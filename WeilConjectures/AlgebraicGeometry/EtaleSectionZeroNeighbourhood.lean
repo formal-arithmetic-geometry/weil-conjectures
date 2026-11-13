@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-! # A zero neighbourhood for a section killed by inverse image
 
 Source: Stacks Project, Tags 03PN (geometric stalks) and 03Q1 (pullback stalks).
-(blueprint: lem-weil-pbc-etale-section-zero-neighbourhood)
 -/
 
 @[expose] public section
@@ -117,21 +116,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- If a section on an étale object becomes zero on a scheme mapping to that object,
 then it is zero on an open neighbourhood of the image.
 Source: Stacks Project, Tag 03PN, Definition 59.29.6 (filtered-colimit stalks),
-and Tag 03Q1, lemma-stalk-pullback (3), including compatibility with the unit.
-Proof: The zero locus of a section is open: a zero geometric germ is represented by
-an étale neighbourhood of the given pointed object on which the section is zero,
-by equality detection in the filtered colimit defining its stalk. The image of this neighbourhood
-is open, and the neighbourhood covers its image. Sheaf separatedness therefore makes
-the section zero on that image. Take the union of all opens on which the section is
-zero. Sheaf separatedness on this open covering makes the section zero on the union.
-For each point of T choose a geometric point above it. The inverse-image stalk
-isomorphism, with its unit-germ compatibility and naturality for restriction,
-carries the germ of the displayed canonical section to the original germ
-on V. Its vanishing puts the image point in the zero locus. The uniqueness isomorphism
-between H and the standard inverse image preserves the units, so the same reasoning
-applies to the supplied adjunction. The empty scheme has empty image and permits the
-empty open; for the zero section the whole object is a zero neighbourhood.
-(blueprint: lem-weil-pbc-etale-section-zero-neighbourhood) -/
+and Tag 03Q1, lemma-stalk-pullback (3), including compatibility with the unit. -/
 theorem etaleSection_zero_neighbourhood
     {X T : Scheme.{u + 1}} (V : X.Etale) (a : T ⟶ V.left)
     (p : T ⟶ X) (hp : a ≫ V.hom = p)

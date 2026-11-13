@@ -23,8 +23,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 omit [Fact ℓ.Prime] in
 /-- An additive functor preserves invertibility of a natural scalar endomorphism.
-Source: functorial preservation of isomorphisms and natural multiples of morphisms.
-(auxiliary; not a blueprint node). -/
+Source: functorial preservation of isomorphisms and natural multiples of morphisms. -/
 theorem mappedScalar_isIso
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     (F : A ⥤ B) [F.Additive] (M : A) [IsIso (ℓ • 𝟙 M)] :
@@ -32,12 +31,7 @@ theorem mappedScalar_isIso
   simpa only [Functor.map_nsmul, CategoryTheory.Functor.map_id] using F.map_isIso (ℓ • 𝟙 M)
 
 /-- The localization-unit telescope of an integral module is a colimit.
-Source: Bhatt--Scholze, Lemma 6.8.2, tensoring the regular localization telescope.
-(auxiliary; not a blueprint node).
-Proof. Tensor the regular coefficient colimit with M. Balanced tensor preserves
-colimits and identifies its vertex with restricted scalar extension of M. The
-zeroth leg is the extension unit by the coequalizer formula. Multiplication by ℓ
-is invertible at that vertex, so the zeroth-leg equation determines every leg. -/
+Source: Bhatt--Scholze, Lemma 6.8.2, tensoring the regular localization telescope. -/
 noncomputable def integralModuleLocalizationCocone (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) :
@@ -48,13 +42,7 @@ noncomputable def integralModuleLocalizationCocone (X : Scheme.{u})
     (Mod.extendRestrictAdjunction (coefficientMap (integralScalarMap ℓ E) X)) M
 
 /-- The module localization unit presents scalar extension as its scalar telescope.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(auxiliary; not a blueprint node).
-Proof. On underlying abelian sheaves, base `Mod.isColimitExtendScalarsCocone`
-(`isColimitIntegralExtendScalarsCocone`) presents `E_X ⊗ M` as the colimit of
-`M --ℓ--> M --ℓ--> ⋯` with zeroth leg the extension unit. Multiplication by ℓ is
-invertible at the vertex, so the zeroth-leg equation identifies every leg with the
-unit cocone; the forgetful functor from modules reflects the colimit. -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 theorem integralModuleLocalization_isColimit (X : Scheme.{u})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) :

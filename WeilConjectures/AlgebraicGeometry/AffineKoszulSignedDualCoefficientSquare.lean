@@ -285,22 +285,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine finite-free signed dual comparisons commute with quotient coefficients.
 Source: Stacks Project, Tag 0BQZ, displayed Hom-complex map;
-Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules.
-(blueprint: new-g3-affine-koszul-signed-dual-coefficient-square).
-
-Proof: In nonnegative degree k use the exterior-power basis of the free
-module A^n. On a principal open D(g), maps from its associated sheaf to
-tilde(M), for M=A or A/I, are tuples of values in M_g on that finite basis.
-Localization of Hom_A(K_k,M) gives exactly these tuples. Their coordinate
-identifications commute with localization, so they define inverse sheaf
-maps. Precomposition by the localized Koszul boundary has the same matrix
-on either side; the integer sign -(-1)^k equals (-1)^(k+1). Thus the maps
-commute with the signed differentials. In negative degree both terms are
-zero; at the degree -1 boundary the source is zero. The degree comparisons
-therefore assemble into complex isomorphisms. Postcomposition with A→A/I
-reduces every basis value, which is precisely koszulCoefficientReduction.
-This proves the coefficient square degreewise. The empty exterior bases,
-zero ring, top ideal and empty charts are covered by the same formulas. -/
+Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules. -/
 theorem affine_koszul_signed_dual_coefficient_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n : ℕ) (f : Fin n → Γ(Y, U.1)) :

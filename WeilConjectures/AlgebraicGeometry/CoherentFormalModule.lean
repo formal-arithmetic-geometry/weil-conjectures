@@ -23,8 +23,7 @@ import WeilConjectures.Algebra.Homology.KFlat
 /-! # Coherent formal modules and completion
 
 Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880,
-the paragraph before Lemma 0889, proof of Theorem 088E, and Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module).
+the paragraph before Lemma 0889, proof of Theorem 088E, and Section 0CYW, equation 088D.
 
 ## Main definitions
 * `CoherentFormalModule`: the full category of coherent adic inverse systems.
@@ -47,25 +46,25 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- Coherent modules as a full subcategory of all modules.
-Source: Stacks, Section 0EHN (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0EHN. -/
 abbrev CoherentModules (X : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (C := X.Modules) (RingedSpace.IsCoherent X.toRingedSpace)
 
 /-- The quotient by the image of multiplication by the nth power of a quasi-coherent ideal.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalModuleQuotient {X : Scheme.{u}} (I : X.IdealSheafData) (n : ℕ) (F : X.Modules) :
     X.Modules :=
   cokernel (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 F)
 
 /-- The quotient projection.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalModuleQuotientπ {X : Scheme.{u}} (I : X.IdealSheafData) (n : ℕ) (F : X.Modules) :
     F ⟶ formalModuleQuotient I n F :=
   cokernel.π (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 F)
 
 /-- The defining object conditions: coherence, annihilation by I^(n+1), and an induced
 quotient isomorphism whose composite with the quotient projection is the transition map.
-Source: Stacks, Section 0EHN (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0EHN. -/
 def IsCoherentFormalModule {X : Scheme.{u}} (I : X.IdealSheafData)
     : ObjectProperty (ℕᵒᵖ ⥤ X.Modules) := fun F ↦
   (∀ n : ℕ, RingedSpace.IsCoherent X.toRingedSpace (F.obj (op n))) ∧
@@ -78,7 +77,7 @@ def IsCoherentFormalModule {X : Scheme.{u}} (I : X.IdealSheafData)
 /-- The full subcategory of inverse systems satisfying the coherent adic conditions.
 This is Stacks' Coh(X, I); the object `op n` is the level `n + 1`. Morphisms are natural
 transformations, hence precisely compatible families of module maps.
-Source: Stacks, Section 0EHN (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0EHN. -/
 abbrev CoherentFormalModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :=
   (IsCoherentFormalModule I).FullSubcategory
 
@@ -106,13 +105,7 @@ private theorem idealSheafPower_factor {X : Scheme.{u}} (I : X.IdealSheafData)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map carries the product by the m-th ideal power into the product by the n-th
-ideal power when n ≤ m, hence factors through that product inclusion.
-Proof: induct on n ≤ m to factor the power inclusion through lower powers, using the
-recursive product inclusion at each successor. Whisker this factorization with F and
-use multiplication naturality for f to obtain a commutative square. Mathlib's image map
-of this square gives the required map between ideal-module products.
-Source: Stacks Project, Cohomology of Schemes, Section 0EHN, equation 0880
-(blueprint: lem-weil-pbc-formal-module-ideal-power-factor). -/
+ideal power when n ≤ m, hence factors through that product inclusion. -/
 theorem formalModuleQuotient_factor {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     ∃ k : Scheme.idealModuleProduct (Scheme.idealSheafPower I.toModulesι m).2 F ⟶
@@ -270,7 +263,7 @@ private theorem isFiniteType_of_epi {X : Scheme.{u}} {F G : X.Modules}
 factorization needed for the canonical quotient map. Proof: node steps 1--3: on affine
 opens u sends each sum a_i s_i to the sum a_i u(s_i); I^m F is contained in I^n F.
 The quotient projection kills I^n F. Equality on the affine basis gives the sheaf equality.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalModuleQuotient_map_zero {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι m).2 F ≫
@@ -285,7 +278,7 @@ theorem formalModuleQuotient_map_zero {X : Scheme.{u}} (I : X.IdealSheafData)
     _ = 0 := by simp [formalModuleQuotientπ]
 
 /-- Reduction of a linear map from level m to level n, n ≤ m, by the cokernel property.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalModuleQuotientMap {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     formalModuleQuotient I m F ⟶ formalModuleQuotient I n G :=
@@ -295,7 +288,7 @@ def formalModuleQuotientMap {X : Scheme.{u}} (I : X.IdealSheafData)
 /-- Reduction preserves identities. Proof: node step 6; after precomposing with the
 cokernel projection both sides are the projection, so the cokernel universal property
 identifies them.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalModuleQuotientMap_id {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) (n : ℕ) :
     formalModuleQuotientMap I (𝟙 F) (Nat.le_refl n) = 𝟙 (formalModuleQuotient I n F) := by
@@ -303,10 +296,7 @@ theorem formalModuleQuotientMap_id {X : Scheme.{u}} (I : X.IdealSheafData)
     (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι _).2 _))).1
   simp [formalModuleQuotientMap, formalModuleQuotientπ, formalModuleQuotient]
 
-/-- Reduction preserves composition, including transition maps between different levels.
-Proof: node step 6; precompose with the source quotient projection, use the defining
-factorization of each reduction, and cancel this epimorphism by the cokernel property.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+/-- Reduction preserves composition, including transition maps between different levels. -/
 theorem formalModuleQuotientMap_comp {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G H : X.Modules} (f : F ⟶ G) (g : G ⟶ H) {l m n : ℕ}
     (h₁ : m ≤ l) (h₂ : n ≤ m) :
@@ -349,7 +339,7 @@ private theorem formalModuleQuotient_iterated {X : Scheme.{u}} (I : X.IdealSheaf
 /-- Canonical reductions form an inverse system. Proof: node steps 5--6; quotient
 projections are epi, and both sides of each identity or composition law agree after
 precomposition with the projection, by uniqueness in the cokernel universal property.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalCompletionSystem_laws {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) :
     (∀ n : ℕᵒᵖ, formalModuleQuotientMap I (𝟙 F)
@@ -367,7 +357,7 @@ theorem formalCompletionSystem_laws {X : Scheme.{u}} (I : X.IdealSheafData)
       (Nat.succ_le_succ (leOfHom f.unop)) (Nat.succ_le_succ (leOfHom g.unop))
 
 /-- The inverse system F/I^(n+1)F, with the canonical surjections.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalCompletionSystem {X : Scheme.{u}} (I : X.IdealSheafData) (F : X.Modules) :
     ℕᵒᵖ ⥤ X.Modules where
   obj n := formalModuleQuotient I (n.unop + 1) F
@@ -378,7 +368,7 @@ def formalCompletionSystem {X : Scheme.{u}} (I : X.IdealSheafData) (F : X.Module
 /-- Reduction of a module map commutes with transitions. Proof: node step 6; both
 composites after precomposition with the source quotient map are u followed by the target
 quotient map, so uniqueness of cokernel factorization gives equality.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalCompletionMap_naturality {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (u : F ⟶ G) (a b : ℕᵒᵖ) (f : a ⟶ b) :
     (formalCompletionSystem I F).map f ≫
@@ -390,7 +380,7 @@ theorem formalCompletionMap_naturality {X : Scheme.{u}} (I : X.IdealSheafData)
   simp
 
 /-- The compatible family of reductions of a module map.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalCompletionMap {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (u : F ⟶ G) : formalCompletionSystem I F ⟶ formalCompletionSystem I G
     where
@@ -408,7 +398,7 @@ I^n acts by zero on F/I^n F. The same calculation identifies maps out of the ite
 quotient with maps out of F killing I^n F. Construct both directions of the resulting
 quotient isomorphism by cokernel.desc; cancel the quotient projections to prove that
 they are inverse and that the isomorphism induces the specified transition map.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalCompletionSystem_coherent {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentModules X) :
     IsCoherentFormalModule I (formalCompletionSystem I F.obj) := by
@@ -442,7 +432,7 @@ theorem formalCompletionSystem_coherent {X : Scheme.{u}} [IsNoetherian X]
 precompose with its quotient projection. For identities both sides give the projection;
 for composition both sides give the original composite followed by the projection.
 The cokernel property and componentwise equality identify the natural transformations.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 theorem formalCompletionMap_laws {X : Scheme.{u}} (I : X.IdealSheafData) :
     (∀ F : X.Modules, formalCompletionMap I (𝟙 F) = 𝟙 (formalCompletionSystem I F)) ∧
     (∀ (F G H : X.Modules) (f : F ⟶ G) (g : G ⟶ H),
@@ -459,7 +449,7 @@ theorem formalCompletionMap_laws {X : Scheme.{u}} (I : X.IdealSheafData) :
       (Nat.le_refl (n.unop + 1))
 
 /-- The functor to inverse systems, on objects the quotients and on maps their reductions.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def formalCompletionFunctor {X : Scheme.{u}} (I : X.IdealSheafData) :
     X.Modules ⥤ (ℕᵒᵖ ⥤ X.Modules) where
   obj := formalCompletionSystem I
@@ -468,7 +458,7 @@ def formalCompletionFunctor {X : Scheme.{u}} (I : X.IdealSheafData) :
   map_comp f g := (formalCompletionMap_laws I).2 _ _ _ f g
 
 /-- The completion functor Coh(O_X) → Coh(X,I), with the specified quotient data.
-Source: Stacks, equation 0880 (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, equation 0880. -/
 def completion (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :
     CoherentModules X ⥤ CoherentFormalModule X I :=
   ObjectProperty.lift (IsCoherentFormalModule I)
@@ -477,30 +467,19 @@ def completion (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :
     (formalCompletionSystem_coherent I)
 
 /-- Annihilation by a quasi-coherent ideal means its product with each term is zero.
-Source: Stacks, paragraph before Lemma 0889 and proof of Theorem 088E
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, paragraph before Lemma 0889 and proof of Theorem 088E. -/
 def AnnihilatedBy {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∀ n : ℕ, IsZero (Scheme.idealModuleProduct K.toModulesι (M.obj.obj (op n)))
 
 /-- Uniform annihilation by a positive power of I, as opposed to the termwise adic condition.
-Source: Stacks, paragraph before Lemma 0889
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, paragraph before Lemma 0889. -/
 def IsIdealPowerTorsion {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∃ c : ℕ, 1 ≤ c ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct
     (Scheme.idealSheafPower I.toModulesι c).2 (M.obj.obj (op n)))
 
-/-- Uniform annihilation by I^(c+1) is equivalent to stabilization at level c+1.
-Proof: node step 7. Inclusions of higher ideal powers into lower ones transfer
-annihilation to all higher powers. Uniform annihilation therefore makes each successive
-quotient projection at or above c an isomorphism; the defining quotient isomorphisms
-of M and induction on c ≤ n make every transition to level c an isomorphism.
-Conversely, level c is annihilated by I^(c+1). Naturality of multiplication transports
-this to every level n ≥ c along the monomorphic transition to level c. For n < c,
-the higher-power product factors through I^(n+1)M_n, which is zero by the adic condition.
-Source: Stacks, paragraph before Lemma 0889
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+/-- Uniform annihilation by I^(c+1) is equivalent to stabilization at level c+1. -/
 theorem formalModule_annihilated_power_iff {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (M : CoherentFormalModule X I) (c : ℕ) :
     (∀ n : ℕ, IsZero (Scheme.idealModuleProduct
@@ -552,20 +531,19 @@ theorem formalModule_annihilated_power_iff {X : Scheme.{u}} [IsNoetherian X]
         _ (M.property.2.1 n)
 
 /-- Support on a closed subscheme means annihilation by its ideal, including its nilpotents.
-Source: Stacks, proof of Theorem 088E (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, proof of Theorem 088E. -/
 def SupportedOn {X Z : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (M : CoherentFormalModule X I) (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   AnnihilatedBy I i.ker M
 
 /-- The analogous scheme-theoretic support condition for a coherent module.
-Source: Stacks, proof of Theorem 088E (blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, proof of Theorem 088E. -/
 def CoherentModuleSupportedOn {X Z : Scheme.{u}} (F : CoherentModules X)
     (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   IsZero (Scheme.idealModuleProduct i.ker.toModulesι F.obj)
 
 /-- Full subcategory of formal modules whose level 1 has support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0CYW, equation 088D. -/
 abbrev CohSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :=
   ObjectProperty.FullSubcategory
@@ -573,20 +551,13 @@ abbrev CohSupportProper {X S : Scheme.{u}} [IsNoetherian X]
       Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)))
 
 /-- Full subcategory of coherent modules with support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0CYW, equation 088D. -/
 abbrev CohModuleSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :=
   ObjectProperty.FullSubcategory
     (fun F : CoherentModules X ↦ Scheme.Modules.HasSupportProperOver f F.obj)
 
-/-- The support of F/IF is contained in the support of F.
-Proof: node step 8. The quotient projection is surjective on sections over affine opens,
-by lem-weil-pbc-quasi-coherent-module-cokernel-image, hence on stalks by the affine-basis
-colimit description in def-weil-pbc-module-stalk. A quotient of a zero stalk is zero.
-Therefore a nonzero quotient stalk can occur only at a nonzero original stalk.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+/-- The support of F/IF is contained in the support of F. -/
 theorem formalCompletion_support_subset {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentModules X) :
     {x : X | ¬ Subsingleton ((formalModuleQuotient I 1 F.obj).presheaf.stalk x)} ⊆
@@ -607,8 +578,7 @@ support on a Noetherian scheme. The quotient projection is surjective on affine 
 hence on stalks. A zero stalk of F therefore gives a zero stalk of F/IF. Its closed support
 is contained in the closed support of F, and a closed subset of a support proper over the
 base is proper (Lemma 0CYN). Thus the level-1 support has the required properness.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0CYW, equation 088D. -/
 theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData)
     (F : CohModuleSupportProper f) :
@@ -633,8 +603,7 @@ theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
   exact hxQ
 
 /-- Restriction of completion to the two proper-support full subcategories.
-Source: Stacks, Section 0CYW, equation 088D
-(blueprint: def-weil-pbc-coherent-formal-module). -/
+Source: Stacks, Section 0CYW, equation 088D. -/
 def completionSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :
     CohModuleSupportProper f ⥤ CohSupportProper f I :=

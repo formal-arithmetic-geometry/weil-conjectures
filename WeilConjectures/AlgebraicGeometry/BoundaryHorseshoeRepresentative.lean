@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.BoundaryHorseshoeBoundaryIdentification
 /-! # A global representative for a horseshoe boundary
 
 Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tags 013T and 015B.
-(blueprint: lem-sc-boundary-horseshoe-representative).
 -/
 
 @[expose] public section
@@ -27,21 +26,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A boundary class is represented by the differential of a global lift through the
 middle horseshoe resolution. No cover or Cech comparison is involved.
 Source: Stacks Project, Homology, Tag 0117 (snake construction); Derived Categories,
-Tags 013T and 015B (resolution and derived-triangle compatibility).
-(blueprint: lem-sc-boundary-horseshoe-representative).
-
-Proof:
-1. Each horseshoe row splits because its first term is injective. Applying global
-sections preserves its splitting identities and hence gives short exact rows.
-Lift the augmentation of q in IC^0(X) to a section b in IB^0(X).
-2. Naturality of beta and the augmentation identity imply beta(d b) = d(aug q) = 0.
-Exactness of the degree-one global row lifts d b uniquely to a section a in IA^1(X).
-The degree-two inclusion is monic and alpha is a chain map, so d a = 0.
-3. The concrete snake formula on the global horseshoe complexes sends the class of
-aug q to [a]. The degree-zero resolution identification sends toRightDerivedZero(q)
-to [aug q]. The horseshoe/derived-triangle compatibility identifies this snake map
-with moduleCohomologyBoundary. Transport by isoRightDerivedObj gives the last equation.
-The argument includes q = 0 and zero objects: all lifts may then be zero. -/
+Tags 013T and 015B (resolution and derived-triangle compatibility). -/
 theorem boundary_horseshoe_representative (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

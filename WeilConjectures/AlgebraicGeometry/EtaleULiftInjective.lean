@@ -25,21 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Coefficient lift preserves injective abelian sheaves on the small étale site.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO.
-(blueprint: lem-sc-etale-ulift-injective)
-
-Proof: Replace the small étale site by its essentially u-small affine model using
-`AffineEtale.sheafEquiv`, and then by a u-small skeleton with transported topology.
-Restriction commutes with coefficient lift. The free abelian sheaf on a representable
-has u-small values: the representable and free presheaf are u-small, and sheafification
-on this u-small site uses u-small limits and colimits. These constructions commute
-with ULift. A subsheaf of the lifted free representable is u-small objectwise.
-Shrink its values and transport the restrictions, group operations, and sheaf condition
-to obtain a small-coefficient sheaf. Full faithfulness of ULift descends its inclusion
-and any map to the lift of I. Injectivity of I extends that map over the small free
-representable; lifting gives an extension over the large one. Tag 01DO gives injectivity
-of the lifted sheaf. Transport back through the site equivalences. The argument also
-applies to the empty scheme and the zero injective sheaf. -/
+Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO. -/
 theorem etale_ulift_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I] :
     Injective

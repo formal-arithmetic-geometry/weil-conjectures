@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnitEq
 # Étale restriction and pullback units
 
 Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
-(blueprint: lem-weil-pbc-etale-restriction-pullback-unit)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry
 
 /-- Unit compatibility for an étale object in a cartesian square.
 Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
-(blueprint: lem-weil-pbc-etale-restriction-pullback-unit)
 
 Proof (the node's five steps):
 1. Put h = g' ≫ p = p' ≫ g. Form P₀ = W ×ₓ W, P₁ = W ×ₓ Y, Q = W ×ₓ W'.

@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorIdentificati
 import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorLevel
 
 /-! # The normalized Koszul augmentation tensor square
-Source: Stacks 099M and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 099M and 06YN.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,13 +26,7 @@ attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoid
   SheafOfModules.monoidalCategory Functor.preservesZeroMorphisms_of_additive
 
 /-- Normalized augmentations give a commuting tensor square before taking cones.
-Source: Stacks 099M and 06YN (auxiliary; not a blueprint node).
-Proof: project the ordinary-limit unit equation to each finite level. Transport
-it through the ordinary reduction tensor model. The degree-zero Koszul unit is
-invertible by negative Koszul duality and its empty-subset basis. Apply the
-normalization theorem to this projected unit equation and to the nonzero-degree
-vanishing law. Cancel the source and target comparison isomorphisms at each
-level, and use natural-transformation extensionality to assemble the square. -/
+Source: Stacks 099M and 06YN. -/
 theorem augmentationTensorSquare
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

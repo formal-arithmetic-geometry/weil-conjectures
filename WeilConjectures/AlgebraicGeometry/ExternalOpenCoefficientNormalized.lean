@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackOpenSquare
 /-! # Normalized open-base-change isomorphism of external coefficients
 
 Source: Stacks Project, Tags 0BED, 0096, 0097 and 01CD.
-(blueprint: lem-sc-external-open-coefficient-normalized).
 -/
 
 @[expose] public section
@@ -63,22 +62,7 @@ private theorem restriction_tensor_hom_tmul {A B : Scheme.{w}}
 /-- Restriction of the external coefficient to an open base change, normalized on
 sections by the pullback units.
 Source: Stacks Project, Tag 0BED, omitted canonical-cup verification; Tags 0096,
-0097 and 01CD.
-(blueprint: lem-sc-external-open-coefficient-normalized).
-
-Proof: use the proved restriction-tensor comparison to identify the restricted
-coefficient with the tensor of the restricted factors. The normalized open-triangle
-comparison identifies the first factor with the new first-projection pullback by
-hfst. The normalized open-square comparison identifies the second factor with the
-new second-projection pullback of the restricted G, using hj and hsnd. Tensor these
-two factor isomorphisms and compose with the restriction-tensor isomorphism.
-Its inverse pure-section equation, together with naturality of tensor sections,
-gives the forward equation after transport along hj. The triangle section formula
-and composition of restriction maps identify the first section with the new first
-projection unit. The square formula identifies the second section with the new
-second projection unit of the transported section of G. tensorHom_app_tmulSection
-combines them. Every comparison also applies to the empty open.
--/
+0097 and 01CD. -/
 theorem exists_externalOpenCoefficient_normalized
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens)

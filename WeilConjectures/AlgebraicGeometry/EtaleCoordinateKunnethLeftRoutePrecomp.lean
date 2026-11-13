@@ -110,8 +110,7 @@ composing with the canonical direct-image compositor.
 Source: the coordinate interchange calculation in
 `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/`.
 The proof expands the ordered projection, comparison mate and direct compositor, then uses
-naturality of the derived tensor comparison and the mate equations for proper exchange.
-(auxiliary; not a blueprint node). -/
+naturality of the derived tensor comparison and the mate equations for proper exchange. -/
 theorem coordinateKunneth_leftRoute_precomp
     [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :

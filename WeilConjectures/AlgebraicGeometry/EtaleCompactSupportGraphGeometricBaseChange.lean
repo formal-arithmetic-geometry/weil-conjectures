@@ -16,8 +16,7 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 /-!
 # The graph comparison under geometric base change
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 07A7
-(auxiliary; not a blueprint node).
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 07A7.
 -/
 
 section
@@ -2394,20 +2393,7 @@ namespace AlgebraicGeometry.Etale
 /-- The forward graph map commutes with the specified compact-support exchange at a
 geometric point over an arbitrary scheme. This is equality of unbounded derived
 transformations; neither scheme needs to be Noetherian or quasi-compact.
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6, 07A7, 0E46 and 0E47.
-(auxiliary; not a blueprint node).
-
-Proof:
-Construct the derived transfer through the open and closed graph of the compactification.
-Pullback composition coherence and the open-extension adjunction identify its base change;
-the proper base-change cube gives the corresponding equation for its adjoint comparison.
-On homotopy representatives, the unit and counit formulas identify this transfer with the
-termwise sheaf graph transfer. The sheaf graph-unit equation and proper base-change
-normalization therefore identify the comparison with the specified descended graph map.
-Localization full faithfulness extends the identification to unbounded derived categories.
-Finally transport the base-change equation along the canonical exact-functor comparisons
-and specialize the base morphism to the geometric point. The argument includes empty
-fibres and the zero ring -/
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6, 07A7, 0E46 and 0E47. -/
 theorem compactSupportGraphDerivedComparison_geometric_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]

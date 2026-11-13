@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.HomCongr
 
 /-! # Hom transport from coherent affine object comparisons
-Source: Stacks Project, Tags 06Z0 and 09RE.
-(blueprint: lem-pc-affine-model-hom-transport-assembly). -/
+Source: Stacks Project, Tags 06Z0 and 09RE. -/
 
 @[expose] public section
 universe u w
@@ -108,28 +107,7 @@ private theorem exists_affineTransportedHomEquiv (A : CommRingCat.{u})
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Convert coherent object comparisons to derived module Hom comparisons.
-Source: Stacks Project, Tags 06Z0, 08DW and 09RE.
-(blueprint: lem-pc-affine-model-hom-transport-assembly).
-
-Proof: For any ring A, apply exists_affineQCohDerivedEquivalence to obtain the
-quasi-coherent derived equivalence and its localization factorization. Compose
-its fully faithful functor with the full inclusion into the sheaf-module derived
-category. The factorization isomorphism, evaluated at two complexes, conjugates
-its Hom equivalence to an equivalence with Homs between the two tilde complexes.
-Naturality of that isomorphism shows that localization of a chain map is sent
-to localization of its termwise tilde map: precompose naturality by the inverse
-component and cancel inverse followed by component. No boundedness is needed.
-Choose these Hom equivalences simultaneously over rings and pairs of complexes.
-At each stage compose with the fully faithful Hom equivalence of d(j), then
-conjugate by alphaE(j), alphaK(j). At the limit use dlim and betaE, betaK.
-On any chain map these composites are precisely the conjugated sheafified maps
-in hcomp, by the just-proved chain-map formula. Apply its finite-stage and limit
-identities. Thus the two displayed compatibility equations follow by congruence
-under functor maps, conjugations, and perfectStageMap or perfectLimitMap.
-This argument applies to arbitrary complexes, zero rings and zero objects; it
-takes F,E,K as parameters and does not provide the geometric comparisons in hcomp.
-In particular this is only Hom transport, not the finite-projective or geometric
-parts of the specified-model comparison. -/
+Source: Stacks Project, Tags 06Z0, 08DW and 09RE. -/
 theorem exists_affineModelHomTransportAssembly
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

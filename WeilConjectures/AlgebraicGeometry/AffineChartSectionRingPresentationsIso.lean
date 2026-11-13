@@ -16,14 +16,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 /-- The initial upper-tail chart projection is an isomorphism.
-Source: Stacks Project, Tag 01ZR. (blueprint: new-affine-chart-section-ring-presentations-iso).
-
-Proof: the selected representative is equivalent in both preorder directions
-to the upper-tail index `⟨j, le_rfl⟩`, by the quotient representative law.
-Hence its preorder morphism is invertible because preorder hom sets are
-subsingleton. Functoriality transports this isomorphism through `R.map` and
-`Scheme.Spec.map`, and the pullback second projection along an isomorphism is
-an isomorphism by the standard pullback instance. -/
+Source: Stacks Project, Tag 01ZR. -/
 theorem affine_chart_section_ring_presentations_iso
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}}

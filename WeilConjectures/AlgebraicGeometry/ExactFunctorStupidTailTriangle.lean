@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 /-! # The kernel triangle of an exact restricted stupid tail
 
 Source: Stacks Project, Tag 08EG, stupid truncation step, and Tag 0152.
-(blueprint: lem-sc-exact-functor-stupid-tail-triangle).
 -/
 
 @[expose] public section
@@ -65,23 +64,7 @@ private theorem stupidTailι_isIso_f
 /-- If the image complex is exact through r, its stupid tail fits into the triangle
 whose first term is the outgoing kernel placed in degree r. This is solely a
 homological-algebra statement: no finiteness, boundedness or perfectness is assumed.
-Source: Stacks Project, Tag 08EG, stupid truncations; Tag 0152, SES triangle.
-(blueprint: lem-sc-exact-functor-stupid-tail-triangle).
-
-Proof: Map the inclusion of K's stupid tail into K termwise by R, giving j : S → L.
-The complex S is strictly zero below r and j is an isomorphism in each degree ≥ r.
-The canonical truncation sequence S.truncLE r → S → B is short exact, so its derived
-triangle is distinguished. The first complex is concentrated in degree r, where
-its term is cycles(S,r); its kernel universal property and the isomorphisms j^r
-and j^(r+1) identify this term with ker(L.d r (r+1)). The quotient B maps by a
-quasi-isomorphism to S.truncGE(r+1). The map induced by j from this truncation to
-L.truncGE(r+1) is a quasi-isomorphism since all three adjacent components computing
-homology above r are isomorphisms. Exactness of L through r makes its projection
-to L.truncGE(r+1) a quasi-isomorphism as well. Thus B represents L. Transport the
-SES triangle along these identifications and the derived restriction comparisons.
-This construction has the single kernel in degree r directly and needs no choice
-of a splitting. Zero kernels and zero complexes require no separate argument.
--/
+Source: Stacks Project, Tag 08EG, stupid truncations; Tag 0152, SES triangle. -/
 theorem exactFunctor_stupidTail_triangle
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]

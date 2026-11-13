@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 /-! # The coproduct cofan of products over an étale object
 
 Source: Stacks Project, Tag 03OZ, the product decomposition following equation-sheaf-coprod.
-(blueprint: new-etale-over-coproduct-power-cofan)
 -/
 
 @[expose] public section
@@ -36,25 +35,7 @@ set_option backward.defeqAttrib.useBackward true
 as a coproduct of the corresponding products of its summands.
 
 Source: Stacks Project, Tag 03OZ, product decomposition following equation-sheaf-coprod;
-Schemes, Section 26.17, uniqueness of fibre products.
-(blueprint: new-etale-over-coproduct-power-cofan)
-
-Proof: use `Etale.overEquiv U` and then `Etale.forget U.left` to read the products
-in `Over U` as scheme fibre products over `U.left`. Both functors preserve finite
-products, so the product comparison maps are projection-compatible isomorphisms.
-The scheme cofan hypothesis identifies `W.left` with the coproduct of the `V i`,
-and `hw` identifies its map to `U.left` with the coproduct of the maps `(f i).left`.
-Apply `etale_fibre_product_coproduct U.left I` to those maps in degree `n`.
-Its first projection equations identify the inclusion of each tuple summand with
-`Pi.map` of the maps `Over.homMk (c i) (hw i)`: both maps have the same components
-and finite-product uniqueness makes them equal. Consequently its isomorphism from
-the tuple coproduct to the singleton product carries the canonical coproduct cofan
-to the displayed cofan. Transport the coproduct universal property through this
-isomorphism and through the product comparison isomorphisms. This proves exactly
-`IsColimit`, without any sheaf or differential argument. For empty `I`, the coproduct
-is empty and every positive power is empty; in degree zero there is one factor.
-Large finite `I` is small in universe `u`, or may be reindexed by `Fin (Nat.card I)`;
-coproduct and product uniqueness make this reindexing independent of choices. -/
+Schemes, Section 26.17, uniqueness of fibre products. -/
 theorem etale_over_coproduct_power_isColimit
     (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]
     (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

@@ -12,7 +12,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Hom bijection for the two affine-module tensor operations
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-sc-affine-module-tensor-hom-bijective).
 -/
 
 @[expose] public section
@@ -64,24 +63,7 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 /-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions.
-Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y.
-(blueprint: lem-sc-affine-module-tensor-hom-bijective).
-
-Proof: For G and F, transport along hobj and apply the change-of-rings Hom bijection
-for ε to identify Hom(HG,F) with Hom(PG,Res_ε F). Transport along pobj and apply
-the change-of-rings bijection for t, obtaining Hom(f⁻¹G,Res_t Res_ε F).
-Apply the inverse-image module Hom bijection. Its target scalar action is through
-η_A followed by f_*(t ε). By ht and the ring adjunction identity this is the identity
-of A, so the target is Hom(G,RF). Each operation is a bijection on all module sheaves.
-On a section g over V the composite sends a to a applied to the sheafification of
-1 tensor the sheafification of 1 tensor η_G(g). The unit formula hP identifies the
-inner section with κ inverse applied to the ordinary tensor-pullback unit, after
-pobj. The formula hH identifies the outer section with γ applied to that same unit,
-after hobj. Cancel κ with its inverse and both equality transports. By hβ and the
-ordinary adjunction formula this section is β_G(g). Postcomposing with a gives
-β_G followed by R(a), so this explicitly specified function is bijective.
-This argument applies to zero rings, zero modules, empty schemes and empty opens;
-it uses no affineness or quasi-coherence. -/
+Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y. -/
 theorem affine_module_tensor_hom_bijective
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf)

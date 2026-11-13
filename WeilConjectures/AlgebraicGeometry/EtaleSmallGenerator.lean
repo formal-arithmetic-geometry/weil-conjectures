@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Generator.Sheaf
 
 Source: Stacks Project, Tags 01DO and 03EW; Mathlib free-Yoneda sheaves and
 affine etale site comparison.
-(blueprint: def-sc-etale-small-generator)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Scheme
 transported to the full etale site. It is a concrete construction, with no choice from
 an unproved existence assertion.
 Source: Stacks Project, Tags 01DO and 03EW; Mathlib's free-Yoneda construction and
-comparison equivalences for dense subsites.
-(blueprint: def-sc-etale-small-generator) -/
+comparison equivalences for dense subsites. -/
 noncomputable def etaleSmallGenerator (X : Scheme.{u}) :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} := by
   let C := SmallModel.{u} X.AffineEtale

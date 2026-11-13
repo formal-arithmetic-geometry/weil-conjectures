@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierLisseTensor
 import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierLisseInverse
 /-! # Lissity and multiplicativity of the Artin–Schreier sheaves
 
-Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
-(blueprint: lem-fd-as-lisse).
+Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md.
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 and its tensor inverse is the sheaf of the negative function, also the sheaf for the
 inverse character. The local rank-one clause says that the pullback is the regular
 coefficient module, not merely that the underlying sheaf of sets is locally constant.
-Source: current blueprint, lem-fd-as-lisse.md (blueprint: lem-fd-as-lisse).
+Source: current blueprint, lem-fd-as-lisse.md.
 
 The statement is made for every nontrivial character psi of k₀, which contains the
 character psi = Psi ∘ Tr of def-fd-additive-character (the case of the node).

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardAffineSectionV
 /-! # Eventual vanishing of constant-module direct-image germs
 
 Source: Stacks Project, Tag 09Z1, degree zero.
-(blueprint: lem-weil-pbc-constant-module-pushforward-germ-vanishing).
 -/
 
 @[expose] public section
@@ -64,26 +63,7 @@ private theorem affine_point_refinement
 vanishes after one transition of the inverse system.
 
 Source: Stacks Project, Tag 09Z1, degree-zero injectivity in the proof; Tag 09YQ,
-degree-zero continuity on affine etale test schemes.
-(blueprint: lem-weil-pbc-constant-module-pushforward-germ-vanishing).
-
-Proof: Represent the germ on an affine etale neighborhood U of the geometric point
-of X. The hypothesis says that its restriction to U times_X Y is zero after shrinking
-U; choose an affine etale refinement of that neighborhood. All U times_X D_i are
-qcqs, their transition maps are affine, and their limit is U times_X Y. The canonical
-pullback of a constant module sheaf is the same constant module sheaf. Degree-zero
-continuity (Tag 09YQ, as used in Tag 09Z1) implies that a section which is zero on
-U times_X Y is zero at a later stage. For a general cofiltered category, use the
-final directed reindexing of Tag 0032; a common refinement supplies an arrow to the
-original stage. The canonical transition is restriction of sections: the adjunction
-unit, constant-sheaf comparison and direct-image composition in
-constantModulePushforwardMap give exactly this restriction. Thus the section zero
-equality gives the displayed equality of germs. Coefficients can be forgotten to
-abelian groups, since constant sheaves, pullbacks, direct images and their canonical
-maps commute with forgetting; zero and equality are reflected by that faithful
-functor. This proves the assertion for any module, with no finiteness assumption.
-The zero module is immediate; an empty limit still gives eventual zero by the same
-qcqs continuity. A singleton system has an invertible transition to its limit. -/
+degree-zero continuity on affine etale test schemes. -/
 theorem exists_constantModulePushforward_germ_eq_zero
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

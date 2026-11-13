@@ -25,17 +25,7 @@ namespace AlgebraicGeometry
 
 /-- Sufficiently large shifts give a coherent adic quotient system.
 
-Source: Stacks Project, Lemma 087X, claims (b)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-adic-bound).
-
-Proof: Kernels and cokernels of maps between coherent modules are coherent. Apply
-this twice to see that the abelian image of each kernel-transition map is coherent.
-Transport its quasi-coherence and finite type along hS to S_m. Each shifted quotient
-is therefore coherent by the proved coherence of completion quotients. The ideal
-product on that quotient is zero by the cokernel multiplication calculation.
-The eventual comparison bound supplies exactly the remaining successive reduction
-condition. Combine these three clauses of IsCoherentFormalModule.
--/
+Source: Stacks Project, Lemma 087X, claims (b)--(c). -/
 theorem coherentFormalModule_kernel_quotient_adic_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

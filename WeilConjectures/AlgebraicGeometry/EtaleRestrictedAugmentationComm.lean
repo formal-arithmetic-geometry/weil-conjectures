@@ -23,17 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit augmentation components commute with the total differential.
-Source: Stacks, Tag 015J, proof remark (3); Tag 0133, augmented total.
-
-Proof: If n < q, the source of the two composites is zero. Otherwise both n and
-n+1 are retained. Transport by the stupid-truncation component isomorphisms and
-by extension from natural resolution degrees. On the resolution-degree-zero
-summand the vertical differential vanishes, since the row augmentation is a
-chain map from a single complex. The horizontal differential has sign +1 in
-resolution degree zero and commutes with the augmentation by T.a.comm.
-These give the equation for adjacent indices; nonadjacent differentials are zero.
-The argument includes q < 0 and empty diagonals without a change of signs.
-(blueprint: lem-weil-pbc-etale-restricted-augmentation-comm). -/
+Source: Stacks, Tag 015J, proof remark (3); Tag 0133, augmented total. -/
 theorem etaleRestrictedAugmentation_comm
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

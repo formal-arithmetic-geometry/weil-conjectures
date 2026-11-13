@@ -23,25 +23,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 /-- A nonempty directed union of ideal sheaves is a colimit of their module sheaves.
 
 Source: Stacks Project, Properties, Tag 01PG (the union argument for submodules),
-applied to ideal sheaves.
-(blueprint: lem-pqf-directed-ideal-module-colimit).
-
-Proof: Transport each stage along e to its ideal module. The displayed compatibility
-identifies each cocone leg with the inclusion into I and, by monicity of the inclusion
-of I into the structure sheaf, identifies every transition with the ideal inclusion.
-On an affine open U, the equality sSup S = I identifies I.ideal U with the supremum
-of the stage ideals. Since S is nonempty and directed, any element of this supremum
-belongs to one stage. Given any other cocone, define its descent on an affine section
-by choosing a stage containing the section and applying its cocone leg. Directedness
-provides a common upper stage, so the result is independent of the choice. The same
-argument proves addition and scalar multiplication. Restriction to a smaller affine
-open preserves membership in the chosen stage and commutes with its cocone map, so
-these linear maps commute with restriction. The affine opens form a basis, hence the
-maps extend uniquely to a morphism of sheaves of modules. Its composites with the
-stage inclusions are the given legs, as can be checked on this basis. Conversely any
-such morphism has these values on every affine section, so it is unique. This is the
-colimit universal property. On the empty scheme the same basis argument is vacuous;
-nonemptiness of S also ensures that zero sections have a stage. -/
+applied to ideal sheaves. -/
 theorem nonempty_isColimit_of_directed_ideal_modules {X : Scheme.{u}}
     (I : X.IdealSheafData) (S : Set X.IdealSheafData)
     (hne : S.Nonempty) (hdir : DirectedOn (· ≤ ·) S) (hunion : sSup S = I)

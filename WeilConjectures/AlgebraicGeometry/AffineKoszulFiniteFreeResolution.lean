@@ -20,8 +20,7 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Finite free sheafification of an augmented Koszul complex
 
-Source: Stacks Project, Tags 068C and 0BQZ, affine Koszul resolution.
-(blueprint: lem-sc-affine-koszul-finite-free-resolution). -/
+Source: Stacks Project, Tags 068C and 0BQZ, affine Koszul resolution. -/
 
 @[expose] public section
 
@@ -78,23 +77,7 @@ private theorem quotient_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 /-- Sheafification of an already augmented algebraic Koszul resolution is a
 bounded-above finite free resolution of the restricted closed pushforward.
 
-Source: Stacks Project, Tag 068C, affine quotient resolution, and Tag 0BQZ.
-(blueprint: lem-sc-affine-koszul-finite-free-resolution).
-
-Proof: The closed immersion identifies its inverse image over U with Spec(A/I),
-where A = Gamma(Y,U) and I = i.ker.ideal U. On basic opens the quotient modules
-and the restricted pushforward both have sections (A/I)[1/g], compatibly with
-restrictions. This identifies their module sheaves. Tilde is exact because its
-stalks are localizations; chart restriction is exact because it is an equivalence.
-Map the supplied integer-indexed augmentation by their composite and the single
-complex comparison, then the single complex of the quotient identification.
-This gives the augmentation in the conclusion and preserves its quasi-isomorphism.
-There are no positive cochain terms: extension sends chain degree k to -k.
-In degree -k, the wedge basis indexed by k-element subsets of Fin n identifies
-its associated sheaf with the finite free sheaf on that finite set, enumerated
-by Fin r and lifted to universe u. Terms outside the extension image are zero,
-which is the free sheaf of rank zero. This also covers n=0, zero rings and empty U.
-No regularity is assumed here: it is supplied by the given quasi-isomorphism. -/
+Source: Stacks Project, Tag 068C, affine quotient resolution, and Tag 0BQZ. -/
 theorem affine_koszul_finite_free_resolution
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1))

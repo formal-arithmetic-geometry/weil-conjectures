@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleInverseImageTransport
 # Exact inverse image of constant-ring modules on the small etale site
 
 Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
-Sites and Sheaves, Example 0H7J
-(blueprint: prop-weil-pbc-inverse-image-modules-exact).
+Sites and Sheaves, Example 0H7J.
 -/
 
 @[expose] public section
@@ -32,37 +31,12 @@ namespace AlgebraicGeometry
 -- Elaborating the dependent witness package and its comparisons exceeds the default limit.
 set_option backward.defeqAttrib.useBackward true in
 /-- Constant-ring inverse image is the exact module pullback, with the abelian adjunction.
-Source: Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and Example 0H7J
-(blueprint: prop-weil-pbc-inverse-image-modules-exact).
+Source: Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and Example 0H7J.
 
 The names RV, RU, etaV and etaU are lambda-bound and immediately applied to the
 constant ring sheaves and their sheafification units; these are reducible names, not
 additional hypotheses. Lr is the ring inverse image, L0 the module
-inverse image before transporting scalars, and LM the module inverse image over RU.
-
-Proof:
-1. The ring lift of lem-weil-pbc-etale-inverse-image-algebraic-structures and the
-constant-sheaf adjunction (lem-weil-pbc-constant-sheaf-maps-global-sections) identify
-maps from the inverse image of RV with maps from R into global sections on U.
-Yoneda gives c. Its adjoint gamma sends constant sections to constant sections,
-by def-weil-pbc-constant-sheaf and def-weil-pbc-sheafification.
-2. Apply the set inverse image to the action and the module axioms, using preservation
-of finite products. This gives the unique action and the functor L0, compatible with
-forgetting to abelian sheaves (def-weil-sheaf-of-modules-category). Transport along c
-produces LM. Sectionwise extension of scalars along the ring isomorphism sends
-(a tensor m) to c inverse(a) times m; sheafification gives the natural tensor comparison,
-using def-pur-sheaf-tensor-product and def-weil-pbc-sheafification.
-3. The faithful forgetful functor preserves kernels and cokernels, by
-lem-weil-pbc-module-sheaves-colimits-forgetful. The abelian inverse image is additive
-and exact, by prop-weil-pbc-inverse-image-exact. Kernel and cokernel comparisons
-are therefore isomorphisms after forgetting, hence before forgetting. Additivity,
-kernels and cokernels give all finite limits and colimits. Alternatively use
-lem-weil-pbc-left-adjoint-preserves-colimits for the colimit part.
-4. By lem-weil-pbc-inverse-image-module-adjunction, the abelian adjunction restricts
-to linear morphisms. Transport along c makes its right adjoint the direct image with
-scalars restricted through gamma, as in def-weil-pbc-direct-image. Its unit and
-counit are the abelian ones. This is the pullback of the flat ringed-site morphism
-(u,c), by 03D6 and 03D7. -/
+inverse image before transporting scalars, and LM the module inverse image over RU. -/
 theorem etaleInverseImageModulesExact (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1}) :
     (fun (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

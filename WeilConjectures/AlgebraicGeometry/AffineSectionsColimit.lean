@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Sites.Coverage
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-/-! Source: Stacks Project, Sites Tag 0738(4) (blueprint: aux-weil-pbc-affine-sections-colimit). -/
+/-! Source: Stacks Project, Sites Tag 0738(4). -/
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.ConcreteCategory Opposite
@@ -29,16 +29,7 @@ finite affine étale pretopology. The proof uses finite affine refinements of co
 filtered colimit representatives on the finite family and the sheaf equalizer condition.
 The empty covering is included.
 
-Source: Stacks Project, Sites Tag 0738(4) and Tag 00VM; Categories Tag 002W.
-(blueprint: aux-weil-pbc-affine-sections-colimit).
-Proof: evaluation preserves presheaf colimits. For a finite covering presieve,
-lift its compatible family to a common stage of the filtered diagram. There are
-finitely many pairs of covering arrows, so the eventual equality criterion at
-those pullbacks and a filtered wide span make the family compatible at one stage.
-The stagewise sheaf condition glues it. Separatedness follows by the same finite
-wide-span argument applied to two candidate sections. Hence the presheaf colimit
-is a sheaf on the finite affine pretopology. Inclusion creates its colimit and
-evaluation preserves it; uniqueness of colimits transports this to K. -/
+Source: Stacks Project, Sites Tag 0738(4) and Tag 00VM; Categories Tag 002W. -/
 theorem affineSections_colimit
     {S : Scheme.{u}} {J : Type u} [SmallCategory J] [IsFiltered J]
     (E : J ⥤ Sheaf (Scheme.fullAffineEtaleTopology S) (Type (u + 1)))

@@ -168,29 +168,7 @@ set_option linter.unusedVariables false in
 compatible at some later stage. No covering hypothesis or covering conclusion is needed.
 
 Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit
-and its finite-matching argument; Étale Cohomology Tag 0EYL.
-(blueprint: lem-weil-pbc-sets-eventual-local-stage-matching-compatibility).
-
-Proof: The base change Y_j of W is affine, since W is affine and the transition
-map is affine. For each ordered pair q,q', form P = V_q ×_{Y_j} V_q'. This is
-an affine étale object over D(j). Restrict s_q and s_q' to P. Naturality of the
-sheaf comparison and the given equations with t show that these two sections
-have the same image on the base change of P to the limit.
-Restrict the original inverse system to stages above j; its limit is still c.pt.
-Apply the affine-site colimit presentation (0EYL), the equivalence between full
-and affine étale sheaves, and the section formula of 0A35 to the sheaf H_j and
-object P. The two equal limit sections are equal in this filtered colimit, so
-they become equal at one later stage. Unit-compatible inverse-image composition
-identifies these colimit transition maps with the comparisons in the statement.
-There are finitely many pairs. Directedness gives one common later stage for
-all their equality witnesses; transporting equalities to it preserves them.
-Base change preserves each overlap. Every pair of arrows with equal composites
-into Y_j' factors through the base-changed overlap, so restricting its equality
-proves Presieve.Arrows.Compatible. The isomorphism d merely changes the target
-of the family and cancels in the equal-composite condition. If n = 0, the
-compatibility condition is vacuous and the identity refinement suffices. Empty
-overlaps cause no exception: a sheaf has a unique section on the empty object.
-No section is selected to define an object. -/
+and its finite-matching argument; Étale Cohomology Tag 0EYL. -/
 theorem etaleSet_eventualLocalStageCompatibility
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

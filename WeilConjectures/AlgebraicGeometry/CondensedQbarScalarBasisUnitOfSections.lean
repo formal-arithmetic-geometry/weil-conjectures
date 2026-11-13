@@ -286,18 +286,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 
 /-- An ordinary scalar-unit copower for an exact extension descends to derived objects.
 Source: Compatibility.lean, `isIso_derivedBasisUnitDesc` and
-`isIso_leftDerivedBasisUnitDesc`, with coproducts replacing finite biproducts.
-
-Proof: evaluate the scalar-unit map of complexes in each degree. The ordinary module
-hypothesis and the coproduct comparison for evaluation make it invertible. Localization
-preserves this coproduct by `DerivedCategory.isColimitCofanMkQObj`. The factorization
-isomorphisms for exact functors and the adjunction-unit factorization identify its localized
-legs with the termwise derived unit and localized central actions. The comparison from left
-derived extension to exact derived extension respects these legs by central naturality.
-Finally represent an arbitrary derived object by a complex and transport the copower and
-its scalar legs along the representative isomorphism. Coefficient-section coherence is
-unnecessary for this descent; the outer theorem retains it separately.
-(auxiliary; not a blueprint node) -/
+`isIso_leftDerivedBasisUnitDesc`, with coproducts replacing finite biproducts. -/
 theorem condensedQbar_scalar_basis_unit_of_sections
     (I : Type (u + 1))
     (b : ∀ Z : Scheme.{u}, I →

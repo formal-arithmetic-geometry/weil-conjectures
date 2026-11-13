@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-! # Constructibility under a surjective coefficient restriction
 Source: Stacks Project, Tag 09AJ, definition-constructible; Tag 09BR, scalar restriction
 in the coefficient-filtration argument.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -144,16 +143,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 constructibility of each cohomology sheaf. No boundedness is required.
 
 Source: Stacks Project, proetale.tex, Tag 09AJ, definition-constructible;
-Tag 09BR, lemma-compare-truncations-constructible, scalar restriction in the induction.
-(auxiliary; not a blueprint node).
-
-Proof: Exact scalar restriction commutes with cohomology, stratum inverse image and
-slice restriction through their canonical comparisons. A finite B-module restricts
-to a finite A-module because A -> B is surjective, with the same generators; over
-the Noetherian ring A it is finitely presented. Constant realization commutes with
-restriction, retaining the same strata. Apply this sheaf assertion to the canonical
-exact cohomology comparison. This argument also applies to a zero coefficient ring and
-the empty scheme. -/
+Tag 09BR, lemma-compare-truncations-constructible, scalar restriction in the induction. -/
 theorem coefficientSurjectiveRestriction_constructible (X : Scheme.{u})
     (A B : Type (max v (u + 1))) [CommRing A] [CommRing B]
     [IsNoetherianRing A] [IsNoetherianRing B]

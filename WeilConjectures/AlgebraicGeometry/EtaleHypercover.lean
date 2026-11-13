@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 
 Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI;
 matching schemes as in blueprint `def-weil-pbc-finite-split-hypercover`.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ At degree zero the diagram is empty and its limit is `X`; at degree one it is th
 product of the two vertices. Morphisms in `X.Etale` are automatically étale, so the
 covering condition is precisely surjectivity of the underlying matching arrow.
 Source: Stacks Project, Hypercoverings, Definition 01G5, and the matching-scheme clause
-of blueprint `def-weil-pbc-finite-split-hypercover`.
-(auxiliary; not a blueprint node) -/
+of blueprint `def-weil-pbc-finite-split-hypercover`. -/
 def IsEtaleHypercover {X : Scheme.{u}} (U : SimplicialObject X.Etale) : Prop :=
   ∀ n : ℕ, ∃ (M : X.Etale)
     (π : ∀ (Δ : SimplexCategory), Δ.len < n →

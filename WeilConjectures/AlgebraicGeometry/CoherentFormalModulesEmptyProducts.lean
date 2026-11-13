@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 /-! # Empty products of coherent formal modules
 
 Source: Stacks Project, Section 0EHN, zero-system argument written out from the definition.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-empty-products)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 /-- The empty limit satisfies the coherent formal module property.
 Source: Stacks Project, Cohomology of Schemes, Section 0EHN,
 zero-system argument from the definition.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-empty-products).
 
 An empty-diagram limit is zero, and evaluation carries it to zero module sheaves.
 Present each term as the cokernel of the identity on a rank-one free sheaf. This

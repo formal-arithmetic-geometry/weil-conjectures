@@ -15,8 +15,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 # Component intersections on a Noetherian scheme of dimension at most one
 
 Source: Stacks Project, Varieties, Lemma 33.38.10 (Tag 09NX), proof, first paragraph
-and the uniqueness assertion in its final paragraph
-(blueprint: lem-sc-component-intersections-finite).
+and the uniqueness assertion in its final paragraph.
 -/
 
 @[expose] public section
@@ -28,18 +27,7 @@ namespace AlgebraicGeometry
 /-- On a Noetherian scheme of topological dimension at most one, the irreducible components
 are finite in number, their distinct pairwise intersections are finite sets of closed points,
 and outside their union each point belongs to exactly one component.
-Source: Stacks Project, Varieties, Lemma 33.38.10 (Tag 09NX), proof
-(blueprint: lem-sc-component-intersections-finite).
-
-Proof: The Noetherian hypothesis gives finitely many components. For distinct components,
-maximality shows that the first is not contained in the second, so the complement of the
-second in the first is a nonempty open. The first component is irreducible, sober, Noetherian
-and of dimension at most one. The source library's
-`IsOpen.finite_compl_of_topologicalKrullDim_le_one` makes its complement finite, and
-`IsOpen.isClosed_singleton_of_mem_compl` makes its points closed in the component. The closed
-embedding into the scheme preserves these closed singletons. Taking the finite union over
-distinct component pairs gives the finite closed-point set T. Every point belongs to
-`irreducibleComponent y`; outside T any other component containing it must equal this one. -/
+Source: Stacks Project, Varieties, Lemma 33.38.10 (Tag 09NX), proof. -/
 theorem component_intersections_finite (Y : Scheme.{u}) [IsLocallyNoetherian Y]
     [CompactSpace Y] (h_dim : topologicalKrullDim Y ≤ 1) :
     let T : Set Y := {y | ∃ Z₁ ∈ irreducibleComponents Y,

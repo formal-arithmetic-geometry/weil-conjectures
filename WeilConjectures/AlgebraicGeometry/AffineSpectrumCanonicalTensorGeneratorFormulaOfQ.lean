@@ -28,14 +28,7 @@ variable [∀ Y : Scheme.{u},
 set_option maxHeartbeats 800000 in
 -- Comparing the fixed stalk complex types needs substantial definitional reduction.
 /-- The canonical affine-spectrum comparison respects tensor generators for the explicitly
-constructed input coordinates, not for arbitrary chain isomorphisms.
-Proof: the coefficient-one identity is the composition-unit germ calculation. The
-comparison is semilinear over the actual stalk map along X'.isoSpec.inv. Write
-`d tensor x = d • (1 tensor x)`, use semilinearity, and then the coefficient-one
-identity. The chain coordinates are constructed from the extension/restriction unit
-and the inverse pullback-stalk comparison; source-point transport is by isoSpec naturality.
-Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
-(blueprint: lem-pc-affine-spectrum-canonical-tensor-generator-formula-of-q). -/
+constructed input coordinates, not for arbitrary chain isomorphisms. -/
 theorem canonicalSpectrum_tensor_generator_formula_of_q
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

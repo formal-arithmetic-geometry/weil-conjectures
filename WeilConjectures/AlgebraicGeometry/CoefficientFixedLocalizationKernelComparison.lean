@@ -25,20 +25,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The kernel of the canonical closed unit is classical when the open restriction is.
 Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open, and Tag 09AF,
-lemma-jshriek-comparison (auxiliary; not a blueprint node).
-
-Proof: the open-closed localization sequence identifies the kernel of the closed unit
-with extension by zero of the restriction to the complementary open. To obtain this
-identification, on affine weakly contractible test objects use the principal-open and
-closed-localization cover from Tag 09AH: the sequence is respectively F → F → 0 and
-0 → F → F. These local identifications preserve the arbitrary A-action, and glue by
-the kernel universal property. Choose an etale antecedent G of the open restriction.
-The etale extension by zero of G is an antecedent of this kernel: comparison commutes
-with open extension by zero by Tag 09AF, since the two composite left adjoints have
-identical right adjoints given by restriction to etale objects over the open. Transport
-these functors and their adjunctions through the coefficient-sized AsSmall equivalences.
-For an empty open the kernel is zero; for an empty closed subscheme the open is all of X
-and the hypothesis itself supplies an antecedent. -/
+lemma-jshriek-comparison. -/
 theorem coefficientFixed_localization_kernel_comparison
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

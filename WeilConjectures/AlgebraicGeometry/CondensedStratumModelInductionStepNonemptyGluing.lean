@@ -87,7 +87,6 @@ finite stage. The finite-stage adjunction and extension classification produce a
 sequence over that field. Serre closure makes its middle term constructible. Exact scalar
 extension preserves its extension class, and extension classification identifies the extended
 middle term with N.
-(auxiliary; not a blueprint node)
 -/
 theorem glue_nonempty_support_open_closed_models
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]

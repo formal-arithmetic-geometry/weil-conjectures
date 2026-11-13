@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
 lem-pc-affine-universal-tensor-exact.
-(blueprint: lem-pc-affine-tensor-pullback-complex-comparison).
 -/
 
 @[expose] public section
@@ -32,21 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Pulling a quasi-coherent complex on an affine scheme back to Spec B agrees with
 sheafifying its global-sections complex after ordinary scalar extension.
 Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact.
-(blueprint: lem-pc-affine-tensor-pullback-complex-comparison).
-
-Proof: Restrict C along the canonical inverse Spec A -> S. The source
-sectionsRestrictFromSpecLinearEquiv identifies the global sections of this
-restriction with evaluation of C at top. Naturality is Hom.app_presheaf_map.
-The affine counit fromTildeGamma is an isomorphism on each quasi-coherent term
-of the restriction; its naturality assembles a complex isomorphism using
-isoOfComponents. Pull this presentation back along Spec B -> Spec A and apply
-the source tildePullbackIso, lifted to complexes by mapHomologicalComplexCompIso.
-Replace restriction by pullback via restrictFunctorIsoPullback, then compose
-pullbacks using pullbackComp and fromSpec_top. These natural isomorphisms commute
-with every differential and give exactly the stated comparison.
-No homology, boundedness, or flatness assumption is involved. For B zero, C zero,
-or S empty the same construction still gives an isomorphism. -/
+lem-pc-affine-universal-tensor-exact. -/
 theorem affine_tensor_pullback_complex_comparison (S : Scheme.{u}) [IsAffine S]
     (C : CochainComplex S.Modules ℤ)
     (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)

@@ -87,16 +87,7 @@ private theorem comparison_of_preserved_left_homology
 
 /-- The affine K-injective cohomology comparison witness can be chosen to be the
 canonical comparison used by the counit construction.
-Source: Stacks Project, Tag 0AVW, proof of affine-morphism-equivalence; Tag 08D4.
-(blueprint: new-affine-algebra-canonical-comparison-identification).
-
-Proof: The affine sections calculation identifies the edge morphism on every affine
-open with the map sending a cycle section to its cohomology class. The resulting
-maps are natural in restrictions and linear over the direct-image algebra, so they
-assemble to the canonical morphism in `affineAlgebraCounitHomologyComparison`.
-The unbounded truncation argument of Tag 08D4 proves this edge morphism invertible
-in every integer degree. The equality follows by extensionality on affine opens.
--/
+Source: Stacks Project, Tag 0AVW, proof of affine-morphism-equivalence; Tag 08D4. -/
 theorem affine_algebra_kinjective_canonical_comparison_identification
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

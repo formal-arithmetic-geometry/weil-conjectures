@@ -33,37 +33,7 @@ with the prescribed exchange map. This is a map comparison, without continuity,
 representatives, a limiting cone, affineness, qcqs hypotheses or filteredness.
 Source: Stacks Project, Tags 0EYM (the square in the second proof), 03Q8
 (higher-direct-image evaluation), 03CB (inverse-image composition) and 09YQ
-(canonical cohomology maps).
-(blueprint: lem-sc-cartesian-higher-image-chart-comparison).
-
-Proof: Write S_i for D(i), X_i for X times_S S_i and p_i:X_i -> S_i.
-The source of chart stage j is S_j times_{S_i} X_i. Pullback pasting identifies
-it with X times_S S_j, preserving its maps to X and S_j. The analogous
-identification at the cone point identifies S_limit times_{S_i} X_i with
-X times_S S_limit. The test object U is the pullback of V along the i-th cone
-leg, by hr. Pasting identifies V times_{S_i} the apex chart with U times_{S_limit}
-(X times_S S_limit). Inverse-image composition identifies their restricted
-coefficient sheaves. Derived adjunction for p_limit, together with the shift
-comparison of R p_limit,* and the single-complex comparison of exact inverse
-image, identifies the displayed derived Hom with raw Hom out of
-p_limit^* Z[U]. The free abelian sheaf and etale restriction adjunction identifies
-this raw Hom with cohomology of the coefficient on the last fibre product
-(rawRestrictedCohomologyComparison). This gives e.
-For j, the same construction identifies the chart cohomology with raw derived
-Hom over S_j, evaluated on V times_{S_i} S_j. Pull the resulting class back along
-the j-th cone leg. The canonical free-representable pullback comparison and hr
-identify its source with Z[U][0]; the single-complex and shift comparisons give
-lift j. For the compatibility equation, take the p_limit derived adjoint of
-both sides. The exchange map is the mate of the inverse-image composition
-comparison, so its counit cancels with the adjunction unit. The remaining map
-is derived inverse image of the class followed by its coefficient comparison.
-Naturality of rawRestrictedCohomologyComparison identifies this with the
-canonical rawAffineComplexPullback and coefficient map that define
-restrictedOverCohomologyMap. Pullback uniqueness identifies all geometric arrows,
-and upperStarComp associativity identifies the coefficient comparisons.
-Thus both sides give the same adjunct. This proves the equation independently
-of invertibility of exchange. The same identities hold for empty charts and
-q=0; no proper base change assertion is used. -/
+(canonical cohomology maps). -/
 theorem exists_cartesianChart_cohomology_comparison
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 /-! # Full faithfulness of the affine structure-algebra functor
 
 Source: Stacks Project, Morphisms, Lemma 01SA, with the local argument in steps 5--6 of
-lem-weil-pbc-affine-morphism-relative-spec
-(blueprint: lem-weil-pbc-affine-structure-algebra-fully-faithful).
+lem-weil-pbc-affine-morphism-relative-spec.
 -/
 
 @[expose] public section
@@ -90,23 +89,7 @@ private theorem exists_over_map_of_algebra {S X Y : Scheme.{u}} (f : X ⟶ S)
   congr 1
 
 /-- The canonical contravariant structure-algebra functor is full and faithful.
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemmas 01LT and 01LY
-(blueprint: lem-weil-pbc-affine-structure-algebra-fully-faithful).
-
-Proof: On an affine open U of S, both inverse images are affine. The Gamma--Spec
-adjunction identifies morphisms between them with ring maps on sections. The condition
-of being over U is exactly compatibility with the structure maps from O_S(U).
-If two S-morphisms have the same image under F, hmap gives equality of their section
-maps over every affine U, hence equality of their restrictions by the adjunction.
-These inverse images cover the source, so scheme-morphism gluing gives equality globally.
-For fullness, an algebra morphism gives on every affine U the unique U-morphism
-corresponding to its section map. Naturality of the algebra morphism and uniqueness for
-maps into affine schemes give compatibility over inclusions of affine opens. For two
-arbitrary affine opens, cover their intersection by smaller affine opens and apply the
-same uniqueness there. Scheme-morphism gluing now gives a global S-morphism. Its image
-under F has the prescribed components on all affine opens by hmap; sheaf-morphism
-uniqueness on an affine basis gives equality with the original algebra morphism.
-This argument also covers the empty scheme, whose empty open cover detects equality. -/
+Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemmas 01LT and 01LY. -/
 theorem affine_structure_algebra_full_faithful (S : Scheme.{u})
     (F : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ⥤
       ObjectProperty.FullSubcategory

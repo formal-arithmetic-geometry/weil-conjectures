@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Canonical coordinate-ring diagrams for affine descent
 
 Source: Stacks Project, Tag 09RF, affine case.
-(blueprint: def-pc-affine-descent-ring-diagram).
 -/
 
 @[expose] public section
@@ -23,13 +22,11 @@ namespace AlgebraicGeometry
 variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (i : I)
 variable {Z : Scheme.{u}} (t : Z ⟶ Spec (R.obj i))
 /-- The base change at an index on the tail above `i`.
-Source: Stacks Project, Tag 09RF, affine case
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tag 09RF, affine case. -/
 noncomputable def affineDescentStage (j : Set.Ici i) : Scheme.{u} :=
   pullback t (Spec.map (R.map (homOfLE j.property)))
 /-- The canonical transition morphism of base changes.
-Source: Stacks Project, Tag 09RF, affine case
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tag 09RF, affine case. -/
 noncomputable def affineDescentTransition {j k : Set.Ici i} (h : j ≤ k) :
     affineDescentStage R i t k ⟶ affineDescentStage R i t j :=
   baseChangeMap t
@@ -38,8 +35,7 @@ noncomputable def affineDescentTransition {j k : Set.Ici i} (h : j ≤ k) :
     (Over.homMk (Spec.map (R.map (homOfLE h)))
     (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))
 /-- The global-ring diagram of the actual tail base changes.
-Source: Stacks Project, Tag 09RF, affine case
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tag 09RF, affine case. -/
 noncomputable def affineDescentRings : Set.Ici i ⥤ CommRingCat.{u} where
   obj j := Γ(affineDescentStage R i t j, ⊤)
   map f := (affineDescentTransition R i t (leOfHom f)).appTop
@@ -63,8 +59,7 @@ noncomputable def affineDescentRings : Set.Ici i ⥤ CommRingCat.{u} where
     simp [h]
 variable (c : Cocone R)
 /-- The canonical map from the limit base change to a tail stage.
-Source: Stacks Project, Tag 09RF, affine case
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tag 09RF, affine case. -/
 noncomputable def affineDescentLimitMap (j : Set.Ici i) :
     pullback t (Spec.map (c.ι.app i)) ⟶ affineDescentStage R i t j :=
   baseChangeMap t
@@ -73,8 +68,7 @@ noncomputable def affineDescentLimitMap (j : Set.Ici i) :
     (Over.homMk (Spec.map (c.ι.app j.val))
     (by dsimp; rw [← Spec.map_comp, c.w (homOfLE j.property)]))
 /-- The cocone of global rings of the canonical limit base-change maps.
-Source: Stacks Project, Tag 09RF, affine case
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tag 09RF, affine case. -/
 noncomputable def affineDescentRingCocone : Cocone (affineDescentRings R i t) where
   pt := Γ(pullback t (Spec.map (c.ι.app i)), ⊤)
   ι :=
@@ -90,13 +84,12 @@ noncomputable def affineDescentRingCocone : Cocone (affineDescentRings R i t) wh
           rw [← Spec.map_comp, c.w (homOfLE (leOfHom f))]
         simpa [affineDescentRings] using congrArg Scheme.Hom.appTop h }
 /-- Sheafification through the morphism to the spectrum of the given ring.
-Source: Stacks Project, Tags 09RF and 06Z0
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tags 09RF and 06Z0. -/
 noncomputable def affineDescentSheafification (Y : Scheme.{u}) (A : CommRingCat.{u})
     (r : A ⟶ Γ(Y, ⊤)) : ModuleCat.{u} A ⥤ Y.Modules :=
   tilde.functor A ⋙ Scheme.Modules.pullback (Y.toSpecΓ ≫ Spec.map r)
 
-/-- (blueprint: def-pc-affine-descent-ring-diagram) -/
+/-- -/
 instance affineDescentSheafification_preservesZeroMorphisms
     (Y : Scheme.{u}) (A : CommRingCat.{u}) (r : A ⟶ Γ(Y, ⊤)) :
     (affineDescentSheafification Y A r).PreservesZeroMorphisms := by
@@ -105,8 +98,7 @@ instance affineDescentSheafification_preservesZeroMorphisms
   infer_instance
 
 /-- The derived object of the actual termwise associated-sheaf complex.
-Source: Stacks Project, Tags 09RF and 06Z0
-(blueprint: def-pc-affine-descent-ring-diagram). -/
+Source: Stacks Project, Tags 09RF and 06Z0. -/
 noncomputable def affineDescentRealization (Y : Scheme.{u}) (A : CommRingCat.{u})
     (r : A ⟶ Γ(Y, ⊤))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

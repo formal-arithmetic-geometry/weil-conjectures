@@ -272,8 +272,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Bounded scalar multiplication commutes with arbitrary scheme inverse image.
 
 Source: RefactorInstruction, Section 4, finite-matrix refinement, coefficient
-realization and geometric-fiber comparison, steps 1--3
-(auxiliary; not a blueprint node).
+realization and geometric-fiber comparison, steps 1--3.
 
 Proof in words: base change of small pro-etale objects sends a bounded function to
 its composite with the first projection. This defines a morphism from the bounded

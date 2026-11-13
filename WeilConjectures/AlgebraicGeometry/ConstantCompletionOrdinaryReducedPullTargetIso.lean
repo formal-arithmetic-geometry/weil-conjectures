@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPullTa
 /-! # Target transport for ordinary finite reduction
 
 The target-side transport to the finite quotient model is isolated here.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,11 +29,7 @@ variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
 /-- The target finite reduction has a transport to the same finite quotient model as
 the source reduction.  This is the target half of the common-quotient argument.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M.
-Proof: use the second-site quotient identification, the projection equation for
-`completedMap`, and normalized scalar associativity for the inverse-image algebra.
-(auxiliary; not a blueprint node).
--/
+Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M. -/
 theorem ordinaryReducedPull_targetIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

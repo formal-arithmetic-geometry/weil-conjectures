@@ -25,38 +25,7 @@ set_option maxHeartbeats 800000 in
 -- Instantiating adjunction naturality in four derived module categories needs extra heartbeats.
 /-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
 of the module docstring; the coefficient complex construction in step 3 of
-`prop-weil-pbc-qbar-condensed-two-colimit`.
-(auxiliary; not a blueprint node)
-
-Proof: represent the bounded-below object `L` by a complex `C` zero below an integer
-`a`, using the standard derived t-structure. At index `i`, extend `C` termwise from
-`F` to `H.obj i`, then restrict the resulting complex to `E`. A transition map is
-induced by the coefficient inclusion, tensor the identity of `C`; its `E`-linearity
-follows from the equality of the two coefficient inclusions. Tensor functoriality
-proves identities, composition, and the cocone equations. The vertex is the same
-construction with the finite-subfield-valued condensed algebraic closure.
-
-The finite coefficient rings have this closure as their colimit, also after the
-final functor `H` and after pullback to the scheme. Balanced tensor preserves this
-colimit: write it as the coequalizer of the two action maps, use preservation by
-ordinary tensor, and commute colimits. Forgetting the `E` action creates colimits,
-so this gives the module colimit in every degree. Colimits of complexes are
-computed degreewise, giving `IsColimit c`. All terms below `a` are zero because
-extension and restriction are additive.
-
-Exactness of these coefficient extensions identifies the total derived functors
-with the termwise functors. Together with the representative isomorphism for `L`
-this gives `eΩ` and every `ei`. For the displayed equation, first check the
-underived extension/restriction adjunction: both sides take a section `m` to
-`1 ⊗ m` followed by the same coefficient inclusion and tensor multiplication.
-This is an equality of natural transformations of complexes, not a choice of
-bijections. Localize it and use the defining factorization equations of
-`leftDerivedFunctorCompIso` and `leftDerivedFunctorNatIso`; the resulting
-comparisons are precisely `derivedExtendScalarsCompIso`. Naturality
-then gives the equation for every derived `K` and every `g`.
-
-Edge cases: the zero complex and the empty scheme give zero cocones; no
-nonzero-source or bounded-above hypothesis is used. -/
+`prop-weil-pbc-qbar-condensed-two-colimit`. -/
 theorem exists_condensed_coefficient_complex_presentation
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E F : FiniteIntermediateField ℓ)

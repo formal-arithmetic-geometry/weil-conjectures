@@ -21,12 +21,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tag 04DZ, inverse-image/topos equivalence.
-Proof: The constructed set-valued inverse image is left adjoint to lowerStar.
-The inverse of sheafEquivalence is also left adjoint to this same functor.
-Adjunction.leftAdjointUniq gives the comparison isomorphism; take its inverse
-for the displayed orientation.
-(blueprint: thm-weil-pbc-etaleSetPullback_eq_sheafEquivalence) -/
+/-- Source: Stacks Project, Tag 04DZ, inverse-image/topos equivalence. -/
 theorem etaleSetPullback_eq_sheafEquivalence {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty ((sheafEquivalence (Type (u + 1)) u).symm.functor ≅

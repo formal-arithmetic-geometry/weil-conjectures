@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Identifying the adic pullback with exact comparison
 
 Source: Stacks Project, Tags 03D2, 099R and 09AL.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -65,21 +64,7 @@ private theorem ordinaryComparison (X : Scheme.{u})
 
 /-- The normalized adic inverse image is the localization of exact module comparison.
 Source: Stacks Project, Tags 03D2, 099R and 09AL; identification of the two
-presentations of inverse image in the parent proof step 3.
-(auxiliary; not a blueprint node).
-
-Proof: the algebraic lift of the set-sheaf inverse image, followed by scalar
-extension along its constant-ring identification, is left adjoint to module
-direct image with its constant-section ring map. The Kan-extension construction
-constructibleComparisonPullback is left adjoint to that same direct image.
-The units identify their coefficient maps: both are adjoint to constant
-sections. Uniqueness of left adjoints gives an isomorphism of the ordinary
-module functors. The latter functor is exact, so its action on complexes
-preserves all quasi-isomorphisms. Its localization is therefore also its left
-derived functor. Transport the ordinary isomorphism to complexes and use the
-universal property of adicFinitePullbackData to identify its derived functor
-with this exact localization. Whisker this isomorphism by Q and compose with
-the localization factorization. No bounds or constructibility are used. -/
+presentations of inverse image in the parent proof step 3. -/
 theorem adicExactComparison (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     Nonempty (Q (constant (smallModelComparisonEtaleTopology.{u, v} X) A) ⋙

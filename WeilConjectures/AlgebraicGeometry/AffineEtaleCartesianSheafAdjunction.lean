@@ -102,21 +102,7 @@ private noncomputable def cartesianEtaleIso
     · simp only [Category.assoc, IsPullback.isoPullback_hom_snd,
         Scheme.Hom.etale_map_left_comp_snd, MorphismProperty.Over.w])
 
-/-- Source: Stacks Project, Topologies 04HR and Étale Cohomology 03Q1(2).
-
-Proof: the natural cartesian squares identify `F`, after affine inclusion, with ordinary
-small étale base change along `f`. Pullback uniqueness gives the object isomorphisms;
-naturality of `p` and uniqueness give their naturality on arrows. Restriction from each
-small étale site to its full affine subcategory is an equivalence on Type u sheaves
-(04HR). Under these equivalences, precomposition along `F` is ordinary direct image:
-on an affine object A both evaluate a sheaf on A ×_S T, and the restriction maps agree.
-Conjugate the ordinary étale inverse-image/direct-image adjunction by the restriction
-equivalences. The resulting left adjoint is adjoint to the displayed continuous
-pushforward. Étale inverse image preserves finite limits by 03Q1(2), and equivalences
-and their quasi-inverses preserve all limits, hence this left adjoint preserves finite
-limits. The argument uses sheaves in the stated universe throughout and does not require
-an enlargement of the coefficient universe or a choice of system coherence data.
-(blueprint: lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction). -/
+/-- Source: Stacks Project, Topologies 04HR and Étale Cohomology 03Q1(2). -/
 theorem affineEtale_cartesian_sheafAdjunction
     {S T : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]
     (F : S.FullAffineEtale ⥤ T.FullAffineEtale)

@@ -25,8 +25,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- Geometric presentation data, independent of a coefficient sheaf or cocycle.
 The transition maps and cone legs respect every repeated-intersection projection.
-Source: Stacks Project, Tag 099U, finite Čech approximations.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099U, finite Čech approximations. -/
 structure AffineEtaleCechSystem (Y : Scheme.{u}) (V : Y.ProEt)
     {n : ℕ} (U : Fin n → Over V) (I : Type u) [SmallCategory I] where
   W : I → Y.Etale

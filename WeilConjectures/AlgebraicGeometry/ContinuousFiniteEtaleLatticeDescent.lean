@@ -28,7 +28,6 @@ public import WeilConjectures.CategoryTheory.SiteModuleCompatibleTuples
 /-! # Integral lattices descend along finite etale surjections
 
 Source: Bhatt--Scholze, first paragraph of the proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -43,7 +42,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 /-- A lisse rational module with an integral lattice on a finite etale cover
 has an integral lisse lattice on the base. No descent datum on the input lattice
 is required. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-(auxiliary; not a blueprint node)
 
 Proof in words. Construct the integral module as the inverse image, under the
 rational adjunction unit P → p_*p^*P, of the image of the pushed lattice map

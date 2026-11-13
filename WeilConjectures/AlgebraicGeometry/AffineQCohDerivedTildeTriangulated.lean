@@ -19,15 +19,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The termwise tilde functor in the preceding construction is compatible
 with the canonical integer shift and is triangulated. This is the final
-compatibility step of Stacks Project, Tag 06Z0.
-Proof: Exact termwise tilde commutes with translation of complexes, including
-the signed differentials, and with mapping cones. Its localization therefore
-carries distinguished cone triangles to distinguished triangles and has a
-compatible integer-shift structure. Transfer that structure through the
-given natural isomorphism after Q. The localization universal property
-descends the shift isomorphisms and their coherence to F followed by the
-full-subcategory inclusion; it also descends preservation of triangles.
-(blueprint: new-affine-qcoh-derived-tilde-triangulated) -/
+compatibility step of Stacks Project, Tag 06Z0. -/
 theorem affineQCohDerivedEquivalence_core_triangulated (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

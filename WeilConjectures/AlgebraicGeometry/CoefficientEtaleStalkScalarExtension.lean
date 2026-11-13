@@ -276,25 +276,7 @@ private def stalk_right_restriction (X : Scheme.{u})
 Both functors here are the previously constructed functors, not unspecified scalar
 extensions. No boundedness, constructibility or nilpotence is required.
 Source: Stacks Project, Modules on Sites, Tags 03EL, 05V7 and 05V8;
-Cohomology on Sites, Tag 07A6; Derived Categories, Tag 015F.
-(auxiliary; not a blueprint node).
-
-Proof: combine the fixed-scalar equivalence with the AsSmall equivalence, retaining
-its actual continuous direct-image functor. The ordinary stalk is left adjoint to the
-usual product-valued skyscraper functor followed by the inverse of this presentation.
-Products of modules are exact, so this right adjoint is exact (Modules on Sites,
-Tags 05V7 and 05V8). Both sides of the stalk adjunction therefore localize termwise.
-Naturality of the constant-ring sheafification unit identifies intrinsic restriction
-with fixed-scalar restriction through the presentation. Restriction of modules
-preserves products, giving a natural isomorphism between the two ordinary composite
-right adjoints. Localize this exact square. Derived scalar extension of sheaves is
-left adjoint to the existing exact restriction: resolve by K-flat complexes, derive
-the ordinary tensor adjunction, then identify its left derived functor with the
-specified ConstantCompletion.extend by its universal property. The module scalar
-adjunction is already provided. Compose each scalar adjunction with the appropriate
-derived stalk adjunction. Their right adjoints are isomorphic by the localized square;
-uniqueness of left adjoints gives the desired isomorphism at K. This argument requires
-no flatness or boundedness, and applies also to zero coefficient rings. -/
+Cohomology on Sites, Tag 07A6; Derived Categories, Tag 015F. -/
 theorem coefficientEtale_stalk_scalarExtension
     (X : Scheme.{u}) {B R : Type (max v (u + 1))} [CommRing B] [CommRing R]
     (f : B →+* R) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

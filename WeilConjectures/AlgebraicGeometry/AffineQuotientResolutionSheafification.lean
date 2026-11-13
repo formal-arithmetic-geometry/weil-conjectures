@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQuotientRestrictedIso
 /-!
 # Sheafifying an affine quotient resolution
 
-Source: Stacks Project, Tag 068C, affine-local resolution argument
-(blueprint: lem-sc-affine-quotient-resolution-sheafification).
+Source: Stacks Project, Tag 068C, affine-local resolution argument.
 -/
 
 @[expose] public section
@@ -31,21 +30,7 @@ namespace AlgebraicGeometry
 
 /-- An algebraic resolution of an affine quotient sheafifies to a resolution of the
 restricted pushforward of the closed subscheme's structure sheaf.
-Source: Stacks Project, Tag 068C, affine-local reduction and Koszul resolution
-(blueprint: lem-sc-affine-quotient-resolution-sheafification).
-
-Proof: The equation for the quotient presentation identifies the inverse image of
-`U` with `Spec (A/I)` over `Spec A`, where `A = Γ(Y,U)`. On a basic open `D(g)`, the
-restricted pushforward of the structure sheaf has sections `(A/I)_g`, including
-its `A_g`-module action. These identifications commute with restriction maps and
-therefore give an isomorphism with `tilde(A/I)` transported along `hU.isoSpec`.
-The tilde functor is exact: its stalk at a prime is localization of modules, and
-localization is exact. Restriction along the affine chart is an equivalence, hence
-exact. Apply these functors to the given augmentation; homology commutes with an
-exact functor, so the resulting map remains a quasi-isomorphism. Identify the
-image of the single complex with the single complex of the image module, then
-compose with the single complex of the preceding module isomorphism. This gives
-the asserted chain map and quasi-isomorphism. No bound or freeness is needed. -/
+Source: Stacks Project, Tag 068C, affine-local reduction and Koszul resolution. -/
 theorem exists_affine_quotient_sheafified_resolution {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (U : Y.Opens) (hU : IsAffineOpen U) (I : Ideal (Γ(Y, U)))
     (e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅

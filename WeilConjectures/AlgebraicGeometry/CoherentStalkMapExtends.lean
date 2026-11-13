@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 # A map of stalks of coherent modules comes from a map on a neighbourhood
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01Y4 (label
-`lemma-map-stalks-local-map`), using Lemma 01XZ and Modules Lemma 01CP
-(blueprint: lem-weil-pbc-coherent-stalk-map-extends).
+`lemma-map-stalks-local-map`), using Lemma 01XZ and Modules Lemma 01CP.
 -/
 
 @[expose] public section
@@ -72,24 +71,7 @@ private theorem isFinitePresentation_of_coherent (X : Scheme.{u}) (F : X.Modules
 some open neighbourhood.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01Y4
-(label `lemma-map-stalks-local-map`), using Lemma 01XZ and Modules, Lemma 01CP
-(blueprint: lem-weil-pbc-coherent-stalk-map-extends).
-
-Proof:
-1. The coherent source `G` is of finite type by definition (`pqf-def-coherent`).
-   Locally choose finitely many generating sections, giving a surjection from a
-   finite free module. Its kernel is of finite type by coherence (`pqf-def-coherent`).
-   Shrink again and choose finitely many kernel generators. This gives a finite
-   presentation of `G` (`def-weil-pbc-module-finite-type-presentation`), as in 01XZ.
-2. Apply `lem-weil-pbc-stalk-internal-hom-finite-presentation` (01CP) to `G` and `F`.
-   The canonical map from the stalk of internal Hom to Hom of stalks is an
-   isomorphism, so `ψ` has a preimage germ. Internal-Hom sections are morphisms
-   between the restricted modules (`def-pur-sheaf-hom`). Represent the germ by
-   a morphism `φ` on an open neighbourhood `U` of `x` (`def-weil-pbc-module-stalk`).
-3. The canonical map sends that representative germ to the induced stalk map `φ_x`
-   (`lem-weil-pbc-stalk-internal-hom-finite-presentation`). Its value is `ψ` by
-   construction. The restriction stalk isomorphisms identify this induced map
-   with the displayed elementwise equality, yielding the required `U` and `φ`. -/
+(label `lemma-map-stalks-local-map`), using Lemma 01XZ and Modules, Lemma 01CP. -/
 theorem exists_open_hom_of_coherent_stalk_map
     {X : Scheme.{u}} [IsLocallyNoetherian X]
     (F G : X.Modules)

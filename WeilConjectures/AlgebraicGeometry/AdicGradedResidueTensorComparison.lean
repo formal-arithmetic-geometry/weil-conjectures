@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Finiteness.Basic
 /-! # The residue module underlying an adic graded layer
 
 Source: Stacks Project, Tag 09BR, second displayed isomorphism.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -26,10 +25,7 @@ open CategoryTheory CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
 /-- The kernel of the residue quotient annihilates the consecutive-power kernel.
-Source: Stacks Tag 09BR
-(auxiliary; not a blueprint node).
-Proof: lift both factors to A. They lie in J and J^(n+1), so their product lies
-in J^(n+2) and vanishes in the larger quotient. -/
+Source: Stacks Tag 09BR. -/
 theorem adicFiniteGradedModule_torsion {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) :
     Module.IsTorsionBySet (adicFiniteCoeff J (n + 1))
@@ -57,8 +53,7 @@ theorem adicFiniteGradedModule_torsion {A : Type w} [CommRing A]
 
 /-- The same kernel, with its action descended through the surjective residue map.
 This is a construction from the annihilation proof, with no choice of a module witness.
-Source: Stacks Tag 09BR
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09BR. -/
 def adicFiniteResidueGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} (adicFiniteCoeff J 0) :=
   let r := adicFiniteFactor J (Nat.zero_le (n + 1))
@@ -71,10 +66,7 @@ def adicFiniteResidueGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : �
   ModuleCat.of _ L
 
 /-- The descended residue action agrees with the original larger-quotient action.
-Source: Stacks Tag 09BR
-(auxiliary; not a blueprint node).
-Proof: the inverse kernel-quotient equivalence sends r(b) to the class of b;
-the quotient-module action on that class is the original action of b. -/
+Source: Stacks Tag 09BR. -/
 theorem adicFiniteResidueGradedModule_smul {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) (b : adicFiniteCoeff J (n + 1))
     (x : RingHom.ker (adicFiniteFactor J (Nat.le_succ n))) :
@@ -89,8 +81,7 @@ theorem adicFiniteResidueGradedModule_smul {A : Type w} [CommRing A]
   rfl
 
 /-- Restricting the constructed residue module gives exactly the original kernel module.
-Source: Stacks Tag 09BR
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09BR. -/
 def adicFiniteResidueGradedModule_restrictIso {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) :
     adicFiniteGradedModule J n ≅
@@ -102,11 +93,7 @@ def adicFiniteResidueGradedModule_restrictIso {A : Type w} [CommRing A]
   exact adicFiniteResidueGradedModule_smul J n b x
 
 /-- Noetherianity makes the constructed residue module finite.
-Source: Stacks Tag 09BR
-(auxiliary; not a blueprint node).
-Proof: the kernel is an ideal in the Noetherian larger quotient, so it is finite
-over that quotient. The identity semilinear map, with scalar map the residue
-surjection, carries its finite generating set to generators over the residue ring. -/
+Source: Stacks Tag 09BR. -/
 theorem adicFiniteResidueGradedModule_finite {A : Type w} [CommRing A]
     [IsNoetherianRing A] (J : Ideal A) (n : ℕ) :
     Module.Finite (adicFiniteCoeff J 0) (adicFiniteResidueGradedModule J n) := by
@@ -327,22 +314,7 @@ This comparison has no constructibility or cohomological boundedness assumption.
 
 Source: Stacks Project, proetale.tex, Tag 09BR,
 lemma-compare-truncations-constructible, second displayed isomorphism;
-Cohomology on Sites, Tags 06YY and 06YU, derived change of rings and tensor.
-(auxiliary; not a blueprint node).
-
-Proof: write B=A/J^(n+2), C=A/J and I=ker(B -> A/J^(n+1)). The preceding
-annihilation calculation equips I with exactly the constructed C-action.
-Its restriction is the original B-module via the identity on elements.
-Take a termwise-flat K-flat representative P of N. The actual extension of P
-to B is still K-flat. Tensor it with a K-flat resolution of the constant I.
-Tensor cancellation computes the resulting object by P tensor_A I, with its
-B-action retained. The same calculation over C computes the tensor of the
-residue extension of P and the constant C-module I by the same complex.
-The balancing maps send (p tensor b) tensor i to p tensor bi and their inverses
-send p tensor i to (p tensor 1) tensor i. These respect the scalar actions,
-restrictions and total differentials. Exact scalar restriction and the selected
-K-flat computation isomorphisms give the displayed comparison. The argument
-also applies to J=0, J=top, the zero ring and the empty scheme. -/
+Cohomology on Sites, Tags 06YY and 06YU, derived change of rings and tensor. -/
 theorem adicFiniteGradedLayer_residueTensor (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

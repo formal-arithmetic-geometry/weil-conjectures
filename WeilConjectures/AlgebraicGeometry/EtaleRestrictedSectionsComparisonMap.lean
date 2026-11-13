@@ -72,21 +72,7 @@ private theorem restricted_iso_formula
 set_option backward.isDefEq.respectTransparency false in
 /-- The complex map obtained by sections of the restricted resolution comparison
 is the prescribed sections inclusion followed by the full comparison.
-Source: Stacks Project, Tag 015J, proof remark (3).
-
-Proof: In degree n, precompose both maps with the images under Γ of the
-restricted total summands in bidegrees (r,s), where r ≥ 0, s ≥ q, r+s=n.
-The finite-diagonal coproduct comparison etaleCEMappedTotalIso identifies
-these generators with the summands of the restricted mapped total. The total
-map sends each summand through the corresponding column inclusion to the
-full total. Apply T.w_formula to that full summand. Naturality of the
-extension-by-zero comparison cancels the extension isomorphisms on both
-sides, leaving Γ of the sheaf-total inclusion followed by T.comparison.
-The coproduct universal property gives equality in degree n, and chain-map
-extensionality gives the assertion. Negative resolution degrees and omitted
-columns are zero. Empty diagonals and zero terms require no separate choice;
-the same proof applies to every integer q.
-(blueprint: lem-weil-pbc-etale-restricted-sections-comparison-map). -/
+Source: Stacks Project, Tag 015J, proof remark (3). -/
 theorem etaleRestrictedSections_comparison_map
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

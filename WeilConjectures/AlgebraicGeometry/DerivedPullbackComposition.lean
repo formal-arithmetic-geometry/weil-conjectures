@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionCoherence
 /-!
 # Composition and coherence of derived pullbacks
 
-Source: Stacks Project, Cohomology, Lemma 20.27.2, Tag 0D5S
-(blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
+Source: Stacks Project, Cohomology, Lemma 20.27.2, Tag 0D5S.
 -/
 
 @[expose] public section
@@ -62,8 +61,7 @@ of `g` and `f` followed by the canonical underived identification
 `pushforwardComp f g` under the pinned tensor-pullback adjunctions.
 The family of derived-category instances only chooses the localizations; it imposes no
 geometric condition on the schemes or morphisms.
-Source: Stacks Project, Cohomology, Tag 0D5S
-(blueprint: lem-pc-ringed-spaces-derived-pullback-composition).
+Source: Stacks Project, Cohomology, Tag 0D5S.
 Proof, step 1: choose a K-flat resolution on Z (lem-pc-kflat-resolution). Pullback
 preserves K-flatness (lem-pc-kflat-pullback-preservation), so successive derived
 pullbacks are represented by successive termwise tensor pullbacks (def-pc-derived-pullback):

@@ -20,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 
 /-- The geometric continuity core: a canonical restriction cocone is colimiting.
 Source: Stacks Project, Tag 03Q6, degree zero of Lemma 59.51.5.
-(blueprint: new-local-stalk-sections-canonical-colimit)
 
 The proof is the affine-site continuity argument over a cofiltered limit of affine
 open subschemes.  It identifies the filtered colimit of sections with sections on

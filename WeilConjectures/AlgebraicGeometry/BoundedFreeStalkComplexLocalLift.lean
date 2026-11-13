@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeSheafStalkRealization
 /-! # A bounded free complex on an affine neighbourhood of a stalk
 
 Source: Stacks Project, Tags 0BCD, 0BC7 and 00CR, finite-matrix spreading.
-(blueprint: lem-sc-bounded-free-stalk-complex-local-lift).
 -/
 
 @[expose] public section
@@ -68,33 +67,7 @@ private theorem affineSheafification_coordinate_free
 Source: Stacks Project, Tags 0BCD and 0BC7 (finite-presentation spreading),
 and Algebra Tag 00CR. The stalk of a sheaf on the open is expressed using ordinary
 open direct image followed by the ambient stalk functor; no global boundedness or
-restriction comparison is asserted here.
-(blueprint: lem-sc-bounded-free-stalk-complex-local-lift).
-
-Proof:
-1. Use hterms to identify every term with its standard rank-d i free module.
-   Express each differential in the standard bases. The hypothesis hd makes all
-   ranks zero outside [a,b], so only finitely many matrices have any entries.
-2. Choose an affine neighbourhood V of x. Its stalk is the localization of its
-   section ring at the prime corresponding to x. Every entry of the finitely many
-   matrices is a fraction with denominator outside that prime. Multiply these
-   denominators to obtain a principal affine neighbourhood where all entries lift.
-3. Each composite of consecutive matrices has zero germ. Every one of its finitely
-   many entries therefore vanishes after multiplication by an element outside the
-   prime. Shrink again using the product of these elements. The lifted matrices
-   now square to zero, and define the differentials between the rank-d i free
-   sheaves on the resulting affine open U. Outside [a,b] take the zero differentials;
-   rank zero gives zero sheaves there, so the resulting complex L is bounded.
-4. The stalks of finite free sheaves have their standard finite bases. The chosen
-   bases of F identify them with these stalks and commute with the differentials
-   by the definition of the lifted matrices, giving an isomorphism of complexes.
-   In the ambient direct image, neighbourhoods contained in U are cofinal at x;
-   this identifies that stalk with the local one, compatibly with scalar action
-   and differentials, and yields the displayed isomorphism.
-For an empty degree interval every rank is zero, so there are no coefficients or
-relations to lift. No point exists on an empty scheme; rank-zero terms introduce
-no coefficients. Nothing assumes that the open immersion is quasi-compact.
--/
+restriction comparison is asserted here. -/
 theorem exists_boundedFree_stalk_complex_local_lift
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)
     (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)

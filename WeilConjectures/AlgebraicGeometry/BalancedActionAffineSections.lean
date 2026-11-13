@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSectionsInduction
 /-! # Balanced actions on affine sections of the direct-image algebra
 
 Source: Stacks Project, Tags 01LX, 01SB and 0897, affine tensor-action construction.
-(blueprint: lem-weil-pbc-balanced-action-affine-sections).
 -/
 
 @[expose] public section
@@ -27,24 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The balanced tensor action on affine opens, including compatibility on inclusions.
 
-Source: Stacks Project, Tags 01LX (2)-(3), 01SB and 0897, relative-spectrum paragraph.
-(blueprint: lem-weil-pbc-balanced-action-affine-sections).
-
-Proof: For U affine, write D = O_X(U) and N = M(U). Affine base change identifies
-O_Y(pi inverse U) with D tensor_A B, sending pi-sharp(d) to d tensor 1 and
-fB-sharp(b) to 1 tensor b. The endomorphisms rho(b)_U are D-linear; their
-A-action agrees with the D-action by the scalar hypothesis. The tensor-product
-universal property gives the unique action (d tensor b)x = d rho(b)_U(x), and
-its unit, multiplication, and addition identities give a ring map to additive
-endomorphisms of N. This proves the two displayed generator identities and
-uniqueness on each affine U. For an inclusion of affine opens V into U, the
-restriction on the direct-image algebra sends pi-sharp(d) to pi-sharp(d|V)
-and fB-sharp(b)|pi-inverse(U) to fB-sharp(b)|pi-inverse(V). On the former
-generators compatibility is semilinearity of the original module restrictions;
-on the latter it is naturality of rho(b). Each tensor is a finite sum of pure
-tensors, so additivity proves compatibility for every algebra section. Thus
-no affine intersection is assumed affine and no localization of M is needed.
-The tensor universal property also handles zero modules and zero rings. -/
+Source: Stacks Project, Tags 01LX (2)-(3), 01SB and 0897, relative-spectrum paragraph. -/
 theorem balancedAction_affine_sections
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

@@ -15,8 +15,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # The module associated to a divisor
 
-Source: blueprint, sec-abelian-varieties, def-sc-picard-group, node def-sc-divisor
-(blueprint: def-sc-divisor).
+Source: sec-abelian-varieties, def-sc-picard-group, node def-sc-divisor.
 
 ## Main definitions
 
@@ -50,40 +49,31 @@ variable (X : Scheme.{u}) [IsIntegral X] [IsNoetherian X] [IsRegular X]
 
 /-- Pointwise scalar action on function-field-valued functions, by taking the germ at each
 point and then specializing to the generic point. Source: blueprint node def-sc-divisor,
-section O_C(D)(U) (blueprint: def-sc-divisor). -/
+section O_C(D)(U). -/
 noncomputable def divisorScalarMap (U : X.Opens) : Γ(X, U) →+* (U → X.functionField) :=
   RingHom.pi fun x : U ↦
     (algebraMap (X.presheaf.stalk x.val) X.functionField).comp
       (X.presheaf.germ U x.val x.property).hom
 
 /-- Scalar multiplication induced by the explicit pointwise germ map. Source: blueprint
-node def-sc-divisor (blueprint: def-sc-divisor). -/
+node def-sc-divisor. -/
 noncomputable instance divisorFunctionAlgebra (U : X.Opens) :
     Algebra Γ(X, U) (U → X.functionField) :=
   (divisorScalarMap X U).toAlgebra
 
 /-- Locally constant rational functions obeying the divisor bounds at closed points.
-Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U)
-(blueprint: def-sc-divisor). -/
+Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U). -/
 def Divisor.sectionCondition (D : X.Divisor) (U : X.Opens) (s : U → X.functionField) : Prop :=
   IsLocallyConstant s ∧ ∀ (x : U) (hx : IsClosed ({x.val} : Set X)),
     s x = 0 ∨ 0 ≤ X.ord (s x) x.val + D ⟨x.val, hx⟩
 
-/-- Zero satisfies every order bound. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: the zero function is locally constant, and at every closed point the zero disjunct
-holds. This also covers the empty open. -/
+/-- Zero satisfies every order bound. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.sectionCondition_zero (D : X.Divisor) (U : X.Opens) :
     D.sectionCondition X U 0 := by
   have _hreg : IsRegular X := inferInstance
   exact ⟨IsLocallyConstant.const 0, fun _ _ ↦ Or.inl rfl⟩
 
-/-- Closure under addition. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: sums of locally constant functions are locally constant. At a closed point the order
-in the regular codimension-one local ring satisfies v(a+b) >= min(v(a),v(b)); if either
-summand or the sum is zero use its separate zero case. At points of other codimensions ord
-is zero, so when a nonzero summand is permitted its bound is already nonnegative. -/
+/-- Closure under addition. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.sectionCondition_add (D : X.Divisor) (U : X.Opens)
     (s t : U → X.functionField) (hs : D.sectionCondition X U s)
     (ht : D.sectionCondition X U t) : D.sectionCondition X U (s + t) := by
@@ -106,12 +96,7 @@ theorem Divisor.sectionCondition_add (D : X.Divisor) (U : X.Opens)
   · rw [ord_eq_zero_of_coheight_neq_one hd] at h ⊢
     exact h
 
-/-- Closure under regular scalars. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: a regular section maps to a single rational function on each nonempty integral open,
-so its product with a locally constant function is locally constant. Its order at every
-codimension-one point is nonnegative. Add orders for a nonzero product; a zero product
-satisfies the zero disjunct. Elsewhere ord is zero. The empty open has no points. -/
+/-- Closure under regular scalars. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.sectionCondition_smul (D : X.Divisor) (U : X.Opens)
     (a : Γ(X, U)) (s : U → X.functionField) (hs : D.sectionCondition X U s) :
     D.sectionCondition X U (a • s) := by
@@ -146,8 +131,7 @@ theorem Divisor.sectionCondition_smul (D : X.Divisor) (U : X.Opens)
   omega
 
 /-- The explicit section submodule O_X(D)(U) inside function-field-valued functions.
-Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U)
-(blueprint: def-sc-divisor). -/
+Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U). -/
 noncomputable def Divisor.sectionModule (D : X.Divisor) (U : X.Opens) :
     Submodule Γ(X, U) (U → X.functionField) where
   carrier := {s | D.sectionCondition X U s}
@@ -155,10 +139,7 @@ noncomputable def Divisor.sectionModule (D : X.Divisor) (U : X.Opens) :
   add_mem' := fun {s t} hs ht ↦ D.sectionCondition_add X U s t hs ht
   smul_mem' := D.sectionCondition_smul X U
 
-/-- Restriction retains the local conditions. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: locally constant functions remain locally constant under the inclusion of an open
-subset. The order bounds at its closed points are a subset of the original bounds. -/
+/-- Restriction retains the local conditions. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.sectionCondition_restrict (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (s : D.sectionModule X U) :
     D.sectionCondition X V (fun x ↦ s.val ⟨x.val, leOfHom i x.property⟩) := by
@@ -167,23 +148,18 @@ theorem Divisor.sectionCondition_restrict (D : X.Divisor) {U V : X.Opens}
   exact continuous_subtype_val.subtype_mk _
 
 /-- Pointwise restriction of the explicit section submodules.
-Source: blueprint node def-sc-divisor (blueprint: def-sc-divisor). -/
+Source: blueprint node def-sc-divisor. -/
 noncomputable def Divisor.restrictSection (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (s : D.sectionModule X U) : D.sectionModule X V :=
   ⟨fun x ↦ s.val ⟨x.val, leOfHom i x.property⟩, D.sectionCondition_restrict X i s⟩
 
-/-- Additivity of restriction. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: both sides have at each point the sum of the same two function-field values. -/
+/-- Additivity of restriction. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.restrictSection_add (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (s t : D.sectionModule X U) :
     D.restrictSection X i (s + t) = D.restrictSection X i s + D.restrictSection X i t := by
   rfl
 
-/-- Semilinearity of restriction. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: germ of a restricted scalar equals its original germ at each point of V. Composing
-with the map to the generic stalk gives identical pointwise scalar products. -/
+/-- Semilinearity of restriction. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.restrictSection_smul (D : X.Divisor) {U V : X.Opens}
     (i : V ⟶ U) (a : Γ(X, U)) (s : D.sectionModule X U) :
     D.restrictSection X i (a • s) =
@@ -196,26 +172,19 @@ theorem Divisor.restrictSection_smul (D : X.Divisor) {U V : X.Opens}
       (X.presheaf.germ V x.val x.property (X.presheaf.map i.op a)) * s.val _
   rw [TopCat.Presheaf.germ_res_apply]
 
-/-- Restriction as a semilinear map. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor). -/
+/-- Restriction as a semilinear map. Source: blueprint node def-sc-divisor. -/
 noncomputable def Divisor.restrictLinear (D : X.Divisor) {U V : X.Opens} (i : V ⟶ U) :
     D.sectionModule X U →ₛₗ[(X.presheaf.map i.op).hom] D.sectionModule X V where
   toFun := D.restrictSection X i
   map_add' := D.restrictSection_add X i
   map_smul' := D.restrictSection_smul X i
 
-/-- Identity restriction. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: restriction along the identity fixes the value at every point; subtype proof fields
-are irrelevant. -/
+/-- Identity restriction. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.restrictSection_id (D : X.Divisor) (U : X.Opens)
     (s : D.sectionModule X U) : D.restrictSection X (𝟙 U) s = s := by
   rfl
 
-/-- Composition of restrictions. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: the direct and iterated inclusions send each point to the same point of U, hence
-produce equal functions, and subtype proof fields are irrelevant. -/
+/-- Composition of restrictions. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.restrictSection_comp (D : X.Divisor) {U V W : X.Opens}
     (i : V ⟶ U) (j : W ⟶ V) (s : D.sectionModule X U) :
     D.restrictSection X (j ≫ i) s =
@@ -223,7 +192,7 @@ theorem Divisor.restrictSection_comp (D : X.Divisor) {U V W : X.Opens}
   rfl
 
 /-- The presheaf with the specified sections and pointwise restriction.
-Source: blueprint node def-sc-divisor (blueprint: def-sc-divisor). -/
+Source: blueprint node def-sc-divisor. -/
 noncomputable def Divisor.modulePresheaf (D : X.Divisor) : X.PresheafOfModules where
   obj U := ModuleCat.of Γ(X, U.unop) (D.sectionModule X U.unop)
   map {U V} i := ModuleCat.ofHom
@@ -240,12 +209,7 @@ noncomputable def Divisor.modulePresheaf (D : X.Divisor) : X.PresheafOfModules w
     ext s
     exact D.restrictSection_comp X i.unop j.unop s
 
-/-- The specified presheaf is a sheaf. Source: blueprint node def-sc-divisor
-(blueprint: def-sc-divisor).
-Proof: compatible locally constant functions glue uniquely as functions and remain locally
-constant because the covering opens cover every point. Each closed-point order bound is
-checked on any covering open containing that point. This proves existence and uniqueness
-of the glued section; on the empty cover there is only the empty function. -/
+/-- The specified presheaf is a sheaf. Source: blueprint node def-sc-divisor. -/
 theorem Divisor.modulePresheaf_isSheaf (D : X.Divisor) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X) (D.modulePresheaf X).presheaf := by
   let P : TopCat.LocalPredicate (fun _ : X ↦ X.functionField) :=
@@ -268,8 +232,7 @@ theorem Divisor.modulePresheaf_isSheaf (D : X.Divisor) :
   exact TopCat.subpresheafToTypes.isSheaf P
 
 /-- The associated O_X-module O_X(D), with explicit section data (not an arbitrary chosen
-invertible module). Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U)
-(blueprint: def-sc-divisor). -/
+invertible module). Source: blueprint node def-sc-divisor, displayed formula O_C(D)(U). -/
 noncomputable def Divisor.associatedModule (D : X.Divisor) : X.Modules :=
   ⟨D.modulePresheaf X, D.modulePresheaf_isSheaf X⟩
 
@@ -281,8 +244,7 @@ namespace AlgebraicGeometry.Scheme.Divisor
 Noetherian hypotheses are added: those instances follow from smoothness, connectedness
 and finite type over the field. Divisors, degree, principal divisors and the class group
 remain the existing declarations in Curve.Divisor.
-Source: blueprint sec-abelian-varieties, def-sc-picard-group, def-sc-divisor
-(blueprint: def-sc-divisor). -/
+Source: blueprint sec-abelian-varieties, def-sc-picard-group, def-sc-divisor. -/
 noncomputable def moduleOfSmoothConnectedCurve (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (D : C.Divisor) : C.Modules :=

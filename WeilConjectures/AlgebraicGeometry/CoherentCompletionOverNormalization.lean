@@ -16,7 +16,6 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 /-! # Normalized completion on an open over-site
 
 Source: Stacks Project, Tag 0889(1), Zariski locality, and equation 0880.
-(blueprint: lem-weil-pbc-coherent-completion-over-normalization).
 -/
 
 @[expose] public section
@@ -28,22 +27,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Restricting a coherent module to an open over-site preserves coherence and has
 an inverse-system quotient comparison normalized by the original projections.
 
-Source: Stacks Project, Tag 0889(1), first sentence of proof; equation 0880.
-(blueprint: lem-weil-pbc-coherent-completion-over-normalization).
-
-Proof: Identify the over-site with the open subscheme using overFunctorEquiv.
-Coherence restricts to that subscheme. Restriction preserves cokernels and the
-images of multiplication by every ideal power. Hence the restricted quotient and
-quotient of the restriction have the same cokernel universal property. Construct
-both comparison maps from this universal property; cancellation of the quotient
-projections proves they are inverse. Normalize the comparison by requiring its
-composite with the restricted projection to equal the quotient projection of the
-restriction. For every transition, precompose with the projection from the larger
-quotient's module and cancel that epimorphism. This gives a natural isomorphism of
-systems. Transfer it through overFunctorEquiv to the indicated over-site objects.
-The construction works for the zero and unit ideals and the empty open: it uses
-only cokernel universal properties, with no nonemptiness or affineness assumption.
--/
+Source: Stacks Project, Tag 0889(1), first sentence of proof; equation 0880. -/
 theorem coherentCompletion_over_normalization
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H : CoherentModules X) (W : X.Opens) :

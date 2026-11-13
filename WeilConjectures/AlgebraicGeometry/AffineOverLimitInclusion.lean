@@ -158,30 +158,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A directed inverse limit in schemes affine over `S` is also a limit in `Over S`.
 
 Source: Stacks Project, Limits, Lemma 01YX (lemma-directed-inverse-system-has-limit),
-the universal-property argument, using Lemma 01YW on each affine open of the base.
-(blueprint: lem-weil-pbc-affine-over-limit-inclusion)
-
-Proof: Send the limiting cone through the relative-spectrum anti-equivalence to a
-colimit of quasi-coherent algebras. The directed algebra-colimit theorem constructs a
-colimit in all algebra sheaves whose vertex is quasi-coherent. Thus the full-subcategory
-inclusion creates this colimit and preserves the given colimit cocone.
-
-Define the contravariant structure-algebra functor on all schemes over S, not only the
-affine ones. The object and morphism clauses of the anti-equivalence identify its
-restriction with the underlying algebra functor. Consequently the given cone's
-structure algebras form a colimit in all algebra sheaves.
-
-For an arbitrary test scheme T over S and an affine Y over S, the structure-algebra map
-on Hom(T,Y) is bijective. Injectivity follows by restricting to inverse images of affine
-base opens and using the Gamma--Spec adjunction. For surjectivity,
-`affine_algebra_local_maps` constructs compatible maps on these inverse images;
-scheme-morphism gluing produces the global map over S. Its algebra map is the prescribed
-one by equality on the affine basis. No quasi-separatedness of S or T is needed.
-
-Apply the algebra colimit's universal property to the structure algebras of any test
-cone. The Hom bijection produces its unique scheme factorization. Functoriality and
-injectivity give the projection identities, and colimit uniqueness gives uniqueness
-of the factorization. This is the required universal property in Over S. -/
+the universal-property argument, using Lemma 01YW on each affine open of the base. -/
 theorem isLimit_affineOver_inclusion
     {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (S : Scheme.{u})

@@ -241,7 +241,6 @@ private theorem transport_of_unit (K K' : Type u) [Field K] [IsAlgClosed K]
 
 Source: RefactorInstruction, Section 4, lem:XS and prop:pX, and Section 5,
 eq:triangle; Bhatt--Scholze, Example 4.1.10.
-(auxiliary; not a blueprint node).
 
 Proof in words: write X = Spec K', Y = Spec K, f = Spec i, and S for the
 singleton profinite set. Let qY and qX be the specified structural maps from

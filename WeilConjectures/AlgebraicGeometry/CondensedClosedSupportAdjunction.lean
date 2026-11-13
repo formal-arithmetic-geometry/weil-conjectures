@@ -24,8 +24,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 # Closed support for arbitrary condensed coefficients
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-localization`,
-`sk-lem-formal-closed-support-adjunction.md` and its proof
-(blueprint: det-lem-formal-closed-support-adjunction).
+`sk-lem-formal-closed-support-adjunction.md` and its proof.
 
 Inverse image uses the canonical coefficient isomorphism and restriction of scalars along
 its inverse. This works for noncommutative rings as well. The finite constant-coefficient
@@ -47,47 +46,47 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 
 /-- The existing category of left module objects over the pulled-back ring.
-Source: blueprint opening paragraph (blueprint: det-lem-formal-closed-support-adjunction).
+Source: blueprint opening paragraph.
 This is the ring-object presentation of module sheaves, with sectionwise linear maps. -/
 abbrev supportModules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
 /-- Grothendieck structure for arbitrary left modules, without commutativity.
-Source: blueprint proof Step 6 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 6. -/
 noncomputable instance supportModules_grothendieck (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (supportModules Λ X) :=
   Mod.isGrothendieckAbelian.{u + 1, u + 1, u + 2} (condensedRingObj Λ X)
 
 /-- Canonical inverse image, transporting the action through the inverse of alpha.
-Source: blueprint proof Steps 1--2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Steps 1--2. -/
 noncomputable def supportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportModules Λ Y ⥤ supportModules Λ X :=
   (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
     Mod.comap (asIso (condensedPullbackHom Λ f)).inv
 
 /-- Exactness and additivity are inherited from inverse image and scalar transport.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2. -/
 noncomputable instance supportPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (supportPullback Λ f).Additive := inferInstanceAs
       (((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
         Mod.comap (asIso (condensedPullbackHom Λ f)).inv).Additive)
 
 /-- Inverse image preserves finite limits.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2. -/
 noncomputable instance supportPullback_leftExact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (supportPullback Λ f) := by
   unfold supportPullback
   infer_instance
 
 /-- Inverse image preserves finite colimits.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2. -/
 noncomputable instance supportPullback_rightExact {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (supportPullback Λ f) := by
   unfold supportPullback
   infer_instance
 
 /-- Scalar transport equivalence along alpha. Both functors restrict scalars.
-Source: blueprint proof Step 1 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 1. -/
 noncomputable def supportCoefficientEquivalence {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       ((ProEtale.upperStar Ab.{u + 1} f).obj (condensedRingObj Λ Y)) ≌
@@ -100,7 +99,7 @@ noncomputable def supportCoefficientEquivalence {X Y : Scheme.{u}} (f : X ⟶ Y)
       (condensedPullbackHom Λ f)).symm ≪≫ Mod.comapCongr (by simp) ≪≫ Mod.comapId _)
 
 /-- Canonical module inverse/direct-image adjunction, including its specified unit.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
+Source: blueprint proof Step 2. -/
 noncomputable def supportPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportPullback Λ f ⊣ lowerStar Λ f :=
   (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction

@@ -30,24 +30,7 @@ open Scheme Etale
 agrees with the Ext definition of cohomology pullback.
 
 Source: Stacks Project, sites-cohomology.tex, Section 21.2 (definition of cohomology)
-and Tag 08J6; cohomology.tex, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-abelian-derived-global-ext-pullback)
-
-Proof: Choose a bounded below injective resolution I of G and a bounded below injective
-resolution J of g'^*G. Exactness of inverse image makes g'^*I a resolution of g'^*G.
-The comparison theorem gives a map g'^*I → J over the identity of g'^*G, unique up to
-homotopy. The constant-integer-sheaf adjunction identifies Hom(Z,I) with Γ(X,I)
-termwise, by evaluation at 1; the analogous identification holds for J. These
-identifications commute with the differentials. Computing Ext with I and J gives
-the two additive equivalences in every nonnegative degree, including degree zero.
-The map on Hom complexes defining Ext pullback is application of g'^* followed by
-the constant-sheaf comparison and the map to J. Under evaluation at 1, this is the
-unit section map Γ(X,I) → Γ(X',g'^*I) followed by Γ of the comparison to J.
-The derived-unit description of pullback identifies this last map with p: the
-Leray isomorphism is the equality Γ(X,g'_*J)=Γ(X',J), and the derived adjunction
-unit is represented by the underived unit and the replacement. Taking homology
-proves the displayed equation. Homotopic choices give equal maps on homology,
-so all these comparisons hold for the functors used in the statement. -/
+and Tag 08J6; cohomology.tex, Tag 01F8 and equations 01F9 and 01FA. -/
 theorem Etale.exists_addEquiv_derivedGlobal_ext_pullback
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :

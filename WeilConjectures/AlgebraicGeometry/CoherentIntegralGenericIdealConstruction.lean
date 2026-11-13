@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The lattice construction before proving injectivity.
 
 Source: Stacks Project, Tag 01YE, first two paragraphs of the integral-case proof.
-(blueprint: lem-weil-pbc-coherent-integral-generic-ideal-map-construction).
 
 Extend a finite generic basis to an open neighbourhood. Extend that specific map
 from a coherent ideal lattice of the same rank. Its finite coproduct is coherent

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorModelInputNaturality
 /-! # Comparison of normalized derived evaluation maps
 
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-hom-uncurry-normalized-comparison).
+Tags 0A90 and 0A96.
 -/
 
 @[expose] public section
@@ -148,26 +148,7 @@ private theorem assoc_four {C : Type*} [Category* C] {A B D E F G : C}
 
 /-- Localized evaluation respects comparisons between normalized representatives.
 Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90
-and 0A96. (blueprint: lem-pc-tensor-hom-uncurry-normalized-comparison).
-
-Proof: Replace L and L' by K-flat resolutions, and replace both targets by their
-fixed K-injective resolutions. Hom from a K-flat complex into a K-injective is
-K-injective, so the displayed equality of derived inputs is an equality of
-homotopy classes after computing the comparison roofs on common K-flat sources.
-Uncurrying carries a chain homotopy to a chain homotopy: uncurry its degree-minus-one
-components on every tensor summand, and use the Hom differential formula to
-identify the boundary with the difference of evaluations. On chain maps,
-precomposition in P and L and postcomposition in the target commute with evaluation
-by naturality of the sheaf tensor-Hom adjunction and of the Hom projections.
-Coproduct extensionality promotes the summand identities to identities of chain
-maps. Localize those identities. Naturality of the tensor model comparison, of the
-internal-Hom resolution comparison, and of the resolution augmentation identifies
-the resulting composites with the displayed outputs. Cancel the localized
-quasi-isomorphisms of the chosen resolutions. For arbitrary L, K-flatness of P
-makes P tensor - invert its resolution, while Hom(-,I(M)) also inverts it; hence
-the same cancellation applies. This proves the implication without any hypothesis
-on a family of values, and includes zero maps, zero complexes, and identity
-comparisons. No boundedness is used. -/
+and 0A96. -/
 theorem tensorHomUncurry_normalized_comparison (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M P' L' M' : CochainComplex

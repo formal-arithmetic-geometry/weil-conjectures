@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.PullbackStalkTensorFlat
 
 /-! # Stalkwise Tor-independence of base-flat complexes
 
-Source: Stacks Project, perfect.tex, Tag 0A1D, proof checking Tag 0DJ8 (1)
-(blueprint: lem-pc-derived-pullback-tor-independent-flat-complex).
+Source: Stacks Project, perfect.tex, Tag 0A1D, proof checking Tag 0DJ8 (1).
 
 The localized comparison of the existing base-derived tensor cohomology model is
 used without replacing the canonical map by an arbitrary isomorphism. Its target
@@ -40,8 +39,7 @@ namespace AlgebraicGeometry
 
 /-- Base-flat bounded-above quasi-coherent complexes satisfy the stalkwise condition.
 
-Source: Stacks Project, perfect.tex, Tag 0A1D, proof via Tag 0DJ8 (1)
-(blueprint: lem-pc-derived-pullback-tor-independent-flat-complex).
+Source: Stacks Project, perfect.tex, Tag 0A1D, proof via Tag 0DJ8 (1).
 
 Here x', x, t and f(x) are the points of X_T, X, T and S. The equality f(x) = g(t)
 is `pullback.condition` evaluated at x'; the four algebra-map equations fix

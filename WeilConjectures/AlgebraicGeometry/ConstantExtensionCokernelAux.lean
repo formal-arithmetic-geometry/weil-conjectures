@@ -77,7 +77,6 @@ private theorem extension_presentation
 /-- An extension with constant outer terms admits a local cokernel presentation before
 recording finite generation of the source module.
 Source: Stacks Project, Tag 093U, extension argument.
-(blueprint: lem-pc-constant-extension-cokernel-aux-cover)
 -/
 theorem exists_constantExtension_cokernelPresentation_aux_cover {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
@@ -113,15 +112,7 @@ theorem exists_constantExtension_cokernelPresentation_aux_cover {X : Scheme.{u}}
 
 /-- A lifted short exact module presentation with finite kernel yields a finite-source
 cokernel presentation of the middle term, when the first term is constant.
-Source: Stacks Project, Tag 093U, finite free presentation step.
-(blueprint: lem-pc-constant-extension-cokernel-aux-finite)
-
-Proof: Restrict the extension and apply the exact constant-sheaf functor to the supplied
-module presentation. Factor the lifted kernel map through the first term. The proved
-helper shows that (-g,T.f) has the middle term as its cokernel. Identify the first term
-with a constant model M and the biproduct with the constant sheaf of M plus T.X₂.
-Transporting the cokernel along this isomorphism preserves the source T.X₁, whose finite
-generation is part of the supplied presentation. -/
+Source: Stacks Project, Tag 093U, finite free presentation step. -/
 theorem finite_cokernelPresentation_of_local_presentation {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

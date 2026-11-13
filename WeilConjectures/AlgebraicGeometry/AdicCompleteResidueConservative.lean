@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.AdicResidueQuotientUnitUniversal
 /-! # Derived Nakayama on localized completed coefficient sites
 
 Source: Stacks Project, Tags 09C6, 099M and 099F.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -91,19 +90,7 @@ private theorem complete_zero_of_reductions
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Residue reduction detects isomorphisms between locally complete objects on a slice.
 Source: Stacks Project, proetale.tex, Tag 09C6, final step; Algebraization, Tags 099M and
-099F, derived Nakayama.
-(auxiliary; not a blueprint node).
-
-Proof: complete f to a distinguished triangle with cone Q. The completion unit is a
-map of exact functors, so the complete-object criterion and two-out-of-three make Q
-complete. Its residue reduction is zero. The exact constant coefficient sequence
-0 -> J^n/J^(n+1) -> A/J^(n+1) -> A/J^n -> 0 gives after derived tensor with Q a triangle.
-The first term is the tensor of the zero residue reduction with J^n/J^(n+1), hence
-vanishes. Induction makes every finite reduction of Q zero. The same calculation
-holds on the slice, because restriction is exact and preserves the coefficient maps.
-Completeness identifies Q with the derived limit of these zero reductions, hence Q
-is zero. The distinguished triangle then makes f an isomorphism. Neither T nor M
-is assumed bounded or constructible; no quotient is assumed perfect over A. -/
+099F, derived Nakayama. -/
 theorem adicResidue_isIso_of_residue
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

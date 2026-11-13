@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Section rings of upper-tail affine charts
 
 Source: Stacks Project, Tag 01ZR, affine reduction, and Tag 01I4.
-(blueprint: new-affine-chart-section-ring-presentations-tail).
 -/
 
 @[expose] public section
@@ -97,30 +96,7 @@ private theorem representative_final {J : Type u} [Preorder J] [IsDirectedOrder 
   rw [hrep]
 
 /-- The actual upper-tail chart rings present the direct and finite-stage chart rings.
-Source: Stacks Project, Tag 01ZR, affine reduction, and Tag 01I4.
-(blueprint: new-affine-chart-section-ring-presentations-tail).
-
-Proof: The upper tail is directed, as is its antisymmetrization. The quotient class
-of a representative is the original class, so the representative functor is final
-by the directed-preorder cofinality criterion. Its opposite is initial. Whisker the
-explicit limiting upperTailChartCone along this opposite functor. Every object is
-a pullback of affine schemes over Spec R(j), so Mathlib's preservesColimit_Γ sends
-the opposite cone to a colimit of exactly F. The unique comparison of colimit points
-gives β from colimit F to the sections of the cone vertex.
-
-Paste the chart pullback square with the base-change square. Its universal property
-gives z from the direct chart to the cone vertex, and e from each finite-stage chart
-to the corresponding diagram object. Their two projection equations are fixed by
-isoPullback. Their targets are affine, so their sources are affine. Apply Γ to z
-and e and compose the former with β to obtain ρ₀ and ρₓ. The initial and finite-stage
-equations follow from the second projections: maps in Over.pullback preserve that
-projection to U(a). For the last equation, the two maps from the iterated chart to
-the stage diagram object have identical first projections by pullbackHom_map and
-the baseChangeMap projection equation, and identical second projections by the
-formula defining v. Pullback uniqueness equates them. Apply appTop and the colimit
-leg equation for β to obtain the required elementwise compatibility. All objects
-are the displayed pullbacks; no arbitrary existence witness supplies ring data.
-The argument also covers empty charts, zero rings, and equivalent preorder indices. -/
+Source: Stacks Project, Tag 01ZR, affine reduction, and Tag 01I4. -/
 theorem affine_chart_section_ring_presentations_tail
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

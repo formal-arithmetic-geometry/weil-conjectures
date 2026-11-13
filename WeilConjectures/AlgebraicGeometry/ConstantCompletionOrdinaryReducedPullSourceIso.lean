@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryFinite
 /-! # Source transport for ordinary finite reduction
 
 This is the source-side transport used in the ordinary reduced pull comparison.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,11 +26,7 @@ variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
 /-- The source finite reduction has its canonical transport to the finite quotient model.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-Proof: whisker the normalized ordinary finite pullback isomorphism on the left by
-restriction of scalars, then whisker the normalized finite comparison on the right.
-(auxiliary; not a blueprint node).
--/
+Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL. -/
 theorem ordinaryReducedPull_sourceIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

@@ -24,19 +24,7 @@ namespace AlgebraicGeometry
 
 /-- Classifying a section after pullback between nested opens gives its restriction.
 Source: Stacks Project, Tag 03F3, localization restriction; the unit compatibility
-calculation of `open_restriction_pullback_unit`.
-(blueprint: lem-weil-pbc-etale-open-section-pullback)
-
-Proof: Expand the constant pullback comparison as the unique left adjoint comparison.
-Under the constant-sheaf adjunction the pulled-back map is the original section
-followed by the inverse-image unit and the terminal-object pullback identification.
-Apply the open restriction unit calculation to U.ι and V. The fibre product of V
-and U over X identifies with V, since V is contained in U. The composition unit law
-then cancels the inverse composition comparison in the displayed map. The remaining
-section map is F evaluated on the inclusion from V to U, conjugated by the two
-localization restriction comparisons. Naturality of these comparisons gives precisely
-the displayed expression. The argument uses only terminal-object uniqueness and
-monomorphy of open immersions, so also applies to empty or equal opens. -/
+calculation of `open_restriction_pullback_unit`. -/
 theorem etaleOpenSection_pullback {X : Scheme.{u}}
     (U V : X.Opens) (h : V ≤ U)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

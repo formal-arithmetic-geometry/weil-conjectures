@@ -25,16 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An affine etale object over a qcqs inverse limit descends to an affine etale
 object at a stage, for an arbitrary small cofiltered index.
-Source: Stacks Project, Tags 0EYL and 01ZM.
-(blueprint: lem-sc-cofiltered-affine-etale-model).
-
-Proof: Choose a final functor from a nonempty directed poset to the opposite
-index. Its left opposite is initial, so whiskering the scheme cone preserves
-its limiting property. Compactness, quasi-separatedness and affineness of
-transition maps are inherited by this reindexing. Apply affineEtale_common_models
-to the singleton family consisting of U. The obtained model and pullback square
-are already over an object of the original index. Empty U is included in affine
-etale descent and requires no separate choice of a point. -/
+Source: Stacks Project, Tags 0EYL and 01ZM. -/
 theorem exists_affineEtale_model_of_cofiltered
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u})

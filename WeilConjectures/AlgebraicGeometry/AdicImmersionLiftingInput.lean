@@ -46,7 +46,7 @@ attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
 /-- The standard derived category on the original slice, with the actual inverse-image ring.
 This abbreviates the codomain of `sfbLocalRestriction`; it changes no coefficient ring.
-Source: Stacks Tag 00XZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00XZ. -/
 abbrev sfbAdicImmersionSliceCategory {X S : Scheme.{u}} (i : S ⟶ X)
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) (U : S.ProEt) :=
   let R := (adicLisseForget S).obj
@@ -58,39 +58,7 @@ lemma, together with its slice comparisons. This statement constructs no perfect
 and no covering sieve. Its output remains an arbitrary complete complex with lisse residue.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, forward implication; Lemma 6.5.8 and
-Remark 6.5.10; Stacks Tags 03A0, 03CY, 099L and 099R
-(auxiliary; not a blueprint node).
-
-Proof: Transport the exact module inverse image along i to the AsSmall model of S.
-The constant-ring comparison is adjoint to constant sections. It identifies each finite
-quotient and its quotient transition. Immersion inverse image preserves limits, so their
-limit comparison identifies the transported inverse-image completed ring with
-ConstantCompletion.completed. Apply the resulting scalar equivalence to the transported
-localization representative of K to obtain M. The comparison identifies the residue
-projection itself, not just its target ring. The completion-unit restriction theorem,
-using finite generators of I, takes completeness of K to completeness of M.
-
-Apply exact etale inverse image to C and transport to the small etale model of S.
-The equivalence from fixed-scalar sheaves to modules over the constant commutative ring
-sheaf gives C'. Both equivalences and inverse image are exact, hence commute with
-cohomology. They preserve its interval [a,b]. Each specified finite locally constant
-cohomology sheaf becomes locally constant with finitely generated module values:
-transport its trivializing cover, and use the constant-module comparison; stalk finiteness
-ensures that its constant values are finitely generated locally. The quotient by I is a
-field, so tensor with every degree-zero sheaf is exact. Thus every representative which
-is K-flat and represents C' computes tensor in [a,b]. No quotient is assumed perfect over A.
-
-The normalized finite-projection derived scalar comparison, comparison pullback, and
-the fixed-scalar equivalence carry the supplied residue isomorphism to the displayed
-isomorphism for M and C'. Finally, for each U, transport its slice along AsSmall and
-restrict scalars along the inverse of the completed-ring comparison. This gives an
-actual equivalence eU. Composition of exact inverse-image and localization functors,
-with the localization representative comparison, identifies eU(M restricted to U) with
-sfbLocalRestriction i K. The same comparisons for constant coefficients, evaluated
-termwise on an arbitrary A-complex P, identify eU of the completed constant P-model
-with sfbLocalRestriction i of sfbCompletedModel X I P. These comparisons hold before
-choosing any perfect P. Empty schemes and empty slice objects use the same equivalences
-and the empty-cover sheaf axiom. -/
+Remark 6.5.10; Stacks Tags 03A0, 03CY, 099L and 099R. -/
 theorem sfbAdicImmersion_liftingInput
     (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S]
     (i : S ⟶ X) [IsImmersion i]

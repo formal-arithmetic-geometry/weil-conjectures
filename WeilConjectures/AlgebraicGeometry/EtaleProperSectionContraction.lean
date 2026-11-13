@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
 # Tensor contraction of a proper section integral
 
 Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,12 +34,7 @@ attribute [local instance 20000] derivedBraidedCategory
 attribute [local implicit_reducible] sheafMonoidalCategory sheafBraidedCategory
 
 /-- The ordered section projection contracts against any normalized scalar integral.
-Source: blueprint thm-amb-p1-adjunction.proof.md, tensoring a section integral.
-(auxiliary; not a blueprint node).
-Proof: apply the generic section integral tensor identity. Identify the conjugate
-section unit with the derived section pushforward comparison. The ordered projection
-comparison identifies each of its projection mates, and invertibility identifies their
-inverses. The single-complex unitor equation then gives the stated contraction. -/
+Source: blueprint thm-amb-p1-adjunction.proof.md, tensoring a section integral. -/
 theorem properSection_contraction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (s : X ⟶ Y) (p : Y ⟶ X)

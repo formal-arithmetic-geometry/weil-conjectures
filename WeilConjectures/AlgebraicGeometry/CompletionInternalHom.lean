@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CompletionInternalHomQuotient
 
 /-! # Internal Hom and coherent formal completion
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.5, Tag 0882
-(blueprint: lem-weil-pbc-completion-internal-hom).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.5, Tag 0882.
 
 The inverse limit is written as compatible families of global sections. The existential
 maps are specified by quotient factorization and by their components, so the bijection
@@ -49,8 +48,7 @@ The maps `e` factor postcomposition with the quotient projection through both qu
 the next clause expresses compatibility with every transition. Finally `Φ` has components
 obtained by taking sections of `e` and the global internal-Hom identification.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.5, Tag 0882
-(blueprint: lem-weil-pbc-completion-internal-hom).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.5, Tag 0882.
 
 Proof (the node's five steps):
 1. Ideal products are locally sums of products of ideal sections with module sections

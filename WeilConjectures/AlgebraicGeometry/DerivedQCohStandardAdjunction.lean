@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 /-! # Transport of a quasi-coherent direct-image adjunction to standard localizations
 
 Source: Stacks Project, Tags 05RU and 079V.
-(blueprint: lem-pc-derived-qcoh-standard-adjunction).
 -/
 
 @[expose] public section
@@ -116,24 +115,7 @@ private theorem directImageComparison {Z Y : Scheme.{u}} (i : Z ⟶ Y)
       (δ ≪≫ γ.symm)⟩
 
 /-- Standardize a specified right adjoint, with comparisons on all objects.
-Source: Stacks Project, Tags 05RU and 079V.
-(blueprint: lem-pc-derived-qcoh-standard-adjunction).
-
-Proof: homology is the localization lift of homotopy-category homology. Uniqueness
-of localization lifts identifies homology after the standard comparison, in both
-directions. Quasi-coherence is therefore preserved, and the ambient equivalences
-restrict to equivalences eZ and eY of the full quasi-coherent subcategories. The
-K-injective factorization of module pushforward identifies its two models:
-both use the same functorial resolution and termwise pushforward before target
-localization. Compare these factorizations using the Q comparison, then descend
-the natural isomorphism by full faithfulness of precomposition with Q. This comparison transfers hRi
-to the standard model. Conjugate the given adjunction by eZ and eY, and identify
-its left adjoint with the standard restricted direct image. Take the resulting
-right adjoint cS = eY.inverse followed by c and eZ.functor. The unit of eY and the
-inclusion comparisons give the displayed natural isomorphisms. This construction
-uses no tensor formula, perfection, properness, or immersion assumption. The
-adjunction specifies cS up to natural isomorphism. Identity maps and zero module
-categories are covered by the same equivalence and Kan-extension arguments. -/
+Source: Stacks Project, Tags 05RU and 079V. -/
 theorem derivedQCoh_standardAdjunction
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

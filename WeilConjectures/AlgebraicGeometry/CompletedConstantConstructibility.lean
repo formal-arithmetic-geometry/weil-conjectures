@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 /-!
 # Finite constant models in the completed ring-sheaf presentation
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3)
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 
 The original general condensed-ring interfaces remain publicly available. This adds the
 same finite-stratification condition for modules over the actual inverse-limit ring sheaf.
@@ -36,8 +35,7 @@ modules are pulled back to the actual inverse-image ring before slice restrictio
 canonical immersion comparison identifies that ring with the completed ring on the stratum.
 For qcqs schemes this is the constructibility condition; on other schemes the source uses
 its affine-local version, for which the original general interface is retained.
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3)
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3). -/
 def IsCompletedConstantStratified (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (M : proEtaleRingModules X (adicLisseCompletedRing X I)) : Prop :=

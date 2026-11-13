@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # The triangle identities from the two diagonal integrals -/
 @[expose] public noncomputable section

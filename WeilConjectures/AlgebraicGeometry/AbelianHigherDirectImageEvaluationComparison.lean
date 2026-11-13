@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvalua
 /-! # Natural abelian higher-image comparison
 
 Source: Stacks Project, Tag 03Q8.
-(blueprint: lem-sbc-abelian-higher-image-evaluation-functor-iso)
 -/
 
 @[expose] public section
@@ -33,23 +32,8 @@ attribute [local instance] RawRestrictedComparison.etaleComposition
 sheaf, to cohomology restricted to an etale pullback. No qcqs or continuity
 hypothesis is used.
 
-Source: Stacks Project, Tag 03Q8 (lemma-higher-direct-images) and the restriction
-calculations in Tags 072W and 0BKV.
-
-Proof: Put V=U times_X Y and r:V->Y. The free abelian Yoneda and sheafification
-adjunctions identify maps from h^*Z[U] to G with sections of r^*G on V.
-Restriction along the etale map r preserves injectives: its extension-by-zero
-left adjoint is exact, as its geometric stalks are direct sums of abelian groups.
-On an injective resolution of F the additive sections adjunction is an
-isomorphism of complexes, since it commutes with each differential. Its degree-q
-cohomology is thus the cohomology of r^*F on V. The K-injective localization
-bijection and full faithfulness of D+ in D identify the source with the displayed
-shifted derived Hom. Lift a coefficient map F->F' to the resolutions. The
-termwise sections adjunction commutes with the lift, and homotopic lifts induce
-the same cohomology map. Hence these isomorphisms are natural in F, giving a
-natural functor isomorphism. This includes degree zero, empty V, and arbitrary
-abelian coefficients; neither filteredness nor compactness enters.
-(blueprint: lem-sbc-abelian-higher-image-evaluation-functor-iso) -/
+Source: Stacks Project, Tag 03Q8 and the restriction
+calculations in Tags 072W and 0BKV. -/
 theorem nonempty_abelianHigherDirectImage_evaluationFunctorIso
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ) (U : X.Etale) :
     Nonempty

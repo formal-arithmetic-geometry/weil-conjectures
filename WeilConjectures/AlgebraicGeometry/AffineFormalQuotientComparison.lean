@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 /-! # Sheafification of a positive affine module quotient
 
 Source: Stacks Project, Tags 01I7, 01I8, 01IC and 087W.
-(blueprint: lem-weil-pbc-affine-formal-quotient-comparison).
 -/
 
 @[expose] public section
@@ -146,26 +145,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 No finiteness, completeness or Noetherian hypothesis on the module is required.
 
 Source: Stacks Project, Tags 01I7 and 01IC (exact affine module correspondence),
-01I8 (tensor products), and 087W (the positive-power quotient system).
-(blueprint: lem-weil-pbc-affine-formal-quotient-comparison).
-
-Proof:
-1. On Spec A, the ideal sheaf associated with I has power inclusion with range I^n.
-The affine tensor-sections formula identifies the image of multiplication on tilde M
-with I^n M. Exact affine sections identify the cokernel projection with the surjection
-M to M/I^n M: its kernel is I^n M. Thus the quotient's sections are canonically
-isomorphic to M/I^n M, with the given projection.
-2. Both the cokernel and tilde of the module quotient are quasi-coherent. The affine
-counit therefore sheafifies that section isomorphism to an isomorphism of sheaves.
-Its composite with the quotient projection is tilde of the module quotient map,
-as seen on global sections and hence on every localized basic open.
-3. Use X's canonical affine isomorphism with Spec A. The affine ideal dictionary sends
-J to the ideal I of top sections. Pullback along the isomorphism is an equivalence,
-so preserves cokernels and images. The ideal-power product image comparison identifies
-the transported multiplication image with the one used in formalModuleQuotient J.
-The uniqueness of maps from a cokernel transports the projection equation as well.
-For I=0 the projection is an isomorphism; for I=A the quotient is zero. Empty affine
-schemes and zero modules satisfy the same cokernel argument. -/
+01I8 (tensor products), and 087W (the positive-power quotient system). -/
 theorem affine_formalQuotient_comparison
     {X : Scheme.{u}} [IsAffine X] (J : X.IdealSheafData)
     (M : ModuleCat.{u} Γ(X, ⊤)) (n : ℕ) (hn : 0 < n) :

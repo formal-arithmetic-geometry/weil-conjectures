@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection
 
 /-! # One overlap equation remains effective at later stages
-Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction.
-(blueprint: lem-weil-pbc-sets-section-pair-matching-eventually). -/
+Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction. -/
 
 @[expose] public section
 
@@ -22,21 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction.
-(blueprint: lem-weil-pbc-sets-section-pair-matching-eventually).
-Proof: fix the two objects and form their fibre product over W in the small étale
-category. Cancellation against the qcqs structure map of W makes the two arrows to
-W qcqs; base change and composition make the fibre product qcqs. Apply eventual
-section equality to the restrictions along its two projections, using hmatch.
-Thinness identifies the two witness arrows to j. At any later stage k, transport
-this equality by the section comparison. Composition coherence and restriction
-naturality identify it with the restrictions of the original sections transported
-along e followed by d. Base change preserves the fibre product. Every pair of
-arrows a,a' whose composites into the base change of W agree factors uniquely
-through that base changed fibre product. Restriction along this factorization
-proves the displayed equality. No finite common-stage choice is made here: this
-is only the overlap equation for the two fixed objects. The same proof applies
-when the two objects coincide, an overlap is empty, or a sheaf has no sections. -/
+/-- Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction. -/
 theorem etaleSetSection_pair_matching_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

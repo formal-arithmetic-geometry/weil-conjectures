@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstantClosedEffaceme
 /-! # Effacing constructible finite module coefficients on a closed subscheme
 
 Source: Stacks Project, Tag 09ZE, constructible finite-pushforward step of the proof.
-(blueprint: lem-weil-pbc-constructible-module-closed-effacement)
 -/
 
 @[expose] public section
@@ -31,29 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The constructible finite-module part of affine closed-subscheme effacement.
 
-Source: Stacks Project, Tag 09ZE, proof, constructible case; Tags 09Z7 and 09ZD.
-(blueprint: lem-weil-pbc-constructible-module-closed-effacement)
-
-Proof:
-1. Embed C into a finite sum of finite pushforwards of constant finite modules M_j
-   along finite finitely presented maps f_j:Y_j to X, using Tag 09Z7. Each Y_j is
-   affine. Pullback is exact, and forgetting coefficients preserves monomorphisms.
-2. Take the image of x under this embedding and its projections to the summands.
-   Finite exchange and the finite-pushforward cohomology edge isomorphism identify
-   each component with a class of the constant underlying abelian sheaf M_j on
-   Y_j times_X Z. Forgetting modules commutes with constants and inverse image.
-3. Apply Tag 09ZD to obtain finite surjective finitely presented covers
-   π_j:Y'_j to Y_j killing those classes. Each adjunction unit from constant M_j
-   to π_j*π_j^*M_j is monic by surjectivity. Finite pushforward preserves monos.
-   The pullback of the constant module is canonically constant on Y'_j.
-4. Push these units forward by f_j and take their finite sum. Compose with the
-   embedding of C to obtain a monomorphism into the resulting module sheaf D.
-   Base-change/unit/edge compatibility says that every projected image of x is
-   zero. Cohomology respects finite biproducts, so the full image is zero.
-   No constructibility is asserted for D and no comparison hypothesis is used.
-   Empty sums and zero coefficient rings give zero sheaves. The restriction is
-   to a closed subscheme, so the killing lemma applies; q>0 is essential.
--/
+Source: Stacks Project, Tag 09ZE, proof, constructible case; Tags 09Z7 and 09ZD. -/
 theorem exists_constructible_module_mono_closed_cohomology_eq_zero
     {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

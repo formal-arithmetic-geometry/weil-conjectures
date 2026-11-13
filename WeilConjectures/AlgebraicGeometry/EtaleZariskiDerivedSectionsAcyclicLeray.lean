@@ -84,28 +84,7 @@ private noncomputable def mapResolution
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Acyclic Leray for right-derived terminal sections, without either Ext model.
-Source: Stacks Project, Tags 072Z and 0733(1).
-(blueprint: new-etale-zariski-derived-sections-acyclic-leray)
-
-Proof: A continuous finite-limit-preserving i gives an exact inverse image on
-abelian sheaves: finite-limit preservation gives representable flatness, hence
-left exactness of inverse image on sets; its lift to abelian group objects is
-left exact and, being a left adjoint, right exact. Its right adjoint T therefore
-preserves injectives. T is left exact as a right adjoint. Choose an injective
-resolution I of F. If all positive right-derived images of F vanish, the
-augmented complex T(F) -> T(I) is exact: left exactness proves the augmentation
-is the degree-zero kernel, and its positive homology is R^q T(F), hence zero.
-Every T(I^k) is injective, so T(I) is an injective resolution of T(F).
-Evaluation of T(I) at the top open is definitionally evaluation of I at i(top).
-Compute right-derived Zariski evaluation using T(I), and right-derived etale
-evaluation using I. Their section complexes are identical, giving c F hF n.
-For F -> G lift the morphism to a comparison I_F -> I_G. Applying T gives a
-comparison of the pushed resolutions. The degreewise section identification
-commutes with this comparison, so the resulting homology equivalences satisfy
-the displayed naturality equation. Homotopic lifts give equal maps on homology;
-proof irrelevance removes dependence on hF and hG. On zero coefficients all
-positive groups are zero. Empty schemes cause no exception to the resolution
-argument. This assertion has no cohomology/Ext comparison in its conclusion. -/
+Source: Stacks Project, Tags 072Z and 0733(1). -/
 theorem etaleZariskiDerivedSectionsAcyclicLeray
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

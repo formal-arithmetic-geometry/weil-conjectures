@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 # Constructible finite stratifications of flat quasi-finite morphisms
 
 Source: Stacks Project, More on Morphisms, Tags 07RY and 07RZ, using the bounded
-closed degree filtration and quasi-compactness of its successive differences
-(blueprint: lem-weil-pbc-etale-separated-stratified-finite-intermediate).
+closed degree filtration and quasi-compactness of its successive differences.
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem exists_immersion_of_locallyClosed {X : Scheme.{u}} {s : Set X}
 admits a finite constructible locally closed stratification on whose strata it is finite.
 This packages the construction from the closed degree filtration, including the induced
 subscheme structures. Source: More on Morphisms, Lemma Tag 07RZ.
-(blueprint: lem-weil-pbc-etale-separated-stratified-finite-intermediate)
 -/
 theorem exists_constructible_stratified_finite
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

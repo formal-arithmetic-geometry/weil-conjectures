@@ -232,8 +232,7 @@ private theorem main_of_coeff (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The specified abelian comparison preserves the scalar action on every module.
 
 Source: Bhatt--Scholze, Example 4.1.10; RefactorInstruction, Section 4,
-geometric-fiber comparison, steps 1--3
-(auxiliary; not a blueprint node).
+geometric-fiber comparison, steps 1--3.
 
 Proof in words: the comparison is the inverse-image adjunction unit followed by
 restriction along the canonical terminal-object comparison. Both respect the lax

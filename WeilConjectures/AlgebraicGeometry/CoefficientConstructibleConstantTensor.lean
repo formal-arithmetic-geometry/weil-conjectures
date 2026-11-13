@@ -17,7 +17,6 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 /-! # Tensoring constructible complexes with finite constant modules
 
 Source: Stacks Project, Tags 09BQ and 094H.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact constant realization of a module in degree zero on the coefficient-sized site.
-Source: Stacks Tags 093J and 09BQ
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 093J and 09BQ. -/
 def coefficientConstantSingle (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] (M : ModuleCat.{max v (u + 1)} A) :
     adicFiniteAmbient.{u, v} X A :=
@@ -39,8 +37,7 @@ def coefficientConstantSingle (X : Scheme.{u})
     ((commutativeSiteConstantModuleFunctor T A).obj M))
 
 /-- The existing K-flat tensor with the specified constant module in degree zero.
-Source: Stacks Tags 09BQ and 094H
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 09BQ and 094H. -/
 def coefficientConstantTensor (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (K : adicFiniteAmbient.{u, v} X A) (M : ModuleCat.{max v (u + 1)} A) :
@@ -104,21 +101,7 @@ private theorem commonStratification (s : Finset ℤ)
 There is no lower bound or flatness assumption on the constant factor.
 
 Source: Stacks Project, proetale.tex, Tag 09BQ, lemma-tensor-c;
-sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product.
-(auxiliary; not a blueprint node).
-
-Proof: Fix an affine open U. Only finitely many cohomology sheaves of K are nonzero.
-Intersect their finite constructible stratifications using the actual fibre-product
-strata and their projections. Pull back the local constant models along these
-projections. Exact inverse image preserves the cohomology and the bounds, and its
-canonical tensor comparison identifies the restricted tensor with the tensor of the
-restrictions. The constant module M remains constant on each stratum and has
-cohomology only in degree zero. Apply Tag 094H to the two bounded-above factors.
-It gives locally constant finite type cohomology in every degree. Over the
-Noetherian ring A the finite local models are finitely presented, which supplies
-the required witnesses on U. For an empty cohomology interval take the one-stratum
-refinement; the tensor is zero. The same argument allows the zero module, zero
-ring and empty scheme. No finite projective dimension of M is used. -/
+sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product. -/
 theorem coefficientConstructible_constantTensor (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (K : adicFiniteAmbient.{u, v} X A)

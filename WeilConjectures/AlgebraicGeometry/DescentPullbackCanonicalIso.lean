@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.DescentPullbackConstruction
 /-!
 # Canonical comparisons of pullback functors on scheme descent data
 
-Source: Stacks Project, Descent, Tags 02VS(3) and 023Y(1)--(2)
-(blueprint: lem-galois-fpqc-pullback-canonical-iso).
+Source: Stacks Project, Descent, Tags 02VS(3) and 023Y(1)--(2).
 -/
 
 @[expose] public section
@@ -297,24 +296,14 @@ private theorem pullback_exists {S X T : Scheme.{v}} (a : X ⟶ S) (b : T ⟶ S)
 -- Keep the existing signature, including its named proof argument to `pull`.
 set_option linter.unusedVariables false in
 /-- Canonical comparisons of pullback of descent data over a fixed scheme.
-Source: Stacks Project, Descent, Tags 023Y(1)--(2) and 02VS(3)
-(blueprint: lem-galois-fpqc-pullback-canonical-iso).
+Source: Stacks Project, Descent, Tags 023Y(1)--(2) and 02VS(3).
 
 The functors are specified by their fibre-product projections `q`, the universal property
 `IsPullback`, the pulled-back datum `IsBaseChange`, and the equation for their maps.
 The two-map comparison is specified by transporting the universal point of the first
 pullback along the pair of maps to `X`. The composition comparison preserves the projection
 back to the original scheme; together with being over `U`, this specifies the canonical
-associativity isomorphism uniquely.
-
-Proof: (1) The pair `(r₀,r₁)` defines a map to `X ×_S X` by the universal property
-[def-pc-fibre-product]. Pull back the descent isomorphism [def-pd-descent-datum] along this
-pair to obtain the comparison; compatibility of morphisms of descent data gives naturality.
-(2) On `T ×_S T`, the required descent-morphism equation follows by applying the cocycle
-identity twice on `X ×_S X ×_S X`; inverse transport gives the inverse morphism.
-(3) For composable maps, the universal property [def-pc-fibre-product] identifies the
-iterated and direct pullbacks preserving both projections. Functoriality identifies their
-descent data and morphisms, giving the natural associativity comparison. -/
+associativity isomorphism uniquely. -/
 theorem descent_pullback_canonical_iso (S : Scheme.{v}) :
     ∃ (pull : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S)
         (r : T ⟶ X) (hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b)

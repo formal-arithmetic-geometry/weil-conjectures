@@ -47,28 +47,7 @@ The etale residue is the explicit transported complex, with no boundedness or lo
 constancy assumptions. Neither a perfect complex nor a covering is chosen.
 
 Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 03A0, 03CY,
-099L and 099R (auxiliary; not a blueprint node).
-Proof: transport the pro-etale inverse-image functor along AsSmall. Its normalized
-constant-ring comparison identifies every finite quotient and the quotient transition.
-An immersion inverse image preserves limits, so the comparison of inverse limits is an
-isomorphism for the completed ring. Apply scalar restriction along this isomorphism
-to the transported localization representative of K, and localize, obtaining M.
-The comparison identifies the actual finite projection maps. Choose finite generators
-of I and apply adicStratumCompletionUnit to their Koszul completion-unit comparison;
-it carries completeness of K to completeness of M.
-The finite-projection derived comparison identifies the residue of M with inverse
-image of the residue of K. Apply the supplied residue isomorphism, then the coherent
-etale/pro-etale comparison pullback isomorphism. The normalized fixed-scalar equivalence
-and exact localization identify the other side with adicResidueComparison applied to
-the displayed sfbImmersionResidue, yielding the asserted residue isomorphism.
-For each U, AsSmall induces an equivalence of slices. Compose it with restriction of
-scalars along the completed-ring isomorphism on that slice, then its exact derived
-equivalence, obtaining eU. The localization representative comparison identifies the
-restriction of M with sfbLocalRestriction of K. For each ordinary A-complex P, the
-constant coefficient comparison identifies the coefficient unit and therefore, termwise,
-the completed constant model on S with inverse image of the completed constant model
-on X. Restriction and localization give the second displayed slice isomorphism.
-All constructions apply to empty schemes and empty slice objects as well. -/
+099L and 099R. -/
 theorem sfbAdicImmersion_completedTransport
     (X S : Scheme.{u}) [IsNoetherian X] [IsNoetherian S]
     (i : S ⟶ X) [IsImmersion i]

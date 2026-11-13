@@ -102,32 +102,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The positive-degree Mayer--Vietoris segment before descent of its squares.
 
 Source: Stacks Project, Tag 09YQ, coherent-system construction, and Tag 0A50,
-long exact sequence and coefficient naturality; pullback naturality of its construction.
-(blueprint: lem-weil-pbc-etale-limit-binary-successor-cocone-segment).
-
-Proof: Pass to the directed tail J above i₀ with final inclusion t. Transfer U,V
-along e to the union stage and pull them back to each later stage and the limit.
-These opens cover each stage. Restrict all coefficients and transition maps;
-upperStarComp and the original coherence laws give coherent restricted systems.
-The restricted cones are limits by isLimitOpensCone, with affine transitions.
-Affine inverse images preserve compactness. Quasi-separatedness passes to open
-subschemes, and the intersection is compact because D(i₀) is quasi-separated.
-Inverse image preserves the sheaf colimit by its left adjoint property. Construct
-canonical cohomology diagrams of the two opens and their intersection in degrees
-q and q+1. Their specified initial stages are isomorphic to U, V and U ∩ V.
-Take K₁ to be the degree-q product, K₂ the degree-q intersection, K₄ the degree-(q+1)
-product, and the middle diagram to be t ⋙ H. Apply the functorial Mayer--Vietoris
-sequence before evaluating on coefficients, so that its difference and boundary
-maps are chosen simultaneously. Coefficient naturality and pullback naturality
-make a,b,r natural. Exactness of the sequence gives both stage pairs and the bottom
-pair. Its canonical comparison cocones give C₁,C₂ and v₄. The system certificate
-constructor certifies the single factors; prod and iso/comp transport certify their
-products and the specified cocones. Naturality of the sequence proves the three
-stage-leg squares. For the middle square use hB to identify its actual leg with
-pullback followed by the coefficient colimit leg. No equality on an entire colimit
-is asserted here: those equalities require colimit.hom_ext and finality separately.
-Zero factors for empty opens and diagonal/difference maps for coincident opens
-satisfy the same naturality and exactness statements. -/
+long exact sequence and coefficient naturality; pullback naturality of its construction. -/
 theorem etale_limit_binary_successor_cocone_segment
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

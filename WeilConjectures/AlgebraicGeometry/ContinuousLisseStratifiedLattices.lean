@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 /-! # Lattices on finitely many strata of a continuous local system
 
 Source: Bhatt--Scholze, first paragraph of the proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -68,7 +67,6 @@ private theorem continuousLisse_stratified_lattices_of_system
 
 /-- A locally finite free rational sheaf admits locally free integral lattices after a finite
 stratification. Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph.
-(auxiliary; not a blueprint node)
 
 Proof in words. Proposition 6.8.4(6) supplies integral lattices on an etale cover.
 Refine its members by affine opens and take a finite subcover, possible because the

@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineCoordinateTensorComparison
 import WeilConjectures.CategoryTheory.CounitComparisonComposition
 
 /-! # Derived comparisons from concrete affine models
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.
-(blueprint: lem-pc-affine-coordinate-derived-comparison). -/
+Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S. -/
 
 @[expose] public section
 universe u w
@@ -23,8 +22,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- The comparison on a single K-flat model, before conjugating the supplied H charts. 
-(blueprint: lem-pc-affine-coordinate-derived-comparison)
+/-- The comparison on a single K-flat model, before conjugating the supplied H charts.
 -/
 noncomputable def affineCoordinateObjectDerivedComparison
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
@@ -44,10 +42,7 @@ noncomputable def affineCoordinateObjectDerivedComparison
     (asIso ((perfectHomTensorCounit p).app ((affineCoordinateHomotopy a).obj M))).symm
 
 /-- The inverse-counit comparison is natural between K-flat models.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-affine-coordinate-derived-comparison).
-Proof: apply inverseCounitModelNaturality to the natural termwise comparison
-and the fixed counit. The K-flatness theorem makes the two counits invertible. -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 theorem affineCoordinateObjectDerivedComparison_naturality
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -74,8 +69,7 @@ theorem affineCoordinateObjectDerivedComparison_naturality
     ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ affineCoordinateHomotopy b)
     (affineCoordinateHomotopyComparison a b φ p hp) (perfectHomTensorCounit p) f
 
-/-- Conjugate the concrete comparison by the supplied coordinate models. 
-(blueprint: lem-pc-affine-coordinate-derived-comparison)
+/-- Conjugate the concrete comparison by the supplied coordinate models.
 -/
 noncomputable def affineCoordinateChartObjectComparison
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
@@ -90,9 +84,7 @@ noncomputable def affineCoordinateChartObjectComparison
     (derivedPullback p).mapIso ((affineCoordinateHomotopyIso a).app M).symm
 
 /-- The chart comparison retains naturality on K-flat models.
-Source: Stacks Project, Tag 08DW.
-(blueprint: lem-pc-affine-coordinate-derived-comparison).
-Proof: conjugate the preceding naturality equation by the two natural chart isos. -/
+Source: Stacks Project, Tag 08DW. -/
 theorem affineCoordinateChartObjectComparison_naturality
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -111,8 +103,7 @@ theorem affineCoordinateChartObjectComparison_naturality
     (affineCoordinateObjectDerivedComparison a b φ p hp N hN)
     (affineCoordinateObjectDerivedComparison_naturality a b φ p hp M N hM hN f)
 
-/-- The natural comparison on the full category of two labelled K-flat models. 
-(blueprint: lem-pc-affine-coordinate-derived-comparison)
+/-- The natural comparison on the full category of two labelled K-flat models.
 -/
 noncomputable def affineCoordinateDerivedComparison :
     AffineCoordinateComparisonFamily.{u, w} := by

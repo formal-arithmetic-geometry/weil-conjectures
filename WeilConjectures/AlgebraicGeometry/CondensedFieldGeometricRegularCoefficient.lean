@@ -364,8 +364,7 @@ private lemma geometric_scalar_value
 
 /-- Compatibility of a regular endomorphism's coefficient with one geometric pullback.
 
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
+Source: Hemo--Richarz--Scholbach, Example 3.1.
 
 Proof in words. The extension-of-scalars regular-module comparison and naturality
 of restriction of scalars identify the underlying conjugate by the canonical regular

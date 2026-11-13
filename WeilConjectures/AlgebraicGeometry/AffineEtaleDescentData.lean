@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleCoveringEventually
 # AffineEtaleDescentData
 
 Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
-(blueprint: lem-weil-pbc-affine-etale-descent-data).
 -/
 
 @[expose] public section
@@ -88,8 +87,7 @@ Proof (steps 5--7 of lem-weil-pbc-affine-etale-site-colimit):
    this means that the descended family covers. Delta gives the stated comparisons.
 4. Conversely, preservation of coverings by v and invariance under the displayed
    source and target isomorphisms show that any such descended covering covers.
-   This includes n = 0: the coproduct is empty and 07RR applies to its map.
-(blueprint: lem-weil-pbc-affine-etale-descent-data). -/
+   This includes n = 0: the coproduct is empty and 07RR applies to its map. -/
 theorem affineEtale_descent_data
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

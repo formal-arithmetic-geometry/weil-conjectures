@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineEtalePullbackArrowComparison
 # Eventual lifting of arrows between affine étale models
 
 Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
-(blueprint: lem-pbc-affine-etale-model-arrows).
 -/
 
 @[expose] public section
@@ -26,19 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Limits 01ZM(2), and Étale Cohomology 0EYL.
-
-Proof: Use the q-pullback squares to identify the v-images with canonical pullbacks.
-For each arrow apply 01ZM(2) to the two fixed affine étale models, which are finitely
-presented over the stage. It gives a later stage and an arrow between their base
-changes. Take an upper bound for these finitely many stages and the original
-stage, then pull back the arrows to that bound. Affine transition maps ensure that
-the base-changed models are still affine, and étaleness is preserved by base change.
-Transitivity and uniqueness of pullbacks give comparison isomorphisms from their
-v-images to the original v-images. Naturality of q and pullback uniqueness identify
-the lifted arrows with the given arrows under those isomorphisms. For no arrows,
-take the original stage and the identity base-change comparisons.
-(blueprint: lem-pbc-affine-etale-model-arrows). -/
+/-- Source: Stacks Project, Limits 01ZM(2), and Étale Cohomology 0EYL. -/
 theorem affineEtale_model_arrows
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

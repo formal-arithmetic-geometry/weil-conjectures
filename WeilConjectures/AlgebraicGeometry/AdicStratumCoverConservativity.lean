@@ -35,7 +35,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 /-! # Joint conservativity on stratum covering slices
 
 Source: Bhatt--Scholze, Remark 6.5.10 and Proposition 6.6.11; Stacks Project,
-Tags 09AH and 05RU (auxiliary; not a blueprint node).
+Tags 09AH and 05RU.
 -/
 
 @[expose] public section
@@ -265,25 +265,7 @@ private theorem strataModules_detectZero
 reflect isomorphisms in the unbounded derived category.
 
 Source: Bhatt--Scholze, Remark 6.5.10 and Proposition 6.6.11; Stacks Project,
-Tags 09AH and 05RU.
-(auxiliary; not a blueprint node).
-
-Proof: transport the small models to the original pro-etale sites. Forgetting a module
-to its abelian sheaf is faithful and exact. The supplied underlying-set comparisons and
-operation identities identify the algebraic module inverse image with geometric inverse
-image followed by scalar extension. Since the coefficient maps are isomorphisms, scalar
-extension is an equivalence. Thus vanishing after these module functors is exactly
-vanishing of the geometric inverse-image abelian sheaf. A covering sieve gives a jointly
-covering family of its arrows; the sheaf separation axiom detects vanishing on that
-family. Apply Noetherian finite-stratum detection to the cohomology sheaves in each
-integer degree. Exactness of inverse image identifies their pullbacks with cohomology
-of the given derived pullbacks. The latter are computed termwise because the coefficient
-maps are isomorphisms. This proves joint detection of zero derived objects. Complete
-the given morphism to a distinguished triangle. Its image cones vanish since all image
-morphisms are isomorphisms; zero detection makes its original cone zero, and the
-triangle criterion gives invertibility. The empty scheme and empty covering families
-are included by the empty-cover sheaf axiom, with no boundedness assumption.
--/
+Tags 09AH and 05RU. -/
 theorem adicStratumCoverConservativity
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)

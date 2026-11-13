@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
 /-!
 # Finite neighborhoods of multiple isolated fiber points after etale localization
 
-Source: Stacks Project, More on Morphisms, Lemma 02LM
-(blueprint: lem-weil-pbc-etale-local-finite-multiple-points).
+Source: Stacks Project, More on Morphisms, Lemma 02LM.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, More on Morphisms, Lemma 02LM
-(blueprint: lem-weil-pbc-etale-local-finite-multiple-points).
+/-- Source: Stacks Project, More on Morphisms, Lemma 02LM.
 For finitely many distinct isolated fiber points, an etale neighborhood makes their lifts
 lie in finite open subschemes, with purely inseparable residue fields and no unlisted lifts.
 

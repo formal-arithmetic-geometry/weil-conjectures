@@ -31,16 +31,7 @@ private theorem intModules_comp_forget :
 
 /-- Equality in a filtered colimit of abelian sheaves on a fixed scheme is detected
 at a later index on any quasi-compact etale object.
-Source: Stacks Project, Sites Tag 0738 (lemma-directed-colimits-sections), part (2).
-(blueprint: lem-weil-pbc-etale-abelian-section-colimit-eventual-equality).
-
-Proof: Give every abelian group its canonical integer-module structure, and transport
-sheaves and their colimit along the equivalence with integer modules. Subtract the
-second section from the first. The colimit image of this difference is zero. The
-module-sheaf eventual-zero theorem provides a later arrow killing the difference.
-Forgetting the integer action and using subtraction gives the desired equality.
-The empty etale object has its unique section; zero groups and singleton diagrams
-are included. This statement involves one fixed scheme and no inverse system. -/
+Source: Stacks Project, Sites Tag 0738, part (2). -/
 theorem etale_abelian_section_colimit_eventual_equality
     (X : Scheme.{u}) (U : X.Etale) [CompactSpace U.left]
     {I : Type u} [SmallCategory I] [IsFiltered I]

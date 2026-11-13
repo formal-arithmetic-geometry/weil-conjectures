@@ -32,16 +32,7 @@ namespace AlgebraicGeometry
 
 /-- Properties of the actual cone of a reduced quasi-isomorphism.
 
-Source: Stacks Project, Tag 0BCA, cone construction paragraph.
-(blueprint: lem-sc-complex-lift-cone-properties).
-
-Proof: The cone of a quasi-isomorphism is acyclic by the long exact homology
-sequence of its triangle. If E vanishes above e and K above k, its terms vanish
-above max e k: its term in degree i is E in degree i+1 plus the reduction of K
-in degree i. Choose a class member reducing to E in degree i+1. The product of
-that member with K in degree i belongs to the class by the forward direction
-of the sum-closure equivalence. Extension of scalars preserves binary
-biproducts, so this product reduces to the stated cone term. -/
+Source: Stacks Project, Tag 0BCA, cone construction paragraph. -/
 theorem complex_lift_cone_properties
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

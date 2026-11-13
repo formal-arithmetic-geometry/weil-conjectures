@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleRestrictionComposition
 /-!
 # Comparison of inverse images on the full and affine étale sites
 
-Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR
-(blueprint: lem-weil-pbc-sets-affine-etale-inverse-image-comparison).
+Source: Stacks Project, Étale Cohomology 09YQ, Topologies 04HR.
 -/
 
 @[expose] public section
@@ -28,27 +27,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks 09YQ, using 04HR
-(blueprint: lem-weil-pbc-sets-affine-etale-inverse-image-comparison).
+/-- Source: Stacks 09YQ, using 04HR.
 The functors `U` are base change, specified by their identifications `t` with small-site
 base change. `L` and `a` are the affine-site inverse images and their adjunctions.
 The comparisons `e` preserve units. The composition comparisons `c` and `d` are specified
-by their unit equations; `gamma` is the canonical iterated-base-change identification.
-
-Proof:
-1. Affine base change preserves affine étale objects and standard finite coverings
-   (lem-weil-pbc-affine-etale-site-base-change), hence is continuous.
-2. Restriction is an equivalence (lem-weil-pbc-affine-etale-site-topos). Full and affine
-   direct images agree after restriction, since both evaluate at the same base change
-   (lem-weil-pbc-etale-base-change-continuous, def-weil-pbc-sites-and-cohomology).
-   Transport the inverse-image adjunction across these equivalences. Uniqueness of left
-   adjoints gives e, with its unit equation (lem-weil-pbc-conjugate-iso-unit-equation).
-   Finite-limit preservation transfers from the full-site inverse image.
-3. Evaluate the unit equation on each affine object. For composites, pullback pasting
-   (def-pc-fibre-product) gives gamma. Both routes preserve the iterated units by
-   lem-weil-pbc-sets-etale-inverse-image-composition-units and
-   lem-weil-pbc-site-morphism-composition. Uniqueness of the unit-compatible adjoint
-   comparison (lem-weil-pbc-conjugate-iso-unit-equation) makes the two routes equal. -/
+by their unit equations; `gamma` is the canonical iterated-base-change identification. -/
 theorem exists_affineEtale_inverseImage_comparison :
     ∃ (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

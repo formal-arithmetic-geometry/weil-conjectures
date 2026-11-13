@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 /-! # Derived pullback/direct image adjunction for schemes
 
 Source: literature/stacks-project/cohomology.tex, Tag 079W, Cohomology Lemma
-cohomology-lemma-adjoint (blueprint: lem-pc-ringed-spaces-derived-adjoint).
+cohomology-lemma-adjoint.
 -/
 
 @[expose] public section
@@ -34,23 +34,7 @@ variable {X Y : Scheme.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- For a morphism of schemes, derived pullback is left adjoint to derived direct image.
-
-Proof:
-1. The tensor pullback/direct image adjunction of Stacks Tag 0096 induces an
-   adjunction on homotopy categories. The object and map clauses of
-   `derivedPullback_spec` identify its underived functor with tensor pullback.
-2. The recorded sheaf tensor structure and functorial flat resolutions give the
-   K-flat left derivability structure. Its categorical K-flat objects satisfy the
-   sheaf definition: tensoring an acyclic complex remains acyclic, as checked after
-   the homotopy quotient. Thus the chosen pullback counit is invertible on this
-   structure. The direct image unit is invertible on K-injectives. Whiskering these
-   comparisons gives the two derived-composite universal properties.
-3. Apply Mathlib's `Adjunction.derived` to the homotopy adjunction and these
-   universal properties. It constructs the adjunction of the chosen functors,
-   including the natural Hom equivalences and the triangle identities.
-Source: literature/stacks-project/cohomology.tex, Tag 079W, Cohomology Lemma
-cohomology-lemma-adjoint (blueprint: lem-pc-ringed-spaces-derived-adjoint). -/
+/-- For a morphism of schemes, derived pullback is left adjoint to derived direct image. -/
 theorem nonempty_derivedPullbackAdjunction (f : X ⟶ Y) :
     Nonempty (derivedPullback f ⊣ schemeDerivedDirectImage f) := by
   let A := SheafOfModules.{u} (moduleRings Y.toRingedSpace)

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleObject
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleMapLinearity
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2
-(blueprint: lem-weil-pbc-inverse-image-module-construction). -/
+Source: Stacks Project, Tags 03D1 and 03D2. -/
 
 @[expose] public section
 
@@ -28,25 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Construct the module inverse-image functor and its transported scalar action.
-Source: Stacks Project, Tags 03D1 and 03D2
-(blueprint: lem-weil-pbc-inverse-image-module-construction).
-
-Proof: the hom-equivalence equations pin the ring and abelian comparisons to
-the set adjunction. By uniqueness of left adjoints they are the transported lifts of
-`etaleInverseImageAlgebraicStructures`, and thus identify the ring and group operations.
-For each module,
-apply the set inverse image to its action map. Conjugate through the product comparison,
-the ring comparison, and the abelian comparison to obtain an action on the abelian
-inverse image. The comparisons preserve projections and are natural. Applying the
-set inverse image to each module law therefore proves distributivity in both
-variables, associativity of scalar multiplication, and the unit law. The resulting
-section actions commute with restriction because the transported action is a sheaf
-morphism. Applying inverse image to the linearity equation for a module map gives a
-linear map between these modules. Identities and composites are preserved by the
-abelian inverse-image functor, so these maps define LM. The underlying abelian
-comparisons define the natural isomorphism e. Construct muV and muU sectionwise from
-the actual scalar multiplication; the definition of the transported action gives
-the displayed product-comparison identity. -/
+Source: Stacks Project, Tags 03D1 and 03D2. -/
 theorem etaleInverseImageModuleConstruction (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

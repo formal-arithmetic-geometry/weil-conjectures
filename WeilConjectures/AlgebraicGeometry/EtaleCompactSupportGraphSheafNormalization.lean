@@ -10,8 +10,8 @@ import WeilConjectures.ConstructibleSheaf.EtaleMorphismDescent
 /-!
 # The graph map into the compactification sheaf
 
-Source: Stacks Project Tag 0F4L (lemma-shriek-into-star-separated-etale),
-and SGA 4 XVII 6.2.11 (auxiliary; not a blueprint node).
+Source: Stacks Project Tag 0F4L,
+and SGA 4 XVII 6.2.11.
 -/
 
 @[expose] public section
@@ -868,11 +868,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The transpose of the graph comparison is the graph extension unit.
 Source: Stacks Project Tag 0F4L and SGA 4 XVII 6.2.11; the adjunction-transpose part
-of the graph restriction calculation.
-Proof: transpose the explicit graph map through the lower-shriek restriction adjunction;
-then simplify the graph and complement restrictions using the clopen decomposition.
-(auxiliary; not a blueprint node).
--/
+of the graph restriction calculation. -/
 theorem compactSupportGraphSheafComparison_normalization_transpose
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X)
     [Etale f] [IsSeparated f] (c : Compactification f)
@@ -909,27 +905,7 @@ theorem compactSupportGraphSheafComparison_normalization_transpose
 
 /-- The graph transpose extends each sheet section by zero in the compactification.
 Source: Stacks Project Tag 0F4L, lemma-shriek-into-star-separated-etale;
-SGA 4 XVII 6.2.11.
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Transpose both sides under the sum-extension/restriction adjunction. A section over
-an etale test object is thereby tested on each lift of that object to U.
-2. The inverse beta in the graph projection identifies that lift with its base change
-in Z times_X U. The composition comparison preserves the same left-adjoint units.
-3. The projection to the graph is identity on the graph and zero on its complement:
-its map into the graph direct image is the adjoint of the section identity, and the
-clopen comparison between extension and direct image is inverted.
-4. Inclusion of extension by zero into direct image keeps the underlying section.
-Both transposes are therefore the graph-extension unit defining
-etaleLowerShriekToLowerStar. Injectivity of the adjunction bijection proves equality.
-Concretely, apply the injective homEquiv of etaleLowerShriekRestrictionAdjunction,
-then lowerStarUnit_app_hom_app. Scheme.Etale.graph_hom_ext reduces the resulting
-section equation to its graph and complement restrictions. The target restrictions
-are graphExtend_graph and graphExtend_graphComplι. For the constructed transpose,
-the inverse-conjugate counit equation for beta, the counit equation for leftAdjointUniq,
-and the triangle identity for the clopen projection give respectively identity and zero.
-The argument is valid for the empty graph, where all relevant sections are zero. -/
+SGA 4 XVII 6.2.11. -/
 theorem compactSupportGraphSheafComparison_normalization
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X)
     [Etale f] [IsSeparated f] (c : Compactification f)

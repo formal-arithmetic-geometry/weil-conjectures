@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.Dual
 /-! # Injectivity of restriction on a disjoint ideal twist
 
 Source: Stacks Project, Remark 09NW, the kernel calculation, and Lemma 09NX.
-(blueprint: lem-sc-closed-immersion-disjoint-ideal-twist-mono).
 -/
 
 @[expose] public section
@@ -76,23 +75,7 @@ private theorem tensor_ideal_inclusions_disjoint {Y : Scheme.{u}}
 zero intersection with the closed-immersion ideal.
 
 Source: Stacks Project, Remark 09NW, the calculation I/(I intersection J), and the
-local trivialization argument in Lemma 09NX.
-(blueprint: lem-sc-closed-immersion-disjoint-ideal-twist-mono).
-
-Proof: put N = M.tensorPow m, which is invertible. First, maps into I and J with
-identical composites into the structure module have zero common composite: on each
-open its values belong to I(U) intersection J(U), which is zero by hzero. The ideal
-inclusion is monic, so the map into I is zero. Tensoring with N is an equivalence,
-with inverse tensoring by its dual. Fullness, faithfulness and the counit isomorphism
-transport this zero-intersection property to the two tensor ideal inclusions.
-Both multiplication maps are monic, so their images identify with their sources.
-The closed-immersion unit kernel theorem identifies the image of J multiplication
-with the kernel of the chosen unit on N. Any map into the image of I multiplication
-killed by the unit therefore factors through the image of J multiplication. Cancel
-the common unitor and apply the tensor zero-intersection property to show this map
-is zero. The additive cancellation criterion proves monicity. No local choice of
-trivialization or comparison of adjunctions is needed: the kernel theorem uses the
-same chosen adjunction. The argument also covers empty schemes, m = 0 and I = 0. -/
+local trivialization argument in Lemma 09NX. -/
 theorem closedImmersion_disjointIdeal_twist_mono {Y X : Scheme.{u}} (i : X ⟶ Y)
     [IsClosedImmersion i] (I : Y.IdealSheafData)
     (hzero : ∀ U : Y.Opens, I.idealOfOpens U ⊓ i.ker.idealOfOpens U = ⊥)

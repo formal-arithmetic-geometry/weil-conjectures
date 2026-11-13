@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueSliceCompleteness
 /-! # Finite-level local models in the general adic lifting argument
 
 Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -124,35 +123,7 @@ private theorem adicResidue_restriction_factor
 markings or an isomorphism over completed coefficients.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, through the construction of the dual
-complex; Tags 09C2, 09BI, 09AW and 099Q.
-(auxiliary; not a blueprint node).
-
-Proof: restrict M to constant A-coefficients using the complete-object equivalence.
-The given lisse cohomology is constructible on the one-stratum stratification, so 09C2
-supplies all bounded constructible finite reductions with the same Tor interval and
-normalized quotient maps. Cover X by connected clopen components of Noetherian affine
-charts. Exact slice restriction preserves the quotient Roos tower and its unit, hence
-completeness and the finite reductions. On each component, apply nilpotent-reduction
-lissity to each A/J^(n+1)-complex and then 09BI. Take the geometric stalk of its normalized
-quotient system at one point. These are perfect complexes E_n with derived reduction
-E_(n+1) tensor A/J^(n+1) = E_n. Algebraic perfect inverse-limit reconstruction 09AW and
-A's adic completeness give a bounded finite-projective A-complex P with these reductions.
-Choose an affine weakly contractible pro-etale cover of that component. The weakly
-contractible clause of 09BI identifies every finite reduction of M there with the same
-constant P/J^(n+1), independently at each level. Localize the coefficient ring and all
-projections on the actual slice; this is the site of the covering scheme by localization.
-Restriction remains complete since it preserves products, kernels and the quotient Roos
-unit. Each term of the completed realization of P is an idempotent summand of a finite
-power of B, and is the limit of its corresponding J-power-torsion summands. Apply torsion
-limit completeness to the bounded complex and the constant/completed equivalence to
-obtain its local completeness. Assemble the covers by transitivity and generate a covering
-sieve. A member U of that sieve factors through one of the original weakly contractible
-covering objects V. Restriction along U -> V gives R; composition of exact slice
-restrictions identifies R(L) with M|U and R(T) with the same completed constant P|U.
-Weak contractibility is required only of V, never of arbitrary sieve refinements.
-Empty charts use the
-empty covering. No compatible local markings and no morphism between the complete
-objects are asserted here, and no quotient is assumed perfect over A or finite as a set. -/
+complex; Tags 09C2, 09BI, 09AW and 099Q. -/
 theorem adicResidue_finite_local_models
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

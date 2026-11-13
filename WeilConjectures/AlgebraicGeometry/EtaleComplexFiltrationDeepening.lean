@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 /-! # Deepening the etale hypercohomology image filtration
 
 The vanishing half of the finite spectral-sequence comparison in Stacks Tag 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-filtration-deepening).
 -/
 
 @[expose] public section
@@ -107,24 +106,7 @@ private theorem finite_comparison_filtered
   infer_instance
 
 /-- A kernel class in one image-filtration step moves to the next step at a later stage.
-Source: Stacks Project, Tag 0EZM, finite-term comparison, and Tag 015J.
-
-Proof: Reindex the filtered opposite category by a directed cofinal set (Tag 0032).
-Apply sheaf continuity (Tag 09YQ) in every complex degree. Functoriality of the first
-hypercohomology spectral sequence identifies these maps with the page-one comparison.
-Exact filtered colimits carry kernels and images to kernels and images, hence comparison
-isomorphisms propagate to every page. The common support region `r >= 0, s >= a`
-gives a stabilization bound independent of the stage in each bidegree. Thus the comparison
-on the stable graded piece in filtration degree `q` is injective on filtered colimits.
-The filtration here is the image from the stupid truncation in degrees at least `q`:
-a map from any complex supported there factors through that truncation, and its inclusion
-is itself such a map. A class in this step with zero limit image has zero limit graded
-component. Stable-page injectivity implies that component is zero at a later stage,
-so its transition image lies in the next filtration step. For an arbitrary original
-stage, finality first gives a map to a reindexed stage; compose that map with the later
-witness. Functoriality on abutments identifies the maps with `P` followed by `φ`;
-`hH` identifies their transitions with `H.map`.
-(blueprint: lem-weil-pbc-etale-complex-filtration-deepening). -/
+Source: Stacks Project, Tag 0EZM, finite-term comparison, and Tag 015J. -/
 theorem exists_etale_complex_class_in_next_filtration
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

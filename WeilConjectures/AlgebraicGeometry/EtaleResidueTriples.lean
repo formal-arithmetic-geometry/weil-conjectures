@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.InducedCategory
 /-!
 # Étale algebras with a prime and a residue-field embedding
 
-Source: Stacks Project, Tag 04HX, first paragraph of the proof
-(blueprint: def-weil-pbc-etale-residue-triples).
+Source: Stacks Project, Tag 04HX, first paragraph of the proof.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Stacks, Tag 04HX (blueprint: def-weil-pbc-etale-residue-triples).
+/-- Stacks, Tag 04HX.
 A triple consists of an étale map `A → B`, a prime `q` over `p`, and an embedding
 `κ(q) → K` compatible with the fixed map `κ(p) → K`. Compatibility on `A` is equivalent
 to compatibility on `κ(p)`, since residue fields are fraction fields of the quotients. -/
@@ -43,7 +42,7 @@ structure EtaleResidueTriple (A : CommRingCat.{u}) (p : Spec A)
   compatible : α ≫ (ΓSpecIso B).inv ≫ (Spec B).Γevaluation q ≫ φ =
     (ΓSpecIso A).inv ≫ (Spec A).Γevaluation p ≫ χ
 
-/-- Stacks, Tag 04HX (blueprint: def-weil-pbc-etale-residue-triples).
+/-- Stacks, Tag 04HX.
 Forget the prime and residue-field factorization, retaining the factorization `A → B → K`. -/
 def EtaleResidueTriple.factorization {A : CommRingCat.{u}} {p : Spec A}
     {K : Type u} [Field K] {χ : (Spec A).residueField p ⟶ CommRingCat.of K}
@@ -52,7 +51,7 @@ def EtaleResidueTriple.factorization {A : CommRingCat.{u}} {p : Spec A}
   Under.mk (Over.homMk (V := Over.mk
     ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ)) t.α t.compatible)
 
-/-- Stacks, Tag 04HX (blueprint: def-weil-pbc-etale-residue-triples).
+/-- Stacks, Tag 04HX.
 The category of triples, with morphisms the `A`-ring maps commuting with their maps to `K`.
 This is equivalent to inverse-image equality of primes and commutation on residue fields:
 the kernel of `B → κ(q) → K` is `q`, and residue-field factorization is unique. -/
@@ -61,7 +60,7 @@ abbrev EtaleResidueTriples (A : CommRingCat.{u}) (p : Spec A)
   InducedCategory (Under (Over.mk ((ΓSpecIso A).inv ≫ (Spec A).Γevaluation p ≫ χ)))
     (EtaleResidueTriple.factorization (A := A) (p := p))
 
-/-- Stacks, Tag 04HX (blueprint: def-weil-pbc-etale-residue-triples).
+/-- Stacks, Tag 04HX.
 The ring diagram sending a triple to its ring `B` and a morphism to its underlying ring map. -/
 def etaleResidueTriplesRingDiagram (A : CommRingCat.{u}) (p : Spec A)
     (K : Type u) [Field K] (χ : (Spec A).residueField p ⟶ CommRingCat.of K) :

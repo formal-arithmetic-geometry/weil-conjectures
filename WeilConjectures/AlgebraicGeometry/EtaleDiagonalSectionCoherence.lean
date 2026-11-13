@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import WeilConjectures.CategoryTheory.SectionConjugateComparison
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Restriction of the coordinate comparison to the diagonal -/
 @[expose] public noncomputable section

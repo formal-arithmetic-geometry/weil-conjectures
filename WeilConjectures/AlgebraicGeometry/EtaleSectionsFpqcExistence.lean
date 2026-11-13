@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleFpqcMatchingFamily
 
 /-! # EtaleSectionsFpqcExistence
 
-Source: Stacks Project, Tag 09XN
-(blueprint: lem-weil-pbc-etale-sections-fpqc-existence). -/
+Source: Stacks Project, Tag 09XN. -/
 
 @[expose] public section
 
@@ -23,21 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN, existence argument.
-(blueprint: lem-weil-pbc-etale-sections-fpqc-existence).
-
-Proof:
-For each etale V and section t, take the largest agreement opens between its
-pullbacks and the prescribed sections. Overlap compatibility identifies their two
-pullbacks. Fpqc open descent gives an open W in V. The local description of inverse
-image sections supplies etale local representatives t_ia on V_ia. Apply the preceding
-construction to each representative. Compatibility and joint surjectivity imply that
-its test scheme factors through W_ia. These W_ia therefore cover S in the etale site.
-Two restricted representatives agree on their overlap: their largest agreement open
-pulls back to the entire overlap under every T_i, and joint surjectivity makes it the
-entire overlap. The sheaf axiom glues the representatives to t. Its pullback agrees
-with each prescribed section on its etale representative cover, hence globally by
-sheaf separatedness. -/
+/-- Source: Stacks Project, Tag 09XN, existence argument. -/
 theorem exists_etaleSection_of_fpqc_cover
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

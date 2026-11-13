@@ -25,8 +25,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonData
 
 /-! # Coherent geometric isomorphisms of specified affine models
-Source: Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S.
-(blueprint: lem-pc-affine-base-change-model-comparison-isos). -/
+Source: Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S. -/
 
 @[expose] public section
 universe u w
@@ -64,36 +63,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Coherent object isomorphisms between termwise affine models and geometric pullbacks.
 This asserts no equivalence of derived module Hom sets and no preservation of bounds.
 Source: Stacks Project, Tag 09RE, affine calculation; Tag 08DW(2), Tag 06Z0,
-and Tag 0D5S (composition of derived pullbacks).
-(blueprint: lem-pc-affine-base-change-model-comparison-isos).
-
-Proof:
-1. Write B = Gamma(Y). The pushouts defining F are tensor products over R(i).
-   Spec sends these pushouts to pullbacks. Spec.preimage(t.hom followed by s)
-   gives exactly the supplied structural morphism. Use t to identify Spec B with Y.
-   The structural map r is invertible, since its other pushout leg is R(id).
-2. The tail inclusion is final, so hc gives the colimit of its restricted R diagram.
-   Under.pushout is left adjoint and preserves colimits. The forgetful functor from
-   rings under B creates these nonempty connected colimits. Thus colimit F is the
-   pushout of R(i) to B along c.ι(i). Spec identifies it with the limit pullback.
-   The colimit injections correspond to the prescribed arrows of pullbacks.
-3. Extend E₀ and K₀ along r and the subsequent structural maps. These remain
-   bounded projective, hence termwise flat. The upper support bound and
-   kFlat_of_isStrictlyLE_of_flat (Tag 064K) imply K-flatness.
-   Termwise tilde/base-change, followed by
-   the K-flat derived-pullback counit, supplies natural comparison isomorphisms.
-   Compose with the pushout/pullback isomorphisms, with the localization comparison
-   he for exact pushforward along t, and with the images of hPE and hQK and the
-   counit of e. The scheme isomorphisms induce exact derived equivalences d, dlim;
-   in their target categories this gives αE, αK at each stage and βE, βK at the colimit.
-4. Apply naturality of termwise tilde/base-change and of the derived-pullback
-   counit to f. Associativity of scalar extension identifies the resulting chain
-   map with scalarExtensionHom. The composition comparisons are characterized by
-   their counits; consequently their components agree with perfectHomComposition.
-   Cancel each comparison with its inverse. The resulting conjugated equalities
-   are exactly the two displayed equations. This uses no descent of morphisms.
-   Pushout universal properties, finality of the nonempty tail, and the K-flat
-   counit apply also to zero rings, zero complexes and empty spectra. -/
+and Tag 0D5S (composition of derived pullbacks). -/
 theorem exists_affineBaseChangeModelComparisonIsos
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

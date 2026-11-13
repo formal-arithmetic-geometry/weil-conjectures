@@ -9,7 +9,6 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 
 /-! Uniqueness for the normalized ordinary finite pullback comparison.
 Source: Stacks Project, Tags 06YY and 099L.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public noncomputable section
 universe u
@@ -59,7 +58,6 @@ private theorem finitePull_homEquiv {R : Sheaf J CommRingCat.{u}}
 include V adj hL in
 /-- Two isomorphisms satisfying the insertion normalization are equal.
 Source: Stacks Project, Tags 06YY and 099L.
-(auxiliary; not a blueprint node).
 The insertion maps generate the sheafified scalar extensions, so the displayed
 formula determines every component and hence the natural isomorphism. -/
 theorem ordinaryFinitePull_unique

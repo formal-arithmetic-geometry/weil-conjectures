@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTran
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

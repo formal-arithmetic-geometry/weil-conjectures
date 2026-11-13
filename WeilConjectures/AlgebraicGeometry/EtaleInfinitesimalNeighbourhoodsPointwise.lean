@@ -24,7 +24,7 @@ namespace AlgebraicGeometry
 
 The proof follows the pointwise part of Stacks Lemma 0A43: the Artinian lifting
 criterion gives smoothness, the zeroth neighbourhood gives fibre dimension zero,
-and shrinking yields an étale neighbourhood. (blueprint: lem-weil-pbc-etale-infinitesimal-pointwise)
+and shrinking yields an étale neighbourhood.
 -/
 private theorem fibre_dimension_zero_of_etale_closed_baseChange
     {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S) [IsClosedImmersion i]
@@ -64,8 +64,7 @@ private theorem fibre_dimension_zero_of_etale_closed_baseChange
 
 /-- Every point over the closed subscheme has an etale neighbourhood. The proof uses
 smoothness from the Artinian lifting criterion, zero fibre dimension from the etale
-zeroth neighbourhood, and the etale shrinking lemma.
-(blueprint: lem-weil-pbc-etale-infinitesimal-pointwise) -/
+zeroth neighbourhood, and the etale shrinking lemma. -/
 theorem etale_infinitesimal_pointwise
     {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S)
     [IsLocallyNoetherian S] [LocallyOfFiniteType g] [QuasiCompact g]

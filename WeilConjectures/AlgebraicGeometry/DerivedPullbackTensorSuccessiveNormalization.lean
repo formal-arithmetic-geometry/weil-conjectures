@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 /-! # Normalization of the successive tensor pullback route
 
 Source: Stacks Project, cohomology.tex, Tags 079U, 08HY and 0D5S.
-(blueprint: lem-sc-derived-pullback-tensor-successive-normalization).
 -/
 
 @[expose] public section
@@ -68,25 +67,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- Normalization of the successive tensor-pullback route on K-flat complexes.
-Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
-(blueprint: lem-sc-derived-pullback-tensor-successive-normalization).
-
-Proof: normalize the g tensorator and the f tensorator by their defining K-flat
-coordinate equations. Naturality of the f tensorator moves the g counits to
-its inputs. The factorization equation for the composition comparison at P and N
-turns the final composite-arrow counits into the successive counits followed by
-the ordinary pullback composition maps. Naturality of the localization tensor
-map moves these composition maps to the total complex. At each (p,q) summand,
-the ordinary tensor composition equation identifies the resulting map with the
-given phi: transpose under the pinned tensor-pullback adjunctions and test on
-pure tensor sections. Both transposes send s tensor t to the tensor of the same
-successive unit images. Tensor universality and the adjunction bijection prove
-the module equality; joint epimorphy of the total-complex summand inclusions
-proves the chain equality. Localize it. This proves only the successive route's
-normalization; comparison with the direct derived tensorator and cancellation
-are performed in the importing theorem. Zero complexes and identity morphisms
-satisfy the same calculation, as do the unique maps on empty schemes.
--/
+Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S. -/
 theorem derivedPullback_tensor_successive_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)

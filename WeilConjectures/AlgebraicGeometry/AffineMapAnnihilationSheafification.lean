@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 /-! # Affine formal gluing comparison
 
 Source: Stacks Project, Tags 087W, 0888 and 0889(1).
-(blueprint: lem-weil-pbc-affine-map-annihilation-sheafification).
 -/
 
 @[expose] public section
@@ -63,20 +62,7 @@ private theorem idealPower_zero_of_sections_iso {X : Scheme.{u}} [IsAffine X]
 set_option backward.isDefEq.respectTransparency false in
 /-- Sheafification transfers a fixed annihilating power for an algebraic map.
 
-Source: Stacks Project, Tags 01I7, 01IB and 0889(1).
-(blueprint: lem-weil-pbc-affine-map-annihilation-sheafification).
-
-Proof: exactness of tilde identifies its sheaf kernel and cokernel with tilde of
-the algebraic kernel and cokernel. The given ideal annihilator inclusions say that
-the product by I^t is zero in both modules. The affine ideal-product formula identifies
-the sheaf product with tilde of that module product; hence both are zero sheaves.
-Transport along the canonical affine scheme isomorphism and along ε. Pullback by
-an isomorphism is exact and identifies the ideal sheaf of I with J, so the same
-exponent t annihilates the kernel and cokernel of the displayed sheaf map. This
-holds for arbitrary T and P; neither coherence nor finite generation is used.
-For t=0 it says the kernel and cokernel themselves are zero, and the same argument
-applies. The empty scheme is covered by the same exact functors.
--/
+Source: Stacks Project, Tags 01I7, 01IB and 0889(1). -/
 theorem affine_map_annihilation_sheafification
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData) :
     let A := Γ(X, ⊤)

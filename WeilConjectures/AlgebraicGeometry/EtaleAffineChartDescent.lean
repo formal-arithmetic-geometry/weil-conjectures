@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineChartDirectedRingModel
 # Descent on one affine chart of an inverse system
 
 Source: Stacks Project, Limits, Tag 07RP, affine reduction, and Algebra, Tag 07RI.
-(blueprint: lem-weil-pbc-etale-affine-chart-descent).
 -/
 
 @[expose] public section
@@ -76,24 +75,7 @@ private theorem etale_on_open_pullback_comp
 /-- Étaleness on a fixed affine triple descends and persists at all later stages.
 No quasi-compactness or quasi-separatedness of the ambient schemes is required.
 
-Source: Stacks Project, Limits, Tag 07RP (the affine reduction), Algebra, Tag 07RI.
-(blueprint: lem-weil-pbc-etale-affine-chart-descent).
-
-Proof: Restrict the inverse system to the upper tail above i₀ and to the inverse
-images of W. These are affine, since every transition is affine, and the restricted
-limit is the inverse image of W in c.pt. Its coordinate ring is the directed colimit
-of the coordinate rings of those inverse images. Write A₀ = Γ(W), B₀ = Γ(V), and
-C₀ = Γ(U). The containment hypotheses give an A₀-algebra map φ₀ : B₀ → C₀,
-which is finitely presented by local finite presentation of f₀. At each stage,
-the inverse images of U and V identify with Spec(Aᵢ ⊗[A₀] C₀) and
-Spec(Aᵢ ⊗[A₀] B₀), respectively. The restricted map is Spec(id ⊗ φ₀):
-check this on the two pullback projections. The same identifications at the limit
-turn hf into étaleness of Spec(id ⊗ φ₀) over the colimit. Apply
-Etale.exists_stage_of_directedColimit to obtain an index i. For j ≥ i,
-pullback pasting identifies the chart morphism into Yⱼ with the base change of
-the chart morphism into Yᵢ. Restrict the resulting pullback square to the preimage
-of U; étaleness is preserved by base change.
-This argument concerns only U, not a covering or the whole of X₀. -/
+Source: Stacks Project, Limits, Tag 07RP (the affine reduction), Algebra, Tag 07RI. -/
 theorem Etale.exists_stage_on_affine_chart
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 # Derived pullback and derived tensor product
 
 Source: Stacks Project, Cohomology, Lemma 079U
-(cohomology-lemma-pullback-tensor-product), line 6411
-(blueprint: lem-pc-derived-pullback-tensor-product).
+(cohomology-lemma-pullback-tensor-product), line 6411.
 
 There is no derived tensor bifunctor on `D(𝒪_X)`; as in
 def-pc-derived-tensor-cohomology-vanishes and lem-pc-derived-pullback-tensor-qcoh,
@@ -45,7 +44,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option maxHeartbeats 800000 in
 -- Elaborating the transported tensor comparison and its totalization needs extra heartbeats.
 set_option synthInstance.maxSize 256 in
-/-- (blueprint: lem-pc-derived-pullback-tensor-product) For a morphism of schemes
+/-- For a morphism of schemes
 `g : T ⟶ S`, derived pullback commutes with derived tensor product:
 `Lg^*(K ⊗^L L) ≅ Lg^*K ⊗^L Lg^*L`, canonically and naturally in `K` and `L`.
 

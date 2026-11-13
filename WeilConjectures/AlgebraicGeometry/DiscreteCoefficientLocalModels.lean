@@ -15,7 +15,6 @@ import WeilConjectures.WeilObject.Sheaf.Stalk
 
 Source: Stacks, Tags 03CY, 00YV and 09AJ; the local finite-presentation step of
 `lem-sfb-discrete-coefficient-model`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -482,29 +481,7 @@ scheme restriction. This is only a local-model comparison: it asserts no stratif
 constructibility equivalence, coefficient-map existence, or tensor structure.
 
 Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV; Pro-etale, Tag 09AJ;
-the finite-matrix argument in step 3 of `lem-sfb-discrete-coefficient-model`.
-(auxiliary; not a blueprint node).
-
-Proof: a finitely presented internal module over the discrete condensed ring is the
-cokernel of a finite matrix of scalars in A. The constant-sheaf comparison identifies
-the pullback of this presentation to a scheme with its constant module presentation.
-Section reconstruction and the equivalent small site preserve that cokernel and all
-restrictions. Scalar restriction along c sends its finitely many matrix entries to
-sections of the constant ring sheaf k. Refine the pro-etale covering so that those
-entries are constant; this is possible simultaneously because the matrix is finite.
-On each member the result is the constant cokernel of a finite matrix over k, hence
-a finitely presented k-module. Conversely, present each finitely presented constant
-k-module by a finite matrix, apply c inverse, and refine until its finitely many entries
-are constant in A. The corresponding point presentation pulls back to the inverse
-local model. The section equivalence and inverse image commute with localization and
-with scheme pullback, so the same argument applies to f-restrictions. A scheme cover
-generates covering sieves over every object; conversely a covering sieve over the
-terminal object is refined by a pro-etale covering family. Over the Noetherian ring k,
-finite generation and finite presentation agree. This proves both implications. For
-empty schemes the empty covering works; the zero ring uses its zero presentations.
-No normalization of c is needed: only finitely many coefficients must be constant on
-each refinement, so even an automorphism of the constant ring sheaf is allowed.
--/
+the finite-matrix argument in step 3 of `lem-sfb-discrete-coefficient-model`. -/
 theorem discrete_coefficient_local_models
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k] [IsNoetherianRing k]

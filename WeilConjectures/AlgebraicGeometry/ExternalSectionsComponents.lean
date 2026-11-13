@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGlobalSectionsComparison
 /-! # Components of the external section morphism
 
 Source: Stacks Project, Tag 0BED, degree-zero cup product.
-(blueprint: lem-sc-external-sections-components).
 -/
 
 @[expose] public section
@@ -112,14 +111,7 @@ def externalSectionsComponent
     TensorProduct.lift (externalSectionsBilinear f g F G V))
 
 /-- External section components commute with restriction in the second factor.
-Source: Stacks Project, Tag 0BED, degree-zero cup product.
-(blueprint: lem-sc-external-sections-components).
-Proof: On a pure tensor the left factor is the restriction of one fixed pulled-back
-section, so functoriality of restriction gives its compatibility. The right factor
-is the pullback adjunction unit, whose naturality gives compatibility with restriction.
-The restriction formula for tensor sections then identifies the two products.
-Tensor induction extends this equality to all tensors.
--/
+Source: Stacks Project, Tag 0BED, degree-zero cup product. -/
 theorem externalSectionsComponent_naturality
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) {U V : Y.Opensᵒᵖ} (i : U ⟶ V) :

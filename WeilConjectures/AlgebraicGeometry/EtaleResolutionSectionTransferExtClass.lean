@@ -18,23 +18,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Transfer of a represented Ext class before applying the open-object map.
-Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality), and 0A50.
-(blueprint: lem-weil-pbc-etale-resolution-section-transfer-ext-class)
-
-Proof: Adjoint each component of α to a morphism β from g*I to J. Naturality of
-adjunction gives its chain-map equations; hα gives the augmentation equation.
-Exactness of g* preserves the quasi-isomorphism from G to I. In the derived
-category β therefore represents the identity of g*G under the augmentation
-identifications. Apply `InjectiveResolution.extMk_hom` and
-`Abelian.Ext.mapExactFunctor_hom` to compute the image of the class represented
-by fX as the cocycle g*fX followed by β. Precompose with
-etaleOpenFreeSheafPullback. Naturality of the adjunction unit with fX and the
-counit identity express the section of this composite as α applied to the
-section of fX, then restricted along openSectionPullback. This is precisely
-openResolutionSectionTransfer. By hsections and injectivity of sectionsEquiv
-this cocycle equals fY. Precomposition of Ext by a degree-zero morphism agrees
-with precomposition of its representing cocycle, giving the stated equality.
-No localization or open cohomology comparison is involved. -/
+Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality), and 0A50. -/
 theorem resolutionSection_transfer_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

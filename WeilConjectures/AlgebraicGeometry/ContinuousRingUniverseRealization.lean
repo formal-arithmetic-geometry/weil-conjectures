@@ -32,16 +32,14 @@ attribute [local instance] Profinite.continuousMapRingObjOfUniverseMonObj
 namespace AlgebraicGeometry.ProEtale.ContinuousRingUniverse
 
 /-- Naturality of the projection from a profinite test scheme.
-Source: HRS Example 3.1; the canonical test projection.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; the canonical test projection. -/
 theorem testProjection_natural (X : Scheme.{u}) {S T : Profinite.{u}} (f : S ⟶ T) :
     (profiniteTestProjection X T).comp ((profiniteToProEtOf X).map f).left.base.hom =
       f.hom.hom.comp (profiniteTestProjection X S) := by
   exact profiniteTestProjection_natural X f
 
 /-- The adjoint comparison given by precomposing a continuous function with the test projection.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; the point-Lan affine evaluation proof. -/
 noncomputable def comparisonAdjoint (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     Profinite.continuousMapRingObjOfUniverse E ⟶
@@ -65,8 +63,7 @@ noncomputable def comparisonAdjoint (X : Scheme.{u}) (E : Type u)
        erw [testProjection_natural] }⟩
 
 /-- The canonical continuous-ring realization, defined by the point inverse-image adjunction.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; the point-Lan affine evaluation proof. -/
 @[irreducible] noncomputable def comparison (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     condensedRingObj (Profinite.continuousMapRingObjOfUniverse E) X ⟶
@@ -129,8 +126,7 @@ private lemma comparisonAdjoint_isMonHom (X : Scheme.{u}) (E : Type u)
   exact Sheaf.isMonHom_sheafCompose_map J (comparisonAdjointRing X E)
 
 /-- The canonical realization preserves the internal ring operations.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; the point-Lan affine evaluation proof. -/
 instance comparison_isMonHom (X : Scheme.{u}) (E : Type u)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     IsMonHom (comparison X E) := by
@@ -297,8 +293,7 @@ private lemma comparison_basis_isIso (X : Scheme.{u}) (E : Type u)
   infer_instance
 
 /-- The canonical realization is an isomorphism for totally disconnected topological rings.
-Source: HRS Example 3.1; the point-Lan affine evaluation proof.
-(auxiliary; not a blueprint node) -/
+Source: HRS Example 3.1; the point-Lan affine evaluation proof. -/
 theorem comparison_isIso (X : Scheme.{u}) (T : Type u)
     [TopologicalSpace T] [Ring T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :
     IsIso (comparison X T) :=

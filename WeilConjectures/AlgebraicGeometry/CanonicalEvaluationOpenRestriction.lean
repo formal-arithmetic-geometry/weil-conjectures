@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionClosedMonoidal
 /-! # Open restriction of canonical derived evaluation
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-pc-canonical-evaluation-open-restriction).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The standard localization is available on the open scheme independently of the
 specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-canonical-evaluation-open-restriction). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance restrictionEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -129,29 +127,8 @@ set_option maxHeartbeats 500000 in
 /-- Restriction preserves the canonical derived evaluation arrow, including its
 source and target comparisons. This is independent of any ordinary complex model.
 
-Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom),
-Tag 08DL (lemma-restriction-RHom-to-U), and Tag 06YH (derived tensor construction).
-(blueprint: lem-pc-canonical-evaluation-open-restriction).
-
-Proof:
-1. Pass from the over-site to the open scheme by Modules.overEquiv. Its derived
-   functor is an equivalence, also between independently specified localization
-   universes. Compose it with exact open restriction to form R.
-2. Restrict K-flat tensor representatives. Restriction preserves K-flatness and
-   commutes with sheaf tensor and its direct-sum totalization. This gives the
-   natural strong tensor comparison and the comparison of the degree-zero units.
-3. Restrict the fixed K-injective Hom representatives. Open restriction preserves
-   K-injectivity and commutes with the product Hom complex. This gives the natural
-   Hom comparison. Its representative formula is restriction of each local map.
-4. On a total-tensor summand, the uncurrying formula for the canonical tensor-Hom
-   family evaluates the same local map before or after restriction. Thus its
-   evaluation counit commutes with the tensor and Hom comparisons. Naturality of
-   associators and right unitors, and the unit comparison, carry the adjunct
-   defining g to the corresponding adjunct on the open scheme. Composing the
-   tensor comparison with the dual Hom comparison gives a, and the Hom comparison
-   gives b. Faithfulness of the tensor-Hom equivalence gives the displayed square.
-No ordinary evaluation inverse or exactness assumption on a complex is used.
-The same constructions apply to the empty open and to zero objects. -/
+Source: Stacks Project, cohomology.tex, Tag 08DJ,
+Tag 08DL (lemma-restriction-RHom-to-U), and Tag 06YH (derived tensor construction). -/
 theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

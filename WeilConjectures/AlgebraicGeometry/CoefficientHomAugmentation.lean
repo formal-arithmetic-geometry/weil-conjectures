@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CoefficientHomUnit
 /-! # Augmentation evaluation in coefficient Hom complexes
 
 Source: Stacks Project, Algebraization, Tag 099I, final displayed composite.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -120,23 +119,7 @@ private theorem coefficientAugmentation
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Augmentation evaluation lifts to a natural B-linear map of coefficient Hom complexes.
-Source: Stacks Project, Algebraization, Tag 099I, final displayed composite.
-(auxiliary; not a blueprint node).
-
-Proof: construct the coefficient internal Hom H with its precomposition B-action and
-its explicit augmentation-evaluation maps. Apply the product Hom-complex construction
-to H, and normalize its restriction comparison by its product projections. For m in
-M^n, define the projection at source degree p to be zero if p is not zero. At p=0,
-use the B-linear evaluation map associated to delta^0, followed by eta^n. The product
-universal property supplies the degree-n map. The Hom differential on a projection is
-d_I h - (-1)^n h d_L. The p=0 equation is eta's chain-map equation; the p=-1 term
-vanishes by delta d_L=0; all other projections are zero. Thus these degree maps form
-a chain map. Eta's naturality gives naturality in M. Restrict and precompose with u.
-The augmentation equation identifies the resulting cochain with
-x -> epsilon(x) eta(m), which is evaluation-at-one inverse followed by precomposition
-with epsilon. Equality of all product projections proves the stated chain identity.
-No quasi-isomorphism or K-injectivity hypothesis is needed.
--/
+Source: Stacks Project, Algebraization, Tag 099I, final displayed composite. -/
 theorem exists_coefficientHom_augmentation
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)

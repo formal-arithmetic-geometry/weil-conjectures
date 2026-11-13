@@ -21,17 +21,7 @@ namespace AlgebraicGeometry
 
 /-- The kernels of the descended inclusion vanish after the defining shift.
 
-Source: Stacks Project, Lemma 087X, uniqueness in claim (d).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-inclusion-bound).
-
-Proof: Since j is monic and S_(n+d) embeds in the annihilated F_(n+d), the
-transition S_(n+2d) to S_(n+d) kills I^(n+d+1). Descend it to a map k from the
-shifted quotient at n+d to S_(n+d). Cokernel uniqueness identifies the inclusion
-at n+d with k followed by j_(n+d), and the quotient transition to level n with
-k followed by the quotient projection of S_(n+d). The kernel of the inclusion
-kills k, since j_(n+d) is monic, and hence kills that quotient transition.
-No Artin--Rees assumption or coherence of the quotient system is needed here.
--/
+Source: Stacks Project, Lemma 087X, uniqueness in claim (d). -/
 theorem coherentFormalModule_kernel_quotient_inclusion_bound
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)

@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStruct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-! # The transported abelian unit lifts to a module map
 
-Source: Stacks Project, Tag 03D3
-(blueprint: lem-weil-pbc-inverse-image-module-unit-linear-lift). -/
+Source: Stacks Project, Tag 03D3. -/
 
 @[expose] public section
 
@@ -65,26 +64,7 @@ private theorem adjunct_pair_snd
   exact a.homEquiv_naturality_left _ _
 
 /-- The transported abelian unit admits a module lift.
-Source: Stacks Project, Tag 03D3 (lemma-adjoint-push-pull-modules).
-(blueprint: lem-weil-pbc-inverse-image-module-unit-linear-lift).
-
-Proof:
-1. Write t for the set adjunct of i_G.inv, where i_G is the displayed composite
-comparison. The abelian hom-equivalence compatibility identifies the underlying
-map of a(e_G.inv) with t. The ring compatibility at the identity identifies
-ar.unit at O with the set unit at O followed by R(er_O.inv).
-2. Naturality of the set unit at mu_G gives eta_G composed with R(L(mu_G))
-equal to mu_G composed with eta_(O times G). Substitute the transported-action
-equation. The product-comparison equation
-eta_(O times G) followed by R(lambda) = eta_O times eta_G follows by
-composing with each projection and applying unit naturality. Cancel i_G
-against its inverse. The resulting equality says exactly that t sends r times x
-to the action of ar.unit_O(r) on t(x).
-3. The abelian adjunct is already additive and natural in the site object.
-The scalar equality in step 2 makes each component linear for the restricted
-scalar action on RM(LM(G)). Apply PresheafOfModules.homMk to its underlying
-abelian presheaf map and wrap it in SheafOfModules.Hom. Its underlying abelian
-map is unchanged, giving the stated equation. -/
+Source: Stacks Project, Tag 03D3. -/
 theorem etaleInverseImageModuleUnitLinearLift (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

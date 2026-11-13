@@ -27,13 +27,7 @@ namespace AlgebraicGeometry.Scheme
 for module sheaves over a finite commutative ring.
 
 Source: Stacks Project, Tags 095E (3), 03RU and 09XZ, and the global stratification
-convention of `IsConstructibleEtaleModuleSheaf` and `IsConstructibleSheaf`.
-(blueprint: lem-weil-pbc-constructible-etale-module-sheaf-comparison).
-
-Proof: use the same stratification in both directions. On each stratum apply the first
-equivalence of `finite_locally_constant_module_values_iff` (blueprint dependency
-`lem-weil-pbc-finite-locally-constant-module-values`), which identifies the existence
-of finite constant-value trivializations with `IsFiniteLocallyConstantSheaf`. -/
+convention of `IsConstructibleEtaleModuleSheaf` and `IsConstructibleSheaf`. -/
 theorem isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

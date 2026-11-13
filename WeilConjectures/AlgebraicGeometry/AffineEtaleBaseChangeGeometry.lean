@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # AffineEtaleBaseChangeGeometry
 
 Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
-(blueprint: lem-weil-pbc-affine-etale-base-change-system).
 -/
 
 @[expose] public section
@@ -213,24 +212,7 @@ private theorem cartesian_site_geometry
     (hc A R (hJ ▸ hR))
 
 /-- Source: Stacks Project 0EYL, the base-change system used in its qcqs proof,
-and Sites 00X1 for continuity.
-
-Proof: the limit projections are affine by `AlgebraicGeometry.isAffineHom_π_app`.
-Pullback along an affine morphism preserves affine domains and étale structure maps.
-Choose restricted pullback for transitions, except that on equal indices choose the
-identity, with identity first projection; choose restricted pullback along each cone
-projection for `v`. The functor laws follow from the two pullback projections.
-Pullback pasting identifies iterated transition pullbacks and transition-cone pullbacks
-with the single pullback. Its unique comparison isomorphisms define `gamma` and `delta`;
-on diagonal indices choose identity comparisons. Their projection equations follow from
-this definition. In each associativity or cone cocycle both composites have the same
-first and structure projections, so pullback uniqueness gives equality. Base change
-preserves finite jointly surjective étale families, including the empty family, and
-pasting preserves every cospan pullback. These facts pass to the full affine subcategories.
-Cover preservation and preservation of their pairwise pullbacks imply continuity for
-the generated topologies. This proves precisely the geometric clauses, with no sheaf
-adjunction assertion.
-(blueprint: lem-weil-pbc-affine-etale-base-change-geometry). -/
+and Sites 00X1 for continuity. -/
 theorem exists_affineEtale_baseChange_geometry
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

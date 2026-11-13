@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 /-! # Derived sheafification on the localized affine site
 
 Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-pc-affine-localized-derived-sheafification).
 -/
 
 @[expose] public section
@@ -23,20 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Affine sheafification factors through a full functor from the module derived category.
-Source: Stacks Project, Tag 06Z0, Lemma perfect-lemma-affine-compare.
-(blueprint: lem-pc-affine-localized-derived-sheafification).
-
-Proof: Apply the affine quasi-coherent derived equivalence to the spectrum of Gamma(X,U).
-Compose its functor with the fully faithful inclusion of the quasi-coherent derived
-subcategory. Restriction along the affine spectrum isomorphism and the equivalence of
-sheaves on U with sheaves on the localized site are exact equivalences of abelian
-categories. They induce equivalences of derived categories. Compose these with the
-preceding functor to obtain G, which is fully faithful and in particular full. Whisker
-the tilde factorization isomorphism with these transport equivalences, and compose with
-their localization factorization isomorphisms. This gives the stated natural isomorphism
-between Q followed by G and the explicitly constructed termwise affine sheafification
-followed by Q. No choice of a complex representative is involved. The same construction
-works on the empty affine spectrum; all its module and sheaf categories are zero. -/
+Source: Stacks Project, Tag 06Z0, Lemma perfect-lemma-affine-compare. -/
 theorem affine_localized_derived_sheafification (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     [HasDerivedCategory.{wR} (ModuleCat.{u} (X.presheaf.obj (.op U)))]

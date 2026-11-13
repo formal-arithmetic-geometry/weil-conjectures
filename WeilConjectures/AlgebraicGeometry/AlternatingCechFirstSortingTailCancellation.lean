@@ -14,7 +14,6 @@ import WeilConjectures.Combinatorics.SignedFacePermutation
 # Tail deletions in the first sorting homotopy
 
 Source: Stacks Project, Tag 01FM, equation 20.23.6.1, omitted verification.
-(blueprint: lem-pc-alternating-cech-first-sorting-tail-cancellation)
 -/
 
 @[expose] public section
@@ -36,28 +35,7 @@ open Classical in
 label does not precede the junction in stable order.
 
 Source: Stacks 01FM, verification of equation 20.23.6.1, tail-deletion part
-of the labelled-deletion argument (details omitted in the source).
-
-Proof: Order labels j by (t j, j); the sorting filters then pick unique
-permutations. In a filtered outgoing nonjunction term with a ≤ r, equality
-r = a is impossible because the junction map takes a to σ a. Hence r > a.
-Remove j = τ (r - 1), restrict the two permutations, and renumber remaining
-labels increasingly. The prefix length stays b = a. The removed label is
-outside the sorted prefix and differs from the junction, so it follows the
-junction in the pair order. The restricted junction is exactly the outgoing
-junction with entry r deleted, as a map to original labels. Conversely, for
-an incoming label j following the junction, insert it in the stable sort at
-its stable rank and in the partial sort's increasing tail at its original-label
-rank. The induced outgoing deletion has r > a and removes a nonjunction
-label. These constructions are inverse. The restricted permutation τ' has
-sign τ' = (-1)^(r-1+j) sign τ, by moving the removed position r-1 and its
-label j to the end before restricting. The incoming coefficient is therefore
-(-1)^(j+a+r-1+j) sign τ, the negative of (-1)^(a+r) sign τ.
-Sum along the bijection: each pair has the same f argument and opposite
-integer coefficients. Distinct original labels make the pair order strict,
-including when all values of t agree. The last prefix has no tail deletions
-except the excluded junction occurrence; empty I has no input tuple.
-(blueprint: lem-pc-alternating-cech-first-sorting-tail-cancellation) -/
+of the labelled-deletion argument (details omitted in the source). -/
 theorem cechFirstSortingTailCancellation {I : Type v} [LinearOrder I] {B : Type w} [AddCommGroup B]
     (p : ℕ) (t : Fin (p + 2) → I) (f : (Fin (p + 2) → Fin (p + 2)) → B) :
     let before := fun (j : Fin (p + 2)) (σ : Equiv.Perm (Fin (p + 1)))

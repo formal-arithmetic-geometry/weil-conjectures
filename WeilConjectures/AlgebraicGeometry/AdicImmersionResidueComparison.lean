@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Pure inverse image of a fixed-scalar residue, followed by the actual small-site
 and constant-ring equivalences: the public name of
 `SfbResidueComparisonCore.sfbFixedResiduePull`, whose exactness instances it inherits.
-Source: Stacks Tags 03A0 and 03CY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03A0 and 03CY. -/
 abbrev sfbFixedResiduePull {X S : Scheme.{u}} (i : S ⟶ X)
     (k : Type (u + 1)) [CommRing k] :
     Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ⥤
@@ -80,24 +79,7 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
 These are assertions about the functors themselves: they require neither completeness
 nor a chosen residue isomorphism.
 
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8
-(auxiliary; not a blueprint node).
-Proof: first apply finiteComparison for the transported inverse image, at exponent one.
-Its source is the actual projection of the completed coefficient ring. The finite-tower
-isomorphism defining SfbCompletionNormalization.coefficients carries the original projection to that
-projection. Scalar restriction along its inverse, exact AsSmall precomposition, and
-fixed-scalar restriction commute with finite scalar extension. On a flat-term K-flat
-resolution each comparison sends the same tensor 1 tensor x to 1 tensor x, so these
-comparisons descend through localization and give the first displayed isomorphism.
-For the second square, the canonical comparison pullback isomorphism identifies
-pro-etale inverse image after etale comparison with etale inverse image before comparison.
-Conjugate by the AsSmall equivalences and the constant-ring scalar equivalences.
-The algebraic inverse-image and fixed-scalar functors have the same generalized-section
-scalar actions, so their comparison is linear. Apply the natural comparison termwise
-to C and then localize. The comparison with the K-flat-derived adicResidueComparison
-is invertible because geometric inverse image for these coefficients is exact.
-No boundedness, finite field, or perfectness assumption is used. Empty schemes and
-zero coefficient rings are covered by the same functor and localization comparisons. -/
+Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
 theorem sfbImmersion_residueComparisons
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

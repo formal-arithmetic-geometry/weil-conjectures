@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetEventualLocalStageMatching
 /-! # Local surjective comparison with the stage presheaf colimit
 
 Source: Stacks Project, Sites Tag 0A35 and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-stage-presheaf-locally-surjective).
 -/
 
 @[expose] public section
@@ -123,34 +122,7 @@ private theorem stage_global_representative
 is locally surjective.
 
 Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-and Étale Cohomology Tag 09YQ, via the affine-site colimit presentation.
-(blueprint: lem-weil-pbc-sets-stage-presheaf-locally-surjective).
-
-Proof: 1. Restrict the system to the cofinal upper tail of i₀. Apply the affine
-   étale site colimit presentation to this tail. The base change of an affine
-   test object W is affine, because the cone projection is affine. Transport
-   the stage and limit inverse images through the full-affine restriction
-   equivalences using the unit-compatible inverse-image comparison.
-2. The construction in Sites 0A35, equation-compute-pullback-to-limit,
-   represents a limit inverse-image section by stage inverse-image sections.
-   Indeed inverse-image sections are locally represented by an original
-   section of G and a map into its base change. The finite-presentation object
-   and arrow descent clauses place these maps at stages. A covering that
-   supplies these representatives has a finite affine refinement; descend
-   that finite cover to a common stage using covering descent.
-3. Overlaps of the local representatives agree at the limit. Descend the
-   finite equations witnessing agreement to a later common stage, using the
-   eventual-equality clause of the site presentation. The sheaf axiom at
-   that stage glues the representatives. This is the existence part of
-   0A35's section formula. The adjunction-unit and composition equations
-   identify its map with etaleSetSectionComparison and hence, by the supplied
-   component equations, with the leg of K.
-4. Insert the resulting stage representative into the presheaf colimit
-   using its coprojection. The presheaf colimit universal property says that
-   its comparison image is the given limit section. Thus the image sieve is
-   covering (indeed the argument gives a representative on W itself).
-   Empty covers are allowed throughout; on an empty object the sheaf axiom
-   gives the unique section, with no nonemptiness assumption on G. -/
+and Étale Cohomology Tag 09YQ, via the affine-site colimit presentation. -/
 theorem etaleSetStagePresheaf_locallySurjective
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

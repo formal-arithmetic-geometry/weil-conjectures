@@ -188,25 +188,7 @@ comparison inverse image on Y. All sites and functors are the recorded coefficie
 locally-constructible-proetale-modules]. No constructibility or Noetherianity hypothesis is
 used.
 
-Source: Stacks Project, Tags 099R, 00VC and 03CY
-(auxiliary; not a blueprint node).
-
-Proof: The constant-ring unit is locally bijective. Scalar restriction is fully faithful by
-the Mathlib locally-surjective scalar-restriction Hom equivalence. To construct an antecedent
-of a fixed-
-scalar sheaf, apply module sheafification to the identity of its underlying abelian sheaf. The
-sheafification unit extends the scalar action; identity maps give its inverse isomorphism. Thus
-the literal coefficientModelFixedScalars functor is an equivalence.
-The ring-map adjunction equation states that constructibleComparisonRingMap sends each constant
-scalar to the same constant scalar. This identifies module direct image followed by scalar
-restriction with scalar restriction followed by fixed-scalar comparison direct image, by
-identity linear maps on sections. Conjugate through the two scalar equivalences and use
-uniqueness of left adjoints to identify the two comparison inverse images.
-On site objects comparison and scheme base change commute: both are the same fibre product.
-Whisker the original site natural isomorphism by AsSmall.down and AsSmall.up. Its isomorphism on
-continuous direct images identifies the right adjoints of the two inverse-image composites.
-Uniqueness of left adjoints gives their inverse-image isomorphism. Whisker and compose it with
-the scalar comparison of the preceding step. -/
+Source: Stacks Project, Tags 099R, 00VC and 03CY. -/
 theorem coefficientComparison_fixedPullback {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :
     Nonempty

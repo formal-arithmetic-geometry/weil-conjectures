@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapDataLinearity
 /-! # Linearity property of module cohomology maps
 
 Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-linearity).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Linearity property of the cohomology map induced by an h-map.
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
 Derived Categories, Tags 013P, 013S, 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-linearity).
 
 Proof (argument specialized from the parent node):
 1. Choose the resolutions I, J, the auxiliary injective complex K, and the maps

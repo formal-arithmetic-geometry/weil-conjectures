@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Affine perfect support extension
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EK (Lemma 36.13.10)
-(blueprint: lem-sc-affine-perfect-support-extension).
+Source: Stacks Project, Derived Categories of Schemes, Tag 08EK (Lemma 36.13.10).
 -/
 
 @[expose] public section
@@ -70,16 +69,7 @@ intersection with a closed set with quasi-compact complement, extends after adjo
 its shift to a perfect complex supported on that closed set.
 Support is expressed by vanishing of every cohomology stalk off the closed subset.
 Restriction uses the canonical equivalence from the localized site to the open subscheme.
-Source: Stacks Project, Tag 08EK (blueprint: lem-sc-affine-perfect-support-extension).
-Proof: write T as the vanishing set of finitely many functions. By
-lem-sc-affine-perfect-plus-shift extend F plus F[1] to X; by
-lem-sc-perfect-into-support-on-T replace the functions by powers annihilating F.
-Take successive multiplication cones. By lem-sc-affine-support-iterated-cones the
-result is perfect, supported on T, and restricts to a sum of shifts of F.
-Apply lem-sc-affine-perfect-map-lift to the endomorphism that is zero on the unshifted
-F summand and identity on the others. Its lifted source remains supported on T.
-The cone of the lifted map is perfect and supported on T by two-of-three, and its
-restriction cancels all the unwanted summands, leaving F plus F[1]. -/
+Source: Stacks Project, Tag 08EK. -/
 theorem exists_perfect_supported_extension (X : Scheme.{u}) [IsAffine X]
     (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)
     (U : X.Opens) (hU : IsCompact (U : Set X))

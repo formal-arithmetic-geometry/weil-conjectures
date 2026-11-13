@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-! # Derived open restriction is a localization
 Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: lem-pc-derived-open-restriction-is-localization).
 -/
 
 @[expose] public section
@@ -31,19 +30,7 @@ namespace AlgebraicGeometry
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Exact derived restriction localizes at the morphisms it turns into isomorphisms.
-Source: Stacks Project, Tags 08BT and 08BS, using extension by zero from Tag 00A7.
-Proof: exact extension by zero is left adjoint to restriction. Compose this adjunction
-with the module equivalence from the localized site to the open subscheme. Restricting
-extension by zero is naturally the identity, so this new adjunction also has its
-left-then-right composite isomorphic to the identity. Derive the termwise adjunction
-by Mathlib's localization construction; both functors are exact, and the factorization
-isomorphisms identify the derived functors. Exact-functor composition, natural-isomorphism
-and identity comparisons give the same composite isomorphism after derivation, for
-independent localization universes. Adjunction.fullyFaithfulLOfCompIsoId makes the
-derived left adjoint fully faithful, and Adjunction.isLocalization' proves that its
-right adjoint, the displayed derived restriction, is a localization. Empty opens use
-the same adjunction and comparison.
-(blueprint: lem-pc-derived-open-restriction-is-localization). -/
+Source: Stacks Project, Tags 08BT and 08BS, using extension by zero from Tag 00A7. -/
 theorem schemeDerivedOpenRestriction_isLocalization (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :

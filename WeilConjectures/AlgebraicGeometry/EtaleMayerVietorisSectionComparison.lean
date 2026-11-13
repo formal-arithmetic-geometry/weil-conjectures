@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 # Resolution comparison for the étale section complexes
 
 Source: Stacks Project, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-section-comparison).
 -/
 
 @[expose] public section
@@ -119,38 +118,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A comparison of the prescribed resolution section complexes, with homology
 identifications respecting the prescribed restriction and pullback maps.
 Source: Stacks Project, Tag 0A50, proof, and the explicit resolution comparison
-of the parent node, steps 1, 2 and 4.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-section-comparison)
-
-Proof: Use the given nonnegative injective resolutions I of G and J of g⁻¹G. Exact inverse
-image preserves the quasi-isomorphism from G to I. The bounded below injective
-resolution J is K-injective, so a comparison beta from g⁻¹I to J exists over the
-augmentations. The possible homotopy of augmentations has values in degree -1 of J,
-which is zero, so it is an equality. On X take the complexes of sections of I on
-X, the product of its sections on U and V, and its sections on U ∩ V, with the
-restriction pair and difference of restrictions. On Y do the same with J and the
-inverse-image opens. The unit on sections followed by beta commutes with restriction
-by naturality, and
-with its difference by additivity, and gives the morphism phi of short
-complexes. No cover or short exactness
-is needed for this step.
-
-Identify homology of these complexes with the displayed Ext cohomology groups using
-Hom from the constant integer sheaf, evaluated at 1. For opens, restriction preserves
-injectives by its exact extension-by-zero left adjoint, so the same resolutions compute
-the restricted cohomology. The identification for the middle complex uses homology's
-preservation of the finite product. The coefficient composition comparison gives the
-four asserted horizontal identities. To check the two vertical identities, represent
-an Ext class by a cocycle in Hom from the constant integer sheaf to I. Exact inverse
-image applies to that cocycle, and precomposition with the constant-sheaf comparison
-is the adjunction unit on its section. Composing with beta therefore gives precisely
-cohomologyMap g. On U ∩ V the restricted resolution and the pullback-unit identity
-identify this with openCohomologyPullback, including its coefficient comparisons.
-Thus the same identifications satisfy all six identities simultaneously; mere abstract
-existence of unrelated isomorphisms is not being used. Empty opens give zero section
-complexes. For identity pullback, compare the given resolutions by a homotopy
-equivalence; if they agree, choose the identity comparison. No
-connecting maps or long-exact-sequence assertions are part of this statement. -/
+of the parent node, steps 1, 2 and 4. -/
 theorem etaleSectionShortComplex_pullback_comparison
     {X Y : Scheme.{u}} (g : Y ⟶ X) (U V : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

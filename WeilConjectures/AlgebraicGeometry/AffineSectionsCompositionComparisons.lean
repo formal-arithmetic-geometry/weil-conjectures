@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.AffineSectionsPushforwardNormalizat
 /-! # Normalized affine sections composition comparisons
 
 Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7. (blueprint: lem-pc-affine-sections-composition-comparisons).
+perfect.tex, Tag 0AA7.
 -/
 
 @[expose] public section
@@ -111,23 +111,8 @@ private theorem affineSectionsAcyclic
 /-- Normalized sections comparisons for f, its base change, and g itself.
 This statement concerns only right-derived composition; it has no input E,
 quasi-coherence hypothesis, extension functor, or base-change map.
-Source: Stacks, cohomology.tex, Tag 0D5T (lemma-derived-pushforward-composition), and
-perfect.tex, Tag 0AA7, restriction of the canonical comparison to the base.
-(blueprint: lem-pc-affine-sections-composition-comparisons).
-Proof:
-1. For f and f', evaluate direct image at the whole open. The inverse image
-of that open is the whole open. Sections are unchanged. Compose the scalar
-restriction maps and cancel GammaSpecIso to obtain the identity t and z.
-For g the same calculation gives v: the B-action restricted along the
-canonical R-to-B map is precisely the action on sections of g_*.
-2. A direct image of a K-injective complex is acyclic for global sections.
-Exact scalar restriction preserves the invertibility of that derived unit.
-Consequently the composite right-derived unit computes the right-derived
-functor of each underived composite, even for unbounded complexes.
-3. Right-derived uniqueness, followed by deriving t, z, and v and the exact
-restriction comparisons, gives b, d, and r. The factorization equations for
-these comparisons are exactly the three displayed derived-unit equations.
-These constructions are simultaneous and require no Tor independence. -/
+Source: Stacks, cohomology.tex, Tag 0D5T, and
+perfect.tex, Tag 0AA7, restriction of the canonical comparison to the base. -/
 theorem exists_affineSectionsCompositionComparisons
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

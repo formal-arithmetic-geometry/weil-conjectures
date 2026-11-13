@@ -20,23 +20,7 @@ namespace AlgebraicGeometry
 
 /-- The ordinary exchange is invertible for the Cech resolution data.
 Source: Stacks Project, Tags 02KG and 02KH; the affine intersection exchange
-paragraph of `lem-pc-affine-alternating-cech-pinned-mate`.
-(blueprint: lem-pc-s3-affine-alternating-cech-resolution-exchange).
-Proof: Choose the representative C and its degreewise finite-product
-identifications from hterms. For each affine W, separatedness makes W.ι affine,
-and W.ι ≫ f is affine because its source and target are affine. The restriction
-G|W is quasi-coherent. Apply affinePushforward_baseChange to the cartesian
-squares for W.ι and for W.ι ≫ f. The vertical pasting identity for moduleBaseChangeMap,
-obtained by transposing under the pullback adjunctions,
-with the invertible exchange for W.ι, shows that ordinary exchange for f on
-W.ι_*(G|W) is invertible. Both functors in the exchange are additive, so they
-preserve finite biproducts, which are the finite products of these module
-categories. Naturality transports the factor isomorphisms across each specified
-product isomorphism for C.X k. Hence termwise exchange on C is an isomorphism
-of complexes; its homotopy image and localization are isomorphisms. Finally
-naturality across D ≅ quotient C transports the localized conclusion to D.
-The empty finite product is a zero object and gives the same conclusion.
-This makes no assertion for arbitrary complexes without hterms. -/
+paragraph of `lem-pc-affine-alternating-cech-pinned-mate`. -/
 theorem affineAlternatingCech_resolution_exchange
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

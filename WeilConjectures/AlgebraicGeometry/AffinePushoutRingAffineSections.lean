@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePushoutRingSectionMapTmul
 # Affine sections of the ring-sheaf pushout
 
 Source: Stacks Project, Morphisms, Tag 01SB, affine reduction in the proof.
-(blueprint: stage3-affine-pushout-ring-affine-sections).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 /-- The ring-sheaf pushout becomes a pushout of section rings on affine inverse images.
 Source: Stacks Project, Morphisms, Tag 01SB.
-(blueprint: stage3-affine-pushout-ring-affine-sections).
 The affine inverse image W is affine since f is affine. Write D = Γ(X,V) and
 C = Γ(U,W). The ring map D → C is f.app V.
 Restrict f and the pushout diagram to this inverse image. The sheaf pushout is

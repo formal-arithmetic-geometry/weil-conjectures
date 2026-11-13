@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 /-! # Universal property of the change-of-rings balancing map
 
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-balancing-universal).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 
 /-- Uniqueness clause for the balancing factorization.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB.
-(blueprint: aux-lem-weil-pbc-change-of-rings-tensor-balancing-universal-unique)
 Two factorizations agree on pure tensors, which generate sectionwise, and hence agree
 after sheafification. -/
 theorem changeOfRings_tensor_balancing_universal_unique (Y : Scheme.{u})

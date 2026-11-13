@@ -21,8 +21,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Object comparison in one affine square
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-affine-square-kflat-model-iso). -/
+Source: Stacks Project, Tags 08DW and 0D5S. -/
 
 @[expose] public section
 universe u w
@@ -113,21 +112,7 @@ private theorem inverse_iso_pullback {X Y : Scheme.{u}} (s : X ≅ Y)
     G.mapDerivedCategory γ.hom ε (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
 /-- A single K-flat model comparison across a commuting square of affine coordinates.
-Source: Stacks Project, Tag 08DW(2), and Tag 0D5S.
-(blueprint: lem-pc-affine-square-kflat-model-iso).
-
-Proof: the affine K-flat comparison identifies pullback of Q(tilde M) along
-Spec φ with Q(tilde (φ* M)). Pushforward along a scheme isomorphism is an
-exact equivalence whose inverse is its pullback. Localize this assertion and
-use he and hd to identify the specified derived equivalences with these
-pushforwards. Apply the composition comparison to the square equation,
-cancel pullback and pushforward along t and σ, and evaluate at Q(tilde M).
-Compose Lt*(P) ≅ e.inverse(P) with hP and pull the result back along Spec φ.
-The resulting isomorphism d.inverse(Lp*(P)) ≅ Q(tilde(φ* M)) is inverted,
-then mapped by d.functor and followed by the counit of d.
-This is an object comparison only: it asserts no compatibility between choices
-for different ring maps. There is no flatness assumption on φ; M is K-flat.
-The argument also applies to zero rings, zero complexes and identity squares. -/
+Source: Stacks Project, Tag 08DW(2), and Tag 0D5S. -/
 theorem nonempty_affineSquareKFlatModelIso
     (A B : CommRingCat.{u}) (Y Z : Scheme.{u})
     [∀ X : Scheme.{u},

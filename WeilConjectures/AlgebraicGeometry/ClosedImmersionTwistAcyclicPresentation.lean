@@ -25,20 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent closed-immersion pushforward has a presentation whose middle term
 has zero positive cohomology after sufficiently large twists.
-Source: Stacks Project, Tag 01YS (4), finite-twist presentation in the descending proof.
-(blueprint: lem-pc-d2-closed-immersion-twist-acyclic-presentation)
-
-Proof: Projective space over A is locally Noetherian. A closed immersion sends the
-quasi-coherent finitely presented F to a coherent module G. Choose a surjection B → G
-from a finite sum of negative twists O(-m_j), with m_j natural numbers, and let K be
-its kernel. Kernels of maps of coherent modules on a locally Noetherian scheme are
-coherent. The kernel sequence gives S and its third term is G. Take b to be the maximum
-of the finitely many m_j (zero for the empty family). For t ≥ b, tensoring each summand
-by O(t) gives O(t-m_j), whose positive cohomology is zero by the monomial Cech
-calculation over A. Tensoring preserves finite sums, and cohomology is additive, so
-B tensor O(t) also has zero degree-q cohomology. The comparison of ordinary sheaf
-cohomology with module right-derived sections gives the stated IsZero. This argument
-also covers N=0 and the zero module; it uses no next-degree vanishing hypothesis. -/
+Source: Stacks Project, Tag 01YS (4), finite-twist presentation in the descending proof. -/
 theorem exists_closedImmersion_twist_acyclic_presentation
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

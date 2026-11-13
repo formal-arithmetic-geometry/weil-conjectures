@@ -90,14 +90,7 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- The fixed completed-model residue comparison, isolated from the etale comparison clause.
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8
-(auxiliary; not a blueprint node).
-Proof: apply the normalized finite derived comparison at exponent one to the
-transported inverse image.  The finite comparison is then conjugated by the
-AsSmall and fixed-scalar equivalences, yielding the displayed isomorphism for
-every completed complex.  This is the first clause of the parent comparison
-statement and is strictly smaller because it contains no etale-origin clause.
--/
+Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
 theorem sfbImmersion_residueComparison_fixed
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

@@ -16,7 +16,6 @@ import Mathlib.RingTheory.TensorProduct.Basic
 /-! # Epimorphism of the closed immersion pullback unit
 
 Source: Stacks Project, Modules, Lemma 08KS.
-(blueprint: lem-weil-pbc-closed-immersion-unit-epi).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 /-- The unit of tensor pullback along a closed immersion is epi, by the stalkwise
 quotient computation of Stacks Project, Modules, Lemma 08KS.
-(blueprint: lem-weil-pbc-closed-immersion-unit-epi)
 -/
 theorem closedImmersion_unit_epi {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (F : Y.Modules) :

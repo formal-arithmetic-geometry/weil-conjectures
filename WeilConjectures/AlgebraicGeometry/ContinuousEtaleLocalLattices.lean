@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousLatticeFiniteCoproduct
 /-! # Etale local integral lattices
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6) and Lemma 6.8.13.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -97,7 +96,6 @@ private theorem exists_finite_affine_etale_cover_with_property
 
 /-- Integral lattices exist on a quasi-compact quasi-separated etale cover.
 Source: Bhatt--Scholze, Proposition 6.8.4(6), and the first paragraph of Lemma 6.8.13.
-(auxiliary; not a blueprint node)
 
 Proof in words. Apply continuousLisse_affine_etale_lattice at every point x of X.
 It encodes the rational module explicitly, applies the existing sectionwise

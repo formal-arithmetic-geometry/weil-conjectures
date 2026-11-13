@@ -37,8 +37,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The canonical additive pullback-stalk comparison on ordinary complexes.
-Source: Stacks Project, Tag 0098, stalk pullback formula.
-(blueprint: lem-pc-affine-spectrum-tensor-coherent-coordinate-data). -/
+Source: Stacks Project, Tag 0098, stalk pullback formula. -/
 def ordinaryIsoPullbackStalkComplexIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :=
@@ -61,18 +60,7 @@ def ordinaryIsoPullbackStalkComplexIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j
 -- The stalk comparison has several nested complex functor compositions.
 /-- Canonical affine coordinates with chain-level pullback-stalk coherence.
 Source: Stacks Project, Tag 0098 (stalk pullback formula), Tag 0096 (adjunction),
-and Tag 0DJ8 (affine reduction).
-(blueprint: lem-pc-affine-spectrum-tensor-coherent-coordinate-data).
-Proof: obtain the four stalk ring coordinates and q, with the pure-tensor formula
-for the fixed additive comparison H, from the generator-coordinate lemma. In each
-degree tensor induction proves H(r v) = eD(r) H(v): zero and sums use additivity,
-and a pure tensor uses the generator formula and multiplicativity of eD.
-ModuleCat.isoMk lifts each additive component to a linear isomorphism into
-restriction of scalars. The differential equation is inherited from H, and
-HomologicalComplex.Hom.isoOfComponents assembles t. Its tensor formula is the
-same generator formula. After forgetting scalars, t is H by extensionality.
-Postcompose with the spectrum tensorStalkIso: its inverse in H cancels, giving
-exactly the requested chain coherence. No flatness or boundedness is needed. -/
+and Tag 0DJ8 (affine reduction). -/
 theorem exists_affineSpectrum_tensor_coherent_coordinate_data
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

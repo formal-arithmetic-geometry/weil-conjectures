@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientHomRepresentativeEval
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 /-! # Canonical closed tensor-Hom models on a ringed site
 
-Source: Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 06YN, 07A4, 08J9 and 0A98.
 
 ## Main definitions
 
@@ -33,7 +32,7 @@ namespace WeilConjectures
 The tensor objects are determined by this universal property, up to the compatible
 unique isomorphism. Evaluation and transposition are the counit and Hom equivalence;
 they are not extra maps supplied after taking components.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J9. -/
 structure CoefficientClosedStructure {D : Type a} [Category.{b} D]
     (H : Dᵒᵖ × D ⥤ D) where
   /-- The derived tensor monoidal structure. -/
@@ -56,24 +55,24 @@ variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
   (S : CoefficientClosedStructure H)
 
 /-- The actual tensor bifunctor specified by closed derived tensor data.
-Source: Stacks 07A4, 08J9 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, 08J9. -/
 def tensor : D × D ⥤ D :=
   @MonoidalCategory.tensor D _ S.monoidal
 
 /-- Evaluation in the derived system category itself.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J9. -/
 def evaluation (P Q : D) : S.tensor.obj (H.obj (op P, Q), P) ⟶ Q :=
   (S.adjunction P).counit.app Q
 
 /-- The tensor-Hom transpose in the derived system category itself.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+Source: Stacks 08J9. -/
 def transpose (T P Q : D) : (S.tensor.obj (T, P) ⟶ Q) ≃ (T ⟶ H.obj (op P, Q)) :=
   (S.adjunction P).homEquiv T Q
 
 end CoefficientClosedStructure
 
 /-- The actual total-tensor bifunctor on complexes, retaining independent site sizes.
-Source: Stacks 06YN, 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN, 07A4. -/
 noncomputable def coefficientTotalTensor
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -95,7 +94,7 @@ noncomputable def coefficientTotalTensor
         (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
 
 /-- The full subcategory of the recorded K-flat complexes.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 noncomputable def coefficientKFlatInclusion
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -118,7 +117,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (A : Sheaf J CommRingCat.{max c v u})
 
 /-- A tensor generator before sheafification, mapped to its total-degree summand.
-Source: Stacks 03EK, 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK, 06YN. -/
 noncomputable def coefficientTensorGenerator
     (P Q : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -141,7 +140,7 @@ noncomputable def coefficientTensorGenerator
 end TensorRepresentatives
 
 /-- The exact representative uncurrying equation, packaged once as a proposition.
-Source: Stacks 07A4, 08J9 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4, 08J9. -/
 def CoefficientTensorUncurryModel
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -177,7 +176,7 @@ def CoefficientTensorUncurryModel
 -- Elaborate the representative tensor-Hom square with independent site universes.
 /-- A derived tensor is specified by the natural total-tensor comparison on K-flats.
 This is a universal representative characterization, not an extra assumption on inputs.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 structure CoefficientTensorModels
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -197,7 +196,7 @@ structure CoefficientTensorModels
   uncurry_model : CoefficientTensorUncurryModel.{u, c, v, w} J A S comparison
 
 /-- Computation of a chosen derived tensor on the displayed K-flat representatives.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 noncomputable def CoefficientTensorModels.iso
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]

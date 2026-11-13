@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 /-! # Cohomology continuity with a specified stage
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit).
-(blueprint: def-weil-pbc-etale-cohomology-stage-continuity).
+Source: Stacks Project, Tag 09YQ.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 This is an explicit proposition, not a chosen sheaf or diagram. All scheme and sheaf
 limits, transitions, and comparison legs are supplied and universally quantified.
-Source: Stacks Project, Tag 09YQ (theorem-colimit).
-(blueprint: def-weil-pbc-etale-cohomology-stage-continuity). -/
+Source: Stacks Project, Tag 09YQ. -/
 structure EtaleCohomologyStageContinuity (S : Scheme.{u}) : Prop where
   holds :
     ∀ {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

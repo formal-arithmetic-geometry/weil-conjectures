@@ -33,22 +33,7 @@ followed by the finite completed-module equivalence, inclusion and restriction o
 This statement supplies the natural comparison, and asserts no exactness or annihilator bound.
 
 Source: Stacks Project, Lemma 087W, the definition of M as the inverse limit in its proof,
-and the affine calculation in Lemma 087X.
-(blueprint: lem-weil-pbc-formal-affine-limit-model)
-
-Proof: Identify V with Spec of A = Gamma(V, O_X) using the canonical affine-open
-isomorphism. Under this isomorphism the restricted ideal corresponds to J = I(V).
-Transport formal modules along the isomorphism by termwise pullback. Apply the equivalence
-of Lemma 087W with this ideal J; compose it with that transport to obtain E. The cones in
-Lemma 087W identify the underlying A-module of E(F) with the inverse limit of the sections
-of F on V. Termwise restriction identifies these sections with sections on the open
-subscheme, and the Spec/global-sections identification transports them to A-modules.
-Compare each such limiting cone with the chosen limit cone. Uniqueness gives invertible
-A-linear comparison maps. The naturality of the cones on morphisms shows these maps form
-a natural isomorphism for every global formal module and morphism after restriction.
-For the empty affine open A is the zero ring and both categories consist of zero modules;
-the same comparison applies. For J=0 the towers are constant and completion is A;
-for J=A all levels and the completion are zero. No proper-ideal hypothesis is needed. -/
+and the affine calculation in Lemma 087X. -/
 theorem coherentFormalModule_affine_limit_model
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 import WeilConjectures.CategoryTheory.SectionProjectionUnit
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Exchange under a change of chart in the upper corner -/
 @[expose] public noncomputable section

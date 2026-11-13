@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.CommMonoidOperationsDescent
 
 Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
 Stacks Project, Descent, Tag 02W0.
-(blueprint: lem-pd-comm-monoid-operations-descent).
 -/
 
 @[expose] public section
@@ -67,21 +66,7 @@ private theorem local_hom_ext
 
 /-- Multiplication and the unit descend to a commutative monoid structure, before the
 inverse is descended. Source: blueprint lem-pd-group-scheme-descent, multiplication and
-unit step; Stacks Project, Tag 02W0.
-(blueprint: lem-pd-comm-monoid-operations-descent).
-
-Proof: First descend multiplication and the unit as morphisms using
-`exists_raw_monoid_operations_of_effective_projection`
-(lem-pd-raw-monoid-operations-descent). For any Y-scheme A, the fpqc projection
-A times_Y X to A is an epimorphism. The cartesian square hqV lifts each point of V₀
-on this cover uniquely to V. Apply the two operation identities to these lifts:
-associativity, the two unit laws, and commutativity on V give the corresponding
-pointwise equations on V₀ after precomposition with the cover. Epimorphism
-cancellation proves them on A. Specializing to the universal points of the products
-constructs the three fields of MonObj and the commutativity field of IsCommMonObj.
-The two requested identities are the factorization identities already proved for
-the operations. No inverse is used. Empty schemes introduce no exception, since
-all steps use pullback universal properties and epimorphism cancellation. -/
+unit step; Stacks Project, Tag 02W0. -/
 theorem exists_commMonObj_of_effective_projection
     {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p]
     {V : Over X} [MonObj V] [IsCommMonObj V] (D : Over.DescentDatum p V)

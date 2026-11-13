@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
 # Boundary principal divisors and algebraically closed base change
 
 Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-  affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change).
+  affine-case proof, unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -41,20 +41,7 @@ smooth proper connected compactification `c : C ↪ X = c.Z`, boundary
   function fields through the restriction maps `φ`, `φ'`, tied to the germs at the points of
   `C`, `C'`);
 * `ι` maps the set of boundary divisors of units on `C` onto that on `C'`.
-
-Proof: smooth connected curves and their base changes are integral and Noetherian.
-The geometric setup and forward order comparison are
-`affine_unit_divisor_base_change_core`: restriction to the generic point gives the
-compatible maps, rational boundary points have unique fibres, and local DVR base change
-preserves orders. Explicit pullback of a unit witnesses the forward inclusion of ranges.
-`affine_boundary_unit_divisor_descent` gives the reverse inclusion: a transported boundary
-divisor is principal after extension, its degree-zero Picard class vanishes by injectivity
-of the Jacobian point comparison, and the divisor exact sequence supplies a unit before
-extension. Set antisymmetry gives equality. The two cited intermediate geometric statements
-remain open; this is a decomposition of the blueprint argument.
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-  affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change). -/
+-/
 theorem affine_unit_divisor_base_change
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

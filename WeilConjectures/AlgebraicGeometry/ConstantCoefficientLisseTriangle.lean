@@ -116,17 +116,7 @@ private theorem closure_of_iso
 /-- Finite locally constant cohomology is closed under the middle term of a
 distinguished triangle. Constants are formed in commutative rings as in the
 coefficient reduction API. Source: Stacks Project, Tag 094I, first proof paragraph;
-Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node).
-
-Proof: identify the constant ring with the constant commutative-ring sheaf after
-forgetting commutativity. The equivalence on module sheaves carries constant
-finite local models to constant finite local models by the constant-module
-comparison theorem. The existing Serre theorem gives closure under kernels,
-cokernels and extensions on the ring-sheaf side. Apply the five-term exact
-cohomology sequence of a distinguished triangle, or equivalently triangulated
-closure of its cohomology property. The exact coefficient equivalence commutes
-with cohomology. Transport the conclusion back. -/
+Modules on Sites, Tag 093U (3). -/
 theorem locallyConstantFiniteTypeModules_of_distinguished
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     (B : Type u) [CommRing B] [IsNoetherianRing B]

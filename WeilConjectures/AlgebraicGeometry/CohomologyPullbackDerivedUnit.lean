@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 # Cohomology pullback and the derived unit
 
 Source: Stacks Project, cohomology.tex, Lemmas 01EZ and 01F8, equations 01F9 and 01FA;
-sites-cohomology.tex, Remark 08J6 and Lemmas 072Z and 07A6
-(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+sites-cohomology.tex, Remark 08J6 and Lemmas 072Z and 07A6.
 
 The Leray isomorphism used below is `Functor.rightDerivedFunctorPlusCompIso'` applied to
 `Etale.lowerStarCompGlobalSectionsIso`. Its type is a natural isomorphism on all of D⁺.
@@ -74,8 +73,7 @@ private theorem isIso_unit_of_kInjective
 namespace AlgebraicGeometry.Etale
 
 /-- A bounded below K-injective complex remains K-injective under direct image.
-Source: Stacks Project, Lemma 08BJ and Remark 08J6
-(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
+Source: Stacks Project, Lemma 08BJ and Remark 08J6.
 Proof, step 3 of the node: inverse image is exact and left adjoint to direct image.
 For every acyclic complex `M`, maps `M → f_*J` up to homotopy correspond to maps
 `f⁻¹M → J`, which vanish since `f⁻¹M` is acyclic and `J` is K-injective.
@@ -91,15 +89,7 @@ theorem lowerStar_isKInjective_boundedBelow {X Y : Scheme.{v}} (f : Y ⟶ X)
 sections on both sites are computed by `J` itself: the units are isomorphisms, so the natural
 Leray isomorphism `Functor.rightDerivedFunctorPlusCompIso'`, characterized by its unit
 compatibility `Functor.rightDerivedFunctorPlusCompIso'_fac`, is the sectionwise identification.
-Source: Stacks Project, Lemma 01EZ and Remark 08J6
-(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
-Proof: use the exact inverse-image adjunction to preserve K-injectivity under direct image.
-For any bounded below K-injective representative, compare it with the image of a complex
-of injective objects under the equivalence `K⁺(Inj) ≌ D⁺`. Localization is bijective on
-maps into either K-injective complex, so both directions of the derived isomorphism lift
-and their composites are identities already in the homotopy category. Naturality of the
-derived-functor unit transports its invertibility from the complex of injective objects.
-Apply this argument to direct image and to global sections on the two sites. -/
+Source: Stacks Project, Lemma 01EZ and Remark 08J6. -/
 theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
     (J : HomotopyCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective J.obj.as] :
@@ -118,21 +108,7 @@ theorem lerayPlus_on_kInjective {X Y : Scheme.{v}} (f : Y ⟶ X)
 
 /-- Pullback of derived global sections is Γ of the derived unit followed by the natural
 Leray identification, for every bounded below derived object (including a sheaf in degree 0).
-Source: Stacks Project, Lemma 01F8 and equations 01F9 and 01FA
-(blueprint: lem-weil-pbc-cohomology-pullback-derived-unit).
-Proof: compare the two natural transformations out of derived global sections using
-`Functor.rightDerived_ext`. It suffices to precompose their components on the bounded
-below homotopy category with the derived global-sections unit. The derived adjunction's
-unit formula expresses its component as the localized underived unit, the direct-image
-derived unit, and the inverse of the inverse-image factorization isomorphism. Move this
-last isomorphism through the Leray comparison by naturality, then move the localized
-underived unit through the global-sections derived unit. The Leray unit compatibility
-`Functor.rightDerivedFunctorPlusCompIso'_fac` identifies the resulting composite with
-global sections of the underived unit followed by the sectionwise identification.
-After passing through the faithful inclusion of bounded below homotopy categories,
-this final identity is the image under the quotient functor of an equality of maps of
-complexes, which is definitionally true. Thus the universal property gives equality of
-the natural transformations and hence of their components at every derived object. -/
+Source: Stacks Project, Lemma 01F8 and equations 01F9 and 01FA. -/
 theorem derivedCohomologyPullback_eq_derivedUnit {X Y : Scheme.{v}} (f : Y ⟶ X)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{v + 1})) :
     (Functor.rightDerivedDesc _

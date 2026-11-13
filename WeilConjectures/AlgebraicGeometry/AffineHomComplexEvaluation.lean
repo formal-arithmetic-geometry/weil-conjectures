@@ -27,27 +27,7 @@ all unbounded complexes. The unit-Hom comparison is chosen by evaluation at one.
 
 Source: Stacks Project, duality.tex, lemma-compute-sheafhom-affine (0BUZ),
 lemma-sheafhom-affine-adjoint (0BV0), and remark-trace-map-finite (0AX3);
-the termwise calculation in the proof of lem-sc-affine-hom-kinjective-evaluation.
-(blueprint: lem-sc-affine-hom-complex-evaluation).
-
-Proof:
-1. In the product defining Hom from a degree-zero sheaf, all factors except
-   the zero source degree vanish. Projection to the zero factor is an isomorphism;
-   its inverse inserts the given map in that factor and zero in all others.
-   The differential formula reduces to postcomposition by the target differential.
-2. For the unit source, compose that projection with evaluation at one. Its inverse
-   sends x to the linear map r -> r*x. These are inverse sheaf maps and commute
-   with differentials and all chain maps. They give the natural isomorphism e.
-3. The restriction of the direct-image algebra unit is f_*O_X: both have on an
-   open U the module O_X(f^{-1}U), with the scalar action through f.c. Use this
-   sectionwise identity, apply iH in every degree, and then invert the projection
-   in step 1 for the source f_*O_X[0]. This constructs the chain isomorphism d.
-4. Under these projections, precomposition by O_Y -> f_*O_X sends a local linear
-   map phi to the map r -> phi(f.c(r)). Evaluation at one is phi(1), since f.c
-   preserves one. The hypothesis h_eval identifies this with the counit in each
-   degree. Extensionality on opens and sections, followed by chain-map
-   extensionality, proves the equality. Zero rings, empty schemes, zero complexes,
-   and unbounded complexes are included: no exactness of products is used. -/
+the termwise calculation in the proof of lem-sc-affine-hom-kinjective-evaluation. -/
 theorem affine_hom_complex_evaluation
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

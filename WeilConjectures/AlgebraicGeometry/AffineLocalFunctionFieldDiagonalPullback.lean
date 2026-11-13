@@ -24,28 +24,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine-local function-field square is a pullback of the diagonal, without
 assuming separatedness.
-Source: Stacks Project, Varieties Lemma 09NB, first paragraph of the proof
-(blueprint: lem-sc-affine-local-function-field-diagonal-pullback).
-Proof: Put A = Γ(X,U), B = O_{X,x}, and K = k(X). The stalk is a local domain
-with fraction field K. A one-dimensional local domain B has just the zero prime
-and its maximal ideal: a nonzero prime strictly below the maximal ideal would give
-a chain of length two. Since x is outside U and the generic point is in every
-nonempty open, the inverse image of U is precisely the zero prime. Choose a nonzero
-element t of the maximal ideal (B cannot be a field since its dimension is one).
-For every nonzero a in B, t lies in the radical of (a), so a divides a power of t.
-The localization criterion therefore makes K a localization of B away from t,
-and Spec K → Spec B is an open immersion. Its range is the zero prime, exactly
-the inverse image of U: the closed point maps to x, while the unique point of
-Spec K maps to the generic point. The open-immersion pullback criterion shows
-that Spec K, with the germ and stalk-specialization maps, is Spec A ×_X Spec B.
-The product Spec A × Spec B is
-Spec (A ⊗[ℤ] B), since this tensor product is the coproduct of commutative rings.
-Under this identification the map from Spec K is the spectrum of the tensor lift:
-its compositions with the two projections are the germ map and the stalk map.
-Finally the square from any fibre product Y ×_X Z to Y × Z and the diagonal
-X → X × X is cartesian, by the universal properties of products and pullbacks.
-These identifications give exactly the displayed square. No separatedness is
-used in this calculation; it is the separate closedness step in the parent proof. -/
+Source: Stacks Project, Varieties Lemma 09NB, first paragraph of the proof. -/
 theorem Scheme.isPullback_affine_local_functionField_diagonal
     (X : Scheme.{u}) [IsIntegral X]
     (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U]

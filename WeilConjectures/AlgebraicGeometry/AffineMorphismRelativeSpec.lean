@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeSpecMorphismChart
 /-! # Affine morphisms and quasi-coherent algebras (relative spectrum)
 
 Source: Stacks Project, Morphisms, Lemmas 01S8 and 01SA; Constructions, Definition 01LW and
-Lemma 01LX (blueprint: lem-weil-pbc-affine-morphism-relative-spec).
+Lemma 01LX.
 
 A quasi-coherent `𝒪_S`-algebra is a landed `S.CommAlgebraSheaf` (`Under S.sheaf`,
 def-weil-pbc-comm-algebra-sheaf) whose `toModule` is quasi-coherent. For `f : X ⟶ S` the algebra
@@ -123,16 +123,7 @@ the restriction over an affine `U` of `Spec_S ℬ ⟶ Spec_S 𝒜` is `Spec φ_U
 `(f⁻¹ V).ι.appLE`); `Spec_S 𝒜 ×_S V = π⁻¹ V`, and `π ∣_ V` is affine with isomorphic charts for
 `𝒜|_V` and `α|_V ≫ ρ` over every affine open `W` of `V`, i.e. `π⁻¹ V = Spec_V (𝒜|_V)`.
 Source: Stacks Project, Morphisms, Lemmas 01S8 and 01SA; Constructions, Definition 01LW and
-Lemma 01LX (blueprint: lem-weil-pbc-affine-morphism-relative-spec).
-
-Proof: (1) by Stacks 01LC (pushforward of a quasi-coherent module along a quasi-compact
-quasi-separated morphism). For (2), on each affine open `U` take `Spec 𝒜(U)`; these are
-compatible over inclusions of affine opens and glue by relative gluing (Stacks 01LH) to
-`π : Spec_S 𝒜 ⟶ S`, affine with `π⁻¹ U ≅ Spec 𝒜(U)`; `α` is an isomorphism on the affine basis,
-hence an isomorphism. For (3), full faithfulness is checked locally on affine opens using
-morphisms into affine schemes and Spec on affine pieces, essential surjectivity is (1) with
-Stacks 01S8 (`X ≅ Spec_S f_* 𝒪_X`). (4) follows from `isPullback_morphismRestrict` and the
-local nature of the construction. -/
+Lemma 01LX. -/
 theorem affine_morphism_relative_spec (S : Scheme.{u}) :
     (∀ {X : Scheme.{u}} (f : X ⟶ S), IsAffineHom f →
       (Scheme.CommAlgebraSheaf.toModule (𝒪⁎ f)).IsQuasicoherent) ∧

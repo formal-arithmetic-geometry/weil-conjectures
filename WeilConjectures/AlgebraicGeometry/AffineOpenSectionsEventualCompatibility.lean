@@ -71,20 +71,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Two affine local representatives with the same inverse-image section agree over
 some later stage, without constructing or choosing a covering refinement.
-Source: Stacks Project, Tags 03Q6 and 09XM, equality-open and limit-containment arguments.
-(blueprint: lem-weil-pbc-affine-open-inverse-image-compatible-refinement-compatibility).
-
-Proof: Form the affine overlap of V and W over D(j) and subtract the restricted
-sections. After base change to the limit its unit is zero, by naturality of the unit
-and the uniqueness of maps to the terminal object. Localize the adjunction to that
-base-changed overlap; the zero-neighbourhood theorem gives an open containing its
-limit image on which the difference is zero. On the cofiltered tail over j, the
-base-changed overlaps form an affine-transition diagram of compact affine schemes.
-Its limit is the base change of the overlap to c.pt, by the pullback universal
-property. Eventual containment in the agreement open supplies k and f:k→j.
-Any test object with a map to D(k) and compatible maps to V and W maps to this
-base-changed overlap, so restriction of the zero difference gives the equality.
-For an empty overlap all sections are zero; no nonemptiness assumption is used. -/
+Source: Stacks Project, Tags 03Q6 and 09XM, equality-open and limit-containment arguments. -/
 theorem affineOpenSections_pair_eventual_agreement
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

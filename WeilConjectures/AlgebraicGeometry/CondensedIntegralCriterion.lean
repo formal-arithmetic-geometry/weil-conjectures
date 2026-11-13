@@ -23,7 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralPointComplexHomology
 /-! # The four-way condensed integral constructibility criterion
 
 Source: current blueprint, sec-proetale-coefficients/sk-prop-integral-criterion,
-statement and all four proof paragraphs (blueprint: lem-fix-condensed-integral-criterion).
+statement and all four proof paragraphs.
 
 All categories and tensors are ordinary unbounded internal-module derived categories.
 A finite free module over the condensed integer ring on the point is a finite sum of
@@ -50,8 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Canonical scalar-complex realization on a chart: pull back the finite free point
 complex termwise and localize. The additive and exact structures are supplied by the
 existing finite-limit and left-adjoint properties of the inverse image from the point.
-Source: current blueprint sk-prop-integral-criterion, condition (3)
-(blueprint: lem-fix-condensed-integral-criterion). -/
+Source: current blueprint sk-prop-integral-criterion, condition (3). -/
 noncomputable def condensedIntegralCriterionRealization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
@@ -263,8 +262,7 @@ scalar models, without a dimension bound or invertibility of the residue charact
 The third entry uses a finite constructible locally closed stratification and the actual
 derived restriction along the composite chart-to-stratum-to-X morphism. Its point complex
 is bounded termwise finite free; its scalar matrices and bounds can depend on the chart.
-Source: current blueprint sk-prop-integral-criterion, conditions (1)--(4)
-(blueprint: lem-fix-condensed-integral-criterion).
+Source: current blueprint sk-prop-integral-criterion, conditions (1)--(4).
 
 Proof, following the updated node:
 1. The internal forward criterion gives completeness and constructible first reduction.

@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Source: Stacks Project, Tag 0DJQ, verification of the support hypothesis of 08EV;
 Tags 01AT (support), 09MQ (4) and 03GN (descent along a proper surjection).
-(blueprint: lem-pc-bounded-complex-tensor-proper-support-bound).
 -/
 
 @[expose] public section
@@ -131,21 +130,7 @@ private theorem tensor_support_subset (X : Scheme.{u})
 puts all cohomology supports inside one closed subset proper over the base. No perfection,
 coherence, relative flatness, Noetherian assumption or cohomology boundedness is needed.
 This asserts containment; the cohomology supports need not themselves be closed.
-Source: Stacks Project, Tag 0DJQ, support verification for 08EV; Tags 01AT, 0CYR, 08DX.
-
-Proof:
-1. If [c,d] bounds G, let Z be the union of the supports of G^n for c <= n <= d.
-   Terms outside the interval are zero, with empty support. This is a finite union of
-   closed subsets. If c > d the entire complex is zero and the union is empty.
-2. Apply isClosedSubsetProperOver_union_preimage (Stacks 0CYR) to this finite family.
-   This packages the proper-surjection descent argument for the reduced union.
-3. On the open complement of Z every term of G has zero stalks, hence is the zero sheaf.
-   Therefore the restricted complex G is zero. Restriction to an open commutes with
-   the K-flat derived tensor, and tensor with zero is zero, so E tensor^L G restricts
-   to zero there, for arbitrary E. Exactness of open restriction shows every cohomology
-   sheaf is zero on this complement. Its nonzero-stalk locus is consequently contained
-   in Z, as asserted. For an empty Z the same proof gives zero cohomology everywhere.
-(blueprint: lem-pc-bounded-complex-tensor-proper-support-bound). -/
+Source: Stacks Project, Tag 0DJQ, support verification for 08EV; Tags 01AT, 0CYR, 08DX. -/
 theorem boundedComplex_tensor_proper_support_bound
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

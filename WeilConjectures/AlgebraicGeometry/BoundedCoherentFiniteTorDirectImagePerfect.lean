@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ProperDirectImageFiniteTor
 
 /-! # Perfect direct image of a bounded coherent finite-Tor complex
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV)
-(blueprint: lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV).
 -/
 
 @[expose] public section
@@ -120,23 +119,7 @@ private theorem finiteTor_of_iso (S : Scheme.{u})
 
 /-- A bounded coherent complex with proper cohomological support and finite Tor dimension
  over the inverse-image structure sheaf has perfect derived direct image.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV)
-(blueprint: lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect).
-
-Proof:
-1. Apply lem-pc-direct-image-bounded-coherent: the Noetherian base, locally finite-type
-   morphism, bounded coherent cohomology, and proper supports give bounded coherent
-   cohomology of Rf_*E.
-2. Apply lem-pc-noetherian-bounded-coherent-pseudo-coherent on S to obtain pseudo-coherence.
-3. Represent E by a complex K and transport its hypotheses to the standard source
-   localization using homology comparison and uniqueness of localization. Enlarge the
-   bounded interval to [min a b, b]. Apply lem-pc-proper-direct-image-finite-tor in the
-   standard source and target localizations, which share a morphism universe. In both
-   target localizations the K-injective computation represents the direct image by the
-   same complex f_*I(K). Uniqueness of localization transports the K-flat representatives
-   witnessing finite Tor dimension back to the given target localization.
-4. Apply lem-pc-pseudo-coherent-finite-tor-perfect to the conclusions of steps 2 and 3.
--/
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV). -/
 theorem isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

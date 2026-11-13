@@ -14,7 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a finite affine covering with finitely many factorizations
 
-Source: Stacks Project, Étale Cohomology Tag 0EYL (lemma-colimit-affine-sites), and
+Source: Stacks Project, Étale Cohomology Tag 0EYL, and
 Limits Tags 01ZM and 01ZC, finite-presentation descent of objects and morphisms.
 -/
 
@@ -149,31 +149,8 @@ set_option backward.isDefEq.respectTransparency false in
  each covering object into a base-changed original étale object, descends to a common
  stage. This is a geometric assertion: it contains no sheaf or section.
 
-Source: Stacks Project, Étale Cohomology Tag 0EYL (lemma-colimit-affine-sites), qcqs case,
-and Limits Tags 01ZM and 01ZC, descent of finite-presentation objects and arrows.
-(blueprint: lem-weil-pbc-etale-finite-cover-factorization-descent).
-
-Proof: Work on the cofinal tail above i₀. Each affine étale V_q has finite presentation
- over the qcqs limit scheme. Descend its object and its arrow into the fixed affine
- W using the object and arrow clauses of the affine étale site colimit. For each
- arrow b_q into the possibly non-affine base change of U_q, consider the inverse
- system of base changes of the descended affine source on its tail. Its transition
- maps are affine, its terms are affine (hence qcqs), and its limit is V_q by base
- change of limits. Composing b_q with the projection to U_q gives a morphism over
- the original base D(i₀). The structure morphism of U_q is étale, hence locally
- of finite presentation. Apply 01ZC(3), or Mathlib's
- Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation, to descend this
- morphism over D(i₀). The pullback universal property converts it to a map
- into the stage base change of U_q. No quasi-compactness or separation assumption
- on U_q is needed. Choose a common stage for this finite collection of
- data and equations. The maps to W and U_q then base change to a_q and b_q under
- the same source isomorphism d_q; these are the displayed equations with the
- canonical pullback-composition isomorphisms. Finally the finite union of images
- of the descended arrows to W is constructible. Since it covers W at the limit,
- covering descent makes it cover at a later stage. Base change preserves the
- factorization equations and affineness. When n = 0, covering descent says that
- the fixed test object becomes empty at a later stage; no factorization data is
- required. -/
+Source: Stacks Project, Étale Cohomology Tag 0EYL, qcqs case,
+and Limits Tags 01ZM and 01ZC, descent of finite-presentation objects and arrows. -/
 theorem etale_finiteCoverFactorizationDescent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

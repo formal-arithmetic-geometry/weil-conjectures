@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionLocalizationGluingAux
 
 /-! # Mayer--Vietoris gluing for localization of twisted cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph
-(blueprint: lem-sc-invert-s-cohomology-gluing).
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph.
 -/
 
 @[expose] public section
@@ -34,19 +33,7 @@ and `U ⊓ V` in every degree `p`, then so is the comparison for `W = U ⊔ V`.
 isomorphism `e` out of the fraction presentation `CohomologyFractionPresentation L F s p W`
 (def-sc-cohomology-fraction-presentation), tied to the canonical map by the equation
 `s^n · e(ξ/s^n) = ξ|_{W ⊓ S}`; since `s` trivializes `L` on `S`, this determines `e`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph
-(blueprint: lem-sc-invert-s-cohomology-gluing).
-
-Proof:
-1. Apply lem-sc-invert-s-cohomology-mayer-vietoris-diagram to `U ∪ V`. It gives a
-commutative five-term diagram with exact rows in every degree: the upper row is the
-localized degree-zero twisted cohomology sequence and the lower row is the ordinary
-sequence on the nonvanishing opens. Localization and taking degree zero are exact.
-2. The four outside vertical arrows are the comparisons on `U`, `V`, and `U ∩ V`
-in adjacent degrees, with direct sums on `U` and `V`; these are isomorphisms by the
-three hypotheses. Apply lem-weil-pbc-five-lemma to obtain the middle comparison
-isomorphism on `U ∪ V`. In degree zero the sequence begins with zero groups, so
-left exactness gives the same conclusion. This holds for every `p`. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, Mayer--Vietoris paragraph. -/
 theorem cohomologyFractionPresentation_gluing
     (X : Scheme.{uG}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

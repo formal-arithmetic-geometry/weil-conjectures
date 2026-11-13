@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 /-! # Tensor pairing for the coefficient-degree comparisons
 
 Source: Stacks Project, Tags 01CD and 09MS.
-(blueprint: lem-sc-boundary-coefficient-tensor-product).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ universe u
 noncomputable section
 
 /-- Move the ideal factor to the left and multiply the two tensor degrees.
-Source: Stacks Project, Tag 09MS, ideal coefficient tensor multiplication.
-(blueprint: lem-sc-boundary-coefficient-tensor-product). -/
+Source: Stacks Project, Tag 09MS, ideal coefficient tensor multiplication. -/
 def boundaryIdealTensorProduct {X : Scheme.{u}} (J L : X.Modules) (a b : ℕ) :
     L.tensorPow a ⊗ (J ⊗ L.tensorPow b) ⟶ J ⊗ L.tensorPow (a + b) :=
   (α_ _ _ _).inv ≫ (β_ _ _).hom ▷ _ ≫ (α_ _ _ _).hom ≫
@@ -50,21 +48,7 @@ private theorem boundaryIdealTensorProduct_interchange {X : Scheme.{u}}
 This involves only tensor comparisons on Z, with no kernel, square-zero hypothesis, or lift.
 
 Source: Stacks Project, Tag 01CD (pullback of tensor products), and Tag 09MS,
-coherent-equation-ses (tensor powers of the ideal coefficient).
-(blueprint: lem-sc-boundary-coefficient-tensor-product).
-Proof: Use tensorPowAddIso_inv_block_interchange to interchange the two L blocks.
-The braiding hexagon then factors boundaryIdealTensorProduct through braiding the
-section block past the entire coefficient block and coefficient-first concatenation.
-Combine the arithmetic casts and apply tensorPullback to this factorization.
-Apply boundaryCoefficientDegreeIso_split to the coefficient-first concatenation,
-and boundaryPullbackTensorIso_braiding to its preceding braiding. This gives the
-morphism equality before evaluating on sections. Evaluate it on the inverse
-tensorator applied to q tensor s; cancel that tensorator with its inverse.
-The braiding section formula interchanges q and s, and tensorHom_app_tmulSection
-applies the two remaining comparison maps separately, giving the asserted formula.
-The block interchange lemma uses local free generators and sheaf separation;
-the coefficient splitting lemma uses induction and monoidal coherence without
-invertibility. Zero exponents and empty opens obey these same tensor identities. -/
+coherent-equation-ses (tensor powers of the ideal coefficient). -/
 theorem boundaryCoefficientDegreeIso_tensor_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) [L.IsInvertible] (n e : ℕ) (V : Z.Opens)
     (q : Γ((tensorPullback j).obj (L.tensorPow (n * (e + 1))), V))

@@ -257,34 +257,7 @@ private theorem adjoint_isIso_of_rationalization
   infer_instance
 
 /-- Local trivializations of the two canonical maps attached to a finite etale cover.
-Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph; agent finite-sheet variant.
-(auxiliary; not a blueprint node)
-
-Proof. First prove that a finite etale surjective pushforward preserves local finite
-freeness, and that the cokernel of its rational adjunction unit is locally finite
-free. Over an etale splitting cover the canonical product comparison identifies
-this unit with a diagonal. Subtracting one coordinate identifies its cokernel
-with the sum over the other sheets. Finite common refinements of the supplied
-free covers give free bases of each product and quotient.
-
-The rational unit is mono: inverse image along a surjective weakly etale map is
-faithful, as restriction along a cover-dense localization functor, and its
-adjunction unit is therefore mono. Refine the local free covers of P, p_*M and
-the unit's cokernel together, then by affine opens, obtaining compact members.
-Use the supplied rational basis, the integral basis, and the quotient basis.
-
-The adjoint of the pushed lattice embedding is an isomorphism by the integral
-scalar/pushforward comparison and e. After normalized inverse image its adjoint
-remains invertible: express scalar localization as the colimit of repeated
-multiplication by the prime, preserve that colimit under inverse image, and use
-the zeroth-leg equation and uniqueness of all remaining legs. This gives eD.
-The rational basis gives eA and the integral basis gives eB. Conjugate the pulled
-rational unit by these bases to define i; exactness of inverse image and the
-quotient basis give its finite free cokernel. The two required map equations
-follow from naturality of the coefficient comparison and the extension unit.
-Raw inverse-image coefficient rings are normalized along condensedPullbackHom.
-No equality between sheet ranks, dimension hypothesis on E, or noetherian
-hypothesis on X is used. -/
+Source: Bhatt--Scholze, Lemma 6.8.13, first paragraph; agent finite-sheet variant. -/
 theorem continuousLatticeIntersection_splitData
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

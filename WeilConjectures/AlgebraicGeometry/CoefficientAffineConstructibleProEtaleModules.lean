@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Affine-local pro-etale constructibility with independent coefficient size
 
-Source: Stacks Project, proetale.tex, definition-constructible, Tag 09AJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, proetale.tex, definition-constructible, Tag 09AJ.
 
 The published coefficient-sized site is equivalent to the original small site. Its
 objects and coverings are unchanged. Constant-scalar restriction retains the underlying
@@ -38,8 +37,7 @@ namespace AlgebraicGeometry.Scheme
 This is the usual left Kan extension followed by sheafification along canonical scheme
 base change. It reads the constant-ring module inverse image after constant-scalar
 restriction, with its canonical constant-coefficient identification.
-Source: Stacks Tags 09A5, 00VC and 03D2
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 09A5, 00VC and 03D2. -/
 def coefficientProEtaleFixedModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Type (max v (u + 1))) [CommRing R] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -51,8 +49,7 @@ coefficient-sized site. The finite stratification consists of the same immersed 
 On every localized site, values are finitely presented modules and may vary with the
 covering member. No coefficient-set finiteness or universe equality is imposed.
 Source: Stacks Project, Tag 09AJ, definition-constructible; Tag 00IK identifies finite type
-and finite presentation over a Noetherian coefficient ring
-(auxiliary; not a blueprint node). -/
+and finite presentation over a Noetherian coefficient ring. -/
 def IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf (X : Scheme.{u})
     (R : Type (max v (u + 1))) [CommRing R] [IsNoetherianRing R]
     (F : CategoryTheory.ConstantCompletion.Mod

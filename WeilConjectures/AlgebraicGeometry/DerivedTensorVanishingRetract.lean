@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.TorAmplitudeOpenLocal
 /-! # Derived tensor cohomology vanishing passes to retracts
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08CK.
-(blueprint: lem-pc-derived-tensor-vanishing-retract).
 -/
 
 @[expose] public section
@@ -33,15 +32,7 @@ private noncomputable local instance (X : Scheme.{u}) :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Vanishing of one derived tensor cohomology group passes to a retract.
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CK.
-(blueprint: lem-pc-derived-tensor-vanishing-retract).
-
-Proof: Choose a K-flat representative of each object. The K-flat tensor comparison
-identifies the existential vanishing predicate with zero homology of the derived
-object tensor G[0]. Apply the tensor-right functor followed by the i-th homology
-functor to the retraction. The identity of the resulting retract factors through a
-zero object, so is zero. Hence that retract is zero, and the comparison gives the
-required vanishing predicate. This works for zero objects and for empty schemes. -/
+Source: Stacks Project, Cohomology of Sheaves, Tag 08CK. -/
 theorem schemeDerivedTensorCohomologyVanishes_of_retract (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E K : schemeDerivedCategory X) (r : Retract E K)

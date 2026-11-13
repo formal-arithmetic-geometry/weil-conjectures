@@ -20,18 +20,7 @@ namespace AlgebraicGeometry.CurveCoefficientPair
 
 /-- A constructible torsion sheaf on a curve is killed by a positive integer.
 Source: Stacks Project, Definition 03RW and Lemma 095E; the finite-bound
-argument in step 1 of the parent constructible subobject node, used for 09BH (2).
-
-Proof: the curve is Noetherian because it is quasi-compact and of finite type over
-its base field. Apply the uniform finite geometric stalk-cardinality bound to obtain N.
-Choose N factorial, which is positive even for N = 0. Each abelian stalk is nonempty
-and finite, so its positive cardinality divides N factorial. Lagrange's theorem then
-shows that N factorial annihilates every stalk element. Additivity of the stalk functor
-identifies this with the stalk map of N factorial times the identity. Joint faithfulness
-of the algebraic-closure residue-field stalks proves that this morphism is zero.
-The geometric cardinality bound is the remaining named theorem; the finite-group
-argument and the passage back to sheaf morphisms are proved here.
-(blueprint: lem-weil-pbc-curve-constructible-annihilator) -/
+argument in step 1 of the parent constructible subobject node, used for 09BH (2). -/
 theorem exists_annihilator_of_constructible {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k) (hF : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

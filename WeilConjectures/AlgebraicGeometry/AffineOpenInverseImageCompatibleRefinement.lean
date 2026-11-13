@@ -23,24 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 /-- A finite family of affine local sections with agreeing limit images has a
 covering refinement at a later open stage on which its restrictions are compatible.
 Source: Stacks Project, Tag 03Q6, proof steps (2)--(4), and Tag 09XM
-(equality locus of inverse-image sections).
-(blueprint: lem-weil-pbc-affine-open-inverse-image-compatible-refinement).
-
-Proof: On each pairwise overlap over D(j), take the difference of the two sections.
-Its inverse-image unit is zero: both local unit images restrict from t. The overlap
-is affine, since both members and D(j) are affine. The zero-neighbourhood argument
-puts the limit image in an open on which the difference is zero. The compact affine
-limit criterion supplies a later stage whose overlap lies in this open. Cofilteredness
-puts these finitely many stages over j at one common stage, equalizing the finitely
-many arrows to j. Pull back the original covering along this stage map to obtain
-V', v', gamma. Cover stability gives the stage cover, and its pullback to the limit
-still covers the terminal object. The restricted differences are zero on all pairwise
-pullbacks. Every pair of arrows with equal composites factors through that pairwise
-pullback, giving the stated compatibility. The terminal maps pi' are the composites
-of the old pi with the base changes of gamma. If B is empty, the original covering
-forces D(j) empty and all compatibility conditions are vacuous; take k=j. The same
-proof includes empty limits, singleton systems and the zero sheaf. This theorem
-neither constructs a global section nor assumes an amalgamation exists. -/
+(equality locus of inverse-image sections). -/
 theorem affineOpenSections_inverse_image_compatible_refinement
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

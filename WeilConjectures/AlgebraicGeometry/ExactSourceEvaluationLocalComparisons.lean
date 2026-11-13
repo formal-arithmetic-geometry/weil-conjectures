@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ExactSourceEvaluationOpenModels
 
 Source: Stacks Project, Tags 08DL, 08DM and 08DQ, the ordinary complex models;
 Tag 08DJ, the tensor-Hom representative equation.
-(blueprint: lem-pc-exact-source-evaluation-local-comparisons).
 -/
 
 @[expose] public section
@@ -54,33 +53,7 @@ set_option maxHeartbeats 600000 in
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
 of ordinary evaluation. The second complex is arbitrary.
 Source: Stacks Project, Tags 08DL, 08DM and 08DQ, the ordinary complex models;
-Tag 08DJ, the tensor-Hom representative equation.
-(blueprint: lem-pc-exact-source-evaluation-local-comparisons).
-
-Proof:
-1. Resolve F and O[0] by the functorial K-injective resolution. The assumption
-   hhom makes Hom(P,F) -> Hom(P,I(F)) and Hom(P,O[0]) -> Hom(P,I(O[0]))
-   quasi-isomorphisms. The localization factorization of derived internal Hom,
-   together with its open restriction comparison and eK,eN, therefore gives
-   target and dual comparisons using the actual Hom complexes.
-2. Since Hom(P,O[0]) is K-flat by hdual, its ordinary tensor with F computes
-   the derived tensor, even if F is unbounded. Exact open restriction commutes
-   with sheaf tensor and its total complex; transport this comparison through
-   eN and the dual comparison of step 1. This constructs the source comparison
-   a independently of any inverse of evaluation. The target comparison is b.
-3. Replace the tensor inputs by K-flat resolutions and the final target by the
-   same K-injective resolution used by the canonical tensor-Hom family. Its
-   representative equation uncurries the adjunct defining g. On a tensor
-   summand (p,q), followed by the r-th Hom projection, the result evaluates the
-   dual on P^r and then acts on F^p by the unit when r+q=0; otherwise it is zero.
-   The associator and symmetry restore the order F tensor Hom(P,O[0]). These
-   are exactly the component equations hf. Naturality of evaluation makes the
-   resolution maps commute with this calculation. Tensor inclusions and Hom
-   product projections detect equality, so the representative chain maps agree.
-   Localize and use the model comparisons to obtain the displayed square.
-No inverse of f is used or asserted. Empty opens and zero complexes use the same
-universal properties and zero maps; the hypotheses retain all unbounded F.
--/
+Tag 08DJ, the tensor-Hom representative equation. -/
 theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}

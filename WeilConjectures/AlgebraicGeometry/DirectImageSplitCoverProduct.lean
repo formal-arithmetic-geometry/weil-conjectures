@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SplitCoverSectionsLimit
 /-!
 # Direct image for a split finite cover
 
-Source: literature/stacks-project/etale-cohomology.tex, proof of Lemma 095B
-(blueprint: lem-weil-pbc-direct-image-split-cover-product).
+Source: literature/stacks-project/etale-cohomology.tex, proof of Lemma 095B.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- If a scheme is a finite disjoint coproduct of open-and-closed pieces each
 isomorphic to the base, its étale direct image is the product of the restrictions.
-Source: Stacks Project, Lemma 095B, lines 9982--9991
-(blueprint: lem-weil-pbc-direct-image-split-cover-product).
+Source: Stacks Project, Lemma 095B, lines 9982--9991.
 
 Proof (the five steps of the node):
 1. For each étale `W → X`, base change decomposes `W ×_X Y` into the clopen

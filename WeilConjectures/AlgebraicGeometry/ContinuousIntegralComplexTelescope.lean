@@ -22,12 +22,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The termwise extension unit presents extension of a complex as the scalar telescope.
-Source: Bhatt--Scholze, Lemma 6.8.2, applied degreewise.
-(auxiliary; not a blueprint node).
-Proof. Form the unit cocone for the adjunction on complexes. Evaluation identifies
-its zeroth leg with the module extension unit. Multiplication by ℓ is invertible
-on every extended term, so the zeroth leg determines all legs. The module telescope
-is colimiting in each degree; evaluation jointly reflects colimits of complexes. -/
+Source: Bhatt--Scholze, Lemma 6.8.2, applied degreewise. -/
 theorem integralComplexLocalization_colimit (X : Scheme.{u})
     (C : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) ℤ) :

@@ -104,23 +104,7 @@ set_option backward.isDefEq.respectTransparency false in
 Source: Stacks Project, Tag 088A, the second use of Remark 0888 and the identification
 of coherent modules killed by the thickening ideal (Tag 087T).
 https://stacks.math.columbia.edu/tag/088A
-https://stacks.math.columbia.edu/tag/0888
-(blueprint: lem-weil-pbc-completion-thickening-cokernel-reflection).
-
-Proof: let Q be the ordinary cokernel of a and B = K^s Q, with inclusion j : B → Q.
-Coherent cokernel closure and quasi-coherent submodule closure give coherence of Q and B.
-The quotient G → Q carries annihilation by K^q to Q; its submodule B inherits this bound.
-The closed-immersion power-quotient and unit-kernel comparisons identify these bounds
-with support on Z = V(K^q). The coherent closed-pushforward equivalence and its natural
-completion comparison transport faithful completion on Z to faithful completion on the
-supported coherent modules of X. For every n the reduced cokernel of a surjects onto
-Q/I^(n+1)Q, so the latter is killed by K^s. Naturality of ideal products then gives
-j followed by Q → Q/I^(n+1)Q equal to zero. The cokernel universal property shows that
-every reduction of j is zero. Faithful completion therefore gives j = 0, hence B = 0.
-Finally formalModuleQuotient_factor at the identity of Q factors the inclusion K^(2s)Q
-through K^s Q and proves the requested vanishing. No affine completion exactness or
-kernel torsion hypothesis is used. In fact the cokernel argument does not need hF.
--/
+https://stacks.math.columbia.edu/tag/0888. -/
 theorem completion_thickening_cokernel_reflection
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (q : ℕ) (hq : 1 ≤ q)

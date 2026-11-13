@@ -25,15 +25,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.standard
 
 /-- Finite reductions with the given Tor interval and the prescribed residue marking.
-Source: Stacks Project, proetale.tex, Tag 09C2 (1)-(4), and Tag 09AL.
-(auxiliary; not a blueprint node).
-
-Proof: The residue Tor filtration supplies all reduction bounds. Completeness
-and the Milnor endpoint argument give the derived limit and bounds on N.
-Choose etale origins separately at each level, then replace the zero origin
-and its comparison by the prescribed C and e using a dependent case split.
-The normalized full-faithful quotient transport supplies beta and its cocycle
-for this family. At zero the marking equation reduces to the identity law. -/
+Source: Stacks Project, proetale.tex, Tag 09C2 (1)-(4), and Tag 09AL. -/
 theorem adic_constructible_finite_reductions (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (hcomplete : adicFiniteComplete.{u, v} X A J N)

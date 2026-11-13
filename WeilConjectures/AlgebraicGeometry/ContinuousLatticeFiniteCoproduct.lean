@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEs
 /-! # Integral lattices on finite disjoint unions
 
 Source: Stacks Project, Tag 04TR, sheaf gluing; Bhatt--Scholze, Lemma 6.8.13.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

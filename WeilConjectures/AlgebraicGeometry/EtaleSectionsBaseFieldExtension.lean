@@ -16,8 +16,7 @@ import WeilConjectures.FieldTheory.FieldTensorUniqueMinimalPrime
 # Étale sections after extension of a separably closed base field
 
 Source: Stacks Project, Etale Cohomology, Lemma 0A3I
-(etale-cohomology-lemma-sections-base-field-extension)
-(blueprint: lem-weil-pbc-sections-base-field-extension).
+(etale-cohomology-lemma-sections-base-field-extension).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Etale Cohomology, Lemma 0A3I
-(blueprint: lem-weil-pbc-sections-base-field-extension).
+/-- Source: Stacks Project, Etale Cohomology, Lemma 0A3I.
 Let `k` be separably closed, `K/k` a field extension, and `S` a `k`-scheme.
 Pullback induces a bijection on sections of every sheaf of sets on `S`'s small étale site.
 The map is the inverse-image/direct-image adjunction unit evaluated at the identity
@@ -37,18 +35,7 @@ The map is the inverse-image/direct-image adjunction unit evaluated at the ident
 that object, canonically isomorphic to the identity object of `S_K`; composing with
 this isomorphism gives exactly the canonical map to global sections on `S_K`.
 The inverse image is the same Kan-extension/sheafification construction as the recorded
-`Scheme.etaleSetPullback`, rather than an independently chosen equivalence of section sets.
-
-Proof:
-1. The map `Spec K ⟶ Spec k` is flat (a field extension is a free module) and
-   quasi-compact (its source has one point). Thus its base change `p : S_K ⟶ S`
-   is flat and quasi-compact, by lem-weil-pbc-flat-morphism-base-change and
-   lem-pc-quasi-compact-base-change.
-2. Over a geometric point `Spec L ⟶ S`, the fibre is `Spec (K ⊗[k] L)`.
-   By lem-weil-pbc-field-tensor-irreducible, this ring has a unique minimal prime;
-   its spectrum is irreducible, hence connected.
-3. Apply lem-weil-pbc-etale-sections-flat-qc-connected-fibres (Stacks 0A3H) to `p`
-   and `F`. This gives bijectivity of the canonical pullback map on sections. -/
+`Scheme.etaleSetPullback`, rather than an independently chosen equivalence of section sets. -/
 theorem etale_sections_base_field_extension
     (k K : Type u) [Field k] [Field K] [Algebra k K] [IsSepClosed k]
     (S : Scheme.{u}) [S.Over (Spec (.of k))]

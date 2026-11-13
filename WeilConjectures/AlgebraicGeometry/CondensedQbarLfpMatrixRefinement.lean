@@ -419,45 +419,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 /-- A finite presentation on one pro-etale object admits a finite-free refinement.
 
 Source: RefactorInstruction.tex, Section 4, finite-matrix refinement;
-Bhatt--Scholze, Definition 6.8.3
-(auxiliary; not a blueprint node).
-Proof:
-1. Extension of scalars along the coefficient isomorphism identifies the given
-   presentation with a finite presentation over the coefficient object on Y. The
-   canonical finite-field comparison is transported through ULift, on both condensed
-   rings and scheme coefficient sheaves; adjunction naturality preserves its evaluation
-   equation. These comparisons form a natural isomorphism of finite-field diagrams.
-   Passing to their filtered colimits identifies the condensed Qbar coefficient ring
-   with the sheafification of bounded continuous functions. The induced map preserves
-   multiplication because tensors preserve these colimits and its composites with all
-   finite-field inclusions are ring maps. Supplying this ring isomorphism, the
-   function-presentation theorem gives a
-   cover C, fixed matrix sizes, bounded
-   continuous matrices B, and their cokernel presentations after every open restriction.
-   It also identifies the linear cokernels at points with the same image in X.
-2. Quotient dimension plus range dimension equals the common target dimension n;
-   consequently these fibrewise linear equivalences imply equality of matrix ranks.
-3. Each C_i to X is flat. Its image is stable under generalization by going-down.
-   For the union S of these images, rank descends by step 2 and is invariant under
-   specialization: lift a generalization in X to C_i and use that continuous functions
-   into a Hausdorff field agree at comparable points. The subspace S is noetherian.
-   It is quasi-sober, since a generic point in X of the closure of an irreducible closed
-   subset of S generalizes one of its points and hence belongs to S. Its closure in S
-   is the original subset. S has finitely many irreducible components. Any subset
-   invariant under both specialization and generalization is the union of the components
-   it meets. This is a finite union of closed sets; applying it to rank fibres and their
-   complements proves that these fibres are clopen. Their preimages in C_i are open.
-4. Near any point, intersect its constant-rank neighborhood with the nonvanishing locus
-   of a maximal minor. Invert the determinant in the bounded function ring: inversion
-   is continuous and the values stay in the same finite field. Schur elimination yields
-   B = L diag(1,0) R with invertible determinants. Pointwise rank forces the Schur
-   complement to vanish, and point evaluation is jointly injective on functions.
-5. Apply the ring homomorphism from functions to endomorphisms of the regular module.
-   Matrix multiplication becomes biproduct-map composition, and invertible matrices
-   give isomorphisms. The identity block projects onto selected columns and includes
-   selected rows. Its cokernel is the complementary-row biproduct, hence finite free.
-   Compose the resulting Zariski covers with C. The same argument covers rank zero,
-   empty matrices and the empty scheme. No covering scheme is assumed noetherian. -/
+Bhatt--Scholze, Definition 6.8.3. -/
 theorem exists_condensedQbar_finiteFree_refinement
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X Y : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

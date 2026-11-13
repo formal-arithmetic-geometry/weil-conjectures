@@ -16,8 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-!
 # Étale splitting of the quasi-finite part
 
-Source: Stacks Project, More on Morphisms, Lemma 37.41.6, Tag 02LP
-(blueprint: lem-weil-pbc-etale-splits-off-quasi-finite-part).
+Source: Stacks Project, More on Morphisms, Lemma 37.41.6, Tag 02LP.
 -/
 
 @[expose] public section
@@ -123,36 +122,11 @@ private theorem exists_openImmersion_fiber_of_elementary
   refine ⟨l ≫ h, inferInstance, ?_⟩
   simp [l, h, a, b, p, q, Scheme.Hom.fiberι, Category.assoc]
 
-/-- Stacks Project, Tag 02LP
-(blueprint: lem-weil-pbc-etale-splits-off-quasi-finite-part).
+/-- Stacks Project, Tag 02LP.
 A separated locally finite type morphism whose fibre has finitely many isolated points
 admits an elementary étale neighbourhood on which a finite clopen part splits off and the
 remaining fibre has no isolated points. If the original fibre is finite, the remaining
-fibre is empty.
-
-Proof outline:
-1. List all isolated points of `f.fiber s`, and their images in `X`
-   (def-pc-scheme-fibre).
-2. Apply lem-weil-pbc-etale-splits-off-isolated-points-technical (Stacks 02LN) to obtain
-   an elementary étale neighbourhood and disjoint finite clopen pieces around those points,
-   with a complementary open `W` whose fibre avoids them.
-3. Take `V` to be the union of those pieces. It is finite over `U` by
-   lem-weil-pbc-finite-coproduct and def-weil-finite-integral-morphism; the empty union is
-   the empty finite scheme.
-4. Identify the fibre of the base change at `u` with `f.fiber s`, using
-   lem-weil-pbc-fibre-of-base-change, def-pc-fibre-product and def-weil-affine-spectrum:
-   the induced residue-field map is an isomorphism.
-5. The fibre of `W` maps openly into the original fibre: pullback pasting exhibits
-   the first map as a base change of `W.ι`, and step 4 supplies the fibre isomorphism.
-   The avoidance clause excludes every isolated point from its image.
-6. An isolated point of this open subscheme would be isolated in the whole fibre,
-   contradicting step 5.
-7. If the original set-theoretic fibre is finite, `f.fiberHomeo s` makes the scheme
-   fibre finite. Mathlib supplies a Jacobson space instance for a locally finite type
-   fibre, using lem-weil-pbc-lft-base-change. Its finite Jacobson space discreteness
-   instance makes every point isolated (Stacks 02NG).
-8. Step 5 excludes every point of `W`'s fibre in this case; hence it is empty.
--/
+fibre is empty. -/
 theorem exists_etale_splits_off_quasiFinitePart
     {X S : Scheme.{v}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsSeparated f] (s : S)
     (hfinite : Set.Finite {x : f.fiber s | IsOpen ({x} : Set (f.fiber s))}) :

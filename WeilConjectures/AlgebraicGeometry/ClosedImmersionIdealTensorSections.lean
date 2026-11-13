@@ -27,18 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Tensoring the ideal inclusion by an invertible tensor power identifies its sections
 with the kernel of restriction to the closed subscheme.
 
-Source: Stacks Project, Modules Lemma 08KS and Varieties Lemma 09NX, extension by zero.
-(blueprint: lem-sc-closed-immersion-ideal-tensor-sections).
-
-Proof: an invertible module and every tensor power are locally free of rank one.
-Tensoring the ideal inclusion is therefore a monomorphism. The closed-immersion unit
-quotient theorem identifies the image of ideal multiplication with the kernel of the
-pullback unit. This remains true for the canonical adjunction: comparing two adjunctions
-of the same functors changes the unit by an automorphism of the target, which preserves
-its kernel. Evaluation on an open preserves kernels, so on the top open the multiplication
-map is injective and its range is exactly the sections killed by restriction. This also
-covers an empty closed subscheme, where the ideal is the whole structure module, and
-power zero, where the module is the structure module. -/
+Source: Stacks Project, Modules Lemma 08KS and Varieties Lemma 09NX, extension by zero. -/
 theorem closedImmersion_ideal_tensor_sections {Y Z : Scheme.{u}} (j : Z ⟶ Y)
     [IsClosedImmersion j] (M : Y.Modules) [M.IsInvertible] (m : ℕ) :
     let N := M.tensorPow m

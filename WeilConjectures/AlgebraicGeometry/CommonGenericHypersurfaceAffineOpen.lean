@@ -31,21 +31,7 @@ with a hypersurface over its original base. The generic fibre of this open is
 nonempty. No assertion about special fibres is made here.
 
 Source: Stacks Project, Tag 0559, first proof, the separating transcendence basis
-and common-open construction; Tag 0552, birational finite type schemes.
-Proof: Apply the generic-fibre birational hypersurface model theorem to obtain
-P over Gamma(S, O_S), a geometrically integral generic hypersurface, and a partial
-isomorphism of the two generic fibres over kappa(eta). The hypersurface map is
-locally of finite presentation: a polynomial algebra in finitely many variables
-is finitely presented, and quotienting by one equation preserves finite
-presentation. Geometric irreducibility makes the source generic fibre nonempty.
-Apply the generic-fibre partial-isomorphism spreading theorem to obtain an open
-V in X meeting the generic fibre and an open immersion V -> H over S. Choose a
-point v in V above eta and an affine open neighbourhood W of v contained in V.
-Compose W -> V with V -> H. The composite is an open immersion over S, and v
-witnesses that eta is in the image of W -> S. Retain the geometric properties
-of the hypersurface generic fibre supplied by the model theorem.
-
-(blueprint: lem-sbc-common-generic-hypersurface-affine-open) -/
+and common-open construction; Tag 0552, birational finite type schemes. -/
 theorem exists_common_generic_hypersurface_affine_open
     {X S : Scheme.{u}} [IsAffine X] [IsReduced X] [IsAffine S] [IsIntegral S]
     (f : X ⟶ S) [Flat f] [LocallyOfFinitePresentation f]

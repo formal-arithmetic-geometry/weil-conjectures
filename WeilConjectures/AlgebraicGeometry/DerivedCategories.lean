@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 # Derived categories of etale sheaves of modules
 
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/
-`lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md`
-(blueprint: def-weil-pbc-derived-categories); Stacks Project, Derived Categories, Tag 05RU.
+`lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md`; Stacks Project, Derived Categories, Tag 05RU.
 
 The notions of the node are existing declarations, in the encoding of etale sheaves of
 `Λ`-modules that the six-functor and proper-base-change chapters use
@@ -50,8 +49,7 @@ namespace AlgebraicGeometry.Etale
 `H^r(K)`, as a sheaf of abelian groups, is a torsion sheaf: every local section is locally
 killed by a positive integer (`CategoryTheory.Sheaf.IsTorsion`).
 Source: blueprint
-`sec-curve-estimates/lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md` (blueprint:
-def-weil-pbc-derived-categories). -/
+`sec-curve-estimates/lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md`. -/
 def DerivedCategory.torsionCohomology (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) :
     ObjectProperty (DerivedCategoryModule Λ T) :=
   fun K ↦ ∀ r : ℤ, CategoryTheory.Sheaf.IsTorsion

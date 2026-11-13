@@ -19,7 +19,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Detecting zero direct-image cohomology on the affine basis
 
 Source: Stacks Project, Tag 08D5, proof of (2); Tag 079V, K-injective computation.
-(blueprint: lem-pc-direct-image-homology-affine-detection).
 -/
 
 @[expose] public section
@@ -98,23 +97,7 @@ private theorem homology_zero_of_affine_sections (S : Scheme.{u})
 /-- Vanishing of derived sections on every inverse image of an affine open detects
 vanishing of the corresponding cohomology sheaf of derived direct image. No
 quasi-coherence or support hypothesis on the derived object is required.
-Source: Stacks Project, Tag 08D5, proof of (2); Tag 079V.
-(blueprint: lem-pc-direct-image-homology-affine-detection).
-
-Proof:
-1. Represent E by a complex and take a K-injective resolution I. The unbounded
-right derived functor of sections on any open V is computed by the complex of
-sections I(V). Derived direct image is represented by the termwise direct image
-f_*I, by its K-injective computation. Sections of f_*I on U are termwise I(f⁻¹U).
-2. The hypothesis says the degree m cohomology of those complexes is zero on
-all affine opens U. The cohomology sheaf H^m(f_*I) is the sheafification of the
-presheaf U ↦ H^m(I(f⁻¹U)): module sheafification is exact, hence commutes with
-kernels, images and their quotient in homology.
-3. Affine opens are a basis, so a presheaf zero on every affine open has zero
-sheafification: every germ has a representative on an affine neighborhood and
-is therefore zero. All stalks of H^m(f_*I) vanish, hence the sheaf is zero.
-Transport along the resolution comparison gives the conclusion. This argument
-works in every integer degree, for unbounded E, and also for the empty scheme. -/
+Source: Stacks Project, Tag 08D5, proof of (2); Tag 079V. -/
 theorem isZero_schemeHigherDirectImage_of_affine_sections
     {X S : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

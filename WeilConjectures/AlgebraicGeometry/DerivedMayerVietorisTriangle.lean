@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Derived Mayer--Vietoris for a qcqs scheme
 
-Source: Stacks Project, Cohomology, Tag 08BV; Derived Categories of Schemes, Tag 08D5
-(blueprint: lem-pc-derived-mayer-vietoris-triangle).
+Source: Stacks Project, Cohomology, Tag 08BV; Derived Categories of Schemes, Tag 08D5.
 -/
 
 @[expose] public section
@@ -72,23 +71,7 @@ private theorem qcoh_openRestriction (X : Scheme.{u₁}) (U : X.Opens)
     (moduleRings U.toScheme.toRingedSpace)).prop_of_iso comparison.symm hF
 
 /-- A two-open cover gives the direct-image Mayer--Vietoris distinguished triangle.
-Source: Stacks Project, Tags 08BV and 08D5
-(blueprint: lem-pc-derived-mayer-vietoris-triangle).
-
-Proof:
-1. Choose a K-injective resolution with injective terms
-   (prop-pur-kinjective-resolutions-exist). Its restrictions remain K-injective
-   (lem-sc-derived-k-injective-restrict-open), and compute the derived direct images
-   (def-pc-derived-direct-image).
-2. The sheaf gluing axiom gives exactness at the first two terms of the sectionwise
-   sequence. Injectivity gives surjectivity of the difference of restriction maps
-   (lem-sc-ringed-space-injective-restriction-surjective). This holds in every degree.
-3. Apply the non-split short-exact-sequence triangle
-   (lem-weil-pbc-complex-ses-triangle), and transport along the resolution isomorphism.
-   The first map is the pair of units and the second is the difference of restrictions.
-4. Restriction preserves quasi-coherent cohomology. Each open immersion is qcqs, so
-   lem-pc-derived-direct-image-preserves-qcoh places the three direct-image terms in
-   D_QCoh. Their biproduct and the triangle therefore lie in that full subcategory. -/
+Source: Stacks Project, Tags 08BV and 08D5. -/
 theorem schemeDerived_mayerVietoris_triangle
     (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

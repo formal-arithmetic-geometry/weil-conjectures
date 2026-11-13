@@ -57,23 +57,7 @@ def CondensedQbarDerivedScalarBasis : Prop :=
 
 /-- A single algebraic basis gives compatible scalar endomorphisms on every scheme.
 Source: Compatibility.lean, finiteFreePushData and derivedPushHom_of_finiteFree;
-FiniteSubextension.lean, the finite-subextension-valued coefficient colimit.
-(auxiliary; not a blueprint node)
-
-Proof: choose an E-basis of the algebraic closure. A section of the specified coefficient
-presheaf lies in a finite intermediate field. Its image therefore lies in a finite-dimensional
-E-subspace and has only finitely many basis coordinates; each coordinate is continuous by
-finite-dimensional topological linear algebra. This gives the coproduct decomposition of the
-restricted regular module, whose summand maps send 1 to the chosen basis elements. Finite
-covers preserve finite support, so the same decomposition holds after sheafification.
-The monoidal left adjoint from the point preserves it. Tensor this decomposition with each
-module: its summand maps are the extension unit followed by basis scalar multiplication.
-Exact coproducts and exact coefficient extension descend this natural isomorphism termwise
-to the unbounded derived category. The descended scalar multiplications are central.
-Their pullback compatibility follows from the monoidal unit map and the coefficient square.
-Transpose that equality along derived pullback/direct image: pushforward carries each scalar
-to the same scalar. Thus the same basis works on every scheme and for every morphism.
-No preservation of infinite coproducts by direct image is used here. -/
+FiniteSubextension.lean, the finite-subextension-valued coefficient colimit. -/
 theorem condensedQbar_derived_scalar_basis :
     CondensedQbarDerivedScalarBasis ℓ E := by
   let h := exists_condensedQbar_scalar_basis_unit ℓ E

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CoefficientSurjectiveRestrictionConstru
 
 /-! # Constructible cohomology of the graded coefficient layer
 Source: Stacks Project, Tags 09BR and 094H.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -24,25 +23,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Only the graded layer, rather than a higher reduction, has constructible cohomology.
 
 Source: Stacks Project, proetale.tex, Tag 09BR, second displayed isomorphism and tensor
-step; sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product.
-(auxiliary; not a blueprint node).
-
-Proof: The kernel of A/J^(n+2) -> A/J^(n+1) is J^(n+1)/J^(n+2). Multiplication
-by J annihilates this kernel. Noetherianity makes it finite over A, hence finite and
-finitely presented over A/J. Associativity of K-flat scalar extension and tensor
-identifies the displayed layer with the residue reduction tensor over A/J with
-this constant finite module, followed by restriction to A/J^(n+2). On each affine
-open refine the finitely many residue cohomology stratifications to one finite
-stratification, retaining the actual projection maps. Exact stratum restriction
-commutes with cohomology and derived tensor. The residue complex is bounded above
-on each stratum, and its cohomology is locally constant finite type there; the
-constant graded module is concentrated in degree zero. Apply Tag 094H to obtain
-locally constant finite type tensor cohomology in every degree. Restriction of
-scalars along A/J^(n+2) -> A/J retains those constant models. Their generators remain
-finite and finite modules over the Noetherian larger quotient are finitely presented.
-This gives the required affine-local strata and trivializations. There is no lower
-cohomology bound: the graded module need not be flat. For J=0 or J=top the layer is
-zero; the same construction covers the zero ring and the empty scheme. -/
+step; sites-cohomology.tex, Tag 094H, lemma-locally-constant-tensor-product. -/
 theorem adicFiniteGradedLayer_constructible (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

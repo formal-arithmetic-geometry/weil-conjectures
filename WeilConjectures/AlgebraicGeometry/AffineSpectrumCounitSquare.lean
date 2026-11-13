@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSquare
 /-! # The affine spectrum derived counit square
 
 Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098.
-(blueprint: lem-pc-affine-spectrum-counit-square).
 -/
 
 @[expose] public section
@@ -35,27 +34,7 @@ attribute [local implicit_reducible] DerivedCategory
 set_option maxHeartbeats 1500000 in
 -- The quotient comparison normalization unfolds several derived-category factors.
 /-- The inverse pullback counits commute with the canonical affine coordinate comparison.
-This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology.
-
-Proof: let Pg be the termwise gprime-pullback of P and P0 the termwise isoSpec
-pullback. Apply affineSpectrum_representative_map_eq with K=Q(P), Kprime=Q(Pg),
-coefficient the pinned gprime counit, and Coordinates given by P, Pg, identity
-representative isomorphisms and identity chain map. K-flatness is hP and represents
-reduces to functoriality of identity. Choose e and eprime to be the inverse exact
-iso-pullback complex counits. Their two defining equations are the explicit
-quotientCompQhIso and mapHomotopyCategoryFactors formulas; the latter comparison
-is identity on each complex. The resulting equation says spectrum counit followed
-by Q(alpha.hom) followed by eprime.hom equals derived spectrum pullback of e.hom,
-followed by the canonical derived composition comparison, followed by derived
-isoSpec pullback of the gprime counit. Cancel the composition comparison and the
-last counit. All four counits and alpha are invertible, so composing with their
-inverses gives exactly the displayed equation. No stalk-ring comparison, localized
-base-derived tensor map, coefficient to an arbitrary target, or point is involved.
-For identity coordinate maps this is the identity composition law; zero complexes
-and empty schemes use the same counit equations.
-Source: Stacks Project, Tag 0D5S, lemma-pullback-composition; Tag 0DJ8, affine
-reduction on the canonical representative.
-(blueprint: lem-pc-affine-spectrum-counit-square). -/
+This is an equation of derived morphisms, independent of f, g, z0 and stalk cohomology. -/
 theorem affineSpectrum_counit_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

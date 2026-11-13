@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 /-! # Affine-local cohomology of derived pullback
 
 Source: Stacks Project, Tag 08DW, part (1), with its affine calculation in part (2).
-(blueprint: lem-pc-derived-pullback-qcoh-component).
 -/
 
 @[expose] public section
@@ -27,17 +26,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Affine-local cohomology calculation for derived pullback.
-Source: Stacks Project, Tag 08DW(1), proof using Tag 08DW(2) and Tag 06Z0.
-Proof: restrict E to V using exact restriction and quasi-coherence of its cohomology.
-On the affine morphism U → V, choose a K-flat module representative on the canonical
-spectrum of V. The affine model comparison represents its pullback by tilde of its
-base-changed complex on the spectrum of U, followed by exact restriction to U.
-The affine derived equivalence puts the tilde complex in the quasi-coherent derived
-subcategory. Exact restriction commutes with homology and preserves quasi-coherence.
-Transfer through the affine model and the derived open-restriction comparison, then
-use the over equivalence to obtain the claimed cohomology over-object.
-Empty opens, arbitrary degrees, unbounded complexes and nonflat f are included.
-(blueprint: lem-pc-derived-pullback-qcoh-component). -/
+Source: Stacks Project, Tag 08DW(1), proof using Tag 08DW(2) and Tag 06Z0. -/
 theorem derivedPullback_cohomology_over_affine {X Y : Scheme.{uX}} (f : X ⟶ Y)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))]

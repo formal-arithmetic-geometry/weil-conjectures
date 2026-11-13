@@ -60,18 +60,7 @@ The whole object `K` need not be concentrated.
 
 Source: rank-idempotent splitting, steps 1--2 of clopen rank-stratum formality;
 Stacks Tag 00EE for the characteristic idempotent and Tag 08J5 for the
-single-degree presentation of the resulting retract.
-(blueprint: lem-sc-clopen-rank-strata-homology-presentation)
-
-Proof: For nonnegative n, split off the image of the characteristic idempotent
-of the rank-n stratum. Homology in every other nonnegative degree is supported
-on a disjoint stratum, so the idempotent acts by zero there. Negative homology
-of K is zero by the prescribed T, hence the retract's negative homology is
-zero as well. On the source module the idempotent acts as the identity, and
-naturality fixes every map from that source into homology. For negative n,
-the source T n is zero; take the zero retract. Concentration identifies this
-retract with its degree-n homology placed in degree n, by two truncations.
-No claim is made that the complementary summand of K has zero homology. -/
+single-degree presentation of the resulting retract. -/
 theorem clopenRankStrata_homology_presentation
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}
@@ -149,29 +138,7 @@ Source: rank-idempotent splitting and single-degree truncation, steps 1--2
 of `lem-sc-clopen-rank-strata-formality` (expanding the reconstruction argument
 motivated by Tag 0BQZ); Stacks Tags 00EE (clopen idempotents), 0118
 (canonical truncation), and 0AVW (direct-image algebra setup).
-The rank-stratum expansion is given here, not stated verbatim in 0BQZ.
-(blueprint: lem-sc-clopen-rank-strata-homology-lift)
-
-Proof: If n is negative then T n is zero, so its single complex is zero
-and the unique zero map is a lift. Otherwise put q = n.toNat and U = {r = q}.
-Glue 1 on U and 0 on its open complement to get the characteristic idempotent
-of O_Z, hence of i_*O_Z. Multiplication by this central idempotent splits
-any representative complex of K into its image and complementary image,
-with chain inclusions and projections. This splitting is exact on module
-sheaves, so the homology of the image complex is the image of multiplication
-by the same idempotent on H^m(K). For m different from n, the given isomorphism
-identifies H^m(K) with the direct image of T m. This module is zero when m
-is negative and is supported on the disjoint rank-m stratum otherwise.
-The idempotent therefore acts by zero on these homology sheaves. The image
-complex has homology only in degree n; the two canonical truncations give
-its derived isomorphism to its degree-n homology in degree n. The idempotent
-acts as the identity on the source module g_*T n. Every module-linear map a
-therefore lands in the idempotent image of H^n(K). Apply the single functor
-to this factored map, compose with the inverse of the truncation isomorphism
-and with the image-complex inclusion into K. The natural homology
-identification of a single complex shows that this composite induces a.
-The construction also covers an empty stratum: the source module and its
-single complex are zero. Neither U nor its image has to be open in Y. -/
+The rank-stratum expansion is given here, not stated verbatim in 0BQZ. -/
 theorem clopenRankStrata_homology_lift
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

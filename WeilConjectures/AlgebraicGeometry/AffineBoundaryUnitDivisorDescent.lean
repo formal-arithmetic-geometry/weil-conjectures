@@ -25,24 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Every boundary divisor of a unit after extension descends to a boundary divisor of a unit.
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
-(blueprint: lem-sc-affine-boundary-unit-divisor-descent).
-
-Proof: on each curve, boundary_divisor_pic_kernel identifies the boundary divisors of
-units with the kernel of the point-ideal divisor-to-Picard homomorphism, after extending
-coefficients by zero. Degree of an invertible module is preserved under field extension,
-so a Picard class that becomes trivial has degree zero. Restrict Picard pullback to the
-kernels of the two degree homomorphisms and apply picZero_torsion_base_change at n = 1
-for injectivity; hence the original Picard class is trivial as well.
-For each supplied boundary point, construct its rational point morphism and its scalar
-extension. The fibre condition he identifies that extension with e(P). The resulting
-cartesian square identifies the pullback of the point ideal with the ideal of e(P).
-Pullback commutes with its dual, giving equality of the point classes. Induction on a
-finitely supported boundary divisor proves compatibility of divisor-to-Picard with
-Finsupp.domCongr e. Given a boundary divisor after extension, transport it back using
-e.symm. Its class becomes trivial, hence is trivial by Picard injectivity. Apply the
-kernel characterization on the original curve and transport forward again. This covers
-empty and singleton boundaries without choosing a boundary base point. -/
+Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph. -/
 theorem affine_boundary_unit_divisor_descent
     (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]

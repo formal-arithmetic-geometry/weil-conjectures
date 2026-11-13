@@ -98,18 +98,7 @@ private lemma single_isoQh_naturality
 
 /-- The canonical single/pullback comparison respects the flat single tensorators.
 Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU; the derived inverse-image
-counit identity leftDerivedUpperStarTensorComparison_app_app_comp.
-(auxiliary; not a blueprint node).
-Proof: compute the tensor comparison of derived inverse image on the homotopy images
-of the two single complexes. Its defining counit square identifies it with the
-termwise ordinary oplax tensor comparison. The single/termwise-pullback comparison
-respects the degree-(0,0) tensor summand: there it is exactly the ordinary oplax
-comparison, and every other summand is zero. Apply Qh and use the counit square to
-obtain the equation. The exact-functor counit factorization identifies the resulting
-single comparison with singleFunctorCompLeftDerivedUpperStarIso, rather than an
-arbitrary isomorphism. The left single complex and its pullback are K-flat because
-the left sheaf is flat and inverse image preserves flats. There is no flatness
-assumption on M. The argument is unchanged for zero sheaves or empty schemes. -/
+counit identity leftDerivedUpperStarTensorComparison_app_app_comp. -/
 theorem singleFunctorObjTensorIso_pullback
     {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)
     [(upperStar B v).PreservesFlat]

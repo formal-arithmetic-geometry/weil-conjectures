@@ -98,24 +98,7 @@ private theorem local_epi_cancel {X : Scheme.{u}} {P Q S : X.Modules}
 The source and arrow are supplied; this theorem only descends their quotient comparisons.
 
 Source: Stacks Project, Tag 0889(1), compatibility after algebraic sheaf descent;
-Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-compatible-quotient-formal-comparisons).
-
-Proof: Restriction along an open immersion is exact and commutes with ideal-module
-products and ideal powers. It therefore identifies each restricted quotient of F
-with the quotient of Fi through ei, compatibly with the quotient projections.
-Combining this normalized comparison with βi.inv gives an isomorphism from the
-restricted quotient of F to N at each level. The normalization equation for pi
-says that the projection followed by this isomorphism is pi. Quotient projections
-are epimorphisms. Thus hcompat, checked at every open in a pairwise intersection,
-identifies these isomorphisms there. Their inverses also agree there. The canonical
-quotient transitions and the naturality of βi identify the component maps as an
-isomorphism of inverse systems. Its inverse is ε. Precompose the required
-factorization with the quotient projection; hδ gives equality, and cancellation
-of this epimorphism proves the equation. For J=0 projections are isomorphisms;
-for J=1 all quotients and N on the covering opens are zero; empty covers have
-no comparison obligations.
--/
+Sheaves, Tags 00AL and 00AM. -/
 theorem compatible_quotient_formal_comparisons
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H F : CoherentModules X) (N : CoherentFormalModule X J)

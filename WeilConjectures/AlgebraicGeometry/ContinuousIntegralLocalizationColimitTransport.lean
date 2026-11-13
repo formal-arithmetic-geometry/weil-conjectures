@@ -29,10 +29,7 @@ private noncomputable def sequenceComparison
 
 omit [Fact ℓ.Prime] in
 /-- Transport colimits from a strict complex telescope along its localization-unit model.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(auxiliary; not a blueprint node).
-Proof: whisker the representative isomorphism to identify the diagrams, and use the
-model vertex isomorphism and its leg equations to identify the cocones. -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 theorem localizationCocone_isColimit_of_model
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
     [HasColimitsOfShape (ULift.{x} ℕ) A]

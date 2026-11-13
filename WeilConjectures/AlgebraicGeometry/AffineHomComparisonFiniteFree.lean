@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Extending the affine Hom comparison from rank one to finite free modules
 
-Source: Stacks Project, Tag 01HV (4)-(5), finite-basis argument of Tag 0BQZ.
-(blueprint: lem-sc-k3-affine-hom-comparison-finite-free). -/
+Source: Stacks Project, Tag 01HV (4)-(5), finite-basis argument of Tag 0BQZ. -/
 
 @[expose] public section
 
@@ -27,22 +26,7 @@ namespace AlgebraicGeometry
 /-- A natural forward Hom comparison invertible in rank one is invertible
 on every finite free source, with arbitrary coefficients.
 Source: Stacks Project, Tag 01HV (4)-(5); Tag 0BQZ,
-lemma-regular-immersion-ext, finite-free coefficient calculation.
-(blueprint: lem-sc-k3-affine-hom-comparison-finite-free).
-
-Proof: Fix N and choose a finite basis b of M. Let i_j:A -> M and
-p_j:M -> A be its inclusions and coordinate projections, so sum_j i_j p_j
-is the identity of M. Write L(f) for T of precomposition by f and H(f)
-for internal Hom precomposition by T(f). Both are additive contravariant
-operations, so sum_j L(i_j)L(p_j) and sum_j H(i_j)H(p_j) are identities.
-Define the inverse to c(M,N) to be sum_j H(i_j)c(A,N)^(-1)L(p_j).
-Naturality moves c(M,N) past H(i_j) in one inverse identity, and moves it
-past L(p_j) in the other. Cancel c(A,N) with its inverse, then use the
-two sum identities. This argument works for any additive T into the
-module sheaves on U, including the associated-sheaf functor transported
-by isoSpec. No coefficient freeness is used. For an empty basis the sum
-identities are still valid and the inverse is the zero map between zero
-objects. The same proof covers the zero ring. -/
+lemma-regular-immersion-ext, finite-free coefficient calculation. -/
 theorem affine_hom_comparison_isIso_of_finite_free
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (T : ModuleCat.{u} Γ(Y, U.1) ⥤ U.1.toScheme.Modules)

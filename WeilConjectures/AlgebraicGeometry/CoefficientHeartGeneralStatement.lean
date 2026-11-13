@@ -21,7 +21,7 @@ Source: blueprint latest,
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/_section.md`,
 and `sk-lem-coefficient-heart.proof.md`, clauses (1)--(3), with the standing
-field hypothesis `char(k) ≠ ℓ` (blueprint: sk-lem-coefficient-heart).
+field hypothesis `char(k) ≠ ℓ`.
 
 This file states the current coefficient-heart lemma. The coefficient ring is either a
 finite extension inside the algebraic closure of `ℚ_ℓ` or the finite-subextension-valued
@@ -89,8 +89,7 @@ Source: blueprint latest,
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/_section.md`,
 clauses (1)--(3), and
-`sk-lem-coefficient-heart.proof.md`, steps (1)--(3)
-(blueprint: sk-lem-coefficient-heart).
+`sk-lem-coefficient-heart.proof.md`, steps (1)--(3).
 
 Proof, following the node's five steps:
 1. Finite type over k makes X Noetherian (locally Noetherian and quasi-compact).

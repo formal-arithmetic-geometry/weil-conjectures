@@ -21,14 +21,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- Derived restriction detects isomorphisms on a two-member open cover.
 Source: Stacks Project, Tag 08DF, the local cohomology criterion in its proof;
-Mathlib `DerivedCategory.isIso_iff` and sheaf locality (Tag 04TN).
-(blueprint: lem-pc-derived-restriction-isIso-open-cover).
-
-Proof: An isomorphism is detected by all homology functors. Exact restriction
-commutes with homology, so the two local hypotheses make every homology map an
-isomorphism on both opens. Sheaf-module isomorphisms are local on an open cover,
-so every global homology map is invertible, and hence so is the derived map.
-This also covers an empty member or an empty scheme. -/
+Mathlib `DerivedCategory.isIso_iff` and sheaf locality (Tag 04TN). -/
 theorem derived_restriction_isIso_open_cover (X : Scheme.{u}) (U V : X.Opens)
     (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

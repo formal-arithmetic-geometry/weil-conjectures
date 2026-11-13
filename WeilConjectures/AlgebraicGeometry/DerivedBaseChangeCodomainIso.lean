@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
 and 20.28.2 (0D5T).
-(blueprint: lem-pc-derived-base-change-codomain-iso).
 -/
 
 @[expose] public section
@@ -117,32 +116,7 @@ private theorem pullback_square_postcomp
 
 /-- Postcompose both morphisms into the common base with a scheme isomorphism.
 Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
-and 20.28.2 (0D5T).
-(blueprint: lem-pc-derived-base-change-codomain-iso).
-
-Proof: Write Lk and Rk for the recorded derived pullback and direct image. Use the
-pullback comparisons c and identity comparisons i selected in
-exists_derivedPullbackComposition. Their comparisons for e.hom and e.inv, composed
-with i, exhibit L(e.hom) and L(e.inv) as inverse equivalences. Adjointify this
-explicit equivalence without changing these functors, obtaining adjV with an
-invertible counit. Use the adjunctions for f, f e.hom and fprime pinned to the
-selected left-derived counits in schemeDerivedBaseChangeMap. Conjugate c f e.hom
-under the adjunction for f e.hom and the composite of adjV with the adjunction for f:
-this gives d : R(f e.hom) ≅ Rf followed by L(e.inv). Insert the inverse counit of
-adjV after Rf and before Lg, then use c g e.hom and d.inv to construct a.
-The pullback square comparisons q and qA satisfy Lfprime of c g e.hom followed by
-qA = q at L(e.hom) followed by Lgprime of c f e.hom. This is the associativity
-law of c applied to fprime,g,e.hom and gprime,f,e.hom; naturality in the equality
-of the original square and equality transports identify the remaining factors.
-Transpose the required mate equation under the unchanged adjunction for fprime.
-Naturality of qA moves d.inv next to the counit for f e.hom. The conjugate-counit
-identity replaces their composite by c f e.hom inverse followed by the composite
-adjunction counit. The square comparison identity cancels c f e.hom. Naturality of
-q then moves the inverse counit of adjV next to its counit; these cancel and leave
-q followed by Lgprime of the counit for f, exactly the original transpose.
-Injectivity and naturality of the Hom equivalence prove the mate equation for every E.
-No cartesian condition is used; identity coordinates, empty schemes and zero E are
-included by the same equivalence and associativity identities. -/
+and 20.28.2 (0D5T). -/
 theorem exists_derivedBaseChange_codomain_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

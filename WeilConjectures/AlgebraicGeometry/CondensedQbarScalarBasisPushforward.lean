@@ -12,7 +12,6 @@ Source: the scalar-action and adjunction calculations of
 `WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean`.
 The shared unitor and center-transport lemmas are moved here under their original names;
 the source module imports this API, so neither consumer duplicates those proofs.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 /-- The regular-module left unitor composes with the tensor quotient to give the action.
-Source: Colimit/Compatibility.lean, the original `tensorπ_leftUnitor_hom` proof.
-(auxiliary; not a blueprint node) -/
+Source: Colimit/Compatibility.lean, the original `tensorπ_leftUnitor_hom` proof. -/
 lemma tensorπ_leftUnitor_hom (M : Mod C S) :
     tensorObjπ (regular S) M ≫ (λ_ M).hom.hom = γ[S,M.X] := by
   change coequalizer.π _ _ ≫
@@ -53,8 +51,7 @@ lemma tensorπ_leftUnitor_hom (M : Mod C S) :
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 /-- The underlying inverse left unitor inserts the coefficient unit before the tensor quotient.
-Source: Colimit/Compatibility.lean, the original `leftUnitor_inv_hom` proof.
-(auxiliary; not a blueprint node) -/
+Source: Colimit/Compatibility.lean, the original `leftUnitor_inv_hom` proof. -/
 lemma leftUnitor_inv_hom (M : Mod C S) :
     (λ_ M).inv.hom = (λ_ M.X).inv ≫ η[S] ▷ M.X ≫ tensorObjπ (regular S) M := by
   apply (cancel_mono (λ_ M).hom.hom).1
@@ -165,8 +162,7 @@ variable {A B : Type*} [Category A] [Category B]
   (τA : CatCenter A) (τB : CatCenter B)
 include adj in
 /-- A right adjoint preserves central actions whenever its left adjoint does.
-Source: Colimit/Compatibility.lean, the original `map_center_rightAdjoint` proof.
-(auxiliary; not a blueprint node) -/
+Source: Colimit/Compatibility.lean, the original `map_center_rightAdjoint` proof. -/
 lemma map_center_rightAdjoint
     (hF : ∀ X, F.map (τA.app X) = τB.app (F.obj X)) (Y : B) :
     G.map (τB.app Y) = τA.app (G.obj Y) := by
@@ -281,8 +277,7 @@ namespace CategoryTheory
 section CenterTransport
 variable {A B : Type*} [Category A] [Category B] {F G : A ⥤ B}
 /-- Transport preservation of central actions across a natural isomorphism of functors.
-Source: Colimit/Compatibility.lean, the original `map_center_of_iso` proof.
-(auxiliary; not a blueprint node) -/
+Source: Colimit/Compatibility.lean, the original `map_center_of_iso` proof. -/
 lemma map_center_of_iso (e : F ≅ G) (τA : CatCenter A) (τB : CatCenter B)
     (hG : ∀ X, G.map (τA.app X) = τB.app (G.obj X)) (X : A) :
     F.map (τA.app X) = τB.app (F.obj X) := by

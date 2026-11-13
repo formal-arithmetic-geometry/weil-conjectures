@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-!
 # The normalized difference derivation into the diagonal conormal
 
-Source: Stacks Project, Tag 08S2
-(blueprint: lem-sc-diagonal-conormal-derivation-core-exists).
+Source: Stacks Project, Tag 08S2.
 
 Over an open `U`, lift the difference of the projection pullbacks to the actual kernel
 over the intersection of their inverse images of `U`. Apply the tensor-pullback unit
@@ -326,8 +325,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The difference derivation into the diagonal conormal, with its local formula.
 Source: Stacks Project, Tag 08S2. Construct the difference of the two splittings
-of the square-zero diagonal extension and check the formula locally.
-(blueprint: lem-sc-diagonal-conormal-derivation-core-exists). -/
+of the square-zero diagonal extension and check the formula locally. -/
 theorem exists_diagonalConormalDerivation_core (f : X ⟶ S) :
     ∃ D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf,
       ∀ (U : X.Opens) (W : (pullback f f).Opens)

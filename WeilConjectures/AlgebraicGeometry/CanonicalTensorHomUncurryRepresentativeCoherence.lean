@@ -86,27 +86,7 @@ private theorem evaluation_heq {C : Type*} [Category C] [MonoidalCategory C]
 uncurried output. Object equalities and heterogeneous equalities record only transport
 along equality, not transport along arbitrary isomorphisms. No family of functions is
 asserted to exist here.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96.
-(blueprint: lem-pc-tensor-hom-uncurry-representative-coherence).
-
-Proof: Resolve L and L' by K-flat complexes. Hom into the fixed K-injective
-resolutions and tensoring with P or P' invert these quasi-isomorphisms. On these
-models, maps into the Hom complex are chain maps modulo homotopy, since Hom from
-a K-flat complex into a K-injective complex is K-injective. Represent the equalities
-of derived objects by the identity morphisms after equality transport, and compute
-these morphisms by roofs on common K-flat resolutions. The equality of the input
-morphisms makes the two resulting chain maps homotopic after these comparisons.
-Uncurry the degree-minus-one components of this homotopy and extend them over the
-coproduct defining the total tensor. The Hom differential formula gives a homotopy
-between the uncurried chain maps: its boundary is their difference, with the same
-Koszul signs as the total tensor differential. Evaluation commutes with all comparison
-maps, by naturality of the sheaf tensor-Hom adjunction and the Hom projections;
-verify this on every tensor summand and use the coproduct universal property.
-Localizing the homotopy and cancelling the quasi-isomorphisms, with the natural
-Hom resolution isomorphism, tensor model comparison and inverse augmentation,
-gives the asserted equality after equality transport. Express it as HEq to avoid
-choosing casts. This works for zero maps, zero complexes and unbounded complexes;
-no injectivity or flatness of L or L' is assumed. -/
+Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96. -/
 theorem tensorHomUncurry_representative_coherence (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M P' L' M' : CochainComplex

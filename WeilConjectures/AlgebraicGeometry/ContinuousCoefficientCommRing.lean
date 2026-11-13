@@ -26,8 +26,7 @@ variable (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- Pointwise multiplication makes continuous commutative coefficients a commutative ring object.
 Source: the existing `Profinite.isCommMonObj_continuousMapRingObj`, with the coefficient carrier
-in the scheme universe rather than Type 0.
-(auxiliary; not a blueprint node). -/
+in the scheme universe rather than Type 0. -/
 instance isCommMonObj_continuousCoefficientRingObj :
     IsCommMonObj (continuousCoefficientRingObj T) :=
   Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})

@@ -20,8 +20,7 @@ Source: Stacks Project, Tag 03Q6, degree-zero continuity on affine neighbourhood
 The affine-site continuity argument identifies sections on the limiting affine scheme with
 the filtered colimit of sections on the affine stages; the displayed component formula
 ensures that this identification is the cocone built from ν. The proof uses the limit cone
-and the affine/open hypotheses.
-(blueprint: affine-open-sections-canonical-colimit-core) -/
+and the affine/open hypotheses. -/
 theorem affineOpenSections_canonical_colimit_core
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

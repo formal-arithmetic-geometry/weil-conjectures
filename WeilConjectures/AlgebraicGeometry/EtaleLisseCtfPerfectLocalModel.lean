@@ -20,8 +20,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 # Etale lisse finite-Tor perfect local model
 
 Source: literature/stacks-project/etale-cohomology.tex, Tag 09BI,
-lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization
-(blueprint: lem-per-etale-lisse-ctf-perfect-local-model).
+lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization.
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ generated projective `A`-modules (the bounded finite projective model of
 `def-pc-perfect-ring-complex`), the same `P` on every member of a jointly surjective etale
 family. No Noetherian hypothesis on `S` is made.
 Source: literature/stacks-project/etale-cohomology.tex, Tag 09BI,
-lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization
-(blueprint: lem-per-etale-lisse-ctf-perfect-local-model).
+lemma-connected-ctf-locally-constant; finite commutative coefficient ring specialization.
 
 Proof (node steps):
 1. The `H^q(L)` are locally constant with finite values; the first clause of

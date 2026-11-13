@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 /-! # Powered generators of a closed support
 
 Source: Stacks Project, Tag 08EK, proof, first paragraph; Tag 08EJ.
-(blueprint: lem-sc-affine-support-powered-generators).
 -/
 
 @[expose] public section
@@ -46,19 +45,7 @@ private def globalFamily (X : Scheme.{u}) (a : Γ(X, ⊤)) :
 
 /-- A closed subset of an affine scheme with quasi-compact complement is cut out by
 finitely many global functions whose restrictions annihilate a given supported perfect object.
-Source: Stacks Project, Tag 08EK, proof, first paragraph, and Tag 08EJ
-(blueprint: lem-sc-affine-support-powered-generators).
-
-Proof: cover the quasi-compact open complement of T by finitely many principal opens D(a_i)
-contained in it. Regard a_i as compatible families of local sections on X and restrict the
-families to U. The quasi-compact open U of an affine scheme is quasi-separated. The perfect
-object F has quasi-coherent cohomology and is supported on V(a_i|_U), since T is contained
-in V(a_i). Apply exists_pow_smul_eq_zero_of_perfect_supported on U to id_F. Choose a
-positive power for each a_i (increase a zero exponent to one if necessary). These powers
-annihilate F and have exactly the same principal opens as the original functions. Restriction
-of section families commutes with powers, giving the asserted equality on the top open.
-For T = X the empty family suffices; for T empty the argument uses the support assumption
-on F, which forces F to be zero. -/
+Source: Stacks Project, Tag 08EK, proof, first paragraph, and Tag 08EJ. -/
 theorem exists_affine_support_powered_generators (X : Scheme.{u}) [IsAffine X]
     (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)
     (U : X.Opens) (hU : IsCompact (U : Set X))

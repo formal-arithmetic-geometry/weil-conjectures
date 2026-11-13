@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianRawPullbackComposition
 /-! # Coherence of varying-coefficient raw pullbacks
 
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence-base).
 -/
 
 @[expose] public section
@@ -114,37 +113,8 @@ private lemma rawPullbackMap_app {S Y Y' : Scheme.{v}}
 
 
 /-- The explicit raw pullbacks form natural transformations and obey identity and composition.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
-Tag 03CB for inverse-image composition.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence-base).
-
-Proof: For each transition and each cone leg, use the five factors in
-abelianHigherDirectImageRawPullback. The middle factor is an additive derived
-inverse-image functor, and composition with the other four fixed morphisms is additive.
-Thus each component is a homomorphism. If r is a morphism of test objects, naturality
-of upperStarComp and of mapDerivedCategoryPlusSingleFunctor moves its free-sheaf
-restriction through the first two factors. Functor.map_comp moves it through the
-pulled-back class. This is the naturality square, so the component homomorphisms
-bundle as tau and beta. Their displayed component equations hold by construction.
-
-For an identity transition, rewrite D.map_id and use hphiid. The unit laws for
-upperStarComp cancel the source identity comparison against the coefficient identity.
-The corresponding derived identity comparison is natural in the class and commutes
-with its shift. Its comparison on single complexes is the underived identity
-comparison, since both come from the same termwise map; hence the other single
-comparisons cancel. The resulting component is the original class.
-
-For two transitions, expand the two five-factor formulas and use map_comp.
-Naturality of the single comparison moves it past the intermediate source map and
-cancels the intermediate hom/inv pair. The derived composition comparison is natural
-in the class and commutes with shift. Its comparison on single complexes is the
-underived composition comparison (abelianPullbackSingleComposition, specialized to
-these scheme maps). Apply upperStarComp associativity to the two source maps and
-the structure map to combine the source factors, and apply hphicomp to combine the
-coefficient factors. The remaining factors are those of the composite raw pullback.
-Extensionality of homomorphisms and natural transformations proves both laws.
-Neither construction uses hH, continuity, or any geometric hypothesis. In particular
-empty index sets, empty test objects, zero coefficients, and p = 0 are allowed. -/
+Source: Stacks Project, Tag 09Z1, canonical comparison maps;
+Tag 03CB for inverse-image composition. -/
 theorem abelianRawPullback_coherent_base {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

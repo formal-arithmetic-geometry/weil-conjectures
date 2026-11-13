@@ -67,20 +67,7 @@ private theorem coherent_pushforward {X Y : Scheme.{u}} [IsNoetherian Y]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The geometric and coherence part of completed affine base change.
-Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 0887 and 02O5.
-(blueprint: lem-weil-pbc-completed-affine-pullback-objects)
-
-Proof: The ring of sections B of the affine open U is Noetherian. Its J(U)-adic
-completion R is flat over B. The morphism Spec R to Y is the composite of this flat
-map with the affine chart isomorphism and open immersion, so it is flat. On affine
-sections, extension of the ideal J along this composite is J(U)R. The Spec global
-sections isomorphism identifies its ideal sheaf with the displayed J₀; hence
-J.comap g = J₀. The assumed Noetherian R makes S Noetherian, and proper base change
-makes p proper and Z Noetherian. Apply formal-system pullback along g and use the
-ideal equality to obtain G₀ with its specified underlying diagram. Coherent
-pullback along q gives F₀ with its specified underlying module. Proper coherent
-direct image gives coherence of p_*F₀. No comparison morphisms are constructed here.
-The argument allows J = 0, J = 1, zero rings, zero modules and empty schemes. -/
+Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 0887 and 02O5. -/
 theorem completedAffine_pullback_objects
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

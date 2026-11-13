@@ -21,7 +21,6 @@ import Mathlib.RingTheory.Filtration
 /-! # Stabilized-image construction for a formal kernel
 
 Source: Stacks Project, Lemma 087X, claims (a)--(c) and the Artin--Rees calculation.
-(blueprint: lem-weil-pbc-formal-kernel-construction).
 -/
 
 @[expose] public section
@@ -37,29 +36,7 @@ of the inclusion components vanish after transitioning by the same uniform bound
 This statement makes no assertion about the universal factorization property.
 
 Source: Stacks Project, Lemma 087X, claims (a)--(c), with the uniqueness calculation
-expanded from its Artin--Rees bound.
-(blueprint: lem-weil-pbc-formal-kernel-construction).
-
-Proof: Choose a finite affine Noetherian cover. The affine formal-module equivalence
-identifies the morphism with a map f : M → N of finite modules over the adic completion.
-That ring is Noetherian. Apply Artin--Rees both to ker f in M and to im f in N; enlarge
-the bounds to their maximum on the cover. With L = ker f, the second application gives
-f⁻¹(I^l N) ⊆ L + I^(l-c) M. Thus the images in level m+1 equal
-(L + I^(m+1) M)/I^(m+1) M whenever l ≥ m+c. Kernels and images are quasi-coherent;
-the locally Noetherian coherence criterion makes these images coherent. Equality of
-the affine submodules proves stabilization globally. Restrict transitions to those
-images; their inclusions are monic, so the restrictions obey the functor laws and form S.
-Take its shifted level-n quotient by I^(n+1). Its affine sections are
-L/(L ∩ I^(n+c+1) M + I^(n+1) L), which equal L/I^(n+1) L by the first Artin--Rees
-application. These are coherent and annihilated by I^(n+1); the successive quotient
-comparisons identify the required reductions. The induced transitions define K.
-The inclusion followed by the transition to F_n kills the ideal product and therefore
-descends through the quotient, defining ι and the stated compatibility equations.
-Finally ker(ι at n+c) has affine sections
-(L ∩ I^(n+c+1) M)/I^(n+c+1) L. Artin--Rees places its numerator in I^(n+1) L,
-so its transition into L/I^(n+1) L is zero. Zero maps are detected on the affine cover.
-The same construction covers zero modules, I=0, I=O_X, and the empty scheme.
--/
+expanded from its Artin--Rees bound. -/
 theorem coherentFormalModule_kernel_construction {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I)
     (α : F ⟶ H) :

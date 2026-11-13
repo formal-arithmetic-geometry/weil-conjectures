@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 /-! # Compatibility of terminal section identifications
 
 Source: Stacks Project, Tags 03S2, 03CB and 03CC.
-(blueprint: lem-weil-pbc-sets-terminal-cone).
 -/
 
 @[expose] public section
@@ -344,21 +343,7 @@ private lemma terminal_transport_comparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Source: Stacks Project, Tag 03S2 and Sites Tags 03CB and 03CC;
-the canonical comparison calculation in the degree-zero route of Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-terminal-cone).
-
-Proof: Expand terminal transport and section comparison. The composition-unit
-equation for the structure morphism of `W` and the map to `W` identifies the
-iterated pulled-back section with the section pulled back along `p`. The
-restriction-unit equation at the étale object `U` identifies the input section
-with its restriction to the terminal object over `U`. Naturality of both units
-moves this section through the comparison. Associativity of inverse-image
-composition makes the two composition isomorphisms agree. After cancelling
-these isomorphisms, the two maps of pullbacks have first projection `t` and
-second projection the identity, so pullback uniqueness identifies both with the
-explicit diagonal lift below. Equality transports depend only on their endpoints.
-No étaleness assumption is used on `p`, `t` or `t₀`; thus identity maps, empty
-schemes and arbitrary cone legs are included. -/
+the canonical comparison calculation in the degree-zero route of Tag 09YQ. -/
 theorem etaleSetTerminalCone
     {R T : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1)))
     (U W : R.Etale) (q : U ⟶ W) (p : T ⟶ R) (t : T ⟶ U.left) (t₀ : T ⟶ W.left)

@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 # Representations over disjoint components
 
 Source: Stacks Project, Tags 03RV and 02W5, gluing local representations.
-(blueprint: lem-weil-pbc-etale-coproduct-representation)
 -/
 
 @[expose] public section
@@ -174,30 +173,9 @@ private noncomputable def coproductYonedaRestrictionIso {ι : Type u}
 /-- Chosen etale representatives on a family of components represent the transported
 restriction to their coproduct. Finiteness and joint surjectivity onto T are not needed.
 
-Source: Stacks Project, Tag 03RV (lemma-characterize-finite-locally-constant), the
-assembly of local representations; Tag 02W5 (lemma-descent-data-sheaves), the sheaf
-identification in the effective case. This is the disjoint-cover instance of that argument.
-(blueprint: lem-weil-pbc-etale-coproduct-representation)
-
-Proof: Put B = coproduct U_i and V = coproduct Q_i, with the displayed structure map.
-For an etale W over B, let W_i = W times_B U_i. The coprojections U_i to B are open
-immersions, disjoint, and jointly surjective; their base changes give a disjoint etale
-cover of W. Its component square with V is cartesian: the inverse image of U_i in V
-is Q_i, as follows from disjointness and the coproduct universal property. A morphism
-W_i to V over B therefore factors uniquely through Q_i over U_i. Under the localized
-site equivalence, the restriction of the transported sheaf to W_i is the original
-sheaf evaluated at W_i to U_i to T. Apply the given representation isomorphism on
-each W_i. The disjoint-cover sheaf axiom identifies sections on W with the product
-of the sections on W_i. Representable presheaves satisfy the same sheaf axiom, so
-the local maps to Q_i glue uniquely to a map W to V over B. Applying the inverse
-local isomorphisms and gluing sections gives its inverse. Both composites restrict
-to the identity on every W_i, hence are identities by separatedness. For a morphism
-W' to W over B, its pullbacks W'_i to W_i commute with restriction, and naturality
-of the given local isomorphisms followed by uniqueness of gluing proves naturality
-of the assembled maps. These maps are the claimed presheaf isomorphism. For an empty
-index type B, V and every W are empty, and the empty-cover axiom makes the section
-sets singletons; thus the same construction works. No bound on the index set or
-on the ranks is used. -/
+Source: Stacks Project, Tag 03RV, the
+assembly of local representations; Tag 02W5, the sheaf
+identification in the effective case. This is the disjoint-cover instance of that argument. -/
 theorem etaleCoproduct_representation
     {ι : Type u} (T : Scheme.{u})
     (E : Sheaf T.smallEtaleTopology (Type (u + 1)))

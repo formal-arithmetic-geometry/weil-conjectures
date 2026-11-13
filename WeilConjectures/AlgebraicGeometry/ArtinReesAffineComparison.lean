@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Abelian.Basic
 /-! # Affine comparison for ideal products and intersections
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01YA, affine reduction in the proof;
-Algebra, Tag 00IN (blueprint: lem-weil-pbc-artin-rees-affine-comparison).
+Algebra, Tag 00IN.
 -/
 
 @[expose] public section
@@ -230,23 +230,7 @@ comparison only; neither coherence, a Noetherian hypothesis, nor an Artin-Rees b
 is assumed.
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01YA, affine reduction in the proof;
-Schemes, Tags 01I8 and 01IC
-(blueprint: lem-weil-pbc-artin-rees-affine-comparison).
-
-Proof: Products by the powers of I are quasi-coherent, including the zeroth power.
-For every t, realize H_t = I^t F ∩ G as the kernel of G → F/(I^t F).
-The quotient, kernel, and ideal products of this kernel are quasi-coherent.
-Evaluation on the affine open is exact on quasi-coherent modules. Thus H_t(U)
-is I(U)^t F(U) ∩ image(G(U) → F(U)), with its inclusion into F(U).
-The affine product formula identifies the image of I^(n-c) H_c on U with
-I(U)^(n-c) (I(U)^c F(U) ∩ image(G(U) → F(U))). The assumed module equality
-therefore identifies the affine sections of I^(n-c) H_c and H_n, compatibly
-with both inclusions into F. Restrict these quasi-coherent modules to U.
-The affine tilde/global-sections equivalence transports the equality into an
-isomorphism of the two submodules of F restricted to U, commuting with their
-inclusions. Evaluate this isomorphism on any W ≤ U to obtain equality of ranges.
-The empty open, zero modules, zero or unit ideal, and c=0 or n=0 need no exclusion:
-exactness and the affine equivalence hold for them, and I^0 is the unit ideal. -/
+Schemes, Tags 01I8 and 01IC. -/
 theorem artin_rees_affine_comparison {X : Scheme.{u}}
     (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]
     (g : G ⟶ F) [Mono g] (I : X.IdealSheafData) (U : X.affineOpens) (c n : ℕ)

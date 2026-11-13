@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 # Pullback and restriction between two opens
 
 Source: Stacks Project, Tag 01F7; the restriction comparison in the proof of Tag 0A50.
-(blueprint: lem-weil-pbc-open-cohomology-restriction-naturality).
 -/
 
 @[expose] public section
@@ -54,21 +53,7 @@ private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback commutes with restriction between nested opens.
 Source: Stacks Project, Tag 01F7; agent-written consequence of pullback functoriality and
-inverse-image composition, also used in the proof of Tag 0A50.
-(blueprint: lem-weil-pbc-open-cohomology-restriction-naturality)
-
-Proof: Write i : A → B and i' : g⁻¹A → g⁻¹B for the two inclusions, and g_A and g_B
-for the restricted morphisms. The equality i' ≫ g_B = g_A ≫ i follows by composing
-with the monomorphism B.ι and using the restriction identities. Apply composition
-functoriality of cohomologyMap to these two factorizations. Naturality with respect to
-coefficient morphisms moves the inverse composition identifications through pullback.
-The associativity law for upperStarComp, first for i', (g⁻¹B).ι, g and then for g_A,
-i, B.ι, identifies the resulting coefficient morphisms: each transports pullback along
-i' ≫ (g⁻¹B).ι ≫ g = g_A ≫ i ≫ B.ι to restriction of g⁻¹G to g⁻¹A.
-Cancel adjacent inverse composition comparisons and apply Sheaf.H.map_comp_apply.
-This gives precisely the equality below. No cover or connecting morphism is involved.
-For A = B this is the identity comparison law; for A empty both sides land in the
-cohomology of the empty scheme; for g the identity it is the identity pullback law. -/
+inverse-image composition, also used in the proof of Tag 0A50. -/
 theorem openCohomologyPullback_restriction {X Y : Scheme.{u}} (g : Y ⟶ X)
     {A B : X.Opens} (h : A ≤ B)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

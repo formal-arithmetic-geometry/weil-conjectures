@@ -11,8 +11,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/def-fd-kernel.md,
 application paragraph (vector bundle, its dual, evaluation pairing `b(x,xi) = <x,xi>`);
-used for the base-changed pairing in lem-fd-base-change.proof.md
-(blueprint: def-fd-dual-bundle-pairing).
+used for the base-changed pairing in lem-fd-base-change.proof.md.
 
 The simultaneous local charts give a bundle and its dual, including their evaluation.
 Preservation of evaluation forces the transition functions of the two factors to be linear
@@ -34,7 +33,7 @@ frames. The product chart formula is `sum x_i * xi_i`. The two cartesian squares
 local total spaces with restrictions to the open cover. Empty covers on the empty base
 and the empty coordinate sum in rank zero are allowed.
 Source: latest blueprint, def-fd-kernel.md, application paragraph (dual bundle and
-evaluation pairing) (blueprint: def-fd-dual-bundle-pairing). -/
+evaluation pairing). -/
 structure DualBundlePairing {S V Vdual : Scheme.{u}} (π : V ⟶ S) (πdual : Vdual ⟶ S)
     (r : ℕ) (b : Γ(pullback π πdual, ⊤)) where
   I : Type u

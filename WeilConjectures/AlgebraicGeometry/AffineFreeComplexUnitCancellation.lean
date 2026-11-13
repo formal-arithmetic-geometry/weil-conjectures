@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeComplexModuleLift
 
 /-! # Cancelling a unit coefficient in an affine free cochain complex
 
-Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`).
-(blueprint: lem-pc-affine-free-complex-unit-cancellation)
+Source: Stacks Project, Tag 00MT.
 -/
 
 @[expose] public section
@@ -76,23 +75,7 @@ private def reverseHomotopyEquiv {V : Type*} [Category V] [Preadditive V]
 
 /-- A unit coefficient removes a contractible summand, with explicit complementary sizes.
 
-Source: Stacks Project, Tag 00MT (`lemma-add-trivial-complex`).
-(blueprint: lem-pc-affine-free-complex-unit-cancellation)
-
-Proof: Identify each free sheaf with tilde of the free module on its indicated finite
-basis, using tildeFinsupp. Full faithfulness of tilde lifts the conjugated differentials
-and their square-zero equations to a module complex. The global-sections isomorphism
-identifies the displayed coefficient with its module coefficient and preserves units.
-Reverse degree j to -j, reindex the ULift bases by Fin, and apply
-ChainComplex.exists_splitting_of_isUnit_entry at -i. Its complement has sizes n(i)-1
-and n(i+1)-1 at the two changed degrees, and the original sizes elsewhere. In the
-identity summand the reverse differential is the contracting homotopy: it is the
-inverse differential between the two nonzero terms, and zero elsewhere. The complex
-relations make its homotopy identity hold in all degrees. Projection to the complement
-and inclusion back are inverse up to this contraction. Apply the additive tilde functor
-to these maps and the homotopy, and reverse the grading back. In unchanged degrees
-the identity summand is zero, so the termwise splitting gives P'.X j ≅ P.X j.
-This argument needs neither a local ring nor a residue differential nor support bounds. -/
+Source: Stacks Project, Tag 00MT. -/
 theorem exists_affine_free_complex_unit_cancellation (R : CommRingCat.{u})
     (P : CochainComplex (Spec R).Modules ℤ) (n : ℤ → ℕ)
     (e : ∀ j : ℤ, P.X j ≅ SheafOfModules.free

@@ -25,28 +25,7 @@ open Scheme PadicAlgCl
 
 Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, Hom paragraph,
 and the coefficient construction in step 3 of
-`prop-weil-pbc-qbar-condensed-two-colimit`.
-(auxiliary; not a blueprint node)
-
-Proof: set the object at i to the termwise extension F -> H(i), restricted to E.
-For each transition use the coefficient inclusion tensor the identity of C; the
-coefficient inclusions compose and are E-linear. Take termwise extension to the
-finite-subfield-valued condensed algebraic closure, restricted to E, for the vertex.
-The coefficient ring colimit remains a colimit after the final functor H and
-pullback to X. Balanced tensor is a coequalizer of action maps, so preservation
-by ordinary tensor and commutation of colimits give the colimit degreewise.
-The underlying E-module functor creates these colimits; complex colimits are
-computed degreewise. Exactness of scalar extension and restriction identifies
-localization of each termwise complex with the stated derived functor values.
-Use these identifications as the comparison isomorphisms. The unit and tensor
-multiplication formulas commute with coefficient inclusions: on complexes both
-maps send m to 1 tensor m followed by the same inclusion. Localize this equality
-of natural transformations and use the factorization equations for
-leftDerivedFunctorCompIso and leftDerivedFunctorNatIso to identify the comparisons
-with derivedExtendScalarsCompIso. This gives the equation for the
-canonical localized cocone arrow. No boundedness is needed: each construction is degreewise and
-localization uses exact functors. Zero complexes and the empty scheme give zero
-diagrams and satisfy the same formulas. -/
+`prop-weil-pbc-qbar-condensed-two-colimit`. -/
 theorem exists_condensed_coefficient_complex_model
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E F : FiniteIntermediateField ℓ)

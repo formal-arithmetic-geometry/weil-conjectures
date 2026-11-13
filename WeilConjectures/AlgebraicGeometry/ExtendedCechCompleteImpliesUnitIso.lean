@@ -17,7 +17,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ComplementaryTrunc
 /-! The complete-to-unit direction of the extended Cech criterion.
 
 Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-complete-implies-unit-isIso).
 
 Proof: for one section, apply contravariant derived internal Hom to the degreewise
 split sequence O[1/s][-1] → [O → O[1/s]] → O. Vanishing on the localization makes
@@ -376,8 +375,7 @@ private theorem derived_isIso_of_cover
 
 /-- A locally derived complete object has invertible augmented extended Cech unit.
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-complete-implies-unit-isIso). -/
+Source: Stacks Project, algebraization.tex, Tags 099B and 099F. -/
 theorem ringedExtendedCech_complete_implies_unit_isIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

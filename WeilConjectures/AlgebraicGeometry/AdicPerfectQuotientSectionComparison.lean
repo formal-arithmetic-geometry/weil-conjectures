@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Constant quotient sections and scalar transitions
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; Tag 09C6.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -474,45 +473,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 The right adjoints and the successor mates here are the already constructed ones;
 this statement neither constructs an adjunction nor asserts a unit equation.
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; proetale.tex,
-Tag 09C6, the ordinary constant finite-quotient tensor calculation.
-(auxiliary; not a blueprint node).
-
-Proof: write T for the coefficient site and L for constant module realization on
-its slice. Reassociate scalar extension and commute it with slice restriction.
-The completion cone equation identifies the composite coefficient map with
-A -> A/J^(n+1). The generator-normalized constant scalar comparison
-moduleComparison_tensor identifies this direct scalar extension with the constant
-quotient-ring realization of (A/J^(n+1)) tensor_A M. The algebraic equivalence
-quotTensorEquivQuotSMul identifies that tensor product with M/J^(n+1)M,
-naturally in M. Restrict scalars to A and use sectionsIso to identify ordinary
-constant module sections with L followed by terminal sections. Invert these
-comparisons to obtain e for the normalized tensor/sections adjunction.
-
-The scalar-extension unit inserts 1 in a tensor. The balancing map multiplies
-successive scalar factors. Consequently both successor composites on a constant
-quotient class of m send it to the class of 1 tensor m at the lower level.
-This is equality of morphisms of constant module sheaves before taking sections:
-constant presheaf generators determine a sheaf morphism by the sheafification
-universal property. Naturality extends the generator calculation through the
-constant scalar comparison and the algebraic tensor-quotient equivalence.
-Evaluation at the terminal slice object gives the displayed equation on all
-sections, including sections which are only locally constant.
-
-Finally sectionModel_exists constructs an adjunction tower from these concrete
-sections functors, and sectionModel selects from this completely proved theorem.
-For the selected right adjoints use the unique right-adjoint isomorphisms t_n
-from the normalized sections adjoints, characterized by eta_can followed by
-t_n(F_n M) equalling the selected unit. Replace e_can,n by e_can,n followed by
-t_n(F_n M). The selected successor map is the mate of inverse balancing:
-the stored unit identity characterizes that mate uniquely. Indeed, precompose
-naturality at the upper counit by the upper unit and use the right triangle
-identity to recover every component from this unit identity. Thus it is t_(n+1)
-inverse, followed by the normalized mate, followed by C_n(t_n). Naturality of t_n
-with respect to theta_n cancels the adjacent inverse factors and gives the
-displayed equation with exactly AdicQuotientSections.step. No choice of a witness
-of this theorem is used to define an object. The calculation remains valid for
-zero modules, the zero ring, J = 0 and J = top; all maps then have their usual
-quotient or zero interpretations. -/
+Tag 09C6, the ordinary constant finite-quotient tensor calculation. -/
 theorem adicPerfectQuotientSectionComparison (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

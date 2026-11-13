@@ -27,19 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false
 of the extended affine ideal after completion base change.
 
 Source: Stacks Project, Tag 088B, paragraph defining Y', X' and the pullback of K;
-stability of isomorphisms under base change.
-(blueprint: lem-weil-pbc-completed-affine-complement-base-change)
-
-Proof: Let g be the completion map followed by the inverse affine chart and the
-inclusion of U. On U the support of K is the zero locus of K(U). Under the affine
-chart this is the prime-spectrum zero locus. The inverse image of this zero locus
-under Spec(B -> R) is the zero locus of K(U)R. Transporting the latter ideal along
-GammaSpecIso shows that the complement of Q.support is g inverse of the complement
-of K.support. Base change f over this open: associativity of pullbacks identifies its
-projection with the base change of pullback.snd f (the inclusion of K's complement).
-That morphism is an isomorphism by hypothesis, and its base change is an isomorphism.
-This argument uses no flatness or properness, and includes empty complements and a
-zero completion ring. -/
+stability of isomorphisms under base change. -/
 theorem completedAffine_complement_base_change
     {X Y : Scheme.{u}} (J K : Y.IdealSheafData) (f : X ⟶ Y)
     (hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl)))

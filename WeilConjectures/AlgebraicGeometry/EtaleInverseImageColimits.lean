@@ -33,7 +33,7 @@ Second, apply `lem-weil-pbc-left-adjoint-preserves-colimits` (Lemma 0038(1)) to 
 adjunction and any diagram F. The image of its colimit cocone is a colimit cocone.
 The canonical map from the chosen colimit of the image diagram to the image of the
 chosen colimit is induced by the images of the coprojections
-(`def-weil-pbc-category-colimit`). The two colimit universal properties give its
+. The two colimit universal properties give its
 inverse: the composites agree with the identities on every coprojection and hence
 are identities by uniqueness. Thus the canonical map is an isomorphism. -/
 theorem inverseImage_preservesColimits {U V : Scheme.{u}} (f : U ⟶ V) :

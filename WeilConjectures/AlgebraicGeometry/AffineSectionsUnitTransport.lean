@@ -103,28 +103,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport invertibility of the sections comparison across the canonical affine
 isomorphism, for an arbitrary complex of module sheaves on its spectrum.
 Source: Stacks Project, Tag 06Z0, identification of derived sections; the transport
-argument is given below.
-(blueprint: new-affine-sections-unit-transport)
-
-Proof: Put X = Spec Γ(S, top), E = restriction along S.toSpecΓ, and
-G = sections on X followed by scalar restriction along (ΓSpecIso Γ(S, top)).inv.
-Since S is affine, S.toSpecΓ is an isomorphism. Restriction along its inverse is
-inverse to E: restrictFunctorComp, restrictFunctorCongr and restrictFunctorId
-give both composites. Hence E is an exact equivalence and preserves K-injective
-complexes. Evaluation of restrictAppIso at the top open, whose image is top,
-gives E followed by sections on S naturally isomorphic to G. The scalar relation
-is S.toSpecΓ.appTop = (ΓSpecIso Γ(S, top)).hom, so its inverse is precisely the
-scalar restriction in G, not the hom in the other direction.
-Choose a K-injective resolution i : C -> I. Its image E(i) is a K-injective
-resolution of E(C). In these resolution models the two right-derived units are
-the localized maps G(i) and Γ_S(E(i)), respectively. The preceding natural
-isomorphism identifies these maps up to invertible endpoint maps. Therefore
-invertibility of the first implies invertibility of the second. Uniqueness of
-right-derived functors, compatible with their units, transfers this conclusion
-to the independently chosen derived categories in the statement. Neither
-boundedness nor quasi-coherence is needed. For the zero ring, zero complex,
-and identity affine isomorphism the same equivalence and resolution argument
-applies without a nonzero-object assumption. -/
+argument is given below. -/
 theorem affineSectionsUnit_transport (S : Scheme.{u}) [IsAffine S]
     [(Scheme.Modules.restrictFunctor S.toSpecΓ).Additive]
     (C : CochainComplex

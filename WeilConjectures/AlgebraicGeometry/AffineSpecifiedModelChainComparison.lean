@@ -24,7 +24,6 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Specified affine perfect models and base-change comparison
 Source: Stacks Project, perfect.tex, Tag 09RE, Tags 08EB, 06Z0 and 08DW.
-(blueprint: lem-pc-affine-specified-model-chain-comparison).
 -/
 @[expose] public section
 universe u w
@@ -52,32 +51,7 @@ private theorem scalarExtension_bounded_finite_projective
 
 /-- Base-change comparison from genuine affine perfect models.
 Source: Stacks Project, perfect.tex, lemma-descend-homomorphisms, Tag 09RE;
-Tags 06Z0 and 08DW.
-(blueprint: lem-pc-affine-specified-model-chain-comparison).
-
-Proof: Let B be the ring of global sections of Y, and give B its R(i)-algebra
-structure via s. On the tail form F(j) = B tensor over R(i) with R(j).
-Extension of scalars preserves the colimit, so its colimit is B tensor over
-R(i) with c.pt. The map r : B to F(i) is an isomorphism. Tensor and pullback
-universal properties identify their spectra with the prescribed pullbacks.
-The isomorphism t identifies Spec B with Y. Use the composite of t.hom
-with s to give B its R(i)-algebra structure. The factorization he identifies
-e with exact pushforward along t.hom. The
-isomorphisms hPE and hQK therefore identify the two specified tilde complexes
-with P and Q. Extend E₀ and K₀ along r to obtain E and K. Extension of scalars
-preserves degreewise zero objects, finite generation and projectivity, giving
-both bounded finite-projective conditions. Their projective terms are flat,
-and bounded flat complexes are K-flat, so the natural affine tilde/pullback
-comparison computes all pullbacks by termwise scalar extension. Compose the
-fully faithful affine quasi-coherent derived equivalence with scheme-isomorphism
-transport and conjugate by the specified object isomorphisms. This gives stage
-and limit Hom equivalences. On chain maps, naturality of tilde base change
-identifies scalar extension with pullback. Tensor associativity and the fixed
-counit-pinned derived composition comparison identify the conjugations with
-perfectStageMap and perfectLimitMap, proving the two equations. The argument
-uses neither morphism descent nor homotopy descent. It applies to zero rings
-and empty spectra, because the tensor and pullback universal properties and
-the affine equivalence do; the tail has its initial object i. -/
+Tags 06Z0 and 08DW. -/
 theorem exists_affineSpecifiedModelChainComparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

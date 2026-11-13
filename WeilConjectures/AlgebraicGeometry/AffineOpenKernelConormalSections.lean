@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OpenKernelConormalTransport
 /-! # Conormal sections on an affine closed chart
 
 Source: Stacks Project, Tags 01R3 and 0096.
-(blueprint: lem-sc-affine-open-kernel-conormal-sections).
 -/
 
 @[expose] public section
@@ -66,28 +65,7 @@ private theorem affineOpen_conormal_transport_comp
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual kernel conormal on an affine closed chart, with its original unit.
-Source: Stacks Project, Tag 01R3 (1), (2), and Tag 0096.
-(blueprint: lem-sc-affine-open-kernel-conormal-sections).
-
-Proof: Restrict g to i : U → W. The preimage equality gives a Cartesian square
-with the two open inclusions. The section map of i is the displayed map, after
-identifying global sections of the open subschemes with sections on the opens.
-Its surjectivity makes i a closed immersion, since both charts are affine.
-Open restriction preserves kernels: on an open T of W, the original structure
-module map and i's structure module map are identified by the section maps of
-the open inclusions; their kernels and inclusions therefore agree. The kernel
-of the closed immersion is its ideal module, so the restricted actual kernel
-is i.ker.toModules. Tensor pullback commutes with these restrictions. Indeed,
-compose the inverse-image/direct-image adjunctions with extension of scalars;
-the resulting left adjoints are canonically isomorphic. The canonical units
-commute with the isomorphism: on a section s both are the sheafification of
-1 ⊗ s, by the unit formula of exists_tensorPullbackAdjunction. Apply
-affine_conormal_sections_existence to i on the top affine open of W, using
-r followed by the inverse open-section isomorphism. Transport this equivalence
-back across the open-section and kernel identifications. Its unit formula is
-the displayed restriction of the original unit. Scalars act through g.appLE
-composed with r, giving R-linearity. Different inclusion proofs give identical
-maps by proof irrelevance. Empty charts reduce to the same zero-module maps. -/
+Source: Stacks Project, Tag 01R3 (1), (2), and Tag 0096. -/
 theorem affineOpen_kernel_conormal_sections {X Y : Scheme.{u}} (g : X ⟶ Y)
     (W : Y.affineOpens) (U : X.affineOpens)
     (h : U.1 ≤ g ⁻¹ᵁ W.1) (hpre : g ⁻¹ᵁ W.1 = U.1)

@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 # Finite affine sections generating one geometric stalk
 
 Source: Stacks Project, Tag 095N, finite generation at a fixed geometric point.
-(blueprint: lem-weil-pbc-affine-free-finite-stalk-generation).
 -/
 
 @[expose] public section
@@ -109,17 +108,7 @@ private theorem represents_affine_stalk_element
 sheafified affine free representables. No constructibility or compactness is needed.
 
 Source: Stacks Project, Tag 095N, the sentence using finite type of geometric stalks,
-and Tag 03DI (the free representable adjunction).
-(blueprint: lem-weil-pbc-affine-free-finite-stalk-generation).
-
-Proof: Choose finitely many module generators of the stalk. Each is represented by a
-section on a pointed etale neighbourhood, by the filtered-colimit description of the
-stalk. Shrink that neighbourhood to an affine open containing the marked point. The
-free-module and sheafification adjunctions turn this section into a map from P_W to F.
-On the geometric stalk, the free generator at the chosen lift maps to the chosen germ.
-The resulting finite coproduct map is therefore surjective. Remove repeated pairs (W,map)
-to obtain a finite set without changing the span of their germs. A zero stalk permits
-the empty set, so neither nonemptiness of X nor nonzeroness of Λ is needed. -/
+and Tag 03DI (the free representable adjunction). -/
 theorem exists_finset_affine_free_stalk_surjective
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)

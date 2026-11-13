@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Clo
 # Assembling ordinary integral models along a finite stratification
 
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -591,7 +590,6 @@ private theorem stratification_mem
 suffice to construct an ordinary integral model of the whole rational sheaf.
 Source: Bhatt--Scholze, the filtration and Ext1 argument at the end of Lemma 6.8.13
 and the essential-surjectivity argument of Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
 
 Proof in words. Noetherian induction produces a finite increasing chain of opens from
 empty to X whose successive differences lie in individual strata. The counits

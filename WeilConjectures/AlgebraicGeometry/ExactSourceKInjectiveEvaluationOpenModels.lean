@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveSchemeEvaluationModels
 /-! # K-injective models for evaluation on the open scheme
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-exact-source-kinjective-evaluation-open-models).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The standard localization is available on the open scheme independently of the
 specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-exact-source-evaluation-open-models). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -45,26 +43,8 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
 set_option maxHeartbeats 1000000 in
 -- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
-Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
-08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex).
-(blueprint: lem-pc-exact-source-kinjective-evaluation-open-models).
-
-Proof: Transport P,F and the degree-zero unit through the exact over-equivalence.
-The equivalence preserves the tensor inclusions and Hom projections because it
-preserves their coproduct and product universal properties. Thus it preserves the
-Hom differential, the signed total differential, and the stated evaluation formula.
-It preserves K-injectivity by its exact inverse. Resolve the transported unit by
-its fixed K-injective resolution. Hom(P,-) preserves that resolution quasi-isomorphism,
-so localization identifies the ordinary dual with RHom(K,1). Since F is K-injective,
-the Hom factorization identifies Hom(P,F) with RHom(K,N). K-flatness of the ordinary
-dual identifies its total tensor with F with N tensor RHom(K,1); this constructs a.
-Use these comparisons for b as well. Replace the tensor factors by K-flat resolutions
-in the canonical tensor-Hom representative equation. Uncurry the identity of the
-dual. Following a degree-(p,q) tensor inclusion and an r-th Hom projection gives
-unit-action evaluation if r+q=0, and zero otherwise. These are precisely hf.
-Product projections and coproduct inclusions detect equality, and localization
-and cancellation of the Hom resolution isomorphisms give the asserted square.
-No inverse of f is used. The same argument applies to zero complexes and empty opens. -/
+Source: Stacks Project, cohomology.tex, Tags 08DJ,
+08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex). -/
 theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory U.toScheme)

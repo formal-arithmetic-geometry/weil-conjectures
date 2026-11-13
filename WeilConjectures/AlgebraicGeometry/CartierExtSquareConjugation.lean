@@ -12,8 +12,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-! # Conjugation of a Cartier coefficient Ext square
 
 Source: blueprint sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md,
-coefficient extension and transport by comparison isomorphisms
-(blueprint: lem-amb-cartier-ext-square-conjugation).
+coefficient extension and transport by comparison isomorphisms.
 
 The statement concerns arbitrary sheaves and degree-two classes on the ordinary
 pro-etale site. Its transported classes and coefficient maps are expanded explicitly.
@@ -31,17 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A coefficient Ext square remains commutative after conjugating its four objects.
 Source: blueprint sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md,
-coefficient extension and transport by comparison isomorphisms
-(blueprint: lem-amb-cartier-ext-square-conjugation).
-
-Proof: write `[f]` for `Ext.mk₀ f` and let `F` be restriction of scalars. The
-exact-functor Ext identities expand the left side, after which associativity and
-`F.map (βa.inv ≫ βa.hom) = 𝟙` cancel the adjacent comparison maps. The result is
-`[βb.hom] (([η₀] · F_*ga) · [F.map qa.hom])`. Expanding the right side cancels
-`qb.hom ≫ qb.inv` and gives `[βb.hom] ((gb · [θ₀]) · [F.map qa.hom])`.
-The assumed square identifies the middle factors. Only functoriality,
-associativity, and inverse-isomorphism laws enter, so no Cartier or flatness
-hypothesis is needed. -/
+coefficient extension and transport by comparison isomorphisms. -/
 theorem cartier_ext_square_conjugation
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})

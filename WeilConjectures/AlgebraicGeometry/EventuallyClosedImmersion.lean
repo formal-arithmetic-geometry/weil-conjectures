@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 /-!
 # Eventual closed immersions in inverse systems
 
-Source: Stacks Project, Limits, Lemma 0A0N
-(blueprint: lem-weil-pbc-eventually-closed-immersion).
+Source: Stacks Project, Limits, Lemma 0A0N.
 -/
 
 @[expose] public section
@@ -155,31 +154,7 @@ transitions, quasi-compact and quasi-separated stages, and locally finite type s
 maps, and its limit structure map is a closed immersion, then all sufficiently late
 structure maps are closed immersions.
 
-Source: Stacks Project, Limits, Lemma 0A0N
-(blueprint: lem-weil-pbc-eventually-closed-immersion).
-
-Proof:
-1. Closed immersions are affine (lem-weil-pbc-closed-immersion-integral-separated-uc).
-   Apply eventually_affine (lem-weil-pbc-eventually-affine) to obtain an affine
-   starting structure map. Choose a finite affine open cover of T.
-2. On each cover open U, the starting preimage is affine and its section ring is
-   finitely generated over Γ(T, U) (lem-weil-pbc-lft-affine-pairs). The limit
-   structure-map section homomorphism is surjective
-   (lem-weil-pbc-closed-immersion-affine-cover-criterion).
-3. Induct on the finite generators, carrying a surjective comparison from the
-   starting ring to the current stage ring. Lift the limit image of the next
-   generator to Γ(T, U). Its difference from that lift vanishes in the limit.
-   Mathlib's exists_app_map_eq_zero_of_isLimit makes this difference vanish at a
-   later stage; it bundles the restricted-open limit and section eventual-zero
-   arguments (lem-weil-pbc-limit-cone-affine-projections-opens and
-   lem-weil-pbc-limit-global-sections-colimit). Closed-immersion transitions give
-   affine preimages and surjective comparisons and preserve the previous lifts.
-4. Algebra.adjoin_induction and surjectivity of the comparison show that the base
-   section homomorphism is surjective at the selected stage. Affine preimages and
-   section surjectivity persist under every later closed-immersion transition.
-5. Choose a common upper bound for the finitely many selected stages, including
-   the empty-cover case. The affine-cover closed-immersion criterion proves that
-   every structure map at or beyond that bound is a closed immersion. -/
+Source: Stacks Project, Limits, Lemma 0A0N. -/
 theorem eventually_isClosedImmersion_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]

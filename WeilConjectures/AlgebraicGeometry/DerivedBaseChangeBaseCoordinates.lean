@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 /-! # Transport of the derived mate in its base coordinates
 
 Source: Stacks Project, Tags 08HY, 0D5S and 0D5T.
-(blueprint: lem-pc-derived-base-change-base-coordinates).
 -/
 
 @[expose] public section
@@ -27,34 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Change the two base schemes, keeping the upper-left scheme fixed.
-Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T.
-(blueprint: lem-pc-derived-base-change-base-coordinates).
-
-Proof: Use the coherent pullback comparisons selected in
-exists_derivedPullbackComposition and the derived adjunctions pinned to their counits
-in schemeDerivedBaseChangeMap. For an isomorphism s, the unit laws and comparisons
-for s.hom and s.inv identify their composite pullbacks with the identity. Thus the
-pullback along s.hom is an equivalence, whose inverse is pullback along s.inv.
-The right adjoint of this equivalence is its inverse. Uniqueness of right adjoints,
-using the pinned adjunction, identifies R(s.inv)_* with L(s.hom)^*.
-Write V = L(eT.hom)^*. The comparison for f' followed by eT.hom, and its right
-adjoint mate, followed by eT.inv give b : Rf'_* ≅ R(f' eT)_* R(eT.inv)_*.
-Similarly the right-adjoint comparison for f eS gives
-R(f eS)_* ≅ Rf_* R(eS.hom)_*. Compose with the pullback comparison for
-(eT.inv g) eS and the inverse-equivalence counits for eS and eT to obtain
-Rf_* Lg^* ≅ R(f eS)_* L(eT.inv g eS)^* R(eT.inv)_*, namely a.
-These are mates of the selected comparisons, not independent choices of adjunctions.
-To check the displayed square, apply V's inverse-equivalence identification and
-transpose under L(f' eT)^* ⊣ R(f' eT)_*. By the defining mate formula, the right
-side transposes to Lg'^* applied to the counit for f eS, with the comparison for
-g' (f eS). The composite-adjunction counit formula expresses this counit as the
-counit of eS followed by that of f. The inverse-equivalence counit cancels the eS
-factor of a. On the left, the definition of b as the right-adjoint mate cancels
-the eT factor and leaves the transpose of the original mate. Pullback associativity
-and the two unit laws identify both expressions with Lg'^* of the counit of f.
-The Hom equivalence and the equivalence along eT are faithful, giving the equation.
-All comparisons are natural, so it holds for every E. The argument uses only a
-commutative square, and applies to identity coordinates, empty schemes and zero E. -/
+Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T. -/
 theorem exists_derivedBaseChange_base_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

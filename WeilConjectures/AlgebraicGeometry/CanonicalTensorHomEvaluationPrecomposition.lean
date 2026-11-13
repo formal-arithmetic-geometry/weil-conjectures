@@ -13,7 +13,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # One-variable localized evaluation compatibility
 
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-hom-evaluation-precomposition).
+Tags 0A90 and 0A96.
 -/
 
 @[expose] public section
@@ -152,21 +152,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- One-variable compatibility of the explicit localized identity evaluation.
 Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-hom-evaluation-precomposition).
-
-Proof: Evaluation is dinatural in the complex being evaluated. Resolve L and L' by
-K-flat complexes and represent b on a common K-flat roof. Hom into I(M) is
-K-injective on these models, so the comparison is computed by chain maps modulo
-homotopy. On each total tensor summand, the Hom projection and sheaf tensor-Hom
-adjunction identify evaluation after Hom precomposition with evaluation after
-applying the comparison in the tensor factor. Extend over the coproduct to get the
-chain-map identity. Uncurry the degree-minus-one components to carry chain
-homotopies to tensor homotopies using the signed Hom differential formula. Apply
-Q; naturality of its lax tensor comparison and the Hom resolution comparison
-identifies the resulting composites. Cancel the localized roof denominators and
-K-flat resolutions. This proves the displayed identity for arbitrary unbounded
-L and L'; zero complexes, zero maps, and identity comparisons obey the same
-summand identity. -/
+Tags 0A90 and 0A96. -/
 theorem tensorHomEvaluation_precomposition (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L L' M : CochainComplex

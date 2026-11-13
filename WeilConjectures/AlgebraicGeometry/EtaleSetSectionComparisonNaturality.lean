@@ -9,8 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 
 /-! # Restriction naturality of the section comparison
-Source: Stacks Project, Sites Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-sets-section-comparison-naturality). -/
+Source: Stacks Project, Sites Tags 03CB and 03CC. -/
 
 @[expose] public section
 
@@ -18,15 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites Tags 03CB and 03CC, inverse-image units and composition.
-(blueprint: lem-weil-pbc-sets-section-comparison-naturality).
-Proof: expand the section comparison into the adjunction unit, the composition
-isomorphism, the equality transport, and pullback pasting. Each of the first three
-factors is a morphism of sheaves, hence its components commute with restriction along
-V ⟶ W. The pullback-pasting isomorphism is natural in the étale object, so its components
-also commute with that restriction after applying the contravariant presheaf. Compose
-these four naturality equations using associativity. This gives the displayed square
-for every section, without any affineness or limit hypotheses. -/
+/-- Source: Stacks Project, Sites Tags 03CB and 03CC, inverse-image units and composition. -/
 theorem etaleSetSectionComparison_naturality
     {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1)))

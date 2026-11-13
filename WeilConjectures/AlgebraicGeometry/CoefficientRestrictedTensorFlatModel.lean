@@ -30,20 +30,7 @@ constant tensor computes the restricted derived tensor. This comparison has no f
 module, Noetherian ring, or local constancy hypotheses.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
-lemma-pullback-tensor-product, and Tag 06YU, definition-derived-tor.
-(auxiliary; not a blueprint node).
-
-Proof: use the target constant-scalar equivalence to regard exact inverse image of K as
-an intrinsic derived object L. The exact functors commute with homology; hence the bound
-on K is a bound on L. Choose a bounded-above flat-term K-flat representative P of L using
-the existing bounded flat representative theorem. Its derived scalar image represents
-inverse image of K by the equivalence counit and the representative factorization. Apply
-the derived restricted tensor comparison to K and M. Transport its first target tensor
-factor from L to Q(P). The K-flat single-tensor comparison identifies this tensor with Q
-of termwise tensorRight by the constant realization of M. The braiding identifies that
-complex with termwise tensorLeft. Finally use the exact functor's representative
-factorization to obtain the stated comparison in the fixed-scalar derived category.
-No finiteness or flatness of M is needed; the zero ring and empty schemes are allowed. -/
+lemma-pullback-tensor-product, and Tag 06YU, definition-derived-tor. -/
 theorem coefficient_restricted_tensor_flat_model
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A]

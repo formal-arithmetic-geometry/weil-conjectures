@@ -22,7 +22,6 @@ import Mathlib.AlgebraicGeometry.QuasiAffine
 /-! # Effacement preserving a fixed coefficient exponent
 
 Source: Stacks Project, Tag 09ZE, proof with coefficients in Z/n.
-(blueprint: lem-weil-pbc-bounded-abelian-closed-effacement)
 -/
 
 @[expose] public section
@@ -37,32 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A positive-degree class on a closed subscheme of an affine scheme can be effaced
 without changing the integer annihilating its coefficients.
 
-Source: Stacks Project, Tag 09ZE, proof with finite Z/n-module coefficients.
-(blueprint: lem-weil-pbc-bounded-abelian-closed-effacement)
-
-Proof:
-1. Give every group of sections of G the canonical Z/n-action: integer multiplication
-   factors through Z/n since n kills the identity. Restriction maps are linear. Lift
-   Z/n to the coefficient universe by ULift. This constructs a module-valued sheaf;
-   no object is chosen from an unproved existence assertion.
-2. Represent the given class by a constructible module sheaf C mapping to G, using
-   the constructible filtered-colimit presentation, cohomology continuity on the
-   affine closed subscheme, and the inverse-image/forgetful natural isomorphism.
-3. Embed C into a finite sum of finite pushforwards of finite constant modules.
-   Finite base change and the finite-pushforward cohomology edge isomorphism identify
-   each component of the restricted class with a constant class on the closed
-   subscheme of a finite affine cover. Tag 09ZD kills it on a finite surjective
-   cover. The adjunction unit for this cover is monic; finite pushforward preserves
-   monomorphisms. Unit/edge compatibility identifies its cohomology map with this
-   killing map. The finite sum of these maps therefore effaces the class of C.
-4. Push out this embedding along C to G in module-valued sheaves. The map from G
-   into the pushout is monic, and the pushout identity implies that the original
-   class dies. Exact forgetting and inverse-image/forgetful compatibility give
-   the stated map of abelian sheaves. Every object remains a Z/n-module, so G'
-   is still killed by n. This construction uses no henselian hypothesis and no
-   comparison theorem. It includes G=0 and zero classes; for n=1 all modules
-   are zero, and for an empty closed subscheme every cohomology group is zero.
--/
+Source: Stacks Project, Tag 09ZE, proof with finite Z/n-module coefficients. -/
 theorem exists_bounded_mono_closed_cohomology_eq_zero
     {X Z : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) [IsClosedImmersion i]
     (n : ℕ) (hn : 0 < n)

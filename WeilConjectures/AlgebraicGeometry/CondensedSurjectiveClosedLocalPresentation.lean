@@ -123,18 +123,7 @@ attribute [local irreducible] CondensedRing.upperStarComp
 for a coefficient ring pulled back from condensed abelian groups.
 
 Source: Stacks Project Tags 09AA and 09AH, empty-complement localization; the support
-argument in `ModuleObject/Colimit/TwoColimit.lean`.
-Proof: refine a presentation cover of P by a cover obtained from X, using the
-affine ind-etale closed-site lift (Tag 09AB). On each lifted member, pull the
-finite presentation back along its refinement map. Normalized inverse image
-preserves finite free modules and cokernels. The cartesian square and the counit
-identify the pullback of the restriction of the direct image with this finitely
-presented module. Inverse image along the base-changed surjective closed immersion
-is an equivalence preserving the regular module, hence reflects finite presentations.
-Undo the coefficient normalization to obtain the presentation on the chosen cover
-of X. Rank-zero and empty-cover cases use the same formulas.
-(auxiliary; not a blueprint node)
--/
+argument in `ModuleObject/Colimit/TwoColimit.lean`. -/
 theorem lfp_lowerStar_of_surjective_closed
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)

@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionSquare
 /-! # Equal pullbacks of geometric constant sections
 
 Source: Stacks Project, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-geometric-section-two-pullbacks).
 -/
 
 @[expose] public section
@@ -52,19 +51,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Two maps over an algebraically closed field pull back a section on a connected
 scheme to the same section. The receiving scheme may be empty or disconnected.
 
-Source: Stacks Project, Tag 0A3H, final paragraph, and Tag 03P5.
-(blueprint: lem-weil-pbc-etale-geometric-section-two-pullbacks).
-
-Proof:
-The bijection in etaleGeometricFibreConstantSections writes b as the constant section
-of a stalk element e. Its naturality equation along each v_i identifies the composite
-pullback with the section of value e, initially on the base change of the identity
-etale object of U. Restrict to the identity object of E using its canonical pullback
-lift. Naturality of the composition isomorphism, of the inverse constant comparison,
-and of toSheafify moves this restriction through each map. Both v_i followed by h
-are w, so both resulting sections are the same constant section of e under the same
-comparison on E. Transport by associativity to w followed by q and then by ht to t.
-No connectedness of E enters; for E empty the equality remains valid. -/
+Source: Stacks Project, Tag 0A3H, final paragraph, and Tag 03P5. -/
 theorem etaleSet_geometricSection_two_pullbacks
     {S U E : Scheme.{u}} (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (q : Spec (.of Ω) ⟶ S) (h : U ⟶ Spec (.of Ω)) [ConnectedSpace U]

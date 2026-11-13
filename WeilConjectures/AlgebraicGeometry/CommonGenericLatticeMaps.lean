@@ -24,7 +24,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! Construction of the common generic lattice, with coherence separated from the
 coherence of the original pushed ideal.
-(blueprint: lem-pc-r2-common-generic-lattice-maps)
 -/
 
 @[expose] public section
@@ -60,25 +59,7 @@ private theorem pushforward_stalk_isIso {X W : Scheme.{u}}
 /-- Two nonzero ideals on an integral closed subscheme admit a coherent common
 generic lattice and monomorphisms into both pushed ideals, which are isomorphisms
 at the generic point.  The coherence of the pushed ideal itself is separate.
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH, intersection comparison.
-(blueprint: lem-pc-r2-common-generic-lattice-maps)
-
-Proof: Nonzero pushed I implies I is nonzero: if I were zero, its affine sections
-would vanish, hence its module and its pushforward would be zero. Set
-L = kernel (I.toModulesι followed by J.toPushforwardSubscheme). Its kernel arrow
-d embeds it into I. The composite into the structure module factors through the
-kernel defining J, giving b; its composite with the inclusion of J equals the
-mono d followed by the inclusion of I, so b is mono too. Both ideals and the
-pushed structure module of the subscheme defined by J are coherent, by coherent
-kernel closure and finite pushforward. Thus L is coherent by kernel closure.
-At the generic point both ideal inclusions are isomorphisms. The comparison from
-the structure module to the quotient defined by J is therefore zero there.
-Kernel-stalk exactness makes d an isomorphism, and the equality of composites
-makes b one too. Push L, b and d forward along i. This preserves coherence and
-monomorphisms. The bijective, natural closed-pushforward stalk comparisons
-conjugate the two stalk maps into the original isomorphisms. The construction
-also covers unit ideals; no witness is selected from an existence theorem.
--/
+Source: Stacks Project, Cohomology of Schemes, Tag 01YH, intersection comparison. -/
 theorem exists_common_generic_lattice_maps {X W : Scheme.{u}}
     [IsLocallyNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (I J : W.IdealSheafData) (hI : ¬ IsZero ((pushforward i).obj I.toModules))

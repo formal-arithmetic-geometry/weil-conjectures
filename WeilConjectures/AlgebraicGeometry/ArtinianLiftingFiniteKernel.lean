@@ -58,7 +58,6 @@ private theorem factor_kernel_length
 
 Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1), the filtration
 of I_N and successive application of the lifting condition.
-(blueprint: lem-weil-pbc-artinian-lifting-finite-kernel).
 
 Proof in words: Filter ker phi by the finite ideal filtration with length-one
 successive quotients. Every filtration ideal lies in the maximal ideal, since

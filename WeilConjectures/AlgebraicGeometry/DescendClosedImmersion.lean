@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DescendMonomorphism
 /-!
 # Descent of closed immersions to a stage of an inverse limit
 
-Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D
-(blueprint: lem-weil-pbc-descend-closed-immersion).
+Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D.
 -/
 
 @[expose] public section
@@ -43,15 +42,7 @@ private theorem property_overPullback_comp
 quasi-compact quasi-separated stage becomes a closed immersion at some later stage if its
 base change to the limit is a closed immersion.
 
-Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D
-(blueprint: lem-weil-pbc-descend-closed-immersion).
-
-Proof:
-A closed immersion is finite and monic. Descend these two properties separately
-(Stacks Limits, Tags 01ZO and 07RQ). Directedness gives a common upper stage.
-Pullback composition identifies its morphism with a base change of either descended
-morphism, so it is finite and monic there. The finite-monomorphism criterion gives a
-closed immersion. -/
+Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D. -/
 theorem exists_isClosedImmersion_stage_of_locallyOfFiniteType
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

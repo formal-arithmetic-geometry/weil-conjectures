@@ -14,7 +14,6 @@ import WeilConjectures.RingTheory.GenericFlatness
 /-! # Generic flatness on an affine source chart
 
 Source: Stacks Project, Tags 051T and 052A.
-(blueprint: lem-sbc-affine-chart-generic-flatness)
 -/
 
 @[expose] public section
@@ -27,18 +26,7 @@ namespace AlgebraicGeometry
 
 /-- An affine finite type chart over an affine integral base becomes flat on a basic open.
 
-Source: Stacks Project, Tag 051T applied to the algebra itself, and Tag 052A.
-Proof: let A and B be the global section rings of S and X. The induced map
-A → B is finite type, and A is a domain. Apply the algebraic generic-flatness
-lemma to obtain a nonzero a such that the composite A → B → B[1/a] is flat.
-The global sections of the affine basic open V = D(f.appTop(a)) in X are a
-localization of B at f.appTop(a). Thus V → S is flat by the affine ring-map
-criterion. The preimage of D(a) under f is V. Factoring V → S through the open
-immersion D(a) → S preserves flatness of the factor, giving the claim.
-The zero target algebra is allowed; its localization and its empty spectrum
-satisfy the same criteria. No quasi-compactness or Noetherian assumption is used.
-
-(blueprint: lem-sbc-affine-chart-generic-flatness) -/
+Source: Stacks Project, Tag 051T applied to the algebra itself, and Tag 052A. -/
 theorem exists_nonzero_flat_restrict_basicOpen {X S : Scheme.{u}}
     [IsAffine X] [IsAffine S] [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] :
     ∃ a : Γ(S, ⊤), a ≠ 0 ∧ Flat (f ∣_ S.basicOpen a) := by

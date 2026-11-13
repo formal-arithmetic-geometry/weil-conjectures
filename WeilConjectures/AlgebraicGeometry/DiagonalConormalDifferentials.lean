@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineComparison
 /-!
 # Conormal sheaf of the diagonal and relative differentials
 
-Source: Stacks Project, Tag 08S2
-(blueprint: lem-sc-smooth-proper-diagonal-conormal-differentials).
+Source: Stacks Project, Tag 08S2.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{v}}
 
 /-- The conormal module of the diagonal is the sheaf of relative Kähler differentials.
-Source: Stacks, Tag 08S2
-(blueprint: lem-sc-smooth-proper-diagonal-conormal-differentials).
+Source: Stacks, Tag 08S2.
 Proof, step 1: cover X by affine U = Spec A mapping into affine V = Spec R.
 The opens U ×_V U form the neighbourhood W of the diagonal from Tag 01KJ.
 The diagonal there is cut out by I = ker(A ⊗_R A → A).

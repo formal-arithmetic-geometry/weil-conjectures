@@ -20,13 +20,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
 /-- Construction of compatible strict henselization data from pointed affine etale neighbourhoods.
-Source: Stacks Tags 04HX, 03PS, 04GU, 04DY. (blueprint: compatible-strict-henselization-core-data)
-
-Proof: construct the coordinate-ring colimits of pointed affine etale neighbourhoods.
-Tags 04HX and 03PS identify these colimits with strict henselizations and their residue
-fields. Functoriality from Tag 04GU gives the local map, structural equality, and residue
-factorizations. Tag 04DY gives universal homeomorphisms on residue spectra.
--/
+Source: Stacks Tags 04HX, 03PS, 04GU, 04DY. -/
 theorem Etale.exists_compatibleStrictHenselizationCoreData
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

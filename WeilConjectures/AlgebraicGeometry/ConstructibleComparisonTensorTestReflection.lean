@@ -136,20 +136,7 @@ private theorem tensorTestReflectsZero {C E : Type w} [SmallCategory C] [SmallCa
 
 /-- Vanishing of a pulled-back tensor test detects vanishing of the etale tensor test.
 Source: Stacks Project, Tag 07A4, lemma-pullback-tensor-product; blueprint finite-Tor
-comparison, paragraphs Tor amplitude is detected and The equivalence
-(auxiliary; not a blueprint node).
-
-Proof: use constructibleComparisonPullback_exact_faithful for the intrinsic-module
-comparison. Its left adjoint preserves finite colimits, so it commutes with homology.
-Construct its ordinary tensor comparison by the continuous ringed-topos interface
-and uniqueness of left adjoints. The ordinary
-symmetric monoidal inverse image preserves the tensor of P with M[0], termwise and
-with its signed total differential; since the second factor is concentrated in
-degree zero, each total degree has only one nonzero summand. Thus the pro-etale
-homology object in the hypothesis is isomorphic to the inverse image of the etale
-homology object in the conclusion. Faithfulness reflects zero objects: apply it
-to id = 0. No K-flatness, derived localization, Tor interval, constructibility or
-boundedness hypothesis is needed. -/
+comparison, paragraphs Tor amplitude is detected and The equivalence. -/
 theorem constructibleComparisonTensorTest_reflects_zero (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (P : ConstantCompletion.Cx (ConstantCompletion.constant

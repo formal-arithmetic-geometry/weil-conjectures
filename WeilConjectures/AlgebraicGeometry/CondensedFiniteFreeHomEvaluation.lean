@@ -24,24 +24,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Derived maps from P[0] are derived sections of internal Hom from P.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2), evaluation.
-(auxiliary; not a blueprint node)
-
-Proof: on a pro-etale covering trivializing P, the tensor functor - tensor P is a
-finite power of the identity and is exact. The module tensor-Hom adjunction therefore
-shows that internal Hom from P preserves K-injective complexes: its acyclic Hom tests
-are transported to acyclic Hom tests by this exact left adjoint. Resolve the input
-complex by a functorial K-injective complex J. Internal Hom from P applied to J is
-K-injective, so its ordinary sections compute the specified right derived sections.
-Sections of internal Hom from P are ordinary additive maps from P. Degree n cycles of
-that Hom complex are chain maps P[0] to J[n], and boundaries are their homotopies.
-K-injectivity identifies the homotopy classes with maps in the ordinary derived
-category. This identifies the two displayed abelian groups and their addition.
-The evaluation identification commutes with every chain map, giving the natural
-isomorphism of functors; it also commutes with the signed differential of the integer
-shift. The ringed-site formulation is transported along the internal-module equivalence
-for the identical coefficient sheaf and evaluation pairing. Rank zero and empty schemes
-are included. There is no assertion about colimits or exactness in this conclusion. -/
+Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2), evaluation. -/
 theorem condensed_finite_free_hom_evaluation
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

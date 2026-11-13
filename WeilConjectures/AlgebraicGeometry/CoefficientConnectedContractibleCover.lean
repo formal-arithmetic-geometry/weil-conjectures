@@ -41,13 +41,7 @@ private theorem small_pushforward_eq_pullback (X : Scheme.{u})
     exact ⟨AsSmall.up.obj Y, ⟨f⟩, 𝟙 _, hf, by simp⟩
 
 /-- An affine w-contractible ring gives weak contractibility on the actual model slice,
-in every coefficient universe. Source: Stacks Tags 0990 and 090K.
-(auxiliary; not a blueprint node).
-
-Proof: every cover of its spectrum has a disjoint open refinement, by splitting a
-faithfully flat ind-etale affine cover. Lift that refinement through AsSmall and into
-the slice. Its members remain monomorphisms, and distinct members have empty intersection.
-Sheaf gluing therefore lifts any section through an epimorphism. -/
+in every coefficient universe. Source: Stacks Tags 0990 and 090K. -/
 theorem coefficientSliceWeaklyContractible_of_wContractible
     (X : Scheme.{u}) (W : X.ProEt) (R : CommRingCat.{u}) [IsWContractibleRing R]
     (e : W.left ≅ Spec R) :
@@ -109,14 +103,7 @@ theorem coefficientSliceWeaklyContractible_of_wContractible
 
 /-- A Noetherian scheme has an affine, slice-weakly-contractible cover, each member
 mapping into the connected component of a specified point of the base. The index lies
-in the coefficient universe. Source: Stacks Tags 09C6, 0990 and 098F.
-(auxiliary; not a blueprint node).
-
-Proof: connected components of a locally Noetherian scheme are open and cover it.
-Refine each component by spectra of w-contractible rings, then compose the covers.
-The spectrum is affine; the preceding disjoint-refinement argument gives the slice
-condition at the required universe. Its map factors through the component's open
-immersion, so its image lies in that component. Empty schemes use the empty family. -/
+in the coefficient universe. Source: Stacks Tags 09C6, 0990 and 098F. -/
 theorem exists_coefficient_connected_contractible_cover
     (X : Scheme.{u}) [IsNoetherian X] :
     ∃ (I : Type (max v (u + 1)))

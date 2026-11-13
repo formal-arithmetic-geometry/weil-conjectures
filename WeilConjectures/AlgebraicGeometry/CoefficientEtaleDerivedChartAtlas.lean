@@ -183,31 +183,7 @@ There is no assertion that different charts have isomorphic models.
 
 Source: Stacks Project, sites-cohomology.tex, lemma-locally-constant (094G);
 etale-cohomology.tex, proof of lemma-connected-ctf-locally-constant (09BI),
-through the choice of the individual complexes; Tags 03PT, 04EQ, 099R and 03DJ.
-(auxiliary; not a blueprint node).
-
-Proof: Restrict constant scalars to obtain a complex of B-module-valued sheaves
-on the coefficient-sized etale site. This is an exact equivalence and takes
-finite locally constant cohomology to finite locally constant cohomology.
-Use the existing bounded constant-model theorem (094G), with lower bound min(c,d)
-if the given bounds are reversed. It supplies an etale covering by bounded
-complexes of finite B-modules. Transport the covering through AsSmall.down.
-For each point of X choose one chart above it; retain that entire chart and its
-algebraic derived model. This selection is only inside the existential proof.
-For any point y in the image of a chart, lift X.algClosurePoint(y) to that
-chart using the etale geometric-point lifting lemma. Restrict the local model
-to this pointed chart and apply its exact geometric stalk. A constant sheaf
-has stalk its coefficient module, naturally in that module. Applying these
-natural isomorphisms termwise and localizing gives the displayed isomorphism
-from the algebraic model to the specified derived stalk at y. Finally pull
-the chart isomorphism through the etale/pro-etale comparison and restrict along
-the given factorization from V. Inverse image and slice restriction are exact
-and commute with constant sheaves; their termwise natural isomorphisms descend
-to the derived categories. The canonical constant-coefficient ring comparison
-identifies the result with adicFinitePullback and the commutative constant
-realization displayed below. No connectedness, Tor amplitude, affineness or
-weak contractibility is used. If X is empty the chart family is empty; empty
-charts and zero models give the same exact restriction formulas. -/
+through the choice of the individual complexes; Tags 03PT, 04EQ, 099R and 03DJ. -/
 theorem coefficient_etale_derived_chart_atlas
     (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 # Bounded constructible complexes of etale sheaves of modules
 
 Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/
-`def-weil-pbc-constructible-complexes.md`
-(blueprint: def-weil-pbc-constructible-complexes).
+`def-weil-pbc-constructible-complexes.md`.
 
 For a finite commutative ring `Λ` and a scheme `T`, `D^b_c(T_et, Λ)` is the full
 subcategory of `D(T_et, Λ) = AlgebraicGeometry.Etale.DerivedCategoryModule Λ T` of the
@@ -38,10 +37,9 @@ namespace AlgebraicGeometry.Etale
 
 /-- A complex `K ∈ D(T_et, Λ)`, `Λ` a finite commutative ring, is *bounded constructible* if
 every cohomology sheaf `H^i(K)` is a constructible sheaf of `Λ`-modules
-(`def-weil-pbc-etale-constructible-sheaf`) and there are integers `a ≤ b` with `H^i(K) = 0`
+ and there are integers `a ≤ b` with `H^i(K) = 0`
 for `i ∉ [a, b]`.
-Source: blueprint `sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md`
-(blueprint: def-weil-pbc-constructible-complexes). -/
+Source: blueprint `sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md`. -/
 def DerivedCategory.isBoundedConstructible (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (T : Scheme.{u}) : ObjectProperty (DerivedCategoryModule Λ T) :=
   fun K ↦
@@ -53,8 +51,7 @@ def DerivedCategory.isBoundedConstructible (Λ : Type (u + 1)) [CommRing Λ] [Fi
         (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj K)
 
 /-- `D^b_c(T_et, Λ) ⊂ D(T_et, Λ)`: the full subcategory of bounded constructible complexes.
-Source: blueprint `sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md`
-(blueprint: def-weil-pbc-constructible-complexes). -/
+Source: blueprint `sec-proper-base-change/sk-thm-p1/def-weil-pbc-constructible-complexes.md`. -/
 def BoundedConstructibleDerivedCategory (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (T : Scheme.{u}) : Type _ :=
   (DerivedCategory.isBoundedConstructible Λ T).FullSubcategory

@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 # Cofinality of affine pointed étale neighbourhoods
 
 Source: Weil conjectures blueprint, chapter `sec-curve-estimates`, unit
-`lem-sc-second-kummer-divisors` (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal); Stacks
+`lem-sc-second-kummer-divisors`; Stacks
 Project, Tags 04HX and 0BUC.
 -/
 
@@ -28,25 +28,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The full subcategory of affine pointed étale neighbourhoods of a geometric point is
 initial; its opposite inclusion is final, so computes the same opposite-indexed stalk colimit.
-Source: blueprint `lem-sc-second-kummer-divisors` (blueprint:
-lemma-weil-pbc-affine-neighbourhood-cofinal), Stacks Project, proof of Tag 04HX and the dual of Tag
-0BUC, with Tag 04E7.
-
-Proof:
-1. For each pointed neighbourhood, choose an affine open containing its geometric point
-   and lift the point to that open. Its inclusion is a point-preserving refinement
-   (`lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`), so each comma category
-   of affine neighbourhoods mapping to a fixed neighbourhood is nonempty.
-2. Given two comma objects, cofilteredness of the ambient pointed neighbourhood category
-   (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`) gives a common refinement.
-   Equalize its two composites to the fixed neighbourhood, then shrink the resulting
-   refinement to an affine open as in step 1. Fullness gives arrows from this affine
-   comma object to both original comma objects, hence a connecting zigzag. Thus every
-   comma category is connected, and the inclusion is initial
-   (`lem-weil-pbc-colimit-initial-full-subcategory`).
-3. Passing to opposites makes the inclusion final. The final-functor colimit comparison
-   identifies the affine-indexed colimit with the full stalk colimit
-   (`lem-weil-pbc-colimit-initial-full-subcategory`). -/
+Source: blueprint `lem-sc-second-kummer-divisors`, Stacks Project, proof of Tag 04HX and the dual of Tag
+0BUC, with Tag 04E7. -/
 theorem affinePointedNeighbourhoods_initial_and_final_op
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

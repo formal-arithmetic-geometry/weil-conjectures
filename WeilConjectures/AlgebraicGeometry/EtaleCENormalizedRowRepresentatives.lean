@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCERowCyclesNaturality
 /-! # Normalized CE pages and signed row representatives
 
 Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-normalized-row-representatives).
 -/
 
 @[expose] public section
@@ -26,29 +25,7 @@ namespace AlgebraicGeometry.Etale
 set_option linter.unusedVariables false in
 -- Elaborate the prescribed presentation, normalized pages and signed row families together.
 /-- Prescribed CE presentations with signed comparisons to the actual sections-row homology.
-Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-normalized-row-representatives).
-
-Proof. Extend each row by zero and form the flipped finite-diagonal sections total.
-Use the second filtration and the canonical boundary cokernels on every positive page;
-construct the differential from representatives and use the unique normalized successor
-homology isomorphism. Adjoin the graded page zero. The row calculation identifies the
-first page with the actual homology of the sections of I^q. Multiply this isomorphism
-by (-1)^(pq); the two signed factors commute with every additive row map. Compare each
-injective row with the chosen resolution and evaluate Ext cocycles at 1. Use precisely
-the composite of the row resolution's isoRightDerivedObj with ceRowOrdinaryIso for
-ordinaryComparison; take eDerived to be the signed row comparison followed by the inverse
-of isoRightDerivedObj. The intermediate resolution comparisons cancel, giving the
-first-page equation. Coefficient naturality yields the ordinary_naturality field.
-Retain the augmentation, K-injective comparison, canonical abutment and transported
-finite image filtration from exists_hypercohomology_firstPage.
-The defining equality for u, on each diagonal summand, identifies its graded sections
-map with ceRowSectionsMap f (phi.f q). Project the related filtered representatives x,y
-onto that graded row, then onto its homology. The equations for z,z' identify those
-projections with the boundary cokernel maps, so composing gives the last equality.
-This is purely the row-homology calculation; no identification of the row pullback
-with ordinary cohomology pullback is used. Zero rows, empty diagonals, p = 0 and empty
-schemes use the same cokernel and finite-sum universal properties. -/
+Source: Stacks Project, Tags 015J, 015K and 012K. -/
 theorem exists_etaleCE_normalized_row_representatives
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

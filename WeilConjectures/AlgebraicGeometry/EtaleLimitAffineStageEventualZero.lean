@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Finite-stage vanishing when one stage is affine
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit), cofinal-tail reduction.
-(blueprint: lem-weil-pbc-etale-limit-affine-stage-eventual-zero).
+Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
 -/
 
 @[expose] public section
@@ -28,32 +27,11 @@ namespace AlgebraicGeometry.Etale
 
 /-- A class whose comparison image is zero vanishes at a later stage.
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit); the cofinal-tail argument of
+Source: Stacks Project, Tag 09YQ; the cofinal-tail argument of
 lem-weil-pbc-etale-limit-cohomology-affine-stage, followed by finite-stage equality
-in a filtered colimit of abelian groups.
-(blueprint: lem-weil-pbc-etale-limit-affine-stage-eventual-zero).
-
-Proof: fix a class x at i mapping to zero. Restrict the entire supplied system to
-indices j above i0. Directedness makes this tail nonempty, directed and final;
-its opposite is initial. The whiskered scheme cone remains a limit, and the
-whiskered sheaf cocone remains a colimit. Every tail scheme is affine because its
-map to D_i0 is affine. Restrict F, phi, eG and eH and all their identity,
-composition, transition and leg equations along the inclusion. Apply affine
-comparison (Tag 09YQ, via affine-site continuity Tags 0EYL and 09YP): the
-restricted B is a colimit. Finality then makes the original B a colimit.
-For an index i outside the tail, first move x to a common upper bound of i and
-i0. Naturality of B makes its comparison image zero there; compose the eventual
-vanishing transition with i's transition to that upper bound.
-The forgetful functor from abelian groups preserves filtered colimits. In that
-filtered colimit, x and zero at i have equal images by hypothesis. The equality
-criterion for a filtered colimit gives j and f : i to j with H.map f x =
-H.map f 0 = 0. This proves only kernel detection, not class descent or the
-colimit universal property. For x = 0 choose the identity. Degree zero is the
-same equality argument; zero sheaves, empty affine schemes and singleton index
-systems need no exceptions. Earlier schemes need not be affine. -/
+in a filtered colimit of abelian groups. -/
 /- Tail lemma for the affine cofinal subsystem.
 Source: Stacks Project, Tag 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-affine-stage-eventual-zero-tail)
 
 Proof: apply the affine-stage eventual-zero theorem to the tail subsystem. -/
 theorem etale_limit_affine_stage_eventual_zero_tail
@@ -114,7 +92,7 @@ theorem etale_limit_affine_stage_eventual_zero_tail
   rw [map_zero] at hf
   exact hf
 
-/-- (blueprint: lem-weil-pbc-etale-limit-affine-stage-eventual-zero) -/
+/-- -/
 theorem etale_limit_affine_stage_eventual_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -45,7 +45,7 @@ private theorem linear_lowerStar
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 /-- Module pullback is linear for scalars pulled back from the coefficient point.
-Source: the linear module adjunction (blueprint: lem-kernel-condensed-projector-scalars). -/
+Source: the linear module adjunction. -/
 theorem condensedModulePullback_linear
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -73,16 +73,7 @@ private theorem regularEnd_eq_smul
 projector is the usual normalized sum of its translation endomorphisms.
 
 Source: latest blueprint, `def-fd-artin-schreier-sheaf.md`, displayed projector, and
-`prop-kernel-lisse.proof.md`, the character average
-(blueprint: lem-kernel-condensed-projector-scalars).
-
-Proof. The ring map on global sections induced by pullback from the point defines a
-linear structure on each module category. The monoidal adjunction identity for global
-sections shows that the coefficient pushforward map respects these scalar actions.
-Consequently module pushforward is linear. On the regular module, multiplication by a
-global section is its scalar multiple of the identity. Apply linearity term by term to
-the defining projector and use that the ring inverse of an invertible element is its
-specified inverse. No choice of a section of the Artin–Schreier cover is involved. -/
+`prop-kernel-lisse.proof.md`, the character average. -/
 theorem condensedArtinSchreierProjector_eq_sum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

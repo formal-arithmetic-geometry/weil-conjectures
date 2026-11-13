@@ -54,16 +54,7 @@ private noncomputable def opensSiteCechIso (X : Scheme.{u}) {n : Type u} (U : n 
     rfl)
 
 /-- The standard N+1 affine opens bound cohomology of a closed projective subscheme.
-Source: Stacks Project, Tags 01XT and 01YS (4).
-(blueprint: lem-pc-j4-closed-immersion-twist-cohomology-bound)
-
-Proof: Restrict the N+1 standard affine opens to X. A closed subscheme of an affine
-scheme is affine. Their intersections are affine because X is separated. The twisted
-module is quasi-coherent, so its higher cohomology on each intersection is zero.
-The ordered Cech complex computes cohomology and its terms, indexed by strictly
-increasing tuples of distinct cover indices, are zero in all degrees above N. Hence
-cohomology is zero above N, for every twist, including
-zero; no finite presentation is needed for this cover argument. -/
+Source: Stacks Project, Tags 01XT and 01YS (4). -/
 theorem isZero_closedImmersion_twist_above_dimension
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

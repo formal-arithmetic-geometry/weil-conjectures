@@ -108,7 +108,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 # Pullback of strict completed-coefficient towers
 
 Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1261;
-Stacks Project, Tag 099N (blueprint: def-weil-pbc-completed-pullback).
+Stacks Project, Tag 099N.
 
 The structure map into the completed coefficient ring is built from its finite
 projections. It is a morphism, with no invertibility assumption. The functor here
@@ -131,7 +131,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
 /-- The finite coefficient identification transported by the published constant comparison.
-Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+Source: blueprint four corners; Stacks 098T. -/
 noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U ⟶ V)
     (n : ℕ) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (d.finiteRing V n) ≅
@@ -143,10 +143,7 @@ noncomputable def AdicCoefficientDatum.finiteRingIso {U V : Scheme.{u}} (f : U �
     pbcLevelConstantComparison U d n
 
 /-- The finite coefficient comparisons retain every quotient transition.
-Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
-Proof: the published constants-to-functions comparison commutes with quotient maps.
-The constant inverse-image comparison is natural in the finite coefficient ring.
-Combining their naturality squares with the limit cone equations gives this equation. -/
+Source: blueprint four corners; Stacks 098T. -/
 theorem AdicCoefficientDatum.integralRingComponent_naturality {U V : Scheme.{u}}
     (f : U ⟶ V) {m n : ℕᵒᵖ} (a : m ⟶ n) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V m.unop) ≫
@@ -199,8 +196,7 @@ theorem AdicCoefficientDatum.integralRingComponent_naturality {U V : Scheme.{u}}
     ← Category.assoc, limit.w]
 
 /-- Finite coefficient comparison obtained from constant sections, with its fixed
-constant-section normalization. Source: blueprint order 1261
-(blueprint: def-weil-pbc-completed-pullback). -/
+constant-section normalization. -/
 def completedFiniteCoefficientMap (n : ℕ) :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
         ((pbcAdicRings Y d).obj (op n)) ⟶ (pbcAdicRings X d).obj (op n) :=
@@ -211,25 +207,21 @@ def completedFiniteCoefficientMap (n : ℕ) :
     (pbcLevelConstantComparison X d n).hom
 
 /-- The components of the completed coefficient structure map.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+ -/
 def completedCoefficientComponent (n : ℕ) :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ⟶
       (pbcAdicRings X d).obj (op n) :=
   (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (pbcAdicProjection Y d n) ≫
     completedFiniteCoefficientMap g d n
 
-/-- The coefficient components form a limit cone.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback).
-Proof: the completion projections commute with quotient maps. The finite coefficient
-comparison is induced by constant sections, so is natural in the quotient homomorphism.
-Apply inverse-image functoriality and these two equalities. -/
+/-- The coefficient components form a limit cone. -/
 theorem completedCoefficientComponent_naturality {b a : ℕᵒᵖ} (f : b ⟶ a) :
     completedCoefficientComponent g d b.unop ≫ (pbcAdicRings X d).map f =
       completedCoefficientComponent g d a.unop := by
   exact d.integralRingComponent_naturality g f
 
 /-- The canonical coefficient structure map into the actual completed limit.
-Source: blueprint order 1261 (blueprint: def-weil-pbc-completed-pullback). -/
+ -/
 def completedCoefficientMap :
     (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ⟶
       pbcAdicCompletion X d :=

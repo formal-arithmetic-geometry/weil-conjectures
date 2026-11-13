@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionPowerQuotient
 /-! # Completion comparison from a normalized restriction functor
 
 Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-completion-from-restriction).
 -/
 
 @[expose] public section
@@ -86,29 +85,7 @@ private theorem quotient_comparison_naturality {C D : Type*}
 set_option backward.isDefEq.respectTransparency false in
 /-- A restriction functor with unit-normalized pullback comparisons induces the
 canonical comparison with completion.
-Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-completion-from-restriction).
-
-Proof:
-For each coherent F and n, closedImmersion_unit_quotient applied to j_n identifies
-F/J^(n+1)F with j_(n,*)j_n^*F. Identify the iterated ideal-module product defining
-formalModuleQuotient with multiplication by J^(n+1), by induction on n using
-associativity of multiplication (equivalently its affine tensor calculation).
-Transport the quotient identification from the canonical tensor-pullback adjunction
-to aj_n by the unit-normalized uniqueness isomorphism of left adjoints. Compose
-with the inverse of j_(n,*)(r_n,F) and then the inverse of beta_n,R(F).
-These are isomorphisms from the terms of completion(F) to the terms of Phi(R(F)).
-The transition hypothesis for Phi, the comparison equation hr for R, and the unit
-equation hc imply that adjacent transition squares commute after precomposition
-with the quotient projection F -> F/J^(n+2)F. This map is epi, so the squares commute.
-Every order map of natural numbers factors into adjacent maps, so the termwise
-maps and their inverses define an isomorphism of inverse systems. Naturality in F
-follows from naturality of quotient maps, adjunction units, beta and r, again
-canceling the quotient projections. Lift this natural isomorphism through the full
-subcategory of coherent formal modules. The definition of its terms gives the
-asserted quotient-projection equation. No arbitrary existence witness is used to
-define an object: R is supplied, and all quotient maps are uniquely determined.
--/
+Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880. -/
 theorem completion_from_restriction {A : Type v} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     [LocallyOfFiniteType f] [QuasiCompact f] (I : Ideal A)

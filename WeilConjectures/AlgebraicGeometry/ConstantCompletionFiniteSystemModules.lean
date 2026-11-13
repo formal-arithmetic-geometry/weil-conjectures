@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionBasic
 public import WeilConjectures.AlgebraicGeometry.SectionwiseAdicAlgebraLimit
 /-! Module structures for the finite constant completion tower.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 093M.
 The quotient coefficient sections carry their canonical module structures over the
 corresponding quotient rings. -/
 @[expose] public noncomputable section

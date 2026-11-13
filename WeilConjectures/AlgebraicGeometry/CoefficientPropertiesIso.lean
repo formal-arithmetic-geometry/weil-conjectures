@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStra
 
 Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5,
 transport of constructible filtration terms and lissity.
-(blueprint: lem-zl-native-coefficient-properties-iso)
 -/
 
 @[expose] public noncomputable section
@@ -45,12 +44,7 @@ private theorem finiteConstantStratified_of_iso {X : Scheme.{u}}
 
 /-- Constructibility with finite constant scalar models is invariant under module
 isomorphisms, on qcqs schemes and on the affine-open definition for other schemes.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5
-(blueprint: lem-zl-native-coefficient-properties-iso).
-Proof: keep the finite stratification and its pro-etale covers and scalar models.
-Precompose each local model isomorphism with the restriction of the given module
-isomorphism. On a non-qcqs scheme apply this construction on every affine open.
-The inverse isomorphism gives the converse. -/
+Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5. -/
 theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) :
@@ -67,11 +61,7 @@ theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
       ((CondensedRing.upperStar Λ U.ι).mapIso e) (hB U hU)
 
 /-- Lissity is invariant under an isomorphism of coefficient modules.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5
-(blueprint: lem-zl-native-coefficient-properties-iso).
-Proof: keep the pro-etale cover trivializing the second module, and precompose
-its finite-free trivialization with the pullback of the given isomorphism.
-Apply the same argument to the inverse for the reverse implication. -/
+Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5. -/
 theorem lisseCoefficientModule_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) : IsLisseCoefficientModule Λ M ↔ IsLisseCoefficientModule Λ N := by

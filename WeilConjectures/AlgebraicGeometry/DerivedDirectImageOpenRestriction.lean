@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-!
 # Derived direct image commutes with restriction to an open
 
-Source: Stacks Project, Cohomology, Lemma 20.32.4, Tag 08FE
-(blueprint: lem-pc-restrict-derived-direct-image-open).
+Source: Stacks Project, Cohomology, Lemma 20.32.4, Tag 08FE.
 -/
 
 @[expose] public section
@@ -31,16 +30,7 @@ namespace AlgebraicGeometry
 /-- Restricting `Rf_*` to an open `V` is naturally isomorphic to first restricting to
 `f ⁻¹ᵁ V` and then applying the derived direct image of the induced morphism `f ∣_ V`.
 The components of this functor isomorphism are the canonical comparisons for every E.
-Source: Stacks Project, Cohomology, Lemma 20.32.4 (Tag 08FE)
-(blueprint: lem-pc-restrict-derived-direct-image-open).
-
-Proof:
-1. Choose a K-injective resolution E → I on X. Its restriction to the inverse-image
-   open is K-injective by `lem-sc-derived-k-injective-restrict-open` (Tag 08BS).
-2. By `def-pc-ringed-spaces-derived-direct-image`, `Rf_*E` is represented by f_*I,
-   and the derived direct image of the restricted E is represented by g_*(I|U).
-   On every open W of V both complexes have sections I(f⁻¹W). These identifications
-   commute with differentials and are natural in E, giving the natural isomorphism. -/
+Source: Stacks Project, Cohomology, Lemma 20.32.4 (Tag 08FE). -/
 theorem schemeDerivedDirectImage_openRestriction {X Y : Scheme.{u}}
     (f : X ⟶ Y) (V : Y.Opens)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

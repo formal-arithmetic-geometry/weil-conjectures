@@ -44,18 +44,7 @@ private theorem isoPullbackAdditiveStalkIso_smul
 set_option maxHeartbeats 500000 in
 -- Identifying the complex composition factors reduces several stalk functor types.
 /-- Scalar compatibility of the fixed additive comparison; this assertion does not involve
-input-complex coordinates or the coefficient-one equation.
-Proof: the two tensor-stalk isomorphisms are linear over their output stalk rings.
-The intervening map alpha is a sheaf-module isomorphism, so its stalk is linear.
-For the additive pullback-stalk comparison along j, restriction on germs sends
-r times m to j.stalkMap(r) times the restricted germ of m. The adjunction uniqueness
-map from tensor pullback to restriction is a sheaf-module map and hence preserves
-that action. Thus isoPullbackAdditiveStalkIso is semilinear over j.stalkMap.
-Composing gives semilinearity of H; its coefficient map is exactly eD because
-the point transport here is reflexive. Lifting to complexes and inserting the
-functor composition isomorphisms preserves this degreewise equation.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: lem-pc-affine-spectrum-canonical-tensor-comparison-scalar). -/
+input-complex coordinates or the coefficient-one equation. -/
 theorem canonicalSpectrum_tensor_comparison_smul
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

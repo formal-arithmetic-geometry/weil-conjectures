@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 # Ring charts of a base changed inverse system
 
 Source: Stacks Project, Limits, Tags 01YZ and 01ZR (3).
-(blueprint: lem-pc-affine-base-change-chart-colimit).
 -/
 
 @[expose] public section
@@ -32,33 +31,28 @@ variable {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
   (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) (j : I) (hij : i ≤ j)
   (U : Xi.Opens)
 
-/-- The stage over the original base. Source: Stacks, Tag 01YZ
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- The stage over the original base. Source: Stacks, Tag 01YZ. -/
 noncomputable def stage (k : {k : I // j ≤ k}) : Over (Spec (R.obj i)) :=
   Over.mk (Spec.map (R.map (homOfLE (hij.trans k.property))))
 
-/-- Transition over the original base. Source: Stacks, Tag 01YZ
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- Transition over the original base. Source: Stacks, Tag 01YZ. -/
 noncomputable def transition {k l : {k : I // j ≤ k}} (a : k ⟶ l) :
     stage R i j hij l ⟶ stage R i j hij k :=
   Over.homMk (Spec.map (R.map (homOfLE (leOfHom a))))
     (by dsimp [stage]; rw [← Spec.map_comp, ← R.map_comp]; rfl)
 
-/-- The inverse image chart. Source: Stacks, Tag 01ZR (3)
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- The inverse image chart. Source: Stacks, Tag 01ZR (3). -/
 noncomputable def chart (k : {k : I // j ≤ k}) :
     (pullback f (stage R i j hij k).hom).Opens :=
   (pullback.fst f (stage R i j hij k).hom) ⁻¹ᵁ U
 
-/-- Chart preimages agree under transition. Source: Stacks, Tag 01YZ
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- Chart preimages agree under transition. Source: Stacks, Tag 01YZ. -/
 theorem chart_le {k l : {k : I // j ≤ k}} (a : k ⟶ l) :
     chart R i f j hij U l ≤ baseChangeMap f (transition R i j hij a) ⁻¹ᵁ
       chart R i f j hij U k := by
   simp [chart, ← Scheme.Hom.comp_preimage, baseChangeMap]
 
-/-- The diagram of section rings on the charts. Source: Stacks, Tag 01ZR (3)
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- The diagram of section rings on the charts. Source: Stacks, Tag 01ZR (3). -/
 noncomputable def rings : {k : I // j ≤ k} ⥤ CommRingCat.{u} where
   obj k := Γ(pullback f (stage R i j hij k).hom, chart R i f j hij U k)
   map a := (baseChangeMap f (transition R i j hij a)).appLE _ _
@@ -86,26 +80,22 @@ noncomputable def rings : {k : I // j ≤ k} ⥤ CommRingCat.{u} where
 
 variable (c : Cone (R.op ⋙ Scheme.Spec))
 
-/-- Limit-to-stage transition. Source: Stacks, Tag 01YZ
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- Limit-to-stage transition. Source: Stacks, Tag 01YZ. -/
 noncomputable def projection (k : {k : I // j ≤ k}) :
     Over.mk (c.π.app (op i)) ⟶ stage R i j hij k :=
   Over.homMk (c.π.app (op k.val)) (c.w (homOfLE (hij.trans k.property)).op)
 
-/-- The chart on the limit. Source: Stacks, Tag 01ZR (3)
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- The chart on the limit. Source: Stacks, Tag 01ZR (3). -/
 noncomputable def limitChart : (pullback f (c.π.app (op i))).Opens :=
   (pullback.fst f (c.π.app (op i))) ⁻¹ᵁ U
 
-/-- Chart preimages agree under projection. Source: Stacks, Tag 01YZ
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- Chart preimages agree under projection. Source: Stacks, Tag 01YZ. -/
 theorem limitChart_le (k : {k : I // j ≤ k}) :
     limitChart R i f U c ≤ baseChangeMap f (projection R i j hij c k) ⁻¹ᵁ
       chart R i f j hij U k := by
   simp [limitChart, chart, ← Scheme.Hom.comp_preimage, baseChangeMap]
 
-/-- The cocone of actual chart section rings. Source: Stacks, Tag 01ZR (3)
-(blueprint: lem-pc-affine-base-change-chart-colimit). -/
+/-- The cocone of actual chart section rings. Source: Stacks, Tag 01ZR (3). -/
 noncomputable def cocone : Cocone (rings R i f j hij U) where
   pt := Γ(pullback f (c.π.app (op i)), limitChart R i f U c)
   ι.app k := (baseChangeMap f (projection R i j hij c k)).appLE _ _
@@ -121,16 +111,7 @@ noncomputable def cocone : Cocone (rings R i f j hij U) where
     exact c.w (homOfLE (show k.val ≤ l.val from leOfHom a)).op
 
 /-- The ring on the limit chart is the filtered colimit of the stage chart rings.
-Source: Stacks Project, Limits, Tags 01YZ, 01YW, and 01ZR (3).
-(blueprint: lem-pc-affine-base-change-chart-colimit).
-
-Proof: Restrict to the nonempty directed upper tail of j, which is cofinal in I.
-Base change the inverse spectrum diagram along f, and restrict each stage to the
-inverse image of U. Base change and restriction preserve this cofiltered limit
-(Tag 01YZ). The charts are affine because the maps to Xi are affine and U is
-affine. The affine Spec/Gamma equivalence converts this limit into a colimit of
-rings. Its structure maps are precisely appLE along the base-change maps, by the
-naturality of the chart restrictions. This also applies to empty affine charts. -/
+Source: Stacks Project, Limits, Tags 01YZ, 01YW, and 01ZR (3). -/
 theorem isColimit_cocone [IsDirected I (· ≤ ·)]
     (hc : IsLimit c) [IsAffine c.pt] (hU : IsAffineOpen U) :
     Nonempty (IsColimit (cocone R i f j hij U c)) := by

@@ -78,20 +78,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Tensor base change in a specified cartesian square, with identified tensor factors.
-Source: Stacks Project, Tag 0A1D, displayed cartesian square and its isomorphism.
-Proof: the cartesian square identifies X' with the canonical pullback of f and p.
-Apply relativelyFlat_tensor_baseChange_iso to f, p, E and G. Transport its right side
-along this scheme isomorphism, using composition of derived pullbacks and of derived
-direct images and the identity comparisons; pushforward along a scheme isomorphism
-is inverse to pullback. The given degreewise isomorphisms e commute with differentials,
-so define an isomorphism of complexes from the ordinary tensor pullback of G to G'.
-Apply DerivedCategory.Q to this complex isomorphism. Tensor it with the given derived
-identification of E, and apply the direct-image functor. Composing gives the displayed
-isomorphism. Only ordinary pullback is used on G; relative flatness, rather than
-O_X-flatness, is exactly the assumption of Tag 0A1D. There are no support, finite
-presentation, perfectness or Noetherian assumptions. Empty schemes and zero complexes
-are included by the same categorical construction.
-(blueprint: lem-pc-cartesian-tensor-data-comparison). -/
+Source: Stacks Project, Tag 0A1D, displayed cartesian square and its isomorphism. -/
 theorem cartesian_tensor_data_comparison
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

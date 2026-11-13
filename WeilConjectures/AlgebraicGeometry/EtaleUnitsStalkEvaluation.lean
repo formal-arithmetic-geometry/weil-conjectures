@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleEvaluationSeparable
 # Evaluation of unit germs in the separable closure
 
 Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation).
 -/
 
 @[expose] public section
@@ -29,21 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation defines an additive homomorphism on the geometric stalk of units.
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation).
-
-Proof: An etale neighbourhood of a geometric point over a field admits a refinement
-by the spectrum of a finite separable extension: choose an affine open around the
-image point and then its connected component. Evaluation of global functions at
-its lift lands in that extension's embedded copy in the algebraic closure, hence
-in the image of the separable closure. The same holds for the inverse of a unit.
-The embedding of the separable closure in the algebraic closure is injective, so
-there is a unique unit with this evaluated value. Pullback of functions commutes
-with evaluation. These maps therefore form a compatible cocone over pointed etale
-neighbourhoods and induce a map on the filtered colimit defining the stalk.
-Evaluation preserves products, which are addition in the coefficient groups.
-Removing the universe lift gives the asserted additive homomorphism and formula.
-This constructs no arbitrary witness: the formula uniquely determines every value. -/
+Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
 theorem exists_etale_units_stalk_evaluation (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

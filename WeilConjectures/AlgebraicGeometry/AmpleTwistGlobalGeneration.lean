@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-! # Global generation after a sufficiently positive ample twist
 
 Source: EGA II, Proposition 4.5.5, implication ample ⇒ d); Stacks Project,
-Properties, Proposition 01Q3, (1) ⇒ (7)
-(blueprint: lem-weil-pbc-coherent-twist-global-generation).
+Properties, Proposition 01Q3, (1) ⇒ (7).
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ the evaluation map from the free module on that family is an epimorphism by `σ.
 The exponent is a natural number, since the node uses nonnegative tensor powers.
 
 Source: EGA II, Proposition 4.5.5, last paragraph of the proof; Stacks Project,
-Properties, Proposition 01Q3, (1) ⇒ (7)
-(blueprint: lem-weil-pbc-coherent-twist-global-generation).
+Properties, Proposition 01Q3, (1) ⇒ (7).
 
 Proof following the six steps of the node:
 1. Absolute ampleness gives quasi-compactness. The lemma

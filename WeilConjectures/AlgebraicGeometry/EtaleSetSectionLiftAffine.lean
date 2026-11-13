@@ -29,16 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 -- Constructing the sheaf diagram involves several nested functor compositions.
 /-- Source: Stacks Project, Étale Cohomology Tag 09YQ, proof via Tags 0EYL,
-04HR and Sites Tag 09YN (blueprint: lem-weil-pbc-sets-section-lift-affine).
-Proof: on the original full affine étale site, construct the stage push-pull sheaves
-and their comparison maps. Restriction naturality makes these maps sheaf morphisms;
-the comparison laws give the diagram identities and the cone compatibility.
-The sheaf-level continuity bridge identifies this explicit cocone as a colimit.
-The finite-cover evaluation theorem then makes its sections on W₀ a colimit of sets.
-The type-colimit representative theorem supplies a stage section mapping to t;
-the explicitly defined cocone leg is the required etaleSetSectionComparison.
-The empty affine scheme causes no exception: its section set is a singleton by the
-sheaf condition and the filtered tail is nonempty. -/
+04HR and Sites Tag 09YN. -/
 theorem etaleSetSectionLift_affine
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

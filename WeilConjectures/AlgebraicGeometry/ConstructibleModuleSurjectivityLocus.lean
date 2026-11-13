@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 # Constructible failure locus of a map of constructible module sheaves
 
 Source: Stacks Project, Tag 095N, the subsets T_{I'} in its proof.
-(blueprint: lem-weil-pbc-constructible-module-surjectivity-locus).
 -/
 
 @[expose] public section
@@ -32,16 +31,7 @@ namespace AlgebraicGeometry.Scheme
 on the geometric stalk at the algebraic closure of the residue field form a constructible
 subset. The source need not be a sum of affine free sheaves.
 
-Source: Stacks Project, Tag 095N, construction of T_{I'}, with Tags 095E and 04FN.
-(blueprint: lem-weil-pbc-constructible-module-surjectivity-locus).
-
-Proof: The cokernel is constructible, since constructible module sheaves form an abelian
-subcategory. Exactness of the geometric stalk functor identifies its stalk with the
-cokernel of the given stalk map. For modules that cokernel is zero exactly when the map
-is surjective. Forgetting scalars preserves and reflects zero stalks. Independence of
-vanishing from the choice of geometric point identifies the displayed locus with the
-support of the underlying abelian cokernel sheaf. The constructible support theorem
-therefore applies. Empty schemes and zero sheaves give the empty failure locus. -/
+Source: Stacks Project, Tag 095N, construction of T_{I'}, with Tags 095E and 04FN. -/
 theorem isConstructible_module_stalk_nonsurjective
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

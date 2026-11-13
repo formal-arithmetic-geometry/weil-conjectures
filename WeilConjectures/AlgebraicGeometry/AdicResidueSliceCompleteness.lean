@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.NativeRingedRestrictionLocalization
 /-! # Completeness on slices of completed coefficients
 
 Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -145,24 +144,7 @@ private theorem sliceTest_isZero
 
 /-- Restriction to an arbitrary slice preserves local derived completeness.
 Source: Stacks Project, algebraization.tex, Tag 0999; Modules on Sites, Section 03DH;
-Cohomology on Sites, Tag 08JB; proetale.tex, Tag 09C6, the connected-local reduction.
-(auxiliary; not a blueprint node).
-
-Proof: The slice ring and first projection are sectionwise restrictions of the
-original ones. Thus the kernel ideal over an arrow V -> U has exactly the same
-sections as the original kernel on V. The iterated slice (C/U)/(V -> U) is canonically
-equivalent to C/V, by forgetting the intermediate arrow and by composition in the
-inverse direction. This equivalence preserves coverings and the coefficient ring.
-Its exact module equivalence identifies the localized module for each kernel section
-with the original localization on C/V. The composite restriction of M identifies
-with direct restriction to V. Compute derived internal Hom by a K-injective
-representative: exact equivalences preserve K-injectives and identify the Hom
-complexes sectionwise. Therefore the internal Hom in the local completeness test
-on the iterated slice is the image under an equivalence of the zero internal Hom
-supplied by completeness of M at V. It is zero. This applies to every U, every arrow
-V -> U and every kernel section, and proves the stated local completeness. No
-boundedness, affine hypothesis or weak contractibility is used. The zero ring,
-zero ideal and empty slices use the same equivalence and vanishing argument. -/
+Cohomology on Sites, Tag 08JB; proetale.tex, Tag 09C6, the connected-local reduction. -/
 theorem adicResidue_slice_completeness
     (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

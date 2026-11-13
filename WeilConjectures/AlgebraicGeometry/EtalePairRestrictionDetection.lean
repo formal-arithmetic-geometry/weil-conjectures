@@ -21,18 +21,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Source: Stacks Project, Tags 03Q4 and 09YQ, fibre-product overlap reduction.
-(blueprint: lem-weil-pbc-etale-pair-restriction-detection).
-Proof: take Z to be U ×_W V in the small étale category, with its projections p,q.
-The maps to W are qcqs by cancellation against the qcqs structure map of W.
-Base change and composition show that Z has qcqs structure map. Its projections
-have equal composites to W. Base change along h preserves this fibre product.
-For any a,a' with equal composites to the base change of W, the pullback universal
-property supplies a map from Y to the base change of Z with composites a,a'.
-Restrict the assumed equation along this map. Functoriality of the presheaf F
-identifies its two sides with the restrictions along a,a'. This uses no covering,
-limit cone, directed system, or sheaf gluing; functorial restriction suffices.
-Empty overlaps and equal objects are included by the same universal property. -/
+/-- Source: Stacks Project, Tags 03Q4 and 09YQ, fibre-product overlap reduction. -/
 theorem etale_pair_restriction_detection
     {S : Scheme.{u}} (W U V : S.Etale)
     [QuasiCompact W.hom] [QuasiSeparated W.hom]

@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibilit
 
 /-!
 # Tor amplitude and `Dᵇ_ctf(X,Λ)` with finite constant scalar models
-
-(blueprint: det-def-sfb-constructible-tor-amplitude).
+.
 
 The four notions of the node are the landed declarations of
 `WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibility` and the generic Tor amplitude
@@ -58,8 +57,7 @@ have Tor amplitude in `[a,b]`, so does `K`. A direct summand (retract) of a comp
 amplitude in `[a,b]` has Tor amplitude in `[a,b]`. Hence the complexes of finite Tor
 amplitude form a thick subcategory (a triangulated subcategory closed under retracts) of
 `D(X_proét,Λ)`; `Dᵇ_ctf(X,Λ)` is by definition its intersection with `Dᵇ_c(X,Λ)`.
-
-(blueprint: det-def-sfb-constructible-tor-amplitude).
+.
 
 Proof plan:
 1. Isomorphism invariance. If `M ≅ M'`, restrict the isomorphism to every stratum and every

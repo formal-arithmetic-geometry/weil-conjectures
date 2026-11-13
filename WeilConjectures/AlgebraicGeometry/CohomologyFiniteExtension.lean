@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.Noetherian.Basic
 /-! # Finiteness of cohomology under extensions
 
 Source: Stacks Project, Tag 02O5.
-(blueprint: lem-pc-e2-cohomology-finite-extension)
  -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Finiteness in a fixed degree is preserved under a short exact extension, with
 scalars restricted from global functions to a Noetherian ring.
 Source: Stacks Project, Cohomology of Schemes, proof of Proposition 30.19.1, Tag 02O5:
-the long exact sequence and closure of finite modules under submodules and extensions.
-(blueprint: lem-pc-e2-cohomology-finite-extension) -/
+the long exact sequence and closure of finite modules under submodules and extensions. -/
 theorem finite_H_of_shortExact_extension {X : Scheme.{u}} (R : Type v) [CommRing R]
     [IsNoetherianRing R] (σ : R →+* Γ(X, ⊤))
     (S : ShortComplex X.Modules) (hS : S.ShortExact) (q : ℕ) :

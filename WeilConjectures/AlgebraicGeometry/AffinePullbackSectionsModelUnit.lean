@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled
 /-! # Pullback unit on affine sections models
 
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-pullback-sections-model-unit).
 -/
 
 @[expose] public section
@@ -44,20 +43,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- The affine pullback unit on a K-flat associated-sheaf model is the localized
 ordinary unit after the sections comparisons.
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW(2) and 0AA7.
-(blueprint: new-affine-pullback-sections-model-unit).
-Proof: Tilde takes M to a K-flat sheaf complex K. The canonical pullback
-counit is invertible on K. Tensor pullback of tilde M is termwise associated
-sheaf over B of scalar extension of M, after transporting g along full
-faithfulness of Spec. Its ordinary-to-derived sections comparison is therefore
-invertible by affine acyclicity without boundedness. Compose derived B-sections
-of the pullback counit with the inverse of this comparison to obtain b.
-Apply the canonical derived adjunction unit factorization to K. Naturality of
-the sections comparison moves the pullback counit past the comparison. The
-hypothesis hr replaces the derived lift of v by r. The equality specifying
-s replaces the R-sections comparison by s.inv. Cancel these comparisons to
-obtain the equation. No extension adjunction or comparison c is involved.
-For the zero complex the maps are the unique maps between zero objects. -/
+Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW(2) and 0AA7. -/
 theorem exists_affinePullbackSections_model_unit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibil
 /-! # The affine algebra counit on K-injective cohomology
 
 Source: Stacks Project, Tag 0AVW, proof of perfect-lemma-affine-morphism-equivalence.
-(blueprint: lem-sc-affine-algebra-kinjective-counit-homology-factorization).
 -/
 
 @[expose] public section
@@ -30,24 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The cohomology of the termwise counit on a K-injective complex is the ordinary
 module counit, under the affine cohomology comparison and the exact pullback comparison.
-Source: Stacks Project, Tag 0AVW, proof, using the unbounded bound of Tag 08D4.
-(blueprint: lem-sc-affine-algebra-kinjective-counit-homology-factorization).
-
-Proof: Cover Y by affine opens V. Their inverse images are affine since f is affine.
-Apply the unbounded affine sections calculation (Tag 08D4, with bound one) to I,
-whose cohomology modules are quasi-coherent. K-injectivity makes sections of I on
-these inverse images compute derived sections. Thus H^n(g_* I) is canonically
-identified with g_* H^n(I). Keep the f_*O_X action on each sections complex: the
-comparison is linear for this action and commutes with restrictions, so it glues
-as a comparison of modules over the direct-image algebra. Exact P commutes with
-cohomology. The preceding comparison is e. The canonical exact-functor homology
-comparison identifies the contribution of P to the displayed composite. Naturality
-of the kernel and image maps identifies the homology of
-the termwise counit with the module counit under e: on an affine chart both send
-b tensor s to b*s. For arbitrary a, transport this identity from tensor pullback
-by the unique adjunction-compatible isomorphism of left adjoints. This computation
-uses no derived unit, no derived counit invertibility, and no boundedness of I.
-The same maps apply to the zero complex, empty schemes and all integer degrees. -/
+Source: Stacks Project, Tag 0AVW, proof, using the unbounded bound of Tag 08D4. -/
 theorem affine_algebra_kinjective_counit_homology_factorization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.PerfectStalkDerivedIsoSpread
 /-! # Spreading a prescribed bounded free stalk model
 
 Source: Stacks Project, Tag 0BCD, spreading paragraph, with Tags 0BC7 and 09RE.
-(blueprint: lem-sc-bounded-free-stalk-model-spread).
 -/
 
 @[expose] public section
@@ -28,31 +27,7 @@ noncomputable section
 /-- A given bounded finite-free stalk model of a locally strictly perfect object spreads
 with its specified ranks to an affine neighbourhood. No residue rank computation is made.
 
-Source: Stacks Project, Tag 0BCD, spreading paragraph; Tags 00CR, 0BC7 and 09RE.
-(blueprint: lem-sc-bounded-free-stalk-model-spread).
-
-Proof:
-1. Lift F as a complex by exists_boundedFree_stalk_complex_lift, giving an affine
-   neighbourhood U and a bounded global auxiliary complex H. On U its terms are
-   free of ranks d i, and the stalk complex of H is isomorphic to F. This uses finite
-   differential matrices directly, retaining the specified bases and ranks.
-2. The bounds of H and its termwise free isomorphisms make its restriction to U
-   strictly perfect: each free isomorphism supplies the required retraction. Compose
-   eF inversely with the derived image of the stalk complex isomorphism. This identifies
-   the derived stalks of G and H. Transport hlocal along eG to get a local strictly
-   perfect representative for Q(G), then use
-   exists_affine_restriction_iso_of_perfect_stalk_iso to extend the derived comparison
-   to an affine W containing x inside U.
-3. Set K equal to the termwise restriction of H to W. Restriction preserves zero objects,
-   hence the bounds. The restriction-composition isomorphism identifies each K.X i
-   with the restriction from U of H.X i. Apply that restriction to its given free
-   isomorphism and use mapFreeIso with overMapUnitIso to identify its image with the
-   rank-d i free sheaf on W. Finally compose the derived restriction of eG inverse,
-   the exact restriction comparison for Q, and the derived isomorphism on W.
-The two intermediate theorems separate construction of a complex from comparison of
-existing perfect models. Zero ranks, empty degree intervals and nonseparated schemes
-are allowed. No finite-projective standard free cover or residue rank computation is used.
--/
+Source: Stacks Project, Tag 0BCD, spreading paragraph; Tags 00CR, 0BC7 and 09RE. -/
 theorem spread_boundedFree_stalkModel
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

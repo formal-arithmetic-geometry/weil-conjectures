@@ -13,8 +13,7 @@ public import Mathlib.Algebra.Homology.Single
 /-! # Vanishing of derived tensor cohomology on a scheme
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU;
-Derived Categories of Schemes, Tag 08EA
-(blueprint: def-pc-derived-tensor-cohomology-vanishes).
+Derived Categories of Schemes, Tag 08EA.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ The representative is required to exist: this predicate cannot hold vacuously.
 K-flat resolutions exist (Tag 06YS), and different K-flat representatives compute
 isomorphic derived tensor products (Tag 06YU). Thus existential choice of a
 representative gives exactly vanishing of the derived tensor cohomology sheaf.
-Source: Stacks Project, Tags 06YS, 06YU and 08EA
-(blueprint: def-pc-derived-tensor-cohomology-vanishes). -/
+Source: Stacks Project, Tags 06YS, 06YU and 08EA. -/
 def schemeDerivedTensorCohomologyVanishes (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X)

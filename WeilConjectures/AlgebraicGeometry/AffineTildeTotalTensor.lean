@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 /-! # Tilde and the unbounded total tensor complex
 
 Source: Stacks Project, Tag 08DX, proof of the affine computation.
-(blueprint: lem-pc-affine-tilde-total-tensor).
 -/
 
 @[expose] public section
@@ -120,18 +119,7 @@ private noncomputable instance affineTotalTensorColimits (A : Type u) [CommRing 
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Tilde commutes naturally with the total tensor complex, for two arbitrary unbounded
-module complexes. Source: Stacks Project, Tag 08DX, proof of part (2), and Tag 01I8.
-(blueprint: lem-pc-affine-tilde-total-tensor).
-
-Proof: the affine tilde tensor comparison of Tag 01I8 identifies, in each bidegree,
-`tilde(P.X p) tensor tilde(N.X q)` with `tilde(P.X p tensor N.X q)`. Its uniqueness
-on pure global tensors implies naturality in both factors. Consequently it respects
-both differentials, including the sign on the second differential. The tilde functor
-is a left adjoint to global sections, and therefore preserves every coproduct indexed
-by the pairs (p,q) with p+q=n, even when the complexes are unbounded. Apply these
-coproduct comparisons degreewise to obtain mutually inverse chain maps. Checking on
-each summand gives naturality with respect to maps of both input complexes. Applying
-Q to this natural total-complex isomorphism gives the stated localized comparison. -/
+module complexes. Source: Stacks Project, Tag 08DX, proof of part (2), and Tag 01I8. -/
 theorem affineTilde_totalTensor_natIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] :

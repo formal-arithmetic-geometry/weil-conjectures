@@ -285,7 +285,6 @@ private theorem diagonal_natural {A B : Type*} [Category* A] [Category* B]
 Source: Stacks Project, Tags 0940 and 0941, and the final paragraph of
 literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md.
-(auxiliary; not a blueprint node).
 
 Proof in words:
 Take the canonical product comparison degreewise. Its projection identities imply

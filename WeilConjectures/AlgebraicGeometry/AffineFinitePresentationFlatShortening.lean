@@ -25,36 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 an affine scheme without shrinking that scheme. This is an algebraic statement;
 there is no proper morphism, coefficient sheaf, or competing cohomology model.
 Source: Stacks Project, https://stacks.math.columbia.edu/tag/068V (residue criterion),
-Tags 0653 and 064U (Tor-amplitude and finite-projective representatives), and 08EB.
-(blueprint: lem-pc-affine-finite-presentation-flat-shortening).
-
-Proof:
-1. Identify S with Spec A. The affine quasi-coherent equivalence identifies the
-   global-section terms of B with finitely presented flat A-modules, hence finite
-   projectives. The complex P of sections is concentrated in [0,b], and associated
-   sheaves recover B, including its differentials. Residue pullback is ordinary
-   tensor of P with the corresponding residue field.
-2. If the top degree m is greater than d, its fibre homology is the cokernel of
-   the preceding differential. This cokernel is finite and has zero fibre at every
-   prime by hvan. Local Nakayama makes its localization zero at every prime;
-   hence it is zero. The differential onto P^m is therefore surjective and splits
-   because P^m is projective. Decompose P^(m-1) as its finite-projective kernel
-   plus P^m. The complex relation makes the preceding differential land in that
-   kernel, so the P^m summands in degrees m-1,m form a contractible subcomplex.
-   Remove it. This is a chain homotopy equivalence, preserved by every tensor.
-3. Repeat at the next top degree until the complex is concentrated in [0,d].
-   All replacements are finite projective. No negative term is introduced:
-   each removed pair has m > d >= 0, hence m-1 >= 0. If b <= d no cancellation
-   is needed. Associate sheaves to the resulting complex and transport to S.
-   Its terms are flat and quasi-coherent. Its section complex is bounded finite
-   projective, hence pseudo-coherent: successively add finite-projective
-   complements as contractible pairs, descending from the top degree, to form
-   a bounded-above finite free complex with the same derived image (Tag 064U).
-   That free complex may be unbounded below, as the definition permits.
-4. Pullback preserves the chain homotopy equivalences from step 2. Taking homology
-   gives the isomorphisms for every scheme over S, including nonaffine ones.
-   This keeps S fixed and claims no global freeness. For the zero ring use the
-   zero complex; d = 0 yields a finite-projective module in degree zero. -/
+Tags 0653 and 064U (Tor-amplitude and finite-projective representatives), and 08EB. -/
 theorem exists_affine_finitePresentation_flat_shortening (S : Scheme.{u})
     (hS : IsAffine S) (B : CochainComplex S.Modules ℤ) (b d : ℕ)
     (hBge : B.IsStrictlyGE 0) (hBle : B.IsStrictlyLE b)

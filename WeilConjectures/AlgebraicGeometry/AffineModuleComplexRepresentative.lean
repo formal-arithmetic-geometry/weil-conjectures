@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Module-complex representatives on affine schemes
 
 Source: Stacks Project, Tags 06Z0 and 08DW.
-(blueprint: lem-pc-affine-module-complex-representative).
 -/
 
 @[expose] public section
@@ -35,14 +34,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- A quasi-coherent derived object on an affine scheme has a module-complex representative.
-Source: Stacks Project, Tag 06Z0.
-Proof: restriction along the inverse of Y.toSpecΓ is an exact equivalence, preserving
-quasi-coherent cohomology. Apply the core affine derived equivalence to this transported
-object and essential surjectivity of Q to its inverse image. The equivalence comparison
-identifies its image with termwise tilde of a module complex M. Apply exact restriction
-back along Y.toSpecΓ and its localization comparison to obtain the displayed isomorphism.
-No boundedness is required, and the zero ring is included.
-(blueprint: lem-pc-affine-module-complex-representative). -/
+Source: Stacks Project, Tag 06Z0. -/
 theorem exists_affine_module_complex_representative (Y : Scheme.{u}) [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :

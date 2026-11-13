@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPartialSortUnique
 
 Source: Stacks Project, Tag 01FM, verification of
 `cohomology-equation-first-homotopy` (omitted in the source).
-(blueprint: lem-pc-alternating-cech-partial-sort-advance)
 -/
 
 @[expose] public section
@@ -25,20 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Deleting the tail copy of the junction advances the partially sorted prefix.
 
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1, labelled-deletion verification.
-Proof: Write b=tau^{-1}(sigma(a)). Since tau agrees with sigma before a, injectivity
-of sigma implies b>=a. Move tau(b) to position a, shifting entries a,...,b-1 right.
-This is tau composed with the inverse interval cycle (a ... b). It agrees with
-sigma through a. Its remaining tail is the old increasing tail with tau(b) removed,
-so remains increasing. Thus it equals rho: both have the same prefix and their
-increasing tails enumerate the same complement. In the junction map, positions
-0,...,a are sigma(0),...,sigma(a), and later positions are tau(a),...,tau(p+1).
-Deleting position b+1 leaves exactly the moved tuple: below a the prefix is unchanged,
-at a the entry is tau(b), from a+1 through b it is tau(k-1), and above b it is tau(k).
-These are also the four cases of the inverse interval cycle. This proves both
-function equality and permutation equality. If b=a the cycle is identity and the
-adjacent duplicate is removed. If a=p+1 the advanced tail is empty and rho=sigma.
-(blueprint: lem-pc-alternating-cech-partial-sort-advance) -/
+Source: Stacks Project, Tag 01FM, equation 20.23.6.1, labelled-deletion verification. -/
 theorem cechPartialSort_advance (p : ℕ) (σ τ ρ : Equiv.Perm (Fin (p + 2)))
     (a : Fin (p + 2)) (hτ : cechPartialSort σ τ a)
     (hρ : (∀ k, k.val < a.val + 1 → ρ k = σ k) ∧

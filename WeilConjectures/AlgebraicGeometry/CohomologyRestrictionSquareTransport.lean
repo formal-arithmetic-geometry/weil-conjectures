@@ -30,23 +30,7 @@ open Scheme Etale
 total-space cohomology map with its restricted cohomology map.
 
 Source: Stacks Project, proof of Tag 095T, the final stalk-map calculation;
-Tag 03FD for the underlying abelian coefficient convention.
-(blueprint: lem-weil-pbc-cohomology-restriction-square-transport)
-
-Proof: exact inverse image commutes with forgetting the module structure.
-Let alpha identify i^*(F_ab) with (i^* F)_ab and beta identify g^*(F_ab)
-with (g^* F)_ab. Let gamma identify j^*g^*(F_ab) with
-k^*(i^* F)_ab: compose the inverse-image composition isomorphisms,
-the equality j >> g = k >> i, and k^* alpha. Define b₁ as alpha on
-cohomology after restriction along i, and b₂ as gamma on cohomology
-after restriction along j. The first assumed bijection makes b₁ invertible.
-Naturality of cohomologyMap with beta identifies restriction along j on
-g^*(F_ab) with restriction on (g^* F)_ab; the second assumed bijection
-and beta therefore make b₂ invertible. Finally functoriality of Ext
-pullback and coherence of the constant-Z inverse-image isomorphism give
-gamma H(j) H(g) = H(k) alpha H(i). This is the displayed equation.
-No cartesianness is needed, and no properness, torsion, or vanishing is
-inferred here. The proof includes degree zero and zero cohomology groups. -/
+Tag 03FD for the underlying abelian coefficient convention. -/
 theorem Etale.exists_addEquiv_cohomology_restrictionSquare
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' X₀ X₀' : Scheme.{u}} (g : X' ⟶ X) (i : X₀ ⟶ X)

@@ -542,20 +542,7 @@ private lemma coefficient_square
 inverse images attached to a commutative square.
 
 Source: Stacks Project, Remark 21.19.3, Tag 07A7, and the composition of inverse images
-in the definition of the exchange map.
-Proof: for composable morphisms, compare both coefficient transports of their
-composite inverse image. Inverse images are left adjoints to the sectionwise direct
-images; the coefficient comparison is obtained from the common direct-image/coextension
-composite by uniqueness of left adjoints. Uniqueness is transitive and compatible with
-composition of adjunctions. Thus the coefficient comparison for a composite equals
-the composite of the two coefficient comparisons, with the inverse-image composition
-isomorphisms inserted. Apply this once to h followed by p and once to e followed by g.
-The equality h ≫ p = e ≫ g identifies the composite comparisons. Composing the first
-identity with the inverse of the second gives the asserted square. Apply exact
-derivation: Functor.mapDerivedCategoryPlusNatIso preserves composition and its composition
-isomorphisms are natural, so the same identity holds in D⁺. No direct-image derived
-functor or adjunction unit/counit occurs in this assertion.
-(blueprint: lem-sbc-restrict-scalars-pullback-square-comparison) -/
+in the definition of the exchange map. -/
 theorem pullbackSquareComparison_restrictScalars
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

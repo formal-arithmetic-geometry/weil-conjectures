@@ -28,11 +28,7 @@ def-sbc-raw-module-scalar-pullback-comparison]. Its component is adjoint to the
 coefficient-forgotten
 comparison adjunction unit.
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: Coefficient forgetting is left adjoint to coefficient coinduction. Compose this adjunction
-with site comparison in the two orders. Their right adjoints agree, so uniqueness of left adjoints
-gives the isomorphism. Apply the two Hom equivalences to its component; the left-adjoint uniqueness
-unit equation and naturality of the coinduction unit identify the component with the stated mate. -/
+06YY and 0GLZ. -/
 def forgetComparisonIso (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     Etale.moduleAbelianForget A Z ⋙
         comparisonUpperStar AddCommGrpCat.{u + 1} Z ≅

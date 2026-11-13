@@ -26,12 +26,7 @@ namespace AlgebraicGeometry.Scheme
 variable {k : Type u} [Field k] {X : Scheme.{u}}
 
 /-- Blueprint `lem-kun-closed-point-field` (a): a point `x` of a scheme locally of finite type
-over a field `k` is closed if and only if its residue field `κ(x)` is finite over `k`.
-
-Proof: one direction is `Hom.finite_residueField_of_isClosed` (Zariski's lemma). Conversely,
-if `κ(x)` is finite over `k`, the composite `Spec κ(x) ⟶ X ⟶ Spec k` is finite, so
-`Spec κ(x) ⟶ X` is locally of finite type, and in the Jacobson scheme `X` this forces `x` to
-be closed. -/
+over a field `k` is closed if and only if its residue field `κ(x)` is finite over `k`. -/
 theorem Hom.isClosed_singleton_iff_finite_residueField (f : X.Hom (Spec (.of k)))
     [LocallyOfFiniteType f] (x : X) :
     letI := (f.residueFieldAlgebraMap x).toAlgebra
@@ -67,10 +62,7 @@ theorem _root_.Module.Finite.of_essFiniteType_of_isAlgebraic (K L : Type*) [Fiel
 
 /-- Blueprint `lem-kun-closed-point-field` (a), transcendence degree form: a point `x` of a
 scheme locally of finite type over a field `k` is closed if and only if `κ(x)` is algebraic over
-`k` (i.e. `trdeg_k κ(x) = 0`).
-
-Proof: `κ(x)` is a finitely generated field extension of `k`, so it is algebraic if and only if
-it is finite; conclude by `Hom.isClosed_singleton_iff_finite_residueField`. -/
+`k` (i.e. `trdeg_k κ(x) = 0`). -/
 theorem Hom.isClosed_singleton_iff_isAlgebraic_residueField (f : X.Hom (Spec (.of k)))
     [LocallyOfFiniteType f] (x : X) :
     letI := (f.residueFieldAlgebraMap x).toAlgebra
@@ -84,11 +76,7 @@ theorem Hom.isClosed_singleton_iff_isAlgebraic_residueField (f : X.Hom (Spec (.o
 
 /-- Blueprint `lem-kun-closed-point-field` (b): if `k` is separably closed and `x` is a closed
 point of a scheme locally of finite type over `k`, then `κ(x)` is finite and purely
-inseparable over `k`, and `κ(x)` is separably closed.
-
-Proof: finiteness is part (a); a finite extension of a separably closed field is purely
-inseparable (`lem-kun-sep-closed-finite-extension-purely-inseparable`) and separably closed
-(`lem-kun-sep-closed-finite-extension-sep-closed`). -/
+inseparable over `k`, and `κ(x)` is separably closed. -/
 theorem Hom.residueField_of_isClosed_of_isSepClosed [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [LocallyOfFiniteType f] (x : X) (hx : IsClosed {x}) :
     letI := (f.residueFieldAlgebraMap x).toAlgebra

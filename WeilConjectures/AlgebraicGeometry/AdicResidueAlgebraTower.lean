@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 
 Source: Stacks Project, proetale.tex, Tag 09C6, the normalized stalk system before
 application of More on Algebra, Tag 09AW.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A normalized algebraic quotient tower, with its actual scalar-extension adjunctions.
 The coefficient ring and its quotients need not be finite as sets.
-Source: Stacks Project, Tags 09C6 and 09AW.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 09C6 and 09AW. -/
 structure AdicResidueAlgebraTower {A : Type w} [CommRing A] (J : Ideal A) where
   level : ∀ n : ℕ, DerivedCategory (ModuleCat.{w} (A ⧸ J ^ (n + 1)))
   transition : ∀ n : ℕ, level (n + 1) ⟶
@@ -50,8 +48,7 @@ structure AdicResidueAlgebraTower {A : Type w} [CommRing A] (J : Ideal A) where
 /-- Exact constant realization of an algebraic finite quotient on the actual slice.
 The algebraic category uses the small Grothendieck localization; the sheaf category
 uses the standard localization of the coefficient package.
-Source: Stacks Project, Tags 093J, 03DJ and 09C6.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 093J, 03DJ and 09C6. -/
 def adicResidueFiniteConstant (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :=

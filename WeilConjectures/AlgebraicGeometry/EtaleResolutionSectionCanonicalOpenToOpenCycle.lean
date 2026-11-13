@@ -51,7 +51,6 @@ private lemma sectionsEquiv_precomp {X : Scheme.{u}} {A B : X.Etale}
 set_option backward.isDefEq.respectTransparency false in
 /-- Cocycle-level restriction identity underlying the canonical open comparison.
 Source: Stacks Project, Tags 0A50 and 03F3; normalized Hom-cocycle calculation.
-(blueprint: lem-weil-pbc-etale-resolution-section-canonical-open-to-open-cycle)
 
 The proof expands the two `open_cocycle` normalization identities, rewrites the
 Ext class of the restricted cocycle using `InjectiveResolution.mk₀_comp_extMk`,

@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummer
 # Exact derived realization of Cartier classes
 
 Source: blueprint main-20261015, det-sp-p1-trace, clause 3: the canonical
-identification of the Ext cycle class with its derived closed-image arrow
-(blueprint: def-sp-cartier-derived-realization).
+identification of the Ext cycle class with its derived closed-image arrow.
 
 The predicate uses the existing exact-direct-image realization, with specified
 source and target isomorphisms. It applies to any exact additive functor.
@@ -33,7 +32,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical shift and degree-zero comparison for the positive Tate line.
-Source: det-sp-p1-trace, clause 3 (blueprint: def-sp-cartier-derived-realization). -/
+Source: det-sp-p1-trace, clause 3. -/
 @[irreducible]
 def cartierShiftSingleIso {C : Type uC} [Category.{vC} C] [Abelian C]
     [HasDerivedCategory.{wC} C] {D : Type uD} [Category.{vD} D] [Abelian D]

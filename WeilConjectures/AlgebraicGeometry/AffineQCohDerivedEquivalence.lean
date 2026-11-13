@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-!
 # The affine quasi-coherent derived equivalence
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0
-(blueprint: lem-pc-affine-qcoh-derived-equivalence).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0.
 -/
 
 @[expose] public section
@@ -39,31 +38,7 @@ namespace AlgebraicGeometry
 with the full-subcategory inclusion is triangulated for a compatible shift structure,
 and it sends `A[k]` to `𝒪_Y[k]` for every integer `k`.
 
-Source: Stacks Project, Lemma 36.3.5, Tag 06Z0
-(blueprint: lem-pc-affine-qcoh-derived-equivalence).
-
-Proof:
-1. The affine tilde/Gamma adjunction (lem-weil-pbc-affine-tilde-gamma-adjunction)
-   is fully faithful onto quasi-coherent sheaves. Tilde preserves colimits and kernels
-   (lem-weil-pbc-quasi-coherent-module-kernel), hence is exact. The image of `A` is
-   the structure sheaf. Termwise tilde therefore inverts quasi-isomorphisms, factors
-   through localization, and lands in the full quasi-coherent derived subcategory.
-2. Derive global sections using K-injective resolutions as for
-   def-pc-derived-direct-image. The ordinary adjunction induces the derived unit
-   and counit; applying exact tilde termwise computes its derived functor.
-3. Affine vanishing (pqf-lem-affine-vanishing) supplies the bound `N = 1` in
-   lem-pc-unbounded-derived-functor-cohomological-bound. Apply that bound to the
-   negative truncation, then use the truncation triangle and left exactness of Gamma
-   on the nonnegative injective resolution to obtain
-   `H^i(RΓ(Y,E)) ≅ Γ(Y,H^i(E))` for quasi-coherent derived objects.
-4. Exactness of tilde and this comparison identify the cohomology maps of the
-   derived counit and unit with their ordinary counterparts on quasi-coherent
-   sheaves and modules. These are isomorphisms by the affine adjunction, so the
-   derived functors are quasi-inverse equivalences. Their complex constructions
-   commute with shifts and preserve cone triangles, giving triangulatedness.
-5. The complex `A[k]` has `A` in degree `-k` and zero elsewhere. Termwise tilde
-   gives the structure sheaf in that degree, namely `𝒪_Y[k]`.
--/
+Source: Stacks Project, Lemma 36.3.5, Tag 06Z0. -/
 theorem exists_affineQCohDerivedEquivalence (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

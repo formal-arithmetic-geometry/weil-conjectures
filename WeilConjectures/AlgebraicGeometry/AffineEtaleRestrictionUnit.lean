@@ -23,17 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Source: Stacks Project, Topologies 04HR, Sites 00WX and 00X1;
-Étale Cohomology 09YQ (blueprint: lem-weil-pbc-affine-etale-restriction-unit).
-Proof: restriction along the full affine inclusions is an equivalence for sheaves of
-sets in Type (u + 1): the affine refinement and special-cocontinuity argument of
-04HR is independent of the coefficient universe. The identification t induces an
-isomorphism between the two right-adjoint
-composites, since their evaluations are the sections at the same base-change object.
-Conjugate the given affine inverse-image adjunction by the restriction equivalences.
-Uniqueness of left adjoints gives an isomorphism from full-site inverse image to this
-conjugate, compatible with the units. Whisker with restriction and cancel its
-quasi-inverse. Evaluating the resulting unit equation at V and s gives the formula
-below, with the restriction along t expressing the right-adjoint identification. -/
+Étale Cohomology 09YQ. -/
 theorem affineEtale_inverseImage_restriction_unit
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

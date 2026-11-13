@@ -31,25 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A sufficiently high ideal multiple intersects a quasi-coherent submodule
 only inside a prescribed ideal multiple of that submodule.
 
-Source: Stacks Project, Tag 01YA, inclusion clause of Artin-Rees.
-(blueprint: lem-pc-coherent-ideal-product-intersection-bound)
-
-Proof: On each affine open of X, H has a finite module of sections over a
-Noetherian ring. Apply algebraic Artin-Rees to the image of a there. Choose a
-finite affine cover, take c to be the maximum of its Artin-Rees constants, and
-set k = c + r. On a cover member with constant d <= c the intersection
-I^k H intersect T equals I^(k-d)(I^d H intersect T), which is contained in
-I^(k-d) T and therefore in I^r T since k-d >= r. The affine multiplication
-image formula identifies these algebraic products with the recursive ideal
-products, including exponent zero. Localization gives the same range inclusion
-on subopens of every cover member. For an arbitrary open W, restrict a section
-in both ranges to its intersections with the affine cover. The resulting
-preimages in I^r T agree on overlaps because the composite I^r T -> T -> H is
-mono. Glue them using the sheaf axiom to obtain the asserted preimage on W.
-For an empty scheme use c = 0 and the empty-cover sheaf axiom. When r = 0 the
-right-hand product is the whole submodule. Zero and unit ideals, and T = 0,
-are covered by the same algebraic Artin-Rees argument. No coherence of T and
-no annihilation or complementary-open hypothesis are needed. -/
+Source: Stacks Project, Tag 01YA, inclusion clause of Artin-Rees. -/
 theorem coherent_ideal_product_intersection_bound
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (H T : X.Modules) (hH : RingedSpace.IsCoherent X.toRingedSpace H)

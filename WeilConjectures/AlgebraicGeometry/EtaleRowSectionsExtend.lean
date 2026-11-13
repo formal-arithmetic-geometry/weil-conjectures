@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRowIntegerSections
 /-! # Sections comparison and extension by zero
 
 Source: Stacks Project, Tags 015J and 015K.
-(blueprint: lem-weil-pbc-row-sections-extend).
 -/
 
 @[expose] public section
@@ -22,15 +21,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Commuting sections with extension by zero respects any row comparison.
-Source: Stacks Project, Tags 015J and 015K.
-(blueprint: lem-weil-pbc-row-sections-extend).
-
-Proof. Test the square in each integer degree. In nonnegative degree n, each
-mapExtendIso component is the canonical equality isomorphism identifying the extended
-term with the original term. The comparison components are φ.f n. Naturality of the
-sections unit along those equality isomorphisms gives the required square, with
-functoriality of sections. In negative degree the extended sections source is zero,
-so the two morphisms are equal. No augmentation or injectivity hypothesis is needed. -/
+Source: Stacks Project, Tags 015J and 015K. -/
 theorem ceRowSectionsMap_extend {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}

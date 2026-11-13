@@ -145,31 +145,7 @@ private theorem affine_hom_of_section_coordinates
   simpa only [eN.apply_symm_apply] using h
 
 /-- Object reconstruction and full faithfulness in normalized section coordinates.
-Source: Stacks Project, Tag 01ZR (affine proof), and Tag 01I6.
-(blueprint: lem-pc-affine-chart-normalized-section-models).
-
-Proof: The representative of the starting class is equivalent to j in the
-preorder, so its spectrum map is an isomorphism. The second projection of its
-pullback chart to U(a) is therefore an isomorphism. Its inverse pullback unit on
-global sections gives the additive equivalences δM and δN. The upper-tail chart
-cone is limiting by upperTailChartCone_isLimit. Reindex it along the equivalence
-from the antisymmetrization to the tail. All charts, including its vertex, are
-affine by affine base change. Affine spectrum/global-sections duality turns this
-limiting cone into a colimit of F. Identify its vertex with the direct chart by
-pullback pasting. This gives ρ₀; stage pullback pasting gives ρₓ. Their equation on
-the iterated chart follows from the colimit cocone equation after applying global
-sections and comparing the two projections of each pasting isomorphism. Apply
-quasi-coherent affine reconstruction at the starting chart, then the affine
-pullback/scalar-extension identification at every stage and at the vertex.
-Transport through these ring and chart isomorphisms to get e₀M,e₀N,eₓM,eₓN.
-The identification is linear along ρ₀ or ρₓ, giving the four scalar equations.
-The tensor-to-pullback identification sends 1 ⊗ m to the pullback unit applied to
-m, giving all four normalizations with the same δM,δN. Finally the affine
-quasi-coherent equivalence is fully faithful: conjugating its Hom equivalence by
-these object identifications yields α and β, with the displayed coordinate
-formulas. No compatibility of α and β with scalar extension of morphisms is
-asserted here. This construction also covers zero modules, zero rings and empty
-charts, and uses no finite-presentation assumption. -/
+Source: Stacks Project, Tag 01ZR (affine proof), and Tag 01I6. -/
 theorem affine_chart_normalized_section_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

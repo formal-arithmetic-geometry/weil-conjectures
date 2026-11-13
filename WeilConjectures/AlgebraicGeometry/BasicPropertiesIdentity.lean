@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 /-! # Identity property of module cohomology maps
 
 Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-identity).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Identity property of the cohomology map induced by an h-map.
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
 Derived Categories, Tags 013P, 013S, 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-identity).
 
 Proof (argument specialized from the parent node):
 Steps 1--3 are packaged in `moduleCohomologyFMap_identity_resolution_homology`;

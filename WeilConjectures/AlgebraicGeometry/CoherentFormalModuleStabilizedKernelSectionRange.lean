@@ -13,8 +13,7 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.RingTheory.AdicKernelImageBound
 
 /-! # Stabilized kernel section ranges
-Source: Stacks Project, Lemma 087X, proof of claim (a).
-(blueprint: lem-weil-pbc-stabilized-kernel-section-range). -/
+Source: Stacks Project, Lemma 087X, proof of claim (a). -/
 
 @[expose] public section
 
@@ -25,20 +24,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- The image of the true completed kernel equals the stabilized affine section range.
 
-Source: Stacks Project, Lemma 087X, proof of claim (a), using Lemma 087W.
-(blueprint: lem-weil-pbc-stabilized-kernel-section-range).
-
-Proof: Put R equal to the completion and K equal to the extended ideal. R is
-Noetherian. Artin--Rees applied to range(f) supplies a bound d. At l=max(m+c,m+d),
-the image of f inverse(K^(l+1)N) modulo K^(m+1)M equals the image of ker(f).
-The projection kernel criterion makes equality in this quotient exactly equality
-under p_m. Surjectivity of p_l and hf and hqk identify the projected preimage
-with the section range of the level-l categorical kernel followed by transition.
-Quasi-coherence of the level kernels and affine exactness identify this with the
-section range of its abelian image inclusion. Equality hc of subobjects identifies
-this image with the image at m+c. Combining these equalities proves the assertion.
-For the empty affine, the rings and modules are zero; zero and unit ideals also
-satisfy the same calculation without requiring a nontriviality hypothesis. -/
+Source: Stacks Project, Lemma 087X, proof of claim (a), using Lemma 087W. -/
 theorem coherentFormalModule_stabilized_kernel_section_range
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

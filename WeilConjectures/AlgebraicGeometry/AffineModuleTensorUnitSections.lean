@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineTensorUnitSectionPresentation
 /-! # Affine tensor unit on sections
 
 Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
-(blueprint: lem-weil-pbc-affine-module-tensor-unit-sections).
 -/
 
 @[expose] public section
@@ -126,25 +125,7 @@ private theorem scalar_relation_unit_bijective
     exact ⟨a z, (hnormal z).symm⟩
 
 /-- The tensor unit comparison is bijective on the indicated affine sections.
-Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs.
-(blueprint: lem-weil-pbc-affine-module-tensor-unit-sections).
-
-Proof: On V put D = O_X(V), C = O_U(f⁻¹V), and N = G(V).
-The structure algebra f_*O_U is quasi-coherent by affine pushforward. Scalar restriction
-therefore makes G quasi-coherent over O_X. The affine pullback section formula identifies
-its pullback sections with C tensor_D N, compatibly with the adjunction unit.
-The pushout identifies B on the affine preimage with C tensor_D C, with ε multiplication.
-The affine change-of-rings section formula then identifies H(G)(f⁻¹V) with
-C tensor_(C tensor_D C) (C tensor_D N). The κ-unit and γ equations, together with the
-formula homEquiv(γ) = unit ≫ pushforward(γ), identify β on V with
-n ↦ 1 tensor (1 tensor n). The inverse is c tensor (d tensor n) ↦ cd n,
-where C acts on N through its A(V)-module structure. The action of a ⊗ b in C tensor_D C on d ⊗
-n is ad ⊗ bn, whereas its action on the outer C is multiplication by ab. Thus the proposed
-inverse sends both balanced representatives to cabd n. In the tensor quotient, balancing first
-with d ⊗ 1 and then with 1 ⊗ cd gives c ⊗ (d ⊗ n) = cd ⊗ (1 ⊗ n) = 1 ⊗ (1 ⊗ (cd)n). Together
-with (1 · 1)n = n, these are the inverse identities on pure tensors.
-Additivity and tensor induction extend these identities to all sections. Hence β_V is
-bijective, including the empty affine open and the zero module. -/
+Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs. -/
 theorem affine_module_tensor_unit_sections_bijective [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

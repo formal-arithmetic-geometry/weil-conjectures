@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 /-! # Singleton projection retracts the local alternating augmentation
 
 Source: Stacks Project, Tag 02FU, the degree-zero insertion operator.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-singleton-retraction).
 -/
 
 @[expose] public section
@@ -43,19 +42,7 @@ private theorem cechCapFunctor_isContinuous {X : Scheme.{u}} (W : X.Opens) :
     (Opens.grothendieckTopology X)
 
 /-- The local augmentation has a left inverse in degree zero.
-Source: Stacks Project, Tag 02FU, degree-zero insertion; Tag 01FM for increasing tuples.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-singleton-retraction).
-
-Proof: Project the degree-zero product of intersection presheaves to the singleton
-whose unique index is i. On a test open V contained in U i, its intersection with
-U i is V, so the singleton restriction is identified with the identity of G(V).
-These identifications are linear and natural under restrictions. Sheafify the
-projection and restrict it to U i. Sheafification of G.val is identified with G
-by the sheafification counit, inverse to its unit on sheaves. Thus projection
-following augmentation is the identity. Extend to integer degrees: degree zero
-is unchanged, up to the canonical extendXIso and its functorial image. Transport
-the preceding retraction across these isomorphisms. For r=0 there is no i; for an
-empty U i all the modules in question are zero and the assertion still holds. -/
+Source: Stacks Project, Tag 02FU, degree-zero insertion; Tag 01FM for increasing tuples. -/
 theorem alternatingCechSheafAugmentation_restrict_degreeZero_retraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

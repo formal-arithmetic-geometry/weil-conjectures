@@ -44,28 +44,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A tensor map with the supported pullback-unit formula is injective.
 Only injectivity is asserted; no equivalence or inverse formula is assumed.
 Source: Stacks Project, Tag 02KG (Lemma 30.5.1, affine tensor computation),
-Tags 01I9 and 01IA (affine pullback), and Tag 0097 (restriction).
-(blueprint: lem-pc-coefficient-target-tensor-injective).
-
-Proof: Put A = Gamma(U,O), D = Gamma(Z,O), R = Gamma(B,O),
-and N = Gamma(Z,F|Y), where Y = f inverse image U. The affine intersection
-base-change theorem makes W intersect fprime inverse image B affine and
-the restricted cartesian square identifies it with Z times_U B, with ring
-R tensor_A D. Restriction preserves quasi-coherence. Apply the affine
-pullback section theorem to F|Z and transport tensorPullback to the standard
-pullback by uniqueness of adjoints, compatibly with units. Identify
-open-immersion pullback with restriction. Target sections are thus
-(R tensor_A D) tensor_D N. The structural A-action on N is exactly the
-one in the statement: GammaSpecIso cancels the canonical affine chart.
-The stated formula identifies c(r tensor n) with (r tensor 1) tensor n,
-first for r=1 by unit compatibility, and then for every r by R-linearity.
-The balanced map back sends
-(r tensor d) tensor n to r tensor (d*n). Balancing over D follows from its
-module law, and balancing over A follows from the common structural action.
-Its composite with c sends r tensor n to r tensor (1*n) = r tensor n.
-Tensor induction proves the composite is the identity. Applying this left
-inverse to c(x)=c(y) gives x=y, proving injectivity. Empty Z or B gives zero
-modules, for which the identity and injectivity still hold. -/
+Tags 01I9 and 01IA (affine pullback), and Tag 0097 (restriction). -/
 theorem coefficientTarget_tensor_injective
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

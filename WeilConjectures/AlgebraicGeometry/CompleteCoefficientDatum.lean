@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 # Adic coefficient datum and reduction tower
 
 Source: literature/blueprint/master/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md, order 1255
-(blueprint: def-weil-pbc-complete-coefficient-datum).
+sk-thm-properbasechange/def-weil-pbc-complete-coefficient-datum.md, order 1255.
 
 The construction uses one K-flat model with flat terms. Quotient reductions are actual
 changed complexes. The ordinary balancing and transition maps are specified uniquely on
@@ -50,8 +49,7 @@ open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry.Scheme
 
 /-- Perfectness of the actual quotient module over the original coefficient ring,
-placed in degree zero. Source: blueprint order 1255
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+placed in degree zero. -/
 noncomputable def adicQuotientPerfect (Λ : Type t) [CommRing Λ] (I : Ideal Λ) (n : ℕ) :
     Prop :=
   letI := HasDerivedCategory.standard (ModuleCat.{t} Λ)
@@ -60,7 +58,7 @@ noncomputable def adicQuotientPerfect (Λ : Type t) [CommRing Λ] (I : Ideal Λ)
 
 /-- Precisely the coefficient hypotheses, without an assumption of I-adic completeness,
 finiteness of the quotient sets, or flatness of any quotient.
-Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
+ -/
 structure CompleteCoefficientDatum (Λ : Type t) [CommRing Λ] where
   ideal : Ideal Λ
   noetherian : IsNoetherianRing Λ
@@ -69,8 +67,7 @@ structure CompleteCoefficientDatum (Λ : Type t) [CommRing Λ] where
   quotientPerfect : ∀ n : ℕ, 1 ≤ n → adicQuotientPerfect Λ ideal n
 
 /-- The quotient map for two powers of the ideal, sending the class of x to the class of x.
-Source: blueprint order 1255, construction step 2
-(blueprint: def-weil-pbc-complete-coefficient-datum). -/
+, construction step 2. -/
 noncomputable def adicQuotientMap {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
     (b a : ℕ) (hab : a ≤ b) : Λ ⧸ I ^ b →+* Λ ⧸ I ^ a :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right hab)

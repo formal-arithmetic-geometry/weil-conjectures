@@ -212,22 +212,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Classical derived base change is computed by the section map on resolutions.
-Source: Stacks Project, Tag 01F8, equation 01F9; site version Tag 08J6.
-(blueprint: lem-weil-pbc-classical-pullback-resolution-sections)
-
-Proof: Use the chosen bounded below injective resolutions I of G and J of L G.
-The homotopy hφ says that φ represents the identity of L G in the derived category,
-because exact inverse image carries the augmentation of I to a quasi-isomorphism.
-The derived base-change transformation is characterized by compatibility with the
-derived-functor units. On I this compatibility identifies it with η on each term,
-followed by the derived Γ' unit on L I. Naturality of that unit along φ, and its
-invertibility on J, identifies this composite with Γ'(φ) following η(I).
-Apply degree-q homology and the canonical comparisons computing classical right
-derived functors by the chosen resolutions. These are precisely
-isoRightDerivedObjCochainComplex, so the displayed equality follows. A different
-lift gives the same homology map, since additive Γ' preserves homotopies.
-No acyclicity of L I for Γ' is assumed. The unit on J supplies the replacement,
-so the argument applies in degree zero, to zero sheaves, and to empty schemes. -/
+Source: Stacks Project, Tag 01F8, equation 01F9; site version Tag 08J6. -/
 theorem classicalPullback_resolution_sections
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
 /-! # EtaleLimitAffineEventualZero
 
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YP.
-(blueprint: lem-weil-pbc-etale-limit-affine-eventual-zero).
 -/
 
 @[expose] public section
@@ -41,29 +40,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The kernel half of affine-stage cohomology continuity.
 
 Source: Stacks Project, Theorem 09YQ, via Lemmas 0EYL, 04HR and 09YP,
-and the dimension-shifting argument of 0739.
-(blueprint: lem-weil-pbc-etale-limit-affine-eventual-zero).
-
-Proof: Induct on the cohomological degree, generalizing the coefficient
-system, its pullback diagram, its colimit cocone, and the initial stage.
-The degree-zero kernel theorem gives the base case. In successor degree n+1,
-the corrected-lift theorem supplies a cokernel coefficient system R with
-natural additive connecting maps, and a degree-n class z at a later stage j.
-The limit image of z is zero and its connecting image is the transition of x.
-The induction hypothesis for R kills z after a transition j → k. Naturality
-of the connecting maps then kills the successive transitions of x.
-Cohomology pullback naturality, its composition comparison, and the supplied
-coefficient composition law identify these successive transitions with the
-single transition i → k. This gives the required witness.
-
-The geometric base case and exact-ladder construction remain separate named
-theorems. Corrected lifting uses finite-stage class descent only in degree n;
-it does not invoke eventual detection of zero in that degree.
-
-Edge cases: the index is nonempty; an empty scheme has zero cohomology; degree
-zero is the section assertion. For a singleton system the assertion is
-injectivity of that identification, with the identity transition.
--/
+and the dimension-shifting argument of 0739. -/
 theorem etale_limit_affine_eventual_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

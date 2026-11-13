@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelE
 import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 
 /-! # Canonical underived comparison in affine coordinates
-Source: Stacks Project, Tags 01I9 and 08DW.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison). -/
+Source: Stacks Project, Tags 01I9 and 08DW. -/
 
 @[expose] public section
 universe u w
@@ -30,21 +29,18 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- Global sections in a supplied affine coordinate chart. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- Global sections in a supplied affine coordinate chart.
 -/
 noncomputable abbrev affineCoordinateGamma (a : AffineComparisonCoordinate.{u, w}) :=
   Scheme.Modules.pushforward a.σ.inv ⋙ moduleSpecΓFunctor (R := a.A)
 
-/-- The concrete chart model is left adjoint to its coordinate global sections. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The concrete chart model is left adjoint to its coordinate global sections.
 -/
 noncomputable def affineCoordinateAdjunction (a : AffineComparisonCoordinate.{u, w}) :
     affineCoordinateModules a ⊣ affineCoordinateGamma a :=
   tilde.adjunction.comp (affineCoordinateModuleEquivalence a.σ).toAdjunction
 
-/-- The right-adjoint comparison of a commuting affine square. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The right-adjoint comparison of a commuting affine square.
 -/
 noncomputable def affineCoordinateGammaComparison
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
@@ -85,11 +81,7 @@ noncomputable def affineCoordinateGammaComparison
     (affineCoordinateGammaComparison a b φ p hp).symm
 
 /-- The right comparisons compose by restriction of scalars.
-Source: Stacks Project, Tags 01I9 and 08DW.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison).
-Proof: every factor acts as the identity on the underlying global section.
-The equalities of maps only transport inverse-image opens; at the whole space
-these are the same open. Restriction of scalars also acts as the identity. -/
+Source: Stacks Project, Tags 01I9 and 08DW. -/
 theorem affineCoordinateGammaComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)
@@ -117,12 +109,7 @@ theorem affineCoordinateGammaComparison_comp
   simp
 
 /-- The underived affine comparisons respect the fixed scalar and pullback mates.
-Source: Stacks Project, Tags 01I9 and 08DW; uniqueness and pasting of adjoints.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison).
-Proof: the global-sections comparisons compose, since they preserve the underlying
-section. Apply the proved pasting theorem for adjunction squares. The scalar and
-tensor composition maps are exactly the mates of restriction and pushforward
-composition, respectively. Evaluate the natural-isomorphism identity at M. -/
+Source: Stacks Project, Tags 01I9 and 08DW; uniqueness and pasting of adjoints. -/
 theorem affineCoordinateTensorComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)
@@ -166,22 +153,19 @@ theorem affineCoordinateTensorComparison_comp
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.comp_id, Category.id_comp] using hh
 
-/-- The chart model on the homotopy category. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The chart model on the homotopy category.
 -/
 noncomputable abbrev affineCoordinateHomotopy (a : AffineComparisonCoordinate.{u, w}) :=
   affineCoordinateComplex a ⋙ HomotopyCategory.quotient _ (.up ℤ)
 
-/-- The supplied model is localization of the concrete homotopy model. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The supplied model is localization of the concrete homotopy model.
 -/
 noncomputable def affineCoordinateHomotopyIso (a : AffineComparisonCoordinate.{u, w}) :
     a.H ≅ affineCoordinateHomotopy a ⋙ DerivedCategory.Qh :=
   affineCoordinateModelIso a ≪≫
     Functor.isoWhiskerLeft (affineCoordinateComplex a) (DerivedCategory.quotientCompQhIso _).symm
 
-/-- The termwise comparison, factored through application of composite functors. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The termwise comparison, factored through application of composite functors.
 -/
 noncomputable def affineCoordinateComplexComparison
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
@@ -213,8 +197,7 @@ noncomputable def affineCoordinateComplexComparison
       (affineCoordinateComplexFactorIso b)
 
 /-- Termwise comparison components are the underived module mate.
-Source: the termwise construction; Stacks Project, Tag 01I9.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison). -/
+Source: the termwise construction; Stacks Project, Tag 01I9. -/
 theorem affineCoordinateComplexComparison_hom_f
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -227,16 +210,14 @@ theorem affineCoordinateComplexComparison_hom_f
   erw [CategoryTheory.Functor.map_id]
   simp only [Category.id_comp, Category.comp_id]
 
-/-- Mapping a complex in affine coordinates then passing to homotopy. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- Mapping a complex in affine coordinates then passing to homotopy.
 -/
 theorem affineCoordinateHomotopy_map (a : AffineComparisonCoordinate.{u, w})
     {M N : CochainComplex (ModuleCat.{u} a.A) ℤ} (f : M ⟶ N) :
     (affineCoordinateHomotopy a).map f =
       (HomotopyCategory.quotient _ (.up ℤ)).map ((affineCoordinateComplex a).map f) := rfl
 
-/-- The termwise mate, followed by the homotopy quotient. 
-(blueprint: lem-pc-affine-coordinate-tensor-comparison)
+/-- The termwise mate, followed by the homotopy quotient.
 -/
 noncomputable def affineCoordinateHomotopyComparison
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
@@ -256,8 +237,7 @@ noncomputable def affineCoordinateHomotopyComparison
       (HomotopyCategory.quotient _ (.up ℤ))
 
 /-- The homotopy comparison evaluates to the quotient of the complex comparison.
-Source: the termwise construction and homotopy quotient; Stacks Project, Tag 01I9.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison). -/
+Source: the termwise construction and homotopy quotient; Stacks Project, Tag 01I9. -/
 theorem affineCoordinateHomotopyComparison_hom_app
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -314,11 +294,7 @@ private theorem affineCoordinateComplexComparison_comp_hom
     (affineCoordinateTensorComparison_comp a b c φ ψ p q hp hq hs (M.X n))
 
 /-- The same composition equation on concrete homotopy models.
-Source: Stacks Project, Tags 01I9, 08DW and 0D5S.
-(blueprint: lem-pc-affine-coordinate-tensor-comparison).
-Proof: map the underived equality termwise to complexes and apply the homotopy
-quotient. The factor comparisons have identity components. At each degree the
-remaining equality is exactly affineCoordinateTensorComparison_comp. -/
+Source: Stacks Project, Tags 01I9, 08DW and 0D5S. -/
 theorem affineCoordinateHomotopyComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)

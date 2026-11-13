@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.Sites.CechCriterion
 /-!
 # Surjectivity of étale sections from vanishing Čech H¹
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F8 (lemma-ses-cech-h1)
-(blueprint: lem-weil-pbc-ses-cech-h1-surjective).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F8 (lemma-ses-cech-h1).
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ if the kernel has vanishing Čech H¹ on a cofinal system of coverings of `U`.
 coverings by `hcover`; `hcofinal` expresses refinement of every covering by a member.
 The Čech complex is computed in `Over U`, so products are fibre products over `U`.
 Source: Stacks Project, Lemma 03F8 (lemma-ses-cech-h1).
-(blueprint: lem-weil-pbc-ses-cech-h1-surjective)
 
 Proof (the node's six steps). (1) Short exactness makes `S.g` an epimorphism and `S.f`
 its kernel inclusion. By lem-weil-pbc-sheafification-exact, kernels are computed

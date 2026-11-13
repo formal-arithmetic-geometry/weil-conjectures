@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.SecondFiltrationRowGradedCycles
 /-! # Canonical comparisons for the cycles of CE rows
 
 Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable {X : Scheme.{uNatural}}
 /-- The row comparison normalized by diagonal inclusion and the homology projection.
 The source theorem is proved. Its equations determine the step lift and cycle lift
 by monicity, and the quotient comparison by epimorphic cancellation.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 noncomputable def rowComparison (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     filteredComplexPageObject D.sectionsTotal D.L 1 (q, (p : ℤ)) ≅
       (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
@@ -40,8 +38,7 @@ noncomputable def rowComparison (D : EtaleTermwiseHypercohomology X K) (p : ℕ)
     D.I D.below D.L D.filtration_formula).choose p q
 
 /-- The unique lift of row cycles to the filtration step.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 noncomputable def rowCycleStep (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj (D.I.X q)).cycles p ⟶
@@ -51,8 +48,7 @@ noncomputable def rowCycleStep (D : EtaleTermwiseHypercohomology X K) (p : ℕ) 
     D.I D.below D.L D.filtration_formula).choose_spec.choose p q
 
 /-- The unique graded class of the lifted row cycle.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 noncomputable def rowCycleClass (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj (D.I.X q)).cycles p ⟶
@@ -62,8 +58,7 @@ noncomputable def rowCycleClass (D : EtaleTermwiseHypercohomology X K) (p : ℕ)
     D.I D.below D.L D.filtration_formula).choose_spec.choose_spec.choose p q
 
 /-- The diagonal normalization of the step lift.
-Source: Stacks Project, Tag 0130.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tag 0130. -/
 theorem rowCycleStep_arrow (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     D.rowCycleStep p q ≫ (D.L.step q).arrow.f (q + (p : ℤ)) =
       (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
@@ -75,8 +70,7 @@ theorem rowCycleStep_arrow (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q :
     D.I D.below D.L D.filtration_formula).choose_spec.choose_spec.choose_spec.1 p q
 
 /-- The cycle normalization of the graded class.
-Source: Stacks Project, Tag 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tag 012K. -/
 theorem rowCycleClass_arrow (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     D.rowCycleClass p q ≫ (D.L.complexCycles q (q + (p : ℤ)) 1).arrow =
       D.rowCycleStep p q ≫ (D.L.complexQuotientπ q (q + 1) (by omega)).f (q + (p : ℤ)) :=
@@ -85,8 +79,7 @@ theorem rowCycleClass_arrow (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q 
     D.I D.below D.L D.filtration_formula).choose_spec.choose_spec.choose_spec.2.1 p q
 
 /-- The quotient normalization of row homology.
-Source: Stacks Project, Tag 0130.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tag 0130. -/
 theorem rowCycleClass_comparison (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     D.rowCycleClass p q ≫ filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫
         (D.rowComparison p q).hom =
@@ -97,8 +90,7 @@ theorem rowCycleClass_comparison (D : EtaleTermwiseHypercohomology X K) (p : ℕ
     D.I D.below D.L D.filtration_formula).choose_spec.choose_spec.choose_spec.2.2 p q
 
 /-- Row cycles and filtered first-page cycles are isomorphic, before taking homology.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 theorem rowCycleClass_isIso (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     IsIso (D.rowCycleClass p q) := by
   obtain ⟨c, hc⟩ := Functor.secondFiltration_row_graded_cycles
@@ -111,8 +103,7 @@ theorem rowCycleClass_isIso (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q 
   infer_instance
 
 /-- The inverse cycle comparison, used on individual filtered representatives.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 noncomputable def rowCyclesIso (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :
     (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj (D.I.X q)).cycles p ≅
@@ -121,8 +112,7 @@ noncomputable def rowCyclesIso (D : EtaleTermwiseHypercohomology X K) (p : ℕ) 
   asIso (D.rowCycleClass p q)
 
 /-- The signed first-page comparison, constructed from the normalized row comparison.
-Source: Stacks Project, Tag 0130.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tag 0130. -/
 noncomputable def signedRowComparison (D : EtaleTermwiseHypercohomology X K)
     (p : ℕ) (q : ℤ) :
     filteredComplexPageObject D.sectionsTotal D.L 1 (q, (p : ℤ)) ≅
@@ -131,8 +121,7 @@ noncomputable def signedRowComparison (D : EtaleTermwiseHypercohomology X K)
   ((p : ℤ) * q).negOnePow • D.rowComparison p q
 
 /-- Computing a class through row cycles.
-Source: Stacks Project, Tags 0130 and 012K.
-(blueprint: def-weil-pbc-ce-canonical-row-comparison). -/
+Source: Stacks Project, Tags 0130 and 012K. -/
 theorem rowComparison_projection (D : EtaleTermwiseHypercohomology X K)
     (p : ℕ) (q : ℤ) :
     filteredComplexPageπ D.sectionsTotal D.L 1 (q, (p : ℤ)) ≫

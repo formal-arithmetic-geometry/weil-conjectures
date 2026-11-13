@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-!
 # The ideal sheaf of a base-changed closed subscheme
 
-Source: Stacks Project, Schemes, Lemma 26.17.6, Tag 01JU (1)
-(blueprint: lem-pc-closed-subscheme-base-change-ideal-image).
+Source: Stacks Project, Schemes, Lemma 26.17.6, Tag 01JU (1).
 -/
 
 @[expose] public section
@@ -68,12 +67,7 @@ private theorem ideal_product_unit_image {X : Scheme.{u}} {I : X.Modules}
 and its kernel ideal is the image of the pulled-back ideal inclusion followed by the
 adjoint of the structure-sheaf map. The adjunction is the one supplied by the tensor
 pullback dependency; its choice does not affect the image subobject.
-Source: Stacks Project, Schemes, Tag 01JU (1)
-(blueprint: lem-pc-closed-subscheme-base-change-ideal-image).
-Proof: apply `lem-pc-closed-imm-base-change` to `i : Z ⟶ S` and `g : Y ⟶ S`.
-Its projection and ideal-image assertions are precisely these two conclusions.
-Equivalently, Tag 01JU constructs the closed subscheme defined by this image ideal,
-identifies it with the fibre product of locally ringed spaces, and observes it is a scheme. -/
+Source: Stacks Project, Schemes, Tag 01JU (1). -/
 theorem closedSubscheme_baseChange_ideal_image {S Z Y : Scheme.{u}}
     (i : Z ⟶ S) [IsClosedImmersion i] (g : Y ⟶ S) :
     IsClosedImmersion (pullback.snd i g) ∧

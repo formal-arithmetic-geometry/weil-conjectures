@@ -19,8 +19,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Detection of quasi-isomorphisms on an affine principal-open cover
 
-Source: Stacks Project, Tag 08EE, final sheafification, and Tags 01HV and 01IB
-(blueprint: lem-sc-affine-principal-cover-quasi-iso-detection).
+Source: Stacks Project, Tag 08EE, final sheafification, and Tags 01HV and 01IB.
 -/
 
 @[expose] public section
@@ -64,21 +63,7 @@ private theorem tilde_preservesHomology (R : CommRingCat.{u}) :
 set_option backward.isDefEq.respectTransparency false in
 /-- Localization at one element detects the quasi-isomorphism of the associated
 sheaf complexes on its principal open.
-Source: Stacks Project, Tags 01HV and 01IB; Tag 08EE, final sheafification step.
-(blueprint: lem-sc-affine-principal-cover-quasi-iso-detection).
-
-Proof: The source-library tildePullbackIso identifies tilde followed by pullback
-along Spec(A_a) → Spec(A) with scalar extension followed by tilde. Open restriction
-is naturally pullback. Transport along X.isoSpec and hT and identify Spec(A_a)
-with D(a) by equality of their open-immersion ranges. Associated sheaf preserves
-colimits by its affine adjunction and preserves monomorphisms because each
-localized stalk map preserves injectivity. Hence it preserves homology. Apply
-this to the localized quasi-isomorphism. Restrict back along the inverse of
-Spec(A_a) ≅ D(a), then use overFunctorEquiv and reflection of quasi-isomorphisms
-by the open-scheme equivalence. The zero element, zero ring and unit cases use
-the same localization and equivalence constructions.
-No covering or derived-category hypotheses are needed.
--/
+Source: Stacks Project, Tags 01HV and 01IB; Tag 08EE, final sheafification step. -/
 private theorem principalOpen_localized_quasiIso
     (X : Scheme.{u}) [IsAffine X]
     (T : ModuleCat.{u} (X.presheaf.obj (.op ⊤)) ⥤
@@ -238,24 +223,7 @@ private theorem quasiIso_over_of_cover (X : RingedSpace.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- Localized quasi-isomorphisms on a principal-open cover give an invertible
 map on the open derived category. No pseudo-coherence or boundedness is required.
-Source: Stacks Project, Tag 08EE, final sheafification step, and Tags 01HV and 01IB
-(blueprint: lem-sc-affine-principal-cover-quasi-iso-detection).
-
-Proof: Tilde preserves colimits by its adjunction and monomorphisms by
-injectivity of localized stalk maps, hence preserves homology. The proved
-source-library tildePullbackIso and the open restriction/pullback comparison
-identify tilde restricted to Spec(A_f) with tilde of scalar extension.
-Transport along X.isoSpec and hT, and identify Spec(A_f) with D(f) by equality
-of open-immersion ranges. This gives a quasi-isomorphism on each D(f).
-The D(f), with their inclusions into U, cover the terminal object of the
-localized open site over U. Apply Mathlib's sheaf local-isomorphism criterion
-to the underlying abelian sheaves. Exact restriction commutes with homology,
-so the restricted complex map is a quasi-isomorphism. The equivalence with
-modules on U preserves this assertion. Apply Q, which inverts quasi-isomorphisms,
-and conjugate by mapDerivedCategoryFactors to obtain the required map.
-For an empty cover the covering hypothesis forces U to be empty; the same local
-criterion applies vacuously. No unit-ideal hypothesis on the family is needed.
--/
+Source: Stacks Project, Tag 08EE, final sheafification step, and Tags 01HV and 01IB. -/
 theorem affine_principal_cover_quasiIso_detection
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

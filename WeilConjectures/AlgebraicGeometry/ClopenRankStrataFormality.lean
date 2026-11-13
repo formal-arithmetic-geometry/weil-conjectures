@@ -35,26 +35,7 @@ reconstructed from their cohomology in the assigned degrees. The family E
 is arbitrary; no exterior-power or derived-direct-image computation occurs
 in this assertion.
 
-Source: Stacks Tags 0BQZ and 0AVW; reconstruction proof steps 2--4.
-(blueprint: lem-sc-clopen-rank-strata-formality)
-
-Proof: The clopen fibers of r partition Z. Glue 1 on each fiber and 0 on
-its complement to obtain global sections e_n of O_Z. Their images in
- i_*O_Z are orthogonal idempotents with sum 1; only finitely many fibers
-are nonempty. Multiplication by e_n splits each complex of algebra-module
-sheaves into image subcomplexes. Differentials commute with scalar
-multiplication, and the inclusions and projections exhibit the original
-complex as their finite direct sum. The splitting preserves homology and
-quasi-isomorphisms. The direct image of E_n from the clopen rank-n stratum
-lies entirely in the e_n summand. The hypothesized cohomology isomorphisms
-are algebra-linear, hence commute with these idempotents. Consequently
-that summand of K has cohomology only in degree n, equal to the direct
-image of E_n. Truncation above and below n identifies it with this module
-in degree n. Apply the same truncations to the zero-differential comparison
-complex. Sum these finitely many isomorphisms and compose with the splitting
-isomorphisms. Off the closed image the algebra and all its modules are zero.
-If Z is empty every summand is zero. Rank zero is the degree-zero case.
-No stratum is required to be open in Y. -/
+Source: Stacks Tags 0BQZ and 0AVW; reconstruction proof steps 2--4. -/
 theorem clopenRankStrata_formality
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 
 Source: the rank-idempotent construction in steps 1--2 of
 `lem-sc-clopen-rank-strata-homology-lift`; Stacks Tag 00EE.
-(blueprint: lem-sc-clopen-rank-stratum-module-projector)
 -/
 
 @[expose] public section
@@ -66,25 +65,7 @@ forward from that stratum and zero on modules from any other rank stratum.
 
 Source: the characteristic-idempotent and support calculation in steps 1--2
 of `lem-sc-clopen-rank-strata-homology-lift`, expanding the rank-stratum argument
-of `lem-sc-clopen-rank-strata-formality`; Stacks Tag 00EE (clopen idempotents).
-(blueprint: lem-sc-clopen-rank-stratum-module-projector)
-
-Proof: The fiber U_q of the locally constant function r is clopen. By the
-scheme clopen-idempotent theorem, take the unique section e of O_Z restricting
-to 1 on U_q and 0 on its complement. For an i_*O_Z-module M and an open V in Y,
-define the component endomorphism on M(V) to be multiplication by the restriction
-of e to i^{-1}(V). These maps are linear because the ring sheaf is commutative.
-They commute with restriction maps because e is a global section, so they form
-a module-sheaf endomorphism. They are natural in M because module morphisms
-are linear on sections. Since e squared equals e, this natural transformation
-is idempotent. On a module g_* j_{k,*} F, sections over V are the sections of F
-on U_k intersected with i^{-1}(V), with scalar action through the restriction
-of O_Z to that open. If k=q the restriction of e is 1 and the endomorphism is
-the identity. If k differs from q, disjointness of the fibers implies that the
-restriction is 0 and the endomorphism is zero. Equality of these component maps
-on every open gives the stated sheaf-morphism equalities. Empty fibers give the
-zero module and satisfy both identities. The construction uses one idempotent
-and requires neither finitely many fibers nor that i(U_q) be open in Y. -/
+of `lem-sc-clopen-rank-strata-formality`; Stacks Tag 00EE (clopen idempotents). -/
 theorem clopenRankStratum_module_projector
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (r : LocallyConstant Z ℕ) (q : ℕ) :

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 /-! # Affine coherent sheaves have associated-module presentations
 
 Source: Stacks Project, Tags 01IB and 01XZ.
-(blueprint: lem-weil-pbc-affine-coherent-tilde-presentation).
 -/
 
 @[expose] public section
@@ -27,17 +26,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport the affine tilde counit along the canonical affine chart.
 
-Source: Stacks Project, Tags 01IB and 01XZ.
-(blueprint: lem-weil-pbc-affine-coherent-tilde-presentation).
-
-Proof: restrict H along the inverse of X.isoSpec to Spec of the global section ring.
-Coherence implies quasi-coherence, which is preserved by restriction. Take P to be
-its module of sections via moduleSpecΓFunctor. The tilde counit is an isomorphism.
-Restrict it back along X.isoSpec.hom and compose with the restriction composition
-isomorphism, the chart hom-inverse identity and the identity restriction isomorphism.
-Finally replace restriction along the chart by pullback. The proof also applies to
-an empty affine scheme and to the zero module.
--/
+Source: Stacks Project, Tags 01IB and 01XZ. -/
 theorem affine_coherent_tilde_presentation
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (H : CoherentModules X) :
     ∃ P : ModuleCat.{u} Γ(X, ⊤),

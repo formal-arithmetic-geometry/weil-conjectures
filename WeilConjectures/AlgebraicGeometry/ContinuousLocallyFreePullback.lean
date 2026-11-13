@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 
 `ProEtale.IsLocallyFree` is preserved by restriction along an invertible coefficient map.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tag 03DO.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Restriction along an invertible coefficient map preserves local finite freeness.
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites, Tag 03DO.
-(auxiliary; not a blueprint node)
 
 Use the same cover. On each member apply the existing free_comap and
 free_of_iso to the mapModComapIso comparison. -/

@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Eventual vanishing of one raw cartesian derived class
 
 Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT.
-(blueprint: stage3-cartesian-higher-image-single-raw-class-vanishing).
 -/
 
 @[expose] public section
@@ -86,7 +85,6 @@ end
 Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT. Apply affine cohomology continuity
 to the descended qcqs chart system and identify its transition with the displayed
 raw map by exchange naturality.
-(blueprint: stage3-cartesian-higher-image-single-raw-class-vanishing).
 
 The proof is the affine cohomology continuity argument for one test object: descend the
 finite-presentation chart and the raw derived class, apply continuity of the resulting

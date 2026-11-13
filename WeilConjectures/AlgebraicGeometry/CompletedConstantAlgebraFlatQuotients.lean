@@ -34,7 +34,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # Flatness and quotients of a completed constant algebra
 
-Source: Stacks Project, Modules on Sites, Tag 093M (lemma-completion-flat).
+Source: Stacks Project, Modules on Sites, Tag 093M.
 The coefficient presentation is allowed to change by specified ring isomorphisms.
 -/
 
@@ -956,32 +956,7 @@ end CompletedConstantAlgebra
 and the projection-multiplication map to each constant quotient is invertible.
 The result retains arbitrary isomorphic presentations of the completed and quotient rings.
 Source: Stacks Project, sites-modules.tex, Tag 093M, lemma-completion-flat, and its
-quotient assertion applied to each power of the ideal.
-(auxiliary; not a blueprint node)
-
-Proof: Pass to the coefficient-sized equivalent `AsSmall` site with its induced topology.
-The continuous-pushforward/sheafification comparison identifies constant sheaves, with
-their sheafification units. Its naturality identifies the quotient diagrams; preservation
-of limits identifies their completions and all projection maps. Apply the flatness and
-sectionwise quotient-kernel theorem `ConstantCompletion.flat_and_quotients` there.
-For flatness on the original site, transport each finite relation across the ring
-isomorphisms, obtain local factorizations by the forward equational criterion, pull the
-covering sieve back along the inverse site equivalence, and transport the witnesses back.
-The converse local criterion gives flatness. Interchanging sectionwise tensor factors
-and then sheafifying identifies underlying scalar extension with tensor by this flat
-algebra. Forgetting to additive sheaves preserves and reflects finite limits and
-colimits, so scalar extension is exact.
-For the quotient assertion, transport surjectivity and the generated-kernel formula
-back to the original site. In the scalar extension X of the constant quotient module,
-the section z=1 tensor 1 defines t:S→X. Balancedness gives t(c(a))=1 tensor class(a),
-which vanishes for a in I^(n+1). Induction on ideal-span membership proves ker(p)≤ker(t).
-Descend t sectionwise through the surjective map p to construct s:H→X. Naturality follows
-by lifting a section of H through p and using naturality of t. The formula for r gives
-r(s(p(b)))=p(b). For the other identity use the scalar-tensor and constant-sheafification
-adjunctions: quotient surjectivity reduces to a class represented by a in A, and
-s(r(1 tensor class(a)))=s(p(c(a)))=t(c(a))=1 tensor class(a). Thus both inverse identities
-hold. Specified ring isomorphisms preserve all formulas. Zero rings, I=0, I=A and empty
-covering sieves require no extra hypotheses. -/
+quotient assertion applied to each power of the ideal. -/
 theorem completed_constant_algebra_flat_quotients
     (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (S : Sheaf (ProEt.topology T) CommRingCat.{u + 1})

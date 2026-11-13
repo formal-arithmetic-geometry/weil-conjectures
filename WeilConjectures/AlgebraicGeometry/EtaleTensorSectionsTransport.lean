@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Normalized transport of tensor-pullback sections
 
-Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf.
-(blueprint: lem-sc-etale-tensor-sections-transport) -/
+Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf. -/
 
 @[expose] public section
 universe u
@@ -80,19 +79,7 @@ private theorem restriction_eq {X : Scheme.{u}} (F : X.Modules)
 
 /-- Transport from an iterated tensor pullback to the pullback of an etale object,
 with the normalized unit equation on global sections.
-Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf.
-(blueprint: lem-sc-etale-tensor-sections-transport)
-
-Proof: let k be the component at F of tensorSectionsComp a.left U.hom followed
-by equality transport along a.w. Both factors are module isomorphisms on V.left.
-Taking global sections therefore gives an additive equivalence e; its inverse is
-obtained by taking sections of the inverse module isomorphism. Module-linearity
-of k gives e(b times s) = b times e(s) for every section s. By the definition of
-etaleTensorSectionsRestriction, e applied to tensorSectionsUnit a.left applied to m
-is exactly the restriction of m: evaluation of the composite of module morphisms
-is composition of their section maps. Set s equal to this unit section and combine
-these two equations. Neither quasi-coherence nor affineness nor nonemptiness is used.
-The construction is valid for the zero module and empty schemes. -/
+Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf. -/
 theorem exists_etaleTensorSectionsTransport {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etale} (a : V ⟶ U) :
     ∃ e : Γ((tensorPullback a.left).obj ((tensorPullback U.hom).obj F), ⊤) ≃+

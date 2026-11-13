@@ -16,8 +16,7 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 # Finite unions and proper preimages of closed subsets proper over a base
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.6 (Tag 0CYR)
-and Lemma 30.26.5 (Tag 0CYQ), part (3)
-(blueprint: lem-weil-pbc-closed-subset-proper-over-base-union-preimage).
+and Lemma 30.26.5 (Tag 0CYQ), part (3).
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ namespace AlgebraicGeometry.Scheme
 Proof of (1), following the node's seven-step proof:
 1. Induct on `n` to reduce to two subsets. The empty scheme proves the `n = 0` case,
    using `lem-weil-pbc-closed-subset-proper-over-base-properties`.
-2. Take the reduced induced structures (`lem-weil-pbc-reduced-induced-closed-subscheme`).
+2. Take the reduced induced structures.
    Their coproduct map to `X` is finite by `lem-weil-pbc-closed-immersion-finite` and
    `lem-weil-pbc-finite-coproduct`, hence proper and universally closed by
    `lem-weil-pbc-finite-morphism-permanence` and `lem-weil-pbc-proper-fp-permanence`.
@@ -44,7 +43,7 @@ Proof of (1), following the node's seven-step proof:
    equals the union since the coprojections cover the coproduct.
 Proof of (2):
 5. Form the fibre product with the reduced induced structure on `Z`
-   (`def-pc-fibre-product`). Its projections are respectively a closed immersion and proper
+. Its projections are respectively a closed immersion and proper
    by `lem-weil-pbc-closed-immersion-base-change` and `lem-weil-pbc-proper-fp-permanence`.
 6. Its image in `X` is precisely the preimage of `Z`, by
    `lem-weil-pbc-fibre-product-points`: compatible points lift because the tensor product
@@ -52,8 +51,7 @@ Proof of (2):
 7. The composite to `S` is proper by `lem-weil-pbc-proper-fp-permanence`. Apply
    `lem-weil-pbc-closed-subset-proper-over-base-properties` to this closed structure.
 Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.6 (Tag 0CYR),
-proof; Lemma 30.26.5 (Tag 0CYQ), proof of part (3)
-(blueprint: lem-weil-pbc-closed-subset-proper-over-base-union-preimage) -/
+proof; Lemma 30.26.5 (Tag 0CYQ), proof of part (3) -/
 theorem isClosedSubsetProperOver_union_preimage
     {X S : Scheme.{u}} (sX : X ⟶ S) [LocallyOfFiniteType sX] :
     (∀ (n : ℕ) (Z : Fin n → TopologicalSpace.Closeds X),

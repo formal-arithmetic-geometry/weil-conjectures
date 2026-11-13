@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 # The reducible step for finite lisse partitions
 
 Source: finite pushforward constructibility blueprint, step 2.
-(blueprint: lem-weil-pbc-etale-lisse-partition-reducible).
 -/
 
 @[expose] public section
@@ -163,21 +162,7 @@ private def unionDisjoint {X : Scheme.{u}}
 /-- The reducible Noetherian induction step only uses partitions on proper closed subsets;
 it does not require the generic-lissity hypothesis.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2.
-(blueprint: lem-weil-pbc-etale-lisse-partition-reducible).
-
-Proof: The nonempty closed subset T has finitely many irreducible components, by
-Noetherianity of the closed subspace. List them as T_1,...,T_r. Because T is not
-irreducible, every component is a proper closed subset of T. Apply the given hypothesis
-to each component. For each stratum in component i, take the inverse image of the
-complement of the closed subset T_1 union ... union T_{i-1}. This is an open subscheme
-of the stratum; compose its open immersion with the old stratum immersion. Composition
-preserves immersions. The images are the old images minus the earlier components,
-so the resulting finite list is disjoint and covers T. Pullback composition identifies
-the new sheaf with the open restriction of the old lisse sheaf. Restrict an etale
-trivializing cover; the restriction comparison and the constant-sheaf pullback comparison
-show local constancy, and the inverse-image geometric-stalk bijection shows finiteness.
-Thus every new stratum is lisse. Empty differences can be kept as empty strata. -/
+Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 2. -/
 theorem nonempty_etaleLissePartition_of_reducible
     {X : Scheme.{u}} [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

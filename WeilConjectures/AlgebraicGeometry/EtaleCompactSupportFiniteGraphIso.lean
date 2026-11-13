@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphSheafNormalizat
 
 /-! # The specified compact-support graph map for a finite etale morphism
 
-Source: Stacks Project Tags 0F4L and 015F
-(auxiliary; not a blueprint node).
+Source: Stacks Project Tags 0F4L and 015F.
 -/
 
 @[expose] public section
@@ -25,18 +24,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The fixed derived graph comparison is invertible for a finite etale morphism.
-Source: Stacks Project Tags 0F4L and 015F
-(auxiliary; not a blueprint node).
-
-Proof: Properness makes the compactification's open immersion clopen, so its extension
-by zero equals its direct image and preserves K-injective complexes. The sheaf graph
-normalization identifies the composite of the graph map into direct image with the
-finite-etale sum-to-product isomorphism. Hence the sheaf graph map is an isomorphism,
-and the composite j!r_* is exact. Its right-derived unit is invertible. The canonical
-right-derived composition isomorphism and exactness of j! imply that the r_* unit on
-j! applied to any complex is invertible. The component formula for the derived graph
-map then consists entirely of invertible factors. Localization full faithfulness
-reflects invertibility. No Noetherianity or finiteness of the coefficient ring is used. -/
+Source: Stacks Project Tags 0F4L and 015F. -/
 theorem isIso_compactSupportGraphDerivedComparison_of_isFinite
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
     (f : U ⟶ X) [Etale f] [IsFinite f] (c : Compactification f) :

@@ -153,23 +153,7 @@ private theorem integral_strictHenselization_residue
   simpa only [← Spec.map_comp_assoc, CommRingCat.ofHom_comp] using hbase
 
 /-- The strict henselization rings and residue maps exist for the two geometric points.
-Source: Stacks Project, Tags 04HX, 03PS and 04DY.
-(blueprint: compatible-strict-henselization-core-existence)
-Proof: take A and B to be the actual coordinate-ring colimits strictHenselization
-of the indicated geometric points, with eA and eB the identity spectrum isomorphisms.
-By affine neighbourhood cofinality and Tag 04HX, these colimits are the strict
-henselizations of the local rings at the images of σ and τ. Their residue fields are
-the separable algebraic closures of the respective point residue fields inside Ω;
-they are henselian local rings with separably closed residue fields. The integral
-factorizations hσ and hτ identify k and k' as algebraic extensions of those point
-residue fields. Since k and k' are separably closed, their embeddings into Ω contain
-these separable closures. The remaining extensions are algebraic purely inseparable:
-an algebraic extension of a separably closed field has no nontrivial separable part.
-Take ρA and ρB to be the spectra of these residue inclusions. Purely inseparable
-algebraic field extensions give integral, radicial, surjective spectrum maps, hence
-universal homeomorphisms. The inclusions extend the given point residue maps, so
-composition with the ring residue maps and the colimit structural maps gives σ and τ.
-No ring data are chosen from a mere unproved existence assertion. -/
+Source: Stacks Project, Tags 04HX, 03PS and 04DY. -/
 theorem Etale.exists_compatibleStrictHenselizationCoreExistence
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

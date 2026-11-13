@@ -160,23 +160,7 @@ private def localFixedConstant
 
 /-- A supplied etale constant chart realizes the comparison on every object over that chart.
 Source: Stacks Project, Pro-etale Cohomology, 099R; Modules on Sites, 03DJ;
-Cohomology on Sites, 094G.
-(auxiliary; not a blueprint node).
-
-Proof: Localize the etale/pro-etale inclusion over W and its image. Slice inverse image
-commutes with restriction: both are left adjoint to the direct-image functor given by
-precomposition on the corresponding slice sites. Compose with restriction along the
-supplied morphism from V. This gives comparison followed by restriction to V as a functor
-of the supplied etale restriction. Inverse image preserves constant module sheaves, with
-the comparison normalized to the identity on constant scalar sections. Constant-scalar
-restriction is an exact equivalence; its natural comparison with comparison inverse image
-identifies the intrinsic comparison with adicFinitePullback. The constant module presheaf
-and its sheafification identify the other side with commutative constant realization.
-Apply this exact composite to hM. The constant comparisons are natural in modules, so
-applying them to all terms and differentials gives a cochain isomorphism. Descend to the
-standard derived localizations and use their factorization isomorphisms. This proves the
-stated literal-slice comparison. No boundedness, finiteness, stalk or covering assumption
-is used, and the same formulas include empty charts and zero complexes. -/
+Cohomology on Sites, 094G. -/
 theorem coefficient_etale_chart_comparison
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (K : ConstantCompletion.D

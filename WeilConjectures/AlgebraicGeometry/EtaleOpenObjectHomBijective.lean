@@ -32,19 +32,7 @@ private noncomputable def freeSectionEquiv {X : Scheme.{u}} (U : X.Opens)
 
 /-- The degree-zero identity-generator comparison on morphisms is bijective.
 Source: Stacks Project, Cohomology on Sites, Tag 03F3, free abelian representable
-and constant-sheaf adjunctions.
-(blueprint: lem-weil-pbc-etale-open-object-hom-bijective)
-
-Proof: Sheafification, the free abelian group adjunction, and lifted Yoneda identify
-morphisms from the free sheaf at U with sections F(U). The constant-sheaf adjunction
-at the terminal object of U, followed by the integer-generator equivalence, identifies
-morphisms from the constant integers with sections of the pulled-back sheaf at that
-terminal object. The inverse-image/restriction isomorphism identifies these sections
-with F(U). Naturality of the three adjunctions shows that sending f to the identity
-unit followed by pullback of f becomes the identity on F(U): the free generator at
-the identity is sent to the section corresponding to f. Thus this map is a composite
-of bijections. Degree zero and the empty open require no separate assumption: Yoneda
-and the terminal-object adjunction apply there as well. -/
+and constant-sheaf adjunctions. -/
 theorem etaleOpenObjectHom_bijective {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     Function.Bijective (fun f : (etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι) ⟶ F ↦

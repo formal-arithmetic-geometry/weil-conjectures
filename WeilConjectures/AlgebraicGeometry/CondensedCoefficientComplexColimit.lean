@@ -62,8 +62,7 @@ Source: archived `TwoColimit.lean`, coefficient construction, and the defining
 coequalizer of `Mod.extendScalars`. Tensor with a fixed object preserves colimits.
 The two action maps are compatible with coefficient inclusion. The universal
 property of the coefficient colimit therefore descends through their coequalizers.
-Forgetting module structure reflects colimits, and complex colimits are degreewise.
-(auxiliary; not a blueprint node) -/
+Forgetting module structure reflects colimits, and complex colimits are degreewise. -/
 theorem nonempty_isColimit_coefficientComplexCocone
     {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex

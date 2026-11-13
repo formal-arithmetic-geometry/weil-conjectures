@@ -21,14 +21,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback preserves the degree-zero structure sheaf.
-Source: Stacks Project, Tags 06YD, 06YJ and 0096.
-(blueprint: lem-sc-derived-pullback-structure-sheaf-local).
-Proof: the structure sheaf is flat because tensoring with the unit is the identity.
-Its degree-zero single complex is bounded above and termwise flat, so the
-flat-complex comparison computes derived pullback by termwise tensor pullback.
-The single-complex comparisons and the tensor-unit pullback isomorphism identify
-the result with the degree-zero structure sheaf on the source. Empty schemes and
-zero stalk rings cause no exception to any of these isomorphisms. -/
+Source: Stacks Project, Tags 06YD, 06YJ and 0096. -/
 theorem nonempty_derivedPullback_structureSheaf_iso
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

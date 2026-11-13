@@ -86,21 +86,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- A fixed-scalar etale module whose comparison is a finite local system is itself
 a finite local system. This is the single-stratum assertion, with no stratification
 or intrinsic-module inverse image in its statement.
-Source: Stacks Tags 099Y and 099T
-(auxiliary; not a blueprint node).
-
-Proof: over a Noetherian ring every finite local model is finitely presented.
-Apply coefficientFpLocalSystem_etaleCover to obtain etale charts whose images
-cover the pro-etale site and carry specified constant finitely presented models.
-Reflect this covering family: a generating pro-etale precover of the terminal
-object proves joint surjectivity, which is the etale covering criterion. Transport
-this calculation through the AsSmall site equivalences. On each chart apply
-coefficientComparison_constant_over_reflect with the same module. For an arbitrary
-object W use the covering sieve Sieve.ofObjects V W. Each member factors through
-one of the etale charts; restriction preserves that chart's constant module.
-Finite presentation implies finite generation, giving the required local models.
-No model is resized, and the argument includes empty schemes, empty charts and
-the zero module. -/
+Source: Stacks Tags 099Y and 099T. -/
 theorem coefficientComparison_finite_reflect (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

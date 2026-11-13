@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
 # Finitely many isolated fibre points become finite pieces after an elementary étale base change
 
 Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011.
-(blueprint: lem-weil-pbc-etale-local-finite-multiple-points-elementary)
 -/
 
 @[expose] public section
@@ -133,8 +132,7 @@ private theorem transport_finite_open_piece
     · rfl
 
 /-- Finitely many isolated points of a fibre become finite pieces after an elementary étale
-base change. Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011
-(blueprint: lem-weil-pbc-etale-local-finite-multiple-points-elementary).
+base change. Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011.
 
 Proof (the six steps of the node, following Stacks 02LL):
 1. Induct on `n`; the zero case uses `U = S`, the identity, and no opens.

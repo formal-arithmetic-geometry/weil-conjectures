@@ -111,15 +111,7 @@ private lemma raw_finite_model_on_immersion_range
 /-- A nonempty open piece of the support carries the finite coefficient model
 coming from the supplied stratification models.
 
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split.
-Proof: pull the stratification back to Y. The union of the interiors of its
-strata is dense, hence has a point. The interior of the stratum containing this
-point is a nonempty open U. Normalize the given stratum model by its coefficient
-comparison isomorphism, transport it along the immersion range to U, and use the
-trivial stratification to turn local finite presentation into constructibility.
-The scalar-extension comparisons identify the result with the restriction of M.
-(auxiliary; not a blueprint node)
--/
+Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split. -/
 theorem exists_nonempty_support_open_piece_model
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

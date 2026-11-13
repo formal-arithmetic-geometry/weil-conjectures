@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 /-! # Sections of the normalized pointwise pullback evaluation
 
 Source: Stacks Project, Cohomology, Tags 08I3, 079W, 08DJ and 08JA.
-(blueprint: lem-pc-derived-pullback-evaluation-sections).
 -/
 
 @[expose] public section
@@ -212,30 +211,7 @@ set_option synthInstance.maxSize 2048 in
 identification of zeroth hypercohomology with derived morphisms.
 This is a statement about elements, with no bifunctorial mate and no counit composite.
 
-Source: Stacks Project, Cohomology, Remark 08I3, Lemma 079W, Lemma 08DJ and Tag 08JA.
-(blueprint: lem-pc-derived-pullback-evaluation-sections).
-
-Proof:
-1. Extract the termwise tensor pullback and its left-derived comparison from the
-   given monoidal model. Derive its underived pullback/direct-image adjunction on
-   K-flat source and K-injective target complexes. Transport the left side by the
-   model's left-derived comparison. This supplies a, normalized to that comparison.
-2. Compute direct image and global sections on K-injective resolutions. Sections
-   of direct image are sections on the source, giving z after zeroth cohomology.
-   Identify H0 of the Hom complex with chain maps modulo homotopies, then with
-   derived morphisms into the fixed K-injective resolution. These give eS and eT;
-   composition of representatives proves both displayed naturality identities.
-3. Resolve K and L by K-flat complexes and the target by the fixed K-injective
-   resolution. The canonical tensor-Hom predicates identify evaluation with
-   componentwise uncurrying. The monoidal-model predicate identifies its tensorator
-   with termwise pullback on every total-tensor summand. Transposing evaluation
-   after this tensorator and taking its adjoint therefore sends a degree-zero
-   Hom cocycle phi to its termwise pullback. The z comparison removes direct image
-   without changing that cocycle. Passing to homotopy classes gives the last
-   identity. Common resolutions transport this identity to arbitrary K and L.
-   No invertibility of an internal-Hom/counit composite is used. For an identity
-   morphism the computation is the identity on cocycles; for zero objects or the
-   empty scheme both sides are the zero morphism. -/
+Source: Stacks Project, Cohomology, Remark 08I3, Lemma 079W, Lemma 08DJ and Tag 08JA. -/
 theorem exists_derivedPullback_evaluation_sections
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveSections
 /-! # Positive-degree exactness of a locally restricted Cech complex
 
 Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
-(blueprint: lem-pc-cech-local-positive-exact).
 -/
 
 @[expose] public section
@@ -25,23 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The restricted Cech-model complex is exact in every positive degree.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-local-positive-exact)
-
-Proof: On an open V contained in U_i, insert i at the front of each tuple to define
-h from degree p+1 to degree p. The extra intersection with U_i does not change V.
-For p > 0, the alternating differential satisfies d h + h d = identity: deleting the
-new first entry gives identity, and every other deletion cancels the corresponding
-shifted deletion in the other composite. Hence any positive-degree cocycle is a
-boundary. These operators are natural in V and linear for the global section ring.
-Transport them through e, using hd, after forgetting to abelian sheaves (e need not
-be linear for the full local structure ring). This proves exactness of the underlying
-abelian sheaf complex on U_i. Forgetting module sheaves to abelian sheaves reflects
-exactness, since kernels are sectionwise kernels and cokernels are sheafified
-sectionwise cokernels. It follows that the module-sheaf complex is exact in degree
-p+1. Empty U_i and zero F give zero sheaves and satisfy the same equations. The
-argument uses no augmentation, no covering assumption, and no interchange of stalks
-with infinite products. -/
+Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
 theorem cech_sheaf_restrict_exact_positive
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

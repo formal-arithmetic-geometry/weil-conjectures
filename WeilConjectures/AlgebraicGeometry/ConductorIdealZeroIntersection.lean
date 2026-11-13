@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionDisjointIdealTwist
 # Conductor ideal: zero intersection and restriction to a component
 
 Source: literature/stacks-project/varieties.tex, Varieties Remark 09NW, as used in the proof
-of Lemma 09NX (blueprint: lem-sc-conductor-ideal-zero-intersection).
+of Lemma 09NX.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ ideal `I` of the reduced union of the components other than `Z₁` meets the ide
 `Z₁` in zero on every open, and for every invertible module `M` and every `m ≥ 0` the
 restriction `Γ(U, I M^{⊗m}) → Γ(U ∩ Z₁, I₁ (M|_{Z₁})^{⊗m})` is bijective on every open `U`.
 
-Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX
-(blueprint: lem-sc-conductor-ideal-zero-intersection).
+Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX.
 
 Here, as in `Scheme.conductorIdeal_restriction_isIso`, `i` lists the distinct components
 (`hdistinct`), `a` labels `Z₁`, `j` is the immersion of the reduced union `Z` of the other
@@ -48,20 +47,7 @@ components, `I = j.ker`, `J₁ = (i a).ker`, and `I₁` is the image of the map
 identification `e : i₁^*(M^{⊗m}) ≅ (i₁^* M)^{⊗m}`; any `O_{Z₁}`-linear `e` carries
 `I₁ · i₁^*(M^{⊗m})` onto `I₁ (M|_{Z₁})^{⊗m}`, so the clause is stated for every `e`.
 `ρ` is the restriction corestricted to `I₁ (M|_{Z₁})^{⊗m}`; its sections over `U` are the map
-`Γ(U, I M^{⊗m}) → Γ(U ∩ Z₁, I₁ (M|_{Z₁})^{⊗m})`.
-
-Proof:
-1. On an affine open `U = Spec A` the closed subschemes `Z₁` and `Z` are cut out by ideals
-`J₁` and `I` with `V(I) ∪ V(J₁) = Spec A`, and `A` is reduced since `Y` is
-(def-pc-reduced-scheme, def-sbc-closed-immersion-ideal-sheaf).
-2. By lem-sc-reduced-ideals-zero-intersection, `I ∩ J₁ = 0` and `I` maps isomorphically onto
-its image `(I + J₁)/J₁` in `A/J₁`. Hence the sheaf intersection is zero and the restriction
-`I → i₁_* I₁` is bijective on a basis of opens, so it is an isomorphism of sheaves and is
-bijective on every open (this is the case `m = 0`).
-3. On an open `V` trivialising `M` (def-sc-invertible-module), `M^{⊗m}|_V ≅ 𝒪_V` and
-`(M|_{Z₁})^{⊗m}|_{V ∩ Z₁} ≅ 𝒪_{V ∩ Z₁}` (def-pur-sheaf-tensor-product), under which the two
-image sheaves become `I|_V` and `I₁|_{V ∩ Z₁}` compatibly with restriction. So the restriction
-is locally the isomorphism of step 2, hence an isomorphism, bijective on every open. -/
+`Γ(U, I M^{⊗m}) → Γ(U ∩ Z₁, I₁ (M|_{Z₁})^{⊗m})`. -/
 theorem conductorIdealZeroIntersection
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y)

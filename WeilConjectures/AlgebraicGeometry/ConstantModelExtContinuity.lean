@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The degree-zero filtered-colimit factorization property needed for Ext from
 constant-model constructible sheaves. This is a condition, not an assertion that
-it holds on every scheme.
-(blueprint: def-constant-model-ext-factorization). -/
+it holds on every scheme. -/
 def ConstantModelExtContinuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : Prop :=

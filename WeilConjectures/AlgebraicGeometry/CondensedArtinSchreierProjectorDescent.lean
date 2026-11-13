@@ -188,15 +188,14 @@ local notation "e" => condensedArtinSchreierProjector Λ k
 
 /-- The canonical lax monoidal structure on the module pushforward, adjoint to the
 strong monoidal pullback. Source: monoidal adjunction and latest blueprint
-`prop-kernel-lisse.proof.md` (blueprint: lem-kernel-condensed-projector-descent). -/
+`prop-kernel-lisse.proof.md`. -/
 abbrev condensedArtinSchreierLowerStarMonoidal : (CondensedRing.lowerStar Λ q).LaxMonoidal :=
   CondensedRing.moduleLowerStarMonoidal Λ q
 
 attribute [local instance] condensedArtinSchreierLowerStarMonoidal
 
 /-- Pullback along the Artin–Schreier cover reflects isomorphisms.
-Source: descent along an etale surjection
-(blueprint: lem-kernel-condensed-projector-descent). -/
+Source: descent along an etale surjection. -/
 theorem condensedArtinSchreierPullback_reflectsIsomorphisms :
     (CondensedRing.upperStar Λ q).ReflectsIsomorphisms := by
   have : AlgebraicGeometry.Etale q := Etale.etale_artinSchreierMap (k := k)
@@ -356,21 +355,7 @@ private theorem lisse_of_rankOne_cover {X : Scheme.{u}}
 /-- Counit trivializations and multiplication fixed by the target projector imply all
 local rank-one, character tensor-product, inverse and Tor assertions for every function.
 
-Source: latest blueprint `prop-kernel-lisse.proof.md`, descent and flatness paragraphs
-(blueprint: lem-kernel-condensed-projector-descent).
-
-Proof. The Artin–Schreier map is an etale surjection, hence a proetale singleton cover.
-Restriction to this cover detects isomorphisms on underlying sheaves, and module
-forgetful functors reflect them. The counit identifies each pulled-back image with the
-regular module. The monoidal-adjunction argument identifies the pullback of the product
-of two image inclusions with the tensor product of these counit identifications, so the
-fixed-point equation makes the induced map to the product-character image invertible.
-The same argument applied to constant functions gives the trivial-character unit.
-Pull these isomorphisms back along the map defined by the function. Pulling the singleton
-cover back gives an explicit trivializing cover, and a regular module is free of rank one.
-Apply character multiplication to the inverse character and the trivial-character unit
-to obtain a tensor inverse. Tensor invertibility implies flatness; a flat object in degree
-zero has Tor amplitude [0,0]. Empty schemes and trivial characters are included. -/
+Source: latest blueprint `prop-kernel-lisse.proof.md`, descent and flatness paragraphs. -/
 theorem condensedArtinSchreier_properties_of_projectors
     (heval : ∀ ψ : AddChar k (MonObj.Γ Λ),
       IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫

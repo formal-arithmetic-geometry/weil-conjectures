@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- `continuousLisse_lattice_on_stratum` for the coefficients `𝒪_E ⟶ E`, with descent of
 lattices along finite étale surjections given by `continuousLisse_finiteEtale_lattice`.
-Source: Bhatt--Scholze, proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, proof of Lemma 6.8.13. -/
 theorem continuousLisse_coefficient_lattice_on_stratum
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

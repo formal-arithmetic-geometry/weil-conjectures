@@ -28,34 +28,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Compatible geometric evaluation, independent of any chosen module or presentation.
 Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node).
-
-Proof: use the supplied maps from the common algebraically closed field. First
-extend scalars along the canonical coefficient isomorphism for p or g, then apply
-module inverse image along a or d. Both routes end in modules over the condensed
-coefficient ring on Spec(Omega). Evaluate their underlying sheaves and actions at
-the final object. The continuous realization identifies that ring with ULift E,
-since the spectrum of a field has one point. Define the E-action on each evaluated
-module by applying its internal action to ULift(e) tensor m. The tensor universal
-property and internal unit and associativity equations give an ordinary E-module;
-the internal linearity diagram makes every evaluated morphism E-linear.
-
-A pro-etale cover of an algebraically closed field splits through a member, so
-abelian evaluation preserves cokernels. Finite colimits of internal modules are
-computed on their underlying abelian sheaves, as tensoring preserves these
-colimits. The ordinary module forgetful functor reflects these colimits, proving
-finite-colimit preservation of evaluation. Inverse image and change of scalars
-preserve finite colimits too. Each construction is additive. The module inverse
-image composition comparisons, coefficient comparisons and the equality had give
-the displayed natural isomorphism on all modules over X.
-
-The regular coefficient module evaluates to E, giving b and c by evaluation at 1.
-An endomorphism of the regular module is multiplication by its value on 1. The
-adjoint-test characterization of the canonical continuous realization identifies
-its image under geometric pullback with the value of its continuous coefficient
-at a(z) or d(z). This proves both scalar formulas. The maps from the field exclude
-empty source schemes V and W. No finite presentation or finite rank is required. -/
+Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11. -/
 theorem exists_condensedField_compatible_evaluations
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X V W : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]

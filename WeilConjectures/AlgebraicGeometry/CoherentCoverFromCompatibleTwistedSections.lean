@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 /-! # A coherent source for compatible twisted sections
 
 Source: Stacks Project, proof of Lemma 0885 (lemma-existence-projective).
-(blueprint: lem-weil-pbc-coherent-cover-compatible-twisted-sections).
 -/
 
 @[expose] public section
@@ -34,20 +33,7 @@ at level zero, give compatible maps from a coherent module, epi at level zero.
 This concerns ordinary module maps only, without adic quotients or completion.
 
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 0885
-(lemma-existence-projective), the displayed maps from the finite negative twist sum.
-(blueprint: lem-weil-pbc-coherent-cover-compatible-twisted-sections).
-
-Proof: Let Q be the dual of P. The inverse of tensoring by P is tensoring by Q.
-Take G to be the free module on the finite generating index set tensored with Q.
-It is finitely presented and quasi-coherent, hence coherent on the Noetherian
-scheme. At level n the given sections define a free-module map to F_n tensor P.
-Apply the inverse tensor equivalence and then its unit inverse to obtain g_n.
-The naturality of the tensor equivalence and the free-module/sections bijection
-make the g_n commute with each transition. At level zero the free-module map is
-exactly the evaluation epimorphism of the specified generating family. The inverse
-equivalence preserves epimorphisms, and composing with the unit isomorphism preserves
-this property, so g_0 is epi. This also works for an empty finite generating family.
--/
+(lemma-existence-projective), the displayed maps from the finite negative twist sum. -/
 theorem coherent_cover_from_compatible_twisted_sections
     {X : Scheme.{u}} [IsNoetherian X] (F : ℕᵒᵖ ⥤ X.Modules)
     (P : X.Modules) [P.IsInvertible]

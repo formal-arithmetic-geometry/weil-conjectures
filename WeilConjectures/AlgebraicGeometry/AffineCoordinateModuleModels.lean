@@ -13,8 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Concrete module models for affine coordinates
-Source: Stacks Project, Tags 08DW and 06Y1.
-(blueprint: lem-pc-affine-coordinate-module-models). -/
+Source: Stacks Project, Tags 08DW and 06Y1. -/
 
 @[expose] public section
 universe u w
@@ -27,15 +26,13 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- Tilde followed by the supplied coordinate isomorphism's pushforward. 
-(blueprint: lem-pc-affine-coordinate-module-models)
+/-- Tilde followed by the supplied coordinate isomorphism's pushforward.
 -/
 noncomputable abbrev affineCoordinateModules (a : AffineComparisonCoordinate.{u, w}) :
     ModuleCat.{u} a.A ⥤ SheafOfModules.{u} (moduleRings a.X.toRingedSpace) :=
   tilde.functor a.A ⋙ SheafOfModules.pushforward a.σ.hom.toRingCatSheafHom
 
-/-- The termwise concrete module model. 
-(blueprint: lem-pc-affine-coordinate-module-models)
+/-- The termwise concrete module model.
 -/
 noncomputable abbrev affineCoordinateComplex (a : AffineComparisonCoordinate.{u, w}) :
     CochainComplex (ModuleCat.{u} a.A) ℤ ⥤
@@ -49,8 +46,7 @@ noncomputable abbrev affineCoordinateComplex (a : AffineComparisonCoordinate.{u,
       (SheafOfModules.pushforward a.σ.hom.toRingCatSheafHom)
       ⟨fun _ _ ↦ rfl⟩ (.up ℤ))
 
-/-- The concrete module chart preserves zero maps. 
-(blueprint: lem-pc-affine-coordinate-module-models)
+/-- The concrete module chart preserves zero maps.
 -/
 instance affineCoordinateModules_preservesZero (a : AffineComparisonCoordinate.{u, w}) :
     (affineCoordinateModules a).PreservesZeroMorphisms where
@@ -60,8 +56,7 @@ instance affineCoordinateModules_preservesZero (a : AffineComparisonCoordinate.{
     rw [tilde.map_zero]
     rfl
 
-/-- Termwise application of the composite chart agrees with its two explicit factors. 
-(blueprint: lem-pc-affine-coordinate-module-models)
+/-- Termwise application of the composite chart agrees with its two explicit factors.
 -/
 noncomputable def affineCoordinateComplexFactorIso (a : AffineComparisonCoordinate.{u, w}) :
     (affineCoordinateModules a).mapHomologicalComplex (.up ℤ) ≅
@@ -70,14 +65,12 @@ noncomputable def affineCoordinateComplexFactorIso (a : AffineComparisonCoordina
     (fun _ ↦ Iso.refl _) (by intros; simp)) (by intros; ext i; rfl)
 
 /-- The supplied localized model is naturally its concrete module model's localization.
-Source: Stacks Project, Tag 08DW; the supplied hd and hH.
-(blueprint: lem-pc-affine-coordinate-module-models). -/
+Source: Stacks Project, Tag 08DW; the supplied hd and hH. -/
 noncomputable def affineCoordinateModelIso (a : AffineComparisonCoordinate.{u, w}) :
     a.H ≅ affineCoordinateComplex a ⋙ DerivedCategory.Q :=
   a.hH ≪≫ Functor.isoWhiskerLeft _ a.hd
 
-/-- Pushforward along an isomorphism, with inverse pushforward. 
-(blueprint: lem-pc-affine-coordinate-module-models)
+/-- Pushforward along an isomorphism, with inverse pushforward.
 -/
 noncomputable def affineCoordinateModuleEquivalence {X Y : Scheme.{u}} (s : X ≅ Y) :
     SheafOfModules.{u} (moduleRings X.toRingedSpace) ≌
@@ -90,12 +83,7 @@ noncomputable def affineCoordinateModuleEquivalence {X Y : Scheme.{u}} (s : X �
       Scheme.Modules.pushforwardCongr s.inv_hom_id ≪≫ Scheme.Modules.pushforwardId Y)
 
 /-- Concrete coordinate models preserve K-flatness.
-Source: Stacks Project, Tags 06Y1 and 08DW.
-(blueprint: lem-pc-affine-coordinate-module-models).
-Proof: tilde of M is K-flat. Pushforward along a scheme isomorphism is the inverse
-of the opposite pushforward equivalence, hence is isomorphic, by uniqueness of
-left adjoints, to tensor pullback along the inverse isomorphism. Pullback preserves
-K-flatness. The termwise comparison and invariance under isomorphism give the result. -/
+Source: Stacks Project, Tags 06Y1 and 08DW. -/
 theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w})
     (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) :
     CochainComplex.IsKFlatTensor (R := a.X.sheaf) ((affineCoordinateComplex a).obj M) := by

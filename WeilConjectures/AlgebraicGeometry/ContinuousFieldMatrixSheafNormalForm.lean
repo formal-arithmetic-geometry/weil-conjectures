@@ -535,20 +535,7 @@ private lemma freeMatrix_pullback {E : Type u} [NormedField E]
 
 /-- Lift an explicit continuous matrix block factorization along an open immersion.
 Source: steps 6--7 of the rank/descent argument accompanying Hemo--Richarz--Scholbach,
-Example 3.1 (auxiliary; not a blueprint node).
-Proof: for the continuous-function ring, a regular-module endomorphism is multiplication
-by its value at one. Linearity gives this on arbitrary sections; naturality along the
-unique map to the terminal site object identifies these values with restrictions of
-a global continuous function. Conversely multiplication by a global function is a
-linear natural transformation. The assignments are inverse and preserve addition and
-composition. Biproduct inclusions and projections extend this correspondence to finite
-matrices. Thus P and Q give automorphisms. The chosen injections split source and target
-indices into the selected r entries and their finite complements. For the open immersion,
-the monoidal inverse-image/localization-restriction comparison identifies the component
-functions of the restricted map with composition along g. Transport along e and the
-finite-biproduct comparisons gives the two changes of basis a and b; enumerate the finite
-complements by Fin of their cardinalities. The explicit matrix factorization then gives
-the asserted equality. Rank zero, zero-sized matrices and empty opens are permitted. -/
+Example 3.1. -/
 theorem continuousField_matrix_sheaf_normalForm
     (E : Type u) [NormedField E] {V W : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R]

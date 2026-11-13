@@ -32,8 +32,7 @@ private theorem coordinate_image {B' B : Scheme.{u}} (g : B' ⟶ B)
     (iteratedAffineLineProj B' c ≫ g) (iteratedAffineLine.coord B' c) i
 
 /-- The map on the closed subschemes cut out by the same coordinate.
-Source: the final base-change paragraph of the affine-space zero-section proof
-(blueprint: lem-pur-coordinate-divisor-base-change). -/
+Source: the final base-change paragraph of the affine-space zero-section proof. -/
 def coordinateZeroLocusMap {B' B : Scheme.{u}} (g : B' ⟶ B)
     (c : ℕ) (i : Fin c) :
     (iteratedAffineLine B' c).zeroLocusSubscheme {iteratedAffineLine.coord B' c i} ⟶
@@ -51,13 +50,7 @@ def coordinateZeroLocusMap {B' B : Scheme.{u}} (g : B' ⟶ B)
 
 Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
 cor-pur-affine-space-zero-section-purity.proof.md, final Cartier-map base-change
-paragraph (blueprint: lem-pur-coordinate-divisor-base-change).
-
-Proof: the defining map of affine towers pulls back the i-th coordinate to the
-same coordinate on the new tower. Hence it maps the singleton set of defining
-sections to the primed singleton. The general zero-locus pullback theorem gives
-the displayed Cartesian square. This works over arbitrary bases, including the
-empty scheme, without flatness. At rank zero there is no index to check. -/
+paragraph. -/
 theorem coordinateZeroLocus_isPullback {B' B : Scheme.{u}} (g : B' ⟶ B)
     (c : ℕ) (i : Fin c) :
     IsPullback (coordinateZeroLocusMap g c i)

@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 /-! # Affine pushforward of an unbounded quasi-coherent resolution
 
 Source: Stacks Project, Tags 08C2 and 0AVW.
-(blueprint: lem-pc-affine-pushforward-resolution-quasi-iso).
 -/
 
 @[expose] public section
@@ -134,21 +133,7 @@ private theorem quasiIso_of_affine_sections (Y : Scheme.{u})
 /-- Applying affine pushforward to a K-injective resolution of a termwise
 quasi-coherent complex gives a quasi-isomorphism.
 Source: Stacks Project, Tag 08C2 (singleton affine covering) and Tag 0AVW
-(affine cohomology calculation).
-(blueprint: lem-pc-affine-pushforward-resolution-quasi-iso).
-
-Proof: On every affine open V of Y the inverse image f⁻¹V is affine. Apply
-`affineOpenSections_resolution_quasiIso` to s on f⁻¹V: its source is termwise
-quasi-coherent and its target is K-injective, so its section map is a
-quasi-isomorphism. Forgetting scalars identifies this map with Γ(V,f_*s).
-For any y in Y, affine neighborhoods of y form a cofinal system of neighborhoods.
-The stalk complex of f_*s is therefore the filtered colimit of these section
-complexes. Filtered colimits of abelian groups are exact and hence preserve
-homology, so f_*s induces an isomorphism on every stalk of every homology sheaf.
-The module-stalk functors are exact and jointly reflect isomorphisms; consequently
-f_*s is a quasi-isomorphism. No boundedness or quasi-coherence of the terms of J
-is used. Empty schemes and empty inverse-image opens cause no exception: their
-section complexes are zero and the stalk detection criterion is vacuous. -/
+(affine cohomology calculation). -/
 theorem affinePushforward_resolution_quasiIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (F J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

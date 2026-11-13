@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 /-! # Affine pullback comparison through spectrum charts
 
 Source: Stacks Project, Tags 06Z0 and 08DW.
-(blueprint: lem-pc-affine-kflat-pullback-chart-comparison).
 -/
 
 @[expose] public section
@@ -58,17 +57,7 @@ private theorem isKFlat_of_iso {X : Scheme.{u}}
     (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
 
 /-- Transport the affine derived pullback calculation through canonical spectrum charts.
-Source: Stacks Project, Tag 08DW(2), using Tag 08DV.
-Proof: naturality of toSpecΓ identifies f followed by Y.toSpecΓ with X.toSpecΓ
-followed by Spec.map f.appTop. Restriction along these scheme isomorphisms is exact.
-Termwise tensor pullback commutes with these restrictions. Tilde of the K-flat module
-complex is K-flat; the derived-pullback counits therefore identify both functors with
-these termwise calculations. Apply derivedPullback_tilde_iso with the identity resolution
-of P and transport its comparison through the chart isomorphisms. Uniqueness of the
-localization lift of the exact restriction gives the comparison even when the target
-spectrum has an independent localization universe. No quasi-coherence condition on an
-arbitrary derived object, or choice of a representative for it, occurs in this statement.
-(blueprint: lem-pc-affine-kflat-pullback-chart-comparison). -/
+Source: Stacks Project, Tag 08DW(2), using Tag 08DV. -/
 theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsAffine X] [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

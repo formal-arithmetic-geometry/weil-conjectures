@@ -48,13 +48,7 @@ private theorem isFiniteLocallyConstantSheafOfTypes_of_iso {X : Scheme.{u}}
 
 /-- If the underlying sheaf of sets of an abelian sheaf `G` is represented by an étale
 `S`-scheme `P`, and the base change of `P` along `i : Z ⟶ S` is finite, then the underlying
-sheaf of sets of the inverse image of `G` along `i` is finite locally constant.
-
-Proof: forgetting abelian groups commutes with inverse image
-(`etaleInverseImageAlgebraicStructures`), the inverse image of sheaves of sets sends the sheaf
-represented by `P` to the sheaf represented by `P ×_S Z`
-(`Adjunction.uliftYonedaCompIso`), and the sheaf represented by a finite étale scheme is
-finite locally constant (`isFiniteLocallyConstant_uliftYoneda`). -/
+sheaf of sets of the inverse image of `G` along `i` is finite locally constant. -/
 theorem isFiniteLocallyConstant_forget_upperStar_of_iso_uliftYoneda {S Z : Scheme.{u}}
     (i : Z ⟶ S) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (P : S.Etale)
     (e : (sheafCompose S.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G ≅

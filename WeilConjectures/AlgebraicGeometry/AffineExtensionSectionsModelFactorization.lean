@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePullbackSectionsModelUnit
 /-! # Localization of the affine model comparison
 
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-extension-sections-model-factorization).
 -/
 
 @[expose] public section
@@ -60,33 +59,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 -- Affine functor identifications need to unfold the scheme module carrier.
 /-- Localization of the normalized underived model comparison computes the derived mate.
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-extension-sections-model-factorization).
-Proof: Tilde is exact and preserves K-flatness. The K-flat M computes derived
-extension of scalars, and tilde M computes derived tensor pullback. The ordinary
-sections/derived sections comparison is invertible on complexes of associated
-sheaves, even when unbounded, by affine acyclicity and truncation. These three
-comparison maps give a and b, with the displayed source and target complexes.
-More explicitly, write K = tilde M, X = Gamma_R K, and N = P K. Let
-s_R : Q(X) -> RGamma_R(Q(K)) and s_B : Q(Gamma_B N) -> RGamma_B(Q(N))
-be the invertible sections comparisons, and let e_E and e_P be the left-derived
-counits on X and K. After identifying the fixed extension adjoint with the standard
-left derived extension by the unit-compatible uniqueness isomorphism, take
- a = (LE(s_R))^{-1} followed by e_E,
- b = RGamma_B(e_P) followed by s_B^{-1}.
-Here X is K-flat because the ordinary tilde unit identifies X with M. For the
-comparison over B, transport g to Spec of its coordinate ring map using full
-faithfulness of Spec, then use the termwise tensor-pullback/tilde isomorphism.
-Apply the underived equation hc termwise and pass to the homotopy categories.
-The derived extension adjunction is transported from extension/restriction, so its
-unit factors through the extension counit on M. The canonical pullback adjunction
-has the analogous factorization through its K-flat counit on tilde M. Substitute
-these two unit factorizations in the localized equation hc. The equation hr replaces
-the localized sections/direct-image comparison by r; naturality of the derived
-units moves this comparison past the resolution maps. Cancel the invertible
-sections and K-flat comparison maps. This gives precisely the displayed equation.
-The zero complex and identity map recover the ordinary adjunction identities;
-no boundedness or flatness assumption on g occurs. -/
+Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7. -/
 theorem exists_affineExtensionSections_model_factorization
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 /-! # Normalization determines a total tensor augmentation
 
 Source: Stacks Project, Modules on Sites, Tag 03EK and proetale.tex, Tag 099M.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -241,17 +240,7 @@ end Generic
 /-- Degree-zero normalization and vanishing away from that degree determine the
 square relating a tensor augmentation to its value at the cochain unit.
 
-Source: Stacks 099M, tensoring the finite augmentation, with Stacks 03EK.
-(auxiliary; not a blueprint node).
-
-Proof: transport bU along the left unitor and the single-factor comparison to a
-map c from K to Q[0]. Its degree-zero map composed with u is q, by the normalization
-at the unit and the unitor equations. On a (p,0) summand, cancel the isomorphism
-P^p tensor u; the normalization of b and c makes the two maps equal. On every
-(p,q) summand with q nonzero, the component of c vanishes because its target is
-zero, and the component of b vanishes by hypothesis. Total tensor inclusions
-jointly detect equality. Finally cancel the left unitor to recover the square.
-No boundedness of P or K is used. -/
+Source: Stacks 099M, tensoring the finite augmentation, with Stacks 03EK. -/
 theorem normalizedTensorSquare
     (O : Sheaf J CommRingCat.{u}) (K P : Cx O) (Q : Mod O)
     (u : 𝟙_ (Mod O) ⟶ K.X 0) [IsIso u] (q : 𝟙_ (Mod O) ⟶ Q)

@@ -33,8 +33,7 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 The ordinary finite pullback comparison (`ordinaryFinitePull_existsUnique`).
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
 -/
 
 @[expose] public noncomputable section
@@ -74,12 +73,7 @@ attribute [local irreducible] derivedPull pull change
 include V adj hL in
 /-- Ordinary constant-coefficient pullback commutes with finite reduction, normalized
 by the two insertions. This fixes the canonical tensor reassociation in the quotient
-coefficient category. Source: Stacks 06YY, 099L
-(auxiliary; not a blueprint node).
-Proof: inverse image preserves balanced generators and relations because it preserves
-finite products and colimits. Both sides are the same quotient of u^(-1)M. The maps
-send a generalized element m to the same class. These generate the tensor sheaf, giving
-uniqueness, naturality in M, and compatibility with quotient ring maps. -/
+coefficient category. Source: Stacks 06YY, 099L. -/
 theorem ordinaryFinitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅
         change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))),

@@ -9,8 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkPasting
 
 /-! # One row of the graph product interchange grid
 
-Source: Stacks Project, Tag 0F7J, A--F pasting in the product neighborhoods
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F7J, A--F pasting in the product neighborhoods.
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +35,7 @@ variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The source lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def productSourceLambda (second : Bool) :
     (if second then d₂ else d₁).sourcePresentation.functor A ≅
       (d₁.productF d₂).functor A := by
@@ -47,7 +46,7 @@ def productSourceLambda (second : Bool) :
       d₁.sourcePresentation d₂.sourcePresentation A
 
 /-- The middle lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def productMiddleLambda (second : Bool) :
     (EtaleGraphPresentation.ofCompactification
       (if second then d₂ else d₁).compactification).functor A ≅
@@ -61,7 +60,7 @@ def productMiddleLambda (second : Bool) :
       (EtaleGraphPresentation.ofCompactification d₂.compactification) A
 
 /-- The composite lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def productCompositeLambda (second : Bool) :
     (if second then d₂ else d₁).compositePresentation.functor A ≅
       (d₁.productH d₂).functor A := by
@@ -79,28 +78,7 @@ auxiliary compactification. Its boundary is defined from the product proper/open
 and the inverse exchange for the closed inclusion of products over Y into products over Z.
 
 Source: Stacks Tag 0F7J, A--F pasting; product-graph extension, steps 6--7 of
-lem-pur-etale-graph-comparison-interchange
-(auxiliary; not a blueprint node).
-
-Proof: expand the three lambda words, with their two side squares and graph triangles.
-For the g word the neighborhoods are Y times T_other and T_selected times Y over Z;
-for h they are W_selected times P_other and P_selected times W_other over Z.
-For f use W_selected times V_other and V_selected times W_other over Y. Insert
-V_selected times P_other and P_selected times V_other over Z. The maps from the
-Y-products to the Z-products are productBV and productBW. They are proper because
-Y to Y times Y over Z is closed: g is separated, since it is open then proper.
-Their square with the products of e is Cartesian, by the pullback universal property.
-All side squares are Cartesian base changes of the supplied opens, and all graph
-triangles have proper graph edges by proper-to-separated. Evaluate this grid by rows
-and by columns. Horizontal pasting combines consecutive open edges; vertical pasting
-combines consecutive proper edges. Naturality interchanges cells meeting at a vertex.
-Opposite intersection graph triangles cancel. The row boundary is the selected I
-followed by its composite lambda. The column boundary is the source lambda, the middle
-lambda, the inverse B exchange and Q₀ exchange, including their proper and open
-compositors. These last two factors are exactly productInterchange. Cartesian exchange
-normalization, the open triple-composition law and composite-adjunction normalization
-identify the words, including their associators. No comparison between the two selected
-sides is assumed, and no equality is inferred from stalks. -/
+lem-pur-etale-graph-comparison-interchange. -/
 theorem etaleGraphProductRowPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

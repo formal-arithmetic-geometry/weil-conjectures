@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCEStationaryComparisonsAtBounds
 /-! # Support-controlled filtered CE totals
 
 Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-supported-ce-filtered-totals).
 -/
 
 @[expose] public section
@@ -44,51 +43,7 @@ The presentation, page maps and stationary comparisons are chosen simultaneously
 The abutment is the homology map of the specified CE-total map; this assertion does not
 compare it with an arbitrary supplied map of K-injective resolutions.
 Source: Stacks Project, Tag 015J (first spectral sequence), Tag 015K (filtered
-functoriality), and Tag 0EZM (common lower support bound).
-(blueprint: lem-weil-pbc-supported-ce-filtered-totals).
-
-Proof:
-1. For a complex whose terms are all zero choose the zero CE resolution. Otherwise,
-   boundedness below gives a least degree b with a nonzero term. Shift b to zero,
-   apply exists_cartanEilenberg_resolution, and shift back. The resulting CE rows
-   vanish below b, hence below every lower bound a of the original complex. Construct
-   the CE presentation from these resolutions, with the canonical augmentation,
-   K-injective comparison, finite-diagonal sections comparison and transported
-   cohomology-image filtration. In the zero case all these are the zero comparisons.
-2. Extend resolution degree by zero, flip, and filter by original complex degree.
-   The total in degree i has summands indexed by s+m=i with m nonnegative.
-   Thus its step p is zero for p>i and is the whole total for p<=a, for every
-   lower support bound a of K. Construct the pages from the actual cycle/boundary
-   quotients, using common finite crops in the finitely many degrees involved.
-   The representative equations identify successive crops and fix the differential
-   and page-homology comparison. Apply the signed row identifications and the
-   natural ordinary sheaf cohomology comparison to obtain firstPageIso.
-3. Exact inverse image and the augmented CE comparison give a bidegree-preserving
-   lift of v. Extend, flip and totalize it to obtain u. The augmentation equation
-   follows on each degree-zero resolution summand and then by joint epimorphy.
-   The sections unit and totalSectionsIso give the sections-total map displayed
-   in ht. It preserves every filtration step. Its maps on cycle representatives
-   descend to maps of the chosen quotient pages and commute with their homology
-   comparisons, giving M. On the first page the row comparison computes precisely
-   cohomologyMap followed by Sheaf.H.map(v.f q); the equal sign corrections cancel.
-4. If r>=max(1,q-a+2,n-q+2), then q+r>n+1 and q-r+1<=a.
-   Hence the two outer filtration steps in degrees n+1 and n-1 are respectively
-   zero and the whole object. The stationary cycle/boundary formulas and
-   stableSubquotient_at_bounds identify the page with the graded cohomology image.
-   Use its canonical quotient-to-image comparison and transport it by c n, rather
-   than choosing an arbitrary isomorphism. Its definition uses q,n,r and the two
-   outer-step equalities; proof irrelevance removes dependence on the witness a.
-   This supplies eInf for the existential support-admissibility condition.
-5. Restrict homology of the sections-total map to the cohomology images of the
-   filtration steps and transport by c_X and c_Y. These are t, with equation ht.
-   On a cycle representative both its stationary page map and the induced image
-   map send the class of z to the class of its image under the same total map.
-   The representative projections are epimorphic. Cancel them to obtain the
-   displayed equation with cokernel.map, for every proof hc (proof irrelevance).
-   No unrelated M or eInf is quantified universally: both come from this one
-   filtered construction. Empty schemes, zero complexes, negative total degrees
-   and empty diagonals satisfy the same zero-object universal properties.
--/
+functoriality), and Tag 0EZM (common lower support bound). -/
 theorem exists_etaleHypercohomology_supported_ce_filtered_totals :
     ∃ (D : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CechSheafLocalPositiveExact
 /-! # Local exactness of the augmented module-sheaf Čech complex
 
 Source: blueprint `lem-pc-cech-resolution`, displayed complex and proof paragraph 1.
-(blueprint: lem-pc-cech-sheaf-local-quasi-iso).
 -/
 
 @[expose] public section
@@ -27,31 +26,7 @@ namespace AlgebraicGeometry
 
 /-- Any augmented complex with the usual Čech sections and restriction augmentation
 is a quasi-isomorphism after restricting to one member of the family of opens.
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-sheaf-local-quasi-iso)
-
-Proof: fix i and work on the open subscheme U_i. On an open V of U_i, the chosen
-member U_i covers V entirely. For a degree-p section, the degree-(p-1) homotopy
-has coordinate indexed by y equal to the coordinate indexed by the tuple with i
-inserted first, using the identification V intersection U_i = V. In degree zero,
-project to the coordinate i to obtain the homotopy to F. These maps are A-linear
-and natural in V because all structure maps are restrictions. Forget to abelian sheaves
-before transporting them through e; e need not respect the full O_X(V)-action. Compute d h + h d:
-the coface deleting the inserted first index gives the identity; each other coface
-pairs with the term obtained by first deleting its shifted index and then inserting
-i, with opposite signs. Thus all remaining terms cancel. The augmentation equation
-supplies the same identity at degree zero, and projection onto i followed by the
-augmentation is the identity of F restricted to U_i. These equations give a chain
-homotopy inverse of the restricted augmentation on underlying abelian sheaves. Thus
-its abelian-sheaf homology maps are isomorphisms. Forgetting module sheaves to abelian
-sheaves is exact and reflects isomorphisms: kernels are computed on sections and
-cokernels are the associated sheaves of the sectionwise cokernels. It therefore
-reflects quasi-isomorphisms, proving the module-sheaf assertion. This proof concerns
-one member only and needs no covering hypothesis. If U_i is empty all terms and
-homology objects are zero; if the index type is empty the parameter i has no values.
-The zero module is covered by the same identities. It uses no assertion that boundary
-stalks of open direct images vanish, and no assertion that stalks commute with infinite
-products. -/
+Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
 theorem augmented_cech_sheaf_quasiIso_restrict
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

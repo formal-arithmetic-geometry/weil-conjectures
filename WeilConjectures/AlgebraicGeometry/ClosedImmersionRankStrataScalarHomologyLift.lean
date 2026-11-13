@@ -82,26 +82,7 @@ private theorem rank_term_stalk_zero
 its other cohomology degrees are supported on the other rank strata.
 
 Source: Stacks, Tag 0BQZ (single-degree truncation), and Cohomology, Tags
-08BS and 08BT (exact extension by zero and its adjunction).
-(blueprint: lem-sc-closed-immersion-rank-strata-scalar-homology-lift)
-
-Proof: For negative n the source is zero, and the zero morphism is a lift.
-Otherwise let V be the complement in Y of the closed image of the complement
-of the rank-n stratum. On V every other cohomology degree vanishes: its
-support is a different rank stratum. Exact restriction therefore gives a
-single-degree derived object. The canonical truncation isomorphism identifies
-it with its degree-n homology placed in degree n, compatibly with homology.
-Restrict a and compose with the inverse truncation isomorphism. Extension
-by zero is exact and left adjoint to restriction, so this local morphism
-extends to a morphism into K. The source sheaf is supported on the closed
-image of the rank-n stratum, which is contained in V; hence the counit
-from the extension by zero of its restriction is an isomorphism, as is
-checked on stalks. Use this isomorphism to identify the extended source
-with the original source. The homology of the resulting morphism is a:
-on V this follows from the truncation comparison and counit naturality,
-and off V both maps have zero source stalk. Equality of sheaf morphisms
-is detected on stalks. Empty strata give zero source; no finiteness or
-algebra action is used. -/
+08BS and 08BT (exact extension by zero and its adjunction). -/
 theorem closedImmersion_rankStrata_scalar_homology_lift
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u}

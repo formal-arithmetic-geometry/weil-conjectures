@@ -81,18 +81,7 @@ def properModelComparison (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The published proper comparison equals the direct-image factorization.
 Source: blueprint latest, sec-smooth-purity/sk-prop-an/
 cor-pur-affine-space-zero-section-purity.proof.md, ordered compact-support composition;
-parent node proof Step 3 (blueprint: lem-pur-closed-proper-derived-factor).
-
-Proof: let c=(j,p) be the chosen compactification. Properness of f makes j clopen.
-Put J=j_!, I=j_* and e:J≅I the canonical sheaf comparison. Both are exact and preserve
-K-injective complexes. The underived comparison f_!→f_* is p_*(e) followed by the
-specified direct-image factorization. Apply right derivation to this equality.
-Naturality of the composition comparison identifies R(p_*e) with Rp_*(Re).
-Naturality of RF≅D(F) for exact functors identifies Re with D(e). The inverse exact
-comparisons then give precisely the displayed factorization. All the equalities
-are equalities of natural transformations: they follow by right-derived uniqueness
-from their pasted-unit equations on homotopy representatives. Thus neither an
-arbitrary compactification choice nor a new choice of isomorphism is used. -/
+parent node proof Step 3. -/
 theorem closedProperDerivedFactor (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] [HasCompactification f] :
     rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar (ModuleCat.{u + 1} A) f =

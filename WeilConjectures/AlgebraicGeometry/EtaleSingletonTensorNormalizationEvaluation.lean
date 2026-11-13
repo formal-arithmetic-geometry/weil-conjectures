@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 
 /-! # Evaluation of a normalized singleton comparison
 
-Source: Stacks Project, Tag 03P2, singleton Čech term.
-(blueprint: new-etale-singleton-tensor-normalization-evaluation) -/
+Source: Stacks Project, Tag 03P2, singleton Čech term. -/
 
 @[expose] public section
 
@@ -24,18 +23,7 @@ noncomputable section
 set_option linter.auxLemma false in
 /-- Evaluating the sole outer Čech index gives an additive map whose value on
 normalized pure tensors is the prescribed section. No affine hypothesis is needed.
-Source: Stacks Project, Tag 03P2, affine Čech term identification.
-(blueprint: new-etale-singleton-tensor-normalization-evaluation)
-
-Proof: define q by the categorical product projection at the unique index
-Fin(n+1) → Fin 1, followed by ULift.down. The projection is an additive homomorphism,
-and ULift.down is an additive equivalence. Their composite is therefore additive.
-Unfold IsSingletonTensorDegreeComparisonHom: its displayed equation is exactly
-the asserted equation for q on pure tensors. The only Lean transport is unfolding
-the degree-n Čech term and the lifted Amitsur term to expose their carriers.
-This construction uses neither affineness, bijectivity nor tensor-generator
-induction and applies to empty schemes and zero modules as well.
--/
+Source: Stacks Project, Tag 03P2, affine Čech term identification. -/
 theorem singletonTensor_normalization_evaluation
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

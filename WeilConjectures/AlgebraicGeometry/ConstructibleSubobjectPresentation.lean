@@ -30,21 +30,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every module sheaf on a Noetherian scheme over a finite ring is a filtered union
 of constructible module subsheaves.
-Source: Stacks Project, Tags 03SA(3), 09BH(3), and 03SC, first proof paragraph.
-(blueprint: lem-pbc-u2-constructible-subobject-presentation)
-
-Proof: Use the filtered constructible presentation of Tag 03SA(3), converting its
-constructibility convention by the finite-ring comparison. Replace each map to F by
-its image. Its kernel is constructible by the Noetherian module-subobject theorem;
-its image, the cokernel of that kernel inclusion, is constructible by constructible
-cokernel closure. A commuting triangle into F induces a unique transition between
-images, and uniqueness gives a functor and a natural cocone of monomorphisms.
-This cocone is colimiting: compatible maps from images compose with the epimorphisms
-from the original stages to give a compatible family, hence a map from F. The
-resulting map restricts to the prescribed image maps, by cancellation of those
-epimorphisms; uniqueness follows from the original colimit. The original filtered
-index remains unchanged, including its zero stage. This handles zero rings, zero
-sheaves, and empty schemes without requiring nonzero sections. -/
+Source: Stacks Project, Tags 03SA(3), 09BH(3), and 03SC, first proof paragraph. -/
 theorem exists_filtered_colimit_constructible_subobjects
     {X : Scheme.{u}} [IsNoetherian X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

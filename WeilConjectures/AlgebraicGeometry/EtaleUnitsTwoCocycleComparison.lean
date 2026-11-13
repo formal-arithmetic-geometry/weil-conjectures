@@ -13,7 +13,6 @@ public import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 # Etale unit cohomology computed by continuous inhomogeneous cocycles
 
 Source: Stacks Project, Tags 04JQ, 03QU, 03QV (2), and Section 0DVG.
-(blueprint: lem-sc-etale-units-two-cocycle-comparison).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ comparison `AlgebraicGeometry.Scheme.cohomologicalBrauerGroupAddEquivGaloisUnits
 The target is a bijection only because `Field.GaloisUnitsTwoCocycleClasses` is a bare
 quotient type.
 
-Source: Stacks Project, Tags 04JQ and 03QU, Example 03QV (2), and Section 0DVG.
-(blueprint: lem-sc-etale-units-two-cocycle-comparison). -/
+Source: Stacks Project, Tags 04JQ and 03QU, Example 03QV (2), and Section 0DVG. -/
 noncomputable def twoCocycleClassesEquivCohomologicalBrauerGroup (K : Type u) [Field K] :
     Field.GaloisUnitsTwoCocycleClasses K ≃ (Spec (.of K)).CohomologicalBrauerGroup :=
   (Field.galoisUnitsH2EquivTwoCocycleClasses K).symm.trans

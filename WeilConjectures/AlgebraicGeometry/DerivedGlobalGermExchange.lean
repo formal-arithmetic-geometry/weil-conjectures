@@ -32,24 +32,7 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGermExchang
 /-- The canonical derived global germ intertwines exchange with the derived unit.
 
 Source: Stacks Project, etale-cohomology.tex, Tag 095T, final map-on-stalks paragraph;
-cohomology.tex, Tag 01F8; sites-cohomology.tex, Remark 08J6.
-(blueprint: lem-weil-pbc-derived-global-germ-exchange)
-
-Proof: Represent K by a bounded below injective complex I. Replace the exact inverse
-image of I by an injective complex J. By
-`Etale.existsUnique_derivedBaseChangeMapPlus_comparison` and
-`Etale.derivedBaseChangeMapPlus_eq_termwise`, exchange is underived exchange on I
-followed by direct image of the replacement. After global sections,
-Leray and the global germ identify this with the unit on I followed by replacement
-and then the target global germ. Underived equality is the mate formula for exchange
-and naturality of the global germ. The defining unit compatibility of right-derived
-natural transformations and of the Leray comparison transports precisely this equality
-to the derived category. The identification of the section-pullback morphism with
-RΓ of the derived unit is `derivedCohomologyPullback_eq_derivedUnit`. Equivalently, use
-right-derived extensionality to check equality after precomposing the unit on injective
-complexes; that computation is the termwise equality just given. These comparisons are
-natural, so the resulting equality holds for every bounded below derived object.
-This is compatibility only; neither of the global germs is asserted invertible. -/
+cohomology.tex, Tag 01F8; sites-cohomology.tex, Remark 08J6. -/
 theorem derivedGlobalGerm_exchange
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g)

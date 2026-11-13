@@ -25,18 +25,7 @@ attribute [local irreducible] adicResidueLocalReductionStep
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- K-projectivity of the ordinary quotient complexes.
-Source: Stacks Project, Tags 06YY, 064B and 09C5.
-(auxiliary; not a blueprint node).
-
-Proof: every finite projective term of P is a retract of a finite free module.
-Constant realization, scalar extension and slice restriction preserve these retract
-maps and their identity composite. Each quotient term is consequently a retract
-of a finite sum of copies of the unit sheaf. On the weakly contractible slice,
-Hom from the unit is evaluation at the final object, which preserves epimorphisms.
-Thus the unit is projective, as are its finite sums and retracts. Termwise additive
-functors preserve the upper bound b. Apply the bounded-above projective-complex
-criterion to obtain K-projectivity. The argument includes zero terms, zero rings,
-the unit ideal and empty slices, since retracts and exact evaluation still apply. -/
+Source: Stacks Project, Tags 06YY, 064B and 09C5. -/
 theorem adicPerfectReductionModels_kprojective (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

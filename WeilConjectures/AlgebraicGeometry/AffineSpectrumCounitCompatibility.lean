@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCoordinateCounit
 /-! # AffineSpectrumCounitCompatibility
 
 Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-affine-spectrum-counit-compatibility).
 -/
 
 @[expose] public section
@@ -30,20 +29,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The direct-image comparison preserves the pinned adjunction counit.
-
-Proof: expand affineSpectrumDerivedDirectImageIso as the inverse left unitor,
-whiskered unit of the inverse spectrum equivalence, associator, and conjugate d.
-Apply conjugateEquiv_counit to d for the composed pinned adjunctions. Expand the
-composite counits. Naturality of the equivalence unit moves it across the counit
-of f. The equivalence triangle identities cancel that unit against its counit.
-The forward pullback comparison is the inverse-spectrum pullback comparison
-transported across the two spectrum equivalences: expand both using c, and use
-its associativity and unit laws and isoSpec naturality. This gives the displayed
-counit identity. There is only one morphism f and one object K, with no square.
-Empty schemes and zero objects are included by the categorical identities.
-Source: Stacks Project, Tags 0D5S and 08HY.
-(blueprint: lem-pc-affine-spectrum-counit-compatibility). -/
+/-- The direct-image comparison preserves the pinned adjunction counit. -/
 theorem affineSpectrum_counit_compatibility
     {X S : Scheme.{u}} [IsAffine X] [IsAffine S]
     (f : X ⟶ S) (K : schemeDerivedCategory X) :

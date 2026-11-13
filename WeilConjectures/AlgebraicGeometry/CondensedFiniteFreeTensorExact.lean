@@ -104,16 +104,7 @@ attribute [local instance] Mod.isGrothendieckAbelian
 
 /-- Tensoring with a module trivialized as finite free by a pro-etale cover is left
 exact.  It is already right exact because it is left adjoint to internal Hom.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node)
-
-Proof: on a trivializing cover, internal Hom is the finite-power functor.  The
-finite-copower functor is its left adjoint and is also a finite-power functor;
-uniqueness of left adjoints identifies tensor with that exact functor.  Pullback
-commutes with module tensor, as follows from its coequalizer construction, and
-preserves finite limits.  Thus every pullback of the limit comparison is invertible.
-The restrictions along a cover jointly reflect isomorphisms, so the comparison
-itself is invertible.  This argument includes rank zero and the empty scheme. -/
+Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2). -/
 theorem condensed_locally_free_tensor_preservesFiniteLimits {X : Scheme.{u}}
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)

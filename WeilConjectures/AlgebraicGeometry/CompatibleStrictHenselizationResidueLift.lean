@@ -94,25 +94,7 @@ private theorem lift_indEtale_residue
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Lift compatible geometric residue embeddings to a ring map of strict henselizations.
-Source: Stacks Project, Tags 04GU and 04HX.
-(blueprint: lem-weil-pbc-compatible-strict-henselization-residue-lift).
-
-Proof: choose an affine open U = Spec R containing the image of σ. The closed
-point of Spec B maps into U, so the entire local spectrum Spec B maps into U:
-every point generalizes its closed point. This gives the base ring map R → B.
-Use Scheme.etale_local_ring_triples to identify the pointed neighbourhood
-colimit over U with the etale residue-triples diagram. Scheme.strictHenselization_triples
-identifies its residue field with the chosen separable closure and its maximal ideal
-with the pointed prime. Transport this colimit presentation along eA using full
-faithfulness of Spec. Thus A is an ind-etale R-algebra with its maximal ideal over
-the inverse image of the maximal ideal of B. The supplied hres, followed by the two
-factorization equalities and hι, says that r respects the base residue field.
-Apply Algebra.map_into_henselian_colimit (Tag 08HR, the lifting property used in
-Tag 04GU) with this maximal ideal and r. Identify the prime residue fields there
-with the local residue fields here. Its prescribed reduction gives the ring residue
-diagram; its R-algebra compatibility gives the equality of maps to U and hence the
-structural square after composing with U → S. Only φ is obtained: r and its spectral
-compatibility are inputs, constructed independently by the caller. -/
+Source: Stacks Project, Tags 04GU and 04HX. -/
 theorem Etale.exists_compatibleStrictHenselizationResidueLift
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

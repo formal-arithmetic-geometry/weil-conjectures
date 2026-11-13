@@ -343,8 +343,7 @@ theorem eq_of_forall_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {S : Sieve X}
 
 /-- **Fpqc descent for closed subschemes: uniqueness.** Two ideal sheaves on `X` whose pullbacks
 along every member of an fpqc covering family agree are equal.
-
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
+ -/
 theorem eq_of_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
     (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
     {J J' : X.IdealSheafData} (h : ∀ i, J.comap (p i) = J'.comap (p i)) : J = J' := by
@@ -363,8 +362,7 @@ refined by finitely many flat morphisms `f j : W j ⟶ U` from affine schemes, a
 `⨅ j, (I j).map (f j)` on `U` restricts to the given ones by flat base change
 (`Scheme.IdealSheafData.comap_iInf_map_of_flat`); these local ideal sheaves are unique, hence
 glue (`Scheme.IdealSheafData.exists_comap_ι_eq`).
-
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
+ -/
 theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
     (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
     (I : ∀ i, (X' i).IdealSheafData)

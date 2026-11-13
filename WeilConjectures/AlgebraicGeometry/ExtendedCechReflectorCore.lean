@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.RingedCechCompletionUnitIdempotence
 /-!
 # Core reflector properties for the extended Cech completion
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
 
 The remaining finite localization-filtration and orthogonality argument is isolated here.
 -/
@@ -429,7 +428,6 @@ private theorem universal_of_idempotence
 
 /-- The completeness and universal mapping clauses of the extended Cech reflector.
 Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(auxiliary; not a blueprint node).
 
 The proof contracts the localized extended Cech complex on each finite-generator slice,
 filters the augmentation cone by its positive localization terms, and globalizes the

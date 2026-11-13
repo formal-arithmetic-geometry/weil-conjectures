@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorPreservesQCoh
 /-! # Derived pullback and tensor preserve quasi-coherent cohomology
 
 Source: Stacks Project, Derived Categories of Schemes, Lemmas 36.3.8 (Tag 08DW), part (1),
-and 36.3.9 (Tag 08DX), part (1) (blueprint: lem-pc-derived-pullback-tensor-qcoh).
+and 36.3.9 (Tag 08DX), part (1).
 -/
 
 @[expose] public section
@@ -39,8 +39,7 @@ def-pc-derived-tensor-cohomology-vanishes, `K ⊗^L L` is stated through represe
 `K ≅ Q(P)` with `P` K-flat (one exists by lem-pc-kflat-resolution) and `L ≅ Q(N)` for any
 complex `N` (`Q` is essentially surjective), and then `K ⊗^L L ≅ Q(Tot(P ⊗_{𝒪_X} N))`.
 Quantifying over all such `P` and `N` covers every pair `K, L`.
-Source: Stacks Project, Tags 08DW(1) and 08DX(1)
-(blueprint: lem-pc-derived-pullback-tensor-qcoh).
+Source: Stacks Project, Tags 08DW(1) and 08DX(1).
 
 Proof (the two steps of the node):
 1. Quasi-coherence of cohomology is local. Cover X by affine opens U mapping into affine

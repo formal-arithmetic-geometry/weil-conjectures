@@ -23,8 +23,7 @@ namespace AlgebraicGeometry
 Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).
 Proof in words: this strict component is obtained by the tensor-pullback
 functoriality (for the isomorphism component) or by the affine-local standard
-chart argument (for the properties component), exactly as in the parent proof.
-(blueprint: lem-pc-chow-relative-ample-twist-iso) -/
+chart argument (for the properties component), exactly as in the parent proof. -/
 theorem chow_relative_ample_twist_iso (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

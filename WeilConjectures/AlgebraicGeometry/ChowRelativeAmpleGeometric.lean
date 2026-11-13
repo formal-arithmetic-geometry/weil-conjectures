@@ -29,8 +29,7 @@ properness also supplies the quasi-compactness required for projectivity of
 gives `ProjectiveSpace.liftBaseChange π j hj`; the diagonal of the proper map
 `g` is closed, so this composite is a closed immersion.  The same properness
 and quasi-compactness argument then makes `π` projective.
-
-(blueprint: lem-pc-chow-relative-ample-geometric) -/
+ -/
 theorem chow_relative_ample_geometric (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

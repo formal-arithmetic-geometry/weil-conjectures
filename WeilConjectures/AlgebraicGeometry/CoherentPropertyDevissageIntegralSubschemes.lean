@@ -25,8 +25,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 /-!
 # Devissage of a property of coherent modules
 
-Source: literature/stacks-project/coherent.tex, Lemma 01YM
-(blueprint: lem-weil-pbc-coherent-property-devissage-integral-subschemes).
+Source: literature/stacks-project/coherent.tex, Lemma 01YM.
 -/
 
 @[expose] public section
@@ -174,7 +173,6 @@ set_option linter.unusedVariables false in
 /-- A property satisfying extension, summand, and integral-support devissage hypotheses
 holds for every coherent module on a Noetherian scheme.
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YM.
-(blueprint: lem-weil-pbc-coherent-property-devissage-integral-subschemes)
 
 Proof (the node's nine steps):
 

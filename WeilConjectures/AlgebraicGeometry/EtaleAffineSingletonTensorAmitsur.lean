@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorCofaces
 
 /-! # Singleton affine tensor-section Čech complexes
 Source: Stacks Project, Tag 03P2, affine tensor-product calculation.
-(blueprint: new-etale-affine-singleton-tensor-amitsur).
 -/
 
 @[expose] public section
@@ -29,27 +28,7 @@ set_option autoImplicit false
 
 /-- The singleton Čech complex of an affine map is its tensor Amitsur complex.
 Source: Stacks Project, Tag 03P2, identification before the faithfully-flat exactness argument;
-Tag 03OZ, singleton-cover calculation.
-(blueprint: new-etale-affine-singleton-tensor-amitsur)
-
-Proof: set A = Γ(U.left, O), B = Γ(W.left, O), M = Γ(U.left, U.hom*F).
-Compare tensorPullback with Mathlib pullback by uniqueness of left adjoints to pushforward;
-the unit-compatible comparison transports quasi-coherence from the proved pullback instance.
-The unit-normalized composition isomorphism identifies
-restriction of the tensor-section presheaf from X with sections of the pullback of F to U.
-The degree p categorical product is the (p+1)-fold fibre product of W over U. Affine charts
-and the affine fibre-product formula identify its ring with the indexed tensor product of
-(p+1) copies of B over A, compatibly with projections. The affine pullback-sections formula
-then identifies sections with M tensor that ring. On pure tensors, pullback along a projection
-omitting factor j inserts 1 in factor j; the unit equation for the composition comparison
-ensures this is also the restriction of the original tensor-section presheaf. Pure tensors
-generate, so the coface maps agree with the Amitsur cofaces. In each degree the product over
-maps Fin (p+1) to Fin 1 is a singleton product; evaluation at its unique index identifies it
-with this section group. Apply ULift to the additive isomorphisms and their inverses. They
-commute with every coface and hence with the alternating differentials, giving the asserted
-complex isomorphism. This calculation uses neither flatness nor surjectivity. For empty W,
-B is the zero ring and all terms on both sides vanish. For an identity map it is the usual
-A tensor-power identification, with exactly the alternating identity cofaces. -/
+Tag 03OZ, singleton-cover calculation. -/
 theorem nonempty_etale_affine_singleton_tensor_amitsur_iso
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :

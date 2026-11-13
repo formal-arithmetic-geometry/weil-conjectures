@@ -28,8 +28,7 @@ import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 # Constructible sheaves over discrete Noetherian rings form weak Serre subcategories
 
 Source: Stacks Project, Tag 03RZ (3), etale-cohomology.tex, lemma-constructible-abelian;
-Tag 09B5, proetale.tex, lemma-constructible-serre
-(auxiliary; not a blueprint node).
+Tag 09B5, proetale.tex, lemma-constructible-serre.
 
 ## Main statements
 
@@ -284,13 +283,7 @@ private theorem noetherian_flc_of_shortExact
 
 /-- Global constructible fixed-scalar module sheaves over a Noetherian ring are
 closed under extensions, without a finite-underlying-ring assumption.
-Source: Stacks Project, Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node).
-Proof: take the fibre-product common refinement of the two finite stratifications.
-Exact immersion pullback gives extensions of finite locally constant sheaves on each
-stratum. The finite-presentation lifting argument noetherian_flc_of_shortExact above
-makes the middle sheaf locally constant, and stalkwise exactness makes its values
-finitely generated. The common refinement witnesses global constructibility. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3). -/
 theorem IsConstructibleSheaf.of_shortExact_of_isNoetherianRing
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)

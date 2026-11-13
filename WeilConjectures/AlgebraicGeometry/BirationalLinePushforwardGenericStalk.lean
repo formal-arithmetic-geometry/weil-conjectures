@@ -20,7 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
 verification of property (a).
-(blueprint: lem-pc-q2-birational-line-pushforward-generic-stalk)
 -/
 
 @[expose] public section
@@ -80,21 +79,7 @@ open CategoryTheory.Limits TopologicalSpace in
 invertible module has a free stalk of rank one at each point of that open.
 
 Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-verification of property (a).
-(blueprint: lem-pc-q2-birational-line-pushforward-generic-stalk)
-
-Proof: Let y be the inverse image of x under the isomorphism from the inverse
-image of U to U. Restriction of the pushforward to U identifies with pushforward
-of the restriction of L along that isomorphism: on every open V of U, both
-modules have sections L over the inverse image of V with the same scalar action.
-Restriction preserves invertibility, as does transport along an isomorphism.
-Choose an open neighbourhood of x on which this transported module is the
-structure module, using the defining local trivialization of an invertible module.
-Restriction to a neighbourhood preserves stalks: its neighbourhoods are cofinal
-among the neighbourhoods of x in W. Taking the stalk of the trivialization
-therefore identifies the original pushforward stalk with the structure-ring
-stalk, linearly over that ring. Neither density nor integrality is needed.
-The statement is conditional on x belonging to U, so an empty open is harmless. -/
+verification of property (a). -/
 private theorem line_pushforward_stalk_on_iso_open {W Y : Scheme.{u}}
     (π : Y ⟶ W) (U : W.Opens) [IsIso (π ∣_ U)]
     (L : Y.Modules) [L.IsInvertible] (x : W) (hx : x ∈ U) :
@@ -127,22 +112,7 @@ open of an integral scheme has the residue-field stalk after closed pushforward.
 The equivalence respects the original stalk action through the residue map.
 
 Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-property (a) and the closed-immersion stalk comparison preceding Chow's lemma.
-(blueprint: lem-pc-q2-birational-line-pushforward-generic-stalk)
-
-Proof:
-1. The generic point eta of integral W belongs to the dense open U. Restriction
-   of pushforward to U is pushforward from pi^{-1}(U). As pi restricted to U is
-   an isomorphism, this restricted module is invertible. A local trivialization
-   gives its eta stalk an O_{W,eta}-linear equivalence with O_{W,eta}.
-2. O_{W,eta} is a field. The residue quotient identifies it with kappa(eta).
-   The stalk of i_* at i(eta) is that of the original module at eta, and its
-   scalar action is induced by i.stalkMap eta (closed-pushforward stalks).
-3. A closed immersion induces an isomorphism of residue fields at corresponding
-   points. Compose the additive equivalences with this residue-field isomorphism.
-   Naturality of the residue maps gives e(a v) = residue(a) e(v).
-   This construction works for every invertible L, with no cohomological,
-   projective, properness, or Noetherian hypothesis. -/
+property (a) and the closed-immersion stalk comparison preceding Chow's lemma. -/
 theorem birational_line_pushforward_generic_stalk {X W Y : Scheme.{u}}
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (π : Y ⟶ W) (U : W.Opens) (hU : Dense (U : Set W))

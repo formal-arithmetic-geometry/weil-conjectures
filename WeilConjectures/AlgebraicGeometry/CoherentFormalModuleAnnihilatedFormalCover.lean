@@ -77,20 +77,7 @@ private theorem formal_annihilation_iff_limit
 
 /-- On any affine open cover, a fixed positive power kills a formal kernel and cokernel
 exactly when its section ideals kill the kernels and cokernels of the affine limit maps.
-Source: Stacks Project, Lemmas 087W and 087X (the affine description of the kernel)
-(blueprint: lem-weil-pbc-formal-annihilation-kernel-cokernel-cover).
-
-Proof:
-1. The defining quotient isomorphisms give surjective transition maps on affine
-   sections. Sequential inverse-limit surjectivity gives surjective projections.
-2. The affine-cover ideal-product criterion detects each level's annihilation.
-   Limit extensionality shows that annihilation at every level kills the limit;
-   surjectivity of its projections proves the converse.
-3. The affine-limit annihilator comparison identifies the limits of the formal
-   kernel and cokernel with the linear kernel and cokernel for this test. Apply
-   the equalities on each member of the cover and combine both conditions.
-In particular the formal kernel is not asserted to be the termwise kernel.
-For an empty index type covering X, X is empty and both sides hold. -/
+Source: Stacks Project, Lemmas 087W and 087X (the affine description of the kernel). -/
 theorem coherentFormalModule_annihilated_formal_cover
     (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)
     (F G : CoherentFormalModule X I) (α : F ⟶ G)

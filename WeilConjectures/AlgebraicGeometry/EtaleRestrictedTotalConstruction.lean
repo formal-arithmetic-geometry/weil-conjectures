@@ -15,7 +15,6 @@ public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 /-! # Concrete restricted Cartan--Eilenberg totals
 
 Source: Stacks Project, Tags 015J and 0133.
-(blueprint: def-weil-pbc-etale-restricted-total-construction).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite-diagonal comparison, constructed from coproduct comparison maps and
 extension by zero. No isomorphism is chosen from an existence statement.
-Source: Stacks, Tag 015J; finite diagonals of the CE total.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+Source: Stacks, Tag 015J; finite diagonals of the CE total. -/
 noncomputable def etaleCEMappedTotalIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
@@ -84,16 +82,14 @@ noncomputable def etaleCEMappedTotalIso
   exact e
 
 /-- Restrict complex degree to s ≥ q and extend by zero, retaining resolution degree.
-Source: Stacks, Tag 015J, proof remark (3).
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+Source: Stacks, Tag 015J, proof remark (3). -/
 noncomputable def etaleRestrictedBicomplex (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
   T.I.stupidTrunc (ComplexShape.embeddingUpIntGE q)
 
 /-- The actual sheaf-valued restricted total, before global sections.
-Source: Stacks, Tags 015J and 0133.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+Source: Stacks, Tags 015J and 0133. -/
 noncomputable def etaleRestrictedTotal (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
@@ -103,8 +99,7 @@ noncomputable def etaleRestrictedTotal (X : Scheme.{u})
 
 /-- The restricted total is zero below q: the retained rows have s ≥ q.
 Source: Stacks, Tags 015J and 0133. Proof: below q the outer stupid truncation
-is a zero complex, since no nonnegative index is sent to s < q.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+is a zero complex, since no nonnegative index is sent to s < q. -/
 theorem etaleRestrictedBicomplex_below (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :
@@ -116,8 +111,7 @@ theorem etaleRestrictedBicomplex_below (X : Scheme.{u})
 
 /-- The explicit degree-zero summand map into the restricted total. It is zero
 when n < q and is the row augmentation when n ≥ q.
-Source: Stacks, Tag 015J and Tag 0133, augmented total construction.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+Source: Stacks, Tag 015J and Tag 0133, augmented total construction. -/
 noncomputable def etaleRestrictedAugmentationComponent (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q n : ℤ) :
@@ -135,8 +129,7 @@ noncomputable def etaleRestrictedAugmentationComponent (X : Scheme.{u})
       (ComplexShape.up ℤ) 0 n n (zero_add n)
 
 /-- Inclusion of the restricted mapped total into the full mapped total.
-Source: Stacks, Tag 015J; totalization of the column inclusion.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+Source: Stacks, Tag 015J; totalization of the column inclusion. -/
 noncomputable def etaleRestrictedMappedInclusion (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
@@ -148,8 +141,7 @@ noncomputable def etaleRestrictedMappedInclusion (X : Scheme.{u})
             (T.I.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))) (ComplexShape.up ℤ)
 
 /-- The inclusion from Γ of the restricted sheaf total, using the finite-diagonal
-comparison in the inverse direction. Source: Stacks, Tag 015J.
-(blueprint: def-weil-pbc-etale-restricted-total-construction). -/
+comparison in the inverse direction. Source: Stacks, Tag 015J. -/
 noncomputable def etaleRestrictedSectionsInclusion (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=

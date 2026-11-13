@@ -24,24 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Tag 09YQ, affine-site argument using Tags 0EYL,
-04HR and 09YN (blueprint: lem-weil-pbc-affine-section-cocone-colimit).
-
-Proof: The opposite of the category of stages over i₀ is the directed upper tail,
-which is cofinal in I. Restrict the limiting scheme diagram to this tail. Its
-projections are affine. The affine étale site presentation of 0EYL identifies its
-limit site with the filtered colimit of the affine stage sites. Transport G and
-its inverse images along the full/affine restriction equivalences of 04HR. The
-unit-compatible inverse-image comparison identifies transition section maps with
-the maps in etaleStageSectionDiagram. Pulling these sheaves to the limit gives a
-diagram canonically isomorphic to the constant diagram on the inverse image of G;
-the composition unit equations supply its compatibility. A nonempty filtered
-category is connected, so the constant diagram has that sheaf as colimit. Apply
-09YN to the base changes of the affine object W₀: coverings are finite, hence
-sections commute with this filtered sheaf colimit. Transport the resulting
-colimit cocone back along the restriction equivalences. The same unit equations
-identify its legs with etaleStageSectionCocone. This proves the universal property
-of the specified cocone, including both existence and uniqueness of its descents.
-Empty affine objects cause no exception: their section sets are singletons. -/
+04HR and 09YN. -/
 theorem etaleStageSectionCocone_isColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

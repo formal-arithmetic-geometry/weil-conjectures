@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Compatibility of the étale cohomology edge map with base change
 
-Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
+Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 0A5D.
 
 The edge map is written as pullback on cohomology followed by the counit. In the finite
 case, its bijectivity and that of the exchange followed by the base-changed edge map give
@@ -31,8 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- The edge map commutes with cartesian base change, without any hypothesis on `f`.
-Source: Stacks Project, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
+Source: Stacks Project, Section 03SB, proof of Lemma 0A5D.
 
 Proof (steps 1--6 of the node):
 1. Fix resolutions and unwind the edge maps as pullback followed by the counit. The
@@ -130,8 +128,7 @@ theorem cohomology_edgeMap_baseChange
 /-- When `f` is finite and the underived exchange is invertible, the vertical comparison
 maps in `cohomology_edgeMap_baseChange` are isomorphisms (bijective additive maps).
 Thus that identity identifies `g`-pullback with `g'`-pullback through these isomorphisms.
-Source: Stacks Project, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
+Source: Stacks Project, Section 03SB, proof of Lemma 0A5D.
 
 Proof (step 7 of the node): finite morphisms are stable under base change
 (lem-weil-pbc-finite-morphism-permanence), so `f'` is finite. Both edge maps are bijective

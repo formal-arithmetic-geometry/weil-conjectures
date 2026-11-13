@@ -16,8 +16,7 @@ import Mathlib.Topology.Algebra.Valued.LocallyCompact
 # Continuous coefficient sheaves and immersion restriction
 
 Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.5.8(1), Definition 6.8.1,
-Lemma 6.8.2 and the paragraph preceding Definition 6.8.6
-(auxiliary; not a blueprint node).
+Lemma 6.8.2 and the paragraph preceding Definition 6.8.6.
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Continuous-function presheaf of commutative rings on schemes.
 
-Source: Bhatt--Scholze, Definition 6.8.1 (auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def continuousMapPresheafCommRing (T : Type v) [TopologicalSpace T]
     [CommRing T] [IsTopologicalRing T] : Scheme.{u}ᵒᵖ ⥤ CommRingCat.{max v u} where
   obj U := CommRingCat.of C(U.unop, T)
@@ -100,10 +99,7 @@ private theorem commRingForgetReflectsLimit {J : Type v} [Category J]
 
 /-- The continuous-function presheaf is a pro-etale sheaf.
 
-Source: Bhatt--Scholze, Lemma 4.2.12 and Definition 6.8.1 (auxiliary; not a blueprint node).
-Proof: apply fpqc descent for continuous abelian functions and restrict to the weaker
-pro-etale topology. The pointwise ring structure commutes with restriction; reflect
-sheafhood through the ring forgetful functor. This is step 1 of the node. -/
+Source: Bhatt--Scholze, Lemma 4.2.12 and Definition 6.8.1. -/
 theorem continuousMapPresheafCommRing_isSheaf (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf proetaleTopology (continuousMapPresheafCommRing T) := by
@@ -118,7 +114,7 @@ theorem continuousMapPresheafCommRing_isSheaf (T : Type v)
 
 /-- The continuous-function coefficient sheaf on the small pro-etale site.
 
-Source: Bhatt--Scholze, Definition 6.8.1 (auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def continuousCoefficientSheaf (X : Scheme.{u}) (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (ProEt.topology X) CommRingCat.{max v u} :=

@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 /-! # The sections comparison restriction square
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-sections-comparison-restriction-square).
 -/
 
 @[expose] public section
@@ -31,19 +30,7 @@ namespace AlgebraicGeometry.Etale
 /-- The comparison from termwise sections to derived sections respects restriction
 along one morphism, before taking homology or changing a complex by an isomorphism.
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
-(blueprint: lem-weil-pbc-sections-comparison-restriction-square).
-
-Proof: in the homotopy category the derived adjunction unit factors the image of
-its underived unit followed by the direct-image derived unit. Apply derived
-sections and use naturality of its unit to move the underived adjunction unit
-past that unit. The composition right-derived unit factorization and the
-underived isomorphism of pushforward sections with sections identify the result
-with the underived restriction followed by the sections derived unit. Cancel
-only the exact inverse-image localization comparison. Transport from homotopy
-classes to complexes by the naturality of quotientCompQhIso. This gives the
-square for every complex, including unbounded and zero complexes, without
-assuming that either sections comparison is invertible. -/
+Source: Stacks Project, Tag 03Q9, final injective-complex paragraph. -/
 theorem sectionsComparison_restriction_square {X Y : Scheme.{v}} (a : X ⟶ Y)
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
   let restriction :=

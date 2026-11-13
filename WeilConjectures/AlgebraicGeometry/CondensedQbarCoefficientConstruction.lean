@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.GeometricFieldProEtaleEvaluation
 # Scalar functions and geometric evaluation for bounded condensed coefficients
 
 This coefficient interface is independent of any module or finite presentation.
-Source: RefactorInstruction.tex, Section 4, coefficient realization and geometric evaluation
-(auxiliary; not a blueprint node).
+Source: RefactorInstruction.tex, Section 4, coefficient realization and geometric evaluation.
 -/
 
 @[expose] public section
@@ -37,15 +36,13 @@ open Opposite CategoryTheory.MonObj CategoryTheory.MonoidalCategory
 
 variable (E : Type) [NormedField E]
 /-- Lift a coefficient field into the scheme universe without changing its topology.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 @[instance_reducible]
 noncomputable def liftNormedField : NormedField (ULift.{u} E) :=
   NormedField.induced _ E ULift.ringEquiv.toRingHom ULift.down_injective
 
 /-- The lifted field retains its normed scalar algebra.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 @[instance_reducible]
 noncomputable def liftNormedAlgebra (K : Type) [NormedField K] [NormedAlgebra K E] :
     letI := liftNormedField.{u} E
@@ -54,8 +51,7 @@ noncomputable def liftNormedAlgebra (K : Type) [NormedField K] [NormedAlgebra K 
   exact { norm_smul_le := fun c x ↦ norm_smul_le c x.down }
 
 /-- The down map of the lifted coefficient field is continuous.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 lemma liftContinuousDown :
     letI := liftNormedField.{u} E
     Continuous (ULift.down : ULift.{u} E → E) := by
@@ -63,8 +59,7 @@ lemma liftContinuousDown :
   exact continuous_induced_dom
 
 /-- The up map of the lifted coefficient field is continuous.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 lemma liftContinuousUp :
     letI := liftNormedField.{u} E
     Continuous (ULift.up : E → ULift.{u} E) := by
@@ -72,8 +67,7 @@ lemma liftContinuousUp :
   exact continuous_induced_rng.mpr continuous_id
 
 /-- Continuous condensed coefficients are invariant under the explicit universe lift.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 noncomputable def liftCondensedRingIso :
     letI := liftNormedField.{u} E
     Profinite.continuousMapRingSheaf.{u} E ≅
@@ -106,8 +100,7 @@ noncomputable def liftCondensedRingIso :
     rfl
 
 /-- Continuous scheme coefficients are invariant under the explicit universe lift.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 noncomputable def liftSchemeRingIso (X : AlgebraicGeometry.Scheme.{u}) :
     letI := liftNormedField.{u} E
     AlgebraicGeometry.ProEtale.continuousMapRingSheaf X E ≅
@@ -140,8 +133,7 @@ noncomputable def liftSchemeRingIso (X : AlgebraicGeometry.Scheme.{u}) :
     rfl
 
 /-- The canonical finite-extension realization, without a noetherian assumption.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 @[irreducible] noncomputable def finiteFieldComparisonIso (ℓ : ℕ) [Fact ℓ.Prime]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
     Mon.mk (condensedRingObj (Profinite.continuousMapRingObj E) X) ≅
@@ -173,8 +165,7 @@ Source: RefactorInstruction, Section 4, finite-coefficient comparison and its fi
   exact d
 
 /-- The finite-extension realization is normalized on profinite test functions.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 lemma finiteFieldComparison_test (ℓ : ℕ) [Fact ℓ.Prime]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
     ∀ (S : Profinite.{u}) (f : C(S, E)),
@@ -234,8 +225,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   [PreservesColimit₂ F F (curriedTensor C)]
 include hc in
 /-- A sifted-colimit map is multiplicative when each cocone composite is.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 lemma isMonHom_of_colimit {R : C} [MonObj R] (g : c.pt ⟶ R)
     (hι : ∀ j, IsMonHom (show F.obj j ⟶ c.pt from c.ι.app j)) (hg : ∀ j, IsMonHom (c.ι.app j ≫ g)) :
     IsMonHom g := by
@@ -258,8 +248,7 @@ lemma isMonHom_of_colimit {R : C} [MonObj R] (g : c.pt ⟶ R)
 end Colimit
 
 /-- The canonical realizations commute with inclusions of finite extensions.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 @[irreducible] noncomputable def fieldDiagramIso (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     Profinite.padicSubfieldRingObjFunctor.{u} ℓ ⋙ upperStarFromPoint X ≅
       padicSubfieldSheafFunctor X ℓ ⋙
@@ -299,8 +288,7 @@ Source: RefactorInstruction, Section 4, finite-coefficient comparison and its fi
       (he E S.unop f).symm
 
 /-- Each finite-extension comparison preserves the ring operations.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 lemma fieldDiagramIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     IsMonHom (show condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
@@ -313,8 +301,7 @@ lemma fieldDiagramIso_isMonHom (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 
 noncomputable section
 /-- The bounded condensed coefficient ring realizes as the bounded-function sheaf.
-Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, finite-coefficient comparison and its filtered colimit. -/
 @[irreducible] noncomputable def globalCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) :
     Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ≅
@@ -369,13 +356,11 @@ namespace CondensedQbarScalarConstruction
 variable (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
 
 /-- The abelian presheaf underlying the bounded-function ring presheaf.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable abbrev boundedP := padicAlgClRingPresheaf Y ℓ ⋙ forget₂ RingCat Ab
 
 /-- Precomposition preserves the finite-subextension bound.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalSpace T']
     (g : C(T', T)) : PadicAlgCl.finiteIntermediateFieldValued ℓ T →+*
       PadicAlgCl.finiteIntermediateFieldValued ℓ T' :=
@@ -389,8 +374,7 @@ noncomputable def boundedComp {T T' : Type u} [TopologicalSpace T] [TopologicalS
 /-- Bounded continuous functions descend uniquely to the actual component quotient.
 The quotient is surjective, so the same finite extension bounds the descended function.
 This includes the empty space.
-Source: RefactorInstruction, Section 4, coefficient realization on the component quotient
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization on the component quotient. -/
 noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
     (T : Type u) [TopologicalSpace T] :
     PadicAlgCl.finiteIntermediateFieldValued ℓ (ConnectedComponents T) ≃+*
@@ -418,16 +402,14 @@ noncomputable def boundedComponentsIso (ℓ : ℕ) [Fact ℓ.Prime]
     exact Continuous.connectedComponentsLift_apply_coe a.1.continuous x
 
 /-- Restriction of a bounded function to a small pro-etale object.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def restrictBounded (U : Y.ProEt) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
       PadicAlgCl.finiteIntermediateFieldValued ℓ U.left :=
   boundedComp ℓ (show C(U.left, Y) from U.hom.base.hom)
 
 /-- Multiplication by a restricted bounded function on each presheaf section.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def boundedMul (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     boundedP ℓ Y ⟶ boundedP ℓ Y where
   app U := AddCommGrpCat.ofHom
@@ -449,8 +431,7 @@ noncomputable def boundedMul (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y
     exact congrArg a.1 (by rw [← MorphismProperty.Over.w g.unop]; rfl)
 
 /-- Multiplication by a bounded function is internally linear.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 lemma boundedMul_linear (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     (MonObj.mul : boundedP ℓ Y ⊗ boundedP ℓ Y ⟶ _) ≫ boundedMul ℓ Y a =
       boundedP ℓ Y ◁ boundedMul ℓ Y a ≫ MonObj.mul := by
@@ -463,8 +444,7 @@ lemma boundedMul_linear (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
   rw [mul_assoc]
 
 /-- The explicit ring action of bounded functions on the regular presheaf module.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (boundedP ℓ Y)) where
   toFun a := .of (Mod.homMk (boundedMul ℓ Y a) (boundedMul_linear ℓ Y a))
@@ -502,8 +482,7 @@ noncomputable def presheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ 
 /-- Every regular-module endomorphism of the bounded-function presheaf is multiplication
 by a bounded function. Evaluate at one on the terminal object; naturality transports
 this section and module linearity determines the endomorphism at every object.
-Source: RefactorInstruction, Section 4, regular-module scalar realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, regular-module scalar realization. -/
 lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     Function.Surjective (presheafScalar ℓ Y) := by
   intro f
@@ -528,8 +507,7 @@ lemma presheafScalar_surjective (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
 
 
 /-- Monoidal sheafification carries the regular module to the regular module.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def sheafificationRegularIso :
     ((presheafToSheaf (Scheme.ProEt.topology Y) Ab.{u + 1}).mapMod (boundedP ℓ Y)).obj
       (Mod.regular (boundedP ℓ Y)) ≅ Mod.regular (padicAlgClSheaf Y ℓ) :=
@@ -537,8 +515,7 @@ noncomputable def sheafificationRegularIso :
     simp only [Iso.refl_hom, Category.comp_id, whiskerLeft_id, Category.id_comp])
 
 /-- The bounded-function action after monoidal abelian sheafification.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
     End (Mod.regular (padicAlgClSheaf Y ℓ)) where
   toFun a := .of ((sheafificationRegularIso ℓ Y).inv ≫
@@ -569,8 +546,7 @@ noncomputable def sheafScalar : PadicAlgCl.finiteIntermediateFieldValued ℓ Y �
 
 /-- Transport the explicitly constructed bounded-function action through a ring-sheaf
 realization. Every operation is constructed from multiplication and functoriality.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 @[irreducible] noncomputable def transportedScalar
     (e : Mon.mk (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) ≅
       Mon.mk (padicAlgClSheaf Y ℓ)) :
@@ -605,8 +581,7 @@ end CondensedQbarScalarConstruction
 namespace CondensedQbarCoefficientRealization
 
 /-- The global bounded realization agrees with every finite-extension inclusion.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 lemma globalCoefficientIso_fac (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (upperStarFromPoint X).map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) ≫
@@ -625,8 +600,7 @@ lemma globalCoefficientIso_fac (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
 /-- The bounded coefficient realization is normalized on every profinite test function.
 Choose the finite extension bounding the function and use the finite comparison's
 normalization; the sheafification unit-counit identity identifies the final inclusion.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 lemma globalCoefficientIso_test (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     (S : Profinite.{u}) (a : PadicAlgCl.finiteIntermediateFieldValued ℓ S) :
     (((pointUpperStarLowerStarAdjunction.comp
@@ -681,8 +655,7 @@ end CondensedQbarCoefficientRealization
 
 /-- The canonical scalar action is obtained from the explicit bounded-function
 multiplication and the filtered-colimit coefficient realization.
-Source: RefactorInstruction, Section 4, coefficient realization
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, coefficient realization. -/
 noncomputable abbrev condensedQbarScalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) :
     PadicAlgCl.finiteIntermediateFieldValued ℓ Y →+*
       End (Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y)) :=
@@ -690,8 +663,7 @@ noncomputable abbrev condensedQbarScalar (ℓ : ℕ) [Fact ℓ.Prime] (Y : Schem
     (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y)
 
 /-- The regular module is preserved by normalized condensed-coefficient pullback.
-Source: the coefficient comparison in RefactorInstruction, Section 4
-(auxiliary; not a blueprint node). -/
+Source: the coefficient comparison in RefactorInstruction, Section 4. -/
 @[irreducible] noncomputable def condensedQbarRegularPullbackIso
     (ℓ : ℕ) [Fact ℓ.Prime] {X Y : Scheme.{u}} (f : Y ⟶ X) :
     (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) f).obj
@@ -706,8 +678,7 @@ open scoped CategoryTheory.Obj
 variable (K : Type u) [Field K] [IsAlgClosed K]
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 lemma cover_id (S : Sieve (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))
     (hS : S ∈ Scheme.ProEt.topology (Spec (.of K)) _) : S (𝟙 _) := by
   obtain ⟨U, f, s, hf, hs⟩ :=
@@ -717,8 +688,7 @@ lemma cover_id (S : Sieve (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 lemma unit_iso (P : (Spec (.of K)).ProEtᵒᵖ ⥤ Ab.{u + 1}) :
     IsIso ((toSheafify (Scheme.ProEt.topology (Spec (.of K))) P).app
       (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))) := by
@@ -738,16 +708,14 @@ lemma unit_iso (P : (Spec (.of K)).ProEtᵒᵖ ⥤ Ab.{u + 1}) :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable instance evaluationMonoidal (U : (Spec (.of K)).ProEtᵒᵖ) :
     ((evaluation _ Ab.{u + 1}).obj U).Monoidal :=
   Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def boundedEval (ℓ : ℕ) [Fact ℓ.Prime] :
     PadicAlgCl.finiteIntermediateFieldValued ℓ (Spec (.of K)) →+* PadicAlgCl ℓ where
   toFun a := a.1 default
@@ -759,8 +727,7 @@ noncomputable def boundedEval (ℓ : ℕ) [Fact ℓ.Prime] :
 omit [IsAlgClosed K] in
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 lemma boundedEval_bijective (ℓ : ℕ) [Fact ℓ.Prime] : Function.Bijective (boundedEval K ℓ) := by
   constructor
   · intro a b h
@@ -777,8 +744,7 @@ lemma boundedEval_bijective (ℓ : ℕ) [Fact ℓ.Prime] : Function.Bijective (b
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def fieldUnitIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let J := Scheme.ProEt.topology (Spec (.of K))
     let P := padicAlgClRingPresheaf (Spec (.of K)) ℓ ⋙ forget₂ RingCat Ab
@@ -802,8 +768,7 @@ noncomputable def fieldUnitIso (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def boundedPointIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let P := padicAlgClRingPresheaf (Spec (.of K)) ℓ ⋙ forget₂ RingCat Ab
     let E := (evaluation (Spec (.of K)).ProEtᵒᵖ Ab.{u + 1}).obj
@@ -835,8 +800,7 @@ noncomputable def boundedPointIso (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def fieldCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime] :
     let J := Scheme.ProEt.topology (Spec (.of K))
     let A := condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))
@@ -855,8 +819,7 @@ variable (R : Type u) [Ring R] (M : Mod Ab.{u} (AddCommGrpCat.of R))
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable instance internalModule : Module R M.X where
   smul a m := (γ[AddCommGrpCat.of R,M.X]).hom (a ⊗ₜ[ℤ] m)
   one_smul m := by
@@ -890,8 +853,7 @@ noncomputable instance internalModule : Module R M.X where
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def internalToModule : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R where
   obj M := ModuleCat.of R M.X
   map {M N} f := ModuleCat.ofHom
@@ -910,8 +872,7 @@ noncomputable def internalToModule : Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleC
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def ordinaryAct (N : ModuleCat.{u} R) :
     AddCommGrpCat.of R ⊗ AddCommGrpCat.of N ⟶ AddCommGrpCat.of N :=
   AddCommGrpCat.ofHom (TensorProduct.lift (LinearMap.mk₂ ℤ (fun (a : R) (m : N) ↦ a • m)
@@ -922,8 +883,7 @@ noncomputable def ordinaryAct (N : ModuleCat.{u} R) :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def moduleToInternalObj (N : ModuleCat.{u} R) :
     Mod Ab.{u} (AddCommGrpCat.of R) := by
   letI : ModObj (AddCommGrpCat.of R) (AddCommGrpCat.of N) :=
@@ -937,8 +897,7 @@ noncomputable def moduleToInternalObj (N : ModuleCat.{u} R) :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def moduleToInternalHom {M N : Mod Ab.{u} (AddCommGrpCat.of R)}
     (f : (internalToModule R).obj M ⟶ (internalToModule R).obj N) : M ⟶ N :=
   Mod.homMk (AddCommGrpCat.ofHom f.hom.toAddMonoidHom)
@@ -947,8 +906,7 @@ noncomputable def moduleToInternalHom {M N : Mod Ab.{u} (AddCommGrpCat.of R)}
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def internalToModuleFullyFaithful : (internalToModule R).FullyFaithful where
   preimage f := moduleToInternalHom R f
   map_preimage f := by ext m; rfl
@@ -956,50 +914,43 @@ noncomputable def internalToModuleFullyFaithful : (internalToModule R).FullyFait
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance : (internalToModule R).Full := (internalToModuleFullyFaithful R).full
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance : (internalToModule R).Faithful := (internalToModuleFullyFaithful R).faithful
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def realizationIso (N : ModuleCat.{u} R) :
     (internalToModule R).obj (moduleToInternalObj R N) ≅ N :=
   ModuleCat.isoMk (Iso.refl _) (fun _ ↦ rfl)
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance : (internalToModule R).EssSurj where
   mem_essImage N := ⟨moduleToInternalObj R N, ⟨realizationIso R N⟩⟩
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance : (internalToModule R).IsEquivalence where
 
 end Ordinary
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def ordinary (R : Type u) [Ring R] :
     Mod Ab.{u} (AddCommGrpCat.of R) ⥤ ModuleCat.{u} R :=
   Ordinary.internalToModule R
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def fieldFiber (ℓ : ℕ) [Fact ℓ.Prime] :
     Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K))) ⥤
@@ -1017,8 +968,7 @@ noncomputable def fieldFiber (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable instance ordinary_equivalence (R : Type u) [Ring R] :
     (ordinary R).IsEquivalence := by
   unfold ordinary
@@ -1026,23 +976,20 @@ noncomputable instance ordinary_equivalence (R : Type u) [Ring R] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance ordinary_additive (R : Type u) [Ring R] : (ordinary R).Additive where
   map_add := by intros; rfl
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance fieldFiber_additive (ℓ : ℕ) [Fact ℓ.Prime] : (fieldFiber K ℓ).Additive := by
   unfold fieldFiber
   infer_instance
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance comap_colimits {A B : Ab.{u}} [MonObj A] [MonObj B]
     (f : A ⟶ B) [IsMonHom f] : PreservesFiniteColimits (Mod.comap (D := Ab.{u}) f) where
   preservesFiniteColimits I _ _ := by
@@ -1053,8 +1000,7 @@ instance comap_colimits {A B : Ab.{u}} [MonObj A] [MonObj B]
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance fieldFiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] :
     PreservesFiniteColimits (fieldFiber K ℓ) := by
   let J := Scheme.ProEt.topology (Spec (.of K))
@@ -1085,8 +1031,7 @@ instance fieldFiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def ordinaryRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
     (ModuleCat.restrictScalars.{u + 1} (ULift.ringEquiv.symm.toRingHom :
       PadicAlgCl ℓ →+* ULift.{u + 1} (PadicAlgCl ℓ))).obj
@@ -1102,8 +1047,7 @@ noncomputable def ordinaryRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def fieldRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
     (fieldFiber K ℓ).obj (Mod.regular
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (Spec (.of K)))) ≃ₗ[PadicAlgCl ℓ]
@@ -1127,8 +1071,7 @@ noncomputable def fieldRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime] :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 noncomputable def geometricPoint (Y : Scheme.{u}) (x : Y) :
     Spec (.of (AlgebraicClosure (Y.residueField x))) ⟶ Y :=
   Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField x)
@@ -1136,8 +1079,7 @@ noncomputable def geometricPoint (Y : Scheme.{u}) (x : Y) :
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 @[irreducible] noncomputable def fiber (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) ⥤
@@ -1147,22 +1089,19 @@ construction uses the tensor-action proof of internalModuleAb_equivalence
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance fiber_additive (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     (fiber ℓ Y x).Additive := by unfold fiber; infer_instance
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 instance fiber_colimits (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (x : Y) :
     PreservesFiniteColimits (fiber ℓ Y x) := by unfold fiber; infer_instance
 
 /-- Explicit geometric-field evaluation and its module-theoretic properties.
 Source: RefactorInstruction, Section 4, geometric fibers; the ordinary-module
-construction uses the tensor-action proof of internalModuleAb_equivalence
-(auxiliary; not a blueprint node). -/
+construction uses the tensor-action proof of internalModuleAb_equivalence. -/
 @[irreducible] noncomputable def fiberRegularCoordinates (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (x : Y) :
     (fiber ℓ Y x).obj (Mod.regular
@@ -1177,16 +1116,14 @@ end CondensedQbarGeometricEvaluation
 /-- The value of a regular-module endomorphism in chosen linear coordinates.
 Keeping this operation folded avoids reducing inverse-image module constructions
 while comparing the same coordinate data.
-Source: RefactorInstruction, Section 4, geometric scalar evaluation
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, geometric scalar evaluation. -/
 noncomputable def regularScalarValue
     {R : Type w} [CommRing R] {C : Type v} [Category.{z} C]
     (F : C ⥤ ModuleCat.{u} R) {A : C} (c : F.obj A ≃ₗ[R] R) (f : A ⟶ A) : R :=
   c (F.map f (c.symm 1))
 
 /-- Computation rule for the folded regular scalar value.
-Source: RefactorInstruction, Section 4, geometric scalar evaluation
-(auxiliary; not a blueprint node). -/
+Source: RefactorInstruction, Section 4, geometric scalar evaluation. -/
 lemma regularScalarValue_def
     {R : Type w} [CommRing R] {C : Type v} [Category.{z} C]
     (F : C ⥤ ModuleCat.{u} R) {A : C} (c : F.obj A ≃ₗ[R] R) (f : A ⟶ A) :

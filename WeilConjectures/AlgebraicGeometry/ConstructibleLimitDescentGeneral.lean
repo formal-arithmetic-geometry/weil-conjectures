@@ -22,7 +22,6 @@ import Mathlib.Data.Finset.Order
 # Constructible module descent with Noetherian coefficients
 
 Source: Stacks Project, Tags 09YU (3), 095N and 09YQ.
-(blueprint: new-constructible-limit-descent-general).
 -/
 
 @[expose] public section
@@ -140,31 +139,7 @@ private noncomputable def freeModelIso (W : X.Etale) :
 This statement descends objects only; it makes no assertion about arrows between them.
 
 Source: Stacks Project, Tag 09YU (3), essential surjectivity of the affine etale site
-using 095N, and Tag 03S6.
-(blueprint: lem-weil-pbc-affine-free-etale-family-models).
-
-Proof:
-1. Regard each U and V as an object of the full affine etale site. Apply the essential
-   surjectivity clause of `exists_affineEtaleSite_colimit` to each of these finitely
-   many objects. Nonemptiness and directedness give a common upper bound i, even
-   when both families are empty. Move every object to i by the site's transition
-   functors. The cartesian squares and composition comparisons identify its base
-   change to the limit with the original U or V. Affineness is preserved because
-   the scheme transitions and limit projections are affine.
-2. For an affine etale object W, its sheaf P(W) represents evaluation on W: compose
-   the sheafification adjunction, the free-module adjunction and ulift Yoneda.
-   The etale lower shriek of the constant rank-one module represents the same
-   evaluation, by the shriek/pullback and constant-sheaf adjunctions. The natural
-   equivalences of represented functors give their unique comparison isomorphism.
-   Inverse image of P(W) is P of the base-changed object: apply the upperStar/lowerStar
-   adjunction and use that lowerStar evaluates on the base-changed etale object.
-   This is also `Etale.upperStarFreeYonedaIso` after comparing the two free models.
-3. Inverse image preserves coproducts since it is a left adjoint. Combine its
-   coproduct comparison with the comparisons in step 2 to obtain eU and eV.
-   In these stage models use the lower shriek of the constant rank-one module.
-   This is the free sheaf by step 2. The witnesses WU and WV, their affine proofs,
-   and eU and eV give the asserted common-stage models. Empty sums are handled
-   by preservation of the initial object. -/
+using 095N, and Tag 03S6. -/
 private theorem family_models_general
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -393,19 +368,7 @@ private theorem arrow_descent_general
 /-- A constructible module sheaf on an affine-transition limit of qcqs schemes descends
 with its constructibility to a stage, for any Noetherian coefficient ring.
 
-Source: Stacks Project, Tag 09YU (3), essential surjectivity, using Tags 095N and 09YQ.
-(blueprint: new-constructible-limit-descent-general).
-
-Proof: Present the sheaf by two finite sums of affine free etale sheaves (095N). Descend
-the finitely many etale objects to a common stage by the affine etale site limit theorem.
-The free-Yoneda and sheafification adjunctions identify each component of the presentation
-arrow with a section. The section limit theorem descends these finitely many sections to
-a later common stage, and naturality of the adjunction unit and inverse-image composition
-identifies the pulled-back arrow with the original arrow. Both descended sums are
-constructible: finite-etale stratification makes affine free sheaves constructible, and
-finite sums and pullback preserve constructibility. Their cokernel is constructible and
-pulls back to the original cokernel, hence to the given sheaf. Empty families are included
-by directedness and preservation of zero objects. -/
+Source: Stacks Project, Tag 09YU (3), essential surjectivity, using Tags 095N and 09YQ. -/
 theorem exists_constructible_limit_descent_general
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

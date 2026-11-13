@@ -34,7 +34,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
 sites-cohomology.tex, Tag 07A4, tensor pullback.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -549,7 +548,6 @@ its projections. This assertion contains no duals or internal Hom complexes.
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, positive finite free tensors;
 sites-cohomology.tex, Tag 07A4, tensor pullback.
-(auxiliary; not a blueprint node).
 
 Proof in words: the comparison of constant rings, composed with transport of
 sections, is natural in every commutative ring. Constant-ring section rigidity,

@@ -17,7 +17,6 @@ import Mathlib.Data.Int.Interval
 /-! # Descent of maps between fixed bounded module families
 
 Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (2).
-(blueprint: lem-pc-bounded-graded-map-compatibility)
 -/
 
 @[expose] public section
@@ -62,29 +61,7 @@ private theorem familyLimit_isZero
   exact Functor.map_isZero _ hM
 
 /-- Descent of maps between fixed bounded module families.
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (2).
-(blueprint: lem-pc-bounded-graded-map-compatibility)
-
-Proof: First use finite-set induction to descend any finite set of successive maps
-between the limit pullbacks of the fixed family F. For the empty set take stage j,
-family F, zero maps, and identity comparisons. In the induction step let G, δ and t
-be the current family, maps and comparisons. Transport the new φ n to
-(t n).hom ≫ φ n ≫ (t (n+1)).inv. Apply the map clause of
-finitePresentation_module_map_descent to descend this map after enlarging the stage.
-Let T be transition pullback and e the comparison from the current limit pullback
-to T followed by the new limit pullback. Set H m = T.obj (G m). In the new degree
-use the descended map; in every other degree use T.map (δ m). Define the new term
-comparison as e.inv.app (G m) followed by (t m).hom. The map clause's equation,
-multiplied by the two inverse comparisons, proves commutativity in the new degree.
-Naturality of e.inv preserves all the equations in the previously processed degrees.
-The new family remains zero outside [a,b], since T is left adjoint and preserves zero
-objects; tensor pullback preserves finite presentation and hence quasicoherence.
-Apply this induction to the finite interval [a,b-1]. For every remaining degree,
-either n<a or b<n+1. In the first case the limit pullback of G n is zero and all
-maps with this source coincide. In the second case the limit pullback of F(n+1)
-is zero and all maps with this target coincide. These facts give the boundary
-comparisons, including empty or singleton intervals. No square-zero equation or
-canonical associativity coherence for multiple transition steps is required. -/
+Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (2). -/
 theorem bounded_graded_map_compatibility
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

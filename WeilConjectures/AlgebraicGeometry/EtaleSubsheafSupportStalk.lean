@@ -20,19 +20,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The open support of a subterminal étale sheaf is detected by geometric stalks.
-Source: Stacks Project, Étale Cohomology, Tag 04HV, lemma-support-subsheaf-final.
-(blueprint: lem-weil-pbc-etale-subsheaf-final-open-parts-stalk)
-
-Proof: An element of the stalk is represented by a section on a pointed étale neighbourhood.
-The factorization property puts the image point in W. Conversely, if the point belongs to
-W, the geometric morphism lifts through the open immersion W → S. This makes W a pointed
-étale neighbourhood. The identity factorization of W gives its unique section, whose image
-in the stalk proves nonemptiness. The factorization hypothesis already makes every
-inhabited section set a singleton: a section rules out the emptiness alternative, hence
-implies factorization and uniqueness. Any two stalk elements have representatives on a
-common pointed neighbourhood, where they agree by this uniqueness. Therefore a nonempty
-stalk is a singleton; the converse follows
-from its distinguished element. -/
+Source: Stacks Project, Étale Cohomology, Tag 04HV, lemma-support-subsheaf-final. -/
 theorem etale_subsheaf_final_stalk_criterion (S : Scheme.{u})
     (H : Sheaf S.smallEtaleTopology (Type (max u v)))
     [Mono (terminal.from H)] (W : S.Opens)

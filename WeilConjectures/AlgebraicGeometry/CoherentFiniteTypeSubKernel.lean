@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
 /-! # Finite type submodules and kernels of coherent modules
 
-Source: Stacks Project, Modules, Lemma 01BY
-(blueprint: lem-weil-pbc-coherent-finite-type-sub-kernel).
+Source: Stacks Project, Modules, Lemma 01BY.
 -/
 
 @[expose] public section
@@ -166,8 +165,7 @@ private theorem finiteType_kernel
 
 /-- A finite type submodule of a coherent module is coherent, and the kernel of a
 map from a finite type module to a coherent module is finite type.
-Source: Stacks Project, Modules, Lemma 01BY
-(blueprint: lem-weil-pbc-coherent-finite-type-sub-kernel).
+Source: Stacks Project, Modules, Lemma 01BY.
 Proof, following Stacks 01BY (1), (2):
 1. Restriction preserves monomorphisms and kernels, as checked by evaluating on sections.
 2. For a map from a finite free module into `K`, compose with the monomorphism into `G`.

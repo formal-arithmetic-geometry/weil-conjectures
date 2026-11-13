@@ -27,7 +27,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.ProEtale
 
 /-- Composition with an open immersion on the coefficient-sized pro-etale sites.
-Source: Stacks Tags 03DI and 09AF (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03DI and 09AF. -/
 abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.coefficientProEtaleSiteModel.{u, v} U ⥤
@@ -36,7 +36,7 @@ abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     (inferInstance : @WeaklyEtale _ _ j) ⋙ AsSmall.up
 
 /-- Composition with an open immersion on the coefficient-sized etale sites.
-Source: Stacks Tags 03DI and 09AF (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03DI and 09AF. -/
 abbrev coefficientOpenEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.smallModelComparisonEtaleSite.{u, v} U ⥤
@@ -93,7 +93,7 @@ instance coefficientOpenEtaleMap_isContinuous {U X : Scheme.{u}} (j : U ⟶ X)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
 /-- Pro-etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03DI. -/
 def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -102,7 +102,7 @@ def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.coefficientProEtaleModelTopology.{u, v} X)
 
 /-- Etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03DI. -/
 def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -111,7 +111,7 @@ def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
 /-- Comparison commutes with open extension by zero in the coefficient universe.
-Source: Stacks Project, Tag 09AF (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 09AF.
 
 The two right adjoints are restriction along equal composites of site functors.
 Their identity natural isomorphism has a conjugate between the composite left

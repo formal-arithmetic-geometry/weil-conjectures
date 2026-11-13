@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingP
 
 /-! # Pullback of an ample invertible module
 
-Source: Stacks Project, Morphisms, Lemma 0892, part (2)
-(blueprint: lem-weil-pbc-pullback-ample-invertible).
+Source: Stacks Project, Morphisms, Lemma 0892, part (2).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ universe u
 
 /-- An affine pullback preserves ampleness.
 Source: Stacks Project, Morphisms, Lemma 0892, part (2), specialized to an affine
-morphism; the affine nonvanishing-locus criterion is Properties Definition 01PS
-(blueprint: lem-weil-pbc-pullback-ample-invertible).
+morphism; the affine nonvanishing-locus criterion is Properties Definition 01PS.
 Proof, following the node's two steps:
 1. The pullback is invertible and commutes with tensor powers by
 `lem-weil-pbc-invertible-pullback-tensor`. Its fibre formula sends a section value to

@@ -16,7 +16,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-! # The Čech double complex on opens with large étale coefficients
 
 Source: Stacks Project, Tag 03AZ, construction from an injective resolution.
-(blueprint: def-sc-etale-open-cech-resolution-double-complex)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The Čech functor preserves zero morphisms, also for larger coefficients.
-Source: the degree maps are products of zero morphisms.
-(blueprint: def-sc-etale-open-cech-resolution-double-complex) -/
+Source: the degree maps are products of zero morphisms. -/
 instance etaleOpenCech_preservesZeroMorphisms (X : Scheme.{u})
     {ι : Type u} (U : ι → X.Opens) :
     (cechComplexFunctor (A := AddCommGrpCat.{u + 1}) U).PreservesZeroMorphisms where
@@ -47,8 +45,7 @@ instance etaleOpenCech_preservesZeroMorphisms (X : Scheme.{u})
 
 /-- Apply the open Čech complex functor to each term of the actual injective
 resolution, and flip the indices to put the Čech degree first.
-Source: Stacks Project, Tag 03AZ.
-(blueprint: def-sc-etale-open-cech-resolution-double-complex) -/
+Source: Stacks Project, Tag 03AZ. -/
 noncomputable def etaleOpenCechResolutionDoubleComplex
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     {ι : Type u} (U : ι → X.Opens)

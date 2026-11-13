@@ -17,8 +17,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Splitting off isolated fibre points in an elementary étale neighbourhood
 
-Source: Stacks Project, More on Morphisms, Lemma 37.41.4, Tag 02LN
-(blueprint: lem-weil-pbc-etale-splits-off-isolated-points-technical).
+Source: Stacks Project, More on Morphisms, Lemma 37.41.4, Tag 02LN.
 -/
 
 @[expose] public section
@@ -124,27 +123,9 @@ private theorem disjoint_finite_pieces_after_shrinking
     exact ⟨(hpersist i).1, (hv' i).1, (hv' i).2.1,
       (hv' i).2.2.1, (hv' i).2.2.2.1⟩
 
-/-- Source: Stacks Project, More on Morphisms, Tag 02LN
-(blueprint: lem-weil-pbc-etale-splits-off-isolated-points-technical).
+/-- Source: Stacks Project, More on Morphisms, Tag 02LN.
 A separated locally finite type morphism splits off finite disjoint open pieces through any
-finite family of distinct isolated fibre points after an elementary étale base change.
-
-Proof: Apply `lem-weil-pbc-etale-local-finite-multiple-points-elementary` (Tag 02LL)
-to obtain the elementary neighbourhood and finite open pieces with their unique fibre points
-and residue-field isomorphisms. By `lem-weil-pbc-separated-base-change` the base-changed
-morphism is separated. Each finite piece is proper by
-`lem-weil-pbc-finite-morphism-permanence`; its inclusion is proper by
-`lem-weil-pbc-proper-over-separated`; its range is closed because proper maps are closed.
-Pairwise intersections are closed in the finite pieces; their images in the base are closed
-and avoid the distinguished point, since the original points are distinct. Remove these
-finitely many images from the base. The retained properties follow from
-`lem-weil-pbc-elementary-etale-finite-piece-persistence`, and étaleness from
-`lem-weil-pbc-etale-composition-cancellation`. The pieces are now disjoint; their complement
-is the open and closed `W`. For `n = 0` the union is empty and `W` is the whole
-pullback. Finally `lem-weil-pbc-fibre-product-points` identifies points above
-`(x i, t)` with primes of the residue-field tensor product. Since the neighbourhood has
-trivial residue extension, this tensor product is a field with a unique prime. Thus a point
-in `W` above this pair would equal the selected point of `V i`, contradicting disjointness. -/
+finite family of distinct isolated fibre points after an elementary étale base change. -/
 theorem exists_etale_splits_off_isolated_points
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [IsSeparated f]
     (s : S) (n : ℕ) (x : Fin n → X) (h_distinct : Function.Injective x)

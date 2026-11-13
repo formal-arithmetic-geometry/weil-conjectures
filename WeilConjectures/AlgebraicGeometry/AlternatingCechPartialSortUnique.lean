@@ -14,7 +14,6 @@ import Mathlib.Data.Fin.Tuple.Sort
 
 Source: Stacks Project, Tag 01FM, definition of sigma_a preceding
 `cohomology-equation-first-homotopy`.
-(blueprint: lem-pc-alternating-cech-partial-sort-unique)
 -/
 
 @[expose] public section
@@ -24,21 +23,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The partial sorting filter has exactly one solution, including the empty tail.
 
-Source: Stacks Project, Tag 01FM, definition of sigma_a preceding equation 20.23.6.1.
-Proof: Give each label k the key sigma^{-1}(k) if that index is less than a,
-and the key n+k otherwise. These keys are injective. Sort them with Tuple.sort.
-The keys of the prescribed prefix are 0,...,a-1, below all other keys. Induct on
-k<a to show that the sorted permutation sends k to sigma(k): its preimage of
-sigma(k) cannot be earlier than k, since earlier entries are already fixed.
-Monotonicity then bounds the key at k by k. A smaller key would repeat an earlier
-fixed entry, so this key is k. After a the keys are n plus the original label;
-monotonicity and injectivity therefore give a strictly increasing tail.
-Conversely, any permutation satisfying the two filters orders these keys:
-prefix/prefix uses their indices, prefix/tail uses the gap at n, and tail/tail
-uses the increasing labels. Key injectivity excludes ties. Tuple.eq_sort_iff
-identifies every such permutation with the one constructed by Tuple.sort.
-For a=0 this is the identity; for a=n it is sigma; for n=0 all filters are vacuous.
-(blueprint: lem-pc-alternating-cech-partial-sort-unique) -/
+Source: Stacks Project, Tag 01FM, definition of sigma_a preceding equation 20.23.6.1. -/
 theorem cechPartialSort_existsUnique (n : ℕ) (σ : Equiv.Perm (Fin n))
     (a : ℕ) (_ha : a ≤ n) :
     ∃! τ : Equiv.Perm (Fin n),

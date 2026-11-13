@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 /-! # Module models of affine strictly perfect complexes
 
 Source: Stacks Project, Tags 08CR and 06Z0.
-(blueprint: lem-pc-affine-perfect-module-model).
 -/
 
 @[expose] public section
@@ -61,17 +60,7 @@ private theorem counit_isIso_of_retract {C D : Type*} [Category* C] [Category* D
 
 /-- A strictly perfect complex on an affine open is the sheafification of a K-projective
 module complex, up to an actual complex isomorphism.
-Source: Stacks Project, Tag 08CR, second proof, and Tag 06Z0, affine tilde/Gamma equivalence.
-(blueprint: lem-pc-affine-perfect-module-model).
-
-Proof: Transport K by the over equivalence and the affine spectrum isomorphism. Its terms
-are retracts of finite free sheaves, so they are quasi-coherent. Apply global sections
-termwise and transport the scalars through GammaSpecIso. Naturality of the affine counit
-identifies the sheafification of this actual sections complex P with K as complexes.
-Sections preserve the finite free retract equations; hence every P.X n is projective.
-The same finite support bound holds because sections preserve zero objects. In particular
-P is bounded above, and Mathlib's isKProjective_of_projective applies. This construction
-also works for the empty affine open and the zero complex. -/
+Source: Stacks Project, Tag 08CR, second proof, and Tag 06Z0, affine tilde/Gamma equivalence. -/
 theorem affine_perfect_module_model (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
     (K : CochainComplex
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)

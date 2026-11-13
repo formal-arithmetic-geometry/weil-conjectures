@@ -64,28 +64,7 @@ private noncomputable def affineSectionsIso (X : Scheme.{u}) (V : X.affineOpens)
 
 /-- Transport coherent formal modules from an affine open to its canonical spectrum,
 including the natural comparison of the underlying A-module section diagrams.
-Source: Stacks Project, Lemma 087X, affine reduction, and Lemma 087W.
-(blueprint: lem-weil-pbc-formal-affine-spec-transport)
-
-Proof: Put A=Γ(X,V) and J=I(V). Use IsAffineOpen.isoSpec to identify V with Spec A.
-The ideal comapped along its inverse is ofIdealTop (J.map ΓSpecIso.inv): the inverse
-has top ring map V.topIso.hom followed by ΓSpecIso.inv, and extension of I to V has
-top ideal J transported by V.topIso.inv. Check equality on the affine basis using
-quasi-coherence. Termwise tensor pullback along the inverse isomorphism gives T.
-The functor in the other direction is tensor pullback along the isomorphism, with
-the ideal equality just checked. Pullback composition and identity isomorphisms
-supply inverse comparisons; lift these through the fully faithful full-subcategory
-inclusions to obtain the transport equivalence. To compare sections, pushforward
-along the affine isomorphism and its inverse are inverse equivalences of module
-categories. Uniqueness of left adjoints identifies inverse-isomorphism tensor
-pullback with forward-isomorphism pushforward. Its top sections are the original
-top sections with scalars restricted along the forward top-ring map. Composing
-that map with ΓSpecIso.inv gives V.topIso.inv, so restrictScalarsComp' supplies the
-A-linear comparison, naturally in all module sheaves. Whisker this comparison by
-the inverse-system functor and the formal-module inclusion; the equation defining
-P identifies the result with the section diagram after T. Empty V and zero or unit ideals obey the
-same formulas, since none of the argument requires a nonzero ring or proper ideal.
--/
+Source: Stacks Project, Lemma 087X, affine reduction, and Lemma 087W. -/
 theorem coherentFormalModule_affine_spec_transport
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

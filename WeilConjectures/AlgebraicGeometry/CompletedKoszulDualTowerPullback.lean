@@ -32,7 +32,6 @@ import all WeilConjectures.CategoryTheory.RingedCechKoszulDualKFlat
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, and
 sites-cohomology.tex, Tag 07A4.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -98,27 +97,7 @@ private theorem dualizeAugmentedDiagram
 Only the Koszul complexes occur here; there is no arbitrary coefficient complex.
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
-sites-cohomology.tex, Tag 07A4, tensor pullback.
-(auxiliary; not a blueprint node).
-
-Proof: the positive Koszul complex is the ordered tensor of rank-one two-term
-complexes. Expand it into the finite free basis indexed by Boolean subsets. Its
-dual has the dual basis, with the subset of cardinality k in degree -k. Module
-inverse image along the invertible coefficient map preserves rank-one modules,
-finite sums, and their scalar morphisms. Naturality of the constant-ring
-comparison in the coefficient ring fixes each constant a_i: apply it to the
-universal element of the polynomial ring Z[X] and all evaluation maps. The limit
-projection equations for completedMap then identify the images of these constants
-in the completions. Therefore the coordinate comparisons identify differentials,
-with their ordered signs, and the transitions, which multiply selected coordinates
-by a_i. This gives an isomorphism of towers. First use the canonical comparison
-on the rank-one ring complex. The given j differs from it by an automorphism of
-the target ring complex, hence multiplication by an invertible global section.
-Multiply every dual coordinate by that section. This preserves differentials and
-transitions and makes the coaugmentation equation hold: its empty coordinate is
-identity, and every other coordinate is zero. For no generators the comparison
-is the constant tower with value j. Zero scalars, repeated scalars and the zero
-ring satisfy the identical formulas. -/
+sites-cohomology.tex, Tag 07A4, tensor pullback. -/
 theorem completedKoszulDualTowerPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

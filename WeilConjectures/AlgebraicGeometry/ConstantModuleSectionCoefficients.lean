@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Forget the scalar action and compare constant sheaves, then undo the canonical
 constant-sheaf pullback comparison. This uses actual natural isomorphisms, not a choice
-of an equivalence family. 
-(blueprint: lem-weil-pbc-constant-module-section-coefficients)
+of an equivalence family.
 -/
 noncomputable def constantModuleSectionCoefficientSheafIso
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
@@ -52,8 +51,7 @@ noncomputable def constantModuleSectionCoefficientSheafIso
   exact (constantCommuteCompose Z.smallEtaleTopology V).app M ≪≫
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).app (V.obj M)).symm
 
-/-- Evaluate the coefficient comparison at the base change of the étale object. 
-(blueprint: lem-weil-pbc-constant-module-section-coefficients)
+/-- Evaluate the coefficient comparison at the base change of the étale object.
 -/
 noncomputable def constantModuleSectionCoefficientEquiv
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
@@ -75,21 +73,7 @@ set_option backward.isDefEq.respectTransparency false in
 adjunction-unit transition for the abelian sheaf pulled back from the base.
 
 Source: Stacks Project, Tags 03DB and 03CO (forgetting coefficients and sheafification),
-and Tag 09Z1 (canonical transition maps).
-(blueprint: lem-weil-pbc-constant-module-section-coefficients).
-
-Proof: Write C_X for the constant abelian sheaf on X. The sheaf isomorphism used here
-is the constantCommuteCompose comparison followed by the inverse of the canonical
-constant-sheaf pullback comparison. The former commutes with sheafification generators.
-The latter is the uniqueness isomorphism of left adjoints to terminal evaluation, so
-its adjoint sends each constant generator to the same generator. Naturality of the
-inverse-image unit moves the coefficient comparison across the unit. The unit equation
-for uniqueness of left adjoints identifies the composite constant pullback comparison
-with upperStarComp. Applying lowerStar and its composition isomorphism gives the
-sheaf-level commuting square. Evaluate it at U. Direct image is precomposition on
-étale objects, so coefficient forgetting commutes with it definitionally. This gives
-the displayed section equality. There are no restrictions on coefficients or schemes;
-zero coefficients and empty pullbacks use the same unit and naturality equations. -/
+and Tag 09Z1 (canonical transition maps). -/
 theorem constantModuleSectionCoefficientEquiv_naturality
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} (U : X.Etale)

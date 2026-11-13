@@ -73,8 +73,7 @@ private lemma derived_horizontal_factor
 
 /-- A comparison is normalized when it carries the right-derived units to the
 termwise ordinary comparison and the target right-derived unit.
-Source: Stacks Project, Tag 0F7D.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0F7D. -/
 def ProperOpenUnitNormalized
     {C C' D D' : Type v} [Category.{w} C] [Category.{w} C']
     [Category.{w} D] [Category.{w} D']
@@ -421,22 +420,7 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Horizontal pasting for normalized unbounded proper/open comparison families.
-Source: Stacks Project, Tag 0F7D.
-(auxiliary; not a blueprint node).
-
-Proof:
-Take a K-injective representative J and resolutions rho:k!J→I and sigma:l!I→H.
-Exactness of l! makes sigma after l!rho a resolution of l!k!J. The two consecutive
-interchanges are represented by j!(p*rho after theta1), followed by q*sigma after theta2.
-Naturality of theta2 moves rho through this expression. Include the remaining sheaf
-maps into the common composite direct image using the given support normalizations.
-Associativity of support composition identifies their product with the outer theta,
-with the open-extension compositors inserted. Their termwise derived descents identify
-the chosen composite resolution with the outer one. Equivalently, precompose with the
-right-derived unit, use both assumed unit equations, and apply the universal property
-of right derivation to the equality of the sheaf maps. This proves the equation for
-every derived object without a boundedness assumption.
--/
+Source: Stacks Project, Tag 0F7D. -/
 theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V T W Z S : Scheme.{u}}
     (k : U ⟶ V) (l : V ⟶ T) (r : U ⟶ W) (p : V ⟶ Z) (q : T ⟶ S)

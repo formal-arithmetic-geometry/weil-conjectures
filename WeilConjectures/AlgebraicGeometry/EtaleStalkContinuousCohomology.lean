@@ -19,7 +19,6 @@ discrete topological `Gal(Ks/K)`-module identified equivariantly with the stalk 
 Galois point `AlgebraicGeometry.Scheme.galoisPoint K Ks`.
 
 Source: Stacks Project, Tags 04JQ, 03QU and Section 0DVG.
-(blueprint: lem-sc-etale-stalk-continuous-cohomology).
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ modules (`AlgebraicGeometry.Scheme.sheafHAddEquivGaloisH`) with the computation 
 `ℤ` by continuous cochains (`DiscreteModule.hAddEquivContinuousCohomology`), transported
 along `c`.
 
-Source: Stacks Project, Tags 04JQ and 03QU; Section 0DVG.
-(blueprint: lem-sc-etale-stalk-continuous-cohomology). -/
+Source: Stacks Project, Tags 04JQ and 03QU; Section 0DVG. -/
 noncomputable def sheafHAddEquivContinuousCohomology
     (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})
     (M : TopRep.{u} ℤ Gal(Ks/K)) [DiscreteTopology M.V]

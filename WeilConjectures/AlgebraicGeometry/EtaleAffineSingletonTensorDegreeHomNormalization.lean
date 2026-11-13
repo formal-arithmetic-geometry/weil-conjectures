@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- The singleton tensor-section Čech complex, before identifying its terms. 
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
+/-- The singleton tensor-section Čech complex, before identifying its terms.
 -/
 abbrev singletonTensorCech (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) :=
@@ -32,8 +31,7 @@ abbrev singletonTensorCech (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (Modules.etaleTensorSectionsSheaf F)).obj)
 
-/-- Forget scalars and lift the affine Amitsur complex. 
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
+/-- Forget scalars and lift the affine Amitsur complex.
 -/
 abbrev singletonTensorAmitsur (X : Scheme.{u}) (F : X.Modules)
     (U W : X.Etale) (g : W ⟶ U) :=
@@ -43,8 +41,7 @@ abbrev singletonTensorAmitsur (X : Scheme.{u}) (F : X.Modules)
       (Algebra.TensorProduct.amitsurComplex Γ(U.left, ⊤) Γ(W.left, ⊤)
         Γ((Modules.tensorPullback U.hom).obj F, ⊤))
 
-/-- The cosimplicial object underlying the singleton tensor-section Čech complex. 
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
+/-- The cosimplicial object underlying the singleton tensor-section Čech complex.
 -/
 abbrev singletonTensorCechCosimplicial (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] (U W : X.Etale) (g : W ⟶ U) :=
@@ -54,8 +51,7 @@ abbrev singletonTensorCechCosimplicial (X : Scheme.{u}) (F : X.Modules)
         ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
           (Modules.etaleTensorSectionsSheaf F)).obj)
 
-/-- The coefficient-forgetting and universe-lifting functor used by the comparison. 
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
+/-- The coefficient-forgetting and universe-lifting functor used by the comparison.
 -/
 abbrev singletonTensorForget (U : Scheme.{u}) :=
   (forget₂ (ModuleCat.{u} Γ(U, ⊤)) AddCommGrpCat.{u}) ⋙
@@ -63,8 +59,7 @@ abbrev singletonTensorForget (U : Scheme.{u}) :=
 
 /-- The pure-tensor equation fixes the degree comparison uniquely: evaluate the singleton
 product, multiply the pulled-back functions, and pull back the coefficient section.
-This predicate mentions no differential or coface. 
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
+This predicate mentions no differential or coface.
 -/
 def IsSingletonTensorDegreeComparison (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] (U W : X.Etale) (g : W ⟶ U) (n : ℕ)
@@ -83,7 +78,6 @@ def IsSingletonTensorDegreeComparison (X : Scheme.{u}) (F : X.Modules)
 
 /-- The pure-tensor normalization for a comparison homomorphism.
 Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom-normalization)
 -/
 def IsSingletonTensorDegreeComparisonHom (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 /-! # Quasi-coherence of affine pushforward Čech terms
 
 Source: Stacks Project, Tags 02KG and 02KH, affine intersections and direct images.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-affine-quasicoherent).
 -/
 
 @[expose] public section
@@ -37,20 +36,7 @@ private theorem quasicoherent_product {A : CommRingCat.{u}} {I : Type}
     (inferInstance : SheafOfModules.IsQuasicoherent.{u} ((tilde.functor A).obj N))
 
 /-- Each pushed-forward extended term is quasi-coherent.
-Source: Stacks Project, Tags 02KG and 02KH, separated-case affine intersections.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-affine-quasicoherent).
-
-Proof: For nonnegative degree p, use the term comparison to identify the term with
-the finite product of j_t* of G restricted to W_t. Every tuple has p+1 entries, so
-W_t is an affine open: finite nonempty intersections of affine opens are affine
-on a scheme separated over an affine base. The map W_t → Spec A is affine, and
-its pushforward takes quasi-coherent modules to quasi-coherent modules. Composition
-of pushforwards identifies this with f* j_t*. Pushforward preserves products;
-finite products of quasi-coherent modules are quasi-coherent because they are
-finite biproducts. Transfer quasi-coherence across the term and extension
-isomorphisms. In negative degree the extended term is zero, whose pushforward
-is zero and is quasi-coherent. If no tuples exist, the product is likewise zero.
-No covering hypothesis is needed. -/
+Source: Stacks Project, Tags 02KG and 02KH, separated-case affine intersections. -/
 theorem alternatingCechSheafComplex_affineQuasicoherent
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))

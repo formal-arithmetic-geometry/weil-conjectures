@@ -13,7 +13,6 @@ import all WeilConjectures.CategoryTheory.DoubleComplexTotal
 /-! # CE row cycles under diagonal-compatible total maps
 
 Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-row-cycles-naturality).
 -/
 
 @[expose] public section
@@ -305,24 +304,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The inverse canonical cycle comparison takes related filtered representatives to
 related row cycles. This is a degreewise statement, before taking homology; it assumes
 no augmentation compatibility and no normalization of higher spectral-sequence pages.
-Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-row-cycles-naturality).
-
-Proof. In total degree n=q+p the second filtration is the finite sum of diagonal
-summands with complex index at least q. Its quotient by the next step keeps only
-the summand with index q, which is the row term in resolution degree p. Project the
-equality relating x and y onto that summand. The summand equation for u, transported
-through totalSectionsIso_formula and the naturality of ceSectionsUnit, identifies
-this projected map with the degree-p component of ceRowSectionsMap f (phi.f q).
-The equations for z and zprime identify the same projections with their graded
-cycle inclusions. The canonical rowCyclesIso was normalized by diagonal inclusion;
-its inverse therefore takes these projections to the corresponding row cycles.
-Apply monicity of the target row iCycles to conclude the stated equality of cycle
-maps. The construction kills every higher-index summand by the quotient projection;
-negative resolution indices vanish by extension by zero. At p=0 the row cycle
-kernel calculation is unchanged, and zero rows or empty diagonals give the unique
-map from or to a zero object. No ordinary cohomology or derived-functor comparison
-is involved. -/
+Source: Stacks Project, Tags 015J, 015K and 012K. -/
 theorem etaleCE_row_cycles_naturality
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))

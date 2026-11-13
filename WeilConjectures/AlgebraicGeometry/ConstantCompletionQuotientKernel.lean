@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionBasic
 
 /-! Kernel characterization for a finite constant quotient.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 093M.
 The proof is the local-to-global kernel argument for sheafified constant rings: locally
 zero classes are represented by elements of the coefficient ideal, and finite generation
 of the ideal lets the local expressions glue through the sheaf of constant rings. -/

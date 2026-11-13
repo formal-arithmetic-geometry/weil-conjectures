@@ -24,8 +24,7 @@ variable [∀ Y : Scheme.{u},
 /-- Canonical chain transport: the extension/restriction unit followed by the inverse
 pullback-stalk comparison. The latter is pinned by its formula on all section germs,
 which generate the extension of scalars, so no arbitrary existence witness is chosen.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: def-pc-affine-spectrum-canonical-stalk-complex-iso). -/
+Source: Stacks Project, Tags 0098 and 0096. -/
 def isoPullbackModuleStalkComplexIso
     {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j] (y : Y)
     (P : CochainComplex Z.Modules ℤ) :
@@ -70,8 +69,7 @@ def isoPullbackModuleStalkComplexIso
       ((Functor.mapHomologicalComplexCompIso (Iso.refl T) (.up ℤ)).app P))
 
 /-- The canonical chain transport with the source point identified by `h`.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: def-pc-affine-spectrum-canonical-stalk-complex-iso). -/
+Source: Stacks Project, Tags 0098 and 0096. -/
 def canonicalSpectrumStalkComplexIso
   (X : Scheme.{u}) [IsAffine X] (x : X) (y : Spec Γ(X, ⊤))
   (h : x = X.isoSpec.inv y)

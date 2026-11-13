@@ -16,7 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # Lifting a derived decomposition on an affine open to modules
 
 Source: Stacks Project, Tag 06Z0, lemma-affine-compare, and the affine reduction in
-Tag 08CE (blueprint: lem-pc-affine-derived-summand-models).
+Tag 08CE.
 -/
 
 @[expose] public section
@@ -35,21 +35,7 @@ binary decomposition in the module derived category. No boundedness, finite gene
 or pseudo-coherence is assumed.
 
 Source: Stacks Project, Tag 06Z0, lemma-affine-compare, used in the affine reduction of
-Tag 08CE (blueprint: lem-pc-affine-derived-summand-models).
-
-Proof: Transport the localized sheaf category to Spec Gamma(U,O) by the exact
-isoSpec and overEquiv equivalences. The affine derived equivalence, followed by inclusion
-and this transport, gives a fully faithful G and the comparison with termwise
-sheafification. Exactness of tilde follows from exactness of module localization.
-The tilde/Gamma adjunction therefore induces an unbounded derived adjunction. Descend
-its comparison with the affine equivalence through Q and compose with the transport
-adjunction to get G left adjoint to B. The counit at E ⊞ F is invertible since this
-object is isomorphic to G(Q(P)). Naturality makes the counits at E and F retracts of
-that invertible counit, so they are invertible. Set C = B(E) and D = B(F); their counits
-give E ≅ G(C) and F ≅ G(D). Additivity identifies G(C ⊞ D) with G(C) ⊞ G(D), and full
-faithfulness lifts the resulting isomorphism G(Q(P)) ≅ G(C ⊞ D).
-The empty affine open and zero summands are handled by the same adjunctions and retract
-equations. No boundedness or finite-free model of C or D is used or asserted. -/
+Tag 08CE. -/
 theorem affine_derived_summand_models (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U)
     [HasDerivedCategory.{wR} (ModuleCat.{u} (X.presheaf.obj (.op U)))]

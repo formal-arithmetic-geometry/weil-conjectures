@@ -207,20 +207,7 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- The etale-origin residue comparison, isolated from the fixed completed-model clause.
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8
-(auxiliary; not a blueprint node).
-Proof: constant-scalar restriction identifies the continuous module direct
-image with fixed-coefficient direct image. Scalar normalization and the
-ringed inverse-image adjunction identify the supplied algebraic pullback with
-the fixed-coefficient comparison inverse image, by uniqueness of left adjoints.
-Conjugate the etale/pro-etale pullback square by these identifications and the
-AsSmall equivalences. This comparison makes the algebraic pullback left exact;
-its adjunction also makes it right exact. Its termwise functor therefore
-preserves quasi-isomorphisms, so the universal left-derived comparison is an
-isomorphism. Compose its inverse with the exact functor's derived-category
-factorization and the termwise square. This is the second clause of the parent
-comparison statement; no completed-complex clause is used.
--/
+Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8. -/
 theorem sfbImmersion_residueComparison_etale
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

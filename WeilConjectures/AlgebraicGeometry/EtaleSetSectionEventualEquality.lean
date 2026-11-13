@@ -26,18 +26,7 @@ namespace AlgebraicGeometry
 
 
 /-- Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, proof via Tags 0EYL,
-04HR, and 09YN, followed by finite affine-cover descent.
-(blueprint: lem-weil-pbc-sets-section-eventual-equality).
-Proof: directedness first moves the two sections to a common stage on the cofinal tail.
-For an affine descended object, the affine-site colimit theorem and unit-compatible
-inverse-image comparison turn the given limit equality into equality in the filtered
-colimit of section sets. Equality in a filtered colimit holds at some later stage.
-For general W₀, restrict to a finite affine cover. Apply the affine assertion to the
-two restrictions on each member. Choose a common later stage for these finitely many
-equalities. Separatedness of the sheaf on this covering then gives equality of the
-two sections over the entire base changed W₀. The resulting arrows to the original
-two stages and comparison coherence give the displayed equality. Empty covers need
-no equalities and separatedness already gives uniqueness. -/
+04HR, and 09YN, followed by finite affine-cover descent. -/
 theorem etaleSetSectionEventualEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

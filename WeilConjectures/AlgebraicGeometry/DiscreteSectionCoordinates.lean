@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The constant scalar at the profinite point, followed by the constant-sheaf adjunction.
 This is an explicit section; it uses neither a local lift nor an existence theorem.
-Source: the constant-sheaf adjunction, Stacks Tag 00YV
-(auxiliary; not a blueprint node). -/
+Source: the constant-sheaf adjunction, Stacks Tag 00YV. -/
 def discretePointScalarSection (A : Type u) [CommRing A] (c : ULift.{u + 1} A) :
     𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ discreteObj A :=
   Functor.LaxMonoidal.ε (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
@@ -937,20 +936,7 @@ If that coordinate restricts to a constant scalar, its inverse image is the poin
 constant section. This compares sections only; no module morphism, covering sieve,
 finite index set or matrix occurs in the statement.
 
-Source: Stacks, Tags 03CY and 00YV; `constantSchemeIso` and weakly-etale localization.
-(auxiliary; not a blueprint node).
-
-Proof: the monoidal comparison `constantSchemeIso`, composed with the comparisons
-forgetting commutative rings to abelian groups, identifies x with a section of the
-constant ring sheaf on U.left. Weakly-etale localization identifies terminal sections
-on U.left with sections on U in Y.ProEt; AsSmall transports the same section to the
-specified small site, giving s. These identifications commute with restriction.
-The hypothesis on c therefore says that the restriction of x is the constant c
-section. The adjunction defining `upperStar` identifies restriction with inverse
-image followed by the canonical coefficient comparison. The constant-sheaf
-adjunction defining `discretePointScalarSection` sends c to that same constant
-section. Its transported unit supplies the epsilon factors in the formula.
-This proves the asserted equality, including for the zero ring and empty schemes. -/
+Source: Stacks, Tags 03CY and 00YV; `constantSchemeIso` and weakly-etale localization. -/
 theorem discrete_section_coordinates
     (A : Type u) [CommRing A] {Y : Scheme.{u}}
     (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)

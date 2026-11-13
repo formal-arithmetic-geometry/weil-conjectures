@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 /-! # Canonical comparison maps for a base-change cube
 
 Source: Stacks Project, Tags 03Q9 and 095T, restriction of section complexes.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open Scheme
 
 /-- Apply homology and the inverse-image stalk comparison to a derived morphism.
 The equality specifies the point at which its source stalk is taken.
-Source: Stacks Project, Tag 03Q1.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+Source: Stacks Project, Tag 03Q1. -/
 noncomputable def derivedStalkComparison
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -51,8 +49,7 @@ variable {S T X X' S₀ T₀ X₀ X₁ : Scheme.{u}}
 
 /-- Restrict the source of exchange: commute the two inverse images, use the
 base-change map for f, and identify the pulled-back single complex.
-Source: Stacks Project, Tag 03Q9, restriction complexes.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+Source: Stacks Project, Tag 03Q9, restriction complexes. -/
 noncomputable def exchangeCubeSourceComparison
     (sq₀ : CommSq p₀ f₀ f jA) (h : jB ≫ g = g₀ ≫ jA)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -75,8 +72,7 @@ noncomputable def exchangeCubeSourceComparison
 
 /-- Restrict the target of exchange: use the base-change map for f', then commute
 inverse images and identify the pulled-back single complex.
-Source: Stacks Project, Tag 03Q9, restriction complexes.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+Source: Stacks Project, Tag 03Q9, restriction complexes. -/
 noncomputable def exchangeCubeTargetComparison
     (sqB : CommSq b f₁ f' jB) (hb : b ≫ g' = p₁ ≫ p₀)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -112,25 +108,7 @@ private theorem derivedExchange_transport
   simp
 
 /-- The two factorizations of the outer derived mate agree after the
-inverse-image composition identifications of the commuting cube.
-
-Proof: form the horizontal composite of `sq` and `sqB`, and the horizontal
-composite of `sq₀` and `sq₁`. Apply `derivedBaseChangeMapPlus_paste_horiz` to
-each composite at `K`. The outer horizontal maps are identified by `h` and
-`hb`, so transport one outer square along these equalities; its commutativity
-proof agrees with the other by proof irrelevance. Naturality of the
-inverse-image composition isomorphisms transports the resulting mate.
-Precompose by the inverse of the composition isomorphism for `jB,g`, and
-postcompose by the direct-image of the composition isomorphism for `p₁,p₀`.
-Cancel each adjacent hom/inv pair using the isomorphism identities and
-functoriality. The displayed equality is the remaining composite. This
-argument concerns arbitrary complexes and commuting squares, so it needs
-no properness, cartesianness, degree, or stalk assumptions; it also applies
-to zero complexes and identity cubes.
-
-Source: Stacks Project, Tags 03Q9 and 095T; the first proof step of
-`lem-weil-pbc-abelian-exchange-cube-comparisons`, before single-complex naturality.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+inverse-image composition identifications of the commuting cube. -/
 private theorem derivedExchangeCube_pasting
     (sq : CommSq g' f' f g) (sq₀ : CommSq p₀ f₀ f jA)
     (sq₁ : CommSq p₁ f₁ f₀ g₀) (sqB : CommSq b f₁ f' jB)
@@ -177,8 +155,7 @@ private theorem derivedExchangeCube_pasting
 
 
 /-- Naturality of the stalk comparison in its target morphism.
-Source: Stacks Project, Tag 095T, formal functoriality of homology and fibres.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+Source: Stacks Project, Tag 095T, formal functoriality of homology and fibres. -/
 private theorem derivedStalkComparison_postcomp
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -194,8 +171,7 @@ private theorem derivedStalkComparison_postcomp
   simp [derivedStalkComparison, Functor.map_comp, Category.assoc]
 
 /-- Naturality of the stalk comparison in its source morphism.
-Source: Stacks Project, Tag 095T, formal functoriality of inverse image.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons). -/
+Source: Stacks Project, Tag 095T, formal functoriality of inverse image. -/
 private theorem derivedStalkComparison_precomp
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -253,19 +229,7 @@ private theorem exchangeCube_derived_square
 
 /-- The exchange square commutes after restriction along a commuting cube and on
 homology stalks. This is a compatibility assertion only, with no invertibility claim.
-Source: Stacks Project, Tags 03Q9 and 095T; formal mate-pasting calculation.
-(blueprint: lem-weil-pbc-abelian-exchange-cube-comparisons).
-
-Proof: paste the original square with the square over jB, and paste the square over
-jA with the local square over g₀. The resulting outer squares have equal horizontal
-maps by h and hb. The horizontal pasting law for the derived base-change map gives
-the same outer mate from each factorization. Cancel the inverse-image composition
-isomorphisms to get the square between the two comparison morphisms above. Naturality
-of the inverse-image/single-complex isomorphism inserts the identification of K₀.
-Apply H^q, then the point fibre functor. Naturality of the exact inverse-image/homology
-isomorphism and of the inverse-image stalk isomorphism identifies the source with the
-stalk at s and gives the displayed square. No cartesianness, properness, torsion, or
-strict locality is required; the argument also applies to q = 0 and zero sheaves. -/
+Source: Stacks Project, Tags 03Q9 and 095T; formal mate-pasting calculation. -/
 theorem exchangeCube_stalk_square
     (sq : CommSq g' f' f g) (sq₀ : CommSq p₀ f₀ f jA)
     (sq₁ : CommSq p₁ f₁ f₀ g₀) (sqB : CommSq b f₁ f' jB)

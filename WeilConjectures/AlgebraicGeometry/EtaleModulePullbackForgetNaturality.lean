@@ -29,23 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Module inverse image commutes naturally with passage to underlying abelian sheaves.
 Source: Stacks Project, Tags 03D3 and 03D7, and the restriction of module coefficients
-in the proof of Tag 09ZE (first sentence).
-(blueprint: lem-weil-pbc-etale-module-pullback-forget-naturality)
-
-Proof: Unfold inverse image as left Kan extension of presheaves along the base-change functor,
-followed by sheafification. The forgetful functor from modules to abelian groups preserves
-colimits: a colimit abelian group carries the unique induced scalar operations, whose
-relations are checked on the coprojections. Hence it commutes with the comma-category
-colimits computing left Kan extension, naturally in the presheaf. It also preserves finite
-limits and filtered colimits. The plus construction uses these limits for matching
-families and filtered colimits over covering sieves, so forgetting commutes with each plus
-construction and therefore with sheafification. Compose Mathlib
-`sheafComposeNatIso` with `Functor.lanCompIsoOfPreserves`, whisker with the inclusion
-of sheaves into presheaves, and use the associativity isomorphisms of functor composition
-to identify the result with the two composites in the statement. Each comparison is natural in
-module-sheaf morphisms, so the result is a natural isomorphism, not only an objectwise one.
-There are no finiteness or torsion assumptions. For identity maps this is the canonical
-identity comparison; zero rings and empty schemes give the same construction. -/
+in the proof of Tag 09ZE (first sentence). -/
 theorem exists_upperStar_forget₂_natIso (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Nonempty ((f)^*[ModuleCat.{u + 1} Λ] ⋙

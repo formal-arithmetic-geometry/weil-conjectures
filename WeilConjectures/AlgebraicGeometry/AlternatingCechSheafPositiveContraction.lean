@@ -34,24 +34,7 @@ private theorem exact_inner_inverse_on_cycles
   simp only [Category.assoc, hi]
 
 /-- Positive-degree signed insertion cancellation on the singleton open.
-Source: Stacks Project, Tag 02FU, with the ordered convention of Tag 01FM.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-positive-contraction).
-
-Proof: On a test open V contained in U i, for a tuple t not containing i,
-insert i in its unique increasing position b. Project to that coordinate and
-multiply by (-1)^b. The resulting intersection equals the old intersection
-since V is contained in U i. For tuples containing i use zero. These linear maps
-commute with restrictions. For a positive-degree tuple not containing i, deleting
-the inserted i contributes the identity. Every other deletion in d h is paired
-with insertion after deletion in h d; the two restrictions agree and their signs
-are opposite. For tuples containing i, only deletion of i contributes, with
-product of signs one. Sheafify these natural maps on the restricted site,
-using the local sheafification identification with the restriction of the
-sheafified complex; additivity preserves the equation. Transport through
-extendXIso to integer degrees and put the maps equal to zero in negative degrees.
-For empty test opens all modules vanish; r=0 has no i; degrees above the tuple
-length have zero terms. This claim imposes no equation at degree zero.
--/
+Source: Stacks Project, Tag 02FU, with the ordered convention of Tag 01FM. -/
 theorem alternatingCechSheaf_restrict_positive_contraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

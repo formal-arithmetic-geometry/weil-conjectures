@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.IntegralScalarContractive
 
 The coefficient of an endomorphism is its value on the global unit section. Naturality
 and regular-module linearity determine its action everywhere from this function.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -151,15 +150,13 @@ lemma regularCoefficient_comp (X : Scheme.{u})
     (g.hom.hom.app (op (Scheme.ProEt.mk (𝟙 X))) (ULift.up 1)) x
 
 /-- The identity regular endomorphism has constant coefficient one.
-Source: evaluation of the identity on the unit section.
-(auxiliary; not a blueprint node) -/
+Source: evaluation of the identity on the unit section. -/
 lemma regularCoefficient_id (X : Scheme.{u})
     (O : Type) [CommRing O] [TopologicalSpace O] [IsTopologicalRing O] :
     regularCoefficient X O (𝟙 (Mod.regular (continuousAbRing X O))) = 1 := rfl
 
 /-- A continuous nowhere-zero field multiplier has a continuous inverse.
-Source: continuous reciprocal and the universal property of the regular module.
-(auxiliary; not a blueprint node) -/
+Source: continuous reciprocal and the universal property of the regular module. -/
 lemma continuousRegular_field_isIso (X : Scheme.{u})
     (K : Type) [Field K] [TopologicalSpace K] [IsTopologicalRing K] [ContinuousInv₀ K]
     (g : Mod.regular (continuousAbRing X K) ⟶ Mod.regular (continuousAbRing X K))

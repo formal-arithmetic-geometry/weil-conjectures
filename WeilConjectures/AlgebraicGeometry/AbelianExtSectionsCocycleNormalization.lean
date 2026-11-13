@@ -29,14 +29,7 @@ noncomputable section
 namespace CategoryTheory
 
 /-- The acyclic comparison of an injective resolution is its usual derived comparison.
-Source: Stacks Project, Tags 015E and 06XR.
-(blueprint: new-abelian-injective-acyclic-comparison)
-
-Proof: Lift the identity to the chosen injective resolution. Naturality of the
-usual injective comparison identifies its homology map with the comparison
-between the two resolutions. The mapped lift is a quasi-isomorphism because
-both resolutions have acyclic terms. Cancel its inverse homology map in the
-acyclic-resolution constructor. -/
+Source: Stacks Project, Tags 015E and 06XR. -/
 theorem acyclic_comparison_of_injective
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [HasInjectiveResolutions C] [Abelian D]
@@ -74,8 +67,7 @@ theorem acyclic_comparison_of_injective
 The homology projection is surjective. Lift the chosen homology element, use
 injectivity of the source comparison to recover its cohomology representative,
 and apply naturality of the homology projection to the chain map.
-Source: Mathlib, HomologicalComplex.homologyπ_naturality.
-(blueprint: new-abelian-cycle-representative-transfer) -/
+Source: Mathlib, HomologicalComplex.homologyπ_naturality. -/
 theorem homology_transfer_of_cycle_representatives
     {E E' : Type*} (K B : CochainComplex AddCommGrpCat.{u} ℕ) (t : K ⟶ B) (p : ℕ)
     (e : E → K.homology p) (he : Function.Injective e)
@@ -390,17 +382,7 @@ attribute [local irreducible] siteSectionsObjIso
 attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 
 /-- The prescribed site-sections comparison sends an Ext cocycle to its section class.
-Source: Stacks Project, Tag 06XR; Mathlib, InjectiveResolution.extEquivCohomologyClass_extMk.
-(blueprint: new-abelian-ext-sections-cocycle-normalization)
-
-Proof: For the chosen resolution, unfold the fixed Ext/right-derived-Hom
-constructor. Its derived-resolution factors cancel. The explicit Ext-to-Hom
-cocycle comparison and the left homology data then send the cocycle to its
-homology class. For an arbitrary injective resolution, compare with the chosen
-one, use naturality, and cancel the homology map of the comparison. Transport
-through the sections natural isomorphism, using right-derived naturality.
-Finally use the defining formula for siteSectionsObjIso. This identifies the
-actual prescribed map, in every degree, rather than choosing a new comparison. -/
+Source: Stacks Project, Tag 06XR; Mathlib, InjectiveResolution.extEquivCohomologyClass_extMk. -/
 theorem canonical_site_sections_cocycle
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]

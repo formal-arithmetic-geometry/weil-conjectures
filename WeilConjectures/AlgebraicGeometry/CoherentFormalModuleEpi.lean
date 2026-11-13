@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 
 /-! # Epimorphisms of coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Y
-(blueprint: lem-weil-pbc-formal-systems-surjective).
+Source: Stacks Project, Cohomology of Schemes, Lemma 087Y.
 -/
 
 @[expose] public section
@@ -99,27 +98,7 @@ private theorem isZero_of_first_component {X : Scheme.{u}} [IsNoetherian X]
 /-- A morphism in Coh(X,I) is an epimorphism exactly when its first component is an
  epimorphism of O_X-modules. In the shared indexing convention, `op 0` denotes level 1.
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Y
-(blueprint: lem-weil-pbc-formal-systems-surjective).
-
-Proof:
-1. Take the Limits.cokernel cofork supplied by `coherentFormalModule_abelian`. Its evaluation
-at each level is colimiting. The preadditive epi/Limits.cokernel criterion reduces the two
-assertions to vanishing of the formal Limits.cokernel and vanishing of its first component.
-2. For a module H, suppose H/I^(n+1)H is zero and I^(n+2)H is zero. At a stalk, the
-ideal-product and quotient formulas give J^(n+1)H_x = H_x and J^(n+2)H_x = 0.
-Since J^(n+1) is contained in J, we have JH_x = H_x. Induction using the product
-of ideals gives J^k H_x = H_x for every k. Taking k = n+2 makes H_x zero.
-Section extensionality makes every section zero, so the identity of H is zero.
-This is the power-annihilated version
-of the elementary nilpotent Nakayama argument in Stacks, Algebra, Lemma 00DV (9).
-3. Starting from a zero first component, induct on n. The defining quotient
-isomorphism identifies level n with level n+1 modulo I^(n+1); level n+1 is killed
-by I^(n+2). Step 2 therefore makes level n+1 zero. Every component is zero,
-hence the inverse system is zero; the full inclusion reflects zero objects.
-4. A zero formal Limits.cokernel gives a zero first component by evaluation. Conversely,
-a zero first component gives a zero formal Limits.cokernel by Step 3. Apply Step 1.
--/
+Source: Stacks Project, Cohomology of Schemes, Lemma 087Y. -/
 theorem coherentFormalModule_epi_iff_first_component {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) {F G : CoherentFormalModule X I} (α : F ⟶ G) :
     Epi α ↔ Epi (α.hom.app (op 0)) := by

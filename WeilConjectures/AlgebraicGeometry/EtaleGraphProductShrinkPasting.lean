@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkSquare
 
 Source: Stacks Project, Tag 0F7J, cancellation of the graph triangles in A--F;
 the product-graph extension in lem-pur-etale-graph-product-row-pasting.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -33,27 +32,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCate
 /-- Shrinking the three supporting neighborhoods commutes with the fixed product boundary.
 The source and target are the already enlarged proper ambient products: this assertion
 contains neither the original supplied square exchange nor a proper-ambient lambda.
-Source: Stacks Tags 0F7C, 0F7D and the final A--F calculation in 0F7J
-(auxiliary; not a blueprint node).
-
-Proof: write n for the selected index and m for the other. The three open inclusions
-are W_1 times_Y W_2 into W_n times_Y V_m, Y times_Z Y into Y times_Z T_m,
-and W_1 times_Z W_2 into W_n times_Z P_m. The two maps imposing equality over Y
-are productBV and productBW. Paste their B square with the square involving the
-selected mixed neighborhood V_n times_Z P_m, and paste the product Q square with
-its open inclusion into the ambient Q square. The resulting outer squares agree
-by their projections. Apply horizontal pasting of normalized proper/open exchanges
-to the open edges and vertical pasting to the proper edges. The three identity-top
-graph squares compare the proper lifts z_f,z_g,z_h with the product graph lifts.
-Their exchange is exactly the inverse triangle factor of shrinkLambda, by Cartesian
-normalization and removal of extension by the identity. Naturality interchanges the
-factors meeting at a vertex. The two interior graph triangles then cancel; what
-remains is the inverse product B exchange followed by the product Q exchange.
-The open triple compositor law and proper compositor associativity give the displayed
-parenthesizations and identify this boundary with productInterchange. All graph edges
-are proper by proper-to-separated. This calculation uses no original square exchange,
-no choice of compactification, and no equality inferred from stalks; it applies also
-to empty supporting neighborhoods and identity open immersions. -/
+Source: Stacks Tags 0F7C, 0F7D and the final A--F calculation in 0F7J. -/
 theorem etaleGraphProductShrinkPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

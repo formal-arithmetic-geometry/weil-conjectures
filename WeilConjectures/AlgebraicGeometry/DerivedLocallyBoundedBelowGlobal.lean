@@ -26,16 +26,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A locally bounded-below derived object on a Noetherian scheme is bounded below.
-Source: Stacks Project, Tag 0A6H, proof of clause (1).
-(blueprint: lem-sc-derived-locally-bounded-below-global).
-
-Proof: Choose, at each point, the given open neighbourhood and its lower bound.
-Quasi-compactness of the Noetherian scheme gives a finite subcover. Choose an integer
-no larger than every bound in this finite cover (zero if the cover is empty). For each
-smaller degree, the cohomology sheaf restricts to zero on every member of the cover.
-Sheaf separatedness implies that all its sections are zero, hence it is a zero object.
-The cohomological characterization of the canonical t-structure gives the assertion.
-The empty scheme causes no exception: all module sheaves on it are zero. -/
+Source: Stacks Project, Tag 0A6H, proof of clause (1). -/
 theorem derivedLocallyBoundedBelowGlobal (Y : Scheme.{u}) [IsNoetherian Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y)

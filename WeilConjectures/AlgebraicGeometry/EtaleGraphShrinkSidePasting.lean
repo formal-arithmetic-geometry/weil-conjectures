@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting
 
 /-! # Side-square pasting for a shrinking graph neighborhood
 
-Source: Stacks Project, Tag 0F7J, graph neighborhood pasting
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F7J, graph neighborhood pasting.
 -/
 
 @[expose] public noncomputable section
@@ -56,21 +55,7 @@ private theorem cancel_side₂
     Category.comp_id] using hc.symm
 
 /-- The side comparison respects an open shrinking of its proper graph.
-Source: Stacks Tag 0F7J, product-graph extension, side-square calculation
-(auxiliary; not a blueprint node).
-
-Proof: let D_H and D_S be the Cartesian side squares over e and e v, respectively.
-The induced neighborhood square D_v is Cartesian by graphNeighborhoodShrink_isPullback,
-and D_S is D_v pasted horizontally before D_H. The identity-top graph square E has
-bottom edge graphNeighborhoodShrink and proper edges the two graph lifts. Its vertical
-pasting with D_v is the identity-top graph square for a', v, a. Apply horizontal pasting
-to D_S and vertical pasting to this latter square, using the Cartesian normalization
-of the selected proper/open exchange in both equations. Invert the graph triangle,
-cancel the common exchange for D_v, and use naturality of D_H to move that triangle
-past D_H. Insert the proper direct-image compositors and the open compositor. The
-composite-adjunction normalization and associativity identify the two boundaries with
-the displayed side words. This is equality of natural transformations on the unbounded
-derived categories, without passing to stalks. -/
+Source: Stacks Tag 0F7J, product-graph extension, side-square calculation. -/
 theorem etaleGraphShrinkSidePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

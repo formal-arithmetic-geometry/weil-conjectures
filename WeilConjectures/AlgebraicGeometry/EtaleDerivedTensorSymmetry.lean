@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 /-!
 # The canonical symmetry of the etale derived tensor product
 
-Source: Stacks Project, Tag 06YU, symmetry of the derived tensor product
-(blueprint: lem-kun-tensor-sym).
+Source: Stacks Project, Tag 06YU, symmetry of the derived tensor product.
 
 The recorded existence theorem forgets the canonical map. This interface exposes the actual
 braiding descended from the signed braiding of cochain complexes, without choosing an arbitrary
@@ -44,7 +43,7 @@ variable (C : Type u') [Category.{u + 1} C] [Abelian C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
 /-- The canonical signed symmetry, packaged before specialization to sheaves.
-Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym). -/
+Source: Stacks Project, Tag 06YU. -/
 noncomputable def canonicalTensorSymmetry :
     curriedTensor (DerivedCategory C) ≅ (curriedTensor (DerivedCategory C)).flip :=
   letI : BraidedCategory (DerivedCategory C) := by exact braidedCategory' C
@@ -55,7 +54,7 @@ end DerivedCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical symmetry of the unbounded derived tensor bifunctor, natural in both variables.
-Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym).
+Source: Stacks Project, Tag 06YU.
 
 Construction: the homotopy-category braiding is the signed swap in bidegree `(p,q)`, with
 sign `(-1)^(p*q)`. Descend that braiding through the K-flat localization using

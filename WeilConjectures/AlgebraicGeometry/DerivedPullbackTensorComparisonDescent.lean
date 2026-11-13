@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.KFlatBifunctorIsoDescent
 
 /-! # Natural tensor comparison of derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-derived-pullback-tensor-comparison-descent).
+Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
 -/
 
 @[expose] public section
@@ -75,24 +74,7 @@ noncomputable local instance tensorDescentPullbackDescentQLax (S : Scheme.{uMode
 of bifunctors, with its prescribed computation on K-flat pairs. This statement contains
 neither associativity nor unit coherence; no underived monoidal structure is needed.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; steps 1 and 2 of the parent descent proof.
-(blueprint: lem-pc-derived-pullback-tensor-comparison-descent).
-Proof: identify F with the recorded tensor pullback using hF and hmap. Its termwise
-functor preserves K-flat complexes. Compare the supplied left-derived counit with the
-recorded K-flat computation using uniqueness of left-derived functors; its components
-on K-flat objects are isomorphisms. Tensor products of K-flat complexes are K-flat,
-and the localization tensorator is invertible on such pairs, also after applying F.
-For a K-flat pair put A = L(mu_Q), B = epsilon followed by Q(phi), and
-C = (epsilon tensor epsilon) followed by mu_Q. All three are isomorphisms; for B use
-hiso. The comparison is C followed by B inverse followed by A inverse, so mu;A;B=C.
-Naturality of epsilon, phi, and the localization tensorator shows this is natural on
-K-flat complexes and compatible with quasi-isomorphisms between them. Resolve each
-argument by a K-flat complex. Localization of this resolving class extends the
-comparison to a transformation of the two derived bifunctors. Apply the same descent
-to the inverse formula to obtain its inverse, with the two inverse identities checked
-on the resolving class. This gives the asserted natural isomorphism and equation.
-For the identity and empty scheme this is the same localization construction; no
-flatness hypothesis on the morphism of schemes is used. -/
+and section-derived-pullback; steps 1 and 2 of the parent descent proof. -/
 theorem derivedPullback_tensor_comparison_exists {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

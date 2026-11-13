@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-! # Descending the agreement open of a single local representative
 
-Source: Stacks Project, Tag 09XN, agreement-open construction before the covering argument.
-(blueprint: lem-weil-pbc-etale-fpqc-representative-open). -/
+Source: Stacks Project, Tag 09XN, agreement-open construction before the covering argument. -/
 
 @[expose] public section
 
@@ -28,31 +27,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Source: Stacks Project, Tag 09XN, paragraphs beginning "Let V" and
-"By construction", and Tag 09XM, the largest agreement-open universal property.
-(blueprint: lem-weil-pbc-etale-fpqc-representative-open).
-
-Proof:
-For the fixed V and t, form the largest agreement open on each T_j ×_S V
-between the unit image of t and the restriction of s_j. The prescribed double
-intersection equalities, transported using the unit-compatible composition
-isomorphisms and fibre-product symmetry and associativity, show that the opens
-have equal inverse images on all overlaps. Fpqc open descent gives an open U in V.
-On T_j ×_S U the two sections agree by the universal property of the agreement
-open. Unit naturality identifies the first section with the unit image of t|_U,
-and functorial restriction identifies the second with s_j restricted along the
-structure map. This gives the matching equation for every j.
-For the image inclusion, apply unit naturality to a and π, then restrict along
-the diagonal over Z. Applying this composite to hrep yields equality of the
-canonical inverse-image sections used by the agreement-open universal property,
-so a.left factors through the i-th agreement open. Since that open is the inverse
-image of U, the map Z → V has image in U. Conversely, to recover the displayed
-matching equation from equality of canonical sections, evaluate at every geometric
-point of the base change of W. The inverse-image stalk comparison sends the two
-germs to the original section germs; its bijectivity reflects their equality.
-Geometric-germ extensionality gives the matching equation on that whole object.
-This lemma treats one representative only. It asserts neither a covering of S
-nor compatibility among distinct representatives. Empty Z has empty image and
-places no constraint on U; empty V is handled by its unique open. -/
+"By construction", and Tag 09XM, the largest agreement-open universal property. -/
 theorem etaleFpqcSections_descend_representative_open
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

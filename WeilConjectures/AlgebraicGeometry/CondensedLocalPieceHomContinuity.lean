@@ -147,32 +147,7 @@ open scoped CategoryTheory.Obj
 
 /-- Extension by zero of a locally finitely presented condensed field module has
 filtered derived Hom continuity on uniformly bounded below complexes.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free and costalk steps.
-(blueprint: lem-weil-pbc-condensed-local-piece-hom-continuity)
-
-Proof: write the piece as i_*j_!P[0], where i is closed and j is a quasi-compact open.
-The noetherian closed subscheme and its open are qcqs. Local finite presentation over
-these condensed finite field coefficients gives pro-etale local finite freeness.
-The actual internal Hom functor Mod.ihom P preserves all small colimits by finite
-free trivializations and joint conservativity of covering restrictions. Its right
-adjunction gives exactness. The derived evaluation formula identifies Hom(P[0],L[n])
-with the nth derived sections of termwise internal Hom. This termwise functor preserves
-the common lower bound. Apply qcqs global sections continuity to the resulting diagram.
-Transport the ringed-site module formulation to internal module objects with the same
-coefficient ring and evaluation
-pairing. The good-truncation cocone used by continuity maps termwise quasi-isomorphically
-to the original cocone; exact filtered colimits preserve this comparison.
-For the ambient diagram, adjunction identifies
-Hom(i_*j_!P[0],N[n]) with Hom(P[0],j^*Ri^!N[n]). Recollement expresses i_*Ri^!N as
-Cone(N → Rk_*k^*N)[-1] for the complementary quasi-compact open k. Qcqs pushforward
-continuity and exact filtered colimits show that this cone commutes with the filtered
-colimit. The same recollement gives the common lower bound for Ri^!N; exact j^*
-also preserves it. Functorial bounded injective resolutions and good truncations give
-strict uniformly bounded below diagrams representing these derived images and their
-colimits. Include the bounded below derived categories in the ordinary derived categories
-when applying adjunction. Apply the locally free calculation to j^*Ri^!N. Naturality of the
-adjunction and of evaluation identifies every leg with the original cocone leg.
-An isomorphism of the first argument transports the resulting isomorphism. -/
+Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free and costalk steps. -/
 theorem condensed_local_piece_hom_continuity
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

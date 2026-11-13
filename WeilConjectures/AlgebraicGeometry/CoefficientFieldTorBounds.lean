@@ -12,7 +12,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-! # Bounded cohomology over a constant field has the same Tor bound
 
 Source: Stacks Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze Remark 6.3.2.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -23,15 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Over a constant field sheaf every module is flat, so a bounded object has the same
-Tor interval. Source: Stacks Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze Remark 6.3.2
-(auxiliary; not a blueprint node).
-
-Proof: use the homology bounds to put the derived object in the corresponding standard
-truncation interval. Truncate a cochain representative at both ends to obtain a strict
-bounded representative. Every term is flat by the constant-field flatness theorem, after
-identifying the site tensor with the existing monoidal tensor. Apply the bounded-flat-model
-criterion to this representative. The construction works for the zero object, an empty site,
-and either sign of the interval endpoints. -/
+Tor interval. Source: Stacks Tags 03ER, 08FC, 08G0 and 08G1; Bhatt--Scholze Remark 6.3.2. -/
 theorem coefficientFieldTorBounds {C : Type w} [SmallCategory C]
     (J : GrothendieckTopology C) (k : Type w) [Field k]
     (K : ConstantCompletion.D (ConstantCompletion.constant J k))

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffineTopTensorSections
 /-! # Normalized affine pullback models with an isomorphic starting chart
 
 Source: Stacks Project, Tag 01I6, Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5.
-(blueprint: lem-pc-affine-isomorphic-source-normalized-models).
 -/
 
 @[expose] public section
@@ -61,20 +60,7 @@ private noncomputable def affinePullbackTensorMap {A W : Scheme.{u}} (q : W ⟶ 
 
 /-- The canonical tensor comparison is bijective on affine schemes.
 Source: Stacks Project, Tags 01I9 (pullback of an associated module) and
-01IB (the affine quasi-coherent equivalence).
-
-Proof: Identify A with Spec Γ(A,O_A) and W with Spec S, using their canonical
-scheme-to-spectrum isomorphisms and the presentation ρ for W. Naturality of
-these charts and the equation ρ(r(b)) = q.appTop(b) identify q with Spec(r).
-By quasi-coherence, M is the associated sheaf of Γ(A,M) (Tag 01IB).
-Its pullback along Spec(r) is the associated sheaf of S ⊗_r Γ(A,M)
-(Tag 01I9). Taking global sections of the associated sheaf recovers this
-module (Tag 01IB). The resulting isomorphism sends b ⊗ m to
-ρ(b) times the pullback unit of m, by the unit formula of the tilde pullback
-comparison. The tensor universal property therefore identifies it with the
-explicit affinePullbackTensorMap above. Being this composite of isomorphisms,
-that map is bijective. The argument applies to the zero ring, zero modules,
-and arbitrary (not necessarily finitely presented) quasi-coherent modules. -/
+01IB (the affine quasi-coherent equivalence). -/
 private theorem affinePullbackTensorMap_bijective {A W : Scheme.{u}} [IsAffine A] [IsAffine W]
     (q : W ⟶ A) (M : A.Modules) (hMq : M.IsQuasicoherent)
     (S : CommRingCat.{u}) (r : Γ(A, ⊤) →+* S) (ρ : S ≃+* Γ(W, ⊤))
@@ -157,20 +143,7 @@ private theorem tensorMap_one_tmul {A W : Scheme.{u}} (q : W ⟶ A)
 /-- Normalized scalar-extension models for one affine pullback, starting
 from sections on an isomorphic affine chart. The starting equivalences are fixed
 before the destination chart, its coefficient ring, or its ring presentation.
-Source: Stacks Project, Tag 01I6, Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5.
-(blueprint: lem-pc-affine-isomorphic-source-normalized-models).
-
-Proof: Since s is an isomorphism, its pullback unit is bijective on global
-sections. Take its inverse as δM and δN. This choice depends only on s,M,N.
-Identify A and T with the spectra of their section rings, and identify W with
-Spec S using ρ. The displayed ring equation says precisely that q corresponds
-to r composed with s.appTop. Apply affine quasi-coherent reconstruction to M,N
-and the scalar-extension/pullback identification. Changing coordinates by s
-and ρ gives eM,eN. On tensors this map is b tensor m mapped to ρ(b) times the
-pullback of δ(m); thus it is semilinear and has the stated unit formula. Its
-inverse is the inverse affine reconstruction comparison, so it is an additive
-equivalence, even for zero rings and zero modules. There is no finite-presentation
-hypothesis. -/
+Source: Stacks Project, Tag 01I6, Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5. -/
 theorem affine_isomorphic_source_normalized_models
     {A T : Scheme.{u}} [IsAffine A] (s : T ⟶ A) [IsIso s]
     (M N : A.Modules) (hMq : M.IsQuasicoherent) (hNq : N.IsQuasicoherent) :

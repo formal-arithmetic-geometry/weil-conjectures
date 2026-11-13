@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local truncation comparison for unbounded direct image
 
-Source: Stacks Project, perfect.tex, Tag 08D5, final paragraph
-(blueprint: lem-pc-derived-direct-image-affine-truncation-comparison).
+Source: Stacks Project, perfect.tex, Tag 08D5, final paragraph.
 -/
 
 @[expose] public section
@@ -55,23 +54,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 isomorphism on any fixed higher direct image. The assertion concerns the actual
 canonical map, and does not assert quasi-coherence of either higher direct image.
 Source: Stacks Project, perfect.tex, Tag 08D5, final paragraph; cohomology.tex,
-Tag 08BS for open restriction
-(blueprint: lem-pc-derived-direct-image-affine-truncation-comparison).
-
-Proof:
-1. Put V = f^-1(U). The induced morphism V -> U is qcqs, by base change along
-   the open immersion U -> Y. The affine scheme U is quasi-compact.
-2. Exact restriction of E to V has quasi-coherent cohomology. Choose a
-   K-injective representative of E; kInjective_of_restrict_open says that
-   its restriction is K-injective. Use schemeDerivedDirectImage_openRestriction
-   to identify the restriction of Rf_*E with R(f|V)_*(E|V), naturally in E.
-3. Apply exists_schemeDerivedDirectImage_uniform_truncation_bound, its second
-   clause, to V -> U, E|V and q, and choose n at least the resulting n0.
-   This makes the q-th higher direct image of the truncation projection an iso.
-4. Exact restriction commutes with canonical truncation and its projection,
-   by the standard t-structure, and with homology. Transport the iso of step 3
-   through these natural comparisons. It is precisely the displayed map.
--/
+Tag 08BS for open restriction. -/
 theorem exists_isIso_schemeHigherDirectImage_truncGE_over_affine
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

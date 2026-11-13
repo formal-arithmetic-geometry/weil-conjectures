@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoodsPointwi
 /-!
 # Étaleness along a closed subscheme from its infinitesimal neighbourhoods
 
-Source: More on Morphisms, Lemma 0A43 (part (2))
-(blueprint: lem-weil-pbc-etale-infinitesimal-neighbourhoods).
+Source: More on Morphisms, Lemma 0A43 (part (2)).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: More on Morphisms, Lemma 0A43 (part (2));
-(blueprint: lem-weil-pbc-etale-infinitesimal-neighbourhoods).
+/-- Source: More on Morphisms, Lemma 0A43 (part (2));.
 
 Given a finite type morphism between locally Noetherian schemes and a closed subscheme
 of the target, if every infinitesimal base change is étale, then the morphism is étale

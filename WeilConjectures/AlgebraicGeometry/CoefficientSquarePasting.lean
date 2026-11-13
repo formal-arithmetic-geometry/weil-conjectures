@@ -97,21 +97,7 @@ end
 
 /-- Restricting a coefficient map across two commutative squares agrees with
 restriction across their pasted rectangle, in the composition coordinates.
-Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback.
-(blueprint: lem-pc-coefficient-square-pasting).
-
-Proof: Expand the two square maps. Use functoriality to distribute the outer
-pullback over the first square's four factors. Naturality of the comparison
-c(r,p) moves the pulled-back coefficient morphism to the end. Apply the
-associativity law to (t,a,w) and (r,q,w) to merge the source factors and to
-(r,p,g) to merge the target factors. The equations h and h2 identify the
-resulting composite scheme morphisms with the rectangle. Naturality of
- eqToHom combines their transports into the transport along hrect; proof
-irrelevance identifies the proofs of this equality. Cancel the intermediate
-comparison and its inverse. The remaining factors are exactly the rectangle
-map preceded by the source composition and followed by the inverse target
-composition. This uses no pullback universal property or geometric hypothesis,
-so also covers empty schemes, zero coefficients and identity arrows. -/
+Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback. -/
 theorem coefficient_square_pasting
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

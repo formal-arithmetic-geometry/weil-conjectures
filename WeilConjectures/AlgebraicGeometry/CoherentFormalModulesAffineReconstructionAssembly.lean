@@ -23,21 +23,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible affine reconstruction projections assemble into a natural isomorphism.
 Source: Stacks Project, Cohomology of Schemes, Lemma 087W, affine correspondence and
-M/I^n M = M_n; Algebra, Lemma 05G8, surjective finite-module endomorphisms.
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-reconstruction-assembly).
-
-Proof: Transpose each projection through the tilde/Gamma adjunction. The target is
-annihilated by the required ideal power, so multiplication naturality factors this
-transpose through the sheaf quotient. The adjunction triangle says its sections map,
-precomposed by the unit and quotient projection, is the given surjection. Hence the
-quotient comparison is surjective on sections. The objectwise isomorphism gives a
-separate isomorphism between its source and target. Composing the comparison with
-that isomorphism's inverse gives a surjective endomorphism of the finite section
-module of the coherent target, which is bijective by 05G8. Thus the comparison is
-invertible on sections, and the affine counit equation makes it invertible on sheaves.
-For transitions and morphisms, precompose with the cokernel projection. The resulting
-equalities are respectively naturality of p and hnatural, transported by tilde and
-the counit. Cancel the projection and assemble twice with NatIso.ofComponents. -/
+M/I^n M = M_n; Algebra, Lemma 05G8, surjective finite-module endomorphisms. -/
 theorem coherentFormalModules_affine_reconstruction_assembly
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

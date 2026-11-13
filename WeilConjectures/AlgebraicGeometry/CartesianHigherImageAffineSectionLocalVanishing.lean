@@ -149,7 +149,6 @@ private theorem exists_rawSectionsComparison_local_zero_sieve
 /-- A transitioned cartesian higher-image section vanishes when it vanishes on a finite
 etale cover. This is the sheaf-separatedness part of the affine-section argument.
 Source: Stacks Project, Tag 0EYM, second proof, injectivity on affine etale objects.
-(blueprint: lem-sc-cartesian-higher-image-affine-section-local-vanishing)
 -/
 theorem cartesianHigherImage_section_eq_zero_of_finite_cover
     {k : Type u} [Field k]
@@ -188,15 +187,7 @@ theorem cartesianHigherImage_section_eq_zero_of_finite_cover
 
 
 /-- Local sieve form of affine-section eventual vanishing.
-Source: Stacks Project, Tag 0EYM, second proof, affine section reduction.
-Proof: local surjectivity of the derived-Hom-to-homology comparison lifts the
-section, and local injectivity at the target makes its derived image zero after
-refinement. Extract a finite affine etale cover. Apply eventual vanishing of the
-finite family of raw derived classes at one common stage. Naturality of homology
-and its shift comparison then gives zero for the transitioned sections. Close the
-finite covering family under precomposition to obtain the required sieve.
-(blueprint: lem-sc-cartesian-higher-image-affine-section-local-vanishing)
--/
+Source: Stacks Project, Tag 0EYM, second proof, affine section reduction. -/
 theorem cartesianHigherImage_affine_section_local_zero_sieve
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]
@@ -277,8 +268,7 @@ theorem cartesianHigherImage_affine_section_local_zero_sieve
 /-- Extract a finite cover from the covering sieve of eventual local vanishing.
 Source: Stacks Project, Tag 0EYM, second proof, part (2).
 The affine test object is quasi-compact, so the sieve has a finite affine etale
-refinement; reindex that family in the base universe and retain its vanishing.
-(blueprint: lem-sc-cartesian-higher-image-affine-section-local-vanishing). -/
+refinement; reindex that family in the base universe and retain its vanishing. -/
 theorem exists_cartesianHigherImage_affine_section_local_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

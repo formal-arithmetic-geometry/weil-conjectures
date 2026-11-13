@@ -22,17 +22,7 @@ namespace WeilConjectures.DerivedTotalResolution
 variable {R : Type u} [Ring R]
 
 /-- Cycle lifting at column zero makes the total augmentation surjective on homology.
-Source: Stacks Project, Homology, Tag 09IZ, proof and exactness of augmented kernels.
-(blueprint: lem-pc-derived-total-resolution-homology-surjective)
-
-Proof. Represent a degree n homology class of M by a cycle m. Surjectivity
-of the augmentation on cycles gives a cycle x in (K.X 0)^n mapping to m.
-Include x into the column-zero summand of the total complex. Its vertical
-differential is zero since x is a cycle; its horizontal differential
-lands in the zero column K.X 1, and hence is also zero. Thus it is a total
-cycle. The augmentation identity on column zero says its image is m, so
-its homology class is a preimage of the given class. This argument works
-for every integer n and requires neither boundedness nor the other exact rows. -/
+Source: Stacks Project, Homology, Tag 09IZ, proof and exactness of augmented kernels. -/
 theorem total_resolution_homology_surjective
     (M : CochainComplex (ModuleCat R) ℤ)
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleKInjectiveUnitLeray
 /-! # K-injective computation of the étale pullback abutment
 
 Source: Stacks Project, Tags 015J, 015K, 070I and 08BJ.
-(blueprint: lem-weil-pbc-kinjective-pullback-abutment).
 -/
 
 @[expose] public section
@@ -30,20 +29,7 @@ namespace AlgebraicGeometry.Etale
 unit--Leray map, after the canonical resolution identifications.
 Source: Stacks Project, Tag 015J (computation by an injective total resolution),
 Tag 015K (independence of comparison maps), and Tags 070I and 08BJ
-(K-injective comparison and direct image).
-(blueprint: lem-weil-pbc-kinjective-pullback-abutment).
-
-Proof: Apply the underived adjunction to the comparison j to obtain a map
-I -> f_* J. Its composite with the resolution of K is homotopic to the
-adjoint of v followed by the resolution of L. Pushforward preserves
-K-injectives because its left adjoint is exact. Thus this adjoint comparison
-computes the derived unit followed by Rf_*(v). Apply RΓ_X and the Leray
-isomorphism RΓ_X Rf_* ≅ RΓ_Y. On K-injective complexes their defining units
-are isomorphisms and naturality identifies the resulting map with Γ applied
-to the adjoint comparison, or equivalently the degreewise unit followed by
-Γ_Y(j). This is w by its component formula. Homotopic maps have equal maps
-in the derived category. Finally apply H^n and the canonical resolution
-isomorphisms; their factors are exactly resolutionEtaleCohomologyIso. -/
+(K-injective comparison and direct image). -/
 theorem etaleKInjective_pullback_abutment
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

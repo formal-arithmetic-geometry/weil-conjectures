@@ -25,7 +25,6 @@ namespace LinearMap
 
 /-- Products of scalar quasi-inverses annihilate kernel and cokernel.
 Source: Stacks Project, Remark 0888, final scalar-composite argument.
-(blueprint: lem-weil-pbc-formal-annihilation-affine-limit-criterion)
 -/
 theorem annihilated_of_scalar_composites
     {A : Type u} [CommRing A] (K : Ideal A) (t : ℕ)
@@ -66,7 +65,6 @@ level. Their compatibility with transition maps makes them a map on inverse
 limits; the two scalar composite identities are then checked by the limit
 projections. This is the intermediate scalar-composite assertion used by the
 annihilation criterion.
-(blueprint: lem-weil-pbc-formal-annihilation-affine-limit-scalar)
 -/
 abbrev affineLimitModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I)
@@ -144,7 +142,6 @@ kernel makes the map independent of the chosen lift, while annihilation of the
 cokernel provides a lift. Naturality of the transition maps gives compatibility.
 The two composite identities follow by checking every limit projection.
 Source: Stacks Project, Remark 0888, final paragraph.
-(blueprint: lem-weil-pbc-formal-annihilation-affine-limit-scalar)
 -/
 theorem coherentFormalModule_affine_limit_scalar_composites
     (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)

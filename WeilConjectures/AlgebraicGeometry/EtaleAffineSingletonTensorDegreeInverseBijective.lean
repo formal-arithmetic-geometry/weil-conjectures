@@ -23,7 +23,6 @@ noncomputable section
 
 /-- A normalized affine singleton tensor comparison homomorphism is bijective.
 Source: Stacks Project, Tag 03P2, affine tensor calculation.
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-bijective)
 The affine sections and tensor-generator argument identifies the homomorphism on
 all additive generators with the canonical affine comparison, which is bijective.
 -/

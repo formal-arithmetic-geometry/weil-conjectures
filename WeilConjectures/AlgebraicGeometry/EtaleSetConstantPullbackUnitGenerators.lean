@@ -12,7 +12,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Constant comparison compatibility
 
 Source: Stacks Project, Tags 03CB, 03CC, 0B65, and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-pullback-unit-generators).
 -/
 
 @[expose] public section
@@ -24,16 +23,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The inverse constant comparison preserves a unit-pulled generator.
-Source: Stacks Project, Tags 0B65 and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-pullback-unit-generators).
-Proof: the defining left-adjoint uniqueness equation identifies the composite
-constant-sheaf and inverse-image unit with the constant unit at the terminal object,
-using the canonical isomorphism from the pulled terminal object. Naturality of the
-sheafification unit restricts the equal-valued generator to any object. Naturality
-of the inverse-image unit and of the comparison then restricts the terminal equality
-along the unique map from W to the terminal object. The terminal comparison commutes
-with these unique maps by terminality. Cancel the forward comparison to obtain the
-inverse-comparison formula. This also works for empty A and empty schemes. -/
+Source: Stacks Project, Tags 0B65 and 03P5. -/
 theorem etaleSetConstantPullbackUnitGenerators
     (P U : Scheme.{u}) (h : U ⟶ P) (A : Type (u + 1)) (W : P.Etale) (e : A) :
     (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous

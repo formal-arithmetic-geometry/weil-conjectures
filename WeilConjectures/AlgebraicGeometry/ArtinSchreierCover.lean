@@ -28,8 +28,8 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Properties
 
 /-! # Artin–Schreier covers of global functions
 
-Source: blueprint, Fourier–Deligne transform, sk-lem-as-properties,
-lem-fd-as-cover; Stacks Project, Tag 0A3J (blueprint: lem-fd-as-cover).
+Source: Fourier–Deligne transform, sk-lem-as-properties,
+lem-fd-as-cover; Stacks Project, Tag 0A3J.
 
 The cover is constructed by base change from the polynomial quotient over the global
 functions. Its affine presentations identify it with the relative spectrum in the source.
@@ -47,21 +47,21 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The equation defining the Artin–Schreier cover.
-Source: blueprint, lem-fd-as-cover, first sentence (blueprint: lem-fd-as-cover). -/
+Source: lem-fd-as-cover, first sentence. -/
 def artinSchreierCoverPolynomial (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Polynomial Γ(X, ⊤) :=
   Polynomial.X ^ p - Polynomial.X - Polynomial.C f
 
 /-- The Artin–Schreier cover of `f`, as a scheme over `X`. This is the base change along
 `X.toSpecΓ` of the spectrum of the actual quotient ring `Γ(X)[T]/(T^p-T-f)`.
-Source: blueprint, lem-fd-as-cover, first sentence (blueprint: lem-fd-as-cover). -/
+Source: lem-fd-as-cover, first sentence. -/
 def artinSchreierCover (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) : Over X :=
   Over.mk (pullback.fst X.toSpecΓ
     (Spec.map (CommRingCat.ofHom
       (algebraMap Γ(X, ⊤) (AdjoinRoot (artinSchreierCoverPolynomial p X f))))))
 
 /-- The class of `T` on the Artin–Schreier cover, pulled back from its quotient-ring model.
-Source: blueprint, lem-fd-as-cover, the coordinate `T` (blueprint: lem-fd-as-cover). -/
+Source: lem-fd-as-cover, the coordinate `T`. -/
 def artinSchreierCoverCoordinate (p : ℕ) (X : Scheme.{u}) (f : Γ(X, ⊤)) :
     Γ((artinSchreierCover p X f).left, ⊤) :=
   (pullback.snd X.toSpecΓ
@@ -77,30 +77,7 @@ The normalization on every open where such a function is constant specifies the 
 isomorphism, including on disconnected bases. The sheaf torsor is identified with the
 represented presheaf, and the action of each constant section is identified with the
 specified translation.
-Source: blueprint, lem-fd-as-cover (blueprint: lem-fd-as-cover).
-
-Proof: (1) The affine quotient has monic basis `1,T,...,T^(p-1)` by
-lem-weil-pbc-monic-quotient-free. Its derivative is `-1`, so
-lem-weil-pbc-standard-etale-monic-derivative gives étaleness and degree `p`.
-(2) Maps into the cover are roots, by lem-weil-pbc-morphism-into-affine-scheme,
-lem-asd-polynomial-quotient-hom-equivalence and lem-weil-pbc-scheme-morphism-gluing.
-(3) Translation preserves the equation since `a^p=a`, by
-lem-sc-field-artin-schreier-kernel; its inverse subtracts `a`.
-(4) Over an algebraically closed field every root is uniquely `r+a`, by
-lem-sc-artin-schreier-k. This proves simple transitivity and surjectivity.
-(5) Representability is a sheaf by lem-weil-pbc-small-etale-representable-presheaf-sheaf.
-Differences of roots are locally constant by lem-fd-frobenius-fixed-sections and
-lem-weil-pbc-constant-sheaf-sections-locally-constant. The cover trivializes this sheaf;
-lem-weil-pbc-etale-base-change-continuous supplies covers after pullback.
-(6) For an automorphism `g`, the difference `g*T-T` is a Frobenius-fixed function on `Y`.
-It commutes with all translations exactly when that function is invariant.
-(7) Invariant functions descend uniquely to the base: geometric transitivity gives
-constancy on fibres, and lem-weil-pbc-etale-morphism-open-map makes the descended function
-locally constant. Conversely, glue translations on its clopen fibres. Addition corresponds
-to composition. This gives the normalized centralizer isomorphism.
-(8) A geometric fibre proves faithfulness when the base is nonempty. On connected `Y`
-the difference function is constant, so all automorphisms are translations. Over an empty
-base the cover is empty and its automorphism group has one element. -/
+Source: lem-fd-as-cover. -/
 theorem artinSchreier_cover_properties (p : ℕ) [Fact p.Prime]
     (X : Scheme.{u}) (hchar : (p : Γ(X, ⊤)) = 0) (f : Γ(X, ⊤)) :
     IsFinite (artinSchreierCover p X f).hom ∧

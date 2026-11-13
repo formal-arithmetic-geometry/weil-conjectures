@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumMateCompatibility
 /-! # The base-change mate in affine spectrum coordinates
 
 Source: Stacks Project, Tags 0DJ8, 08HY and 0D5S.
-(blueprint: lem-pc-affine-spectrum-base-change-comparison).
 -/
 
 @[expose] public section
@@ -23,28 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Canonical spectrum coordinate transport identifies the actual base-change
-comparison followed by the given coefficient morphism. No stalk condition is used.
-
-Proof: write tY for the four canonical affine spectrum isomorphisms. Derived
-pullback of tY and its inverse are mutually inverse: compose the canonical
-pullback composition comparisons with the identity comparison. The pinned
-derived adjunction therefore identifies RtY_* with L(tY.inv)^*. Naturality of tY
-and these composition comparisons identify Rf_*K with LtS^* Rf0_*K0, and similarly
-Rf'_*K' with LtS'^* Rf0'_*K0'. Compose the former identification with the pullback
-comparison for g and tS to obtain eL; the latter gives eR. Expand the base-change
-map as the Hom transpose under Lf'^* adjoint to Rf'_* of the square pullback
-comparison followed by Lg'^* of the counit of f. Under the four equivalences,
-coherence of pullback composition identifies the square comparison with that
-for f0,f0',g0,g0'; naturality of adjunction counits identifies the following
-counit. Naturality of the Hom transpose then identifies the base-change mates.
-Finally apply naturality of the direct-image identification to phi. The map
-on spectrum coordinates is exactly affineSpectrumDerivedMorphism by its
-universal-composition definition, so the resulting equality is the displayed
-one, including the coefficient map. These are categorical identities for
-unbounded objects; empty schemes and zero rings require no separate argument.
-Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 08HY, counit definition of
-base change; Tag 0D5S, derived pullback composition.
-(blueprint: lem-pc-affine-spectrum-base-change-comparison). -/
+comparison followed by the given coefficient morphism. No stalk condition is used. -/
 theorem affineSpectrumCoordinates_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

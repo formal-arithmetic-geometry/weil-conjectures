@@ -17,11 +17,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option linter.unusedVariables false in
 /-- The factorization supplied by the core construction is bijective at the generic
 stalk once its stalk map is known to be surjective. Source: Stacks Project, Tag 01YL,
-final paragraph.
-(blueprint: lem-weil-pbc-coherent-ideal-patching-generic-embedding-stalk-bijective)
-Proof: combine the supplied surjectivity with monomorphy of the factorization; the
-remaining geometric verification that the stalk map is surjective is isolated in the
-core construction. -/
+final paragraph. -/
 theorem coherent_ideal_patching_generic_embedding_stalk_bijective
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

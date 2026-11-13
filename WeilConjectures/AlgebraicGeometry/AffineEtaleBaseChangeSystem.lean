@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # AffineEtaleBaseChangeSystem
 
 Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
-(blueprint: lem-weil-pbc-affine-etale-base-change-system).
 -/
 
 @[expose] public section
@@ -43,8 +42,7 @@ Proof (steps 1--4 of lem-weil-pbc-affine-etale-site-colimit):
    This gives continuity. Restriction to the affine site is a sheaf equivalence (04HR).
    Conjugate small-site inverse image by these equivalences to obtain the displayed
    adjunctions and finite-limit preservation for sheaves of Type u. The construction is
-   coefficient-universe independent; equivalences preserve finite limits.
-(blueprint: lem-weil-pbc-affine-etale-base-change-system). -/
+   coefficient-universe independent; equivalences preserve finite limits. -/
 theorem exists_affineEtale_baseChange_system
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -25,7 +25,7 @@ Source: blueprint lemma `det-wrp-cover-open-immersion`
 (literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
 det-wrp-cover-open-immersion.md and its `.proof.md`), with Stacks Project Tags
-035B, 0AVK, 05K0 and 0AB1 (blueprint: det-wrp-cover-open-immersion).
+035B, 0AVK, 05K0 and 0AB1.
 -/
 
 @[expose] public section
@@ -48,12 +48,11 @@ Source: blueprint lemma `det-wrp-cover-open-immersion`
 sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
 det-wrp-cover-open-immersion.proof.md, both paragraphs, and
 sk-lem-wrp-normal-geometric-cover.proof.md, second and third paragraphs);
-Stacks Project Tags 035B, 0AVK, 05K0 and 0AB1
-(blueprint: det-wrp-cover-open-immersion).
+Stacks Project Tags 035B, 0AVK, 05K0 and 0AB1.
 
 Proof (the six steps of the node):
 1. `X` is finite type over a field, hence Noetherian
-   (`lem-weil-pbc-finite-type-over-noetherian`); by `rem-pc-regular-normal` (2) the
+; by `rem-pc-regular-normal` (2) the
    Noetherian normal `X` is a finite disjoint union of normal integral clopen pieces, and
    nonempty connectedness leaves one, so `X` is integral.
 2. Affine étale charts `Spec B ⟶ Spec A ⊆ X` of `Y₁` are Noetherian
@@ -62,12 +61,11 @@ Proof (the six steps of the node):
    every point of `Y₁` a normal integral open neighbourhood (no quasi-compactness of `Y₁`).
 3. Hence `Y₁` is normal and reduced, its irreducible components are disjoint and open,
    and connectedness leaves one: `Y₁` is integral.
-4. The image of `p` is nonempty open (`lem-weil-pbc-etale-morphism-open-map`), so the
+4. The image of `p` is nonempty open, so the
    generic point of `Y₁` lies over that of `X`; the generic fibre has charts
    `(A ∖ 0)⁻¹ B`, nonzero domains with one common generic point
-   (`lem-sc-integral-function-field-affine-fraction`,
-   `lem-weil-pbc-fibre-product-affine-spectra`), and is a disjoint union of spectra of
-   finite separable extensions (`lem-weil-pbc-etale-fibre-discrete-separable-points`);
+, and is a disjoint union of spectra of
+   finite separable extensions;
    irreducibility leaves one, `Spec L`.
 5. `lem-fin-normalization-extension-finite` makes `X.normalizationIn L ⟶ X` finite.
 6. `lem-sf-integral-etale-normalization-open` (`integral_etale_normalization_open`)

@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 /-! # Fixed-degree affine Serre vanishing
 
 Source: Stacks Project, Tag 0B5T (4).
-(blueprint: lem-pc-e4-affine-restricted-twist-fixed-degree)
 -/
 
 @[expose] public section
@@ -118,24 +117,7 @@ private theorem exists_isZero_affine_tensorPow_degree
 
 /-- Fixed-degree Serre vanishing on the inverse image of one affine open.
 
-Source: Stacks Project, Tag 0B5T (4), used in the affine-local proof of Tag 02O1.
-(blueprint: lem-pc-e4-affine-restricted-twist-fixed-degree)
-
-Proof: Base change f to V. Properness gives a Noetherian source over the
-Noetherian affine base. Restriction preserves coherence, and the hypothesis
-provides an ample invertible module on this source. Apply Tag 0B5T (4) in the
-specified positive degree as follows. A positive power L^d comes from O(1)
-along an immersion into projective space; properness makes that immersion
-closed. For each residue r<d, the projection formula and affine closed-immersion
-cohomology comparison identify the dt+r twist with projective cohomology of
-i_*(F tensor L^r) tensor O(t). This pushforward is coherent. Projective Serre
-vanishing supplies a threshold t_r. The finite maximum T of these thresholds
-gives the bound d*T, since n=dt+r and n>=d*T imply t>=T. Open restriction commutes
-with tensor products and powers, identifying the coefficient module with
-F restricted tensor the nth power of L restricted. Transport cohomology
-vanishing through this isomorphism. For empty V or empty inverse image the
-module category is zero, so threshold zero works. No threshold uniform in
-cohomological degree is asserted here. -/
+Source: Stacks Project, Tag 0B5T (4), used in the affine-local proof of Tag 02O1. -/
 theorem exists_isZero_restricted_twist_moduleCohomology_degree
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f]
     (F : X.Modules) [F.IsQuasicoherent] (hF : RingedSpace.IsCoherent X.toRingedSpace F)

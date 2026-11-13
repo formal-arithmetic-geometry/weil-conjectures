@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Filtered.Connected
 /-! # Etale cohomology of limits of schemes
 
 Source: Stacks Project, Etale Cohomology, Theorem 59.51.3 (Tag 09YQ), and
-Limits, Lemma 32.2.1 (Tag 01YW)
-(blueprint: lem-weil-pbc-etale-cohomology-limit-of-schemes).
+Limits, Lemma 32.2.1 (Tag 01YW).
 
 The object isomorphisms present diagrams on the varying sites as ordinary functors.
 The equations on their arrows and on the cocone legs specify the canonical comparison.
@@ -38,33 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 
 /-- Cohomology continuity for a system of abelian sheaves on a directed inverse system
-of qcqs schemes with affine transition maps. Source: Stacks Project, Tag 09YQ
-(blueprint: lem-weil-pbc-etale-cohomology-limit-of-schemes).
-
-Proof:
-1. Inverse-image composition (lem-weil-pbc-inverse-image-composition) and its coherence
-   turn the pulled-back sheaves into the diagram `G`. Cohomology pullback functoriality
-   (lem-weil-pbc-cohomology-pullback-functorial) gives the diagram `H` and cocone `B`.
-2. Restrict to any cofinal tail of the directed set using
-   lem-weil-pbc-colimit-initial-full-subcategory and lem-weil-pbc-limit-affine-transition.
-3. For affine stages use lem-weil-pbc-affine-etale-site-topos and
-   lem-weil-pbc-affine-etale-site-colimit to pass to the colimit of affine etale sites.
-   Direct images agree on affine objects, so uniqueness of left adjoints identifies
-   inverse images, compatibly with units and composition.
-4. Apply lem-weil-pbc-cohomology-colimit-of-sites at the final affine object and transport
-   the cohomology comparison back across the equivalence. Cofinality gives the full diagram.
-5. Restrict to quasi-compact opens at a stage. Limits commute with these restrictions,
-   and inverse image preserves colimits; hence the restricted data have the same form.
-6. Mayer-Vietoris and its pullback compatibility (lem-weil-pbc-etale-mayer-vietoris and
-   lem-weil-pbc-etale-mayer-vietoris-pullback), exact filtered colimits of abelian groups
-   (lem-weil-pbc-filtered-colimit-abelian-groups-exact), and lem-weil-pbc-five-lemma
-   show that the result glues across two such opens.
-7. Induct on a finite affine cover in the separated case; intersections of affine opens
-   are affine by lem-weil-pbc-separated-affine-open-intersection.
-8. Induct on a finite affine cover in general. The intersection with one affine is a
-   quasi-compact separated open, handled by step 7. Step 6 finishes the induction.
-   The comparison throughout has exactly the legs prescribed by `hB`.
--/
+of qcqs schemes with affine transition maps. Source: Stacks Project, Tag 09YQ. -/
 theorem nonempty_isColimit_etale_cohomology_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -187,8 +160,7 @@ private theorem continuity_constant_pullback
 
 /-- The affine ring case: for a directed system of rings with colimit `C`, the compatible
 pullbacks of one abelian sheaf to `Spec C_i` satisfy continuity at `Spec C`.
-Source: Stacks Project, Tags 01YW and 09YQ
-(blueprint: lem-weil-pbc-etale-cohomology-limit-of-schemes).
+Source: Stacks Project, Tags 01YW and 09YQ.
 
 Proof (step 9 of the node): lem-weil-pbc-spec-colimit-limit gives the limit and affine
 transitions. Set F_i = v_i inverse image of G; inverse-image composition gives their

@@ -24,8 +24,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Splitting the support of a coherent module into two closed pieces
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD
-(blueprint: lem-weil-pbc-coherent-support-union-exact-sequence).
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD.
 -/
 
 @[expose] public section
@@ -95,24 +94,7 @@ private theorem power_quotient_stalk_zero {X : Scheme.{u}}
 /-- A coherent module with support `Z ∪ Z'` has a coherent submodule supported on `Z'`
 and coherent quotient supported on `Z`. The inclusion is a monomorphism `i`, and the
 quotient is its canonical cokernel. Support uses the inline nonzero-stalk convention.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD
-(blueprint: lem-weil-pbc-coherent-support-union-exact-sequence).
-
-Proof:
-1. Take the actual vanishing ideal K of Z. The zero-set theorem identifies its proper
-   stalk locus with its closed support, which is Z.
-2. On V = X minus Z', restrict F and K. Restriction identifies stalks, so the support
-   of F|V lies in the proper-stalk locus of K|V. The open V is Noetherian, hence
-   coherent_support_power_ideal_kills supplies t with (K|V)^t (F|V) = 0.
-3. The ideal-power restriction comparison gives (K^t F)|V = 0. Set G' = K^t F and
-   i its image inclusion. The ideal powers and F are quasi-coherent; their tensor
-   product and image are quasi-coherent. The coherent-submodule theorem gives
-   coherence of G' and cokernel i. The abelian cokernel sequence is short exact.
-4. At points of V the restriction-stalk comparison makes the stalk of G' zero,
-   proving its support is contained in Z'. Outside Z, the stalk ideal K_x is the
-   unit ideal. The ideal-power quotient stalk formula therefore identifies the
-   quotient stalk with F_x/F_x = 0. For t = 0 use the identity inclusion of the
-   structure sheaf and the product stalk formula directly. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD. -/
 theorem exists_coherent_submodule_of_support_union
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

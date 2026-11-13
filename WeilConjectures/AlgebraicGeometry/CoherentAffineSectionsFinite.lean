@@ -15,8 +15,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Finite affine sections of a coherent module
 
 Source: Stacks Project, Modules, Tag 01BV; Properties, Tag 01PB;
-Cohomology of Schemes, Tag 01Y8
-(blueprint: lem-weil-pbc-coherent-affine-sections-finite).
+Cohomology of Schemes, Tag 01Y8.
 -/
 
 @[expose] public section
@@ -28,17 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent module has finitely generated sections on each affine open.
-Source: Stacks Project, Tag 01Y8, proof, using Tags 01BV, 01BO and 01PB
-(blueprint: lem-weil-pbc-coherent-affine-sections-finite).
-
-Proof: Choose finite local generators of the coherent module and reindex each finite
-family by ULift (Fin n). Coherence makes the kernel of the generator epimorphism finite
-type. Choose finite local generators of that kernel. The over-site restriction preserves
-cokernels, finite free modules and epimorphisms; hence restricting the original generators
-and composing the relation maps gives finite presentations on the refined cover. Bind
-the local data and apply locality of finite presentation. Finally the proved source-library
-result finitePresentation_sections_of_isFinitePresentation gives finitely presented
-sections on the given affine open, which are in particular finitely generated. -/
+Source: Stacks Project, Tag 01Y8, proof, using Tags 01BV, 01BO and 01PB. -/
 theorem coherent_affine_sections_finite (X : Scheme.{u}) (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (U : X.Opens) (hU : IsAffineOpen U) : Module.Finite Γ(X, U) Γ(F, U) := by

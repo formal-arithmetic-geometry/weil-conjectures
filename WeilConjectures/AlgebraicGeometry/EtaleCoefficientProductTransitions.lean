@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The outgoing-arrow product transition, with components obtained by transposing
 projections along the inverse-image/direct-image adjunction. No witnesses are chosen.
-Source: Stacks Project, Tag 0EXZ, canonical component maps of ψ.
-(blueprint: lem-weil-pbc-etale-coefficient-product-transition-laws). -/
+Source: Stacks Project, Tag 0EXZ, canonical component maps of ψ. -/
 noncomputable def etaleCoefficientProductTransition
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -39,23 +38,7 @@ noncomputable def etaleCoefficientProductTransition
             (Injective.under (F t.1)))
 
 /-- The canonical outgoing-arrow product transitions satisfy the system laws.
-Source: Stacks Project, Tag 0EXZ, canonical maps ψ in its proof.
-(blueprint: lem-weil-pbc-etale-coefficient-product-transition-laws).
-
-Proof: project both sides to the factor indexed by g : j → k. For the identity law,
-the projection indexed by id followed by g is the g projection. The right unit law
-for lowerStarComp identifies the comparison with lowerStarId inverse. Transposition,
-the unit form of upperStarId, and naturality identify the resulting component with
-the identity comparison followed by this projection. For composition, the component
-indexed by h : k → l of the transition for f followed by g is the transpose of the
-projection indexed by f followed by g followed by h. Transpose the other side twice;
-projection of the product lifts removes the intermediate products, and naturality of
-the adjunction moves the projections through inverse images. The mate relation between
-upperStarComp and lowerStarComp identifies this double transpose with transposition
-along the composite. Associativity of lowerStarComp identifies its two comparisons.
-The diagram's map_comp equations supply all transports; map_id supplies the identity
-transport. Product extensionality concludes both laws. This argument does not need
-nonemptiness or directedness of I and does not use any coefficient transition φ. -/
+Source: Stacks Project, Tag 0EXZ, canonical maps ψ in its proof. -/
 theorem etale_coefficient_product_transition_laws
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) :

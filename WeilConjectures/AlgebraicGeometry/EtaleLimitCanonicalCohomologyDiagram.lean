@@ -65,20 +65,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Cohomology functoriality constructs the canonical comparison diagram in any degree.
 
-Source: Stacks Project, Tags 01F7 and 09YQ (canonical comparison map).
-(blueprint: lem-weil-pbc-etale-limit-canonical-cohomology-diagram).
-
-Proof: Put H_i = H^n(F_i) and take its arrows to be cohomology pullback followed
-by the map of the coefficient transition. The identity and composition equations
-for the coefficient system, pullback functoriality and naturality prove the functor
-laws. Put B.pt = H^n(L.pt) and take each leg to be pullback along the cone projection
-followed by the cohomology map of the colimit leg, after the given identification eG.
-The cone equation, pullback composition, coefficient naturality and naturality of
-L.ι prove the cocone equation. All object identifications are identity isomorphisms.
-This works for arbitrary degree and arbitrary cocone L; no exactness, vanishing,
-continuity, or connecting map enters the construction. In particular it includes
-zero and empty-scheme cohomology groups and does not require an index initial object.
--/
+Source: Stacks Project, Tags 01F7 and 09YQ (canonical comparison map). -/
 theorem etale_limit_canonical_cohomology_diagram
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

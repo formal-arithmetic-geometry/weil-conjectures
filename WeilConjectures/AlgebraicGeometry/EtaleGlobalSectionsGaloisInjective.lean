@@ -17,7 +17,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 # Global sections under the abelian Galois stalk equivalence
 
 Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
-(blueprint: lem-sc-etale-global-sections-galois-invariants).
 -/
 
 @[expose] public section
@@ -31,15 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The canonical terminal germ map, transported through the supplied stalk
 isomorphism, is injective.
 
-Source: Stacks Project, Tag 04JM, lemma-global-sections-point.
-(blueprint: aux-etale-global-sections-injective).
-
-Proof: Equality of germs is witnessed on a common pointed etale neighbourhood.
-Its structural map to Spec K is an etale surjection: its image is nonempty and
-Spec K has one point. It therefore covers the terminal object. The separatedness
-part of the sheaf condition makes restriction along this cover injective.
-The two terminal sections are equal. Transport through the additive stalk
-isomorphism preserves and reflects equality. -/
+Source: Stacks Project, Tag 04JM, lemma-global-sections-point. -/
 theorem etaleGlobalSections_galoisInvariants_injective
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

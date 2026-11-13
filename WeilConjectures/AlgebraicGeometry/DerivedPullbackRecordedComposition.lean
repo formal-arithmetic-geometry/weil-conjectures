@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionIsIso
 The universal functor and its counit are retained as one presentation. In particular,
 we do not select a fresh counit for an already fixed functor from the composition
 existence theorem. Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-pc-recorded-pullback-composition).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ variable [∀ Z : Scheme.{u},
 
 /-- The tensor functor and universal counit in the original derived-pullback presentation.
 The additive instance is included so all homotopy functors use the same presentation.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
   E : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
     SheafOfModules.{u} (moduleRings X.toRingedSpace)
@@ -58,7 +57,7 @@ once, rather than choosing a fresh counit for the fixed functor from a later exi
 statement. Its universal functor/counit pair is determined up to the compatible
 isomorphism used for derived computations. Irreducibility avoids unfolding the nested
 witness selections when using the field equations below.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 @[irreducible] noncomputable def recordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) :
     RecordedPullbackData f := by
   classical
@@ -67,21 +66,21 @@ Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-compositio
   exact ⟨E, hE, hEmap, hEa, ε, hε.1, hε.2.2⟩
 
 /-- Equality of the recorded tensor functor with the fixed tensor formula.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 theorem recordedPullbackData_E {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (recordedPullbackData f).E = Scheme.Modules.tensorPullback f :=
   CategoryTheory.Functor.ext (recordedPullbackData f).obj_eq
     (fun _ _ a ↦ (recordedPullbackData f).map_eq a)
 
 /-- Additivity of the tensor pullback in the original presentation.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 theorem recordedPullbackData_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (recordedPullbackData f).E.Additive :=
   (recordedPullbackData f).additive
 
 /-- Transport a counit along equality of its underived tensor functors.
 This is equality transport, with no selection of natural-transformation data.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 noncomputable def recordedTransportCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (E E' : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace)) [E.Additive] [E'.Additive]
@@ -122,7 +121,7 @@ private theorem transportCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact hε
 
 /-- The original counit, transported along equality of the tensor-formula functors.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 @[irreducible] noncomputable def recordedDerivedPullbackCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI : (Scheme.Modules.tensorPullback f).Additive := by
       rw [← recordedPullbackData_E f]
@@ -137,7 +136,7 @@ Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-compositio
     (recordedPullbackData_E f) (recordedPullbackData f).ε
 
 /-- The retained counit has the original universal property.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 theorem recordedDerivedPullbackCounit_universal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedPullback f).IsLeftDerivedFunctor (recordedDerivedPullbackCounit f)
       (HomotopyCategory.quasiIso
@@ -151,7 +150,7 @@ theorem recordedDerivedPullbackCounit_universal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (recordedPullbackData f).ε (recordedPullbackData f).universal
 
 /-- The retained counit computes pullback on K-flat complexes.
-Source: Stacks Project, Tag 06YJ (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 06YJ. -/
 theorem recordedDerivedPullbackCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlatTensor (R := Y.sheaf) P) :
@@ -168,7 +167,7 @@ theorem recordedDerivedPullbackCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
 attribute [local instance] recordedDerivedPullbackCounit_universal
 
 /-- The explicit composite of the original counits and the canonical tensor associator.
-Source: Stacks Project, Tag 0D5S (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 noncomputable def recordedDerivedPullbackCompositionLift {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ⟶ derivedPullback (f ≫ g) := by
@@ -196,7 +195,7 @@ noncomputable def recordedDerivedPullbackCompositionLift {X Y Z : Scheme.{u}}
         (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))))
 
 /-- The explicit lift is invertible by its K-flat computation.
-Source: Stacks Project, Tag 0D5S (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 theorem recordedDerivedPullbackCompositionLift_isIso {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) : IsIso (recordedDerivedPullbackCompositionLift f g) := by
   exact isIso_derivedPullbackCompositionLift
@@ -209,7 +208,7 @@ theorem recordedDerivedPullbackCompositionLift_isIso {X Y Z : Scheme.{u}}
 attribute [local instance] recordedDerivedPullbackCompositionLift_isIso
 
 /-- Composition of derived pullbacks, constructed from the retained original counits.
-Source: Stacks Project, Tag 0D5S (blueprint: lem-pc-recorded-pullback-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 noncomputable def recordedDerivedPullbackComposition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=

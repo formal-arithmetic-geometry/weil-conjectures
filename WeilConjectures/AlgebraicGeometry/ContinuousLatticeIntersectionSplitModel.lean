@@ -25,14 +25,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- On a compact splitting refinement, the global intersection is the inverse
 image of the rational diagonal inside the rationalized sum of the sheet lattices.
-Source: Bhatt--Scholze, Lemma 6.8.13; agent finite-sheet variant.
-(auxiliary; not a blueprint node)
-
-Proof. Take the finite-sheet coordinates of the two maps from splitData. Exact
-normalized inverse image preserves their image-pullback by imagePullbackMapIso.
-Transport its objects and maps along the three supplied coordinate isomorphisms
-using imagePullbackCongr. This gives exactly the asserted model; the mono and
-free cokernel data are those of the rational diagonal. -/
+Source: Bhatt--Scholze, Lemma 6.8.13; agent finite-sheet variant. -/
 theorem continuousLatticeIntersection_splitModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

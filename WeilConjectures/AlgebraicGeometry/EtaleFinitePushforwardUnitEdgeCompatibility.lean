@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 # Compatibility of base-changed edge maps with the pushforward of a unit
 
 Source: Stacks Project, Etale Cohomology, Lemma 09ZE
-(`lemma-efface-cohomology-on-closed-by-finite-cover`), proof, second paragraph
-(blueprint: lem-weil-pbc-finite-pushforward-unit-edge-compatibility).
+, proof, second paragraph.
 -/
 
 @[expose] public section
@@ -103,9 +102,8 @@ set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Base-changed exchange followed by the edge map carries the pushforward of the unit
 for `π` to pullback along `πZ`, followed by the canonical composition comparison.
-Source: Stacks Project, Lemma 09ZE (`lemma-efface-cohomology-on-closed-by-finite-cover`),
-proof, second paragraph; the compatibility used there is formulated by the node's agent
-(blueprint: lem-weil-pbc-finite-pushforward-unit-edge-compatibility).
+Source: Stacks Project, Lemma 09ZE,
+proof, second paragraph; the compatibility used there is formulated by the node's agent.
 
 Proof (the eight steps of the node):
 1. Set `A = f_* G`, `B = i^* A`, and `A' = (π ≫ f)_* π^* G`. The two cartesian

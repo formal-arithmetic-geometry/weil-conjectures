@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 # Quasi-coherent modules annihilated by a closed subscheme's ideal
 
 Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS,
-01BG, and 01B6 (blueprint: lem-weil-pbc-closed-immersion-pushforward-annihilated).
+01BG, and 01B6.
 -/
 
 @[expose] public section
@@ -35,23 +35,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 its ideal. A quasi-coherent module annihilated by that ideal has quasi-coherent pullback
 and invertible canonical unit, and finite type passes to that pullback.
 Here `i.ker.idealOfOpens V` is the ideal on every open, not only affine opens.
-Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS, 01BG, and 01B6
-(blueprint: lem-weil-pbc-closed-immersion-pushforward-annihilated).
-Proof:
-1. A closed immersion is affine. Apply `affinePushforward_baseChange` to the identity
-base-change square for quasi-coherence of the pushforward.
-2. Ideal membership makes the section zero under the subscheme inclusion; the image
-factorization makes it zero under `i.app V`. Restriction of scalars gives annihilation.
-3. Uniqueness of left adjoints identifies tensor pullback with Mathlib pullback, whose
-quasi-coherence instance is already proved.
-4. The annihilation hypothesis makes ideal multiplication `I ⊗ F ⟶ F` zero: use the
-sheafification adjunction and tensor induction to check this on pure tensors of sections.
-5. `closedImmersion_unit_quotient` gives an epimorphic unit with kernel the image of
-this multiplication. That image inclusion is zero, so the kernel universal property
-makes the unit mono. In the abelian module category it is therefore an isomorphism.
-6. Compare the adjunction used by the quotient lemma with the adjunction in this
-statement via `unit_leftAdjointUniq_hom_app`; invertibility transfers to the stated unit.
-7. Apply the finite-type conjunct of `tensorPullback_isFiniteType`. -/
+Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS, 01BG, and 01B6. -/
 theorem closedImmersion_pushforward_annihilated
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     (∀ (G : Z.Modules) [G.IsQuasicoherent],

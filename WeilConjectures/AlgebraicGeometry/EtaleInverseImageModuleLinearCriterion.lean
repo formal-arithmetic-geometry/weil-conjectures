@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleUnitLinearLift
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleCounitLinearLift
 /-! # Linearity under the etale abelian adjunction
 
-Source: Stacks Project, Tag 03D3
-(blueprint: lem-weil-pbc-inverse-image-module-linear-criterion). -/
+Source: Stacks Project, Tag 03D3. -/
 
 @[expose] public section
 
@@ -29,25 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The abelian adjunction preserves and reflects linearity for the transported action.
 Source: Stacks Project, Tag 03D3, with the omitted converse supplied by the
-naturality and triangle-identity calculation in the parent node, steps 2--5
-(blueprint: lem-weil-pbc-inverse-image-module-linear-criterion).
-
-Proof: the ring and abelian hom-equivalence hypotheses identify their underlying
-units and counits with those of the set adjunction. On the action of G, naturality
-of the set unit gives eta_G composed with mu_G equal to the direct image of the
-transported action composed with eta_O times eta_G. Compatibility with each product
-projection proves that eta_G is linear. For F, naturality of the set counit at mu_F
-reduces counit linearity to equality of two maps into L(O) times F. On the scalar
-projection this is the left triangle identity at O; on the module projection it is
-counit naturality. Thus the counit is linear too. Direct image preserves linear
-maps by sectionwise restriction of scalars along the ring unit, and LM preserves
-linear maps by its functorial underlying comparison e and the action hypothesis.
-The formulas beta = eta_G followed by R(alpha) and alpha = L(beta) followed by
-epsilon_F prove both directions of linearity. For each linear abelian map, its
-sectionwise scalar compatibility supplies a morphism
-of sheaves of modules via `PresheafOfModules.homMk`. Conversely every such morphism
-satisfies that scalar identity. These constructions give precisely the two
-existential lift conditions in the statement. -/
+naturality and triangle-identity calculation in the parent node, steps 2--5. -/
 theorem etaleInverseImageModuleLinearCriterion (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

@@ -177,26 +177,7 @@ private def closedPresentation {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersi
 /-- Closed direct image takes a classical sheaf to a classical sheaf, with independent
 coefficient size. No finite-generation, finite-set or Noetherian condition is imposed.
 Source: Stacks Project, Tag 09A6, lemma-morphism-comparison, in degree zero;
-Tag 09AA, lemma-closed-immersion
-(auxiliary; not a blueprint node).
-
-Proof: pull any affine etale presentation over X back along i. Its stages and
-vertex remain affine because a closed immersion and all its base changes are
-affine, and its stage structure maps remain etale. Base change is a right adjoint
-on the over-categories, so the pulled-back cone is still a limit. For an etale
-antecedent G of H, the comparison continuity theorem says that its section cocone
-on this presentation over Z is a colimit. This is exactly the section cocone of
-the direct image on the original presentation over X. Naturality transports the
-colimit and invertibility of the continuity maps through the given isomorphism.
-
-The inverse constant-scalar equivalence sends that direct image to an intrinsic
-constant-ring module. Its counit identifies the underlying fixed-scalar sheaf with
-the original direct image, so its continuity maps are invertible too. Apply the
-existing classical-module origin criterion, then the fixed-comparison isomorphism
-and the scalar-equivalence counit to obtain the required etale antecedent. Every
-construction keeps the A-action and takes place in max v (u+1). The pulled-back
-affine presentation works also for empty Z and full-image closed immersions that
-are not scheme isomorphisms. -/
+Tag 09AA, lemma-closed-immersion. -/
 theorem coefficientFixed_closed_directImage_essImage
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]

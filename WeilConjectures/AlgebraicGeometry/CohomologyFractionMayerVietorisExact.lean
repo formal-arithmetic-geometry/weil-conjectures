@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
 /-! # Exact Mayer--Vietoris row of fractions
 
 Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
-(blueprint: lem-sc-cohomology-fraction-mayer-vietoris-exact)
 -/
 
 @[expose] public section
@@ -185,21 +184,7 @@ private lemma fraction_kill_pair {X : Scheme.{uMV}} (L F : X.Modules)
 cohomology fractions, with the prescribed restriction, difference, and boundary formulas.
 This statement concerns only the upper row: it has no nonvanishing open or comparison map.
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB.
-Proof: Apply the given family to every nonnegative twist F tensor L^n. Naturality
-of its connecting transformations and of cohomology restriction makes the maps commute
-with every transition multiplication by s^b. Extend each map to direct sums; the
-fraction relations are preserved, so quotient descent gives a, b, and d, and the four
-formulas follow on generators. The fraction presentation is the sequential direct
-limit of these twists: finite sums can be moved to a common denominator, and zero
-means zero after some further transition. For a class in a kernel, represent it at
-one denominator and increase that denominator until its image is zero. Exactness of
-the twist at that denominator supplies a preimage. Its fraction gives the required
-preimage in the quotient. Conversely composites vanish at each twist and hence on
-fractions. If a degree-zero class maps to zero, increase its denominator to make both
-restrictions zero; injectivity at that twist makes the numerator zero. This proves
-injectivity of a 0 as well. Neither compactness nor quasi-coherence is needed.
-(blueprint: lem-sc-cohomology-fraction-mayer-vietoris-exact). -/
+Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB. -/
 theorem exists_cohomologyFraction_mayerVietoris_exact (X : Scheme.{uMV})
     (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))

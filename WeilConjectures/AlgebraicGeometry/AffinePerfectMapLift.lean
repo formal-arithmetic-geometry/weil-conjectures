@@ -19,8 +19,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Affine lifting of maps from perfect complexes
 
-Source: Stacks Project, Tag 08EH, Lemma 36.13.7
-(blueprint: lem-sc-affine-perfect-map-lift).
+Source: Stacks Project, Tag 08EH, Lemma 36.13.7.
 -/
 
 @[expose] public section
@@ -43,25 +42,7 @@ the open. Restriction to `U` is first to the localized site and then transported
 canonical equivalence with the open's site, so `α` is a map in `D(𝒪_U)`. The lifted
 object keeps every closed support of the original object, support meaning that every
 cohomology sheaf has zero stalks off the closed set.
-Source: Stacks Project, Tag 08EH, Lemma 36.13.7
-(blueprint: lem-sc-affine-perfect-map-lift).
-
-Proof:
-1. The perfect-source RHom of A into E' has quasi-coherent cohomology, with no
-   boundedness assumption on E' (lem-sc-rhom-supported-qcoherent). Restriction of
-   RHom to U (lem-sc-derived-internal-hom-restrict-open) and the global-sections
-   identification (lem-pur-rhom-global-sections) turn alpha into a degree-zero section.
-2. Cover U by finitely many principal opens. Apply
-   lem-sc-affine-perfect-open-represent-cohomology to this RHom object: a perfect
-   Koszul augmentation I to O_X, invertible on U, represents the section.
-3. Set A' = A tensor-derived I. It is perfect by lem-sc-perfect-derived-tensor-perfect.
-   The tensor-Hom adjunction (lem-sc-affine-perfect-derived-tensor-hom) gives gamma.
-   Tensor the augmentation with id_A to obtain beta. Restriction commutes with tensor
-   and RHom (lem-sc-derived-internal-hom-restrict-open). Naturality of the adjunction
-   identifies gamma restricted to U, composed with the inverse of beta, with alpha.
-4. At a point outside a closed support T of A, every cohomology stalk of A is zero, so
-   A is zero near that point. Tensoring with I keeps it zero, so A' is supported on T.
--/
+Source: Stacks Project, Tag 08EH, Lemma 36.13.7. -/
 theorem exists_perfect_map_lift_of_isAffine
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

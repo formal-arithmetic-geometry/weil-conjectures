@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemEmbeddin
 /-! # Injective embeddings of coefficient systems
 
 Source: Stacks Project, Tags 0EXZ and 04JC.
-(blueprint: lem-weil-pbc-etale-coefficient-injective-system).
 -/
 
 @[expose] public section
@@ -23,22 +22,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 /-- A compatible coefficient system admits a compatible stagewise injective embedding.
-Source: Stacks Project, Tag 0EXZ, product of direct images over all outgoing arrows.
-(blueprint: lem-weil-pbc-etale-coefficient-injective-system).
-
-Proof: Choose the canonical embedding of each F k into Injective.under (F k).
-At i take the product of their direct images over pairs (k, f : i to k).
-The component of ai at f is the adjoint of φ f followed by the embedding at k.
-The identity component is monic and therefore ai is monic. Direct image
-preserves injectives because its left adjoint is exact; products of injectives
-are injective. For f : i to j define ψ f componentwise at g : j to k by the
-projection to the factor indexed by f followed by g, followed by the canonical
-counit comparison from inverse image of that direct image to the direct image
-indexed by g. The composition comparison for direct image identifies these
-maps. Check product projections and transpose across the adjunction: the
-adjunction unit and counit equations and associativity of inverse-image
-comparisons give identity and composition, and hcomposition gives compatibility
-with ai. No cone point, cokernel or exact functor-category diagram is asserted. -/
+Source: Stacks Project, Tag 0EXZ, product of direct images over all outgoing arrows. -/
 theorem etale_coefficient_injective_system
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

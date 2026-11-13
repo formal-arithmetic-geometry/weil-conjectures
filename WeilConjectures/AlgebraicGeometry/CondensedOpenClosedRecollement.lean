@@ -111,8 +111,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 # Recollement with arbitrary condensed coefficients
 
 Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, (3.3), (3.4),
-Lemma 3.4 and the proof of Lemma 5.3(2); Stacks, Tags 09AH, 09BM, 09AA, 09BN
-(auxiliary; not a blueprint node).
+Lemma 3.4 and the proof of Lemma 5.3(2); Stacks, Tags 09AH, 09BM, 09AA, 09BN.
 -/
 
 @[expose] public section
@@ -647,47 +646,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the nested adjunction and instance witnesses requires a larger heartbeat budget.
 /-- Open-closed recollement on ordinary bounded below derived categories.
 Source: Hemo--Richarz--Scholbach, (3.3), (3.4), Lemma 3.4 and Lemma 5.3(2);
-Stacks, Tags 09AH, 09BM, 09AA, 09BN
-(auxiliary; not a blueprint node).
-Proof:
-1. Use abelian closed support, and lift its unit and counit isomorphisms to module
-objects through the monoidal adjunction and the equivalence given by the coefficient
-isomorphism. The open unit is invertible by linearizing the fully faithful extension
-by zero and composing with the scalar equivalence.
-2. The open restriction of a closed direct image vanishes: after forgetting its action,
-its sections on every open-site object are sections over the empty scheme. The other
-zero composite follows from the two adjunctions. The restrictions jointly detect zero
-objects by the supported-unit assertion. Applying them to cokernels proves exactness
-of closed pushforward.
-3. Construct i^!F as i^* applied to the kernel of F → j_*j^*F. The open restriction of
-this kernel vanishes. Closed support and full faithfulness identify maps into that
-kernel with maps into i^!F, giving the exceptional adjunction without choosing an
-arbitrary representing object.
-4. Derive the four adjunctions using the existing bounded-below derived API. Exact
-functors and their composition comparisons preserve full faithfulness. Restrict the
-shift-compatible exact adjunctions along the fully faithful inclusions into unbounded
-derived categories. For the two right derived functors choose the shift structures
-induced by their left adjoints. Right-derived homology vanishing gives left t-exactness.
-5. Exact functors commute with cohomology. Thus both vanishing composites and joint
-zero detection pass to bounded-below derived categories. Complete the closed unit or
-the open counit to a triangle: both restrictions kill its cone, so the appropriate
-supported object is in the essential image of the closed pushforward or open shriek.
-6. Apply the library's general recollement triangle theorem twice. Orthogonality
-makes each connecting arrow unique; the corresponding triangle morphisms prove
-naturality. Transport the triangle under each signed shift functor and use uniqueness
-again. This proves shift compatibility with the prescribed triangle signs.
-7. Obtain functorial injective embeddings by applying the K-injective replacement
-functor to complexes concentrated in degree zero and evaluating degree zero. Use the
-existing bounded injective-resolution theorem. For a prescribed common bound a first
-apply good truncation at a, then resolve. The truncation map is a quasi-isomorphism
-when the input is cohomologically bounded below by a. Injective terms are acyclic for
-each left exact functor, proving the two resolution-unit assertions.
-8. The inverse images preserve small colimits by their ordinary adjunctions.
-
-The sheaf-support input is
-lem-weil-pbc-proetale-abelian-closed-support; the resolution input is
-lem-weil-pbc-functorial-bounded-injective-resolution. Other arguments use proved
-library APIs and the explicit constructions in this module. -/
+Stacks, Tags 09AH, 09BM, 09AA, 09BN. -/
 theorem condensed_open_closed_recollement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}

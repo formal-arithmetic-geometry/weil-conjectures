@@ -12,7 +12,6 @@ import Mathlib.AlgebraicGeometry.Gluing
 /-! # Descent of compatible immersions
 
 Source: Stacks Project, Tags 01JB and 01JC; Tag 0BDL, gluing characterized patches.
-(blueprint: lem-sc-compatible-immersion-gluing).
 -/
 
 @[expose] public section
@@ -23,20 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A compatible local immersion has the expected open overlap with every other patch.
-Source: Stacks Project, Tag 0BDL, final paragraph, characterized local patches.
-(blueprint: lem-sc-compatible-immersion-gluing).
-
-Proof: Fix i,k and restrict W i to the inverse image of U k under j i followed
-by the inclusion into S. Its map to S factors through both U i and U k. The
-compatibility equivalence supplies a factorization through W k. Pairing that
-factorization with the open inclusion into W i gives a map to the Limits.pullback.
-Conversely the Limits.pullback projection to W i factors through this open restriction,
-since its structure map factors through U k. The two maps are inverse: cancel
-the monomorphism W k to S to compare their W k components, and cancel the open
-inclusion to compare the other composite. Thus the first Limits.pullback projection
-is, up to isomorphism, the inclusion of this open restriction. It is open and
-its range is exactly the inverse image of U k. Empty patches give the same
-argument without needing any points. -/
+Source: Stacks Project, Tag 0BDL, final paragraph, characterized local patches. -/
 private theorem compatibleImmersion_openOverlap (S : Scheme.{u})
     (U : S → S.Opens) (W : S → Scheme.{u})
     (j : ∀ s : S, W s ⟶ (U s).toScheme) (hj : ∀ s : S, IsImmersion (j s))
@@ -87,19 +73,7 @@ private theorem compatibleImmersion_openOverlap (S : Scheme.{u})
       Set.range_eq_univ.mpr hp.isoPullback.inv.surjective, Set.image_univ, Opens.range_ι]
 
 /-- Monomorphisms with open Limits.pullback projections admit a glued open atlas over the base.
-Source: Stacks Project, Tags 01JB and 01JC, gluing schemes along open subschemes.
-(blueprint: lem-sc-compatible-immersion-gluing).
-
-Proof: Use the pullbacks of the maps to the base as the overlap schemes. The first
-projection is open by hypothesis; the second is open by symmetry. The diagonal
-Limits.pullback projection is an isomorphism because each structure map is monic. Use
-Limits.pullback symmetry for the transition isomorphisms and the canonical permutation
-maps on triple pullbacks. Their factorization and cocycle identities follow by
-cancelling the monic projections. These data define Scheme.GlueData. Its glued
-scheme has open charts covering all points, and the overlap identity is its glue
-condition. The structure maps agree on the overlaps by the Limits.pullback condition,
-so they descend by morphism gluing to q. This construction also works for an
-empty index type: the glued scheme is empty and the assertions are vacuous. -/
+Source: Stacks Project, Tags 01JB and 01JC, gluing schemes along open subschemes. -/
 private theorem exists_gluedMonoOpenAtlas {I : Type u} (S : Scheme.{u}) (W : I → Scheme.{u})
     (f : ∀ i, W i ⟶ S) (hf : ∀ i, Mono (f i))
     (hopen : ∀ i k, IsOpenImmersion (Limits.pullback.fst (f i) (f k))) :
@@ -171,31 +145,7 @@ private theorem exists_gluedMonoOpenAtlas {I : Type u} (S : Scheme.{u}) (W : I �
 
 /-- Compatible immersions over a point-indexed family of opens descend to Cartesian charts.
 Source: Stacks Project, Tags 01JB and 01JC, applied to the characterized patches
-in the final paragraph of Tag 0BDL.
-(blueprint: lem-sc-compatible-immersion-gluing).
-
-Proof:
-1. Put q i = j i followed by the inclusion of U i in S. Restrict W i to
-   V(i,k) = the inverse image of U k under q i. Its map to S factors both through
-   U i and through U k. Compatibility with i,k gives a factor of the latter map
-   through j k, hence a map V(i,k) to W k over S. Its image lies in V(k,i), so it
-   factors through that open restriction. Reversing i,k gives the inverse: after
-   composition into S each composite is the original structure map, and q i and
-   q k are monomorphisms. The same cancellation proves uniqueness.
-2. These unique isomorphisms restrict to the triple intersections and satisfy
-   the cocycle identity, because both composites have the same map to S. The
-   restriction maps V(i,k) to W i are open immersions. Apply scheme gluing
-   (Tags 01JB and 01JC) to obtain Z with open charts e i from W i. The maps q i
-   agree on the overlaps, so open-cover morphism gluing gives a map q from Z to S.
-3. The image of e i is the inverse image of U i under q. One inclusion follows
-   from q composed with e i = q i. For the other, choose a chart e k containing
-   a point z whose image under q lies in U i. Its preimage in W k belongs to
-   V(k,i), whose comparison with V(i,k) identifies z with a point in the e i
-   chart. Thus the two open subsets coincide. Since e i and the inclusion of U i
-   are open immersions, this equality and the commutative square give the
-   asserted Cartesian square (the universal property of an open restriction).
-   For empty S the point-indexed family is empty; take the empty scheme for Z
-   and its unique map to S, and the chart assertions are vacuous. -/
+in the final paragraph of Tag 0BDL. -/
 theorem exists_gluedCompatibleImmersionCharts (S : Scheme.{u})
     (U : S → S.Opens)
     (W : S → Scheme.{u}) (j : ∀ s : S, W s ⟶ (U s).toScheme)

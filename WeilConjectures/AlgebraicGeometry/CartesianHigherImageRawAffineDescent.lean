@@ -33,25 +33,7 @@ noncomputable local instance cartesianHigherImageRawAffineDescentHasShift (T : S
 
 /-- A raw derived class on an affine etale test object factors through a pulled-back
 stage derived image. No assertion about arbitrary homology sections or germs is made.
-Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow; Tags 0EYL and 09YQ.
-(blueprint: lem-sc-cartesian-higher-image-raw-affine-descent).
-
-Proof: Reindex by a coinitial directed poset. The affine etale test object U is
-finitely presented over the qcqs limiting base. Descend it to an affine etale
-object U_i at a stage using 0EYL. On the tail at i, set U_j = U_i times_{S_i} S_j
-and Y_j = U_j times_{S_j} (X times_k S_j). These Y_j are qcqs, their transitions
-are affine, and their limit is U times_S (X times_k S). Their coefficient sheaves
-are the inverse images of F along Y_j to X. Derived adjunction and the free-sheaf
-sections adjunction identify the given raw morphism with degree-q cohomology on
-this limit. Cohomology continuity 09YQ represents it by a class on one Y_j. The
-same adjunction identifies that class with a morphism from Z[U_j][0] to the shifted
-stage derived image. Pull back this morphism to S, identify the free sheaf on the
-pullback of U_j with Z[U], and use exact pullback's single and shift comparisons.
-This gives t. Naturality of derived adjunction identifies its composite with the
-shift of cartesianDerivedImageMap with z, since that map is the exchange of the
-same cartesian square followed by coefficient composition. Finally return the
-stage j to the original index category. All equalities here are in D-plus, before
-homology or sheafification. Zero coefficients, q=0 and empty U are included. -/
+Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow; Tags 0EYL and 09YQ. -/
 theorem exists_cartesianHigherImage_raw_affine_factorization
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

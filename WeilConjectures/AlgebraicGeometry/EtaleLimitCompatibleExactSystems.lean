@@ -29,36 +29,7 @@ namespace AlgebraicGeometry.Etale
 set_option linter.unusedVariables false in
 /-- Compatible stage short exact sequences and their limit sequence, in continuation form.
 Source: Stacks Project, Tags 0EXZ and 09YP, construction of the injective system and
-its cokernel; exactness of filtered sheaf colimits.
-(blueprint: lem-weil-pbc-etale-limit-compatible-exact-systems).
-
-Proof: For each k take the canonical injective embedding F_k into Injective.under F_k.
-At i take the product of the direct images of these injectives over all arrows i to k.
-The adjunction transposes the coefficient transitions into product components. The
-identity component makes the induced embedding monic. Exact inverse image makes each
-factor injective and products preserve injectivity. Composition of arrows defines the
-product transitions; the canonical adjunction comparisons prove the identity and
-composition laws. Take the actual stage cokernels of the embeddings. Exact inverse
-image preserves their cokernel property, so cancelling the quotient epimorphisms proves
-the quotient transition laws. Pull all three systems to X using the cone comparisons,
-then take their actual filtered colimits. Exact filtered sheaf colimits give the limit
-short exact sequence. The stage coprojections induce the displayed morphisms of short
-complexes. More explicitly, transport the pulled-back embeddings and quotients
-through eG, eGI and eGR to natural transformations between the three diagrams.
-The coefficient squares and the cone comparisons prove their naturality. Their
-composite is zero objectwise. Exact inverse image gives stagewise short exactness,
-hence objectwise exactness gives a short exact sequence in the functor category.
-Apply the exact filtered colimit functor. Identify colimit G with the supplied
-L.pt by the unique colimit isomorphism. Compose the three object-identification
-inverses with the coprojections to obtain t. Naturality of the coprojections
-and the definitions of the induced colimit maps prove its two squares.
-The stage compatibility of the embedding and quotient makes the triples
-(phi, psi, phiR) morphisms r of short complexes. The middle component of each
-limit comparison t is the pulled-back middle coprojection, just as its outer
-components are the prescribed coprojections. This is only the construction:
-no vanishing or cohomology boundary is asserted. The product construction
-works for a singleton index and zero or empty-scheme systems as well.
--/
+its cokernel; exactness of filtered sheaf colimits. -/
 theorem etale_limit_compatible_exact_systems
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

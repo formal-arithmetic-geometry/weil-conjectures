@@ -12,15 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 /-!
 # Dimension of schemes of finite type over a field
 
-The dimension of a scheme is `topologicalKrullDim` of its underlying space (blueprint
-`def-kun-dimension`).
+The dimension of a scheme is `topologicalKrullDim` of its underlying space.
 
 ## Main results
 
-- `AlgebraicGeometry.topologicalKrullDim_lt_top_of_finiteType` (blueprint
-  `lem-kun-dimension-finite-type`): a scheme of finite type over a field has finite dimension.
-- `AlgebraicGeometry.topologicalKrullDim_pullback_eq_and_eq_of_isOpenImmersion` (blueprint
-  `lem-kun-dimension-extension`): the dimension of a scheme of finite type over a field is
+- `AlgebraicGeometry.topologicalKrullDim_lt_top_of_finiteType`: a scheme of finite type over a field has finite dimension.
+- `AlgebraicGeometry.topologicalKrullDim_pullback_eq_and_eq_of_isOpenImmersion`: the dimension of a scheme of finite type over a field is
   invariant under extension of the base field and under passing to a dense open subscheme.
 -/
 

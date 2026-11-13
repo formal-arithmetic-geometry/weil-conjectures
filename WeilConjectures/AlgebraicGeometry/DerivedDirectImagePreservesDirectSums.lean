@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCohomologyCoproduct
 /-! # Derived direct image preserves direct sums
 
 Source: literature/stacks-project/perfect.tex,
-Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums
-(blueprint: lem-pc-derived-direct-image-preserves-direct-sums).
+Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums.
 -/
 
 @[expose] public section
@@ -46,8 +45,7 @@ private theorem exists_ambient_coproduct (Y : Scheme.{u₁})
 /-- For a quasi-compact and quasi-separated morphism of schemes, derived direct image
 preserves every set-indexed coproduct of objects with quasi-coherent cohomology.
 Source: literature/stacks-project/perfect.tex,
-Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums
-(blueprint: lem-pc-derived-direct-image-preserves-direct-sums).
+Lemma perfect-lemma-quasi-coherence-pushforward-direct-sums.
 
 Proof (the three steps of the node):
 1. Check the comparison on affine opens of the target. On each such open, use
@@ -69,8 +67,7 @@ Proof (the three steps of the node):
    so the comparison is an isomorphism on every cohomology sheaf, hence an
    isomorphism in the derived category. By
    `lem-pc-derived-direct-image-preserves-qcoh`, its image lies in the full
-   quasi-coherent subcategory of the target, where the same coproduct applies. 
-(blueprint: lem-pc-derived-direct-image-direct-sums)
+   quasi-coherent subcategory of the target, where the same coproduct applies.
 -/
 theorem derivedDirectImagePreservesDirectSums {X Y : Scheme.{u₁}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

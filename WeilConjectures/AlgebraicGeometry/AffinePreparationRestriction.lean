@@ -26,21 +26,7 @@ set_option backward.isDefEq.respectTransparency false in
 and locally finitely presented, retaining an affine open of the original base.
 
 Source: Stacks Project, Tag 0559, second proof, generic-flat shrinking;
-Tag 01IT for the affine-open basis.
-Proof: q is a homeomorphism, so q(W) is open in V. Its image in T is open and contains
- η. Choose an affine open U about η contained in this image. Its inverse image S' in
- S is affine because q is an affine morphism (it is integral) and U is affine; it is
- integral because it is a nonempty open of the integral scheme S. Restrict Z to the
- inverse image of S', obtaining Z'. It is reduced as an open of Z and affine because
- the morphism from Z to S is affine (both schemes are affine). The restriction q'
- is the base change of q and is universally homeomorphic. Pullback pasting identifies
- X ×_T S' with the restriction of X ×_T S. Under this identification the restriction
- h' is a base change of h and is universally homeomorphic. Finally S' lies in W,
- so the restricted composite is a further restriction of the given flat, locally
- finitely presented family over W. Both properties are local on the target and are
- preserved by restriction. This construction also works for an empty Z.
-
-(blueprint: lem-sbc-affine-preparation-restriction) -/
+Tag 01IT for the affine-open basis. -/
 theorem exists_affine_preparation_restriction
     {X T S Z : Scheme.{u}} (f : X ⟶ T)
     (V : T.Opens) (q : S ⟶ V.toScheme)

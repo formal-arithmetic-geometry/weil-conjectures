@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 /-!
 # Bounds on the degrees of scheme-theoretic fibres
 
-Source: Stacks Project, Morphisms, Section 29.56 and Definition Tag 03J4
-(blueprint: def-weil-pbc-fibre-degree-bound).
+Source: Stacks Project, Morphisms, Section 29.56 and Definition Tag 03J4.
 
 ## Main definitions
 
@@ -30,16 +29,14 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 /-- An integer `n ≥ 0` bounds the degrees of the fibres of `f` if every fibre is finite
 over its residue field and its degree is at most `n` (Stacks, Definition Tag 03J4;
-blueprint: def-weil-pbc-fibre-degree-bound). 
-(blueprint: def-weil-pbc-fibre-degree-bound)
+blueprint: def-weil-pbc-fibre-degree-bound).
 -/
 def BoundsFiberDegrees {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) : Prop :=
   ∀ y : Y, IsFinite (f.fiberToSpecResidueField y) ∧
     (f.fiberToSpecResidueField y).finrankΓ ≤ n
 
 /-- The fibres of `f` are universally bounded if one nonnegative integer bounds the
-degree of every fibre (Stacks, Definition Tag 03J4).
-(blueprint: def-weil-pbc-fibre-degree-bound) -/
+degree of every fibre (Stacks, Definition Tag 03J4). -/
 def HasUniversallyBoundedFibers {X Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
   ∃ n : ℕ, BoundsFiberDegrees f n
 

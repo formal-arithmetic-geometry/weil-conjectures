@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Coherent modules on a ringed space
 
 Source: Stacks Project, Modules, Tags 01BV (coherent), 01B5 (finite type), 01BE
-(quasi-coherent); Schemes, Tag 01IA (blueprint: pqf-def-coherent).
+(quasi-coherent); Schemes, Tag 01IA.
 
 The three notions of the node, on the carrier `SheafOfModules.{u} (moduleRings X)` shared
 with the finite-presentation siblings (for a scheme `X`, `X.Modules` and
@@ -40,7 +40,7 @@ is of finite type (Mathlib's `SheafOfModules.IsFiniteType`) and for every open `
 map `O_U^{⊕ n} ⟶ F|_U` the kernel is of finite type. Here `F|_U = F.over U` is the restriction
 `SheafOfModules.overFunctor (moduleRings X) U` and `O_U^{⊕ n}` is the free module on
 `ULift (Fin n)` over `(moduleRings X).over U`.
-Source: Stacks Project, Modules, Tag 01BV (blueprint: pqf-def-coherent). -/
+Source: Stacks Project, Modules, Tag 01BV. -/
 def IsCoherent (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) : Prop :=
   F.IsFiniteType ∧
     ∀ (U : Opens X) (n : ℕ)

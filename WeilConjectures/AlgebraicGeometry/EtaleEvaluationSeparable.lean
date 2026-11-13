@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 # Values of functions on etale neighbourhoods are separable
 
 Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-evaluation-separable).
 -/
 
 @[expose] public section
@@ -28,19 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation of an etale function at a geometric lift is separable over the base field.
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-evaluation-separable).
-
-Proof: Factor the geometric lift through the residue field of its image point.
-The residue-field inclusion into Spec K is an isomorphism: it is a surjective closed
-immersion into a reduced scheme. Hence its preimage under Spec is a ring isomorphism.
-The residue-field extension induced by the etale structural morphism is finite
-separable, so its composite with this ring isomorphism is etale, and in particular
-separable. The embedding of the image residue field into the algebraic closure is
-K-linear because the geometric lift lies over Spec K. Evaluate the global function
-first in this residue field, then embed it. Naturality of the global sections of
-Spec identifies the result with evaluation along the original lift. Separability
-is preserved by the embedding. This argument needs no quasi-compactness of X. -/
+Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
 theorem etale_evaluation_isSeparable (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

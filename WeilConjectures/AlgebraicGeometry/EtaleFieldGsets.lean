@@ -19,7 +19,7 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Étale schemes over a field and continuous G-sets
 
-Source: Stacks Project, Tags 03QR and 03QS (blueprint: lem-exc-etale-field-gsets).
+Source: Stacks Project, Tags 03QR and 03QS.
 -/
 
 @[expose] public section
@@ -32,7 +32,7 @@ namespace AlgebraicGeometry
 
 attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
-/-- Stacks Project, Tags 03QR and 03QS (blueprint: lem-exc-etale-field-gsets).
+/-- Stacks Project, Tags 03QR and 03QS.
 The geometric-point functor carries the Galois action by precomposition. An étale scheme
 over a field is a coproduct of spectra of finite separable extensions. Their geometric
 points are finite transitive Galois sets, with open stabilizers, giving continuity.

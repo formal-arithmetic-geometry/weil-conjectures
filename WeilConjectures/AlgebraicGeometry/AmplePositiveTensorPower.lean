@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 
 Source: Stacks Project, Properties Definition 01PS and Lemma 01PT;
 Varieties Lemma 09NX, powering the component bundles.
-(blueprint: lem-sc-ample-positive-tensor-power).
 -/
 
 @[expose] public section
@@ -63,20 +62,7 @@ private theorem nonvanishing_of_frame {X : Scheme.{u}} (M : X.Modules)
 /-- A positive tensor power of an ample invertible module is ample.
 
 Source: Stacks Project, Properties Definition 01PS and Lemma 01PT;
-Varieties Lemma 09NX, first two paragraphs.
-(blueprint: lem-sc-ample-positive-tensor-power).
-
-Proof: keep compactness from ampleness of M. At any point choose a positive exponent n,
-a section s of M^n, and its affine nonvanishing open U containing the point. The kth
-power of s is a global section of (M^n)^k. Transport it through the tensor-power
-isomorphisms (M^n)^k ≅ M^(n*k) ≅ M^(k*n) ≅ (M^k)^n. In a local frame of M the
-coefficient of the new section is the kth power of that of s. Since k is positive,
-that coefficient is a unit in each local ring exactly when the original coefficient
-is a unit. Consequently the nonvanishing locus stays U, and n, U and the transported
-section witness ampleness of M^k at the chosen point. On the empty scheme the
-pointwise condition is vacuous. Positivity is necessary: M^0 is the structure module,
-which need not be ample on a nonaffine scheme.
--/
+Varieties Lemma 09NX, first two paragraphs. -/
 theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]
     (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)  := by
   refine ⟨hM.1, fun x ↦ ?_⟩

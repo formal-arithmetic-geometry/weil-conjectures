@@ -32,8 +32,7 @@ public import WeilConjectures.RingTheory.WContractibleGeometricCriterion
 
 /-! # The coefficient ringed sequence site and canonical functors
 
-Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0941, 06YY, 079P and 07A6.
 
 ## Main definitions
 
@@ -58,18 +57,13 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 
 /-- The vertical covering condition for a sequence site.
-Source: Stacks 0941, sequence-site construction
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0941, sequence-site construction. -/
 def coefficientSequenceCovering {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (X : ℕ × C) (S : Sieve X) : Prop :=
   S.functorPullback (Prod.sectR X.1 C) ∈ J X.2
 
 /-- The vertical covering condition satisfies the topology axioms.
-Source: Stacks 0941 (auxiliary; not a blueprint node).
-Proof: the slice of the maximal sieve is maximal. For pullback along (h,f), the
-vertical slice contains the pullback along f of the old vertical slice, so covering
-stability and upward closure apply. For local character, test the supplied condition
-on every vertical arrow in the covering slice and apply local character in J. -/
+Source: Stacks 0941. -/
 theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) :
     (∀ X : ℕ × C, coefficientSequenceCovering J X ⊤) ∧
@@ -103,7 +97,7 @@ theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
     rwa [Sieve.functorPullback_pullback] at hr
 
 /-- The actual sequence topology, with covering determined by the vertical slice.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 def coefficientSequenceTopology {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) : GrothendieckTopology (ℕ × C) where
   sieves X := {S | coefficientSequenceCovering J X S}
@@ -175,13 +169,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- The unchanged sequence site fits in the coefficient universe.
-Source: the size convention, Stacks 0941
-(auxiliary; not a blueprint node). -/
+Source: the size convention, Stacks 0941. -/
 noncomputable instance (priority := low) coefficientSequenceEssentiallySmall :
     EssentiallySmall.{max u (t + 1)} (ℕ × W.ProEt) := essentiallySmallSelf _
 
 /-- The standard localization at each finite coefficient ring.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 noncomputable instance coefficientFiniteHasDerived (n : ℕ) :
     HasDerivedCategory (SheafOfModules.{max u (t+1)}
       ((sheafCompose (Scheme.ProEt.topology W)
@@ -189,10 +182,7 @@ noncomputable instance coefficientFiniteHasDerived (n : ℕ) :
   HasDerivedCategory.standard _
 
 /-- The vertical inclusion is continuous, so restriction is coefficient evaluation.
-Source: Stacks 0941 (auxiliary; not a blueprint node).
-Proof: a sequence sheaf restricts to a sheaf on every vertical slice, by the defining
-covering condition. The product-site sheaf condition checked above applies to set
-sheaves as well as ring sheaves; this is exactly continuity. -/
+Source: Stacks 0941. -/
 @[instance]
 theorem coefficientSequenceEvaluationContinuous (n : ℕ) :
     (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
@@ -200,8 +190,7 @@ theorem coefficientSequenceEvaluationContinuous (n : ℕ) :
   exact sequenceInclusion_continuous (Scheme.ProEt.topology W) n
 
 /-- The simultaneous resolution instance for the actual constant-coefficient towers.
-Source: Stacks 079P and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks 079P and 0941. -/
 noncomputable instance coefficientConstantTowersKInjectives :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) := by
   let A := scalarReductionSource l E W
@@ -215,13 +204,13 @@ noncomputable instance coefficientConstantTowersKInjectives :
   infer_instance
 
 /-- The standard unbounded localization of constant coefficient towers.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 noncomputable instance coefficientConstantTowerDerived :
     HasDerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
   HasDerivedCategory.standard _
 
 /-- The additive structure on the ordinary inverse-limit functor.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 noncomputable instance coefficientConstantTowerLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive := by
   constructor

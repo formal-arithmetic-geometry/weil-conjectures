@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 /-! # Direct-image triangle on an arbitrary open union
 
 Source: Stacks Project, Tag 08BV, applied on the open union and pushed to X.
-(blueprint: lem-sc-derived-open-union-adjunction-triangle).
 -/
 
 @[expose] public section
@@ -48,30 +47,7 @@ the two canonical restrictions of the union counit. This is geometric triangle d
 exactness of Hom nor scalar compatibility is asserted.
 
 Source: Stacks Project, Tag 08BV (Lemma cohomology-lemma-exact-sequence-j-star),
-with the derived open adjunction of Tag 079W.
-(blueprint: lem-sc-derived-open-union-adjunction-triangle).
-
-Proof: On W = U union V, restrict a K-injective representative I of E'[k] having
-injective terms. Exact restriction preserves K-injectivity, since its extension-by-zero
-left adjoint is exact. In each degree the sequence of direct images
-0 -> j_W* I|W -> j_U* I|U plus j_V* I|V -> j_(U intersect V)* I|_(U intersect V) -> 0
-is exact. Evaluate on an arbitrary open Z: the first two maps are restriction and the
-difference of restrictions, and sheaf gluing proves exactness at the first two terms.
-Surjectivity follows because an injective module sheaf is flasque, so a section on
-Z intersect U intersect V lifts to Z intersect U. These complexes compute the four
-right derived direct images, since their restricted representatives are K-injective.
-The short-exact-complex triangle construction and inverse rotation give the triangle
-in the statement. The shift comparisons identify the first vertex with the right
-direct image of E'[k-1] on the overlap. Transport each vertex to the specified right
-adjoint using the unique isomorphism of right adjoints compatible with its adjunction.
-For the second arrow, transpose the counit for the union adjunction, restrict it to
-U and V by the canonical nested comparison, and transpose back by the respective
-adjunctions. This gives exactly the biproduct lift b displayed here. Naturality of
-the comparison and the units identifies b with the image of the restriction-unit
-arrow on W. Its compatibility with arbitrary Hom maps is proved separately by
-adjunction naturality, not assumed in this theorem. Empty opens give zero terms,
-repeated opens give the split sequence, and all integer shifts use the same
-construction. No compactness or quasi-coherence is used. -/
+with the derived open adjunction of Tag 079W. -/
 theorem derived_open_union_adjunction_triangle
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

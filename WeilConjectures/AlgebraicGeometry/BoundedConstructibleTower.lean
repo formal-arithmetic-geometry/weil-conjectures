@@ -13,8 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAd
 # Uniformly bounded constructible adic towers
 
 Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-bounded-constructible-tower, order 1250; Stacks Tags 09AI and 09BT
-(blueprint: def-weil-pbc-bounded-constructible-tower).
+def-weil-pbc-bounded-constructible-tower, order 1250; Stacks Tags 09AI and 09BT.
 
 Positive level n+1 is indexed by n : ℕ. Normalizations are stored for every comparable
 pair; their cocycle determines the nonconsecutive ones from the consecutive ones.
@@ -144,7 +143,7 @@ private theorem normalizedDerivedAdjunction
 object trivializes F as a module sheaf; on each member the constant is a finite module.
 The coefficient ring is exactly the inverse image, so the module isomorphism is linear
 with the restricted coefficient action, including when g is the identity.
-Source: Stacks Tags 09AI and 099Y (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tags 09AI and 099Y. -/
 def IsRelativelyFiniteLisseModule {X Y : Scheme.{u}} (g : Y ⟶ X)
     (A : Type (u + 1)) [CommRing A]
     (F : ringedSiteModules.{u + 1} ((adicLisseForget Y).obj
@@ -161,17 +160,17 @@ def IsRelativelyFiniteLisseModule {X Y : Scheme.{u}} (g : Y ⟶ X)
 variable (X : Scheme.{u})
 
 /-- The module category over a commutative ring sheaf on the small site.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev pbcModules (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ringedSiteModules.{u + 1} ((adicLisseForget X).obj R)
 
 /-- Strict inverse sequences, reindexed by n ↦ n+1.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev pbcTowers (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   ℕᵒᵖ ⥤ pbcModules X R
 
 /-- The standard derived localization for strict towers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 instance pbcTowers_hasDerivedCategory
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (pbcTowers X R) := HasDerivedCategory.standard _
@@ -179,49 +178,45 @@ instance pbcTowers_hasDerivedCategory
 variable {X} {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
 
 /-- Restrict scalar actions along the given ring-sheaf map.
-Source: Stacks Tag 03CZ (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03CZ. -/
 abbrev pbcRestrict :=
   proEtaleRingRestrictScalars φ
 
-/-- Exact restriction preserves finite limits. Source: Stacks Tag 03DA
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Exact restriction preserves finite limits. Source: Stacks Tag 03DA. -/
 instance pbcRestrict_limits : PreservesFiniteLimits (pbcRestrict φ) :=
   (proEtaleRingRestrictScalars_properties φ).1
 
-/-- Exact restriction preserves finite colimits. Source: Stacks Tag 03DA
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Exact restriction preserves finite colimits. Source: Stacks Tag 03DA. -/
 instance pbcRestrict_colimits : PreservesFiniteColimits (pbcRestrict φ) :=
   (proEtaleRingRestrictScalars_properties φ).2.1
 
 /-- Restriction of scalars is additive on pro-etale module sheaves.
-Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03DA. -/
 instance pbcRestrict_additive : (pbcRestrict φ).Additive := by
   dsimp [pbcRestrict, proEtaleRingRestrictScalars]
   infer_instance
 
 /-- Exact scalar restriction on unbounded derived categories.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcDerivedRestrict := (pbcRestrict φ).mapDerivedCategory
 
 set_option linter.defProp false in
 /-- The existing universal scalar-extension theorem, including its fixed objects,
-fixed maps and K-flat computation. Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+fixed maps and K-flat computation. Source: Stacks Tag 06YY. -/
 abbrev pbcExtensionExistence :=
   completedAdicChangeData X φ
 
 /-- Ordinary sheafified tensor extension, determined on both objects and maps.
-Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03EK. -/
 abbrev pbcExtend : pbcModules X R ⥤ pbcModules X S := reductionChange X φ
 
-/-- Tensor extension is additive. Source: Stacks Tag 03EK
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Tensor extension is additive. Source: Stacks Tag 03EK. -/
 instance pbcExtend_additive : (pbcExtend φ).Additive :=
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose
 
 set_option linter.defProp false in
 /-- The universal derived pair supplied by the existing K-flat scalar-extension theorem.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 @[no_expose] def pbcDerivedExtensionExistence :
     ∃ (LF : DerivedCategory (pbcModules X R) ⥤ DerivedCategory (pbcModules X S))
       (ε : DerivedCategory.Qh ⋙ LF ⟶
@@ -235,42 +230,38 @@ Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived scalar extension, determined up to unique comparison compatible with its
-universal counit. Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+universal counit. Source: Stacks Tag 06YY. -/
 abbrev pbcDerivedExtend : DerivedCategory (pbcModules X R) ⥤
     DerivedCategory (pbcModules X S) := reductionDerivedChange X φ
 
 /-- The universal comparison, invertible on K-flat complexes.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 def pbcExtensionCounit : DerivedCategory.Qh ⋙ pbcDerivedExtend φ ⟶
     (pbcExtend φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh :=
   reductionDerivedCounit X φ
 
 /-- The universal property of the recorded scalar-extension comparison.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 theorem pbcDerivedExtension_universal :
     (pbcDerivedExtend φ).IsLeftDerivedFunctor (pbcExtensionCounit φ)
       (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) :=
   (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.1
 
 /-- The recorded scalar-extension comparison computes tensor on K-flat complexes.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 theorem pbcExtensionCounit_isIso (P : CochainComplex (pbcModules X R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := R) P) :
     IsIso ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj P)) :=
   (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.2.2 P hP
 
 /-- A sheafified pure tensor, using the object equality in the scalar-extension witness.
-Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03EK. -/
 def pbcTensorSection (M : pbcModules X R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) : ((pbcExtend φ).obj M).val.obj U :=
   completedAdicChangeTensor X φ M U s x
 
 /-- The tensor-unit normalized ordinary adjunction is unique.
-Source: Stacks Tags 03EK and 06YY (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: the sheafification universal property and sectionwise tensor adjunction identify
-maps out of E(M) with maps M→Res(N), by precomposition with m↦1⊗m. These bijections are
-natural. They give the adjunction, and their formula determines it uniquely. -/
+Source: Stacks Tags 03EK and 06YY. -/
 theorem pbcScalarAdjunction_exists :
     ∃! adj : pbcExtend φ ⊣ pbcRestrict φ,
       ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -295,12 +286,12 @@ theorem pbcScalarAdjunction_exists :
   exact (hadj' M U x).trans (hu M U x).symm
 
 /-- The ordinary adjunction with its actual tensor unit.
-Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03EK. -/
 def pbcScalarAdjunction : pbcExtend φ ⊣ pbcRestrict φ :=
   (pbcScalarAdjunction_exists φ).exists.choose
 
 /-- The universal derived counit expressed on cochain representatives.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 def pbcComplexCounit (P : CochainComplex (pbcModules X R) ℤ) :
     (pbcDerivedExtend φ).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -312,12 +303,7 @@ def pbcComplexCounit (P : CochainComplex (pbcModules X R) ℤ) :
       (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The derived adjunction is uniquely fixed by its tensor-unit computation on K-flats.
-Source: Stacks Tags 06YY and 0DVC (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: exact restriction has its termwise derived functor. Derive the ordinary adjunction
-using K-flat resolutions on the left. Its unit on a K-flat P is the localization of
-P→Res(E(P)), transported by the invertible universal counit. Every object has a K-flat
-representative; the Hom adjunction and naturality follow from the ordinary bijections
-and localization. The formula fixes the unit everywhere and therefore the adjunction. -/
+Source: Stacks Tags 06YY and 0DVC. -/
 theorem pbcDerivedScalarAdjunction_exists :
     ∃! adj : pbcDerivedExtend φ ⊣ pbcDerivedRestrict φ,
       ∀ (P : CochainComplex (pbcModules X R) ℤ),
@@ -341,7 +327,7 @@ theorem pbcDerivedScalarAdjunction_exists :
     (pbcDerivedExtension_universal φ) (pbcExtensionCounit_isIso φ)
 
 /-- Canonical derived scalar extension/restriction adjunction.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 06YY. -/
 def pbcDerivedScalarAdjunction : pbcDerivedExtend φ ⊣ pbcDerivedRestrict φ :=
   (pbcDerivedScalarAdjunction_exists φ).exists.choose
 
@@ -350,9 +336,7 @@ variable {B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
 
 include h in
 /-- Composition of ordinary scalar restrictions is identity on underlying sections.
-Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: the actions coincide by h; identity on sections is linear and natural, and its
-inverse is identity. Sectionwise faithfulness gives uniqueness. -/
+Source: Stacks Tag 03DA. -/
 theorem pbcRestrictComp_exists :
     ∃! e : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ,
       ∀ (M : pbcModules X B) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -378,7 +362,7 @@ theorem pbcRestrictComp_exists :
     exact he' M U x
 
 /-- The canonical ordinary restriction comparison.
-Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03DA. -/
 def pbcRestrictComp : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ :=
   (pbcRestrictComp_exists φ ψ χ h).exists.choose
 
@@ -386,34 +370,34 @@ def pbcRestrictComp : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ :=
 A constant sheaf is canonically also the sheafification of continuous maps from connected
 components to the discrete ring: every such function is locally constant on its open
 fibres, which form a Zariski, hence pro-etale, cover. Constant sections give the comparison.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev pbcAdicRings (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :=
   AdicCoefficients.ringSystem X d.ideal d.quotientFinite
 
 /-- The completed coefficient sheaf is the actual inverse limit of the quotient sheaves.
 Limits of sheaves are sectionwise compatible families, with pointwise operations.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev pbcAdicCompletion (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :=
   AdicCoefficients.completedRing X d.ideal d.quotientFinite
 
 /-- The n-th coordinate of a compatible family in the completed ring.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcAdicProjection (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (n : ℕ) : pbcAdicCompletion X d ⟶ (pbcAdicRings X d).obj (op n) :=
   limit.π (pbcAdicRings X d) (op n)
 
 /-- The quotient continuous-function presheaf with its prescribed discrete topology.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcQuotientPresheaf (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} :=
   letI := d.quotientFinite n
   AdicCoefficients.functionPresheaf X (A ⧸ d.ideal ^ (n + 1))
 
 /-- The constant continuous component function used by the coefficient comparison.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 noncomputable def pbcQuotientConstant (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ)
     (U : X.ProEtᵒᵖ) (b : A ⧸ d.ideal ^ (n + 1))
@@ -424,12 +408,7 @@ noncomputable def pbcQuotientConstant (X : Scheme.{u}) {A : Type (u + 1)} [CommR
     inferInstance τ b
 
 /-- The constant-section comparison with the recorded continuous-function coefficient.
-Source: blueprint order 1250; Stacks Tags 03CY and 00W1
-(blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: send each constant section to the same constant continuous component function.
-Its level sets give a Zariski, hence pro-etale, cover. Thus this map is locally bijective
-and sheafification makes it an isomorphism. Local constant sections generate, giving
-uniqueness even for the empty scheme or zero ring. -/
+; Stacks Tags 03CY and 00W1. -/
 theorem pbcLevelConstantComparison_exists (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     ∃! e : adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)) ≅
@@ -506,17 +485,13 @@ theorem pbcLevelConstantComparison_exists (X : Scheme.{u}) {A : Type (u + 1)} [C
   exact (he' U b).trans (he U b).symm
 
 /-- The canonical finite coefficient identification, fixed on constant sections.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcLevelConstantComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)) ≅ (pbcAdicRings X d).obj (op n) :=
   (pbcLevelConstantComparison_exists X d n).exists.choose
 
-/-- Constant comparisons intertwine the entire recorded quotient diagram.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: on constant sections both routes apply the same quotient homomorphism.
-Local generation gives the equality at consecutive indices. Every poset arrow is a
-composite of consecutive arrows, so induction gives the result for all indices. -/
+/-- Constant comparisons intertwine the entire recorded quotient diagram. -/
 theorem pbcConstantSystemComparison_naturality (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
@@ -549,7 +524,7 @@ theorem pbcConstantSystemComparison_naturality (X : Scheme.{u})
   exact t.naturality f
 
 /-- The comparison of constant and continuous-function quotient coefficient diagrams.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcConstantSystemComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     adicLisseRingSystem X d.ideal ≅ AdicCoefficients.ringSystem X d.ideal d.quotientFinite :=
@@ -558,7 +533,7 @@ def pbcConstantSystemComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 /-- The completed-coefficient comparison is induced by the quotient diagram.
 No completed coefficient sheaf is identified with a constant sheaf.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 def pbcCompletedComparison (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     adicLisseCompletedRing X d.ideal ≅ pbcAdicCompletion X d :=
@@ -570,11 +545,11 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 variable {X} {Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- Restrict any coefficient sheaf by its actual inverse image along the scheme map.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev adicTowerInverseImage := proEtaleSheafInverseImage g CommRingCat.{u + 1}
 
 /-- Exact derived inverse image with exactly the inverse-image coefficient sheaf.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+ -/
 abbrev adicTowerPullback (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   proEtaleRingDerivedPullback g R ((adicTowerInverseImage g).obj R) (Iso.refl _)
 

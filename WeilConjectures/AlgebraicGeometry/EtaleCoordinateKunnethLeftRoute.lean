@@ -21,7 +21,6 @@ after composing `R p₁_*` and `R f_*`.  This is the first mate calculation in t
 coordinate interchange argument.
 Source: the coordinate interchange calculation in
 `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/`.
-(auxiliary; not a blueprint node).
 -/
 theorem coordinateKunneth_leftRoute_comp_kunneth
     [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

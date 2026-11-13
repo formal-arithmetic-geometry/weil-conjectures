@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 /-!
 # Constructed graph comparisons for compact supports
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6
-(auxiliary; not a blueprint node).
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Inclusion of compactly supported sheaf sections into direct image.
-Source: SGA 4 XVII 6.2.11
-(auxiliary; not a blueprint node). -/
+Source: SGA 4 XVII 6.2.11. -/
 noncomputable def compactificationSheafToDirectImage
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} {f : U ⟶ X}
     (c : Compactification f) :
@@ -42,8 +40,7 @@ noncomputable def compactificationSheafToDirectImage
     (lowerStarComp (ModuleCat.{u + 1} A) c.i c.g f c.comm).hom
 
 /-- The specified sum-extension exchange, descended termwise and inverted.
-Source: Stacks Project Tag 03S6
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 03S6. -/
 noncomputable def exactEtaleSumExchange
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :
@@ -59,8 +56,7 @@ noncomputable def exactEtaleSumExchange
 
 /-- The proper exchange followed by inverse open-extension exchange, using exact derived
 inverse image. The transport from `L(g^*)` is the canonical exact-functor comparison.
-Source: SGA 4 XVII 5.2.2
-(auxiliary; not a blueprint node). -/
+Source: SGA 4 XVII 5.2.2. -/
 noncomputable def exactCompactSupportExchange
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     {f : U ⟶ X} (c : Compactification f) (g : X' ⟶ X) :
@@ -82,7 +78,7 @@ attribute [local instance 2000] Abelian.toPreadditive
 
 /-- The natural transformation underlying the homotopy comparison, assembled from
 exact-functor factors and the right-derived unit. No new objects are chosen.
-Source: Stacks Project Tag 015F (auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 015F. -/
 noncomputable def normalizationHomotopyTransformation
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -108,7 +104,7 @@ noncomputable def normalizationHomotopyTransformation
 
 /-- The homotopy formula for an exact source and open factor followed by a right derived
 functor. This is the explicit five-factor composite, with no choices of new objects.
-Source: Stacks Project Tag 015F (auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 015F. -/
 noncomputable def normalizationHomotopyComponent
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -129,7 +125,7 @@ noncomputable def normalizationHomotopyComponent
     R.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.inv.app K)
 
 /-- The generic natural transformation has the specified five-factor component.
-Source: Stacks Project Tag 015F (auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 015F. -/
 theorem normalizationHomotopyTransformation_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -148,8 +144,7 @@ theorem normalizationHomotopyTransformation_app
 
 /-- A termwise sheaf comparison followed by the total-right-derived comparison.
 This is a map on homotopy representatives, with no boundedness condition.
-Source: SGA 4 XVII 6.2.11
-(auxiliary; not a blueprint node). -/
+Source: SGA 4 XVII 6.2.11. -/
 noncomputable def compactSupportComparisonOnHomotopy
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (c : Compactification f)
@@ -168,8 +163,7 @@ noncomputable def compactSupportComparisonOnHomotopy
     (lowerStar (ModuleCat.{u + 1} A) c.g) a K
 
 /-- Descend a natural transformation through a localization without choosing any data.
-Source: Stacks Project Tag 04VG
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 04VG. -/
 @[irreducible]
 noncomputable def normalizationLocalizationDesc
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -178,8 +172,7 @@ noncomputable def normalizationLocalizationDesc
   (Localization.fullyFaithfulWhiskeringLeft L W E).preimage τ
 
 /-- The localization descent recovers the original transformation on every representative.
-Source: Stacks Project Tag 04VG
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 04VG. -/
 theorem normalizationLocalizationDesc_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
@@ -191,8 +184,7 @@ by
 
 /-- The normalized comparison on all derived objects, obtained by full faithfulness of
 precomposition with the homotopy localization. No isomorphism claim enters this construction.
-Source: Stacks Project Tags 04VG and 015F
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project Tags 04VG and 015F. -/
 @[irreducible]
 noncomputable def compactSupportDerivedComparison
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
@@ -213,8 +205,7 @@ noncomputable def compactSupportDerivedComparison
       (lowerStar (ModuleCat.{u + 1} A) c.g) a)
 
 /-- The derived comparison has the prescribed value on every homotopy representative.
-Source: Stacks Project Tag 04VG
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project Tag 04VG. -/
 theorem compactSupportDerivedComparison_app
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (c : Compactification f)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 /-! # DegreeZero property of module cohomology maps
 
 Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-degree-zero).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- DegreeZero property of the cohomology map induced by an h-map.
 Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
 Derived Categories, Tags 013P, 013S, 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-degree-zero).
 
 Proof (argument specialized from the parent node):
 1. Global sections preserves kernels, computed sectionwise in module sheaves. For an

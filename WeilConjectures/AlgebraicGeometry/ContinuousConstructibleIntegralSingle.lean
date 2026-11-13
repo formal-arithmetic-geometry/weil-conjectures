@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 /-! # Integral models for constructible sheaves in degree zero
 
 Source: Bhatt--Scholze, Lemma 6.8.13 and the sheaf case of Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -83,7 +82,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- A constructible continuous E module, placed in degree zero, has an integral model.
 Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
 
 Proof in words. On each of the finitely many constructible strata, identify local finite
 presentations over the continuous E coefficient sheaf with finite-rank local systems.

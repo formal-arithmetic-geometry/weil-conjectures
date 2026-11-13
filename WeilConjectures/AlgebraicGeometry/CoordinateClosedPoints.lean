@@ -29,9 +29,7 @@ coordinate projection to the line lies in `Sᵢ` form a finite set of closed poi
   and the coordinate projections `AffineSpace.reindex` to the line `𝔸(n; Spec K)`.
 
 This is the scheme-level form of `MvPolynomial.finite_zeroLocus_range_aeval_X`: the "finite
-product of finite sets" in the finite-support step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`).
-
+product of finite sets" in the finite-support step of Gabber's Künneth formula.
 -/
 
 @[expose] public section

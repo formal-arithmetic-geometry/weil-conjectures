@@ -71,24 +71,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 sections over the source chart rings. This concerns only the tensor modules, before
 applying the section map of the second module pullback.
 
-Source: Stacks Project, Morphisms, Tags 0473 and 01R3 (2); Schemes, Tag 01JU (1).
-(blueprint: lem-weil-pbc-closed-immersion-conormal-affine-tensor-coordinates).
-
-Proof: Put A = Γ(X',U'), B = Γ(X,U), J = i'.ker.ideal U',
-C = Γ(Z',i'⁻¹U'), and D = Γ(Z,i⁻¹U). Closed immersions make both inverse-image
-opens affine and the maps A → C and B → D surjective. The cartesian square gives
-ker(B → D) = J.map(A → B), using the pullback projection kernel formula and the
-affine ideal-comap formula. Thus C = A/J and D = B/JB, compatibly with C → D.
-The affine conormal equivalence identifies N = Γ(i'*i'.ker,i'⁻¹U') with J/J²;
-it sends class(a) to the unit on the ideal section representing a and is C-linear,
-since it is A-linear and A → C is surjective. Since J annihilates J/J², scalar
-cancellation identifies N ⊗[C] D with N ⊗[A] D. The quotient tensor formula
-identifies the latter with (B ⊗[A] J/J²)/(JB • ⊤), after swapping factors.
-The denominator is zero: g(a) • (b ⊗ m) = b ⊗ (a • m) = 0 for a ∈ J;
-linearity extends this from ideal generators and pure tensors. Remove the zero
-quotient and compose the equivalences. Their pure-tensor formulas send b ⊗ class(a)
-to unit(s') ⊗ i.app(b), proving the normalization. This also covers J = 0, J = A,
-and zero chart rings, without a flatness hypothesis. -/
+Source: Stacks Project, Morphisms, Tags 0473 and 01R3 (2); Schemes, Tag 01JU (1). -/
 theorem closedImmersion_conormal_affine_tensor_coordinates
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

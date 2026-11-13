@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 /-! # Termwise sections and derived pullback cohomology
 
 Source: Stacks Project, Tag 03Q9, final injective-complex restriction paragraph.
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Sections of an inverse image, using the unit and the underived Leray comparison.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 noncomputable def sectionsPullbackNat {Y Z : Scheme.{v}} (a : Y ⟶ Z) :
     Sheaf.Γ Z.smallEtaleTopology AddCommGrpCat.{v + 1} ⟶
       upperStar AddCommGrpCat.{v + 1} a ⋙
@@ -39,8 +37,7 @@ noncomputable def sectionsPullbackNat {Y Z : Scheme.{v}} (a : Y ⟶ Z) :
       (lowerStarCompGlobalSectionsIso AddCommGrpCat.{v + 1} a).hom
 
 /-- Cohomology of the actual complex of sections, before deriving sections.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 noncomputable abbrev termwiseSectionsCohomology (Y : Scheme.{v})
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :=
   (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).obj
@@ -49,8 +46,7 @@ noncomputable abbrev termwiseSectionsCohomology (Y : Scheme.{v})
         (.up ℤ)).obj C))
 
 /-- The actual chain-level restriction of sections along a triangle, on cohomology.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 noncomputable def termwiseSectionsRestriction {X Y T : Scheme.{v}}
     (a : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = a ≫ g)
     (J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :
@@ -68,8 +64,7 @@ noncomputable def termwiseSectionsRestriction {X Y T : Scheme.{v}}
 
 /-- The canonical comparison from termwise sections to derived sections. Its unit
 is used even if the complex is not acyclic for sections.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph (map to derived sections)
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison). -/
+Source: Stacks, Tag 03Q9, final injective-complex paragraph (map to derived sections). -/
 noncomputable def termwiseSectionsToDerived (Y : Scheme.{v})
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) (n : ℤ) :
     termwiseSectionsCohomology Y C n ⟶
@@ -84,8 +79,7 @@ noncomputable def termwiseSectionsToDerived (Y : Scheme.{v})
         ((DerivedCategory.quotientCompQhIso _).hom.app C))
 
 /-- Transport the canonical sections comparison through a specified representative.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison). -/
+Source: Stacks, Tag 03Q9, final proof paragraph. -/
 noncomputable def representativeSectionsComparison {Y T : Scheme.{v}} (g : Y ⟶ T)
     {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})}
     {J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ}
@@ -127,21 +121,7 @@ private theorem isIso_representativeSectionsComparison_of_etale
 /-- The comparison from termwise sections to stage hypercohomology is invertible,
 and intertwines both neighbourhood and cone restrictions. This theorem concerns
 only the derived-sections unit and its naturality, not derived Hom or the mate.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph
-(blueprint: lem-weil-pbc-injective-sections-pullback-comparison).
-
-Proof: each stage projection to X is etale. Restriction on its small etale site
-preserves injectives, since it has an exact extension-by-zero left adjoint. Hence
-the restricted bounded-below complex is K-injective and the right-derived sections
-unit there is invertible. This proves the first assertion. Apply naturality of
-that unit to termwise sections restriction along each neighbourhood map and each
-cone leg. Deriving the sections restriction transformation gives the derived
-adjunction unit followed by Leray. Exact inverse-image localization transports
-the complex composition comparison to upperStarComp in the derived category.
-Naturality with q then gives each displayed square. At the limit use only the
-comparison unit, without assuming the pullback of J remains injective. This proves
-both squares even for nonetale cone legs. All constructions are valid in negative
-degrees and for zero complexes and empty schemes. -/
+Source: Stacks, Tag 03Q9, final injective-complex paragraph. -/
 theorem injectiveSections_strictLocal_comparison {X S : Scheme.{v}}
     (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

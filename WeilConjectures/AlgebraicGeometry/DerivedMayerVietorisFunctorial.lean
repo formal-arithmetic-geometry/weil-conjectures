@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 /-! # Functoriality of derived Mayer--Vietoris triangles
 
 Source: Stacks Project, Cohomology, Tags 08BV and 0D5T; Derived Categories of Schemes,
-Tag 0DJ9 (blueprint: lem-pc-derived-mayer-vietoris-functorial).
+Tag 0DJ9.
 -/
 
 @[expose] public section
@@ -438,33 +438,7 @@ private theorem canonicalMV_spec
 
 /-- Mayer--Vietoris boundaries can be chosen simultaneously, naturally in the object.
 The adjunction units and the difference of restrictions are the first two maps.
-Source: Stacks, Tag 08BV (blueprint: lem-pc-derived-mayer-vietoris-functorial).
-
-Proof:
-1. Choose K-injective representatives with injective terms
-   (prop-pur-kinjective-resolutions-exist). Restriction preserves K-injectivity
-   (lem-sc-derived-k-injective-restrict-open). The Mayer--Vietoris sequence is exact
-   degreewise by injective restriction surjectivity
-   (lem-sc-ringed-space-injective-restriction-surjective).
-2. Represent derived morphisms by chain maps into K-injective representatives
-   (lem-sc-kinjective-quasi-iso-comparison). Restriction gives a morphism of the
-   short exact sequences. Naturality of triangleOfSES, including its boundary,
-   gives the three commuting squares (lem-weil-pbc-complex-ses-triangle).
-3. For direct image, apply the triangulated right derived functor
-   (lem-pc-right-derived-functor-triangulated). Choose a K-injective representative
-   J of h_*I' and a quasi-isomorphism h_*I' → J. Its restrictions give the
-   comparison of the middle and intersection terms, using derived direct-image
-   composition (lem-pc-derived-direct-image-composition) and open restriction
-   (lem-pc-restrict-derived-direct-image-open).
-4. The source sequence is degreewise split because I' has injective terms. Its
-   other complexes are K-injective by restriction and the exact-left-adjoint
-   criterion (lem-weil-pbc-right-adjoint-preserves-kinjective). Apply
-   lem-pc-derived-functor-termwise-split-ses-triangle to identify the image
-   boundary with the boundary of the image sequence. Naturality of triangleOfSES
-   applied to q and its restrictions gives the final square, hence an isomorphism
-   of distinguished triangles. Quasi-coherence of Rh_*E' follows from
-   lem-pc-derived-direct-image-preserves-qcoh.
--/
+Source: Stacks, Tag 08BV. -/
 theorem schemeDerived_mayerVietoris_naturality
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
@@ -564,34 +538,7 @@ The comparison functor isomorphisms are the normalized constructions
 with the determining right-derived unit equation and sectionwise restriction identity,
 the same for every object.
 The triangle isomorphism includes compatibility with the connecting maps.
-Source: Stacks, Tags 08BV, 0D5T and 0DJ9
-(blueprint: lem-pc-derived-mayer-vietoris-functorial).
-
-Proof:
-1. Choose K-injective representatives with injective terms
-   (prop-pur-kinjective-resolutions-exist). Restriction preserves K-injectivity
-   (lem-sc-derived-k-injective-restrict-open). The Mayer--Vietoris sequence is exact
-   degreewise by injective restriction surjectivity
-   (lem-sc-ringed-space-injective-restriction-surjective).
-2. Represent derived morphisms by chain maps into K-injective representatives
-   (lem-sc-kinjective-quasi-iso-comparison). Restriction gives a morphism of the
-   short exact sequences. Naturality of triangleOfSES, including its boundary,
-   gives the three commuting squares (lem-weil-pbc-complex-ses-triangle).
-3. For direct image, apply the triangulated right derived functor
-   (lem-pc-right-derived-functor-triangulated). Choose a K-injective representative
-   J of h_*I' and a quasi-isomorphism h_*I' → J. Its restrictions give the
-   comparison of the middle and intersection terms, using derived direct-image
-   composition (lem-pc-derived-direct-image-composition) and open restriction
-   (lem-pc-restrict-derived-direct-image-open).
-4. The source sequence is degreewise split because I' has injective terms. Its
-   other complexes are K-injective by restriction and the exact-left-adjoint
-   criterion (lem-weil-pbc-right-adjoint-preserves-kinjective). Apply
-   lem-pc-derived-functor-termwise-split-ses-triangle to identify the image
-   boundary with the boundary of the image sequence. Naturality of triangleOfSES
-   applied to q and its restrictions gives the final square, hence an isomorphism
-   of distinguished triangles. Quasi-coherence of Rh_*E' follows from
-   lem-pc-derived-direct-image-preserves-qcoh.
--/
+Source: Stacks, Tags 08BV, 0D5T and 0DJ9. -/
 theorem schemeDerived_mayerVietoris_directImage
     (X Y : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y]

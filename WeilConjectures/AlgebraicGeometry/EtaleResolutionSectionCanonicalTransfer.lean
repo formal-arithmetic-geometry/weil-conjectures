@@ -24,28 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Canonical comparisons identify augmentation-preserving section transfers with pullback.
 Source: Stacks Project, Tag 01F8 and Remark 01FB (functoriality through resolutions),
-Tag 03F3 (localization), and Tag 0A50 (section complexes).
-(blueprint: lem-weil-pbc-etale-resolution-section-canonical-transfer)
-
-Proof: Adjunction sends α to a chain map β from g inverse image of I to J.
- Exactness of inverse image makes the source a resolution of g inverse image
- of G, and hα says β preserves that augmentation. On a cycle represented by
- f from the constant integer sheaf, β after g inverse image of f, precomposed
- with the constant-sheaf comparison, represents the Ext pullback class.
- This follows either from the derived-category formula for extMk, where the
- augmentation equation cancels the two resolution isomorphisms, or from
- independence of comparison lifts up to homotopy. Evaluation at 1 identifies
- the corresponding section with α evaluated at the terminal object followed
- by restriction along `terminalSectionPullback g`, exactly the explicit
- global transfer. The normalization fields of cX and cY identify the two
- homology classes with these Ext classes, giving the first identity. On W,
- carry out the same calculation with the free sheaf representing W and its
- identity generator. Naturality of the unit and the upperStarComp
- isomorphisms gives the coefficient transport in `openCohomologyPullback`;
- its section map is α followed by restriction along `openSectionPullback`.
- Surjectivity of homologyπ extends the calculation from cycles to all classes.
- Boundaries remain boundaries under these chain maps. Degree zero, empty
- opens, zero sheaves, and identity morphisms require no extra hypothesis. -/
+Tag 03F3 (localization), and Tag 0A50 (section complexes). -/
 theorem resolutionSection_canonical_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

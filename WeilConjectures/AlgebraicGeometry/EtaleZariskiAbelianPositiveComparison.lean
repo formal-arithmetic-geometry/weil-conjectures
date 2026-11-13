@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
 /-! # Positive-degree comparison for underlying abelian sheaves
 
 Source: Stacks Project, Descent, Proposition Tag 03DW (2), and Étale Cohomology,
-Theorem Tag 03P2 (blueprint: lem-sc-etale-zariski-abelian-positive-comparison).
+Theorem Tag 03P2.
 -/
 
 @[expose] public section
@@ -43,35 +43,7 @@ This statement concerns abelian sheaf cohomology, not derived sections in the
 category of modules, and makes no assertion in degree zero.
 
 Source: Stacks Project, Descent, Proposition Tag 03DW (2), Étale Cohomology,
-Theorem Tag 03P2, and Cohomology on Sites, Tags 03F3, 072W and 0733(1).
-(blueprint: lem-sc-etale-zariski-abelian-positive-comparison).
-
-Proof:
-1. Include the open subschemes into the small étale site. On each open W,
-   the unit-normalized identification of tensor pullback along its open immersion
-   with module restriction identifies direct image of the tensor-sections sheaf
-   with the underlying abelian sheaf of F. The unit equation of the pullback
-   composition comparison makes these identifications commute with inclusions
-   of opens. Naturality of the same adjunction comparison in F identifies the
-   direct image of m F G φ with the underlying abelian sheaf map of φ.
-2. On each affine open W, localization of sheaf cohomology identifies object
-   cohomology of the tensor-sections sheaf with global étale cohomology of the
-   sheaf associated to F restricted to W. Tensor pullback preserves
-   quasi-coherence, so affine quasi-coherent acyclicity makes this group zero
-   in every positive degree. Every open has an affine covering. Consequently
-   every positive cohomology-presheaf section is locally zero, and its
-   sheafification is zero. The sheafified-presheaf description of higher
-   direct images gives vanishing of all positive derived direct images.
-3. Apply Leray degeneration to this direct image. The edge map is the canonical
-   cohomology pullback followed by the adjunction counit and is an isomorphism.
-   Precompose it with cohomology of the direct-image identification in step 1.
-   This yields the asserted additive equivalence for each positive degree.
-4. The maps in step 3 are natural: use the square of step 1, functoriality of
-   cohomology pullback, and naturality of the counit. Their composite is the
-   displayed equality. The resolution interpretation of Ext identifies the
-   small enough-injectives Zariski Ext model and the standard large étale Ext
-   model with these same resolution maps, naturally in the coefficient sheaf.
-   No separatedness, nonemptiness or smallness assumption on X is used. -/
+Theorem Tag 03P2, and Cohomology on Sites, Tags 03F3, 072W and 0733(1). -/
 theorem etaleZariskiAbelianPositiveComparison (X : Scheme.{u})
     (m : ∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent],
       (F ⟶ G) → (etaleTensorSectionsSheaf F ⟶ etaleTensorSectionsSheaf G))

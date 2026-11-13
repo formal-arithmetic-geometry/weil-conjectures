@@ -31,10 +31,7 @@ namespace AlgebraicGeometry.Etale
 base-change arrow, and these isomorphisms intertwine the two arrows.  This is the
 derived-functor comparison part; the arrow-category packaging is proved below.
 
-Source: Stacks Project, Lemma 21.20.7(3), Tag 0D6J, and Remark 21.19.3, Tag 07A7.
-Proof: compare inverse and direct images sectionwise, derive the comparison using an
-injective resolution, and check compatibility with the adjunction units and counits.
-(blueprint: lem-sbc-base-change-restrict-scalars-comparison) -/
+Source: Stacks Project, Lemma 21.20.7(3), Tag 0D6J, and Remark 21.19.3, Tag 07A7. -/
 theorem restrictScalars_baseChange_comparison
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
@@ -101,22 +98,7 @@ of the base-change map by adjunction. The assembly below is the comparison part 
 `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients`, the
 change-of-rings paragraph in the module docstring and in
 `isIso_baseChangeHomologyMap_of_nsmul_eq_zero`; the following is the coefficient-comparison
-part of that argument, without any base-change-isomorphism hypothesis.
-
-Proof: restriction of scalars is exact and is computed on the same underlying sheaves.
-Inverse image commutes with it: the underlying inverse image is the inverse image of the
-underlying abelian sheaf, with the restricted scalar action. Direct image commutes with it
-sectionwise. Higher direct images commute with it as well: resolve a module sheaf by
-injective module sheaves; their underlying sheaves are acyclic for direct image on every
-étale slice, so the same resolution computes direct-image cohomology after restriction.
-This gives the comparison on derived direct images, compatible with their units and with
-composition. The underived exchange map is obtained from the pullback/direct-image
-adjunction units and counits, which agree under these comparisons. Taking its derived
-mate, then the degree-q homology, therefore gives a commutative square with invertible
-vertical maps. These two maps and their commutativity give the asserted arrow isomorphism.
-The construction also works for negative q, when both arrows have zero endpoints.
-
-(blueprint: lem-sbc-base-change-restrict-scalars-arrow) -/
+part of that argument, without any base-change-isomorphism hypothesis. -/
 theorem exists_baseChangeHomologyMap_restrictScalars_arrow_iso
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

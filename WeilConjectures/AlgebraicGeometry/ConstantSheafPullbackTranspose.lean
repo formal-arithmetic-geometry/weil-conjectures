@@ -39,20 +39,7 @@ private lemma leftUniq_transpose
     Adjunction.homEquiv_leftAdjointUniq_hom_app, Adjunction.homEquiv_unit]
 
 /-- The constant-sheaf comparison transposes inverse image to the unit on sections.
-Source: Stacks Project, Tag 08J6 (remark-before-Leray), and Tag 01FA.
-(blueprint: lem-weil-pbc-constant-sheaf-pullback-transpose)
-
-Proof: The upperStarConstantSheafIso is the unique comparison between the two
-left adjoints to sections on the source site. Its inverse therefore has identity
-transpose for the composite adjunction. Transpose its composite with L(a):
-naturality of the adjunction first gives the transpose of a followed by the
-unit of L ⊣ g_*, and then the canonical identification of sections of g_* with
-sections on the source. The Γ adjunction is transported from the terminal-section
-adjunction using ΓNatIsoSheafSections. Substitution of the definition of
-lowerStarCompGlobalSectionsIso cancels the two terminal-section identifications.
-The remaining composite is precisely η.app F. This is an equality of group
-homomorphisms before evaluation or passage to complexes. It holds for arbitrary
-M and F, including zero objects and empty schemes. -/
+Source: Stacks Project, Tag 08J6 (remark-before-Leray), and Tag 01FA. -/
 theorem constantSheaf_pullback_transpose {X X' : Scheme.{u}} (g : X' ⟶ X)
     (M : AddCommGrpCat.{u + 1})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

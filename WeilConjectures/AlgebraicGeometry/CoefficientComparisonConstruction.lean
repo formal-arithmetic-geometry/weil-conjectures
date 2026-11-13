@@ -24,8 +24,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pull sections back by the unit, then restrict to the support of the direct image.
-Source: Stacks Project, Tag 0097, restriction of a pullback section. 
-(blueprint: lem-pc-coefficient-section-map-linear)
+Source: Stacks Project, Tag 0097, restriction of a pullback section.
 -/
 def coefficientSectionAddMap {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
@@ -47,17 +46,7 @@ def coefficientSectionAddMap {X T : Scheme.{u}} (f : X ⟶ T)
       ((f ⁻¹ᵁ U).ι ''ᵁ Z)).hom.comp ((F.restrictAppIso (f ⁻¹ᵁ U).ι Z).hom.hom))
 
 /-- The section-unit map is linear for the structural map of the base.
-Source: Stacks Project, Tag 0096, module pullback adjunction; Tag 0097, composition.
-(blueprint: lem-pc-coefficient-section-map-linear).
-Proof: The source scalar is first restricted along the global structural map and
-then to Z. The restriction identification transports it through the inverse of
-Y.ι.appIso. The pullback unit is linear over the section ring on Y.ι(Z), with
-target scalars transported by g'. Restricting to the support transports it once
-more. On the target the scalar is transported successively by GammaSpecIso.inv,
-U.toSpecGamma, g, fprime and W.ι, followed by W.ι.appIso.inv. Naturality of the
-structure maps, the equality gprime f = fprime g U.ι, and the inverse identities
-of appIso identify these two composites. Thus both scalar actions agree. Empty
-opens cause no exception since restriction maps and linearity remain defined. -/
+Source: Stacks Project, Tag 0096, module pullback adjunction; Tag 0097, composition. -/
 theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -140,8 +129,7 @@ theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T)
   erw [hi, Category.id_comp]
 
 /-- The linear map of sections used as the mate in the composed adjunction.
-Source: Stacks Project, Tag 02KE, termwise coefficient construction. 
-(blueprint: lem-pc-coefficient-section-map-linear)
+Source: Stacks Project, Tag 02KE, termwise coefficient construction.
 -/
 def coefficientSectionLinearMap {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
@@ -161,8 +149,7 @@ def coefficientSectionLinearMap {X T : Scheme.{u}} (f : X ⟶ T)
       map_smul' := coefficientSectionAddMap_linear f F U Z g g' f' w W hW }
 
 /-- The coefficient morphism is the mate of the explicit linear map of sections.
-Source: Stacks Project, Tags 02KE and 01IA, adjunction construction. 
-(blueprint: lem-pc-coefficient-section-map-linear)
+Source: Stacks Project, Tags 02KE and 01IA, adjunction construction.
 -/
 def coefficientComparisonMorphism {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)

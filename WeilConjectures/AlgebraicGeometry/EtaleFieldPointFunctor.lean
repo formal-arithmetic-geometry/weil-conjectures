@@ -74,17 +74,7 @@ noncomputable def etaleFieldPointFunctor :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The geometric-point functor is full and faithful.
-Source: Stacks Project, Tag 03QR, the equivalence assertion
-(blueprint: lem-exc-etale-field-point-functor-fully-faithful).
-
-Proof: By Morphisms, Tag 02GL, an étale K-scheme is the disjoint union of spectra of
-finite separable extensions. On a component Spec L its geometric points are the
-K-embeddings L → Ksep, a nonempty finite transitive Galois set. An equivariant map
-from such a transitive set lands in one target orbit. The finite Galois classification
-identifies maps between these orbits with unique K-morphisms of the corresponding
-spectra. The coproduct universal property assembles these maps, proving fullness.
-Uniqueness on every component proves faithfulness. The empty source has a unique map;
-a nonempty source cannot map to the empty target on either side of the correspondence. -/
+Source: Stacks Project, Tag 03QR, the equivalence assertion. -/
 theorem etaleFieldPointFunctor_fullyFaithful :
     (etaleFieldPointFunctor K Ksep).Full ∧ (etaleFieldPointFunctor K Ksep).Faithful := by
   classical

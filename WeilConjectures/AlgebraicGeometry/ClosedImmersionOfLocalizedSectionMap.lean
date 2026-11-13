@@ -14,7 +14,6 @@ import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 # A surjective localized section map gives a closed immersion
 
 Source: Stacks Project, Tag 04DG, proof, final localization sentence.
-(blueprint: lem-weil-pbc-closed-immersion-localized-section-map).
 -/
 
 @[expose] public section
@@ -59,16 +58,7 @@ private theorem surjective_awayMap_of_localizedMap_surjective
 set_option backward.isDefEq.respectTransparency false in
 /-- Surjectivity of the localized affine section map makes the restriction over the
 corresponding principal open a closed immersion.
-Source: Stacks Project, Tag 04DG, proof, final localization sentence.
-(blueprint: lem-weil-pbc-closed-immersion-localized-section-map).
-
-Proof: Let A = Γ(S,U), B = Γ(X,f⁻¹U). The affine-morphism hypothesis makes f⁻¹U affine.
-For a in A, the open S.basicOpen a is affine, and its inverse image is the affine
-basic open defined by the image of a in B. Their section rings are A_a and B_a.
-Localization commutes with the linear map A → B. The localized modules of A and B
-are therefore their localized rings as A-modules, and the given surjectivity says
-A_a → B_a is surjective. The affine section-map criterion then gives a closed
-immersion over this basic open. This includes a = 0, when both opens are empty. -/
+Source: Stacks Project, Tag 04DG, proof, final localization sentence. -/
 theorem isClosedImmersion_restrict_basicOpen_of_localizedMap_surjective
     {X S : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f]
     (U : S.Opens) (hU : IsAffineOpen U) (a : Γ(S, U))

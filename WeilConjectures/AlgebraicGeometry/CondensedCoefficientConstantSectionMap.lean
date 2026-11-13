@@ -19,8 +19,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSectio
 
 /-! Constant-section coefficient naturality for the finite condensed subfield inclusion.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
-(blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
+Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

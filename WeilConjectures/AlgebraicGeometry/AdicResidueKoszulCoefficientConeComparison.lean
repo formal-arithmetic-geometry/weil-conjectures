@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Homology.Single
 
 Source: Stacks Project, proetale.tex, lemma-naive-completion (099M), and
 more-algebra.tex, lemma-sequence-Koszul-complexes.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -67,32 +66,7 @@ and makes no assertion about derived inverse limits.
 
 Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M);
 more-algebra.tex, lemma-sequence-Koszul-complexes; algebraization.tex,
-lemma-derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
-
-Proof: take E to be exact commutative constant-module realization, followed by
-extension to the completed coefficient sheaf and restriction to the slice U.
-The first functor is exact by module sheafification; the second is exact by
-flat_and_quotients, and slice restriction is exact. The same quotient theorem
-identifies E(A/J^(n+1)) with the actual quotient module on the slice. These
-identifications are induced by the projections, hence commute with qA.
-Identify the exterior complex with the ordered tensor of negative two-term
-complexes by splitting wedges according to their first basis vector. A wedge
-on an increasing subset maps to its tensor basis vector. This respects the
-contraction differential and sends the exterior diagonal tA to the product of
-its diagonal coefficients on that subset. Constant realization, extension and
-slice restriction preserve these finite tensor coordinates. The finite free
-evaluation pairing identifies this negative tensor with the internal dual of
-the positive Koszul tensor; the empty-subset basis vector is the dual unit.
-A map to a degree-zero complex has only its degree-zero component, and this
-unit is invertible in degree zero. Thus the normalization of epsilon makes
-the resulting augmentation precisely E(epsilonA). The supplied component
-identities uniquely specify epsilonA, tA and qA (for qA use surjectivity of
-the quotient map). Consequently all the strict squares agree. The additive
-mapping-cone comparison gives e and its naturality for every n <= m.
-For r=0 the exterior-degree-zero identification is the entire comparison;
-for the zero ring or J=A the same formulas and quotient universal property
-apply. No infinite tensor or product occurs. -/
+lemma-derived-completion-koszul (0A0E). -/
 theorem adicResidue_koszul_coefficient_cone_comparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

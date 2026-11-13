@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- An integral lattice of a pullback of a continuous `E`-module pulls back to an integral
-lattice of the further pullback along any morphism of schemes.
-(auxiliary; not a blueprint node) -/
+lattice of the further pullback along any morphism of schemes. -/
 theorem exists_integral_lattice_upperStar_comp {X U W : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E) X))
@@ -50,7 +49,6 @@ theorem exists_integral_lattice_upperStar_comp {X U W : Scheme.{u}}
 
 /-- Two locally free continuous `E`-modules on a locally Noetherian scheme admit integral
 lattices on a common connected affine etale neighbourhood of any given point.
-(auxiliary; not a blueprint node)
 
 Proof in words. Take an affine etale neighbourhood carrying a lattice of `M`, and over it an
 affine etale neighbourhood of a point above `x` carrying a lattice of the pullback of `N`.
@@ -100,7 +98,6 @@ theorem exists_connected_affine_etale_lattices [FiniteDimensional ℚ_[ℓ] E] (
 /-- On a quasi-compact quasi-separated scheme, every morphism between the rationalizations of
 two integral modules, the source being locally free, becomes the rationalization of an
 integral morphism after multiplication by a power of `ℓ`.
-(auxiliary; not a blueprint node)
 
 Proof in words. The restricted scalar extension of the target is the colimit of its
 multiplication-by-`ℓ` telescope, whose `k`-th leg is the extension unit followed by `ℓ⁻ᵏ`.
@@ -151,8 +148,7 @@ private theorem heartAbsorbDenominator
 
 /-- On an affine scheme carrying integral lattices of two continuous `E`-modules, every
 morphism between them is the rationalization of an integral morphism, after rescaling the
-source rationalization isomorphism.
-(auxiliary; not a blueprint node) -/
+source rationalization isomorphism. -/
 theorem CondensedRing.exists_integral_hom_of_lattices (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] {X V : Scheme.{u}} [IsAffine V]
     (q : V ⟶ X) {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -181,8 +177,7 @@ theorem CondensedRing.exists_integral_hom_of_lattices (ℓ : ℕ) [Fact ℓ.Prim
   exact ⟨g, eP', h⟩
 
 /-- A property of etale neighbourhoods which holds for some neighbourhood of every point
-holds for all members of some pro-etale cover.
-(auxiliary; not a blueprint node) -/
+holds for all members of some pro-etale cover. -/
 theorem _root_.AlgebraicGeometry.Scheme.exists_proetale_cover_of_forall_etale
     {X : Scheme.{u}}
     (p : ∀ Z : Scheme.{u}, (Z ⟶ X) → Prop)
@@ -205,7 +200,6 @@ scheme: a pro-etale cover by connected affine Noetherian schemes, on each of whi
 pullback of the morphism is the rationalization of a morphism of lisse integral modules.
 The pullback functors are passed as a family `U` equal to `upperStar`, so that the statement
 can be specialized along definitionally equal coefficient rings without unfolding them.
-(auxiliary; not a blueprint node)
 
 Proof in words: at each point take a connected affine etale neighbourhood carrying lattices
 of both modules (`CondensedRing.exists_connected_affine_etale_lattices`); these form a
@@ -262,8 +256,7 @@ Source: latest blueprint,
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
 `sk-lem-coefficient-heart.proof.md`, proof (1),
 "First let Lambda = E", through the construction of h = pi^m f.
-This is a step of the proof of `sk-lem-coefficient-heart`
-(auxiliary; not a blueprint node).
+This is a step of the proof of `sk-lem-coefficient-heart`.
 
 Proof in words: at each point of `X`, take a connected affine etale neighbourhood, which is
 Noetherian, carrying integral lattices of both `M` and `N`

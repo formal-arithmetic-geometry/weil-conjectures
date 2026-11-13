@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 Source: Stacks Project, Tag 08EV, proof, the upper tensor bound;
 Tags 06YS and 06YD for bounded-above flat representatives.
-(blueprint: lem-pc-derived-tensor-upper-bound)
 -/
 
 @[expose] public section
@@ -29,15 +28,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Tensoring a derived object with a module in degree zero preserves its upper bound.
-Source: Stacks Project, Tag 08EV, proof (upper bound), and Tags 06YS and 06YD.
-(blueprint: lem-pc-derived-tensor-upper-bound)
-
-Proof: Represent E by its good upper truncation at b. Replace that complex by a flat
-complex P with the same termwise upper bound using bounded-above flat replacement.
-The replacement is K-flat by Tag 06YD and represents E. The total tensor of P with
-F in degree zero vanishes termwise above b: in a summand indexed by p+q=i>b,
-either p>b, so P^p is zero, or q>0, so F[0]^q is zero. Its cohomology is therefore
-zero in those degrees. This P witnesses the derived-tensor vanishing predicate. -/
+Source: Stacks Project, Tag 08EV, proof (upper bound), and Tags 06YS and 06YD. -/
 theorem schemeDerivedTensorCohomologyVanishes_of_upper_bound
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

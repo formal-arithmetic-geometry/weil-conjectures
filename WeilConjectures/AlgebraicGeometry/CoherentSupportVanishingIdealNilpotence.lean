@@ -24,7 +24,6 @@ import Mathlib.RingTheory.Finiteness.Ideal
 /-! # Nilpotence of the vanishing ideal on a coherent module
 
 Source: Stacks Project, Tag 01Y9.
-(blueprint: lem-pc-s3-coherent-support-vanishing-ideal-nilpotence)
 -/
 
 @[expose] public section
@@ -267,18 +266,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The vanishing ideal of a closed set containing the support kills a coherent module
 by some power.
 
-Source: Stacks Project, Tag 01Y9, as used in the ideal-power paragraph of Tag 01YF.
-(blueprint: lem-pc-s3-coherent-support-vanishing-ideal-nilpotence)
-
-Proof: On every affine open of the Noetherian scheme the coherent module has a finite
-module of sections M. Its support is V(Ann M). The vanishing ideal J of T has zero
-locus T on that affine. Support containment implies J is contained in the radical
-of Ann M. Since J is finitely generated, a power of J is contained in Ann M.
-Take a finite affine cover and the maximum of these exponents. Every higher power
-also annihilates the corresponding affine section module. The ideal-product
-construction has affine sections equal to the product of the section ideal and
-module, so the resulting global power product is zero on the cover, hence zero
-by the sheaf axiom. An empty scheme admits exponent zero. -/
+Source: Stacks Project, Tag 01Y9, as used in the ideal-power paragraph of Tag 01YF. -/
 theorem coherent_support_vanishingIdeal_nilpotence
     (X : Scheme.{u}) [IsNoetherian X] (T : TopologicalSpace.Closeds X)
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

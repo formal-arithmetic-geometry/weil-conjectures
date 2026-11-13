@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperAmbientTransportComposition
 /-! # Second-side pasting under a proper ambient change
 
 Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, proper-projection grid.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,23 +26,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
   lowerStar openImmersionLowerShriek rightDerivedLowerStarComp
 
-/-- The second side word commutes with the proper change of graph product.
-
-Proof: denote the product map by r and the map of second neighborhoods by r2.
-The left square between the neighborhoods and products is Cartesian. Its pasting
-with the old product-projection square equals the pasting of the new projection
-square with the supplied square q,e_t,e_s,pr: both outer rectangles have the same
-two projections. Vertical pasting of the normalized proper/open exchange identifies
-the two exchange composites. The graph identities s2_t r2 = s2_s, s2_s d_s = a_s,
-and s2_t d_t = a_t, together with a_t q = a_s, identify the inserted proper images.
-Move these direct-image compositors through the exchanges by naturality and use
-their associativity. Finally r followed by the old map to Y is the new map to Y;
-pr followed by p_s is p_t. The boundary is exactly the displayed transport of the
-second side. This argument never uses the first side or the intersection word,
-and it remains valid for identity ambient maps and empty supporting opens.
-
-Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical pasting.
-(auxiliary; not a blueprint node). -/
+/-- The second side word commutes with the proper change of graph product. -/
 theorem etaleGraphProperAmbientSecondSide
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComp
 /-! # Comparing the concrete Mayer--Vietoris sequences after direct image
 
 Source: Stacks Project, Tags 08BV, 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-image-resolution-comparison).
 -/
 
 @[expose] public section
@@ -33,28 +32,7 @@ attribute [local instance 2000] schemeMVModuleAbelian
 
 /-- A map of concrete short complexes realizes the normalized first and intersection maps.
 Source: Stacks Project, Tag 08BV, concrete sequence; Tag 08FE, sectionwise comparison;
-Tag 0D5T, derived composition comparison.
-(blueprint: lem-pc-mayer-vietoris-image-resolution-comparison).
-
-Proof: Put I = schemeMVResolution X E and J = schemeMVResolution Y (Rh_*E).
-The computation isomorphism phi_I followed by the inverse resolution isomorphism
-of J gives a derived map Q(h_*I) to Q(J). Because J is K-injective, represent
-this map by an actual chain map f : h_*I to J, using fullness of localization
-on morphisms into a K-injective complex. Apply open restriction and open direct
-image to f for U, V and their intersection. The sectionwise identity of Tag
-08FE identifies h_*(j_*I|h^-1(W)) with j_*(h_*I)|W, naturally in W.
-The pair of these maps defines the middle component using the additive
-biproduct comparison. Naturality of restriction units and of the difference
-of restrictions gives both commuting squares, hence a map m of short complexes.
-The first displayed identity is the defining localized equation for f.
-For the third component, the right-derived unit equations characterizing
-schemeMVDirectImageComposition and schemeMVOpenRestrictionComparison compute
-these comparisons on I as the localized sectionwise identity. Insert the
-comparison for I on the inverse-image intersection and for J on U intersect V,
-and use naturality at f. The two resolution isomorphisms then give exactly the
-second identity. This assertion contains no connecting morphism; it holds
-without any cover assumption. Empty and repeated opens give the same sectionwise
-identities, and no injectivity or K-injectivity of h_*I is required. -/
+Tag 0D5T, derived composition comparison. -/
 theorem schemeMV_image_resolution_comparison
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

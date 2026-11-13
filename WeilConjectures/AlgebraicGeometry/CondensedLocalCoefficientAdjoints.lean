@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.SplitCoefficientDerivedFaithful
 # Canonical local scalar adjoints at every finite coefficient stage
 
 Source: archived ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

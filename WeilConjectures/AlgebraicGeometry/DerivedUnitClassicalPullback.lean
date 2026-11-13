@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.IdentityDerivedHomologyComparison
 /-! # Derived-unit pullback and classical derived base change
 
 Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-derived-unit-classical-pullback)
 -/
 
 @[expose] public section
@@ -29,18 +28,7 @@ open Scheme Etale
 /-- Homology of the derived-unit section map agrees with classical right-derived
 base change, through the canonical single-complex comparisons.
 
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-derived-unit-classical-pullback)
-
-Proof: the derived-unit and Leray description of pullback equals the right-derived
-descendant of the underived section map, by the derived-unit formula. Deriving
-that same section map as a square with identity functor on abelian groups gives
-rightDerivedFunctorPlusBaseChange. Its defining unit compatibility and the
-universal property of the right-derived functor identify these maps. Apply homology
-and transport through the inverse-image/single-complex isomorphism. The definition
-of rightDerivedBaseChange is precisely this transport followed by the classical
-single-complex comparisons. Identity-functor comparisons cancel, yielding the
-stated equality, including in degree zero. -/
+Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA. -/
 theorem derivedUnit_classicalPullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G

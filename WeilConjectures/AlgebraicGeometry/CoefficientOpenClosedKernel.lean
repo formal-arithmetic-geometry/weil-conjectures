@@ -637,28 +637,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 This assertion concerns arbitrary coefficient-sized module sheaves and does not involve
 etale comparison or an etale antecedent.
 
-Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open
-(auxiliary; not a blueprint node).
-
-Proof: identify inverse image along the open immersion with restriction along composition
-of site objects. The site-level composition/base-change adjunction induces an adjunction
-on sheaves; uniqueness of left adjoints identifies this restriction with the specified
-Kan-extension pullback. Thus extension by zero is left adjoint to that pullback.
-Its counit has zero composite with the closed unit. Check that this counit is monic and
-has image the kernel locally, as in Tag 09AH. On an affine weakly contractible test
-object Spec B, the inverse image of Z is cut out by an ideal I. Quasi-compactness of j
-provides finitely many functions of I whose distinguished opens cover its complement.
-The distinguished opens and the localization of B at elements invertible modulo I
-form a pro-etale cover. On a distinguished open the two maps are an isomorphism followed
-by a map to zero. On the localization every point specializes into the closed fibre;
-extension by zero vanishes there, and the closed unit is an isomorphism. The sequence
-is therefore left exact on this covering. The sheaf condition descends monicity and
-factorizations of maps killed by the closed unit, giving the kernel universal property.
-These local maps preserve the A-action. Transport the covering and all restriction maps
-through AsSmall.down and AsSmall.up, which are inverse site equivalences. This does not
-shrink coefficients or sections and works for the displayed independent universes.
-Uniqueness of kernels gives the isomorphism. If U is empty the open term and the kernel
-are zero; if Z is empty the counit identifies the open term with F itself. -/
+Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open. -/
 theorem coefficientOpenClosedKernelIso
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

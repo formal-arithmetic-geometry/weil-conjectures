@@ -23,19 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The constant-sheaf pullback comparison sends the adjunction unit to composition
 with the first projection, in the description of constant sheaves by continuous maps.
-Source: Stacks Project Tags 03Q1 (2), (4), and 0A5G.
-(blueprint: lem-weil-pbc-constant-pullback-unit-continuous-map)
-
-Proof: Construct the natural transformation from the constant sheaf on Y to the
-pushforward of the continuous-map sheaf on Y₀ by composition with the first
-projection. Apply the constant-sheaf adjunction on Y and then the terminal-object
-comparison for pushforward. On a constant m, its value is the constant function m,
-by the unit identity for the continuous-map comparison. The same calculation on Y₀
-computes the adjunct of that comparison. Uniqueness of the left adjoint identifies
-the two adjuncts, and injectivity of the adjunction Hom equivalence gives equality
-of the sheaf morphisms. Evaluation at W and g gives the claimed formula. This uses
-no finiteness hypothesis on M. Empty objects and the trivial group are covered by
-the same constant-function calculation. -/
+Source: Stacks Project Tags 03Q1 (2), (4), and 0A5G. -/
 theorem constant_pullback_unit_continuousMap
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M]

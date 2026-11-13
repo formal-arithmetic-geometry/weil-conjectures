@@ -240,21 +240,8 @@ private theorem model_affine_basis (X : Scheme.{u})
     exact t.down.1.prop
 
 /-- Positive derived sections of the comparison pullback vanish over affine etale objects.
-Source: Stacks Project, Tag 099U (lemma-affine-vanishing) and Tag 099V
-(lemma-relative-comparison), first proof paragraph; blueprint
-sk-lem-pe-injective-acyclicity, affine restriction and Cech computation
-(auxiliary; not a blueprint node).
-
-Proof: use the affine ind-etale basis directly on the coefficient-sized pro-etale
-model. Transport cover-density and finite covering refinements through AsSmall.up.
-Closure under pullbacks gives closure of all chosen Cech intersections, by induction
-using their universal properties. The finite affine Cech calculation gives zero positive
-Cech cohomology for the intrinsic comparison pullback. Apply the module Cech criterion
-to an injective resolution in the intrinsic module category, then its canonical
-right-derived evaluation isomorphism. The requested affine etale object belongs to the
-basis. Thus neither localization nor a change to an abelian-sheaf resolution is needed.
-No hypothesis on the size of A relative to u, other than the displayed common universe,
-is used. Empty coverings and the zero coefficient ring are included -/
+Source: Stacks Project, Tag 099U and Tag 099V, first proof paragraph; blueprint
+sk-lem-pe-injective-acyclicity, affine restriction and Cech computation. -/
 theorem coefficientComparison_affineSections_vanishing (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

@@ -247,23 +247,9 @@ private lemma signedIso_eval (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
   rw [← Category.assoc, ← MonoidalCategory.comp_whiskerRight, Iso.hom_inv_id,
     MonoidalCategory.id_whiskerRight, Category.id_comp]
 
-/-! Remaining coherence package for finite Tate pullback.
-(auxiliary; not a blueprint node). -/
+/-! Remaining coherence package for finite Tate pullback. -/
 /-- Derived tensor/shift comparison and change of annihilating exponent for finite Tate
-sheaves. Source: Stacks Project, Tags 03PK, 07A4 and 0G7E.
-
-Proof: compose the existing derived monoidal comparison with the degree-zero pullback
-comparison and commute pullback past the shift. For exponent change write `m' = m * k`.
-Kummer exactness makes multiplication by both `m` and `k` on the multiplicative-group
-sheaf epimorphic. The induced map `ker(m*k) → ker(m)` is the cokernel of multiplication
-by `m` on `ker(m*k)`, as one checks by lifting along those epimorphisms. Maps from the
-coefficient root line to an `A`-module sheaf are exactly additive maps from roots of unity
-to the underlying abelian sheaf. Since `mA = 0`, every such map factors uniquely through
-that cokernel. Thus the exponent map induces an isomorphism on coefficient lines. Its
-formula on pure generators follows from the scalar-extension adjunction. Tensor powers
-extend it to positive degrees; precomposition with its inverse extends it to duals.
-Naturality of evaluation gives the final equation.
-(auxiliary; not a blueprint node). -/
+sheaves. Source: Stacks Project, Tags 03PK, 07A4 and 0G7E. -/
 theorem etaleFiniteTwistPullback_rest (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hm : 0 < m) (hA : (m : A) = 0)
     (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShif
 /-! # Pullback compatibility of the canonical derived-Hom class map
 
 Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-abelian-higher-direct-image-class-compatibility).
 -/
 
 @[expose] public section
@@ -136,22 +135,7 @@ noncomputable def abelianHigherDirectImageClass {S Y : Scheme.{v}} (h : Y ⟶ S)
 
 /-- The explicit class map commutes with pullback of a raw class and the canonical
 higher-direct-image transition. Source: Stacks Project, Tag 03Q8 (the canonical
-sectionwise comparison), Tag 09Z1 (compatibility of comparison maps).
-(blueprint: lem-sbc-abelian-higher-direct-image-class-compatibility).
-
-Proof: Write the adjunct of z as the derived unit followed by the direct image
-of the single-functor comparison and z. Expand the higher-image transition as
-its defining derived unit, pullback-composition comparison, counit, and coefficient
-map. Naturality of the derived unit moves z through the pullback. The triangle
-identity cancels the counit with the unit. The coherence of the exact pullback
-single-functor comparison and the pullback-composition comparison identifies
-the remaining source factor with the single of upperStarComp. Naturality of the
-shift comparison moves the shifted coefficient map to the right and identifies
-the result with the adjunct of the displayed pulled-back class. Applying zeroth
-homology, its single-functor comparison, and the shift-to-degree-p comparison
-preserves this equality. Finally evaluate at the identity generator. These are
-identities of actual adjunctions and functors, valid for all schemes and all
-nonnegative degrees; no geometric finiteness assumptions enter. -/
+sectionwise comparison), Tag 09Z1 (compatibility of comparison maps). -/
 theorem abelianHigherDirectImageClass_pullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

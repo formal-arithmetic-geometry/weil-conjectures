@@ -75,23 +75,7 @@ private theorem subsingleton_H_of_isZero_higherDirectImage_sepClosed
 /-- The inverse image of an injective Z/n-module sheaf is acyclic after extending
 algebraically closed scalars, when n is invertible in the base field.
 Source: Stacks Project, Tag 0F1C (field-extension exchange), Tag 03QU (cohomology over
-separably closed bases) and Tag 03FD (abelian acyclicity of injective module sheaves).
-(blueprint: lem-sc-algclosed-extension-injective-acyclic)
-
-Proof: Identify J with a module over the constant Z/n ring sheaf, preserving
-injectivity and the underlying abelian sheaf. The injective-module direct-image
-acyclicity theorem gives vanishing of every positive higher direct image along f.
-The identity of J, and hence of its underlying abelian sheaf, is killed by n.
-Apply relative field-extension exchange to identify the higher direct image after
-extension with the exact inverse image of this zero sheaf. It is therefore zero.
-Global sections on Spec K are exact because K is separably closed. Their total
-right derived functor is their exact derived functor; Leray and the homology
-comparison identify the positive cohomology on X_K with zero. The comparison
-between Sheaf.H and derived cohomology, followed by the module-forgetting inverse
-image isomorphism, gives precisely the group in the statement. For n = 1 every
-module sheaf is zero; n = 0 is excluded by hn. Empty X causes no exception.
-The field-extension comparison is proved from smooth finite-type stages and affine
-inverse-limit continuity, using perfectness of k. -/
+separably closed bases) and Tag 03FD (abelian acyclicity of injective module sheaves). -/
 theorem subsingleton_cohomology_upperStar_injective_algClosed_extension
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]

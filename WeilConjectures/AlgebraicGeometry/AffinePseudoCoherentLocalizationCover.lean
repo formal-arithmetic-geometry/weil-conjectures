@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
 
 /-! # Local module models on a finite principal-open cover
 
-Source: Stacks Project, Tag 08E7, finite-cover and local-model steps
-(blueprint: lem-pc-affine-pseudo-coherent-localization-cover).
+Source: Stacks Project, Tag 08E7, finite-cover and local-model steps.
 -/
 
 @[expose] public section
@@ -31,23 +30,7 @@ namespace AlgebraicGeometry
 on a finite principal-open cover. This asserts only the local models, not their gluing.
 
 Source: Stacks Project, Tag 08E7, finite-cover and local-model steps, using the local
-finite-free characterization in Tags 08CB and 08E5
-(blueprint: lem-pc-affine-pseudo-coherent-localization-cover).
-
-Proof:
-1. Let S consist of the elements f for which the localized module complex is
-   pseudo-coherent. At each prime choose a neighbourhood U and its finite-free
-   model from scheme pseudo-coherence. The principal-open basis gives D(f) ⊆ U
-   containing that prime. Apply affine_pseudoCoherent_principal_model to this
-   model to show f belongs to S.
-2. Thus the principal opens defined by S cover Spec A. The principal-open
-   covering criterion says Ideal.span S is the unit ideal. Membership of 1 in
-   an ideal span uses only finitely many generators, giving a finite subset t
-   of S whose span is still the unit ideal.
-3. Enumerate t using Fin (Fintype.card t). Surjectivity of the enumeration
-   identifies its range with t; every member has the required local property
-   by membership in S. Empty spectra and empty enumerations need no special
-   branch: the same span criterion and finite-subset theorem apply. -/
+finite-free characterization in Tags 08CB and 08E5. -/
 theorem affine_pseudoCoherent_localization_cover (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wX}

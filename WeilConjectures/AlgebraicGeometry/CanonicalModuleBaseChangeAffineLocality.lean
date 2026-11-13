@@ -34,24 +34,7 @@ namespace AlgebraicGeometry
 on an affine open W mapping into an affine open V of the base. This lemma identifies
 restricted maps and transports cartesian squares; it does not detect global invertibility.
 Source: blueprint `lem-pc-rf-base-change-flat-module`, Step 1; Stacks Tag 08IB,
-first paragraph of the proof, and Tag 08HY for the canonical mate.
-(blueprint: lem-pc-canonical-module-base-change-affine-locality).
-
-Proof: identify X' with the chosen pullback via its projection-preserving isomorphism.
-The pullback-composition comparisons and their derived analogues identify the maps:
-the canonical mate commutes with this identification by the adjunction unit equations.
-Restrict to V in S and W in S'. Exact open restriction commutes with derived pullback,
-and derived direct image commutes with restriction to a full inverse image. Under
-these comparisons the restriction to W of the displayed composite is the composite
-for f^{-1}(V) -> V and W -> V. The comparison c restricts to a left-derived counit
-comparison: restrict its witnessing counit, use the termwise tensor restriction
-identification, and commute this with the single-complex identification. Relative
-flatness and quasi-coherence restrict; quasi-compactness and separatedness persist
-under open base change. Identify the two affine opens with spectra of their section
-rings, transport the restricted morphisms and comparison along those chart
-isomorphisms, and apply haffine. Finally transport invertibility back along the
-source and target comparisons. Empty W gives a zero derived category. No Cech
-flatness calculation or local-to-global detection is used in this lemma. -/
+first paragraph of the proof, and Tag 08HY for the canonical mate. -/
 theorem canonicalModuleBaseChange_isIso_on_affine_open_of_affine_cases
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

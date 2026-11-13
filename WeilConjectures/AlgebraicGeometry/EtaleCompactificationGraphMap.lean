@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 under inverse image/direct image for the proper projection.
 
 Source: Stacks Project, Etale Cohomology, Tag 0F4L, graph extension.
-(auxiliary; not a blueprint node).
 
 The graph projection is constructed from the unit of inverse image/direct image for
 the graph and the inverse of its open-extension-to-direct-image comparison. Thus the

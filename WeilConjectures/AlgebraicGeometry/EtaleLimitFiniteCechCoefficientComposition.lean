@@ -21,27 +21,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 set_option linter.unusedVariables false in
 /-- The composition law for prescribed descended Cech coefficient maps.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
-Cech comparison. This is the composition part of the agent's explicit etale realization.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-composition).
-
-Proof: Apply HomologicalComplex.Hom.ext degreewise and Pi.hom_ext at each tuple.
-Postcompose with the invertible presheaf image of eNj r n t. For m(a) followed by
-m(b), substitute the component equation for b, reassociate, then substitute that
-for a. The intermediate restriction along eNj k cancels. Naturality of the unit
-and of φ b moves restriction along gamma a past these transformations. Substitute
-hcomposition for φ(a ≫ b), and use upperStarComp_hom_app_unit_app evaluated at
-Wj j n t to replace the two successive units by the unit of the composite followed
-by the inverse-image composition comparison. The geometric comparison for the
-composite is the canonical iterated-pullback comparison followed by the pullback
-of gamma a and then gamma b. It equals gamma (a ≫ b): hγ for a and b gives the
-first projection to W0, which equals that for the composite by hγ and D.map_comp;
-the structural projections agree because all maps are in the etale over-category.
-The universal property of the pullback Wj r identifies the two maps. Contravariant
-functoriality now turns the combined restrictions into restriction along the
-inverse of gamma (a ≫ b). The resulting expression is exactly the prescribed
-component equation for m(a ≫ b). Cancel the target isomorphism and finish by
-extensionality. With empty K all tuple checks are vacuous. No leg law is asserted.
--/
+Cech comparison. This is the composition part of the agent's explicit etale realization. -/
 theorem etale_limit_finite_cech_coefficient_composition
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -24,7 +24,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! The unit-to-complete direction of the extended Cech criterion.
 
 Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-unit-isIso-implies-complete).
 
 Proof: on a finite-generator slice, tensoring the extended Cech complex with the
 localization at a generator makes one two-term factor contractible. Tensor-Hom
@@ -419,8 +418,7 @@ end LocalCalculation
 
 /-- An invertible augmented extended Cech unit forces local derived completeness.
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-unit-isIso-implies-complete). -/
+Source: Stacks Project, algebraization.tex, Tags 099B and 099F. -/
 theorem ringedExtendedCech_unit_isIso_implies_complete
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

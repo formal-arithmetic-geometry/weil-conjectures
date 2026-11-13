@@ -46,13 +46,7 @@ private theorem integralScalarMap_mono (ℓ : ℕ) [Fact ℓ.Prime]
   exact mono_of_mono φ eE
 
 /-- The scalar-localization unit is injective on each standard finite free integral module.
-Source: injectivity of O_E to E and naturality of the extension unit.
-(auxiliary; not a blueprint node)
-
-Proof. For the regular module the unit, followed by the regular extension
-isomorphism, is the injective coefficient map. For a finite free module, compose
-a morphism killed by the unit with each coordinate projection. Naturality and
-injectivity of the regular unit show all coordinates vanish. -/
+Source: injectivity of O_E to E and naturality of the extension unit. -/
 theorem integralFiniteFree_unit_mono (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) (n : ℕ) :
@@ -101,14 +95,7 @@ private theorem integralRational_pow_nsmul_isIso (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- The kernel of the integral adjoint of a surjective rational finite matrix
 has a model as the kernel of an integral matrix with surjective rationalization.
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization.
-(auxiliary; not a blueprint node)
-
-Proof. Clear the matrix denominators on the compact scheme. Adjunction identifies
-the integral numerator followed by the target's localization unit with the
-corresponding power of ℓ times the original adjoint. The localization unit is mono
-on a finite free module, and ℓ is invertible on rational modules. These two facts
-identify the kernels. The same scalar invertibility preserves rational surjectivity. -/
+Source: Bhatt--Scholze, Section 6.8, continuous coefficient localization. -/
 theorem integralFiniteFree_kernel_model (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u}) [CompactSpace X] (n m : ℕ)

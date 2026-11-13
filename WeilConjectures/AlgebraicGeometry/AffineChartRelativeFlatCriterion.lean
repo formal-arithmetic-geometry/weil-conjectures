@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Relative flatness on a single affine chart
 
 Source: Stacks Project, Morphisms Tag 01U4; Algebra Tag 00HT (6).
-(blueprint: lem-pc-affine-chart-relative-flat-criterion).
 -/
 
 @[expose] public section
@@ -30,18 +29,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections on one affine chart are flat over an affine base precisely when the
 module stalks on that chart are flat over the corresponding base stalks.
-Source: Stacks Project, Morphisms Tag 01U4; Algebra Tag 00HT (6).
-(blueprint: lem-pc-affine-chart-relative-flat-criterion).
-
-Proof: Write R = O(S) and C = O(U). Quasi-coherence identifies each stalk at x in U
-with C_x tensor_C G(U), using the ordinary germ action. If G(U) is R-flat,
-localization in C preserves R-flatness. The base stalk is a localization of R,
-and flatness over R is equivalent to flatness over that localization for a module
-on which it acts. Germ-stalkMap compatibility identifies these actions.
-Conversely, choose the point of U for each maximal ideal of C. The base stalk is
-R_p and is R-flat. Relative stalk flatness therefore gives R-flatness of each
-localized C-module by transitivity. The relative local criterion gives R-flatness
-of G(U). Empty U and zero modules are included in the localization criterion. -/
+Source: Stacks Project, Morphisms Tag 01U4; Algebra Tag 00HT (6). -/
 theorem affine_chart_relative_flat_iff {X S : Scheme.{u}} [IsAffine S]
     (f : X ⟶ S) (G : X.Modules) [G.IsQuasicoherent] (U : X.affineOpens) :
     (letI : Module Γ(S, ⊤) Γ(G, U.1) :=

@@ -29,24 +29,7 @@ open Etale
 representatives of a bounded below derived object.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
 derived.tex, Lemmas 070I and 070K; step 7 of the explicit comparison
-in lem-weil-pbc-derived-exchange-termwise.
-
-Proof: choose P from injectiveObjectEquivalence, a bounded below complex of
-injectives representing K. The comparison h from I to P is invertible in the
-homotopy category: lift the inverse of its localized isomorphism by the
-K-injective Hom bijection and use injectivity to verify the inverse identities.
-Represent a homotopy inverse by a complex map v from P to I. Precompose j with
-g'^* v to obtain j_P. This is a quasi-isomorphism since termwise inverse image
-preserves homotopies and v is a homotopy equivalence. Apply the assumed bounded
-formula to P, its canonical resolution isomorphism and j_P. Naturality of the
-underived exchange shows e_P composed with g^* f_* h equals e in the homotopy
-category, since v h is homotopic to the identity. Naturality of the exact
-inverse-image comparison gives the same equality for source comparisons.
-The target resolution isomorphism is unchanged: its expression for P becomes
-t after cancelling h v under localization. Uniqueness of the K-injective
-comparison to P' therefore gives the same target comparison. Precompose the
-bounded equation with Q(g^* f_* h) and substitute these three equalities.
-(blueprint: lem-weil-pbc-derived-exchange-unbounded-transport). -/
+in lem-weil-pbc-derived-exchange-termwise. -/
 lemma derivedExchangeUnboundedTransport
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)

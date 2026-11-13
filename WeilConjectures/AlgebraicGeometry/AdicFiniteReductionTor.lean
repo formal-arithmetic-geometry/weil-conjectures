@@ -196,22 +196,7 @@ private theorem tensorTest_devissage {D₀ : Type v} [SmallCategory D₀]
 
 /-- The residue Tor interval controls every positive-power reduction.
 Source: Stacks Project, proetale.tex, Tag 09C2 (2), and sites-cohomology.tex,
-lemma-bounded; finite-Tor comparison over discrete Noetherian coefficients.
-(auxiliary; not a blueprint node).
-
-Proof: The finite-Tor comparison transfers the given interval from C to its
-comparison pullback, hence through e to the residue reduction. Resolve N by one
-K-flat complex P with flat terms. Its scalar extensions represent all reductions
-and remain K-flat with flat terms. For an A/J^(n+1)-module sheaf F, filter F by
-J^i F for 0 <= i <= n+1. Each successive quotient G is annihilated by J.
-Balancing identifies the tensor of the nth reduction with G with the tensor of
-the residue reduction with G. The residue Tor bound gives vanishing outside
-[a,b]. Tensoring the short exact filtration sequences with P is degreewise
-exact because its terms are flat. Their long exact homology sequences and
-induction from the zero last term give the bound for F. Changing K-flat
-representatives preserves the tests, giving the stated universal predicate.
-For n=0 this is just comparison; J=0 gives a constant filtration and J=A gives
-the zero quotient category. No completeness of N is needed. -/
+lemma-bounded; finite-Tor comparison over discrete Noetherian coefficients. -/
 theorem adicFiniteReduction_tor
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

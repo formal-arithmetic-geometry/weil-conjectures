@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Quasi-coherence in the affine algebra derived adjunction
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof
-(blueprint: lem-sc-affine-algebra-derived-adjunction-qcoh).
+Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
 -/
 
 @[expose] public section
@@ -31,20 +30,7 @@ namespace AlgebraicGeometry
 
 /-- Every left adjoint to the canonical affine algebra derived direct image preserves
 quasi-coherent cohomology.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof
-(blueprint: lem-sc-affine-algebra-derived-adjunction-qcoh).
-
-Proof: Use the ringed-space derived adjunction to obtain the concrete tensor
-pullback P and its left-derived functor D. The affine stalk calculation
-(affine_algebra_tensorModulePullback_exact) makes P exact on all module sheaves.
-Consequently P.mapDerivedCategory is also a left-derived functor, with its
-invertible localization comparison. Uniqueness of left-derived functors gives
-D isomorphic to P.mapDerivedCategory. Uniqueness of left adjoints identifies
-the given L with D. The exact-functor homology comparison identifies every
-H^n(P.mapDerivedCategory M) with P(H^n(M)), without boundedness. Tensor
-pullback preserves quasi-coherence by the local free-presentation argument
-of Stacks 01BG (tensorModulePullback_isQuasicoherent). Apply it to H^n(M),
-then transport along the homology comparison and the isomorphism from L. -/
+Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof. -/
 theorem affine_algebra_derived_pullback_preserves_qcoh
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

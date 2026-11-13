@@ -88,8 +88,7 @@ set_option backward.isDefEq.respectTransparency false in
 
 This is the termwise part of the chain-map comparison; the chain-map
 extensionality argument is supplied by `affine_hom_complex_d`.
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
-(blueprint: lem-sc-affine-hom-complex-evaluation-d-components) -/
+Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3. -/
 theorem affine_hom_complex_d_components
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
@@ -165,7 +164,7 @@ theorem affine_hom_complex_d_components
   intro n
   exact congrArg (fun g ↦ g.f n) hd
 
-/-- (blueprint: lem-sc-affine-hom-complex-evaluation-d) -/
+/-- -/
 theorem affine_hom_complex_d
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

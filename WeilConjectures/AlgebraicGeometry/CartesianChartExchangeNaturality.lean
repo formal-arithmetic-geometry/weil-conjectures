@@ -32,28 +32,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The explicit chart lift and apex isomorphism commute with the specified
 cartesian derived exchange. This asserts an identity between constructed maps;
 it does not choose an isomorphism, lift, coefficient object, or representative.
-Source: Stacks Project, Tags 0EYM, 03Q8, 03CB and 09YQ.
-(blueprint: lem-sc-cartesian-chart-exchange-naturality).
-
-Proof: Apply rawRestrictedCohomologyComparison_naturality to the chart cone leg
-with its upperStarComp coefficient map. It identifies the inverse evaluation of
-the restricted cohomology map with abelianHigherDirectImageRawPullback of the
-stage class. Expand cartesianChartRawAdjunctionIso on both sides. Pullback
-uniqueness identifies the two arrows from the actual apex source to the chart
-stage: the inverse chart identification followed by the chart leg equals the
-cartesian projection followed by the inverse stage identification. Each equality
-is checked after the two pullback projections. Inverse-image composition then
-identifies the coefficient maps and the free-sheaf source maps; its associativity
-and naturality cancel the chart identifications. Take derived adjoints under the
-apex projection. Replace derivedBaseChangeMapPlus by its mate using
-baseChange_eq_derivedBaseChangeMapPlus. The adjunction triangle identity cancels
-the stage counit with its unit, leaving exactly the pullback of the raw stage
-class followed by the coefficient comparison. Naturality of the single-functor
-and shift comparisons identifies these factors with the definition of
-abelianHigherDirectImageRawPullback. Undoing the raw evaluation comparison proves
-the equation. The free-sheaf source is transported by the specified pullback
-square hr throughout; no invertibility of exchange is used. Empty test objects
-and q=0 require no separate argument. -/
+Source: Stacks Project, Tags 0EYM, 03Q8, 03CB and 09YQ. -/
 theorem cartesianChartCohomologyLift_exchange
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

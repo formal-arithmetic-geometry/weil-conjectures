@@ -26,22 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The affine derived unit induces an isomorphism on every cohomology object.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, module-unit calculation.
-(blueprint: new-affine-derived-unit-homology-isIso).
-
-Proof: The quasi-coherent kernel of a map of associated sheaves has an invertible
-ordinary counit. Lift its kernel fork through fully faithful tilde and reflect
-its limit property, proving exactness of tilde. Form the canonical adjunction
-between derived tilde and right-derived affine sections. On Qh(K), its unit
-factors through the canonical sections comparison, which is invertible by
-affineTildeDerivedSectionsUnit_isIso. Cancel the exact-functor comparison and
-use essential surjectivity of Qh and naturality to obtain an invertible unit
-on every derived module. Descend hF through Q and restrict this adjunction along
-the fully faithful inclusion of D_QCoh, using hG. The restriction unit formula
-and uniqueness of right adjoints transport invertibility to the given adjunction.
-Homology preserves that isomorphism, in every integer degree. The argument
-includes arbitrary unbounded complexes, the zero ring and the zero complex.
--/
+Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, module-unit calculation. -/
 theorem affineDerivedUnit_homology_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

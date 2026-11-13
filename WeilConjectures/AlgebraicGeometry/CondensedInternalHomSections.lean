@@ -58,13 +58,7 @@ private noncomputable def regularSectionsIso
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections of internal Hom are the additive group of module morphisms, naturally
 in the second module.  No freeness or boundedness is required.
-Source: Stacks Project, Tag 08JJ, tensor-Hom adjunction and evaluation.
-(auxiliary; not a blueprint node)
-
-Proof: evaluation at the terminal pro-etale object is Hom from the constant integer
-sheaf.  The free-module adjunction therefore identifies module sections with Hom
-from the regular module.  Apply the module tensor-Hom adjunction at that regular
-module; its tensor product with P is P by the unit isomorphism. -/
+Source: Stacks Project, Tag 08JJ, tensor-Hom adjunction and evaluation. -/
 theorem condensed_internal_hom_sections
     (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

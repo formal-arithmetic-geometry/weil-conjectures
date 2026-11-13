@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift
 
 Source: Stacks Project, Tags 0BCD and 0BC7, finite presentation argument;
 Tag 00CR and the definition of the module direct image.
-(blueprint: lem-sc-bounded-free-stalk-complex-lift).
 -/
 
 @[expose] public section
@@ -66,30 +65,7 @@ private theorem openModuleDirectImage_restrict_iso (X : Scheme.{u}) (U : X.Opens
 /-- A bounded free stalk complex lifts as a complex, without a prescribed derived object.
 
 Source: Stacks Project, Tags 0BCD and 0BC7, descent of finite presentations and maps,
-and Tag 00CR. The final direct image is only an auxiliary global complex.
-(blueprint: lem-sc-bounded-free-stalk-complex-lift).
-
-Proof:
-1. Fix bounds a,b. The stalk ring is nonzero, since it is local. A zero free module
-   over it has rank zero, so hfree implies d i = 0 outside [a,b], including when b < a.
-   Choose bases using hfree, and express the differentials as finite matrices. There
-   are only finitely many entries and finitely many equations for the square to vanish.
-2. Choose an affine neighbourhood of x. Its stalk is the prime localization of its
-   section ring, the filtered colimit of principal localizations (Tag 00CR). Lift all
-   entries to one principal neighbourhood. Every entry of each differential composite
-   has zero germ; shrink to a common later principal neighbourhood where these finitely
-   many entries vanish. Equivalently use the maps and equality clauses of finite
-   presentation descent. The rank-d i free modules and these matrices now define a
-   bounded free sheaf complex L on this affine open U. Its stalk complex is isomorphic
-   to F, since the chosen bases conjugate the differentials to their lifted matrices.
-3. Define H by the termwise ordinary direct image along U into X: on an open V its
-   sections are the sections of L on V intersect U, with scalars restricted from V.
-   Direct image is additive and preserves zero objects, so H is bounded. Its restriction
-   to U is L. Neighbourhoods contained in U are cofinal at x, so its stalk complex is
-   the stalk complex of L. These identifications give the free-term and stalk isomorphisms.
-No comparison with another derived object is made. Empty spectra have no x; rank-zero
-terms and empty degree intervals require no entries or equations to lift.
--/
+and Tag 00CR. The final direct image is only an auxiliary global complex. -/
 theorem exists_boundedFree_stalk_complex_lift
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)
     (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)

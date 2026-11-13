@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisBoundaryD
 
 /-! # Connecting square for relative Mayer--Vietoris base change
 
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9
-(blueprint: lem-pc-rf-mv-base-change-connecting-square).
+Source: Stacks Project, Tags 08BV, 08HY and 0DJ9.
 -/
 
 @[expose] public section
@@ -32,41 +31,7 @@ namespace AlgebraicGeometry
 /-- Distinguished cover triangles and the connecting square for the constructed
 canonical comparison maps. The open adjunctions are fixed explicit constructions.
 This asserts no first or second square and constructs no triangle morphism.
-Source: Stacks Project, Tags 08BV, 08HZ and 0DJ9, induction step
-(blueprint: lem-pc-rf-mv-base-change-connecting-square).
-Proof:
-1. An affine-to-affine morphism g is affine, and so is g'. The base changes
-   f' and g' are qcqs. The qcqs sources X and X' and the inverse-image cover
-   satisfy the compactness hypotheses, including the overlap. Transpose ψ
-   under the pinned Lg'^* / Rg'_* adjunction; Rg'_*K' has quasi-coherent
-   cohomology by schemeDerivedDirectImage_preserves_QCoh.
-2. Choose K-injective representatives with injective terms for K and K'. Use
-   schemeKInjective_mayerVietoris_presentation with the explicit adjunctions
-   mvOpenRestrictionAdjunction. For each W, the resulting complex is the
-   direct image of the restriction of the representative. Its two maps are
-   exactly the units and the difference of adjoint restrictions in this
-   statement. Apply triangleOfSES to obtain δ and δ' and distinguishedness.
-3. Represent the transposed ψ by a chain map into a K-injective representative
-   of g'_* of the second representative. Restrict this one chain map to U,
-   V and their overlap. Together with the resolution comparison it gives a
-   morphism of short exact Mayer--Vietoris sequences. The connecting maps
-   commute by naturality of triangleOfSES. This uses a morphism of sequences,
-   rather than inferring a connecting square from two squares in a triangulated
-   category. The degreewise split presentation of the direct-image sequence
-   identifies its boundary with Rg'_*δ', as in the direct-image part of
-   schemeDerived_mayerVietoris_directImage.
-4. Identify all direct-image compositions by the right-adjoint mates of the
-   pinned pullback composition comparisons, not by independently selected
-   bare isomorphisms. The unit/counit equations of mvOpenPullbackIso and
-   associativity of those comparisons identify the restricted chain maps
-   with the transposes of mvBaseChangeOpenMap. Apply Rf_* and transpose the
-   full connecting equation under Lg^* / Rg_*. Naturality of the Hom equivalence
-   and its shift compatibility give precisely the final displayed equation.
-5. Derived pullback admits a triangulated shift structure by
-   exists_derivedPullback. Derived direct image is a triangulated right derived
-   functor. Compose these structures to obtain csF and csG; their mapTriangle
-   functors send the two distinguished triangles to distinguished triangles.
-   Empty opens, the zero object and redundant covers use the same sequences. -/
+Source: Stacks Project, Tags 08BV, 08HZ and 0DJ9, induction step. -/
 theorem derivedBaseChange_mayerVietoris_connectingSquare
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

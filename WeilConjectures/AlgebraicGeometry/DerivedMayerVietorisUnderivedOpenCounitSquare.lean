@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 /-! # The underived open counit square
 
 Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-underived-open-counit-square).
 -/
 
 @[expose] public section
@@ -86,19 +85,7 @@ end
 set_option linter.unusedVariables false in
 /-- The sectionwise comparison square respects the two underived open counits,
 after passage to the homotopy category.
-Source: Stacks Tags 08FE and 08BV.
-Proof: on an open W of U, both composites are the restriction identification of
-sections of I over g inverse image W. Use restrictAdjunction_counit_app_app for
-the two counits and the sectionwise formulas for pushforwardComp and
-pushforwardCongr. Transport along overFunctorEquiv, which is the identification
-used to define schemeOpenModuleAdjunction and schemeMVUnderivedOpenRestriction.
-The equalities are natural in I and commute with its differentials. Apply the
-termwise functors, then the homotopy quotient; the quotient counit formula
-mapHomotopyCategory_counit_app_quotient identifies their counits. Every homotopy
-object is a quotient of a complex, so this gives the displayed equation for all K.
-For the empty open this is the unique map between zero objects; for the full open
-it is the same sectionwise identity. No derived comparison occurs here.
-(blueprint: lem-pc-mayer-vietoris-underived-open-counit-square). -/
+Source: Stacks Tags 08FE and 08BV. -/
 theorem schemeMVUnderivedOpenCounit_square
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (K : HomotopyCategory

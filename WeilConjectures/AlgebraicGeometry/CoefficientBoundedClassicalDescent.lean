@@ -22,7 +22,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- Cohomology vanishes outside one ordered finite integer interval.
-Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 05RU. -/
 def coefficientCohomologyBounded {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (K : ConstantCompletion.D R) : Prop :=
@@ -88,19 +88,7 @@ private theorem bounded_origin_of_homology_origin
 with bounded classical cohomology has an etale derived antecedent. No constructibility
 or finiteness of its cohomology modules is imposed here.
 Source: blueprint det-pe-classical-derived-equivalence and sk-prop-sf-comparison;
-Stacks Tag 09AL (auxiliary; not a blueprint node).
-
-Proof: exactness of intrinsic module comparison and enough injectives give its
-bounded-below derived adjunction. The ordinary unit on injectives and acyclicity
-of their pullbacks make the derived unit invertible, hence the derived pullback
-fully faithful on D+. This gives the Hom-set bijection for bounded objects after
-the fully faithful inclusion into the unbounded derived category. For descent,
-continuity puts each cohomology module in the ordinary essential image. The
-counit is invertible on single complexes in that image; finite truncation
-devissage makes it invertible on every bounded complex with such cohomology.
-The derived direct image is its antecedent. Finally, localization uniqueness
-identifies the given D with the exact derived pullback, and naturality transports
-both conclusions. No constructibility or finiteness hypothesis is used. -/
+Stacks Tag 09AL. -/
 theorem coefficientComparison_boundedClassical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (D : ConstantCompletion.D (ConstantCompletion.constant

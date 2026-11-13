@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 Source: Stacks Project, Tag 068C (finite-free resolutions), and Tag 08C4;
 Mathlib's `tildeFinsupp` and `SheafOfModules.mapFreeIso` implement the basis transport.
-(blueprint: lem-affine-finite-free-model-term-iso-free).
 -/
 
 @[expose] public section
@@ -34,7 +33,7 @@ through restriction and the inverse affine-site equivalence. The extension contr
 object in the out-of-range degrees. The finite basis theorem and the functorial preservation of
 finite coproducts provide the required isomorphism. The finite basis is indexed by `Fin m`; in
 the zero-rank case use `m = 0`. Functoriality transports the basis isomorphism, and extension
-by zero preserves the resulting term. (blueprint: lem-affine-finite-free-model-term-iso-free) -/
+by zero preserves the resulting term. -/
 theorem affine_finite_free_model_term_iso_free {Y : Scheme.{u}}
     (U : Y.Opens) (hU : IsAffineOpen U)
     (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ)

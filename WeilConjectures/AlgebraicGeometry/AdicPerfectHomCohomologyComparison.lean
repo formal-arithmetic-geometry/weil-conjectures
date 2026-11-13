@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 /-! # Quotient Hom cohomology for constant perfect models
 
 Source: Stacks Project, Tags 09C5 and 09C6, finite-projective Hom calculation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +30,7 @@ attribute [local irreducible] ConstantCompletion.derivedExtension
 
 /-- Sections of the cohomology of the actual quotients of the algebraic Hom complex.
 Index n uses the ideal power J^(n+1); all quotient maps are the canonical maps.
-Source: Stacks Project, Tags 09C5 and 09C6.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 09C5 and 09C6. -/
 def adicPerfectHomCohomologyTower
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -114,36 +112,7 @@ The bijections intertwine the actual successor quotient maps. No completeness,
 Noetherian, affine, or marking hypothesis occurs.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, the displayed description of H_n;
-Tag 09C5, exact sections; More on Algebra, Tag 0A8H, the signed Hom differential.
-(auxiliary; not a blueprint node).
-
-Proof: split each term of P and Q as a retract of a finite free A-module. Constant
-realization, restriction to U, and extension to the completed coefficients preserve
-these splittings and the finite sums. Thus the displayed realizations are bounded
-complexes of finite-projective coefficient modules. Such complexes are K-flat, so
-reduction along the projection to A/J^(n+1) is computed termwise. The composite
-coefficient map is the actual quotient map: it is the limit cone equation. Scalar
-balancing therefore identifies each reduced complex with the constant realization
-of P/J^(n+1)P or Q/J^(n+1)Q.
-
-On the weakly contractible slice evaluation at its final object is exact. The free
-rank-one module represents this evaluation, so it is projective; finite free modules
-and their retracts are projective. The reduced source complex is bounded above and
-termwise projective, hence K-projective. The localization bijection identifies its
-derived Hom with chain maps modulo chain homotopy, namely H^0 of the ordinary Hom
-complex of sections. Finite-projective evaluation identifies the sheaf Hom complex
-with the constant realization of the quotient of moduleHomComplex P Q. Boundedness
-of P leaves only finitely many factors in every Hom degree; tensoring with the
-quotient commutes with these products and with finite-projective Hom. Exact constant
-realization and exact evaluation commute with cohomology, giving the stated bijections.
-
-For compatibility, use the same evaluation map on each term at all levels: a reduced
-linear map sends a tensor class of p to the class of its value on p. This formula
-commutes with the quotient maps and with the differential d_Q f - (-1)^q f d_P.
-It also agrees with both scalar-balancing conjugations in adicResidueHomStep, since
-those reassociations send a tensor of scalars and p to their product times p. Passing
-to cohomology yields the successor equation. Empty slices, the unit ideal, the zero
-ring, and zero complexes give zero modules and singleton Hom sets on both sides. -/
+Tag 09C5, exact sections; More on Algebra, Tag 0A8H, the signed Hom differential. -/
 theorem adicPerfectHomCohomologyComparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

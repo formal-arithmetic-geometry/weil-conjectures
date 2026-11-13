@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 Source: Mathlib.CategoryTheory.Adjunction.Mates, `conjugateEquiv_counit`;
 Stacks Project, Tag 08HY, the counit description of base change.
-(blueprint: new-affine-spectrum-coordinate-counit).
 -/
 
 @[expose] public section
@@ -21,24 +20,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory
 
-/-- Generic counit compatibility for conjugate adjunctions and equivalence coordinates.
-Proof: write d for the conjugate comparison at U K, M for R(V(U K)), and
-N for R0(U K). The conjugate-counit equation expands to
-F0(W d); F0(counit_t N); counit_0(U K) = a M; U(counit(V(U K))); counit_u(U K).
-Naturality of s and the right triangle for W ⊣ T give
-s M; T(W d); T(counit_t N) = d. Insert this expression for d under F and
-move the two T-images across v by naturality. Apply V to the expanded
-conjugate-counit equation. The right triangle for U ⊣ V and cancellation
-of the invertible u give V(counit_u(U K)) = u.inv(V(U K)). Naturality of
-u.inv moves it across counit(V(U K)). The assumed comparison cancellation
-at M now cancels s.hom M against s.inv M. Thus the composite beginning
-with F d equals counit(V(U K)); u.inv K. Finally the defining component
-formula for b inserts F(R(u.hom K)); naturality of the original counit
-and u.hom K; u.inv K = identity give counit K. This argument applies to
-identity equivalences and zero objects without extra hypotheses.
-Source: Mathlib.CategoryTheory.Adjunction.Mates, conjugateEquiv_counit;
-Stacks Project, Tag 08HY, Remark 20.28.3, counit definition of base change.
-(blueprint: new-affine-spectrum-coordinate-counit). -/
+/-- Generic counit compatibility for conjugate adjunctions and equivalence coordinates. -/
 theorem coordinate_counit_compatibility
     {A B A0 B0 : Type*} [Category A] [Category B] [Category A0] [Category B0]
     (F : B ⥤ A) (R : A ⥤ B) (F0 : B0 ⥤ A0) (R0 : A0 ⥤ B0)

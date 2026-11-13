@@ -17,8 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 # Canonical tensor comparison for condensed module inverse image
 
 Source: Stacks Project, Tags 03EL and 0G7D; the totalization and K-flat descent in
-steps 3--7 of the open/closed internal-Hom calculation
-(auxiliary; not a blueprint node).
+steps 3--7 of the open/closed internal-Hom calculation.
 
 The coequalizer equation determines the ordinary comparison. The equation on every
 summand of the total tensor complex then determines its unbounded derived comparison.
@@ -88,8 +87,7 @@ variable {C : Type w₁} {D : Type w₂}
   [F.IsLeftAdjoint] [F.Monoidal]
 
 /-- The comparison family for the termwise derived functor of an exact functor.
-Source: Stacks Tag 0G7D
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 0G7D.
 Keeping the tensor structure inside this generic definition avoids repeatedly unfolding
 specialized sheaf monoidal instances when checking a comparison family. -/
 def ExactDerivedTensorComparisonFamily :=
@@ -98,8 +96,7 @@ def ExactDerivedTensorComparisonFamily :=
       F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj M
 
 /-- Naturality and the total-complex square for a specified ordinary comparison.
-Source: Stacks Tags 06YL and 0G7D
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 06YL and 0G7D.
 This is the generic form of `SupportDerivedTensorNormalization`: tensor morphisms
 are written as the two maps of the curried tensor functor. -/
 def ExactDerivedTensorNormalization
@@ -327,38 +324,34 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Small colimits for the total tensor complexes, obtained by universe shrinking.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 noncomputable instance supportModules_smallColimits (X : Scheme.{u}) :
     HasColimitsOfSize.{0, 0} (supportModules Λ X) :=
   hasColimitsOfSizeShrink (supportModules Λ X)
 
 /-- Direct small-diagram colimits, using exactly the existing shrunken colimit instance.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 instance (priority := 10000) supportModules_smallDiagramColimit
     (X : Scheme.{u}) {J : Type} [Category.{0} J] (D : J ⥤ supportModules Λ X) :
     HasColimit D :=
   (supportModules_smallColimits Λ X).has_colimits_of_shape J |>.has_colimit D
 
 /-- Existence of the coproducts defining total tensor, with no search for larger colimits.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 instance (priority := 10000) supportModules_complexHasTensor (X : Scheme.{u})
     (A B : CochainComplex (supportModules Λ X) ℤ) : HomologicalComplex.HasTensor A B :=
   fun _ ↦ (supportModules_smallColimits Λ X).has_colimits_of_shape _ |>.has_colimit _
 
 /-- The support inverse image is the recorded extension-of-scalars inverse image, via
 extension along the invertible coefficient map alpha.
-Source: Stacks Tag 09AA (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09AA. -/
 noncomputable def supportPullbackIsoUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportPullback Λ f ≅ upperStar Λ f :=
   Functor.isoWhiskerLeft ((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y))
     (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f)).symm
 
 /-- The normalized ordinary tensor comparison exists uniquely as a module isomorphism.
-Source: Stacks Tag 03EL (auxiliary; not a blueprint node).
-Proof: inverse image preserves the balanced-tensor coequalizer and the abelian-sheaf
-tensor. Transport the action along alpha. The displayed equation is the universal
-balanced bilinear generator formula, giving existence and uniqueness; the inverse is
-obtained from the inverse abelian-sheaf tensor comparison. -/
+Source: Stacks Tag 03EL. -/
 theorem existsUnique_supportTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : supportModules Λ Y) :
     ∃! e : (supportPullback Λ f).obj (M ⊗ N) ≅
@@ -370,7 +363,7 @@ theorem existsUnique_supportTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ProEtale.upperStar Ab.{u + 1} f) (asIso (condensedPullbackHom Λ f)).inv M N
 
 /-- Ordinary pullback-tensor comparison, fixed by its balanced generator formula.
-Source: Stacks Tag 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03EL. -/
 noncomputable def supportTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : supportModules Λ Y) :
     (supportPullback Λ f).obj (M ⊗ N) ≅
@@ -409,7 +402,7 @@ private theorem supportTensorComparison_eq_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact congrArg Iso.hom hEq
 
 /-- The summand normalization, for an additive functor between monoidal categories.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 def SupportComplexTensorEquations
     {C : Type w₁} {D : Type w₂} [Category.{v₁} C] [Category.{v₂} D]
     [Preadditive C] [Preadditive D] [MonoidalCategory C] [MonoidalCategory D]
@@ -428,7 +421,7 @@ def SupportComplexTensorEquations
           ((r.mapHomologicalComplex (.up ℤ)).obj B) p q n h
 
 /-- The summand equations specialized to the canonical ordinary pullback comparison.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 def SupportComplexTensorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (supportModules Λ Y) ℤ)
     (d : ((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj
@@ -440,11 +433,7 @@ def SupportComplexTensorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (fun M N ↦ (supportTensorComparison Λ f M N).hom) A B d
 
 /-- The summand comparisons determine a unique chain map.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node).
-Proof: inverse image preserves the coproduct over p+q=n. Define the component by the
-ordinary tensor comparison on each summand. Naturality with respect to both differentials
-and additivity give the chain-map equation with its usual sign. The coproduct universal
-property proves uniqueness degree by degree. -/
+Source: Stacks Tag 06YL. -/
 theorem existsUnique_supportComplexTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (supportModules Λ Y) ℤ) :
     ∃! d : ((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj
@@ -477,7 +466,7 @@ theorem existsUnique_supportComplexTensorComparison {X Y : Scheme.{u}} (f : X �
   exact (hd' p q n h).trans (hd p q n h).symm
 
 /-- The total-complex comparison fixed by its ordinary tensor summands.
-Source: Stacks Tag 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YL. -/
 noncomputable def supportComplexTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A B : CochainComplex (supportModules Λ Y) ℤ) :
     ((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj
@@ -488,13 +477,12 @@ noncomputable def supportComplexTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y
   Classical.choose (ExistsUnique.exists (existsUnique_supportComplexTensorComparison Λ f A B))
 
 /-- The type of candidate derived pullback tensor comparison families.
-Source: Stacks Tag 0G7D (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0G7D. -/
 def SupportDerivedTensorComparisonFamily {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   ExactDerivedTensorComparisonFamily (supportPullback Λ f)
 
 /-- Naturality and the localization square on total-complex representatives.
-Source: Stacks Tags 06YL and 0G7D
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 06YL and 0G7D.
 The tensor maps are those of the existing derivedTensor functors and lax localization. -/
 def SupportDerivedTensorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (e : SupportDerivedTensorComparisonFamily Λ f) : Prop :=
@@ -524,15 +512,7 @@ private theorem supportComplexTensorComparison_eq_δ {X Y : Scheme.{u}} (f : X �
       (Functor.OplaxMonoidal.δNatTrans (supportPullback Λ f)) (.up ℤ) A B p q n h
 
 /-- The normalized derived comparison exists uniquely.
-Source: Stacks Tags 03EL, 06YS and 0G7D
-(auxiliary; not a blueprint node).
-Proof: sum the ordinary comparison over p+q=n. Naturality intertwines the two
-differentials, including (-1)^p on the second. Inverse image preserves coproducts,
-flat terms and K-flat resolutions. Compute both sides on these resolutions; the
-summand maps give an isomorphism. Descend along the two K-flat localization
-equivalences. The localization tensor maps give the displayed square on arbitrary
-complexes. Its restriction to K-flat pairs, where those maps are invertible, determines
-every component uniquely; the factorization isomorphisms extend this to all objects. -/
+Source: Stacks Tags 03EL, 06YS and 0G7D. -/
 theorem existsUnique_supportDerivedTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : SupportDerivedTensorComparisonFamily Λ f,
       SupportDerivedTensorNormalization Λ f e := by
@@ -541,7 +521,7 @@ theorem existsUnique_supportDerivedTensorComparison {X Y : Scheme.{u}} (f : X �
     (supportComplexTensorComparison Λ f) (supportComplexTensorComparison_eq_δ Λ f)
 
 /-- Derived pullback-tensor comparison with the specified total-complex normalization.
-Source: Stacks Tag 0G7D (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0G7D. -/
 noncomputable def supportDerivedTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     SupportDerivedTensorComparisonFamily Λ f :=
   Classical.choose (ExistsUnique.exists (existsUnique_supportDerivedTensorComparison Λ f))

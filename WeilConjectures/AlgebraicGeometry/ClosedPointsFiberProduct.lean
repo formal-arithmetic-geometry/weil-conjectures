@@ -16,14 +16,11 @@ public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.locallyOfFinitePresentation_and_finiteType_comp` (blueprint
-  `lem-kun-etale-lfp`): étale morphisms are locally of finite presentation, and a quasi-compact
+- `AlgebraicGeometry.Etale.locallyOfFinitePresentation_and_finiteType_comp`: étale morphisms are locally of finite presentation, and a quasi-compact
   étale scheme over a scheme of finite type over a field is of finite type over the field.
-- `AlgebraicGeometry.Scheme.Pullback.isClosed_singleton_iff` (blueprint
-  `lem-kun-closed-points-of-product`): a point of `X ×_K Y` is closed if and only if both of its
+- `AlgebraicGeometry.Scheme.Pullback.isClosed_singleton_iff`: a point of `X ×_K Y` is closed if and only if both of its
   images are closed.
-- `AlgebraicGeometry.Scheme.finite_of_isClosed_of_forall_isClosed_singleton` (blueprint
-  `lem-kun-finite-closed-subscheme`): a closed subset of a scheme of finite type over a field
+- `AlgebraicGeometry.Scheme.finite_of_isClosed_of_forall_isClosed_singleton`: a closed subset of a scheme of finite type over a field
   consisting of closed points is finite.
 -/
 

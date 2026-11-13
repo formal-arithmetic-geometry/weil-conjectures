@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 
 Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
 Stacks Project, Descent, Tag 02W0.
-(blueprint: lem-pd-raw-monoid-operations-descent).
 -/
 
 @[expose] public section
@@ -84,25 +83,7 @@ private theorem descend_local_morphism
 /-- The invariant multiplication and unit descend as morphisms. This assertion includes
 no associativity, unit law, or commutativity downstairs.
 Source: blueprint lem-pd-group-scheme-descent, multiplication and unit step;
-Stacks Project, Descent, Tag 02W0.
-(blueprint: lem-pd-raw-monoid-operations-descent).
-
-Proof: Pull back the scheme V₀ times_Y V₀ along p. Its two projections lift uniquely to V
-by the cartesian square hqV. Multiply these two lifted points and compose with qV.
-For two maps into this pullback with equal projections downstairs, hDV and the
-cartesian square identify their lifted points by D.transport. The equation hμ then
-says that the two products have equal images under qV. The pullback projection is fpqc,
-hence an effective epimorphism (representable fpqc descent, Tag 02W0); its universal
-property gives a unique morphism m to V₀. Its factorization equation gives the
-displayed multiplication identity: a pair
-of V-points over T lifts to this product cover, and the cartesian square identifies
-the two pullbacks of the universal lifted points with the original pair.
-For the unit use the same argument on Y times_Y X: hη identifies the two transported
-unit points, and hDV identifies their images under qV. Descend to e from the terminal
-object over Y. Pulling its factorization equation along the map induced by T to X
-gives its displayed identity. The structure-map equations
-for m and e follow after precomposition with the same fpqc projections. Empty bases
-and empty schemes obey the same universal properties and introduce no exception. -/
+Stacks Project, Descent, Tag 02W0. -/
 theorem exists_raw_monoid_operations_of_effective_projection
     {X Y : Scheme.{u}} {p : X ⟶ Y} [Flat p] [Surjective p] [QuasiCompact p]
     {V : Over X} [MonObj V] (D : Over.DescentDatum p V)

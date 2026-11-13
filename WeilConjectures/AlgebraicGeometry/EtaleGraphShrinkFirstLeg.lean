@@ -11,7 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 /-! # First projection pasting for a shrinking graph intersection
 
 Source: Stacks Project, Tags 0F7D and 0F7J, horizontal pasting and the
-intersection calculation (auxiliary; not a blueprint node).
+intersection calculation.
 -/
 
 @[expose] public noncomputable section
@@ -217,29 +217,7 @@ private theorem first_leg_pasting
 /-- The inverse first triangle commutes with passing to the smaller intersection.
 Source: Stacks Project, more-etale.tex, lemma-shriek-proper-and-open-compose-horizontal
 (Tag 0F7D), specialized to the first intersection projection in the product-graph
-extension of the independence calculation of lemma-shriek-composition (Tag 0F7J).
-(auxiliary; not a blueprint node).
-
-Proof: write I and I' for the intersections, d:I'→I for graphIntersectionShrink,
-s and s' for their proper graph lifts, and u:I→O1 and u':I'→O1 for the first
-projections. Both u and u' are open, d u = u', and s' d = s. The first graph
-lift is unchanged by graphFirstLift_shrink. All the identity-top squares for
-these lifts and inclusions are Cartesian, since the inclusions are monomorphisms.
-Apply the horizontal pasting clause of etaleProperOpenExchangeCube to the
-identity-top squares for d and u. Its Cartesian normalization identifies their
-exchanges with the exchanges in the definition of the proper/open triangles.
-Remove extension by the identity with mapDerivedCategoryOpenImmersionLowerShriekId.
-The two resulting triangles compose to the triangle for u'. Invert this equation,
-whisker by extension along b1:O1→T, and compose the open extensions. Associativity
-of openImmersionLowerShriekComp, descended to derived categories, identifies the
-compositors for d,u,b1. Now whisker by the common ambient proper image and insert
-the displayed functor associators. This compares exactly graphIntersectionLeg₁
-followed by graphIntersectionShrinkIso with the smaller first leg, under the
-canonical identification of the unchanged first graph word. The first side formula
-locallyClosedGraphSide₁ depends only on this unchanged graph lift and the fixed
-ambient projections; consequently that identification is graphFirstShrinkIso.
-No second projection, second-neighborhood triangle, or middle comparison is used.
-Identity and empty opens obey the same equations. -/
+extension of the independence calculation of lemma-shriek-composition (Tag 0F7J). -/
 theorem etaleGraphShrinkFirstLeg
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

@@ -27,22 +27,7 @@ open Scheme.Modules (wedge)
 set_option backward.isDefEq.respectTransparency false in
 /-- On a fixed open, the determinant pairing gives a unique alternating family of
 internal functionals, characterized on wedges over every subopen.
-Source: Stacks Project, Tag 0BRT, determinant inversion; Tag 03CY, module sheafification.
-(blueprint: lem-sc-exterior-dual-pairing-local).
-
-Proof: for a tuple of dual sections over U and each V mapping to U, evaluate these
-sections on M(V). Compose the canonical exterior-power determinant pairing with
-these evaluations. Naturality of internal Hom sections and preservation of the
-finite determinant polynomial by ring restriction make this a presheaf morphism
-on Over U. Extend uniquely through the sheafification of the exterior presheaf
-on this open site. Restriction of sheafification to an open is sheafification
-on that open site, so the resulting morphism is an internal dual section of
-exteriorPower M n over U. The determinant is alternating and multilinear in
-its columns; uniqueness of extension carries these identities to the internal
-functional, giving the stated alternating map. For uniqueness, pure wedges
-span each sectionwise exterior power, and the sheafification adjunction is
-injective on morphisms into a sheaf. This includes n = 0 (empty determinant 1),
-the empty open and the zero ring, without requiring local freeness. -/
+Source: Stacks Project, Tag 0BRT, determinant inversion; Tag 03CY, module sheafification. -/
 theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]

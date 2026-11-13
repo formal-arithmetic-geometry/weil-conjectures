@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md`,
 proof, last paragraph (compatibility implicit in transporting the internal adjunction through
-compact-support exchange); Stacks Project, Tags 0E48, 0GL1 and 03S6
-(auxiliary; not a blueprint node).
+compact-support exchange); Stacks Project, Tags 0E48, 0GL1 and 03S6.
 
 The compact-support projection map is taken with the coefficient first, as in
 lem-amb-proper-coproducts-projection: the upstream right-coefficient projection map
@@ -123,8 +122,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
 by the inverse extension-by-zero tensor comparison), and `Rf_!` of the signed symmetry.
 Source: blueprint `lem-asd-smooth-generic-direct-image.md`, proof, last paragraph; Stacks
 Project, equation-projection-formula-map and lemma-j-shriek-and-tensor (Tag 0GL1), with the
-coefficient-first convention of lem-amb-proper-coproducts-projection
-(auxiliary; not a blueprint node). -/
+coefficient-first convention of lem-amb-proper-coproducts-projection. -/
 noncomputable def compactProjectionMapCoeffFirst {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f]
     (Q : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -151,8 +149,7 @@ followed by `Lg'^*Lf^*Q ≅ Lf'^*Lg^*Q` on the target. Here `b` is
 extension-by-zero base change, then the comparison `Rf'_!(c') ≅ R(f')_!` of the base-changed
 compactification with the chosen one. No boundedness or constructibility is assumed.
 Source: blueprint `lem-asd-smooth-generic-direct-image.md`, proof, last paragraph; Stacks
-Project, Tag 0E48 (remark-compatible-with-diagram), Tags 0GL1, 03S6
-(auxiliary; not a blueprint node).
+Project, Tag 0E48, Tags 0GL1, 03S6.
 
 Proof (the node's proof, step by step):
 1. Fix the compactification `X →j X̄ →p S` and its base change `(j', p')`, `a : X̄' ⟶ X̄`,

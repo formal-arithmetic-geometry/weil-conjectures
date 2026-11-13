@@ -29,7 +29,6 @@ corresponding shift of its image.  Composing these canonical isomorphisms with
 the canonical shifted-unit comparison on the target gives the displayed
 isomorphism; the required coherence follows from the functoriality of the
 shift and the monoidal unitors.
-(blueprint: lem-sc-derived-pullback-shifted-unit-iso-data).
 -/
 theorem exists_derivedPullback_shifted_unit_iso
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)

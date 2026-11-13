@@ -30,28 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 open restriction is classical. Only the open restriction is assumed classical here.
 The assertion holds for any adjunction between the specified inverse and direct images.
 Source: Stacks Project, Tag 09AH, lemma-ses-associated-to-open; Tag 09AF,
-lemma-jshriek-comparison; Tag 09AK, lemma-compare-constructible, open endpoint of the sequence
-(auxiliary; not a blueprint node).
-
-Proof: on the pro-etale site the canonical open-closed sequence is short exact.
-For an affine weakly contractible test object V=Spec B, choose finitely many functions
-cutting out the complement of the open. The corresponding principal opens together
-with Spec of the localization of B along the closed subset form a pro-etale cover.
-On the principal opens the sequence is F -> F -> 0; on that localization it is
-0 -> F -> F. Thus the closed unit is epic and the kernel is the open extension by
-zero of the open restriction. The open extension commutes with comparison: the two
-composite left adjoints have naturally identical right adjoints, given sectionwise
-by restriction to etale objects over the open. If G is an etale antecedent of j^*F,
-the etale extension by zero of G therefore pulls back to the kernel. These arguments
-preserve every constant scalar action and transport through the AsSmall site
-models. Quasi-compactness supplies the finite list of functions. No bound on A or
-its modules is used. For empty U the kernel is zero; for empty Z the closed unit is
-the map to zero and the kernel is F. A full-image closed immersion is treated by
-its closed direct image, not by an unjustified scheme isomorphism. An arbitrary
-adjunction between the same functors differs from the canonical one by a natural
-automorphism of the left adjoint. Its unit is the canonical unit followed by the
-corresponding invertible direct-image map. Epimorphy is unchanged, and the kernel
-is canonically isomorphic, so essential-image membership is unchanged. -/
+lemma-jshriek-comparison; Tag 09AK, lemma-compare-constructible, open endpoint of the sequence. -/
 theorem coefficientFixed_localization_kernel_origin
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

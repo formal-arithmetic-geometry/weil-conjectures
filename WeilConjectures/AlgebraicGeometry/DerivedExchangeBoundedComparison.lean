@@ -24,23 +24,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The exchange comparison equation for a bounded below K-injective source complex.
 Source: Stacks Project, sites-cohomology.tex, Lemma 0736 and Remark 07A7;
 derived.tex, Lemmas 070I, 070K, 0DVC. The comparison is the explicit
-argument in step 6 of lem-weil-pbc-derived-exchange-termwise.
-
-Proof: let N = g^* f_* I. It is bounded below because the termwise functors
-preserve zero objects. Express the derived exchange as the adjoint of the
-pullback of the derived counit. Naturality of the derived unit moves the source
-comparison inside that adjoint. The counit on I is the localized termwise
-counit conjugated by s, by uniqueness of the K-injective comparison. The derived
-square isomorphism is the termwise square isomorphism conjugated by the exact
-inverse-image comparison maps. Substitute both formulas: the adjoint is now
-the localization of j composed with the termwise adjoint of the underived
-exchange. Compute the derived unit on N by a bounded below injective resolution
-of f'^* N. Uniqueness of maps into the K-injective J identifies the resulting
-lift with j composed with that termwise adjoint. Apply f'_* to the equality of
-homotopy classes and then localize. Naturality of the right-derived unit and
-of the counit of injectiveObjectEquivalence identifies the target comparison
-with the displayed χ'. This gives the stated equation.
-(blueprint: lem-weil-pbc-derived-exchange-bounded-comparison). -/
+argument in step 6 of lem-weil-pbc-derived-exchange-termwise. -/
 lemma derivedExchangeBoundedComparison
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)

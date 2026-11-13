@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 /-!
 # Base change on the full affine étale sites
 
-Source: Stacks Project, Étale Cohomology, Lemma 0EYL and Topologies, Lemma 04HR
-(blueprint: lem-weil-pbc-affine-etale-site-base-change).
+Source: Stacks Project, Étale Cohomology, Lemma 0EYL and Topologies, Lemma 04HR.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR
-(blueprint: lem-weil-pbc-affine-etale-site-base-change).
+/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR.
 Proof (step 1): the projection to `U` is a base change of the affine morphism `h`,
 so it is affine by lem-weil-pbc-affine-morphism-permanence(1). Its target is affine,
 so its source is affine by part (2) of that node. Étaleness of the structure map is
@@ -44,8 +42,7 @@ theorem affineEtaleBaseChange_isAffine {T T' : Scheme.{u}} (h : T' ⟶ T)
   change IsAffine (pullback U.obj.hom h)
   exact AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1 U.obj.hom h
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR
-(blueprint: lem-weil-pbc-affine-etale-site-base-change).
+/-- Source: Stacks Project, Étale Cohomology 0EYL, and Topologies 04HR.
 The ordinary étale base-change functor restricted to the full affine subcategories.
 Its objects are `U ×_T T' → T'`; its arrows are the ordinary base-change arrows. -/
 noncomputable def affineEtaleBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
@@ -56,14 +53,7 @@ noncomputable def affineEtaleBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
 
 end Scheme
 
-/-- Source: Stacks Project, Topologies 04HR and 0217, Sites 00WV
-(blueprint: lem-weil-pbc-affine-etale-site-base-change).
-Proof: base change preserves joint surjectivity by the point-lifting property of a
-cartesian square. It preserves étaleness by stability under base change. The affine
-full inclusions create pullbacks, and full étale base change preserves finite limits,
-so the restricted functor preserves pullbacks. For continuity, test the sheaf condition
-on the standard coverings of the pretopology; pullback preservation identifies matching
-families with those on the image covering, where the sheaf condition holds. -/
+/-- Source: Stacks Project, Topologies 04HR and 0217, Sites 00WV. -/
 private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] :
     (∀ (X : T.FullAffineEtale) (R : Presieve X),
@@ -150,33 +140,7 @@ private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{
 set_option linter.unusedVariables false in
 /--
 Source: Stacks Project, Étale Cohomology, Lemma 0EYL, and Topologies,
-Lemma 04HR; Sites 00WV, 00WX, 00X1; Étale Cohomology 03Q1(2)
-(blueprint: lem-weil-pbc-affine-etale-site-base-change).
-
-Proof:
-1. Restrict ordinary étale base change to affine objects using
-   lem-weil-pbc-etale-base-change-finite-limits(1) and
-   lem-weil-pbc-affine-morphism-permanence(1),(2), as in the definition above.
-2. Finite jointly surjective étale covering families remain such after base change
-   (lem-weil-pbc-etale-covering-base-change). Their domains are affine by step 1.
-   A pullback of affine objects over an affine object is affine: its projection is
-   affine by pqf-def-affine-morphism and lem-weil-pbc-affine-morphism-permanence.
-   It is étale, and the canonical base-change comparison is an isomorphism, by
-   lem-weil-pbc-etale-base-change-finite-limits(2),(3). This proves both covering
-   continuity conditions of def-weil-pbc-sites-and-cohomology(3).
-3. Precomposition preserves sheaves. The sheafified presheaf left Kan extension
-   is left adjoint to it (lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction).
-4. Restriction from full small étale sites to the affine sites is an equivalence
-   (lem-weil-pbc-affine-etale-site-topos). Full-site direct image and affine-site
-   direct image agree under restriction: both evaluate a sheaf at `V ×_T T'`, with
-   the same restriction maps (lem-weil-pbc-etale-base-change-continuous(3)).
-   Uniqueness of left adjoints therefore identifies affine inverse image with
-   full-site inverse image conjugated by these restriction equivalences.
-   Full-site inverse image preserves finite limits and colimits
-   (lem-weil-pbc-sets-etale-inverse-image-exact), as do equivalences and their
-   quasi-inverses. Thus the affine inverse image is exact, giving the morphism
-   of sites of def-weil-pbc-sites-and-cohomology(3).
--/
+Lemma 04HR; Sites 00WV, 00WX, 00X1; Étale Cohomology 03Q1(2). -/
 theorem affineEtaleSiteBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
     [IsAffineHom h] :
     (∀ (X : T.FullAffineEtale) (R : Presieve X),

@@ -57,19 +57,7 @@ private theorem additive_pi_sections_bijective {R : Type u} [CommRing R]
 finite-product coordinates. The differential in these coordinates is the signed sum
 of the images of the coefficient restriction maps.
 Source: Stacks Project, Tag 02KE, termwise finite Čech calculation; the definitions of
-alternatingCechComplex and extension by zero.
-(blueprint: lem-pc-additive-alternating-cech-coordinates).
-
-Proof: For each p, the explicit function module alternatingCechTerms is the finite
-product of the coefficient modules. An additive functor preserves finite biproducts,
-hence finite products, including the empty product. Evaluate the resulting product
-isomorphism on B; sections preserve products. Precompose with the image of extendXIso
-at p to obtain a. Each coordinate is the section map of the image of the explicit
-projection. Hence it commutes with restrictions of B and is linear over its section
-ring. Expand alternatingCechDifferential as its finite signed sum of a coefficient
-restriction composed with a projection. Additivity preserves that sum and its integer
-scalars; the projection equation gives the displayed differential formula. The equation
-extend_d_eq transports this calculation to integer degrees. -/
+alternatingCechComplex and extension by zero. -/
 theorem additive_alternatingCech_coordinates {Y S : Scheme.{u}} {r : ℕ}
     (V : Fin r → Y.Opens)
     (G : Y.Opensᵒᵖ ⥤ ModuleCat.{u} Γ(Y, ⊤))

@@ -16,7 +16,6 @@ import Mathlib.Algebra.Field.ULift
 /-! # Integral models on a locally finitely presented stratum
 
 Source: Bhatt--Scholze, Lemmas 6.8.12--6.8.13 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 ordinary constructible integral model, with both coefficient rings pulled back from X.
 Source: Hemo--Richarz--Scholbach, Example 3.1 (local triviality), and Bhatt--Scholze,
 Lemma 6.8.13, with the coefficient restriction identification of Lemma 6.8.2.
-(auxiliary; not a blueprint node)
 
 Proof in words. An immersion identifies Y with a locally closed subspace of X, so Y
 is topologically noetherian. Identify the two pulled-back coefficient rings and their

@@ -13,8 +13,7 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-!
 # Affine rank-one extensions separate etale module sheaves
 
-Source: Stacks Project, Tags 03EW and 04HR
-(blueprint: lem-weil-pbc-affine-etale-rank-one-separating).
+Source: Stacks Project, Tags 03EW and 04HR.
 -/
 
 @[expose] public section
@@ -29,22 +28,7 @@ namespace AlgebraicGeometry.Scheme
 objects form a separating family. This needs neither finite coefficients nor a qcqs base.
 
 Source: Stacks Project, Modules on Sites, Tag 03EW, proof of (3), and Topologies,
-Tag 04HR (affine etale objects are cover-dense)
-(blueprint: lem-weil-pbc-affine-etale-rank-one-separating).
-
-Proof: suppose two module-sheaf maps agree after composition with every map from
-one of these extensions. The extension-by-zero/pullback adjunction identifies maps
-from the extension at U with maps from the constant rank-one module sheaf into the
-restriction to U. The constant-sheaf adjunction and the free rank-one module identify
-these maps with sections over the terminal object of U's small etale site, hence with
-sections over U of the original sheaf. Thus the two maps agree on every section over
-an affine etale object. Every etale object has an affine open covering, whose members
-are again etale over the base. Naturality gives equality after restriction to all members
-of this cover, and the target sheaf's separatedness gives equality on the original
-section. This proves equality of all components, hence equality of the sheaf maps.
-The family is indexed in Type (u + 1), the universe of the small etale site, so no
-additional universe resizing is needed. On an empty base or with the zero ring the
-sheaf category is trivial, and the same separatedness argument still applies. -/
+Tag 04HR (affine etale objects are cover-dense). -/
 theorem affine_etale_rankOne_isSeparating
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ObjectProperty.IsSeparating (ObjectProperty.ofObj

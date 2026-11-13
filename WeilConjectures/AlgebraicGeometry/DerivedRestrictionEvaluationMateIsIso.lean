@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionEvaluationMatePostcom
 
 /-! # Invertibility of the restricted evaluation mate
 Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
-(blueprint: lem-sc-derived-restriction-evaluation-mate-is-iso).
 -/
 
 @[expose] public section
@@ -29,36 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
 /-- Currying restricted evaluation gives an isomorphism for any natural tensor comparison.
-Source: Stacks Project, Tags 08DJ and 08DL; Tag 08BS (exact extension by zero).
-(blueprint: lem-sc-derived-restriction-evaluation-mate-is-iso).
-
-Proof: let J be derived extension by zero from U. It is exact, left adjoint to
-restriction R, and its unit A -> R(J(A)) is invertible. The counit J(R(B)) -> B
-is invertible precisely on complexes supported on U. Tensoring a complex
-supported on U with any complex is again supported on U: outside U its stalk
-complex is acyclic, and a K-flat representative computes the tensor stalkwise.
-For a test object A on U, the adjoint of
-  A tensor R(L) -> R(J(A)) tensor R(L) -> R(J(A) tensor L),
-where the second arrow is the inverse tensor comparison, is consequently an
-isomorphism J(A tensor R(L)) -> J(A) tensor L. Indeed its restriction is the
-composite of the tensor comparison inverse and the unit, both invertible, and
-both objects are supported on U, where restriction reflects isomorphisms.
-For f : A -> R(H(L,E)), let q : J(A) -> H(L,E) be its adjoint. Under the
-adjunction and tensor-Hom bijections, precomposition by that tensor isomorphism
-sends f to the transpose of
-  (unit_A tensor identity); t(J(A),L).inv; R(e_X(q)).
-Tensor-Hom naturality writes e_X(q) as (q tensor identity); e_X(identity).
-Naturality of t for (q, identity) moves R(q tensor identity) past t.inv, and
-the adjunction identity unit_A; R(q) = f then gives
-  (f tensor identity); t(H(L,E),L).inv; R(e_X(identity)).
-By the definition of the displayed mate and tensor-Hom naturality on U, this
-is e_U(f; mate). Hence postcomposition by the mate is a composite of bijections:
-the adjunction inverse, e_X, precomposition by the tensor isomorphism, the
-adjunction forward and e_U inverse. It is bijective for every A. Yoneda proves
-that the mate is invertible.
-This argument allows arbitrary natural tensor comparisons; it needs neither a
-unit coherence axiom nor a particular choice on K-flat representatives. For
-the empty open all objects are zero and the same adjunction argument applies. -/
+Source: Stacks Project, Tags 08DJ and 08DL; Tag 08BS (exact extension by zero). -/
 theorem derivedRestriction_evaluationMate_isIso
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

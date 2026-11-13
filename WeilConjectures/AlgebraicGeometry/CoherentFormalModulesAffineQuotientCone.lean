@@ -22,9 +22,7 @@ namespace AlgebraicGeometry
 
 /-- The canonical cone from a module to the sections of its sheaf quotient system.
 The maps are the tilde/global-sections unit followed by the actual quotient projections.
-Source: Stacks Project, Tag 087W, implicit converse (blueprint:
-def-weil-pbc-coherent-formal-modules-affine-quotient-cone). 
-(blueprint: def-weil-pbc-coherent-formal-modules-affine-quotient-cone)
+Source: Stacks Project, Tag 087W, implicit converse.
 -/
 noncomputable def coherentFormalModules_affine_quotientCone
     (A : Type u) [CommRing A] (I : Ideal A)
@@ -120,25 +118,7 @@ private theorem isLimit_of_complete_quotient_projections
 /-- The canonical quotient cone of a finite completed module is limiting, and its
 projections use the residue of a completed scalar at their level. This assertion
 concerns only the explicit quotient construction, not any candidate inverse functor.
-Source: Stacks Project, Tag 087W, implicit converse; Algebra Tags 0316, 05GG, 00MA (3).
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-quotient-cone).
-
-Proof: Write B = AdicCompletion I A and K = I B. Since A is Noetherian, I is finitely
-generated. The completion quotient formula identifies B/K^m with A/I^m for every
-positive m, and B is K-adically complete and Noetherian (0316 and 05GG). The finite
-B-module N is K-adically complete: 00MA (3) identifies its completion with
-N tensor B-completion, hence with N itself. Restriction of scalars identifies
-K^m N with I^m N: expand elements of the extended ideal as finite sums, and use
-associativity of scalar multiplication; the reverse inclusion uses the algebra map.
-The affine tilde/global-sections unit and ideal-product/cokernel comparison identify
-our displayed projections with N -> N/I^(n+1)N and the transitions with reductions.
-Completeness therefore supplies exactly the universal property of this cone; dropping
-the zero quotient at exponent zero does not change compatible families. Finally, if
-r has the residue of a modulo I^(n+1), the completion quotient formula puts
-r - algebraMap A B a in K^(n+1). Its product with any x is killed by this quotient
-projection, so the projection of r x equals a times the projection of x. The unit
-and cokernel comparison transport this equality to the displayed sections maps.
-For I = bottom this is the constant module cone; for I = top both B and N are zero. -/
+Source: Stacks Project, Tag 087W, implicit converse; Algebra Tags 0316, 05GG, 00MA (3). -/
 theorem coherentFormalModules_affine_quotientCone_complete
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

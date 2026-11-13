@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperOpenExchangeCube
 /-! # Composition of Cartesian proper ambient transports
 
 Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical pasting.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -105,22 +104,7 @@ private theorem exchange_paste
 
 /-- Two Cartesian proper ambient transports compose to the transport of the rectangle.
 
-Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical proper/open exchange pasting.
-(auxiliary; not a blueprint node).
-
-Proof: use the Cartesian normalization of etaleProperOpenExchangeCube to replace the
-three exchanges by the same normalized family. Its vertical pasting law expresses
-the exchange of the outer rectangle as the two inner exchanges separated by the
-inverse direct-image compositor on the neighborhood and the direct-image compositor
-on the ambient scheme. Expand the two transports. Naturality moves the compositor
-for a2,q21 through the first exchange and the compositor for r10,p0 through the
-second exchange. The inverse neighborhood compositor from the pasting law cancels
-the direct compositor inserted by these two graph factorizations. Associativity of
-the canonical proper direct-image compositors identifies the remaining source
-factor with the inverse compositor for a2,q21 q10, and the remaining target factor
-with the compositor for r21 r10,p0. The functor associators only change parentheses.
-This gives the displayed equality of isomorphisms. No properness of the a-maps or
-p-maps is used, and no graph, compactification, or intersection appears in the law. -/
+Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical proper/open exchange pasting. -/
 theorem etaleProperAmbientTransport_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y U₀ U₁ U₂ P₀ P₁ P₂ : Scheme.{u}}

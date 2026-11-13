@@ -74,22 +74,7 @@ private theorem coefficientTarget_generator_scalar_ring
 
 /-- The supported pullback-unit section is linear over the global ring of U.
 Only scalar compatibility is asserted; neither affineness nor bijectivity is needed.
-Source: Stacks Project, Tags 0096 and 0097, module pullback units and restriction.
-(blueprint: lem-pc-coefficient-target-generator-scalar).
-
-Proof: The source A-action is restriction along GammaSpecIso.inv followed by
-(f restricted to U followed by U.toSpecGamma).appTop, and then to Z.
-The isomorphism F.restrictAppIso transports this action to the structural action
-on the image of Z in X. Linearity of the pullback adjunction unit transports
-it by gprime.app; restriction to W and then W intersect fprime inverse image B
-transports it by the corresponding restriction ring maps. Under the support
-identification, multiplication by r in Gamma(Tprime,B) is multiplication by
-fprime.app(B)(r) restricted to that intersection. Set r = g.appLE(top,B)(a).
-Naturality of the structure maps and w identify this with the transported
-source scalar: GammaSpecIso cancels the canonical chart U.toSpecGamma, leaving
-f followed by the restriction to U. Thus applying coefficientSupportIso.hom
-makes both expressions identical. Its injectivity gives the equation below.
-All maps exist for empty opens and zero modules; no flatness is used. -/
+Source: Stacks Project, Tags 0096 and 0097, module pullback units and restriction. -/
 theorem coefficientTarget_generator_scalar
     {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules)

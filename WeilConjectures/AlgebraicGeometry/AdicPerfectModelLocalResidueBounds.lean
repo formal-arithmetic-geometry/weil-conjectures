@@ -162,30 +162,7 @@ has that model's interval on the same slice. This is a local calculation, with
 no stratification, covering hypothesis, compactness or global boundedness assertion.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Project,
-Tags 03EL, 06YY and 0E8K.
-(auxiliary; not a blueprint node).
-
-Proof: put B=adicLisseCompletedRing X I and k=adicLisseConstantRing X (A/I).
-The actual inverse-image functor along i is exact, as is restriction to the slice U.
-Their tensor comparisons identify the derived inverse image of extension of scalars
-along B to k with extension along the inverse image of this map. To see this on
-unbounded complexes, choose a flat-term K-flat resolution. Exact inverse image and
-slice restriction preserve its quasi-isomorphism and K-flatness. The ordinary
-sectionwise tensor comparison gives the identification on these resolutions, and
-its compatibility with the derived counits gives it on every derived object.
-The local isomorphism e therefore identifies the restricted residue of K with
-that of the specified completed realization of P.
-Each term of P is projective, hence flat. Constant realization preserves flatness,
-and scalar extension of a flat module is flat. The completed realization is bounded
-above and termwise flat, hence K-flat, also after restriction. Consequently its
-derived residue is computed termwise. A zero term of P stays zero under each
-additive realization, tensor and restriction. Thus this residue complex has zero
-terms outside [a,b], hence zero homology there. Finally exact fixed-scalar
-restriction retains the underlying additive sheaf and commutes with homology.
-Transport through the representative isomorphism used in sfbResidueComplex to
-obtain precisely the displayed local vanishing. No comparison is chosen as data
-and no bound or completeness of K is presupposed. The zero complex, empty slice
-and unordered a,b cases use the same termwise argument. -/
+Tags 03EL, 06YY and 0E8K. -/
 theorem adicPerfectModel_localResidueBounds {X S : Scheme.{u}} (i : S ⟶ X)
     [IsImmersion i] {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal)

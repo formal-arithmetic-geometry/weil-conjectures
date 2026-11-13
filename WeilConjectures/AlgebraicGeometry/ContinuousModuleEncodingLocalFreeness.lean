@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Sites.CoversTop.Basic
 /-! # Local freeness under continuous module encodings
 
 Source: Stacks Project, Modules on Sites, Tags 03DM and 03DO.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -28,23 +27,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The continuous module encoding preserves and reflects local finite freeness.
 Source: Stacks Project, Modules on Sites, Tags 03DM and 03DO;
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node)
-
-Proof. On a weakly etale chart, the small pro-etale site of the source is the
-slice of the base site. The chart-pullback square identifies restriction of the
-sectionwise encoding with encoding of canonical inverse image. On these slices,
-continuousRingFreeIso identifies each finite biproduct of the internal regular
-module with the finite free sectionwise module, including rank zero. Conversely
-full faithfulness and the counit of the encoding take any finite free
-sectionwise presentation back to that internal biproduct. The local generators
-criterion for IsFiniteLocallyFree therefore transports trivializations in both
-directions. A scheme pro-etale precover gives a covering family on the small
-site. In the converse direction, evaluate the covering family at the terminal
-object, refine the resulting covering sieve by a pro-etale precover, and pull
-back the finite free presentations along the refinement arrows. The resulting
-scheme cover is the cover appearing on the left. No uniform rank, nonempty
-cover, quasi-compactness, or finite indexing set is required. -/
+Bhatt--Scholze, Section 6.8. -/
 theorem continuousRing_locallyFree_iff
     (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]
@@ -134,7 +117,6 @@ set_option backward.isDefEq.respectTransparency false
 
 /-- Local finite freeness transports to the normalized rational encoding.
 Source: Stacks Project, Tag 03DM.
-(auxiliary; not a blueprint node)
 
 Apply the continuous-ring criterion, then restrict along the coefficient
 isomorphism supplied by lisseFieldSheaf_eq. -/
@@ -162,7 +144,6 @@ theorem continuousField_locallyFree
 
 /-- A finite locally free integral module has locally free inverse encoding.
 Source: Stacks Project, Tag 03DM.
-(auxiliary; not a blueprint node)
 
 First transport the given module along the inverse integral coefficient
 isomorphism. Apply the counit of the continuous-ring encoding, then the reverse

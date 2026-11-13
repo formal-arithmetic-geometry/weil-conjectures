@@ -44,30 +44,7 @@ set_option maxHeartbeats 150000 in
 /-- The canonical cocone on inverse-image opens has a stage-comparison certificate.
 
 Source: Stacks Project, Tag 09YQ, coherent-system construction; the open-limit
-construction in Mathlib.AlgebraicGeometry.AffineTransitionLimit.
-(blueprint: lem-weil-pbc-etale-limit-open-comparison-certificate).
-
-Proof: Restrict the inverse diagram to the directed tail above i₀ and to the
-inverse images of W. The opens cone is limiting by `isLimitOpensCone`, after
-identifying the tail opposite with Over(op i₀). Its transitions are affine
-restrictions of the given affine maps. At the least tail index its object is
-isomorphic to W.toScheme: the identity transition, the given e, and W ≤ O
-identify its open with W. Compactness of W makes this least stage compact;
-affine preimages of quasi-compact opens are quasi-compact. Every other stage
-is an open in a quasi-separated scheme, hence quasi-separated. Pull the given
-coefficient system back to these stages with `openSquareCoefficient`. The
-canonical inverse-image coherences give the identity, composition and G-map
-equations. The tail inclusion is final (directedness gives an upper bound for
-any index and i₀), so L reindexed to the tail is still a colimit. Inverse image
-along the limit open is a left adjoint and preserves this colimit. Composition
-identifications make it the colimit of the pulled-back restricted coefficients.
-The specified hK and hι are precisely the arrow and cocone formulas for this
-system, after transporting the object identifications eK. Apply the `system`
-constructor of StageCohomologyComparison at the least index, and transport
-through the canonical open-limit/coefficient isomorphisms with its `iso` and
-`comp` constructors. This certifies the supplied colimit.desc, without asserting
-that it is an isomorphism. Empty W, zero coefficients, and singleton diagrams
-satisfy the same construction; no injectivity or continuity is assumed. -/
+construction in Mathlib.AlgebraicGeometry.AffineTransitionLimit. -/
 theorem etale_limit_open_comparison_certificate
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

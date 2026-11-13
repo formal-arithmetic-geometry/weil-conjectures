@@ -10,8 +10,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # Morphisms into a coproduct of copies of a scheme
 
-Source: Stacks Project, Groupoids, Example 03YW and Schemes, Lemmas 01JB and 01HI
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Groupoids, Example 03YW and Schemes, Lemmas 01JB and 01HI.
 -/
 
 @[expose] public section
@@ -24,14 +23,12 @@ namespace AlgebraicGeometry
 
 /-- An indexed clopen decomposition consists of pairwise disjoint open subschemes whose
 union is the whole scheme. Each piece is also closed, since its complement is the union
-of the other pieces. Source: Stacks Project, Groupoids, Example 03YW
-(auxiliary; not a blueprint node). -/
+of the other pieces. Source: Stacks Project, Groupoids, Example 03YW. -/
 def IsClopenDecomposition (W : Scheme.{u}) (E : Type v) (P : E → W.Opens) : Prop :=
   (∀ e e' : E, e ≠ e' → Disjoint (P e) (P e')) ∧ (⨆ e, P e) = ⊤
 
 open Classical in
-/-- Source: Stacks Project, Groupoids, Example 03YW, and Schemes, Lemmas 01JB and 01HI
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Groupoids, Example 03YW, and Schemes, Lemmas 01JB and 01HI.
 
 The coprojections are open immersions with disjoint images covering the coproduct.
 Pulling their images back along a map over `U` gives disjoint open pieces covering `W`;

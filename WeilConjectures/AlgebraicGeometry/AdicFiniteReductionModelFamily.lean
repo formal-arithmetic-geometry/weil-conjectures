@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-! # A covering family with one perfect model for all finite reductions
 
 Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -53,26 +52,7 @@ private theorem adicResidueAlgebraTower_model
 /-- A covering family with a bounded finite-projective algebraic model for all
 finite reductions. Completeness of either object on the slice is a separate assertion.
 Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph through the choice of
-an affine weakly contractible cover; Tags 09C2, 094I, 09BI and 09AW.
-(auxiliary; not a blueprint node).
-
-Proof: Restrict scalars to the constant A-sheaf using the constant-completion
-comparison. Lisse finite-type cohomology is constructible on the one-stratum
-stratification, so the finite-reduction theorem gives etale lifts C_n, with a common
-Tor interval and normalized quotient maps. Cover X by connected clopen components
-of Noetherian affine charts. Slice localization is exact and preserves the quotient
-completion unit and finite reductions. Nilpotent-reduction lissity makes each C_n
-lisse. On each nonempty component choose a geometric point and take the stalks of
-this normalized system. Connected perfect constancy makes these stalks perfect,
-and exact tensor-compatible stalks give their consecutive derived reduction
-isomorphisms. Apply algebraic perfect inverse-limit reconstruction over the complete
-ring A and choose a bounded finite-projective representative P. Cover the component
-by affine weakly contractible objects. The weakly contractible clause of connected
-perfect constancy identifies every restricted C_n with the constant stalk complex.
-The algebraic reduction isomorphisms for P and the scalar-extension/pullback
-comparisons identify the actual slice reductions of B tensor P and M at every level.
-Take the composite covering family, retaining the chosen P on each member. Empty
-charts contribute the empty family. No compatible local markings are needed. -/
+an affine weakly contractible cover; Tags 09C2, 094I, 09BI and 09AW. -/
 theorem adicResidue_finite_reduction_model_family
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

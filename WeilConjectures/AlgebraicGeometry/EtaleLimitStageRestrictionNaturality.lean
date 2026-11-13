@@ -66,31 +66,7 @@ commutes with each actual tail-stage cohomology transition, including its arbitr
 coefficient morphism φ. There is no condition on identities or compositions of φ.
 
 Source: Stacks Project, Tag 01F7 (pullback and coefficient functoriality),
-Tag 09YQ (restricted stage and cone maps); parent proof step 1.
-(blueprint: lem-weil-pbc-etale-limit-stage-restriction-naturality)
-
-Proof: Let i and i' be the inclusions A_j → B_j and A_k → B_k, let a and b
-be the actual stage transitions on A and B, and let t be D.map of the opposite
-stage arrow. Put c = i' ≫ b. The equations tailStageOpenMap followed by the
-stage-open inclusion = stage-open inclusion followed by t, and homOfLE_ι,
-give c = a ≫ i by cancellation of the monomorphism B_j.ι. They also give
-A_k.ι ≫ t = c ≫ B_j.ι.
-For arbitrary composable scheme maps and coefficient maps, cohomologyMap_map,
-cohomologyPullbackFunctorial and Sheaf.H.map_comp_apply express the composite
-cohomology map as pullback along their composite followed by a single coefficient
-map; the private transported-composition helper proves this equality directly.
-Apply this to i', b on the left and a, i on the right. Naturality of the inverse
-upperStarComp for i', B_k.ι moves the arbitrary coefficient morphism φ past the
-restriction comparison. Apply the component associativity laws in
-WeilConjectures.SixFunctors.BaseChange.Pasting to the triples i', b, B_j.ι and
-i', B_k.ι, t for the left coefficient map, and to a, i, B_j.ι for the right.
-Cancel the adjacent hom and inv comparisons. Both coefficient maps become the
-inverse comparison for c, B_j.ι followed by the comparison for A_k.ι, t and the
-restriction of φ to A_k. Hence the two transported cohomology maps agree.
-Unfold openCohomologyRestriction, tailOpenCohomologyMapDegree and
-openSquareCoefficient to identify this equality with the claim; proof irrelevance
-identifies the commuting-square and inclusion proofs. No coefficient-system laws
-are used. Empty and equal opens, identity stage arrows and zero φ are included. -/
+Tag 09YQ (restricted stage and cone maps); parent proof step 1. -/
 theorem tailOpenCohomologyMapDegree_restriction
     {X : Scheme.{u}} {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

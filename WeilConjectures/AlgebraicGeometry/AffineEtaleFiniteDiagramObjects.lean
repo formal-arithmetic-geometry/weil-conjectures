@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Simultaneous descent of affine étale objects
 
 Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
-(blueprint: lem-pbc-affine-etale-common-models).
 -/
 
 @[expose] public section
@@ -105,17 +104,7 @@ private theorem affineEtale_single_model
     isPullback_isPullbackLift (homOfLE hk).op hr'⟩
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 01ZM,
-01YZ, 01Z6 and 07RP.
-
-Proof: Every affine étale object has finitely presented structure morphism because
-its source is quasi-compact and its base is quasi-separated. The limit is qcqs since
-its projections are affine. Apply 01ZM to each structure morphism. Its base-change
-tail has the original object as limit by 01YZ. Apply 01Z6 to obtain an affine stage,
-then 07RP to obtain an étale stage. Further base changes remain affine and étale.
-Directedness gives a common upper bound for the finite collection of stages; for
-an empty collection use nonemptiness of I. Transitivity of pullbacks supplies
-cartesian squares from the original objects to the common-stage models.
-(blueprint: lem-pbc-affine-etale-common-models). -/
+01YZ, 01Z6 and 07RP. -/
 theorem affineEtale_common_models
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

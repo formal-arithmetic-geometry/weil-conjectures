@@ -350,28 +350,7 @@ end ProductTransport
 with scheme-limit cones on all their repeated intersections. This is a purely geometric
 assertion: it says nothing about sections, injectivity, exactness, or cohomology.
 Source: Stacks Project, Tag 099U, the two finite Čech limit reductions; Limits Tags
-01ZM, 01ZN and 07RP for finite-presentation and covering descent.
-(auxiliary; not a blueprint node).
-
-Proof: transport the covering sieve through AsSmall.down. Factor the finite family through
-its affine disjoint union, a single surjection onto U. The singleton relative-presentability
-result gives compatible affine étale presentations of this surjection. Descend the finite
-affine open cover of its source by Scheme.OpenCover.exists_of_isCofiltered_of_finite, and
-restrict its presentations to the descended opens. Cone identities identify the resulting
-member maps with the original covering arrows. Lifting points through the singleton stage
-cover and its descended open cover proves that every stage family covers. This construction
-does not require the ambient X to be affine.
-
-Construct all ordered intersections using systemOfPresentation. The base and member limit
-properties give the intersection limit properties by presentedNerveIsLimit. Choose normalized
-SiteCechComplex structures for the étale stage covers. View each chosen intersection as a
-limiting wide-pullback cone and compare it with the ordered product by its unique compatible
-isomorphism. Projecting to each factor shows that these isomorphisms commute with all index
-maps. Conjugate the transitions and cone projections by these isomorphisms. Transfer affineness
-through the same isomorphisms and Scheme.isAffine_of_isLimit. Map the normalized complexes
-through AsSmall.up, and enlarge the small index to universe u+1 by AsSmall. Whiskering by this
-equivalence and transporting the diagram and vertex isomorphisms preserves the limit cones.
-Empty families have no nonempty tuples and need no separate coefficient argument. -/
+01ZM, 01ZN and 07RP for finite-presentation and covering descent. -/
 theorem exists_coefficient_affine_cech_presentation (X : Scheme.{u})
     (U : Scheme.coefficientProEtaleSiteModel.{u, v} X)
     (m : ℕ) (V : Fin m → Scheme.coefficientProEtaleSiteModel.{u, v} X)

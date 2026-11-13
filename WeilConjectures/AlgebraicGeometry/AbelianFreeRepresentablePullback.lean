@@ -40,8 +40,7 @@ scheme-theoretic pullback. Both objects corepresent sections on that pullback:
 apply inverse-image/direct-image adjunction, sheafification, the free abelian
 adjunction, and Yoneda. Naturality in the coefficient sheaf gives the unique
 representing isomorphism. Empty U is included in the same adjunction argument.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sc-abelian-free-representable-pullback). -/
+Source: Stacks Project, Tags 03CB and 03Q8. -/
 noncomputable def abelianFreeRepresentablePullbackIso {S T : Scheme.{u}}
     (a : T ⟶ S) (U : S.Etale) :
     ((a)^*[AddCommGrpCat.{u + 1}]).obj ((abelianComparisonFree S).obj U) ≅
@@ -65,8 +64,7 @@ noncomputable def abelianFreeRepresentablePullbackIso {S T : Scheme.{u}}
 
 /-- The same free-sheaf comparison for a specified pullback square, with the
 free sheaf on its given apex rather than on a chosen fibre product.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sc-abelian-free-representable-pullback). -/
+Source: Stacks Project, Tags 03CB and 03Q8. -/
 noncomputable def abelianFreeRepresentablePullbackSquareIso {S T : Scheme.{u}}
     (a : T ⟶ S) (V : S.Etale) (U : T.Etale) (r : U.left ⟶ V.left)
     (hr : IsPullback r U.hom V.hom a) :

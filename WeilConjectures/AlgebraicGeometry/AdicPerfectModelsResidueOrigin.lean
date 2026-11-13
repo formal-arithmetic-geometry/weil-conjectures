@@ -62,28 +62,7 @@ private theorem bounded_residueOrigin (X : Scheme.{u})
 /-- Stratified perfect models give global completeness and bounds, and bounded
 constructible etale origin of the residue. The Tor condition is deliberately separate:
 it follows from field-valued tensor exactness.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3
-(auxiliary; not a blueprint node).
-
-Proof: On each model cover, transport the given finite-projective complex to the small
-site and apply adicPerfectModel_complete_reduction. It gives completeness and vanishing
-of both the model and its residue outside the termwise bounds; the residue cohomology
-is the constant realization of finite-dimensional coefficient cohomology. Restriction
-along the stratum immersion and then to the slice commutes with this calculation by
-the finite-projection scalar comparisons. Detect completeness by
-adicStratumCompletionUnit_detection. For bounds, choose finitely many quasi-compact
-pieces of the covering schemes over each of the finitely many Noetherian strata, and
-take the minimum of their lower bounds and maximum of their upper bounds. Exact
-restriction commutes with cohomology and finite-stratum detection proves the global
-vanishing, for K and its residue separately. This is
-exists_global_bounds_of_stratified_local_bounds. If the selected family is empty, use
-[0,0] and the empty-cover sheaf axiom. The residue cohomology is intrinsically
-constructible on the given strata, with finite-dimensional, hence finitely presented,
-constant module values. Noetherian global constructibility and the bounded derived
-constructible comparison equivalence descend this bounded residue to an etale complex
-C. Exact fully faithful comparison identifies its cohomology, bounds and the required
-residue isomorphism. Fixed-scalar restriction and the small-site equivalences give the
-stated presentation without changing the coefficients or the quotient projection. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3. -/
 theorem adicPerfectModels_residueOrigin (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

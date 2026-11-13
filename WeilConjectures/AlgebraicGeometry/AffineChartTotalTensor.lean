@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 /-! # Total tensor complexes through the canonical affine chart
 
 Source: Stacks Project, Tag 08DX(2), the underived total-complex comparison.
-(blueprint: lem-pc-affine-chart-total-tensor).
 -/
 
 @[expose] public section
@@ -104,21 +103,7 @@ private noncomputable def tildeTensorNatIso (R : CommRingCat.{u}) :
       exact (congrArg (fun k ↦ k m) (tilde.toOpen_map_app f ⊤)).symm)
 /-- Associated sheaf followed by canonical chart restriction commutes with total tensor.
 Source: Stacks Project, Tag 08DX, lemma-quasi-coherence-tensor-product, proof of (2),
-and Tag 01I8 for the underived associated-sheaf tensor identification.
-(blueprint: lem-pc-affine-chart-total-tensor).
-
-Proof: let C be tilde followed by restriction along X.toSpecΓ. The affine associated-
-sheaf tensor comparison identifies C(U tensor V) with C(U) tensor C(V). Its defining
-formula on pure tensors proves naturality in U and V; restriction has the same
-naturality by its defining formula on restricted sections. The affine tilde functor
-is a left adjoint, and open restriction preserves colimits, so C preserves the
-coproduct indexed by all pairs (p,q) with p+q=n in each integer degree n. Combine the
-tensor comparisons on these summands with the coproduct comparison. Naturality
-identifies the first differentials and the signed second differentials. This gives
-mutually inverse chain maps between C(Tot(P tensor N)) and Tot(C(P) tensor C(N)).
-Take the inverse comparison to obtain the displayed orientation. This construction
-uses no K-flatness, no localization, and no finiteness assumption; it also applies
-to zero rings, zero complexes and an empty affine scheme. -/
+and Tag 01I8 for the underived associated-sheaf tensor identification. -/
 theorem affineChart_totalTensor_iso (X : Scheme.{u}) [IsAffine X]
     (P N : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ) :
     letI : Functor.PreservesZeroMorphisms

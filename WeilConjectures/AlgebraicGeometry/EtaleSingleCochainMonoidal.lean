@@ -31,7 +31,6 @@ variable {C : Type uB} [Category.{u + 1} C] [Abelian C]
 
 /-- The explicit total-tensor comparison for single complexes in degree zero.
 Source: Stacks, Cohomology on Sites, Tag 06YQ.
-(auxiliary; not a blueprint node).
 It is the composition of the two existing single/bifunctor comparisons. -/
 @[irreducible]
 noncomputable def singleCochainTensorIso
@@ -159,12 +158,7 @@ private noncomputable def cochainSingleMonoidal :
           (congrArg Iso.hom (singleCochainTensorIso_rightUnitor L)).symm }
 
 /-- The canonical degree-zero cochain tensorator extends to a strong monoidal structure.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, total tensor of single complexes.
-(auxiliary; not a blueprint node).
-Proof: the inverse tensorator is the inclusion of the (0,0) summand. Naturality follows
-from naturality of this inclusion. The triple inclusion identities give associativity,
-and the degree-zero unit inclusions give both unit equations. Apply CoreMonoidal to
-these explicit isomorphisms; its tensorator is definitionally the displayed one. -/
+Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, total tensor of single complexes. -/
 theorem exists_singleCochainMonoidal :
     ∃ m : (HomologicalComplex.single C (.up ℤ) 0).Monoidal,
       ∀ L M : C, letI := m

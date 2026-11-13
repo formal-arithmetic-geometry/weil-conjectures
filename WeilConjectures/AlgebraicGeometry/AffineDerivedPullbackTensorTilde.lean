@@ -29,8 +29,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Affine computations of derived pullback and tensor
 
 Source: Stacks Project, Lemmas 36.3.8(2), 36.3.9(2), Tags 08DW and 08DX,
-and Lemma 36.3.6, Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+and Lemma 36.3.6, Tag 08DV.
 
 The affine formulas are written for every K-flat resolution `P ⟶ M`.
 Thus the right sides are the concrete representatives of the module derived tensors,
@@ -211,8 +210,7 @@ private theorem pullbackOpenIso (X : Scheme.{u}) (U : X.Opens)
     ε α.hom (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
 /-- Derived pullback commutes naturally with restriction to opens.
-Source: Stacks, Tag 08DW, proof
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Source: Stacks, Tag 08DW, proof.
 Proof (node step 1): choose a K-flat resolution on Y (lem-pc-kflat-resolution).
 Restriction to V preserves K-flatness (lem-pc-kflat-pullback-preservation).
 Termwise tensor pullback and restriction commute, so both composite functors are
@@ -245,8 +243,7 @@ theorem derivedPullback_openRestriction_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact eqToIso (congrArg (fun k ↦ derivedPullback k) (Scheme.Hom.resLE_comp_ι f hUV).symm)
 
 /-- Derived tensor commutes with restriction to any open subscheme.
-Source: Stacks, Tag 08DX, proof; the restriction computation of Tag 08DW
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Source: Stacks, Tag 08DX, proof; the restriction computation of Tag 08DW.
 Proof (node step 1): choose a K-flat resolution of K (lem-pc-kflat-resolution).
 It remains K-flat on U (lem-pc-kflat-pullback-preservation). Restriction commutes
 with sheaf tensor and all direct sums in the signed total complex
@@ -347,8 +344,7 @@ private theorem baseChangeCounitComparison
     (Functor.isoWhiskerRight δ DerivedCategory.Q.{w})⟩
 
 /-- Naturality of the affine pullback comparison on K-flat module models.
-Source: Stacks, Tag 08DW(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Source: Stacks, Tag 08DW(2), via Tag 08DV.
 Proof (node step 2): apply the natural termwise tilde/base-change isomorphism
 (lem-weil-pbc-tilde-pullback-base-change) to K-flat complexes. Their tilde complexes
 are K-flat (lem-pc-affine-tilde-kflat), so the derived-pullback counit is invertible
@@ -392,8 +388,7 @@ theorem derivedPullback_tilde_kFlat_natIso (A B : Type u) [CommRing A] [CommRing
   exact isKFlat_tilde A P.obj (moduleKFlat_acyclic A P.obj P.property)
 
 /-- Naturality of the affine tensor comparison in a K-flat first model and an arbitrary
-second complex. Source: Stacks, Tag 08DX(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+second complex. Source: Stacks, Tag 08DX(2), via Tag 08DV.
 Proof (node step 3): tilde of the first model is K-flat (lem-pc-affine-tilde-kflat).
 Compute sheaf derived tensor by that model (def-pc-kflat-complex). Apply the natural
 tilde/tensor isomorphism in each bidegree (lem-weil-pbc-affine-tilde-tensor), then
@@ -475,8 +470,7 @@ private theorem tensorIso_trans_nonempty
 
 /-- Affine derived pullback of termwise tilde is termwise tilde of derived base change,
 computed on any K-flat resolution of the input complex.
-Source: Stacks, Tag 08DW(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Source: Stacks, Tag 08DW(2), via Tag 08DV.
 Proof (node step 2): resolve M by P (lem-pc-kflat-resolution). Termwise tilde
 preserves quasi-isomorphisms (lem-pc-affine-qcoh-derived-equivalence), and tilde P
 is K-flat (lem-pc-affine-tilde-kflat). Derived pullback is therefore represented
@@ -516,8 +510,7 @@ theorem derivedPullback_tilde_iso (A B : Type u) [CommRing A] [CommRing B]
 
 /-- On an affine scheme, derived tensor of termwise tilde complexes is termwise tilde
 of module derived tensor, computed with any K-flat resolution of the first factor.
-Source: Stacks, Tag 08DX(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Source: Stacks, Tag 08DX(2), via Tag 08DV.
 Proof (node step 3): resolve M by P (lem-pc-kflat-resolution). Exactness of termwise
 tilde (lem-pc-affine-qcoh-derived-equivalence) and K-flatness of tilde P
 (lem-pc-affine-tilde-kflat) allow the sheaf derived tensor to be computed by

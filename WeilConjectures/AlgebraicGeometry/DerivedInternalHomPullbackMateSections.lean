@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackEvaluationSections
 
 /-! # Evaluation mate and its zeroth hypercohomology
 
-Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ
-(blueprint: lem-pc-derived-internal-hom-pullback-mate-sections).
+Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ.
 -/
 
 @[expose] public section
@@ -213,27 +212,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Construction of the evaluation mate, with compatible sections identifications.
 No invertibility of the counit composite is asserted here.
 
-Source: Stacks Project, Tags 08I3, 079W, 08DJ and 08JA
-(blueprint: lem-pc-derived-internal-hom-pullback-mate-sections).
-
-Proof: Choose the pullback/direct-image adjunction from the underived adjunction
-by the K-flat and K-injective derived-functor construction of Tag 079W. The
-canonical tensor-Hom bijections of Tag 08DJ give bS and bT by the Hom-equivalence
-construction of an adjunction. Resolve both tensor factors by K-flat complexes.
-Termwise pullback commutes with their tensor total complex, and localization
-therefore gives t. Pull back evaluation and precompose with t.inv, transpose by
-bT, and then transpose by a to obtain gamma. Naturality of evaluation and the
-three transpositions proves naturality in both entries.
-
-Compute global sections on K-injective representatives. Direct image followed
-by sections on S is sections on T, so the derived comparison gives z after
-zeroth cohomology. For eS and eT use the identification of degree-zero Hom
-cocycles modulo homotopies with derived morphisms into a K-injective complex
-(Tag 08JA). Composition of chain maps gives the two naturality equations.
-With these specific compatible choices, transposing pulled-back evaluation
-and postcomposing with the counit takes the class of phi to the class of
-Lg*(phi) followed by the counit. This proves the last equation without using
-invertibility of the internal-Hom composite. -/
+Source: Stacks Project, Tags 08I3, 079W, 08DJ and 08JA. -/
 theorem exists_derivedInternalHom_pullback_mate_sections
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

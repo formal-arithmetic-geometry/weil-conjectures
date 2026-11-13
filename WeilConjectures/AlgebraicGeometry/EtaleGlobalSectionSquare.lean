@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 /-! # Global inverse-image section restriction through a square
 
 Source: Stacks Project, Tag 0A3H, final paragraph.
-(blueprint: lem-weil-pbc-etale-global-section-square).
 -/
 
 @[expose] public section
@@ -157,20 +156,7 @@ set_option backward.isDefEq.respectTransparency false in
 an arbitrary commutative square. No fibre, field, or connectedness hypothesis is used.
 
 Source: Stacks Project, Sites, Tags 03CB and 03CC; Tag 0A3H, the identification of
-restrictions along the two factorizations through a geometric fibre.
-(blueprint: lem-weil-pbc-etale-global-section-square).
-
-Proof:
-Use unit naturality to move the terminal-object restriction through the component of
-the first composition comparison. Apply associativity of the unit-compatible
-composition comparisons to rewrite each side as the comparison along the composite
-map applied to its direct unit-restriction of a. The unit equation identifies iterated
-units with that direct unit. The terminal lifts in the iterated and direct pullbacks
-agree because their common target is the pullback of the terminal etale object,
-which is terminal since the base-change functor preserves finite limits. The equality of
-composite maps supplied by the square then identifies the two expressions. All
-Eq.mp transports are along the stated equalities, so proof irrelevance makes their
-choices immaterial. This argument applies also to empty schemes. -/
+restrictions along the two factorizations through a geometric fibre. -/
 theorem etaleSet_globalSection_square
     {S T D U E : Scheme.{u}} (f : T ⟶ S) (k : D ⟶ T) (d : E ⟶ D)
     (p : U ⟶ T) (v : E ⟶ U) (g : D ⟶ S) (r : U ⟶ S) (t : E ⟶ S)

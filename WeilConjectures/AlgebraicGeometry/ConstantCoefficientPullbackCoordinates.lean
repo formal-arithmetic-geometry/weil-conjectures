@@ -129,21 +129,7 @@ no module equivalence, slice, or comparison of module inverse-image functors.
 
 Source: Stacks Project, Sites, Tag 00YV (functoriality of algebraic structures),
 Modules on Sites, Tag 03D2 (inverse image); coefficient transport in step 1 of
-lem-sfb-constant-slice-module-encoding.
-(auxiliary; not a blueprint node).
-
-Proof: let kappa be the direct-image map extending the constant-presheaf
-unit. Its ring inverse-image adjunct q is invertible: base change preserves a
-terminal test object, and the constant-sheaf/global-sections adjunction shows
-that both inverse-image constant functors are left adjoints to the same section
-functor. Let phi be the explicit condensedSmallRingMap, and psi its adjunct,
-which is invertible by condensedSmallRingMap_pullback_isIso. Define d as
-q inverse, followed by inverse image of c, followed by psi. Naturality of the
-adjunction gives kappa followed by direct image of d = c followed by phi.
-Precomposing with the constant-presheaf unit gives the displayed section equation.
-Conversely, that section equation gives the full sheaf-morphism equation by the
-sheafification Hom bijection. Transpose it and cancel q to determine d.hom;
-Iso.ext determines d. No nonempty-site or nonzero-ring assumption is used. -/
+lem-sfb-constant-slice-module-encoding. -/
 theorem constant_coefficient_pullback_coordinates
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

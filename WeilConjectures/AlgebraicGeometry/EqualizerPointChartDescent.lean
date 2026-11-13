@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
 # Descent of point-indexed equalizer charts
 
 Source: the current Weil conjectures blueprint, `thm-trf-frobenius-fixed-points.proof.md`,
-Steps 0, 2 and 3 (blueprint: lem-trf-equalizer-point-chart-descent).
+Steps 0, 2 and 3.
 -/
 
 @[expose] public section
@@ -140,8 +140,7 @@ private theorem field_germ_iso (k : Type u) [Field k] (a : Spec (.of k)) :
 set_option backward.isDefEq.respectTransparency false in
 /-- Descent of evaluation-normalized affine equalizer charts to the canonical finite disjoint
 union of fixed rational points, including its finite étale structure and length-one stalks.
-Source: the current blueprint, `thm-trf-frobenius-fixed-points.proof.md`, Steps 0, 2 and 3
-(blueprint: lem-trf-equalizer-point-chart-descent).
+Source: the current blueprint, `thm-trf-frobenius-fixed-points.proof.md`, Steps 0, 2 and 3.
 
 Proof plan:
 1. Every label belongs to some `Pj j`, by the open cover and the universal property of an

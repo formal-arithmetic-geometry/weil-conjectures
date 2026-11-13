@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md,
-final proof paragraph; Stacks Project, Tags 0940, 0941 and 07KC
-(auxiliary; not a blueprint node).
+final proof paragraph; Stacks Project, Tags 0940, 0941 and 07KC.
 
 The tower functor is Mathlib's actual postcomposition by `F`, on both complexes and
 localizations. All Roos, resolution, triangle and augmentation clauses concern the same
@@ -199,8 +198,7 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
 /-- The full signed Roos specification for exact product-preserving functors.
 This packages verbatim the witnesses and normalization equations of
 `exactProductFunctorStrictLimit`, so specialization can retain a named predicate.
-Source: Stacks 0940, 0941 and 07KC
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0940, 0941 and 07KC. -/
 def StrictLimitAssertions (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)
@@ -425,7 +423,7 @@ end StrictLimitSpecification
 
 Source: the final paragraph of the blueprint proof of
 lem-cbc-completed-extension-zero-comparison, refined by Stacks Project, Tags 0940,
-0941 and 07KC (auxiliary; not a blueprint node).
+0941 and 07KC.
 
 Proof, following the nine steps of the blueprint node:
 1. Apply lem-sf-exact-functor-derived-triangulated to `F` and its postcomposition on

@@ -35,22 +35,7 @@ Ext-defined sheaf cohomology on an isomorphic scheme. No finiteness, affineness,
 normality, or separably closed field hypothesis is needed.
 
 Source: Stacks Project, Cohomology on Sites, definition of cohomology as derived global
-sections; Etale Cohomology, Lemma 09ZC, first sentence and implicit transport.
-
-Proof: Composition with a scheme isomorphism gives inverse equivalences of the small
-etale sites, preserving coverings and terminal objects. The induced equivalence of
-abelian sheaves is exact, preserves injectives and global sections, and identifies
-constant sheaves by the sheafification universal property. It therefore induces an
-additive isomorphism on all cohomology groups. To compare the two cohomology definitions,
-resolve the sheaf by injectives in nonnegative degrees. This bounded below injective
-complex is K-injective. Both the total right derived global sections on the single
-complex and the classical right derived functors are computed by its global sections.
-The latter compute Ext from the constant free abelian sheaf, since Hom from that sheaf
-is global sections. Their degree `n` groups are thus additively isomorphic to `Sheaf.H`.
-An abelian group object is zero exactly when its underlying type is a subsingleton.
-This includes degree zero and the empty scheme.
-(blueprint: lem-weil-pbc-constant-etale-cohomology-iso-comparison)
--/
+sections; Etale Cohomology, Lemma 09ZC, first sentence and implicit transport. -/
 theorem isZero_constant_cohomology_iff_subsingleton_H_of_iso
     (X Y : Scheme.{u}) (e : X ≅ Y)
     (M : Type (u + 1)) [AddCommGroup M] (n : ℕ) :

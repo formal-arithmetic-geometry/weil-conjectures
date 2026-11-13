@@ -13,8 +13,7 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Joint injectivity of fpqc inverse-image units on étale objects
 
-Source: Stacks Project, Tags 09XM and 09XN, agreement-open uniqueness.
-(blueprint: lem-weil-pbc-etale-fpqc-units-jointly-injective). -/
+Source: Stacks Project, Tags 09XM and 09XN, agreement-open uniqueness. -/
 
 @[expose] public section
 
@@ -25,23 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Tag 03Q1 (3), inverse-image stalk comparison;
-Tag 03PU, sections determined by geometric germs; Tag 09XN, fpqc uniqueness.
-(blueprint: lem-weil-pbc-etale-fpqc-units-jointly-injective).
-
-Proof:
-1. Base change the fpqc covering to V. For every point v of V choose a point y
-   above it on some T_i ×_S V, using joint surjectivity. Take the algebraic closure
-   of the residue field of y and its canonical geometric lift to T_i ×_S V.
-2. Its projection to T_i and its projection to V define a pointed étale
-   neighbourhood of the image point of S. The inverse-image stalk comparison,
-   including its adjunction-unit formula, sends the two equal pulled-back germs
-   to the original germs of t and t'. Thus these original germs agree.
-3. Equality in the filtered colimit of pointed étale neighbourhoods is witnessed
-   on a common refinement W → V. This gives equal restrictions on W and a point
-   of W mapping to v. These W cover V as v varies.
-4. Sheaf separatedness on this covering gives t = t'. If V is empty the family
-   is empty and separatedness for the empty cover applies. No overlap datum or
-   existence of matching representatives is assumed. -/
+Tag 03PU, sections determined by geometric germs; Tag 09XN, fpqc uniqueness. -/
 theorem etaleFpqcUnits_jointly_injective
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

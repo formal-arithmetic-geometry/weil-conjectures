@@ -178,23 +178,7 @@ attribute [local irreducible] SfbCompletionNormalization.constants
 attribute [-instance] ConstantScalarRestriction.ringAbelian ConstantScalarRestriction.fixedAbelian
   ConstantScalarRestriction.ringGrothendieck ConstantScalarRestriction.fixedGrothendieck in
 /-- Finite reduction is unchanged by normalizing the completed coefficient presentation.
-Source: Stacks Tags 03A0, 03CY and 06YY
-(auxiliary; not a blueprint node).
-
-Proof: the limit comparison commutes with the zeroth projections. Its inverse and
-that of the constant-ring comparison give a commuting square of coefficient maps.
-The constant-ring comparison preserves constant sections by compatibility of
-sheafification with small-site precomposition. The fixed-scalar coordinate theorem
-therefore identifies normalized finite modules with the functor T in the statement.
-Precomposition and scalar restriction give a commuting square of exact right adjoints.
-Derive that square and take its inverse mate under the scalar-extension adjunctions;
-the horizontal functors are equivalences, so the mate is invertible. This identifies
-the two derived scalar extensions. The exact-derived factorization isomorphisms and
-Q.objObjPreimageIso then remove the representatives in object and sfbResidueComplex.
-The fixed-scalar derived category uses its original smaller localization universe;
-only the normalized module category uses the standard localization. The argument
-works for every unbounded K. For I=0 the same coefficient isomorphisms apply; for
-I=A the finite coefficient rings are zero. No completeness or Noetherianity is used. -/
+Source: Stacks Tags 03A0, 03CY and 06YY. -/
 theorem sfbResidue_normalization
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : @DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) _ _

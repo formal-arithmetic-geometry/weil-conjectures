@@ -26,8 +26,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- Compose a profinite coefficient function with the canonical profinite test projection.
-Source: the continuous coefficient realization of Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Source: the continuous coefficient realization of Bhatt--Scholze, Section 6.8. -/
 noncomputable def chartComparisonAdjoint (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] : Profinite.continuousMapRingObj E ⟶
       (pointLowerStar.obj ((lowerStar AddCommGrpCat.{u + 1} (toSpecZ X)).obj
@@ -50,8 +49,7 @@ noncomputable def chartComparisonAdjoint (X : Scheme.{u}) (E : Type)
        erw [profiniteTestProjection_natural] }⟩
 
 /-- The actual adjoint comparison from condensed to continuous ring coefficients.
-Source: Bhatt--Scholze, Section 6.8, coefficient realization.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Section 6.8, coefficient realization. -/
 noncomputable def chartComparison (X : Scheme.{u}) (E : Type)
     [TopologicalSpace E] [Ring E] [IsTopologicalRing E] :
     condensedRingObj (Profinite.continuousMapRingObj E) X ⟶
@@ -120,13 +118,7 @@ instance chartComparison_isMonHom (X : Scheme.{u}) (E : Type)
 
 /-- The canonical continuous coefficient realization commutes with continuous ring maps.
 
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization.
-(auxiliary; not a blueprint node)
-
-Proof: apply the inverse-image/direct-image adjunction to the two composites.
-Naturality of its Hom equivalence reduces the assertion to the explicit profinite test
-maps. On every section, both sides first compose with the test projection and then apply
-the coefficient ring map. These operations commute pointwise. -/
+Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization. -/
 lemma chartComparison_naturality (X : Scheme.{u})
     (E F : Type) [TopologicalSpace E] [Ring E] [IsTopologicalRing E]
     [TopologicalSpace F] [Ring F] [IsTopologicalRing F]

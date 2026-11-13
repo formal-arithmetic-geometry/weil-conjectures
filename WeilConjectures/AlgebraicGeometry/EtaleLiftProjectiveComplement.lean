@@ -84,20 +84,7 @@ private theorem quotient_tensor_equiv
 
 /-- A finite projective quotient module acquires a lifted projective complement.
 
-Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph, and Tag 07M5.
-(blueprint: lem-weil-pbc-etale-lift-projective-complement)
-
-Proof: split a surjection from a finite free module onto P using projectivity.
-Its kernel Kbar is finite projective, and the splitting identifies P × Kbar
-with that finite free module. Apply Tag 07M5 to Kbar, obtaining A₁, the quotient
-isomorphism alpha and a finite projective lift K. Define eta as alpha inverse
-composed with the quotient map A₁ → A₁/JA₁. Compatibility of alpha makes eta an
-A-algebra map; it is surjective. The quotient-tensor identification for K and
-the lift isomorphism, transported through alpha inverse, identify
-(A/J) tensor over A₁ K with Kbar. Transport the free structure along the product
-of this identification with the identity on P. For J = top all modules over
-A/J are zero; the same splitting and quotient identifications apply.
--/
+Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph, and Tag 07M5. -/
 theorem exists_etale_lift_projective_complement
     (A : Type u) [CommRing A] (J : Ideal A)
     (P : Type u) [AddCommGroup P] [Module (A ⧸ J) P]

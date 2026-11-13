@@ -86,21 +86,7 @@ private theorem exists_iso_preserving_frame_relations
           ((isGlueValue_glueHom_app hU hm hc' x).symm hm he) }
   exact ⟨φ, fun _ x ↦ isGlueValue_glueHom_app hU he hc x⟩
 
-/-- Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, final assertion.
-
-Proof: As in the construction of the glued module, choose neighborhoods of points of
-T meeting T only at the chosen point. At such a point all sections on incident
-components generate their line bundles by the nonvanishing hypothesis. Shrink the
-neighborhood and normalize all frames to carry the prescribed sections to 1. Off T
-use arbitrary trivializing frames. The reduced-cover section identity transfers the
-frame changes on overlaps to units on Y. Glue the trivial modules with these transition
-units. On the neighborhoods of T take the section 1; elsewhere take the expression of
-the prescribed section in its component frame. These local expressions agree under the
-transition maps because those maps are frame changes; the sheaf axiom produces t.
-The component frame isomorphisms glue to the asserted pullback isomorphisms, under which
-t restricts to s. The restriction is the unit of the tensor-pullback adjunction as in
-the target statement. If T is empty the disjoint components simply glue independently.
-(blueprint: lem-sc-exists-glued-section) -/
+/-- Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, final assertion. -/
 theorem existsGluedSection
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

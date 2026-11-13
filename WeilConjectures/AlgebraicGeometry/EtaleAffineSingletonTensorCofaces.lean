@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaces
 
 /-! # Cofaces of the affine singleton tensor comparison
 Source: Stacks Project, Tag 03P2, the tensor differential formula.
-(blueprint: new-etale-affine-singleton-tensor-cofaces).
 -/
 
 @[expose] public section
@@ -27,21 +26,7 @@ noncomputable section
 
 /-- The pure-tensor normalized degree comparisons commute with each coface.
 Source: Stacks Project, Tag 03P2, affine proof: omission of one projection inserts
-one into the corresponding tensor factor; Tag 03DR for restriction functoriality.
-(blueprint: new-etale-affine-singleton-tensor-cofaces)
-
-Proof: evaluate the categorical product at its sole index. Test the two composites
-on a tensor m tensor tprod(b). Such tensors additively generate, by ordinary tensor
-induction and indexed tensor induction. The Amitsur coface inserts one in position j.
-By the normalization equation its image is the product of the other pulled-back
-b(k), multiplied by the coefficient section pulled back from U. On the Čech side,
-the coface is restriction along the product projection omitting j. Restriction is
-additive and semilinear over the pullback of functions. Its composition law identifies
-the restricted coefficient section with the direct restriction from U. The universal
-property of the product identifies the composites of the retained projections with
-their original projections. Thus the products of functions agree; the omitted factor
-is one. Equality on generators gives the equation. No affineness is needed here:
-it was used only to produce the normalized degree comparisons. -/
+one into the corresponding tensor factor; Tag 03DR for restriction functoriality. -/
 theorem singletonTensorDegreeComparison_coface
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U)

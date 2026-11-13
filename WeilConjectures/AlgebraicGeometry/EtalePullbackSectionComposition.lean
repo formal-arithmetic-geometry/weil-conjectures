@@ -17,19 +17,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 /-- Canonical section transitions on iterated etale pullbacks compose.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Cech comparison.
-(blueprint: lem-weil-pbc-etale-pullback-section-composition).
-
-Proof: Expand the section transitions. Naturality of the inverse-image unit and
-of the coefficient morphism moves restriction along gamma a through the second
-transition. Substitute the coefficient composition law and
-upperStarComp_hom_app_unit_app. The combined geometric map is the canonical
-iterated-pullback comparison followed by the pullback of gamma a and gamma b.
-Its first projection to W0 agrees with gamma (a ≫ b) by hgamma and D.map_comp;
-its structural projection agrees because these are morphisms over the same
-scheme. Pullback uniqueness identifies these maps. Contravariant functoriality
-then identifies their restrictions and proves the displayed equality. This
-argument concerns one etale object, with no Cech products or differentials. -/
+Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Cech comparison. -/
 theorem etale_pullback_section_composition
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

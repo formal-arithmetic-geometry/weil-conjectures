@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Homology.RhomGlobalSections
 
 Source: Stacks Project, Tags 08JA and 08DJ; step 2 of
 lem-pc-derived-pullback-evaluation-sections.
-(blueprint: lem-pc-derived-tensor-hom-sections-unit).
 -/
 
 @[expose] public section
@@ -144,24 +143,7 @@ set_option synthInstance.maxSize 2048 in
 identification on internal Hom agrees with uncurrying at that unit.
 
 Source: Stacks Project, Tags 08JA and 08DJ; the representative identification in
-step 2 of lem-pc-derived-pullback-evaluation-sections.
-(blueprint: lem-pc-derived-tensor-hom-sections-unit).
-
-Proof: use rhom_global_sections to obtain a natural additive identification e0
-on internal Hom. Specialize tensor-Hom at K=unit and precompose with the inverse
-right unitor. This gives a family Hom(A,H(unit,B)) equiv Hom(A,B) natural in A
-and B. Evaluate it and its inverse at identity maps to construct B iso H(unit,B);
-its inverse laws and naturality follow from those two naturality equations.
-Apply zeroth hypercohomology to this isomorphism and then e0(unit,B). This gives
-a natural additive gamma(B):Q(B) equiv Hom(unit,B).
-The tensor-Hom family is additive: naturality in its first variable expresses
-q(f) as (f tensor identity) followed by evaluation, and tensoring is additive.
-Define e(K,L) by gamma(H(K,L)), then q(unit,K,L), then precomposition with the
-inverse left unitor. Its normalization equation is definitional. Naturality
-of gamma and q, followed by naturality of the left unitor, proves naturality
-of e in both variables. This is a categorical construction from the existing
-natural global-Hom identification; no representative calculation or new
-existence assumption is required. Zero and empty schemes are included. -/
+step 2 of lem-pc-derived-pullback-evaluation-sections. -/
 theorem exists_derivedTensorHom_sections_unit (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (q : ∀ A K L : schemeDerivedCategory X,

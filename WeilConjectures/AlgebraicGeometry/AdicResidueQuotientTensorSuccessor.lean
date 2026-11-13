@@ -14,7 +14,6 @@ import all WeilConjectures.CategoryTheory.RingedScalarTensorUnit
 /-! # One successor square for the explicit scalar tensor comparison
 
 Source: Stacks Project, Tags 03CZ, 06YY and 099M.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -160,20 +159,7 @@ This is an equality of specified maps; it asserts no existence of a tower isomor
 and contains no unit assertion.
 
 Source: Stacks Project, Cohomology on Sites, Tag 06YY, derived scalar extension;
-proetale.tex, Tag 099M (lemma-naive-completion), the quotient coefficient transitions.
-(auxiliary; not a blueprint node).
-
-Proof: on ordinary pure tensors the quotient successor replaces s by its image.
-Factor this scalar transition as insertion of one, restriction composition and
-ordinary balancing. The normalized units identify the derived Hom equivalence
-on K-flat complexes with its ordinary counterpart followed by resFactors.
-Applying this twice, using preservation of K-flatness and the factorization
-formula for exact restriction composition, identifies the specified derived
-balancing with uniqueness of left adjoints. The triangle identity then computes
-the transpose of the reduced preceding counit as derived insertion, restriction
-composition and balancing. The K-flat comparison formulas identify this composite
-with localization of the ordinary scalar transition. Finally naturality transports
-the equality along eP, and the pure-tensor successor square gives the result. -/
+proetale.tex, Tag 099M, the quotient coefficient transitions. -/
 theorem adicResidueQuotientTensorLevelIso_successor
     (P : Cx ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U))
     (hP : P.IsKFlatTensor) (M : AdicResidueLocalDerived.{u, v} X J U)

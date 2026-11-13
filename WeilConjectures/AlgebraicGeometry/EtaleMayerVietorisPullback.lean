@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
 
 Source: Stacks Project, Étale Cohomology, Tag 0A50, construction in its proof.
 Pullback naturality is the stated consequence of that construction.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-pullback).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Source: Stacks Project, Étale Cohomology, Tag 0A50 and its proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-pullback)
 
 The two sequences have their actual pullback restriction maps and the same difference sign.
 The maps `pU`, `pV`, `pI` are restricted pullback followed by the inverse-image composition

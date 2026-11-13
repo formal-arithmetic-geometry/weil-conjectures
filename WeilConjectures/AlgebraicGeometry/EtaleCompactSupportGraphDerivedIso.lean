@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 /-!
 # Invertibility of the graph comparison on unbounded complexes
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 0F0C
-(auxiliary; not a blueprint node).
+Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tags 03S6 and 0F0C.
 -/
 
 @[expose] public section
@@ -29,22 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The specified graph map is invertible after unbounded derived descent for a
 quasi-compact separated etale morphism over an arbitrary scheme.
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6 and 0F0C.
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Mathlib's IsFinite.of_locallyQuasiFinite shows that the quasi-compact etale
-geometric fibre is finite over the Artinian spectrum of an algebraically closed field.
-Apply the proved finite-etale graph isomorphism theorem to its pulled-back compactification.
-2. The geometric base-change graph equation identifies the pulled-back comparison,
-after the compact-support exchange, with the invertible sum exchange followed by the
-finite-fibre comparison. Torsion proper base change makes the compact-support exchange
-invertible. Cancellation makes the pulled-back comparison invertible.
-3. The canonical exact/left-derived inverse-image isomorphism identifies these maps
-with the left-derived geometric pullbacks. The established geometric-point detection
-theorem proves invertibility of every component on arbitrary unbounded complexes.
-Componentwise invertibility proves invertibility of the natural transformation.
-Only the graph base-change identity remains a separate geometric obligation here. -/
+Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6 and 0F0C. -/
 theorem isIso_compactSupportGraphDerivedComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
@@ -88,8 +72,7 @@ theorem isIso_compactSupportGraphDerivedComparison
   exact NatIso.isIso_of_isIso_app _
 
 /-- The inverse of the explicitly constructed derived graph map.
-Source: SGA 4 XVII 6.2.11
-(auxiliary; not a blueprint node). -/
+Source: SGA 4 XVII 6.2.11. -/
 noncomputable def canonicalEtaleCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]

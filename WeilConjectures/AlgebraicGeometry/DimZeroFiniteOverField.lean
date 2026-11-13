@@ -13,8 +13,7 @@ import Mathlib.RingTheory.Jacobson.Artinian
 /-!
 # Zero-dimensional schemes of finite type over a field
 
-Source: Stacks Project, Varieties, Lemma 33.20.2 (Tag 06LH), algebraic case
-(blueprint: lem-pc-algebraic-dim-zero-affine-finite).
+Source: Stacks Project, Varieties, Lemma 33.20.2 (Tag 06LH), algebraic case.
 -/
 
 @[expose] public section
@@ -26,16 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A scheme of finite type over a field and of dimension at most zero is affine, and its
-structure morphism is finite (Stacks, Tag 06LH).
-(blueprint: lem-pc-algebraic-dim-zero-affine-finite)
-
-Proof: The equality of `Scheme.dim` and topological Krull dimension makes `Y` locally
-Artinian, since finite type over a field makes it locally Noetherian. Quasi-compactness gives
-a compact underlying space, which is finite because it is discrete. A finite discrete scheme
-is affine. Its coordinate ring is Artinian and its structure map on global sections is of
-finite type. The base ring `Γ(Spec k, ⊤)` is Artinian as well. Mathlib's
-`Module.finite_iff_krullDimLE_zero` now makes this ring map finite, which is precisely the
-affine criterion for a finite scheme morphism. All these steps include the empty scheme. -/
+structure morphism is finite (Stacks, Tag 06LH). -/
 theorem isAffine_and_isFinite_of_dim_le_zero {k : Type u} [Field k]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]

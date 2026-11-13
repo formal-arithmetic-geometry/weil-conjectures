@@ -17,8 +17,7 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # Dimension of an affine spectrum under field extension
 
-Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3)
-(blueprint: lem-weil-pbc-dimension-preserved-field-extension).
+Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- Scalar extension preserves the topological Krull dimension of an affine spectrum.
-Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3)
-(blueprint: lem-weil-pbc-dimension-preserved-field-extension).
+Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3).
 
 Proof (the node's split, using Tags 00P4 and 0B7I):
 1. Tensor-factor symmetry induces a homeomorphism between the spectra of `K ⊗[k] S`

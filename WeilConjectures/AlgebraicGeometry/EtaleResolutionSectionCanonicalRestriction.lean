@@ -23,24 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- Canonical comparisons commute with whole-to-open and open-to-open restriction.
-Source: Stacks Project, Tag 03F3 (2), and Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-resolution-section-canonical-restriction)
-
-Proof: Represent a homology class by a cycle. The Hom-to-sections adjunction
- identifies this cycle with a morphism from the constant integer sheaf, or the
- free abelian representable sheaf, to the corresponding term of I. Restricting
- the section precomposes that morphism with the representing free sheaf map.
- `I.mk₀_comp_extMk` therefore describes the resulting Ext class. For the
- whole-to-open map, pulling back the constant cocycle and precomposing with
- the identity generator is the adjunction unit, and hence `cohomologyMap W.ι`.
- For an inclusion A ≤ B the same calculation, with the two inverse-image
- composition comparisons, gives `openCohomologyRestriction`. Naturality of
- the identity generator cancels the intermediate constant-sheaf comparisons.
- The normalization fields of c evaluate the original and restricted cycles
- by these independently specified Ext classes, so the two displayed
- equalities follow. Every homology class has a cycle representative because
- homologyπ is an epimorphism of abelian groups. The argument also applies to
- degree zero, identities, empty opens, and the zero sheaf. -/
+Source: Stacks Project, Tag 03F3 (2), and Tag 0A50, proof. -/
 theorem resolutionSection_canonical_restriction {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
     (c : ResolutionSectionCanonicalComparison G I) :

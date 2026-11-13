@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Pasting a derived base-change square with an upper-left morphism
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-derived-base-change-pasting).
 -/
 
 @[expose] public section
@@ -39,22 +38,7 @@ private theorem homEquiv_conjugate
 -- Keep the chosen derived comparison families folded during mate rewriting.
 /-- The mate pasting law before cancellation of the upper-left adjunction unit.
 It applies to any morphism `t`, without an invertibility or cartesian assumption.
-Source: Stacks Project, Remark 20.28.3 (Tag 08HY), and Lemma 20.27.2 (Tag 0D5S).
-(blueprint: lem-pc-derived-base-change-pasting).
-
-Proof: Transpose both sides under the composite adjunction `a q` followed by `a t`.
-By definition, the conjugate comparison `k` changes transposition under `a (t ≫ q)`
-into transposition under this composite, using the pullback comparison `c t q`.
-The transpose of the right side is obtained by applying `derivedPullback t` to
-that under `a q`: the inserted unit of `a t` cancels by the triangle identity.
-Substitute the counit formula defining both base-change maps. Naturality moves
-`c t p` past the counit of `a f`. The associativity laws for `c`, first for `t, q, g`
-and then for `t, p, f`, identify the two composites into the pullback of `t ≫ p ≫ f`.
-The commutativity proof `h` identifies the middle morphisms; proof irrelevance
-identifies the resulting equality transports. Thus the transposes coincide, and
-injectivity of the composite adjunction Hom equivalence gives the displayed law.
-For identity `t` it reduces to the unit law; zero objects and empty schemes need
-no exclusion, because the proof consists of natural transformation identities. -/
+Source: Stacks Project, Remark 20.28.3 (Tag 08HY), and Lemma 20.27.2 (Tag 0D5S). -/
 theorem schemeDerivedBaseChange_pasting
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

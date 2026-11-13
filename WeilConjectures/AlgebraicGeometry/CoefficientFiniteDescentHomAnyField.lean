@@ -22,8 +22,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
 sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3),
-with the Q30 any-field scope repair of 2026-11-02
-(blueprint: det-lem-coefficient-finite-descent-hom).
+with the Q30 any-field scope repair of 2026-11-02.
 
 The old positive-characteristic theorem and the canonical maps it defines remain
 available. This statement includes characteristic zero and uses those same maps,
@@ -50,8 +49,7 @@ whose characteristic differs from the coefficient prime.
 Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-descent-to-a-finite-coefficient-field/
 sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md (1)--(3) and its
-.proof.md, with the node's Q30 scope repair of 2026-11-02
-(blueprint: det-lem-coefficient-finite-descent-hom).
+.proof.md, with the node's Q30 scope repair of 2026-11-02.
 
 Proof, following the five current DAG steps:
 1. A field is Noetherian, including in characteristic zero. A finite type scheme

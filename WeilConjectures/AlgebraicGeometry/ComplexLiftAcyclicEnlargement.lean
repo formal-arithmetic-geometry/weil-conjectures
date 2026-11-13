@@ -64,24 +64,7 @@ private theorem cokernel_bounded_above
 
 /-- Construct an acyclic cone and a cokernel sequence for any acyclic lift of it.
 
-Source: Stacks Project, More on Algebra, Tag 0BCA, cone and dotted-arrow paragraphs.
-(blueprint: lem-sc-complex-lift-acyclic-enlargement).
-
-Proof: Reduced class members are projective by extension of scalars. Represent the
-supplied derived isomorphism by a quasi-isomorphism from E to the reduction of K₀,
-using bounded projective complexes. Its mapping cone C is bounded above, acyclic,
-and has terms reducing class members, by closure under binary sums. For any
-bounded-above acyclic class complex A supplied with a reduction
-isomorphism to C, regard C as an R-complex.
-The quotient map A -> C is degreewise surjective and a quasi-isomorphism. Lift the
-map K₀ -> C through it in the homotopy category, using K-projectivity of K₀. Lift
-the correcting homotopy degreewise by projectivity and subtract its boundary.
-This gives a strictly commuting map f : K₀ -> A whose reduction is the cone
-inclusion. Take B to be the actual cokernel complex of f. The cokernel sequence is
-right exact and B is bounded above. Extension of scalars preserves cokernels;
-the cokernel of the cone inclusion is E[1]. This identifies the reduction of B
-with E[1], and the reduced sequence splits in each degree. No injectivity of f
-before reduction is asserted here; that is the separate class-splitting step. -/
+Source: Stacks Project, More on Algebra, Tag 0BCA, cone and dotted-arrow paragraphs. -/
 theorem exists_complex_lift_acyclic_enlargement
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

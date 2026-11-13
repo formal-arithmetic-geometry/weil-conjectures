@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementar
 # Elementary localization of already split fibre points
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, lines 12083--12089.
-(blueprint: lem-weil-pbc-elementary-localize-split-points).
 -/
 
 @[expose] public section
@@ -135,27 +134,7 @@ private theorem finite_purelyInseparable_residue_square
   exact congrArg CommRingCat.Hom.hom H
 
 /-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM,
-lines 12083--12089 and its omitted verification using Schemes, Lemma 01JT
-(blueprint: lem-weil-pbc-elementary-localize-split-points).
-
-Proof:
-1. Regard the finite sigma family `y` as a list `Fin N` using a finite-type equivalence.
-   Apply `exists_etale_local_finite_multiple_points_elementary` to `pullback.snd f φ`.
-   Its local-finite-type instance comes from base change. The result is an elementary
-   étale neighborhood `ψ : U' → U`, with `ψ u' = u`, and one finite open for each `y i j`,
-   with a unique point over `u'` and an unchanged residue field over `y i j`.
-2. Identify the iterated pullback with `pullback f (ψ ≫ φ)` by pullback pasting. Transport
-   the opens, points, finiteness and unique-fibre-point assertions along this isomorphism.
-   The first projection sends the chosen point to `y i j` and then to `x i`.
-3. The residue-field square commutes and its base and point vertical maps are isomorphisms.
-   Transport the given finite purely inseparable extension across these isomorphisms.
-4. Distinct output points follow by projecting to the injective sigma family `y`.
-   Any point of the final pullback above `u'` and `x i` projects to `y i j` by `hex`.
-   Its lifts over `(y i j,u')` correspond to primes of
-   `κ(y i j) ⊗[κ(u)] κ(u')`. Since the second factor map is an isomorphism, this is a
-   field, hence has one prime. The chosen point is that sole lift, proving exhaustion.
-For an empty sigma family the identity neighborhood and no opens work. These hypotheses
-explicitly retain the purely inseparable residue extensions; uniqueness alone is insufficient. -/
+lines 12083--12089 and its omitted verification using Schemes, Lemma 01JT. -/
 theorem exists_elementary_localize_split_points
     {X S U : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (φ : U ⟶ S) (u : U) (n : ℕ) (x : Fin n → X) (m : Fin n → ℕ)

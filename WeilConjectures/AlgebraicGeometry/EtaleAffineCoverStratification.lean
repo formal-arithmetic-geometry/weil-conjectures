@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 # Stratifying an etale affine cover and its overlaps
 
 Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, proof,
-second paragraph (blueprint: lem-weil-pbc-etale-affine-cover-gluing).
+second paragraph.
 -/
 
 @[expose] public section
@@ -200,30 +200,7 @@ private theorem separated_of_finite_charts {S V : Scheme.{u}} [IsAffine S]
 finite partition of the base into constructible locally closed affine subschemes on
 which the charts and their overlaps are finite etale and the whole scheme is separated.
 Source: Stacks Project, Etale Cohomology, `lemma-etale-stratified-finite`, proof,
-second paragraph (blueprint: lem-weil-pbc-etale-affine-cover-gluing).
-
-Proof:
-1. Each affine chart and each overlap is separated, quasi-compact and etale over the
-   affine base: use affine-morphism permanence, separated cancellation, qcqs permanence,
-   and etale composition (`lem-weil-pbc-affine-morphism-permanence`,
-   `lem-weil-pbc-separated-cancellation`, `lem-weil-pbc-qcqs-morphism-permanence`,
-   `lem-weil-pbc-proper-fp-permanence`, `lem-weil-pbc-etale-composition-cancellation`).
-2. Apply `lem-weil-pbc-etale-separated-stratified-finite` to each chart and overlap.
-3. Take a common refinement (`lemma-constructible-common-refinement`); its images are
-   finite intersections of constructible locally closed sets, and finite etaleness
-   persists by base change (`def-weil-pbc-finite-etale-category`, `def-pc-fibre-product`).
-4. Refine into affine pieces with `lem-weil-pbc-immersion-affine-constructible-pieces`.
-   Again finite etaleness persists by base change.
-5. Identify the pulled-back charts and overlaps with opens of the pulled-back scheme
-   (`lem-weil-pbc-open-fibre-product`). Finite morphisms over the affine stratum make
-   them affine, proper and separated (`lem-weil-pbc-finite-morphism-permanence`,
-   `lem-weil-pbc-affine-morphism-permanence`, `lem-weil-pbc-proper-fp-permanence`).
-6. Each overlap inclusion into a chart is proper by
-   `lem-weil-pbc-proper-over-separated`, and hence a closed immersion by
-   `lem-weil-pbc-proper-immersion-closed`. Its restriction on sections is surjective
-   (`lem-weil-pbc-closed-immersion-affine-cover-criterion`); consequently the map from
-   the tensor product of the sections of the two charts is surjective as well.
-7. Apply `lem-weil-pbc-separated-affine-cover-criterion` to conclude separatedness. -/
+second paragraph. -/
 theorem exists_etale_affine_cover_stratification
     {X U : Scheme.{u}} [IsAffine X] [CompactSpace U] [QuasiSeparatedSpace U]
     (j : U ⟶ X) [Etale j] (m : ℕ) (A : Fin m → U.Opens)

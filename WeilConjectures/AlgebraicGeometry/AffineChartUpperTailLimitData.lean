@@ -21,7 +21,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The spectrum diagram on the upper tail, with its maps to the fixed stage.
-(blueprint: new-affine-chart-upper-tail-limit-data)
 -/
 noncomputable def upperTailSpectrumOver {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (i : I) :
@@ -40,7 +39,6 @@ noncomputable def upperTailSpectrumOver {I : Type u} [Preorder I]
     rfl
 
 /-- The given spectrum cone restricted to the upper tail and lifted to the slice.
-(blueprint: new-affine-chart-upper-tail-limit-data)
 -/
 noncomputable def upperTailSpectrumOverCone {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (i : I) :
@@ -54,7 +52,6 @@ noncomputable def upperTailSpectrumOverCone {I : Type u} [Preorder I]
     exact (c.w _).symm
 
 /-- The actual diagram obtained by pulling the upper-tail spectra back to A.
-(blueprint: new-affine-chart-upper-tail-limit-data)
 -/
 noncomputable def upperTailChartDiagram {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (i : I) {A : Scheme.{u}} (g : A ⟶ Spec (R.obj i)) :
@@ -62,7 +59,6 @@ noncomputable def upperTailChartDiagram {I : Type u} [Preorder I]
   upperTailSpectrumOver R i ⋙ Over.pullback g ⋙ Over.forget A
 
 /-- The actual pulled-back cone, without choosing any existential witness.
-(blueprint: new-affine-chart-upper-tail-limit-data)
 -/
 noncomputable def upperTailChartCone {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cone (R.op ⋙ Scheme.Spec)) (i : I)
@@ -70,20 +66,7 @@ noncomputable def upperTailChartCone {I : Type u} [Preorder I]
   (Over.forget A).mapCone ((Over.pullback g).mapCone (upperTailSpectrumOverCone R c i))
 
 /-- The explicitly constructed upper-tail base-change cone is limiting.
-Source: Stacks Project, Limits Tag 01ZR, affine case; Tags 0095 and 0097.
-(blueprint: new-affine-chart-upper-tail-limit-data).
-
-Proof: The inclusion J = {j | i ≤ j} into I is final. For every k choose a
-common upper bound of i and k. Any two such upper bounds admit a further common
-upper bound, so each comma category is nonempty and connected. Hence the opposite
-inclusion is initial, and restriction of the limiting cone c to J opposite is
-limiting. Its lift upperTailSpectrumOverCone to Over(Spec(R_i)) is limiting,
-because the forgetful functor reflects limits and its underlying cone is precisely
-that restriction. Over.pullback g is right adjoint to Over.map g, and therefore
-preserves limits. Finally J contains i and is directed, so J opposite is connected;
-the forgetful functor Over(A) -> Scheme preserves these connected limits. Its image
-is exactly upperTailChartCone. Neither affineness nor a choice of new data is
-needed for this universal-property argument. -/
+Source: Stacks Project, Limits Tag 01ZR, affine case; Tags 0095 and 0097. -/
 theorem upperTailChartCone_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

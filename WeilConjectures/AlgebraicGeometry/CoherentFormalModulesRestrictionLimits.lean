@@ -97,20 +97,7 @@ private theorem restricted_kernel_mono {X : Scheme.{u}} [IsNoetherian X]
 
 /-- The explicit termwise restriction functor preserves finite limits and colimits.
 Source: Stacks Project, Lemma 087X, construction (a)--(d) and the last sentence
-of its proof; step 2 of lem-weil-pbc-coherent-formal-modules-local-exactness.
-(blueprint: lem-weil-pbc-coherent-formal-modules-restriction-limits)
-
-Proof: Ambient cokernel closure makes the full-subcategory inclusion preserve
-cokernels. Ordinary restriction preserves colimits, and the restricted inclusion
-reflects them, so formal restriction preserves cokernels. For kernels, the
-stabilized construction has zero transitions on its levelwise arrow kernels.
-Epi transitions make the formal arrow monic. Ordinary restriction preserves
-kernels and transports those zero-transition equations, so the restricted arrow
-is also monic. Compare the constructed limiting fork with an arbitrary limiting
-fork to transport this monicity. The restricted factorization-existence lemma
-then supplies lifts, and cancellation proves their uniqueness. Finally use the
-additive functor criteria for finite limits from kernels and finite colimits from
-cokernels, with the finite biproduct instances supplied by abelianness. -/
+of its proof; step 2 of lem-weil-pbc-coherent-formal-modules-local-exactness. -/
 theorem coherentFormalModules_restriction_limits {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     [IsNoetherian U.toScheme] :

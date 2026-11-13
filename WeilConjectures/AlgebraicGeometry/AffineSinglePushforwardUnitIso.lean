@@ -15,8 +15,7 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # AffineSinglePushforwardUnitIso
 
-Source: Stacks Project, finite duality and affine cohomology
-(blueprint: lem-sc-affine-single-pushforward-unit-iso). -/
+Source: Stacks Project, finite duality and affine cohomology. -/
 
 @[expose] public section
 
@@ -31,23 +30,7 @@ namespace AlgebraicGeometry
 module in degree zero, not merely some unspecified derived isomorphism.
 
 Source: Stacks Project, Cohomology of Schemes, Tag 01XC; Derived Categories of
-Schemes, Tags 08I8 and 0AVW
-(blueprint: lem-sc-affine-single-pushforward-unit-iso).
-
-Proof:
-1. Affine higher-direct-image vanishing makes M acyclic for module direct image F.
-   The other terms of M[0] are zero, hence F-acyclic. Direct image is left exact
-   because it is right adjoint to module pullback.
-2. Choose a bounded-below injective resolution i : M[0] -> I. Its terms are
-   F-acyclic and I is K-injective. The theorem `quasiIso_map_of_rightAcyclic`
-   makes F(i) a quasi-isomorphism, so Q(F(i)) is an isomorphism.
-3. Naturality of F's right-derived unit along i says Q(F(i)) followed by the
-   unit at I equals the unit at M[0] followed by RF(Q(i)). The unit at I is
-   invertible since I is K-injective; RF(Q(i)) is invertible since i is a
-   quasi-isomorphism. Therefore the unit at M[0] is invertible as well.
-4. The single-complex comparison is already an isomorphism. Composing its
-   inverse, mapped by Q, with the unit gives exactly the displayed morphism.
-   Rank zero, empty schemes, and the zero module require no cancellation. -/
+Schemes, Tags 08I8 and 0AVW. -/
 theorem affine_singlePushforward_unit_isIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

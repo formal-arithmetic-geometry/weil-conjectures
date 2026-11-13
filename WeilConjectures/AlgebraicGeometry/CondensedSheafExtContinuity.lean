@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceHomContinuity
 
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, module docstring, Sorried input (Hom);
 Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(2).
-(auxiliary; not a blueprint node)
 
 The comparison is `colimit.desc` of the cocone obtained by localization, shifting, and
 additive Hom from `M[0]`. Thus its legs are postcomposition with the shifted colimit legs.
@@ -55,7 +54,6 @@ set_option maxHeartbeats 800000 in
 filtered colimit of complexes with a common termwise lower bound, in every integer shift.
 Source: upstream ModuleObject/Colimit/TwoColimit.lean, Sorried input (Hom), sheaf base case;
 Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node)
 
 Lean reduction: the open/closed one-step lemma gives a finite extension tower by
 noetherian induction on closed supports. Continuity holds for the locally closed pieces

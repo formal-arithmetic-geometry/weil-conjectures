@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 # Local representatives of sections of an étale inverse image
 
 Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback,
-paragraph beginning “By construction”
-(blueprint: lem-weil-pbc-etale-inverse-image-section-description).
+paragraph beginning “By construction”.
 -/
 
 @[expose] public section
@@ -27,22 +26,10 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Étale Cohomology, Tag 09XN, proof of lemma-describe-pullback,
-paragraph beginning “By construction”
-(blueprint: lem-weil-pbc-etale-inverse-image-section-description).
+paragraph beginning “By construction”.
 Every global section of the inverse image is locally the restriction of a section pulled
 back by the adjunction unit. A morphism into the base change of `V` encodes the commuting
-factorization through the étale scheme `V` over `S`.
-
-Proof:
-1. By lem-weil-pbc-etale-inverse-image-algebraic-structures, the inverse image is the
-   sheafification of the presheaf of colimits over pairs consisting of an étale object `V`
-   over `S` and a map from the test object into its base change to `T`.
-2. By lem-weil-pbc-site-sheafification-sections-local, the given section has representatives
-   in this presheaf after an étale covering of `T`.
-3. By lem-weil-pbc-filtered-colimit-sets-elementwise, each representative comes from a
-   section of some `F(V)`. Its map to the base change of `V` gives the asserted factorization.
-   The identity-indexed unit followed by restriction is its image in the sheafification,
-   as in lem-weil-pbc-etale-inverse-image-algebraic-structures. -/
+factorization through the étale scheme `V` over `S`. -/
 theorem etaleInverseImageSectionDescription (S T : Scheme.{u}) (g : T ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (s : ((Scheme.etaleSetPullback g).obj F).obj.obj (op (Scheme.Etale.mk (𝟙 T)))) :

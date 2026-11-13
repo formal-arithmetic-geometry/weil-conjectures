@@ -61,28 +61,7 @@ private theorem stageMap_asHomMap
   rfl
 
 /-- The stage Hom equation follows from the natural comparison and object triangles.
-Source: Stacks Project, Tag 09RE and derived pullback composition, Tag 0D5S.
-(blueprint: lem-pc-affine-model-stage-hom-equation-of-coherent-objects).
-
-Proof: Fix the finite-stage arrow j→k.
-Apply naturality of the supplied full two-label comparison θ to the given chain
-map a; it need not descend to the bottom. Scalar reassociation identifies
-scalarExtensionHom with κE.hom followed by extension of a followed by κK.inv,
-where κ is affineModelScalarAssocIso. The two object triangles express the
-comparison at the target as κ, θ, pullback of the source comparison and the
-inverse perfectHomComparison. Substitute these formulas and expand map_comp.
-Cancel adjacent inverse pairs, use naturality of θ, then cancel its inverse
-pair. The result is exactly the conjugated Hom transport written below.
-Proof irrelevance identifies the generated pullback-instance proofs with the
-named arrow representation. The argument includes identity arrows, zero rings,
-zero complexes and coincident labelled objects.
-
-Implementation: first rewrite the named stage transport as perfectHomMap, then
-use an equal pinned copy of its comparison in both the transport and the object
-triangles. The pin is chosen from a proved equality to the supplied comparison,
-so its value is completely determined. Apply the already proved
-`affineModel_scalarConjugation_nat`. The private transport equations prevent
-kernel conversion from unfolding the large comparison construction. -/
+Source: Stacks Project, Tag 09RE and derived pullback composition, Tag 0D5S. -/
 theorem affineModelStageHomEquation_of_coherent_objects
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

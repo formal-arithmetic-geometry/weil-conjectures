@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.AbelianRepresentableCohomologyMapNatura
 import WeilConjectures.AlgebraicGeometry.CyclicCoefficientPullbackCompatibility
 
 /-! # Naturality of cyclic free-representable cohomology comparison
-Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf.
-(blueprint: lem-sbc-cyclic-representable-cohomology-map-naturality). -/
+Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf. -/
 
 @[expose] public section
 universe u
@@ -23,21 +22,7 @@ namespace AlgebraicGeometry.Etale
 pulled-back constant coefficients with constant coefficients.
 
 Source: Stacks Project, Tag 03Q8, restricted cohomology presheaf, and naturality
-of the free-sheaf adjunction in `HigherDirectImage/FreeSheaf.lean`.
-(blueprint: lem-sbc-cyclic-representable-cohomology-map-naturality).
-
-Proof: For v : V → W over X let g : Y ×_X V → Y ×_X W be its base change.
-The section defining abelianRepresentableGenerator for V maps under Z[v] to
-the pullback of the section for W. This follows by naturality of the inverse
-image/direct image adjunction unit, evaluation at the representable identity,
-and naturality of the localization restriction isomorphism. Convert derived
-Hom to Ext through the fully faithful inclusion D+ → D. Pulling back an Ext
-class respects composition, so the universal-section equality identifies
-precomposition by Z[v] with pullback along g followed by the generator for V.
-Finally the canonical constant-sheaf pullback comparisons commute with
-composition of inverse images; applying Sheaf.H.map yields the equality below.
-No invertibility of e or positivity of q is required; identity maps, e = 0,
-and empty fibre products satisfy the same adjunction identities. -/
+of the free-sheaf adjunction in `HigherDirectImage/FreeSheaf.lean`. -/
 theorem cyclicRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

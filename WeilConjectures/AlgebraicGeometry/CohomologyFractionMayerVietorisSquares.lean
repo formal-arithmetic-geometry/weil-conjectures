@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionDivision
 /-! # Comparison squares on cohomology fractions
 
 Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
-(blueprint: lem-sc-cohomology-fraction-mayer-vietoris-squares)
 -/
 
 @[expose] public section
@@ -67,22 +66,7 @@ private theorem fraction_addHom_ext {X : Scheme.{uMV}} (L F : X.Modules)
 the generator formulas and any module-natural boundary compatible with restricting covers.
 Exactness of either row is not assumed.
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB naturality.
-Proof: Multiplication by s^n on W intersect S is an isomorphism on cohomology, since
-s trivializes L there. Thus the formula for c uniquely determines its values on
-fractions. For each generator xi/s^n, apply this invertible multiplication to both
-sides of the restriction square. The formula for a and the formula for c reduce
-both sides to successive restrictions of xi, which agree by functoriality. The two
-summands of the difference square are treated in the same way using the formulas
-for b; additivity handles their difference. For the boundary square, use the formula
-for d and c, restriction compatibility of δ, and naturality of δ for the module
-morphism F to F tensor L^n. The lattice equalities identify the two intersection
-and union opens in that square; restrictions along their equality are inverse.
-After multiplication both sides are the restriction of δ applied to xi, so cancel
-multiplication. Finally direct-sum generators generate the quotient additively.
-Additivity therefore extends all three equalities from generators to every fraction.
-The proof also covers s=0 (S empty), degree zero, and arbitrary opens.
-(blueprint: lem-sc-cohomology-fraction-mayer-vietoris-squares). -/
+Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB naturality. -/
 theorem cohomologyFraction_mayerVietoris_squares (X : Scheme.{uMV})
     (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))

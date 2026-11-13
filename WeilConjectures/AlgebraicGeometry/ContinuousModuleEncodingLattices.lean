@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingRestriction
 /-! # Lattice compatibility of the continuous module encoding
 
 Source: Stacks Project, Modules on Sites, and Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ translate any specified etale lattice and its rationalization back to internal m
 Source: Stacks Project, Modules on Sites, Tags 03DM (local finite freeness),
 03DO (pullback), 03D7 (adjunction), 03EK and 03EL (tensor and pullback);
 Bhatt--Scholze, Definition 6.8.3 and Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
 
 Proof in words. A finite free internal module is a finite biproduct of the regular
 module. The proved continuousFieldFreeIso and continuousIntegerFreeIso give the

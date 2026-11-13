@@ -25,8 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The derived direct image on the cartesian pullback of `f` along `g`.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-derived-image). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable abbrev cartesianDerivedImage {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S)
     (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
@@ -35,8 +34,7 @@ noncomputable abbrev cartesianDerivedImage {X S T : Scheme.{u}}
     ((D+((pullback.fst f g)^*[AddCommGrpCat.{u + 1}])).obj P)
 
 /-- The canonical projection between two cartesian pullbacks.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-image-projection). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable def cartesianImageProjection {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g) :
     pullback f g' ⟶ pullback f g :=
@@ -44,24 +42,21 @@ noncomputable def cartesianImageProjection {X S T T' : Scheme.{u}}
     rw [Category.assoc, ← w, pullback.condition])
 
 /-- First projection equation of the canonical cartesian projection.
-Source: the universal property of a pullback (Stacks Project, Tag 0EYM).
-(blueprint: lem-sc-cartesian-image-projection-fst). -/
+Source: the universal property of a pullback (Stacks Project, Tag 0EYM). -/
 @[simp] theorem cartesianImageProjection_fst {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g) :
     cartesianImageProjection f g g' a w ≫ pullback.fst f g = pullback.fst f g' :=
   pullback.lift_fst _ _ _
 
 /-- Second projection equation of the canonical cartesian projection.
-Source: the universal property of a pullback (Stacks Project, Tag 0EYM).
-(blueprint: lem-sc-cartesian-image-projection-snd). -/
+Source: the universal property of a pullback (Stacks Project, Tag 0EYM). -/
 @[simp] theorem cartesianImageProjection_snd {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g) :
     cartesianImageProjection f g g' a w ≫ pullback.snd f g = pullback.snd f g' ≫ a :=
   pullback.lift_snd _ _ _
 
 /-- Exchange for a projection, followed by the inverse-image composition identification.
-Source: Stacks Project, Tag 0EYM, construction of the comparison maps.
-(blueprint: def-sc-cartesian-derived-image-map). -/
+Source: Stacks Project, Tag 0EYM, construction of the comparison maps. -/
 noncomputable def cartesianDerivedImageMap {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g)
     (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
@@ -103,8 +98,7 @@ private theorem upperStarComp_inv_transport {X Y Z : Scheme.{u}}
   rw [eqToHom_refl, Category.comp_id]
 
 /-- Pasting identifies the transition of a stage exchange with the later exchange.
-Source: Stacks Project, Tag 0EYM, compatibility of the comparison maps.
-(blueprint: lem-sc-cartesian-derived-image-map-exchange). -/
+Source: Stacks Project, Tag 0EYM, compatibility of the comparison maps. -/
 theorem cartesianDerivedImageMap_exchange {X S T T' : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (g' : T' ⟶ S) (a : T' ⟶ T) (w : g' = a ≫ g)
     (P : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
@@ -138,8 +132,7 @@ theorem cartesianDerivedImageMap_exchange {X S T T' : Scheme.{u}}
   simpa only [Category.assoc] using ht.symm
 
 /-- A pulled-back stage higher image, computed by bounded-below derived homology.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-higher-image-stage). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable abbrev cartesianHigherImageStage {X S : Scheme.{u}} {I : Type u}
     [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) :
@@ -150,8 +143,7 @@ noncomputable abbrev cartesianHigherImageStage {X S : Scheme.{u}} {I : Type u}
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))
 
 /-- The higher image on the limit base.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-higher-image-limit). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable abbrev cartesianHigherImageLimit {X S : Scheme.{u}} {I : Type u}
     [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
@@ -160,8 +152,7 @@ noncomputable abbrev cartesianHigherImageLimit {X S : Scheme.{u}} {I : Type u}
     (cartesianDerivedImage f c.pt.hom ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
 
 /-- The canonical map from a stage higher image to the limit higher image.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-higher-image-leg). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable def cartesianHigherImageLeg {X S : Scheme.{u}} {I : Type u}
     [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (i : I) :
@@ -171,8 +162,7 @@ noncomputable def cartesianHigherImageLeg {X S : Scheme.{u}} {I : Type u}
       (Over.w (c.π.app i)).symm ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
 
 /-- The stage transition on the limit base, with its inverse-image composition transport.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-higher-image-transition). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable def cartesianHigherImageTransition {X S : Scheme.{u}} {I : Type u}
     [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (f : X ⟶ S)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

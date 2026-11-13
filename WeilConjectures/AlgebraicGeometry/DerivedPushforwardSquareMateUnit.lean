@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 /-! # Unit compatibility of the sheaf direct-image square mate
 
 Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.
-(blueprint: lem-pc-derived-pushforward-square-mate-unit).
 -/
 
 @[expose] public section
@@ -80,17 +79,7 @@ private theorem canonical_conjugate_eq {A B C D : Scheme.{u}}
 set_option linter.all false in
 -- Matching the canonical composition choices expands derived-functor instance data.
 /-- The sheaf-level unit equation for the square conjugate.
-Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.
-(blueprint: lem-pc-derived-pushforward-square-mate-unit).
-Proof: construct the ordinary comparison from pushforward composition and equality
-transport; its whole-space section map is the identity. Keep the homotopy
-object arbitrary. The existing normalized square-mate theorem identifies the
-derived mate with the first composition comparison, equality transport, and the
-inverse second comparison. Rewrite the two pasted units using the normalized
-composition-unit equations. Associativity cancels the adjacent comparison and its
-inverse; single-unit equality transport supplies the middle equation. Substitute
-the second composition-unit equation. Only isomorphisms are cancelled, never a
-unit, so no injectivity hypothesis is needed. Identity and zero cases agree. -/
+Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T. -/
 theorem exists_derivedPushforwardSquareMateUnit
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.TransportLeftNaturality
 # Saturation of descent orbits
 
 Source: Stacks Project, Tags 03JE and 0H8K.
-(blueprint: lem-pd-descent-orbit-saturated).
 -/
 
 @[expose] public section
@@ -28,18 +27,7 @@ namespace CategoryTheory.Over.DescentDatum
 
 /-- The orbit of a point in the cartesian groupoid associated to a descent datum is saturated.
 Source: Stacks Project, Tag 03JE, orbit used in the first two paragraphs of the proof;
-Tag 0H8K, identification of the cartesian groupoid of a descent datum.
-(blueprint: lem-pd-descent-orbit-saturated).
-
-Proof: The universal transport gives the target t on R = V ×_Y X. Naturality and the
-identity and cocycle laws give the identity, inverse and composition of this groupoid.
-For a point r of R, if s(r) is in the orbit of v, choose an arrow from v to s(r).
-The residue fields of that arrow and r have a common field extension over the residue
-field of s(r): their tensor product is nonzero, and a prime quotient embeds in its
-fraction field. Thus they lift to composable geometric arrows. Composition gives an
-arrow from v to t(r), proving t(r) is in the orbit. Applying the inverse gives the
-converse. The argument works for nonclosed points and inseparable extensions, since
-it uses field tensor products rather than rational points. -/
+Tag 0H8K, identification of the cartesian groupoid of a descent datum. -/
 theorem descent_orbit_saturated
     {X Y R : Scheme.{u}} {p : X ⟶ Y} {V : Over X}
     (D : Over.DescentDatum p V) (s : R ⟶ V.left) (q : R ⟶ X) (t : R ⟶ V.left)

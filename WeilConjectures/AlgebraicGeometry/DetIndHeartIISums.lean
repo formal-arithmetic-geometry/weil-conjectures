@@ -21,8 +21,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
-and its proof
-(blueprint: det-ind-heart-ii-sums).
+and its proof.
 
 The Noetherian scope is the accepted correction recorded in the node's stage-1 report.
 Both coefficient choices are condensed rings pulled back to the small pro-etale site.
@@ -48,17 +47,7 @@ coprojection. Bijectivity is equivalent to its being an isomorphism of abelian g
 
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/sk-cor-ind-heart-ii-sums.md
-and its proof
-(blueprint: det-ind-heart-ii-sums).
-
-Proof: first the degree-zero embedding, the shift, and additive Hom from C preserve
-finite sums, including the empty sum. Express the ambient sum as the filtered colimit
-of its finite subcoproducts, indexed by finite subsets of S. Their standard cocone is
-colimiting. Apply constructible_sheaf_ext_continuity to this diagram: it identifies Ext
-of that filtered colimit with the filtered colimit of Ext. Finite additivity identifies
-the latter with the direct sum of the individual Ext groups. Under these identifications
-the map on each summand is postcomposition by its shifted coprojection, so the composite
-is exactly DirectSum.toAddMonoid below. Hence that additive homomorphism is bijective. -/
+and its proof. -/
 theorem det_ind_heart_ii_sums
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

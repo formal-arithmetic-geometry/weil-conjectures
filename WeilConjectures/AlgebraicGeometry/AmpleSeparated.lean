@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Separatedness from an ample invertible module
 
-Source: Stacks Project, Properties, Lemma 09MP (label lemma-ample-separated)
-(blueprint: lem-weil-pbc-ample-scheme-separated).
+Source: Stacks Project, Properties, Lemma 09MP (label lemma-ample-separated).
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ private theorem separatingPair_of_basicOpen {X : Scheme.{u}} {U V : X.Opens}
 already imply separatedness; no quasi-compactness assumption is required.
 
 Source: Stacks Project, Properties, Lemma 01PY (label
-lemma-affine-s-opens-cover-quasi-separated), used in Lemma 09MP
-(blueprint: lem-weil-pbc-ample-scheme-separated).
+lemma-affine-s-opens-cover-quasi-separated), used in Lemma 09MP.
 Proof (the node's affine-cover argument, rather than the source's valuative argument):
 1. The affine nonvanishing loci of positive-degree sections cover `X` by `hcover`
    (nonvanishing loci: def-weil-pbc-ample-invertible-module); quasi-compactness is unused.
@@ -122,7 +120,7 @@ theorem isSeparated_of_affine_nonvanishing_cover (X : Scheme.{u}) (L : X.Modules
 /-- A scheme carrying an ample invertible module is separated.
 
 Source: Stacks Project, Properties, Lemma 09MP, proved using Lemma 01PY and
-Definition 01PS (blueprint: lem-weil-pbc-ample-scheme-separated).
+Definition 01PS.
 Proof (the node's affine-cover argument, rather than the source's valuative argument):
 1. The affine nonvanishing loci of positive-degree sections cover `X` by ampleness
    (def-weil-pbc-ample-invertible-module); quasi-compactness is unused.

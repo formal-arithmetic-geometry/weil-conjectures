@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleOverCoproductPowerCofan
 
 /-! # Čech comparison for a finite coproduct over an étale object
 Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod.
-(blueprint: new-etale-over-coproduct-cech-comparison).
 -/
 
 @[expose] public section
@@ -65,23 +64,7 @@ private theorem cofan_sections_isIso {X : Scheme.{u}} {J : Type (u + 1)} [Finite
   exact Etale.isIso_piLift_of_disjoint G D d hcov hdisj
 
 /-- Replacing a finite family over an étale object by its coproduct preserves the Čech complex.
-Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod and its Čech-complex consequence.
-(blueprint: new-etale-over-coproduct-cech-comparison)
-
-Proof: the product-cofan theorem transports scheme fibre-product distribution to the
-canonical tuple-indexed products in Over U. A scheme coproduct cofan has open, monic,
-pairwise disjoint inclusions covering its point; the disjoint-cover sheaf theorem therefore
-makes restriction to these tuple summands an isomorphism on sections. Construct the
-cosimplicial restriction map from the singleton family to the original family using
-Pi.map of the given coprojections. After every product projection, its naturality is
-Pi.map_π and functoriality of G, for every simplex map. Applying the alternating-coface
-complex functor gives a chain map. In each degree it factors as the singleton-tuple
-product projection (an isomorphism by productUniqueIso) followed by the disjoint-cover
-restriction isomorphism. Componentwise invertibility gives an isomorphism of complexes;
-its inverse has the orientation in the statement. For empty I, the tuple family is empty
-in every positive power, so the empty-cover sheaf axiom supplies the same argument.
-Neither affineness nor coverage of U is required. Finite large index types are handled
-by the existing Small instances without changing the coefficient universe. -/
+Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod and its Čech-complex consequence. -/
 theorem nonempty_etale_over_coproduct_cech_iso
     (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]
     (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

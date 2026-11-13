@@ -81,8 +81,7 @@ theorem ramificationIdx_eq_length_of_isLocalization {R S : Type*} [CommRing R] [
     Module.length_eq_of_surjective e'.surjective]
 
 /-- In a finite flat extension `S` of a domain `R` whose rank is prime to `ℓ`, over every prime
-`p` of `R` lies a prime `q` of `S` with ramification index prime to `ℓ` (blueprint
-`det-tf-restriction-zero-covers`): the ramification indices times the inertia degrees sum to the
+`p` of `R` lies a prime `q` of `S` with ramification index prime to `ℓ`: the ramification indices times the inertia degrees sum to the
 rank. -/
 theorem exists_not_dvd_ramificationIdx {R S : Type*} [CommRing R] [IsDomain R] [CommRing S]
     [Algebra R S] [Module.Finite R S] [Module.Flat R S] (p : Ideal R) [p.IsPrime] {ℓ : ℕ}

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 /-! # The terminal restriction isomorphism for an étale object
 
 Source: Stacks Project, Étale Cohomology, Tag 03S2.
-(blueprint: def-weil-pbc-sets-terminal-restriction).
 -/
 
 @[expose] public section
@@ -21,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Tag 03S2, paragraph following Definition 03S3.
-(blueprint: def-weil-pbc-sets-terminal-restriction).
 Evaluate the étale inverse-image/restriction isomorphism at the identity object,
 and identify the identity followed by the structure map with the structure map.
 Invert this restriction isomorphism to send a section of `H` on `U` to the

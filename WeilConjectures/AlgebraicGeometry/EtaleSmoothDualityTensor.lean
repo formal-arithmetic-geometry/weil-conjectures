@@ -22,7 +22,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
 (the unit/tensor comparison for an étale map over an arbitrary base) and the affine-line case
 (the canonical duality on the compactified affine line). This module does not import
 `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`, so that the smooth generic direct
-image (`lem-asd-smooth-generic-direct-image`), which uses smooth duality, has no import path back
+image, which uses smooth duality, has no import path back
 to `Finiteness/Deligne.lean`.
 -/
 

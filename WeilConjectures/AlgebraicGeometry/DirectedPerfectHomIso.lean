@@ -12,7 +12,6 @@ public import Mathlib.Order.Directed
 /-! # Invertibility from directed continuity of Hom sets
 
 Source: Stacks Project, Tag 09RE, descending an inverse and its two equations.
-(blueprint: lem-pc-directed-perfect-hom-iso).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 /-- A directed system of Hom sets for two objects, with its actual limit functors.
 The structure records transport, lifting and eventual equality, rather than choosing
 an object or a morphism from an existence theorem.
-(blueprint: lem-pc-directed-perfect-hom-iso)
 -/
 structure DirectedPerfectHomSystem
     (I : Type u) [Preorder I] (C : I → Type v) [∀ k, Category.{h} (C k)]
@@ -54,13 +52,7 @@ structure DirectedPerfectHomSystem
         transport (show k ≤ m from le_trans hkl hlm) g
 
 /-- An isomorphism in the limit lifts as an isomorphism at a directed stage.
-Source: Stacks Project, Tag 09RE.
-Proof: lift the hom and inverse independently and transport both to a common
-stage. Their composites have limit images equal to the identities. Eventual
-Hom equality stabilizes these two relations. At a common upper bound the two
-transported maps are mutually inverse, and the transported hom still has its
-prescribed limit image.
-(blueprint: lem-pc-directed-perfect-hom-iso). -/
+Source: Stacks Project, Tag 09RE. -/
 theorem DirectedPerfectHomSystem.lift_iso
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     {C : I → Type v} [∀ k, Category.{h} (C k)]
@@ -105,7 +97,6 @@ theorem DirectedPerfectHomSystem.lift_iso
 
 /-- Recover the comparison square from the prescribed conjugated limit image.
 Source: Stacks Project, Tag 09RE, transport of the descended morphism.
-(blueprint: lem-pc-directed-perfect-hom-iso)
 -/
 theorem iso_comparison_of_conjugated_identity
     {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)

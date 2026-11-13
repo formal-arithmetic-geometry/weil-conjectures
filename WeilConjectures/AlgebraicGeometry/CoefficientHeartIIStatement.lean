@@ -26,7 +26,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 Source: blueprint latest,
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-cor-coefficient-heart-ii/_section.md`
-and `sk-cor-coefficient-heart-ii.proof.md` (blueprint: sk-cor-coefficient-heart-ii).
+and `sk-cor-coefficient-heart-ii.proof.md`.
 
 The standing setting is a separated finite-type scheme over a field of positive
 characteristic, with characteristic different from the coefficient prime.  The
@@ -226,8 +226,7 @@ closed extensions of lisse modules.
 Source: blueprint latest,
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-cor-coefficient-heart-ii/_section.md`
-and `sk-cor-coefficient-heart-ii.proof.md`, both paragraphs
-(blueprint: sk-cor-coefficient-heart-ii).
+and `sk-cor-coefficient-heart-ii.proof.md`, both paragraphs.
 
 The first conjunct is the triangulated-subcategory assertion.  The second
 conjunct gives a finite sequence ending at the chosen complex; each term is

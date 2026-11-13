@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 /-! # Shrinking one local étale representative along a closed subscheme
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, open-image shrinking.
-(blueprint: lem-weil-pbc-etale-closed-section-shrink).
 -/
 
 @[expose] public section
@@ -28,21 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A local representative can be shrunk so its unit equation holds everywhere on
-its closed base change. Source: Stacks Project, Tag 09ZF, fourth proof paragraph.
-(blueprint: lem-weil-pbc-etale-closed-section-shrink).
-
-Proof: The morphism a is étale, hence has open image O in U times_X Z.
-The projection of this fibre product to U is a closed embedding. Therefore O
-is the inverse image of an ambient open U' of U. Restrict s to U'. The map a
-factors through U' times_X Z, and is surjective onto it by the choice of U'.
-This is a one-member étale cover. Restrict ht to this factorization; unit
-naturality identifies its right side with the restriction of i⁻¹(s|U').
-The sheaf separatedness axiom gives equality on U' times_X Z. The terminal
-map in ht is the unique map into the base change of the identity object,
-so it is the composite of a with the base-changed structure map of U.
-Every point in W maps into U', giving the range inclusion. For W empty,
-choose U' empty, and use the empty-cover sheaf axiom. No global covering,
-compactness, or Zariski-unit injectivity assumption enters this assertion. -/
+its closed base change. Source: Stacks Project, Tag 09ZF, fourth proof paragraph. -/
 theorem etale_closed_section_shrink
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

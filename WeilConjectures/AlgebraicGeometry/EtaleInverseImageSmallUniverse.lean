@@ -49,18 +49,7 @@ private theorem pullback_fiber_small {S T : Scheme.{u}} (f : T ⟶ S)
   let := ulift_fiber_small (pointSmallEtale (s ≫ f)) G
   exact small_of_injective (e.app _).toEquiv.injective
 
-/-- Source: Stacks Project, Étale Cohomology, 03Q1(3), 03PU and 03PT.
-Proof: use one geometric point with separable-closure residue field over each point
-of T. This u-small family is conservative, also after lifting its point universes.
-For its members, the fibre of inverse image is the fibre of G at the image geometric
-point. Taking fibres commutes with ULift, so these fibres are u-small. The lifted
-representable sheaf associated to B also has u-small fibres, by the same commutation.
-Yoneda identifies sections over B with morphisms from that lifted representable.
-Joint faithfulness injects this morphism set into the product, over the u-small family,
-of maps between those u-small fibre sets. The product is u-small, so its subset is
-u-small. The argument requires neither affineness nor nonemptiness; an empty index
-family gives a singleton product.
-(blueprint: lem-weil-pbc-etale-inverse-image-small-universe). -/
+/-- Source: Stacks Project, Étale Cohomology, 03Q1(3), 03PU and 03PT. -/
 theorem etale_setPullback_small {S T : Scheme.{u}} (f : T ⟶ S)
     (G : Sheaf S.smallEtaleTopology (Type u)) (B : T.Etale) :
     Small.{u} ((((etaleSetPullback f).obj

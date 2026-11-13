@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.AffineRegularStalkScalar
 /-! # Matrix action on the explicit affine basis germs
 
 Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
-(blueprint: lem-sc-affine-free-basis-germ-map).
 -/
 
 @[expose] public section
@@ -23,19 +22,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Sheafifying a linear map sends each actual basis germ to the combination of target
 basis germs whose coefficients are the germs of its matrix entries.
 
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), and Tags 01IB, 01C6, 0098.
-(blueprint: lem-sc-affine-free-basis-germ-map).
-
-Proof: Compose f with the p-th coordinate inclusion from the regular module.
-In the finite coordinate module this composite is the sum, over q, of the q-th
-coordinate inclusion multiplied by the coefficient (f(e_p))_q. Tilde carries that
-identity to the corresponding identity on standard basis sections. Restriction
-along the affine chart and transport by overEquiv preserve this identity and
-identify multiplication by a section of Gamma(X,U) with multiplication by that
-section in the structure sheaf. Apply ordinary open direct image and then the germ
-map at x. Germs preserve sums, and the scalar germ identity says that the germ of
-a times a basis section is germ(a) times its basis germ. This gives the displayed
-formula. Empty source has no p; empty target has the empty sum and zero map. -/
+Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), and Tags 01IB, 01C6, 0098. -/
 theorem affineFreeBasisGerm_map
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (n m : ℕ)

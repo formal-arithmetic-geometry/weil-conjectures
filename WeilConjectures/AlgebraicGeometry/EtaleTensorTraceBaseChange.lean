@@ -14,7 +14,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Base change for the ordered tensor trace evaluation
 
@@ -204,10 +203,7 @@ private theorem orderedProjection_baseChange
     (derivedUpperStar_map_derivedBaseChangeMap_app_counit B sq) E K
 
 /-- Tensoring a scalar trace square with an arbitrary complex gives the evaluation square.
-Source: blueprint thm-amb-p1-adjunction.proof.md, final base-change calculation.
-Proof: the mate projection square is tensor compatible by the pullback composition
-coherence. Cancel the ordered projection, use naturality with respect to the scalar
-trace square, and finish with the pullback right-unit law. -/
+Source: blueprint thm-amb-p1-adjunction.proof.md, final base-change calculation. -/
 theorem etaleTensorEvaluation_constant_baseChange
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {g' : X' ⟶ X} {g : Y' ⟶ Y} (sq : CommSq g' f' f g)

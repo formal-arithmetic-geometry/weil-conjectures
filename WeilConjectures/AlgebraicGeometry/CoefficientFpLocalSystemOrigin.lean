@@ -31,22 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Finitely presented local constant models descend to the etale site, with no
 Noetherian hypothesis on the coefficient ring.
 
-Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant
-(auxiliary; not a blueprint node).
-
-Proof: evaluate the local-model hypothesis at the final pro-etale object and extract
-its trivializing covering. Group the covering members by isomorphism type of their
-constant module models. These groups have disjoint open images: pro-etale covers
-are fpqc covers, and fpqc descent detects openness. Work over one such open, with
-fixed model M. Finite presentation identifies the sheaf of automorphisms of the
-constant M with the constant discrete group Aut_A(M). The sheaf of isomorphisms
-from constant M to F is a torsor under this group. Comparison for discrete-group
-torsors makes this torsor etale locally trivial. Descend the constant modules with
-the resulting transition maps to an etale module sheaf. Their comparison inverse
-images glue to F. The AsSmall equivalences preserve the covers, slice constant
-sheaves and transition maps, so this is the displayed canonical fixed-scalar
-inverse image. On an empty scheme the empty covering gives the unique zero sheaf;
-zero module models have the same construction with the trivial automorphism group. -/
+Source: Stacks Project, Tag 099Y, lemma-compare-locally-constant. -/
 theorem coefficientFpLocalSystem_essImage (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

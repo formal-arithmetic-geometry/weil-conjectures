@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.EtalePresentationImageFiltration
 /-! # Coherent categorical filtrations for an etale complex diagram
 
 Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-coherent-filtrations).
 -/
 
 @[expose] public section
@@ -119,30 +118,7 @@ set_option maxHeartbeats 700000 in
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.
 This statement constructs no reindexing, subgroup presentation, or quotient homomorphism.
-Source: Stacks Project, Tags 015J and 015K; the finite-support argument of Tag 0EZM.
-
-Proof:
-1. Apply the functorial Cartan--Eilenberg construction to the stage complexes and
-   the degreewise colimit of their inverse images. Exact inverse image and degreewise
-   colimits preserve the lower bound a. Identity and composition for the coefficient
-   maps assemble the spectral-sequence functor and its compatible maps to the target.
-   Swap coordinates to resolution degree first. The natural first-page isomorphisms
-   give the two displayed equations; negative resolution degrees vanish.
-2. Use the canonical image filtrations on degree-p hypercohomology. The step at a
-   is the whole object, since the complex is supported above a. Steps above p vanish
-   since the truncated complex and its derived global sections are supported above p.
-   If p<a, hypercohomology itself vanishes, so the step at a is also zero. This gives
-   the upper bound at max a (p+1) without excluding the zero-length case.
-3. For each q, choose r>max(p-q+1,q-a) with r>=1. Both incident differentials at
-   (p-q,q) vanish, at all stages and the target. Subquotient convergence identifies
-   this common page with each categorical graded piece. All q use the same pages and
-   filtrations chosen in step 1; only r and the convergence isomorphisms depend on q.
-4. Pullback preserves each canonical image-filtration step. Restrict the abutment
-   map to these steps; monicity proves the square for their inclusions. Naturality
-   of the convergence isomorphisms identifies its graded map with cokernel.map.
-   The specified formula hP fixes its underlying abutment map. No continuity or
-   surjectivity of any page comparison is used.
-(blueprint: lem-weil-pbc-etale-complex-coherent-filtrations). -/
+Source: Stacks Project, Tags 015J and 015K; the finite-support argument of Tag 0EZM. -/
 theorem exists_etale_complex_coherent_filtrations
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

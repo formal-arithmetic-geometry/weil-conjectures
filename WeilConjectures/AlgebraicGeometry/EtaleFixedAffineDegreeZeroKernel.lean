@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 /-! # Finite-stage vanishing for one fixed sheaf in degree zero
 
 Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.
-(blueprint: lem-weil-pbc-fixed-affine-degree-zero-kernel).
 -/
 
 @[expose] public section
@@ -28,24 +27,7 @@ namespace AlgebraicGeometry.Etale
 limit dies after pullback to a later stage. No varying coefficient system or colimit
 of sheaves is involved.
 
-Source: Stacks Project, Tag 09YQ, degree-zero argument via 0EYL, 04HR and 09YN.
-(blueprint: lem-weil-pbc-fixed-affine-degree-zero-kernel).
-
-Proof: Restrict the inverse system to the cofinal upper tail of i. Its schemes and
-limit are affine. Present the limit affine etale site as the colimit of the stage
-sites (0EYL), and restrict the fixed sheaf and all its inverse images along the
-small-to-affine equivalences (04HR). Inverse-image composition identifies the
-pullbacks on the limit with the constant diagram on the limit inverse image of F;
-these identifications commute with the units, so its identity cocone is a colimit.
-Apply 09YN at the identity affine object. The resulting filtered colimit of stage
-sections is the group of limit sections, with transition maps induced by the units.
-The identification H^0 = sections carries cohomologyMap to these unit maps.
-The zero image of x is therefore equality of its representative with zero in a
-filtered colimit. The equality criterion supplies a stage on the upper tail where
-the pulled-back representative is zero. The tail inclusion gives the displayed
-arrow in I. For zero coefficients or an empty affine scheme, every section is zero;
-for a singleton index, pullback along the limit projection is an equivalence.
--/
+Source: Stacks Project, Tag 09YQ, degree-zero argument via 0EYL, 04HR and 09YN. -/
 theorem fixed_affine_degree_zero_kernel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

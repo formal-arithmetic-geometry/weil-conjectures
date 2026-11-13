@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleRingDirectImageOperations
 # Identifying the ring-object lift of sectionwise etale direct image
 
 Source: Stacks Project, Proposition 00YV, ring paragraph and Section 00YR.
-(blueprint: lem-weil-pbc-etale-ring-direct-image-comparison).
 -/
 
 @[expose] public section
@@ -27,23 +26,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.CartesianMonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples.
-(blueprint: lem-weil-pbc-etale-ring-direct-image-comparison).
-
-Proof: The forgetful equalities identify the underlying source of the comparison
-with R(X), and its target with R of the underlying ring sheaf GU(X). Use their
-canonical isomorphisms to define the displayed underlying comparison. The strict
-inverse identity GU FU = id transports the five section formulas for FU to GU;
-similarly GV FV = id transports the formulas for FV to GV. At every etale object,
-the product comparison of R is the coordinate pairing: this follows by composing
-with both projections. Its terminal comparison is the unique map between singleton
-sections. Substitute these facts in the five RF operation equations. The underlying
-comparison then preserves addition, zero, negation, multiplication and one on each
-section. Bundle its components and inverse as ring homomorphisms. Naturality follows
-from the underlying comparisons, since forgetting ring coefficients is faithful.
-Their composites are identities by the underlying isomorphism identities. This
-constructs d with exactly the displayed underlying formula. No inverse-image functor,
-unit or adjunction is involved in this assertion. -/
+/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples. -/
 theorem etaleRingDirectImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
     (FU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1} ⥤
       CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))))

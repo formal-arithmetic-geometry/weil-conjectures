@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Locally closed single-sheaf generators for a fixed commutative condensed ring.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), open/closed steps.
-(auxiliary; not a blueprint node)
 
 This is the coefficient-abstract form of the existing finite-field generator predicate.
 Keeping the coefficient abstract avoids repeated expansion of the sheafification and

@@ -13,7 +13,6 @@ import Mathlib.RingTheory.Finiteness.Projective
 /-! # The ordinary quotient comparison for a single pair of modules
 
 Source: Stacks Project, Tags 093T and 09C6.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -119,29 +118,7 @@ is invertible for a finite projective source, and respects actual scalar balanci
 No complexes, differentials, degree bounds or cohomology occur in this assertion.
 
 Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-the quotient total-Hom calculation; More on Algebra, Tag 0A8H.
-(auxiliary; not a blueprint node).
-
-Proof: first balance scalar extension from the constant ring through its completion
-and then to its quotient. The completion cone equation identifies the composite
-ring map with the constant quotient map. Constant module sheafification and
-restriction to the slice commute with this extension, so the quotient realization
-of M is the constant sheaf of M/J^(n+1)M over the constant quotient ring.
-A linear map M to N induces a map of those quotients. It factors through the
-quotient of Hom_A(M,N), since J^(n+1) acts trivially on the target. Constant
-sheafification gives the comparison on locally constant Hom sections; evaluation
-at the terminal object turns these into global module-sheaf morphisms. This
-constructs the comparison for arbitrary M,N, and additivity and two-variable
-naturality follow on constant sections and hence by sheaf separatedness.
-For M finite free, evaluate on a finite basis: Hom commutes with the quotient
-and with constant sheafification's finite products. A finite projective module is
-a retract of a finite free module, and these natural comparisons preserve the
-retraction; hence the comparison is bijective for a finite projective source.
-For the successor identity, both sides on a constant linear map and a local pure
-tensor have value given by the same linear map followed by the quotient. The
-balancing map multiplies the two scalar factors. Local generators and separatedness
-extend the equation to all sections. The zero module, zero ring, unit ideal and
-empty slice are included; the corresponding maps are the unique zero maps. -/
+the quotient total-Hom calculation; More on Algebra, Tag 0A8H. -/
 theorem adicPerfectModuleHom (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

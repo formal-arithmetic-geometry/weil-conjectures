@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- Pasting identifies the chart fibre product with the cartesian source over T.
 Both arrows are explicitly constructed by the pullback universal property.
-Source: Stacks Project, Tag 0EYM.
-(blueprint: def-sc-cartesian-chart-source-iso). -/
+Source: Stacks Project, Tag 0EYM. -/
 noncomputable def cartesianChartSourceIso {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
     (w : g' = a ≫ g) :
@@ -64,8 +63,7 @@ theorem cartesianChartSourceIso_hom_snd {S X T B : Scheme.{u}}
       pullback.fst a (pullback.snd f g) := by
   exact pullback.lift_snd _ _ _
 
-/-- The inverse chart identification preserves its projection to T.
-(blueprint: def-sc-cartesian-chart-source-iso). -/
+/-- The inverse chart identification preserves its projection to T. -/
 @[reassoc (attr := simp)]
 theorem cartesianChartSourceIso_inv_fst {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
@@ -75,8 +73,7 @@ theorem cartesianChartSourceIso_inv_fst {S X T B : Scheme.{u}}
   exact pullback.lift_fst _ _ _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse chart identification preserves its projection to X.
-(blueprint: def-sc-cartesian-chart-source-iso). -/
+/-- The inverse chart identification preserves its projection to X. -/
 @[reassoc (attr := simp)]
 theorem cartesianChartSourceIso_inv_snd_fst {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
@@ -87,8 +84,7 @@ theorem cartesianChartSourceIso_inv_snd_fst {S X T B : Scheme.{u}}
 
 /-- Pullback along an isomorphism is an equivalence also on bounded-below
 complexes; the unit and counit are the composition and identity comparisons.
-Source: Stacks Project, Tag 03CB.
-(blueprint: def-sc-cartesian-chart-source-iso). -/
+Source: Stacks Project, Tag 03CB. -/
 noncomputable def abelianDerivedPullbackEquivalence {Y Z : Scheme.{u}} (e : Y ≅ Z) :
     DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ≌
       DerivedCategory.Plus (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
@@ -100,8 +96,7 @@ noncomputable def abelianDerivedPullbackEquivalence {Y Z : Scheme.{u}} (e : Y �
       upperStarIdDerivedPlus AddCommGrpCat.{u + 1} Z)
 
 /-- The explicit coefficient comparison on the chart identification.
-Source: Stacks Project, Tags 03CB and 0EYM.
-(blueprint: def-sc-cartesian-chart-source-iso). -/
+Source: Stacks Project, Tags 03CB and 0EYM. -/
 noncomputable def cartesianChartCoefficientIso {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
     (w : g' = a ≫ g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -118,8 +113,7 @@ noncomputable def cartesianChartCoefficientIso {S X T B : Scheme.{u}}
 
 /-- Pullback of raw classes along a specified scheme isomorphism and coefficient
 isomorphism. Its underlying map is exactly the canonical raw pullback.
-Source: Stacks Project, Tags 03CB and 03Q8.
-(blueprint: def-sc-abelian-raw-iso-pullback). -/
+Source: Stacks Project, Tags 03CB and 03Q8. -/
 noncomputable def abelianRawIsoPullback {B Y Z : Scheme.{u}} (e : Y ≅ Z)
     (h : Y ⟶ B) (h' : Z ⟶ B) (w : e.inv ≫ h = h') (q : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -157,8 +151,7 @@ noncomputable def abelianRawIsoPullback {B Y Z : Scheme.{u}} (e : Y ≅ Z)
     (preadditiveYoneda.obj _).mapIso ea.op
 
 /-- The constructed isomorphism acts by the prescribed raw pullback.
-Source: Stacks Project, Tag 03CB.
-(blueprint: def-sc-abelian-raw-iso-pullback). -/
+Source: Stacks Project, Tag 03CB. -/
 theorem abelianRawIsoPullback_hom {B Y Z : Scheme.{u}} (e : Y ≅ Z)
     (h : Y ⟶ B) (h' : Z ⟶ B) (w : e.inv ≫ h = h') (q : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -170,8 +163,7 @@ theorem abelianRawIsoPullback_hom {B Y Z : Scheme.{u}} (e : Y ≅ Z)
   rfl
 
 /-- The additive shifted derived adjunction, with the shift comparison of
-right derived direct image. Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sc-abelian-raw-adjunction-iso). -/
+right derived direct image. Source: Stacks Project, Tag 03Q8. -/
 noncomputable def abelianShiftedDerivedAdjunctionIso {T Y : Scheme.{u}}
     (p : Y ⟶ T)
     (A : DerivedCategory.Plus (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -186,8 +178,7 @@ noncomputable def abelianShiftedDerivedAdjunctionIso {T Y : Scheme.{u}}
 
 /-- Transport raw chart classes into the Hom group on the actual fibre product.
 All factors are isomorphisms of exact inverse images, single complexes or raw
-classes under a scheme isomorphism. Source: Stacks Project, Tags 03CB and 0EYM.
-(blueprint: def-sc-cartesian-chart-adjunct). -/
+classes under a scheme isomorphism. Source: Stacks Project, Tags 03CB and 0EYM. -/
 noncomputable def cartesianChartAdjunctIso {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
     (w : g' = a ≫ g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -222,8 +213,7 @@ noncomputable def cartesianChartAdjunctIso {S X T B : Scheme.{u}}
         0).app F).symm)
 
 /-- Take the shifted derived adjoint of the explicitly transported chart class.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-cartesian-chart-raw-adjunction-iso). -/
+Source: Stacks Project, Tags 03Q8 and 0EYM. -/
 noncomputable def cartesianChartRawAdjunctionIso {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
     (w : g' = a ≫ g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -243,8 +233,7 @@ noncomputable def cartesianChartRawAdjunctionIso {S X T B : Scheme.{u}}
 /-- The chart cohomology comparison for a specified pullback test object. Its
 three factors are the inverse of the raw cohomology evaluation comparison,
 the chart derived adjunction, and the free-representable pullback isomorphism.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-cartesian-chart-cohomology-iso). -/
+Source: Stacks Project, Tags 03Q8 and 0EYM. -/
 noncomputable def cartesianChartCohomologyIso {S X T B : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S)
     (w : g' = a ≫ g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

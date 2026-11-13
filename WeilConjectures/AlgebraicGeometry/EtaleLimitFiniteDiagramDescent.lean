@@ -13,8 +13,7 @@ import Mathlib.Data.Fintype.Order
 
 /-! # Descent of a finite qcqs étale diagram
 
-Source: Stacks Project, Limits, Tags 01ZM and 07RP.
-(blueprint: lem-weil-pbc-etale-limit-finite-diagram-descent). -/
+Source: Stacks Project, Limits, Tags 01ZM and 07RP. -/
 
 @[expose] public section
 universe u
@@ -146,21 +145,7 @@ private theorem finite_qcqs_pullback_hom_descent
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Descend a finite star diagram, without a covering assumption or conclusion.
-Source: Stacks Project, Limits, Tags 01ZM(1),(2) and 07RP.
-(blueprint: lem-weil-pbc-etale-limit-finite-diagram-descent).
-
-Proof: Affine-limit permanence gives a qcqs limit base. The qcqs sources and
-étale structure maps make every object finitely presented over this base.
-Apply 01ZM(1) to U and each V_k. The resulting finitely presented models over
-qcqs stages are qcqs. Apply 07RP to their structure maps to make them étale,
-then take a common upper bound of the finitely many stages, including U's stage.
-Base change preserves étaleness and the qcqs properties; pullback composition
-retains the identifications with U and V_k. For each k, conjugate f_k by these
-identifications to obtain an arrow between the limit pullbacks of the fixed
-models. Apply 01ZM(2) to descend this arrow. Take a common upper bound of these
-finitely many arrow stages and pull back all models and arrows to it. Naturality
-of pullback composition gives the displayed equations. For empty K only U is
-spread out and the arrow and source clauses are vacuous. No surjectivity is used. -/
+Source: Stacks Project, Limits, Tags 01ZM(1),(2) and 07RP. -/
 theorem exists_etale_limit_finite_diagram_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -103,21 +103,7 @@ private theorem constantComparison_unit
 /-- A constant chart of the reconstructed coefficient ring propagates along every scheme map.
 Only coefficient rings occur in this assertion, with no input module or slice.
 
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2.
-(auxiliary; not a blueprint node).
-
-Proof: transport c to the original sites using AsSmall. The cartesian coefficient
-isomorphism identifies the inverse image of the internal ring on X with the internal
-ring on Y. Section reconstruction identifies this with algebraic inverse image of its
-section ring: the underlying set inverse image preserves the graphs of addition,
-multiplication, zero and one. Inverse image of the constant k-ring is the constant k-ring,
-by composing the constant-sheaf adjunction with the geometric adjunction. Pull back c
-and compose these two identifications, then transport back by AsSmall to obtain d.
-The unit equation of the ring inverse-image adjunction identifies its adjunct with
-InternalModuleOperations.coefficientMap. Evaluating this equation on a constant scalar
-a at each V gives the displayed equality. This argument works also for the empty scheme
-and the zero ring: all maps used are natural ring isomorphisms.
--/
+Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2. -/
 theorem exists_constant_coefficient_chart_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)

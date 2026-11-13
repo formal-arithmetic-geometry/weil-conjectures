@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Localization description of an affine pushforward stalk
 
 Source: Stacks Project, Tag 0AVW, affine stalk calculation.
-(blueprint: lem-sc-affine-pushforward-stalk-localization)
 -/
 
 @[expose] public section
@@ -22,20 +21,7 @@ namespace AlgebraicGeometry
 
 /-- On an affine neighborhood, the pushforward stalk is the localization of the
 sections of its inverse image at the images of functions not vanishing at the point.
-Source: Stacks Project, Tag 0AVW, affine stalk calculation.
-(blueprint: lem-sc-affine-pushforward-stalk-localization)
-
-Proof: Put B = Γ(Y,U), A = Γ(X,f⁻¹U), and q = hU.primeIdealOf y. The distinguished
-opens D(b), b ∉ q, are cofinal among neighborhoods of y inside U. Their inverse
-images are the distinguished opens D(f.app U b) in the affine open f⁻¹U. Their
-section rings are A localized at f.app U b, compatibly with the restriction maps.
-Consequently their filtered colimit, the pushforward stalk at y, is A localized
-at the submonoid consisting of the images of B minus q. The map from A into this
-colimit is exactly the germ map. Equivalently the images of the submonoid are
-units, every stalk element has a numerator in A and a denominator in that
-submonoid, and a numerator with zero germ is killed by a member of that submonoid.
-These are the three defining properties of IsLocalization. This also covers
-an empty inverse image, where A and the stalk are the zero ring. -/
+Source: Stacks Project, Tag 0AVW, affine stalk calculation. -/
 theorem affine_pushforward_stalk_isLocalization
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     {U : Y.Opens} (hU : IsAffineOpen U) (y : U) :

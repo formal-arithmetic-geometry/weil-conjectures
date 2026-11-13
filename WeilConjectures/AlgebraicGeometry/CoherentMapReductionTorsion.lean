@@ -24,14 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Reduction by any positive ideal power doubles an actual kernel/cokernel bound.
-Source: Stacks Project, Remark 0888, commutative algebra fact
-(blueprint: lem-weil-pbc-coherent-map-reduction-torsion).
-
-Proof: apply the kernel component bound, which uses the affine scalar quasi-inverse
-argument, and the cokernel component bound, which descends annihilation through the
-canonical epimorphism from the original cokernel. Pair the resulting IsZero statements
-at each n. The kernel component remains a separate named proof obligation.
--/
+Source: Stacks Project, Remark 0888, commutative algebra fact. -/
 theorem coherentMap_reduction_torsion
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (F H : CoherentModules X) (a : F ⟶ H) (t : ℕ) (ht : 1 ≤ t)

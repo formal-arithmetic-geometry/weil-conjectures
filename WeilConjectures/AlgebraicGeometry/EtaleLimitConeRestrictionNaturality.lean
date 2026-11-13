@@ -144,22 +144,7 @@ The coefficient map is (eG j.val).inv followed by the cocone leg. The cone and
 coefficient cocone need not be limiting or colimiting.
 
 Source: Stacks Project, Tag 01F7 (pullback and coefficient functoriality),
-Tag 09YQ (restricted stage and cone maps); parent proof step 1.
-(blueprint: lem-weil-pbc-etale-limit-cone-restriction-naturality)
-
-Proof: First prove restriction naturality for arbitrary commuting open squares and
-an arbitrary coefficient morphism φ : f*F → G. Cancel the larger stage-open inclusion
-to identify the two composites from the smaller source open to the larger stage open.
-Coefficient naturality and composition functoriality of cohomology express both paths
-as the same pullback followed by a coefficient map. Naturality of upperStarComp.inv
-moves φ to the last factor; the three component associativity identities for
-upperStarComp then identify the coefficient maps by cancelling adjacent hom/inv pairs.
-Specialize this square calculation to f = c.π.app (op j.val), the nested stage and
-limit opens, tailLimitOpenMap for their two vertical maps, and coefficient
-(eG j.val).inv ≫ L.ι.app j.val. The commuting-square hypotheses are exactly
-Scheme.Hom.resLE_comp_ι. Expanding tailOpenCohomologyLegDegree gives the claimed
-pointwise equality. No universal property, coefficient-system naturality, directedness,
-or nonemptiness is used. Empty and equal opens and zero coefficients are included. -/
+Tag 09YQ (restricted stage and cone maps); parent proof step 1. -/
 theorem tailOpenCohomologyLegDegree_restriction
     {X : Scheme.{u}} {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

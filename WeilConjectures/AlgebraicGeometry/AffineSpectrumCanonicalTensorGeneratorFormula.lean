@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorF
 /-! # Canonical affine spectrum comparison on tensor generators
 
 Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
-(blueprint: lem-pc-affine-spectrum-canonical-tensor-generator-formula).
 -/
 
 @[expose] public section
@@ -29,33 +28,7 @@ variable [∀ Y : Scheme.{u},
 
 -- The fixed stalk comparison requires substantial definitional reduction.
 /-- Existence of input-complex coordinates compatible with the fixed comparison,
-using the actual affine-spectrum stalk ring maps.
-
-Proof: put a = X.isoSpec.inv and j = X'.isoSpec.inv. Along a, the canonical
-pullback-stalk comparison is an isomorphism from the stalk of a*P to extension
-of scalars of the stalk of P. Since a induces an invertible stalk ring map,
-the extension/restriction unit is an isomorphism. Compose that unit with the
-inverse pullback-stalk comparison after restricting scalars; transport its
-source point by isoSpec naturality. Apply this natural linear isomorphism in
-every degree. Naturality with respect to the differentials gives q and its
-inverse as chain maps. This constructs q; it does not use an arbitrary witness
-of an existence statement without a characterizing property.
-To check the generator equation, represent x by a section germ. The first
-comparison sends d tensor x to d times the germ of the pullback unit applied to
-that section. The comparison along j sends this germ to its pullback along j,
-and sends the coefficient d through j.stalkMap. The composition mate alpha is
-characterized by the composite adjunction units: its inverse identifies this
-successive pullback-unit germ with the pullback-unit germ along the spectrum
-map applied to the section pulled back along a. This is precisely the germ
-obtained from q(x). The inverse last tensor-stalk comparison therefore returns
-eD(d) tensor q(x). Every stalk element has a section-germ representative, so
-this proves the formula for every x and d in every degree. The coefficient
-maps are the displayed actual stalk maps; equality transport changes neither
-the germ nor the formula. The argument works for the zero complex and zero
-modules. No flatness or boundedness is needed, and an empty spectrum has no z0.
-Source: Stacks Project, Tags 0098 (pullback stalks), 0096 (adjunction units),
-and 0DJ8 (affine reduction).
-(blueprint: lem-pc-affine-spectrum-canonical-tensor-generator-formula). -/
+using the actual affine-spectrum stalk ring maps. -/
 theorem exists_canonicalSpectrum_tensor_generator_formula
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

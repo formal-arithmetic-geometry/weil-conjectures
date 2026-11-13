@@ -33,8 +33,7 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 The derived scalar pullback comparison.
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
 -/
 
 @[expose] public noncomputable section
@@ -71,8 +70,7 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-/-- The prescribed unreduced ordinary scalar comparison. Source: Stacks 06YY, 099L
-(auxiliary; not a blueprint node). -/
+/-- The prescribed unreduced ordinary scalar comparison. Source: Stacks 06YY, 099L. -/
 def ordinaryPullComparison (A : Type u) [CommRing A] (I : Ideal A) :
     res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⟶
       pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) :=
@@ -80,8 +78,7 @@ def ordinaryPullComparison (A : Type u) [CommRing A] (I : Ideal A) :
 
 /-- The representative square for a derived scalar comparison, with abstract ordinary
 functors so complex-composition conversions are checked before specialization.
-Source: Stacks 06YY, 099L
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 099L. -/
 def DerivedPullComparisonFormula
     {M₀ M₁ M₂ M₃ D₀ D₁ D₂ D₃ : Type*}
     [Category M₀] [Category M₁] [Category M₂] [Category M₃]
@@ -143,14 +140,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical derived scalar comparison, characterized on every flat-term K-flat
 representative. Uniqueness makes it independent of resolving choices and gives its
 coherence for identity and composite inverse images with the same insertion formula.
-Source: Stacks 06YY, 099L (auxiliary; not a blueprint node).
-Proof: restrict a flat-term K-flat B-model, using flatness of B over the constant ring.
-Apply ordinaryPullComparison termwise, then the two universal computation maps. This
-is invariant under resolution maps by the resolving-class derived-functor theorem, and
-hence descends naturally to every derived object. The square determines it on a resolving
-class, hence uniquely. For composite inverse images, both formulas send m to
-(1 tensor (1 tensor m)), identified with 1 tensor m by ordinary tensor reassociation;
-therefore uniqueness gives composition and identity coherence. -/
+Source: Stacks 06YY, 099L. -/
 theorem derivedPullComparison_existsUnique (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     ∃! δ : dres (coefficientMap J A I) ⋙ (derivedPull F V adj (constantMap F A)).functor ⟶
@@ -195,7 +185,7 @@ theorem derivedPullComparison_existsUnique (A : Type u) [CommRing A]
 end
 
 /-- The actual derived comparison with the specified K-flat scalar-insertion formula.
-Source: Stacks 06YY, 099L (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 099L. -/
 def derivedPullComparison (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     dres (coefficientMap J A I) ⋙ (derivedPull F V adj (constantMap F A)).functor ⟶
       (derivedPull F V adj (completedMap F A I)).functor ⋙ dres (coefficientMap J' A I) :=

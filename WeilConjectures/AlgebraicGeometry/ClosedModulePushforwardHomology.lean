@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Homology preservation by closed module pushforward
 
-Source: Stacks Project, Modules, Tag 08KS.
-(blueprint: lem-pc-closed-module-pushforward-homology). -/
+Source: Stacks Project, Modules, Tag 08KS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -68,21 +67,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Closed-immersion pushforward of module sheaves preserves homology.
 
-Source: Stacks Project, Modules, Lemma 17.13.4 (Tag 08KS).
-(blueprint: lem-pc-closed-module-pushforward-homology).
-
-Proof: An epimorphism of abelian sheaves is locally surjective. At a point in the
-closed image, lift its section on a source neighbourhood, realize that neighbourhood
-as the inverse image of an ambient open using the inducing property, and intersect
-with the prescribed ambient neighbourhood. Restriction of the lift gives a local
-lift there. At a point outside the image, use the open complement of the closed image;
-its inverse image is empty, so the sheaf axiom makes the target sections zero and the
-zero section is a lift. Thus abelian direct image preserves epimorphisms. The exact
-faithful forgetful functor to abelian sheaves preserves and reflects epimorphisms,
-and its composite with module direct image is definitionally the abelian direct
-image. Module direct image therefore preserves epimorphisms. It is a right adjoint,
-so preserves kernels. In abelian categories, these two properties imply preservation
-of homology. Identity immersions and empty sources obey the same local argument. -/
+Source: Stacks Project, Modules, Lemma 17.13.4 (Tag 08KS). -/
 theorem closed_modulePushforward_preservesHomology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     (Scheme.Modules.pushforward i).PreservesHomology := by

@@ -23,22 +23,7 @@ namespace AlgebraicGeometry
 
 /-- Ordinary base-change maps paste horizontally before any invertibility assumption.
 Source: Stacks Project, Tag 0ATM (composition of base change), Tag 08HY (counit formula),
-and Tag 0D5S (associativity of derived pullback).
-(blueprint: lem-pc-derived-base-change-horizontal-pasting)
-
-Proof: Transpose both sides under the pinned adjunction for r. Naturality of the
-composition comparison c(r,h) moves the first base-change map through it. The
-commutativity equality and naturality of c(t,q) then move it through the comparison
-between pullbacks along r followed by h and t followed by q. The counit formula for
-the second square gives pullback along t of the counit for q. The first base-change
-map is a transpose under the pinned adjunction for q, so its pullback followed by
-this counit is exactly its defining transpose. Substitute that transpose. The
-associativity identity for c, for r,h,g and for t,p,f, and the two square equalities
-identify the resulting composite with the transpose of the outer square, preceded
-by c(h,g) and followed by c(t,p) inverse. Equality transports agree by proof
-irrelevance. Injectivity of the Hom equivalence for r proves the formula. This
-uses only adjunction and functor identities, including for empty schemes, zero
-objects, or identity arrows; no cartesian or invertibility assumption is needed. -/
+and Tag 0D5S (associativity of derived pullback). -/
 theorem schemeDerivedBaseChange_horizontal_pasting
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

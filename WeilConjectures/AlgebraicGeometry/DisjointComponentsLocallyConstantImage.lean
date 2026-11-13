@@ -17,7 +17,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 Source: smooth purity blueprint, final paragraph of
 `lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-disjoint-components-locally-constant-image).
 -/
 
 @[expose] public section
@@ -222,21 +221,7 @@ private theorem locallyConstant_product {T : Scheme.{u}}
 
 /-- Assemble locally constant component direct images along a finite disjoint open cover.
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-disjoint-components-locally-constant-image).
-
-Proof: For each etale test scheme over Y, base change the disjoint open cover of X.
-The sheaf axiom identifies sections over the resulting scheme with the product of
-sections over these disjoint components: intersections are empty and an abelian sheaf
-has a unique section on the empty scheme. These restriction identifications commute
-with maps of test schemes, giving an isomorphism from the underlying direct image to
-the finite product of the underlying component direct images. Choose a trivializing
-etale cover for each factor. Their finite fibre-product refinement covers Y. On every
-member all factors are constant; the constant-sheaf functor preserves finite products
-because etale sheafification is left exact. Hence their product is constant. Restrict
-the displayed isomorphism to this refinement and transport constancy. For n = 0 the
-cover condition implies X is empty; every test-object pullback is empty, so direct
-image is the terminal set sheaf, the constant singleton sheaf. -/
+`lem-weil-pbc-finite-pushforward-generic-constructible`. -/
 theorem isLocallyConstant_disjoint_components_directImage
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (n : ℕ) (W : Fin n → X.Opens)

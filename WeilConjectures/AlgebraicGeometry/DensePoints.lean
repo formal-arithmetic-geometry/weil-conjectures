@@ -170,8 +170,7 @@ private lemma exists_etale_mvPolynomial (f : X.Hom (Spec (.of k))) [Smooth f] (x
 
 /-- **Density of separable points.** Let `X` be a smooth scheme over a field `k`. Then the
 closed points `x` of `X` whose residue field `κ(x)` is finite and separable over `k` are dense.
-
-(blueprint: `lem-pc-dense-separable-points`) -/
+ -/
 @[stacks 056U]
 theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [Smooth f] :
     Dense {x : X | IsClosed {x} ∧ letI := (f.residueFieldAlgebraMap x).toAlgebra
@@ -197,8 +196,7 @@ theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [
 /-- **Zariski density of rational points.** Let `X` be a smooth scheme over a separably closed
 field `k`, given by its structure morphism `f : X ⟶ Spec k`. Then the image in `X` of the set
 `X(k)` of `k`-rational points is Zariski dense.
-
-(blueprint: `det-prop-picard-dense-points`, `lem-pc-rational-points-dense`) -/
+ -/
 theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f] :
     DenseRange fun p : f.fieldPoints k ↦ (p.1.base default : X) := by
   refine f.dense_setOf_isClosed_finite_isSeparable.mono fun x hx ↦ ?_
@@ -211,8 +209,7 @@ theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [S
 
 /-- **Rational points of a smooth scheme exist.** A nonempty smooth scheme over a separably
 closed field `k` has a `k`-rational point.
-
-(blueprint: `lem-pc-rational-points-dense`) -/
+ -/
 theorem Hom.nonempty_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f]
     [Nonempty X] : Nonempty (f.fieldPoints k) :=
   f.denseRange_fieldPoints.nonempty
@@ -222,8 +219,7 @@ open Limits in
 induced by a `k`-rational point `x` of `X`, for a field extension `K` of `k`. A `k`-rational
 point is an element of `AlgebraicGeometry.Scheme.Hom.fieldPoints`, a section `Spec k ⟶ X` of the
 structure morphism, and `x_K` is the induced section `σ_T` for `T = Spec K`.
-
-(blueprint: `def-pc-rational-point`) -/
+ -/
 noncomputable def Hom.baseChangeFieldPoint (f : X.Hom (Spec (.of k))) (K : Type u) [Field K]
     [Algebra k K] (p : f.fieldPoints k) :
     (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fieldPoints K :=

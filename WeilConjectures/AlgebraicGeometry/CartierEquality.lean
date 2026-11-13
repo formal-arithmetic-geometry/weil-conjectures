@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.FractionFieldCompleteIntersectionCotangent
 /-!
 # Cartier equality
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07E1 (blueprint:
-lem-weil-pbc-cartier-equality).
+Source: Stacks Project, More on Algebra, Lemma Tag 07E1.
 -/
 
 @[expose] public section
@@ -47,8 +46,7 @@ and exactness carry these identifications from the model to `K`.  Rank--nullity
 then gives the dimension difference as `n - c`, which is the cardinality of the
 chosen transcendence basis and hence `Algebra.trdeg`; for a finite extension the
 empty basis gives zero and the two finite dimensions are equal.  These are the
-steps recorded in the node proof (blueprint: lem-weil-pbc-cartier-equality).
-(blueprint: lem-weil-pbc-cartier-equality)
+steps recorded in the node proof.
 -/
 theorem cartier_equality
     (k K : Type*) [Field k] [Field K] [Algebra k K]

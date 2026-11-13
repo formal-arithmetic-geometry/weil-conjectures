@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # Affine images away from the other member of a closed cover
 
 Source: Stacks Project, Varieties, Lemma 09NX, final paragraph.
-(blueprint: lem-sc-affine-image-away-closed-cover).
 -/
 
 @[expose] public section
@@ -25,15 +24,7 @@ namespace AlgebraicGeometry.Scheme
 /-- An affine open in one member of a closed cover, disjoint from the other member,
 has affine open image in the reduced ambient scheme.
 
-Source: Stacks Project, Varieties, Lemma 09NX, final paragraph.
-(blueprint: lem-sc-affine-image-away-closed-cover).
-
-Proof: let W be the complement of T. Restrict f to W. This is a closed immersion
-surjective onto W, since the two closed subsets cover X. W is reduced, so the
-restricted closed immersion is an isomorphism. As V avoids T, V is contained in
-the preimage of W; the composite V -> f^-1 W -> W -> X is therefore an open
-immersion. Its source is affine. Its open image is the desired affine open U,
-and its set of points is f(V). Empty V and empty W cause no exception. -/
+Source: Stacks Project, Varieties, Lemma 09NX, final paragraph. -/
 theorem exists_affineOpen_image_away_closed_cover
     {X Y : Scheme.{u}} [IsReduced X] (f : Y ⟶ X) [IsClosedImmersion f]
     (T : TopologicalSpace.Closeds X) (hcover : Set.range f ∪ (T : Set X) = Set.univ)

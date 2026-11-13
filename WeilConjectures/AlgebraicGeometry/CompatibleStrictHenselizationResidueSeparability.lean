@@ -63,20 +63,7 @@ private theorem residue_factorization_descends
 point is separable over the second residue field.  This is the residue-field
 comparison step from Stacks Tags 04HX and 095T; it is isolated here so that
 the polynomial conclusion can be obtained independently by a minimal-polynomial
-argument.
-
-(blueprint: lem-weil-pbc-compatible-strict-henselization-residue-separability)
-
-Proof: identify the first model's residue field as a separable extension of a
-base residue field κ(s), preserving its closed-point structural map. This is the
-single-model theorem `strictHenselization_residue_separable_model`. Compose the
-factorization with ι and ρA. The equations hρA, hι and hρB identify the resulting
-point with the second model's closed-point structural map followed by g. A field
-point factors uniquely through its image's residue field, so the latter map gives
-c : κ(s) → κB whose composite with the embedding ρB agrees with the image of κ(s)
-in k'. Regard the map κA → k' as a κ(s)-algebra homomorphism; it preserves
-separability. Finally enlarge the base from κ(s) to κB using the scalar tower.
-The hypothesis hAlgebra ties that tower to the given geometric embedding. -/
+argument. -/
 theorem Etale.compatibleStrictHenselization_residue_isSeparable
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

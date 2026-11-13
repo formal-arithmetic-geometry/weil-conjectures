@@ -149,26 +149,7 @@ private theorem derivedPullbackIdentity_normalized
   exact ⟨i, hi⟩
 
 /-- Canonical composition comparisons have identity comparisons and satisfy coherence.
-Source: Stacks Project, Cohomology, Tag 0D5S, with the tensor unit and associativity laws.
-(blueprint: lem-pc-derived-pullback-comparison-coherence).
-Proof: the identity tensor pullback is isomorphic to the identity functor by the
-conjugate of the pushforward identity comparison under the pinned adjunction.
-On a K-flat complex the identity counit is invertible, so this comparison descends
-to an isomorphism L(id)* ≅ id by the universal property and K-flat resolutions.
-For each unit law, whisker the proposed equality with Qh and compose with the
-counit. The defining factorization hc and tensor unit law give equal maps on
-K-flat complexes. Resolve every complex to descend the equality; uniqueness of
-maps into the left-derived functor gives equality of natural transformations.
-For associativity the same factorization rewrites both paths on a K-flat complex
-as three successive counits followed by the underived tensor comparison. The
-conjugates of pushforwardComp are associative by the adjunction mate calculus
-and pushforward associativity. Concretely, use
-Adjunction.leftAdjointCompIso_comp_id, Adjunction.leftAdjointCompIso_id_comp,
-and Adjunction.leftAdjointCompIso_assoc for the underived comparisons.
-Resolve complexes and use naturality and essential surjectivity of Qh
-to extend component equalities to all derived objects. Equality of homs implies
-equality of the resulting isomorphisms.
-Empty schemes and identity morphisms require no extra hypotheses. -/
+Source: Stacks Project, Cohomology, Tag 0D5S, with the tensor unit and associativity laws. -/
 theorem derivedPullbackComposition_coherence
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

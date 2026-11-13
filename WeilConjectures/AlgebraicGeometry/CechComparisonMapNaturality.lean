@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCechLiftSquares
 /-!
 # Naturality of the canonical Cech-to-cohomology comparison map
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ
-(blueprint: lem-sc-cech-comparison-map-naturality).
+Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ.
 -/
 
 @[expose] public section
@@ -69,21 +68,7 @@ The shared bicomplex places resolution degree first; multiplying the (p,q) summa
 `(-1)^(p*q)` identifies it with the source's exchanged convention and fixes both axes.
 Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ; the comparison is obtained
 from an injective resolution, the first-quadrant total Cech double complex, and the
-quasi-isomorphism from global sections. (blueprint: lem-sc-cech-comparison-map-naturality)
-
-Proof:
-1. The existing moduleCechAlpha_isIso gives isomorphisms on every homology object;
-   Mathlib's quasi-isomorphism characterization gives the first conjunct.
-2. Define c using H(beta), the inverse of H(alpha), and the inverse resolution
-   identification. For any lift, moduleCechLiftSquares supplies the alpha and beta
-   squares. Their homology equations and isoRightDerivedObj_hom_naturality give
-   the private comparison_transport equation.
-3. Transport along a lift of the identity to every resolution; functors preserve
-   identities, so the constructed c satisfies IsModuleCechComparison.
-4. Transport along a coefficient morphism and substitute the equation for cG.
-   Cancel the composite of the resolution identification and H(alpha) to obtain
-   the naturality square.
--/
+quasi-isomorphism from global sections. -/
 theorem cechComparisonMapNaturality (X : Scheme.{u}) {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) :
     (∀ (F : X.Modules) (I : InjectiveResolution F), QuasiIso (moduleCechAlpha U I)) ∧

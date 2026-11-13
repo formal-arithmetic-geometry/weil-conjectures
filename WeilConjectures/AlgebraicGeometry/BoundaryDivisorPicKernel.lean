@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 /-! # Boundary divisors of units as a Picard kernel
 
 Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph.
-(blueprint: lem-sc-boundary-divisor-pic-kernel).
 -/
 
 @[expose] public section
@@ -24,25 +23,7 @@ namespace AlgebraicGeometry
 /-- Boundary divisors of units are precisely the divisors with trivial Picard class
 when extended by zero to the compactification.
 Source: blueprint thm-sc-constant-invariance, affine-case unit quotient paragraph;
-the upstream point-ideal divisor-class equivalence and the local DVR unit criterion.
-(blueprint: lem-sc-boundary-divisor-pic-kernel).
-
-Proof: the germ condition identifies φ with restriction through the open immersion:
-choose a point of the nonempty C, use the inverse of c.i.appIso to lift a section to
-c.i(C), and compare its germ with its image in the function field. A unit and its
-inverse have regular germs on this open, so every order there is zero. Its full
-principal divisor is therefore the extension by zero of its boundary divisor.
-The divisor-to-Picard homomorphism annihilates principal divisors, giving one inclusion.
-Conversely, the divisor-class/Picard equivalence says that an extended divisor with
-trivial Picard class is div(r) for a nonzero rational function r. Its orders on c.i(C)
-are all zero: closed points there have zero coefficient by extension by zero, and
-orders at nonclosed points vanish on a smooth curve. The local DVR criterion and
-sheaf gluing (exists_isUnit_germToFunctionField_eq_of_ord_eq_zero on c.i(C)) produce a
-unit section with rational image r. Transport it by c.i.appIso to C and use the germ
-comparison already proved to identify its image under φ. Restriction of div(r) to the
-boundary returns the original divisor. For empty boundary both sides are the singleton
-zero. For a singleton boundary, properness and degree zero force its coefficient to be
-zero; the unit one represents that divisor. No field extension or descent is used. -/
+the upstream point-ideal divisor-class equivalence and the local DVR unit criterion. -/
 theorem boundary_divisor_pic_kernel
     (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

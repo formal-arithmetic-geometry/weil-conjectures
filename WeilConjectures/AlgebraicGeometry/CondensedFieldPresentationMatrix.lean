@@ -11,8 +11,7 @@ public import Mathlib.LinearAlgebra.Matrix.Rank
 /-!
 # Matrices of continuous functions for condensed field presentations
 
-Source: Hemo--Richarz--Scholbach, Example 3.1; the rank/descent argument of
-(auxiliary; not a blueprint node).
+Source: Hemo--Richarz--Scholbach, Example 3.1; the rank/descent argument of.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ noncomputable def condensedFieldContinuousCoefficientMap
   ((g.hom.app (op (Scheme.ProEt.mk (𝟙 V)))) (ULift.up 1)).down
 
 /-- The continuous-function matrix of a finite free morphism and a coefficient realization.
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the presentation-matrix step of
-(auxiliary; not a blueprint node).
+Source: Hemo--Richarz--Scholbach, Example 3.1, and the presentation-matrix step of.
 Each entry is the image of the unit under the corresponding regular-module endomorphism,
 conjugated by the supplied ring-object isomorphism. -/
 noncomputable def continuousFieldPresentationMatrix
@@ -59,9 +57,7 @@ noncomputable def continuousFieldPresentationMatrix
   condensedFieldContinuousCoefficientMap E V (inv e ≫ a.hom ≫ e)
 
 /-- The explicit composite uniquely determines the pullback realization.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Proof: the displayed composite is a witness, and the defining equality proves uniqueness. -/
+Source: Hemo--Richarz--Scholbach, Example 3.1. -/
 theorem existsUnique_condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) :
@@ -74,8 +70,7 @@ theorem existsUnique_condensedFieldPullbackRealization
 
 
 /-- The realization of coefficients pulled back along an arbitrary scheme map.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
+Source: Hemo--Richarz--Scholbach, Example 3.1.
 Compose the monoidal coefficient pullback comparison with the canonical realization. -/
 noncomputable def condensedFieldPullbackRealization
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
@@ -87,10 +82,7 @@ noncomputable def condensedFieldPullbackRealization
     (condensedFieldContinuousMapIso E V).hom.hom
 
 /-- The pullback realization equals its explicit defining composite.
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Proof: the chosen morphism satisfies its uniquely determining equality. This equation
-allows controlled rewriting without reducing the inverse-image construction at evaluation. -/
+Source: Hemo--Richarz--Scholbach, Example 3.1. -/
 theorem condensedFieldPullbackRealization_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     {X V : Scheme.{u}} (g : V ⟶ X) :

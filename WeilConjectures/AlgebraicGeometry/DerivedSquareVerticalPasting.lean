@@ -27,21 +27,7 @@ variable [∀ Y : Scheme.{v},
 
 /-- Vertical pasting of canonical derived square comparisons.
 Source: Stacks Project, Tag 0D5S; step 2 of
-lem-sc-picard-coefficient-transpose-pasting.
-(blueprint: lem-sc-derived-square-vertical-pasting)
-
-Proof: Expand each square as composition.hom, equality transport, and
-composition.inv. Postcompose with the invertible composition comparison for
-b followed by a followed by p. Apply the associativity law of the selected
-composition family first to p2,i,t and then to b,a,p. Naturality moves the
-comparison for b,a past the remaining square. Transport the two middle
-comparisons along hb and ha. The equality transports then compose to the
-same map, because hab, h and the three square equations imply the same
-equality of scheme morphisms; proof irrelevance identifies the proofs.
-Cancel the composition comparison. This uses only pullback coherence,
-not direct image, adjunction counits, coefficients or invertibility of any
-single-module map. Identity arrows, zero complexes and empty schemes obey
-the same natural transformation identities. -/
+lem-sc-picard-coefficient-transpose-pasting. -/
 theorem canonicalDerivedSquareComparison_vertical
     {A B C W T T' : Scheme.{v}}
     (p : A ⟶ W) (p1 : B ⟶ T) (p2 : C ⟶ T')

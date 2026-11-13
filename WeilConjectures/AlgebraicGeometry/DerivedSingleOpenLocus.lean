@@ -16,8 +16,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # The flat single-cohomology open locus
 
-Source: the cohomology-sheaf gluing paragraph of the perfect-locus proof
-(blueprint: lem-pc-derived-single-open-locus).
+Source: the cohomology-sheaf gluing paragraph of the perfect-locus proof.
 -/
 
 @[expose] public section
@@ -51,18 +50,7 @@ private theorem isZero_restrict_union {T : Scheme.{u}} (M : T.Modules)
 on a set of points is a flat single object on an open neighbourhood of that set.
 
 Source: blueprint lem-pc-perfect-locus, cohomology-sheaf gluing paragraph; the first
-step of lem-pc-derived-pullback-single-cohomology.
-(blueprint: lem-pc-derived-single-open-locus).
-
-Proof: take W to be the union of all opens satisfying the local hypothesis. Every point
-of the given set lies in W. Exact open restriction preserves negative vanishing. In
-nonnegative degrees other than i the cohomology sheaves vanish on the covering opens,
-hence on W by the sheaf condition. The degree-i sheaf is locally finite free on this
-cover and therefore flat: tensoring is exact locally, hence exact globally. Exactness
-of open restriction identifies these sheaves with the cohomology of L(W.ι)^* E.
-Standard truncations of an object with cohomology in degree i only give its isomorphism
-to its degree-i cohomology placed in degree i. This construction uses no uniform rank,
-and works on the empty open and with the zero sheaf. -/
+step of lem-pc-derived-pullback-single-cohomology. -/
 theorem exists_flat_single_open_locus
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

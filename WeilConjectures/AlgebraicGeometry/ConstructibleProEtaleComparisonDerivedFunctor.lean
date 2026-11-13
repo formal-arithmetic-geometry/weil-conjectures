@@ -247,18 +247,7 @@ private theorem liftExact {C D : Type w} [SmallCategory C] [SmallCategory D]
 
 /-- The actual canonical inverse image descends to the ordinary derived categories.
 No constructibility or boundedness hypothesis is needed for this ambient functor.
-Source: Stacks Tags 00YV, 03D2 and 09AL
-(auxiliary; not a blueprint node).
-
-Proof: the constant-sheaf adjunction identifies the pullback constant ring with the
-specified pro-etale constant ring, and its unit is the constant-section map defining
-our inverse image. The module inverse-image comparison identifies the underlying
-additive sheaf with the additive inverse image. Representable flatness gives left
-exactness there, and the conservative module forgetful functor reflects finite
-limits. The module pullback is a left adjoint, so preserves finite colimits and
-zero morphisms; left exactness then gives additivity. The exact-functor localization
-of Mathlib sends quasi-isomorphisms to isomorphisms and supplies the displayed
-natural factorization through the standard derived localization. -/
+Source: Stacks Tags 00YV, 03D2 and 09AL. -/
 theorem constructibleComparison_derivedFunctor (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ∃ D : ConstantCompletion.D (ConstantCompletion.constant

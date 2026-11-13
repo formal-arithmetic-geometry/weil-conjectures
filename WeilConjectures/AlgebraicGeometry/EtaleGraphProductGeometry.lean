@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtalePairwiseProductGraphNormali
 
 /-! # The products in the graph interchange grid
 
-Source: Stacks Project, Tag 0F7J, product-graph extension of the A--F diagram
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0F7J, product-graph extension of the A--F diagram.
 -/
 
 @[expose] public noncomputable section
@@ -30,38 +29,32 @@ namespace EtaleGraphInterchangeDiagram
 variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (d₁ d₂ : EtaleGraphInterchangeDiagram f g)
 
-/-- The product of the two open-then-proper presentations. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product of the two open-then-proper presentations. Source: Stacks Tag 0F7J. -/
 abbrev productG := EtaleGraphPresentation.PairwiseProduct.presentation
   (EtaleGraphPresentation.ofCompactification d₁.compactification)
   (EtaleGraphPresentation.ofCompactification d₂.compactification)
 
-/-- The product presentation over the middle scheme. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product presentation over the middle scheme. Source: Stacks Tag 0F7J. -/
 abbrev productF := EtaleGraphPresentation.PairwiseProduct.presentation
   d₁.sourcePresentation d₂.sourcePresentation
 
-/-- The product presentation over the final scheme. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product presentation over the final scheme. Source: Stacks Tag 0F7J. -/
 abbrev productH := EtaleGraphPresentation.PairwiseProduct.presentation
   d₁.compositePresentation d₂.compositePresentation
 
 /-- The ambient product before imposing equality in the middle scheme.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev productV := pullback (d₁.k ≫ d₁.p ≫ d₁.q) (d₂.k ≫ d₂.p ≫ d₂.q)
 
-/-- The product of the two supplied open immersions k. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product of the two supplied open immersions k. Source: Stacks Tag 0F7J. -/
 def productK : d₁.productV d₂ ⟶ pullback (d₁.p ≫ d₁.q) (d₂.p ≫ d₂.q) :=
   pullback.map _ _ _ _ d₁.k d₂.k (𝟙 Z) (by simp) (by simp)
 
-/-- The product of the proper maps p. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product of the proper maps p. Source: Stacks Tag 0F7J. -/
 def productP : pullback (d₁.p ≫ d₁.q) (d₂.p ≫ d₂.q) ⟶ pullback d₁.q d₂.q :=
   pullback.map _ _ _ _ d₁.p d₂.p (𝟙 Z) (by simp) (by simp)
 
-/-- The product of the proper maps r into Y times Y over Z. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The product of the proper maps r into Y times Y over Z. Source: Stacks Tag 0F7J. -/
 def productR : d₁.productV d₂ ⟶ pullback (d₁.i ≫ d₁.q) (d₂.i ≫ d₂.q) :=
   pullback.map _ _ _ _ d₁.r d₂.r (𝟙 Z)
     (by simpa only [Category.comp_id, Category.assoc] using
@@ -69,41 +62,34 @@ def productR : d₁.productV d₂ ⟶ pullback (d₁.i ≫ d₁.q) (d₂.i ≫ d
     (by simpa only [Category.comp_id, Category.assoc] using
       congrArg (· ≫ d₂.q) d₂.square.w)
 
-/-- Product open e. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Product open e. Source: Stacks Tag 0F7J. -/
 def productE :
     pullback ((d₁.e ≫ d₁.k) ≫ (d₁.p ≫ d₁.q))
       ((d₂.e ≫ d₂.k) ≫ (d₂.p ≫ d₂.q)) ⟶ d₁.productV d₂ :=
   pullback.map _ _ _ _ d₁.e d₂.e (𝟙 Z) (by simp [Category.assoc])
     (by simp [Category.assoc])
 
-/-- Product k is open. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Product k is open. Source: Stacks Tag 0F7J. -/
 instance productK_open : IsOpenImmersion (d₁.productK d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance <;>
     simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
 
-/-- Product p is proper. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Product p is proper. Source: Stacks Tag 0F7J. -/
 instance productP_proper : IsProper (d₁.productP d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsProper) inferInstance inferInstance <;>
     simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
 
-/-- Product r is proper. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Product r is proper. Source: Stacks Tag 0F7J. -/
 instance productR_proper : IsProper (d₁.productR d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsProper) inferInstance inferInstance <;>
     simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
 
-/-- Product e is open. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Product e is open. Source: Stacks Tag 0F7J. -/
 instance productE_open : IsOpenImmersion (d₁.productE d₂) := by
   apply MorphismProperty.pullbackMap (P := @IsOpenImmersion) inferInstance inferInstance <;>
     simp only [Category.assoc, d₁.square.w_assoc, d₂.square.w_assoc]
 
-/-- The product proper/open square commutes. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node).
-Proof: project to T₁ and T₂, and use the two given commutative squares. -/
+/-- The product proper/open square commutes. Source: Stacks Tag 0F7J. -/
 theorem product_square :
     CommSq (d₁.productK d₂) (d₁.productR d₂) (d₁.productP d₂)
       (d₁.productG d₂).e := by
@@ -118,8 +104,7 @@ theorem product_square :
   · exact d₂.square.w
 
 /-- The product of e followed by the product of k is the product of e k.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node).
-Proof: compare the two projections to P₁ and P₂. -/
+Source: Stacks Tag 0F7J. -/
 theorem productE_productK :
     d₁.productE d₂ ≫ d₁.productK d₂ = (d₁.productH d₂).e := by
   dsimp only [productE, productK, productH, EtaleGraphPresentation.PairwiseProduct.presentation,
@@ -133,8 +118,7 @@ theorem productE_productK :
       pullback.lift_fst_assoc, pullback.lift_snd_assoc]
 
 /-- The product of p followed by q is the structural map of the product H.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node).
-Proof: use the first projection equation and associativity. -/
+Source: Stacks Tag 0F7J. -/
 theorem productP_productQ :
     d₁.productP d₂ ≫ (d₁.productG d₂).p = (d₁.productH d₂).p := by
   dsimp only [productP, productG, productH, EtaleGraphPresentation.PairwiseProduct.presentation,
@@ -144,8 +128,7 @@ theorem productP_productQ :
       pullback.lift_fst, pullback.lift_snd,
       pullback.lift_fst_assoc, pullback.lift_snd_assoc, Category.comp_id, Category.id_comp]
 
-/-- The supplied square identifies the two structural maps to Z. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The supplied square identifies the two structural maps to Z. Source: Stacks Tag 0F7J. -/
 theorem productR_to_base (d : EtaleGraphInterchangeDiagram f g) :
     d.r ≫ g = d.k ≫ d.p ≫ d.q := by
   calc
@@ -153,14 +136,14 @@ theorem productR_to_base (d : EtaleGraphInterchangeDiagram f g) :
     _ = d.k ≫ d.p ≫ d.q := by rw [← Category.assoc, ← d.square.w, Category.assoc]
 
 /-- The supporting open has the same structural map by either factorization.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 theorem productW_to_base (d : EtaleGraphInterchangeDiagram f g) :
     (d.e ≫ d.r) ≫ g = (d.e ≫ d.k) ≫ (d.p ≫ d.q) := by
   rw [Category.assoc, productR_to_base]
   simp only [Category.assoc]
 
 /-- The middle structural map is separated, being open then proper.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 theorem productG_separated (d : EtaleGraphInterchangeDiagram f g) : IsSeparated g := by
   rw [← d.facG]
   infer_instance
@@ -168,15 +151,14 @@ theorem productG_separated (d : EtaleGraphInterchangeDiagram f g) : IsSeparated 
 /-- Impose equality over Y on the product V over Z. It is defined by its two projections
 and identified below with the pullback of the diagonal of g, followed by equality
 transport on the structural maps.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def productBV : pullback d₁.r d₂.r ⟶ d₁.productV d₂ :=
   pullback.lift (pullback.fst d₁.r d₂.r) (pullback.snd d₁.r d₂.r) (by
     rw [← productR_to_base d₁, ← productR_to_base d₂,
       ← Category.assoc, ← Category.assoc,
       pullback.condition (f := d₁.r) (g := d₂.r)])
 
-/-- Impose equality over Y on the product W over Z. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Impose equality over Y on the product W over Z. Source: Stacks Tag 0F7J. -/
 def productBW :
     pullback (d₁.e ≫ d₁.r) (d₂.e ≫ d₂.r) ⟶
       pullback ((d₁.e ≫ d₁.k) ≫ (d₁.p ≫ d₁.q))
@@ -188,7 +170,7 @@ def productBW :
         (pullback.condition (f := d₁.e ≫ d₁.r) (g := d₂.e ≫ d₂.r)))
 
 /-- The inclusion V_c into V₀ is proper, since g is separated.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 instance productBV_proper : IsProper (d₁.productBV d₂) := by
   have := productG_separated d₁
   have he : d₁.productBV d₂ = pullback.mapDesc d₁.r d₂.r g ≫
@@ -203,7 +185,7 @@ instance productBV_proper : IsProper (d₁.productBV d₂) := by
   infer_instance
 
 /-- The inclusion W_c into W₀ is proper, since g is separated.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 instance productBW_proper : IsProper (d₁.productBW d₂) := by
   have := productG_separated d₁
   have he : d₁.productBW d₂ =
@@ -219,8 +201,7 @@ instance productBW_proper : IsProper (d₁.productBW d₂) := by
   infer_instance
 
 /-- The two graph maps agree under the inclusion of the products.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node).
-Proof: equality of both coordinates a₁ and a₂. -/
+Source: Stacks Tag 0F7J. -/
 theorem productA_productBW :
     (d₁.productF d₂).a ≫ d₁.productBW d₂ = (d₁.productH d₂).a := by
   dsimp only [productF, productH, productBW, sourcePresentation, compositePresentation,
@@ -234,8 +215,7 @@ theorem productA_productBW :
       pullback.lift_fst_assoc, pullback.lift_snd_assoc]
 
 /-- Equality over Y gives the diagonal of g after applying the two r maps.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node).
-Proof: the two coordinates agree by the defining condition for V_c. -/
+Source: Stacks Tag 0F7J. -/
 theorem productBV_productR :
     d₁.productBV d₂ ≫ d₁.productR d₂ =
       (d₁.productF d₂).p ≫ (d₁.productG d₂).a := by
@@ -253,8 +233,7 @@ theorem productBV_productR :
     exact (pullback.condition (f := d₁.r) (g := d₂.r)).symm
 
 /-- The square comparing the two products of e commutes.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node).
-Proof: compare its two projections to V₁ and V₂. -/
+Source: Stacks Tag 0F7J. -/
 theorem productB_square :
     CommSq (d₁.productF d₂).e (d₁.productBW d₂) (d₁.productBV d₂) (d₁.productE d₂) := by
   dsimp only [productBW, productBV, productE, productF, productH,

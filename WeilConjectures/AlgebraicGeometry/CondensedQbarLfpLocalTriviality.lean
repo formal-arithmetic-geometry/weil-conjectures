@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpCoverComposition
 # Local triviality for bounded-image condensed algebraic-closure coefficients
 
 Source: ConstructibleSheaf/ProEtaleModule/Def.lean, IsLocallyFinitelyPresented and its
-module docstring; RefactorInstruction.tex, Section 4; Bhatt--Scholze, Definition 6.8.3
-(auxiliary; not a blueprint node).
+module docstring; RefactorInstruction.tex, Section 4; Bhatt--Scholze, Definition 6.8.3.
 
 The coefficient ring is the bounded-finite-subextension-image condensed ring, pulled
 back from the profinite point. Presentations and restrictions are ordinary module
@@ -39,8 +38,7 @@ bounded-image condensed algebraic closure of the l-adic field.
 
 Source: ConstructibleSheaf/ProEtaleModule/Def.lean, IsLocallyFinitelyPresented;
 RefactorInstruction.tex, Section 4, prop:Qbar-X and prop:continuous-X;
-Bhatt--Scholze, Definition 6.8.3
-(auxiliary; not a blueprint node).
+Bhatt--Scholze, Definition 6.8.3.
 
 Proof plan:
 1. Refine the presentation cover by affine weakly contractible objects

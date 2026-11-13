@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 /-! # Open restriction preserves formal kernels
 
 Source: Stacks Project, Lemma 087X, claims (a)--(d) and final sentence.
-(blueprint: lem-weil-pbc-coherent-formal-modules-restriction-kernels).
 -/
 
 @[expose] public section
@@ -110,25 +109,7 @@ private theorem restrictionImage {X : Scheme.{u}} (U : X.Opens)
   exact image.isoStrongEpiMono_hom_comp_ι q (R.map j) hq
 
 /-- Restriction preserves kernels in the formal category, without assuming abelianness.
-Source: Stacks Project, Lemma 087X, claims (a)--(d) and final sentence.
-(blueprint: lem-weil-pbc-coherent-formal-modules-restriction-kernels).
-
-Proof: Obtain the shifted-image quotient presentation and the uniform vanishing
-bound from coherentFormalModule_kernel_construction. Naturality of alpha, the image
-factorization, and the quotient projections show that its inclusion kills alpha.
-The proved transition-zero monicity helper and coherentFormalModule_kernel_factorization
-make this a limiting fork on X. Ordinary module restriction preserves kernels and
-maps the epi-mono presentation of each shifted image to its image presentation on U.
-The proved powerQuotientIso and its projection identity from FormalSystemsPullback
-(Stacks 0887) identify the restricted quotient levels, after transporting the tensor
-pullback comparison along the unique left-adjoint isomorphism with restriction.
-Map the two presentation equations to obtain the transition and inclusion equations
-on U. The sheaf-kernel comparison transports the original transition-zero bound;
-the same monicity helper proves that the restricted formal inclusion is monic.
-Apply the factorization theorem on U with the restricted presentation. Together with
-monicity this makes the mapped fork limiting. Mathlib's preservation-of-one-limit-cone
-criterion then gives preservation of every kernel fork. Only module sheaves use an
-abelian structure; no abelian structure on coherent formal modules is assumed. -/
+Source: Stacks Project, Lemma 087X, claims (a)--(d) and final sentence. -/
 theorem coherentFormalModules_restriction_preservesKernel {X : Scheme.{u}}
     [IsNoetherian X] (I : X.IdealSheafData) (U : X.Opens)
     [IsNoetherian U.toScheme] {F G : CoherentFormalModule X I} (α : F ⟶ G) :

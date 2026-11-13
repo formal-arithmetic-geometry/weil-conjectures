@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInst
 # Tensor-spectrum comparison for an open affine triple
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
-(blueprint: lem-weil-pbc-affine-triple-tensor-base-change).
 -/
 
 @[expose] public section
@@ -32,26 +31,7 @@ base change along a map whose inverse image of the base open has a spectrum mode
 The source open in the base change is the inverse image of the chosen source open.
 
 Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph; Schemes,
-Tags 01JR and 01I4 (open fibre products and affine fibre products).
-(blueprint: lem-weil-pbc-affine-triple-tensor-base-change).
-
-Proof: Write X_T and Y_T for the two pullbacks over S. Put U_T and V_T equal
-to the inverse images of U₀ and V₀ under their first projections, and W_T=t⁻¹(W₀).
-The two containments and the pullback equations imply U_T≤f_T⁻¹(V_T), and
-that both opens lie over W_T. Pullback pasting with the open immersion squares
-identifies U_T with U₀×_{W₀}W_T and V_T with V₀×_{W₀}W_T, compatibly
-with the restricted map f_T. Transport both pullback squares along e0,eB,eC,eA.
-The compatibility hB identifies the target structure map with Spec(algebraMap R B).
-The compatibility hC and the fact that φ commutes with R identify the source
-structure map with Spec(algebraMap R C); ht identifies the other leg with
-Spec(algebraMap R A). Use pullbackSpecIso R A B and pullbackSpecIso R A C,
-with pullbackSymmetry to put A first. The restricted map becomes Spec(id⊗φ):
-its composite with the B projection is Spec(φ) after the C projection, since
-(id⊗φ)(1⊗b)=1⊗φ(b); its composite with the A projection is the A projection,
-since (id⊗φ)(a⊗1)=a⊗1. The pullback universal property gives equality.
-The resulting two isomorphisms form the claimed arrow isomorphism. The chosen
-U_T has the displayed equality by construction. Every step works for empty
-opens and zero rings; no affineness of t outside W₀ is needed. -/
+Tags 01JR and 01I4 (open fibre products and affine fibre products). -/
 theorem affine_triple_tensor_base_change
     {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)
     (W₀ : S.Opens) (V₀ : Y₀.left.Opens) (U₀ : X₀.left.Opens)

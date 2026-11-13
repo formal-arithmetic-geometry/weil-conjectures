@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyc
 /-! # Coherence of normalized affine sections comparisons
 
 Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7. (blueprint: lem-pc-affine-sections-square-comparison-coherence).
+perfect.tex, Tag 0AA7.
 -/
 
 @[expose] public section
@@ -33,24 +33,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 /-- Normalized sections comparisons commute with the right-adjoint comparison of
 an arbitrary fibre-product object. This assertion has no pullback units and no
 base-change map: it only compares two ways to take sections of a composed direct image.
-Source: Stacks, cohomology.tex, Tags 0D5T and 08HY; perfect.tex, Tag 0AA7.
-(blueprint: lem-pc-affine-sections-square-comparison-coherence).
-Proof: Choose a K-injective representative J of F. The composite direct-image units
-are invertible on J: direct image sends such representatives to complexes acyclic
-for the subsequent direct image and global sections (Tag 0D5T). Transpose the pinned
-left-derived composition comparisons under their normalized adjunctions. The pinned
-Hom-equivalence equation identifies the resulting right-adjoint comparison δ with
-the right-derived comparison induced by pushforward composition and the commutative
-square. Precompose the claimed equality with the pasted right-derived unit of the
-composite p_*; f_*; Γ_R at J. Replace b and c using hb and hc, and replace r and d
-using hr and hd. Naturality of each right-derived unit moves these units past the
-underived comparison maps. The two resulting underived maps are identical: t, z, v
-and s are identity on the underlying sections by ht, hz, hv and hs, and pullback.condition
-identifies their R-actions. Cancel the invertible pasted unit at J. Finally every
-object F is isomorphic to the localization of a K-injective representative; naturality
-of all comparisons transports the equality from that representative to F. This
-argument uses neither quasi-coherence nor invertibility of a base-change morphism.
-For F=0 both maps are zero, and for identity squares it is the composition unit law. -/
+Source: Stacks, cohomology.tex, Tags 0D5T and 08HY; perfect.tex, Tag 0AA7. -/
 theorem affineSections_square_comparison_coherence
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)

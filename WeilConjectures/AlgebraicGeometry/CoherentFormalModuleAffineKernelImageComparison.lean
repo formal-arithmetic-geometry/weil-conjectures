@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-! # Affine comparison of formal kernel images with module quotients
 
 Source: Stacks Project, Lemma 087X, affine description of K'_(l,m), using Lemma 087W.
-(blueprint: new-formal-affine-kernel-image-comparison).
 -/
 
 @[expose] public section
@@ -264,24 +263,7 @@ is equivalent to comparison of the corresponding quotient submodules of a comple
 module. There is no stabilization assertion or Artin--Rees bound in this statement.
 
 Source: Stacks Project, Lemma 087X, description of K'_(l,m) before claim (a),
-and Lemma 087W; Schemes, Tags 01IB and 01IC.
-(blueprint: new-formal-affine-kernel-image-comparison).
-
-Proof: Restrict F, H and alpha to U and identify U with Spec A for A = Gamma(U,O_X).
-Restriction preserves the defining coherent formal object conditions. Apply 087W to
-these systems and their morphism to obtain finite completed modules M, N and a linear
-map f. Put J = I(U)R in the completed ring R. The level-n projections are surjective
-and have kernels J^(n+1)M and J^(n+1)N. Hence sections of ker(alpha_l) lift precisely
-to f inverse(J^(l+1)N), and transition to level m sends their lifts to their classes
-modulo J^(m+1)M. Affine sections of the abelian image equal the ordinary linear image.
-The tilde/global-sections equivalence identifies the image inclusion with the tilde
-of this quotient submodule inclusion. Thus equal quotient submodules give equal
-subsheaves on U, and consequently equal section ranges on every W contained in U.
-Conversely equality of these ranges includes equality at W = U; the affine quotient
-identification recovers equality of the two submodules. Restriction of scalars from
-R to A preserves equality of underlying submodules. No finiteness or affine assumption
-on W is used. On empty U, A and R are zero rings and both sides are the unique zero
-submodule; zero and unit ideals give the same quotient computations. -/
+and Lemma 087W; Schemes, Tags 01IB and 01IC. -/
 theorem coherentFormalModule_affine_kernel_image_comparison
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (F H : CoherentFormalModule X I) (α : F ⟶ H) (U : X.affineOpens) :

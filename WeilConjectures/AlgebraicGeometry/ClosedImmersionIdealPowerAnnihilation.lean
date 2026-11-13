@@ -22,17 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An ideal-power-annihilated quasi-coherent module remains annihilated by the
 inverse image ideal after closed pushforward and any module isomorphism.
-Source: Stacks Project, proof of Theorem 088E and Tags 01Y9, 01I8.
-(blueprint: aux-closed-immersion-ideal-power-annihilation)
-
-Proof: On each affine open U of X its inverse image V is affine. The ideal of
-(L^t).map j on U is the inverse image of L(V)^t under the structure ring map.
-The affine zero-product criterion turns the hypothesis into annihilation of F(V).
-Pushforward uses the same section group with the restricted scalar action. The
-isomorphism e is linear on sections, so transfers this annihilation to H(U).
-The affine product-section formula makes the image of the product inclusion zero.
-The inclusion is injective on sections, hence the product has zero sections on each
-affine open and is the zero sheaf. This also covers t = 0 and empty schemes. -/
+Source: Stacks Project, proof of Theorem 088E and Tags 01Y9, 01I8. -/
 theorem closedImmersion_idealPower_annihilation
     {X Z : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j]
     (L : Z.IdealSheafData) (t : ℕ) (F : Z.Modules) [F.IsQuasicoherent]

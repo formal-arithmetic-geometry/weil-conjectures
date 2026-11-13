@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.AbelianResolutionComparisonEvaluation
 /-! # The abelian counit on a resolution
 
 Source: Stacks Project, Tags 01F7 and 06XR.
-(blueprint: new-abelian-counit-resolution-calculation)
 -/
 
 @[expose] public section
@@ -122,28 +121,7 @@ def counitSectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules)
       (standardAbelianResolution X F).cocomplex
 
 /-- The Ext counit is represented by the adjoint lift on abelian section complexes.
-Source: Stacks Project, Tag 01F7, and Tag 06XR, injective-resolution Ext computation.
-(blueprint: new-abelian-counit-resolution-calculation)
-
-Proof: The forgotten augmentation of J is an acyclic resolution by 03FD. Its inverse
-image remains a resolution because inverse image is exact. Lift coeff(f,identity)
-from this resolution to the standard abelian injective resolution R of F, using
-counitResolutionLift. Compute Ext by cocycles in Hom from the constant integer
-sheaf into these resolutions. Applying inverse image to such a cocycle and composing
-with the lift computes exact inverse image on Ext followed by the counit. The
-constant-source comparison is constIso(f).symm. Evaluation on the integer generator
-identifies these Hom complexes with sections: adjunction sends the lifted cocycle
-to counitResolutionAdjoint, and restriction along the equality f-inverse(Y)=X is
-abelianPushforwardSectionsIso. These identifications commute with differentials,
-boundaries and the standard comparison from Ext to derived sections. Passing to
-homology gives the asserted equality. The source acyclic-resolution comparison is
-abelianResolutionIso(Y,J). On the target, the acyclic-resolution comparison
-is the standard abelian-resolution comparison followed by the inverse of sections
-of forgottenResolutionMap(X,I). Sections of this map is a quasi-isomorphism by
-03FD and 015E; composing with its homology map cancels that inverse. Therefore
-the target expression below is precisely the comparison computed on R.
-This is independent of any module replacement K or quasi-isomorphism into K. The
-same calculation includes degree zero, zero modules and empty schemes. -/
+Source: Stacks Project, Tag 01F7, and Tag 06XR, injective-resolution Ext computation. -/
 theorem abelian_counit_resolution_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (J : InjectiveResolution ((pushforward f).obj F))
     (I : InjectiveResolution F) (p : ℕ) (x : H ((pushforward f).obj F) p) :

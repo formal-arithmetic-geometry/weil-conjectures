@@ -14,7 +14,7 @@ public import Mathlib.GroupTheory.Perm.Sign
 # Explicit sorting and contraction operators on Čech cochains
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equations 20.23.6.1 and
-20.23.6.2. (blueprint: def-pc-alternating-cech-sorting-operators)
+20.23.6.2.
 
 All operators are finite sums with decidable filters. No sorting permutation or
 homotopy is selected from an unproved existence theorem.
@@ -31,29 +31,26 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The sorting permutation orders equal entries by their original positions.
-Source: Stacks 01FM. (blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM. -/
 def cechStableSort {I : Type v} [LinearOrder I] {n : ℕ} (t : Fin n → I)
     (σ : Equiv.Perm (Fin n)) : Prop :=
   Monotone (t ∘ σ) ∧ ∀ i j, i < j → t (σ i) = t (σ j) → σ i < σ j
 
 /-- A partial sorting permutation fixes the sorted prefix and orders the remaining
-original positions. Source: Stacks 01FM.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+original positions. Source: Stacks 01FM. -/
 def cechPartialSort {n : ℕ} (σ τ : Equiv.Perm (Fin n)) (a : Fin n) : Prop :=
   (∀ k, k.val < a.val → τ k = σ k) ∧
     ∀ i j, a.val ≤ i.val → i < j → τ i < τ j
 
 /-- The junction tuple in the first homotopy, as a map of positions.
-Source: Stacks 01FM, equation 20.23.6.1.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM, equation 20.23.6.1. -/
 def cechJunction {p : ℕ} (σ τ : Equiv.Perm (Fin (p + 1))) (a : Fin (p + 1))
     (k : Fin (p + 2)) : Fin (p + 1) :=
   if h : k.val ≤ a.val then σ ⟨k.val, lt_of_le_of_lt h a.isLt⟩
   else τ ⟨k.val - 1, by omega⟩
 
 /-- The first adjacent equality, with a strictly increasing prefix.
-Source: Stacks 01FM, equation 20.23.6.2.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM, equation 20.23.6.2. -/
 def cechFirstRepeat {I : Type v} [LinearOrder I] {p : ℕ} (t : Fin (p + 1) → I)
     (a : Fin (p + 1)) : Prop :=
   ∃ h : a.val + 1 < p + 1, t a = t ⟨a.val + 1, h⟩ ∧
@@ -65,8 +62,7 @@ variable (X : Scheme.{u}) {I : Type v} [LinearOrder I]
   (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))
 
 /-- Signed stable sorting, as an actual homomorphism in each degree.
-Source: Stacks 01FM, the operator κ.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM, the operator κ. -/
 noncomputable def cechStableSortingMap (p : ℕ) : S.cochains F p ⟶ S.cochains F p := by
   classical
   exact AddCommGrpCat.ofHom
@@ -81,8 +77,7 @@ noncomputable def cechStableSortingMap (p : ℕ) : S.cochains F p ⟶ S.cochains
         simp only [ite_add_zero, Finset.sum_add_distrib] }
 
 /-- Signed extension of increasing restriction, zero on tuples with repetitions.
-Source: Stacks 01FK and 01FM, the operator cπ.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FK and 01FM, the operator cπ. -/
 noncomputable def cechAlternatingProjectionMap (p : ℕ) :
     S.cochains F p ⟶ S.cochains F p := by
   classical
@@ -98,8 +93,7 @@ noncomputable def cechAlternatingProjectionMap (p : ℕ) :
         simp only [ite_add_zero, Finset.sum_add_distrib] }
 
 /-- The first sorting homotopy, given by its explicit junction sum.
-Source: Stacks 01FM, equation 20.23.6.1.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM, equation 20.23.6.1. -/
 noncomputable def cechFirstSortingHom (p : ℕ) : S.cochains F (p + 1) ⟶ S.cochains F p := by
   classical
   exact AddCommGrpCat.ofHom
@@ -117,8 +111,7 @@ noncomputable def cechFirstSortingHom (p : ℕ) : S.cochains F (p + 1) ⟶ S.coc
         simp only [ite_add_zero, Finset.sum_add_distrib] }
 
 /-- Pull the repeated-tuple homotopy back by signed stable sorting.
-Source: Stacks 01FM, equation 20.23.6.2.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM, equation 20.23.6.2. -/
 noncomputable def cechSecondSortingHom (p : ℕ) : S.cochains F (p + 1) ⟶ S.cochains F p := by
   classical
   exact AddCommGrpCat.ofHom
@@ -135,15 +128,13 @@ noncomputable def cechSecondSortingHom (p : ℕ) : S.cochains F (p + 1) ⟶ S.co
         simp only [ite_add_zero, Finset.sum_add_distrib] }
 
 /-- Extend the first degree-lowering operator to the relevant pairs of degrees.
-Source: Stacks 01FM; degree zero has no incoming component.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM; degree zero has no incoming component. -/
 noncomputable def cechFirstSortingFamily (i j : ℕ) (h : (ComplexShape.up ℕ).Rel j i) :
     (S.complex F).X i ⟶ (S.complex F).X j :=
   eqToHom (congrArg (fun n ↦ S.cochains F n) h.symm) ≫ cechFirstSortingHom X U F S j
 
 /-- Extend the second degree-lowering operator to the relevant pairs of degrees.
-Source: Stacks 01FM; degree zero has no incoming component.
-(blueprint: def-pc-alternating-cech-sorting-operators) -/
+Source: Stacks 01FM; degree zero has no incoming component. -/
 noncomputable def cechSecondSortingFamily (i j : ℕ) (h : (ComplexShape.up ℕ).Rel j i) :
     (S.complex F).X i ⟶ (S.complex F).X j :=
   eqToHom (congrArg (fun n ↦ S.cochains F n) h.symm) ≫ cechSecondSortingHom X U F S j

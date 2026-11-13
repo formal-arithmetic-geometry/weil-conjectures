@@ -71,17 +71,7 @@ private theorem tensor_right_triple_hom_ext {Y : Scheme.{u}} {M N L H : Y.Module
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The balancing identity for maps satisfying the section formulas.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps-balancing).
-
-Proof: morphisms from a tensor sheaf are determined on pure tensor sections,
-by the sheafification adjunction and the sectionwise tensor universal property.
-For the iterated tensor, the inner tensorator is locally surjective. Locally
-lift its section to a sum of pure tensors and use additivity and separatedness
-of the target. Thus it suffices to test b tensor (c tensor p). The three
-formulas reduce the desired equality to the image under the sheafification
-unit of c tensor_B bp = φ(b)c tensor_B p. This is the balanced tensor identity.
--/
+Source: Stacks Project, Morphisms, proof of Lemma 01SB. -/
 theorem changeOfRings_tensor_action_comp_eq (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right))

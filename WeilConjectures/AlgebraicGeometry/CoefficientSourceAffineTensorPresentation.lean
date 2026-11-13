@@ -147,19 +147,7 @@ set_option maxRecDepth 4096 in
 -- Transport between native tensors and module-category sections.
 /-- Sections on an affine open of the pullback of an associated module have a
 unit-compatible tensor presentation. This assertion involves no comparison morphism.
-Source: Stacks Project, Tags 01I9 and 01IA, affine pullback of modules.
-(blueprint: lem-pc-coefficient-source-affine-tensor-presentation).
-
-Proof: Compose g with S.toSpecGamma and restrict to the affine scheme B. Pullback
-composition is the unique isomorphism of left adjoints compatible with their units.
-The affine pullback section formula for this composite identifies the sections with
-R tensor_A N, where A = Gamma(S,O) and R = Gamma(B,O). The ring map A -> R is
-g.appLE top B: the canonical GammaSpecIso cancels the chart's scalar map. The unit
-of the tilde/Gamma adjunction sends s to tilde.toOpen N top s. Compatibility of
-composite pullback units therefore sends the displayed coefficientGenerator,
-restricted to B, to 1 tensor s. Swap tensor factors if the section formula is
-written N tensor_A R. The formula and equivalence are also valid for B empty
-or N zero, since both sides then have the corresponding zero module. -/
+Source: Stacks Project, Tags 01I9 and 01IA, affine pullback of modules. -/
 theorem exists_coefficientSource_affine_tensor_presentation
     {S S' : Scheme.{u}} (g : S' ⟶ S) (N : ModuleCat.{u} Γ(S, ⊤))
     (B : S'.Opens) (hB : IsAffineOpen B) :

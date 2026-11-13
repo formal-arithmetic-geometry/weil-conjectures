@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 /-! # Finite freeness on pro-etale slices
 Source: Stacks Project, Tags 03DM and 03DO.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -26,15 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Finite freeness on the localized site is detected by raw internal inverse image.
-Source: Stacks Project, Tags 03DM and 03DO.
-(auxiliary; not a blueprint node)
-
-Proof. The equivalence of the pro-etale slice with the source site induces an
-equivalence of module sheaves, preserving the unit and finite free modules.
-The continuous-chart restriction comparison identifies its value on the
-restricted encoding with the encoding of canonical inverse image. The latter
-is finite free exactly when raw inverse image is finite free, since the
-canonical coefficient comparison is invertible. -/
+Source: Stacks Project, Tags 03DM and 03DO. -/
 theorem continuousRing_slice_free_iff
     (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]

@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoun
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Local cohomological bound for a restricted lower tail
-Source: Stacks Project, Tags 0D64, 01E1 and 03FD.
-(blueprint: lem-sc-affine-basis-restricted-lower-tail-local-bound). -/
+Source: Stacks Project, Tags 0D64, 01E1 and 03FD. -/
 
 @[expose] public section
 universe u wC wV
@@ -27,20 +26,8 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 /-- The restriction of a lower tail has local cohomological bound zero on an affine basis.
-Source: Stacks Project, Tag 0D64 (lemma-is-limit-dimension), Tag 01E1 (restriction
-of injectives), and Tag 03FD (module versus abelian cohomology).
-(blueprint: lem-sc-affine-basis-restricted-lower-tail-local-bound).
-
-Proof: Take B to be all affine opens of the open subscheme V. These form a basis,
-including when V is empty. Each member is the inverse image of its image W in X;
-W is affine and contained in V. Exact restriction commutes with homology. The
-homology of truncLT a (Q F) in degree r is F.homology r for r < a, and zero otherwise.
-In the first case transitivity of restriction identifies its restriction to a
-basis open with (F.homology r).restrict W.ι. Apply the natural module cohomology
-source comparison to the assumed subsingleton H groups. Restriction preserves
-injectives, so open module cohomology is the cohomology of this restriction. In
-the second case additive cohomology preserves the zero object. Thus every positive
-cohomology group vanishes; choose d = 0. No boundedness of F is needed. -/
+Source: Stacks Project, Tag 0D64, Tag 01E1 (restriction
+of injectives), and Tag 03FD (module versus abelian cohomology). -/
 theorem affineBasisRestrictedLowerTail_local_bound
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

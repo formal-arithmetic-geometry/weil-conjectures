@@ -12,8 +12,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Exact field tensor and cohomological bounds
 
-Source: Bhatt--Scholze, Remark 6.3.2
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Remark 6.3.2.
 -/
 
 @[expose] public noncomputable section
@@ -47,11 +46,7 @@ private theorem sfbFieldTensor_exact (X : Scheme.{u}) (k : Type (u + 1)) [Field 
   exact ⟨hlim, inferInstance⟩
 
 /-- Tensor with a degree-zero sheaf over a field preserves a cohomological interval.
-Source: Bhatt--Scholze, Remark 6.3.2; exact tensor over a field
-(auxiliary; not a blueprint node).
-Proof: presheaf tensor is pointwise exact over the field. Sheaf tensor is this tensor
-followed by exact sheafification, and is also a left adjoint. The resulting exact
-functor commutes with homology, giving the asserted vanishing for every complex. -/
+Source: Bhatt--Scholze, Remark 6.3.2; exact tensor over a field. -/
 theorem sfbFieldTensor_bounds (X : Scheme.{u}) (k : Type (u + 1)) [Field k]
     (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ)
     (a b : ℤ) (h : ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) :

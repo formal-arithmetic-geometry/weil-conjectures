@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexGradedClassDescent
 /-! # Etale complex class descent
 
 The descent half of the finite spectral-sequence comparison in Stacks Tag 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-class-descent).
 -/
 
 @[expose] public section
@@ -26,31 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Every limit hypercohomology class has a stage representative.
 Source: Stacks Project, Tag 0EZM, proof of lemma-colimit-variant-complexes;
-Tag 015J (termwise hypercohomology spectral sequence).
-(blueprint: lem-weil-pbc-etale-complex-class-descent).
-
-Proof: First choose a directed cofinal reindexing of the filtered opposite
-index category (Tag 0032), preserving the scheme limit and complex colimit.
-For descent, a representative at a reindexed stage is already an original-stage
-representative. For vanishing at an arbitrary original stage i, finality first
-supplies an arrow from i to a reindexed stage in the opposite category. Transport
-the class there, find its later zero witness in the directed system, and compose
-the two arrows back in the original category. Apply sheaf continuity (09YQ) to
-each term of the system.
-Choose the functorial
-termwise hypercohomology spectral sequences of Tag 015J. Exactness of filtered
-colimits of abelian groups propagates the first-page comparison isomorphisms
-through kernels modulo images to every subsequent page.
-The common region
-r >= 0, s >= a bounds the relevant entries in total degree p by a <= s <= p;
-therefore their stabilization bounds are independent of the stage. The stable
-page comparisons are surjective. Lift a limit class one graded piece at a time
-through the finite abutment filtration, subtracting a stage representative at
-each step. Filteredness moves the finitely many representatives to one common
-stage, where their sum represents the original class. For p < a all abutments
-are zero and any stage represents zero. Pullback functoriality identifies the
-filtered abutment maps with P followed by the complex maps; hB and eB transport
-the resulting representative to the displayed cocone leg. -/
+Tag 015J (termwise hypercohomology spectral sequence). -/
 theorem exists_etale_complex_class_rep
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

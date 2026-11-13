@@ -10,7 +10,7 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 /-! # Constant scalar multiplication under module inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7;
-Cohomology on Sites, Tag 093M (auxiliary; not a blueprint node).
+Cohomology on Sites, Tag 093M.
 -/
 
 @[expose] public noncomputable section
@@ -59,14 +59,7 @@ private theorem change_scalar
 /-- Constant-coefficient pullback carries scalar multiplication to its transported section.
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7;
-Cohomology on Sites, Tag 093M (auxiliary; not a blueprint node).
-
-Proof: inverseImageSection_map identifies the scalar on every test sheaf. Apply
-moduleSMul to the underlying sheaf of M, the scalar map, the identity and scalar
-multiplication. Naturality of moduleUnderlying gives the algebraic inverse-image
-endomorphism. The scalar-extension adjunction unit is linear, and its naturality
-identifies the image after scalar extension with multiplication by the structural
-image of the transported section. -/
+Cohomology on Sites, Tag 093M. -/
 theorem constantPullback_scalar
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

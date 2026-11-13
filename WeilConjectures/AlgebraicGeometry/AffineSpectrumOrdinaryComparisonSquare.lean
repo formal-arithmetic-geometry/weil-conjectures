@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport
 /-! # The ordinary affine spectrum stalk comparison square
 
 Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098.
-(blueprint: lem-pc-affine-spectrum-ordinary-comparison-square).
 -/
 
 @[expose] public section
@@ -76,8 +75,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The comparison before applying the inverse derived pullback counit.
-Source: Stacks Project, Tag 0DJ8, equation-bc; Tag 0098, stalk pullback formula.
-(blueprint: lem-pc-affine-spectrum-ordinary-comparison-square). -/
+Source: Stacks Project, Tag 0DJ8, equation-bc; Tag 0098, stalk pullback formula. -/
 def comparisonIntoTensorPullback {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) (z : X')
@@ -95,8 +93,7 @@ def comparisonIntoTensorPullback {X X' S S' : Scheme.{u}}
 
 /-- The actual chain isomorphism between the two successive ordinary pullbacks.
 It is the adjunction mate of pushforward composition, with isoSpec naturality.
-Source: Stacks Project, Tags 0096 and 0D5S, pullback composition.
-(blueprint: lem-pc-affine-spectrum-ordinary-comparison-square). -/
+Source: Stacks Project, Tags 0096 and 0D5S, pullback composition. -/
 def affineSpectrumTensorComplexIso {X X' : Scheme.{u}}
     [IsAffine X] [IsAffine X'] (g' : X' ⟶ X)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :
@@ -167,31 +164,7 @@ private theorem ordinary_stalk_transport_eq {Y Z : Scheme.{u}} (j : Y ⟶ Z) [Is
 set_option maxHeartbeats 1000000 in
 -- Unifying the two stalk-ring diagrams and their tensor models needs this budget.
 /-- The base-derived tensor comparison is invariant under affine spectrum coordinates
-before introducing either inverse counit for g'. No K-flatness is needed here.
-
-Proof: isoSpec naturality and stalkMap_comp identify R, A, B and C and their
-structural maps in the original and spectrum squares. The map on A tensor_R B
-is the tensor of the stalk ring isomorphisms; its inverse is the tensor of their
-inverses. On the two tensor inclusions these maps intertwine tensorMap, including
-its stalkCongr factor. The germ formula of Tag 0098 identifies the stalk complex
-of the termwise pullback P0 with extension of the stalk complex of P along the
-A-isomorphism. Restriction along its inverse is exact and inverse to this extension.
-Transport the left-derived R-to-B extension through these exact equivalences.
-Uniqueness of a left-derived lift identifies the transported functor and its
-counit with the spectrum model. Apply homology, use cohomologyIso_smul for each
-A-element, and tensor induction to lift the B-linear cohomology isomorphism to
-an isomorphism over A tensor_R B. Extend scalars to C and forget scalars to get l.
-The equations comparison_eq and localized_eq identify the model comparisons with
-the transported counits. The tensorStalkIso germ formulas identify the ordinary
-pullback factors with affineSpectrumTensorComplexIso. Restriction-stalk naturality
-identifies the remaining stalk change with isoPullbackStalkCohomologyIso followed
-by the exact iso-pullback complex counit. These equalities give the displayed
-square. This uses only exact coordinate equivalences, with no flatness over R,
-no invertibility of the comparisons, and no derived pullback composition along g'.
-Zero complexes and empty schemes satisfy the same tensor and counit equations.
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098,
-lemma-stalk-pullback-modules; Tag 0096, pullback adjunction.
-(blueprint: lem-pc-affine-spectrum-ordinary-comparison-square). -/
+before introducing either inverse counit for g'. No K-flatness is needed here. -/
 theorem exists_affineSpectrum_ordinaryComparison_square
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

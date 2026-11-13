@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentIdealPatchingExactSequence
 # The integral-support induction step for coherent devissage
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YL.
-(blueprint: lem-weil-pbc-coherent-property-integral-ideals-of-small-support).
 -/
 
 @[expose] public section
@@ -38,38 +37,7 @@ property for coherent modules supported on this integral closed subscheme and va
 at its generic point, the distinguished module gives the property for every ideal.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YL, third paragraph and its end,
-with the explicit zero hypothesis needed for the zero ideal.
-(blueprint: lem-weil-pbc-coherent-property-integral-ideals-of-small-support)
-
-Proof:
-1. Extension closure and P(0) give isomorphism invariance: use 0 → 0 → F → G → 0
-for an isomorphism F ≅ G of coherent modules. All proper-support cokernels below have
-P by hsmall; no induction on smaller integral subschemes is needed in this lemma.
-2. Generic-point uniqueness identifies ξ with i(η). Apply the generic-point
-ideal-inclusion lemma to G. It embeds a finite direct sum of
-a coherent ideal I on Z into G, isomorphically near ξ. The nonzero generic stalk of G
-forces both I nonzero and the number r of summands positive. Pushforward commutes with
-finite sums. For every nonzero ideal I' contained in I, compose the sum of its inclusions
-with this embedding to obtain a mono β : (i_* I')^{⊕ r} → G, bijective at ξ.
-3. Its coherent cokernel Q is supported in i(Z) and misses ξ. The annihilator J of Q is
-quasi-coherent and coherent: it is the kernel of the structure-sheaf quotient for its
-closed subscheme, whose structure sheaf has coherent finite pushforward. On the open
-complement of Supp(Q), all stalks of Q vanish, so Q restricts to zero by stalk detection.
-Its annihilator is the unit ideal there; in particular J has full stalk at ξ.
-Moreover JG is contained in the image of β: multiplication
-by J followed by the cokernel map is zero. Apply hG to J to get G' contained in JG, with
-full generic stalk and P(G'). Pull it back through the mono β. The resulting coherent
-submodule H of (i_* I')^{⊕ r} is isomorphic to G'. Its cokernel misses ξ and is supported
-in i(Z), hence has P by hsmall. Extension closure gives P((i_* I')^{⊕ r}); hP_sum gives
-P(i_* I').
-4. For an arbitrary nonzero ideal I'', the intersection I'' ∩ I is nonzero: on a nonempty
-affine open the product of nonzero sections is nonzero since Z is integral. Apply step 3
-to this intersection. The inclusion into I'' is generically an isomorphism, so its coherent
-pushforward cokernel misses ξ and has P by hsmall. Extension closure gives P(i_* I'').
-All ideal modules and their pushforwards are coherent, since the source is locally
-Noetherian and closed pushforward is finite. For the zero ideal its pushforward is zero;
-isomorphism invariance and hP_zero finish.
--/
+with the explicit zero hypothesis needed for the zero ideal. -/
 theorem coherent_property_integral_ideals_of_small_support
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (P : X.Modules → Prop)

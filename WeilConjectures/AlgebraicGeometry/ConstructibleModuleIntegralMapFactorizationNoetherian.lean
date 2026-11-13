@@ -114,23 +114,7 @@ private theorem finitelyPresentable_constructible
 module factors through a finite pushforward of that same constant module.
 
 Source: Stacks Project, Tag 09Z6, final paragraph of the proof of (1), transferred to (3),
-using Tags 09YZ, 09Z1 and 09Z4.
-(blueprint: new-lem-weil-pbc-noetherian-integral-map-factorization).
-
-Proof: A Noetherian scheme is quasi-compact and quasi-separated. Write the integral
-morphism nu as the inverse limit of finite, finitely presented X-schemes with affine
-transition maps (09YZ). The constant sheaves with value M on these schemes pull back
-compatibly to the constant sheaf with value M on Y. Their pullbacks have colimit that
-constant sheaf, since the indexing directed set is nonempty and connected. The relative
-colimit theorem 09Z1 in degree zero identifies the colimit of their finite direct images
-with nu_* M; all these maps are module-linear. Filtered colimits of module sheaves are
-computed on underlying abelian sheaves, so this is also a module-sheaf colimit. The finite
-ring Lambda is Noetherian, and a constructible module sheaf on this qcqs base is finitely
-presented by 09Z4. Thus phi factors through one stage. Take Z and f from that stage, psi
-its factorization, and kappa its colimit injection composed with the above identification.
-The equality psi followed by kappa equals phi is the factorization equality. Empty bases,
-zero modules and zero maps are included, since the approximation has a nonempty index set
-and finite presentability applies to zero objects as well. -/
+using Tags 09YZ, 09Z1 and 09Z4. -/
 theorem exists_finite_lowerStar_factorization_noetherian
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     {X : Scheme.{u}} [IsNoetherian X]

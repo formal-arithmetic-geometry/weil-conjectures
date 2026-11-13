@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafPullbackTranspose
 /-! # Evaluation square for integer-indexed sections
 
 Source: Stacks Project, Tags 015K, 01F9 and 01FA.
-(blueprint: lem-weil-pbc-row-sections-evaluation-square).
 -/
 @[expose] public section
 universe uNatural
@@ -23,23 +22,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Evaluation of the integer Hom complex commutes with pullback and sections.
-Source: Stacks Project, Tags 015K, 01F9 and 01FA.
-(blueprint: lem-weil-pbc-row-sections-evaluation-square).
-
-Proof. Set L = f inverse image and α equal to the inverse constant-sheaf
-comparison. Expand complexSectionsIso in degree n on an arbitrary cochain a.
-The inverse fromSingleEquiv converts it into a morphism from the constant integer
-sheaf into K in degree n. The definition of homPullbackMap sends it to
-fromSingleMk (α;L(fromSingleEquiv a);ψ in degree n). Applying evaluation cancels
-fromSingleMk with fromSingleEquiv. Naturality of the adjunction hom equivalence
-then moves postcomposition by ψ outside sectionsEquiv. The constant-sheaf
-pullback transpose identifies evaluation of α;L(fromSingleEquiv a) with the
-adjunction unit on global sections. Naturality of ΓNatIsoSheafSections and the
-formula for lowerStarCompGlobalSectionsIso identify this unit with ceSectionsUnit.
-Thus both sides have the same value on every degree-n cochain. Extensionality
-of group morphisms and complex maps gives the square. Nothing here uses
-injectivity, a resolution augmentation, or a nonnegative degree. Zero complexes,
-zero maps, negative degrees and empty schemes obey the same component formulas. -/
+Source: Stacks Project, Tags 015K, 01F9 and 01FA. -/
 theorem ceComplexSectionsSquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {K' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}

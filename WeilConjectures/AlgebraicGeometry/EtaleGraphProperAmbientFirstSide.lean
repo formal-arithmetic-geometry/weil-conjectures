@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperAmbientTransportComposition
 /-! # First-side pasting under a proper ambient change
 
 Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, proper-projection grid.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,23 +26,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
   lowerStar openImmersionLowerShriek rightDerivedLowerStarComp
 
-/-- The first side word commutes with the proper change of graph product.
-
-Proof: write r for the induced proper product map, r1 for its pullback to the first
-neighborhood, and d_s,d_t for the projections of these neighborhoods to X. The
-projection equations give d_s r1 = d_t and r p2_s = p2_t, while the graph equations
-give r1 s1_t = s1_s. Stack the Cartesian proper/open square for r1,r over the old
-side square. Its outer rectangle is the new side square. Apply vertical pasting
-of etaleProperOpenExchangeCube and its Cartesian normalization. Insert the inverse
-direct-image compositors for the two graph/projection factorizations of the identity.
-Naturality moves those compositors through the exchanges. Associativity of the
-normalized direct-image compositors identifies both resulting outer factors; the
-identity direct-image comparison is the same on both paths and cancels. This gives
-the displayed equality before considering either the second side or intersection.
-The projection equations and pasting laws also hold for empty schemes and identities.
-
-Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical pasting.
-(auxiliary; not a blueprint node). -/
+/-- The first side word commutes with the proper change of graph product. -/
 theorem etaleGraphProperAmbientFirstSide
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

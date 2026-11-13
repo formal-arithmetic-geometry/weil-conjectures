@@ -26,7 +26,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- Every bounded constructible continuous E complex has a constructible integral model.
 Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node).
 
 Proof in words. On each stratum, locally finite presentations over the continuous E
 coefficient sheaf become locally free after finite refinement. Lemma 6.8.13 gives a

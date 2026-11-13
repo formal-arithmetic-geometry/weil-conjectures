@@ -20,17 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 set_option backward.isDefEq.respectTransparency false in
 /-- A map from the affine limit to an étale X-scheme factors through an affine stage.
 Source: Stacks Project, Limits, Tag 01ZM, morphism descent; Étale Cohomology,
-Tag 0EYL, proof of full faithfulness.
-(blueprint: affine-open-etale-map-factorization).
-
-Proof: The underlying diagram consists of affine schemes, so its terms are qcqs
-and all its transition maps are affine. Its structure maps form a natural transformation
-to the constant scheme X, and hp identifies the induced map on the limit with p.
-The target U is étale over X, hence locally of finite presentation. Apply Mathlib's
-Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation directly to q. It gives
-simultaneously the factorization equation and the equation over X. No quasi-compactness
-or quasi-separatedness assumption on U or X is required. The theorem includes empty
-limits and singleton systems. -/
+Tag 0EYL, proof of full faithfulness. -/
 theorem affineOpenSections_etale_map_factorization
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

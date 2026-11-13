@@ -25,13 +25,7 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Lemma 087X, claim (c) and the eventual kernel calculation,
 under the stabilized-image equality supplied by claims (a)--(b).
-The bound is enlarged to satisfy the Artin--Rees condition for the kernel in the source.
-Proof: enlarge c to an eventual adicness bound. Construct
-K from the explicit shifted quotient system and its proved adicness, and construct its
-map to F by cokernel descent. Identity level isomorphisms give the transition and map
-compatibility equations. Monicity of j and cokernel descent prove kernel vanishing.
-(blueprint: lem-weil-pbc-formal-kernel-quotient-aux).
--/
+The bound is enlarged to satisfy the Artin--Rees condition for the kernel in the source. -/
 theorem coherentFormalModule_kernel_quotient_aux {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

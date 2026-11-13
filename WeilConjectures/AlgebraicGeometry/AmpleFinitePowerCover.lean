@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph;
 Properties, Definition 01PS.
-(blueprint: lem-weil-pbc-ample-finite-common-power-cover).
 -/
 
 @[expose] public section
@@ -29,26 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Ampleness gives finitely many affine section loci in one positive tensor power.
 
 Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph;
-Properties, Definition 01PS.
-(blueprint: lem-weil-pbc-ample-finite-common-power-cover).
-
-Proof:
-1. Choose an affine nonvanishing locus of a positive-degree section through each point,
-   using absolute ampleness. Quasi-compactness gives a finite subcover.
-2. Take the product m of their positive degrees. Raise each section to the quotient
-   m / n of degrees, and transport it by the tensor-power exponent isomorphism.
-   Locally in a rank-one trivialization, its coefficient is raised to a positive power;
-   a coefficient is a unit exactly when that positive power is a unit. Thus the loci
-   remain unchanged and affine, and they still cover.
-3. A global section corresponds to a morphism from the structure module by evaluation
-   at one. For an invertible module its nonvanishing germ locus equals the complement
-   of the support of its zero locus: in a rank-one stalk both say the coefficient is a
-   unit. Use this identification to express the cover in the source library's convention.
-4. Add a degree-one zero section to the finite subcover, giving a nonempty family
-   indexed by Option of the finite index type. Its empty affine locus leaves the cover
-   unchanged. This also handles an empty scheme and an empty subcover: the product
-   degree is one and the zero section covers the empty scheme. Enumerate the resulting
-   common-degree family by ULift (Fin (r + 1)). -/
+Properties, Definition 01PS. -/
 theorem IsAmple.exists_finite_common_power_cover (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible] (hL : IsAmple X L) :
     ∃ (m : ℕ) (_ : 0 < m) (r : ℕ)

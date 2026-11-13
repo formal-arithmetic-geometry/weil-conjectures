@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorBalancingUnique
 /-! # Universal property of the change-of-rings balancing map
 
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-balancing-universal).
 -/
 
 @[expose] public section
@@ -34,26 +33,7 @@ local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 
 /-- Maps out of change of rings are exactly maps equalizing the two algebra actions.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property).
-(blueprint: lem-weil-pbc-change-of-rings-tensor-balancing-universal).
-
-Proof: precompose f with the tensor presheaf sheafification unit. Its sectionwise
-bilinear map h(c,p) = f(c tensor p) satisfies h(c,bp) = h(φ(b)c,p), by the
-assumed equality of the action composites evaluated on b tensor (c tensor p).
-The universal property of the sectionwise B-tensor product therefore factors h
-uniquely through C tensor_B P as an O-linear map. These maps commute with
-restrictions, since both composites do so and pure tensors generate. A target
-O-module Q need not have a C-action: sheafification here is applied to the
-underlying O-module presheaf of C tensor_B P. Restricting the C-module
-sheafification to O identifies it with that O-module sheafification, by the
-universal property (or by the common associated additive sheaf and induced
-scalar action). Extend the sectionwise map to T using this identification.
-The formula for g and uniqueness of sheafification show g ≫ t = f.
-For uniqueness, if g ≫ t' = f, the two maps from the presheaf C tensor_B P
-agree on every c tensor_B p by the formula for g. Pure tensors generate, so
-they agree as presheaf maps. The sheafification universal property gives t'=t.
-This works for zero modules and empty opens, and requires no quasi-coherence.
--/
+Sheaves, Lemma 0089 (sheafification universal property). -/
 theorem changeOfRings_tensor_balancing_universal (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

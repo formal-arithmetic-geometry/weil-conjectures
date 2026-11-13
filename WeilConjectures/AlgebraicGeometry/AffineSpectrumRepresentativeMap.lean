@@ -17,7 +17,6 @@ import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSqua
 /-! # Chain-map transport for affine spectrum representatives
 
 Source: Stacks Project, Tags 0DJ8 and 0D5S.
-(blueprint: lem-pc-affine-spectrum-representative-map).
 -/
 
 @[expose] public section
@@ -94,26 +93,7 @@ private theorem counit_naturality_complex
   rw [Functor.mapHomotopyCategory_map] at h
   exact h
 
-/-- Canonical representative identifications transport the coefficient chain map.
-
-Proof: Set j=X.isoSpec.inv and j'=X'.isoSpec.inv. Naturality of isoSpec gives
-(Spec.map g'.appTop) ≫ j = j' ≫ g'. The conjugates of pushforward composition
-under the pinned tensor-pullback adjunctions give the underived composition
-isomorphisms. Map these to complexes and combine them with the equality of
-composite scheme maps to obtain an isomorphism from (Spec.map g'.appTop)*j*P
-to j'*(g'*P). Compose its hom with j'*c.t to obtain t. The two assumptions on
-e and e' say precisely that their inverses are the derived images of c.e.inv
-and c.e'.inv followed by the pinned counits, with the quotient/localization
-comparison isomorphisms inserted. Naturality of those comparisons and of the
-counits, the leftDerivedLift factorization equations defining the two derived
-composition comparisons, and c.represents identify Q(t) with the transported
-coefficient. Cancel the invertible e and e' to obtain the displayed equation.
-This construction uses no arbitrary lift of a morphism into the derived
-category, no K-injectivity of N, and no quasi-coherence. Zero complexes and
-empty schemes obey the same composition equations.
-Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S, composition of
-pullbacks and compatibility of the derived counits.
-(blueprint: lem-pc-affine-spectrum-representative-map). -/
+/-- Canonical representative identifications transport the coefficient chain map. -/
 private theorem affineSpectrum_representative_map_eq_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -217,26 +197,7 @@ private theorem counit_naturality_complex_restored
   rw [Functor.mapHomotopyCategory_map] at h
   exact h
 
-/-- Canonical representative identifications transport the coefficient chain map.
-
-Proof: Set j=X.isoSpec.inv and j'=X'.isoSpec.inv. Naturality of isoSpec gives
-(Spec.map g'.appTop) ≫ j = j' ≫ g'. The conjugates of pushforward composition
-under the pinned tensor-pullback adjunctions give the underived composition
-isomorphisms. Map these to complexes and combine them with the equality of
-composite scheme maps to obtain an isomorphism from (Spec.map g'.appTop)*j*P
-to j'*(g'*P). Compose its hom with j'*c.t to obtain t. The two assumptions on
-e and e' say precisely that their inverses are the derived images of c.e.inv
-and c.e'.inv followed by the pinned counits, with the quotient/localization
-comparison isomorphisms inserted. Naturality of those comparisons and of the
-counits, the leftDerivedLift factorization equations defining the two derived
-composition comparisons, and c.represents identify Q(t) with the transported
-coefficient. Cancel the invertible e and e' to obtain the displayed equation.
-This construction uses no arbitrary lift of a morphism into the derived
-category, no K-injectivity of N, and no quasi-coherence. Zero complexes and
-empty schemes obey the same composition equations.
-Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S, composition of
-pullbacks and compatibility of the derived counits.
-(blueprint: lem-pc-affine-spectrum-representative-map). -/
+/-- Canonical representative identifications transport the coefficient chain map. -/
 theorem affineSpectrum_representative_map_eq
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

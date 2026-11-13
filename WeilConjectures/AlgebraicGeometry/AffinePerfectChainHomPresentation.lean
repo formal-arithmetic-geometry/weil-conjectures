@@ -24,7 +24,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectChainGeometricModels
 
 Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation, using Tags
 08EB and 06Z0 for the models and Tag 08DW for pullback.
-(blueprint: lem-pc-affine-perfect-chain-hom-presentation).
 -/
 
 @[expose] public section
@@ -35,23 +34,7 @@ namespace AlgebraicGeometry
 
 /-- Affine perfect Hom models with geometric compatibility checked on chain maps.
 Source: Stacks Project, perfect.tex, Tag 09RE (affine calculation), Tags 08EB,
-06Z0 and 08DW.
-(blueprint: lem-pc-affine-perfect-chain-hom-presentation).
-
-Proof: Write Y as Spec of its global sections B and form the tensor-extension
-ring diagram B tensor over R(i) with R(j). Tensor extension preserves the
-colimit and identifies its spectra with the given pullbacks. Transport the
-perfect objects to Spec B and apply the affine bounded-projective criterion
-separately to obtain E and K. Flatness of their projective terms computes all
-pullbacks by termwise scalar extension. The affine quasi-coherent derived
-equivalence supplies the Hom equivalences at each stage and at the limit.
-Take H to be the module-derived Hom diagram, with its extension-of-scalars
-cocone. The scalar-extension associators give its equations on chain maps.
-Naturality of the tilde pullback comparison and the counit-pinned composition
-comparison identify the geometric transports on these chain maps. This lemma
-only asks for that chain-level comparison; passage to arbitrary derived
-morphisms is proved separately by K-projective localization. The zero ring
-causes no exception, and the tail has its initial object i. -/
+06Z0 and 08DW. -/
 theorem exists_affinePerfectChainHomPresentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

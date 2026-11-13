@@ -333,24 +333,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 /-- Coherent sections giving the ordinary scalar-extension copower, with exact extension.
 Source: Compatibility.lean, `continuousBasisSheafIso`, `isIso_basisAdjUnitDesc`, and
 `preservesFiniteLimits_extendScalars_of_flat`; FiniteSubextension.lean, the sectionwise
-finite-subextension model.
-
-Proof: choose a small algebraic `E`-basis of `PadicAlgCl ℓ`. A finite-subextension-valued
-section has values in an `E`-span of finite dimension (take the compositum with `E`), so
-only finitely many basis coordinates occur. Each coordinate is continuous: restrict it to
-this finite-dimensional span and apply finite-dimensional linear topology over `ℚ_[ℓ]`.
-Conversely a finite sum of continuous `E`-valued coordinates times basis vectors takes
-values in a finite subextension and is continuous. These inverse maps, natural on profinite
-sets, exhibit the restricted regular coefficient module as the basis-indexed coproduct of
-regular `E`-modules. Pull this decomposition to `Z` using the colimit-preserving monoidal
-point inverse image. Its monoidal composition comparison proves coherence of the pulled-back
-basis sections. Tensoring the regular-module coproduct with `N` preserves it, and the
-extension-unit/scalar-action calculation identifies its legs with the displayed maps.
-The regular module is flat; coproducts of flat modules are flat. Thus the restricted
-regular closure module is flat, and `extendForgetTensorIso`, with reflection by the exact
-forgetful functor, proves the finite-limit-preservation clause. This construction is entirely
-in ordinary internal modules; no derived unit decomposition is assumed.
-(auxiliary; not a blueprint node) -/
+finite-subextension model. -/
 theorem exists_condensedQbar_scalar_basis_sections :
     ∃ (I : Type (u + 1))
       (b : ∀ Z : Scheme.{u}, I →

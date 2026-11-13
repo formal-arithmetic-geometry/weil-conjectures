@@ -24,21 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 namespace AlgebraicGeometry.ProEtale
 /-- Restrict derived comparison to bounded constructible objects.
-Source: blueprint constructible-comparison-equivalence, part (2), Stacks Tag 09AL
-(auxiliary; not a blueprint node).
-
-Proof: the cohomology comparison and the module constructibility test show that
-derived inverse image preserves constructible cohomology. Its zero preservation
-preserves the stated finite cohomological interval. Lift to the full subcategories.
-Bounded classical full faithfulness supplies injectivity and surjectivity on all
-morphisms. For essential surjectivity, a bounded constructible target has continuous
-cohomology by classicality of each constructible cohomology module. Bounded
-classical descent gives a derived antecedent. Cohomology comparison identifies its
-cohomology images with the given constructible cohomology modules. Reflection of
-module constructibility makes the antecedent constructible. Full faithfulness of
-module inverse image reflects zero objects, so its cohomology vanishes outside the
-same interval; hence the antecedent is bounded. The equivalence therefore has the
-lifted canonical functor as its actual forward functor. -/
+Source: blueprint constructible-comparison-equivalence, part (2), Stacks Tag 09AL. -/
 theorem constructibleComparison_boundedRestriction (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X]

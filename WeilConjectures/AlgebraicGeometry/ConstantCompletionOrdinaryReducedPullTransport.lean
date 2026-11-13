@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPullTr
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL, 093M;
 sites-cohomology.tex, Tag 06YY.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -34,15 +33,7 @@ ordinary finite-module functor, and the comparison is the map induced by that tr
 The transport is assembled from the sectionwise quotient identifications, the normalized
 finite pullback comparison, and the coefficient-map projection equation; on pure tensors
 all three maps send `1 ⊗ m` to the same class.  This is the ordinary (underived) part of
-the common-quotient insertion argument.
-Proof: identify both finite-reduced sides with the same finite-module functor using the
-sectionwise adic quotient and normalized pullback isomorphisms.  The projection equation
-for the coefficient map makes these identifications natural, and the defining insertion
-equation for `ordinaryPullComparison` gives the displayed equality.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL, 093M;
-sites-cohomology.tex, Tag 06YY.
-(auxiliary; not a blueprint node).
--/
+the common-quotient insertion argument. -/
 theorem ordinaryReducedPull_transport
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

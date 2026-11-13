@@ -20,7 +20,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 /-! # Pullback cohomology on a locus with one locally free cohomology sheaf
 
 Source: the cohomology-sheaf gluing argument in the proof of the perfect-locus lemma,
-and Stacks Project, Tag 0B9S (blueprint: lem-pc-derived-pullback-single-cohomology).
+and Stacks Project, Tag 0B9S.
 -/
 
 @[expose] public section
@@ -37,16 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, Tags 06YD and 06YJ; the shifted-single specialization of
 lem-pc-flat-complex-derived-pullback.
-This is the flat-single step of (blueprint: lem-pc-derived-pullback-single-cohomology).
-
-Proof: the single complex on M in degree n is bounded above by n. Its only nonzero
-term is M, which is flat, and its other terms are zero and flat. Apply the bounded-above
-flat-complex comparison to obtain its derived pullback by termwise tensor pullback.
-Termwise pullback of the single complex is the single complex on tensor pullback of M.
-The adjunction characterizes tensor pullback and ordinary pullback as left adjoints to
-the same pushforward, giving their natural isomorphism. Applying the localization and
-the single-functor comparison yields the displayed isomorphism. This also covers the
-zero sheaf, an empty scheme, and every integer degree. -/
+This is the flat-single step of. -/
 private theorem nonempty_derivedPullback_flat_single_iso
     {T T' : Scheme.{u}} (g : T' ⟶ T)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]
@@ -99,21 +90,7 @@ private theorem nonempty_derivedPullback_flat_single_iso
 nonnegative degree only, derived pullback cohomology is ordinary pullback cohomology.
 
 Source: blueprint lem-pc-perfect-locus, proof, cohomology-sheaf gluing paragraph and
-termwise pullback paragraph; Stacks Project, Tag 0B9S and its perfect-locus input.
-(blueprint: lem-pc-derived-pullback-single-cohomology).
-
-Proof: let W be the union of the neighbourhoods in the hypothesis. On each such
-neighbourhood all integer cohomology except degree i vanishes: negative degrees vanish
-by connectivity and restriction is exact, and nonnegative degrees by the given condition.
-The standard truncation maps therefore identify E on that neighbourhood with H^i(E)
-placed in degree i. These identifications are canonical through truncation and agree on
-overlaps, giving the same identification on W. The local finite freeness makes H^i(E)|W
-flat, so its shifted single complex computes its derived pullback by ordinary pullback.
-The morphism g factors through W since its entire image is in W. Apply derived pullback
-composition to this factorization, then take degree-i cohomology. Exactness of open
-restriction and the ordinary pullback composition identification give the claimed global
-isomorphism. No common rank for the neighbourhoods is required. Empty image and rank
-zero are included: all constructions restrict and glue also on the empty open. -/
+termwise pullback paragraph; Stacks Project, Tag 0B9S and its perfect-locus input. -/
 theorem nonempty_homology_derivedPullback_iso_of_locally_single
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionBasic
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionFiniteSystemProperties
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionProjectionKernel
 /-! Projection quotient component of constant coefficient completion.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node).
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 093M.
 The sectionwise adic algebra limit argument identifies each original completion
 projection with the quotient by the extended power of the coefficient ideal. -/
 @[expose] public noncomputable section

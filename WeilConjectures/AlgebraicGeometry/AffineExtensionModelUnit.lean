@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-! # Scalar-extension unit on affine models
 
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-extension-model-unit).
 -/
 
 @[expose] public section
@@ -36,18 +35,7 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- K-flat extension models respect the extension adjunction unit.
-Source: Stacks Project, perfect.tex, Tags 08DW(2) and 0AA7.
-(blueprint: new-affine-extension-model-unit).
-Proof: The ordinary tilde unit identifies X with M, so X is K-flat. Affine
-acyclicity makes its sections comparison invertible, including for unbounded
-complexes. Let s be the inverse of that comparison. The standard left-derived
-extension is left adjoint to exact restriction. Identify the fixed extension
-adjunction with this standard adjunction by the unit-compatible uniqueness
-isomorphism. Its K-flat counit at X is invertible. Composing the extension
-of s, the uniqueness isomorphism, and this counit gives a. The formula for
-the derived adjunction unit, followed by the exact restriction comparison,
-gives the displayed identity. Naturality of the unit moves s to the left.
-All assertions also hold for the zero ring and the zero complex. -/
+Source: Stacks Project, perfect.tex, Tags 08DW(2) and 0AA7. -/
 theorem exists_affineExtension_model_unit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     [(@id (ModuleCat.{u} R ⥤

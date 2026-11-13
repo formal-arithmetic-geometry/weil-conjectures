@@ -201,24 +201,7 @@ private theorem cech_map_of_transport
 set_option linter.unusedVariables false in
 /-- The prescribed tuple maps commute with the Čech differential.
 Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed Čech
-comparison, and Tag 03AM for the alternating differential.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-differential).
-
-Proof: Fix a coordinate deletion. The two maps between the initial products
-are determined by the retained projections. Apply the base-change functors.
-The identities hNj and hNlim identify these maps with the stage and cone-point
-nerve maps. For gamma and delta, their first-projection identities identify
-the two ways to transport each nerve map: compare first projections to W0,
-and use the structural morphism for the second pullback projection. Pullback
-uniqueness gives equality. Naturality of the adjunction unit, phi, eG.inv,
-and the leg of L now makes the prescribed section map commute with this face.
-The maps eNj and eNlim are isomorphisms, so their presheaf images can be
-cancelled. Product extensionality proves commutation with the coface map.
-Summing with signs proves commutation with d n (n+1). For any other pair the
-shape-up differential is zero, so the equation follows from zero composition.
-The proof uses no coefficient identity/composition law or cocone equation hG.
-For empty K all tuple sets are empty and product extensionality is vacuous.
--/
+comparison, and Tag 03AM for the alternating differential. -/
 theorem etale_limit_finite_cech_coefficient_differential
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

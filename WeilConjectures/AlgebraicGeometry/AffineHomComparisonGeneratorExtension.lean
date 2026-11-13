@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.AffineHomComparisonGeneratorExistence
 
 /-! # Extending the affine Hom comparison from its global generators
 
-Source: Stacks Project, Tag 01I7 and Tag 01HV (4)-(5).
-(blueprint: lem-sc-k4-affine-hom-generator-extension). -/
+Source: Stacks Project, Tag 01I7 and Tag 01HV (4)-(5). -/
 
 @[expose] public section
 
@@ -89,20 +88,7 @@ private theorem hom_ext_of_elements {A : Type u} [CommRing A]
   simpa [affineHomElement] using hy
 
 /-- The images of global linear maps extend uniquely to the affine Hom comparison.
-Source: Stacks Project, Tag 01I7, the mapping property, and Tag 01HV (4)-(5).
-(blueprint: lem-sc-k4-affine-hom-generator-extension).
-
-Proof: Work first on Spec A. The assignment h to the sheaf morphism tilde(h) is
-A-linear. By the tilde/global-sections adjunction, this linear map into the global
-sections of internal Hom extends uniquely to a morphism from tilde(Hom_A(M,N)).
-Equivalently, on D(a), it sends h/a^r to the map taking m/a^s to h(m)/a^(r+s).
-Localization makes this well defined and the maps compatible with restriction.
-Transport the map along isoSpec. Its values on the displayed generators are the
-specified global sections. For uniqueness, the generators give every global
-section of the associated source, since the tilde adjunction unit is invertible;
-localization then determines the map on every principal open. No finiteness of M
-or quasi-coherence of internal Hom is required. The zero ring and zero modules
-are covered by the same adjunction and localization construction. -/
+Source: Stacks Project, Tag 01I7, the mapping property, and Tag 01HV (4)-(5). -/
 theorem existsUnique_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) :
     ∃! c : (affineHomComparisonFunctor U).obj (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) ⟶

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # The ordinary affine model comparison
 
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: new-affine-extension-sections-underived-model).
 -/
 
 @[expose] public section
@@ -27,16 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry
 -- Affine functor identifications need to unfold the scheme module carrier.
 /-- The affine extension/sections comparison on associated sheaves, with its unit equation.
-Source: Stacks Project, Schemes, Tag 01I9, and perfect.tex, Tag 0AA7.
-(blueprint: new-affine-extension-sections-underived-model).
-Proof: Compose the tilde/sections adjunction with tensor pullback/direct image.
-The comparison v identifies its right adjoint with B-sections followed by restriction
-of scalars.
-The same right adjoint belongs to extension of scalars followed by B-tilde.
-Uniqueness of left adjoints supplies the tilde/pullback comparison with its unit
-formula. Apply B-sections and cancel the invertible tilde/sections units over R and B.
-The result is c, and the unit formula gives the displayed equality. The computation
-works for zero rings and zero modules and does not require the ring map to be flat. -/
+Source: Stacks Project, Schemes, Tag 01I9, and perfect.tex, Tag 0AA7. -/
 theorem exists_affineExtensionSections_underived_model
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

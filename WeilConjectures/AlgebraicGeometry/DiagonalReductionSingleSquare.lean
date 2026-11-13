@@ -23,8 +23,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 attribute [local implicit_reducible] HomotopyCategory.singleFunctors
 
 /-- Termwise application preserves finite limits, since it preserves each finite
-limit shape pointwise. Source: Mathlib pointwise functor limits.
-(blueprint: lem-diagonal-exact-whiskering). -/
+limit shape pointwise. Source: Mathlib pointwise functor limits. -/
 instance diagonalReductionWhiskering_preservesFiniteLimits
     {B D : Type*} [Category B] [Category D] [HasFiniteLimits B]
     (G : B ⥤ D) [PreservesFiniteLimits G] :
@@ -32,8 +31,7 @@ instance diagonalReductionWhiskering_preservesFiniteLimits
   preservesFiniteLimits _ _ _ := inferInstance
 
 /-- Termwise application preserves finite colimits, since it preserves each finite
-colimit shape pointwise. Source: Mathlib pointwise functor colimits.
-(blueprint: lem-diagonal-exact-whiskering). -/
+colimit shape pointwise. Source: Mathlib pointwise functor colimits. -/
 instance diagonalReductionWhiskering_preservesFiniteColimits
     {B D : Type*} [Category B] [Category D] [HasFiniteColimits B]
     (G : B ⥤ D) [PreservesFiniteColimits G] :
@@ -44,16 +42,7 @@ instance diagonalReductionWhiskering_preservesFiniteColimits
 /-- A comparison of reduction counits on a single complex gives its degree-zero square.
 
 Source: blueprint latest, diagonal coefficient changes (3), reduction of the supported
-integral source.
-(blueprint: lem-diagonal-reduction-single-square).
-
-Proof: expand the two single counits and the exact inverse-image single comparison.
-Use the supplied counit square on the single complex. Naturality of the second
-counit moves the cochain single comparison across it; naturality of the exact
-localization comparison does the same on the first side. The remaining identity
-is an identity of cochain maps: in degree zero it is naturality of the ordinary
-square, and in every other degree its source is zero. No isomorphism of a reduction
-counit or detection by finite evaluation is needed. -/
+integral source. -/
 theorem diagonalReduction_single_square
     {A B C D : Type*}
     [Category A] [Abelian A] [Category B] [Abelian B]

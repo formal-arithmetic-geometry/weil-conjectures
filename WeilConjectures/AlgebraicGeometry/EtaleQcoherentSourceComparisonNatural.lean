@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 /-! # Natural comparison of lifted tensor-sheaf cohomology with ordinary H
 
 Source: Stacks Project, Tags 03P2 and 03FD.
-(blueprint: lem-sc-etale-qcoherent-source-comparison-natural)
 -/
 
 @[expose] public section
@@ -29,16 +28,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Compose the natural coefficient, etale/Zariski and module/abelian comparisons.
-Source: Stacks Project, Tags 03P2 and 03FD.
-(blueprint: lem-sc-etale-qcoherent-source-comparison-natural)
-
-Proof: Choose the etale/Zariski comparison and its module-map family m.
-For the fixed F and q, compose the coefficient-lift comparison, the inverse
-etale/Zariski comparison, and the source ordinary-H comparison. The inverse
-etale/Zariski square follows by applying its forward equivalence and cancelling.
-Substitute the three naturality identities in this composite. The resulting
-square is natural for every module endomorphism phi. The map m has the section
-components stated in etale_zariski_qcoh_comparison. -/
+Source: Stacks Project, Tags 03P2 and 03FD. -/
 theorem exists_etaleTensorSectionsSheaf_source_comparison_natural
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) :

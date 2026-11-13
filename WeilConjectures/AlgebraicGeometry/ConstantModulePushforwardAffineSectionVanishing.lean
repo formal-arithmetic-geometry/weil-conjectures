@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 /-! # Constant-module section vanishing at an inverse limit
 
 Source: Stacks Project, Tags 09Z1 and 09YQ, degree-zero continuity.
-(blueprint: lem-weil-pbc-constant-module-affine-section-vanishing).
 -/
 
 @[expose] public section
@@ -35,27 +34,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- A section on an affine etale test scheme which vanishes at the limit already
 vanishes at a later stage. This assertion concerns sections, not geometric germs.
 
-Source: Stacks Project, Tag 09Z1, degree-zero injectivity, using Tag 09YQ.
-(blueprint: lem-weil-pbc-constant-module-affine-section-vanishing).
-
-Proof: Form the system E_j = U times_X D_j over U and its cone with vertex
-U times_X Y. Pullback preserves this limit because I is cofiltered and hence
-connected. The transition maps remain affine. Since U is affine and the structure
-maps p_j are qcqs, every E_j is qcqs. Forget the coefficients to abelian groups.
-The underlying abelian sheaf of a constant module sheaf is the constant underlying
-abelian sheaf: the forgetful functor preserves colimits and finite limits and thus
-commutes with sheafification. Identify these constant sheaves with the pullbacks
-of the constant abelian sheaf G on U. The canonical comparison maps agree with
-unitComparison under these identifications, by naturality of the constant-sheaf
-pullback comparison with the adjunction unit and the pushforward composition
-comparison. Apply exists_unitComparison_app_eq_zero_of_isLimit to E over U and
-the terminal etale object of U. Its hypotheses hold since affine U is
-quasi-separated and E_j are qcqs. This gives an arrow g:j -> i where the
-restricted underlying abelian section is zero. Faithfulness of coefficient
-forgetting reflects this equality as an equality of module sections.
-No directed reindexing is needed: the section-continuity theorem already accepts
-any small cofiltered category. Zero modules and empty fibre products satisfy the
-same argument. -/
+Source: Stacks Project, Tag 09Z1, degree-zero injectivity, using Tag 09YQ. -/
 theorem exists_constantModulePushforward_affine_section_eq_zero
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

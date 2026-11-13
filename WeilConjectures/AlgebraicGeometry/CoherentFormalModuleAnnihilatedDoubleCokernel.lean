@@ -128,7 +128,7 @@ private theorem product_zero_on_affine_cover {X : Scheme.{u}} {J : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An intermediate cokernel-annihilation component of the affine-cover reduction.
-Source: Stacks, Remark 0888 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power-cokernel).
+Source: Stacks, Remark 0888.
 The proof is the corresponding kernel/cokernel half of the finite affine-cover
 argument. The finite affine cover is reduced modulo each power of the ideal, the
 commutative-algebra annihilation lemma is applied, and local annihilation is glued

@@ -31,7 +31,6 @@ namespace Algebra
 
 Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1), paragraphs
 beginning "Let N" and "Applying condition (4)" (https://stacks.math.columbia.edu/tag/02HT).
-(blueprint: lem-weil-pbc-artinian-lifting-truncated-section).
 
 Proof in words:
 Write C = P.Ring, S = A_q, J = P.ker, m = maximalIdeal C, and n = maximalIdeal S.

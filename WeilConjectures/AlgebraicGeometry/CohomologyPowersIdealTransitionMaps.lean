@@ -49,17 +49,7 @@ private theorem product_inclusion {X : Scheme.{v}} {P Q : X.Modules}
   exact (image.map_ι (Arrow.homMk' (u ▷ F) (𝟙 F) hs)).trans (Category.comp_id _)
 
 /-- Transition maps for ideal powers on any scheme and any module.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, inverse-system setup.
-(blueprint: lem-weil-pbc-cohomology-powers-ideal-application-transition-maps)
-
-Proof: The recursive definition of ideal powers gives the inclusion of power k+1 into
-power k: at k = 0 this is J -> O_X, and at positive k it is the image inclusion
-J J^k -> J^k. Compose these to get J^k -> J^n over O_X for n <= k; for equal degrees
-use the identity. Tensor this map with F. The resulting square of multiplication maps
-has identity right edge on F. Mathlib's image.map gives J^k F -> J^n F, and image.map_ι
-proves its composite with the inclusion into F is the original inclusion. Choose this
-proved factorization separately for every k,n,h. No geometric finiteness hypothesis is
-used and no data is chosen from an unproved existence theorem. -/
+Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, inverse-system setup. -/
 theorem cohomology_powers_ideal_transition_maps
     {X : Scheme.{v}} (J : X.IdealSheafData) (F : X.Modules) :
     ∃ i : ∀ (k n : ℕ), n ≤ k →

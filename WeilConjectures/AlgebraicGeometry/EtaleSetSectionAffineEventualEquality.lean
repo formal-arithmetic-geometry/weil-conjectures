@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Eventual equality on an affine étale object
-Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.
-(blueprint: lem-weil-pbc-sets-section-affine-eventual-equality). -/
+Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN. -/
 
 @[expose] public section
 
@@ -24,20 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Tag 09YQ, affine case of the degree-zero argument using
-Tags 0EYL, 04HR and 09YN.
-(blueprint: lem-weil-pbc-sets-section-affine-eventual-equality).
-Proof: restrict the inverse system to the upper tail of i₀, which is cofinal, and move
-j and k to a common stage. Affine transition maps and affine limit projections preserve
-objects of the affine étale site. Apply the affine-site colimit presentation (0EYL).
-Transport the sheaf and its pullbacks through the full/affine restriction equivalences
-(04HR). The unit equations in the affine inverse-image comparison identify the stage
-section maps with the specified comparisons. At the limit, composition identifies the
-pulled-back system with a constant system; its colimit is the limit inverse image.
-The section theorem 09YN identifies its sections on the base change of W₀ with the
-filtered colimit of the stage sections. The assumed equality therefore identifies two
-representatives in that filtered colimit. The filtered-colimit equality criterion gives
-a later stage and arrows where they agree. The comparison composition laws identify
-these maps with the two maps displayed below. No finite-cover descent is used here. -/
+Tags 0EYL, 04HR and 09YN. -/
 theorem etaleSetSectionAffineEventualEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

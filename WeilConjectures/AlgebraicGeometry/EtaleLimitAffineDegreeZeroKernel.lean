@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Limits
 /-! # The degree-zero affine continuity kernel
 
 Source: Stacks Project, Tags 09YQ, 09YP, 09YN and 0739.
-(blueprint: lem-weil-pbc-etale-limit-affine-degree-zero-kernel).
 -/
 
 @[expose] public section
@@ -64,30 +63,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Detection of zero for degree-zero affine-stage cohomology.
 
 Source: Stacks Project, Tag 09YP, degree-zero case, using Sites Tag 09YN;
-affine étale reduction in Tags 09YQ, 0EYL and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-affine-degree-zero-kernel).
-
-Proof: Restrict to the cofinal upper tail of i. Present the affine étale sites
-by the strictified colimit of 0EYL. Restriction from the small étale site is
-an equivalence by 04HR. Both direct images evaluate on the same cartesian
-base changes of affine objects. The resulting right-adjoint comparison induces
-an inverse-image comparison compatible with adjunction units. Uniqueness of
-this comparison gives its identity and composition coherence. Transport F, φ,
-G and the colimit cocone L through these equivalences; equivalences preserve
-colimits. The identity object of the affine scheme at i and its base changes
-are terminal. The section comparison of 09YN at this object identifies the
-limit sections with the filtered colimit of the stage sections. Degree-zero
-Ext is sections via H.equiv₀; the cohomology pullback formula is the adjunction
-unit, so the specified maps are exactly these section comparison maps.
-A representative whose limit section is zero equals the zero representative
-in this filtered colimit. Finite-stage detection of equality therefore gives
-a later stage at which its transition is zero. The tail inclusion supplies the
-arrow i → j in the original index category.
-
-Edge cases: zero coefficients and the empty affine scheme have zero sections;
-for a singleton index both comparisons are equivalences. No higher-degree
-continuity or negative cohomology is used.
--/
+affine étale reduction in Tags 09YQ, 0EYL and 04HR. -/
 theorem etale_limit_affine_degree_zero_kernel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

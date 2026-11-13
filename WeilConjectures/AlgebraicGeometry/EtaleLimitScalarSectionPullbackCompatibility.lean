@@ -42,21 +42,7 @@ private theorem section_unit_comp
 
 /-- The normalized unit sections commute with the prescribed sheaf transitions.
 Source: Stacks Project, Sites Tags 03CB and 03CC, adjunction unit naturality
-and composition, used in the degree-zero proof of Etale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-scalar-section-pullback-compatibility).
-
-Proof: Cancel the comparison isomorphisms eG on both sides and substitute hG.
-Naturality moves the transition morphism phi across the projection unit.
-The unit form of upperStarComp identifies the two successive units with the
-unit for their composite, followed by the pullback composition comparison.
-Evaluate this equation at Tj j. Naturality of the section restrictions moves
-these comparisons across gamma and delta. Both resulting maps from the
-iterated pullback to Tlim have the same first projection by the hypotheses;
-they have the same second projection by their equations over the base and
-cone naturality. Pullback uniqueness identifies them. This gives the stated
-commuting square after restoring eG. No limit, compactness, filteredness or
-sheaf colimit assertion is used. Empty objects and zero coefficients obey the
-same morphism equations. -/
+and composition, used in the degree-zero proof of Etale Cohomology Tag 09YQ. -/
 theorem etale_limit_scalar_section_pullback_compatibility
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

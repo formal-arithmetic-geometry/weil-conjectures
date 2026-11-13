@@ -73,23 +73,7 @@ attribute [local irreducible] adicFiniteStrictReductionLevel
 /-- The strict ordinary quotient tower on a K-flat representative computes the normalized
 finite reductions, with all successor maps retained.
 
-Source: Stacks Project, Tag 06YY (derived tensor products) and Tag 099M
-(auxiliary; not a blueprint node).
-
-Proof: apply the scalar-extension comparison to P at every positive quotient, then
-apply the exact restriction comparison resFactors. These are invertible on P because
-P is K-flat. Their inverses give isomorphisms from the localized ordinary reductions
-to the derived reductions. The formula for adicFiniteUnit inserts 1 on the second
-scalar extension, the formula for adicFiniteExtendComp multiplies the scalar factors,
-and adicFiniteDresComp is the identity on underlying sections. Their composite on a
-pure tensor s tensor p is therefore the tensor of the quotient of s with p. The
-uniqueness clause of reductionStep identifies this with its strict successor map.
-The comparisons thus assemble using NatIso.ofComponents and naturality for successor
-arrows. Finally transport by e: the units and composition comparisons are natural,
-so the levelwise images of e commute with the successor maps. No limit, completion,
-completeness or Tor bound is involved. For J=0 this is the constant tensor comparison;
-for J=A both sides are zero. The same computation applies to the zero complex and
-on the empty scheme. -/
+Source: Stacks Project, Tag 06YY (derived tensor products) and Tag 099M. -/
 private theorem adicFiniteStrictReduction_comparison
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))
@@ -106,25 +90,8 @@ private theorem adicFiniteStrictReduction_comparison
     (adicFiniteStrictReduction_successor X A J P hP hflat N e)⟩
 
 /-- Completion is a derived limit of the actual normalized finite reductions.
-Source: Stacks Project, proetale.tex, Tag 099M (lemma-naive-completion),
-and sites-cohomology.tex, Tags 0940 and 0947.
-(auxiliary; not a blueprint node).
-
-Proof: Choose a flat-term K-flat representative P of N. The comparison of the
-universal scalar extension with ordinary change of rings identifies the nth
-underlying reduction with Q of P tensor A/J^(n+1). On pure tensors the ordinary
-scalar unit inserts 1, reassociation multiplies the two scalar factors, and
-restriction composition is the identity. Thus their composite is exactly the
-quotient map on the second tensor factor. The uniqueness clauses specifying
-adicFiniteUnit, adicFiniteRho and adicFiniteDresComp identify the whole strict
-tower, including every successor map, with the strict reduction tower used in
-quotientPresentation. Exact countable products on the pro-etale site, transported
-to its coefficient-sized equivalent, identify total right derived strict limit
-with its Roos triangle. Transport that triangle along the levelwise normalized
-isomorphisms. Its first object is completion N by the definition of completion.
-This establishes both the product and the asserted derived-limit property.
-Neither completeness of N nor a Tor bound is used. For J=0 the tower is constant;
-for J=A it is zero. Empty schemes and zero complexes give zero triangles. -/
+Source: Stacks Project, proetale.tex, Tag 099M,
+and sites-cohomology.tex, Tags 0940 and 0947. -/
 theorem adicFiniteCompletion_tower
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) :

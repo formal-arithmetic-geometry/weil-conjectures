@@ -12,7 +12,6 @@ public import Mathlib.Topology.Sets.Closeds
 /-! # Support of direct image with closed ambient support
 
 Source: Stacks Project, Lemma 0CYJ, proof.
-(blueprint: new-closed-support-pushforward-support)
 -/
 
 @[expose] public section
@@ -22,14 +21,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Direct image has support inside the given closed ambient support.
-Source: Stacks Project, Lemma 0CYJ, proof (vanishing on the complement).
-(blueprint: new-closed-support-pushforward-support)
-
-Proof: At a point outside T, shrink each representative of a direct-image stalk
-section to the complement of T. Its sections are sections of F on the inverse image.
-Every stalk there is zero by the support hypothesis; the sheaf section extensionality
-lemma makes each such section zero. Every germ at the original point is therefore zero.
-This also covers empty schemes, empty supports and zero modules. -/
+Source: Stacks Project, Lemma 0CYJ, proof (vanishing on the complement). -/
 theorem pushforward_support_subset_of_closed_support
     {Y X : Scheme.{u}} (j : Y ⟶ X) (F : Y.Modules)
     (T : TopologicalSpace.Closeds X)

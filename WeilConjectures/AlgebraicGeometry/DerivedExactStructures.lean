@@ -18,8 +18,7 @@ already proved exact shift of derivedPullback, the canonical exact tensor
 shifts, and the right-adjoint shifts from Mathlib. No compatibility with a
 supplied monoidal tensorator or comparison transformation is asserted.
 Source: derived-pullback existence (Stacks Tag 06YJ), canonical tensor exactness
-(Tag 06YH), and Mathlib.CategoryTheory.Triangulated.Adjunction.
-(blueprint: lem-sc-derived-separate-exact-structures). -/
+(Tag 06YH), and Mathlib.CategoryTheory.Triangulated.Adjunction. -/
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -29,8 +28,7 @@ open AlgebraicGeometry
 
 /-- The supported quasi-coherent triangulated property at the whole space is D_QCoh.
 Source: Stacks Tag 0A9A. Proof: identify the two object properties by extensionality
-and apply supported_qcoh_isTriangulated at Set.univ.
-(blueprint: lem-sc-derived-separate-exact-structures). -/
+and apply supported_qcoh_isTriangulated at Set.univ. -/
 theorem qc_triangulated (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     (schemeDerivedQCohProperty X).IsTriangulated := by
@@ -41,11 +39,7 @@ theorem qc_triangulated (X : Scheme.{u})
   exact supported_qcoh_isTriangulated X Set.univ
 
 /-- Separate exact shifts for the pullback-tensor lift and the specified right adjoint.
-Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction.
-Proof: use the exact shift from derivedPullback_spec; transfer it to direct image
-by its adjunction. TensorRight is exact for the canonical tensor shift. Lift exactness
-through the quasi-coherent inclusions and use the restricted adjunction for c.
-(blueprint: lem-sc-derived-separate-exact-structures). -/
+Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction. -/
 theorem rightAdjointTensor_exactStructures
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -93,11 +87,7 @@ theorem rightAdjointTensor_exactStructures
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 /-- Separate exact shifts for the two functors in the projection comparison.
-Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction.
-Proof: take the already exact pullback shift, the canonical tensor shifts on Y and Z,
-and the right-adjoint shift on direct image. Composition and the full-subcategory
-inclusion give the two displayed exact functors.
-(blueprint: lem-sc-derived-separate-exact-structures). -/
+Source: Stacks Tags 06YJ and 06YH; Mathlib Triangulated.Adjunction. -/
 theorem projection_exactStructures
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # Derived direct image preserves quasi-coherent cohomology
 
 Source: literature/stacks-project/perfect.tex, Tag 08D5,
-part (1) (blueprint: lem-pc-derived-direct-image-preserves-qcoh).
+part (1).
 -/
 
 @[expose] public section
@@ -31,22 +31,7 @@ namespace AlgebraicGeometry
 /-- For a quasi-compact and quasi-separated morphism of schemes, derived direct image
 preserves the full subcategory of complexes with quasi-coherent cohomology.
 Source: literature/stacks-project/perfect.tex, Tag 08D5,
-part (1) (blueprint: lem-pc-derived-direct-image-preserves-qcoh).
-Proof:
-1. For every degree q and affine open U of Y, use
-   exists_isIso_schemeHigherDirectImage_truncGE_over_affine to replace E by
-   a sufficiently low canonical truncation in the restricted higher direct image.
-2. The quasi-coherent property contains zero: the free sheaf on no generators
-   has zero identity, by freeHomEquiv, and is quasi-coherent. Consequently
-   DerivedCategory.homologyProperty_truncGE gives quasi-coherent cohomology of
-   the truncation. It is bounded below by the standard t-structure.
-3. Apply schemeDerivedDirectImage_preserves_QCoh_of_isGE to this truncation.
-   Restrict its quasi-coherent q-th higher direct image using
-   SheafOfModules.isQuasicoherent_over, and transport the property through the
-   inverse of the canonical comparison isomorphism.
-4. The affine opens cover Y. SheafOfModules.IsQuasicoherent.of_coversTop gives
-   global quasi-coherence in degree q; quantify over all integers q.
-(blueprint: lem-pc-derived-direct-image-preserves-qcoh). -/
+part (1). -/
 theorem schemeDerivedDirectImage_preserves_QCoh
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -465,25 +465,7 @@ private theorem open_baseChange_factors (A : Type (u + 1)) [CommRing A]
         (ModuleCat.{u + 1} A) s)).symm
 
 /-- Base change for support- and right-derived-unit-normalized comparison families.
-Source: Stacks Project, Tag 0F7F.
-(auxiliary; not a blueprint node).
-
-Proof:
-First prove the ordinary sheaf cube. Postcompose with the monic open-to-direct-image
-comparison and its compositors. The support equations replace both theta maps by
-inclusions in the common direct image. Compatibility of open base change with those
-inclusions and ordinary exchange pasting give the same map, so monicity gives the cube.
-For a generic cube of additive functors with exact horizontal functors, the source
-right-derived functor followed by the two exact derived functors is again right-derived:
-its unit is an isomorphism on K-injectives. Right-derived extensionality therefore
-reduces the desired equality to precomposition with that unit. Insert the four unit
-normalizations, the two exact base-change factorization equations, and naturality.
-The remaining equality is the homotopy-category image of the ordinary cube, checked
-on complexes in each degree. The exact adjunction-mate formula gives the required
-unit equations for the specified exchanges; square factorization gives those for the
-specified inverse open-base-change maps. Apply the generic result to the sheaf cube.
-No exchange is inverted or cancelled, and inverse image need not preserve K-injectives.
--/
+Source: Stacks Project, Tag 0F7F. -/
 theorem etaleProperOpenCubeNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}
         (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

@@ -27,22 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Comparison on connected smooth curves implies comparison on every qc smooth
 separated curve of relative dimension one.
-Source: blueprint sbc-thm-algebraically-closed-invariance, first step.
-(blueprint: lem-sc-curve-cohomology-connected-reduction)
-
-Proof: C is finite type over k and hence Noetherian. Its finitely many
-connected components are clopen. Restricting f to each gives a separated,
-finite type, smooth morphism of relative dimension one; its connected nonempty
-source has dimension exactly one, so it is a connected smooth curve. The
-components form a finite coproduct. Finite-coproduct cohomology assembly,
-followed by the constant-sheaf restriction isomorphisms, gives bijective source
-product coordinates. The base-change square theorem gives bijective target
-product coordinates and identifies each coordinate with the component
-comparison. Apply h componentwise. Equality of images implies equality in
-every source coordinate, proving injectivity. For surjectivity, lift each target
-coordinate through its component comparison and then through the source product
-coordinates. The empty product handles C empty. No connectedness statement for
-the base-changed components is required. -/
+Source: blueprint sbc-thm-algebraically-closed-invariance, first step. -/
 theorem bijective_curve_cohomologyMap_of_connected
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

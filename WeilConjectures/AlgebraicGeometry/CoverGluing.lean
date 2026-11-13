@@ -297,7 +297,7 @@ end Glued
 
 end Construction
 
-/-- **Gluing schemes along an open cover** (blueprint: `lem-galois-glue`). Let `{Y_i ⟶ Y}` be an
+/-- **Gluing schemes along an open cover**. Let `{Y_i ⟶ Y}` be an
 open cover, `p_i : P_i ⟶ Y_i` schemes over its members, and `γ_ij : P_i ×_Y Y_j ⟶ P_j` morphisms
 over `Y_j` (`γ_ij ≫ p_j = pr₂`), i.e. morphisms
 `φ_ij = (γ_ij, p_i ∘ pr₁) : P_i ×_Y Y_j ⟶ P_j ×_Y Y_i`

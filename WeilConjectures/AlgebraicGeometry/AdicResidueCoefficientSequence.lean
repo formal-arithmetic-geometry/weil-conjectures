@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # The consecutive finite coefficient sequence on a slice
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1T, and proetale.tex, Tag 09C6.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -330,20 +329,7 @@ namespace AlgebraicGeometry.Scheme
 an action of the residue coefficient sheaf, on the actual slice site.
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1T, consecutive-power filtration in
-lemma-derived-vanishing-mod-I; proetale.tex, Tag 09C6, finite reduction argument.
-(auxiliary; not a blueprint node).
-
-Proof: the algebraic sequence has kernel J^(n+1)/J^(n+2). Multiplication by J
-kills this kernel since J * J^(n+1) = J^(n+2), so its action factors through A/J.
-Apply constant-module sheafification to the algebraic sequence, which is exact,
-and restrict to the slice over U. The coefficient-ring comparison identifies
-its middle and last terms with the units of the two constant quotient sheaves.
-Restrict their actions along the completed coefficient projections. On the
-kernel this action factors through the residue projection: both actions are
-induced by multiplication after the map to A/J^(n+2), and reduction modulo J
-gives the same action on J^(n+1)/J^(n+2). This constructs N, S and the three
-isomorphisms. Exact restriction of scalars preserves the sequence. For J=0 the
-kernel is zero; for J=top all three terms are zero. No complex is involved. -/
+lemma-derived-vanishing-mod-I; proetale.tex, Tag 09C6, finite reduction argument. -/
 theorem adicResidue_coefficient_sequence
     (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}
     [CommRing A] [IsNoetherianRing A] (J : Ideal A)

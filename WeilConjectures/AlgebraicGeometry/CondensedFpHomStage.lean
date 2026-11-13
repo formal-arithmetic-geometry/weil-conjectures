@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.ProetaleQcqsFpSectionCalculus
 # Filtered Hom factorization for finitely presented internal module sheaves
 
 Source: the finite-presentation Hom argument in archived `TwoColimit.lean`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -101,19 +100,7 @@ private lemma free_hom_eventual_eq (n : ℕ) {i : I}
 factors through a stage of every filtered colimit of internal modules.
 
 Source: the Hom finite-presentation argument in the archived `TwoColimit.lean`;
-qcqs section continuity is `proetale_qcqs_fp_section_calculus`.
-(auxiliary; not a blueprint node).
-
-Proof: homomorphisms from the regular module are sections of the underlying sheaf
-on the terminal pro-etale object. Such sections descend to a filtered stage on a
-qcqs scheme, and equality is eventual. The same two assertions hold for a finite
-free module by taking a common upper object (and a common wide-span cocone for
-the equality witnesses). Present the source as the cokernel of a map of finite
-free modules. Descend the map on its generators. Its composite with the relations
-vanishes in the colimit, so eventual equality makes it vanish at a later stage.
-The cokernel universal property then gives the desired factorization. This also
-covers zero generators and relations since a filtered category is nonempty.
--/
+qcqs section continuity is `proetale_qcqs_fp_section_calculus`. -/
 theorem condensed_fp_hom_stage (P : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
     (hP : Mod.IsFinitelyPresented R P) (a : P ⟶ c.pt) :
     ∃ (i : I) (b : P ⟶ D.obj i), b ≫ c.ι.app i = a := by

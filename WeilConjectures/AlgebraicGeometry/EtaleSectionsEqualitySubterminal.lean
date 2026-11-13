@@ -103,23 +103,7 @@ private theorem global_agreement_subterminal (T : Scheme.{u})
 /-- The agreement of two sections gives a subterminal sheaf on the small étale site of
 `V.left`. Its stalk is inhabited precisely when the original sections have equal germs.
 Source: Stacks Project, Étale Cohomology, Tag 09XM, first paragraph of the proof;
-Tag 03Q1 for the identification with the original sheaf's germs.
-(blueprint: lem-weil-pbc-etale-sections-equality-subterminal).
-
-Proof:
-Restrict `F` to the small étale site of `V.left`. For an étale `U → V.left`, define
-`H(U)` to be a singleton when the restrictions of `s` and `t` along `U → V.left → S`
-are equal, and empty otherwise. Equality is preserved by restriction, so these sets
-form a presheaf. Sections on a covering family agree automatically on overlaps.
-They give equality of the two restricted sections on the cover, hence on `U` by
-separatedness of the restricted sheaf. Thus they glue to the unique element of `H(U)`.
-Every section set is a subsingleton, making the unique map to the terminal sheaf mono.
-At a geometric point `x`, a germ of `H` is represented by an agreement neighbourhood,
-so it implies equality of the germs of the two sections. Conversely, equality of germs
-in the filtered colimit of pointed étale neighbourhoods is witnessed on a common
-neighbourhood, which then has a section of `H`. The inverse-image stalk identification
-of Tag 03Q1, with its unit formula, identifies these germs of the restricted sheaf with
-those of `F` at `x ≫ V.hom`, with pointed lift `x` to `V`. -/
+Tag 03Q1 for the identification with the original sheaf's germs. -/
 theorem exists_etaleSections_equality_subterminal (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (V : S.Etale) (s t : F.obj.obj (op V)) :

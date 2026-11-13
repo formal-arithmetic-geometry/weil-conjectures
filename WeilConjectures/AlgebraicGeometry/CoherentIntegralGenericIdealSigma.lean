@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 Source: Stacks Project, Tag 01YE, the finite-sum coherence assertion. A coherent ideal is
 quasi-coherent and of finite type on a locally Noetherian scheme. Finite coproducts preserve
 quasi-coherence and finite type, hence are coherent by the local Noetherian criterion.
-(blueprint: lem-weil-pbc-coherent-integral-generic-ideal-sigma-coherent)
 -/
 theorem coherent_sigma_of_coherent_ideal (Z : Scheme.{w}) [IsNoetherian Z]
     (r : ℕ) (I : Z.IdealSheafData)

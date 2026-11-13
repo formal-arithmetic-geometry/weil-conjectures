@@ -20,7 +20,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Explicit data for the natural Mayer--Vietoris triangle
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08FE and 0D5T.
-(blueprint: def-pc-derived-mayer-vietoris-canonical-data).
 The boundary is constructed from the fixed functorial K-injective resolution and the
 short-exact-sequence boundary, without choosing a witness of a boundary existence theorem.
 -/
@@ -44,7 +43,7 @@ variable (X : Scheme.{u})
 /-- The existing abelian structure on modules on a scheme, specialized once.
 This named construction avoids repeated searches through the generic sheafification
 instances. It is the Mathlib structure, with no choice of new abelian data.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 abbrev schemeMVModuleAbelian (T : TopCat.{u})
     (R : Sheaf (Opens.grothendieckTopology T) RingCat.{u}) :
     Abelian (SheafOfModules.{u} R) := inferInstance
@@ -53,14 +52,14 @@ attribute [local instance 2000] schemeMVModuleAbelian
 
 /-- Exact derived restriction, with its exactness witnesses elaborated once.
 This is an abbreviation for the existing derived restriction functor, not new data.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 abbrev schemeMVDerivedRestriction (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
     schemeDerivedCategory X ⥤ schemeDerivedCategory U.toScheme :=
   (schemeOpenRestriction X U).mapDerivedCategory
 
 /-- Derive the fixed underived restriction adjunction.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 def schemeMVAdjunction (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :
     (schemeMVDerivedRestriction X U) ⊣ schemeDerivedDirectImage U.ι :=
@@ -69,28 +68,28 @@ def schemeMVAdjunction (U : X.Opens)
   a.mapDerivedCategoryRightDerivedAdjunction
 
 /-- The fixed K-injective representative used in the natural boundary construction.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 abbrev schemeMVResolution (E : schemeDerivedCategory X) :
     CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ :=
   (CochainComplex.kInjectiveResolutionFunctor.{u}
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))).obj (DerivedCategory.Q.objPreimage E)
 
 /-- K-injectivity of the fixed functorial resolution.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 instance schemeMVResolution_isKInjective (E : schemeDerivedCategory X) :
     (schemeMVResolution X E).IsKInjective := by
   dsimp only [schemeMVResolution]
   infer_instance
 
 /-- Injectivity of each term of the fixed functorial resolution.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 instance schemeMVResolution_term_injective (E : schemeDerivedCategory X) (n : ℤ) :
     Injective ((schemeMVResolution X E).X n) := by
   dsimp only [schemeMVResolution]
   infer_instance
 
 /-- The inverse localized resolution map followed by the localization preimage comparison.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 def schemeMVResolutionIso (E : schemeDerivedCategory X) :
     DerivedCategory.Q.obj (schemeMVResolution X E) ≅ E := by
   let A := SheafOfModules.{u} (moduleRings X.toRingedSpace)
@@ -102,7 +101,7 @@ def schemeMVResolutionIso (E : schemeDerivedCategory X) :
       (DerivedCategory.Q.objPreimage E)))).symm ≪≫ DerivedCategory.Q.objObjPreimageIso E
 
 /-- Boundary of the concrete short exact sequence, transported to a derived object.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 def schemeMVBoundary (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (U ⊓ V).toScheme.toRingedSpace))]
@@ -119,7 +118,7 @@ def schemeMVBoundary (U V : X.Opens) (hcover : U ⊔ V = ⊤)
           (fun _ ↦ inferInstance))) ≫ (schemeMVResolutionIso X E).hom⟦(1 : ℤ)⟧'
 
 /-- The triangle with the fixed units, restrictions and explicitly constructed boundary.
-Source: Stacks Tag 08BV (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 08BV. -/
 def schemeMVTriangle (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))]
@@ -139,20 +138,20 @@ variable {X} {Y : Scheme.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The existing triangulated structure of derived direct image, specialized once.
-Source: Stacks Tag 0D5T (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 0D5T. -/
 abbrev schemeMVDirectImageTriangulated (h : X ⟶ Y) :
     (schemeDerivedDirectImage h).IsTriangulated := inferInstance
 
 attribute [local instance 2000] schemeMVDirectImageTriangulated
 
 /-- The image triangle, with the right-derived shift commutation elaborated once.
-Source: Stacks Tag 0DJ9 (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 0DJ9. -/
 def schemeMVImageTriangle (h : X ⟶ Y) (T : Triangle (schemeDerivedCategory X)) :
     Triangle (schemeDerivedCategory Y) :=
   (schemeDerivedDirectImage h).mapTriangle.obj T
 
 /-- The constructed image triangle is distinguished when its source is.
-Source: Stacks Tag 0DJ9 (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 0DJ9. -/
 theorem schemeMVImageTriangle_distinguished (h : X ⟶ Y)
     (T : Triangle (schemeDerivedCategory X))
     (hT : T ∈ distTriang (schemeDerivedCategory X)) :
@@ -166,7 +165,7 @@ variable
     (SheafOfModules.{u} (moduleRings T.toScheme.toRingedSpace))]
 
 /-- Composition comparison selected by its determining right-derived unit equation.
-Source: Stacks Tag 0D5T (blueprint: def-pc-derived-mayer-vietoris-canonical-data).
+Source: Stacks Tag 0D5T.
 The equation in exists_derivedModuleDirectImageComposition determines this isomorphism
 by the right-derived universal property; this is not a choice of an arbitrary isomorphism. -/
 def schemeMVDirectImageComposition {Z : Scheme.{u}}
@@ -179,7 +178,7 @@ def schemeMVDirectImageComposition {Z : Scheme.{u}}
 
 -- Explicit additivity witnesses require a larger typeclass-search budget.
 /-- The derived sectionwise identity comparing direct image and open restriction.
-Source: Stacks Tag 08FE (blueprint: def-pc-derived-mayer-vietoris-canonical-data).
+Source: Stacks Tag 08FE.
 This is the explicit construction used in schemeDerivedDirectImage_openRestriction,
 retained as data rather than hidden behind Nonempty. -/
 def schemeMVOpenRestrictionComparison (f : X ⟶ Y) (V : Y.Opens) :
@@ -237,8 +236,7 @@ def schemeMVOpenRestrictionComparison (f : X ⟶ Y) (V : Y.Opens) :
       (schemeDerivedDirectImage (f ∣_ V))
 
 /-- Compose the recorded direct-image and open-restriction comparisons.
-Source: Stacks Tags 0D5T and 08FE
-(blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tags 0D5T and 08FE. -/
 def schemeMVOpenComparison (h : X ⟶ Y) (U : Y.Opens) (E : schemeDerivedCategory X) :
     (schemeDerivedDirectImage h).obj ((schemeDerivedDirectImage (h ⁻¹ᵁ U).ι).obj
       ((schemeMVDerivedRestriction X (h ⁻¹ᵁ U)).obj E)) ≅
@@ -252,7 +250,7 @@ def schemeMVOpenComparison (h : X ⟶ Y) (U : Y.Opens) (E : schemeDerivedCategor
       ((schemeMVOpenRestrictionComparison h U).symm.app E)
 
 /-- The biproduct comparison followed by the two open comparisons.
-Source: Stacks Tag 0DJ9 (blueprint: def-pc-derived-mayer-vietoris-canonical-data). -/
+Source: Stacks Tag 0DJ9. -/
 def schemeMVMiddleComparison (h : X ⟶ Y) (U V : Y.Opens)
     (E : schemeDerivedCategory X) :
     (schemeDerivedDirectImage h).obj

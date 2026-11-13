@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 
 /-! Pullback transport for an ordinary condensed coefficient comparison.
 
-Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph
-(blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
+Source: latest blueprint, lem-fd-first-formula proof, coefficient paragraph.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

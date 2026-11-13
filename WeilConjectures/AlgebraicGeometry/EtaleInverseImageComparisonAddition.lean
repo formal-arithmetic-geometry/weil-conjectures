@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Addition transport for supplied inverse image comparisons
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-comparison-addition). -/
+Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
 
 @[expose] public section
 
@@ -88,23 +87,7 @@ private theorem tensor_to_product_snd
 
 -- The dependent sheaf comparisons require repeated unfolding of the forgetful functors.
 /-- Source: Stacks Project, Tags 00X6, 00YV, and 03D2, proof of
-lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-comparison-addition).
-
-Proof: Apply etaleInverseImageAlgebraicStructures to obtain the canonical
-abelian and commutative-ring lifts and their addition transport equations.
-The ring lift is identified with Lr by uniqueness of left adjoints to Rr;
-the abelian lift is the fixed La. Apply the two hom-equivalence compatibility
-hypotheses to identity maps and use injectivity of the set adjunction's hom
-bijection. This identifies the supplied comparisons with the canonical ones,
-after the unique ring isomorphism. Naturality of that isomorphism and the fact
-that its components are ring homomorphisms carry canonical addition to addition
-on Lr. The abelian comparison is identified in the same manner. Precompose
-categorical addition maps with the canonical tensor-to-product isomorphisms;
-their section values are the sums of the two coordinates, because these
-isomorphisms preserve both projections. Substitute the canonical transport
-equations and cancel inverse comparison pairs to obtain the two equations.
-No scalar action or distributivity law is used. -/
+lemma-pullback-module. -/
 theorem etaleInverseImageComparisonAddition (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

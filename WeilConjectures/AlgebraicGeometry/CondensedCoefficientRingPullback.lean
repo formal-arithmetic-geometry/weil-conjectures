@@ -26,8 +26,7 @@ attribute [local instance 2000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The actual coefficient map, reconstructed as commutative rings on the small sites.
-Source: Stacks Tag 00YV; the underlying additive map is eta_f.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00YV; the underlying additive map is eta_f. -/
 def condensedSmallRingMap
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -96,21 +95,7 @@ private theorem smallRingAdjunction_unit {X Y : Scheme.{u}} (f : Y ⟶ X)
 /-- The ring-sheaf adjunct of the actual condensed coefficient map is invertible.
 
 Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2;
-ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding.
-(blueprint: lem-sfb-condensed-coefficient-ring-pullback).
-
-Proof: forget the ring inverse image to underlying abelian sheaves. The canonical
-forgetful comparison is an isomorphism: inverse image on sets preserves finite
-limits, filtered colimits compute its local sections, and ring/abelian structures
-are transported by the same finite operations. The comparison respects the
-adjunction units. The sectionRingSheaf reconstruction has exactly the original
-underlying abelian sheaf, and condensedSmallRingMap is eta_f on those sections,
-by coefficientMap_existsUnique. Consequently its adjunct, after the forgetful
-comparison and AsSmall transport, is alpha_f = condensedPullbackHom Λ f.
-This is an isomorphism by upperStarFromPointComp. The forgetful functor from
-commutative-ring sheaves reflects isomorphisms, so the displayed ring adjunct
-is invertible. No coefficient ring k, coordinate c, module, or slice enters this
-assertion. The argument also applies to the empty scheme and zero ring. -/
+ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding. -/
 theorem condensedSmallRingMap_pullback_isIso
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

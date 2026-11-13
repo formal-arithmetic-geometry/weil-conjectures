@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Ample invertible modules on schemes
 
-Source: Stacks Project, Properties, Section 01PR and Definition 01PS
-(blueprint: def-weil-pbc-ample-invertible-module).
+Source: Stacks Project, Properties, Section 01PR and Definition 01PS.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ universe u
 where the germ of `s` is outside the maximal ideal times the stalk module, equivalently
 where `s` has nonzero value in the fibre `M_x ⊗ κ(x)`. This is exactly the predicate used
 inline in `IsAmple`.
-Source: Stacks Project, Properties, Section 01PR
-(blueprint: def-weil-pbc-ample-invertible-module).
+Source: Stacks Project, Properties, Section 01PR.
 -/
 def nonvanishingLocus {X : Scheme.{u}} (M : X.Modules)
     (s : M.val.presheaf.obj (Opposite.op ⊤)) : Set X :=
@@ -42,8 +40,7 @@ def nonvanishingLocus {X : Scheme.{u}} (M : X.Modules)
 /-- The absolute ampleness condition of Stacks Properties Definition 01PS.
 The open `U` is exactly the locus where the germ is outside the maximal ideal times
 the stalk module, equivalently where the section has nonzero residue-field value.
-Source: Stacks Project, Properties, Definition 01PS
-(blueprint: def-weil-pbc-ample-invertible-module).
+Source: Stacks Project, Properties, Definition 01PS.
 -/
 def IsAmple (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] : Prop :=
   CompactSpace X ∧ ∀ x : X, ∃ n : ℕ, 0 < n ∧

@@ -16,8 +16,7 @@ import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Recovering a finite system from compatible affine algebra reductions
 
-Source: Stacks Project, Lemma 09ZT, final sentence, and Morphisms, Lemma 01S8
-(blueprint: lem-weil-pbc-affine-algebra-reductions-cartesian).
+Source: Stacks Project, Lemma 09ZT, final sentence, and Morphisms, Lemma 01S8.
 -/
 
 @[expose] public section
@@ -138,21 +137,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A fixed morphism of affine schemes over X is the base change along a closed
 immersion if its section maps present the quotient by the extended base ideal.
-Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA.
-(blueprint: lem-weil-pbc-affine-algebra-reductions-cartesian, step 2).
-
-Proof: Cover X by affine opens U = Spec R. Since j is a closed immersion, its
-inverse image is Spec(R/J), where J is the kernel of j.app U. Both g inverse U and
-(f followed by j) inverse U are affine. Identify the first coordinate ring with
-B(U) using alpha. The section formula for v identifies its ring map with b(U)
-after this isomorphism. Surjectivity and the kernel equation identify the second
-coordinate ring with B(U)/(J B(U)), by the ring first isomorphism theorem.
-The square of coordinate rings is a pushout: B(U)/(J B(U)) is
-B(U) tensor_R (R/J). Taking Spec gives a pullback square on this chart with the
-specified maps, since v is over X. Pullback squares can be checked after restriction
-to an open cover of X, so the original square is cartesian. This uses no flatness;
-J = 0, J = R, empty charts and zero coordinate rings all satisfy the same quotient
-and pushout calculation. No morphism is constructed or chosen in this criterion. -/
+Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA. -/
 private theorem affine_algebra_quotient_isPullback
     {X Y X' Y' : Scheme.{u}}
     (j : X' ⟶ X) [IsClosedImmersion j]
@@ -273,17 +258,7 @@ private theorem affine_algebra_quotient_isPullback
 
 /-- Compatible quotient maps from an affine structure algebra give compatible
 cartesian morphisms of the reduction schemes into its realization.
-Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA.
-
-Proof: For each affine U in X, identify Y over U with Spec B(U) using α, and Yn over
-j_n inverse U with Spec O_Yn(r_n inverse U). The ring map b_n(U) induces a morphism
-to Y over U, because b_n is an O_X-algebra morphism. Naturality of b_n glues these
-local morphisms to u_n : Yn to Y. The surjectivity and kernel formulas identify its
-source on each chart with Spec of B(U)/ker(j_n.app U)B(U), the base change of Y to Xn.
-Thus the square is cartesian, detected on the affine cover. The displayed compatibility
-of b_n(U) with gn sharp implies gn followed by u_(n+1) equals u_n on every chart,
-hence globally. Empty charts and zero rings give empty spectra and pose no exception.
-(blueprint: lem-weil-pbc-affine-algebra-reductions-cartesian). -/
+Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA. -/
 theorem affine_algebra_reductions_cartesian
     {X Y : Scheme.{u}} (Xn Yn : ℕ → Scheme.{u})
     (j : ∀ n, Xn n ⟶ X) [∀ n, IsClosedImmersion (j n)]

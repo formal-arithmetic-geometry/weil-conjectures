@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 Source: Stacks Project, Tag 01F7 and Tag 0A50.
 These abbreviations expand to the maps of etale_mayerVietoris_pullback.
-(blueprint: lem-weil-pbc-open-cohomology-whole-restriction-naturality).
 -/
 
 @[expose] public section
@@ -59,8 +58,7 @@ private theorem cohomologyMap_comp_explicit {X Y Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction from the whole scheme commutes with pullback.
 Source: Stacks Project, Tag 01F7; this is composition functoriality twice, followed by
-cancellation of the inverse composition comparison.
-(blueprint: lem-weil-pbc-open-cohomology-whole-restriction-naturality) -/
+cancellation of the inverse composition comparison. -/
 theorem openCohomologyPullback_restrict {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : Sheaf.H G q) :
     cohomologyMap (g ⁻¹ᵁ W).ι ((upperStar AddCommGrpCat.{u + 1} g).obj G) q

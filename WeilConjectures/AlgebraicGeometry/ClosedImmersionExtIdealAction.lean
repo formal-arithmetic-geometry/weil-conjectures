@@ -77,23 +77,7 @@ private theorem idealAction_zero_of_iso {Y : Scheme.{u}}
 /-- Every scalar Ext sheaf from the pushed-forward structure sheaf is annihilated
 by the closed-immersion ideal, without regularity or finite-presentation assumptions.
 
-Source: Stacks Project, Tag 0BUZ (precomposition algebra action), and Tag 0BQZ.
-(blueprint: lem-sc-closed-immersion-ext-ideal-action).
-
-Proof: Represent O_Y by a K-injective complex J. Since the first argument is
-concentrated in degree zero, the Hom complex is the complex of sheaves
-Hom(i_* O_Z, J^p). A local section a of the immersion ideal acts as zero on
-these sheaves: for any local O_Y-linear map t, a t(b) = t(ab) = t(0) = 0,
-because the structure map O_Y -> i_* O_Z kills a. This equality holds after
-all further restrictions and therefore is an equality of sheaf multiplication
-maps. It passes to kernels, images and cokernels defining cohomology, so the
-ideal acts by zero on every cohomology sheaf of this complex. The derived Hom
-representation and the homology comparison are O_Y-linear, so they transport
-this equality to the displayed Ext sheaf. Multiplication on the sheaf tensor
-product is the sheafification of a tensor b |-> ab, so vanishing of every such
-local product is exactly the stated zero morphism. If Z is empty, the first
-argument and the Hom complex are zero; for the identity immersion the ideal
-itself is zero. Negative degrees cause no change to the argument. -/
+Source: Stacks Project, Tag 0BUZ (precomposition algebra action), and Tag 0BQZ. -/
 theorem closedImmersion_ext_idealAction_eq_zero
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

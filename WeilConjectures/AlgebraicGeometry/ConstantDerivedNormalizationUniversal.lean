@@ -15,7 +15,6 @@ set_option linter.privateModule false
 /-! # Constant realization preserves universal coefficient normalization
 
 Source: Stacks Project, Tags 06YY, 07A4 and 0G7E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

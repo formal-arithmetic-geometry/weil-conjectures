@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsIdeal
 
 Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
 algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -360,26 +359,7 @@ private theorem reflector_finite_unit_isIso
 objects. This assertion does not assert completeness of the point of the limit.
 
 Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(auxiliary; not a blueprint node).
-
-Proof: choose finite generators of J and the negative Koszul towers with transitions
-(a_i,1). Over the Noetherian constant ring the augmentation to the quotient tower
-has pro-zero cone, by Artin--Rees for the finite Koszul homology modules. Sheafify
-and tensor one flat-term K-flat representative of M. Total derived inverse limit
-inverts the resulting pro-isomorphism. Flat restriction to constant coefficients
-commutes with these limits and detects isomorphisms, so this computation applies
-to completed coefficients and on every slice. The Koszul limit unit is initial
-among maps to locally complete objects by the Koszul reflector theorem. The
-augmentation preserves insertion of one and all quotient transitions, which are
-the counit-transpose successors used here. Thus one normalized map to the given
-Roos limit has this mapping property. For any other such a, its difference from
-the normalized map is invisible at every quotient. Both factor through the Koszul
-reflector, and their difference there has zero finite reductions; derived Nakayama
-makes the resulting endomorphism with identity finite reductions invertible.
-Precomposition by a therefore has the same mapping bijection. Empty generators
-(J=0) give the identity unit; for J=A all complete targets vanish. No finiteness
-or boundedness of either derived object is used. -/
+algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul. -/
 theorem adicResidueQuotientUnit_universal
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

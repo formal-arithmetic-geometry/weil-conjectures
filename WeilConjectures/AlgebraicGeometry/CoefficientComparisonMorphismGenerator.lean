@@ -23,7 +23,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- (blueprint: lem-pc-coefficient-comparison-morphism-generator) -/
+/-- -/
 private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     (φ : A ⟶ D) {B C : S.Opens} (i : B ⟶ C) (s : Γ(A, C)) :
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by
@@ -32,20 +32,7 @@ private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
 set_option maxHeartbeats 600000 in
 -- Rewriting section morphisms requires unfolding the three composed adjunctions.
 /-- The concrete mate sends the three-unit generator to the pullback-unit section.
-Source: Stacks Project, Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097.
-(blueprint: lem-pc-coefficient-comparison-morphism-generator).
-Proof: Apply the hom equivalence of the composed tilde/Gamma and two pullback
-adjunctions to the defining mate. Equiv.apply_symm_apply gives the original
-linear section map. Expand the composed unit: its components are tilde.toOpen,
-then the unit for U.toSpecGamma and the unit for g. Naturality of the second
-unit moves the first full-open restriction past it; naturality of the mate
-moves the last restriction past the mate. The two resulting restrictions on
-the target, followed by the support identification, compose to restriction
-from the inverse-image support to W intersect fprime inverse image top.
-Expand the original linear section map and combine its restriction with this
-one by functoriality. This is precisely the pullback-unit section restricted
-through hW and then to the displayed intersection. Proof irrelevance identifies
-all inclusion and equality morphisms. No affine or cartesian hypothesis is used. -/
+Source: Stacks Project, Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097. -/
 theorem coefficientComparisonMorphism_generator {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')

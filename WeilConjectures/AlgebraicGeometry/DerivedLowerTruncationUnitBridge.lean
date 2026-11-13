@@ -19,7 +19,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Source: Stacks Project, Tag 05TC (2) and the single-object calculation of
 Tags 015A, 05TH and 05TI.
-(blueprint: lem-sc-derived-lower-truncation-unit-bridge).
 -/
 
 @[expose] public section
@@ -33,17 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 with the canonical projection fixed.
 
 Source: Stacks Project, Derived Categories, Tag 015A; uniqueness of truncation
-triangles, as in the parent bridge step 1.
-
-Proof: The good truncation short exact sequence at n - 1 gives a distinguished
-triangle in the derived category. Its first term has homology only below n and
-its third term is Q(truncGE n I), which has no homology below n. The universal
-property of truncation therefore gives the unique isomorphism from this third
-term to tauGE n QI commuting with the projection out of QI. Compose on the
-source with quotientCompQhIso at truncGE n I. Naturality of quotientCompQhIso
-identifies the projection from Qh(PI) with the image of I.πTruncGE n. This proves
-the stated equality. The construction works for every integer n and any
-unbounded I; when I is zero the unique isomorphism is the zero-object one. -/
+triangles, as in the parent bridge step 1. -/
 private theorem lowerTruncationLocalization
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (I : CochainComplex C ℤ) (n : ℤ) :
@@ -113,17 +102,7 @@ set_option backward.isDefEq.respectTransparency false in
 complex that is strictly zero in lower degrees.
 
 Source: Stacks Project, Derived Categories, Tags 05TC (2), 05TH, 05TI, 015A;
-parent bridge step 2.
-
-Proof: Choose a quasi-isomorphism K → L with L injective termwise and strictly
-zero below the same n. Such L is K-injective, so its derived unit is invertible.
-Both K and L have zero incoming differential in degree n. Their bottom homology
-is a kernel, preserved by F; naturality of the preserved homology comparison
-therefore makes H^n(F(K → L)) invertible. Localization makes Qh(P(K → L))
-invertible as well. Naturality of the actual derived unit gives its bottom
-homology map at K as a composite of these isomorphisms. No shifts or
-bounded-below/unbounded comparison is required; arbitrary integer n and zero
-complexes obey the same argument. -/
+parent bridge step 2. -/
 private theorem isIsoBottomUnit
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]
@@ -180,35 +159,7 @@ its bottom-degree comparison there is invertible. This concerns the derived
 unit and localization only; it contains no cycle-class or homology quotient map.
 
 Source: Stacks Project, Tag 05TC (2); Tags 015A, 05TH, 05TI, and naturality of
-localization and of the right-derived unit.
-(blueprint: lem-sc-derived-lower-truncation-unit-bridge).
-
-Proof: Put K = truncGE n I. In the derived category, QK is the good lower
-truncation of QI: the short exact truncation sequence gives a distinguished
-triangle whose first object is strictly below n and whose last object is at
-least n. Uniqueness of the truncation triangle gives a canonical isomorphism
-QK to tauGE n QI, commuting with the projection from QI. Compose its inverse
-with the quotient-to-homotopy factor isomorphism to identify Q_h(PK) with
-this lower truncation.
-
-The derived unit at K is an isomorphism on H^n. To see this with the actual
-unit, upper-truncate K at n. Negative vanishing (Tag 05TC) makes the derived
-upper-truncation inclusion invertible on H^n. Double truncation is H^n(K)
-placed in degree n. Shift it to degree zero. The derived unit on a single
-object is the canonical F to R^0 F map, computed by the augmentation of an
-injective resolution. F preserves the augmentation kernel, so this map is
-invertible. Naturality of the unit for the upper-truncation inclusion and
-the double-truncation projection transports invertibility back to K. No
-choice of an arbitrary bottom cohomology isomorphism is involved.
-
-Define d by the inverse homotopy and derived homology factor isomorphisms
-for F(K), followed by H^n of the unit at K and by H^n of RF of the canonical
-isomorphism Q_h(PK) to tauGE n QI. Each factor is invertible, hence so is d.
-Naturality of the unit at P(I to K), naturality of the homology factor
-isomorphisms, and the commuting truncation-projection triangle identify
-e H^n(U) H^n(q) with H^n(F(I to K)) d. The argument only uses that K is
-strictly zero below n, so all integers n, unbounded I, and zero complexes
-satisfy the same calculation. -/
+localization and of the right-derived unit. -/
 theorem derived_lower_truncation_unit_bridge
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]

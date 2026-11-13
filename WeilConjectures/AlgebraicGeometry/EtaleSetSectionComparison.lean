@@ -24,8 +24,7 @@ iterated-fibre-product isomorphism. This defines the transition maps and limit l
 in the continuity statement.
 
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero section comparison;
-Sites, Tags 03CB and 03CC
-(blueprint: def-weil-pbc-sets-section-comparison). -/
+Sites, Tags 03CB and 03CC. -/
 noncomputable def etaleSetSectionComparison
     {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) :

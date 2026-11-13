@@ -130,17 +130,7 @@ private lemma singleTensorator_factorization
   exact singleFunctorObjTensorIso_factorization A C hA
 
 /-- The canonical flat single tensorators preserve the signed braiding in degree zero.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, signed tensor symmetry.
-(auxiliary; not a blueprint node).
-Proof: the tensor product of two single complexes has only its (0,0) summand.
-Precomposition with that summand reduces the signed cochain braiding to the ordinary
-braiding, since (-1)^(0*0)=1. All other summands have a zero factor. Apply the braided
-homotopy quotient. The defining identity braiding_hom_μ for the canonical derived
-braiding then moves the Qh tensorator through that braiding. Naturality of braiding
-moves the two single/quotient isomorphisms through it, and their inverses cancel at
-the target. The remaining composite is exactly the displayed equality. Both factors
-are flat only to identify the comparison maps with the stated isomorphisms; the
-computation also applies to zero objects and empty schemes. -/
+Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, signed tensor symmetry. -/
 theorem singleFunctorObjTensorIso_symmetry
     (L M : Sheaf X.smallEtaleTopology B)
     (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M) :

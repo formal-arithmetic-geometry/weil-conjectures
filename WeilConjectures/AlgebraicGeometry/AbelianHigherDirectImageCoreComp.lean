@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 /-! # Canonical-coefficient composition for abelian higher direct images
 
 Source: Stacks Project, Tag 09Z1, canonical comparison maps.
-(blueprint: lem-sbc-abelian-higher-direct-image-core-comp).
 -/
 
 @[expose] public section
@@ -344,21 +343,7 @@ private lemma abelianHigherDirectImageMap_eq {S Y Y' : Scheme.{v}}
     ((DerivedCategory.Plus.singleFunctor _ 0).map φ)
 
 /-- Composition with canonical pullback coefficients, before inserting arbitrary
-coefficient morphisms. Source: Stacks Project, Tag 09Z1, canonical comparison maps.
-(blueprint: lem-sbc-abelian-higher-direct-image-core-comp).
-
-Proof: Expand the two maps as the derived adjunction units followed by direct
-images of pullback comparisons and counits, and the single-complex comparisons.
-Transpose along the h'' derived adjunction. Naturality moves the intermediate
-unit past the first pulled-back counit. The h' triangle identity cancels the
-intermediate counit and unit. Associativity of the inverse-image comparison
-identifies the remaining counit composite with that for b followed by a.
-The composition comparison for exact functors commutes with single complexes:
-on their degree-zero representatives this is the ordinary pullback composition
-comparison, and localization preserves this equality. Apply degree-p homology,
-which preserves composition. The proofs of the structure-map equalities agree
-by proof irrelevance. This works for identity scheme maps, zero sheaves, and
-p = 0, with no geometric hypotheses. -/
+coefficient morphisms. Source: Stacks Project, Tag 09Z1, canonical comparison maps. -/
 theorem abelianHigherDirectImage_core_comp {S Y Y' Y'' : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)
     (wa : a ≫ h = h') (wb : b ≫ h' = h'') (p : ℕ)

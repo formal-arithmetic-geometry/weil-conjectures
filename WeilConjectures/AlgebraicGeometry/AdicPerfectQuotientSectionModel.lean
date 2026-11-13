@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.AdicPerfectQuotientSectionRealiz
 /-! # Explicit section adjoints for the ordinary quotient realization
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,7 @@ variable (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
 attribute [local irreducible] adicPerfectQuotientFunctor adicPerfectQuotientModuleStep
 
 /-- The ordinary adjunction tower, with its proved unit identity stored as a field.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03EK. -/
 structure SectionModel where
   R : ∀ n : ℕ,
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
@@ -46,7 +45,7 @@ structure SectionModel where
 
 /-- Assemble a tower from arbitrary adjunctions by the general mate construction.
 The functors and adjunctions remain parameters throughout this proof.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03EK. -/
 def SectionModel.ofAdjunctions
     (R : ∀ n : ℕ,
       Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
@@ -67,17 +66,17 @@ def SectionModel.ofAdjunctions
     (a n) (a (n + 1)) (adicPerfectQuotientModuleStep X J U n) M
 
 /-- Supply the concrete terminal sections adjoints to the general constructor.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03EK. -/
 theorem sectionModel_exists : Nonempty (SectionModel X J U) :=
   ⟨SectionModel.ofAdjunctions X J U (rawRightAdjoint X J U) (rawAdjunction X J U)⟩
 
 /-- An adjunction tower selected from the preceding completely proved construction.
 Its fields are abstract interfaces, so consumers do not reduce scalar tensor implementations.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03EK. -/
 def sectionModel : SectionModel X J U := Classical.choice (sectionModel_exists X J U)
 
 /-- The right adjoints of the constructed tower.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 def rightAdjoint : ∀ n : ℕ,
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
       ModuleCat.{max v (u + 1)} A :=
@@ -86,7 +85,7 @@ def rightAdjoint : ∀ n : ℕ,
 attribute [local irreducible] rightAdjoint
 
 /-- The adjunctions of the constructed tower.
-Source: Stacks 03CY, 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY, 03EK. -/
 def adjunction : ∀ n : ℕ, adicPerfectQuotientFunctor X J U n ⊣
     rightAdjoint X J U n := by
   unfold rightAdjoint
@@ -95,7 +94,7 @@ def adjunction : ∀ n : ℕ, adicPerfectQuotientFunctor X J U n ⊣
 attribute [local irreducible] adjunction
 
 /-- The scalar successor maps of the constructed tower.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 def step : ∀ n : ℕ, rightAdjoint X J U (n + 1) ⟶
     change (adicPerfectQuotientScalarStep X J U n) ⋙ rightAdjoint X J U n := by
   unfold rightAdjoint
@@ -104,7 +103,7 @@ def step : ∀ n : ℕ, rightAdjoint X J U (n + 1) ⟶
 attribute [local irreducible] step
 
 /-- The already proved unit equation of the constructed tower.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 theorem step_unit (n : ℕ) (M : ModuleCat.{max v (u + 1)} A) :
     (adjunction X J U n).unit.app M =
       (adjunction X J U (n + 1)).unit.app M ≫

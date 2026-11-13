@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 
 /-! # EtaleSingletonTensorCechCofaceEvaluation
 Source: Stacks Project, Tags 03P2 and 03DR.
-(blueprint: lem-sc-singleton-tensor-cech-coface-evaluation)
 -/
 
 @[expose] public section
@@ -81,9 +80,7 @@ private theorem singletonCoface_projection (X : Scheme.{u}) (U : X.Etale)
   erw [Pi.lift_comp_π_apply]
   rfl
 
-/-- Raw categorical coface projection, before evaluating lifted sections.
-(blueprint: new-etale-singleton-tensor-cech-coface-raw-projection)
-Proof: unfold the formal coproduct coface and apply the product projection equation. -/
+/-- Raw categorical coface projection, before evaluating lifted sections. -/
 theorem singletonTensorCech_coface_raw_projection
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))
@@ -104,20 +101,7 @@ theorem singletonTensorCech_coface_raw_projection
 -- Keep the unused `P` let-binding in the existing public statement.
 set_option linter.unusedVariables false in
 /-- Downstairs evaluation of the raw coface map is restriction.
-Source: Stacks Project, Tags 03P2 and 03DR, the restriction formula for tensor sections.
-(blueprint: new-etale-singleton-tensor-cech-coface-map-down)
-
-Proof: the opposite of the forgetful functor sends `f.op` to `f.left.op`.
-The underlying presheaf of `etaleTensorSectionsSheaf F` is
-`etaleTensorSectionsPresheaf F`, whose map at this arrow is exactly
-`etaleTensorSectionsRestriction F f.left`. Composing the sheaf with
-`AddCommGrpCat.uliftFunctor` lifts this homomorphism: it sends a lifted
-section `t` to `ULift.up (etaleTensorSectionsRestriction F f.left t.down)`.
-The two displayed source projections have the same constant family of
-lifted section groups, so their values agree. Apply the lifted-map equation
-at that projected section and take `ULift.down`. This argument applies to
-any over-category arrow; the coface product map is its stated instance.
-It also applies at degree zero and when the section group is zero. -/
+Source: Stacks Project, Tags 03P2 and 03DR, the restriction formula for tensor sections. -/
 theorem singletonTensorCech_coface_map_down
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))
@@ -140,21 +124,7 @@ theorem singletonTensorCech_coface_map_down
 
 
 /-- Evaluation of a singleton Čech coface is restriction along the product map.
-Source: Stacks Project, Tag 03P2 (Čech restriction formula), Tag 03DR.
-(blueprint: lem-sc-singleton-tensor-cech-coface-evaluation)
-
-Proof: unfold the formal-coproduct Čech face. Its index map sends a tuple t
-of length n+2 to t composed with j.succAbove. Its component is Pi.lift of
-the retained product projections. The extension of a presheaf to formal
-coproducts sends this face to Pi.lift of the source projection followed by
-restriction along that component. Composing with the projection at the
-constant-zero tuple and applying Pi.lift_comp_π selects that restriction. The
-source tuple is again constant zero. The lifted tensor-section presheaf
-maps the component by ULift of etaleTensorSectionsRestriction, so taking
-down gives the displayed equation. This is a statement about every section,
-not about comparison maps or tensors. For n=0 it gives the two projection
-restrictions; on zero section groups both sides are zero.
--/
+Source: Stacks Project, Tag 03P2 (Čech restriction formula), Tag 03DR. -/
 theorem singletonTensorCech_coface_evaluation
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

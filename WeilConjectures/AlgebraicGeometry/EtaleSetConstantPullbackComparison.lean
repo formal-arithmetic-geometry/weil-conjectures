@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Constant sheaves and the constructed set inverse image
 
 Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
-(blueprint: def-weil-pbc-etale-set-constant-pullback-comparison).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry
 Compose the constant-sheaf adjunction with the constructed inverse-image adjunction.
 Its right adjoint is global sections: base change preserves the terminal etale object.
 Uniqueness of left adjoints then gives this comparison, in the full value universe.
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
-(blueprint: def-weil-pbc-etale-set-constant-pullback-comparison). -/
+Source: Stacks Project, Tags 03CB, 03CC, and 03P5. -/
 noncomputable def etaleSetConstantPullbackComparison
     {P U : Scheme.{u}} (h : U ⟶ P) :
     constantSheaf P.smallEtaleTopology (Type (u + 1)) ⋙ Scheme.etaleSetPullback h ≅

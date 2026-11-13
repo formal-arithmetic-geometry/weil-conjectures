@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 /-! # A coefficient comparison of fixed normalized section complexes
 
 Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-section-short-complex-coefficient-comparison).
 -/
 
 @[expose] public section
@@ -248,32 +247,7 @@ private theorem coefficient_transfer_open
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A coefficient morphism induces a comparison of fixed section complexes.
-Source: Stacks Project, Tag 0A50, resolution functoriality, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-section-short-complex-coefficient-comparison)
-
-Proof: Adjoint φ to F → f_*G. Inverse image is exact, so its right adjoint
-preserves injectives. Extend the adjoint coefficient map from the augmentation
-of I into f_*J in degree zero by injectivity. At each successor degree,
-exactness of I makes the composite to the next term factor through the next
-image, and injectivity extends this factor to the full resolution term.
-This constructs an augmentation-preserving chain map I → f_*J. Apply
-resolutionSectionShortComplexTransfer to it. Substitute hU and hV to identify
-the target section complex with the one on the displayed target opens.
-The equation hk and monicity of the source open inclusion identify k with
-the restricted morphism f on the intersection.
-
-For the whole-scheme homology map use the canonical coefficient transfer
-identity, whose cocycle formula is normalized by cI and cJ. For the
-intersection map represent a homology class by a cycle on U ∩ V. The
-free-abelian-representable sections adjunction turns it into a Hom cocycle
-into I. Exact inverse image followed by the adjoint chain map represents
-pullback of its Ext class followed by φ. Evaluating its restriction on the
-target intersection gives the transfer section. The two composition comparisons
-along the square hk are exactly the first two factors of openSquareCoefficient;
-restriction of φ gives its last factor. The open_cocycle fields of cI and cJ
-therefore give the second identity. Homotopic lifts induce the same maps.
-No covering hypothesis or connecting map is used. Zero coefficients, empty
-opens, coincident opens and degree zero are included. -/
+Source: Stacks Project, Tag 0A50, resolution functoriality, and Tag 01F7. -/
 theorem etaleSectionShortComplex_coefficient_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V : X.Opens) (U' V' : Y.Opens)
     (hU : U' = f ⁻¹ᵁ U) (hV : V' = f ⁻¹ᵁ V)

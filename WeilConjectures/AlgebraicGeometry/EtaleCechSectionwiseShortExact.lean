@@ -18,7 +18,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 # Sectionwise short exactness of étale Čech complexes
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03F9, proof.
-(blueprint: lem-weil-pbc-etale-cech-sectionwise-short-exact).
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- The categorical Čech functor preserves zero morphisms.
-Source: Stacks 03AO, functoriality of the Čech complex.
-(blueprint: lem-weil-pbc-etale-cech-sectionwise-short-exact). -/
+Source: Stacks 03AO, functoriality of the Čech complex. -/
 instance etale_cech_preservesZero (X : Scheme.{u}) (U : X.Etale)
     {T : Type (u + 1)} (V : T → X.Etale) (f : ∀ t, V t ⟶ U) :
     (cechComplexFunctor (fun t ↦ Over.mk (f t)) :
@@ -51,18 +49,7 @@ instance etale_cech_preservesZero (X : Scheme.{u}) (U : X.Etale)
 induces a short exact sequence of Čech complexes.
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03F9, proof, the paragraph beginning
-"Hence for any U in Cov we get a short exact sequence of Cech complexes".
-(blueprint: lem-weil-pbc-etale-cech-sectionwise-short-exact).
-
-Proof: Evaluation of abelian sheaves is left exact: the inclusion into presheaves and
-object evaluation preserve finite limits. Thus at each iterated fibre product the
-sequence is exact on the left. The assumed surjectivity makes it short exact there.
-In degree p the Čech functor takes the product of these sequences over all tuples of
-p+1 indices, and acts on morphisms by the product of their section maps. Arbitrary
-products in abelian groups are exact, including an empty product, so the sequence in
-each degree is short exact. The criterion for short exactness of homological complexes
-then gives short exactness of the sequence of Čech complexes. No covering hypothesis
-is required in this step: only exactness on the specified intersections is used. -/
+"Hence for any U in Cov we get a short exact sequence of Cech complexes". -/
 theorem etale_cech_shortExact_of_sections
     (X : Scheme.{u})
     (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

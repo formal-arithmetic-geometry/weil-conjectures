@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
 /-! # Total derived pullback coherence
 
 Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-derived-unit-classical-pullback-coherence)
 -/
 
 @[expose] public section
@@ -27,18 +26,7 @@ open Scheme Etale
 
 /-- The total derived morphism underlying the classical pullback comparison.
 
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-derived-unit-classical-pullback-coherence)
-
-Proof: identify both maps by the derived-unit formula and the defining unit
-compatibility of the right-derived base-change morphism; the canonical identity
-functor comparison is inserted on the source. To verify unit compatibility, use naturality of the
-identity comparison to move it past the global-sections unit. Apply the
-base-change unit equation and cancel the identity factorization comparison using
-`mapDerivedCategoryPlusIdIso_hom_app_factorsh`. The remaining equality is the
-levelwise underived section map. The universal property of right derivation and
-`derivedCohomologyPullback_eq_derivedUnit` give the equality on every object.
-This argument is valid on all bounded below objects and precedes homology. -/
+Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA. -/
 theorem derivedUnit_classicalPullback_coherence {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     let P := (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus

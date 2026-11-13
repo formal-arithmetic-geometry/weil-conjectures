@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 /-!
 # Base change morphism for etale extension by zero
 
-Source: Stacks Project, Etale Cohomology, Tags 03S6 (proof) and 03S3(3)
-(blueprint: def-weil-pbc-etale-shriek-base-change-map).
+Source: Stacks Project, Etale Cohomology, Tags 03S6 (proof) and 03S3(3).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The base change morphism `j'_! f'⁻¹ ⟶ f⁻¹ j_!` on sheaves of constant-ring modules,
 where `V' = pullback f j`, `j' = pullback.fst f j` and `f' = pullback.snd f j`.
-Source: Stacks Project, Tag 03S6, proof, and Definition 03S3(3)
-(blueprint: def-weil-pbc-etale-shriek-base-change-map).
+Source: Stacks Project, Tag 03S6, proof, and Definition 03S3(3).
 
 The square is the chosen scheme fibre product, and `j'` is etale by base change.
 The adjunctions `j_! ⊣ j⁻¹` and `f⁻¹ ⊣ f_*` compose to `L₁ ⊣ R₁`; those for

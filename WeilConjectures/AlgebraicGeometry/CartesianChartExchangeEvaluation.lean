@@ -33,7 +33,7 @@ private theorem cartesianChartAdjunct_spec {S X T B : Scheme.{u}}
       (cartesianChartRawAdjunctionIso f g a g' w F q V).hom z := by
   rfl
 
-/-- (blueprint: lem-sc-cartesian-chart-cohomology-evaluation) -/
+/-- -/
 private theorem chartCohomologyIso_eval {S X B T : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (w : g' = a ≫ g)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ)

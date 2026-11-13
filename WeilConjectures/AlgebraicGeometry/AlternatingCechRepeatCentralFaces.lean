@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSortingOperators
 # The three central faces of a duplicated first repeat
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2.
-(blueprint: lem-pc-alternating-cech-repeat-central-faces)
 -/
 
 @[expose] public section
@@ -64,15 +63,7 @@ private theorem central_tuple {I : Type v} [LinearOrder I] {p : ℕ}
 /-- The three deletions in the tripled block have total contribution s(t).
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2
-and the verification omitted immediately after it.
-Proof: Duplication at the first repeat turns the equal entries at a and a+1 into
-three equal entries at a,a+1,a+2. Deleting any of them gives t again. The composite
-restriction is the identity after this tuple equality, since Opens is a thin
-category. Thus the three transported sections all equal s(t). Their coefficients
-are (-1)^a times (-1)^a, (-1)^(a+1), and (-1)^(a+2), respectively. The first
-and third are 1 and the middle is -1, so their sum is 1. All other summands
-are excluded by the filter.
-(blueprint: lem-pc-alternating-cech-repeat-central-faces) -/
+and the verification omitted immediately after it. -/
 theorem cechRepeatCentralFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ)

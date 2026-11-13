@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 /-! # Transport of terminal sections through inverse-image composition
 
 Source: Stacks Project, Sites, Tags 03CB and 03CC.
-(blueprint: def-weil-pbc-sets-terminal-transport).
 -/
 
 @[expose] public section
@@ -21,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Sites, Tags 03CB and 03CC.
-(blueprint: def-weil-pbc-sets-terminal-transport).
 Evaluate the inverse-image composition isomorphism at the terminal object, transport
 along the triangle equality, and then use the second projection from the pullback
 of an identity. This projection is an isomorphism because its first defining map

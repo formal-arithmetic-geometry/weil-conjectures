@@ -14,7 +14,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-! # Affine module tensor CoherenceComparisons
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-factor).
 -/
 
 @[expose] public section
@@ -77,27 +76,7 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option maxHeartbeats 600000 in
 -- Transport through three sheaf-module object equalities needs extra elaboration heartbeats.
 /-- The pullback counit factors through scalar extension; its comparison map is epic.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-(blueprint: lem-weil-pbc-affine-module-tensor-counit-factor).
-
-Proof: Identify P(RF) restricted to O_U with f^* S(RF) using κ. The counit
-on a local tensor c tensor s evaluates to c s. To justify this identification
-for the supplied κ, use hP on pullback-unit sections and the canonical unit
-formula of adj₀. These sections generate inverse-image modules locally; after
-scalar extension their O_U multiples generate P(RF) locally. Thus the hP
-identification extends to all sections, and the adjunction triangle gives
-the stated counit evaluation. The B-action is compatible with
-the action on F through ε: the inverse-image ring counit evaluates the A factor,
-and t ε = e gives exactly this evaluation. Check this first on products of pure
-tensors, where both expressions are c c' a s, and extend additively and locally
-through sheafification. Thus the counit is B-linear and the tensor universal
-property along ε gives the asserted map from H(RF). The hH tensor-unit formula
-then gives its composite with γ as the original counit. Finally γ is epic:
-its image contains every sheafification section 1 tensor p, after identifying
-via κ. Every tensor c tensor p is c times such a section, so these generate
-locally. This proves local surjectivity and hence epimorphy of module sheaves.
-No quasi-coherence or affineness is needed; zero rings and empty opens obey
-exactly the same balanced tensor identities and local-generation argument. -/
+Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
 theorem affine_module_tensor_counitFactor
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

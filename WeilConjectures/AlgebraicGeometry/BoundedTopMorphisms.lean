@@ -26,19 +26,7 @@ set_option backward.isDefEq.respectTransparency false in
 highest degree is represented by an actual chain map. The terms of the source
 need not be projective.
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, boundary-map step.
-(auxiliary; not a blueprint node)
-
-Proof: The outgoing differential at n vanishes, so H^n(P) is the cokernel of the
-incoming differential. Transport the top cohomology map of the derived morphism
-through the localization comparison, and precompose it with this cokernel quotient.
-It kills the incoming differential and defines a chain map to the single complex.
-Its induced top homology map is the prescribed one, by the naturality of the
-cycles and opcycles maps and their single-complex comparison isomorphisms. The
-canonical t-structure makes H^n injective on maps from objects bounded above by n
-to objects bounded below by n; hence the localized chain map is the original
-morphism. That injectivity follows by truncating source and target to the shifted
-heart, where the single-complex functor is fully faithful. -/
+Source: Stacks Project, Cohomology on Sites, Tag 094G, boundary-map step. -/
 theorem exists_chainMap_to_single_of_isStrictlyLE
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (P : CochainComplex A ℤ) (n : ℤ) [P.IsStrictlyLE n] (X : A)

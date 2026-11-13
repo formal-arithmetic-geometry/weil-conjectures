@@ -21,12 +21,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A qcqs pushforward on condensed module sheaves preserves filtered colimits.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), in degree zero.
-(auxiliary; not a blueprint node)
-Proof. Put the filtered diagram of modules in degree zero. Its good truncation at
-zero is isomorphic to itself. Qcqs continuity makes the image of its colimit cocone
-a colimit after derived pushforward and zeroth homology. The natural identification
-of this composite on single complexes with ordinary pushforward proves the claim. -/
+Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), in degree zero. -/
 theorem lowerStar_preservesFilteredColimit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

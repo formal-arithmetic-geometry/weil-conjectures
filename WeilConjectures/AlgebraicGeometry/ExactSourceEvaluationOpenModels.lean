@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Ordinary models for evaluation on the open scheme
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-exact-source-evaluation-open-models).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The standard localization is available on the open scheme independently of the
 specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-exact-source-evaluation-open-models). -/
+Source: Stacks Project, Tag 05RU. -/
 local instance modelsEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
@@ -85,35 +83,9 @@ set_option maxHeartbeats 400000 in
 only changes from the over-site to its equivalent scheme site; it does not restrict
 an object or an evaluation arrow from X.
 
-Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom),
-Tag 08DM (lemma-Rhom-strictly-perfect), and Tag 08DQ (lemma-dual-perfect-complex),
-ordinary representative computation without the perfectness-dependent inverse.
-(blueprint: lem-pc-exact-source-evaluation-open-models).
-
-Proof:
-1. Transport the actual complexes P,F and f along the exact equivalence of module
-   categories Modules.overEquiv. It preserves tensor, the unit, Hom complexes,
-   their projections, and direct-sum totalization. Thus it preserves the given
-   component equations, Hom preservation of quasi-isomorphisms, and K-flatness
-   of the actual ordinary dual. Its localization factorization identifies E(QP)
-   and E(QF) with the localized transported complexes.
-2. Resolve the transported F and the degree-zero unit by the fixed functorial
-   K-injective resolution on the open scheme. Hom preservation makes the two
-   induced Hom maps quasi-isomorphisms. The derived Hom factorization, followed
-   by their localized inverses and eK,eN, supplies the target and dual comparisons.
-3. K-flatness of the ordinary dual makes its total tensor with the arbitrary F
-   compute the derived tensor. Compose this model comparison with eN and the
-   dual comparison to obtain a. In particular, a uses no inverse of f.
-4. Replace tensor inputs by K-flat resolutions and use the fixed K-injective
-   target. Uncurry the identity of the dual with the canonical representative
-   formula. On a summand of degrees p,q followed by the Hom projection indexed
-   by r, associativity and symmetry give the unit-action evaluation when r+q=0,
-   and zero otherwise. These are exactly hf. Naturality with the resolution maps
-   and detection by tensor inclusions and Hom projections identify the chain
-   maps. Localization, and cancellation of the two Hom resolution isomorphisms,
-   give g;b=a;E(Qf).
-This is a local complex calculation: no global restriction compatibility is
-asserted. Zero complexes and the empty open obey the same universal properties. -/
+Source: Stacks Project, cohomology.tex, Tag 08DJ,
+Tag 08DM (lemma-Rhom-strictly-perfect), and Tag 08DQ,
+ordinary representative computation without the perfectness-dependent inverse. -/
 theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
     (K N : schemeDerivedCategory U.toScheme)

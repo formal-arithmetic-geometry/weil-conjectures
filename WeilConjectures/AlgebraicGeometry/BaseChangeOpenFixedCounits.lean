@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackCo
 import WeilConjectures.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility
 /-! # Open restriction for the fixed derived pullback counits
 Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-base-change-open-fixed-counits).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -21,12 +20,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical comparison is obtained by the chosen derived counit.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-canonical-single-pullback-comparison).
-Proof: unfold the canonical single pullback map, compose the chosen derived
-counit with the tensor-to-ordinary comparison, and cancel the comparison with
-its inverse. The resulting component is exactly the displayed map and satisfies
-the defining comparison predicate. -/
+Source: Stacks Project, Tag 08HY. -/
 private theorem canonical_single_pullback_comparison_fixed
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -95,40 +89,7 @@ def fixedCounitRestrictionStatement
           (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
             pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
 /-- Open restriction for the fixed counits used to define the derived base-change map.
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
-(blueprint: lem-pc-base-change-open-fixed-counits).
-Proof: put Z = f' inverse-image W. Cartesianness identifies the open subscheme Z
-with P = U times_V W, compatibly with both projections: compose a cone over U and W
-with their open inclusions, apply the original pullback property, and factor the
-resulting map through Z. This works also for empty opens.
-
-Restriction preserves K-injectives because extension by zero is its exact left
-adjoint (0D5U). Thus 08FE gives the direct-image restriction comparisons for f and
-f'. Restriction also preserves K-flat complexes, since tensor products restrict
-sectionwise and exact extension by zero tests acyclicity. Computing derived
-pullback on these complexes gives the pullback restriction comparison for g.
-Combine the first comparison with the exact single-complex restriction G[0] to
-H[0] to obtain a. Combine the second with the sectionwise tensor-pullback
-restriction comparison along Z = P to obtain b.
-
-It remains to compare the arrows, not just these objects. Use the left-derived
-counits fixed by exists_derivedPullbackComposition. In canonicalSinglePullbackMap
-the final tensor-to-ordinary comparison cancels with t inverse, so c and c0 are
-the single components of these counits. On K-flat representatives the composition
-comparisons are induced by tensor reassociation and commute with open restriction.
-The Hom equivalences in schemeDerivedBaseChangeMap are pinned to those same
-counits and the right-derived units. Transpose both base-change arrows under
-these adjunctions, as in 08HY. Their transposes are pullbacks of the direct-image
-counit after the composition comparison. Restricting the underived units, counits
-and tensor reassociation gives the same sectionwise maps for the restricted
-square. Localizing this identity, using K-injectives for direct image and K-flats
-for pullback, gives the same transposes, hence the same mates. The unique
-comparisons of these resolution models with the recorded derived functors give
-a and b above; their single-module target identifications include any comparison
-between the selected counits on the two morphisms. Composing with c and c0 now
-gives precisely the displayed equality. No comparison supplied by a caller is
-used. Zero modules give zero arrows, empty opens give zero categories, and full
-opens give the original square transported through the open-scheme comparisons. -/
+Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U. -/
 theorem restricted_base_change_fixed_counits
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

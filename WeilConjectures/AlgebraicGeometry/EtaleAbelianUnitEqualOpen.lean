@@ -146,26 +146,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Equality of inverse-image unit sections is characterized by the inverse image
 of an open in the original étale object being the whole base-changed object.
 Source: Stacks Project, Étale Cohomology Tag 09XM (agreement open),
-Tag 03Q1 (inverse image on geometric stalks), and Tag 03S2 (étale restriction).
-(blueprint: lem-weil-pbc-etale-abelian-unit-equal-open).
-
-Proof: Forget the abelian operations and use the set-valued agreement-open
-existence theorem to obtain W. For each f, the canonical comparison from the
-set pullback to the underlying abelian pullback is an isomorphism: the forgetful
-functor preserves the filtered colimits computing left Kan extension, and it
-preserves sheafification. Compose their canonical comparisons. The Kan-extension
-and sheafification unit equations identify this composite with the adjoint
-transpose of the forgotten abelian unit. Evaluating the adjunction equation
-shows that this isomorphism sends the set unit images to the abelian unit images,
-so these images agree exactly when the set unit images agree.
-Apply the cartesian-unit equality criterion to A = U ×[S] X with the identity
-isomorphism and p its first projection. It identifies equality of the set unit
-images with equality after arbitrary restriction along p. The defining property
-of W identifies the latter with factorization of p through W. Such a factorization
-implies p inverse-image W = top by evaluation on points; conversely that equality
-gives the factorization by the open-immersion lifting property.
-For empty U the open and its pullbacks are empty and all sections agree. For
-s = t the agreement open is top. No compactness, limit, or directedness is used. -/
+Tag 03Q1 (inverse image on geometric stalks), and Tag 03S2 (étale restriction). -/
 theorem etale_abelian_unit_equal_open
     (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})

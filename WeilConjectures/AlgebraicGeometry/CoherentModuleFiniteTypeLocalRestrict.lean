@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 
 /-- Finite type of a coherent module is preserved by restriction to every open.
 Source: Stacks Project, Definitions 01BV and 01B5 and Lemma 01B6.
-(blueprint: lem-weil-pbc-coherent-module-finite-type-local-restrict)
 -/
 theorem coherent_module_finite_type_local_restrict
     (X : Scheme.{u}) (F : X.Modules) :

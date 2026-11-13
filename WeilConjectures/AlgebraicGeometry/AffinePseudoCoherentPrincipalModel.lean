@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # A module model on one principal open
 
-Source: Stacks Project, Tag 08E7, local-model comparison in the converse direction
-(blueprint: lem-pc-affine-pseudo-coherent-principal-model).
+Source: Stacks Project, Tag 08E7, local-model comparison in the converse direction.
 -/
 
 @[expose] public section
@@ -32,27 +31,7 @@ namespace AlgebraicGeometry
 pseudo-coherent localized module complex on every principal open contained in it.
 
 Source: Stacks Project, Tag 08E7, local-model comparison, using the affine derived
-comparison of Tag 06Z0
-(blueprint: lem-pc-affine-pseudo-coherent-principal-model).
-
-Proof:
-Restrict P along D(f) ≤ U. Restriction is exact, preserves zero objects and finite
-free sheaves, and sends the given derived isomorphism to one on D(f). Identify
-D(f) with Spec(A_f). The sections of tilde N on principal opens are localizations
-of N, naturally in N; hence restriction of the termwise tilde complex of M
-identifies with the termwise tilde complex of A_f tensor M. The finite free terms
-of the restricted P correspond under the tilde/Gamma adjunction to finite free
-A_f-modules of the same ranks. Full faithfulness lifts every differential, and
-faithfulness proves that consecutive differentials compose to zero. This gives
-a module complex with the same upper bound. Both associated-sheaf complexes have
-quasi-coherent cohomology; the full inclusion of the quasi-coherent derived
-category lifts their isomorphism, and the affine derived equivalence reflects it
-to an isomorphism of module derived objects. Reverse this isomorphism to obtain
-the finite-free representative required by DerivedCategory.IsPseudoCoherent.
-If D(f) is empty, A_f is the zero ring, all its modules are zero, and the zero
-complex is the representative. Rank zero and arbitrarily negative upper bounds
-are allowed throughout. This argument makes no assertion about a finite cover
-or about gluing models from different opens. -/
+comparison of Tag 06Z0. -/
 theorem affine_pseudoCoherent_principal_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

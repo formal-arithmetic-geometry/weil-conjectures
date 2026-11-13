@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 # The étale sheaf associated to a quasi-coherent module
 
 Source: Stacks Project, Descent, Definition 35.8.2, Tag 03DU, item 4;
-Section 35.8, equation (35.8.1), Tag 03DR
-(blueprint: def-sc-etale-qcoherent-module).
+Section 35.8, equation (35.8.1), Tag 03DR.
 -/
 
 @[expose] public section
@@ -35,7 +34,7 @@ The sheaf condition is supplied by `isSheaf_etaleTensorSectionsPresheaf`, the se
 quasi-coherent descent theorem; this definition neither sheafifies nor changes the
 section groups or their restrictions.
 Source: Stacks Project, Descent, Tag 03DU, Definition 35.8.2, item 4, and Tag 03DR,
-equation (35.8.1) (blueprint: def-sc-etale-qcoherent-module). -/
+equation (35.8.1). -/
 noncomputable def etaleTensorSectionsSheaf {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] : Sheaf X.smallEtaleTopology AddCommGrpCat.{u} :=
   ⟨etaleTensorSectionsPresheaf F, isSheaf_etaleTensorSectionsPresheaf F⟩

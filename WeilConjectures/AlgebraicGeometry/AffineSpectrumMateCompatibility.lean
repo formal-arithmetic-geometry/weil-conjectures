@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 /-! # Compatibility of the canonical spectrum comparisons with base-change mates
 
 Source: Stacks Project, Tags 08HY and 0D5S.
-(blueprint: lem-pc-affine-spectrum-mate-compatibility).
 -/
 
 @[expose] public section
@@ -130,31 +129,7 @@ private theorem coordinate_mate_compatibility
 
 /-- The bare base-change mate commutes with the explicitly constructed coordinate
 isomorphisms. This only concerns the pulled-back coefficient object, with no chosen
-coefficient morphism or second coefficient object.
-
-Proof: let c and i be the comparisons selected by exists_derivedPullbackComposition,
-and let a be the adjunctions pinned to their derived counits. The equivalence for
-inverse spectrum pullback is built from c and i. The direct-image coordinate iso
-is the conjugate of affineSpectrumDerivedPullbackIso, under a(f) composed with the
-inverse spectrum equivalence on X and the inverse spectrum equivalence on S
-composed with a(f0). Its counit equation is conjugateEquiv_counit. First postcompose
-both sides with the inverse direct-image coordinate map and cancel its hom-inverse
-pair. Apply the inverse Hom equivalence of a(fprime) to this equation. Expand both
-base-change
-maps into their square comparison followed by pullback of the counit. Substitute
-the conjugate counit equations for f and fprime. Naturality moves the inserted
-spectrum equivalence units across the square comparisons. The associativity law
-for c, applied to the four spectrum naturality squares, identifies the two square
-comparison composites. The unit laws for c and the triangle identities for the
-spectrum equivalences cancel the inverse spectrum maps and leave identical
-transposes. Injectivity of a(fprime)'s Hom equivalence proves the displayed
-identity. The equivalence construction retains the specified counit, so this
-calculation uses the actual comparisons defining the data, not arbitrary isos.
-It needs only commutativity of the two squares; empty schemes, zero rings and
-zero coefficient objects are included in the same categorical calculation.
-Source: Stacks Project, Tag 08HY, counit definition of the comparison; Tag 0D5S,
-composition and its unit and associativity identities.
-(blueprint: lem-pc-affine-spectrum-mate-compatibility). -/
+coefficient morphism or second coefficient object. -/
 theorem affineSpectrum_baseChange_mate_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

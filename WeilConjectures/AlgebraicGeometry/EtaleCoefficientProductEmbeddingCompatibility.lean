@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The map to the outgoing-arrow product whose components are adjoint to the coefficient
 transitions followed by the canonical injective embeddings. This is an explicit product lift.
-Source: Stacks Project, Tag 0EXZ, definition of γ.
-(blueprint: lem-weil-pbc-etale-coefficient-product-embedding-compatibility). -/
+Source: Stacks Project, Tag 0EXZ, definition of γ. -/
 noncomputable def etaleCoefficientProductEmbedding
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -64,20 +63,7 @@ private theorem adjointComp
 
 
 /-- The canonical product embedding intertwines the coefficient and product transitions.
-Source: Stacks Project, Tag 0EXZ, the assertion that γ is a map of systems.
-(blueprint: lem-weil-pbc-etale-coefficient-product-embedding-compatibility).
-
-Proof: fix f : i → j and project the desired square to the factor indexed by
- g : j → k. On the left the component is φ_f followed by the adjoint transpose of
-φ_g followed by Injective.ι. On the right, naturality of homEquiv moves the embedding
-of F_i inside the transpose defining ψ_f. The product-lift projection equation then
-selects the component indexed by f followed by g, namely the transpose of
-φ_(f≫g) followed by Injective.ι, followed by the inverse lowerStarComp comparison.
-Use hcomposition to replace φ_(f≫g) by upperStarComp followed by the inverse image
-of φ_f and by φ_g. The mate equation for upperStarComp and lowerStarComp, together
-with naturality of the adjunction, identifies this transpose with the left component.
-Since these component equations hold for every outgoing g, product extensionality
-proves the square. No identity law, directedness, nonemptiness, or monicity is used. -/
+Source: Stacks Project, Tag 0EXZ, the assertion that γ is a map of systems. -/
 theorem etale_coefficient_product_embedding_compatibility
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})

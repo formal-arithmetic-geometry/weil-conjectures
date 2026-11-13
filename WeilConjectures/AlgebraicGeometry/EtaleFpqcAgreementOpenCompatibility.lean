@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenArbitraryCriterio
 import WeilConjectures.AlgebraicGeometry.EtaleFpqcAgreementSectionsOverlap
 
 /-! # Compatibility of agreement opens for a matching family
-Source: Stacks Project, Tag 09XN, agreement-open paragraph.
-(blueprint: lem-weil-pbc-etale-fpqc-agreement-open-compatibility). -/
+Source: Stacks Project, Tag 09XN, agreement-open paragraph. -/
 
 @[expose] public section
 
@@ -20,27 +19,8 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Tag 09XN (lemma-describe-pullback), paragraph
-beginning "Let V", using Tag 09XM and composition units in Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-etale-fpqc-agreement-open-compatibility).
-
-Proof: On Q_j = V ×_S T_j compare the unit image of t with the pullback of s_j.
-The given E_j is their agreement open, tested by every étale restriction.
-First compare E_j with the canonical largest agreement open of the two sections
-on Q_j. Test each candidate's own open immersion in the ordinary étale criterion;
-the restriction isomorphism identifies this criterion with the canonical one,
-so the two inclusions prove equality. Thus E_j also has the arbitrary-scheme-map
-criterion. On D = Q_i ×_V Q_j, both projections to Q_i and Q_j are arbitrary maps.
-Use inverse-image restriction and the agreement-open universal property to
-identify the inverse images of E_i and E_j as agreement opens on D. The two
-unit images of t agree after the composition isomorphisms: the composition unit
-formula and unit naturality identify both with pullback of t along D → V → S.
-The other two sections agree because D maps to T_i ×_S T_j; pull back hcompat
-along this map. Fibre-product associativity is determined by its projections,
-so the identifications use exactly those in hcompat. Injectivity of the
-composition and restriction isomorphisms reflects these equalities. Uniqueness
-of the agreement open on D now gives the asserted equality of opens. No fpqc
-hypothesis is needed for this calculation. Empty D gives equality of empty opens. -/
+/-- Source: Stacks Project, Tag 09XN, paragraph
+beginning "Let V", using Tag 09XM and composition units in Tags 03CB and 03CC. -/
 theorem etaleFpqcAgreementOpens_compatible
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

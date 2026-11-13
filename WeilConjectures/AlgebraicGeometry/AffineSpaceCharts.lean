@@ -48,7 +48,7 @@ namespace AlgebraicGeometry.AffineSpace
 variable (n : Type u) {S T : Scheme.{u}}
 
 /-- The affine chart `Spec Γ(S, V)[n] ⟶ 𝔸(n; S)` of relative affine space over an affine
-open `V` of `S`. (blueprint: `lemma-nagata-relative-affine-space-charts`) -/
+open `V` of `S`. -/
 noncomputable def chart {V : S.Opens} (hV : IsAffineOpen V) :
     Spec (.of (MvPolynomial n Γ(S, V))) ⟶ 𝔸(n; S) :=
   (SpecIso n Γ(S, V)).inv ≫ map n hV.fromSpec
@@ -120,8 +120,7 @@ lemma chartTransition_comp {V V' V'' : S.Opens} (h' : V' ≤ V) (h'' : V'' ≤ V
   rw [RingHom.comp_apply, MvPolynomial.map_map, ← CommRingCat.hom_comp, ← Functor.map_comp]
   rfl
 
-/-- The base change isomorphism `𝔸(n; S) ×_S T ≅ 𝔸(n; T)` for `g : T ⟶ S`.
-(blueprint: `lemma-nagata-relative-affine-space-charts`) -/
+/-- The base change isomorphism `𝔸(n; S) ×_S T ≅ 𝔸(n; T)` for `g : T ⟶ S`. -/
 noncomputable def pullbackIso (g : T ⟶ S) : pullback (𝔸(n; S) ↘ S) g ≅ 𝔸(n; T) :=
   (isPullback_map (n := n) g).isoPullback.symm
 

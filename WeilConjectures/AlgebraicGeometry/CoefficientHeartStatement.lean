@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 Source: blueprint latest,
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/_section.md`,
-clauses (1)--(3) (blueprint: sk-lem-coefficient-heart).
+clauses (1)--(3).
 
 The coefficient ring is the condensed ring pulled back from the point.  The statement
 uses the existing constructible full subcategory, the existing lisse predicate, and the
@@ -45,8 +45,7 @@ clauses (1)--(3), and
 `part-six-operations/sec-reduction-finite-coefficients/`
 `sec-constructible-sheaves-with-field-coefficients/sk-lem-coefficient-heart/`
 `sk-lem-coefficient-heart.proof.md`,
-steps (1)--(3)
-(blueprint: sk-lem-coefficient-heart).
+steps (1)--(3).
 
 The closure conjuncts render clause (1)'s closure under kernels, cokernels and extensions.
 The `Abelian` witness and finite-limit/finite-colimit preservation render its abelian and

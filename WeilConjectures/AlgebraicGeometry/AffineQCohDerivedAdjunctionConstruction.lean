@@ -24,18 +24,7 @@ namespace AlgebraicGeometry
 /-- Derived affine tilde and derived global sections admit an adjunction on
 quasi-coherent derived objects, with the two defining functor comparisons.
 Source: Stacks Project, Tag 06Z0, elucidation of the two adjoint functors;
-Tag 079W supplies derived adjunction.
-(blueprint: new-affine-qcoh-derived-adjunction-construction).
-
-Proof: View Spec A as a ringed space over the one-point ringed space A.
-The pullback is associated sheaf and is exact, since localization of modules
-is exact. Apply it termwise to complexes; its cohomology is associated sheaf
-of module cohomology, hence quasi-coherent. Localize this complex functor to
-obtain F and its comparison. The right adjoint is derived global sections,
-computed on K-injective resolutions, with scalars transported through ΓSpecIso.
-The ordinary tilde/global-sections adjunction induces the derived adjunction.
-Its restriction has the same hom-equivalence because the quasi-coherent
-subcategory is full; this gives F ⊣ G and the comparison for G. -/
+Tag 079W supplies derived adjunction. -/
 theorem affineQCohDerivedAdjunction_construction (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

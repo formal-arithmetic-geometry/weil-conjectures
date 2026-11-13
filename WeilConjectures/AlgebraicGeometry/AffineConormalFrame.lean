@@ -20,8 +20,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Sheafifying an affine conormal basis
 
-Source: Stacks Project, Morphisms, Tag 01R3, and Modules, Tag 01C6.
-(blueprint: lem-sc-affine-conormal-frame). -/
+Source: Stacks Project, Morphisms, Tag 01R3, and Modules, Tag 01C6. -/
 
 @[expose] public section
 
@@ -254,26 +253,7 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 
 /-- A basis of an affine conormal module gives a frame of the conormal sheaf,
 and its cardinality computes stalk finrank at points of that affine chart.
-Source: Stacks Project, Morphisms, Tag 01R3 (2), and Modules, Tag 01C6 (3).
-(blueprint: lem-sc-affine-conormal-frame).
-
-Proof: Put A = O_Y(U), I = i.ker.ideal U and V = i^{-1}(U). A closed immersion
-has affine inverse images and a surjective section map A -> O_Z(V) with kernel I.
-Thus B = A/I identifies with O_Z(V). By affine_conormal_sections the conormal C
-is quasi-coherent and its sections on V identify with I/I^2. The A-linear equivalence
-in that lemma is B-linear: both modules are annihilated by I, and one can lift every
-scalar of B to A. Transport the supplied basis b along this equivalence and the
-quotient-ring identification to a basis of C(V) over O_Z(V). The equivalence between
-quasi-coherent sheaves on the affine V and modules sends its coordinate isomorphism
-to C|_V = O_V^m. Transport this isomorphism to the over-V site and reindex the basis
-along ULift. This gives the first assertion. Coordinate projections and inclusions
-commute with restriction on all subopens of V. At any z in V their germs give
-mutually inverse O_{Z,z}-linear maps between C_z and the m-fold product of O_{Z,z}:
-take germs of the finite coordinate-sum identity and the projection-inclusion
-identities. The scheme stalk ring is nontrivial, so the coordinate basis computes
-finrank as m. For m = 0 these are empty sums and zero modules. If V is empty,
-the stalk assertion is vacuous and its sheaf category has only the zero object,
-so the frame still exists. The lemma uses no regularity or Noetherian hypothesis. -/
+Source: Stacks Project, Morphisms, Tag 01R3 (2), and Modules, Tag 01C6 (3). -/
 theorem affine_conormal_frame {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (U : Y.affineOpens) (m : ℕ)
     (b : Module.Basis (Fin m) (Γ(Y, U.1) ⧸ i.ker.ideal U) (i.ker.ideal U).Cotangent) :

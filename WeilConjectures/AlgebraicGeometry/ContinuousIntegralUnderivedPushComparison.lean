@@ -22,14 +22,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The ordinary scalar-extension/pushforward comparison is invertible for a qcqs map.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2.
-(auxiliary; not a blueprint node)
-Proof. Both scalar extensions are the colimits of multiplication-by-ℓ telescopes.
-Ordinary qcqs pushforward preserves these filtered colimits. Restrict the specified
-mate to integral coefficients and compose with the restriction/pushforward comparison.
-The adjunction unit equation identifies its zeroth telescope leg with the pushed
-unit. Invertibility of ℓ then identifies every leg. Uniqueness of colimits makes
-this restricted comparison invertible; faithful exact restriction reflects it. -/
+Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2. -/
 theorem integralScalarUnderivedPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

@@ -30,20 +30,7 @@ namespace CondensedRing
 complementary closed immersion preserve constructibility, for any condensed ring.
 
 Source: upstream `ConstructibleSheaf/OpenClosed.lean`, stratification concatenation;
-`ModuleObject/Colimit/TwoColimit.lean`, open/closed object descent.
-(auxiliary; not a blueprint node)
-
-Proof: normalize the coefficient identification on each stratum. The pullback
-composition isomorphisms identify restriction along a concatenated stratum with
-successive restriction to the open or closed member and then its stratum. Thus
-constructibility is detected by the two restrictions. For open extension by zero,
-restriction to the open member is the original module, by its adjunction unit;
-restriction to the closed member is zero. For closed direct image these roles are
-reversed, using the closed adjunction counit, transported from abelian closed support
-by the coefficient comparison. A zero module has a rank-zero finite presentation. These
-arguments allow an empty piece or a zero module and impose no condition on the coefficient
-ring beyond commutativity.
--/
+`ModuleObject/Colimit/TwoColimit.lean`, open/closed object descent. -/
 theorem constructible_open_closed_images
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Z : Scheme.{u}}

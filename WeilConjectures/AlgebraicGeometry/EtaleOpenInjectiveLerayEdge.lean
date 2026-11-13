@@ -288,20 +288,7 @@ private theorem lower_transition_factor
   exact Category.id_comp _
 
 /-- The open coefficient counit induces a monic degree-q Leray edge map.
-Source: Stacks Project, Tags 0F07 and 0734.
-(blueprint: lem-sbc-open-injective-leray-edge).
-
-Proof: Let K = e^*((j_*J)[0]) and let α be the derived unit for a followed by
-the pullback comparison and the single of the coefficient counit. The lower-degree
-comparison identifies H^n(α) with base change for n < q, so these maps are isomorphisms.
-K is concentrated in degree zero. The long exact sequence of its cone triangle gives
-H^n(cone α) = 0 for n < q: use the isomorphism in degree n, and either the isomorphism
-in degree n+1 or the vanishing of H^(n+1)(K) when n+1 ≥ q. Derived h_* preserves this
-lower bound. Its long exact sequence therefore makes H^q(Rh_*(α)) monic.
-The composition law for the derived adjunction units identifies the displayed transition
-and coefficient counit with this map followed by the derived pushforward composition
-isomorphism. Taking homology preserves that isomorphism and hence monicity.
--/
+Source: Stacks Project, Tags 0F07 and 0734. -/
 theorem baseChangeTargetTransition_counit_mono
     {X Y T V W : Scheme.{u}} (h : Y ⟶ X) (e : Y ⟶ T) (j : V ⟶ T)
     (eV : W ⟶ V) (a : W ⟶ Y) (h' : W ⟶ X)

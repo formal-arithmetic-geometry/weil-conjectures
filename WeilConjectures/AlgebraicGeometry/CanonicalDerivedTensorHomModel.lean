@@ -10,8 +10,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 
 /-! # Canonical derived tensor/internal-Hom bijections
-Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom).
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
+Source: Stacks Project, cohomology.tex, Tag 08DJ.
 The representative equation uses the actual Hom-complex projections, sheaf tensor-Hom
 currying, the localization factorization, and the functorial K-injective resolution.
 -/
@@ -29,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The functorial resolution already used by derived internal Hom, with the scheme's
 Grothendieck instance supplied explicitly.
-Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-(blueprint: def-pc-canonical-derived-tensor-hom-model)
+Source: Stacks, cohomology.tex, 08DJ.
 -/
 def schemeHomKInjectiveResolution (X : Scheme.{uCD}) :
     CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ ⥤
@@ -40,9 +37,7 @@ def schemeHomKInjectiveResolution (X : Scheme.{uCD}) :
   CochainComplex.kInjectiveResolutionFunctor.{uCD} _
 
 /-- Inverse of the localized quasi-isomorphism into the fixed resolution.
-Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-(blueprint: def-pc-canonical-derived-tensor-hom-model)
+Source: Stacks, cohomology.tex, 08DJ.
 -/
 def schemeHomResolutionInverse (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
@@ -59,9 +54,7 @@ def schemeHomResolutionInverse (X : Scheme.{uCD})
     ((CochainComplex.toKInjectiveResolution.{uCD} _).app M))
 
 /-- The localization factorization for the fixed functorial K-injective model.
-Source: Stacks, cohomology.tex, 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-(blueprint: def-pc-canonical-derived-tensor-hom-model)
+Source: Stacks, cohomology.tex, 08DJ.
 -/
 def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
@@ -87,8 +80,6 @@ def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
 
 /-- The uncurried component of a map into the fixed Hom complex.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, componentwise evaluation.
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-(blueprint: def-pc-canonical-derived-tensor-hom-model)
 -/
 def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
     (P L M : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ)
@@ -110,9 +101,7 @@ def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
 The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
 P^p tensor L^q. The localization factorization and resolution map fix both targets.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-bijection).
-(blueprint: def-pc-canonical-derived-tensor-hom-model)
+Source: Stacks, cohomology.tex, Tag 08DJ.
 -/
 def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
@@ -150,8 +139,7 @@ def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
 The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
 P^p tensor L^q. The localization factorization and resolution map fix both targets.
-Source: Stacks, cohomology.tex, Tag 08DJ
-(blueprint: def-pc-canonical-derived-tensor-hom-model). -/
+Source: Stacks, cohomology.tex, Tag 08DJ. -/
 def IsCanonicalDerivedTensorHomMap (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (e : ∀ K L M : schemeDerivedCategory X,

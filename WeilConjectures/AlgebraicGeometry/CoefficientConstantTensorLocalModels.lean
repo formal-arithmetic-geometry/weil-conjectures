@@ -62,23 +62,7 @@ local systems on the whole source of `f`; no stratification or constructibility 
 occurs. Only an upper bound on `K` is needed, and no bound below on the result is asserted.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 094H,
-lemma-locally-constant-tensor-product; proetale.tex, Tag 09BQ, lemma-tensor-c.
-(auxiliary; not a blueprint node).
-
-Proof: The inverse image on the coefficient-sized sites is exact: base change preserves
-finite limits, and the constant coefficient ring comparison is invertible. It therefore
-commutes with cohomology and preserves the displayed upper bound. Zero cohomology objects
-have the constant zero module as a finite local model, so the hypothesis supplies locally
-constant finite type cohomology in every degree after restriction. The exact constant
-realization of M has cohomology M in degree zero and zero in other degrees, and its
-restriction is the constant realization of the same M. Choose flat-term K-flat resolutions
-of these two restricted factors. The canonical tensor-pullback comparison identifies their
-total tensor with the restriction of the displayed derived tensor. Apply Tag 094H to these
-bounded-above factors. Transport its finite constant cohomology models through the exact
-constant-scalar equivalence and its slice comparisons. This gives the stated finite local
-models for the fixed-scalar inverse image of each cohomology sheaf. Empty covering sieves,
-the zero module, the zero ring and empty schemes are allowed throughout; no finite
-projective dimension of M or lower bound for the tensor is used. -/
+lemma-locally-constant-tensor-product; proetale.tex, Tag 09BQ, lemma-tensor-c. -/
 theorem coefficientConstantTensor_restricted_finite
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]

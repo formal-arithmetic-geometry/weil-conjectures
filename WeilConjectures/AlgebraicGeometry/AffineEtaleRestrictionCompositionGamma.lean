@@ -19,11 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Sites 03CB and 03CC.
-(blueprint: lem-weil-pbc-affine-etale-restriction-composition-gamma)
-(blueprint: lem-weil-pbc-affine-etale-restriction-composition-gamma)
-Proof: conjugate pullbackComp by t, then cancel the fully faithful affine inclusion.
-The map-preimage identity and cancellation of t give the displayed equation. -/
+/-- Source: Stacks Project, Sites 03CB and 03CC. -/
 theorem affineEtale_restriction_composition_gamma
     (U : ∀ {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h],
         X.FullAffineEtale ⥤ Y.FullAffineEtale)

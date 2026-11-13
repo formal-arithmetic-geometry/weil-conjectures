@@ -87,27 +87,7 @@ This statement constructs only opens, sections of the prescribed modules, and ri
 it does not construct a module on the ambient scheme.
 
 Source: Stacks Project, Varieties Lemma 09NE, direct proof, from the definition of `T`
-through the construction of the transition functions on the three kinds of overlaps.
-(blueprint: lem-sc-closed-cover-frame-transitions)
-
-Proof: Let T be the union of intersections of distinct component images. Finiteness and
-closedness make T closed. A finite union of closed discrete subspaces is discrete: at a
-point of T, exclude the closed members not containing it and intersect neighborhoods
-isolating it in the members containing it. For each point t of T choose U_t meeting T
-only at t. Exclude component images not containing t. Shrink U_t further, finitely many
-times, so each prescribed component module has a free generator on its inverse image.
-For each point outside T use its open complement as the initial neighborhood and
-again shrink to trivialize each component through the point and exclude the others.
-These choices give a point-indexed open cover U and frames f on every component inverse
-image, including the unique frame of the zero module on empty opens. Distinct chosen
-opens overlap only outside T. On such overlaps the section identity of
-lem-sc-glue-component-reduced-cover-sections identifies ambient functions with the
-product of component functions. Unique frame-change coefficients on the components
-are units; lift their values and inverse values by the section identity. Injectivity
-shows the lifted values multiply to one, giving ambient units g with the asserted
-frame relation. On a diagonal overlap put g = 1. The empty
-scheme has the empty point-indexed cover, and all assertions are vacuous.
--/
+through the construction of the transition functions on the three kinds of overlaps. -/
 theorem exists_closedCover_frame_transitions
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedFiniteFamilyHomDescent
 /-!
 # Descending compatible local submodules to one finite coefficient field
 
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph
-(auxiliary; not a blueprint node).
+Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
 -/
 
 @[expose] public section
@@ -39,24 +38,7 @@ private lemma iso_of_overlap_maps
 /-- After a finite enlargement, the adjoints of the local model isomorphisms
 are compatible embeddings into the restriction of the given module.
 
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph.
-(auxiliary; not a blueprint node).
-
-Proof: choose the supplied local isomorphisms. At every finite stage construct the
-canonical scalar adjoints using tensor transitivity and the extension adjunction.
-The coefficient-linear projection from the algebraic closure splits the extension
-unit after all inverse images, so the adjoints are monic. Their scalar adjuncts are
-the chosen local isomorphisms composed with tensor-transitivity isomorphisms.
-Pairwise overlaps are qcqs because X is quasi-separated and the covering schemes
-are affine. Apply Hom descent to the finite family of all ordered pairs, using each overlap
-in both directions. This gives a common
-finite F and forward and reverse maps commuting with the canonical adjoints.
-The reverse upperStarCompIso is the inverse of the forward comparison. Compose
-the two equations and cancel the pulled monomorphisms to prove that the maps are
-mutual inverses. Thus they form the required underlying overlap isomorphisms, and
-the forward equations give their compatibility. No further field enlargement or
-eventual-equality argument is needed for these inverse identities. The empty cover
-is covered by the empty-family case, with F = E. -/
+Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) overlap descent paragraph. -/
 theorem exists_finiteCoefficient_compatible_local_monomorphisms
     (T X : Scheme.{u}) [QuasiSeparatedSpace X]
     (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]

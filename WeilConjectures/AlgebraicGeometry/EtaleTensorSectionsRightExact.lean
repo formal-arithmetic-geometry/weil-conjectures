@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsCokernelExact
 
 Source: blueprint `lem-sc-additive-ideal-image-tensor-comparison`, Proof, Step 2;
 Stacks Project, Descent, Tag 070S, Lemma 35.8.5(2), and Tag 03FH(1).
-(blueprint: lem-sc-etale-tensor-sections-right-exact)
 -/
 
 @[expose] public section
@@ -98,24 +97,7 @@ def etaleTensorSectionsFunctorObjIso {X : Scheme.{u}} (F : X.Modules)
 
 /-- Sheafified tensor sections preserve cokernels of module morphisms.
 Source: blueprint `lem-sc-additive-ideal-image-tensor-comparison`, Step 2;
-Stacks Project, Descent, Tag 070S, Lemma 35.8.5(2), and Tag 03FH(1).
-(blueprint: lem-sc-etale-tensor-sections-right-exact)
-
-Proof: For a module morphism F to G with cokernel Q, tensor pullback is a left
-adjoint and takes Q to the cokernel of the pulled-back morphism. A section of that
-cokernel locally lifts to G: the module cokernel is the sheafification of the
-sectionwise quotient, so this assertion holds on a Zariski cover of each etale
-object. A section of G mapping to zero locally comes from F, by the same
-sectionwise quotient description. These Zariski covers are etale covers.
-Consequently the sheafified tensor-section sequence is right exact. Equivalently,
-any morphism of abelian sheaves from the sections of G killing the sections of F
-factors uniquely through the sections of Q: lift a section locally, apply the
-morphism, and glue; local exactness gives independence of lifts and uniqueness.
-Coequalizers are cokernels of differences in these additive categories,
-and the constructed functor is additive, so it preserves all parallel-pair
-colimits. The additive universe lift preserves this construction. The argument uses no
-quasi-coherence, affine hypothesis, nonemptiness, or flatness: tensor pullback is
-right exact for every scheme morphism. -/
+Stacks Project, Descent, Tag 070S, Lemma 35.8.5(2), and Tag 03FH(1). -/
 theorem preservesCokernels_etaleTensorSectionsFunctor (X : Scheme.{u}) :
     PreservesColimitsOfShape WalkingParallelPair (etaleTensorSectionsFunctor X) := by
   let T := etaleTensorSectionsFunctor X

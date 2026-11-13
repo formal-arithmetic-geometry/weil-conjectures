@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalConstruction
 /-! # Degreewise monicity of restricted sections
 
 Source: Stacks Project, Tag 015J, total-complex comparison.
-(blueprint: lem-weil-pbc-etale-restricted-sections-inclusion-mono-component).
 -/
 
 @[expose] public section
@@ -24,18 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The restricted sections inclusion is monic degreewise.
-Source: Stacks Project, Tag 015J.
-(blueprint: lem-weil-pbc-etale-restricted-sections-inclusion-mono-component).
-Proof: In each complex degree b the outer stupid truncation inclusion has the
-retraction πStupidTruncf, also outside its support, where the source is zero.
-Apply the global-sections functor on resolution complexes and extension by zero to
-this retraction. On a total diagonal define a retraction by totalDesc: each full
-summand maps by this retraction into the corresponding restricted coprojection.
-The inclusion followed by this map is the identity, as checked on every restricted
-coprojection using ιStupidTruncf_πStupidTruncf. Thus the mapped-total inclusion is
-monic in every degree. The sections inclusion is this map precomposed with the
-inverse of the explicit finite-diagonal comparison, so it too is monic. No
-restriction on q or n is needed, including empty diagonals. -/
+Source: Stacks Project, Tag 015J. -/
 theorem etaleRestrictedSectionsInclusion_mono_component
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

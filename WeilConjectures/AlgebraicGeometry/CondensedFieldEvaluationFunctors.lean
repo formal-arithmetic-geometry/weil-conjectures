@@ -216,8 +216,7 @@ private noncomputable def pointCoordinates
 
 /-- Evaluation at the final object over one algebraically closed field.
 
-Source: Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1.
 
 Proof in words. Apply final-object sections to the underlying abelian sheaf and its
 internal action. Sections is lax monoidal: its tensorator sends a pair of sections to

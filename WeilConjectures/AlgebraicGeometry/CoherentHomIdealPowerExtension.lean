@@ -51,8 +51,7 @@ private theorem hom_zero_of_affine {X : Scheme.{u}} {M N : X.Modules}
     exact h i.1 _
 
 /-- Factor an inclusion through a monomorphism by vanishing of its cokernel projection.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+Source: Stacks Project, proof of Lemma 01YP. -/
 private theorem subobject_le_of_affine_range {X : Scheme.{u}} {M N P : X.Modules}
     (i : M ⟶ P) (j : N ⟶ P) [Mono i] [Mono j]
     (h : ∀ V : X.affineOpens, Set.range (i.app V.1) ⊆ Set.range (j.app V.1)) :
@@ -146,32 +145,7 @@ private theorem product_iso {X : Scheme.{u}} {P Q : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A morphism on the complement extends after multiplying its coherent source by an
-ideal power. This is only the surjectivity assertion, with the complement fixed in advance.
-
-Proof: X is Noetherian, so it is quasi-separated, U is quasi-compact, and I is of finite
-type. First treat G = O_X and write s for the image of 1. The image of the map defined
-by s on U is quasi-coherent of finite type. Extend it to a finite-type quasi-coherent
-submodule E of F; E is coherent and s belongs to E(U). The increasing submodules E_N
-annihilated by I^N stabilize at H = E_a, with I^a H = 0. Artin--Rees gives c such that
-I^b E meets H in a submodule of I^(b-c) H for b >= c. Taking b = a+c gives
-E' = I^b E with E' intersect H = 0 and E'|U = E|U. Every ideal-power annihilator
-of E' is zero, since E_N is contained in H for every N. The sections-over-a-quasi-
-compact-open comparison identifies the colimit of Hom(I^N, E'/E'_N) with E'(U).
-Here E'_N = 0, so a finite-stage representative of s gives I^N -> E' -> E -> F,
-with value s on 1 over U. For general coherent G, its internal
-Hom into F is quasi-coherent because G is finitely presented. Apply the structure-sheaf
-case to this internal Hom and use tensor--Hom adjunction to obtain a map from I^n ⊗ G.
-The multiplication map to G has image I^n G, and its kernel K is killed by I^n,
-as follows on affines: put J = I^n and write z = sum b_i ⊗ m_i in the kernel,
-so sum b_i m_i = 0. For a in J, tensor balancing gives
- a z = sum a ⊗ (b_i m_i) = a ⊗ 0 = 0.
-Artin--Rees gives an m for which I^m(I^n ⊗ G) meets K in
-zero. Multiplication identifies that submodule with I^(n+m)G; restricting the lifted
-map to it gives the required extension. On U multiplication by 1 shows that its
-restriction is the original map. Empty complements and zero modules obey the same
-argument; the exponent may be zero.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YB, surjectivity paragraphs.
-(blueprint: lem-weil-pbc-coherent-hom-ideal-power-extension). -/
+ideal power. This is only the surjectivity assertion, with the complement fixed in advance. -/
 theorem coherent_hom_ideal_power_extension {X : Scheme.{u}} [IsLocallyNoetherian X]
     [CompactSpace X] (I : X.IdealSheafData) (F G : X.Modules) [F.IsQuasicoherent]
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) (U : X.Opens)

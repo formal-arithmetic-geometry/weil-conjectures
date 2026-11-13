@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleActionLaws
 import Mathlib.CategoryTheory.Limits.Types.Products
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2
-(blueprint: lem-weil-pbc-inverse-image-module-object). -/
+Source: Stacks Project, Tags 03D1 and 03D2. -/
 
 @[expose] public section
 
@@ -64,20 +63,7 @@ private theorem sectionProdIso_snd (V : Scheme.{u})
 
 /-- Objectwise transport of the scalar action, before constructing maps or a functor.
 Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module; the object part of
-lem-weil-pbc-inverse-image-module-construction, step 1(a).
-(blueprint: lem-weil-pbc-inverse-image-module-object).
-
-Proof: identify the specified ring and abelian comparisons with the canonical lifts
-using the hom-equivalence equations and uniqueness of left adjoints. The set pullback
-preserves finite products. Apply it to the scalar action of G and conjugate by the
-product comparison and er and ea. Apply it to each module law: the two distributive
-laws, multiplication associativity, and the unit law. The transported ring and
-abelian operations make these precisely the module laws on the abelian pullback.
-Naturality of the transported action makes restriction maps semilinear. Thus these
-section modules form HG; its underlying abelian sheaf is the abelian pullback, giving
-eG. The original and transported action morphisms have the stated section values,
-and their definition gives the product-comparison equation. No choice of maps
-between different modules, nor functoriality, is claimed here. -/
+lem-weil-pbc-inverse-image-module-construction, step 1(a). -/
 theorem etaleInverseImageModuleObject (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

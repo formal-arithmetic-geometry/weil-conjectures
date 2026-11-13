@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 # The normalized Cartier pole-extension class
 
 proof.md, (G1) and the local lifts
-paragraph (auxiliary; not a blueprint node).
+paragraph.
 
 The relative extension model records the frame torsor of O(D), its canonical section
 on the complement, and the lift of supported one. Locally a frame is t⁻¹; its image
@@ -30,7 +30,7 @@ Cartier section on the complement. Its torsor map is equivariant and lies over t
 supported section +1. Killing the specified complementary frame fixes the relative
 class, including the sign, rather than only its image in Pic(T).
 proof.md, (G1) and the local lifts
-paragraph (auxiliary; not a blueprint node). -/
+paragraph. -/
 def CartierPoleBoundarySpec {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
     (hI : i.ker.IsInvertible)
     (β : Ext ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D))

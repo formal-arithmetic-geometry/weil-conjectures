@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 /-! # Sheafification and derived pullback of affine projective models
 
 Source: Stacks Project, Tag 09RF, affine case; Tags 08EB, 06YI and 06YJ.
-(blueprint: lem-pc-affine-descent-stage-realization).
 -/
 
 @[expose] public section
@@ -76,21 +75,7 @@ private theorem realization_perfect (Y : Scheme.{u}) (A : CommRingCat.{u})
 /-- Sheafifying a bounded finite-projective complex at any specified stage is perfect,
 and its canonical derived pullback is sheafification of scalar extension to the colimit.
 No existence of a stage and no model for a given limit object are asserted here.
-Source: Stacks Project, Tag 09RF, affine case; Tags 08EB, 06YI and 06YJ
-(blueprint: lem-pc-affine-descent-stage-realization).
-
-Proof: The stage fibre product is affine. Each finite projective module is a retract of
-a finite free module. Associated sheaf and pullback along its affine spectrum isomorphism
-preserve these retract diagrams and finite support, giving a perfect complex by 08EB.
-These projective terms are flat; their bounded complex is K-flat. The canonical counit
-of derivedPullback is an isomorphism on this K-flat representative (06YI, 06YJ).
-The ordinary affine associated-sheaf base-change isomorphism identifies its termwise
-pullback with sheafification of extension of scalars. The global-ring map of the
-canonical baseChangeMap equals colimit.ι followed by colimit.desc, by the defining
-cocone equation. Thus this base-change isomorphism uses precisely the canonical map
-in the assertion. Naturality in module maps makes the termwise isomorphisms commute
-with differentials. Apply derived localization and compose with the K-flat counit.
-This includes the zero complex, empty affine source, and zero rings. -/
+Source: Stacks Project, Tag 09RF, affine case; Tags 08EB, 06YI and 06YJ. -/
 theorem affine_descent_stage_realization
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)

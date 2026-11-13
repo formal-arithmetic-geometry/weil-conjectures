@@ -10,7 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 /-! # Intersection pasting under a proper ambient change
 
 Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, proper-projection grid.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -423,24 +422,7 @@ private theorem cancel_intersection_transport
 /-- The intersection graph comparison is natural for a proper ambient map.
 
 Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, vertical and horizontal
-pasting in the proper-projection grid.
-(auxiliary; not a blueprint node).
-
-Proof: form the map from the new intersection to the old one by the universal
-property of the two neighborhood squares. The map and its two projections are
-Cartesian over the corresponding proper product map, and the graph lifts commute
-with them. The two identity-top graph triangles used in the middle comparison
-are therefore compatible with the two proper neighborhood squares. Apply horizontal
-pasting to each graph triangle beside its projection square, then vertical pasting
-to each pair of open inclusions from the intersection to the product. Naturality
-interchanges the two exchanges meeting at a vertex. After expanding the two middle
-words, the exchanges for the map on intersections occur with opposite orientations
-and cancel. Associativity of the open compositors identifies the common composite
-open inclusion; associativity of the proper compositors identifies the two maps to Y.
-Whiskering the remaining equation by the proper direct image to Y and inserting the
-two functor associators yields the equation below. Neither side comparison nor the
-final graph comparison is used. No quasi-compactness is needed; the same identities
-apply if a neighborhood is empty or the proper ambient map is an identity. -/
+pasting in the proper-projection grid. -/
 theorem etaleGraphProperAmbientMiddle
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

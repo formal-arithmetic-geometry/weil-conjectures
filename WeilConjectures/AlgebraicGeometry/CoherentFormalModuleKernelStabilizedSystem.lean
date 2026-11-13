@@ -16,7 +16,6 @@ namespace AlgebraicGeometry
 /-- The stabilized kernel images admit a compatible system of representatives.
 
 Source: Stacks Project, Lemma 087X, construction of claims (a)--(b).
-(blueprint: new-kernel-stabilized-system).
 The proof restricts the stabilized image inclusions on a finite affine cover and
 glues the resulting compatible quasi-coherent systems.
 -/

@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 /-! # Tor amplitude under the affine associated-sheaf correspondence
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.4, Tag 08E9,
-part (1) (blueprint: lem-pc-affine-tor-amplitude-criterion).
+part (1).
 -/
 
 @[expose] public section
@@ -66,28 +66,7 @@ set_option synthInstance.maxSize 256 in
 /-- A module complex and its corresponding quasi-coherent derived object on `Spec A`
 have the same Tor amplitude in `[a,b]`. The corresponding object is the image under `Q` of
 the termwise tilde complex of `M`, as in `exists_affineQCohDerivedEquivalence`.
-Source: Stacks Project, Tag 08E9, part (1)
-(blueprint: lem-pc-affine-tor-amplitude-criterion).
-
-Proof:
-1. Choose a flat module model P in [a,b] using
-   lem-pc-module-tor-amplitude-flat-model. Bounded flat complexes are K-flat
-   (lem-pc-module-bounded-flat-kflat), and tilde preserves K-flatness
-   (lem-pc-affine-tilde-kflat). The affine equivalence transports its representing
-   isomorphism to sheaves. Tensor with a sheaf in degree zero is termwise tensor,
-   so zero terms outside [a,b] give zero homology and the required K-flat witness.
-2. Conversely, test against tilde N for every module N. Unpack the K-flat witness
-   of vanishing and apply lem-pc-kflat-derived-tensor-comparison. Choose a module
-   K-flat resolution P to M using the proved source resolution theorem
-   (lem-pc-source-module-kflat-resolution). The module K-flat tensor computation
-   (lem-pc-source-kflat-module-tensor-model) and the affine derived tensor comparison
-   identify the sheaf tensor with tilde of the module total tensor.
-3. The existing affine derived cohomology comparison
-   (new-affine-derived-tilde-homology-comparison) identifies its cohomology with tilde
-   of the module cohomology. Full faithfulness of tilde, from
-   lem-weil-pbc-affine-tilde-gamma-adjunction, detects zero identity morphisms and hence
-   zero modules. The canonical t-structure characterizations of IsGE and IsLE convert
-   this vanishing to the asserted module Tor amplitude. -/
+Source: Stacks Project, Tag 08E9, part (1). -/
 theorem affine_torAmplitude_iff (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wX}

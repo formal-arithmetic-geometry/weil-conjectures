@@ -122,20 +122,7 @@ private theorem finiteLisse_fixedModels {S : Scheme.{u}} (k : Type (u + 1)) [Com
 /-- Finite local constancy on the original etale site gives finite module values in
 its explicit constant-ring small model. The coefficient ring need not be finite.
 
-Source: Stacks Project, Tags 03RU, 03RW(3), 03CY and 03A0
-(auxiliary; not a blueprint node).
-Proof: choose a locally constant cover of F and discard its empty members. This still
-covers S, since a member covering a point is nonempty. On each remaining member U,
-choose a constant module value V and a geometric point of U. Pullback to U and the
-constant-sheaf stalk comparison identify V with the geometric stalk of F, as modules.
-The finite-sheaf hypothesis says that this stalk is finitely generated; hence V is
-finitely generated. Transport this cover along AsSmall.down, which is an equivalence
-of sites and preserves covering sieves. The scalar-restriction equivalence commutes
-with localization and identifies the constant module sheaf with the constant
-fixed-scalar sheaf. Its inverse therefore identifies the transported trivializations
-with constantCoefficientModule(V). Restrict the transported covering sieve to each
-object to obtain exactly IsLocallyConstantFiniteTypeModules. Empty S and empty slice
-objects use the empty covering sieve and require no choice of a geometric point. -/
+Source: Stacks Project, Tags 03RU, 03RW(3), 03CY and 03A0. -/
 theorem sfbEtaleResidueModel_finiteLisse (S : Scheme.{u})
     (k : Type (u + 1)) [CommRing k]
     (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} k))
@@ -162,14 +149,7 @@ theorem sfbEtaleResidueModel_finiteLisse (S : Scheme.{u})
     (SheafOfModules.coefficientRingIso_fac J k) M).mpr hring
 
 /-- The concrete residue model has locally constant finite type cohomology.
-Source: Stacks Project, Tags 03RU, 03CY and 03A0
-(auxiliary; not a blueprint node).
-Proof: choose locally constant trivializing covers for each original cohomology sheaf,
-transport them through the AsSmall site equivalence and the scalar restriction
-Equivalence, and use the exact homology comparison. The stalk modules on each cover
-are finitely generated because the original finite sheaf has finitely generated
-geometric stalks; scalar restriction preserves finite generation. The transported
-cover therefore witnesses the displayed predicate. -/
+Source: Stacks Project, Tags 03RU, 03CY and 03A0. -/
 theorem sfbImmersionResidue_lisse {X S : Scheme.{u}} (i : S ⟶ X)
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (C : CochainComplex

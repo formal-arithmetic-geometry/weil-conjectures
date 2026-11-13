@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeNaturality
 # Affine base change for global Hom out of a perfect complex
 
 Source: Stacks Project, perfect.tex, lemma-affine-morphism-and-hom-out-of-perfect,
-case (1) (blueprint: lem-pc-affine-morphism-hom-out-of-perfect).
+case (1).
 -/
 
 @[expose] public section
@@ -49,8 +49,7 @@ private theorem baseChangeMap_naturality
 Tor-independent base change in D(R'). The comparison is the extension/restriction adjoint of
 restricted RΓ applied to internal-Hom pullback, followed by the unit-compatible
 sections/pushforward comparison.
-Source: Stacks, perfect.tex, lemma-affine-morphism-and-hom-out-of-perfect, case (1)
-(blueprint: lem-pc-affine-morphism-hom-out-of-perfect).
+Source: Stacks, perfect.tex, lemma-affine-morphism-and-hom-out-of-perfect, case (1).
 
 Proof (the four steps of the node):
 1. Put M-dual = RHom(M,O_X). The perfect tensor-Hom comparison

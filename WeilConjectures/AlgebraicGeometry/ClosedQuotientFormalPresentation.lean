@@ -34,19 +34,7 @@ namespace AlgebraicGeometry
 termwise pushforward identification. The lack of a proper closed support implies
 that V(K) is nonempty.
 
-Source: Stacks Project, Theorem 088E, paragraphs 2--4, and Tag 087T.
-(blueprint: lem-weil-pbc-closed-quotient-formal-presentation).
-
-Proof: K.subschemeι is a closed immersion with kernel K. The closed-immersion
-coherent-formal equivalence is essentially surjective onto systems killed by K;
-apply it to M. Its comparison with termwise pushforward gives the displayed
-isomorphism. At points in V(K), closed pushforward has the same stalk as the
-original module, and outside V(K) its stalk is zero. Thus the first supports,
-with reduced closed subscheme structures, are identified and properness descends.
-If V(K) were empty, its closed immersion into X would be proper over any base
-(the empty morphism is proper), and its kernel K already kills M. This contradicts
-the hypothesis forbidding a proper closed support. No comparison map or enlarged
-annihilator is obtained at this step. -/
+Source: Stacks Project, Theorem 088E, paragraphs 2--4, and Tag 087T. -/
 theorem exists_closedQuotientFormalPresentation
     {X S : Scheme.{u}} [IsNoetherian X] (f : X ⟶ S)
     [LocallyOfFiniteType f]

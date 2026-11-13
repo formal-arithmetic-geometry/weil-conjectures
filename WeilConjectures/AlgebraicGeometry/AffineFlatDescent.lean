@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Global
 # The affine case of effective descent
 
 Source: Stacks Project, Descent, Lemma 35.37.1 (Tag 0245), affine case.
-(blueprint: lem-galois-affine-flat-descent-effective).
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ Transporting the resulting square through the initial affine identifications pro
 effectivity for the original schemes. The flat algebra theorem used here is
 `Algebra.DescentDatum.descendedEquiv`; it requires only flatness. Surjectivity is
 retained to match the affine case in the fpqc reduction.
-
-(blueprint: lem-galois-affine-flat-descent-effective) -/
+ -/
 theorem isEffective_of_isAffineHom_flat_affine {X S : Scheme.{u}}
     [IsAffine X] [IsAffine S] (f : X ⟶ S) (hf : Flat f) (hs : Surjective f)
     {V : Over X} [IsAffineHom V.hom] (D : Over.DescentDatum f V) : D.IsEffective := by

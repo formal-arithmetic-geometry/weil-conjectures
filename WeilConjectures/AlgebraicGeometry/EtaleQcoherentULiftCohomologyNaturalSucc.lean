@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyResolutionEvaluationNatura
 
 Source: Stacks Project, Tags 01FT and 06XR (resolution computation);
 Tag 01DO (the existing coefficient-lift injectivity theorem).
-(blueprint: lem-sc-etale-qcoherent-ulift-cohomology-natural-succ)
 -/
 
 @[expose] public section
@@ -31,33 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- The positive-degree naturality part of coefficient comparison.
 Source: Stacks Project, Tags 01FT and 06XR, with coefficient-lift injectivity
-from Tag 01DO. The original statement is the comparison needed in Tag 03P2.
-(blueprint: lem-sc-etale-qcoherent-ulift-cohomology-natural-succ)
-
-Proof: Choose an injective resolution R of the associated sheaf E. Coefficient
-lift is additive and preserves homology by etale_ulift_preservesHomology; it
-preserves injective sheaves by etale_ulift_injective. Apply it degreewise to R,
-with the single-complex comparison on the augmentation, to construct a genuine
-injective resolution S of L(E). This uses the proved preservation interfaces;
-no preservation hypothesis is added to the statement. Evaluate both resolutions
-at the terminal etale object. The evaluation complex of S is definitionally the
-coefficient lift of the evaluation complex of R. Homology preservation by the
-group lift gives an additive equivalence between their homology groups after
-lowering the lifted group. The general natural resolution-evaluation comparison
-identifies these groups with Sheaf.H, including the specified HasExt.standard
-instance on the small side. Compose the three comparisons to choose e.
-
-For any abelian sheaf endomorphism theta, InjectiveResolution.desc lifts it to
-an endomorphism phi of R, with augmentation compatibility. L(phi) is a map of S
-over L(theta), as follows by applying L to that compatibility. The two natural
-resolution-evaluation comparisons and mapHomologyIso_hom_naturality identify the
-induced maps under e. All comparisons are fixed before theta is introduced.
-No O-linear hypothesis on theta is used. This argument works for every abelian
-sheaf, hence in particular for the tensor-section sheaf in the statement, and
-handles the empty scheme and zero sheaf without cases. Compactness, separatedness
-and quasi-coherence are retained in the unchanged statement but are not needed
-for this route. It avoids the finite affine cover and its spectral sequences.
--/
+from Tag 01DO. The original statement is the comparison needed in Tag 03P2. -/
 theorem exists_etaleTensorSectionsSheaf_cohomology_ulift_natural_succ
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :

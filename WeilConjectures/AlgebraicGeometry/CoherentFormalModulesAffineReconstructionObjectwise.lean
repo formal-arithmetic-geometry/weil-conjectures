@@ -31,19 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Tilde of the module projection is a cokernel of the sheaf ideal-power inclusion.
 Source: Stacks Project, Schemes, Section 01LA, item (8), Lemma 01IC and Lemma 01ID;
-Cohomology of Schemes, Lemma 087W, the reduction to module systems.
-
-Proof: On each basic open D(f), tilde sections are localized modules. The ideal
-associated to I has localized ideal I_f, and its nth power has ideal (I^n)_f.
-Localization commutes with products and images, so the image of the multiplication
-inclusion on these sections is (I^n N)_f. Localization is exact, hence the localized
-projection N_f -> (N/I^n N)_f is surjective with this kernel. The composite of the
-inclusion and projection is therefore zero on the basic-open basis, hence zero as
-a sheaf morphism. Given a sheaf morphism from tilde(N) annihilating the inclusion,
-its maps on basic-open sections descend uniquely through these quotient projections.
-Uniqueness and compatibility of the original maps make these descended maps commute
-with restriction; they glue to a unique sheaf morphism from tilde(N/I^n N).
-This is exactly the cokernel cofork universal property. -/
+Cohomology of Schemes, Lemma 087W, the reduction to module systems. -/
 private theorem affineIdealPower_tilde_cokernel
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -174,16 +162,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A surjective section map with ideal-power kernel induces the specified quotient
 isomorphism at a single level. Source: Stacks Project, Lemma 087W, the reduction to
-module systems; Schemes 01I7 and 01IB, and the ideal-product calculation of 01IC.
-
-Proof: The first isomorphism theorem identifies N/(I^n N) with Gamma(F), with its
-projection induced by q. The affine ideal-product formula identifies the inclusion
-of J^n tilde(N) with the tilde of I^n N, because J is associated to I. Tilde preserves
-cokernels, hence identifies the sheaf quotient with tilde(N/(I^n N)). Compose this
-comparison with tilde of the first-isomorphism map and the quasi-coherent counit onto
-F. Each comparison respects its projection, so their composite has the stated
-factorization. This factorization uniquely determines the isomorphism, since the
-quotient projection is an epimorphism. -/
+module systems; Schemes 01I7 and 01IB, and the ideal-product calculation of 01IC. -/
 private theorem affineFormalQuotient_projection_iso
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -231,10 +210,7 @@ private theorem affineFormalQuotient_projection_iso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The proof follows the first-isomorphism and affine tilde/Gamma arguments,
-then checks transition and map naturality as in Lemma 087W.
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-reconstruction-objectwise).
-Proof: apply the corresponding argument to quotient projections and cancel their
-surjectivity. -/
+then checks transition and map naturality as in Lemma 087W. -/
 theorem coherentFormalModules_affine_reconstruction_objectwise
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

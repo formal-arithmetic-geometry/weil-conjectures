@@ -33,25 +33,7 @@ set_option backward.defeqAttrib.useBackward true in
 The cone need not be limiting; affineness, directedness and covering are unnecessary.
 
 Source: Stacks Project, Sites Tags 03CB and 03CC; unit-compatible composition
-in lem-weil-pbc-sets-etale-inverse-image-composition-units.
-(blueprint: lem-weil-pbc-sets-local-stage-image-equations).
-
-Proof: Write h = D(r.left), f = D(j.hom), g = c.π.app j'.left.
-The over-category equation gives h ≫ f = D(j'.hom); the cone equation gives
-g ≫ h = c.π.app j.left. Expand each sheaf comparison as its adjunction unit
-followed by the chosen unit-compatible inverse-image composition isomorphism.
-Naturality of the g-unit in the sheaf morphism for (f,h), associativity of these
-composition isomorphisms, and the composition-unit equation for (h,g) show
-that applying β_j' to the transported s_q equals applying β_j to s_q, followed
-by restriction along the canonical isomorphism between g^*h^*V_q and p_j^*V_q.
-Substitute the original equation with t. Combine restrictions using the
-presheaf composition law. Naturality and associativity of the canonical
-iterated-base-change isomorphisms identify the resulting arrow to p_i₀^*W
-with B_j'(a'_q) ≫ e_j'⁻¹: both have the same projections to V_q, W, and c.pt.
-This yields exactly the displayed equation. Equality elimination handles the
-non-definitional commuting triangles; proof irrelevance removes dependence on
-their witnesses. This calculation is pointwise in q, so also covers an empty
-family, and uses neither existence of a global section at a stage nor gluing. -/
+in lem-weil-pbc-sets-etale-inverse-image-composition-units. -/
 theorem etaleSet_localStageImageEquations
     {I : Type u} [Category I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

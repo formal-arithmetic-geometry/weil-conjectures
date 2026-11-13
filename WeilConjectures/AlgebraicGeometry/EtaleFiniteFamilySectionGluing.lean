@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 /-! # Gluing étale sections on a finite disjoint union
 
 Source: Stacks Project, Tag 09ZF, fourth proof paragraph, disjoint union of representatives.
-(blueprint: lem-weil-pbc-etale-finite-family-section-gluing).
 -/
 
 @[expose] public section
@@ -28,21 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- Assemble finitely many representing sections into one surjective étale object.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, the disjoint union of U_j.
-(blueprint: lem-weil-pbc-etale-finite-family-section-gluing).
-
-Proof: Form the finite scheme coproduct of the underlying schemes of U_j and let
-q be the map induced by their structure maps. Its coprojections are open immersions
-and cover the coproduct. Thus q is étale by locality on the source; hcover makes
-it surjective. The coprojections are an étale cover. Different components have
-empty fibre product, and the self-intersections are the components themselves,
-so the given s_j are compatible and glue uniquely to s in F(U). Base change
-preserves this cover. On each base-changed component, unit naturality identifies
-i⁻¹s with i⁻¹s_j, which equals the restriction of t by heq. Separatedness of the
-inverse-image sheaf proves the asserted global equation. The finite coproduct
-is a scheme in universe u. For empty J, hcover forces X empty; the empty-cover
-sheaf axiom gives the unique s and the unique equality after base change.
-No closed-immersion, compactness, or Zariski-unit hypothesis is needed. -/
+Source: Stacks Project, Tag 09ZF, fourth proof paragraph, the disjoint union of U_j. -/
 theorem etale_finite_family_section_gluing
     {X Z : Scheme.{u}} (i : Z ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

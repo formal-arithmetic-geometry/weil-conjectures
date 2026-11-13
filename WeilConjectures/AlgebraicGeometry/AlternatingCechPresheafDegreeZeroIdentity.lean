@@ -123,22 +123,7 @@ private theorem pairIntersection {X : Scheme.{u}} {r : ℕ}
 
 /-- Degree-zero insertion expresses restriction as an augmentation plus a boundary term.
 Source: Stacks Project, Tag 02FU, insertion cancellation in degree zero;
-Tag 01FM for the increasing-tuple convention.
-(blueprint: lem-pc-s3-alternating-cech-presheaf-degree-zero-identity).
-
-Proof: Put K(P)(V)=P(V intersect U i), with scalars restricted from V. Define p
-by projection onto the singleton i, whose intersection is U i. For each singleton
-j, define the j coordinate of h by the pair {i,j}: when i<j take its coordinate
-with positive sign, when j<i with negative sign, and when i=j take zero. Its
-sections live on V intersect U i intersect U j, precisely the j coordinate of
-K(P0)(V). The canonical intersection equalities identify these modules; all maps
-are O(V)-linear and natural in V. The j coordinate of d followed by h is the
-restriction of the j section minus the restriction of the i section. The latter
-is the j coordinate of p followed by K(augmentation). Their sum is restriction
-to U i. For j=i the first term is zero and the second is restriction itself.
-Equality in the finite product proves the stated identity. No sheafification or
-integer extension occurs here. For r=0 there is no i; for r=1 the differential
-term is zero; empty intersections give the same identity in zero modules. -/
+Tag 01FM for the increasing-tuple convention. -/
 theorem alternatingCechSheafPresheaf_degreeZero_identity
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let K := cechCapPresheafFunctor (U i)

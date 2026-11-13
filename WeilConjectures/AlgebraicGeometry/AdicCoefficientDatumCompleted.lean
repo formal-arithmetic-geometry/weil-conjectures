@@ -43,8 +43,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Completed adic coefficient datum and its strict reduction tower
 
-Source: blueprint, proper base change, order 1239; Stacks Tags 099L and 099M
-(blueprint: def-weil-pbc-adic-coefficient-datum).
+Source: proper base change, order 1239; Stacks Tags 099L and 099M.
 
 The site has object universe t+1 and morphism universe t. Coefficients and modules
 are in t+1. The ambient ring is the actual inverse limit of the finite constant
@@ -76,7 +75,7 @@ attribute [local irreducible] Functor.mapHomotopyCategory
 namespace AlgebraicGeometry.Scheme
 
 /-- The Noetherian, finitely generated, torsion, perfect and finite quotient hypotheses.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 structure ProEtaleAdicCoefficientDatum (A : Type (t + 1)) [CommRing A]
     extends CompleteCoefficientDatum A where
   quotientFinite : ∀ n : ℕ, Finite (A ⧸ ideal ^ (n + 1))
@@ -91,25 +90,22 @@ variable [TopologicalSpace P] [DiscreteTopology P]
 end FiniteCoefficientComparison
 
 /-- The completed coefficient sheaf, with its genuine compatible-family sections.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 def adicDatumRing := adicLisseCompletedRing T d.ideal
 
 /-- Module sheaves over the completed coefficient sheaf.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 abbrev adicDatumModules := completedConstantModules T (adicDatumRing T d)
 
 /-- Finite biproducts are the usual products in the abelian module category.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 instance adicDatumFiniteBiproducts : HasFiniteBiproducts (adicDatumModules T d) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The original ring acts by its compatible residues in every finite quotient.
-The projection equations determine this map uniquely.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the constant quotient maps form a cone, since the quotient maps compose.
-Use the limit lift; its projection identities prove existence and uniqueness. -/
+The projection equations determine this map uniquely. -/
 theorem adicDatumScalar_exists :
     ∃! φ : adicLisseConstantRing T A ⟶ adicDatumRing T d,
       ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem T d.ideal) (op n) =
@@ -133,7 +129,7 @@ theorem adicDatumScalar_exists :
     exact (hφ n.unop).trans (limit.lift_π c n).symm
 
 /-- The unique compatible-residue coefficient map.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 def adicDatumScalar := (adicDatumScalar_exists T d).exists.choose
 
 section ScalarChange
@@ -142,7 +138,7 @@ variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
 
 /-- Local pure tensors in the actual sheafified extension, transported by the
 specified object identification of the additive scalar-extension witness.
-Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+; Tag 03EK. -/
 abbrev adicDatumTensorSection (M : completedConstantModules T R) (U : T.ProEtᵒᵖ)
     (s : S.obj.obj U) (m : M.val.obj U) :
     ((reductionChange T φ).obj M).val.obj U :=
@@ -162,9 +158,7 @@ private theorem adicDatumOrdinaryAdjunction_formula :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary tensor/restriction unit, fixed by its local pure-tensor formula.
-Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the presheaf tensor unit m maps to 1 tensor m and then sheafifies.
-Naturality on restrictions gives a sheaf map; tensor generation gives uniqueness. -/
+; Tag 03EK. -/
 theorem adicDatumOrdinaryUnit_exists (M : completedConstantModules T R) :
     ∃! u : M ⟶ (SheafOfModules.restrictScalars.{t + 1}
       ((adicLisseForget T).map φ)).obj ((reductionChange T φ).obj M),
@@ -182,7 +176,7 @@ theorem adicDatumOrdinaryUnit_exists (M : completedConstantModules T R) :
   exact (hu U x).trans (ha M U x).symm
 
 /-- The ordinary unit, selected by the unique section formula.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 def adicDatumOrdinaryUnit (M : completedConstantModules T R) :
     M ⟶ (SheafOfModules.restrictScalars.{t + 1}
       ((adicLisseForget T).map φ)).obj ((reductionChange T φ).obj M) :=
@@ -191,10 +185,7 @@ def adicDatumOrdinaryUnit (M : completedConstantModules T R) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor/restriction adjunction normalized by the ordinary unit on every module.
-Source: order 1239; Tag 03EK (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the balanced map sends s tensor m to s times the proposed restricted map(m).
-Sheafification extends it uniquely. Evaluation at 1 tensor m is its inverse;
-the formulas commute with precomposition and postcomposition. -/
+; Tag 03EK. -/
 theorem adicDatumOrdinaryAdjunction_exists :
     ∃ adj : reductionChange T φ ⊣
         SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ),
@@ -206,7 +197,7 @@ theorem adicDatumOrdinaryAdjunction_exists :
     (adicDatumOrdinaryUnit_exists T φ M).exists.choose_spec
 
 /-- The canonical ordinary scalar adjunction.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+ -/
 def adicDatumOrdinaryAdjunction : reductionChange T φ ⊣
     SheafOfModules.restrictScalars.{t + 1} ((adicLisseForget T).map φ) :=
   (adicDatumOrdinaryAdjunction_exists T φ).choose

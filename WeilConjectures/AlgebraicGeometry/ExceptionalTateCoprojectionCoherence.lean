@@ -12,8 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 # Closed-immersion Tate co-projection coherence
 
 Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-regular/
- sk-thm-regular.proof.md`, Steps 2 and 4(iii)
-(blueprint: lem-pur-exceptional-tate-coprojection-coherence).
+ sk-thm-regular.proof.md`, Steps 2 and 4(iii).
 
 The canonical co-projection for the shifted Tate object is defined from the specified
 right-adjoint tensor mate and the canonical inverse-image Tate comparison.  The coherence
@@ -35,8 +34,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z]
 
 /-- The finite Tate object `A_T(r)[2r]` used in the co-projection statement.
-Source: the finite Tate convention in `sk-thm-regular.proof.md`, Step 1
-(blueprint: lem-pur-exceptional-tate-coprojection-coherence). -/
+Source: the finite Tate convention in `sk-thm-regular.proof.md`, Step 1. -/
 noncomputable def shiftedTateObject (T : Scheme.{u}) (r : ℤ) :
     _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   (tateObject Λ T r)⟦2 * r⟧
@@ -44,8 +42,7 @@ noncomputable def shiftedTateObject (T : Scheme.{u}) (r : ℤ) :
 /-- The zero Tate factor identified with the ordinary tensor unit, `T_0^T = A_T(0)[0] ≅ A_T`.
 
 Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-regular/
- sk-thm-regular.proof.md`, Step 2, zero twist
-(blueprint: lem-pur-exceptional-tate-coprojection-coherence). -/
+ sk-thm-regular.proof.md`, Step 2, zero twist. -/
 noncomputable def shiftedTateZeroIso (T : Scheme.{u}) [HasInvertibleExponent Λ T] :
     shiftedTateObject Λ T 0 ≅ constantComplex Λ T :=
   (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).app _ ≪≫
@@ -55,8 +52,7 @@ noncomputable def shiftedTateZeroIso (T : Scheme.{u}) [HasInvertibleExponent Λ 
 the Tate addition at `(r, -r)` followed by the zero-shift and zero-twist identifications.
 
 Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-regular/
- sk-thm-regular.proof.md`, Step 2, cancellation of the invertible Tate factor
-(blueprint: lem-pur-exceptional-tate-coprojection-coherence). -/
+ sk-thm-regular.proof.md`, Step 2, cancellation of the invertible Tate factor. -/
 noncomputable def shiftedTateEvaluation (T : Scheme.{u}) [HasInvertibleExponent Λ T]
     (r : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) T).obj

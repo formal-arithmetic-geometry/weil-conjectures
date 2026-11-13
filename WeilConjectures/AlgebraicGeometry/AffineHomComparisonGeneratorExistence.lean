@@ -142,27 +142,7 @@ private theorem restrict_scalar_naturality {R : CommRingCat.{u}} {X : Scheme.{u}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Global linear maps extend to a morphism into the internal Hom sheaf.
-Source: Stacks Project, Tag 01I7 (mapping property) and Tag 01HV (4)-(5).
-(blueprint: new-affine-hom-generator-extension-existence).
-
-Proof: Substitute the equation fixing the chart functor T. Compose the tilde
-adjunction with the restriction adjunction along the affine chart. This composite
-is additive since it preserves colimits. Send h to its internal-Hom section,
-precomposed with e.hom. This assignment is additive by the section equivalences.
-For scalar multiplication, tilde(r*h) sends each localized m/s to r*h(m)/s;
-this follows by induction on localized-module fractions. Transport this identity
-through the chart's ring isomorphisms. Their naturality shows that the local
-scalars restrict compatibly. Linearity of e and commutativity of the local rings
-then give alpha(r*h) = T(a |-> a*r) followed by alpha(h). This works for any
-linear rank-one isomorphism e, so its additional normalization is not needed.
-Apply the adjunction to alpha(h), obtaining a map A -> S(internalHom), and evaluate
-it at one. The additive adjunction equivalence and its naturality under
-multiplication by r show that these values form an A-linear map from Hom_A(M,N).
-Its adjoint is c. Naturality under a |-> a*h proves the generator equation after
-precomposition with e.hom; cancellation with e.inv gives the displayed formula.
-No finite presentation or quasi-coherence of internal Hom is needed. The same
-construction includes the zero ring and zero coefficient modules.
-Only existence is asserted here; uniqueness is proved separately by adjunction. -/
+Source: Stacks Project, Tag 01I7 (mapping property) and Tag 01HV (4)-(5). -/
 theorem exists_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) :
     ∀ (T : ModuleCat.{u} Γ(Y, U.1) ⥤ U.1.toScheme.Modules)

@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 # Descended overlap transitions before gluing
 
 Source: Stacks Project, Descent, Tag 0AP4, construction of U_ij and transition maps.
-(blueprint: lem-pd-descended-overlap-glue-data).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Over.DescentDatum
 
 /-- The fpqc sheaf condition for representables makes a covering singleton effective epi.
-Source: Stacks Project, Descent, Tag 023Q; Mathlib's fpqc subcanonical instance.
-(blueprint: lem-pd-descended-overlap-glue-data). -/
+Source: Stacks Project, Descent, Tag 023Q; Mathlib's fpqc subcanonical instance. -/
 private theorem effectiveEpi_of_cover {A B : Scheme.{u}}
     (J : Precoverage Scheme) (hJ : J ≤ Scheme.fpqcPrecoverage)
     (q : A ⟶ B) (hq : Presieve.singleton q ∈ J B) : EffectiveEpi q := by
@@ -41,7 +39,6 @@ private theorem effectiveEpi_of_cover {A B : Scheme.{u}}
 /-- Pairwise cartesian lifts and the transition factorization imply the triple cocycle.
 
 Source: Stacks Project, Descent, Tag 0AP4, omitted verification of the gluing identities.
-(blueprint: lem-pd-descended-overlap-glue-data).
 
 Pull back each double overlap along its map to W_i to obtain an fpqc effective epi c.
 The cartesian lifts give maps a and b to the original pairwise intersections, with the
@@ -153,7 +150,6 @@ private theorem overlap_cocycle
 
 /-- Compatibility with the ambient datum preserves factorization through another open.
 Source: Stacks Project, Descent, Tag 0AP4, compatibility of the overlap with descent data.
-(blueprint: lem-pd-descended-overlap-glue-data).
 Lift the initial point through U_k, transport both lifts, and compare their inclusions
 using hcompat. The transported point still factors through U_k. -/
 private theorem transport_range_open
@@ -189,7 +185,6 @@ private theorem transport_range_open
 
 /-- The intersection open satisfies the double-overlap equality required by open descent.
 Source: Stacks Project, Descent, Tags 0AP4 and 03N0.
-(blueprint: lem-pd-descended-overlap-glue-data).
 For two maps a and b with the same q_i composite, restrict their test scheme to the
 preimage of U_k under a. Cartesian uniqueness and hinv identify transport of a with b.
 The preceding factorization lemma gives containment of the preimage under a in that
@@ -250,38 +245,7 @@ private theorem intersections_invariant
 /-- The effective local models have open overlap transitions and lifts of the intersections.
 
 Source: Stacks Project, Descent, Tag 0AP4, proof through the construction of gluing data;
-Tags 03N0 and 02W0 for descent of opens and morphisms, respectively.
-(blueprint: lem-pd-descended-overlap-glue-data).
-
-Proof:
-1. Inside U_i, take the inverse image of U_k under its inclusion in V. Given two
-   transports over the same map to Y, membership in this intersection is preserved:
-   compatibility with D makes the two inclusions agree after transport, and inverse
-   transport gives the reverse implication. The pullback square for q_i identifies
-   U_i with W_i times_Y X. Transport invariance of q_i and the pullback universal
-   property identify E_i with the canonical descent datum. Base change of the fpqc
-   singleton p makes q_i an fpqc singleton. Tag 03N0 descends the invariant intersection
-   to a unique open O_ik of W_i. Set Z(i,k) to its open subscheme and f i k to its
-   inclusion. The diagonal intersection is all U_i, so uniqueness gives O_ii = W_i
-   and f i i is an isomorphism.
-2. The common intersection U_i times_V U_k identifies the pullbacks of Z(i,k) and
-   Z(k,i) along p. Its identity commutes with the canonical descent data just identified.
-   Tag 02W0 descends this identity to t i k over Y, and descends its inverse to t k i.
-   Injectivity proves the inverse identities and t i i = identity. The restriction of
-   q_i to the intersection factors through the descended open, giving r i k. The
-   factorization equations are r i k followed by f i k = first projection followed by
-   q_i, and r i k followed by t i k and f k i = second projection followed by q_k.
-   Descent of the open identifies its pullback along q_i with this intersection,
-   giving the asserted cartesian square for r i k.
-3. On triple intersections, uniqueness in Tag 03N0 identifies the overlap domains.
-   Restrict the transitions there and use the pullback universal property to obtain
-   t' i k l. Its second projection is the first projection followed by t i k.
-   After fpqc base change the three cyclic restrictions are identities on the same
-   triple intersection; injectivity in Tag 02W0 gives the cyclic cocycle equation.
-   The f i k are open immersions by construction. No covering assumption on U is used,
-   and no ambient glued scheme or map from it to Y is asserted. Empty I gives empty
-   families with all assertions vacuous; empty individual opens descend to empty opens.
--/
+Tags 03N0 and 02W0 for descent of opens and morphisms, respectively. -/
 theorem exists_descended_overlap_glue_data
     {X Y : Scheme.{u}} {p : X ⟶ Y}
     (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y)

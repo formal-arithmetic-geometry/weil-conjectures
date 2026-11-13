@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.NatIso
 /-! # The smaller-support cokernel of an ideal-sum inclusion
 
 Source: Stacks Project, Tag 01YF, final paragraph, using Tag 01YE.
-(blueprint: lem-weil-pbc-coherent-ideal-sum-cokernel-reduction)
 -/
 
 @[expose] public section
@@ -32,21 +31,8 @@ attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- An ideal-sum inclusion which is invertible near a nonzero stalk has a nonzero
 ideal, coherent source and cokernel, and strictly smaller cokernel support.
-Source: Stacks Project, Tag 01YF (`lemma-coherent-filter`), final paragraph,
-using the coherent inclusion of Tag 01YE (`lemma-prepare-filter-irreducible`).
-(blueprint: lem-weil-pbc-coherent-ideal-sum-cokernel-reduction)
-
-Proof: the closed subscheme is locally Noetherian, since a closed immersion is
-locally of finite type. Finite sums of its coherent ideal are coherent, as is their
-finite pushforward. Coherent cokernel closure proves coherence of the cokernel.
-If I were zero, all its summands and their pushforward would be zero. The local
-isomorphism would force the target stalk at x to be zero, contradicting hx.
-The cokernel projection is an epimorphism, hence is surjective on stalks: its
-support is contained in the support of F. Restriction to W preserves cokernels;
-the cokernel of the restricted isomorphism is zero. In particular its stalk at x
-is zero. Thus x belongs to the support of F but not to that of the cokernel,
-proving strict containment. This reasoning allows r = 0 syntactically, but the
-nonzero target stalk excludes that case as well. -/
+Source: Stacks Project, Tag 01YF, final paragraph,
+using the coherent inclusion of Tag 01YE. -/
 theorem coherent_ideal_sum_cokernel_reduction
     {X Z : Scheme.{u}} [IsLocallyNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i]

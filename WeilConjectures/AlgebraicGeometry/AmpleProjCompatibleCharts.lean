@@ -27,24 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Local quotient morphisms on nonvanishing opens agree on overlaps. Their fraction
 identities are equations of sections on the ambient image of each local chart
 preimage. No covering hypothesis or global morphism is asserted here.
-Source: Stacks Project, Properties, Tag 01PZ, proof; Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-ample-proj-compatible-quotient-charts).
-
-Proof: A section of positive degree d trivializes L^{tensor d} on its nonvanishing
-open. Its tensor powers therefore give unique division of degree nd sections by s^n.
-These quotients respect the equivalence relation on homogeneous fractions: multiply
-an equality by a sufficiently large power of s, then cancel the free generator.
-Tensor multiplication gives a unital ring homomorphism from S_(s) to functions on
-this open. The affine morphism correspondence and D_+(s) = Spec S_(s) give the local
-morphism to Proj. For sections s,t of degrees d,e, the quotient t^d/s^e is invertible
-exactly where t is nonvanishing, by the residue-field criterion and d > 0. Thus the
-inverse image of D_+(t) is the intersection of the two nonvanishing opens. Both maps
-on that intersection factor through D_+(st), where their ring maps send a/(st)^n
-to the quotient by (st)^n. The identities a t^k/(st)^k = a/s^k and
-b s^k/(st)^k = b/t^k prove agreement. For any other positive-degree chart t, the
-same calculation on its inverse image gives the fraction identity with denominator
-t, after restricting to the original open. All these statements hold on an empty
-open, where sections are unique; n = 0 is the tensor-unit coefficient map. -/
+Source: Stacks Project, Properties, Tag 01PZ, proof; Constructions, Tags 01N8 and 01NK. -/
 theorem exists_sectionRing_compatible_quotient_charts
     (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (I : Type w) (d : I → ℕ) (s : ∀ i, sectionRingGrade L (d i))

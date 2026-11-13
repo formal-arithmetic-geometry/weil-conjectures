@@ -13,7 +13,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 /-! # Products generating the ring of an affine base-change intersection
 
 Source: Stacks Project, Tag 02KG, Lemma 30.5.1, affine tensor computation.
-(blueprint: lem-pc-coefficient-intersection-scalar-decomposition).
 -/
 
 @[expose] public section
@@ -27,21 +26,7 @@ open scoped TensorProduct
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every scalar on the intersection is a finite sum of products of scalars from
-its two factors. Source: Stacks Project, Tag 02KG, Lemma 30.5.1.
-(blueprint: lem-pc-coefficient-intersection-scalar-decomposition).
-
-Proof: Put Y = f inverse image U and V = the image of Z under Y -> X.
-The open immersion identifies Z with V. Restrict the given cartesian square
-first to V and then to B. Its top left corner is I = W intersect f' inverse
-image B, and the square identifies I with Z times_U B. All three factors
-Z, U and B are affine, so the affine pullback ring is Gamma(B) tensor over
-Gamma(U) Gamma(Z). The open immersion identifies Gamma(Z) with Gamma(X,V).
-The maps from these two rings to Gamma(X',I) are precisely app followed by
-restriction as displayed below. The canonical tensor map is surjective, and
-its pure tensors are the displayed products. Tensor induction expresses any
-preimage as a finite sum of pure tensors (scalar multiples are absorbed into
-one factor). The empty intersection and zero rings obey the same tensor
-calculation, and the zero scalar also admits the empty sum. -/
+its two factors. Source: Stacks Project, Tag 02KG, Lemma 30.5.1. -/
 theorem coefficientIntersection_scalar_decomposition
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (U : T.Opens) (hU : IsAffineOpen U)

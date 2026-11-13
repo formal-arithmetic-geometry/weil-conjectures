@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCounitSquare
 /-! # The affine spectrum counit square on the canonical representative
 
 Source: Stacks Project, Tag 0DJ8, affine reduction; Tags 0098 and 0D5S.
-(blueprint: lem-pc-affine-spectrum-canonical-comparison-square).
 -/
 
 @[expose] public section
@@ -48,30 +47,7 @@ private theorem comparisonIntoPullback_eq
 
 set_option maxHeartbeats 1100000 in
 -- The comparison expands several nested stalk and localization functors.
-/-- The comparison square for the termwise spectrum pullback with its canonical counit.
-
-Proof: isoSpec naturality and stalkMap_comp identify the four stalk rings and
-intertwine their structural maps, including the stalkCongr in rightAlgebra.
-The tensor universal property intertwines tensorMap: check on the A and B inclusions.
-The tensor-pullback stalk formula identifies the stalk complex of Q with extension
-of the stalk complex of P along the resulting ring isomorphism. Restriction along
-its inverse gives an inverse exact equivalence. Transport the universal R-to-B
-left-derived extension through these equivalences; uniqueness of the left-derived
-lift gives the counit-compatible identification. Taking degree-i homology and
-using cohomologyIso_smul lifts its B-linear source comparison to an isomorphism
-of the full tensor-algebra modules. Extend to C and forget scalars to obtain l.
-The model equations comparison_eq and localized_eq identify the comparisons
-with the derived counits. The germ formula for tensorStalkIso and the
-restriction-stalk construction of isoPullbackStalkCohomologyIso identify the
-ordinary pullback factors. The defining leftDerivedLift equation for the
-composition comparison gives affineSpectrumDerivedPullbackIso.inv, with the
-specified canonical counit d. Combining these counit equations gives the square.
-There are no changes of derived representatives in this statement. In particular,
-no invertibility of either localized comparison is used; empty schemes, zero
-rings, zero complexes, unbounded complexes, and arbitrary i use the same argument.
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098,
-lemma-stalk-pullback-modules; Tag 0D5S, lemma-pullback-composition.
-(blueprint: lem-pc-affine-spectrum-canonical-comparison-square). -/
+/-- The comparison square for the termwise spectrum pullback with its canonical counit. -/
 theorem exists_affineSpectrum_canonicalComparison_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

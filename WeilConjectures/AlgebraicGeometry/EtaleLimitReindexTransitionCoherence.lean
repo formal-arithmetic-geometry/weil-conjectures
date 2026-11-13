@@ -63,17 +63,7 @@ private theorem reindex_transition_coherence_aux
 
 /-- Inverse-image transition identity and composition are preserved by reindexing.
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit), restriction to a cofinal tail.
-(blueprint: lem-weil-pbc-etale-limit-reindex-transition-coherence).
-
-Proof: evaluate the original identity law at t.obj i and the composition law at
- t.map f and t.map g. Functoriality identifies t.map (identity) with identity
-and t.map (f composed with g) with t.map f composed with t.map g. The opposite
-functor and the composite scheme diagram have the same object and arrow maps.
-Proof irrelevance identifies the proofs of the equations used in eqToIso and
-upperStarComp. Thus the two original equalities are exactly the restricted laws.
-This holds for empty or singleton preorders as well as all degrees and sheaves;
-no nonemptiness, directedness, affineness, or existence of a limit is used. -/
+Source: Stacks Project, Tag 09YQ, restriction to a cofinal tail. -/
 theorem etale_limit_reindex_transition_coherence
     {I J : Type u} [Preorder I] [Preorder J]
     (t : J ⥤ I) (D : Iᵒᵖ ⥤ Scheme.{u})

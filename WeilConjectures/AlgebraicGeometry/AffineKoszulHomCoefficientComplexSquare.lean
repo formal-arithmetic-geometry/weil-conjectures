@@ -41,31 +41,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Applying internal Hom to the sheafified coefficient quotient gives the
 sheafification of the explicit coefficient reduction between dual complexes.
 Source: Stacks Project, Tag 0BQZ, Lemma 48.15.5, displayed Hom-complex map;
-Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules.
-(blueprint: lem-sc-affine-koszul-hom-coefficient-complex-square).
-
-Proof: Substitute the equality hH identifying the given functor with Hom(E,-).
-For either coefficient module M = A or A/I, project the product defining
-Hom(E,M[0]) in degree k to the factor of source degree -k. All other factors
-have zero target. The product lift with this component and zero in the others
-is the inverse. For k >= 0, the canonical extension term is wedge^k(A^n).
-Its exterior-power basis is finite. On a basic open D(g), a map from its
-associated sheaf to tilde(M) is uniquely specified by its values on that basis,
-which lie in M_g. A finite tuple of such values is precisely the localization
-of Hom_A(wedge^k(A^n),M). These coordinate isomorphisms commute with restriction
-because each basis value localizes, so they glue to sheaf isomorphisms. For
-k < 0, the source term and the extended dual term are zero, giving the unique
-isomorphism. Under these identifications the Hom differential is signed
-precomposition: its target contribution vanishes and its source contribution
-is -(-1)^k times precomposition by the Koszul boundary. At k >= 0 this is
-(-1)^(k+1), the sign of both recorded dual differentials. At the boundary
-from degree -1 to 0 both maps are zero. Thus the isomorphisms form chain
-isomorphisms. Postcomposition with the coefficient quotient reduces each
-basis value modulo I; this is exactly koszulCoefficientReductionDegree, so
-the square commutes in every degree and hence as complex morphisms. This
-calculation is natural in the coefficients and does not take homology or
-assume regularity. For n = 0 only degree zero survives; for k > n the exterior
-basis is empty. Zero rings, I = top, and empty charts give zero objects. -/
+Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules. -/
 theorem affine_koszul_hom_coefficient_complex_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n : ℕ) (f : Fin n → Γ(Y, U.1))

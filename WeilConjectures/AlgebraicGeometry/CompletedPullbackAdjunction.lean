@@ -42,8 +42,7 @@ set_option linter.privateModule false
 # Completed pullback is left adjoint to direct image
 
 Source: Stacks Project, `proetale.tex`, Tags 099M and 099N (1), (2), and
-`algebraization.tex`, Tag 099K
-(auxiliary; not a blueprint node).
+`algebraization.tex`, Tag 099K.
 
 All coefficient sheaves, local-completeness predicates and quotient-tower completions
 are the constructions of `ConstantCompletionEquivalence`. Positive exponents are n+1.

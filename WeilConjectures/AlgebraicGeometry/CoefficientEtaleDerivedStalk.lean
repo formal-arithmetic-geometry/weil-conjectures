@@ -28,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Continuity of the original etale-site equivalence at the coefficient size.
-Source: Stacks Tag 00VC (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00VC. -/
 instance coefficientEtaleAsSmallUp_isContinuous (X : Scheme.{u}) :
     (AsSmall.up : X.Etale ⥤ smallModelComparisonEtaleSite.{u, v} X).IsContinuous
       X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X) :=
@@ -39,8 +39,7 @@ instance coefficientEtaleAsSmallUp_isContinuous (X : Scheme.{u}) :
         X.smallEtaleTopology))
 
 /-- The ordinary geometric stalk: restrict to constant scalars, undo AsSmall, and take
-its usual pointed-neighborhood colimit. Source: Stacks Tags 03PT and 04EQ.
-(auxiliary; not a blueprint node). -/
+its usual pointed-neighborhood colimit. Source: Stacks Tags 03PT and 04EQ. -/
 def coefficientEtaleModuleStalk (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
@@ -53,11 +52,7 @@ def coefficientEtaleModuleStalk (X : Scheme.{u})
         X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X) ⋙
     (pointSmallEtale x).sheafFiber (A := ModuleCat.{max v (u + 1)} B)
 
-/-- Geometric stalks on the model are additive and exact. Source: Stacks Tag 04EQ.
-(auxiliary; not a blueprint node).
-
-Proof: the two changes of presentation are equivalences. The remaining functor is
-the usual exact geometric stalk, a filtered colimit of sections. -/
+/-- Geometric stalks on the model are additive and exact. Source: Stacks Tag 04EQ. -/
 theorem coefficientEtaleModuleStalk_exact (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
@@ -126,8 +121,7 @@ instance coefficientEtaleModuleStalk_colimits (X : Scheme.{u})
   (coefficientEtaleModuleStalk_exact X B x).2.2
 
 /-- The exact derived geometric stalk of a constant-ring module complex, in the
-independent coefficient universe. Source: Stacks Tags 03PT and 04EQ.
-(auxiliary; not a blueprint node). -/
+independent coefficient universe. Source: Stacks Tags 03PT and 04EQ. -/
 def coefficientEtaleDerivedStalk (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :

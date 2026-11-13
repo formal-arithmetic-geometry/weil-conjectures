@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.CyclicDerivedHomComparisonNaturality
 # Comparing free-representable derived Hom with cyclic cohomology
 
 Source: Stacks Project, Tag 03Q8, and the free-representable interpretation of sections.
-(blueprint: lem-sbc-cyclic-derived-hom-cohomology-comparison).
 -/
 
 @[expose] public section
@@ -33,23 +32,7 @@ restriction to zero forces the corresponding presheaf restriction to zero.
 
 Source: Stacks Project, Tag 03Q8, the restricted cohomology presheaf; the free-sheaf
 adjunction argument in
-`WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean`.
-(blueprint: lem-sbc-cyclic-derived-hom-cohomology-comparison).
-
-Proof: The free abelian sheaf on an etale representable corepresents evaluation. Pullback
-along h takes the free sheaf on W to the free sheaf on Y times_X W, as follows from the
-pullback/direct-image adjunction and the section-corepresenting universal property.
-Extension by zero along the etale projection Y times_X W to Y takes the constant free
-abelian sheaf to this free representable sheaf. Extension by zero is exact and left
-adjoint to restriction; its derived adjunction therefore identifies Hom from the
-free representable in degree zero to F[0][q] with Ext^q from the constant integer sheaf
-to F restricted to Y times_X W. This is Sheaf.H. The canonical pullback identification
-for constant cyclic sheaves identifies the latter coefficients with Z/e on that fibre
-product. The evaluation adjunctions are natural in W: precomposition with the free
-map induced by v corresponds to cohomologyMap of the induced fibre-product morphism,
-followed by the constant-coefficient isomorphism. That isomorphism and the additive
-comparison preserve and reflect zero, giving the implication displayed here.
-No affine, nonempty, positive-degree, or nonzero-modulus hypothesis is used. -/
+`WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/FreeSheaf.lean`. -/
 theorem exists_cyclicDerivedHom_cohomology_comparison {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

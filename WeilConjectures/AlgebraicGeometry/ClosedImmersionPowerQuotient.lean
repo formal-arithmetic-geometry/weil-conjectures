@@ -46,20 +46,7 @@ private theorem power_iso {X : Scheme.{v}} (J : X.IdealSheafData) (n : ℕ) :
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotient by an ideal power is the pushforward of restriction, with its
 projection identified with the unit of the supplied adjunction.
-Source: Stacks Project, Lemma 087T (lemma-i-star-equivalence), equation 0880.
-(blueprint: lem-weil-pbc-closed-immersion-power-quotient).
-
-Proof: On each affine open, the image of the recursively defined ideal-sheaf power
-has range J(U)^n, by induction using the affine tensor multiplication calculation.
-Thus its product with F has the same image subobject as multiplication by (J^n).
-The equality is checked on affine opens and glued by sheaf separatedness. Replace
-J^n by the kernel of j. The closed-immersion unit quotient theorem identifies the
-cokernel of this image inclusion with j_*j^*F, taking the projection to the canonical
-adjunction unit. Equal image subobjects induce the unique quotient isomorphism
-preserving projections. Finally compose with the pushforward of leftAdjointUniq
-from the canonical adjunction to a; its unit equation gives the claimed equality.
-The zero power is the unit ideal, so the closed subscheme and both quotient objects
-are zero; zero ideals and zero modules give the same calculation. -/
+Source: Stacks Project, Lemma 087T (lemma-i-star-equivalence), equation 0880. -/
 theorem closedImmersion_power_quotient {X Z : Scheme.{v}} (J : X.IdealSheafData)
     (n : ℕ) (j : Z ⟶ X) [IsClosedImmersion j] (hj : j.ker = J ^ n)
     (a : Scheme.Modules.tensorPullback j ⊣ Scheme.Modules.pushforward j)

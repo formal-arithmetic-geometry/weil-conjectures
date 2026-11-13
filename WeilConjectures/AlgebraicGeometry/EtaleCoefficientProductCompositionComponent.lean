@@ -88,22 +88,7 @@ private lemma inverse_associativity {W X Y Z : Scheme.{u}}
 
 /-- Composition calculation at one outgoing-arrow factor.
 Source: Stacks Project, Tag 0EXZ, canonical maps ψ, expanded with the adjunction
-mate equations and direct-image coherence in UpperLowerStar.Coherence.
-(blueprint: lem-weil-pbc-etale-coefficient-product-composition-component).
-
-Proof: apply the injective homEquiv along D((f composed with g).op).
-The unit mate equation upperStarComp_hom_app_unit_app and naturality of lowerStarComp
-replace transposition after upperStarComp by two successive transpositions, followed
-by lowerStarComp.hom at the target factor. Adjunction naturality in the source moves
-the transition for f through the transpose for g. Naturality in the target moves
-both inverse direct-image comparisons through the transpose for f. The projection
-formula Pi.lift_comp_π removes the intervening product lift. The resulting expression
-starts with the projection indexed by f composed with g composed with the outgoing
-arrow. The inverse associativity equation obtained from lowerStarComp_assoc' equates
-the two orders of inverse comparisons, and cancellation of lowerStarComp.hom with
-its inverse leaves the left side. Category.assoc identifies the outgoing-arrow
-indices; D.map_comp supplies the named scheme composites. This calculates one
-factor only and does not assert an equality of maps into the whole product. -/
+mate equations and direct-image coherence in UpperLowerStar.Coherence. -/
 theorem etale_coefficient_product_composition_component
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})

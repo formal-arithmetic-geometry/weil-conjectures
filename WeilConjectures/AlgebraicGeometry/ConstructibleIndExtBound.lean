@@ -36,13 +36,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The specified bound extends to ind-constructible targets on a Noetherian scheme,
 for either of the canonical field coefficient sheaves.
 
-Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause.
-(blueprint: lem-finite-window-ind-ext-bound-noetherian)
-Proof: the existing Noetherian continuity theorem makes the shifted Hom functor
-preserve each filtered module colimit. Every element of the colimit of abelian
-groups has a representative at a stage. This supplies the factorization condition
-in `constructibleInd_extBound_of_continuity`, which kills each representative by
-the specified bound. This is a special case, not a proof for arbitrary schemes. -/
+Source: blueprint `sk-cor-ind-heart-ii`, vanishing clause. -/
 theorem constructibleInd_extBound_noetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
@@ -82,23 +76,7 @@ ind-constructible sheaf. The coefficient equality includes the multiplication,
 via bundled monoid objects. This is the sheaf input to bounded-complex devissage.
 
 Source: blueprint latest, sk-cor-ind-heart-ii, vanishing clause, and
-sk-lem-finite-window-bounded.proof.md, one-cohomology case
-(blueprint: lem-finite-window-ind-ext-bound).
-
-Proof: choose a small filtered constructible presentation B = colim B_i.
-The filtered-colimit Ext comparison of sk-lem-constructible-ext-continuity,
-clause (1), identifies Ext^r(C,B) with colim Ext^r(C,B_i). Every stage group is
-zero by the supplied bound since d < r. A colimit of zero abelian groups is
-zero; transporting along the comparison gives the claim. This uses only
-sheaves, viewed as complexes in degree zero, so the common lower bound is zero.
-The source states this for arbitrary X. The existing theorem
-`constructible_sheaf_ext_continuity` has additional Noetherian and compactness
-hypotheses, so the arbitrary-scheme geometric input is isolated in the two
-coefficient-specific declarations `continuousMap_ext_continuity` and
-`padicAlgCl_ext_continuity`. The conditional algebraic step is proved in
-`constructibleInd_extBound_of_continuity`, and `constructibleInd_extBound_noetherian`
-proves the canonical-coefficient Noetherian special case. Full filtered-colimit
-continuity in degree zero cannot be assumed on a non-quasi-compact scheme. -/
+sk-lem-finite-window-bounded.proof.md, one-cohomology case. -/
 theorem constructibleInd_extBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 /-! # The vanishing columns of Leray over an affine scheme
 
 Source: Stacks Project, Tags 01XJ (1), 01XB and 03FD.
-(blueprint: lem-pc-affine-higher-direct-image-cohomology-vanishing).
 -/
 
 @[expose] public section
@@ -28,18 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Every positive cohomology group of a higher direct image vanishes on an affine base.
-Source: Stacks Project, Tags 01XJ (1), 01XB and 03FD.
-(blueprint: lem-pc-affine-higher-direct-image-cohomology-vanishing).
-
-Proof: First apply the quasi-coherence clause of 01XJ: for a qcqs morphism and a
-quasi-coherent module, each ordinary higher direct image is quasi-coherent. Its proof
-is local on the base and uses the qcqs-open induction principle of Tag 08DR,
-with relative Mayer-Vietoris for its union step. Apply affine vanishing 01XB to each
-resulting module on the affine base. Finally
-03FD identifies abelian-sheaf cohomology with cohomology computed by injective module
-resolutions. The forgetful functor from modules to additive groups is faithful,
-so vanishing of the additive group implies the module object is zero. This holds
-also for q = 0, zero modules, and the empty affine scheme; only p must be positive. -/
+Source: Stacks Project, Tags 01XJ (1), 01XB and 03FD. -/
 theorem isZero_affine_higherDirectImage_moduleCohomology
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [IsAffine S]
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hM : M.IsQuasicoherent)

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 /-! # Affine cohomology and higher-image sections
 
 Source: Stacks Project, Tags 01F4, 01XJ, 01E4 and 03FD.
-(blueprint: new-affine-cohomology-section-equiv)
 -/
 
 @[expose] public section
@@ -33,27 +32,7 @@ set_option maxHeartbeats 500000 in
 -- The explicit derived section comparisons require substantial elaboration.
 /-- The affine Leray comparison, normalized by any augmentation-preserving restricted
 resolution. This comparison is formed before any base change or scalar extension.
-Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 03FD.
-(blueprint: new-affine-cohomology-section-equiv)
-
-Proof: Put U = f inverse V. The canonical isomorphism restrictFunctorIsoPullback
-identifies F restricted to U with N, preserving the restriction adjunction unit.
-Transport the supplied natural module/Ext cohomology comparison E through this
-isomorphism to form the displayed eH. The naturality hypothesis hE, applied to
-multiplication by sections, makes eH linear for A = Gamma(S,V), acting through h.
-Thus even a different natural choice of E gives a linear change of coordinates.
-Restrict f to U -> V. Higher images commute with open restriction. They are
-quasi-coherent by 01XJ, so their positive cohomology on affine V vanishes. The
-cocycle-defined Leray edge of 01F4 is consequently an isomorphism. Its naturality
-for multiplication makes it A-linear. Identify its values with sections on V of
-R^p f_* F by open-restriction comparison. The common section complex computes
-both sides: its homology projection followed by the sheafification unit is
-sectionCohomologyTheta, by 01E4. The augmentation and components equations of R
-identify this computation with resolutionSectionClass for the chosen R; an
-augmentation-preserving change of resolution induces the same derived comparison.
-Compose this edge with eH inverse to obtain e and the displayed equality.
-For p = 0 this is the augmentation comparison. Empty V and zero coefficients
-give zero groups throughout, so the same comparison and formula remain valid. -/
+Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 03FD. -/
 theorem exists_affine_cohomology_section_equiv
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F)

@@ -13,7 +13,6 @@ import Mathlib.RingTheory.Spectrum.Prime.Module
 /-! # Elementwise torsion for an affine model of a supported target
 
 Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0.
-(blueprint: new-affine-open-supported-model-torsion).
 -/
 @[expose] public section
 universe u w
@@ -28,24 +27,7 @@ private theorem torsion_of_localized_subsingleton {R M : Type*} [CommRing R]
   exact ⟨n, hm⟩
 
 /-- Vanishing away from the zero locus implies power annihilation on affine cohomology.
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0.
-(blueprint: new-affine-open-supported-model-torsion).
-
-Proof: Fix i and put N = H^i(M). Compare F with affine derived tilde followed by
-canonical affine-site transport: the two comparisons after Q lift to a natural
-isomorphism by localization. Exactness of tilde identifies the transported sheaf
-of N with H^i(F(M)). Apply homology to hM and undo affine-site transport; exact
-open restriction and its stalk isomorphism identify this sheaf with the affine
-restriction of H^i(E'[k]). The homology shift isomorphism identifies its stalks
-with stalks of H^(i+k)(E'). Compatibility of f with restriction and the affine
-chart identifies D(f|U) with the points of U outside the global V(f). Hence the
-sheaf of N has zero stalks there. Tilde stalks are prime localizations of N,
-so Module.notMem_support_iff gives disjointness of D(f|U) and Module.support A N.
-LocalizedModule.subsingleton_iff_disjoint makes the localization at powers of
-f|U zero. For m, its localization equals zero; the localization equality criterion
-provides a power (f|U)^n annihilating m. The exponent may depend on m and i.
-For f=0, n=1 works; for a unit f, N is zero; for empty U, A and N are zero.
-No finite generation, boundedness, or perfectness is needed. -/
+Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0. -/
 theorem affine_open_supported_model_torsion
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

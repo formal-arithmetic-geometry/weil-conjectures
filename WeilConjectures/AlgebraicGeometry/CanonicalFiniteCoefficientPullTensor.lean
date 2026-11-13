@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 /-! # Tensor coherence of the canonical finite coefficient pullback comparison
 
 Source: the coefficient-presentation step in det-thm-sf-pf-finite.proof.md.
-(blueprint: lem-d5-canonical-finite-coefficient-pull-tensor).
 -/
 
 @[expose] public noncomputable section
@@ -98,20 +97,7 @@ private theorem canonicalFixed_push_pure {X Y : Scheme.{u}} (p : X ⟶ Y)
 for the section-normalized tensor structures.
 
 Source: det-thm-sf-pf-finite.proof.md, coefficient realization and the proper
-projection square; the geometric adjunction and its tensor comparison.
-(blueprint: lem-d5-canonical-finite-coefficient-pull-tensor).
-
-Proof: the direct-image coefficient comparison is identity on underlying sections
-over every fibre product. The lax tensor maps of both direct images send a pure
-pairing to the same pairing on that fibre product. Substituting the two normalization
-identities therefore proves the tensor equation for the direct-image comparison;
-the unit equation follows from uniqueness of the unit of the induced monoid.
-Conjugate this monoidal comparison under the two geometric adjunctions and the
-coefficient-equivalence adjunctions. The conjugate unit and tensor equations show
-that its left-adjoint mate is monoidal. This mate is exactly the published
-upperStarFiniteCoefficientModEquivalenceIso, since that is defined by the same
-conjugate of the identity-on-sections direct-image comparison. This argument uses
-neither properness nor boundedness, and also covers identity and empty morphisms. -/
+projection square; the geometric adjunction and its tensor comparison. -/
 theorem canonicalFiniteCoefficientPullTensor
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [DiscreteTopology A] [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y)

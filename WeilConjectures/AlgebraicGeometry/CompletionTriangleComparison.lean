@@ -30,8 +30,7 @@ set_option linter.privateModule false
 /-! # Exact principal completion and its canonical triangle map
 
 proof.md`,
-Cones paragraph and shifts sentence; Stacks Tag 05RU
-(auxiliary; not a blueprint node).
+Cones paragraph and shifts sentence; Stacks Tag 05RU.
 
 ## Main definitions and statement
 

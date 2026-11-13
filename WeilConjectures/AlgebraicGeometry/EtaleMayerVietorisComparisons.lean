@@ -18,20 +18,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Cohomology on Sites, Tag 03F3 (2).
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-comparisons)
-
-Proof: Choose a bounded below injective resolution of a sheaf on X's small etale site.
-Evaluation at each of X, U, V and U ∩ V computes its right derived evaluation functor.
-For an open immersion, inverse image is restriction to the localized site and preserves
-injectives: extension by zero is its exact left adjoint. Thus restriction of the resolution
-is an injective resolution on that open. Global sections of the restricted resolution
-are naturally the sections of the original resolution on the corresponding etale object.
-Taking homology identifies right derived evaluation with derived global sections of the
-restricted sheaf in degree zero. At X use the same resolution without restriction.
-Comparison maps between resolutions are unique up to homotopy, so these identifications
-are natural in the sheaf and give the four functor isomorphisms, independently in every
-nonnegative degree. No covering assumption is needed. -/
+/-- Source: Stacks Project, Cohomology on Sites, Tag 03F3 (2). -/
 theorem etale_mayerVietoris_comparisons (X : Scheme.{u}) (U V : X.Opens) :
     Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
         (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅

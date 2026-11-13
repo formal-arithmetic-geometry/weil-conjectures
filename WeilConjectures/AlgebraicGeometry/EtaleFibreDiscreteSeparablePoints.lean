@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # The points of an etale fibre
 
-Source: Stacks Project, Morphisms, Lemma 02GL, part (2)
-(blueprint: lem-weil-pbc-etale-fibre-discrete-separable-points).
+Source: Stacks Project, Morphisms, Lemma 02GL, part (2).
 -/
 
 @[expose] public section
@@ -29,26 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The fibre of an etale morphism is discrete, and each singleton open subscheme is the
 spectrum of its residue field, finite and separable over the base residue field.
-Source: Stacks Project, Morphisms, Lemma 02GL(2)
-(blueprint: lem-weil-pbc-etale-fibre-discrete-separable-points).
-
-Proof:
-1. The fibre projection is etale by base change
-   (`lem-weil-pbc-etale-base-change-finite-limits`, Stacks 02GO).
-2. An affine open around a fibre point is etale over the base field by restriction and
-   composition (`lem-weil-pbc-etale-composition-cancellation`). Its coordinate algebra is
-   a finite product of finite separable fields
-   (`lem-weil-pbc-etale-algebra-over-field-product`, Stacks 00U3).
-3. The spectrum of that product has open singleton components, each isomorphic over the
-   base field to the spectrum of the corresponding factor
-   (`lem-weil-pbc-spec-finite-product-fields`).
-4. Every point is open, so every subset is open and every singleton is also closed.
-5. The residue field at the point agrees with that of its singleton open subscheme,
-   hence with the corresponding finite separable factor. Transport the component
-   isomorphism along this identification to obtain the claimed isomorphism over the base.
-
-The ring map `i` is the canonical base-field map obtained by applying the fully faithful
-spectrum functor to the composite from the point's residue-field spectrum to the base. -/
+Source: Stacks Project, Morphisms, Lemma 02GL(2). -/
 theorem Scheme.Hom.etale_fibre_discrete_separable_points
     {X S : Scheme.{u}} (f : X ⟶ S) [Etale f] (s : S) :
     DiscreteTopology (f.fiber s) ∧

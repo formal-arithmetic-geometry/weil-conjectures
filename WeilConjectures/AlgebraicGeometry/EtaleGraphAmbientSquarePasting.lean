@@ -10,7 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.DerivedCompactSupportCompositionCoh
 /-! # Target-square subgrid of ambient projection pasting
 
 Source: Stacks Tags 0F7C, 0F7D and 0F7J, the k-side ambient rectangle.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -393,23 +392,7 @@ private theorem full_grid
 neighborhood. No f-side ambient change or inverse B exchange occurs here.
 
 Source: Stacks Tags 0F7C and 0F7D (vertical and horizontal pasting), step 3 of
-lem-pur-etale-graph-product-ambient-pasting, and Tag 0F7J, A--F comparison.
-(auxiliary; not a blueprint node).
-
-Proof: take the Cartesian k-side square (K,qN,prH,k). Pasting it above the
-supplied square gives the same outer commutative square as pasting Q above
-the Cartesian g-side square, because R qG=qN r and productP prG=prH p.
-Apply vertical pasting to both decompositions and equate the normalized exchanges
-for the common outer square. Apply horizontal pasting to the e-side and k-side
-squares; the outer square is the Cartesian side square for e k. Substitute the
-vertical identity into this horizontal factorization. Whisker by the proper
-graph zH and the final proper map q. Naturality moves the graph splitter and
-proper compositors past the exchanges; proper-compositor associativity identifies
-the two factorizations of the final map. Open-compositor associativity, together
-with E K=H.e, gives the target open compositor. These are exactly rawSquare;
-ambientLambda on one side, and sourceTransport; middleTail; squareInterchange on
-the other. Neither B nor the f-side lambda is used. The argument requires no
-nonemptiness or boundedness hypotheses. -/
+lem-pur-etale-graph-product-ambient-pasting, and Tag 0F7J, A--F comparison. -/
 theorem etaleGraphAmbientSquarePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

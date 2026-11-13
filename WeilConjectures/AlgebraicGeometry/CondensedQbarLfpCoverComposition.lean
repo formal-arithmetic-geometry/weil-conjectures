@@ -35,8 +35,7 @@ private theorem exists_cover_of_local_property
 
 /-- Compose local finite-free refinements into one pro-etale cover.
 
-Source: Stacks Project, Sites, covering composition; RefactorInstruction.tex, Section 4
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, covering composition; RefactorInstruction.tex, Section 4.
 The covering presieve is the indexed composition of the original presieve with each
 local presieve; the finite-free isomorphisms are carried along the composite maps. -/
 theorem exists_condensedQbar_refinement_of_local

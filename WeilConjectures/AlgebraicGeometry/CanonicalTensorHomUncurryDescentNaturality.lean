@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Naturality forced by componentwise uncurrying
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ.
-(blueprint: lem-pc-tensor-hom-uncurry-descent-naturality).
 -/
 
 @[expose] public section
@@ -108,25 +107,7 @@ Assume also transport along isomorphisms; this is essential when the chosen
 derived category has objects which are not literally images of complexes.
 No existence of a family, or existence of chain representatives, is asserted here.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, naturality of evaluation;
-sites-cohomology.tex, Tags 0A90 and 0A96.
-(blueprint: lem-pc-tensor-hom-uncurry-descent-naturality).
-
-Proof: Choose K-flat representatives for the four source objects K,K',L,L',
-and the functorial K-injective models for M and M'. Represent maps between them
-by roofs, using common K-flat resolutions for source denominators. Maps to a
-K-injective complex are actual chain maps modulo homotopy. On these models,
-restrict the two uncurried chain maps to every total tensor summand. Naturality
-of the sheaf tensor-Hom adjunction and of the Hom product projections identifies
-both sides with evaluation after precomposition in P and L and postcomposition
-in I(M). The coproduct universal property proves equality of the chain maps.
-Apply Q and the assumed representative equation to these chain maps. Naturality
-of Q's lax tensor map, of the derived Hom localization factorization, and of the
-functorial resolution map gives the claimed equality on representatives.
-Use the assumed isomorphism transport to cancel the localized quasi-isomorphisms
-in the roofs and the representative isomorphisms to obtain the equation for
-arbitrary derived maps a,b,c. Homotopy invariance ensures that none of the roof
-choices affects the calculation. The identity and zero-map cases obey the same
-component equation, without boundedness assumptions. -/
+sites-cohomology.tex, Tags 0A90 and 0A96. -/
 theorem tensorHomUncurry_descent_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

@@ -38,8 +38,7 @@ import WeilConjectures.CategoryTheory.RingedCechKoszulHomLimitComparison
 # Restriction of the actual Koszul completion unit
 
 Source: Bhatt--Scholze, Lemma 6.5.8, Remark 6.5.10 and Proposition 6.6.11;
-Stacks Project, proetale.tex, Tags 099L and 099M, and algebraization.tex, Tag 0A0E
-(auxiliary; not a blueprint node).
+Stacks Project, proetale.tex, Tags 099L and 099M, and algebraization.tex, Tag 0A0E.
 
 We use the recorded equivalent small model of each pro-etale site. Its object and
 morphism universes are both `u+1`; the original site's morphism universe remains `u`.
@@ -66,8 +65,7 @@ attribute [local irreducible] ConstantCompletion.completed ConstantCompletion.de
 namespace AlgebraicGeometry.Scheme.SfbAdicRestriction
 
 /-- The equivalence from the small model to the original pro-etale sheaf category.
-Source: Stacks Tags 00YY and 09A5
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00YY and 09A5. -/
 def modelEquivalence (X : Scheme.{u}) (D : Type v) [Category.{u + 1} D] :
     Sheaf (proEtaleModelTopology X) D ≌ Sheaf (ProEt.topology X) D :=
   CategoryTheory.Equivalence.mk
@@ -80,8 +78,7 @@ def modelEquivalence (X : Scheme.{u}) (D : Type v) [Category.{u + 1} D] :
 attribute [local irreducible] modelEquivalence
 
 /-- The specified pro-etale inverse image, transported through the site equivalences.
-Source: Stacks Tags 09A5 and 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 09A5 and 00YV. -/
 def inverse {X S : Scheme.{u}} (i : S ⟶ X) :
     Sheaf (proEtaleModelTopology X) (Type (u + 1)) ⥤
       Sheaf (proEtaleModelTopology S) (Type (u + 1)) :=
@@ -90,8 +87,7 @@ def inverse {X S : Scheme.{u}} (i : S ⟶ X) :
       (modelEquivalence S (Type (u + 1))).inverse
 
 /-- Its transported right adjoint, the actual pro-etale direct image.
-Source: Stacks Tags 09A5 and 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 09A5 and 00YV. -/
 def direct {X S : Scheme.{u}} (i : S ⟶ X) :
     Sheaf (proEtaleModelTopology S) (Type (u + 1)) ⥤
       Sheaf (proEtaleModelTopology X) (Type (u + 1)) :=
@@ -100,14 +96,14 @@ def direct {X S : Scheme.{u}} (i : S ⟶ X) :
       (modelEquivalence X (Type (u + 1))).inverse
 
 /-- Transport of the specified inverse-image adjunction, with no new functor choice.
-Source: Stacks Tag 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00YV. -/
 def adjunction {X S : Scheme.{u}} (i : S ⟶ X) : inverse i ⊣ direct i :=
   ((modelEquivalence X (Type (u + 1))).toAdjunction.comp
     (proEtaleSheafAdjunction i (Type (u + 1)))).comp
       (modelEquivalence S (Type (u + 1))).symm.toAdjunction
 
 /-- Finite-limit structure inherited from the original inverse image and equivalences.
-Source: Stacks Tag 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00YV. -/
 instance inverse_finiteLimits {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
     PreservesFiniteLimits (inverse i) :=
   haveI := (proEtale_immersion_inverseImage_preservesLimits i).1
@@ -269,8 +265,7 @@ section Slice
 variable {C : Type v} [SmallCategory C] (J : GrothendieckTopology C) (U : C)
 
 /-- Slice restriction with all algebraic operations evaluated on the underlying object.
-Source: Stacks Tags 00XZ and 03D2
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 00XZ and 03D2. -/
 def sliceAlgebra : ConstantCompletion.InverseImageData (J.overPullback (Type v) U) where
   rings := J.overPullback CommRingCat.{v} U
   algebra O :=
@@ -294,12 +289,12 @@ def sliceAlgebra : ConstantCompletion.InverseImageData (J.overPullback (Type v) 
           ((Functor.const Cᵒᵖ).map f))
 
 /-- The right adjoint of slice restriction, from the canonical site localization.
-Source: Stacks Tag 00XZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00XZ. -/
 abbrev sliceDirect :=
   (Over.forget U).sheafPushforwardCocontinuous (Type v) (J.over U) J
 
 /-- The canonical localization adjunction, rather than a chosen module map.
-Source: Stacks Tag 00XZ (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 00XZ. -/
 def sliceAdjunction : J.overPullback (Type v) U ⊣ sliceDirect J U :=
   (Over.forget U).sheafAdjunctionCocontinuous (Type v) (J.over U) J
 
@@ -317,8 +312,7 @@ variable {C D : Type v} [SmallCategory C] [SmallCategory D]
   [PreservesFiniteLimits L] (A : Type v) [CommRing A] (I : Ideal A)
 
 /-- Derived module inverse image with the finite-projection completed coefficient map.
-Source: Stacks Tags 099L and 06YY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 099L and 06YY. -/
 def completedPull :
     ConstantCompletion.D (ConstantCompletion.completed J A I) ⥤
       ConstantCompletion.D (ConstantCompletion.completed K A I) :=
@@ -328,8 +322,7 @@ def completedPull :
 factors are the recorded K-flat-normalized finite scalar comparisons and the uniquely
 normalized completed finite pullback comparison. Thus its source uses the actual
 projection of the completed ring, not a replacement finite coefficient object.
-Source: Stacks Tags 099L and 06YY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 099L and 06YY. -/
 def finiteComparison [IsNoetherianRing A] (n : ℕ) :
     completedPull F V adj A I ⋙
         ConstantCompletion.extend (ConstantCompletion.projection K A I n) ≅
@@ -350,8 +343,7 @@ canonical scalar-insertion normalization in each quotient coefficient category. 
 internal-Hom completeness
 restricts. This is just a package of the conclusions, not a replacement definition of
 completeness or of completion.
-Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 099M and 0A0E
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Stacks Tags 099M and 0A0E. -/
 def UnitRestriction [IsNoetherianRing A] (r : ℕ) (a : Fin r → A) : Prop :=
   IsIso (ConstantCompletion.completedMap F A I) ∧
   (∀ P : ConstantCompletion.Cx (ConstantCompletion.completed J A I),
@@ -588,8 +580,7 @@ variable {X : Scheme.{u}} (s : FiniteLocallyClosedStratification X)
 
 /-- Restriction along the actual immersion realizing one stratum. The finite-limit
 structure comes from that immersion, so it is not an extra hypothesis on a stratum.
-Source: Bhatt--Scholze, Lemma 6.5.8
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Lemma 6.5.8. -/
 def stratumPull (α : Fin s.n) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) ⥤
       ConstantCompletion.D
@@ -599,8 +590,7 @@ def stratumPull (α : Fin s.n) :
 
 /-- The composite of stratum inverse image and the actual localization at a site object,
 with coefficient change given by the canonical finite-projection comparison.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Tag 00XZ
-(auxiliary; not a blueprint node). -/
+Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Tag 00XZ. -/
 def stratumSlicePull (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)) :
     ConstantCompletion.D (ConstantCompletion.completed (proEtaleModelTopology X) A I) ⥤
       ConstantCompletion.D
@@ -620,8 +610,7 @@ boundedness assumption. The auxiliary `finiteComparison` gives the normalized co
 for every finite derived reduction.
 
 Source: Bhatt--Scholze, Lemma 6.5.8(1),(2), Remark 6.5.10 and Proposition 6.6.11;
-Stacks Project, proetale.tex, Tags 099L and 099M, algebraization.tex, Tag 0A0E
-(auxiliary; not a blueprint node).
+Stacks Project, proetale.tex, Tags 099L and 099M, algebraization.tex, Tag 0A0E.
 
 Proof, following steps 1--4 and the forward part of step 5 of the node:
 1. Constant inverse-image comparisons identify every finite quotient and its transitions.
@@ -680,8 +669,7 @@ A covering family is represented by its generated covering sieve; testing its ar
 also tests every further pullback, so includes arbitrary chosen covering families.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Remark 6.5.10;
-Stacks Project, proetale.tex, Tags 099L and 099M
-(auxiliary; not a blueprint node).
+Stacks Project, proetale.tex, Tags 099L and 099M.
 
 Proof, step 5 of the node: apply adicStratumCompletionUnit to every stratum and then
 its covering slices. By lem-weil-pbc-constant-completion-equivalence every restricted

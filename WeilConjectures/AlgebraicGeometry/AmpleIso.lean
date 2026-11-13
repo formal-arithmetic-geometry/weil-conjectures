@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 /-! # Ampleness is invariant under module isomorphisms
 
 Source: Stacks Project, Properties, Definition 01PS.
-(blueprint: lem-sc-ample-iso).
 -/
 
 @[expose] public section
@@ -90,18 +89,7 @@ private theorem tensorPow_iso {X : Scheme.{u}} {M N : X.Modules}
     exact ⟨MonoidalCategory.tensorIso e a⟩
 
 /-- Isomorphic invertible modules have the same ampleness predicate.
-Source: Stacks Project, Properties, Definition 01PS and Section 01PR.
-(blueprint: lem-sc-ample-iso).
-
-Proof: an isomorphism induces isomorphisms of every tensor power, compatible with
-restriction and hence with germs. Use the inverse tensor-power isomorphism to
-transport a global section of `N` to one of `L`. At every point the induced stalk
-isomorphism is linear over the local ring and maps the maximal ideal times the
-whole stalk onto the corresponding submodule. Thus the transported section has
-exactly the same nonvanishing locus. The same affine open and positive exponent
-witness ampleness at each point; compactness is unchanged. Apply this argument to
-the inverse isomorphism for the converse. This also works on the empty scheme.
--/
+Source: Stacks Project, Properties, Definition 01PS and Section 01PR. -/
 theorem isAmple_iff_of_iso {X : Scheme.{u}} {L N : X.Modules}
     [L.IsInvertible] [N.IsInvertible] (e : L ≅ N) :
     IsAmple X L ↔ IsAmple X N := by

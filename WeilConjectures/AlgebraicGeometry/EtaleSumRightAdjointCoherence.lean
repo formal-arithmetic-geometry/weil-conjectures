@@ -68,8 +68,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fla
 
 /-! # Coherence of normalized etale sum right adjoints
 
-proof.md, Step 1; Stacks Tags 03S6, 0F7J, 0F7K
-(auxiliary; not a blueprint node).
+proof.md, Step 1; Stacks Tags 03S6, 0F7J, 0F7K.
 
 The comparisons below use the actual proper/open compositor and exchange. The map to sum
 extension is the constructed graph comparison, rather than a choice of a bare isomorphism.
@@ -93,8 +92,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   unboundedEtaleCompactSupportBaseChange exactEtaleSumExchange
 
 /-- The specified compact-support-to-sum identification for the chosen compactification.
-Source: Stacks Tags 0F4L, 0F7J, and the blueprint Step 1
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F4L, 0F7J, and the blueprint Step 1. -/
 noncomputable def etaleSumSupportIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -105,8 +103,7 @@ noncomputable def etaleSumSupportIso
     canonicalEtaleCompactSupportComparison A e (HasCompactification.compactification e)
 
 /-- The normalization rho is the adjunction conjugate of the inverse specified comparison.
-Source: blueprint Step 1; Stacks Tags 0037 and 03S6
-(auxiliary; not a blueprint node). -/
+Source: blueprint Step 1; Stacks Tags 0037 and 03S6. -/
 noncomputable def etaleSumRightAdjointIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -119,8 +116,7 @@ noncomputable def etaleSumRightAdjointIso
     (etaleSumSupportIso A e).symm
 
 /-- The canonical pullback identification of the coefficient unit, in the exact derived model.
-Source: blueprint Step 1, pullback-unit identification
-(auxiliary; not a blueprint node). -/
+Source: blueprint Step 1, pullback-unit identification. -/
 noncomputable def etaleSumPullbackUnitIso
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (e : U ⟶ X) :
     (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.obj (constantComplex A X) ≅

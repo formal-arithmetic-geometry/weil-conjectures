@@ -25,8 +25,7 @@ variable {A : Type u} [Category.{v} A] [MonoidalCategory A] [BraidedCategory A]
   (a : S ⟶ T) [IsMonHom a] (hf : f ≫ a = g) (he : e ≫ a = e')
 
 /-- Extension by a coefficient inclusion, with both objects restricted to a common ring.
-The map is constructed from the scalar-extension adjunction, not chosen by existence.
-(auxiliary; not a blueprint node) -/
+The map is constructed from the scalar-extension adjunction, not chosen by existence. -/
 noncomputable def mixedScalarMap (M : Mod A R) :
     (comap e).obj ((extendScalars f).obj M) ⟶
       (comap e').obj ((extendScalars g).obj M) :=
@@ -139,8 +138,7 @@ noncomputable def coefficientComplexMap {E F G G' : FiniteIntermediateField ℓ}
       (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ he h)) (.up ℤ)).app C
 
 /-- The canonical coefficient diagram, with actual termwise scalar inclusions as maps.
-Source: the coefficient-algebra construction of the archived `TwoColimit.lean`.
-(auxiliary; not a blueprint node) -/
+Source: the coefficient-algebra construction of the archived `TwoColimit.lean`. -/
 noncomputable def coefficientComplexDiagram {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ)
@@ -205,8 +203,7 @@ noncomputable def coefficientComplexToAlgCl {E F G : FiniteIntermediateField ℓ
       (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ he)) (.up ℤ)).app C
 
 /-- The canonical coefficient cocone, with the actual algebraic-closure complex as vertex.
-Source: archived `TwoColimit.lean`, coefficient-algebra construction.
-(auxiliary; not a blueprint node) -/
+Source: archived `TwoColimit.lean`, coefficient-algebra construction. -/
 noncomputable def coefficientComplexCocone {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ)
@@ -233,21 +230,18 @@ noncomputable def coefficientComplexCocone {E F : FiniteIntermediateField ℓ}
         rw [← comp_whiskerRight_assoc, padicSubfieldRingObjMap_comp_toPadicAlgCl] }
 
 /-- Ordinary coefficient tensor transitivity, before localization.
-Source: uniqueness of the scalar-extension adjoints.
-(auxiliary; not a blueprint node) -/
+Source: uniqueness of the scalar-extension adjoints. -/
 noncomputable def coefficientTensorIso {E G : FiniteIntermediateField ℓ} (h : E ≤ G) :=
   (Mod.extendScalarsComp (padicSubfieldRingObjMap X ℓ h)
     (padicSubfieldRingObjToPadicAlgCl X ℓ G)).symm ≪≫
     Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)
 
-/-- Tensor transitivity applied degree by degree to coefficient complexes.
-(auxiliary; not a blueprint node) -/
+/-- Tensor transitivity applied degree by degree to coefficient complexes. -/
 noncomputable def coefficientComplexTensorIso {E G : FiniteIntermediateField ℓ} (h : E ≤ G) :=
   CategoryTheory.Functor.mapHomologicalComplexCompIso (coefficientTensorIso X ℓ h) (.up ℤ)
 
 /-- The ordinary adjunction mate of tensor transitivity on a coefficient complex.
-The next theorem identifies this actual morphism with the coefficient inclusion.
-(auxiliary; not a blueprint node) -/
+The next theorem identifies this actual morphism with the coefficient inclusion. -/
 noncomputable def coefficientComplexTransposedMap {E F G : FiniteIntermediateField ℓ}
     (he : E ≤ G) (hf : F ≤ G)
     (C : CochainComplex
@@ -265,8 +259,7 @@ noncomputable def coefficientComplexTransposedMap {E F G : FiniteIntermediateFie
             (.up ℤ)).obj C)) ≫
       (coefficientComplexTensorIso X ℓ hf).hom.app C)
 
-/-- The exact scalar-extension comparison on a coefficient complex.
-(auxiliary; not a blueprint node) -/
+/-- The exact scalar-extension comparison on a coefficient complex. -/
 noncomputable def coefficientComplexExtensionIso {F G : FiniteIntermediateField ℓ}
     (h : F ≤ G)
     (C : CochainComplex
@@ -280,8 +273,7 @@ noncomputable def coefficientComplexExtensionIso {F G : FiniteIntermediateField 
     u + 1, u + 1, u + 2, u + 2} F).app (DerivedCategory.Q.obj C) ≪≫
     F.mapDerivedCategoryFactors.app C
 
-/-- The exact extension-to-algebraic-closure comparison on a coefficient complex.
-(auxiliary; not a blueprint node) -/
+/-- The exact extension-to-algebraic-closure comparison on a coefficient complex. -/
 noncomputable def coefficientComplexAlgClExtensionIso (F : FiniteIntermediateField ℓ)
     (C : CochainComplex
       (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) ℤ) :

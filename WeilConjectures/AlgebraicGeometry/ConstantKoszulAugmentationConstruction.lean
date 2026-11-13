@@ -10,7 +10,6 @@ import all WeilConjectures.CategoryTheory.TensorQuotientAugmentation
 /-! # Constructing a normalized tower augmentation from low-degree data
 
 Source: Stacks Project, Tag 099M, strict Koszul quotient augmentation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -117,17 +116,7 @@ private theorem quotientAugmentation_f
 /-- A degree-zero identification compatible with the dual unit and transitions,
 and annihilation of the incoming differential after reduction, determine a normalized
 strict tower augmentation.
-Source: Stacks Project, Tag 099M, Koszul quotient construction.
-(auxiliary; not a blueprint node).
-
-Proof: on each total-tensor summand of Koszul degree zero use its identification
-with the coefficient unit, the right unitor and the actual reduction unit. Send
-other summands to zero. Coproduct descent and the incoming-differential hypothesis
-give the cochain equation. Transition compatibility and naturality give a strict
-tower map natural in the complex. The inverse right-unitor formula computes its
-composite with the tensor unit. Evaluate the ordinary-limit map at each projection
-and use the uniqueness characterization of ordinaryUnit to obtain its unit law.
-The other normalization law is the zero formula on the remaining summands. -/
+Source: Stacks Project, Tag 099M, Koszul quotient construction. -/
 theorem constantKoszulAugmentationFromLowDegrees
     (e₀ : ∀ n : ℕ, ((ringedKoszulDualTower (coefficients J A I b) r
       (fun i ↦ algebraSection (baseMap J A I b) (a i))).obj (op n)).X 0 ≅

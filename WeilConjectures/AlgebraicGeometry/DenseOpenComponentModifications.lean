@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DenseOpenComponentModificationsNonempty
 # Dense-open gluing of component modifications
 
 Source: Stacks Project, Morphisms 0BAJ and Etale Cohomology 0A3Q.
-(blueprint: lem-weil-pbc-dense-open-component-modifications)
 -/
 
 @[expose] public section
@@ -29,23 +28,7 @@ namespace AlgebraicGeometry
 
 /-- The coproduct of modifications of distinct integral components is an isomorphism
 on a dense open of the reduced target.
-Source: Stacks Project, Morphisms 0BAJ and the proof of Etale Cohomology 0A3Q.
-(blueprint: lem-weil-pbc-dense-open-component-modifications)
-
-Proof: Write Z i for the image of ι i. Remove every Z j with j different from i,
-obtaining an open W i contained in Z i and containing its generic point. The image
-in W i of the intersection of U i with the inverse image of W i is open in X.
-Indeed, the restriction of ι i to W i is a surjective closed immersion into a
-reduced scheme, hence an isomorphism: on affines its ideal has zero locus the whole
-spectrum, and therefore lies in the nilradical, which is zero. Each resulting
-open V i contains the generic point of Z i because U i is dense and the component
-is irreducible. The V i are pairwise disjoint, and their union U is dense since
-its closure contains every component's generic point. Over V i all other summands
-have empty preimage, while the i-th summand map is an isomorphism by restriction
-from U i and the preceding isomorphism for ι i. Isomorphism is local on the target,
-so these inverses glue over U. For an empty family the component-cover hypothesis
-forces X empty and the empty open is dense, with the empty-to-empty map an isomorphism.
--/
+Source: Stacks Project, Morphisms 0BAJ and the proof of Etale Cohomology 0A3Q. -/
 theorem exists_dense_open_isIso_component_modifications
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-! # Bottom cohomology of a left exact derived functor
 
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-qcoh-sections-left-exact-bottom).
 -/
 
 @[expose] public section
@@ -28,15 +27,7 @@ open CategoryTheory
 namespace CategoryTheory.Functor
 
 /-- A left exact functor computes bottom cohomology after lower truncation.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-qcoh-sections-left-exact-bottom).
-
-Proof: Lift the lower truncation to the bounded below category. Upper truncation
-at n has invertible H^n after deriving a left exact functor. Double truncation
-is the single cohomology object in degree n. Shift to degree zero, apply the
-single-object comparison and rightDerivedZeroIsoSelf. Compatibility of bounded
-below and unbounded derived functors and the homology truncation projection
-give the displayed natural isomorphism. No quasi-coherence is needed. -/
+Source: Stacks Project, Tag 05TC (2). -/
 theorem rightDerivedFunctor_truncated_bottom
     {C : Type uC} [Category.{vC} C] [Abelian C]
     [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]

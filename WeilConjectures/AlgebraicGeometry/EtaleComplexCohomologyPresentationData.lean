@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-! # Data of an abelian complex cohomology presentation
 
 Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes.
-(blueprint: def-sbc-etale-complex-cohomology-presentation-data).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The witnesses of a presentation, bundled to avoid repeated elimination of
 large dependent existential types. These are precisely the old existential fields;
 no field is a continuity conclusion and no data are chosen from an existence theorem.
-Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes.
-(blueprint: def-sbc-etale-complex-cohomology-presentation-data). -/
+Source: Stacks Project, Tag 0EZM, lemma-colimit-variant-complexes. -/
 inductive EtaleComplexCohomologyPresentationData
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1}) (B : Cocone H) : Prop where

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 /-! # Composition of the coefficient comparisons in target transitions
 
 Source: Stacks Tags 0F07 and 09Z1, canonical restriction comparisons.
-(blueprint: lem-sbc-pullback-comparison-comp)
 -/
 
 @[expose] public section
@@ -175,24 +174,7 @@ private lemma square_comp
 
 /-- The pullback and single-complex comparisons for two commutative squares compose.
 
-Source: Stacks Tag 0F07, condition (1), and Tag 09Z1, the canonical restriction maps.
-(blueprint: lem-sbc-pullback-comparison-comp)
-
-Proof: write each square comparison as the inverse composition comparison for its
-upper-left path followed by the comparison for its lower-right path. Apply associativity
-of the derived pullback comparisons to the triples (a₁,a₂,e), (a₁,e₂,π₂), and
-(e₁,π₁,π₂). Naturality moves the identification π₂^*(F[0]) → (π₂^*F)[0]
-past the (a₁,e₂) comparison. The intermediate comparison and its inverse cancel.
-For the remaining coefficient maps, composition of the exact functors π₂^* and π₁^*
-commutes with placing a sheaf in degree zero: on a single complex both maps are the
-underived composition comparison in degree zero and the unique zero maps elsewhere.
-The localization factorization and the fully faithful inclusion D⁺ → D preserve this
-identity. After applying e₁^*, this identifies the two single-complex maps followed by
-(π₁^*π₂^*F)[0] → ((π₁ ≫ π₂)^*F)[0] with the single-complex comparison for π₁ ≫ π₂.
-The uncancelled source comparison is precisely the inverse comparison for a₁,a₂.
-This uses only commutativity of the two squares, not cartesianness; identity arrows and
-zero sheaves give the same identities by the unit laws.
--/
+Source: Stacks Tag 0F07, condition (1), and Tag 09Z1, the canonical restriction maps. -/
 theorem Etale.baseChangePullbackComparison_comp
     {T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T)
     (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂)

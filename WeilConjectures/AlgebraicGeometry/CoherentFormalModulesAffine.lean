@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffineReconstructi
 
 /-! # Coherent formal modules on an affine scheme
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W and its proof
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine).
+Source: Stacks Project, Cohomology of Schemes, Lemma 087W and its proof.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ The inverse is naturally the sheaf quotient system of the tilde of the restricte
 on an affine scheme this is canonically the tilde of the module quotient N/I^(n+1)N,
 with the canonical reductions on objects and maps.
 
-Source: Stacks Project, Lemma 087W
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine).
+Source: Stacks Project, Lemma 087W.
 Proof, following the seven steps of the node:
 1. Global sections identify coherent sheaves with finite A-modules (01XZ), and ideal
 products and quotients on an affine with the corresponding module products and quotients.

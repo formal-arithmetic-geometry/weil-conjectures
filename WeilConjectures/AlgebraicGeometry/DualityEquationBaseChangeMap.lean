@@ -19,7 +19,7 @@ or derived-pullback counit is chosen by this definition.
 # Canonical base-change map for a right adjoint
 
 Source: literature/stacks-project/duality.tex, Tag 0AA8 (Lemma 48.6.2),
-equation-base-change-map (blueprint: def-sc-duality-equation-base-change-map).
+equation-base-change-map.
 -/
 
 @[expose] public section
@@ -50,8 +50,7 @@ the map is `Lg_X^* a(η'_K) ≫ Lg_X^* (θ_{Lg^* K})⁻¹ ≫ ε_{a'(Lg^* K)}`.
 We compute it directly as the mate of `β⁻¹` under `adjf` and `adjf'`. The iterated
 mates identity identifies this with the displayed composite for any auxiliary
 pullback/direct-image adjunctions. Thus no such auxiliary choice is part of the data.
-Source: Stacks Project, duality.tex, Tag 0AA8, equation-base-change-map
-(blueprint: def-sc-duality-equation-base-change-map). -/
+Source: Stacks Project, duality.tex, Tag 0AA8, equation-base-change-map. -/
 noncomputable def dualityEquationBaseChangeMap
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

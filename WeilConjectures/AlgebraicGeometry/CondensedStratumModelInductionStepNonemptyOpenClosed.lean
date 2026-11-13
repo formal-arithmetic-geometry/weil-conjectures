@@ -28,20 +28,7 @@ set_option linter.style.haveILetI false
 
 /-- Open/closed localization data for the nonempty support step.
 
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split.
-Proof: Pull the given stratification and its models back to Y. Choose an irreducible
-component of nonempty Y. Some stratum intersects it densely; local closedness and removal
-of the other components give a nonempty open U contained in that stratum image. The
-pulled-back stratum over U is a surjective closed immersion. Empty-complement ringed
-localization identifies its module category with that of U and transports the supplied
-locally finitely presented model, including coefficient-change compatibility. This gives a
-constructible model on U. Realize the complement by a closed immersion k:Z → Y. Its
-composite with i has closed image D′ strictly below D: it is contained in range(i) and
-misses the image of a point of U, since i is injective. Apply the supplied induction
-hypothesis at D′. Pullback composition identifies the resulting model with the restriction
-along k ≫ i. The open and closed images are complementary, giving all required witnesses.
-(auxiliary; not a blueprint node)
--/
+Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split. -/
 theorem exists_nonempty_support_open_closed_models
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

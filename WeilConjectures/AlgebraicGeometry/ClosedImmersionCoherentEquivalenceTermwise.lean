@@ -27,7 +27,6 @@ open MonoidalCategory Scheme.Modules
 Source: Stacks Project, Cohomology of Schemes, Tags 088A and 087T.
 The proof constructs the restricted pushforward equivalence level by level, using
 the annihilation, coherence, ideal-power, and full-faithfulness lemmas.
-(blueprint: lem-weil-pbc-closed-immersion-coherent-formal-equivalence-termwise)
 -/
 theorem closedImmersion_coherentFormal_equivalence_termwise {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) :

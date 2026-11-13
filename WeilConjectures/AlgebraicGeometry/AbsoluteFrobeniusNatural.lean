@@ -35,8 +35,7 @@ characteristic `p`:
 
 ## Main statements
 
-- `frobenius_spec`: Mathlib's `frobenius` and `iterateFrobenius` (blueprint
-  `def-weil-ring-frobenius`).
+- `frobenius_spec`: Mathlib's `frobenius` and `iterateFrobenius`.
 - `AlgebraicGeometry.Scheme.absoluteFrobenius_wellDefined`: blueprint
   `lem-weil-absolute-frobenius-well-defined`.
 - `AlgebraicGeometry.Scheme.comp_iterateFrobenius`: naturality of the absolute Frobenius.

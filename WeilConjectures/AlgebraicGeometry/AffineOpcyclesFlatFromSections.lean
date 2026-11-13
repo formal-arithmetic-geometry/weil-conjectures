@@ -117,23 +117,7 @@ private noncomputable def sections_cokernel_iso (S : Scheme.{u}) (hS : IsAffine 
 set_option backward.isDefEq.respectTransparency false in
 /-- Transfer flatness of module opcycles to affine-local flatness of sheaf opcycles.
 Source: Stacks Project, Tags 01IB (affine equivalence), 01HV (localization of
-associated sheaves), and 01U4 (affine-local flatness).
-(blueprint: lem-pc-affine-opcycles-flat-from-sections).
-
-Proof: Let P be the global-sections complex and Q its degree-a opcycles.
-The counit of the affine quasi-coherent equivalence identifies the two terms
-of C defining this cokernel with the sheafifications of their global sections,
-naturally in the differential. Sheafification is a left adjoint and preserves
-cokernels, so C.opcycles a is the associated sheaf of Q. Localizing a flat
-module gives flat stalks over the localized structure rings. On any affine
-open U, the prime-local criterion implies that the sections of this associated
-sheaf are flat over Gamma(U,O). For affine U contained in affine V, the open
-immersion U to V gives a flat map Gamma(V,O) to Gamma(U,O). Transitivity of
-module flatness gives flatness of Gamma(U,C.opcycles a) over Gamma(V,O), with
-the scalar action obtained by restricting along the identity's appLE. This
-proves every test in IsFlatOver(identity). Only the two displayed terms need
-quasi-coherence, since opcycles are their cokernel; no other degree or homology
-is involved. The empty scheme and zero cokernel are included. -/
+associated sheaves), and 01U4 (affine-local flatness). -/
 theorem affine_opcycles_flat_from_sections (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ) (a : ℤ)
     (hprev : (C.X (a - 1)).IsQuasicoherent) (hcurr : (C.X a).IsQuasicoherent)

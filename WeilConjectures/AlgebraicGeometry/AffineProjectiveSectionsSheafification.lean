@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 /-! # Sheafifying a finite-projective comparison with affine sections
 
 Source: Stacks Project, Tags 01IB and 08EB.
-(blueprint: lem-pc-affine-projective-sections-sheafification).
 -/
 
 @[expose] public section
@@ -127,22 +126,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Sheafification of a ring quasi-isomorphism to the sections of a quasi-coherent
 complex supplies a quasi-isomorphism to that complex; finite projective terms give
 flat, quasi-coherent and finitely presented sheaves.
-Source: Stacks Project, Tag 01IB (schemes-lemma-spec-sheaves), and Tag 08EB.
-(blueprint: lem-pc-affine-projective-sections-sheafification).
-
-Proof: Use the explicit functor tilde followed by restriction along Y.isoSpec.hom.
-The affine tilde functor is exact and thus preserves quasi-isomorphisms. Its counit
-on every term of D is invertible because that term is quasi-coherent; naturality
-makes these counits a chain isomorphism from the sheafified section complex to D.
-Compose this chain isomorphism with the sheafification of q. Each finite projective
-module P.X n is a retract of a finite free module. Tilde and restriction preserve
-the retraction and finite sums, giving a retract of a finite free structure-module
-on Y. Such a retract is quasi-coherent and finitely presented. On an affine open U
-its sections are finite projective over Gamma(U,O), hence flat. For affine U inside
-affine V, Gamma(U,O) is flat over Gamma(V,O) by flatness of open immersions.
-Transitivity of flatness gives exactly the sectionwise IsFlatOver identity predicate,
-with its restriction-of-scalars action. These arguments include rank zero and the zero ring.
-No boundedness or perfectness is assumed in this sheafification step. -/
+Source: Stacks Project, Tag 01IB (schemes-lemma-spec-sheaves), and Tag 08EB. -/
 theorem affine_projective_sections_sheafification
     (Y : Scheme.{u}) [IsAffine Y]
     (D : CochainComplex Y.Modules ℤ)

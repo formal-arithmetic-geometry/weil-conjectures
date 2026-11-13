@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AmpleProjChartFormula
 # The canonical morphism to Proj of the section ring
 
 Source: Stacks Project, Properties, Tag 01PZ, existence and clause (1), and Constructions,
-Tag 01N8, the localized chart formula (blueprint: lem-sc-ample-proj-canonical-map).
+Tag 01N8, the localized chart formula.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical morphism to the Proj of the section ring, with its inverse images and
-its map on chart sections. Source: Stacks Project, Tags 01PZ and 01N8
-(blueprint: lem-sc-ample-proj-canonical-map).
+its map on chart sections. Source: Stacks Project, Tags 01PZ and 01N8.
 
 Step 1: a positive-degree section `s` trivializes its tensor power on its nonvanishing
 open (lem-weil-pbc-nonvanishing-section-trivializes). Dividing a homogeneous numerator of

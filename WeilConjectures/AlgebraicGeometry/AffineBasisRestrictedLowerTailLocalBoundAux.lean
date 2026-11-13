@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Local vanishing on each affine open; this is the cohomological core of the
 restricted lower-tail bound.
 Source: Stacks Project, Tags 0D64, 01E1 and 03FD.
-(blueprint: lem-sc-affine-basis-restricted-lower-tail-local-bound-aux).
 The proof follows the restriction, truncation, and module/abelian cohomology
 comparison argument in the parent node. -/
 theorem affineBasisRestrictedLowerTail_local_vanishing

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 /-! # Computation normalization of the canonical coefficient tensor presentation
 
 Source: Stacks 06YY and 0G7E; the scalar comparison in the rational proper
-base-change proof, paragraph (1)
-(auxiliary; not a blueprint node).
+base-change proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -280,8 +279,7 @@ private theorem regularPullback₀_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rw [pull_unit_eq S f]
 
 /-- The canonical balanced tensor presentation, including its fixed symmetry.
-Source: Stacks 06YY, 0G7E
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YY, 0G7E. -/
 def canonicalCoefficientTensorNormalization (T : Scheme.{u}) : TensorNormalization a T := by
   letI : SymmetricCategory (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
     { toBraidedCategory := sheafBraidedCategory Ab.{u + 1} T
@@ -301,27 +299,7 @@ def canonicalCoefficientTensorNormalization (T : Scheme.{u}) : TensorNormalizati
 normalization, and the two exact single-object pullback constructions agree.
 
 Source: Stacks 06YY and 0G7E; the canonical scalar tensor and inverse-image
-comparisons in rational proper base change, paragraph (1)
-(auxiliary; not a blueprint node).
-
-Proof. Apply derivedTensorPresentationIso_fac to the quotient of a complex P.
-Naturality of the braiding moves the coefficient single-object comparison across
-Qh's tensor comparison. Compatibility of Qh with the braiding changes the
-coefficient-first expression into the coefficient-last expression. The ordinary
-single-tensor comparisons identify the remaining composite with termwise tensor
-on P. Expanding the balanced counit gives compute followed by exact restriction
-and the ordinary balanced map, which is precisely TensorNormalized. No flatness
-of P or of the coefficient is used. For the second assertion, expand the exact
-single/left-derived comparison through the exact mapDerivedCategory comparison.
-For the ordinary unit comparison, precompose with the balanced scalar-extension
-coprojection. The standard composite monoidal structure and the transported
-residue monoidal structure both give multiplication by the pulled scalar: their
-unit maps send a local scalar s to 1 tensor s, and their inverses multiply.
-The coprojection is epi,
-so these unit maps agree. The ordinary restriction/pullback maps are already the
-same specified comapUpperStarIso. Both derived constructions therefore consist
-of the same localization factor, single factor and ordinary restricted unit map.
-Functoriality of Q combines the last two factors. -/
+comparisons in rational proper base change, paragraph (1). -/
 theorem canonicalCoefficientTensorNormalization_normalized :
     (∀ T : Scheme.{u},
       TensorNormalized a T (canonicalCoefficientTensorNormalization a T)) ∧

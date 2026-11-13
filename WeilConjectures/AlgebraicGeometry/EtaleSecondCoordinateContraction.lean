@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -77,17 +76,7 @@ private theorem combine
 
 /-- The second-coordinate contraction for any coefficient with identity self symmetry.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle before
-using the diagonal integral; Stacks Tags 07A7 and 0B56.
-(auxiliary; not a blueprint node).
-
-Proof: base change of the single trace evaluation identifies inverse exchange
-followed by f*evaluation with second-projection integration, using
-traceBaseChangeEvaluation. Pullback preserves the identity self symmetry of L.
-The projectionTraceTensorInterchange identity then moves the exterior f*L across
-that integration. Naturality of the ordinary projection map in coordinateH makes
-the two projection maps cancel. Functoriality of tensor combines inverse exchange
-and f*evaluation; the resulting composite is exactly comparison followed by H of
-evaluation. This uses neither the first-coordinate equation nor a diagonal class. -/
+using the diagonal integral; Stacks Tags 07A7 and 0B56. -/
 theorem secondCoordinateContraction [Finite A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsProper f] (L : DerivedCategoryModule A Y)
     (hL : (swap A Y L L).hom = 𝟙 _)

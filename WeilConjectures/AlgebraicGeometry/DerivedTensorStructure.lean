@@ -17,8 +17,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Derived tensor structure on O_X-modules
 
-Source: Stacks Project, Cohomology, Tags 06Y7, 06YH and 03EO
-(blueprint: def-pc-scheme-derived-tensor-structure).
+Source: Stacks Project, Cohomology, Tags 06Y7, 06YH and 03EO.
 The tensor is the upstream K-flat derived monoidal construction, specialized to the
 shared category of O_X-modules, rather than an arbitrary monoidal structure.
 -/
@@ -34,17 +33,12 @@ namespace AlgebraicGeometry
 variable (X : Scheme.{u})
 
 /-- The recorded sheaf tensor structure, specialized to O_X.
-Source: Stacks, 06Y7 (blueprint: def-pc-scheme-derived-tensor-structure). -/
+Source: Stacks, 06Y7. -/
 noncomputable local instance moduleTensor :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- O_X-modules admit functorial flat resolutions. Source: Stacks, 06Y7
-(blueprint: def-pc-scheme-derived-tensor-structure).
-Proof: take the sum of extension-by-zero free modules indexed by all local sections
-on all opens, with its evaluation epimorphism. These modules are flat on stalks.
-Iterate the construction on kernels. Maps of modules act on the section indices,
-so this resolution is functorial. -/
+/-- O_X-modules admit functorial flat resolutions. Source: Stacks, 06Y7. -/
 theorem schemeModule_hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := by
@@ -81,7 +75,7 @@ lem-pc-sheaf-modules-tensor-closed), the Grothendieck structure and the functori
 construction; its tensor on objects and morphisms is the K-flat derived tensor.
 It is a global instance, so every statement about `schemeDerivedCategory X` uses this one
 monoidal structure.
-Source: Stacks, 06YH (blueprint: def-pc-scheme-derived-tensor-structure). -/
+Source: Stacks, 06YH. -/
 @[instance_reducible]
 noncomputable def schemeDerivedTensorMonoidal
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

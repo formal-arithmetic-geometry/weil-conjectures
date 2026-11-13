@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The unique lift through the monic filtered-step inclusion, a genuine universal
 property construction rather than a choice of an arbitrary isomorphism.
-Source: Stacks, Tag 015J, column filtration.
-(blueprint: def-weil-pbc-etale-restricted-sections-lift). -/
+Source: Stacks, Tag 015J, column filtration. -/
 noncomputable def etaleRestrictedSectionsLift
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -34,8 +33,7 @@ noncomputable def etaleRestrictedSectionsLift
     (etaleRestrictedSections_factors X K T q)
 
 /-- The lift has the prescribed composite with the filtered-step inclusion.
-Source: Stacks, Tag 015J. Proof: the defining universal property of factorThru.
-(blueprint: def-weil-pbc-etale-restricted-sections-lift). -/
+Source: Stacks, Tag 015J. Proof: the defining universal property of factorThru. -/
 theorem etaleRestrictedSectionsLift_arrow
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -45,8 +43,7 @@ theorem etaleRestrictedSectionsLift_arrow
   exact Subobject.factorThru_arrow _ _ _
 
 /-- Any lift with the prescribed inclusion composite is the canonical lift.
-Source: Stacks, Tag 015J. Proof: cancel the monic filtered-step inclusion.
-(blueprint: def-weil-pbc-etale-restricted-sections-lift). -/
+Source: Stacks, Tag 015J. Proof: cancel the monic filtered-step inclusion. -/
 theorem etaleRestrictedSectionsLift_unique
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -60,18 +57,7 @@ theorem etaleRestrictedSectionsLift_unique
 
 
 /-- The canonical sections lift is an isomorphism of complexes.
-Source: Stacks, Tag 015J, proof remark (3); finite diagonal sums.
-
-Proof: In degree n, Γ commutes with the finite sum of terms having r ≥ 0,
-s ≥ q, r+s=n, as implemented by etaleCEMappedTotalIso. The restricted mapped
-total inclusion identifies this sum with the second-filtration subobject.
-By T.filtration_formula, this is precisely the degree-n filtered step.
-Consequently the degree-n lift is the canonical isomorphism onto that subobject.
-It is the lift in the definition by cancellation of the monic step inclusion.
-All its components are isomorphisms, hence the chain map is an isomorphism.
-The empty sum gives the zero-object isomorphism; the same calculation works
-for arbitrary integer bounds and for zero terms.
-(blueprint: lem-weil-pbc-etale-restricted-sections-lift-isIso). -/
+Source: Stacks, Tag 015J, proof remark (3); finite diagonal sums. -/
 theorem etaleRestrictedSectionsLift_isIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

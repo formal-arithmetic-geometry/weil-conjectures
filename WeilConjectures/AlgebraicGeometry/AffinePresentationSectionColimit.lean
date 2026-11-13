@@ -126,28 +126,7 @@ private theorem affineEtale_smallLimit_preservesColimit {X : Scheme.{u}}
 colimit for every affine etale presentation in the site universe.
 
 Source: Bhatt--Scholze, Lemma 5.1.1; the final paragraph of the blueprint's
-continuity-map definition (auxiliary; not a blueprint node).
-
-Proof: First work over an affine stage of the presentation, by restriction to the
-cofiltered over-category of that stage. Global sections turn the given affine
-limit into a filtered ring colimit. Finite presentation of etale algebras implies
-that maps to every affine etale object factor through a stage, and equality of two
-such maps is detected at a later stage. This argument uses only finitely many
-algebra generators and relations, and hence also works for the larger index.
-The small-index theorem for ind-etale algebras supplies a universe-u etale
-presentation Q of the same vertex. Its section cocone is a colimit by the
-hypothesis. Maps from the vertex to every stage of Q factor through the original
-presentation, so each section on Q comes from an original stage. Conversely,
-sections from two original stages which agree on the vertex agree after passing
-to a stage of Q. Factor its projection through an original stage; eventual
-equality of maps to the two original etale stages, supplied by finite
-presentation, makes the two sections equal at a common original stage. Thus the
-canonical section map is surjective and injective. The filtered-colimit
-criterion for sets identifies this with the stated colimit cocone. Working over
-an affine stage and composing its structure morphism back to X gives the same
-restriction maps, so the argument applies to an arbitrary base scheme. Empty
-spectra and zero rings are included in the ring-colimit and finite-presentation
-arguments; a cofiltered category is nonempty. -/
+continuity-map definition. -/
 theorem affinePresentation_sectionCocone_isColimit {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1)))
     (hF : PreservesFilteredColimitsOfSize.{u, u}

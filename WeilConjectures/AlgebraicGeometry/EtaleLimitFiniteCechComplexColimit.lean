@@ -18,7 +18,6 @@ set_option linter.unusedVariables false
 /-! # Finite Čech complexes on inverse limits of schemes
 
 Source: Stacks Project, Tags 09YP, 09YN and 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-complex-colimit).
 -/
 
 @[expose] public section
@@ -32,29 +31,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- A finite qcqs étale covering has a Čech complex computed by stage Čech complexes.
 Source: Stacks Project, proof of Tag 09YP, the displayed equality of Čech complexes;
-Tag 09YN supplies degree-zero continuity, and 09YQ supplies the scheme-site realization.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-complex-colimit).
-
-Proof: Descend the qcqs étale object U and the finitely many qcqs covering objects
-and arrows to a common stage. These étale morphisms have finite presentation because
-source and base are qcqs. Descend the jointly surjective finite family, increasing the
-stage if necessary. On the directed tail, pull back the descended covering to obtain
-Uj, Vj and fj. Base change preserves étaleness and the covering property. Iterated
-fibre products of these objects give the stage nerves; their pullbacks to the limit
-are the nerve of the given covering, by uniqueness of fibre products. On each nerve
-object apply degree-zero section continuity for the compatible coefficient system.
-Its maps are the adjunction units followed by the coefficient transitions, so they
-commute with every face projection. Taking the finite product over tuples of cover
-indices therefore defines the stage complex diagram A and a cocone into the limit
-Čech complex. Naturality commutes with the alternating differentials. Filtered
-colimits of abelian groups commute with these finite products, so the cocone is
-colimiting in every degree and hence in complexes. The stage complexes are identified
-by the fibre-product comparisons, giving eA; their colimit is identified with the
-original nerve complex, giving eK. No injectivity or positive-degree cohomological
-continuity is used. The empty covering only covers an empty object and gives zero
-complexes; a singleton index and the zero coefficient system satisfy the same construction.
-The displayed existential is a theorem about complexes; it is not used to define
-any coefficient sheaf or other object of the library. -/
+Tag 09YN supplies degree-zero continuity, and 09YQ supplies the scheme-site realization. -/
 theorem etale_limit_finite_cech_complex_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

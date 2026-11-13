@@ -24,17 +24,7 @@ set_option synthInstance.maxSize 2048
 set_option maxHeartbeats 800000 in
 -- The two scheme tensor structures need extra elaboration when composing Hom equivalences.
 /-- The explicit restricted evaluation mate induces bijections on all Hom sets.
-Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
-(blueprint: lem-sc-derived-restriction-evaluation-mate-postcomp-bijective).
-
-Proof: use extension by zero as the left adjoint to restriction. The unit is an
-isomorphism, and tensoring an object in the essential image of extension by zero
-with an arbitrary complex remains in that image by the stalkwise K-flat tensor
-calculation. Transpose a map along the adjunction and the canonical tensor-Hom
-equivalences. Naturality of the supplied tensor comparison identifies the resulting
-map with postcomposition by the displayed mate. Every operation in this composite
-is a bijection, proving the assertion.
--/
+Source: Stacks Project, Tags 08DJ, 08DL and 08BS. -/
 theorem derivedRestriction_evaluationMate_postcomp_bijective
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

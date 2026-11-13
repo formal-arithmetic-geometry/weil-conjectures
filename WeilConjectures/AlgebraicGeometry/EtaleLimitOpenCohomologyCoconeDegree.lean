@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Canonical cohomology transition on the restricted stage opens.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone-degree). -/
+Source: Stacks Project, Tags 09YQ and 01F7. -/
 noncomputable def tailOpenCohomologyMapDegree {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -48,8 +47,7 @@ noncomputable def tailOpenCohomologyMapDegree {I : Type u} [Preorder I]
         (φ (homOfLE (show j.val ≤ k.val from f.le)))) n)
 
 /-- Canonical cohomology leg from a stage open to the limit open.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone-degree). -/
+Source: Stacks Project, Tags 09YQ and 01F7. -/
 noncomputable def tailOpenCohomologyLegDegree {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -72,28 +70,7 @@ noncomputable def tailOpenCohomologyLegDegree {I : Type u} [Preorder I]
 
 /-- The canonical restricted cohomology arrows and legs form a diagram and cocone.
 
-Source: Stacks Project, Tag 09YQ (coherent systems) and Tag 01F7 (functoriality).
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone-degree).
-
-Proof: For each tail index j put W_j = (D(j -> i₀); g₀)^-1(W) and use
-`tailStageOpenMap` for the restricted transitions. Pull F_j back along W_j.ι.
-The coefficient transition is `openSquareCoefficient`: its first factor undoes
-composition along the restricted transition and W_j.ι, its second factor composes
-along W_k.ι and the original transition, and its last factor restricts φ.
-The inverse-image identity and associativity coherences, applied to hidentity and
-hcomposition, prove the restricted coefficient identity and composition equations.
-Restrict G along the limit open inclusion, and whisker with the tail inclusion.
-The original eG, the projection squares, and inverse-image composition identify
-this diagram with the pullbacks of the restricted F_j. Naturality and hG give
-its transition formula. Restrict and reindex L as a cocone; colimithood is not
-needed here. Apply `etale_limit_canonical_cohomology_diagram` in degree n to
-this restricted system. Its object identifications give eK and its arrow formula
-is exactly `tailOpenCohomologyMapDegree`. Transport its cocone point using the
-coefficient identification with the restriction of L.pt. The canonical leg
-formula becomes `tailOpenCohomologyLegDegree`. No limit, compactness, affine transition,
-or cohomology continuity assertion is used. For empty W all terms are the
-cohomology of the empty schemes; for an identity singleton diagram these are
-ordinary restriction maps. Arbitrary coefficients, including zero, are allowed. -/
+Source: Stacks Project, Tag 09YQ (coherent systems) and Tag 01F7 (functoriality). -/
 theorem etale_limit_open_cohomology_cocone_degree
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

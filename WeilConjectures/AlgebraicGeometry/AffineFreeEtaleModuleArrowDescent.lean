@@ -34,29 +34,7 @@ namespace AlgebraicGeometry.Scheme
 between constructible module sheaves at a common stage.
 
 Source: Stacks Project, Tag 09YU (3), proof of essential surjectivity using Tag 095N;
-Tag 09YQ for sections, Tag 03S6 for free sheaves and base change.
-(blueprint: lem-weil-pbc-affine-free-etale-module-arrow-descent).
-
-Proof:
-1. Descend the finitely many affine etale objects U and V using the essential
-surjectivity of the affine etale site colimit. Directedness gives one common stage.
-Transport the original arrow through the induced free-sheaf isomorphisms.
-2. At that stage form the finite sum Q of the descended U free sheaves. Base change
-of free sheaves and preservation of sums identify its inverse image with the target
-of f. Represent f on each V summand by a section of this inverse image of Q, using
-free Yoneda followed by sheafification.
-3. The section-colimit theorem 09YQ represents each such section at a later stage.
-Choose a common upper bound of those finitely many stages, moving sections along
-transition maps. Form A from the free sheaves on the V objects at this later stage,
-and B as the pullback of Q from the initial common stage. The sections define a map a.
-4. Free-sheaf base change and composition give isomorphisms eA and eB. Check the
-asserted square on each free generator: the section comparison is precisely the unit
-of inverse image followed by its composition isomorphism. Yoneda and the coproduct
-universal property identify the two arrows.
-5. Each descended affine etale free sheaf is constructible by 03S8. Finite sums are
-constructible by the Serre property 03RZ, including the empty sum (zero); inverse
-image preserves constructibility. Thus both A and B are constructible.
-No cokernel or constructible sheaf F is involved in this statement. -/
+Tag 09YQ for sections, Tag 03S6 for free sheaves and base change. -/
 theorem exists_affine_free_etaleModule_arrow_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

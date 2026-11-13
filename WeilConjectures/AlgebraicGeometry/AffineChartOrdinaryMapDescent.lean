@@ -16,7 +16,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # Ordinary Hom descent on an affine chart
 
 Source: Stacks Project, Tags 01ZR and 05N7 (2).
-(blueprint: lem-pc-affine-chart-ordinary-map-descent).
 -/
 
 @[expose] public section
@@ -43,23 +42,7 @@ private theorem ordinaryChartBaseModule_finitePresentation
     (isAffineOpen_top (pullback r g))
 
 /-- Ordinary pullback maps of two fixed modules on one affine chart descend.
-Source: Stacks Project, Tag 01ZR, affine proof; Tag 05N7 (2).
-(blueprint: lem-pc-affine-chart-ordinary-map-descent).
-
-Proof: Work on the upper tail of j and its partial-order quotient. The stage
-charts are the pullbacks of the affine chart along maps between affine bases,
-so are affine, including the limit chart. Pullback pasting identifies their rings
-with the chart ring tensored over R(j) with R(k); at the limit this is the filtered
-colimit of the stage rings. Under the affine quasi-coherent module equivalence,
-M and N give finitely presented modules and ordinary pullback is scalar extension.
-Apply the map clause of finitePresentation_descent_directedColimit and transport
-its map back to sheaves. The pure-tensor equations characterize its comparisons
-as ordinary pullback composition. The pullback lift v compares the iterated limit
-chart with the direct limit chart, so this gives precisely the displayed equation
-with d. The tail contains j; quotienting a preorder does not change its colimit.
-Zero rings, empty affine charts and zero modules obey the same tensor argument.
-Only chart modules occur here: tensor pullbacks of ambient sheaves and the
-comparison with ambient restriction are handled separately. -/
+Source: Stacks Project, Tag 01ZR, affine proof; Tag 05N7 (2). -/
 theorem affine_chart_ordinary_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

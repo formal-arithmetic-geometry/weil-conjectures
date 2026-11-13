@@ -16,7 +16,6 @@ import Mathlib.RingTheory.Localization.Ideal
 /-! # Compatibility of affine annihilators on basic opens
 
 Source: Stacks Project, Morphisms, Lemma 05JU and Algebra, Lemma 07T8.
-(blueprint: lem-weil-pbc-annihilator-affine-basic-open)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Restriction to a slice site preserves finite type for a sheaf of modules over
 an arbitrary sheaf of rings. Pull a local finite generating cover back along `Over.forget U`;
 its local maps preserve colimits and the unit, hence preserve finite generating families.
-Source: Stacks Project, Modules, Tag 01B5, locality of finite type.
-(blueprint: lem-weil-pbc-annihilator-affine-basic-open) -/
+Source: Stacks Project, Modules, Tag 01B5, locality of finite type. -/
 private theorem isFiniteType_over_site
     {C : Type u₁} [Category.{v₁} C] [Limits.HasBinaryProducts C] [Limits.HasPullbacks C]
     (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u})
@@ -133,26 +131,7 @@ private theorem annihilator_localized
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine annihilator ideals of a finite type quasi-coherent module are compatible with
 restriction to basic opens.
-Source: Stacks Project, Morphisms, Lemma 05JU (last paragraph), and Algebra, Lemma 07T8.
-(blueprint: lem-weil-pbc-annihilator-affine-basic-open)
-
-Proof: fix an affine open U, put A = O_X(U), M = F(U), and fix f in A. Finite type and
-quasi-coherence imply that M is finite. The restriction ring O_X(D(f)) is a localization
-A_f, and the canonical quasi-coherent section base-change map identifies F(D(f)) with
-M tensor_A A_f, with its A_f action and with restriction corresponding to m tensor 1.
-The tensor identification gives an IsLocalizedModule structure on restriction. For the
-forward ideal inclusion, a scalar in Ann_A(M) kills every localized section: multiply
-such a section by an invertible denominator to bring it into the image of M, and use
-linearity and injectivity of multiplication by that denominator. For the reverse
-inclusion, write a localized annihilator z as a fraction r/s. Then restriction sends
-r times every generator of M to zero. The localization equality criterion gives a
-denominator c_j killing r times the j-th generator. The product t of the finitely many
-c_j kills r times all generators, hence all of M by linearity. Thus tr belongs to
-Ann_A(M), and z = (tr)/(ts) belongs to its extended ideal. This proves exactly the
-claimed equality along the actual restriction homomorphism. The empty product is 1,
-so the proof also covers the zero module. The equality remains
-valid for f = 0 and for M = 0: localization at 0 is the zero ring, and the annihilator
-of the zero module is the unit ideal. -/
+Source: Stacks Project, Morphisms, Lemma 05JU (last paragraph), and Algebra, Lemma 07T8. -/
 theorem annihilator_affine_basicOpen
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]
     (U : X.affineOpens) (f : Γ(X, U.1)) :

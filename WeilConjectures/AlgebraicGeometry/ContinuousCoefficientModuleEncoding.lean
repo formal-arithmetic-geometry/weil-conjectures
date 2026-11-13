@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousChartSchemeNaturality
 /-! # Encoding continuous internal modules as sectionwise module sheaves
 
 Source: Stacks Project, Modules on Sites, and Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The section ring reconstructed from a ring sheaf is the original ring sheaf.
 The identity on sections preserves multiplication by Sheaf.μ_comp_map_mul.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def reconstructedRingIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (Scheme.ProEt.topology X)
@@ -63,8 +61,7 @@ noncomputable def reconstructedRingIso (X : Scheme.{u})
 /-- The ring map on reconstructed section rings induced by an internal algebra map.
 It is obtained by forgetting sheaves and evaluating the commutative monoid functor.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def sectionRingMap (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -84,8 +81,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Encoding internal modules commutes with restriction of scalars.
 The underlying isomorphism is identity; linearity is mapModComapIso.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def sectionModuleComapIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -117,8 +113,7 @@ noncomputable def sectionModuleComapIso (X : Scheme.{u})
 /-- The regular internal module encodes as the unit sectionwise module.
 The isomorphism is the identity on sections and their scalar actions.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def sectionModuleRegularIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
@@ -141,8 +136,7 @@ noncomputable def sectionModuleRegularIso (X : Scheme.{u})
 /-- The given metric on a finite extension is its spectral-norm metric.
 This is NormedAlgebra.norm_eq_spectralNorm applied to differences.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 lemma spectralMetric_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [hE : NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -156,8 +150,7 @@ lemma spectralMetric_eq (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The spectral and given-norm continuous field sheaves agree.
 Their metrics agree, hence their topologies and continuous function rings agree.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 lemma lisseFieldSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [hE : NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -172,8 +165,7 @@ lemma lisseFieldSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The two integral coefficient subrings agree.
 Both membership conditions are exactly spectral norm at most one.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 lemma continuousIntegers_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -188,8 +180,7 @@ lemma continuousIntegers_eq (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The spectral and given-norm integral coefficient sheaves agree.
 Use equality of their subrings and of the induced subspace topologies.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 lemma lisseIntegerSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [hE : NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -207,8 +198,7 @@ lemma lisseIntegerSheaf_eq (ℓ : ℕ) [Fact ℓ.Prime]
 /-- Transport module sheaves through an isomorphism of coefficient sheaves.
 Use the identity-site pushforward equivalence and the two inverse ring maps.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def ringModuleEquivalenceOfIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (e : S ≅ R) :
     SheafOfModules.{u + 1} R ≌ SheafOfModules.{u + 1} S := by
@@ -230,8 +220,7 @@ noncomputable def ringModuleEquivalenceOfIso (X : Scheme.{u})
 /-- Coefficient transport identifies the unit module sheaves.
 On each object this is restrictScalarsIsoOfEquiv for the given ring isomorphism.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def ringModuleUnitIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (e : S ≅ R) :
     (ringModuleEquivalenceOfIso X e).functor.obj (SheafOfModules.unit R) ≅
@@ -248,8 +237,7 @@ noncomputable def ringModuleUnitIso (X : Scheme.{u})
 attribute [local instance] Abelian.hasFiniteBiproducts
 
 /-- A coefficient isomorphism preserves the finite free sectionwise modules.
-Source: Stacks Project, Modules on Sites, Tag 03DO.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Modules on Sites, Tag 03DO. -/
 noncomputable def ringModuleFreeIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (e : S ≅ R)
     (n : ℕ) :
@@ -263,8 +251,7 @@ noncomputable def ringModuleFreeIso (X : Scheme.{u})
 Restrict along the inverse chartComparison, encode the sectionwise action, then
 transport along reconstructedRingIso. Each step is an actual equivalence.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousRingModuleEquivalence (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -283,8 +270,7 @@ noncomputable def continuousRingModuleEquivalence (X : Scheme.{u}) (T : Type)
 /-- The continuous module encoding identifies the regular module with the unit.
 Compose regularIsoOfIsIso, sectionModuleRegularIso and ringModuleUnitIso.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousRingRegularIso (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T] :
     (continuousRingModuleEquivalence X T).functor.obj
@@ -305,8 +291,7 @@ noncomputable def continuousRingRegularIso (X : Scheme.{u}) (T : Type)
 Map the biproduct through the equivalence, use continuousRingRegularIso and
 reindex the corresponding coproduct along Equiv.ulift.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousRingFreeIso (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]
     (n : ℕ) :
@@ -326,8 +311,7 @@ noncomputable def continuousRingFreeIso (X : Scheme.{u}) (T : Type)
 /-- The explicit encoding for rational coefficients in the lattice theorem.
 Compose continuousRingModuleEquivalence with the spectral coefficient equality.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousFieldModuleEquivalence (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -350,8 +334,7 @@ noncomputable def continuousFieldModuleEquivalence (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The explicit encoding for integral coefficients in the lattice theorem.
 Compose continuousRingModuleEquivalence with the integral coefficient equality.
 Source: Stacks Project, Modules on Sites, sheaves of modules (Tag 00YV);
-Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousIntegerModuleEquivalence (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -374,14 +357,7 @@ noncomputable def continuousIntegerModuleEquivalence (ℓ : ℕ) [Fact ℓ.Prime
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit continuous module encoding commutes with restriction of scalars.
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 00YV;
-Bhatt--Scholze Section 6.8.
-(auxiliary; not a blueprint node)
-
-Proof. Coefficient naturality conjugates the condensed scalar map by the two
-canonical chart comparisons to the sectionwise scalar map. Apply comapComp and
-sectionModuleComapIso. The reconstructed-ring comparisons are identity on sections,
-so their restrictions commute by an identity linear map. Compose the resulting
-isomorphisms. This proves a property of the already constructed encodings. -/
+Bhatt--Scholze Section 6.8. -/
 theorem continuousRing_comap_compatibility (X : Scheme.{u}) (T S : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]
     [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [TotallyDisconnectedSpace S]
@@ -457,13 +433,7 @@ private lemma cast_square {C : Type*} [Category C] {A A' B B' : C}
   simp
 set_option backward.isDefEq.respectTransparency false in
 /-- The integral-to-field scalar map commutes with the spectral coefficient identifications.
-Source: Bhatt--Scholze Section 6.8, with NormedAlgebra.norm_eq_spectralNorm.
-(auxiliary; not a blueprint node)
-
-Proof. The given and spectral metrics agree, and the two integral subrings agree.
-The inclusions of either subring into the field are the same subtype inclusion.
-Postcomposition on continuous functions therefore gives heterogeneously equal maps.
-Transport through the coefficient equalities to obtain the stated commuting square. -/
+Source: Bhatt--Scholze Section 6.8, with NormedAlgebra.norm_eq_spectralNorm. -/
 lemma lisseScalar_square (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -503,8 +473,7 @@ attribute [local irreducible] condensedPushforwardHom
 Source: Bhatt--Scholze Section 6.8; the adjoint form of
 continuousChart_scheme_naturality. Transpose by the inverse-image adjunction.
 The localization comparison transposes to its unit; on sections this is exactly
-precomposition with the pullback projection. Apply scheme naturality.
-(auxiliary; not a blueprint node) -/
+precomposition with the pullback projection. Apply scheme naturality. -/
 lemma continuousChart_pullback (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f]
     (E : Type) [CommRing E] [TopologicalSpace E] [IsTopologicalRing E] :
     (upperStar Ab.{u + 1} f).map (chartComparison X E) ≫

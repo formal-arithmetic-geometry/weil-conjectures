@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Affine opens intersected with section nonvanishing loci
 
-Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open)
-(blueprint: lem-sc-affine-cap-section-open).
+Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open).
 -/
 
 @[expose] public section
@@ -68,20 +67,7 @@ module, or of any positive tensor power of it, gives an affine open. The nonvani
 condition is exactly that the germ lies outside the maximal ideal times the stalk module,
 as in `def-weil-pbc-ample-invertible-module`.
 
-Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open)
-(blueprint: lem-sc-affine-cap-section-open).
-
-Proof:
-1. Restrict the invertible module to the affine scheme `U = Spec R`. The affine dictionary
-   (`lem-weil-pbc-affine-tilde-gamma-adjunction` and
-   `lem-sc-affine-cap-section-open-dictionary`) identifies it with the sheaf of a finite
-   projective rank-one module `N`, and identifies the intersection with the primes `p`
-   at which the restricted section is outside `p N`.
-2. Apply `lem-sc-affine-cap-section-open-algebra`: this prime locus is affine. Its affine
-   model is `Spec (Sym_R N / (s - 1))`, so the intersection is affine.
-3. For `n > 0`, the tensor power is invertible
-   (`def-weil-pbc-ample-invertible-module`). Apply the first clause to it and to its section.
--/
+Source: Stacks Project, Properties, Lemma 01PV (properties-lemma-affine-cap-s-open). -/
 theorem affine_cap_section_open (X : Scheme.{u}) (M : X.Modules) [M.IsInvertible]
     (s : M.val.presheaf.obj (Opposite.op ⊤)) (U : X.Opens) (hU : IsAffineOpen U) :
     (∃ V : X.Opens, IsAffineOpen V ∧ ∀ x : X, x ∈ V ↔ x ∈ U ∧

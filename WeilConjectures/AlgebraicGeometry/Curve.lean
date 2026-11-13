@@ -75,8 +75,7 @@ not part of this class; the dimension condition is phrased with `topologicalKrul
 valued in `WithBot ℕ∞` and is `⊥` exactly on the empty scheme.
 
 This is also blueprint `def-sc-curves`. As blueprint `rem-pc-relation-sc` records, a smooth
-projective curve in the sense of the curve-calculation chapter is a smooth connected curve here
-(blueprint `lem-pc-curves-are-sc`). -/
+projective curve in the sense of the curve-calculation chapter is a smooth connected curve here. -/
 class IsCurve (f : C ⟶ Spec (.of K)) : Prop
     extends IsSeparated f, LocallyOfFiniteType f, QuasiCompact f where
   /-- The underlying space of a curve has dimension at most one. -/
@@ -156,8 +155,7 @@ over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
 
 On a smooth projective geometrically integral curve this is the degree of any associated Weil
 divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds.
-
-(blueprint: `def-sc-pic0`) -/
+ -/
 noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) (L : C.Pic) : ℤ :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree K ((fromSkeleton C.Modules).obj L.val)
@@ -187,8 +185,7 @@ of degree zero, recorded here as the subset `f.picZero` of `C.Pic`.
 For a smooth proper curve the degree is the group homomorphism
 `AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
 (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
-
-(blueprint: `def-sc-pic0`) -/
+ -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 

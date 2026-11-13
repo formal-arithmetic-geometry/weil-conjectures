@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleSecondCoordinateContraction
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, both triangle computations before diagonal integration.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +45,7 @@ private theorem cancel_coordinate
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two coordinate contraction equations for an even shifted etale line.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two triangle computations
-(auxiliary; not a blueprint node).
+Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two triangle computations.
 
 Proof plan:
 1. A finite ring is additive torsion. Properness is stable under base change, so

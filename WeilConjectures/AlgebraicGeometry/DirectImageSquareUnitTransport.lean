@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Equality transport of the ordinary direct-image square
 Source: Stacks Project, Tags 08HY and 0D5T.
-(blueprint: lem-pc-direct-image-square-unit-transport).
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The ordinary comparison, constructed from pushforward composition and equality transport.
-Source: Stacks, Tags 08HY and 0D5T.
-(blueprint: lem-pc-direct-image-square-unit-transport). -/
+Source: Stacks, Tags 08HY and 0D5T. -/
 @[irreducible] noncomputable def directImageSquareIso {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r) :
     RingedSpace.moduleDirectImage s.toLRSHom.toShHom ⋙
@@ -36,8 +34,7 @@ Source: Stacks, Tags 08HY and 0D5T.
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed comparison is the identity on whole-space sections.
-Source: Stacks, Tags 08HY and 0D5T.
-(blueprint: lem-pc-direct-image-square-unit-transport). -/
+Source: Stacks, Tags 08HY and 0D5T. -/
 theorem directImageSquareIso_top {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r)
     (M : SheafOfModules.{u} (moduleRings A.toRingedSpace)) (x : M.val.obj (op ⊤)) :
@@ -100,29 +97,7 @@ set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 -- Matching the composite homotopy functors unfolds the sheaf scalar restrictions.
 /-- Equality transport of a single right-derived unit across the ordinary square.
-Source: Stacks Project, Tags 08HY and 0D5T.
-(blueprint: lem-pc-direct-image-square-unit-transport).
-Proof: moduleDirectImage of a composite is definitionally the composite
-of the two moduleDirectImage functors. The pushforwardComp hom and inv are
-identities on sections over every open (not just the whole space), by the
-Mathlib component formulas. Consequently these comparison maps identify
-with the equality maps for the definitionally equal functors. On complexes
-they are degreewise identities; on homotopy objects this follows by taking
-a representative under HomotopyCategory.quotient and using that the quotient
-functor maps identity maps to identities.
-After these identifications the ordinary square comparison is equality
-transport along h. For a single scheme morphism v, its chosen derived
-functor and its unit form a family in v. Naturality of a family of morphisms
-under equality (eqToHom_naturality, or induction on that equality) says that
-its unit followed by the equality map of the derived functors equals the
-equality map of the source functors followed by its unit. Additivity is a
-proposition, so the additive instance introduces no extra comparison.
-Applying Qh to the homotopy equality map gives precisely the source equality
-map in that naturality equation: functors preserve eqToHom. Substituting the
-ordinary comparison just identified proves the displayed equation.
-Only equality maps are simplified; no unit is cancelled. The argument works
-for arbitrary homotopy complexes, zero complexes, identity squares, and
-empty schemes, with no acyclicity hypothesis. -/
+Source: Stacks Project, Tags 08HY and 0D5T. -/
 theorem directImageSquare_unit_transport {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :

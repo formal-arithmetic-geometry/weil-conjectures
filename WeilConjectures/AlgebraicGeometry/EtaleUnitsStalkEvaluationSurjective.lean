@@ -21,20 +21,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Surjectivity part of geometric stalk evaluation.
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation-surjective).
-
-Proof: Let a be a unit of the separable closure, with its multiplicative group
-written additively. The subfield L = K(a) inside the separable closure is finite
-and separable over K and contains both a and its inverse. Spec L is therefore
-etale over Spec K, and the composite embedding of L into the algebraic closure
-gives a geometric lift x. Via the global-sections isomorphism for Spec L, a and
-its inverse define a unit section z on this neighbourhood. Let t be the germ
-of z at x. The evaluation formula for f says that the underlying value of f(t)
-embedded in the algebraic closure is the embedded value of a. Injectivity of the
-separable-closure embedding, followed by extensionality of units and transport
-through the additive wrapper, gives f(t) = a. Thus every target element has a
-preimage. This construction uses only separable extensions, even for imperfect K. -/
+Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
 theorem etale_units_stalk_evaluation_surjective (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

@@ -75,7 +75,6 @@ private theorem composition_unit
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The source and target arrows admit compatible object isomorphisms.
-(blueprint: lem-sbc-etale-chart-sections-object-comparison)
 Source: Stacks Project, Tag 0EZX, comparison of section objects.
 The proof constructs the canonical inverse-image restriction and composition
 isomorphisms and checks their compatibility with the two adjunction units. -/

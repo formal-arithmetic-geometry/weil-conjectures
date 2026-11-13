@@ -11,7 +11,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 
 /-! The empty sum has a coherent integral filtration.
-(blueprint: lem-weil-pbc-coherent-integral-filtration-ideal-sum-zero)
 -/
 
 @[expose] public section
@@ -23,15 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The empty direct sum is the zero module, so its unique length-zero chain has no
-successive quotient obligations.
-(blueprint: lem-weil-pbc-coherent-integral-filtration-ideal-sum-zero)
-
-Proof: identify the empty biproduct with the zero object and take the zero-length filtration.
-Pushforward preserves zero objects. The subobject lattice of a zero object is a singleton,
-so the two endpoints agree. The bottom subobject is coherent by zero-object coherence
-and isomorphism invariance. There are no quotient conditions.
-Source: Stacks Project, Tag 01YF, final paragraph of `lemma-coherent-filter`.
--/
+successive quotient obligations. -/
 theorem coherentIntegralFiltration_ideal_sum_zero
     {X Z : Scheme.{u}} [IsLocallyNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

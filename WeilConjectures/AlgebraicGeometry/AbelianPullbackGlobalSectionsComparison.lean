@@ -14,8 +14,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Coefficient comparison for global sections of inverse images
-Source: Stacks Project, Tags 00YV, 03CB and 03CC.
-(blueprint: lem-weil-pbc-abelian-pullback-global-sections-comparison). -/
+Source: Stacks Project, Tags 00YV, 03CB and 03CC. -/
 
 @[expose] public section
 
@@ -323,36 +322,7 @@ set_option maxRecDepth 2048 in
 inverse image on the base-changed terminal object, compatibly with composition.
 There is no inverse system or finite-stage lifting assertion here.
 
-Source: Stacks Project, Sites, Tags 00YV, 03CB and 03CC.
-(blueprint: lem-weil-pbc-abelian-pullback-global-sections-comparison).
-
-Proof: For each f, use etaleInverseImageAlgebraicStructures to obtain a natural
-coefficient isomorphism C_f from the underlying abelian inverse image to the set
-inverse image. Its direct-image comparison is the identity on sections and its
-unit equation is R_f(C_f) composed with the forgotten abelian unit = the set unit.
-Thus these choices are determined by the adjunction hom-set bijection, rather
-than by an arbitrary isomorphism. Write T_f for the base change of the terminal
-object and t_f : T_f ≅ terminal for PreservesTerminal.iso. Define e_f by the
-Gamma-to-terminal-section isomorphism, then restriction along t_f.hom, then
-C_f evaluated at T_f. All three maps are invertible, giving a bijection.
-
-For h followed by f, apply the unit equation for C_h to the abelian inverse image
-of F and that for C_f to F. Naturality of C_h transports the latter equation
-through h inverse image. The resulting composite intertwines the composite
-abelian unit with the composite set unit. The abelian composition isomorphism
-is the mate of the direct-image composition comparison. The uniqueness clause
-of etaleSetInverseImageCompositionUnits identifies its forgotten, conjugated
-inverse with the chosen set composition map: both satisfy this same unit equation.
-Evaluate this equality at the iterated base change of the terminal object.
-Naturality in site objects moves C across the fibre-product pasting isomorphism;
-uniqueness of terminal maps identifies the terminal-preservation maps on both
-sides. Expanding globalSectionsUpperStarMap cancels the Gamma/terminal-section
-isomorphisms. The remaining three factors are precisely the set unit, the set
-composition map, and restriction along pullbackComp.hom, which define
-etaleSetSectionComparison. Transport along hk gives the displayed equation.
-For identities the same unit equations apply. On empty schemes or for the zero
-sheaf both sets are singletons. No compactness, affineness, torsion, finiteness,
-inverse system or finite-stage descent is used. -/
+Source: Stacks Project, Sites, Tags 00YV, 03CB and 03CC. -/
 theorem exists_abelianPullbackGlobalSectionsComparison
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     ∃ e : ∀ (Y : Scheme.{u}) (f : Y ⟶ X),

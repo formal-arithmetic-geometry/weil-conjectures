@@ -115,19 +115,7 @@ private theorem cap_precompose_bijective {X : Scheme.{u}} (W : X.Opens)
       _ = f := by simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- Intersecting with W has no effect after sheafification and restriction to W.
-Source: Stacks Project, Tag 02FU, local restriction of the Čech resolution.
-(blueprint: lem-pc-s3-cech-cap-presheaf-local-iso).
-
-Proof: Intersecting twice with W equals intersecting once, so K maps the unit
-on every presheaf to an isomorphism. For a module sheaf M on W, the unit on the
-underlying presheaf of its direct image is invertible: the inverse images of V
-and V intersect W in W coincide. Thus precomposition with the unit on P bijects
-maps K(P) to that direct image with maps P to it. The inverse sends f to K(f)
-followed by the inverse target unit. For injectivity, apply K, cancel the image
-unit, and use naturality and the invertible target unit. The composite of the
-sheafification and open-restriction adjunctions transfers this bijection to maps
-out of the displayed morphism. The coyoneda criterion makes it an isomorphism.
-This works for empty W and arbitrary presheaves P. -/
+Source: Stacks Project, Tag 02FU, local restriction of the Čech resolution. -/
 theorem cechCapPresheafUnit_local_isIso {X : Scheme.{u}} (W : X.Opens)
     (P : PresheafOfModules.{u} X.ringCatSheaf.obj) :
     IsIso ((Scheme.Modules.restrictFunctor W.ι).map

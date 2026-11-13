@@ -121,18 +121,7 @@ private theorem map_transport {S Y Y' : Scheme.{v}}
   rfl
 
 /-- Canonical abelian higher direct image transitions respect coefficient composition.
-Source: Stacks Project, Tag 09Z1, functoriality of the comparison maps.
-(blueprint: lem-sbc-abelian-higher-direct-image-transition-comp).
-
-Proof: Expand both transitions before degree-p homology. Naturality moves the
-second derived adjunction unit past the first coefficient map. The triangle
-identity cancels the intermediate counit with that unit. The associativity
-coherence of inverse-image composition and its comparison with the single
-functor identifies the remaining factors with the transition for f followed
-by g. Substitute hφcomp and D.map_comp (in the opposite order). Apply the
-homology functor, which preserves composition. Identity and structure-map
-proof transports agree by proof irrelevance. No limit or qcqs hypothesis is used.
-This also applies when a stage or sheaf is zero. -/
+Source: Stacks Project, Tag 09Z1, functoriality of the comparison maps. -/
 theorem abelianHigherDirectImage_transition_comp {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

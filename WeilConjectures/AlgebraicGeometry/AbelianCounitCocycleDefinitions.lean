@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatu
 
 /-! # The fixed abelian counit resolution comparisons
 Source: Stacks Project, Tags 01F7, 03FD and 06XR.
-(blueprint: def-pc-abelian-counit-cocycle-comparisons)
 -/
 @[expose] public section
 universe u
@@ -57,7 +56,6 @@ def abelianExtSectionsIso (X : Scheme.{u})
 
 /-- Ext compared with sections of an abelian injective resolution of a module.
 Source: Stacks Project, Tag 06XR.
-(blueprint: def-pc-abelian-counit-cocycle-comparisons)
 -/
 @[irreducible]
 def abelianInjectiveResolutionIso (X : Scheme.{u})
@@ -73,8 +71,7 @@ def abelianInjectiveResolutionIso (X : Scheme.{u})
 Source: Stacks Project, Tags 015E and 06XR. The comparison lift from the given
 injective resolution to the chosen resolution commutes with the augmentation.
 Naturality of the usual injective comparison cancels its homology map, giving
-the acyclic constructor used before this computational normalization.
-(blueprint: new-abelian-injective-resolution-comparison-normalization) -/
+the acyclic constructor used before this computational normalization. -/
 theorem abelianInjectiveResolutionIso_eq_acyclic (X : Scheme.{u}) (F : X.Modules)
     (R : InjectiveResolution
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F)) (p : ℕ) :
@@ -89,16 +86,7 @@ attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 attribute [local irreducible] siteSectionsObjIso
 
 /-- Changing from a forgotten module resolution to an abelian injective resolution.
-Source: Stacks Project, Tags 03FD, 015E and 06XR.
-(blueprint: new-abelian-resolution-comparison-evaluation)
-
-Proof: The forgotten terms are section-acyclic by 03FD. The augmentation square
-makes phi a comparison of the two resolutions of the same underlying sheaf.
-Apply naturality of the canonical acyclic-resolution comparison with the identity
-coefficient map. Cancel the inverse target comparison to obtain equality of the
-hom maps. Compose with the terminal-source Ext precomposition and the canonical
-site-sections comparison. Evaluating this equality on z gives the assertion.
-This uses no morphism of schemes and includes degree zero, zero F and empty X. -/
+Source: Stacks Project, Tags 03FD, 015E and 06XR. -/
 theorem abelian_resolution_comparison_evaluation (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (I : InjectiveResolution F)

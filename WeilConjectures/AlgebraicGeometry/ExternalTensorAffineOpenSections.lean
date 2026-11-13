@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # External tensor sections on one affine product open
 
 Source: Stacks Project, Tag 0BED, varieties-lemma-kunneth, affine-open paragraph.
-(blueprint: lem-sc-external-tensor-affine-open-sections).
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ variable (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
 variable (F : X.Modules) (G : Y.Modules) (A : X.Opens) (V : Y.Opens)
 
 /-- The external product of two sections, on a specified open of the product.
-Source: Stacks Project, Tag 0BED, maps preceding equation-kunneth-on-cech.
-(blueprint: lem-sc-external-tensor-affine-open-sections). -/
+Source: Stacks Project, Tag 0BED, maps preceding equation-kunneth-on-cech. -/
 def externalTensorOpenPureSection
     (J : ((pullback.snd f g) ⁻¹ᵁ V).toScheme.Opens)
     (hK : ((pullback.snd f g) ⁻¹ᵁ V).ι ''ᵁ J ≤ (pullback.fst f g) ⁻¹ᵁ A)
@@ -202,34 +200,7 @@ private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
 /-- On one affine product open, the external tensor-section map is an additive
 isomorphism, normalized by the original projection adjunction units.
 Source: Stacks Project, Tag 0BED, varieties-lemma-kunneth, affine-open paragraph;
-Tags 01I9 and 01CD for pullback and tensor sections.
-(blueprint: lem-sc-external-tensor-affine-open-sections).
-
-Proof: Put W = pr2 inverse V and K = W.ι(J). The image-preimage formula
-identifies K with pr1 inverse A intersect pr2 inverse V. The affine product-open
-lemma makes K affine. Apply the affine pushout-section comparison to the product
-square and A,V, then transport its base from Gamma(Spec k,top) to k via GammaSpecIso.
-The resulting pushout has projection ring maps appLE. Naturality of the structure
-sheaf shows that they commute with the scalar maps from k.
-Apply exists_tensorPullback_affine_sections to each projection, with source open K
-and target open A or V. Its bijectivity, linearity and pure-tensor clauses give
-C-linear equivalences C tensor_R M with the first projection sections and
-C tensor_S N with the second, for R=Gamma(X,A), S=Gamma(Y,V), C=Gamma(Z,K),
-M=Gamma(F,A), N=Gamma(G,V). Algebra.IsPushout.cancelBaseChange, tensor commutativity
-and AlgebraTensorModule.cancelBaseChange identify their tensor product over C
-with M tensor_k N. Its inverse sends s tensor t to (1 tensor s) tensor (1 tensor t).
-Both projection pullbacks are quasi-coherent, since tensorPullback agrees with the
-usual pullback by uniqueness of left adjoints. The affine tensor-section theorem
-therefore makes tensorSectionsMap on K bijective. Compose its additive equivalence
-with the preceding tensor equivalence; its pure-tensor formula is precisely the
-tensor section of the two original projection-unit sections restricted to K.
-The identity on F(A) identifies global-ring scalar restriction with the local
-k action. The restriction-section isomorphism identifies the right factor with
-G(V) k-linearly; its scalar compatibility follows from the appLE/appIso identity.
-The inverse restriction-section isomorphism for W.ι gives the asserted sections
-on J. These comparisons and their formulas prove the normalization. Empty A or V
-gives zero section modules; no step excludes them. No finite family, Cech complex,
-covering, or differential is involved. -/
+Tags 01I9 and 01CD for pullback and tensor sections. -/
 theorem externalTensor_affine_open_sections [F.IsQuasicoherent] [G.IsQuasicoherent]
     (hA : IsAffineOpen A) (hV : IsAffineOpen V)
     (J : ((pullback.snd f g) ⁻¹ᵁ V).toScheme.Opens)

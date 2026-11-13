@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductInterchange
 
 Source: Stacks Project, Tag 0F7J, comparison of the proper projection grids A--F;
 the product-graph extension in lem-pur-etale-graph-product-row-pasting.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,85 +31,75 @@ namespace EtaleGraphPresentation.ProductRow
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f) (second : Bool)
 
-/-- The selected presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected presentation. Source: Stacks Tag 0F7J. -/
 abbrev side := if second then t else s
 
-/-- The selected proper projection. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected proper projection. Source: Stacks Tag 0F7J. -/
 def projection : (PairwiseProduct.presentation s t).P ⟶ (side s t second).P := by
   cases second
   · exact pullback.fst s.p t.p
   · exact pullback.snd s.p t.p
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance projection_proper : IsProper (projection s t second) := by
   cases second <;> dsimp [projection] <;> infer_instance
 
-/-- The selected supporting neighborhood in the ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected supporting neighborhood in the ambient product. Source: Stacks Tag 0F7J. -/
 abbrev neighborhood := pullback (projection s t second) (side s t second).e
 
-/-- Its open inclusion. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its open inclusion. Source: Stacks Tag 0F7J. -/
 abbrev j : neighborhood s t second ⟶ (PairwiseProduct.presentation s t).P :=
   pullback.fst _ _
 
-/-- Its proper projection onto the selected support. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its proper projection onto the selected support. Source: Stacks Tag 0F7J. -/
 abbrev q : neighborhood s t second ⟶ (side s t second).U := pullback.snd _ _
 
-/-- Inclusion of the intersection into the selected neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Inclusion of the intersection into the selected neighborhood. Source: Stacks Tag 0F7J. -/
 def v : (PairwiseProduct.presentation s t).U ⟶ neighborhood s t second := by
   cases second
   · exact PairwiseProduct.v₁ s t
   · exact PairwiseProduct.v₂ s t
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance v_open : IsOpenImmersion (v s t second) := by
   cases second
   · exact (PairwiseProduct.geometry s t).openV₁
   · exact (PairwiseProduct.geometry s t).openV₂
 
-/-- The proper graph in the selected neighborhood. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The proper graph in the selected neighborhood. Source: Stacks Tag 0F7J. -/
 def z : X ⟶ neighborhood s t second := (PairwiseProduct.presentation s t).a ≫ v s t second
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance z_proper : IsProper (z s t second) := by
   cases second
   · exact (PairwiseProduct.geometry s t).properZ₁
   · exact (PairwiseProduct.geometry s t).properZ₂
 
 /-- The defining projection equation of the selected neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma z_q : z s t second ≫ q s t second = (side s t second).a := by
   cases second
   · exact (PairwiseProduct.geometry s t).z₁_q
   · exact (PairwiseProduct.geometry s t).z₂_q
 
 /-- The defining projection equation of the selected neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma v_j : v s t second ≫ j s t second = (PairwiseProduct.presentation s t).e := by
   cases second
   · exact (PairwiseProduct.geometry s t).v₁_b
   · exact (PairwiseProduct.geometry s t).v₂_b
 
 /-- The defining projection equation of the selected neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma z_j : z s t second ≫ j s t second =
     (PairwiseProduct.presentation s t).a ≫ (PairwiseProduct.presentation s t).e := by
   simp only [z, Category.assoc, v_j]
 
 /-- The defining projection equation of the selected neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma projection_p : projection s t second ≫ (side s t second).p =
     (PairwiseProduct.presentation s t).p := by
   cases second
@@ -118,7 +107,7 @@ lemma projection_p : projection s t second ≫ (side s t second).p =
   · exact pullback.condition.symm
 
 /-- The presentation before shrinking to the intersection of the supports.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev ambient : EtaleGraphPresentation f where
   U := neighborhood s t second
   P := (PairwiseProduct.presentation s t).P
@@ -132,8 +121,7 @@ abbrev ambient : EtaleGraphPresentation f where
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The proper-ambient factor of lambda, with its Cartesian exchange and compositors.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 def ambientLambda : (side s t second).functor A ≅ (ambient s t second).functor A :=
   Functor.isoWhiskerRight
       (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A)
@@ -148,8 +136,7 @@ def ambientLambda : (side s t second).functor A ≅ (ambient s t second).functor
           (projection s t second) (side s t second).p _ (projection_p s t second)))
 
 /-- The remaining graph-triangle factor of lambda, followed by the open compositor.
-Source: Stacks Tags 0F7D and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7D and 0F7J. -/
 def shrinkLambda : (ambient s t second).functor A ≅
     (PairwiseProduct.presentation s t).functor A :=
   Functor.isoWhiskerRight
@@ -163,15 +150,14 @@ def shrinkLambda : (ambient s t second).functor A ≅
           mapDerivedCategoryOpenImmersionLowerShriekCongr (ModuleCat.{u + 1} A)
             (v_j s t second)) _)
 
-/-- The selected lambda with a dependent source. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected lambda with a dependent source. Source: Stacks Tag 0F7J. -/
 def lambda : (side s t second).functor A ≅ (PairwiseProduct.presentation s t).functor A := by
   cases second
   · exact PairwiseProduct.lambda₁ s t A
   · exact PairwiseProduct.lambda₂ s t A
 
 /-- Lambda is the proper-ambient factor followed by its graph-triangle factor.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma lambda_factor : lambda s t second A =
     ambientLambda s t second A ≪≫ shrinkLambda s t second A := by
   cases second <;>
@@ -189,75 +175,63 @@ open EtaleGraphPresentation
 variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (d₁ d₂ : EtaleGraphInterchangeDiagram f g)
 
-/-- The selected diagram. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected diagram. Source: Stacks Tag 0F7J. -/
 abbrev d : EtaleGraphInterchangeDiagram f g := (d₁, d₂).1
 
-/-- Source neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Source neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev F := EtaleGraphPresentation.ProductRow.ambient
   d₁.sourcePresentation d₂.sourcePresentation false
 
-/-- Middle neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Middle neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev G := EtaleGraphPresentation.ProductRow.ambient
   (ofCompactification d₁.compactification) (ofCompactification d₂.compactification) false
 
-/-- Composite neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Composite neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev H := EtaleGraphPresentation.ProductRow.ambient
   d₁.compositePresentation d₂.compositePresentation false
 
-/-- Projection of the source ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the source ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prF := EtaleGraphPresentation.ProductRow.projection
   d₁.sourcePresentation d₂.sourcePresentation false
 
-/-- Projection of the middle ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the middle ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prG := EtaleGraphPresentation.ProductRow.projection
   (ofCompactification d₁.compactification) (ofCompactification d₂.compactification) false
 
-/-- Projection of the composite ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the composite ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prH := EtaleGraphPresentation.ProductRow.projection
   d₁.compositePresentation d₂.compositePresentation false
 
 /-- The intermediate open neighborhood V_selected times P_other over Z.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev N := pullback (prH d₁ d₂) (d d₁ d₂).k
 
-/-- Its open inclusion in the composite ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its open inclusion in the composite ambient product. Source: Stacks Tag 0F7J. -/
 abbrev K : N d₁ d₂ ⟶ (d₁.productH d₂).P := pullback.fst _ _
 
-/-- Its proper projection onto V_selected. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its proper projection onto V_selected. Source: Stacks Tag 0F7J. -/
 abbrev qN : N d₁ d₂ ⟶ (d d₁ d₂).V := pullback.snd _ _
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma productP_projection :
     d₁.productP d₂ ≫ prG d₁ d₂ = prH d₁ d₂ ≫ (d d₁ d₂).p := by
     simp [prG, prH, EtaleGraphPresentation.ProductRow.projection, d, productP,
       compactification, compositePresentation, ofCompactification,
       PairwiseProduct.presentation, pullback.map]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma productBV_K_projection :
     d₁.productBV d₂ ≫ d₁.productK d₂ ≫ prH d₁ d₂ =
       prF d₁ d₂ ≫ (d d₁ d₂).k := by
     simp [prF, prH, EtaleGraphPresentation.ProductRow.projection, d, productBV, productK,
       sourcePresentation, compositePresentation, PairwiseProduct.presentation, pullback.map]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma prF_r : prF d₁ d₂ ≫ (d d₁ d₂).r = (d₁.productF d₂).p := by
   rfl
 
 /-- The product of e_selected with the identity on the other proper ambient factor.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def E : (H d₁ d₂).U ⟶ N d₁ d₂ := by
   change pullback (prH d₁ d₂) ((d d₁ d₂).e ≫ (d d₁ d₂).k) ⟶
     pullback (prH d₁ d₂) (d d₁ d₂).k
@@ -266,14 +240,12 @@ def E : (H d₁ d₂).U ⟶ N d₁ d₂ := by
     ((pullback.condition (f := prH d₁ d₂)
       (g := (d d₁ d₂).e ≫ (d d₁ d₂).k)).trans (Category.assoc _ _ _).symm)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma E_K : E d₁ d₂ ≫ K d₁ d₂ = (H d₁ d₂).e := by
   simp only [E, id_eq, K, pullback.lift_fst]
   rfl
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma E_qN : E d₁ d₂ ≫ qN d₁ d₂ =
     EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation false ≫ (d d₁ d₂).e := by
@@ -281,8 +253,7 @@ lemma E_qN : E d₁ d₂ ≫ qN d₁ d₂ =
   rfl
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance E_open : IsOpenImmersion (E d₁ d₂) := by
   have : IsOpenImmersion (E d₁ d₂ ≫ K d₁ d₂) := by
     have h := (H d₁ d₂).openE
@@ -291,7 +262,7 @@ instance E_open : IsOpenImmersion (E d₁ d₂) := by
   exact IsOpenImmersion.of_comp _ (K d₁ d₂)
 
 /-- The proper vertical map from the mixed neighborhood to the middle neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def R : N d₁ d₂ ⟶ (G d₁ d₂).U :=
   pullback.lift (K d₁ d₂ ≫ d₁.productP d₂)
     (qN d₁ d₂ ≫ (d d₁ d₂).r) (by
@@ -300,8 +271,7 @@ def R : N d₁ d₂ ⟶ (G d₁ d₂).U :=
       rfl)
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance R_proper : IsProper (R d₁ d₂) := by
   have : IsProper (R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
@@ -314,14 +284,13 @@ instance R_proper : IsProper (R d₁ d₂) := by
     false)
 
 /-- Proper inclusion of the product over Y into the mixed ambient neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def BV : (F d₁ d₂).P ⟶ N d₁ d₂ :=
   pullback.lift (d₁.productBV d₂ ≫ d₁.productK d₂) (prF d₁ d₂)
     (by simpa only [Category.assoc] using productBV_K_projection d₁ d₂)
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance BV_proper : IsProper (BV d₁ d₂) := by
   have : IsProper (BV d₁ d₂ ≫ qN d₁ d₂) := by
     simpa only [BV, pullback.lift_snd] using
@@ -330,7 +299,7 @@ instance BV_proper : IsProper (BV d₁ d₂) := by
   exact IsProper.of_comp _ (qN d₁ d₂)
 
 /-- Proper map from the source neighborhood to the composite neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def BW : (F d₁ d₂).U ⟶ (H d₁ d₂).U :=
   pullback.lift ((F d₁ d₂).e ≫ d₁.productBV d₂ ≫ d₁.productK d₂)
     (EtaleGraphPresentation.ProductRow.q
@@ -339,14 +308,12 @@ def BW : (F d₁ d₂).U ⟶ (H d₁ d₂).U :=
         ← Category.assoc, pullback.condition, Category.assoc]
       rfl)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BW_e : BW d₁ d₂ ≫ (H d₁ d₂).e =
     (F d₁ d₂).e ≫ d₁.productBV d₂ ≫ d₁.productK d₂ := by
   exact pullback.lift_fst _ _ _
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BW_q : BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation false =
     EtaleGraphPresentation.ProductRow.q
@@ -354,8 +321,7 @@ lemma BW_q : BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
   exact pullback.lift_snd _ _ _
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance BW_proper : IsProper (BW d₁ d₂) := by
   have : IsProper (BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation false) := by
@@ -365,8 +331,7 @@ instance BW_proper : IsProper (BW d₁ d₂) := by
   exact IsProper.of_comp _ (EtaleGraphPresentation.ProductRow.q
     d₁.compositePresentation d₂.compositePresentation false)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma a_BW : (F d₁ d₂).a ≫ BW d₁ d₂ = (H d₁ d₂).a := by
   apply pullback.hom_ext
   · simp only [Category.assoc, BW, pullback.lift_fst]
@@ -397,8 +362,7 @@ lemma a_BW : (F d₁ d₂).a ≫ BW d₁ d₂ = (H d₁ d₂).a := by
       (EtaleGraphPresentation.ProductRow.z_q
         d₁.compositePresentation d₂.compositePresentation false).symm
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BV_R : BV d₁ d₂ ≫ R d₁ d₂ =
     (F d₁ d₂).p ≫ (G d₁ d₂).a := by
   apply pullback.hom_ext
@@ -416,8 +380,7 @@ lemma BV_R : BV d₁ d₂ ≫ R d₁ d₂ =
     rw [EtaleGraphPresentation.ProductRow.z_q]
     simp [EtaleGraphPresentation.ProductRow.side, ofCompactification]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma B_square : CommSq (F d₁ d₂).e (BW d₁ d₂)
     (BV d₁ d₂) (E d₁ d₂) := by
   constructor
@@ -439,15 +402,14 @@ lemma B_square : CommSq (F d₁ d₂).e (BW d₁ d₂)
         pullback.condition
       _ = _ := by rw [Category.assoc, E_qN, ← Category.assoc, BW_q]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma Q_square : CommSq (K d₁ d₂) (R d₁ d₂)
     (d₁.productP d₂) (G d₁ d₂).e := by
   constructor
   simp only [R, pullback.lift_fst]
 
 /-- The intermediate source word over the middle supporting neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev F₀ (A : Type (u + 1)) [CommRing A] :=
   R(((H d₁ d₂).a)_*[ModuleCat.{u + 1} A]) ⋙
     D((E d₁ d₂)_!open[ModuleCat.{u + 1} A]) ⋙
@@ -456,7 +418,7 @@ abbrev F₀ (A : Type (u + 1)) [CommRing A] :=
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The inverse B exchange for the proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def liftInterchange :
     (F d₁ d₂).functor A ⋙ R(((G d₁ d₂).a)_*[ModuleCat.{u + 1} A]) ≅
       F₀ d₁ d₂ A :=
@@ -481,7 +443,7 @@ def liftInterchange :
         (a_BW d₁ d₂)) _
 
 /-- The Q exchange for the proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def squareInterchange :
     F₀ d₁ d₂ A ⋙
         (D(((G d₁ d₂).e)_!open[ModuleCat.{u + 1} A]) ⋙
@@ -507,7 +469,7 @@ def squareInterchange :
           (d₁.productP_productQ d₂)))
 
 /-- The fixed common boundary at the three proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def interchange : (F d₁ d₂).functor A ⋙ (G d₁ d₂).functor A ≅
     (H d₁ d₂).functor A :=
   (Functor.associator _ _ _).symm ≪≫
@@ -523,75 +485,63 @@ open EtaleGraphPresentation
 variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (d₁ d₂ : EtaleGraphInterchangeDiagram f g)
 
-/-- The selected diagram. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The selected diagram. Source: Stacks Tag 0F7J. -/
 abbrev d : EtaleGraphInterchangeDiagram f g := (d₁, d₂).2
 
-/-- Source neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Source neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev F := EtaleGraphPresentation.ProductRow.ambient
   d₁.sourcePresentation d₂.sourcePresentation true
 
-/-- Middle neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Middle neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev G := EtaleGraphPresentation.ProductRow.ambient
   (ofCompactification d₁.compactification) (ofCompactification d₂.compactification) true
 
-/-- Composite neighborhood presentation. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Composite neighborhood presentation. Source: Stacks Tag 0F7J. -/
 abbrev H := EtaleGraphPresentation.ProductRow.ambient
   d₁.compositePresentation d₂.compositePresentation true
 
-/-- Projection of the source ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the source ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prF := EtaleGraphPresentation.ProductRow.projection
   d₁.sourcePresentation d₂.sourcePresentation true
 
-/-- Projection of the middle ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the middle ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prG := EtaleGraphPresentation.ProductRow.projection
   (ofCompactification d₁.compactification) (ofCompactification d₂.compactification) true
 
-/-- Projection of the composite ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Projection of the composite ambient product. Source: Stacks Tag 0F7J. -/
 abbrev prH := EtaleGraphPresentation.ProductRow.projection
   d₁.compositePresentation d₂.compositePresentation true
 
 /-- The intermediate open neighborhood V_selected times P_other over Z.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev N := pullback (prH d₁ d₂) (d d₁ d₂).k
 
-/-- Its open inclusion in the composite ambient product. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its open inclusion in the composite ambient product. Source: Stacks Tag 0F7J. -/
 abbrev K : N d₁ d₂ ⟶ (d₁.productH d₂).P := pullback.fst _ _
 
-/-- Its proper projection onto V_selected. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- Its proper projection onto V_selected. Source: Stacks Tag 0F7J. -/
 abbrev qN : N d₁ d₂ ⟶ (d d₁ d₂).V := pullback.snd _ _
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma productP_projection :
     d₁.productP d₂ ≫ prG d₁ d₂ = prH d₁ d₂ ≫ (d d₁ d₂).p := by
     simp [prG, prH, EtaleGraphPresentation.ProductRow.projection, d, productP,
       compactification, compositePresentation, ofCompactification,
       PairwiseProduct.presentation, pullback.map]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma productBV_K_projection :
     d₁.productBV d₂ ≫ d₁.productK d₂ ≫ prH d₁ d₂ =
       prF d₁ d₂ ≫ (d d₁ d₂).k := by
     simp [prF, prH, EtaleGraphPresentation.ProductRow.projection, d, productBV, productK,
       sourcePresentation, compositePresentation, PairwiseProduct.presentation, pullback.map]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma prF_r : prF d₁ d₂ ≫ (d d₁ d₂).r = (d₁.productF d₂).p := by
   exact pullback.condition.symm
 
 /-- The product of e_selected with the identity on the other proper ambient factor.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def E : (H d₁ d₂).U ⟶ N d₁ d₂ := by
   change pullback (prH d₁ d₂) ((d d₁ d₂).e ≫ (d d₁ d₂).k) ⟶
     pullback (prH d₁ d₂) (d d₁ d₂).k
@@ -600,14 +550,12 @@ def E : (H d₁ d₂).U ⟶ N d₁ d₂ := by
     ((pullback.condition (f := prH d₁ d₂)
       (g := (d d₁ d₂).e ≫ (d d₁ d₂).k)).trans (Category.assoc _ _ _).symm)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma E_K : E d₁ d₂ ≫ K d₁ d₂ = (H d₁ d₂).e := by
   simp only [E, id_eq, K, pullback.lift_fst]
   rfl
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma E_qN : E d₁ d₂ ≫ qN d₁ d₂ =
     EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation true ≫ (d d₁ d₂).e := by
@@ -615,8 +563,7 @@ lemma E_qN : E d₁ d₂ ≫ qN d₁ d₂ =
   rfl
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance E_open : IsOpenImmersion (E d₁ d₂) := by
   have : IsOpenImmersion (E d₁ d₂ ≫ K d₁ d₂) := by
     have h := (H d₁ d₂).openE
@@ -625,7 +572,7 @@ instance E_open : IsOpenImmersion (E d₁ d₂) := by
   exact IsOpenImmersion.of_comp _ (K d₁ d₂)
 
 /-- The proper vertical map from the mixed neighborhood to the middle neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def R : N d₁ d₂ ⟶ (G d₁ d₂).U :=
   pullback.lift (K d₁ d₂ ≫ d₁.productP d₂)
     (qN d₁ d₂ ≫ (d d₁ d₂).r) (by
@@ -634,8 +581,7 @@ def R : N d₁ d₂ ⟶ (G d₁ d₂).U :=
       rfl)
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance R_proper : IsProper (R d₁ d₂) := by
   have : IsProper (R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
@@ -648,14 +594,13 @@ instance R_proper : IsProper (R d₁ d₂) := by
     true)
 
 /-- Proper inclusion of the product over Y into the mixed ambient neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def BV : (F d₁ d₂).P ⟶ N d₁ d₂ :=
   pullback.lift (d₁.productBV d₂ ≫ d₁.productK d₂) (prF d₁ d₂)
     (by simpa only [Category.assoc] using productBV_K_projection d₁ d₂)
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance BV_proper : IsProper (BV d₁ d₂) := by
   have : IsProper (BV d₁ d₂ ≫ qN d₁ d₂) := by
     simpa only [BV, pullback.lift_snd] using
@@ -664,7 +609,7 @@ instance BV_proper : IsProper (BV d₁ d₂) := by
   exact IsProper.of_comp _ (qN d₁ d₂)
 
 /-- Proper map from the source neighborhood to the composite neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def BW : (F d₁ d₂).U ⟶ (H d₁ d₂).U :=
   pullback.lift ((F d₁ d₂).e ≫ d₁.productBV d₂ ≫ d₁.productK d₂)
     (EtaleGraphPresentation.ProductRow.q
@@ -673,14 +618,12 @@ def BW : (F d₁ d₂).U ⟶ (H d₁ d₂).U :=
         ← Category.assoc, pullback.condition, Category.assoc]
       rfl)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BW_e : BW d₁ d₂ ≫ (H d₁ d₂).e =
     (F d₁ d₂).e ≫ d₁.productBV d₂ ≫ d₁.productK d₂ := by
   exact pullback.lift_fst _ _ _
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BW_q : BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation true =
     EtaleGraphPresentation.ProductRow.q
@@ -688,8 +631,7 @@ lemma BW_q : BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
   exact pullback.lift_snd _ _ _
 
 /-- The morphism property follows from base change or proper-to-separated.
-Source: Stacks Tags 01W4, 01W6 and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 01W4, 01W6 and 0F7J. -/
 instance BW_proper : IsProper (BW d₁ d₂) := by
   have : IsProper (BW d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation true) := by
@@ -699,8 +641,7 @@ instance BW_proper : IsProper (BW d₁ d₂) := by
   exact IsProper.of_comp _ (EtaleGraphPresentation.ProductRow.q
     d₁.compositePresentation d₂.compositePresentation true)
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma a_BW : (F d₁ d₂).a ≫ BW d₁ d₂ = (H d₁ d₂).a := by
   apply pullback.hom_ext
   · simp only [Category.assoc, BW, pullback.lift_fst]
@@ -731,8 +672,7 @@ lemma a_BW : (F d₁ d₂).a ≫ BW d₁ d₂ = (H d₁ d₂).a := by
       (EtaleGraphPresentation.ProductRow.z_q
         d₁.compositePresentation d₂.compositePresentation true).symm
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma BV_R : BV d₁ d₂ ≫ R d₁ d₂ =
     (F d₁ d₂).p ≫ (G d₁ d₂).a := by
   apply pullback.hom_ext
@@ -750,8 +690,7 @@ lemma BV_R : BV d₁ d₂ ≫ R d₁ d₂ =
     rw [EtaleGraphPresentation.ProductRow.z_q]
     simp [EtaleGraphPresentation.ProductRow.side, ofCompactification]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma B_square : CommSq (F d₁ d₂).e (BW d₁ d₂)
     (BV d₁ d₂) (E d₁ d₂) := by
   constructor
@@ -773,15 +712,14 @@ lemma B_square : CommSq (F d₁ d₂).e (BW d₁ d₂)
         pullback.condition
       _ = _ := by rw [Category.assoc, E_qN, ← Category.assoc, BW_q]
 
-/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+/-- The defining projection identity of the ambient grid. Source: Stacks Tag 0F7J. -/
 lemma Q_square : CommSq (K d₁ d₂) (R d₁ d₂)
     (d₁.productP d₂) (G d₁ d₂).e := by
   constructor
   simp only [R, pullback.lift_fst]
 
 /-- The intermediate source word over the middle supporting neighborhood.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 abbrev F₀ (A : Type (u + 1)) [CommRing A] :=
   R(((H d₁ d₂).a)_*[ModuleCat.{u + 1} A]) ⋙
     D((E d₁ d₂)_!open[ModuleCat.{u + 1} A]) ⋙
@@ -790,7 +728,7 @@ abbrev F₀ (A : Type (u + 1)) [CommRing A] :=
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The inverse B exchange for the proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def liftInterchange :
     (F d₁ d₂).functor A ⋙ R(((G d₁ d₂).a)_*[ModuleCat.{u + 1} A]) ≅
       F₀ d₁ d₂ A :=
@@ -815,7 +753,7 @@ def liftInterchange :
         (a_BW d₁ d₂)) _
 
 /-- The Q exchange for the proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def squareInterchange :
     F₀ d₁ d₂ A ⋙
         (D(((G d₁ d₂).e)_!open[ModuleCat.{u + 1} A]) ⋙
@@ -841,7 +779,7 @@ def squareInterchange :
           (d₁.productP_productQ d₂)))
 
 /-- The fixed common boundary at the three proper ambient neighborhoods.
-Source: Stacks Tag 0F7J (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 def interchange : (F d₁ d₂).functor A ⋙ (G d₁ d₂).functor A ≅
     (H d₁ d₂).functor A :=
   (Functor.associator _ _ _).symm ≪≫
@@ -855,8 +793,7 @@ namespace EtaleGraphInterchangeDiagram.ProductRow
 variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
 
 /-- The square part of the supplied interchange, before adjoining the identity graph.
-Source: Stacks Tag 0F7J, the first calculation in the proof of composition
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J, the first calculation in the proof of composition. -/
 def rawSquare (A : Type (u + 1)) [CommRing A] [Finite A]
     (d : EtaleGraphInterchangeDiagram f g) :
     d.sourcePresentation.functor A ⋙
@@ -890,16 +827,14 @@ variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The commutative e-side square, without the k-side square.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 lemma e_side_square : CommSq (E d₁ d₂)
     (EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation false)
     (qN d₁ d₂) (d d₁ d₂).e := ⟨E_qN d₁ d₂⟩
 
 /-- The two projections of R give the same proper composite.
-Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma R_q : R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
       false = qN d₁ d₂ ≫ (d d₁ d₂).r := pullback.lift_snd _ _ _
@@ -907,8 +842,7 @@ lemma R_q : R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
 /-- Transport just the e-side source word to the mixed neighborhood.
 It splits the composite graph, exchanges e, and changes the factorization of the
 proper composite qN r to R qG. It contains neither the B inverse nor the k exchange.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 def sourceTransport : (d d₁ d₂).sourcePresentation.functor A ≅
     F₀ d₁ d₂ A ⋙ R((EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
@@ -942,8 +876,7 @@ def sourceTransport : (d d₁ d₂).sourcePresentation.functor A ≅
     (Functor.associator _ _ _).symm
 
 /-- The ambient change for g after splitting off its identity graph.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 def middleTail :
     R((EtaleGraphPresentation.ProductRow.q
         (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
@@ -974,16 +907,14 @@ variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The commutative e-side square, without the k-side square.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 lemma e_side_square : CommSq (E d₁ d₂)
     (EtaleGraphPresentation.ProductRow.q
       d₁.compositePresentation d₂.compositePresentation true)
     (qN d₁ d₂) (d d₁ d₂).e := ⟨E_qN d₁ d₂⟩
 
 /-- The two projections of R give the same proper composite.
-Source: Stacks Tag 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7J. -/
 lemma R_q : R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
       true = qN d₁ d₂ ≫ (d d₁ d₂).r := pullback.lift_snd _ _ _
@@ -991,8 +922,7 @@ lemma R_q : R d₁ d₂ ≫ EtaleGraphPresentation.ProductRow.q
 /-- Transport just the e-side source word to the mixed neighborhood.
 It splits the composite graph, exchanges e, and changes the factorization of the
 proper composite qN r to R qG. It contains neither the B inverse nor the k exchange.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 def sourceTransport : (d d₁ d₂).sourcePresentation.functor A ≅
     F₀ d₁ d₂ A ⋙ R((EtaleGraphPresentation.ProductRow.q
       (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)
@@ -1026,8 +956,7 @@ def sourceTransport : (d d₁ d₂).sourcePresentation.functor A ≅
     (Functor.associator _ _ _).symm
 
 /-- The ambient change for g after splitting off its identity graph.
-Source: Stacks Tags 0F7C and 0F7J
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tags 0F7C and 0F7J. -/
 def middleTail :
     R((EtaleGraphPresentation.ProductRow.q
         (ofCompactification d₁.compactification) (ofCompactification d₂.compactification)

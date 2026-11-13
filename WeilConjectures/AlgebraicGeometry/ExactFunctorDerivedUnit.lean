@@ -10,7 +10,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 The coefficient functor and its exactness are parameters. Keeping this universal
 property abstract prevents repeated expansion of concrete sheaf constructions.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -25,10 +24,7 @@ define DerivedUnit(U,F,H,η) to say that composition with single(η) followed by
 exact-functor single comparison induces a bijection Hom(single H,K)→Hom(single F,DU(K)) for every
 unbounded complex K.
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
-Proof: This is the Hom universal property of the specified scalar-extension unit. The single
-comparison identifies single(UH) with DU(single H), so the displayed composition is defined without
-constructing or choosing a left adjoint. -/
+06YY and 0GLZ. -/
 def DerivedUnit
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B]

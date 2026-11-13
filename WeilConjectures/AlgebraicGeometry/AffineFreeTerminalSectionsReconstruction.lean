@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Reconstruction from terminal sections on an affine slice
 
 Source: Stacks Project, Tag 01IB.
-(blueprint: lem-sc-affine-free-terminal-sections-reconstruction)
 -/
 
 @[expose] public section
@@ -60,25 +59,7 @@ private theorem overChartSectionsIso (W : Scheme.{v}) (U : W.Opens)
     exact (PresheafOfModules.naturality_apply f.val a.hom.op x).symm
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Sheafifying the actual terminal sections reconstructs a termwise finite free complex.
-Source: Stacks Project, Tag 01IB (schemes-lemma-equivalence-quasi-coherent).
-(blueprint: lem-sc-affine-free-terminal-sections-reconstruction)
-
-Proof: Compose the affine chart restriction equivalence with the inverse slice
-module equivalence, obtaining E from modules on Spec(A) to the slice site, where
-A = Gamma(W,U). Set S = tilde followed by E.functor and H = E.inverse followed by
-moduleSpecGamma. The fully faithful tilde adjunction composed with E.toAdjunction
-makes S left adjoint to H. Tilde of a finite free module, followed by E, is the
-finite free slice sheaf: use tildeFinsupp, preservation of coproducts, and the
-transported structure-module isomorphism. Thus every term of K is in S's essential
-image, and the adjunction counit is invertible on it.
-Identify H naturally with terminal slice evaluation. Uniqueness of right adjoints
-identifies inverse chart restriction with forward chart pushforward. Its section
-scalar action is isoSpec_hom_appTop composed with GammaSpecIso.inv, hence U.topIso.inv.
-The presheaf map from the corresponding top slice object to (U,id) cancels this
-scalar map; its naturality is presheaf morphism naturality. Map the counit and this
-section comparison to complexes. Counit naturality supplies differential
-compatibility, and invertibility in each degree gives the desired complex
-isomorphism. This also covers rank zero, the zero ring and unbounded K. -/
+Source: Stacks Project, Tag 01IB (schemes-lemma-equivalence-quasi-coherent). -/
 theorem affineFree_terminalSections_reconstruction
     (W : Scheme.{v}) (U : W.Opens) (hU : IsAffineOpen U)
     (K : CochainComplex

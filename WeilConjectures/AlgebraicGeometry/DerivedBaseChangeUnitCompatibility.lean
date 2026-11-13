@@ -26,8 +26,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- Termwise ordinary exchange, with the composition identifications on homotopy categories.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-pc-derived-base-change-unit-compatibility). -/
+Source: Stacks Project, Tag 08HY. -/
 def moduleHomotopyBaseChange
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)
@@ -116,21 +115,7 @@ private theorem exchange_unit_of_counit
 /-- The pinned derived mate agrees with ordinary exchange before resolving the input.
 There is no acyclicity, flatness, affine-base or cover hypothesis.
 Source: Stacks Project, Tag 08HY, transposition of the mate; the derived adjunction
-compatibility of Tag 09T5.
-(blueprint: lem-pc-derived-base-change-unit-compatibility).
-
-Proof: Transpose both composites under the pinned derived adjunction for f'.
-The defining compatibility of that adjunction identifies a counit followed by
-localization of an ordinary map with its ordinary adjoint followed by the
-right-derived unit. Apply this first to p and then to f. The defining universal
-property of the pinned composition comparisons replaces the successive left-derived
-counits by the counit for the composite pullback. The commutativity of the square
-identifies the composites. Naturality of the right-derived units moves these units
-past the ordinary exchange, and the two adjunction triangle identities cancel the
-remaining units and counits. The resulting ordinary adjoint is the pushforward of
-the p-pullback unit followed by pushforward composition, precisely the definition
-of moduleBaseChangeMap. Descend termwise to the homotopy categories and localize;
-injectivity of the pinned Hom equivalence gives the equation. -/
+compatibility of Tag 09T5. -/
 theorem derivedBaseChange_unit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

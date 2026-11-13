@@ -13,7 +13,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 Source: Stacks Project, Tag 009O (sheaves on a basis); the affine-basis gluing in
 Tags 01LX and 0897.
-(blueprint: lem-weil-pbc-affine-basis-ring-action-gluing).
 -/
 
 @[expose] public section
@@ -25,25 +24,7 @@ namespace AlgebraicGeometry
 
 /-- Compatible actions on the affine basis extend uniquely to a natural ring action.
 
-Source: Stacks Project, Tag 009O, applied to the affine basis; Tags 01LX and 0897.
-(blueprint: lem-weil-pbc-affine-basis-ring-action-gluing).
-
-Proof: Form the Type-valued presheaf P(U) = R(U) times F(U). The maps
-(r,x) to tau(U)(r)(x) on affine opens are natural by the hypothesis. Apply
-TopCat.Sheaf.restrictHomEquivHom to extend this natural transformation into
-the underlying sheaf of sets of F. Its affine components are the prescribed
-maps by extend_hom_app. Hence its evaluation a(U,r,x) satisfies naturality
-and restricts to tau(V)(r|V)(x|V) on every affine V contained in U.
-For a fixed r, check that a(U,r,-) is additive and preserves zero by restricting
-to each affine V; there these are the additive-endomorphism identities of tau(V).
-Similarly, check zero, addition, unit and multiplication in r on the affine
-basis. These checks make a(U,-,-) a ring homomorphism to additive endomorphisms.
-Separatedness proves each global identity from its local check. Naturality of
-the extended map proves naturality of the actions, and extend_hom_app gives
-affine agreement. Any other natural action with the same affine components
-has the same restriction on all affine subopens, so separatedness proves
-uniqueness. Affine subopens cover every open, including the empty one; no
-intersection is assumed affine and no compactness is required. -/
+Source: Stacks Project, Tag 009O, applied to the affine basis; Tags 01LX and 0897. -/
 theorem affineBasis_ringAction_gluing
     (X : Scheme.{u}) (R : TopCat.Sheaf RingCat.{u} X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X)

@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSectionProperties
 import all WeilConjectures.AlgebraicGeometry.SectionwiseAdicAlgebraLimit
 
 /-! Flatness component of constant coefficient completion.
-Source: Stacks Project, Tag 093M (auxiliary; not a blueprint node).
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 093M.
 The sectionwise adic algebra limit theorem applied to the finite quotient tower proves
 that the completed coefficient algebra is flat over the constant coefficient sheaf. -/
 @[expose] public noncomputable section

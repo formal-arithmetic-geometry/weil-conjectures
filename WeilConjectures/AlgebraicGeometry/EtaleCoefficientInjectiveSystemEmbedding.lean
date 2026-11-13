@@ -37,23 +37,7 @@ private theorem etaleCoefficientProductEmbedding_mono
 
 set_option linter.unusedVariables false in
 /-- The explicit outgoing-arrow product admits compatible transitions and embeddings.
-Source: Stacks Project, Tag 0EXZ, product/direct-image construction.
-(blueprint: lem-weil-pbc-etale-coefficient-injective-system-embedding).
-
-Proof: write J_k = Injective.under (F k), with canonical mono e_k. For each
-arrow h : i to k, the h-component of a_i is the adjoint transpose of phi_h
-followed by e_k. For f : i to j and g : j to k, project FI_i to the factor
-indexed by f followed by g. Transport that factor through direct-image
-composition, apply inverse image along f, then its adjunction counit. This
-gives a map into the g-factor of FI_j; the universal property of the product
-defines psi_f. Check each product projection: naturality and the triangle
-identities of the adjunction and the inverse/direct-image composition
-comparisons give the identity and composition laws for psi. Transposing the
-same projected equations identifies a_j after phi_f with psi_f after inverse
-image of a_i, using hcomposition. At the identity arrow the adjunction identity
-comparison identifies the projection of a_i with e_i, using hidentity. Since
-e_i is mono, a_i is mono. All products are small: the arrows form a sigma
-type indexed by I in universe u, inside the universe u+1 sheaf category. -/
+Source: Stacks Project, Tag 0EXZ, product/direct-image construction. -/
 theorem etale_coefficient_injective_system_embedding
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

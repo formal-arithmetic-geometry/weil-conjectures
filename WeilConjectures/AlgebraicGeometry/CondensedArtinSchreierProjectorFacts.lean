@@ -69,14 +69,7 @@ local notation "ρ" => condensedArtinSchreierChartProjection Λ k
 -- Concrete linear and monoidal module comparisons need additional elaboration heartbeats.
 /-- The character image evaluates to the regular module on the Artin–Schreier cover.
 
-Source: latest blueprint `prop-kernel-lisse.proof.md`, character projector calculation
-(blueprint: lem-kernel-condensed-projector-facts).
-
-Proof. Module pullback preserves images and the scalar-weighted finite sum defining the
-projector. In the split-cover product chart translations shift the coordinates. The
-finite character calculation identifies the image of the pulled-back projector with
-the coefficient module by evaluation on the zero coordinate. That coordinate is the
-adjunction counit, so the preserved-image comparison gives the asserted counit map. -/
+Source: latest blueprint `prop-kernel-lisse.proof.md`, character projector calculation. -/
 theorem condensedArtinSchreierProjector_evaluation (ψ : AddChar k (MonObj.Γ Λ)) :
     IsIso ((CondensedRing.upperStar Λ q).map (image.ι (e ψ).asHom) ≫
       (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app
@@ -129,14 +122,7 @@ private theorem translation_add (a b : k) :
 /-- Products of the two character images and constant functions are fixed by the
 appropriate character projectors.
 
-Source: latest blueprint `prop-kernel-lisse.proof.md`, character multiplication
-(blueprint: lem-kernel-condensed-projector-facts).
-
-Proof. Restriction to the cover is faithful because it preserves equalizers and reflects
-isomorphisms. Its product chart therefore proves the addition law for deck operators.
-The deck operators preserve multiplication and constants. Apply the generic character
-product calculation using the module category's bilinear tensor product, and identify
-the normalized average with the actual defining projector. -/
+Source: latest blueprint `prop-kernel-lisse.proof.md`, character multiplication. -/
 theorem condensedArtinSchreierProjector_products (ψ ψ' : AddChar k (MonObj.Γ Λ)) :
     (((image.ι (e ψ).asHom ⊗ₘ image.ι (e ψ').asHom) ≫ Functor.LaxMonoidal.μ G
       (Mod.regular (condensedRingObj Λ A)) (Mod.regular (condensedRingObj Λ A)) ≫

@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.HomComplex
 /-! # Finite-support assembly of ordinary evaluation
 
 Source: Stacks Project, Tags 08DQ and 08DM, finite total-complex calculation.
-(blueprint: lem-pc-bounded-ordinary-evaluation-assembly).
 -/
 
 @[expose] public section
@@ -37,24 +36,7 @@ attribute [local instance] localEvaluationPreadditive
 
 /-- Assemble evaluation from the degree-zero module comparisons.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`, and
-Tag 08DM, proof of `lemma-Rhom-strictly-perfect`.
-(blueprint: lem-pc-bounded-ordinary-evaluation-assembly).
-
-Proof: the projection from the dual in degree q to Hom(P^(-q),O) is invertible:
-all other targets of the degree-zero complex vanish, hence so do their Hom
-objects, and the recorded Hom projections exhibit a product. Bounded support
-of P makes the dual bounded. In total degree n, discard the zero tensor
-summands and the zero Hom factors outside that same finite support. Products
-and coproducts over the remaining finite indices agree in this additive
-category. Reindex the tensor summands by r=-q and p=r+n. Under these
-identifications the displayed component equations give zero off-diagonal
-blocks and the canonical module evaluation on each diagonal block. Each such
-block is invertible by hblocks, after tensoring the dual projection and
-transporting the degree equality. The finite biproduct of their inverses is
-an inverse for f.f n. The product and coproduct universal properties verify
-both inverse equations. An empty support gives the unique map between zero
-objects. No bound on F and no affineness of U enter the argument.
--/
+Tag 08DM, proof of `lemma-Rhom-strictly-perfect`. -/
 theorem boundedOrdinaryEvaluation_degree (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (P.X r))

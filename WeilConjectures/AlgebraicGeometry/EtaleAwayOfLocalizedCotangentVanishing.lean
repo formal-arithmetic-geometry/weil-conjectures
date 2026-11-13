@@ -13,8 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 # An étale basic neighbourhood from vanishing of the naive cotangent complex
 
 Source: Stacks Project, Algebra, Tags 07BU, 00TB, 00U1; Morphisms, Tag 02GJ;
-More on Algebra, proof of Tag 07M7
-(blueprint: lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing).
+More on Algebra, proof of Tag 07M7.
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 homology of the naive cotangent complex and the Kähler differentials gives an étale
 principal neighbourhood of `q` over `Spec A`.
 Source: Stacks Project, Tags 07BU, 00TB, 00U1, 02GJ, and the proof of 07M7.
-(blueprint: lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing)
 
 Proof, following the node's four steps:
 1. The zero localized differential module is finite free of rank zero. Together with

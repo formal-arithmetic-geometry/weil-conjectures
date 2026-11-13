@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # EtaleSingletonTensorNormalizedRestriction
 Source: Stacks Project, Tags 03P2 and 03DR.
-(blueprint: lem-sc-singleton-tensor-normalized-restriction)
 -/
 
 @[expose] public section
@@ -80,25 +79,7 @@ private theorem smul_pinned {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)
     ((hr a).trans (congrArg (fun r ↦ r ≫ (H.smul (σ a)).asHom) (seal_eq r).symm))
 
 /-- The evaluated normalized pure sections agree after omitting a factor.
-Source: Stacks Project, Tag 03P2 (tensor Čech identification), Tag 03DR.
-(blueprint: lem-sc-singleton-tensor-normalized-restriction)
-
-Proof: apply hf to evaluate the input section as the product of pulled-back
-functions times the restriction of m from U. Semilinearity of
-etaleTensorSectionsRestriction moves that scalar product outside restriction.
-A ring homomorphism preserves finite products. For each k, the product map
-omitting j followed by the k-th projection is the j.succAbove(k)-th projection,
-by Pi.lift_comp_π. Functoriality of appTop therefore identifies each pulled-back
-scalar with the corresponding retained projection function on the larger
-product. Composition of etaleTensorSectionsRestriction and the over-U
-triangle identify the restricted coefficient with direct restriction from U.
-Apply hf' to evaluate the inserted-unit pure section. Its j-th scalar factor
-is the pullback of one and equals one. Fin.prod_univ_succAbove, together with
-insertNth at j and at j.succAbove(k), identifies its remaining factors with
-those just computed. Thus the evaluated sections agree. This argument has
-no Čech coface and no injectivity assertion. It works in degree zero, for
-both possible omitted factors, and for zero modules and empty schemes.
--/
+Source: Stacks Project, Tag 03P2 (tensor Čech identification), Tag 03DR. -/
 theorem singletonTensor_normalized_restriction
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

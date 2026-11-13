@@ -29,13 +29,7 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
 
 /-- The flat single tensorator is the composite of the explicit cochain tensorator,
 the homotopy quotient tensorator and the localization tensorator.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, derived tensor construction.
-(auxiliary; not a blueprint node).
-Proof: expand the defining composite of singleFunctorObjTensorIso. The hom component
-of an isomorphism composite is the composite of its hom components; the hom of asIso
-is its original map. The homotopy quotient and localization tensorator formula for
-a composite functor then identifies the middle two arrows. Functoriality combines
-the two maps defining singleCochainTensorIso, and the final inverse is unchanged. -/
+Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, derived tensor construction. -/
 theorem singleFunctorObjTensorIso_factorization
     (A C : Sheaf X.smallEtaleTopology B) (hA : ObjectProperty.flat A) :
     let sg := HomologicalComplex.single (Sheaf X.smallEtaleTopology B) (.up ℤ) 0

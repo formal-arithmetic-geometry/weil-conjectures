@@ -36,22 +36,7 @@ private theorem inhabited_lan_source
 witnessed by etale objects. The values and the family may be coefficient-sized.
 
 Source: Bhatt--Scholze, Lemma 5.1.4; Stacks Project, Tag 099T, and the discrete
-Isom-sheaf argument in Tag 099Y
-(auxiliary; not a blueprint node).
-
-Proof: for each a the comparison counit is invertible by local classicality
-(Bhatt--Scholze, Lemma 5.1.4), in the coefficient universe. Compose its underlying
-presheaf map with the locally surjective sheafification map from the pointwise
-left Kan extension of the restriction of H a to the etale site. The resulting map
-to H a is locally surjective. Every element of this Kan extension is represented
-by a section on an etale object Y together with a map into Y from the object where
-the element is evaluated. Index all etale objects Y equipped with a family index a
-and a section of H a on Y. Given one of the assumed sections on U j, local
-surjectivity and these Kan representatives show this indexed family covers U j.
-Transitivity with the given covering family U shows it covers the final object.
-All indices lie in the coefficient universe. The construction allows empty sets
-and empty families: when K is empty, hsec makes the original cover empty, and the
-same transitivity argument proves the empty family covers. -/
+Isom-sheaf argument in Tag 099Y. -/
 theorem coefficientLocallyConstant_etaleSections (X : Scheme.{u})
     (K : Type (max v (u + 1)))
     (H : K → Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

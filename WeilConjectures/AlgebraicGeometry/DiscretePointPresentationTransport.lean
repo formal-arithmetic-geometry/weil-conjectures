@@ -326,20 +326,7 @@ This is the section reconstruction, constant-sheaf pullback, and scalar-restrict
 Stacks Tags 03CY and 00YV; it is strictly the first step of the refinement argument and does
 not include the local lifting of matrix coefficients.
 
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV.
-(auxiliary; not a blueprint node).
-
-Proof: compose point pullback on X with section reconstruction, the small-site equivalence,
-restriction of scalars along c, fixed-scalar reconstruction, scheme inverse image and slice
-restriction. This functor preserves finite colimits. The regular-module comparison and c,
-followed by constant-sheaf pullback, identify its regular module with the constant k-module.
-Finite biproducts identify its two free terms, so conjugating the image of d gives the
-required matrix a. Preservation of cokernels identifies the image of coker d with coker a.
-Point-pullback composition and the given hN identify the internal restrictions of N and
-the point cokernel on X. Apply coefficient-slice invariance to this isomorphism, and
-compose with the proved cokernel comparison. The separate equivalence e is not needed
-once the ring-sheaf isomorphism c is given.
--/
+Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV. -/
 theorem discrete_point_presentation_transport
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

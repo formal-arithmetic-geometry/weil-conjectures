@@ -521,22 +521,7 @@ private theorem isIso_of_openRestrictions (X : Scheme.{u})
 /-- Etale origin is local for an open cover, with coefficients of independent size.
 Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible, the sentence
 "Since it suffices to prove this locally on X"; Tags 099T and 099Y, comparison
-full faithfulness and compatibility with restriction
-(auxiliary; not a blueprint node).
-
-Proof: let L be comparison inverse image, R its direct image, and epsilon the counit.
-Restriction along an open immersion commutes with L and R: both right adjoints are
-precomposition along the corresponding base-change functors, and localization at
-an open is restriction to the associated slice site. The adjunction mate identifies
-the restricted epsilon with the comparison counit of the restricted sheaf.
-On each covering open the sheaf is in the image of L, so its counit is invertible
-by full faithfulness of L. Invertibility of a sheaf morphism is local for a covering
-family; hence epsilon is invertible globally. Its source L(R(F)) supplies the etale
-antecedent. For an empty base the empty cover gives the same argument, since every
-sheaf morphism there is invertible. All constructions use the coefficient-sized
-small models: their site equivalences preserve covers, the sectionwise direct
-images, and the adjunction mates. The proof is valid for arbitrary modules and
-does not use finite generation, a Noetherian ring, or quasi-compactness. -/
+full faithfulness and compatibility with restriction. -/
 theorem coefficientFixed_essImage_of_openCover (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] {I : Type u}
     (U : I → X.Opens) (hU : ∀ x : X, ∃ i, x ∈ U i)

@@ -108,18 +108,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The composed adjunction compares dependent scalar-restriction and direct-image instances.
 /-- The concrete coefficient mates commute with every Cech face restriction.
-Source: Stacks Project, Tags 02KE and 0097, naturality of the termwise map.
-(blueprint: lem-pc-coefficient-comparison-morphism-faces).
-Proof: Restriction of sections from an intersection with a deleted index to the
-full intersection commutes with restrictAppIso and with the pullback unit.
-Thus the explicitly defined section maps commute with the source restriction
-and the support restriction on the target. Take mates under the composed
-adjunction. Naturality of the hom equivalence on both sides gives equality of
-module morphisms after the coefficient restriction. Evaluate on B and use
-naturality of the support identifications. Their equality morphisms and the
-inclusions of supports compose to the single inclusion displayed here, by
-proof irrelevance in the poset of opens. For empty opens the same identities
-hold; for an empty tuple family there is no face to check. -/
+Source: Stacks Project, Tags 02KE and 0097, naturality of the termwise map. -/
 theorem coefficientComparisonMorphism_faces {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) {r : ℕ}
     (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens)

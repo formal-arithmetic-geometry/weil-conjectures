@@ -47,15 +47,7 @@ private lemma plusHomExt_precomp {Y : Scheme.{u}}
     congrArg (fun t ↦ t ≫ I.map ξ ≫ i.hom) (j.inv.naturality a).symm
 
 /-- Naturality of the free-representable comparison before coefficient conversion.
-Source: Stacks Project, Tag 03Q8 and the free-sheaf adjunction.
-(blueprint: lem-sbc-abelian-representable-cohomology-map-naturality).
-
-Proof: Expand the Ext comparison. Naturality of the inverse-image map on Ext,
-together with the universal-section identity and associativity of Ext
-precomposition, identifies restriction by `v` with pullback along its base
-change. The derived single-object inclusion and exact-functor comparisons are
-natural in the source arrow.
--/
+Source: Stacks Project, Tag 03Q8 and the free-sheaf adjunction. -/
 theorem abelianRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
     (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

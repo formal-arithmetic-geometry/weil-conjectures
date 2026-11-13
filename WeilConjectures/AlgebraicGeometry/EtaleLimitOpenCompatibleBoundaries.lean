@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryNatu
 /-! # Compatible boundaries on the actual stage and limit cohomology groups
 
 Source: Stacks Project, Tags 0A50 and 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-open-compatible-boundaries).
 -/
 
 @[expose] public section
@@ -34,30 +33,7 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- Choose exact Mayer--Vietoris boundaries compatible with all stage maps and legs.
 
 Source: Stacks Project, Tag 0A50, functorial long exact sequence of an injective
-resolution, and Tag 09YQ, coherent-system restriction maps.
-(blueprint: lem-weil-pbc-etale-limit-open-compatible-boundaries).
-
-Proof: The value hypotheses identify the supplied additive difference maps
-with the actual differences of restrictions, by extensionality. Fix injective
-resolutions for the coefficient sheaves on every stage and
-on c.pt. Sections on the two covering opens and their intersection form short
-exact sequences of complexes. Use their homology connecting maps and transport
-through the comparisons with Sheaf.H. For each transition, pull back the stage
-resolution and lift the coefficient map φ into the target resolution. The maps
-on sections commute with restriction, hence give a morphism of the short exact
-complex sequences. Homology connecting-map naturality identifies the induced
-intersection map followed by the target boundary with the source boundary
-followed by whole-scheme pullback and coefficient cohomology. The comparison
-with Sheaf.H gives exactly tailOpenCohomologyMapDegree, including its inverse
-image composition comparison. Repeat for each cone projection and coefficient
-(eG j).inv ≫ L.ι.app j to obtain the leg equation. This construction uses the
-same resolution boundaries for all arrows; choosing existential boundaries
-separately for each arrow would not suffice. Long exactness gives both stage
-exactness assertions and bottom exactness. Inverse image preserves intersections,
-so the intersection term is the inverse image of U∩V used here. No directedness,
-identity/composition condition on φ, or formula for G.map is used. Empty or
-coincident covering opens give the same exact section complexes. The existential
-boundaries are used in proofs only, never to define unspecified data. -/
+resolution, and Tag 09YQ, coherent-system restriction maps. -/
 theorem tailOpenCompatibleBoundaries
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I]

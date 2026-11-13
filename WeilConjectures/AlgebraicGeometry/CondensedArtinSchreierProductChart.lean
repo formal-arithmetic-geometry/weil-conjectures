@@ -25,8 +25,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized restriction to a sheet, for an arbitrary morphism of schemes.
-Source: the counit restriction and monoidal unit comparison
-(blueprint: lem-kernel-condensed-product-chart). -/
+Source: the counit restriction and monoidal unit comparison. -/
 def condensedRegularSheetProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U Y : Scheme.{u}} (p : U ⟶ X)
@@ -38,8 +37,7 @@ def condensedRegularSheetProjection
     (Mod.regularMapIso (condensedRingObj Λ U) (CondensedRing.upperStar Λ t)).hom
 
 /-- Evaluation on the sheet given by translation by `a`, normalized to the regular module.
-Source: latest blueprint `prop-kernel-lisse.proof.md`, splitting chart
-(blueprint: lem-kernel-condensed-product-chart). -/
+Source: latest blueprint `prop-kernel-lisse.proof.md`, splitting chart. -/
 def condensedArtinSchreierChartProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k] (a : k) :
@@ -214,15 +212,7 @@ private theorem sheets_colimit (k : Type u) [Field k] [Fintype k] :
 with the counit-defined sheet evaluations enumerated by Fin |k| as coordinates.
 
 Source: latest blueprint `prop-kernel-lisse.proof.md`, first paragraph, and the proved
-Artin–Schreier torsor decomposition
-(blueprint: lem-kernel-condensed-product-chart).
-
-Proof. The Artin–Schreier torsor map identifies the self fibre product with the coproduct
-of copies of the affine line indexed by the additive field. Swap the two projections
-so that the sheet labelled `a` is `(σ_a,id)`. Reindex by `Fin |k|` and apply the canonical
-split-cover product-map theorem to the regular module. Normalize each pulled-back regular
-module using the strong monoidal unit comparison. The resulting product isomorphism
-has exactly the displayed enumerated sheet evaluations as its projections. -/
+Artin–Schreier torsor decomposition. -/
 theorem condensedArtinSchreierChart_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k] :

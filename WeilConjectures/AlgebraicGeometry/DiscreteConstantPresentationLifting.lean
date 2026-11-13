@@ -142,24 +142,7 @@ presentations on the condensed point. This concerns one constant module and its 
 trivialization, before any locally constant predicate or covering family is assembled.
 
 Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-the reverse finite-matrix argument in lem-sfb-discrete-coefficient-local-models, steps 1--2.
-(auxiliary; not a blueprint node).
-
-Proof: on the slice U, regard the displayed matrix q as a presentation by
-constant free k-module sheaves. Inverse scalar restriction along c and section reconstruction
-identify its entries with sections of the discrete coefficient ring pulled back from A.
-The constant-sheaf pullback comparison and e identify this ring with the constant ring
-ULift A. Refine the slice covering until every entry of this finite matrix is a constant
-ULift A scalar, using local surjectivity of the sheafification unit and finite intersections
-of covering sieves. On each refined member form the cokernel P of the same finite matrix
-between regular discrete point modules; this is a real cokernel, finitely presented by
-construction, with the same ranks m and n as q. Pullback, section reconstruction and slice
-restriction preserve the finite free presentation and its cokernel. Their inverse-image
-comparison therefore identifies this point cokernel with the given restriction of N.
-Full faithfulness of the section and
-small-site equivalences reflects the resulting cokernel isomorphism. Empty matrices and
-empty schemes use the same construction. No Noetherianity is needed, since the finite
-presentation is displayed. The refinement accommodates any coefficient isomorphism c. -/
+the reverse finite-matrix argument in lem-sfb-discrete-coefficient-local-models, steps 1--2. -/
 theorem discrete_constant_presentation_lifting
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

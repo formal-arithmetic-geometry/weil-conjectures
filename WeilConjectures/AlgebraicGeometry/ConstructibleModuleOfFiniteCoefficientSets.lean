@@ -371,31 +371,7 @@ private theorem finite_constant_module_value {Y : Scheme.{u}}
 scalar action factors through a finite quotient ring.
 
 Source: normalization exact-sequence blueprint, finite-operation module refinement in
-`lem-weil-pbc-constructible-module-of-finite-coefficient-sets`, steps 1 and 2.
-(blueprint: lem-weil-pbc-constructible-module-of-finite-coefficient-sets)
-
-Proof: Choose the locally constant underlying-set cover and discard empty members.
-The labels on a remaining member are finite: identify them with a stalk at an
-algebraic closure of the residue field of a point. Choose one representative of
-each element of the finite quotient Lambda/I. At the terminal object of the
-localized site form the zero section, all pairwise sums and negatives of label
-sections, and all scalar multiples by these finitely many representatives.
-Each is a section of the constant set sheaf. The finite-section lemma supplies
-a common covering sieve on which they are constant labels. A member through any
-specified point has an injective label map, since the empty sieve cannot cover
-an object with a point. Annihilation by I extends closure under the chosen scalar
-representatives to closure under every scalar of Lambda.
-The range of this label map is consequently an actual submodule of the terminal
-section module. Transport its module structure to the labels using the bijection
-with this range. Naturality extends the terminal linear label map to a natural
-transformation from the constant module presheaf. Its underlying set map is the
-sheafification unit followed by the chart isomorphism, hence locally bijective.
-Sheafification therefore gives a module chart with the same finite labels.
-The neighbourhoods through all points form covers; bind these to the original
-cover to obtain the displayed trivialization datum and its finite module values.
-On the empty scheme the covers are empty. For the unit ideal, annihilation forces
-the zero module and the same construction applies. All module data here are
-constructed from submodules and equivalences, never from unproved existence. -/
+`lem-weil-pbc-constructible-module-of-finite-coefficient-sets`, steps 1 and 2. -/
 private theorem exists_finite_coefficient_module_charts
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -569,22 +545,7 @@ private theorem finiteLocallyConstant_of_charts
 underlying set sheaf is constructible.
 
 Source: normalization exact-sequence blueprint, module refinement in
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 3.
-(blueprint: lem-weil-pbc-constructible-module-of-finite-coefficient-sets)
-
-Proof: The sectionwise annihilation gives every section module its canonical action
-of the quotient ring, by quotient induction, and restriction maps remain linear.
-Choose the finite constructible stratification and finite-set trivializing covers.
-On each nonempty member, the transported addition, zero, and scalar operations are
-locally constant maps on finite constant sets. For each input tuple they are locally
-constant sections of the finite constant target. Refine the cover to trivialize these
-sections, taking finite common refinements for all input tuples and all elements of
-the finite quotient ring. Cover transitivity gives the required etale covers.
-The identities for the transported operations follow from the original sheaf, yielding
-constant finite quotient modules on the refinements. As Lambda-modules these are also
-finite and hence finitely generated. The original stratification thus witnesses
-IsConstructibleSheaf. Empty strata are discarded; the zero module and zero quotient
-ring satisfy the same argument without any nontriviality assumption. -/
+`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 3. -/
 theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

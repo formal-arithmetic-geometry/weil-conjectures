@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 
 Source: Stacks Project, perfect.tex, Tag 0AA7,
 lemma-affine-morphism-and-hom-out-of-perfect, case (1); cohomology.tex, Tag 08I3.
-(blueprint: lem-pc-affine-global-hom-base-change-factorization).
 -/
 
 @[expose] public section
@@ -37,40 +36,7 @@ internal-Hom pullback comparison. This statement makes no Tor-independence assum
 and does not assert that either base-change map is invertible.
 
 Source: Stacks Project, perfect.tex, Tag 0AA7,
-lemma-affine-morphism-and-hom-out-of-perfect, case (1); cohomology.tex, Tag 08I3.
-(blueprint: lem-pc-affine-global-hom-base-change-factorization).
-
-Proof:
-1. Put H = RHom(M,K). The perfect tensor-Hom comparison identifies H with the
-   tensor of the perfect dual of M and K, so H has quasi-coherent cohomology.
-   Since f is qcqs, Rf_*H has quasi-coherent cohomology as well.
-2. The derived direct-image composition comparison identifies restricted RΓ_X H
-   with RΓ_S Rf_*H. Choose the comparison commuting with the right-derived units;
-   on sheaves it is the identity on sections with the R-action induced by f.
-3. The affine quasi-coherent derived equivalences on Spec R and Spec B identify
-   Lg^* with derived extension of scalars. Compute this comparison on K-flat module
-   representatives using the tilde/pullback formula. The extension/restriction
-   adjunction on these representatives descends to the derived categories.
-   Compare this adjunction with affineDerivedExtensionAdjunction by uniqueness of
-   left adjoints to the fixed derived restriction functor. Combining this with
-   step 2 gives the source isomorphism a, compatible with the chosen adjunction unit.
-4. The canonical map Lg_X^*H → RHom(Lg_X^*M,Lg_X^*K) is invertible. Indeed, rewrite
-   H as K tensor the perfect dual of M. Strong monoidal pullback transports the
-   evaluation and coevaluation pairing, and the perfect dual pullback comparison
-   identifies the transported dual with the internal dual of Lg_X^*M. The tensor-Hom
-   evaluation comparison identifies the resulting map with the canonical one:
-   after tensoring with Lg_X^*M its evaluation is pullback of evaluation, preceded
-   by the inverse tensor-pullback comparison. Apply Rf'_* and RΓ_S' and then the
-   unit-compatible direct-image composition comparison to obtain b.
-5. Transpose the composite a.hom; RΓ_S'(base change on H); b.hom under the fixed
-   extension/restriction adjunction. The source comparison of step 3 commutes with
-   its unit. The sheaf base-change map is the mate of the commutative-square
-   pullback comparison and the direct-image counit. The triangle identities and
-   naturality turn its transpose into restricted RΓ_X of the evaluation-mate map
-   of step 4, followed by the sections/pushforward comparison of step 2 on X'.
-   This is globalHomPullbackComparison by its evaluation equation and its
-   right-derived-unit equation. Injectivity of the adjunction Hom equivalence
-   gives the displayed equality. No invertibility of sheaf base change is used. -/
+lemma-affine-morphism-and-hom-out-of-perfect, case (1); cohomology.tex, Tag 08I3. -/
 theorem affineGlobalHomBaseChange_factorization
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

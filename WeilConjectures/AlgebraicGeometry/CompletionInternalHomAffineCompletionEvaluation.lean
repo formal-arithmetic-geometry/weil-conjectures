@@ -45,30 +45,7 @@ The supplied map sends each ordinary linear map to its adic completion. There ar
 scalar extension tensor products in this comparison.
 
 Source: Stacks Project, Tag 0882, affine argument before applying flat base change for Hom;
-Tag 087W, the equivalence of affine formal modules and complete modules.
-(blueprint: lem-weil-pbc-completion-internal-hom-affine-completion-evaluation).
-
-Proof:
-1. Write A = O_X(U), J = I(U), N = G(U), M = F(U), H = Hom_A(N,M).
-   Affine tilde/sections identifies the internal Hom sections with H. Coherence of
-   internal Hom and the affine finite type criterion make H, N, M finite.
-   Ideal products and quotient sections identify the three quotient systems with
-   P/J^(n+1)P, including projections and transition maps, for P = H, N, M.
-2. The inverse limit of the H quotient system is its adic completion. These
-   identifications give rho. Finite-level quotient surjectivity and the internal-Hom
-   quotient factorization force each e_n, by he, to be quotient evaluation.
-3. Evaluating compatible quotient maps componentwise produces a completed-ring-linear
-   map from the completion of H to Hom between the completions of N and M. It sends
-   the image of h to AdicCompletion.map J h. It equals the supplied epsilon: the
-   completion of finite H is generated over the completed ring by images of H
-   (the completion-tensor comparison), so two linear maps agreeing there are equal.
-4. Restrict t to U and pass to inverse limits to obtain v. The affine formal-module
-   comparison identifies this map componentwise. Equality of maps of completed modules
-   is equivalent to equality at every quotient level (all projections are jointly
-   injective, and the N-limit projects onto each level by AdicCompletion.eval_surjective).
-   Thus epsilon(rho(s)) = v
-   is equivalent to the specified evaluation equations, in both directions.
-   This argument does not use a flat base-change isomorphism for Hom. -/
+Tag 087W, the equivalence of affine formal modules and complete modules. -/
 theorem completion_internal_hom_affine_completion_evaluation {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

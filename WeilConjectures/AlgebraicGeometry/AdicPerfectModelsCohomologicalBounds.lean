@@ -301,20 +301,7 @@ private theorem residueModels_bounds (X : Scheme.{u}) [IsNoetherian X]
     simpa using hz.eq_of_src (F.map (𝟙 M)) (F.map 0)
 
 /-- The object and its canonical residue have globally bounded cohomology.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3.
-(auxiliary; not a blueprint node).
-
-Proof: choose finite subcovers of the covering sieves on the Noetherian strata.
-For the finitely many selected coefficient models with intervals [a_j,b_j], take
-[-sum |a_j|,sum |b_j|]. This interval is ordered even when no charts are selected.
-A zero term of a coefficient model stays zero under additive constant realization
-and completed scalar extension, so its completed model has zero cohomology there.
-Exact inverse image and slice restriction transport this vanishing through the
-specified local isomorphisms. Sheaf separation on each cover and detection on the
-jointly surjective family of stratum immersions give the global bound for K.
-Apply adicPerfectModel_localResidueBounds on each selected chart for the residue,
-using the same interval. Slice separation and stratum detection for the underlying
-additive sheaf give global residue vanishing; the forgetful functor is faithful. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, and Lemma 6.5.3. -/
 theorem adicPerfectModels_cohomologicalBounds (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

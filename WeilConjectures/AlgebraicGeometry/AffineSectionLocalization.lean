@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
 # Degree-zero localization of sections on an affine scheme
 
 Source: Stacks Project, Properties, Lemma 01PW, equation module-invert-s; Cohomology of
-Schemes, Lemma 09MR, affine case (blueprint: lem-sc-affine-section-localization).
+Schemes, Lemma 09MR, affine case.
 -/
 
 @[expose] public section
@@ -34,11 +34,7 @@ isomorphism of modules. The domain is the existing fraction presentation of the 
 localization (def-sc-section-fraction-presentation).
 
 Source: Stacks Properties, Lemma 01PW (2), equation module-invert-s, and Cohomology of
-Schemes, Lemma 09MR, affine case (blueprint: lem-sc-affine-section-localization).
-Proof: (1) An affine scheme is quasi-compact and quasi-separated by
-lem-weil-pbc-affine-scheme-qcqs. (2) Apply lem-sc-p1-invertible-section-localization with
-`X = Y`; its invertible module, quasi-coherent module, section, nonvanishing locus and
-canonical fraction map are exactly these data. -/
+Schemes, Lemma 09MR, affine case. -/
 theorem affine_section_localization
     (Y : Scheme.{u}) [IsAffine Y]
     (L : Y.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

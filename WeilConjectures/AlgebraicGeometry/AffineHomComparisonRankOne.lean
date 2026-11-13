@@ -11,8 +11,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Rank-one affine Hom comparison
 
-Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ.
-(blueprint: lem-sc-k4-affine-hom-comparison-rankone). -/
+Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ. -/
 
 @[expose] public section
 
@@ -37,21 +36,7 @@ private theorem section_eval {C : Type u} [Category.{u} C]
   rfl
 
 /-- Generator normalization implies this affine comparison property.
-Source: Stacks Project, Tag 01HV (4)-(5).
-(blueprint: lem-sc-k4-affine-hom-comparison-rankone).
-
-Proof: Evaluation at one identifies Hom_A(A,N) with N via
-ModuleCat.homLinearEquiv and LinearMap.ringLmapEquivSelf. Identify T(A) with
-the structure sheaf using tildeSelf and restrictUnitIso, and apply
-SheafOfModules.homObjUnitIso to identify internalHom(T(A),T(N)) with T(N).
-Precompose the comparison followed by this identification with the generator
-h. Normalization, functoriality of internal-Hom sections, and evaluation at
-one identify the result with the image of h(1). A-linear maps out of A are
-determined by their value at one, so h is the element map for h(1).
-Generator detection therefore equates the comparison followed by evaluation
-with T of the module evaluation isomorphism. Both evaluation maps are
-isomorphisms, hence so is the comparison. The same proof includes the zero
-ring and zero coefficient module. -/
+Source: Stacks Project, Tag 01HV (4)-(5). -/
 theorem affineHomComparison_chart_rankone {Y : Scheme.{u}} (U : Y.affineOpens) :
     ∀ N : ModuleCat.{u} Γ(Y, U.1),
       IsIso (affineHomComparison U (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) N) := by

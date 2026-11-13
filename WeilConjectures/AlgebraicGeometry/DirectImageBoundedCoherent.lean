@@ -24,8 +24,7 @@ import all WeilConjectures.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
 /-! # Proper-support direct image preserves bounded coherent complexes
 
 Source: literature/stacks-project/perfect.tex, Derived Categories of Schemes,
-Lemma 36.11.3 (Tag 08E2; label lemma-direct-image-coherent)
-(blueprint: lem-pc-direct-image-bounded-coherent).
+Lemma 36.11.3 (Tag 08E2; label lemma-direct-image-coherent).
 -/
 
 @[expose] public section
@@ -58,25 +57,7 @@ private theorem coherent_pages {S : Scheme.{u}}
 
 /-- If `S` is Noetherian and `f : X ⟶ S` is locally of finite type, then the derived
  direct image of a bounded complex with coherent cohomology and proper support has
- bounded coherent cohomology. Source: Stacks Project, Tag 08E2, Lemma 36.11.3
- (blueprint: lem-pc-direct-image-bounded-coherent).
-
-Proof:
-1. Represent `E` by a bounded complex and apply `thm-sp-truncation-e2` to the
-   left exact module direct-image functor. This gives the convergent spectral sequence
-   `Rᵖf_* Hᑫ(E) ⇒ Hᵖ⁺ᑫ(Rf_*E)` and finite filtrations on its abutment.
-2. By `lem-pc-coherent-support-proper-higher-direct-image`, each term of its
-   second page is coherent, since each source cohomology sheaf has proper support.
-3. The filtration pieces are subquotients of these terms; coherence on the locally
-   Noetherian target is closed under subquotients and finite extensions. Thus every
-   cohomology sheaf of the direct image is coherent.
-4. The lower bound follows from the vanishing quadrant of `thm-sp-truncation-e2`.
-5. For each cohomology module of the bounded-below representative, apply
-   `lem-pc-proper-support-module-higher-direct-image-bound`. Take the maximum of
-   N(q) + max(q,0) over the finite interval [a,b]. Above this maximum every E2 term
-   vanishes: outside [a,b] its coefficient is zero, and inside [a,b] its first index
-   exceeds N(q). Each later page is a subquotient of the corresponding E2 term, so
-   all graded pieces of the finite abutment filtration vanish. The abutment is zero. -/
+ bounded coherent cohomology. Source: Stacks Project, Tag 08E2, Lemma 36.11.3. -/
 theorem directImage_isBounded_coherent
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{wX}

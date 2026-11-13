@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnit
 
 /-! # Descent of coherent tensor pullback comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-derived-pullback-monoidal-descent).
+Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
 -/
 
 @[expose] public section
@@ -81,29 +80,7 @@ attribute [local instance] tensorDescentPullbackDescentModuleTensor
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Coherent termwise tensor comparisons descend along K-flat resolutions.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27
-(blueprint: lem-pc-derived-pullback-monoidal-descent).
-Proof: first restrict to K-flat complexes. Their tensor products are K-flat, their
-pullbacks are K-flat, and the localization tensor maps are invertible there. The supplied
-counit and complex comparison identify the left-derived tensor bifunctor with the tensor
-of the two left-derived pullbacks. The left-derived universal property extends this
-natural comparison to every derived object: on a K-flat pair write
-A = L(μ_Q), B = ε_tensor followed by Q(φ), and C = (ε_P tensor ε_N) followed by μ_Q.
-The tensorator is C followed by the inverse of B and then the inverse of A. Choose
-K-flat resolutions of arbitrary arguments and use their comparison quasi-isomorphisms.
-Naturality of ε and φ makes the result independent of
-resolutions and natural in both arguments. The counit agrees with the recorded K-flat
-computation by uniqueness of left-derived
-functors, so it is invertible on K-flat inputs. All three maps A, B, C are invertible
-by hiso and K-flat computation of each pullback. To check associativity, resolve three arguments by
-K-flat complexes and precompose the total-complex diagrams with each triple summand
-inclusion. The hypothesis hφ reduces the diagrams to associativity of mF; naturality
-then descends equality through localization. Resolve the unit by the structure sheaf in
-degree zero, which is K-flat; the unit comparison of mF and the derived counit give the
-unit isomorphism. The same argument with summand inclusions gives both unit laws.
-Package the inverse comparisons and this unit map as CoreMonoidal. The defining formula
-on K-flat pairs is precisely the displayed equation, since the extension was made from
-the supplied ε and φ. -/
+Source: Stacks Project, Cohomology, Tag 079U and Section 20.27. -/
 theorem derivedPullback_monoidal_descent {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

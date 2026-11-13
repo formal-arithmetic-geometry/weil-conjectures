@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleRingDirectImageComparison
 # A ring-valued lift of the étale set inverse image and its unit
 
 Source: Stacks Project, Proposition 00YV, ring paragraph and Section 00YR.
-(blueprint: lem-weil-pbc-etale-ring-inverse-image-unit).
 -/
 
 @[expose] public section
@@ -30,22 +29,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph;
-Section 00YR, sextuples.
-(blueprint: lem-weil-pbc-etale-ring-inverse-image-unit).
-
-Proof: Identify ring sheaves with internal commutative ring objects on both sites,
-using the sectionwise-operation identifications. Finite-limit preservation of L
-implies finite-product preservation. Apply the ring-only lifted adjunction
-to the set adjunction. Compose its left functor with the two inverse identification
-functors to obtain Lr, and compose their forgetful comparisons to obtain er.
-On the right, the product comparisons for sectionwise precomposition identify each
-transported operation with the original operation at the base-changed object.
-Consequently the underlying right comparison is a ring isomorphism, natural in the
-ring sheaf and site object, to Rr. Transport the lifted unit through this comparison.
-Naturality of the transported unit follows from that of the original unit and the
-comparisons. The generic lifted-unit formula becomes the displayed equality after
-cancelling the inverse-identification components. This constructs only the unit;
-no triangle identity or universal property of this unit is asserted here. -/
+Section 00YR, sextuples. -/
 theorem etaleRingInverseImageUnit (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f

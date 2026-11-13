@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Coherent modules and adic systems on a closed subscheme
 
-Source: Stacks Project, Cohomology of Schemes, Tags 087T, 088A, 088C, and 088E
-(blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence).
+Source: Stacks Project, Cohomology of Schemes, Tags 087T, 088A, 088C, and 088E.
 
 ## Main statements
 * `closedImmersion_coherent_equivalence`: pushforward identifies coherent modules with
@@ -95,7 +94,6 @@ private theorem product_zero_iff {X : Scheme.{u}} (J : X.IdealSheafData)
         ((J.range_toModulesι_app_eq_idealOfOpens U.unop).subset ⟨a, rfl⟩) s
 
 /-- Pushforward induces the equivalence on coherent modules of Stacks Tag 087T.
-(blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence)
 Proof (node steps 1--4): a closed immersion is finite
 (lem-weil-pbc-closed-immersion-finite), so its pushforward preserves coherence
 (lem-weil-pbc-finite-pushforward-coherent). Its defining ideal kills the pushforward
@@ -149,7 +147,7 @@ theorem closedImmersion_coherent_equivalence {Z X : Scheme.{u}} (i : Z ⟶ X)
   exact ⟨D.asEquivalence, ⟨Iso.refl _⟩⟩
 
 /-- The support formula accompanying Stacks Tag 087T, by the stalk calculation of
-Sheaves, Tag 00AE (blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence).
+Sheaves, Tag 00AE.
 Proof (node step 5): outside the closed image the stalk of the pushforward is zero;
 at i(z) it is isomorphic, as an additive group, to the stalk at z
 (lem-weil-pbc-closed-pushforward-stalks). A zero stalk is precisely a subsingleton stalk
@@ -180,7 +178,7 @@ theorem closedImmersion_coherent_support {Z X : Scheme.{u}} (i : Z ⟶ X)
 
 /-- The termwise closed pushforward equivalence and its natural completion comparison.
 Source: Stacks Tags 088A, 088C, 088E, using Tag 087T without further mention; completion
-is equation 0880 (blueprint: lem-weil-pbc-closed-immersion-coherent-equivalence).
+is equation 0880.
 Proof (node steps 6--10): the closed subscheme of a Noetherian scheme is Noetherian
 (pqf-def-locnoeth, def-weil-closed-immersion). The extended ideal is I.comap i
 (def-nagata-extended-ideal). Ideal powers commute with pushforward on products, and

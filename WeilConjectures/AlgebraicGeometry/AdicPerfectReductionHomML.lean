@@ -13,7 +13,6 @@ import Mathlib.Data.Int.Interval
 /-! # Mittag-Leffler for perfect finite-reduction Hom
 
 Source: Stacks Project, Tags 09C5 and 09C6.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -213,22 +212,7 @@ private theorem homTower_finiteComparison
     exact (homTower_map_comp X J U T M T (g ≫ f) x e.inv).symm
 
 /-- The finite-reduction Hom tower from a constant perfect local model is Mittag-Leffler.
-Source: Stacks Project, proetale.tex, Tags 09C5 and 09C6, the dual-complex calculation.
-(auxiliary; not a blueprint node).
-
-Proof: at any triple of indices t >= m >= n, choose only a level-t isomorphism
-from the fixed perfect model to M. Scalar extension and the prescribed conjugations
-preserve identities and composition; reduce that isomorphism to m and n. Postcomposing
-with its inverses identifies both Hom transition images with the endomorphism images
-of the fixed model, using a common bijection at n. These finite markings require no
-infinite compatible choice. The quotient Hom/cohomology comparison identifies the
-model's endomorphism tower with constant-module sections of H^0 of the quotients of
-its algebraic Hom complex. Its degree-one term is finite: restrict cochains to the
-finite support interval of P and embed them in the finite product of finite linear-Hom
-modules. Artin--Rees gives Mittag--Leffler for this quotient-cohomology tower, and exact
-constant-module sections preserve it. Transfer stable images through the two finite
-comparisons. Neither the affine hypothesis nor completeness of M is needed on this
-route; the original statement and its hypotheses are retained. -/
+Source: Stacks Project, proetale.tex, Tags 09C5 and 09C6, the dual-complex calculation. -/
 theorem adicResidueHomTower_mittagLeffler
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

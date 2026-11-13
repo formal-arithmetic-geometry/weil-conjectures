@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.DerivedDirectImagePastedCounitNorma
 
 /-! # Counit calculations for pullback composition
 Source: Stacks Project, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-sc-derived-pullback-composition-counit-normalization).
 -/
 
 @[expose] public section
@@ -37,21 +36,7 @@ set_option maxHeartbeats 500000 in
 -- The selected adjunctions and composite sheaf instances need a larger budget.
 /-- The chosen pullback comparison and composite direct-image unit transpose to the
 explicit pasted underived counits.
-Source: Stacks Project, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-sc-derived-pullback-composition-counit-normalization).
-
-Proof: Apply the pinned Hom formula at the underived counit for f ≫ g; its
-adjunct is the identity by the right triangle identity. Thus L(fg) applied to β(fg),
-followed by the derived counit, is ε(fg) at (fg)_*K followed by the localized
-underived counit. Precompose with p. The defining left-derived lift factorization
-replaces p followed by ε(fg) by Lf(ε(g)), ε(f), and the localized tensor
-composition comparison. On a complex representative, the comparison is the inverse
-mate of pushforwardComp, so its composite with the (fg)-counit is the pasted
-g- and f-counits: apply conjugateEquiv_counit_symm degreewise, and use that
-pushforwardComp is the identity on sections. Descend through the homotopy quotient
-and apply localization. Naturality of ε(f) at the g-counit moves the localized
-g-counit inside Lf and gives the displayed formula. Identities, zero complexes and
-empty schemes use the same triangle and naturality equations. -/
+Source: Stacks Project, Tags 079W, 0D5S and 0D5T. -/
 theorem derivedPullbackComposition_counit_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 /-! # Data for tensor compatibility of degree-zero etale sheaves
 
 Source: Stacks Project, Cohomology, Tags 06YQ and 06YU.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   {X X' : AlgebraicGeometry.Scheme.{u}}
 
 /-- The canonical degree-zero derived pairing computed on a flat left factor.
-Source: Stacks Tag 06YQ; (auxiliary; not a blueprint node).
+Source: Stacks Tag 06YQ;.
 This explicit result type uses the same derived tensor bifunctor as its consumers. -/
 @[irreducible]
 noncomputable def singleFunctorFlatPairing
@@ -45,8 +44,7 @@ noncomputable def singleFunctorFlatPairing
     (DerivedCategory.singleFunctor _ 0).map f
 
 /-- Apply an ordinary pullback arrow after the canonical single/pullback comparison.
-Source: Stacks Tag 06YQ;
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 06YQ;.
 No resolution or inverse-image comparison is chosen here. -/
 noncomputable def singleFunctorPullbackMap (v : X' ⟶ X)
     {L : Sheaf X.smallEtaleTopology B} {L' : Sheaf X'.smallEtaleTopology B}
@@ -57,8 +55,7 @@ noncomputable def singleFunctorPullbackMap (v : X' ⟶ X)
     (DerivedCategory.singleFunctor _ 0).map f
 
 /-- The equations expressing the tensor compatibility of flat degree-zero models.
-Source: Stacks Tags 06YQ and 06YU;
-(auxiliary; not a blueprint node).
+Source: Stacks Tags 06YQ and 06YU;.
 The support sheaves and all ordinary multiplication or support maps are arbitrary inputs. -/
 structure EtaleFlatSingleTensorCompatibility (v : X' ⟶ X)
     [(upperStar B v).PreservesFlat] : Prop where

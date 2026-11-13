@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Coherent comparison data for affine complex models
-Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula.
-(blueprint: def-pc-affine-model-comparison-data). -/
+Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula. -/
 
 @[expose] public section
 universe u w
@@ -26,8 +25,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 Its data are the derived equivalences, the four families of object isomorphisms,
 and the two sheafified-chain-map compatibility equations written below. This is
 notation for that formula, not data chosen from an existence theorem.
-Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula.
-(blueprint: def-pc-affine-model-comparison-data). -/
+Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula. -/
 @[irreducible]
 def affineModelComparisonData
     {I : Type u} [Preorder I]

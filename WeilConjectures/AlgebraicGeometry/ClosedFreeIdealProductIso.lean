@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Closed finite free ideal-product comparison
 
 Source: Stacks Project, Tag 01QY, the affine quotient description of closed pushforward.
-(blueprint: lem-pc-g1-closed-free-ideal-product-iso)
 -/
 
 @[expose] public section
@@ -29,25 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 -- Coproduct and tensor comparison elaboration requires additional heartbeats.
 /-- An ambient ideal times a closed finite free source is the pushforward of the
 finite sum of its extended ideal, compatibly with the inclusions.
-Source: Stacks Project, Tag 01QY, affine quotient calculation, applied coordinatewise.
-(blueprint: lem-pc-g1-closed-free-ideal-product-iso)
-
-Proof: On an affine V = Spec A of X the closed inverse image is Spec B, with
-B = A/L. Write J = K(V). The extended ideal has sections J B = image(J -> B).
-The finite free source has sections B^r; multiplication J tensor_A B^r -> B^r
-has image (J B)^r, with coordinatewise inclusion. Thus both displayed sources,
-with their monic arrows into the same closed free module, are the same subobject
-on every affine open. The identifications commute with localization, because
-extension of ideals and finite sums commute with localization. Their unique local
-lifts through the monic inclusions consequently agree on overlaps and glue to
-inverse global morphisms. Their composite with the ambient product inclusion is
-exactly the pushforward of the coordinate inclusions. This proves the equation
-as well as the isomorphism. Alternatively distribute the ambient ideal product
-and the closed pushforward over the finite sum, then apply the rank-one closed
-structure ideal-product isomorphism to every coordinate. No Noetherianity, open,
-target, or local morphism is used. For r = 0 both sources are zero; for the zero
-ideal both products are zero; for the unit ideal both inclusions are invertible.
-The empty closed subscheme gives zero sources as well. -/
+Source: Stacks Project, Tag 01QY, affine quotient calculation, applied coordinatewise. -/
 theorem closed_free_ideal_product_iso
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (K : X.IdealSheafData) (r : ℕ) :

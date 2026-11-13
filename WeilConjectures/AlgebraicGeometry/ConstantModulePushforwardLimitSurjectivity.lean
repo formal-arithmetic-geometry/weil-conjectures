@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 /-! # Surjectivity of the constant-module continuity comparison
 
 Source: Stacks Project, Tag 09Z1, degree zero.
-(blueprint: lem-weil-pbc-constant-module-pushforward-limit-surjectivity).
 -/
 
 @[expose] public section
@@ -34,45 +33,7 @@ maps and comparison components; they do not assume a colimit property.
 Only surjectivity is asserted, not the complementary injectivity assertion.
 
 Source: Stacks Project, Tag 09Z1, degree-zero continuity and its canonical maps;
-Tag 09Z6, finite approximation paragraph.
-(blueprint: lem-weil-pbc-constant-module-pushforward-limit-surjectivity).
-
-Proof:
-1. Reindex the opposite of the small cofiltered category by a final functor from
-   a nonempty directed partial order (Tag 0032). Its opposite is initial, so the
-   restricted scheme cone is limiting. Affineness and qcqs are preserved. Finality
-   identifies the colimits of the restricted and original pushforward diagrams.
-2. Pull each constant sheaf back to the limit. The constant-sheaf pullback
-   comparison identifies it with the same constant sheaf on the limit. The
-   identity and composition equations for pullback, including the adjunction
-   units, show that transitions become identities. The colimit on the limit is
-   the constant sheaf, since the directed category is nonempty and connected.
-3. Forget coefficients to abelian sheaves. Constant-sheaf pullback comparisons
-   and pushforward commute with this forgetful functor. Apply Tag 09Z1 in degree
-   zero: left exactness identifies R^0 of pushforward with ordinary pushforward.
-   Under this identification, the higher-direct-image comparison components
-   are the adjunction unit, constant-sheaf pullback comparison, and direct-image
-   composition comparison. Thus `hK` and `hι` identify the supplied diagrams
-   and cocone with the canonical continuity comparison.
-4. Use only the surjectivity part of degree-zero continuity. A section on
-   an affine etale test object at the limit descends to some stage. Its image
-   in the filtered colimit is a preimage under the comparison. For an
-   arbitrary etale test object, cover by affine etale objects and do this
-   locally. Local lifting of sections makes the abelian comparison epic;
-   global lifting on arbitrary test objects is not required.
-5. Forgetting coefficients preserves filtered colimits: sheafify the sectionwise
-   filtered module colimit, whose underlying group is the filtered group colimit;
-   the underlying abelian sheaf of module sheafification is abelian
-   sheafification. Thus the underlying comparison is the abelian comparison of
-   step 4. The forgetful functor is faithful, so it reflects
-   epimorphisms by cancellation of any two maps. Hence the module comparison
-   is epic. This argument does not need eventual equality of representatives.
-6. Transfer along the final reindexing and the isomorphisms `eK` and `e`.
-   Composition with these isomorphisms preserves surjectivity.
-
-Edge cases: a singleton diagram has invertible comparison; for the zero module
-or an empty limit scheme the same continuity argument applies. Cofilteredness
-excludes an empty index. No finite generation of the ring or module is used. -/
+Tag 09Z6, finite approximation paragraph. -/
 theorem epi_constantModulePushforwardComparison
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

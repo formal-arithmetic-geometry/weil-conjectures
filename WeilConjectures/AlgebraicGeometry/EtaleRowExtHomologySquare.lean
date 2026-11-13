@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.ExtCoefficientCocycle
 /-! # Ext coefficient naturality before sections evaluation
 
 Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9/01FA), and 08J6.
-(blueprint: lem-weil-pbc-row-ext-homology-square).
 -/
 
 @[expose] public section
@@ -116,26 +115,7 @@ private theorem ext_homComplex_naturality
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Pullback and the coefficient map on Ext are computed on the unevaluated Hom complex.
-Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9/01FA), and 08J6.
-(blueprint: lem-weil-pbc-row-ext-homology-square).
-
-Proof. Put L = f inverse image and let α be the inverse constant-integer-sheaf
-comparison. Represent an Ext class by a cohomology class using the resolution
-R, then by a cocycle, then by a single cocycle a in degree p. The chain-map
-identity for ψ and L's additivity imply that α;L(a);ψ in degree p is a cocycle.
-The augmentation equality yields Homotopy.ofEq hψ. Apply
-InjectiveResolution.ext_mapExactFunctor_coefficient_cocycle to these two cocycles:
-the target Ext class is precomposition by α, exact-functor pullback of the source
-class, and postcomposition by v. On short complexes, the left homology map data
-commute with both the inclusion of cocycles and the quotient projection. Hence
-the Hom-complex homology map sends the class of a to the class of α;L(a);ψ.
-Surjectivity of CohomologyClass.mk and Cocycle.fromSingleMk makes this calculation
-apply to every Ext class. The definition of homPullbackMap is exactly the displayed
-cochain calculation. Rewrite Sheaf.H.map_apply and cohomologyMap_apply and use
-extensionality of abelian-group morphisms to obtain the square. This statement
-has no sections functor or evaluation map, so it does not include the separate
-component evaluation square. Degree zero, zero coefficients, zero sheaves, and
-empty schemes use the same cocycle and quotient formulas. -/
+Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9/01FA), and 08J6. -/
 theorem ceExtHomologySquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})

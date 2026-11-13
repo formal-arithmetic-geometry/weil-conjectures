@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Lemma 087X, claims (a)--(b), via the affine
 Artin--Rees argument. The proof is deferred to the corresponding DAG node.
-(blueprint: lem-weil-pbc-formal-kernel-stabilized-aux).
 -/
 theorem coherentFormalModule_kernel_stabilized_aux {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) :

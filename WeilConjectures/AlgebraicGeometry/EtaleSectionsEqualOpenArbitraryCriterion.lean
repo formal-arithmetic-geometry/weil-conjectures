@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Agreement-open criteria for arbitrary scheme maps
-Source: Stacks Project, Tag 09XM, and Tag 03S2.
-(blueprint: lem-weil-pbc-etale-sections-equal-open-arbitrary-criterion). -/
+Source: Stacks Project, Tag 09XM, and Tag 03S2. -/
 
 @[expose] public section
 
@@ -115,16 +114,7 @@ private theorem range_iff_factors {X T : Scheme.{u}} (E : X.Opens) (a : T ⟶ X)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XM, and Tag 03S2.
-(blueprint: lem-weil-pbc-etale-sections-equal-open-arbitrary-criterion).
-
-Proof: Choose the canonical agreement open W with its arbitrary-map criterion.
-For an étale test map, the inverse-image restriction isomorphism and unit
-naturality identify canonical restriction equality with ordinary restriction
-equality. Thus W and E satisfy the same ordinary criterion. Test the open
-immersions of E and W to get both inclusions, so E = W. Replace factorization
-through this open by range containment using the open-immersion lift.
-This works for empty schemes and for identical sections. -/
+/-- Source: Stacks Project, Tag 09XM, and Tag 03S2. -/
 theorem etaleSections_equal_open_arbitrary_criterion
     (S : Scheme.{u}) (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
     (Q : S.Etale) (s t : F.obj.obj (op Q)) (E : Q.left.Opens)

@@ -37,17 +37,7 @@ private theorem transported_unit
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The levelwise extension unit agrees with the specified derived extension unit.
-Source: Bhatt--Scholze, Lemma 6.8.2; exact-functor derived adjunction compatibility.
-(auxiliary; not a blueprint node).
-
-Proof. Exactness gives the adjunction on levelwise derived functors. On the image
-of C in the homotopy category its unit factors through the two exact-functor
-comparison isomorphisms as the quotient image of the complex adjunction unit.
-The natural isomorphism quotient ⋙ Qh ≅ Q transports this equation to Q(C).
-Finally, uniqueness of left adjoints to the same exact restriction identifies
-the levelwise left adjoint with the specified left derived extension, compatibly
-with their units. Compose these comparisons to obtain the asserted isomorphism.
-No colimit, bound, constructibility or pushforward occurs in this compatibility. -/
+Source: Bhatt--Scholze, Lemma 6.8.2; exact-functor derived adjunction compatibility. -/
 theorem integralScalar_derivedUnit_complex (X : Scheme.{u})
     (C : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X)) ℤ) :

@@ -13,7 +13,6 @@ public import WeilConjectures.SixFunctors.EtaleLocallyClosedGraphModel
 
 Source: Stacks Project, Tags 0F7B--0F7F; the explicit graph formula in
 `EtaleLocallyClosedGraphModel.lean`.
-(auxiliary; not a blueprint node).
 
 These definitions are moved unchanged from `EtaleGraphComparisonBaseChange` so that
 individual coherence lemmas can refer to the same maps without an import cycle.
@@ -31,8 +30,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- A supplied presentation `f = p e a`, with proper outer factors and open middle factor.
-Source: the presentations in the product-graph argument, Stacks Tags 0F7C--0F7F
-(auxiliary; not a blueprint node). -/
+Source: the presentations in the product-graph argument, Stacks Tags 0F7C--0F7F. -/
 structure EtaleGraphPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) where
   U : Scheme.{u}
   P : Scheme.{u}
@@ -48,8 +46,7 @@ attribute [instance] EtaleGraphPresentation.properA EtaleGraphPresentation.openE
   EtaleGraphPresentation.properP
 
 /-- An open-then-proper factorization is the presentation with identity first factor.
-Source: `LowerShriekComposition.lean`, graph-model source
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, graph-model source. -/
 def EtaleGraphPresentation.ofCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) : EtaleGraphPresentation f where
   U := X
@@ -60,8 +57,7 @@ def EtaleGraphPresentation.ofCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
   fac := by simpa using c.comm.symm
 
 /-- The actual ordinary unbounded functor `Rp_* De_! Ra_*` attached to a presentation.
-Source: `LowerShriekComposition.lean`, target of the graph comparison
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, target of the graph comparison. -/
 def EtaleGraphPresentation.functor (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f) :
     DerivedCategoryModule A X ⥤ DerivedCategoryModule A Y :=
@@ -69,8 +65,7 @@ def EtaleGraphPresentation.functor (A : Type (u + 1)) [CommRing A]
     R((t.p)_*[ModuleCat.{u + 1} A])
 
 /-- Remove the identity proper direct image in an open-then-proper presentation.
-Source: `LowerShriekComposition.lean`, `rightDerivedLowerStarIdIso`
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, `rightDerivedLowerStarIdIso`. -/
 def etaleGraphOpenNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (EtaleGraphPresentation.ofCompactification c).functor A ≅
@@ -79,8 +74,7 @@ def etaleGraphOpenNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The specified `B_{t,c}`: use the graph theorem only for its properness proofs and
 then evaluate its explicit `B₁`, intersection `B₁₂`, and inverse `B₂` composite. No
-endpoint isomorphism is chosen. Source: `EtaleLocallyClosedGraphModel.lean`, graph formula
-(auxiliary; not a blueprint node). -/
+endpoint isomorphism is chosen. Source: `EtaleLocallyClosedGraphModel.lean`, graph formula. -/
 def etaleGraphComparisonFromOpen (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (t : EtaleGraphPresentation f) :
@@ -93,16 +87,14 @@ def etaleGraphComparisonFromOpen (A : Type (u + 1)) [CommRing A] [Finite A]
     ((Category.assoc t.a t.e t.p).trans (t.fac.trans c.comm)) A
 
 /-- `C_{t,s} = B_{t,c} B_{s,c}^{-1}`, retaining the auxiliary compactification explicitly
-until the independence theorem. Source: Stacks Tags 0F7C--0F7D, product/intersection argument
-(auxiliary; not a blueprint node). -/
+until the independence theorem. Source: Stacks Tags 0F7C--0F7D, product/intersection argument. -/
 def etaleGraphComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (s t : EtaleGraphPresentation f) : s.functor A ≅ t.functor A :=
   (etaleGraphComparisonFromOpen A c s).symm ≪≫ etaleGraphComparisonFromOpen A c t
 
 /-- Cartesian representatives of the three pulled-back factors of a presentation.
-The maps `v` and `b` are the source and base projections. Source: Stacks Tag 0F7F
-(auxiliary; not a blueprint node). -/
+The maps `v` and `b` are the source and base projections. Source: Stacks Tag 0F7F. -/
 structure EtaleGraphPresentation.BaseChange
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (t : EtaleGraphPresentation f) (t' : EtaleGraphPresentation f')
@@ -114,8 +106,7 @@ structure EtaleGraphPresentation.BaseChange
   pSquare : IsPullback w t'.p t.p b
 
 /-- The Cartesian representatives for the base change of an open-then-proper presentation.
-Source: `Compactification.BaseChange`, the two constituent pullback squares
-(auxiliary; not a blueprint node). -/
+Source: `Compactification.BaseChange`, the two constituent pullback squares. -/
 def EtaleGraphPresentation.ofCompactificationBaseChange
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {v : X' ⟶ X} {b : Y' ⟶ Y} (c : Compactification f) (sq : IsPullback v f' f b) :
@@ -129,8 +120,7 @@ def EtaleGraphPresentation.ofCompactificationBaseChange
 
 /-- The actual successive canonical exchanges `chi_t`: proper exchange for `p`, inverse
 of the unit-normalized open mate for `e`, then proper exchange for `a`, with associators.
-Source: Stacks Tag 0F7F; `exactDerivedBaseChangeMap` and the termwise open-unit mate
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0F7F; `exactDerivedBaseChangeMap` and the termwise open-unit mate. -/
 def etaleGraphPresentationExchange (A : Type (u + 1)) [CommRing A]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {t : EtaleGraphPresentation f} {t' : EtaleGraphPresentation f'}

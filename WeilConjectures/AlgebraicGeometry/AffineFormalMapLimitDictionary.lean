@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 /-! # Affine formal maps and inverse limits of sections
 
 Source: Stacks Project, Tags 087W, 00MA and 0889(1).
-(blueprint: lem-weil-pbc-affine-formal-map-limit-dictionary).
 -/
 
 @[expose] public section
@@ -72,31 +71,7 @@ and identifies that map with the actual inverse limit of its section maps.
 No torsion hypothesis or annihilator conclusion is involved.
 
 Source: Stacks Project, Tags 087W, 00MA and 0889(1), affine comparison before
-applying Remark 0888.
-(blueprint: lem-weil-pbc-affine-formal-map-limit-dictionary).
-
-Proof:
-1. Coherence makes the top sections of H finite. Restrict epsilon to Spec A, use
-   the tilde unit and the natural affine section comparison to identify P with
-   those sections. Hence P is finite over A and B = S tensor P is finite over S.
-2. Use the affine equivalence E from finite S-modules to coherent formal systems,
-   with its quotient-system comparison beta and section-limit comparison gamma.
-   Put Q = E.inverse(N) and let c : E(Q) isomorphic to N be the counit. Put
-   t = beta(B), followed by eta inverse and completion(epsilon). Lift t to the
-   coherent formal subcategory. Fullness gives psi : Q -> B whose image is
-   c.hom followed by delta and t inverse. Its underlying S-linear map is phi.
-   Set rho = c inverse followed by beta(Q). Naturality of beta and cancellation
-   of the counit and t give the displayed factorization.
-3. Define a as gamma(Q) followed by lim sections c, and b as gamma(B) followed by
-   lim sections t. These composites are A-linear equivalences. Naturality of
-   gamma for psi, followed by lim sections t, gives the commuting square, since
-   E(psi) followed by t equals c followed by delta. Evaluate this equality of
-   ModuleCat morphisms at x. The construction uses the given eta without changing it.
-These constructions use finite-module completeness over the Noetherian completed
-ring. For I=0 the quotient systems are constant, and for I=A all formal modules
-and limits are zero. Thus the same comparisons apply to these cases and to the
-zero ring. No data definition chooses a witness from this existence theorem.
--/
+applying Remark 0888. -/
 theorem affine_formal_map_limit_dictionary
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

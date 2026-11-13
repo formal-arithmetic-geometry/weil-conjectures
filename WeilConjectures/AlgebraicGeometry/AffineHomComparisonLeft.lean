@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineHomComparisonGeneratorExte
 
 /-! # Contravariant naturality of the affine Hom comparison
 
-Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ.
-(blueprint: lem-sc-k4-affine-hom-comparison-left). -/
+Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ. -/
 
 @[expose] public section
 
@@ -21,17 +20,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Generator normalization implies this affine comparison property.
-Source: Stacks Project, Tag 01HV (4)-(5).
-(blueprint: lem-sc-k4-affine-hom-comparison-left).
-
-Proof: Precompose the desired equation with each global generator h of
-Hom_A(M,N). Generator normalization and functoriality identify its two sides
-with the section corresponding to T(f ≫ h). The internal-Hom section
-correspondence respects composition. Maps from an associated module are
-jointly detected by their global generators: apply the chart's tilde
-adjunction and evaluate the adjoint linear maps at every element. This
-proves the equation for arbitrary modules, including zero modules and the
-zero ring. -/
+Source: Stacks Project, Tag 01HV (4)-(5). -/
 theorem affineHomComparison_chart_left {Y : Scheme.{u}} (U : Y.affineOpens)
     :
     ∀ (M M' N : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (f : M' ⟶ M),

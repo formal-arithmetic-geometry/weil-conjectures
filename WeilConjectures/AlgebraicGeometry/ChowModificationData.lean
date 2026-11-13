@@ -33,24 +33,7 @@ namespace AlgebraicGeometry
 and a nonempty open of the target over which it is an isomorphism.
 
 Source: Stacks Project, Theorem 088E, Chow modification paragraph, using Chow's lemma
-0200 and the reduced complement construction.
-(blueprint: new-chow-modification-data).
-
-Proof: Apply ChowModification.nonempty_data to f over the Noetherian scheme Spec A.
-Extract its source Y, proper surjective map q, finite coordinate type N, immersion
-into ProjectiveSpace N (Spec A), equation over Spec A, and dense open U on which the
-restriction of q is an isomorphism. Since Z is nonempty and q is surjective, Y is
-nonempty. Projective space with an empty coordinate type is empty, so N is nonempty.
-Choose a finite enumeration N ≃ ULift (Fin (n + 1)), with n one less than its positive
-cardinality. Renaming homogeneous variables induces an isomorphism of projective spaces
-over Spec A. Compose the extracted immersion with this isomorphism to obtain e;
-composition preserves immersion and the equation over Spec A.
-Take L to be the vanishing ideal of the reduced closed complement of U. The reduced
-complement theorem identifies its support with that complement, hence L.support.compl
-with U. Density of U and nonemptiness of Z imply U is nonempty. Finally the canonical
-isomorphism from the pullback along U.ι to the restricted source identifies pullback.snd
-with q restricted to U. Transport the restriction isomorphism along this identification
-and the equality U = L.support.compl. These constructions supply all asserted data. -/
+0200 and the reduced complement construction. -/
 theorem exists_chow_modification_data
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))

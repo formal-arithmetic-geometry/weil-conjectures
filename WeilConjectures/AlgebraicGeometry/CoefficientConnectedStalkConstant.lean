@@ -41,8 +41,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact constant realization followed by actual slice restriction for any coefficient
-ring. Source: Stacks Tag 093J.
-(auxiliary; not a blueprint node). -/
+ring. Source: Stacks Tag 093J. -/
 def coefficientSliceConstant (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     (U : coefficientProEtaleSiteModel.{u, v} X) :=
@@ -212,29 +211,7 @@ geometric stalk. On an affine weakly contractible object mapping into the connec
 component of that point, its comparison pullback is the constant realization of
 that specified stalk. This assertion concerns one complex over one ring.
 Source: Stacks Project, Etale Cohomology, Tag 09BI; Pro-etale Cohomology, Tag 09C6,
-first paragraph; Sites, Tag 090K.
-(auxiliary; not a blueprint node).
-
-Proof: the component of z is open in the locally Noetherian scheme. Restrict the
-complex to this nonempty connected open. Constant-scalar restriction and the AsSmall
-site equivalence identify the input with a bounded etale complex with finite locally
-constant cohomology; they preserve tensor, cohomology and the Tor interval. The
-connected perfect-constancy argument applies: bounded locally constant finite
-cohomology gives local bounded finite-module complex models. Exact stalks identify
-the models on intersecting images. Those images are open, and connectedness gives
-one isomorphism class, represented by the stalk at the algebraic closure of the
-residue field of z. Finite constant charts give finite stalk cohomology. The coefficient
-Tor-amplitude criterion supplies a bounded flat representative of K. Taking the exact
-stalk termwise preserves both its bounds and flatness. A bounded flat complex with
-finite cohomology over a Noetherian ring is perfect. Pull the etale constant-model
-cover to the given pro-etale object. Weak contractibility splits its covering
-surjection; after a disjoint clopen refinement the constant models glue, and pulling
-along the section gives constancy on the object. Weakly etale localization identifies
-its small pro-etale site with the actual slice. Transport back through the exact
-fixed-scalar and AsSmall equivalences; their constant comparisons give exactly the
-functors in the conclusion. The image hypothesis provides the factorization through
-the component open. An empty test object is harmless, since its slice sheaf category
-is trivial. No tower, complete coefficient ring, or compatible markings are used. -/
+first paragraph; Sites, Tag 090K. -/
 theorem coefficient_connected_stalk_constant
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

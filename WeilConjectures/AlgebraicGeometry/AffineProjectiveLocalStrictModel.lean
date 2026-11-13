@@ -22,20 +22,7 @@ namespace AlgebraicGeometry
 
 /-- Termwise tilde of a bounded finite-projective complex admits strictly perfect models
 on the localized sites of all points.
-Source: Stacks Project, perfect.tex, Lemma perfect-lemma-perfect-affine (Tag 08EB).
-(blueprint: lem-pc-affine-projective-local-strict-model)
-
-Proof: A finite projective module is a retract of a finite free module. Apply the additive
-associated-sheaf functor to the splitting maps; its preservation of identities and
-composition preserves the retract equation. The associated sheaf of a finite free module
-is the corresponding finite free structure-sheaf module, and restriction to the localized
-site preserves this finite free module and its splitting. Apply this to every term of P.
-Use the whole scheme as the open neighborhood of each point, and take the termwise
-restriction of tilde(P) as K. The same bound holds since additive functors preserve zero
-objects. The comparison between derived restriction and ordinary restriction on complexes
-identifies the restriction of Q(tilde(P)) with Q(K); restriction is exact. This proves
-strict perfectness without any derived-object isomorphism transport. Empty spectra have
-no points, and zero complexes give the zero strictly perfect model. -/
+Source: Stacks Project, perfect.tex, Lemma perfect-lemma-perfect-affine (Tag 08EB). -/
 theorem affine_projective_local_strict_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{w} (SheafOfModules.{u}
       (moduleRings (Spec (.of A)).toRingedSpace))]

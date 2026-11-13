@@ -26,7 +26,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 Source: Stacks Project, Tag 01YF, irreducible-support ideal-power paragraph,
 using Tags 01Y9 and 01J3.
-(blueprint: lem-pc-s3-coherent-support-adic-chain)
 -/
 
 @[expose] public section
@@ -174,25 +173,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A finite coherent adic chain with generic-residue-field successive quotients.
 
 Source: Stacks Project, Tag 01YF, irreducible-support ideal-power paragraph,
-using Tags 01Y9 and 01J3 (https://stacks.math.columbia.edu/tag/01YF).
-(blueprint: lem-pc-s3-coherent-support-adic-chain)
-
-Proof: construct the vanishing ideal J of the reduced induced closed subscheme T.
-The nilpotence lemma gives n with J^n F zero. Put P(t) equal to the image J^t F,
-including the zero power. Its image inclusion b(0) is an isomorphism onto F.
-Define the returned chain by Q(0) = F and Q(k+1) = P(k), with terminal index n+1.
-The first quotient is the zero cokernel of b(0); later quotients are the cokernels
-of the monic inclusions P(t+1) into P(t). No condition is required beyond n+1.
-Quasi-coherence of ideal powers, products and cokernels, together with coherent
-submodule and cokernel closure, gives coherence. Stalk exactness gives support
-containment for the quotients. The stalk of J at the generic point is the maximal
-ideal: a nonunit germ has a representative whose basic open omits the generic
-point and therefore all its specializations in T. The stalk ranges of the products
-are J_xi^t F_xi. Multiplying a lifted quotient germ by J_xi places its image in
-J_xi^(t+1) F_xi; injectivity of b(t) identifies it with a lift from P(t+1), and the
-cokernel projection kills it. At n = 0 the same construction has just the initial
-isomorphism and its zero quotient.
-This statement constructs only the chain; it asserts no integral filtration. -/
+using Tags 01Y9 and 01J3 (https://stacks.math.columbia.edu/tag/01YF). -/
 theorem coherent_support_adic_chain
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

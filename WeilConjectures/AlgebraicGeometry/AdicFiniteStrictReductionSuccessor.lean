@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Normalization of the strict finite reduction tower
 
-Source: Stacks Project, Tags 06YY and 099M
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 06YY and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ attribute [local irreducible] derivedExtension DerivedCategory.Q HasDerivedCateg
   dres change
 
 /-- Termwise evaluation commutes with the two ordinary scalar functors.
-Source: Stacks Tag 06YY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 def adicFiniteStrictReductionEvaluationIso
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A)) (n : ℕ) :
@@ -43,8 +41,7 @@ def adicFiniteStrictReductionEvaluationIso
 
 /-- The levelwise scalar comparison, constructed from universal K-flat computation
 and exact restriction; its direction is from the derived reduction to the strict model.
-Source: Stacks Tag 06YY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 06YY. -/
 def adicFiniteStrictReductionLevel
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))
@@ -150,21 +147,7 @@ end Proofs
 attribute [local semireducible] extend
 
 /-- The normalized derived tensor unit and balancing give the actual quotient successor.
-Source: Stacks Tags 06YY and 099M
-(auxiliary; not a blueprint node).
-
-Proof: compute the scalar unit on the K-flat complex obtained by extending P to the
-larger quotient; this is K-flat by flat scalar base change. Use adicFiniteUnitFormula
-and adicFiniteExtendCompFormula. The exact restriction composition comparison commutes
-with localization by its definition using mapDerivedCategoryCompIso. After composing
-with the invertible level comparisons, the resulting equality is the localization
-of an equality of ordinary chain maps. In each degree use the faithful underlying
-module functor and the scalar tensor adjunction, or check pure tensors: the unit sends
-s tensor p to 1 tensor (s tensor p), balancing sends this to the quotient of s tensor p,
-and restriction composition acts by identity. The unique normalization of reductionStep
-is precisely this formula, so the chain maps agree in each degree. Naturality of all
-three scalar comparisons transports the equality along e. The calculation remains
-valid for zero ideals, unit ideals, zero complexes, and empty schemes. -/
+Source: Stacks Tags 06YY and 099M. -/
 theorem adicFiniteStrictReduction_successor
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))

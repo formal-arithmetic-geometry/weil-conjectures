@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGeneration
 /-! # Isomorphisms detected by affine pullbacks of perfect complexes
 
 Source: Stacks Project, Tag 0AA8, first proof paragraph, and Tag 0BQT.
-(blueprint: lem-sc-affine-pullback-perfect-detects-iso).
 -/
 
 @[expose] public section
@@ -30,17 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace AlgebraicGeometry
 
 /-- Affine pullbacks of perfect complexes detect isomorphisms between quasi-coherent
-complexes. Source: Stacks Project, Tag 0AA8, first proof paragraph, and Tag 0BQT.
-(blueprint: lem-sc-affine-pullback-perfect-detects-iso).
-
-Proof: Choose a perfect generator P on X and pull it back along g. Complete the
-underlying morphism to a distinguished triangle. Its cone has quasi-coherent cohomology.
-For every shift of the pulled-back generator, injectivity of Hom into the given
-map shifted by one kills the composite into the shifted first term of the triangle.
-Exactness and surjectivity at shift zero make each map into the cone factor through
-the first triangle arrow and then vanish. The generator
-criterion makes the cone zero. The distinguished triangle then makes the morphism
-invertible; the fully faithful inclusion reflects this isomorphism. -/
+complexes. Source: Stacks Project, Tag 0AA8, first proof paragraph, and Tag 0BQT. -/
 theorem affinePullbackPerfect_detects_iso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
 /-! # Cohomology of derived affine sections
 
 Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
-(blueprint: lem-pc-affine-derived-sections-homology-comparison).
 -/
 
 @[expose] public section
@@ -26,20 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Derived affine sections commute naturally with cohomology on D_QCoh.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, cohomology calculation.
-(blueprint: lem-pc-affine-derived-sections-homology-comparison).
-
-Proof: Global sections is right adjoint to tilde, so preserves products. Scalar
-transport through ΓSpecIso is exact and preserves products. Affine vanishing gives
-the uniform bound N = 1 on quasi-coherent modules; the exact conservative forgetful
-functor to abelian groups detects the resulting cohomology isomorphisms. For each
-shift of K, apply the unbounded cohomological bound to its strictly negative
-truncation. Derived sections of that truncation vanish in degrees zero and one.
-The truncation triangle thus identifies degree-zero derived sections of K with
-those of its nonnegative truncation. Left exactness identifies the latter with
-ordinary sections of H^0(K). All truncation maps are natural, so shifting gives
-a natural isomorphism in every degree. Transport along hG to obtain the displayed
-comparison. No boundedness hypothesis or nonzero-ring hypothesis is needed. -/
+Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, cohomology calculation. -/
 theorem affineDerivedSections_homology_comparison (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

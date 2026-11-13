@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelIntersectionFiniteType
 /-! # Finite local kernel generators from an open cover
 
 Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF.
-(blueprint: lem-weil-pbc-coherent-kernel-condition-descent-local-generators).
 -/
 
 @[expose] public section
@@ -75,8 +74,7 @@ and transports finite generators across the resulting restriction isomorphisms.
 The cover equality supplies, for every point, a member and a neighbourhood on which
 these generators apply; assembling those neighbourhoods is the required local
 generators datum.  This is the gluing step in the proof of finite-type descent.
-Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF.
-(blueprint: lem-weil-pbc-coherent-kernel-condition-descent-local-generators). -/
+Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF. -/
 theorem coherent_kernel_condition_local_generators
     (X : Scheme.{u}) (F : X.Modules)
     (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
 /-! # Direct sums in the quasi-coherent derived category
 
 Source: literature/stacks-project/derived-categories-of-schemes.tex,
-  Lemma perfect-lemma-quasi-coherence-direct-sums
-(blueprint: lem-pc-derived-qcoh-direct-sums).
+  Lemma perfect-lemma-quasi-coherence-direct-sums.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 /-- For every scheme `X`, the derived category of `𝒪_X`-modules whose cohomology
 sheaves are quasi-coherent has all set-indexed direct sums.
 Source: literature/stacks-project/derived-categories-of-schemes.tex,
-  Lemma perfect-lemma-quasi-coherence-direct-sums
-(blueprint: lem-pc-derived-qcoh-direct-sums). The proof proceeds as follows. First,
+  Lemma perfect-lemma-quasi-coherence-direct-sums. The proof proceeds as follows. First,
 by `lem-pc-derived-ambient-direct-sums`, the ambient derived category has
 set-indexed coproducts represented by termwise sums, with cohomology the direct
 sum of the cohomologies in each degree. Second, for a family of quasi-coherent

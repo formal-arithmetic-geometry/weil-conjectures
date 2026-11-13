@@ -19,7 +19,6 @@ import Mathlib.Data.Finset.Order
 /-! # Descent of bounded finitely presented module families
 
 Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (1).
-(blueprint: lem-pc-bounded-graded-family-descent)
 -/
 
 @[expose] public section
@@ -102,20 +101,7 @@ private theorem familyLimit_isZero
   exact Functor.map_isZero _ hM
 
 /-- Descent of bounded finitely presented module families.
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (1).
-(blueprint: lem-pc-bounded-graded-family-descent)
-
-Proof: For each n in the finite integer interval [a,b], apply the object clause of
-finitePresentation_module_map_descent to M n. Directedness gives a stage j above i and
-all the finitely many stages obtained. Pull each model to j. Tensor pullback preserves
-finite presentation, hence quasicoherence, and its composition isomorphism identifies
-the limit pullback with M n. Define F n to be that pullback when n lies in [a,b] and
-the zero module otherwise. The zero module is finitely presented and quasicoherent;
-its tensor pullback is zero because tensor pullback is a left adjoint. For n outside
-the interval, hM_zero identifies M n as zero too, and the unique isomorphism between
-zero objects completes the family comparison. If the interval is empty, the same
-construction uses a common stage above i and the zero family. The chosen index i
-ensures I is nonempty even in that case. -/
+Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (1). -/
 theorem bounded_graded_family_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 # Continuity of sections of étale sheaves of sets
 
 Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero argument via Tags 0EYL,
-04HR and 09YN; restriction along an étale morphism, Tag 03S2
-(blueprint: lem-weil-pbc-sets-etale-section-continuity).
+04HR and 09YN; restriction along an étale morphism, Tag 03S2.
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ maps `F(V)` to the global sections of the inverse image on `V`. Its inverse is t
 restriction identification in the last clause of continuity.
 
 Source: Stacks Project, Étale Cohomology, Tag 03S2, inverse image along an étale morphism
-is restriction (blueprint: lem-weil-pbc-sets-etale-section-continuity). -/
+is restriction. -/
 noncomputable def etaleSetRestrictionUnit
     {X : Scheme.{u}} (V : X.Etale) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     F.obj.obj (op V) ⟶
@@ -109,35 +108,7 @@ bijective. The final assertion says that the canonical unit/diagonal section map
 each étale projection is bijective, equivalently that restriction is its inverse.
 
 Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, degree zero for sets via
-Tags 0EYL, 04HR and 09YN, and restriction along étale morphisms, Tag 03S2
-(blueprint: lem-weil-pbc-sets-etale-section-continuity).
-
-Proof:
-1. First take `W₀` affine. Transitions and projections are affine by hypothesis and
-   lem-weil-pbc-limit-affine-transition. Use lem-weil-pbc-affine-etale-site-colimit
-   and lem-weil-pbc-affine-etale-site-topos to describe the limit affine étale site.
-   Transport the inverse images and units using
-   lem-weil-pbc-site-equivalence-sheaf-transport and
-   lem-weil-pbc-sets-affine-etale-inverse-image-comparison. Their transition maps are
-   isomorphisms with the cocycle law, so lem-weil-pbc-colimit-constant-connected-diagram
-   identifies their inverse-image colimit with the inverse image at the limit.
-2. Apply lem-weil-pbc-colimit-of-sites-sections to each affine descended object.
-   The unit compatibility of lem-weil-pbc-sets-affine-etale-inverse-image-comparison
-   and clauses (0) and (1) of lem-weil-pbc-sets-etale-inverse-image-composition-units
-   identify its components with `etaleSetSectionComparison`.
-3. For general `W₀`, use lem-weil-pbc-etale-qcqs-cofinal-finite-coverings to choose
-   a finite affine cover and finite affine refinements of all pairwise overlaps.
-   Their base changes remain affine and covering. Apply the affine result to all
-   these objects. By lem-weil-pbc-pretopology-sheaf-condition, sections are the finite
-   equalizer of the corresponding products of sections. Unit naturality makes all
-   comparisons commute with restriction. Then
-   lem-weil-pbc-filtered-colimits-commute-finite-limits gives the required bijection.
-4. The unit, composition and associativity clauses of
-   lem-weil-pbc-sets-etale-inverse-image-composition-units, together with fibre-product
-   pasting, give the identity and composition laws, hence `E` and the cocone `ν`.
-   Finally lem-weil-pbc-sets-etale-inverse-image-restriction identifies inverse image
-   along each étale projection with restriction, inverse to `etaleSetRestrictionUnit`.
--/
+Tags 0EYL, 04HR and 09YN, and restriction along étale morphisms, Tag 03S2. -/
 theorem etaleSetSectionContinuity
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

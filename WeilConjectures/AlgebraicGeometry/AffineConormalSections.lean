@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 # Affine sections of the conormal sheaf
 
 Source: Stacks Project, Morphisms, Definition 01R2 (definition-conormal-sheaf)
-and Lemma 01R3 (lemma-affine-conormal), assertion (2)
-(blueprint: lem-weil-pbc-affine-conormal-sections).
+and Lemma 01R3 (lemma-affine-conormal), assertion (2).
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ The equation on ideal sections pins the equivalence to the canonical map `a mod 
 Semilinearity along `r` expresses `R`-linearity in these coordinates. Since `(i.app U) ∘ r`
 is surjective with kernel `I`, the equivalence is also `R/I`-linear.
 
-Source: Stacks Project, Morphisms, Definition 01R2 and Lemma 01R3 (2)
-(blueprint: lem-weil-pbc-affine-conormal-sections).
+Source: Stacks Project, Morphisms, Definition 01R2 and Lemma 01R3 (2).
 Proof, following the node's five steps:
 1. By def-sbc-closed-immersion-ideal-sheaf and
    lem-weil-pbc-closed-immersion-affine-cover-criterion, the inverse image of `U` is affine,

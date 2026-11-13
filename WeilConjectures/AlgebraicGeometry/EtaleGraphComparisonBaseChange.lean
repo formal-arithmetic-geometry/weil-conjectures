@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EtalePairwiseProductGraphNormalization
 
 Source: Stacks Project, Tags 0F7C--0F7F; the product-graph formula in
 `LowerShriekComposition.lean`, lines 193--268, and the refinement formula in
-`LowerShriekIndependenceUnbounded.lean`
-(auxiliary; not a blueprint node).
+`LowerShriekIndependenceUnbounded.lean`.
 
 All maps below are constructed from the recorded graph model and canonical exchanges.
 The base-change clause is stated for arbitrary Cartesian representatives of the pulled-back
@@ -101,25 +100,7 @@ private theorem whiskered_quotient_exchange
 inverses), and common-refinement normalization of the specified graph comparisons.
 
 Source: Stacks Project, Tags 0F7C--0F7F; `LowerShriekComposition.lean`, lines 193--268;
-`LowerShriekIndependenceUnbounded.lean`, refinement comparison and common-refinement iso
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Apply the pairwise-product graph normalization for c and d. Its right side does
-   not mention either auxiliary compactification, giving independence.
-2. Change the auxiliary compactification to d. The diagonal graph normalization
-   identifies B(d,d) with the inverse open normalization. Substitution gives the
-   open-normalization clause.
-3. Identity and cocycle for a fixed c follow by cancelling adjacent inverse B maps.
-4. Put E_t = openNormalization(c);B(c,t). The single-graph base-change theorem gives
-   exchange compatibility for each E. Cancel the common open normalizations to write
-   C(s,t) = E_s^{-1};E_t. Compatibility is preserved by composition and inverse of
-   the E factors; only these isomorphisms are cancelled, never an exchange map.
-5. Factor C(s,t) through C(s,r);C(t,r)^{-1}. Open normalization and the one-refinement
-   normalization identify these factors with the two specified refinement maps.
-6. Specialize to Compactification.inf s t and unfold the named common-refinement iso.
-   QuasiCompact is used only for this last choice; all prior clauses retain the
-   arbitrary-scheme and unbounded hypotheses. -/
+`LowerShriekIndependenceUnbounded.lean`, refinement comparison and common-refinement iso. -/
 theorem etaleGraphComparisonBaseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

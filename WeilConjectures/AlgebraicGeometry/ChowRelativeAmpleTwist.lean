@@ -41,8 +41,7 @@ restrictions also give the witnesses `hV` and `hW`. The proof of ampleness is
 independent of these witnesses by proof irrelevance. Transporting these properties
 across the pullback
 isomorphism gives both quantified affine-open clauses.
-
-(blueprint: lem-pc-chow-relative-ample-twist) -/
+ -/
 theorem chow_relative_ample_twist (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

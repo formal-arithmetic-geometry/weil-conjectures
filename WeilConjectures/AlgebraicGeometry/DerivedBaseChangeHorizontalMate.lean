@@ -194,7 +194,6 @@ private theorem baseChange_eq
 
 /-- The mate calculation before the final relative composition comparison.
 Source: Stacks Project, Cohomology, Tags 08HY and 0D5S.
-(blueprint: new-lem-pc-derived-base-change-horizontal-mate).
 The proof expands each base-change map as the transpose of the corresponding
 counit, uses naturality and the triangle identity, and then applies associativity
 of the pinned pullback comparison. This is the intermediate mate identity used

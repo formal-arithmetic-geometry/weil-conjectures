@@ -180,7 +180,7 @@ Source: Stacks Project, Modules, Lemma 01BY, local lifting argument.
 An epimorphism of sheaves is locally surjective; pulling a local lift back along
 an object of the over-site gives the same local lift there. We apply the
 locally-surjective characterization of epimorphisms on the over-site, after
-pulling back the covering and lift. (blueprint: lem-stage3-epi-over-functor) -/
+pulling back the covering and lift. -/
 theorem epi_overFunctor_map
     {C : Type v} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}}

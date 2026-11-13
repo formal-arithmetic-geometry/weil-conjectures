@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.RingedKoszulCompletionReflector
 /-! # Residue-zero detection independent of quotient reconstruction
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1U; algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -145,28 +144,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A locally complete complex with zero residue extension is zero.
 
 Source: Stacks Project, more-algebra.tex, Tag 0G1U, lemma-derived-complete-zero-bis,
-and Tag 0G1T, lemma-derived-vanishing-mod-I; algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
-
-Proof: choose finitely many generators of J, whose completed sections generate the
-actual residue kernel on every slice by flat_and_quotients. The Koszul reflector
-formula represents a complete Q as the total derived inverse limit of the finite
-negative Koszul complexes tensored with Q. The homology sheaves of the Koszul
-complex at power m+1 are annihilated by a power of the residue ideal, since each
-generator to that power acts nullhomotopically. A module annihilated by the residue
-ideal has zero derived tensor with Q: scalar balancing identifies it with tensor
-of the zero residue extension of Q over the residue coefficient sheaf. Filter a
-module annihilated by a higher power by powers of the ideal and use its short
-exact sequences to obtain the same vanishing. The bounded Postnikov filtration
-of each finite Koszul complex therefore makes its derived tensor with Q zero.
-Consequently the strict Koszul tensor tower has zero image in its derived
-category: evaluation is exact and jointly detects acyclic complexes. Its total
-derived inverse limit is zero. The Koszul unit is invertible because Q is locally
-complete, so Q is zero. This proof uses the Koszul reflector, not reconstruction
-from the quotient tower or a mapping property of its unit. For the empty list the
-Koszul complex is the ring and the residue extension is the identity. For J=A the
-unit ideal contains one, so completeness itself forces Q to vanish. The zero ring
-and arbitrary unbounded Q are included. -/
+and Tag 0G1T, lemma-derived-vanishing-mod-I; algebraization.tex, Tag 0A0E. -/
 theorem adicResidue_isZero_of_complete_residue
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

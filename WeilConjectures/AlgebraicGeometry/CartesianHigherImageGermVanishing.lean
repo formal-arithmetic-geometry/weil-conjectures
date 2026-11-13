@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 This is the kernel criterion for relative higher-image continuity, independently
 of invertibility of any exchange map.
 Source: Stacks Project, Tag 0EYM, second proof, part (2).
-(blueprint: lem-sc-cartesian-higher-image-germ-vanishing)
 
 Proof: represent the stage germ on an affine etale stage neighbourhood. Pullback
 of sheaves and geometric stalks identify this representative with a germ on the
@@ -43,7 +42,7 @@ exchange and naturality of the presheaf comparison identify this restriction
 with cartesianHigherImageTransition. Cofilteredness supplies a common stage and
 handles parallel-arrow equalities; reindex by a directed set if necessary.
 No torsion or smoothness is used, and q=0 and zero sheaves are included. -/
-/-- (blueprint: lem-sc-cartesian-higher-image-germ-vanishing) -/
+/-- -/
 theorem exists_cartesianHigherImage_germ_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

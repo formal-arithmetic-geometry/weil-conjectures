@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 # Spectrum presentation of the base change of one affine chart
 
 Source: Stacks Project, Schemes, Tags 01JR and 01I4.
-(blueprint: lem-weil-pbc-affine-chart-base-change-iso).
 -/
 
 @[expose] public section
@@ -30,21 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 spectrum presentation of its inverse image under base change, with both projections fixed.
 
 Source: Stacks Project, Schemes, Tags 01JR (open fibre products) and 01I4
-(affine fibre products).
-(blueprint: lem-weil-pbc-affine-chart-base-change-iso).
-
-Proof: Form the pullback of Spec(B) and Spec(A) over Spec(R), and map it to
-Z ×[S] T using eB.inv followed by V.ι, e.inv followed by (t ⁻¹ᵁ W).ι,
-and e0.inv followed by W.ι. The two compatibility equations make this a map of
-pullback diagrams. All three vertical maps are open immersions; hence the induced
-map is an open immersion. Its image is the intersection of the inverse images of
-V and t⁻¹(W). Since V maps into W, the first inverse image is already contained
-in the second, by the pullback equation. Thus its image equals the inverse image
-of V. The open immersion is therefore isomorphic to that open subscheme.
-Compose this isomorphism with the symmetry of the affine fibre product and
-pullbackSpecIso R A B. The inverse has the stated projections by the defining
-projection equations of pullback.map and pullbackSpecIso. This works also when
-V or t⁻¹(W) is empty, since spectra and fibre products allow zero rings. -/
+(affine fibre products). -/
 theorem exists_affineChart_baseChangeIso
     {S Z : Scheme.{u}} (z : Z ⟶ S)
     (W : S.Opens) (V : Z.Opens) (eV : V ≤ z ⁻¹ᵁ W)

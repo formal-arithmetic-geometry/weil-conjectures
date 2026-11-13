@@ -18,7 +18,6 @@ import Mathlib.Tactic
 
 Source: Stacks, Tags 01GN and 01GS. In degree n the relative matching problem is
 extension from the two endpoint n-simplices and doubled proper faces to Δ[2n+1].
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ namespace AlgebraicGeometry.EtaleSimplicialMatching
 Source: Stacks, Tag 01GN. Glue the endpoint and proper-face families, extend across
 the finite simplex locally, and combine each extended simplex with the given simplex
 of U using the endpoint pullback. The generator equations identify all proper faces,
-and the matching universal property identifies the lifted matching datum.
-(auxiliary; not a blueprint node) -/
+and the matching universal property identifies the lifted matching datum. -/
 theorem locally_lift_ordinal_matching {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : SimplicialObject X.Etale}
     (a b : U ⟶ V) (hV : IsEtaleHypercover V) (n : ℕ) (T : X.Etale)
@@ -137,8 +135,7 @@ theorem locally_lift_ordinal_matching {X : Scheme.{u}}
 Source: Stacks, Tags 01GN and 01GS. Pull U's matching cover back to the matching
 scheme of the endpoint pullback. Over that surjective cover, the relative lifting
 lemma supplies an étale covering with lifts to its degree n. The covering criterion
-then gives surjectivity of the absolute matching arrow in every degree.
-(auxiliary; not a blueprint node) -/
+then gives surjectivity of the absolute matching arrow in every degree. -/
 theorem isEtaleHypercover_ordinalPathPullback {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : SimplicialObject X.Etale}
     (a b : U ⟶ V) (hU : IsEtaleHypercover U) (hV : IsEtaleHypercover V) :

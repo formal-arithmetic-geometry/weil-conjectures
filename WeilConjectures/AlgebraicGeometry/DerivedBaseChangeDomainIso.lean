@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
 and 20.28.2 (0D5T).
-(blueprint: lem-pc-derived-base-change-domain-iso).
 -/
 
 @[expose] public section
@@ -137,34 +136,7 @@ private theorem pullback_square_precomp
 
 /-- Replace the source of the base morphism by an isomorphic scheme.
 Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
-and 20.28.2 (0D5T).
-(blueprint: lem-pc-derived-base-change-domain-iso).
-
-Proof: Write Lk and Rk for the recorded derived pullback and direct image. Use the
-pullback comparisons c and identity comparisons i selected in
-exists_derivedPullbackComposition, and the adjunctions adj k pinned to these counits
-in schemeDerivedBaseChangeMap. The two comparisons c e.hom e.inv and c e.inv e.hom,
-composed with i, exhibit L(e.inv) as an equivalence. Hence the unit of its pinned
-adjunction adj e.inv is an isomorphism. Put fB = fprime followed by e.hom and
-T = R(e.inv). The isomorphism cf : L(e.inv) followed by LfB ≅ Lfprime is
-c fB e.inv followed by the equality fB e.inv = fprime. Conjugating cf under
-adj fprime and the composite of adj e.inv with adj fB gives b : Rfprime ≅ RfB T.
-Take a by applying Rf to the comparison Lg ≅ L(e.inv g) T obtained by inserting
-the unit of adj e.inv after Lg, then applying c e.inv g, and reassociating.
-For the square comparisons q and qB, associativity of c on fB, e.inv, g gives
-LfB of c e.inv g followed by qB = cf at Lg followed by q. The equality transports
-agree by naturality of c in fB e.inv = fprime and proof irrelevance.
-To prove the mate equation, the component of b is the Hom transpose, under the
-composite adjunction, of cf followed by the counit of adj fprime. Naturality of cf
-and of that Hom equivalence identify the original mate followed by b with the
-composite-adjunction transpose of cf followed by q and Lgprime of the counit of f.
-Substitute the square comparison identity. The Hom equivalence of a composite
-adjunction is the composite of the two Hom equivalences, so naturality under adj fB
-turns this into the Hom transpose, under adj e.inv, of c e.inv g followed by the
-new mate. Expanding that Hom transpose as the unit followed by T of the morphism
-gives exactly a followed by T of the new mate. All comparisons are natural in E.
-No cartesian condition is used; identity coordinates, empty schemes and zero E are
-included by the same adjunction and associativity identities. -/
+and 20.28.2 (0D5T). -/
 theorem exists_derivedBaseChange_domain_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

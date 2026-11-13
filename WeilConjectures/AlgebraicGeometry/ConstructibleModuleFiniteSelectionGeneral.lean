@@ -99,19 +99,7 @@ private theorem failure_locus_constructible
 
 /-- A family containing an injective map at every geometric stalk of a constructible
 module sheaf has a finite subfamily whose joint map is monomorphic.
-Source: Stacks Project, Tag 09Z6 (3), using constructible-topology compactness.
-(blueprint: new-lem-weil-pbc-noetherian-module-finite-selection).
-
-Proof: For each finite family, its joint kernel is a subobject of the constructible
-source, hence constructible over the Noetherian coefficient ring. Exactness of stalks
-identifies the support of this kernel with the failure locus of injectivity at the
-residue-field algebraic-closure points. These loci are constructible. Their total
-intersection is empty, since at each point a singleton family is already injective.
-Compactness of the constructible topology gives finitely many families with empty
-intersection of failure loci. Their union is injective at every test stalk, by
-projection to each selected family. Conservativity of the geometric stalks makes
-its joint map mono. Reindex its finite index set by `Fin n`. The empty scheme and
-empty index set require no separate choices. -/
+Source: Stacks Project, Tag 09Z6 (3), using constructible-topology compactness. -/
 theorem exists_mono_biproduct_of_constructible_module_stalk_injective_general
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     (X : Scheme.{u}) [IsNoetherian X]

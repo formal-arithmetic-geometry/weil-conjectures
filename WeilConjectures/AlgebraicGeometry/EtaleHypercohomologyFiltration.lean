@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-! # The image filtration on etale hypercohomology
 
 Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-etale-hypercohomology-filtration-zero).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 /-- Membership in the image filtration from complexes supported in degrees at least `q`.
 A map from such a complex factors through the stupid truncation of `K` at `q`, so this
 is the usual image filtration of the termwise hypercohomology spectral sequence.
-Source: Stacks Project, Tag 015J.
-(blueprint: lem-weil-pbc-etale-hypercohomology-filtration-zero). -/
+Source: Stacks Project, Tag 015J. -/
 def InEtaleHypercohomologyFiltration (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
     (p q : ℤ) (x : (cohomology AddCommGrpCat.{u + 1} X p).obj
@@ -41,17 +39,7 @@ def InEtaleHypercohomologyFiltration (X : Scheme.{u})
       (cohomology AddCommGrpCat.{u + 1} X p).map (DerivedCategory.Q.map f) y = x
 
 /-- The image filtration is zero above the total cohomological degree.
-Source: Stacks Project, Tag 015J, the first spectral sequence and its vanishing region.
-
-Proof: Choose the witness `T`, map `f`, and class `y`. Mathlib's
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective` replaces `T`
-by a quasi-isomorphic complex `J` of injectives with the same lower bound `q`.
-A bounded-below complex of injectives is K-injective. Global sections applied termwise
-to `J` still vanishes below `q`. The isomorphism `rightDerivedFunctorObjQIso`, together
-with the quasi-isomorphism from `T` to `J`, identifies derived global sections of `T`
-with this termwise complex. Its homology in degree `p < q` is zero. Consequently
-`y = 0`, and additivity of the map induced by `f` gives `x = 0`.
-(blueprint: lem-weil-pbc-etale-hypercohomology-filtration-zero). -/
+Source: Stacks Project, Tag 015J, the first spectral sequence and its vanishing region. -/
 theorem eq_zero_of_inEtaleHypercohomologyFiltration
     (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

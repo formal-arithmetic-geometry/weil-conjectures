@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 /-! # Finite type of a kernel restricted to one open intersection
 
 Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Section 01AF.
-(blueprint: lem-weil-pbc-coherent-kernel-intersection-finite-type).
 -/
 
 @[expose] public section
@@ -32,21 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 of a kernel initially defined on `W`. This comparison requires neither an open
 cover nor a finite-type hypothesis on `F`.
 Source: Stacks Project, Modules, Definition 01BV (definition-coherent),
-Definition 01B5 (definition-finite-type), and Section 01AF (section-kernels).
-(blueprint: lem-weil-pbc-coherent-kernel-intersection-finite-type).
-
-Proof: Put `Z = W ∩ U`, regarded as an open of `U`. Restrict `f` to `Z`.
-Restriction sends the structure module to the structure module and preserves
-finite coproducts; its source is therefore the free module of rank `n` on `Z`.
-Transitivity identifies its target with `(F|_U)|_Z`. Precompose with the free-module
-comparison isomorphism to obtain a map of precisely the kind in `hK`, and apply
-`hK` to that map. Its kernel is finite type. By the sectionwise description of
-kernels in 01AF, this kernel identifies with the restriction of `kernel f` to `Z`.
-The equivalence between opens of `Z` and the corresponding slice category sends
-a local finite generating family to the same sections on the corresponding open:
-it preserves the free module, epimorphisms, and the covering family. Consequently
-the finite local generating data transfer to `(kernel f).over (Z ⟶ W)`, giving
-its finite type by 01B5. Empty intersections and rank zero require no changes. -/
+Definition 01B5 (definition-finite-type), and Section 01AF (section-kernels). -/
 theorem coherent_kernel_intersection_finiteType
     (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) (n : ℕ)
     (hK : ∀ (V : U.toScheme.Opens)

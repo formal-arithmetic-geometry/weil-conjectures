@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 # Module cohomology and underlying abelian cohomology
 
 Source: Stacks Project, Cohomology on Sites, Tag 03FD, applied to a constant ring.
-(blueprint: lem-weil-pbc-etale-module-cohomology-forget).
 -/
 
 @[expose] public section
@@ -49,25 +48,7 @@ theorem moduleSheafForgetIsLeftAdjoint (Y : Scheme.{u}) (Λ : Type (u + 1)) [Com
 
 /-- Forgetting the module structure commutes naturally with cohomology of a sheaf
 placed in degree zero. This comparison has no compactness or colimit hypothesis.
-Source: Stacks Project, Tag 03FD and its proof.
-(blueprint: lem-weil-pbc-etale-module-cohomology-forget).
-
-Proof:
-1. The coefficient forgetful functor is both a left and a right adjoint, using
-restriction and coextension or extension of scalars along `Z → Λ` and the equivalence
-of integer modules with abelian groups. Its induced sheaf functor is also both a left
-and a right adjoint, using the sheafification adjunction. Thus both functors are exact.
-2. Evaluate at the terminal identity étale object. Evaluation commutes with forgetting
-coefficients by definition, and the two global-sections/evaluation isomorphisms give
-`Γ_modules ⋙ forget ≅ sheafForget ⋙ Γ_abelian`.
-3. The underlying sheaf functor sends module injectives to abelian-global-sections
-acyclic objects by `lem-weil-pbc-etale-module-injective-forget-acyclic`. Apply the source
-library's invertibility theorem for bounded-below derived base change. Its homology
-comparison gives a natural isomorphism of the classical right derived functors.
-4. For both coefficient categories, the proved plus-derived compatibility and the
-single-functor homology isomorphism identify classical derived global sections with
-`Etale.cohomology` on degree-zero sheaves. Compose these natural isomorphisms with the
-base-change isomorphism from step 3. -/
+Source: Stacks Project, Tag 03FD and its proof. -/
 theorem nonempty_etaleModuleCohomology_forgetIso
     (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (q : ℕ) :
     Nonempty

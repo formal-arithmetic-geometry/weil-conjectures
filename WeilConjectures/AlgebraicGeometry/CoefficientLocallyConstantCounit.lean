@@ -43,17 +43,7 @@ private noncomputable def colimitEvaluationComparison
 /-- A set-valued left Kan extension preserves a colimit if the representables in
 its defining image preserve that colimit.
 Source: the density theorem for presheaves and commutation of colimits, applied to
-the finite-presentation argument in Bhatt--Scholze, Lemma 5.1.1.
-(auxiliary; not a blueprint node).
-
-Proof: The canonical map from the colimit of values to the value at the colimit
-is natural in a presheaf. Both its source and target preserve presheaf colimits:
-Kan extension is a left adjoint, restriction and evaluation compute colimits
-pointwise, and colimits commute with colimits. On a representable the Kan
-extension is the representable of its image, so the given hypothesis makes this
-map invertible. Express an arbitrary presheaf as the canonical colimit of its
-representables. Preservation of that colimit makes the same map invertible for
-the arbitrary presheaf. This is exactly the preservation criterion. -/
+the finite-presentation argument in Bhatt--Scholze, Lemma 5.1.1. -/
 private theorem lan_preserves_colimit_of_representables
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (B : C ⥤ D) (G : Cᵒᵖ ⥤ Type (max v (u + 1)))
@@ -259,14 +249,7 @@ private theorem setComparisonUnit_isIso (X : Scheme.{u})
 -- object. The comparison unit there is invertible.
 
 /-- Full faithfulness of the set-valued comparison, in its unit-normalized form.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-(auxiliary; not a blueprint node).
-
-Proof: Restrict the unit to the dense affine etale subsite. At every affine etale
-object the Kan-extension unit is invertible because the inclusion is fully faithful,
-and the sheafification map is invertible by the affine section formula. Their
-composite is the comparison unit. Restriction to the dense subsite and inclusion
-of sheaves into presheaves both reflect isomorphisms. -/
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2. -/
 private theorem proEtaleComparisonUnitSets_isIso (X : Scheme.{u}) :
     IsIso (comparison.{u, v} X).unit := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -351,17 +334,7 @@ private theorem setLanAffineContinuous (X : Scheme.{u})
 
 /-- The inverse image of an etale sheaf is continuous on affine ind-etale limits.
 Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2, with the same finite-presentation
-argument for arbitrary affine ind-etale stages.
-(auxiliary; not a blueprint node).
-
-Proof: Before sheafification the inverse image is a Kan extension. An etale
-scheme is locally of finite presentation, so maps to it from a cofiltered limit
-of affine schemes factor through a stage, with equality also detected at a
-stage. Thus the representables defining the Kan extension preserve the given
-filtered colimit. The density theorem and commutation of colimits imply that
-the Kan extension does too. The affine section formula identifies this Kan
-extension with its sheafification on every affine ind-etale stage and on the
-limit; naturality identifies all restriction maps. -/
+argument for arbitrary affine ind-etale stages. -/
 private theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (Type (max v (u + 1)))) :
     PreservesFilteredColimitsOfSize.{u, u}
@@ -397,14 +370,7 @@ private theorem proEtaleComparisonSets_continuous (X : Scheme.{u})
 
 /-- The comparison counit is invertible for a sheaf continuous on affine ind-etale
 presentations.
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2.
-(auxiliary; not a blueprint node).
-
-Proof: Test on the dense affine ind-etale subsite. Present each basis object by
-an etale cofiltered diagram. Both the sheaf and its comparison inverse image carry
-this limit to a colimit. On finite stages the counit is inverse to the comparison
-unit, hence is invertible. The unique map between the two colimits is therefore
-invertible, and its naturality identifies it with the counit at the limit object. -/
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.2. -/
 private theorem proEtaleComparisonCounitSets_isIso_of_continuous (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (max v (u + 1))))
     (hF : Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt X)
@@ -491,29 +457,7 @@ private theorem finite_sections_equal
 
 /-- A filtered colimit of presheaves satisfying the sheaf condition for one finite
 presieve with pairwise pullbacks satisfies that same condition.
-Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W
-(auxiliary; not a blueprint node).
-
-Proof: Index the arrows of R by its finite subtype of uncurried arrows. Evaluation
-preserves presheaf colimits. For separatedness, lift two sections over X to a common
-stage. Their restrictions agree in the colimit over each arrow of R, so each such
-equality holds after a transition. The finite wide-span lemma for filtered categories
-makes all of these transitions factor through a single transition. Separatedness at
-that stage identifies the two sections, hence their images in the colimit agree.
-
-For existence, lift the finitely many members of a compatible family to stages of
-the diagram, and take a cocone over the finite discrete diagram of those stages.
-This gives a family at one stage. For each pair of arrows of R, compatibility of its
-image implies equality of the two restrictions over the pairwise pullback after a
-transition. There are finitely many pairs, so the finite wide-span lemma again gives
-one transition making every compatibility equation hold. At that stage the sheaf
-condition provides an amalgamation. Its image amalgamates the original family by
-naturality and the cocone equations. Empty R causes no exception: the finite discrete
-cocone and the wide-span construction also apply to empty index sets, and the
-stagewise empty-presieve sheaf condition supplies the unique section over X.
-
-This is the finite-stage argument of Sites Tag 0738(4), applied directly to the
-sectionwise presheaf colimit and the sheaf condition of Tag 00VM. -/
+Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W. -/
 private theorem finitePresieveSheafFilteredColimit
     {C : Type w} [Category.{u} C]
     {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]
@@ -1014,31 +958,7 @@ private theorem affineClassicalCover (X : Scheme.{u})
       (classicalRestrictionIso (U i).left Zg).app G
 
 /-- Local etale presentations imply continuity on affine ind-etale presentations.
-Source: Bhatt--Scholze, Lemma 5.1.4, using the continuity criterion of Lemma 5.1.2.
-(auxiliary; not a blueprint node).
-
-Proof: Refine the given cover over each affine basis object by all affine ind-etale
-objects admitting a map to one of its members. Cocontinuity of localization and of
-the dense affine inclusion proves that these objects cover. Raw restriction is the
-scheme inverse image, by the map/pullback adjunction, so comparison/pullback
-compatibility preserves the local etale presentations on this refinement.
-
-Over an affine base, form the diagram of sheaves V |-> F(C_j times V) and its
-canonical cocone V |-> F(C times V). These are sheaves because product with a
-fixed object is continuous. Their pointwise filtered colimit is again a sheaf:
-the affine pro-etale topology is generated by finite presieves with pairwise
-pullbacks, and finitely many representatives and equality witnesses move to a
-single stage. Over each refined cover member the classical-continuity theorem
-makes the cocone limiting in the required colimit sense, including on every
-object mapping to that member. Thus the comparison from the pointwise colimit
-to the cocone point is an isomorphism locally, hence globally. Evaluate at the
-terminal affine object to obtain section continuity over the affine base.
-
-For a general base, pass to the cofinal over-category of any stage of the affine
-etale presentation. Regard this diagram as an affine ind-etale diagram over that
-affine stage. The affine result applies to the restriction of F there, and finality
-of the opposite over-category returns the original section colimit. Empty covers
-are included in the finite-presieve argument; filtered categories are nonempty. -/
+Source: Bhatt--Scholze, Lemma 5.1.4, using the continuity criterion of Lemma 5.1.2. -/
 private theorem proEtale_locallyClassical_continuity (X : Scheme.{u})
     (F : Sheaf (ProEt.topology X) (Type (max v (u + 1))))
     (I : Type (max v (u + 1))) (U : I → X.ProEt) (hU : (ProEt.topology X).CoversTop U)
@@ -1226,30 +1146,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The comparison counit is invertible for a locally constant set sheaf, in the
 coefficient universe, on the existing small site models.
 
-Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4, p. 34
-(auxiliary; not a blueprint node).
-
-Proof: transport the slice restrictions and covering family through AsSmall and
-weakly etale localization. Constant sheaves are classical: compose the constant
-sheaf adjunction on the etale site with the comparison adjunction and use uniqueness
-of left adjoints to identify its inverse image with the pro-etale constant sheaf.
-Thus the given local trivializations make the sheaf locally classical. Classicality
-is local by the equalizer argument of Lemma 5.1.4: work on an affine ind-etale basis,
-take a finite affine refinement of the trivializing cover of Spec A, and form its
-finite disjoint union Spec B. The restrictions on its components are classical;
-sections on the disjoint union and its base changes are finite products of these
-classical section functors. Write
-an ind-etale A-algebra C as a filtered colimit of etale A-algebras C_j. The sheaf
-condition expresses sections over C and C_j as equalizers of sections over their
-base changes to B and B tensor B. Local classicality identifies the latter two
-section sets with the corresponding filtered colimits. Filtered colimits of sets
-commute with equalizers, so the same holds over C. The affine section formula of
-Lemma 5.1.1 and the counit criterion of Lemma 5.1.2 now show the counit invertible
-on the affine basis, and hence everywhere. This proof works in max v (u+1): every
-geometric diagram has size at most u+1 and filtered colimits and finite equalizers
-exist and commute in the coefficient universe. No constant set need be inhabited;
-the empty-base case is covered by the same sheaf condition. Transport the result
-back through the site equivalences to the displayed counit. -/
+Source: Bhatt--Scholze, Lemmas 5.1.1--5.1.4, p. 34. -/
 theorem coefficientLocallyConstant_counit_isIso (X : Scheme.{u})
     (H : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)
       (Type (max v (u + 1))))

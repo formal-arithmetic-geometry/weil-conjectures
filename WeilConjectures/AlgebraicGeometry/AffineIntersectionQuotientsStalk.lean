@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Localization of affine intersection quotient systems
 
 Source: Stacks Project, Tags 01IB, 01IC, and 00CS; ideal products as in 01I8.
-(blueprint: lem-weil-pbc-affine-intersection-quotients-stalk).
 -/
 
 @[expose] public section
@@ -29,28 +28,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Localizing compatible affine quotients preserves any prescribed kernel filtration.
 
-Source: Stacks Project, Schemes, Tags 01IB and 01IC, and Algebra, Tag 00CS.
-(blueprint: lem-weil-pbc-affine-intersection-quotients-stalk).
-
-Proof: Put A = Gamma(U,O_X), B = O_(X,x), and let P be the prime of x in U.
-Construct M = B tensor_A L, with L restricted from R to A. The affine
-quasi-coherent stalk correspondence identifies each stalk S_m,x with the
-localization of Gamma(U,S_m); localize q_m to define p_m. Naturality of germs
-identifies the localized section transitions with the stalk transitions, giving
-compatibility of all p_m. Localization preserves surjectivity and exactness.
-For an R-submodule Q of L, define phi(Q) as the image of B tensor_A Q in M.
-Inclusions of submodules make this an order homomorphism. Exactness applied to
-the section kernel criterion identifies ker p_m with phi(D_m). Restriction of
-scalars identifies K^r L with
-I(U)^r L: K is the extended ideal, R coefficients can be absorbed into elements
-of L, and ideal extension commutes with powers. Localization of ideal products
-therefore gives phi(K^r L) = (I(U)B)^r M. The quasi-coherent ideal/stalk
-correspondence identifies I(U)B with the image J of the ideal stalk inclusion;
-the assumed germ equation for e ensures it uses exactly this unit-stalk
-identification. This also proves the formula at r=0, since localization of the
-identity on L has full image. No finiteness, Noetherian hypothesis, completion,
-formal module, kernel stabilization, or Artin--Rees bound is used. If U is empty
-there is no x; zero or unit ideals and zero modules obey the same equations. -/
+Source: Stacks Project, Schemes, Tags 01IB and 01IC, and Algebra, Tag 00CS. -/
 theorem affine_intersection_quotients_stalk
     {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules)
     (U : X.affineOpens)

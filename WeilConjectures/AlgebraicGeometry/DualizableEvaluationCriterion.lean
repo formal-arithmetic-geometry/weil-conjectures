@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Closed symmetric monoidal dualizability criterion
 
-Source: Stacks Project, Cohomology, Tag 0FPC
-(blueprint: lem-pc-dualizable-evaluation-criterion).
+Source: Stacks Project, Cohomology, Tag 0FPC.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ private theorem evaluation_slide {C : Type*} [Category C] [MonoidalCategory C]
 The bijection `adj` is a tensor--internal-Hom bijection of
 `lem-sc-derived-internal-hom-adjunction`, with the naturality equation of
 `scheme_derivedInternalHom_adjunction` as hypothesis `hadj`.
-Source: Stacks Project, Cohomology, Tag 0FPC
-(blueprint: lem-pc-dualizable-evaluation-criterion).
+Source: Stacks Project, Cohomology, Tag 0FPC.
 
 Proof:
 1. Naturality of the adjunction in its first variable: for `f : A → B` and
@@ -56,8 +54,7 @@ Proof:
    isomorphism. Associators and unitors are inserted throughout. -/
 /-- The second triangle identity isolated from the evaluation criterion.
 The formal tensor--Hom naturality and bifunctoriality calculation is the
-second zig-zag identity in Stacks Project, Cohomology, Tag 0FPC.
-(blueprint: lem-pc-dualizable-evaluation-second-triangle) -/
+second zig-zag identity in Stacks Project, Cohomology, Tag 0FPC. -/
 theorem dualizable_evaluation_second_triangle (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K D : schemeDerivedCategory X)
@@ -151,7 +148,7 @@ theorem dualizable_evaluation_second_triangle (X : Scheme.{u})
     simpa only [Category.id_comp] using hgt
   exact hgid.symm
 
-/-- (blueprint: lem-pc-dualizable-evaluation-criterion) -/
+/-- -/
 theorem dualizable_evaluation_criterion (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K D : schemeDerivedCategory X)

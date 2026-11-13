@@ -24,16 +24,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The actual free abelian representable sheaf functor used in object cohomology.
-Source: Stacks Project, Tag 03F3, sections represented by free abelian sheaves.
-(blueprint: def-weil-pbc-etale-open-object-cohomology-map) -/
+Source: Stacks Project, Tag 03F3, sections represented by free abelian sheaves. -/
 def etaleOpenFreeSheaf (X : Scheme.{u}) :
     X.Etale ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
     presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}
 
 /-- The identity generator, transported to sections of the inverse image on the open.
-Source: Stacks Project, Tag 03F3, the free-sheaf/Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-object-cohomology-map) -/
+Source: Stacks Project, Tag 03F3, the free-sheaf/Yoneda adjunction. -/
 def etaleOpenFreeSheafSection {X : Scheme.{u}} (U : X.Opens) :
     ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj
       ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι))).obj.obj
@@ -51,8 +49,7 @@ def etaleOpenFreeSheafSection {X : Scheme.{u}} (U : X.Opens) :
     inferInstance).inv.app A).hom.app (op b) s
 
 /-- The constant-to-pulled-back-free-sheaf map classifying the identity generator.
-Source: Stacks Project, Tag 03F3, the sections adjunction at the terminal object.
-(blueprint: def-weil-pbc-etale-open-object-cohomology-map) -/
+Source: Stacks Project, Tag 03F3, the sections adjunction at the terminal object. -/
 def etaleOpenFreeSheafUnit {X : Scheme.{u}} (U : X.Opens) :
     (constantSheaf U.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift ℤ)) ⟶
@@ -69,8 +66,7 @@ def etaleOpenFreeSheafUnit {X : Scheme.{u}} (U : X.Opens) :
 
 /-- Pull an Ext class back to the open and precompose with the identity generator.
 This is a real construction, with no choice of a comparison isomorphism.
-Source: Stacks Project, Tag 03F3, identification of section complexes.
-(blueprint: def-weil-pbc-etale-open-object-cohomology-map) -/
+Source: Stacks Project, Tag 03F3, identification of section complexes. -/
 def etaleOpenObjectCohomologyMap {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : X.Opens) :
     ((Functor.flip ((etaleOpenFreeSheaf X).op ⋙ Abelian.extFunctor q)).obj F).obj

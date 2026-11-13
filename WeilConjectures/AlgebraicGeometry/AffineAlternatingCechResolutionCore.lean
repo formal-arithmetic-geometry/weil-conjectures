@@ -56,29 +56,7 @@ private theorem unit_isIso_of_acyclic
 set_option linter.unusedVariables false in
 /-- Core alternating Cech resolution data and the four comparison isomorphisms.
 Source: Stacks Project, Tags 02KG and 02KH; the Cech resolution and acyclicity
-paragraphs of `lem-pc-affine-alternating-cech-pinned-mate`.
-(blueprint: lem-pc-s3-affine-alternating-cech-resolution-core).
-Proof: In nonnegative degree k use one open pushforward of G restricted to each
-strictly increasing (k+1)-tuple intersection of the cover, and the finite product
-of these factors. In negative degrees and when there are no such tuples, use the
-empty product, a zero object. The intersections are affine by separatedness over
-the affine base, including the empty intersection opens. Enumerate each finite
-index type by Fin n to obtain the asserted degreewise isomorphisms. The signed
-restriction differential squares to zero by cancellation of the two ways of
-deleting two indices; augment by the restriction maps from G. On each cover open,
-insert its index, sort with sign, and send repetitions to zero. This contracts
-the augmented complex; the same additive homotopy after pullback proves both
-localized augmentations invertible without assuming tensor exactness.
-The increasing tuple complex is contracted by insertion of a cover index. Every
-intersection is affine, hence its open pushforward is right-acyclic; the bounded
-below derived unit criterion and its compatibility transport the result to the
-unbounded complex and to the pulled-back cover. The affine tilde comparison
-identifies its pushforward with the displayed model: on each affine intersection
-use the tilde-Gamma comparison and its naturality for restrictions, then take the
-finite product. Choose D to be the homotopy quotient of this constructed complex,
-so the representative isomorphism is reflexive. For an empty cover X is empty
-and the zero complex supplies all the assertions. No witness is used to define
-an arbitrary complex. -/
+paragraphs of `lem-pc-affine-alternating-cech-pinned-mate`. -/
 theorem affineAlternatingCech_resolution_core
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

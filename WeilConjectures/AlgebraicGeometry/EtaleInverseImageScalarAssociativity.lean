@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 
 /-! # Associativity and unit of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-scalar-associativity). -/
+Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
 
 @[expose] public section
 
@@ -126,29 +125,7 @@ private theorem pairSection_eta {C : Type*} [Category C]
   exact ConcreteCategory.congr_hom (C := Type (u + 1))
     (congrArg (fun k ↦ k.hom.app W) e.hom_inv_id) z
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-scalar-associativity).
-
-Proof: Obtain the canonical ring and abelian lifts and the multiplication
-and one transport equations from `etaleInverseImageAlgebraicStructures`.
-As in the additive case, uniqueness of the lifted left adjoints and the two
-assumed hom-equivalence equations identify the supplied er and ea with the
-canonical comparisons after the lifted adjoint isomorphisms. Consequently the
-multiplication and one of Lr(O) are the transported multiplication and one of O.
-
-The source associativity diagram on (O times O) times G equates multiplication
-of the two scalar factors followed by muV with the iterated action of the second
-scalar and then the first. The source unit diagram on G inserts the constant
-one in the first factor and applies muV; it equals the identity. Check both
-diagrams on sections by the assumed formula for muV and the source module's
-`mul_smul` and `one_smul` axioms. Apply L to these equalities. Rewrite the
-triple-product comparison by its projections and naturality, and substitute
-the multiplication transport formula; cancelling er and ea gives the
-associativity diagram for mu. For the unit diagram use preservation of the
-terminal object and its unique map, together with the one transport formula.
-Evaluate the resulting diagrams at ((r,s),x) and at x. Sectionwise products
-identify these evaluations with the two displayed equalities. This proves
-associativity and the unit without assuming or asserting distributivity. -/
+/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
 theorem etaleInverseImageScalarAssociativity (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

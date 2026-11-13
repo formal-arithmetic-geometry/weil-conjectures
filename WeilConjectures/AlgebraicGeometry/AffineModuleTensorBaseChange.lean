@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SheafTensorPushoutCancellation
 /-! # Affine module tensor BaseChange
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-base-change).
 -/
 
 @[expose] public section
@@ -179,19 +178,7 @@ private theorem extensionFunctor_unit {T : TopCat.{u}} {C D : T.Sheaf CommRingCa
 -- The unit calculation unfolds two scalar restrictions and the chosen adjunction.
 /-- Base change across the ring-sheaf pushout identifies extension of the inverse-image
 algebra module with tensor pullback after scalar restriction.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-Proof: Form the inverse-image module functor and extend along t, with the sheafified
-sectionwise map id tensor inverse-image(a). These maps preserve identity and composition.
-On stalks the pushout identifies B with O_U tensor over inverse-image O_X with
-inverse-image A. The balanced tensor universal property gives inverse maps between
-B tensor over inverse-image A with inverse-image G and O_U tensor over inverse-image O_X
-with inverse-image G, sending (b tensor a) tensor g to b tensor ag and b tensor g to
-(b tensor 1) tensor g. They commute with restriction and sheafification and hence give
-the natural isomorphism κ. The canonical unit formula for the chosen pullback adjunction
-then gives κ inverse applied to the unit as the sheafification of 1 tensor η(g).
-This argument includes the zero ring and zero module: both inverse maps are still given
-by the balanced universal property.
-(blueprint: lem-weil-pbc-affine-module-tensor-base-change). -/
+Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
 theorem affine_module_tensor_baseChange
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpush : IsPushout r₀ t₀ b t) :

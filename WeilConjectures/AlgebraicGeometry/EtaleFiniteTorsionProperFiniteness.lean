@@ -31,7 +31,7 @@ import WeilConjectures.AlgebraicGeometry.ProperCohomologyGenericLocalConstancy
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Theorem 6.7.1,
 proper alternative, with R = A and maximal ideal zero; Stacks Project, Tags 0A3V,
-095U and 0GL0 (blueprint: lem-fd-etale-finite-torsion-proper-finiteness).
+095U and 0GL0.
 
 The higher direct images use the ordinary small etale sites and the bounded below
 right derived direct image of a module sheaf placed in degree zero.
@@ -250,8 +250,7 @@ private theorem higherDirectImage_constructible
 constructible and vanish outside one interval [0, d], chosen independently of the sheaf.
 
 Source: Bhatt--Scholze, Theorem 6.7.1, proper alternative, specialized to R = A;
-Stacks Project, Tags 0A3V, 095U, 03RW and 0GL0
-(blueprint: lem-fd-etale-finite-torsion-proper-finiteness).
+Stacks Project, Tags 0A3V, 095U, 03RW and 0GL0.
 
 Proof plan following the six DAG steps:
 1. Properness gives finite type and the Noetherian target is quasi-compact.

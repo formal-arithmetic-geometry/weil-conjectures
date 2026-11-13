@@ -69,16 +69,7 @@ private lemma singleTensorator_eq_transport
   simp [singleCochainTensorIso, singleIsoQh, Functor.map_comp, Category.assoc]
 
 /-- The canonical flat single tensorators preserve the associator.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, single/total tensor calculation.
-(auxiliary; not a blueprint node).
-Proof: expand the single tensorator through the degree-zero cochain functor, the
-strong monoidal homotopy quotient, and the lax monoidal localization Qh. On complexes,
-precompose in each degree with the triple-summand inclusions. A summand with any
-nonzero index has a zero factor. The (0,0,0) summand is the original associator.
-The quotient and Qh associativity axioms carry this equation to the derived category;
-the natural single/quotient isomorphism cancels at intermediate objects. Flatness
-makes the two tensorators whose left factors are L and L tensor M invertible;
-no flatness of N is used. This calculation also covers zero sheaves and empty sites. -/
+Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, single/total tensor calculation. -/
 theorem singleFunctorObjTensorIso_associativity
     (L M N : Sheaf X.smallEtaleTopology B)
     (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M) :

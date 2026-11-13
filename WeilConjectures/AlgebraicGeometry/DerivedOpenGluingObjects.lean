@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenDifferenceDiagram
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-derived-open-gluing-objects).
+Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1).
 -/
 
 @[expose] public section
@@ -93,18 +92,7 @@ set_option maxHeartbeats 800000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Objects of the derived category glue across a two-open cover with their prescribed
 transition, without an assertion about morphisms into another object.
-Source: Stacks Project, Cohomology, Tag 08DG, first assertion and cone construction
-(blueprint: lem-sc-derived-open-gluing-objects).
-Proof: let W = U ∩ V. Form the difference of the two restriction maps from
-Rj_U A ⊕ Rj_V B to Rj_W (B|W), using c on the first summand. Complete this
-map to a distinguished triangle with first object F. Restrict the triangle to U.
-Tag 08FE identifies the other two pushforwards with the same Rj from W to U;
-the second component of the map is minus the identity. The resulting split
-triangle identifies F|U with A. Interchanging U and V gives F|V ≅ B.
-Restrict both projections to W: the kernel equation for the difference map
-identifies their transition with c. The displayed canonical comparisons include
-the units of the open-subscheme equivalences, so this equation is exactly the
-one in the conclusion. The construction also works if an open or W is empty. -/
+Source: Stacks Project, Cohomology, Tag 08DG, first assertion and cone construction. -/
 theorem derived_open_gluing_objects
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

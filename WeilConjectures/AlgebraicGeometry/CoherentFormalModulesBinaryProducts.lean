@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Binary products preserve coherent formal modules
 
 Source: Stacks Project, Section 0EHN and Lemma 087X, binary-sum argument written out.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-binary-products)
 -/
 
 @[expose] public section
@@ -91,7 +90,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Binary products of coherent formal modules are coherent formal.
 Source: Stacks Project, Cohomology of Schemes, Section 0EHN and Lemma 087X,
 binary-sum argument written out.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-binary-products).
 
 Take the inverse system H with H_n = F_n ⊞ G_n and diagonal transition maps.
 The coherent kernel/cokernel theorem gives coherence of H_n. On an affine open,

@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-! # Finite type under the affine module correspondence
 
 Source: Stacks Project, Cohomology of Schemes, Tag 0897, proof; Morphisms, Tag 01SB;
-Properties, Tag 01PB (blueprint: lem-weil-pbc-affine-module-finite-type).
+Properties, Tag 01PB.
 -/
 
 @[expose] public section
@@ -122,25 +122,7 @@ set_option maxHeartbeats 400000 in
 /-- On one affine open, finite global generators of the direct image over its
 sectionwise algebra are equivalent to finite generation of the inverse-image sections.
 Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB; Cohomology of
-Schemes, Tag 0897, proof, finite-type detail
-(blueprint: lem-weil-pbc-affine-module-finite-type), steps 2 and 3.
-
-Proof:
-1. Put W = f⁻¹ V and B = O_U(W). W is affine. Sections of f_*F over V, including
-   their B-action and restrictions, are definitionally sections of F over W.
-2. Given a finite generating family for (f_*F)|V, regard its sections as sections
-   on W and form the evaluation map O_W^n → F|W. For each t in F(W), generation
-   on V expresses t locally as combinations of these sections. Pull those opens
-   back to W. Thus t lies in the sheaf image of evaluation. Since evaluation is
-   between quasi-coherent modules on the affine W, the affine-sections image formula
-   (Stacks 01IC) expresses t as a B-linear combination of the same finite family.
-3. Conversely choose finitely many B-module generators of F(W). The affine
-   tilde-Gamma equivalence shows their evaluation map O_W^n → F|W is surjective.
-   On each affine V' contained in V its inverse image W' is affine; the same
-   image formula gives a lift of every section of F(W') to O_U(W')^n. These
-   coefficients are exactly sections of A on V'. The affine V' cover every open
-   contained in V, so the family generates (f_*F)|V as an A|V-module.
-No finite-type assumption on either sheaf is made in this local assertion. -/
+Schemes, Tag 0897, proof, finite-type detail, steps 2 and 3. -/
 private theorem affine_pushforward_finite_generators [IsAffineHom f]
     (F : U.Modules) (hF : F.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V) :
     (∃ σ : ((PUSH).obj F |>.over V).GeneratingSections, Finite σ.I) ↔
@@ -205,20 +187,18 @@ local notation "R" => PUSH
 /-- Finite type is preserved in both directions by the affine module correspondence.
 The direct image carries its sectionwise action by `A = f_* O_U`, rather than merely
 its restricted `O_X`-action. Source: Stacks Project, Tag 0897, proof (the omitted
-finite-type detail), with Tags 01SB and 01PB
-(blueprint: lem-weil-pbc-affine-module-finite-type).
+finite-type detail), with Tags 01SB and 01PB.
 
 Proof (the five steps of the node):
 1. Transport finite generation through the given `A`-linear isomorphism, reducing to
-   `M = f_* F` (`lem-weil-pbc-affine-module-correspondence`). An epimorphism from a
+   `M = f_* F`. An epimorphism from a
    finite free module means every section is locally a linear combination of its
-   basis images (`def-weil-sheaf-of-modules-category`,
-   `def-weil-pbc-module-finite-type-presentation`). Generation restricts to smaller
+   basis images. Generation restricts to smaller
    opens. Affine opens form a basis, and their inverse images are affine.
 2. On an affine open `V` of `X`, set `B = O_U(f⁻¹ V)`. A finite family generating
    `M|_V` over `A|_V` generates `F(f⁻¹ V)` over `B`: form the map from the finite
    free quasi-coherent module on `f⁻¹ V` and use the affine-sections image formula
-   (`lem-weil-pbc-quasi-coherent-module-cokernel-image`), together with
+, together with
    `lem-weil-pbc-module-restriction-open-immersion-colimits` and
    `lem-weil-pbc-spec-tilde-free-module`.
 3. Conversely, sections generating `F|_(f⁻¹ V)` generate `M|_V`: cover any open

@@ -56,22 +56,7 @@ private def fixedScalarsMonoidal {C : Type w} [SmallCategory C]
 ordinary derived categories, after the target constant-scalar equivalence.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
-lemma-pullback-tensor-product; Modules on Sites, Tag 03CY.
-(auxiliary; not a blueprint node).
-
-Proof: the constant-scalar realization equivalences are exact and monoidal, and
-coefficient inverse image is an exact monoidal left adjoint preserving ordinary flat
-objects. Choose flat-term K-flat representatives for both derived inputs. The published
-cochain tensor comparison computes their tensor; the flat-term preservation theorem
-makes the second image K-flat. Compose exact derived-functor factorization, the cochain
-monoidal comparison and the inverse native localization tensorator. Thus either
-realization functor takes the published tensor to the native tensor of its images.
-The ordinary constant-realization comparison and the constant-sheaf adjunction identify
-inverse image of constant_X(M) with constant_Y(M). Derive this isomorphism on the single
-complexes. Finally compose the two tensor comparisons with this isomorphism and the
-counit of the target derived equivalence. No boundedness, Noetherianity, finite
-generation, local constancy or flatness of M is used. Zero coefficients, the zero
-module and empty schemes are included. -/
+lemma-pullback-tensor-product; Modules on Sites, Tag 03CY. -/
 theorem coefficient_restricted_tensor_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A]

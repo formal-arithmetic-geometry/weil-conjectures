@@ -81,17 +81,7 @@ private theorem flat_alternating_sections
 
 /-- The explicit finite alternating model is termwise flat over
 its affine base. This is about the ordinary complex, without any derived map.
-Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D.
-(blueprint: lem-pc-affine-alternating-cech-model-flat).
-
-Proof: Separatedness over an affine scheme makes all finite intersections of affine
-opens affine. Apply IsFlatOver to each such intersection and the top affine open
-of Spec A. Transport the resulting flatness through GammaSpecIso to the A-action
-in restrictScalars. Each term is a finite product of these flat A-modules and is
-therefore flat. Sheafification preserves this property: its stalk at a prime is
-localization of the section module, flat over the localized ring. Negative-degree
-terms are zero by extension and are flat; the empty product terms in degrees
-p >= r are likewise zero. The argument includes r = 0 and zero rings. -/
+Source: blueprint `lem-pc-rf-base-change-flat-module`, Steps 2--3; Stacks Tag 0A1D. -/
 theorem affineAlternatingCechModel_flat
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))

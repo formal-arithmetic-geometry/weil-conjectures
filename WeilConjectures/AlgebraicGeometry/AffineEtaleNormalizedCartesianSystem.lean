@@ -76,29 +76,7 @@ private theorem normalizedPair {I : Type u} [Preorder I]
     exact normalizedSquare (D.map (homOfLE h).op)
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, base-change functors and their
-canonical comparison isomorphisms (including the discussion following its proof).
-
-Proof: For i ≠ j, restrict pullback along D.map (homOfLE h).op to affine étale objects.
-The first projection is affine, since it is a base change of an affine morphism; its
-source is affine because its target is affine. Its other projection is étale by base
-change. For i = j choose the identity functor and identity first projection instead;
-D maps the unique endomorphism to the identity, so that square is cartesian. The
-projection is the underlying functor left unitor, whose components are identities. Pullback
-along each c.π.app (op i), restricted in the same way, gives v and q. The ordinary
-pullback map supplies the functor laws and naturality of the first projections.
-
-For a chain i ≤ j ≤ k, paste the two cartesian squares. Functoriality of D identifies
-its composite base arrow with D.map (homOfLE (h.trans h')).op. The pasted pullback
-and the single pullback have a unique isomorphism preserving the first and structure
-projections. These component isomorphisms form gamma: naturality follows because both
-sides have equal projections. The same construction using cone naturality gives delta.
-If either adjacent pair of indices is equal, take the identity comparison; its source
-and target identify through the diagonal identity choice. This gives the three HEq
-normalization clauses. The first-projection equations are the defining equations of
-the comparisons. No associativity or cone cocycle, covering, or continuity property is
-concluded; these follow from the displayed first-projection equations by pullback
-uniqueness and base change of coverings, respectively.
-(blueprint: lem-weil-pbc-affine-etale-normalized-cartesian-system). -/
+canonical comparison isomorphisms (including the discussion following its proof). -/
 theorem exists_affineEtale_normalized_cartesian_system
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

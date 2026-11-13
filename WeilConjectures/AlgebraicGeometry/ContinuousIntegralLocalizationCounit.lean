@@ -21,8 +21,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A scalar telescope of an object on which the scalar is invertible has an
 invertible zeroth colimit leg.
-Source: universal property of the localization telescope.
-(auxiliary; not a blueprint node) -/
+Source: universal property of the localization telescope. -/
 theorem integralLocalization_zero_isIso (ℓ : ℕ)
     {C : Type*} [Category C] [Preadditive C] (K : C) [IsIso (ℓ • 𝟙 K)]
     (c : Cocone (Mod.smulSequence K ℓ)) (hc : IsColimit c)
@@ -49,12 +48,7 @@ theorem integralLocalization_zero_isIso (ℓ : ℕ)
 
 /-- Restriction followed by extension of integral coefficients has counit an
 isomorphism on every rational module.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization at ℓ.
-(auxiliary; not a blueprint node)
-Proof. The restricted rational module has invertible ℓ. Its localization telescope
-therefore has invertible zeroth leg. This leg is the extension unit; the adjunction
-triangle then makes the restricted counit invertible. Restriction is faithful and
-both module categories are abelian, so it reflects this isomorphism. -/
+Source: Bhatt--Scholze, Lemma 6.8.2, localization at ℓ. -/
 theorem integralScalarCounit_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

@@ -16,7 +16,6 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 /-! # Kernel of the pullback unit at a point on the closed image
 
 Source: Stacks Project, Modules, Lemma 08KS, using Sheaves, Lemmas 0098 and 00AE.
-(blueprint: lem-weil-pbc-closed-immersion-unit-stalk-kernel-on-image).
 -/
 
 @[expose] public section
@@ -55,22 +54,7 @@ private theorem ker_tensor_unit {R S : Type w} [CommRing R] [CommRing S]
 
 /-- At a point on the closed image, the kernel of the pullback unit is the local
 ring kernel times the module stalk. This involves no ideal sheaf or multiplication map.
-Source: Stacks Project, Modules, Lemma 08KS; Sheaves, Lemmas 0098 and 00AE.
-(blueprint: lem-weil-pbc-closed-immersion-unit-stalk-kernel-on-image).
-
-Proof: For the canonical tensor adjunction, compose the pushforward stalk comparison
-at i(z) with the tensor pullback stalk comparison. The germ formulas identify the
-unit with m mapping to 1 tensor m in O_Z,z tensor over O_Y,i(z) F_i(z).
-The local ring map is surjective because i is a closed immersion. Writing its
-kernel as K, tensor the exact pair K -> O_Y,i(z) -> O_Z,z with F_i(z).
-Right exactness identifies the tensor map kernel with the image of K tensor F_i(z).
-The left unitor O_Y,i(z) tensor F_i(z) -> F_i(z) sends that image to K F_i(z)
-and sends the tensor map to m mapping to 1 tensor m. Its kernel is K F_i(z).
-For any other adjunction on the same two functors, uniqueness of left adjoints
-relates its unit to the canonical unit by postcomposition with the pushforward
-of an isomorphism. Its stalk is invertible, so the kernel does not change.
-For the identity immersion K is zero; for F zero both submodules are zero.
-The empty immersion has no z and hence introduces no excluded case. -/
+Source: Stacks Project, Modules, Lemma 08KS; Sheaves, Lemmas 0098 and 00AE. -/
 theorem closedImmersion_unit_stalk_kernel_on_image {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (F : Y.Modules) (z : Z) :
     let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)

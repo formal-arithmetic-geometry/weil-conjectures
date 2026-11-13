@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Canonical derived restriction and its adjoint maps on opens
 
-Source: Stacks Project, Cohomology, Tag 08BV
-(blueprint: def-pc-derived-open-restriction-maps).
+Source: Stacks Project, Cohomology, Tag 08BV.
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ namespace AlgebraicGeometry
 set_option synthInstance.maxSize 2048
 
 /-- Exact restriction from a scheme to an open subscheme.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 abbrev schemeOpenRestriction (X : Scheme.{u}) (U : X.Opens) :=
   (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U ⋙
       Equivalence.functor
@@ -38,25 +37,25 @@ abbrev schemeOpenRestriction (X : Scheme.{u}) (U : X.Opens) :=
         (Scheme.Modules.overEquiv U))
 
 /-- Exactness structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenRestriction_preservesFiniteLimits (X : Scheme.{u}) (U : X.Opens) :
     PreservesFiniteLimits (schemeOpenRestriction X U) :=
   comp_preservesFiniteLimits _ _
 
 /-- Exactness structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenRestriction_preservesFiniteColimits (X : Scheme.{u}) (U : X.Opens) :
     PreservesFiniteColimits (schemeOpenRestriction X U) :=
   comp_preservesFiniteColimits _ _
 
 /-- Additivity structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenRestriction_additive (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenRestriction X U).Additive :=
   Functor.additive_of_preserves_binary_products _
 
 /-- Exact restriction between two open subschemes.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 abbrev schemeOpenOverlapRestriction (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :=
   (Equivalence.inverse
       (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
@@ -69,7 +68,7 @@ abbrev schemeOpenOverlapRestriction (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ 
       (Scheme.Modules.overEquiv W))
 
 /-- Exactness structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenOverlapRestriction_preservesFiniteLimits
     (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     PreservesFiniteLimits (schemeOpenOverlapRestriction X i) :=
@@ -82,7 +81,7 @@ instance schemeOpenOverlapRestriction_preservesFiniteLimits
   comp_preservesFiniteLimits _ _
 
 /-- Exactness structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenOverlapRestriction_preservesFiniteColimits
     (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     PreservesFiniteColimits (schemeOpenOverlapRestriction X i) :=
@@ -97,13 +96,13 @@ instance schemeOpenOverlapRestriction_preservesFiniteColimits
 set_option synthInstance.maxHeartbeats 400000 in
 -- Zero preservation of the three-fold transported restriction needs more instance search.
 /-- Additivity structure of canonical open restriction.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 instance schemeOpenOverlapRestriction_additive (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     (schemeOpenOverlapRestriction X i).Additive :=
   Functor.additive_of_preserves_binary_products _
 
 /-- The canonical composition isomorphism for exact restriction to nested opens.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 def schemeOpenRestrictionCompIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) :
     schemeOpenRestriction X U ⋙ schemeOpenOverlapRestriction X i ≅
       schemeOpenRestriction X W :=
@@ -121,7 +120,7 @@ def schemeOpenRestrictionCompIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U) 
         (Scheme.Modules.overEquiv W))
 
 /-- Canonical composition isomorphism on the derived categories of nested opens.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 def schemeDerivedOpenRestrictionCompIso (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))]
@@ -140,7 +139,7 @@ def schemeDerivedOpenRestrictionCompIso (X : Scheme.{u}) {W U : X.Opens} (i : W 
 
 /-- Restriction between derived direct images, defined as the adjoint of the
 restriction counit, using the canonical composition isomorphism.
-Source: Stacks Project, Tag 08BV (blueprint: def-pc-derived-open-restriction-maps). -/
+Source: Stacks Project, Tag 08BV. -/
 def schemeDerivedOpenDirectImageRestriction
     (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

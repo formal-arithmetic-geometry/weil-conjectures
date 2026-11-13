@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 /-! # Pullback and coefficient naturality of a fixed resolution boundary
 
 Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-naturality).
 -/
 
 @[expose] public section
@@ -25,17 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed boundaries commute with one pullback and coefficient morphism.
-Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-naturality)
-
-Proof: The fixed-comparison coefficient lemma supplies a morphism of the two
-section short complexes whose homology maps are the actual whole and open
-cohomology maps. The covers make both complexes short exact. Represent x
-using the source normalized intersection equivalence. Apply Mathlib's
-connecting-map naturality to that representative, then the target global
-equivalence. The two comparison identities identify its vertical maps.
-The definition of the boundary cancels each inverse comparison and yields
-the displayed equality. No choices of boundaries are made here. -/
+Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7. -/
 private theorem etaleMayerVietorisCanonicalBoundary_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V : X.Opens) (U' V' : Y.Opens)
     (hcover : U ⊔ V = ⊤) (hcover' : U' ⊔ V' = ⊤)
@@ -84,11 +73,7 @@ private theorem etaleMayerVietorisCanonicalBoundary_naturality
   rw [← hn, ha]
 
 /-- Naturality with specified source and target intersection opens.
-Source: Stacks Project, Tags 0A50 and 01F7, the preceding naturality identity.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-naturality)
-
-Proof: Substitute the intersection identifications and apply fixed-boundary naturality.
-This transports the domain only; the resolutions and normalized comparisons stay fixed. -/
+Source: Stacks Project, Tags 0A50 and 01F7, the preceding naturality identity. -/
 private theorem etaleMayerVietorisBoundaryOn_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V W : X.Opens) (U' V' W' : Y.Opens)
     (hW : W = U ⊓ V) (hW' : W' = U' ⊓ V')
@@ -113,10 +98,7 @@ private theorem etaleMayerVietorisBoundaryOn_naturality
     f U V U' V' hcover hcover' hU hV k hk F G φ I J cI cJ q x
 
 /-- Naturality of the fixed boundary interface.
-Source: Stacks Project, Tags 0A50 and 01F7, functorial resolution argument.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-naturality)
-
-Proof: Unfold only the fixed resolution choices and apply named-intersection naturality. -/
+Source: Stacks Project, Tags 0A50 and 01F7, functorial resolution argument. -/
 theorem etaleMayerVietorisFixedBoundary_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V W : X.Opens) (U' V' W' : Y.Opens)
     (hW : W = U ⊓ V) (hW' : W' = U' ⊓ V')

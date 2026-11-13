@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Affine derived equivalence on shifts of the unit
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 06Z0.
-(blueprint: new-affine-qcoh-derived-equivalence-shift).
 
 The termwise tilde comparison identifies the image of the degree-zero free
 rank-one module with the structure sheaf. Shift compatibility then gives the
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 
 /-- The affine equivalence sends the shifted free rank-one module to the shifted
 structure sheaf. This is the shift-normalization part of Tag 06Z0.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0
-(blueprint: new-affine-qcoh-derived-equivalence-shift).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0.
 The proof identifies the degree-zero tilde of `A` with the structure sheaf and
 then transports this isomorphism through the shift functor. -/
 theorem affineQCohDerivedEquivalence_shift (A : Type u) [CommRing A]

@@ -13,7 +13,6 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 /-! # ClosedFibreInteriorComponent
 
 Source: Stacks Project, Tag 054X, second proof paragraph.
-(blueprint: lem-sbc-closed-fibre-interior-component)
 -/
 
 @[expose] public section
@@ -81,16 +80,7 @@ private theorem component_of_embedding {A B : Type*}
 set_option backward.isDefEq.respectTransparency false in
 /-- At an ambient fibre component point in the closed interior, the closed fibre
 has the same local dimension and the point is generic in one of its components.
-Source: Stacks Project, Tag 054X, second proof paragraph.
-Proof: the closed immersion on fibres identifies the source fibre with the closed
-inverse image of its range. The closure of the chosen ambient generic point is an
-ambient component contained in that range. Its inverse image is an irreducible
-component of the closed fibre, by maximality of the ambient component. The chosen
-point is its generic point. On the open interior the closed immersion is a
-homeomorphism onto an ambient open neighbourhood. Local dimension is unchanged
-under a homeomorphism and under restriction to an open neighbourhood, so the two
-local dimensions agree. This uses only topology, not flatness or finite type.
-(blueprint: lem-sbc-closed-fibre-interior-component) -/
+Source: Stacks Project, Tag 054X, second proof paragraph. -/
 theorem common_fibre_component_dimension_of_mem_interior
     {Z X T : Scheme.{u}} (f : X ⟶ T) (i : Z ⟶ X) [IsClosedImmersion i]
     (z : Z)

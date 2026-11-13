@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-! # Detecting isomorphisms of open direct images on an intersection
 
 Source: Stacks Project, Tags 08FE and 08DG.
-(blueprint: lem-sc-derived-open-intersection-iso-detection).
 -/
 
 @[expose] public section
@@ -52,26 +51,7 @@ set_option synthInstance.maxSize 2048 in
 /-- For a map from the direct image from P to one from W = O ∩ P, invertibility
 on W implies invertibility on O. This applies to every such map, independently
 of any choice of adjunction or of any formula for a mate.
-Source: Stacks Project, Tag 08FE and the local identification in Tag 08DG.
-(blueprint: lem-sc-derived-open-intersection-iso-detection).
-
-Proof: Let k : W → O be the inclusion. By Tag 08FE, restriction to O of
-RjP_* B is in the essential image of Rk_*: identify the inverse-image open
-of O in P with W, and identify the induced morphism to O with k. Apply the
-same result to jW and O; its inverse-image open is all of W, so restriction
-to O of RjW_* C is also in the essential image of Rk_*. Let L be restriction
-from O to W. The right adjoint Rk_* is fully faithful: underived open direct
-image is fully faithful and preserves K-injectives because its left adjoint
-is exact, so its total right derived functor is fully faithful. Consequently
-L reflects isomorphisms between objects in this essential image. Explicitly,
-the adjunction units at both objects are invertible, and naturality expresses
-the given map as the conjugate of Rk_* applied to its L-restriction by these
-units. The canonical nested-restriction comparison identifies that
-L-restriction with restriction to W of the original map. The latter is
-invertible by hypothesis, so the given map on O is invertible. No claim of
-reflection on arbitrary objects of D(O) is made. If W is empty, both objects
-on O are zero by the same Tag 08FE comparison. The argument also includes
-O = X, P = X, and O ⊆ P without a covering assumption. -/
+Source: Stacks Project, Tag 08FE and the local identification in Tag 08DG. -/
 theorem derived_open_intersection_isIso_of_restriction
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

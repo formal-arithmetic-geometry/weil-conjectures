@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 # A generic lisse stratum in an irreducible closed subset
 
 Source: finite pushforward constructibility blueprint, step 3.
-(blueprint: lem-weil-pbc-etale-generic-lisse-stratum).
 -/
 
 @[expose] public section
@@ -48,20 +47,7 @@ stratum in every irreducible closed subset, leaving a proper closed complement.
 No partition of that complement is asserted here.
 
 Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 3;
-Stacks Project, Tags 01J3 and 01J4 for the reduced induced scheme.
-(blueprint: lem-weil-pbc-etale-generic-lisse-stratum).
-
-Proof: Give T its reduced induced closed scheme structure. Its underlying space is
-homeomorphic to T; since T is irreducible and nonempty, this reduced scheme is integral.
-It is Noetherian as a closed subscheme of X. Choose an affine open containing one point;
-it is nonempty, integral and Noetherian. Compose its open immersion with the closed
-immersion into X and apply the generic-lissity hypothesis. The resulting dense open W
-is nonempty and is also open in the reduced induced scheme. Its image is relatively
-open and dense in T. Let Z be its complement in T. Then Z is closed in X and proper
-in T. The composite immersion W into X has image T minus Z. The inverse-image
-composition isomorphism identifies its pullback of F with the iterated pullback supplied
-by the hypothesis. Local constancy and finite geometric stalks are invariant under
-isomorphism of sheaves, so that composite pullback is lisse. -/
+Stacks Project, Tags 01J3 and 01J4 for the reduced induced scheme. -/
 theorem exists_etaleGenericLisseStratum
     {X : Scheme.{u}} [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

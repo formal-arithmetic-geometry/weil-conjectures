@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Zeroth derived global sections of a coproduct
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph (blueprint: lem-pc-derived-global-sections-cohomology-coproduct).
+first paragraph.
 -/
 
 @[expose] public section
@@ -31,18 +31,7 @@ set_option backward.isDefEq.respectTransparency false in
 open Classical in
 /-- Zeroth derived global sections commutes with coproducts of quasi-coherent complexes.
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
-first paragraph (blueprint: lem-pc-derived-global-sections-cohomology-coproduct).
-Proof: Let a:X → Spec(ULift ℤ) be the structure morphism. Quasi-compactness and
-quasi-separatedness of X make a quasi-compact and quasi-separated. Derived direct image
-preserves the displayed ambient coproduct of quasi-coherent complexes. The affine derived
-equivalence on Spec(ULift ℤ) computes global sections of Ra_* by module complexes.
-Derived global sections of Ra_* are those of the original complex, by composition of
-pushforward and the injective-resolution computation. The affine equivalence preserves
-coproducts, which are represented termwise in module complexes. Exactness of module sums
-identifies their H^0 with the sum of their H^0. Forgetting the global-section ring action
-preserves and reflects this bijection. All comparisons are natural in the coprojections,
-so their composite is the displayed DirectSum.toAddMonoid map. For the empty family both
-sides are zero; the same argument applies to zero summands and arbitrary shifts. -/
+first paragraph. -/
 theorem derivedGlobalSections_cohomology_coproduct (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

@@ -20,28 +20,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Transfer of Ext cocycles represented by sections over an open.
 Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality),
-03F3 (localization), and 0A50 (section complexes).
-(blueprint: lem-weil-pbc-etale-resolution-section-open-transfer-ext)
-
-Proof: Adjoint α to β : g*I → J. The augmentation equation hα makes β a
-comparison from the exact pullback resolution of g*G to J. Write I.extMk fX
-using InjectiveResolution.extMk_hom in the derived category and apply the
-exact functor g*. Cancel the augmentation identifications using hα. This
-expresses the pulled-back Ext class by the cocycle β composed with g*fX.
-Precompose with the free-representable map induced by openSectionPullback.
-The sections adjunction, natural in coefficients, identifies its section
-with the degree-q section transfer of the section of fX. By hsections and
-injectivity of sectionsEquiv this cocycle is fY. Expand
-etaleOpenObjectCohomologyMap: it applies the exact inverse-image functor for
-the open inclusion and precomposes with etaleOpenFreeSheafUnit. Naturality
-of the adjunction unit identifies the pulled-back identity generator with
-the identity generator of g⁻¹W. The square
-(morphismRestrict g W) ≫ W.ι = (g⁻¹W).ι ≫ g and inverse-image composition
-comparison identify the resulting coefficient transport with that in
-openCohomologyPullback. Ext.mapExactFunctor_comp and associativity complete
-the equality. This calculation concerns Hom cocycles and Ext only; it does
-not assume any canonical homology comparison. It is valid at q = 0, on
-empty opens, and for the zero coefficient sheaf. -/
+03F3 (localization), and 0A50 (section complexes). -/
 theorem resolutionSection_transfer_open_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

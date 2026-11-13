@@ -11,8 +11,7 @@ public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Binomial sums of shifted objects
 
-Source: Stacks Project, Tag 08EK, binomial expansion in the cone construction
-(blueprint: lem-sc-binomial-shift-biproduct).
+Source: Stacks Project, Tag 08EK, binomial expansion in the cone construction.
 -/
 
 @[expose] public section
@@ -163,19 +162,7 @@ private theorem binomial_biproduct_succ (Y : Scheme.{u})
 
 /-- Binomial sums start with F plus F[1], and adding the shift of the nth sum
 produces the (n+1)st sum.
-Source: Stacks Project, Tag 08EK, cone construction and Pascal's identity
-(blueprint: lem-sc-binomial-shift-biproduct).
-
-Proof: In degree one the indexing type consists of the unique copy at j=0 and
-unique copy at j=1, so the biproduct is F[0] plus F[1]; the zero shift is naturally
-isomorphic to F. For the recursive identity, distribute the shift over the finite
-biproduct and use F[j][1] isomorphic to F[j+1]. The unshifted summands at degree j
-have multiplicity choose(n,j), and the shifted summands have multiplicity
-choose(n,j-1). Concatenate these two finite lists. Pascal's identity identifies
-their combined length with choose(n+1,j). At j=0 there is no shifted summand;
-at j=n+1 there is no unshifted summand; both multiplicities are one. Reindexing
-biproducts along these bijections gives the isomorphism. The same description
-works for n=0, where the unique input summand is F. -/
+Source: Stacks Project, Tag 08EK, cone construction and Pascal's identity. -/
 theorem binomial_shift_biproduct (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (F : schemeDerivedCategory Y) :

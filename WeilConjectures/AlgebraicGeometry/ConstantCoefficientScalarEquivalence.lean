@@ -255,17 +255,7 @@ private theorem lisse_of_iso
 
 /-- A bijective change of constant coefficients reflects finite locally constant
 cohomology in each degree. Source: Stacks Project, Cohomology on Sites, Tags 06YY
-and 094I (auxiliary; not a blueprint node).
-
-Proof: the inverse ring isomorphism gives an exact inverse to restriction of scalars
-on sheaves. Extension of scalars is naturally isomorphic to this exact inverse:
-on sections, the maps are s tensor m maps to f inverse(s) times m and
-m maps to 1 tensor m. Sheafification preserves these inverse maps. Thus derived
-extension is the functor induced by this exact equivalence and commutes with
-cohomology. Restriction to a slice commutes with the equivalence. A constant finite
-module is carried to the same abelian group with the transported scalar action;
-its finite generating set still generates, using bijectivity of f. Applying the
-inverse coefficient equivalence to each local trivialization proves the assertion. -/
+and 094I. -/
 theorem locallyConstantFiniteTypeModules_of_scalarExtension_bijective
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)

@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 /-! # The normalized quotient cone of a complete object
 
 Source: Stacks Project, Tags 099M, 0940 and 09C6.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -31,22 +30,7 @@ attribute [local instance] HasDerivedCategory.standard
 
 /-- A complete object has the quotient homotopy-limit cone, with its actual adjunction units.
 Source: Stacks Project, Algebraization Tag 099M; Cohomology on Sites Tags 0940 and 0941;
-proetale.tex, Tag 09C6, passage from the reductions to the complete object.
-(auxiliary; not a blueprint node).
-
-Proof: choose a flat-term K-flat representative of M and take its termwise quotient tower,
-with scalar actions retained. Exact restriction of scalars realizes this as a tower over
-B. Its unit is m mapped to m tensor 1, including sheafification. The universal derived
-scalar extension is left adjoint to exact restriction, by resolving that ordinary scalar
-adjunction. The inverse image of its unit is therefore the identity after reduction.
-The composition comparisons are the unique normalized balancing maps, so adjunction
-naturality identifies the successor map with adicResidueHomStep after conjugation.
-Apply total right derived inverse limit to the strict quotient tower. Exact countable
-products on the pro-etale slice give its Roos triangle. The quotient-completion reflector
-identifies this unit with the local completeness unit. Since M is complete, the unit is
-invertible; transport the cone and Roos triangle along it so the cone point is M itself.
-The leg equality is the unit equality before transport. There is no choice of a compatible
-family of maps, and no perfectness, boundedness, or Mittag-Leffler condition is used. -/
+proetale.tex, Tag 09C6, passage from the reductions to the complete object. -/
 theorem adicResidue_complete_reduction_cone
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

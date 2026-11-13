@@ -103,21 +103,7 @@ private theorem geometric_fiber_flat
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Flatness survives the normalized coefficient geometric stalk.
-Source: Stacks Project, Modules on Sites, Tag 05VC, only-if direction.
-(auxiliary; not a blueprint node).
-
-Proof: constant-scalar restriction is an exact symmetric monoidal equivalence.
-Consequently it takes the exact right-tensor functor of the given module sheaf to
-an exact right-tensor functor on fixed-coefficient sheaves. The AsSmall equivalence
-has the same property. At the geometric point, test a monomorphism of B-modules by
-its constant sheaf. Constant sheafification preserves this monomorphism, tensoring
-with the flat sheaf preserves it, and the exact strong monoidal fiber functor
-preserves it. The fiber of a constant sheaf is its original module, so this proves
-that tensoring with the stalk preserves every monomorphism. Tensor is right exact,
-hence the stalk is flat. These comparisons preserve the B-action induced by the
-constant-ring unit; no identification with an unrelated stalk ring is chosen.
-The argument includes the zero sheaf and zero coefficient ring and uses neither
-Noetherianity nor local constancy. -/
+Source: Stacks Project, Modules on Sites, Tag 05VC, only-if direction. -/
 theorem coefficientEtaleModuleStalk_flat
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)

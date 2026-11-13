@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonC
 /-! # Canonical module base change under changes of coordinates
 
 Source: Stacks Project, Tags 08HY, 0D5T, and 08IB.
-(blueprint: lem-pc-canonical-module-base-change-iso-comparison).
 -/
 
 @[expose] public section
@@ -29,21 +28,7 @@ namespace AlgebraicGeometry
 /-- Changing the two base coordinates by isomorphisms preserves the canonical
 module base-change arrow. This statement involves no open restriction.
 Source: Stacks Project, Tag 08HY, counit construction; Tag 0D5T, composition;
-Tag 08IB, affine coordinate change in the first proof paragraph.
-(blueprint: lem-pc-canonical-module-base-change-iso-comparison).
-
-Proof:
-1. Apply exists_isDerivedModulePullbackComparison to obtain a comparison
-at the first projection of the chosen coordinate pullback. This uses the
-existing derived-pullback counit, evaluated at the module in degree zero;
-no transport of the original comparison is required for existence.
-2. Apply canonicalModuleBaseChange_iso_comparison_ab to this comparison. It
-supplies the coordinate isomorphisms and the equality. Its geometric argument
-uses pullback/direct-image composition and mate naturality; its independence
-of the chosen comparison uses the ordinary target-automorphism lemma.
-3. Package the comparison, its property, and the two isomorphisms with the
-equality. This includes empty schemes and zero modules.
--/
+Tag 08IB, affine coordinate change in the first proof paragraph. -/
 theorem exists_canonicalModuleBaseChange_iso_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

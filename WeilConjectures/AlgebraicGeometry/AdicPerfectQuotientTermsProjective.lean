@@ -121,23 +121,7 @@ private noncomputable def change_unit_iso {D : Type v} [SmallCategory D]
 
 /-- Each term of the actual ordinary quotient complex is projective on the slice.
 Source: Stacks Project, Tags 09C5 and 09C6 (exact sections on weakly contractible
-objects and finite-projective constant models).
-(auxiliary; not a blueprint node).
-
-Proof: choose a splitting of each finite projective A-module P.X i from a finite
-free A-module. The composite of termwise constant realization, restriction of
-scalars along the constant-ring isomorphism, extension to the completed ring,
-slice restriction and ordinary quotient extension is a functor, so it preserves
-this retraction. It sends the finite free module to the corresponding finite sum
-of the quotient ring's unit sheaf: constant realization has its canonical free
-basis, extension sends the unit to the unit and preserves finite sums, and slice
-restriction preserves the same finite free basis. The slice hypothesis makes
-terminal sections of every epimorphism of module sheaves surjective, by forgetting
-to set sheaves. A morphism from the unit is such a terminal section, so it lifts
-against every epimorphism. Thus the unit is projective. Finite sums and retracts
-of projectives are projective, proving the assertion in every degree. The zero
-module, zero ring, unit ideal and empty slice are included by the same argument;
-no nonzero or nonempty basis is used. -/
+objects and finite-projective constant models). -/
 theorem adicPerfectQuotientComplex_terms_projective (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

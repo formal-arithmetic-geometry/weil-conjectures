@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageRingLift
 /-!
 # Inverse image on small étale sites and algebraic structures
-Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV
-(blueprint: lem-weil-pbc-etale-inverse-image-algebraic-structures).
+Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV.
 -/
 
 @[expose] public section
@@ -37,29 +36,12 @@ private theorem unit_of_homEquiv
     e.inv_hom_id, R.map_id]
   exact Category.comp_id _
 
-/-- Source: Stacks Project, Tags 00X6, 00X1, and 00YV
-(blueprint: lem-weil-pbc-etale-inverse-image-algebraic-structures).
+/-- Source: Stacks Project, Tags 00X6, 00X1, and 00YV.
 The set inverse image is the recorded `Scheme.etaleSetPullback` (def-weil-pbc-etale-sheaves):
 left Kan extension along the opposite of base change, followed by sheafification.
 The direct images are precomposition with base change. The lifted adjunctions
 commute with forgetting, including their hom-set bijections and units. This
-identifies the transported algebraic structures and the abelian inverse image.
-Proof:
-1. Base change is continuous and preserves finite limits, by
-   lem-weil-pbc-etale-base-change-continuous and
-   lem-weil-pbc-etale-base-change-finite-limits; direct image is precomposition.
-2. Presheaf pullback and sheafification are left adjoints, by
-   lem-weil-pbc-presheaf-pullback-sets-left-exact and def-weil-pbc-sheafification.
-   Their composite with the fully faithful inclusion gives the set adjunction.
-3. Presheaf pullback, inclusion, and sheafification preserve finite limits, by
-   lem-weil-pbc-presheaf-finite-limits-objectwise and
-   lem-weil-pbc-sheafification-sets-exact. Hence so does set inverse image.
-4. By lem-weil-pbc-sheaf-algebraic-structures-objects and
-   lem-weil-pbc-adjunction-lifts-abelian-group-objects, transport the operations using
-   the product and terminal comparisons. The adjunction restricts on hom sets,
-   and its unit is the original set unit. Right images have sectionwise operations.
-5. Uniqueness of left adjoints (lem-weil-pbc-conjugate-iso-unit-equation) identifies
-   the abelian lift with def-weil-pbc-inverse-image, compatibly with the units. -/
+identifies the transported algebraic structures and the abelian inverse image. -/
 theorem etaleInverseImageAlgebraicStructures (U V : Scheme.{u}) (f : U ⟶ V) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f
     let L := Scheme.etaleSetPullback f

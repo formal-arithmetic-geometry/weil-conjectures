@@ -28,21 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The fraction formula detects basic-open membership at a point outside the base locus.
 Only this point must have a nonvanishing positive-degree section; no global cover is assumed.
 Source: Stacks Project, Constructions, Tag 01N8, chart inverse-image calculation;
-Properties, Tag 01PZ, clause (1)
-(blueprint: lem-sc-ample-proj-canonical-map-preimage).
-
-Proof: Work in the residue field at x, trivializing L near x. If f(x) is in D_+(s), choose
-by hx a nonvanishing section t of degree e. Apply the fraction identity on this chart with
-numerator t^d and denominator s^e. If s vanished at x, its e-th tensor power would vanish,
-whereas the d-th power of t would not; the identity is a contradiction. Thus s does not
-vanish. Conversely, suppose s is nonvanishing at x. Choose a positive-degree homogeneous
-t with f(x) in D_+(t), possible because these opens cover Proj. The identity with numerator
-s^e and denominator t^d first implies that t is nonvanishing at x, and then that the
-pullback of s^e/t^d has nonzero residue. A scheme morphism induces a local homomorphism on
-stalks, so this chart function is a unit at f(x). Its basic open in D_+(t) is exactly
-D_+(s) intersect D_+(t), proving f(x) is in D_+(s). Positive powers preserve nonvanishing
-in a one-dimensional residue-field fibre, which justifies both power tests. The argument
-is pointwise and is vacuous for the empty scheme; a zero section gives both sides false. -/
+Properties, Tag 01PZ, clause (1). -/
 theorem sectionRing_proj_mem_basicOpen (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (f : X ⟶ Proj (sectionRingGrade L))
     (hformula : ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d),

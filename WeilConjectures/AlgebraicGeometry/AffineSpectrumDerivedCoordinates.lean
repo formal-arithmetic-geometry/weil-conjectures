@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Explicit derived coefficient data in affine spectrum coordinates
 
 Source: Stacks Project, Tags 0DJ8 and 0D5S.
-(blueprint: def-pc-affine-spectrum-derived-coordinates).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Pull an object back along the inverse of the canonical affine spectrum isomorphism.
-Source: Stacks Project, Tag 0DJ8, affine reduction.
-(blueprint: def-pc-affine-spectrum-derived-coordinates). -/
+Source: Stacks Project, Tag 0DJ8, affine reduction. -/
 def affineSpectrumDerivedObject (X : Scheme.{u}) [IsAffine X]
     (K : schemeDerivedCategory X) : schemeDerivedCategory (Spec Γ(X, ⊤)) :=
   (derivedPullback X.isoSpec.inv).obj K
@@ -38,8 +36,7 @@ def affineSpectrumDerivedObject (X : Scheme.{u}) [IsAffine X]
 /-- The canonical composition comparison intertwining a morphism with its spectrum map.
 Naturality of isoSpec identifies the two composite scheme maps. Composition comparisons
 are selected from their specified universal left-derived property, not arbitrary isos.
-Source: Stacks Project, Tags 0DJ8 and 0D5S.
-(blueprint: def-pc-affine-spectrum-derived-coordinates). -/
+Source: Stacks Project, Tags 0DJ8 and 0D5S. -/
 def affineSpectrumDerivedPullbackIso {X X' : Scheme.{u}}
     [IsAffine X] [IsAffine X'] (g' : X' ⟶ X) :
     derivedPullback X.isoSpec.inv ⋙ derivedPullback (Spec.map g'.appTop) ≅
@@ -55,8 +52,7 @@ def affineSpectrumDerivedPullbackIso {X X' : Scheme.{u}}
 /-- Transport the given coefficient morphism using the canonical pullback comparison.
 This is a real construction: it uses inverse-isomorphism pullback on phi, rather than
 choosing data from a mere existence statement.
-Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S.
-(blueprint: def-pc-affine-spectrum-derived-coordinates). -/
+Source: Stacks Project, Tag 0DJ8, affine reduction; Tag 0D5S. -/
 def affineSpectrumDerivedMorphism {X X' : Scheme.{u}}
     [IsAffine X] [IsAffine X'] (g' : X' ⟶ X)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

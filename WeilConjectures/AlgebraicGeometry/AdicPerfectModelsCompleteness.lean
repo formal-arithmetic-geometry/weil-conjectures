@@ -25,18 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Stratified completed perfect models are locally derived complete.
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8.
-(auxiliary; not a blueprint node).
-
-Proof: unpack the stratum covers and their finite-projective coefficient complexes.
-The strict bounds imply degreewise vanishing outside the same interval, so
-adicPerfectModel_complete_reduction applies. Its HasCompleteResidueCalculation
-contains completeness of the normalized model. The presentation comparison
-sfbPerfectModel_completion_transport transfers this to sfbCompletedModel. On every
-covering arrow, the original witness identifies the restriction of K with that of
-this complete object. Apply sfbAdicComplete_of_stratum_local_iso to these witnesses.
-Its proof uses preservation and detection of the completion unit on the finite
-strata and their covers; the empty scheme requires no separate nonemptiness hypothesis. -/
+Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Lemma 6.5.8. -/
 theorem adicPerfectModels_completeness (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

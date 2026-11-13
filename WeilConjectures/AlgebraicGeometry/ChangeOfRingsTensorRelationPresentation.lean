@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.ChangeOfRingsTensorBalancingUniversal
 /-! # Change of rings as a tensor relation cokernel
 
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-relation-presentation).
 -/
 
 @[expose] public section
@@ -38,21 +37,7 @@ set_option maxHeartbeats 800000 in
 -- The nested tensor and restriction-of-scalars types need extra elaboration heartbeats.
 /-- The tensor relation presentation, without any quasi-coherence hypotheses.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
-Sheaves, Lemma 0089 (sheafification universal property).
-(blueprint: lem-weil-pbc-change-of-rings-tensor-relation-presentation).
-
-Proof: on the tensor presheaf C tensor_O P, define the two B-actions by acting
-on P and by multiplication through φ on C. They commute with restrictions and
-extend uniquely to its sheafification S. Their difference induces δ from B tensor_O S.
-The balanced tensor map from C tensor_O P to C tensor_B P kills δ and gives a map
-from coker δ to change of rings. Conversely, the cokernel projection composed with
-the tensor sheafification unit kills all B-balancing relations, hence factors through
-C tensor_B P and then through its sheafification. Both composites are identities:
-on S this follows from the sheafification universal property and cancellation of the
-cokernel projection; on change of rings use surjectivity of the presheaf balancing
-map followed by uniqueness of sheafification. These maps give e. Evaluating the
-constructions on pure tensors gives the displayed relation and comparison formulas.
--/
+Sheaves, Lemma 0089 (sheafification universal property). -/
 theorem changeOfRings_tensor_relation_presentation (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

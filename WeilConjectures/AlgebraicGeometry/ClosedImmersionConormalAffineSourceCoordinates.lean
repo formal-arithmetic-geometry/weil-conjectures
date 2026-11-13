@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 /-! # Normalized affine coordinates for conormal sections
 
 Source: Stacks Project, Morphisms, Lemma 0473 and Schemes, Lemma 01JU (1).
-(blueprint: lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates).
 -/
 
 @[expose] public section
@@ -42,22 +41,7 @@ scalar multiples of the successive adjunction units of ideal sections.
 No conormal morphism or target coordinate occurs in this statement.
 
 Source: Stacks Project, Morphisms, Lemma 0473, affine reduction; Schemes,
-Lemma 01JU (1); Morphisms, Lemma 01R3 (2).
-(blueprint: lem-weil-pbc-closed-immersion-conormal-affine-source-coordinates).
-
-Proof:
-1. The tensor-coordinate lemma identifies the ambient tensor B tensor_A J/J² with
-   the tensor of conormal sections over the affine source chart rings. Its formula
-   sends b tensor class(a) to unit(s') tensor i.app(b).
-2. The conormal is quasi-coherent by affine_conormal_sections. Apply the affine
-   pullback section comparison to f on V' = i' inverse image U' and V = i inverse
-   image U, and turn its bijective linear map into an additive equivalence d.
-   Compose the tensor-coordinate equivalence with d and invert to obtain eS.
-3. The pure-tensor formulas of both equivalences give the successive units and
-   scalar i.app(b). Expand the pushforward composition and equality-transport
-   components. The restriction followed by equality transport equals the direct
-   restriction: use the presheaf composition law and uniqueness of arrows in the
-   opposite category of opens. This proves the displayed normalization. -/
+Lemma 01JU (1); Morphisms, Lemma 01R3 (2). -/
 theorem closedImmersion_conormal_affine_source_coordinates
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

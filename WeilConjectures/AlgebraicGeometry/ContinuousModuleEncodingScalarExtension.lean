@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Scalar extension under continuous module encodings
 
 Source: Stacks Project, Modules on Sites, Tags 03D7, 03EK, 03EL.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -124,12 +123,7 @@ private noncomputable def scalarExtensionTensorHomEquiv
             (α.hom.app U).hom).apply_symm_apply (g.val.app U)) x }
 
 /-- The sheafified sectionwise tensor product is left adjoint to scalar restriction
-on any small ringed site. Source: Stacks Project, Modules on Sites, Tag 03D7.
-(auxiliary; not a blueprint node)
-
-Proof. The module tensor universal property gives a natural bijection of presheaf
-maps with scalar-restricted maps. The sheafification adjunction then gives the
-same bijection for sheaf maps. Its naturality constructs the adjunction. -/
+on any small ringed site. Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 theorem exists_siteChangeOfRingsAdjunction :
     ∃ (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ⥤
         SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)),
@@ -158,12 +152,7 @@ end SheafOfModules
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Restriction of scalars commutes with the integral and rational continuous encodings.
-Source: Stacks Project, Modules on Sites, Tag 03D7.
-(auxiliary; not a blueprint node)
-
-Proof. Apply continuousRing_comap_compatibility to the valuation-ring inclusion,
-then transport the coefficient square using lisseScalar_square. The latter
-transport is identity on underlying module sections. -/
+Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 theorem continuousLisse_comap_compatibility
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -217,14 +206,7 @@ theorem continuousLisse_comap_compatibility
     Functor.isoWhiskerLeft (continuousRingModuleEquivalence X E).functor q⟩
 
 /-- Encoding the scalar extension of an inverse integral encoding recovers the
-sectionwise sheafified tensor product. Source: Stacks Project, Tag 03D7.
-(auxiliary; not a blueprint node)
-
-Proof. Compose the extension-restriction adjunction with the two encoding
-equivalences. The preceding scalar-restriction comparison identifies its right
-adjoint with sectionwise scalar restriction. The tensor-sheafification
-adjunction above has the same right adjoint. Uniqueness of left adjoints gives
-the isomorphism on the specified object M. -/
+sectionwise sheafified tensor product. Source: Stacks Project, Tag 03D7. -/
 theorem continuousModuleEncoding_scalar_extension
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})

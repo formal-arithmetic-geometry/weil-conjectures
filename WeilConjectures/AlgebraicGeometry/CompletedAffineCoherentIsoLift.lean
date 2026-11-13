@@ -89,24 +89,7 @@ of a Noetherian ring B lifts to a sheaf isomorphism with exactly those sections.
 
 Source: Stacks Project, Tag 087W (finite formal modules), Tag 00MA (completion
 of finite modules over Noetherian rings), Tag 05GG (completion modulo powers),
-and Tag 01I6 (the affine quasi-coherent module equivalence).
-(blueprint: lem-weil-pbc-completed-affine-coherent-iso-lift)
-
-Proof: Put R equal to the I-adic completion of B. R is Noetherian and complete
-for IR, and the section modules of coherent sheaves on Spec R are finite.
-Their I-adic filtrations as B-modules agree with their IR-adic filtrations as
-R-modules: (IR)^n is generated over R by the images of the finitely generated
-ideal I^n, so every generator acting on a module is already a B-ideal multiple
-of another module element. A B-linear map therefore preserves this filtration.
-For r in R and each n choose a in B representing r modulo (IR)^n. For every x,
-f(r*x)-r*f(x) lies in (IR)^n times the target, using B-linearity and filtration
-preservation. Finite modules over R are complete and separated, so intersection
-of these powers is zero. Hence f is R-linear. Apply the same argument to the
-inverse B-linear map. These maps are inverse R-linear maps. Full faithfulness
-of the affine quasi-coherent/sections equivalence lifts them to inverse sheaf
-maps. Their section maps are the given ones by the counit identities.
-For I=B the completion and both section modules are zero; for I=0 this is the
-ordinary affine equivalence. No proper-ideal hypothesis is used. -/
+and Tag 01I6 (the affine quasi-coherent module equivalence). -/
 theorem completedAffine_coherent_iso_lift
     (B : Type u) [CommRing B] [IsNoetherianRing B] (I : Ideal B)
     (A D : CoherentModules (Spec (CommRingCat.of (AdicCompletion I B))))

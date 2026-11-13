@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Completed integral coefficient sheaves
 
-Source: Weil conjectures blueprint, `sec-smooth-purity`, `sk-def-sf-operations`, order 1455
-(blueprint: def-weil-completed-integral-coefficients).
+Source: Weil conjectures blueprint, `sec-smooth-purity`, `sk-def-sf-operations`, order 1455.
 
 The natural-number index `n` stands for the positive exponent `n + 1`. Coefficients are
 lifted into a universe containing the small pro-etale site. The completion is a limit
@@ -44,7 +43,7 @@ namespace WeilConjectures
 
 /-- Transport ring sheafification through a small model in the coefficient universe.
 This is the existing Mathlib transport, with `essentiallySmallSelf` supplying the size.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable instance (priority := low) integralCoefficientRingSheafify
     (Y : AlgebraicGeometry.Scheme.{t}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
@@ -53,7 +52,7 @@ noncomputable instance (priority := low) integralCoefficientRingSheafify
   hasSheafifyEssentiallySmallSite _ _
 
 /-- Transport abelian-group sheafification through a small model in the coefficient universe.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable instance (priority := low) integralCoefficientAbSheafify
     (Y : AlgebraicGeometry.Scheme.{t}) :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)} :=
@@ -63,7 +62,7 @@ noncomputable instance (priority := low) integralCoefficientAbSheafify
 
 /-- The locally bijective description is transported from the same small model.
 It supplies Mathlib's abelian instance for module sheaves without an added hypothesis.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable instance (priority := low) integralCoefficientAbLocallyBijective
     (Y : AlgebraicGeometry.Scheme.{t}) :
     (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
@@ -78,7 +77,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The constant ring sheaf with coefficient ring `A_{E,n+1}`. This is precisely the
 constant commutative-ring sheaf, with commutativity forgotten, used by the dependency's
 `proEtaleDerivedCategory`; `ULift` only changes size.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def integralCoefficientSheaf (n : ℕ) :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
   (sheafCompose _
@@ -87,7 +86,7 @@ noncomputable def integralCoefficientSheaf (n : ℕ) :
       (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
 
 /-- Sheafification sends the quotient reduction to the reduction of constant ring sheaves.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def integralCoefficientSheafTransition (n : ℕ) :
     integralCoefficientSheaf l E Y (n + 1) ⟶ integralCoefficientSheaf l E Y n :=
   (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
@@ -99,15 +98,14 @@ noncomputable def integralCoefficientSheafTransition (n : ℕ) :
             (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))))
 
 /-- The inverse sequence of constant finite quotient ring sheaves, starting at exponent one.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def integralCoefficientSheafSystem :
     ℕᵒᵖ ⥤ Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
   Functor.ofOpSequence (integralCoefficientSheafTransition l E Y)
 
 /-- The completed coefficient sheaf without an auxiliary finite-field datum.
 This is the same inverse limit used below; the finite-field convention is irrelevant
-for its construction. Source: blueprint order 1455; Stacks Tag 03CO
-(blueprint: def-weil-completed-integral-coefficients). -/
+for its construction.; Stacks Tag 03CO. -/
 noncomputable def completedIntegralCoefficientSheafUnrestricted :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
   limit (integralCoefficientSheafSystem l E Y)
@@ -115,12 +113,7 @@ noncomputable def completedIntegralCoefficientSheafUnrestricted :
 variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The completed coefficient ring is commutative on every site object.
-Source: Bhatt--Scholze, Section 6.5, setup before Definition 6.5.1
-(blueprint: def-weil-completed-integral-coefficients).
-Proof: evaluate the inverse limit of ring sheaves on U. Evaluation preserves limits,
-and each finite quotient constant ring sheaf is commutative. The limit projections
-are jointly injective on sections. The images of a*b and b*a agree under every
-projection, by commutativity in the finite quotient sheaves; hence a*b = b*a. -/
+Source: Bhatt--Scholze, Section 6.5, setup before Definition 6.5.1. -/
 theorem completedIntegralCoefficient_mul_commUnrestricted
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (a b : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U) :
@@ -143,7 +136,7 @@ theorem completedIntegralCoefficient_mul_commUnrestricted
           (Padic.coefficientExtensionRing l E (n + 1))))).obj.obj U) _ _ _
 
 /-- The commutative structure on the existing completed ring, with unchanged ring data.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+Source: Bhatt--Scholze, Section 6.5. -/
 noncomputable abbrev completedIntegralCoefficientCommRingUnrestricted
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) :
     CommRing ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U) :=
@@ -151,7 +144,7 @@ noncomputable abbrev completedIntegralCoefficientCommRingUnrestricted
     mul_comm := completedIntegralCoefficient_mul_commUnrestricted l E Y U }
 
 /-- The completed coefficient presheaf, retaining its commutative structure.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+Source: Bhatt--Scholze, Section 6.5. -/
 noncomputable abbrev completedIntegralCommRingPresheafUnrestricted :
     (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ ⥤ CommRingCat.{max u (t + 1)} where
   obj U := @CommRingCat.of ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U)
@@ -167,7 +160,7 @@ noncomputable abbrev completedIntegralCommRingPresheafUnrestricted :
 
 /-- The same completed sheaf with commutativity retained. Forgetting commutativity
 recovers the recorded completed ring sheaf definitionally.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+Source: Bhatt--Scholze, Section 6.5. -/
 noncomputable def completedIntegralCommRingSheafUnrestricted :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
   ⟨completedIntegralCommRingPresheafUnrestricted l E Y,
@@ -175,7 +168,7 @@ noncomputable def completedIntegralCommRingSheafUnrestricted :
       (completedIntegralCoefficientSheafUnrestricted l E Y).property⟩
 
 /-- The finite quotient coefficient sheaf with commutativity retained.
-Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
+Source: Bhatt--Scholze, Section 6.5. -/
 noncomputable def integralCoefficientCommRingSheaf (n : ℕ) :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)} :=
   (constantSheaf _ CommRingCat.{max u (t + 1)}).obj
@@ -183,8 +176,7 @@ noncomputable def integralCoefficientCommRingSheaf (n : ℕ) :
 
 /-- The completed coefficient projection without the finite-field convention.
 It is the coordinate map of the same limit, with commutativity retained.
-Source: blueprint order 1455; Stacks Tag 03CO
-(blueprint: def-weil-completed-integral-coefficients). -/
+; Stacks Tag 03CO. -/
 noncomputable def completedIntegralCommRingProjectionUnrestricted (n : ℕ) :
     completedIntegralCommRingSheafUnrestricted l E Y ⟶
       integralCoefficientCommRingSheaf l E Y n where
@@ -209,34 +201,34 @@ variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The completed integral coefficient sheaf is the inverse limit in sheaves of rings.
 The global datum and `hl` impose the blueprint's coefficient convention `l ≠ p`.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def completedIntegralCoefficientSheaf (D : FiniteFieldDatum.{d})
     (_hl : l ≠ D.p) :
     Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
   completedIntegralCoefficientSheafUnrestricted l E Y
 
 /-- The limit projection to exponent `n+1`; no surjectivity theorem is assumed here.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def completedIntegralCoefficientProjection (n : ℕ) :
     completedIntegralCoefficientSheaf l E Y D hl ⟶ integralCoefficientSheaf l E Y n :=
   limit.π (integralCoefficientSheafSystem l E Y) (op n)
 
 /-- Sheaves of modules over the completed ring sheaf, with Mathlib's abelian structure.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable abbrev completedIntegralModuleSheaves :=
   CategoryTheory.ringedSiteModules.{max u (t + 1)}
     (completedIntegralCoefficientSheaf l E Y D hl)
 
 /-- The localization of cochain complexes of completed-coefficient module sheaves at
 quasi-isomorphisms, using the standard derived-category localization.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable abbrev completedIntegralDerivedCategory :=
   @DerivedCategory (completedIntegralModuleSheaves l E Y D hl) _ _
     (HasDerivedCategory.standard _)
 
 /-- Restriction of scalars along the limit projection at exponent `n+1`.
 Exactness is intentionally a separate theorem.
-Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+ -/
 noncomputable def completedIntegralRestrictScalars (n : ℕ) :
     SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) ⥤
       completedIntegralModuleSheaves l E Y D hl :=

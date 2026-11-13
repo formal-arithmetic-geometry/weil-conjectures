@@ -16,7 +16,6 @@ import WeilConjectures.RingTheory.JacobsonDenominatorFunctionField
 /-! # Reciprocal functions on a two-open cover
 
 Source: Stacks Project, Varieties Lemma 09NB, first paragraph and open-cover construction.
-(blueprint: lem-sc-affine-complement-reciprocal-cover)
 -/
 
 @[expose] public section
@@ -63,24 +62,7 @@ private theorem functionField_res (X : Scheme.{u}) [IsIntegral X]
 neighbourhood of its complement.
 
 Source: Stacks Project, Varieties Lemma 09NB (varieties-lemma-find-globally-generated),
-proof through the open-cover construction.
-(blueprint: lem-sc-affine-complement-reciprocal-cover).
-
-Proof: Set A = O(U), K = k(X), and B_x = O_{X,x} for x outside U. The stalks are
-Noetherian local domains. Their dimension is one: the generic point lies in U and
-strictly specializes to x, while chains in a stalk have length at most dim X = 1.
-Both A and B_x have fraction field K. Separatedness makes A tensor B_x -> K
-surjective. The common-denominator lemma 09N5 supplies nonzero f in A with inverse
-in the maximal ideal of every B_x. Represent these inverse germs on neighbourhoods
-V_x of x. All representatives have the same image f^{-1} in K and so agree on
-nonempty overlaps by injectivity of regular functions into K; on empty overlaps
-agreement is automatic. The sheaf axiom glues them to g on V = union V_x. Thus
-U union V = X. On U intersect V the product fg is 1, again by injectivity into K.
-Consequently g is a unit at every point of U intersect V. At each point outside U
-its germ is in the maximal ideal by construction. This gives D(g) = U intersect V.
-If the complement is empty, V is empty and g is its unique section; the
-restriction equation holds in the subsingleton ring of sections on the empty overlap.
--/
+proof through the open-cover construction. -/
 theorem exists_affine_complement_reciprocal_cover
     (X : Scheme.{u}) [IsIntegral X] [X.IsSeparated] [IsLocallyNoetherian X]
     [CompactSpace X] (hdim : topologicalKrullDim X = 1) (U : X.Opens)

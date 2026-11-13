@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Generator.Basic
 # Grothendieck abelianness of constant-coefficient etale module sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 03DA, 03DB, 03DI and 03EW;
-Topologies, Tags 021A, 021B and 04HR
-(blueprint: lem-weil-pbc-module-sheaves-grothendieck-abelian).
+Topologies, Tags 021A, 021B and 04HR.
 -/
 
 @[expose] public section
@@ -39,32 +38,7 @@ indexed by `V ⟶ U`; `ULift` only adjusts universes. Its sheafification is `j_{
 The constant ring sheaf `Λ_T` is the `constantSheaf` of `ULift Λ`, written out in place.
 The last conjunct states the abelian-sheaf case, with integer coefficients.
 
-Source: Stacks Project, Tags 03DA, 03DB, 03DI, 03EW, 021B and 04HR
-(blueprint: lem-weil-pbc-module-sheaves-grothendieck-abelian).
-
-Proof:
-1. Kernels are sectionwise and cokernels are sheafified sectionwise cokernels (03DA),
-   using `def-weil-sheaf-of-modules-category`. The forgetful functor to abelian sheaves
-   is faithful and exact by `lem-weil-pbc-module-sheaves-colimits-forgetful` (1).
-2. Sheafify sectionwise colimits, using that lemma's (2) and (3), to obtain all small
-   colimits and their preservation by the forgetful functor (03DB).
-3. For a filtered diagram of short exact sequences, colimits preserve cokernels.
-   The forgotten colimit of the first maps is mono by
-   `lem-weil-pbc-abelian-etale-sheaves-grothendieck`; faithfulness reflects monos.
-   Thus filtered colimits are exact.
-4. Choose affine etale representatives forming a covering family for every object by
-   `lem-weil-pbc-affine-etale-essentially-small-cover`. Sheafify the free Yoneda
-   module (03DI); sheafification adjunction and
-   `lem-weil-pbc-free-yoneda-presheaf-module` identify maps from it to F with F(U).
-   This identification is natural and additive, so zero sections give zero maps.
-5. A nonzero difference of sheaf morphisms is nonzero on a section over some V.
-   Sheaf separatedness on an affine cover detects a nonzero restriction over U.
-   The corresponding map from the free sheaf at U detects the difference. Extend it
-   by zero on the other summands to a map from the coproduct. The coproduct therefore
-   separates morphisms and is a generator (03EW).
-6. These properties give `def-sp-grothendieck-abelian`. For integer coefficients,
-   abelian sheaves have their unique integer-module structure; alternatively apply
-   `lem-weil-pbc-abelian-etale-sheaves-grothendieck` directly. -/
+Source: Stacks Project, Tags 03DA, 03DB, 03DI, 03EW, 021B and 04HR. -/
 theorem etaleModuleSheaves_grothendieckAbelian (T : Scheme.{u})
     (Λ : Type u) [CommRing Λ] :
     IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}

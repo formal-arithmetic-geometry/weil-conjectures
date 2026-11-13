@@ -14,8 +14,7 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # Length-one filtrations of ideals in Artinian rings
 
-Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT
-(blueprint: lem-weil-pbc-artinian-ideal-length-one-filtration).
+Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace RingTheory
 For an Artinian commutative ring, every ideal admits a finite filtration by ideals
 whose successive quotients have module length one.
 
-Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT
-(blueprint: lem-weil-pbc-artinian-ideal-length-one-filtration). The proof uses
+Source: literature/stacks-project/algebra.tex, Algebra, proof of Lemma Tag 02HT. The proof uses
 `lem-weil-pbc-artinian-ring-self-finite-length` and
 `lem-weil-pbc-finite-length-module-simple-filtration`. Regard `B` as a module over
 itself and use the Artinian-ring finite-length lemma to bound strict submodule

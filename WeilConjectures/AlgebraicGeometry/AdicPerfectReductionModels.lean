@@ -29,22 +29,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 compatible identifications with its actual derived reductions. The square compares
 only object computations; no Hom/cohomology comparison is asserted here.
 
-Source: Stacks Tags 09C6, 06YY, 064B, and 09C5 (exact evaluation).
-(auxiliary; not a blueprint node).
-
-Proof: split each finite projective term as a retract of a finite free module.
-Constant realization, scalar extension, and restriction preserve these splittings.
-All terms of the local complex and its ordinary reductions are therefore flat and
-bounded above, hence K-flat. The K-flat computation counit and the exact restriction
-comparison give the displayed isomorphisms. On the weakly contractible slice the
-rank-one free module represents exact final-object evaluation, so it is projective.
-Finite sums and retracts are projective; the bounded-above quotient complex is
-therefore K-projective by Tag 064B. For the square, use the same counits at both
-successor levels. The normalization of adicFiniteExtendComp is its K-flat counit
-square with adicFiniteChangeComp; after exact restriction this is precisely the
-stated equality. Both ordinary balancing maps multiply the two adjacent scalars,
-so this square also commutes with the restriction comparison. Zero complexes,
-the unit ideal, the zero ring, and the empty slice have the zero computations. -/
+Source: Stacks Tags 09C6, 06YY, 064B, and 09C5 (exact evaluation). -/
 theorem adicPerfectReductionModels (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

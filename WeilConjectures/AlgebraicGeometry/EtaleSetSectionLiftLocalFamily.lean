@@ -24,23 +24,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, Étale Cohomology Tag 09YQ, finite affine-cover
-reduction, using Sites Tag 09YN
-(blueprint: lem-weil-pbc-sets-section-lift-local-family).
-Proof: W₀ is qcqs since its structure map is quasi-compact and quasi-separated and
-its base is qcqs. Choose a finite affine open cover V of W₀ and identify its finite
-index type with Fin n. All V are étale over the base, with quasi-compact and
-quasi-separated structure maps. Apply haff to the restrictions of t and choose one
-common stage for the finitely many lifts. Comparison coherence preserves their images.
-Choose finite affine refinements of the pairwise intersections; these exist because
-W₀ is quasi-separated. The two restrictions to each such affine refinement have
-identical limit images by naturality. Apply eventual equality on these finitely many
-objects, then choose one later stage for all the equalities. Separatedness on each
-refined intersection gives compatibility on that intersection, hence on every pair
-of arrows with equal composites into W₀. The original covering stays covering under
-base change at both the chosen stage and the limit. The local images are the original
-restrictions of t by coherence. If n is zero, there are no representatives or overlap
-equalities to choose; nonemptiness supplies a stage and all compatibility clauses
-are vacuous. This lemma constructs only a compatible family, not a global section. -/
+reduction, using Sites Tag 09YN. -/
 theorem etaleSetSectionLift_local_family
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

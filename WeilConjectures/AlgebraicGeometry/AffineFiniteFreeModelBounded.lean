@@ -17,8 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The explicit affine finite-free model is supported in degrees `[-r, 0]`.
-Source: Stacks Project, Tag 068C, extension-by-zero support calculation
-(blueprint: lem-affine-finite-free-model-bounded).
+Source: Stacks Project, Tag 068C, extension-by-zero support calculation.
 
 The extension along `n ↦ -n` is zero in positive degrees and below `-r`; the
 inverse localized-site equivalence preserves zero objects. This is a direct

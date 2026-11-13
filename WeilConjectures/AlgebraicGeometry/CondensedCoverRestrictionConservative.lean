@@ -12,7 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 /-! # Conservativity of covering restrictions with condensed coefficients
 
 Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Section 3
-and the proof of Lemma 4.5 (auxiliary; not a blueprint node).
+and the proof of Lemma 4.5.
 
 The module-object presentation is the published category of modules over
 `coefficientRing X Λ`, whose underlying ring object is `condensedRingObj Λ.X X`.
@@ -64,8 +64,7 @@ private theorem isIso_of_condensed_cover
 
 /-- Derived restrictions along any pro-etale covering family jointly detect isomorphisms
 and zero objects for arbitrary commutative condensed coefficients.
-Source: HRS Section 3 and Lemma 4.5, proof, conservativity of restriction
-(auxiliary; not a blueprint node).
+Source: HRS Section 3 and Lemma 4.5, proof, conservativity of restriction.
 
 Proof plan:
 1. By lem-weil-proetale-weakly-etale-localization the site of each cover member is

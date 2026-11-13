@@ -21,17 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Sites Tags 03CB and 03CC, and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-section-comparison-laws).
-Proof: expand each comparison into its adjunction unit, the unit-compatible composition
-isomorphism, and pullback pasting. Naturality of the unit moves restriction maps through
-units. For two successive comparisons, associativity of the composition isomorphisms
-combines them into the single comparison. The pullback pasting maps agree because their
-projections agree. For the identity map, the identity adjunction and uniqueness of the
-unit-compatible comparison cancel the identity-base-change isomorphism. Apply the same
-composition calculation to a transition followed by a cone projection; cone naturality
-identifies the composite with the other projection. These arguments require neither
-qcqs hypotheses nor a limit cone. -/
+/-- Source: Stacks Project, Sites Tags 03CB and 03CC, and Étale Cohomology Tag 09YQ. -/
 theorem etaleSetSectionComparisonLaws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)

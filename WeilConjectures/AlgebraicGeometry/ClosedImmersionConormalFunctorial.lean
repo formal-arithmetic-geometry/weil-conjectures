@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 /-!
 # Functoriality of conormal sheaves of closed immersions
 
-Source: Stacks Project, Morphisms, Lemma 01R4, Definition 01R2 and Lemma 01R3
-(blueprint: lem-weil-pbc-closed-immersion-conormal-functorial).
+Source: Stacks Project, Morphisms, Lemma 01R4, Definition 01R2 and Lemma 01R3.
 -/
 
 @[expose] public section
@@ -39,24 +38,7 @@ The final affine equation explicitly sends that class to the class of `g.appLE` 
 to its ideal representative. The existential section `s` also records ideal containment
 on these affine opens, without choosing coordinates or a second conormal definition.
 
-Source: Stacks Project, Morphisms, Lemma 01R4 (closed immersion case), with 01R2 and 01R3
-(blueprint: lem-weil-pbc-closed-immersion-conormal-functorial).
-Proof:
-1. The Galois connection for ideal comap/map and the kernel of a composite give
-   `i'.ker.comap g ≤ i.ker` from the commutative square.
-2. The source library's `pullbackToModulesι` factors through the extended ideal by
-   its kernel universal property. Ideal containment gives a second kernel lift into
-   `i.ker.toModules`. Compare the tensor pullback with Mathlib's pullback by uniqueness
-   of left adjoints; its unit equation gives exactly the section formula for `γ`.
-3. Compose the adjunctions for `i'` and `f`, then transport the right adjoint through
-   `pushforwardComp` and the equality of the two composites. Apply its inverse Hom
-   equivalence to the displayed right-hand morphism to construct `c`. Bijectivity of
-   this Hom equivalence proves uniqueness already from the adjoint equation.
-4. Restrict the section obtained by applying `γ` to the unit of `s'` to `U`. Naturality
-   of the ideal inclusion gives its required `g.appLE` value. The adjoint equation for
-   `c`, followed by naturality of the unit along `i`, gives the affine equation.
-   Thus no affine tensor-generation or quotient calculation is needed for this
-   statement, which expresses the affine classes through the pullback units. -/
+Source: Stacks Project, Morphisms, Lemma 01R4 (closed immersion case), with 01R2 and 01R3. -/
 theorem closedImmersion_conormal_functorial
     {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 /-!
 # Finite Tate sheaves and inverse image
 Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,
-Tags 03EK and 03EM; Cohomology on Sites, Tags 07A4 and 0G7E
-(auxiliary; not a blueprint node).
+Tags 03EK and 03EM; Cohomology on Sites, Tags 07A4 and 0G7E.
 -/
 @[expose] public section
 universe u
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 2048 in
 /-- Finite Tate sheaves are locally free lines, with the normalized inverse-image
 comparisons, their signed tensor products, and exponent-change comparisons.
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
 Proof plan:
 1. Apply `lem-asd-finite-etale-twist-line` to `ℤ/m` to trivialize the roots sheaf.
    Extend its cyclic basis to `A`. This uses only `m A = 0`, not finiteness or flatness
@@ -213,8 +211,7 @@ theorem etaleFiniteTwistPullback (A : Type (u + 1)) [CommRing A] (m : ℕ)
 
 /-! ## Structured normalized comparisons
 
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
 
 Named projections expose the same three witnesses and every law of the theorem above.
 The original declaration remains unchanged for existing consumers.
@@ -227,8 +224,7 @@ set_option synthInstance.maxSize 2048
 
 /-- The root, signed pullback and signed multiplication maps with every normalization of
 etaleFiniteTwistPullback, including unbounded derived pullback and exponent change.
-Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E. -/
 structure FiniteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hA : (m : A) = 0) where
   /-- Roots of unity, normalized by their inclusion in G_m. -/
@@ -383,8 +379,7 @@ structure FiniteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A] (m : ℕ)
 
 /-- The structured finite Tate comparisons exist, with the normalized inverse-image
 comparisons, their signed tensor products, and exponent-change comparisons.
-Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E.
 Proof plan:
 1. Apply `lem-asd-finite-etale-twist-line` to `ℤ/m` to trivialize the roots sheaf.
    Extend its cyclic basis to `A`. This uses only `m A = 0`, not finiteness or flatness
@@ -423,8 +418,7 @@ theorem nonempty_finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
 /-- Select the normalized comparisons. Constants and pure root tensors determine c, and
 unitors, positive recursion, associativity and evaluation determine p; r is determined by
 its monic inclusion into G_m. Thus the data are unique up to equality, including the duals.
-Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E. -/
 @[irreducible]
 def finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) : FiniteEtaleTwistPullbackData A m hA :=

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Transport of the derived mate at the upper-left vertex
 
 Source: Stacks Project, Tags 08HY, 0D5S and 0D5T.
-(blueprint: lem-pc-derived-base-change-top-iso).
 -/
 
 @[expose] public section
@@ -26,30 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Change only the upper-left scheme of a commutative square by an isomorphism.
-Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T.
-(blueprint: lem-pc-derived-base-change-top-iso).
-
-Proof: Use the pullback comparisons c and identity comparisons i selected by
-exists_derivedPullbackComposition, and their pinned derived adjunctions used in
-schemeDerivedBaseChangeMap. The comparisons for e.hom e.inv and e.inv e.hom,
-followed by i, exhibit L(e.hom)^* and L(e.inv)^* as inverse equivalences.
-Uniqueness of the right adjoint, with its pinned unit and counit, supplies
-R(e.hom)_* ≅ L(e.inv)^*. The equality e.hom p = g' and the pullback comparison
-give Lg'^* ≅ Lp^* L(e.hom)^*. Compose on the right with R(e.hom)_* and cancel
-L(e.hom)^* R(e.hom)_* by the inverse of the pinned adjunction unit; this defines j.
-The equality e.hom q = f'
-and the right-adjoint mate of c e.hom q give k : Rf'_* ≅ R(e.hom)_* Rq_*.
-Transpose the asserted equation under Lq^* ⊣ Rq_*. The definition of k as the
-mate of c identifies its effect on a transpose with applying R(e.hom)_* to the
-transpose under Lf'^* ⊣ Rf'_*. Substitute the counit definition of each base-change
-map. On the left this leaves the comparison identifying Lf'^* Lg^* with Lg'^* Lf^*,
-followed by Lg'^* of the counit of f, and then j. Naturality of j moves that counit
-past j. The associativity law for c, applied to e.hom, q and g, identifies the
-remaining comparison with the comparison identifying Lq^* Lg^* with Lp^* Lf^*.
-The unit laws cancel e.hom and e.inv in j. This is precisely the transpose of the
-right-hand base-change map. Injectivity of the Hom equivalence proves equality.
-No cartesian hypothesis is used. Identity e gives the unit laws; empty schemes
-and zero E are included, since all steps are identities of natural transformations. -/
+Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T. -/
 theorem exists_derivedBaseChange_top_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoordinates
 
 /-! # Affine scalar Ext and dual Koszul cohomology
 
-Source: Stacks Project, Tag 0BQZ, local finite free Hom computation.
-(blueprint: lem-sc-affine-koszul-scalar-ext-comparison). -/
+Source: Stacks Project, Tag 0BQZ, local finite free Hom computation. -/
 
 @[expose] public section
 
@@ -33,33 +32,7 @@ namespace AlgebraicGeometry
 of the cohomology of the integer-indexed dual Koszul complex.
 
 Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5, the displayed finite
-free Hom computation; Tag 08DM, Lemma 20.46.9.
-(blueprint: lem-sc-affine-koszul-scalar-ext-comparison).
-
-Proof: Put A = O_Y(U) and I = i.ker.ideal U. The closed immersion identifies
-its inverse image over U with Spec(A/I) over Spec(A). Koszul regularity makes
-the quotient augmentation a quasi-isomorphism. Exact associated-module
-sheafification and transport along U.isoSpec sheafify this augmentation to a
-resolution of the restricted i_* O_Z, by the affine quotient resolution lemma.
-The terms are finite free exterior powers and vanish above the sequence length;
-extension to integer cochain degrees makes a bounded finite free resolution.
-Restrict derived internal Hom to U, and use the bounded finite free Hom model
-into O_U in degree zero. In finite free coordinates, sheaf Hom into O_U is the
-associated sheaf of module Hom into A. These coordinate maps commute with
-localization on standard opens, with the Koszul differentials, and hence glue
-to an isomorphism of complexes with the sheafified dual Koszul complex.
-In degree k >= 0, only the target degree-zero term contributes, and the Hom
-differential is (-1)^(k+1) times precomposition with the Koszul boundary; this
-is exactly koszulDualBoundary. Negative degrees have zero terms.
-Associated sheafification and open restriction are exact, so their homology
-is the associated sheaf of the module homology. The equivalence between the
-over-U module site and U.toScheme.Modules gives the stated form.
-For an arbitrary supplied derived universe compute both representations using
-the same K-injective Hom complex in the standard derived universe and transport
-its homology comparison. Thus no derived-category instance on U in universe w
-is assumed. Empty sequences give the degree-zero structure sheaf; an empty
-chart gives the zero sheaf category. There is no rank or degree exclusion here,
-and no tensor pullback or derived base-change assertion. -/
+free Hom computation; Tag 08DM, Lemma 20.46.9. -/
 theorem affine_koszul_scalar_ext_comparison
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

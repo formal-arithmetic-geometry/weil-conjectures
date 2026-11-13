@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 /-! # Composite direct-image units with a fixed source
 
 Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: def-pc-direct-image-composition-unit-source).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ attribute [local instance 2000] schemeMVModuleAbelian
 The source identification is definitional: pushforward composition is the identity
 on sections. Naming it prevents later categorical calculations from repeatedly
 unfolding scalar restrictions.
-Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: def-pc-direct-image-composition-unit-source). -/
+Source: Stacks Project, Cohomology, Tag 0D5T. -/
 @[irreducible] def schemeMVCompositionUnit {A B D : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings B.toRingedSpace))]

@@ -21,21 +21,7 @@ namespace AlgebraicGeometry
 
 /-- Every positive-degree cocycle on an open of U_i has a sectionwise boundary.
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-local-positive-section-boundary)
-
-Proof: An open W of U_i identifies with an open V of X contained in U_i.
-Evaluate the isomorphisms e and their differential compatibility hd on V.
-For a Cech cocycle, insert i as the first index to construct its primitive:
-the extra intersection with U_i is V itself. The alternating differential
-of this primitive is the cocycle, because deletion of the inserted index
-contributes the cocycle and all other terms cancel by its cocycle equation.
-Transport the primitive back through e in degree p and the restriction
-isomorphism on sections. These are additive isomorphisms, so hd transports
-the boundary equation. This is an assertion on every open, requiring no
-sheafification or reflection of exactness. Empty opens and zero modules
-satisfy the same insertion formula.
--/
+Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy). -/
 theorem cech_sheaf_restrict_positive_section_boundary
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules)
     (D : CochainComplex X.Modules ℕ)

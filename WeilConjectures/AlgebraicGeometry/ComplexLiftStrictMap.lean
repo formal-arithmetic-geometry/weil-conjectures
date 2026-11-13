@@ -47,20 +47,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Lift a reduced map into an acyclic reduced complex strictly.
 
 Source: Stacks Project, Tag 0BCA, dotted-arrow paragraph; Derived Categories,
-Tag 0649 (lifting maps from bounded-above projective complexes).
-(blueprint: lem-sc-complex-lift-strict-map).
-
-Proof: Extension of scalars preserves projectives and zero objects, so the
-reduction of K is again bounded above and projective, hence K-projective.
-Its map to the acyclic C is therefore homotopic to zero. For each homotopy
-component, compose with the inverse of e, then apply the extension/restriction
-adjunction. The quotient adjunction unit is surjective, because every scalar
-modulo I comes from R and every tensor is represented by 1 tensor a vector.
-Projectivity of each term of K lifts the resulting map through this unit.
-Take the boundary of this lifted family, using nullHomotopicMap. Additivity
-and compatibility of nullHomotopicMap with postcomposition show that its
-reduction followed by e is the boundary of the original homotopy, namely the
-supplied map. Acyclicity of A is not required. -/
+Tag 0649 (lifting maps from bounded-above projective complexes). -/
 theorem exists_complex_lift_strict_map
     (R : Type u) [CommRing R] (I : Ideal R)
     (K A : CochainComplex (ModuleCat.{max u v} R) ℤ)

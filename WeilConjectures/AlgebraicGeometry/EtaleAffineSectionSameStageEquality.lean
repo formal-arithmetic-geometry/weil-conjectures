@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-! # Equality detection for two affine stage sections
-Source: Stacks Project, Tags 09YQ and 09XM; Mathlib affine-transition limits.
-(blueprint: lem-weil-pbc-affine-section-same-stage-equality). -/
+Source: Stacks Project, Tags 09YQ and 09XM; Mathlib affine-transition limits. -/
 
 @[expose] public section
 
@@ -27,20 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Tags 09YQ and 09XM; the compact closed-complement
-argument in Mathlib `AlgebraicGeometry.exists_map_eq_top`.
-(blueprint: lem-weil-pbc-affine-section-same-stage-equality).
-
-Proof: Restrict the limiting diagram to the cofinal category of stages over i₀.
-Base change W₀ to each stage and to the limit. Pullbacks commute with connected
-limits, so these schemes form a limiting cone. The stages are compact by
-quasi-compactness of W₀.hom, and their transitions are affine by base change.
-The generic comparison agreement-open theorem gives an open U on the base
-change at j such that equality of two comparison images means that the
-corresponding scheme map has whole inverse image of U. Apply this at the limit
-using hst. Mathlib's `exists_map_eq_top` then gives a single transition into j
-with whole inverse image of U. Apply the reverse agreement-open criterion to
-that transition. It is the transition in etaleStageSectionDiagram, as required.
-Empty base changes are included by the same open-containment argument. -/
+argument in Mathlib `AlgebraicGeometry.exists_map_eq_top`. -/
 theorem etaleAffineSection_sameStageEquality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

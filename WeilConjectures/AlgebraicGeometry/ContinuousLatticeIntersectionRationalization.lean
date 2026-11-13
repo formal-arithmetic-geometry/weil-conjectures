@@ -22,12 +22,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The canonical intersection recovers the original rational module after scalar extension.
-Source: Bhatt--Scholze, Lemma 6.8.13; localization and qcqs pushforward continuity.
-(auxiliary; not a blueprint node)
-Proof. Qcqs pushforward commutes with localization. The mates counit equation then
-makes the scalar extension of the pushed lattice embedding invertible. Exact scalar
-extension carries the pullback of its image to the whole restricted rational module.
-The localization counit identifies its scalar extension with the original module. -/
+Source: Bhatt--Scholze, Lemma 6.8.13; localization and qcqs pushforward continuity. -/
 theorem continuousLatticeIntersectionRationalization_isIso
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

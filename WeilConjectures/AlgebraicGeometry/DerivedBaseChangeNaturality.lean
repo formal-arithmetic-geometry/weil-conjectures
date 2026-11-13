@@ -34,13 +34,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Naturality of the canonical derived base-change map in its coefficient object.
-Source: Stacks Project, Cohomology, Remark 08HY.
-(blueprint: lem-pc-derived-base-change-coefficient-naturality).
-Proof: The map is the mate of the natural pullback-composition comparison followed
-by the pulled-back counit. Naturality of the adjunction Hom equivalence moves a
-coefficient map to the two ends of the transpose. Naturality of the comparison
-moves it into the pulled-back counit, and naturality of the counit equates the
-resulting transposes. -/
+Source: Stacks Project, Cohomology, Remark 08HY. -/
 theorem schemeDerivedBaseChangeMap_naturality
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

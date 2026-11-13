@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ExactFunctorStupidTailTriangle
 
 /-! # Arbitrarily low perfect truncation triangles on affine schemes
 
-Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, finite-free lift and truncation
-(blueprint: lem-sc-affine-perfect-low-truncation-triangle).
+Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, finite-free lift and truncation.
 -/
 
 @[expose] public section
@@ -36,29 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option backward.isDefEq.respectTransparency false in
 /-- There are arbitrarily low finite locally free truncation triangles with a perfect
 middle term extending to the ambient affine scheme. No vanishing or splitting is asserted.
-Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, first part
-(blueprint: lem-sc-affine-perfect-low-truncation-triangle).
-
-Proof:
-1. Perfectness implies locally finite Tor dimension. A finite cover of the
-quasi-compact open gives a common Tor interval [a,b]. Use the equivalence
-X = Spec Gamma(X) to view the supplied bounded-above finite-free sheaf complex K
-as a module complex P: take sections termwise, using that finite-free sheaves
-are quasi-coherent and the affine tilde/sections equivalence is exact.
-The resulting module complex is bounded above and termwise finite free;
-its associated sheaf complex recovers K, so its restriction represents F.
-2. Set N = a-1. For each r <= N, take the image K of P^(r-1) -> P^r.
-On U, exactness in degree r identifies K with the next kernel. The affine
-truncation-kernel finite-local-freeness theorem makes M = K|U finite locally free.
-The complex Q with M in degree r-1 followed by P^r|U, P^(r+1)|U, ... represents F.
-3. The tail P^r -> P^(r+1) -> ... on X is bounded finite free, hence perfect.
-The degreewise short exact sequence tail|U -> Q -> M[1-r] gives a distinguished
-triangle. Inverse rotation gives M[-r] -> tail|U -> F -> M[1-r]. Identify M[-r]
-with the single complex in degree r. This supplies the three morphisms and the
-asserted distinguished triangle for every r <= N.
-The empty open and zero complex require no exception: all constructions then
-restrict to zero, and the same short exact sequence gives the zero triangle.
--/
+Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, first part. -/
 theorem exists_low_perfect_truncation_triangle
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

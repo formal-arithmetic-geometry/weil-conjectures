@@ -22,7 +22,7 @@ import WeilConjectures.Algebra.Homology.AffinePerfectHomotopyDescent
 /-! # Affine full faithfulness for perfect complexes over a filtered colimit
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE,
-affine case (blueprint: lem-pc-affine-perfect-hom-colimit).
+affine case.
 
 The equivalences `ident` identify a presentation `H` with the stage derived Hom sets.
 The equations `htransition` and `hcanonical` specify scalar extension on every chain-map
@@ -38,17 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The canonical affine derived Hom comparison is bijective.
-Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof.
-Proof: Scalar extension preserves projective terms and bounded-above support.
-Mathlib's K-projective localization bijection represents every derived map by a
-chain map, and detects equality by a homotopy. Chain maps descend by
-`affine_perfect_chainMap_descent`; homotopies descend by
-`affine_perfect_homotopy_descent`. For surjectivity, descend a chain representative
-and use `hcanonical`. For injectivity, represent two colimit elements at one common
-stage, lift both derived maps to chain maps, descend the resulting homotopy, and
-use `htransition` and the filtered-colimit equality criterion. No derived-internal-Hom
-or one-point sheaf comparison is needed.
-(blueprint: lem-pc-affine-perfect-hom-colimit) -/
+Source: Stacks Project, Derived Categories of Schemes, Tag 09RE, affine proof. -/
 theorem affine_perfect_hom_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

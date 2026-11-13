@@ -59,8 +59,7 @@ theorem condensedField_coordinates_of_conjugacy
 /-- Transport the normalized regular-module evaluation along one geometric map.
 
 Source: Hemo--Richarz--Scholbach, Example 3.1; the adjoint-test characterization of
-continuous realization in `condensedFieldContinuousMapIso_test`
-(auxiliary; not a blueprint node).
+continuous realization in `condensedFieldContinuousMapIso_test`.
 
 Proof in words. Restriction along the inverse coefficient isomorphism sends the
 regular pulled-back coefficient module to the regular coefficient module on V.

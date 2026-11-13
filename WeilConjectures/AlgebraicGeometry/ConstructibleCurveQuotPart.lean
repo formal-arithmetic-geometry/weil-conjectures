@@ -24,8 +24,7 @@ module subobject theorem makes the first term constructible, and the cokernel
 Serre property makes its cokernel constructible. Short exactness identifies this
 cokernel with the quotient. Transport across that isomorphism, then apply the
 integral comparison to the torsion quotient. Source: Stacks Project, Tag 09BH (2),
-with the integral coefficient comparison recorded in the imported library.
-(blueprint: lem-weil-pbc-curve-constructible-quot-part) -/
+with the integral coefficient comparison recorded in the imported library. -/
 theorem constructible_quot_part {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

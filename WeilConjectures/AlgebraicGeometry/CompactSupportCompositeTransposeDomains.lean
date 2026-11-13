@@ -22,7 +22,6 @@ import Mathlib.Tactic.IrreducibleDef
 Source: latest blueprint file:
 `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`.
-(blueprint node: `lem-pur-compact-support-composite-transpose-domains`).
 
 The statement is made on the concrete finite-coefficient small pro-etale derived categories.
 -/
@@ -205,8 +204,7 @@ This is the explicit transport through `comparisonUpperStarPlusEtaleOrigin` and
 `rightDerivedLowerShriekComparisonIso`; no choice of an arbitrary inhabiting isomorphism is made.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable irreducible_def canonicalEtaleOriginLowerShriekCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -224,8 +222,7 @@ noncomputable irreducible_def canonicalEtaleOriginLowerShriekCompIso
 /-- The finite-Tor compositor restricted to the constructible finite-Tor subcategories.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable irreducible_def canonicalAlpha
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -261,8 +258,7 @@ noncomputable irreducible_def canonicalAlpha
 Brown adjunctions (statement dependency def-weil-pbc-adjunction-conjugate).
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable irreducible_def canonicalC
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -292,8 +288,7 @@ noncomputable irreducible_def canonicalC
 /-- The component `c_{A_Z} : W_h ≅ G_f G_g A_Z` of the conjugate `c` at the coefficient unit.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable irreducible_def canonicalCUnit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -325,8 +320,7 @@ noncomputable irreducible_def canonicalCUnit
 ambient derived morphism `P_h B ⟶ P_g P_f B`.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable irreducible_def canonicalAlphaComponent
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -355,8 +349,7 @@ noncomputable irreducible_def canonicalAlphaComponent
 inverse pullback compositor, used in `R_K`.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 noncomputable def canonicalSourceIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -376,8 +369,7 @@ noncomputable def canonicalSourceIso
 /-- Concrete normalized data for the final compact-support transposition.
 Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/`
 `sec-the-orientation-from-the-diagonal/sk-thm-dnc/thm-pur-cohomological-smoothness.md`,
-proof, final composition paragraph
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+proof, final composition paragraph. -/
 structure CompactSupportCompositeTransposeDomains
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
@@ -599,8 +591,7 @@ are recorded for every input used by the two transposes.
 with the two successive projections, including the module input `P_f M`.
 (6) The restricted adjunction Hom equivalences are bijections (hence injective); applying them
 in the two orders gives the displayed `L` and `R` domains and the typed composite-projection
-identity required before the final double-transpose calculation.
-(blueprint: lem-pur-compact-support-composite-transpose-domains). -/
+identity required before the final double-transpose calculation. -/
 theorem compactSupportCompositeTransposeDomains
     (ell : ℕ) [Fact ell.Prime]
     (k : Type u) [Field k] [Fact (ringChar k).Prime]

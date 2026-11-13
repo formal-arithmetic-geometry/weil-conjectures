@@ -93,19 +93,7 @@ private theorem exchange_vertical
 
 /-- Ordinary exchange is invertible on a quasi-coherent affine-open direct image.
 Source: Stacks Project, Tag 02KG; the affine-intersection argument of
-`lem-pc-affine-alternating-cech-pinned-mate`.
-(blueprint: lem-pc-s3-affine-open-pushforward-exchange).
-Proof: Write j for W.ι and form its pullback j' along p = pullback.fst f g.
-Since X is separated over the affine scheme Spec A, X is separated and j is affine.
-The composite j ≫ f is affine because both its source and target are affine.
-The restriction G|W is quasi-coherent. The square for j and p and the outer square
-for j ≫ f and g are cartesian, so affinePushforward_baseChange makes their exchange
-maps invertible. Vertical pasting of ordinary exchange, proved by transposing under
-the tensor-pullback adjunction for g, expresses the outer map (up to pushforward
-composition isomorphisms) as the exchange for f on j_*G|W followed by f'_* of
-exchange for j. Pushforward preserves the latter isomorphism. Cancel it and the
-composition isomorphisms to obtain the assertion. This uses no derived category,
-complex, finite-product identification, or localization. -/
+`lem-pc-affine-alternating-cech-pinned-mate`. -/
 theorem affineOpen_pushforward_exchange
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

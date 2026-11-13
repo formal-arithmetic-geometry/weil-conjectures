@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport
 
 Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction;
 Tag 0098, stalks of pullback, and Tag 0D5S, pullback composition.
-(blueprint: lem-pc-affine-spectrum-stalk-conjugacy).
 -/
 
 @[expose] public section
@@ -81,25 +80,7 @@ set_option maxHeartbeats 1600000 in
 -- The two squares require elaborating distinct nested stalk cohomology models.
 /-- Pointwise comparison arrows are conjugate when the spectrum representatives
 are the termwise pullbacks. This does not construct such representatives, nor
-assert a stalk condition for either square.
-
-Proof: normalize each comparison by the exact-stalk homology isomorphism and
-its target representative isomorphism e'. Naturality for the chain map t and the
-represents equation give comparisonIntoPullback followed by the derived stalk
-cohomology map of L(g')*(e);phi. Apply the source-only affine spectrum transport
-with c.P, d.P, c.e, d.e and hP. It gives an additive source isomorphism and a natural
-isomorphism T from original derived stalk cohomology to spectrum pullback followed
-by spectrum derived stalk cohomology. Postcompose its comparison square with the
-spectrum coefficient morphism. The inverse composition comparison cancels the
-composition comparison defining affineSpectrumDerivedMorphism. Naturality of T
-at phi gives a commuting square for the normalized comparisons. The target
-isomorphism is original normalization, then T at K', then inverse spectrum
-normalization. Cancel the latter normalization and apply Arrow.isoMk. The target
-transport works for arbitrary target representatives, so the retained hypothesis
-hN is unnecessary for this argument. No horizontal comparison is assumed invertible.
-Source: Stacks Project, Tag 0DJ8, affine reduction and equation-bc;
-Tag 0098, tensor-pullback stalk formula; Tag 0D5S, composition of derived pullback.
-(blueprint: lem-pc-affine-spectrum-stalk-conjugacy). -/
+assert a stalk condition for either square. -/
 theorem nonempty_affineSpectrum_stalkComparison_arrow_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

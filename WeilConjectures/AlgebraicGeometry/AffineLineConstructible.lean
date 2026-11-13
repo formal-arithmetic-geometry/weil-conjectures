@@ -21,10 +21,8 @@ A constructible subset of `X` containing no generic point of `X` is a finite set
 affine line `𝔸(n; Spec K)` over a field `K`, with `n` a singleton
 (`AlgebraicGeometry.AffineSpace.exists_finset_of_isConstructible`).
 
-This is the first half of the finite-support step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`): the image of the support in a coordinate line is
+This is the first half of the finite-support step of Gabber's Künneth formula: the image of the support in a coordinate line is
 constructible and omits the generic point, so is a finite set of closed points.
-
 -/
 
 @[expose] public section

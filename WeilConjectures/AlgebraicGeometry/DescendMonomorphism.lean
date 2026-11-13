@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 # Monomorphisms descend to a stage of an inverse limit
 
 Source: Stacks Project, Limits, Tag 07RQ, in Situation 081D.
-(blueprint: lem-weil-pbc-descend-monomorphism)
 -/
 
 @[expose] public section
@@ -271,27 +270,7 @@ private theorem exists_mono_overPullback
 /-- A locally finite type morphism between qcqs schemes is monic at some stage if its
 base change to the inverse limit is monic.
 
-Source: Stacks Project, Limits, Lemma Tag 07RQ, in Situation 081D.
-(blueprint: lem-weil-pbc-descend-monomorphism)
-
-Proof:
-The diagonal is locally of finite presentation: follow it by the first projection,
-a locally finite type morphism, to obtain the identity, and apply cancellation
-(Morphisms, Tag 02FV). Its source and target are qcqs. The diagonal of a base change
-is the base change of the diagonal, up to canonical isomorphisms. Monicity of the
-limit morphism thus makes the limit diagonal an isomorphism.
-
-Descend that isomorphism using finite-stage model comparison, without invoking
-Limits Tag 01ZL (whose published proof depends on closed-immersion descent).
-Given a locally finitely presented model whose pullback is an isomorphism, regard
-the limit as a common model of it and of the identity of the initial stage. The
-finite-stage comparison theorem descends the inverse and its two inverse identities,
-by factorization of maps into locally finitely presented schemes and eventual
-equality of maps into locally finite type schemes (Limits, Tag 01ZM). The resulting
-isomorphism over a later stage equals the model's structure map, hence that structure
-map is an isomorphism. Apply this to the diagonal, then use the diagonal criterion
-for monomorphisms. Cartesian square pasting transfers the result between the ordinary
-pullback and `Over.pullback` presentations. -/
+Source: Stacks Project, Limits, Lemma Tag 07RQ, in Situation 081D. -/
 theorem exists_mono_baseChange_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

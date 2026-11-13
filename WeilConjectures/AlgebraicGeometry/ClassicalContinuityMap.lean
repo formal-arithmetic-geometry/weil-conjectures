@@ -15,8 +15,7 @@ import WeilConjectures.RingTheory.IndEtaleSmallIndex
 /-! # Continuity maps and classical pro-étale sheaves
 
 Source: current blueprint, sec-proetale-coefficients/sk-def-pe-classical-definition,
-`sk-def-pe-classical-definition-continuity-map.md`, clauses 1--4 and final paragraph
-(blueprint: det-pe-classical-definition-continuity-map).
+`sk-def-pe-classical-definition-continuity-map.md`, clauses 1--4 and final paragraph.
 
 The index categories and section values live in the common larger universe `u + 1`.
 Module coefficients use the intrinsic constant-ring module category of the recorded
@@ -35,8 +34,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- An affine étale presentation with an affine vertex in the pro-étale site.
 The universal property is taken in all schemes over `X`, not just in the site.
-Source: current blueprint, continuity-map detail, clause 1
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Source: current blueprint, continuity-map detail, clause 1. -/
 structure AffinePresentation (X : Scheme.{u}) (I : Type (u + 1))
     [SmallCategory I] [IsCofiltered I] where
   diagram : I ⥤ X.ProEt
@@ -47,16 +45,14 @@ structure AffinePresentation (X : Scheme.{u}) (I : Type (u + 1))
   isLimit : IsLimit ((Scheme.ProEt.forget X).mapCone cone)
 
 /-- Restriction of a presheaf to the stages of a presentation, contravariantly.
-Source: current blueprint, continuity-map detail, clause 2
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Source: current blueprint, continuity-map detail, clause 2. -/
 def sectionDiagram {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I)
     {C : Type uC} [Category.{vC} C] (F : X.ProEtᵒᵖ ⥤ C) : Iᵒᵖ ⥤ C :=
   P.diagram.op ⋙ F
 
 /-- The restriction cocone, obtained functorially from the projection cone.
-Source: current blueprint, continuity-map detail, clause 2
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Source: current blueprint, continuity-map detail, clause 2. -/
 def sectionCocone {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I)
     {C : Type uC} [Category.{vC} C] (F : X.ProEtᵒᵖ ⥤ C) :
@@ -64,8 +60,7 @@ def sectionCocone {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
   F.mapCocone P.cone.op
 
 /-- The canonical map out of the chosen colimit, retaining the presentation.
-Source: current blueprint, continuity-map detail, clause 2; Stacks, Categories, Tag 002F
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Source: current blueprint, continuity-map detail, clause 2; Stacks, Categories, Tag 002F. -/
 noncomputable def continuityMap {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I)
     {C : Type uC} [Category.{vC} C] (F : X.ProEtᵒᵖ ⥤ C)
@@ -74,11 +69,7 @@ noncomputable def continuityMap {X : Scheme.{u}} {I : Type (u + 1)} [SmallCatego
   colimit.desc (sectionDiagram P F) (sectionCocone P F)
 
 /-- Naturality of the continuity map in the sheaf (in fact in any presheaf).
-Source: current blueprint, continuity-map detail, clause 2
-(blueprint: det-pe-classical-definition-continuity-map).
-Proof: precompose with every coprojection. Both composites become the restriction map
-along `u_i` followed by the component of the sheaf morphism. They agree by naturality;
-the colimit universal property gives equality. -/
+Source: current blueprint, continuity-map detail, clause 2. -/
 theorem continuityMap_natural {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I)
     {C : Type uC} [Category.{vC} C] {F G : X.ProEtᵒᵖ ⥤ C} (α : F ⟶ G)
@@ -92,19 +83,14 @@ theorem continuityMap_natural {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory
   simp [continuityMap, sectionCocone, sectionDiagram, α.naturality]
 
 /-- A set sheaf is classical when every affine presentation gives a bijective map.
-Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Source: current blueprint, continuity-map detail, clause 3. -/
 def IsClassical {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) : Prop :=
   ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (P : AffinePresentation X I), Function.Bijective (continuityMap P F.obj)
 
 /-- Set-sheaf classicality is invariant under isomorphism.
-Source: current blueprint, continuity-map proof, third paragraph
-(blueprint: det-pe-classical-definition-continuity-map).
-Proof: naturality identifies the continuity maps through the component bijections of
-an isomorphism and the colimit isomorphism induced by its stage components. Apply the
-same construction to its inverse to see that these identifications are bijective. -/
+Source: current blueprint, continuity-map proof, third paragraph. -/
 theorem isClassical_iso_iff {X : Scheme.{u}}
     {F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))} (e : F ≅ G) :
     IsClassical F ↔ IsClassical G := by

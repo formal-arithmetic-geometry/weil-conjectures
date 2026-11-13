@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleColimitCocone
 /-!
 # Constructible filtered presentations of etale module sheaves
 
-Source: Stacks Project, Tag 03SA, part (3)
-(blueprint: lem-weil-pbc-module-sheaf-colimit-constructible).
+Source: Stacks Project, Tag 03SA, part (3).
 -/
 
 @[expose] public section
@@ -33,26 +32,7 @@ by constructible module sheaves. The maps and the universal property are in the 
 of module-valued sheaves, the constant-ring module-sheaf encoding used by
 `IsConstructibleEtaleModuleSheaf`.
 
-Source: Stacks Project, Tag 03SA(3)
-(blueprint: lem-weil-pbc-module-sheaf-colimit-constructible).
-
-Proof:
-1. Constructible module sheaves generate the category: choose an epimorphism from a
-   coproduct of constructible sheaves to `F` (`lem-weil-pbc-constructible-generation`).
-   Constructible sheaves are finitely presented
-   (`lem-weil-pbc-constructible-finitely-presented`), so maps from them into a filtered
-   colimit factor through a stage and equalities hold after a common refinement.
-2. Take a small model of the category of constructible sheaves equipped with a map to
-   `F`, with morphisms commuting with these maps. The zero sheaf gives nonemptiness,
-   finite sums give common successors, and constructible cokernels equalize parallel
-   arrows. Thus the category is filtered. Generation and finite presentation show
-   that the canonical cocone is a colimit (`def-weil-pbc-category-colimit`): compatible
-   maps descend uniquely through the generating epimorphism, and local epimorphism
-   detection gives uniqueness.
-3. This construction takes place in module sheaves, with all maps linear over `Λ`.
-   The cocone is therefore a colimit in that category, and every diagram object is
-   constructible (`def-weil-pbc-etale-sheaves`, `def-weil-sheaf-of-modules-category`).
--/
+Source: Stacks Project, Tag 03SA(3). -/
 theorem exists_filtered_colimit_constructible
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

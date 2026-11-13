@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffineFlatDescent
 
 /-! Effective fpqc descent of affine morphisms.
 Source: Stacks Project, Descent, Lemma 35.37.1 (Tag 0245).
-(blueprint: lem-galois-fpqc-affine-descent-effective)
 -/
 
 @[expose] public section
@@ -55,8 +54,7 @@ private theorem isAffineHom_sigmaMap (m : ℕ) (Y V : Fin m → Scheme.{u})
 The fpqc reduction applies to the affine morphism property. Base change stability is
 `MorphismProperty.pullback_snd`; finite coproduct stability is the proved helper
 `isAffineHom_sigmaMap`; the affine flat case is `isEffective_of_isAffineHom_flat_affine`.
-
-(blueprint: lem-galois-fpqc-affine-descent-effective) -/
+ -/
 theorem isEffective_of_isAffineHom_fpqc {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y) {V : Over X}
     [IsAffineHom V.hom] (D : Over.DescentDatum p V) : D.IsEffective := by

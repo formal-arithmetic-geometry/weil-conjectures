@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Nakayama
 /-! # Coherent support on an adic closed fibre
 
 Source: Stacks Project, Theorem 088E, displayed support equation after projective existence.
-(blueprint: new-coherent-adic-closed-fibre-support)
 -/
 
 @[expose] public section
@@ -95,17 +94,7 @@ private theorem support_inter_ideal_subset_quotient {X : Scheme.{u}} [IsNoetheri
   exact ha.trans hb.symm
 
 /-- On the closed fibre, support is detected by the first ideal quotient.
-Source: Stacks Project, Theorem 088E, displayed support equation, and Algebra, Tag 00DV.
-(blueprint: new-coherent-adic-closed-fibre-support)
-
-Proof: Write K = I O_X. The stalk of the first quotient is F_x/K_x F_x by exactness
-of stalks and the ideal-product stalk formula. If p(x) lies in V(I), K_x is contained
-in the maximal ideal of the local ring O_{X,x}. The coherent stalk F_x is finite,
-so Nakayama implies that a zero quotient forces F_x = 0. Conversely, a quotient of
-a zero stalk is zero. Off p inverse V(I), some element of I is a unit at x, so
-K_x = O_{X,x} and the quotient is zero. These observations give the set equality.
-No completeness or properness is required. For I = 0 it is the identity; for I = 1
-both sides are empty; the zero module and empty scheme give empty supports. -/
+Source: Stacks Project, Theorem 088E, displayed support equation, and Algebra, Tag 00DV. -/
 theorem coherent_adic_closed_fibre_support
     (A : Type u) [CommRing A] (I : Ideal A)
     {X : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Spec (.of A))

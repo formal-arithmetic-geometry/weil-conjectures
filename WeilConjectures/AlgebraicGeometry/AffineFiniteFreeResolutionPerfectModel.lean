@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFiniteFreePerfectComparison
 /-!
 # Local strictly perfect models from bounded finite free resolutions
 
-Source: Stacks Project, Tag 068C, finite free resolution argument, and Tags 08C4, 08CM
-(blueprint: lem-sc-affine-finite-free-resolution-perfect-model).
+Source: Stacks Project, Tag 068C, finite free resolution argument, and Tags 08C4, 08CM.
 -/
 
 @[expose] public section
@@ -30,24 +29,7 @@ namespace AlgebraicGeometry
 
 /-- A bounded finite free algebraic chain complex resolving a sheaf on an affine
 open supplies a strictly perfect model for its derived restriction to that open.
-Source: Stacks Project, Tag 068C, and Definitions 08C4, 08CM
-(blueprint: lem-sc-affine-finite-free-resolution-perfect-model).
-
-Proof: Extend `K` by zero from degree `n` to cohomological degree `-n`. Its terms
-vanish outside `[-r,0]`. Choose a finite basis in each algebraic term; sheafifying
-its basis isomorphism identifies the term with a finite direct sum of the unit
-sheaf. Transport along the affine chart and then along `Scheme.Modules.overEquiv U`
-to the localized site used in `IsStrictlyPerfect`. The transported basis maps give
-inverse maps to the finite free sheaf indexed by `ULift (Fin m)`; outside the bound
-use rank zero. Thus the transported cochain complex is strictly perfect.
-Extend the given quasi-isomorphism `q` by zero as well; its homology is unchanged
-in degrees `-n` and zero in the other degrees. The localized-site equivalence
-preserves homology. Invert this quasi-isomorphism in the derived category and
-compose with the natural restriction-single comparison. That comparison identifies
-restriction via `SheafOfModules.overFunctor` with restriction to `U.toScheme`
-followed by the localized-site equivalence, and commutes with the degree-zero
-single functor. The resulting derived isomorphism has precisely the asserted
-source and target. This argument works for the zero ring, rank zero, and `r = 0`. -/
+Source: Stacks Project, Tag 068C, and Definitions 08C4, 08CM. -/
 theorem exists_affine_finite_free_perfect_model {Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

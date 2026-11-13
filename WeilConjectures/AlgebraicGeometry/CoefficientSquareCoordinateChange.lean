@@ -105,20 +105,7 @@ end
 /-- A change of the two coordinates of a commutative coefficient square is
 compatible with the composition comparisons. The coordinate arrows need not
 be invertible.
-Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback.
-(blueprint: lem-pc-coefficient-square-coordinate-change).
-
-Proof: Expand both square maps. Apply associativity to (t,e,z) and
-(b,qz,z) to move the source comparison through the square equality hz;
-use ht and hv to identify the composite morphisms. Apply associativity to
-(b,pz,g), then naturality at phi, to move the target comparison past the
-coefficient morphism. Equality-transport naturality moves the transports to
-the common composite. The rectangle equality and the transported square
-equality have the same endpoints, so proof irrelevance identifies them.
-The forward and inverse comparisons cancel. Both sides now have the same
-source comparison, the same equality transport and the same final pullback
-of phi. No cancellation of a coordinate arrow is used, so the assertion holds
-for arbitrary arrows, including maps from empty schemes and zero coefficients. -/
+Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback. -/
 theorem coefficient_square_coordinate_change
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Int
 /-! # Restriction of continuous module encodings
 
 Source: Bhatt--Scholze, Section 6.8; Stacks Project, Modules on Sites.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Restriction of a continuous-function coefficient ring is identity on sections.
-Source: Bhatt--Scholze, Section 6.8.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Section 6.8. -/
 noncomputable def continuousRestrictionMap
     {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] :
@@ -39,14 +37,7 @@ noncomputable def continuousRestrictionMap
     naturality := fun _ _ _ ↦ rfl }
 
 /-- Encoding canonical inverse image agrees with restriction of the sectionwise module.
-Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tags 03EK and 03EL.
-(auxiliary; not a blueprint node)
-
-Proof. Apply the monoidal localization comparison to the underlying module.
-Conjugate its coefficient map by the two continuous charts. The chart-pullback
-square identifies the result with the identity continuous-function coefficient
-map. Evaluating the actions on pure tensors gives the sectionwise linearity.
-Naturality is the localization comparison's naturality. -/
+Source: Bhatt--Scholze, Section 6.8; Stacks Project, Tags 03EK and 03EL. -/
 theorem continuousRing_module_restriction
     (X Y : Scheme.{u}) (f : Y ⟶ X) [WeaklyEtale f]
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
@@ -241,12 +232,7 @@ private theorem field_restriction_transport
         ((SheafOfModules.forget _).mapIso eFX.symm)⟩
 
 /-- The rational encoding commutes with the etale restriction used in a lattice.
-Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
-
-Proof. Apply continuousRing_module_restriction and transport its coefficient
-rings through lisseFieldSheaf_eq. These transports commute with restriction
-because they are induced by the same equality of coefficient topologies. -/
+Source: Bhatt--Scholze, Proposition 6.8.4(6). -/
 theorem continuousField_module_restriction
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

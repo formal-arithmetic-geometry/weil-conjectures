@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 /-!
 # Essential surjectivity of the compatible affine chart functor
 
-Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT
-(blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence).
+Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT.
 -/
 
 @[expose] public section
@@ -44,21 +43,8 @@ private theorem residueTriple_iso {A : CommRingCat.{v}} {p : Spec A}
   apply Over.OverMorphism.ext
   exact hA
 
-/-- Source: Stacks Project, proof of Tag 04HX (lemma-describe-etale-local-ring),
-translation of pointed affine neighbourhoods into triples, and Tag 04HT
-(remark-etale-neighbourhoods).
-(blueprint: lem-weil-pbc-etale-chart-essentially-surjective).
-
-Proof: Given a triple t, form V = Spec t.B, with structure map Spec t.α followed by i
-and point the spectrum map of B → κ(t.q) → K → Ω. Its structure map is étale by
-composition, and the compatibility equation of t makes its point lie over xU ≫ i.
-It is affine and factors through the chart, so it defines c in NU. The component δ_c,
-followed backwards by ΓSpecIso, identifies the ring of H(c) with B. The first formula
-shows that this ring isomorphism commutes with the maps from A. The second formula,
-after cancelling the injective inclusion K → Ω using full faithfulness of Spec,
-shows that it also commutes with the maps to K. It and its inverse therefore define
-an isomorphism of triples between H(op c) and t. This proves essential surjectivity;
-no arbitrary equivalence of indexing categories is used. -/
+/-- Source: Stacks Project, proof of Tag 04HX,
+translation of pointed affine neighbourhoods into triples, and Tag 04HT. -/
 theorem etale_chart_residue_triples_essentially_surjective
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

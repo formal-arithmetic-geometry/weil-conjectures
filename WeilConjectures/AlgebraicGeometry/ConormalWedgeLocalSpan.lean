@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Local generation of conormal wedges by affine ideal sections
 
-Source: Stacks Project, Tags 01R3 and 0096, and affine module localization.
-(blueprint: new-e3-conormal-wedge-local-span). -/
+Source: Stacks Project, Tags 01R3 and 0096, and affine module localization. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -55,24 +54,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A pure wedge of local conormal sections is locally in the span of wedges of the
 pullback-unit images of ideal sections on a fixed ambient affine chart.
-Source: Stacks Project, Tags 01R3 and 0096, and affine module localization.
-(blueprint: new-e3-conormal-wedge-local-span).
-
-Proof: The closed inverse image of V = Spec A is affine with coordinate ring A/I.
-The conormal sections theorem, including its unit equation, identifies N on this chart
-with the associated module I/I² and the unit images with classes of elements of I.
-Choose a principal neighbourhood of x inside W in this closed affine chart. Each of
-the finitely many sections a(j) is a fraction in the localization of I/I² on a smaller
-principal neighbourhood. Refine the finitely many neighbourhoods to a common principal
-neighbourhood W' and lift every numerator to I, using surjectivity of I → I/I².
-Thus each restricted a(j) is a finite linear combination of restrictions of unit images
-of ideal sections on V, with coefficients in O_Z(W'). Expand their wedge using
-multilinearity; each resulting summand is a scalar multiple of a wedge of those unit
-images. The exterior sheaf restriction and sheafification unit preserve these wedges
-and scalar combinations. This proves the asserted span membership. For n=0 the empty
-wedge is itself one of the generators and W'=W works. A point in W rules out the empty
-chart, while a zero conormal module causes no difficulty. No finite generation of I,
-regular immersion hypothesis, or general-section sheafification argument is used. -/
+Source: Stacks Project, Tags 01R3 and 0096, and affine module localization. -/
 theorem conormal_wedge_mem_span_locally
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)
     (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)

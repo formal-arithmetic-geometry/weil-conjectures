@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.AffineHomComparisonRankOne
 
 /-! # Natural affine Hom comparison maps
 
-Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ.
-(blueprint: lem-sc-k3-affine-hom-comparison-maps). -/
+Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ. -/
 
 @[expose] public section
 
@@ -28,21 +27,7 @@ namespace AlgebraicGeometry
 /-- The forward affine Hom comparison exists for arbitrary modules, is natural
 in both arguments, and is invertible when the source is the rank-one module.
 Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5); Tag 0BQZ,
-lemma-regular-immersion-ext, the coefficient comparison.
-(blueprint: lem-sc-k3-affine-hom-comparison-maps).
-
-Proof: For modules M,N, on D(a) send a localized linear map h/a^r to the
-map M_a -> N_a taking m/a^s to h(m)/a^(r+s). The localization universal
-property makes this independent of representatives and linear over A_a.
-These maps commute with restriction to smaller principal opens, by the
-uniqueness clause of localization, and thus glue to a sheaf morphism from
-associated Hom to internal Hom. This construction does not assert that
-Hom commutes with localization for arbitrary M. Composing before or after
-h commutes with the displayed formula, proving the two naturality squares.
-For M=A, evaluation at 1 identifies both sides with associated N, and the
-comparison with its identity; this proves invertibility in rank one.
-Transport along isoSpec preserves maps, compositions and invertibility.
-The formulas also apply to the zero ring and the zero coefficient module. -/
+lemma-regular-immersion-ext, the coefficient comparison. -/
 theorem exists_affine_hom_comparison_maps {Y : Scheme.{u}} (U : Y.affineOpens) :
     let A := (Γ(Y, U.1) : Type u)
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom

@@ -24,8 +24,7 @@ variable {X S : Scheme.{u}}
 /-- The sheaf morphism underlying the normalized difference derivation.
 Source: Stacks Project, Tag 08S2. Construct the morphism from the universal relative
  differential sheaf by the difference of the two splittings of the square-zero diagonal
- extension; the local kernel calculation gives the displayed normalization.
-(blueprint: lem-sc-diagonal-conormal-morphism-exists). -/
+ extension; the local kernel calculation gives the displayed normalization. -/
 theorem exists_diagonalConormalMorphism (f : X ⟶ S) :
     ∃ φ : f.relativeDifferentials ⟶ diagonalConormal f,
       ∀ (U : X.Opens) (W : (pullback f f).Opens)

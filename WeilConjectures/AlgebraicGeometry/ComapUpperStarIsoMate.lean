@@ -108,20 +108,7 @@ private lemma comapUpperStarIso_inv_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The canonical restriction/pullback comparison is the inverse mate of the
 restriction/pushforward comparison for one scheme map.
 Source: Bhatt--Scholze, Remark 6.8.15, and the explicit constructions in
-`ModuleObject.ChangeOfCoefficients` and `ModuleObject.UpperLowerStar.Defs`.
-(auxiliary; not a blueprint node)
-
-Proof. Expand the module pull/push adjunction as the composite of the lifted
-monoidal sheaf adjunction and extension/restriction along the coefficient-pullback
-isomorphism. Extension along this isomorphism is restriction along its inverse;
-the unit of their adjunction is the resulting identification of the actions.
-The coefficient square commutes by naturality of upperStarFromPointComp. Thus
-restriction of the pullback unit, followed by the identity underlying
-restriction/pushforward comparison, equals the pullback unit of the restricted
-module followed by pushforward of the inverse restriction/pullback comparison.
-Transpose this unit equation. The triangle identity and faithfulness of the module
-forgetful functor identify its mate with comapLowerStarIso. This argument is for
-one map only and uses neither composition coherence nor flatness of a. -/
+`ModuleObject.ChangeOfCoefficients` and `ModuleObject.UpperLowerStar.Defs`. -/
 theorem comapUpperStarIso_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     mateEquiv (upperStarLowerStarAdjunction Λ' f) (upperStarLowerStarAdjunction Λ f)
       (TwoSquare.mk _ _ _ _ (comapUpperStarIso a f).inv) =

@@ -17,8 +17,7 @@ import WeilConjectures.RingTheory.FpModuleTensorModelComparison
 /-!
 # Eventual flatness for finitely presented modules over affine inverse limits
 
-Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
-(blueprint: lem-pc-affine-flat-module-descent).
+Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /--
-Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
-(blueprint: lem-pc-affine-flat-module-descent).
+Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3).
 
 1. Finite presentation over the base gives finite presentation of the
    prescribed algebra and module stages; the directed colimit criteria

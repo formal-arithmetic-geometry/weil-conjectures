@@ -18,7 +18,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Affine-local acyclicity under open restriction
 
 Source: Stacks Project, Tag 0A51, the Mayer--Vietoris induction, and Tag 03D3.
-(blueprint: lem-weil-pbc-affine-local-acyclic-open-restriction).
 -/
 
 @[expose] public section
@@ -33,20 +32,7 @@ open Scheme Etale
 
 /-- Affine-local acyclicity is inherited by restriction to an open subscheme.
 Source: Stacks Project, Tag 0A51, induction step; inverse-image composition and
-base-change associativity, Stacks Project, Tag 03D3.
-(blueprint: lem-weil-pbc-affine-local-acyclic-open-restriction)
-
-Proof: Let O be an affine open of W. Its image W.ι(O) is an affine open of X,
-because O and its image are isomorphic as schemes. Apply hlocal to that image.
-The iterated fibre product O ×_W (W ×_X Z) is canonically isomorphic to
-W.ι(O) ×_X Z, by the open-image isomorphism and associativity of fibre products.
-Under this isomorphism the sheaves in the two groups agree: both are the inverse
-image of J along the same composite to X. The composition isomorphisms of module
-inverse image and their compatibility with forgetting coefficients give an
-isomorphism of abelian sheaves. Cohomology preserves sheaf isomorphisms, and
-pullback along a scheme isomorphism induces an isomorphism on cohomology.
-Transport the subsingleton instance supplied by hlocal across these isomorphisms.
-The argument also applies to empty opens, to W = top, and to any morphism i. -/
+base-change associativity, Stacks Project, Tag 03D3. -/
 theorem Etale.affine_local_acyclic_open_restriction
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

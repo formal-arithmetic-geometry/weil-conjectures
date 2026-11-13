@@ -21,7 +21,6 @@ import WeilConjectures.ConstructibleSheaf.KernelCokernel
 # Affine free presentations with Noetherian coefficients
 
 Source: Stacks Project, Tag 095N.
-(blueprint: new-constructible-affine-free-presentation-general).
 -/
 
 @[expose] public section
@@ -243,18 +242,7 @@ private theorem finite_affine_free_epimorphism
 
 /-- A constructible module sheaf over a Noetherian ring has a finite affine free presentation.
 
-Source: Stacks Project, Tag 095N.
-(blueprint: new-constructible-affine-free-presentation-general).
-
-Proof: Affine free etale sheaves are constructible by the finite-etale stratification
-of their representing morphisms. Finite generation of each stalk provides finitely many
-sections, represented on affine pointed etale neighborhoods, surjecting on that stalk.
-The failure locus of each finite family is the constructible support of its cokernel.
-Compactness of the constructible topology selects finitely many families with empty
-intersection of failure loci. Their union gives an epimorphism. Its kernel is constructible
-because the coefficient ring is Noetherian. Apply the same construction to the kernel,
-then compose with its inclusion. The original epimorphism is the cokernel of this composite.
-Zero sheaves and empty bases allow the empty family throughout. -/
+Source: Stacks Project, Tag 095N. -/
 theorem exists_affine_free_etale_presentation_general
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]

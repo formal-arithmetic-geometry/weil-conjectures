@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 /-! # Counit square for affine spectrum pullback composition
 
 Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-affine-spectrum-composition-counit-square).
 -/
 
 @[expose] public section
@@ -213,22 +212,7 @@ private theorem composition_factorization_transport_private
 alias composition_factorization_transport := composition_factorization_transport_private
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
-(blueprint: lem-pc-affine-spectrum-composition-counit-square).
-
-Proof: Apply the leftDerived_fac_app equation to each of the two chosen composition
-comparisons, at the image of P in the homotopy category. Expand whiskering and
-associators: each equation is the composite of the two successive counits followed
-by Qh of the underived composition comparison. The latter is the inverse of the
-pinned tensorPullbackCompositionIso, since conjugation commutes with inversion and
-pushforwardCongr rfl is the identity. Transport the second equation along
-isoSpec_inv_naturality. Its total pullback and counit agree with those in the first
-equation by equality elimination and proof irrelevance. Cancel the second derived
-comparison and the first underived comparison. The resulting square is precisely
-the displayed equation. The quotient/localization comparison has identity components;
-its naturality identifies Qh of the termwise comparison with Q of that comparison.
-No inversion of a counit is used; zero complexes and empty schemes satisfy the same
-factorization equations. -/
+Source: Stacks Project, Tag 0D5S, composition of derived pullbacks. -/
 private theorem affineSpectrum_composition_counit_square_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -288,22 +272,7 @@ private theorem affineSpectrum_composition_counit_square_aux
 
 /-- The composition comparison intertwines the successive derived counits at a complex.
 There is no coefficient morphism, representative isomorphism or K-flatness assumption.
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks.
-(blueprint: lem-pc-affine-spectrum-composition-counit-square).
-
-Proof: Apply the leftDerived_fac_app equation to each of the two chosen composition
-comparisons, at the image of P in the homotopy category. Expand whiskering and
-associators: each equation is the composite of the two successive counits followed
-by Qh of the underived composition comparison. The latter is the inverse of the
-pinned tensorPullbackCompositionIso, since conjugation commutes with inversion and
-pushforwardCongr rfl is the identity. Transport the second equation along
-isoSpec_inv_naturality. Its total pullback and counit agree with those in the first
-equation by equality elimination and proof irrelevance. Cancel the second derived
-comparison and the first underived comparison. The resulting square is precisely
-the displayed equation. The quotient/localization comparison has identity components;
-its naturality identifies Qh of the termwise comparison with Q of that comparison.
-No inversion of a counit is used; zero complexes and empty schemes satisfy the same
-factorization equations. -/
+Source: Stacks Project, Tag 0D5S, composition of derived pullbacks. -/
 theorem affineSpectrum_composition_counit_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

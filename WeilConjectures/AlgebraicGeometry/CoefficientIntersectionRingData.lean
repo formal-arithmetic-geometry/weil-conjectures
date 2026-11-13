@@ -20,8 +20,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- The lift of the base-change square to the inverse image of the base open. 
-(blueprint: def-pc-coefficient-intersection-ring-data)
+/-- The lift of the base-change square to the inverse image of the base open.
 -/
 def coefficientRestrictedLift {X T T' X' : Scheme.{u}}
     (f : X ⟶ T) (U : T.Opens) (g : T' ⟶ U.toScheme)
@@ -30,8 +29,7 @@ def coefficientRestrictedLift {X T T' X' : Scheme.{u}}
   ((isPullback_morphismRestrict f U).flip).lift g' (f' ≫ g)
     (by rw [sq.w, Category.assoc])
 
-/-- The inverse-image coefficient intersection lies over its original coefficient open. 
-(blueprint: def-pc-coefficient-intersection-ring-data)
+/-- The inverse-image coefficient intersection lies over its original coefficient open.
 -/
 theorem coefficientIntersection_le {X T T' X' : Scheme.{u}}
     (f : X ⟶ T) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
@@ -50,8 +48,7 @@ theorem coefficientIntersection_le {X T T' X' : Scheme.{u}}
   rw [he]
   exact inf_le_left
 
-/-- Structural map from the affine base ring to the coefficient ring. 
-(blueprint: def-pc-coefficient-intersection-ring-data)
+/-- Structural map from the affine base ring to the coefficient ring.
 -/
 def coefficientBaseRingMap {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     (Z : (f ⁻¹ᵁ U).toScheme.Opens) : Γ(U.toScheme, ⊤) →+* Γ((f ⁻¹ᵁ U).toScheme, Z) :=
@@ -60,8 +57,7 @@ def coefficientBaseRingMap {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
       ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)
 
 /-- Structural map from the coefficient ring to the intersection ring.
-Source: Stacks Project, Tags 0097 and 02KG.
-(blueprint: def-pc-coefficient-intersection-ring-data). -/
+Source: Stacks Project, Tags 0097 and 02KG. -/
 def coefficientIntersectionRingMap {X T T' X' : Scheme.{u}}
     (f : X ⟶ T) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')

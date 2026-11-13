@@ -80,8 +80,7 @@ Proof (the three steps of the node):
    applied to `(T, g⁻¹𝒪_S) → (S, 𝒪_S)`. The change-of-rings counit is therefore an
    isomorphism. The canonical comparison for `s : P → G` is the inverse of `L(Q(s))`
    followed by this counit at `P`. Comparisons between resolutions factor through
-   `L(Q(G))`, so are independent of choices and compatible with composition.
-(blueprint: def-pc-derived-pullback). -/
+   `L(Q(G))`, so are independent of choices and compatible with composition. -/
 theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
@@ -192,8 +191,7 @@ functor `Scheme.Modules.derivedPullback g` of the pullback of modules, transport
 these equivalences (`AlgebraicGeometry.derivedPullbackIso`), and it is a left derived functor of
 the tensor pullback whose counit is an isomorphism on K-flat complexes
 (`AlgebraicGeometry.derivedPullback_spec`).
-
-(blueprint: def-pc-derived-pullback) -/
+ -/
 noncomputable irreducible_def derivedPullback :
     schemeDerivedCategory.{u, w} S ⥤ schemeDerivedCategory.{u, w} T :=
   (schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
@@ -271,12 +269,7 @@ instance : (derivedPullback.{u, w} g).IsLeftDerivedFunctor (derivedPullbackCouni
 /-- **The derived pullback is the left derived functor of the tensor pullback.** For
 `g : T ⟶ S`, `derivedPullback g` is a triangulated left derived functor of the tensor pullback
 `E = Scheme.Modules.tensorPullback g` (with the exact inverse image `I` underlying it), and its
-counit `Lg^*(P) ⟶ E(P)` is an isomorphism for every K-flat complex `P`.
-Proof: `derivedPullback g` and the functor of `exists_derivedPullback` are left derived
-functors of isomorphic functors, as `E ≅ Scheme.Modules.pullback g`; hence they are isomorphic,
-and the properties of the latter transfer.
-
-(blueprint: def-pc-derived-pullback) -/
+counit `Lg^*(P) ⟶ E(P)` is an isomorphism for every K-flat complex `P`. -/
 theorem derivedPullback_spec :
     ∃ (I : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
           SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology T)

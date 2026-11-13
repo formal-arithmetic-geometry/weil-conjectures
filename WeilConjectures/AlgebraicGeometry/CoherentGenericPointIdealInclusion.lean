@@ -23,8 +23,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # A coherent ideal inclusion near a generic point
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YE
-(`coherent.tex`, label `lemma-prepare-filter-irreducible`)
-(blueprint: lem-weil-pbc-coherent-generic-point-ideal-inclusion).
+(`coherent.tex`, label `lemma-prepare-filter-irreducible`).
 -/
 
 @[expose] public section
@@ -72,8 +71,7 @@ an injective pushforward of a finite direct sum of a coherent ideal on the integ
 subscheme, and this inclusion is an isomorphism on an ambient neighbourhood of that point.
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 01YE
-(`coherent.tex`, label `lemma-prepare-filter-irreducible`)
-(blueprint: lem-weil-pbc-coherent-generic-point-ideal-inclusion).
+(`coherent.tex`, label `lemma-prepare-filter-irreducible`).
 
 Proof (the seven steps of the node):
 1. The closed subscheme Z is Noetherian by lem-weil-pbc-immersion-base-change-lft and

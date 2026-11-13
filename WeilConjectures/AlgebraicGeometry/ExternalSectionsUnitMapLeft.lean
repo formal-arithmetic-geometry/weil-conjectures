@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ExternalOpenFactorUnitsLeft
 /-! # The first-factor external section map from pullback units
 
 Source: Stacks Project, Tags 0096, 01F7 and 0BED.
-(blueprint: lem-sc-external-sections-unit-open-transport-left).
 -/
 
 @[expose] public section
@@ -161,28 +160,7 @@ theorem externalSectionsUnitLeft_top
 /-- The cartesian open-immersion square transports the unit-defined external
 product on pure tensors to the external product on the open subscheme.
 Source: Stacks Project, Tag 0BED, the degree-zero restriction verification;
-Tags 0096, 0097 and 01CD.
-(blueprint: lem-sc-external-sections-unit-open-transport-left).
-
-Proof: Put P = X times Y, p = pr_1, q = pr_2, and W = p inverse-image V.
-The base change of V -> X identifies V times Y with the open subscheme W of P.
-The restriction section isomorphism F(V) = Gamma(V,F restricted) respects
-scalars from V -> X -> Spec k. Tensor it with the identity on Gamma(Y,G)
-to obtain eS. Identify restriction to W with tensor pullback along W -> P
-using the unique comparison of the two left adjoints to pushforward. Its
-unit equation identifies restriction of a section with its pullback unit.
-Apply the tensor-pullback comparison to the external coefficient and the
-composition comparisons to its two factors. The resulting coefficient
-isomorphism on V times Y gives eT on global sections, with the same k-action
-by the pullback equation. On the first factor, the unit equation for the
-composition comparison sends the restricted p-pullback of s to the local
-p_V-pullback of the restriction of s. On the second, it sends the restriction
-of the q-pullback of t to the local q_V-pullback of t. The tensor comparison
-carries the tensor section of these images to their tensor section. These
-are exactly the pure tensor formulas for externalSectionsUnitAppLeft and
-externalGlobalSectionsTensor, proving the displayed equality. Empty opens,
-empty factors and zero modules obey the same unit equations and require
-no separate hypotheses. -/
+Tags 0096, 0097 and 01CD. -/
 theorem exists_externalSectionsUnitOpenTransportLeft
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : X.Opens) :

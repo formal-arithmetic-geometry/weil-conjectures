@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-! # Closed–open coefficient embedding
 
 Source: Stacks Project, Tag 0F07, closed–open part of the proof.
-(blueprint: lem-sbc-closed-open-coefficient-embedding)
 -/
 
 @[expose] public section
@@ -28,17 +27,7 @@ namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- The open injective embedding and the closed unit jointly embed the coefficient sheaf.
 
-Source: Stacks Project, Tag 0F07, proof of condition (3).
-(blueprint: lem-sbc-closed-open-coefficient-embedding)
-
-Proof: if a morphism into F is killed by both components, adjunction identifies
-its open restriction followed by the injective embedding with zero. Monicity of
-the injective embedding kills the open restriction. The closed unit similarly kills
-the closed restriction. The geometric points obtained from the algebraic closures
-of residue fields of V and Z jointly cover T. Pullback-stalk comparison makes the
-morphism zero on all these stalks, so their conservative family makes it zero.
-The cancellation-of-zero criterion proves that the pair is monic.
--/
+Source: Stacks Project, Tag 0F07, proof of condition (3). -/
 theorem mono_closedOpen_coefficient_embedding {T Z : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (V : T.Opens) (i : Z ⟶ T) [IsClosedImmersion i]

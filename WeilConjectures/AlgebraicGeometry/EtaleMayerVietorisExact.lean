@@ -25,21 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Etale Cohomology, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-exact)
-
-Proof: The two open immersions form a cover, and their intersection is their pullback.
-The sheaf condition makes the section map injective, with image the kernel of the
-difference of restrictions (etale_mayerVietoris_sections). An injective sheaf restricts
-surjectively along the monomorphism U ∩ V → U, by extending a morphism from its free
-abelian representable sheaf (injective_sheaf_mono_restriction, Stacks Tag 093X).
-Thus every intersection section is the difference of a lifted U-section and zero.
-The generic rightDerived_pair_sequence applies this short exact section sequence to
-injective resolutions, takes homology, and supplies natural connecting transformations
-and the three exactness assertions. For the initial injection, evaluation preserves
-finite limits, so its degree-zero augmentation is an isomorphism. Naturality of this
-augmentation in the evaluation functor (rightDerived_zero_transformation) transports
-the proved section injection to the displayed right derived restriction maps. -/
+/-- Source: Stacks Project, Etale Cohomology, Tag 0A50, proof. -/
 theorem etale_mayerVietoris_exact (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
 ∃ δ : ∀ n : ℕ,
       (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙

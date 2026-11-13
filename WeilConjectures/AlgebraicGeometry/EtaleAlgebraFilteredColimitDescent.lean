@@ -15,7 +15,7 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 /-! # Etale algebras over a filtered colimit descend to a finite stage
 
 Source: Stacks Project, Algebra, Lemma Tag 00U2 (9), and more-algebra.tex,
-proof of Lemma Tag 0A02 (blueprint: lem-weil-pbc-etale-algebra-filtered-colimit-descent).
+proof of Lemma Tag 0A02.
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Algebra, Lemma Tag 00U2 (9), and more-algebra.tex,
-proof of Lemma Tag 0A02 (blueprint: lem-weil-pbc-etale-algebra-filtered-colimit-descent).
+proof of Lemma Tag 0A02.
 
 Proof, following the node:
 1. By lem-weil-pbc-etale-algebra-finite-type-model choose a finitely generated

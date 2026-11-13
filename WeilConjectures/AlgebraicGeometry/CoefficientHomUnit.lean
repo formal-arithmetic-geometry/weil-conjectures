@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedCoefficientHomComplex
 /-! # The coefficient-Hom unit for the ring in degree zero
 
 Source: Stacks Project, Algebraization, Tag 099I, first arrow of the final composite.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -715,24 +714,7 @@ set_option maxHeartbeats 700000 in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 /-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
 restriction and evaluation at one.
-Source: Stacks Project, Algebraization, Tag 099I, first arrow of the final composite.
-(auxiliary; not a blueprint node).
-
-Proof: take the coefficient internal Hom with its precomposition B-action and form its
-product Hom complexes. Restriction preserves the products. Choose the comparison with
-the R-valued Hom complex by requiring its composite with every product projection to
-be the restricted coefficient projection followed by the underlying-Hom comparison.
-The differential and induced-map formulas show that this is a natural chain isomorphism
-in both variables. In degree n define the unit by the product lift whose p-th component
-is zero for p != 0. For p=0 use the B-linear map sending a section m to the R-linear map
-b -> b*m, transporting the source along B[0]^0 = B. It is B-linear because the action on
-Hom is precomposition with multiplication. The ring single complex has zero differential,
-so the Hom differential is just postcomposition with d_M, which commutes with this map.
-Thus the lifts are a chain map natural in M. After restriction and precomposition with
-R[0] -> r(B[0]), the only nonzero component sends m to (a -> phi(a)*m) = (a -> a*m).
-This is exactly the inverse of evaluation at one. The normalization of the comparison
-and equality on product projections prove the identity. The construction also applies
-to zero rings, empty sites and zero complexes; no flatness or injectivity is used. -/
+Source: Stacks Project, Algebraization, Tag 099I, first arrow of the final composite. -/
 theorem exists_coefficientHom_unit
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :

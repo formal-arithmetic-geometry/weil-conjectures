@@ -20,7 +20,6 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 /-! # Constructibility of the higher derived coefficient reductions
 
 Source: Stacks Project, Tag 09BR, lemma-compare-truncations-constructible.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -214,33 +213,7 @@ coefficient reduction. This assertion concerns only cohomology sheaves; it suppl
 neither a Tor bound nor an etale origin.
 
 Source: Stacks Project, proetale.tex, Tag 09BR,
-lemma-compare-truncations-constructible, with its exponent n shifted by one.
-(auxiliary; not a blueprint node).
-
-Proof: For r >= 1 use the short exact sequence
-0 -> J^r/J^(r+1) -> A/J^(r+1) -> A/J^r -> 0. Tensoring it in the derived
-category with N gives the coefficient-filtration distinguished triangle. The left
-term is the restriction of scalars of
-N_0 tensor^L over A/J with the constant module J^r/J^(r+1): derived associativity
-identifies the two expressions, since J annihilates the graded piece. Noetherianity
-makes this graded piece a finite, hence finitely presented, A/J-module. Its constant
-sheaf is constructible and concentrated in degree zero. On each affine open,
-refine the finitely many stratifications for the nonzero residue cohomology
-sheaves to one finite stratification. Inverse image is exact and commutes with
-derived tensor. On every stratum apply the bounded-above locally constant finite
-type tensor theorem (Tag 094H) to the restricted residue complex and the constant
-graded module. This shows that every layer cohomology is constructible. This is
-the special case of Tag 09BQ used in Tag 09BR; it avoids the fixed truncation
-cutoff printed in the proof of 09BQ, since the residue complex is already bounded.
-Restriction of scalars through the surjective quotient maps preserves finite
-presentation over the Noetherian quotient rings and keeps the same affine-local
-strata and constant trivializations. The constructible weak Serre property
-(Tag 09B5) and the long exact cohomology sequence therefore give the induction step
-from reduction r to reduction r+1. The base r=1 is the hypothesis. The named
-reductions are the same derived tensors by their K-flat computation and balancing
-isomorphisms. This proves every degree at every level. If J is the unit ideal all
-quotients vanish; if J is zero the reductions are unchanged. The argument also
-allows the empty scheme and the zero ring. -/
+lemma-compare-truncations-constructible, with its exponent n shifted by one. -/
 theorem adicFiniteReduction_constructible_cohomology
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

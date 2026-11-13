@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Ring colimits of affine chart limits
 
 Source: Stacks Project, Tags 01ZR, 0095, 0097 and 01I6.
-(blueprint: new-affine-chart-ring-colimit-geometric).
 -/
 
 @[expose] public section
@@ -26,24 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A colimit presentation of the fixed affine chart ring, with geometric chart comparisons.
-Source: Stacks Project, Limits Tag 01ZR, first proof, affine case; Tag 01I6.
-(blueprint: new-affine-chart-ring-colimit-geometric).
-
-Proof: On the upper tail above i, base change V.X a along each Spec(R_j) -> Spec(R_i).
-Pullback maps define a scheme diagram; their identity and composition equations follow
-from the pullback universal property. Apply contravariant global sections to obtain F.
-The upper tail is cofinal, since a common upper bound of i and any index lies in it.
-Consequently c restricts to a limit cone. View this cone in schemes over Spec(R_i),
-then apply pullback along V.X a -> Spec(R_i). Pullback is a right adjoint and preserves
-limits; forgetting the over structure preserves this connected limit. Each chart is
-affine because Spec(R_j) -> Spec(R_i) is affine and affine morphisms are stable under
-base change. The spectrum/global-sections equivalence therefore gives the colimit q.
-The pullback-pasting isomorphisms identify the stage charts with U.X a, giving e.
-Pasting at the limit gives h from the iterated chart Y to Z. The universal property
-of pullbacks shows h commutes with the maps to the ambient limit base change, giving
-the first equation. It also shows that the stage projection composed with h is
-U.pullbackHom p a. Applying global sections gives the second equation. The upper tail
-contains i, so is nonempty; empty charts and zero rings require no separate argument. -/
+Source: Stacks Project, Limits Tag 01ZR, first proof, affine case; Tag 01I6. -/
 theorem exists_affine_chart_ring_colimit_geometric
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

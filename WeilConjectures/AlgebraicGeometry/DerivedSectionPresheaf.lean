@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 
 /-! # The unbounded derived section cohomology presheaf
 
-Source: Stacks Project, Cohomology, Tag 0D5X
-(blueprint: def-pc-derived-section-presheaf).
+Source: Stacks Project, Cohomology, Tag 0D5X.
 
 Resolve on the source, then take direct image as a presheaf of modules and its
 cohomology. Evaluation on an open is exact in the presheaf category, so this is
@@ -34,8 +33,7 @@ K-injective resolution and the `𝒪_Y(V)`-action induced by `f`. We derive the 
 of direct image and the inclusion into module presheaves, then take cohomology in
 that presheaf category. Its standard derived-category implementation is internal:
 only the resulting presheaf functor is exposed.
-Source: Stacks Project, Cohomology, Tag 0D5X
-(blueprint: def-pc-derived-section-presheaf). -/
+Source: Stacks Project, Cohomology, Tag 0D5X. -/
 noncomputable def schemeDerivedSectionPresheaf {X Y : Scheme.{a}}
     [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X.toRingedSpace))]
     (f : X ⟶ Y) (i : ℤ) :

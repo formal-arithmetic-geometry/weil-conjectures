@@ -48,25 +48,7 @@ private theorem sheafification_unit_locally_injective
 
 /-- Equality of unit sections after restriction is witnessed on an étale
 X-scheme whose image contains the image of the chosen point.
-Source: Stacks Project, Tag 09ZF, first proof paragraph; Sites, Tags 00VE, 00WX, 00WK.
-(blueprint: lem-weil-pbc-etale-pullback-unit-pointed-witness).
-
-Proof: the constructed sheaf pullback is the sheafification of the left Kan
-extension along the opposite base-change functor. Its adjunction unit is the
-Kan-extension unit followed by the sheafification unit. Thus the two restricted
-sections are sheafifications of the two coprojections indexed by (W,f).
-Local injectivity of sheafification supplies an étale cover of V on which these
-coprojections agree. Choose a member and a point above z, using joint
-surjectivity. The index category is filtered: the small étale category has
-finite limits and base change preserves them. Equality in a filtered colimit
-of sets is witnessed by one arrow out of the common index. Opposing that
-arrow gives an étale X-scheme U, an X-morphism g:U→W, and a Z-morphism from
-the chosen covering member to U×[X]Z; the restrictions of s and t along g
-are equal. Project the chosen point to U. Commutativity over Z and the
-pullback square show that its image in X is i(V.hom(z)). This proves all
-three assertions. Empty V has no z, and no surjectivity or closedness of i
-is required. The section universe is at least that of the small étale site,
-so the usual local-injectivity theorem for sheafification applies. -/
+Source: Stacks Project, Tag 09ZF, first proof paragraph; Sites, Tags 00VE, 00WX, 00WK. -/
 theorem etale_pullback_unit_pointed_witness
     {X Z : Scheme.{u}} (i : Z ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v)))

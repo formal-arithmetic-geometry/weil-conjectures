@@ -13,8 +13,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity when one stage is affine
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit), cofinal-tail reduction.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-affine-stage).
+Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
 -/
 
 @[expose] public section
@@ -28,20 +27,8 @@ namespace AlgebraicGeometry.Etale
 set_option linter.unusedVariables false in
 /-- Affine-stage continuity applies when just one chosen stage is affine.
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit); cofinal-tail reduction in
-step 1 of lem-weil-pbc-etale-limit-cohomology-qcqs-gluing.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-affine-stage).
-
-Proof: the chosen stage is affine by its isomorphism to S. Class descent supplies
-surjectivity of the canonical group-colimit comparison. For injectivity, represent
-an element of its kernel at a stage and apply finite-stage detection of zero with
-the chosen affine stage. The colimit transition equation then kills this
-representative. A bijective group homomorphism is an isomorphism, so transport the
-canonical colimit cocone along it; the comparison's leg equations identify the
-transported cocone with B. The supplied affine-continuity hypothesis is retained
-in the statement but is not needed by this elementwise reduction. The geometric
-cofinal-tail argument remains in the finite-stage zero-detection theorem.
-Empty affine schemes and degree zero use the same colimit argument. -/
+Source: Stacks Project, Tag 09YQ; cofinal-tail reduction in
+step 1 of lem-weil-pbc-etale-limit-cohomology-qcqs-gluing. -/
 theorem etale_limit_cohomology_affine_stage
     (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

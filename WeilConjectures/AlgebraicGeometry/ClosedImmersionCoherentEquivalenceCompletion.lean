@@ -23,7 +23,6 @@ open MonoidalCategory Scheme.Modules
 Source: Stacks Project, Cohomology of Schemes, equation 0880.
 The proof assembles the canonical quotient comparisons into a natural isomorphism
 and checks the stated projection equation at every positive level.
-(blueprint: lem-weil-pbc-closed-immersion-coherent-formal-equivalence-completion)
 -/
 theorem closedImmersion_coherentFormal_equivalence_completion {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [IsNoetherian X] (I : X.IdealSheafData) :

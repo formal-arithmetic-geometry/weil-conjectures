@@ -30,20 +30,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A finite constant quotient admits a module presentation whose constant sheaf map
 lifts locally to the middle term of the extension.
 
-Source: Stacks Project, Tag 093U, extension paragraph, through the choice of lifted generators.
-(blueprint: lem-pc-constant-extension-presentation-lift)
-
-Proof: On a nonempty base, a constant model N of the quotient has a stalk isomorphic
-to N. The finite-stalk assumption therefore makes N finitely generated. Choose a finite
-free surjection P → N, and form its kernel K, giving the module short exact sequence T.
-Since the ring and the set of free generators are finite, P and its subset K are finite
-sets. The finite set of all elements of K generates it, so K is finitely generated.
-The generators of P map to sections of the quotient. Local surjectivity of the sheaf
-epimorphism lifts each section on an etale cover; a finite common refinement lifts them
-simultaneously. By the universal property of the constant free sheaf these lifts define r.
-Its composite with the quotient map equals the constant presentation map, since the two
-maps agree on the free generators. Constant sheaves commute with etale restriction,
-which supplies e and the displayed identity. For an empty base use the empty cover. -/
+Source: Stacks Project, Tag 093U, extension paragraph, through the choice of lifted generators. -/
 theorem exists_constantExtension_presentation_lift {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

@@ -16,7 +16,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Exact comparison ladder for binary continuity
 
 Source: Stacks Project, Tags 09YQ and 0A50.
-(blueprint: lem-weil-pbc-etale-limit-binary-comparison-ladder).
 -/
 
 @[expose] public section
@@ -80,45 +79,8 @@ private theorem exact_transport_middle
 
 /-- The geometric and exactness part of binary continuity, before the group chase.
 
-Source: Stacks Project, Tag 09YQ (theorem-colimit), finite-open-cover reduction,
-and Tag 0A50 (lemma-mayer-vietoris).
-(blueprint: lem-weil-pbc-etale-limit-binary-comparison-ladder).
-
-Proof: Pass to the directed cofinal tail above i₀. Transfer U and V along the
-stage isomorphism and pull them back to each later stage and the limit. These
-restricted diagrams are limits with affine transitions. Their stages are qcqs:
-affine inverse images preserve compactness of opens, and opens inherit
-quasi-separatedness. The intersection at i₀ is compact because that stage is
-quasi-separated; ambient X need not be quasi-separated. Restrict F and its
-transitions by inverse image. Composition isomorphisms give the coherence laws,
-and inverse image preserves L because it is a left adjoint. Apply hCU, hCV and
-hCI to obtain colimit comparisons for each restricted system in every degree.
-Transport cohomology maps and cocone legs through eG, eH and eB by pullback
-functoriality and naturality in coefficients.
-
-For p=q+1 let A₁,A₂,A₄ be the filtered colimits of the stage groups
-H^q(U) × H^q(V), H^q(U∩V), and H^p(U) × H^p(V), respectively. Let B₁,B₂,B₄
-be the corresponding limit groups. The maps a,b,r and a',b',r' are the
-Mayer--Vietoris difference, boundary and restriction maps. Filtered colimits
-preserve exactness and finite products, so the two required top pairs and the
-first bottom pair are exact. Naturality of Mayer--Vietoris in pullback and in
-coefficients gives all three commuting squares, with colimit.desc H B as the
-middle comparison. Continuity on U,V,U∩V makes v₁ surjective and v₂,v₄ injective
-(in fact all three are isomorphisms). Finality identifies the tail colimits
-with those of the original diagram.
-
-For p=0 take A₁,A₂,B₁,B₂ to be the zero group and all incident maps zero.
-Use the degree-zero product groups for A₄,B₄ and their restriction maps for
-r,r'. The initial Mayer--Vietoris restriction is injective at every stage;
-filtered exactness makes r injective. Thus Exact b r holds, while the two
-other exact pairs and the first two squares are automatic. Continuity on U,V
-gives injectivity of v₄ and the last square is restriction naturality.
-
-Empty opens give zero factors and the same sequences. Coincident opens use
-standard diagonal restrictions and difference maps. No middle injectivity or
-finite-stage vanishing is assumed or concluded here. The last bottom term and
-its restriction map are the actual cohomology groups and pullback maps on the
-inverse-image opens; they cannot be replaced by an arbitrary test group. -/
+Source: Stacks Project, Tag 09YQ, finite-open-cover reduction,
+and Tag 0A50. -/
 theorem etale_limit_binary_comparison_ladder
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

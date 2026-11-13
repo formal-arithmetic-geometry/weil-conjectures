@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Global functions acting on derived morphisms
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EJ
-(blueprint: def-sc-derived-global-scalar).
+Source: Stacks Project, Derived Categories of Schemes, Tag 08EJ.
 -/
 
 @[expose] public section
@@ -27,7 +26,7 @@ namespace AlgebraicGeometry
 /-- Multiply a derived morphism by a global function, encoded as a compatible family of
 local sections. The action on module sheaves is sectionwise multiplication, and the action
 on the derived category is its canonical localization via Mathlib's derived linear structure.
-Source: Stacks Project, Tag 08EJ (blueprint: def-sc-derived-global-scalar). -/
+Source: Stacks Project, Tag 08EJ. -/
 noncomputable def schemeDerivedScalar
     (X : Scheme.{v})
     [HasDerivedCategory.{z} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

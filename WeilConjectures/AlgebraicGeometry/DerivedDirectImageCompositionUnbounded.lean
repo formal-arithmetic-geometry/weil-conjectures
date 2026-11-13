@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageCompositio
 # Composition of derived direct images
 
 Source: literature/stacks-project/cohomology.tex, Lemma 20.28.2 (Tag 0D5T),
-Cohomology of unbounded complexes (blueprint: lem-pc-derived-direct-image-composition).
+Cohomology of unbounded complexes.
 
 This module states the canonical composition comparison for the unbounded derived direct
 image of morphisms of schemes.
@@ -37,8 +37,7 @@ variable {X Y Z : Scheme.{u₂}}
 
 /-- The derived direct image of a composite is canonically naturally isomorphic to the
 composite of the derived direct images. Source: Stacks Project, Lemma 20.28.2 (Tag 0D5T),
-using the derived pullback composition and uniqueness of right adjoints
-(blueprint: lem-pc-derived-direct-image-composition). -/
+using the derived pullback composition and uniqueness of right adjoints. -/
 theorem derivedDirectImageComposition (p : X ⟶ Y) (f : Y ⟶ Z) :
     Nonempty
       (schemeDerivedDirectImage (p ≫ f) ≅

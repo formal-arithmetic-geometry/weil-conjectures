@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorPureCo
 
 /-! # Pure-tensor coface formula for singleton sections
 Source: Stacks Project, Tag 03P2, the tensor differential formula.
-(blueprint: new-etale-affine-singleton-tensor-pure-cofaces).
 -/
 
 @[expose] public section

@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuit
 
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/
-sk-cor-ind-heart-ii-vanishing.md and its proof (blueprint: det-ind-heart-ii-vanishing).
+sk-cor-ind-heart-ii-vanishing.md and its proof.
 
 The fixed bound on constructible targets is retained. Ext in every integer degree is
 written as shifted Hom in the ordinary derived category of internal module objects.
@@ -41,7 +41,7 @@ The coefficient equality is between bundled monoid objects, including multiplica
 
 Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
 sec-compactness/sec-ind-constructible-sheaves/sk-cor-ind-heart-ii/
-sk-cor-ind-heart-ii-vanishing.md and its proof (blueprint: det-ind-heart-ii-vanishing).
+sk-cor-ind-heart-ii-vanishing.md and its proof.
 
 Proof, following the three DAG steps:
 1. Regard each constructible stage as a complex in degree zero. These complexes have

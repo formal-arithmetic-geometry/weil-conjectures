@@ -81,7 +81,6 @@ set_option maxHeartbeats 400000 in
 /-- The specified scalar-extension/pushforward mate is invertible on integral bounded
 constructible complexes for a qcqs map.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-weil-pbc-continuous-integral-push-comparison).
 
 Proof in words. Express the restricted regular E coefficient module as the sequential
 colimit O --ℓ--> O --ℓ--> ..., with nth map a ↦ a/ℓⁿ. The compact-test localization

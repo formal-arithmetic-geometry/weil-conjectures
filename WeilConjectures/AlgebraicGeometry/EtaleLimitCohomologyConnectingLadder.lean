@@ -30,45 +30,7 @@ set_option linter.unusedVariables false in
 
 Source: Stacks Project, Cohomology on Sites, proof of Tag 09YP via the
 injective-system construction 0EXZ and dimension shifting 0739; Etale Cohomology
-Tag 09YQ, using its affine-site reduction 0EYL and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-cohomology-connecting-ladder).
-
-Proof: Choose injective embeddings F_k -> A_k. At stage i form the product
-E_i of the direct images of A_k over all arrows i -> k, as in 0EXZ. Adjunction
-transposes the composites of the coefficient transitions and these embeddings
-to F_i -> E_i. The identity component makes this a monomorphism. The canonical
-transition maps of these products give a compatible injective system: direct
-image preserves injectives since inverse image is exact, and products of
-injectives are injective. Take stage cokernels R_i. Exact inverse images and
-cancellation of their epimorphisms give the identity and composition laws for R.
-Pull the three systems to the limit. Exact filtered sheaf colimits give
-0 -> L -> LE -> LR -> 0.
-
-To prove positive global acyclicity of LE use only degree-zero continuity.
-Take the basis of qcqs etale objects on the limit. Every such object, and each
-finite affine covering of it, descends to a stage by 0EYL; cofinal tails leave
-the limit and sheaf colimit unchanged. Every iterated covering fibre product
-is qcqs. Degree-zero continuity applied to its descended inverse system
-identifies its sections of LE with the filtered colimit of sections of E_i.
-Finite products commute with these colimits, so the Cech complex of the
-covering is the filtered colimit of its stage Cech complexes. Injective
-stage sheaves have acyclic augmented Cech complexes (03AW); exact filtered
-group colimits preserve positive acyclicity. Finite qcqs covers are cofinal,
-so the Cech criterion (03F9) gives positive object cohomology vanishing on
-the qcqs basis, in particular at the terminal object of the qcqs limit.
-This proves global acyclicity without any successor-degree continuity.
-
-The long exact sequence on the limit now makes the connecting map
-H^n(LR) -> H^(n+1)(L) surjective. At each stage take the connecting map from the
-short exact sequence F_i -> E_i -> R_i. Naturality of connecting maps for exact
-inverse image, and then for the coprojections, gives the commuting square with
-the limit connecting map. Define HR and BR from R in degree n, and transport the
-connecting maps through eH and eB. Their square is the final displayed equation.
-The new coefficient system has all the hypotheses needed for the degree-n
-induction; the lemma asserts no descent for it. For n=0 use the ordinary H^0
-connecting map. Empty schemes or zero systems give zero maps to the zero group,
-which are surjective, and the construction is valid for a one-object index.
--/
+Tag 09YQ, using its affine-site reduction 0EYL and 04HR. -/
 theorem etale_limit_cohomology_connecting_ladder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

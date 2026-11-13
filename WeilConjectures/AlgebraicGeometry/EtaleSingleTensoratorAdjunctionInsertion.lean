@@ -26,7 +26,6 @@ which keeps its kernel check cheap.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
 sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
 Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
 -/
 
 @[expose] public noncomputable section
@@ -44,12 +43,7 @@ attribute [local instance 10000] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] sheafBraidedCategory
 
 /-- The flat single tensorator is the localization tensorator of the two single complexes,
-followed by the explicit cochain tensorator of single complexes.
-(auxiliary; not a blueprint node).
-
-Proof: expand the factorization of `singleFunctorObjTensorIso` through the homotopy category;
-the comparison of the single functor with `Q` cancels against the comparison of `Q` with the
-homotopy quotient followed by `Qh`. -/
+followed by the explicit cochain tensorator of single complexes. -/
 theorem singleFunctorObjTensorIso_hom_eq
     {B : Type v} [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
@@ -93,12 +87,7 @@ as morphisms `i₁ i₂ i₁₂` equal to `adjointInsertion`.
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
 sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction.
-(blueprint: lem-pur-tate-tensor-adjunction-insertion)
-
-Proof: the flat single tensorators are the localization tensorators followed by the cochain
-tensorators of single complexes (`singleFunctorObjTensorIso_hom_eq`). The site normalization is
-the representative tensor square, so `normalizedTensor_adjointInsertion` applies. -/
+Step 1 (compatibility with the finite reductions), finite-level scalar/tensor reduction. -/
 theorem siteNormalizedTensor_adjointInsertion
     (rep : ∀ P : CochainComplex (Sheaf T.smallEtaleTopology C) ℤ,
       E.obj (DerivedCategory.Q.obj P) ⟶

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCond
 /-! # Canonical ring coordinates for affine spectrum replacement
 
 Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: lem-pc-affine-spectrum-canonical-stalk-ring-coordinates).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ private theorem stalkCongr_eqToHom (Y : Scheme.{u}) (y y' : Y) (h : y = y') :
   simp [TopCat.Presheaf.stalkCongr]
 
 /-- The actual affine-spectrum stalk ring map, with its source point transported.
-Source: Stacks Project, Tag 0098; Mathlib `isoSpec_inv_naturality`.
-(blueprint: lem-pc-affine-spectrum-canonical-stalk-ring-coordinates). -/
+Source: Stacks Project, Tag 0098; Mathlib `isoSpec_inv_naturality`. -/
 @[irreducible]
 noncomputable def canonicalSpectrumStalkEquiv
     (Y : Scheme.{u}) [IsAffine Y] (y : Y) (y0 : Spec Γ(Y, ⊤))
@@ -102,15 +100,7 @@ private theorem tensorMap_tmul
   rw [h, map_mul]
   exact congrArg₂ (· * ·) (RingHom.congr_fun hl a) (RingHom.congr_fun hr b)
 
-/-- Compatibility of the canonical affine-spectrum stalk ring maps.
-Proof: use the stalk maps of the four isoSpec inverses, with the point equalities
-from isoSpec naturality. The composition law for stalk maps gives the R-to-A and
-R-to-B equations. The defining two restrictions of tensorMap express its value
-on a pure tensor as the product of the two projection images. Naturality of the
-projection stalk maps and preservation of multiplication give the last equation.
-No complex isomorphism is asserted or chosen.
-Source: Stacks Project, Tags 0098 and 0096.
-(blueprint: lem-pc-affine-spectrum-canonical-stalk-ring-coordinates). -/
+/-- Compatibility of the canonical affine-spectrum stalk ring maps. -/
 theorem exists_canonicalSpectrum_stalk_ring_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

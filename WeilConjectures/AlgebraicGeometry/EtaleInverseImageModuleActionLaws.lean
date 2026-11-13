@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageScalarAssociativity
 import Mathlib.Algebra.Module.MinimalAxioms
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2
-(blueprint: lem-weil-pbc-inverse-image-module-action-laws). -/
+Source: Stacks Project, Tags 03D1 and 03D2. -/
 
 @[expose] public section
 
@@ -30,8 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The scalar action as a morphism of sheaves of sets.
 Source: Stacks Project, Tag 03D2, multiplication map in lemma-pullback-module.
-Naturality is the semilinearity of the module restriction maps.
-(blueprint: lem-weil-pbc-inverse-image-module-action-laws). -/
+Naturality is the semilinearity of the module restriction maps. -/
 noncomputable def etaleModuleScalarAction (V : Scheme.{u})
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (G : SheafOfModules.{u + 1} ((sheafCompose V.smallEtaleTopology
@@ -63,23 +61,7 @@ noncomputable def etaleModuleScalarAction (V : Scheme.{u})
       rw [hf, hs]
       exact (G.val.map_smul i _ _).symm }
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-module-action-laws).
-
-Proof: the compatibility of the two hom equivalences identifies the ring and
-abelian comparisons with those of the canonical algebraic lifts, by uniqueness
-of left adjoints. Hence they intertwine addition, zero, negation, multiplication
-and one with the operations transported by the set inverse image. Conjugate the
-original scalar action by these comparisons and the inverse product comparison.
-Apply the finite-product-preserving inverse image to each source module diagram:
-addition in either variable, zero in either variable, multiplication of scalars,
-and the unit. Cancel the invertible product comparisons and substitute the
-identified ring and abelian operations. Evaluating these diagram identities on
-sections gives the module axioms for the displayed action, on the existing
-abelian groups. Products of set sheaves are computed sectionwise, so every pair
-of sections occurs. This proves the asserted sectionwise Module structures and
-their scalar-action values. Restriction maps and a sheaf of modules are not
-constructed in this lemma. -/
+/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module. -/
 theorem etaleInverseImageModuleActionLaws (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

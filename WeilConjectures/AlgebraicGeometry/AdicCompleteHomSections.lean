@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 /-! # Lifting compatible finite-reduction morphisms
 
 Source: Stacks Project, Tags 09C6, 0940 and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -48,20 +47,7 @@ private theorem milnor_surjective
 
 /-- Compatible morphisms to the finite reductions lift to a morphism into a complete object.
 Source: Stacks Project, proetale.tex, Tag 09C6, the inverse-limit morphism; Cohomology on
-Sites, Tags 0940 and 0941.
-(auxiliary; not a blueprint node).
-
-Proof: the quotient-completion reflector identifies M, with its actual quotient unit,
-with the derived inverse limit of its restricted finite reductions. The Roos triangle
-and representability give a surjection from Hom(T,M) onto the kernel of 1-shift on
-the product of Hom(T,Res M_n). The scalar-extension/restriction adjunction identifies
-Hom(T,Res M_n) with Hom(T tensor^L B_n,M_n). Its unit is insertion of 1; its scalar
-reassociation is the balancing map. Naturality of these adjunctions identifies the
-transition on these groups with adicResidueHomStep, including its two conjugations.
-The kernel is therefore precisely the sections of adicResidueHomTower. The surjection
-is the displayed adicResidueHomSection, since its nth component is scalar extension
-of the original morphism. This argument requires no boundedness or perfectness of T,
-no Mittag-Leffler hypothesis, and no compatibility choice of object isomorphisms. -/
+Sites, Tags 0940 and 0941. -/
 theorem adicResidueHomSection_surjective
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

@@ -40,27 +40,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Coefficient-forgetting isomorphisms respect a commuting cohomology square.
 
 Source: Stacks Project, proof of Tag 095T, the final map-on-stalks calculation,
-and Tag 03FD for the underlying abelian cohomology convention.
-(blueprint: lem-weil-pbc-cohomology-module-square-compatibility)
-
-Proof: use pullback_forget_modules_iso to choose alpha:
-(i^* F)_ab -> i^* F_ab and beta: (g^* F)_ab -> g^* F_ab.
-Let e1 be the inverse-image composition isomorphism for j,g and e2
-that for k,i with common composite j >> g. Define gamma by
-j^* beta, e1 inverse, e2, then k^* alpha inverse.
-Applying Sheaf.functorH to alpha inverse, beta inverse, and gamma
-produces c₁, c₂, c₃. These are additive equivalences because the
-cohomology functor preserves isomorphisms. Naturality of cohomologyMap
-moves beta inverse and alpha inverse past the respective pullbacks.
-Its composition law expresses the two successive pullbacks using e1
-after H(j >> g) and e2 after that same map, respectively.
-Compose the cohomology morphisms. The factors j^* beta inverse and
-j^* beta cancel, as do e1 and e1 inverse. Both sides are therefore
-H(e2 followed by k^* alpha inverse) applied to H(j >> g)(x).
-This proves the equation without requiring coherent choices of alpha
-and beta: gamma was defined to incorporate the chosen comparisons.
-There are no bijectivity, properness, torsion, or cartesianness assumptions;
-the assertion holds for q = 0 and for empty schemes or zero coefficients. -/
+and Tag 03FD for the underlying abelian cohomology convention. -/
 theorem Etale.exists_addEquiv_cohomology_moduleSquare
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' X₀ X₀' : Scheme.{u}} (g : X' ⟶ X) (i : X₀ ⟶ X)

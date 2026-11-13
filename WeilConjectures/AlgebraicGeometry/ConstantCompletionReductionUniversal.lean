@@ -15,8 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 The `n`-th strict reduction unit of a module sheaf with constant coefficients is the
 universal map to a module whose coefficient action factors through `A ⧸ I ^ (n + 1)`.
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 099L
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D7 and 099L.
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {A : Type u} [CommRing A] {I : Ideal A}
 
 /-- The quotient map of constant ring sheaves is locally surjective.
-Source: Stacks Project, Sites, Tag 00WM (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00WM. -/
 theorem quotient_isLocallySurjective (n : ℕ) :
     Presheaf.IsLocallySurjective J
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map (quotient J A I n)).hom := by
@@ -51,7 +50,7 @@ theorem quotient_isLocallySurjective (n : ℕ) :
   exact this
 
 /-- The quotient maps are compatible with the finite transition maps.
-Source: Stacks Project, Tag 099L (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099L. -/
 theorem quotient_comp_transition (n : ℕ) :
     quotient J A I (n + 1) ≫ transition J A I n = quotient J A I n := by
   unfold quotient transition
@@ -60,12 +59,12 @@ theorem quotient_comp_transition (n : ℕ) :
 
 variable (J A I) in
 /-- Module sheaves whose coefficient action factors through the `n`-th finite quotient.
-Source: Stacks Project, Modules on Sites, Tag 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 def IsReducedModule (n : ℕ) (P : Mod (coefficients J A I false)) : Prop :=
   ∃ P' : Mod (finite J A I n), Nonempty ((res (quotient J A I n)).obj P' ≅ P)
 
 /-- A module reduced at level `n` is reduced at level `n + 1`.
-Source: Stacks Project, Tag 099L (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099L. -/
 theorem IsReducedModule.succ {n : ℕ} {P : Mod (coefficients J A I false)}
     (hP : IsReducedModule J A I n P) : IsReducedModule J A I (n + 1) P := by
   obtain ⟨P', ⟨i⟩⟩ := hP
@@ -73,7 +72,7 @@ theorem IsReducedModule.succ {n : ℕ} {P : Mod (coefficients J A I false)}
     ⟨(resCompIso _ _ _ (quotient_comp_transition n)).app P' ≪≫ i⟩⟩
 
 /-- Restriction of scalars along a finite quotient is fully faithful.
-Source: Stacks Project, Modules on Sites, Tag 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 def resQuotientFullyFaithful (n : ℕ) : (res (quotient J A I n)).FullyFaithful := by
   have := quotient_isLocallySurjective (J := J) (A := A) (I := I) n
   refine ⟨(fun {M N} f ↦
@@ -89,7 +88,7 @@ def resQuotientFullyFaithful (n : ℕ) : (res (quotient J A I n)).FullyFaithful 
       f.val
 
 /-- The strict reduction unit is the unit of the scalar-extension adjunction.
-Source: Stacks Project, Modules on Sites, Tag 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 theorem reductionUnit_app_eq (n : ℕ) (N : Mod (coefficients J A I false)) :
     ((reductionUnit J A I false).app N).app (op n) =
       (SheafOfModules.RingedTensor.tensorAdjunction (quotient J A I n)).unit.app N := by
@@ -97,7 +96,7 @@ theorem reductionUnit_app_eq (n : ℕ) (N : Mod (coefficients J A I false)) :
   exact (reductionUnit_existsUnique J A I false).exists.choose_spec N n U m
 
 /-- The strict reduction unit is universal among maps to reduced modules.
-Source: Stacks Project, Modules on Sites, Tag 03D7 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03D7. -/
 theorem reductionUnit_existsUnique_lift (n : ℕ) (N P : Mod (coefficients J A I false))
     (hP : IsReducedModule J A I n P) (f : N ⟶ P) :
     ∃! g : ((reductionTower J A I false).obj N).obj (op n) ⟶ P,
@@ -125,7 +124,7 @@ theorem reductionUnit_existsUnique_lift (n : ℕ) (N P : Mod (coefficients J A I
     rw [Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- The strict reduction of every module is reduced.
-Source: Stacks Project, Tag 099L (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099L. -/
 theorem isReducedModule_reductionTower (n : ℕ) (N : Mod (coefficients J A I false)) :
     IsReducedModule J A I n (((reductionTower J A I false).obj N).obj (op n)) :=
   ⟨(change (quotient J A I n)).obj N, ⟨Iso.refl _⟩⟩

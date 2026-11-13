@@ -64,26 +64,7 @@ explicit parameter avoids unfolding its right-derived choice in each projection.
 This concerns an arbitrary complex on the open, not a restriction unit on X.
 
 Source: Stacks Project, Tags 08FE (sectionwise restriction/direct-image identity),
-0D5T (composition of derived direct images), and 08BV (open adjunction computation).
-Proof: Substitute the defining equality hβ. Let jX and jY be the two open
-inclusions and g the restricted morphism.
-Open direct image jX_* preserves K-injective complexes, since its left adjoint is
-exact restriction. Thus I and jX_*I compute the relevant source derived images.
-Use the determining right-derived unit equations of both composition comparisons
-and jX followed by h = g followed by jY to identify the restricted composition
-comparison with the localization of the sectionwise composition identity. Expand
-schemeMVOpenRestrictionComparison using the unit factorization equations of its
-exact-functor and composition factors. The required equality now reads, on an open
-W of U, that the two counit identifications of sections of I over g inverse image W
-are equal. Both are the restriction/direct-image identity of Tag 08FE, with the
-open-adjunction counits identifying restriction of open direct image with I.
-These equalities commute with differentials, so descend through the homotopy and
-derived localizations. The factorization equation for the derived counit
-(Adjunction.derivedε_fac_app) identifies the localized counits with the displayed
-schemeMVAdjunction counits. Cancel the intervening computation isomorphisms.
-For U empty both target objects are zero; for U top this is the normalized
-composition identity. Neither a cover nor a unit at an object on X is used.
-(blueprint: lem-pc-derived-mayer-vietoris-open-composition-counit). -/
+0D5T (composition of derived direct images), and 08BV (open adjunction computation). -/
 theorem schemeMVOpenComposition_counit_Q
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

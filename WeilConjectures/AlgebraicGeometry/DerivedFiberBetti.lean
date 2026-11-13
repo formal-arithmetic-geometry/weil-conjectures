@@ -12,8 +12,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-! # Betti numbers of derived residue-field fibres
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.1, Tag 0BDI
-(blueprint: def-sc-derived-fiber-betti).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.31.1, Tag 0BDI.
 
 On the one-point scheme `Spec κ(x)`, evaluation of the cohomology sheaf on the whole
 space gives its cohomology vector space. Scalars are transported along `ΓSpecIso`.
@@ -30,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The degree-`i` cohomology vector space of the derived fibre `Li_x^* E`.
 It is the global sections of its cohomology sheaf on `Spec κ(x)`, with the canonical
 `κ(x)`-action via the inverse of `ΓSpecIso`.
-Source: Stacks Project, Tag 0BDI (blueprint: def-sc-derived-fiber-betti). -/
+Source: Stacks Project, Tag 0BDI. -/
 noncomputable def derivedFiberCohomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (i : ℤ) (x : X)
@@ -47,7 +46,7 @@ noncomputable def derivedFiberCohomology (X : Scheme.{u})
 /-- The Betti number `β_i(x) = dim_{κ(x)} H^i(Li_x^* E)` for a pseudo-coherent complex.
 The formula is defined for every derived object; pseudo-coherence ensures that the
 cohomology vector spaces are finite dimensional.
-Source: Stacks Project, Tag 0BDI (blueprint: def-sc-derived-fiber-betti). -/
+Source: Stacks Project, Tag 0BDI. -/
 noncomputable def derivedFiberBetti (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ x : X, HasDerivedCategory.{w} (SheafOfModules.{u}

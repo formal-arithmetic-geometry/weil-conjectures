@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.AffineBasisDualMatrix
 /-! # Finite basis dual comparison on an affine open
 
 Source: Stacks Project, schemes.tex, Tag 01HV; duality.tex, Tag 0BQZ.
-(blueprint: lem-sc-affine-finite-free-dual-naturality).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry
 
 /-- The associated sheaf of a based module, transported to the affine open,
 is the free sheaf on the same basis. All maps are constructed from the basis.
-Source: Stacks Project, schemes.tex, Tag 01HV.
-(blueprint: lem-sc-affine-finite-free-dual-naturality). -/
+Source: Stacks Project, schemes.tex, Tag 01HV. -/
 noncomputable abbrev affineBasisSheafIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} (b : Basis I Γ(Y, U.1) M) :
     ((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom).obj M) ≅
@@ -33,8 +31,7 @@ noncomputable abbrev affineBasisSheafIso {Y : Scheme.{u}} (U : Y.affineOpens)
   affineBasisCoordinatesIso U M b
 
 /-- Transport a contravariant duality through specified coordinate comparisons.
-Source: Stacks Project, Tag 0BQZ, transport of the finite free dual comparison.
-(blueprint: lem-sc-affine-finite-free-dual-naturality). -/
+Source: Stacks Project, Tag 0BQZ, transport of the finite free dual comparison. -/
 noncomputable def affineDualTransportIso {C : Type w} [Category.{v} C]
     (D : Cᵒᵖ ⥤ C) {M F P : C} (e : M ≅ F) (d : P ≅ F)
     (h : D.obj (op F) ≅ F) : D.obj (op M) ≅ P :=
@@ -58,8 +55,7 @@ private theorem affineDualTransportIso_hom {C : Type w} [Category.{v} C]
 /-- Explicit comparison of the internal dual and the sheafified module dual.
 Use the basis and its dual basis, with the canonical dual of a finite free sheaf.
 No data are selected from an unproved existence theorem.
-Source: Stacks Project, duality.tex, Tag 0BQZ; schemes.tex, Tag 01HV.
-(blueprint: lem-sc-affine-finite-free-dual-naturality). -/
+Source: Stacks Project, duality.tex, Tag 0BQZ; schemes.tex, Tag 01HV. -/
 @[irreducible]
 noncomputable def affineBasisDualIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} [Fintype I]
@@ -186,22 +182,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite basis dual comparisons commute with precomposition, for any
 choices of bases on the two modules.
-Source: Stacks Project, schemes.tex, Tag 01HV; duality.tex, Tag 0BQZ.
-(blueprint: lem-sc-affine-finite-free-dual-naturality).
-
-Proof: On a principal open D(g), the basis sheaf is the free module on the
-localized basis. The free internal dual is identified with its coordinates by
-evaluation on those generators. The dual-basis representation of a functional
-has exactly these coordinates, by Basis.dualBasis_repr. Thus the displayed
-comparison sends an internal functional to the vector of its evaluations,
-regarded as the localized module dual. If f has matrix (a_ij) in the two bases,
-precomposition on either side sends an evaluation vector (v_i) to
-(sum_i a_ij v_i)_j. Localization preserves these finite sums and products, so
-the two composites agree on D(g). They agree on all opens by the sheaf property,
-since the principal opens form a basis. Transport by U.isoSpec preserves the
-identity. This also proves independence of the basis. No nontriviality of the
-ring is required: for rank zero or a zero ring all the same formulas hold and
-the maps between zero modules are unique. -/
+Source: Stacks Project, schemes.tex, Tag 01HV; duality.tex, Tag 0BQZ. -/
 theorem affineBasisDualIso_naturality {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Fintype I] [Fintype J]
     (bM : Basis I Γ(Y, U.1) M) (bN : Basis J Γ(Y, U.1) N) (f : N ⟶ M) :

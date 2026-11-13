@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCoherenceComparisons
 /-! # Tensor construction for affine module correspondence
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
-(blueprint: lem-weil-pbc-affine-module-tensor-construction).
 -/
 
 @[expose] public section
@@ -84,28 +83,7 @@ set_option maxHeartbeats 1400000 in
 -- The deeply nested functor and transport equalities require additional elaboration steps.
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
 This assertion constructs the maps; it does not assert that they are isomorphisms.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
-(blueprint: lem-weil-pbc-affine-module-tensor-construction).
-
-Proof:
-1. Take the pushout of the inverse-image structure map and the inverse-image algebra map
-   in commutative ring sheaves. The inverse-image counit and structure map commute, so
-   the pushout universal property supplies ε with the two stated equations.
-2. Extend inverse-image modules along t. Functoriality of inverse image and change of
-   rings gives P and its map formula. Associativity of scalar extension identifies its
-   underlying structure-sheaf module with tensor pullback; on the adjunction unit the
-   comparison sends g to the sheafification of 1 tensor η(g). This fixes κ.
-3. Extend P along ε to define H. The scalar-extension unit, conjugated by κ, defines γ.
-   Its formula is the sheafification of 1 tensor p and is natural by functoriality.
-4. The direct-image algebra is quasi-coherent by affine relative Spec. Scalar restriction,
-   quasi-coherence of pullback, and change of rings between quasi-coherent algebras show
-   that H carries quasi-coherent modules to quasi-coherent modules.
-5. The pullback counit is linear over the pulled-back algebra: on tensor generators
-   (b tensor a)(b' tensor s) maps to bb'as, the product of ε(b tensor a) and b's.
-   Thus it factors through extension along ε to give α, naturally in F. The unit followed
-   by γ is algebra-linear by the same generator computation, and gives β. The tensor
-   universal property and the adjunction give the two displayed comparison equations.
--/
+Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
 theorem affine_module_tensor_construction [IsAffineHom f] :
     ∃ (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf),

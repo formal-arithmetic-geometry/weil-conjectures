@@ -65,7 +65,6 @@ private theorem residue_retraction_of_kernel
 
 /-- Source: Stacks Project, Algebra, Lemma 02HT, proof of (4) implies (1),
 third through last paragraphs (https://stacks.math.columbia.edu/tag/02HT).
-(blueprint: lem-weil-pbc-artinian-lifting-conormal-mod-maximal).
 
 Proof in words:
 Let S = A_q, C = P.Ring, J = ker(C -> S), and m = maximalIdeal C. Surjectivity

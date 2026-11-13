@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleRingIsoTensor
 # Transport of the etale module inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
-Sites and Sheaves, Example 0H7J
-(blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
+Sites and Sheaves, Example 0H7J.
 -/
 
 @[expose] public section
@@ -58,26 +57,7 @@ private theorem adjunctionForgetUnitCounit
 set_option maxHeartbeats 500000 in
 -- Specializing the abstract adjunction identities to this dependent package exceeds the default.
 /-- Transport the module inverse image and its adjunction along a ring comparison.
-Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6.
-(blueprint: lem-weil-pbc-etale-module-inverse-image-transport).
-
-Proof: Use the module lift and adjunction of `etaleInverseImageModuleAdjunction`
-for RV. Identify its ring lift with the supplied Lr by uniqueness of left
-adjoints, using the hom-equivalence compatibility to identify their underlying
-set comparisons. Transport the module action across this identification to
-obtain L0 and e0. Applying the set pullback to the original action gives the
-required action equation. The prescribed sectionwise scalar multiplication
-uniquely determines muU, since morphisms of sheaves are determined by sections.
-Restrict scalars along c.inv to obtain LM, the comparison t and e. The inverse
-restriction along c.hom gives an equivalence. Compose this equivalence with
-the module adjunction: its right adjoint is pushforward along gamma because
-      ar.homEquiv c.hom = gamma. Under forgetting, the hom equivalence, unit and
-counit are those of the abelian adjunction, with the displayed comparison e.
-For the tensor comparison, sectionwise send a tensor m to c.inv(a) times m;
-the inverse sends m to 1 tensor m. The balancing relation and the inverse-ring
-identities prove these maps are inverse linear maps. They commute with
-restriction and module morphisms, and sheafification gives d and its formulas.
-No exactness is asserted here. -/
+Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6. -/
 theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1})
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

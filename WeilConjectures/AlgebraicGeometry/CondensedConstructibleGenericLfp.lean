@@ -25,21 +25,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A constructible module is locally finitely presented everywhere, or on some nonempty open.
 Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), finite-stratum induction;
-Bhatt--Scholze, Definition 6.8.10 and proof of Lemma 6.8.12.
-(auxiliary; not a blueprint node)
-
-Proof: choose the finite locally closed stratification in constructibility. The union of
-its stratum interiors is dense. If the ambient scheme is nonempty, one interior U is
-nonempty. The restriction of the corresponding stratum to U is a surjective closed
-immersion. Pro-étale sheaves and the coefficient ring are invariant under this immersion:
-topological invariance on the affine ind-etale basis transports covering
-presentations and makes both adjunction maps invertible. Pull back the finite
-presentations on the stratum to its inverse image over U,
-and transport them along this equivalence, which preserves the free modules and cokernels
-in a presentation. This gives local finite presentation on U. If the ambient scheme is
-empty, the empty pro-étale cover witnesses local finite presentation of every module,
-so the first alternative holds. No nonempty point, reduced structure, or coefficient field
-is used in the empty case or in the transport. -/
+Bhatt--Scholze, Definition 6.8.10 and proof of Lemma 6.8.12. -/
 theorem condensed_constructible_generic_lfp
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

@@ -41,24 +41,7 @@ private theorem evaluation_equality_transport {C : Type*} [Category C]
   exact heq_of_eq h
 
 /-- Normalized evaluation at the identity depends only on the literal derived objects.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96.
-(blueprint: lem-pc-tensor-hom-identity-evaluation-coherence).
-
-Proof: Resolve L and L' by K-flat complexes and use the fixed K-injective resolutions
-of M and M'. On these models, evaluation is the counit of the componentwise sheaf
-Hom-tensor adjunction, extended over the coproduct defining the total tensor. Hom
-from a K-flat complex into a K-injective complex is K-injective, so comparison roofs
-compute the internal-Hom comparison uniquely modulo chain homotopy. Evaluation
-commutes with the comparison maps on each tensor summand by the sheaf adjunction
-and the Hom projections. The Hom differential formula makes homotopic comparison
-maps give homotopic evaluation maps, with the total tensor Koszul signs. Localize
-these identities and cancel the resolution quasi-isomorphisms. Naturality of the
-internal-Hom resolution isomorphism and of the inverse augmentation identifies the
-result with the displayed normalized identity evaluations. For literal equalities
-of the derived objects the comparison arrows are equality isomorphisms; equality
-induction reduces their transport to identities, giving HEq. No source P or map
-into Hom occurs in this assertion. Zero and unbounded complexes cause no change:
-all identities are checked on the same total tensor summands. -/
+Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96. -/
 theorem tensorHomIdentityEvaluation_coherence (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M L' M' : CochainComplex

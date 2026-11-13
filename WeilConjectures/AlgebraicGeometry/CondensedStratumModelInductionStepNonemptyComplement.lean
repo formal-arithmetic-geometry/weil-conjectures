@@ -20,13 +20,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The closed complement of a nonempty open piece has strictly smaller support.
 
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split.
-Proof: take `Z` to be the scheme-theoretic closed complement of `j`. The complement
-identities give the cover and disjointness. Since `j` is nonempty and `i` is a closed
-immersion, its image misses the image of a point of `U`; the image of `Z` is therefore a
-proper closed subset of the support `D` and is represented by a `D' < D`.
-(auxiliary; not a blueprint node)
--/
+Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split. -/
 theorem exists_strict_closed_complement_support
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (D : TopologicalSpace.Closeds T)

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedSingleHomEvaluation
 /-! # Evaluation of affine Hom on K-injective complexes
 
 Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3.
-(blueprint: lem-sc-affine-hom-kinjective-evaluation).
 -/
 
 @[expose] public section
@@ -31,25 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The termwise affine Hom comparison on K-injective targets respects evaluation.
 This statement involves only the underived adjunction, with no supplied derived functors.
 
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3.
-(blueprint: lem-sc-affine-hom-kinjective-evaluation).
-
-Proof:
-1. Internal Hom from the unit sheaf is naturally the identity by evaluation at one.
-   Apply this degreewise to Hom from the complex concentrated in degree zero.
-   The comparison with the localized Hom complex gives a natural isomorphism j
-   from derived internal Hom out of the unit to the identity: the resolution map
-   is inverted by Q, so evaluation on a resolution descends to evaluation on D(Y).
-2. Scalar restriction of the algebra unit is the pushforward of the structure
-   sheaf, by the identity on sections. Apply iH degreewise to a K-injective I.
-   Since the first complex is concentrated in degree zero, its Hom complex has
-   precisely these degreewise Hom sheaves, and the Hom differential is that of I.
-   The derivedInternalHom comparison on a K-injective target gives the isomorphism c.
-3. The assumed sectionwise equality h_eval identifies the termwise counit with
-   precomposition by the unit map followed by evaluation at one. Equality on all
-   opens and all sections gives equality of sheaf maps, and equality in every
-   degree gives equality of chain maps. Applying Q and the natural comparisons
-   in steps 1 and 2 gives the displayed equality for c and j. -/
+Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3. -/
 theorem affine_hom_kInjective_evaluation
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

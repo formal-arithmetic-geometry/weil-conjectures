@@ -23,7 +23,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-! # A uniform affine bound for canonical truncation projections
 
 Source: Stacks Project, Tags 08D5(2) and 08DZ.
-(blueprint: lem-pc-derived-direct-image-uniform-affine-truncation).
 -/
 
 @[expose] public section
@@ -38,21 +37,7 @@ namespace AlgebraicGeometry
 -- Exact restriction additivity witnesses need a larger typeclass-search budget.
 /-- A single lower truncation works on an affine open for every quasi-coherent
 derived object. This is uniform in the object, with no coproduct hypothesis.
-Source: Stacks Project, Tag 08D5(2), final truncation argument, and Tag 08DZ.
-(blueprint: lem-pc-derived-direct-image-uniform-affine-truncation).
-
-Proof. Restrict f to the inverse image of the affine open U. This is a qcqs morphism
-with quasi-compact target. Exact restriction preserves quasi-coherent cohomology.
-Use the uniform upper bound N of 08D5(2), not its objectwise truncation clause.
-For n >= N-q the upper tail tau_<(-n) of any restricted object has direct image
-with zero cohomology in degrees q and q+1: shift the tail by -n-1 and apply N.
-The homology sequence of the truncation triangle makes its middle arrow invertible.
-Exact restriction commutes with homology and canonical truncation, including the
-projection. Derived direct image commutes naturally with open restriction, since
-restriction of a K-injective representative remains K-injective (Tag 08BS).
-Transport the middle-arrow isomorphism through these natural comparisons. Taking
-n = N-q gives one a = -n, independent of the derived object. The assertion includes
-zero objects and the empty open and places no compactness requirement on Y. -/
+Source: Stacks Project, Tag 08D5(2), final truncation argument, and Tag 08DZ. -/
 theorem exists_isIso_schemeHigherDirectImage_uniform_truncGE_over_affine
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

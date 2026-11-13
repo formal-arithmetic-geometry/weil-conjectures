@@ -218,19 +218,7 @@ private theorem interchange_general
 /-- Tensor extraction commutes with an extra copy of a self symmetric coefficient.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, second triangle, rearrangement of the even shifts;
-Stacks 0B56, projection-formula map.
-(auxiliary; not a blueprint node).
-
-Proof: transpose the two projection composites under p* adjoint Rp*. Projection
-associativity says that extracting K and then L agrees with extracting K tensor L,
-with the canonical pullback tensor comparison and associators. Conjugate by the
-canonical symmetries to put the outside coefficient first. The remaining permutation
-interchanges the two copies of p*L. Braidedness of pullback transports hL to say this
-permutation is identity. Naturality of the symmetry for t moves the trace onto the
-other copy. Associator/right-unitor coherence cancels the tensor unit. All projection
-maps are invertible because A is finite and p is proper, so invert the resulting
-square to obtain this equality. This calculation uses just p and t, no self-product
-square, exchange morphism, or trace base change hypothesis. -/
+Stacks 0B56, projection-formula map. -/
 theorem projectionTraceTensorInterchange [Finite A] {W X : Scheme.{u}}
     (p : W ⟶ X) [IsProper p] (K L : DerivedCategoryModule A X)
     (hL : (swap A X L L).hom = 𝟙 _)

@@ -21,24 +21,7 @@ open Scheme PadicAlgCl
 transitivity.
 
 Source: the Hom paragraph of archived `ModuleObject/Colimit/TwoColimit.lean`, and
-`new-weil-pbc-condensed-coefficient-complex-model`, step 3.
-(auxiliary; not a blueprint node)
-
-Proof: compute the mate before localization using the extension/restriction
-adjunction. The unit is `m ↦ 1 ⊗ m`; tensor transitivity multiplies the two
-coefficient factors. Its mate is consequently the map induced by the inclusion
-of the intermediate coefficient algebra into the specified algebraic closure.
-This is exactly `mixedScalarMap`, as can be checked after precomposing its
-underlying morphism with the epimorphism `extendπ`. Apply the identity in every
-degree. Exact extension and restriction descend to the unbounded derived
-categories. Their factorization isomorphisms carry the localized units to the
-derived units; the defining equations of `leftDerivedFunctorCompIso` and
-`leftDerivedFunctorNatIso` carry the localized tensor comparison to
-`derivedExtendScalarsCompIso`. Transport the degreewise identity along
-these isomorphisms. This gives the displayed equality with the explicitly
-constructed stage and vertex comparisons. All operations apply to arbitrary
-complexes, including zero complexes, with no boundedness or filteredness
-hypothesis. -/
+`new-weil-pbc-condensed-coefficient-complex-model`, step 3. -/
 theorem coefficientComplexToAlgCl_derived_compatibility
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F G : FiniteIntermediateField ℓ} (he : E ≤ G) (hf : F ≤ G)

@@ -11,8 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBi
 
 /-! # Étale cohomology over an open object
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ
-(blueprint: def-weil-pbc-etale-open-comparison-data).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry
 namespace EtaleOpenComparison
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable def freeSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (W : C)
     (F : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :
@@ -42,8 +40,7 @@ noncomputable def freeSectionsEquiv
     rfl
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable def sectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}] (W : C)
@@ -54,8 +51,7 @@ noncomputable def sectionsEquiv
     (freeSectionsEquiv W F.obj)
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 lemma sectionsEquiv_naturality
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}] (W : C)
@@ -70,15 +66,13 @@ lemma sectionsEquiv_naturality
   rfl
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable abbrev integerSheaf (U : Scheme.{u}) :=
   (constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable def restrictedSectionsEquiv
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -94,8 +88,7 @@ noncomputable def restrictedSectionsEquiv
   exact e.trans (G.obj.mapIso i.op.symm).addCommGroupIsoToAddEquiv
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 lemma restrictedSectionsEquiv_naturality
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -111,8 +104,7 @@ lemma restrictedSectionsEquiv_naturality
   exact (NatTrans.naturality_apply f.hom _ _).symm
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable def representingHomEquiv
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -125,8 +117,7 @@ noncomputable def representingHomEquiv
       (sectionsEquiv X.smallEtaleTopology (Scheme.Etale.mk j) G).toEquiv.symm)
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 lemma representingHomEquiv_naturality
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -145,8 +136,7 @@ lemma representingHomEquiv_naturality
   simp only [AddEquiv.apply_symm_apply]
 
 /-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction.
-(blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
 noncomputable def representingIso
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -167,15 +157,7 @@ sheafification of the universe-lifted representable of `j`. This is the analogue
 `Sheaf.H'` for coefficients in `AddCommGrpCat.{u + 1}`; unlike global `Sheaf.H G q`,
 it evaluates sections at `j`. Mathlib's `H'` requires coefficients in the Hom universe
 of the site, which here is `u`, so it cannot be applied to this larger coefficient sheaf.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ
-(blueprint: def-weil-pbc-etale-open-comparison-data).
-
-Proof: Extension by zero and restriction are exact adjoints. The image of the constant
-integer sheaf under extension by zero represents sections at the object `j`: use the
-adjunction, the constant-sheaf adjunction on U, and the free-abelian Yoneda adjunction on X.
-Yoneda therefore identifies this image with the free abelian sheaf on the representable
-of `j`. The Ext adjunction and precomposition with this representing isomorphism give the
-comparison in every degree. -/
+Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ. -/
 noncomputable def etaleCohomologyOverOpenEquiv {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale j]
     [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
@@ -194,11 +176,7 @@ noncomputable def etaleCohomologyOverOpenEquiv {X U : Scheme.{u}} (j : U ⟶ X)
 
 
 /-- The canonical comparison commutes with a morphism of coefficient sheaves.
-Source: Stacks 03F3; naturality of the exact Ext adjunction and Ext composition.
-(blueprint: def-weil-pbc-etale-open-comparison-data).
-Proof: apply the inverse comparison. Naturality of the Ext adjunction moves the
-coefficient map across the adjunction, and associativity of Yoneda composition moves
-it across precomposition with the representing isomorphism. -/
+Source: Stacks 03F3; naturality of the exact Ext adjunction and Ext composition. -/
 theorem etaleCohomologyOverOpenEquiv_naturality {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale j]
     [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
@@ -228,7 +206,7 @@ theorem etaleCohomologyOverOpenEquiv_naturality {X U : Scheme.{u}} (j : U ⟶ X)
   all_goals omega
 
 /-- The free abelian sheaf functor representing sections on the small etale site.
-Source: Stacks 03F3 (blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3. -/
 noncomputable abbrev EtaleOpenComparison.freeSheaf (X : Scheme.{u}) :
     X.Etale ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   etaleOpenFreeSheaf X
@@ -236,7 +214,7 @@ noncomputable abbrev EtaleOpenComparison.freeSheaf (X : Scheme.{u}) :
 /-- Restriction in global cohomology, transported from inverse image to site restriction.
 The three coefficient maps identify k^*j^*G with (k composed with j)^*G, using the
 inverse-image composition isomorphism and the canonical restriction comparisons.
-Source: Stacks 03F3 (blueprint: def-weil-pbc-etale-open-comparison-data). -/
+Source: Stacks 03F3. -/
 noncomputable def etaleCohomologyOverOpenRestriction {X U V : Scheme.{u}}
     (j : U ⟶ X) (k : V ⟶ U) [IsOpenImmersion j] [IsOpenImmersion k]
     [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})]

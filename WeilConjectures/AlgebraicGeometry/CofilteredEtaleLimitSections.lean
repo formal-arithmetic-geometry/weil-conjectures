@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.Final
 /-! # Sections over a cofiltered limit of etale schemes
 
 Source: Stacks Project, Tag 03Q9, degree zero, using Tags 09YQ and 03S2.
-(blueprint: lem-weil-pbc-cofiltered-etale-limit-sections).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ variable {J : Type u} [SmallCategory J] {R : Scheme.{u}}
 
 /-- The diagonal section map from the terminal etale object of the limit to the
 base change of a stage. Its first component is the limit leg; its second is the identity.
-Source: Stacks Project, Tag 03Q9, canonical section restriction.
-(blueprint: lem-weil-pbc-cofiltered-etale-limit-sections). -/
+Source: Stacks Project, Tag 03Q9, canonical section restriction. -/
 noncomputable def limitSectionMap (j : J) :
     Scheme.Etale.mk (𝟙 c.pt) ⟶
       (MorphismProperty.Over.pullback @Etale ⊤ p).obj (B.obj j) :=
@@ -38,10 +36,7 @@ noncomputable def limitSectionMap (j : J) :
 set_option backward.isDefEq.respectTransparency false
 
 /-- Compatibility of the diagonal section maps with transition morphisms.
-Source: Stacks Project, Tag 03Q9, compatibility of the section comparison components.
-(blueprint: lem-weil-pbc-cofiltered-etale-limit-sections).
-Proof: compare the two pullback projections, using the cone's naturality for the
-first projection and the identity for the second. -/
+Source: Stacks Project, Tag 03Q9, compatibility of the section comparison components. -/
 theorem limitSectionMap_naturality {j k : J} (a : j ⟶ k) :
     limitSectionMap B c p h j ≫
       (MorphismProperty.Over.pullback @Etale ⊤ p).map (B.map a) =
@@ -65,8 +60,7 @@ set_option backward.isDefEq.respectTransparency false
 /-- The section cocone whose components pull back by the adjunction unit and then
 restrict along `limitSectionMap`. Unit naturality and compatibility of the cone legs
 prove naturality, without any continuity hypothesis.
-Source: Stacks Project, Tag 03Q9, degree-zero comparison map.
-(blueprint: lem-weil-pbc-cofiltered-etale-limit-sections). -/
+Source: Stacks Project, Tag 03Q9, degree-zero comparison map. -/
 noncomputable def limitSectionCocone : Cocone (B.op ⋙ H.obj) where
   pt := ((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt)))
   ι.app j :=
@@ -90,31 +84,7 @@ noncomputable def limitSectionCocone : Cocone (B.op ⋙ H.obj) where
 /-- The explicit unit/restriction cocone is a colimit when its etale stages are qcqs,
 its transition morphisms are affine, and its scheme cone is limiting. The base scheme
 need not be quasi-separated; all qcqs assumptions concern the stages.
-Source: Stacks Project, Tag 03Q9, degree zero, using Theorem 09YQ and Tag 03S2.
-(blueprint: lem-weil-pbc-cofiltered-etale-limit-sections).
-
-Proof:
-1. Apply `exists_directed_reindexing` to `J` opposite, obtaining one nonempty directed
-   index preserving both the scheme limit and the section colimit. Choose a stage zero
-   and restrict to its cofinal upper tail.
-2. On stage zero take the inverse image of H along its etale structure map to R, and
-   take the terminal etale object. Apply `etaleSetSectionContinuity`: the stages are
-   qcqs, their maps are affine, and the terminal object's structure morphism is qcqs.
-3. Inverse-image composition identifies the sheaf at every stage with the inverse
-   image of H along its structure map to R, and the limit sheaf with the inverse
-   image along p, using the equations h. Each stage structure map is etale.
-   `etaleSetInverseImageRestriction` identifies its terminal sections with H(B_j).
-   Its unit equation and inverse-image composition identify the transition maps
-   with H applied to the opposite of B's maps.
-4. The limit components, under the same identifications, are the unit for p followed
-   by restriction along the map with components c_j and the identity. This is
-   `limitSectionMap`, as checked by its two pullback projections. Thus the cocone is
-   exactly `limitSectionCocone`. Continuity's bijective colimit comparison makes it
-   a colimit. Cofinality of the upper tail and the directed reindexing gives the
-   asserted colimit over J opposite.
-Small cases: a one-object identity diagram gives etale restriction; an empty stage
-is allowed and its terminal section set is a singleton by the empty-cover sheaf axiom.
-The cofiltered hypothesis excludes an empty indexing category. -/
+Source: Stacks Project, Tag 03Q9, degree zero, using Theorem 09YQ and Tag 03S2. -/
 theorem cofilteredLimitSections
     {J : Type u} [SmallCategory J] {R : Scheme.{u}}
     (B : J ⥤ R.Etale) (c : Cone (B ⋙ Scheme.Etale.forget R ⋙ Over.forget R))

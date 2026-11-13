@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.TensorRoofTransposition
 
 /-! # Koszul tensor roof lifting an affine open morphism
 
-Source: Stacks Project, Tag 08EH, construction of the two maps in Lemma 36.13.7
-(blueprint: lem-sc-affine-perfect-tensor-roof).
+Source: Stacks Project, Tag 08EH, construction of the two maps in Lemma 36.13.7.
 -/
 
 @[expose] public section
@@ -108,27 +107,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 /-- Construct the Koszul roof and the lifted map for a fixed K-flat model of the source.
 This statement does not assert perfectness or support of the total tensor.
-Source: Stacks Project, Tag 08EH, proof of Lemma 36.13.7
-(blueprint: lem-sc-affine-perfect-tensor-roof).
-
-Proof:
-1. RHom(A,E') is quasi-coherent for perfect A and arbitrary quasi-coherent E'.
-   Restriction of RHom and its zeroth global sections identify alpha with a section
-   of this RHom object on U. Transport along X's canonical affine isomorphism to
-   Spec of its global sections and choose a finite principal-open cover of U.
-2. Apply affine_perfect_open_represent_cohomology to the RHom object. Surjectivity
-   of its filtered-colimit cocone gives a Koszul tail and a map into RHom representing
-   this section. The tail is perfect and its augmentation is invertible on U.
-3. Take J to be the associated-sheaf Koszul tail, transported back along the affine
-   isomorphism. It is bounded finite locally free, hence K-flat by the bounded-above
-   flat criterion, and has its canonical chain augmentation u to the tensor unit.
-   Transpose the representing map under derived tensor-Hom, computed on P and J,
-   to obtain gamma. Tensor u with id_P, then follow by the right unitor and eA.
-4. Restriction commutes with the representative tensor and RHom. Its tensor
-   augmentation is therefore an isomorphism. Naturality of transposition shows
-   gamma restricted, precomposed with its inverse, is precisely alpha. Transport
-   back from Spec. Empty U gives the zero tail and zero map; no nonempty-open
-   assumption is used. -/
+Source: Stacks Project, Tag 08EH, proof of Lemma 36.13.7. -/
 theorem exists_affine_perfect_tensor_roof
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

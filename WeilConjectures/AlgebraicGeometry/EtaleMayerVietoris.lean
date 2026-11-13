@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisExact
 # Mayer-Vietoris for étale cohomology
 
 Source: Stacks Project, Étale Cohomology, Tag 0A50, and Cohomology on Sites,
-Tag 03F3 (2) (blueprint: lem-weil-pbc-etale-mayer-vietoris).
+Tag 03F3 (2).
 -/
 
 @[expose] public section
@@ -28,42 +28,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Source: Stacks Project, Tags 0A50 and 03F3 (2).
-(blueprint: lem-weil-pbc-etale-mayer-vietoris)
 
 The natural isomorphisms identify cohomology evaluated at the objects X, U, V and U ∩ V
 of X's small étale site with derived global sections on their small étale sites.
 The maps below are the right derived maps of section restriction; transporting them across
 these identifications gives the pullback restrictions in the displayed Mayer-Vietoris
 sequence. The two-summand direct sum is represented by the product of abelian groups.
-The connecting maps are natural transformations, hence functorial in the coefficient sheaf.
-
-Proof:
-1. The open immersions are étale, and U, V cover X. Their fibre products are intersections
-   (lem-weil-pbc-etale-composition-cancellation, lem-weil-pbc-open-fibre-product).
-2. The sheaf equalizer condition makes sections on X inject into sections on U × V and
-   identifies their image with the kernel of the difference of restrictions
-   (def-weil-pbc-abelian-etale-sheaves).
-3. For an injective sheaf, a section γ on U ∩ V gives the Čech cocycle (0, γ, -γ, 0).
-   Čech acyclicity makes it a boundary, proving surjectivity of the difference map
-   (lem-weil-pbc-injective-sheaf-cech-acyclic, def-weil-pbc-cech-complex).
-4. Choose a bounded below injective resolution and apply the preceding sequence degreewise.
-   This gives a short exact sequence of complexes of sections
-   (lem-weil-pbc-module-sheaves-enough-injectives,
-   lem-weil-pbc-left-exact-injective-resolution-degree-zero,
-   lem-weil-pbc-dplus-injective-representative).
-5. Its homology sequence is exact, and begins with an injection in degree zero
-   (lem-weil-pbc-complex-ses-homology-long-exact).
-6. Restriction to each étale open preserves injectives. Sections of the restricted
-   resolution equal sections on that object of X's site (03F3 (2)); the unit and
-   composition comparisons identify its maps with pullback restriction
-   (lem-weil-pbc-cohomology-pullback-functorial,
-   lem-weil-pbc-etale-inverse-image-restriction,
-   lem-weil-pbc-inverse-image-composition).
-7. A morphism of sheaves lifts to resolutions. Naturality of the homology sequence
-   proves functoriality and independence of the choices
-   (lem-weil-pbc-complex-ses-long-exact-naturality).
-8. Exactness shows vanishing when the adjacent groups vanish; at degree zero the
-   initial injection suffices. -/
+The connecting maps are natural transformations, hence functorial in the coefficient sheaf. -/
 theorem etale_mayerVietoris (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
     Nonempty (∀ n : ℕ, (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
         (evaluation _ _).obj (op (Scheme.Etale.mk (𝟙 X)))).rightDerived n ≅

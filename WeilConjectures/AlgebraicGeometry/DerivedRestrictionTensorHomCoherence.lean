@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionEvaluationMateIsIso
 
 /-! # Coherent derived tensor and Hom restriction
 Source: Stacks Project, Tags 08DJ, 08DL and 079U.
-(blueprint: lem-sc-derived-restriction-tensor-hom-coherence).
 -/
 
 @[expose] public section
@@ -60,28 +59,7 @@ set_option maxHeartbeats 800000 in
 -- Naturality of the canonical family unfolds the sheaf tensor-Hom instance data.
 /-- Exact open restriction has simultaneous tensor and internal-Hom comparisons
 compatible with the canonical tensor-Hom bijections.
-Source: Stacks Project, Tags 079U, 08DL and 08DJ.
-(blueprint: lem-sc-derived-restriction-tensor-hom-coherence).
-
-Proof: compute the tensor comparison on K-flat representatives of its arguments.
-Restrict their total tensor termwise and use preservation of K-flatness. The
-localization factorization identifies this with restriction of derived tensor.
-Naturality on complexes descends through quasi-isomorphisms to arbitrary derived
-maps, giving the displayed tensor naturality square. For an open immersion,
-ordinary restriction is exact, so it computes derived pullback in Tag 079U.
-Common K-flat resolutions identify the comparisons for different representatives;
-their inverses give the same square for roofs. Compute internal Hom with
-K-injective representatives of the second argument; restriction preserves these
-and identifies the Hom complexes termwise. Transport through the over-site
-module equivalence, obtaining the Hom comparison. Choose these comparisons from
-the same termwise restriction maps. On each total-tensor summand, restricting
-uncurrying evaluates the same local linear map as uncurrying after restriction.
-Thus their evaluation square commutes on representatives. With a K-flat model
-of the second tensor factor, its Hom into a K-injective is K-injective, so every
-map from an arbitrary first factor is represented modulo homotopy. Uncurrying
-preserves homotopies. The representative characterization and uniqueness of the
-canonical tensor-Hom family therefore give the evaluation equation for every
-derived map. The construction includes zero objects and the empty open. -/
+Source: Stacks Project, Tags 079U, 08DL and 08DJ. -/
 theorem exists_derivedRestriction_tensorHom_coherence
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

@@ -27,7 +27,7 @@ local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 /-- The tensor section map is constructed by the ring tensor universal property.
 It is not chosen from a postponed existence theorem.
-Source: Stacks Project, Tag 01SB (blueprint: stage3-affine-pushout-ring-section-map). -/
+Source: Stacks Project, Tag 01SB. -/
 def affinePushoutSectionMap
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpushout : IsPushout r₀ t₀ b t) (V : X.Opens) :

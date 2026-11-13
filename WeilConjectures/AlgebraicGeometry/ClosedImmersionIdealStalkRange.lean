@@ -13,7 +13,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # The ideal of a closed immersion on stalks
 
 Source: Stacks Project, Modules, Lemma 08KS and Lemma 01AG.
-(blueprint: lem-weil-pbc-closed-immersion-ideal-stalk-range).
 -/
 
 @[expose] public section
@@ -40,21 +39,7 @@ private theorem ideal_stalk_map_germ {Y : Scheme.{w}} (x : Y) {M N : Y.Modules}
 
 /-- The stalk ideal is the kernel of the local ring map on the image, and the whole
 ring off the image. The comparison `e` identifies structure-module germs with ring germs.
-Source: Stacks Project, Modules, Lemma 08KS, using Lemma 01AG.
-(blueprint: lem-weil-pbc-closed-immersion-ideal-stalk-range).
-
-Proof: On affine opens the range of the ideal inclusion is the kernel of `i.app`,
-by `range_toModulesι_app` and the definition of `i.ker`. At a point of the image,
-represent a ring germ on an affine neighbourhood. Its image under the local ring
-map is zero precisely when, after shrinking the corresponding neighbourhood in Z,
-the image section is zero. The closed embedding allows that neighbourhood to be
-replaced by the inverse image of a smaller open in Y. Shrink further to an affine
-open in Y; the section now lies in the affine kernel ideal and lifts to an ideal
-section. This proves both inclusions of the stalk range equality. Off the closed
-image choose an affine neighbourhood disjoint from it. Its inverse image is empty,
-so the map on sections has zero target and its kernel is the whole ring. Every
-ring germ therefore lifts to an ideal germ. The formulas for `e` and the stalk map
-send these lifted germs to the original ring germs. -/
+Source: Stacks Project, Modules, Lemma 08KS, using Lemma 01AG. -/
 theorem closedImmersion_ideal_stalk_range {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (x : Y)
     (e : (RingedSpace.moduleStalkFunctor Y.toRingedSpace x).obj

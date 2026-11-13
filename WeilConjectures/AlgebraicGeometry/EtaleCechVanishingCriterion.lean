@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleCechSectionwiseShortExact
 /-!
 # The étale Čech vanishing criterion
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9
-(blueprint: lem-weil-pbc-cech-vanishing-criterion).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
 -/
 
 @[expose] public section
@@ -36,20 +35,18 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- Use the standard small model of the étale category, fixing the model universe explicitly.
-Source: Mathlib `essentiallySmallSelf`; Stacks 03F9
-(blueprint: lem-weil-pbc-cech-vanishing-criterion). -/
+Source: Mathlib `essentiallySmallSelf`; Stacks 03F9. -/
 local instance etaleSiteEssentiallySmallForCechCriterion (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   essentiallySmallSelf.{0} _
 
 /-- The standard Grothendieck abelian structure supplies injective resolutions without an
-extra hypothesis. Source: Mathlib `Sheaf.isGrothendieckAbelian_of_essentiallySmall`; Stacks 03F9
-(blueprint: lem-weil-pbc-cech-vanishing-criterion). -/
+extra hypothesis. Source: Mathlib `Sheaf.isGrothendieckAbelian_of_essentiallySmall`; Stacks 03F9. -/
 local instance etaleSheavesGrothendieckForCechCriterion (X : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
   Sheaf.isGrothendieckAbelian_of_essentiallySmall.{u + 1, u + 1, u, u + 2, u + 1} _ _
 
-/-- Stacks Project, Lemma 03F9 (blueprint: lem-weil-pbc-cech-vanishing-criterion).
+/-- Stacks Project, Lemma 03F9.
 Vanishing higher Čech cohomology on a cofinal collection of coverings implies vanishing
 higher derived evaluation on every object of the chosen collection `B`. The predicate `Cov`
 is membership in the collection of indexed families; `hcover` says they are coverings.

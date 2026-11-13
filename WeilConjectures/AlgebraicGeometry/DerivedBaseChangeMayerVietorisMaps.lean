@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 /-! # Concrete maps for relative Mayer--Vietoris base change
 
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9
-(blueprint: def-pc-rf-mv-base-change-components).
+Source: Stacks Project, Tags 08BV, 08HY and 0DJ9.
 -/
 
 @[expose] public section
@@ -35,15 +34,13 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The derived pullback adjunction pinned to the same counits as the base-change map.
-Source: Stacks Project, Tags 079W and 08HY
-(blueprint: def-pc-rf-mv-base-change-components). -/
+Source: Stacks Project, Tags 079W and 08HY. -/
 abbrev mvDerivedPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedPullback f ⊣ schemeDerivedDirectImage f :=
   canonicalPullbackAdjunction f
 
 /-- The derived adjunction of exact open restriction, constructed from its underived
-adjunction. Source: Stacks Project, Tag 08BV
-(blueprint: def-pc-rf-mv-base-change-components). -/
+adjunction. Source: Stacks Project, Tag 08BV. -/
 @[irreducible] def mvOpenRestrictionAdjunction (X : Scheme.{u}) (U : X.Opens) :
     (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι :=
   let a : schemeOpenRestriction X U ⊣
@@ -54,15 +51,13 @@ adjunction. Source: Stacks Project, Tag 08BV
 
 /-- The comparison between pullback by an open immersion and exact restriction is
 constructed by uniqueness of left adjoints; its unit and counit identities are those
-of `Adjunction.leftAdjointUniq`. Source: Stacks Project, Tags 08DW and 079W
-(blueprint: def-pc-rf-mv-base-change-components). -/
+of `Adjunction.leftAdjointUniq`. Source: Stacks Project, Tags 08DW and 079W. -/
 @[irreducible] def mvOpenPullbackIso (X : Scheme.{u}) (U : X.Opens) :
     derivedPullback U.ι ≅ (schemeOpenRestriction X U).mapDerivedCategory :=
   (mvDerivedPullbackAdjunction U.ι).leftAdjointUniq (mvOpenRestrictionAdjunction X U)
 
 /-- The open comparison respects the adjunction unit by construction.
-Source: Stacks Project, Tag 079W; Mathlib `Adjunction.unit_leftAdjointUniq_hom_app`
-(blueprint: def-pc-rf-mv-base-change-components). -/
+Source: Stacks Project, Tag 079W; Mathlib `Adjunction.unit_leftAdjointUniq_hom_app`. -/
 private theorem mvOpenPullbackIso_unit (X : Scheme.{u}) (U : X.Opens)
     (K : schemeDerivedCategory X) :
     (mvDerivedPullbackAdjunction U.ι).unit.app K ≫
@@ -73,8 +68,7 @@ private theorem mvOpenPullbackIso_unit (X : Scheme.{u}) (U : X.Opens)
     (mvDerivedPullbackAdjunction U.ι) (mvOpenRestrictionAdjunction X U) K
 
 /-- The same comparison respects the adjunction counit.
-Source: Stacks Project, Tag 079W; Mathlib `Adjunction.leftAdjointUniq_hom_app_counit`
-(blueprint: def-pc-rf-mv-base-change-components). -/
+Source: Stacks Project, Tag 079W; Mathlib `Adjunction.leftAdjointUniq_hom_app_counit`. -/
 private theorem mvOpenPullbackIso_counit (X : Scheme.{u}) (U : X.Opens)
     (K : schemeDerivedCategory U.toScheme) :
     (mvOpenPullbackIso X U).hom.app ((schemeDerivedDirectImage U.ι).obj K) ≫
@@ -86,8 +80,7 @@ private theorem mvOpenPullbackIso_counit (X : Scheme.{u}) (U : X.Opens)
 
 /-- Canonical pullback/restriction comparison. Unlike a witness of bare `Nonempty`,
 this is constructed from the pinned pullback composition comparisons and the open
-adjunctions. Source: Stacks Project, Tags 0D5S and 08DW
-(blueprint: def-pc-rf-mv-base-change-components). -/
+adjunctions. Source: Stacks Project, Tags 0D5S and 08DW. -/
 @[irreducible] def mvPullbackOpenRestrictionIso {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) :
     derivedPullback f ⋙ (schemeOpenRestriction X (f ⁻¹ᵁ V)).mapDerivedCategory ≅
       (schemeOpenRestriction Y V).mapDerivedCategory ⋙
@@ -106,8 +99,7 @@ adjunctions. Source: Stacks Project, Tags 0D5S and 08DW
 
 /-- The explicit first two maps and boundary of an open-cover triangle.
 The overlap is a separate open, so inverse-image covers do not require casts.
-Source: Stacks Project, Tag 08BV
-(blueprint: def-pc-rf-mv-base-change-components). -/
+Source: Stacks Project, Tag 08BV. -/
 def mvBaseChangeTriangle (X : Scheme.{u}) (U V W : X.Opens)
     (iU : W ⟶ U) (iV : W ⟶ V)
     (adjU : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)
@@ -122,8 +114,7 @@ def mvBaseChangeTriangle (X : Scheme.{u}) (U V W : X.Opens)
       (-(schemeDerivedOpenDirectImageRestriction X iV adjV adjW K))) δ
 
 /-- The pasted base-change component on an open. This is an explicit map, with
-no witness chosen from an existence statement. Source: Stacks, Tags 08HY and 0DJ9
-(blueprint: def-pc-rf-mv-base-change-components). -/
+no witness chosen from an existence statement. Source: Stacks, Tags 08HY and 0DJ9. -/
 def mvBaseChangeOpenMap {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (h : g' ≫ f = f' ≫ g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')
@@ -146,8 +137,7 @@ def mvBaseChangeOpenMap {X S X' S' : Scheme.{u}}
           (schemeOpenRestriction X' (g' ⁻¹ᵁ W)).mapDerivedCategory.map ψ))
 
 /-- The middle component is the sum of its two diagonal components, written using
-images of the biproduct inclusions and projections. Source: Stacks, Tag 0DJ9
-(blueprint: def-pc-rf-mv-base-change-components). -/
+images of the biproduct inclusions and projections. Source: Stacks, Tag 0DJ9. -/
 def mvBaseChangeMiddle {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (h : g' ≫ f = f' ≫ g) (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

@@ -30,18 +30,7 @@ This concerns all module sheaves, independently of any rank decomposition or
 choice of complex.
 
 Source: Stacks Tag 01AX (exact direct image for a closed subset),
-Tag 00AE (stalks), and Tag 0AVW (direct-image algebra); reconstruction proof step 1.
-(blueprint: lem-sc-closed-immersion-algebra-direct-image-exact)
-
-Proof: At a point in the image of the closed embedding, inverse-image opens
-are cofinal among neighborhoods of its unique preimage. The stalk of direct
-image is therefore the source stalk, with its unchanged ring action, since
-the ring map of toDirectImageAlgebraSpace is the identity. At a point outside
-the image, its open complement has empty preimage. The direct-image stalk
-is the zero module. Exactness of module sheaves is detected on stalks, so
-this functor preserves short exact sequences. An additive exact functor
-between abelian categories preserves finite limits and finite colimits.
-The empty source is covered by the zero-stalk case. -/
+Tag 00AE (stalks), and Tag 0AVW (direct-image algebra); reconstruction proof step 1. -/
 theorem closedImmersion_algebraDirectImage_preservesFiniteColimits
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     PreservesFiniteColimits

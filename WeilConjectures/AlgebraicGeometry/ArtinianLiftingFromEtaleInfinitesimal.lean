@@ -126,23 +126,7 @@ private theorem artinian_factor {S : Scheme.{u}} (J : S.IdealSheafData)
     IsIso.inv_hom_id, Category.id_comp]
 
 /-- Every small Artinian test diagram at a point over the closed subscheme lifts.
-Source: Stacks Project, More on Morphisms, Lemma 0A43, proof of part (1).
-(blueprint: lem-weil-pbc-etale-infinitesimal-artinian-tests)
-
-Proof: The Artinian local spectra have a single point. The test square puts
-β's closed point in the support of J. Pull back J to Spec B'; this ideal sheaf
-has full support. Its global sections form an ideal in a Noetherian ring and
-lie in the nilradical, so some positive power vanishes. Pullback commutes with
-powers. The pullback projection along J^(n+1) is therefore a closed immersion
-with zero kernel and hence an isomorphism; its inverse gives β's factorization
-through Z_n. The test square then gives α's factorization through X_n.
-The length-one kernel of φ is a simple module. Its annihilator is the local
-ring's maximal ideal, which contains the proper kernel; hence the kernel has
-square zero. Naturality of Γ(Spec R) ≅ R gives the corresponding first-order
-thickening of affine schemes. Etaleness of X_n → Z_n supplies flatness and an
-open immersion diagonal. Apply the formal smoothness half of
-flat_unramified_formally_etale to lift to X_n, and compose with X_n → X.
-The pullback projection equations give both required equalities. -/
+Source: Stacks Project, More on Morphisms, Lemma 0A43, proof of part (1). -/
 theorem artinian_lifting_tests_of_etale_infinitesimal
     {X S Z : Scheme.{u}} (g : X ⟶ S) (i : Z ⟶ S)
     [IsClosedImmersion i] (J : S.IdealSheafData) (hJ : J = i.ker)

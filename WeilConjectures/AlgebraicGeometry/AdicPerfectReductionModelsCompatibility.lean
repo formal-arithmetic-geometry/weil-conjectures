@@ -236,22 +236,7 @@ private theorem compatibility_of_kflat_model
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Compatible object comparisons for the actual constant perfect model.
 Source: Stacks Project, Tags 09C6 and 06YY; the normalized derived extension
-composition comparison of Tag 099M.
-(auxiliary; not a blueprint node).
-
-Proof: split the finite projective terms as retracts of finite free modules.
-The constant realization, completion and slice restriction preserve the
-splittings. Therefore the local complex and all its ordinary quotient complexes
-are bounded complexes of flat modules and hence K-flat. Compute derived scalar
-extension by these complexes, using the K-flat counit. Exact slice restriction
-identifies this computation with the restriction of the constant perfect object;
-compose the two comparisons to define r at each n. The normalization of
-adicFiniteExtendComp is the counit square for successive derived scalar extension
-and ordinary scalar reassociation. Evaluate that square on the local K-flat
-complex. Naturality of the exact restriction comparison identifies its two sides
-with the displayed equation. Both reassociation maps multiply adjacent scalar
-factors, so their restriction comparisons agree. This also handles zero complexes,
-zero rings, the unit ideal and empty slices, where the same counit identities hold. -/
+composition comparison of Tag 099M. -/
 theorem adicPerfectReductionModels_compatibility (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

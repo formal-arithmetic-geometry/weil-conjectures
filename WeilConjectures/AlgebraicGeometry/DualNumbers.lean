@@ -455,8 +455,7 @@ namespace Scheme
 variable (X : Scheme.{u})
 
 /-- The dual-number thickening `X[ε]` of a scheme `X`: the same underlying space with structure
-sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`. -/
 noncomputable def dualNumbers : Scheme.{u} where
   __ := X.toLocallyRingedSpace.dualNumbers
   local_affine x := by

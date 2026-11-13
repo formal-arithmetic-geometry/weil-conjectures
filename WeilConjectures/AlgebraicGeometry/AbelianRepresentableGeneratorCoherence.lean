@@ -446,25 +446,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The universal section is compatible with a morphism of étale objects.
 Source: Stacks Project, Tag 03Q8 (restriction on the cohomology presheaf), and
-naturality of the free-sheaf, inverse-image, and constant-sheaf adjunctions.
-(blueprint: lem-sbc-abelian-representable-generator-coherence).
-
-Proof: Apply the constant-sheaf adjunction on T_V = Y ×_X V, evaluated at its
-terminal étale object, to both sides. The constant pullback comparison sends
-1 to 1. The generator for V is obtained by evaluating the h*-adjunction unit
-on the identity of V. Mapping it by h*Z[v] gives the section corresponding to
-v, by naturality of this unit and of the free/sheafification/Yoneda adjunction
-in its representing object. The pullback of the generator for W also gives
-this section: the map T_V to T_W is the base change of v. Conjugating with the
-pullback symmetry and the final-object identifications in the definition of
-the generator gives the same arrow over Y. The inverse-image composition
-unit identity identifies the successive restriction comparisons with the
-comparison for T_V to Y. Naturality of the localization restriction
-isomorphism then supplies exactly the displayed upperStarComp component.
-Both sides therefore classify the same section; injectivity of the adjunction
-bijection proves equality. Only functoriality and terminal-object identities
-are used, so identity v and empty fibre products require no extra hypotheses.
--/
+naturality of the free-sheaf, inverse-image, and constant-sheaf adjunctions. -/
 theorem abelianRepresentableGenerator_coherence {X Y : Scheme.{u}}
     (h : Y ⟶ X) (W V : X.Etale) (v : V ⟶ W) :
     let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp)

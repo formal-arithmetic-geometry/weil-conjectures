@@ -31,23 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Locally an extension with finite constant outer terms is a cokernel of a morphism
 between constant sheaves, with finitely generated source.
-Source: Stacks Project, Tag 093U, extension argument, up to the pushout diagram.
-(blueprint: lem-pc-constant-extension-cokernel-presentation)
-
-Proof: Remove empty schemes from covers. On each nonempty scheme choose constant values
-M and N for the outer terms. Their geometric stalks identify with M and N, so these modules
-are finitely generated. Present N as a quotient of a finite free module P with kernel K.
-Since the coefficient ring is finite, P and K are finite sets, hence K is finitely generated.
-Local surjectivity of the epimorphism to the constant sheaf N allows the finitely many
-chosen generators to be lifted simultaneously on an etale cover. The lifts define a map
-r from the constant sheaf P to the middle term. Its restriction to the constant sheaf K
-factors through the first term as a map g. Exactness of the constant sheaf functor makes
-this the pushout of the constant presentation of N along g. Equivalently, the middle term
-is the cokernel of (-g,inclusion) from the constant sheaf K to the constant sheaf M plus P.
-Indeed the map (a,v) to a+r(v) is epi, and its kernel consists exactly of (-g(k),k).
-The direct sum is the constant sheaf of M plus P. The resulting map need not be induced
-by a module homomorphism; no local constancy of its cokernel is asserted here.
-For an empty scheme choose the empty covering family. -/
+Source: Stacks Project, Tag 093U, extension argument, up to the pushout diagram. -/
 theorem exists_constantExtension_cokernelPresentation {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

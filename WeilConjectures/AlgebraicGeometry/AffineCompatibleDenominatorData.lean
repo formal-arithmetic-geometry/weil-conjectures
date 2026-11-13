@@ -16,7 +16,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Compatible numerators on a finite principal-open cover
 
 Source: Stacks Project, Properties, Lemma 01PM, denominator-clearing paragraphs.
-(blueprint: lem-weil-pbc-affine-compatible-denominator-data).
 -/
 
 @[expose] public section
@@ -29,21 +28,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Choose finite ideal generators and compatible numerators for one affine chart.
 
 Source: Stacks Project, Properties, Lemma 01PM, proof from the choice of generators
-through replacement of the numerators by further powers of the generators.
-(blueprint: lem-weil-pbc-affine-compatible-denominator-data).
-
-Proof: On V identify I with the finitely generated ideal J given by the image of
-its sections. Choose generators g_i. The locus where the inclusion is surjective
-on stalks is D(J), so their principal opens cover U intersect V. Quasi-coherence
-identifies sections of F on D(g_i) with the localization of M=F(V). Choose a
-positive common denominator exponent k and numerators x_i. On each overlap,
-equality of the localized fractions implies that some power of g_i*g_j kills
-(g_j^k*x_i-g_i^k*x_j). There are finitely many pairs, so choose a common e.
-Replace x_i by g_i^e*x_i and k by k+e. This preserves the fractions and makes
-every cross relation an equality in M. Restricting the fraction identity proves
-the asserted identity on every smaller open. If J=0, use no generators and
-k=1; the cover is empty. A unit ideal and an empty affine open need no special
-argument: localization and the finite maximum construction still apply. -/
+through replacement of the numerators by further powers of the generators. -/
 theorem affine_compatible_denominator_data
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

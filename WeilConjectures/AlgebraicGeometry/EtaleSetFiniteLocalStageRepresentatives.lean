@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-! # Finite local stage representatives
 
 Source: Stacks Project, Sites Tag 0A35 and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-finite-local-stage-representatives).
 -/
 
 @[expose] public section
@@ -93,24 +92,7 @@ private theorem comparison_unit
 They are not asserted to be compatible at that stage.
 
 Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-existence of local representatives; Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-finite-local-stage-representatives).
-
-Proof: Restrict to the cofinal tail above i₀. The inverse image is left Kan extension
-followed by sheafification, so locally t is the image of an original section of G,
-restricted along an arrow to a base-changed original object. Refine both these
-original objects and the representing objects to affine étale objects; restrict
-the original sections along their affine open covers. The test object at the limit is affine (the
-cone projections are affine),
-hence quasi-compact; choose a finite subcover. Descend these finitely many objects,
-arrows, and their commutative triangles to a common stage by finite-presentation
-object and arrow descent. Covering descent makes their arrows a cover of the
-base change of W at a possibly later stage. Apply the stage inverse-image unit to
-the original sections and restrict along the descended arrows to obtain s.
-The composition-unit equations show their images under β are the restrictions
-of t. Only the individual local representatives have been descended here: no
-matching equations between different representatives are descended. An empty
-cover gives an empty family, so the statement also includes an empty test object. -/
+existence of local representatives; Étale Cohomology Tag 09YQ. -/
 theorem etaleSet_finiteLocalStageRepresentatives
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

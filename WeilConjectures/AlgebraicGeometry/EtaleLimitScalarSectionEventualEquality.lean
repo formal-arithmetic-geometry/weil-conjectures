@@ -25,33 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Equality of two stage sections in the limit is detected at a later stage.
 Source: Stacks Project, Sites Tag 09YN, lemma-colimit, the iterated-colimit
-argument; Etale Cohomology Tags 0EYL and 09YQ, affine-site realization.
-(blueprint: lem-weil-pbc-etale-limit-scalar-section-eventual-equality).
-
-Proof: Restrict the scheme system to the directed upper tail of i₀. Its limit
-is unchanged. Base change T₀ and choose a finite affine open cover of T₀.
-Affine transition maps preserve the affineness of these base changes. The
-projection equations determine γ and δ by the two pullback projections.
-On each affine member, present the limit affine etale site as the colimit of
-stage sites (0EYL), and transport the sheaves along the full affine etale
-restriction equivalences. For each stage sheaf the inverse-image presentation
-of 09YM computes its sections at the limit object by later-stage sections.
-The finite-cover section theorem computes the sections of the sheaf colimit
-L as the filtered colimit of the sections of the inverse images. Insert the
-09YM presentations into this latter colimit. A finite collection of descended
-objects, arrows, and equalities has a common refinement; thus the refinement
-category is filtered and the diagonal system is final. Flattening the two
-colimits identifies the two equal images with equal representatives in the
-stage-section colimit. Its equality relation gives a later equality witness.
-The inverse-image unit equations, hG, and the projection equations identify
-these maps with μ and ρ. There are finitely many affine cover members, so
-choose one stage above all these witnesses. The transition sections agree on
-a covering at that stage, hence agree by the separatedness of the stage sheaf.
-This proves only equality detection; it supplies no representative of an
-arbitrary limit section and does not assume scalar colimit universality.
-For the empty object separatedness for the empty cover gives the conclusion
-at the original stage; zero coefficients and a singleton index also cause no
-exception. No object is defined by choosing a section witness. -/
+argument; Etale Cohomology Tags 0EYL and 09YQ, affine-site realization. -/
 theorem etale_limit_scalar_sections_eventual_equality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

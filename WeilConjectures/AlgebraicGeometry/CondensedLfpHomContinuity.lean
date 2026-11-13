@@ -39,20 +39,7 @@ local instance localInst_CondensedLfpHomContinuity_1
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
 
 /-- Continuity for a locally finitely presented module on the scheme itself.
-Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), the locally free calculation.
-(auxiliary; not a blueprint node)
-
-Proof: local finite presentations over the finite continuous coefficient field are
-pro-etale locally finite free. Identify internal module objects with sheaves of modules
-for the same coefficient ring. The evaluation-normalized locally free derived Hom formula
-identifies the functor below with H^n of derived sections after tensor by the finite
-locally free dual. The dual tensor is exact and preserves filtered colimits, as is checked
-on the finite free trivializations. It also preserves the common lower bound. The
-noetherian scheme is qcqs, so apply qcqs global-sections continuity to the tensor diagram.
-Good truncation at the common bound compares its cocone quasi-isomorphically with the
-ordinary termwise colimit cocone, since filtered colimits of module sheaves are exact.
-Naturality of evaluation identifies the induced arrow with the displayed colimit.desc.
-Rank zero and the empty scheme give zero Hom groups; no nonempty-rank assumption is used. -/
+Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(2), the locally free calculation. -/
 theorem condensed_lfp_hom_continuity
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

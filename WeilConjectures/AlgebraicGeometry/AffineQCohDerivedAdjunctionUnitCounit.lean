@@ -22,26 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The affine derived adjunction has invertible unit and counit.
-Source: Stacks Project, Tag 06Z0, proof after the elucidation.
-(blueprint: new-affine-qcoh-derived-adjunction-unit-counit).
-
-Proof: Global sections is a right adjoint and therefore preserves products;
-restriction of scalars through ΓSpecIso is exact and preserves products.
-Affine vanishing gives the bound N = 1 on quasi-coherent sheaves.
-The same bound holds for underlying abelian groups, and forgetting the
-module structure is exact and conservative, so degreewise isomorphisms
-can be checked there. The unbounded cohomological bound applied to the
-negative truncation, and the truncation triangle, identify degree-zero
-cohomology of derived sections with sections of degree-zero cohomology.
-Apply this also to every shifted object to obtain the identification in all
-degrees. Exactness of tilde identifies the cohomology of F with tilde of
-cohomology. Thus the derived counit induces the ordinary counit on each
-cohomology sheaf, an isomorphism by quasi-coherence; the derived unit induces
-the ordinary module unit, also an isomorphism. Both are quasi-isomorphisms,
-hence isomorphisms in the derived categories. The two comparisons transport
-this conclusion to F and G. Any adjunction on these functors has invertible
-unit and counit, since the adjunction is unique up to an isomorphism of right
-adjoints and invertibility is preserved by that isomorphism. -/
+Source: Stacks Project, Tag 06Z0, proof after the elucidation. -/
 theorem affineQCohDerivedAdjunction_unit_counit (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

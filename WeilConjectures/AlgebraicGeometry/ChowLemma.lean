@@ -269,8 +269,7 @@ is universally closed and dominant, the dense open `U∞` mapping isomorphically
 preimage of `⋂ i, R.U i` and proper over it, hence all of it); step 7 is the closed immersion
 of the graph into a single projective space over `S`. These steps are carried out in
 `AlgebraicGeometry.exists_chowModification_of_finite_irreducibleComponents`, which applies since
-`X` is Noetherian.
-(blueprint: `thm:chow-lemma`, `lem-weil-pbc-chow-noetherian`) -/
+`X` is Noetherian. -/
 @[stacks 0200]
 theorem nonempty_data : Nonempty (Data f) := by
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
@@ -354,8 +353,7 @@ theorem toProjectiveSpace_over :
   (data f).w
 
 /-- **Chow's lemma**: the modification of a Chow modification is an isomorphism over a dense
-open subset of `X`.
-(blueprint: `thm:chow-lemma`) -/
+open subset of `X`. -/
 @[stacks 0200]
 theorem exists_dense_isIso_restrict :
     ∃ U : X.Opens, Dense (U : Set X) ∧ IsIso (modificationMap f ∣_ U) :=
@@ -369,8 +367,7 @@ over a Noetherian base is dominated by a projective one.
 
 Indeed, `toProjectiveSpace f` composed with the structure morphism of `ℙ(index f; S)` is the
 proper morphism `modificationMap f ≫ f`, and the structure morphism is separated, so
-`toProjectiveSpace f` is itself proper, hence universally closed.
-(blueprint: `cor:chow-lemma-proper`) -/
+`toProjectiveSpace f` is itself proper, hence universally closed. -/
 @[stacks 0202]
 instance isClosedImmersion_toProjectiveSpace {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsProper f] : IsClosedImmersion (toProjectiveSpace f) := by

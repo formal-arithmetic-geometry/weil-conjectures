@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryLocalizedEvalu
 /-! # One-variable localized evaluation compatibility
 
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-hom-evaluation-postcomposition).
+Tags 0A90 and 0A96.
 -/
 
 @[expose] public section
@@ -116,20 +116,7 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
 set_option backward.isDefEq.respectTransparency.types true in
 /-- One-variable compatibility of the explicit localized identity evaluation.
 Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex,
-Tags 0A90 and 0A96. (blueprint: lem-pc-tensor-hom-evaluation-postcomposition).
-
-Proof: Fix L and a chain map f : M → N. Apply localized uncurrying naturality
-first to Hom(id_L,I(f)) with target N fixed, then to the identity Hom input
-with target map f. Their equal left sides identify evaluation after Q Hom(id_L,I(f))
-with evaluation followed by Qf. Naturality of the fixed localization comparison
-identifies RHom(id_QL,Qf) followed by the comparison at N with the comparison at M
-followed by Q Hom(id_L,I(f)). Tensor with id_QL and reassociate to obtain naturality
-of the displayed evaluation composite for Qf. These components form a natural
-transformation Q ⋙ (RHom(QL,-) tensor QL) → Q. Fully faithful precomposition by
-the localization Q gives a natural transformation on the derived category whose
-components at Q(M) are exactly these evaluation composites. Its naturality at
-c.inv is the claimed equality. No K-flat replacement or lift of c.inv is needed;
-identity comparisons and zero complexes obey the same argument. -/
+Tags 0A90 and 0A96. -/
 theorem tensorHomEvaluation_postcomposition (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M M' : CochainComplex

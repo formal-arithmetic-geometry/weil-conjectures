@@ -12,7 +12,6 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 /-! # Lower bound of the pulled-back complex colimit
 
 Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-colimit-below).
 -/
 
 @[expose] public section
@@ -26,14 +25,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 /-- A colimit of uniformly lower bounded inverse-image complexes has the same lower bound.
-Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1.
-
-Proof: Exactness of inverse image makes every pulled back term zero below a. The
-isomorphisms eG therefore make every G term zero in these degrees. Evaluation of
-complexes preserves colimits, so L.pt.X n is a colimit of zero objects when n < a.
-A cocone with vertex zero is then colimiting, hence this term is itself zero.
-This argument works also when the index category is empty.
-(blueprint: lem-weil-pbc-etale-complex-colimit-below). -/
+Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1. -/
 theorem etaleComplex_colimit_below
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

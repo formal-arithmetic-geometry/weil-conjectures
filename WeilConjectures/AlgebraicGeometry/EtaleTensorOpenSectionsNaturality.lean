@@ -27,7 +27,7 @@ noncomputable section
 
 /-- The canonical tensor-to-restriction comparison on the whole open subscheme.
 Source: Stacks, Tags 0095 and 0096; uniqueness of left adjoints and
-Mathlib `restrictAppIso` (blueprint: new-etale-tensor-open-section-iso). -/
+Mathlib `restrictAppIso`. -/
 def tensorOpenSectionIso (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) :
     Γ((tensorPullback U.ι).obj F, ⊤) ≅ Γ(F, U) :=
   ((CategoryTheory.evaluation _ AddCommGrpCat).obj (op ⊤)).mapIso
@@ -39,7 +39,7 @@ def tensorOpenSectionIso (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) :
 
 /-- Transport the canonical open-section comparison along the equality of
 underlying over-scheme objects. No section is chosen from an existence assertion.
-Source: Stacks, Tag 03DR (blueprint: new-etale-tensor-open-section-iso). -/
+Source: Stacks, Tag 03DR. -/
 def etaleTensorOpenSectionIso (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)
     (U : X.Opensᵒᵖ) :
@@ -276,28 +276,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The constructed comparisons commute with the unit-normalized tensor restrictions.
-Source: Stacks, Tag 03DR, equation (35.8.0.1), and Tags 0095 and 0096.
-(blueprint: new-etale-tensor-open-section-naturality).
-
-Proof: First use hi on objects and arrows to replace the underlying objects i(U)
-by the inclusions U.ι and each underlying arrow by the inclusion between opens.
-Write a for the inclusion V into U and b for U.ι. Let e_b be the unique comparison
-from tensor pullback to restriction defined by leftAdjointUniq. Its unit equation
-is η_b followed by b_* e_b = the restriction-adjunction unit. The composition
-comparison c_{a,b} is the mate of the inverse pushforward-composition isomorphism.
-Its unit equation identifies η_b followed by b_* η_a and the pushforward of
-c_{a,b} with η_{a≫b}, after the pushforward composition identification.
-Combine these equations: section pullback along a, followed by c_{a,b} and e_{a≫b},
-is e_b followed by the restriction unit along a and the restriction-composition
-comparison. Equality follows by injectivity of the adjunction Hom equivalence;
-both mates are the same composite restriction unit. Evaluate at the whole source
-open. Mathlib restrictAdjunction_unit_app_app expresses the restriction unit as
-the ordinary presheaf restriction, while restrictAppIso identifies the whole-open
-sections with F(U) and F(V). The transports of image-top and a≫b=V.ι commute with
-these maps by functoriality of F.presheaf. This gives the displayed square. Empty
-opens, identity inclusions, and zero modules obey the same unit equations. -/
+Source: Stacks, Tag 03DR, equation (35.8.0.1), and Tags 0095 and 0096. -/
 /- Core comparison compatibility after expanding the constructed isomorphisms.
-Source: Stacks, Tag 03DR, equation (35.8.0.1) (blueprint: new-etale-tensor-open-section-core).
+Source: Stacks, Tag 03DR, equation (35.8.0.1).
 -/
 theorem etaleTensorOpenSectionIso_component_core
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
@@ -318,7 +299,7 @@ theorem etaleTensorOpenSectionIso_component_core
     (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj U.unop) hi)
     (congrArg (fun k : X.Opens ⥤ Over X ↦ k.obj V.unop) hi)
 
-/-- (blueprint: new-etale-tensor-open-section-naturality) -/
+/-- -/
 theorem etaleTensorOpenSectionIso_naturality
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)

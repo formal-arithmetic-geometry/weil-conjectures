@@ -16,18 +16,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- Pullback of a cover along any stage map covers both that stage and the limit.
-Source: Stacks Project, Tag 03Q6, base-change stability of coverings.
-(blueprint: lem-weil-pbc-affine-open-inverse-image-compatible-refinement-data).
-
-Proof: Set V'_b to the categorical pullback of v_b and D(f) in X.Etale, with
-projections v'_b to D(k) and γ_b to V_b. Their equation is the pullback equation,
-and the stage covering follows by stability under base change. Define π'_b as
-p*(γ_b) followed by π_b. Since D(j) and D(k) embed openly into X and p factors
-through each, their base changes to c.pt are terminal. Consequently p*(D(f)) is
-an isomorphism. Base change preserves pullbacks, so each p*(γ_b) is an isomorphism.
-The composite family π' therefore generates the same covering sieve as π.
-This proof also handles empty covering families and uses neither sections nor
-any equality-locus argument. -/
+Source: Stacks Project, Tag 03Q6, base-change stability of coverings. -/
 theorem affineOpenSections_refinement_data
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J]
     (D : J ⥤ X.Etale) [∀ j, IsOpenImmersion (D.obj j).hom]

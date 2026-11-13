@@ -30,8 +30,7 @@ private theorem hom_ext {A B : Ab.{u + 1}} {f g : A ⟶ B}
 /-- The geometric evaluation comparison has the same bounded-coefficient coordinates
 on both algebraically closed fields.
 
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers
-(auxiliary; not a blueprint node).
+Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.
 
 Proof in words: write q_K for the structural map from the singleton relative profinite
 object to the final object, eta_K for the point-adjunction unit on the coefficient

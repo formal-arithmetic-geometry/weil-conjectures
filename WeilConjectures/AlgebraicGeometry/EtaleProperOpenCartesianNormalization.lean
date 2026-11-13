@@ -209,19 +209,7 @@ private theorem derived_cartesian_normalized
 set_option backward.isDefEq.respectTransparency true in
 /-- The support- and unit-normalized derived comparison on a Cartesian square
 is the canonical adjunction exchange.
-Source: Stacks Project, Tag 0F7B.
-(auxiliary; not a blueprint node).
-
-Proof:
-The ordinary mate of the inverse open base-change map has the required support
-normalization. This follows by composing with the inclusion of extension by zero
-into direct image, using compatibility of open base change with this inclusion,
-and applying naturality and the adjunction triangle identities. That inclusion is
-monic, as is its proper direct image, so the given theta is this ordinary mate.
-The unit formula for deriving an adjunction mate is then exactly the assumed
-unit normalization of Gamma. Uniqueness of right-derived transformations identifies
-Gamma with the descended mate, whose definition is the specified exchange.
--/
+Source: Stacks Project, Tag 0F7B. -/
 theorem etaleProperOpenCartesianNormalization
     (A : Type (u + 1)) [CommRing A]
     {U V W Z : Scheme.{u}}

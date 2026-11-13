@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingLattices
 /-! # An integral lattice near a point of a continuous local system
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -45,7 +44,6 @@ private lemma etale_cover_point (X : Scheme.{u}) {I : Type (u + 1)}
 /-- An integral lattice exists on some affine etale neighbourhood of each point.
 
 Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
 
 Proof in words. Apply the explicit continuous field module equivalence to P.
 The lattice-compatibility theorem supplies finite local freeness of its image.

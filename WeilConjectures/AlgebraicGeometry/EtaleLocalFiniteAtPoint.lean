@@ -15,8 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 /-!
 # An isolated fibre point becomes finite after elementary étale base change
 
-Source: Stacks Project, More on Morphisms, Lemma 02LK, clauses (a), (b), (i)-(iii)
-(blueprint: lem-weil-pbc-etale-local-finite-at-point-elementary).
+Source: Stacks Project, More on Morphisms, Lemma 02LK, clauses (a), (b), (i)-(iii).
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ private theorem isIso_pullback_fst_residueFieldMap {X Y S : Scheme.{u}}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Stacks Project, Lemma 02LK, excluding its final persistence assertion
-(blueprint: lem-weil-pbc-etale-local-finite-at-point-elementary).
+/-- Stacks Project, Lemma 02LK, excluding its final persistence assertion.
 An isolated fibre point of a locally finite type morphism admits an elementary étale
 neighbourhood and a finite open piece with exactly one point over the distinguished base
 point; that point lies over the original point with unchanged residue field.

@@ -23,16 +23,14 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Restrict the base system above i and pull it back to X times the i-th base.
-This is an actual functor of fibre products, without any chosen descent data.
-(blueprint: def-sc-cartesian-higher-image-chart-system). -/
+This is an actual functor of fibre products, without any chosen descent data. -/
 noncomputable def cartesianChartDiagram
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (i : I) :
     Over i ⥤ Over (pullback f (D.obj i).hom) :=
   Over.post (X := i) (D ⋙ Over.forget S) ⋙ Over.pullback (pullback.snd f (D.obj i).hom)
 
-/-- The same explicit pullback construction on the limiting cone.
-(blueprint: def-sc-cartesian-higher-image-chart-system). -/
+/-- The same explicit pullback construction on the limiting cone. -/
 noncomputable def cartesianChartCone
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D) (i : I) :
@@ -41,20 +39,7 @@ noncomputable def cartesianChartCone
     (((Over.forget S).mapCone c).overPost i)
 
 /-- The chart system is limiting and has affine arrows and qcqs structure maps.
-Source: Stacks Project, Tags 0EYM, 01YZ and 01Z6.
-(blueprint: lem-sc-cartesian-higher-image-chart-system).
-
-Proof: Restrict the underlying scheme cone to Over i. Its forgetful functor is
-initial because I is cofiltered; therefore this restriction is limiting. Pullback
-to X times_S S_i preserves limits. Forgetting an over-category preserves connected
-limits, and Over i is cofiltered, hence connected. This gives the underlying
-limiting cone of cartesianChartDiagram. Each transition map is the base change of
-an original affine transition. The projection of the original limit to S_i is
-affine, so the apex structure map is affine as well. Each stage structure map is
-the base change of an original affine transition to S_i. Compose these affine
-maps with X times_S S_i to S_i, which is qcqs as the base change of f. Thus the
-stage and apex maps to S_i are qcqs. This construction uses no etale test object,
-coefficient sheaf, cohomology comparison, or continuity assertion. -/
+Source: Stacks Project, Tags 0EYM, 01YZ and 01Z6. -/
 theorem cartesianChartSystem_properties
     {S X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

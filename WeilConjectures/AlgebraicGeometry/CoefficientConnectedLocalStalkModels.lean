@@ -64,26 +64,7 @@ private theorem stalks_agree_on_component
 /-- A bounded lisse complex has the specified stalk as a common local model on
 objects mapping into its connected component.
 Source: Stacks Project, Etale Cohomology, Tag 09BI; Pro-etale Cohomology, Tag 09C6,
-first paragraph, before the weak-contractibility argument.
-(auxiliary; not a blueprint node).
-
-Proof: Obtain an etale chart through each point, with its individual algebraic
-model, its stalk identifications and its comparison realization, from
-coefficient_etale_derived_chart_atlas. The set of points whose stalk is
-isomorphic to the stalk at z is open: any chart containing such a point lies
-in the set. Its complement is open by the same chart argument. Preconnectedness
-of the connected component of z therefore puts that whole component in the set.
-For each point of U, pull back an etale chart through its image. The resulting
-family is jointly surjective by the scheme pullback carrier lemma, so is an
-etale, hence pro-etale, covering family. Transport its generated sieve through
-AsSmall. Every arrow in this sieve factors through a chosen chart, where the
-atlas realizes the pullback of K by its model. Compose the isomorphism from the
-specified stalk at z to the stalk at the chart's chosen point with the inverse
-of that chart's stalk identification, and apply constant realization followed
-by slice restriction. This gives the required local isomorphism. If U is empty,
-the family is empty and is still covering by the same surjectivity criterion.
-Neither openness of connected components nor a separate empty-slice argument
-is needed -/
+first paragraph, before the weak-contractibility argument. -/
 theorem coefficient_connected_local_stalk_models
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

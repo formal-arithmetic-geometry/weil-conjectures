@@ -16,7 +16,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 # Identifying the ring-object lift of sectionwise etale direct image
 
 Source: Stacks Project, Proposition 00YV, ring paragraph and Section 00YR.
-(blueprint: lem-weil-pbc-etale-ring-direct-image-operations).
 -/
 
 @[expose] public section
@@ -27,7 +26,7 @@ open CategoryTheory.CartesianMonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Source: Stacks Project, Proposition 00YV, ring paragraph; equality transport in
-step 1 of (blueprint: lem-weil-pbc-etale-ring-direct-image-operations).
+step 1 of.
 Equality of bundled internal rings transports the operations as well as the carrier.
 After eliminating that equality, the two carrier identifications agree by proof irrelevance. -/
 private theorem transportSectionOperations.{v, w} {C : Type v} [Category C]
@@ -62,26 +61,7 @@ private theorem transportSectionOperations.{v, w} {C : Type v} [Category C]
   exact ops
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples.
-(blueprint: lem-weil-pbc-etale-ring-direct-image-operations).
-
-Proof: Fix X and an etale object Z. For any internal ring Y on either site,
-apply the supplied section formulas to GY. The equality G F = id identifies
-F(GY) with Y as an internal ring, hence identifies all its operations.
-The forgetful equalities make the composite of the resulting underlying
-identifications the identity. Thus the inverse of eG carries the internal
-addition, zero, multiplication and one to the corresponding section operations
-of GY. For sectionwise direct image R, the inverse product comparison sends a
-pair of sections to that same pair at the base-changed object: compose with the
-two projections to check this assertion. The inverse terminal comparison sends
-the unique singleton section to the unique singleton section. Evaluate each of
-the supplied RF addition, zero, multiplication and one equations at Z, and apply
-these product and terminal descriptions. Finally use the preceding operation
-identifications for GU and GV. The four resulting equations are exactly the
-four assertions for c. This calculation is valid for the zero ring and requires
-no points or nonempty sections. It asserts only preservation of operations;
-constructing ring homomorphisms, proving invertibility and proving naturality
-are separate steps handled by the importing module. -/
+/-- Source: Stacks Project, Proposition 00YV, ring paragraph; Section 00YR, sextuples. -/
 theorem etaleRingDirectImageOperations (U V : Scheme.{u}) (f : U ⟶ V)
     (FU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1} ⥤
       CommRingObjCat (Sheaf U.smallEtaleTopology (Type (u + 1))))

@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
 # Algebraization of finite schemes over thickenings of a proper scheme
 
 Source: Cohomology of Schemes, Stacks Project, Lemma 09ZT (the proof via
-Grothendieck existence, Theorem 088C and Remark 088F)
-(blueprint: lem-weil-pbc-algebraize-finite-over-proper).
+Grothendieck existence, Theorem 088C and Remark 088F).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
-/-- (blueprint: lem-weil-pbc-algebraize-finite-over-proper) Let `A` be a
+/-- Let `A` be a
 Noetherian `I`-adically complete ring, `S = Spec A`, `Sₙ = Spec (A/I^(n+1))`
 (with `sn n : Sₙ ⟶ S` and transition maps `Sₙ ⟶ Sₙ₊₁` induced by the quotient maps),
 and `f : X ⟶ S` separated and of finite type (`IsSeparated`, `LocallyOfFiniteType`,
@@ -41,14 +40,7 @@ immersions `ιn n : Xₙ ⟶ Xₙ₊₁` (`pullback.map`). Given finite `fnY n :
 `gn n : Yₙ ⟶ Yₙ₊₁` making every square cartesian, with `Yₙ₀ → S₀` proper, there is a
 finite `g : Y ⟶ X` with `Y → S` proper, and isomorphisms `Y ×_X Xₙ ≅ Yₙ` over `Xₙ`
 compatible with the maps `Yₙ ⟶ Yₙ₊₁` (through the induced map
-`Y ×_X Xₙ ⟶ Y ×_X Xₙ₊₁`, characterized by its two projections).
-
-Proof: by Grothendieck's existence theorem (Stacks 088C, in the form of Remark 088F)
-the compatible system of coherent `𝒪_{Xₙ}`-algebras `fnY n _* 𝒪_{Yₙ}` is the system
-of reductions of a coherent `𝒪_X`-algebra `𝒜`, whose support is proper over `S` since
-the support of `Y₀` is; put `Y = Spec_X 𝒜`, finite over `X`, and the isomorphisms
-come from `𝒜 ⊗ 𝒪_{Xₙ} ≅ fnY n _* 𝒪_{Yₙ}`. `Y` is proper over `S` because it is
-finite over the proper (on the support) part of `X` (Lemma finite-pushforward-coherent). -/
+`Y ×_X Xₙ ⟶ Y ×_X Xₙ₊₁`, characterized by its two projections). -/
 theorem algebraize_finite_over_proper
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

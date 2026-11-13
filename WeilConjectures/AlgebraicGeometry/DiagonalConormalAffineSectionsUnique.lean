@@ -22,17 +22,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- Normalized diagonal conormal derivations agree on sections of every open.
-Source: Stacks Project, Tag 08S2.
-(blueprint: lem-sc-diagonal-conormal-affine-sections-unique).
-Proof: let W be the intersection of the two inverse images of U under the
-projections. Its diagonal inverse image is U since both composites with the
-diagonal are the identity. Pull a back under each projection on W and subtract.
-Pulling this difference along the diagonal gives zero by functoriality. The
-sectionwise description of a sheaf-module kernel therefore supplies a section s
-of the actual kernel with this difference as its image. Apply the normalization
-of each derivation to the same W and s. Both values equal the restriction to U of
-the same tensor-pullback unit applied to s, so they agree. This works also for the
-empty open and for a nonseparated morphism; W need not be affine. -/
+Source: Stacks Project, Tag 08S2. -/
 theorem diagonalConormal_affine_sections_unique (f : X ⟶ S)
     (U : X.Opens)
     (D₁ D₂ : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)

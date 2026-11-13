@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.KInjectiveResolution
 /-! # Prescribed normalized CE presentations
 
 Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-normalized-row-presentations).
 -/
 
 @[expose] public section
@@ -87,27 +86,7 @@ set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE and normalized page data together.
 /-- Construct normalized presentations and pin their first-page comparison to the
 concrete signed row comparison. No scheme-map naturality is asserted here.
-Source: Stacks Project, Tags 015J, 015K, 012K and 06XR.
-(blueprint: lem-weil-pbc-ce-normalized-row-presentations).
-
-Proof. Apply exists_hypercohomology_firstPage to each prescribed augmented bicomplex,
-retaining I, a, the second filtration and the pinned total augmentation. Use the
-canonical K-injective resolution of K and compose the total-homology comparison with
-resolutionEtaleCohomologyIso; transport the finite homology-image filtration by this
-composite. Build every positive page from filteredComplex_page_differential_exists_unique
-and every successor comparison from filteredComplex_normalized_homology. Adjoin the
-page-zero graded complex via filteredComplex_graded_homology. Its negative row terms
-vanish by extension by zero. The canonical rowComparison identifies the first page
-with row homology. Multiply it by (-1)^(pq), and compose with the inverse of the
-row resolution isoRightDerivedObj to define eDerived. Define ordinaryComparison as
-isoRightDerivedObj followed by ceRowOrdinaryIso. Their intermediate maps cancel,
-giving the displayed equation. The signed d1 equation and right-derived naturality
-give dDerived; the explicit Ext/sections comparison is natural for coefficient maps,
-giving ordinary_naturality. Assemble these witnesses as EtaleTermwiseHypercohomology.
-Every positive page is the concrete boundary cokernel, so j is the identity comparison
-and successor normalization holds. The construction works at p=0, for zero rows,
-negative complex degrees and empty diagonals using the same quotient universal
-properties. -/
+Source: Stacks Project, Tags 015J, 015K, 012K and 06XR. -/
 theorem exists_etaleCE_normalized_row_presentations
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

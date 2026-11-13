@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisImage
 # Global sections under the abelian Galois stalk equivalence
 
 Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point.
-(blueprint: lem-sc-etale-global-sections-galois-invariants).
 -/
 
 @[expose] public section
@@ -36,26 +35,7 @@ representation. Only degree zero is asserted; no derived or continuous cohomolog
 comparison is assumed.
 
 Source: Stacks Project, Etale Cohomology, Tag 04JM, lemma-global-sections-point,
-and Tag 04JQ, lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-sc-etale-global-sections-galois-invariants).
-
-Proof: The set-valued stalk equivalence identifies sections over Spec K with the
-fixed elements of the stalk (04JM). Explicitly, restrict to finite separable
-extensions in Ks. A germ has a representative on such a field: shrink its
-pointed etale neighbourhood to the finite connected component containing its
-geometric point. Enlarge to a finite Galois extension. Germ maps from these
-connected objects are injective, since a further pointed neighbourhood is an
-etale surjective cover and the sheaf equalizer gives injective restriction.
-If a germ is invariant, this injectivity makes its representative invariant
-under the finite Galois group. Galois descent therefore produces a unique
-section over K. Conversely, a section over K has unchanged pullbacks under
-every change of geometric lift. The action hypothesis `hi` and the stalk
-isomorphism `i` identify this lift-change action with the representation action.
-The germ map preserves addition, and its inverse consequently does too.
-For a sheaf morphism, its pullback commutes with all restriction and germ maps;
-naturality of `i` identifies the resulting map with `E.functor.map`, giving
-the displayed naturality equality. Only finite etale neighbourhoods in Ks are
-used; Omega may contain transcendental elements over K. -/
+and Tag 04JQ, lemma-equivalence-abelian-sheaves-point. -/
 theorem etaleGlobalSections_galoisInvariants
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

@@ -18,8 +18,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 /-!
 # Constructible comparison for discrete Noetherian coefficients
 
-Stacks Project, Tags 09AJ, 09AK and 09AL
-(blueprint: sk-thm-pe-constructible-comparison).
+Stacks Project, Tags 09AJ, 09AK and 09AL.
 
 We use the recorded equivalent coefficient-sized sites and intrinsic modules over their
 constant ring sheaves. The two full subcategories have all ambient morphisms. The forward
@@ -51,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 On qcqs schemes every such module is classical, and comparison induces equivalences on
 constructible sheaves and on bounded constructible derived categories.
 
-Stacks Tags 09AJ, 09AK and 09AL (blueprint: sk-thm-pe-constructible-comparison).
+Stacks Tags 09AJ, 09AK and 09AL.
 
 Proof, following the node's four steps:
 1. Over the Noetherian coefficient ring, finite type is equivalent to finite presentation

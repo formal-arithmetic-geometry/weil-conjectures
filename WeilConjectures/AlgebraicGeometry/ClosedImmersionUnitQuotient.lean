@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Abelian.Basic
 # Closed immersion unit and quotient
 
 Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (part (1)), with the
-stalkwise proof in Modules, Lemma 08KS (blueprint: lem-weil-pbc-closed-immersion-unit-quotient).
+stalkwise proof in Modules, Lemma 08KS.
 -/
 
 @[expose] public section
@@ -42,14 +42,14 @@ Here, as in `conductorIdealZeroIntersection`, `JF` is `image μ_F` for the multi
 `a : F ⟶ G`, the induced map `q` on quotients and the naturality square of `η̄`.
 
 Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (1), and Modules,
-Lemma 08KS (blueprint: lem-weil-pbc-closed-immersion-unit-quotient).
+Lemma 08KS.
 Proof, following the node's six steps:
 1. The adjunction of `def-pc-module-pullback` gives the unit. Compute its stalks,
 using `lem-weil-pbc-module-iso-on-stalks` and
 `lem-weil-pbc-locally-surjective-iff-stalks` to test isomorphisms and surjectivity.
 2. Outside the closed image, `lem-weil-pbc-closed-pushforward-stalks` gives a zero
 target stalk. On a neighbourhood disjoint from the image the ideal is the unit
-ideal (`def-sbc-closed-immersion-ideal-sheaf`), so `JF` is the entire module.
+ideal, so `JF` is the entire module.
 3. At `x = i(z)`, the closed immersion makes the local ring map `R → S`
 surjective, with kernel `K = J_x`, by the same ideal definition and pushforward
 stalk calculation.

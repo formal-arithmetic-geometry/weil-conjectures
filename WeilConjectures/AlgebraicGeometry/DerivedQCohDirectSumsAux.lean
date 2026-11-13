@@ -33,8 +33,7 @@ local instance instHasColimitsOfShape_derivedQCohDirectSumsAux (X : Scheme.{u}) 
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
-/-- The ambient derived category of sheaves of modules has coproducts
-(blueprint: lem-pc-derived-ambient-has-coproducts). The proof chooses representatives
+/-- The ambient derived category of sheaves of modules has coproducts. The proof chooses representatives
 for each derived object, forms the termwise coproduct complex, and applies
 `derivedAmbientDirectSums`; the resulting coproduct cocone is transported along the
 chosen representative isomorphisms.
@@ -55,8 +54,7 @@ theorem derivedAmbientHasCoproducts (X : Scheme.{u})
   exact hasCoproducts_of_colimit_cofans (fun E ↦ c E)
     (fun E ↦ (derivedAmbientDirectSums X _ E (K E) (e E)).1.some)
 
-/-- Quasi-coherent cohomology is closed under ambient derived coproducts
-(blueprint: lem-pc-derived-qcoh-closed-coproducts). The proof identifies cohomology of
+/-- Quasi-coherent cohomology is closed under ambient derived coproducts. The proof identifies cohomology of
 the ambient coproduct with direct sums, writes each direct sum as a filtered colimit of
 finite sums, and applies finite-sum and filtered-colimit quasi-coherence closure.
 Source: Stacks Project, Lemma 08DT. Proof: `derivedAmbientDirectSums` identifies each

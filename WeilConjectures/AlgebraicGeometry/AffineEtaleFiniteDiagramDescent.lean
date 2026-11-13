@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleFiniteDiagramArrows
 # Finite affine étale diagram descent
 
 Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
-(blueprint: lem-weil-pbc-affine-etale-finite-diagram-descent).
 -/
 
 @[expose] public section
@@ -26,22 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Limits 01ZM,
-01YZ, 01Z6, and 07RP.
-
-Proof:
-1. Each affine étale object is finitely presented over the qcqs limit. Descend its
-   structure morphism by 01ZM. On the base-change tail, 01YZ identifies its limit
-   with the original affine object. By 01Z6 a later model is affine, and by 07RP a
-   still later model is étale. Affine and étale base change preserve these properties.
-2. Do this for the target and the finitely many sources. Directedness supplies a
-   common stage, including when there are no sources. The q-pullback squares give
-   isomorphisms between their v-images and the original objects.
-3. Conjugate each arrow by these isomorphisms. Apply 01ZM(2) to descend each arrow
-   between the finitely presented models, and choose a common later stage.
-   The q-pullback squares identify their v-images with the resulting base changes.
-   Pullback uniqueness and naturality of q give the displayed arrow equalities.
-   No surjectivity is asserted or used.
-(blueprint: lem-weil-pbc-affine-etale-finite-diagram-descent). -/
+01YZ, 01Z6, and 07RP. -/
 theorem affineEtale_finite_diagram_descent
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

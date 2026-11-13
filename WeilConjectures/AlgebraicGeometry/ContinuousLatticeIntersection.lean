@@ -31,21 +31,18 @@ namespace CategoryTheory.Limits
 variable {C : Type*} [Category C] [Abelian C] {A B D : C}
 
 /-- The inverse image of the image of `g` under `f`.
-Source: the categorical image and pullback universal properties.
-(auxiliary; not a blueprint node) -/
+Source: the categorical image and pullback universal properties. -/
 noncomputable def imagePullback (f : A ⟶ D) (g : B ⟶ D) : C :=
   pullback f (image.ι g)
 
 /-- The inclusion of the inverse image of an image.
-Source: the pullback universal property.
-(auxiliary; not a blueprint node) -/
+Source: the pullback universal property. -/
 noncomputable def imagePullbackι (f : A ⟶ D) (g : B ⟶ D) : imagePullback f g ⟶ A :=
   pullback.fst _ _
 
 /-- Exact functors send the inclusion of this inverse image to an isomorphism
 whenever they invert the map whose image was taken.
-Source: exactness of images and the pullback universal property.
-(auxiliary; not a blueprint node) -/
+Source: exactness of images and the pullback universal property. -/
 theorem imagePullbackι_map_isIso {D' : Type*} [Category D'] [Abelian D']
     (F : C ⥤ D') [PreservesFiniteLimits F]
     (f : A ⟶ D) (g : B ⟶ D) [IsIso (F.map g)] :
@@ -58,10 +55,7 @@ theorem imagePullbackι_map_isIso {D' : Type*} [Category D'] [Abelian D']
   exact ((IsPullback.of_hasPullback f (image.ι g)).map F).isIso_fst_of_isIso
 
 /-- Exact inverse image transports the canonical image-pullback itself.
-Source: preservation of images and pullbacks by exact functors.
-(auxiliary; not a blueprint node)
-Proof. First use the pullback comparison, then the image comparison to transport
-its second input. All three maps in this transport are isomorphisms. -/
+Source: preservation of images and pullbacks by exact functors. -/
 noncomputable def imagePullbackMapIso {D' : Type*} [Category D'] [Abelian D']
     (F : C ⥤ D') [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (f : A ⟶ D) (g : B ⟶ D) :
@@ -74,11 +68,7 @@ noncomputable def imagePullbackMapIso {D' : Type*} [Category D'] [Abelian D']
 
 /-- Changing all objects and maps by commuting isomorphisms transports the
 canonical image-pullback.
-Source: functoriality of images and pullbacks.
-(auxiliary; not a blueprint node)
-Proof. Apply the image functor to the arrow isomorphism of the second maps.
-Together with the first and target isomorphisms it induces an invertible map
-between the two pullbacks. -/
+Source: functoriality of images and pullbacks. -/
 noncomputable def imagePullbackCongr {A' B' D' : C}
     (f : A ⟶ D) (g : B ⟶ D) (f' : A' ⟶ D') (g' : B' ⟶ D')
     (eA : A ≅ A') (eB : B ≅ B') (eD : D ≅ D')
@@ -93,13 +83,7 @@ noncomputable def imagePullbackCongr {A' B' D' : C}
 
 /-- The intersection of two subobjects is the kernel of one subobject's map to
 the other's quotient.
-Source: the normal-monomorphism property in an abelian category.
-(auxiliary; not a blueprint node)
-Proof. A monomorphism identifies its domain with its image. Projecting the
-pullback to the second subobject therefore gives a map to the displayed kernel.
-Conversely, a map killed by the first quotient factors uniquely through its
-monomorphism and thus lifts to the pullback. The projection and kernel inclusions
-are monic, so their universal properties prove the inverse identities. -/
+Source: the normal-monomorphism property in an abelian category. -/
 noncomputable def imagePullbackIsoKernel (f : A ⟶ D) [Mono f]
     (g : B ⟶ D) [Mono g] : imagePullback f g ≅ kernel (g ≫ cokernel.π f) := by
   have : Mono (factorThruImage g) := mono_of_mono_fac (image.fac g)
@@ -134,8 +118,7 @@ namespace CategoryTheory.Adjunction
 
 /-- Transposing a pushed integral embedding is coefficient-change pushforward
 followed by the pushed rational map.
-Source: the counit equation for the mates correspondence.
-(auxiliary; not a blueprint node) -/
+Source: the counit equation for the mates correspondence. -/
 theorem pushHomOfComapIso_homEquiv
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {LX : A ⥤ B} {UX : B ⥤ A} {LY : C ⥤ D} {UY : D ⥤ C}
@@ -172,8 +155,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     (upperStar S p).obj P)
 
 /-- The supplied lattice maps to the restricted rational module by `m ↦ e(1 ⊗ m)`.
-Source: Bhatt--Scholze, Lemma 6.8.13, integral structures on a finite cover.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.8.13, integral structures on a finite cover. -/
 noncomputable def latticeIntegralEmbedding :
     M ⟶ (Mod.comap (coefficientMap a U)).obj
       ((upperStar S p).obj P) :=
@@ -181,8 +163,7 @@ noncomputable def latticeIntegralEmbedding :
     M ((upperStar S p).obj P) e.hom
 
 /-- Push forward the lattice embedding and use the canonical change-of-scalars comparison.
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent. -/
 noncomputable def latticePushedEmbedding :
     (lowerStar R p).obj M ⟶
       (Mod.comap (coefficientMap a X)).obj
@@ -193,8 +174,7 @@ noncomputable def latticePushedEmbedding :
       ((upperStar S p).obj P)
 
 /-- The rational adjunction unit, viewed as an integral-linear map.
-Source: the inverse-image/direct-image adjunction in Bhatt--Scholze, Section 4.
-(auxiliary; not a blueprint node) -/
+Source: the inverse-image/direct-image adjunction in Bhatt--Scholze, Section 4. -/
 noncomputable def latticeIntersectionUnit :
     (Mod.comap (coefficientMap a X)).obj P ⟶
       (Mod.comap (coefficientMap a X)).obj
@@ -205,8 +185,7 @@ noncomputable def latticeIntersectionUnit :
 
 /-- Pull back the image of the pushed lattice under the rational adjunction unit.
 This constructs the module itself without selecting a witness of an existence theorem.
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent, using intersections.
-(auxiliary; not a blueprint node) -/
+Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent, using intersections. -/
 noncomputable def latticeIntersection :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj R X) :=
@@ -214,8 +193,7 @@ noncomputable def latticeIntersection :
     (latticePushedEmbedding a X P p M e)
 
 /-- The canonical inclusion of the intersection in the rational module.
-Source: the pullback construction of the finite-sheet lattice intersection.
-(auxiliary; not a blueprint node) -/
+Source: the pullback construction of the finite-sheet lattice intersection. -/
 noncomputable def latticeIntersectionι :
     latticeIntersection a X P p M e ⟶
       (Mod.comap (coefficientMap a X)).obj P :=
@@ -224,8 +202,7 @@ noncomputable def latticeIntersectionι :
     exact imagePullbackι _ _
 
 /-- The canonical scalar extension map from the intersection to the original module.
-Source: the tensor universal property in Bhatt--Scholze, Lemma 6.8.13.
-(auxiliary; not a blueprint node) -/
+Source: the tensor universal property in Bhatt--Scholze, Lemma 6.8.13. -/
 noncomputable def latticeIntersectionRationalization :
     (Mod.extendScalars (coefficientMap a X)).obj
       (latticeIntersection a X P p M e) ⟶ P :=
@@ -233,8 +210,7 @@ noncomputable def latticeIntersectionRationalization :
     (latticeIntersectionι a X P p M e)
 
 /-- The canonical map out of the pushed lattice is the coefficient-change mate.
-Source: the mates correspondence for extension and restriction of scalars.
-(auxiliary; not a blueprint node) -/
+Source: the mates correspondence for extension and restriction of scalars. -/
 theorem latticePushedEmbedding_rationalization :
     (Mod.extendScalars (coefficientMap a X)).map (latticePushedEmbedding a X P p M e) ≫
         (Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app
@@ -247,8 +223,7 @@ theorem latticePushedEmbedding_rationalization :
 
 /-- Invertibility of coefficient-change pushforward implies invertibility of the
 extended pushed lattice map, provided the rational localization counit is invertible.
-Source: the counit equation for the mates correspondence.
-(auxiliary; not a blueprint node) -/
+Source: the counit equation for the mates correspondence. -/
 theorem latticePushedEmbedding_map_isIso
     [IsIso ((pushHom a p).app M)]
     [IsIso ((Mod.extendRestrictAdjunction (coefficientMap a X)).counit.app
@@ -266,8 +241,7 @@ theorem latticePushedEmbedding_map_isIso
 
 /-- If scalar extension inverts the pushed lattice map and its restriction counit,
 it identifies the canonical intersection with the rational module.
-Source: exactness of localization and the pullback universal property.
-(auxiliary; not a blueprint node) -/
+Source: exactness of localization and the pullback universal property. -/
 theorem latticeIntersectionRationalization_isIso_of_map_isIso
     [PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
     [IsIso ((Mod.extendScalars (coefficientMap a X)).map

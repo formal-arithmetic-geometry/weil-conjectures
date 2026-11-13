@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Finite ideal generators cover the stalk-surjectivity locus on an affine
 
 Source: Stacks Project, Properties, Lemma 01PM, proof; Schemes, Lemma 01IN.
-(blueprint: lem-weil-pbc-affine-ideal-generator-cover).
 -/
 
 @[expose] public section
@@ -31,21 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The affine section ideal has finite generators whose basic opens cover its unit locus.
 
 Source: Stacks Project, Properties, Lemma 01PM, the choice of generators at the
-start of the proof; Schemes, Lemma 01IN, quasi-coherent ideals on affine schemes.
-(blueprint: lem-weil-pbc-affine-ideal-generator-cover).
-
-Proof: Finite type on the affine V makes I(V) a finite module, hence its
-image ideal J has a finite generating family g. The unit-module stalk
-isomorphism identifies the stalk map with a linear map into O_X,x, carrying
-germs of sections to the corresponding ring germs. If this map is surjective,
-lift 1 and represent its preimage on a neighborhood of x. Shrinking makes its
-image equal to 1. Choose a basic neighborhood D(f) within this neighborhood;
-localization expresses the local I-section as a global section divided by a
-power of f. Its image therefore has unit germ at x, giving a member of J whose
-basic open contains x. Conversely such a member has unit germ, so the stalk
-image ideal contains a unit and is the whole ring. Finally zeroLocus_span
-identifies this locus with the union of D(g_i). The empty family, unit ideal,
-and empty affine are included by the same argument. -/
+start of the proof; Schemes, Lemma 01IN, quasi-coherent ideals on affine schemes. -/
 theorem affine_ideal_generator_cover
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

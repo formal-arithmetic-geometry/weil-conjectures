@@ -33,23 +33,7 @@ set_option maxHeartbeats 600000 in
 -- Elaborating naturality across the composed affine equivalences needs more heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite completed-module equivalence with natural local section cones.
-Source: Stacks Project, Lemma 087W and the affine reduction in Lemma 087X.
-(blueprint: lem-weil-pbc-formal-affine-limit-equivalence)
-
-Proof: Use the canonical isomorphism V ≅ Spec A, where A = Γ(X,V).
-The inverse isomorphism sends I|V to the ideal sheaf associated with J=I(V):
-on top sections its ring map is V.topIso.hom followed by ΓSpecIso.inv.
-Pull coherent formal modules back termwise along the isomorphism. Pullback
-composition and identity comparisons give the unit and counit, lifted through the
-fully faithful system inclusions. Compose this transport equivalence with the
-finite completed-module equivalence of Lemma 087W. Its limiting cones transport
-back to the top sections on V, with scalars restricted along V.topIso.inv.
-The section comparisons are linear because pullback along an isomorphism and
-ΓSpecIso intertwine the scalar actions. Transport of limiting cones preserves
-universality. Naturality of the original projections and of these comparisons
-gives the displayed equation for each map and each level. This works also for
-an empty open or for zero or unit ideals: no properness of J is used.
--/
+Source: Stacks Project, Lemma 087W and the affine reduction in Lemma 087X. -/
 theorem coherentFormalModule_affine_limit_equivalence
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 /-! # Ringed presentations of coefficient forgetting and étale direct image
 
 Source: Stacks Project, Tags 093I, 0D6J, and 0D6E.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -103,32 +102,7 @@ private theorem integerToSheafEquivalence (X : Scheme.{u}) :
 /-- The two underived functors have simultaneous presentations by module direct images.
 
 Source: Stacks Project, Tag 093I (constant rings and modules), and the coefficient
-restriction and geometric morphisms in the proof of Tag 0D6J(3), using Tag 0D6E.
-(auxiliary; not a blueprint node).
-
-Proof: Replace the small étale categories of A and B by AsSmall, lifting homs to
-Type (u+1), and use the topologies transported along the inverse equivalences.
-Precomposition gives equivalences of sheaf categories. Transport the constant
-Lambda and constant ULift integers ring sheaves. The constant-ring module equivalence
-identifies Lambda-module-valued sheaves with modules over the first ring. For the
-integers, first identify abelian groups with ULift-integer modules sectionwise,
-then apply the constant-ring equivalence. Thus the forgetful functors from modules
-over the constant integer sheaves to abelian sheaves are equivalences. Use their
-inverses to define the two abelian encodings.
-The identity geometric morphism with ring map Z to Lambda gives r: its module
-direct image is restriction of scalars. The geometric morphism induced by v,
-with the constant-integer structural map, gives p. The structural ring maps
-respect zero, one, addition and multiplication, since inverse image preserves
-finite limits and these operations are maps of sheaves. The module-linearity
-condition follows in the same way from the addition and action graphs. Under
-the equivalences, r.modules is coefficient forgetting and p.modules is abelian
-direct image. After applying the fully faithful forgetful functor for the
-integer ring, their sectionwise descriptions give the two natural isomorphisms;
-fully faithfulness lifts these to module-valued functors. The site equivalence units and
-counits give the conjugated set
-adjunctions and preserve finite limits. No complexes or resolutions are used.
-The zero ring, empty schemes and identity morphisms are included.
--/
+restriction and geometric morphisms in the proof of Tag 0D6J(3), using Tag 0D6E. -/
 theorem etaleModuleAbelianRingedPresentation
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     ∃ (C D : Type (u + 1)) (_ : SmallCategory C) (_ : SmallCategory D)

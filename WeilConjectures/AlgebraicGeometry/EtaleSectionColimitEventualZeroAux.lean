@@ -27,7 +27,7 @@ record the local vanishing data and the separatedness implication; the remaining
 argument is the finite filtered-category equalisation from Sites, Tag 0738.
 Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2).
 The finite family is equalized using filteredness, and separatedness then gives
-the global vanishing. (blueprint: lem-weil-pbc-etale-section-colimit-eventual-zero-finite-cover). -/
+the global vanishing. -/
 theorem etale_section_colimit_eventual_zero_of_finite_cover
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) (I : Type w) [SmallCategory I] [IsFiltered I]
@@ -57,8 +57,7 @@ theorem etale_section_colimit_eventual_zero_of_finite_cover
 Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2), together
 with the etale openness and quasi-compactness arguments.  Sheafification gives
 local equality, etale maps have open images, and compactness extracts finitely
-many members; these are recorded as local eventual vanishing and separatedness.
-(blueprint: lem-weil-pbc-etale-section-colimit-finite-zero-cover). -/
+many members; these are recorded as local eventual vanishing and separatedness. -/
 theorem etale_section_colimit_finite_zero_cover
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left]

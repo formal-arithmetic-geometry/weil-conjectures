@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionTwistVanishingStep
 /-! # Fixed-degree projective Serre vanishing
 
 Source: Stacks Project, Tag 01YS (4).
-(blueprint: lem-pc-c2-closed-immersion-fixed-degree-vanishing)
 -/
 
 @[expose] public section
@@ -25,22 +24,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Fixed-degree projective Serre vanishing, split from the affine restriction theorem.
-Source: Stacks Project, Tag 01YS (4), proof by descending induction.
-(blueprint: lem-pc-c2-closed-immersion-fixed-degree-vanishing)
-
-Proof: projective space over A and its closed subscheme X are locally Noetherian.
-Thus the quasi-coherent finitely presented F is coherent, as is its pushforward G.
-The standard N+1 affine opens give H^j(G)=0 for j>N. Descend from that bound,
-for all coherent modules G simultaneously. Choose a surjection from a finite
-sum of twists O(a) onto G; its kernel K is coherent. Tensor the kernel sequence
-with the invertible O(t), preserving exactness. For t at least every -a, the
-positive-degree cohomology of the finite sum vanishes by the projective twist
-calculation. The induction hypothesis kills H^(j+1)(K(t)) for all sufficiently
-large t. The long exact sequence therefore kills H^j(G(t)) for such t.
-Apply this at j=q and replace the resulting integer threshold by its maximum
-with zero. The projection formula identifies G(t) with i_*(F tensor i^*O(t));
-closed immersions are affine, so their cohomology comparison identifies its
-cohomology with that on X. This proves the required natural-number threshold. -/
+Source: Stacks Project, Tag 01YS (4), proof by descending induction. -/
 theorem exists_isZero_closedImmersion_twist_degree
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

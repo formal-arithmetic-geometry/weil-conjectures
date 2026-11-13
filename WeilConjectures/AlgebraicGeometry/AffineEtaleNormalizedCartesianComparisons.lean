@@ -111,27 +111,7 @@ private theorem comparison_refl {C : Type*} [Category C] {S T : Scheme.{u}}
     simp
 
 /-- Source: Stacks Project, Étale Cohomology 0EYL, its base-change construction and
-coherence discussion following the proof.
-
-Proof: The supplied cartesian squares determine the objects of U and v up to the
-unique isomorphism respecting their first and structure projections. For i ≤ j ≤ k,
-paste the two U object squares. Functoriality of D identifies the composite base arrow
-with D.map (homOfLE (h.trans h')).op. Compare this pullback with the supplied single
-U_ik pullback using its universal property. The resulting component isomorphisms form
-gamma: after composing with the first projection, naturality is exactly naturality of
-p; after composing with the structure projection it follows because the arrows are
-morphisms over D_k. Pullback uniqueness therefore proves naturality. The first-projection
-equation is the defining equation of this comparison. For delta use the identical
-construction, pasting the U square with the v square; cone naturality identifies the
-composite base arrow with c.π.app (op i).
-
-When i = j or j = k, rewrite U_ii by hid. The supplied hpd makes its first projection
-identity. The corresponding functor unitor has identity components and satisfies the
-same first- and structure-projection equations as the constructed comparison. Pullback
-uniqueness makes the comparisons equal to these unitors. The unitors are heterogeneously
-equal to Iso.refl after the identity-composition equalities, giving all three HEq clauses.
-No cocycle or site property is asserted.
-(blueprint: lem-weil-pbc-affine-etale-normalized-cartesian-comparisons). -/
+coherence discussion following the proof. -/
 theorem exists_affineEtale_normalized_cartesian_comparisons
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)
     (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤

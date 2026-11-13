@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ConstantScalarTensorModel
 /-! # The ordinary reduction tower as a tensor tower
 
 Source: Stacks Project, Modules on Sites, Tag 03EK and Tag 099M.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -103,20 +102,7 @@ private theorem reductionTensorTowerIso_hom_app (b : Bool)
 module, naturally in the module and in the finite quotient level. This statement
 involves ordinary module sheaves only, with no Koszul or cochain complex.
 
-Source: Stacks Project, Modules on Sites, Tag 03EK; proetale.tex, Tag 099M.
-(auxiliary; not a blueprint node).
-
-Proof: identify restriction of scalar extension of M with the sheafification of
-S tensor_R M. The reduction Q of the rank-one module is identified with the
-restricted S-module S by multiplication. The symmetry of sheaf tensor identifies
-M tensor_R Q with Q tensor_R M, and the normalized extension-tensor comparison
-sends the pure tensor m tensor s to s tensor m. This constructs the component
-isomorphisms. Pure tensors generate before sheafification, and the sheafification
-adjunction detects maps from that sheafification. Thus the component maps commute
-with every map of M and with the quotient transition s tensor m to bar(s) tensor m.
-The reduction unit sends m to 1 tensor m; the displayed tensor unit map sends it
-to m tensor 1. The same calculation proves the unit equation. All these formulas
-hold for the empty site, zero ring, and zero or unit ideal. -/
+Source: Stacks Project, Modules on Sites, Tag 03EK; proetale.tex, Tag 099M. -/
 theorem constantReductionTensorModel (b : Bool) :
     let O := coefficients J A I b
     let Q := (reductionTower J A I b).obj (𝟙_ (Mod O))

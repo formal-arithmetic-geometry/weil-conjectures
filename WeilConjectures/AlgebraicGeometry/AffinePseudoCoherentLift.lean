@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QcOpenDerivedLift
 /-! # Lifting pseudo-coherent objects from quasi-compact opens of affine schemes
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08EE,
-Lemma 36.13.3, lemma-lift-pseudo-coherent (blueprint: lem-sc-affine-pseudo-coherent-lift).
+Lemma 36.13.3, lemma-lift-pseudo-coherent.
 -/
 
 @[expose] public section
@@ -36,26 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A pseudo-coherent derived object on a quasi-compact open of an affine scheme has a
 bounded-above finite-free complex on the whole scheme representing it after restriction.
 The ranks may vary with the degree, and the complex need not be bounded below.
-Source: Stacks Project, Tag 08EE, lemma-lift-pseudo-coherent
-(blueprint: lem-sc-affine-pseudo-coherent-lift).
-
-Proof:
-1. PseudoCoherentQCoh makes E quasi-coherent. QcOpenDerivedLift supplies a
-   quasi-coherent E' on X and an isomorphism E' restricted to U ≅ E.
-2. Construct T by associating sheaves on Spec Gamma(X) and restricting along
-   X.isoSpec.hom. AffineOpenLocalizedModel gives a module complex M representing
-   E', a finite family of pseudo-coherent localizations, and detection of
-   quasi-isomorphisms after restriction to U.
-3. FiniteLocalizationFreeModel performs the descending cone construction and
-   denominator clearing, giving a bounded-above finite-free F and a chain map
-   F → M which is a quasi-isomorphism at each of those localizations.
-4. Apply T termwise. T preserves zero objects, hence the upper bound. A finite
-   basis of each term, tildeFinsupp, and mapFreeIso identify its associated sheaf
-   with a finite free sheaf of the same rank.
-5. The detection clause makes the derived restriction of the map T(F) → T(M)
-   invertible. Compose its isomorphism with the restriction of Q(T(M)) ≅ E'
-   and with E' restricted to U ≅ E.
--/
+Source: Stacks Project, Tag 08EE, lemma-lift-pseudo-coherent. -/
 theorem exists_boundedAbove_finiteFree_lift
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

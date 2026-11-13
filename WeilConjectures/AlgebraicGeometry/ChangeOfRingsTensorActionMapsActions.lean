@@ -60,26 +60,7 @@ private theorem exists_tensor_pairing {Y : Scheme.{u}} (M N Q : Y.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The two action maps exist with their section formulas.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-action-maps-actions).
-
-Proof: put P₀ = P restricted to O_Y and K = C.toModule.val tensor P₀.val.
-Give K the two B-actions b(c tensor p) = c tensor bp and
-b(c tensor p) = phi(b)c tensor p. The first respects O_Y-balancing by
-commutativity of B and the scalar-tower identity; the second respects it
-because phi is an O_Y-algebra morphism. Restrictions commute with each
-action by naturality of phi and semilinearity of the module restrictions.
-Sheafify each B-module presheaf. After restriction to O_Y both associated
-module sheaves identify with the O_Y-sheafification of K: the underlying
-additive sheafification is the same and the O_Y-action is uniquely determined
-by its restriction to the sheafification unit. Transport the B-actions
-through these identifications to S = C.toModule tensor P₀. Their pairings
-B.toModule.val times S.val are O_Y-bilinear and natural. Apply the sectionwise
-tensor universal property and then the sheafification adjunction to obtain
-a and d. The identifications preserve the units, so on the indicated double
-pure tensors their values are c tensor bp and phi(b)c tensor p. The universal
-properties apply to empty opens and zero modules without extra hypotheses.
--/
+Source: Stacks Project, Morphisms, proof of Lemma 01SB. -/
 theorem exists_changeOfRings_tensor_action_maps_actions (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

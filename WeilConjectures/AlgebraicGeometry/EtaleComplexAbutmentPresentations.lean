@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Abelian.Exact
 /-! # Functorial hypercohomology quotient presentations
 
 Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-abutment-presentations).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Transport a first-page colimit comparison across a final reindexing.
 Source: Stacks Project, Tag 0032, final reindexing of filtered systems.
-(blueprint: lem-weil-pbc-etale-complex-first-page-reindexing).
 
 The proof uses the canonical isomorphism between a colimit and the colimit of its
 whiskering by a final functor, and the first-page comparison equations. -/
@@ -88,30 +86,7 @@ set_option maxHeartbeats 700000 in
 -- The dependent page and quotient witnesses require elaboration together.
 /-- Construct the functorial pages and abutment quotient projections, without continuity.
 Source: Stacks Project, Tags 015J and 015K; Tag 0EZM, proof of
-lemma-colimit-variant-complexes.
-(blueprint: lem-weil-pbc-etale-complex-abutment-presentations).
-
-Proof:
-1. Choose functorial Cartan--Eilenberg presentations for the bounded-below stage
-complexes and the colimit complex. Exact inverse image and degreewise colimits
-preserve the bound. The identity and composition equations assemble E0 and v0.
-Swap the coordinates to resolution degree first. The first-page identifications
-are ordinary term cohomology, and their naturality gives first_transition and
-first_comparison. Negative resolution degrees vanish.
-2. Choose a small directed final reindexing of I.op. Lift its preorder to universe
-u+1 and compose its equivalence with the reindexing to obtain R. Finality is
-preserved. This construction uses no geometric limit or continuity hypothesis.
-3. The support region is resolution degree >=0 and complex degree >=a. Homology
-preserves this vanishing. In bidegree (p-a-n,a+n), both incident differentials
-vanish for r>max(p-a-n+1,n), uniformly at every stage and the target.
-Functorial convergence identifies that common page with the graded abutment.
-4. Transport the limit abutment filtration along eB. Its steps at a+n give S;
-the bounds give S 0=top and S (p+1-a).toNat=bottom and it is antitone. If p<a,
-the abutment is zero, so both bounds coincide. Transport the stage steps along
-eH to give T. Compose the quotient projections with the inverse convergence
-isomorphisms to define q and t. Quotient exactness gives the kernel formula and
-surjectivity of t. Filtered functoriality and hP,hH,hB identify the underlying
-maps with the legs of B, giving membership and the last equation. -/
+lemma-colimit-variant-complexes. -/
 theorem exists_etale_complex_abutment_presentations
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

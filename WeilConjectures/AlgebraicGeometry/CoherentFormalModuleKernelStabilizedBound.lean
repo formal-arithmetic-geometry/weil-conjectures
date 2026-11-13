@@ -18,7 +18,6 @@ namespace AlgebraicGeometry
 /-- A uniform bound for stabilization of the kernel images.
 
 Source: Stacks Project, Lemma 087X, claims (a)--(b), affine Artin--Rees argument.
-(blueprint: new-kernel-stabilized-bound).
 The proof chooses a finite affine cover, applies Artin--Rees to the kernel on each
 affine, and takes the maximum of the resulting bounds; equality of the resulting
 quasi-coherent submodules is checked on the cover.

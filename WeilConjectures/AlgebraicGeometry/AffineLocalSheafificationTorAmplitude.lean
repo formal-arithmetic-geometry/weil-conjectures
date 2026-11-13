@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Tor bounds for an affine module model
 
 Source: Stacks Project, Tags 08CG, 08E9 and 08DX.
-(blueprint: lem-pc-affine-local-sheafification-tor-amplitude).
 -/
 
 @[expose] public section
@@ -52,23 +51,7 @@ noncomputable def affine_cancel (S : Scheme.{u}) (U : S.Opens) (hU : IsAffineOpe
     Functor.rightUnitor T
 
 /-- Tor bounds on an open W pass to a module model on an affine subopen U.
-Source: Stacks Project, Tags 08CG, 08E9(1), 08DX(2), and 09U8.
-(blueprint: lem-pc-affine-local-sheafification-tor-amplitude).
-
-Proof: Write the interval [a,b] supplied by the finite Tor hypothesis on W.
-For each module sheaf G on U, regard G as a sheaf on W by direct image under
-U.toScheme -> W.toScheme. Test the Tor bound on that direct image, and restrict
-back to U. Exact restriction preserves derived tensor and homology; the
-restriction of the direct image is G. Composition of derived open pullbacks
-identifies the restricted object with the pullback of K from S to U. Thus the
-same interval bounds all its tensors with G. Transport along U.isoSpec and
-Modules.overEquiv U: these exact equivalences identify the structure sheaves,
-tensor products and cohomology. The representing isomorphism hP identifies the
-object with the associated complex of P. Test on associated sheaves of ring
-modules and use the affine Tor-amplitude criterion (08E9(1)). Exact faithful
-associated sheafification detects zero homology modules, proving Tor amplitude
-[a,b] for Q(P). Empty opens and zero rings give zero modules, and no boundedness
-or pseudo-coherence of P is used. -/
+Source: Stacks Project, Tags 08CG, 08E9(1), 08DX(2), and 09U8. -/
 theorem finiteTorAmplitude_of_affine_sheafification_of_open_tor (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ V : S.Opens,

@@ -20,7 +20,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Eventual matching of local stage representatives
 
 Source: Stacks Project, Sites Tag 0A35 and Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-eventual-local-stage-matching).
 -/
 
 @[expose] public section
@@ -34,25 +33,7 @@ family after refinement to a later stage. The finite family is transported by
 base change, not replaced by a global section.
 
 Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-finite matching equations; Étale Cohomology Tag 09YQ.
-(blueprint: lem-weil-pbc-sets-eventual-local-stage-matching).
-
-Proof: For every pair of the finitely many covering objects, cover their overlap
-by finitely many affine étale objects. The object Y_j is affine because W is
-affine and f_j is affine. Thus the overlap of the affine V_q and V_q′ over Y_j
-is itself affine; more generally the qcqs finite-refinement argument suffices. Their two section
-restrictions have equal images at
-the limit by the given equations with t. Inverse-image sections are locally
-represented by original sections; equality after sheafification is local equality
-of such representatives. Refine these finitely many overlap covers accordingly.
-Descend the finitely many objects and arrows and the equations between them to
-one later stage, using eventual equality in the affine site presentation. Descend
-the covering property too. Separatedness of the inverse-image sheaf at that
-stage then implies equality on each overlap, hence the transported family is
-compatible. Pullback preserves the original covering. Naturality of the units
-and coherence of their composition isomorphisms preserve the equations with t.
-No gluing is done in this lemma. With n = 0 there are no matching equations;
-take the identity refinement. No section of G is chosen on an empty object. -/
+finite matching equations; Étale Cohomology Tag 09YQ. -/
 theorem etaleSet_eventualLocalStageMatching
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Finiteness from formal quotients and a bounded torsion kernel
 
 Source: Stacks Project, Tag 0889(1), finiteness paragraph, and Tag 05EU.
-(blueprint: lem-weil-pbc-coherent-of-formal-quotients-torsion-kernel).
 -/
 
 @[expose] public section
@@ -88,18 +87,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A fixed quasi-coherent candidate is coherent if its quotient by a positive ideal
 power is coherent and that same power annihilates the kernel of a map to a coherent module.
 
-Source: Stacks Project, Tag 0889(1), finiteness paragraph, and Tag 05EU.
-(blueprint: lem-weil-pbc-coherent-of-formal-quotients-torsion-kernel).
-
-Proof: on X = Spec A let P and M be the sections of F and H, and let I be the
-sections of J. Exactness of affine sections identifies the kernel of a with
-ker(P -> M), killed by I^s. The formal quotient at level s has finite sections,
-namely P/I^s P. The image in the finite module M is finite since A is Noetherian.
-Choose a finite submodule L of P containing lifts of generators of both this image
-and P/I^s P. Surjectivity onto the image gives P = L + ker a, so I^s P is contained
-in L because I^s ker a = 0. Surjectivity onto the quotient gives P = L + I^s P.
-Thus P=L is finite. The affine finite-type criterion and the Noetherian coherence
-criterion give coherence. This works also for I=0, I=A, and the empty spectrum. -/
+Source: Stacks Project, Tag 0889(1), finiteness paragraph, and Tag 05EU. -/
 theorem coherent_of_formalQuotients_and_torsionKernel
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (F : X.Modules) [F.IsQuasicoherent] (H : CoherentModules X) (a : F ⟶ H.obj)

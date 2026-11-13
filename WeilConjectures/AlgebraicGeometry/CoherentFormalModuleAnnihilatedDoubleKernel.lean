@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- An intermediate kernel-annihilation component of the affine-cover reduction.
-Source: Stacks, Remark 0888 (blueprint: lem-weil-pbc-formal-systems-annihilated-by-power-kernel).
+Source: Stacks, Remark 0888.
 The proof is the corresponding kernel/cokernel half of the finite affine-cover
 argument. The finite affine cover is reduced modulo each power of the ideal, the
 commutative-algebra annihilation lemma is applied, and local annihilation is glued

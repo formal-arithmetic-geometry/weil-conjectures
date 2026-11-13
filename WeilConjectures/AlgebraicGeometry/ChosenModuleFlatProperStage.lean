@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 /-! # Eventual flatness and proper support of a chosen finite-stage module
 
 Source: Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097.
-(blueprint: lem-pc-chosen-module-flat-proper-stage).
 -/
 
 @[expose] public section
@@ -114,24 +113,7 @@ private theorem supportProper_of_cartesian_model
 
 /-- A chosen finitely presented module becomes flat with proper support at every later stage.
 
-Source: Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097.
-(blueprint: lem-pc-chosen-module-flat-proper-stage).
-
-Proof: View M on X_j with its finitely presented structure morphism to Spec R_j.
-Pullback pasting identifies its pullback to the limiting base with the module in the
-hypotheses. Tag 05LY gives eventual flatness for this finitely presented module.
-Tag 081G gives a stage with proper support, interpreted as properness of the reduced
-closed support by Tag 0CYS. Choose an upper bound of the two stages. Cartesian tensor
-pullback preserves finite presentation, relative flatness and proper support; hence the
-properties hold at every later stage. The tensor-pullback composition isomorphism and
-pullback pasting identify these modules with the displayed moduleBaseChange objects.
-For a preorder, apply Tag 0032 to choose a final directed poset in its thin filtered
-category, with an object mapping above j. Restrict the diagram and its limit to this
-poset, apply the preceding argument, and take its image stage in I. For any later stage
-of I, the cartesian tensor-pullback preservation theorem transports both properties
-from that image stage; no lifting of the later stage through the final functor is needed.
-The zero module, an empty source and an empty support cause no exception: tensor
-pullback preserves zero and the empty closed subscheme is proper over any base. -/
+Source: Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097. -/
 theorem exists_eventually_chosen_module_flat_proper
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

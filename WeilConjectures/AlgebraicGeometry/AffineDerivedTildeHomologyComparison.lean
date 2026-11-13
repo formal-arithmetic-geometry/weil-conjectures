@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 /-! # Cohomology of the derived affine associated-sheaf functor
 
 Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
-(blueprint: new-affine-derived-tilde-homology-comparison).
 -/
 
 @[expose] public section
@@ -61,19 +60,7 @@ private theorem tilde_preservesKernel (A : Type u) [CommRing A]
     ((c.isLimitMapConeEquiv T).symm hc)
 
 /-- Derived associated sheaf commutes with cohomology, naturally in the derived object.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5 (exactness of associated sheaf).
-(blueprint: new-affine-derived-tilde-homology-comparison).
-
-Proof: The kernel of a map between associated sheaves is quasi-coherent, by
-Scheme.Modules.isQuasicoherent_kernel. Its ordinary counit is therefore invertible.
-Use full faithfulness of tilde to lift this kernel fork to modules. Its image is a
-limit fork, so full faithfulness reflects that it is a limit; hence tilde preserves
-kernels. The additive left adjoint tilde also preserves colimits, so it is exact.
-The universal property of Q descends the given comparison to an isomorphism between
-F followed by inclusion and tilde.mapDerivedCategory. Whisker this with cohomology
-and compose with Functor.mapDerivedCategoryHomologyFunctorIso. All comparisons are
-natural; this works in every integer degree and for arbitrary rings, including zero.
--/
+Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5 (exactness of associated sheaf). -/
 theorem affineDerivedTilde_homology_comparison (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

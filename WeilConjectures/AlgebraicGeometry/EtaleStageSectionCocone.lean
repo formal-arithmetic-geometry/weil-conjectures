@@ -18,7 +18,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The limit section comparisons form a cocone.
-Source: Stacks Project, Tag 09YQ (blueprint: def-weil-pbc-affine-section-cocone). -/
+Source: Stacks Project, Tag 09YQ. -/
 noncomputable def etaleStageSectionCocone
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)
     (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))

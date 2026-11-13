@@ -15,7 +15,6 @@ import Mathlib.LinearAlgebra.Dual.Basis
 
 /-! # Local perfection of the exterior dual pairing
 Source: Stacks Project, Tag 0BRT, determinant inversion.
-(blueprint: lem-sc-exterior-dual-pairing-local-bijective).
 -/
 
 @[expose] public section
@@ -29,22 +28,7 @@ open Scheme.Modules (wedge)
 /-- A determinant-formula morphism is bijective on sections below an open on which M
 is finite free, in every exterior degree.
 Source: Stacks Project, Tag 0BRT, determinant pairing; Mathlib
-`exteriorPower.basis_coord` and the finite dual basis.
-(blueprint: lem-sc-exterior-dual-pairing-local-bijective).
-
-Proof: restrict the given trivialization to each V contained in U. Sections of the
-finite free sheaf and its internal dual become the free section module and its
-ring-linear dual; the inverse to evaluation reconstructs a natural sheaf map by
-basis coordinates. The wedge bases identify the exterior sheaves on these opens
-with the sectionwise exterior powers: the latter are finite free sheaves, and
-sheafification restricted to the open is characterized by the same adjunction.
-Under these identifications the assumed formula identifies f on pure wedges with
-Mathlib's pairingDual. Pure wedges span the sectionwise exterior powers, so the
-maps agree everywhere. The wedge of each dual basis vector maps to the
-corresponding coordinate functional (`exteriorPower.basis_coord`). Since the wedge
-basis is finite, these functionals form its dual basis, proving bijectivity.
-When n exceeds the rank, both exterior modules are zero;
-when n=0 both are the ring. Zero rings and empty opens are allowed. -/
+`exteriorPower.basis_coord` and the finite dual basis. -/
 theorem exterior_dual_pairing_app_bijective (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (f : Scheme.Modules.exteriorPower (Scheme.Modules.dual M) n ⟶
       Scheme.Modules.dual (Scheme.Modules.exteriorPower M n))

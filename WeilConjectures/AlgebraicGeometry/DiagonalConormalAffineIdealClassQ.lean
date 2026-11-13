@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-! # Affine diagonal cotangent comparison
 
 Source: Stacks Project, Tags 08S2, 01KJ and 01R3.
-(blueprint: stage3-diagonal-conormal-affine-ideal-class-q).
 -/
 
 @[expose] public section
@@ -26,26 +25,7 @@ variable {X S : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Affine diagonal cotangent equivalence and unit formula, assuming tensor coordinates.
-(blueprint: stage3-diagonal-conormal-affine-ideal-class-q)
-Source: Stacks Project, Tags 08S2, 01KJ, 01R3.
-Proof: Put A = Γ(X,U), R = Γ(S,V), B = A ⊗[R] A and J = ker μ.
-The two projection formulas determine r on pure tensors, hence on B. They identify
-the restricted diagonal U → W with Spec μ, a closed immersion since μ is onto.
-Restriction to W preserves the actual module-sheaf kernel, and identifies it with
-the closed immersion ideal module J. Inverse image of sheaves commutes with open
-restriction, as does extension of scalars: both are the same inverse-image sheaf
-followed by sheafification of the sectionwise tensor product. Their canonical units
-restrict compatibly, since inverse-image unit followed by 1 ⊗ s is unchanged by
-restriction and its sheafification unit is natural. Apply
-Scheme.Modules.affine_conormal_sections_existence to this restricted closed
-immersion. It gives an equivalence J/J² with the conormal sections, sending the
-class of j to the restricted unit of any section s whose inclusion is r(j).
-The B-action on J/J² factors through B/J, because every product of two
-elements of J vanishes in J/J². Multiplication identifies B/J with A and sends
-a ⊗ 1 to a. Thus the transported equivalence is A-linear for the first-factor action.
-Mathlib's KaehlerDifferential R A is exactly J.Cotangent = J/J².
-This yields e with the displayed formula. Any proof hδ gives the same restriction
-map by proof irrelevance. The zero-ring chart obeys the same quotient calculation. -/
+Source: Stacks Project, Tags 08S2, 01KJ, 01R3. -/
 theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     : letI : Algebra Γ(S, V.1) Γ(X, U.1) :=

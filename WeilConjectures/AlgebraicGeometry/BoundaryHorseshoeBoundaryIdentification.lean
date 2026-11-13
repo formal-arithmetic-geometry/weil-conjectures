@@ -17,24 +17,7 @@ set_option maxHeartbeats 600000 in
 -- Comparing X.Modules with module sheaves makes the isomorphism transports expensive.
 set_option backward.isDefEq.respectTransparency false in
 /-- The snake boundary of the global horseshoe equals the derived-triangle boundary.
-Source: Stacks Project, Tags 0117, 013T and 015B.
-(blueprint: stage3-boundary-identification).
-
-Proof: Split the resolution rows using injectivity of IA in each degree and apply
-additive global sections, obtaining a short exact sequence of global complexes.
-The augmentation of q is a degree-zero cocycle. The two displayed equalities
-are exactly the lifting equalities in the concrete snake formula; that formula
-sends its homology class to the class of a. The degree-zero resolution comparison
-sends toRightDerivedZero(q) to the class of its augmentation. Apply the horseshoe
-comparison of rightDerived_triangle_connecting to these compatible resolutions:
-its first equality identifies the snake map transported by isoRightDerivedObj,
-and its second identifies the same map with the boundary of the derived image
-of the canonical short-exact-sequence triangle. The latter, transported by the
-single-object comparison isomorphisms, is moduleCohomologyBoundary by definition.
-Compose the comparison equalities and cancel the degree-one isomorphism to obtain
-the stated equality. It holds for every permitted lift: changing b changes a
-by a boundary, so its homology class is unchanged. For q = 0 that class is zero,
-and zero objects introduce no exception. -/
+Source: Stacks Project, Tags 0117, 013T and 015B. -/
 theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

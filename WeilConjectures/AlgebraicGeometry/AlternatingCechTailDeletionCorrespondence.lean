@@ -14,7 +14,6 @@ import Mathlib.Data.Fin.Tuple.Sort
 # Unsigned correspondence for tail deletions
 
 Source: Stacks Project, Tag 01FM, verification of equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-tail-deletion-correspondence)
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ universe v
 namespace AlgebraicGeometry.Scheme
 
 /-- Filtered outgoing tail indices, retaining original labels.
-Source: Stacks 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-tail-deletion-correspondence) -/
+Source: Stacks 01FM, equation 20.23.6.1. -/
 abbrev cechTailOutgoingIndex {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×
@@ -37,8 +35,7 @@ abbrev cechTailOutgoingIndex {I : Type v} [LinearOrder I] (p : ℕ)
       ¬ x.2.2.2.val < x.2.1.val}
 
 /-- Filtered incoming indices whose omitted label follows the junction in stable order.
-Source: Stacks 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-tail-deletion-correspondence) -/
+Source: Stacks 01FM, equation 20.23.6.1. -/
 abbrev cechTailIncomingIndex {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {y : Fin (p + 2) × Equiv.Perm (Fin (p + 1)) × Fin (p + 1) ×
@@ -337,11 +334,7 @@ private theorem tail_delete_surjective {I : Type v} [LinearOrder I] (p : ℕ)
   rw [hτk, hρ, hη]
   rfl
 
-/-- The deletion correspondence with the rank, restriction, and prefix identities.
-Proof: construct deletion and insertion maps on the finite permutations and verify their
-properties by the defining cases of stable and partial sorting.
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-tail-deletion-basic) -/
+/-- The deletion correspondence with the rank, restriction, and prefix identities. -/
 theorem cechTailDeletionBasic {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t,
@@ -356,11 +349,7 @@ theorem cechTailDeletionBasic {I : Type v} [LinearOrder I] (p : ℕ)
     ⟨tail_delete_injective p t, tail_delete_surjective p t⟩
   exact ⟨e, tail_delete_spec p t⟩
 
-/-- The junction-map identity for the basic tail deletion correspondence.
-Proof: use the deletion identities to check the two cases in the definition of the
-junction map, giving equality on every finite position.
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-tail-deletion-junction) -/
+/-- The junction-map identity for the basic tail deletion correspondence. -/
 theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) (e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t)
     (he : ∀ x, ∃ k : Fin (p + 2),
@@ -441,7 +430,7 @@ theorem cechTailDeletionJunction {I : Type v} [LinearOrder I] (p : ℕ)
       omega
 
 
-/-- (blueprint: lem-pc-alternating-cech-tail-deletion-correspondence) -/
+/-- -/
 theorem cechTailDeletionCorrespondence {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : cechTailOutgoingIndex p t ≃ cechTailIncomingIndex p t,

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestriction
 
 /-! Intermediate existence data for the relative Mayer--Vietoris boundary.
 Source: Stacks Project, Tags 08BV and 0DJ9.
-(blueprint: lem-pc-rf-mv-base-change-connecting-square-data).
 -/
 @[expose] public section
 universe u w
@@ -30,8 +29,7 @@ variable [∀ Y : Scheme.{u},
 /-- Distinguishedness for the specified SES boundary, without existential choices
 of the boundary or its comparisons. Proof: identify both first arrows using the
 localized units and restrictions, and the third using inverse cancellation.
-Source: Stacks Tag 08BV
-(blueprint: lem-pc-rf-mv-base-change-connecting-square-data). -/
+Source: Stacks Tag 08BV. -/
 private theorem pinned_boundary_distinguished (X : Scheme.{u}) (U V W : X.Opens)
     (iU : W ⟶ U) (iV : W ⟶ V) (hW : U ⊓ V = W) (hcover : U ⊔ V = ⊤)
     (K : schemeDerivedCategory X) :
@@ -149,8 +147,7 @@ private theorem pinned_boundary_distinguished (X : Scheme.{u}) (U V W : X.Opens)
 /-- The explicit SES boundaries are distinguished, and their images are distinguished
 for the specified adjunction-compatible derived-functor shifts. The actual unit/counit
 shift compatibility is proved in mvCanonicalPullbackShift_compatible.
-Source: Stacks Tags 08BV and 0DJ9
-(blueprint: lem-pc-rf-mv-base-change-connecting-square-data). -/
+Source: Stacks Tags 08BV and 0DJ9. -/
 theorem mvBoundary_canonical_data
     {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -199,23 +196,7 @@ theorem mvBoundary_canonical_data
 constructed adjunction-compatible shifts. There are no arbitrary boundary or shift
 parameters: each side refers to the same fixed SES and right-derived shift data
 used by mvBoundary_canonical_data.
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9.
-(blueprint: lem-pc-rf-mv-base-change-connecting-square-equation).
-
-Proof: transpose ψ under the pinned pullback/direct-image adjunction. Represent this
-map by a chain map into the K-injective resolution of the direct image of K'. Its
-restrictions form a morphism from the source cover SES to the termwise direct image
-of the target cover SES. The target SES is degreewise split, so its direct-image
-boundary is the right-derived image of triangleOfSESδ with the existing right-derived
-shift. Apply triangleOfSESδ_naturality and transport by mvCanonicalOpenComparison
-and schemeMVResolutionIso. The adjunction units and counits defining these comparisons
-identify the overlap map with the transpose of mvBaseChangeOpenMap. The direct-image
-composition maps are the mates of the pinned derived-pullback compositions; their
-right-derived unit equations identify the chain-level comparisons. Finally apply Rf_*
-and transpose under the pinned adjunction for g. Its unit and counit commute with
-shifts by mvCanonicalPullbackShift_compatible, and the composite source shift is
-mvCanonicalSourceShift. Thus transposition carries precisely the right-derived
-connecting equation to the displayed equality, with no independent sign choice. -/
+Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
 theorem mvBoundary_equation
     {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

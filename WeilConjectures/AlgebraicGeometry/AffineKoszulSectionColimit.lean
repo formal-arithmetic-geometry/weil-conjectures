@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectTransport
 /-! # The Koszul section colimit on an arbitrary affine scheme
 
 Source: Stacks Project, Tags 08DC, 08DD and 08EH.
-(blueprint: lem-sc-affine-koszul-section-colimit).
 -/
 
 @[expose] public section
@@ -152,35 +151,7 @@ set_option maxHeartbeats 500000 in
 This asserts a compatible system of perfect derived augmentations and its colimit;
 it does not choose a finite-stage representative or any chain map or K-flat complex.
 Source: Stacks Project, perfect.tex, Equation comparison (Tag 08DC), Proposition
-represent-cohomology-class-on-open (Tag 08DD), and lemma-lift-map (Tag 08EH).
-(blueprint: lem-sc-affine-koszul-section-colimit).
-
-Proof:
-1. Put A = Γ(X,O_X) and use X.isoSpec. The image of U under this homeomorphism is
-   compact open. The principal-open basis and compactness express it as a finite
-   union D(f_i), including the empty union when U is empty.
-2. Transfer the chosen derived localizations along the isomorphism, without changing
-   the morphism universe, using exists_scheme_iso_derived_localizations. Pushforward
-   along the isomorphism and its inverse give the derived equivalence of
-   exists_scheme_iso_derived_equivalence. Transport E to Spec A; its cohomology is
-   quasi-coherent by scheme_iso_derived_inverse_preserves_qcoh.
-3. Apply affine_perfect_open_represent_cohomology to this transported object and
-   the finite family. Its perfect objects, augmentations, two-sided inverses, Hom
-   diagram and colimit cocone supply the system on Spec A. The structure object is
-   the localization of the tilde of the extended single A[0]. The extension-single
-   comparison, singleMapHomologicalComplex and tildeSelf identify it with O[0].
-4. Transport the diagram and cocone through the global derived equivalence and the
-   restriction square exists_scheme_iso_derived_restriction_square. Compose that
-   square with the exact overEquiv on each open site. Localized restriction along
-   a scheme isomorphism preserves the unit, by Modules.restrictUnitIso, so its single
-   complex identifies the transported structure object with Q(T). Naturality gives
-   the displayed formula for each leg and transports both inverse identities.
-   Equivalences preserve colimits; the induced natural equivalences on Hom sets
-   transport the original colimit cocone to the displayed one. Perfectness transports
-   by scheme_iso_derived_inverse_preserves_perfect. All these operations are exact
-   and use no boundedness of E. For empty U the restricted category is zero and the
-   Hom diagram has singleton colimit; the same construction applies to the zero ring.
--/
+represent-cohomology-class-on-open (Tag 08DD), and lemma-lift-map (Tag 08EH). -/
 theorem affine_koszul_section_colimit
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

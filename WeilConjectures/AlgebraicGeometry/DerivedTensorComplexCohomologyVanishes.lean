@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 /-! # Vanishing of derived tensor cohomology for two derived objects
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU;
-Derived Categories of Schemes, Tag 09M4, spectral sequence in the proof
-(blueprint: def-pc-derived-tensor-complex-cohomology-vanishes).
+Derived Categories of Schemes, Tag 09M4, spectral sequence in the proof.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ K-flat replacement (Tag 06YS), essential surjectivity of `Q`, and independence o
 representatives (Tag 06YU) identify this with derived tensor cohomology vanishing.
 It extends `schemeDerivedTensorCohomologyVanishes`, whose second argument is a module
 placed in degree zero; it does not replace that existing predicate.
-Source: Stacks Project, Tags 06YS and 06YU; Tag 09M4, spectral sequence in the proof
-(blueprint: def-pc-derived-tensor-complex-cohomology-vanishes). -/
+Source: Stacks Project, Tags 06YS and 06YU; Tag 09M4, spectral sequence in the proof. -/
 def schemeDerivedTensorComplexCohomologyVanishes (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E L : schemeDerivedCategory X) (i : ℤ) : Prop :=

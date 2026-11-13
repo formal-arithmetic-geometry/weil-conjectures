@@ -25,7 +25,7 @@ set_option hygiene false in
 local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
 /-- On pure tensors the constructed map multiplies the two section legs.
-Source: Stacks Project, Tag 01SB (blueprint: stage3-affine-pushout-ring-section-map-tmul). -/
+Source: Stacks Project, Tag 01SB. -/
 theorem affinePushoutSectionMap_tmul
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpushout : IsPushout r₀ t₀ b t) (V : X.Opens) :
