@@ -31,6 +31,7 @@ Source: literature/stacks-project/cohomology.tex, Lemma 01E4
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 750000 in
+set_option trace.profiler true in
 -- The explicit resolution and evaluation comparisons require substantial elaboration.
 /-- Stacks 01E4 with every datum tied. For an injective resolution I of F, the presheaf
 P_p is `sectionCohomologyPresheaf (f_*I) p`, V ↦ H^p(I(f⁻¹V)); theta is
