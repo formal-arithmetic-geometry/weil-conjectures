@@ -239,7 +239,8 @@ theorem _root_.PrimeSpectrum.exists_finset_eq_iUnion_basicOpen_inter_zeroLocus {
     exact hxb (hxg (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hb)))
 
 
-/-- A family pulling back to a stratification has no overlaps or uncovered points in its preimage. -/
+/-- A family pulling back to a stratification has no overlaps or uncovered points
+in its preimage. -/
 private theorem stratification_bad_preimage_eq_empty {X Y : Type*} [TopologicalSpace X]
     (S : Topology.Stratification X) (t : Fin S.n → Set Y) (f : X → Y)
     (ht : ∀ i, f ⁻¹' t i = S.stratum i) :
@@ -301,7 +302,8 @@ private theorem preimage_comap_subalgebra_inclusion (B₀ B : Subalgebra ℤ A) 
     congrArg AlgHom.toRingHom (Subalgebra.val_comp_inclusion h)
   rw [← Set.preimage_comp, ← comap_comp, hv]
 
-/-- Descended locally closed constructible strata form a stratification after enlarging the stage. -/
+/-- Descended locally closed constructible strata form a stratification
+after enlarging the stage. -/
 private theorem exists_finset_stratification_of_comap_eq
     (S : Topology.Stratification (PrimeSpectrum A)) (F₀ : Finset A)
     (t₀ : Fin S.n → Set (PrimeSpectrum (Algebra.adjoin ℤ (F₀ : Set A))))
