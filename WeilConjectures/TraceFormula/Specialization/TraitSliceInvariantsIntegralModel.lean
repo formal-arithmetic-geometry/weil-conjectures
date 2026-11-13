@@ -74,12 +74,16 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
             ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
       (integralModelLeftDerivedUpperStar w).obj B :=
-  (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
-      Z)).leftDerivedFunctor.mapIso
-      ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
-        B₀) ≪≫
-    (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
-    L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso e₀
+  by
+    let e₁ := (derivedUpperStarExtendScalarsIso
+      (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app B₀
+    let e₂ := (derivedUpperStarExtendScalarsIso
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app
+        ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
+          W)).leftDerivedFunctor.obj B₀)
+    let e₃ := (integralModelLeftDerivedUpperStar w).mapIso e₀
+    exact (Mod.extendScalars (coefficientMap
+      (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) Z)).leftDerivedFunctor.mapIso e₁ ≪≫ e₂ ≪≫ e₃
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
