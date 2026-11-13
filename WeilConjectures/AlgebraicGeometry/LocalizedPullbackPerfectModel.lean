@@ -139,13 +139,17 @@ theorem localizedPullback_perfectModel_iso {T X : Scheme.{u}} (g : T ⟶ X)
   let V := g ⁻¹ᵁ U
   let f := g.resLE U V le_rfl
   -- Reuse sheafification on the localized sites throughout the comparisons below.
-  have : HasSheafify ((TopologicalSpace.Opens.grothendieckTopology X).over U)
+  have hsX : HasSheafify ((Opens.grothendieckTopology X).over U)
       AddCommGrpCat.{u} := inferInstance
-  have : ((TopologicalSpace.Opens.grothendieckTopology X).over U).WEqualsLocallyBijective
+  have : HasWeakSheafify ((Opens.grothendieckTopology X).over U)
+      AddCommGrpCat.{u} := hsX.isRightAdjoint
+  have : ((Opens.grothendieckTopology X).over U).WEqualsLocallyBijective
       AddCommGrpCat.{u} := inferInstance
-  have : HasSheafify ((TopologicalSpace.Opens.grothendieckTopology T).over V)
+  have hsT : HasSheafify ((Opens.grothendieckTopology T).over V)
       AddCommGrpCat.{u} := inferInstance
-  have : ((TopologicalSpace.Opens.grothendieckTopology T).over V).WEqualsLocallyBijective
+  have : HasWeakSheafify ((Opens.grothendieckTopology T).over V)
+      AddCommGrpCat.{u} := hsT.isRightAdjoint
+  have : ((Opens.grothendieckTopology T).over V).WEqualsLocallyBijective
       AddCommGrpCat.{u} := inferInstance
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
