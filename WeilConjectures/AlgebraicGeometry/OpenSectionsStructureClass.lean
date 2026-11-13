@@ -98,8 +98,6 @@ private theorem exact_single_iso
   erw [Category.comp_id]
   rfl
 
-set_option profiler true in
-set_option maxHeartbeats 700000 in
 -- The explicit restriction and homology comparison types exceed the default elaboration budget.
 /-- Before comparing the two derived functors, the restricted structure class is the
 image of the ordinary tilde class of one under the restricted ordinary-to-derived unit.
