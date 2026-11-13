@@ -290,8 +290,9 @@ private theorem projectionMap_laxSquare
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
   rw [adj'.unit_naturality_assoc, adj'.unit_naturality_assoc, hn,
     reassoc_of% (hunit (R.obj K ⊗ T)), ← QD.map_comp, hπ, QD.map_comp,
-    ← Functor.LaxMonoidal.μ_natural_right_assoc, reassoc_of% hπ',
-    ← Functor.LaxMonoidal.μ_natural_right_assoc, hμ]
+    ← Functor.LaxMonoidal.μ_natural_right_assoc]
+  erw [reassoc_of% hπ']
+  rw [← Functor.LaxMonoidal.μ_natural_right_assoc, hμ]
   simp only [tensorHom_def, Category.assoc]
   rw [whisker_exchange_assoc, whisker_exchange_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc,
@@ -388,7 +389,7 @@ lemma projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U ⟶ X
     rw [derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction, Adjunction.localization_unit_app]
     dsimp only [CatCommSq.iso, Iso.symm_hom, asIso_inv]
     simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-    erw [Functor.map_id]
+    erw [CategoryTheory.Functor.map_id]
     rw [Category.id_comp, NatIso.isIso_inv_app, IsIso.inv_hom_id, Category.comp_id]
   have hc :
       ((Etale.etaleLowerShriekUpperStarAdjunction A f inferInstance).mapHomologicalComplex
@@ -411,9 +412,11 @@ lemma projectionMap_derivedEtaleLowerShriek_app_Qh {U : Scheme.{u}} (f : U ⟶ X
     (asIso (f)^*[A].leftDerivedFunctorCounit)
     (Etale.etaleLowerShriek A f inferInstance).mapDerivedCategoryFactorsh.hom
     ((quotient _ _).obj K₁) ((quotient _ _).obj T₁) _ _ hμ hunit ?_
-  simpa only [Functor.map_comp, HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft',
-    ← Functor.mapHomotopyCategory_map, ← Adjunction.mapHomotopyCategory_unit_app_quotient]
-    using (quotient _ _).congr_map hc
+  erw [Adjunction.mapHomotopyCategory_unit_app_quotient,
+    Adjunction.mapHomotopyCategory_unit_app_quotient, Functor.mapHomotopyCategory_map,
+    ← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  exact (quotient _ _).congr_map hc
 
 open HomotopyCategory _root_.DerivedCategory in
 omit [HasSmallSiteSheafify A] in
