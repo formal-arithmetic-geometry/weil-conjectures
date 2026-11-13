@@ -305,13 +305,13 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     simp only [specInertiaInvariantsTo, Category.assoc, hfp, Scheme.specAlgebraicClosure,
       Over.mk_hom, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hφ]
   -- the neighbourhood `h`
-  let h := specInertiaInvariantsToGeometricFiber hW Q ε hgAp
-  have hhW : WeaklyEtale h :=
-    weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp
-  have hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q :=
-    pullback.lift_fst _ _ _
-  have hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
-      Spec.map (CommRingCat.ofHom ε) := pullback.lift_snd _ _ _
+  obtain ⟨h, hhW, hhproj, hhalg⟩ : ∃ h : Spec (.of (Ideal.inertiaInvariants C.functionField Q)) ⟶
+      (C ↘ Spec (.of K)).geometricFiber, WeaklyEtale h ∧
+      h ≫ (C ↘ Spec (.of K)).geometricFiberProj = specInertiaInvariantsTo hW Q ∧
+      h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure =
+        Spec.map (CommRingCat.ofHom ε) :=
+    ⟨_, weaklyEtale_specInertiaInvariantsToGeometricFiber hW Q x hxW ε hgAp,
+      pullback.lift_fst _ _ _, pullback.lift_snd _ _ _⟩
   -- the lift of `x̄`
   have hpt := specMap_comp_specInertiaInvariantsTo_of_compatible hW Q x hxW _ ε r hrε hr hε _ hQ
   have hw : Spec.map (CommRingCat.ofHom r) ≫ h =
@@ -372,11 +372,10 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     mem_iff := hmem
     α := α
     hα := hα
-    hcα := by rw [htl]; exact hcα
-    hεα := by
-      change Spec.map _ ≫ (specFieldMap _ Ω ≫ e'.hom ≫ pullback.fst h (j̄)) =
-        (specFieldMap _ Ω ≫ e'.hom ≫ pullback.fst h (j̄)) ≫ α
-      rw [hfst]
-      exact hεα }⟩
+    hcα := (congrArg ((specGeometricFrobenius K ^
+      (C ↘ Spec (.of K)).degreeOver x.1).asIso.hom ≫ ·) htl).trans
+        (hcα.trans (congrArg (· ≫ α) htl.symm))
+    hεα := (congrArg (Spec.map (CommRingCat.ofHom (σF : Ω →+* Ω)) ≫ ·) hfst).trans
+      (hεα.trans (congrArg (· ≫ α) hfst.symm)) }⟩
 
 end AlgebraicGeometry.WeilGroup
