@@ -463,8 +463,6 @@ lemma quasiIso_cokernelDesc_towerFunctor_self (n : ℕ) :
   infer_instance
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- The derived-category computations at concrete restriction functors are slow to elaborate.
 include hφ hψ₀ hsurj hker ht in
 lemma quasiIso_cokernelDesc_towerFunctor (n k : ℕ) :
     QuasiIso (cokernel.desc (ϖ ^ n • 𝟙 ((towerFunctor φ ψ hψ L t).obj (op (n + k + 1))))
