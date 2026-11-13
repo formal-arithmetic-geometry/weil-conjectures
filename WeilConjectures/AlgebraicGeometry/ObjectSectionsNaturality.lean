@@ -96,6 +96,7 @@ private lemma terminalEvaluation_map_eq_res {C : Type*} [Category C]
   rw [he]
   exact Sheaf.ΓRes_map F f.op
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Nested pullback and localization comparisons require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in

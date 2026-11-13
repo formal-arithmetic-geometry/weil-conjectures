@@ -54,6 +54,7 @@ namespace Scheme.Hom.Nbhd
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   {y : Spec (.of Ω) ⟶ Y}
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- the descent and the split neighbourhood are constructed in a single proof
 /-- **Pointed lifting along an integral morphism.** -/
