@@ -70,6 +70,7 @@ variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option maxHeartbeats 4000000 in
+set_option profiler true in
 -- the derived categories of module objects are unfolded when matching the comparisons
 /-- The derived (Pull) isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor
 comparisons of the derived pullbacks (`leftDerivedUpperStarTensor`) and of the derived extensions
@@ -99,6 +100,7 @@ theorem comparisonCompatible_derivedPullIso :
   erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
 
 set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- unifying the projection maps with `Adjunction.rightAdjointProjectionMap` unfolds the derived
 -- categories of module objects
 /-- **The projection formula under a flat change of coefficients**: if the projection map
