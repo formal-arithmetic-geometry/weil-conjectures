@@ -53,6 +53,14 @@ private lemma adicBaseChange_mate_symm_app {C D E F : Type*}
         L₂.map (β.app (L₁.obj M)) ≫ adj₂.counit.app (H.obj (L₁.obj M)) := by
   simp
 
+private lemma adicBaseChange_modIsoTrans_hom_app {C D : Type*}
+    [Category* C] [Category* D] [MonoidalCategory D] {A : D} [MonObj A]
+    {F₁ F₂ F₃ F₄ : C ⥤ Mod D A} (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃)
+    (M : C) :
+    ((e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M).hom =
+      (e₁.hom.app M).hom ≫ (e₂.hom.app M).hom ≫ (e₃.inv.app M).hom :=
+  rfl
+
 variable (l : ℕ) [Fact l.Prime]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
@@ -69,11 +77,11 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  exact congrArg₂ (fun f g ↦ f ≫ g)
-    (adicLowerStarComp_hom_app_hom j' g'' M)
-    (congrArg₂ (fun f g ↦ f ≫ g)
-      (adicLowerStarCongr_hom_app_hom sq.w.symm M)
-      (adicLowerStarComp_inv_app_hom g' j M))
+  exact (adicBaseChange_modIsoTrans_hom_app (adicLowerStarComp l j' g'')
+    (adicLowerStarCongr l sq.w.symm) (adicLowerStarComp l g' j) M).trans
+    (congrArg₂ (fun f g ↦ f ≫ g) (adicLowerStarComp_hom_app_hom j' g'' M)
+      (congrArg₂ (fun f g ↦ f ≫ g) (adicLowerStarCongr_hom_app_hom sq.w.symm M)
+        (adicLowerStarComp_inv_app_hom g' j M)))
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
