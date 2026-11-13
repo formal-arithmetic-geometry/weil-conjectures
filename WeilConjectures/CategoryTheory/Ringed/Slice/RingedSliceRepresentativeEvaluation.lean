@@ -329,7 +329,6 @@ local notation "tot" => coefficientTotalTensor.{u, c, v} J A
 set_option hygiene false in
 local notation "totU" => coefficientTotalTensor.{u, max c v, v} (J.over U) (A.over U)
 
-set_option trace.profiler true in
 -- The local-family formula has dependent slice-section and complex-degree endpoints.
 private theorem slice_uncurry
     (Q P I : CochainComplex Mod ℤ) (q : Q ⟶ homComplex (R := A) P I)
@@ -387,7 +386,6 @@ private theorem slice_uncurry
 
 end SliceChains
 
-set_option trace.profiler true in
 -- Assemble the dependent tensor and Hom normalization squares without unfolding their data.
 /-- Normalized slice evaluation on a flat-term K-flat source and K-injective target.
 Source: Stacks Project, Tags 08J9 and 08JB
