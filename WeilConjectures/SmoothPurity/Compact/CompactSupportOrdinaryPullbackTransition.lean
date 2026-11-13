@@ -97,7 +97,6 @@ private def evG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) f n
 
-set_option profiler true in
 private theorem systemEval_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (N : ProEtale.VaryingRing.Modules (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) Y) :
@@ -115,7 +114,6 @@ private theorem systemEval_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
       ((coefficientSequenceEvaluation l E Y n).obj N) := by
   exact compactSupportOrdinaryPullbackUnit l E f n N
 
-set_option profiler true in
 /-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
 Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
 (blueprint: lem-weil-compact-support-ordinary-pullback-transition).
@@ -164,28 +162,9 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    ?_ ?_ ?_ ?_ N
-  · intro Q
-    have hu := compactSupportOrdinaryPullbackUnit l E f m Q
-    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
-      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
-      Functor.comp_obj, Functor.comp_map] at hu ⊢
-    exact hu
-  · intro Q
-    have hu := compactSupportOrdinaryPullbackUnit l E f n Q
-    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
-      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
-      Functor.comp_obj, Functor.comp_map] at hu ⊢
-    exact hu
+    (systemEval_unit l E f m) (systemEval_unit l E f n)
+    (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
   · intro M
-    have hd := compactSupportOrdinaryDirectImageTransition l E f h M
-    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
-      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
-      Functor.comp_obj, Functor.comp_map] at hd ⊢
-    exact hd
   · intro M
     exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
