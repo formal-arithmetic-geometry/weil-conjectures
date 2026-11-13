@@ -153,7 +153,6 @@ private theorem tensorSection_smul (W : Scheme.{u})
   rw [← TensorProduct.smul_tmul]
   rfl
 
-set_option profiler true in
 /-- The ordinary association in the prescribed scalar model, normalized on tensor sections. -/
 private theorem scalarChainSection (W : Scheme.{u})
     (M : CompletionUnit.OrdinaryModel l E W)
@@ -198,7 +197,6 @@ private theorem scalarChainSection (W : Scheme.{u})
       (hT (Q.X i) V c q))
   exact (congrArg (fun y ↦ ((β.hom.app K).f i).val.app V y) he).trans (hβ K n i U c x)
 
-set_option profiler true in
 /-- Degreewise normalized association datum for fixed strict quotient representatives.
 
 Source: Stacks Tags 03EL and 07A4; the finite balanced tensor association and its
