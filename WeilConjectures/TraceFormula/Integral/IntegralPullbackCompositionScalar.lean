@@ -196,10 +196,12 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Np Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  exact scalar_composition_paste
-    (DE := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
-    (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
-    N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
+  have IIIk' := congrArg (UL h).map IIIk
+  have CE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map CE
+  simp only [Functor.map_comp] at IIIk' CE'
+  rw [← eE, ← eL] at mix
+  rw [reassoc_of% N1, IIIk', reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
+    reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
 
 end SystemScalar
 
