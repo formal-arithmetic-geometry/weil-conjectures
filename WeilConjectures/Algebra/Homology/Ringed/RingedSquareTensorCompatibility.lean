@@ -207,6 +207,7 @@ private theorem tensor_map_comp {A B : Type*} [Category A] [Category B]
   T.map_comp (CategoryTheory.Prod.mkHom a b) (CategoryTheory.Prod.mkHom c d)
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Keep the four representative identifications explicit during composition.
 private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (d : RingedTensorEdge B C)
@@ -253,6 +254,7 @@ private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
     rw [reassoc_of% (comparison_naturality d (delta e P Q))]
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Elaborate the four derived functors and their representative comparisons together.
 /-- The representative characterization of the derived square is compatible with
 canonical tensor comparisons on flat K-flat complexes.
