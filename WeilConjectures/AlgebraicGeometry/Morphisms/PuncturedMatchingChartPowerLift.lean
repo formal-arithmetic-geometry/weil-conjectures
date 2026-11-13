@@ -24,7 +24,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every chart section lifts to a matching section after clearing a power of `f`.
 

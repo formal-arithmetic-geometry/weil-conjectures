@@ -58,7 +58,6 @@ private theorem principalOpen_image
     inf_eq_right.mpr hf]
   exact SpecMap_preimage_basicOpen D.baseMap f
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem matching_chart_kernel
     {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A]
