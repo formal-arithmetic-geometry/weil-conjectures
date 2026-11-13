@@ -400,10 +400,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
             (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
               (L((N.ε)^*⟦Λ⟧).obj C))) ≫
           (N.galoisLayerExchangeIso h Ω Λ C).hom := by
-  have := projector_hasTensor₄ObjExt N.total (condensedRingObj Λ N.total)
-  have := projector_hasGoodTensor₁₂Tensor N.total (condensedRingObj Λ N.total)
-  have := projector_hasGoodTensorTensor₂₃ N.total (condensedRingObj Λ N.total)
-  exact exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
+  have key := exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
     (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
     ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
     (N.galoisLayerExchangeIso h Ω Λ C)
@@ -411,6 +408,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
     (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
     (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
+  exact key
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀] [IsGalois L Ω]
@@ -437,6 +435,88 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
     (DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
       L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
+
+/-- Construct the projector using a bounded complex of étale origin. The exchange and action
+are shared in the conclusion, so their derived functors are elaborated only once. -/
+private theorem exists_retraction_galoisLayer_projector_of_complex
+    [QuasiCompact N.j] [QuasiSeparated N.j]
+    (hp : ∀ L' : FiniteGaloisIntermediateField L Ω, IsUnit ((Module.finrank L L' : ℕ) : T₀))
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) X)))
+    (K : CochainComplex (Mod (Sheaf (ProEt.topology N.generic) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) N.generic)) ℤ)
+    (a : ℤ) [K.IsStrictlyGE a]
+    (hterms : ∀ n, ∃ F₀ : Sheaf N.generic.smallEtaleTopology
+      (ModuleCat.{u + 1} (ULift.{u + 1} T₀)),
+      Nonempty ((finiteCoefficientModEquivalence N.generic T₀).functor.obj (K.X n) ≅
+        (ν^*(N.generic)[ModuleCat.{u + 1} (ULift.{u + 1} T₀)]).obj F₀))
+    (e : DerivedCategory.Q.obj K ≅ L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) :
+    let Λ₀ := Profinite.continuousMapRingObj T₀
+    let α := ((N.galoisLayerHom h Ω).pullbackExchange Λ₀).app C
+    let D := ((N.galoisLayer h Ω).nearbyCycles Λ₀).obj (L((𝟙 X)^*⟦Λ₀⟧).obj C)
+    let ρ := fun σ ↦ N.galoisLayerAction Λ₀ h Ω σ (L((𝟙 X)^*⟦Λ₀⟧).obj C)
+    ∃ r, α ≫ r = 𝟙 _ ∧
+      (∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α) ∧
+      ∀ {Z : Scheme.{u}} (f' : Z ⟶ X') (q : ℤ),
+        let H := L((f')^*⟦Λ₀⟧) ⋙ DerivedCategory.homologyFunctor _ q
+        ∀ {W : Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ₀ Z)}
+          (φ : H.obj D ⟶ W) {κ : Type*} (S : κ → (Ω ≃ₐ[L] Ω)),
+          (∀ (L' : FiniteGaloisIntermediateField L Ω) (a : L' ≃ₐ[L] L'),
+            ∃ k, ∀ x : L', S k x = a x) →
+          (∀ k, H.map (ρ (S k)) ≫ φ = φ) → H.map (r ≫ α) ≫ φ = φ := by
+  dsimp only
+  have := projector_hasTensor₄ObjExt N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := projector_hasGoodTensor₁₂Tensor N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := projector_hasGoodTensorTensor₂₃ N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  choose F₀ hF₀ using hterms
+  have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
+      (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+        (condensedRingObj (Profinite.continuousMapRingObj T₀) Y)) :
+      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := by
+    have hcard : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
+      rw [← Nat.card_eq_fintype_card]
+      exact IsGalois.card_aut_eq_finrank L j
+    rw [hcard]
+    exact isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀) (hp j) M
+  have hKe (n : ℤ) := essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some
+  have hc (n : ℤ) := isColimitModuleCocone_galoisTower Ω h T₀ (K.X n) (hKe n)
+  have hK (n : ℤ) :=
+    rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
+  obtain ⟨r, hr₁, hr₂, hr₃⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
+    _ h Ω C ((galoisTower Ω h).derivedTrace _ (fun j M ↦ hW j M) K hc a hK _ e)
+    ((galoisTower Ω h).unit_app_comp_derivedTrace _ _ K hc a hK _ e)
+    (fun σ ↦ (galoisTower Ω h).derivedUnitTransport_comp_derivedTrace _ _ K hc a hK _ e _ _
+      fun (j : FiniteGaloisIntermediateField L Ω) ↦
+        ⟨σ.restrictNormal j, pullbackAction_comp_galoisLevelProjection h j σ⟩)
+  refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
+  obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
+    K a hKe f' q
+  have hσj (j : FiniteGaloisIntermediateField L Ω) (b : j ≃ₐ[L] j) :
+      ∃ k, pullbackAction h _ specGaloisAction_comp (S k) ≫ (galoisTower Ω h).π j =
+        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := by
+    obtain ⟨k, hk⟩ := hS j b
+    refine ⟨k, ?_⟩
+    have hb : (S k).restrictNormal j = b := AlgEquiv.ext fun x ↦
+      (algebraMap j Ω).injective ((AlgEquiv.restrictNormal_commutes (S k) j x).trans (hk x))
+    rw [← hb]
+    exact pullbackAction_comp_galoisLevelProjection h j (S k)
+  have hφ' (k : κ) := hφ k
+  simp only [galoisLayerAction, galoisLayerAut_autAction] at hφ'
+  have key := (galoisTower Ω h).map_derivedTrace_comp_unit_comp _ (fun j M ↦ hW j M) K hc a hK _ e
+    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+      L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
+    hΦ (fun j ↦ hW j W) ((DerivedCategory.homologyFunctor _ q).map
+      (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
+        (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom) ≫ φ)
+    (fun k ↦ pullbackAction h _ specGaloisAction_comp (S k))
+    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (S k)) hσj
+    (fun k ↦ (map_map_conj_comp_eq_iff _ _ _ _ _).1 (hφ' k))
+  rw [hr₃]
+  exact (map_map_conj_comp_eq_iff _ _ _ _ _).2 key
 
 -- matching the derived functors of the Galois layer with those of the field tower
 /-- **The nearby cycles of `N` are the `Gal(Ω/L)`-invariants of those of the Galois layer `N_Ω`,
@@ -487,60 +567,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  have := projector_hasTensor₄ObjExt N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
-  have := projector_hasGoodTensor₁₂Tensor N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
-  have := projector_hasGoodTensorTensor₂₃ N.total
-    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
   have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
     (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
   obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
-  choose F₀ hF₀ using hterms
-  have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
-      (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-        (condensedRingObj (Profinite.continuousMapRingObj T₀) Y)) :
-      IsIso (Fintype.card ((galoisTower Ω h).Γ j) • 𝟙 M) := by
-    have hcard : Fintype.card ((galoisTower Ω h).Γ j) = Module.finrank L j := by
-      rw [← Nat.card_eq_fintype_card]
-      exact IsGalois.card_aut_eq_finrank L j
-    rw [hcard]
-    exact isIso_nsmul_id_mod_of_isUnit _ (Profinite.continuousMapConstRingHom T₀) (hp j) M
-  have hKe (n : ℤ) := essImage_comparisonUpperStar_X T₀ (K.X n) (F₀ n) (hF₀ n).some
-  have hc (n : ℤ) := isColimitModuleCocone_galoisTower Ω h T₀ (K.X n) (hKe n)
-  have hK (n : ℤ) :=
-    rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
-  obtain ⟨r, hr₁, hr₂, hr₃⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
-    _ h Ω C ((galoisTower Ω h).derivedTrace _ (fun j M ↦ hW j M) K hc a hK _ e)
-    ((galoisTower Ω h).unit_app_comp_derivedTrace _ _ K hc a hK _ e)
-    (fun σ ↦ (galoisTower Ω h).derivedUnitTransport_comp_derivedTrace _ _ K hc a hK _ e _ _
-      fun (j : FiniteGaloisIntermediateField L Ω) ↦
-        ⟨σ.restrictNormal j, pullbackAction_comp_galoisLevelProjection h j σ⟩)
-  refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
-  obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
-    K a hKe f' q
-  have hσj (j : FiniteGaloisIntermediateField L Ω) (b : j ≃ₐ[L] j) :
-      ∃ k, pullbackAction h _ specGaloisAction_comp (S k) ≫ (galoisTower Ω h).π j =
-        (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := by
-    obtain ⟨k, hk⟩ := hS j b
-    refine ⟨k, ?_⟩
-    have hb : (S k).restrictNormal j = b := AlgEquiv.ext fun x ↦
-      (algebraMap j Ω).injective ((AlgEquiv.restrictNormal_commutes (S k) j x).trans (hk x))
-    rw [← hb]
-    exact pullbackAction_comp_galoisLevelProjection h j (S k)
-  have hφ' (k : κ) := hφ k
-  simp only [galoisLayerAction, galoisLayerAut_autAction] at hφ'
-  have key := (galoisTower Ω h).map_derivedTrace_comp_unit_comp _ (fun j M ↦ hW j M) K hc a hK _ e
-    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-      L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ DerivedCategory.homologyFunctor _ q)
-    hΦ (fun j ↦ hW j W) ((DerivedCategory.homologyFunctor _ q).map
-      (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
-        (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom) ≫ φ)
-    (fun k ↦ pullbackAction h _ specGaloisAction_comp (S k))
-    (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (S k)) hσj
-    (fun k ↦ (map_map_conj_comp_eq_iff _ _ _ _ _).1 (hφ' k))
-  rw [hr₃]
-  exact (map_map_conj_comp_eq_iff _ _ _ _ _).2 key
+  exact exists_retraction_galoisLayer_projector_of_complex N h Ω T₀ hp C K a hterms e
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
