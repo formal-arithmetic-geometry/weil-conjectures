@@ -14,7 +14,9 @@ universe u wC wD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 -- Comparing X.Modules with module sheaves makes the isomorphism transports expensive.
+set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 /-- The snake boundary of the global horseshoe equals the derived-triangle boundary.
 Source: Stacks Project, Tags 0117, 013T and 015B.
 (blueprint: stage3-boundary-identification).
