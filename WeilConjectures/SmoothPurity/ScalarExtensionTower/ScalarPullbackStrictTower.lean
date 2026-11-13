@@ -140,7 +140,7 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
   intro i
   dsimp only [NatTrans.comp_app, HomologicalComplex.comp_f,
     Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  trace "before extensionality"
+  run_tac do Lean.logInfo m!"before extensionality: {← IO.monoMsNow}"
   with_unfolding_all
     apply scalar_pullback_hom_ext l E L ι f n.unop n.unop
       (scalarFiniteRingMap l E L ι X n.unop) (scalarProjectionRingSquare l E L ι X n.unop)
@@ -148,16 +148,18 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((integralOperationsLevelPullback l L f n.unop).obj
         ((unrestrictedIntegralReductionFunctor l L Y n.unop).obj
           ((integralOrdinaryScalar l E L ι Y).obj (P.obj.X i))))
-  trace "after extensionality"
+  run_tac do Lean.logInfo m!"after extensionality: {← IO.monoMsNow}"
   intro U x
+  run_tac do Lean.logInfo m!"before z: {← IO.monoMsNow}"
   let z := integralComparisonSequenceSection l E Y (C.X i) n.unop (op U)
     (((κ n.unop).inv.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
+  run_tac do Lean.logInfo m!"before w: {← IO.monoMsNow}"
   let w := integralComparisonRestrictedSection l E X
     ((integralComparisonSequencePullback l E f).obj (C.X i)) n.unop
     (op ((Scheme.proEtaleBaseChange f).obj U))
     (integralComparisonSequenceGenerator l E f (C.X i) n.unop U z)
-  trace "before hz"
+  run_tac do Lean.logInfo m!"before hz: {← IO.monoMsNow}"
   have hz : ((κ n.unop).hom.f i).val.app (op U)
       (coefficientEvaluationSection l E Y (C.X i) n.unop (op U) z) =
       unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x := by
@@ -169,24 +171,24 @@ theorem scalarPullbackStrictTower {X Y : Scheme.{u}} (f : X ⟶ Y)
     exact congrArg (fun g ↦ (g.f i).val.app (op U)
       (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x))
         (κ n.unop).inv_hom_id
-  trace "after hz"
+  run_tac do Lean.logInfo m!"after hz: {← IO.monoMsNow}"
   have hqEw : ((qE.hom.app n).f i).val.app _ w =
       integralOperationsPullbackGenerator l E f n.unop _ U
         (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x) :=
     (hqE n.unop i U z).trans
       (congrArg (integralOperationsPullbackGenerator l E f n.unop _ U) hz)
-  trace "after hqEw"
+  run_tac do Lean.logInfo m!"after hqEw: {← IO.monoMsNow}"
   have hqEinv : ((qE.inv.app n).f i).val.app _
       (integralOperationsPullbackGenerator l E f n.unop _ U
         (unrestrictedIntegralTensorSection l E Y n.unop (P.obj.X i) (op U) 1 x)) = w := by
     have hi := congrArg (fun g ↦ ((g.app n).f i).val.app _ w) qE.hom_inv_id
     have hj := congrArg (fun y ↦ ((qE.inv.app n).f i).val.app _ y) hqEw.symm
     with_unfolding_all exact hj.trans hi
-  trace "after hqEinv"
+  run_tac do Lean.logInfo m!"after hqEinv: {← IO.monoMsNow}"
   have hlevel := (scalarPullbackTower_existsUnique l E L ι f).exists.choose_spec P.obj n.unop
   have hnorm := (scalarPullbackLevel_existsUnique l E L ι f n.unop).exists.choose_spec
     P.obj i U x
-  trace "after normalization"
+  run_tac do Lean.logInfo m!"after normalization: {← IO.monoMsNow}"
   with_unfolding_all
     change ((q.hom.app n).f i).val.app _
       (((τ.app n).f i).val.app _
