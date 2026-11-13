@@ -238,7 +238,6 @@ private theorem finiteSystemPullback_heq_integralComparison {X Y : Scheme.{u}} (
       (integralComparisonSequencePullback l E f) := by
   apply HEq.rfl
 
-set_option profiler true in
 /-- The finite-system composition comparison of integral pullback is the whole-system
 comparison of the integral comparison sequence systems.
 Source: Stacks 03D8, 0D6D (blueprint: lem-pod-integral-pullback-composition-scalar).
@@ -293,6 +292,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
+  -- Compare forward maps before using extensionality, and unfold the presentation
+  -- aliases explicitly when matching their dependent morphism types.
   with_unfolding_all exact Iso.ext (eq_of_heq hh)
 
 end Composition
