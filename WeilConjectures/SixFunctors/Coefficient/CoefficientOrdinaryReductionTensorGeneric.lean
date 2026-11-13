@@ -269,7 +269,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through total tensor complexes and scalar restriction.
-set_option profiler true in
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
 natural in both complexes. Source: Stacks 03EK, 07A4. -/
 theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
@@ -320,6 +319,8 @@ theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
         ((s.hom.f k).val.app V (coefficientRestrictionSection π _ V
           ((a.unit.app _).val.app V
             (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))))
+    -- Apply the generator formulas under fixed section maps, avoiding rewrite search
+    -- through the scalar restrictions and total tensor complexes.
     have hleft := (congrArg ((s'.hom.f k).val.app V)
       (unit_map_section π a
         (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) V
@@ -358,7 +359,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through several levels of composite functors.
-set_option profiler true in
 /-- The tensor product of two presentations of strict system complexes is again a
 presentation: its finite comparison commutes with the strict transitions.
 Source: Stacks 03EK, 07A4 and 0941. -/
@@ -498,6 +498,7 @@ theorem tensorPresentation_transition
       (coefficientRestrictionSection pm (Em.obj (P.X p)) V ((am.unit.app (P.X p)).val.app V x)))
     have hy := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
       (coefficientRestrictionSection pm (Em.obj (Q.X p')) V ((am.unit.app (Q.X p')).val.app V y)))
+    -- Select the lifts without eliminating existentials in the large section equality.
     let x0 := hx.choose
     let y0 := hy.choose
     have hx0 : σm (CP.X p) V x0 = _ := hx.choose_spec
