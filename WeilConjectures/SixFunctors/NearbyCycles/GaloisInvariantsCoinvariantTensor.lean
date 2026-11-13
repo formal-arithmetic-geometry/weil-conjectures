@@ -362,6 +362,18 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
+  letI := galoisTensorModuleColimit
+  letI := galoisTensorLeftColimit
+  letI := galoisTensorRightColimit
+  obtain ⟨r, hr, hcoinv⟩ :=
+    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
+      hact
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
