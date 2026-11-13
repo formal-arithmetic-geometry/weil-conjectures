@@ -220,8 +220,6 @@ variable {X Y X' Y' : Scheme.{u}} {e : X ⟶ Y} {g : Y' ⟶ Y} {e' : X' ⟶ Y'} 
   (sq : IsPullback g' e' e g) (c : Compactification e) [_root_.AlgebraicGeometry.Etale e]
   [_root_.AlgebraicGeometry.Etale e']
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] [_root_.AlgebraicGeometry.Etale e'] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with base
@@ -264,8 +262,10 @@ lemma compactificationEtaleGraphIso_baseChange
       (leftDerivedUpperStarCompSectionIso _ (c.ofIsPullback sq).selfGraph
         (pullback.snd (c.ofIsPullback sq).g e') (c.ofIsPullback sq).selfGraph_snd).hom.app
         (L((g')^*[ModuleCat.{u + 1} Λ]).obj N) := by
-    rw [← hpre, ← Functor.map_comp_assoc]
-    simp [derivedSquareUpperStarIso]
+    exact (Iso.eq_inv_comp
+      (L(((c.ofIsPullback sq).selfGraph)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphBaseChange sq).toCommSq).app N))).1
+      hpre.symm
   -- the open immersions `j` and `j'`
   have hJ := unit_map_derivedOpenImmersionLowerShriekBaseChangeIso' Λ
     (c.isPullback_i_ofIsPullback' sq) N
