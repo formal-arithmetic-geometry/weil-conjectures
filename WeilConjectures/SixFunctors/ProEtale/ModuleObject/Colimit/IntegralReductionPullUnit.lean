@@ -66,7 +66,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
   rfl
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 set_option trace.profiler true in
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
@@ -160,7 +159,6 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   simp only [Mod.comp_hom'] at h
   exact h
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
 lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
@@ -243,7 +241,6 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
 set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
 pullback of the unit `M ⟶ Res (Ext M)`, followed by the commutation `ι` of `Res` with `Lf^*`, is
