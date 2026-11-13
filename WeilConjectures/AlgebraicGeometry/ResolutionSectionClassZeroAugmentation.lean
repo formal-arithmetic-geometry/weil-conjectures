@@ -280,7 +280,7 @@ theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y
   let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
     (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
   have : A.Additive := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
-  have : D.Additive := { map_add := by intros; rfl }
+  have : D.Additive := instAdditivePushforward f
   let C := (A.mapHomologicalComplex (.up ℕ)).obj R.resolution.cocomplex
   let K := (D.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let L := (P.mapHomologicalComplex (.up ℕ)).obj K

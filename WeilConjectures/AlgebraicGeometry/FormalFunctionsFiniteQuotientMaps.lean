@@ -70,11 +70,14 @@ theorem formalFunctions_finite_quotient_maps {X Y : Scheme.{u}} (f : X ⟶ Y)
   intro I J V hy D xi
   let K := injectiveResolution
     ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)
-  obtain ⟨E₀⟩ := Scheme.Modules.flatBaseChangeMap_sections_choices
-    f (Y.fromSpecStalk y) F I K V
+  let E₀ := Classical.choice (Scheme.Modules.flatBaseChangeMap_sections_choices
+    f (Y.fromSpecStalk y) F I K V)
   let E : Scheme.Modules.FlatBaseChangeOpenChoices f (Y.fromSpecStalk y) F I K V :=
     { E₀ with source := D.source }
-  obtain ⟨t, ht, htx⟩ := formalFunctions_finite_open_factorization f y F p n I K J V E D
+  have hfac := formalFunctions_finite_open_factorization f y F p n I K J V E D
+  let t := hfac.choose
+  have ht := hfac.choose_spec.1
+  have htx := hfac.choose_spec.2
   have hl := ha I K V hy E xi
   let rho := Scheme.Modules.moduleCohomologyRestriction
     ((formalFibreι f y n) ⁻¹ᵁ (f ⁻¹ᵁ V))
