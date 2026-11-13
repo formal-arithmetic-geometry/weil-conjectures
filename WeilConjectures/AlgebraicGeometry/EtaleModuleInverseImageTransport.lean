@@ -297,13 +297,13 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
       ext W x
       exact (eq_of_heq (hnu.1 W x)).trans (hu W x).symm
   · intro G
-    simpa only [Adjunction.homEquiv_id, Adjunction.homEquiv_unit, FU.map_id,
+    simpa only [Adjunction.homEquiv_unit, Functor.map_id,
       Category.comp_id] using hm G (LM.obj G) (𝟙 _)
   · intro F
     have h := hm _ F (am.counit.app F)
     rw [← am.homEquiv_symm_id F, Equiv.apply_symm_apply, FV.map_id] at h
     have h' := congrArg (fun t ↦ (a.homEquiv _ (FU.obj F)).symm t) h
-    simp only [Adjunction.homEquiv_symm_id, Equiv.symm_apply_apply] at h'
+    simp only [a, FV, FU, Adjunction.homEquiv_symm_id, Equiv.symm_apply_apply] at h'
     simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using
       congrArg (fun t ↦ e.hom.app _ ≫ t) h'.symm
 

@@ -102,9 +102,12 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
     (etaleSetDescentUnit (j ≫ g) ((Scheme.etaleSetPullback f).obj F)
       ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) s)
   unfold etaleSetDescentComparison
+  trace "comparison: hn₁"
   erw [hn₁]
   simp only [ConcreteCategory.comp_apply] at hn₃
+  trace "comparison: hn₃"
   erw [hn₃]
+  trace "comparison: hn₂"
   erw [hn₂]
   let v := etaleSetDescentUnit j ((Scheme.etaleSetPullback g).obj ((Scheme.etaleSetPullback f).obj
     F))
@@ -116,19 +119,23 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
       f).obj U))))) v
   simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     ConcreteCategory.comp_apply] at hc'
+  trace "comparison: hc'"
   erw [hc']
   have hp := congr_app (congrArg Iso.hom
     (MorphismProperty.Over.pullbackComp_assoc (P := @Etale) (Q := ⊤) j g f)) U
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hp
+  trace "comparison: pasting"
   erw [pasting_transport (j ≫ g) f (j ≫ g ≫ f) (Category.assoc j g f).symm U] at hp
   let e := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
     (Category.assoc j g f)
   let e' := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
     (Category.assoc j g f).symm
+  trace "comparison: associating hp"
   rw [Category.assoc (eqToHom e') _ _] at hp
   have hv := cancel_cast_comp e e' _ _ hp
+  trace "comparison: map_comp"
   erw [← Functor.map_comp_apply, ← op_comp]
   refine (map_transport (Category.assoc j g f) F U
     ((MorphismProperty.Over.pullback @Etale ⊤ j).obj ((MorphismProperty.Over.pullback @Etale ⊤

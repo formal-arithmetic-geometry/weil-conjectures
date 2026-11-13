@@ -45,6 +45,55 @@ private theorem shrink_scalarTower
   rw [(Shrink.algEquiv R C).commutes, (Shrink.algEquiv B C).commutes,
     ← IsScalarTower.algebraMap_apply R B C]
 
+/-- Transport a finite étale localization to a small ring, preserving its scalar towers. -/
+private theorem exists_small_localization_model
+    (A R : Type u) (A0 T K' : Type*)
+    [CommRing A] [CommRing R] [CommRing A0] [CommRing T] [Field K']
+    [Algebra A R] [Algebra A A0] [Algebra A T] [Algebra R T]
+    [Algebra A0 T] [Algebra A0 K'] [Algebra T K']
+    [IsScalarTower A R T] [IsScalarTower A A0 T] [IsScalarTower A0 T K']
+    [IsDomain T] [Module.Finite R T] [Algebra.Etale R T] [IsFractionRing T K']
+    (s : A0) [IsLocalization.Away s T]
+    (hinj : Function.Injective (algebraMap R T)) :
+    ∃ (A' : Type u) (_ : CommRing A') (_ : Algebra R A')
+      (_ : Algebra A A') (_ : IsScalarTower A R A')
+      (_ : IsDomain A') (_ : Algebra A' K') (_ : Algebra A0 A')
+      (_ : IsScalarTower A A0 A') (_ : IsScalarTower A0 A' K')
+      (_ : IsLocalization.Away s A'),
+      Module.Finite R A' ∧ Algebra.Etale R A' ∧ IsFractionRing A' K' ∧
+        Surjective (Spec.map (CommRingCat.ofHom (algebraMap R A'))) := by
+  have : Small.{u} T := Module.Finite.small R T
+  let A' := Shrink.{u} T
+  let : Algebra A' K' :=
+    ((algebraMap T K').comp (Shrink.ringEquiv T).toRingHom).toAlgebra
+  have : IsScalarTower A R A' := shrink_scalarTower A R T
+  have : IsScalarTower A A0 A' := shrink_scalarTower A A0 T
+  have : IsScalarTower A0 A' K' := by
+    apply IsScalarTower.of_algebraMap_eq
+    intro x
+    change algebraMap A0 K' x =
+      algebraMap T K' ((Shrink.algEquiv A0 T) (algebraMap A0 A' x))
+    rw [(Shrink.algEquiv A0 T).commutes, ← IsScalarTower.algebraMap_apply A0 T K']
+  have : IsLocalization.Away s A' :=
+    IsLocalization.isLocalization_of_algEquiv (Submonoid.powers s)
+      (Shrink.algEquiv A0 T).symm
+  have : Module.Finite R A' := inferInstance
+  have : Algebra.Etale R A' := Algebra.Etale.of_equiv (Shrink.algEquiv R T).symm
+  have : IsFractionRing A' K' :=
+    (IsFractionRing.isFractionRing_iff_of_base_ringEquiv
+      (S := K') (Shrink.ringEquiv T).symm).mp inferInstance
+  refine ⟨A', inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  have hRA' : Function.Injective (algebraMap R A') := by
+    intro x y h
+    apply hinj
+    have h' := congrArg (Shrink.algEquiv R T) h
+    exact (Shrink.algEquiv R T).commutes x ▸
+      (Shrink.algEquiv R T).commutes y ▸ h'
+  have : FaithfulSMul R A' := (faithfulSMul_iff_algebraMap_injective R A').mpr hRA'
+  exact ⟨Algebra.IsIntegral.comap_surjective R A'⟩
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Core construction of a nonzero localization of a finite étale model.
@@ -168,33 +217,6 @@ private theorem exists_base_element_model_localization
   have : Algebra.Etale A T := Algebra.Etale.comp A S0 T
   have : Algebra.Etale A R := Algebra.Etale.of_isLocalizationAway c
   have : Algebra.Etale R T := Algebra.Etale.of_restrictScalars A R T
-  have : Small.{u} T := Module.Finite.small R T
-  let A' := Shrink.{u} T
-  let : CommRing A' := inferInstance
-  let : Algebra R A' := inferInstance
-  let : Algebra A A' := inferInstance
-  let : Algebra A0 A' := inferInstance
-  let : Algebra A' K' :=
-    ((algebraMap T K').comp (Shrink.ringEquiv T).toRingHom).toAlgebra
-  have : IsScalarTower A R A' := shrink_scalarTower A R T
-  have : IsScalarTower A A0 A' := shrink_scalarTower A A0 T
-  have : IsScalarTower A0 A' K' := by
-    apply IsScalarTower.of_algebraMap_eq
-    intro x
-    change algebraMap A0 K' x =
-      algebraMap T K' ((Shrink.algEquiv A0 T) (algebraMap A0 A' x))
-    rw [(Shrink.algEquiv A0 T).commutes, ← IsScalarTower.algebraMap_apply A0 T K']
-  have : IsLocalization.Away s A' :=
-    IsLocalization.isLocalization_of_algEquiv (Submonoid.powers s)
-      (Shrink.algEquiv A0 T).symm
-  have : Module.Finite R A' := inferInstance
-  have : Algebra.Etale R A' := Algebra.Etale.of_equiv (Shrink.algEquiv R T).symm
-  have : IsFractionRing A' K' :=
-    (IsFractionRing.isFractionRing_iff_of_base_ringEquiv
-      (S := K') (Shrink.ringEquiv T).symm).mp inferInstance
-  refine ⟨c, A', inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
-    inferInstance, hc, inferInstance, inferInstance, inferInstance, ?_⟩
   have hS0 : Function.Injective (algebraMap S0 A0) := by
     intro x y h
     apply Subtype.ext
@@ -209,14 +231,10 @@ private theorem exists_base_element_model_localization
     have : x = 0 := hS0 (by simpa using hx)
     simp [this]
   have hRT : Function.Injective (algebraMap R T) := hST.comp e.symm.injective
-  have hRA' : Function.Injective (algebraMap R A') := by
-    intro x y h
-    apply hRT
-    have h' := congrArg (Shrink.algEquiv R T) h
-    exact (Shrink.algEquiv R T).commutes x ▸
-      (Shrink.algEquiv R T).commutes y ▸ h'
-  have : FaithfulSMul R A' := (faithfulSMul_iff_algebraMap_injective R A').mpr hRA'
-  exact ⟨Algebra.IsIntegral.comap_surjective R A'⟩
+  obtain ⟨A', hA', hR, hA, hAR, hdom, hK, h0, hA0, h0K, hloc, hprops⟩ :=
+    exists_small_localization_model A R A0 T K' s hRT
+  exact ⟨c, A', hA', hR, hA, hAR, hdom, hK, h0, hA0, h0K, hloc,
+    hc, hprops⟩
 
 /-- Descend a specified nonzero denominator of a finite étale domain model to a
 principal open of the original base. The resulting small domain is a localization of
