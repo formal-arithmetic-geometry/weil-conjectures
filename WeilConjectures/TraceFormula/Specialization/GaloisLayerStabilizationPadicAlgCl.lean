@@ -229,6 +229,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
   revert C hgen
   normalize_precoherent
   intro C hgen
+  dsimp only [Functor.comp_obj] at hgen ⊢
   exact_mod_proofs hgen
 
 end NearbyCyclesModel
