@@ -11,11 +11,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 # Generic constructibility of `Rj_*` after base change
 
 Deligne's generic constructibility theorem
-(`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`, blueprint
-`theorem-generic-constructibility-base-change-rj` and its clause `--2`) gives, over a nonempty
+(`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`) gives, over a nonempty
 open `U` of the base, both the bounded constructibility of the direct image after every
 noetherian base change into `U` and the base change isomorphism. This file isolates the first
-part (`theorem-generic-constructibility-base-change-rj--1`).
+part.
 
 ## Main statements
 
@@ -40,15 +39,12 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `theorem-generic-constructibility-base-change-rj--1`: generic bounded
-constructibility of `Rj_*` after every noetherian base change.
-
-Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose
+/-- Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose
 exponent is invertible on `S`, and let `j : X ⟶ Y` be an open immersion of finite-type
 `S`-schemes. For a constructible sheaf `F` of `Λ`-modules on `X`, there is a nonempty open
 `U ⊆ S` such that for every noetherian `T` and every `t : T ⟶ S` with image in `U`, with base
 change `j_T : X_T ⟶ Y_T` and projection `g_X : X_T ⟶ X`, the complex `Rj_{T,*}(g_X^* F)` is
-bounded constructible. Taking for `T` the open subscheme `U` gives `(6.19)`. -/
+bounded constructible. -/
 theorem exists_boundedConstructible_rightDerivedLowerStar_baseChange {k : Type u} [Field k]
     {S X Y : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasInvertibleExponent Λ S] (fY : Y ⟶ S) [LocallyOfFiniteType fY]

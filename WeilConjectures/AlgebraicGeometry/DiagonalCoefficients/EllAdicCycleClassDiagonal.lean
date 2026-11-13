@@ -22,11 +22,10 @@ import Mathlib.CategoryTheory.Generator.Basic
 # The `ℓ`-adic cycle class of the diagonal
 
 Let `q : ℙ¹_Y ⟶ Y` be the projection, `Δ` the diagonal of `ℙ¹_Y ×_Y ℙ¹_Y` and `p₁, p₂` its
-projections. Blueprint `proposition-ell-adic-cycle-class-diagonal` asserts that there are a
-class `δ : Δ_* Λ ⟶ Λ(1)[2]` and a trace `Tr_q : Rq_* Λ(1)[2] ⟶ Λ` with
-`Tr_{p_i} ∘ Rp_{i*}(δ) = 1`, for `Λ = 𝒪_E, E, ℚ̄_ℓ`, all obtained from one class with
-`ℤ_ℓ`-coefficients, reducing to the torsion cycle classes and traces, and compatible with base
-change.
+projections. We show that there are a class `δ : Δ_* Λ ⟶ Λ(1)[2]` and a trace
+`Tr_q : Rq_* Λ(1)[2] ⟶ Λ` with `Tr_{p_i} ∘ Rp_{i*}(δ) = 1`, for `Λ = 𝒪_E, E, ℚ̄_ℓ`, all obtained
+from one class with `ℤ_ℓ`-coefficients, reducing to the torsion cycle classes and traces, and
+compatible with base change.
 
 All these data are the members of a `AlgebraicGeometry.ProEtale.DiagonalCoefficients.Family`.
 The family built from the canonical whole-system limit of the Cartier–Kummer classes is singled
@@ -35,9 +34,9 @@ out by `AlgebraicGeometry.ProEtale.DiagonalCoefficients.Family.IsCanonical`.
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.DiagonalCoefficients.exists_family_isCanonical`: the canonical
-  family exists (`proposition-ell-adic-cycle-class-diagonal`).
+  family exists.
 - The clause lemmas `Family.IsCanonical.integral_delta_reduction`, ...,
-  `Family.IsCanonical.trace_pullback` (`proposition-ell-adic-cycle-class-diagonal--1` to `--14`).
+  `Family.IsCanonical.trace_pullback`: the properties of the canonical family.
 -/
 
 @[expose] public noncomputable section
@@ -205,8 +204,7 @@ theorem QuotientCompatibility.traceCompatibility {l : ℕ} [Fact l.Prime] {Y : S
 /-- The coefficient family is the canonical one: its `ℤ_ℓ`-member is the derived limit `δ` of
 the whole Cartier–Kummer system of the diagonal together with the completed traces
 (`Reference`), and every uniformizer reduction of every `𝒪_E`-member is the torsion cycle class
-and trace (`FiniteReductions`). These are the choices of
-`proposition-ell-adic-cycle-class-diagonal`. -/
+and trace (`FiniteReductions`). -/
 def Family.IsCanonical (Y : Scheme.{u}) [IsNoetherian Y] (family : Family l Y) : Prop :=
   ∃ (hY : IsUnit (l : Γ(Y, ⊤))) (aY : DiagonalTraceLocalizations l Y)
     (aP : DiagonalTraceLocalizations l (ProjectiveLine Y))
@@ -262,14 +260,10 @@ private theorem towerGrothendieck (A : Type*) [Category A] [Abelian A]
     HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted l X),
     hasExt_of_hasDerivedCategory _⟩
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal`: the `ℓ`-adic cycle class of the
-diagonal.
-
-Let `k` be a field of characteristic `p ≠ ℓ` and `Y` a separated `k`-scheme of finite type.
+/-- Let `k` be a field of characteristic `p ≠ ℓ` and `Y` a separated `k`-scheme of finite type.
 There is a canonical family of diagonal classes `δ_Λ : Δ_* Λ ⟶ Λ(1)[2]` on
 `ℙ¹_Y ×_Y ℙ¹_Y` and traces `Tr_q : Rq_* Λ(1)[2] ⟶ Λ`, `Tr_{p_i}`, for
-`Λ = ℤ_ℓ, 𝒪_E, E, ℚ̄_ℓ`: it comes from the derived limit of the Cartier–Kummer system, and its
-properties are the clause lemmas `Family.IsCanonical.integral_delta_reduction`, ... below. -/
+`Λ = ℤ_ℓ, 𝒪_E, E, ℚ̄_ℓ`, coming from the derived limit of the Cartier–Kummer system. -/
 theorem exists_family_isCanonical (k : Type u) [Field k] [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ l)] (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
@@ -302,10 +296,9 @@ variable {l}
 
 /-! ### Integral coefficients -/
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--1`: the class
-`δ_{𝒪_E} : Δ_* 𝒪_E ⟶ 𝒪_E(1)[2]` of the canonical family reduces to the torsion cycle classes:
-for every uniformizer `π` of `𝒪_E` and every `n`, its derived reduction modulo `π^(n+1)` is the
-canonical Cartier cycle class of the diagonal (`lemma-cycle-class-cartier-divisor`). -/
+/-- The class `δ_{𝒪_E} : Δ_* 𝒪_E ⟶ 𝒪_E(1)[2]` of the canonical family reduces to the torsion cycle
+classes: for every uniformizer `π` of `𝒪_E` and every `n`, its derived reduction modulo `π^(n+1)` is
+the canonical Cartier cycle class of the diagonal. -/
 theorem Family.IsCanonical.integral_delta_reduction {Y : Scheme.{u}} [IsNoetherian Y]
     {family : Family l Y} (h : family.IsCanonical l Y) (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E)
@@ -320,10 +313,9 @@ theorem Family.IsCanonical.integral_delta_reduction {Y : Scheme.{u}} [IsNoetheri
   obtain ⟨d, hs, hq⟩ := hred E π hπ n
   exact ⟨d, hs, hq.classCompatibility⟩
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--2`: the trace
-`Tr_q : Rq_* 𝒪_E(1)[2] ⟶ 𝒪_E` of the canonical family lifts the torsion traces: for every
-uniformizer `π` of `𝒪_E` and every `n`, its derived reduction modulo `π^(n+1)` is the trace of
-`lemma-cohomology-projective-line-trace`. -/
+/-- The trace `Tr_q : Rq_* 𝒪_E(1)[2] ⟶ 𝒪_E` of the canonical family lifts the torsion traces: for
+every uniformizer `π` of `𝒪_E` and every `n`, its derived reduction modulo `π^(n+1)` is the torsion
+projective-line trace. -/
 theorem Family.IsCanonical.integral_traceq_reduction {Y : Scheme.{u}} [IsNoetherian Y]
     {family : Family l Y} (h : family.IsCanonical l Y) (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E)
@@ -338,16 +330,16 @@ theorem Family.IsCanonical.integral_traceq_reduction {Y : Scheme.{u}} [IsNoether
   obtain ⟨d, hs, hq⟩ := hred E π hπ n
   exact ⟨d, hs, hq.traceCompatibility⟩
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--3`: with `𝒪_E`-coefficients,
-`Tr_{p₁} ∘ Rp_{1*}(δ) = 1`, after the identification `Rp_{1*} Δ_* 𝒪_E ≅ 𝒪_E`. -/
+/-- With `𝒪_E`-coefficients, `Tr_{p₁} ∘ Rp_{1*}(δ) = 1`, after the identification
+`Rp_{1*} Δ_* 𝒪_E ≅ 𝒪_E`. -/
 theorem Family.integral_integration₁ {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (family.integral E).support₁.hom ≫ (family.integral E).R₁.R.map (family.integral E).delta ≫
       (family.integral E).trace₁ = 𝟙 _ :=
   (family.integral E).integration₁
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--4`: with `𝒪_E`-coefficients,
-`Tr_{p₂} ∘ Rp_{2*}(δ) = 1`, after the identification `Rp_{2*} Δ_* 𝒪_E ≅ 𝒪_E`. -/
+/-- With `𝒪_E`-coefficients, `Tr_{p₂} ∘ Rp_{2*}(δ) = 1`, after the identification
+`Rp_{2*} Δ_* 𝒪_E ≅ 𝒪_E`. -/
 theorem Family.integral_integration₂ {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (family.integral E).support₂.hom ≫ (family.integral E).R₂.R.map (family.integral E).delta ≫
@@ -356,8 +348,7 @@ theorem Family.integral_integration₂ {Y : Scheme.{u}} (family : Family l Y)
 
 /-! ### Finite extensions of `ℚ_ℓ` -/
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--5`: the class
-`δ_E : Δ_* E ⟶ E(1)[2]` is the extension of scalars of `δ_{𝒪_E}` along `𝒪_E ⟶ E`. -/
+/-- The class `δ_E : Δ_* E ⟶ E(1)[2]` is the extension of scalars of `δ_{𝒪_E}` along `𝒪_E ⟶ E`. -/
 theorem Family.rational_delta_eq {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (derivedScalars (padicIntegersRingObjToContinuousMapRingObj l E) (diagonalSurface Y)).map
@@ -365,8 +356,7 @@ theorem Family.rational_delta_eq {Y : Scheme.{u}} (family : Family l Y)
       (family.toRational E).supported.iso.hom ≫ (family.rational E).delta :=
   (family.toRational E).delta
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--6`: the trace
-`Tr_q : Rq_* E(1)[2] ⟶ E` is the extension of scalars of the `𝒪_E`-trace, through the
+/-- The trace `Tr_q : Rq_* E(1)[2] ⟶ E` is the extension of scalars of the `𝒪_E`-trace, through the
 canonical scalar/direct-image comparison. -/
 theorem Family.rational_traceq_eq {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
@@ -377,16 +367,14 @@ theorem Family.rational_traceq_eq {Y : Scheme.{u}} (family : Family l Y)
           (family.rational E).traceq :=
   (family.toRational E).q.trace
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--7`: with `E`-coefficients,
-`Tr_{p₁} ∘ Rp_{1*}(δ_E) = 1`. -/
+/-- With `E`-coefficients, `Tr_{p₁} ∘ Rp_{1*}(δ_E) = 1`. -/
 theorem Family.rational_integration₁ {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (family.rational E).support₁.hom ≫ (family.rational E).R₁.R.map (family.rational E).delta ≫
       (family.rational E).trace₁ = 𝟙 _ :=
   (family.rational E).integration₁
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--8`: with `E`-coefficients,
-`Tr_{p₂} ∘ Rp_{2*}(δ_E) = 1`. -/
+/-- With `E`-coefficients, `Tr_{p₂} ∘ Rp_{2*}(δ_E) = 1`. -/
 theorem Family.rational_integration₂ {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (family.rational E).support₂.hom ≫ (family.rational E).R₂.R.map (family.rational E).delta ≫
@@ -395,9 +383,8 @@ theorem Family.rational_integration₂ {Y : Scheme.{u}} (family : Family l Y)
 
 /-! ### `ℚ̄_ℓ`-coefficients -/
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--9`: the class
-`δ_{ℚ̄_ℓ} : Δ_* ℚ̄_ℓ ⟶ ℚ̄_ℓ(1)[2]` is the extension of scalars of `δ_E` for every finite stage
-`E`. -/
+/-- The class `δ_{ℚ̄_ℓ} : Δ_* ℚ̄_ℓ ⟶ ℚ̄_ℓ(1)[2]` is the extension of scalars of `δ_E` for every
+finite stage `E`. -/
 theorem Family.closure_delta_eq {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (derivedScalars (Profinite.padicSubfieldRingObjToPadicAlgCl l E) (diagonalSurface Y)).map
@@ -405,9 +392,8 @@ theorem Family.closure_delta_eq {Y : Scheme.{u}} (family : Family l Y)
       (family.toClosure E).supported.iso.hom ≫ family.closure.delta :=
   (family.toClosure E).delta
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--10`: the trace
-`Tr_q : Rq_* ℚ̄_ℓ(1)[2] ⟶ ℚ̄_ℓ` is the extension of scalars of the `E`-trace for every finite
-stage `E`. -/
+/-- The trace `Tr_q : Rq_* ℚ̄_ℓ(1)[2] ⟶ ℚ̄_ℓ` is the extension of scalars of the `E`-trace for every
+finite stage `E`. -/
 theorem Family.closure_traceq_eq {Y : Scheme.{u}} (family : Family l Y)
     (E : PadicAlgCl.FiniteIntermediateField l) :
     (derivedScalars (Profinite.padicSubfieldRingObjToPadicAlgCl l E) Y).map
@@ -416,15 +402,13 @@ theorem Family.closure_traceq_eq {Y : Scheme.{u}} (family : Family l Y)
         family.closure.Rq.R.map ((family.toClosure E).lineP.shift _) ≫ family.closure.traceq :=
   (family.toClosure E).q.trace
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--11`: with `ℚ̄_ℓ`-coefficients,
-`Tr_{p₁} ∘ Rp_{1*}(δ_{ℚ̄_ℓ}) = 1`. -/
+/-- With `ℚ̄_ℓ`-coefficients, `Tr_{p₁} ∘ Rp_{1*}(δ_{ℚ̄_ℓ}) = 1`. -/
 theorem Family.closure_integration₁ {Y : Scheme.{u}} (family : Family l Y) :
     family.closure.support₁.hom ≫ family.closure.R₁.R.map family.closure.delta ≫
       family.closure.trace₁ = 𝟙 _ :=
   family.closure.integration₁
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--12`: with `ℚ̄_ℓ`-coefficients,
-`Tr_{p₂} ∘ Rp_{2*}(δ_{ℚ̄_ℓ}) = 1`. -/
+/-- With `ℚ̄_ℓ`-coefficients, `Tr_{p₂} ∘ Rp_{2*}(δ_{ℚ̄_ℓ}) = 1`. -/
 theorem Family.closure_integration₂ {Y : Scheme.{u}} (family : Family l Y) :
     family.closure.support₂.hom ≫ family.closure.R₂.R.map family.closure.delta ≫
       family.closure.trace₂ = 𝟙 _ :=
@@ -476,10 +460,10 @@ def DiagramTracePullback
       (baseW g) (baseP g) data.geometry.second_square d.R₂ d'.R₂ d.p₂_canonical
       d'.p₂_canonical data.endpoints.lineW data.endpoints.cP d.trace₂ d'.trace₂
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--13`: the diagonal classes of the
-canonical families are compatible with base change along a morphism `g : Y' ⟶ Y` of separated
-`k`-schemes of finite type: for `𝒪_E`-coefficients through the canonical comparison of the
-Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some comparison of the Tate twists. -/
+/-- The diagonal classes of the canonical families are compatible with base change along a morphism
+`g : Y' ⟶ Y` of separated `k`-schemes of finite type: for `𝒪_E`-coefficients through the canonical
+comparison of the Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some comparison of the
+Tate twists. -/
 theorem Family.IsCanonical.delta_pullback (k : Type u) [Field k] [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ l)] {Y Y' : Scheme.{u}} [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
@@ -499,10 +483,10 @@ theorem Family.IsCanonical.delta_pullback (k : Type u) [Field k] [Fact (ringChar
       (fun X ↦ spQbarTwist X l) family.closure family'.closure mP mW := by
   sorry
 
-/-- Blueprint `proposition-ell-adic-cycle-class-diagonal--14`: the traces of the canonical
-families are compatible with base change along a morphism `g : Y' ⟶ Y` of separated
-`k`-schemes of finite type: for `𝒪_E`-coefficients through the canonical comparison of the
-Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some comparison of the Tate twists. -/
+/-- The traces of the canonical families are compatible with base change along a morphism
+`g : Y' ⟶ Y` of separated `k`-schemes of finite type: for `𝒪_E`-coefficients through the
+canonical comparison of the Tate twists, and for `E`- and `ℚ̄_ℓ`-coefficients through some
+comparison of the Tate twists. -/
 theorem Family.IsCanonical.trace_pullback (k : Type u) [Field k] [Fact (ringChar k).Prime]
     [Fact (ringChar k ≠ l)] {Y Y' : Scheme.{u}} [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]

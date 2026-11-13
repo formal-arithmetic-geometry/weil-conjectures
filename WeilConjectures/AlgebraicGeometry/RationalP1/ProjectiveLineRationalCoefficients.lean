@@ -14,9 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.EllAdicCycl
 
 Let `k` be a field of characteristic `p ≠ ℓ`, let `Y` be a separated `k`-scheme of finite type
 and `q : ℙ¹_Y ⟶ Y` the projection. For `Λ = E` a finite extension of `ℚ_ℓ` or `Λ = ℚ̄_ℓ`
-(`c = some E` or `c = none`), blueprint `proposition-projective-line-rational-coefficients`
-asserts that `q^*(1)[2]` is right adjoint to `Rq_*` on the localizing categories of bounded
-constructible complexes, and hence agrees with the exceptional inverse image `q^!`.
+(`c = some E` or `c = none`), we show that `q^*(1)[2]` is right adjoint to `Rq_*` on the
+localizing categories of bounded constructible complexes, and hence agrees with the exceptional
+inverse image `q^!`.
 
 The functors are `AlgebraicGeometry.ProEtale.RationalP1.push` (`Rq_*`) and
 `AlgebraicGeometry.ProEtale.RationalP1.exceptional` (`q^*(1)[2]`), on
@@ -25,9 +25,9 @@ The functors are `AlgebraicGeometry.ProEtale.RationalP1.push` (`Rq_*`) and
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.RationalP1.nonempty_push_adjunction_exceptional`:
-  `Rq_* ⊣ q^*(1)[2]` (`proposition-projective-line-rational-coefficients--1`).
+  `Rq_* ⊣ q^*(1)[2]`.
 - `AlgebraicGeometry.ProEtale.RationalP1.exists_rightAdjoint_iso_exceptional`:
-  `q^! ≅ q^*(1)[2]` (`proposition-projective-line-rational-coefficients--2`).
+  `q^! ≅ q^*(1)[2]`.
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +47,8 @@ variable (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
 
-/-- Blueprint `proposition-projective-line-rational-coefficients--1`: for `Λ = E` or `ℚ̄_ℓ`,
-the functor `q^*(1)[2] : Loc(D^b_ctf(Y, Λ)) ⥤ Loc(D^b_ctf(ℙ¹_Y, Λ))` is right adjoint to
-`Rq_*`. -/
+/-- For `Λ = E` or `ℚ̄_ℓ`, the functor `q^*(1)[2] : Loc(D^b_ctf(Y, Λ)) ⥤ Loc(D^b_ctf(ℙ¹_Y, Λ))`
+is right adjoint to `Rq_*`. -/
 theorem nonempty_push_adjunction_exceptional :
     Nonempty (push l c k (ringChar k) (Fact.out : ringChar k ≠ l) Y ⊣
       exceptional l c k (ringChar k) (Fact.out : ringChar k ≠ l) Y) := by
@@ -61,11 +60,10 @@ theorem nonempty_push_adjunction_exceptional :
       (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
   exact rationalP1_adjunction_assembly l c k Y
 
-/-- Blueprint `proposition-projective-line-rational-coefficients--2`: for `Λ = E` or `ℚ̄_ℓ`,
-`q^! ≅ q^*(1)[2]`. Precisely: for every compactification of `q` and every right adjoint `G` of
-the corresponding `Rq_! : Loc(D^b_ctf(ℙ¹_Y, Λ)) ⥤ Loc(D^b_ctf(Y, Λ))` (such as the one of
-`theorem-existence-exceptional-inverse-image`), `G` is isomorphic to `q^*(1)[2]` under the
-identifications `Loc(D^b_ctf(-, Λ)) = Loc(D^b_c(-, Λ))`. -/
+/-- For `Λ = E` or `ℚ̄_ℓ`, `q^! ≅ q^*(1)[2]`: for every compactification of `q` and every
+right adjoint `G` of the corresponding `Rq_! : Loc(D^b_ctf(ℙ¹_Y, Λ)) ⥤ Loc(D^b_ctf(Y, Λ))`,
+`G` is isomorphic to `q^*(1)[2]` under the identifications
+`Loc(D^b_ctf(-, Λ)) = Loc(D^b_c(-, Λ))`. -/
 theorem exists_rightAdjoint_iso_exceptional
     (compactification : Compactification.BoundaryCompactification (ProjectiveLine Y ↘ Y))
     (h : ∀ A, localizingClosureProEtale (coefficient l c).X (ProjectiveLine Y) A →
