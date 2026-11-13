@@ -429,8 +429,10 @@ theorem adicResidue_koszul_coefficient_cone_comparison
             ((HomologicalComplex.functorEquivalence
               (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
               (homOfLE h).op  := by
+  run_tac Lean.logInfo m!"PH574 start remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   have _ := hqA
   cases ha
+  run_tac Lean.logInfo m!"PH574 cases remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   intro O b ε hε
   obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hq⟩ :=
     adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U
@@ -439,9 +441,11 @@ theorem adicResidue_koszul_coefficient_cone_comparison
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
       (Ideal.span (Set.range a))) x) U
   refine ⟨E, hadd, hlim, hcolim, ?_⟩
+  run_tac Lean.logInfo m!"PH574 realization remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
   apply ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U) q
     (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U) hq ε hε
+  run_tac Lean.logInfo m!"PH574 final remaining: {(← Lean.getRemainingHeartbeats) / 1000}"
 
 end AlgebraicGeometry.Scheme
