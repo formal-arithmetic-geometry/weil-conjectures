@@ -124,7 +124,20 @@ private theorem injectiveContinuity_of_derived
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
-set_option trace.profiler true in
+-- Build complex colimits degreewise, fixing the module category before searching for colimits.
+local instance closedCostalkInjectiveContinuityHasColimit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] (X : Scheme.{u}) {I : Type (u + 1)} [SmallCategory I]
+    (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) ℤ) : HasColimit N := by
+  let C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+  have : HasColimitsOfShape I C := inferInstance
+  have (n : ℤ) : HasColimit (N ⋙ HomologicalComplex.eval C (.up ℤ) n) :=
+    HasColimitsOfShape.has_colimit _
+  exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval N⟩⟩⟩
+
+-- Internal module colimit inference needs a larger typeclass search budget.
+set_option synthInstance.maxSize 4096 in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
 of injective complexes with a common lower bound.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), closed costalk step, using (3.4)
