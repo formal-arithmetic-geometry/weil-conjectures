@@ -279,12 +279,14 @@ private theorem adicResidueConeComparison_span
         HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =
       HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫
         HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat) :
-    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a))).over U
+    let R := (completed (coefficientProEtaleModelTopology.{u, v} X) A
+      (Ideal.span (Set.range a))).over U
     let b := fun i ↦ ringedKoszulSliceSection
       (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
-      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
-        (a i)) U
-    ∀ (ε : ringedKoszulDualTower R r b ⟶ adicResidueQuotientCoefficientTower X (Ideal.span (Set.range a)) U)
+      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
+        (Ideal.span (Set.range a))) (a i)) U
+    ∀ (ε : ringedKoszulDualTower R r b ⟶
+        adicResidueQuotientCoefficientTower X (Ideal.span (Set.range a)) U)
       (_hε : ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =
         (show ringedSiteRingComplex R ⟶
           (adicResidueQuotientCoefficientTower X (Ideal.span (Set.range a)) U).obj (op n) from
