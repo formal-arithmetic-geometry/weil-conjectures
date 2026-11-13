@@ -38,6 +38,43 @@ private theorem map_conjugation_comp
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← H.map_comp, ← H.map_comp, hc, H.map_comp]
 
+/-- Naturality of an adjunction unit transports an augmentation square. -/
+private theorem adjunction_unit_map_augmentation
+    {C D : Type*} [Category* C] [Category* D]
+    {Q : C ⥤ D} {P : D ⥤ C} (adj : Q ⊣ P)
+    {F A : C} {F' B : D} (i : F ⟶ A) (i' : F' ⟶ B)
+    (t : Q.obj A ⟶ B) (c : Q.obj F ⟶ F')
+    (ht : Q.map i ≫ t = c ≫ i') :
+    i ≫ adj.unit.app A ≫ P.map t = (adj.unit.app F ≫ P.map c) ≫ P.map i' := by
+  rw [← Category.assoc, adj.unit.naturality i]
+  change (adj.unit.app F ≫ P.map (Q.map i)) ≫ P.map t = _
+  rw [Category.assoc, ← P.map_comp, ht, P.map_comp, Category.assoc]
+
+set_option profiler true in
+/-- Pushforward identifies the global-section complexes, with the inverse given by
+restriction along the inverse image of the top open. -/
+private theorem exists_pushforward_sections_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : CochainComplex X.Modules ℕ) :
+    ∃ a : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ≅
+      ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+          (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj K),
+      ∀ n : ℕ, a.inv.f n = (K.X n).presheaf.map
+        (eqToHom (by simp) : (⊤ : X.Opens) ⟶ f ⁻¹ᵁ (⊤ : Y.Opens)).op := by
+  let a : ((RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ≅
+      ((RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+        forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
+          (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj K := by
+    refine (HomologicalComplex.Hom.isoOfComponents
+      (fun n ↦ (presheaf (K.X n)).mapIso
+        (eqToIso (by simp) : op (f ⁻¹ᵁ (⊤ : Y.Opens)) ≅ op (⊤ : X.Opens))) ?_).symm
+    intro n m _
+    exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
+      (K.d n m)).naturality _
+  exact ⟨a, fun _ ↦ rfl⟩
+
 /-- The restriction-unit calculation on a single module, independent of resolutions. -/
 private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
     (U L : Z.Opens) (e : L ≤ U) (K : Z.Modules)
@@ -187,29 +224,11 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
     rw [HomologicalComplex.comp_f]
     change R.resolution.ι.f 0 ≫ (restrictAdjunction j).unit.app
       (R.resolution.cocomplex.X 0) ≫ P.map (t.f 0) = _
-    erw [← Category.assoc, (restrictAdjunction j).unit.naturality
-      (R.resolution.ι.f 0)]
-    change (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
-      P.map (Q.map (R.resolution.ι.f 0)) ≫ P.map (t.f 0) = _
-    erw [← P.map_comp, ht, P.map_comp]
-    rfl
+    exact adjunction_unit_map_augmentation (restrictAdjunction j)
+      (R.resolution.ι.f 0) (R'.resolution.ι.f 0) (t.f 0) (c.hom.app F) ht
   let Γ := RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace ⋙
     forget₂ _ AddCommGrpCat.{u}
-  let a : ((RingedSpace.globalSectionsFunctor L.toScheme.toRingedSpace ⋙
-      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)).obj
-        R'.resolution.cocomplex ≅
-      (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj
-        ((P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R'.resolution.cocomplex) := by
-    refine (HomologicalComplex.Hom.isoOfComponents
-      (fun n ↦ (presheaf (R'.resolution.cocomplex.X n)).mapIso
-        (eqToIso (by simp) : op (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≅
-          op (⊤ : L.toScheme.Opens))) ?_).symm
-    intro n m _
-    exact ((SheafOfModules.forget _ ⋙ PresheafOfModules.toPresheaf _).map
-      (R'.resolution.cocomplex.d n m)).naturality _
-  have ha : ∀ n : ℕ, a.inv.f n = (R'.resolution.cocomplex.X n).presheaf.map
-      (eqToHom (by simp) : (⊤ : L.toScheme.Opens) ⟶
-        j ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op := by intro n; rfl
+  obtain ⟨a, ha⟩ := exists_pushforward_sections_iso j R'.resolution.cocomplex
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let r := (NatTrans.mapHomologicalComplex
     (Functor.whiskerLeft (SheafOfModules.forget Z.ringCatSheaf ⋙

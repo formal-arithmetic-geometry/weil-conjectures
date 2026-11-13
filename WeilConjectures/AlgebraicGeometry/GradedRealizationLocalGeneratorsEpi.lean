@@ -54,7 +54,6 @@ private theorem over_hom_ext_of_locally_eq {X : Scheme.{u}}
     exact ht
   exact N.isSheaf.isSeparated V.unop S hcover _ _ (fun W v hv ↦ hv)
 
-set_option profiler true in
 /-- The specified finite homogeneous sections generate the algebra-module direct image
 on a fixed open. This is purely a local generation statement: the morphism need not be
  affine and the module need not be quasi-coherent.

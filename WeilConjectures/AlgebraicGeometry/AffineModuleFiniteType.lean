@@ -104,7 +104,6 @@ private theorem affine_generators_cover {X : Scheme.{u}}
   dsimp [q]
   infer_instance
 
-set_option profiler true in
 /-- Finite generation at a terminal object gives finite generating sections whenever
 finite free evaluation detects epimorphisms. -/
 private theorem finite_generators_iff_finite_terminal_sections
@@ -180,7 +179,6 @@ set_option hygiene false in
 local notation "PUSH" => SheafOfModules.pushforward.{u} (F := Opens.map f.base)
   (S := AR) (R := U.ringCatSheaf) (𝟙 AR)
 
-set_option profiler true in
 /-- On one affine open, finite global generators of the direct image over its
 sectionwise algebra are equivalent to finite generation of the inverse-image sections.
 Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB; Cohomology of
