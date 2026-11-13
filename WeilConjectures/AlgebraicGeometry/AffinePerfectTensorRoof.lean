@@ -37,7 +37,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option profiler true in
 -- Keep tensor instances as local abbreviations during the representative computation.
 private theorem affinePerfectTensorRoof_aux
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
@@ -77,6 +76,7 @@ private theorem affinePerfectTensorRoof_aux
         ∃ (γ : B ⟶ E'.obj) (bU : R.obj B ≅ R.obj A),
           bU.hom = R.map β ∧ α = bU.inv ≫ R.map γ := by
   classical
+  -- Reuse the tensor instances bound in the conclusion instead of elaborating them again.
   intro monoidal monoidalPreadditive
   let H := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf).obj (Opposite.op A, E'.obj)
@@ -86,6 +86,7 @@ private theorem affinePerfectTensorRoof_aux
   obtain ⟨J, hJ, hperfect, u, ξ, hu, hξ⟩ :=
     affine_koszul_section_roof X U hU ⟨H, hH⟩ (e.symm α)
   obtain ⟨γ, hβ, hγ⟩ := he J hJ u hu ξ (e.symm α) hξ
+  -- Infer the augmentation from its isomorphism proof, avoiding a second tensor computation.
   refine ⟨J, hJ, hperfect, u, γ, @asIso _ _ _ _ _ hβ, rfl, ?_⟩
   apply (Iso.eq_inv_comp _).2
   simpa only [asIso_hom, Equiv.apply_symm_apply] using hγ
