@@ -439,7 +439,7 @@ theorem adicResidue_koszul_coefficient_cone_comparison
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
       (Ideal.span (Set.range a))) x) U
   refine ⟨E, hadd, hlim, hcolim, ?_⟩
-  exact ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc
+  apply ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U) q
     (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U) hq ε hε
