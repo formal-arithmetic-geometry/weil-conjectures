@@ -164,7 +164,6 @@ lemma derivedComapLowerStarIso_inv_app_Qh
   erw [reassoc_of% hQ]
   erw [Iso.hom_inv_id_app_assoc]
 
-set_option profiler true in
 /-- The derived (Push) on the image of a complex `I`, through the units of the right derived
 pushforwards and the counits of the derived extensions of scalars, is the underived (Push). -/
 lemma derivedPushHom_app_Qh_fac
@@ -202,14 +201,11 @@ lemma derivedPushHom_app_Qh_fac
     ((f)_*⟦Λ⟧).rightDerivedFunctor ((f)_*⟦Λ'⟧).rightDerivedFunctor
     (derivedComapLowerStarIso a f).inv _ _ _ _ _ _ _ _ _ _ _ _ _ _ hX hY hP hβ hV hxy
 
-
-
 section Integral
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
   (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
-set_option profiler true in
 /-- **(Push) for `𝒪_E ⟶ E` on bounded below objects**: for a quasi-compact quasi-separated `f`
 and a bounded below `K ∈ D(𝒪_{E,X})`, the comparison `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` is an
 isomorphism. -/
