@@ -43,8 +43,6 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- The large existential target needs extra elaboration heartbeats.
 /-- The boundary of a square-zero extension is a derivation for the induced action.
 `σ` is the local quotient action on the kernel, commuting with restriction.
 `μ` is its action by global sections on the kernel sheaf. `ρ` is the induced
@@ -120,15 +118,15 @@ theorem boundary_derivation_square_zero (X : Scheme.{u})
   let hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map
       (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact :=
     fun k => (hrows k).1
-  let : PreservesFiniteLimits (RingedSpace.globalSectionsFunctor X.toRingedSpace) :=
-    inferInstanceAs (PreservesFiniteLimits
-      (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
-  obtain ⟨_, _, hglobal⟩ :=
-    CategoryTheory.exists_horseshoe_rightDerived_deltaFunctor
-      (RingedSpace.globalSectionsFunctor X.toRingedSpace)
-  obtain ⟨hΓ, _⟩ := hglobal
-      (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw) _hS
-      IA IB IC α β hαβ hιA hιB hH
+  have hΓ : ((ShortComplex.mk α β hαβ).map
+      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
+        (ComplexShape.up ℕ))).ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro k
+    have hr := hH k
+    change (ShortComplex.mk (α.f k) (β.f k) _).ShortExact at hr
+    exact (hr.splittingOfInjective.map
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace)).shortExact
   refine ⟨IA, IB, IC, α, β, hαβ, hιA, hιB, hH, hΓ, ?_⟩
   exact boundary_derivation_algebraic_data X B C p I i hw _hS _hsq IA IB IC α β hαβ
     hιA hιB hH hΓ
