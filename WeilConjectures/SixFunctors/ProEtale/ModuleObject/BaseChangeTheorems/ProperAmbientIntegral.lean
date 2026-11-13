@@ -89,16 +89,12 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
       (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
         sq)).app K)) :
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq').app K.obj) := by
-  obtain rfl := Subsingleton.elim sq'
-    (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)
-  have hθ := boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-    ℓ (Profinite.padicIntegersRingObj ℓ E) sq
   unfold baseChangeMap
-  apply isIso_exchangeRight_of_restrictFullyFaithful_app
+  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
+  refine isIso_exchangeRight_of_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
-    (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E)
-      (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left))
+    _
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ f K)
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
@@ -110,9 +106,12 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ sq)
-    hθ K
-  convert hres using 3
-  all_goals rfl
+    ?_ K ?_
+  · intro N
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison,
+      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
+  · convert hres using 3
+    all_goals rfl
 
 /-- **Proper base change on the ambient derived categories** (blueprint
 `det-thm-sfb-proper-base-change-integral` (3), for `𝒪_E`-coefficients): for a cartesian square
