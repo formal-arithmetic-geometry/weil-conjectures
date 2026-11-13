@@ -106,6 +106,24 @@ instance isIso_presheafHomRestrict (M : modulesPseudofunctor.obj (.mk (op Y))) (
   rw [presheafHomRestrict_eq]
   infer_instance
 
+-- Prove the compatibility abstractly so that naturality does not unfold module pullbacks.
+set_option profiler true in
+private lemma presheafHom_precomp_restrict_naturality
+    {C : Type*} [Category C] (F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat)
+    {S S' : C} (q : S' ⟶ S) (A B : F.obj (.mk (op S))) (P : F.obj (.mk (op S')))
+    (a : P ⟶ (F.map q.op.toLoc).toFunctor.obj A) {T T' : Over S'} (g : T' ⟶ T)
+    (x : (F.presheafHom A B).obj (op ((Over.map q).obj T))) :
+    (F.map T'.hom.op.toLoc).toFunctor.map a ≫
+        (F.overMapCompPresheafHomIso A B q).hom.app (op T')
+          ((F.presheafHom A B).map ((Over.map q).map g).op x) =
+      (F.presheafHom P ((F.map q.op.toLoc).toFunctor.obj B)).map g.op
+        ((F.map T.hom.op.toLoc).toFunctor.map a ≫
+          (F.overMapCompPresheafHomIso A B q).hom.app (op T) x) := by
+  rw [Pseudofunctor.presheafHom_map_comp (F := F)]
+  exact congrArg₂ (fun b c ↦ b ≫ c)
+    (pullHom_map (F := F) a T.hom g.left T'.hom (Over.w g)).symm
+    (NatTrans.naturality_apply (F.overMapCompPresheafHomIso A B q).hom g.op x)
+
 set_option profiler true in
 lemma presheafHomRestrict_naturality (M : modulesPseudofunctor.obj (.mk (op Y))) {T T' : Over X}
     (g : T' ⟶ T)
@@ -113,13 +131,8 @@ lemma presheafHomRestrict_naturality (M : modulesPseudofunctor.obj (.mk (op Y)))
     presheafHomRestrict f M T'
         ((modulesPseudofunctor.presheafHom (unitObj Y) M).map ((Over.map f).map g).op x) =
       (modulesPseudofunctor.presheafHom (unitObj X) _).map g.op (presheafHomRestrict f M T x) := by
-  dsimp only [presheafHomRestrict]
-  rw [Pseudofunctor.presheafHom_map_comp (F := modulesPseudofunctor)]
-  exact congrArg₂ (fun a b ↦ a ≫ b)
-    (pullHom_map (F := modulesPseudofunctor) (unitRestrictIso f).inv T.hom g.left T'.hom
-      (Over.w g)).symm
-    (NatTrans.naturality_apply
-      (Pseudofunctor.overMapCompPresheafHomIso modulesPseudofunctor (unitObj Y) M f).hom g.op x)
+  exact presheafHom_precomp_restrict_naturality modulesPseudofunctor f (unitObj Y) M
+    (unitObj X) (unitRestrictIso f).inv g x
 
 lemma presheafHomRestrict_smulMor (M : modulesPseudofunctor.obj (.mk (op Y))) (T : Over X)
     (x : (modulesPseudofunctor.presheafHom (unitObj Y) M).obj (op ((Over.map f).obj T)))
