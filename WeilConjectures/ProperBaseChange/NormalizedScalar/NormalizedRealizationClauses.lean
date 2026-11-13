@@ -91,7 +91,6 @@ def DerivedScalarData : Prop :=
         ((NatTrans.mapHomologicalComplex
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
-set_option profiler true in
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
 (blueprint: lem-weil-pbc-normalized-realization-clauses).
