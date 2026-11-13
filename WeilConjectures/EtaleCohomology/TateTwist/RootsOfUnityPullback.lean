@@ -181,7 +181,7 @@ theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n]
       (primitiveRootsCover Γ(Y, ⊤) n), ⊤)) ^ i - (ζ : Γ(pullback Y.toSpecΓ
       (primitiveRootsCover Γ(Y, ⊤) n), ⊤)) ^ j) := by
     intro i hi j hj hij
-    simpa [ζ, ← map_pow, ← map_sub] using
+    simpa only [ζ, IsUnit.unit_spec, ← map_pow, ← map_sub] using
       (PrimitiveRootsAlgebra.isUnit_zeta_pow_sub_zeta_pow Γ(Y, ⊤) n hi hj hij).map
         ((Scheme.ΓSpecIso (.of (PrimitiveRootsAlgebra Γ(Y, ⊤) n))).inv ≫
           (pullback.snd Y.toSpecΓ (primitiveRootsCover Γ(Y, ⊤) n)).appTop).hom
@@ -193,8 +193,10 @@ theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n]
     (isIso_upperStar_map_upperStarRootsOfUnitySheafToRootsOfUnitySheaf n _ g hcomp)
   intro x
   obtain ⟨v, hv⟩ := surjective_primitiveRootsCover Γ(Y, ⊤) n hn (Y.toSpecΓ (g x))
-  obtain ⟨y', hy', -⟩ := Scheme.Pullback.exists_preimage_pullback (g x) v hv.symm
-  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback x y' hy'.symm
+  obtain ⟨y', hy', -⟩ := Scheme.Pullback.exists_preimage_pullback
+    (f := Y.toSpecΓ) (g := primitiveRootsCover Γ(Y, ⊤) n) (g x) v hv.symm
+  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback
+    (f := g) (g := qY) x y' hy'.symm
   exact ⟨z, hz⟩
 
 end AlgebraicGeometry.Scheme
