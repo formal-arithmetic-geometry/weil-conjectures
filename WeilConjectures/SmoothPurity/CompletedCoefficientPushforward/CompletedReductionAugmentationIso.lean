@@ -205,7 +205,6 @@ private theorem complete_roosUnit (W : Scheme.{t})
   rw [← hc, ← Category.assoc]
   exact IsIso.comp_isIso' hu c.isIso_hom
 
-set_option profiler true in
 /-- Completeness makes the specified chain-level reduction augmentation invertible
 in any normalized total derived inverse-limit model.
 
