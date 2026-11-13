@@ -72,6 +72,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf
