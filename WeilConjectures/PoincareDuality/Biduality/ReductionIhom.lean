@@ -58,7 +58,7 @@ theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
     letI := Mod.extendScalarsMonoidal (integersModPowReduction X ℓ E n)
     letI := (Mod.extendScalars (integersModPowReduction X ℓ E n)).leftDerivedFunctorMonoidal
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).natTrans.app B) :=
+      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).app B) :=
   Mod.isIso_ihomComparison_leftDerivedExtendScalars _ _
     (zsmul_id_comp_integersModPowReduction X ℓ E n) (shortExact_integersModPowReduction X ℓ E n)
     A B
@@ -77,7 +77,7 @@ theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :
     letI := inst
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).natTrans.app B) := by
+      L(Mod.extendScalars (integersModPowReduction X ℓ E n)) A).app B) := by
   subst h
   exact isIso_ihomComparison_leftDerivedIntegersModPowReduction ℓ E n X A B
 

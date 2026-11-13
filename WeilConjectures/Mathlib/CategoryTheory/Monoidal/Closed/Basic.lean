@@ -119,7 +119,7 @@ def ihomComparison (A : C) : TwoSquare (ihom A) G G (ihom (G.obj A)) :=
 -/
 @[reassoc]
 lemma ihomComparison_ev (A B : C) :
-    G.obj A ◁ (ihomComparison G A).natTrans.app B ≫ (ihom.ev (G.obj A)).app (G.obj B) =
+    G.obj A ◁ (ihomComparison G A).app B ≫ (ihom.ev (G.obj A)).app (G.obj B) =
       μ G A _ ≫ G.map ((ihom.ev A).app B) :=
   mateEquiv_counit _ _ (μTwoSquare G A) B
 
@@ -134,7 +134,7 @@ lemma ihomComparison_ev (A B : C) :
 -/
 @[reassoc]
 lemma coev_ihomComparison (A B : C) :
-    G.map ((ihom.coev A).app B) ≫ (ihomComparison G A).natTrans.app (A ⊗ B) =
+    G.map ((ihom.coev A).app B) ≫ (ihomComparison G A).app (A ⊗ B) =
       (ihom.coev (G.obj A)).app (G.obj B) ≫ (ihom (G.obj A)).map (μ G A B) :=
   unit_mateEquiv _ _ (μTwoSquare G A) B
 
@@ -144,18 +144,18 @@ namespace Monoidal
 
 variable [G.Monoidal] [G.IsEquivalence]
 
-instance (A : C) : IsIso (LaxMonoidal.μTwoSquare G A).natTrans :=
+instance (A : C) : IsIso (LaxMonoidal.μTwoSquare G A) :=
   @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun X ↦ inferInstanceAs (IsIso (LaxMonoidal.μ G A X))
 
 /-- A monoidal functor which is an equivalence preserves internal homs: the comparison map
 `G [A, B] ⟶ [G A, G B]` is an isomorphism. Taking mates once more, along the adjunction
 `G ⊣ G⁻¹`, gives the conjugate of the tensorator, which is an isomorphism; and taking mates along
 adjoint equivalences preserves isomorphisms. -/
-instance (A : C) : IsIso (LaxMonoidal.ihomComparison G A).natTrans := by
+instance (A : C) : IsIso (LaxMonoidal.ihomComparison G A) := by
   let adj : G ⊣ G.inv := G.asEquivalence.toAdjunction
   have h := iterated_mateEquiv_conjugateEquiv (ihom.adjunction A) (ihom.adjunction (G.obj A))
     adj adj (LaxMonoidal.μTwoSquare G A)
-  have : IsIso (mateEquiv adj adj (LaxMonoidal.ihomComparison G A)).natTrans := by
+  have : IsIso (mateEquiv adj adj (LaxMonoidal.ihomComparison G A)) := by
     rw [LaxMonoidal.ihomComparison, h]
     infer_instance
   have : IsIso adj.unit := inferInstanceAs (IsIso G.asEquivalence.unitIso.hom)
@@ -177,7 +177,7 @@ with internal homs, `G [A, -] ≅ [G A, G -]`:
 ```
 -/
 noncomputable def commIhom (A : C) : ihom A ⋙ G ≅ G ⋙ ihom (G.obj A) :=
-  asIso (LaxMonoidal.ihomComparison G A).natTrans
+  asIso (LaxMonoidal.ihomComparison G A)
 
 /-- A monoidal functor `G` which is an equivalence between monoidal closed categories preserves
 internal homs: `G [A, B] ≅ [G A, G B]`. -/
@@ -272,16 +272,16 @@ variable {C D E : Type*} [Category* C] [Category* D] [Category* E] [MonoidalCate
 /-- The comparison map `G [A, B] ⟶ [G A, G B]` is characterised by its compatibility with
 evaluation. -/
 lemma ihomComparison_app_eq_curry (G : C ⥤ D) [G.LaxMonoidal] (A B : C) :
-    (ihomComparison G A).natTrans.app B = curry (μ G A _ ≫ G.map ((ihom.ev A).app B)) := by
+    (ihomComparison G A).app B = curry (μ G A _ ≫ G.map ((ihom.ev A).app B)) := by
   rw [← ihomComparison_ev, ← uncurry_eq, curry_uncurry]
 
 /-- The comparison map of a composite of lax monoidal functors is the composite of the comparison
 maps. -/
 lemma ihomComparison_comp_app (F : C ⥤ D) (G : D ⥤ E) [F.LaxMonoidal] [G.LaxMonoidal]
     (A B : C) :
-    (ihomComparison (F ⋙ G) A).natTrans.app B =
-      G.map ((ihomComparison F A).natTrans.app B) ≫
-        (ihomComparison G (F.obj A)).natTrans.app (F.obj B) := by
+    (ihomComparison (F ⋙ G) A).app B =
+      G.map ((ihomComparison F A).app B) ≫
+        (ihomComparison G (F.obj A)).app (F.obj B) := by
   rw [ihomComparison_app_eq_curry, curry_eq_iff, uncurry_eq]
   dsimp only [Functor.comp_obj, Functor.id_obj]
   rw [MonoidalCategory.whiskerLeft_comp_assoc, ihomComparison_ev, μ_natural_right_assoc,
@@ -291,8 +291,8 @@ lemma ihomComparison_comp_app (F : C ⥤ D) (G : D ⥤ E) [F.LaxMonoidal] [G.Lax
 /-- The comparison maps are compatible with monoidal natural transformations. -/
 lemma ihomComparison_app_comp_map_app {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
     (τ : F ⟶ F') [NatTrans.IsMonoidal τ] (A B : C) :
-    (ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.app B) =
-      τ.app _ ≫ (ihomComparison F' A).natTrans.app B ≫ (pre (τ.app A)).app (F'.obj B) := by
+    (ihomComparison F A).app B ≫ (ihom (F.obj A)).map (τ.app B) =
+      τ.app _ ≫ (ihomComparison F' A).app B ≫ (pre (τ.app A)).app (F'.obj B) := by
   apply uncurry_injective
   rw [uncurry_natural_right, uncurry_eq, ihomComparison_ev, uncurry_natural_left,
     uncurry_pre_app, uncurry_eq, ihomComparison_ev, Category.assoc, ← tensorHom_def'_assoc,
@@ -304,8 +304,8 @@ lemma ihomComparison_app_comp_map_app {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMo
 @[reassoc]
 lemma map_pre_app_comp_ihomComparison_app (G : C ⥤ D) [G.LaxMonoidal] {A A' : C} (f : A' ⟶ A)
     (B : C) :
-    G.map ((pre f).app B) ≫ (ihomComparison G A').natTrans.app B =
-      (ihomComparison G A).natTrans.app B ≫ (pre (G.map f)).app (G.obj B) := by
+    G.map ((pre f).app B) ≫ (ihomComparison G A').app B =
+      (ihomComparison G A).app B ≫ (pre (G.map f)).app (G.obj B) := by
   apply uncurry_injective
   rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, uncurry_pre_app, uncurry_eq,
     ihomComparison_ev, μ_natural_right_assoc, ← G.map_comp, id_tensor_pre_app_comp_ev,
@@ -315,11 +315,11 @@ lemma map_pre_app_comp_ihomComparison_app (G : C ⥤ D) [G.LaxMonoidal] {A A' : 
 if those of `F'` are. -/
 lemma isIso_ihomComparison_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.LaxMonoidal]
     (τ : F ≅ F') [NatTrans.IsMonoidal τ.hom] (A : C)
-    [IsIso (ihomComparison F' A).natTrans] : IsIso (ihomComparison F A).natTrans := by
+    [IsIso (ihomComparison F' A)] : IsIso (ihomComparison F A) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro B
   have h := ihomComparison_app_comp_map_app τ.hom A B
-  have : IsIso ((ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
+  have : IsIso ((ihomComparison F A).app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
     rw [h]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))

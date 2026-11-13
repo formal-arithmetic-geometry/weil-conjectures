@@ -34,8 +34,8 @@ variable {C D E F : Type*}
  equivalences. Source: the iterated-mate conjugation identity
 (blueprint: lem-sfb-finite-coefficient-heart-pullback). -/
 theorem inverseMate_isIso [G.IsEquivalence] [H.IsEquivalence]
-    (β : TwoSquare R₁ H G R₂) [IsIso β.natTrans] :
-    IsIso ((mateEquiv adj₁ adj₂).symm β).natTrans := by
+    (β : TwoSquare R₁ H G R₂) [IsIso β] :
+    IsIso ((mateEquiv adj₁ adj₂).symm β) := by
   let aG : G ⊣ G.asEquivalence.inverse := G.asEquivalence.toAdjunction
   let aH : H ⊣ H.asEquivalence.inverse := H.asEquivalence.toAdjunction
   have : IsIso aG.unit := by
@@ -45,18 +45,17 @@ theorem inverseMate_isIso [G.IsEquivalence] [H.IsEquivalence]
     simp only [aH, Equivalence.toAdjunction_counit]
     infer_instance
   have : IsIso β := by
-    change IsIso β.natTrans
     infer_instance
-  have hβ : IsIso (mateEquiv aH aG β).natTrans := by
-    dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.natTrans, TwoSquare.mk]
+  have hβ : IsIso (mateEquiv aH aG β) := by
+    dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk]
     infer_instance
   let α := (mateEquiv adj₁ adj₂).symm β
   have hh := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ aG aH α
   have hα : mateEquiv adj₁ adj₂ α = β := Equiv.apply_symm_apply _ _
-  have : IsIso (conjugateEquiv (adj₁.comp aH) (aG.comp adj₂) α.natTrans) := by
+  have : IsIso (conjugateEquiv (adj₁.comp aH) (aG.comp adj₂) α) := by
     rw [← hh, hα]
     exact hβ
-  exact conjugateEquiv_of_iso (adj₁.comp aH) (aG.comp adj₂) α.natTrans
+  exact conjugateEquiv_of_iso (adj₁.comp aH) (aG.comp adj₂) α
 end Mate
 
 variable (A : Type u) [CommRing A]
@@ -175,12 +174,12 @@ Source: Stacks 03D3; uniqueness of adjoints
   let β : TwoSquare (CondensedRing.lowerStar R f) (heart A R e X EX)
       (heart A R e Y EY) (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f) :=
     (heartPush A R e f EX EY).hom
-  have : IsIso β.natTrans := inferInstanceAs (IsIso (heartPush A R e f EX EY).hom)
+  have : IsIso β := inferInstanceAs (IsIso (heartPush A R e f EX EY).hom)
   have := inverseMate_isIso (CondensedRing.upperStarLowerStarAdjunction R f)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f) β
   exact (asIso ((mateEquiv (CondensedRing.upperStarLowerStarAdjunction R f)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f)).symm
-      β).natTrans).symm
+      β)).symm
 
 /-- The inverse of heartPull is precisely the mate of the sectionwise heartPush.
 Source: the definition by inverse mates

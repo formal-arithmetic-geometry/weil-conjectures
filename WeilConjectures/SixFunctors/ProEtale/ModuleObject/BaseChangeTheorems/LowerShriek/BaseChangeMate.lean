@@ -174,7 +174,7 @@ lemma isIso_exchange_boundedConstructibleExchangeFormalism {Z Z' : Over (Spec (.
     [IsProper t.left] (sq : IsPullback g' i' i t) :
     haveI := isIso_baseChange_boundedConstructibleExchangeFormalism ℓ sq
     IsIso ((𝔽).exchange (SepFinType.homMk g') (SepFinType.homMk i') (SepFinType.homMk i)
-      (SepFinType.homMk t) (SepFinType.homMk_comp_homMk sq.w)).natTrans := by
+      (SepFinType.homMk t) (SepFinType.homMk_comp_homMk sq.w)) := by
   have h := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ sq
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchange] at h
   exact h
@@ -265,7 +265,7 @@ theorem mateEquiv_boundedConstructibleLowerShriekOfCompactificationBaseChange
     haveI := isIso_exchange_triangleShriekTriangle ℓ (baseChangeTriangleRight c' (g := g))
     (mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ g')
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ g)
-        (boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ c c' h hi hp)).natTrans =
+        (boundedConstructibleLowerShriekOfCompactificationBaseChange ℓ c c' h hi hp)) =
       Functor.whiskerRight (boundedConstructibleLowerShriekOfCompactificationOfIsProperIso ℓ g').inv
           (boundedConstructibleLowerShriekOfCompactification ℓ c) ≫
         ((𝔽).compIso (triangleShriekTriangle (baseChangeTriangleLeft c c' h hi hp w))).hom ≫
@@ -334,7 +334,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'
   have hi := c.overBaseChange_isPullback_i sq
   have hp := c.overBaseChange_isPullback_g sq
   refine Eq.symm ((Equiv.symm_apply_eq _).2 ?_)
-  refine Eq.trans ?_ (congrArg TwoSquare.natTrans (mateEquiv_ofNatIsoRight _ _ _ _ _)).symm
+  refine Eq.trans ?_ ((mateEquiv_ofNatIsoRight _ _ _ _ _)).symm
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange ℓ sq c
     (c.ofIsPullback sq.overLeft) (c.overBaseChangeFst sq) hi hp]
   have hm := mateEquiv_mk_whiskerRight_comp_comp_whiskerLeft

@@ -205,7 +205,6 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
-set_option maxHeartbeats 800000 in
 -- Transposition elaborates localized module structures in two site universes.
 set_option synthInstance.maxSize 256 in
 /-- Morphisms to an internal Hom from a sheaf tensor are determined on localized pure tensors.

@@ -95,7 +95,6 @@ private theorem tensor_map_unit_section (W : Scheme.{u}) (n : ℕ)
     (finite_reduction_map_section l E W n (a.f p) U x)
     (finite_reduction_map_section l E W n (b.f q) U y)
 
-set_option maxHeartbeats 600000 in
 -- The tensor and restricted-scalar section types require substantial elaboration.
 /-- The left square agrees on every unit reduction tensor generator.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4

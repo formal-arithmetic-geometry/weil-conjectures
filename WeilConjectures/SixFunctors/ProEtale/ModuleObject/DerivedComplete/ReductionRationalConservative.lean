@@ -86,7 +86,6 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {X : Scheme.{u}}
 
-set_option maxHeartbeats 400000 in
 -- The instance arguments of `Functor.leftDerivedFunctorIsoMapDerivedCategory` for the extension
 -- of scalars along `𝒪_{E,X} ⟶ E_X` take long to unify.
 /-- **Conservativity of reduction and rationalization, via `derivedReduction`**: an

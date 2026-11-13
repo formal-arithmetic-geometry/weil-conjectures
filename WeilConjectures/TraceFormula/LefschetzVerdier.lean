@@ -158,6 +158,21 @@ lemma assemble_aux {A B B' B'' D E F : P} {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a�
     a₁ ≫ a₂ ≫ a₃ ≫ u ≫ b₁ ≫ b₂ = p ≫ u ≫ q := by
   rw [← hA, hB]
   simp only [Category.assoc]
+
+/-- Assemble two partial composites around a functorial map, transporting that map through
+a natural isomorphism. -/
+private lemma assemble_natIso_aux {S R : C ⥤ P} (ι : S ≅ R) {A B B' D E F H : P} {M N : C}
+    {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a₃ : B' ⟶ S.obj M}
+    {p₁ : A ⟶ D} {p₂ : D ⟶ E} {p₃ : E ⟶ R.obj M}
+    (hA : a₁ ≫ a₂ ≫ a₃ = p₁ ≫ p₂ ≫ p₃ ≫ ι.inv.app M) (u : M ⟶ N)
+    {b₁ : S.obj N ⟶ F} {b₂ : F ⟶ A}
+    {q₁ : R.obj N ⟶ H} {q₂ : H ⟶ D} {q₃ : D ⟶ A}
+    (hB : ι.hom.app N ≫ q₁ ≫ q₂ ≫ q₃ = b₁ ≫ b₂) :
+    a₁ ≫ a₂ ≫ a₃ ≫ S.map u ≫ b₁ ≫ b₂ =
+      p₁ ≫ (p₂ ≫ (p₃ ≫ R.map u ≫ q₁) ≫ q₂) ≫ q₃ := by
+  rw [assemble_aux hA (S.map u) hB]
+  simp only [Category.assoc]
+  rw [← ι.inv.naturality_assoc, Iso.inv_hom_id_app_assoc]
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -360,8 +375,6 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
   exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
     (comp_toPoint _) K
 
-set_option maxHeartbeats 1600000 in
--- the rewrites unify large composites of six-functor maps
 /-- **The pushed coefficient map is the global operator** (blueprint
 `thm-trf-fixed-point-localization`, proof): the coefficient pushforward `[a_X, a_C]_! u` of `u`
 along the diagram to the point is the global operator `T_c(u)`, read through
@@ -374,19 +387,11 @@ theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
           c.toPointDiagram.pushforwardCoeff ≫
           (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff) ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).inv.app K := by
-  have e : c.toPointDiagram.pushforwardCoeff = c.toPointDiagram.pushforwardCoeffUnit ≫
-      (boundedConstructibleLowerStar ℓ (toPoint c.C)).map c.u ≫
-      c.toPointDiagram.pushforwardCoeffCounit := rfl
-  have hu : (boundedConstructibleLowerStar ℓ (toPoint c.C)).map
-      c.u = (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ ≫
-        (boundedConstructibleLowerShriek ℓ (toPoint c.C)).map
-          c.u ≫
-        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ := by
-    simp
-  rw [globalOperator_eq, e, hu]
-  simp only [Category.assoc]
-  rw [reassoc_of% c.lowerShriek_map_unit_eq_pushforwardCoeffUnit,
-    ← c.lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit]
+  exact c.globalOperator_eq.trans
+    (CategoryTheory.assemble_natIso_aux
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C))
+      c.lowerShriek_map_unit_eq_pushforwardCoeffUnit c.u
+      c.lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit)
 
 /-- **The Lefschetz–Verdier formula** (blueprint `thm-trf-fixed-point-localization`,
 `sk-c-proper-global`): for `X` proper over `s`, an endocorrespondence `c` with proper ordinary
@@ -403,7 +408,7 @@ theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
     (F : c.FixedLocus) [IsProper F.F.hom]
     [HasRightDual
       ((boundedConstructibleLowerShriek ℓ (toPoint X)).obj K)] :
-    trace c.globalOperator = (c.traceClass F).integral := by
+    End.of (trace c.globalOperator) = (c.traceClass F).integral := by
   obtain ⟨T, hT⟩ : ∃ T : c.toPointDiagram.coeff ⟶ c.toPointDiagram.coeff, T =
       (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
         c.toPointDiagram.coeff ≫ c.toPointDiagram.pushforwardCoeff ≫
@@ -452,7 +457,7 @@ theorem trace_globalOperator_eq_sum_localTerm [IsProper c.c₂.left]
     (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).left.base)
       (Set.range (j i').left.base))
     (hcover : ⋃ i, Set.range (j i).left.base = Set.univ) :
-    trace c.globalOperator = ∑ i, (c.traceClass F).localTerm (j i) := by
+    End.of (trace c.globalOperator) = ∑ i, (c.traceClass F).localTerm (j i) := by
   rw [c.trace_globalOperator_eq_integral_traceClass F,
     BorelMooreSection.integral_eq_sum_localTerm B j hdisj hcover]
 end Correspondence

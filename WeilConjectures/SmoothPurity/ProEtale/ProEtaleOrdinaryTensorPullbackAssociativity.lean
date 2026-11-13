@@ -26,8 +26,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   PresheafOfModules.sheafificationAdjunction SheafOfModules.tensorObjIsoSheafification
   proEtaleOrdinaryTensorPullback proEtaleRingModuleAdjunction
 
-set_option maxHeartbeats 800000 in
--- The concrete site and tensor instances require additional elaboration heartbeats.
 /-- The unit-normalized ordinary pullback tensor comparison respects reassociation.
 Source: Stacks 03EL and 07A4 (blueprint: lem-pur-ordinary-pullback-tensor-associativity).
 Proof: take adjuncts, which makes both maps start at the ordinary triple tensor.

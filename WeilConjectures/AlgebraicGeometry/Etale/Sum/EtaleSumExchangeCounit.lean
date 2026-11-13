@@ -84,7 +84,7 @@ theorem etaleSumExchangeCounit
           (pullback.fst w e) inferInstance)).symm
         (TwoSquare.mk _ _ _ _
           (squareUpperStarIso (ModuleCat.{u + 1} A)
-            (IsPullback.of_hasPullback w e).toCommSq).hom)).natTrans ∧
+            (IsPullback.of_hasPullback w e).toCommSq).hom)) ∧
     (∀ M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A),
       (etaleLowerShriekBaseChangeMap A w e).app M =
         (etaleLowerShriek (ModuleCat.{u + 1} A) (pullback.fst w e) inferInstance).map
@@ -148,7 +148,7 @@ theorem etaleSumExchangeCounit
   let b' := upperStarLowerStarAdjunction B w
   let χ := squareUpperStarIso B (IsPullback.of_hasPullback w e).toCommSq
   have hm : etaleLowerShriekBaseChangeMap A w e =
-      ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans := by
+      ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) := by
     apply (conjugateEquiv (a.comp b') (b.comp a')).injective
     change (conjugateEquiv (a.comp b') (b.comp a'))
         ((conjugateEquiv (a.comp b') (b.comp a')).symm
@@ -176,16 +176,15 @@ theorem etaleSumExchangeCounit
   · intro K
     let : IsIso (etaleLowerShriekBaseChangeMap A w e) :=
       isIso_etaleLowerShriekBaseChangeMap A w e
-    have : IsIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans := by
+    have : IsIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) := by
       rw [← hm]
       exact isIso_etaleLowerShriekBaseChangeMap A w e
     have hloc := (exact_localization_inverse_mate a a' χ).2.1
-    have hi : asIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)).natTrans =
+    have hi : asIso ((mateEquiv a a').symm (TwoSquare.mk _ _ _ _ χ.hom)) =
         asIso (etaleLowerShriekBaseChangeMap A w e) := by
       apply Iso.ext
       exact hm.symm
     rw [hi] at hloc
-    dsimp only [TwoSquare.natTrans] at hloc
     have hc := mateEquiv_counit_symm
       (exactLocalizationDerivedAdjunction a) (exactLocalizationDerivedAdjunction a')
       (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso χ).hom) K

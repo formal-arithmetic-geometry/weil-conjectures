@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # The tensor-formula pullback of modules is left adjoint to pushforward

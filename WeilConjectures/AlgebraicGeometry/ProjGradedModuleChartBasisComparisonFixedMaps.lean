@@ -49,10 +49,61 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => (Proj 𝒜).Modules
 
+/-- Common localization descriptions give linear comparisons of principal-open sections.
+Keeping the sheaves abstract avoids unfolding their constructions in the comparison proof. -/
+private theorem basisComparison_of_common_localizations
+    (R : CommRingCat.{u}) (N : ModuleCat.{u} R)
+    (X : Scheme.{u}) (e : X ≅ Spec R) (E G : X.Modules)
+    (hE : ∃ b : E.val.obj (op ⊤) ≃+ N,
+      ∀ r : R,
+        let V := e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r
+        ∀ t : X.ringCatSheaf.obj.obj (op V) ≃+* Localization.Away r,
+          (∀ x : R, t ((e.hom.appLE ⊤ V (by simp))
+            ((Scheme.ΓSpecIso R).inv x)) =
+              algebraMap R (Localization.Away r) x) →
+          ∃ c : E.val.obj (op V) ≃+ LocalizedModule.Away r N,
+            (∀ (x : X.ringCatSheaf.obj.obj (op V)) (s : E.val.obj (op V)),
+              c (x • s) = t x • c s) ∧
+            ∀ s : E.val.obj (op ⊤), c (E.val.map V.leTop.op s) = mk (b s) 1)
+    (hG : ∃ b : G.val.obj (op ⊤) ≃+ N,
+      ∀ r : R,
+        let V := e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r
+        ∃ t : X.ringCatSheaf.obj.obj (op V) ≃+* Localization.Away r,
+          (∀ x : R, t ((e.hom.appLE ⊤ V (by simp))
+            ((Scheme.ΓSpecIso R).inv x)) =
+              algebraMap R (Localization.Away r) x) ∧
+          ∃ d : G.val.obj (op V) ≃+ LocalizedModule.Away r N,
+            (∀ (x : X.ringCatSheaf.obj.obj (op V)) (s : G.val.obj (op V)),
+              d (x • s) = t x • d s) ∧
+            ∀ s : G.val.obj (op ⊤), d (G.val.map V.leTop.op s) = mk (b s) 1) :
+    let B := Set.range (fun r : R ↦ e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)
+    ∃ a : E.val.obj (op ⊤) →+ G.val.obj (op ⊤),
+      ∀ V : B, ∃ l : E.val.obj (op V.val) →ₗ[
+        X.ringCatSheaf.obj.obj (op V.val)] G.val.obj (op V.val),
+        Function.Bijective l ∧ ∀ s : E.val.obj (op ⊤),
+          l (E.val.map V.val.leTop.op s) = G.val.map V.val.leTop.op (a s) := by
+  obtain ⟨bE, hE⟩ := hE
+  obtain ⟨bG, hG⟩ := hG
+  refine ⟨bG.symm.toAddMonoidHom.comp bE.toAddMonoidHom, ?_⟩
+  rintro ⟨V, r, rfl⟩
+  obtain ⟨t, ht, d, hdscalar, hdres⟩ := hG r
+  obtain ⟨c, hcscalar, hcres⟩ := hE r t ht
+  let l : E.val.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)) ≃ₗ[
+      X.ringCatSheaf.obj.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r))]
+      G.val.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)) :=
+    (c.trans d.symm).toLinearEquiv fun x s ↦ by
+      apply d.injective
+      change d (d.symm (c (x • s))) = d (x • d.symm (c s))
+      rw [d.apply_symm_apply, hdscalar, hcscalar, d.apply_symm_apply]
+  refine ⟨l.toLinearMap, l.bijective, ?_⟩
+  intro s
+  apply d.injective
+  change d (d.symm (c (E.val.map (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r).leTop.op s))) =
+    d (G.val.map (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r).leTop.op (bG.symm (bE s)))
+  rw [d.apply_symm_apply, hcres, hdres, bG.apply_symm_apply]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The large dependent chart-section signature and comparison require extra elaboration budget.
 /-- On each principal open of a fixed chart, there is a bijective linear comparison
 extending the same additive comparison on whole-chart sections.
 
@@ -114,35 +165,15 @@ theorem gradedModuleChart_basisComparison_fixed_core
           Function.Bijective l ∧ ∀ s : E.val.obj (op ⊤),
             l (E.val.map V.val.leTop.op s) =
               G.val.map V.val.leTop.op (a s) := by
-  classical
   dsimp only
   let e := basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1
   let E := Scheme.Modules.restrict F D[f].ι
   let G := Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f))) e.hom
-  obtain ⟨bE, hE⟩ := gradedModuleChart_principalLocalization 𝒜 Z rhoS rho U hU
-    theta thetaS htheta hcanonical F alpha hscalar hrestriction f
-  obtain ⟨bG, hG⟩ := tilde_principalLocalization_transport (CommRingCat.of R[f])
-    (ModuleCat.of R[f] (Z f)) D[f].toScheme e
-  refine ⟨bG.symm.toAddMonoidHom.comp bE.toAddMonoidHom, ?_⟩
-  rintro ⟨V, r, rfl⟩
-  obtain ⟨t, ht, d, hdscalar, hdres⟩ := hG r
-  obtain ⟨c, hcscalar, hcres⟩ := hE r t ht
-  let l : E.val.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)) →ₗ[
-      D[f].toScheme.ringCatSheaf.obj.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r))]
-      G.val.obj (op (e.hom ⁻¹ᵁ PrimeSpectrum.basicOpen r)) :=
-    { toFun := fun s ↦ d.symm (c s)
-      map_add' := fun s s' ↦ by simp
-      map_smul' := fun x s ↦ by
-        apply d.injective
-        simp only [RingHom.id_apply, d.apply_symm_apply, hdscalar, hcscalar]
-        rfl }
-  refine ⟨l, d.symm.bijective.comp c.bijective, ?_⟩
-  intro s
-  apply d.injective
-  dsimp only [l, LinearMap.coe_mk, AddHom.coe_mk,
-    AddMonoidHom.coe_comp, Function.comp_apply, AddEquiv.coe_toAddMonoidHom]
-  refine (d.apply_symm_apply _).trans ?_
-  exact (hcres s).trans ((hdres (bG.symm (bE s))).trans
-    (congrArg (fun q ↦ mk q 1) (bG.apply_symm_apply (bE s)))).symm
+  exact basisComparison_of_common_localizations (CommRingCat.of R[f])
+    (ModuleCat.of R[f] (Z f)) D[f].toScheme e E G
+    (gradedModuleChart_principalLocalization 𝒜 Z rhoS rho U hU
+      theta thetaS htheta hcanonical F alpha hscalar hrestriction f)
+    (tilde_principalLocalization_transport (CommRingCat.of R[f])
+      (ModuleCat.of R[f] (Z f)) D[f].toScheme e)
 
 end AlgebraicGeometry.Proj

@@ -234,7 +234,7 @@ def reductionPullbackMap :
     (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U 0))).symm
       (TwoSquare.mk _ _ _ _
         (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E 1) j).inv)
-    ).natTrans
+    )
 
 private theorem unique_mate
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -333,7 +333,6 @@ private theorem residue_open_image
   obtain ⟨hbc, hta⟩ := hd (min a b) (max b a) (by omega) K hK ht'
   exact ⟨hbc, min a b, max b a + d, hta⟩
 
-set_option maxHeartbeats 800000 in
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
@@ -424,9 +423,10 @@ theorem integral_open_direct_image
     (X ↘ Spec (.of k))
   let : IsNoetherian U := ⟨⟩
   let : IsNoetherian X := ⟨⟩
-  obtain ⟨hχ, hpush⟩ := internal_integral_direct_image_limits l E j
-  change IsIso (reductionPullbackMap l E j) at hχ
+  have hlimits := internal_integral_direct_image_limits l E j
+  have hχ : IsIso (reductionPullbackMap l E j) := hlimits.choose
   let := hχ
+  have hpush := hlimits.choose_spec
   let adj := (CondensedRing.derivedUpperStarLowerStarAdjunction
     (DerivedNakayama.integerRing l E) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
@@ -435,10 +435,18 @@ theorem integral_open_direct_image
     (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
         (DerivedNakayama.quotientRing l E 1) j)
-  obtain ⟨hcomplete, hmate⟩ := hpush K
-  obtain ⟨hinput, _⟩ := internal_integral_residue_criterion l E U
-  obtain ⟨houtput, htor'⟩ := internal_integral_residue_criterion l E X
-  obtain ⟨hcK, hrK, htK⟩ := (hinput K).mp hK
+  have hpushK := hpush K
+  have hcomplete := hpushK.1
+  have hmate := hpushK.2
+  have hinputAll := internal_integral_residue_criterion l E U
+  have hinput := hinputAll.1
+  have houtputAll := internal_integral_residue_criterion l E X
+  have houtput := houtputAll.1
+  have htor' := houtputAll.2
+  have hresK := (hinput K).mp hK
+  have hcK := hresK.1
+  have hrK := hresK.2.1
+  have htK := hresK.2.2
   have hcomplete' := hcomplete hcK
   obtain ⟨c, hc, hunique⟩ := unique_mate adj adj'
     (AdicCompletion.derivedReduction l E X 0)

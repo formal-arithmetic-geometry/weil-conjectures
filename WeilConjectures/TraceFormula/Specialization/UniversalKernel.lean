@@ -355,7 +355,6 @@ lemma leftDerivedUpperStarCompOfEq_inv_app_eq {B₀ B₁ B₂ : Scheme.{u}} (p :
   simp only [eqToHom_refl, Category.comp_id]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the instance of the abstract computation is matched against the unfolded Künneth maps
 /-- **The Künneth map along a common section of the two projections**: for morphisms of models
 `φ₁ φ₂ : P ⟶ M` and `ρ : M ⟶ P` with `ρ ≫ φ₁ = ρ ≫ φ₂ = 𝟙`, the pullback of the Künneth map

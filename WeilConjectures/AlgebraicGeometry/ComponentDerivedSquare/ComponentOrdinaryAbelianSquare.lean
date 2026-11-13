@@ -340,7 +340,6 @@ private lemma absolute_test_square
     have hE : E.hom = (prod.fst : affineComponentSpace X ⨯ S ⟶
         affineComponentSpace X) := by
       simp only [E, Over.star_obj_hom]
-      exact prod.lift_fst _ _
     apply profinite_pullback_ext E.hom h
     · apply profinite_prod_ext
       · change (prod.fst : affineComponentSpace X ⨯ S ⟶ affineComponentSpace X)

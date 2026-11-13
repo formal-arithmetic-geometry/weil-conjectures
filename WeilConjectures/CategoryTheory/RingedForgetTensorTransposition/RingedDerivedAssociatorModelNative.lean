@@ -53,7 +53,6 @@ variable {C : Type c} [SmallCategory C] (J : GrothendieckTopology C)
   (β : @SymmetricCategory _ _ S.monoidal)
   (coh : RingedDerivedTensorCoherence.{c, c, c, w} J R S T β)
 
-set_option maxHeartbeats 800000 in
 -- Comparing the two concrete tensor presentations requires additional elaboration steps.
 /-- The concrete cochain associator gives the derived associator on K-flat models.
 Source: Stacks 0FPQ, 0FPT

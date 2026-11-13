@@ -43,10 +43,10 @@ private theorem mate_normalization_at
       β₂.hom.app (E₂.obj (F.obj P)) = Q₃.map (a₂.unit.app (F.obj P)))
     (hτ : ∀ N, Fd.map (β₁.hom.app N) ≫ γ₁.hom.app (U₁.obj N) ≫ Q₃.map (τ.app N) =
       τd.app (Q₂.obj N) ≫ R₂.map (γ₂.hom.app N) ≫ β₂.hom.app (G.obj N)) :
-    ((mateEquiv d₁ d₂).symm (TwoSquare.mk _ _ _ _ τd)).natTrans.app (Q₁.obj P) ≫
+    ((mateEquiv d₁ d₂).symm (TwoSquare.mk _ _ _ _ τd)).app (Q₁.obj P) ≫
         Gd.map α₁ ≫ γ₂.hom.app (E₁.obj P) =
       L₂.map (γ₁.hom.app P) ≫ α₂ ≫
-        Q₄.map (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.app P) := by
+        Q₄.map (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).app P) := by
   apply (d₂.homEquiv _ _).injective
   apply (cancel_mono (β₂.hom.app (G.obj (E₁.obj P)))).mp
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
@@ -58,14 +58,14 @@ private theorem mate_normalization_at
   rw [← Q₃.map_comp, unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ τ) P]
   rw [Q₃.map_comp]
   have hb := β₂.hom.naturality
-    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans.app P)
+    (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).app P)
   simp only [Functor.comp_map, Functor.comp_obj] at hb
   rw [hb]
   rw [← reassoc_of% d₂.unit.naturality (γ₁.hom.app P)]
   convert! (congrArg
     (fun z ↦ γ₁.hom.app P ≫ z ≫
       Q₃.map (U₂.map (((mateEquiv a₁ a₂).symm
-        (TwoSquare.mk _ _ _ _ τ)).natTrans.app P))) h₂.symm) using 1;
+        (TwoSquare.mk _ _ _ _ τ)).app P))) h₂.symm) using 1;
     simp only [Category.assoc]
 
 private theorem mate_mapComplex_at
@@ -82,9 +82,9 @@ private theorem mate_mapComplex_at
         (TwoSquare.mk (R₁.mapHomologicalComplex (.up ℤ))
           (G.mapHomologicalComplex (.up ℤ)) (F.mapHomologicalComplex (.up ℤ))
           (R₂.mapHomologicalComplex (.up ℤ))
-          (NatTrans.mapHomologicalComplex τ (.up ℤ)))).natTrans.app P =
+          (NatTrans.mapHomologicalComplex τ (.up ℤ)))).app P =
       (NatTrans.mapHomologicalComplex
-        ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)).natTrans (.up ℤ)).app P := by
+        ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ τ)) (.up ℤ)).app P := by
   ext i
   simp only [mateEquiv,
     Equiv.symm_mk, Equiv.coe_fn_mk, NatTrans.comp_app,
@@ -134,11 +134,11 @@ private theorem mate_mapComplex_normalization_at
         Q₃.map ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app N) =
       τd.app (Q₂.obj N) ≫ R₂.map (γ₂.hom.app N) ≫
         β₂.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj N)) :
-    ((mateEquiv d₁ d₂).symm (TwoSquare.mk _ _ _ _ τd)).natTrans.app (Q₁.obj P) ≫
+    ((mateEquiv d₁ d₂).symm (TwoSquare.mk _ _ _ _ τd)).app (Q₁.obj P) ≫
         Gd.map α₁ ≫ γ₂.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P) =
       L₂.map (γ₁.hom.app P) ≫ α₂ ≫
         Q₄.map ((NatTrans.mapHomologicalComplex
-          ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans (.up ℤ)).app P) := by
+          ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)) (.up ℤ)).app P) := by
   have hc := mate_normalization_at
     (a₁.mapHomologicalComplex (.up ℤ)) (a₂.mapHomologicalComplex (.up ℤ))
     d₁ d₂ Q₁ Q₂ Q₃ Q₄ β₁ β₂ γ₁ γ₂
@@ -179,7 +179,7 @@ def finiteHomSiteOrdinaryBeta {n m : ℕ} (h : m ≤ n) :
   ((mateEquiv (ProEtale.etaleSheafExtendScalarsAdjunction (finiteHomQuotient l E h) X)
     ((coefficientDerivedSystemEvaluationCalculus l E
       X).choose.quotientCalculus.ordinaryAdjunction h)).symm
-    (TwoSquare.mk _ _ _ _ (finiteHomNuRestriction l E X h).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (finiteHomNuRestriction l E X h).inv))
 
 private theorem scalar_unit_normalization {n m : ℕ} (h : m ≤ n)
     (P : CochainComplex (Sheaf X.smallEtaleTopology

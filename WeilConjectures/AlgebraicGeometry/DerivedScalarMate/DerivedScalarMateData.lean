@@ -327,7 +327,7 @@ def beta {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :
     push f A ⋙ proEtaleRingDerivedExtension a ⟶
       proEtaleRingDerivedExtension (inverseMap f a) ⋙ push f B :=
-  (mateEquiv (adjunction f A) (adjunction f B) (scalarPullback f a).hom).natTrans
+  (mateEquiv (adjunction f A) (adjunction f B) (scalarPullback f a).hom)
 
 /-- The canonical restriction/direct-image comparison d, with its adjunction normalization.
 Source: Stacks 0D6E (blueprint: lem-sfb-derived-scalar-tensor-identification). -/

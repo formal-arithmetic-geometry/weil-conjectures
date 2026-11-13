@@ -29,8 +29,6 @@ variable [∀ Y : Scheme.{v},
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The dependent complex comparisons require substantial instance elaboration.
 private theorem composite_counit_of_associativity
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
     (K : CochainComplex
@@ -100,13 +98,12 @@ private theorem composite_counit_of_associativity
     NatTrans.id_app, Category.id_comp, Functor.map_comp, Category.assoc]
   have hn := (c i s).inv.naturality e
   dsimp only [Functor.comp_map, Functor.comp_obj] at hn
-  rw [reassoc_of% h, ← reassoc_of% hn]
+  simp only [reassoc_of% h, ← reassoc_of% hn]
   rw [hc]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The dependent complex comparisons require substantial instance elaboration.
 set_option linter.unusedVariables false in
 -- Preserve the original statement, including its unused lambda binder t.
 /-- The composites of a fixed morphism with the pinned tensor-pullback counits

@@ -371,11 +371,11 @@ private theorem inverseMate_exists
     {F : C ⥤ D} {G : D ⥤ C} {L : A ⥤ B} {R : B ⥤ A}
     {U : C ⥤ A} {V : D ⥤ B} (adj : F ⊣ G) (adjn : L ⊣ R)
     (d : G ⋙ U ≅ V ⋙ R)
-    [IsIso ((mateEquiv adj adjn).symm d.hom).natTrans] :
+    [IsIso ((mateEquiv adj adjn).symm d.hom)] :
     ∃ ξ : F ⋙ V ≅ U ⋙ L, ∀ M : C,
       U.map (adj.unit.app M) ≫ d.hom.app (F.obj M) ≫ R.map (ξ.hom.app M) =
         adjn.unit.app (U.obj M) := by
-  let e := asIso ((mateEquiv adj adjn).symm d.hom).natTrans
+  let e := asIso ((mateEquiv adj adjn).symm d.hom)
   refine ⟨e.symm, ?_⟩
   intro M
   have h := unit_mateEquiv_symm adj adjn d.hom M
@@ -425,7 +425,7 @@ theorem inverseEvaluation_exists {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
   have : ((𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)).IsContinuous
       (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology X)) := base_continuous f
-  have : IsIso ((mateEquiv adj adjn).symm d.hom).natTrans :=
+  have : IsIso ((mateEquiv adj adjn).symm d.hom) :=
     SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) (Scheme.proEtaleBaseChange f)
       ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology Y))

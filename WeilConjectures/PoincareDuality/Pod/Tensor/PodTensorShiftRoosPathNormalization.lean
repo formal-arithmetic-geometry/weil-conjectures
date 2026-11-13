@@ -49,7 +49,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] integralOperationsRoos
 
-set_option maxHeartbeats 600000 in
 -- Keep sharing in the four dependent path formulas; the wall-clock limit is unchanged.
 /-- The two derived paths have separate formulas in terms of strict tower maps.
 No equality between the two strict paths is assumed or asserted here.

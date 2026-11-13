@@ -212,7 +212,7 @@ canonical Weil structure `Fr_X^* Λ_X̄ = (Fr_X⁻¹)_* Λ_X̄ ≅ Λ_X̄`, pull
 blueprint `def-weil-ordinary-compact-cohomology`, with its canonical Weil structure. -/
 noncomputable def constant : FieldWeilSheaf k₀ Λ X where
   obj := .mk (FieldSheaf.unit Λ _)
-    (fieldLowerStarUnitIso Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
+    (fieldLowerStarUnitIso Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)
   property := isFieldConstructibleSheaf_fieldConstantSheaf _
 
 /-- The constant twist `F ⊗ 𝓑_b` of a constructible `Λ`-Weil sheaf by a unit `b` of `Λ`: the

@@ -63,7 +63,7 @@ theorem systemProperScalarEvaluation_compatibility
     let scalarMate := ((mateEquiv
       (pbcDerivedScalarAdjunction (scalarRingMap φ X))
       (pbcDerivedScalarAdjunction (scalarRingMap φ Y))).symm
-      (TwoSquare.mk _ _ _ _ (sfDerivedImageRestriction f φ).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (sfDerivedImageRestriction f φ).hom))
     let a := (mateEquiv levelE levelL).symm scalarMate
     ∀ A : coefficientSequenceDerived l E Y,
       (coefficientSequenceDerivedEvaluation l L X n).map

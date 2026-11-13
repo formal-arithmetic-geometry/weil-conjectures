@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Functor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalk of restriction along the relative inverse-image ring map
 
@@ -68,7 +69,6 @@ private theorem relative_ring_stalk_map
   rw [huv]
   exact (PresheafedSpace.stalkMap_germ f.toPshHom V y hV).symm
 
-set_option maxHeartbeats 400000 in
 -- Comparing germ actions unfolds the module structures on both colimit stalks.
 private theorem restriction_stalk_smul
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : X)

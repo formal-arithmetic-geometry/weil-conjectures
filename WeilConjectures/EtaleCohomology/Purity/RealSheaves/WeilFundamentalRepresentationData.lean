@@ -82,12 +82,12 @@ both are Frobenius elements at `x`. -/
 theorem isConj_frobenius (x : C.finitePoints)
     (π : fiber ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) ≅ fiber B.t) :
     IsConj (W.frobenius x) (B.frobLift ^ (C ↘ Spec (.of K)).degreeOver x.1 *
-      B.geomHom (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm)) := by
+      B.geomHom (.of (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm))) := by
   have := W.geometricallyConnected
   have := W.connectedSpace
   have : Finite (C.residueField x.1) := x.2
   have hg : (W.weilGroupEquiv (B.frobLift ^ (C ↘ Spec (.of K)).degreeOver x.1 *
-      B.geomHom (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm)) :
+      B.geomHom (.of (B.frobeniusLoop x π ≪≫ (B.frobPathPow _).symm))) :
         W.fundamentalGroup × Multiplicative ℤ) =
       (B.downAut (B.frobeniusLoop x π) (B.frobeniusLoop_comp_geometricFiberProj x),
         Multiplicative.ofAdd ((C ↘ Spec (.of K)).degreeOver x.1 : ℤ)) := by

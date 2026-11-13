@@ -100,8 +100,9 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
 @[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
   { (inferInstance : Ring (End (𝟙_ A))) with
     mul_comm := fun a b ↦ by
-      have h := unitEndAction_naturality a b
-      simpa only [End.mul_def, unitEndAction_unit] using h }
+      apply End.ext
+      have h := unitEndAction_naturality a.asHom b
+      simpa only [End.mul_asHom, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 
@@ -151,7 +152,7 @@ open Category
 namespace PowerQuotients
 variable {C : Type u} [Category.{v} C] [Abelian C]
   {U : C} (d : End U) (B : ℕ → C) (r : ∀ n, U ⟶ B n)
-  (hz : ∀ n, (d ^ n) ≫ r n = 0)
+  (hz : ∀ n, (d ^ n).asHom ≫ r n = 0)
   (hs : ∀ n, (ShortComplex.mk _ _ (hz n)).ShortExact)
 end PowerQuotients
 
@@ -216,7 +217,7 @@ private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
 
 private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  refine Mod.homMk (uniformizerMap l E) ?_
+  refine .of (Mod.homMk (uniformizerMap l E) ?_)
   change MonObj.mul ≫ uniformizerMap l E =
     integerRing l E ◁ uniformizerMap l E ≫ MonObj.mul
   apply Sheaf.tensor_hom_ext
@@ -248,7 +249,7 @@ private def reductionHom (n : ℕ) :
 
 private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (x : S.unop) :
-    (((uniformizerEnd l E).hom.hom.app S) f).down x =
+    (((uniformizerEnd l E).asHom.hom.hom.app S) f).down x =
       Padic.coefficientExtensionUniformizer l E * f.down x := by
   rfl
 
@@ -266,20 +267,20 @@ private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E 
 
 private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
     (f : (integerRing l E).obj.obj S) (s : S.unop) :
-    (((uniformizerEnd l E ^ n).hom.hom.app S) f).down s =
+    (((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s =
       Padic.coefficientExtensionUniformizer l E ^ n * f.down s := by
   induction n generalizing f with
   | zero =>
     change f.down s = _
     simp
   | succ n ih =>
-    rw [pow_succ, End.mul_def]
-    change (((uniformizerEnd l E ^ n).hom.hom.app S)
-      (((uniformizerEnd l E).hom.hom.app S) f)).down s = _
+    rw [pow_succ, End.mul_asHom]
+    change (((uniformizerEnd l E ^ n).asHom.hom.hom.app S)
+      (((uniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]
 
 private theorem reduction_zero (n : ℕ) :
-    (uniformizerEnd l E ^ n) ≫ reductionHom l E n = 0 := by
+    (uniformizerEnd l E ^ n).asHom ≫ reductionHom l E n = 0 := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   apply Mod.hom_ext
   apply Sheaf.hom_ext
@@ -291,7 +292,7 @@ private theorem reduction_zero (n : ℕ) :
   apply ContinuousMap.ext
   intro s
   change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
-      ((((uniformizerEnd l E ^ n).hom.hom.app S) f).down s) = 0
+      ((((uniformizerEnd l E ^ n).asHom.hom.hom.app S) f).down s) = 0
   rw [uniformizerPower_apply, map_mul]
   have h : Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)
       (Padic.coefficientExtensionUniformizer l E ^ n) = 0 := by
@@ -301,9 +302,9 @@ private theorem reduction_zero (n : ℕ) :
   rw [h, zero_mul]
 
 private theorem pointResolution (n : ℕ) :
-    (ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
+    (ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
       (reduction_zero l E n)).ShortExact := by
-  let S := ShortComplex.mk (uniformizerEnd l E ^ n) (reductionHom l E n)
+  let S := ShortComplex.mk (uniformizerEnd l E ^ n).asHom (reductionHom l E n)
     (reduction_zero l E n)
   have hs : (S.map (Mod.forget _)).ShortExact := by
     apply shortExact_of_sectionwise
@@ -319,8 +320,8 @@ private theorem pointResolution (n : ℕ) :
       apply ContinuousMap.ext
       intro t
       have h' := congrArg (fun f ↦ f.down t) h
-      change (((uniformizerEnd l E ^ n).hom.hom.app T) f).down t =
-        (((uniformizerEnd l E ^ n).hom.hom.app T) g).down t at h'
+      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) f).down t =
+        (((uniformizerEnd l E ^ n).asHom.hom.hom.app T) g).down t at h'
       rw [uniformizerPower_apply, uniformizerPower_apply] at h'
       exact mul_left_cancel₀ (pow_ne_zero n (uniformizer_ne_zero l E)) h'
     have hg : Function.Surjective S'.g := by
@@ -355,7 +356,7 @@ private theorem pointResolution (n : ℕ) :
       apply ULift.ext
       apply ContinuousMap.ext
       intro t
-      change (((uniformizerEnd l E ^ n).hom.hom.app T)
+      change (((uniformizerEnd l E ^ n).asHom.hom.hom.app T)
         (ULift.up (⟨g, hg⟩ : C(T.unop, Padic.coefficientExtensionIntegers l E)))).down t = _
       rw [uniformizerPower_apply]
       exact Subtype.ext (by simpa using hgf t)

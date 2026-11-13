@@ -178,7 +178,6 @@ lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
   -- the carrier of `K|_Z` is `Li^* K` by `rfl`; a bare `rfl` slowly unfolded the composites
   dsimp only [weilUpperStar_obj_carrier]
 
-set_option maxHeartbeats 1000000 in
 -- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **The compactly supported Frobenius commutes with the pullback to a closed piece**: for a
@@ -249,7 +248,6 @@ noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
 
-set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite
 omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- The square of the closed piece: `E_Z ∘ RΓ_c(η) = RΓ_c(η) ∘ F_c(K)` for the unit
@@ -289,7 +287,6 @@ theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
     Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the open-piece operator unfolds to a long composite
 omit [IsClosedImmersion i.left] in
 /-- The square of the open piece (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(a)):

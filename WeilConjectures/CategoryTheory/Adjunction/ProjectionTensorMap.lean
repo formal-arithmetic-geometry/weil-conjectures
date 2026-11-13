@@ -44,8 +44,8 @@ isomorphism is an isomorphism. -/
 lemma isIso_of_isIso_mateEquiv {A B C D : Type*} [Category* A] [Category* B] [Category* C]
     [Category* D] {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [IsIso adj₁.unit] [IsIso adj₁.counit] [IsIso adj₂.unit]
-    [IsIso adj₂.counit] (γ : TwoSquare G L₁ L₂ H) [IsIso (mateEquiv adj₁ adj₂ γ).natTrans] :
-    IsIso γ.natTrans := by
+    [IsIso adj₂.counit] (γ : TwoSquare G L₁ L₂ H) [IsIso (mateEquiv adj₁ adj₂ γ)] :
+    IsIso γ := by
   rw [← (mateEquiv adj₁ adj₂).symm_apply_apply γ]
   simp only [mateEquiv_symm_apply]
   infer_instance
@@ -139,17 +139,17 @@ theorem isIso_projectionTensorMap_of_isInvertible
         simp only [IsIso.inv_hom_id_assoc, Category.assoc, IsIso.hom_inv_id,
           Category.comp_id] at h
         exact h.symm }
-  have : IsIso α.natTrans := @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _
+  have : IsIso α := @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _
     fun M ↦ inferInstanceAs (IsIso (inv (π M N)))
-  have hα : (mateEquiv adj adj α).natTrans.app M = adj.projectionTensorMap π M N := by
+  have hα : (mateEquiv adj adj α).app M = adj.projectionTensorMap π M N := by
     apply ext_of_comp_counit (adj := adj)
     erw [mateEquiv_counit, map_projectionTensorMap_comp_counit]
     rfl
-  suffices IsIso (mateEquiv adj adj α).natTrans by rw [← hα]; infer_instance
+  suffices IsIso (mateEquiv adj adj α) by rw [← hα]; infer_instance
   let adjG := (tensorRightEquivalenceOfTensorIso e₁' e₂').toAdjunction
   let adjH := (tensorRightEquivalenceOfTensorIso e₁ e₂).toAdjunction
   have h := iterated_mateEquiv_conjugateEquiv adj adj adjG adjH α
-  have : IsIso (mateEquiv adjH adjG (mateEquiv adj adj α)).natTrans := by
+  have : IsIso (mateEquiv adjH adjG (mateEquiv adj adj α)) := by
     rw [h]
     infer_instance
   have : IsIso adjG.unit :=
@@ -388,8 +388,8 @@ theorem mateEquiv_inv_comp
     {Ga : Cx ⥤ Cx'} {Gb : Cy ⥤ Cy'} {Gc : Cz ⥤ Cz'}
     (ξf : TwoSquare Ga Lf Lf' Gb) (ξg : TwoSquare Gb Lg Lg' Gc) (ξh : TwoSquare Ga Lh Lh' Gc)
     (e : Lh ≅ Lf ⋙ Lg) (e' : Lh' ≅ Lf' ⋙ Lg')
-    (hξ : ∀ M : Cx, ξh.natTrans.app M ≫ Gc.map (e.hom.app M) =
-      e'.hom.app (Ga.obj M) ≫ Lg'.map (ξf.natTrans.app M) ≫ ξg.natTrans.app (Lf.obj M))
+    (hξ : ∀ M : Cx, ξh.app M ≫ Gc.map (e.hom.app M) =
+      e'.hom.app (Ga.obj M) ≫ Lg'.map (ξf.app M) ≫ ξg.app (Lf.obj M))
     (ρ : Rh ⟶ Rg ⋙ Rf)
     (hρ : ∀ K : Cz, Lg.map (Lf.map (ρ.app K)) ≫ Lg.map (adjf.counit.app _) ≫ adjg.counit.app K =
       e.inv.app _ ≫ adjh.counit.app K)
@@ -397,9 +397,9 @@ theorem mateEquiv_inv_comp
     (hρ' : ∀ K : Cz', Lg'.map (Lf'.map (ρ'.app K)) ≫ Lg'.map (adjf'.counit.app _) ≫
       adjg'.counit.app K = e'.inv.app _ ≫ adjh'.counit.app K)
     (K : Cz) :
-    Ga.map (ρ.app K) ≫ (mateEquiv adjf adjf' ξf).natTrans.app (Rg.obj K) ≫
-        Rf'.map ((mateEquiv adjg adjg' ξg).natTrans.app K) =
-      (mateEquiv adjh adjh' ξh).natTrans.app K ≫ ρ'.app (Gc.obj K) := by
+    Ga.map (ρ.app K) ≫ (mateEquiv adjf adjf' ξf).app (Rg.obj K) ≫
+        Rf'.map ((mateEquiv adjg adjg' ξg).app K) =
+      (mateEquiv adjh adjh' ξh).app K ≫ ρ'.app (Gc.obj K) := by
   apply ext_of_comp_counit (adj := adjf')
   apply ext_of_comp_counit (adj := adjg')
   simp only [Functor.map_comp, Category.assoc]
@@ -416,9 +416,9 @@ theorem mateEquiv_inv_comp
   rw [← Lg'.map_comp_assoc (Lf'.map _) (adjf'.counit.app _)]
   erw [mateEquiv_counit]
   simp only [Functor.map_comp, Category.assoc]
-  erw [← ξg.natTrans.naturality_assoc, ← ξg.natTrans.naturality_assoc]
+  erw [← ξg.naturality_assoc, ← ξg.naturality_assoc]
   simp only [Functor.comp_map, ← Lg'.map_comp_assoc]
-  erw [← ξf.natTrans.naturality_assoc]
+  erw [← ξf.naturality_assoc]
   rfl
 
 /-- **Base change of the tensor map.** Let `Ex : L ⋙ Gb ⟶ Ga ⋙ L'` be an exchange map with
@@ -448,14 +448,14 @@ theorem projectionTensorMap_mateEquiv
       Gb.map (φ ▷ N'') ≫ δb N' N'' = δb N N'' ≫ Gb.map φ ▷ Gb.obj N'')
     (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N))
     (Ex : L ⋙ Gb ⟶ Ga ⋙ L') [IsIso Ex] (ξ : TwoSquare Ga L L' Gb)
-    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
+    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.app M = 𝟙 _)
     (hEx : ∀ (M : Cx) (N : Cy), Gb.map (π M N) ≫ Ex.app (M ⊗ F.obj N) ≫
       L'.map (δa M (F.obj N)) ≫ L'.map (Ga.obj M ◁ κ N) =
         δb (L.obj M) N ≫ Ex.app M ▷ Gb.obj N ≫ π' (Ga.obj M) (Gb.obj N))
     (M N : Cy) :
-    Ga.map (adj.projectionTensorMap π M N) ≫ (mateEquiv adj adj' ξ).natTrans.app (M ⊗ N) ≫
+    Ga.map (adj.projectionTensorMap π M N) ≫ (mateEquiv adj adj' ξ).app (M ⊗ N) ≫
         R'.map (δb M N) =
-      δa (R.obj M) (F.obj N) ≫ (mateEquiv adj adj' ξ).natTrans.app M ▷ Ga.obj (F.obj N) ≫
+      δa (R.obj M) (F.obj N) ≫ (mateEquiv adj adj' ξ).app M ▷ Ga.obj (F.obj N) ≫
         R'.obj (Gb.obj M) ◁ κ N ≫ adj'.projectionTensorMap π' (Gb.obj M) (Gb.obj N) := by
   apply ext_of_comp_counit (adj := adj')
   rw [← cancel_epi (Gb.map (π (R.obj M) N) ≫ Ex.app _)]
@@ -463,14 +463,14 @@ theorem projectionTensorMap_mateEquiv
   erw [adj'.counit_naturality, reassoc_of% (mateEquiv_counit adj adj' ξ (M ⊗ N)),
     ← Ex.naturality_assoc]
   rw [reassoc_of% (hExξ _), map_projectionTensorMap_comp_counit]
-  have hx : L'.map ((mateEquiv adj adj' ξ).natTrans.app M ▷ Ga.obj (F.obj N)) ≫
+  have hx : L'.map ((mateEquiv adj adj' ξ).app M ▷ Ga.obj (F.obj N)) ≫
       L'.map (R'.obj (Gb.obj M) ◁ κ N) = L'.map (Ga.obj (R.obj M) ◁ κ N) ≫
-      L'.map ((mateEquiv adj adj' ξ).natTrans.app M ▷ F'.obj (Gb.obj N)) := by
+      L'.map ((mateEquiv adj adj' ξ).app M ▷ F'.obj (Gb.obj N)) := by
     rw [← L'.map_comp, ← L'.map_comp, whisker_exchange]
     rfl
   erw [reassoc_of% hx]
   rw [reassoc_of% (hEx (R.obj M) N)]
-  erw [← reassoc_of% (hπ' ((mateEquiv adj adj' ξ).natTrans.app M) (Gb.obj N))]
+  erw [← reassoc_of% (hπ' ((mateEquiv adj adj' ξ).app M) (Gb.obj N))]
   rw [IsIso.hom_inv_id_assoc, ← comp_whiskerRight, ← comp_whiskerRight]
   erw [mateEquiv_counit]
   rw [reassoc_of% (hExξ _)]
@@ -510,9 +510,9 @@ theorem mateEquiv_inv_comp_rightAdjointUniq
     (Exh : Lh ⋙ Gc ⟶ Ga ⋙ Lh') [IsIso Exh] (e : Lh ≅ Lf ⋙ Lg) (e' : Lh' ≅ Lf' ⋙ Lg')
     (hEx : ExchangeCompCompatible Exf Exg Exh e e') (K : Cz) :
     Ga.map ((rightAdjointUniq (adjh.ofNatIsoLeft e) (adjf.comp adjg)).hom.app K) ≫
-        (mateEquiv adjf adjf' (inv Exf)).natTrans.app (Rg.obj K) ≫
-        Rf'.map ((mateEquiv adjg adjg' (inv Exg)).natTrans.app K) =
-      (mateEquiv adjh adjh' (inv Exh)).natTrans.app K ≫
+        (mateEquiv adjf adjf' (inv Exf)).app (Rg.obj K) ≫
+        Rf'.map ((mateEquiv adjg adjg' (inv Exg)).app K) =
+      (mateEquiv adjh adjh' (inv Exh)).app K ≫
         (rightAdjointUniq (adjh'.ofNatIsoLeft e') (adjf'.comp adjg')).hom.app (Gc.obj K) := by
   refine mateEquiv_inv_comp adjf adjg adjh adjf' adjg' adjh' _ _ _ e e' (fun M ↦ ?_) _
     (rightAdjointUniq_ofNatIsoLeft_comp_counit adjf adjg adjh e) _
@@ -549,26 +549,26 @@ theorem isIso_mateEquiv_app_of_isInvertible
       Gb.map (φ ▷ N'') ≫ δb N' N'' = δb N N'' ≫ Gb.map φ ▷ Gb.obj N'')
     (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N)) [∀ N, IsIso (κ N)]
     (Ex : L ⋙ Gb ⟶ Ga ⋙ L') [IsIso Ex] (ξ : TwoSquare Ga L L' Gb)
-    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
+    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.app M = 𝟙 _)
     (hEx : ∀ (M : Cx) (N : Cy), Gb.map (π M N) ≫ Ex.app (M ⊗ F.obj N) ≫
       L'.map (δa M (F.obj N)) ≫ L'.map (Ga.obj M ◁ κ N) =
         δb (L.obj M) N ≫ Ex.app M ▷ Gb.obj N ≫ π' (Ga.obj M) (Gb.obj N))
-    (h₁ : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ Cy))) {N : Cy} (hN : IsInvertible N)
+    (h₁ : IsIso ((mateEquiv adj adj' ξ).app (𝟙_ Cy))) {N : Cy} (hN : IsInvertible N)
     (hFN : IsInvertible (F.obj N)) (hGN : IsInvertible (Gb.obj N))
     (hF'GN : IsInvertible (F'.obj (Gb.obj N))) :
-    IsIso ((mateEquiv adj adj' ξ).natTrans.app N) := by
+    IsIso ((mateEquiv adj adj' ξ).app N) := by
   have key := projectionTensorMap_mateEquiv adj adj' π π' hπ' δa δb hδb κ Ex ξ hExξ hEx (𝟙_ _) N
   have := isIso_projectionTensorMap_of_isInvertible adj π hπ hN hFN (𝟙_ _)
   have := isIso_projectionTensorMap_of_isInvertible adj' π' hπ' hGN hF'GN (Gb.obj (𝟙_ _))
   have h₂ : IsIso (Ga.map (adj.projectionTensorMap π (𝟙_ _) N) ≫
-      (mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N) ≫ R'.map (δb (𝟙_ _) N)) := by
+      (mateEquiv adj adj' ξ).app (𝟙_ _ ⊗ N) ≫ R'.map (δb (𝟙_ _) N)) := by
     rw [key]
     infer_instance
   have := (isIso_comp_left_iff _ _).1 h₂
-  have : IsIso ((mateEquiv adj adj' ξ).natTrans.app (𝟙_ _ ⊗ N)) :=
+  have : IsIso ((mateEquiv adj adj' ξ).app (𝟙_ _ ⊗ N)) :=
     IsIso.of_isIso_comp_right _ (R'.map (δb (𝟙_ _) N))
-  have hn := (mateEquiv adj adj' ξ).natTrans.naturality (λ_ N).hom
-  have h₄ : IsIso ((R ⋙ Ga).map (λ_ N).hom ≫ (mateEquiv adj adj' ξ).natTrans.app N) := by
+  have hn := (mateEquiv adj adj' ξ).naturality (λ_ N).hom
+  have h₄ : IsIso ((R ⋙ Ga).map (λ_ N).hom ≫ (mateEquiv adj adj' ξ).app N) := by
     rw [hn]
     infer_instance
   exact (isIso_comp_left_iff _ _).1 h₄

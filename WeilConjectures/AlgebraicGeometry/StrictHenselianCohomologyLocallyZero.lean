@@ -15,6 +15,7 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Positive étale cohomology classes are Zariski locally zero
 

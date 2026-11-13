@@ -120,7 +120,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {N : NearbyCyclesModel Y.left Y'.left} {P₃ : NearbyCyclesModel X₃.left X₃'.left}
   {P₁ : NearbyCyclesModel X₁.left X₁'.left}
 
-set_option maxHeartbeats 400000 in
 -- the abstract identity is instantiated on the ambient derived categories of `ℚ̄_ℓ`-modules
 /-- **The key identity of the refinement step for models** (blueprint `det-nearby-exchange-maps`,
 proof): for open immersions `φ₃ : N ⟶ P₃`, `φ₁ : N ⟶ P₁` of models and a morphism

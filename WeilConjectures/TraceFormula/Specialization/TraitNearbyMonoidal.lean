@@ -53,6 +53,8 @@ namespace CategoryTheory
 
 namespace Adjunction
 
+section
+
 variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalCategory D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
 
@@ -73,6 +75,27 @@ lemma whiskerRight_unit_comp_homEquiv (B : D) (A : C) :
   erw [left_triangle_components]
   rw [Category.id_comp, id_tensorHom]
   rfl
+
+end
+
+variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalCategory D]
+  {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.Monoidal]
+
+/-- A monoidal functor which inverts the unit at a dualizable object also inverts the lax
+tensor map of the right adjoint with the image of that object as its first argument. -/
+private lemma isIso_map_homEquiv_counit_tensor_of_isDualizable
+    {E : Type*} [Category E] [MonoidalCategory E] (H : D ⥤ E) [H.Monoidal]
+    {B : D} (hB : IsDualizable B) (A : C) [IsIso (H.map (adj.unit.app B))] :
+    IsIso (H.map (adj.homEquiv _ _
+      (Functor.OplaxMonoidal.δ F (G.obj (F.obj B)) (G.obj A) ≫
+        (adj.counit.app (F.obj B) ⊗ₘ adj.counit.app A)))) := by
+  have := adj.isIso_leftProjectionMorphism_of_isDualizable hB A
+  have h₁ : IsIso (H.map (adj.unit.app B ▷ G.obj A)) := by
+    rw [Functor.Monoidal.map_whiskerRight]
+    infer_instance
+  have h := H.map_isIso (adj.leftProjectionMorphism B A)
+  rw [← adj.whiskerRight_unit_comp_homEquiv B A, Functor.map_comp] at h
+  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ h₁ h
 
 end Adjunction
 
@@ -141,8 +164,6 @@ lemma isDualizable_shift_unit_derivedCategory (X : Scheme.{u}) (d : ℤ) :
 
 variable (k' : Type u) [Field k'] [IsSepClosed k']
 
-set_option maxHeartbeats 1000000 in
--- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism for
 `U = Lη̄^* (𝟙⟦d⟧)`: precomposed with the unit, it is the left projection morphism of the
@@ -155,37 +176,12 @@ lemma isIso_upperStar_map_lowerStarTensorMap'_upperStar_shift (d : ℤ)
       (lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j
         (L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).obj
           ((shiftFunctor _ d).obj (𝟙_ _))) V)) := by
-  have hp := (derivedUpperStarLowerStarAdjunction Λ
-    (NearbyCyclesModel.traitGenericModel k').j).isIso_leftProjectionMorphism_of_isDualizable
+  have := isIso_upperStar_traitClosedPoint_map_derivedUnit_app_shift Λ k' d
+  exact (derivedUpperStarLowerStarAdjunction Λ
+    (NearbyCyclesModel.traitGenericModel k').j).isIso_map_homEquiv_counit_tensor_of_isDualizable
+      L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧)
       (isDualizable_shift_unit_derivedCategory Λ (NearbyCyclesModel.traitGenericModel k').total d)
       V
-  have e : (derivedUpperStarLowerStarAdjunction Λ
-        (NearbyCyclesModel.traitGenericModel k').j).unit.app
-        ((shiftFunctor _ d).obj (𝟙_ _)) ▷
-          R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V ≫
-        lowerStarTensorMap' Λ (NearbyCyclesModel.traitGenericModel k').j
-          (L(((NearbyCyclesModel.traitGenericModel k').j)^*⟦Λ⟧).obj
-            ((shiftFunctor _ d).obj (𝟙_ _))) V =
-      (derivedUpperStarLowerStarAdjunction Λ
-        (NearbyCyclesModel.traitGenericModel k').j).leftProjectionMorphism
-          ((shiftFunctor _ d).obj (𝟙_ _)) V :=
-    (derivedUpperStarLowerStarAdjunction Λ
-      (NearbyCyclesModel.traitGenericModel k').j).whiskerRight_unit_comp_homEquiv _ V
-  have hu := isIso_upperStar_traitClosedPoint_map_derivedUnit_app_shift Λ k' d
-  have h₁ : IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
-      ((derivedUpperStarLowerStarAdjunction Λ (NearbyCyclesModel.traitGenericModel k').j).unit.app
-        ((shiftFunctor _ d).obj (𝟙_ _)) ▷
-          R(((NearbyCyclesModel.traitGenericModel k').j)_*⟦Λ⟧).obj V)) := by
-    rw [Functor.Monoidal.map_whiskerRight]
-    infer_instance
-  have h₂ : IsIso (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).map
-      ((derivedUpperStarLowerStarAdjunction Λ
-        (NearbyCyclesModel.traitGenericModel k').j).leftProjectionMorphism
-          ((shiftFunctor _ d).obj (𝟙_ _)) V)) :=
-    Iso.isIso_hom (L(((NearbyCyclesModel.traitGenericModel k').i)^*⟦Λ⟧).mapIso
-      (@asIso _ _ _ _ _ hp))
-  rw [← e, Functor.map_comp] at h₂
-  exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ h₁ h₂
 
 /-- The lax tensor map `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)`, restricted to the closed point of the
 trait, as a natural transformation in `U`. -/
@@ -207,7 +203,6 @@ noncomputable def upperStarLowerStarTensorMapNatTrans
     simp only [Functor.comp_map, ← Functor.map_comp]
     exact congrArg _ h
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism when `U` is a
@@ -274,7 +269,6 @@ instance isIso_pullbackExchange_id_traitGenericModel :
   unfold Hom.pullbackExchange
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- the Künneth map of the trait unfolds to large terms
 /-- **The nearby cycles of the trait are monoidal on the geometric generic point**: the Künneth
 map of the trait `T` (as a model of its geometric generic point) is an isomorphism at `(C, D)`

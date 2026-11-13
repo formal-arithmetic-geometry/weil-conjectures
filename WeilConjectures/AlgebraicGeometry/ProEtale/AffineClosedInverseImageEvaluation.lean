@@ -263,7 +263,7 @@ theorem affine_closed_inverseImage_evaluation (A : Type u) [CommRing A] (I : Ide
     (Functor.sheafPushforwardContinuousComp u (toProEt Z) (Type (u + 1))
       (topology X) (topology Z) (ProEt.topology Z)).symm
   let alpha := ((mateEquiv (proEtaleSheafAdjunction i (Type (u + 1))) a).symm
-    beta.hom).natTrans
+    beta.hom)
   have : IsIso alpha :=
     isIso_inverseMate_of_equivalences (proEtaleSheafAdjunction i (Type (u + 1))) a beta
   refine ⟨?_, ?_⟩

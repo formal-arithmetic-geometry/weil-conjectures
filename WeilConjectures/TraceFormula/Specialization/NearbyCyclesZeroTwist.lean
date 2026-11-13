@@ -330,7 +330,6 @@ lemma twistSpecializationMap_tateTwistZero_comp_autAction (s : M.Hom M (𝟙 X) 
   exact congrArg _ (s.unit_comp_autAction _)
 
 set_option maxRecDepth 20000 in
-set_option maxHeartbeats 1000000 in
 -- the defeq checks of the shifts of the derived categories of module objects are deep, and the
 -- specialization maps and the actions of the model unfold to large terms
 /-- **The action of a self-map fixes the specialization map of `ℚ̄_ℓ(0)[n]`**, on the ambient

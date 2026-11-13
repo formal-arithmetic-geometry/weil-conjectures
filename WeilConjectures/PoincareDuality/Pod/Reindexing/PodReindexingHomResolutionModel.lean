@@ -1074,8 +1074,57 @@ theorem podReindexing_resolution_preservation {X Y : Scheme.{u}} (g : X ⟶ Y) [
     let := ha
     infer_instance
 
-set_option maxHeartbeats 1200000 in
--- Elaborating the product comparison and fixed derived models needs a larger heartbeat budget.
+/-- Reindexing local families commutes with precomposition and postcomposition. -/
+private theorem podReindexingHomNaturality {X Y : Scheme.{u}}
+    (g : X ⟶ Y) [IsIso g] (s : Option ℕ)
+    (η : ∀ M N : podReindexingModules l E Y s,
+      (podReindexingFunctor l E g s).obj (SheafOfModules.homObj
+        (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅
+      SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s)
+        ((podReindexingFunctor l E g s).obj M)
+        ((podReindexingFunctor l E g s).obj N))
+    (hη : ∀ (M N : podReindexingModules l E Y s) (U V : X.ProEt) (a : V ⟶ U)
+      (f : (SheafOfModules.homObj (J := ProEt.topology Y)
+        (R := podReindexingRing l E Y s) M N).val.obj
+          (op ((proEtaleIsoPostcompose g).obj U)))
+      (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj V))),
+      ((η M N).hom.val.app (op U) f).app (op (Over.mk a)) x =
+        f.app (op (Over.mk ((proEtaleIsoPostcompose g).map a))) x)
+    {M M' N N' : podReindexingModules l E Y s} (a : M' ⟶ M) (b : N ⟶ N') :
+    (podReindexingFunctor l E g s).map
+        (SheafOfModules.homObjMap (R := podReindexingRing l E Y s) a b) ≫
+      (η M' N').hom = (η M N).hom ≫
+        SheafOfModules.homObjMap (R := podReindexingRing l E X s)
+          ((podReindexingFunctor l E g s).map a) ((podReindexingFunctor l E g s).map b) := by
+  let R := podReindexingRing l E Y s
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext f : 2
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext x
+  obtain ⟨U⟩ := U
+  obtain ⟨⟨V, ⟨⟨⟩⟩, v⟩⟩ := V
+  change ((η M' N').hom.val.app (op U)
+    ((SheafOfModules.homObjMap (R := R) a b).val.app
+      (op ((proEtaleIsoPostcompose g).obj U)) f)).app (op (Over.mk v)) x = _
+  rw [hη]
+  change _ = (b.val.app (op ((proEtaleIsoPostcompose g).obj V)))
+    (((η M N).hom.val.app (op U) f).app (op (Over.mk v))
+      (a.val.app (op ((proEtaleIsoPostcompose g).obj V)) x))
+  rw [hη]
+  rfl
+
+/-- The inverse resolution model is the ordinary-to-derived Hom comparison. -/
+private theorem podReindexingHomModel_inv (W : Scheme.{u}) (s : Option ℕ)
+    (K I : CochainComplex (podReindexingModules l E W s) ℤ) (hI : I.IsKInjective) :
+    (@podReindexingHomModel l _ E _ _ _ W s K I hI).inv =
+      @ringedSiteOrdinaryHomComparison.{u+1,u,u+1,u+2} _ _ (ProEt.topology W) _ _
+        (podReindexingRing l E W s) (HasDerivedCategory.standard.{u+1,u+2} _) K I := by
+  rw [CategoryTheory.ordinaryHomComparison_eq.{u+1,u,u+1,u+2}]
+  rfl
+
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual Hom-complex and derived localization comparisons, with their
 projection, naturality, quasi-isomorphism, and resolution-model laws.
@@ -1186,31 +1235,12 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   let := HasDerivedCategory.standard.{u+1,u+2} (podReindexingModules l E X s)
   have hp := podReindexing_resolution_preservation.{u,0,0} l E g s
   let : PreservesLimitsOfSize.{0,0} F := hp.2.2.2.2.1
-  have hηnat {M M' N N' : podReindexingModules l E Y s} (a : M' ⟶ M) (b : N ⟶ N') :
-      F.map (SheafOfModules.homObjMap (R := R) a b) ≫ (η M' N').hom =
-        (η M N).hom ≫ SheafOfModules.homObjMap (R := S) (F.map a) (F.map b) := by
-    apply SheafOfModules.hom_ext
-    apply PresheafOfModules.hom_ext
-    intro U
-    ext f : 2
-    apply PresheafOfModules.hom_ext
-    intro V
-    ext x
-    obtain ⟨U⟩ := U
-    obtain ⟨⟨V, ⟨⟨⟩⟩, v⟩⟩ := V
-    change ((η M' N').hom.val.app (op U)
-      ((SheafOfModules.homObjMap (R := R) a b).val.app
-        (op ((proEtaleIsoPostcompose g).obj U)) f)).app (op (Over.mk v)) x = _
-    rw [hη]
-    change _ = (b.val.app (op ((proEtaleIsoPostcompose g).obj V)))
-      (((η M N).hom.val.app (op U) f).app (op (Over.mk v))
-        (a.val.app (op ((proEtaleIsoPostcompose g).obj V)) x))
-    rw [hη]
-    rfl
-  obtain ⟨γ, hγ⟩ := CategoryTheory.bundledProductHomRestrictionComparison F
+  have hγdata := CategoryTheory.bundledProductHomRestrictionComparison F
     (CategoryTheory.nativeHomInterface.{u+1,u,u+1} (ProEt.topology Y) R)
     (CategoryTheory.nativeHomInterface.{u+1,u,u+1} (ProEt.topology X) S) η
-    (fun a b ↦ hηnat a b)
+    (fun a b ↦ podReindexingHomNaturality l E g s η hη a b)
+  let γ := hγdata.choose
+  have hγ := hγdata.choose_spec
   let : IsGrothendieckAbelian.{u+1} (podReindexingModules l E Y s) :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u+1,u,u}
       (ProEt.topology Y) R).1
@@ -1218,7 +1248,7 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   let η₀ := CochainComplex.toKInjectiveResolution.{u+1} (podReindexingModules l E Y s)
   have hFI (I : CochainComplex (podReindexingModules l E Y s) ℤ) (hI : I.IsKInjective) :
       CochainComplex.IsKInjective (FC.obj I) := hp.2.2.2.2.2.2.2.2.1 I hI
-  obtain ⟨δ, hδ⟩ := CategoryTheory.homRestrictionDescent Q QX FD FC
+  have hδdata := CategoryTheory.homRestrictionDescent Q QX FD FC
     ((HomologicalComplex.quasiIso _ (.up ℤ)).op.prod
       (HomologicalComplex.quasiIso _ (.up ℤ)))
     (Functor.uncurry.obj (podReindexingHom l E Y s))
@@ -1235,13 +1265,16 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
       intro L M
       have : (I₀.obj M).IsKInjective :=
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u+1} _ M
-      exact RingedHomUniverses.ordinaryComparison_isIso (ProEt.topology Y) R L (I₀.obj M))
+      exact RingedHomUniverses.ordinaryComparison_isIso.{u+1,u,u+1,u+2}
+        (ProEt.topology Y) R L (I₀.obj M))
     (by
       intro L M
       have : CochainComplex.IsKInjective (FC.obj (I₀.obj M)) := hFI _
         (CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u+1} _ M)
-      exact RingedHomUniverses.ordinaryComparison_isIso (ProEt.topology X) S
+      exact RingedHomUniverses.ordinaryComparison_isIso.{u+1,u,u+1,u+2} (ProEt.topology X) S
         (FC.obj L) (FC.obj (I₀.obj M)))
+  let δ := hδdata.choose
+  have hδ := hδdata.choose_spec
   refine ⟨fun K I _ ↦ γ.app (op K, I), δ, ?_, ?_, ?_, ?_⟩
   · intro K I hI r p
     exact hγ K I r p (p+r) rfl
@@ -1256,26 +1289,13 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
     infer_instance
   · intro K I hI
     refine ⟨hFI I hI, ?_⟩
-    have hmodel (W : Scheme.{u}) [EssentiallySmall.{u+1} W.ProEt]
-        (K I : CochainComplex (podReindexingModules l E W s) ℤ) (hI : I.IsKInjective) :
-        (@podReindexingHomModel l _ E _ _ _ W s K I hI).inv =
-          @ringedSiteOrdinaryHomComparison.{u+1,u,u+1,u+2} _ _ (ProEt.topology W) _ _
-            (podReindexingRing l E W s) (HasDerivedCategory.standard.{u+1,u+2} _) K I := by
-      rw [CategoryTheory.ordinaryHomComparison_eq]
-      rfl
     have hd := hδ K I
     simp only [RingedHomUniverses.ordinaryComparison_app] at hd
-    rw [← hmodel Y K I hI, ← hmodel X (FC.obj K) (FC.obj I) (hFI I hI)] at hd
+    rw [← podReindexingHomModel_inv l E Y s K I hI,
+      ← podReindexingHomModel_inv l E X s (FC.obj K) (FC.obj I) (hFI I hI)] at hd
     let κ := @podReindexingHomModel l _ E _ _ _ Y s K I hI
-    calc
-      δ.hom.app _ = FD.map κ.hom ≫ (FD.map κ.inv ≫ δ.hom.app _) := by
-        simp only [← Category.assoc, ← FD.map_comp, Iso.hom_inv_id,
-          FD.map_id, Category.id_comp]
-      _ = _ := congrArg (fun f ↦ FD.map κ.hom ≫ f) hd
+    exact (FD.mapIso κ).inv_comp_eq.mp hd
 
-set_option maxHeartbeats 800000 in
--- The theorem combines the separately stated tensor/Hom and derived comparison data.
-set_option maxHeartbeats 800000 in
 -- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
 and its natural derived descent with the specified K-injective resolution model.
@@ -1381,8 +1401,7 @@ theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
                 (((podReindexingDerivedFactors l E g s).app K).op.prod
                   ((podReindexingDerivedFactors l E g s).app I).symm)).hom) := by
   obtain ⟨σ, η, hσ, hη⟩ := podReindexing_tensor_hom_data l E g s
-  obtain ⟨χ, δ, hχπ, hχnat, hχq, hδ⟩ :=
-    podReindexing_derived_hom_data l E g s η hη
-  exact ⟨σ, η, χ, δ, hσ, hη, hχπ, hχnat, hχq, hδ⟩
+  obtain ⟨χ, δ, hχ⟩ := podReindexing_derived_hom_data l E g s η hη
+  exact ⟨σ, η, χ, δ, hσ, hη, hχ⟩
 
 end WeilConjectures

@@ -70,7 +70,7 @@ private theorem ordinary_basic_square (o : Operations l E) (a : AmbientModels l 
         (Expression.ringedObj l E e a.ringedModels K)) :=
       GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel j.left _
     change IsIso (((mateEquiv (ringedOpenAdj l E j.left) (o.extension j.left).adj).symm
-      (a.realizationModel.reductionPull j.left).hom).natTrans.app
+      (a.realizationModel.reductionPull j.left).hom).app
         (Expression.ringedObj l E e a.ringedModels K)) at hi
     exact GeneratorReduction.inverse_mate_unit_square (ringedOpenAdj l E j.left)
       (o.extension j.left).adj (a.realizationModel.reductionPull j.left).hom
@@ -80,14 +80,14 @@ private theorem ordinary_basic_square (o : Operations l E) (a : AmbientModels l 
         ((ringedPull l E j.left).obj (Expression.ringedObj l E t a.ringedModels K))) :=
       GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel j.left _
     change IsIso (((mateEquiv (ringedOpenAdj l E j.left) (o.extension j.left).adj).symm
-      (a.realizationModel.reductionPull j.left).hom).natTrans.app
+      (a.realizationModel.reductionPull j.left).hom).app
         ((ringedPull l E j.left).obj
           (Expression.ringedObj l E t a.ringedModels K))) at hi
     have hm := GeneratorReduction.inverse_mate_counit_square (ringedOpenAdj l E j.left)
       (o.extension j.left).adj (a.realizationModel.reductionPull j.left).hom
       (Expression.ordinaryReduction l E o a t K)
     simpa only [Expression.ordinaryReduction, RealizationModel.openReduction,
-      ringedOpenAdj, Operations.shriek, TwoSquare.natTrans, Functor.comp_obj,
+      ringedOpenAdj, Operations.shriek, Functor.comp_obj,
       Functor.id_obj, Category.assoc] using! hm
   | properOpen k r p i w e => exact ordinaryProperOpenSquare l E o a K k r p i w e
   | exchange k r p i hr hp w e =>

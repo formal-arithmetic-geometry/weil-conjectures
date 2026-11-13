@@ -42,9 +42,10 @@ lemma moduleFinite_pointSectionsIntegral_obj_unit :
       ((pointSectionsIntegral ℓ k E).obj (𝟙_ (PointModIntegral ℓ k E))) := by
   let x : (pointSectionsIntegral ℓ k E).obj (𝟙_ (PointModIntegral ℓ k E)) := 𝟙 _
   refine Module.Finite.of_surjective (LinearMap.toSpanSingleton _ _ x) fun t ↦ ?_
-  obtain ⟨r, hr⟩ := surjective_pointIntegersUnitEndRingHom ℓ k E t
-  exact ⟨shrinkRingEquiv ℓ E.1 r, (Category.comp_id _).trans ((congrArg
-    (pointIntegersUnitEndRingHom ℓ k E) ((shrinkRingEquiv ℓ E.1).symm_apply_apply r)).trans hr)⟩
+  obtain ⟨r, hr⟩ := surjective_pointIntegersUnitEndRingHom ℓ k E (End.of t)
+  exact ⟨shrinkRingEquiv ℓ E.1 r, (Category.comp_id _).trans (congrArg End.asHom
+    ((congrArg (pointIntegersUnitEndRingHom ℓ k E)
+      ((shrinkRingEquiv ℓ E.1).symm_apply_apply r)).trans hr))⟩
 
 /-- The sections over the point of a finitely presented `𝒪̲_E,s`-module form a finitely
 generated `𝒪_E`-module: they are a quotient of the sections of a free module of finite rank. -/

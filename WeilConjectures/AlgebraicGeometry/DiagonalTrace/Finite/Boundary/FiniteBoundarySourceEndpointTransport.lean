@@ -23,8 +23,15 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   DerivedCategory.singleFunctors DerivedCategory.singleFunctorIsoCompQ
 attribute [local implicit_reducible] spCoefficientCommRings
 
-set_option maxHeartbeats 1000000 in
--- Matching the concrete evaluation and restriction presentations needs extra reduction.
+private theorem finiteBoundarySourceRestriction_inv_section
+    (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ)
+    (M : Systems T (Arings l (ULift.{u} (Padic l)) T)) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l (ULift.{u} (Padic l)) T n).obj M).val.obj U) :
+    HEq (((finiteBoundaryRestrictionUnderlying l T r n).inv.app M).hom.app U x) x := by
+  change HEq ((eqToHom (r.underlying M n U).symm) x) x
+  exact finiteBoundary_cast_heq _ _
+
 /-- Source endpoint transport.  This is the coefficient-one calculation: the
 finite quotient followed by the restricted evaluation comparison is the
 integer coefficient map.  The proof is the coefficient-one section calculation,
@@ -43,9 +50,11 @@ theorem finiteBoundary_source_endpoint
         k.coefficientForget.inv.app (op n)) := by
   intro S e
   rw [← S.map_comp]
-  congr 1
+  apply congrArg S.map
   rw [← Iso.app_inv k.coefficientForget, Iso.eq_comp_inv]
   apply constantAb_ext_one
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    AddCommGrpCat.comp_apply]
   let U := op (Scheme.ProEt.mk (𝟙 T))
   let z := (toSheafify (Scheme.ProEt.topology T)
     ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app U
@@ -57,11 +66,15 @@ theorem finiteBoundary_source_endpoint
   have hx' : HEq x' (1 : (systemRing l (ULift.{u} (Padic l)) T).obj.obj
       (op (n, U.unop))) := by
     simpa only [x', z, finiteQuotient, Int.cast_one] using hq
-  have hx : HEq x x' := finiteBoundary_cast_heq
-    (r.underlying (coefficient T (Arings l (ULift.{u} (Padic l)) T)) n U).symm x'
+  have hx : HEq x x' := by
+    dsimp only [x, e]
+    exact finiteBoundarySourceRestriction_inv_section l T r n
+      (coefficient T (Arings l (ULift.{u} (Padic l)) T)) U x'
   have ha := k.coefficient_one n U x (hx.trans hx')
   have hi := integerMap_sections T (Scheme.purTwistFiniteRing T l n) U 1
-  change (k.coefficientForget.hom.app (op n)).hom.app U x = _
-  rw [ha, hi, Int.cast_one]
+  rw [Int.cast_one] at hi
+  dsimp only [x, x', z, U] at ha
+  dsimp only [U] at hi
+  exact ha.trans hi.symm
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

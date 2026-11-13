@@ -135,7 +135,6 @@ private def trace_scalar_shift
 
 attribute [local instance] trace_pull_shift trace_push_shift trace_scalar_shift
 
-set_option maxHeartbeats 800000 in
 -- Compare the full derived-unit normalization before cancelling the single comparison.
 private theorem endpoint_hom
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -186,7 +185,6 @@ private theorem endpoint_hom
   let c := ((Mod.comap (coefficientMap a X)).mapDerivedCategorySingleFunctor 0).app N
   exact hn.trans ((c.eq_comp_inv).2 hv).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep both composite adjunctions fixed while identifying the normalized conjugate.
 private theorem derivedPull_eq_path
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -231,7 +229,6 @@ section OrdinaryEndpointSquare
 set_option allowUnsafeReducibility true in
 attribute [local reducible] CondensedRing.lowerStar Mod.comap
 
-set_option maxHeartbeats 800000 in
 -- Transpose the module square twice without expanding sheafification data.
 private theorem ordinary_endpoint_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -279,7 +276,6 @@ private theorem ordinary_endpoint_square
 
 end OrdinaryEndpointSquare
 
-set_option maxHeartbeats 800000 in
 -- Identify the two exact-derived composition paths on a single module.
 private theorem derivedPull_single
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -299,14 +295,41 @@ private theorem derivedPull_single
           ((CondensedRing.pullIso a f).hom.app M) := by
   apply (cancel_epi (((CondensedRing.upperStar Λ f).leftDerivedFunctorCompIso
     (Mod.extendScalars (coefficientMap a X))).hom.app _)).1
-  rw [derivedPull_eq_path]
+  rw [derivedPull_eq_path a f]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc,
     Iso.hom_inv_id_app_assoc]
-  rw [Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj]
-  rw [Functor.leftDerivedFunctorNatIso_hom_app_singleFunctor_obj]
-  rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj _ _ _)]
+  rw [Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
+    (Mod.extendScalars (coefficientMap a S)) (CondensedRing.upperStar Λ' f) M]
+  rw [Functor.leftDerivedFunctorNatIso_hom_app_singleFunctor_obj
+    (CondensedRing.upperStar Λ f ⋙ Mod.extendScalars (coefficientMap a X))
+    (Mod.extendScalars (coefficientMap a S) ⋙ CondensedRing.upperStar Λ' f)
+    (CondensedRing.pullIso a f) M]
+  rw [reassoc_of% (Functor.leftDerivedFunctorCompIso_hom_app_singleFunctor_obj
+    (CondensedRing.upperStar Λ f) (Mod.extendScalars (coefficientMap a X)) M)]
 
-set_option maxHeartbeats 800000 in
+-- Paste naturality squares before specializing to the concrete derived functors.
+private theorem comparison_endpoint_paste
+    {B C D B' C' D' : Type*}
+    [Category B] [Category C] [Category D] [Category B'] [Category C'] [Category D']
+    (G : B ⥤ D) (I : C ⥤ D) (SB : B ⥤ B') (SC : C ⥤ C') (SD : D ⥤ D')
+    (LG : B' ⥤ D') (LI : C' ⥤ D')
+    (cG : SB ⋙ LG ⟶ G ⋙ SD) (cI : SC ⋙ LI ⟶ I ⋙ SD)
+    {M N : B} {M' N' : C} {Q : D} {K : D'}
+    (x : K ⟶ LG.obj (SB.obj M)) (y : K ⟶ LI.obj (SC.obj M'))
+    (c : G.obj M ⟶ I.obj M') (e : M ⟶ N) (m : M' ⟶ N')
+    (n : G.obj N ⟶ Q) (r : I.obj N' ⟶ Q)
+    (hc : y ≫ cI.app M' = x ≫ cG.app M ≫ SD.map c)
+    (ho : c ≫ I.map m ≫ r = G.map e ≫ n) :
+    y ≫ LI.map (SC.map m) ≫ cI.app N' ≫ SD.map r =
+      x ≫ LG.map (SB.map e) ≫ cG.app N ≫ SD.map n := by
+  have hi := cI.naturality m
+  have hg := cG.naturality e
+  dsimp only [Functor.comp_map] at hi hg
+  rw [reassoc_of% hi, reassoc_of% hc]
+  have hh := congrArg SD.map ho
+  simp only [Functor.map_comp] at hh
+  rw [hh, ← reassoc_of% hg]
+
 -- Normalize both scalar endpoints and paste the exact single comparisons.
 private theorem endpoint_pull_square
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -324,27 +347,30 @@ private theorem endpoint_pull_square
     (derivedPullIso a f).hom.app ((DerivedCategory.singleFunctor (Modules Λ S) 0).obj M) ≫
         (derivedUpper Λ' f).map cS.iso.hom ≫ e'.derived =
       (derivedScalars a X).map e.derived ≫ cX.iso.hom := by
-  rw [endpoint_hom a cS, endpoint_hom a cX]
-  unfold PullEndpoint.derived singlePullback
-  simp only [Functor.map_comp, Category.assoc, Iso.app_hom]
-  have hS := NatTrans.naturality
+  have h := comparison_endpoint_paste
+    (Mod.extendScalars (coefficientMap a X)) (CondensedRing.upperStar Λ' f)
+    (DerivedCategory.singleFunctor (Modules Λ X) 0)
+    (DerivedCategory.singleFunctor (Modules Λ' S) 0)
+    (DerivedCategory.singleFunctor (Modules Λ' X) 0)
+    (derivedScalars a X) (derivedUpper Λ' f)
+    (Mod.extendScalars (coefficientMap a X)).singleFunctorCompLeftDerivedFunctorIso.hom
     (CondensedRing.upperStar Λ' f).singleFunctorCompLeftDerivedFunctorIso.hom
+    ((derivedScalars a X).map
+      ((CondensedRing.upperStar Λ f).singleFunctorCompLeftDerivedFunctorIso.hom.app M))
+    ((derivedPullIso a f).hom.app ((DerivedCategory.singleFunctor (Modules Λ S) 0).obj M) ≫
+      (derivedUpper Λ' f).map
+        ((Mod.extendScalars (coefficientMap a S)).singleFunctorCompLeftDerivedFunctorIso.hom.app M))
+    ((CondensedRing.pullIso a f).hom.app M) e.iso.hom
     (((Mod.extendRestrictAdjunction (coefficientMap a S)).homEquiv M M').symm
       cS.semilinear.hom)
-  dsimp only [Functor.comp_map] at hS
-  erw [reassoc_of% hS]
-  erw [reassoc_of% (derivedPull_single a f M)]
-  have hX := NatTrans.naturality
-    (Mod.extendScalars (coefficientMap a X)).singleFunctorCompLeftDerivedFunctorIso.hom
-    e.iso.hom
-  dsimp only [Functor.comp_map] at hX
-  erw [reassoc_of% hX]
-  have hh := congrArg (fun z ↦ (DerivedCategory.singleFunctor (Modules Λ' X) 0).map z)
+    (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv N N').symm
+      cX.semilinear.hom) e'.iso.hom
+    (by simpa only [Category.assoc] using derivedPull_single a f M)
     (ordinary_endpoint_square a f cS.semilinear cX.semilinear e e' hr)
-  simp only [Functor.map_comp] at hh
-  rw [hh]
+  rw [endpoint_hom a cS, endpoint_hom a cX]
+  unfold PullEndpoint.derived singlePullback
+  simpa only [Functor.map_comp, Category.assoc, Iso.app_hom] using h
 
-set_option maxHeartbeats 800000 in
 -- Supply the shift compatibilities of the full derived composite adjunctions.
 private theorem derivedPull_commShift
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -456,7 +482,6 @@ private theorem nativePullEndpointShift_formula
   unfold nativePullEndpointShift PullEndpoint.shift PullEndpoint.derived
   rw [pullbackShift_eq]
 
-set_option maxHeartbeats 800000 in
 -- Transport the normalized endpoint square through the specified shift structures.
 private theorem endpoint_pull_square_shift
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -584,7 +609,6 @@ private def nativeUnitPullEndpoint
     erw [CondensedRing.homEquiv_εIso_inv_hom Λ f]
     exact hu
 
-set_option maxHeartbeats 800000 in
 -- Compare the normalized degree-zero unit with the native monoidal unit map.
 private theorem unitPullEndpoint_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -691,7 +715,7 @@ private theorem firstTraceExchange_eq
       (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
           (ProjectiveLine Y ↘ Y))
         (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (firstProjection Y))
-        (TwoSquare.mk _ _ _ _ t)).natTrans.app T ≫
+        (TwoSquare.mk _ _ _ _ t)).app T ≫
         (CondensedRing.lowerStar Λ (firstProjection Y)).rightDerivedFunctor.map e.hom) hc
   unfold firstTraceExchange derivedExchange
   rw [Adjunction.exchangeRight_eq_mateEquiv]
@@ -923,7 +947,6 @@ private def closurePullEndpoint (l : ℕ) [Fact l.Prime]
   chosenPullEndpoint_normalized _ f _ _ _ (adicComparison l f).qbar_cartesian
     (lineComparison l none f) rfl
 
-set_option maxHeartbeats 800000 in
 -- Unfold only the selected coefficient and line when fixing the native endpoints.
 private def nativeRationalEndpoint (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) {X S : Scheme.{u}} (f : X ⟶ S)
@@ -936,7 +959,6 @@ private def nativeRationalEndpoint (l : ℕ) [Fact l.Prime]
   unfold coefficient line at e
   exact e
 
-set_option maxHeartbeats 800000 in
 -- Unfold only the selected coefficient and line when fixing the native endpoints.
 private def nativeClosureEndpoint (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
@@ -1024,7 +1046,7 @@ private theorem oppositeExchange_eq
       (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ
           (ProjectiveLine Y ↘ Y))
         (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (firstProjection Y))
-        (TwoSquare.mk _ _ _ _ t)).natTrans) (congrArg Iso.hom hc)
+        (TwoSquare.mk _ _ _ _ t))) (congrArg Iso.hom hc)
   unfold derivedExchange condensedAmbientExchange
   rw [Adjunction.exchangeRight_eq_mateEquiv]
   coefficient_finish hh
@@ -1046,7 +1068,6 @@ private def NativeTraceSquare
 
 attribute [local irreducible] derivedPullIso derivedPushHom
 
-set_option maxHeartbeats 800000 in
 -- Paste normalized squares while keeping the coefficient category instances folded.
 private theorem nativeTraceSquare_scalar
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -1121,7 +1142,6 @@ private theorem nativeTraceSquare_scalar
   simp only [Category.assoc] at hh ⊢
   coefficient_finish hh
 
-set_option maxHeartbeats 800000 in
 -- Compose equalities of the two boundaries without dependent rewriting of the square.
 private theorem nativeTraceSquare_of_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -1173,7 +1193,6 @@ private theorem nativeTraceSquare_to_first
     Category.assoc, Iso.inv_hom_id, Category.comp_id, id_eq] at ht' ⊢
   coefficient_finish ht'
 
-set_option maxHeartbeats 800000 in
 -- Assemble the integral, rational, and closure squares in their fixed coefficient types.
 private theorem native_scalar_trace
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
@@ -1262,7 +1281,6 @@ private theorem native_scalar_trace
       exact hc
   exact ht
 
-set_option maxHeartbeats 0 in
 -- Assemble the completed square and the three concrete scalar transports.
 /-- Base change of the normalized q trace to the first projection.
 

@@ -191,7 +191,7 @@ Source: Zheng, Construction 2.26, equation (2.26.1)
 (blueprint: lem-pur-etale-system-quotient-normalization). -/
 def etaleCoefficientQuotientMate :
     gC ⋙ scalarExtension a X ⟶ scalarExtension a Y ⋙ gD :=
-  (mateEquiv adjC adjD (.mk _ _ _ _ q.inv)).natTrans
+  (mateEquiv adjC adjD (.mk _ _ _ _ q.inv))
 
 private def quotientRestrictionIso :
     gD ⋙ Sheaf.derivedRestrictScalars X.smallEtaleTopology a ≅
@@ -242,7 +242,7 @@ private theorem quotientRestrictionIso_mate
             (Sheaf.derivedRestrictScalars X.smallEtaleTopology a)).unit.app K) ≫
           r.inv.app ((scalarExtension a X).obj K)) :
     (quotientRestrictionIso a c adjC adjD q).hom =
-      (mateEquiv adjD adjC (.mk _ _ _ _ r.inv)).natTrans := by
+      (mateEquiv adjD adjC (.mk _ _ _ _ r.inv)) := by
   let ax := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars X.smallEtaleTopology a)
   let ay := Adjunction.ofIsRightAdjoint
@@ -368,7 +368,7 @@ theorem etaleCoefficientQuotientNormalization
   let := hqiso
   let q := asIso (compactScalarMap a c)
   let rho := quotientRestrictionIso a c adjC adjD q
-  have hrho : rho.hom = (mateEquiv adjD adjC (.mk _ _ _ _ r.inv)).natTrans :=
+  have hrho : rho.hom = (mateEquiv adjD adjC (.mk _ _ _ _ r.inv)) :=
     quotientRestrictionIso_mate a c adjC adjD q r hu
   have : Fact k.p.Prime := ⟨k.prime⟩
   let := Fintype.ofFinite k.k₀
@@ -487,7 +487,7 @@ private theorem brownFiniteQuotient
         Etale.scalarExtension a Y ≅ Etale.scalarExtension a X ⋙
           Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c,
       q.hom = Etale.compactScalarMap a c ∧
-        IsIso (mateEquiv aa ab (.mk _ _ _ _ q.inv)).natTrans := by
+        IsIso (mateEquiv aa ab (.mk _ _ _ _ q.inv)) := by
   obtain ⟨q, hq, r, _, rho, _, _, b, hb, _⟩ :=
     Etale.etaleCoefficientQuotientNormalization D l hl f c A B
       (by simpa only [Nat.cast_pow] using ha)
@@ -526,10 +526,10 @@ private theorem brownCubeMate_isIso
     (hc : ∀ X : A,
       K'.map (pG.inv.app X) ≫ pK.inv.app (G.obj X) ≫ d.map (θ.app X) =
         θ'.app (a.obj X) ≫ H'.map (pF.inv.app X) ≫ pH.inv.app (F.obj X))
-    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)).natTrans)
-    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)).natTrans)
-    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ')).natTrans) :
-    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)).natTrans := by
+    (hF : IsIso (mateEquiv adj adj' (.mk _ _ _ _ pF.inv)))
+    (hK : IsIso (mateEquiv adjK adjK' (.mk _ _ _ _ pK.inv)))
+    (hθ : IsIso (mateEquiv adj' adjK' (.mk _ _ _ _ θ'))) :
+    IsIso (mateEquiv adj adjK (.mk _ _ _ _ θ)) := by
   have hFapp (M : B) : IsIso ((mateEquiv adj adj'
       (.mk _ _ _ _ pF.inv)).app M) := NatIso.isIso_app_of_isIso _ M
   have hKapp (M : D) : IsIso ((mateEquiv adjK adjK'

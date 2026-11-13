@@ -73,10 +73,10 @@ lemma app_eq_comp_of_eq_mateEquiv_pasting (adjf : Lf ⊣ Rf) (adjg : Lg ⊣ Rg) 
     (γ₃ : IN ⋙ Lf' ⟶ Lt ⋙ IM) (α : (EN ⋙ JN ⋙ IN) ⋙ Lf' ⟶ Lf ⋙ EM ⋙ JM ⋙ IM)
     (hα : α = Functor.whiskerLeft (EN ⋙ JN) γ₃ ≫
       Functor.whiskerRight (Functor.whiskerLeft EN γ₂ ≫ Functor.whiskerRight γ₁ JM) IM)
-    (χ : Rf ⋙ EN ⋙ JN ⋙ IN ⟶ (EM ⋙ JM ⋙ IM) ⋙ Rf') (hχ : χ = (mateEquiv adjf adjf' α).natTrans)
-    (β₁ : Rf ⋙ EN ⟶ EM ⋙ Rg) (hβ₁ : β₁ = (mateEquiv adjf adjg γ₁).natTrans)
-    (β₂ : Rg ⋙ JN ⟶ JM ⋙ Rt) (hβ₂ : β₂ = (mateEquiv adjg adjt γ₂).natTrans)
-    (β₃ : Rt ⋙ IN ⟶ IM ⋙ Rf') (hβ₃ : β₃ = (mateEquiv adjt adjf' γ₃).natTrans) (K : DX) :
+    (χ : Rf ⋙ EN ⋙ JN ⋙ IN ⟶ (EM ⋙ JM ⋙ IM) ⋙ Rf') (hχ : χ = (mateEquiv adjf adjf' α))
+    (β₁ : Rf ⋙ EN ⟶ EM ⋙ Rg) (hβ₁ : β₁ = (mateEquiv adjf adjg γ₁))
+    (β₂ : Rg ⋙ JN ⟶ JM ⋙ Rt) (hβ₂ : β₂ = (mateEquiv adjg adjt γ₂))
+    (β₃ : Rt ⋙ IN ⟶ IM ⋙ Rf') (hβ₃ : β₃ = (mateEquiv adjt adjf' γ₃)) (K : DX) :
     χ.app K = IN.map (JN.map (β₁.app K)) ≫ IN.map (β₂.app (EM.obj K)) ≫
       β₃.app (JM.obj (EM.obj K)) := by
   subst hχ hβ₁ hβ₂ hβ₃

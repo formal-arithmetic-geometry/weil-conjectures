@@ -49,7 +49,6 @@ private theorem normalized_projection_isIso (a : ProjectionFamily Λ)
   rw [eq_of_heq (ha f K N)]
   exact traceProjection_isIso Λ f K N h
 
-set_option maxHeartbeats 800000 in
 -- Specialize the two-variable extension through the internal module comparisons.
 attribute [-instance] internalMonoidal in
 private theorem selected_projection_isIso

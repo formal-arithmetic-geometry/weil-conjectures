@@ -706,13 +706,15 @@ private theorem ringCone_difference {F : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} 
     apply difference_iso_of_nilpotent
     obtain ⟨e, he⟩ := hf n
     refine ⟨e, ?_⟩
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    change ((endPower (localSectionMultiplication c.pt U f (G.obj n)) e).val.app V) x = 0
+    change ((endPower (.of (localSectionMultiplication c.pt U f (G.obj n))) e).asHom.val.app V)
+      x = 0
     rw [sectionMultiplication_pow]
     change (F.obj n).obj.obj (op V.unop.left) at x
     change (c.π.app n).hom.app (op V.unop.left)

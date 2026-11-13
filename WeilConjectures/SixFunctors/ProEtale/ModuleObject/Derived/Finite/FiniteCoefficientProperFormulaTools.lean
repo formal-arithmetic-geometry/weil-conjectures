@@ -267,7 +267,7 @@ private theorem finite_ambient_iso
       (H := (upperStar R g').leftDerivedFunctor)
       (derivedUpperStarLowerStarAdjunction R p)
       (derivedUpperStarLowerStarAdjunction R p')
-      (TwoSquare.mk _ _ _ _ i.hom)).natTrans) hs
+      (TwoSquare.mk _ _ _ _ i.hom))) hs
   exact iff_of_eq (congrArg IsIso (congrArg (fun t ↦ t.app K) he))
 
 -- Bundle the inputs for the proved finite coefficient theorem.
@@ -341,14 +341,14 @@ private theorem quotient_ambient_eq
   have he : IntegralQuotient.ambient R sq = condensedAmbientExchange R sq := by
     unfold IntegralQuotient.ambient condensedAmbientExchange
     exact congrArg₂ (fun a b ↦ (mateEquiv a b
-      (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom)).natTrans)
+      (TwoSquare.mk _ _ _ _ (scalarPullbackSquare R sq).hom)))
       (ha p) (ha p') |>.trans
         (congrArg (fun (i : (upperStar R g).leftDerivedFunctor ⋙
             (upperStar R p').leftDerivedFunctor ≅ (upperStar R p).leftDerivedFunctor ⋙
             (upperStar R g').leftDerivedFunctor) ↦ (mateEquiv
           (derivedUpperStarLowerStarAdjunction R p)
           (derivedUpperStarLowerStarAdjunction R p')
-          (TwoSquare.mk _ _ _ _ i.hom)).natTrans) hs)
+          (TwoSquare.mk _ _ _ _ i.hom))) hs)
   exact he
 
 private theorem quotient_projection_eq

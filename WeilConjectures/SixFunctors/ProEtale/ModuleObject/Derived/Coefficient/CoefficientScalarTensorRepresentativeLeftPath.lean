@@ -65,7 +65,6 @@ attribute [local irreducible] coefficientInternalScalarComplex
   coefficientSectionScalarTotal SheafOfModules.scalarPairComplexComparison
   internalScalarTensorComparison
 
-set_option maxHeartbeats 800000 in
 -- Compare the native totalization and localization morphisms.
 /-- Identify the scalar tensor representative's left path after comparison.
 Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.

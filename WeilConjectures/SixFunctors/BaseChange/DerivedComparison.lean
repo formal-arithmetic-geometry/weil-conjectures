@@ -155,7 +155,7 @@ lemma Etale.baseChange_app_eq_mateEquiv (sq : CommSq g' f' f g)
     (Etale.baseChange A sq).app K =
       (mateEquiv (Etale.upperStarLowerStarAdjunction A f).derivedPlus
         (Etale.upperStarLowerStarAdjunction A f').derivedPlus
-        (TwoSquare.mk _ _ _ _ (Etale.pullbackSquareComparison A sq).hom)).natTrans.app K := by
+        (TwoSquare.mk _ _ _ _ (Etale.pullbackSquareComparison A sq).hom)).app K := by
   rw [Etale.baseChange_app, Etale.baseChangeUnitStep_app, Etale.baseChangeSquareStep_hom_app,
     Etale.baseChangeCounitStep_app, Etale.derivedUpperStarLowerStarAdjunctionPlus_eq_derivedPlus,
     Etale.derivedUpperStarLowerStarAdjunctionPlus_eq_derivedPlus]

@@ -84,7 +84,6 @@ private theorem tensorResolution_normalize_comparison
   rw [hninv]
   simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ eV.inv) hc
 
-set_option maxHeartbeats 600000 in
 -- The four tensor squares require a larger elaboration budget.
 
 /-- Naturality of the common K-flat comparison and normalized open restriction.

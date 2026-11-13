@@ -80,7 +80,7 @@ private theorem normalizedMateEquations
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (d : R₁ ⋙ G ≅ H ⋙ R₂) (e : L₁ ⋙ H ≅ G ⋙ L₂)
-    (hm : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans = e.inv) :
+    (hm : ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)) = e.inv) :
     (∀ M, G.map (a.unit.app M) ≫ d.hom.app (L₁.obj M) ≫
       R₂.map (e.hom.app M) = b.unit.app (G.obj M)) ∧
     (∀ N, L₂.map (d.hom.app N) ≫ b.counit.app (H.obj N) =
@@ -90,7 +90,7 @@ private theorem normalizedMateEquations
     have hu := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ d.hom) M
     change G.map (a.unit.app M) ≫ d.hom.app (L₁.obj M) =
       b.unit.app (G.obj M) ≫ R₂.map
-        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans.app M) at hu
+        (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)).app M) at hu
     rw [hm] at hu
     rw [reassoc_of% hu]
     rw [← Functor.map_comp, Iso.inv_hom_id_app]
@@ -98,7 +98,7 @@ private theorem normalizedMateEquations
   · intro N
     have hc := mateEquiv_counit_symm a b (TwoSquare.mk _ _ _ _ d.hom) N
     change L₂.map (d.hom.app N) ≫ b.counit.app (H.obj N) =
-      ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans.app (R₁.obj N) ≫
+      ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ d.hom)).app (R₁.obj N) ≫
         H.map (a.counit.app N) at hc
     rw [hm] at hc
     exact hc
@@ -155,18 +155,18 @@ private theorem compactSupportOpenDerivedEvaluation
   have hmate (n : ℕ) :
       ((mateEquiv (IntegralOpenReduction.systemAdjunction l E j o)
         (compactSupportCanonicalJLevelAdjunction l E j o n)).symm
-        (TwoSquare.mk _ _ _ _ (right n).hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ (right n).hom)) =
           (compactSupportCanonicalJEvaluation l E j o n).inv := by
     let a := IntegralOpenReduction.ordinarySystemAdjunction l E j o
     let b := (o.finite n).toAdjunction.comp
       (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
         (integralCoefficientCommRingSheaf l E Z n) (IntegralOpenReduction.openObject j))
-    have hi : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ (d n).hom)).natTrans := by
+    have hi : IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ (d n).hom)) := by
       rw [hd n]
       infer_instance
     have he := (exact_localization_inverse_mate a b (d n)).2.1
     have hiso : asIso ((mateEquiv a b).symm
-        (TwoSquare.mk _ _ _ _ (d n).hom)).natTrans =
+        (TwoSquare.mk _ _ _ _ (d n).hom)) =
           (IntegralOpenReduction.extensionEvaluation l E j o n).symm :=
       Iso.ext (hd n)
     rw [hiso] at he

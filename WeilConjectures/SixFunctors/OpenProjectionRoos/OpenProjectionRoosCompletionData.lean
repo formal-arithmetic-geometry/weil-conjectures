@@ -392,7 +392,6 @@ def RestrictionRepresentative
           ((OpenSemilinearTensor.extensionComplex l E j o).obj Q, F))).hom ≫
       DerivedCategory.Q.map (integralOperationsRoosMap delta.hom)
 
-set_option maxHeartbeats 800000 in
 -- The predicate retains simultaneous natural transformations and all representative equations.
 /-- The completion of the specified augmented square. Every isomorphism is pinned
 by chain or unit equations, including restriction and every strict finite reduction.

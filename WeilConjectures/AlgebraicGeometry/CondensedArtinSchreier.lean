@@ -48,7 +48,7 @@ Source: current blueprint, def-fd-artin-schreier-sheaf.md, translation action
 (blueprint: def-fd-artin-schreier-sheaf). -/
 def condensedArtinSchreierTranslationAction (a : k) :
     End (condensedArtinSchreierPushforward Λ k) :=
-  (CondensedRing.lowerStar Λ
+  End.of <| (CondensedRing.lowerStar Λ
     (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
       (((CondensedRing.upperStarLowerStarAdjunction Λ
         (Etale.artinSchreierTranslation k a)).homEquiv _ _)
@@ -67,19 +67,19 @@ Source: current blueprint, def-fd-artin-schreier-sheaf.md, displayed projector
 (blueprint: def-fd-artin-schreier-sheaf). -/
 def condensedArtinSchreierProjector (ψ : AddChar k (MonObj.Γ Λ)) :
     End (condensedArtinSchreierPushforward Λ k) :=
-  ∑ a : k, condensedArtinSchreierTranslationAction Λ k a ≫
+  ∑ a : k, End.of ((condensedArtinSchreierTranslationAction Λ k a).asHom ≫
     (CondensedRing.lowerStar Λ
       (AffineSpace.artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k))).map
         (Mod.regularEndRingHom
           (MonObj.Γ.mapFunctorMonoidHom
             (upperStarFromPoint (AffineSpace PUnit (Spec (.of k))))
-            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a))))
+            (Ring.inverse (Fintype.card k : MonObj.Γ Λ) * ψ (-a)))).asHom)
 
 /-- The condensed Artin–Schreier sheaf is the actual image of its character projector.
 Source: current blueprint, def-fd-artin-schreier-sheaf.md, condensed-coefficients paragraph
 (blueprint: def-fd-artin-schreier-sheaf). -/
 def condensedArtinSchreierSheaf (ψ : AddChar k (MonObj.Γ Λ)) :=
-  image (condensedArtinSchreierProjector Λ k ψ)
+  image ((condensedArtinSchreierProjector Λ k ψ)).asHom
 
 /-- The Artin–Schreier sheaf of a global function is the ordinary pullback of the
 character image along the morphism defined by that function. This is a module over

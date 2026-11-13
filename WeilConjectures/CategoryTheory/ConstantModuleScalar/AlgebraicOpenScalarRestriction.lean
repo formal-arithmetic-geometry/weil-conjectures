@@ -18,6 +18,7 @@ public import Mathlib.CategoryTheory.Subterminal
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.CategoryTheory.Sites.Subsheaf
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! # Ordinary scalar restriction and extension from an open subtopos -/
 
@@ -295,10 +296,10 @@ theorem open_restriction_mate_isIso
       LA.moduleUnderlying.hom.app
         ((restriction ((constantSheaf J CommRingCat).map
           (CommRingCat.ofHom (algebraMap A B)))).obj M) ≫ LB.moduleUnderlying.inv.app M) :
-    IsIso ((mateEquiv b a).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans := by
+    IsIso ((mateEquiv b a).symm (TwoSquare.mk _ _ _ _ d.inv)) := by
   let rK := restriction ((constantSheaf K CommRingCat).map
     (CommRingCat.ofHom (algebraMap A B)))
-  let m := ((mateEquiv b a).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
+  let m := ((mateEquiv b a).symm (TwoSquare.mk _ _ _ _ d.inv))
   have hm (N : modules (constantRing K B)) : IsIso (m.app N) := by
     have hu := unit_mateEquiv_symm b a (TwoSquare.mk _ _ _ _ d.inv) N
     change rK.map (b.unit.app N) ≫ d.inv.app (EB.obj N) =

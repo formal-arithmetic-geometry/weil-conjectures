@@ -43,7 +43,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option maxHeartbeats 1600000 in
 -- The canonical adjunction comparisons involve large functors on the two scheme sites.
 private theorem homEquiv_conjugate
     {C D : Type*} [Category C] [Category D]
@@ -52,9 +51,9 @@ private theorem homEquiv_conjugate
     {M : C} {N : D} (t : L'.obj M ⟶ N) :
     a.homEquiv M N (((conjugateEquiv b a).symm d.hom).app M ≫ t) =
       b.homEquiv M N t ≫ d.hom.app N := by
-  simp only [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc]
-  rw [← unit_conjugateEquiv_symm b a d.hom M]
-  simp only [Category.assoc, d.hom.naturality]
+  rw [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc,
+    ← unit_conjugateEquiv_symm b a d.hom M, Category.assoc, ← d.hom.naturality,
+    ← Category.assoc, ← Adjunction.homEquiv_unit]
 
 private theorem inverse_square
     {C : Type*} [Category C] {A B D E T : C}

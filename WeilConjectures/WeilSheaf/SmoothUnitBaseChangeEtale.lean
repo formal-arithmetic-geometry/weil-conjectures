@@ -109,7 +109,7 @@ lemma isIso_mateEquiv_app_iff (α : TwoSquare G a b H) (U : D) :
 
 /-- Whether the mate of a square is invertible does not depend on the chosen right adjoints. -/
 lemma isIso_mateEquiv_iff (α : TwoSquare G a b H) :
-    IsIso (mateEquiv adjS adjS' α).natTrans ↔ IsIso (mateEquiv adj adj' α).natTrans := by
+    IsIso (mateEquiv adjS adjS' α) ↔ IsIso (mateEquiv adj adj' α) := by
   rw [NatTrans.isIso_iff_isIso_app, NatTrans.isIso_iff_isIso_app]
   exact forall_congr' fun U ↦ isIso_mateEquiv_app_iff adj adjS adj' adjS' α U
 
@@ -126,19 +126,19 @@ lemma mateEquiv_eq_of_counit (α : TwoSquare G a b H) (c : TwoSquare S H G S')
 /-- The mate of `α` under `a ⊣ a'` and `b ⊣ b'` is invertible as soon as `α` carries the counit
 of some other adjunction `a ⊣ S` to that of some `b ⊣ S'` through an isomorphism `c`. -/
 lemma isIso_mateEquiv_of_counit (α : TwoSquare G a b H) (c : TwoSquare S H G S')
-    [IsIso c.natTrans]
+    [IsIso c]
     (h : ∀ M, α.app (S.obj M) ≫ H.map (adjS.counit.app M) =
       b.map (c.app M) ≫ adjS'.counit.app (H.obj M)) :
-    IsIso (mateEquiv adj adj' α).natTrans := by
+    IsIso (mateEquiv adj adj' α) := by
   rw [← isIso_mateEquiv_iff adj adjS adj' adjS', mateEquiv_eq_of_counit adjS adjS' α c h]
   infer_instance
 
 /-- If the inverse mate `β` of an isomorphism `c` is invertible, then `β⁻¹` carries the counit of
 `a ⊣ S` to that of `b ⊣ S'` through `c`. -/
 lemma map_counit_eq_inv_mateEquiv_symm (c : TwoSquare S H G S')
-    [IsIso ((mateEquiv adjS adjS').symm c).natTrans] (M : D) :
+    [IsIso ((mateEquiv adjS adjS').symm c)] (M : D) :
     H.map (adjS.counit.app M) =
-      (inv ((mateEquiv adjS adjS').symm c).natTrans).app (S.obj M) ≫ b.map (c.app M) ≫
+      (inv ((mateEquiv adjS adjS').symm c)).app (S.obj M) ≫ b.map (c.app M) ≫
         adjS'.counit.app (H.obj M) := by
   rw [mateEquiv_counit_symm, ← Category.assoc, ← NatTrans.comp_app, IsIso.inv_hom_id,
     NatTrans.id_app, Category.id_comp]
@@ -158,7 +158,7 @@ lemma isIso_unitBaseChange_iff [IsIso e] :
 
 /-- `CategoryTheory.Adjunction.unitBaseChange` is invertible when `e` and the mate of `bc⁻¹`
 are. -/
-lemma isIso_unitBaseChange [IsIso e] [IsIso (mateEquiv adj adj' (inv bc)).natTrans] :
+lemma isIso_unitBaseChange [IsIso e] [IsIso (mateEquiv adj adj' (inv bc))] :
     IsIso (unitBaseChange adj adj' bc e) := by
   rw [unitBaseChange]
   infer_instance
@@ -214,7 +214,7 @@ theorem isIso_mateEquiv_boundedConstructibleUpperShriekAdjunction_of_counit
           ((boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom.app M) ≫
         adj'.counit.app ((boundedConstructibleUpperStarOfMap l πV).obj M)) :
     IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-      (boundedConstructibleUpperShriekAdjunction l h') bc.inv).natTrans := by
+      (boundedConstructibleUpperShriekAdjunction l h') bc.inv) := by
   refine Adjunction.isIso_mateEquiv_of_counit _ adj _ adj' _
     (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom) fun M ↦ ?_
   rw [hbc M, ← Category.assoc]
@@ -232,7 +232,7 @@ theorem isIso_smoothUnitBaseChange_of_counit [IsIso e]
         adj'.counit.app ((boundedConstructibleUpperStarOfMap l πV).obj M)) :
     IsIso (smoothUnitBaseChange l h h' bc e) := by
   have : IsIso (mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-      (boundedConstructibleUpperShriekAdjunction l h') (inv bc.hom)).natTrans := by
+      (boundedConstructibleUpperShriekAdjunction l h') (inv bc.hom)) := by
     refine Adjunction.isIso_mateEquiv_of_counit _ adj _ adj' _
       (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' w).hom) fun M ↦ ?_
     rw [hbc M, IsIso.Iso.inv_hom, ← Category.assoc]
@@ -334,7 +334,7 @@ def etaleLowerShriekExchange :
       boundedConstructibleLowerShriek l h ⋙ boundedConstructibleUpperStarOfMap l πV :=
   ((mateEquiv (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)
     (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h')).symm
-      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)).natTrans
+      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom))
 
 /-- **Étale base change for the lower shriek** on bounded constructible `ℚ̄_ℓ`-complexes: for a
 cartesian square with `h` étale, the exchange morphism `πU^* ⋙ Rh'_! ⟶ Rh_! ⋙ πV^*` is an
@@ -368,7 +368,7 @@ theorem isIso_smoothUnitBaseChange_etaleLowerShriekBaseChange
   rw [etaleLowerShriekBaseChange_hom]
   have : IsIso ((mateEquiv (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)
       (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h')).symm
-      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)).natTrans :=
+      (.mk _ _ _ _ (boundedConstructibleUpperStarOfMapSquareIso l h h' hsq.w).hom)) :=
     isIso_etaleLowerShriekExchange l hsq
   exact Adjunction.map_counit_eq_inv_mateEquiv_symm
     (boundedConstructibleLowerShriekUpperStarAdjunctionOfEtale l h)

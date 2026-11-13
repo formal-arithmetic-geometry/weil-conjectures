@@ -181,7 +181,6 @@ theorem rationalScalarAmbientIntegralFamily_apply_add
     Limits.prod.lift_snd] at key
   exact key
 
-set_option maxHeartbeats 400000 in
 -- The tensor-induction over localized morphisms elaborates large scalar-localization terms.
 /-- Rationalized trace transport from the integral trace data.
 Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15, and the raw

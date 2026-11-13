@@ -150,7 +150,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option maxHeartbeats 400000 in
 -- The final unit normalization unifies the bundled and unrestricted coefficient sheaves.
 /-- The two reduction towers have separate tensor models preserving their units.
 This asserts no isomorphism between Hom tensor Q_n and Hom into tensor Q_n.

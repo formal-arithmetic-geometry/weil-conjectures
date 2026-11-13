@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Topology.Sheaves.GrothendieckVanishing
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-!
 # The small Zariski site of a scheme and Grothendieck vanishing

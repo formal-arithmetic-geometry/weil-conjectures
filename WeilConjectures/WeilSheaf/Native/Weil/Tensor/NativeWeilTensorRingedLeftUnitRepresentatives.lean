@@ -141,8 +141,6 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 -- The unchanged signature keeps d, which the shorter categorical proof does not use.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
--- Specializing associativity transport to these derived types needs more elaboration heartbeats.
 /-- The degree-zero calculation for the left unit of the native tensor comparison.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT; the left-unit

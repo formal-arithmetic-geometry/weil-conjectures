@@ -108,7 +108,6 @@ lemma Etale.sheafifyCocone_locally {X : Scheme.{u}} {J : Type (u + 1)} [SmallCat
   erw [hx]
   exact ht
 
-set_option maxHeartbeats 1600000 in
 -- The element chases below go through many coercions between sections of sheaves of modules
 -- and of abelian groups, which are expensive for the kernel.
 /-- A functor `G` to sheaves of `Λ`-modules on `X_ét` preserves filtered colimits as soon as it

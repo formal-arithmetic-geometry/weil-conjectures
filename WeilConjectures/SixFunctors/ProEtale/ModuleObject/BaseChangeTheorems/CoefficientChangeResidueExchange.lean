@@ -55,7 +55,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 400000 in
 -- unifying objects of the derived categories of module objects is slow
 /-- The first derived reduction of the exchange morphism `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` of the
 ambient derived categories of `𝒪_E`-module objects and the pro-étale base-change morphism with

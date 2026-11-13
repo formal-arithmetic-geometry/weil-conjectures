@@ -64,9 +64,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 the comparison `g^* Hom_{Λ_X}(M, N) ⟶ Hom_{Λ_W}(g^* M, g^* N)` is an isomorphism. -/
 instance isIso_ihomComparison_upperStar_of_weaklyEtale
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
-    IsIso (Functor.LaxMonoidal.ihomComparison (g)^*⟦Λ⟧ M).natTrans := by
+    IsIso (Functor.LaxMonoidal.ihomComparison (g)^*⟦Λ⟧ M) := by
   have (Z : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :
-      IsIso (Functor.LaxMonoidal.ihomComparison (g)^*[Ab.{u + 1}] Z).natTrans :=
+      IsIso (Functor.LaxMonoidal.ihomComparison (g)^*[Ab.{u + 1}] Z) :=
     ProEtale.isIso_ihomComparison_upperStar Ab.{u + 1} g Z
   rw [NatTrans.isIso_iff_isIso_app]
   intro N
@@ -246,7 +246,6 @@ lemma projectionMap_derivedWeaklyEtaleLowerShriek_app_Qh
   erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
   rfl
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh` on complexes of module
 objects over `Λ_Z` is an isomorphism when `K` is K-flat. The case of a K-flat `M` is
@@ -264,7 +263,6 @@ lemma isIso_μ_Qh_of_kFlat_left {Z : Scheme.{u}}
       (LF := curriedTensor (DerivedCategory _)) (Functor.LaxMonoidal.μNatTrans DerivedCategory.Qh)
       ⟨K, hK⟩ M
 
-set_option maxHeartbeats 1600000 in
 -- the instances on complexes of module objects make the elaboration slow
 open HomotopyCategory DerivedCategory in
 /-- The derived projection map of `Dg_! ⊣ Lg^*` is an isomorphism at `M = Qh K₁` for a K-flat

@@ -87,7 +87,7 @@ def cbcScalarOpenInverse (l : ℕ) [Fact l.Prime]
         pbcEmbeddingAmbientTensor l E F i Z :=
   ((mateEquiv (cbcDerivedOpenAdjunction (pbcIntegralDatum l E) j)
     (cbcDerivedOpenAdjunction (pbcIntegralDatum l F) j)).symm
-      (TwoSquare.mk _ _ _ _ (cbcScalarOrdinaryIso l E F i j).inv)).natTrans
+      (TwoSquare.mk _ _ _ _ (cbcScalarOrdinaryIso l E F i j).inv))
 
 /-- Inverse coefficient comparison for Lg* Rp* j!, formed from the open unit mate,
 the proper counit mate, and the unit-normalized completed pullback comparison.

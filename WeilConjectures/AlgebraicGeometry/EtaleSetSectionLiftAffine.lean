@@ -27,7 +27,6 @@ attribute [local irreducible] etaleSetSectionComparison
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
 -- Constructing the sheaf diagram involves several nested functor compositions.
 /-- Source: Stacks Project, Étale Cohomology Tag 09YQ, proof via Tags 0EYL,
 04HR and Sites Tag 09YN (blueprint: lem-weil-pbc-sets-section-lift-affine).

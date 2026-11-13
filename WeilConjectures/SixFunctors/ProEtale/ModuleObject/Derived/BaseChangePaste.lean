@@ -124,7 +124,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 variable {X Y X' Y' X'' Y'' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
   {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Pasting law of the derived pullback comparisons**: the comparison of the outer square of
 two horizontally pasted squares is the pasting of their comparisons, through the composition
@@ -153,7 +152,6 @@ lemma pullbackSquareComparison_paste (sq₁ : CommSq g' f' f g) (sq₂ : CommSq 
     (leftDerivedUpperStarComp_assoc_app Λ h' g' f N) _ _
     (pullbackSquareComparison_hom_app Λ sq N)
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- **Two-out-of-three for pasted base change morphisms**: if the base change morphism of the
 left square `sq₁` is invertible, then the base change morphism of the outer square is invertible

@@ -119,8 +119,8 @@ private theorem exists_frobenius_linear_local_lift
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e)) (U : S.Etale)
     (b : Γ((Modules.tensorPullback U.hom).obj E, ⊤)) (x : U.left) :
     ∃ (W : S.Etale) (f : W ⟶ U) (w : W.left)
@@ -200,8 +200,8 @@ theorem frobenius_linear_vector_bundle_locally_surjective
     (hF : ∀ (U : S.Etale) (a : Γ(U.left, ⊤))
       (e : Γ((Modules.tensorPullback U.hom).obj E, ⊤)),
       F.hom.app (op U)
-          ((((Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+          ((((Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+        (((Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
           (F.hom.app (op U) e)) :
     Sheaf.IsLocallySurjective (F - 𝟙 _) := by
   apply locally_surjective_of_pointwise_lifts S _ _ (F - 𝟙 _)
