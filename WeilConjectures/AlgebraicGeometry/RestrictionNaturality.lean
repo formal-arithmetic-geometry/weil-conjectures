@@ -167,6 +167,7 @@ private theorem target_diagram_cancel
   rw [hm, IsIso.inv_hom_id, Category.comp_id, hβ, ← Category.assoc, hj]
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Resolution transports cross module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)

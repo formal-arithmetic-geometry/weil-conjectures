@@ -94,6 +94,7 @@ private theorem sectionCohomologyTheta_naturality
     (PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)) g p
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The naturality squares compare several termwise composite functors.
 /-- The canonical resolution-section map commutes with coefficient maps.
 
