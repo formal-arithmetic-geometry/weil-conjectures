@@ -190,6 +190,34 @@ private theorem transport_homology
   simpa only [Category.assoc] using congrArg
     (fun g => g ≫ E.map (U.map L.homologyπ)) hc
 
+private theorem transport_augmentation
+    {C D P Q : Type*} [Category* C] [Category* D] [Category* P] [Category* Q]
+    [Abelian C] [Abelian D] [Abelian P] [Abelian Q]
+    (B : C ⥤ Q) (U : D ⥤ P) (E : P ⥤ Q)
+    [B.PreservesZeroMorphisms] [U.PreservesZeroMorphisms] [E.PreservesZeroMorphisms]
+    [PreservesFiniteLimits E] [PreservesFiniteLimits U]
+    (K : ShortComplex C) (L : ShortComplex D)
+    [B.PreservesLeftHomologyOf K] [U.PreservesLeftHomologyOf L]
+    [E.PreservesLeftHomologyOf (L.map U)]
+    (a : K.map B ⟶ (L.map U).map E)
+    {R H : C} {S G : D} (r : R ⟶ H) (e : H ≅ K.homology) (x : R ⟶ K.cycles)
+    (t : S ⟶ G) (d : G ≅ L.homology) (y : S ⟶ L.cycles)
+    (b : B.obj R ⟶ E.obj (U.obj S))
+    (θ : (L.map U).homology ⟶ U.obj L.homology)
+    (hr : r ≫ e.hom = x ≫ K.homologyπ)
+    (ht : t = y ≫ L.homologyπ ≫ d.inv)
+    (hθ : θ = (L.mapHomologyIso U).hom)
+    (ha : B.map x ≫ B.map K.iCycles ≫ a.τ₂ =
+      (b ≫ E.map (U.map y)) ≫ E.map (U.map L.iCycles)) :
+    B.map r ≫ B.map e.hom ≫ (K.mapHomologyIso B).inv ≫
+      ShortComplex.homologyMap a ≫ ((L.map U).mapHomologyIso E).hom ≫
+      E.map θ ≫ E.map (U.map d.inv) = b ≫ E.map (U.map t) := by
+  rw [← B.map_comp_assoc, hr, B.map_comp_assoc, hθ, ht]
+  simp only [Functor.map_comp]
+  have hh := transport_homology B U E K L a (B.map x) (b ≫ E.map (U.map y)) ha
+  simpa only [Category.assoc] using
+    congrArg (fun g ↦ g ≫ E.map (U.map d.inv)) hh
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
@@ -280,10 +308,8 @@ theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y
   let E := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
     (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
   have : A.Additive := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace
-  have : D.Additive := instAdditivePushforward f
   let C := (A.mapHomologicalComplex (.up ℕ)).obj R.resolution.cocomplex
   let K := (D.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
-  let L := (P.mapHomologicalComplex (.up ℕ)).obj K
   have hPA : P.Additive := inferInstanceAs
     ((SheafOfModules.forget.{u} Y.ringCatSheaf).Additive)
   have hP : P.PreservesLeftHomologyOf (K.sc 0) :=
@@ -292,44 +318,24 @@ theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y
       E.obj (P.obj (D.obj F)) :=
     (F.restrictAppIso U.ι ⊤).hom ≫
       F.presheaf.map (eqToHom U.ι_image_top.symm).op
-  have h : B.map (A.toRightDerivedZero.app ((restrictFunctor U.ι).obj F)) ≫
-      resolutionSectionClass R.resolution K V R.sections 0 ≫
-        Hom.app (I.isoRightDerivedObj D 0).inv V =
-      b ≫ Hom.app (D.toRightDerivedZero.app F) V := by
-    change B.map (A.toRightDerivedZero.app ((restrictFunctor U.ι).obj F)) ≫
-        B.map (R.resolution.isoRightDerivedObj A 0).hom ≫
-        ((C.sc 0).mapHomologyIso B).inv ≫
-        HomologicalComplex.homologyMap R.sections.hom 0 ≫
-        ((L.sc 0).mapHomologyIso E).hom ≫
-        E.map (sectionCohomologyTheta K 0) ≫
-        E.map (P.map (I.isoRightDerivedObj D 0).inv) =
-      b ≫ (P ⋙ E).map (D.toRightDerivedZero.app F)
-    have hsrc := congrArg B.map (augmentation_comp_resolution R.resolution A)
-    simp only [Functor.map_comp] at hsrc
-    erw [reassoc_of% hsrc]
-    have htheta := @theta_zero Y K hPA hP
-    rw [htheta]
-    rw [I.toRightDerivedZero_eq D]
-    simp only [Functor.comp_map, Functor.map_comp]
-    have haug : B.map (R.resolution.toRightDerivedZero' A) ≫
-        B.map (C.iCycles 0) ≫ R.sections.hom.f 0 =
-      (b ≫ E.map (P.map (I.toRightDerivedZero' D))) ≫
-        E.map (P.map (K.iCycles 0)) := by
-      have ha := congrArg B.map (R.resolution.toRightDerivedZero'_comp_iCycles A)
-      simp only [Functor.map_comp] at ha
-      erw [reassoc_of% ha]
-      have hb := congrArg (P ⋙ E).map (I.toRightDerivedZero'_comp_iCycles D)
-      simp only [Functor.map_comp, Functor.comp_map] at hb
-      erw [Category.assoc, hb]
-      exact restricted_augmentation_sections I U R
-    have ht := transport_homology B P E (C.sc 0) (K.sc 0)
-      ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) 0).map R.sections.hom)
-      (B.map (R.resolution.toRightDerivedZero' A))
-      (b ≫ E.map (P.map (I.toRightDerivedZero' D))) haug
-    have ht' := congrArg
-      (fun g => g ≫ E.map (P.map (I.isoRightDerivedObj D 0).inv)) ht
-    simp only [Category.assoc] at ht'
-    exact ht'
+  have haug : B.map (R.resolution.toRightDerivedZero' A) ≫
+      B.map (C.iCycles 0) ≫ R.sections.hom.f 0 =
+    (b ≫ E.map (P.map (I.toRightDerivedZero' D))) ≫
+      E.map (P.map (K.iCycles 0)) := by
+    have ha := congrArg B.map (R.resolution.toRightDerivedZero'_comp_iCycles A)
+    simp only [Functor.map_comp] at ha
+    erw [reassoc_of% ha]
+    have hb := congrArg (P ⋙ E).map (I.toRightDerivedZero'_comp_iCycles D)
+    simp only [Functor.map_comp, Functor.comp_map] at hb
+    erw [Category.assoc, hb]
+    exact restricted_augmentation_sections I U R
+  have h := transport_augmentation B P E (C.sc 0) (K.sc 0)
+    ((HomologicalComplex.shortComplexFunctor _ (.up ℕ) 0).map R.sections.hom)
+    (A.toRightDerivedZero.app ((restrictFunctor U.ι).obj F))
+    (R.resolution.isoRightDerivedObj A 0) (R.resolution.toRightDerivedZero' A)
+    (D.toRightDerivedZero.app F) (I.isoRightDerivedObj D 0) (I.toRightDerivedZero' D)
+    b (sectionCohomologyTheta K 0) (augmentation_comp_resolution R.resolution A)
+    (I.toRightDerivedZero_eq D) (@theta_zero Y K hPA hP) haug
   have hs := ConcreteCategory.congr_hom h s
   exact hs
 

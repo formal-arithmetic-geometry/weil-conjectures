@@ -32,7 +32,6 @@ attribute [local irreducible] Scheme.Modules.moduleCohomologyFMap
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.
 (blueprint: lem-weil-pbc-formal-functions-finite-quotient-maps)
