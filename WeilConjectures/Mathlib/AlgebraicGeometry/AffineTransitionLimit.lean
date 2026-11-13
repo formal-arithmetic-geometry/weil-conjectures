@@ -695,9 +695,6 @@ lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
   rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_sV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
-set_option maxHeartbeats 1600000 in
--- The defeq checks between `algebraMap`s of the two `Algebra` structures in scope and the
--- structure sheaf restriction maps are expensive on the opens diagram of the approximation.
 /-- (Implementation, Stacks 01Z9) The sections over the basic open `Wⱼ(r l)` are the
 localization of the coefficient algebra of the stage away from the tautological element
 `(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity combines the
@@ -707,20 +704,19 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : Fin E.n) :
     IsLocalization.Away (T.h l)
       Γ(E.WD.obj T.j, (E.WD.obj T.j).basicOpen (T.r l)) := by
   let := (T.ρRes l).hom.toAlgebra
-  have := isLocalization_basicOpen_of_qcqs (X := E.WD.obj T.j) (U := ⊤)
-    isCompact_univ isQuasiSeparated_univ (T.r l)
-  refine ⟨fun ⟨_, m, rfl⟩ ↦ ?_, fun z ↦ ?_, fun {a a'} hd ↦ ?_⟩
-  · simp only [RingHom.algebraMap_toAlgebra, map_pow]
-    refine IsUnit.pow _ ?_
+  refine IsLocalization.Away.mk (T.h l) ?_ (fun z ↦ ?_) (fun a a' hd ↦ ?_)
+  · change IsUnit (((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom (T.r l))
     exact RingedSpace.isUnit_res_basicOpen (E.WD.obj T.j).toRingedSpace (T.r l)
   · obtain ⟨m, p, hp, hres⟩ := T.hgen l z
-    refine ⟨(⟨p, hp⟩, ⟨T.h l ^ m, m, rfl⟩), ?_⟩
-    simp only [RingHom.algebraMap_toAlgebra, map_pow]
+    refine ⟨m, ⟨p, hp⟩, ?_⟩
+    change z * ((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom (T.r l) ^ m =
+      ((E.WD.obj T.j).presheaf.map (homOfLE le_top).op).hom p.2
     exact hres.symm
   · -- The second components agree after multiplication by a power of `r l`.
     have hres : a.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) =
         a'.1.2 |_ (E.WD.obj T.j).basicOpen (T.r l) := hd
-    obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top hres
+    obtain ⟨k, hk⟩ := exists_of_res_eq_of_qcqs_of_top (X := E.WD.obj T.j)
+      (f := a.1.2) (g := a'.1.2) (s := T.r l) hres
     have hk' : T.r l ^ k * (a.1.2 - a'.1.2) = 0 := by
       rw [mul_sub, sub_eq_zero]
       exact hk
@@ -731,7 +727,7 @@ lemma Stage.isLocalization_away (T : E.Stage) (l : Fin E.n) :
       rw [map_mul, map_pow, map_sub, T.hA _ a.2, T.hA _ a'.2, ← map_sub]
       exact ht
     obtain ⟨K, hK⟩ := E.exists_pow_mul_eq_zero_of_sV_eq_zero l hV0
-    refine ⟨⟨T.h l ^ (K + k), K + k, rfl⟩, Subtype.ext (Prod.ext ?_ ?_)⟩
+    refine ⟨K + k, Subtype.ext (Prod.ext ?_ ?_)⟩
     · simp only [MulMemClass.coe_mul, SubmonoidClass.coe_pow, Stage.coe_h, Prod.fst_mul,
         Prod.pow_fst]
       rw [← sub_eq_zero, ← mul_sub, pow_add, mul_assoc]
