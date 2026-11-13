@@ -42,22 +42,6 @@ variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
 local instance hasColimitsOfSize_shiftUnitor : HasColimitsOfSize.{0, 0} C :=
   hasColimitsOfSizeShrink C
 
--- Reuse the coproduct and graded tensor instances in the monoidal comparisons.
-local instance hasCoproducts_shiftUnitor (J : Type) : HasColimitsOfShape (Discrete J) C :=
-  inferInstance
-
-local instance hasTensor_shiftUnitor (X₁ X₂ : GradedObject ℤ C) : X₁.HasTensor X₂ :=
-  inferInstance
-
-local instance hasTensor₄ObjExt_shiftUnitor (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
-    GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
-
-local instance hasGoodTensor₁₂Tensor_shiftUnitor (X₁ X₂ X₃ : GradedObject ℤ C) :
-    GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
-
-local instance hasGoodTensorTensor₂₃_shiftUnitor (X₁ X₂ X₃ : GradedObject ℤ C) :
-    GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
-
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
 namespace TensorCommShift₂
@@ -69,11 +53,19 @@ noncomputable def unitKFlat : CochainComplex.KFlat C :=
 
 end TensorCommShift₂
 
-set_option trace.profiler true in
 open TensorCommShift₂ in
 lemma leftUnitor_commShift (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).obj (𝟙_ _)).commShiftIso n).hom.app (𝟙_ _) ≫
       (λ_ (𝟙_ (DerivedCategory C))).hom⟦n⟧' = (λ_ ((𝟙_ (DerivedCategory C))⟦n⟧)).hom := by
+  -- Reuse the coproduct and graded tensor instances throughout the comparison.
+  have (J : Type) : HasColimitsOfShape (Discrete J) C := inferInstance
+  have (X₁ X₂ : GradedObject ℤ C) : X₁.HasTensor X₂ := inferInstance
+  have (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
   have := Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (M := ℤ) (LKFlat C) (L C)
     (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat (HomologicalComplex.quasiIso C (.up ℤ)) (F C)
     (curriedTensor (DerivedCategory C)) (unitKFlat C)
@@ -121,11 +113,19 @@ lemma leftUnitor_commShift (n : ℤ) :
     rw [← Functor.map_comp_assoc, hF]
   exact hG
 
-set_option trace.profiler true in
 open TensorCommShift₂ in
 lemma rightUnitor_commShift (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app (𝟙_ _) ≫
       (ρ_ (𝟙_ (DerivedCategory C))).hom⟦n⟧' = (ρ_ ((𝟙_ (DerivedCategory C))⟦n⟧)).hom := by
+  -- Reuse the coproduct and graded tensor instances throughout the comparison.
+  have (J : Type) : HasColimitsOfShape (Discrete J) C := inferInstance
+  have (X₁ X₂ : GradedObject ℤ C) : X₁.HasTensor X₂ := inferInstance
+  have (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := inferInstance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := inferInstance
   have := Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (M := ℤ) (L C) (LKFlat C)
     (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
     (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)
