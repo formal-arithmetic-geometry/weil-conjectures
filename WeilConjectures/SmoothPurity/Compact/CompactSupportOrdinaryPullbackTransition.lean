@@ -98,6 +98,24 @@ private def evG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (compactSupportSystemQuotient l E) f n
 
 set_option profiler true in
+private theorem systemEval_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (N : ProEtale.VaryingRing.Modules (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) Y) :
+    (coefficientSequenceEvaluation l E Y n).map
+        ((ProEtale.VaryingRing.moduleAdj (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) f).unit.app N) ≫
+      (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)
+        (compactSupportSystemQuotient l E) f n).hom.app
+          ((ProEtale.VaryingRing.pull (compactSupportSystemLevel l E)
+            (compactSupportSystemQuotient l E) f).obj N) ≫
+      (ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E n) f).map
+        ((ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
+          (compactSupportSystemQuotient l E) f n).hom.app N) =
+    (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f).unit.app
+      ((coefficientSequenceEvaluation l E Y n).obj N) := by
+  exact compactSupportOrdinaryPullbackUnit l E f n N
+
+set_option profiler true in
 /-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
 Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
 (blueprint: lem-weil-compact-support-ordinary-pullback-transition).
@@ -149,10 +167,10 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     ?_ ?_ ?_ ?_ N
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
-    exact compactSupportOrdinaryPullbackUnit l E f m Q
+    exact systemEval_unit l E f m Q
   · intro Q
     dsimp only [Functor.comp_obj, Functor.comp_map]
-    exact compactSupportOrdinaryPullbackUnit l E f n Q
+    exact systemEval_unit l E f n Q
   · intro M
     dsimp only [Functor.comp_obj, Functor.comp_map]
     exact compactSupportOrdinaryDirectImageTransition l E f h M
