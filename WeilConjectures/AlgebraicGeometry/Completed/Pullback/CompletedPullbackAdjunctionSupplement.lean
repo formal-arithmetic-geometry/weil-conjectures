@@ -349,7 +349,15 @@ private theorem supplied_module_homEquiv
     exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
   exact ⟨B', hB⟩
 
--- The normalized module Hom equivalence elaborates the two transported operation diagrams.
+open SheafOfModules SheafOfModules.GeometricConstruction in
+private theorem supplied_restrictScalars_map
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R S : Sheaf J CommRingCat.{u}} (c : R ⟶ S)
+    {M N : SheafOfModules.{u} (base S)} (b : M ⟶ N) :
+    (mset R).map ((restrictScalars ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = (mset S).map b := rfl
+
+-- Construct the adjunction from the normalized module Hom equivalence.
 open SheafOfModules SheafOfModules.GeometricConstruction in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -387,9 +395,7 @@ private theorem supplied_module_adjunction
     have hn : (mset B).map (f.modules.map b) ≫ eP.hom.app H' =
         eP.hom.app H ≫ f.direct.map ((mset A).map b) := eP.hom.naturality b
     rw [hn, ← Category.assoc, hB, (mset RI).map_comp]
-    change f.adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) = _
-    rw [← Category.assoc, f.adj.homEquiv_naturality_right]
+    rw [supplied_restrictScalars_map, ← Category.assoc, f.adj.homEquiv_naturality_right]
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
