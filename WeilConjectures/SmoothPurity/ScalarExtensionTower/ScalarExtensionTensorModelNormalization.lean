@@ -253,6 +253,22 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
       (congrArg Iso.hom (roosBridge_eq l E W ρ
         ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))).symm)
   have hfinal := normalizedTensorComposite L H
+    (A₀ := T.systemClosed.tensor.obj
+      (T.reduction.obj (DerivedCategory.Q.obj P.obj),
+        T.reduction.obj (DerivedCategory.Q.obj Q.obj)))
+    (A₁ := S.systemClosed.tensor.obj
+      (S.reduction.obj (DerivedCategory.Q.obj P.obj),
+        S.reduction.obj (DerivedCategory.Q.obj Q.obj)))
+    (A₂ := S.systemClosed.tensor.obj (DerivedCategory.Q.obj C, DerivedCategory.Q.obj D))
+    (A₃ := DerivedCategory.Q.obj ((tensor l E W).obj (C, D)))
+    (B₀ := T.systemClosed.tensor.obj
+      (DerivedCategory.Q.obj (R.obj P.obj), DerivedCategory.Q.obj (R.obj Q.obj)))
+    (B₁ := DerivedCategory.Q.obj ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))
+    (Y₀ := U.obj ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))
+    (Y₁ := U.obj ((tensor l E W).obj (C, D)))
+    (Y₂ := (integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj))
+    (I := (integralCompletedTensor l E W).obj
+      (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     ((pullbackTensorIntegralTensorModel l E W).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     (T.systemClosed.tensor.map
