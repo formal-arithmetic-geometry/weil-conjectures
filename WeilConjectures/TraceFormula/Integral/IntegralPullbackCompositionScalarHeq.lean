@@ -250,10 +250,12 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
   run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-    let localDecl ← Lean.Meta.getLocalDeclFromUserName `hh
-    Lean.logInfo m!"TARGET TYPE: {repr target.consumeMData.getAppArgs[0]!}"
-    Lean.logInfo m!"HH LEFT TYPE: {repr localDecl.type.consumeMData.getAppArgs[0]!}"
-    Lean.logInfo m!"HH RIGHT TYPE: {repr localDecl.type.consumeMData.getAppArgs[2]!}"
+    let ht ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `hh).type
+    let opts := (← Lean.getOptions).setBool `pp.explicit true |>.setBool `pp.universes true
+    Lean.withOptions (fun _ ↦ opts) do
+      Lean.logInfo m!"TARGET TYPE: {target.consumeMData.getAppArgs[0]!}"
+      Lean.logInfo m!"HH LEFT TYPE: {ht.consumeMData.getAppArgs[0]!}"
+      Lean.logInfo m!"HH RIGHT TYPE: {ht.consumeMData.getAppArgs[2]!}"
   exact eq_of_heq hh
 
 end Composition
