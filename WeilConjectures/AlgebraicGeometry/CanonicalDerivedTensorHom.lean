@@ -80,9 +80,9 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     inferInstance
   have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
     inferInstance
-  letI := SheafOfModules.monoidalCategory X.sheaf
-  letI := schemeDerivedTensorMonoidal X
-  letI := SheafOfModules.symmetricCategory X.sheaf
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := schemeDerivedTensorMonoidal X
+  let := SheafOfModules.symmetricCategory X.sheaf
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
   let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj X.sheaf
   have : IsGrothendieckAbelian.{uCD} C := SheafOfModules.isGrothendieckAbelian _
