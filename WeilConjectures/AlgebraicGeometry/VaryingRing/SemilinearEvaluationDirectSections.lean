@@ -35,6 +35,7 @@ theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Modules R φ X) (n : ℕ) (H : Y.ProEtᵒᵖ)
     (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :
     HEq (((moduleEvalP R φ f n).hom.app M).val.app H x) x := by
-  exact heq_of_eq ((moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x)
+  have h := heq_of_eq ((moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x)
+  exact h
 
 end AlgebraicGeometry.ProEtale.VaryingRing
