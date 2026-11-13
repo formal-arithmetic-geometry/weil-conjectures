@@ -251,9 +251,7 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     exact hr.trans (congrArg (fun f ↦ f ≫ H.map (U.map t.hom))
       (congrArg Iso.hom (roosBridge_eq l E W ρ
         ((tensor l E W).obj (R.obj P.obj, R.obj Q.obj)))).symm)
-  refine normalizedTensorComposite_transport (tensorModelRealization_hom l E W S
-    (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)) ?_
-  refine normalizedTensorComposite L H
+  have hfinal := normalizedTensorComposite L H
     ((pullbackTensorIntegralTensorModel l E W).hom.app
       (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
     (T.systemClosed.tensor.map
@@ -274,10 +272,10 @@ theorem tensorModelRealization_normalized (W : Scheme.{u})
     (integralComparisonRoosBridge l E W ρ ((tensor l E W).obj (C, D))).hom
     (U.map t.hom) q.hom (pullbackTensorTensorTower l E W P.obj Q.obj).hom
     ((integralCompletedTensorComparison l E W).hom.app (P, Q))
-    ?_ ?_ ?_ ?_
-  · exact (Category.assoc _ _ _).trans hm
-  · exact hr'
-  · exact hq
-  · exact hreference
+    ((Category.assoc _ _ _).trans hm) hr' hq hreference
+  have hnormalized := normalizedTensorComposite_transport
+    (tensorModelRealization_hom l E W S
+      (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)) hfinal
+  exact hnormalized
 
 end WeilConjectures.ScalarExtensionTower
