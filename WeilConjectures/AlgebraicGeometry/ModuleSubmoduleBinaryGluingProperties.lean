@@ -42,9 +42,8 @@ private theorem isIso_overMap_of_components
     {M N : SheafOfModules.{u} (R.over V)} (f : M ⟶ N)
     (h : ∀ A : Over U, IsIso (f.val.app (op ((Over.map j).obj A)))) :
     IsIso ((overMap R j).map f) := by
-  apply isIso_of_components
-  intro T
-  exact h T.unop
+  have hc (T : (Over U)ᵒᵖ) : IsIso (((overMap R j).map f).val.app T) := h T.unop
+  exact isIso_of_components ((overMap R j).map f)
 
 private theorem isIso_of_overMap_app
     {C : Type*} [Category* C] {J : GrothendieckTopology C}

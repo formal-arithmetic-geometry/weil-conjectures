@@ -103,6 +103,31 @@ private theorem tuple_over_eval (X : RingedSpace.{u})
   exact hs.trans (((M.over U).val.sections_property ((M.over U).freeHomEquiv g i)
     (Over.homMk (homOfLE hVU) : Over.mk (homOfLE hVU) ⟶ Over.mk (𝟙 U)).op).symm)
 
+-- Convert a family of section lifts to a commuting free-sheaf map for arbitrary modules.
+private theorem free_tuple_lift_of_sections (X : RingedSpace.{u})
+    (G H : SheafOfModules.{u} (moduleRings X)) (q : G ⟶ H)
+    {U V : Opens X} (hVU : V ≤ U) {I : Type u}
+    (g : SheafOfModules.free (R := (moduleRings X).over U) I ⟶ H.over U)
+    (t : I → G.val.obj (Opposite.op V))
+    (ht : ∀ i, q.val.app (Opposite.op V) (t i) =
+      H.val.map (homOfLE hVU).op
+        (((H.over U).freeHomEquiv g i).val (Opposite.op (Over.mk (𝟙 U))))) :
+    let D := SheafOfModules.overMap (moduleRings X) (homOfLE hVU)
+    let e := SheafOfModules.mapFreeIso D I
+      (SheafOfModules.overMapUnitIso (R := moduleRings X) (homOfLE hVU)).symm
+    let c := (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE hVU)).app H
+    (G.over V).freeHomEquiv.symm (fun i ↦ section_on_open X G V (t i)) ≫ q.over V =
+      e.hom ≫ D.map g ≫ c.hom := by
+  dsimp only
+  apply (H.over V).freeHomEquiv.injective
+  funext i
+  rw [SheafOfModules.freeHomEquiv_comp_apply, Equiv.apply_symm_apply]
+  apply sections_ext_top X H V
+  rw [tuple_over_eval]
+  change q.val.app (Opposite.op V) (G.val.map (𝟙 _) (t i)) = _
+  rw [G.val.map_id]
+  exact ht i
+
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
 -- Unfold restriction functors while synthesizing the pullback instance.
@@ -164,17 +189,8 @@ theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
   let l₀ : SheafOfModules.free (R := (moduleRings X).over V) (ULift.{u} (Fin n)) ⟶
       G.over V := (G.over V).freeHomEquiv.symm (fun i ↦ section_on_open X G V (t i))
   have hl₀ : l₀ ≫ (cokernel.π f).over V = e.hom ≫ D.map g ≫ cH.hom := by
-    apply ((cokernel f).over V).freeHomEquiv.injective
-    funext i
-    rw [SheafOfModules.freeHomEquiv_comp_apply]
-    dsimp only [l₀]
-    rw [Equiv.apply_symm_apply]
-    apply sections_ext_top X (cokernel f) V
-    rw [tuple_over_eval]
-    change (cokernel.π f).val.app (Opposite.op V)
-      (G.val.map (𝟙 _) (t i)) = _
-    rw [G.val.map_id]
-    change (cokernel.π f).val.app (Opposite.op V) (t i) = _
+    apply free_tuple_lift_of_sections X G (cokernel f) (cokernel.π f) hVU g t
+    intro i
     rw [ht i, tuple_over_eval]
     exact ((cokernel f).val.map_comp_apply
       (homOfLE inf_le_left).op (homOfLE hVT).op _).symm.trans

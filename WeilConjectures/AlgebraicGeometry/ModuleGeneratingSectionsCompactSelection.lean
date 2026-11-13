@@ -76,8 +76,9 @@ private theorem epi_overMap_of_open_cover
   have he := hU i
   let Q := W ⊓ U i
   have hQV : Q ≤ V := inf_le_left.trans (hWK.trans hKV)
-  let b : G.val.obj (.op (Over.mk (homOfLE hQV))) :=
-    G.val.map (Over.homMk (homOfLE (show Q ≤ W from inf_le_left))).op a
+  let r : Over.mk (homOfLE hQV) ⟶ Over.mk (homOfLE (hWK.trans hKV)) :=
+    Over.homMk (homOfLE inf_le_left)
+  let b : G.val.obj (.op (Over.mk (homOfLE hQV))) := G.val.map r.op a
   obtain ⟨Z, hZQ, hxZ, z, hz⟩ :=
     (epi_overMap_iff_local_lifts X V (U i) ((hUK i).trans hKV) _).mp he
       Q inf_le_right b x ⟨hxW, hxi⟩
@@ -89,7 +90,6 @@ private theorem epi_overMap_of_open_cover
     (Over.homMk (homOfLE (hZQ.trans inf_le_left))).op a
   simpa only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
     ← Over.homMk_comp, homOfLE_comp] using hz
-
 
 -- Elaborating free coproduct maps across slice restriction needs additional steps.
 set_option backward.isDefEq.respectTransparency false in
