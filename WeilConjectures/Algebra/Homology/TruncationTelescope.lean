@@ -35,8 +35,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- Comparing the two telescope formulas unfolds the truncation diagram under a cone type.
 /-- (blueprint: lem-pc-kflat-hocolim-truncations) For a complex `K` of modules over a sheaf of
 commutative rings on a site, the canonical map from the telescope of its good truncations to
 `K` is a quasi-isomorphism. Also, filtered colimits preserve quasi-isomorphisms of such
@@ -121,7 +119,8 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
       𝟙 (∐ E) - Sigma.desc (fun n ↦ t n ≫ Sigma.ι E (n + 1)) := by
     apply Sigma.hom_ext
     intro n
-    simp [telescopeColimitShift, E, t, D, Preadditive.comp_sub]
+    simp only [telescopeColimitShift, Preadditive.comp_sub, Category.comp_id,
+      Sigma.ι_comp_desc]
   obtain ⟨g, hg, hz, hq⟩ := quasiIso_telescopeColimit R D
   have hq' : QuasiIso (g ≫ e.hom) := by
     let _ := hq
