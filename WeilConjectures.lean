@@ -14008,6 +14008,7 @@ public import WeilConjectures.Blowup.GluingOverlap
 public import WeilConjectures.Blowup.GraphQuasiFinite
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.PartialSectionExtension
+public import WeilConjectures.Blowup.PartialSectionExtensionFiniteType
 public import WeilConjectures.Blowup.PartialSectionExtensionReduction
 public import WeilConjectures.Blowup.Principalization
 public import WeilConjectures.Blowup.Proper
