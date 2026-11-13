@@ -93,21 +93,22 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).app
         K)) :
     IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq').app K.obj) := by
-  unfold baseChangeMap
-  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq']
+  let sq₀ : CommSq g'.left f'.left f.left g.left :=
+    ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩
+  have hsq : sq' = sq₀ := Subsingleton.elim _ _
+  let θ := Adjunction.leftDerivedFunctorSquareIso
+    (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ) sq₀)
+  have hcomp : pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq₀ = θ :=
+    pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq₀
   have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj :=
+        K).hom = θ.hom.app K.obj :=
     (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicAlgClRingObj ℓ) sq K).trans (congrArg (fun e ↦ e.hom.app K.obj)
-        (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ)
-          (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)))
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq K).trans (congrArg (fun e ↦ e.hom.app K.obj) hcomp)
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
-    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicAlgClRingObj ℓ) sq'))
+    θ
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
@@ -116,7 +117,7 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
     hθ K
-  rw [← key, ObjectProperty.isIso_hom_iff]
+  rw [hsq, baseChangeMap, hcomp, ← key, ObjectProperty.isIso_hom_iff]
   convert hres using 3
   all_goals rfl
 
