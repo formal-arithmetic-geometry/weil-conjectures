@@ -27,6 +27,7 @@ open CategoryTheory
 
 namespace CategoryTheory.Sheaf
 
+set_option profiler true in
 set_option maxHeartbeats 450000 in
 -- Comparing the two Ext universes and the lifted homology composites needs more reductions.
 set_option backward.isDefEq.respectTransparency false in
