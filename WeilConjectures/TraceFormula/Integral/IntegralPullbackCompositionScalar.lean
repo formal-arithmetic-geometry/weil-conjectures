@@ -49,6 +49,12 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 set_option allowUnsafeReducibility true in
 attribute [local reducible] integralSystemReduction
 
+/-- Scalar extension with the finite-system source and target displayed explicitly. -/
+private abbrev integralCompositionFiniteScalar (X : Scheme.{u}) :
+    finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X ⥤
+      finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X :=
+  integralComparisonDerivedSequenceScalar l E L ι X
+
 private theorem scalar_comp_naturality {C D D' B : Type*}
     [Category C] [Category D] [Category D'] [Category B]
     (F : C ⥤ D) (G : D ⥤ B) (F' : C ⥤ D') (G' : D' ⥤ B)
@@ -152,14 +158,14 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
     [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
     {M N : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Y}
     (a : M ⟶ N) :
-    (integralComparisonDerivedSequenceScalar l E L ι X).map
+    (integralCompositionFiniteScalar l E L ι X).map
         ((finiteSystemDerivedPullback (integralSystemRings l E)
           (integralSystemTransition l E) f).map a) ≫
         (integralComparisonSystemScalarPullback l E L ι f).hom.app N =
       (integralComparisonSystemScalarPullback l E L ι f).hom.app M ≫
         (finiteSystemDerivedPullback (integralSystemRings l L)
           (integralSystemTransition l L) f).map
-            ((integralComparisonDerivedSequenceScalar l E L ι Y).map a) := by
+            ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralComparisonSystemScalarPullback l E L ι f).hom.naturality a
 
 private theorem integralComparisonSystemScalarPullback_finite_mixed
@@ -169,7 +175,7 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
     [∀ z : Z, Invertible (l : Z.residueField z)]
     (h : Z ⟶ W) (k : W ⟶ V)
     (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
-    (integralComparisonDerivedSequenceScalar l E L ι Z).map
+    (integralCompositionFiniteScalar l E L ι Z).map
         ((integralComparisonSystemComposition l E h k).hom.app M) ≫
       (integralComparisonSystemScalarPullback l E L ι h).hom.app
         ((finiteSystemDerivedPullback (integralSystemRings l E)
@@ -179,7 +185,7 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
           ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
       (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
-          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
+          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
   exact NatTrans.congr_app
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
 
@@ -242,7 +248,7 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have Np := scalar_comp_naturality
     (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
       E L ι Z) (integralSystemReduction l L Z)
-    (integralSystemReduction l E Z) (integralComparisonDerivedSequenceScalar l E L ι Z)
+    (integralSystemReduction l E Z) (integralCompositionFiniteScalar l E L ι Z)
     (integralSystemScalarIso l E L ι Z).hom
     (((integralPullbackComposition l E).choose h k).hom.app K)
   have CE := (integralPullbackComposition l E).choose_spec.2.2 h k K
@@ -259,15 +265,15 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   have eE := finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k
     ((integralSystemReduction l E V).obj K)
   have eL := finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
-    ((integralComparisonDerivedSequenceScalar l E L ι V).obj
+    ((integralCompositionFiniteScalar l E L ι V).obj
       ((integralSystemReduction l E V).obj K))
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have IIIk' := scalar_map_three_eq_three (UL h) IIIk
   have CE' := scalar_map_three_eq_two
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
-    (integralComparisonDerivedSequenceScalar l E L ι Z) CE
-  have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
+    (integralCompositionFiniteScalar l E L ι Z) CE
+  have eE' := congrArg (integralCompositionFiniteScalar l E L ι Z).map eE
   have paste := scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
   exact paste
 
