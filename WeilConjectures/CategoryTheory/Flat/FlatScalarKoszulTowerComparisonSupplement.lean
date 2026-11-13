@@ -304,26 +304,6 @@ private theorem inverseUnitComparison
   rw [← Category.assoc, hu, hB, ← F.map_comp, hA]
   exact (F.map_id E).symm
 
-private theorem composeCompletionComparison
-    {C D T U : Type*} [Category C] [Category D] [Category T] [Category U]
-    (TB : C ⥤ T) (TR : D ⥤ U) (IB : T ⥤ C) (IR : U ⥤ D)
-    (F : C ⥤ D) (G : T ⥤ U)
-    (alpha : IB ⋙ F ≅ G ⋙ IR) (hD : TB ⋙ G ≅ F ⋙ TR) :
-    ∃ gamma : (TB ⋙ IB) ⋙ F ≅ F ⋙ (TR ⋙ IR),
-      ∀ E, gamma.hom.app E = alpha.hom.app (TB.obj E) ≫ IR.map (hD.hom.app E) := by
-  let gamma : (TB ⋙ IB) ⋙ F ≅ F ⋙ (TR ⋙ IR) :=
-    Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft TB alpha ≪≫
-      (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight hD IR ≪≫
-      Functor.associator _ _ _
-  refine ⟨gamma, ?_⟩
-  intro E
-  simp only [gamma, Functor.comp_obj, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
-    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
-
 private theorem composeProjectionSquare
     {C D : Type*} [Category C] [Category D]
     (F G : C ⥤ D) (p : F ⟶ G) {X Y : C} (f : X ⟶ Y)
@@ -928,8 +908,6 @@ private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
     rw [← t₁.naturality, ← t₂.naturality, hI I hi]
   exact NatTrans.congr_app ht M
 
-set_option maxHeartbeats 800000 in
-set_option trace.profiler true in
 -- Assemble the independently normalized comparisons without unfolding their models.
 /-- Scalar restriction identifies strict Koszul towers, with the identity on each ordered
 exterior coordinate, their coaugmentations, and their normalized total derived limits.
@@ -1025,15 +1003,35 @@ theorem flatScalarKoszulTowerComparison (φ : R ⟶ B)
         (∀ E, DR.unit E ≫ eR.hom.app E = 𝟙 E) ∧
         ∀ E, gamma.hom.app E ≫ eR.hom.app ((restrictDerived φ).obj E) =
           (restrictDerived φ).map (eB.hom.app E)) := by
-  obtain ⟨h, hc, hu⟩ := strictScalarKoszulComparison φ r a
-  obtain ⟨DB, hB0⟩ := existsPresentation B r (imageSections φ a)
-  obtain ⟨DR, hR0⟩ := existsPresentation R r a
-  obtain ⟨hD, hd⟩ := descendedTensorComparison φ r a DB DR h
-  obtain ⟨alpha, ha⟩ := normalizedLimitComparison φ _hflat r a DB DR
-  obtain ⟨pB, hpB⟩ := normalizedProjections B DB
-  obtain ⟨pR, hpR⟩ := normalizedProjections R DR
-  obtain ⟨gamma, hg⟩ := composeCompletionComparison DB.tensorTower DR.tensorTower
-    DB.inverseLimit DR.inverseLimit (restrictDerived φ) (restrictTowerDerived φ) alpha hD
+  let h := (strictScalarKoszulComparison φ r a).choose
+  have hc := (strictScalarKoszulComparison φ r a).choose_spec.1
+  have hu := (strictScalarKoszulComparison φ r a).choose_spec.2
+  let DB := (existsPresentation B r (imageSections φ a)).choose
+  have hB0 := (existsPresentation B r (imageSections φ a)).choose_spec
+  let DR := (existsPresentation R r a).choose
+  have hR0 := (existsPresentation R r a).choose_spec
+  let hD := (descendedTensorComparison φ r a DB DR h).choose
+  have hd := (descendedTensorComparison φ r a DB DR h).choose_spec
+  let alpha := (normalizedLimitComparison φ _hflat r a DB DR).choose
+  have ha := (normalizedLimitComparison φ _hflat r a DB DR).choose_spec
+  let pB := (normalizedProjections B DB).choose
+  have hpB := (normalizedProjections B DB).choose_spec
+  let pR := (normalizedProjections R DR).choose
+  have hpR := (normalizedProjections R DR).choose_spec
+  let gamma : DB.completion ⋙ restrictDerived φ ≅ restrictDerived φ ⋙ DR.completion :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft DB.tensorTower alpha ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight hD DR.inverseLimit ≪≫
+      Functor.associator _ _ _
+  have hg (E : ringedSiteDerived B) :
+      gamma.hom.app E = alpha.hom.app (DB.tensorTower.obj E) ≫
+        DR.inverseLimit.map (hD.hom.app E) := by
+    simp only [gamma, RingedKoszulLimitPresentation.completion, Functor.comp_obj,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id]
   have hunit (E : ringedSiteDerived B) :
       (restrictDerived φ).map (DB.unit E) ≫ gamma.hom.app E =
         DR.unit ((restrictDerived φ).obj E) := by
