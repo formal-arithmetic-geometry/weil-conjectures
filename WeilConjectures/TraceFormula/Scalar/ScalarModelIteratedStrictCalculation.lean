@@ -30,6 +30,26 @@ namespace WeilConjectures
 
 attribute [local irreducible] HasDerivedCategory.standard
 
+/-- Move a presentation map through the composite comparison and counit. -/
+private theorem iteratedScalar_move_naturality
+    {V W S : Type*} [Category V] [Category W] [Category S]
+    (B I : V ⥤ W) (R : V ⥤ S) (TL : S ⥤ V) (H : S ⥤ W)
+    (β : B ⟶ I) (r : I ⟶ R ⋙ H) (ε : TL ⋙ R ⟶ 𝟭 S)
+    {K P : V} {N D : S} (p : K ⟶ P) (f : P ⟶ TL.obj N) (v : N ⟶ D) :
+    B.map p ≫ β.app P ≫ I.map f ≫ r.app (TL.obj N) ≫
+        H.map (ε.app N) ≫ H.map v =
+      B.map (p ≫ f ≫ TL.map v) ≫ β.app (TL.obj D) ≫
+        r.app (TL.obj D) ≫ H.map (ε.app D) := by
+  let δ : TL ⋙ B ⟶ H := Functor.whiskerLeft TL β ≫
+    Functor.whiskerLeft TL r ≫ Functor.whiskerRight ε H
+  have hd := δ.naturality v
+  change B.map (TL.map v) ≫
+      (β.app (TL.obj D) ≫ r.app (TL.obj D) ≫ H.map (ε.app D)) =
+    (β.app (TL.obj N) ≫ r.app (TL.obj N) ≫ H.map (ε.app N)) ≫ H.map v at hd
+  rw [← β.naturality_assoc]
+  simp only [Functor.map_comp, Category.assoc] at hd ⊢
+  rw [← hd]
+
 /-- Assemble five identities without unfolding any of the concrete functors. -/
 private theorem assemble_calculation
     {V : Type*} [Category V]
@@ -72,7 +92,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
 It does not involve a direct scalar realization model or a derived associator.
@@ -229,11 +249,12 @@ theorem scalarModelIteratedStrictCalculation
       (integralComparisonRoosBridge l F X ρF _).hom =
     (integralComparisonRoosBridge l F X ρF _).hom ≫
       DerivedCategory.Q.map (integralOperationsRoosFunctor.map wa.hom) := by
-    dsimp only [T, coefficientSequenceLimit, integralComparisonRoosBridge]
-    simp only [Iso.trans_hom, Functor.mapIso_hom, Functor.comp_map, Category.assoc]
-    erw [← Functor.map_comp_assoc, Functor.mapDerivedCategoryFactors_hom_naturality,
-      Functor.map_comp, Category.assoc, ρF.comparison.hom.naturality]
-    rfl
+    exact (Functor.isoWhiskerRight
+      (coefficientSequenceRestriction l F X).mapDerivedCategoryFactors
+      (coefficientConstantTowerLimit l F X) ≪≫
+      Functor.isoWhiskerLeft
+        ((coefficientSequenceRestriction l F X).mapHomologicalComplex (.up ℤ))
+        ρF.comparison).hom.naturality a.hom
   have hsuffix :
       (integralComparisonSystemScalarComposition l E L F ι j X).hom.app
           (SE.reduction.obj K) ≫ A''.map e.hom ≫ M''.ε.app C =
@@ -255,24 +276,10 @@ theorem scalarModelIteratedStrictCalculation
         (completedScalarComparison l L F j X).app (TL.obj (DerivedCategory.Q.obj D)) ≫
         bLF.realization.hom.app (TL.obj (DerivedCategory.Q.obj D)) ≫
         T.map (A'.map (SL.adjunction.counit.app (DerivedCategory.Q.obj D))) := by
-    rw [← (completedScalarComparison l L F j X).naturality_assoc]
-    have hcounit := SL.adjunction.counit.naturality v
-    change SL.reduction.map (TL.map v) ≫
-        SL.adjunction.counit.app (DerivedCategory.Q.obj D) =
-      SL.adjunction.counit.app N ≫ v at hcounit
-    rw [← T.map_comp, ← A'.map_comp, ← hcounit]
-    simp only [Functor.map_comp, Category.assoc]
-    have hb := bLF.realization.hom.naturality (TL.map v)
-    change (integralScalarExtensionOfUniverses l L F j X).map (TL.map v) ≫
-        bLF.realization.hom.app (TL.obj (DerivedCategory.Q.obj D)) =
-      bLF.realization.hom.app (TL.obj N) ≫ T.map (A'.map (SL.reduction.map (TL.map v))) at hb
-    erw [← reassoc_of% hb]
-    have hx := (completedScalarComparison l L F j X).naturality (TL.map v)
-    change B.map (TL.map v) ≫
-        (completedScalarComparison l L F j X).app (TL.obj (DerivedCategory.Q.obj D)) =
-      (completedScalarComparison l L F j X).app (TL.obj N) ≫
-        (integralScalarExtensionOfUniverses l L F j X).map (TL.map v) at hx
-    erw [← reassoc_of% hx]
+    exact iteratedScalar_move_naturality B (integralScalarExtensionOfUniverses l L F j X)
+      SL.reduction TL (A' ⋙ T) (completedScalarComparison l L F j X)
+      bLF.realization.hom SL.adjunction.counit
+      ((completedScalarComparison l E L ι X).app K) (bEL.realization.hom.app K) v
   have htail : DerivedCategory.Q.map g ≫
       DerivedCategory.Q.map (integralOperationsRoosFunctor.map wa.hom) ≫
       DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =
