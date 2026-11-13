@@ -82,6 +82,7 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
 
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Elaborating the nested cohomology and stalk types needs more than the default heartbeats.
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
