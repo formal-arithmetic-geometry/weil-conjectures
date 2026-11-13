@@ -31,7 +31,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace SheafOfModules
 
-set_option trace.profiler true in
 -- Comparing the two restriction presentations in the naturality square needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in
 /-- If `F` is flat on a ringed site, tensoring by its restriction to a slice preserves
@@ -112,12 +111,13 @@ theorem isFlat_over_preservesFiniteLimits
         (whiskerRight_tensorObjIsoSheafification_hom (R := R.over U) f FU)
       have h₂ := e.hom.naturality (X := (G, F)) (Y := (H, F)) (f, 𝟙 F)
       have h₃ := whiskerRight_tensorObjIsoSheafification_hom (R := R) (L.map f) F
-      dsimp only [TU, tensorRight, Functor.flip_obj_map, curriedTensor_map_app]
+      dsimp only [TU, T, tensorRight, Functor.flip_obj_map, curriedTensor_map_app]
       simp only [Functor.map_comp] at h₁
       simp only [Functor.comp_map, Functor.prod_map, MonoidalCategory.tensor_map,
         CategoryTheory.Functor.map_id] at h₂
       erw [MonoidalCategory.tensorHom_id, MonoidalCategory.tensorHom_id] at h₂
-      simpa only [Category.assoc] using
+      -- Paste the three naturality squares, reversing the final comparison isomorphism.
+      simpa only [Category.assoc, Iso.app_hom] using
         ((CommSq.mk h₁).vert_comp
           ((CommSq.mk h₂).vert_comp (CommSq.mk h₃).vert_inv)).w)
   have hex : ∀ S : ShortComplex (SheafOfModules.{u} (A.over U)),

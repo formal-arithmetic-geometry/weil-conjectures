@@ -52,7 +52,6 @@ private lemma homObjMap_units_smul_left
   · simp only [one_smul]
   · simp only [Units.neg_smul, one_smul, homObjMap_neg_left]
 
-set_option trace.profiler true in
 -- The dependent product projection formulas require repeated complex-index transport.
 set_option backward.isDefEq.respectTransparency false in
 /-- The signed reindexing for a source shift is natural in the target complex.
@@ -170,6 +169,7 @@ theorem homComplex_shift_left
     change (a M n ≫ (T M).d n (n + 1)) ≫ π S M (n + 1) p (p + (n + 1)) rfl =
       (((-m).negOnePow • ((F.obj (op L)).obj M).d (n - m) (n + 1 - m)) ≫
         a M (n + 1)) ≫ π S M (n + 1) p (p + (n + 1)) rfl
+    -- Focus on each projection composite so matching does not unfold the product lifts.
     conv_lhs =>
       rw [Category.assoc]
       rhs
@@ -220,6 +220,7 @@ theorem homComplex_shift_left
   change (((F.obj (op L)).map f).f (n - m) ≫ a N n) ≫
       π S N n p (p + n) rfl =
     (a M n ≫ ((F.obj (op S)).map f).f n) ≫ π S N n p (p + n) rfl
+  -- Use naturality only at the selected factor of the product.
   conv_lhs =>
     rw [Category.assoc]
     rhs
