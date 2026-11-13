@@ -266,9 +266,7 @@ private theorem exists_stratification_of_empty_bad_preimage {X Y : Type*} [Topol
   classical
   have hbad' (x) (hx : f x ∈
       (⋃ p ∈ {p : Fin n × Fin n | p.1 ≠ p.2}, t p.1 ∩ t p.2) ∪ (⋃ i, t i)ᶜ) : False := by
-    have : x ∈ f ⁻¹' _ := hx
-    rw [hbad] at this
-    exact this
+    exact Set.notMem_empty x (hbad ▸ hx)
   refine ⟨{ n := n
             stratum := fun i ↦ f ⁻¹' t i
             isLocallyClosed_stratum := htl
@@ -283,6 +281,21 @@ private theorem exists_stratification_of_empty_bad_preimage {X Y : Type*} [Topol
   · rw [Function.onFun, Set.disjoint_left]
     intro x hi hj
     exact hbad' x (Or.inl (Set.mem_iUnion₂.2 ⟨(i, j), hij, hi, hj⟩))
+
+private theorem isConstructible_comap_preimage {R B : Type*} [CommRing R] [CommRing B]
+    (f : R →+* B) {t : Set (PrimeSpectrum R)} (ht : IsConstructible t) :
+    IsConstructible (comap f ⁻¹' t) := by
+  obtain ⟨D, rfl⟩ := PrimeSpectrum.exists_constructibleSetData_iff.mpr ht
+  rw [← ConstructibleSetData.toSet_map]
+  exact ConstructibleSetData.isConstructible_toSet _
+
+private theorem preimage_comap_subalgebra_inclusion (B₀ B : Subalgebra ℤ A) (h : B₀ ≤ B)
+    (t : Set (PrimeSpectrum B₀)) :
+    comap B.val.toRingHom ⁻¹' (comap (Subalgebra.inclusion h).toRingHom ⁻¹' t) =
+      comap B₀.val.toRingHom ⁻¹' t := by
+  have hv : B.val.toRingHom.comp (Subalgebra.inclusion h).toRingHom = B₀.val.toRingHom :=
+    congrArg AlgHom.toRingHom (Subalgebra.val_comp_inclusion h)
+  rw [← Set.preimage_comp, ← comap_comp, hv]
 
 set_option profiler true in
 private theorem exists_finset_stratification_of_comap_eq
@@ -305,19 +318,11 @@ private theorem exists_finset_stratification_of_comap_eq
     stratification_bad_preimage_eq_empty S t₀ (comap B₀.val.toRingHom) ht₀
   obtain ⟨F, hF, hF'⟩ := exists_finset_comap_eq_empty hbadc hbad
   let ι := Subalgebra.inclusion (R := ℤ) (Algebra.adjoin_mono (R := ℤ) (Finset.coe_subset.2 hF))
-  have htc (i) : IsConstructible (comap ι.toRingHom ⁻¹' t₀ i) := by
-    obtain ⟨D, hD⟩ := PrimeSpectrum.exists_constructibleSetData_iff.mpr (ht₀c i)
-    rw [← hD, ← ConstructibleSetData.toSet_map]
-    exact ConstructibleSetData.isConstructible_toSet _
   obtain ⟨T, e, hT⟩ := exists_stratification_of_empty_bad_preimage t₀ (comap ι.toRingHom)
-    (fun i ↦ (ht₀l i).preimage (continuous_comap ι.toRingHom)) htc hF'
+    (fun i ↦ (ht₀l i).preimage (continuous_comap ι.toRingHom))
+    (fun i ↦ isConstructible_comap_preimage ι.toRingHom (ht₀c i)) hF'
   refine ⟨F, T, e, fun i ↦ ?_⟩
-  rw [hT i, ← ht₀ (e i)]
-  ext x
-  change comap ι.toRingHom (comap _ x) ∈ t₀ (e i) ↔ comap _ x ∈ t₀ (e i)
-  have hv : (Algebra.adjoin ℤ (F : Set A)).val.toRingHom.comp ι.toRingHom = B₀.val.toRingHom :=
-    RingHom.ext fun _ ↦ rfl
-  rw [← comap_comp_apply, hv]
+  rw [hT i, preimage_comap_subalgebra_inclusion, ht₀ (e i)]
 
 
 set_option profiler true in
