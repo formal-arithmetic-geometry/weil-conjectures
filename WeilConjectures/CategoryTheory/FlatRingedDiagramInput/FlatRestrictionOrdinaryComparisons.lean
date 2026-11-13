@@ -86,7 +86,7 @@ private theorem pairPreimage_snd
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the two scalar actions unfolds the underlying-set restriction presentations.
 private theorem inverse_change_hom
     {C D : Type u} [SmallCategory C] [SmallCategory D]
@@ -267,7 +267,7 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Naturality compares the two presentations of restriction on underlying sheaves.
 private theorem inverse_comparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
