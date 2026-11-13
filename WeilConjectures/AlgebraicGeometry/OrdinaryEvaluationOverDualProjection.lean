@@ -47,8 +47,7 @@ private theorem dualProjection_id_first
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
-set_option maxHeartbeats 600000 in
--- The dependent Hom projections need extra elaboration steps on the concrete open site.
+set_option trace.profiler true in
 set_option linter.unusedVariables false in
 /-- The inverse transported dual comparison recovers the unit-valued projection.
 Source: Stacks Project, Tags 0A8X and 08DL, product projections and open restriction.
