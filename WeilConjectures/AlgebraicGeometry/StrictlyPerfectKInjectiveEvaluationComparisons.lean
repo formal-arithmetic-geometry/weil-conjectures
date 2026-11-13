@@ -34,6 +34,9 @@ private theorem eq_of_two_sided_inverse {C : Type*} [Category C]
     _ = s ≫ (f ≫ r) := Category.assoc _ _ _
     _ = s := by rw [hr, Category.comp_id]
 
+set_option maxHeartbeats 300000 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The local evaluation square when its second representative is already K-injective.
 This only handles the resolved case; it does not assert the comparison for an arbitrary
 second complex.
@@ -57,9 +60,6 @@ Proof:
 The two local inverse identities remain separate named obligations, following the
 ordinary-model calculation of Stacks 08DQ.
 -/
-set_option maxHeartbeats 300000 in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}
