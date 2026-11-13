@@ -86,6 +86,8 @@ private theorem tensor_changeOfRings_adjunct
   exact ⟨adj.homEquiv M N (eqToHom (hE M) ≫ k), he M N k⟩
 
 private theorem tensor_ring_counit_unit_section
+    [∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map f.base).op.HasLeftKanExtension F]
     (V : (Opens X)ᵒᵖ) (r : (A).obj.obj V) :
     (show IA ⟶ U.sheaf from e₀).hom.app ((Opens.map f.base).op.obj V)
       (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -97,7 +99,6 @@ private theorem tensor_ring_counit_unit_section
       ((adj.homEquiv A U.sheaf).apply_symm_apply (𝟙 A))
   exact congrArg (fun a ↦ a.hom.app V r) h
 
-set_option profiler true in
 /-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-unit-lift).
@@ -161,6 +162,11 @@ theorem affine_module_tensor_unitLift
       ∃ a : G ⟶ (R).obj (H.obj G),
         (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G) := by
   classical
+  have : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+    have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+    exact Functor.HasLeftKanExtension.mk _
+      (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
   let : (Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U.toTopCat) :=
     inferInstanceAs ((Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U))
   have _ := hpush
