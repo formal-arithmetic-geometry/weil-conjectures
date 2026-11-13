@@ -71,7 +71,7 @@ lemma pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app
   erw [Category.comp_id, Category.comp_id]
   exact Iso.hom_inv_id_app _ _
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- unifying objects of the derived categories of module objects is slow
 /-- The derived (Pull) isomorphism through the counits, inverse form: on the image of a
 complex `N`, `(derivedUpperStarExtendScalarsIso a f).inv` followed by the counits is the inverse
@@ -95,7 +95,7 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit
     pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- unifying objects of the derived categories of module objects is slow
 /-- **The derived (Push) comparison on complexes**, for an arbitrary coefficient change: through
 the units of the right derived pushforwards and the counits of the derived extensions of scalars,
