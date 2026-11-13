@@ -298,6 +298,9 @@ private theorem normalized_forget_comparison_apply
     (HomologicalComplex.homologyMap f 0 ≫ bH.hom) (cH.inv y)
   rw [Iso.inv_hom_id_apply, hf]
   simp only [ConcreteCategory.comp_apply, Iso.inv_hom_id_apply]
+  have hc : cH.hom (cH.inv y) = y :=
+    congrArg (fun k : E ⟶ E ↦ k.hom y) cH.inv_hom_id
+  rw [hc]
   exact congrArg b₀.hom h
 
 private theorem mapped_single_homology_inv
@@ -369,6 +372,7 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 
 
 set_option backward.defeqAttrib.useBackward true in
+set_option trace.profiler true in
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
 (blueprint: lem-sc-open-sections-ordinary-structure-class).
