@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
+import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationComponentFactorization
 
 /-! # Invertible evaluation diagonal
 
@@ -81,8 +82,6 @@ private theorem dualProjection_isIso (X : Scheme.{u}) (U : X.Opens)
   exact hh 0 hr
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 600000 in
--- Naturality rewrites elaborate the sheaf tensor and internal Hom structures.
 /-- The diagonal component is invertible whenever its module evaluation is.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`,
 termwise evaluation; Tag 08DM, degree of the dual complex.
@@ -122,26 +121,10 @@ theorem ordinaryEvaluation_diagonal_block (X : Scheme.{u}) (U : X.Opens)
   have he : localEvaluationComponent X U P F (r + n) (-r) n r (by omega) =
       (F.X (r + n) ◁ d) ≫
         SheafOfModules.moduleDualEvaluation (X.sheaf.over U) (P.X r) (F.X (r + n)) := by
-    simp only [localEvaluationComponent, dite_eq_left (show r + -r = 0 by omega),
-      HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, Category.comp_id]
-    unfold SheafOfModules.moduleDualEvaluation
-    rw [← SheafOfModules.tensorHomEquiv_whiskerLeft_comp
-      (R := X.sheaf.over U) (P.X r) (F.X (r + n) ◁ d)]
-    apply (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _ _).congr_arg
-    have hev : P.X r ◁ d ≫
-        (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _
-          (𝟙_ (localEvaluationModules X U))).symm (𝟙 _) =
-        (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _
-          (𝟙_ (localEvaluationModules X U))).symm d := by
-      apply (SheafOfModules.tensorHomEquiv (R := X.sheaf.over U) (P.X r) _ _).injective
-      rw [SheafOfModules.tensorHomEquiv_whiskerLeft_comp
-        (R := X.sheaf.over U) (P.X r) d]
-      simp
-    rw [BraidedCategory.braiding_naturality_right_assoc,
-      associator_naturality_middle_assoc]
-    simp only [← whiskerLeft_comp_assoc, BraidedCategory.braiding_naturality_left_assoc,
-      hev]
-    rfl
+    simpa only [HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom,
+      SheafOfModules.homObjMap_id, Category.comp_id] using
+      ordinaryEvaluation_component_factorization X U P F (r + n) (-r) n r
+        (by omega) (by omega)
   rw [he]
   apply IsIso.comp_isIso' _ hblock
   change IsIso ((tensorLeft (F.X (r + n))).map d)
