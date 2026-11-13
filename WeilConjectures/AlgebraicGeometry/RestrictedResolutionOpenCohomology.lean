@@ -114,16 +114,13 @@ private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
   have hn := (Hom.mapPresheaf v'.inv).naturality
     (eqToHom (by simp) : (⊤ : L.toScheme.Opens) ⟶
       j ⁻¹ᵁ (⊤ : U.toScheme.Opens)).op
-  change (((restrictFunctor L.ι).obj K).presheaf.map _ ≫
-    Hom.app v'.inv ⊤) =
+  change ((restrictFunctor L.ι).obj K).presheaf.map _ ≫ Hom.app v'.inv ⊤ =
     Hom.app v'.inv (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) ≫
     D'.presheaf.map _ at hn
-  rw [← Category.assoc (Hom.app v'.inv _)
-    (D'.presheaf.map _)]
+  rw [← Category.assoc (Hom.app v'.inv _) (D'.presheaf.map _)]
   erw [← hn]
   simp only [Category.assoc]
-  have hcan : Hom.app v'.inv ⊤ ≫
-      Hom.app v'.hom ⊤ = 𝟙 _ := by
+  have hcan : Hom.app v'.inv ⊤ ≫ Hom.app v'.hom ⊤ = 𝟙 _ := by
     rw [← Hom.comp_app, v'.inv_hom_id, Hom.id_app]
   rw [← Category.assoc (Hom.app v'.inv ⊤)
     (Hom.app v'.hom ⊤), hcan, Category.id_comp]
@@ -134,8 +131,7 @@ private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
       ((restrictFunctor U.ι).obj K)) ⊤ =
     Hom.app ((restrictAdjunction j).unit.app D) ⊤ ≫
     Hom.app ((restrictFunctor j).map v) (j ⁻¹ᵁ (⊤ : U.toScheme.Opens)) at hu
-  rw [← Category.assoc (Hom.app ((restrictAdjunction j).unit.app
-    D) ⊤)
+  rw [← Category.assoc (Hom.app ((restrictAdjunction j).unit.app D) ⊤)
     (Hom.app ((restrictFunctor j).map v) _), ← hu]
   simp only [Category.assoc]
   simp only [c, Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom,
@@ -212,21 +208,19 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let Q := restrictFunctor j
   have : Q.Additive := (restrictAdjunction j).left_adjoint_additive
   let c : restrictFunctor U.ι ⋙ Q ≅ restrictFunctor L.ι :=
-    (restrictFunctorComp j U.ι).symm ≪≫
-    restrictFunctorCongr (Z.homOfLE_ι e)
+    (restrictFunctorComp j U.ι).symm ≪≫ restrictFunctorCongr (Z.homOfLE_ι e)
   let t : (Q.mapHomologicalComplex (ComplexShape.up ℕ)).obj R.resolution.cocomplex ⟶
       R'.resolution.cocomplex :=
     (Q.mapHomologicalComplex (ComplexShape.up ℕ)).map R.comparison.hom ≫
-    (NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℕ)).app I.cocomplex ≫
-      R'.comparison.inv
+      (NatTrans.mapHomologicalComplex c.hom (ComplexShape.up ℕ)).app I.cocomplex ≫
+        R'.comparison.inv
   let β : R.resolution.cocomplex ⟶
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R'.resolution.cocomplex :=
     ((restrictAdjunction j).mapHomologicalComplex (ComplexShape.up ℕ)).unit.app
       R.resolution.cocomplex ≫
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).map t
   let φ : (restrictFunctor U.ι).obj F ⟶ P.obj ((restrictFunctor L.ι).obj F) :=
-    (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
-    P.map (c.hom.app F)
+    (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫ P.map (c.hom.app F)
   have ht := map_comparison_augmentation Q c.hom (I.ι.f 0)
     (R.resolution.ι.f 0) (R'.resolution.ι.f 0) (R.comparison.hom.f 0)
     ((HomologicalComplex.eval _ _ 0).mapIso R'.comparison) R.augmentation R'.augmentation
@@ -262,9 +256,11 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
         (forget₂ _ AddCommGrpCat.{u})).symm
   have hmap := moduleCohomologyFMap_of_augmentedLift j φ R'.resolution R.resolution
     β hβ a ha p
-  exact map_conjugation_comp H iR iR' (moduleCohomologyFMap j φ p)
+  have hfinal := map_conjugation_comp H iR iR' (moduleCohomologyFMap j φ p)
     ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) a
     R'.sections.hom R.sections.hom r hmap hc
+  simpa only [iR, iR', Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+    using hfinal
 
 
 end AlgebraicGeometry.Scheme.Modules
