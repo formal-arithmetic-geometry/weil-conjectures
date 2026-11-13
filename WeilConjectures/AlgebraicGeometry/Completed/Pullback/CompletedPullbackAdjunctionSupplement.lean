@@ -317,6 +317,38 @@ private theorem supplied_module_linear_iff
     (supplied_module_smul_spec RI (I.modules.obj M)) (supplied_module_smul_spec A H) α).trans
       ((and_congr hAdd hSmul).trans hSame.symm)
 
+-- Package the restricted equivalence with its underlying map formula, so naturality
+-- depends on that formula rather than on the choice of linear lifts.
+open SheafOfModules SheafOfModules.GeometricConstruction in
+private theorem supplied_module_homEquiv
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (f : RingedToposMorphism.{u} (C := C) (D := D) (J := J) (K := K) (base A) (base B))
+    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI)
+    (c : RI ⟶ A)
+    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      I.ringUnderlying.inv ≫ f.ringMap) :
+    ∃ B' : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H),
+      ∀ M H a, (mset B).map (B' M H a) ≫ f.underlying.hom.app H =
+        f.adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫ (mset RI).map a) := by
+  let eI := I.moduleUnderlying
+  let eP := f.underlying
+  let E : ∀ M H, ((mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) ≃
+      ((mset B).obj M ⟶ (mset B).obj (f.modules.obj H)) :=
+    fun M H ↦ mateIsoEquiv f.adj (eI.app M) (eP.app H)
+  have hImage M H (α : (mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) :=
+    supplied_module_linear_iff f RI I c hc M H α
+  let B' : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H) :=
+    fun M H ↦ restrictHomEquiv (mset RI) (mset B) (E M H) (hImage M H)
+  have hB M H a : (mset B).map (B' M H a) ≫ eP.hom.app H =
+      f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
+    rw [restrictHomEquiv_map]
+    exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+  exact ⟨B', hB⟩
+
 -- The normalized module Hom equivalence elaborates the two transported operation diagrams.
 open SheafOfModules SheafOfModules.GeometricConstruction in
 set_option backward.defeqAttrib.useBackward true in
@@ -337,18 +369,7 @@ private theorem supplied_module_adjunction
             (underlying A).map k) := by
   let eI := I.moduleUnderlying
   let eP := f.underlying
-  let E : ∀ M H, ((mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) ≃
-      ((mset B).obj M ⟶ (mset B).obj (f.modules.obj H)) :=
-    fun M H ↦ mateIsoEquiv f.adj (eI.app M) (eP.app H)
-  have hImage M H (α : (mset RI).obj (I.modules.obj M) ⟶ (mset A).obj H) :=
-    supplied_module_linear_iff f RI I c hc M H α
-  let B' : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
-      (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H) :=
-    fun M H ↦ restrictHomEquiv (mset RI) (mset B) (E M H) (hImage M H)
-  have hB M H a : (mset B).map (B' M H a) ≫ eP.hom.app H =
-      f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
-    rw [restrictHomEquiv_map]
-    exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+  obtain ⟨B', hB⟩ := supplied_module_homEquiv f RI I c hc
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
     apply (mset B).map_injective
