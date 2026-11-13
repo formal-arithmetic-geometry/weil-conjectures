@@ -124,6 +124,7 @@ private theorem closedMonoidal_evaluation
   simp
 
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Elaborating the mixed-universe sheaf tensor comparisons needs extra heartbeats.
 /-- Restriction preserves the canonical derived evaluation arrow, including its
