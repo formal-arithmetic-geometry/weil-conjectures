@@ -47,6 +47,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the gluing manipulates long composites of derived and sheaf-level isomorphisms
 /-- **Descent of morphisms of sheaves placed in degree zero along a surjective étale
