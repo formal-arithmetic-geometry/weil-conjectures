@@ -61,22 +61,21 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
       (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
         sq)).app K)) :
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E) sq').app K.obj) := by
+  let t := Adjunction.leftDerivedFunctorSquareIso
+    (upperStarSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq')
+  have ht : pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq' = t :=
+    pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
+      (Profinite.padicIntegersRingObj ℓ E) sq'
   unfold baseChangeMap
-  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
-    (Profinite.padicIntegersRingObj ℓ E) sq']
+  rw [ht]
   have hθ (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
-        sq).hom.app K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicIntegersRingObj ℓ E) sq')).hom.app K.obj := by
-    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicIntegersRingObj ℓ E) sq K,
-      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
-        (Profinite.padicIntegersRingObj ℓ E) sq']
+        sq).hom.app K).hom = t.hom.app K.obj := by
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison, ht]
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
-    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
-          (Profinite.padicIntegersRingObj ℓ E) sq'))
+    t
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj
       (Profinite.padicIntegersRingObj ℓ E) ℓ f K)
     (fun K ↦ PadicIntegersRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E f K)
