@@ -69,9 +69,14 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  simp only [adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Mod.comp_hom', adicLowerStarComp_hom_app_hom,
-    adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
+  unfold adicSquareLowerStarIso ProEtale.squareLowerStarIso
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [Mod.comp_hom']
+  rewrite [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+    adicLowerStarComp_inv_app_hom]
+  rfl
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
