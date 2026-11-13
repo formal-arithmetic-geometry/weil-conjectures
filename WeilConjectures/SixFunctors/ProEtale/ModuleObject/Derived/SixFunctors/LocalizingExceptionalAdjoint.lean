@@ -175,10 +175,7 @@ noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
     (fun K ↦ h K.obj K.property)).CommShift ℤ)
 
 set_option linter.unusedVariables false in
-set_option synthInstance.maxHeartbeats 100000 in
--- Instance search through the bundled Brown structures is expensive.
-set_option maxHeartbeats 800000 in
--- The proof assembles both bundled Brown structures and their small-model equivalences.
+set_option profiler true in
 /-- The compactification lower shriek on localizing closures has an exact right adjoint,
 unique up to the unique counit-compatible isomorphism, and that adjoint preserves all small
 coproducts. The existential triangulated structures are proofs that the recorded object
