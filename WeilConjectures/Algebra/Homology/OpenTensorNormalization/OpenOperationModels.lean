@@ -439,6 +439,7 @@ private theorem pushforward_action
   exact congrArg₂ smul hf.symm hs.symm
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Elaborate the sectionwise adjunction and its transported coefficient identities.
 -- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
 private theorem supplied_adjunction
