@@ -59,6 +59,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing the scheme-module and sheaf-module tensor interfaces needs extra elaboration.
 /-- Localization of the ordinary tensor/composition square.
 Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.
