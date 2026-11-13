@@ -24,8 +24,22 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 400000 in
--- Comparing the sheaf-ring coercions in the derived module models needs extra heartbeats.
+-- Keep the transport argument independent of the concrete derived sheaf models.
+private theorem comp_eq_zero_of_scalar_preimage
+    {A : Type*} [CommRing A] {C D : Type*}
+    [Category C] [Preadditive C] [Linear A C] [Category D] [Preadditive D]
+    (F : C ⥤ D) [F.Full] [F.Additive] {P M : C} {E E' : D}
+    (eP : F.obj P ≅ E) (eM : F.obj M ≅ E') (r : A)
+    (g : E ⟶ E) (β : E ⟶ E')
+    (hscalar : F.map (r • 𝟙 P) ≫ eP.hom = eP.hom ≫ g)
+    (hzero : r • F.preimage (eP.hom ≫ β ≫ eM.inv) = 0) : g ≫ β = 0 := by
+  have h : F.map ((r • 𝟙 P) ≫ F.preimage (eP.hom ≫ β ≫ eM.inv)) = 0 := by
+    rw [Linear.smul_comp, Category.id_comp, hzero, F.map_zero]
+  rw [F.map_comp, Functor.map_preimage, ← Category.assoc, hscalar, Category.assoc] at h
+  apply (cancel_epi eP.hom).mp
+  apply (cancel_mono eM.inv).mp
+  simpa only [Category.assoc, zero_comp, comp_zero] using h
+
 /-- Every local morphism from a restricted perfect source into a shift of a restricted
 supported target is killed by a power of the global function on an affine open.
 Source: Stacks Project, Tag 08EJ, affine paragraph.
@@ -61,29 +75,16 @@ theorem perfect_support_affine_open_torsion
     ∀ (k : ℤ) (β : R.obj E.obj ⟶ R.obj (E'.obj⟦k⟧)),
       ∃ n : ℕ, R.map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj)) ≫ β = 0 := by
   classical
+  intro R k β
   let A : Type u := ↑(X.sheaf.obj.obj (op U))
   let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
     HasDerivedCategory.standard (ModuleCat.{u} A)
-  let R := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  dsimp only
-  intro k β
   obtain ⟨P, M, F, hF, hAdd, hb, hf, hp, hM, eP, eM, hscalar⟩ :=
     perfect_support_affine_module_model X f E E' hE hSupport U hU k
   let α := F.preimage (eP.hom ≫ β ≫ eM.inv)
   obtain ⟨n, hn⟩ := DerivedCategory.bounded_projective_hom_power_torsion
     A (f.val (op U)) P hb hf hp M hM α
-  refine ⟨n, ?_⟩
-  have hzero : F.map
-      (((show A from f.val (op U)) ^ n • 𝟙 (DerivedCategory.Q.obj P)) ≫ α) = 0 := by
-    rw [Linear.smul_comp, Category.id_comp, hn, F.map_zero]
-  have hpow : (show A from (f ^ n).val (op U)) = (f.val (op U)) ^ n := by
-    rfl
-  rw [F.map_comp, Functor.map_preimage] at hzero
-  have htransport := hscalar (f ^ n)
-  rw [hpow] at htransport
-  rw [← Category.assoc, htransport, Category.assoc] at hzero
-  apply (cancel_epi eP.hom).mp
-  apply (cancel_mono eM.inv).mp
-  simpa only [Category.assoc, zero_comp, comp_zero] using hzero
+  exact ⟨n, comp_eq_zero_of_scalar_preimage (A := A) F eP eM ((f.val (op U)) ^ n)
+    (R.map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj))) β (hscalar (f ^ n)) hn⟩
 
 end AlgebraicGeometry.Scheme
