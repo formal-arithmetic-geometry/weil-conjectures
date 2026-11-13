@@ -121,6 +121,7 @@ lemma derivedComapLowerStarIso_inv_app_Qh
   erw [Iso.hom_inv_id_app_assoc]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Rewriting inside derived-category composites requires unfolding homotopy category objects.
 /-- The derived (Push) on the image of a complex `I`, through the units of the right derived
 pushforwards and the counits of the derived extensions of scalars, is the underived (Push). -/
@@ -192,6 +193,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Producing the bounded below injective resolution of `K` is slow to elaborate.
 /-- **(Push) for `𝒪_E ⟶ E` on bounded below objects**: for a quasi-compact quasi-separated `f`
 and a bounded below `K ∈ D(𝒪_{E,X})`, the comparison `E_Y ⊗ᴸ Rf_* K ⟶ Rf_*(E_X ⊗ᴸ K)` is an
