@@ -144,10 +144,11 @@ theorem koszulOpenHom_restriction_surjective
   obtain ⟨e, z, hz⟩ := sequentialColimit_derivedHomology_representative A D x
   let φ := (a e).symm z
   refine ⟨e, φ, b.injective ?_⟩
-  have hs := hsquare e φ (v e ≫ R.map φ) (by
-    rw [← Category.assoc, (j e).hom_inv_id, Category.id_comp])
-  rw [hs, Equiv.apply_symm_apply, hz]
-  change H.map c (inv (H.map c) (b ψ)) = b ψ
-  exact ConcreteCategory.congr_hom (IsIso.inv_hom_id (H.map c)) (b ψ)
+  have hs := hsquare e φ (v e ≫ R.map φ) ((j e).hom_inv_id_assoc (R.map φ))
+  have hz' : H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ) = x :=
+    (congrArg (fun z ↦ H.map (DerivedCategory.Q.map (colimit.ι D e)) z)
+      ((a e).apply_symm_apply z)).trans hz
+  exact hs.trans ((congrArg (fun z ↦ H.map c z) hz').trans
+    (ConcreteCategory.congr_hom (IsIso.inv_hom_id (H.map c)) (b ψ)))
 
 end AlgebraicGeometry
