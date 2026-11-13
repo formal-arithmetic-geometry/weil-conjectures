@@ -67,7 +67,6 @@ private theorem inverseForwardComparison
   rw [← h, ← F.map_comp_assoc, b.inv_hom_id, F.map_id, Category.id_comp,
     c.inv_hom_id_assoc]
 
-set_option profiler true in
 /-- The integral completion comparison in both coefficient presentations, ready for raw
 localization. This statement makes no assertion about rational comparisons or stage systems.
 Source: trace-definition final coefficient-category sentence, integral comparison steps 1--6
@@ -197,6 +196,7 @@ theorem fdIntegralScalarDescentInputs
     have hY := congrArg (fun F ↦ F.obj ((U l Ω T h).obj K))
       (stage L).integral_identity
     exact (heq_composite hX hY _ _ (hb E L h K) _).trans (hcomparison h V hV)
+  -- Project the conjunctions directly to avoid case elimination over the large remaining goal.
   have hrestriction := @fdIntegralScalarRestrictionExact D l _ hl Ω _ _ _ T _ dT iT stage
     @ordinary @b' @hlift hI
   have hforward := @fdIntegralScalarPresentationForward D l _ hl Ω _ _ _ T _ dT iT stage
