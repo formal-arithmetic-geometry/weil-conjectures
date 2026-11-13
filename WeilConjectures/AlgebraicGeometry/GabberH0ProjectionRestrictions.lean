@@ -57,6 +57,32 @@ private theorem pasting_transport {X Y W : Scheme.{u}}
   subst k
   simp
 
+/-- The associativity comparison on an over category, evaluated at one object. -/
+private theorem pullbackComp_assoc_hom {C : Type*} [Category C] [HasPullbacks C]
+    (P : MorphismProperty C) [P.IsStableUnderBaseChange]
+    {X Y W V : C} (f : Y ⟶ X) (g : W ⟶ Y) (j : V ⟶ W) (U : P.Over ⊤ X) :
+    eqToHom (congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback P ⊤ k).obj U)
+        (Category.assoc j g f)) ≫
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) j (g ≫ f)).hom.app U ≫
+        (MorphismProperty.Over.pullback P ⊤ j).map
+          ((MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) g f).hom.app U) =
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) (j ≫ g) f).hom.app U ≫
+        (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) j g).hom.app
+          ((MorphismProperty.Over.pullback P ⊤ f).obj U) := by
+  have transport (k : V ⟶ X) (hk : k = (j ≫ g) ≫ f) :
+      (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) (j ≫ g) f k hk).hom.app U =
+        eqToHom (congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback P ⊤ k).obj U)
+          hk) ≫ (MorphismProperty.Over.pullbackComp (P := P) (Q := ⊤) (j ≫ g) f).hom.app U := by
+    subst k
+    simp
+  have hp := congr_app (congrArg Iso.hom
+    (MorphismProperty.Over.pullbackComp_assoc (P := P) (Q := ⊤) j g f)) U
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.comp_id] at hp
+  rw [transport (j ≫ g ≫ f) (Category.assoc j g f).symm, Category.assoc] at hp
+  rw [hp, ← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
+
 set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 private theorem comparison_assoc {X Y W V : Scheme.{u}}
@@ -121,22 +147,7 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
     ConcreteCategory.comp_apply] at hc'
   trace "comparison: hc'"
   erw [hc']
-  have hp := congr_app (congrArg Iso.hom
-    (MorphismProperty.Over.pullbackComp_assoc (P := @Etale) (Q := ⊤) j g f)) U
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.comp_id] at hp
-  trace "comparison: pasting"
-  have hp' := hp.trans (congrArg
-    (fun k ↦ k ≫ (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) j g).hom.app
-      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))
-    (pasting_transport (j ≫ g) f (j ≫ g ≫ f) (Category.assoc j g f).symm U))
-  let e := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
-    (Category.assoc j g f)
-  let e' := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
-    (Category.assoc j g f).symm
-  trace "comparison: associating hp"
-  have hv := cancel_cast_comp e e' _ _ (hp'.trans (Category.assoc _ _ _))
+  have hv := pullbackComp_assoc_hom (@Etale) f g j U
   trace "comparison: map_comp"
   erw [← ((Scheme.etaleSetPullback (j ≫ g ≫ f)).obj F).obj.map_comp_apply, ← op_comp]
   refine (map_transport (Category.assoc j g f) F U

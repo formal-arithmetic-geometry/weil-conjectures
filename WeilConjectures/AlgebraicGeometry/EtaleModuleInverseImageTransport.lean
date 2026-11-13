@@ -61,7 +61,8 @@ private theorem etaleModuleAdjunction_unit_counit
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})
     (gamma : RV ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
-      CommRingCat.{u + 1} V.smallEtaleTopology U.smallEtaleTopology).obj RU) :
+      CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale)
+        (U.smallGrothendieckTopology @Etale)).obj RU) :
   let FV := SheafOfModules.toSheaf ((sheafCompose V.smallEtaleTopology
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
   let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
