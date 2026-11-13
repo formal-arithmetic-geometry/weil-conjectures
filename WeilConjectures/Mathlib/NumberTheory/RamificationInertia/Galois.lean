@@ -64,6 +64,14 @@ theorem ramificationIdx_under_eq_one_of_inertia_le (p : Ideal R) [p.IsPrime] (P 
   rw [← hH, hGH, hG] at htower
   exact (mul_eq_right₀ hne).1 htower.symm
 
+private lemma perfectField_residueField_of_finite {A B : Type*} [CommRing A] [CommRing B]
+    [Algebra A B] [Module.Finite A B] (p : Ideal A) [p.IsPrime] (q : Ideal B)
+    [q.IsPrime] [q.LiesOver p] [PerfectField p.ResidueField] :
+    PerfectField q.ResidueField := by
+  let := Localization.AtPrime.algebraOfLiesOver p q
+  have : Algebra.IsIntegral A B := Algebra.IsIntegral.of_finite A B
+  exact Algebra.IsAlgebraic.perfectField p.ResidueField
+
 end Ideal
 
 section SeparableClosure
@@ -104,7 +112,7 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   have : x ∈ RingHom.ker ψ.toRingHom := hx
   rwa [hker, Ideal.mem_bot] at this
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
 `R` in `Ω` over a maximal ideal `m` of `R` with perfect residue field. If the inertia group of `Q`
@@ -229,10 +237,8 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
     change (τ x : Ω) = x
     rw [← hτ'M, ← hσM _ x.2, h1]
   have : (P.under S).IsMaximal := Ideal.IsMaximal.of_liesOver_isMaximal (P.under S) m
-  have hperfS : PerfectField (P.under S).ResidueField := by
-    let := Localization.AtPrime.algebraOfLiesOver m (P.under S)
-    have : Algebra.IsIntegral R S := Algebra.IsIntegral.of_finite R S
-    exact Algebra.IsAlgebraic.perfectField m.ResidueField
+  have hperfS : PerfectField (P.under S).ResidueField :=
+    perfectField_residueField_of_finite m (P.under S)
   have : Module.IsTorsionFree R TM := Module.isTorsionFree_iff_faithfulSMul.2
     ((faithfulSMul_iff_algebraMap_injective R TM).2 fun x y hxy ↦ hRΩ (by
       have h := congrArg iTB hxy
