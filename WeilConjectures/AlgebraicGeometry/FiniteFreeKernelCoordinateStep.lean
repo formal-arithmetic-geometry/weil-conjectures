@@ -28,6 +28,36 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+/-- Separate the distinguished summand of a coproduct indexed by `Option I`. -/
+private theorem free_option_coordinate_split
+    {C : Type*} [Category C] [Preadditive C] {T : C} {I : Type*}
+    (F : Cofan (fun _ : I ↦ T)) (hF : IsColimit F)
+    (G : Cofan (fun _ : Option I ↦ T)) (hG : IsColimit G)
+    (inc : F.pt ⟶ G.pt) (hi : ∀ i, F.inj i ≫ inc = G.inj (some i)) :
+    ∃ (r : G.pt ⟶ F.pt) (t : G.pt ⟶ T) (s : T ⟶ G.pt),
+      inc ≫ r = 𝟙 _ ∧ inc ≫ t = 0 ∧ r ≫ inc + t ≫ s = 𝟙 _ := by
+  let r := Cofan.IsColimit.desc hG (fun i ↦ match i with
+    | none => 0
+    | some j => F.inj j)
+  let t := Cofan.IsColimit.desc hG (fun i ↦ match i with
+    | none => 𝟙 T
+    | some _ => 0)
+  refine ⟨r, t, G.inj none, ?_, ?_, ?_⟩
+  · apply Cofan.IsColimit.hom_ext hF
+    intro i
+    rw [← Category.assoc, hi]
+    simp only [r, Cofan.IsColimit.fac, Category.comp_id]
+  · apply Cofan.IsColimit.hom_ext hF
+    intro i
+    rw [← Category.assoc, hi]
+    simp only [t, Cofan.IsColimit.fac, comp_zero]
+  · apply Cofan.IsColimit.hom_ext hG
+    intro i
+    rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc]
+    cases i with
+    | none => simp [r, t]
+    | some i => simp [r, t, hi]
+
 /-- A split coordinate decomposition gives the kernel an image quotient. -/
 private theorem exists_shortExact_kernel_split
     {C : Type*} [Category C] [Abelian C] {Q P T L T' : C}
@@ -66,7 +96,7 @@ private theorem exists_shortExact_kernel_split
     refine ⟨kernel.lift q (k ≫ kernel.ι p ≫ r) hkq, ?_⟩
     apply (cancel_mono (kernel.ι p)).mp
     simp only [Category.assoc, ha, kernel.lift_ι_assoc]
-    exact hrec
+    simpa only [Category.assoc] using hrec
   let b₀ := Abelian.factorThruImage v
   have hw₀ : a ≫ b₀ = 0 := by
     apply (cancel_mono (Abelian.image.ι v)).mp
@@ -119,48 +149,17 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
         (ShortComplex.mk a b w).ShortExact := by
   classical
   let inc := SheafOfModules.freeMap (R := X.ringCatSheaf) (some : I → Option I)
-  let r : SheafOfModules.free (R := X.ringCatSheaf) (Option I) ⟶
-      SheafOfModules.free I :=
-    Sigma.desc (fun i ↦ match i with
-      | none => 0
-      | some j => SheafOfModules.ιFree j)
-  let t : SheafOfModules.free (R := X.ringCatSheaf) (Option I) ⟶
-      SheafOfModules.unit X.ringCatSheaf :=
-    Sigma.desc (fun i ↦ match i with
-      | none => 𝟙 _
-      | some _ => 0)
-  let s := SheafOfModules.ιFree (R := X.ringCatSheaf) (none : Option I)
-  have hir : inc ≫ r = 𝟙 _ := by
-    apply Cofan.IsColimit.hom_ext (SheafOfModules.isColimitFreeCofan I)
-    intro i
-    change SheafOfModules.ιFree i ≫ inc ≫ r = SheafOfModules.ιFree i ≫ 𝟙 _
-    rw [← Category.assoc, SheafOfModules.ιFree_freeMap]
-    simp [r, SheafOfModules.ιFree]
-  have hit : inc ≫ t = 0 := by
-    apply Cofan.IsColimit.hom_ext (SheafOfModules.isColimitFreeCofan I)
-    intro i
-    change SheafOfModules.ιFree i ≫ inc ≫ t = SheafOfModules.ιFree i ≫ 0
-    rw [← Category.assoc, SheafOfModules.ιFree_freeMap]
-    simp [t, SheafOfModules.ιFree]
-  have hsplit : r ≫ inc + t ≫ s = 𝟙 _ := by
-    apply Cofan.IsColimit.hom_ext (SheafOfModules.isColimitFreeCofan (Option I))
-    intro i
-    change SheafOfModules.ιFree i ≫ (r ≫ inc + t ≫ s) =
-      SheafOfModules.ιFree i ≫ 𝟙 _
-    rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc]
-    cases i with
-    | none => simp [r, t, s, SheafOfModules.ιFree]
-    | some i =>
-      simp only [r, t, SheafOfModules.ιFree, Sigma.ι_comp_desc, zero_comp, add_zero,
-        Category.comp_id]
-      exact SheafOfModules.ιFree_freeMap some i
+  obtain ⟨r, t, s, hir, hit, hsplit⟩ := free_option_coordinate_split
+    (SheafOfModules.freeCofan I) (SheafOfModules.isColimitFreeCofan I)
+    (SheafOfModules.freeCofan (Option I)) (SheafOfModules.isColimitFreeCofan (Option I))
+    inc (SheafOfModules.ιFree_freeMap some)
   let v := kernel.ι p ≫ t
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
   have hqc := Scheme.Modules.isQuasicoherent_kernel p
   have := Scheme.Modules.isQuasicoherent_cokernel v
   have := Scheme.Modules.isQuasicoherent_kernel (cokernel.π v)
-  obtain ⟨J, hJ, ⟨e⟩⟩ := quasiCoherent_submodule_ideal X (Abelian.image.ι v)
-  exact ⟨J, hJ, exists_shortExact_kernel_split inc r t s p hir hit hsplit e⟩
+  obtain ⟨J, hJ, he⟩ := quasiCoherent_submodule_ideal X (Abelian.image.ι v)
+  exact ⟨J, hJ, exists_shortExact_kernel_split inc r t s p hir hit hsplit (Classical.choice he)⟩
 
 end AlgebraicGeometry

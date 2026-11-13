@@ -73,6 +73,50 @@ private theorem exists_completion_hom_evaluation
     exact AdicCompletion.tensor_map_id_left_eq_map J h
   exact ⟨E, hEof⟩
 
+/-- Quotient-compatible pairings on generators extend to finite completions. -/
+private theorem completion_evaluation_component
+    {A N M Hs QH QN QM : Type u} [CommRing A]
+    [AddCommGroup N] [Module A N] [Module.Finite A N]
+    [AddCommGroup M] [Module A M]
+    [AddCommGroup Hs] [Module A Hs] [Module.Finite A Hs]
+    [AddCommGroup QH] [Module A QH] [AddCommGroup QN] [Module A QN]
+    [AddCommGroup QM] [Module A QM] (J : Ideal A) (n : ℕ)
+    (K : Hs ≃ₗ[A] (N →ₗ[A] M))
+    (E : AdicCompletion J (N →ₗ[A] M) →ₗ[AdicCompletion J A]
+      (AdicCompletion J N →ₗ[AdicCompletion J A] AdicCompletion J M))
+    (hEof : ∀ h, E (AdicCompletion.of J _ h) = AdicCompletion.map J h)
+    (pH : AdicCompletion J Hs →ₗ[A] QH) (pN : AdicCompletion J N →ₗ[A] QN)
+    (pM : AdicCompletion J M →ₗ[A] QM) (κ : QH →ₗ[A] (QN →ₗ[A] QM))
+    (hscalarH : ∀ b a z, AdicCompletion.evalₐ J n b = Ideal.Quotient.mk _ a →
+      pH (b • z) = a • pH z)
+    (hscalarN : ∀ b a x, AdicCompletion.evalₐ J n b = Ideal.Quotient.mk _ a →
+      pN (b • x) = a • pN x)
+    (hscalarM : ∀ b a x, AdicCompletion.evalₐ J n b = Ideal.Quotient.mk _ a →
+      pM (b • x) = a • pM x)
+    (hbase : ∀ h y, κ (pH (AdicCompletion.of J _ h)) (pN (AdicCompletion.of J _ y)) =
+      pM (AdicCompletion.of J _ (K h y)))
+    (z : AdicCompletion J Hs) (x : AdicCompletion J N) :
+    κ (pH z) (pN x) = pM (E (AdicCompletion.congr J K z) x) := by
+  have hon (h : Hs) (x : AdicCompletion J N) :
+      κ (pH (AdicCompletion.of J _ h)) (pN x) = pM (AdicCompletion.map J (K h) x) := by
+    obtain ⟨w, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J N x
+    induction w using TensorProduct.inductionOn with
+    | tmul b y =>
+      obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (AdicCompletion.evalₐ J n b)
+      rw [AdicCompletion.ofTensorProduct_tmul, hscalarN b a _ ha.symm,
+        map_smul, map_smul, hscalarM b a _ ha.symm, AdicCompletion.map_of, hbase]
+    | add x y hx hy => simp only [map_add, hx, hy]
+  obtain ⟨w, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J Hs z
+  induction w using TensorProduct.inductionOn with
+  | tmul b h =>
+    obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective (AdicCompletion.evalₐ J n b)
+    rw [AdicCompletion.ofTensorProduct_tmul, hscalarH b a _ ha.symm]
+    simp only [map_smul, LinearMap.smul_apply]
+    rw [hscalarM b a _ ha.symm]
+    simp only [AdicCompletion.congr_apply, AdicCompletion.map_of, hEof]
+    rw [hon]
+  | add w z hw hz => simp only [map_add, LinearMap.add_apply, hw, hz]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Construct completed evaluation and identify its individual quotient components.
@@ -225,34 +269,16 @@ theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoether
         (formalModuleQuotient I (n.unop + 1) F.obj).val U.val
         (k.val.app (op U.val) h) y) (he n)
     exact h'
-  have hon (n : ℕᵒᵖ) (h : Hs) (x : AdicCompletion J N) :
-      κ n ((e n).val.app (op U.val)
-        ((formalModuleQuotientπ I (n.unop + 1) Hobj).val.app (op U.val) h)) (pN n x) =
-      pM n (AdicCompletion.map J (K h) x) := by
-    obtain ⟨z, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J N x
-    induction z using TensorProduct.inductionOn with
-    | tmul b y =>
-      obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
-        (AdicCompletion.evalₐ J (n.unop + 1) b)
-      rw [AdicCompletion.ofTensorProduct_tmul, hscalarN n b a _ ha.symm,
-        map_smul, map_smul, hscalarM n b a _ ha.symm, AdicCompletion.map_of,
-        hofN, hofM, hbase]
-    | add x y hx hy => simp only [map_add, hx, hy]
   have hcomponent (z : AdicCompletion J Hs) (n : ℕᵒᵖ) (x : AdicCompletion J N) :
       κ n ((e n).val.app (op U.val) (pH n z)) (pN n x) =
         pM n (E (AdicCompletion.congr J K z) x) := by
-    obtain ⟨w, rfl⟩ := AdicCompletion.ofTensorProduct_surjective_of_finite J Hs z
-    induction w using TensorProduct.inductionOn with
-    | tmul b h =>
-      obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective
-        (AdicCompletion.evalₐ J (n.unop + 1) b)
-      rw [AdicCompletion.ofTensorProduct_tmul, hscalarH n b a _ ha.symm, hofH]
-      simp only [map_smul, LinearMap.smul_apply]
-      rw [hscalarM n b a _ ha.symm]
-      simp only [AdicCompletion.congr_apply, AdicCompletion.map_of, hEof]
-      rw [hon]
-      rfl
-    | add w z hw hz => simp only [map_add, LinearMap.add_apply, hw, hz]
+    apply completion_evaluation_component J (n.unop + 1) K E hEof
+      (pH n) (pN n) (pM n) (κ n ∘ₗ ((e n).val.app (op U.val)).hom)
+      (hscalarH n) (hscalarN n) (hscalarM n) ?_ z x
+    intro h y
+    change κ n ((e n).val.app (op U.val) (pH n (AdicCompletion.of J _ h)))
+      (pN n (AdicCompletion.of J _ y)) = pM n (AdicCompletion.of J _ (K h y))
+    rw [hofH, hofN, hofM, hbase]
   refine ⟨ρ, E, hEof, ?_, ?_⟩
   · intro s n x
     have hp : pH n (R.symm s) = s.val n :=

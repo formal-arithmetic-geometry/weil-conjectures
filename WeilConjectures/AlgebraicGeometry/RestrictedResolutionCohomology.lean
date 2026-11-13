@@ -63,6 +63,20 @@ private theorem restriction_component {Z : Scheme.{u}} (U : Z.Opens)
   rw [← M.presheaf.map_comp, ← M.presheaf.map_comp]
   congr 1
 
+/-- Cancel resolution comparisons before applying a functor to a commuting diagram. -/
+private theorem iso_homology_transport
+    {C D : Type*} [Category C] [Category D] (H : C ⥤ D)
+    {S K L M : C} {X Y Z T : D}
+    (i : X ≅ Y) (j : Y ≅ H.obj S) (k : Z ≅ T) (l : T ≅ H.obj K)
+    (a : K ≅ L) (β : S ⟶ L) (s : K ⟶ M) (r : S ⟶ M)
+    (h : β ≫ a.inv ≫ s = r) :
+    (i.hom ≫ j.hom ≫ H.map β ≫ inv (H.map a.hom) ≫ l.inv ≫ k.inv) ≫
+      k.hom ≫ l.hom ≫ H.map s = i.hom ≫ j.hom ≫ H.map r := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  have ha : inv (H.map a.hom) = H.map a.inv :=
+    IsIso.inv_eq_of_hom_inv_id (by rw [← H.map_comp, Iso.hom_inv_id, H.map_id])
+  rw [ha, ← H.map_comp, ← H.map_comp, h]
+
 set_option trace.profiler true in
 /-- Restriction on module cohomology is computed by the restriction of sections of a
 fixed resolution, followed by the pinned identification of the restricted resolution.
@@ -194,11 +208,16 @@ theorem restrictedResolution_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   rw [hC]
   dsimp only [ModuleCohomologyFMapData.map, C]
   simp only [CategoryTheory.Functor.map_id, Category.comp_id]
-  have ha : inv (H.map a.hom) = H.map a.inv :=
-    IsIso.inv_eq_of_hom_inv_id (by rw [← H.map_comp, Iso.hom_inv_id, H.map_id])
-  rw [ha]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id, Functor.map_id,
-    Category.id_comp, Iso.hom_inv_id_assoc]
-  rw [← H.map_comp, ← H.map_comp, hc]
+  exact iso_homology_transport H
+    ((forget₂ _ AddCommGrpCat.{u}).mapIso
+      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p))
+    ((((RingedSpace.globalSectionsComplex I).sc p).mapHomologyIso
+      (forget₂ _ AddCommGrpCat.{u})).symm)
+    ((forget₂ _ AddCommGrpCat.{u}).mapIso
+      (R.resolution.isoRightDerivedObj
+        (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) p))
+    ((((RingedSpace.globalSectionsComplex R.resolution).sc p).mapHomologyIso
+      (forget₂ _ AddCommGrpCat.{u})).symm)
+    a ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map β) R.sections.hom r hc
 
 end AlgebraicGeometry.Scheme.Modules
