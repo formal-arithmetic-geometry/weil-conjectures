@@ -31,6 +31,7 @@ attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoida
   CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
 attribute [local implicit_reducible] coefficientSequenceInternalHom
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- The identity total tensor has to be compared across the two site universe parameters.
 /-- The representative tensor models commute with the canonical closed-tensor comparison.
