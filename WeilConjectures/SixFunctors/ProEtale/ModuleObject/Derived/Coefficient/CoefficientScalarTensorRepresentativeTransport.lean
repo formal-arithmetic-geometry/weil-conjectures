@@ -109,6 +109,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 -- Retain the original exactness hypothesis, although transport only uses the supplied data.
 set_option linter.unusedSectionVars false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborate the whiskered naturality diagram without unfolding the derived tensor data.
 /-- Transport an equation known on all internal complexes to arbitrary section
 complexes satisfying the same flat-term and K-flat hypotheses. The proof uses the
