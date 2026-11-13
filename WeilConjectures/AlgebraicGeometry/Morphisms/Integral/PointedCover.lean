@@ -64,6 +64,44 @@ private lemma tensorPoint_restrict_comp {R A C D Ω : Type*}
     AlgEquiv.commutes, ← RingHom.comp_apply, hχ]
   rfl
 
+-- A point of the tensor-product chart is determined by its two projections.
+private lemma specTensorPoint_eq_of_comp {R A C D Ω : Type u}
+    [CommRing R] [CommRing A] [CommRing C] [CommRing D] [CommRing Ω]
+    [Algebra R A] [Algebra R C] [Algebra A D]
+    (e : A ⊗[R] C ≃ₐ[A] D) (χ : D →+* Ω) (ψ : A →+* Ω)
+    (hχ : χ.comp (algebraMap A D) = ψ)
+    {T : Scheme.{u}} (q : Spec (.of Ω) ⟶ T)
+    (μ₁ : T ⟶ Spec (.of A)) (μ₂ : T ⟶ Spec (.of C))
+    (hμ : μ₁ ≫ Spec.map (CommRingCat.ofHom (algebraMap R A)) =
+      μ₂ ≫ Spec.map (CommRingCat.ofHom (algebraMap R C)))
+    (h₁ : q ≫ μ₁ = Spec.map (CommRingCat.ofHom ψ))
+    (h₂ : q ≫ μ₂ = Spec.map (CommRingCat.ofHom (χ.comp (e.toAlgHom.toRingHom.comp
+      (Algebra.TensorProduct.includeRight (R := R) (A := A)).toRingHom)))) :
+    q ≫ pullback.lift μ₁ μ₂ hμ ≫ (pullbackSpecIso R A C).hom ≫
+      Spec.map (CommRingCat.ofHom e.symm.toRingEquiv.toRingHom) =
+        Spec.map (CommRingCat.ofHom χ) := by
+  have key : q ≫ pullback.lift μ₁ μ₂ hμ =
+      Spec.map (CommRingCat.ofHom (χ.comp e.toAlgHom.toRingHom)) ≫
+        (pullbackSpecIso R A C).inv := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, pullback.lift_fst, Category.assoc, pullbackSpecIso_inv_fst,
+        ← Spec.map_comp, h₁]
+      congr 1
+      ext b
+      have hb : (Algebra.TensorProduct.includeLeftRingHom b : A ⊗[R] C) =
+          algebraMap A _ b := by
+        simp [Algebra.TensorProduct.algebraMap_apply]
+      change ψ b = χ (e (Algebra.TensorProduct.includeLeftRingHom b))
+      rw [hb, AlgEquiv.commutes, ← RingHom.comp_apply, hχ]
+    · rw [Category.assoc, pullback.lift_snd, Category.assoc, pullbackSpecIso_inv_snd,
+        ← Spec.map_comp, h₂]
+      rfl
+  rw [reassoc_of% key, Iso.inv_hom_id_assoc, ← Spec.map_comp]
+  congr 2
+  ext x
+  simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply]
+  exact congrArg χ (e.apply_symm_apply x)
+
 namespace Scheme.Hom.Nbhd
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
@@ -329,36 +367,19 @@ theorem exists_pointed_disjoint_cover (c₀ : Nbhd y) [IsAffine c₀.1.left]
         reassoc_of% hq, hθ, SplitNbhd.piecePt_left_ι]
     have ha₀ : (s₀.piecePt (img t)).left ≫ (a₀ (img t)).val.left = (pt (img t)).left :=
       congrArg CommaMorphism.left (a₀ (img t)).map_val
-    have key : q ≫ pullback.lift (μ₁ (img t)) (μ₂ (img t)) (hμ (img t)) =
-        Spec.map (CommRingCat.ofHom ((χ j₀.1 ⟨t, hmL t⟩).comp (e₁ j₀).toAlgHom.toRingHom)) ≫
-          (pullbackSpecIso B₁ B (Q₁ j₀).Ring).inv := by
-      apply pullback.hom_ext
-      · rw [Category.assoc, pullback.lift_fst, Category.assoc, pullbackSpecIso_inv_fst,
-          ← Spec.map_comp]
-        simp only [μ₁]
-        rw [reassoc_of% hq, ← Category.assoc (basePt f c t), basePt_comp_etale_map_left]
-        refine (Scheme.Hom.comp_toSpecΓ _).trans ?_
-        congr 1
-        ext b
-        have hb : (Algebra.TensorProduct.includeLeftRingHom b : B ⊗[B₁] (Q₁ j₀).Ring) =
-            algebraMap B _ b := by
-          simp [Algebra.TensorProduct.algebraMap_apply]
-        change _ = χ _ _ (e₁ j₀ (Algebra.TensorProduct.includeLeftRingHom b))
-        rw [hb, AlgEquiv.commutes, ← RingHom.comp_apply, hχ]
-        rfl
-      · rw [Category.assoc, pullback.lift_snd, Category.assoc, pullbackSpecIso_inv_snd,
-          ← Spec.map_comp]
-        simp only [μ₂]
-        rw [reassoc_of% hq₂, reassoc_of% ha₀]
-        erw [pullback.lift_snd]
-        rw [hσt]
-        rfl
-    simp only [ν]
-    rw [reassoc_of% key, Iso.inv_hom_id_assoc, ← Spec.map_comp]
-    congr 2
-    ext x
-    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply]
-    exact congrArg _ ((e₁ j₀).apply_symm_apply x)
+    change q ≫ pullback.lift (μ₁ (img t)) (μ₂ (img t)) (hμ (img t)) ≫
+      (pullbackSpecIso B₁ B (Q₁ j₀).Ring).hom ≫
+        Spec.map (CommRingCat.ofHom (e₁ j₀).symm.toRingEquiv.toRingHom) = _
+    apply specTensorPoint_eq_of_comp (e₁ j₀) (χ j₀.1 ⟨t, hmL t⟩)
+      (basePt f c₀ t).appTopPoint (hχ _ _) q _ _ _
+    · simp only [μ₁]
+      rw [reassoc_of% hq, ← Category.assoc (basePt f c t), basePt_comp_etale_map_left]
+      exact Scheme.Hom.comp_toSpecΓ _
+    · simp only [μ₂]
+      rw [reassoc_of% hq₂, reassoc_of% ha₀]
+      erw [pullback.lift_snd]
+      rw [hσt]
+
 
 end Scheme.Hom.Nbhd
 
