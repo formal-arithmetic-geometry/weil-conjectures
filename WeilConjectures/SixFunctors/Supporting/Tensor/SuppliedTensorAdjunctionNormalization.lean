@@ -138,7 +138,6 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency.types false
 set_option maxRecDepth 4000
 
-set_option profiler true in
 /-- The geometric mate bijection restricts to scalar-linear morphisms. -/
 private theorem suppliedTensor_mate_linear_iff
     {C D : Type u} [SmallCategory C] [SmallCategory D]
@@ -217,7 +216,6 @@ private theorem suppliedTensor_mate_linear_iff
     (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) (fun _ _ ↦ rfl) α).trans
       ((and_congr hAdd hSmul).trans hSame.symm)
 
-set_option profiler true in
 -- Restriction of the geometric Hom bijection compares the additive and scalar operations.
 /-- Scalar extension is adjoint to the supplied module direct image, with the underlying
 Hom bijection fixed by the canonical insertion.
@@ -326,7 +324,6 @@ private theorem privateSuppliedTensorAdjunction_normalized
   exact (hB M H _).trans (congrArg (fun a ↦ f.adj.homEquiv _ _ (eI.inv.app M ≫ a))
     (tensorAdjunction_underlying c (I.modules.obj M) H v))
 
-set_option profiler true in
 -- Transporting the scalar-extension presentation uses dependent functor equalities.
 /-- The scalar-extension normalization is unchanged by a specified presentation of
 its objects and maps.
