@@ -212,9 +212,17 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       eqToHom (congrArg (fun s ↦ L((s)^*⟦Λ⟧).obj M) h) ≫
         (leftDerivedUpperStarComp Λ FT g).hom.app M ≫
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
+  -- Synthesize the tensor conditions pointwise, and reuse them for both module categories.
+  have (Y : Scheme.{u}) (K₁ K₂ K₃ K₄ : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      GradedObject.HasTensor₄ObjExt K₁ K₂ K₃ K₄ := inferInstance
+  have (Y : Scheme.{u}) (K₁ K₂ K₃ : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      GradedObject.HasGoodTensor₁₂Tensor K₁ K₂ K₃ := inferInstance
+  have (Y : Scheme.{u}) (K₁ K₂ K₃ : GradedObject ℤ
+      (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      GradedObject.HasGoodTensorTensor₂₃ K₁ K₂ K₃ := inferInstance
   have hc := Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
-    (G := (g)^*⟦Λ⟧) (A := (FX)^*⟦Λ⟧) (B := (FT)^*⟦Λ⟧)
-    (P := (g ≫ FX)^*⟦Λ⟧) (P' := (FT ≫ g)^*⟦Λ⟧)
     (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
     (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M
   simpa only [← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso, upperStarCongr,
