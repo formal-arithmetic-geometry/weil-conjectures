@@ -162,7 +162,8 @@ theorem moduleCup_naiveMap_comm
       naiveMapComponent_summand_fast X K L i (j + 1) m (by omega)]
     conv_rhs => rw [← Category.assoc,
       naiveMapComponent_summand_fast X K L i j n hij]
-    rw [Category.assoc, ← S.map_comp, CochainComplex.ιTensorObj_d K L i j n m hij hnm]
+    have hdiff := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
+    rw [Category.assoc, ← S.map_comp, hdiff]
     simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
       Preadditive.comp_add, Linear.comp_units_smul]
     apply congrArg₂ (· + ·)
