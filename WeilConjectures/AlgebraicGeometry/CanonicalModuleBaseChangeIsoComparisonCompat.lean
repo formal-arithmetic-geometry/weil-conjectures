@@ -27,6 +27,38 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+private theorem coordinate_comparison_square
+    {C D E B : Type*} [Category* C] [Category* D] [Category* E] [Category* B]
+    (U : C ⥤ D) (R : D ⥤ B) (T : B ⥤ E) (F : C ⥤ E)
+    (k : F ≅ U ⋙ R ⋙ T)
+    {X Y : C} {Z N : D} {L : E} {L₀ : B}
+    (β : L ⟶ F.obj X) (β₀ : L₀ ⟶ R.obj Z) (a : L ≅ T.obj L₀)
+    (c : X ⟶ Y) (j : U.obj X ⟶ Z) (m : U.obj Y ≅ N)
+    (cT c₀ : Z ⟶ N) (α : N ≅ N)
+    (hm : U.map c ≫ m.hom = j ≫ cT) (hα : cT = c₀ ≫ α.hom)
+    (hβ : β ≫ k.hom.app X ≫ T.map (R.map j) = a.hom ≫ T.map β₀) :
+    ∃ b : F.obj Y ≅ T.obj (R.obj N),
+      (β ≫ F.map c) ≫ b.hom = a.hom ≫ T.map (β₀ ≫ R.map c₀) := by
+  let b₀ := k.app Y ≪≫ T.mapIso (R.mapIso m)
+  let d := T.mapIso (R.mapIso α)
+  refine ⟨b₀ ≪≫ d.symm, ?_⟩
+  have hcompat : (β ≫ F.map c) ≫ b₀.hom =
+      (a.hom ≫ T.map (β₀ ≫ R.map c₀)) ≫ d.hom := by
+    calc
+      _ = β ≫ k.hom.app X ≫ T.map (R.map (U.map c ≫ m.hom)) := by
+        dsimp only [b₀, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
+        simp only [Functor.map_comp, Category.assoc]
+        rw [← Category.assoc (F.map c), k.hom.naturality c]
+        rfl
+      _ = β ≫ k.hom.app X ≫ T.map (R.map (j ≫ cT)) := by rw [hm]
+      _ = (β ≫ k.hom.app X ≫ T.map (R.map j)) ≫ T.map (R.map cT) := by
+        simp only [Functor.map_comp, Category.assoc]
+      _ = (a.hom ≫ T.map β₀) ≫ T.map (R.map cT) := by rw [hβ]
+      _ = _ := by simp only [hα, d, Functor.mapIso_hom, Functor.map_comp, Category.assoc]
+  change (β ≫ F.map c) ≫ b₀.hom ≫ d.inv = _
+  rw [← Category.assoc, hcompat]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
 set_option profiler true in
 /-- Coordinate-change isomorphisms identify the canonical module base-change maps.
 Source: Stacks Project, Tag 08HY, counit construction and coordinate transport;
@@ -115,46 +147,11 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
   obtain ⟨cT, hcT, m, hm⟩ :=
     exists_modulePullbackComparison_iso_transport g' p e hp j G c hc
   obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism p G c0 cT hc0 hcT
-  let b0 := k.app M ≪≫ T.mapIso (R.mapIso m)
-  let d := T.mapIso (R.mapIso (S0.mapIso α))
-  refine ⟨a.app E, b0 ≪≫ d.symm, ?_⟩
-  have hcompat :
-      (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
-          (schemeDerivedDirectImage f').map c) ≫ b0.hom =
-        (a.hom.app E ≫ T.map
-          (schemeDerivedBaseChangeMap fA q gA p pullback.condition E ≫ R.map c0)) ≫
-            d.hom := by
-    have hn : (schemeDerivedDirectImage f').map c ≫ k.hom.app M =
-        k.hom.app ((derivedPullback g').obj E) ≫
-          T.map (R.map ((schemeDerivedDirectImage e.hom).map c)) := k.hom.naturality c
-    calc
-      _ = schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
-          k.hom.app ((derivedPullback g').obj E) ≫
-          T.map (R.map ((schemeDerivedDirectImage e.hom).map c ≫ m.hom)) := by
-            dsimp only [b0, Iso.trans_hom, Functor.mapIso_hom]
-            simp only [Functor.map_comp, Category.assoc]
-            change _ ≫ (schemeDerivedDirectImage f').map c ≫
-              k.hom.app M ≫ T.map (R.map m.hom) = _
-            rw [← Category.assoc ((schemeDerivedDirectImage f').map c), hn]
-            simp only [Category.assoc]
-      _ = schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
-          k.hom.app ((derivedPullback g').obj E) ≫
-          T.map (R.map (j.hom.app E ≫ cT)) := by rw [hm]
-      _ = (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
-          k.hom.app ((derivedPullback g').obj E) ≫
-          T.map (R.map (j.hom.app E))) ≫ T.map (R.map cT) := by
-            simp only [Functor.map_comp, Category.assoc]
-      _ = (a.hom.app E ≫ T.map
-          (schemeDerivedBaseChangeMap fA q gA p pullback.condition E)) ≫
-          T.map (R.map cT) := by rw [hβ E]
-      _ = _ := by
-        rw [hα]
-        simp only [Functor.map_comp, Category.assoc]
-        rfl
-  change (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫
-    (schemeDerivedDirectImage f').map c) ≫ b0.hom ≫ d.inv = _
-  rw [← Category.assoc, hcompat]
-  simp
-  rfl
+  refine ⟨a.app E, ?_⟩
+  exact coordinate_comparison_square (schemeDerivedDirectImage e.hom) R T
+    (schemeDerivedDirectImage f') k
+    (schemeDerivedBaseChangeMap f f' g g' sq.w E)
+    (schemeDerivedBaseChangeMap fA q gA p pullback.condition E)
+    (a.app E) c (j.hom.app E) m cT c0 (S0.mapIso α) hm hα (hβ E)
 
 end AlgebraicGeometry
