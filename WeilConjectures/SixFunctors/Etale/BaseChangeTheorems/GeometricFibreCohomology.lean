@@ -17,28 +17,27 @@ Let `f : X ⟶ Y` be proper and `ȳ : Spec Ω ⟶ Y` a geometric point (`Ω` sep
 geometric fibre `X_ȳ = X ×_Y Spec Ω` and projection `i : X_ȳ ⟶ X`. For a bounded below complex
 `K` of abelian étale sheaves on `X` with torsion cohomology sheaves, the derived stalk of `Rf_* K`
 at `ȳ` is the derived global sections `RΓ(X_ȳ, i^* K)` of the restriction of `K` to the fibre
-(`AlgebraicGeometry.Etale.sheafFiberRightDerivedLowerStarIsoOfIsProper`). This is the derived
-form of blueprint `corollary-cohomology-geometric-fibres`; its degreewise form for a sheaf of
-modules over a finite ring is
+(`AlgebraicGeometry.Etale.sheafFiberRightDerivedLowerStarIsoOfIsProper`). Its degreewise form for
+a sheaf of modules over a finite ring is
 `AlgebraicGeometry.Etale.nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper`.
-
-The proof follows the blueprint: apply proper base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`) to the cartesian square of the
-geometric fibre, so that the stalk of `Rf_* K` at `ȳ` is the stalk of `R(f_ȳ)_* (i^* K)` at the
-closed point of `Spec Ω`. Over the strictly local scheme `Spec Ω`, taking the stalk at the closed
-point is taking global sections (`AlgebraicGeometry.Etale.strictLocal_globalGerm_isIso`), and
-`RΓ(Spec Ω, R(f_ȳ)_* -) = RΓ(X_ȳ, -)` (`AlgebraicGeometry.Etale.derivedGlobalGerm`).
-
-As in the formalisation of blueprint `theorem-proper-base-change-classical-pro`
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`), the statement is
-made on the étale site, which the pro-étale statement of the blueprint reduces to.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.sheafFiberRightDerivedLowerStarIsoOfIsProper`: the derived statement,
-  blueprint `corollary-cohomology-geometric-fibres--1`.
-- `AlgebraicGeometry.Etale.cohomology_geometricFibres`: both clauses of blueprint
-  `corollary-cohomology-geometric-fibres`.
+- `AlgebraicGeometry.Etale.sheafFiberRightDerivedLowerStarIsoOfIsProper`:
+  `(Rf_* K)_ȳ ≅ RΓ(X_ȳ, i^* K)`.
+- `AlgebraicGeometry.Etale.cohomology_geometricFibres`: the derived and the degreewise statements.
+
+## Implementation details
+
+The isomorphism applies proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`)
+to the cartesian square of the geometric fibre, so that the stalk of `Rf_* K` at `ȳ` is the stalk
+of `R(f_ȳ)_* (i^* K)` at the closed point of `Spec Ω`. Over the strictly local scheme `Spec Ω`,
+taking the stalk at the closed point is taking global sections
+(`AlgebraicGeometry.Etale.strictLocal_globalGerm_isIso`), and `RΓ(Spec Ω, R(f_ȳ)_* -) = RΓ(X_ȳ, -)`
+(`AlgebraicGeometry.Etale.derivedGlobalGerm`).
+
+As for `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`, the statement is
+made on the étale site rather than the pro-étale site.
 -/
 
 @[expose] public section
@@ -65,17 +64,11 @@ noncomputable def _root_.AlgebraicGeometry.Scheme.specResidueFieldIso (Ω : Type
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   (y : Spec (.of Ω) ⟶ Y)
 
-/-- Blueprint `corollary-cohomology-geometric-fibres--1`: **cohomology of geometric fibres**.
-Let `f : X ⟶ Y` be proper, `ȳ : Spec Ω ⟶ Y` a geometric point with geometric fibre
-`X_ȳ = X ×_Y Spec Ω` and projection `i : X_ȳ ⟶ X`, and let `K ∈ D⁺(X_ét)` have torsion cohomology
-sheaves. Then the derived stalk at `ȳ` of `Rf_* K` is canonically isomorphic to the derived
-global sections of `i^* K` on the geometric fibre:
-
-`(Rf_* K)_ȳ ≅ RΓ(X_ȳ, K|_{X_ȳ})`.
-
-It is the composite of the inverse of the proper base change isomorphism for the cartesian
-square of `X_ȳ` with the derived global germ of `X_ȳ ⟶ Spec Ω`, which is invertible since
-`Spec Ω` is strictly local. -/
+/-- **Cohomology of geometric fibres**: let `f : X ⟶ Y` be proper, `ȳ : Spec Ω ⟶ Y` a geometric
+point with geometric fibre `X_ȳ = X ×_Y Spec Ω` and projection `i : X_ȳ ⟶ X`, and let
+`K ∈ D⁺(X_ét)` have torsion cohomology sheaves. Then the derived stalk at `ȳ` of `Rf_* K` is
+canonically isomorphic to the derived global sections of `i^* K` on the geometric fibre:
+`(Rf_* K)_ȳ ≅ RΓ(X_ȳ, i^* K)`. -/
 noncomputable def sheafFiberRightDerivedLowerStarIsoOfIsProper
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (hK : DerivedCategory.Plus.torsionHomology X K) :
@@ -99,16 +92,12 @@ noncomputable def sheafFiberRightDerivedLowerStarIsoOfIsProper
       (asIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)) ≪≫
     (asIso ((derivedGlobalGerm (pullback.snd f y) t₀).app _)).symm
 
-/-- Blueprint `corollary-cohomology-geometric-fibres`: **cohomology of geometric fibres** of a
-proper morphism `f : X ⟶ Y` at a geometric point `ȳ : Spec Ω ⟶ Y`, with geometric fibre
-`X_ȳ = X ×_Y Spec Ω` and projection `i : X_ȳ ⟶ X`.
+/-- **Cohomology of geometric fibres** of a proper morphism `f : X ⟶ Y` at a geometric point
+`ȳ : Spec Ω ⟶ Y`, with geometric fibre `X_ȳ = X ×_Y Spec Ω` and projection `i : X_ȳ ⟶ X`.
 
-1. For `K ∈ D⁺(X_ét)` with torsion cohomology sheaves, `(Rf_* K)_ȳ ≅ RΓ(X_ȳ, i^* K)`
-   (`AlgebraicGeometry.Etale.sheafFiberRightDerivedLowerStarIsoOfIsProper`).
+1. For `K ∈ D⁺(X_ét)` with torsion cohomology sheaves, `(Rf_* K)_ȳ ≅ RΓ(X_ȳ, i^* K)`.
 2. For a sheaf `F` of modules over a finite ring `Λ` and `q ≥ 0`,
-   `(Rᵠf_* F)_ȳ ≃ Hᵠ(X_ȳ, i^* F)`
-   (`Etale.nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper`).
--/
+   `(Rᵠf_* F)_ȳ ≃ Hᵠ(X_ȳ, i^* F)`. -/
 theorem cohomology_geometricFibres :
     (∀ (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),
       DerivedCategory.Plus.torsionHomology X K →
