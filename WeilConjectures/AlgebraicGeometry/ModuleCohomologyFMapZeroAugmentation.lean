@@ -72,6 +72,7 @@ private theorem forget_augmentation {C : Type*} [Category* C] [Abelian C]
     InjectiveResolution.toRightDerivedZero'_comp_iCycles]
   rfl
 
+-- Cancel abstract isomorphisms without unfolding the concrete resolution comparisons.
 private theorem augmentation_diagram_cancel {C : Type*} [Category* C]
     {A B C₁ D E F K L : C} (rJ : B ≅ C₁) (sJ : D ≅ C₁)
     (rI : E ≅ F) (sI : K ≅ F) (aJ : A ⟶ B) (aI : A ⟶ E)

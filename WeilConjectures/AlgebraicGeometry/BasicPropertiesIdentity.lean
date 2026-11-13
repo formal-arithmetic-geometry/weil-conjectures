@@ -35,6 +35,7 @@ noncomputable section
 
 open Opposite
 
+-- Prove naturality before specializing the resolution and homology types to scheme modules.
 private theorem resolution_homology_naturality {C : Type*} [Category* C] [Abelian C]
     [HasInjectiveResolutions C] {R : Type u} [Ring R]
     (Γ : C ⥤ ModuleCat.{u} R) [Γ.Additive] {G F : C} (ψ : G ⟶ F)
@@ -43,11 +44,11 @@ private theorem resolution_homology_naturality {C : Type*} [Category* C] [Abelia
     let Γc := (Γ ⋙ U).mapHomologicalComplex (ComplexShape.up ℕ)
     let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
     U.map (J.isoRightDerivedObj Γ p).hom ≫
-        ((((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex).sc p).
-          mapHomologyIso U).inv ≫ H.map (Γc.map (InjectiveResolution.desc ψ I J)) =
+        ((((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex).sc p).mapHomologyIso
+          U).inv ≫ H.map (Γc.map (InjectiveResolution.desc ψ I J)) =
       U.map ((Γ.rightDerived p).map ψ) ≫ U.map (I.isoRightDerivedObj Γ p).hom ≫
-        ((((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc p).
-          mapHomologyIso U).inv := by
+        ((((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex).sc p).mapHomologyIso
+          U).inv := by
   dsimp only
   let U := forget₂ (ModuleCat.{u} R) AddCommGrpCat.{u}
   let α := InjectiveResolution.desc ψ I J

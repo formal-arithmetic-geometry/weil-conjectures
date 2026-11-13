@@ -24,6 +24,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+-- Keep extension by zero and resolution descent independent of the concrete module category.
 private theorem identity_resolution_homotopy {C : Type*} [Category* C] [Abelian C]
     {G F : C} (ψ : G ⟶ F) (I : InjectiveResolution F) (J : InjectiveResolution G)
     {K : CochainComplex C ℕ} (hK : ∀ n, Injective (K.X n))
@@ -121,8 +122,7 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
     ((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex
   refine resolution_homology_factorization Γ ψ D.I D.J D.injective c D.lambda D.β D.a p
     ?_ ?_
-  · rw [D.compatible, ← Category.assoc (D.I.ι.f 0)]
-    congr 1
+  · exact D.compatible
   · apply complex_hom_eq_of_inv_f_comp
     intro n
     rw [D.sections]
