@@ -103,6 +103,7 @@ private theorem map_coordinate_composite
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hσ]
 
+set_option profiler true in
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
