@@ -54,7 +54,6 @@ private theorem stalkAddMap_comm_smul {X : TopCat.{u}}
     ← PresheafOfModules.germ_smul (R := R) M]
   rw [stalkAddMap_germ, map_smul, PresheafOfModules.germ_smul (R := R) N,
     stalkAddMap_germ]
-  rfl
 
 private theorem stalk_sheafification_bijective {X : TopCat.{u}}
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (x : X)
@@ -66,6 +65,18 @@ private theorem stalk_sheafification_bijective {X : TopCat.{u}}
   let : IsIso t := stalkFunctor_map_unit_toSheafify_isIso x Ab.{u} P.presheaf
   change Function.Bijective t
   exact ConcreteCategory.bijective_of_isIso t
+
+private theorem sheafification_unit_naturality_apply {X : TopCat.{u}}
+    (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    {P Q : PresheafOfModules.{u} R.obj} (f : P ⟶ Q)
+    (U : Opens X) (s : P.obj (op U)) :
+    ((PresheafOfModules.sheafification (𝟙 R.obj)).map f).val.app (op U)
+        (((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app P).app (op U) s) =
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.app Q).app (op U)
+        (f.app (op U) s) := by
+  have h := congrArg (fun t ↦ t.app (op U))
+    ((PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.naturality f)
+  exact (ConcreteCategory.congr_hom h s).symm
 
 set_option profiler true in
 /-- Change of rings commutes with stalks, naturally in the module and compatibly with germs.
@@ -180,22 +191,7 @@ theorem stalkChangeOfRingsIso (X : TopCat.{u})
       changeOfRingsPresheaf.{u, u, u} α G :=
     { app := fun W ↦ (ModuleCat.extendScalars (α.hom.app W).hom).map (f.val.app W)
       naturality := changeOfRingsHom_naturality α F f }
-  have hn := (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).unit.naturality k
-  have he := congrArg (fun t ↦ t.app (op (U ⊓ V))) hn
-  have hp := ConcreteCategory.congr_hom he
-    (R₂.obj.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op a
-      ⊗ₜ[R₁.obj.obj (op (U ⊓ V)), (α.hom.app (op (U ⊓ V))).hom]
-      (show F.val.obj (op (U ⊓ V)) from
-        F.val.presheaf.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op s))
   apply congrArg (germ (changeOfRings α G).val.presheaf (U ⊓ V) x hx)
-  change (changeOfRingsHom α F f).val.app (op (U ⊓ V))
-    ((θ F).app (op (U ⊓ V)) _) = _
-  dsimp only [PresheafOfModules.comp_app, Functor.id_map,
-    PresheafOfModules.restrictScalars_map_app, Functor.comp_map] at hp
-  change (θ G).app (op (U ⊓ V)) (k.app (op (U ⊓ V)) _) =
-    (changeOfRingsHom α F f).val.app (op (U ⊓ V))
-      ((θ F).app (op (U ⊓ V)) _) at hp
-  erw [← hp, ModuleCat.ExtendScalars.map_tmul]
-  rfl
+  exact sheafification_unit_naturality_apply R k (U ⊓ V) _
 
 end SheafOfModules
