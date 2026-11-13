@@ -57,7 +57,7 @@ open Scheme
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- unifying the objects of the homotopy categories of module objects is slow
 /-- The composition isomorphism `Mod.extendScalarsComp` of extensions of scalars, followed by
 the underived (Pull) isomorphism rewritten with the composite `α_f ≫ a_X`, is the underived
@@ -83,7 +83,7 @@ lemma mapHomotopyCategory_extendScalarsComp_inv_app_comp_mapModUpperStarExtendSc
     NatTrans.id_app]
   exact Iso.inv_hom_id_app_assoc _ _ _
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The first constituent of `derivedUpperStarExtendScalarsIso a f` through the counits:
 `L(Ext_{a_X})` applied to `Lf^*_Λ ≅ D(mapMod(f^*)) ⋙ L(Ext_{α_f})` and the counits of
