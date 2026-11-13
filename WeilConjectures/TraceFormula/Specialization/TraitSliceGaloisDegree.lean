@@ -195,7 +195,7 @@ theorem mem_range_traitTensorCompositum_of_isSeparable {p : ℕ}
         (adjoin_simple_le_iff.2 (mem_traitGenericSepCompositum_of_pow_eq hd hρ) hγρ))
   exact ⟨⟨γ, hmem⟩, rfl⟩
 
-set_option synthInstance.maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- the instances `Module L L₁` for the concrete composita are found slowly
 /-- **Finite Galois subextensions of `L^sep / L` have `p`-power degree**, for a prime `p` such
 that every natural number vanishing in `k'` is divisible by `p`. -/
