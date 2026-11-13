@@ -55,6 +55,25 @@ private theorem sectionCohomologyComparison_isIso {Y : Scheme.{u}}
     ((HomologicalComplex.homologyFunctor Y.Modules (ComplexShape.up ℕ) p).map_isIso
       ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K))
 
+private theorem sectionCohomologyTheta_stalk_isIso {Y : Scheme.{u}}
+    (K : CochainComplex Y.Modules ℕ) (p : ℕ) (y : Y) :
+    IsIso ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map
+      (Scheme.Modules.sectionCohomologyTheta K p)) := by
+  let A := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
+  let S := PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y
+  have : IsIso (Scheme.Modules.sectionCohomologyComparison K p) :=
+    sectionCohomologyComparison_isIso K p
+  have : IsIso (S.map (A.unit.app (Scheme.Modules.sectionCohomologyPresheaf K p))) := by
+    rw [← isIso_iff_of_reflects_iso _ (forget₂ _ AddCommGrpCat.{u})]
+    change IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).map
+      ((PresheafOfModules.toPresheaf Y.ringCatSheaf.obj).map
+        (A.unit.app (Scheme.Modules.sectionCohomologyPresheaf K p))))
+    simp only [A, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+    exact TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso y _ _
+  change IsIso (S.map (A.homEquiv _ _ (Scheme.Modules.sectionCohomologyComparison K p)))
+  rw [Adjunction.homEquiv_unit, S.map_comp]
+  infer_instance
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
@@ -129,9 +148,7 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
   let K : CochainComplex Y.Modules ℕ :=
     ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj I.cocomplex
-  let e : ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F ≅
-      K.homology p :=
-    I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p
+  let e := I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p
   let A := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
   let : PreservesFiniteLimits
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) := by
@@ -140,36 +157,13 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hc : IsIso (Scheme.Modules.sectionCohomologyComparison K p) :=
     sectionCohomologyComparison_isIso K p
   refine ⟨?_, ?_, ?_, ?_, by infer_instance⟩
-  · change IsIso (Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv)
-    infer_instance
-  · change ∀ (Q : Y.Modules)
-        (a : Scheme.Modules.sectionCohomologyPresheaf K p ⟶
-          (SheafOfModules.forget Y.ringCatSheaf).obj Q),
-      ∃! b : ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F ⟶ Q,
-        Scheme.Modules.sectionCohomologyTheta K p ≫
-          (SheafOfModules.forget Y.ringCatSheaf).map (e.inv ≫ b) = a
-    intro Q a
+  · exact IsIso.comp_isIso' hc e.isIso_inv
+  · intro Q a
     exact higherDirectImagePresheaf_universal_aux A
       (Scheme.Modules.sectionCohomologyComparison K p) e a
-  · change ∀ y : Y, IsIso
-      ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map
-        (Scheme.Modules.sectionCohomologyTheta K p ≫
-          (SheafOfModules.forget Y.ringCatSheaf).map e.inv))
-    intro y
-    let S := PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y
-    have hu : IsIso (S.map (A.unit.app
-        (Scheme.Modules.sectionCohomologyPresheaf K p))) := by
-      rw [← isIso_iff_of_reflects_iso _ (forget₂ _ AddCommGrpCat.{u})]
-      change IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).map
-        ((PresheafOfModules.toPresheaf Y.ringCatSheaf.obj).map
-          (A.unit.app (Scheme.Modules.sectionCohomologyPresheaf K p))))
-      simp only [A, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
-      exact TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso y _ _
-    change IsIso (S.map (A.homEquiv _ _
-      (Scheme.Modules.sectionCohomologyComparison K p) ≫
-        (SheafOfModules.forget Y.ringCatSheaf ⋙
-          PresheafOfModules.restrictScalars (𝟙 Y.ringCatSheaf.obj)).map e.inv))
-    rw [← A.homEquiv_naturality_right, Adjunction.homEquiv_unit, S.map_comp]
+  · intro y
+    have := sectionCohomologyTheta_stalk_isIso K p y
+    rw [Functor.map_comp]
     infer_instance
   · intro V W i
     let α : RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V) ⟶
