@@ -383,6 +383,7 @@ lemma isIso_Q_map_mappingCone_map_comp_restrictScalarsActionMap (f : R →+* B)
   infer_instance
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the identifications of the strict model with restrictions of scalars are slow to check
 include hϖ hI in
 /-- **The legs of the derived limit of a normalized tower are derived base changes.** Let
