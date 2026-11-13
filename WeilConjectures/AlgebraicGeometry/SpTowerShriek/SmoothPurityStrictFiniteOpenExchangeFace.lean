@@ -138,24 +138,16 @@ private meta partial def conversionCongruence
         a.getAppFn.constName! == b.getAppFn.constName!)
     if sameHead && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
       try
-        let mut aa := a.getAppArgs
-        let mut bb := b.getAppArgs
-        -- Keep the common prefix fixed: its parameters need no equality proofs.
-        let mut prefix := 0
-        if a.getAppFn == b.getAppFn then
-          while prefix < aa.size && aa[prefix]! == bb[prefix]! do
-            prefix := prefix + 1
-        let head := Lean.mkAppN a.getAppFn (aa.extract 0 prefix)
-        aa := aa.extract prefix aa.size
-        bb := bb.extract prefix bb.size
-        let key := (head, aa.size)
+        let aa := a.getAppArgs
+        let bb := b.getAppArgs
+        let key := (a.getAppFn, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if head.hasFVar then
-                Lean.Meta.mkHCongrWithArity head aa.size
+            let ct ← if a.getAppFn.hasFVar then
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity head aa.size
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
@@ -568,6 +560,7 @@ private theorem inverse_pull_square (b : Base l E)
       ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).leftDerivedFunctor.obj M))
     (by
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      simp only [Iso.app, Functor.mapIso_hom, Iso.symm_hom, Iso.symm_inv]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         exactByConversion h)
@@ -651,17 +644,20 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
         exactByConversion h) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
         exactByConversion h)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
         exactByConversion h)
@@ -676,9 +672,11 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         exactByConversion h) N
+  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
