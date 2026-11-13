@@ -32,33 +32,10 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
 
--- Reuse the graded tensor compatibility proofs needed by each derived functor.
--- These are propositions, so sharing them preserves the derived functors definitionally.
-local instance residueIff_hasTensorFour (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasTensor₄ObjExt A B C D := by
-  infer_instance
-
-local instance residueIff_hasGoodTensorLeft (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensor₁₂Tensor A B C := by
-  infer_instance
-
-local instance residueIff_hasGoodTensorRight (T : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) R)) :
-    GradedObject.HasGoodTensorTensor₂₃ A B C := by
-  infer_instance
-
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
   {X X' Y Y' Z Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
-
-set_option profiler true in
--- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
 `B₀` such that `Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀` is bounded below, `𝔽_E ⊗ᴸ Π_{A₀,B₀}` is invertible if and
 only if `Π_{𝔽_E ⊗ᴸ A₀, 𝔽_E ⊗ᴸ B₀}` is. -/
@@ -82,7 +59,7 @@ theorem isIso_map_kunnethMap_iff_residueField (φ₁ : P.Hom M f₁ f₁') (φ�
   (MorphismProperty.isomorphisms _).arrow_mk_iso_iff
     (nonempty_arrowIso_map_kunnethMap_residueField ℓ E φ₁ φ₂ A₀ B₀ n m).some
 
-set_option profiler true in
+set_option maxHeartbeats 1000000 in
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The restricted Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: under the hypotheses of
 `NearbyCyclesModel.isIso_map_kunnethMap_iff_residueField`, for every `h : W ⟶ Z'`,
