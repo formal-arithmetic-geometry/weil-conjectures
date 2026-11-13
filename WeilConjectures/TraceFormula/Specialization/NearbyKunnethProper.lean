@@ -228,6 +228,7 @@ private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.Noetheria
   have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
   exact ⟨S, hS, hR, hU⟩
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 private lemma isIso_of_isIso_upperStar_and_lowerStar
     [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
