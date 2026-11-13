@@ -260,7 +260,7 @@ theorem ringed_forget_tensor_associator_representatives
       (α_ (U.mapDerivedCategory.obj (DerivedCategory.Q.obj P))
         (U.mapDerivedCategory.obj (DerivedCategory.Q.obj Q))
         (U.mapDerivedCategory.obj (DerivedCategory.Q.obj N))).hom
-  simp only [id_tensorHom, tensorHom_id]
+  erw [id_tensorHom, tensorHom_id]
   let V := U.mapHomologicalComplex (.up ℤ)
   let B := coefficientTotalTensor.{r, c, v} J R
   let A := coefficientTotalTensor.{s, d, vd} J' R'
