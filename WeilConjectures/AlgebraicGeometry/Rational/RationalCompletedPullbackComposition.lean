@@ -124,7 +124,7 @@ theorem rationalCompletedPullbackComposition (g : Y ⟶ X) (h : Z ⟶ Y)
           (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
           (e'' * scalarSection h ah.rationalCoefficient
             ((proEtaleBaseChange g).obj V) e')
-          (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.map
+          (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
             ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
               (unitSection (h ≫ g) ac.rationalCoefficient M V m))))
     (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙

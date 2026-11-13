@@ -154,7 +154,7 @@ def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
       (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
       (e'' * rationalCoherenceScalar l E h ah.rationalCoefficient
         ((proEtaleBaseChange g).obj V) e')
-      (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.map
+      (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.restrictₛₗ
         ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
           (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))) ∧
   ∃ (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙
@@ -294,7 +294,8 @@ theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
       limit.lift_π _ (op n)
     rw [hc.completed_comp] at hp
     simpa only [Category.assoc] using hp
-  · simpa only [rationalCoherenceUnit, rationalCoherenceScalar, rationalCoherenceSmul]
+  · simpa only [rationalCoherenceUnit, rationalCoherenceScalar, rationalCoherenceSmul,
+      PresheafOfModules.restrictₛₗ_apply]
       using hmodule
   · exact rationalCompletedPullbackComposition l E g h sX sY sZ ag ah ac
       hcoefficient moduleComp hmodule ambientComp hderived
