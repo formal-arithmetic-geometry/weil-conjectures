@@ -656,7 +656,9 @@ private theorem open_exchange_inverse (b : Base l E)
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      exact he)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+        exactByConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
