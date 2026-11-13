@@ -1127,8 +1127,114 @@ section
 
 attribute [local semireducible] ConstantCompletion.pull
 
-set_option maxHeartbeats 1000000 in
--- The concrete quotient coefficient square needs extra normalization heartbeats.
+-- Scalar insertion along a ring isomorphism is the unit of an equivalence.
+private theorem scalarInsertion_isIso (U : Site.{u})
+    {R S : Sheaf U.topology CommRingCat.{u}} (t : R ⟶ S) [IsIso t]
+    (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.insertion t M) := by
+  have : (ConstantCompletion.res t).IsEquivalence :=
+    ConstantCompletion.restrictScalars_equivalence
+      ((sheafCompose U.topology (forget₂ CommRingCat RingCat)).mapIso (asIso t))
+  have := (ConstantCompletion.scalarAdj t).isEquivalence_left_of_isEquivalence_right
+  have := (ConstantCompletion.scalarAdj t).unit_isIso_of_L_fully_faithful
+  rw [ConstantCompletion.insertion_eq_unit]
+  infer_instance
+
+private theorem restrictionPullAdjunct_exists {V U : Site.{u}} (f : Morphism V U)
+    {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
+    (a : R ⟶ S) (b : R' ⟶ S')
+    (c : f.algebra.rings.obj R ⟶ R') (d : f.algebra.rings.obj S ⟶ S')
+    (hs : f.algebra.rings.map a ≫ d = c ≫ b) :
+    ∃ q₀ : ConstantCompletion.res a ⋙ (f.algebra.algebra R).modules ⟶
+        ConstantCompletion.pull f.algebra d ⋙
+          ConstantCompletion.res b ⋙ ConstantCompletion.res c,
+      ∀ M : ConstantCompletion.Mod S,
+        (ConstantCompletion.underlying (f.algebra.rings.obj R)).map (q₀.app M) =
+          (f.algebra.algebra R).moduleUnderlying.hom.app
+              ((ConstantCompletion.res a).obj M) ≫
+            ConstantCompletion.pullInsertion f.algebra d M := by
+  let F := f.algebra
+  let q₀ := ConstantCompletion.inverseRestriction F a ≫
+    Functor.whiskerLeft (F.algebra _).modules
+      (Functor.whiskerRight (ConstantCompletion.scalarAdj d).unit
+        (ConstantCompletion.res (F.rings.map a))) ≫
+    Functor.whiskerLeft (ConstantCompletion.pull F d)
+      (ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom
+  refine ⟨q₀, ?_⟩
+  intro M
+  ext W x
+  dsimp only [q₀, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  change ((ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom.app
+    _).val.app W _ = _
+  rw [ConstantCompletion.squareRestriction_apply]
+  rw [ConstantCompletion.pullInsertion, ConstantCompletion.insertion_eq_unit]
+  rfl
+
+-- Prove the scalar-restriction comparison over an abstract coefficient square.
+-- This keeps quotient-ring constructions out of the normalization argument.
+private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
+    {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
+    (a : R ⟶ S) (b : R' ⟶ S')
+    (c : f.algebra.rings.obj R ⟶ R') (d : f.algebra.rings.obj S ⟶ S')
+    [IsIso c] [IsIso d] (hs : f.algebra.rings.map a ≫ d = c ≫ b) :
+    ∃! e : ConstantCompletion.res a ⋙ ConstantCompletion.pull f.algebra c ≅
+        ConstantCompletion.pull f.algebra d ⋙ ConstantCompletion.res b,
+      ∀ M : ConstantCompletion.Mod S,
+        ConstantCompletion.pullInsertion f.algebra c ((ConstantCompletion.res a).obj M) ≫
+          (ConstantCompletion.underlying R').map (e.hom.app M) =
+        ConstantCompletion.pullInsertion f.algebra d M := by
+  let F := f.algebra
+  obtain ⟨q₀, hq₀⟩ := restrictionPullAdjunct_exists f a b c d hs
+  let q : ConstantCompletion.res a ⋙ ConstantCompletion.pull F c ⟶
+      ConstantCompletion.pull F d ⋙ ConstantCompletion.res b :=
+    { app := fun M ↦ ((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M)
+      naturality := by
+        intro M N t
+        apply ((ConstantCompletion.scalarAdj c).homEquiv _ _).injective
+        dsimp only [Functor.comp_map, ConstantCompletion.pull]
+        rw [(ConstantCompletion.scalarAdj c).homEquiv_naturality_left,
+          (ConstantCompletion.scalarAdj c).homEquiv_naturality_right,
+          Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+        exact q₀.naturality t }
+  have hn (M : ConstantCompletion.Mod S) :
+      ConstantCompletion.pullInsertion F c ((ConstantCompletion.res a).obj M) ≫
+        (ConstantCompletion.underlying R').map (q.app M) =
+      ConstantCompletion.pullInsertion F d M := by
+    rw [← ConstantCompletion.pull_homEquiv]
+    change (F.algebra _).moduleUnderlying.inv.app _ ≫
+      (ConstantCompletion.underlying _).map
+        (((ConstantCompletion.scalarAdj c).homEquiv _ _)
+          (((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M))) = _
+    rw [Equiv.apply_symm_apply]
+    rw [hq₀]
+    simp only [F, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  have hp {R : Sheaf V.topology CommRingCat.{u}}
+      {S : Sheaf U.topology CommRingCat.{u}} (t : F.rings.obj R ⟶ S) [IsIso t]
+      (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.pullInsertion F t M) := by
+    have := scalarInsertion_isIso U t ((F.algebra R).modules.obj M)
+    dsimp only [ConstantCompletion.pullInsertion]
+    infer_instance
+  clear_value q
+  have hqi (M : ConstantCompletion.Mod S) : IsIso (q.app M) := by
+    have := hp c ((ConstantCompletion.res a).obj M)
+    have := hp d M
+    have hi : IsIso ((ConstantCompletion.underlying R').map (q.app M)) := by
+      apply (isIso_comp_left_iff (ConstantCompletion.pullInsertion F c _) _).mp
+      rw [hn]
+      infer_instance
+    exact isIso_of_reflects_iso _ (ConstantCompletion.underlying R')
+  have : IsIso q := NatIso.isIso_of_isIso_app q
+  refine ⟨asIso q, hn, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  have := hp c ((ConstantCompletion.res a).obj M)
+  apply (ConstantCompletion.underlying R').map_injective
+  apply (cancel_epi (ConstantCompletion.pullInsertion F c
+    ((ConstantCompletion.res a).obj M))).mp
+  exact (he M).trans (hn M).symm
+
 /-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
 on every inverse-image generator, not merely its objects.
 Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
@@ -1141,90 +1247,19 @@ theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
         f.modulePull A ≅ f.modulePull (quotientRing A I n) ⋙
           ConstantCompletion.res (ConstantCompletion.quotient U.topology A I n),
       Morphism.finiteModuleRestrictionPullIso_normalized f A I n e := by
-  let F := f.algebra
-  let a := ConstantCompletion.quotient V.topology A I n
-  let b := ConstantCompletion.quotient U.topology A I n
-  let c := ConstantCompletion.constantMap F A
-  let d := ConstantCompletion.constantMap F (quotientRing A I n)
-  have hc : IsIso c := by dsimp [c, ConstantCompletion.constantMap]; infer_instance
-  have hd : IsIso d := by dsimp [d, ConstantCompletion.constantMap]; infer_instance
-  have hs : F.rings.map a ≫ d = c ≫ b :=
-    F.constants.hom.naturality
-      (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))
-  let q₀ := ConstantCompletion.inverseRestriction F a ≫
-    Functor.whiskerLeft (F.algebra _).modules
-      (Functor.whiskerRight (ConstantCompletion.scalarAdj d).unit
-        (ConstantCompletion.res (F.rings.map a))) ≫
-    Functor.whiskerLeft (ConstantCompletion.pull F d)
-      (ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom
-  let q : ConstantCompletion.res a ⋙ ConstantCompletion.pull F c ⟶
-      ConstantCompletion.pull F d ⋙ ConstantCompletion.res b :=
-    { app := fun M ↦ ((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M)
-      naturality := by
-        intro M N t
-        apply ((ConstantCompletion.scalarAdj c).homEquiv _ _).injective
-        dsimp only [Functor.comp_map, ConstantCompletion.pull]
-        rw [(ConstantCompletion.scalarAdj c).homEquiv_naturality_left,
-          (ConstantCompletion.scalarAdj c).homEquiv_naturality_right,
-          Equiv.apply_symm_apply, Equiv.apply_symm_apply]
-        exact q₀.naturality t }
-  have hn (M : V.modules (quotientRing A I n)) :
-      ConstantCompletion.pullInsertion F c ((ConstantCompletion.res a).obj M) ≫
-        (ConstantCompletion.underlying (U.ring A)).map (q.app M) =
-      ConstantCompletion.pullInsertion F d M := by
-    rw [← ConstantCompletion.pull_homEquiv]
-    change (F.algebra _).moduleUnderlying.inv.app _ ≫
-      (ConstantCompletion.underlying _).map
-        (((ConstantCompletion.scalarAdj c).homEquiv _ _)
-          (((ConstantCompletion.scalarAdj c).homEquiv _ _).symm (q₀.app M))) = _
-    rw [Equiv.apply_symm_apply]
-    have hq₀ : (ConstantCompletion.underlying _).map (q₀.app M) =
-        (F.algebra _).moduleUnderlying.hom.app ((ConstantCompletion.res a).obj M) ≫
-          ConstantCompletion.pullInsertion F d M := by
-      ext W x
-      dsimp only [q₀, NatTrans.comp_app, Functor.whiskerLeft_app,
-        Functor.whiskerRight_app]
-      change ((ConstantCompletion.squareRestriction (F.rings.map a) d c b hs.symm).hom.app
-        _).val.app W _ = _
-      rw [ConstantCompletion.squareRestriction_apply]
-      rw [ConstantCompletion.pullInsertion, ConstantCompletion.insertion_eq_unit]
-      rfl
-    rw [hq₀]
-    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
-  have hinsert {R : Sheaf U.topology CommRingCat.{u}}
-      {S : Sheaf U.topology CommRingCat.{u}} (t : R ⟶ S) [IsIso t]
-      (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.insertion t M) := by
-    let r := sheafCompose U.topology (forget₂ CommRingCat RingCat)
-    have : (ConstantCompletion.res t).IsEquivalence :=
-      ConstantCompletion.restrictScalars_equivalence (r.mapIso (asIso t))
-    rw [ConstantCompletion.insertion_eq_unit]
+  have : IsIso (ConstantCompletion.constantMap f.algebra A) := by
+    dsimp only [ConstantCompletion.constantMap]
     infer_instance
-  have hp {R : Sheaf V.topology CommRingCat.{u}}
-      {S : Sheaf U.topology CommRingCat.{u}} (t : F.rings.obj R ⟶ S) [IsIso t]
-      (M : ConstantCompletion.Mod R) : IsIso (ConstantCompletion.pullInsertion F t M) := by
-    have := hinsert t ((F.algebra R).modules.obj M)
-    dsimp only [ConstantCompletion.pullInsertion]
+  have : IsIso (ConstantCompletion.constantMap f.algebra (quotientRing A I n)) := by
+    dsimp only [ConstantCompletion.constantMap]
     infer_instance
-  have hqi (M : V.modules (quotientRing A I n)) : IsIso (q.app M) := by
-    have := hp c ((ConstantCompletion.res a).obj M)
-    have := hp d M
-    have hi : IsIso ((ConstantCompletion.underlying (U.ring A)).map (q.app M)) := by
-      apply (isIso_comp_left_iff (ConstantCompletion.pullInsertion F c _) _).mp
-      rw [hn]
-      infer_instance
-    exact isIso_of_reflects_iso _ (ConstantCompletion.underlying (U.ring A))
-  have : IsIso q := NatIso.isIso_of_isIso_app q
-  refine ⟨asIso q, hn, ?_⟩
-  intro e he
-  apply Iso.ext
-  apply NatTrans.ext
-  funext M
-  apply ((ConstantCompletion.scalarAdj c).homEquiv _ _).injective
-  apply (ConstantCompletion.underlying (F.rings.obj _)).map_injective
-  apply (cancel_epi ((F.algebra _).moduleUnderlying.inv.app
-    ((ConstantCompletion.res a).obj M))).mp
-  rw [ConstantCompletion.pull_homEquiv, ConstantCompletion.pull_homEquiv]
-  exact (he M).trans (hn M).symm
+  exact restrictionPullIso_existsUnique f
+    (ConstantCompletion.quotient V.topology A I n)
+    (ConstantCompletion.quotient U.topology A I n)
+    (ConstantCompletion.constantMap f.algebra A)
+    (ConstantCompletion.constantMap f.algebra (quotientRing A I n))
+    (f.algebra.constants.hom.naturality
+      (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
 
 end
 
@@ -1333,8 +1368,22 @@ private theorem reductionPull_hom_ext {V U : Site.{u}} (f : Morphism V U)
   simpa only [η, ConstantCompletion.insertion_eq_unit, Category.assoc,
     ConstantCompletion.reduction, ConstantCompletion.finiteMap] using h
 
-set_option maxHeartbeats 2000000 in
--- Concrete quotient and tensor functor types require extra normalization heartbeats.
+-- Quotient-unit compatibility is independent of the pullback and is used on both sites.
+private theorem reductionUnit_step (T : Site.{u}) (A : Type u) [CommRing A]
+    (I : Ideal A) (n : ℕ) (M : T.modules A) :
+    (ConstantCompletion.scalarAdj (ConstantCompletion.quotient T.topology A I (n + 1))).unit.app
+        M ≫ (ConstantCompletion.reductionStep T.topology A I false n).app M =
+      (ConstantCompletion.scalarAdj (ConstantCompletion.quotient T.topology A I n)).unit.app
+        M := by
+  ext W m
+  have ht := (ConstantCompletion.reductionStep_existsUnique T.topology A I false n).exists
+    |>.choose_spec M W 1 m
+  change ((ConstantCompletion.reductionStep T.topology A I false n).app M).val.app W
+    (ConstantCompletion.tensorSection (ConstantCompletion.quotient T.topology A I (n + 1))
+      M W 1 m) =
+    ConstantCompletion.tensorSection (ConstantCompletion.quotient T.topology A I n) M W 1 m
+  simpa only [ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one] using ht
+
 /-- The ordinary strict reduction/pullback comparison is fixed on quotient-unit
 insertions at every level. Its source and target are actual strict diagrams.
 Source: Stacks 07A4, 099N(5) (blueprint: lem-sp-completion-mate-comparison).
@@ -1421,26 +1470,12 @@ theorem Morphism.moduleReductionPullIso_existsUnique {V U : Site.{u}}
     ConstantCompletion.reductionStep U.topology A I false n
   have hv (n : ℕ) (M : V.modules A) :
       (ηv (n + 1)).app M ≫ (dv n).app M =
-        (ηv n).app M := by
-    ext W m
-    have ht := (ConstantCompletion.reductionStep_existsUnique V.topology A I false n).exists
-      |>.choose_spec M W 1 m
-    change ((ConstantCompletion.reductionStep V.topology A I false n).app M).val.app W
-      (ConstantCompletion.tensorSection (av (n + 1)) M W 1 m) =
-        ConstantCompletion.tensorSection (av n) M W 1 m
-    simpa only [av, ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one]
-      using ht
+        (ηv n).app M :=
+    reductionUnit_step V A I n M
   have hu (n : ℕ) (M : U.modules A) :
       (ηu (n + 1)).app M ≫ (du n).app M =
-        (ηu n).app M := by
-    ext W m
-    have ht := (ConstantCompletion.reductionStep_existsUnique U.topology A I false n).exists
-      |>.choose_spec M W 1 m
-    change ((ConstantCompletion.reductionStep U.topology A I false n).app M).val.app W
-      (ConstantCompletion.tensorSection (au (n + 1)) M W 1 m) =
-        ConstantCompletion.tensorSection (au n) M W 1 m
-    simpa only [au, ConstantCompletion.finiteMap, ConstantCompletion.reductionStep, map_one]
-      using ht
+        (ηu n).app M :=
+    reductionUnit_step U A I n M
   have hEpi (n : ℕ) (M : V.modules A) : Epi ((ηv n).app M) :=
     quotientUnit_epi V A I n M
   clear_value ηv ηu
