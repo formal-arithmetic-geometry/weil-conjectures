@@ -47,24 +47,12 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
--- Tensoring preserves each colimit directly, avoiding repeated searches through adjoints.
-noncomputable local instance (priority := 2000) integralModelTensorLeftPreservesColimit
-    {J : Type} [SmallCategory J] (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-    PreservesColimit F (MonoidalCategory.tensorLeft P) := by
-  infer_instance
-
-noncomputable local instance (priority := 2000) integralModelTensorRightPreservesColimit
-    {J : Type} [SmallCategory J] (T : Scheme.{u})
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-    (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-    PreservesColimit F (MonoidalCategory.tensorRight P) := by
-  infer_instance
-
 variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+private noncomputable def integralModelLeftDerivedUpperStar
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+    {Z W : Scheme.{u}} (w : Z ⟶ W) :=
+  L((w)^*⟦Λ⟧)
 
 -- the derived extensions of scalars and pullbacks of module objects are large terms
 /-- **Integral models pull back**: an isomorphism `ℚ̄_ℓ ⊗ (E ⊗ B₀) ≅ B` gives
@@ -82,14 +70,14 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Z)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
-            (L((w)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) ≅
-      L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B :=
+            (integralModelLeftDerivedUpperStar w).obj B₀) ≅
+      (integralModelLeftDerivedUpperStar w).obj B :=
   (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       Z)).leftDerivedFunctor.mapIso
       ((derivedUpperStarExtendScalarsIso (padicIntegersRingObjToContinuousMapRingObj ℓ E) w).app
         B₀) ≪≫
     (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) w).app _ ≪≫
-    L((w)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso e₀
+    (integralModelLeftDerivedUpperStar w).mapIso e₀
 
 /-- An isomorphism of an integral model in the ambient derived categories, as an isomorphism of
 bounded constructible complexes (the form required by the stabilization theorem). -/
@@ -111,9 +99,6 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme PadicAlgCl
-
-attribute [local instance 2000] integralModelTensorLeftPreservesColimit
-  integralModelTensorRightPreservesColimit
 
 attribute [local instance] traitGenericFieldAlgebra
 
