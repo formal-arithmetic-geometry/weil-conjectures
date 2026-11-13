@@ -161,7 +161,7 @@ theorem localDirectImage_stalk_cohomology_normalization
   intro eta
   have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
   have heclass := (he eta).trans hclass
-  have hs := congrArg e.symm heclass
+  have hs := congrArg e.symm.toLinearMap heclass
   have hs' := (e.symm_apply_apply eta).symm.trans hs
   exact congrArg r hs'.symm
 
