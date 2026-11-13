@@ -102,11 +102,46 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-! ### Instances
 
-Direct instances for complexes of module objects over `Λ_Z`. Finding them from the generic
-instances on `Mod` exceeds the default heartbeat limit, so they are recorded once here. -/
+Record the colimits and their preservation used by the graded tensor constructions once,
+so that constructing tensor products does not repeat the search through module objects. -/
+
+local instance hasColimitsOfShape_monoidalModule (Z : Scheme.{u})
+    (J : Type) [Category J] :
+    HasColimitsOfShape J
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+  letI := Mod.hasColimitsOfSize (C := Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+    (R := condensedRingObj Λ Z)
+  inferInstance
+
+local instance preservesColimitsOfSize_tensorLeft_monoidalModule (Z : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
+
+local instance preservesColimitsOfSize_tensorRight_monoidalModule (Z : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight M) := inferInstance
+
+local instance hasTensor_gradedModule (Z : Scheme.{u})
+    (A B : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    GradedObject.HasTensor A B := inferInstance
+
+local instance hasTensor₄ObjExt_gradedModule (Z : Scheme.{u})
+    (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+
+local instance hasGoodTensor₁₂Tensor_gradedModule (Z : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+
+local instance hasGoodTensorTensor₂₃_gradedModule (Z : Scheme.{u})
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
 
 set_option profiler true in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 instance hasTensor_cochainComplex (Z : Scheme.{u})
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
@@ -114,14 +149,12 @@ instance hasTensor_cochainComplex (Z : Scheme.{u})
   inferInstance
 
 set_option profiler true in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategoryStruct
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
         ℤ) :=
   inferInstance
 
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategory
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
@@ -130,7 +163,6 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
 
 /-! ### K-flatness of pullbacks -/
 
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 /-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
 quasi-isomorphisms of the homotopy category. It is not an instance: it would change the instance
 found for the existence of the derived pullbacks of module objects. -/
@@ -207,7 +239,6 @@ noncomputable def upperStarTensorComplexHomX
       (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The degreewise comparison `upperStarTensorComplexHomX` is a section of the comparison
 `f^* ((A ⊗ B)^n) ⟶ (f^* A ⊗ f^* B)^n` induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
@@ -228,7 +259,6 @@ lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
   exact Functor.Monoidal.μ_δ_assoc _ _ _ _
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The degreewise comparisons `upperStarTensorComplexHomX` commute with the differentials. -/
 lemma upperStarTensorComplexHom_comm
     (A B : CochainComplex
@@ -263,7 +293,6 @@ noncomputable def upperStarTensorComplexHom
   comm' n n' h := upperStarTensorComplexHom_comm Λ f A B n n' h
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The comparison `upperStarTensorComplexHom` is the inverse of the comparison
 `f^* (A ⊗ B) ⟶ f^* A ⊗ f^* B` induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHom_eq_inv
@@ -275,7 +304,6 @@ lemma upperStarTensorComplexHom_eq_inv
   refine (IsIso.inv_eq_of_inv_hom_id (HomologicalComplex.hom_ext _ _ fun n ↦ ?_)).symm
   exact upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B n
 
--- the instances on complexes of module objects make the elaboration slow
 /-- The comparison `upperStarTensorComplexHom` is natural in both complexes. -/
 lemma upperStarTensorComplexHom_naturality
     {A A' B B' : CochainComplex
@@ -306,7 +334,6 @@ noncomputable def upperStarTensorTarget :
     ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The naturality square of the components of `upperStarTensorCounit`, on complexes. -/
 lemma upperStarTensorCounit_naturality_aux
     {A A' B B' : CochainComplex
@@ -346,7 +373,6 @@ lemma upperStarTensorCounit_naturality_aux
     DerivedCategory.Qh.map_comp]
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The transformation `Qh (f^* A) ⊗ᴸ Qh (f^* B) ⟶ Qh (f^* (A ⊗ B))` of bifunctors on the
 homotopy category of `Mod_{Λ_Y}`: the lax structure of `Qh` followed by `Qh` of the comparison
 `upperStarTensorComplexHom`. -/
@@ -420,7 +446,6 @@ noncomputable def leftDerivedUpperStarTensorRightCounit :
           (uncurry.obj (curriedTensor _)) ≫ whiskeringLeft₂Equiv (upperStarTensorCounit Λ f))
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The comparison `f^* A ⊗ f^* B ⟶ f^*(A ⊗ B)` of complexes is a section of the comparison
 induced by the comonoidal structure of `f^*`. -/
 lemma upperStarTensorComplexHom_δ
@@ -429,21 +454,10 @@ lemma upperStarTensorComplexHom_δ
     upperStarTensorComplexHom Λ f A B ≫
       ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B =
       𝟙 _ := by
-  refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
-  apply HomologicalComplex.mapBifunctor.hom_ext
-  intro i₁ i₂ h
-  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f, 
-    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
-    HomologicalComplex.mapBifunctorComparison_f]
-  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
-  rw [Category.assoc]
-  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
-  erw [Category.comp_id]
-  exact Functor.Monoidal.μ_δ_assoc _ _ _ _
+  exact HomologicalComplex.hom_ext _ _
+    (upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B)
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 open DerivedCategory in
 /-- The counit of the bifunctor `Lf^* - ⊗ᴸ Lf^* -` on objects of the homotopy category. -/
 lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
@@ -469,7 +483,6 @@ lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
 
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- On K-flat complexes, the counit of the bifunctor `Lf^* - ⊗ᴸ Lf^* -` is an isomorphism. -/
 lemma isIso_leftDerivedUpperStarTensorRightCounit_app_app
     (A B : CochainComplex
@@ -493,7 +506,6 @@ lemma isIso_leftDerivedUpperStarTensorRightCounit_app_app
   exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance
     (IsIso.comp_isIso' h₃ h₄))
 
--- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- The bifunctor `Lf^* - ⊗ᴸ Lf^* -` is a left derived bifunctor of `(A, B) ↦ Qh (f^* (A ⊗ B))`,
 for the counit `leftDerivedUpperStarTensorRightCounit`. See the module docstring. -/
 instance isLeftDerivedFunctor₂_upperStarTensor :
@@ -512,7 +524,6 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
   exact isIso_leftDerivedUpperStarTensorRightCounit_app_app Λ f A B hA hB
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The counit of the bifunctor `Lf^* (- ⊗ᴸ -)`: `Lf^*` of the lax structure
 `Qh A ⊗ᴸ Qh B ⟶ Qh (A ⊗ B)` of the localization, followed by the counit
 `Lf^* (Qh (A ⊗ B)) ⟶ Qh (f^* (A ⊗ B))` of the derived pullback. -/
@@ -563,7 +574,6 @@ lemma leftDerivedUpperStarTensor_fac :
   Functor.leftDerived₂_fac _ _ _ _ _ _
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 open DerivedCategory in
 /-- The defining property of the tensor comparison of `Lf^*`, in the form used by
 `DerivedCategory.commShift_of_tensorLeft_fac`. -/
@@ -609,7 +619,6 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
         exact Category.assoc _ _ _
 
 
--- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- Every object of `D(Mod_{Λ_Y})` is isomorphic to the image of a K-flat complex. -/
 lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
@@ -626,9 +635,7 @@ lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
   exact ⟨R.X₁.obj, R.X₁.property,
     ⟨asIso (DerivedCategory.Qh.map R.w) ≪≫ DerivedCategory.Qh.objObjPreimageIso K⟩⟩
 
--- the K-flat derivability structure on complexes of module objects is found by instance search
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- On K-flat complexes, the comparison `m` is an isomorphism: both counits are isomorphisms. -/
 lemma isIso_leftDerivedUpperStarTensor_app_app_Qh_obj
     (A B : CochainComplex
@@ -663,7 +670,6 @@ lemma isIso_leftDerivedUpperStarTensor_app_app_Qh_obj
   exact IsIso.of_isIso_comp_right _ (((leftDerivedUpperStarTensorRightCounit Λ f).app
     ((HomotopyCategory.quotient _ _).obj A)).app ((HomotopyCategory.quotient _ _).obj B))
 
--- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- The comparison `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` is an isomorphism: every object is
 isomorphic to the image of a K-flat complex, on which `m` is an isomorphism
 (`isIso_leftDerivedUpperStarTensor_app_app_Qh_obj`). -/
@@ -713,7 +719,6 @@ noncomputable def leftDerivedUpperStarUnitIso :
               (ComplexShape.up ℤ) 0).app (𝟙_ _) ≪≫
             (HomologicalComplex.single _ _ 0).mapIso (Functor.Monoidal.εIso (f)^*⟦Λ⟧).symm))
 
--- the instances on complexes of module objects make the elaboration slow
 /-- The compatibility of the comparison `m` with the comonoidal structure of `f^*` on the
 homotopy category, in the form of the hypothesis of
 `CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`. -/
@@ -732,9 +737,7 @@ lemma leftDerivedUpperStarTensor_laxSquare (A B : HomotopyCategory
   rw [MonoidalCategory.tensorHom_def, Category.assoc]
   exact leftDerivedUpperStarTensor_app_app_fac Λ f A B
 
--- the K-flat derivability structure on complexes of module objects is found by instance search
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The oplax monoidal structure on `Lf^*` whose comonoidal structure is the comparison `m`
 (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare'`): its coherences are checked on K-flat
 complexes, whose pullbacks are K-flat. -/
@@ -755,7 +758,6 @@ noncomputable def leftDerivedUpperStarOplaxMonoidal : L((f)^*⟦Λ⟧).OplaxMono
         ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hb)))
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The counit of the oplax monoidal structure `leftDerivedUpperStarOplaxMonoidal` is the unit
 comparison `leftDerivedUpperStarUnitIso`. -/
 lemma leftDerivedUpperStarOplaxMonoidal_η :
@@ -778,7 +780,6 @@ lemma leftDerivedUpperStarOplaxMonoidal_η :
   rfl
 
 set_option profiler true in
--- the instances on complexes of module objects make the elaboration slow
 /-- The derived pullback `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` on module objects over `Λ` is
 strong monoidal for the derived tensor products, with tensorator the inverse of
 `leftDerivedUpperStarTensorIso` and unit comparison `leftDerivedUpperStarUnitIso`. -/
