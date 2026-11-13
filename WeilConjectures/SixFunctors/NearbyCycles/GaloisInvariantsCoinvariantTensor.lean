@@ -63,7 +63,8 @@ private lemma CategoryTheory.exists_retraction_of_eq_comp_map_comp_of_coinvarian
 
 /-- Specialize a functorial coinvariant retraction to pullback, tensor, and homology. -/
 private lemma exists_tensor_coinvariant_of_functors
-    {I E D : Type*} {A : I → Type*} [Category E] [Category D] [∀ i, Category (A i)]
+    {I : Type*} {E : Type*} {D : Type*} {A : I → Type*}
+    [Category E] [Category D] [∀ i, Category (A i)]
     [Preadditive E] [Preadditive D] [∀ i, Preadditive (A i)] [MonoidalCategory D]
     [∀ V : D, (tensorRight V).Additive]
     {i : I} (F : E ⥤ D) [F.Additive] (H : ℤ → D ⥤ A i) [∀ q, (H q).Additive]
@@ -426,6 +427,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
   exact exists_tensor_coinvariant_of_functors
+    (I := Scheme.{u}) (i := Z)
+    (A := fun Z ↦ Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) Z))
     L((f')^*⟦Profinite.continuousMapRingObj T₀⟧)
     (fun q ↦ DerivedCategory.homologyFunctor _ q) (fun V b ↦ V.IsGE b)
     (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
