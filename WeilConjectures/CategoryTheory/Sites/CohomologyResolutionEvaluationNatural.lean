@@ -27,7 +27,6 @@ open CategoryTheory
 
 namespace CategoryTheory.Sheaf
 
-set_option profiler true in
 /-- Transport a derived-functor comparison through evaluation and the universe lift.
 The functors are parameters so that naturality does not unfold their constructions. -/
 private theorem exists_resolution_evaluation_iso
@@ -79,7 +78,6 @@ private theorem exists_resolution_evaluation_iso
   exact congrArg ULift.down (ConcreteCategory.congr_hom ht
     (l.hom ((R.isoRightDerivedObj B n).hom ((c.app F).hom x))))
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a terminal object computes cohomology, naturally for resolution maps.
 Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib
