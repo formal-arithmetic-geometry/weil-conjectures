@@ -33,15 +33,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- The standard localization is available on the open scheme independently of the
-specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU.
-(blueprint: lem-pc-exact-source-evaluation-open-models). -/
-local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
-    HasDerivedCategory.{u + 1}
-      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
-  HasDerivedCategory.standard _
-
+/-- Transport a comparison square along model isomorphisms and a functor factorization. -/
 private theorem comparison_of_transported_evaluation
     {C₁ C₂ D : Type*} [Category* C₁] [Category* C₂] [Category* D]
     (T : C₁ ⥤ C₂) (Q : C₂ ⥤ D) (E : C₁ ⥤ D) (v : E ≅ T ⋙ Q)
@@ -60,7 +52,16 @@ private theorem comparison_of_transported_evaluation
   simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv] using
     congrArg (fun z ↦ a'.hom ≫ Q.map t.inv ≫ z) (v.inv.naturality f)
 
-set_option profiler true in
+/-- The standard localization is available on the open scheme independently of the
+specified localization universe of the over-site.
+Source: Stacks Project, Tag 05RU.
+(blueprint: lem-pc-exact-source-evaluation-open-models). -/
+local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
+    HasDerivedCategory.{u + 1}
+      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+  HasDerivedCategory.standard _
+
+-- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
 Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
 08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex).
@@ -116,10 +117,10 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
+  -- Keep the evaluation arrow named while unpacking the transported models.
   intro E₀ H D g
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
     exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
-  trace "PH413: transport ready"
   let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) := inferInstance
   let : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   let L : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ⥤
@@ -135,14 +136,11 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
     L.mapHomologicalComplex (.up ℤ)
   let E := L.mapDerivedCategory
   have v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
-  trace "PH413: functors ready"
   have : CochainComplex.IsKInjective (T.obj F) := hF
   have eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
   have eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
-  trace "PH413: comparisons ready"
   apply comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
     v f g t b
-  trace "PH413: categorical transport ready"
   exact exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
 
