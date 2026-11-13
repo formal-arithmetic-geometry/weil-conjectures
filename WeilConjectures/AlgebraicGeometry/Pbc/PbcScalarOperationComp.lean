@@ -201,8 +201,101 @@ private theorem scalarAssociatorNormalization (T : Scheme.{u})
   rw [scalarBalanceComplex, scalarLeftAdjointCompEq]
   exact scalarComposition_rep T φ ψ χ w P
 
+-- Ordinary coherence is proved before lifting it to complexes and derived categories.
+private theorem scalarOrdinaryCoefficients
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    (dE : AdicCoefficientDatum A) (dF : AdicCoefficientDatum B)
+    (dG : AdicCoefficientDatum C)
+    (φ : ∀ W : Scheme.{u}, pbcAdicCompletion W dE ⟶ pbcAdicCompletion W dF)
+    (ψ : ∀ W : Scheme.{u}, pbcAdicCompletion W dF ⟶ pbcAdicCompletion W dG)
+    (χ : ∀ W : Scheme.{u}, pbcAdicCompletion W dE ⟶ pbcAdicCompletion W dG)
+    (w : ∀ W : Scheme.{u}, φ W ≫ ψ W = χ W)
+    (sEF : pbcActualCoefficientRingMap Y (φ Y) ≫ pbcActualStructureMap g dF =
+      pbcActualStructureMap g dE ≫ (proEtaleSheafDirectImage g RingCat.{u + 1}).map
+        (pbcActualCoefficientRingMap X (φ X)))
+    (sFG : pbcActualCoefficientRingMap Y (ψ Y) ≫ pbcActualStructureMap g dG =
+      pbcActualStructureMap g dF ≫ (proEtaleSheafDirectImage g RingCat.{u + 1}).map
+        (pbcActualCoefficientRingMap X (ψ X)))
+    (sEG : pbcActualCoefficientRingMap Y (χ Y) ≫ pbcActualStructureMap g dG =
+      pbcActualStructureMap g dE ≫ (proEtaleSheafDirectImage g RingCat.{u + 1}).map
+        (pbcActualCoefficientRingMap X (χ X)))
+    (M : pbcModules Y (pbcAdicCompletion Y dE)) :
+      (pbcActualModulePull g dG).map ((Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ Y))
+      (pbcScalarAdjunction (ψ Y)) (pbcScalarAdjunction (χ Y))
+      (pbcRestrictComp (φ Y) (ψ Y) (χ Y) (w Y))).hom.app M) ≫ (pbcActualScalarOrdinaryPullIso g dE dG (χ Y) (χ X) sEG).hom.app M =
+        (pbcActualScalarOrdinaryPullIso g dF dG (ψ Y) (ψ X) sFG).hom.app ((pbcExtend (φ Y)).obj M) ≫
+          (pbcExtend (ψ X)).map ((pbcActualScalarOrdinaryPullIso g dE dF (φ Y) (φ X) sEF).hom.app M) ≫
+          (Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ X))
+      (pbcScalarAdjunction (ψ X)) (pbcScalarAdjunction (χ X))
+      (pbcRestrictComp (φ X) (ψ X) (χ X) (w X))).hom.app ((pbcActualModulePull g dE).obj M) := by
+  let : HasSheafify (ProEt.topology Y) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y
+  let : (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+  let : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let rY := pbcRestrictComp (φ Y) (ψ Y) (χ Y) (w Y)
+  let rX := pbcRestrictComp (φ X) (ψ X) (χ X) (w X)
+  let aY₀ := Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ Y))
+    (pbcScalarAdjunction (ψ Y)) (pbcScalarAdjunction (χ Y)) rY
+  let aX₀ := Adjunction.leftAdjointCompIso (pbcScalarAdjunction (φ X))
+    (pbcScalarAdjunction (ψ X)) (pbcScalarAdjunction (χ X)) rX
+  let oEF := pbcActualScalarOrdinaryPullIso g dE dF (φ Y) (φ X) sEF
+  let oFG := pbcActualScalarOrdinaryPullIso g dF dG (ψ Y) (ψ X) sFG
+  let oEG := pbcActualScalarOrdinaryPullIso g dE dG (χ Y) (χ X) sEG
+  let δEF := pbcActualScalarRightIso g dE dF (φ Y) (φ X) sEF
+  let δFG := pbcActualScalarRightIso g dF dG (ψ Y) (ψ X) sFG
+  let δEG := pbcActualScalarRightIso g dE dG (χ Y) (χ X) sEG
+  have hc : δEG =
+      isoWhiskerLeft (pbcActualModulePush g dG) rY.symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight δFG (pbcRestrict (φ Y)) ≪≫ Functor.associator _ _ _ ≪≫
+      isoWhiskerLeft (pbcRestrict (ψ X)) δEF ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      isoWhiskerRight rX (pbcActualModulePush g dE) := by
+    apply (pbcActualScalarRightIso_exists g dE dG (χ Y) (χ X) sEG).unique
+      (pbcActualScalarRightIso_exists g dE dG (χ Y) (χ X) sEG).exists.choose_spec
+    intro N U x
+    change (rX.hom.app N).val.app ((proEtaleBaseChange g).op.obj U)
+      ((δEF.hom.app ((pbcRestrict (ψ X)).obj N)).val.app U
+        ((δFG.hom.app N).val.app U
+          ((rY.inv.app ((pbcActualModulePush g dG).obj N)).val.app U x))) = x
+    have hr : (rY.inv.app ((pbcActualModulePush g dG).obj N)).val.app U x = x := by
+      have h := (pbcRestrictComp_exists (φ Y) (ψ Y) (χ Y) (w Y)).exists.choose_spec
+        ((pbcActualModulePush g dG).obj N) U x
+      have hi := congrArg (fun f ↦ f.val.app U x)
+        (rY.hom_inv_id_app ((pbcActualModulePush g dG).obj N))
+      exact (congrArg (fun y ↦ (rY.inv.app
+        ((pbcActualModulePush g dG).obj N)).val.app U y) h).symm.trans hi
+    have hFG : (δFG.hom.app N).val.app U x = x :=
+      (pbcActualScalarRightIso_exists g dF dG (ψ Y) (ψ X) sFG).exists.choose_spec _ _ _
+    have hEF : (δEF.hom.app ((pbcRestrict (ψ X)).obj N)).val.app U x = x :=
+      (pbcActualScalarRightIso_exists g dE dF (φ Y) (φ X) sEF).exists.choose_spec _ _ _
+    rw [hr, hFG, hEF]
+    exact (pbcRestrictComp_exists (φ X) (ψ X) (χ X) (w X)).exists.choose_spec _ _ _
+  have ht := FiniteFreeDirectImage.Conjugation.tower
+    (pbcScalarAdjunction (φ Y)) (pbcScalarAdjunction (ψ Y))
+    (pbcScalarAdjunction (χ Y))
+    (pbcScalarAdjunction (φ X)) (pbcScalarAdjunction (ψ X))
+    (pbcScalarAdjunction (χ X))
+    (pbcActualModuleAdjunction g dE) (pbcActualModuleAdjunction g dF)
+    (pbcActualModuleAdjunction g dG) rY rX δEF δFG δEG hc
+  have ht' := congrArg (fun e ↦ (pbcActualModulePull g dG).map (aY₀.hom.app M) ≫
+    e.hom.app M) ht
+  with_unfolding_all
+    simpa only [FiniteFreeDirectImage.Conjugation.square, oEF, oFG, oEG,
+      pbcActualScalarOrdinaryPullIso, δEF, δFG, δEG, aY₀, aX₀,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+      isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Category.comp_id, Category.assoc, ← Functor.map_comp_assoc,
+      Iso.hom_inv_id_app, (pbcActualModulePull g dG).map_id] using ht'
+
 set_option profiler true in
--- Work with abstract coefficient data while checking the long tower calculation.
 private theorem scalarDerivedCoefficients
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (dE : AdicCoefficientDatum A) (dF : AdicCoefficientDatum B)
@@ -253,58 +346,8 @@ private theorem scalarDerivedCoefficients
   let oEF := pbcActualScalarOrdinaryPullIso g dE dF (φ Y) (φ X) sEF
   let oFG := pbcActualScalarOrdinaryPullIso g dF dG (ψ Y) (ψ X) sFG
   let oEG := pbcActualScalarOrdinaryPullIso g dE dG (χ Y) (χ X) sEG
-  have ordinary (M : pbcModules Y (pbcAdicCompletion Y dE)) :
-      (pbcActualModulePull g dG).map (aY₀.hom.app M) ≫ oEG.hom.app M =
-        oFG.hom.app ((pbcExtend (φ Y)).obj M) ≫
-          (pbcExtend (ψ X)).map (oEF.hom.app M) ≫
-          aX₀.hom.app ((pbcActualModulePull g dE).obj M) := by
-    let δEF := pbcActualScalarRightIso g dE dF (φ Y) (φ X) sEF
-    let δFG := pbcActualScalarRightIso g dF dG (ψ Y) (ψ X) sFG
-    let δEG := pbcActualScalarRightIso g dE dG (χ Y) (χ X) sEG
-    have hc : δEG =
-        isoWhiskerLeft (pbcActualModulePush g dG) rY.symm ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        isoWhiskerRight δFG (pbcRestrict (φ Y)) ≪≫ Functor.associator _ _ _ ≪≫
-        isoWhiskerLeft (pbcRestrict (ψ X)) δEF ≪≫
-        (Functor.associator _ _ _).symm ≪≫
-        isoWhiskerRight rX (pbcActualModulePush g dE) := by
-      apply (pbcActualScalarRightIso_exists g dE dG (χ Y) (χ X) sEG).unique
-        (pbcActualScalarRightIso_exists g dE dG (χ Y) (χ X) sEG).exists.choose_spec
-      intro N U x
-      change (rX.hom.app N).val.app ((proEtaleBaseChange g).op.obj U)
-        ((δEF.hom.app ((pbcRestrict (ψ X)).obj N)).val.app U
-          ((δFG.hom.app N).val.app U
-            ((rY.inv.app ((pbcActualModulePush g dG).obj N)).val.app U x))) = x
-      have hr : (rY.inv.app ((pbcActualModulePush g dG).obj N)).val.app U x = x := by
-        have h := (pbcRestrictComp_exists (φ Y) (ψ Y) (χ Y) (w Y)).exists.choose_spec
-          ((pbcActualModulePush g dG).obj N) U x
-        have hi := congrArg (fun f ↦ f.val.app U x)
-          (rY.hom_inv_id_app ((pbcActualModulePush g dG).obj N))
-        exact (congrArg (fun y ↦ (rY.inv.app
-          ((pbcActualModulePush g dG).obj N)).val.app U y) h).symm.trans hi
-      have hFG : (δFG.hom.app N).val.app U x = x :=
-        (pbcActualScalarRightIso_exists g dF dG (ψ Y) (ψ X) sFG).exists.choose_spec _ _ _
-      have hEF : (δEF.hom.app ((pbcRestrict (ψ X)).obj N)).val.app U x = x :=
-        (pbcActualScalarRightIso_exists g dE dF (φ Y) (φ X) sEF).exists.choose_spec _ _ _
-      rw [hr, hFG, hEF]
-      exact (pbcRestrictComp_exists (φ X) (ψ X) (χ X) (w X)).exists.choose_spec _ _ _
-    have ht := FiniteFreeDirectImage.Conjugation.tower
-      (pbcScalarAdjunction (φ Y)) (pbcScalarAdjunction (ψ Y))
-      (pbcScalarAdjunction (χ Y))
-      (pbcScalarAdjunction (φ X)) (pbcScalarAdjunction (ψ X))
-      (pbcScalarAdjunction (χ X))
-      (pbcActualModuleAdjunction g dE) (pbcActualModuleAdjunction g dF)
-      (pbcActualModuleAdjunction g dG) rY rX δEF δFG δEG hc
-    have ht' := congrArg (fun e ↦ (pbcActualModulePull g dG).map (aY₀.hom.app M) ≫
-      e.hom.app M) ht
-    with_unfolding_all
-      simpa only [FiniteFreeDirectImage.Conjugation.square, oEF, oFG, oEG,
-        pbcActualScalarOrdinaryPullIso, δEF, δFG, δEG, aY₀, aX₀,
-        Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
-        isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app,
-        Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-        Category.comp_id, Category.assoc, ← Functor.map_comp_assoc,
-        Iso.hom_inv_id_app, (pbcActualModulePull g dG).map_id] using ht'
+  have ordinary (M : pbcModules Y (pbcAdicCompletion Y dE)) :=
+    scalarOrdinaryCoefficients g dE dF dG φ ψ χ w sEF sFG sEG M
   let EY := (pbcExtend (φ Y)).mapHomologicalComplex (.up ℤ)
   let EX := (pbcExtend (φ X)).mapHomologicalComplex (.up ℤ)
   let FY := (pbcExtend (ψ Y)).mapHomologicalComplex (.up ℤ)
