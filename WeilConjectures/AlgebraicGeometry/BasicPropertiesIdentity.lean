@@ -59,7 +59,7 @@ private theorem resolution_homology_naturality {C : Type*} [Category* C] [Abelia
       ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map α)) U
   change U.map ((Γ.mapHomologicalComplex (ComplexShape.up ℕ) ⋙
       HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) p).map α) ≫ _ = _ at hs
-  rw [← hs, ← U.map_comp_assoc, ← hn, U.map_comp, Category.assoc]
+  erw [← hs, ← U.map_comp_assoc, ← hn, U.map_comp, Category.assoc]
 
 private theorem identity_diagram_cancel {C : Type*} [Category* C]
     {A B C₁ D E K L : C} (rJ : A ≅ B) (sJ : C₁ ≅ B) (rI : D ≅ E) (sI : K ≅ E)
