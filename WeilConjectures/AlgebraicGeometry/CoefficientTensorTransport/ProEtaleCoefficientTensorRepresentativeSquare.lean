@@ -31,6 +31,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
   pullback SheafOfModules.monoidalCategory proEtaleCanonicalTensorComparison
   proEtaleTensorPullbackTotalIso
 
+-- Paste the representative equations before specializing to derived tensor totalizations.
 private theorem map_tensor_representative_paste
     {D E J K : Type*} [Category* D] [Category* E] [Category* J] [Category* K]
     (U : D ⥤ E) (B : J ⥤ D) (Z : K ⥤ E) (V : J ⥤ K)
@@ -58,7 +59,6 @@ private theorem map_tensor_representative_paste
   simp only [Category.assoc]
   rw [reassoc_of% hu, reassoc_of% hm, hrep, ← reassoc_of% hchain]
 
-set_option profiler true in
 /-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
 
 Source: Stacks Tags 03EL, 07A4 and 07A6.
