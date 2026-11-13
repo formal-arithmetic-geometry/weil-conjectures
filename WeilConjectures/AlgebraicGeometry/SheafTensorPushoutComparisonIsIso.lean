@@ -227,26 +227,32 @@ theorem sheafTensorPushoutComparison_isIso
   have hcomp : g.comp gr = gt.comp E.toLinearMap.toAddMonoidHom := by
     apply stalkTensor_addHom_ext r ((restrictScalars (𝓻 s)).obj M) x
     intro U hxU c m
-    change g ((Φr ((restrictScalars (𝓻 s)).obj M)).hom
-      (TopCat.Presheaf.germ C.obj U x hxU c
-        ⊗ₜ[Dx, rx] TopCat.Presheaf.germ M.val.presheaf U x hxU m)) =
-      (Φt M).hom ((Algebra.IsPushout.cancelBaseChange Dx Cx Ax Bx Mx).symm _)
-    erw [hΦr, Algebra.IsPushout.cancelBaseChange_symm_tmul]
-    change g (TopCat.Presheaf.germ
-      (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf U x hxU _) =
-      (Φt M).hom (((TopCat.Presheaf.stalkFunctor CommRingCat x).map b.hom)
-        (TopCat.Presheaf.germ C.obj U x hxU c) ⊗ₜ[Ax, tx] _)
-    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply U x hxU b.hom]
-    erw [hΦt]
-    change ((TopCat.Presheaf.stalkFunctor Ab.{u} x).map
-      ((PresheafOfModules.toPresheaf _).map f.val))
-        (TopCat.Presheaf.germ
-          (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf
-            U x hxU _) = _
-    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
-    exact congrArg
-      (TopCat.Presheaf.germ (changeOfRings.{u, u, u} t M).val.presheaf U x hxU)
-      (comparison_formula r s b t M f hf (Opposite.op U) c m)
+    let cx : Cx := TopCat.Presheaf.germ C.obj U x hxU c
+    let mx : Mx := TopCat.Presheaf.germ M.val.presheaf U x hxU m
+    let z := c ⊗ₜ[D.obj.obj (Opposite.op U), (r.hom.app (Opposite.op U)).hom]
+      (show ((restrictScalars (𝓻 s)).obj M).val.obj (Opposite.op U) from m)
+    let w := b.hom.app (Opposite.op U) c
+      ⊗ₜ[A.obj.obj (Opposite.op U), (t.hom.app (Opposite.op U)).hom] m
+    change g (gr (cx ⊗ₜ[Dx] mx)) = gt (E (cx ⊗ₜ[Dx] mx))
+    have hleft : g (gr (cx ⊗ₜ[Dx] mx)) =
+        TopCat.Presheaf.germ (changeOfRings t M).val.presheaf U x hxU
+          ((θ t M).app (Opposite.op U) w) :=
+      (congrArg g (hΦr ((restrictScalars (𝓻 s)).obj M) U hxU m c)).trans
+        ((TopCat.Presheaf.stalkFunctor_map_germ_apply U x hxU
+          ((PresheafOfModules.toPresheaf _).map f.val)
+          ((θ r((restrictScalars (𝓻 s)).obj M)).app (Opposite.op U) z)).trans
+          (congrArg (TopCat.Presheaf.germ (changeOfRings t M).val.presheaf U x hxU)
+            (comparison_formula r s b t M f hf (Opposite.op U) c m)))
+    have hbx : bx cx = TopCat.Presheaf.germ B.obj U x hxU
+        (b.hom.app (Opposite.op U) c) :=
+      TopCat.Presheaf.stalkFunctor_map_germ_apply U x hxU b.hom c
+    have hright : gt (E (cx ⊗ₜ[Dx] mx)) =
+        TopCat.Presheaf.germ (changeOfRings t M).val.presheaf U x hxU
+          ((θ t M).app (Opposite.op U) w) :=
+      (congrArg gt (Algebra.IsPushout.cancelBaseChange_symm_tmul Dx Cx Ax Bx Mx cx mx)).trans
+        ((congrArg (fun c : Bx ↦ gt (c ⊗ₜ[Ax] mx)) hbx).trans
+          (hΦt M U hxU m (b.hom.app (Opposite.op U) c)))
+    exact hleft.trans hright.symm
   have hg : Function.Bijective g := by
     have hgr : Function.Bijective gr := ConcreteCategory.bijective_of_isIso hr.hom
     have hgt : Function.Bijective gt := ConcreteCategory.bijective_of_isIso ht.hom
@@ -254,13 +260,7 @@ theorem sheafTensorPushoutComparison_isIso
     have hb : Function.Bijective (g ∘ gr) := by
       rw [hh]
       exact hgt.comp he
-    exact ⟨fun a b h ↦ by
-      obtain ⟨a, rfl⟩ := hgr.surjective a
-      obtain ⟨b, rfl⟩ := hgr.surjective b
-      exact congrArg gr (hb.injective h),
-      fun b ↦ by
-        obtain ⟨a, ha⟩ := hb.surjective b
-        exact ⟨gr a, ha⟩⟩
+    exact (hgr.of_comp_iff g).mp hb
   exact (ConcreteCategory.isIso_iff_bijective _).mpr hg
 
 end
