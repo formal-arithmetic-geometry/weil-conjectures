@@ -58,6 +58,7 @@ local instance hasColimitsOfSize_rightUnitorShift : HasColimitsOfSize.{0, 0} C :
 
 variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Elaborating the shifted K-flat representative exceeds the default heartbeat limit.
 open TensorCommShift₂ in
