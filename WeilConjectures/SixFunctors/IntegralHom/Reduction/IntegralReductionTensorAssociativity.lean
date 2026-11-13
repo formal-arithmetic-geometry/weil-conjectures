@@ -37,6 +37,20 @@ private theorem reduction_map_inverse_cancel
     F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
   rw [← h, Iso.symm_hom, ← F.map_comp, e.hom_inv_id, F.map_id]
 
+private theorem reduction_normalized_comparison
+    {C : Type*} [Category C] {A B D E P Q T : C}
+    {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E} (e : P ≅ E)
+    {v : P ⟶ Q} {w : Q ⟶ P} {ε : A ⟶ Q} {t : E ⟶ T} {s : P ⟶ T}
+    (h : a ≫ b ≫ c ≫ e.inv ≫ v = ε) (hv : v ≫ w = 𝟙 P)
+    (hs : s = e.hom ≫ t) : (a ≫ b ≫ c) ≫ t = ε ≫ w ≫ s := by
+  calc
+    (a ≫ b ≫ c) ≫ t = (a ≫ b ≫ c) ≫ e.inv ≫ s := by
+      rw [hs]
+      simp only [Iso.inv_hom_id_assoc]
+    _ = ε ≫ w ≫ s := by
+      have hh := congrArg (fun z ↦ z ≫ w ≫ s) h
+      simpa only [Category.assoc, reassoc_of% hv, Category.id_comp] using hh
+
 private theorem reduction_tensorComparison_transport
     {C D : Type*} [Category C] [Category D]
     {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
@@ -395,28 +409,15 @@ private theorem nativeReductionMonoidal
       trace "PH805: target comparison proved"
       have hcan := reduction_map_inverse_cancel hbκ DerivedCategory.Q
       trace "PH805: cancellation proved"
-      let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
-        m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
-          m.target.tensor.map (Prod.mkHom εP εQ)
       trace "PH805: transport square"
-      calc
-        _ = G ≫ f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
-          rw [hcr]
-          with_unfolding_all
-            exact reduction_tensorComparison_transport F e f m.mu _ εP εQ
-        _ = G ≫ m.target.representative.inv.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫ cS := by
-          rw [hcs]
-          simp only [Iso.inv_hom_id_app_assoc]
-          rfl
-        _ = reductionCounit l E Y D hl n _ ≫
-            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS := by
-          have hh := congrArg (fun z ↦ z ≫
-            DerivedCategory.Q.map (κ.hom.app (P, Q)) ≫ cS) hnorm
-          with_unfolding_all
-            simpa only [F, G, εP, εQ, J, R, completedIntegralCommRingSheaf,
-              totalTensor, coefficientTotalTensor, ordinaryTensor,
-              CategoryTheory.Functor.uncurry_obj_obj, Category.assoc,
-              reassoc_of% hcan, Category.id_comp] using hh)
+      dsimp only [reductionExtension_eq_scalarExtension, coefficientTotalTensor,
+        totalTensor, ordinaryTensor] at hnorm
+      have hn := reduction_normalized_comparison
+        (m.target.representative.app (⟨_, hEP⟩, ⟨_, hEQ⟩)) hnorm hcan hcs
+      rw [hcr]
+      with_unfolding_all
+        exact (reduction_tensorComparison_transport F e f m.mu
+          (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) εP εQ).trans hn)
   trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
