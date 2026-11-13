@@ -136,7 +136,8 @@ lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f
     (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
       ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj ≫
       L((g'.left)^*⟦Λ⟧).map (𝟙 (L((f.left)^*⟦Λ⟧).obj K.obj)) ≫ 𝟙 _
-  simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using
+  simpa only [(L((f'.left)^*⟦Λ⟧)).map_id, (L((g'.left)^*⟦Λ⟧)).map_id,
+    Category.id_comp, Category.comp_id] using
     boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
 
 end SquareComparison
