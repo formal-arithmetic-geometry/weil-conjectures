@@ -56,7 +56,6 @@ private theorem affineSheafification_preservesFiniteLimits
   unfold affinePerfectSheafification
   exact comp_preservesFiniteLimits _ _
 
-set_option trace.profiler true in
 set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
