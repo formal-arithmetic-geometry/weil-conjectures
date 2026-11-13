@@ -172,7 +172,7 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
 This is a finite comparison: it asserts no eventual vanishing, uses no complex P,
@@ -311,10 +311,10 @@ theorem adicResidue_koszul_coefficient_cone_comparison
         (exteriorPower.zeroEquiv A (Fin r →₀ A)).surjective
     have : Epi (f n) := epi_extendMap_single_of_epi_zero (εA n)
     infer_instance
-  obtain ⟨e, he⟩ := additiveConeFamilyComparison E K L f
+  refine ⟨E, hadd, hlim, hcolim, ?_⟩
+  exact additiveConeFamilyComparison E K L f
     (fun n m h ↦ HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
     (fun n m h ↦ HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
     hc ε eK eQ haug ht hfepi
-  exact ⟨E, hadd, hlim, hcolim, e, he⟩
 
 end AlgebraicGeometry.Scheme
