@@ -424,7 +424,7 @@ theorem exists_etaleIsoTorsor_equiv :
         (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) :=
     e1.symm
   erw [e2]
-  simp only [etaleIsoTorsorVal_map_eq, Modules.etaleIsoTorsorVal_mk]
+  simp only [etaleIsoTorsorVal_map_eq]
   exact descentData_pullHom_comm T V t M e.inv Z.hom
     (i₁ := ⟨V₂, h₂⟩) (i₂ := ⟨V₁, h₁⟩) b.left a.left
     (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
