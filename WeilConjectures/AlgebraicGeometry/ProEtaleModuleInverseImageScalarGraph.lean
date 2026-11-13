@@ -233,8 +233,7 @@ private noncomputable def fromModelForgetSetIso (X : Scheme.{u})
 -- are rewritten explicitly. This intentionally uses the simplified goal in the next step.
 set_option linter.flexible false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 500000 in
--- Elaborating the transported scalar-action comparison needs additional reduction steps.
+set_option profiler true in
 /-- The natural set comparisons for inverse image respect scalar multiplication on
 arbitrary generalized sections.
 
