@@ -424,18 +424,20 @@ private lemma map_conj_of_comparison
   have h₂ : S₂.map (c.inv.app Y) = s₂.inv.app (F₁.obj Y) ≫ L₂.map (s₁.inv.app Y) ≫
       d.inv.app (S₀.obj Y) ≫ s₁₂.hom.app Y := by
     rw [← cancel_epi (S₂.map (c.hom.app Y)), ← Functor.map_comp,
-      Iso.hom_inv_id_app, Functor.map_id, h₁ Y]
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, h₁ Y]
     simp [← Functor.map_comp_assoc]
   have h : s₁.hom.app X ≫ S₁.map φ ≫ s₁.inv.app Y = L₁.map k ≫ δ ≫ L₁.map m := by
     rw [hφ]
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app, Category.comp_id]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
   have h' := congrArg L₂.map h
   simp only [Functor.map_comp] at h'
   have nK := d.hom.naturality k
   have nM := d.inv.naturality m
   simp only [Functor.comp_map] at nK nM
-  rw [Functor.map_comp, Functor.map_comp, h₁ X, h₂,
-    ← NatIso.naturality_1 s₂ φ]
+  have nφ := (NatIso.naturality_1 s₂ φ).symm
+  dsimp only [Functor.comp_map] at nφ
+  rw [Functor.map_comp, Functor.map_comp, h₁ X, h₂, nφ]
   simp only [Functor.comp_map, Category.assoc, Iso.hom_inv_id_app_assoc]
   rw [reassoc_of% h', ← reassoc_of% nK, reassoc_of% nM]
 
