@@ -49,6 +49,15 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 set_option allowUnsafeReducibility true in
 attribute [local reducible] integralSystemReduction
 
+/-- Map a composite equation with its factors already expanded.
+Source: functoriality. -/
+private theorem scalar_map_three_eq_two {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B C' D' E' : C}
+    {a : A ⟶ B} {b : B ⟶ C'} {c : C' ⟶ D'} {d : A ⟶ E'} {e : E' ⟶ D'}
+    (h : a ≫ b ≫ c = d ≫ e) :
+    F.map a ≫ F.map b ≫ F.map c = F.map d ≫ F.map e := by
+  simpa only [Functor.map_comp] using congrArg F.map h
+
 /-- Pasting of the scalar-composition diagram after mapping all of its edges into
 one category. Source: elementary category theory. -/
 private theorem scalar_composition_paste_mapped
@@ -226,9 +235,11 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   have IIIk' := congrArg (UL h).map IIIk
-  have CE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map CE
+  have CE' := scalar_map_three_eq_two
+    (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
+    (integralComparisonDerivedSequenceScalar l E L ι Z) CE
   have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
-  simp only [Functor.map_comp] at IIIk' CE'
+  simp only [Functor.map_comp] at IIIk'
   exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
 
 end SystemScalar
