@@ -135,9 +135,7 @@ private theorem kInjective_over_transport (X : Scheme.{u}) (U : X.Opens)
 
 end TransportProofs
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Comparing the site carriers and the chosen Hom functors needs extra elaboration steps.
 /-- Transport the ordinary tensor and Hom models, and their component equation.
 Source: Stacks Project, Tags 08DL, 08DJ and 08DQ, ordinary complex constructions.
 (blueprint: lem-pc-ordinary-evaluation-over-transport).
@@ -186,8 +184,13 @@ theorem exists_ordinaryEvaluation_over_transport (X : Scheme.{u}) (U : X.Opens)
         D'.IsKFlatTensor ∧ CochainComplex.IsKInjective F' ∧
         IsSchemeOrdinaryEvaluation U.toScheme P' F' (t.inv ≫ T.map f ≫ b.hom) := by
   dsimp only
-  obtain ⟨b, hb, d, ht⟩ := exists_ordinaryEvaluation_over_comparisons X U P
-  obtain ⟨t, ht⟩ := ht F
+  have h := exists_ordinaryEvaluation_over_comparisons X U P
+  let b := h.choose
+  have hb := h.choose_spec.1
+  let d := h.choose_spec.2.choose
+  have ht := h.choose_spec.2.choose_spec F
+  let t := ht.choose
+  have ht := ht.choose_spec
   refine ⟨t, b F, hom_quasiIso_over_transport X U P hhom b hb, ?_, ?_, ht f hf⟩
   · exact kFlat_over_transport X U (localEvaluationDual X U P) _ d hdual
       (fun A ↦ exists_totalTensor_overEquiv_iso X U A (localEvaluationDual X U P))
