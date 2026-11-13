@@ -93,7 +93,7 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
       (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
         (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
           L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  with_reducible
+  with_reducible_and_instances
     have k := nonempty_arrowIso_map_map_kunnethMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
       φ₁ φ₂ h A₀ B₀ hA hB hAB
@@ -144,7 +144,7 @@ theorem nonempty_arrowIso_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ f₁
       (L((P.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj
         (L((f₁)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj A₀ ⊗
           L((f₂)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀)) m
-  with_reducible
+  with_reducible_and_instances
     have k := nonempty_arrowIso_map_kunnethMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
       φ₁ φ₂ A₀ B₀ hA hB hAB
