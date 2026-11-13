@@ -205,6 +205,7 @@ private theorem complete_roosUnit (W : Scheme.{t})
   rw [← hc, ← Category.assoc]
   exact IsIso.comp_isIso' hu c.isIso_hom
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- The derived Roos comparison maps unfold large localized categories.
 /-- Completeness makes the specified chain-level reduction augmentation invertible
