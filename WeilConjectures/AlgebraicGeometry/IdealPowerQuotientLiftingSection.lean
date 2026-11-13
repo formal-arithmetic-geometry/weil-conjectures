@@ -39,6 +39,11 @@ private theorem over_comp_over_app {X : Scheme.{u}} {M N P Q : X.Modules}
       f.val.app (op W) ≫ g.val.app (op (Over.mk (homOfLE hWV))) ≫
         h.val.app (op W) := rfl
 
+private theorem over_app_eq {X : Scheme.{u}} {M N : X.Modules}
+    (f : M ⟶ N) {V : X.Opens} (W : X.Opens) (hWV : W ≤ V) :
+    (f.over V).val.app (op (Over.mk (homOfLE hWV))) = f.val.app (op W) := rfl
+
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section on the ideal complement lifts into an ideal-power annihilator quotient.
 
@@ -176,12 +181,7 @@ theorem ideal_power_quotient_local_lifting_section
     dsimp only [β]
     rw [over_comp_over_app, over_comp_over_app]
     rw [← he]
-    change ((r (l V V') m hlm).val.app (op W) ≫
-        (r n (l V V') (hnl V V')).val.app (op W)) ≫
-        (α V).val.app (op (Over.mk (homOfLE hWV))) ≫ (q n m hnm).val.app (op W) =
-      ((r (l V V') m hlm).val.app (op W) ≫
-        (r n (l V V') (hnl V V')).val.app (op W)) ≫
-        (α V').val.app (op (Over.mk (homOfLE hWV'))) ≫ (q n m hnm).val.app (op W)
+    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app]
     rw [Category.assoc, Category.assoc]
     rw [← Category.assoc ((r n (l V V') (hnl V V')).val.app (op W)),
       hl V V' W hWV hWV', Category.assoc]
@@ -204,12 +204,11 @@ theorem ideal_power_quotient_local_lifting_section
   apply Eq.trans _ hs
   have he := congrArg (fun f ↦ f.val.app
     (op (Over.mk (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1))))) (hψ V)
+  rw [over_app_eq] at he
   change (cokernel.π (a m)).app (U ⊓ V.1.1)
       (F.presheaf.map (homOfLE inf_le_left).op s) =
     ψ.val.app (op (U ⊓ V.1.1))
       (((idealSheafPower ι m).1).presheaf.map (homOfLE inf_le_left).op (one m))
-  change _ = (ψ.over V.1.1).val.app (op (Over.mk
-    (homOfLE (inf_le_right : U ⊓ V.1.1 ≤ V.1.1)))) _
   rw [he]
   dsimp only [β]
   rw [over_comp_over_app]
