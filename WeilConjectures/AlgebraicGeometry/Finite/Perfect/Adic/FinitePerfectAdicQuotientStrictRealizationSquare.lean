@@ -20,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Instantiating the generic realization square unfolds the completed coefficient rings.
 /-- The explicit scalar realizations carry the ordinary quotient arrows to the transition maps of
 the strict ordinary tensor tower restricted to `W`, compatibly with the inverse-image comparison
@@ -80,7 +79,7 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
     have h := finitePerfectAdicScalarComponent_forget X d V U W f n G
     dsimp only at h
     exact congrArg (fun k ↦ k.hom) h
-  exact finitePerfectAdicRealization_square_comp X V U W f
+  have hsquare := finitePerfectAdicRealization_square_comp X V U W f
     (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
     (completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n)) (φ (n + 1)) (φ n)
     (finitePerfectAdicSliceScalar X d W (n + 1)) (finitePerfectAdicSliceScalar X d W n)
@@ -96,5 +95,6 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
     ((finitePerfectAdicQuotientTensorIso X d (n + 1)).app N)
     ((finitePerfectAdicQuotientTensorIso X d n).app N) _
     (finitePerfectAdicQuotientTensorIso_transition X d n N)
+  exact hsquare
 
 end AlgebraicGeometry.Scheme
