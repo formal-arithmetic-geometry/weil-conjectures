@@ -1313,6 +1313,7 @@ private theorem ringedSiteTensorCoherence
     ringedSiteTensorRightUnitorModel J R M t ht⟩, rfl⟩
 
 -- The fixed derived Hom comparisons have dependent instance arguments.
+set_option profiler true in
 /-- Biduality is the signed ordinary map under the two specified Hom comparisons.
 Source: Stacks 0A97, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
 Proof: the closed transposition is pinned by models.uncurry_model. The normalized
