@@ -22,11 +22,11 @@ namespace AlgebraicGeometry
 private theorem stalkMap_smul_of_germ_smul {Y : TopCat.{u}}
     {R : Y.Presheaf CommRingCat.{u}} (M : PresheafOfModules.{u} (R ⋙ forget₂ _ _))
     (y : Y) {S : Type u} [CommRing S] {P : Type u} [AddCommGroup P] [Module S P]
-    (f : R.stalk y →+* S) (a : TopCat.Presheaf.stalk M.presheaf y →+ P)
+    (f : R.stalk y →+* S) (a : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.presheaf y →+ P)
     (h : ∀ (V : Opens Y) (hy : y ∈ V) (r : R.obj (op V)) (m : M.obj (op V)),
       a (TopCat.Presheaf.germ M.presheaf V y hy (r • m)) =
         f (R.germ V y hy r) • a (TopCat.Presheaf.germ M.presheaf V y hy m))
-    (r : R.stalk y) (m : TopCat.Presheaf.stalk M.presheaf y) :
+    (r : R.stalk y) (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y) M.presheaf y) :
     a (r • m) = f r • a m := by
   obtain ⟨U, hyU, r, rfl⟩ := R.exists_germ_eq r
   obtain ⟨V, hyV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.presheaf m
@@ -37,7 +37,7 @@ private theorem stalkMap_smul_of_germ_smul {Y : TopCat.{u}}
     ← PresheafOfModules.germ_smul (R := R) M]
   exact h (U ⊓ V) hy _ _
 
-set_option trace.profiler true in
+set_option profiler true in
 -- Comparing stalk module structures through restriction unfolds nested colimit instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -114,7 +114,7 @@ theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Open
       (r : Y.presheaf.stalk y)
       (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y) :
       a F (r • m) = eR.hom r • a F m := by
-    apply stalkMap_smul_of_germ_smul (N F).val y eR.hom.hom (a F).hom
+    apply stalkMap_smul_of_germ_smul (R := Y.presheaf) (N F).val y eR.hom.hom (a F).hom
     intro V hy r m
     rw [hg F V hy, hg F V hy]
     have hr := X.toPresheafedSpace.restrictStalkIso_hom_eq_germ_apply
