@@ -255,6 +255,40 @@ private lemma transport
   simp only [CategoryTheory.Functor.comp_map] at hn
   rw [← S.mapDerivedCategory.map_comp_assoc, hqa,
     S.mapDerivedCategory.map_comp_assoc, reassoc_of% hn]
+
+open CategoryTheory.Functor in
+/-- Transport through equivalences, with the inner comparison given by the unit.
+Keeping the equivalences abstract lets their exactness instances be assembled once. -/
+private lemma transportEquivalence
+    {C D E H I : Type*} [Category C] [Category D] [Category E] [Category H] [Category I]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian H] [Abelian I]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [HasDerivedCategory H] [HasDerivedCategory I]
+    (A : C ⥤ D) (e : D ≌ E) (T : D ⥤ H) (v : H ≌ I) (B : C ⥤ H)
+    [A.Additive] [T.Additive] [B.Additive]
+    [PreservesFiniteLimits A] [PreservesFiniteColimits A]
+    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
+    [PreservesFiniteLimits B] [PreservesFiniteColimits B]
+    (γ : A ⋙ T ≅ B) (F G : DerivedCategory C) :
+    let S := e.inverse ⋙ T ⋙ v.functor
+    let κ : e.functor ⋙ S ≅ T ⋙ v.functor :=
+      (associator _ _ _).symm ≪≫ isoWhiskerRight e.unitIso.symm _ ≪≫ leftUnitor _
+    let α := associator A e.functor S ≪≫ isoWhiskerLeft A κ ≪≫
+      (associator A T v.functor).symm ≪≫ isoWhiskerRight γ v.functor
+    let αD := mapDerivedCategoryCompIso (A ⋙ e.functor) S ≪≫ mapDerivedCategoryNatIso α
+    let qU := (mapDerivedCategoryCompIso A e.functor).symm
+    let qW := (mapDerivedCategoryCompIso B v.functor).symm
+    let d := mapDerivedCategoryCompIso A T ≪≫ mapDerivedCategoryNatIso γ
+    ∀ (a : (A ⋙ e.functor).mapDerivedCategory.obj F ⟶
+        (A ⋙ e.functor).mapDerivedCategory.obj G),
+      αD.inv.app F ≫ S.mapDerivedCategory.map a ≫ αD.hom.app G =
+        qW.hom.app F ≫ v.functor.mapDerivedCategory.map
+          (d.inv.app F ≫ T.mapDerivedCategory.map
+            (e.functor.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app G)) ≫
+            d.hom.app G) ≫ qW.inv.app G := by
+  intro S κ α αD qU qW d a
+  exact transport A e.functor S T v.functor B κ γ F G a
+
 end RestrictionTransport
 
 end
@@ -348,23 +382,14 @@ theorem scheme_derived_hom_restriction_transport
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫
           qW.inv.app E := by
   intro R_U S_U eU e eW qU qW a
-  let A := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
-  let B := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
-  let T := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
-  haveI : A.Additive := moduleOverFunctor_additive X.toRingedSpace U
-  haveI : B.Additive := moduleOverFunctor_additive X.toRingedSpace W
-  haveI : T.Additive := moduleOverMap_additive X.toRingedSpace i
-  haveI : e.Additive := Functor.additive_of_preserves_binary_products _
-  haveI : eW.Additive := Functor.additive_of_preserves_binary_products _
-  let S := Equivalence.inverse
-    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-    (Scheme.Modules.overEquiv U) ⋙ T ⋙ eW
-  let κ : e ⋙ S ≅ T ⋙ eW :=
-    (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).unitIso.symm _ ≪≫
-        Functor.leftUnitor _
-  let γ := SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i
-  exact RestrictionTransport.transport A e S T eW B κ γ F E a
+  exact RestrictionTransport.transportEquivalence
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)
+    (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) from Scheme.Modules.overEquiv U)
+    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i)
+    (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
+      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) from Scheme.Modules.overEquiv W)
+    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W)
+    (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i) F E a
 
 end AlgebraicGeometry
