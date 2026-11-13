@@ -78,8 +78,16 @@ private theorem common_lifts (X : Scheme.{u})
     simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     rfl
 
+private theorem boundary_eq_of_comparison {D : Type*} [Category* D]
+    {A B C E F : D} (a : A ⟶ B) (b : B ⟶ C) (c : A ⟶ E) [Epi c]
+    (d : E ⟶ C) (e : F ≅ C) (f : E ⟶ F)
+    (h : a ≫ b = c ≫ d) (h' : a ≫ b ≫ e.inv = c ≫ f) :
+    d = f ≫ e.hom := by
+  rw [← Category.assoc, h, Category.assoc] at h'
+  have hd := (cancel_epi c).1 h'
+  rw [← hd, Category.assoc, e.inv_hom_id, Category.comp_id]
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 set_option profiler true in
 -- The boundary comparison elaborates several derived-category transports.
 private theorem snake_boundary_eq_triangle (X : Scheme.{u})
@@ -107,23 +115,11 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     (PreservesFiniteLimits (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
   obtain ⟨G, hF, hsnake, htriangle⟩ := rightDerived_triangle_connecting v
   obtain ⟨hΓ', heq⟩ := hsnake S hS IA IB IC α β hz ha hb hr
-  have hs := heq 0
-  have ht := htriangle S hS 0
-  rw [← Category.assoc, hs] at ht
-  simp only [Category.assoc] at ht
-  have ht' := (cancel_epi (eqToHom
-    (congrArg (fun F ↦ (F 0).obj S.X₃) hF))).1 ht
-  apply (cancel_mono (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1).inv).1
-  simp only [Category.assoc]
-  dsimp only [v] at ht'
-  erw [ht']
-  dsimp only [v, RingedSpace.moduleCohomologyBoundary,
-    Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso]
-  simp only [NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app,
-    Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  exact boundary_eq_of_comparison _ _ _ _
+    (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1) _
+    (heq 0) (htriangle S hS 0)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
 -- The cocycle calculation elaborates the underlying modules and product projections.
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
