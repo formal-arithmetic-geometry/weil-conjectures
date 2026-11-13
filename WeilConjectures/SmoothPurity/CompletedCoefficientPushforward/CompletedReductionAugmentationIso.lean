@@ -205,8 +205,6 @@ private theorem complete_roosUnit (W : Scheme.{t})
   rw [← hc, ← Category.assoc]
   exact IsIso.comp_isIso' hu c.isIso_hom
 
-set_option maxHeartbeats 1000000 in
--- The derived Roos comparison maps unfold large localized categories.
 /-- Completeness makes the specified chain-level reduction augmentation invertible
 in any normalized total derived inverse-limit model.
 
@@ -282,9 +280,11 @@ theorem reductionAugmentation_isIso (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
       ρ.hom.app (DerivedCategory.Q.obj C) = α.app C := by
     have h := RF.rightDerivedNatTrans_app source.limit.functor (roosDerivedUnit κ)
       α T (𝟙 _) C
-    simpa [ρ, Functor.rightDerivedUnique, Functor.rightDerivedNatIso,
-      roosDerivedUnit, roosInclusion, roosLimitFunctor,
-      Functor.rightDerivedNatTrans, Category.assoc] using h
+    simpa only [ρ, Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+      Iso.refl_hom, roosDerivedUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+      roosInclusion, roosLimitFunctor, Functor.comp_obj,
+      HomologicalComplex.complexOfFunctorsToFunctorToComplex_obj,
+      Category.assoc, NatTrans.id_app, Category.id_comp] using h
   have hunit : DerivedCategory.Q.map (limIso.hom.app C ≫ roosι C) ≫
       κ.hom.app C ≫ ρ.hom.app (DerivedCategory.Q.obj C) = source.limit.unit.app C := by
     simp only [Functor.map_comp, Category.assoc, hn]
@@ -337,7 +337,8 @@ theorem reductionAugmentation_isIso (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
       (a ≫ limIso.hom.app C) v u hv hu hprod
   have hroos := complete_roosUnit l E W K P hP r hK
   have hmap : IsIso (DerivedCategory.Q.map (integralOperationsRoosMap e'.inv)) := by
-    exact (DerivedCategory.Q.mapIso (integralOperationsRoosFunctor.mapIso e').symm).isIso_hom
+    change IsIso (DerivedCategory.Q.map (integralOperationsRoosFunctor.map e'.inv))
+    infer_instance
   have haugIso : IsIso (r.inv ≫ DerivedCategory.Q.map a ≫
       DerivedCategory.Q.map (limIso.hom.app C ≫ roosι C)) := by
     let := hroos
