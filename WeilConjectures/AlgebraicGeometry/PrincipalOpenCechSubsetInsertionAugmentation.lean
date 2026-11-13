@@ -63,8 +63,37 @@ private theorem sum_singleton_subsets (r : ℕ)
     · simp [hT]
   · simp
 
-set_option maxHeartbeats 800000 in
--- The dependent coefficient and tuple transports require extra elaboration heartbeats.
+open Classical in
+private theorem map_sum_singleton_subsets
+    (r : ℕ) (M : (Fin 1 ↪o Fin r) → Type u) [∀ t, AddCommGroup (M t)]
+    {β : Type u} [AddCommGroup β] (b : (∀ t, M t) →+ β) (z : ∀ t, M t) :
+    (∑ S : {S : Finset (Fin r) // S.Nonempty},
+      b (if h : S.val.card = 1 then
+        Pi.single (S.val.orderEmbOfFin h) (z (S.val.orderEmbOfFin h)) else 0)) = b z := by
+  rw [← map_sum b, sum_singleton_subsets]
+
+private theorem principalSubsetInsertion_hom_apply
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ)
+    (c : principalSubsetCoordinates A r f J n) :
+    (principalSubsetInsertion A r f J n).hom c =
+      ∑ S, principalSubsetInsertOne A r f J n S (c S) := by
+  unfold principalSubsetInsertion
+  rw [show (∑ S, AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
+      principalSubsetInsertOne A r f J n S).hom =
+      ∑ S, (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
+        principalSubsetInsertOne A r f J n S).hom from
+    map_sum (AddCommGrpCat.homAddEquiv.toAddMonoidHom) _ _]
+  rw [AddMonoidHom.finsetSum_apply]
+  change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
+  rfl
+
+private theorem map_iso_cancel_apply
+    {C : Type*} [Category C] (H : C ⥤ AddCommGrpCat.{u})
+    {X Y Z W : C} (a : X ⟶ Y) (e : Y ≅ Z) (t : Y ⟶ W) (x : H.obj X) :
+    (H.map (a ≫ e.hom) ≫ (H.map e.inv ≫ H.map t)) x = H.map (a ≫ t) x := by
+  rw [← H.map_comp, ← H.map_comp, Category.assoc, Iso.hom_inv_id_assoc]
+
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
@@ -110,8 +139,7 @@ theorem principalSubsetInsertion_augmentation
                       (R.obj (J.X n)))
                 exact (principalOpenSectionTransport A V (J.X n)).hom s) := by
   classical
-  dsimp only
-  intro hls hes n s
+  intro V D hls hes R J' U G n s
   let c : principalSubsetCoordinates A r f J n := fun S ↦
     if h : S.val.card = 1 then
       (modulesSpecToSheaf.obj (J.X (n + 1 - (S.val.card : ℤ)))).obj.map
@@ -119,15 +147,7 @@ theorem principalSubsetInsertion_augmentation
         ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app
           (op (principalSubsetUnion A r f)) s) else 0
   change (principalSubsetInsertion A r f J n).hom c = _
-  unfold principalSubsetInsertion
-  rw [show (∑ S, AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
-      principalSubsetInsertOne A r f J n S).hom =
-      ∑ S, (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
-        principalSubsetInsertOne A r f J n S).hom from
-    map_sum (AddCommGrpCat.homAddEquiv.toAddMonoidHom) _ _]
-  rw [AddMonoidHom.finsetSum_apply]
-  change (∑ S, principalSubsetInsertOne A r f J n S
-    (if h : S.val.card = 1 then _ else 0)) = _
+  rw [principalSubsetInsertion_hom_apply]
   let V := principalSubsetUnion A r f
   let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)
   let J' := principalSubsetRestriction A r f J
@@ -152,11 +172,11 @@ theorem principalSubsetInsertion_augmentation
         (map_zero (principalSubsetInsertOne A r f J n S).hom).trans (map_zero b.hom).symm
   change (∑ S, principalSubsetInsertOne A r f J n S (c S)) = _
   simp_rw [hc]
-  rw [← map_sum b.hom, sum_singleton_subsets]
+  refine (map_sum_singleton_subsets r _ b.hom z).trans ?_
   change (H.map (alternatingCechZero U (J'.X n) ≫ e.hom) ≫ b).hom
     ((principalOpenSectionTransport A V (J.X n)).hom s) = _
-  dsimp only [b]
-  rw [← H.map_comp, ← H.map_comp, Category.assoc, Iso.hom_inv_id_assoc]
-  rfl
+  exact map_iso_cancel_apply H (alternatingCechZero U (J'.X n)) e
+    (K.ιTotal (ComplexShape.up ℤ) 0 n n (Int.zero_add n))
+    ((principalOpenSectionTransport A V (J.X n)).hom s)
 
 end AlgebraicGeometry
