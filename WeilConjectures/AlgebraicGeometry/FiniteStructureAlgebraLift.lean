@@ -44,7 +44,6 @@ local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 -- Transport through the module isomorphism and identify the section quotient ideals.
 /-- Lift the algebra structure on an already algebraized coherent module system.
 Source: Stacks Project, Lemma 09ZT, the multiplication and unit paragraphs;
