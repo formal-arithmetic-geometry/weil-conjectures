@@ -156,17 +156,10 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
       forget₂ _ AddCommGrpCat.{u}).Additive := by
     dsimp only [RingedSpace.globalSectionsFunctor, SheafOfModules.evaluation]
     infer_instance
-  dsimp only
+  intro HX HY HZ Hp
   let PX := (pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)
   let PY := (pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)
   let PC := (pushforward (h ≫ k)).mapHomologicalComplex (ComplexShape.up ℕ)
-  let HX := (RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
-    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
-  let HY := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
-    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
-  let HZ := (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
-    forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
-  let Hp := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let T := Functor.mapHomologicalComplexCompIso (pushforwardComp h k) (ComplexShape.up ℕ)
   have : EnoughInjectives Z.Modules := inferInstance
   obtain ⟨L, μ, hL, hμ⟩ := nat_complex_injective_resolution (PY.obj Ch.K)
