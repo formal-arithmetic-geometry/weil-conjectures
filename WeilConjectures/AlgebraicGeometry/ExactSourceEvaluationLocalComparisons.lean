@@ -131,10 +131,10 @@ theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
   let E := ec.mapDerivedCategory
   let R := (SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory
-  refine descend_comparison_squares_of_exists E _ _ _ ?_ ?_
-  · exact exists_canonicalEvaluation_open_restriction X U K N
-  · exact exists_exactSource_evaluation_open_models X U
+  exact descend_comparison_squares_of_exists E _ _ _
+    (exists_canonicalEvaluation_open_restriction X U K N)
+    (exists_exactSource_evaluation_open_models X U
       (E.obj (R.obj K)) (E.obj (R.obj N)) P F _hhom _hdual
-      (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf
+      (E.mapIso _eK).symm (E.mapIso _eN).symm f _hf)
 
 end AlgebraicGeometry
