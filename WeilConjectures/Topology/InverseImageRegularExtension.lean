@@ -47,6 +47,38 @@ private def isoOfHomEquiv {C : Type*} [Category C] (M N : C)
     have h := he M N (𝟙 M) ((e N).symm (𝟙 N))
     simpa using h.symm
 
+/-- A natural hom equivalence and a natural equivalence on sections identify a representing
+module with the regular module. Keeping the functor abstract avoids unfolding scalar restrictions
+in the naturality and normalization calculations. -/
+private theorem exists_unitIso_of_sections
+    {T T' : TopCat.{u}} {R : T'.Sheaf RingCat.{u}} {S : T.Sheaf RingCat.{u}}
+    (H : SheafOfModules.{u} S ⥤ SheafOfModules.{u} R) (F : SheafOfModules.{u} S)
+    (q : ∀ N, (F ⟶ N) ≃ (unit R ⟶ H.obj N))
+    (hq : ∀ N N' (a : F ⟶ N) (b : N ⟶ N'), q N' (a ≫ b) = q N a ≫ H.map b)
+    (se : ∀ N, N.sections ≃ (H.obj N).sections)
+    (hse : ∀ N N' (b : N ⟶ N') (s : N.sections),
+      se N' (sectionsMap b s) = sectionsMap (H.map b) (se N s)) :
+    ∃ e : F ≅ unit S,
+      (H.obj (unit S)).unitHomEquiv (q (unit S) e.hom) =
+        se (unit S) ((unit S).unitHomEquiv (𝟙 (unit S))) := by
+  let eqv (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (unit S ⟶ N) :=
+    (q N).trans ((H.obj N).unitHomEquiv.trans ((se N).symm.trans N.unitHomEquiv.symm))
+  have heqv (N : SheafOfModules.{u} S) (a : F ⟶ N) :
+      se N (N.unitHomEquiv (eqv N a)) = (H.obj N).unitHomEquiv (q N a) := by
+    exact (congrArg (se N) (N.unitHomEquiv.apply_symm_apply
+      ((se N).symm ((H.obj N).unitHomEquiv (q N a))))).trans
+        ((se N).apply_symm_apply _)
+  have hn (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
+      eqv N' (a ≫ b) = eqv N a ≫ b := by
+    apply N'.unitHomEquiv.injective
+    apply (se N').injective
+    rw [heqv, unitHomEquiv_comp_apply, hq, unitHomEquiv_comp_apply, hse, heqv]
+  let e := isoOfHomEquiv F (unit S) eqv hn
+  refine ⟨e, ?_⟩
+  exact (heqv (unit S) e.hom).symm.trans
+    (congrArg (fun z ↦ se (unit S) ((unit S).unitHomEquiv z))
+      ((eqv (unit S)).apply_symm_apply (𝟙 (unit S))))
+
 set_option profiler true in
 /-- Extending the inverse image of the regular module gives the regular target module,
 with the canonical unit normalization.
@@ -134,32 +166,10 @@ theorem inverseImageRegularExtension
       φ M (L.obj N) (adj.homEquiv I N (eqToHom (hE I) ≫ a)) ≫ Q.map (L.map b)
     rw [← Category.assoc, adj.homEquiv_naturality_right]
     exact hnφ M (L.obj N) (L.obj N') _ (L.map b)
-  let eqv (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (unit S ⟶ N) :=
-    (q N).trans ((Q.obj (L.obj N)).unitHomEquiv.trans
-      ((se N).symm.trans N.unitHomEquiv.symm))
-  have heqv (N : SheafOfModules.{u} S) (a : F ⟶ N) :
-      se N (N.unitHomEquiv (eqv N a)) =
-        (Q.obj (L.obj N)).unitHomEquiv (q N a) := by
-    exact (congrArg (se N) (N.unitHomEquiv.apply_symm_apply
-      ((se N).symm ((Q.obj (L.obj N)).unitHomEquiv (q N a))))).trans
-        ((se N).apply_symm_apply _)
-  have hn (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
-      eqv N' (a ≫ b) = eqv N a ≫ b := by
-    apply N'.unitHomEquiv.injective
-    apply (se N').injective
-    rw [heqv, unitHomEquiv_comp_apply, hnq, unitHomEquiv_comp_apply]
-    have hs := heqv N a
-    apply PresheafOfModules.sections_ext
-    intro V
-    exact congrArg (fun z ↦ b.val.app ((Opens.map g).op.obj V) (z.val V)) hs.symm
-  let e := isoOfHomEquiv F (unit S) eqv hn
+  obtain ⟨e, hs⟩ := exists_unitIso_of_sections (L ⋙ Q) F q hnq se
+    (fun _ _ _ _ ↦ rfl)
   refine ⟨e, ?_⟩
   intro V a
-  have h := (eqv (unit S)).apply_symm_apply (𝟙 (unit S))
-  change eqv (unit S) e.hom = 𝟙 _ at h
-  have hs := congrArg
-    (fun z ↦ se (unit S) ((unit S).unitHomEquiv z)) h
-  rw [heqv] at hs
   have hv := congrArg (fun z ↦ z.val V) hs
   change (q (unit S) e.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
