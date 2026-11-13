@@ -138,14 +138,14 @@ theorem perfect_rhom_evaluation_isomorphisms
     have hh := hadj B A K.obj K.obj N N f (𝟙 _) (𝟙 _) q
     change adj A K.obj N (f ≫ q ≫ H.map (𝟙 (op K.obj, N))) =
       (f ⊗ₘ 𝟙 K.obj) ≫ adj B K.obj N q ≫ 𝟙 N at hh
-    simpa only [Functor.map_id, Category.comp_id, tensorHom_id] using hh
+    simpa only [H.map_id (op K.obj, N), Category.comp_id, tensorHom_id] using hh
   have hn₀ (A B N : schemeDerivedCategory X) (f : A ⟶ B)
       (q : B ⟶ H.obj (op K.obj, N)) :
       e₀ A K.obj N (f ≫ q) = (f ▷ K.obj) ≫ e₀ B K.obj N q := by
     have hh := he₀.1 B A K.obj K.obj N N f (𝟙 _) (𝟙 _) q
     change e₀ A K.obj N (f ≫ q ≫ H.map (𝟙 (op K.obj, N))) =
       (f ⊗ₘ 𝟙 K.obj) ≫ e₀ B K.obj N q ≫ 𝟙 N at hh
-    simpa only [Functor.map_id, Category.comp_id, tensorHom_id] using hh
+    simpa only [H.map_id (op K.obj, N), Category.comp_id, tensorHom_id] using hh
   apply evaluationIso_changeAdjunction (schemeDerivedCategory X) K.obj
     (fun N ↦ H.obj (op K.obj, N)) (fun A N ↦ adj A K.obj N)
     (fun A N ↦ e₀ A K.obj N) hn hn₀

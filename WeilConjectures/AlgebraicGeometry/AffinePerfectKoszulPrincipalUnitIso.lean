@@ -48,6 +48,7 @@ theorem affine_perfect_koszul_principal_unit_iso
   obtain ⟨d, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : e ≠ 0)
   let U : (Spec (.of A)).Opens := ⨆ i : Fin r, (Spec (.of A)).basicOpen
     ((Scheme.ΓSpecIso (.of A)).inv (f i))
+  -- Share the abelian structures used by restriction, localization, and the cone triangle.
   let : Abelian (SheafOfModules.{a} (moduleRings (Spec (.of A)).toRingedSpace)) :=
     inferInstance
   let : Abelian (SheafOfModules.{a} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) :=

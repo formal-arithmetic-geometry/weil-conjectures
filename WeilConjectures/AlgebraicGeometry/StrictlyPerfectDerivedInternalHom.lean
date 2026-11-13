@@ -163,7 +163,10 @@ theorem isIso_homComplex_resolution_of_isStrictlyPerfect
         QuasiIso (η.app N) ∧ (I.obj N).IsKInjective) →
         IsIso (DerivedCategory.Q.map
           (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map (η.app M))) := by
-  let A := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
+  -- Use the same presentation as internal Hom so instance search reuses the structure.
+  let A := SheafOfModules.{u}
+    ((sheafCompose ((Opens.grothendieckTopology X).over U)
+      (forget₂ CommRingCat RingCat)).obj (X.sheaf.over U))
   let : Abelian A := inferInstance
   have hexact (n : ℤ) (S : ShortComplex A) (hS : S.ShortExact) :
       ∃ hz : SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X n)) S.f ≫
