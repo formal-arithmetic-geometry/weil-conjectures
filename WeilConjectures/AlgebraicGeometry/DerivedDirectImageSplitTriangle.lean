@@ -112,7 +112,27 @@ private lemma directImageComparison_naturality (g : X ⟶ Y)
     Iso.inv_hom_id_assoc, ← Category.assoc, ← h, Category.assoc,
     Iso.inv_hom_id, Category.comp_id]
 
-set_option maxHeartbeats 400000 in
+private lemma comparison_boundary_of_epi
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (R : D ⥤ E) (F : C ⥤ E) (α : F ⟶ Q ⋙ R)
+    {K L M : C} (d : K ⟶ L) (t : K ⟶ M) [Epi (F.map d)]
+    (eL : R.obj (Q.obj L) ≅ F.obj L) (eM : R.obj (Q.obj M) ≅ F.obj M)
+    (hL : α.app L = eL.inv) (hM : α.app M = eM.inv)
+    (b : Q.obj L ⟶ Q.obj M) (hdt : Q.map d ≫ b = Q.map t)
+    {N : E} (s : F.obj M ⟶ N) (δ : F.obj L ⟶ N)
+    (hδ : F.map d ≫ δ = F.map t ≫ s) :
+    R.map b ≫ eM.hom ≫ s = eL.hom ≫ δ := by
+  have ht := α.naturality t
+  simp only [Functor.comp_map] at ht
+  apply (cancel_epi eL.inv).mp
+  rw [eL.inv_hom_id_assoc, ← hL]
+  apply (cancel_epi (F.map d)).mp
+  rw [← Category.assoc, α.naturality]
+  change (α.app K ≫ R.map (Q.map d)) ≫ (R.map b ≫ eM.hom ≫ s) = F.map d ≫ δ
+  rw [Category.assoc, ← R.map_comp_assoc, hdt, ← Category.assoc, ← ht]
+  rw [Category.assoc, hM, eM.inv_hom_id_assoc]
+  exact hδ.symm
+
 -- Cone comparison identities elaborate through the module-sheaf instances.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -130,18 +150,28 @@ private lemma directImage_boundary {X Y : RingedSpace.{u}}
           (CochainComplex.mappingCone.triangle S.f).mor₃) ≫
         (moduleDirectImageLocalizedShiftIso g S.X₁).hom := by
   let F := (moduleDirectImage g).mapHomologicalComplex (ComplexShape.up ℤ)
-  have hd := CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex
-    (moduleDirectImage g) S
-  have hδ := CochainComplex.mappingCone.map_δ S.f (moduleDirectImage g)
-  change DerivedCategory.Q.map (F.map (CochainComplex.mappingCone.descShortComplex S)) ≫
-      DerivedCategory.triangleOfSESδ hImage = _
-  rw [← hd, Functor.map_comp, Category.assoc,
-    DerivedCategory.descShortComplex_triangleOfSESδ]
-  conv_lhs =>
-    erw [← Category.assoc, ← Functor.map_comp, ← hδ, Functor.map_comp, Category.assoc]
-  simp [moduleDirectImageLocalizedShiftIso]
+  let Q := DerivedCategory.Q (C := SheafOfModules.{u} (moduleRings Y))
+  let c := (CochainComplex.mappingCone.mapHomologicalComplexIso S.f (moduleDirectImage g)).hom
+  let d := CochainComplex.mappingCone.descShortComplex (S.map F)
+  let t := (CochainComplex.mappingCone.triangle (F.map S.f)).mor₃
+  let s := (Q.commShiftIso (1 : ℤ)).hom.app (F.obj S.X₁)
+  calc
+    _ = Q.map (c ≫ d) ≫ DerivedCategory.triangleOfSESδ hImage :=
+      congrArg (fun f ↦ Q.map f ≫ DerivedCategory.triangleOfSESδ hImage)
+        (CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex
+          (moduleDirectImage g) S).symm
+    _ = Q.map c ≫ (Q.map d ≫ DerivedCategory.triangleOfSESδ hImage) :=
+      Q.map_comp_assoc c d _
+    _ = Q.map c ≫ (Q.map t ≫ s) :=
+      congrArg (fun f ↦ Q.map c ≫ f)
+        (DerivedCategory.descShortComplex_triangleOfSESδ hImage)
+    _ = Q.map (c ≫ t) ≫ s := (Q.map_comp_assoc c t s).symm
+    _ = Q.map (F.map (CochainComplex.mappingCone.triangle S.f).mor₃ ≫
+        (F.commShiftIso (1 : ℤ)).hom.app S.X₁) ≫ s :=
+      congrArg (fun f ↦ Q.map f ≫ s)
+        (CochainComplex.mappingCone.map_δ S.f (moduleDirectImage g)).symm
+    _ = _ := Q.map_comp_assoc _ _ _
 
-set_option maxHeartbeats 700000 in
 -- Naturality and cancellation involve several nested derived and shift functors.
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
@@ -231,31 +261,30 @@ theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y)
     let d := CochainComplex.mappingCone.descShortComplex S
     let t : CochainComplex.mappingCone S.f ⟶ S.X₁⟦(1 : ℤ)⟧ :=
       (CochainComplex.mappingCone.triangle S.f).mor₃
-    have hd : IsIso (DerivedCategory.Q.map (F.map d)) := by
+    have hd : IsIso ((F ⋙ DerivedCategory.Q).map d) := by
+      change IsIso (DerivedCategory.Q.map (F.map d))
       dsimp [d, F]
       rw [← CochainComplex.mappingCone.mapHomologicalComplexIso_hom_descShortComplex,
         Functor.map_comp]
       have := CochainComplex.mappingCone.quasiIso_descShortComplex hImage
       infer_instance
-    have hnD := (directImageComparison g).naturality d
-    have hnT := (directImageComparison g).naturality t
-    simp only [Functor.comp_map] at hnD hnT
     have hdt : DerivedCategory.Q.map d ≫ DerivedCategory.triangleOfSESδ hS ≫
         (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁ =
       DerivedCategory.Q.map t := by
       dsimp [d, t]
       rw [DerivedCategory.descShortComplex_triangleOfSESδ_assoc, Iso.hom_inv_id_app]
       exact Category.comp_id _
-    rw [← cancel_epi (derivedModuleDirectImageKInjectiveIso g S.X₃).inv,
-      Iso.inv_hom_id_assoc, ← directImageComparison_app,
-      ← cancel_epi (DerivedCategory.Q.map (F.map d))]
-    erw [← Category.assoc, hnD]
-    simp only [Category.assoc]
-    erw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
-    simp only [Category.assoc]
-    rw [hdt, ← reassoc_of% hnT, directImageComparison_app]
-    erw [Iso.inv_hom_id_assoc]
-    exact (directImage_boundary g S hImage).symm
+    simpa only [Functor.map_comp, Category.assoc] using
+      comparison_boundary_of_epi DerivedCategory.Q (derivedModuleDirectImage g)
+        (F ⋙ DerivedCategory.Q) (directImageComparison g) d t
+        (derivedModuleDirectImageKInjectiveIso g S.X₃)
+        (derivedModuleDirectImageKInjectiveIso g (S.X₁⟦(1 : ℤ)⟧))
+        (directImageComparison_app g S.X₃)
+        (directImageComparison_app g (S.X₁⟦(1 : ℤ)⟧))
+        (DerivedCategory.triangleOfSESδ hS ≫
+          (DerivedCategory.Q.commShiftIso (1 : ℤ)).inv.app S.X₁) hdt
+        (moduleDirectImageLocalizedShiftIso g S.X₁).hom
+        (DerivedCategory.triangleOfSESδ hImage) (directImage_boundary g S hImage)
   let e : derivedModuleDirectImageSplitTriangle g S hS ≅
       DerivedCategory.triangleOfSES hImage :=
     Triangle.isoMk _ _ (derivedModuleDirectImageKInjectiveIso g S.X₁)
