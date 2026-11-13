@@ -49,7 +49,7 @@ open Scheme PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-private abbrev integralModelLeftDerivedUpperStar
+noncomputable abbrev integralModelLeftDerivedUpperStar
     {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
     {Z W : Scheme.{u}} (w : Z ⟶ W) :
     DerivedCategory (Mod (Sheaf (ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)) ⥤
@@ -72,7 +72,7 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
         Z)).leftDerivedFunctor.obj ((Mod.extendScalars (coefficientMap
           (padicIntegersRingObjToContinuousMapRingObj ℓ E) Z)).leftDerivedFunctor.obj
-            (integralModelLeftDerivedUpperStar w).obj B₀) ≅
+            ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
       (integralModelLeftDerivedUpperStar w).obj B :=
   (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
       Z)).leftDerivedFunctor.mapIso
