@@ -165,7 +165,6 @@ theorem affine_module_tensor_counit_smul
   let φ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose
   have hφ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose_spec.1
   let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
-  let E := (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose
   let hE := (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose
   let adE :=
     (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose_spec.choose
@@ -190,10 +189,14 @@ theorem affine_module_tensor_counit_smul
       (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
         (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
           ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)
-    have heq : eqToHom (hE _) ≫ d = (adE.homEquiv _ N).symm v := by
-      simp [d]
-    rw [heq, Equiv.apply_symm_apply] at hd'
-    exact hd'.symm.trans hv'
+    have heq : eqToHom (hE _) ≫ d = (adE.homEquiv _ N).symm v :=
+      (eqToIso (hE _)).hom_inv_id_assoc _
+    have heval := (congrArg (adE.homEquiv _ N) heq).trans
+      ((adE.homEquiv _ N).apply_symm_apply v)
+    exact hd'.symm.trans ((congrArg (fun a ↦ a.val.app ((Opens.map f.base).op.obj V)
+      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+          ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)) heval).trans hv')
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
   let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
   let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F := by
@@ -229,23 +232,18 @@ theorem affine_module_tensor_counit_smul
           (((adj₀).unit.app ((S).obj ((R).obj F))).val.app V m))) = m
     exact (congrArg (d.val.app ((Opens.map f.base).op.obj V))
       (hP.2 ((R).obj F) V m)).trans (hd V m)
-  have hac : a = (adj₀).counit.app F := by
-    rw [← (adj₀).homEquiv_symm_id F]
-    exact ((adj₀).homEquiv ((S).obj ((R).obj F)) F).injective
-      (ha.trans (((adj₀).homEquiv ((S).obj ((R).obj F)) F).apply_symm_apply _).symm)
+  have hac : a = (adj₀).counit.app F :=
+    (((adj₀).homEquiv ((S).obj ((R).obj F)) F).eq_symm_apply.mpr ha).trans
+      ((adj₀).homEquiv_symm_id F)
+  have heq : κ.hom.app ((R).obj F) ≫ (adj₀).counit.app F = dU :=
+    (congrArg (fun q ↦ κ.hom.app ((R).obj F) ≫ q) hac.symm).trans
+      ((κ.app ((R).obj F)).hom_inv_id_assoc dU)
   have hq (V : (Opens U)ᵒᵖ) (m : (P.obj ((R).obj F)).val.obj V) :
-      dP.val.app V m = ((adj₀).counit.app F).val.app V
-        ((κ.hom.app ((R).obj F)).val.app V m) := by
-    have hi := congrArg (fun k ↦ k.val.app V m) (κ.app ((R).obj F)).hom_inv_id
-    change (κ.inv.app ((R).obj F)).val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m) = m at hi
-    have he := congrArg (fun k ↦ k.val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m)) hac
-    change dP.val.app V ((κ.inv.app ((R).obj F)).val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m)) = _ at he
-    rwa [hi] at he
-  rw [← hq, ← hq]
-  exact (dP.val.app W).hom.map_smul c p
+      ((adj₀).counit.app F).val.app V
+        ((κ.hom.app ((R).obj F)).val.app V m) = dP.val.app V m :=
+    congrArg (fun q ↦ q.val.app V m) heq
+  exact (hq W (c • p)).trans (((dP.val.app W).hom.map_smul c p).trans
+    (congrArg (fun m : F.val.obj W ↦ (ε.hom.app W c) • m) (hq W p).symm))
 
 end
 end AlgebraicGeometry.Scheme.Modules

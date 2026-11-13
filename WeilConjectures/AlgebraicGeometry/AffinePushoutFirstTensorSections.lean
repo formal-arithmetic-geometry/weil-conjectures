@@ -85,7 +85,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option profiler true in
 /-- Affine identification of the pushout algebra and the first tensor pullback, with
 both actions and the canonical unit; no assertion about the final extension module.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
