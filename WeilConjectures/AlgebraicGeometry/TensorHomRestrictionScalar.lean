@@ -30,7 +30,6 @@ local instance localInst_TensorHomRestrictionScalar_1
         (M.val.obj (op W))) :=
   inferInstanceAs (SMul (X.sheaf.obj.obj (op W)) (M.val.obj (op W)))
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Transposition sends a local scalar multiple of a Hom section to multiplication
 followed by the local morphism. No coherence or ideal-power hypothesis is required.
@@ -86,6 +85,7 @@ theorem tensorHom_restriction_of_local_scalar
   have hW : W ≤ U := by
     rintro x ⟨y, hy, rfl⟩
     exact y.property
+  -- Compute the restriction comparison once, before the sectionwise calculation.
   change β.app W (tmulSection a g) =
     (s.app (op (Over.mk (homOfLE hW)))) ((ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g))
   have hb := hβ W a g
