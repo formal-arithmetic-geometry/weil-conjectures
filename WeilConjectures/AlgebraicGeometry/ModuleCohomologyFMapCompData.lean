@@ -89,6 +89,7 @@ private theorem sections_iso_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     pushforward_obj_presheaf_map, ← Functor.map_comp]
   congr 1
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- Cross-scheme complex functors require extra elaboration during diagram rewrites.
 set_option backward.isDefEq.respectTransparency.types false in

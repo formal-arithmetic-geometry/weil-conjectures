@@ -23,6 +23,7 @@ set_option hygiene false in
 local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj S
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the nested scalar restrictions and tensor components needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
