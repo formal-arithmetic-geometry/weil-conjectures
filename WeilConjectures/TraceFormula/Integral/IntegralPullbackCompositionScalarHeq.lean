@@ -247,9 +247,9 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
   dsimp only [finiteSystemDerivedComposition, integralComparisonSystemComposition,
     finiteSystemPullback, ProEtale.VaryingRing.pull,
     integralComparisonSequencePullback] at hh ⊢
-  run_tac
+  run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.Elab.Tactic.getMainTarget
-    let localDecl ← Lean.getLocalDeclFromUserName `hh
+    let localDecl ← Lean.Meta.getLocalDeclFromUserName `hh
     Lean.logInfo m!"TARGET TYPE: {repr target.getAppArgs[0]!}"
     Lean.logInfo m!"HH LEFT TYPE: {repr localDecl.type.getAppArgs[0]!}"
     Lean.logInfo m!"HH RIGHT TYPE: {repr localDecl.type.getAppArgs[2]!}"
