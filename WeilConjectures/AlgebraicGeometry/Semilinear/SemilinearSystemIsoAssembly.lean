@@ -206,22 +206,15 @@ private theorem horizontal_natural
         (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
   rw [assemble_app_apply, assemble_app_apply]
   let f : M.val.obj (op (m, U.unop)) → N.val.obj (op (m, U.unop)) :=
-    fun y ↦ (d m).val.app U y
+    ((d m).val.app U).hom.toFun
   let g : M.val.obj (op (n, U.unop)) → N.val.obj (op (n, U.unop)) :=
-    fun y ↦ (d n).val.app U y
+    ((d n).val.app U).hom.toFun
   let a : M.val.obj (op (m, U.unop)) → M.val.obj (op (n, U.unop)) :=
-    fun y ↦ ((transition.{c, v, max c v r} J B τ h).app M).val.app U y
+    (((transition.{c, v, max c v r} J B τ h).app M).val.app U).hom.toFun
   let b : N.val.obj (op (m, U.unop)) → N.val.obj (op (n, U.unop)) :=
-    fun y ↦ ((transition.{c, v, max c v r} J B τ h).app N).val.app U y
+    (((transition.{c, v, max c v r} J B τ h).app N).val.app U).hom.toFun
   have hs (y : M.val.obj (op (m, U.unop))) : g (a y) = b (f y) := by
-    exact restriction_square_apply.{c, v, r} J
-      (coefficientMap.{c, v, max c v r} J B τ h)
-      (V := (evaluation.{c, v, max c v r} J B τ m).obj M)
-      (W := (evaluation.{c, v, max c v r} J B τ m).obj N)
-      (V' := (evaluation.{c, v, max c v r} J B τ n).obj M)
-      (W' := (evaluation.{c, v, max c v r} J B τ n).obj N)
-      ((transition.{c, v, max c v r} J B τ h).app M)
-      ((transition.{c, v, max c v r} J B τ h).app N) (d m) (d n) (ht h) U y
+    exact congrArg (fun k ↦ (k.val.app U).hom.toFun y) (ht h)
   exact square_of_functions f g a
     (fun y ↦ M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y) b
     (fun y ↦ N.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y)
