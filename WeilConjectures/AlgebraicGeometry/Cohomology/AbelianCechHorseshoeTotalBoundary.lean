@@ -109,16 +109,21 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
 private theorem boundary_naturality_pair
     {C : Type u} [Category C] [Abelian C]
     {A B V : ShortComplex (CochainComplex C ℕ)}
-    (φ : A ⟶ V) (ψ : B ⟶ V)
+    (a₁ : A.X₁ ⟶ V.X₁) (a₂ : A.X₂ ⟶ V.X₂) (a₃ : A.X₃ ⟶ V.X₃)
+    (b₁ : B.X₁ ⟶ V.X₁) (b₂ : B.X₂ ⟶ V.X₂) (b₃ : B.X₃ ⟶ V.X₃)
+    (ha₁ : a₁ ≫ V.f = A.f ≫ a₂) (ha₂ : a₂ ≫ V.g = A.g ≫ a₃)
+    (hb₁ : b₁ ≫ V.f = B.f ≫ b₂) (hb₂ : b₂ ≫ V.g = B.g ≫ b₃)
     (hA : A.ShortExact) (hB : B.ShortExact) (hV : V.ShortExact) (q : ℕ) :
     ∃ δ : V.X₃.homology q ⟶ V.X₁.homology (q + 1),
-      hA.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap φ.τ₁ (q + 1) =
-        HomologicalComplex.homologyMap φ.τ₃ q ≫ δ ∧
-      hB.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap ψ.τ₁ (q + 1) =
-        HomologicalComplex.homologyMap ψ.τ₃ q ≫ δ :=
+      hA.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap a₁ (q + 1) =
+        HomologicalComplex.homologyMap a₃ q ≫ δ ∧
+      hB.δ q (q + 1) rfl ≫ HomologicalComplex.homologyMap b₁ (q + 1) =
+        HomologicalComplex.homologyMap b₃ q ≫ δ :=
   ⟨hV.δ q (q + 1) rfl,
-    HomologicalComplex.HomologySequence.δ_naturality φ hA hV q (q + 1) rfl,
-    HomologicalComplex.HomologySequence.δ_naturality ψ hB hV q (q + 1) rfl⟩
+    HomologicalComplex.HomologySequence.δ_naturality
+      (ShortComplex.homMk a₁ a₂ a₃ ha₁ ha₂) hA hV q (q + 1) rfl,
+    HomologicalComplex.HomologySequence.δ_naturality
+      (ShortComplex.homMk b₁ b₂ b₃ hb₁ hb₂) hB hV q (q + 1) rfl⟩
 
 private theorem total_shortExact_of_shortExact
     (D : ShortComplex (HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ)))
@@ -244,13 +249,11 @@ theorem abelianCechHorseshoe_total_boundary
       (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))
   let C := T.map (TopCat.Sheaf.cechComplexFunctor U)
   have hC : C.ShortExact := TopCat.Sheaf.shortExact_cechComplex hT hg
-  let φα : A ⟶ V :=
-    ShortComplex.homMk (abelianCechAlpha U I₁) (abelianCechAlpha U I₂)
-      (abelianCechAlpha U I₃) (alpha_naturality U I₁ I₂ α) (alpha_naturality U I₂ I₃ β)
-  let φβ : C ⟶ V :=
-    ShortComplex.homMk (abelianCechBeta U I₁) (abelianCechBeta U I₂)
-      (abelianCechBeta U I₃) (beta_naturality U I₁ I₂ T.f α hα)
-      (beta_naturality U I₂ I₃ T.g β hβ)
-  exact boundary_naturality_pair φβ φα hC hS hV q
+  exact boundary_naturality_pair (A := C) (B := A) (V := V)
+    (abelianCechBeta U I₁) (abelianCechBeta U I₂) (abelianCechBeta U I₃)
+    (abelianCechAlpha U I₁) (abelianCechAlpha U I₂) (abelianCechAlpha U I₃)
+    (beta_naturality U I₁ I₂ T.f α hα) (beta_naturality U I₂ I₃ T.g β hβ)
+    (alpha_naturality U I₁ I₂ α) (alpha_naturality U I₂ I₃ β)
+    hC hS hV q
 
 end AlgebraicGeometry.Scheme.Modules
