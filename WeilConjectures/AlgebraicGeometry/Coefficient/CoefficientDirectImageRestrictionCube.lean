@@ -139,19 +139,26 @@ theorem coefficientDirectImageRestrictionCube
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro U
+  have hd (x : ((pbcRestrict φY ⋙ pbcRestrict b.hom).obj (GS.obj M)).val.obj U) :
+      (d.hom.app (GS.obj M)).val.app U x = x := by
+    simp only [d, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+      restrictionComp_apply, restrictionComp_inv_apply]
+  have hcz (x : ((pbcRestrict χ).obj ((pbcRestrict (𝟙 SY)).obj (GS.obj M))).val.obj U) :
+      ((pbcRestrict χ).map (cz.hom.app M)).val.app U x = x := by
+    exact czApp M U x
+  have hi (x : ((pbcRestrict b.hom).obj ((pbcRestrict φY).obj (GS.obj M))).val.obj U) :
+      ((pbcRestrict b.hom).map (i.inv.app M)).val.app U x = x := by
+    exact hiInv M U x
+  have ha (x : (H.obj ((pbcRestrict q.hom).obj ((pbcRestrict φX).obj M))).val.obj U) :
+      (H.map (a.hom.app M)).val.app U x = x := by
+    change (a.hom.app M).val.app ((proEtaleBaseChange f).op.obj U) x = x
+    simp only [a, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+      restrictionComp_apply, restrictionComp_inv_apply]
   ext x
-  dsimp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    restrictionComp_apply, restrictionComp_inv_apply]
-  dsimp only [pbcRestrict, proEtaleRingRestrictScalars, proEtaleRingModuleDirectImage,
-    SheafOfModules.restrictScalars, SheafOfModules.pushforward,
-    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
-    PresheafOfModules.restrictScalars, Functor.comp_map, ModuleCat.restrictScalars,
-    ModuleCat.RestrictScalars.map', ModuleCat.hom_ofHom,
-    LinearMap.coe_mk, LinearMap.coe_toAddHom]
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    restrictionComp_apply, restrictionComp_inv_apply]
-  rw [czApp, cdApp, hiInv, cpApp]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  rw [hd, hcz, cdApp, hi, cpApp, ha]
 
 
 end AlgebraicGeometry.Scheme
