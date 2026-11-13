@@ -136,7 +136,6 @@ private theorem regular_restriction_iso (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
   apply Iso.ext
   exact regular_restriction_hom a T
 
-set_option maxHeartbeats 400000 in
 set_option trace.profiler true in
 -- The single-object comparison traverses several exact derived functor isomorphisms.
 private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
@@ -146,10 +145,10 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
         (DerivedCategory.singleFunctor _ 0).mapIso
           (CondensedRing.residueOrdinaryRestrictedRegularPullIso Λ Λ' a f) := by
   apply Iso.ext
-  rw [← regularPullback₀_eq a f]
+  simp only [← regularPullback₀_eq a f]
   unfold scalarTensorRegularPullIso
   dsimp only [id]
-  rw [regular_restriction_iso a Y, regular_restriction_iso a X]
+  simp only [regular_restriction_iso a Y, regular_restriction_iso a X]
   unfold scalarTensorRestrictPullIso RestrictedCoefficientMate.regularPullback₀
     Functor.singleFunctorCompLeftDerivedFunctorIso
   dsimp only [id]
@@ -158,8 +157,8 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  erw [← CategoryTheory.Functor.map_comp_assoc]
-  erw [exact_unit Λ' f]
+  simp only [← CategoryTheory.Functor.map_comp_assoc]
+  simp only [exact_unit Λ' f]
   simp only [Functor.map_comp, Category.assoc]
   have hc : (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app
       ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ' Y))) ≫
@@ -170,18 +169,18 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     change (CondensedRing.upperStar Λ' f).leftDerivedFunctorIsoMapDerivedCategory.inv.app _ ≫
       ((CondensedRing.upperStar Λ' f).leftDerivedFunctorIsoMapDerivedCategory.hom.app _ ≫ _) = _
     exact Iso.inv_hom_id_app_assoc _ _ _
-  erw [← (V a X).map_comp_assoc, hc]
+  simp only [← (V a X).map_comp_assoc, hc]
   have hn := (CondensedRing.upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory.hom.naturality
     (((V₀ a Y).mapDerivedCategorySingleFunctor 0).inv.app
       (Mod.regular (condensedRingObj Λ' Y)))
   have hnX := ((V₀ a X).mapDerivedCategorySingleFunctor 0).hom.naturality
     (Functor.Monoidal.εIso (CondensedRing.upperStar Λ' f)).inv
   dsimp only [Functor.comp_map] at hn hnX
-  erw [reassoc_of% hn]
-  erw [hnX]
-  erw [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
+  simp only [reassoc_of% hn]
+  simp only [hnX]
+  simp only [reassoc_of% restriction_pull_single a f (Mod.regular (condensedRingObj Λ' Y))]
   simp only [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  erw [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
+  simp only [(CondensedRing.upperStar Λ f).mapDerivedCategory.map_id, Category.id_comp]
 
 end NativeUnit
 
