@@ -63,11 +63,10 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
   let K := ((pushforward f).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
   let A := RingedSpace.globalSectionsComplex R.resolution
   let B := ((SheafOfModules.forget T.ringCatSheaf).mapHomologicalComplex (.up ℕ)).obj K
-  let Q := forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf T.ringCatSheaf.obj ⋙
     (evaluation T.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W)
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (.up ℕ) q
-  let eA := (A.sc q).mapHomologyIso Q
+  let eA := (A.sc q).mapHomologyIso (forget₂ _ AddCommGrpCat.{u})
   let eB := (B.sc q).mapHomologyIso E
   let S := RingedSpace.openModuleSections Y.toRingedSpace ⊤
   let : S.Additive := RingedSpace.openModuleSections_additive Y.toRingedSpace ⊤
@@ -101,7 +100,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
     dsimp only at hs
     dsimp only [h] at hb'
     simp only [hb', map_pow] at hs
-    exact hs
+    simpa only [ConcreteCategory.comp_apply] using hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj
       R.resolution.cocomplex))) :
       raw ((S.mapHomologicalComplex (.up ℕ) ⋙ H).map phi y) =
