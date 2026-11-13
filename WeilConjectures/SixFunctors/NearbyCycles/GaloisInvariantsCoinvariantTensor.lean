@@ -371,13 +371,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
-  let Λ := Profinite.continuousMapRingObj T₀
-  let α := ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C
-  change ∃ r, α ≫ r = 𝟙 _ ∧ _
   obtain ⟨r, hr, hcoinv⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
       hact
-  refine ⟨r, hr, ?_⟩
+  refine ⟨r, ?_, ?_⟩
+  · exact hr
   intro q V b hV W φ hφ
   refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
