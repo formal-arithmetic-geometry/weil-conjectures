@@ -219,6 +219,12 @@ private theorem integralCompositionPullback_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
       (integralSystemTransition l E) f) (integralComparisonDerivedSequencePullback l E f) := by
   exact HEq.rfl
 
+private theorem integralCompositionCompositor_heq {V W Z : Scheme.{u}}
+    (h : Z ⟶ W) (k : W ⟶ V) :
+    HEq (finiteSystemDerivedComposition (integralSystemRings l E)
+      (integralSystemTransition l E) h k) (integralComparisonSystemComposition l E h k) := by
+  exact heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l E h k)
+
 universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆ in
 private theorem scalar_mixed_component_heq
     {EV EV' : Type w₁} [iEV : Category.{v₁} EV] [iEV' : Category.{v₁} EV']
@@ -342,11 +348,11 @@ private theorem integralCompositionFinite_mixed
     (finiteSystemDerivedComposition (integralSystemRings l E)
       (integralSystemTransition l E) h k)
     (integralComparisonSystemComposition l E h k)
-    (heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l E h k))
+    (integralCompositionCompositor_heq l E h k)
     (finiteSystemDerivedComposition (integralSystemRings l L)
       (integralSystemTransition l L) h k)
     (integralComparisonSystemComposition l L h k)
-    (heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l L h k))
+    (integralCompositionCompositor_heq l L h k)
     ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
