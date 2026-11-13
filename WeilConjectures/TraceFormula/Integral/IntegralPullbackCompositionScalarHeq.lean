@@ -240,7 +240,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       apply HEq.rfl)
     (finiteSystemComposition_heq_integralComparison l E h k)
-  exact eq_of_heq hh
+  exact eq_of_heq (a := finiteSystemDerivedComposition (integralSystemRings l E)
+    (integralSystemTransition l E) h k) (a' := integralComparisonSystemComposition l E h k) hh
 
 end Composition
 
