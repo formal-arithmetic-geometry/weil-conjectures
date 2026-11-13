@@ -157,8 +157,8 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
-  simp only [← CategoryTheory.Functor.map_comp_assoc]
-  simp only [exact_unit Λ' f]
+  erw [← CategoryTheory.Functor.map_comp_assoc]
+  erw [exact_unit Λ' f]
   simp only [Functor.map_comp, Category.assoc]
   have hc : (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' f).inv.app
       ((DerivedCategory.singleFunctor _ 0).obj (Mod.regular (condensedRingObj Λ' Y))) ≫
