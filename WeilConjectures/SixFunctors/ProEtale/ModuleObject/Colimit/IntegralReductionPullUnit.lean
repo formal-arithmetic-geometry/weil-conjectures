@@ -197,8 +197,18 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
         (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
-  obtain ⟨_, _, _, _, _⟩ := pullUnit_tensorInstances Y (condensedRingObj Λ Y)
-  obtain ⟨_, _, _, _, _⟩ := pullUnit_tensorInstances Y (condensedRingObj Λ' Y)
+  have ht := pullUnit_tensorInstances Y (condensedRingObj Λ Y)
+  have := ht.1
+  have := ht.2.1
+  have := ht.2.2.1
+  have := ht.2.2.2.1
+  have := ht.2.2.2.2
+  have ht := pullUnit_tensorInstances Y (condensedRingObj Λ' Y)
+  have := ht.1
+  have := ht.2.1
+  have := ht.2.2.1
+  have := ht.2.2.2.1
+  have := ht.2.2.2.2
   let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
@@ -270,7 +280,12 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
         (L((f)^*⟦Λ⟧).obj M) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app M) := by
-  obtain ⟨_, _, _, _, _⟩ := pullUnit_tensorInstances Y (condensedRingObj Λ Y)
+  have ht := pullUnit_tensorInstances Y (condensedRingObj Λ Y)
+  have := ht.1
+  have := ht.2.1
+  have := ht.2.2.1
+  have := ht.2.2.2.1
+  have := ht.2.2.2.2
   let P := (CochainComplex.flatResolutionFunctor _).obj (DerivedCategory.Q.objPreimage M)
   let e : DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P) ≅ M :=
     (DerivedCategory.quotientCompQhIso _).app P ≪≫
