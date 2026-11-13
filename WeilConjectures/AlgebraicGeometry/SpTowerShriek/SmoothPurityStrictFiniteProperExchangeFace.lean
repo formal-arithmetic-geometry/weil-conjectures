@@ -346,9 +346,8 @@ private theorem finitePullbackSquareCoherenceCube (b : Base l E)
   simp only
   intro M
   have HC := strictFinitePullbackSquareCoherence l E b sq n M
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-    exactByConversion h
+  simpa only [Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+    Functor.map_comp, Category.assoc] using HC
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
