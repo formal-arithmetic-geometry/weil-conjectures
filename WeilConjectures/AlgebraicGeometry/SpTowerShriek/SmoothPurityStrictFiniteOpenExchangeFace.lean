@@ -653,9 +653,11 @@ private theorem open_exchange_inverse (b : Base l E)
     (fun K ↦ by
       as_aux_lemma =>
         have he := levels.openExchange_mate h j' j g sq n K
-        simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
-          Iso.symm_inv, NatTrans.comp_app, Category.assoc,
+        rw [Adjunction.homEquiv_unit] at he
+        dsimp only [Iso.symm_hom, Iso.trans_inv,
+          Iso.symm_inv, NatTrans.comp_app,
           eqToIso.inv, Functor.comp_obj, Functor.id_obj] at he ⊢
+        simp only [Category.assoc] at he ⊢
         run_tac Lean.Elab.Tactic.withMainContext do
           let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
           exactByConversion h)
@@ -663,8 +665,8 @@ private theorem open_exchange_inverse (b : Base l E)
       as_aux_lemma =>
         intro M
         have HC := inverse_pull_square l E b sq n M
-  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HC) N
+        simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+        exact HC) N
   simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
