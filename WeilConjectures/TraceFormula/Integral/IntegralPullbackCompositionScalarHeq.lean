@@ -202,9 +202,18 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
   have hh := derivedCompositor_heq
+    (C := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) V)
+    (C' := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) V)
+    (D := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) W)
+    (D' := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) W)
+    (E' := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) Z)
+    (E'' := finiteSystems (integralSystemRings l E) (integralSystemTransition l E) Z)
     (dC := SemilinearSections.hasDerived _ _)
+    (dC' := SemilinearSections.hasDerived _ _)
     (dD := SemilinearSections.hasDerived _ _)
+    (dD' := SemilinearSections.hasDerived _ _)
     (dE := SemilinearSections.hasDerived _ _)
+    (dE' := SemilinearSections.hasDerived _ _)
     (F := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) k)
     (F' := integralComparisonSequencePullback l E k)
     (G := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) h)
@@ -248,9 +257,6 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  apply eq_of_heq
-  have hty := type_eq_of_heq hh
-  cases hty
   exact eq_of_heq hh
 
 end Composition
