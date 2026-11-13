@@ -213,6 +213,8 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
         (leftDerivedUpperStarComp Λ FT g).hom.app M ≫
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
   have hc := Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
+    (G := (g)^*⟦Λ⟧) (A := (FX)^*⟦Λ⟧) (B := (FT)^*⟦Λ⟧)
+    (P := (g ≫ FX)^*⟦Λ⟧) (P' := (FT ≫ g)^*⟦Λ⟧)
     (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
     (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M
   simpa only [← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso, upperStarCongr,
