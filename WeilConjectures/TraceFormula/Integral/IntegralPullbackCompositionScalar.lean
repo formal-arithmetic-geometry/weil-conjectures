@@ -223,7 +223,9 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
         (integralComparisonSystemComposition l L h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
   convert NatTrans.congr_app
-    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M using 3 <;> rfl
+    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M using 3
+  all_goals trace_state
+  all_goals rfl
 
 private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
