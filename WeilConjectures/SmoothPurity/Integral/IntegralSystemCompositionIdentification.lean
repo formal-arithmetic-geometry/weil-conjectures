@@ -41,7 +41,7 @@ theorem finiteSystemAdjunction_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
           finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) f) :=
   rfl
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Comparing the two presentations of the same adjunctions unfolds their module categories.
 /-- The finite-system compositor is the strict sequence compositor.
@@ -69,7 +69,7 @@ theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶
     (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose_spec
   exact ⟨d, hd', hs⟩
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Rewriting inside the derived compositor unfolds the same module categories.
 /-- The derived finite-system compositor is the derived strict sequence compositor.
