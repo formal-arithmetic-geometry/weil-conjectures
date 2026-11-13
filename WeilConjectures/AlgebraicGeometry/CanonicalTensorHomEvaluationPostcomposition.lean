@@ -179,10 +179,6 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
       𝟙 (DerivedCategory.Q.obj L)) ≫ evaluation X L N =
       evaluation X L M ≫ DerivedCategory.Q.map f := by
   let := schemeDerivedTensorMonoidal X
-  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
-  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
-    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
-    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
   have he := evaluation_chain_localized X L M N f
   have hn := evaluation_chain_resolution_natural X L M N f
   exact tensor_naturality _ _ _ _ _ _ _ hn he
