@@ -380,9 +380,8 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
   have hγ : shiftSupportedClass Λ ι 2 (kummerBoundary Λ t) =
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU).homEquiv _ _ α ≫ cs ≫
         w⟦(1 : ℤ)⟧' ≫ sa ≫ ss := by
-    rw [shiftSupportedClass, kummerBoundary_eq, Adjunction.homEquiv_unit]
-    simp only [α, cs, w, sa, ss, θj, κU, tU, L, Category.assoc]
-    rfl
+    simp only [shiftSupportedClass, kummerBoundary, α, cs, w, sa, ss, θj, κU, tU, L,
+      Category.assoc]
   let Rp := R((p)_*[ModuleCat.{u + 1} Λ])
   let H := _root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))
@@ -450,17 +449,16 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     have h := Rp.commShiftIso_hom_naturality w (1 : ℤ)
     have hw' : Rp.map (w⟦(1 : ℤ)⟧') = (Rp.commShiftIso (1 : ℤ)).hom.app _ ≫
         (Rp.map w)⟦(1 : ℤ)⟧' ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ := by
-      apply (cancel_mono ((Rp.commShiftIso (1 : ℤ)).hom.app _)).1
-      simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
-      exact h
+      rw [← Category.assoc, ← h]
+      simp
     have := isIso_homology_zero_map_shift_of_isIso_shiftMap T.mor₃ hδ
     have hm₃ : (Rp.map w)⟦(1 : ℤ)⟧' = T.mor₃⟦(1 : ℤ)⟧' ≫
         ((Rp.commShiftIso (1 : ℤ)).inv.app _)⟦(1 : ℤ)⟧' := by
-      have hm : Rp.map w = T.mor₃ ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ :=
-        by
-          change Rp.map w = (Rp.map w ≫ (Rp.commShiftIso (1 : ℤ)).hom.app _) ≫ _
-          rw [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
-      simpa only [Functor.map_comp] using congrArg (shiftFunctor _ (1 : ℤ)).map hm
+      rw [← Functor.map_comp]
+      congr 1
+      change Rp.map w = (Rp.map w ≫ (Rp.commShiftIso (1 : ℤ)).hom.app _) ≫ _
+      rw [Category.assoc]
+      erw [Iso.hom_inv_id_app, Category.comp_id]
     rw [hw', hm₃, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   -- the target of the adjoint is concentrated in degree zero
