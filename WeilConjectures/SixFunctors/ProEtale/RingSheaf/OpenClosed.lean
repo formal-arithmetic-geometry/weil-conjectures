@@ -96,6 +96,21 @@ theorem preservesFiniteColimits_lowerStar_of_isCompl :
     inferInstanceAs (PreservesFiniteColimits (Mod.forget _ ⋙ (i)_*[ModuleCat.{u + 1} R]))
   exact preservesFiniteColimits_of_reflects_of_preserves _ (Mod.forget B)
 
+omit [QuasiCompact j] in
+/-- The restriction `j^*` along an open immersion is left exact on module sheaves. -/
+instance preservesFiniteLimits_upperStar_of_isOpenImmersion :
+    PreservesFiniteLimits (upperStar B j) := by
+  have := (ProEtale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} R) j
+    ).isRightAdjoint
+  have : PreservesFiniteLimits (upperStar B j ⋙ Mod.forget _) :=
+    inferInstanceAs (PreservesFiniteLimits (Mod.forget B ⋙ (j)^*[ModuleCat.{u + 1} R]))
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (Mod.forget _)
+
+omit [QuasiCompact j] in
+/-- The restriction `j^*` along an open immersion is exact on module sheaves. -/
+theorem preservesHomology_upperStar_of_isOpenImmersion : (upperStar B j).PreservesHomology :=
+  Functor.preservesHomology_of_preservesEpis_and_kernels _
+
 /-! ### Units, counits and vanishing -/
 
 /-- Blueprint `det-sf-open-closed-sequence-ring-sheaf`, part (2): the counit `i^* i_* G ⟶ G`
