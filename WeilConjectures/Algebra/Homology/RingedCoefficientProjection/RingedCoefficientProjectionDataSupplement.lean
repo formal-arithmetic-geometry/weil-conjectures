@@ -213,6 +213,6 @@ Source: Stacks 07A7 (blueprint: def-pur-ringed-coefficient-projection-data). -/
 def comparison {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     g.right R ⋙ (pY a).derived ⟶ (pX (g.rings.map a)).derived ⋙ g.right S :=
   (mateEquiv (g.adjunction R) (g.adjunction S)
-    (TwoSquare.mk _ _ _ _ (e.derived a).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (e.derived a).hom))
 
 end SheafOfModules.RingedCoefficientProjection

@@ -144,7 +144,7 @@ theorem exists_etaleReduction_map_exchangeRestriction_comp_eq {c : C ⟶ Y} {ι 
       (etaleReduction ℓ E n F).map
           ((mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c)
             (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E d)
-            (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫ β =
+            (TwoSquare.mk _ _ _ _ σ.inv)).app P) ≫ β =
         s ≫ Etale.exchangeRestriction (integersModPowCoeff.{u} ℓ E n) hsq
           ((L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) φ)).obj
             ((etaleReduction ℓ E n Y).obj P)) := by

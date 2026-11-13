@@ -126,7 +126,7 @@ private def sectionExtensionIso (X : Scheme.{u})
   let α : (sectionModuleEquivalence.{u + 1, u + 1, u} J R).functor ⋙ E ⟶
       Mod.extendScalars p ⋙ (sectionModuleEquivalence.{u + 1, u + 1, u} J S).functor :=
     ((mateEquiv (Mod.extendRestrictAdjunction p) a).symm
-      (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u + 1, u + 1, u} J p).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u + 1, u + 1, u} J p).hom))
   haveI : IsIso α := inverseMate_isIso (Mod.extendRestrictAdjunction p) a
     (scalarRestrictionIso.{u + 1, u + 1, u} J p)
   exact (asIso α).symm.app M

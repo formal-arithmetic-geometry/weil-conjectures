@@ -62,7 +62,7 @@ noncomputable def supportedRestrictionE
   (CategoryTheory.mateEquiv
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
     (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
-    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoE E).inv)).natTrans.app P
+    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoE E).inv)).app P
 
 end Correspondence.FixedLocus
 

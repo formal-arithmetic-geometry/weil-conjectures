@@ -923,7 +923,7 @@ def towerExchange {f : Morphism Y X} {g : Morphism Y Y'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     f.towerPush A ⋙ g.towerPull A ⟶ h.towerPull A ⋙ k.towerPush A :=
   (mateEquiv (f.towerAdjunction A) (k.towerAdjunction A)
-    (TwoSquare.mk _ _ _ _ (towerSquare sq A).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (towerSquare sq A).hom))
 
 /-- The ordinary coefficient exchange for any commutative coefficient ring.
 Source: Stacks 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -932,7 +932,7 @@ def ordinaryExchange {f : Morphism Y X} {g : Morphism Y Y'}
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     f.push A ⋙ g.pull A ⟶ h.pull A ⋙ k.push A :=
   (mateEquiv (f.adj A) (k.adj A)
-    (TwoSquare.mk _ _ _ _ (derivedSquare sq A).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (derivedSquare sq A).hom))
 
 /-- The right-adjoint square is the adjunction conjugate of the canonical left square.
 Source: Stacks 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -975,7 +975,7 @@ def completeExchange {f : Morphism Y X} {g : Morphism Y Y'}
     f.completePush A I ⋙ g.completePull A I ⟶
       h.completePull A I ⋙ k.completePush A I :=
   (mateEquiv (f.completeAdjunction A I) (k.completeAdjunction A I)
-    (TwoSquare.mk _ _ _ _ (completeSquare sq A I).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (completeSquare sq A I).hom))
 
 /-- Exact derived constant towers, used only to normalize the strict-limit adjunction.
 Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
@@ -2374,7 +2374,7 @@ theorem comparisonS_naturality {f : Morphism Y X} {g : Morphism Y Y'}
         (ObjectProperty.ι (X.IsComplete A I) ⋙ X.reduction A I ⋙
           f.towerPush A ⋙ g.towerPull A ⋙ Y'.rlim A).map a := by
   let p := (mateEquiv (f.adj A) (f.towerAdjunction A)
-    (TwoSquare.mk _ _ _ _ (f.reductionPullIso A I).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (f.reductionPullIso A I).hom))
   have hp (M : X.derived A) : p.app M = f.towerProjection A I M := by
     simp [p, Morphism.towerProjection, Adjunction.homEquiv_unit,
       Functor.map_comp]

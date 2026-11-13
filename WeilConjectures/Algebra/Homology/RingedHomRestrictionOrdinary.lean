@@ -7,6 +7,9 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Homology.RingedHomRestrictionComparison
 import WeilConjectures.Algebra.Homology.HomComplexComponents
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Coherent restriction of ordinary internal Hom complexes
 

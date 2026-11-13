@@ -63,9 +63,9 @@ variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (a : X₀ ⟶ Spe
 /-- The abelian factorization attached to the geometric Frobenius. -/
 noncomputable def purityAbelianFrobeniusFactorIso :
     (a.geometricFiberProj)^*[Ab.{u + 1}] ⋙
-        (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}] ≅
+        (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}] ≅
       (a.geometricFiberProj)^*[Ab.{u + 1}] :=
-  purityAbelianFactorIso a.geometricFiberProj a.geometricGaloisFrobenius.hom
+  purityAbelianFactorIso a.geometricFiberProj a.geometricGaloisFrobenius.asIso.hom
     a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
 
 variable (M₀ N₀ : Mod (Sheaf (ProEt.topology X₀) Ab.{u + 1}) (condensedRingObj Λ X₀))
@@ -74,16 +74,16 @@ variable (M₀ N₀ : Mod (Sheaf (ProEt.topology X₀) Ab.{u + 1}) (condensedRin
 
 /-- A scalar Frobenius relation descends from underlying sheaves to coefficient modules. -/
 theorem purityExtendPullbackIso_weil
-    (he : (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map e₀.hom.hom ≫
+    (he : (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map e₀.hom.hom ≫
         (purityAbelianFrobeniusFactorIso a).hom.app N₀.X =
       c₀ • ((purityAbelianFrobeniusFactorIso a).hom.app M₀.X ≫ e₀.hom.hom)) :
     c₀ • ((CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app M₀ ≫
         (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom) =
-      (a.geometricGaloisFrobenius.hom)^*⟦Λ⟧.map
+      (a.geometricGaloisFrobenius.asIso.hom)^*⟦Λ⟧.map
           (purityExtendPullbackIso Λ a.geometricFiberProj M₀ N₀ e₀).hom ≫
         (CondensedRing.geometricFiberProjUpperStarFrobeniusIso Λ a).hom.app N₀ := by
   have h := purityExtendPullbackIso_factor Λ a.geometricFiberProj
-    a.geometricGaloisFrobenius.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
+    a.geometricGaloisFrobenius.asIso.hom a.geometricGaloisFrobenius_hom_comp_geometricFiberProj
     M₀ N₀ e₀ c₀ he
   simp only [CondensedRing.geometricFiberProjUpperStarFrobeniusIso,
     purityModuleFactorIso] at h ⊢

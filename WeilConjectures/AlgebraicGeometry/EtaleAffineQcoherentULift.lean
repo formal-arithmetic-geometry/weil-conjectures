@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechVanishing
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients

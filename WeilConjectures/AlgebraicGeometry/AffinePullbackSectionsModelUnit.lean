@@ -42,10 +42,6 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-set_option synthInstance.maxHeartbeats 100000 in
--- Affine carrier identifications require additional instance search.
-set_option maxHeartbeats 400000 in
--- Affine carrier identifications require additional elaboration heartbeats.
 /-- The affine pullback unit on a K-flat associated-sheaf model is the localized
 ordinary unit after the sections comparisons.
 Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW(2) and 0AA7.

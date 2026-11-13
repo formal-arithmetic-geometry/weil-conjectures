@@ -58,7 +58,7 @@ theorem ordinaryExchangeSquare
       (calculus l E W.left).reduction.map
           ((mateEquiv (ringedAdj l E p.left) (ringedAdj l E r.left)
             (TwoSquare.mk _ _ _ _
-              (ringedSquare l E k.left r.left p.left i.left w).hom)).natTrans.app
+              (ringedSquare l E k.left r.left p.left i.left w).hom)).app
                 (e.ringedObj l E a.ringedModels K)) ≫
         (Expression.push r hr (.pull k e)).ordinaryReduction l E o a K := by
   intro U V W Z k r p i hr hp w e

@@ -50,7 +50,7 @@ lemma openExchangeAux_app {A A' B B' P P' : Type*} [Category A] [Category A']
     (νY : SpB ⋙ LSb' ⟶ LSb ⋙ Ts) (K : A) :
     (openExchangeAux adj adj' α hα i' i νY).app K =
       i'.hom.app (SpA.obj K) ≫
-        LSb'.map (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ (inv α))).natTrans.app K) ≫
+        LSb'.map (((mateEquiv adj adj').symm (TwoSquare.mk _ _ _ _ (inv α))).app K) ≫
         νY.app (Lu.obj K) ≫ Ts.map (i.inv.app K) := by
   simp [openExchangeAux]
 
@@ -110,7 +110,7 @@ lemma openPointExchangeAux_app_comp_aux_of_eq {A A' CX CX' CP Cs Cs' CB DA DA' D
     {DuS : DA ⥤ DX} {DuS' : DA' ⥤ DX'} (cSpA : SpA ⋙ ιA' ≅ ιA ⋙ ΨA) (cLu : Lu ⋙ ιX ≅ ιA ⋙ DuS)
     (cLu' : Lu' ⋙ ιX' ≅ ιA' ⋙ DuS') (νuA : ΨA ⋙ DuS' ⟶ DuS ⋙ ΨX)
     (hνu : ∀ K, ιX'.map (((mateEquiv adjU adjU').symm
-        (TwoSquare.mk _ _ _ _ (inv αU))).natTrans.app K) =
+        (TwoSquare.mk _ _ _ _ (inv αU))).app K) =
       cLu'.hom.app (SpA.obj K) ≫ DuS'.map (cSpA.hom.app K) ≫ νuA.app (ιA.obj K) ≫
         ΨX.map (cLu.inv.app K) ≫ cSp.inv.app (Lu.obj K))
     {G : CB ⥤ A} {Rg : DB ⥤ DA} (cG : G ⋙ ιA ≅ ιB ⋙ Rg) {Rg₁ Rhg : DB ⥤ DX} {Rphg : DB ⥤ Ds}
@@ -190,7 +190,7 @@ lemma openPointExchangeAux_app_comp_aux_of_eq {A A' CX CX' CP Cs Cs' CB DA DA' D
   simp only [Functor.map_comp, Category.assoc]
   rw [pointExchangeAux_app]
   simp only [Functor.map_comp, Category.assoc]
-  set m := ((mateEquiv adjU adjU').symm (TwoSquare.mk Ru Sp SpA Ru' (inv αU))).natTrans.app K
+  set m := ((mateEquiv adjU adjU').symm (TwoSquare.mk Ru Sp SpA Ru' (inv αU))).app K
   have n1 := i1.hom.naturality m
   have n2 := i2.hom.naturality m
   have n3 := i3.hom.naturality (OLS.map m)

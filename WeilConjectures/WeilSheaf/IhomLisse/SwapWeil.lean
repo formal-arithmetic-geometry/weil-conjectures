@@ -39,9 +39,10 @@ theorem ihomSwap_comm (a b K : ProEtaleWeilSheaf k₀ l X) :
     (ihom k₀ l X a (ihom k₀ l X b K)).obj.str ≫ Mod.ihomSwap a.carrier b.carrier K.carrier := by
   rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom]
   exact Mod.map_ihomSwap_comp_of_eq
-    (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l])
+    (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+      WeilCoefficients.{u} l])
     (ρ := adicConstantSheafToLowerStar l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (c := fun M N ↦ frobeniusIhomComparison k₀ l X M N) uncurryHom_frobeniusIhomComparison
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) a.str b.str K.str
     _ (ihom_str_eq_trIso b K) _ (ihom_str_eq_trIso a K) _

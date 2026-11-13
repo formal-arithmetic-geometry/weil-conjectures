@@ -54,7 +54,7 @@ def originMate (A : Type u) [CommRing A] [Finite A]
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p)
         (derivedUpperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p)
-        (comparisonOpenDerivedPullbackIso (ULift.{u + 1, u} A) p).inv).natTrans _ ≫
+        (comparisonOpenDerivedPullbackIso (ULift.{u + 1, u} A) p).inv) _ ≫
     (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft _ (originRealizationPushIso A p).inv ≫
     (Functor.associator _ _ _).inv ≫
@@ -73,7 +73,7 @@ def originPullback (A : Type u) [CommRing A] [Finite A]
     (Etale.derivedUpperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) p)
     (directImageConstantAdjunction A p)).symm
-      (TwoSquare.mk _ _ _ _ (originMate A p))).natTrans
+      (TwoSquare.mk _ _ _ _ (originMate A p)))
 
 /-- On bounded-below inputs the ambient mate is the specified included mate.
 Source: Stacks 09A6 (blueprint: def-fix-etale-origin-scalar-pullback-data).

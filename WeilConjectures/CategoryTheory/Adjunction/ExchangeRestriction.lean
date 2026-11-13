@@ -49,7 +49,7 @@ is the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of `c
 lemma Adjunction.mateEquiv_app_eq_homEquiv {cL : CC ⥤ C₂} {cR : C₂ ⥤ CC} (a : cL ⊣ cR)
     {dL : CF ⥤ CX} {dR : CX ⥤ CF} (g : dL ⊣ dR) (ι : CC ⥤ CF) (Δ : C₂ ⥤ CX)
     (σ : cL ⋙ Δ ≅ ι ⋙ dL) (P : C₂) :
-    (mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P =
+    (mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).app P =
       g.homEquiv (ι.obj (cR.obj P)) (Δ.obj P) (σ.inv.app (cR.obj P) ≫ Δ.map (a.counit.app P)) := by
   rw [Adjunction.homEquiv_unit]
   simp [mateEquiv_apply]
@@ -78,12 +78,12 @@ and `τ_d⁻¹`). -/
 theorem Adjunction.map_mateEquiv_app_comp
     (hσ : ∀ M : CC, TX.map (σ.hom.app M) ≫ τd.hom.app (ι.obj M) ≫ dL'.map (τι.hom.app M) =
       τΔ.hom.app (cL.obj M) ≫ Δ'.map (τc.hom.app M) ≫ σ'.hom.app (TC.obj M)) (P : C₂) :
-    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
-        (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
+    TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).app P) ≫
+        (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).app (Δ.obj P) ≫
           dR'.map (τΔ.hom.app P) =
       τι.hom.app (cR.obj P) ≫
-        ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P) ≫
-          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+        ι'.map ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).app P) ≫
+          (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).app (T₂.obj P) := by
   rw [Adjunction.mateEquiv_app_eq_homEquiv a g ι Δ σ P,
     Adjunction.mateEquiv_app_eq_homEquiv a' g' ι' Δ' σ' (T₂.obj P)]
   apply (g'.homEquiv _ _).symm.injective
@@ -103,7 +103,7 @@ theorem Adjunction.map_mateEquiv_app_comp
     simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.app_inv, Category.assoc] at h2
     rw [← h2]
     simp [← Functor.map_comp_assoc]
-  have hn := σ'.inv.naturality ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P)
+  have hn := σ'.inv.naturality ((mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).app P)
   simp only [Functor.comp_map] at hn
   have hΔ := τΔ.inv.naturality (a.counit.app P)
   simp only [Functor.comp_map] at hΔ
@@ -135,13 +135,13 @@ T ι^* c^! P ---T ρ_P---> T d^! Δ^* P --ex_d--> d'^! T Δ^* P --d'^! τ_Δ--> 
 commutes. -/
 theorem Adjunction.exists_map_mateEquiv_app_comp_eq [dL'.Full] (P : C₂) :
     ∃ s : TF.obj (ι.obj (cR.obj P)) ⟶ ι'.obj (cR'.obj (T₂.obj P)),
-      TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).natTrans.app P) ≫
-          (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).natTrans.app (Δ.obj P) ≫
+      TF.map ((mateEquiv a g (TwoSquare.mk _ _ _ _ σ.inv)).app P) ≫
+          (mateEquiv g g' (TwoSquare.mk _ _ _ _ τd.inv)).app (Δ.obj P) ≫
             dR'.map (τΔ.hom.app P) =
-        s ≫ (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).natTrans.app (T₂.obj P) := by
+        s ≫ (mateEquiv a' g' (TwoSquare.mk _ _ _ _ σ'.inv)).app (T₂.obj P) := by
   rw [Adjunction.mateEquiv_app_eq_homEquiv a g ι Δ σ P,
     Adjunction.mateEquiv_app_eq_homEquiv a' g' ι' Δ' σ' (T₂.obj P)]
-  let m := (mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).natTrans.app P
+  let m := (mateEquiv a a' (TwoSquare.mk _ _ _ _ τc.inv)).app P
   refine ⟨dL'.preimage (τd.inv.app _ ≫ TX.map (σ.inv.app _) ≫ τΔ.hom.app _ ≫
     Δ'.map (τc.hom.app _) ≫ Δ'.map (cL'.map m) ≫ σ'.hom.app _), ?_⟩
   apply (g'.homEquiv _ _).symm.injective

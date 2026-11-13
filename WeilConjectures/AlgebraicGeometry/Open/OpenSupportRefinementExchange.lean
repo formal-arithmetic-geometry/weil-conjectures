@@ -124,7 +124,7 @@ private lemma supportLeft_hom_app
       have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
         (c.isPullback_g_ofIsPullback sq)
       (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-        (c.isPullback_g_ofIsPullback sq).w).natTrans.app
+        (c.isPullback_g_ofIsPullback sq).w).app
           ((F.sh (c.ofIsPullback sq).i).obj K) ≫
         (F.pf c.g).map ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
           (a ≫ c.i) (c.ofIsPullback_i_fst sq)).inv.app K) := by
@@ -141,7 +141,7 @@ private lemma supportLeft_hom_app
   have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F)
     (c.isPullback_g_ofIsPullback sq)
   let e := (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-    (c.isPullback_g_ofIsPullback sq).w).natTrans.app
+    (c.isPullback_g_ofIsPullback sq).w).app
       ((F.sh (c.ofIsPullback sq).i).obj K) ≫
     (F.pf c.g).map ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
       (a ≫ c.i) (c.ofIsPullback_i_fst sq)).inv.app K)
@@ -288,7 +288,7 @@ private noncomputable def supportRaw
   exact Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _
       (asIso (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-        (c.isPullback_g_ofIsPullback sq).w).natTrans) ≪≫
+        (c.isPullback_g_ofIsPullback sq).w)) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight
       ((F.shComp' (c.ofIsPullback sq).i (pullback.fst c.g j)
@@ -327,7 +327,7 @@ private lemma supportPullback_eq_raw
   have := CompactSupportFormalism.HasProperExchange.isIso_exchange (F := F)
     (c.isPullback_g_ofIsPullback sq)
   have he : asIso (F.exchange (c.ofIsPullback sq).g (pullback.fst c.g j) j c.g
-      (c.isPullback_g_ofIsPullback sq).w).natTrans =
+      (c.isPullback_g_ofIsPullback sq).w) =
       openImmersionLowerShriekLowerStarExchangeIso Λ
         (c.isPullback_g_ofIsPullback sq) := by
     apply Iso.ext

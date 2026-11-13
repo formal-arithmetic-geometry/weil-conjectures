@@ -88,7 +88,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 local notation "ĀS" => affineLine.geometricArtinSchreierMap k₀
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- After pullback along the Artin–Schreier cover `ĀS`, the `ψ`-isotypic component `ℒ_ψ` of
 `AS_* ℚ̄_ℓ` becomes the constant sheaf `ℚ̄_ℓ`: the projector `e_ψ` factors there as averaging

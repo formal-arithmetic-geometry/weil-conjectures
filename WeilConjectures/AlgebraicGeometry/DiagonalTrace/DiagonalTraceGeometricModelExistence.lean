@@ -206,12 +206,12 @@ private theorem lineProjection_isIso
     IsIso (projection l E g v M) := by
   let a := SpTowerShriek.adjunction l E b g
   let e := v.derivedIso l E
-  have hi : IsIso (mateEquiv a a e.hom).natTrans :=
+  have hi : IsIso (mateEquiv a a e.hom) :=
     isIso_mateEquiv_of_isEquivalence_of_fullyFaithful a a (tS.T l E) (tX.T l E) e
   have he : projection l E g v M = (mateEquiv a a e.hom).app M := by
     dsimp only [a, e]
     simp only [projection, Adjunction.homEquiv_unit, mateEquiv_apply,
-      TwoSquare.natTrans, NatTrans.comp_app, Functor.comp_obj, Functor.comp_map,
+      NatTrans.comp_app, Functor.comp_obj, Functor.comp_map,
       Functor.rightUnitor_inv_app, Functor.whiskerLeft_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.whiskerRight_app, Functor.leftUnitor_hom_app,

@@ -49,9 +49,6 @@ lemma Etale.baseChangeMap_paste_horiz' (sq₁ : CommSq g' f' f g) (sq₂ : CommS
   rw [Etale.baseChangeMap_paste_horiz_app A sq₁ sq₂ sq]
   rfl
 
-set_option maxHeartbeats 800000 in
--- the proof is a long chain of rewrites in the bounded below derived categories, each of
--- which is cheap but the heartbeat count is per declaration
 /-- **Horizontal pasting of the derived base change maps**: for two squares pasted
 horizontally, the derived base change map of the pasted square is the composite
 `(h ≫ g)^* Rf_* ≅ h^* g^* Rf_* ⟶ h^* Rf'_* g'^* ⟶ Rf''_* g''^* g'^* ≅ Rf''_* (g'' ≫ g')^*` of

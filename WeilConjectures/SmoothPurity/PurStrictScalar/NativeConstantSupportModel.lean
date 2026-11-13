@@ -643,7 +643,7 @@ def systemPullMap {X Y : Scheme.{u}} (g : X ⟶ Y) :
       (compactSupportSystemQuotient l E) g)
     ((proEtaleRingModuleAdjunction g ((constants l E).ring Y)
       ((constants l E).ring X) ((constants l E).pull g)).whiskerRight ℕᵒᵖ)).symm
-    (TwoSquare.mk _ _ _ _ (systemProperOrdinary l E g).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (systemProperOrdinary l E g).hom))
 
 attribute [local irreducible] Functor.leftAdjoint
 set_option backward.isDefEq.respectTransparency true
@@ -689,7 +689,7 @@ private theorem explicitConstantPullMate_isIso {X Y : Scheme.{u}} (g : X ⟶ Y)
         (compactSupportSystemQuotient l E) g)
       ((proEtaleRingModuleAdjunction g ((constants l E).ring Y)
         ((constants l E).ring X) ((constants l E).pull g)).whiskerRight ℕᵒᵖ)).symm
-      (TwoSquare.mk _ _ _ _ d.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ d.hom)) := by
   let R := compactSupportSystemLevel l E
   let φ := compactSupportSystemQuotient l E
   let B := ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)
@@ -740,7 +740,7 @@ theorem systemPullMap_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
           (compactSupportSystemQuotient l E) g)
         ((proEtaleRingModuleAdjunction g ((constants l E).ring Y)
           ((constants l E).ring X) ((constants l E).pull g)).whiskerRight ℕᵒᵖ)).symm
-        (TwoSquare.mk _ _ _ _ d.hom)).natTrans
+        (TwoSquare.mk _ _ _ _ d.hom))
   have hP : P (constantTowerFunctor l E X) (constantTowerFunctor l E Y) :=
     explicitConstantPullMate_isIso l E g
   rw [← systemRestriction_eq l E X, ← systemRestriction_eq l E Y] at hP
@@ -758,7 +758,7 @@ def systemOpenMap {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
   ((mateEquiv (ProEtale.VaryingRing.moduleJAdj (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) j)
     ((moduleJAdj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j).whiskerRight ℕᵒᵖ)).symm
-    (TwoSquare.mk _ _ _ _ (inv (systemPullMap l E j)))).natTrans
+    (TwoSquare.mk _ _ _ _ (inv (systemPullMap l E j))))
 
 private theorem constantOpen_counit_isIso {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (M : coefficientSequenceModules.{u, u} l E X) :
@@ -793,7 +793,7 @@ private theorem inverseOpenMate_isIso_of_support
     (a : L ⊣ R) (b : l ⊣ r) (F : A ⥤ D) (G : B ⥤ E)
     (e : R ⋙ F ≅ G ⋙ r) [IsIso a.unit]
     (hc : ∀ M, IsIso (b.counit.app (G.obj (L.obj M)))) :
-    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+    IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ e.hom)) := by
   apply (NatTrans.isIso_iff_isIso_app _).mpr
   intro M
   have := hc M
@@ -951,7 +951,7 @@ def systemReductionCounit (W : Scheme.{u})
   haveI : (ordinaryLimit l E W).leftAdjoint.Additive := ordinaryReduction_additive l E W
   ((mateEquiv ((ordinaryReductionAdj l E W).mapHomotopyCategory (.up ℤ))
     (S.adjunction.ofNatIsoRight (reductionRightComparison l E W).symm)).symm
-      (TwoSquare.mk _ _ _ _ (ordinaryLimit l E W).rightDerivedFunctorUnit)).natTrans
+      (TwoSquare.mk _ _ _ _ (ordinaryLimit l E W).rightDerivedFunctorUnit))
 
 /-- The recorded separately derived proper/open lift, then coefficient restriction.
 Source: Stacks 0940; recorded reduction-tower construction

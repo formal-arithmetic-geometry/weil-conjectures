@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.CategoryTheory.Abelian.CommSq
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ColimCoyoneda
 public import Mathlib.CategoryTheory.Comma.Final
+public import Mathlib.CategoryTheory.Comma.LocallySmall
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.BinaryBiproducts
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt

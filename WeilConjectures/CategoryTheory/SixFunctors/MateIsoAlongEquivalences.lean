@@ -55,10 +55,10 @@ theorem isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
     (adj : L ⊣ R) (adj' : L' ⊣ R')
     (G : C ⥤ C') (G' : D ⥤ D') [G.IsEquivalence] [G'.Full] [G'.Faithful]
     (θ : G ⋙ L' ≅ L ⋙ G') :
-    IsIso (mateEquiv adj adj' θ.hom).natTrans := by
+    IsIso (mateEquiv adj adj' θ.hom) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro d
-  let α := (mateEquiv adj adj' θ.hom).natTrans.app d
+  let α := (mateEquiv adj adj' θ.hom).app d
   -- Full faithfulness and the adjunctions identify composition by each component.
   have h (c : C) : Function.Bijective (fun f : G.obj c ⟶ G.obj (R.obj d) ↦ f ≫ α) := by
     let e : (G.obj c ⟶ G.obj (R.obj d)) ≃ (G.obj c ⟶ R'.obj (G'.obj d)) :=

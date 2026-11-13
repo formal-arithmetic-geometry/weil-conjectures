@@ -64,7 +64,7 @@ lemma Etale.derivedBaseChangeMapPlus_eq_counit_comp_unit (f : X ⟶ Y)
         (Etale.upperStarLowerStarAdjunction A (𝟙 X)).derivedPlus.unit := by
   have hmate : (mateEquiv (Etale.upperStarLowerStarAdjunction A f).derivedPlus
       (Etale.upperStarLowerStarAdjunction A (𝟙 X)).derivedPlus
-      (TwoSquare.mk _ _ _ _ (𝟙 _))).natTrans =
+      (TwoSquare.mk _ _ _ _ (𝟙 _))) =
       (Etale.upperStarLowerStarAdjunction A f).derivedPlus.counit ≫
         (Etale.upperStarLowerStarAdjunction A (𝟙 X)).derivedPlus.unit := by
     ext Z : 2

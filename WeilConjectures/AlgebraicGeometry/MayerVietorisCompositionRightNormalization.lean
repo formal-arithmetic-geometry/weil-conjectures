@@ -50,7 +50,6 @@ private theorem normalize_right
   simp only [Category.assoc]
   rw [← Category.assoc p t, hf]
 
-set_option maxHeartbeats 400000 in
 -- Explicit complex and derived-category conversions need a larger elaboration budget.
 /-- Right-hand image normalization to the complex-composition composite.
 Source: Stacks Project, Tags 08FE, 0D5T and 079V.

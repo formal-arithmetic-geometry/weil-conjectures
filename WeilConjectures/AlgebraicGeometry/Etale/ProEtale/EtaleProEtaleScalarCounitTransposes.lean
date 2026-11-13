@@ -51,7 +51,7 @@ def scalarSiteDirectImageU
       ((directImageComparisonAmbient A f).app J) ≫
     (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).natTrans.app
+      (TwoSquare.mk _ _ _ _ (scalarPullbackProEtaleIso a f).hom)).app
         ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj J) ≫
     R(lowerStar (ModuleCat.{u + 1} B) f).map ((pbcComparisonReduction X a).hom.app J)
 
@@ -198,7 +198,7 @@ theorem etaleProEtale_scalar_counit_transposes
   let bB := directImageComparisonAmbient B f
   let gp := (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-    (TwoSquare.mk _ _ _ _ cp)).natTrans
+    (TwoSquare.mk _ _ _ _ cp))
   let ge := Etale.scalarMate a f
   let epA := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit
   let epB := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).counit

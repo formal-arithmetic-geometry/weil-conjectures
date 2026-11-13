@@ -343,7 +343,7 @@ private theorem pasteNativeExchangeWords (A : Type u) [CommRing A] [Finite A]
         r'.map (cp.hom.app ((nativeOpen A c.i).obj N)) =
       cg.hom.app ((nativePush A c.g).obj ((nativeOpen A c.i).obj N)) ≫ γ.map (cr.hom.app
       ((nativeOpen A c.i).obj N)) ≫
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)).natTrans.app
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)).app
           (ez.obj ((nativeOpen A c.i).obj N)))
     (hb : ez'.map
         ((leftDerivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
@@ -375,7 +375,7 @@ private theorem pasteNativeExchangeWords (A : Type u) [CommRing A] [Finite A]
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) h)
     (derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
       (c.isPullback_i_ofIsPullback sq))
-    (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)).natTrans beta.hom
+    (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ theta.hom)) beta.hom
     cj cr cg cp ch cj' cr' N ha hb
 
 end NativePasting

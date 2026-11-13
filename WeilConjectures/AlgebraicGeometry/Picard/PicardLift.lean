@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsEpi
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitsCohomologyComparison
 import WeilConjectures.Topology.Curve.NoetherianCohomologyDimOne
 import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Lifting invertible modules along closed immersions in dimension at most one
 

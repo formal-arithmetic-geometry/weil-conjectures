@@ -179,7 +179,7 @@ private noncomputable def siteMate (sq : CommSq g' j' j g'') :=
     (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j'
       (inferInstance : WeaklyEtale j') trivial)
     (TwoSquare.mk _ _ _ _ (MorphismProperty.Over.pullbackMapComparison
-      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq))).natTrans
+      (inferInstance : WeaklyEtale j) (inferInstance : WeaklyEtale j') sq)))
 private theorem siteMate_eq (sq : CommSq g' j' j g'') :
     siteMate sq = (MorphismProperty.Over.pullbackComp g' j).inv ≫
       (MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) sq.w).hom ≫
@@ -198,13 +198,13 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
     IsIso ((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   have hs : IsIso (siteMate sq) := by rw [siteMate_eq]; infer_instance
   have h (F : Sheaf (ProEt.topology U') A) (b : Z.ProEt) :
       ((mateEquiv
         (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app
           (op b) = F.obj.map ((siteMate sq).app b).op := by
     simp only [Functor.comp_obj, mateEquiv, ProEtale.localizationRestrictionLowerStarAdjunction,
       Adjunction.sheafPushforwardContinuous, Functor.id_obj,
@@ -224,17 +224,17 @@ private lemma isIso_mate_localRestrictionBaseChangeMap (sq : CommSq g' j' j g'')
   have hF (F : Sheaf (ProEt.topology U') A) : IsIso ((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F) := by
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F) := by
     have hB : ∀ b : Z.ProEtᵒᵖ, IsIso (((mateEquiv
         (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
         (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom.app b) :=
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom.app b) :=
       fun b ↦ by rw [h F b.unop]; infer_instance
     apply (isIso_iff_of_reflects_iso _ (sheafToPresheaf _ A)).mp
     change IsIso (((mateEquiv
       (ProEtale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (ProEtale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans.app F).hom)
+      (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).app F).hom)
     exact NatIso.isIso_of_isIso_app _
   exact NatIso.isIso_of_isIso_app _
 
@@ -244,7 +244,7 @@ set_option backward.isDefEq.respectTransparency false in
 private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' j g'') :
     IsIso (((mateEquiv (proEtaleSheafAdjunction g'' A)
       (proEtaleSheafAdjunction g' A)).symm
-        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq))).natTrans) := by
+        (TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A sq)))) := by
   let ai := proEtaleSheafAdjunction g'' A
   let ak := proEtaleSheafAdjunction g' A
   let aj := localizationRestrictionLowerStarAdjunction A j inferInstance
@@ -254,15 +254,15 @@ private theorem isIso_inverseMate_localRestrictionBaseChange (sq : CommSq g' j' 
   have hm : mateEquiv ai ak alpha = beta := (mateEquiv ai ak).apply_symm_apply beta
   have h := iterated_mateEquiv_conjugateEquiv ai ak aj ab alpha
   rw [hm] at h
-  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans) := by
+  have hc : IsIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha) := by
     rw [← h]
     exact isIso_mate_localRestrictionBaseChangeMap A sq
   have := hc
   let e := (conjugateIsoEquiv (ai.comp ab) (aj.comp ak)).symm
-    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha.natTrans))
-  have he : e.hom = alpha.natTrans :=
-    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha.natTrans
-  change IsIso alpha.natTrans
+    (asIso (conjugateEquiv (ai.comp ab) (aj.comp ak) alpha))
+  have he : e.hom = alpha :=
+    (conjugateEquiv (ai.comp ab) (aj.comp ak)).symm_apply_apply alpha
+  change IsIso alpha
   rw [← he]
   infer_instance
 
@@ -280,8 +280,8 @@ private theorem isIso_unit_sections_of_localization
   let R := proEtaleSheafDirectImage g' A
   let beta := TwoSquare.mk _ _ _ _ (localRestrictionBaseChangeMap A hsq.toCommSq)
   let alpha := (mateEquiv ai ak).symm beta
-  have : IsIso alpha.natTrans := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
-  have : IsIso beta.natTrans := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
+  have : IsIso alpha := isIso_inverseMate_localRestrictionBaseChange A hsq.toCommSq
+  have : IsIso beta := isIso_localRestrictionBaseChangeMap_of_isPullback A hsq
   have hu := unit_mateEquiv_symm ai ak beta F
   have hu' := congrArg (fun f ↦ f.hom.app (op W)) hu
   change ((ai.unit.app F).hom.app

@@ -67,7 +67,7 @@ noncomputable def exchangeRestriction (sq : IsPullback ι d c Δ)
     (L((ι)^*[ModuleCat.{u + 1} Λ])).obj ((R(c)^![Λ]).obj P) ⟶
       (R(d)^![Λ]).obj ((L((Δ)^*[ModuleCat.{u + 1} Λ])).obj P) :=
   (mateEquiv (rightDerivedUpperShriekAdjunction Λ c) (rightDerivedUpperShriekAdjunction Λ d)
-    (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).natTrans.app P
+    (TwoSquare.mk _ _ _ _ (lowerShriekBaseChangeIso Λ sq).inv)).app P
 
 /-- The étale exchange restriction is the `Rd_! ⊣ Rd^!` adjoint of the inverse of compact-support
 base change followed by `LΔ^*` of the counit of `Rc_! ⊣ Rc^!`. -/

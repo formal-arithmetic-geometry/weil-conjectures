@@ -38,7 +38,6 @@ attribute [local irreducible] proEtaleRingModulePullback
   HasDerivedCategory.ofHasKInjectiveResolutions HasDerivedCategory.standard
   exchangeModuleComposition
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem restriction_eq (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
@@ -49,7 +48,6 @@ private theorem restriction_eq (E : LocallyClosedExtensionData.{u}) (D : E.Deriv
   intro K
   exact (D.restrictionTermwise a K).trans (E.restrictionTermwise a K).symm
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem gamma_eq (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCoherence)
     {T S X : LocallyClosedCoefficients.{u}}
@@ -62,7 +60,6 @@ private theorem gamma_eq (E : LocallyClosedExtensionData.{u}) (D : E.DerivedCohe
   apply (cancel_mono ((E.extension (a.comp b)).mapDerivedCategoryFactors.hom.app K)).mp
   exact (D.gammaTermwise a b K).trans (E.gammaTermwise a b K).symm
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem transportRestriction_forward
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
@@ -83,7 +80,6 @@ private theorem transportRestriction_forward
   simp only [Category.assoc, Category.comp_id, Equivalence.counitIso_inv_hom_id_app]
   simp only [Functor.id_obj, Category.comp_id]
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem exact_normalized
     {A B C : Type*} [Category A] [Category B] [Category C]
@@ -175,7 +171,6 @@ private theorem normalization_congr
   cases hg
   exact hn
 
-set_option maxHeartbeats 1600000 in
 -- Specialize the abstract localization equation without equality induction.
 private theorem canonical_normalized (E : LocallyClosedExtensionData.{u})
     (hE : E.Coherent) {T S X : LocallyClosedCoefficients.{u}}
@@ -246,7 +241,6 @@ private theorem chosen_normalized (E : LocallyClosedExtensionData.{u})
     (restriction_eq E D a) (restriction_eq E D b) (restriction_eq E D (a.comp b))
     rfl (gamma_eq E D a b) (canonical_normalized E hE a b)
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem derived_normalized (E : LocallyClosedExtensionData.{u})
     (hE : E.Coherent) (D : E.DerivedCoherence) {T S X : LocallyClosedCoefficients.{u}}
@@ -391,7 +385,6 @@ private def PushCompCompatible (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{
       (scalarSixSectionRing Λ X) (G.coefficient Λ (f ≫ g)))
     (G.push Λ g) (G.push Λ f) (G.push Λ (f ≫ g)) (lowerStarComp Λ.X f g) delta
 
-set_option maxHeartbeats 800000 in
 -- Use an abstract right compositor to avoid expanding its adjunction mate.
 private theorem push_comp_from_right_normalized
     (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
@@ -423,7 +416,6 @@ private theorem push_comp_from_right_normalized
   rw [G.pushNormalization, lowerStarComp_hom_app_hom]
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private def ForwardCompSquare
     {A B C Ab Bb Cb : Type*}
@@ -453,9 +445,9 @@ private theorem forward_comp_from_push
     (c01 : L01 ⋙ E1.functor ≅ E0.functor ⋙ Lb01)
     (c12 : L12 ⋙ E2.functor ≅ E1.functor ⋙ Lb12)
     (c02 : L02 ⋙ E2.functor ≅ E0.functor ⋙ Lb02)
-    (h01 : (mateEquiv adj01 adjb01 c01.inv).natTrans = r01.hom)
-    (h12 : (mateEquiv adj12 adjb12 c12.inv).natTrans = r12.hom)
-    (h02 : (mateEquiv adj02 adjb02 c02.inv).natTrans = r02.hom)
+    (h01 : (mateEquiv adj01 adjb01 c01.inv) = r01.hom)
+    (h12 : (mateEquiv adj12 adjb12 c12.inv) = r12.hom)
+    (h02 : (mateEquiv adj02 adjb02 c02.inv) = r02.hom)
     (delta : R21 ⋙ R10 ≅ R20)
     (a : L02 ≅ L01 ⋙ L12) (ab : Lb02 ≅ Lb01 ⋙ Lb12)
     (ha : conjugateIsoEquiv (adj01.comp adj12) adj02 a = delta)
@@ -518,7 +510,6 @@ private theorem ordinary_pull_comp (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRi
     (lowerStarComp Λ.X f g) (upperStarComp Λ.X f g) c
     (conjugateIsoEquiv_upperStarComp Λ.X f g) hd
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem derived_forward_comp
     {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
@@ -599,7 +590,6 @@ private theorem derived_pull_comp (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRin
     (ordinary_pull_comp G Λ f g)
   exact hd
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem pullComp_transport (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     {k : Type u} [Field k] {T S X : Over (Spec (.of k))}
@@ -633,7 +623,6 @@ private theorem pullComp_transport (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRi
   rw [AlgebraicGeometry.Scheme.derived_eqToIso (fun z ↦ z.pull) h']
   rfl
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem transportComposition_forward
     {A B C A' B' C' : Type*}
@@ -653,7 +642,6 @@ private theorem transportComposition_forward
     Functor.id_obj]
   simp only [Equivalence.counitIso_inv_hom_id_app, Category.comp_id]
 
-set_option maxHeartbeats 1600000 in
 -- The comparison involves many nested functor constructions.
 private theorem transport_normalized
     {A B C A' B' C' : Type*}

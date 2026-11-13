@@ -290,11 +290,11 @@ private theorem supportProjectionIsoGeneral
   have hpf (K) : IsIso (Functor.Monoidal.projectionMap adj K) := by
     have := isIso_projectionMap_derivedEtaleLowerShriek
       (A := D) e K
-    have : IsIso (Functor.LaxMonoidal.ihomComparison G₀ K).natTrans :=
+    have : IsIso (Functor.LaxMonoidal.ihomComparison G₀ K) :=
       Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
         (derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction e) K
     have : i.symm.hom.IsMonoidal := inferInstanceAs i.inv.IsMonoidal
-    have : IsIso (Functor.LaxMonoidal.ihomComparison G K).natTrans :=
+    have : IsIso (Functor.LaxMonoidal.ihomComparison G K) :=
       Functor.LaxMonoidal.isIso_ihomComparison_of_iso i.symm K
     exact Functor.Monoidal.isIso_projectionMap_of_isIso_ihomComparison adj K
   have hb := braided_transport i

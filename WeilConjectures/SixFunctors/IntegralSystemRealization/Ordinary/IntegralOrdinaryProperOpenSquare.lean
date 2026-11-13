@@ -28,8 +28,7 @@ set_option synthInstance.maxSize 4096
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
-attribute [local implicit_reducible] TwoSquare
-  SemilinearSections.moduleAbelian SemilinearSections.hasDerived
+attribute [local implicit_reducible] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
   integralOperationsCommHasDerivedCategory
 attribute [local irreducible] pullbackTensorCalculus
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
@@ -89,12 +88,12 @@ private theorem cartesian_coefficient_square
     have hi : IsIso ((a.realizationModel.openReduction l E i).app M) :=
       GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel i M
     have hi' : IsIso (((mateEquiv (ringedOpenAdj l E i) (o.extension i).adj).symm
-        (a.realizationModel.reductionPull i).hom).natTrans.app M) := hi
+        (a.realizationModel.reductionPull i).hom).app M) := hi
     have hb : IsIso ((a.realizationModel.openReduction l E b).app
         ((ringedPull l E q).obj M)) :=
       GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel b _
     have hb' : IsIso (((mateEquiv (ringedOpenAdj l E b) (o.extension b).adj).symm
-        (a.realizationModel.reductionPull b).hom).natTrans.app
+        (a.realizationModel.reductionPull b).hom).app
           ((ringedPull l E q).obj M)) := hb
     let ζ₁ := (a.realizationModel.reductionPull p).hom.app ((ringedOpen l E i).obj M) ≫
       (pull l E p).map (inv ((a.realizationModel.openReduction l E i).app M))
@@ -110,21 +109,21 @@ private theorem cartesian_coefficient_square
       ((calculus l E W).reduction.obj M) (𝟙 _)
       (GeneratorReduction.inverseOrZero ((a.realizationModel.openReduction l E i).app M))
       (by simpa only [CategoryTheory.Functor.map_id, Category.comp_id,
-        RealizationModel.openReduction, ringedOpenAdj, TwoSquare.natTrans,
+        RealizationModel.openReduction, ringedOpenAdj,
         Operations.shriek, Category.comp_id] using! hu)
     erw [CategoryTheory.Functor.map_id, Category.comp_id] at hs
     erw [GeneratorReduction.inverseOrZero_eq_inv] at hs
     have hs' : ζ₂ ≫ β.app ((calculus l E W).reduction.obj M) =
         (calculus l E V).reduction.map (α.app M) ≫ ζ₁ := by
       simpa only [ζ₁, ζ₂, α, β, ringedOpenAdj, RealizationModel.openReduction,
-        TwoSquare.natTrans, Operations.shriek,
+        Operations.shriek,
         GeneratorReduction.inverseOrZero_eq_inv, CategoryTheory.Functor.map_id,
         Category.comp_id, Category.assoc] using! hs
     have hx := GeneratorReduction.inverse_square
       ((calculus l E V).reduction.map (α.app M))
       (β.app ((calculus l E W).reduction.obj M)) ζ₂ ζ₁ hs'.symm
     simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,
-      TwoSquare.mk, TwoSquare.natTrans, χ₁, χ₂, NatTrans.comp_app,
+      TwoSquare.mk, χ₁, χ₂, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, ζ₁, ζ₂, GeneratorReduction.inverseOrZero_eq_inv,
       IsIso.inv_comp, ← CategoryTheory.Functor.map_inv, NatIso.inv_hom_app, IsIso.inv_inv,
@@ -133,11 +132,11 @@ private theorem cartesian_coefficient_square
     ((ringedOpenAdj l E i).comp (ringedAdj l E p))
     ((ringedAdj l E q).comp (ringedOpenAdj l E b))
     ((o.extension i).adj.comp (o.direct p).adj)
-    ((o.direct q).adj.comp (o.extension b).adj) χ₁.natTrans χ₂.natTrans α β h L
+    ((o.direct q).adj.comp (o.extension b).adj) χ₁ χ₂ α β h L
   simp only [χ₁, χ₂, composite_mate_app] at hm
   simpa only [cartesianConjugate, ringedCartesianConjugate, conjugateIsoEquiv,
     ordinaryPushReduction, RealizationModel.openReduction, Equiv.apply_symm_apply,
-    TwoSquare.natTrans, ringedOpenAdj, α, β, q, b, Category.assoc] using! hm
+    ringedOpenAdj, α, β, q, b, Category.assoc] using! hm
 
 attribute [local irreducible] ringedCartesianConjugate ringedPushComp cartesianConjugate
   Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.leftDerivedFunctor
@@ -552,7 +551,7 @@ private theorem gamma_coefficient_square
         (ordinaryPushReduction l E o a.realizationModel p).app ((ringedOpen l E k).obj L) ≫
         (Operations.push l E o p).map ((openR l E o a.realizationModel k).app L) := by
   have hi : IsIso (((mateEquiv (ringedOpenAdj l E i) (o.extension i).adj).symm
-      (a.realizationModel.reductionPull i).hom).natTrans.app
+      (a.realizationModel.reductionPull i).hom).app
         ((ringedPush l E r).obj L)) :=
     GeneratorReduction.fixedOpenReduction_isIso l E o a.realizationModel i _
   have hlam := lambda_coefficient_square l E o a k r p i h L
@@ -582,7 +581,7 @@ private theorem gamma_coefficient_square
     ((ringedPush l E r).obj L)
   rw [openR_app]
   erw [GeneratorReduction.inverseOrZero_eq_inv]
-  simpa only [RealizationModel.openReduction, ringedOpenAdj, TwoSquare.natTrans,
+  simpa only [RealizationModel.openReduction, ringedOpenAdj,
     Category.assoc] using! hm
 
 /-- The ordinary coefficient square for the proper/open interchange.

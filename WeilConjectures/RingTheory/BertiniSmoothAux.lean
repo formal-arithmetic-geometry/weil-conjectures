@@ -11,6 +11,7 @@ public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 public import Mathlib.RingTheory.PicardGroup
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.SimpleRing.Principal
@@ -188,7 +189,7 @@ theorem Matrix.exists_det_ne_zero_of_forall_sum_mul_eq_zero {K ι n : Type*} [Fi
   have hli' : LinearIndependent K (Matrix.of fun a' b' ↦ c ((a ∘ e) a') b').row :=
     hli.comp e e.injective
   exact ((Matrix.isUnit_iff_isUnit_det _).mp
-    (Matrix.linearIndependent_rows_iff_isUnit.mp hli')).ne_zero
+    (Matrix.linearIndependent_row_iff_isUnit.mp hli')).ne_zero
 
 open Cardinal Matrix in
 theorem Algebra.trdeg_add_card_le {k A D : Type u} [Field k] [CommRing A] [Algebra k A]

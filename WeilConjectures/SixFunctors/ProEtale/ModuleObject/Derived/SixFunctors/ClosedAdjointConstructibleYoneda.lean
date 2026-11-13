@@ -135,7 +135,6 @@ private theorem support_preserved_of_coefficientIso
   exact (constantModelBoundedConstructible Λ Z).prop_of_iso (t.app K)
     (hpres _ ((bounded_comap_iff a X K).mpr hK))
 
-set_option maxHeartbeats 800000 in
 -- The proof compares two Hom equivalences in full derived subcategories.
 /-- On bounded constructible inputs the exceptional right adjoint is naturally isomorphic
 to derived sections with support, compatibly with their counits. The witnesses `hK` and

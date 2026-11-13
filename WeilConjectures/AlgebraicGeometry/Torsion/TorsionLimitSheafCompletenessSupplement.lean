@@ -83,6 +83,7 @@ public import WeilConjectures.CategoryTheory.RingedSectionLocalization
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.TorsionCompletionDefinitions
 import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsLocal
@@ -244,21 +245,22 @@ private theorem isoLocus_of_iso {B : Type*} [Category* B] (P : B ⥤ B)
 private theorem difference_iso_of_nilpotent {B : Type*} [Category* B]
     [Preadditive B] {M : B} [HasProduct (fun _ : ℕ ↦ M)]
     (a : End M) (ha : IsNilpotent a) :
-    IsIso (towerTransitionEndomorphism (K := fun _ : ℕ ↦ M) (fun _ ↦ a)) := by
-  let s : End (∏ᶜ fun _ : ℕ ↦ M) := towerProductShift (K := fun _ : ℕ ↦ M) (fun _ ↦ a)
-  have hs (r j : ℕ) : (s ^ r) ≫ Pi.π (fun _ : ℕ ↦ M) j =
-      Pi.π (fun _ : ℕ ↦ M) (j + r) ≫ a ^ r := by
+    IsIso (towerTransitionEndomorphism (K := fun _ : ℕ ↦ M) (fun _ ↦ a.asHom)) := by
+  let s : End (∏ᶜ fun _ : ℕ ↦ M) :=
+    .of (towerProductShift (K := fun _ : ℕ ↦ M) (fun _ ↦ a.asHom))
+  have hs (r j : ℕ) : (s ^ r).asHom ≫ Pi.π (fun _ : ℕ ↦ M) j =
+      Pi.π (fun _ : ℕ ↦ M) (j + r) ≫ (a ^ r).asHom := by
     induction r generalizing j with
     | zero => simp
     | succ r ih =>
-      rw [pow_succ, End.mul_def, Category.assoc, ih, ← Category.assoc]
+      rw [pow_succ, End.mul_asHom, Category.assoc, ih, ← Category.assoc]
       simp only [s, towerProductShift, Pi.lift_comp_π]
-      rw [Category.assoc, ← End.mul_def, ← pow_succ]
+      rw [Category.assoc, ← End.mul_asHom, ← pow_succ]
       simp only [Nat.add_assoc]
   obtain ⟨e, he⟩ := ha
   have hnil : IsNilpotent s := by
-    refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
-    rw [hs, he, comp_zero, zero_comp]
+    refine ⟨e, End.ext (Pi.hom_ext _ _ fun j ↦ ?_)⟩
+    simp only [hs, he, End.zero_asHom, comp_zero, zero_comp]
   exact (isUnit_iff_isIso (1 - s)).mp hnil.isUnit_one_sub
 
 private def endPower {B : Type*} [Category* B] {M : B} (a : End M) (n : ℕ) :
@@ -269,12 +271,12 @@ private theorem sectionMultiplication_pow {C : Type*} [SmallCategory C]
     (f : O.obj.obj (op U))
     (M : SheafOfModules ((localCoefficientRings O).over U))
     (n : ℕ) (V : (Over U)ᵒᵖ) (x : M.val.obj V) :
-    ((endPower (localSectionMultiplication O U f M) n).val.app V) x =
+    ((endPower (.of (localSectionMultiplication O U f M)) n).asHom.val.app V) x =
       (O.obj.map V.unop.hom.op f) ^ n • x := by
   induction n generalizing x with
   | zero => change x = _; simp
   | succ n ih =>
-    change ((endPower (localSectionMultiplication O U f M) n).val.app V)
+    change ((endPower (.of (localSectionMultiplication O U f M)) n).asHom.val.app V)
       ((localSectionMultiplication O U f M).val.app V x) = _
     rw [ih]
     change (O.obj.map V.unop.hom.op f) ^ n • ((O.obj.map V.unop.hom.op f) • x) = _

@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 import WeilConjectures.Topology.PresheafStalkTensor
 import Mathlib.Topology.Sheaves.Sheafify
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Stalk of a tensor product of modules on a ringed space

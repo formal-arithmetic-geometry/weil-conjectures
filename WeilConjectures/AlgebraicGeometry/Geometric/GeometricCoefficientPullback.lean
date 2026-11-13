@@ -154,7 +154,7 @@ private theorem ordinaryScalarMate_isIso [PreservesFiniteLimits uInv]
     {m n : ℕ} (h : n ≤ m) :
     IsIso ((mateEquiv (A.scalar h).ordinaryAdjunction
       (target.scalar h).ordinaryAdjunction).symm
-        (TwoSquare.mk _ _ _ _ (O.restrictionPullback h).hom)).natTrans := by
+        (TwoSquare.mk _ _ _ _ (O.restrictionPullback h).hom)) := by
   classical
   let S := A.scalar h
   let T := target.scalar h
@@ -162,7 +162,7 @@ private theorem ordinaryScalarMate_isIso [PreservesFiniteLimits uInv]
   let G := (O.inverseImage n).modules
   let δ := O.restrictionPullback h
   let a := ((mateEquiv S.ordinaryAdjunction T.ordinaryAdjunction).symm
-    (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δ.hom))
   obtain ⟨e, he⟩ :=
     SheafOfModules.ScalarIndependent.exists_scalarInverseImageIndependent
       uInv uPush adjSet (O.inverseImage m) (O.inverseImage n)
@@ -219,7 +219,7 @@ private theorem ordinaryScalarMate_isIso [PreservesFiniteLimits uInv]
       congrArg (fun f ↦ (O.inverseImage m).moduleUnderlying.hom.app M ≫ f) hh
   rw [show ((mateEquiv (A.scalar h).ordinaryAdjunction
     (target.scalar h).ordinaryAdjunction).symm
-      (TwoSquare.mk _ _ _ _ (O.restrictionPullback h).hom)).natTrans = a from rfl, ha]
+      (TwoSquare.mk _ _ _ _ (O.restrictionPullback h).hom)) = a from rfl, ha]
   infer_instance
 
 private theorem inverseImage_good [PreservesFiniteLimits uInv] (n : ℕ)
@@ -265,7 +265,7 @@ theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
       (TwoSquare.mk _ _ _ _
         ((Functor.mapDerivedCategoryCompIso _ _ ≪≫
           Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫
-            (Functor.mapDerivedCategoryCompIso _ _).symm).hom))).natTrans := by
+            (Functor.mapDerivedCategoryCompIso _ _).symm).hom))) := by
   classical
   let S := A.scalar h
   let T := target.scalar h
@@ -277,10 +277,10 @@ theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
   let δ := O.restrictionPullback h
   let δD := Functor.mapDerivedCategorySquareIso δ
   let a := ((mateEquiv S.ordinaryAdjunction T.ordinaryAdjunction).symm
-    (TwoSquare.mk _ _ _ _ δ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δ.hom))
   have ha : IsIso a := ordinaryScalarMate_isIso J B τ J' uInv uPush adjSet A O target h
   let aD := ((mateEquiv S.adjunction T.adjunction).symm
-    (TwoSquare.mk _ _ _ _ δD.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ δD.hom))
   have hrep (P : CochainComplex (Mod.{c, v, max c v r} J (B m)) ℤ)
       (hP : P.IsKFlatIndependentCoefficients)
       (hp : CochainComplex.IsKFlatIndependentCoefficients (R := O.coefficients m)

@@ -105,7 +105,7 @@ noncomputable def boundedConstructibleLowerShriekIntegersModPowReductionSquare (
 
 instance isIso_boundedConstructibleLowerShriekIntegersModPowReductionSquare (p : X ⟶ Y)
     [IsProper p.left] :
-    IsIso (boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p).natTrans :=
+    IsIso (boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p) :=
   have := isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible ℓ E n p
     (integersModPowPullUnitCompatible ℓ E n p.left) (integersModPowPullδCompatible ℓ E n p.left)
   inferInstanceAs (IsIso (inv _ ≫ _))
@@ -122,7 +122,7 @@ noncomputable def finiteEtaleReadingLowerShriekSquare (p : X ⟶ Y) [IsProper p.
   TwoSquare.mk _ _ _ _ (finiteEtaleReadingLowerShriekIso ℓ E n p).inv
 
 instance isIso_finiteEtaleReadingLowerShriekSquare (p : X ⟶ Y) [IsProper p.left] :
-    IsIso (finiteEtaleReadingLowerShriekSquare ℓ E n p).natTrans :=
+    IsIso (finiteEtaleReadingLowerShriekSquare ℓ E n p) :=
   inferInstanceAs (IsIso (Iso.inv _))
 
 /-- Blueprint `det-prop-scalar-six-compact-support` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
@@ -140,7 +140,7 @@ noncomputable def etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
     (boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p)
     (finiteEtaleReadingLowerShriekSquare ℓ E n p)
   (asIso ((boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p).hComp
-    (finiteEtaleReadingLowerShriekSquare ℓ E n p)).natTrans).symm
+    (finiteEtaleReadingLowerShriekSquare ℓ E n p))).symm
 
 /-- Blueprint `det-prop-scalar-six-exceptional` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on
 the étale site, for a proper `p`: the transpose
@@ -167,10 +167,10 @@ theorem isIso_mateEquiv_etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.l
     (asIso (boundedConstructibleLowerStarIntegersModPowReduction ℓ E n p)) rfl
   rw [mateEquiv_ofNatIsoLeft] at hB
   have : IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
-      adjH' (boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p)).natTrans :=
+      adjH' (boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p)) :=
     hB
   have : IsIso (mateEquiv adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left)
-      (finiteEtaleReadingLowerShriekSquare ℓ E n p)).natTrans :=
+      (finiteEtaleReadingLowerShriekSquare ℓ E n p)) :=
     hγC
   exact isIso_mateEquiv_hComp (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)
     adjH' (Etale.rightDerivedUpperShriekAdjunction _ p.left)

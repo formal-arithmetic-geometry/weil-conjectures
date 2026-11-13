@@ -35,7 +35,7 @@ private def starPostIso (X : C) :
   NatIso.ofComponents
     (fun Y ↦ Over.isoMk (asIso (prodComparison G X Y)) (by
       simp only [Functor.comp_obj, Over.star_obj_hom, asIso_hom,
-        prod.lift_fst, prodComparison_fst]
+        prodComparison_fst]
       change G.map prod.fst = G.map (prod.lift prod.fst (𝟙 _) ≫ prod.fst)
       rw [prod.lift_fst]))
     (by

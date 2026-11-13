@@ -126,7 +126,7 @@ lemma cyclesBaseChangeMap_lTensor_toCycles (y : B ⊗[A] S.X₁) :
         congr($((S.baseChange B).zero).hom x)) y := by
   refine Subtype.ext ?_
   rw [coe_cyclesBaseChangeMap, ← LinearMap.comp_apply, ← LinearMap.lTensor_comp,
-    LinearMap.codRestrict_apply, LinearMap.baseChange_eq_ltensor]
+    LinearMap.codRestrict_apply, LinearMap.baseChange_eq_lTensor]
   rfl
 
 /-- **Criterion for the base change map to be bijective.** If tensoring with `B` preserves the
@@ -141,7 +141,7 @@ theorem bijective_homologyBaseChangeAux_of_exact
     rw [← coe_cyclesBaseChangeMap, ← coe_cyclesBaseChangeMap, h]
   have hj' (y : S.cyclesBaseChange B) : ∃ x, S.cyclesBaseChangeMap B x = y := by
     have hy : S.g.hom.lTensor B (y : B ⊗[A] S.X₂) = 0 := by
-      rw [← LinearMap.baseChange_eq_ltensor]
+      rw [← LinearMap.baseChange_eq_lTensor]
       exact y.2
     obtain ⟨x, hx⟩ := (hex _).1 hy
     exact ⟨x, Subtype.ext ((coe_cyclesBaseChangeMap _ _ _).trans hx)⟩

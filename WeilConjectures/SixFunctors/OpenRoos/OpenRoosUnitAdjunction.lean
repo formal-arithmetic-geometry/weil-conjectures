@@ -403,7 +403,7 @@ private theorem smallPrincipalHom
     (P : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (μ : End P)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x =
+      (μ.asHom.f q).val.app U x =
         @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x)
     (L : DerivedCategory.{w} (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))
@@ -416,7 +416,7 @@ private theorem smallPrincipalHom
   let : HasBinaryBiproducts (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) := inferInstance
   have hD := ringedKoszulCompletionReflector R 1 (fun _ ↦ a)
-    (image (ringedKoszulScalar R a)) (image.ι (ringedKoszulScalar R a))
+    (image (ringedKoszulScalar R a).asHom) (image.ι (ringedKoszulScalar R a).asHom)
     (principal_generators R a)
   let D := hD.choose
   have hb := hD.choose_spec.2.1
@@ -440,15 +440,13 @@ private theorem smallPrincipalHom
     (by simpa only [Functor.id_map, Iso.refl_hom, Category.id_comp] using he)
     (hb _ L ((principalLocallyComplete_iff R a L).mp hL))
 
-set_option maxHeartbeats 1000000 in
--- On the rebased imports this proof needs more than the default heartbeat limit.
 private theorem principalHom (T : Scheme.{t})
     (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
     (hσ : ∀ {U V : T.ProEtᵒᵖ} (f : U ⟶ V),
       (completedIntegralCoefficientSheafUnrestricted l E T).obj.map f (σ U) = σ V)
     (P : IntegralOnSlice.Cx l E T none) (μ : End P)
     (hμ : ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x = σ U • x)
+      (μ.asHom.f q).val.app U x = σ U • x)
     (L : IntegralOnSlice.D l E T none)
     (hL : IntegralPrincipalCone.locallyComplete l E T σ L) :
     Function.Bijective (fun f : DerivedCategory.Q.obj
@@ -531,10 +529,10 @@ private theorem principalHom (T : Scheme.{t})
     HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) H.asEquivalence
   let a' := NativeRestriction.restrictedSection.{max u (t + 1), t + 1,
     max u (t + 1), t, u} (K := Js) F R a
-  let μ' := End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)
+  let μ' := End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)
   have hμ' (q : ℤ) (U : (AsSmall.{max u (t + 1)} T.ProEt)ᵒᵖ)
       (x : (((H.mapHomologicalComplex (.up ℤ)).obj P).X q).val.obj U) :
-      (μ'.f q).val.app U x = a'.val U • x := hμ q (F.op.obj U) x
+      (μ'.asHom.f q).val.app U x = a'.val U • x := hμ q (F.op.obj U) x
   have hComparison := CochainComplex.principalCompletionMap H μ
   let c := hComparison.choose
   have hc := hComparison.choose_spec

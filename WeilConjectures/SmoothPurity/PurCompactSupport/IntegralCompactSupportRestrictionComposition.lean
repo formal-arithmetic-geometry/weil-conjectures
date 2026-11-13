@@ -46,10 +46,10 @@ theorem mateEquiv_symm_app_vcomp (cG : G₁ ⋙ G₂ ≅ G₁₂) (cH : H₁ ⋙
     (β₁ : R₁ ⋙ G₁ ⟶ H₁ ⋙ R₂) (β₂ : R₂ ⋙ G₂ ⟶ H₂ ⋙ R₃) (β₁₂ : R₁ ⋙ G₁₂ ⟶ H₁₂ ⋙ R₃)
     (hβ : ∀ b : B, β₁₂.app b = cG.inv.app (R₁.obj b) ≫ G₂.map (β₁.app b) ≫
       β₂.app (H₁.obj b) ≫ R₃.map (cH.hom.app b)) (a : A) :
-    ((mateEquiv adj₁ adj₃).symm (TwoSquare.mk _ _ _ _ β₁₂)).natTrans.app a =
+    ((mateEquiv adj₁ adj₃).symm (TwoSquare.mk _ _ _ _ β₁₂)).app a =
       L₃.map (cG.inv.app a) ≫
-        ((mateEquiv adj₂ adj₃).symm (TwoSquare.mk _ _ _ _ β₂)).natTrans.app (G₁.obj a) ≫
-        H₂.map (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ β₁)).natTrans.app a) ≫
+        ((mateEquiv adj₂ adj₃).symm (TwoSquare.mk _ _ _ _ β₂)).app (G₁.obj a) ≫
+        H₂.map (((mateEquiv adj₁ adj₂).symm (TwoSquare.mk _ _ _ _ β₁)).app a) ≫
         cH.hom.app (L₁.obj a) := by
   apply (adj₃.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
@@ -57,7 +57,7 @@ theorem mateEquiv_symm_app_vcomp (cG : G₁ ⋙ G₂ ≅ G₁₂) (cH : H₁ ⋙
   have h₂ := unit_mateEquiv_symm adj₂ adj₃ (TwoSquare.mk _ _ _ _ β₂) (G₁.obj a)
   have h₁ := unit_mateEquiv_symm adj₁ adj₂ (TwoSquare.mk _ _ _ _ β₁) a
   dsimp only [TwoSquare.mk, Functor.id_obj] at h₁₂ h₂ h₁
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   rw [← h₁₂, hβ]
   simp only [Functor.map_comp]
   rw [adj₃.unit_naturality_assoc]
@@ -91,11 +91,11 @@ theorem mateEquiv_symm_app_comp_leftAdjointUniq
     (ra : RaX ⋙ FR ⟶ FS ⋙ RaY) (rb : RbX ⋙ FS ⟶ FT ⋙ RbY) (rd : RdX ⋙ FR ⟶ FT ⋙ RdY)
     (h : ∀ N : CTX, rd.app N = FR.map (κX.inv.app N) ≫ ra.app (RbX.obj N) ≫
       RaY.map (rb.app N) ≫ κY.hom.app (FT.obj N)) (M : CRX) :
-    EbY.map (((mateEquiv aX aY).symm (TwoSquare.mk _ _ _ _ ra)).natTrans.app M) ≫
-      ((mateEquiv bX bY).symm (TwoSquare.mk _ _ _ _ rb)).natTrans.app (EaX.obj M) ≫
+    EbY.map (((mateEquiv aX aY).symm (TwoSquare.mk _ _ _ _ ra)).app M) ≫
+      ((mateEquiv bX bY).symm (TwoSquare.mk _ _ _ _ rb)).app (EaX.obj M) ≫
       FT.map ((((aX.comp bX).ofNatIsoRight κX).leftAdjointUniq dX).hom.app M) =
     (((aY.comp bY).ofNatIsoRight κY).leftAdjointUniq dY).hom.app (FR.obj M) ≫
-      ((mateEquiv dX dY).symm (TwoSquare.mk _ _ _ _ rd)).natTrans.app M := by
+      ((mateEquiv dX dY).symm (TwoSquare.mk _ _ _ _ rd)).app M := by
   let tc := ((aX.comp bX).ofNatIsoRight κX).leftAdjointUniq dX
   have key : aX.unit.app M ≫ RaX.map (bX.unit.app (EaX.obj M) ≫ RbX.map (tc.hom.app M)) =
       dX.unit.app M ≫ κX.inv.app (EdX.obj M) := by
@@ -115,7 +115,7 @@ theorem mateEquiv_symm_app_comp_leftAdjointUniq
   have ha := unit_mateEquiv_symm aX aY (TwoSquare.mk _ _ _ _ ra) M
   have hb := unit_mateEquiv_symm bX bY (TwoSquare.mk _ _ _ _ rb) (EaX.obj M)
   dsimp only [TwoSquare.mk, Functor.id_obj] at hd ha hb
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   rw [← hd, h]
   simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app,
     Adjunction.comp_unit_app, Category.assoc]
@@ -247,13 +247,13 @@ private theorem pullbackInv_eq_mate {U V : Scheme.{u}} (g : U ⟶ V)
       ((mateEquiv (proEtaleRingModuleAdjunction g SV SU cS)
         (proEtaleRingModuleAdjunction g RV RU cR)).symm
           (TwoSquare.mk _ _ _ _
-            (proEtaleRingRestrictionDirectImage g RV SV RU SU aV aU cR cS comm).hom)).natTrans := by
+            (proEtaleRingRestrictionDirectImage g RV SV RU SU aV aU cR cS comm).hom)) := by
   ext M : 2
   simp only [mateEquiv_symm_apply, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.comp_obj, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
     Category.id_comp]
-  dsimp only [TwoSquare.natTrans, Functor.comp_map]
+  dsimp only [Functor.comp_map]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 

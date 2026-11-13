@@ -61,15 +61,15 @@ abbrev ring := adicDatumRing X (intrinsicPresentationDatum d)
 Source: projection-formula equivariance
 (blueprint: def-wf-tensor-unit-square-data). -/
 def coefficientIso :
-    (proEtaleSheafInverseImage e.hom CommRingCat.{u + 1}).obj (ring X d) ≅ ring X d :=
-  (proEtaleSheafInverseImage e.hom CommRingCat.{u + 1}).mapIso
+    (proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}).obj (ring X d) ≅ ring X d :=
+  (proEtaleSheafInverseImage e.asIso.hom CommRingCat.{u + 1}).mapIso
       (pbcCompletedComparison X d) ≪≫
-    asIso (completedCoefficientMap e.hom d) ≪≫ (pbcCompletedComparison X d).symm
+    asIso (completedCoefficientMap e.asIso.hom d) ≪≫ (pbcCompletedComparison X d).symm
 
 /-- Exact module transport with this coefficient identification.
 Source: projection-formula equivariance
 (blueprint: def-wf-tensor-unit-square-data). -/
-abbrev transport := proEtaleRingModulePullback e.hom (ring X d) (ring X d)
+abbrev transport := proEtaleRingModulePullback e.asIso.hom (ring X d) (ring X d)
   (coefficientIso X d e)
 
 /-- The termwise transport functor.
@@ -92,7 +92,7 @@ Source: projection-formula equivariance
 def alpha (U V : CochainComplex (adicDatumModules X (intrinsicPresentationDatum d)) ℤ) :
     (complexes X d e).obj (tensor X d U V) ≅
       tensor X d ((complexes X d e).obj U) ((complexes X d e).obj V) :=
-  (proEtaleTensorPullbackTotalIso e.hom (ring X d) (ring X d)
+  (proEtaleTensorPullbackTotalIso e.asIso.hom (ring X d) (ring X d)
     (coefficientIso X d e) U V).symm
 
 attribute [local irreducible] tensor alpha
@@ -162,7 +162,7 @@ def beta (k : constants X d ⋙ transport X d e ≅ constants X d)
   let a : (complexes X d e).obj (tensor X d U V) ⟶
       tensor X d ((complexes X d e).obj U) ((complexes X d e).obj V) :=
     (alpha X d e U V).hom
-  exact (proEtaleTensorPullbackTotalIso e.hom (ring X d) (ring X d)
+  exact (proEtaleTensorPullbackTotalIso e.asIso.hom (ring X d) (ring X d)
       (coefficientIso X d e) (tensor X d U V) (koszul X d p m)).inv ≫
     HomologicalComplex.mapBifunctorMap a q (proEtaleOrdinaryTensor X (ring X d)) (.up ℤ)
 
@@ -170,8 +170,8 @@ def beta (k : constants X d ⋙ transport X d e ≅ constants X d)
 Source: projection-formula equivariance
 (blueprint: def-wf-tensor-unit-square-data). -/
 abbrev ordinary (M N : PbcBoundedConstructibleComplete X d) :=
-  (proEtaleCanonicalTensorComparison e.hom (pbcAdicCompletion X d)
-    (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.hom d))
+  (proEtaleCanonicalTensorComparison e.asIso.hom (pbcAdicCompletion X d)
+    (pbcAdicCompletion X d) (asIso (completedCoefficientMap e.asIso.hom d))
     (wfTensorModel X d) (wfTensorModel X d)).app (M.obj, N.obj)
 
 /-- Its specified completed comparison before restricting to the complete subcategory.
@@ -189,13 +189,13 @@ Source: projection-formula equivariance
 (blueprint: def-wf-tensor-unit-square-data). -/
 def DerivedSquare (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (M N : PbcBoundedConstructibleComplete X d) : Prop :=
-  (pbcIsoAmbientPullback e.hom d).map
+  (pbcIsoAmbientPullback e.asIso.hom d).map
       (wfCompletionUnit X d 1 (fun _ ↦ p) hp
         ((wfOrdinaryDerivedTensor X d).obj (M.obj, N.obj))) ≫
       (completed X d e p hp M N).hom =
     (ordinary X d e M N).hom ≫ wfCompletionUnit X d 1 (fun _ ↦ p) hp
       ((wfOrdinaryDerivedTensor X d).obj
-        ((pbcIsoAmbientPullback e.hom d).obj M.obj,
-          (pbcIsoAmbientPullback e.hom d).obj N.obj))
+        ((pbcIsoAmbientPullback e.asIso.hom d).obj M.obj,
+          (pbcIsoAmbientPullback e.asIso.hom d).obj N.obj))
 
 end WeilConjectures.WfTensorUnitSquare

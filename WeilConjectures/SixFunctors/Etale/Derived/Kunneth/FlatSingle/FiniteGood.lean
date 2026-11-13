@@ -97,7 +97,6 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
     NatIso.isIso_map_iff (rightDerivedLowerStarIdIso Λ X')]
   exact Iff.rfl
 
-set_option maxHeartbeats 0 in
 -- the derived-category computation unfolds large terms
 /-- The Künneth map `Rπ'_* Λ ⊗ᴸ Rh_* K ⟶ Rc_* (Lhᵢ^* Λ ⊗ᴸ Lρ^* K)` of a commutative square
 `hᵢ ≫ π' = ρ ≫ h = c` with `π'` proper is an isomorphism if the derived base change map

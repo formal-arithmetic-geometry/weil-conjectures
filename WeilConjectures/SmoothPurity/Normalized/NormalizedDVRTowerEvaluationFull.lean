@@ -20,6 +20,7 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import Mathlib.CategoryTheory.Limits.EssentiallySmall
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf

@@ -123,7 +123,7 @@ theorem ideal_power_affine_denominator_map
       s ∈ Set.range ((a n).app W) ↔
         ∀ (W' : X.Opens) (h : W' ≤ W)
           (b : Γ((idealSheafPower ι n).1, W')),
-          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).hom
+          (F.smul (U := W') ((idealSheafPower ι n).2.val.app (op W') b)).asHom.hom
             (F.presheaf.map (homOfLE h).op s) = 0)
     (hquot : ∀ (n : ℕ) (W : X.Opens), W ≤ U →
       Function.Bijective ((cokernel.π (a n)).app W))
@@ -137,7 +137,7 @@ theorem ideal_power_affine_denominator_map
           f b = K.mkQ x →
           (cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWV).op x) =
             ((cokernel (a n)).smul (U := W) ((idealSheafPower ι n).2.val.app (op W)
-              (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).hom
+              (((idealSheafPower ι n).1).presheaf.map (homOfLE hWV).op b))).asHom.hom
               ((cokernel.π (a n)).app W (F.presheaf.map (homOfLE hWU).op s)) := by
   classical
   have _ := hmono

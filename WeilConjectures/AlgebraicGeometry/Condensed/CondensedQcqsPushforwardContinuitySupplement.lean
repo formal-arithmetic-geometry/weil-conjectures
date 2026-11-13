@@ -211,7 +211,6 @@ private theorem isIso_of_weaklyContractible_sections (X : Scheme.{u})
   apply (Sheaf.isLocallyBijective_iff_isIso f).1
   exact ⟨(Sheaf.isLocallyInjective_iff_injective f).2 hinj, hsurj⟩
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 set_option backward.isDefEq.respectTransparency false in

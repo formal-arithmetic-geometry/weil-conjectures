@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage

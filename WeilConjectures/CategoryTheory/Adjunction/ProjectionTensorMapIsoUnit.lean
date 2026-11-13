@@ -77,21 +77,21 @@ theorem isIso_map_map_projectionTensorMap_of_isIso
       Gb.map (φ ▷ N'') ≫ δb N' N'' = δb N N'' ≫ Gb.map φ ▷ Gb.obj N'')
     (κ : ∀ N : Cy, Ga.obj (F.obj N) ⟶ F'.obj (Gb.obj N)) [∀ N, IsIso (κ N)]
     (Ex : L ⋙ Gb ⟶ Ga ⋙ L') [IsIso Ex] (ξ : TwoSquare Ga L L' Gb)
-    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.natTrans.app M = 𝟙 _)
+    (hExξ : ∀ M : Cx, Ex.app M ≫ ξ.app M = 𝟙 _)
     (hEx : ∀ (M : Cx) (N : Cy), Gb.map (π M N) ≫ Ex.app (M ⊗ F.obj N) ≫
       L'.map (δa M (F.obj N)) ≫ L'.map (Ga.obj M ◁ κ N) =
         δb (L.obj M) N ≫ Ex.app M ▷ Gb.obj N ≫ π' (Ga.obj M) (Gb.obj N))
-    (M N : Cy) [IsIso ((mateEquiv adj adj' ξ).natTrans.app M)]
-    [IsIso ((mateEquiv adj adj' ξ).natTrans.app (M ⊗ N))] (H : Cx' ⥤ E)
+    (M N : Cy) [IsIso ((mateEquiv adj adj' ξ).app M)]
+    [IsIso ((mateEquiv adj adj' ξ).app (M ⊗ N))] (H : Cx' ⥤ E)
     (h : IsIso (H.map (adj'.projectionTensorMap π' (Gb.obj M) (Gb.obj N)))) :
     IsIso (H.map (Ga.map (adj.projectionTensorMap π M N))) := by
   have key := projectionTensorMap_mateEquiv adj adj' π π' hπ' δa δb hδb κ Ex ξ hExξ hEx M N
   have : IsIso (H.map (Ga.map (adj.projectionTensorMap π M N) ≫
-      (mateEquiv adj adj' ξ).natTrans.app (M ⊗ N) ≫ R'.map (δb M N))) := by
+      (mateEquiv adj adj' ξ).app (M ⊗ N) ≫ R'.map (δb M N))) := by
     rw [key, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   rw [Functor.map_comp] at this
-  exact IsIso.of_isIso_comp_right _ (H.map ((mateEquiv adj adj' ξ).natTrans.app (M ⊗ N) ≫
+  exact IsIso.of_isIso_comp_right _ (H.map ((mateEquiv adj adj' ξ).app (M ⊗ N) ≫
     R'.map (δb M N)))
 
 end BaseChange

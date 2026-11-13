@@ -415,7 +415,6 @@ private theorem moduleForget_apply (A : Type (u + 1)) [CommRing A]
     ((forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}).map f) x = f x := by
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Compare the terminal generators in the two sheafification presentations.
 private theorem integerComparisonGenerator (T : Scheme.{u}) (x : ULift.{u + 1} ℤ) :
     ((integerComparison T).hom.hom.app (op (Scheme.ProEt.mk (𝟙 T))))

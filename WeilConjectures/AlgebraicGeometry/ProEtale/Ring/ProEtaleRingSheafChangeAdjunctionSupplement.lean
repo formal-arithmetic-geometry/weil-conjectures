@@ -238,7 +238,7 @@ private theorem homotopy_mate
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (L ⋙ H)) (.up ℤ)).inv))).app K =
       (Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app K ≫
         (NatTrans.mapHomotopyCategory
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K ≫
         (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app K := by
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
   simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app, Functor.comp_obj,
@@ -305,7 +305,7 @@ private theorem derived_mate_factorsh
       DerivedCategory.Qh.map
         ((Functor.mapHomotopyCategoryCompIso (Iso.refl (R ⋙ G)) (.up ℤ)).hom.app K ≫
           (NatTrans.mapHomotopyCategory
-            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K ≫
+            (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K ≫
           (Functor.mapHomotopyCategoryCompIso (Iso.refl (H ⋙ R')) (.up ℤ)).inv.app K) ≫
       R'.rightDerivedFunctorUnit.app ((H.mapHomotopyCategory (.up ℤ)).obj K) := by
   rw [← homotopy_mate adj adj' s K]
@@ -415,7 +415,7 @@ private theorem derived_mate_factors
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K) ≫
       chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
   have hf := derived_mate_factorsh adj adj' s ((HomotopyCategory.quotient _ _).obj K)
   have hG := G.mapDerivedCategoryFactorsh_hom_app
@@ -429,10 +429,10 @@ private theorem derived_mate_factors
       ((HomotopyCategory.quotient _ _).obj K) = 𝟙 _ := rfl
   have hτ : DerivedCategory.Qh.map
       ((NatTrans.mapHomotopyCategory
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app
           ((HomotopyCategory.quotient _ _).obj K)) =
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) := rfl
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K) := rfl
   simp only [Functor.mapDerivedCategoryFactorsh_hom_app, hq, hq', hτ,
     chainDerivedUnit, quotient_hom_id, quotient_inv_id, homotopyFactors_inv_id,
     CategoryTheory.Functor.map_comp, Category.assoc] at hf ⊢
@@ -505,7 +505,7 @@ private theorem mate_adjunct
   have hu := unit_mateEquiv adj adj' s M
   dsimp only [Functor.id_obj] at hu
   rw [← Category.assoc, ← hu, Category.assoc]
-  have hn := (mateEquiv adj adj' s).natTrans.naturality t
+  have hn := (mateEquiv adj adj' s).naturality t
   dsimp only [Functor.comp_map] at hn
   rw [← hn, ← Category.assoc, ← G.map_comp]
 
@@ -747,7 +747,7 @@ private theorem restrictionPullback_mate :
     (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
       (proEtaleRingModuleAdjunction f RV RU cR)
       (TwoSquare.mk _ _ _ _
-        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm))).natTrans =
+        (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm))) =
       (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm).hom := by
   change (mateEquiv (proEtaleRingModuleAdjunction f SV SU cS)
     (proEtaleRingModuleAdjunction f RV RU cR))
@@ -756,15 +756,14 @@ private theorem restrictionPullback_mate :
       TwoSquare.mk _ _ _ _
         (proEtaleRingRestrictionDirectImage f RV SV RU SU aV aU cR cS comm).hom
   rw [← Equiv.eq_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   simp only [mateEquiv_symm_apply, proEtaleRingRestrictionPullbackInv,
     proEtaleRingRestrictionPullbackApp, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_map,
     Category.id_comp]
   simp only [TwoSquare.mk, CategoryTheory.Functor.map_id]
-  dsimp only [TwoSquare.natTrans, Functor.comp_obj]
+  dsimp only [Functor.comp_obj]
   simp only [Category.id_comp]
   exact congrArg (fun h ↦ _ ≫ _ ≫ h) (Category.comp_id _).symm
 
@@ -1012,7 +1011,7 @@ set_option backward.isDefEq.respectTransparency.types false in
   (mateEquiv (proEtaleRingDerivedAdjunction f SV SU cS)
     (proEtaleRingDerivedAdjunction f RV RU cR)
     (TwoSquare.mk _ _ _ _
-      (proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm).inv)).natTrans
+      (proEtaleRingRestrictionDerivedPullback f RV SV RU SU aV aU cR cS comm).inv))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

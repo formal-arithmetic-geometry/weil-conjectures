@@ -41,7 +41,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 open DiagonalCoefficients CondensedRing
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The given rational coefficient, with the finite-subextension convention for the closure.
 Source: blueprint coefficient setting (blueprint: def-sfb-rational-tate-pullback-comparison). -/
@@ -51,7 +50,6 @@ def coefficient (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermedi
   | some E => Mon.mk (Profinite.continuousMapRingObj E.1)
   | none => Mon.mk (Profinite.padicAlgClRingObj l)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The chosen coefficient ring is commutative. Source: blueprint coefficient convention
 (blueprint: def-sfb-rational-tate-pullback-comparison).
@@ -77,7 +75,6 @@ def line (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateFiel
   | some E => spRationalTwist X l E
   | none => spQbarTwist X l
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- Select the preceding coefficient diagram, retaining its fixed class and traces.
 Source: blueprint preceding coefficient theorem
@@ -89,7 +86,6 @@ def diagram (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateF
   | some E => family.rational E
   | none => family.closure
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The unique linear lift of the prescribed abelian adjunct. Source: blueprint
 Cartesian Tate comparison (blueprint: def-sfb-rational-tate-pullback-comparison).
@@ -150,7 +146,6 @@ theorem linePull_existsUnique
   apply Mod.hom_ext
   exact (eq_of_heq he').trans hn.symm
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The determined linear lift; its data are fixed by the displayed adjunct equation.
 Source: blueprint Cartesian Tate comparison
@@ -163,7 +158,6 @@ def linePullIso
     (h : SpInternalCartesian f Λ LS LX τ) : (CondensedRing.upperStar Λ f).obj LS ≅ LX :=
   (linePull_existsUnique Λ f LS LX τ h).exists.choose
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The existing normalized adic comparison. Its root, scalar and coprojection
 normalizations determine the maps used here. Source: blueprint Cartesian coefficients
@@ -173,7 +167,6 @@ def adicComparison (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : S, Invertible (l : S.residueField x)] : CartesianAdicComparison l f :=
   Classical.choice (((cartesianCoefficients l f).2.1 inferInstance inferInstance).2.2)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The linear rational or closure comparison with its prescribed abelian adjunct.
 Source: blueprint Cartesian coefficients
@@ -189,7 +182,6 @@ def lineComparison (l : ℕ) [Fact l.Prime]
   | none => linePullIso _ f _ _ (adicComparison l f).qbar
       (adicComparison l f).qbar_cartesian
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The canonical shifted derived comparison, with no new line isomorphism.
 Source: blueprint unit/counit proof step 10
@@ -215,7 +207,6 @@ namespace AlgebraicGeometry.ProEtale.RationalP1
 open CategoryTheory CategoryTheory.Limits DiagonalCoefficients
 open scoped CategoryTheory.Obj
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The coefficient prime remains a unit in every residue field over the given field.
 Source: blueprint unit/counit, positive characteristic convention
@@ -231,7 +222,6 @@ theorem residueIsUnit (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
       (Fact.out : l.Prime)).1 h))
   simpa only [map_natCast] using hl.map (a.residueFieldAlgebraMap x)
 
-set_option maxHeartbeats 800000 in
 -- Keep fixed site and derived comparisons folded during elaboration.
 /-- The specified shifted Tate comparison for the second projective projection.
 Source: blueprint unit/counit proof step 10

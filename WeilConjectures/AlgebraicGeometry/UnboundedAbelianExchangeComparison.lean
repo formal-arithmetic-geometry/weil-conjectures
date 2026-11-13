@@ -438,9 +438,9 @@ private lemma mate_eq_of_unit
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
     {G : C ⥤ E} {H : D ⥤ F} (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' H) (τ : R ⋙ G ⟶ H ⋙ R')
-    (hu : ∀ M : C, adj'.unit.app (G.obj M) ≫ R'.map (σ.natTrans.app M) =
+    (hu : ∀ M : C, adj'.unit.app (G.obj M) ≫ R'.map (σ.app M) =
       G.map (adj.unit.app M) ≫ τ.app (L.obj M)) :
-    (mateEquiv adj adj' σ).natTrans = τ := by
+    (mateEquiv adj adj' σ) = τ := by
   apply NatTrans.ext
   funext N
   simp only [mateEquiv_apply, NatTrans.comp_app,
@@ -449,7 +449,7 @@ private lemma mate_eq_of_unit
     Functor.comp_map, Category.id_comp]
   erw [Category.id_comp, Category.id_comp, Category.comp_id]
   change adj'.unit.app (G.obj (R.obj N)) ≫
-      R'.map (σ.natTrans.app (R.obj N)) ≫
+      R'.map (σ.app (R.obj N)) ≫
         R'.map (H.map (adj.counit.app N)) = τ.app N
   rw [← Category.assoc]
   rw [hu, Category.assoc]
@@ -483,11 +483,11 @@ omit [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] in
 private lemma homotopy_mate_app (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G') (K : HomotopyCategory C₁ (.up ℤ)) :
-    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K =
+    (NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K =
       (adj'.mapHomotopyCategory (.up ℤ)).unit.app
           ((G.mapHomotopyCategory (.up ℤ)).obj ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
-          ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app
+          ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app
             ((R.mapHomotopyCategory (.up ℤ)).obj K)) ≫
         (R'.mapHomotopyCategory (.up ℤ)).map
           ((G'.mapHomotopyCategory (.up ℤ)).map
@@ -516,28 +516,28 @@ private lemma derived_mate_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
     (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory
       G'.mapDerivedCategory)
     (hθ : ∀ N : HomotopyCategory C₂ (.up ℤ),
-      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+      θ.app (DerivedCategory.Qh.obj N) ≫
           G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
           G'.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
         L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
           L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N))
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N))
     (K : HomotopyCategory C₁ (.up ℤ)) :
     G.mapDerivedCategory.map (R.rightDerivedFunctorUnit.app K) ≫
         (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app
           (DerivedCategory.Qh.obj K) =
       G.mapDerivedCategoryFactorsh.hom.app ((R.mapHomotopyCategory (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
-          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ).natTrans (.up ℤ)).app K) ≫
+          ((NatTrans.mapHomotopyCategory (mateEquiv adj adj' σ) (.up ℤ)).app K) ≫
         R'.rightDerivedFunctorUnit.app ((G'.mapHomotopyCategory (.up ℤ)).obj K) ≫
         R'.rightDerivedFunctor.map (G'.mapDerivedCategoryFactorsh.inv.app K) := by
   have hmate : ∀ (Z : DerivedCategory C₁),
       (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-          adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans.app Z =
+          adj'.mapDerivedCategoryRightDerivedAdjunction θ).app Z =
         adj'.mapDerivedCategoryRightDerivedAdjunction.unit.app
             (G.mapDerivedCategory.obj (R.rightDerivedFunctor.obj Z)) ≫
-          R'.rightDerivedFunctor.map (θ.natTrans.app (R.rightDerivedFunctor.obj Z)) ≫
+          R'.rightDerivedFunctor.map (θ.app (R.rightDerivedFunctor.obj Z)) ≫
           R'.rightDerivedFunctor.map (G'.mapDerivedCategory.map
             (adj.mapDerivedCategoryRightDerivedAdjunction.counit.app Z)) := fun Z => by
     simp [mateEquiv_apply]
@@ -545,7 +545,7 @@ private lemma derived_mate_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
   set u := R.rightDerivedFunctorUnit.app K
   have h₁ := adj'.mapDerivedCategoryRightDerivedAdjunction.unit.naturality
     (G.mapDerivedCategory.map u)
-  have h₂ := θ.natTrans.naturality u
+  have h₂ := θ.naturality u
   have h₃ := (adj.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
     (HomotopyCategory.quasiIso C₁ (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
     R.rightDerivedFunctorUnit K
@@ -554,7 +554,7 @@ private lemma derived_mate_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
     _ at h₃
   have h₄ := homotopy_mate_app adj adj' σ K
   have h₅ := R'.rightDerivedFunctorUnit.naturality
-    ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N ≫
+    ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N ≫
       (G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K))
   have h₆ := (adj'.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
     (HomotopyCategory.quasiIso C₄ (.up ℤ)) L'.mapDerivedCategoryFactorsh.hom
@@ -575,12 +575,12 @@ private lemma derived_mate_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
   erw [Functor.map_comp DerivedCategory.Qh, Category.assoc, reassoc_of% h₅]
   erw [← reassoc_of% h₆, reassoc_of% h₇]
   congr 1
-  have key : θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+  have key : θ.app (DerivedCategory.Qh.obj N) ≫
       G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N ≫
         DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) =
       L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
         L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N) ≫
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N) ≫
         DerivedCategory.Qh.map
           ((G'.mapHomotopyCategory (.up ℤ)).map ((adj.mapHomotopyCategory (.up ℤ)).counit.app K)) ≫
         G'.mapDerivedCategoryFactorsh.inv.app K := by
@@ -597,22 +597,22 @@ private lemma derived_mate_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R')
     (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory
       G'.mapDerivedCategory)
     (hθ : ∀ N : HomotopyCategory C₂ (.up ℤ),
-      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+      θ.app (DerivedCategory.Qh.obj N) ≫
           G'.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app N) ≫
           G'.mapDerivedCategoryFactorsh.hom.app ((L.mapHomotopyCategory (.up ℤ)).obj N) =
         L'.mapDerivedCategory.map (G.mapDerivedCategoryFactorsh.hom.app N) ≫
           L'.mapDerivedCategoryFactorsh.hom.app ((G.mapHomotopyCategory (.up ℤ)).obj N) ≫
-          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N)) :
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ (.up ℤ)).app N)) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
-      adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans =
-        derivedSquare (mateEquiv adj adj' σ).natTrans := by
+      adj'.mapDerivedCategoryRightDerivedAdjunction θ) =
+        derivedSquare (mateEquiv adj adj' σ) := by
   apply Functor.rightDerived_ext (R.rightDerivedFunctor ⋙ G.mapDerivedCategory)
     (Functor.whiskerRight R.rightDerivedFunctorUnit G.mapDerivedCategory ≫
       (Functor.associator _ _ _).hom) (HomotopyCategory.quasiIso C₁ (.up ℤ))
   apply NatTrans.ext
   funext K
   have hn := derived_mate_app_fac adj adj' σ θ hθ K
-  have hd := congr_app (derivedSquare_fac (mateEquiv adj adj' σ).natTrans) K
+  have hd := congr_app (derivedSquare_fac (mateEquiv adj adj' σ)) K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hd ⊢
   rw [hd]
@@ -631,8 +631,8 @@ private lemma derived_mate_exact_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R')
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso G L' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso L G').symm).hom))).natTrans =
-      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans := by
+        (Functor.mapDerivedCategoryCompIso L G').symm).hom))) =
+      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) := by
   apply derived_mate_eq_square
   intro N
   exact exactComparison_factorsh G L' L G' e N
@@ -643,8 +643,8 @@ private lemma derived_mate_exact_inv_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R'
       adj'.mapDerivedCategoryRightDerivedAdjunction
       (TwoSquare.mk _ _ _ _ ((Functor.mapDerivedCategoryCompIso L G' ≪≫
         Functor.mapDerivedCategoryNatIso e ≪≫
-        (Functor.mapDerivedCategoryCompIso G L').symm).inv))).natTrans =
-      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.inv)).natTrans := by
+        (Functor.mapDerivedCategoryCompIso G L').symm).inv))) =
+      derivedSquare (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.inv)) := by
   apply derived_mate_eq_square
   intro N
   have hi : (Functor.mapDerivedCategoryNatIso e).inv =
@@ -677,7 +677,7 @@ noncomputable def moduleAbelianUnboundedLowerStarComparison
       D(moduleAbelianForget Λ A) ⋙ R((v)_*[AddCommGrpCat.{u + 1}]) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v)
     (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} v)
-    (TwoSquare.mk _ _ _ _ (moduleAbelianUnboundedUpperStarIso Λ v).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (moduleAbelianUnboundedUpperStarIso Λ v).inv))
 
 -- Naturality transfers the unit isomorphism across an acyclic replacement.
 private lemma unit_isIso_of_resolution_quasiIso
@@ -819,7 +819,7 @@ theorem unbounded_abelian_exchange_comparison
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v)
       (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} v)
       (moduleAbelianUpperStarIso Λ v).symm
-    simpa only [Iso.symm_inv, hm, TwoSquare.natTrans,
+    simpa only [Iso.symm_inv, hm,
       moduleAbelianUnboundedLowerStarComparison, moduleAbelianUnboundedUpperStarIso,
       mapDerivedUpperStarLowerStarAdjunction] using h
   refine ⟨?_, ?_, ?_⟩

@@ -585,7 +585,6 @@ private theorem cone_naturality
     apply mapCone_ext (D) ((tensor D).obj (A.X p)) f q
     · simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, curriedTensor, id_whiskerRight,
       HomologicalComplex.id_f, Category.id_comp]
-      try simp only [CategoryTheory.Functor.map_comp, NatTrans.comp_app, Category.assoc]
       have e₁ := coneLeft_ι D A f' p q n hpq
       have e₂ := coneLeft_ι D A f p q n hpq
       dsimp only [ι, coneLeft, coneRight, total,
@@ -602,7 +601,6 @@ private theorem cone_naturality
         Category.id_comp]
     · simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, curriedTensor, id_whiskerRight,
       HomologicalComplex.id_f, Category.id_comp]
-      try simp only [CategoryTheory.Functor.map_comp, NatTrans.comp_app, Category.assoc]
       have e₁ := coneLeft_inr_ι D A f' p q n hpq
       have e₂ := coneLeft_inr_ι D A f p q n hpq
       dsimp only [ι, coneLeft, coneRight, total,
@@ -625,7 +623,6 @@ private theorem cone_naturality
     all_goals dsimp only [CategoryTheory.Functor.flip]
     · simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, curriedTensor,
         whiskerLeft_id, HomologicalComplex.id_f, Category.id_comp]
-      try simp only [CategoryTheory.Functor.map_comp, NatTrans.comp_app, Category.assoc]
       have e₁ := coneRight_ι D A f' p q n hpq
       have e₂ := coneRight_ι D A f p q n hpq
       dsimp only [ι, coneLeft, coneRight, total,
@@ -641,7 +638,6 @@ private theorem cone_naturality
         HomologicalComplex.id_f, Category.id_comp]
     · simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, curriedTensor, whiskerLeft_id,
       HomologicalComplex.id_f, Category.id_comp]
-      try simp only [CategoryTheory.Functor.map_comp, NatTrans.comp_app, Category.assoc]
       have e₁ := coneRight_inr_ι D A f' p q n hpq
       have e₂ := coneRight_inr_ι D A f p q n hpq
       dsimp only [ι, coneLeft, coneRight, total,

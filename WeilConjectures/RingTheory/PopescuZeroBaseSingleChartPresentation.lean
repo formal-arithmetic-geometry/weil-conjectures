@@ -100,8 +100,6 @@ private theorem localized_equiv {S P Q : Type*}
     (Localization.Away t) (Localization.Away u) e (by rw [Submonoid.map_powers, h])⟩
 
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 400000 in
--- The nested tensor and quotient presentations require additional elaboration heartbeats.
 /-- Scalar extension killing pi and localization give the displayed linear presentation.
 
 Source: Stacks Project, Tag 07CP, first two lines of the calculation modulo pi.

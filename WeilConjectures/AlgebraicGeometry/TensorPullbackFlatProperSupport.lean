@@ -48,9 +48,9 @@ private theorem flatOver_restrict
   convert hh using 1 <;> try rfl
   ext r m
   change (F.smul (((a.appIso U.1).inv.hom)
-    (((a ≫ f).appLE V.1 U.1 e).hom r))).hom m =
-      (F.smul ((f.appLE V.1 U'.1 e').hom r)).hom m
-  exact congrArg (fun t ↦ (F.smul t).hom m) (congrArg (fun t ↦ t.hom r) heq)
+    (((a ≫ f).appLE V.1 U.1 e).hom r))).asHom.hom m =
+      (F.smul ((f.appLE V.1 U'.1 e').hom r)).asHom.hom m
+  exact congrArg (fun t ↦ (F.smul t).asHom.hom m) (congrArg (fun t ↦ t.hom r) heq)
 
 /-- Base change preserves finite presentation, base-flatness and proper support
 for one module. The square must be cartesian; an arbitrary commutative square would

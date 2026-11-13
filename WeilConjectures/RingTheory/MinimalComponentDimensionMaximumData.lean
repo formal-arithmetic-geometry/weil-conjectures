@@ -12,6 +12,8 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import WeilConjectures.RingTheory.MinimalComponentDimensionMaximumCore
+public import Mathlib.Algebra.EuclideanDomain.Field
+public import Mathlib.RingTheory.PrincipalIdealDomain
 
 @[expose] public section
 

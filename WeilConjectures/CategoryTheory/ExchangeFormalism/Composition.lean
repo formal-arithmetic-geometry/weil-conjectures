@@ -86,22 +86,22 @@ i₁_! ⋙ p₁_* ⋙ i₂_! ⋙ p₂_* ≅ i₁_! ⋙ q_! ⋙ r_* ⋙ p₂_* �
 ```
 built from the exchange isomorphism of the square `p₁ ≫ i₂ = q ≫ r`. -/
 noncomputable def compIso (T : ShriekTriangle 𝒪 X Y S)
-    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans] :
+    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)] :
     F.shriek T.i₁ T.p₁ ⋙ F.shriek T.i₂ T.p₂ ≅ F.shriek T.i T.p :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (F.sh T.i₁) ((Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (asIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans) (F.pf T.p₂) ≪≫
+      Functor.isoWhiskerRight (asIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)) (F.pf T.p₂) ≪≫
       Functor.associator _ _ _) ≪≫
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (F.shComp' T.i₁ T.q T.i T.i_q).symm _ ≪≫
     Functor.isoWhiskerLeft _ (F.pfComp' T.r T.p₂ T.p T.r_p).symm
 
 lemma compIso_hom_app (T : ShriekTriangle 𝒪 X Y S)
-    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans] (K : F.obj X) :
+    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)] (K : F.obj X) :
     (F.compIso T).hom.app K =
-      (F.pf T.p₂).map ((F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans.app ((F.sh T.i₁).obj K) ≫
+      (F.pf T.p₂).map ((F.exchange T.p₁ T.q T.i₂ T.r T.w).app ((F.sh T.i₁).obj K) ≫
         (F.pf T.r).map ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K)) ≫
       (F.pfComp' T.r T.p₂ T.p T.r_p).inv.app ((F.sh T.i).obj K) := by
   simp [compIso, shriek]
@@ -138,15 +138,15 @@ lemma ShriekTriangle.Hom.big_w {T' T : ShriekTriangle 𝒪 X Y S} (φ : ShriekTr
 the comparisons along the refinements of `φ` intertwine the composition isomorphisms of `T` and
 `T'`. -/
 theorem compIso_naturality {T' T : ShriekTriangle 𝒪 X Y S} (φ : ShriekTriangle.Hom 𝒪 T' T)
-    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.baseChange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans]
-    [IsIso (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans]
-    [IsIso (F.baseChange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).natTrans]
-    [IsIso (F.baseChange (𝟙 Y) T'.i₂ T.i₂ φ.rg φ.wg).natTrans]
-    [IsIso (F.baseChange (𝟙 X) T'.i T.i φ.rfg φ.wfg).natTrans]
-    [IsIso (F.baseChange φ.rf T'.q T.q φ.rfg φ.q_comm).natTrans]
-    [IsIso (F.baseChange T'.p₁ T'.q T.i₂ (T'.r ≫ φ.rg) φ.big_w).natTrans] :
+    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.baseChange T'.p₁ T'.q T'.i₂ T'.r T'.w)]
+    [IsIso (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w)]
+    [IsIso (F.baseChange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf)]
+    [IsIso (F.baseChange (𝟙 Y) T'.i₂ T.i₂ φ.rg φ.wg)]
+    [IsIso (F.baseChange (𝟙 X) T'.i T.i φ.rfg φ.wfg)]
+    [IsIso (F.baseChange φ.rf T'.q T.q φ.rfg φ.q_comm)]
+    [IsIso (F.baseChange T'.p₁ T'.q T.i₂ (T'.r ≫ φ.rg) φ.big_w)] :
     (F.compIso T).hom ≫ F.refinementComparison T'.i T'.p T.i T.p φ.rfg φ.wfg φ.hfg =
       NatTrans.hcomp (F.refinementComparison T'.i₁ T'.p₁ T.i₁ T.p₁ φ.rf φ.wf φ.hf)
           (F.refinementComparison T'.i₂ T'.p₂ T.i₂ T.p₂ φ.rg φ.wg φ.hg) ≫
@@ -188,20 +188,20 @@ theorem compIso_naturality {T' T : ShriekTriangle 𝒪 X Y S} (φ : ShriekTriang
   have hSC := congrArg (F.pf T.r).map ((F.shComp' T.i₁ T.q T.i T.i_q).hom.naturality
     ((F.pfId X).inv.app K))
   -- naturality of the exchange maps
-  have hεQ := (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans.naturality
+  have hεQ := (F.exchange T.p₁ T.q T.i₂ T.r T.w).naturality
     ((F.sh T.i₁).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).natTrans.app K)
+      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).app K)
   have hP₁ := (F.pfComp' φ.rfg T.r (T'.r ≫ φ.rg) φ.p_comm.symm).inv.naturality
     ((F.shComp' T'.i₁ T'.q T'.i T'.i_q).inv.app K)
   have hP₂ := (F.pfComp' T'.r φ.rg (T'.r ≫ φ.rg) rfl).inv.naturality
     ((F.shComp' T'.i₁ T'.q T'.i T'.i_q).inv.app K)
-  have hεB := (F.exchange (𝟙 Y) T'.i₂ T.i₂ φ.rg φ.wg).natTrans.naturality
+  have hεB := (F.exchange (𝟙 Y) T'.i₂ T.i₂ φ.rg φ.wg).naturality
     ((F.pf T.p₁).map ((F.sh T.i₁).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).natTrans.app K) ≫
+      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).app K) ≫
       (F.pfComp' φ.rf T.p₁ T'.p₁ φ.hf).inv.app ((F.sh T'.i₁).obj K))
   have hId := congrArg (F.sh T.i₂).map ((F.pfId Y).inv.naturality
     ((F.pf T.p₁).map ((F.sh T.i₁).map ((F.pfId X).inv.app K) ≫
-      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).natTrans.app K) ≫
+      (F.exchange (𝟙 X) T'.i₁ T.i₁ φ.rf φ.wf).app K) ≫
       (F.pfComp' φ.rf T.p₁ T'.p₁ φ.hf).inv.app ((F.sh T'.i₁).obj K)))
   simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Functor.id_obj,
     Functor.id_map, Category.assoc] at hSC hεQ hP₁ hP₂ hεB hId
@@ -223,18 +223,18 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : 𝒞} {gX : X' ⟶ X} {gY : Y
     (wgi : gY ≫ T.i₂ = T'.i₂ ≫ c) (wgp : c ≫ T.p₂ = T'.p₂ ≫ gS)
     (wfgi : gX ≫ T.i = T'.i ≫ b) (wfgp : b ≫ T.p = T'.p ≫ gS)
     (wq : a ≫ T.q = T'.q ≫ b) (hp : b ≫ T.r = T'.r ≫ c)
-    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans]
-    [IsIso (F.baseChange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans]
-    [IsIso (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans]
-    [IsIso (F.baseChange gX T'.i₁ T.i₁ a wfi).natTrans]
-    [IsIso (F.baseChange gY T'.i₂ T.i₂ c wgi).natTrans]
-    [IsIso (F.baseChange gX T'.i T.i b wfgi).natTrans]
-    [IsIso (F.baseChange a T'.q T.q b wq).natTrans] :
+    [IsIso (F.baseChange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.exchange T.p₁ T.q T.i₂ T.r T.w)]
+    [IsIso (F.baseChange T'.p₁ T'.q T'.i₂ T'.r T'.w)]
+    [IsIso (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w)]
+    [IsIso (F.baseChange gX T'.i₁ T.i₁ a wfi)]
+    [IsIso (F.baseChange gY T'.i₂ T.i₂ c wgi)]
+    [IsIso (F.baseChange gX T'.i T.i b wfgi)]
+    [IsIso (F.baseChange a T'.q T.q b wq)] :
     Functor.whiskerRight (F.compIso T).hom (F.pb gS) ≫
-        (F.shriekBaseChange T.i T.p T'.i T'.p gX b gS wfgi wfgp).natTrans =
+        (F.shriekBaseChange T.i T.p T'.i T'.p gX b gS wfgi wfgp) =
       (F.shriekBaseChange T.i₁ T.p₁ T'.i₁ T'.p₁ gX a gY wfi wfp ≫ₕ
-          F.shriekBaseChange T.i₂ T.p₂ T'.i₂ T'.p₂ gY c gS wgi wgp).natTrans ≫
+          F.shriekBaseChange T.i₂ T.p₂ T'.i₂ T'.p₂ gY c gS wgi wgp) ≫
         Functor.whiskerLeft (F.pb gX) (F.compIso T').hom := by
   ext K
   -- the base change map of the extension by zero along `i = i₁ ≫ q`
@@ -245,25 +245,25 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : 𝒞} {gX : X' ⟶ X} {gY : Y
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Functor.comp_obj, Category.assoc] at hbc
   have hA : (F.pb b).map ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K) ≫
-      inv ((F.baseChange gX T'.i T.i b wfgi).natTrans.app K) =
-      inv ((F.baseChange a T'.q T.q b wq).natTrans.app ((F.sh T.i₁).obj K)) ≫
-        (F.sh T'.q).map (inv ((F.baseChange gX T'.i₁ T.i₁ a wfi).natTrans.app K)) ≫
+      inv ((F.baseChange gX T'.i T.i b wfgi).app K) =
+      inv ((F.baseChange a T'.q T.q b wq).app ((F.sh T.i₁).obj K)) ≫
+        (F.sh T'.q).map (inv ((F.baseChange gX T'.i₁ T.i₁ a wfi).app K)) ≫
         (F.shComp' T'.i₁ T'.q T'.i T'.i_q).inv.app ((F.pb gX).obj K) := by
     rw [IsIso.comp_inv_eq, hbc]
     simp
   -- the cube relating the exchange maps of `T` and `T'`
   have hC := F.exchange_pfBaseChange_cube T.p₁ T.q T.i₂ T.r T'.p₁ T'.q T'.i₂ T'.r a gY b
     c T.w T'.w wfp wq wgi hp ((F.sh T.i₁).obj K)
-  have hC' : inv ((F.baseChange gY T'.i₂ T.i₂ c wgi).natTrans.app
+  have hC' : inv ((F.baseChange gY T'.i₂ T.i₂ c wgi).app
         ((F.pf T.p₁).obj ((F.sh T.i₁).obj K))) ≫
-      (F.sh T'.i₂).map ((F.pfBaseChange a T'.p₁ T.p₁ gY wfp).natTrans.app
+      (F.sh T'.i₂).map ((F.pfBaseChange a T'.p₁ T.p₁ gY wfp).app
         ((F.sh T.i₁).obj K)) ≫
-      (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans.app
+      (F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).app
         ((F.pb a).obj ((F.sh T.i₁).obj K)) =
-      (F.pb c).map ((F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans.app
+      (F.pb c).map ((F.exchange T.p₁ T.q T.i₂ T.r T.w).app
         ((F.sh T.i₁).obj K)) ≫
-      (F.pfBaseChange b T'.r T.r c hp).natTrans.app ((F.sh T.q).obj ((F.sh T.i₁).obj K)) ≫
-      (F.pf T'.r).map (inv ((F.baseChange a T'.q T.q b wq).natTrans.app
+      (F.pfBaseChange b T'.r T.r c hp).app ((F.sh T.q).obj ((F.sh T.i₁).obj K)) ≫
+      (F.pf T'.r).map (inv ((F.baseChange a T'.q T.q b wq).app
         ((F.sh T.i₁).obj K))) := by
     rw [← reassoc_of% hC]
     simp
@@ -287,16 +287,16 @@ theorem compIso_shriekBaseChange {X Y S X' Y' S' : 𝒞} {gX : X' ⟶ X} {gY : Y
       ((F.sh T.i).obj K)) ≫ (F.pb gS).map ((F.pfComp' T.r T.p₂ T.p T.r_p).hom.app
       ((F.sh T.i).obj K)) = 𝟙 _ := by
     rw [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-  have hn₁ := (F.pfBaseChange c T'.p₂ T.p₂ gS wgp).natTrans.naturality
-    ((F.exchange T.p₁ T.q T.i₂ T.r T.w).natTrans.app ((F.sh T.i₁).obj K) ≫
+  have hn₁ := (F.pfBaseChange c T'.p₂ T.p₂ gS wgp).naturality
+    ((F.exchange T.p₁ T.q T.i₂ T.r T.w).app ((F.sh T.i₁).obj K) ≫
       (F.pf T.r).map ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K))
   have hn₂ := (F.pfComp' T'.r T'.p₂ T'.p T'.r_p).inv.naturality
-    (inv ((F.baseChange gX T'.i T.i b wfgi).natTrans.app K))
-  have hn₃ := congrArg (F.pf T'.p₂).map ((F.pfBaseChange b T'.r T.r c hp).natTrans.naturality
+    (inv ((F.baseChange gX T'.i T.i b wfgi).app K))
+  have hn₃ := congrArg (F.pf T'.p₂).map ((F.pfBaseChange b T'.r T.r c hp).naturality
     ((F.shComp' T.i₁ T.q T.i T.i_q).inv.app K))
   have hn₄ := congrArg (F.pf T'.p₂).map
-    ((F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).natTrans.naturality
-      (inv ((F.baseChange gX T'.i₁ T.i₁ a wfi).natTrans.app K)))
+    ((F.exchange T'.p₁ T'.q T'.i₂ T'.r T'.w).naturality
+      (inv ((F.baseChange gX T'.i₁ T.i₁ a wfi).app K)))
   have hA' := congrArg (fun φ ↦ (F.pf T'.p₂).map ((F.pf T'.r).map φ)) hA
   have hC'' := congrArg (F.pf T'.p₂).map hC'
   simp only [Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc]

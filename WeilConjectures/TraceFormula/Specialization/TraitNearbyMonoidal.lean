@@ -207,7 +207,6 @@ noncomputable def upperStarLowerStarTensorMapNatTrans
     simp only [Functor.comp_map, ← Functor.map_comp]
     exact congrArg _ h
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors of the trait unfold to large terms
 /-- After restriction to the closed point of the trait, the lax tensor map
 `Rη̄_* U ⊗ Rη̄_* V ⟶ Rη̄_* (U ⊗ V)` of the geometric generic point is an isomorphism when `U` is a
@@ -274,7 +273,6 @@ instance isIso_pullbackExchange_id_traitGenericModel :
   unfold Hom.pullbackExchange
   infer_instance
 
-set_option maxHeartbeats 1000000 in
 -- the Künneth map of the trait unfolds to large terms
 /-- **The nearby cycles of the trait are monoidal on the geometric generic point**: the Künneth
 map of the trait `T` (as a model of its geometric generic point) is an isomorphism at `(C, D)`

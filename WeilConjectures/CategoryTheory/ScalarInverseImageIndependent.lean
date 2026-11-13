@@ -237,7 +237,6 @@ private theorem ringOperations
 
 attribute [local irreducible] mateIsoEquiv restrictHomEquiv
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the operation-preserving Hom equivalence has many dependent objects.
 set_option Elab.async false in
 private theorem scalarHomEquivIndependent
@@ -520,7 +519,6 @@ private theorem directData
       imageModule_action_comparison_right V BX BY d haP hmP H
 
 set_option backward.isDefEq.respectTransparency true
-set_option maxHeartbeats 800000 in
 -- The unit equation compares two adjunctions and two restriction functors.
 /-- Scalar extension commutes with inverse image, with the unit fixed.
 Source: Stacks Project, Modules on Sites, Tag 03EL

@@ -144,7 +144,6 @@ variable {k' : Type u} [Field k'] {X : Scheme.{u}}
 
 variable [IsSepClosed k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)]
 
-set_option maxHeartbeats 1600000 in
 -- elaborating the actions of `P' ⧸ V` on the concrete slice trait `Spec k'⟦u⟧⟦t⟧` is slow
 /-- **The invariants from the finiteness of the action and the image of the average**: the
 conclusion of `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom` follows

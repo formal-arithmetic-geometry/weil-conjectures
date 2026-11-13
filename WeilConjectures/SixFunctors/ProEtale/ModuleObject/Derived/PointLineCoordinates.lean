@@ -32,7 +32,7 @@ theorem point_line_conjugation_independent
     {L : A} (f : L ⟶ L) (h h' : L ≅ 𝟙_ A) :
     h.inv ≫ f ≫ h.hom = h'.inv ≫ f ≫ h'.hom := by
   have hc := unitEndAction_naturality
-    (h.inv ≫ f ≫ h.hom) (h.inv ≫ h'.hom)
+    (h.inv ≫ f ≫ h.hom) (End.of (h.inv ≫ h'.hom))
   simp only [unitEndAction_unit] at hc
   calc
     h.inv ≫ f ≫ h.hom =

@@ -96,7 +96,6 @@ private noncomputable def affineSectionsIso (Y : Scheme.{u}) [IsAffine Y] :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 300000 in
 -- The chart and section scalar actions require additional definitional-equality checks.
 /-- Sheafification of a ring quasi-isomorphism to the sections of a quasi-coherent
 complex supplies a quasi-isomorphism to that complex; finite projective terms give

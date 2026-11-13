@@ -62,11 +62,11 @@ lemma pfComp'_inv_naturality {X Y Z : 𝒞} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X �
 rewriting. -/
 @[reassoc]
 lemma exchange_naturality {U' U Z' Z : 𝒞} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
-    [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w).natTrans]
+    [Fact (𝒪 l)] [Fact (𝒪 r)] (w : t ≫ r = l ≫ b) [IsIso (F.baseChange t l r b w)]
     {M N : F.obj U'} (φ : M ⟶ N) :
-    (F.sh r).map ((F.pf t).map φ) ≫ (F.exchange t l r b w).natTrans.app N =
-      (F.exchange t l r b w).natTrans.app M ≫ (F.pf b).map ((F.sh l).map φ) :=
-  (F.exchange t l r b w).natTrans.naturality φ
+    (F.sh r).map ((F.pf t).map φ) ≫ (F.exchange t l r b w).app N =
+      (F.exchange t l r b w).app M ≫ (F.pf b).map ((F.sh l).map φ) :=
+  (F.exchange t l r b w).naturality φ
 
 end Naturality
 
@@ -99,13 +99,13 @@ with `S₁ : p_f ≫ i_g = a ≫ b`, `S₂ : p_g ≫ i_h = c ≫ d`, `S₃ : b �
 `T₄ = (i_f, p_f; i_g ≫ c, d ≫ p_h; a ≫ e, u)` of `(f, g ≫ h)` give the same identification of
 `F.shriek i4 p4` with `F.shriek i_f p_f ⋙ F.shriek i_g p_g ⋙ F.shriek i_h p_h`. -/
 theorem compIso_assoc (hae : a ≫ e = ae) (hud : u ≫ d = ud)
-    [IsIso (F.baseChange p_f a i_g b S₁).natTrans] [IsIso (F.exchange p_f a i_g b S₁).natTrans]
-    [IsIso (F.baseChange p_g c i_h d S₂).natTrans] [IsIso (F.exchange p_g c i_h d S₂).natTrans]
-    [IsIso (F.baseChange b e c u S₃).natTrans] [IsIso (F.exchange b e c u S₃).natTrans]
-    [IsIso (F.baseChange pfg e i_h ud S₃₂).natTrans]
-    [IsIso (F.exchange pfg e i_h ud S₃₂).natTrans]
-    [IsIso (F.baseChange p_f ae igh u S₁₃).natTrans]
-    [IsIso (F.exchange p_f ae igh u S₁₃).natTrans] (M : F.obj A) :
+    [IsIso (F.baseChange p_f a i_g b S₁)] [IsIso (F.exchange p_f a i_g b S₁)]
+    [IsIso (F.baseChange p_g c i_h d S₂)] [IsIso (F.exchange p_g c i_h d S₂)]
+    [IsIso (F.baseChange b e c u S₃)] [IsIso (F.exchange b e c u S₃)]
+    [IsIso (F.baseChange pfg e i_h ud S₃₂)]
+    [IsIso (F.exchange pfg e i_h ud S₃₂)]
+    [IsIso (F.baseChange p_f ae igh u S₁₃)]
+    [IsIso (F.exchange p_f ae igh u S₁₃)] (M : F.obj A) :
     (F.compIso (⟨Wfg, Ph, V, ifg, pfg, i_h, p_h, i4, p4, e, ud, hi4, hp4, S₃₂⟩ :
         ShriekTriangle 𝒪 A C D)).inv.app M ≫
       (F.shriek i_h p_h).map ((F.compIso (⟨Zf, Pg, Wfg, i_f, p_f, i_g, p_g, ifg, pfg, a, b,
@@ -178,16 +178,16 @@ lemma shComp'_id_right_inv_app (j : X ⟶ Y) [Fact (𝒪 j)] (h : j ≫ 𝟙 Y =
 omit [𝒪.ContainsIdentities] in
 /-- The exchange map of the square `𝟙 ≫ j = j ≫ 𝟙`, objectwise. -/
 lemma exchange_id_horiz_app (j : X ⟶ Y) [Fact (𝒪 j)] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y)
-    [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans] (N : F.obj X) :
-    (F.exchange (𝟙 X) j j (𝟙 Y) w).natTrans.app N =
+    [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w)] (N : F.obj X) :
+    (F.exchange (𝟙 X) j j (𝟙 Y) w).app N =
       (F.sh j).map ((F.pfId X).hom.app N) ≫ (F.pfId Y).inv.app ((F.sh j).obj N) := by
   rw [F.exchange_id_horiz j w]
   simp
 
 /-- The exchange map of the square `g ≫ 𝟙 = 𝟙 ≫ g`, objectwise. -/
 lemma exchange_id_vert_app (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
-    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans] (N : F.obj X) :
-    (F.exchange g (𝟙 X) (𝟙 Y) g w).natTrans.app N =
+    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w)] (N : F.obj X) :
+    (F.exchange g (𝟙 X) (𝟙 Y) g w).app N =
       (F.shId Y).hom.app ((F.pf g).obj N) ≫ (F.pf g).map ((F.shId X).inv.app N) := by
   rw [F.exchange_id_vert g w]
   simp
@@ -203,8 +203,8 @@ variable [𝒪.ContainsIdentities] {X Y Z : 𝒞} (i : X ⟶ Z) (p : Z ⟶ Y) [F
 composition isomorphism `F.shriek (𝟙 X) (𝟙 X) ⋙ F.shriek i p ≅ F.shriek i p` is induced by
 `(𝟙 X)_* (𝟙 X)_! ≅ 𝟭`. -/
 theorem compIso_unitLeft_hom_app (w : 𝟙 X ≫ i = i ≫ 𝟙 Z)
-    [IsIso (F.baseChange (𝟙 X) i i (𝟙 Z) w).natTrans]
-    [IsIso (F.exchange (𝟙 X) i i (𝟙 Z) w).natTrans] (M : F.obj X) :
+    [IsIso (F.baseChange (𝟙 X) i i (𝟙 Z) w)]
+    [IsIso (F.exchange (𝟙 X) i i (𝟙 Z) w)] (M : F.obj X) :
     (F.compIso (⟨X, Z, Z, 𝟙 X, 𝟙 X, i, p, i, p, i, 𝟙 Z, Category.id_comp i,
         Category.id_comp p, w⟩ : ShriekTriangle 𝒪 X X Y)).hom.app M =
       (F.shriek i p).map ((F.pf (𝟙 X)).map ((F.shId X).hom.app M) ≫ (F.pfId X).hom.app M) := by
@@ -222,8 +222,8 @@ theorem compIso_unitLeft_hom_app (w : 𝟙 X ≫ i = i ≫ 𝟙 Z)
 composition isomorphism `F.shriek i p ⋙ F.shriek (𝟙 Y) (𝟙 Y) ≅ F.shriek i p` is induced by
 `(𝟙 Y)_* (𝟙 Y)_! ≅ 𝟭`. -/
 theorem compIso_unitRight_hom_app (w : p ≫ 𝟙 Y = 𝟙 Z ≫ p)
-    [IsIso (F.baseChange p (𝟙 Z) (𝟙 Y) p w).natTrans]
-    [IsIso (F.exchange p (𝟙 Z) (𝟙 Y) p w).natTrans] (M : F.obj X) :
+    [IsIso (F.baseChange p (𝟙 Z) (𝟙 Y) p w)]
+    [IsIso (F.exchange p (𝟙 Z) (𝟙 Y) p w)] (M : F.obj X) :
     (F.compIso (⟨Z, Y, Z, i, p, 𝟙 Y, 𝟙 Y, i, p, 𝟙 Z, p, Category.comp_id i,
         Category.comp_id p, w⟩ : ShriekTriangle 𝒪 X Y Y)).hom.app M =
       (F.pf (𝟙 Y)).map ((F.shId Y).hom.app ((F.shriek i p).obj M)) ≫
@@ -246,8 +246,8 @@ variable [𝒪.ContainsIdentities] {X Y S : 𝒞} (f : X ⟶ Y) (g : Y ⟶ S) (f
 `Y ⟶[𝟙] Y ⟶[g] S` and `X ⟶[𝟙] X ⟶[f ≫ g] S`, the composition isomorphism is, through
 `(𝟙 Y)_! ≅ 𝟭`, the composition isomorphism `(f ≫ g)_* ≅ f_* ⋙ g_*` of the pushforwards. -/
 theorem compIso_ofProper_hom_app (w : f ≫ 𝟙 Y = 𝟙 X ≫ f)
-    [IsIso (F.baseChange f (𝟙 X) (𝟙 Y) f w).natTrans]
-    [IsIso (F.exchange f (𝟙 X) (𝟙 Y) f w).natTrans] (M : F.obj X) :
+    [IsIso (F.baseChange f (𝟙 X) (𝟙 Y) f w)]
+    [IsIso (F.exchange f (𝟙 X) (𝟙 Y) f w)] (M : F.obj X) :
     (F.compIso (⟨X, Y, X, 𝟙 X, f, 𝟙 Y, g, 𝟙 X, fg, 𝟙 X, f, Category.id_comp _, hfg, w⟩ :
         ShriekTriangle 𝒪 X Y S)).hom.app M =
       (F.pf g).map ((F.shId Y).hom.app ((F.pf f).obj ((F.sh (𝟙 X)).obj M))) ≫

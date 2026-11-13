@@ -35,7 +35,6 @@ attribute [local irreducible] sourceModelInput sourceModelOutput podReindexingHo
   derivedInternalHomOfUniverses homComplexFunctor CategoryTheory.RingedHomUniverses.sourceShift
   complexShift
 
-set_option maxHeartbeats 600000 in
 -- The two normalized derived composites have dependent localization endpoints.
 set_option linter.unusedVariables false in
 /-- The normalized source-shift square on a source complex and a K-injective

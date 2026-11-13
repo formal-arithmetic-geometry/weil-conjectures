@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionScalarExtension
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ScalarExtensionMonoidal
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Normalized oplax data for global section scalar extension
 

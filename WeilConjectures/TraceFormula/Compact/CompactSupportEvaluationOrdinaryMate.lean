@@ -56,7 +56,7 @@ theorem compactSupportEvaluationOrdinaryMate_isIso
     IsIso (((mateEquiv
       (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E p))
       (Adjunction.ofIsRightAdjoint (compactSupportLevelDirectImage l E p n))).symm
-        (TwoSquare.mk _ _ _ _ ordinary.hom)).natTrans) := by
+        (TwoSquare.mk _ _ _ _ ordinary.hom))) := by
   let : ((𝟭 ℕ).prod (Scheme.proEtaleBaseChange p)).IsContinuous
       (coefficientSequenceTopology (Scheme.ProEt.topology Y))
       (coefficientSequenceTopology (Scheme.ProEt.topology Z)) :=

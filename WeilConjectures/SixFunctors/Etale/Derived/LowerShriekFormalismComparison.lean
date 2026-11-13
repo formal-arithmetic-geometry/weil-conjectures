@@ -146,7 +146,7 @@ of a refinement `r : c.Refinement d` is the base change isomorphism
 `AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedPlusIso`, preceded by the identity
 isomorphism `D(𝟙 X)^* ≅ 𝟭`. -/
 lemma derivedPlusFormalism_baseChange_refinement (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
-    ((derivedPlusFormalism A).baseChange (𝟙 X) c.i d.i r.hom hcart.flip.w).natTrans =
+    ((derivedPlusFormalism A).baseChange (𝟙 X) c.i d.i r.hom hcart.flip.w) =
       Functor.whiskerRight ((derivedPlusFormalism A).pbId X).hom
           ((derivedPlusFormalism A).sh c.i) ≫
         (Functor.leftUnitor _).hom ≫
@@ -159,7 +159,7 @@ lemma derivedPlusFormalism_baseChange_refinement (hcart : IsPullback c.i (𝟙 X
         (refinementLowerShriekBaseChangeDerivedPlusIso A r hcart).hom))
     ((derivedPlusFormalism A).sqIso (𝟙 X) c.i d.i r.hom hcart.flip.w).hom (fun K ↦ ?_)
   · rw [ExchangeFormalism.baseChange, ← key]
-    exact congrArg TwoSquare.natTrans (Equiv.symm_apply_apply _ _)
+    exact (Equiv.symm_apply_apply _ _)
   rw [ExchangeFormalism.sqIso_eq _ _ _ _ _ _ d.i (Category.id_comp _) r.i_hom]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Functor.map_comp]

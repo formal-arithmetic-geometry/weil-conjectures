@@ -111,7 +111,6 @@ lemma lowerShriekSquareIso_hom_app_comp_map_lowerShriekId (g : B ⟶ C) (h : C �
   rw [boundedConstructibleLowerShriekComp_padicAlgCl_id_left, eqToHom_trans, eqToHom_refl,
     Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- instantiating the abstract lemma with the restricted functors is slow
 /-- **The restriction of `Ex_!` along the open immersion `h`**: for the cartesian square
 `(g, 𝟙, h, g ≫ h)`, `Lg^*(η_h) ≫ (Lg^* Lh^* ≅ L(g ≫ h)^*) ≫ L(g ≫ h)^*(Rh_! ≅ h_!)⁻¹ ≫ Ex_! ≫
@@ -175,7 +174,6 @@ lemma upperStarComp_inv_app_hom (g : B ⟶ C) (h : C ⟶ P) (K : Dᵇc(P.left)�
       (leftDerivedUpperStarComp Λℓ g.left h.left).inv.app K.obj := by
   simp [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
     ObjectProperty.liftCompιIso]
-set_option maxHeartbeats 800000 in
 -- instantiating the abstract lemmas with the restricted functors is slow
 /-- **`openProperExtension` is adjoint to the inverse of the base change map**: the hypothesis of
 `closedExtension_app_eq_openProperExtension`, so that `closedExtension = openProperExtension`. -/
