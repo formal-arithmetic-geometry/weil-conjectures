@@ -407,7 +407,8 @@ private lemma isDerivedBaseChange_of_isIso_reductionActionMap
   have key : Q.map (D.complexMap M.P) ≫ resQ g = M.iso.hom ≫ η := by
     change Q.map (D.complexMap M.P) ≫ F.mapDerivedCategoryFactors.inv.app Z ≫
       F.mapDerivedCategory.map g ≫ F.mapDerivedCategoryFactors.hom.app Y = _
-    rw [← assoc, ← assoc, hg, assoc, assoc, Iso.inv_hom_id_app, comp_id]
+    rw [← assoc, ← assoc, hg, assoc, assoc, Iso.inv_hom_id_app]
+    erw [comp_id]
   have hred : (reductionFunctor J I n).map M.iso.hom ≫
       ((reductionFunctor J I n).map η ≫ reductionActionMap hϖ hI n hψ Y) =
       ((reductionConeIso hϖ hI n M.P).hom ≫
