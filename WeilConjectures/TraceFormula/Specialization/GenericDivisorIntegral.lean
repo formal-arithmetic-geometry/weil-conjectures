@@ -97,9 +97,22 @@ end Instances
 
 namespace NearbyCyclesModel
 
+set_option profiler true in
 /-- Two flat coefficient changes preserve restricted vanishing when their pushforward
 comparisons are invertible on bounded below complexes. -/
 private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
+    [ht12 : ∀ (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
+      GradedObject.HasGoodTensor₁₂Tensor A B C]
+    [ht23 : ∀ (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
+      GradedObject.HasGoodTensorTensor₂₃ A B C]
+    [ht4 : ∀ (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)),
+      GradedObject.HasTensor₄ObjExt A B C D]
     {Λ₀ Λ₁ Λ₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]
     [MonObj Λ₂] [IsCommMonObj Λ₂]
@@ -122,19 +135,6 @@ private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
       ((M.nearbyCycles Λ₂).obj (D((o)_!open⟦Λ₂⟧).obj
         ((L(Mod.extendScalars (coefficientMap b U))).obj
           ((L(Mod.extendScalars (coefficientMap a U))).obj K₀)))))) := by
-  -- Share the tensor properties of module categories across the derived functors below.
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensor₁₂Tensor A B C := by infer_instance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasGoodTensorTensor₂₃ A B C := by infer_instance
-  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
-      [MonObj R] [IsCommMonObj R]
-      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
-      GradedObject.HasTensor₄ObjExt A B C D := by infer_instance
   have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
     a M o e ι K₀ (derivedPushHom a M.j) (ha _ n hn) h
   have hn₁ : ((L((M.ε)^*⟦Λ₀⟧) ⋙ L(Mod.extendScalars (coefficientMap a M.generic))).obj
@@ -150,6 +150,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
   (M : NearbyCyclesModel X X') (o : U ⟶ X) [IsOpenImmersion o] (e : Y ⟶ X') (ι : W ⟶ Y)
   [IsOpenImmersion ι]
 
+set_option profiler true in
 -- Elaborating the statement compares the derived categories of the coefficient rings.
 /-- **Restricted nearby cycles of extensions by zero, from the residue field to `𝒪_E`**: let `M`
 be a model of `X` whose total space and geometric generic fibre are quasi-compact and
@@ -196,6 +197,7 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_res
     have k' := k (by transport_mod_proofs hφ) (by transport_mod_proofs h)
     transport_mod_proofs k'
 
+set_option profiler true in
 -- Elaborating the statement compares the derived categories of the coefficient rings.
 omit [IsOpenImmersion ι] in
 /-- **Restricted nearby cycles of extensions by zero, from `𝒪_E` to `ℚ̄_ℓ`**: let `M` be a model
@@ -239,6 +241,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+set_option profiler true in
 -- Destructuring the finite-coefficient statement unfolds the coefficient rings.
 open NearbyCyclesModel in
 /-- **Generic vanishing along a divisor for `ℚ̄_ℓ`-coefficients, from finite coefficients**: let
