@@ -124,7 +124,6 @@ private theorem quasiCoherent_image_ideal (X : Scheme.{u}) {M : X.Modules}
   exact quasiCoherent_submodule_ideal X (Abelian.image.ι v)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
 with a quasi-coherent ideal quotient.
 
