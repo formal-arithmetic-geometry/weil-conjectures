@@ -81,7 +81,6 @@ lemma pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app
   erw [Category.comp_id, Category.comp_id]
   exact Iso.hom_inv_id_app _ _
 
-set_option profiler true in
 /-- The derived (Pull) isomorphism through the counits, inverse form: on the image of a
 complex `N`, `(derivedUpperStarExtendScalarsIso a f).inv` followed by the counits is the inverse
 of the underived (Pull) isomorphism. -/
@@ -102,7 +101,6 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_Qh_comp_counit
     (derivedUpperStarExtendScalarsIsoFac a f N)
     (pullIsoHomotopy_app_comp_pullIsoInvHomotopy_app a f N)
 
-set_option profiler true in
 /-- **The derived (Push) comparison on complexes**, for an arbitrary coefficient change: through
 the units of the right derived pushforwards and the counits of the derived extensions of scalars,
 `derivedUpperStarExtendScalarsPushHom a f` at the image of a complex `K` is the mate on the
