@@ -42,8 +42,24 @@ local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
   HasDerivedCategory.standard _
 
+private theorem comparison_of_transported_evaluation
+    {C₁ C₂ D : Type*} [Category* C₁] [Category* C₂] [Category* D]
+    (T : C₁ ⥤ C₂) (Q : C₂ ⥤ D) (E : C₁ ⥤ D) (v : E ≅ T ⋙ Q)
+    {A B : C₁} {A' B' : C₂} {S H : D} (f : A ⟶ B) (g : S ⟶ H)
+    (t : T.obj A ≅ A') (b : T.obj B ≅ B')
+    (a' : S ≅ Q.obj A') (b' : H ≅ Q.obj B')
+    (h : g ≫ b'.hom = a'.hom ≫ Q.map (t.inv ≫ T.map f ≫ b.hom)) :
+    ∃ a : S ≅ E.obj A, ∃ b : H ≅ E.obj B, g ≫ b.hom = a.hom ≫ E.map f := by
+  refine ⟨a' ≪≫ (Q.mapIso t).symm ≪≫ (v.app A).symm,
+    b' ≪≫ (Q.mapIso b).symm ≪≫ (v.app B).symm, ?_⟩
+  dsimp only [Iso.trans_hom, Iso.symm_hom]
+  rw [← Category.assoc, ← Category.assoc, h]
+  simp only [Functor.mapIso_inv, Category.assoc, ← Functor.map_comp,
+    Iso.hom_inv_id, Category.comp_id]
+  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv] using
+    congrArg (fun z ↦ a'.hom ≫ Q.map t.inv ≫ z) (v.inv.naturality f)
+
 set_option profiler true in
--- Elaborating the transported models unfolds the exact-functor factorization.
 /-- Ordinary representative evaluation when the coefficient complex is K-injective.
 Source: Stacks Project, cohomology.tex, Tags 08DJ (lemma-internal-hom),
 08DM (lemma-Rhom-strictly-perfect), and 08DQ (lemma-dual-perfect-complex).
@@ -99,13 +115,22 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
       ∃ b : H.obj (op K, N) ≅
           E.obj (DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F)),
         g ≫ b.hom = a.hom ≫ E.map (DerivedCategory.Q.map f) := by
-  let L := Equivalence.functor
+  have : Abelian (localEvaluationModules X U) := inferInstance
+  have : Abelian (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) := inferInstance
+  let L : localEvaluationModules X U ⥤
+      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Equivalence.functor
     (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
     (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
     (Scheme.Modules.overEquiv U)
-  let T := L.mapHomologicalComplex (.up ℤ)
-  let E := L.mapDerivedCategory
-  let v := L.mapDerivedCategoryFactors
+  have : L.Additive := Functor.additive_of_preserves_binary_products L
+  have : PreservesFiniteLimits L := inferInstance
+  have : PreservesFiniteColimits L := inferInstance
+  let T : CochainComplex (localEvaluationModules X U) ℤ ⥤
+      CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
+    L.mapHomologicalComplex (.up ℤ)
+  let E : DerivedCategory (localEvaluationModules X U) ⥤ schemeDerivedCategory U.toScheme :=
+    L.mapDerivedCategory
+  let v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
     exists_ordinaryEvaluation_over_transport X U P F _hhom _hdual f _hf
   have : CochainComplex.IsKInjective (T.obj F) := hF
@@ -113,15 +138,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   let eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
   obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
-  refine ⟨a' ≪≫ (DerivedCategory.Q.mapIso t).symm ≪≫
-    (v.app (localEvaluationTensor X U P F)).symm,
-    b' ≪≫ (DerivedCategory.Q.mapIso b).symm ≪≫
-      (v.app (homComplex (R := X.sheaf.over U) P F)).symm, ?_⟩
-  dsimp only [Iso.trans_hom, Iso.symm_hom]
-  rw [← Category.assoc, ← Category.assoc, h]
-  simp only [Functor.mapIso_inv, Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id, Category.comp_id]
-  simpa only [Functor.comp_map, Functor.map_comp, Category.assoc, Iso.app_inv, L, T] using
-    congrArg (fun z ↦ a'.hom ≫ DerivedCategory.Q.map t.inv ≫ z) (v.inv.naturality f)
+  exact comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
+    v f _ t b a' b' h
 
 end AlgebraicGeometry
