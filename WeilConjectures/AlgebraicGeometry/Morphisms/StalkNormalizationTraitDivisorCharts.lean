@@ -404,6 +404,7 @@ theorem GaloisCover.stalk_normalization_trait_divisor_charts {S C : Scheme.{u}}
   refine ⟨R, φ, y, ρ, ϖ, hφ, hy, hϖ, hφd, hρ, m, e, he, E ≪≫ α₀, ?_⟩
   change (E.hom ≫ α₀.hom) ≫ _ = pullback.snd n φ
   rw [Category.assoc, hα₀]
+  change E.hom ≫ pullback.snd p.fromNormalization φ = pullback.snd n φ
   simp only [E, asIso_hom, pullback.map, pullback.lift_snd, Category.comp_id]
 
 
