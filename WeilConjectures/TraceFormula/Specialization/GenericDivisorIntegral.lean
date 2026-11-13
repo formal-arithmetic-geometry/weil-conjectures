@@ -148,6 +148,8 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_res
     transport_mod_proofs k'
 
 -- Elaborating the statement compares the derived categories of the coefficient rings.
+set_option profiler true in
+set_option maxHeartbeats 1000000 in
 omit [IsOpenImmersion ι] in
 /-- **Restricted nearby cycles of extensions by zero, from `𝒪_E` to `ℚ̄_ℓ`**: let `M` be a model
 of `X` whose inclusion `j` of the geometric generic fibre is quasi-compact and quasi-separated,
