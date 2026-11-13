@@ -386,6 +386,7 @@ private lemma homZero {A B X : Mod.{c, v, u} J R} (hB : IsZero B)
   exact (zeroSection.{c, v, u} J R B hB _ _).trans
     (zeroSection.{c, v, u} J R B hB _ _).symm
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Elaborate five localized product-Hom projections with independent site universes.
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -559,6 +560,7 @@ private lemma total_ext (P V I : CX.{c, v, u} J R)
   apply ModuleCat.MonoidalCategory.tensor_ext
   exact h a b U
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborate the two independent-universe resolution and tensor model squares.
 private lemma comparison_beta
