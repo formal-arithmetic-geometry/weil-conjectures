@@ -243,7 +243,7 @@ private theorem localPieceBoundedInjectiveCocone
     exact hβvq
   exact ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩
 
-private theorem localPieceCostalkModelModuleColimits
+noncomputable local instance localPieceCostalkModelModuleColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
     (I : Type (u + 1)) [SmallCategory I] :
@@ -251,7 +251,7 @@ private theorem localPieceCostalkModelModuleColimits
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := by
   infer_instance
 
-private theorem localPieceCostalkModelComplexColimits
+noncomputable local instance localPieceCostalkModelComplexColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
     (I : Type (u + 1)) [SmallCategory I] :
