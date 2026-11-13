@@ -169,8 +169,6 @@ private theorem fp_free_slice {X : Scheme.{u}} (U : X.Opens) (n : ℕ) :
   exact P.isFinitePresentation
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Slice equivalences and iterated restriction comparisons require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace a quasi-coherent module on an affine open by a finitely presented module,
 with a map which is an isomorphism on the overlap with the previous open.
@@ -208,6 +206,12 @@ theorem exists_finitePresentation_affine_replacement
   let R := moduleRings X.toRingedSpace
   let K : X.Opens := W ⊓ V.1
   let f : K ⟶ V.1 := homOfLE inf_le_right
+  let : Abelian (SheafOfModules.{u} (R.over V.1)) := inferInstance
+  let : Abelian (SheafOfModules.{u} (R.over K)) := inferInstance
+  have : HasFiniteLimits (SheafOfModules.{u} (R.over V.1)) := inferInstance
+  have : HasFiniteColimits (SheafOfModules.{u} (R.over V.1)) := inferInstance
+  have : HasFiniteLimits (SheafOfModules.{u} (R.over K)) := inferInstance
+  have : HasFiniteColimits (SheafOfModules.{u} (R.over K)) := inferInstance
   let T : SheafOfModules.{u} (R.over V.1) ⥤ SheafOfModules.{u} (R.over K) :=
     SheafOfModules.overMap R f
   have : PreservesColimitsOfSize.{u, u} T := inferInstance
