@@ -238,7 +238,7 @@ end Restriction
 
 /-! ### Finite support for a morphism -/
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- A morphism of bounded constructible complexes is invertible away from finitely many closed
 points if it is invertible over the generic points of local coordinates detecting closed points. -/
 lemma exists_finset_isIso_of_forall_exists_coordinates {ℓ : ℕ} [Fact ℓ.Prime]
@@ -314,7 +314,7 @@ lemma isTraitModelOver_restrictOpen_productOpen
   convert hP.restrictOpen (productOpen φ₁ φ₂ V W) using 1 <;>
     simp [Scheme.Hom.resLE_comp_ι_assoc]
 
-set_option profiler true in
+set_option trace.profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- Coordinates of product charts detect closed points and make the Künneth map invertible
 on their generic fibres, assuming the slicing formula in smaller chart dimension. -/
@@ -334,20 +334,14 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
     (hA : boundedConstructible (condensedRingObj Λ X) A)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))}
-    (hB : boundedConstructible (condensedRingObj Λ Y) B)
-    : ∀ z : Z'.left, ∃ (U : Z'.left.Opens) (_ : z ∈ U) (ι : Type u) (_ : Finite ι)
+    (hB : boundedConstructible (condensedRingObj Λ Y) B) :
+    ∀ z : Z'.left, ∃ (U : Z'.left.Opens) (_ : z ∈ U) (ι : Type u) (_ : Finite ι)
       (b : ι → (U.toScheme ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))),
       (∀ i, LocallyOfFiniteType (b i)) ∧ (∀ v : U, (∀ i, IsClosed {b i v}) → IsClosed {v}) ∧
       ∀ i, ∃ (K : Type u) (_ : Field K) (ξ : Spec (.of K) ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k')))
         (t : Spec (.of K)), IsGenericPoint (ξ t) Set.univ ∧
         IsIso (L((pullback.fst (b i) ξ)^*⟦Λ⟧).map
           (L((U.ι)^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
-  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
-    hP.locallyOfFiniteType
-  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
-  have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
-  have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
-  have : IsNoetherian Z'.left := ⟨⟩
   have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback
     hM.isPullback_i hM.locallyOfFiniteType
   have : LocallyOfFiniteType Y'.hom := MorphismProperty.of_isPullback
@@ -441,10 +435,8 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
       isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
     have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 X) _ hA
     have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ (𝟙 Y) _ hB
-    have hslice : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
-        Λ⟧).map (kunnethMap Λ ψ₁ ψ₂
-          (L((𝟙 X)^*⟦Λ⟧).obj A)
-          (L((𝟙 Y)^*⟦Λ⟧).obj B))) := by
+    have hslice : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦Λ⟧).map
+        (kunnethMap Λ ψ₁ ψ₂ (L((𝟙 X)^*⟦Λ⟧).obj A) (L((𝟙 Y)^*⟦Λ⟧).obj B))) := by
       rcases i with a | a
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cV a
           (traitSlice (traitSliceCoord k'))
@@ -464,14 +456,13 @@ lemma exists_coordinates_isIso_kunnethMap_of_slice
           (hslice (by omega)) (by omega) (hm.restrict V)
           (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι
-    have hslice' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦
-        Λ⟧).map (L((r')^*⟦Λ⟧).map
-          (kunnethMap Λ φ₁ φ₂ A B))) := by
+    have hslice' : IsIso (L((sliceSpecialMap (traitSliceCoord k') hPU (hcoord i))^*⟦Λ⟧).map
+        (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) := by
       exact (isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR _ A B).2 hslice
     obtain ⟨l, hl⟩ := exists_comp_sliceSpecialMap (traitSliceCoord k') hPU (hcoord i)
     exact isIso_upperStar_map_of_factorization _ l hl _ hslice'
 
-set_option profiler true in
+set_option trace.profiler true in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
