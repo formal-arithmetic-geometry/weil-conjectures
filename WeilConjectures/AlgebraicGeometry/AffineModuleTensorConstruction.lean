@@ -157,14 +157,15 @@ theorem affine_module_tensor_construction [IsAffineHom f] :
     simpa [tensorPullbackRingMap, TopCat.Sheaf.inverseImageConstruction] using
       adj.homEquiv_naturality_left_symm ρ (𝟙 A)
   have : HasPushout r₀ t₀ := inferInstance
-  let B := pushout r₀ t₀
-  let b := pushout.inl r₀ t₀
-  let t := pushout.inr r₀ t₀
+  let B : U.toTopCat.Sheaf CommRingCat.{u} := pushout r₀ t₀
+  let b : U.sheaf ⟶ B := pushout.inl r₀ t₀
+  let t : IA ⟶ B := pushout.inr r₀ t₀
   let ε : B ⟶ U.sheaf := pushout.desc (𝟙 U.sheaf) e₀ (by simpa using hc)
   have hp : IsPushout r₀ t₀ b t := IsPushout.of_hasPushout r₀ t₀
   have hb : b ≫ ε = 𝟙 U.sheaf := pushout.inl_desc _ _ _
   have ht : t ≫ ε = e₀ := pushout.inr_desc _ _ _
   refine ⟨B, b, t, ε, hp, hb, ht, ?_⟩
+  clear_value ε t b B
   obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
     affine_module_tensor_baseChange f B b t hp
   obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
