@@ -339,14 +339,16 @@ private theorem tensorUnit_complex_coherence
         ((HomologicalComplex.singleMapHomologicalComplex F (ComplexShape.up ℤ) 0).app _).symm
       η.inv ≫ Functor.LaxMonoidal.ε QT =
         G.map (Functor.LaxMonoidal.ε QX) ≫ e (𝟙_ (CochainComplex C ℤ)) ≫ QT.map u.inv)
-    (W : CochainComplex C ℤ → Prop) (hU : W (𝟙_ (CochainComplex C ℤ)))
-    (hμ : ∀ K N, W K → W N →
+    (hμ : ∀ K N,
+      (∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ K).Acyclic) →
+      (∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ N).Acyclic) →
       ((μ.app (QX.obj K)).app (QX.obj N)).hom ≫
           G.map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫ QT.map (φ K N).hom =
         (e K ⊗ₘ e N) ≫ Functor.LaxMonoidal.μ QT
           ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)
           ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N))
-    (P : CochainComplex C ℤ) (hP : W P) [IsIso (e P)] :
+    (P : CochainComplex C ℤ)
+    (hP : ∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ P).Acyclic) [IsIso (e P)] :
     (λ_ (G.obj (QX.obj P))).hom = η.hom ▷ G.obj (QX.obj P) ≫
         ((μ.app (𝟙_ D₁)).app (QX.obj P)).hom ≫ G.map (λ_ (QX.obj P)).hom ∧
       (ρ_ (G.obj (QX.obj P))).hom = G.obj (QX.obj P) ◁ η.hom ≫
@@ -364,6 +366,11 @@ private theorem tensorUnit_complex_coherence
       e U ≫ QT.map u.inv ≫ inv (Functor.LaxMonoidal.ε QT) := by
     apply (cancel_mono (Functor.LaxMonoidal.ε QT)).mp
     simpa only [Category.assoc, IsIso.inv_hom_id, Category.comp_id] using hη'
+  let W := fun K : CochainComplex C ℤ ↦
+    ∀ M : CochainComplex C ℤ, M.Acyclic → (M ⊗ K).Acyclic
+  have hU : W U := by
+    intro N hN i
+    exact (hN i).of_iso (ρ_ N).symm
   have hδ (K N : CochainComplex C ℤ) (hK : W K) (hN : W N) :
       (μ.inv.app (QX.obj K)).app (QX.obj N) ≫ (e K ⊗ₘ e N) ≫
           Functor.LaxMonoidal.μ QT (FC.obj K) (FC.obj N) =
@@ -472,10 +479,6 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
              (derivedPullback g).map (ρ_ A).hom) := by
   let AX := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)
   let AT := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)
-  have hU : CochainComplex.IsKFlatTensor (R := X.sheaf)
-      (𝟙_ (CochainComplex AX ℤ)) := by
-    intro N hN i
-    exact (hN i).of_iso (ρ_ N).symm
   have hEP : IsIso (ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj P)) :=
     tensorUnit_counit_kFlat_isIso g F hF hmap ε hε P hP
   obtain ⟨hQT, hη⟩ := derivedPullback_tensorUnitIso_normalization g F mF ε
@@ -483,7 +486,6 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
     (DerivedCategory.Q (C := AX)) (DerivedCategory.Q (C := AT)) (derivedPullback g)
     (fun K ↦ ε.app ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).obj K))
     (fun f ↦ ε.naturality ((HomotopyCategory.quotient AX (ComplexShape.up ℤ)).map f))
-    φ hφ μ (derivedPullback_tensorUnitIso g F mF ε) hη
-    (CochainComplex.IsKFlatTensor (R := X.sheaf)) hU hμ P hP
+    φ hφ μ (derivedPullback_tensorUnitIso g F mF ε) hη hμ P hP
 
 end AlgebraicGeometry
