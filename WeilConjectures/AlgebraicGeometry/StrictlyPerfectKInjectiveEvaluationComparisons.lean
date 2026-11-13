@@ -28,6 +28,15 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 300000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem eq_of_two_sided_inverse {C : Type*} [Category C]
+    {X Y : C} {f : X ⟶ Y} {r s : Y ⟶ X}
+    (hr : f ≫ r = 𝟙 X) (hs : s ≫ f = 𝟙 Y) : r = s := by
+  calc
+    r = 𝟙 _ ≫ r := (Category.id_comp r).symm
+    _ = (s ≫ f) ≫ r := by rw [hs]
+    _ = s ≫ (f ≫ r) := Category.assoc _ _ _
+    _ = s := by rw [hr, Category.comp_id]
+
 /-- The local evaluation square when its second representative is already K-injective.
 This only handles the resolved case; it does not assert the comparison for an arbitrary
 second complex.
@@ -95,12 +104,7 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
     X K N U P hstrict _eK
   change R.map g ≫ r = 𝟙 _ at hr
   change s ≫ R.map g = 𝟙 _ at hs
-  have hrs : r = s := by
-    calc
-      r = 𝟙 _ ≫ r := (Category.id_comp r).symm
-      _ = (s ≫ R.map g) ≫ r := by rw [hs]
-      _ = s ≫ (R.map g ≫ r) := Category.assoc _ _ _
-      _ = s := by rw [hr, Category.comp_id]
+  have hrs : r = s := eq_of_two_sided_inverse hr hs
   let e : R.obj (N ⊗ D) ≅ R.obj (H.obj (op K, N)) :=
     { hom := R.map g
       inv := r
