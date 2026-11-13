@@ -73,14 +73,14 @@ theorem changeOfRings_tensor_relation_presentation (Y : Scheme.{u})
               (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p)) =
           (cokernel.π δ).app W (tmulSection (M := C.toModule) (N := P₀) c p)) := by
   classical
-  dsimp only
-  let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
-  let S := tensorObj C.toModule P₀
+  intro P₀ S
   let T := (SheafOfModules.restrictScalars (𝓻 C.hom)).obj
     (SheafOfModules.changeOfRings.{u, u, u} φ.right P)
-  obtain ⟨a, d, g, ha, hd, hg, hag⟩ :=
+  obtain ⟨a, d, g, hactions⟩ :=
     exists_changeOfRings_tensor_action_maps Y B C φ P
-  have hu := changeOfRings_tensor_balancing_universal Y B C φ P a d g ha hd hg
+  have hu := changeOfRings_tensor_balancing_universal
+    Y B C φ P a d g hactions.1 hactions.2.1 hactions.2.2.1
+  have hag := hactions.2.2.2
   let δ : tensorObj B.toModule S ⟶ S := a - d
   have hδg : δ ≫ g = 0 := by
     rw [Preadditive.sub_comp, hag, sub_self]
@@ -110,10 +110,10 @@ theorem changeOfRings_tensor_relation_presentation (Y : Scheme.{u})
     change (a - d).app W _ = _
     rw [Hom.sub_app]
     change a.app W _ - d.app W _ = _
-    rw [ha W b c p, hd W b c p]
+    rw [hactions.1 W b c p, hactions.2.1 W b c p]
   · intro W c p
     change h.val.app (op W) _ = _
-    rw [← hg W c p]
+    rw [← hactions.2.2.1 W c p]
     exact congrArg (fun f : S ⟶ cokernel δ ↦
       f.app W (tmulSection (M := C.toModule) (N := P₀) c p)) hh
 
