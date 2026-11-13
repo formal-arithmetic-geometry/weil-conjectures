@@ -75,6 +75,17 @@ lemma isIso_of_comp_eq_comp_map_comp {D : Type*} [Category D] {F : D ⥤ D} (I :
     infer_instance
   exact (NatIso.isIso_map_iff I ρ).1 this
 
+/-- A split map is invertible if its projector is the identity on homology after a functor
+isomorphic to the identity. -/
+private lemma isIso_of_split_of_homology_map_comp_eq_id {A : Type*} [Category A] [Abelian A]
+    [HasDerivedCategory A] {F : DerivedCategory A ⥤ DerivedCategory A} (I : F ≅ 𝟭 _)
+    {P Q : DerivedCategory A} {α : P ⟶ Q} {r : Q ⟶ P} (hr : α ≫ r = 𝟙 _)
+    (h : ∀ q : ℤ, (DerivedCategory.homologyFunctor A q).map (F.map (r ≫ α)) ≫ 𝟙 _ = 𝟙 _) :
+    IsIso α :=
+  (NatIso.isIso_map_iff I α).1 ((DerivedCategory.isIso_iff _ _).2 fun q ↦
+    isIso_map_of_comp_eq_id (F ⋙ DerivedCategory.homologyFunctor A q) hr
+      ((Category.comp_id _).symm.trans (h q)))
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
@@ -171,8 +182,6 @@ lemma pullbackExchange_galoisLayerHom_galoisLayerTower_app
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀]
 
-set_option maxHeartbeats 1600000 in
--- the pullback exchanges of the three layers are large terms
 /-- **Stabilization of the nearby cycles of a Galois layer from the triviality of the Galois
 action on cohomology** (torsion coefficients in which the degrees of the finite subextensions
 of `Ω/L` are invertible). Let `L ⊆ L' ⊆ Ω` with `L'/L` finite and `Lε^* C` bounded below of étale
@@ -204,12 +213,11 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
     infer_instance
   have hp₁ (M : FiniteGaloisIntermediateField L' Ω) :
       IsUnit ((Module.finrank L' M : ℕ) : T₀) := by
-    have e : (M.toIntermediateField.restrictScalars L) ≃ₐ[L] M := AlgEquiv.refl
-    have : FiniteDimensional L M := Module.Finite.trans L' M
+    have hfin : FiniteDimensional L M := Module.Finite.trans L' M
     have := Module.Free.of_divisionRing L' M
-    have hM := hp (M.toIntermediateField.restrictScalars L)
-      e.symm.toLinearEquiv.finiteDimensional
-    rw [e.toLinearEquiv.finrank_eq, ← Module.finrank_mul_finrank L L' M, Nat.cast_mul] at hM
+    have hM := hp (M.toIntermediateField.restrictScalars L) hfin
+    change IsUnit ((Module.finrank L M : ℕ) : T₀) at hM
+    rw [← Module.finrank_mul_finrank L L' M, Nat.cast_mul] at hM
     exact isUnit_of_mul_isUnit_right hM
   have hC₁ := ObjectProperty.prop_of_iso _
     ((finiteCoefficientDerivedEquivalence _ T₀).functor.mapIso
@@ -222,39 +230,29 @@ theorem isIso_pullbackExchange_galoisLayerRestrict_of_homology [IsGalois L Ω]
       (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L')))) hC)
   obtain ⟨r, hr, -, hproj⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector
-      (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁
-      (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC₁
+      (N.galoisLayer h L') (pullback.snd _ _) Ω T₀ hp₁ _ hC₁
   -- the identification `(N_{L'})_Ω ≅ N_Ω` has an invertible exchange intertwining the actions
-  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange
-      (Profinite.continuousMapRingObj T₀)) :=
+  have : IsIso ((N.galoisLayerTower h Ω L').pullbackExchange (Profinite.continuousMapRingObj T₀)) :=
     Hom.isIso_pullbackExchange_of_isIso _ _
-  have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :
-      (DerivedCategory.homologyFunctor _ q).map
-        (L((𝟙 X')^*⟦Profinite.continuousMapRingObj T₀⟧).map
-          ((N.galoisLayer h L').galoisLayerAction (Profinite.continuousMapRingObj T₀)
-            (pullback.snd _ _) Ω σ (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj
-              (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))) = 𝟙 _ := by
-    refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
-    refine map_eq_id_of_comp_eq_comp _ _
-      (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L' _ σ
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) ?_
-    refine map_map_eq_id_of_iso_id (leftDerivedUpperStarId _ X') _ ?_
-    exact htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
-      σ.commutes ⟨x, hx⟩)
+  have hact (σ : Ω ≃ₐ[L'] Ω) (q : ℤ) :=
+    map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X')
+      (DerivedCategory.homologyFunctor _ q)
+      (map_eq_id_of_comp_eq_comp (DerivedCategory.homologyFunctor _ q) _
+        (N.pullbackExchange_galoisLayerTower_app_comp_galoisLayerAction h Ω L'
+          (Profinite.continuousMapRingObj T₀) σ _)
+        (map_map_eq_id_of_iso_id (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') _
+          (htriv q _ ((IntermediateField.mem_fixingSubgroup_iff L' _).2 fun x hx ↦
+            σ.commutes ⟨x, hx⟩))))
   -- the exchange of the projection `(N_{L'})_Ω ⟶ N_{L'}` is invertible: its idempotent is the
   -- identity on cohomology sheaves
   have hfix (q : ℤ) := hproj (𝟙 X') q (𝟙 _) (fun σ : Ω ≃ₐ[L'] Ω ↦ σ)
     (fun M a ↦ ⟨a.liftNormal Ω, fun x ↦ a.liftNormal_commutes Ω x⟩)
     (fun σ ↦ (Category.comp_id _).trans (hact σ q))
-  have : IsIso ((((N.galoisLayer h L').galoisLayerHom (pullback.snd _ _) Ω).pullbackExchange
-      (Profinite.continuousMapRingObj T₀)).app
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) :=
-    (NatIso.isIso_map_iff (leftDerivedUpperStarId _ X') _).1 ((DerivedCategory.isIso_iff _ _).2
-      fun q ↦ isIso_map_of_comp_eq_id (L((𝟙 X')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
-        DerivedCategory.homologyFunctor _ q) hr ((Category.comp_id _).symm.trans (hfix q)))
+  have := isIso_of_split_of_homology_map_comp_eq_id
+    (leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X') hr hfix
   -- composition law for `(N_{L'})_Ω ⟶ N_Ω ⟶ N_{L'}`
-  exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X')
-    (N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _
-      (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
+  have hcomp := N.pullbackExchange_galoisLayerHom_galoisLayerTower_app h Ω L' _
+    (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
+  exact isIso_of_comp_eq_comp_map_comp (leftDerivedUpperStarId _ X') hcomp
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
