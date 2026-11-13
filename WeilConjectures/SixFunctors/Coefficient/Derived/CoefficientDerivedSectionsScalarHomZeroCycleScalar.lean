@@ -365,7 +365,7 @@ private theorem unitClass_eq_of_scalar_model
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at hm' ⊢
     exact hm'.trans (congrArg (H.map b) hz)
   have e1 := ((G ⋙ H).mapIso p).hom_inv_id_apply
-  rw [G.map_comp, H.map_comp, ConcreteCategory.comp_apply, ← key]
+  rw [G.map_comp, H.map_comp (G.map w), ConcreteCategory.comp_apply, ← key]
   exact (e1 _).symm
 
 set_option profiler true in
@@ -406,9 +406,9 @@ theorem coefficientFiniteAdjunction_unit_unitClass
       (coefficientFiniteDerivedRestriction l E W n).map pU.hom =
       DerivedCategory.Q.map (coefficientIntegralUnitComplexUnit l E W n) ≫
         (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.inv.app I := by
-    rw [← hu]
-    simp only [Category.assoc]
-    erw [Iso.hom_inv_id_app, Category.comp_id]
+    exact (Iso.eq_comp_inv
+      ((scalarReductionRestriction l E W n).mapDerivedCategoryFactors.app I)).2
+        ((Category.assoc _ _ _).trans hu)
   have hm := coefficientScalarSections_model_eq l E W D n I
   have hA := coefficientUnitClass_map.{u, t + 1, t} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
