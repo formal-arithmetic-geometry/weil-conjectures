@@ -27,6 +27,15 @@ open CategoryTheory Limits MonoidalCategory MonObj
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+private lemma mapHomotopyCategoryCompIso_refl_map
+    {V W W' D : Type*} [Category* V] [Category* W] [Category* W'] [Category* D]
+    [Preadditive V] [Preadditive W] [Preadditive W']
+    {ι : Type*} (c : ComplexShape ι) (F : V ⥤ W) (G : W ⥤ W')
+    [F.Additive] [G.Additive] (Q : HomotopyCategory W' c ⥤ D)
+    (K : HomotopyCategory V c) :
+    Q.map ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) c).hom.app K) = 𝟙 _ := by
+  rw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Q.map_id]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -130,9 +139,6 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
       [MonObj R] [IsCommMonObj R]
       (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
       GradedObject.HasGoodTensorTensor₂₃ P Q S := inferInstance
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app]
-  erw [DerivedCategory.Qh.map_id, DerivedCategory.Qh.map_id]
-  simp only [Category.id_comp, Category.comp_id]
   simp only [derivedUpperStarExtendScalarsIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_hom_app, Category.id_comp,
@@ -152,8 +158,6 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
     (Mod.extendScalars (condensedPullbackHom Λ f ≫ coefficientMap a X)) K
   dsimp only [Functor.comp_obj, Functor.comp_map] at t3 t4 t5
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at t3 t5
-  erw [DerivedCategory.Qh.map_id, Category.comp_id] at t3 t5
   simp only [t3, t4, reassoc_of% t5]
   have t6 := (Mod.derivedExtendScalarsCompIso (condensedPullbackHom Λ f) (coefficientMap a X)
     (condensedPullbackHom Λ f ≫ coefficientMap a X) rfl).inv.naturality
@@ -167,10 +171,10 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
     (Mod.extendScalars (condensedPullbackHom Λ f)) K
   dsimp only [Functor.comp_obj, Functor.comp_map] at t6 t7 t8
   simp only [← reassoc_of% t6, reassoc_of% t7]
-  simp only [Functor.mapHomotopyCategoryCompIso_refl_hom_app] at t8
-  erw [DerivedCategory.Qh.map_id, Category.comp_id] at t8
+  simp only [mapHomotopyCategoryCompIso_refl_map, Category.comp_id] at t8
   have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
   simp only [Functor.map_comp] at t9
+  simp only [mapHomotopyCategoryCompIso_refl_map, Category.id_comp]
   simp only [leftDerivedUpperStarIso, reassoc_of% t9]
   have t10 :=
     mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendScalarsIso a f K
