@@ -90,6 +90,7 @@ theorem pairRepresentative_eq_of_stage_transport
   exact (StageSystem.PairCategory.mkHom_tr h u).symm
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The categorical component calculation checks several equivalent coefficient-category instances.
 /--
 At the level of the finite coefficient stage, the mixed scalar square and the
