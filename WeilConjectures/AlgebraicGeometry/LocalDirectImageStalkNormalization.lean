@@ -81,6 +81,13 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
   exact fmap_iso _ _ p
 
 
+private theorem inverse_normalization_of_surjective {A B C : Type*}
+    (e : A → B) (s : B → A) (hs : Function.LeftInverse s e)
+    (r : A → C) (g : C → B) (hr : Function.Surjective r)
+    (h : ∀ a, e a = g (r a)) (c : C) : r (s (g c)) = c := by
+  obtain ⟨a, rfl⟩ := hr c
+  rw [← h a, hs a]
+
 set_option profiler true in
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
@@ -160,11 +167,10 @@ theorem localDirectImage_stalk_cohomology_normalization
         ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F))).presheaf
     V y hy
   have hr : Function.Surjective r := (ConcreteCategory.bijective_of_isIso r).2
-  obtain ⟨eta, heta⟩ := hr xi
-  have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
-  have heclass := (he eta).trans hclass
-  have h : g (D.targetClass p xi) = e eta :=
-    (congrArg (fun z ↦ g (D.targetClass p z)) heta).symm.trans heclass.symm
-  exact (congrArg r ((congrArg e.symm h).trans (e.symm_apply_apply eta))).trans heta
+  have hclass (eta) := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
+  have heclass (eta) := (he eta).trans (hclass eta)
+  have hnormalization := inverse_normalization_of_surjective e e.symm.toLinearMap e.symm_apply_apply
+    r (fun z ↦ g (D.targetClass p z)) hr heclass xi
+  exact hnormalization
 
 end AlgebraicGeometry
