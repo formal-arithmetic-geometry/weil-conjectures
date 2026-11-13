@@ -85,8 +85,15 @@ private lemma comparisonCompatible_symm_of_composite_eq
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
     {F : D ⥤ C} {F' : D' ⥤ C'} {N_D : D ⥤ D'} {N_C : C ⥤ C'}
     (α : F ⋙ N_C ≅ N_D ⋙ F')
-    (φ ψ : F.TensorComparison) (φ' ψ' : F'.TensorComparison)
-    (m_C : N_C.TensorIso) (m_D : N_D.TensorIso) (hφ : φ = ψ) (hφ' : φ' = ψ')
+    (φ ψ : (Functor.postcompose₂.obj F).obj (curriedTensor D) ⟶
+      (((Functor.whiskeringLeft₂ C).obj F).obj F).obj (curriedTensor C))
+    (φ' ψ' : (Functor.postcompose₂.obj F').obj (curriedTensor D') ⟶
+      (((Functor.whiskeringLeft₂ C').obj F').obj F').obj (curriedTensor C'))
+    (m_C : (Functor.postcompose₂.obj N_C).obj (curriedTensor C) ≅
+      (((Functor.whiskeringLeft₂ C').obj N_C).obj N_C).obj (curriedTensor C'))
+    (m_D : (Functor.postcompose₂.obj N_D).obj (curriedTensor D) ≅
+      (((Functor.whiskeringLeft₂ D').obj N_D).obj N_D).obj (curriedTensor D'))
+    (hφ : φ = ψ) (hφ' : φ' = ψ')
     (h : ∀ K M, F'.map ((m_D.hom.app K).app M) ≫
         (ψ'.app (N_D.obj K)).app (N_D.obj M) =
       α.inv.app (K ⊗ M) ≫ N_C.map ((ψ.app K).app M) ≫
