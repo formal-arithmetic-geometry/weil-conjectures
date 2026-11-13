@@ -83,20 +83,6 @@ private theorem isIso_adjunct_left_evaluation
   rw [hf]
   exact (t.trans (e A).symm).bijective
 
-private theorem exists_perfect_rhom_dual_fast
-    (X : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
-    [∀ U : X.Opens, HasDerivedCategory.{w}
-      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
-    (K : schemeDerivedQCohCategory X)
-    (hK : Scheme.IsPerfect X K.obj) :
-    ∃ Kdual : schemeDerivedQCohCategory X,
-      Kdual.obj =
-        (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-          X.toRingedSpace.sheaf).obj (op K.obj, 𝟙_ (schemeDerivedCategory X)) ∧
-      Scheme.IsPerfect X Kdual.obj := by
-  exact exists_perfect_rhom_dual X K hK
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
@@ -208,7 +194,11 @@ theorem perfect_rhom_tensor_comparison
                       m.εIso.inv ∧
                 IsIso bc := by
   classical
-  obtain ⟨D, hD, hperfect⟩ := exists_perfect_rhom_dual_fast X K hK
+  letI : MonoidalCategory (schemeDerivedCategory X) := schemeDerivedTensorMonoidal X
+  have hdual := exists_perfect_rhom_dual X K hK
+  let D := hdual.choose
+  have hD := hdual.choose_spec.1
+  have hperfect := hdual.choose_spec.2
   let ev := adj D.obj K.obj (𝟙_ (schemeDerivedCategory X)) (eqToHom hD)
   let φ := fun N : schemeDerivedCategory X ↦
     (adj (N ⊗ D.obj) K.obj N).symm

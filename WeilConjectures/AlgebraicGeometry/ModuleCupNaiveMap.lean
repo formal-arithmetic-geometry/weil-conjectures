@@ -113,21 +113,6 @@ private theorem naiveMapComponent_summand
             (HomologicalComplex.ιTensorObj K L i j n h) := by
   exact HomologicalComplex.ι_mapBifunctorDesc _ i j h
 
-private theorem naiveMapComponent_summand_fast
-    (K L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
-    (i j n : ℤ) (h : i + j = n) :
-    HomologicalComplex.ιTensorObj
-        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj K)
-        (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj L) i j n h ≫
-      moduleCup_naiveMapComponent X K L n =
-        moduleCup_sectionTensorMap X (K.X i) (L.X j) ≫
-          (RingedSpace.globalSectionsFunctor X.toRingedSpace).map
-            (HomologicalComplex.ιTensorObj K L i j n h) := by
-  exact HomologicalComplex.ι_mapBifunctorDesc _ i j h
-
--- Rewriting tensor summands unfolds the two induced monoidal structures.
 /-- The summandwise section tensor maps commute with the total differentials.
 Source: Stacks, Tag 0FKU, the naive product before Lemma 20.31.3.
 (blueprint: lem-sc-module-cup-naive-map-chain)
@@ -145,6 +130,9 @@ theorem moduleCup_naiveMap_comm
       (ComplexShape.up ℤ)
     (T.obj K ⊗ T.obj L).d n m ≫ moduleCup_naiveMapComponent X K L m =
       moduleCup_naiveMapComponent X K L n ≫ (T.obj (K ⊗ L)).d n m := by
+  letI : MonoidalCategory
+      (CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) := inferInstance
+  letI : MonoidalCategory (CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ) := inferInstance
   let S := RingedSpace.globalSectionsFunctor X.toRingedSpace
   let T := S.mapHomologicalComplex (ComplexShape.up ℤ)
   change (T.obj K ⊗ T.obj L).d n m ≫ _ = _ ≫ S.map ((K ⊗ L).d n m)
@@ -154,18 +142,13 @@ theorem moduleCup_naiveMap_comm
     change i + j = n at hij
     change HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _ =
       HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _
-    have hsource := CochainComplex.ιTensorObj_d (T.obj K) (T.obj L) i j n m hij hnm
-    rw [← Category.assoc, hsource]
+    rw [← Category.assoc, CochainComplex.ιTensorObj_d _ _ i j n m hij hnm]
     rw [Preadditive.add_comp, Linear.units_smul_comp]
     simp only [Category.assoc]
-    rw [naiveMapComponent_summand_fast X K L (i + 1) j m (by omega),
-      naiveMapComponent_summand_fast X K L i (j + 1) m (by omega)]
-    conv_rhs => rw [← Category.assoc,
-      naiveMapComponent_summand_fast X K L i j n hij]
-    have hdiff := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
-    rw [Category.assoc, ← S.map_comp]
-    have htarget := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
-    exact htarget
+    rw [naiveMapComponent_summand X K L (i + 1) j m (by omega),
+      naiveMapComponent_summand X K L i (j + 1) m (by omega)]
+    conv_rhs => rw [← Category.assoc, naiveMapComponent_summand X K L i j n hij]
+    rw [Category.assoc, ← S.map_comp, CochainComplex.ιTensorObj_d K L i j n m hij hnm]
     simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
       Preadditive.comp_add, Linear.comp_units_smul]
     apply congrArg₂ (· + ·)
