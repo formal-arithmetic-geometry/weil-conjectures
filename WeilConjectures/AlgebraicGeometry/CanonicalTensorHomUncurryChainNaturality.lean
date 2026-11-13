@@ -157,6 +157,7 @@ private theorem naturality_transport
 
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The resolution and localization instances need extra elaboration heartbeats.
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
 The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
