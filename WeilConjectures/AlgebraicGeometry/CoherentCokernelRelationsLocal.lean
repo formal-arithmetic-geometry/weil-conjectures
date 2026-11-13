@@ -38,10 +38,10 @@ private theorem overMap_preserves_kernel (X : RingedSpace.{u})
 -- Prove the kernel comparison in an abstract abelian category, so constructing
 -- the pushout and composing epimorphisms does not unfold sheaf restriction.
 private theorem exists_epi_kernel_pullback_snd
-    {C : Type*} [Category C] [Abelian C] {L B H P K : C}
+    {C : Type*} [Category C] [Abelian C] {L B B' H P K : C}
     (g : L ⟶ H) (q : B ⟶ H) (p : P ⟶ pullback g q) [Epi p]
-    (k : kernel g ≅ K) :
-    ∃ e : kernel (p ≫ pullback.snd g q) ⟶ K, Epi e := by
+    (eB : B ≅ B') (k : kernel g ≅ K) :
+    ∃ e : kernel (p ≫ pullback.snd g q ≫ eB.hom) ⟶ K, Epi e := by
   let ψ := p ≫ pullback.snd g q
   let a := kernel.map ψ (pullback.snd g q) p (𝟙 _) (by simp only [ψ, Category.comp_id])
   let b := kernel.map (pullback.snd g q) g (pullback.fst g q) q
@@ -51,9 +51,12 @@ private theorem exists_epi_kernel_pullback_snd
   have : Epi a := Abelian.epi_kernel_map_of_isPushout sq
   have : IsIso b :=
     isIso_kernel_map_of_isPullback (IsPullback.of_hasPullback g q).flip
-  exact ⟨a ≫ b ≫ k.hom, inferInstance⟩
+  let i : kernel ψ ≅ kernel (p ≫ pullback.snd g q ≫ eB.hom) :=
+    kernel.mapIso _ _ (Iso.refl _) eB (by simp only [ψ, Iso.refl_hom,
+      Category.id_comp, Category.assoc])
+  exact ⟨i.inv ≫ a ≫ b ≫ k.hom, inferInstance⟩
 
-set_option trace.profiler true in
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 -- Unfold the slice restriction functor in the kernel and pullback comparisons.
 /-- Finite-free replacement for cokernel relations on a neighbourhood of each point.
@@ -103,11 +106,12 @@ theorem coherent_cokernel_relations_local (X : RingedSpace.{u})
   let D := SheafOfModules.overMap.{u} (moduleRings X) (homOfLE hVU)
   let gV := D.map g
   let q := D.map ((cokernel.π f).over U)
-  let ψ : SheafOfModules.free (R := (moduleRings X).over V)
-      (ULift.{u} (Fin m)) ⟶ G.over V := p ≫ pullback.snd gV q
+  let cG := (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE hVU)).app G
+  let ψ := p ≫ pullback.snd gV q ≫ cG.hom
   have : Epi p := hp
   have := overMap_preserves_kernel X U V hVU g
-  obtain ⟨e, he⟩ := exists_epi_kernel_pullback_snd gV q p (PreservesKernel.iso D g).symm
+  obtain ⟨e, he⟩ :=
+    exists_epi_kernel_pullback_snd gV q p cG (PreservesKernel.iso D g).symm
   exact ⟨V, hVU, hxV, m, ψ, e, he⟩
 
 end AlgebraicGeometry.RingedSpace
