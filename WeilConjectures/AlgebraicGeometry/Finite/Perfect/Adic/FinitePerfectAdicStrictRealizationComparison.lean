@@ -432,8 +432,7 @@ variable (X : Scheme.{t}) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
   (hδ : ∀ (U' : V.left.ProEt) x, δ.hom.app (op U') x =
     g.val.app (op (finitePerfectAdicChartObject V U')) x)
 
-set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The explicit square compares two presentations of the realization on the slice.
 include hps hαp hcoh hδ in
 /-- The explicit part of the realization square, after replacing inverse image by restriction:
