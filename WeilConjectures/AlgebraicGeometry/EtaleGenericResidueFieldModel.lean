@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-! # Spreading a finite étale generic residue field
 
-Source: Stacks Project, Tag 0551, proof (monic polynomial construction).
+## References
+
+* Stacks Project, Tag 0551
 -/
 
 @[expose] public section

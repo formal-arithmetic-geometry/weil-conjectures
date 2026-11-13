@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Enough globally generated invertible modules give an ample module
 
-Source: Stacks Project, Varieties, Lemma 09NC.
+## References
+
+* Stacks Project, Tag 09NC
 -/
 
 @[expose] public section

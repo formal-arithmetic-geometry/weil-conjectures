@@ -13,7 +13,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of coherent formal modules along a scheme isomorphism
 
-Source: Stacks Project, Section 0EHN, and the affine identification in Lemma 087W.
+## References
+
+* Stacks Project, Tags 0EHN and 087W
 -/
 
 @[expose] public section

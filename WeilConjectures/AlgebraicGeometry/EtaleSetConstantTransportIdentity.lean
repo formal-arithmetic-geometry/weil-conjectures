@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
 
 /-! # Identity transport of a map out of a constant sheaf
 
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 03P5
 -/
 
 @[expose] public section

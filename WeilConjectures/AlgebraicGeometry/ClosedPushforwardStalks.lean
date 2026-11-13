@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Stalks of pushforward along a closed immersion
 
-Source: Stacks Project, Sheaves, Lemma 00AE and Modules, Lemma 08KS.
+## References
+
+* Stacks Project, Tags 00AE and 08KS
 -/
 
 @[expose] public section

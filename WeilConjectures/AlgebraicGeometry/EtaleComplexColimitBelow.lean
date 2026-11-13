@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 /-! # Lower bound of the pulled-back complex colimit
 
-Source: Stacks Project, Tags 015J and 0EZM.
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section

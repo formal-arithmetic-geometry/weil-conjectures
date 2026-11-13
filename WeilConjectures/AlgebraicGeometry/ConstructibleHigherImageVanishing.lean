@@ -15,9 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 /-!
 # Extending constructible higher-image vanishing to arbitrary sheaves
 
-Source: Stacks Project, Tags 03SA and 09Z1; ILO, Exposé XIII, Proposition 2.3.4.
-The geometric affine Lefschetz calculation in that proof treats constructible sheaves.
-Constructible generation and filtered-colimit continuity extend its uniform bound.
+## References
+
+* Stacks Project, Tags 03SA and 09Z1
 -/
 
 @[expose] public section

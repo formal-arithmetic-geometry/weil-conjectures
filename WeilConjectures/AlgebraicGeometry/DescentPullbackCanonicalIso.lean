@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DescentPullbackConstruction
 /-!
 # Canonical comparisons of pullback functors on scheme descent data
 
-Source: Stacks Project, Descent, Tags 02VS(3) and 023Y(1)--(2).
+## References
+
+* Stacks Project, Tags 02VS and 023Y
 -/
 
 @[expose] public section

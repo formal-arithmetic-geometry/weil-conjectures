@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Tor bounds for an affine module model
 
-Source: Stacks Project, Tags 08CG, 08E9 and 08DX.
+## References
+
+* Stacks Project, Tags 08CG, 08E9 and 08DX
 -/
 
 @[expose] public section

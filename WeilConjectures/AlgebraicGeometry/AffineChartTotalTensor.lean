@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Total tensor complexes through the canonical affine chart
 
-Source: Stacks Project, Tag 08DX(2), the underived total-complex comparison.
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section

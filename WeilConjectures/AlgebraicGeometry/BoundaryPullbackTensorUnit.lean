@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Section normalization of the boundary pullback tensor comparison
 
-Source: Stacks Project, Tag 01CD.
+## References
+
+* Stacks Project, Tag 01CD
 -/
 
 @[expose] public section

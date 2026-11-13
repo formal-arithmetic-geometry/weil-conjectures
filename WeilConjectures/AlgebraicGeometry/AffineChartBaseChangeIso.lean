@@ -12,7 +12,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Spectrum presentation of the base change of one affine chart
 
-Source: Stacks Project, Schemes, Tags 01JR and 01I4.
+## References
+
+* Stacks Project, Tags 01JR and 01I4
 -/
 
 @[expose] public section

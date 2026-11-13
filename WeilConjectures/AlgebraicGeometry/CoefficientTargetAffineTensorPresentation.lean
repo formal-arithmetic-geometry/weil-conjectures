@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientTargetTensorSurjective
 
 /-! # Tensor presentation of inverse-image coefficient sections
 
-Source: Stacks Project, Tags 02KG, 01I9 and 01IA.
+## References
+
+* Stacks Project, Tags 02KG, 01I9 and 01IA
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Termwise representatives in affine spectrum coordinates
 
-Source: Stacks Project, Tags 0DJ8 and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ8 and 0D5S
 -/
 
 @[expose] public section

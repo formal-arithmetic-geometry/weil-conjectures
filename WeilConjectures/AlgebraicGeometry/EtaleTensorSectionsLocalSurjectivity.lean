@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-! # Local lifting of tensor sections of an epimorphism
 
-Source: Stacks Project, Tags 070S(2), 03FH(1), and 0096.
+## References
+
+* Stacks Project, Tags 070S, 03FH and 0096
 -/
 
 @[expose] public section

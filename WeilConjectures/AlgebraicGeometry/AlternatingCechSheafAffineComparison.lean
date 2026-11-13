@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafAffineQuasicoherent
 
 /-! # Affine direct image of the increasing-tuple sheaf complex
 
-Source: Stacks Project, Tags 02KG and 02KH, comparison of affine Čech complexes;
-Tag 01FM, signed increasing tuples.
+## References
+
+* Stacks Project, Tags 02KG, 02KH and 01FM
 -/
 
 @[expose] public section

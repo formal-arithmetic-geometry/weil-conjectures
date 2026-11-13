@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-! # Sheafification and derived pullback of affine projective models
 
-Source: Stacks Project, Tag 09RF, affine case; Tags 08EB, 06YI and 06YJ.
+## References
+
+* Stacks Project, Tags 09RF, 08EB, 06YI and 06YJ
 -/
 
 @[expose] public section

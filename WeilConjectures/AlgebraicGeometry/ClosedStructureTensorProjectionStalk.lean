@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # The local calculation for the closed structure tensor projection
-Source: Stacks Project, Tags 08KS, 01CB and 0098. -/
+
+## References
+
+* Stacks Project, Tags 08KS, 01CB and 0098
+-/
 
 @[expose] public section
 set_option autoImplicit false

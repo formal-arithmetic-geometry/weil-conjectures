@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
 /-!
 # Descent of arrows between finite sums of affine etale free module sheaves
 
-Source: Stacks Project, Tags 09YU (3), 09YQ, 095N and 03S6.
+## References
+
+* Stacks Project, Tags 09YU, 09YQ, 095N and 03S6
 -/
 
 @[expose] public section

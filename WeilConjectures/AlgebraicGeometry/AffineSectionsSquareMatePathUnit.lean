@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPushforwardSquareMateUnit
 
 /-! # Unit formula for the affine sections mate path
 
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7.
+## References
+
+* Stacks Project, Tags 0D5T, 08HY and 0AA7
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shift compatibility of the derived direct-image transition
 
-Source: Stacks Project, Tag 09Z1, derived-adjunction coherence elaboration.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

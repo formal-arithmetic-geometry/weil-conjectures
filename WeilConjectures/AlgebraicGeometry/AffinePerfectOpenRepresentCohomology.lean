@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCol
 
 /-! # Koszul perfect objects represent cohomology classes on a principal open
 
-Source: Stacks Project, Section 36.9, Tags 08CX, 08DC, and 08DD.
+## References
+
+* Stacks Project, Tags 08CX, 08DC and 08DD
 -/
 
 @[expose] public section

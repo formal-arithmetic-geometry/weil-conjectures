@@ -33,8 +33,9 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Koszul units under exact inverse image preserving products
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tags
-07A4 and 0941.
+## References
+
+* Stacks Project, Tags 0A0E, 07A4 and 0941
 -/
 
 @[expose] public section

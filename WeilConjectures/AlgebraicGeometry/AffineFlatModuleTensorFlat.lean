@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Tensor flatness from flat sections on all affine subopens
 
-Source: Stacks Project, Tags 05NE, 00H9 and 00HT.
+## References
+
+* Stacks Project, Tags 05NE, 00H9 and 00HT
 -/
 
 @[expose] public section

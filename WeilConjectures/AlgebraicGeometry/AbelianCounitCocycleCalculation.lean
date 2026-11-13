@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianInjectiveCounitCocycle
 
 /-! # The cocycle calculation for an arbitrary abelian injective target
 
-Source: Stacks Project, Tags 01F7 and 06XR.
+## References
+
+* Stacks Project, Tags 01F7 and 06XR
 -/
 
 @[expose] public section

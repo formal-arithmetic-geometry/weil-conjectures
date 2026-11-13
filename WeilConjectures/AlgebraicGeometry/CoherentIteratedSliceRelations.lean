@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 /-! # Relations of a coherent sheaf on an iterated open slice
 
-Source: Stacks Project, Modules, Definition 01BV, condition (2).
+## References
+
+* Stacks Project, Tag 01BV
 -/
 
 @[expose] public section

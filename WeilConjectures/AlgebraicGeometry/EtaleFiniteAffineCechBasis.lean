@@ -13,7 +13,10 @@ import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Finite affine covers for the étale Čech criterion
-Source: Stacks Project, Tags 0218 and 03F9.
+
+## References
+
+* Stacks Project, Tags 0218 and 03F9
 -/
 
 @[expose] public section

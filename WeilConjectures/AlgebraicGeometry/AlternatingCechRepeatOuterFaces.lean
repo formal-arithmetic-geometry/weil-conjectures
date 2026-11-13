@@ -12,7 +12,9 @@ import Mathlib.Data.Fin.Tuple.Sort
 /-!
 # The outer faces of a duplicated first repeat
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

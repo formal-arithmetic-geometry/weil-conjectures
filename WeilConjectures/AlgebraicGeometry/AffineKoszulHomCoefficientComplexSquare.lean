@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulSignedDualCoefficientSquare
 
 /-! # Finite free Koszul Hom coordinates before taking homology
 
-Source: Stacks Project, Tag 0BQZ, displayed map of Hom complexes. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 

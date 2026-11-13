@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionCoherence
 /-!
 # Composition and coherence of derived pullbacks
 
-Source: Stacks Project, Cohomology, Lemma 20.27.2, Tag 0D5S.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

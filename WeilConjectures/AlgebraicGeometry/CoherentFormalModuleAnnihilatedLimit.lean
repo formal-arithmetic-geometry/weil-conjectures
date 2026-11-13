@@ -14,7 +14,9 @@ import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
 
 /-! # From termwise annihilation to annihilation of an affine limit
 
-Source: Stacks Project, Remark 0888, the implication (1) to (2).
+## References
+
+* Stacks Project, Tag 0888
 -/
 
 @[expose] public section

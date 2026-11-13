@@ -27,7 +27,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhoo
 
 /-! # A local free model along an integral closed subscheme
 
-Source: Stacks Project, Tag 01YE, the argument before clearing denominators.
+## References
+
+* Stacks Project, Tag 01YE
 -/
 
 @[expose] public section

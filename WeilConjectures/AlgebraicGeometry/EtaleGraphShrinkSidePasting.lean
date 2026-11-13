@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting
 
 /-! # Side-square pasting for a shrinking graph neighborhood
 
-Source: Stacks Project, Tag 0F7J, graph neighborhood pasting.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

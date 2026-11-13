@@ -19,7 +19,9 @@ import WeilConjectures.ConstructibleSheaf.Biproduct
 /-!
 # Local presentations of extensions with finite constant outer terms
 
-Source: Stacks Project, Etale Cohomology Tag 03RX (3), via Modules on Sites Tag 093U.
+## References
+
+* Stacks Project, Tags 03RX and 093U
 -/
 
 @[expose] public section

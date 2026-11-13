@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical cohomology cocone on inverse-image opens
 
-Source: Stacks Project, Tags 09YQ and 01F7.
+## References
+
+* Stacks Project, Tags 09YQ and 01F7
 -/
 
 @[expose] public section

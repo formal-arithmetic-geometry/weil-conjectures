@@ -19,7 +19,9 @@ import all WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 
 /-! # Residue recovery from the quotient homotopy limit
 
-Source: Stacks Project, Tags 099M and 0A0E.
+## References
+
+* Stacks Project, Tags 099M and 0A0E
 -/
 
 @[expose] public noncomputable section

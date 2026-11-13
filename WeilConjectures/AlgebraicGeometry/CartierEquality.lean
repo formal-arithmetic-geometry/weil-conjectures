@@ -19,7 +19,9 @@ import WeilConjectures.RingTheory.FractionFieldCompleteIntersectionCotangent
 /-!
 # Cartier equality
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07E1.
+## References
+
+* Stacks Project, Tag 07E1
 -/
 
 @[expose] public section

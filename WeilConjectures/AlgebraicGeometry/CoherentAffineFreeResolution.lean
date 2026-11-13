@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finite free resolutions on affine neighbourhoods
 
-Source: Stacks Project, Coherent Modules, Lemma 01XZ and Algebra, Lemma 00LP.
+## References
+
+* Stacks Project, Tags 01XZ and 00LP
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SectionRingQuotientChartOverlap
 
 /-! # Compatible local quotient morphisms for the section ring
 
-Source: Stacks Project, Properties, Tag 01PZ; Constructions, Tags 01N8 and 01NK.
+## References
+
+* Stacks Project, Tags 01PZ, 01N8 and 01NK
 -/
 
 @[expose] public section

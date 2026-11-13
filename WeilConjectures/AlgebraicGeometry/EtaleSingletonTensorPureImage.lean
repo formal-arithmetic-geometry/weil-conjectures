@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 
 /-! # Canonical evaluation of normalized pure tensors
 
-Source: Stacks Project, Tag 03P2, affine tensor calculation. -/
+## References
+
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 

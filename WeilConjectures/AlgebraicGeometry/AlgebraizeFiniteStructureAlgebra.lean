@@ -26,7 +26,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Algebraization of the structure algebras of a finite formal system
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09ZT, proof via 088F and 088E.
+## References
+
+* Stacks Project, Tags 09ZT, 088F and 088E
 -/
 
 @[expose] public section

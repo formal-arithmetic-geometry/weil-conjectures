@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystemNatural
 
 /-! # Complex presentation of the varying-coefficient raw diagram
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section

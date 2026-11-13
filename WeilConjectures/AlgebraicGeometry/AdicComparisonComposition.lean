@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Scalar composition and geometric comparison
 
-Source: Stacks Project, Tags 06YY, 0G7E and 09AL, normalized tensor balancing.
+## References
+
+* Stacks Project, Tags 06YY, 0G7E and 09AL
 -/
 
 @[expose] public noncomputable section

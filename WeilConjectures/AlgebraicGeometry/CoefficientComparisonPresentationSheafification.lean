@@ -10,7 +10,9 @@ import WeilConjectures.RingTheory.IndEtaleSmallIndex
 
 /-! # Sheafification on affine etale presentations
 
-Source: Stacks Project, Tag 099S.
+## References
+
+* Stacks Project, Tag 099S
 -/
 
 @[expose] public section

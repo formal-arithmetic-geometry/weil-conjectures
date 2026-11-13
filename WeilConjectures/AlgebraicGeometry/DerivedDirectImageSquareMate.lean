@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImageCom
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionMateUnit
 
 /-! # Normalized direct-image square as a pullback mate
-Source: Stacks Project, cohomology.tex, Tags 08HY, 0D5T and 0D5W.
+
+## References
+
+* Stacks Project, Tags 08HY, 0D5T and 0D5W
 -/
 
 @[expose] public section

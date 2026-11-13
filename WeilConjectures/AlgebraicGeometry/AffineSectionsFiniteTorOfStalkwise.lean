@@ -14,7 +14,9 @@ import Mathlib.RingTheory.Flat.Stability
 
 /-! # Affine coordinate Tor bounds from stalkwise bounds
 
-Source: Stacks Project, Tag 069C.
+## References
+
+* Stacks Project, Tag 069C
 -/
 
 @[expose] public section

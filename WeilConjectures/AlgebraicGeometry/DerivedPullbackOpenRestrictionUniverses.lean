@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Derived pullback restriction with independent localization universes
 
-Source: Stacks Project, Tag 08DW, compatibility with restriction to opens.
+## References
+
+* Stacks Project, Tag 08DW
 -/
 
 @[expose] public section

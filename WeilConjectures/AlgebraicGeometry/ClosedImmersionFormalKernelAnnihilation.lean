@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Annihilation of a transported formal kernel
 
-Source: Stacks Project, Cohomology of Schemes, Theorem 088E and Tags 087T, 087W, 087X.
+## References
+
+* Stacks Project, Tags 088E, 087T, 087W and 087X
 -/
 
 @[expose] public section

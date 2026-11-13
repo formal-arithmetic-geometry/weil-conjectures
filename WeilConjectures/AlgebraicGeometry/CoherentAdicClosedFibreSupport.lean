@@ -14,7 +14,9 @@ import Mathlib.RingTheory.Nakayama
 
 /-! # Coherent support on an adic closed fibre
 
-Source: Stacks Project, Theorem 088E, displayed support equation after projective existence.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DescendFiniteAffineBasePiece
 /-!
 # Local finiteness descent over one affine target open
 
-Source: Stacks Project, Limits, proof of Lemma 01ZO, and Algebra, Lemma 07RG.
+## References
+
+* Stacks Project, Tags 01ZO and 07RG
 -/
 
 @[expose] public section

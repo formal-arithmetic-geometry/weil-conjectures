@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalarExt
 
 /-! # Exact constant coefficient realization and finite quotient normalization
 
-Source: Stacks Project, Tags 093M, 099M and 03EK.
+## References
+
+* Stacks Project, Tags 093M, 099M and 03EK
 -/
 
 @[expose] public noncomputable section

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Affine intersection-filtration models for stabilized kernel stalks
 
-Source: Stacks Project, Lemmas 087W and 087X, affine calculation for claim (a).
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section

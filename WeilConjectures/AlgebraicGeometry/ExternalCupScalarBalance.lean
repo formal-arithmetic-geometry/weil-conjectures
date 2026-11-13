@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 
 /-! # Scalar balance of external cup products
 
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, Tag 01F7.
+## References
+
+* Stacks Project, Tags 0BED and 01F7
 -/
 
 @[expose] public section

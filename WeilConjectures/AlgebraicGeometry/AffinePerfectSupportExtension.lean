@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Affine perfect support extension
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EK (Lemma 36.13.10).
+## References
+
+* Stacks Project, Tag 08EK
 -/
 
 @[expose] public section

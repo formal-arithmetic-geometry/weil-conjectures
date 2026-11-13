@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Affine power sections away from component intersections
 
-Source: Stacks Project, Varieties, Lemma 09NX, final paragraph, and Remark 09NW.
+## References
+
+* Stacks Project, Tags 09NX and 09NW
 -/
 
 @[expose] public section

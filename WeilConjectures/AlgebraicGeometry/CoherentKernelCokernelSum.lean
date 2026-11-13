@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentExtensionRelations
 
 /-! # Closure properties of coherent modules
 
-Source: Stacks Project, Modules, Tag 01BY, parts (3) and (4).
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section

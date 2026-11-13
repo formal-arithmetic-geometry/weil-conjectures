@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Vanishing of twists over one affine open
 
-Source: Stacks Project, Tag 02O1, affine-local part of Lemma 30.16.2.
+## References
+
+* Stacks Project, Tag 02O1
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedGlobalGermUnitFac
 
 /-! # Derived exchange and the canonical global germ
 
-Source: Stacks Project, Tags 095T, 01F8, and 08J6.
+## References
+
+* Stacks Project, Tags 095T, 01F8 and 08J6
 -/
 
 @[expose] public section

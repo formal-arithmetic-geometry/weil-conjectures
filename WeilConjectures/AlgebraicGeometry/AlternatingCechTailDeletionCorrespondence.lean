@@ -13,7 +13,9 @@ import Mathlib.Data.Fin.Tuple.Sort
 /-!
 # Unsigned correspondence for tail deletions
 
-Source: Stacks Project, Tag 01FM, verification of equation 20.23.6.1.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

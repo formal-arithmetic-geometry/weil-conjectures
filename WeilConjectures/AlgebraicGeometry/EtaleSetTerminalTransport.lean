@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 
 /-! # Transport of terminal sections through inverse-image composition
 
-Source: Stacks Project, Sites, Tags 03CB and 03CC.
+## References
+
+* Stacks Project, Tags 03CB and 03CC
 -/
 
 @[expose] public section

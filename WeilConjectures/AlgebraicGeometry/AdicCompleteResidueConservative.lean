@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.AdicResidueQuotientUnitUniversal
 
 /-! # Derived Nakayama on localized completed coefficient sites
 
-Source: Stacks Project, Tags 09C6, 099M and 099F.
+## References
+
+* Stacks Project, Tags 09C6, 099M and 099F
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.DeterminantShortExact
 
 /-! # Ordinary determinant evaluation
 
-Source: Stacks Project, Tag 0BRT, final determinant inversion.
+## References
+
+* Stacks Project, Tag 0BRT
 -/
 
 @[expose] public section

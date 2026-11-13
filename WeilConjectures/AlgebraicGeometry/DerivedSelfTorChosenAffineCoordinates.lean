@@ -27,7 +27,10 @@ import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Intrinsic affine self-Tor for one chosen augmented lift
 
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS. -/
+## References
+
+* Stacks Project, Tags 08DX, 06YH, 01I9 and 00LS
+-/
 
 @[expose] public section
 set_option autoImplicit false

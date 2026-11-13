@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Affine derived direct image reflects isomorphisms
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08I8,
-Lemma 36.5.2.
+## References
+
+* Stacks Project, Tag 08I8
 -/
 
 @[expose] public section

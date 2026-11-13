@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 
 /-! # Evaluation of a normalized singleton comparison
 
-Source: Stacks Project, Tag 03P2, singleton Čech term. -/
+## References
+
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 

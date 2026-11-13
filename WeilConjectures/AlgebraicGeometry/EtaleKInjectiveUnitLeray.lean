@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Unit--Leray computation on K-injective complexes
 
-Source: Stacks Project, Tags 08BJ, 070I, 01F8, 01F9, 01FA and 08J6.
+## References
+
+* Stacks Project, Tags 08BJ, 070I, 01F8, 01F9, 01FA and 08J6
 -/
 
 @[expose] public section

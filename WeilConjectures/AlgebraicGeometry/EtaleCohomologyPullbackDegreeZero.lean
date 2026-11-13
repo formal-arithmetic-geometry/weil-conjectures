@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
 /-!
 # Degree-zero étale cohomology and pullback
 
-Source: Stacks Project, Tags 05TD and 01FA.
+## References
+
+* Stacks Project, Tags 05TD and 01FA
 -/
 
 @[expose] public section

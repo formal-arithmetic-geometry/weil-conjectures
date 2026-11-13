@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Perfect source models on affine opens
 
-Source: Stacks Project, Tags 06Z0, 08EB and 08EJ.
+## References
+
+* Stacks Project, Tags 06Z0, 08EB and 08EJ
 -/
 
 @[expose] public section

@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionInverseImage
 import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 
 /-! Uniqueness for the normalized ordinary finite pullback comparison.
-Source: Stacks Project, Tags 06YY and 099L.
+
+## References
+
+* Stacks Project, Tags 06YY and 099L
 -/
 @[expose] public noncomputable section
 universe u

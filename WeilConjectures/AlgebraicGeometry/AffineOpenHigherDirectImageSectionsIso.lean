@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageOpenRestriction
 
 /-! # Leray comparison on affine opens of the target
 
-Source: Stacks Project, Tag 01XK, with open restriction Tag 01E1.
+## References
+
+* Stacks Project, Tags 01XK and 01E1
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentatives
 
 /-! # Prescribed normalized CE pages and their first-page computation
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictionNaturality
 
 /-! # Restriction property of module cohomology maps
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
+## References
+
+* Stacks Project, Tags 01F7 and 01FB
 -/
 
 @[expose] public section

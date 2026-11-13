@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 
 /-! # Algebraic stalk towers for finite adic reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C6, the normalized stalk system before
-application of More on Algebra, Tag 09AW.
+## References
+
+* Stacks Project, Tags 09C6 and 09AW
 -/
 
 @[expose] public noncomputable section

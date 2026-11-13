@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 
 /-! # Ordinary quotient complexes of constant perfect models
 
-Source: Stacks Project, Tags 09C6, 06YY and 064B.
+## References
+
+* Stacks Project, Tags 09C6, 06YY and 064B
 -/
 
 @[expose] public noncomputable section

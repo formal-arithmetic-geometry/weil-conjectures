@@ -12,8 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Inverse image of étale sheaves of sets along an étale morphism
 
-Source: Stacks Project, Étale Cohomology, Tag 03S2, paragraph after Definition 03S3;
-Sites, Tag 00XZ.
+## References
+
+* Stacks Project, Tags 03S2, 03S3 and 00XZ
 -/
 
 @[expose] public section

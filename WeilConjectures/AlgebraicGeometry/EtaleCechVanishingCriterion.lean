@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCechSectionwiseShortExact
 /-!
 # The étale Čech vanishing criterion
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
+## References
+
+* Stacks Project, Tag 03F9
 -/
 
 @[expose] public section

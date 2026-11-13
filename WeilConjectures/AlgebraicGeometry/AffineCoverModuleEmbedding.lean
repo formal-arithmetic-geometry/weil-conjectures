@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-! # The geometric part of the affine-cover acyclic embedding
 
-Source: Stacks Project, Tag 0BDY, construction in part (1).
+## References
+
+* Stacks Project, Tag 0BDY
 -/
 
 @[expose] public section

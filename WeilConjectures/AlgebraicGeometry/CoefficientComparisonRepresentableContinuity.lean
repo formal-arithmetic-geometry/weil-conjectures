@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 
 /-! # Continuity of etale representables at affine presentations
 
-Source: Stacks Project, Tag 099S.
+## References
+
+* Stacks Project, Tag 099S
 -/
 
 @[expose] public section

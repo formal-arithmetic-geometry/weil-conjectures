@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Finite-level internal Hom quotient annihilation
 
-Source: Stacks Project, Cohomology of Schemes, Tag 0882, comparison-map construction.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section

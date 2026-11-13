@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPresheafDegreeZeroIdenti
 
 /-! # Local alternating Čech cancellation
 
-Source: Stacks Project, Tags 02FU and 01FM.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section

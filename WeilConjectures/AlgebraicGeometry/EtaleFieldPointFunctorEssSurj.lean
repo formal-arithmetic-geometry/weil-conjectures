@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoproductEmbeddingPoints
 /-!
 # Essential surjectivity of the geometric-point functor
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section

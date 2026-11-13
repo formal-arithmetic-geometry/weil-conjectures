@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Geometric stalks on the coefficient-sized etale model
 
-Source: Stacks Project, Tags 03PT and 04EQ.
+## References
+
+* Stacks Project, Tags 03PT and 04EQ
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 /-!
 # Fullness of the compatible affine chart functor
 
-Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT.
+## References
+
+* Stacks Project, Tags 04HX and 04HT
 -/
 
 @[expose] public section

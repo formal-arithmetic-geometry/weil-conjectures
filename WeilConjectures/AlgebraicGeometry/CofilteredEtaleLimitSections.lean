@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Sections over a cofiltered limit of etale schemes
 
-Source: Stacks Project, Tag 03Q9, degree zero, using Tags 09YQ and 03S2.
+## References
+
+* Stacks Project, Tags 03Q9, 09YQ and 03S2
 -/
 
 @[expose] public section

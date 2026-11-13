@@ -12,7 +12,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 /-!
 # Sections on an affine open of a scheme-theoretic fibre
 
-Source: Stacks Project, Tags 01I4 and 01JQ, affine fibre-product formula.
+## References
+
+* Stacks Project, Tags 01I4 and 01JQ
 -/
 
 @[expose] public section

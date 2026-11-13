@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 /-!
 # Finite Tate sheaves and inverse image
-Source: Stacks Project, Etale Cohomology, Tags 03PK and 03Q1; Modules on Sites,
-Tags 03EK and 03EM; Cohomology on Sites, Tags 07A4 and 0G7E.
+
+## References
+
+* Stacks Project, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E
 -/
 @[expose] public section
 universe u

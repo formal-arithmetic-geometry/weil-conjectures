@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 
 /-! # Local derived isomorphisms on a weakly contractible affine object
 
-Source: Stacks Project, Tags 090K and 09C6.
+## References
+
+* Stacks Project, Tags 090K and 09C6
 -/
 
 @[expose] public noncomputable section

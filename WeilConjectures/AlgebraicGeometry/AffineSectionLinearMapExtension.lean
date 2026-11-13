@@ -14,7 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extending affine section maps
 
-Source: Stacks Project, Schemes, Lemma 01IB; Properties, Lemma 01PM.
+## References
+
+* Stacks Project, Tags 01IB and 01PM
 -/
 
 @[expose] public section

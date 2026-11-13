@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionClosedMonoidal
 
 /-! # Open restriction of canonical derived evaluation
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
+## References
+
+* Stacks Project, Tags 08DJ and 08DL
 -/
 
 @[expose] public section

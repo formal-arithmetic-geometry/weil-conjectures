@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 
 /-! # Sections of the normalized pointwise pullback evaluation
 
-Source: Stacks Project, Cohomology, Tags 08I3, 079W, 08DJ and 08JA.
+## References
+
+* Stacks Project, Tags 08I3, 079W, 08DJ and 08JA
 -/
 
 @[expose] public section

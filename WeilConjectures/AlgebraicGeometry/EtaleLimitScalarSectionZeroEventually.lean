@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Scalar continuity for descended qcqs étale objects
 
-Source: Stacks Project, Tags 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section

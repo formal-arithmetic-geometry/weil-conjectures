@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOpenKernelConormalSections
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-! # Affine diagonal cotangent comparison
 
-Source: Stacks Project, Tags 08S2, 01KJ and 01R3.
+## References
+
+* Stacks Project, Tags 08S2, 01KJ and 01R3
 -/
 
 @[expose] public section

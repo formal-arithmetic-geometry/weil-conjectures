@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Constant-ring comparison for etale inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
-Sites and Sheaves, Example 0H7J.
+## References
+
+* Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and 0H7J
 -/
 
 @[expose] public section

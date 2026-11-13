@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Compatibility of descended finite Čech coefficient legs
 
-Source: Stacks Project, Tag 09YP.
+## References
+
+* Stacks Project, Tag 09YP
 -/
 
 @[expose] public section

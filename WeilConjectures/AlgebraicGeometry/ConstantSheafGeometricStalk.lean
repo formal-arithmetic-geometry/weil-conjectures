@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # The canonical map to the geometric stalk of a constant étale sheaf
 
-Source: Stacks Project, Étale Cohomology, Tags 03PT (2), 040R and 03PQ.
+## References
+
+* Stacks Project, Tags 03PT, 040R and 03PQ
 -/
 
 @[expose] public section

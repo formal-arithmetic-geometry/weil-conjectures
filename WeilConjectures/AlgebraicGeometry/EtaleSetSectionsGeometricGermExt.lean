@@ -11,7 +11,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Étale set-sheaf sections are determined by geometric germs
 
-Source: Stacks Project, Étale Cohomology, Theorem 03PU, injectivity criterion.
+## References
+
+* Stacks Project, Tag 03PU
 -/
 
 @[expose] public section

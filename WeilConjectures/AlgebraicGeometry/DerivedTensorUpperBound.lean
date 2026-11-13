@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Derived tensor preserves an upper cohomological bound
 
-Source: Stacks Project, Tag 08EV, proof, the upper tensor bound;
-Tags 06YS and 06YD for bounded-above flat representatives.
+## References
+
+* Stacks Project, Tags 08EV, 06YS and 06YD
 -/
 
 @[expose] public section

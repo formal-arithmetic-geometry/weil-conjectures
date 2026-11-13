@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGlobalSectionsComparison
 
 /-! # Components of the external section morphism
 
-Source: Stacks Project, Tag 0BED, degree-zero cup product.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

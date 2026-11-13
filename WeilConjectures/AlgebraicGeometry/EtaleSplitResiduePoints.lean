@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 /-!
 # Splitting the residue fields of finitely many points by an étale neighborhood
 
-Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, lines 12056--12079.
+## References
+
+* Stacks Project, Tag 02LM
 -/
 
 @[expose] public section

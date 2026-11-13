@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 
-Source: Stacks Project, Tags 09YP, 0EXZ, 0739, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YP, 0EXZ, 0739, 09YN and 09YQ
 -/
 
 @[expose] public section

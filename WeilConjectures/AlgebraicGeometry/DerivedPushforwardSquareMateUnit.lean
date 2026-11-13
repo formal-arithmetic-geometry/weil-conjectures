@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 
 /-! # Unit compatibility of the sheaf direct-image square mate
 
-Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T.
+## References
+
+* Stacks Project, Tags 08HY and 0D5T
 -/
 
 @[expose] public section

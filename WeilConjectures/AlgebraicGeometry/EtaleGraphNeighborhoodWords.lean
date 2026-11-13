@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphNeighborhoodGeometry
 
 /-! # The three words in the graph comparison and their shrinking map
 
-Source: Stacks Project, Tag 0F7J, graph neighborhood calculation.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

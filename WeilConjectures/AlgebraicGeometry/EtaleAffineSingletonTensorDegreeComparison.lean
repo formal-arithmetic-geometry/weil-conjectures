@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHom
 import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeInverse
 
 /-! # Degreewise affine singleton tensor comparison
-Source: Stacks Project, Tag 03P2, affine tensor-product calculation.
+
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

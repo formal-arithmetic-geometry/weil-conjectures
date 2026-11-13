@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentMapTorsionCompletionExtZero
 
 /-! # Detecting maps using completion and a torsion-kernel comparison
 
-Source: Stacks Project, Tag 0889, uniqueness argument, and Tag 088A, final paragraph.
+## References
+
+* Stacks Project, Tags 0889 and 088A
 -/
 
 @[expose] public section

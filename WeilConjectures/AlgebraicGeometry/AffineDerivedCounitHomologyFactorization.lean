@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison
 
 /-! # The derived affine counit on cohomology
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

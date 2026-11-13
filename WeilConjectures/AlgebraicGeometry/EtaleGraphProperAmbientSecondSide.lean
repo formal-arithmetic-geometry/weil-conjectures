@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperAmbientTransportComposition
 
 /-! # Second-side pasting under a proper ambient change
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, proper-projection grid.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section

@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Restricting a coherent sheaf system and its colimit to tail opens
 
-Source: Stacks Project, Tag 09YQ, coherent systems and their colimits.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

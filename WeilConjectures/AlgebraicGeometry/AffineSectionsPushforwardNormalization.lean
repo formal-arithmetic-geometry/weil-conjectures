@@ -17,7 +17,10 @@ public import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 
 /-! # Affine scalar actions in the derived sections/pushforward comparison
-Source: Stacks, Tags 0D5T, 08D5 and 0AA7.
+
+## References
+
+* Stacks Project, Tags 0D5T, 08D5 and 0AA7
 -/
 
 @[expose] public section

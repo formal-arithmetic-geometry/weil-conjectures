@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Changing the lower-left base of a derived base-change square
 
-Source: Stacks Project, Remark 20.28.3 (08HY), Lemmas 20.27.2 (0D5S)
-and 20.28.2 (0D5T).
+## References
+
+* Stacks Project, Tags 08HY, 0D5S and 0D5T
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import WeilConjectures.ConstructibleSheaf.Biproduct
 /-!
 # Cokernel presentations of extensions with finite constant outer terms
 
-Source: Stacks Project, Tag 093U, extension argument.
+## References
+
+* Stacks Project, Tag 093U
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
 
 /-! # The constant model of the generic stalk image
 
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), generic submodule paragraph.
+## References
+
+* Stacks Project, Tag 09BH
 -/
 
 @[expose] public section

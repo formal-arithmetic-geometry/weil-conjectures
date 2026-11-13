@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Compatibility of base-changed edge maps with the pushforward of a unit
 
-Source: Stacks Project, Etale Cohomology, Lemma 09ZE
-, proof, second paragraph.
+## References
+
+* Stacks Project, Tag 09ZE
 -/
 
 @[expose] public section

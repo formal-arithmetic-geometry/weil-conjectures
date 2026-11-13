@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Coordinates for one discrete coefficient section
 
-Source: Stacks, Tags 03CY and 00YV; the monoidal constant-sheaf comparison and
-weakly-etale localization in the scalar-entry step of local matrix descent.
+## References
+
+* Stacks Project, Tags 03CY and 00YV
 -/
 
 @[expose] public noncomputable section

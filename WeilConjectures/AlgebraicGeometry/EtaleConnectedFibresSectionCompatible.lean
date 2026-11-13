@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
 
 /-! # Compatibility of sections on connected geometric fibres
 
-Source: Stacks Project, Etale Cohomology, Tag 0A3H, final paragraph.
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

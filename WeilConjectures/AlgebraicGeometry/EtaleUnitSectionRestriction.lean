@@ -8,7 +8,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 /-! # Restricting an étale section along a lift
 
-Source: Stacks Project, Tags 03D3, 03D7 and 03Q9.
+## References
+
+* Stacks Project, Tags 03D3, 03D7 and 03Q9
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Ideal-power quotients of coherent formal-module limit sheaves
 
-Source: Stacks Project, Lemma 087W, the formula M/I^n M = M_n.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section

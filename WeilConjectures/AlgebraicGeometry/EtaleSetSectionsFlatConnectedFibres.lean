@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
 /-!
 # Sections of etale sheaves under flat maps with connected geometric fibres
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.39.3 (Tag 0A3H).
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

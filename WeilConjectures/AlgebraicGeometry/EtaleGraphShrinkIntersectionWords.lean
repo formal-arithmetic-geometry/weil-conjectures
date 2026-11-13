@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphNeighborhoodWords
 
 /-! # The common intersection word for a shrinking graph neighborhood
 
-Source: Stacks Project, Tag 0F7J, intersection calculation in the independence
-of choices argument.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

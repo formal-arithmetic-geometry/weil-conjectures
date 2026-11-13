@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
 
 /-! # The canonical module base-change arrow in affine charts
 
-Source: Stacks Project, Tags 08IB (local reduction), 08HY (the canonical mate),
-and 08FE (restriction of derived direct image).
+## References
+
+* Stacks Project, Tags 08IB, 08HY and 08FE
 -/
 
 @[expose] public section

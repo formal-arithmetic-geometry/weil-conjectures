@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenComposition
 /-!
 # Unbounded proper/open AdjunctionNormalization
 
-Source: Stacks Project, Tags 0F7B.
+## References
+
+* Stacks Project, Tag 0F7B
 -/
 
 @[expose] public section

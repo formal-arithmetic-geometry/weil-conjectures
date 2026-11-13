@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormulaOfQ
 /-! # Canonical affine spectrum comparison on tensor generators
 
-Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
+## References
+
+* Stacks Project, Tags 0098, 0096 and 0DJ8
 -/
 
 @[expose] public section

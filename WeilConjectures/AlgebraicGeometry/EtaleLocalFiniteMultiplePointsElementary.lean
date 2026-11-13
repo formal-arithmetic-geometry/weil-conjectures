@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
 /-!
 # Finitely many isolated fibre points become finite pieces after an elementary étale base change
 
-Source: Stacks Project, More on Morphisms, Lemma 02LL, lines 11974--12011.
+## References
+
+* Stacks Project, Tag 02LL
 -/
 
 @[expose] public section

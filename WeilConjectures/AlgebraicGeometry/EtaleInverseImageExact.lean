@@ -13,7 +13,9 @@ public import Mathlib.Algebra.Category.Grp.AB
 /-!
 # Exactness of inverse image on abelian étale sheaves
 
-Source: Stacks Project, Lemma 59.36.2(1) (Tag 03Q1), and Definition 4.23.1 (Tag 0034).
+## References
+
+* Stacks Project, Tags 03Q1 and 0034
 -/
 
 @[expose] public section

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 
 /-! # Increasing-tuple sheaf terms as products of open direct images
 
-Source: Stacks Project, Tag 01FM, intersection terms; the over-site restriction adjunction.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

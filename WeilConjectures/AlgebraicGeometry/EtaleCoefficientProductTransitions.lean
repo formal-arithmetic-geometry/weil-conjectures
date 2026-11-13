@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical transitions for outgoing-arrow products
 
-Source: Stacks Project, Tag 0EXZ, the canonical maps between products of direct images.
+## References
+
+* Stacks Project, Tag 0EXZ
 -/
 
 @[expose] public section

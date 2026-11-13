@@ -11,7 +11,10 @@ import Mathlib.CategoryTheory.Sites.LocallyInjective
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # A pointed witness for equality of étale inverse-image unit sections
-Source: Stacks Project, Tag 09ZF, first proof paragraph, and Sites, Tag 00WK.
+
+## References
+
+* Stacks Project, Tags 09ZF and 00WK
 -/
 
 @[expose] public section

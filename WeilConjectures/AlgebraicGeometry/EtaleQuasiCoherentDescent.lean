@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsHomComparison
 /-!
 # Étale descent for sections of quasi-coherent modules
 
-Source: Stacks Project, Descent, Section 35.8, Tags 03DR and 03DT.
+## References
+
+* Stacks Project, Tags 03DR and 03DT
 -/
 
 @[expose] public section

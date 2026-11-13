@@ -21,7 +21,10 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 Existence of algebraic inverse-image data (`inverseImageData_exists`).
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section

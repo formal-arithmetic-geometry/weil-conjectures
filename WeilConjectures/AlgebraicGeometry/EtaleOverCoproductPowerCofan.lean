@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-! # The coproduct cofan of products over an étale object
 
-Source: Stacks Project, Tag 03OZ, the product decomposition following equation-sheaf-coprod.
+## References
+
+* Stacks Project, Tag 03OZ
 -/
 
 @[expose] public section

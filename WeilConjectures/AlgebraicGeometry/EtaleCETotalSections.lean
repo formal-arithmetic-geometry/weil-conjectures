@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
 
 /-! # Global sections of Cartan--Eilenberg totals
 
-Source: Stacks Project, Tag 015J, the finite-diagonal comparison in the proof.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

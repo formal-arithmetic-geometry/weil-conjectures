@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleStageSectionDiagram
 
 /-! # Canonical affine étale section system
-Source: Stacks Project, Tag 09YQ. -/
+
+## References
+
+* Stacks Project, Tag 09YQ
+-/
 
 @[expose] public section
 

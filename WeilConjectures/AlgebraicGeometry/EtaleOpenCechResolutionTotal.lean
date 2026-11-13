@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # Total homology of the étale open Čech resolution
 
-Source: Stacks Project, Tags 03AW, 03F6 and 03AZ.
+## References
+
+* Stacks Project, Tags 03AW, 03F6 and 03AZ
 -/
 
 @[expose] public section

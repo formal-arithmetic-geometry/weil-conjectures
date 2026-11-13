@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 
 /-! # Affine cohomology and higher-image sections
 
-Source: Stacks Project, Tags 01F4, 01XJ, 01E4 and 03FD.
+## References
+
+* Stacks Project, Tags 01F4, 01XJ, 01E4 and 03FD
 -/
 
 @[expose] public section

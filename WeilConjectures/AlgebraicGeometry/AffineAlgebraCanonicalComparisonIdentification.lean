@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveBoundaryExactnes
 
 /-! # Identification of the canonical affine cohomology comparison
 
-Source: Stacks Project, Tags 0AVW and 08D4.
+## References
+
+* Stacks Project, Tags 0AVW and 08D4
 -/
 
 @[expose] public section

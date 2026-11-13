@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.SecondFiltrationRowGradedCycles
 
 /-! # Canonical comparisons for the cycles of CE rows
 
-Source: Stacks Project, Tags 0130 and 012K.
+## References
+
+* Stacks Project, Tags 0130 and 012K
 -/
 
 @[expose] public section

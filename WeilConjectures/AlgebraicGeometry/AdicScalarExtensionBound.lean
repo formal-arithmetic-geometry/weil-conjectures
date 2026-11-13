@@ -11,7 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Cohomological bounds after scalar extension
 
-Source: Stacks Project, Tags 08G0, 08G1, 06YQ and 06YY, bounded flat models.
+## References
+
+* Stacks Project, Tags 08G0, 08G1, 06YQ and 06YY
 -/
 
 @[expose] public noncomputable section

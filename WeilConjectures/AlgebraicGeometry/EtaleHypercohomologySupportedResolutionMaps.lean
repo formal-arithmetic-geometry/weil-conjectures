@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # Support-controlled filtered resolution maps
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section

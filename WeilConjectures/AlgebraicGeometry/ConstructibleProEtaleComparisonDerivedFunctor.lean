@@ -11,9 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived localization of canonical coefficient comparison
 
-Source: Stacks Tags 00YV, 03D2 and 09AL. The constant-ring presentation argument
-is the existing proof from ConstructibleComparisonModuleExact, without its cyclic
-import through the constructible comparison theorem.
+## References
+
+* Stacks Project, Tags 00YV, 03D2 and 09AL
 -/
 
 @[expose] public noncomputable section

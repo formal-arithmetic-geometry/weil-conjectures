@@ -13,7 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # The section pullback and the right-derived unit on singles
 
-Source: Stacks Project, Tag 07A6 and the defining composite unit of the Leray comparison.
+## References
+
+* Stacks Project, Tag 07A6
 -/
 
 @[expose] public section

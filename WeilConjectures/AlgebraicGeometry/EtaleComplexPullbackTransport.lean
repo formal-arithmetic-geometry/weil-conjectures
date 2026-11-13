@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # Transport of canonical pullback maps to complex representatives
 
-Source: Stacks Project, Tags 0GIT and 0EZM, termwise pullback argument.
+## References
+
+* Stacks Project, Tags 0GIT and 0EZM
 -/
 
 @[expose] public section

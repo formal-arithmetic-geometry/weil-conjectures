@@ -12,7 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # EtaleModuleRingIsoTensor
 
-Source: Stacks Project, Tags 03D3, 03D6, 03D7. -/
+## References
+
+* Stacks Project, Tags 03D3, 03D6 and 03D7
+-/
 
 @[expose] public section
 

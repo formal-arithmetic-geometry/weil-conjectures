@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # The lowest cohomology of truncated derived sections
 
-Source: Stacks Project, Tag 05TC (2), and Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tags 05TC and 06Z0
 -/
 
 @[expose] public section

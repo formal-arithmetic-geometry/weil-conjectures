@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Ideal.Maps
 
 /-! # Recovering a finite system from compatible affine algebra reductions
 
-Source: Stacks Project, Lemma 09ZT, final sentence, and Morphisms, Lemma 01S8.
+## References
+
+* Stacks Project, Tags 09ZT and 01S8
 -/
 
 @[expose] public section

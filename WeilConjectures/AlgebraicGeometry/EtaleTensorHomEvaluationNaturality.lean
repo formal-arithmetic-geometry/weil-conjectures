@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Naturality of the tensor-sections evaluation map
 
-Source: Stacks Project, Tags 03DT and 03DR.
+## References
+
+* Stacks Project, Tags 03DT and 03DR
 -/
 
 @[expose] public section

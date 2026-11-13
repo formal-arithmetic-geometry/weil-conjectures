@@ -18,7 +18,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of a formal comparison through a closed immersion
 
-Source: Stacks Project, Theorem 088E, closed quotient and final comparison step.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

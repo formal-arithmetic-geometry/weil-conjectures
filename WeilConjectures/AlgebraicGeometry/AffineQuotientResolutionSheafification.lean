@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQuotientRestrictedIso
 /-!
 # Sheafifying an affine quotient resolution
 
-Source: Stacks Project, Tag 068C, affine-local resolution argument.
+## References
+
+* Stacks Project, Tag 068C
 -/
 
 @[expose] public section

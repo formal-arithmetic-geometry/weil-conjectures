@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.AffinePushforwardStalkLocalization
 public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Stalkwise flatness over the direct-image algebra
-Source: Stacks Project, Tag 0AVW.
+
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section

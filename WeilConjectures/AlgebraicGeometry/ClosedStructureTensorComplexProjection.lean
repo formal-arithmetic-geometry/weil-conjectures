@@ -14,7 +14,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # The ordinary complex projection formula for a closed structure sheaf
 
-Source: Stacks Project, Modules, Tags 01AX and 08KS; More on Algebra, Tag 068G. -/
+## References
+
+* Stacks Project, Tags 01AX, 08KS and 068G
+-/
 
 @[expose] public section
 set_option autoImplicit false

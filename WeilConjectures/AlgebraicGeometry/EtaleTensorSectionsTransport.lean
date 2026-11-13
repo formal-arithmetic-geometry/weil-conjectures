@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Normalized transport of tensor-pullback sections
 
-Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf. -/
+## References
+
+* Stacks Project, Tag 03DR
+-/
 
 @[expose] public section
 universe u

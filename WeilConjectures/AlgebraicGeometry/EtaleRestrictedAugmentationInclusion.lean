@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalResolution
 
 /-! # Augmentation and inclusion of the restricted total
 
-Source: Stacks Project, Tags 015J and 0133, restricted augmented total.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section

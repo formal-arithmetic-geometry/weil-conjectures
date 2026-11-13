@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Ideal-supported affine sections of ample pullbacks
 
-Source: Stacks Project, Properties, Proposition 01Q3 and Lemma 01PV.
+## References
+
+* Stacks Project, Tags 01Q3 and 01PV
 -/
 
 @[expose] public section

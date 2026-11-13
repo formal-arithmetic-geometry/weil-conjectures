@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Unbounded proper/open BaseChange
 
-Source: Stacks Project, Tags 0F7F.
+## References
+
+* Stacks Project, Tag 0F7F
 -/
 
 @[expose] public section

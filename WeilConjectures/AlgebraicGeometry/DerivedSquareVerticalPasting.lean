@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # Vertical coherence of derived pullback squares
-Source: Stacks Project, Tag 0D5S.
+
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

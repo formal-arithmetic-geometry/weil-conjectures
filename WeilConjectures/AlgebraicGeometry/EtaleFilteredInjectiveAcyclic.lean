@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleCechFilteredColimit
 /-!
 # Acyclicity of filtered colimits of injective étale sheaves
 
-Source: Stacks Project, Cohomology on Sites, Tag 0739, the final claim and its proof,
-applied to the qcqs objects of the small étale site as in Tag 073E.
+## References
+
+* Stacks Project, Tags 0739 and 073E
 -/
 
 @[expose] public section

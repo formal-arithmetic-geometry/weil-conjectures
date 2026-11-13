@@ -15,7 +15,9 @@ import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! # Epimorphism of the closed immersion pullback unit
 
-Source: Stacks Project, Modules, Lemma 08KS.
+## References
+
+* Stacks Project, Tag 08KS
 -/
 
 @[expose] public section

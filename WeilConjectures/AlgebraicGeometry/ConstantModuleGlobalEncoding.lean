@@ -12,7 +12,9 @@ import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Global fixed-scalar encoding of internal coefficient modules
 
-Source: Stacks Project, Tags 00YV, 03CY and 04IX.
+## References
+
+* Stacks Project, Tags 00YV, 03CY and 04IX
 -/
 
 @[expose] public section

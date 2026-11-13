@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.RingComplexGodementFunctorial
 /-!
 # Global extended Cech model and its derived completion unit
 
-Source: Stacks Project, algebraization.tex, Tags 099E and 099F.
+## References
+
+* Stacks Project, Tags 099E and 099F
 -/
 
 @[expose] public section

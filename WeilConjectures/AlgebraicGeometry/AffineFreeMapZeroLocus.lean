@@ -15,7 +15,9 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # The zero locus of a finite free sheaf map on an affine scheme
 
-Source: Stacks Project, Tag 0BDL, proof, the finite matrix-entry ideal construction.
+## References
+
+* Stacks Project, Tag 0BDL
 -/
 
 @[expose] public section

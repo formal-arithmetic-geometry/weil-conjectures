@@ -15,7 +15,9 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! # Exactness on affine sections for algebra reduction along a closed immersion
 
-Source: Stacks Project, Schemes, Tags 01I9 and 01BJ.
+## References
+
+* Stacks Project, Tags 01I9 and 01BJ
 -/
 
 @[expose] public section

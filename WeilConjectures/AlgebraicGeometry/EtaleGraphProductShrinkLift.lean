@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 
 /-! # Shrinking the inverse B exchange
 
-Source: Stacks Project, Tags 0F7C, 0F7D and the A--F calculation of Tag 0F7J.
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section

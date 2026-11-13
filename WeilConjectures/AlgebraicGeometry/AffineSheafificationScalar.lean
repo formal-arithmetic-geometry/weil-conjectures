@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-! # Scalars in the underived affine associated-sheaf functor
 
-Source: Stacks Project, Tags 01I6 and 06Z0, associated-sheaf construction.
+## References
+
+* Stacks Project, Tags 01I6 and 06Z0
 -/
 
 @[expose] public section

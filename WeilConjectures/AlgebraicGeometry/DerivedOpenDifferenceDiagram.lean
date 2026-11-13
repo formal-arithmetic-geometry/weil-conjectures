@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # The difference diagram before derived open gluing
 
-Source: Stacks Project, Tag 08DG, the difference arrow and its split restrictions.
+## References
+
+* Stacks Project, Tag 08DG
 -/
 
 @[expose] public section

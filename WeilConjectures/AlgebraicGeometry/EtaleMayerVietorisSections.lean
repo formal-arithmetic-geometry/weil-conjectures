@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.Grp.Limits
 /-!
 # Sections for a two-open étale cover
 
-Source: Stacks Project, Tag 0A50, proof, first and middle spots.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

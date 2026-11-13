@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EventuallyAffine
 /-!
 # Affineness descends to a finite stage
 
-Source: Stacks Project, Limits, Lemma 01ZN in Situation 081D.
+## References
+
+* Stacks Project, Tags 01ZN and 081D
 -/
 
 @[expose] public section

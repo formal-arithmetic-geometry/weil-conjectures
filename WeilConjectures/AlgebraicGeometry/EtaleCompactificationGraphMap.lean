@@ -11,8 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnrami
 /-!
 # The graph map from etale sum extension to compactified sheaf pushforward
 
-Source: Stacks Project, Etale Cohomology, Tag 0F4L, graph extension, and
-More on Etale Cohomology, Tag 0GKM.
+## References
+
+* Stacks Project, Tags 0F4L and 0GKM
 -/
 
 @[expose] public section

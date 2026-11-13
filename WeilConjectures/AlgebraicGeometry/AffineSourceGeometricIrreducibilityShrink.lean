@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GenericOpenGeometricFibreDensity
 
 /-! # Spreading geometric irreducibility for an affine source
 
-Source: Stacks Project, Tags 0559 and 054X.
+## References
+
+* Stacks Project, Tags 0559 and 054X
 -/
 
 @[expose] public section

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Canonical derived restriction and its adjoint maps on opens
 
-Source: Stacks Project, Cohomology, Tag 08BV.
+## References
+
+* Stacks Project, Tag 08BV
 -/
 
 @[expose] public section

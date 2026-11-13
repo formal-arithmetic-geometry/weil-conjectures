@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeSubKernel
 
 /-! # Coherent ExtensionRelations
 
-Source: Stacks Project, Modules, Lemma 01BY.
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section

@@ -18,8 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-!
 # Detection of affine module section vanishing at one stage
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
-Algebra, Tags 05N7 (3) and 05LI (1).
+## References
+
+* Stacks Project, Tags 01ZR, 05N7 and 05LI
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisCanonicalBoundaryNatu
 
 /-! # Compatible boundaries on the actual stage and limit cohomology groups
 
-Source: Stacks Project, Tags 0A50 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50 and 09YQ
 -/
 
 @[expose] public section

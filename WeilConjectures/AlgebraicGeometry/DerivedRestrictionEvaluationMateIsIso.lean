@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.DerivedRestrictionEvaluationMatePostcompBijective
 
 /-! # Invertibility of the restricted evaluation mate
-Source: Stacks Project, Tags 08DJ, 08DL and 08BS.
+
+## References
+
+* Stacks Project, Tags 08DJ, 08DL and 08BS
 -/
 
 @[expose] public section

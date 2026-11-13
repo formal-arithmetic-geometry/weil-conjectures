@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 
 /-! # Affine tensor-unit section presentation
 
-Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

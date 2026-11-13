@@ -13,7 +13,9 @@ import WeilConjectures.FieldTheory.EtaleFieldGaloisClassification
 /-!
 # Local realization of equivariant geometric-point maps
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section

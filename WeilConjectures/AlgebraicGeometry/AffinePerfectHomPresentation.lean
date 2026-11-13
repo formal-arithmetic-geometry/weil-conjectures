@@ -22,8 +22,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Comparison of affine sheaf Hom transport with module scalar extension
 
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation, using Tags
-08EB and 06Z0 for the models and Tag 08DW for pullback.
+## References
+
+* Stacks Project, Tags 09RE, 08EB, 06Z0 and 08DW
 -/
 
 @[expose] public section

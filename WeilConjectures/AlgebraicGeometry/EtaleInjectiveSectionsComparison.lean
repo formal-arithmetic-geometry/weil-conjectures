@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsTriangleNaturality
 
 /-! # Termwise sections and derived pullback cohomology
 
-Source: Stacks Project, Tag 03Q9, final injective-complex restriction paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section

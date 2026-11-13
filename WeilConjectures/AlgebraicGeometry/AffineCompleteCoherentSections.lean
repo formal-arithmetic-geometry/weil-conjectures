@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsCompleteBase
 
 /-! # Canonical inverse-limit sections over a complete affine base
 
-Source: Stacks Project, Tag 087U, degree zero for the identity of Spec A.
+## References
+
+* Stacks Project, Tag 087U
 -/
 
 @[expose] public section

@@ -11,7 +11,10 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Finite-product coordinates after an additive functor
 
-Source: Stacks Project, Tag 02KE, the termwise Čech calculation. -/
+## References
+
+* Stacks Project, Tag 02KE
+-/
 
 @[expose] public section
 

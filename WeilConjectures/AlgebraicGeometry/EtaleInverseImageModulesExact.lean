@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleInverseImageTransport
 /-!
 # Exact inverse image of constant-ring modules on the small etale site
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
-Sites and Sheaves, Example 0H7J.
+## References
+
+* Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and 0H7J
 -/
 
 @[expose] public section

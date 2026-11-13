@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.QcOpenDerivedLift
 
 /-! # Lifting pseudo-coherent objects from quasi-compact opens of affine schemes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EE,
-Lemma 36.13.3.
+## References
+
+* Stacks Project, Tag 08EE
 -/
 
 @[expose] public section

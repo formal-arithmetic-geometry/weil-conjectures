@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingLocusRestrict
 
 /-! # Section fractions on an affine open of an ambient scheme
 
-Source: Stacks Project, Tags 01PW and 09MR, affine-open paragraph.
+## References
+
+* Stacks Project, Tags 01PW and 09MR
 -/
 
 @[expose] public section

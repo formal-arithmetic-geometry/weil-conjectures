@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Affine sections of coherent formal modules form adic towers
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, affine reduction.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section

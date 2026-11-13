@@ -19,8 +19,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Coefficient universe comparison for quasi-coherent étale cohomology
 
-Source: Stacks Project, Theorem 03P2 and Proposition 03DW (2), using a finite affine
-open cover of a quasi-compact separated scheme.
+## References
+
+* Stacks Project, Tags 03P2 and 03DW
 -/
 
 @[expose] public section

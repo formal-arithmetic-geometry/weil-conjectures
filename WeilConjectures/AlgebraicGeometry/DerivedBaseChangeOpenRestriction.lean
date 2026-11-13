@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionUnitIso
 
 /-! # Open component compatibility for derived base change
 
-Source: Stacks Project, Tags 08HY, 08BV and 0DJ9.
+## References
+
+* Stacks Project, Tags 08HY, 08BV and 0DJ9
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 /-!
 # Support of a constructible etale module sheaf
 
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN.
+## References
+
+* Stacks Project, Tags 09YS, 04FS and 04FN
 -/
 
 @[expose] public section

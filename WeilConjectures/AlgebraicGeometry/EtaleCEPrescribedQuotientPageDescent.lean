@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
 
 /-! # Quotient-page descent on prescribed CE resolutions
 
-Source: Stacks Project, Derived Categories, Tags 015J and 015K; Homology, Tag 012K.
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section

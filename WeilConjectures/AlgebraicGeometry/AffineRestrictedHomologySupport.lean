@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.Grp.Zero
 /-! # Elementwise torsion for an affine model of a supported target
 
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0.
+## References
+
+* Stacks Project, Tags 08EJ and 06Z0
 -/
 @[expose] public section
 universe u w

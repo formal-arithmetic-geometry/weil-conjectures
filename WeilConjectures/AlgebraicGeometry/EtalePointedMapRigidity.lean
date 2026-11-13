@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Rigidity of pointed maps from a local spectrum to an etale scheme
 
-Source: Stacks Project, Tag 08HQ, uniqueness, and Tag 02GE (open diagonal).
+## References
+
+* Stacks Project, Tags 08HQ and 02GE
 -/
 
 @[expose] public section

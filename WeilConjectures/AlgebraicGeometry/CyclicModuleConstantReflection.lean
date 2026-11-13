@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Reflection of constancy for cyclic module coefficients
 
-Source: Stacks Project, Tags 03RU and 03RW(2),(3), with cyclic coefficients.
+## References
+
+* Stacks Project, Tags 03RU and 03RW
 -/
 
 @[expose] public section

@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 /-!
 # Sections of tensor pullbacks on the small étale site
 
-Source: Stacks Project, Descent, Tag 03DR, equation (35.8.1), restricted to the small
-étale site as in Tag 03DU.
+## References
+
+* Stacks Project, Tags 03DR and 03DU
 -/
 
 @[expose] public section

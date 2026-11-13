@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Affine etale models over cofiltered scheme limits
 
-Source: Stacks Project, Tags 0EYL and 01ZM.
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section

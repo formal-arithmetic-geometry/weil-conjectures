@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Extending the affine Hom comparison from rank one to finite free modules
 
-Source: Stacks Project, Tag 01HV (4)-(5), finite-basis argument of Tag 0BQZ. -/
+## References
+
+* Stacks Project, Tags 01HV and 0BQZ
+-/
 
 @[expose] public section
 

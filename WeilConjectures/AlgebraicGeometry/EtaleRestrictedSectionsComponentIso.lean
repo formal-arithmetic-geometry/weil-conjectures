@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictedSectionsInclusionMono
 
 /-! # Degreewise restricted sections comparison
 
-Source: Stacks Project, Tag 015J, proof remark (3), column filtration.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

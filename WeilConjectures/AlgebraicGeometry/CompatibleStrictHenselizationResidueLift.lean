@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 
 /-! # Lifting compatible residue embeddings through strict henselizations
 
-Source: Stacks Project, Tags 04GU and 04HX.
+## References
+
+* Stacks Project, Tags 04GU and 04HX
 -/
 
 @[expose] public section

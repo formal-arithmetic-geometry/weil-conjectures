@@ -15,7 +15,9 @@ import Mathlib.RingTheory.Support
 
 /-! # Support of a coherent affine map invertible off a closed set
 
-Source: Stacks Project, Lemma 01Y9 and the last paragraph of Lemma 088B.
+## References
+
+* Stacks Project, Tags 01Y9 and 088B
 -/
 
 @[expose] public section

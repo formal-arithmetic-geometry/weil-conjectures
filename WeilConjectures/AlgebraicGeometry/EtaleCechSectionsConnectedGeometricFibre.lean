@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGeometricSectionTwoPullbacks
 
 /-! # Cech compatibility over one connected geometric fibre
 
-Source: Stacks Project, Tag 0A3H, final paragraph.
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

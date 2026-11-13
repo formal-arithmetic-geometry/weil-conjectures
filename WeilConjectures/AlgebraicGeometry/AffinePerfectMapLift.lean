@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Affine lifting of maps from perfect complexes
 
-Source: Stacks Project, Tag 08EH, Lemma 36.13.7.
+## References
+
+* Stacks Project, Tag 08EH
 -/
 
 @[expose] public section

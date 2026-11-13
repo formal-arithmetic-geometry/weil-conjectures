@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # Comparison of the set-valued inverse image with the inverse sheaf equivalence
 
-Source: Stacks Project, Tags 04DZ and 03SI.
+## References
+
+* Stacks Project, Tags 04DZ and 03SI
 -/
 
 set_option linter.style.haveILetI false

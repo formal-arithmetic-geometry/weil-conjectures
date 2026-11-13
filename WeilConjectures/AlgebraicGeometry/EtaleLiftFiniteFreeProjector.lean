@@ -16,7 +16,9 @@ import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # Lifting finite free projectors over an étale neighbourhood
 
-Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, matrix construction.
+## References
+
+* Stacks Project, Tag 07M5
 -/
 
 @[expose] public section

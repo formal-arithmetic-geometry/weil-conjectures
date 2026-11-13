@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Transport of the derived mate at the upper-left vertex
 
-Source: Stacks Project, Tags 08HY, 0D5S and 0D5T.
+## References
+
+* Stacks Project, Tags 08HY, 0D5S and 0D5T
 -/
 
 @[expose] public section

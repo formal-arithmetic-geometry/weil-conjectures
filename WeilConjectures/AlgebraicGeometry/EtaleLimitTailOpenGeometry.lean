@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # The explicit inverse diagram of tail opens
 
-Source: Stacks Project, Tag 09YQ, restriction to inverse-image opens.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

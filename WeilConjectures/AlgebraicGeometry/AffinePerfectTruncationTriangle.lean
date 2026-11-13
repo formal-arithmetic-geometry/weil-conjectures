@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ExactFunctorStupidTailTriangle
 
 /-! # Arbitrarily low perfect truncation triangles on affine schemes
 
-Source: Stacks Project, Tag 08EG, proof of Lemma 36.13.6, finite-free lift and truncation.
+## References
+
+* Stacks Project, Tag 08EG
 -/
 
 @[expose] public section

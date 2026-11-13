@@ -9,7 +9,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-! # Surjectivity of the second affine tensor unit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

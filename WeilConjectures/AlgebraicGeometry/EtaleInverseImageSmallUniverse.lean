@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Étale inverse image preserves small coefficient universes
 
-Source: Stacks Project, Étale Cohomology, 03Q1(3), 03PU and 03PT.
+## References
+
+* Stacks Project, Tags 03Q1, 03PU and 03PT
 -/
 
 @[expose] public section

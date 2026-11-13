@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.BoundaryHorseshoeBoundaryIdentification
 
 /-! # A global representative for a horseshoe boundary
 
-Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tags 013T and 015B.
+## References
+
+* Stacks Project, Tags 0117, 013T and 015B
 -/
 
 @[expose] public section

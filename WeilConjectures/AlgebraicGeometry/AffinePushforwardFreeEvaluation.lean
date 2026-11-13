@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Finite free evaluation over the direct-image algebra
 
-Source: Stacks Project, Morphisms, Tag 01SB; Properties, Tag 01PB;
-Cohomology of Schemes, Tag 0897, proof.
+## References
+
+* Stacks Project, Tags 01SB, 01PB and 0897
 -/
 
 @[expose] public section

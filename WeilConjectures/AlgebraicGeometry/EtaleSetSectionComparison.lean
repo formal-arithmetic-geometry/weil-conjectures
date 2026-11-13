@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Canonical comparison maps on sections of étale inverse images
-Source: Stacks Project, Tag 09YQ and Sites Tags 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 09YQ, 03CB and 03CC
+-/
 
 @[expose] public section
 

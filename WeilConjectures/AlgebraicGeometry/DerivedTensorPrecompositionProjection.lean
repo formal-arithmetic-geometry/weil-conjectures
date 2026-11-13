@@ -19,7 +19,9 @@ import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The direct-image factorization of a tensor precomposition
 
-Source: Stacks Project, Tag 08EU and Tag 0E4G, Lemma 48.4.4.
+## References
+
+* Stacks Project, Tags 08EU and 0E4G
 -/
 
 @[expose] public section

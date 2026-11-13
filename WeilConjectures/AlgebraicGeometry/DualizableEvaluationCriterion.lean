@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Closed symmetric monoidal dualizability criterion
 
-Source: Stacks Project, Cohomology, Tag 0FPC.
+## References
+
+* Stacks Project, Tag 0FPC
 -/
 
 @[expose] public section

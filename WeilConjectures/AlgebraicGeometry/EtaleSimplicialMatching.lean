@@ -14,8 +14,9 @@ import Mathlib.Tactic
 /-!
 # Canonical matching schemes for simplicial étale schemes
 
-Source: Stacks, Tags 0186 and 021D. The finite diagram includes every lower simplex,
-so its limit directly supplies the universal property used by `IsEtaleHypercover`.
+## References
+
+* Stacks Project, Tags 0186 and 021D
 -/
 
 @[expose] public section

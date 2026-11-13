@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # The directed continuity step for the explicit étale section cocone
 
-Source: Stacks Project, Tags 09YQ and 03S2, as used in Tag 03Q9 in degree zero.
+## References
+
+* Stacks Project, Tags 09YQ, 03S2 and 03Q9
 -/
 
 @[expose] public section

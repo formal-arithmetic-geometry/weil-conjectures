@@ -23,7 +23,9 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # Coefficient comparisons for local adic perfect lifting
 
-Source: Stacks Project, Tags 09C6, 099L and 06YY.
+## References
+
+* Stacks Project, Tags 09C6, 099L and 06YY
 -/
 
 @[expose] public noncomputable section

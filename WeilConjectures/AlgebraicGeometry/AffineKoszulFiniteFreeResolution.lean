@@ -20,7 +20,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Finite free sheafification of an augmented Koszul complex
 
-Source: Stacks Project, Tags 068C and 0BQZ, affine Koszul resolution. -/
+## References
+
+* Stacks Project, Tags 068C and 0BQZ
+-/
 
 @[expose] public section
 

@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-! # Affine module tensor CoherenceComparisons
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ public import Mathlib.Order.Directed
 
 /-! # Invertibility from directed continuity of Hom sets
 
-Source: Stacks Project, Tag 09RE, descending an inverse and its two equations.
+## References
+
+* Stacks Project, Tag 09RE
 -/
 
 @[expose] public section

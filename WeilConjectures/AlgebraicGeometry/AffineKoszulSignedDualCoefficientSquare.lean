@@ -15,7 +15,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Finite-free affine signed dual coefficient square
 
-Source: Stacks Project, Tag 0BQZ and Tag 01HV. -/
+## References
+
+* Stacks Project, Tags 0BQZ and 01HV
+-/
 
 @[expose] public section
 

@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Monad.Adjunction
 
 /-! # Derived open restriction is a localization
-Source: Stacks Project, Tags 08FE and 08BS.
+
+## References
+
+* Stacks Project, Tags 08FE and 08BS
 -/
 
 @[expose] public section

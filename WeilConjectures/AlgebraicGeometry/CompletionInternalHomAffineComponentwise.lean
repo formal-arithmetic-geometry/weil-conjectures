@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Componentwise completed internal-Hom evaluation
 
-Source: Stacks Project, Tag 0882, affine-local evaluation construction.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section

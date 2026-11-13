@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Explicit shifted quotient systems
 
-Source: Stacks Project, Lemma 087X, claims (b)--(c).
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

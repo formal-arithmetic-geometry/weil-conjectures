@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisExact
 /-!
 # Mayer-Vietoris for étale cohomology
 
-Source: Stacks Project, Étale Cohomology, Tag 0A50, and Cohomology on Sites,
-Tag 03F3 (2).
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

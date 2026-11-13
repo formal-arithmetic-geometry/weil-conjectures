@@ -14,7 +14,9 @@ import Mathlib.RingTheory.Finiteness.Basic
 
 /-! # The residue module underlying an adic graded layer
 
-Source: Stacks Project, Tag 09BR, second displayed isomorphism.
+## References
+
+* Stacks Project, Tag 09BR
 -/
 
 @[expose] public noncomputable section

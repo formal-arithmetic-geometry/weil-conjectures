@@ -21,7 +21,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates
 import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine coordinates for intrinsic derived self-Tor
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1). -/
+
+## References
+
+* Stacks Project, Tags 08DX, 06YH, 01I9 and 00LS
+-/
 
 @[expose] public section
 set_option autoImplicit false

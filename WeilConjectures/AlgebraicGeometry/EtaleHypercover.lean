@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 /-!
 # Étale hypercovers without finiteness or splitting
 
-Source: Stacks Project, Hypercoverings, Definition 01G5 and Lemma 01GI.
+## References
+
+* Stacks Project, Tags 01G5 and 01GI
 -/
 
 @[expose] public section

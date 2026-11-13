@@ -15,7 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 The `n`-th strict reduction unit of a module sheaf with constant coefficients is the
 universal map to a module whose coefficient action factors through `A ⧸ I ^ (n + 1)`.
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 099L.
+## References
+
+* Stacks Project, Tags 03D7 and 099L
 -/
 
 @[expose] public noncomputable section

@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Hom bijection for the two affine-module tensor operations
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

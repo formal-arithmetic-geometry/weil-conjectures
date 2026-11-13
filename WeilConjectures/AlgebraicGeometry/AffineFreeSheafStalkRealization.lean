@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeBasisGermMap
 
 /-! # Realizing section modules on an affine open and comparing their stalks
 
-Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
+## References
+
+* Stacks Project, Tags 01HV, 01IB, 01C6 and 0098
 -/
 
 @[expose] public section

@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Proper support of the compactification algebraization candidate
 
-Source: Stacks Project, Theorem 088E, the paragraph beginning "Thus" after the
-boundary-support argument.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

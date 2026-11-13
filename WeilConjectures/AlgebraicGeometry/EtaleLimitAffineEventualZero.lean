@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
 
 /-! # EtaleLimitAffineEventualZero
 
-Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YP.
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YP
 -/
 
 @[expose] public section

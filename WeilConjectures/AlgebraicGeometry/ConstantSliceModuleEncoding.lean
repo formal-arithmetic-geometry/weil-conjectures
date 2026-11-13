@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Internal module coordinates on a coefficient-sized slice
 
-Source: Stacks Project, Tags 00YV, 03CY and 04IX.
+## References
+
+* Stacks Project, Tags 00YV, 03CY and 04IX
 -/
 
 @[expose] public section

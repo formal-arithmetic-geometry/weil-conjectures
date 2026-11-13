@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import all WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Quasi-coherence of the annihilator subsheaf
-Source: Stacks Project, Tag 01PO, proof of clause (1).
+
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section

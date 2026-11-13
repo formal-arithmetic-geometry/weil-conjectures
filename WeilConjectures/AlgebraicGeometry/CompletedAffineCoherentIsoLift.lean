@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentAffineMapSupportRadical
 
 /-! # Lifting section isomorphisms over an adic completion
 
-Source: Stacks Project, Tags 087W, 00MA, 05GG and 01I6.
+## References
+
+* Stacks Project, Tags 087W, 00MA, 05GG and 01I6
 -/
 
 @[expose] public section

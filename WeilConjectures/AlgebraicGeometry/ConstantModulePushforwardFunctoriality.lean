@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 /-!
 # Functorial maps between direct images of constant modules
 
-Source: Stacks Project, Tag 09Z1, canonical transition maps.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

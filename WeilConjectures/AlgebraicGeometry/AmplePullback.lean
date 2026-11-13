@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingP
 
 /-! # Pullback of an ample invertible module
 
-Source: Stacks Project, Morphisms, Lemma 0892, part (2).
+## References
+
+* Stacks Project, Tag 0892
 -/
 
 @[expose] public section

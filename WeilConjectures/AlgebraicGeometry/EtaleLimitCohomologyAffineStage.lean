@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity when one stage is affine
 
-Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

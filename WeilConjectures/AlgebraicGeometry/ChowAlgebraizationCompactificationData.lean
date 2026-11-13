@@ -28,8 +28,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Projective compactification algebraization before boundary removal
 
-Source: Stacks Project, Theorem 088E, from Chow compactification through the displayed
-support equation.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

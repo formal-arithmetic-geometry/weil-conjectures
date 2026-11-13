@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineTensorUnitSectionPresentation
 
 /-! # Affine tensor unit on sections
 
-Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

@@ -25,7 +25,9 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # A coherent filtration supported on integral closed subschemes
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.3, Tag 01YF.
+## References
+
+* Stacks Project, Tag 01YF
 -/
 
 @[expose] public section

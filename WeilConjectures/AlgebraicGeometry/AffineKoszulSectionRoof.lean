@@ -18,7 +18,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Koszul representatives of sections on an affine open
 
-Source: Stacks Project, Tags 08DC, 08DD and 08EH.
+## References
+
+* Stacks Project, Tags 08DC, 08DD and 08EH
 -/
 
 @[expose] public section

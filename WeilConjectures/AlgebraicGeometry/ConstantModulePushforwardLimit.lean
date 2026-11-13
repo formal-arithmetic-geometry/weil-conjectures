@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardLimitSurjectiv
 /-!
 # Constant module direct images on an inverse limit
 
-Source: Stacks Project, Tag 09Z1 in degree zero.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

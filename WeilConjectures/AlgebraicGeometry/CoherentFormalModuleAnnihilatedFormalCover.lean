@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Annihilation of formal kernels and cokernels on an affine cover
 
-Source: Stacks Project, Lemmas 087W and 087X, and Remark 0888.
+## References
+
+* Stacks Project, Tags 087W, 087X and 0888
 -/
 
 @[expose] public section

@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Finiteness.Cardinality
 /-!
 # Local lifts of presentations of a finite constant quotient
 
-Source: Stacks Project, Tag 093U, extension paragraph.
+## References
+
+* Stacks Project, Tag 093U
 -/
 
 @[expose] public section

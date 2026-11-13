@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Finite reduction of normalized completed coefficients
 
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R.
+## References
+
+* Stacks Project, Tags 03A0, 03CY, 06YY, 099L and 099R
 -/
 
 @[expose] public noncomputable section

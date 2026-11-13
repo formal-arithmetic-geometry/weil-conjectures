@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeModulesEnoughInjectives
 
 /-! # Comparing module replacements with the abelian counit lift
 
-Source: Stacks Project, Tags 01FB, 013P, 013S and 03FD.
+## References
+
+* Stacks Project, Tags 01FB, 013P, 013S and 03FD
 -/
 
 @[expose] public section

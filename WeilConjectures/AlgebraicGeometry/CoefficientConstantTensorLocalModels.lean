@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleRestrictedTensorFiniteLocal
 
 /-! # The local constant tensor calculation on coefficient-sized sites
 
-Source: Stacks Project, Tags 094H and 09BQ.
+## References
+
+* Stacks Project, Tags 094H and 09BQ
 -/
 
 @[expose] public noncomputable section

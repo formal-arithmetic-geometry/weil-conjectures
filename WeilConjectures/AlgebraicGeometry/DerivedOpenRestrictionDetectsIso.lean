@@ -12,7 +12,9 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 
 /-! # Open restrictions jointly detect derived isomorphisms
 
-Source: Stacks Project, Tag 0AAB, the locality step of its proof.
+## References
+
+* Stacks Project, Tag 0AAB
 -/
 
 @[expose] public section

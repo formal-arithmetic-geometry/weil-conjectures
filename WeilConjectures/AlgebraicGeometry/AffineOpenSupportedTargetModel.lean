@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOpenSupportedModelTorsion
 
 /-! # Supported target models on affine opens
 
-Source: Stacks Project, Tags 06Z0, 08EB and 08EJ.
+## References
+
+* Stacks Project, Tags 06Z0, 08EB and 08EJ
 -/
 
 @[expose] public section

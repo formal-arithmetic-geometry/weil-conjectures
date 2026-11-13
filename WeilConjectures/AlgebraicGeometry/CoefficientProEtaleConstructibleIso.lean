@@ -9,7 +9,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModelsPul
 import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.Algebra.Module.FinitePresentation
 /-! # Isomorphism invariance of coefficient constructibility
-Source: Stacks Tag 09AJ, constructibility by finite local models.
+
+## References
+
+* Stacks Project, Tag 09AJ
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

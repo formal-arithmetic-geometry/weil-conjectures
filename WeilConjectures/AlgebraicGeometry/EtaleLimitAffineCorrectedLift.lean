@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Corrected lifts for the affine continuity kernel
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN and 0739.
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN and 0739
 -/
 
 @[expose] public section

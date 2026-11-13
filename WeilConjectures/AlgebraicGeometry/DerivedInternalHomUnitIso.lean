@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitIso
 
 /-! # Derived internal Hom from the structure sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Section 08J7.
+## References
+
+* Stacks Project, Tag 08J7
 -/
 
 @[expose] public section

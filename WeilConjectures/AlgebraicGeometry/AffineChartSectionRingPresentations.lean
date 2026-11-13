@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartSectionRingPresentationsIso
 
 /-! # Ring presentations of affine upper-tail charts
 
-Source: Stacks Project, Tag 01ZR, affine proof; Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01ZR, 0095 and 0096
 -/
 
 @[expose] public section

@@ -12,8 +12,9 @@ import all WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 /-!
 # Sections on a connected geometric fibre
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph,
-and Remark 59.23.2 (Tag 03P5), set-valued form.
+## References
+
+* Stacks Project, Tags 0A3H and 03P5
 -/
 
 @[expose] public section

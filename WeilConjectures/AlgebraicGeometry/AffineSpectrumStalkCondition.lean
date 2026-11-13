@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumStalkConjugacy
 import WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance
 /-! # Stalk condition under affine spectrum coordinates
 
-Source: Stacks Project, Tag 0DJ8, affine spectrum reduction, and Tag 0DJ9.
+## References
+
+* Stacks Project, Tags 0DJ8 and 0DJ9
 -/
 
 @[expose] public section

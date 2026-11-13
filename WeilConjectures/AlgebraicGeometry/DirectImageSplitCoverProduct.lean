@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SplitCoverSectionsLimit
 /-!
 # Direct image for a split finite cover
 
-Source: Stacks Project, Tag 095B.
+## References
+
+* Stacks Project, Tag 095B
 -/
 
 @[expose] public section

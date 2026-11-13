@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUni
 
 /-! # A single derived unit across a commutative direct-image square
 
-Source: Stacks Project, Cohomology, Tags 08FE and 0D5T.
+## References
+
+* Stacks Project, Tags 08FE and 0D5T
 -/
 
 @[expose] public section

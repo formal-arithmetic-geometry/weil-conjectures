@@ -14,7 +14,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Geometric properties of the explicit affine Koszul complex
-Source: Stacks Project, Tags 0A9A and 0663.
+
+## References
+
+* Stacks Project, Tags 0A9A and 0663
 -/
 
 @[expose] public section

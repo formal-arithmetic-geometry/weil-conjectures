@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 /-!
 # Finite geometric stalks of constructible module sheaves
 
-Source: Stacks Project, proof of Lemma 095N (line 12412 ff.), using Definitions 03RU and
-03RW and Lemma 03Q1.
+## References
+
+* Stacks Project, Tags 095N, 03RU, 03RW and 03Q1
 -/
 
 @[expose] public section

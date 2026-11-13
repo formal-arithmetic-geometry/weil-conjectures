@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkSidePasting
 
 /-! # Graph comparisons and proper/open interchange
 
-Source: Stacks Project, Tag 0F7J.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.NestedOpenSectionUnit
 
 /-! # Restriction of sections classified by a constant sheaf map
 
-Source: Stacks Project, Tag 03F3, localization restriction and adjunction units.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section

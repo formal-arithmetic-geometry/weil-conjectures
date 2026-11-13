@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance
 
 /-! # Stalk condition of the universal pullback counit
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
+## References
+
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section

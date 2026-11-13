@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 /-! # Cohomology continuity with a specified stage
 
-Source: Stacks Project, Tag 09YQ.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

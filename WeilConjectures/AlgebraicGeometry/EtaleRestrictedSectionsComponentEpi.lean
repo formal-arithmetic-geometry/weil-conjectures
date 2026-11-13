@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedSectionsFactors
 
 /-! # Degreewise epimorphism of the restricted sections lift
 
-Source: Stacks Project, Tag 015J, total-complex comparison and column filtration.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleEvaluationSeparable
 /-!
 # Evaluation of unit germs in the separable closure
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
+## References
+
+* Stacks Project, Tags 03QU and 03QV
 -/
 
 @[expose] public section

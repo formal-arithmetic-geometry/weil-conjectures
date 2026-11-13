@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 /-! # Shortening an affine finite-presentation flat complex
 
-Source: Stacks Project, Tags 068V and 08EB, with explicit split cancellation.
+## References
+
+* Stacks Project, Tags 068V and 08EB
 -/
 
 @[expose] public section

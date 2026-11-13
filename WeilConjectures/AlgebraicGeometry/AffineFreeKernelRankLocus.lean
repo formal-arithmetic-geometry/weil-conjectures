@@ -17,7 +17,9 @@ import Mathlib.AlgebraicGeometry.Limits
 
 /-! # Closed maximal-rank kernel locus of a finite-free sheaf map
 
-Source: Stacks Project, Tag 0BDL, local matrix calculation, and Tag 0EWY.
+## References
+
+* Stacks Project, Tags 0BDL and 0EWY
 -/
 
 @[expose] public section

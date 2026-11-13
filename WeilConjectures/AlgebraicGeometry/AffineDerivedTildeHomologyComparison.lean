@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Cohomology of the derived affine associated-sheaf functor
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

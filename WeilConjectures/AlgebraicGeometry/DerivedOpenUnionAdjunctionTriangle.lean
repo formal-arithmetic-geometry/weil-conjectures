@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-! # Direct-image triangle on an arbitrary open union
 
-Source: Stacks Project, Tag 08BV, applied on the open union and pushed to X.
+## References
+
+* Stacks Project, Tag 08BV
 -/
 
 @[expose] public section

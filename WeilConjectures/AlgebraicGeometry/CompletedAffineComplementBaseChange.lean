@@ -11,7 +11,9 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 /-! # The complement of an extended ideal under affine completion base change
 
-Source: Stacks Project, Tag 088B, the construction of the completed-base projection.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section

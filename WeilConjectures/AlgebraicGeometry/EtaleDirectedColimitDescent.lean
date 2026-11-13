@@ -15,7 +15,9 @@ import WeilConjectures.RingTheory.EtalePolynomialCertificateColimit
 /-!
 # Descent of etaleness along a directed colimit of rings
 
-Source: Stacks Project, Algebra, Lemma 10.168.7 (Tag 07RI).
+## References
+
+* Stacks Project, Tag 07RI
 -/
 
 @[expose] public section

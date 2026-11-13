@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalDat
 
 /-! # Composite direct-image units with a fixed source
 
-Source: Stacks Project, Cohomology, Tag 0D5T.
+## References
+
+* Stacks Project, Tag 0D5T
 -/
 
 @[expose] public section

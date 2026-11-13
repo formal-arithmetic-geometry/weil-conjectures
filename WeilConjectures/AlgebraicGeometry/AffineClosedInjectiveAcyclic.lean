@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
 
 /-! # Affine case of restricted injective acyclicity
 
-Source: Stacks Project, Tag 0A51, the case n = 0.
+## References
+
+* Stacks Project, Tag 0A51
 -/
 
 @[expose] public section

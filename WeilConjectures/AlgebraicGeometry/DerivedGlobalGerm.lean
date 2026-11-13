@@ -14,7 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Canonical derived global germs
 
-Source: Stacks Project, Tags 03QO, 01EZ and 095T.
+## References
+
+* Stacks Project, Tags 03QO, 01EZ and 095T
 -/
 
 @[expose] public section

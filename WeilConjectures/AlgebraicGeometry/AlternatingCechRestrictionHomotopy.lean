@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechKernelNullHomotopic
 /-!
 # Homotopy inverse for ordered Čech restriction
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ, 01FK and 01FM.
+## References
+
+* Stacks Project, Tags 01FJ, 01FK and 01FM
 -/
 
 @[expose] public section

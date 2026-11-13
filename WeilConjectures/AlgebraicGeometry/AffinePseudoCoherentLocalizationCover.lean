@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel
 
 /-! # Local module models on a finite principal-open cover
 
-Source: Stacks Project, Tag 08E7, finite-cover and local-model steps.
+## References
+
+* Stacks Project, Tag 08E7
 -/
 
 @[expose] public section

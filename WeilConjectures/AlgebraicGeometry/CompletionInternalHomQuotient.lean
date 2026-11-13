@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CompletionInternalHomQuotientAnnihilati
 
 /-! # Internal Hom factorization through ideal-power quotients
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, construction of the map.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section

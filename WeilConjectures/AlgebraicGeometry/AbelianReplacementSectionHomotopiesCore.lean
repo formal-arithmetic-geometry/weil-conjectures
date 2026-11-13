@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 /-! # Constructing the section homotopies before acyclicity
 
-Source: Stacks Project, Tags 013P, 013S and 01FB.
+## References
+
+* Stacks Project, Tags 013P, 013S and 01FB
 -/
 
 @[expose] public section

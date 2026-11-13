@@ -30,8 +30,9 @@ import all WeilConjectures.CategoryTheory.RingedCechKoszulDualKFlat
 
 /-! # The finite dual Koszul tower under completed inverse image
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, and
-sites-cohomology.tex, Tag 07A4.
+## References
+
+* Stacks Project, Tags 0A0E and 07A4
 -/
 
 @[expose] public section

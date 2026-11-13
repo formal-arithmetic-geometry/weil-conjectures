@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AdicResidueSliceCompleteness
 
 /-! # Finite-level local models in the general adic lifting argument
 
-Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section

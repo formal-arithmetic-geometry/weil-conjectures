@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraCanonicalComparisonIdentif
 
 /-! # Invertibility of the canonical affine direct-image homology comparison
 
-Source: Stacks Project, Tags 0AVW and 08D4.
+## References
+
+* Stacks Project, Tags 0AVW and 08D4
 -/
 
 @[expose] public section

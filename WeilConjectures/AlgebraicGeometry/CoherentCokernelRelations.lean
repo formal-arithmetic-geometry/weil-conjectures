@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentKernelConditionRestriction
 
 /-! # Coherent CokernelRelations
 
-Source: Stacks Project, Modules, Lemma 01BY.
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section

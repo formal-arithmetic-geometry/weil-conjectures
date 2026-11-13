@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianDerivedDirectImageTransitionShif
 
 /-! # Pullback compatibility of the canonical derived-Hom class map
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section

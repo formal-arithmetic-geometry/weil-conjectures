@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
 /-!
 # Affine pointed étale neighbourhoods and residue-field triples
 
-Source: Stacks Project, Tags 03PQ, 04HT and 04HX.
+## References
+
+* Stacks Project, Tags 03PQ, 04HT and 04HX
 -/
 
 @[expose] public section

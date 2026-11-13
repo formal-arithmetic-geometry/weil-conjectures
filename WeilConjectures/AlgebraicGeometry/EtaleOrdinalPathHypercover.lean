@@ -16,8 +16,9 @@ import Mathlib.Tactic
 /-!
 # The ordered endpoint pullback of étale hypercovers is a hypercover
 
-Source: Stacks, Tags 01GN and 01GS. In degree n the relative matching problem is
-extension from the two endpoint n-simplices and doubled proper faces to Δ[2n+1].
+## References
+
+* Stacks Project, Tags 01GN and 01GS
 -/
 
 @[expose] public section

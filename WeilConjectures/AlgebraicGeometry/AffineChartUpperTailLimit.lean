@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartUpperTailLimitComparisons
 
 /-! # The affine chart limit over an upper tail
 
-Source: Stacks Project, Tags 01ZR, 0095, 0097 and 01I6.
+## References
+
+* Stacks Project, Tags 01ZR, 0095, 0097 and 01I6
 -/
 
 @[expose] public section

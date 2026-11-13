@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # Constructibility of extension by zero of a finite constant module sheaf
 
-Source: Stacks Project, Tag 03S8, Lemma 59.73.1(3).
+## References
+
+* Stacks Project, Tag 03S8
 -/
 
 @[expose] public section

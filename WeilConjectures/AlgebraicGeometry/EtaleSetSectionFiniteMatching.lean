@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionPairMatchingEventually
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Finite matching equations become effective at a stage
-Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction. -/
+
+## References
+
+* Stacks Project, Tags 03Q4 and 09YQ
+-/
 
 @[expose] public section
 

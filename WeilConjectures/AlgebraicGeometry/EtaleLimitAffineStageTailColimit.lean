@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence
 
 /-! # The comparison cocone on the affine tail
 
-Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ set_option linter.privateModule false
 
 /-! # Constant realization preserves universal coefficient normalization
 
-Source: Stacks Project, Tags 06YY, 07A4 and 0G7E.
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0G7E
 -/
 
 @[expose] public noncomputable section

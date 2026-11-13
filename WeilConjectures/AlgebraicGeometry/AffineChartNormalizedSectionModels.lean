@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.AffineIsomorphicSourceNormalizedModels
 
 /-! # Normalized section models for affine upper-tail charts
 
-Source: Stacks Project, Tags 01ZR and 01I6.
+## References
+
+* Stacks Project, Tags 01ZR and 01I6
 -/
 
 @[expose] public section

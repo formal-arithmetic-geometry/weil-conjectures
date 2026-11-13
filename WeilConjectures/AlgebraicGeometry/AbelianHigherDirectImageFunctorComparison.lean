@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 
 /-! # Natural abelian higher-image comparison
 
-Source: Stacks Project, Tag 03Q8.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section

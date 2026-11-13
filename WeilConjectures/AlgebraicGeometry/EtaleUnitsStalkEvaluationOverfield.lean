@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationOverfieldBijec
 /-!
 # Evaluation of geometric units germs in a separable closure
 
-Source: Stacks Project, Tag 03QV, Example sheaves-point (2), and Tag 02GL.
+## References
+
+* Stacks Project, Tags 03QV and 02GL
 -/
 
 @[expose] public section

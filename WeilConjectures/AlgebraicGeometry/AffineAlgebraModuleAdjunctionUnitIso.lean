@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorHomBijective
 /-! # Canonical affine algebra module adjunction component
 
-Source: Stacks Project, Tags 0AVW and 01SB. -/
+## References
+
+* Stacks Project, Tags 0AVW and 01SB
+-/
 
 @[expose] public section
 

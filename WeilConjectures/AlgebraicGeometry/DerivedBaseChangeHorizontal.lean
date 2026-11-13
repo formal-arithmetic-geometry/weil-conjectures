@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalMate
 
 /-! # Horizontal composition of derived base-change squares
 
-Source: Stacks Project, Cohomology, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section

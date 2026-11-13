@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Directed colimits of derived etale cohomology at coefficient size
 
-Source: Stacks Project, Tag 03Q5.
+## References
+
+* Stacks Project, Tag 03Q5
 -/
 
 @[expose] public section

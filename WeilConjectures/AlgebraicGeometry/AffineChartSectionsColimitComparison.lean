@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSectionsPullbackIsoTransport
 
 /-! # Colimit and sections comparisons for a fixed affine chart
 
-Source: Stacks Project, Limits Tag 01ZR, affine case; Modules on Schemes Tag 01I6.
+## References
+
+* Stacks Project, Tags 01ZR and 01I6
 -/
 
 @[expose] public section

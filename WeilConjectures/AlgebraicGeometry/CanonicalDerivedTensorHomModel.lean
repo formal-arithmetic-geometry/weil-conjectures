@@ -10,9 +10,10 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 
 /-! # Canonical derived tensor/internal-Hom bijections
-Source: Stacks Project, cohomology.tex, Tag 08DJ.
-The representative equation uses the actual Hom-complex projections, sheaf tensor-Hom
-currying, the localization factorization, and the functorial K-injective resolution.
+
+## References
+
+* Stacks Project, Tag 08DJ
 -/
 
 @[expose] public section

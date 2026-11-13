@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoe
 /-!
 # Finite-pushforward embeddings of constructible module sheaves
 
-Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (3).
+## References
+
+* Stacks Project, Tag 09Z7
 -/
 
 @[expose] public section

@@ -11,7 +11,10 @@ import WeilConjectures.CategoryTheory.AdditiveConeFamilyComparison
 import WeilConjectures.CategoryTheory.ExteriorKoszulScalarRealization
 
 /-! # Finite realization of constant Koszul augmentation cones
-Source: Stacks Project, Tags 099M, 093M and 0A0E.
+
+## References
+
+* Stacks Project, Tags 099M, 093M and 0A0E
 -/
 
 @[expose] public noncomputable section

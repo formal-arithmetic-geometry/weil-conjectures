@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.BoundedGradedMapCompatibility
 
 /-! # Descent of bounded graded modules and successive maps
 
-Source: Stacks Project, Tag 01ZR, clauses (1) and (2).
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section

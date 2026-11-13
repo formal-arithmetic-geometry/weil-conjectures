@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # A torsion kernel embeds in a sufficiently deep ideal quotient
 
-Source: Stacks Project, Tags 0889 and 088A, uniqueness argument, via Artin--Rees.
+## References
+
+* Stacks Project, Tags 0889 and 088A
 -/
 
 @[expose] public section

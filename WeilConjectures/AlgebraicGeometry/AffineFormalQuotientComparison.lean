@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # Sheafification of a positive affine module quotient
 
-Source: Stacks Project, Tags 01I7, 01I8, 01IC and 087W.
+## References
+
+* Stacks Project, Tags 01I7, 01I8, 01IC and 087W
 -/
 
 @[expose] public section

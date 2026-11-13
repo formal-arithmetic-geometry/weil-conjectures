@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Pasting coefficient-restriction squares
 
-Source: Stacks Project, Tag 0D5S.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer
 /-!
 # Naturality of normalized resolution section comparisons
 
-Source: Stacks Project, Tags 0A50, 03F3, and 01F8.
+## References
+
+* Stacks Project, Tags 0A50, 03F3 and 01F8
 -/
 
 @[expose] public section

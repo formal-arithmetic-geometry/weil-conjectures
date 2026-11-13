@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionSerreVanishing
 /-!
 # Serre vanishing over a Noetherian affine base
 
-Source: Stacks Project, Cohomology of Schemes, Tags 02O1 and 0B5T (4);
-Morphisms, Tag 01VK.
+## References
+
+* Stacks Project, Tags 02O1, 0B5T and 01VK
 -/
 
 @[expose] public section

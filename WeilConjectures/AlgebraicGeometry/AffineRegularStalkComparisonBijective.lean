@@ -11,7 +11,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # Bijectivity of the regular-module stalk comparison
 
-Source: Stacks Project, Tags 01HV, 01IB and 0098.
+## References
+
+* Stacks Project, Tags 01HV, 01IB and 0098
 -/
 
 @[expose] public section

@@ -16,8 +16,9 @@ import WeilConjectures.RingTheory.FiniteMapColimitDescent
 /-!
 # Finiteness descent on an affine open over an affine base open
 
-Source: Stacks Project, Limits, proof of Tag 01ZO, affine calculation, and Algebra,
-Tag 07RG.
+## References
+
+* Stacks Project, Tags 01ZO and 07RG
 -/
 
 @[expose] public section

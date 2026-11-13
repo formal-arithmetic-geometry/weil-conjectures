@@ -14,7 +14,10 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 
 /-! # Spreading vanishing from the local scheme
 
-Source: Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3. -/
+## References
+
+* Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3
+-/
 
 @[expose] public section
 

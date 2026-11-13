@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # The terminal restriction isomorphism for an étale object
 
-Source: Stacks Project, Étale Cohomology, Tag 03S2.
+## References
+
+* Stacks Project, Tag 03S2
 -/
 
 @[expose] public section

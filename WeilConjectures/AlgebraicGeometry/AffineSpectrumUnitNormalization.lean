@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDirectImageCoordin
 
 /-! # Affine spectrum unit normalization
 
-Source: Stacks Project, Tag 0D5S, composition coherence used in the affine reduction.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

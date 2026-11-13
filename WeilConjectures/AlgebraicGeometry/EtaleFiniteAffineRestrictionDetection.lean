@@ -14,7 +14,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 import Mathlib.CategoryTheory.Sites.EqualizerSheafCondition
 
 /-! # Finite affine restrictions detect equality after base change
-Source: Stacks Project, Tags 01IT, 03Q4 and 00VL. -/
+
+## References
+
+* Stacks Project, Tags 01IT, 03Q4 and 00VL
+-/
 
 @[expose] public section
 

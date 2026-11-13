@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenInjectiveCoefficientLowerComparison
 
 /-! # Open injective Leray edge comparison
 
-Source: Stacks Project, Tags 0F07 and 0734.
+## References
+
+* Stacks Project, Tags 0F07 and 0734
 -/
 
 @[expose] public section

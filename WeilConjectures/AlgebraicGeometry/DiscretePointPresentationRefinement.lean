@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.SiteFiniteConstantComplexDescent
 
 /-! # Refinement of one discrete point presentation
 
-Source: Stacks, Tags 03CY, 00YV and 09AJ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV and 09AJ
 -/
 
 @[expose] public section

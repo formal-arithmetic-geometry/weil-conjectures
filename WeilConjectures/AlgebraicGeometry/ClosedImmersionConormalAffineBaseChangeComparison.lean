@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # Affine comparison for the canonical conormal base-change map
 
-Source: Stacks Project, Morphisms, Lemma 0473, affine reduction, and
-Schemes, Lemma 01JU (1).
+## References
+
+* Stacks Project, Tags 0473 and 01JU
 -/
 
 @[expose] public section

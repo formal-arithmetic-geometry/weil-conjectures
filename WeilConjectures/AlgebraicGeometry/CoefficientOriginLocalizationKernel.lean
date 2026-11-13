@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientFixedLocalizationKernelCompa
 
 /-! # The classical open part of coefficient-sized localization
 
-Source: Stacks Project, proetale.tex, Tags 09AH, 09AF.
+## References
+
+* Stacks Project, Tags 09AH and 09AF
 -/
 
 @[expose] public noncomputable section

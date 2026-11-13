@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 
 /-! # Affineness of a compatible component section locus
 
-Source: Stacks Project, Varieties Lemma 09NX, second paragraph;
-Limits Lemma 09NL and Properties Section 01PR.
+## References
+
+* Stacks Project, Tags 09NX, 09NL and 01PR
 -/
 
 @[expose] public section

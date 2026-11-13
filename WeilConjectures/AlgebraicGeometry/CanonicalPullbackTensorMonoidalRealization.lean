@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 
 /-! # Realizing the canonical tensor comparison by a monoidal structure
 
-Source: Stacks Project, Cohomology, Tag 079U.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section

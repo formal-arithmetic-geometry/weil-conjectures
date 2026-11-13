@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageUniformAffineTruncati
 
 /-! # Uniform truncation of the two sides over an affine open
 
-Source: Stacks Project, Tags 08DZ and 08D5(2).
+## References
+
+* Stacks Project, Tags 08DZ and 08D5
 -/
 
 @[expose] public section

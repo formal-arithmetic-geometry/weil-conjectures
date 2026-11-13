@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphAmbientSquarePasting
 
 /-! # Proper ambient projection pasting
 
-Source: Stacks Tag 0F7J, the final comparison of diagrams A--F.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

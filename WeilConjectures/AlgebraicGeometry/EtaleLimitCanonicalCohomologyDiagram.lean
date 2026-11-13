@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # Canonical comparison diagrams for etale cohomology
 
-Source: Stacks Project, Tags 01F7 and 09YQ.
+## References
+
+* Stacks Project, Tags 01F7 and 09YQ
 -/
 
 @[expose] public section

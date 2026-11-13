@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantCoefficientLocalModelsCompariso
 
 /-! # Surjective coefficient restriction preserves finite local constant modules
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 094I.
+## References
+
+* Stacks Project, Tags 06YY and 094I
 -/
 
 @[expose] public section

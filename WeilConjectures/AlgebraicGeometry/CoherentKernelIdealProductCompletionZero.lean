@@ -18,7 +18,9 @@ import Mathlib.RingTheory.AdicCompletion.Exactness
 
 /-! # Vanishing of the completion of a coherent kernel's ideal product
 
-Source: Stacks Project, Tags 088A, 087W and 00MB.
+## References
+
+* Stacks Project, Tags 088A, 087W and 00MB
 -/
 
 @[expose] public section

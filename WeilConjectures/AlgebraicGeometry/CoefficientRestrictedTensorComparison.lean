@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-! # Derived tensor comparison for the coefficient-sized inverse image
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public noncomputable section

@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # External sections with an affine second factor
 
-Source: Stacks Project, Tag 0BED, lemma-kunneth, the displayed comparison on X times V.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

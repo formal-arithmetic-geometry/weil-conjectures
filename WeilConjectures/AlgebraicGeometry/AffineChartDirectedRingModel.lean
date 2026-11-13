@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartTensorComparison
 /-!
 # Directed ring models of base changes of an affine chart
 
-Source: Stacks Project, Limits, Tag 07RP (affine reduction), Tags 01YX and 01YW.
+## References
+
+* Stacks Project, Tags 07RP, 01YX and 01YW
 -/
 
 @[expose] public section

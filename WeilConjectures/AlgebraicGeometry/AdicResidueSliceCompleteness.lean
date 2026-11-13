@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.NativeRingedRestrictionLocalization
 
 /-! # Completeness on slices of completed coefficients
 
-Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section

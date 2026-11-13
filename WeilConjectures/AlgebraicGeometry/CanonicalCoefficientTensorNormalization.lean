@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 
 /-! # Computation normalization of the canonical coefficient tensor presentation
 
-Source: Stacks 06YY and 0G7E; the scalar comparison in the rational proper
-base-change proof, paragraph (1).
+## References
+
+* Stacks Project, Tags 06YY and 0G7E
 -/
 
 @[expose] public noncomputable section

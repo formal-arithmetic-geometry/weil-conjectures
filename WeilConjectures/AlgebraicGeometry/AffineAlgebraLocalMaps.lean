@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 
 /-! # Local maps determined by a morphism of structure algebras
 
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemma 01LT.
+## References
+
+* Stacks Project, Tags 01SA and 01LT
 -/
 
 @[expose] public section

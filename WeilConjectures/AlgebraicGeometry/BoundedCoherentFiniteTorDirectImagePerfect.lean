@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.ProperDirectImageFiniteTor
 
 /-! # Perfect direct image of a bounded coherent finite-Tor complex
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV).
+## References
+
+* Stacks Project, Tag 08EV
 -/
 
 @[expose] public section

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 /-!
 # Étale neighborhoods from quotient restrictions
 
-Source: Stacks Project, Tag 0GS2, using Tag 0A43(2).
+## References
+
+* Stacks Project, Tags 0GS2 and 0A43
 -/
 
 @[expose] public section

@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations
 
 /-! # Hom transport from coherent affine object comparisons
-Source: Stacks Project, Tags 09RE and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 09RE and 0D5S
+-/
 
 @[expose] public section
 universe u w

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineScalarSectionAction
 
 /-! # Scalar action on the unit germ of affine sheafification
 
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4, functoriality, and Tag 0098.
+## References
+
+* Stacks Project, Tags 01HV and 0098
 -/
 
 @[expose] public section

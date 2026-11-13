@@ -8,7 +8,9 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Canonical derived change-of-rings model
 
-Source: Stacks Project Tags 06YT, 06YY and 06XN.
+## References
+
+* Stacks Project, Tags 06YT, 06YY and 06XN
 -/
 
 @[expose] public noncomputable section

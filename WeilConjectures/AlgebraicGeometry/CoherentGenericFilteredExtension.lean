@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # Generic inclusions with filtered source
 
-Source: Stacks Project, Tags 01YE and 01YF, generic-point ideal inclusion and cokernel reduction.
+## References
+
+* Stacks Project, Tags 01YE and 01YF
 -/
 
 @[expose] public section

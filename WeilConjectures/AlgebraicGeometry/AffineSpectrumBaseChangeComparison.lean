@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumMateCompatibility
 /-! # The base-change mate in affine spectrum coordinates
 
-Source: Stacks Project, Tags 0DJ8, 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ8, 08HY and 0D5S
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Finite-stage detection of a zero limit cohomology class
 
-Source: Stacks Project, Tags 09YQ, 09YP, 0EYL and 0A50.
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 0EYL and 0A50
 -/
 
 @[expose] public section

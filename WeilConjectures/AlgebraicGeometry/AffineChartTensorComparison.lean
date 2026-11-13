@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 /-!
 # Tensor-product comparison for a single affine chart
 
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Morphisms, Tag 01TQ.
+## References
+
+* Stacks Project, Tags 01JR, 01I4 and 01TQ
 -/
 
 @[expose] public section

@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Naturality of a single restricted cohomology map
 
-Source: Stacks Project, Tags 01F7 and 09YQ; the restricted square specialization
-in the proof of the difference-map naturality lemma.
+## References
+
+* Stacks Project, Tags 01F7 and 09YQ
 -/
 
 @[expose] public section

@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # First projection pasting for a shrinking graph intersection
 
-Source: Stacks Project, Tags 0F7D and 0F7J, horizontal pasting and the
-intersection calculation.
+## References
+
+* Stacks Project, Tags 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section

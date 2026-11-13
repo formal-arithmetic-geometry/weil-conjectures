@@ -12,7 +12,10 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import Mathlib.LinearAlgebra.Span.Basic
 
 /-! # The affine annihilation criterion
-Source: Stacks Project, Tag 01PO, proof of clause (2).
+
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section

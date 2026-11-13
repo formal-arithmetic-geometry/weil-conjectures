@@ -11,7 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! # A single qcqs overlap detects matching after any base change
-Source: Stacks Project, Tags 03Q4 and 09YQ, overlap reduction. -/
+
+## References
+
+* Stacks Project, Tags 03Q4 and 09YQ
+-/
 
 @[expose] public section
 

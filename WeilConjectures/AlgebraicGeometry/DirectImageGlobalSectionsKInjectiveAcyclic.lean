@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.GlobalSectionsPointUnitTransport
 /-!
 # Global-sections acyclicity of a direct image of a K-injective
 
-Source: Stacks Project, Cohomology, Tags 079W and 0D5T; Duality, Tag 0B6I.
+## References
+
+* Stacks Project, Tags 079W, 0D5T and 0B6I
 -/
 
 @[expose] public section

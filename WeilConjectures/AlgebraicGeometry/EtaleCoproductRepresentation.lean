@@ -16,7 +16,9 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 /-!
 # Representations over disjoint components
 
-Source: Stacks Project, Tags 03RV and 02W5, gluing local representations.
+## References
+
+* Stacks Project, Tags 03RV and 02W5
 -/
 
 @[expose] public section

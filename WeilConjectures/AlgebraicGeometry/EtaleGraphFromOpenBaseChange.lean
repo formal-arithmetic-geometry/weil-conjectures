@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
 
 /-! # Base change of a single explicit product-graph map
 
-Source: Stacks Project, Tag 0F7F, applied factor by factor to the graph formula.
+## References
+
+* Stacks Project, Tag 0F7F
 -/
 
 @[expose] public noncomputable section

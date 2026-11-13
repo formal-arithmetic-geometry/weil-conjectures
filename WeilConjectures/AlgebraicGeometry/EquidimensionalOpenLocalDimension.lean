@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 
 /-! # Local dimension of an equidimensional open in a locally algebraic scheme
 
-Source: Stacks Project, Tag 0A21 (3), (5).
+## References
+
+* Stacks Project, Tag 0A21
 -/
 
 @[expose] public section

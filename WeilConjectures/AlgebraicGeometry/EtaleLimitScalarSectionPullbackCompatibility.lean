@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 
 /-! # Naturality of scalar inverse-image section maps
 
-Source: Stacks Project, Sites Tags 03CB and 03CC, and Etale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 09YQ
 -/
 
 @[expose] public section

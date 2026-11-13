@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGeneration
 
 /-! # Isomorphisms detected by affine pullbacks of perfect complexes
 
-Source: Stacks Project, Tag 0AA8, first proof paragraph, and Tag 0BQT.
+## References
+
+* Stacks Project, Tags 0AA8 and 0BQT
 -/
 
 @[expose] public section

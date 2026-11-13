@@ -9,7 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # The two projection boundaries of a proper refinement graph
 
-Source: Stacks Project, Tags 0F7C--0F7E.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7E
 -/
 
 @[expose] public noncomputable section

@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Det
 
 /-! The canonical coefficient-sized closed localization unit.
 
-Source: Stacks Project, proetale.tex, Tags 09AH and 09AF.
+## References
+
+* Stacks Project, Tags 09AH and 09AF
 -/
 
 @[expose] public noncomputable section

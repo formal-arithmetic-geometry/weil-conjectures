@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # The local completion reflector for the actual residue kernel
 
-Source: Stacks Project, Tags 099L, 099E and 099F.
+## References
+
+* Stacks Project, Tags 099L, 099E and 099F
 -/
 
 @[expose] public noncomputable section

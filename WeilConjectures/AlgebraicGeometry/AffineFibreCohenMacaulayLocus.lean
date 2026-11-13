@@ -17,7 +17,9 @@ import WeilConjectures.RingTheory.OpenFlatLocus
 
 /-! # Affine fibre Cohen-Macaulay locus
 
-Source: Stacks Project, Tags 00RI, 00RH, 00N8.
+## References
+
+* Stacks Project, Tags 00RI, 00RH and 00N8
 -/
 
 @[expose] public section

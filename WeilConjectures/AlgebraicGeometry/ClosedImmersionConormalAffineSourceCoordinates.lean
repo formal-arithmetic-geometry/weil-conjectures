@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 
 /-! # Normalized affine coordinates for conormal sections
 
-Source: Stacks Project, Morphisms, Lemma 0473 and Schemes, Lemma 01JU (1).
+## References
+
+* Stacks Project, Tags 0473 and 01JU
 -/
 
 @[expose] public section

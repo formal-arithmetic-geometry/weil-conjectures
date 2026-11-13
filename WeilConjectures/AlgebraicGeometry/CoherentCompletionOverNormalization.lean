@@ -15,7 +15,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Normalized completion on an open over-site
 
-Source: Stacks Project, Tag 0889(1), Zariski locality, and equation 0880.
+## References
+
+* Stacks Project, Tags 0889 and 0880
 -/
 
 @[expose] public section

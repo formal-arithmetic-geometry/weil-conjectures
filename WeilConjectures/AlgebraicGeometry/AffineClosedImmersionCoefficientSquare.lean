@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.AffineQuotientRestrictedIso
 
 /-! # Affine coordinates for the closed-immersion coefficient morphism
 
-Source: Stacks Project, Tags 01I9 and 0BQZ. -/
+## References
+
+* Stacks Project, Tags 01I9 and 0BQZ
+-/
 
 @[expose] public section
 

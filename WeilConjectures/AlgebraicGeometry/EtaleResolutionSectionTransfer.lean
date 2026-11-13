@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
 /-!
 # Sections of a comparison into a direct image resolution
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

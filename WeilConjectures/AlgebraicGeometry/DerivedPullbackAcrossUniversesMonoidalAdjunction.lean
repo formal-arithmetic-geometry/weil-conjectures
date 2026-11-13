@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Monoidal adjunction for the transported derived pullback
 
-Source: Stacks Project, Tags 079U, 079W and 05RU.
+## References
+
+* Stacks Project, Tags 079U, 079W and 05RU
 -/
 
 @[expose] public section

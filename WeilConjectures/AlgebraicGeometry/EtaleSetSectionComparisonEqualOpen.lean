@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 import WeilConjectures.AlgebraicGeometry.EtaleSetCartesianUnitEquality
 
 /-! # The agreement open for canonical inverse-image section comparisons
-Source: Stacks Project, Tag 09XM, with inverse-image unit compatibility in
-Sites Tags 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 09XM, 03CB and 03CC
+-/
 
 @[expose] public section
 

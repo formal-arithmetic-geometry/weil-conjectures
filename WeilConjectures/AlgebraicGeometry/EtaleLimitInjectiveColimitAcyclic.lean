@@ -25,7 +25,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Etale replacement: construction and vanishing
 
-Source: Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ
 -/
 
 @[expose] public section

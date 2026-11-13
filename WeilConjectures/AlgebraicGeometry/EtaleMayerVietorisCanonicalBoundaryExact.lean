@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Exactness of the boundary of a fixed normalized resolution
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

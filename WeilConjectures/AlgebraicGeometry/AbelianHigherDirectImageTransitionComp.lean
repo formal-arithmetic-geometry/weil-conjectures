@@ -11,7 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageCoreComp
 
 /-! # Composition of abelian higher direct image transitions
-Source: Stacks Project, Tag 09Z1, canonical cohomology comparison maps. -/
+
+## References
+
+* Stacks Project, Tag 09Z1
+-/
 
 @[expose] public section
 

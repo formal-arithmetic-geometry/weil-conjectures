@@ -15,8 +15,9 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Finite unions and proper preimages of closed subsets proper over a base
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.6 (Tag 0CYR)
-and Lemma 30.26.5 (Tag 0CYQ), part (3).
+## References
+
+* Stacks Project, Tags 0CYR and 0CYQ
 -/
 
 @[expose] public section

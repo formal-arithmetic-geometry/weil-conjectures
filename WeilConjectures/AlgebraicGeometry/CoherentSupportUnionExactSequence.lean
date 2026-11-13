@@ -24,7 +24,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Splitting the support of a coherent module into two closed pieces
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD.
+## References
+
+* Stacks Project, Tag 01YD
 -/
 
 @[expose] public section

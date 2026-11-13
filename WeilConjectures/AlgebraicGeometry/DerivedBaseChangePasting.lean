@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Pasting a derived base-change square with an upper-left morphism
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section

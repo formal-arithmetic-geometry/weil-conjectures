@@ -15,7 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Counit square for affine spectrum pullback composition
 
-Source: Stacks Project, Tag 0D5S.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleUnitsGaloisPointStalk
 The cohomological Brauer group `H²(Spec K_ét, 𝔾ₘ)` of a field `K` is the second continuous
 Galois cohomology of the units of a separable closure.
 
-Source: Stacks Project, Lemmas 04JQ and 03QU, Example 03QV (2), and Section 0DVG.
+## References
+
+* Stacks Project, Tags 04JQ, 03QU, 03QV and 0DVG
 -/
 
 @[expose] public section

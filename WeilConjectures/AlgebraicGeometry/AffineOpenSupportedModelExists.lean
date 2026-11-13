@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Affine derived preimages of restricted quasi-coherent targets
 
-Source: Stacks Project, Tag 06Z0, with exact restriction to an affine open.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 @[expose] public section
 universe u w

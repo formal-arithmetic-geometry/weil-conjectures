@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.LocalizingPrincipalCoverGluing
 
 /-! # The affine-basis sheaf condition for a localizing module presheaf
 
-Source: Stacks Project, Tag 01HV, with Tags 009N and 009Q.
+## References
+
+* Stacks Project, Tags 01HV, 009N and 009Q
 -/
 
 @[expose] public section

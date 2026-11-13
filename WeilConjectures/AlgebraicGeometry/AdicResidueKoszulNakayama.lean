@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.RingedKoszulCompletionReflector
 
 /-! # Residue-zero detection independent of quotient reconstruction
 
-Source: Stacks Project, Tags 0G1U and 0A0E.
+## References
+
+* Stacks Project, Tags 0G1U and 0A0E
 -/
 
 @[expose] public noncomputable section

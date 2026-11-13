@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleZariskiNaturalAcyclicLeray
 
 /-! # Positive-degree comparison for underlying abelian sheaves
 
-Source: Stacks Project, Descent, Proposition Tag 03DW (2), and Étale Cohomology,
-Theorem Tag 03P2.
+## References
+
+* Stacks Project, Tags 03DW and 03P2
 -/
 
 @[expose] public section

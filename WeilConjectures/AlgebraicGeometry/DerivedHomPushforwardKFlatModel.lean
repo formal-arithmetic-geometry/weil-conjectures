@@ -16,7 +16,10 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 
 /-! # K-flat model for internal Hom into a derived direct image
 
-Source: Stacks Project, Cohomology, Tags 08I3, 08DH, 06YS and 079P. -/
+## References
+
+* Stacks Project, Tags 08I3, 08DH, 06YS and 079P
+-/
 
 @[expose] public section
 set_option autoImplicit false

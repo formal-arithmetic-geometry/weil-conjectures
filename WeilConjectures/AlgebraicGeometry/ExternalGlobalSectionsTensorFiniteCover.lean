@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Finite-cover descent for the external section comparison
 
-Source: Stacks Project, Tag 0BED, lemma-kunneth, the degree-zero finite-cover argument.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

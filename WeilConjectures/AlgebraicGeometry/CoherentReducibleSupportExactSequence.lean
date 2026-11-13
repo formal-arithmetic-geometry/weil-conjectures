@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Splitting a coherent module with reducible closed support
 
-Source: Stacks Project, Tags 01YD and 01YF, the reducible-support paragraph.
+## References
+
+* Stacks Project, Tags 01YD and 01YF
 -/
 
 @[expose] public section

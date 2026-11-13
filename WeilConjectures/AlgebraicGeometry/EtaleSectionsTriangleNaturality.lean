@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsRestrictionSquare
 
 /-! # Naturality of the termwise-to-derived sections comparison
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section

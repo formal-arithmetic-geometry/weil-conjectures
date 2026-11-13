@@ -18,8 +18,9 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Simultaneous local representatives for étale inverse images
 
-Source: Stacks Project, Tag 09XN (description of inverse image) and Tag 00YV
-(inverse image commutes with algebraic structures).
+## References
+
+* Stacks Project, Tags 09XN and 00YV
 -/
 
 @[expose] public section

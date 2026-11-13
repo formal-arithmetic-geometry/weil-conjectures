@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # Compatibility of the canonical spectrum comparisons with base-change mates
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ import WeilConjectures.RingTheory.KernelCokernelAnnihilatedModIdeal
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps
 
-Source: Stacks Project, Cohomology of Schemes, Remark 0888; Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 0888, 087W and 087X
 -/
 
 @[expose] public section

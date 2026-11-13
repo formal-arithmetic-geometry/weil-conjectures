@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 
 /-! # Object cohomology stalks and section complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 03F3; Etale Cohomology, Tag 09AX.
+## References
+
+* Stacks Project, Tags 03F3 and 09AX
 -/
 
 @[expose] public section

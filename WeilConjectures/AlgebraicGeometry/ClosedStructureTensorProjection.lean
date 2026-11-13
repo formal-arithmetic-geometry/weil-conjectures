@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorProjectionStalk
 
 /-! # The ordinary projection formula for a closed structure sheaf
 
-Source: Stacks Project, Modules, Tags 08KS and 01CB; Sheaves, Tag 0098. -/
+## References
+
+* Stacks Project, Tags 08KS, 01CB and 0098
+-/
 
 @[expose] public section
 set_option autoImplicit false

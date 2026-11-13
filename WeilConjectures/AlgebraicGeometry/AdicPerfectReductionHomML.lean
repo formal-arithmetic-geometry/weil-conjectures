@@ -12,7 +12,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Mittag-Leffler for perfect finite-reduction Hom
 
-Source: Stacks Project, Tags 09C5 and 09C6.
+## References
+
+* Stacks Project, Tags 09C5 and 09C6
 -/
 
 @[expose] public noncomputable section

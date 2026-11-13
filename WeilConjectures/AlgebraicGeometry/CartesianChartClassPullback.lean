@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageChartSystem
 
 /-! # Canonical pullback of chart classes
 
-Source: Stacks Project, Tag 0EYM, the stage-to-apex compatibility square.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

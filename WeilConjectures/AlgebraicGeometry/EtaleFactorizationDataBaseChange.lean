@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 
 /-! # Transport of factorization data by a further base change
 
-Source: Stacks, Limits 01YZ; Categories, fibre products and their canonical comparisons.
+## References
+
+* Stacks Project, Tag 01YZ
 -/
 
 @[expose] public section

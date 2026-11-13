@@ -21,7 +21,11 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Object comparison in one affine square
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 0D5S
+-/
 
 @[expose] public section
 universe u w

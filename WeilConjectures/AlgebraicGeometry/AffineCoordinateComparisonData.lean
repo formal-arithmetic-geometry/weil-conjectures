@@ -18,7 +18,11 @@ public import Mathlib.CategoryTheory.InducedCategory
 public import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 
 /-! # Affine-coordinate comparison data
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u w

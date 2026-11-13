@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
 /-! # Affine-local cohomology of derived pullback
 
-Source: Stacks Project, Tag 08DW, part (1), with its affine calculation in part (2).
+## References
+
+* Stacks Project, Tag 08DW
 -/
 
 @[expose] public section

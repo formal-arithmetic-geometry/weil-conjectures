@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
 
 /-! # Chow modification data with projective immersion
 
-Source: Stacks Project, Theorem 088E, Chow modification paragraph.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

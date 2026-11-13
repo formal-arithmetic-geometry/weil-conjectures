@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 /-!
 # Artin–Schreier map over an algebraically closed field
 
-Source: Stacks Project, Tag 0A3J.
+## References
+
+* Stacks Project, Tag 0A3J
 -/
 
 @[expose] public section

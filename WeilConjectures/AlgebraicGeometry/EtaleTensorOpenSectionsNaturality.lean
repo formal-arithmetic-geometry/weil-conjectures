@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Canonical open-section comparisons and restriction compatibility
 
-Source: Stacks Project, Tags 03DR, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 03DR, 0095 and 0096
 -/
 
 @[expose] public section

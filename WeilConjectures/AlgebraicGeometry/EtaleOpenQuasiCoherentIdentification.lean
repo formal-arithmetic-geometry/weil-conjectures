@@ -13,7 +13,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Quasi-coherent coefficients under restriction to an open etale site
 
-Source: Stacks Project, Sites, Section 00XZ; Descent, Tags 03DR and 03DU.
+## References
+
+* Stacks Project, Tags 00XZ, 03DR and 03DU
 -/
 
 @[expose] public section

@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Bounded-below direct image and quasi-coherence
 
-Source: Stacks Project, perfect.tex, Tag 08D5, bounded-below paragraph.
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section

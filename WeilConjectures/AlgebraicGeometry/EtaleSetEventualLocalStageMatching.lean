@@ -19,7 +19,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Eventual matching of local stage representatives
 
-Source: Stacks Project, Sites Tag 0A35 and Étale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 0A35 and 09YQ
 -/
 
 @[expose] public section

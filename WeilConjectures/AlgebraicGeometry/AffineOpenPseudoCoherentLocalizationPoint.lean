@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoNestedOpenFiniteFreeModel
 
 /-! # Pointwise pseudo-coherent localization on an affine open
 
-Source: Stacks Project, Tags 08EE and 08E7.
+## References
+
+* Stacks Project, Tags 08EE and 08E7
 -/
 
 @[expose] public section

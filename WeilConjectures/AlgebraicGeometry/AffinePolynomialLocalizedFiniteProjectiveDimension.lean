@@ -16,7 +16,9 @@ import WeilConjectures.RingTheory.LocalizedPolynomialFiniteProjectiveDimension
 
 /-! # Pointwise projective dimension from stalkwise finite Tor dimension
 
-Source: Stacks Project, Tag 069C, using Tag 068X.
+## References
+
+* Stacks Project, Tags 069C and 068X
 -/
 
 @[expose] public section

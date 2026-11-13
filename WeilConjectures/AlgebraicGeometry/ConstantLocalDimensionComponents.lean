@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Components of an open of constant local dimension
 
-Source: Stacks Project, Tags 0052 (2), (3), and 0055 (local dimension).
+## References
+
+* Stacks Project, Tags 0052 and 0055
 -/
 
 @[expose] public section

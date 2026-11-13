@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafFullOpenIso
 
 /-! # A constant-rank exterior complex in the derived category
 
-Source: Stacks Project, Tag 0BR0, the convention for a locally constant shift.
+## References
+
+* Stacks Project, Tag 0BR0
 -/
 
 @[expose] public section

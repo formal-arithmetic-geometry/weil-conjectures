@@ -14,8 +14,9 @@ public import Mathlib.Basic.UnivLE
 
 /-! # A universe bound from a nonzero etale module-sheaf section
 
-Source: the sheaf condition (Stacks Project, Sites, Definition 00VR), applied to
-scheme disjoint unions (Schemes, Section 01JA). The size argument is written by S1.
+## References
+
+* Stacks Project, Tags 00VR and 01JA
 -/
 
 @[expose] public section

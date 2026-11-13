@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 
 /-! # Identifying the sheaf dual-tensor comparison with the categorical comparison
 
-Source: Stacks Project, Modules, Example 0FNV, the canonical tensor-to-endomorphism map.
+## References
+
+* Stacks Project, Tag 0FNV
 -/
 
 @[expose] public section

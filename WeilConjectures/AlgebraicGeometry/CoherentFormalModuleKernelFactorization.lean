@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Existence of factorization through the shifted image quotients
 
-Source: Stacks Project, Lemma 087X, claim (d), factorization-existence paragraph.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

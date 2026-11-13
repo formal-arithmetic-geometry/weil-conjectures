@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDescent
 import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryDescentNaturality
 
 /-! # Normalized derived tensor-Hom maps
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex, Tag 0A90.
+
+## References
+
+* Stacks Project, Tags 08DJ and 0A90
 -/
 
 @[expose] public section

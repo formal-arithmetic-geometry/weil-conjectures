@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Constant comparison compatibility
 
-Source: Stacks Project, Tags 03CB, 03CC, 0B65, and 03P5.
+## References
+
+* Stacks Project, Tags 03CB, 03CC, 0B65 and 03P5
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
 
 /-! # Transposition of the canonical base-change map for one open
 
-Source: Stacks Project, Tags 08HY, 08FE and 0D5T.
+## References
+
+* Stacks Project, Tags 08HY, 08FE and 0D5T
 -/
 
 @[expose] public section

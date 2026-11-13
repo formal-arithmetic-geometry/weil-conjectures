@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleLargeLimitFactorization
 
 /-! # Maps from affine limits to affine étale objects
 
-Source: Stacks Project, Tags 01ZC and 099S, finite presentation and affine limits.
+## References
+
+* Stacks Project, Tags 01ZC and 099S
 -/
 
 @[expose] public section

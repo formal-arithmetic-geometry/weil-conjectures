@@ -17,7 +17,9 @@ import Mathlib.RingTheory.Flat.Tensor
 /-!
 # Sections of constant module sheaves
 
-Source: Stacks Project, sites-modules, Tags 093J, 093K, 093L.
+## References
+
+* Stacks Project, Tags 093J, 093K and 093L
 -/
 
 universe u

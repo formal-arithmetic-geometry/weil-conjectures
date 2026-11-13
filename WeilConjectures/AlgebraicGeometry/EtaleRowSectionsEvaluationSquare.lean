@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafPullbackTranspose
 
 /-! # Evaluation square for integer-indexed sections
 
-Source: Stacks Project, Tags 015K, 01F9 and 01FA.
+## References
+
+* Stacks Project, Tags 015K, 01F9 and 01FA
 -/
 @[expose] public section
 universe uNatural

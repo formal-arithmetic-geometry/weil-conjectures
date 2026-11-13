@@ -16,7 +16,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # The ring-sheaf adjunction underlying the étale inverse image
 
-Source: Stacks Project, Proposition 00YV and Section 00YR.
+## References
+
+* Stacks Project, Tags 00YV and 00YR
 -/
 
 @[expose] public section

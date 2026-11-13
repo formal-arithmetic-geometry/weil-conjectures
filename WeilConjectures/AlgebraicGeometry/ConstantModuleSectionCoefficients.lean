@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical coefficient comparison for constant-module sections
 
-Source: Stacks Project, Tags 03DB, 03CO and 09Z1.
+## References
+
+* Stacks Project, Tags 03DB, 03CO and 09Z1
 -/
 
 @[expose] public section

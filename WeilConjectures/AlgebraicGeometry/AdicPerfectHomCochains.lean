@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AdicPerfectModuleHom
 
 /-! # Evaluation of ordinary quotient Hom cochains
 
-Source: Stacks Project, Tags 093T, 09C6 and 0A8H.
+## References
+
+* Stacks Project, Tags 093T, 09C6 and 0A8H
 -/
 
 @[expose] public noncomputable section

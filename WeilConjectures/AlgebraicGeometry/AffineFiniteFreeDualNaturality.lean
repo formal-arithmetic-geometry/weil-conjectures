@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineBasisDualMatrix
 
 /-! # Finite basis dual comparison on an affine open
 
-Source: Stacks Project, schemes.tex, Tag 01HV; duality.tex, Tag 0BQZ.
+## References
+
+* Stacks Project, Tags 01HV and 0BQZ
 -/
 
 @[expose] public section

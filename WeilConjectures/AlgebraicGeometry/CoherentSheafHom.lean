@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 /-!
 # Sheaf Hom of coherent modules
 
-Source: Stacks Project, Modules, Lemma 01CQ, the coherent case.
+## References
+
+* Stacks Project, Tag 01CQ
 -/
 
 @[expose] public section

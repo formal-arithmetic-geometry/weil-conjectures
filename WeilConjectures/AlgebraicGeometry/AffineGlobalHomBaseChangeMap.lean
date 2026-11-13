@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.AffineSectionsPushforwardNormalization
 
 /-!
  # The affine global derived Hom base-change comparison
-Source: Stacks Project, perfect.tex, Tag 0AA7.
+
+## References
+
+* Stacks Project, Tag 0AA7
 -/
 
 @[expose] public section

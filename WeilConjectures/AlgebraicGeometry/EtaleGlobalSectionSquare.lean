@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 
 /-! # Global inverse-image section restriction through a square
 
-Source: Stacks Project, Tag 0A3H, final paragraph.
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-!
 # Resolution comparison for the étale section complexes
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

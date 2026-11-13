@@ -9,7 +9,9 @@ import all WeilConjectures.AlgebraicGeometry.DerivedCompactSupportCompositionCoh
 
 /-! # Target-square subgrid of ambient projection pasting
 
-Source: Stacks Tags 0F7C, 0F7D and 0F7J, the k-side ambient rectangle.
+## References
+
+* Stacks Project, Tags 0F7C, 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleQcoherentULiftCohomologyNaturalSuc
 
 /-! # Naturality of the finite-cover coefficient comparison
 
-Source: Stacks Project, Tag 03P2, separated-case finite affine cover proof.
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

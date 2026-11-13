@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Continuity for a supplied fixed-base cohomology cocone
 
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), and Tag 0032.
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section

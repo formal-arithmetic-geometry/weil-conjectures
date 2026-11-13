@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Degree-zero chain maps into connective complexes
 
-Source: Stacks Project, Derived Categories, Section 13.11 (Tag 05RR), truncation
-calculus of fractions.
+## References
+
+* Stacks Project, Tag 05RR
 -/
 
 @[expose] public section

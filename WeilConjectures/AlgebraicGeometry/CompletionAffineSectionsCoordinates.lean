@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Affine coordinates for a coherent completion system
 
-Source: Stacks Project, Tags 087W, 01I7 and 01IB.
+## References
+
+* Stacks Project, Tags 087W, 01I7 and 01IB
 -/
 
 @[expose] public section

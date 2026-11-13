@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Natural local-ring presentation of an affine module model
 
-Source: Stacks Project, Tags 01BH, 01HV (7), and 008B.
+## References
+
+* Stacks Project, Tags 01BH, 01HV and 008B
 -/
 
 @[expose] public section

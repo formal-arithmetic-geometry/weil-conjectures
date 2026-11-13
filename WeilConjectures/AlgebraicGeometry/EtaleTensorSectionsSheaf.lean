@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
 /-!
 # The étale sheaf associated to a quasi-coherent module
 
-Source: Stacks Project, Descent, Definition 35.8.2, Tag 03DU, item 4;
-Section 35.8, equation (35.8.1), Tag 03DR.
+## References
+
+* Stacks Project, Tags 03DU and 03DR
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-! # Tensor coordinates for the two sides of affine base change
 
-Source: Stacks Project, Schemes, Lemma 01I9 and Cohomology of Schemes, Lemma 02KG.
+## References
+
+* Stacks Project, Tags 01I9 and 02KG
 -/
 
 @[expose] public section

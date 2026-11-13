@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePushoutRingSectionMapTmul
 /-!
 # Affine sections of the ring-sheaf pushout
 
-Source: Stacks Project, Morphisms, Tag 01SB, affine reduction in the proof.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

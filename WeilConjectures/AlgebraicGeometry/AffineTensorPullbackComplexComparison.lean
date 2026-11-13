@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-! # Affine pullback as sheafified scalar extension
 
-Source: Stacks Project, Tags 01IB and 01I9.
+## References
+
+* Stacks Project, Tags 01IB and 01I9
 -/
 
 @[expose] public section

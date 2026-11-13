@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantPullbackIdentityCoherence
 /-!
 # Functoriality of pullback on étale cohomology
 
-Source: Stacks Project, Tag 01F7.
+## References
+
+* Stacks Project, Tag 01F7
 -/
 
 @[expose] public section

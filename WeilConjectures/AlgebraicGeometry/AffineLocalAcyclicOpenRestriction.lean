@@ -17,7 +17,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Affine-local acyclicity under open restriction
 
-Source: Stacks Project, Tag 0A51, the Mayer--Vietoris induction, and Tag 03D3.
+## References
+
+* Stacks Project, Tags 0A51 and 03D3
 -/
 
 @[expose] public section

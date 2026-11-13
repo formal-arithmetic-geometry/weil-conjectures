@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 
 /-! # Intersection restriction becomes invertible on its open
 
-Source: Stacks Project, Tag 02FU, restriction to a member of the covering.
+## References
+
+* Stacks Project, Tag 02FU
 -/
 
 @[expose] public section

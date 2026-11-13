@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSectionsUnique
 /-!
 # Normalized diagonal conormal sections on an affine chart
 
-Source: Stacks Project, Tags 01KJ, 01R3, 08S2 and 00RW.
+## References
+
+* Stacks Project, Tags 01KJ, 01R3, 08S2 and 00RW
 -/
 
 @[expose] public section

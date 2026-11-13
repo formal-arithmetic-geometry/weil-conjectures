@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 
 /-! # Ordinary quotient-model Hom and algebraic Hom cohomology
 
-Source: Stacks Project, Tags 09C5, 09C6 and 0A8H.
+## References
+
+* Stacks Project, Tags 09C5, 09C6 and 0A8H
 -/
 
 @[expose] public noncomputable section

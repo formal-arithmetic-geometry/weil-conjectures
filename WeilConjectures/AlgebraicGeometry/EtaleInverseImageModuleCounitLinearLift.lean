@@ -12,7 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 /-! # The transported abelian counit lifts to a module map
 
-Source: Stacks Project, Tag 03D3. -/
+## References
+
+* Stacks Project, Tag 03D3
+-/
 
 @[expose] public section
 

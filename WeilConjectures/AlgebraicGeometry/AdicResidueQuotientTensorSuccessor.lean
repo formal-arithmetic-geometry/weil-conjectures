@@ -13,7 +13,9 @@ import all WeilConjectures.CategoryTheory.RingedScalarTensorUnit
 
 /-! # One successor square for the explicit scalar tensor comparison
 
-Source: Stacks Project, Tags 03CZ, 06YY and 099M.
+## References
+
+* Stacks Project, Tags 03CZ, 06YY and 099M
 -/
 
 @[expose] public noncomputable section

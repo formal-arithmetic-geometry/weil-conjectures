@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphInterchangeData
 
 /-! # Neighborhood maps for a shrinking graph presentation
 
-Source: Stacks Project, Tag 0F7J, product-graph neighborhood calculation.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

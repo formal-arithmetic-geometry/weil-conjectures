@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Identifying the adic pullback with exact comparison
 
-Source: Stacks Project, Tags 03D2, 099R and 09AL.
+## References
+
+* Stacks Project, Tags 03D2, 099R and 09AL
 -/
 
 @[expose] public noncomputable section

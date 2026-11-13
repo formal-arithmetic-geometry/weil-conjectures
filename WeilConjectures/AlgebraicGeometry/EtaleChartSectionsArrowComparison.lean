@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleChartSectionsObjectComparison
 /-!
 # Restricting inverse-image sections to an etale chart
 
-Source: Stacks Project, Etale Cohomology, Tag 0EZX, proof, and Tag 0A3H;
-composition of inverse images and restriction to an etale object.
+## References
+
+* Stacks Project, Tags 0EZX and 0A3H
 -/
 
 @[expose] public section

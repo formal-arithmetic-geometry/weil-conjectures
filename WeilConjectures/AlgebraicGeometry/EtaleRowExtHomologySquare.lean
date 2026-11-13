@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.ExtCoefficientCocycle
 
 /-! # Ext coefficient naturality before sections evaluation
 
-Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9/01FA), and 08J6.
+## References
+
+* Stacks Project, Tags 06XR, 01F8, 01F9, 01FA and 08J6
 -/
 
 @[expose] public section

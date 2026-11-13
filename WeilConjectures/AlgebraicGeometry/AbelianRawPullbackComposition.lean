@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of varying-coefficient raw pullbacks
 
-Source: Stacks Project, Tags 09Z1 and 03CB.
+## References
+
+* Stacks Project, Tags 09Z1 and 03CB
 -/
 
 @[expose] public section

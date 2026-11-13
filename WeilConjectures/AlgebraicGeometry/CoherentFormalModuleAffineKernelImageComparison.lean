@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Affine comparison of formal kernel images with module quotients
 
-Source: Stacks Project, Lemma 087X, affine description of K'_(l,m), using Lemma 087W.
+## References
+
+* Stacks Project, Tags 087X and 087W
 -/
 
 @[expose] public section

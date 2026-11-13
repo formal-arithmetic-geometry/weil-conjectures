@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisRingActionGluing
 
 /-! # Extending a balanced action to the direct-image algebra
 
-Source: Stacks Project, Tags 01LX, 01SB and the relative-spectrum paragraph of 0897.
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section

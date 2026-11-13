@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme
 
-Source: Stacks Project, Étale Cohomology, Theorem 03P2 (affine case).
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

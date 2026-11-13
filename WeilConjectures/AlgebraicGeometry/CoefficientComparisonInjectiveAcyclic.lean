@@ -12,7 +12,10 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 /-! # Injective acyclicity for intrinsic coefficient comparison
-Source: Stacks Tags 099U and 099V.
+
+## References
+
+* Stacks Project, Tags 099U and 099V
 -/
 @[expose] public section
 set_option autoImplicit false

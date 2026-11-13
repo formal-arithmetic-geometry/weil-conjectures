@@ -16,7 +16,9 @@ import WeilConjectures.RingTheory.PolynomialPresentationHeightFieldExtension
 /-!
 # Dimension at a point under extension of the ground field
 
-Source: Stacks Project, Algebra, Lemma 10.116.6, Tag 00P4.
+## References
+
+* Stacks Project, Tag 00P4
 -/
 
 @[expose] public section

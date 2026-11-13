@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Derived comparison for an explicit affine resolution complex
 
-Source: Stacks Project, Tag 068C, and the derived localization construction of Tag 05RU.
+## References
+
+* Stacks Project, Tags 068C and 05RU
 -/
 
 @[expose] public section

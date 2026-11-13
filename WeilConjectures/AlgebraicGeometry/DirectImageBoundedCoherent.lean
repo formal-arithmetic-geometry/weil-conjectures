@@ -23,7 +23,9 @@ import all WeilConjectures.AlgebraicGeometry.DerivedDirectImageBoundedBelowQCoh
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.11.3 (Tag 08E2).
+## References
+
+* Stacks Project, Tag 08E2
 -/
 
 @[expose] public section

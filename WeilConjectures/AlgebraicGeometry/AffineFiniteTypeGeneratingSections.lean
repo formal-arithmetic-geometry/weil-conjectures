@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-!
 # Finite global generators on an affine scheme
 
-Source: Stacks Project, Properties, Tag 01PB, and Schemes, Tags 01IA and 01HV.
+## References
+
+* Stacks Project, Tags 01PB, 01IA and 01HV
 -/
 
 @[expose] public section

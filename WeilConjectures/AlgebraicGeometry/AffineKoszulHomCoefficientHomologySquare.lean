@@ -18,7 +18,10 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # Homology transport for the finite free Koszul coefficient square
 
-Source: Stacks Project, Tags 0BQZ and 01HV. -/
+## References
+
+* Stacks Project, Tags 0BQZ and 01HV
+-/
 
 @[expose] public section
 

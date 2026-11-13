@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFiniteFreePerfectComparison
 /-!
 # Local strictly perfect models from bounded finite free resolutions
 
-Source: Stacks Project, Tag 068C, finite free resolution argument, and Tags 08C4, 08CM.
+## References
+
+* Stacks Project, Tags 068C, 08C4 and 08CM
 -/
 
 @[expose] public section

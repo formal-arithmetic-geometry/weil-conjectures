@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # Derived pullback preserves perfect complexes
 
-Source: Stacks Project, perfect.tex, Tag 09UA.
+## References
+
+* Stacks Project, Tag 09UA
 -/
 
 @[expose] public section

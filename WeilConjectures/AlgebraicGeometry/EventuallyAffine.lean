@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Eventually affine stages in an inverse system
 
-Source: Stacks Project, Limits, Lemma 09ZM (limits.tex, lines 891--911).
+## References
+
+* Stacks Project, Tag 09ZM
 -/
 
 @[expose] public section

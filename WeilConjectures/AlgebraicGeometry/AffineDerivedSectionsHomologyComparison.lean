@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsTruncatedBottom
 
 /-! # Cohomology of derived affine sections
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

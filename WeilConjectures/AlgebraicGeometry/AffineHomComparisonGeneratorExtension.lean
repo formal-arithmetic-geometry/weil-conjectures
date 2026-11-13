@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AffineHomComparisonGeneratorExistence
 
 /-! # Extending the affine Hom comparison from its global generators
 
-Source: Stacks Project, Tag 01I7 and Tag 01HV (4)-(5). -/
+## References
+
+* Stacks Project, Tags 01I7 and 01HV
+-/
 
 @[expose] public section
 

@@ -12,7 +12,9 @@ import Mathlib.Data.Fintype.Order
 /-!
 # Descent of compatible affine ideals to a stalk
 
-Source: Stacks Project, Tags 01HR, 01I6, and 01LA; Tag 0BVH.
+## References
+
+* Stacks Project, Tags 01HR, 01I6, 01LA and 0BVH
 -/
 
 @[expose] public section

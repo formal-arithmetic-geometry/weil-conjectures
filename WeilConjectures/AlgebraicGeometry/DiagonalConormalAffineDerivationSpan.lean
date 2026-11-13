@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClass
 
 /-! # Generation of affine conormal sections by the difference derivation
 
-Source: Stacks Project, Tag 08S2, affine calculation; Tags 01KJ, 01R3 and 00RW.
+## References
+
+* Stacks Project, Tags 08S2, 01KJ, 01R3 and 00RW
 -/
 
 @[expose] public section

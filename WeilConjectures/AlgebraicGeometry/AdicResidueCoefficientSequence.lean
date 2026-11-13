@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # The consecutive finite coefficient sequence on a slice
 
-Source: Stacks Project, Tags 0G1T and 09C6.
+## References
+
+* Stacks Project, Tags 0G1T and 09C6
 -/
 
 @[expose] public noncomputable section

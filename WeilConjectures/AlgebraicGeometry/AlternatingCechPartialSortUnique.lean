@@ -12,8 +12,9 @@ import Mathlib.Data.Fin.Tuple.Sort
 /-!
 # Uniqueness of a permutation with prescribed prefix and increasing tail
 
-Source: Stacks Project, Tag 01FM, definition of sigma_a preceding
-`cohomology-equation-first-homotopy`.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

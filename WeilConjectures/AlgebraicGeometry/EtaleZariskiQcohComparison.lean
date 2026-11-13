@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyAgree
 
 /-! # Étale and Zariski cohomology of quasi-coherent modules
 
-Source: Stacks Project, Descent, Proposition 03DW (2), and Étale Cohomology,
-Theorem 03P2.
+## References
+
+* Stacks Project, Tags 03DW and 03P2
 -/
 
 @[expose] public section

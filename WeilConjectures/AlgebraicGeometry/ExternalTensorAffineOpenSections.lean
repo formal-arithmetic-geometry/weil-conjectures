@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # External tensor sections on one affine product open
 
-Source: Stacks Project, Tag 0BED, varieties-lemma-kunneth, affine-open paragraph.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 
 /-! # Restriction naturality of the section comparison
-Source: Stacks Project, Sites Tags 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 03CB and 03CC
+-/
 
 @[expose] public section
 

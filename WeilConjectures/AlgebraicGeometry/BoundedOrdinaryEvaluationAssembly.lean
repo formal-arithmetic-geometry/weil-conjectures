@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.HomComplex
 
 /-! # Finite-support assembly of ordinary evaluation
 
-Source: Stacks Project, Tags 08DQ and 08DM, finite total-complex calculation.
+## References
+
+* Stacks Project, Tags 08DQ and 08DM
 -/
 
 @[expose] public section

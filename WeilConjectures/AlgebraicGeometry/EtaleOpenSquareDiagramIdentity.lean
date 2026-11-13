@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Identity law for coefficient restriction between two diagrams
 
-Source: Stacks Project, Tags 09YQ and 03CB.
+## References
+
+* Stacks Project, Tags 09YQ and 03CB
 -/
 
 @[expose] public section

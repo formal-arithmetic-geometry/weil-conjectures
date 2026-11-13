@@ -18,7 +18,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Common-stage models of finite affine etale free families
 
-Source: Stacks Project, Tags 09YU (3), 095N and 03S6.
+## References
+
+* Stacks Project, Tags 09YU, 095N and 03S6
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.TransportLeftNaturality
 /-!
 # Saturation of descent orbits
 
-Source: Stacks Project, Tags 03JE and 0H8K.
+## References
+
+* Stacks Project, Tags 03JE and 0H8K
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
 /-! # Finite type submodules and kernels of coherent modules
 
-Source: Stacks Project, Modules, Lemma 01BY.
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section

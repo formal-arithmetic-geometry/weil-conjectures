@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalMorphism
 /-!
 # The difference derivation into the diagonal conormal
 
-Source: Stacks Project, Tag 08S2, construction of the two splittings modulo the square
-of the diagonal ideal, before the affine calculation.
+## References
+
+* Stacks Project, Tag 08S2
 -/
 
 @[expose] public section

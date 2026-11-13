@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 /-!
 # An isolated fibre point becomes finite after elementary étale base change
 
-Source: Stacks Project, More on Morphisms, Lemma 02LK, clauses (a), (b), (i)-(iii).
+## References
+
+* Stacks Project, Tag 02LK
 -/
 
 @[expose] public section

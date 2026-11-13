@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Uniform truncation bound for derived direct image
 
-Source: Stacks Project, Tag 08D5, part (2) and the final truncation argument.
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section

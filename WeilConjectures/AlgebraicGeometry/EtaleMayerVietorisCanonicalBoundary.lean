@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # A boundary constructed from a fixed normalized resolution comparison
 
-Source: Stacks Project, Tag 0A50, resolution proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

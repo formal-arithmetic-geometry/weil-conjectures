@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 
 /-! # The canonical monoidal model of derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section

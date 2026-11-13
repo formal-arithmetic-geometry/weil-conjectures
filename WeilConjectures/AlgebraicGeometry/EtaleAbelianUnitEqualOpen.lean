@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # The agreement open of two abelian étale sheaf sections
 
-Source: Stacks Project, Étale Cohomology Tag 09XM, with Tags 03Q1 and 03S2.
+## References
+
+* Stacks Project, Tags 09XM, 03Q1 and 03S2
 -/
 
 @[expose] public section

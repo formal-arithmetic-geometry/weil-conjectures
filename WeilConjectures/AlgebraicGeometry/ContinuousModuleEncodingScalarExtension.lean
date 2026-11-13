@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Scalar extension under continuous module encodings
 
-Source: Stacks Project, Modules on Sites, Tags 03D7, 03EK, 03EL.
+## References
+
+* Stacks Project, Tags 03D7, 03EK and 03EL
 -/
 
 @[expose] public section

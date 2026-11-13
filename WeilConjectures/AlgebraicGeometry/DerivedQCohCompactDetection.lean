@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Isomorphism detection by compact quasi-coherent derived objects
 
-Source: Stacks Project, Tags 09IS and 09M1; detection step of Tag 0A9R.
+## References
+
+* Stacks Project, Tags 09IS, 09M1 and 0A9R
 -/
 
 @[expose] public section

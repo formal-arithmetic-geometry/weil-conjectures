@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
 
 /-! # The proper graph and its two neighborhood transports
 
-Source: Stacks Project, Tags 0F7C--0F7E.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7E
 -/
 
 @[expose] public noncomputable section

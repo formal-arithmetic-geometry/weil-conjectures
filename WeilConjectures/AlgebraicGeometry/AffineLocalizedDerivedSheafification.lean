@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Derived sheafification on the localized affine site
 
-Source: Stacks Project, Tag 06Z0.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

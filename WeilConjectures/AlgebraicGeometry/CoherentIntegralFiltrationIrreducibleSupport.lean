@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
 
 /-! # The irreducible-support step of coherent integral filtration
 
-Source: Stacks Project, Tag 01YF, irreducible-support paragraphs, using Tag 01YE.
+## References
+
+* Stacks Project, Tags 01YF and 01YE
 -/
 
 @[expose] public section

@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCompositionCounitApex
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # Localized underived counits and the derived composition comparison
-Source: Stacks Project, Tags 0096, 079W and 0D5S.
+
+## References
+
+* Stacks Project, Tags 0096, 079W and 0D5S
 -/
 
 @[expose] public section

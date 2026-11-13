@@ -18,7 +18,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Detecting zero direct-image cohomology on the affine basis
 
-Source: Stacks Project, Tag 08D5, proof of (2); Tag 079V, K-injective computation.
+## References
+
+* Stacks Project, Tags 08D5 and 079V
 -/
 
 @[expose] public section

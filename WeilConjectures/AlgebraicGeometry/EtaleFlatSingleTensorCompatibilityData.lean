@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-! # Data for tensor compatibility of degree-zero etale sheaves
 
-Source: Stacks Project, Cohomology, Tags 06YQ and 06YU.
+## References
+
+* Stacks Project, Tags 06YQ and 06YU
 -/
 
 @[expose] public section

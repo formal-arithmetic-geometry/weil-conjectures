@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Local lifting of Zariski units along closed immersions
 
-Source: Stacks Project, Varieties, Lemma 09NY, opening short exact sequence.
+## References
+
+* Stacks Project, Tag 09NY
 -/
 
 @[expose] public section

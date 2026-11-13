@@ -14,7 +14,9 @@ import Mathlib.Algebra.TrivSqZeroExt.Basic
 
 /-! # Square-zero tests detect tensor exactness on an affine scheme
 
-Source: Stacks Project, Tag 01IB.
+## References
+
+* Stacks Project, Tag 01IB
 -/
 
 @[expose] public section

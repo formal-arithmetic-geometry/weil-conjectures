@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Sheaves of commutative algebras on a scheme
 
-Source: Stacks Project, Properties, Tag 05JT; Modules, algebras on ringed spaces.
+## References
+
+* Stacks Project, Tag 05JT
 -/
 
 @[expose] public section

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyCompariso
 
 /-! # Degree-zero restriction and coefficient transport
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
+## References
+
+* Stacks Project, Tags 07A6 and 0D6F
 -/
 
 @[expose] public section

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment
 
 /-! # Two-open Mayer--Vietoris vanishing for module sheaves
 
-Source: Stacks Project, Tag 0A51, the Mayer--Vietoris induction, and Tag 03D3.
+## References
+
+* Stacks Project, Tags 0A51 and 03D3
 -/
 
 @[expose] public section

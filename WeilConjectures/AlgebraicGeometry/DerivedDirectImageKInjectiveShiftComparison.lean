@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImageKInjectiveShiftCompar
 
 /-! # Shift compatibility of the identity-resolution comparison
 
-Source: Stacks Project, Tag 079V, construction of the total derived direct image.
+## References
+
+* Stacks Project, Tag 079V
 -/
 
 @[expose] public section

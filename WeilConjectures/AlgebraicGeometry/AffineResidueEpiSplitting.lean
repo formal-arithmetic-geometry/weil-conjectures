@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Splitting an affine module map detected on residue fibres
 
-Source: Stacks Project, Tags 056J and 00NX, the finite-cokernel support
-argument and finite-projective splitting.
+## References
+
+* Stacks Project, Tags 056J and 00NX
 -/
 
 @[expose] public section

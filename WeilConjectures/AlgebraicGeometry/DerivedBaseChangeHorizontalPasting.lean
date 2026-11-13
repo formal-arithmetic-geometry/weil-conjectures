@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Horizontal composition of ordinary derived base-change maps
 
-Source: Stacks Project, Tag 0ATM, and the counit formula of Tag 08HY.
+## References
+
+* Stacks Project, Tags 0ATM and 08HY
 -/
 
 @[expose] public section

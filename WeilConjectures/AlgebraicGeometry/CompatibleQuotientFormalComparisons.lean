@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Torsion-controlled local descent data
 
-Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness;
-Sheaves, Tags 00AL and 00AM.
+## References
+
+* Stacks Project, Tags 0889, 00AL and 00AM
 -/
 
 @[expose] public section

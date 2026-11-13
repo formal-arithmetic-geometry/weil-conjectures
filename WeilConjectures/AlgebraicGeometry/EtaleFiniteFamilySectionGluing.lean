@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 
 /-! # Gluing étale sections on a finite disjoint union
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, disjoint union of representatives.
+## References
+
+* Stacks Project, Tag 09ZF
 -/
 
 @[expose] public section

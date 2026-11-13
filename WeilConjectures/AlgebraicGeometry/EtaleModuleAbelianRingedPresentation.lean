@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 
 /-! # Ringed presentations of coefficient forgetting and étale direct image
 
-Source: Stacks Project, Tags 093I, 0D6J, and 0D6E.
+## References
+
+* Stacks Project, Tags 093I, 0D6J and 0D6E
 -/
 
 @[expose] public section

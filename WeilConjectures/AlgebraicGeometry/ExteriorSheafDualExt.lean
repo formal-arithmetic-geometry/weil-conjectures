@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ExteriorPower
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Extensionality of internal dual sections of exterior sheaves
-Source: Stacks Project, Tag 03CY, uniqueness in module sheafification.
+
+## References
+
+* Stacks Project, Tag 03CY
 -/
 
 @[expose] public section

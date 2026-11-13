@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 
 /-! # Properties of the restricted augmented CE total
 
-Source: Stacks Project, Tags 015J and 0133.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section

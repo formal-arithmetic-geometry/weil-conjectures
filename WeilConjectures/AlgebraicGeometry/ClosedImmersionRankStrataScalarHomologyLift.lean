@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Lifting scalar maps from one closed rank support
 
-Source: Stacks Tags 0BQZ, 08BS, 08BT; rank-support reconstruction step 2.
+## References
+
+* Stacks Project, Tags 0BQZ, 08BS and 08BT
 -/
 
 @[expose] public section

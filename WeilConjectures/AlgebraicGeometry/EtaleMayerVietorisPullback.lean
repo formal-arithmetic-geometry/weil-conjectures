@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisConnectingPullback
 /-!
 # Pullback compatibility of the étale Mayer–Vietoris sequence
 
-Source: Stacks Project, Étale Cohomology, Tag 0A50, construction in its proof.
-Pullback naturality is the stated consequence of that construction.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

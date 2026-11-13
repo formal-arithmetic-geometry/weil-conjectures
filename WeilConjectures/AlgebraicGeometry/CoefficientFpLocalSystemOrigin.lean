@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientFpLocalSystemEtaleCover
 
 /-! # Etale origin of coefficient-sized finitely presented local systems
 
-Source: Stacks Project, Tag 099Y.
+## References
+
+* Stacks Project, Tag 099Y
 -/
 
 @[expose] public noncomputable section

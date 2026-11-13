@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemD
 
 /-! # Identity calculation at one outgoing-arrow factor
 
-Source: Stacks Project, Tag 0EXZ, canonical product components.
+## References
+
+* Stacks Project, Tag 0EXZ
 -/
 
 @[expose] public section

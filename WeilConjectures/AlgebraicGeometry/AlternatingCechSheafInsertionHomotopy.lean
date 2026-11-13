@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafInsertionIdentities
 
 /-! # Ordered insertion contracts the alternating Čech augmentation locally
 
-Source: Stacks Project, Tags 02FU and 01FM.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section

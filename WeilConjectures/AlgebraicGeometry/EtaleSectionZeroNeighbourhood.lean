@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # A zero neighbourhood for a section killed by inverse image
 
-Source: Stacks Project, Tags 03PN (geometric stalks) and 03Q1 (pullback stalks).
+## References
+
+* Stacks Project, Tags 03PN and 03Q1
 -/
 
 @[expose] public section

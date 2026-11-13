@@ -22,7 +22,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # The uniformly lower-truncated coproduct comparison
 
-Source: Stacks Project, Tags 08DZ and 015J.
+## References
+
+* Stacks Project, Tags 08DZ and 015J
 -/
 
 @[expose] public section

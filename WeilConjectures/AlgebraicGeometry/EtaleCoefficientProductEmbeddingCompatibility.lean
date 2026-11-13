@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Compatibility of the canonical outgoing-arrow product embeddings
 
-Source: Stacks Project, Tag 0EXZ, the adjoint components of γ.
+## References
+
+* Stacks Project, Tag 0EXZ
 -/
 
 @[expose] public section

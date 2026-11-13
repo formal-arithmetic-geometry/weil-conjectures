@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective
 
 /-! # Sheaf-level continuity on the original affine étale site
 
-Source: Stacks Project, Étale Cohomology Tag 09YQ and Sites Tags 0A35 and 09YN.
+## References
+
+* Stacks Project, Tags 09YQ, 0A35 and 09YN
 -/
 
 @[expose] public section

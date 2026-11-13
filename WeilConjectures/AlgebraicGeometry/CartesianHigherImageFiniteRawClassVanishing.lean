@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawAss
 
 /-! # Eventual vanishing of finitely many raw cartesian derived classes
 
-Source: Stacks Project, Tag 0EYM, second proof, injectivity of the cohomology comparison.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

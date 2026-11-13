@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 
 /-! # Affine sections and the mate of sheaf base change
 
-Source: Stacks Project, perfect.tex, Tag 0AA7; cohomology.tex, Tags 08HY and 0D5T.
+## References
+
+* Stacks Project, Tags 0AA7, 08HY and 0D5T
 -/
 
 @[expose] public section

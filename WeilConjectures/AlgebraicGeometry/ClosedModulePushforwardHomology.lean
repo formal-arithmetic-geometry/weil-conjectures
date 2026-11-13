@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Homology preservation by closed module pushforward
 
-Source: Stacks Project, Modules, Tag 08KS. -/
+## References
+
+* Stacks Project, Tag 08KS
+-/
 
 @[expose] public section
 set_option autoImplicit false

@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-! # Lifting an etale cover and finite-source comparison through a thickening
 
-Source: Stacks Project Tag 04DZ.
+## References
+
+* Stacks Project, Tag 04DZ
 -/
 
 @[expose] public section

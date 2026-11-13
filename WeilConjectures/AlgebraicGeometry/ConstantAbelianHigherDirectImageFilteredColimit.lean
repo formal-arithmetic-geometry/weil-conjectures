@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageEvaluationCompa
 /-!
 # Filtered continuity for constant abelian higher direct images
 
-Source: Stacks Project, Tags 03Q5, 0739 and 03Q8, and the filtered-union step
-of the constant-coefficient reduction in Tag 0F08.
+## References
+
+* Stacks Project, Tags 03Q5, 0739, 03Q8 and 0F08
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Stalks of inverse images of étale sheaves of sets, with germs
 
-Source: Stacks Project, Étale Cohomology, Tag 03Q1 (3).
+## References
+
+* Stacks Project, Tag 03Q1
 -/
 
 @[expose] public section

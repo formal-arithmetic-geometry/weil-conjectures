@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # The sections comparison restriction square
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## References
+
+* Stacks Project, Tag 03Q9
 -/
 
 @[expose] public section

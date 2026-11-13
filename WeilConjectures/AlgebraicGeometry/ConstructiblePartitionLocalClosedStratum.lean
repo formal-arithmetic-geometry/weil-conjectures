@@ -12,7 +12,9 @@ import WeilConjectures.Topology.ConstructibleIsRetrocompact
 /-!
 # An affine neighborhood on which the selected constructible stratum is closed
 
-Source: Stacks Project, Topology, Tags 004E, 005J and 09YH; Schemes, Tag 01IT.
+## References
+
+* Stacks Project, Tags 004E, 005J, 09YH and 01IT
 -/
 
 @[expose] public section

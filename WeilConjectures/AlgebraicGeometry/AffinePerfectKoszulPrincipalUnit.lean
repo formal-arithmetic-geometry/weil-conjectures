@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectKoszulPrincipalUnitIso
 
 /-! # Powers Koszul complexes are perfect on a principal-open cover
 
-Source: Stacks Project, Tag 08CX, Section 36.9.
+## References
+
+* Stacks Project, Tag 08CX
 -/
 
 @[expose] public section

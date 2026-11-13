@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenIntersectionMateIso
 
 /-! # Invertible cross components of the open difference map
 
-Source: Stacks Project, Tags 08DG and 08FE, restriction of the overlap counit.
+## References
+
+* Stacks Project, Tags 08DG and 08FE
 -/
 
 @[expose] public section

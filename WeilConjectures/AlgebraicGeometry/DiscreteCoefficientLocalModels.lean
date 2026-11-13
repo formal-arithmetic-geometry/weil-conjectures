@@ -13,7 +13,9 @@ import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-! # Discrete coefficient local models under section reconstruction
 
-Source: Stacks, Tags 03CY, 00YV and 09AJ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV and 09AJ
 -/
 
 @[expose] public section

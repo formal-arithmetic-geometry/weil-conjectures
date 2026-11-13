@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumTensorCoordinateTransport
 
 /-! # The ordinary affine spectrum stalk comparison square
 
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction; Tag 0098.
+## References
+
+* Stacks Project, Tags 0DJ8 and 0098
 -/
 
 @[expose] public section

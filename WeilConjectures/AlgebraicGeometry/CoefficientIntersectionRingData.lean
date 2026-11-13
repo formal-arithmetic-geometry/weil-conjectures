@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-! # Ring maps on coefficient intersections
 
-Source: Stacks Project, Tags 0097, 01I9 and 02KG.
+## References
+
+* Stacks Project, Tags 0097, 01I9 and 02KG
 -/
 
 @[expose] public section

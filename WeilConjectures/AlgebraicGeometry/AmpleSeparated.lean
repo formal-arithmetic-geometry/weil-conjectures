@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Separatedness from an ample invertible module
 
-Source: Stacks Project, Properties, Lemma 09MP.
+## References
+
+* Stacks Project, Tag 09MP
 -/
 
 @[expose] public section

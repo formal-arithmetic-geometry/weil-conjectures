@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSheafComparison
 
 /-! # Preservation of local image equations under stage transport
 
-Source: Stacks Project, Sites Tags 03CB and 03CC, composition of inverse images.
+## References
+
+* Stacks Project, Tags 03CB and 03CC
 -/
 
 @[expose] public section

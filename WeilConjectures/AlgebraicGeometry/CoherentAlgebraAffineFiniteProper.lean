@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 
 /-! # Finite affine realizations of coherent algebras with proper support
 
-Source: Stacks Project, Lemma 09ZT, last sentence, and Lemma 0CYS.
+## References
+
+* Stacks Project, Tags 09ZT and 0CYS
 -/
 
 @[expose] public section

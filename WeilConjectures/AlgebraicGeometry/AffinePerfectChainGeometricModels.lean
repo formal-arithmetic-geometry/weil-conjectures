@@ -25,7 +25,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 
 /-! # Affine perfect models and geometric chain-map comparison
 
-Source: Stacks Project, perfect.tex, Tags 09RE, 08EB, 06Z0 and 08DW.
+## References
+
+* Stacks Project, Tags 09RE, 08EB, 06Z0 and 08DW
 -/
 
 @[expose] public section

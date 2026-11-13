@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Inverse image of modules on small étale sites
 
-Source: Stacks Project, Modules on Sites, Tags 03D1, 03D2 and 03D3.
+## References
+
+* Stacks Project, Tags 03D1, 03D2 and 03D3
 -/
 
 @[expose] public section

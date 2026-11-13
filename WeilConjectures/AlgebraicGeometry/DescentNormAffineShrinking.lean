@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.TransportLeftNaturality
 /-!
 # Norm shrinking around finite saturated sets
 
-Source: Stacks Project, Tag 03JE.
+## References
+
+* Stacks Project, Tag 03JE
 -/
 
 @[expose] public section

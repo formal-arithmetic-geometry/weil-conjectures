@@ -14,7 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine values of a presheaf satisfying principal localization
 
-Source: Stacks Project, Tags 01HV and 009H.
+## References
+
+* Stacks Project, Tags 01HV and 009H
 -/
 
 @[expose] public section

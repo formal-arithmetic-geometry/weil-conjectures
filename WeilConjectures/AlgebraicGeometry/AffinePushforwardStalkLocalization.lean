@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Localization description of an affine pushforward stalk
 
-Source: Stacks Project, Tag 0AVW, affine stalk calculation.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section

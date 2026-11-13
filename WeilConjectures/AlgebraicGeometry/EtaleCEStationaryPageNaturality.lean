@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Naturality of stationary CE page quotients
 
-Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
+## References
+
+* Stacks Project, Tags 012K, 012Q and 012W
 -/
 
 @[expose] public section

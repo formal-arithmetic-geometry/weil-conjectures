@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionPullbackUnit
 import all WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalWholeToOpen
 
 /-! # Pullback of the open identity generator
-Source: Stacks Project, Tags 03F3, 01F8 and 01FB.
+
+## References
+
+* Stacks Project, Tags 03F3, 01F8 and 01FB
 -/
 
 @[expose] public section

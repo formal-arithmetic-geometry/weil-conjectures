@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Quotient Hom cohomology for constant perfect models
 
-Source: Stacks Project, Tags 09C5 and 09C6, finite-projective Hom calculation.
+## References
+
+* Stacks Project, Tags 09C5 and 09C6
 -/
 
 @[expose] public noncomputable section

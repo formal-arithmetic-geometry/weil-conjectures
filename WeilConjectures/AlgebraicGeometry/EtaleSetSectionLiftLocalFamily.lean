@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionFiniteMatching
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Compatible local stage lifts of étale inverse-image sections
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, using Sites Tag 09YN. -/
+
+## References
+
+* Stacks Project, Tags 09YQ and 09YN
+-/
 
 @[expose] public section
 

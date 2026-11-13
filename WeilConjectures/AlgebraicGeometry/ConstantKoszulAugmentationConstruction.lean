@@ -9,7 +9,9 @@ import all WeilConjectures.CategoryTheory.TensorQuotientAugmentation
 
 /-! # Constructing a normalized tower augmentation from low-degree data
 
-Source: Stacks Project, Tag 099M, strict Koszul quotient augmentation.
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section

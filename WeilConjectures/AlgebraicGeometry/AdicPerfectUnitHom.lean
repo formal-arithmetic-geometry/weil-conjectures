@@ -11,7 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # The unit case of the ordinary quotient Hom comparison
 
-Source: Stacks Project, Tags 093T and 09C6.
+## References
+
+* Stacks Project, Tags 093T and 09C6
 -/
 
 @[expose] public noncomputable section

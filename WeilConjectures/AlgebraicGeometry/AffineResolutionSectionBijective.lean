@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Bijectivity of the normalized affine section class map
 
-Source: Stacks Project, Tags 01F4, 01XJ and 01E4.
+## References
+
+* Stacks Project, Tags 01F4, 01XJ and 01E4
 -/
 
 @[expose] public section

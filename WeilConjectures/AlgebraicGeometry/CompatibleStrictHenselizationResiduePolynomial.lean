@@ -18,7 +18,9 @@ import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # Separable polynomials for compatible strict-henselization residues
 
-Source: Stacks Project, Tags 04HX and 095T.
+## References
+
+* Stacks Project, Tags 04HX and 095T
 -/
 
 @[expose] public section

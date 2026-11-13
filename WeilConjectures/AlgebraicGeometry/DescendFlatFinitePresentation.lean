@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FlatDescentAffineCharts
 /-!
 # Descent of flatness to a finite stage
 
-Source: Stacks Project, Limits of Schemes, Tag 04AI in Situation 081D.
+## References
+
+* Stacks Project, Tags 04AI and 081D
 -/
 
 @[expose] public section

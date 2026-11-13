@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # The vanishing columns of Leray over an affine scheme
 
-Source: Stacks Project, Tags 01XJ (1), 01XB and 03FD.
+## References
+
+* Stacks Project, Tags 01XJ, 01XB and 03FD
 -/
 
 @[expose] public section

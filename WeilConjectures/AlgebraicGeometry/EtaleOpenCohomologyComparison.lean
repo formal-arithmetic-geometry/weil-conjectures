@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBi
 
 /-! # Étale cohomology over an open object
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ.
+## References
+
+* Stacks Project, Tags 03F3 and 00XZ
 -/
 
 @[expose] public section

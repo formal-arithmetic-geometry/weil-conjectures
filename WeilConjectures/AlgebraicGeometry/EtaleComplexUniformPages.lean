@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexPageDiagram
 import WeilConjectures.AlgebraicGeometry.EtaleComplexColimitBelow
 /-! # Uniform stable pages for a diagram of étale complexes
 
-Source: Stacks Project, Tags 015J and 0EZM.
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Fixed-scalar coordinates on a coefficient-sized pro-etale slice
 
-Source: Stacks Project, Tags 00XZ and 04IX.
+## References
+
+* Stacks Project, Tags 00XZ and 04IX
 -/
 
 @[expose] public section

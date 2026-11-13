@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Normalized affine tensor sections
 
-Source: Stacks Project, Tags 01I9, 01IA and 03DR. -/
+## References
+
+* Stacks Project, Tags 01I9, 01IA and 03DR
+-/
 
 @[expose] public section
 

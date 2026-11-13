@@ -12,7 +12,9 @@ import WeilConjectures.Topology.InverseImageOperationExt
 import WeilConjectures.AlgebraicGeometry.SheafTensorPushoutCancellation
 /-! # Affine module tensor BaseChange
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

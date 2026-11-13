@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackSectionsComparison
 
 /-! # Constant-module section comparisons on a cartesian square
 
-Source: Stacks Project, Tags 03S2 and 09Z1, degree zero.
+## References
+
+* Stacks Project, Tags 03S2 and 09Z1
 -/
 
 @[expose] public section

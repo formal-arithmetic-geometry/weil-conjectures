@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 /-! # Quasi-coherence of affine pushforward Čech terms
 
-Source: Stacks Project, Tags 02KG and 02KH, affine intersections and direct images.
+## References
+
+* Stacks Project, Tags 02KG and 02KH
 -/
 
 @[expose] public section

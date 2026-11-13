@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite section homology from cokernel and homology acyclicity
 
-Source: Stacks Project, Tags 015B and 08C2.
+## References
+
+* Stacks Project, Tags 015B and 08C2
 -/
 
 @[expose] public section

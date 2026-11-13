@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteTypeKernelLocalGenerators
 
 /-! # Finite type kernels into a coherent module on an open slice
 
-Source: Stacks Project, Modules, Lemma 01BY (2), with Definition 01BV.
+## References
+
+* Stacks Project, Tags 01BY and 01BV
 -/
 
 @[expose] public section

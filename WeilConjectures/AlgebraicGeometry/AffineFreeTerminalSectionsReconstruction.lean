@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Reconstruction from terminal sections on an affine slice
 
-Source: Stacks Project, Tag 01IB.
+## References
+
+* Stacks Project, Tag 01IB
 -/
 
 @[expose] public section

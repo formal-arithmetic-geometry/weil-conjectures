@@ -17,7 +17,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-!
 # The Galois action on geometric points of an étale scheme
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section

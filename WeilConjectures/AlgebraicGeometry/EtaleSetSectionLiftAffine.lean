@@ -14,7 +14,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonLaws
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 
 /-! # Affine stage lifting of étale inverse-image sections
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, using Sites Tag 09YN. -/
+
+## References
+
+* Stacks Project, Tags 09YQ and 09YN
+-/
 
 @[expose] public section
 

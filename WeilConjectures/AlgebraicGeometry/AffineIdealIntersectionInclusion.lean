@@ -20,7 +20,9 @@ import Mathlib.CategoryTheory.Abelian.Basic
 
 /-! # Affine comparison of ideal intersection inclusions
 
-Source: Stacks Project, Tags 01YA, 01I8 and 01IC.
+## References
+
+* Stacks Project, Tags 01YA, 01I8 and 01IC
 -/
 
 @[expose] public section

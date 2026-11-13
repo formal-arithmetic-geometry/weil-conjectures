@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.Linear
 
 /-! # Scalar multiplication on a sheafified complex over a basic open
 
-Source: Stacks Project, Tag 01HR (standard opens of an affine scheme),
-and Tag 09IR (restriction of the Koszul complex).
+## References
+
+* Stacks Project, Tags 01HR and 09IR
 -/
 
 @[expose] public section

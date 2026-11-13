@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Direct image of tensor-sections sheaves
 
-Source: Stacks Project, Tags 03DW, 03P2 and 0733.
+## References
+
+* Stacks Project, Tags 03DW, 03P2 and 0733
 -/
 
 @[expose] public section

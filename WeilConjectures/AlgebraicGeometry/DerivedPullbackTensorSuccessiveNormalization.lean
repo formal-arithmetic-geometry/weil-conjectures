@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Normalization of the successive tensor pullback route
 
-Source: Stacks Project, cohomology.tex, Tags 079U, 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 079U, 08HY and 0D5S
 -/
 
 @[expose] public section

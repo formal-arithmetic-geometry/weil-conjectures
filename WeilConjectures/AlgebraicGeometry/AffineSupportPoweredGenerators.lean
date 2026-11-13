@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 
 /-! # Powered generators of a closed support
 
-Source: Stacks Project, Tag 08EK, proof, first paragraph; Tag 08EJ.
+## References
+
+* Stacks Project, Tags 08EK and 08EJ
 -/
 
 @[expose] public section

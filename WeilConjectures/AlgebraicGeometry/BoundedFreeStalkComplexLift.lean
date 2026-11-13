@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLocalLift
 
 /-! # Lifting the differential matrices of a bounded free stalk complex
 
-Source: Stacks Project, Tags 0BCD and 0BC7, finite presentation argument;
-Tag 00CR and the definition of the module direct image.
+## References
+
+* Stacks Project, Tags 0BCD, 0BC7 and 00CR
 -/
 
 @[expose] public section

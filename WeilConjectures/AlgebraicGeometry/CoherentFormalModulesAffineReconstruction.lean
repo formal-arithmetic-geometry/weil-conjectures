@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAffineReconstructi
 
 /-! # CoherentFormalModulesAffineReconstruction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section

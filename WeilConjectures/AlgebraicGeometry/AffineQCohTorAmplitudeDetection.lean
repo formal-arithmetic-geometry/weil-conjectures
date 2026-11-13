@@ -23,7 +23,9 @@ import all WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyCompariso
 
 /-! # Quasi-coherent tests on an affine scheme
 
-Source: Stacks Project, Tag 08EA, affine paragraph, using Tags 06Z0 and 08E9.
+## References
+
+* Stacks Project, Tags 08EA, 06Z0 and 08E9
 -/
 
 @[expose] public section

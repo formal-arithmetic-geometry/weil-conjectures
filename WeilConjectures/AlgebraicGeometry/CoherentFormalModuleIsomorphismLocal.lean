@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 /-!
 # Isomorphisms of coherent formal modules are local
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.23.2 (Tag 087X),
-the locality assertion following the construction of kernels and cokernels.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

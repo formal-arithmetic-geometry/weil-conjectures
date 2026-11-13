@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePrincipalCoverQuasiIsoDetection
 
 /-! # Affine module models on a quasi-compact open
 
-Source: Stacks Project, Tag 08EE, module-model reduction and final sheafification.
+## References
+
+* Stacks Project, Tag 08EE
 -/
 
 @[expose] public section

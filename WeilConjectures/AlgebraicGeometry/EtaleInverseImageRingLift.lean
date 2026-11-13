@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # EtaleInverseImageRingLift
 
-Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section

@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # Étale near a point smooth of fibre dimension zero
 
-Source: Stacks Project, Tag 0A43, final sentence of the proof; Tags 02G1, 02G2 and
-02GI.
+## References
+
+* Stacks Project, Tags 0A43, 02G1, 02G2 and 02GI
 -/
 
 @[expose] public section

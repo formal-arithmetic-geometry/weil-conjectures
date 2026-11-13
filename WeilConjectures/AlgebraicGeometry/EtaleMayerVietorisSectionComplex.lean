@@ -14,7 +14,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Section complexes for an étale open cover
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

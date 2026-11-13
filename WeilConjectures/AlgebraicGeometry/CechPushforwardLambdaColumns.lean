@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Resolution columns of the Cech map induced by lambda
 
-Source: Stacks Project, Tags 01FD and 01EX; Derived Categories, Tag 015E.
+## References
+
+* Stacks Project, Tags 01FD, 01EX and 015E
 -/
 
 @[expose] public section

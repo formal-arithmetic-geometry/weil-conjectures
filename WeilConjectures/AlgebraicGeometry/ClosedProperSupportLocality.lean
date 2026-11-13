@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProperMorphismFpqcDescent
 /-!
 # Base change and étale descent of closed proper supports
 
-Source: Stacks Project, Tags 0CYP and 0F4J.
+## References
+
+* Stacks Project, Tags 0CYP and 0F4J
 -/
 
 @[expose] public section

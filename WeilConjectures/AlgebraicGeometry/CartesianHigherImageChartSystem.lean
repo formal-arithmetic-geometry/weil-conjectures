@@ -13,7 +13,9 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-! # The cartesian scheme system above one stage
 
-Source: Stacks Project, Tag 0EYM, second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

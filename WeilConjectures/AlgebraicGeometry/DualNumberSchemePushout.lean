@@ -14,8 +14,9 @@ import Mathlib.AlgebraicGeometry.Stalk
 /-!
 # The finite pushout of dual-number schemes
 
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, with the same local-ring
-argument for any positive finite number of copies.
+## References
+
+* Stacks Project, Tag 0B2B
 -/
 
 @[expose] public section

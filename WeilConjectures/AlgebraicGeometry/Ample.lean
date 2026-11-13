@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Ample invertible modules on schemes
 
-Source: Stacks Project, Properties, Section 01PR and Definition 01PS.
+## References
+
+* Stacks Project, Tags 01PR and 01PS
 -/
 
 @[expose] public section

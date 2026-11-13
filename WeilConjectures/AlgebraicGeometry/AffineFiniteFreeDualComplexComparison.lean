@@ -14,7 +14,9 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Associated sheafification of finite free signed duals
 
-Source: Stacks Project, duality.tex, Tag 0BQZ; schemes.tex, Tag 01HV.
+## References
+
+* Stacks Project, Tags 0BQZ and 01HV
 -/
 
 @[expose] public section

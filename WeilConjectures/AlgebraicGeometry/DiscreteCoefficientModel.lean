@@ -19,7 +19,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-! # Normalized models for discrete constant coefficients
 
-Source: Stacks Tags 03CY, 00YV and 09AJ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV and 09AJ
 -/
 
 @[expose] public noncomputable section

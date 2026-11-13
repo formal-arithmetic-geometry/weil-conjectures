@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Pullback composition on a sheaf in degree zero
 
-Source: Stacks Tag 0D6D, composition of derived pullback; Tag 09Z1, restriction maps.
+## References
+
+* Stacks Project, Tags 0D6D and 09Z1
 -/
 
 @[expose] public section

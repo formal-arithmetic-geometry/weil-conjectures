@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-!
 # Affine rank-one extensions separate etale module sheaves
 
-Source: Stacks Project, Tags 03EW and 04HR.
+## References
+
+* Stacks Project, Tags 03EW and 04HR
 -/
 
 @[expose] public section

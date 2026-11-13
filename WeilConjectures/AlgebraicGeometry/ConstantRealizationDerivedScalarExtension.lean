@@ -37,11 +37,9 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Derived constant realization and scalar extension
 
-Source: Stacks Project, Cohomology on Sites, Tags 0G7E and 0D6D; Modules on Sites,
-Tags 093J, 0GMW and 03CY.
-Scalar extension is the left adjoint to actual restriction; its universal property
-fixes the construction up to the unique unit-preserving isomorphism. The comparison
-below is its mate, not a choice of an unspecified natural isomorphism.
+## References
+
+* Stacks Project, Tags 0G7E, 0D6D, 093J, 0GMW and 03CY
 -/
 
 @[expose] public noncomputable section

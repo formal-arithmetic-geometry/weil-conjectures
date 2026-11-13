@@ -11,7 +11,9 @@ import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
 import WeilConjectures.AlgebraicGeometry.EtalePageMapCoherence
 /-! # Coordinate-swapped diagram of functorial hypercohomology pages
 
-Source: Stacks Project, Tags 015J and 0EZM.
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section

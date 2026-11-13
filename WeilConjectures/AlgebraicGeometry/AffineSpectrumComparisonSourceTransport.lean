@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalComparisonSquare
 
 /-! # Affine spectrum transport before the coefficient morphism
 
-Source: Stacks Project, Tags 0DJ8, 0098 and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ8, 0098 and 0D5S
 -/
 
 @[expose] public section

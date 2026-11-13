@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCEStationaryComparisonsAtBounds
 
 /-! # Support-controlled filtered CE totals
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section

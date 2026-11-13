@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComp
 
 /-! # Comparing the concrete Mayer--Vietoris sequences after direct image
 
-Source: Stacks Project, Tags 08BV, 08FE and 0D5T.
+## References
+
+* Stacks Project, Tags 08BV, 08FE and 0D5T
 -/
 
 @[expose] public section

@@ -10,7 +10,10 @@ import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingRestriction
 import all WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 /-! # Finite freeness on pro-etale slices
-Source: Stacks Project, Tags 03DM and 03DO.
+
+## References
+
+* Stacks Project, Tags 03DM and 03DO
 -/
 
 @[expose] public section

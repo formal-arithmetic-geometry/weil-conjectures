@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Natural assembly of affine coherent formal reconstruction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section

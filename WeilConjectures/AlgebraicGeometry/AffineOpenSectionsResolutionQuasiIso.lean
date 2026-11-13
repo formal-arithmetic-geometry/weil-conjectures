@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Affine sections of an unbounded quasi-coherent resolution
 
-Source: Stacks Project, Cohomology, Lemma 08C2, with affine vanishing 01XB.
+## References
+
+* Stacks Project, Tags 08C2 and 01XB
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Homology.Embedding.Extend
 
 /-! # The explicit complex associated to an affine resolution
 
-Source: Stacks Project, Tag 068C.
+## References
+
+* Stacks Project, Tag 068C
 -/
 
 @[expose] public section

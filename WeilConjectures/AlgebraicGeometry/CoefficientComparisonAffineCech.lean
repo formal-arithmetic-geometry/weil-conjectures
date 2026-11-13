@@ -19,7 +19,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-! # Finite affine Čech complexes for intrinsic comparison
 
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U
 -/
 
 @[expose] public section

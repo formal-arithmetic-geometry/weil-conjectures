@@ -14,7 +14,11 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Coefficient comparison for global sections of inverse images
-Source: Stacks Project, Tags 00YV, 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 00YV, 03CB and 03CC
+-/
 
 @[expose] public section
 

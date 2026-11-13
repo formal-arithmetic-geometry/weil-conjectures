@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleAbelianKanComparisonLocallySurject
 
 /-! # Local representatives for a supplied abelian inverse-image adjunction
 
-Source: Stacks Project, Tag 09XN, local description of inverse-image sections. -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

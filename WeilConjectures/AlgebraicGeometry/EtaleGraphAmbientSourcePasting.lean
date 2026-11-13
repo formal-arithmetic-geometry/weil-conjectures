@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenExchangeTower
 
 /-! # Source-lift subgrid of ambient projection pasting
 
-Source: Stacks Tags 0F7C and 0F7J, the e-side part of the ambient product grid.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7J
 -/
 
 @[expose] public noncomputable section

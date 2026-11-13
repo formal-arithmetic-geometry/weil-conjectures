@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Global sections under the abelian Galois stalk equivalence
 
-Source: Stacks Project, Etale Cohomology, Tag 04JM.
+## References
+
+* Stacks Project, Tag 04JM
 -/
 
 @[expose] public section

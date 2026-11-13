@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Restriction inverts the derived open-adjunction unit
 
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE.
+## References
+
+* Stacks Project, Tags 08BS and 08FE
 -/
 
 @[expose] public section

@@ -12,7 +12,11 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Coherent comparison data for affine complex models
-Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula. -/
+
+## References
+
+* Stacks Project, Tags 09RE and 08DW
+-/
 
 @[expose] public section
 universe u w

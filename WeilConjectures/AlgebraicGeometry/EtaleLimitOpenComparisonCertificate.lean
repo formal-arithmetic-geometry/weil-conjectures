@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Geometric certificate for the canonical open comparison
 
-Source: Stacks Project, Tag 09YQ, restriction of coherent systems.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

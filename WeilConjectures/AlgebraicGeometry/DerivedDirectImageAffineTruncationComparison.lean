@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local truncation comparison for unbounded direct image
 
-Source: Stacks Project, perfect.tex, Tag 08D5, final paragraph.
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section

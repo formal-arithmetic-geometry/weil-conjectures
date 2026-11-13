@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTrans
 
 /-! # Artin--Rees bounds for stabilized kernel quotients
 
-Source: Stacks Project, Lemma 087X.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

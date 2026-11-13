@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleRankOneSeparating
 /-!
 # Constructible module sheaves generate the small etale topos
 
-Source: Stacks Project, Tags 093B(2), 03EW(3), 03SA(3) and 03S8(3).
+## References
+
+* Stacks Project, Tags 093B, 03EW, 03SA and 03S8
 -/
 
 @[expose] public section

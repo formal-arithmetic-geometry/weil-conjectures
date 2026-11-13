@@ -12,8 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # An étale basic neighbourhood from vanishing of the naive cotangent complex
 
-Source: Stacks Project, Algebra, Tags 07BU, 00TB, 00U1; Morphisms, Tag 02GJ;
-More on Algebra, proof of Tag 07M7.
+## References
+
+* Stacks Project, Tags 07BU, 00TB, 00U1, 02GJ and 07M7
 -/
 
 @[expose] public section

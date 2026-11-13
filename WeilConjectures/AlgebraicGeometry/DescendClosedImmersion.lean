@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DescendMonomorphism
 /-!
 # Descent of closed immersions to a stage of an inverse limit
 
-Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D.
+## References
+
+* Stacks Project, Tags 01ZP and 081D
 -/
 
 @[expose] public section

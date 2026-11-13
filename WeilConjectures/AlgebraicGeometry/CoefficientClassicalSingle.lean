@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientBoundedClassicalDescent
 /-! # Classical modules in degree zero
-Source: Stacks Tags 05RU and 099T, degree-zero embedding and continuity.
+
+## References
+
+* Stacks Project, Tags 05RU and 099T
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

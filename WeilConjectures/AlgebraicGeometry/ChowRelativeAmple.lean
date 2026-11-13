@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.ChowRelativeAmpleTwist
 /-!
 # Chow immersion and relative ampleness
 
-Source: Stacks Project, Cohomology of Schemes, Remark 30.18.2 and
-Proposition 30.19.1, Tag 02O5.
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section

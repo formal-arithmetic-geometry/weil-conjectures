@@ -13,7 +13,9 @@ public import Mathlib.CategoryTheory.Limits.Over
 /-!
 # Iterated fibre products of a finite coproduct
 
-Source: Stacks Project, Schemes, Tags 01JB and 01JC, and Section 26.17.
+## References
+
+* Stacks Project, Tags 01JB and 01JC
 -/
 
 @[expose] public section

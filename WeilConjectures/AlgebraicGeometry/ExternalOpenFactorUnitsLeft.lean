@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # The two pullback units under first-factor open base change
 
-Source: Stacks Project, Tags 0096, 0097 and 0BED.
+## References
+
+* Stacks Project, Tags 0096, 0097 and 0BED
 -/
 
 @[expose] public section

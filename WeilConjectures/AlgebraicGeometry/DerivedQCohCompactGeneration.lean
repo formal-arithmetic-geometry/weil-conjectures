@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 
 /-! # Compact generation of the quasi-coherent derived category
 
-Source: Stacks Project, Derived Categories of Schemes, Theorem 36.15.3 (Tag 09IS),
-and Derived Categories, Definition 13.37.5 (Tag 09SQ).
+## References
+
+* Stacks Project, Tags 09IS and 09SQ
 -/
 
 @[expose] public section

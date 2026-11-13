@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenTestObject
 import WeilConjectures.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Tensor-stable test objects for derived open restriction
-Source: Stacks Project, Tags 00A7, 08BT and 06YB.
+
+## References
+
+* Stacks Project, Tags 00A7, 08BT and 06YB
 -/
 
 @[expose] public section

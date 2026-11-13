@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 
 /-! # Fixed-degree affine Serre vanishing
 
-Source: Stacks Project, Tag 0B5T (4).
+## References
+
+* Stacks Project, Tag 0B5T
 -/
 
 @[expose] public section

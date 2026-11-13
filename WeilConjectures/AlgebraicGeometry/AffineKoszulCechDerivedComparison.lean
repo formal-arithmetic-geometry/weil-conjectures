@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalCechResolutionQuasiIso
 
 /-! # Koszul Hom colimits compute derived sections on a principal-open union
 
-Source: Stacks Project, Tags 08D1 and 08D2.
+## References
+
+* Stacks Project, Tags 08D1 and 08D2
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOpcyclesFlatFromSections
 
 /-! # Flat opcycles of a universally exact affine complex
 
-Source: Stacks Project, Tag 0653, affine specialization and square-zero algebra testing.
+## References
+
+* Stacks Project, Tag 0653
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalCone
 
 /-! # Identification of the directed étale section comparisons
 
-Source: Stacks Project, Tags 03S2, 03CB and 03CC, in the degree-zero route of Tag 09YQ.
+## References
+
+* Stacks Project, Tags 03S2, 03CB, 03CC and 09YQ
 -/
 
 @[expose] public section

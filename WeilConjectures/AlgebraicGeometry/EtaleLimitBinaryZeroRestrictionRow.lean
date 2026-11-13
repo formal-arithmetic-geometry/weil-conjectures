@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Native restricted cohomology rows
 
-Source: Stacks Project, Tags 09YQ and 0A50.
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section

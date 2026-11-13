@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Cocycle for the canonical quotient reductions
 
-Source: Stacks Project, Tags 06YY and 09C2, ordinary tensor balancing.
+## References
+
+* Stacks Project, Tags 06YY and 09C2
 -/
 
 @[expose] public noncomputable section

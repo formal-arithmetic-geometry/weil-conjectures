@@ -12,9 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Ambient coproducts and quasi-coherent cohomology
 
-Source: Stacks Project, Lemma 08DT and Section 01LA, item (3).
-The proofs use the termwise ambient coproduct and its cohomology comparison, together
-with the source library's proved closure of quasi-coherent modules under arbitrary sums.
+## References
+
+* Stacks Project, Tags 08DT and 01LA
 -/
 
 @[expose] public section

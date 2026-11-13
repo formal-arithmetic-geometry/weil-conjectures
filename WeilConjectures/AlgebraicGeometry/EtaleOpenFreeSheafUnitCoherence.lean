@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenSectionPullback
 
 /-! # Identity-generator coherence for nested open subschemes
 
-Source: Stacks Project, Tag 03F3, and the open-restriction adjunction unit calculation.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section

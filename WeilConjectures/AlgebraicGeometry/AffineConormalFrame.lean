@@ -20,7 +20,10 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Sheafifying an affine conormal basis
 
-Source: Stacks Project, Morphisms, Tag 01R3, and Modules, Tag 01C6. -/
+## References
+
+* Stacks Project, Tags 01R3 and 01C6
+-/
 
 @[expose] public section
 

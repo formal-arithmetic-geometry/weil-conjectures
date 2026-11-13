@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-! # Shrinking one local étale representative along a closed subscheme
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, open-image shrinking.
+## References
+
+* Stacks Project, Tag 09ZF
 -/
 
 @[expose] public section

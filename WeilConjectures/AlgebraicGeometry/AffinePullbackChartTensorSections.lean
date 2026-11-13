@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.Ring.Constructions
 
 /-! # Tensor sections on the inverse-image affine chart
 
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV.
+## References
+
+* Stacks Project, Tags 01I4, 01IA and 01HV
 -/
 
 @[expose] public section

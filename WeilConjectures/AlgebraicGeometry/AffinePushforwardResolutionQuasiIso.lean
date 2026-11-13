@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Affine pushforward of an unbounded quasi-coherent resolution
 
-Source: Stacks Project, Tags 08C2 and 0AVW.
+## References
+
+* Stacks Project, Tags 08C2 and 0AVW
 -/
 
 @[expose] public section

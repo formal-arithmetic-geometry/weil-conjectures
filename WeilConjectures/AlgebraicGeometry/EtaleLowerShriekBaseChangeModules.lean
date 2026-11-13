@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.Etale
 /-!
 # Etale extension by zero commutes with base change for module sheaves
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.70.5, Tag 03S6.
+## References
+
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section

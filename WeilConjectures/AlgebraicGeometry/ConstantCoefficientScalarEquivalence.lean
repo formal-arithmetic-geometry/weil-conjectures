@@ -10,7 +10,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite locally constant cohomology under an isomorphism of coefficient rings
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 094I.
+## References
+
+* Stacks Project, Tags 06YY and 094I
 -/
 
 @[expose] public section

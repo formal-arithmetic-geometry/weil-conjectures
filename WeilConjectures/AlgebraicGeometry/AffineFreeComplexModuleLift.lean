@@ -13,7 +13,9 @@ public import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-! # Lifting an affine free complex and its unit coefficient
 
-Source: Stacks Project, Tags 01I7 and 00MT, the affine comparison before pivot elimination.
+## References
+
+* Stacks Project, Tags 01I7 and 00MT
 -/
 
 @[expose] public section

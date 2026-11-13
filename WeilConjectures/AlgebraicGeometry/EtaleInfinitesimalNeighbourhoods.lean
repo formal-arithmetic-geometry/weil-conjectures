@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoodsPointwi
 /-!
 # Étaleness along a closed subscheme from its infinitesimal neighbourhoods
 
-Source: More on Morphisms, Lemma 0A43 (part (2)).
+## References
+
+* Stacks Project, Tag 0A43
 -/
 
 @[expose] public section

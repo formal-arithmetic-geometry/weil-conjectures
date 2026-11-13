@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 /-!
 # Separatedness descends to a finite stage
 
-Source: Stacks Project, Limits, Lemma 01ZQ in Situation 081D.
+## References
+
+* Stacks Project, Tags 01ZQ and 081D
 -/
 
 @[expose] public section

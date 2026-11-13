@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Global
 /-!
 # The affine case of effective descent
 
-Source: Stacks Project, Descent, Lemma 35.37.1 (Tag 0245), affine case.
+## References
+
+* Stacks Project, Tag 0245
 -/
 
 @[expose] public section

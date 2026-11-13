@@ -19,9 +19,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Explicit data for the natural Mayer--Vietoris triangle
 
-Source: Stacks Project, Cohomology, Tags 08BV, 08FE and 0D5T.
-The boundary is constructed from the fixed functorial K-injective resolution and the
-short-exact-sequence boundary, without choosing a witness of a boundary existence theorem.
+## References
+
+* Stacks Project, Tags 08BV, 08FE and 0D5T
 -/
 
 @[expose] public section

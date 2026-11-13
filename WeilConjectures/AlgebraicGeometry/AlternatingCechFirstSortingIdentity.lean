@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingBoundary
 /-!
 # The first Čech sorting identity
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ set_option linter.unusedVariables false
 
 /-! # Finite Čech complexes on inverse limits of schemes
 
-Source: Stacks Project, Tags 09YP, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YP, 09YN and 09YQ
 -/
 
 @[expose] public section

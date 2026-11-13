@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import WeilConjectures.AlgebraicGeometry.AffineSpectrumCanonicalTensorGeneratorFormula
 /-! # Affine spectrum stalk coordinates on tensor generators
 
-Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
+## References
+
+* Stacks Project, Tags 0098, 0096 and 0DJ8
 -/
 
 @[expose] public section

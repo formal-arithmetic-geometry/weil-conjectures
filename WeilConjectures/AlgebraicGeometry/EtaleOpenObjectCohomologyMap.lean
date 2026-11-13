@@ -12,7 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # The canonical open-object cohomology map
 
-Source: Stacks Project, Cohomology on Sites, Tag 03F3.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public noncomputable section

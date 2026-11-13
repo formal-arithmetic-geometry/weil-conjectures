@@ -22,8 +22,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Derived sections vanish above a lower tail with basis-acyclic homology
 
-Source: Stacks Project, Tag 0BKT (cohomology-over-U-trivial), applied to the
-strictly lower tail; Tags 071B and 0D64 for its tower reconstruction.
+## References
+
+* Stacks Project, Tags 0BKT, 071B and 0D64
 -/
 
 @[expose] public section

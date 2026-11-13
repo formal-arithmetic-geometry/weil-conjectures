@@ -16,12 +16,9 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Canonical tensor comparison for derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U; perfect.tex, Tag 0DJA(1).
-The comparison is the unique family satisfying `IsCanonicalPullbackTensorComparison`:
-it is pinned by the actual module pullback tensor map and the shared left-derived
-counit on K-flat representatives. Statements bind the comparison together with this
-uniquely characterising predicate; no monoidal structure on pullback is chosen
-arbitrarily and no data is chosen from a theorem.
+## References
+
+* Stacks Project, Tags 079U and 0DJA
 -/
 
 @[expose] public section

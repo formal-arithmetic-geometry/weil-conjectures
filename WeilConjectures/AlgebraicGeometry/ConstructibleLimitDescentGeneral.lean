@@ -21,7 +21,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Constructible module descent with Noetherian coefficients
 
-Source: Stacks Project, Tags 09YU (3), 095N and 09YQ.
+## References
+
+* Stacks Project, Tags 09YU, 095N and 09YQ
 -/
 
 @[expose] public section

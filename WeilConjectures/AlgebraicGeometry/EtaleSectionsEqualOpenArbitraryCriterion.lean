@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Agreement-open criteria for arbitrary scheme maps
-Source: Stacks Project, Tag 09XM, and Tag 03S2. -/
+
+## References
+
+* Stacks Project, Tags 09XM and 03S2
+-/
 
 @[expose] public section
 

@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 
 /-! # Projection maps on a compatible compactification tower
 
-Source: Stacks Project, More on Étale Cohomology, Tags 0F7B and 0F7J,
-and Cohomology on Sites, Tag 0E48.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7J and 0E48
 -/
 
 @[expose] public section

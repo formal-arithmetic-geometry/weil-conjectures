@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the
-explicit free-abelian-sheaf construction used in AbelianHigherDirectImagePresheaf.
+## References
+
+* Stacks Project, Tags 03Q8 and 03Q9
 -/
 
 @[expose] public section

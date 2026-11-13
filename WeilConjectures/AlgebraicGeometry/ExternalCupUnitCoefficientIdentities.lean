@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ScalarUnitClassPullback
 
 /-! # External cup with one after identifying the unit coefficients
 
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, cup products.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

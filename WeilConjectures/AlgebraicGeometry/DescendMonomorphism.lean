@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Monomorphisms descend to a stage of an inverse limit
 
-Source: Stacks Project, Limits, Tag 07RQ, in Situation 081D.
+## References
+
+* Stacks Project, Tags 07RQ and 081D
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Flat coefficient module sheaves have flat geometric stalks
 
-Source: Stacks Project, Modules on Sites, Tag 05VC.
+## References
+
+* Stacks Project, Tag 05VC
 -/
 
 @[expose] public noncomputable section

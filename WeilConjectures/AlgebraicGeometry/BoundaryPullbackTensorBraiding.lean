@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Symmetry of the boundary pullback tensor comparison
 
-Source: Stacks Project, Tags 01CA and 01CD.
+## References
+
+* Stacks Project, Tags 01CA and 01CD
 -/
 
 @[expose] public section

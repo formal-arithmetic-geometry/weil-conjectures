@@ -23,7 +23,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # A filtered source surjecting at a generic stalk
 
-Source: Stacks Project, Tags 01YE and 01YF, generic ideal inclusion and its source filtration.
+## References
+
+* Stacks Project, Tags 01YE and 01YF
 -/
 
 @[expose] public section

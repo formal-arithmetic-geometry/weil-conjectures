@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexFirstPageContinuity
 
 /-! # First-page comparison and abutment quotient models
 
-Source: Stacks Project, Tag 0EZM, and Tags 015J and 015K.
+## References
+
+* Stacks Project, Tags 0EZM, 015J and 015K
 -/
 
 @[expose] public section

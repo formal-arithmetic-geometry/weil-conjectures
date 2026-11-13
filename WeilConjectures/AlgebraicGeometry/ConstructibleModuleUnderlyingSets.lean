@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Constructibility after forgetting module structure
 
-Source: Stacks Project, Tags 095E and 09Z6.
+## References
+
+* Stacks Project, Tags 095E and 09Z6
 -/
 
 @[expose] public section

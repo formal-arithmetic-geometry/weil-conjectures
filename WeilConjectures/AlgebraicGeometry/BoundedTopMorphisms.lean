@@ -9,8 +9,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Chain representatives for morphisms out of the top degree
 
-Source: Stacks Project, Cohomology on Sites, Tag 094G, the boundary map from the
-lower bounded model to the top free term, using the canonical derived t-structure.
+## References
+
+* Stacks Project, Tag 094G
 -/
 
 @[expose] public section

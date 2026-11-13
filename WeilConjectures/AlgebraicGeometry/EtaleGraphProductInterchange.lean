@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductGeometry
 
 /-! # The canonical interchange through the product graph
 
-Source: Stacks Project, Tag 0F7J, product-grid boundary.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

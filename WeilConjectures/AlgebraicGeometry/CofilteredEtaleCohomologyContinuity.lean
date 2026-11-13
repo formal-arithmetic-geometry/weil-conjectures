@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Ordinary etale continuity for cofiltered categories
 
-Source: Stacks Project, Tags 09YQ and 0032.
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section

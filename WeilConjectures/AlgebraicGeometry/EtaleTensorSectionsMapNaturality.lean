@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Naturality of tensor sections in the module
 
-Source: Stacks Project, Descent, Tag 03DR, equation (35.8.0.1).
+## References
+
+* Stacks Project, Tag 03DR
 -/
 
 @[expose] public section

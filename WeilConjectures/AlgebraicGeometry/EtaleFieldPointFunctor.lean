@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Gluing
 /-!
 # The geometric-point functor for étale schemes over a field
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section

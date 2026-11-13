@@ -16,7 +16,9 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 /-!
 # Acyclicity of filtered colimits of injective etale sheaves
 
-Source: Stacks Project, Tag 0739, proof, last paragraph, and Tag 03Q5.
+## References
+
+* Stacks Project, Tags 0739 and 03Q5
 -/
 
 @[expose] public section

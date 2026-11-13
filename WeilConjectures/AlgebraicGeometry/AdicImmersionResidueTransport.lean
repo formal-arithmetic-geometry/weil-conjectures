@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Explicit etale residue transport through the equivalent small site
 
-Source: Stacks Project, Tags 03CY and 03A0.
+## References
+
+* Stacks Project, Tags 03CY and 03A0
 -/
 
 @[expose] public noncomputable section

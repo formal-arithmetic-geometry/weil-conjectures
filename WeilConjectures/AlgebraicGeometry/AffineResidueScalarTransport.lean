@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar transport from the affine prime residue field
 
-Source: Stacks Project, Tag 0098; naturality of scheme residue maps.
+## References
+
+* Stacks Project, Tag 0098
 -/
 
 @[expose] public section

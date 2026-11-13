@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Cohomology along an affine morphism
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 089W and Lemma 01XC;
-Cohomology, Lemma 01F4 and Equation 01FA.
+## References
+
+* Stacks Project, Tags 089W, 01XC, 01F4 and 01FA
 -/
 
 @[expose] public section

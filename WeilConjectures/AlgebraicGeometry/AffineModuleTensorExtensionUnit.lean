@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Affine module tensor ExtensionUnit
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

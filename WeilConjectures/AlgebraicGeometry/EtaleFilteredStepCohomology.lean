@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictedSectionsComparisonMap
 
 /-! # Computing one filtered Cartan--Eilenberg step
 
-Source: Stacks Project, Tags 015J and 0133, applied to the columns in degrees at least q.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section

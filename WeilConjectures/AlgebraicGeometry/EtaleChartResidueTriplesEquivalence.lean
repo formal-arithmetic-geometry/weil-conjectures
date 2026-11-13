@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEssentiallySurj
 /-!
 # Equivalence between affine chart neighbourhoods and residue-field triples
 
-Source: Stacks Project, proof of Tag 04HX and Remark Tag 04HT.
+## References
+
+* Stacks Project, Tags 04HX and 04HT
 -/
 
 @[expose] public section

@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AmpleProjChartFormula
 /-!
 # The canonical morphism to Proj of the section ring
 
-Source: Stacks Project, Properties, Tag 01PZ, existence and clause (1), and Constructions,
-Tag 01N8, the localized chart formula.
+## References
+
+* Stacks Project, Tags 01PZ and 01N8
 -/
 
 @[expose] public section

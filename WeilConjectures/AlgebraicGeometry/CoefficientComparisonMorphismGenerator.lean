@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonConstructio
 
 /-! # Coefficient comparison by the composed adjunction
 
-Source: Stacks Project, Tags 02KE, 01I9, 01IA and 0097.
+## References
+
+* Stacks Project, Tags 02KE, 01I9, 01IA and 0097
 -/
 
 @[expose] public section

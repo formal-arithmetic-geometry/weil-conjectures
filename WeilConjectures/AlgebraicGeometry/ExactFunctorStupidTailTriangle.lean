@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-! # The kernel triangle of an exact restricted stupid tail
 
-Source: Stacks Project, Tag 08EG, stupid truncation step, and Tag 0152.
+## References
+
+* Stacks Project, Tags 08EG and 0152
 -/
 
 @[expose] public section

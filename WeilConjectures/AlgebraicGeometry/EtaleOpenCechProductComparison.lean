@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Comparing open products with étale fibre products
 
-Source: Stacks Project, Tags 03AK and 03AM.
+## References
+
+* Stacks Project, Tags 03AK and 03AM
 -/
 
 @[expose] public section

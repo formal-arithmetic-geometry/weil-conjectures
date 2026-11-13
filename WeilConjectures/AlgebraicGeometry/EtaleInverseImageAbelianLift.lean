@@ -18,7 +18,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # EtaleInverseImageAbelianLift
 
-Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section

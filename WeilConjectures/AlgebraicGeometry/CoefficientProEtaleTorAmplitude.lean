@@ -28,9 +28,9 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Tor amplitude with independent coefficient size
 
-Source: Stacks Project, Tag 08FZ.
-The original predicate is retained. The additional interface uses the same standard
-localization on the coefficient-sized site and the existing total tensor on K-flat models.
+## References
+
+* Stacks Project, Tag 08FZ
 -/
 
 @[expose] public noncomputable section

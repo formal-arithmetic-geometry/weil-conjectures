@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.NormalConstantGenericUnit
 
 /-! # General-ring integral stalk detectors
 
-Source: Stacks Project, Tag 09Z6 (3), generic trivialization and normalization.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleLimitQuotient
 
 /-! # Reconstructing formal-system maps from maps of limit sheaves
 
-Source: Stacks Project, Lemma 087W, and the uniqueness/gluing step of Lemma 088B.
+## References
+
+* Stacks Project, Tags 087W and 088B
 -/
 
 @[expose] public section

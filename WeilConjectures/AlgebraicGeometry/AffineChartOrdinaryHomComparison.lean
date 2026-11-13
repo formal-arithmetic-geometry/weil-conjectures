@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartCanonicalHomNaturality
 
 /-! # Hom comparisons for the explicit affine chart ring diagram
 
-Source: Stacks Project, Tags 01ZR (affine proof), 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01ZR, 01I6, 0095 and 0096
 -/
 
 @[expose] public section

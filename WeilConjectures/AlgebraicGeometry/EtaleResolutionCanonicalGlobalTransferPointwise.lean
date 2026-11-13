@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 /-!
 # Pointwise canonical global transfer identity
 
-Source: Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB.
+## References
+
+* Stacks Project, Tags 0A50, 03F3, 01F8 and 01FB
 -/
 
 @[expose] public section

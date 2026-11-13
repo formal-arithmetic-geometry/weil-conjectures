@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 /-!
 # Exact inverse image of set-valued small etale sheaves
 
-Source: Stacks Project, Lemma 59.36.2 (Tag 03Q1), assertion (2), and Definition
-59.36.1 (Tag 03PZ); Sites, Definition 00X1.
+## References
+
+* Stacks Project, Tags 03Q1, 03PZ and 00X1
 -/
 
 @[expose] public section

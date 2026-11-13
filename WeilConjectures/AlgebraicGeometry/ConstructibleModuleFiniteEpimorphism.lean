@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel
 /-!
 # Finite affine free covers of constructible module sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 095N, proof of the finite surjection.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section

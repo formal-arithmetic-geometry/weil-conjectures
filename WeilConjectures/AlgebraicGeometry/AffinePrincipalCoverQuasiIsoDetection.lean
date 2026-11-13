@@ -19,7 +19,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Detection of quasi-isomorphisms on an affine principal-open cover
 
-Source: Stacks Project, Tag 08EE, final sheafification, and Tags 01HV and 01IB.
+## References
+
+* Stacks Project, Tags 08EE, 01HV and 01IB
 -/
 
 @[expose] public section

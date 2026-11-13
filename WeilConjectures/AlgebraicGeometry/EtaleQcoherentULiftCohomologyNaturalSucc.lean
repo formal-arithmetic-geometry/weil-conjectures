@@ -17,8 +17,9 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyResolutionEvaluationNatura
 
 /-! # Positive-degree naturality of coefficient universe lift
 
-Source: Stacks Project, Tags 01FT and 06XR (resolution computation);
-Tag 01DO (the existing coefficient-lift injectivity theorem).
+## References
+
+* Stacks Project, Tags 01FT, 06XR and 01DO
 -/
 
 @[expose] public section

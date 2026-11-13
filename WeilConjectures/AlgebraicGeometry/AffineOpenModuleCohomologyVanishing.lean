@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleCohomologyComparison
 
 /-! # Vanishing of higher module cohomology on affine opens
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag 01XB.
+## References
+
+* Stacks Project, Tag 01XB
 -/
 
 @[expose] public section

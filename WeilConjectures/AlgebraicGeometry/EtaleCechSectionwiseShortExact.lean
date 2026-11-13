@@ -17,7 +17,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # Sectionwise short exactness of étale Čech complexes
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9, proof.
+## References
+
+* Stacks Project, Tag 03F9
 -/
 
 @[expose] public section

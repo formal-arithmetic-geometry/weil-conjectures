@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Pullback of morphisms in normalized tensor coordinates
 
-Source: Stacks Project, Tags 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01I6, 0095 and 0096
 -/
 
 @[expose] public section

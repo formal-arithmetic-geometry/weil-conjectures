@@ -17,7 +17,9 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # Dimension of an affine spectrum under field extension
 
-Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3).
+## References
+
+* Stacks Project, Tag 00P3
 -/
 
 @[expose] public section

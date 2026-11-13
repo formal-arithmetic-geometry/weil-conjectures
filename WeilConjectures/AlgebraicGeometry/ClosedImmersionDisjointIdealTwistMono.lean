@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Injectivity of restriction on a disjoint ideal twist
 
-Source: Stacks Project, Remark 09NW, the kernel calculation, and Lemma 09NX.
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 @[expose] public section

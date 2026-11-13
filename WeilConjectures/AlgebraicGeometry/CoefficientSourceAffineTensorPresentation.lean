@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Tensor presentation of associated-module coefficient sections
 
-Source: Stacks Project, Tags 01I9 and 01IA.
+## References
+
+* Stacks Project, Tags 01I9 and 01IA
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Conormal module of the diagonal
 
-Source: Stacks Project, Tags 01R2, 01KJ and 08S2.
+## References
+
+* Stacks Project, Tags 01R2, 01KJ and 08S2
 -/
 
 @[expose] public section

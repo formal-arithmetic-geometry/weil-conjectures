@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPullTr
 /-!
 # Ordinary finite reduction of constant-to-completed scalar insertion
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL, 093M;
-sites-cohomology.tex, Tag 06YY.
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 093M and 06YY
 -/
 
 @[expose] public noncomputable section

@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Tilde and the unbounded total tensor complex
 
-Source: Stacks Project, Tag 08DX, proof of the affine computation.
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section

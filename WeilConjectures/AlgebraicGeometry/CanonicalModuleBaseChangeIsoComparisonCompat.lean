@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackComparisonIsoTransport
 
 /-! # Coordinate compatibility with a prescribed module comparison
 
-Source: Stacks Project, Tags 06YJ, 08HY, 0D5T and 08IB.
+## References
+
+* Stacks Project, Tags 06YJ, 08HY, 0D5T and 08IB
 -/
 
 @[expose] public section

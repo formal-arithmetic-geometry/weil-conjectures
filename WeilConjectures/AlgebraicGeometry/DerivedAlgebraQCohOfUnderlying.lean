@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Algebra-module quasi-coherence from exact scalar restriction
 
-Source: Stacks Project, Tags 0BV0, 0BV1 and 0AX2.
+## References
+
+* Stacks Project, Tags 0BV0, 0BV1 and 0AX2
 -/
 
 @[expose] public section

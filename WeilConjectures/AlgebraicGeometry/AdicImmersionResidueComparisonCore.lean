@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueTransport
 
 /-! # Fixed residue pullback data
 
-Source: Stacks Tags 03A0 and 03CY.
+## References
+
+* Stacks Project, Tags 03A0 and 03CY
 -/
 
 @[expose] public noncomputable section

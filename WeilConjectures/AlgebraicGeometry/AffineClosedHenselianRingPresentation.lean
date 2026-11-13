@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Over
 
 /-! # A directed ring presentation of a closed affine henselian neighborhood
 
-Source: Stacks Project, Tags 0A51, 0A02, and 0032.
+## References
+
+* Stacks Project, Tags 0A51, 0A02 and 0032
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
 /-! # Etale replacement: construction and vanishing
 
-Source: Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ
 -/
 
 @[expose] public section

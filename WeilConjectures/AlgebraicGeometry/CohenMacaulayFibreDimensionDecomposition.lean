@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 
 /-! # Relative dimension decomposition of a fibre Cohen-Macaulay open
 
-Source: Stacks Project, Tags 02NM, 02NJ and 0A21.
+## References
+
+* Stacks Project, Tags 02NM, 02NJ and 0A21
 -/
 
 @[expose] public section

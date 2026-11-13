@@ -12,7 +12,9 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The normalized quotient cone of a complete object
 
-Source: Stacks Project, Tags 099M, 0940 and 09C6.
+## References
+
+* Stacks Project, Tags 099M, 0940 and 09C6
 -/
 
 @[expose] public noncomputable section

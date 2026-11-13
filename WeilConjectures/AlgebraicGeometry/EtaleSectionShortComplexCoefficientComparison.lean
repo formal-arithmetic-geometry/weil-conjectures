@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-! # A coefficient comparison of fixed normalized section complexes
 
-Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
+## References
+
+* Stacks Project, Tags 0A50 and 01F7
 -/
 
 @[expose] public section

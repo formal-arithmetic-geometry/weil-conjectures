@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactoriz
 
 /-! # Affine computation of relatively flat canonical module base change
 
-Source: Stacks Project, Tag 0A1D, specializing to a module in degree zero.
+## References
+
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section

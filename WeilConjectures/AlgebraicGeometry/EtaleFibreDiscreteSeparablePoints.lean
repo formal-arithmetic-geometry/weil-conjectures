@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # The points of an etale fibre
 
-Source: Stacks Project, Morphisms, Lemma 02GL, part (2).
+## References
+
+* Stacks Project, Tag 02GL
 -/
 
 @[expose] public section

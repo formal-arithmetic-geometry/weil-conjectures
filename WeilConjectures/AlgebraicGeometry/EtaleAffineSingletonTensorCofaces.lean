@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegree
 import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaces
 
 /-! # Cofaces of the affine singleton tensor comparison
-Source: Stacks Project, Tag 03P2, the tensor differential formula.
+
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-!
 # The ideal sheaf of a base-changed closed subscheme
 
-Source: Stacks Project, Schemes, Lemma 26.17.6, Tag 01JU (1).
+## References
+
+* Stacks Project, Tag 01JU
 -/
 
 @[expose] public section

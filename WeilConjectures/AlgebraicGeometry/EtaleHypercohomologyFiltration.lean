@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # The image filtration on etale hypercohomology
 
-Source: Stacks Project, Tags 015J and 0EZM.
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section

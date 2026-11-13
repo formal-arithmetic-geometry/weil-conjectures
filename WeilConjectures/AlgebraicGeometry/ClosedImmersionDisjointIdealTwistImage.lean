@@ -31,7 +31,9 @@ set_option autoImplicit false
 
 /-! # Image of restriction on an ideal twist
 
-Source: Stacks Project, Remark 09NW, the formula IB = (I+J)/J, and Lemma 09NX.
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 set_option backward.isDefEq.respectTransparency false in

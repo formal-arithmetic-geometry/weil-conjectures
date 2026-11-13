@@ -19,7 +19,9 @@ import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 /-!
 # Elements in tensor products over directed ring colimits
 
-Source: Stacks Project, Algebra, Tags 00D6, 00D7, 00DD, as used in Tag 07RI.
+## References
+
+* Stacks Project, Tags 00D6, 00D7, 00DD and 07RI
 -/
 
 @[expose] public section

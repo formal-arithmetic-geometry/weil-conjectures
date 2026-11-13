@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Constant quotient sections and scalar transitions
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; Tag 09C6.
+## References
+
+* Stacks Project, Tags 03CY, 03EK and 09C6
 -/
 
 @[expose] public noncomputable section

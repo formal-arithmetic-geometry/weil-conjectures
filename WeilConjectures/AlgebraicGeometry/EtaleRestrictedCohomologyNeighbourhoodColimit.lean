@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Continuity of restricted étale cohomology over neighbourhoods
 
-Source: Stacks Project, Étale Cohomology, Tags 09AX, 03Q6 and 09YQ.
+## References
+
+* Stacks Project, Tags 09AX, 03Q6 and 09YQ
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedSingleHomEvaluation
 
 /-! # Evaluation of affine Hom on K-injective complexes
 
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3.
+## References
+
+* Stacks Project, Tags 0BUZ, 0BV0 and 0AX3
 -/
 
 @[expose] public section

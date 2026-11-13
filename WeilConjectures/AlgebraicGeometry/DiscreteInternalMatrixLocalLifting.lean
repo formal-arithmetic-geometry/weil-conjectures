@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 /-! # Local descent of an internal matrix to the discrete condensed point
 
-Source: Stacks, Tags 03CY and 00YV.
+## References
+
+* Stacks Project, Tags 03CY and 00YV
 -/
 
 @[expose] public section

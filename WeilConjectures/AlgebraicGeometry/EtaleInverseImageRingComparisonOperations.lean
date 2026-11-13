@@ -13,7 +13,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 
 /-! # Multiplication and unit for a supplied ring inverse image comparison
 
-Source: Stacks Project, Tags 00YV and 03D2. -/
+## References
+
+* Stacks Project, Tags 00YV and 03D2
+-/
 
 @[expose] public section
 

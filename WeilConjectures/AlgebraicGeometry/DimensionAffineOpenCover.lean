@@ -13,8 +13,9 @@ import Mathlib.RingTheory.Ideal.Height
 /-!
 # Dimension from an affine open cover
 
-Source: Stacks Project, Properties, Lemma 04MU; Schemes, Lemma 01HV;
-Algebra, Lemma 00KG.
+## References
+
+* Stacks Project, Tags 04MU, 01HV and 00KG
 -/
 
 @[expose] public section

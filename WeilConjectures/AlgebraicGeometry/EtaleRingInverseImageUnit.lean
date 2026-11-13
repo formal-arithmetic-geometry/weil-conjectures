@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRingDirectImageComparison
 /-!
 # A ring-valued lift of the étale set inverse image and its unit
 
-Source: Stacks Project, Proposition 00YV, ring paragraph and Section 00YR.
+## References
+
+* Stacks Project, Tags 00YV and 00YR
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Pro-etale restriction of a supplied constant etale chart
 
-Source: Stacks Project, Tags 099R, 03DJ and 094G.
+## References
+
+* Stacks Project, Tags 099R, 03DJ and 094G
 -/
 
 @[expose] public noncomputable section

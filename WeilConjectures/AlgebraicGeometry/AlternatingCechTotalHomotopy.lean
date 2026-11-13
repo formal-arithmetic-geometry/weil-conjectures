@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # Čech totalization preserves coefficient homotopies
 
-Source: Stacks Project, Tag 08C1.
+## References
+
+* Stacks Project, Tag 08C1
 -/
 
 @[expose] public section

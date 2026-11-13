@@ -20,7 +20,9 @@ import WeilConjectures.ConstructibleSheaf.KernelCokernel
 /-!
 # Affine free presentations with Noetherian coefficients
 
-Source: Stacks Project, Tag 095N.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section

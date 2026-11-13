@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCompositionCounitApex
 
 /-! # Counit calculations for pullback composition
-Source: Stacks Project, Tags 079W, 0D5S and 0D5T.
+
+## References
+
+* Stacks Project, Tags 079W, 0D5S and 0D5T
 -/
 
 @[expose] public section

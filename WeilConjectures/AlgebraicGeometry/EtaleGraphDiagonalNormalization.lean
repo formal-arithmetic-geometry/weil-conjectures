@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # The diagonal normalization of the specified product-graph map
 
-Source: Stacks Project, Tags 0F7C--0F7E, and the repeated-presentation diagonal.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7E
 -/
 
 @[expose] public noncomputable section

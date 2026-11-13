@@ -13,7 +13,10 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 
 /-! # The stalk represented by a supported polynomial prime
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), affine localization.
+
+## References
+
+* Stacks Project, Tag 069C
 -/
 
 @[expose] public section

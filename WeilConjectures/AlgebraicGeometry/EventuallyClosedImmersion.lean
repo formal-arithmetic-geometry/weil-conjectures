@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 /-!
 # Eventual closed immersions in inverse systems
 
-Source: Stacks Project, Limits, Lemma 0A0N.
+## References
+
+* Stacks Project, Tag 0A0N
 -/
 
 @[expose] public section

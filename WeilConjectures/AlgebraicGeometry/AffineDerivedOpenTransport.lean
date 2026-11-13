@@ -16,7 +16,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Transport of derived open restriction along an affine presentation
-Source: Stacks Project, Tags 079W and 09IR.
+
+## References
+
+* Stacks Project, Tags 079W and 09IR
 -/
 
 @[expose] public section

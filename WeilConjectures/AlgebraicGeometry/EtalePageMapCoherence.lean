@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 
 /-! # Coherence of the unswapped étale page maps
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section

@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Removing ideal-power torsion from a coherent module
 
-Source: Stacks Project, Tag 01YB, second paragraph of the proof.
+## References
+
+* Stacks Project, Tag 01YB
 -/
 
 @[expose] public section

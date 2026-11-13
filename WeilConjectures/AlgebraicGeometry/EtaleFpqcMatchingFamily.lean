@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFpqcUnitsJointlyInjective
 
 /-! # Compatible local representatives for fpqc descent of étale sections
 
-Source: Stacks Project, Tag 09XN, the agreement-open construction before final gluing. -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

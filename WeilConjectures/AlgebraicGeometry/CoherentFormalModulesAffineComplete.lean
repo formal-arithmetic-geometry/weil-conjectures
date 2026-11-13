@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # CoherentFormalModulesAffineComplete
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Tag 087W
 -/
 
 @[expose] public section

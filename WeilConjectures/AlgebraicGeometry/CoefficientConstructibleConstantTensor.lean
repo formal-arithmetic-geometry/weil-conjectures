@@ -16,7 +16,9 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! # Tensoring constructible complexes with finite constant modules
 
-Source: Stacks Project, Tags 09BQ and 094H.
+## References
+
+* Stacks Project, Tags 09BQ and 094H
 -/
 
 @[expose] public noncomputable section

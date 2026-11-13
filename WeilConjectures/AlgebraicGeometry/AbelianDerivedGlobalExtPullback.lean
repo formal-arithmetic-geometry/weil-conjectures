@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SheafHRightDerivedPullback
 
 /-! # Ext comparison for pullback on derived global sections
 
-Source: Stacks Project, Cohomology on Sites, Section 21.2, and Tag 01F8.
+## References
+
+* Stacks Project, Tag 01F8
 -/
 
 @[expose] public section

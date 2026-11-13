@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Chart cohomology and cartesian exchange
 
-Source: Stacks Project, Tag 0EYM, second proof, canonical cohomology comparisons.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

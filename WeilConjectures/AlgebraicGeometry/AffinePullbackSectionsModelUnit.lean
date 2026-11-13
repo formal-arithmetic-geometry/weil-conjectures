@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePullbackSectionsUnitUncancelled
 
 /-! # Pullback unit on affine sections models
 
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
+## References
+
+* Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 
 /-! # Eventual equality of descended scalar sections
 
-Source: Stacks Project, Sites Tag 09YN and Etale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section

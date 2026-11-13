@@ -9,9 +9,11 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryPullCompa
 import WeilConjectures.AlgebraicGeometry.SemilinearModuleAdjunction
 
 /-! A decomposition of the ordinary finite pullback comparison.
-Source: Stacks Project, Tags 06YY and 099L.
-The existence and insertion-normalization part is isolated so that it can be
-proved independently from the uniqueness argument. -/
+
+## References
+
+* Stacks Project, Tags 06YY and 099L
+-/
 @[expose] public noncomputable section
 universe u
 set_option synthInstance.maxSize 2048

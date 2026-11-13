@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Source-coordinate naturality of the derived comparison
 
-Source: Stacks Project, Tags 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 08HY and 0D5S
 -/
 
 @[expose] public section

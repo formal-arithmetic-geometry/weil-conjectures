@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitRepresentative
 /-!
 # Filtered colimits of sections on quasi-compact quasi-separated etale objects
 
-Source: Sites, Lemma 7.17.7, Tag 0738, part (4), applied using Etale Cohomology,
-Section 59.51, Tag 03Q4.
+## References
+
+* Stacks Project, Tags 0738 and 03Q4
 -/
 
 @[expose] public section

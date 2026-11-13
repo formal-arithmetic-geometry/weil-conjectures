@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineSections
 /-!
 # The diagonal comparison on affine sections
 
-Source: Stacks Project, Tag 08S2, affine calculation; Tag 00RW.
+## References
+
+* Stacks Project, Tags 08S2 and 00RW
 -/
 
 @[expose] public section

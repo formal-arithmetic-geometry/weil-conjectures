@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Canonical-coefficient composition for abelian higher direct images
 
-Source: Stacks Project, Tag 09Z1, canonical comparison maps.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

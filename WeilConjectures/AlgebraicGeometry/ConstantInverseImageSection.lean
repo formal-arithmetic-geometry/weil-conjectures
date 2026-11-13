@@ -27,7 +27,9 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Transporting global coefficient sections
 
-Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2.
+## References
+
+* Stacks Project, Tags 00YV and 03D2
 -/
 
 @[expose] public noncomputable section

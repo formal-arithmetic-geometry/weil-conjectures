@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # K-flat module models on affine schemes
 
-Source: Stacks Project, perfect.tex, Tags 06Z0 and 08DV.
+## References
+
+* Stacks Project, Tags 06Z0 and 08DV
 -/
 
 @[expose] public section

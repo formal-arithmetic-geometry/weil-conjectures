@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounit
 
 /-! # Counit computation for the canonical open composition comparison
 
-Source: Stacks Project, Cohomology, Tags 08FE, 0D5T and 08BV.
+## References
+
+* Stacks Project, Tags 08FE, 0D5T and 08BV
 -/
 
 @[expose] public section

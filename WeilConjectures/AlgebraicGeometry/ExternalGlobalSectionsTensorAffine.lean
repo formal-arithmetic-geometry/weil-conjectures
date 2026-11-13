@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # External global sections on two affine factors
 
-Source: Stacks Project, Tag 0BED, affine charts of equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

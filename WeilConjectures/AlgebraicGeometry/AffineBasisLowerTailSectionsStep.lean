@@ -21,7 +21,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Affine-basis lower truncation tower inputs
-Source: Stacks Project, Tags 0BKT, 0D64, 071B and 08D4. -/
+
+## References
+
+* Stacks Project, Tags 0BKT, 0D64, 071B and 08D4
+-/
 
 @[expose] public section
 universe u wC wA

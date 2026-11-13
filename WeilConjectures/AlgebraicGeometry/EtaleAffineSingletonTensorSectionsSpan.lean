@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorSectionsEquiv
 
 /-! # Affine singleton tensor sections before the outer Čech product
 
-Source: Stacks Project, Tags 03P2, 01I4, 01I9, 01IA. -/
+## References
+
+* Stacks Project, Tags 03P2, 01I4, 01I9 and 01IA
+-/
 
 @[expose] public section
 

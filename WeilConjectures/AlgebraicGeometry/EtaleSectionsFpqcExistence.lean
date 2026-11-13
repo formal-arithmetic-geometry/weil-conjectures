@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFpqcMatchingFamily
 
 /-! # EtaleSectionsFpqcExistence
 
-Source: Stacks Project, Tag 09XN. -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

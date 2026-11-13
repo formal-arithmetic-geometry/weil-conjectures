@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedMateEvaluation
 
 /-! # AffineSpectrumPullbackSquareCoherence
 
-Source: Stacks Project, Tags 0D5S and 08HY.
+## References
+
+* Stacks Project, Tags 0D5S and 08HY
 -/
 
 @[expose] public section

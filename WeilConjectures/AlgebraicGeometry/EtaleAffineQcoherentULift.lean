@@ -20,7 +20,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients
 
-Source: Stacks Project, Tag 03P2, affine case.
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-! # Compatible affine étale Čech presentation data
 
-Source: Stacks Project, Tag 099U, finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U
 -/
 
 @[expose] public section

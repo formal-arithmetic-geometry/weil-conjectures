@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPartialSortUnique
 /-!
 # Advancing a partial sorting permutation by an interval cycle
 
-Source: Stacks Project, Tag 01FM, verification of
-`cohomology-equation-first-homotopy` (omitted in the source).
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.CategoryTheory.Limits.Final.Type
 /-! # Quasi-coherence of the affine tensor pushout algebra
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

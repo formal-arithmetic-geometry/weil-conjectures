@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HomotopyBaseChangeCounit
 
 /-! # Derived and ordinary exchange on the right-derived unit
 
-Source: Stacks Project, Tag 08HY, mate description and derived adjunction compatibility.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section

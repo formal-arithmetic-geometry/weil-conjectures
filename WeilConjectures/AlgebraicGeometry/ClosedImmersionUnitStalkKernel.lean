@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitStalkKernelOnImage
 
 /-! # Stalk kernel calculation for a closed immersion
 
-Source: Stacks Project, Modules, Lemma 08KS, using Sheaves, Lemmas 0098 and 00AE.
+## References
+
+* Stacks Project, Tags 08KS, 0098 and 00AE
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Affine tensor comparison isomorphisms
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

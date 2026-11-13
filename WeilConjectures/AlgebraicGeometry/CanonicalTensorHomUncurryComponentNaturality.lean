@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-! # Naturality of one tensor-Hom evaluation component
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90.
+## References
+
+* Stacks Project, Tag 0A90
 -/
 
 @[expose] public section

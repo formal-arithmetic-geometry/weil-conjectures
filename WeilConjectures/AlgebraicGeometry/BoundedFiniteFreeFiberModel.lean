@@ -16,7 +16,9 @@ import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 
 /-! # Bounded models for one degree of algebraic residue fibres
 
-Source: Stacks Project, Tag 0BDI, stupid truncation.
+## References
+
+* Stacks Project, Tag 0BDI
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # A perfect model over the coordinate-ring colimit
 
-Source: Stacks Project, Tags 09RF and 08EB.
+## References
+
+* Stacks Project, Tags 09RF and 08EB
 -/
 
 @[expose] public section

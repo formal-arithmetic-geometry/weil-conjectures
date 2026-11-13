@@ -25,7 +25,9 @@ import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Clearing denominators in a supplied local closed free model
 
-Source: Stacks Project, Tags 01YB and 01YE, the ideal-lattice extension argument.
+## References
+
+* Stacks Project, Tags 01YB and 01YE
 -/
 
 @[expose] public section

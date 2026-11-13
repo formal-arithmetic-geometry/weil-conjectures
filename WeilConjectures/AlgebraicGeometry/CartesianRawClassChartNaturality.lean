@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 
 /-! # Naturality of a finite-stage raw cartesian chart representative
 
-Source: Stacks Project, Tag 0EYM and the exchange comparison of Tags 03CB and 0GIT.
+## References
+
+* Stacks Project, Tags 0EYM, 03CB and 0GIT
 -/
 
 @[expose] public section

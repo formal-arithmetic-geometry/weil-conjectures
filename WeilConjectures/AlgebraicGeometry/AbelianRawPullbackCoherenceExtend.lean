@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Coherence of varying-coefficient raw pullbacks
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section

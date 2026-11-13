@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.Gluing
 
 /-! # Descent of compatible immersions
 
-Source: Stacks Project, Tags 01JB and 01JC; Tag 0BDL, gluing characterized patches.
+## References
+
+* Stacks Project, Tags 01JB, 01JC and 0BDL
 -/
 
 @[expose] public section

@@ -15,7 +15,10 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Derived global sections and maps from the structure sheaf
-Source: Stacks Project, Tag 09M1, proof, first paragraph.
+
+## References
+
+* Stacks Project, Tag 09M1
 -/
 
 @[expose] public section

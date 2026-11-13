@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulLowDegrees
 
 /-! # Strict Koszul tensor and coefficient identifications
 
-Source: Stacks Project, Tags 099M, 093M and 0A0E.
+## References
+
+* Stacks Project, Tags 099M, 093M and 0A0E
 -/
 
 @[expose] public noncomputable section

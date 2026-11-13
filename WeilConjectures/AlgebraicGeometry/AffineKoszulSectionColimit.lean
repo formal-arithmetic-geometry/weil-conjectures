@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectTransport
 
 /-! # The Koszul section colimit on an arbitrary affine scheme
 
-Source: Stacks Project, Tags 08DC, 08DD and 08EH.
+## References
+
+* Stacks Project, Tags 08DC, 08DD and 08EH
 -/
 
 @[expose] public section

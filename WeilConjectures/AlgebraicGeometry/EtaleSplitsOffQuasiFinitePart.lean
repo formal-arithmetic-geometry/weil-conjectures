@@ -16,7 +16,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-!
 # Étale splitting of the quasi-finite part
 
-Source: Stacks Project, More on Morphisms, Lemma 37.41.6, Tag 02LP.
+## References
+
+* Stacks Project, Tag 02LP
 -/
 
 @[expose] public section

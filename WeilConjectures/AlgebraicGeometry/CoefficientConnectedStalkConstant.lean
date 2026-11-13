@@ -23,7 +23,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # A single lisse complex on a connected component
 
-Source: Stacks Project, Tags 09BI, 09C6 and 090K.
+## References
+
+* Stacks Project, Tags 09BI, 09C6 and 090K
 -/
 
 @[expose] public noncomputable section

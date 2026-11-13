@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.NatIso
 
 /-! # The smaller-support cokernel of an ideal-sum inclusion
 
-Source: Stacks Project, Tag 01YF, final paragraph, using Tag 01YE.
+## References
+
+* Stacks Project, Tags 01YF and 01YE
 -/
 
 @[expose] public section

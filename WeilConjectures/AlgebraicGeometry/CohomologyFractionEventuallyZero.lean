@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
 
 /-! # Vanishing of a cohomology fraction
 
-Source: Stacks Project, Tag 09MR, degree-zero localization preceding the lemma.
+## References
+
+* Stacks Project, Tag 09MR
 -/
 
 @[expose] public section

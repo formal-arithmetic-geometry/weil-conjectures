@@ -12,7 +12,9 @@ public import WeilConjectures.FieldTheory.GaloisUnitsHomogeneousCocycleDescent
 /-!
 # Etale unit cohomology computed by continuous inhomogeneous cocycles
 
-Source: Stacks Project, Tags 04JQ, 03QU, 03QV (2), and Section 0DVG.
+## References
+
+* Stacks Project, Tags 04JQ, 03QU, 03QV and 0DVG
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteComparisonModelRealization
 
 /-! # Closed direct image preserves coefficient-sized etale origin
 
-Source: Stacks Project, proetale.tex, Tags 09A6, 09AA.
+## References
+
+* Stacks Project, Tags 09A6 and 09AA
 -/
 
 @[expose] public noncomputable section

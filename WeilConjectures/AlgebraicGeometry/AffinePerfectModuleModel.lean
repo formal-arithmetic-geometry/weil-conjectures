@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Module models of affine strictly perfect complexes
 
-Source: Stacks Project, Tags 08CR and 06Z0.
+## References
+
+* Stacks Project, Tags 08CR and 06Z0
 -/
 
 @[expose] public section

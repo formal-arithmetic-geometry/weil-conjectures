@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # Underlying abelian sheaves and etale module inverse image
 
-Source: Stacks Project, Tags 03D3 and 03D7 (module inverse image and its adjunction),
-and the coefficient compatibility used in Tags 03SA(3) and 09ZE.
+## References
+
+* Stacks Project, Tags 03D3, 03D7, 03SA and 09ZE
 -/
 
 @[expose] public section

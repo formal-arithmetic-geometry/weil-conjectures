@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Whole-scheme affine tensor sections
 
-Source: Stacks Project, Tags 01I9 and 01IA. -/
+## References
+
+* Stacks Project, Tags 01I9 and 01IA
+-/
 
 @[expose] public section
 universe u

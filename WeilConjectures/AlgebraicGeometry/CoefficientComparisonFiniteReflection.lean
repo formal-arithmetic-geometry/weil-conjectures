@@ -11,7 +11,10 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
 
 /-! # Reflection of finite local systems on the coefficient-sized models
-Source: Stacks Project, Tags 099Y, 099R and 03CY.
+
+## References
+
+* Stacks Project, Tags 099Y, 099R and 03CY
 -/
 
 @[expose] public noncomputable section

@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 /-! # Finite-stage vanishing when one stage is affine
 
-Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

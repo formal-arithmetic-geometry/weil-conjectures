@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # The comparison counit on a constant etale chart
 
-Source: Stacks Project, Tags 099R, 099T and 099Y, comparison and localization.
+## References
+
+* Stacks Project, Tags 099R, 099T and 099Y
 -/
 
 @[expose] public section

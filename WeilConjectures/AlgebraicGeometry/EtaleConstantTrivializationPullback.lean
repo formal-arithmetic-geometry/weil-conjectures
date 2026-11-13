@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetConstantTransportGenerators
 
 /-! # Extending a constant trivialization by inverse image
 
-Source: Stacks Project, Tags 03CB, 03CC, and 0A3H, final proof paragraph.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 0A3H
 -/
 
 @[expose] public section

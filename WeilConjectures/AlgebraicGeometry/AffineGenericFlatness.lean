@@ -13,7 +13,9 @@ import WeilConjectures.RingTheory.GenericFlatness
 
 /-! # Generic flatness on an affine source chart
 
-Source: Stacks Project, Tags 051T and 052A.
+## References
+
+* Stacks Project, Tags 051T and 052A
 -/
 
 @[expose] public section

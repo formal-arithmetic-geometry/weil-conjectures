@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Eventual equality for a single inverse-image unit
 
-Source: Stacks Project, Sites Tag 0A35 and Etale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 0A35 and 09YQ
 -/
 
 @[expose] public section

@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 
 /-! # An intermediate step in continuity of étale sections
-Source: Stacks Project, Tag 09YQ. -/
+
+## References
+
+* Stacks Project, Tag 09YQ
+-/
 
 @[expose] public section
 

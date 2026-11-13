@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-! # Global sections of the inverse image at a geometric point
 
-Source: Stacks Project, Tag 03Q1 (3), combined with Tag 03P5.
+## References
+
+* Stacks Project, Tags 03Q1 and 03P5
 -/
 
 @[expose] public section

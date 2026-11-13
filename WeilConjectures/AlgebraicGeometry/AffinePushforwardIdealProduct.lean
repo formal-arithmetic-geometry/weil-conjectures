@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-!
 # Affine pushforward and ideal-module products
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YP.
+## References
+
+* Stacks Project, Tag 01YP
 -/
 
 @[expose] public section

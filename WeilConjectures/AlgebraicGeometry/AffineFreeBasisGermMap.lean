@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineRegularStalkScalar
 
 /-! # Matrix action on the explicit affine basis germs
 
-Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
+## References
+
+* Stacks Project, Tags 01HV, 01IB, 01C6 and 0098
 -/
 
 @[expose] public section

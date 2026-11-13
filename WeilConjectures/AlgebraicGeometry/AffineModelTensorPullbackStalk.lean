@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModelStalkTensorTransport
 
 /-! # Natural stalk comparison for the pullback of an affine tilde model
 
-Source: Stacks Project, Tags 008H, 0098, 008B and 01BH. -/
+## References
+
+* Stacks Project, Tags 008H, 0098, 008B and 01BH
+-/
 
 @[expose] public section
 

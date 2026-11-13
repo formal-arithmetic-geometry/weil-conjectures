@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones
 
-Source: Stacks Project, Tag 08EK (Lemma 36.13.10), proof, cone construction.
+## References
+
+* Stacks Project, Tag 08EK
 -/
 
 @[expose] public section

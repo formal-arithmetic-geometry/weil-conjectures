@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 import WeilConjectures.AlgebraicGeometry.DescendedQCNeighborhoodCore
 /-!
 # Finite type descent of compact opens
-Source: Stacks Project, Varieties, Lemma Tag 0388.
+
+## References
+
+* Stacks Project, Tag 0388
 -/
 @[expose] public section
 universe u

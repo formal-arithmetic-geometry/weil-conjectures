@@ -19,8 +19,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 /-!
 # Abelian etale sheaves on a finite coproduct
 
-Source: Stacks Project, Etale Cohomology, proof of Lemma 0A5B, first paragraph,
-finite disjoint-union reduction.
+## References
+
+* Stacks Project, Tag 0A5B
 -/
 
 @[expose] public section

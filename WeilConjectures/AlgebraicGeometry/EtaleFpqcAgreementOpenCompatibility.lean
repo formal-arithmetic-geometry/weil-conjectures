@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenArbitraryCriterio
 import WeilConjectures.AlgebraicGeometry.EtaleFpqcAgreementSectionsOverlap
 
 /-! # Compatibility of agreement opens for a matching family
-Source: Stacks Project, Tag 09XN, agreement-open paragraph. -/
+
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

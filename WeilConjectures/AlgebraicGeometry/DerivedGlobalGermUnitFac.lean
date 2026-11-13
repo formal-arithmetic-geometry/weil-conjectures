@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # DerivedGlobalGermUnitFac
 
-Source: Stacks Project, Tags 095T, 01F8 and 08J6.
+## References
+
+* Stacks Project, Tags 095T, 01F8 and 08J6
 -/
 
 @[expose] public section

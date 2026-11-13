@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
 /-!
 # Naturality of the open tensor-section comparison
 
-Source: Stacks Project, Descent, Tags 03DR and
-03DU, item 4. Normalized pullback composition and adjunction-unit naturality give
-compatibility with every triangle over the open subscheme.
+## References
+
+* Stacks Project, Tags 03DR and 03DU
 -/
 
 @[expose] public section

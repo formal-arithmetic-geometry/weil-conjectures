@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of constant-module direct-image germs
 
-Source: Stacks Project, Tag 09Z1, degree zero.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

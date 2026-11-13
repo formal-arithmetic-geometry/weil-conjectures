@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffineTopTensorSections
 
 /-! # Normalized affine pullback models with an isomorphic starting chart
 
-Source: Stacks Project, Tag 01I6, Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5.
+## References
+
+* Stacks Project, Tag 01I6
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Explicit increasing-tuple complexes of module sheaves
 
-Source: Stacks Project, Tag 01FM, alternating face maps.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

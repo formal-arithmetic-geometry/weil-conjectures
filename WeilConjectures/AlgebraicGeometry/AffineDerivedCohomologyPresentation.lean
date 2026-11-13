@@ -13,7 +13,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-! # Natural module presentations of affine derived cohomology
 
-Source: Stacks Project, Tags 06Z0 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Z0 and 0DJ8
 -/
 
 @[expose] public section

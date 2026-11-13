@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCom
 
 /-! # Pullback of free abelian representable sheaves
 
-Source: Stacks Project, Tags 03CB and 03Q8, inverse-image and evaluation adjunctions.
+## References
+
+* Stacks Project, Tags 03CB and 03Q8
 -/
 
 @[expose] public section

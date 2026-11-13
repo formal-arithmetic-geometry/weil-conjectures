@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-! # Affine restriction of a universally homeomorphic preparation
 
-Source: Stacks Project, Tag 0559, second proof, generic-flat shrinking;
-Tag 01IT for the affine-open basis.
+## References
+
+* Stacks Project, Tags 0559 and 01IT
 -/
 
 @[expose] public section

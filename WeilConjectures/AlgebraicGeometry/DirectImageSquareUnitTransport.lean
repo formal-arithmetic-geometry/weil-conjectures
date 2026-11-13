@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Equality transport of the ordinary direct-image square
-Source: Stacks Project, Tags 08HY and 0D5T.
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5T
 -/
 
 @[expose] public section

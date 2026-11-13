@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Generator.Basic
 /-!
 # Grothendieck abelianness of constant-coefficient etale module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03DA, 03DB, 03DI and 03EW;
-Topologies, Tags 021A, 021B and 04HR.
+## References
+
+* Stacks Project, Tags 03DA, 03DB, 03DI, 03EW, 021A, 021B and 04HR
 -/
 
 @[expose] public section

@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedRestrictionTensorNaturality
 import WeilConjectures.AlgebraicGeometry.DerivedRestrictionEvaluationMateIsIso
 
 /-! # Coherent derived tensor and Hom restriction
-Source: Stacks Project, Tags 08DJ, 08DL and 079U.
+
+## References
+
+* Stacks Project, Tags 08DJ, 08DL and 079U
 -/
 
 @[expose] public section

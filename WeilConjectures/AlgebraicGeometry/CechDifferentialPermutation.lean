@@ -14,7 +14,9 @@ import WeilConjectures.Combinatorics.SignedFacePermutation
 /-!
 # Permutation compatibility of the Čech differential
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FG.
+## References
+
+* Stacks Project, Tag 01FG
 -/
 
 @[expose] public section

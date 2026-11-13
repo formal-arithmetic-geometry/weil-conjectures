@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Closed subsets proper over a base: structures, subsets, and images
 
-Source: Stacks Project, Cohomology of Schemes, Lemmas 0CYL, 0CYN, and 0CYQ.
+## References
+
+* Stacks Project, Tags 0CYL, 0CYN and 0CYQ
 -/
 
 @[expose] public section

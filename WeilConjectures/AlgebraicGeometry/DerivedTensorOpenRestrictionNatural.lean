@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Natural tensor comparison for derived open restriction
 
-Source: Stacks Project, Tag 06YH (derived tensor construction) and Tag 08EU (locality).
+## References
+
+* Stacks Project, Tags 06YH and 08EU
 -/
 
 @[expose] public section

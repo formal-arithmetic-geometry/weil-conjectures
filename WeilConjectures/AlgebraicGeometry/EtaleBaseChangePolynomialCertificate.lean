@@ -15,7 +15,9 @@ import WeilConjectures.RingTheory.ConormalPolynomialInverse
 
 /-! # A uniform polynomial certificate for etaleness of a base-changed presentation
 
-Source: Stacks Project, Algebra, proof of Tag 07RI, presentation and inverse differential.
+## References
+
+* Stacks Project, Tag 07RI
 -/
 
 @[expose] public section

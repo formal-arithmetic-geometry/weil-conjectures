@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # A normalized closed structure ideal-product comparison
 
-Source: Stacks Project, Tag 01QY, affine quotient calculation.
+## References
+
+* Stacks Project, Tag 01QY
 -/
 
 @[expose] public section

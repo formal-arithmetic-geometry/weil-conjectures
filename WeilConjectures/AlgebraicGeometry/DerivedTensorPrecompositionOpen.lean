@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # A tensor precomposition map invertible over a pulled-back open
 
-Source: Stacks Project, Tags 08DW, 08DX and 0E4G, Lemma 48.4.4.
+## References
+
+* Stacks Project, Tags 08DW, 08DX and 0E4G
 -/
 
 @[expose] public section

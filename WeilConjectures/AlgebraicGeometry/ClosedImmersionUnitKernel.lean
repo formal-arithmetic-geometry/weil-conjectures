@@ -19,8 +19,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Kernel of the closed immersion pullback unit
 
-Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (1), and Modules,
-Lemma 08KS.
+## References
+
+* Stacks Project, Tags 04CJ and 08KS
 -/
 
 @[expose] public section

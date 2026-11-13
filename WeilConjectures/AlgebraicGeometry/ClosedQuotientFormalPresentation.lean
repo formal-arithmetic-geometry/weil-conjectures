@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Presentation of a formal module on its closed quotient
 
-Source: Stacks Project, Theorem 088E, first reduction to a closed subscheme.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

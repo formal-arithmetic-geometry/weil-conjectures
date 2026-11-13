@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonNaturality
 import WeilConjectures.AlgebraicGeometry.EtalePairRestrictionDetection
 
 /-! # One overlap equation remains effective at later stages
-Source: Stacks Project, Tags 03Q4 and 09YQ, finite overlap reduction. -/
+
+## References
+
+* Stacks Project, Tags 03Q4 and 09YQ
+-/
 
 @[expose] public section
 

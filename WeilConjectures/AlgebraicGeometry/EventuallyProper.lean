@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
 /-!
 # Properness descends to a finite stage
 
-Source: Stacks Project, Limits, Lemma 081F in Situation 081D.
+## References
+
+* Stacks Project, Tags 081F and 081D
 -/
 
 @[expose] public section

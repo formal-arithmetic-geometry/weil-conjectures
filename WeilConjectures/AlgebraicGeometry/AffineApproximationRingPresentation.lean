@@ -12,7 +12,9 @@ public import Mathlib.RingTheory.FiniteType
 
 /-! # Ring presentation of affine approximation stages
 
-Source: Stacks Project, Tags 0GS2 and 0A0P.
+## References
+
+* Stacks Project, Tags 0GS2 and 0A0P
 -/
 
 @[expose] public section

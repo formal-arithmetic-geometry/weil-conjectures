@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartDirectedRingModel
 /-!
 # Descent on one affine chart of an inverse system
 
-Source: Stacks Project, Limits, Tag 07RP, affine reduction, and Algebra, Tag 07RI.
+## References
+
+* Stacks Project, Tags 07RP and 07RI
 -/
 
 @[expose] public section

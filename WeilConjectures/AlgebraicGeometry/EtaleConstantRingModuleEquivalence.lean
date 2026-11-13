@@ -14,8 +14,9 @@ public import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Extending constant coefficients to the constant ring sheaf
 
-Source: Stacks Project, Modules on Sites, Sections 093I and 03CV;
-Sites Example 0H7J.
+## References
+
+* Stacks Project, Tags 093I, 03CV and 0H7J
 -/
 
 @[expose] public noncomputable section

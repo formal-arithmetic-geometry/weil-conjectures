@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # Local models given by a specified geometric stalk on a connected component
 
-Source: Stacks Project, Etale Cohomology, Tag 09BI, and Pro-etale Cohomology, Tag 09C6.
+## References
+
+* Stacks Project, Tags 09BI and 09C6
 -/
 
 @[expose] public noncomputable section

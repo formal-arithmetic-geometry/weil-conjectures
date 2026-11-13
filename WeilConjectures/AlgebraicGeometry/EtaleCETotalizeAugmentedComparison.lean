@@ -11,7 +11,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Totalizing an augmented CE comparison
 
-Source: Stacks Project, Derived Categories, Tags 015J and 015K.
+## References
+
+* Stacks Project, Tags 015J and 015K
 -/
 
 @[expose] public section

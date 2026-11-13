@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.RingTheory.Etale.Field
 /-!
 # Etale coproducts of spectra of finite separable field extensions
 
-Source: Stacks Project, Morphisms, Lemma 02GL.
+## References
+
+* Stacks Project, Tag 02GL
 -/
 
 @[expose] public section

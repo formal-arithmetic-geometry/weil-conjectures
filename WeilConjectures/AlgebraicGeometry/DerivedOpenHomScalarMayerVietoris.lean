@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 
 /-! # Scalar compatible Mayer--Vietoris on an open union
 
-Source: Stacks Project, Tag 08BW, used in Tag 08EJ.
+## References
+
+* Stacks Project, Tags 08BW and 08EJ
 -/
 
 @[expose] public section

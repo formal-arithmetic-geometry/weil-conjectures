@@ -16,7 +16,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Sheafification on affine opens of a localizing module presheaf
 
-Source: Stacks Project, Tags 01HV and 009Q, applied to the principal-open basis.
+## References
+
+* Stacks Project, Tags 01HV and 009Q
 -/
 
 @[expose] public section

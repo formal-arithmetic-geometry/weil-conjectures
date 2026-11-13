@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 
 /-! # A finite affine cover from an ample invertible module
 
-Source: Stacks Project, Properties, Definition 01PS and the first paragraph of
-Lemma 01Q1's proof.
+## References
+
+* Stacks Project, Tags 01PS and 01Q1
 -/
 
 @[expose] public section

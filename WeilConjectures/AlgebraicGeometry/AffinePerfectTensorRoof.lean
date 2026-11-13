@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.TensorRoofTransposition
 
 /-! # Koszul tensor roof lifting an affine open morphism
 
-Source: Stacks Project, Tag 08EH, construction of the two maps in Lemma 36.13.7.
+## References
+
+* Stacks Project, Tag 08EH
 -/
 
 @[expose] public section

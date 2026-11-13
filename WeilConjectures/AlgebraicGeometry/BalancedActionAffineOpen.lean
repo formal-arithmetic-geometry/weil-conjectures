@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSectionsInduction
 
 /-! # A balanced action on one affine open
 
-Source: Stacks Project, Tags 01LX (2)-(3), 01SB and 0897.
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section

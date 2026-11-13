@@ -16,7 +16,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Eventual lifting of morphisms from finite affine etale free sheaves
 
-Source: Stacks Project, Tags 09YU (3), 09YQ and 03S6.
+## References
+
+* Stacks Project, Tags 09YU, 09YQ and 03S6
 -/
 
 @[expose] public section

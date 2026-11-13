@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectStalkDerivedIsoSpread
 
 /-! # Spreading a prescribed bounded free stalk model
 
-Source: Stacks Project, Tag 0BCD, spreading paragraph, with Tags 0BC7 and 09RE.
+## References
+
+* Stacks Project, Tags 0BCD, 0BC7 and 09RE
 -/
 
 @[expose] public section

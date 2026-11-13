@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 
 /-! # Tensor flatness on a specified affine cover
 
-Source: Stacks Project, Morphisms, Tag 01U4; Algebra, Tag 00HT;
-Limits, Tag 05LY, affine-local reduction.
+## References
+
+* Stacks Project, Tags 01U4, 00HT and 05LY
 -/
 
 @[expose] public section

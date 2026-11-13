@@ -15,7 +15,9 @@ import WeilConjectures.Topology.FiniteTypeSurjectiveNearStalk
 /-!
 # Local isomorphism criterion for coherent modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01Y3.
+## References
+
+* Stacks Project, Tag 01Y3
 -/
 
 @[expose] public section

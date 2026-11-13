@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Data of an abelian complex cohomology presentation
 
-Source: Stacks Project, Tag 0EZM.
+## References
+
+* Stacks Project, Tag 0EZM
 -/
 
 @[expose] public section

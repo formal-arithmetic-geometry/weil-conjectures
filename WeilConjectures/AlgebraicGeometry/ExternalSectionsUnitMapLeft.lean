@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ExternalOpenFactorUnitsLeft
 
 /-! # The first-factor external section map from pullback units
 
-Source: Stacks Project, Tags 0096, 01F7 and 0BED.
+## References
+
+* Stacks Project, Tags 0096, 01F7 and 0BED
 -/
 
 @[expose] public section

@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFpqcRepresentativeOpen
 
 /-! # Étale local existence for compatible fpqc section data
 
-Source: Stacks Project, Tag 09XN, agreement opens and local representatives. -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

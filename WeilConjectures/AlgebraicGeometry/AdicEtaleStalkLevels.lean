@@ -13,7 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.NilpotentCoefficientLissity
 
 /-! # Algebraic levels of a normalized etale quotient system
 
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section

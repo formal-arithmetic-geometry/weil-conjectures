@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # The identity-generator comparison on sheaf morphisms
 
-Source: Stacks Project, Cohomology on Sites, Tag 03F3.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section

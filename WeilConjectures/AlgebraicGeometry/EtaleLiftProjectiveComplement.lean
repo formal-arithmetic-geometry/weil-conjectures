@@ -19,7 +19,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-! # Lifting a projective complement over an étale neighbourhood
 
-Source: Stacks Project, More on Algebra, Tags 07M5 and 07M7.
+## References
+
+* Stacks Project, Tags 07M5 and 07M7
 -/
 
 @[expose] public section

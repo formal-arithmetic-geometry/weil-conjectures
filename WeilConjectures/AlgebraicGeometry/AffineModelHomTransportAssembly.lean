@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.HomCongr
 
 /-! # Hom transport from coherent affine object comparisons
-Source: Stacks Project, Tags 06Z0 and 09RE. -/
+
+## References
+
+* Stacks Project, Tags 06Z0 and 09RE
+-/
 
 @[expose] public section
 universe u w

@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 
 /-! # Finite-stage vanishing for one fixed sheaf in degree zero
 
-Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN.
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN
 -/
 
 @[expose] public section

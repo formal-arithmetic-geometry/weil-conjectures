@@ -13,7 +13,10 @@ public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorCofaces
 
 /-! # Singleton affine tensor-section Čech complexes
-Source: Stacks Project, Tag 03P2, affine tensor-product calculation.
+
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

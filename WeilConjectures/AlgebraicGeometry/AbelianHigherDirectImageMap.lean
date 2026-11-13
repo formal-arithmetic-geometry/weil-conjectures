@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 /-!
 # Transition maps of higher direct images of abelian sheaves
 
-Source: Stacks Project, Lemma 59.51.7, Tag 09Z1, canonical comparison.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 
 /-! # The canonical closed-immersion comparison for units is bijective
 
-Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY.
+## References
+
+* Stacks Project, Tags 02UV and 09NY
 -/
 
 @[expose] public section

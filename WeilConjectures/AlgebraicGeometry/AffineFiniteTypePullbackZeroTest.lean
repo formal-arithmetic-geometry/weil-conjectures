@@ -15,8 +15,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # A finite test for vanishing after pullback from an affine open
 
-Source: Stacks Project, Properties, Tag 01PB; Schemes, Tags 01I9 and 01IA;
-Sheaves, Tag 0097.
+## References
+
+* Stacks Project, Tags 01PB, 01I9, 01IA and 0097
 -/
 
 @[expose] public section

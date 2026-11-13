@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Surjectivity descends to a finite stage of an inverse limit
 
-Source: Stacks Project, Limits, Lemma 07RR in Situation 081D.
+## References
+
+* Stacks Project, Tags 07RR and 081D
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 /-!
 # Pullback and restriction between two opens
 
-Source: Stacks Project, Tag 01F7; the restriction comparison in the proof of Tag 0A50.
+## References
+
+* Stacks Project, Tags 01F7 and 0A50
 -/
 
 @[expose] public section

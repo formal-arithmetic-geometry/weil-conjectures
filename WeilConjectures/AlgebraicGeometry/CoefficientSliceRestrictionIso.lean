@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-! # Invariance of the coefficient slice model under internal restriction isomorphisms
 
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-More on Morphisms, Tags 094T and 0951; Sites, Section 00XZ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV, 094T, 0951 and 00XZ
 -/
 
 @[expose] public section

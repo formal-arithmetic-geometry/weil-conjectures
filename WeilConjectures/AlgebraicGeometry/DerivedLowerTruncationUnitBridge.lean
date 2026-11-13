@@ -17,8 +17,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # The bottom derived unit on a lower-truncated complex
 
-Source: Stacks Project, Tag 05TC (2) and the single-object calculation of
-Tags 015A, 05TH and 05TI.
+## References
+
+* Stacks Project, Tags 05TC, 015A, 05TH and 05TI
 -/
 
 @[expose] public section

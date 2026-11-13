@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.EtalePairwiseProductGraphNormali
 
 /-! # The products in the graph interchange grid
 
-Source: Stacks Project, Tag 0F7J, product-graph extension of the A--F diagram.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

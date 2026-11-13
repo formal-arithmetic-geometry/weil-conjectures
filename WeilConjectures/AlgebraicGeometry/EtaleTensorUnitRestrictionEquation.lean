@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-! # The normalized restriction equation for the structure module
 
-Source: Stacks Project, Tags 0096, 01CA and 03DR, equation (35.8.1).
+## References
+
+* Stacks Project, Tags 0096, 01CA and 03DR
 -/
 
 @[expose] public section

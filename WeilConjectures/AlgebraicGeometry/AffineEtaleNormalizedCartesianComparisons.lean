@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 /-!
 # Normalized comparison isomorphisms of cartesian affine étale functors
 
-Source: Stacks Project, Étale Cohomology 0EYL, including its coherence discussion.
+## References
+
+* Stacks Project, Tag 0EYL
 -/
 
 @[expose] public section

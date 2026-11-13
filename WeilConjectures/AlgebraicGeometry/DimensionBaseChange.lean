@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
 /-!
 # Dimension under field extension and base change
 
-Source: Stacks Project, Tag 00P3.
+## References
+
+* Stacks Project, Tag 00P3
 -/
 
 @[expose] public section

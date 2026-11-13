@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonFamilyBase
 import WeilConjectures.AlgebraicGeometry.AffineCoordinateComparisonChartCocycle
 
 /-! # Composition of affine-coordinate comparisons
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u w

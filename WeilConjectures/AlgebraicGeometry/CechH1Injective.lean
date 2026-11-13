@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.Refinements
 
 /-! # Injectivity of the first Čech cohomology map
 
-Source: Stacks Project, Cohomology, Lemma 0B8R.
+## References
+
+* Stacks Project, Tag 0B8R
 -/
 
 @[expose] public section

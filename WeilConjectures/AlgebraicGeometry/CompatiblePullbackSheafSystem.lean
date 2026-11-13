@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Compatible pullbacks of a fixed sheaf
 
-Source: Stacks Project, Sites, Tag 03CB, and Etale Cohomology, Tag 09YQ.
+## References
+
+* Stacks Project, Tags 03CB and 09YQ
 -/
 
 @[expose] public section

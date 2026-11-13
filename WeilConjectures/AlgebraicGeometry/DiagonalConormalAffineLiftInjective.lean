@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Injectivity of the affine diagonal conormal lift
 
-Source: Stacks Project, Tag 08S2, affine calculation; Tags 01KJ, 01R3 and 00RW.
+## References
+
+* Stacks Project, Tags 08S2, 01KJ, 01R3 and 00RW
 -/
 
 @[expose] public section

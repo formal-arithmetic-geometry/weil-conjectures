@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSortingOperators
 /-!
 # Prefix contributions in the first sorting homotopy
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

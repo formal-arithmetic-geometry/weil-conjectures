@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-!
 # Derived direct image commutes with restriction to an open
 
-Source: Stacks Project, Cohomology, Lemma 20.32.4, Tag 08FE.
+## References
+
+* Stacks Project, Tag 08FE
 -/
 
 @[expose] public section

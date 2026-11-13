@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Constructible failure locus of a map of constructible module sheaves
 
-Source: Stacks Project, Tag 095N, the subsets T_{I'} in its proof.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section

@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Constructing a section-ring morphism with the fraction formula
 
-Source: Stacks Project, Properties, Tag 01PZ, and Constructions, Tag 01N8.
+## References
+
+* Stacks Project, Tags 01PZ and 01N8
 -/
 
 @[expose] public section

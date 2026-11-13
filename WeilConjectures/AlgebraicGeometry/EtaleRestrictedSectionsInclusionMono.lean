@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedTotalConstruction
 
 /-! # Degreewise monicity of restricted sections
 
-Source: Stacks Project, Tag 015J, total-complex comparison.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

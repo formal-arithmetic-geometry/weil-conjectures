@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.FpqcDescendingTypesMorphisms
 import WeilConjectures.AlgebraicGeometry.AffineFlatDescent
 
 /-! Effective fpqc descent of affine morphisms.
-Source: Stacks Project, Descent, Lemma 35.37.1 (Tag 0245).
+
+## References
+
+* Stacks Project, Tag 0245
 -/
 
 @[expose] public section

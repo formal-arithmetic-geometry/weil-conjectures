@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 /-!
 # Continuity of sections of étale sheaves of sets
 
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero argument via Tags 0EYL,
-04HR and 09YN; restriction along an étale morphism, Tag 03S2.
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 04HR, 09YN and 03S2
 -/
 
 @[expose] public section

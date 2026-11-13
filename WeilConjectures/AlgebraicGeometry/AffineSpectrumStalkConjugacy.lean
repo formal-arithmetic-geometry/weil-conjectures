@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumComparisonSourceTransport
 
 /-! # Pointwise conjugacy for termwise affine spectrum representatives
 
-Source: Stacks Project, Tag 0DJ8, equation-bc and affine reduction;
-Tag 0098, stalks of pullback, and Tag 0D5S, pullback composition.
+## References
+
+* Stacks Project, Tags 0DJ8, 0098 and 0D5S
 -/
 
 @[expose] public section

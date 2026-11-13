@@ -20,7 +20,9 @@ The stalk of the étale sheaf `𝔾ₘ` on `Spec K` at the Galois point
 group of units of `Ks`: a germ of a unit is sent to its value at the geometric point. This
 identification is equivariant for the natural actions of `Gal(Ks/K)`.
 
-Source: Stacks Project, Example 03QV (2), and Tag 03QU.
+## References
+
+* Stacks Project, Tags 03QV and 03QU
 -/
 
 @[expose] public section

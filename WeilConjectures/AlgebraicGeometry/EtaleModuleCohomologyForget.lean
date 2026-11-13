@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 /-!
 # Module cohomology and underlying abelian cohomology
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD, applied to a constant ring.
+## References
+
+* Stacks Project, Tag 03FD
 -/
 
 @[expose] public section

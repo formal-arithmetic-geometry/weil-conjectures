@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisSectionsResolutionHomologyEp
 
 /-! # Unbounded section comparison from affine-basis acyclicity
 
-Source: Stacks Project, Tag 08C2, singleton-cover case on an affine open.
+## References
+
+* Stacks Project, Tag 08C2
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finiteness from formal quotients and a bounded torsion kernel
 
-Source: Stacks Project, Tag 0889(1), finiteness paragraph, and Tag 05EU.
+## References
+
+* Stacks Project, Tags 0889 and 05EU
 -/
 
 @[expose] public section

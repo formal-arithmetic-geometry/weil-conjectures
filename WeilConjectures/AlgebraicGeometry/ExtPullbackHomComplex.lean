@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-! # Pullback on the Hom complexes of constant sheaves
 
-Source: Stacks Project, Tag 06XR and Tag 01F8, equations 01F9 and 01FA.
+## References
+
+* Stacks Project, Tags 06XR, 01F8, 01F9 and 01FA
 -/
 
 @[expose] public section

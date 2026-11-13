@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Affine formal gluing comparison
 
-Source: Stacks Project, Tags 087W, 0888 and 0889(1).
+## References
+
+* Stacks Project, Tags 087W, 0888 and 0889
 -/
 
 @[expose] public section

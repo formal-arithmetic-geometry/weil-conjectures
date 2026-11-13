@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.ConstantScalarAlgebraicPullback
 
 /-! # Ordinary flat sheaves under coefficient-sized inverse image
 
-Source: Stacks Project, Tag 05VD.
+## References
+
+* Stacks Project, Tag 05VD
 -/
 
 @[expose] public section

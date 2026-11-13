@@ -11,8 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 
 /-! # Propagation of matching global sections to an arbitrary cone
-Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 09XN, 03CB and 03CC
+-/
 
 @[expose] public section
 

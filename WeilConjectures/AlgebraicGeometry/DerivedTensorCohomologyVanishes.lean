@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.Single
 
 /-! # Vanishing of derived tensor cohomology on a scheme
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU;
-Derived Categories of Schemes, Tag 08EA.
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 08EA
 -/
 
 @[expose] public section

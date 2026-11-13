@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 /-!
 # Constructibility of torsion sheaves with integral coefficients
 
-Source: Stacks Project, Tags 03RW and 095E; the comparison of (2) and (3)
-for torsion sheaves and the canonical integral module structure.
+## References
+
+* Stacks Project, Tags 03RW and 095E
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # Successive quotient vanishing
 
-Source: Stacks Project, Tags 0G1T and 09C6.
+## References
+
+* Stacks Project, Tags 0G1T and 09C6
 -/
 
 @[expose] public noncomputable section

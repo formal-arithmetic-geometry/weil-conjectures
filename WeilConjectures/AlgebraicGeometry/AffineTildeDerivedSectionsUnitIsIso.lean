@@ -26,7 +26,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Derived sections comparison on complexes of associated sheaves
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

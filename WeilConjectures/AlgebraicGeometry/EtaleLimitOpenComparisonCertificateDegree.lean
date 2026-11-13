@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitTailOpenCoefficients
 
 /-! # Geometric certificate for the canonical open comparison
 
-Source: Stacks Project, Tag 09YQ, restriction of coherent systems.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

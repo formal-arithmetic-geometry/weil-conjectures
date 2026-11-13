@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenExistence
 
 /-! # The open locus where two étale sheaf sections agree
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.1 (Tag 09XM), applied over an
-étale object of the base scheme.
+## References
+
+* Stacks Project, Tag 09XM
 -/
 
 @[expose] public section

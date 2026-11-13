@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-!
 # Affine derived direct image preserves and reflects standard cohomological bounds
 
-Source: Stacks Project, Derived Categories of Schemes, Tags 0AVW and 08I8.
+## References
+
+* Stacks Project, Tags 0AVW and 08I8
 -/
 
 @[expose] public section

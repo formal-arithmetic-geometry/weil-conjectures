@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorPureImage
 
 /-! # Pure sections in the normalized comparison range
 
-Source: Stacks Project, Tag 03P2, affine tensor calculation. -/
+## References
+
+* Stacks Project, Tag 03P2
+-/
 
 @[expose] public section
 

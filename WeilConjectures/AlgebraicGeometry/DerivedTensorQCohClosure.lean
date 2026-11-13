@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Quasi-coherent closure for the canonical derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 08DX.
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section

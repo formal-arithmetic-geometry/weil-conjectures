@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite ideal generators cover the stalk-surjectivity locus on an affine
 
-Source: Stacks Project, Properties, Lemma 01PM, proof; Schemes, Lemma 01IN.
+## References
+
+* Stacks Project, Tags 01PM and 01IN
 -/
 
 @[expose] public section

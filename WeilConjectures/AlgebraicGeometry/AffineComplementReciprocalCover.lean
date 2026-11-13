@@ -15,7 +15,9 @@ import WeilConjectures.RingTheory.JacobsonDenominatorFunctionField
 
 /-! # Reciprocal functions on a two-open cover
 
-Source: Stacks Project, Varieties Lemma 09NB, first paragraph and open-cover construction.
+## References
+
+* Stacks Project, Tag 09NB
 -/
 
 @[expose] public section

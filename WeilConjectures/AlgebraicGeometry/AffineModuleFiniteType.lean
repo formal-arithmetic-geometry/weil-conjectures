@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Finite type under the affine module correspondence
 
-Source: Stacks Project, Cohomology of Schemes, Tag 0897, proof; Morphisms, Tag 01SB;
-Properties, Tag 01PB.
+## References
+
+* Stacks Project, Tags 0897, 01SB and 01PB
 -/
 
 @[expose] public section

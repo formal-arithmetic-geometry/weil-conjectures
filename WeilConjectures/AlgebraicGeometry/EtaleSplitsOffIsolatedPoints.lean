@@ -17,7 +17,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Splitting off isolated fibre points in an elementary étale neighbourhood
 
-Source: Stacks Project, More on Morphisms, Lemma 37.41.4, Tag 02LN.
+## References
+
+* Stacks Project, Tag 02LN
 -/
 
 @[expose] public section

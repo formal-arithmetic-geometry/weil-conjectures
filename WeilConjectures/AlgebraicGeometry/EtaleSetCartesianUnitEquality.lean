@@ -11,7 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Equality of unit sections on a cartesian étale object
-Source: Stacks Project, Tags 03S2, 00XZ, 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 03S2, 00XZ, 03CB and 03CC
+-/
 
 @[expose] public section
 

@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Derived stalk of a supplied constant etale chart
 
-Source: Stacks Project, Tags 03PT, 04EQ and 094G.
+## References
+
+* Stacks Project, Tags 03PT, 04EQ and 094G
 -/
 
 @[expose] public noncomputable section

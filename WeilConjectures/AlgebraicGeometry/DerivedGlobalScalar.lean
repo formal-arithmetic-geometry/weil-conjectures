@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-! # Global functions acting on derived morphisms
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EJ.
+## References
+
+* Stacks Project, Tag 08EJ
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # Derived tensor and exact restriction
 
-Source: Stacks Project, Tag 08DX, proof of (1).
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechFirstSortingNonjunctionC
 /-!
 # The uncancelled junction terms in the first Čech sorting homotopy
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

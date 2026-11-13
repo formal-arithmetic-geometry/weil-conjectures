@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CohomologySectionDivision
 
 /-! # Comparison squares on cohomology fractions
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
+## References
+
+* Stacks Project, Tag 09MR
 -/
 
 @[expose] public section

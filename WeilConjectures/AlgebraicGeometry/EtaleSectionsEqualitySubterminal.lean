@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 
 /-! # The subterminal sheaf of agreement of two étale sections
 
-Source: Stacks Project, Étale Cohomology, Tag 09XM, first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 09XM
 -/
 
 @[expose] public section

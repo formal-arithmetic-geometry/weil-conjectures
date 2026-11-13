@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafSingletonContractio
 
 /-! # Signed insertion identities on the local alternating complex
 
-Source: Stacks Project, Tag 02FU, the insertion cancellation computation;
-Tag 01FM for the ordered alternating convention.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section

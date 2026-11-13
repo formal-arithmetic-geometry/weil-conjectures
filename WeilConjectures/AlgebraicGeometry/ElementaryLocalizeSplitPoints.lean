@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementar
 /-!
 # Elementary localization of already split fibre points
 
-Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, lines 12083--12089.
+## References
+
+* Stacks Project, Tag 02LM
 -/
 
 @[expose] public section

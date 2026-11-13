@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlgebraLocalMaps
 
 /-! # Including a limit of affine schemes in all schemes over the base
 
-Source: Stacks Project, Limits, Lemmas 01YX and 01YW, the local universal-property
-argument in the relative-spectrum construction.
+## References
+
+* Stacks Project, Tags 01YX and 01YW
 -/
 
 @[expose] public section

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 /-! # Existence of the derived-to-ordinary module pullback comparison
 
-Source: Stacks Project, Cohomology, Remark 08HY.
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section

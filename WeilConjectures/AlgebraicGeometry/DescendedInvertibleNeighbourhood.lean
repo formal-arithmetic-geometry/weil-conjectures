@@ -15,8 +15,9 @@ import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Local triviality of a descended invertible module
 
-Source: Stacks Project, Tag 0BF2, proof paragraph beginning with shrinking the base;
-Tag 0BF0, field rank calculation.
+## References
+
+* Stacks Project, Tags 0BF2 and 0BF0
 -/
 
 @[expose] public section

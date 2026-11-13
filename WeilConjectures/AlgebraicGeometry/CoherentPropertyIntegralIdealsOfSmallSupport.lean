@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentIdealPatchingExactSequence
 /-!
 # The integral-support induction step for coherent devissage
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL.
+## References
+
+* Stacks Project, Tag 01YL
 -/
 
 @[expose] public section

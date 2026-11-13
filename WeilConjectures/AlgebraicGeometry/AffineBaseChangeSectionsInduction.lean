@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Generation of affine base-change sections
 
-Source: Stacks Project, Tag 01LX (2)-(3), affine pullback calculation.
+## References
+
+* Stacks Project, Tag 01LX
 -/
 
 @[expose] public section

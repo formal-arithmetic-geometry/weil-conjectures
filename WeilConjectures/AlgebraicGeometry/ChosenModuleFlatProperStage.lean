@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual flatness and proper support of a chosen finite-stage module
 
-Source: Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097.
+## References
+
+* Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097
 -/
 
 @[expose] public section

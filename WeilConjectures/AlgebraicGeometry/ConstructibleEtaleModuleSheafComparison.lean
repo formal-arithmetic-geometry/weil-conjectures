@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 /-!
 # Comparing constructibility of etale module sheaves
 
-Source: Stacks Project, Tags 095E (3), 03RU and 09XZ.
+## References
+
+* Stacks Project, Tags 095E, 03RU and 09XZ
 -/
 
 @[expose] public section

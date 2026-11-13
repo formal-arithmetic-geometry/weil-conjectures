@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenToOp
 /-!
 # Open-to-open restriction of normalized resolution comparisons
 
-Source: Stacks Project, Tags 03F3 (2) and 0A50, expanded on Hom cocycles.
+## References
+
+* Stacks Project, Tags 03F3 and 0A50
 -/
 
 @[expose] public section

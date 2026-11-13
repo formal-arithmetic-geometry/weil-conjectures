@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Canonical derived tensor/internal-Hom bijections
-Source: Stacks Project, cohomology.tex, Tag 08DJ.
+
+## References
+
+* Stacks Project, Tag 08DJ
 -/
 
 @[expose] public section

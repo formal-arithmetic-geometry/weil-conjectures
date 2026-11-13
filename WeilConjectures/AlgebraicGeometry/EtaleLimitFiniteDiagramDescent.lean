@@ -13,7 +13,10 @@ import Mathlib.Data.Fintype.Order
 
 /-! # Descent of a finite qcqs étale diagram
 
-Source: Stacks Project, Limits, Tags 01ZM and 07RP. -/
+## References
+
+* Stacks Project, Tags 01ZM and 07RP
+-/
 
 @[expose] public section
 universe u

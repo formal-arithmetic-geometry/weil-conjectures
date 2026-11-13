@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomEvaluationPostcomposi
 
 /-! # Naturality of localized tensor-Hom evaluation
 
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96.
+## References
+
+* Stacks Project, Tags 08DJ, 0A90 and 0A96
 -/
 
 @[expose] public section

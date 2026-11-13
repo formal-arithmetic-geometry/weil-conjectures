@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleActionLaws
 import Mathlib.CategoryTheory.Limits.Types.Products
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2. -/
+## References
+
+* Stacks Project, Tags 03D1 and 03D2
+-/
 
 @[expose] public section
 

@@ -13,7 +13,9 @@ import Mathlib.Data.Fintype.EquivFin
 
 /-! # Local finite-free covers of a cokernel tuple pullback
 
-Source: Stacks Project, Modules, Lemma 01BY, cokernel paragraph.
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section

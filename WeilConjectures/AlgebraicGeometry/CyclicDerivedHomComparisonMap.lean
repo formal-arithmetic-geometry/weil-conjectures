@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 
 /-! # The explicit free-representable cohomology comparison map
-Source: Stacks Project, Tag 03Q8; the free-sheaf adjunction. -/
+
+## References
+
+* Stacks Project, Tag 03Q8
+-/
 
 @[expose] public section
 

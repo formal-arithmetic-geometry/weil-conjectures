@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafDegreeZeroFactoriza
 
 /-! # The singleton signed insertion contraction
 
-Source: Stacks Project, Tags 02FU and 01FM.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section

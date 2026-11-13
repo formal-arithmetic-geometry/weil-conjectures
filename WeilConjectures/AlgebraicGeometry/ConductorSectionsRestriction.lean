@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.IdealTensorImageComparison
 
 /-! # Additive restriction on conductor tensor sections
 
-Source: Stacks Project, Varieties Remark 09NW and Lemma 09NX, displayed conductor equality.
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 @[expose] public section

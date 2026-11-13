@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # Detecting isomorphisms of open direct images on an intersection
 
-Source: Stacks Project, Tags 08FE and 08DG.
+## References
+
+* Stacks Project, Tags 08FE and 08DG
 -/
 
 @[expose] public section

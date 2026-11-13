@@ -14,7 +14,9 @@ import Mathlib.Algebra.FiveLemma
 
 /-! # Kernel detection for a two-open continuity comparison
 
-Source: Stacks Project, Tags 09YQ and 0A50.
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section

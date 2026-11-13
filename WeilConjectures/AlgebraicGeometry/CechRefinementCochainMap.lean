@@ -12,9 +12,9 @@ public import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # Refinement of module Cech complexes along a scheme morphism
 
-Source: Stacks Project, Cohomology, Tag 01FD.
-The component formula fixes the map to pullback of sections followed by restriction;
-it is not an unconstrained map assumed to commute with cohomology comparisons.
+## References
+
+* Stacks Project, Tag 01FD
 -/
 
 @[expose] public section

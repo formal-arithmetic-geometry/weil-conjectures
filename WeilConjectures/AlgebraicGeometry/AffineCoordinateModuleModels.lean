@@ -13,7 +13,11 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Concrete module models for affine coordinates
-Source: Stacks Project, Tags 08DW and 06Y1. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 06Y1
+-/
 
 @[expose] public section
 universe u w

@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Scalar extension at the explicit coefficient-sized geometric stalk
 
-Source: Stacks Project, Tags 03EL, 05V7, 05V8, 07A6 and 015F.
+## References
+
+* Stacks Project, Tags 03EL, 05V7, 05V8, 07A6 and 015F
 -/
 
 @[expose] public noncomputable section

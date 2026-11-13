@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 
 /-! # Vanishing of derived tensor cohomology for two derived objects
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU;
-Derived Categories of Schemes, Tag 09M4, spectral sequence in the proof.
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 09M4
 -/
 
 @[expose] public section

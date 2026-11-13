@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Quasi-coherence and derived restriction
 
-Source: Stacks Project, Tags 08DW and 06Z0; exact restriction to open subschemes.
+## References
+
+* Stacks Project, Tags 08DW and 06Z0
 -/
 
 @[expose] public section

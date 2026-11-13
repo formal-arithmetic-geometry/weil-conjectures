@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesCoimageImageRestri
 
 /-! # Affine-local coimage-image comparison
 
-Source: Stacks Project, Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeSheafStalkRealization
 
 /-! # A bounded free complex on an affine neighbourhood of a stalk
 
-Source: Stacks Project, Tags 0BCD, 0BC7 and 00CR, finite-matrix spreading.
+## References
+
+* Stacks Project, Tags 0BCD, 0BC7 and 00CR
 -/
 
 @[expose] public section

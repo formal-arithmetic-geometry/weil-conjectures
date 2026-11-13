@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ComplexTermCohomologyColimit
 
 /-! # Termwise continuity on the first hypercohomology page
 
-Source: Stacks Project, Tag 0EZM, invoking Tag 09YQ in every complex degree.
+## References
+
+* Stacks Project, Tags 0EZM and 09YQ
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionSquare
 
 /-! # Equal pullbacks of geometric constant sections
 
-Source: Stacks Project, Tag 0A3H, final paragraph.
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Underived models for the open counit computation
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
+## References
+
+* Stacks Project, Tags 08FE and 08BV
 -/
 
 @[expose] public section

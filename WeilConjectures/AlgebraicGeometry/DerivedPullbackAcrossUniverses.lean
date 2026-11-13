@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 
 /-! # Derived pullback between independent localization universes
 
-Source: Stacks Project, Tags 05RU and 0D5S.
+## References
+
+* Stacks Project, Tags 05RU and 0D5S
 -/
 
 @[expose] public section

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
 /-!
 # Degree-zero localization of sections on an affine scheme
 
-Source: Stacks Project, Properties, Lemma 01PW, equation module-invert-s; Cohomology of
-Schemes, Lemma 09MR, affine case.
+## References
+
+* Stacks Project, Tags 01PW and 09MR
 -/
 
 @[expose] public section

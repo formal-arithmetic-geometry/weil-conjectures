@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-! # CoherentFormalModulesCoimageImage
 
-Source: Stacks Project, Lemma 087X.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

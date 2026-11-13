@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
 
 /-! # Affine coefficient generators
 
-Source: Stacks Project, Tags 02KG, 01I9, 01IA and 0097.
+## References
+
+* Stacks Project, Tags 02KG, 01I9, 01IA and 0097
 -/
 
 @[expose] public section

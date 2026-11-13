@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # A proper support bound for tensor with a bounded complex
 
-Source: Stacks Project, Tag 0DJQ, verification of the support hypothesis of 08EV;
-Tags 01AT (support), 09MQ (4) and 03GN (descent along a proper surjection).
+## References
+
+* Stacks Project, Tags 0DJQ, 08EV, 01AT, 09MQ and 03GN
 -/
 
 @[expose] public section

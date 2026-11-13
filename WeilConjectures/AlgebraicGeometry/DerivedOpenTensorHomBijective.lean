@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStalkVanishing
 
 /-! # Tensor stability of derived open test objects
-Source: Stacks Project, Tags 00A7, 08BT and 06YB.
+
+## References
+
+* Stacks Project, Tags 00A7, 08BT and 06YB
 -/
 
 @[expose] public section

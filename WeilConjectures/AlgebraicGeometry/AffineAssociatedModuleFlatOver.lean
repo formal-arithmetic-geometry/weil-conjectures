@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # The affine-section flatness of an associated flat module
 
-Source: Stacks Project, Tags 01I9 (affine sections and pullbacks) and 00HT (flatness).
+## References
+
+* Stacks Project, Tags 01I9 and 00HT
 -/
 
 @[expose] public section

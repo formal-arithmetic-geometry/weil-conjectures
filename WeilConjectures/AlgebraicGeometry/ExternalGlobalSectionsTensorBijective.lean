@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSection
 
 /-! # External tensor product on global sections
 
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

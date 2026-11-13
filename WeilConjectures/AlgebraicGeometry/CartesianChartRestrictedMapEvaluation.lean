@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeChartMap
 
 /-! # Evaluation of the restricted chart cone map
 
-Source: Stacks Project, Tags 0EYM and 03Q8.
+## References
+
+* Stacks Project, Tags 0EYM and 03Q8
 -/
 
 @[expose] public section

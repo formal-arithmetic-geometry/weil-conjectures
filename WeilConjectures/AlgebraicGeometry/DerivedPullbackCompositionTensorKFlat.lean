@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormaliz
 
 /-! # Tensor compatibility of derived pullback composition on K-flat complexes
 
-Source: Stacks Project, cohomology.tex, Tags 079U, 08HY and 0D5S.
+## References
+
+* Stacks Project, Tags 079U, 08HY and 0D5S
 -/
 
 @[expose] public section

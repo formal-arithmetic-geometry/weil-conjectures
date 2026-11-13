@@ -24,8 +24,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finite coherent adic chains
 
-Source: Stacks Project, Tag 01YF, irreducible-support ideal-power paragraph,
-using Tags 01Y9 and 01J3.
+## References
+
+* Stacks Project, Tags 01YF, 01Y9 and 01J3
 -/
 
 @[expose] public section

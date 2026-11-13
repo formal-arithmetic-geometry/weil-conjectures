@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorIdentificati
 import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorLevel
 
 /-! # The normalized Koszul augmentation tensor square
-Source: Stacks 099M and 06YN.
+
+## References
+
+* Stacks Project, Tags 099M and 06YN
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

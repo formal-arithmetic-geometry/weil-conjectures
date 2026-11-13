@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRowIntegerSections
 
 /-! # Sections comparison and extension by zero
 
-Source: Stacks Project, Tags 015J and 015K.
+## References
+
+* Stacks Project, Tags 015J and 015K
 -/
 
 @[expose] public section

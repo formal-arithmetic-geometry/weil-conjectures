@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Zero neighbourhood of a section killed by the inverse-image unit
 
-Source: Stacks Project, Tags 09XM and 03Q1.
+## References
+
+* Stacks Project, Tags 09XM and 03Q1
 -/
 
 @[expose] public section

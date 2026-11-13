@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ExternalSectionsOpenComparison
 
 /-! # Restriction compatibility of external global sections
 
-Source: Stacks Project, Tag 0BED, the degree-zero cup product and its restriction maps.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

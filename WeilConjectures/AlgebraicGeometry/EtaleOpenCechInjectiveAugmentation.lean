@@ -20,7 +20,9 @@ import Mathlib.Algebra.Homology.SingleHomology
 
 /-! # The injective étale Čech row on an open covering
 
-Source: Stacks Project, Tags 03AW and 03F6.
+## References
+
+* Stacks Project, Tags 03AW and 03F6
 -/
 
 @[expose] public section

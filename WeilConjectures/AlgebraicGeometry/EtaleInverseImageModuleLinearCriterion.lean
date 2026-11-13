@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleUnitLinearLift
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleCounitLinearLift
 /-! # Linearity under the etale abelian adjunction
 
-Source: Stacks Project, Tag 03D3. -/
+## References
+
+* Stacks Project, Tag 03D3
+-/
 
 @[expose] public section
 

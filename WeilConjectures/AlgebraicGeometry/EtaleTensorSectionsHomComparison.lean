@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorHomEvaluationNaturality
 /-!
 # Comparing tensor-pullback sections with the presheaf of module homomorphisms
 
-Source: Stacks Project, Descent, Tag 03DT, proof of Lemma 35.8.1, the identification
-of a section with a morphism from the pulled-back structure sheaf; Tag 03DR,
-equation (35.8.0.1).
+## References
+
+* Stacks Project, Tags 03DT and 03DR
 -/
 
 @[expose] public section

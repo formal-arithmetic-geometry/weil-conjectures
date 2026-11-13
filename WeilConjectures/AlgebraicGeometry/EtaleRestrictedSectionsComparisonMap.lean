@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleRestrictedAugmentationInclu
 
 /-! # Global sections of the restricted resolution comparison
 
-Source: Stacks Project, Tag 015J, finite-diagonal mapped-total comparison.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

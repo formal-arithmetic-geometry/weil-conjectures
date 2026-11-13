@@ -28,7 +28,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Coherent objects on the completed affine pullback
 
-Source: Stacks Project, Tags 088B, 0887, 02KH and 02O5.
+## References
+
+* Stacks Project, Tags 088B, 0887, 02KH and 02O5
 -/
 
 @[expose] public section

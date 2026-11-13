@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
 
 /-! # Pulling back a constant chart of the condensed coefficient ring
 
-Source: Stacks Project, Tags 00YV and 03D2, and cartesian condensed coefficients.
+## References
+
+* Stacks Project, Tags 00YV and 03D2
 -/
 
 @[expose] public section

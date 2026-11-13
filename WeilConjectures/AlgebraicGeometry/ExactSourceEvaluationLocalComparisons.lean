@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ExactSourceEvaluationOpenModels
 
 /-! # The local representative equation for evaluation with an exact Hom source
 
-Source: Stacks Project, Tags 08DL, 08DM and 08DQ, the ordinary complex models;
-Tag 08DJ, the tensor-Hom representative equation.
+## References
+
+* Stacks Project, Tags 08DL, 08DM, 08DQ and 08DJ
 -/
 
 @[expose] public section

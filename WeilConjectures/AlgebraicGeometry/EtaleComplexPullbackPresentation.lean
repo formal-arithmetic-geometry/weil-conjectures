@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackCoherence
 
 /-! # Complex presentation of canonical derived pullback cocones
 
-Source: Stacks Project, Étale Cohomology, Tag 0GIT, proof (termwise pullbacks).
+## References
+
+* Stacks Project, Tag 0GIT
 -/
 
 @[expose] public section

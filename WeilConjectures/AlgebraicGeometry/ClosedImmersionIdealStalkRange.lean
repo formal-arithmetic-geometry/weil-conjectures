@@ -12,7 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # The ideal of a closed immersion on stalks
 
-Source: Stacks Project, Modules, Lemma 08KS and Lemma 01AG.
+## References
+
+* Stacks Project, Tags 08KS and 01AG
 -/
 
 @[expose] public section

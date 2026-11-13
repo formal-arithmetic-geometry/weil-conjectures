@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechPrefixDeletionBijection
 /-!
 # Prefix deletions in the first sorting homotopy
 
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1, omitted verification.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

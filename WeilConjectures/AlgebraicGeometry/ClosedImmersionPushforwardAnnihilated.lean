@@ -19,8 +19,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-!
 # Quasi-coherent modules annihilated by a closed subscheme's ideal
 
-Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS,
-01BG, and 01B6.
+## References
+
+* Stacks Project, Tags 01QY, 08KS, 01BG and 01B6
 -/
 
 @[expose] public section

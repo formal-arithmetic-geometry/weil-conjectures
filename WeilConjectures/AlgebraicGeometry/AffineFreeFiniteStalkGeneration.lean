@@ -14,7 +14,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Finite affine sections generating one geometric stalk
 
-Source: Stacks Project, Tag 095N, finite generation at a fixed geometric point.
+## References
+
+* Stacks Project, Tag 095N
 -/
 
 @[expose] public section

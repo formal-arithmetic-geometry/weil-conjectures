@@ -16,7 +16,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
 /-! # Affine tensor and pullback homology comparison
 
-Source: Stacks Project, Tags 01IB and 01I9.
+## References
+
+* Stacks Project, Tags 01IB and 01I9
 -/
 
 @[expose] public section

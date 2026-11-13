@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-! # Descending the agreement open of a single local representative
 
-Source: Stacks Project, Tag 09XN, agreement-open construction before the covering argument. -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 

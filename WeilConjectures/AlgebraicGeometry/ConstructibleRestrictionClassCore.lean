@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedCohomologyColimit
 /-!
 # Representatives of restricted cohomology classes from a supplied filtered colimit
 
-Source: Stacks Project, Tag 03Q5, with the colimit
-preservation and module compatibility used in the proof of Tag 03SA(3).
+## References
+
+* Stacks Project, Tags 03Q5 and 03SA
 -/
 
 @[expose] public section

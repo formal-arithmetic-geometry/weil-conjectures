@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnit
 
 /-! # Evaluation on an étale object and global sections
 
-Source: Stacks Project, Tag 03S2.
+## References
+
+* Stacks Project, Tag 03S2
 -/
 
 @[expose] public section

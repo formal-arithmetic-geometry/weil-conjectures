@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRowSectionsEvaluationSquare
 
 /-! # Ordinary comparison before removing extension by zero
 
-Source: Stacks Project, Tags 06XR, 01F8 and 08J6.
+## References
+
+* Stacks Project, Tags 06XR, 01F8 and 08J6
 -/
 
 @[expose] public section

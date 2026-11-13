@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Coherence on locally Noetherian schemes
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.1, Tag 01XZ.
+## References
+
+* Stacks Project, Tag 01XZ
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Flat models for a restricted tensor with constant coefficients
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 07A4.
+## References
+
+* Stacks Project, Tags 06YU and 07A4
 -/
 
 @[expose] public noncomputable section

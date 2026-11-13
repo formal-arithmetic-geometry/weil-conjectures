@@ -16,7 +16,9 @@ public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 /-!
 # Descended overlap transitions before gluing
 
-Source: Stacks Project, Descent, Tag 0AP4, construction of U_ij and transition maps.
+## References
+
+* Stacks Project, Tag 0AP4
 -/
 
 @[expose] public section

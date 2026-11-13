@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Tensor under the standard localization comparison
 
-Source: Stacks Project, Tags 05RU and 06YH.
+## References
+
+* Stacks Project, Tags 05RU and 06YH
 -/
 
 @[expose] public section

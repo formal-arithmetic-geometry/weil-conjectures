@@ -11,8 +11,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 
 /-! # Gluing ring actions from the affine basis
 
-Source: Stacks Project, Tag 009O (sheaves on a basis); the affine-basis gluing in
-Tags 01LX and 0897.
+## References
+
+* Stacks Project, Tags 009O, 01LX and 0897
 -/
 
 @[expose] public section

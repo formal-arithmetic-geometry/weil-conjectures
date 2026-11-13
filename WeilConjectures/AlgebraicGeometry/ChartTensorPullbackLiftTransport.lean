@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ChartTensorPullbackComparisonCoherence
 
 /-! # Transporting an ordinary chart lift to tensor pullback coordinates
 
-Source: Stacks Project, Tags 0095 and 0096, functoriality of pullback.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section

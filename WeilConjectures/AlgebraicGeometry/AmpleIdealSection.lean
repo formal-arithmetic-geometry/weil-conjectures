@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-! # Sections of ample powers in an ideal sheaf
 
-Source: Stacks Project, Properties, Proposition 01Q3, equivalence of (1) and (6).
+## References
+
+* Stacks Project, Tag 01Q3
 -/
 
 @[expose] public section

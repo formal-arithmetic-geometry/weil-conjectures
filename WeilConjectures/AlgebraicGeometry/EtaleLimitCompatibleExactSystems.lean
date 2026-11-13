@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Compatible short exact systems of etale sheaves
 
-Source: Stacks Project, Tags 0EXZ, 09YP and 0739.
+## References
+
+* Stacks Project, Tags 0EXZ, 09YP and 0739
 -/
 
 @[expose] public section

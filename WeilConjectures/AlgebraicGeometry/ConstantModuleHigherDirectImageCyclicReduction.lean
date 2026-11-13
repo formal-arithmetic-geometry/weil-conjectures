@@ -21,9 +21,9 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Reduction of constant module coefficients to cyclic abelian coefficients
 
-Source: the coefficient reduction in
-`Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`, using
-Stacks Project, Tags 03Q8, 03Q5 and 03FD.
+## References
+
+* Stacks Project, Tags 03Q8, 03Q5 and 03FD
 -/
 
 @[expose] public section

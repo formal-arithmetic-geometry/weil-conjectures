@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # Descent of finite locally free morphisms
 
-Source: Stacks Project, Limits, Lemma Tag 06AC, in Situation Tag 081D.
+## References
+
+* Stacks Project, Tags 06AC and 081D
 -/
 
 @[expose] public section

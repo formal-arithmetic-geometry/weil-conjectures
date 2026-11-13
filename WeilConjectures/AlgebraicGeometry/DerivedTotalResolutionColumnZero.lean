@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! # Column-zero representatives in a total complex
 
-Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support induction.
+## References
+
+* Stacks Project, Tag 09IZ
 -/
 
 @[expose] public section

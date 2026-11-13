@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedSectionSingleUnit
 
 /-! # Degree-zero derived section pullback
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
+## References
+
+* Stacks Project, Tags 07A6 and 0D6F
 -/
 
 @[expose] public section

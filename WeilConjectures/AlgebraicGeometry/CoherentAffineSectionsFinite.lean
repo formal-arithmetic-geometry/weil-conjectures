@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Finite affine sections of a coherent module
 
-Source: Stacks Project, Modules, Tag 01BV; Properties, Tag 01PB;
-Cohomology of Schemes, Tag 01Y8.
+## References
+
+* Stacks Project, Tags 01BV, 01PB and 01Y8
 -/
 
 @[expose] public section

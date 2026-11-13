@@ -18,8 +18,9 @@ import Mathlib.CategoryTheory.Sites.Abelian
 /-!
 # Completed constant sheaves and finite reduction
 
-Source: Stacks Project, Modules on Sites, Tags 093J--093M;
-Cohomology on Sites, Tags 06YN and 06YU.
+## References
+
+* Stacks Project, Tags 093J, 093M, 06YN and 06YU
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Sheafifying a finite-projective comparison with affine sections
 
-Source: Stacks Project, Tags 01IB and 08EB.
+## References
+
+* Stacks Project, Tags 01IB and 08EB
 -/
 
 @[expose] public section

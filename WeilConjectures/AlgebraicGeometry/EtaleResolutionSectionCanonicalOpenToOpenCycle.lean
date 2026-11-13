@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenObjectCohomologyMap
 /-!
 # Canonical restriction on resolution-section cocycles
 
-Source: Stacks Project, Tags 0A50 and 03F3; the free-sheaf sections adjunction
-and the exact inverse-image composition comparison.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

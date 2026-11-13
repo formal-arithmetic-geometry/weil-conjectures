@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 
 /-! # Naturality of the abelian representable generator
 
-Source: Stacks Project, Tag 03Q8, and the free-sheaf adjunction.
-The proof uses inverse-image units to compare sections on arbitrary etale objects.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section

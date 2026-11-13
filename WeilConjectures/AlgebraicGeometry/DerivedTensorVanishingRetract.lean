@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.TorAmplitudeOpenLocal
 
 /-! # Derived tensor cohomology vanishing passes to retracts
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CK.
+## References
+
+* Stacks Project, Tag 08CK
 -/
 
 @[expose] public section

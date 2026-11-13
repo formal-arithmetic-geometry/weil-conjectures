@@ -15,8 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 /-!
 # Free sheaves and derived global sections
 
-Source: Stacks Project, Derived Categories, Definition 015A and Lemma 05TI,
-combined with the free-sheaf sections adjunction.
+## References
+
+* Stacks Project, Tags 015A and 05TI
 -/
 
 @[expose] public section

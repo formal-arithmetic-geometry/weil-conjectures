@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.GlueComponentTransitionCocycle
 
 /-! # ExistsGluedSection
 
-Source: Stacks Project, Varieties Lemma 09NE. -/
+## References
+
+* Stacks Project, Tag 09NE
+-/
 
 @[expose] public section
 universe u v

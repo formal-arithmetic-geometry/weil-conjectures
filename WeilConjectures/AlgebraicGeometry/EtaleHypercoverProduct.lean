@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 /-!
 # Products of étale hypercovers
 
-Source: Stacks Project, Hypercoverings, Lemma 01GI, with the covering argument of Lemma 01GH.
+## References
+
+* Stacks Project, Tags 01GI and 01GH
 -/
 
 @[expose] public section

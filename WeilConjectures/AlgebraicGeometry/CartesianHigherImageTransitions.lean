@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 
 /-! # Continuity of cartesian higher direct images with varying bases
 
-Source: Stacks Project, Tag 0EYM.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

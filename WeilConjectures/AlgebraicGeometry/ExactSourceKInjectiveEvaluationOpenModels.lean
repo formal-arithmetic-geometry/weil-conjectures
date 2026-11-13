@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.KInjectiveSchemeEvaluationModels
 
 /-! # K-injective models for evaluation on the open scheme
 
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
+## References
+
+* Stacks Project, Tags 08DJ, 08DM and 08DQ
 -/
 
 @[expose] public section

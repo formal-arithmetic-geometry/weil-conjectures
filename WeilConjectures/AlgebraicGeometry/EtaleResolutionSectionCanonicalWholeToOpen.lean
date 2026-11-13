@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantSectionAdjunctPullback
 /-!
 # Whole-to-open restriction of normalized resolution comparisons
 
-Source: Stacks Project, Tags 0A50 and 03F3 (2), expanded on Hom cocycles.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

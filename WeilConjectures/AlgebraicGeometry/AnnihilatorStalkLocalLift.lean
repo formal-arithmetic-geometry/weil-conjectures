@@ -16,7 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # Local representatives of annihilated stalk elements
-Source: Stacks Project, Tag 01PO, final sentence of the proof.
+
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ProperEtaleOpen
 /-!
 # Étaleness detected by infinitesimal restrictions with proper source
 
-Source: Stacks Project, Fundamental Groups, Tag 0GS2, complete Noetherian
-essential-surjectivity paragraph, the last two sentences before the conclusion.
+## References
+
+* Stacks Project, Tag 0GS2
 -/
 
 @[expose] public section

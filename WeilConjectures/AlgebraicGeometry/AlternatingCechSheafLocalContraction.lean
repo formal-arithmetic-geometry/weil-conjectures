@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Local contraction of the increasing-tuple sheaf augmentation
 
-Source: Stacks Project, Tag 01FM.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

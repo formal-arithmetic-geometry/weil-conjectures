@@ -23,7 +23,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 
 /-! # The canonical affine derived edge after upper truncation
 
-Source: Stacks Project, Tags 0AVW and 08D4, with bound N = 1.
+## References
+
+* Stacks Project, Tags 0AVW and 08D4
 -/
 
 @[expose] public section

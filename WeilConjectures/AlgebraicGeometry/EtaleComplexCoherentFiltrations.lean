@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtalePresentationImageFiltration
 
 /-! # Coherent categorical filtrations for an etale complex diagram
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section

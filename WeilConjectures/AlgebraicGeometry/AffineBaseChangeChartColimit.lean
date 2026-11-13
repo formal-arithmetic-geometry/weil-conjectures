@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Ring charts of a base changed inverse system
 
-Source: Stacks Project, Limits, Tags 01YZ and 01ZR (3).
+## References
+
+* Stacks Project, Tags 01YZ and 01ZR
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The explicit alternating Čech model over an affine base
 
-Source: Stacks Project, Tag 0A1D, finite affine Čech calculation.
+## References
+
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section

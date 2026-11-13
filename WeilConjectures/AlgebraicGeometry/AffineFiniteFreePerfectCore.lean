@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeModelRetracts
 
 /-! # Strict perfectness of the explicit affine finite free model
 
-Source: Stacks Project, Tag 068C and Definition 08C4.
+## References
+
+* Stacks Project, Tags 068C and 08C4
 -/
 
 @[expose] public section

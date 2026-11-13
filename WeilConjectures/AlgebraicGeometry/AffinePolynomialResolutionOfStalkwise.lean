@@ -15,7 +15,9 @@ import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-! # A bounded polynomial resolution from finite stalk Tor dimension
 
-Source: Stacks Project, Tag 069C, proof of (3) implies (1), and Tags 068X and 068W.
+## References
+
+* Stacks Project, Tags 069C, 068X and 068W
 -/
 
 @[expose] public section

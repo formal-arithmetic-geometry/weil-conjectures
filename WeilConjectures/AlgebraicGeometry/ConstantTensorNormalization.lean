@@ -9,7 +9,9 @@ import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Normalization determines a total tensor augmentation
 
-Source: Stacks Project, Modules on Sites, Tag 03EK and proetale.tex, Tag 099M.
+## References
+
+* Stacks Project, Tags 03EK and 099M
 -/
 
 @[expose] public noncomputable section

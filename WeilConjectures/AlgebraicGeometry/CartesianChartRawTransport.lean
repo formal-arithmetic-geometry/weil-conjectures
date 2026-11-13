@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyCompariso
 
 /-! # Geometric transport of chart classes
 
-Source: Stacks Project, Tag 0EYM, the pullback identifications in the second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

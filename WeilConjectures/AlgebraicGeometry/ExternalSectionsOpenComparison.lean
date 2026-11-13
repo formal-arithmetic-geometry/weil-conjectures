@@ -12,8 +12,9 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-! # External section components on open subschemes
 
-Source: Stacks Project, Tag 0BED, omitted degree-zero canonical-cup verification;
-Tags 0096, 0097 and 01CD.
+## References
+
+* Stacks Project, Tags 0BED, 0096, 0097 and 01CD
 -/
 
 @[expose] public section

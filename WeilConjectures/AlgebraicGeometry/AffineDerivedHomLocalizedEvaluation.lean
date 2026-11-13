@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 
 /-! # Localization of the affine sheaf-Hom evaluation counit
 
-Source: Stacks Project, duality.tex, Tags 0BV0 and 0AX3.
+## References
+
+* Stacks Project, Tags 0BV0 and 0AX3
 -/
 
 @[expose] public section

@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.RingTheory.PiTensorProduct
 
 /-! # Functions on an affine singleton Čech product
 
-Source: Stacks Project, Tags 01I4 and 01JQ. -/
+## References
+
+* Stacks Project, Tags 01I4 and 01JQ
+-/
 
 @[expose] public section
 

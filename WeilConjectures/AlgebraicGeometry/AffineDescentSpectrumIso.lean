@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 
 /-! # Spectrum of the coordinate-ring colimit of affine base changes
 
-Source: Stacks Project, Tags 09RF and 01YW.
+## References
+
+* Stacks Project, Tags 09RF and 01YW
 -/
 
 @[expose] public section

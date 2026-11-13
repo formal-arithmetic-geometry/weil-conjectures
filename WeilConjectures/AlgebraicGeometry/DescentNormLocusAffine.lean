@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.RingTheory.Localization.NormTrace
 /-!
 # Affineness of a finite locally free norm locus
 
-Source: Stacks Project, Tag 03JE, final norm argument.
+## References
+
+* Stacks Project, Tag 03JE
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionPowerQuotient
 
 /-! # Completion comparison from a normalized restriction functor
 
-Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880.
+## References
+
+* Stacks Project, Tags 088F, 087T and 0880
 -/
 
 @[expose] public section

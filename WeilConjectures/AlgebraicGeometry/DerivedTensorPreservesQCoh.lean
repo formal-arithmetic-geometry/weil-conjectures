@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine-local cohomology of derived tensor
 
-Source: Stacks Project, Tag 08DX, part (1), with its affine calculation in part (2).
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section

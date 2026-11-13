@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of inverse images on single complexes
 
-Source: Stacks Project, Tag 09Z1, derived-adjunction coherence elaboration.
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section

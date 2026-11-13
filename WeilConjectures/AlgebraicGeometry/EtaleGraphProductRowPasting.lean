@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProductShrinkPasting
 
 /-! # One row of the graph product interchange grid
 
-Source: Stacks Project, Tag 0F7J, A--F pasting in the product neighborhoods.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

@@ -12,9 +12,9 @@ public import WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtension
 
 /-! # Constructible etale modules in the coefficient universe
 
-Source: Stacks Project, Tags 03RW(3) and 09AL.
-These are the recorded affine-local definitions on the equivalent coefficient-sized model.
-The constant scalar action and every locally closed stratum are retained.
+## References
+
+* Stacks Project, Tags 03RW and 09AL
 -/
 
 @[expose] public noncomputable section

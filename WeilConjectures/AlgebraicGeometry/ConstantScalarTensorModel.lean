@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.TwistedActionTensorRestriction
 
 /-! # The normalized ordinary scalar tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tag 03EK and Tag 099M.
+## References
+
+* Stacks Project, Tags 03EK and 099M
 -/
 
 @[expose] public noncomputable section

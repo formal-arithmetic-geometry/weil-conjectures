@@ -13,8 +13,9 @@ public import Mathlib.Algebra.Homology.Monoidal
 
 /-! # Derived tensor augmentations on schemes
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS and 06YU; Derived Categories
-of Schemes, Tag 08EH.
+## References
+
+* Stacks Project, Tags 06YS, 06YU and 08EH
 -/
 
 @[expose] public section

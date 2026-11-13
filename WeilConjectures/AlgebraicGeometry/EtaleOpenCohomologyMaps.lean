@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Explicit restriction and restricted pullback on étale cohomology
 
-Source: Stacks Project, Tag 01F7 and Tag 0A50.
-These abbreviations expand to the maps of etale_mayerVietoris_pullback.
+## References
+
+* Stacks Project, Tags 01F7 and 0A50
 -/
 
 @[expose] public section

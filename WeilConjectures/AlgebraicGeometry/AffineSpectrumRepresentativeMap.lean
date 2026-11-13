@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionCounitSqua
 
 /-! # Chain-map transport for affine spectrum representatives
 
-Source: Stacks Project, Tags 0DJ8 and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ8 and 0D5S
 -/
 
 @[expose] public section

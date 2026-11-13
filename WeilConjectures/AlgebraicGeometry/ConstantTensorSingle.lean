@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Single-complex tensor comparisons for ordinary reduction towers
 
-Source: Stacks Project, Modules on Sites, Tag 03EK; Cohomology on Sites, total tensor.
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public noncomputable section

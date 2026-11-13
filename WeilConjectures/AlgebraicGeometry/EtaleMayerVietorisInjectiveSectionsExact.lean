@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 /-!
 # Degreewise exactness of injective section complexes
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

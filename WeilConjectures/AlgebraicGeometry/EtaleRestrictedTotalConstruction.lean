@@ -14,7 +14,9 @@ public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Concrete restricted Cartan--Eilenberg totals
 
-Source: Stacks Project, Tags 015J and 0133.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section

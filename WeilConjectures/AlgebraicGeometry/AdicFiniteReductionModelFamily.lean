@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # A covering family with one perfect model for all finite reductions
 
-Source: Stacks Project, proetale.tex, Tag 09C6, first half of the proof.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section

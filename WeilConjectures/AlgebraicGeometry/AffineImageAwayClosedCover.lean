@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Affine images away from the other member of a closed cover
 
-Source: Stacks Project, Varieties, Lemma 09NX, final paragraph.
+## References
+
+* Stacks Project, Tag 09NX
 -/
 
 @[expose] public section

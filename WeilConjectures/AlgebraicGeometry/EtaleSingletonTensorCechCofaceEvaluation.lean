@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeHomNormalization
 
 /-! # EtaleSingletonTensorCechCofaceEvaluation
-Source: Stacks Project, Tags 03P2 and 03DR.
+
+## References
+
+* Stacks Project, Tags 03P2 and 03DR
 -/
 
 @[expose] public section

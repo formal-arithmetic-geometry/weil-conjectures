@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Affine-stage cohomology continuity
 
-Source: Stacks Project, Tags 09YQ, 0EYL, 09YP and 04HR.
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 09YP and 04HR
 -/
 
 @[expose] public section

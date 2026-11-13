@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedCoefficientHomComplex
 
 /-! # The coefficient-Hom unit for the ring in degree zero
 
-Source: Stacks Project, Algebraization, Tag 099I, first arrow of the final composite.
+## References
+
+* Stacks Project, Tag 099I
 -/
 
 @[expose] public noncomputable section

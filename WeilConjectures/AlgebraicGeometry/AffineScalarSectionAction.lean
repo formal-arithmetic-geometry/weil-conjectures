@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartScalarTransport
 
 /-! # Scalar action on sections after affine sheafification
 
-Source: Stacks Project, Tags 01HV, 01IB and 0098.
+## References
+
+* Stacks Project, Tags 01HV, 01IB and 0098
 -/
 
 @[expose] public section

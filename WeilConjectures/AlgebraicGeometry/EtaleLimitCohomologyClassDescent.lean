@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitCohomologyConnectingLadder
 
 /-! # Finite-stage representatives of limit cohomology classes
 
-Source: Stacks Project, Tags 09YQ, 09YP, 09YN, 0EXZ and 0739.
+## References
+
+* Stacks Project, Tags 09YQ, 09YP, 09YN, 0EXZ and 0739
 -/
 
 @[expose] public section

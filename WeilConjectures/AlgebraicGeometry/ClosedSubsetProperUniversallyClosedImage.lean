@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Images of closed subsets proper over a base
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.26.5 (Tag 0CYQ), part (2).
+## References
+
+* Stacks Project, Tag 0CYQ
 -/
 
 @[expose] public section

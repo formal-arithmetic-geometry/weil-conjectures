@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Compatible numerators on a finite principal-open cover
 
-Source: Stacks Project, Properties, Lemma 01PM, denominator-clearing paragraphs.
+## References
+
+* Stacks Project, Tag 01PM
 -/
 
 @[expose] public section

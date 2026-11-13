@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.ComplexLiftConeCokernel
 
 /-! # Acyclic enlargement with prescribed reduced cokernel
 
-Source: Stacks Project, More on Algebra, Tag 0BCA.
+## References
+
+* Stacks Project, Tag 0BCA
 -/
 
 @[expose] public section

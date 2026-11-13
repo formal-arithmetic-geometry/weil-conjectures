@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibil
 
 /-! # Natural comparison for abelian higher direct images
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section

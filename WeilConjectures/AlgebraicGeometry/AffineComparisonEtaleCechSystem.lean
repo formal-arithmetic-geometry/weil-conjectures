@@ -10,7 +10,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 /-!
 # Simultaneous affine étale presentations of a finite Čech nerve
 
-Source: Stacks Project, Tags 099U, 099T, 01ZM, 01ZN and 07RP.
+## References
+
+* Stacks Project, Tags 099U, 099T, 01ZM, 01ZN and 07RP
 -/
 
 @[expose] public section

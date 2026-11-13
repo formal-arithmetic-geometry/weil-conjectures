@@ -16,7 +16,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 import WeilConjectures.AlgebraicGeometry.EtaleAffineTensorCechAmitsurComparison
 
 /-! # Čech vanishing for lifted tensor-section sheaves
-Source: Stacks Project, Tags 03P2 and 03OZ.
+
+## References
+
+* Stacks Project, Tags 03P2 and 03OZ
 -/
 
 @[expose] public section

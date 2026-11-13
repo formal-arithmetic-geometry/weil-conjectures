@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSubsheafSupportStalk
 /-!
 # Subsheaves of the final étale sheaf are open subfunctors
 
-Source: Stacks Project, Étale Cohomology, Tag 04HV, used in Tag 09XM.
+## References
+
+* Stacks Project, Tags 04HV and 09XM
 -/
 
 @[expose] public section

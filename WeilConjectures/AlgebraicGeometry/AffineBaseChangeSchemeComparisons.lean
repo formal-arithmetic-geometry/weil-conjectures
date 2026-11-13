@@ -16,7 +16,10 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Scheme identifications for the affine base-change diagram
 
-Source: Stacks Project, Tags 01JO and 09RE. -/
+## References
+
+* Stacks Project, Tags 01JO and 09RE
+-/
 
 @[expose] public section
 universe u

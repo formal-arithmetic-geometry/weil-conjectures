@@ -11,7 +11,9 @@ public import Mathlib.Topology.Sets.Closeds
 
 /-! # Support of direct image with closed ambient support
 
-Source: Stacks Project, Lemma 0CYJ, proof.
+## References
+
+* Stacks Project, Tag 0CYJ
 -/
 
 @[expose] public section

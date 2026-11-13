@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSectionsSquareComparisonCoherence
 
 /-! # Affine sections of the base-change unit square
 
-Source: Stacks Project, cohomology.tex, Tags 0D5T and 08HY;
-perfect.tex, Tag 0AA7.
+## References
+
+* Stacks Project, Tags 0D5T, 08HY and 0AA7
 -/
 
 @[expose] public section

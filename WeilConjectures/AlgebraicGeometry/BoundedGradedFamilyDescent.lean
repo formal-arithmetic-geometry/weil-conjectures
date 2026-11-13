@@ -18,7 +18,9 @@ import Mathlib.Data.Finset.Order
 
 /-! # Descent of bounded finitely presented module families
 
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (1).
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section

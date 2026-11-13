@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Canonical direct-image transport to affine spectrum coordinates
 
-Source: Stacks Project, Tags 0D5S and 08HY.
+## References
+
+* Stacks Project, Tags 0D5S and 08HY
 -/
 
 @[expose] public section

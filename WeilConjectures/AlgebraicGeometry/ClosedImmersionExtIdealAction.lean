@@ -22,8 +22,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The immersion ideal annihilates scalar Ext
 
-Source: Stacks Project, Duality for Schemes, Tag 0BQZ, and the internal Hom
-algebra action in Section 48.11, Tag 0BUZ.
+## References
+
+* Stacks Project, Tags 0BQZ and 0BUZ
 -/
 
 @[expose] public section

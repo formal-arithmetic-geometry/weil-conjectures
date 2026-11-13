@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBaseFlatQuasiFiniteChartCore
 
 /-! # Flat quasi-finite charts at Cohen-Macaulay fibre points
 
-Source: Stacks Project, Tag 00RH.
+## References
+
+* Stacks Project, Tag 00RH
 -/
 
 @[expose] public section

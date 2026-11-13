@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # A module model on one principal open
 
-Source: Stacks Project, Tag 08E7, local-model comparison in the converse direction.
+## References
+
+* Stacks Project, Tag 08E7
 -/
 
 @[expose] public section

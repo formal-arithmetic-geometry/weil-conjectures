@@ -11,7 +11,11 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-! # The explicit ring diagram of an affine base change
-Source: Stacks Project, Tag 09RE, affine calculation, and Tag 01JO. -/
+
+## References
+
+* Stacks Project, Tags 09RE and 01JO
+-/
 
 @[expose] public section
 

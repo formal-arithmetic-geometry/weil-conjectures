@@ -13,7 +13,9 @@ import WeilConjectures.RingTheory.TorVanishingLocalizedBase
 
 /-! # Localization of an affine coordinate Tor bound
 
-Source: Stacks Project, Tags 0B67 and 069C.
+## References
+
+* Stacks Project, Tags 0B67 and 069C
 -/
 
 @[expose] public section

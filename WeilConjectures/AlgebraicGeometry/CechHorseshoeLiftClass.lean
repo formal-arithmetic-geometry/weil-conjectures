@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CechHorseshoeCorrectionCochain
 
 /-! # The local correction in a horseshoe Cech double complex
 
-Source: Stacks Project, Cohomology, Tag 01EQ (total-complex calculation),
-and Tag 0B8S (local lifts).
+## References
+
+* Stacks Project, Tags 01EQ and 0B8S
 -/
 
 @[expose] public section

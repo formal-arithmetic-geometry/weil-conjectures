@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep
 
 /-! # Filtering a finite sum of an integral ideal pushforward
 
-Source: Stacks Project, Tag 01YF, final paragraph (the source filtration).
+## References
+
+* Stacks Project, Tag 01YF
 -/
 
 @[expose] public section

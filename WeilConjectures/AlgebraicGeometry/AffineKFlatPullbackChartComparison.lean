@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 
 /-! # Affine pullback comparison through spectrum charts
 
-Source: Stacks Project, Tags 06Z0 and 08DW.
+## References
+
+* Stacks Project, Tags 06Z0 and 08DW
 -/
 
 @[expose] public section

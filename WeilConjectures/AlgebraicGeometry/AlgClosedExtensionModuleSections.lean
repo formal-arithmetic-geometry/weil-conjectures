@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 
 /-! # Module sections after algebraically closed field extension
 
-Source: Stacks Project, Tag 0A3I, applied to the underlying sheaf of sets.
+## References
+
+* Stacks Project, Tag 0A3I
 -/
 
 @[expose] public section

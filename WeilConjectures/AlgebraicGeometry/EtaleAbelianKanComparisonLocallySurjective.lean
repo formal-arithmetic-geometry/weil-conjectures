@@ -18,7 +18,10 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # The underlying-set Kan comparison for an abelian inverse image
 
-Source: Stacks Project, Tags 00YV, 09XN, and 00WK. -/
+## References
+
+* Stacks Project, Tags 00YV, 09XN and 00WK
+-/
 
 @[expose] public section
 

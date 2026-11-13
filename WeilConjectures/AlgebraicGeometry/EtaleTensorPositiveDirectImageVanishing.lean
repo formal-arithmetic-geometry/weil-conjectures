@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.PositiveDirectImageOfObjectAcyclic
 
 /-! # Positive direct-image vanishing
 
-Source: Stacks Project, Tags 03DW, 03P2 and 0733.
+## References
+
+* Stacks Project, Tags 03DW, 03P2 and 0733
 -/
 
 @[expose] public section

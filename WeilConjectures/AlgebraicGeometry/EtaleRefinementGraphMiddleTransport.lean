@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Intersection transport along a proper refinement graph
 
-Source: Stacks Project, Tags 0F7C and 0F7D.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section

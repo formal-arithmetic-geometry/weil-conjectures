@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Etale trivializing charts for coefficient-sized local systems
 
-Source: Stacks Project, Tag 099Y.
+## References
+
+* Stacks Project, Tag 099Y
 -/
 
 @[expose] public section

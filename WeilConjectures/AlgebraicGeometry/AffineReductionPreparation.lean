@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Reduction of an affine family before generic flatness
 
-Source: Stacks Project, Tag 0559, second proof, first paragraph.
+## References
+
+* Stacks Project, Tag 0559
 -/
 
 @[expose] public section

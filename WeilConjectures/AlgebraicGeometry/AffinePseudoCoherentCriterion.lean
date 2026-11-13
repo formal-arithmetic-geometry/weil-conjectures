@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover
 
 /-! # Pseudo-coherence on an affine scheme
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.2, Tag 08E7,
-pseudo-coherent clause.
+## References
+
+* Stacks Project, Tag 08E7
 -/
 
 @[expose] public section

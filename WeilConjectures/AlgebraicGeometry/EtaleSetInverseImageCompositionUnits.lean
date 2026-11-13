@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Composition of inverse images of étale sheaves of sets, with units
 
-Source: Stacks Project, Sites, Tags 03CB and 03CC, and Étale Cohomology, Tag 09ZF,
-third paragraph of the proof.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 09ZF
 -/
 
 @[expose] public section

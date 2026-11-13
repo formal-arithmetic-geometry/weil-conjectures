@@ -12,5 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.AbelianCounitCocycleDefinitions
 
 The proved evaluation theorem now lives with its comparison constructors,
 so the counit cocycle calculation can use it without an import cycle.
-Source: Stacks Project, Tags 03FD, 015E and 06XR.
+
+## References
+
+* Stacks Project, Tags 03FD, 015E and 06XR
 -/

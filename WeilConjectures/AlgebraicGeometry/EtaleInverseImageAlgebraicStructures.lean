@@ -19,7 +19,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLift
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageRingLift
 /-!
 # Inverse image on small étale sites and algebraic structures
-Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV.
+
+## References
+
+* Stacks Project, Tags 00X6, 00X1 and 00YV
 -/
 
 @[expose] public section

@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Derived tensor through the canonical affine spectrum chart
 
-Source: Stacks Project, Tags 08DX(2) and 08DV.
+## References
+
+* Stacks Project, Tags 08DX and 08DV
 -/
 
 @[expose] public section

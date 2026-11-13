@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 /-!
 # Existence of normalized resolution comparisons
 
-Source: Stacks Project, Tags 0A50 and 03F3.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

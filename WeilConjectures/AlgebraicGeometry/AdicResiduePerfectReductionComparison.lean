@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Finite reductions of completed constant perfect complexes
 
-Source: Stacks Project, proetale.tex, Tag 09C6; Cohomology on Sites, Tag 06YY.
+## References
+
+* Stacks Project, Tags 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineIdealClassQ
 
 /-! # The affine diagonal ideal class map
 
-Source: Stacks Project, Tags 08S2, 01KJ and 01R3.
+## References
+
+* Stacks Project, Tags 08S2, 01KJ and 01R3
 -/
 
 @[expose] public section

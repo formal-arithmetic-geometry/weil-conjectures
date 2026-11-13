@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Module-complex representatives on affine schemes
 
-Source: Stacks Project, Tags 06Z0 and 08DW.
+## References
+
+* Stacks Project, Tags 06Z0 and 08DW
 -/
 
 @[expose] public section

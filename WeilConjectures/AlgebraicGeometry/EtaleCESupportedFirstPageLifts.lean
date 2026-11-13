@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.BoundedBelowSecondFiltration
 
 /-! # Supported coherent first-page CE lifts
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section

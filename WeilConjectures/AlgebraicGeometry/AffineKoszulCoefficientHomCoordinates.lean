@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquar
 
 /-! # Underived affine coordinates for the Koszul coefficient square
 
-Source: Stacks Project, Tag 0BQZ, the map between the two Hom complexes. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 

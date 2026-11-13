@@ -22,7 +22,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # A uniform affine bound for canonical truncation projections
 
-Source: Stacks Project, Tags 08D5(2) and 08DZ.
+## References
+
+* Stacks Project, Tags 08D5 and 08DZ
 -/
 
 @[expose] public section

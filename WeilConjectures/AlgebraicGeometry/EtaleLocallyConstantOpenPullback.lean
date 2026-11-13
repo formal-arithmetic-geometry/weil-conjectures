@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 /-!
 # Local constancy under open restriction
 
-Source: Stacks Project, Tag 093R.
+## References
+
+* Stacks Project, Tag 093R
 -/
 
 @[expose] public section

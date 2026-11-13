@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 /-!
 # Derived direct image of a degreewise split sequence of K-injectives
 
-Source: Stacks Project, Tags 0152 and 079V.
+## References
+
+* Stacks Project, Tags 0152 and 079V
 -/
 
 @[expose] public section

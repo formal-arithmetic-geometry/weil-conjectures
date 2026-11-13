@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
 /-! # Affine sections of the intrinsic comparison of an injective
 
-Source: Stacks Project, Tags 099U and 099V, affine vanishing in the proof of
-comparison.
+## References
+
+* Stacks Project, Tags 099U and 099V
 -/
 
 @[expose] public section

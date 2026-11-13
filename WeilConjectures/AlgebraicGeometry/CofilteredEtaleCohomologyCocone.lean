@@ -14,7 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # A cohomology colimit cocone for a cofiltered system over a fixed scheme
 
-Source: Stacks Project, Theorem 59.51.3, Tag 09YQ.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

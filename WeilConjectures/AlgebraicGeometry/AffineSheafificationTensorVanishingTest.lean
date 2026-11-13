@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictionTotalTensor
 
 /-! # A global test sheaf for affine tensor cohomology
 
-Source: Stacks Project, Tags 08CG and 08DX; exact restriction to an open subscheme.
+## References
+
+* Stacks Project, Tags 08CG and 08DX
 -/
 
 @[expose] public section

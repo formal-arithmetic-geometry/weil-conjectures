@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Section rings of upper-tail affine charts
 
-Source: Stacks Project, Tag 01ZR, affine reduction, and Tag 01I4.
+## References
+
+* Stacks Project, Tags 01ZR and 01I4
 -/
 
 @[expose] public section

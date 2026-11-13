@@ -18,8 +18,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Comparison of constant etale cohomology along an isomorphism
 
-Source: Stacks Project, Cohomology on Sites, the derived-functor definition of cohomology;
-Etale Cohomology, Lemma 09ZC, implicit transport in the affine reduction.
+## References
+
+* Stacks Project, Tag 09ZC
 -/
 
 @[expose] public section

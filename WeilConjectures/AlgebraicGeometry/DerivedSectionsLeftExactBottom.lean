@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 
 /-! # Bottom cohomology of a left exact derived functor
 
-Source: Stacks Project, Tag 05TC (2).
+## References
+
+* Stacks Project, Tag 05TC
 -/
 
 @[expose] public section

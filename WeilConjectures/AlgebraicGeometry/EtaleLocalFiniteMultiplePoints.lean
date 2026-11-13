@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.IsolatedFibrePointBaseChange
 /-!
 # Finite neighborhoods of multiple isolated fiber points after etale localization
 
-Source: Stacks Project, More on Morphisms, Lemma 02LM.
+## References
+
+* Stacks Project, Tag 02LM
 -/
 
 @[expose] public section

@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCoherenceComparisons
 
 /-! # Tensor construction for affine module correspondence
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

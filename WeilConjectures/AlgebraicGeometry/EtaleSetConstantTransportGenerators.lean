@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetConstantPullbackComposition
 
 /-! # Composition transport on constant generators
 
-Source: Stacks Project, Tags 03CB, 03CC, 03P5, and 0A3H, final proof paragraph.
+## References
+
+* Stacks Project, Tags 03CB, 03CC, 03P5 and 0A3H
 -/
 
 @[expose] public section

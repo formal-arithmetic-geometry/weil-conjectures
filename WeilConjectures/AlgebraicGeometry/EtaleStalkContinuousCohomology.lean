@@ -18,7 +18,9 @@ Let `Ks` be a separable closure of a field `K`. The étale cohomology of an abel
 discrete topological `Gal(Ks/K)`-module identified equivariantly with the stalk of `F` at the
 Galois point `AlgebraicGeometry.Scheme.galoisPoint K Ks`.
 
-Source: Stacks Project, Tags 04JQ, 03QU and Section 0DVG.
+## References
+
+* Stacks Project, Tags 04JQ, 03QU and 0DVG
 -/
 
 @[expose] public section

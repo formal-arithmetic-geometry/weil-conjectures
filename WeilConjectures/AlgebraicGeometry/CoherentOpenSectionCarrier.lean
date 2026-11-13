@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 
 /-! # Coherent carrier of a section on an open subset
 
-Source: Stacks Project, Tag 01YB, first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 01YB
 -/
 
 @[expose] public section

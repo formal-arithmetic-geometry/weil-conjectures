@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.PicardConstantTensorBalancedSect
 
 /-! # The ordinary external section map on constant tensor coefficients
 
-Source: Stacks Project, Varieties, Tag 0BED, degree-zero tensor calculation.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section

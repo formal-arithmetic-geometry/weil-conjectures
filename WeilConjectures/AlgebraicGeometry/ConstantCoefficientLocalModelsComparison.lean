@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Comparison of the two constant coefficient module constructions
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 094I.
+## References
+
+* Stacks Project, Tags 06YY and 094I
 -/
 
 @[expose] public section

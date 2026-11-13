@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Cofinality of affine pointed étale neighbourhoods
 
-Source: Stacks Project, Tags 04HX and 0BUC.
+## References
+
+* Stacks Project, Tags 04HX and 0BUC
 -/
 
 @[expose] public section

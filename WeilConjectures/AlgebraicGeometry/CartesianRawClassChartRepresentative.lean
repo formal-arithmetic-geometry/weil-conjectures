@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Finite-stage chart representatives of raw cartesian classes
 
-Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT.
+## References
+
+* Stacks Project, Tags 0EYM, 0EYL and 0GIT
 -/
 
 @[expose] public section

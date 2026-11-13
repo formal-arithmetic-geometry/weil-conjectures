@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 /-!
 # Local vanishing of higher direct images with cyclic coefficients
 
-Source: Stacks Project, Tag 03Q8, and the affine basis of the small etale site.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section

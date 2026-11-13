@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
 
 /-! # Extending a two-open derived gluing datum to the ambient scheme
 
-Source: Stacks Project, Tag 08DG.
+## References
+
+* Stacks Project, Tag 08DG
 -/
 
 @[expose] public section

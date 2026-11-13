@@ -17,8 +17,9 @@ import WeilConjectures.Topology.OpenCechZerothHomology
 
 /-! # The affine-open Čech edge comparison for étale sheaves
 
-Source: Stacks Project, Tag 03AZ, specialized to an acyclic affine-open covering,
-and Tag 03P2, separated-case proof.
+## References
+
+* Stacks Project, Tags 03AZ and 03P2
 -/
 
 @[expose] public section

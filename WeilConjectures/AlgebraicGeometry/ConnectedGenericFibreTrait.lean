@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 /-!
 # Connectedness of the generic fibre of a flat degeneration
 
-Source: Stacks Project, Tag 055J.
+## References
+
+* Stacks Project, Tag 055J
 -/
 
 @[expose] public section

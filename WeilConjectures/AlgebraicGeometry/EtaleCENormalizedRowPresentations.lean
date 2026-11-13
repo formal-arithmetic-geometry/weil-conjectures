@@ -19,7 +19,9 @@ import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
 /-! # Prescribed normalized CE presentations
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section

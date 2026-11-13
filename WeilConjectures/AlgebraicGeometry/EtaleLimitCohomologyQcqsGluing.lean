@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Cohomology continuity glues from affine stages to qcqs stages
 
-Source: Stacks Project, Tags 09YQ and 0A50; parent proof steps 5-8.
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section

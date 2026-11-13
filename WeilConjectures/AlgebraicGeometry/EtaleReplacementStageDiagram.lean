@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # The stage diagram of an étale injective replacement
 
-Source: Stacks Project, Tags 0EXZ and 04JC.
+## References
+
+* Stacks Project, Tags 0EXZ and 04JC
 -/
 
 @[expose] public section

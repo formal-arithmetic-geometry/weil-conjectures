@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Transporting algebraization along a closed immersion
-Source: Stacks Project, Theorem 088E, first paragraph, and Lemma 087T.
+
+## References
+
+* Stacks Project, Tags 088E and 087T
 -/
 
 @[expose] public section

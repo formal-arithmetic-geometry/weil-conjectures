@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesRestriction
 
 /-! # Affine section comparisons for coherent formal modules
 
-Source: Stacks Project, Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section

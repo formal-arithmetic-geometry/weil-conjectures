@@ -20,7 +20,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Ambient ideal-power extension for a closed structure module
 
-Source: Stacks Project, Tags 01YB, 01XZ and 01QY.
+## References
+
+* Stacks Project, Tags 01YB, 01XZ and 01QY
 -/
 
 @[expose] public section

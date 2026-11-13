@@ -21,7 +21,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # Eventual compatibility of finitely many stage sections
 
-Source: Stacks Project, Sites Tag 0A35; Étale Cohomology Tag 0EYL.
+## References
+
+* Stacks Project, Tags 0A35 and 0EYL
 -/
 
 @[expose] public section

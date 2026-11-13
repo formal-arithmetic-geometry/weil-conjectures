@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Left-derived universal property after localization transport
 
-Source: Stacks Project, Tags 06YJ and 05RU.
+## References
+
+* Stacks Project, Tags 06YJ and 05RU
 -/
 
 @[expose] public section

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomUncurryComponentNatur
 
 /-! # Localized evaluation and chain-map composition
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ.
+## References
+
+* Stacks Project, Tags 0A90 and 08DJ
 -/
 
 @[expose] public section

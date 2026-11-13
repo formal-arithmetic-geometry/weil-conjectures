@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 
 /-! # The underived open counit square
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
+## References
+
+* Stacks Project, Tags 08FE and 08BV
 -/
 
 @[expose] public section

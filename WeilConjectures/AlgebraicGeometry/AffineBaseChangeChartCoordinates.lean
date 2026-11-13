@@ -18,7 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Coordinates for base change on compatible affine charts
 
-Source: Stacks Project, Tags 02KG and 01I9.
+## References
+
+* Stacks Project, Tags 02KG and 01I9
 -/
 
 @[expose] public section

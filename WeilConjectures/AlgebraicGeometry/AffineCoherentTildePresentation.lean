@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Affine coherent sheaves have associated-module presentations
 
-Source: Stacks Project, Tags 01IB and 01XZ.
+## References
+
+* Stacks Project, Tags 01IB and 01XZ
 -/
 
 @[expose] public section

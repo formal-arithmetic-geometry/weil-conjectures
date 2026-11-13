@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # The affine formal equivalence with its two natural comparisons
 
-Source: Stacks Project, Tags 087W, 01IB and 00MA.
+## References
+
+* Stacks Project, Tags 087W, 01IB and 00MA
 -/
 
 @[expose] public section

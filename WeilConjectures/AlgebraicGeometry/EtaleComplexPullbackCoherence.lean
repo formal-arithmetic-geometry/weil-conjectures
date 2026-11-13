@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Coherence of termwise pullbacks over a cone
 
-Source: Stacks Project, Tag 0GIT, proof, and inverse-image composition coherence.
+## References
+
+* Stacks Project, Tag 0GIT
 -/
 
 @[expose] public section

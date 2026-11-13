@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # Detection of morphisms by geometric points over a field
 
-Source: Stacks Project, Tags 02GL and 03QR.
+## References
+
+* Stacks Project, Tags 02GL and 03QR
 -/
 
 @[expose] public section

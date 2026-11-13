@@ -12,7 +12,9 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 /-!
 # Base change morphism for etale extension by zero
 
-Source: Stacks Project, Etale Cohomology, Tags 03S6 (proof) and 03S3(3).
+## References
+
+* Stacks Project, Tags 03S6 and 03S3
 -/
 
 @[expose] public section

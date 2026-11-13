@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # Realization of a balanced algebra action
 
-Source: Stacks Project, Tags 01LX and 01SB, as used in Tag 0897.
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section

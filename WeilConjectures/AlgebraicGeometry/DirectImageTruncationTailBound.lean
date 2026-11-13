@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # Shifting a uniform direct-image bound to the truncation tail
 
-Source: Stacks Project, Tag 08D5, final truncation argument.
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section

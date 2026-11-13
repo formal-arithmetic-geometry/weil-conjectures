@@ -21,7 +21,9 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Transport of tensor base change to a specified cartesian square
 
-Source: Stacks Project, Tag 0A1D, displayed cartesian-square comparison.
+## References
+
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section

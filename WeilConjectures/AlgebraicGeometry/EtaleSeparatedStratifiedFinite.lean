@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.UnramifiedQuasiFinite
 /-!
 # Finite étale strata of a separated étale morphism
 
-Source: More on Morphisms, Lemma Tag 07RZ, together with Etale Cohomology, Lemma Tag 03S9.
+## References
+
+* Stacks Project, Tags 07RZ and 03S9
 -/
 
 @[expose] public section

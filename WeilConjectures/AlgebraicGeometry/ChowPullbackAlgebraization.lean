@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 
 /-! # Algebraization of the pullback along a Chow modification
 
-Source: Stacks Project, Theorem 088E, projective compactification argument.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

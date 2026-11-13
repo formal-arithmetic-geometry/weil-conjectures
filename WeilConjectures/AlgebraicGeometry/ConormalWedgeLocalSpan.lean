@@ -15,7 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Local generation of conormal wedges by affine ideal sections
 
-Source: Stacks Project, Tags 01R3 and 0096, and affine module localization. -/
+## References
+
+* Stacks Project, Tags 01R3 and 0096
+-/
 
 @[expose] public section
 set_option autoImplicit false

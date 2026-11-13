@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePerfectTruncationTriangle
 
 /-! # Extending perfect complexes after adjoining a shifted locally free sheaf
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08EG, Lemma 36.13.6.
+## References
+
+* Stacks Project, Tag 08EG
 -/
 
 @[expose] public section

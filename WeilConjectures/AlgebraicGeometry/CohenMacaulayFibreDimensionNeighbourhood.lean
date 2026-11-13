@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FlatQuasiFiniteSmoothDimension
 
 /-! # Constant dimension neighbourhoods in a Cohen-Macaulay family
 
-Source: Stacks Project, Tags 00RH and 0A21 (10); the local step underlying 02NM.
+## References
+
+* Stacks Project, Tags 00RH, 0A21 and 02NM
 -/
 
 @[expose] public section

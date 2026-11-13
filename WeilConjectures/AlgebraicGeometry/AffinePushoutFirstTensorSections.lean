@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.AffinePushoutModuleSectionPresentation
 
 /-! # Affine pushout ring and first tensor sections
 
-Source: Stacks Project, Morphisms, Lemma 01SB, key algebra observation.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

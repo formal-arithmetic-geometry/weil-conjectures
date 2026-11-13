@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Derived Mayer--Vietoris for a qcqs scheme
 
-Source: Stacks Project, Cohomology, Tag 08BV; Derived Categories of Schemes, Tag 08D5.
+## References
+
+* Stacks Project, Tags 08BV and 08D5
 -/
 
 @[expose] public section

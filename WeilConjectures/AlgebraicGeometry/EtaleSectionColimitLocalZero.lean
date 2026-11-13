@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleModuleSheafSectionUniverse
 
 /-! # Local vanishing before finite selection in etale sheaf colimits
 
-Source: Stacks Project, Sites, Lemma Tag 0738, proof of part (2).
+## References
+
+* Stacks Project, Tag 0738
 -/
 
 @[expose] public section

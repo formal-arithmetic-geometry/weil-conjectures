@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 /-!
 # Constant coefficients and the inverse-image unit
 
-Source: Stacks Project, Tag 03Q1 (2), (4), and Tag 0A5G.
+## References
+
+* Stacks Project, Tags 03Q1 and 0A5G
 -/
 
 @[expose] public section

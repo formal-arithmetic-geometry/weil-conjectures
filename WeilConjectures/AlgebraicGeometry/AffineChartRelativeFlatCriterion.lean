@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Relative flatness on a single affine chart
 
-Source: Stacks Project, Morphisms Tag 01U4; Algebra Tag 00HT (6).
+## References
+
+* Stacks Project, Tags 01U4 and 00HT
 -/
 
 @[expose] public section

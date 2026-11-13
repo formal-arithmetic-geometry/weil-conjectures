@@ -18,7 +18,9 @@ set_option linter.unusedVariables false
 
 /-! # Canonical descended finite Čech comparison
 
-Source: Stacks Project, Tags 09YN, 09YP and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN, 09YP and 09YQ
 -/
 
 @[expose] public section

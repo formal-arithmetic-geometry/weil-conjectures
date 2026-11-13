@@ -12,8 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Colimits and inverse image of abelian étale sheaves
 
-Source: Stacks Project, Categories, Lemma 0038(1), applied to the inverse-image
-adjunction of Étale Cohomology, Definition 03Q0; Étale Cohomology, proof of Lemma 0A4B.
+## References
+
+* Stacks Project, Tags 0038, 03Q0 and 0A4B
 -/
 
 @[expose] public section

@@ -18,7 +18,9 @@ import all WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # The generic stalk of a birational line pushforward
 
-Source: Stacks Project, Tag 02O5.
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section

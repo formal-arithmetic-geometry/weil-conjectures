@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Naturality of derived tensor under exact open restriction
-Source: Stacks Project, Tag 079U, specialized to an open immersion.
+
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section

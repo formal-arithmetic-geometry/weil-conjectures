@@ -7,7 +7,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ConstantKoszulTensorIdentifications
 
 /-! # The normalized Koszul augmentation at one finite level
-Source: Stacks 099M and 06YN.
+
+## References
+
+* Stacks Project, Tags 099M and 06YN
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

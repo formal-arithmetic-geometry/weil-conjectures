@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesEmptyProducts
 
 /-! # CoherentFormalModulesFiniteProducts
 
-Source: Stacks Project, Lemma 087X.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section

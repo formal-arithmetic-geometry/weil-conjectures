@@ -25,7 +25,11 @@ public import WeilConjectures.AlgebraicGeometry.AffineBaseChangeRingDiagram
 public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonData
 
 /-! # Coherent geometric isomorphisms of specified affine models
-Source: Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 09RE, 08DW, 06Z0 and 0D5S
+-/
 
 @[expose] public section
 universe u w

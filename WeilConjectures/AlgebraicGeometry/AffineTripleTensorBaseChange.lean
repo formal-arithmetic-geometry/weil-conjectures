@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChangeInst
 /-!
 # Tensor-spectrum comparison for an open affine triple
 
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
+## References
+
+* Stacks Project, Tag 04AI
 -/
 
 @[expose] public section

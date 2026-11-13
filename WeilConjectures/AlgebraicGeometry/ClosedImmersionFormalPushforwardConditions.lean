@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Adic conditions under closed pushforward
 
-Source: Stacks Project, Tags 087T and 088A, and equation 0880.
+## References
+
+* Stacks Project, Tags 087T, 088A and 0880
 -/
 
 @[expose] public section

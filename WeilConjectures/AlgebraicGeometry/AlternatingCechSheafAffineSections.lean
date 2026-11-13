@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 
 /-! # Global sections of the increasing-tuple sheaf complex
 
-Source: Stacks Project, Tag 01FM, signed faces and intersection sections.
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section

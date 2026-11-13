@@ -18,7 +18,9 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 
 /-! # Cohomology comparison with affine etale neighborhoods
 
-Source: Stacks Project, Tag 0A51, affine case of the proof.
+## References
+
+* Stacks Project, Tag 0A51
 -/
 
 @[expose] public section

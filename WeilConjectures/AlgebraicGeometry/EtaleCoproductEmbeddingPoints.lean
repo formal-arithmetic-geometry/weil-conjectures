@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFieldPointFunctor
 /-!
 # Geometric points of a coproduct of field spectra
 
-Source: Stacks Project, Tags 03QR and 01JB.
+## References
+
+* Stacks Project, Tags 03QR and 01JB
 -/
 
 @[expose] public section

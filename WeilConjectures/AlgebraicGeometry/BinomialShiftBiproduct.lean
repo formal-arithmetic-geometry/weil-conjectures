@@ -11,7 +11,9 @@ public import Mathlib.Data.Nat.Choose.Basic
 
 /-! # Binomial sums of shifted objects
 
-Source: Stacks Project, Tag 08EK, binomial expansion in the cone construction.
+## References
+
+* Stacks Project, Tag 08EK
 -/
 
 @[expose] public section

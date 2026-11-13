@@ -16,7 +16,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Descent of maps between fixed bounded module families
 
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (2).
+## References
+
+* Stacks Project, Tag 01ZR
 -/
 
 @[expose] public section

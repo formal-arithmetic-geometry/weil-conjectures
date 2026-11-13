@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
 
 /-! # Canonical module base change under open restriction
 
-Source: Stacks Project, Tags 08FE and 08HY; the local reduction in Tag 08IB.
+## References
+
+* Stacks Project, Tags 08FE, 08HY and 08IB
 -/
 
 @[expose] public section

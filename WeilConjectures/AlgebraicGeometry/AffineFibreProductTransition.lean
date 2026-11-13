@@ -12,7 +12,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Affine transitions between fibre products
 
-Source: Stacks Project, Morphisms, Tags 01SD and 01SC, and Schemes, Tag 01KR.
+## References
+
+* Stacks Project, Tags 01SD, 01SC and 01KR
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ import WeilConjectures.AlgebraicGeometry.AffineModuleTensorCounitFactor
 import WeilConjectures.AlgebraicGeometry.AffineModuleTensorUnitLift
 /-! # Affine module tensor CoherenceComparisons
 
-Source: Stacks Project, Morphisms, Lemma 01SB.
+## References
+
+* Stacks Project, Tag 01SB
 -/
 
 @[expose] public section

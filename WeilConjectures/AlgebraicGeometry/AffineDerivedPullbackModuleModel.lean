@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 
 /-! # A module-complex model for affine derived pullback
 
-Source: Stacks Project, Tag 08DW(2), using Tag 06Z0 and Tag 08DV.
+## References
+
+* Stacks Project, Tags 08DW, 06Z0 and 08DV
 -/
 
 @[expose] public section

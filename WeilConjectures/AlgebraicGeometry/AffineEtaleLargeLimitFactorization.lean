@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.AffineEtaleLargeLimitEquality
 
 /-! # Factorization of maps from larger affine étale limits
 
-Source: Stacks Project, Tags 01ZC and 099S.
+## References
+
+* Stacks Project, Tags 01ZC and 099S
 -/
 
 @[expose] public section

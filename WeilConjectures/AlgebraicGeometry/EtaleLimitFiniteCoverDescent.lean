@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage
 
 /-! # Descent of a finite qcqs étale covering
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u

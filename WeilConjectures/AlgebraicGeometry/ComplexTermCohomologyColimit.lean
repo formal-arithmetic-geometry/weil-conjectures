@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Cohomology colimits of evaluated complex terms
 
-Source: Stacks Project, Tags 09YQ and 0032.
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section

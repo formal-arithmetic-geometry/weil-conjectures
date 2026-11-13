@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # AffineEtaleBaseChangeGeometry
 
-Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
+## References
+
+* Stacks Project, Tags 0EYL and 09YL
 -/
 
 @[expose] public section

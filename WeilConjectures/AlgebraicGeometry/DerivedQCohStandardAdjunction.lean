@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 
 /-! # Transport of a quasi-coherent direct-image adjunction to standard localizations
 
-Source: Stacks Project, Tags 05RU and 079V.
+## References
+
+* Stacks Project, Tags 05RU and 079V
 -/
 
 @[expose] public section

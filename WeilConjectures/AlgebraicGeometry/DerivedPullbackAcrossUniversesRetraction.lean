@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Retraction for derived pullback across localization universes
 
-Source: Stacks Project, Tag 0D5S.
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section

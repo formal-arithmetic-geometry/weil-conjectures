@@ -38,7 +38,9 @@ Descend the proper morphism and relatively flat coefficient module to a Noetheri
 stage, resolve one universal ordinary Čech model there, and pull back the same
 model and resolution. The comparisons are existential homology isomorphisms.
 
-Source: Stacks Project, Tags 0A1H, 0B91 and 064U.
+## References
+
+* Stacks Project, Tags 0A1H, 0B91 and 064U
 -/
 
 @[expose] public section

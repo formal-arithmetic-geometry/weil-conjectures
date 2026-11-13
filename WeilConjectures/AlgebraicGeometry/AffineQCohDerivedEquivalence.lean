@@ -21,7 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-!
 # The affine quasi-coherent derived equivalence
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.3.5, Tag 06Z0.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section

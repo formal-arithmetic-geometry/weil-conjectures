@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Coproduct preservation by the shared derived tensor
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9U, first two sentences of proof;
-Cohomology, Tags 06YH and 0FPB; Injectives, Tag 07D9.
+## References
+
+* Stacks Project, Tags 0A9U, 06YH, 0FPB and 07D9
 -/
 
 @[expose] public section

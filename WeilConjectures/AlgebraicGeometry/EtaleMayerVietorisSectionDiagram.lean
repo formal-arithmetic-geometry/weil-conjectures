@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # A section-complex diagram computing étale Mayer–Vietoris pullback
 
-Source: Stacks Project, Tag 0A50.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

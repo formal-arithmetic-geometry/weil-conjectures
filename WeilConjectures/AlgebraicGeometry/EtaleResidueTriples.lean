@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.InducedCategory
 /-!
 # Étale algebras with a prime and a residue-field embedding
 
-Source: Stacks Project, Tag 04HX, first paragraph of the proof.
+## References
+
+* Stacks Project, Tag 04HX
 -/
 
 @[expose] public section

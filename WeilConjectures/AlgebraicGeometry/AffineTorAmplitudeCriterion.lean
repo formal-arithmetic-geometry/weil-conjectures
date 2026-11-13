@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Tor amplitude under the affine associated-sheaf correspondence
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.10.4, Tag 08E9,
-part (1).
+## References
+
+* Stacks Project, Tag 08E9
 -/
 
 @[expose] public section

@@ -19,7 +19,9 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Étale schemes over a field and continuous G-sets
 
-Source: Stacks Project, Tags 03QR and 03QS.
+## References
+
+* Stacks Project, Tags 03QR and 03QS
 -/
 
 @[expose] public section

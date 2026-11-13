@@ -20,7 +20,10 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoordinates
 
 /-! # Affine scalar Ext and dual Koszul cohomology
 
-Source: Stacks Project, Tag 0BQZ, local finite free Hom computation. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 

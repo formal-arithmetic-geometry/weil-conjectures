@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorUnit
 
 /-! # Descent of coherent tensor pullback comparisons
 
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27.
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section

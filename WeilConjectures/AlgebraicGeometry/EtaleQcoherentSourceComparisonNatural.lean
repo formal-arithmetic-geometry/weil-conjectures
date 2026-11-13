@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 
 /-! # Natural comparison of lifted tensor-sheaf cohomology with ordinary H
 
-Source: Stacks Project, Tags 03P2 and 03FD.
+## References
+
+* Stacks Project, Tags 03P2 and 03FD
 -/
 
 @[expose] public section

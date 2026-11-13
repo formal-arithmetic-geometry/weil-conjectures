@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.AffineBasisRestrictedLowerTailLocalBoun
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Local cohomological bound for a restricted lower tail
-Source: Stacks Project, Tags 0D64, 01E1 and 03FD. -/
+
+## References
+
+* Stacks Project, Tags 0D64, 01E1 and 03FD
+-/
 
 @[expose] public section
 universe u wC wV

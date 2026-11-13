@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 
 /-! # Finite selection over a Noetherian coefficient ring
 
-Source: Stacks Project, Tag 09Z6 (3), finite selection using constructible supports.
+## References
+
+* Stacks Project, Tag 09Z6
 -/
 
 @[expose] public section

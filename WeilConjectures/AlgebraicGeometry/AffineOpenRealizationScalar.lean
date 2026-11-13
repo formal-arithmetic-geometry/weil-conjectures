@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSheafificationScalar
 
 /-! # Scalar compatibility of affine realization
 
-Source: Stacks Project, Tags 06Z0, 08EB and 08EJ.
+## References
+
+* Stacks Project, Tags 06Z0, 08EB and 08EJ
 -/
 
 @[expose] public section

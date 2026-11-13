@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GenericGeometricIrreducibilityShrink
 
 /-! # Simultaneous geometric irreducibility on an open
 
-Source: Stacks Project, Tags 0559 and 055G.
+## References
+
+* Stacks Project, Tags 0559 and 055G
 -/
 
 @[expose] public section

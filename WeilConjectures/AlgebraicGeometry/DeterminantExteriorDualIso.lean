@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 
 /-! Intermediate determinant facts for the ordinary determinant evaluation.
-Source: Stacks Project, Tag 0BRT. -/
+
+## References
+
+* Stacks Project, Tag 0BRT
+-/
 
 @[expose] public section
 

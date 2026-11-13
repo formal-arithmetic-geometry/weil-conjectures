@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
 /-! # Quantitative stabilization for functorial hypercohomology
 
-Source: Stacks Project, Tags 015J and 0EZM.
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section

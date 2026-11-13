@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CechComparisonMapNaturality
 
 /-! # Naturality of the affine-cover Čech comparison isomorphisms
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01EQ; Cohomology of Schemes, Tag 01XD.
+## References
+
+* Stacks Project, Tags 01EQ and 01XD
 -/
 
 @[expose] public section

@@ -16,8 +16,9 @@ import WeilConjectures.RingTheory.EtaleSectionIdempotentSplitting
 
 /-! # Cutting out a section modulo an ideal from an étale algebra
 
-Source: Stacks Project, More on Algebra, Tag 07M7, last paragraph;
-Algebra, Tags 00U7 and 00U8.
+## References
+
+* Stacks Project, Tags 07M7, 00U7 and 00U8
 -/
 
 @[expose] public section

@@ -14,8 +14,9 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 
 /-! # Etale algebras over a filtered colimit descend to a finite stage
 
-Source: Stacks Project, Algebra, Lemma Tag 00U2 (9), and more-algebra.tex,
-proof of Lemma Tag 0A02.
+## References
+
+* Stacks Project, Tags 00U2 and 0A02
 -/
 
 @[expose] public section

@@ -23,7 +23,9 @@ import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! # Nilpotence of the vanishing ideal on a coherent module
 
-Source: Stacks Project, Tag 01Y9.
+## References
+
+* Stacks Project, Tag 01Y9
 -/
 
 @[expose] public section

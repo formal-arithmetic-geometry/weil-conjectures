@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Milnor
 
 /-! # Lifting compatible finite-reduction morphisms
 
-Source: Stacks Project, Tags 09C6, 0940 and 0941.
+## References
+
+* Stacks Project, Tags 09C6, 0940 and 0941
 -/
 
 @[expose] public noncomputable section

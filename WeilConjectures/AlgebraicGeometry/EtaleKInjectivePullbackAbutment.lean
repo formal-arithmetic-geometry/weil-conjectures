@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleKInjectiveUnitLeray
 
 /-! # K-injective computation of the étale pullback abutment
 
-Source: Stacks Project, Tags 015J, 015K, 070I and 08BJ.
+## References
+
+* Stacks Project, Tags 015J, 015K, 070I and 08BJ
 -/
 
 @[expose] public section

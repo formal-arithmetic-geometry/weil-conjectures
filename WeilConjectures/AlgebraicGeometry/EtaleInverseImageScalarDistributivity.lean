@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageScalarDistributivityRi
 
 /-! # Distributivity of the transported scalar action
 
-Source: Stacks Project, Tag 03D2. -/
+## References
+
+* Stacks Project, Tag 03D2
+-/
 
 @[expose] public section
 

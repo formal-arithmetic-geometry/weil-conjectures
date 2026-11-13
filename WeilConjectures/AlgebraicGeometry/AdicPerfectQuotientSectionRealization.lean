@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 
 /-! # Explicit section adjoints for the ordinary quotient realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK.
+## References
+
+* Stacks Project, Tags 03CY and 03EK
 -/
 
 @[expose] public noncomputable section

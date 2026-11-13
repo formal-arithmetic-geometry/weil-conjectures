@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBou
 
 /-! # Affine sections and the canonical lower truncation
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, and Tag 08D4.
+## References
+
+* Stacks Project, Tags 06Z0 and 08D4
 -/
 
 @[expose] public section

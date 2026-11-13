@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanis
 
 /-! # Local affine-cover glue for cartesian higher-image sections
 
-Source: Stacks Project, Tag 0EYM, second proof, affine section reduction.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

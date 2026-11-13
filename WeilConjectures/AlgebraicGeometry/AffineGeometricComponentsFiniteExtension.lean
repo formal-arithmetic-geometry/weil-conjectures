@@ -20,7 +20,9 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 /-!
 # Geometric components after a finite constant extension
 
-Source: Stacks Project, varieties.tex, Tags 038E and 0387; morphisms.tex, Tags 01VB and 02NK.
+## References
+
+* Stacks Project, Tags 038E, 0387, 01VB and 02NK
 -/
 
 @[expose] public section

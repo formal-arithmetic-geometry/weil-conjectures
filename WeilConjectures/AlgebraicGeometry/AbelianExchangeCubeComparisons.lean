@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 
 /-! # Canonical comparison maps for a base-change cube
 
-Source: Stacks Project, Tags 03Q9 and 095T, restriction of section complexes.
+## References
+
+* Stacks Project, Tags 03Q9 and 095T
 -/
 
 @[expose] public section

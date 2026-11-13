@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.BaseChangePullbackComparisonComp
 
 /-! # Composition of target transitions
 
-Source: the transition argument in Stacks Tag 0F07, thickening step.
+## References
+
+* Stacks Project, Tag 0F07
 -/
 
 @[expose] public section

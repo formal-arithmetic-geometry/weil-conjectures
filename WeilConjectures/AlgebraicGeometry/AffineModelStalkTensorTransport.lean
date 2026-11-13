@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import WeilConjectures.AlgebraicGeometry.AffineModelStalkPresentation
 
 /-! # Natural intermediate stalk tensor comparisons
-Source: Stacks Project, Tags 008H, 0098, 008B and 01BH. -/
+
+## References
+
+* Stacks Project, Tags 008H, 0098, 008B and 01BH
+-/
 
 @[expose] public section
 set_option autoImplicit false

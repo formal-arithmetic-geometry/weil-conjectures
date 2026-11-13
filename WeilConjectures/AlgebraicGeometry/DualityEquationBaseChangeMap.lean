@@ -17,7 +17,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 The construction is the mate of the inverse canonical base-change square, using only
 the supplied direct-image/right-adjoint adjunctions.
 
-Source: Stacks Project, Tag 0AA8 (Lemma 48.6.2).
+## References
+
+* Stacks Project, Tag 0AA8
 -/
 
 @[expose] public section

@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Tensor-pullback sections restricted to opens
 
-Source: Stacks Project, Tag 03DR, equation defining associated quasi-coherent
-sections, and Tags 0095 and 0096, module pullback and its adjunction.
+## References
+
+* Stacks Project, Tags 03DR, 0095 and 0096
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorSymmetry
 
 /-! # Derived internal-Hom adjunction on a scheme
 
-Source: Stacks Project, Cohomology, Tags 08DJ and 0FPB.
+## References
+
+* Stacks Project, Tags 08DJ and 0FPB
 -/
 
 @[expose] public section

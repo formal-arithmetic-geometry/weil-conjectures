@@ -12,7 +12,9 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-! # Finite lisse sheaves in the explicit etale coefficient model
 
-Source: Stacks Project, Tags 03RU, 03RW, 03CY and 03A0.
+## References
+
+* Stacks Project, Tags 03RU, 03RW, 03CY and 03A0
 -/
 
 @[expose] public noncomputable section

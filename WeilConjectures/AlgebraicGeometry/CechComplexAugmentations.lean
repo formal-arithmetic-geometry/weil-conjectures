@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Functorial augmentations of arbitrary module Cech total complexes
 
-Source: Stacks Project, Tags 01EQ and 01FD.
+## References
+
+* Stacks Project, Tags 01EQ and 01FD
 -/
 
 @[expose] public section

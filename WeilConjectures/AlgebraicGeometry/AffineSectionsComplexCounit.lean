@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Reconstruction of an affine quasi-coherent complex from its sections
 
-Source: Stacks Project, Tag 01IB; Tag 06Z0, termwise associated sheaf construction.
+## References
+
+* Stacks Project, Tags 01IB and 06Z0
 -/
 
 @[expose] public section

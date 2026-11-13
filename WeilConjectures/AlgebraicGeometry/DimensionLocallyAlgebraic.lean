@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-!
 # Dimension of an irreducible locally algebraic scheme
 
-Source: Stacks Project, Varieties, Lemma 33.20.3, Tag 0A21, part (3).
+## References
+
+* Stacks Project, Tag 0A21
 -/
 
 @[expose] public section

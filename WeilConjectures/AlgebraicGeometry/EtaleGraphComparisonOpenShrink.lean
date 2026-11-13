@@ -9,8 +9,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting
 
 /-! # Shrinking the supporting open in the explicit graph comparison
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, and the
-product/intersection formula of `EtaleLocallyClosedGraphModel`.
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section

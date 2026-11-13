@@ -23,7 +23,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 
 /-! # Stabilization of ideal-power annihilators
 
-Source: Stacks Project, Tag 01YB, second paragraph, using Tags 01PO and 01Y8.
+## References
+
+* Stacks Project, Tags 01YB, 01PO and 01Y8
 -/
 
 @[expose] public section

@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison
 import WeilConjectures.AlgebraicGeometry.BaseChangeOpenFixedCounitsCompatibility
 /-! # Open restriction for the fixed derived pullback counits
-Source: Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U.
+
+## References
+
+* Stacks Project, Tags 08FE, 08HY, 08IB and 0D5U
 -/
 @[expose] public section
 set_option autoImplicit false

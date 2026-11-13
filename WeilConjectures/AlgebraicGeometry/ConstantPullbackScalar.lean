@@ -9,8 +9,9 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Constant scalar multiplication under module inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7;
-Cohomology on Sites, Tag 093M.
+## References
+
+* Stacks Project, Tags 03D2, 03D7 and 093M
 -/
 
 @[expose] public noncomputable section

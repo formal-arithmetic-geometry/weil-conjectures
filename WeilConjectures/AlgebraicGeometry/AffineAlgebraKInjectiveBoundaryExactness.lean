@@ -20,7 +20,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 
 /-! # Exactness of affine cycles and boundaries
 
-Source: Stacks Project, Tags 0AVW and 08D4.
+## References
+
+* Stacks Project, Tags 0AVW and 08D4
 -/
 
 @[expose] public section

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleConstructibleIso
 import WeilConjectures.AlgebraicGeometry.CoefficientSurjectiveRestrictionConstructible
 
 /-! # Constructible cohomology of the graded coefficient layer
-Source: Stacks Project, Tags 09BR and 094H.
+
+## References
+
+* Stacks Project, Tags 09BR and 094H
 -/
 
 @[expose] public section

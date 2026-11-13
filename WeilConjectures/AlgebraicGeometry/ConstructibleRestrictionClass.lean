@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClassCore
 /-!
 # Constructible representatives of restricted cohomology classes
 
-Source: Stacks Project, Tags 03SA(3) and 03Q5.
+## References
+
+* Stacks Project, Tags 03SA and 03Q5
 -/
 
 @[expose] public section

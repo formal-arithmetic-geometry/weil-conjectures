@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # The restriction mate for the intersection of two opens
 
-Source: Stacks Project, Tags 08FE and 08DG.
+## References
+
+* Stacks Project, Tags 08FE and 08DG
 -/
 
 @[expose] public section

@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageScalarAssociativity
 import Mathlib.Algebra.Module.MinimalAxioms
 /-! # Transporting modules through the etale inverse image
 
-Source: Stacks Project, Tags 03D1 and 03D2. -/
+## References
+
+* Stacks Project, Tags 03D1 and 03D2
+-/
 
 @[expose] public section
 

@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionU
 
 /-! # Comparison before evaluation at a base test object
 
-Source: Stacks Project, Sites Tags 03CB and 03CC, and Étale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 09YQ
 -/
 
 @[expose] public section

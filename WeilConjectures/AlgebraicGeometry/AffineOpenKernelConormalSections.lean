@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenKernelConormalTransport
 
 /-! # Conormal sections on an affine closed chart
 
-Source: Stacks Project, Tags 01R3 and 0096.
+## References
+
+* Stacks Project, Tags 01R3 and 0096
 -/
 
 @[expose] public section

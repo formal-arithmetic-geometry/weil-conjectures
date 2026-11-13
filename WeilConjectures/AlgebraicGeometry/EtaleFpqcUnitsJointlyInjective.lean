@@ -13,7 +13,10 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! # Joint injectivity of fpqc inverse-image units on étale objects
 
-Source: Stacks Project, Tags 09XM and 09XN, agreement-open uniqueness. -/
+## References
+
+* Stacks Project, Tags 09XM and 09XN
+-/
 
 @[expose] public section
 

@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafi
 
 /-! # Reflection of one constant comparison chart
 
-Source: Stacks Project, Tags 099T and 099Y, comparison and localization.
+## References
+
+* Stacks Project, Tags 099T and 099Y
 -/
 
 @[expose] public noncomputable section

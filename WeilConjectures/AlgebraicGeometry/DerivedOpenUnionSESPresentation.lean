@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # Short exact presentation on an arbitrary open union
 
-Source: Stacks Project, Tag 08BV, applied on the open union and pushed to X.
+## References
+
+* Stacks Project, Tag 08BV
 -/
 
 @[expose] public section

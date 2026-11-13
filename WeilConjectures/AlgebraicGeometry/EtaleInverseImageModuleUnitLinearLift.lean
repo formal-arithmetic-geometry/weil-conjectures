@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStruct
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-! # The transported abelian unit lifts to a module map
 
-Source: Stacks Project, Tag 03D3. -/
+## References
+
+* Stacks Project, Tag 03D3
+-/
 
 @[expose] public section
 

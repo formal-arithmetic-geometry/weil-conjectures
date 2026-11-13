@@ -11,8 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Extending bilinear operations from the affine basis
 
-Source: the affine-basis gluing argument in the construction of the associated
-graded algebra in Stacks Tag 087Z, with the sheaf axiom (Tag 0072).
+## References
+
+* Stacks Project, Tags 087Z and 0072
 -/
 
 @[expose] public section

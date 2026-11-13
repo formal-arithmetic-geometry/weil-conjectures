@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
 
 /-! # Compatibility of the canonical single-open direct-image comparison
 
-Source: Stacks Project, Tags 08FE, 0D5T and 08BV.
+## References
+
+* Stacks Project, Tags 08FE, 0D5T and 08BV
 -/
 
 @[expose] public section

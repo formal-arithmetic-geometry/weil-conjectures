@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRingDirectImageOperations
 /-!
 # Identifying the ring-object lift of sectionwise etale direct image
 
-Source: Stacks Project, Proposition 00YV, ring paragraph and Section 00YR.
+## References
+
+* Stacks Project, Tags 00YV and 00YR
 -/
 
 @[expose] public section

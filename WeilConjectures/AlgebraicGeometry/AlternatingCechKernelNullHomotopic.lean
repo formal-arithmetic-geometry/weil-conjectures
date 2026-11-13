@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSecondSortingIdentity
 /-!
 # Null homotopy for the kernel of ordered restriction
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ, 01FK and 01FM.
+## References
+
+* Stacks Project, Tags 01FJ, 01FK and 01FM
 -/
 
 @[expose] public section

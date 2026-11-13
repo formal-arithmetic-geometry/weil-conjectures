@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitConeRestrictionNaturality
 
 /-! # Difference of restrictions on the actual open cohomology groups
 
-Source: Stacks Project, Tags 0A50, 01F7 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50, 01F7 and 09YQ
 -/
 
 @[expose] public section

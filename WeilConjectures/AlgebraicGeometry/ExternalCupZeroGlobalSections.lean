@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 
 /-! # Degree-zero external cup on ordinary sections
 
-Source: Stacks Project, Cohomology, Tags 01DZ, 01F7, 0FKV; Varieties, Tag 0BED.
+## References
+
+* Stacks Project, Tags 01DZ, 01F7, 0FKV and 0BED
 -/
 
 @[expose] public section

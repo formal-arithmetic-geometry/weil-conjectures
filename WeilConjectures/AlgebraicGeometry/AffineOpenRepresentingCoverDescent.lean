@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent
 
 /-! # Descent of a representing etale cover in an affine open system
 
-Source: Stacks Project, Tags 0EYL and 03Q6, finite objects, maps and cover descent. -/
+## References
+
+* Stacks Project, Tags 0EYL and 03Q6
+-/
 
 @[expose] public section
 

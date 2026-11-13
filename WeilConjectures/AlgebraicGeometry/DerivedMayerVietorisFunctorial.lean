@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # Functoriality of derived Mayer--Vietoris triangles
 
-Source: Stacks Project, Cohomology, Tags 08BV and 0D5T; Derived Categories of Schemes,
-Tag 0DJ9.
+## References
+
+* Stacks Project, Tags 08BV, 0D5T and 0DJ9
 -/
 
 @[expose] public section

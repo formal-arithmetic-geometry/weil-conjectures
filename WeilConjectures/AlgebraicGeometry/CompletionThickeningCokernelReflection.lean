@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 /-! # Reflection of cokernel torsion on a closed thickening
 
-Source: Stacks Project, Tags 088A and 0888.
+## References
+
+* Stacks Project, Tags 088A and 0888
 -/
 
 @[expose] public section

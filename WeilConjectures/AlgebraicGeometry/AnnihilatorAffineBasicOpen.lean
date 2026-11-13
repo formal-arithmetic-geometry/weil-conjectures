@@ -15,7 +15,9 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Compatibility of affine annihilators on basic opens
 
-Source: Stacks Project, Morphisms, Lemma 05JU and Algebra, Lemma 07T8.
+## References
+
+* Stacks Project, Tags 05JU and 07T8
 -/
 
 @[expose] public section

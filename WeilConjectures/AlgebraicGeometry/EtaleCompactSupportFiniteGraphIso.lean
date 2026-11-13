@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportGraphSheafNormalizat
 
 /-! # The specified compact-support graph map for a finite etale morphism
 
-Source: Stacks Project Tags 0F4L and 015F.
+## References
+
+* Stacks Project, Tags 0F4L and 015F
 -/
 
 @[expose] public section

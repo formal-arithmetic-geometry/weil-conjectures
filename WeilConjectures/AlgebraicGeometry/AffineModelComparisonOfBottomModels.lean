@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentOb
 import WeilConjectures.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects
 
 /-! # Propagation of bottom-stage affine models
-Source: Stacks Project, Tags 09RE and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 09RE and 0D5S
+-/
 
 @[expose] public section
 universe u w

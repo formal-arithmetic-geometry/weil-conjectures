@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Constant sheaves and the constructed set inverse image
 
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5.
+## References
+
+* Stacks Project, Tags 03CB, 03CC and 03P5
 -/
 
 @[expose] public section

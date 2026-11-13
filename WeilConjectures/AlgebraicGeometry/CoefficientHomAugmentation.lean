@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientHomUnit
 
 /-! # Augmentation evaluation in coefficient Hom complexes
 
-Source: Stacks Project, Algebraization, Tag 099I, final displayed composite.
+## References
+
+* Stacks Project, Tag 099I
 -/
 
 @[expose] public section

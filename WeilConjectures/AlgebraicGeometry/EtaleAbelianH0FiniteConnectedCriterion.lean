@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestrict
 /-!
 # A finite-cover connectedness criterion for abelian étale sections
 
-Source: Stacks Project, Tags 09ZG and 09ZF.
+## References
+
+* Stacks Project, Tags 09ZG and 09ZF
 -/
 
 @[expose] public section

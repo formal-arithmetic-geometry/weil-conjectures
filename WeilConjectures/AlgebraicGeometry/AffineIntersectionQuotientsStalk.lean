@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Localization of affine intersection quotient systems
 
-Source: Stacks Project, Tags 01IB, 01IC, and 00CS; ideal products as in 01I8.
+## References
+
+* Stacks Project, Tags 01IB, 01IC, 00CS and 01I8
 -/
 
 @[expose] public section

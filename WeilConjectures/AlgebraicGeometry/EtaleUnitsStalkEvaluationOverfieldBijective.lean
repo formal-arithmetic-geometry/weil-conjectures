@@ -16,7 +16,9 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 /-!
 # Bijectivity of evaluation on the geometric stalk of units
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
+## References
+
+* Stacks Project, Tags 03QU and 03QV
 -/
 
 @[expose] public section

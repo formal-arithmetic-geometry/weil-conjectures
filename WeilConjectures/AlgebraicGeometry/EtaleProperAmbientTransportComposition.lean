@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleProperOpenExchangeCube
 
 /-! # Composition of Cartesian proper ambient transports
 
-Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical pasting.
+## References
+
+* Stacks Project, Tag 0F7C
 -/
 
 @[expose] public noncomputable section

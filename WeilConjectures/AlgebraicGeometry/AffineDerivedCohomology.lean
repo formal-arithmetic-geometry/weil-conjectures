@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Cohomology of affine derived direct image
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 0AVW,
-Lemma 36.5.4, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section

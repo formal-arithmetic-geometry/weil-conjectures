@@ -15,7 +15,9 @@ import Mathlib.Data.Finset.Order
 /-!
 # Descent of étaleness to a stage of an inverse limit
 
-Source: Stacks Project, Limits, Lemma 07RP in Situation 081D.
+## References
+
+* Stacks Project, Tags 07RP and 081D
 -/
 
 @[expose] public section

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.ChowAlgebraizationSupport
 
 /-! # Algebraization on a quasi-projective proper modification
 
-Source: Stacks Project, Theorem 088E, projective compactification argument.
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section

@@ -16,10 +16,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 /-!
 # Higher direct images as sheafified cohomology presheaves
 
-Source: Stacks Project, Tag 03Q8.
-The presheaf is written using derived Hom from the free abelian sheaf of an etale
-representable. This is the standard representation of restricted hypercohomology:
-Hom(Z[U ×_X Y][0], K[q]) = H^q(U ×_X Y, K|). Its restriction maps are precomposition.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section

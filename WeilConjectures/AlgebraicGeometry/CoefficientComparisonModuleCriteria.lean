@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonD
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonConstructibilityTest
 import WeilConjectures.AlgebraicGeometry.ConstructibleProEtaleComparisonDerivedFunctor
 /-! # Classical-module comparison on coefficient-sized sites
-Source: Stacks Tags 099T, 099Y and 09AK, comparison on all module sheaves and on local models.
+
+## References
+
+* Stacks Project, Tags 099T, 099Y and 09AK
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

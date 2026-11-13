@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Vertical homology of the affine-open Čech resolution
 
-Source: Stacks Project, Tags 03AZ and 03P2.
+## References
+
+* Stacks Project, Tags 03AZ and 03P2
 -/
 
 @[expose] public section

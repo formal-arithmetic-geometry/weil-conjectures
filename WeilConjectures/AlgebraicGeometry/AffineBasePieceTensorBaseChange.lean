@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineBasePieceTensorBaseChangeI
 /-!
 # Base change of a compatible spectrum model of an affine base piece
 
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Limits, proof of Tag 01ZO.
+## References
+
+* Stacks Project, Tags 01JR, 01I4 and 01ZO
 -/
 
 @[expose] public section

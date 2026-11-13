@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 /-!
 # Étale neighbourhoods with a prescribed residue field
 
-Source: Stacks Project, More on Morphisms, Lemma 02LF.
+## References
+
+* Stacks Project, Tag 02LF
 -/
 
 @[expose] public section

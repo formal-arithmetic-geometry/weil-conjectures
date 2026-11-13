@@ -19,7 +19,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Chart lifts commute with stage transitions
 
-Source: Stacks Project, Tags 0EYM, 03CB and 03Q8.
+## References
+
+* Stacks Project, Tags 0EYM, 03CB and 03Q8
 -/
 
 @[expose] public section

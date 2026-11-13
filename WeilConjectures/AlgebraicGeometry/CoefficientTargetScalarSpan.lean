@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientIntersectionScalarDecomposit
 
 /-! # Scalar transport into the coefficient generator span
 
-Source: Stacks Project, Tags 02KG, 01I9, 01IA and 0097.
+## References
+
+* Stacks Project, Tags 02KG, 01I9, 01IA and 0097
 -/
 
 @[expose] public section

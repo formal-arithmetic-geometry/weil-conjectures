@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 /-!
 # Comparison of Ext sheaf cohomology with derived global sections
 
-Source: Stacks Project, Derived Categories, Definition 015A and Lemma 05TI;
-Etale Cohomology, the cohomology convention used in Lemma 03Q5.
+## References
+
+* Stacks Project, Tags 015A, 05TI and 03Q5
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackOpenSquare
 
 /-! # Normalized open-base-change isomorphism of external coefficients
 
-Source: Stacks Project, Tags 0BED, 0096, 0097 and 01CD.
+## References
+
+* Stacks Project, Tags 0BED, 0096, 0097 and 01CD
 -/
 
 @[expose] public section

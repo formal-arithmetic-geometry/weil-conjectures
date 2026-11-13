@@ -12,7 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparison
 
 /-! # Compatibility of terminal section identifications
 
-Source: Stacks Project, Tags 03S2, 03CB and 03CC.
+## References
+
+* Stacks Project, Tags 03S2, 03CB and 03CC
 -/
 
 @[expose] public section

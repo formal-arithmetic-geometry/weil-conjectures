@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 /-!
 # The Artin–Schreier sequence
 
-Source: Stacks Project, Tag 0A3J.
+## References
+
+* Stacks Project, Tag 0A3J
 -/
 
 @[expose] public section

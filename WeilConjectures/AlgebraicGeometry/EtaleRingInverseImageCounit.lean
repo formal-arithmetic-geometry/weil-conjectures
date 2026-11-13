@@ -16,7 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Lifting the étale set counit to ring sheaves
 
-Source: Stacks Project, Proposition 00YV, proof of (2), ring paragraph.
+## References
+
+* Stacks Project, Tag 00YV
 -/
 
 @[expose] public section

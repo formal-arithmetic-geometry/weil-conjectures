@@ -15,7 +15,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 /-! # Complex comparison in finite free affine Koszul coordinates
 
-Source: Stacks Project, Tag 0BQZ, displayed finite free Hom computation. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 

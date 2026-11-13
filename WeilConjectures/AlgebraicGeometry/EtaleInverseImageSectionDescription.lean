@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 /-!
 # Local representatives of sections of an étale inverse image
 
-Source: Stacks Project, Étale Cohomology, Tag 09XN.
+## References
+
+* Stacks Project, Tag 09XN
 -/
 
 @[expose] public section

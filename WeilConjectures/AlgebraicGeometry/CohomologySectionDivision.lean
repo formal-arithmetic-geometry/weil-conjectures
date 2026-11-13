@@ -14,7 +14,9 @@ import WeilConjectures.Topology.OpenModuleCohomologyLocalIso
 
 /-! # Dividing restricted twisted cohomology by a nonvanishing section
 
-Source: Stacks Project, Tags 09MR and 01CY, construction of the canonical map.
+## References
+
+* Stacks Project, Tags 09MR and 01CY
 -/
 
 @[expose] public section

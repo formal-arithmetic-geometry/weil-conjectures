@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageReverse
 
 /-! # Detecting nonvanishing from the section-ring chart formula
 
-Source: Stacks Project, Constructions, Tag 01N8, chart inverse-image calculation;
-Properties, Tag 01PZ, clause (1).
+## References
+
+* Stacks Project, Tags 01N8 and 01PZ
 -/
 
 @[expose] public section

@@ -14,7 +14,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 import WeilConjectures.AlgebraicGeometry.EtaleOverCoproductPowerCofan
 
 /-! # Čech comparison for a finite coproduct over an étale object
-Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod.
+
+## References
+
+* Stacks Project, Tag 03OZ
 -/
 
 @[expose] public section

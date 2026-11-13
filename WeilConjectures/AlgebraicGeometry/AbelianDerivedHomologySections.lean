@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 
 /-! # Local derived representatives of homology sections
 
-Source: Stacks Project, Tags 072W and 03Q8.
+## References
+
+* Stacks Project, Tags 072W and 03Q8
 -/
 
 @[expose] public section

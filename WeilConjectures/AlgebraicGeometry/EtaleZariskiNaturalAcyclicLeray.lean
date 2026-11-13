@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleZariskiDerivedSectionsAcyclicLeray
 
 /-! # Natural acyclic Leray with two Ext models
 
-Source: Stacks Project, Tags 03DW, 03P2 and 0733.
+## References
+
+* Stacks Project, Tags 03DW, 03P2 and 0733
 -/
 
 @[expose] public section

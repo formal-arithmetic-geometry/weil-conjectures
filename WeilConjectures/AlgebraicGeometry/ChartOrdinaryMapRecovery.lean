@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # The ordinary chart recovery equation
 
-Source: Stacks Project, Tags 0095 and 0096, functoriality of pullback.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section

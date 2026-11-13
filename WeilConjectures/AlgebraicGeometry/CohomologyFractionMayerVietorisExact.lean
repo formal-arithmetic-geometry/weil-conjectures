@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
 
 /-! # Exact Mayer--Vietoris row of fractions
 
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph.
+## References
+
+* Stacks Project, Tag 09MR
 -/
 
 @[expose] public section

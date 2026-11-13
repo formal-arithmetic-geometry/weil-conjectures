@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAffineLimitComparis
 
 /-! # The finite completed-module model of the affine section-limit functor
 
-Source: Stacks Project, Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section

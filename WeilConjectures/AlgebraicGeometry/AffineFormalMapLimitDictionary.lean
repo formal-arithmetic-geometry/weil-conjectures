@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 
 /-! # Affine formal maps and inverse limits of sections
 
-Source: Stacks Project, Tags 087W, 00MA and 0889(1).
+## References
+
+* Stacks Project, Tags 087W, 00MA and 0889
 -/
 
 @[expose] public section

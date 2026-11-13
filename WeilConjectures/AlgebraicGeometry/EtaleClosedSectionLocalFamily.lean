@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageSectionDescription
 
 /-! # Local representatives around a closed subscheme
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, local shrinking argument.
+## References
+
+* Stacks Project, Tag 09ZF
 -/
 
 @[expose] public section

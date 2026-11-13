@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 /-!
 # Constant pullback composition coherence
 
-Source: Stacks Project, sites.tex, Tag 03CB; cohomology.tex, Tag 01F8.
+## References
+
+* Stacks Project, Tags 03CB and 01F8
 -/
 
 @[expose] public section

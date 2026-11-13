@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCechLiftSquares
 /-!
 # Naturality of the canonical Cech-to-cohomology comparison map
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma Tag 01EQ.
+## References
+
+* Stacks Project, Tag 01EQ
 -/
 
 @[expose] public section

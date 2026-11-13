@@ -17,7 +17,9 @@ import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Affine completed-Hom evaluation before tensor comparison
 
-Source: Stacks Project, Tags 0882 and 087W.
+## References
+
+* Stacks Project, Tags 0882 and 087W
 -/
 
 @[expose] public section

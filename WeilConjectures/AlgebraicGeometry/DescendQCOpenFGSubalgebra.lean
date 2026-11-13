@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.DescendedQCNeighborhood
 /-!
 # Descent of quasi-compact opens to finitely generated subalgebras
 
-Source: Stacks Project, Varieties, Tag 0388.
+## References
+
+* Stacks Project, Tag 0388
 -/
 
 @[expose] public section

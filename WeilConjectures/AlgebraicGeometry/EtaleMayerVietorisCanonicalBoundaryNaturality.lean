@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 /-! # Pullback and coefficient naturality of a fixed resolution boundary
 
-Source: Stacks Project, Tag 0A50, functorial resolution proof, and Tag 01F7.
+## References
+
+* Stacks Project, Tags 0A50 and 01F7
 -/
 
 @[expose] public section

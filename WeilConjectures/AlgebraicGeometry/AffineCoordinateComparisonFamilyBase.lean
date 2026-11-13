@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineCoordinateDerivedComparison
 
 /-! # The two-label affine comparison family
-Source: Stacks Project, Tags 08DW and 06Y1. -/
+
+## References
+
+* Stacks Project, Tags 08DW and 06Y1
+-/
 
 @[expose] public section
 universe u w

@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenComparisonCertificate
 
 /-! # Comparison for one open in a cofinal tail
 
-Source: Stacks Project, Tag 09YQ, restriction of the coherent-system construction.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

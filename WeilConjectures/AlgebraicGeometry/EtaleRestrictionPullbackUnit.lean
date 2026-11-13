@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictionPullbackUnitEq
 /-!
 # Étale restriction and pullback units
 
-Source: Stacks Project, Sites, Tags 03CF and 03EF (unit-side counterpart).
+## References
+
+* Stacks Project, Tags 03CF and 03EF
 -/
 
 @[expose] public section

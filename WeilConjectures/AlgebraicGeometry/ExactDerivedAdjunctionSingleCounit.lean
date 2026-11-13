@@ -14,7 +14,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The exact derived adjunction counit on a single complex
 
-Source: Stacks Project, Tag 0AX3, derived trace as an adjunction counit.
+## References
+
+* Stacks Project, Tag 0AX3
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 
 /-! # Stationary CE comparisons at outer filtration bounds
 
-Source: Stacks Project, Tag 012K, cycle and boundary formulas and graded cohomology.
+## References
+
+* Stacks Project, Tag 012K
 -/
 
 @[expose] public section

@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Eventual finite locally free kernels of an affine lift
 
-Source: Stacks Project, Tag 08EG, the common Tor bound and kernel paragraphs.
+## References
+
+* Stacks Project, Tag 08EG
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianRepresentableGeneratorCoherence
 
 /-! # Naturality of free-representable cohomology comparison
 
-Source: Stacks Project, Tag 03Q8, and the free-sheaf adjunction.
+## References
+
+* Stacks Project, Tag 03Q8
 -/
 
 @[expose] public section

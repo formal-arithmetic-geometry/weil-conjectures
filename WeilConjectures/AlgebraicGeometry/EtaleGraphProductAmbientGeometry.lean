@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphProductInterchange
 
 /-! # Proper ambient part of the product interchange grid
 
-Source: Stacks Project, Tag 0F7J.
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section

@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionColimitEventualZero
 
 /-! # Stage representatives in filtered etale sheaf colimits
 
-Source: Stacks Project, Sites, Lemma Tag 0738, and Etale Cohomology, Tag 03Q4.
+## References
+
+* Stacks Project, Tags 0738 and 03Q4
 -/
 
 @[expose] public section

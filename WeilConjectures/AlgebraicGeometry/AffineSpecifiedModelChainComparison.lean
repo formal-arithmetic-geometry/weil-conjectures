@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.AffineModelHomTransportAssembly
 import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Specified affine perfect models and base-change comparison
-Source: Stacks Project, perfect.tex, Tag 09RE, Tags 08EB, 06Z0 and 08DW.
+
+## References
+
+* Stacks Project, Tags 09RE, 08EB, 06Z0 and 08DW
 -/
 @[expose] public section
 universe u w

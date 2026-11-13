@@ -19,7 +19,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # K-injective section homology from affine-basis acyclicity
 
-Source: Stacks Project, Tag 08C2, singleton cover; Tag 071B, compatible resolution tower.
+## References
+
+* Stacks Project, Tags 08C2 and 071B
 -/
 
 @[expose] public section

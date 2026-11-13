@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 /-! # Canonical coordinate-ring diagrams for affine descent
 
-Source: Stacks Project, Tag 09RF, affine case.
+## References
+
+* Stacks Project, Tag 09RF
 -/
 
 @[expose] public section

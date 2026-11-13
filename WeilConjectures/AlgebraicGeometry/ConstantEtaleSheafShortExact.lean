@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-!
 # Short exact sequences of finite constant etale sheaves
 
-Source: Stacks Project, Etale Cohomology, Tag 03RX (3), via Modules on Sites,
-Tag 093U, extension argument; Tag 03EI, exactness of module sheafification.
+## References
+
+* Stacks Project, Tags 03RX, 093U and 03EI
 -/
 
 @[expose] public section

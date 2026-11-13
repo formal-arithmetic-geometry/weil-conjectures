@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.CoefficientProEtaleFiniteLocalModel
 
 /-! # Exact inverse image of fixed-scalar coefficient sheaves
 
-Source: Stacks Project, Sites, Tags 00YV and 00WJ.
+## References
+
+* Stacks Project, Tags 00YV and 00WJ
 -/
 
 @[expose] public noncomputable section

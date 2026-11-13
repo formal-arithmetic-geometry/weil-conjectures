@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
 
 /-! # A disjoint open component gives a direct-image retract
 
-Source: Stacks Project, Tag 0A5D.
+## References
+
+* Stacks Project, Tag 0A5D
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # The canonical comparison of module and set inverse images
 
-Source: Stacks Project, Tags 03D3 and 03D7.
+## References
+
+* Stacks Project, Tags 03D3 and 03D7
 -/
 
 @[expose] public section

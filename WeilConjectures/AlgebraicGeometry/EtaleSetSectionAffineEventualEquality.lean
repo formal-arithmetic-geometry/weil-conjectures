@@ -14,7 +14,11 @@ import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Eventual equality on an affine étale object
-Source: Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN. -/
+
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 04HR and 09YN
+-/
 
 @[expose] public section
 

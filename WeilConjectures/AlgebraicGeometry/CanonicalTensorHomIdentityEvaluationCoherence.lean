@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalTensorHomEvaluationNaturality
 
 /-! # Equality transport for normalized identity evaluation
 
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96.
+## References
+
+* Stacks Project, Tags 08DJ, 0A90 and 0A96
 -/
 
 @[expose] public section

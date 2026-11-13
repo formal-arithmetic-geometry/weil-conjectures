@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 
 /-! # Ampleness is invariant under module isomorphisms
 
-Source: Stacks Project, Properties, Definition 01PS.
+## References
+
+* Stacks Project, Tag 01PS
 -/
 
 @[expose] public section

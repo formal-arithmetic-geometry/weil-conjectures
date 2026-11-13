@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of the coefficient comparisons in target transitions
 
-Source: Stacks Tags 0F07 and 09Z1, canonical restriction comparisons.
+## References
+
+* Stacks Project, Tags 0F07 and 09Z1
 -/
 
 @[expose] public section

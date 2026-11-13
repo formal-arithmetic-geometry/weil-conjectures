@@ -11,7 +11,11 @@ import all WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenTranspose
 
 /-! Canonical compatibility for relative Mayer--Vietoris.
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
+
+## References
+
+* Stacks Project, Tags 08BV, 08HY and 0DJ9
+-/
 
 @[expose] public section
 universe u w v u' v'

@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Abelian sections on a strictly henselian open neighbourhood
 
-Source: Stacks Project, Etale Cohomology, Tags 03QO, 03S2 and 03Q1.
+## References
+
+* Stacks Project, Tags 03QO, 03S2 and 03Q1
 -/
 
 @[expose] public section

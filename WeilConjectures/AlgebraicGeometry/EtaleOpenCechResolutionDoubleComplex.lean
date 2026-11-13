@@ -15,7 +15,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-! # The Čech double complex on opens with large étale coefficients
 
-Source: Stacks Project, Tag 03AZ, construction from an injective resolution.
+## References
+
+* Stacks Project, Tag 03AZ
 -/
 
 @[expose] public section

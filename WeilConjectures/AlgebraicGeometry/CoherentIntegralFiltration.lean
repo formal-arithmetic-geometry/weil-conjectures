@@ -13,7 +13,9 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # The finite coherent integral-ideal filtration predicate
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YF.
+## References
+
+* Stacks Project, Tag 01YF
 -/
 
 @[expose] public section

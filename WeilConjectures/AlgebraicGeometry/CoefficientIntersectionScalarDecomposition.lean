@@ -12,7 +12,9 @@ import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-! # Products generating the ring of an affine base-change intersection
 
-Source: Stacks Project, Tag 02KG, Lemma 30.5.1, affine tensor computation.
+## References
+
+* Stacks Project, Tag 02KG
 -/
 
 @[expose] public section

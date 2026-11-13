@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineBaseChangeSectionsInduction
 
 /-! # Balanced actions on affine sections of the direct-image algebra
 
-Source: Stacks Project, Tags 01LX, 01SB and 0897, affine tensor-action construction.
+## References
+
+* Stacks Project, Tags 01LX, 01SB and 0897
 -/
 
 @[expose] public section

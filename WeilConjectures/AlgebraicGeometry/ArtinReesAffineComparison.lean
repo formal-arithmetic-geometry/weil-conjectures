@@ -19,8 +19,9 @@ import Mathlib.CategoryTheory.Abelian.Basic
 
 /-! # Affine comparison for ideal products and intersections
 
-Source: Stacks Project, Cohomology of Schemes, Tag 01YA, affine reduction in the proof;
-Algebra, Tag 00IN.
+## References
+
+* Stacks Project, Tags 01YA and 00IN
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # A coherent source for compatible twisted sections
 
-Source: Stacks Project, Tag 0885.
+## References
+
+* Stacks Project, Tag 0885
 -/
 
 @[expose] public section

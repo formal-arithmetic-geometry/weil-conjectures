@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.IdentityDerivedHomologyComparison
 
 /-! # Derived-unit pullback and classical derived base change
 
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA.
+## References
+
+* Stacks Project, Tags 01F8, 01F9 and 01FA
 -/
 
 @[expose] public section

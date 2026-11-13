@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalV
 
 /-! # Eventual vanishing of affine relative higher-image sections
 
-Source: Stacks Project, Tag 0EYM, second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ExtendedCechUnitIsoImpliesComplete
 
 /-! # Fixed objects of the augmented extended Cech completion
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public section

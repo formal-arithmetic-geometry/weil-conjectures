@@ -16,7 +16,11 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelE
 import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 
 /-! # Canonical underived comparison in affine coordinates
-Source: Stacks Project, Tags 01I9 and 08DW. -/
+
+## References
+
+* Stacks Project, Tags 01I9 and 08DW
+-/
 
 @[expose] public section
 universe u w

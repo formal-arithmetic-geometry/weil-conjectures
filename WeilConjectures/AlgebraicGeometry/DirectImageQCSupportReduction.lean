@@ -26,7 +26,9 @@ import Mathlib.Topology.Sheaves.Abelian
 /-!
 # Quasi-compact reduction for a proper-support complex
 
-Source: Stacks Project, Tag 08EV.
+## References
+
+* Stacks Project, Tag 08EV
 -/
 
 @[expose] public section

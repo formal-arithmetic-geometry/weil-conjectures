@@ -8,7 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionModelComplex
 
 /-! # Ordinary completed quotient realization of modules
 
-Source: Stacks Project, Tags 093T and 09C6.
+## References
+
+* Stacks Project, Tags 093T and 09C6
 -/
 
 @[expose] public noncomputable section

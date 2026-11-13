@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleOpenCohomologyComparison
 /-!
 # Canonical comparison specified on resolution cocycles
 
-Source: Stacks Project, Tags 0A50 and 03F3, and the Ext/injective-resolution comparison.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

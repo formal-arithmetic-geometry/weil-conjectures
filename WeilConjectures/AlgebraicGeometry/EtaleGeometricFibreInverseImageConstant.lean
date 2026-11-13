@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 /-!
 # Inverse image over a geometric point is constant
 
-Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph.
+## References
+
+* Stacks Project, Tag 0A3H
 -/
 
 @[expose] public section

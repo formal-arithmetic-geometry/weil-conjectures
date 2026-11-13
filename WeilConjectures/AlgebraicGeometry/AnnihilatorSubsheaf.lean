@@ -13,7 +13,9 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 
 /-! # Construction of the annihilator subsheaf
 
-Source: Stacks Project, Tag 01PO, first sentence of the proof.
+## References
+
+* Stacks Project, Tag 01PO
 -/
 
 @[expose] public section

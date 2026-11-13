@@ -11,7 +11,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Affine diagonal tensor chart and kernel sections
 
-Source: Stacks Project, Tags 08S2, 01KJ and 01R3.
+## References
+
+* Stacks Project, Tags 08S2, 01KJ and 01R3
 -/
 
 @[expose] public section

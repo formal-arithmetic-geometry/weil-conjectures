@@ -9,7 +9,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Scalar section comparison along an inverse system
-Source: Stacks Project, Tags 09YN and 09YQ.
+
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section

@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffi
 
 /-! # Finite adic sections on affine opens
 
-Source: Stacks Project, Lemma 087W, first paragraph, and Lemma 087X (2).
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section

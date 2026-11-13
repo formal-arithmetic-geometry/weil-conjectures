@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.LisseCoefficientConstructible
 
 /-! # Normalized algebraic stalk towers on a weakly contractible covering
 
-Source: Stacks Project, proetale.tex, Tag 09C6, before algebraic reconstruction.
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section

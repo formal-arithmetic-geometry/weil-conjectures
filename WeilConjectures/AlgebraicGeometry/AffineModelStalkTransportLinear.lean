@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Scalar compatibility of the explicit affine stalk transport
 
-Source: Stacks Project, Tags 01BH and 01HV (7).
+## References
+
+* Stacks Project, Tags 01BH and 01HV
 -/
 
 @[expose] public section

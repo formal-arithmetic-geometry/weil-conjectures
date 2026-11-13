@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 
 /-! # Tensor pairing for the coefficient-degree comparisons
 
-Source: Stacks Project, Tags 01CD and 09MS.
+## References
+
+* Stacks Project, Tags 01CD and 09MS
 -/
 
 @[expose] public section

@@ -8,7 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructiblePr
 import WeilConjectures.CategoryTheory.CoefficientFiniteLocalSystemsPullback
 
 /-! # Finite local systems on coefficient-sized pro-etale sites
-Source: Stacks Tags 03RW and 00VC, inverse image and composition.
+
+## References
+
+* Stacks Project, Tags 03RW and 00VC
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

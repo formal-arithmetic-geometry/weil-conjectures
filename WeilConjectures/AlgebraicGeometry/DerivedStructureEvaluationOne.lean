@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # The canonical global cohomology class of one
 
-Source: Stacks Project, Tags 079V and 09M1.
+## References
+
+* Stacks Project, Tags 079V and 09M1
 -/
 
 @[expose] public section

@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Bijectivity of the canonical open-object cohomology map
 
-Source: Stacks Project, Cohomology on Sites, Tag 03F3.
+## References
+
+* Stacks Project, Tag 03F3
 -/
 
 @[expose] public section

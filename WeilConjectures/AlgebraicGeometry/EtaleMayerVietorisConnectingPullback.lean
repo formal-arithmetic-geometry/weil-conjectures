@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram
 /-!
 # Compatible connecting maps for the two étale Mayer–Vietoris sequences
 
-Source: Stacks Project, Tag 0A50 and its proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section

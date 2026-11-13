@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 /-!
 # Underlying abelian acyclicity of injective module-valued étale sheaves
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD, second paragraph of its proof.
+## References
+
+* Stacks Project, Tag 03FD
 -/
 
 @[expose] public section

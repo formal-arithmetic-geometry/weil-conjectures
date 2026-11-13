@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Explicit restriction of a coherent system to inverse-image opens
 
-Source: Stacks Project, Tag 09YQ, restriction of coherent systems.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section

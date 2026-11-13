@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 /-!
 # Uniqueness of the inverse-image torsor action
 
-Source: Stacks Project Tag 03Q1 (2), with the adjunction description of inverse image.
+## References
+
+* Stacks Project, Tag 03Q1
 -/
 
 @[expose] public section

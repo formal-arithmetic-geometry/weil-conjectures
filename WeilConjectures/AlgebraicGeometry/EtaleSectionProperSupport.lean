@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Proper support of an individual etale section
 
-Source: Stacks Project, Tags 04FT and 0F76.
+## References
+
+* Stacks Project, Tags 04FT and 0F76
 -/
 
 @[expose] public section

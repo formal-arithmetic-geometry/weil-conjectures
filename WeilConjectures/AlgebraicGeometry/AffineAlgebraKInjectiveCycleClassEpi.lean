@@ -17,7 +17,9 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-! # Surjectivity of affine cycle classes
 
-Source: Stacks Project, Tags 0AVW and 08D4.
+## References
+
+* Stacks Project, Tags 0AVW and 08D4
 -/
 
 @[expose] public section

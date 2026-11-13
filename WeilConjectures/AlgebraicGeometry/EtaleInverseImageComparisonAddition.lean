@@ -13,7 +13,10 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Addition transport for supplied inverse image comparisons
 
-Source: Stacks Project, Tag 03D2. -/
+## References
+
+* Stacks Project, Tag 03D2
+-/
 
 @[expose] public section
 

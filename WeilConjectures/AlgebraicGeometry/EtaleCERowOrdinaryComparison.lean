@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRowSectionsExtend
 
 /-! # Explicit ordinary cohomology comparisons for CE rows
 
-Source: Stacks Project, Tags 06XR, 01F8 and 015J.
+## References
+
+* Stacks Project, Tags 06XR, 01F8 and 015J
 -/
 
 @[expose] public section

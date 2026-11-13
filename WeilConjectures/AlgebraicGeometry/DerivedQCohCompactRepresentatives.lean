@@ -21,7 +21,9 @@ import WeilConjectures.CategoryTheory.CompactGeneratorAmbientThick
 
 /-! # Small representatives of compact quasi-coherent derived objects
 
-Source: Stacks Project, Tags 09M1 and 09IS; perfect-complex representative argument.
+## References
+
+* Stacks Project, Tags 09M1 and 09IS
 -/
 
 @[expose] public section

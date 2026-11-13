@@ -15,7 +15,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Ordinary Hom descent on an affine chart
 
-Source: Stacks Project, Tags 01ZR and 05N7 (2).
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
 -/
 
 @[expose] public section

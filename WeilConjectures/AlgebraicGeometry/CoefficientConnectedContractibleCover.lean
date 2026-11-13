@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-! # A coefficient-sized contractible cover subordinate to connected components
 
-Source: Stacks Project, Tags 09C6, 0990 and 098F.
+## References
+
+* Stacks Project, Tags 09C6, 0990 and 098F
 -/
 
 @[expose] public noncomputable section

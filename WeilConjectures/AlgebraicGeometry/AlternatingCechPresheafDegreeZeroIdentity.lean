@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CechCapPresheafLocalIso
 
 /-! # The degree-zero insertion identity before sheafification
 
-Source: Stacks Project, Tags 02FU and 01FM.
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section

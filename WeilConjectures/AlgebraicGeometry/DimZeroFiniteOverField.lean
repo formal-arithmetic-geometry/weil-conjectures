@@ -13,7 +13,9 @@ import Mathlib.RingTheory.Jacobson.Artinian
 /-!
 # Zero-dimensional schemes of finite type over a field
 
-Source: Stacks Project, Varieties, Lemma 33.20.2 (Tag 06LH), algebraic case.
+## References
+
+* Stacks Project, Tag 06LH
 -/
 
 @[expose] public section

@@ -17,7 +17,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Zero kernel of the affine singleton tensor comparison
 
-Source: Stacks Project, Tag 03P2, affine tensor calculation; Tags 01I4 and 01I9. -/
+## References
+
+* Stacks Project, Tags 03P2, 01I4 and 01I9
+-/
 
 @[expose] public section
 

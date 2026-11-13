@@ -16,7 +16,9 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Tensor coordinates before the second module pullback
 
-Source: Stacks Project, Morphisms, Tags 0473 and 01R3 (2); Schemes, Tag 01JU (1).
+## References
+
+* Stacks Project, Tags 0473, 01R3 and 01JU
 -/
 
 @[expose] public section

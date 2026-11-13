@@ -9,9 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-! # Canonical exact pullback tensor comparison
 
-Source: Stacks Tag 0F1E.
-The foundational comparisons are separated from support localization to avoid a dependency
-through smooth duality. Their definitions and public signatures are unchanged.
+## References
+
+* Stacks Project, Tag 0F1E
 -/
 
 @[expose] public section

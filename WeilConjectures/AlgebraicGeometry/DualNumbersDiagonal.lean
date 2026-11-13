@@ -12,8 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 # First-order restriction along the diagonal
 
 The diagonal of the dual-number thickening kills the mixed infinitesimal term.
-Source: the square-zero pushout calculation in Stacks Project, Tag 0B2B,
-proof of Lemma 33.16.2, applied locally over an arbitrary base ring.
+
+## References
+
+* Stacks Project, Tag 0B2B
 -/
 
 @[expose] public section

@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorCechCofaceEvaluatio
 import WeilConjectures.AlgebraicGeometry.EtaleSingletonTensorNormalizedRestriction
 
 /-! # Geometric cofaces of normalized singleton tensor sections
-Source: Stacks Project, Tag 03P2; Tag 03DR for section restrictions.
+
+## References
+
+* Stacks Project, Tags 03P2 and 03DR
 -/
 
 @[expose] public section

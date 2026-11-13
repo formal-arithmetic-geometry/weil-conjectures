@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # A finite affine section cover in one positive tensor power
 
-Source: Stacks Project, Morphisms, Lemma 01VS, first proof paragraph;
-Properties, Definition 01PS.
+## References
+
+* Stacks Project, Tags 01VS and 01PS
 -/
 
 @[expose] public section

@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.AbelianExtSectionsCocycleNormalization
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
 
 /-! # The fixed abelian counit resolution comparisons
-Source: Stacks Project, Tags 01F7, 03FD and 06XR.
+
+## References
+
+* Stacks Project, Tags 01F7, 03FD and 06XR
 -/
 @[expose] public section
 universe u

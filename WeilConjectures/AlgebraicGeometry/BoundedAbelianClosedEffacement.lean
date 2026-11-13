@@ -21,7 +21,9 @@ import Mathlib.AlgebraicGeometry.QuasiAffine
 
 /-! # Effacement preserving a fixed coefficient exponent
 
-Source: Stacks Project, Tag 09ZE, proof with coefficients in Z/n.
+## References
+
+* Stacks Project, Tag 09ZE
 -/
 
 @[expose] public section

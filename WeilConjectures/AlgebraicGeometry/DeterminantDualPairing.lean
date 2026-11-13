@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.DeterminantDualAlternatingFamily
 import WeilConjectures.AlgebraicGeometry.ExteriorSheafDualExt
 
 /-! # Construction of the exterior dual pairing
-Source: Stacks Project, Tag 0BRT, determinant inversion.
+
+## References
+
+* Stacks Project, Tag 0BRT
 -/
 
 @[expose] public section

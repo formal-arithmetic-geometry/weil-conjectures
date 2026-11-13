@@ -9,7 +9,9 @@ import WeilConjectures.EtaleCohomology.EtaleSectionZeroOpen
 
 /-! # Closed support of sections of module sheaves
 
-Source: Stacks Project, Tags 04FR, 04FT and 0F4X.
+## References
+
+* Stacks Project, Tags 04FR, 04FT and 0F4X
 -/
 
 @[expose] public section

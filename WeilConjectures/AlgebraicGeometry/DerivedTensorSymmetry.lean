@@ -9,7 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Naturality of the shared derived tensor symmetry
-Source: Stacks Project, Cohomology, Tag 0FPB.
+
+## References
+
+* Stacks Project, Tag 0FPB
 -/
 
 @[expose] public section

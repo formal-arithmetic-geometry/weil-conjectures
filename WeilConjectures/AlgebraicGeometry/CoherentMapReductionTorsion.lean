@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsionCoker
 
 /-! # Torsion bounds for reductions of coherent maps
 
-Source: Stacks Project, Remark 0888.
+## References
+
+* Stacks Project, Tag 0888
 -/
 
 @[expose] public section

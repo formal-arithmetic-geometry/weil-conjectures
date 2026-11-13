@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Cohomology maps for commuting triangles over a fixed base
 
-Source: Stacks Project, Cohomology, Section 20.14 (Tag 01F7).
+## References
+
+* Stacks Project, Tag 01F7
 -/
 
 @[expose] public section

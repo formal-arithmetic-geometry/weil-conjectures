@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PrefixDeletionRestrictions
 /-!
 # The unsigned prefix-deletion correspondence
 
-Source: Stacks Project, Tag 01FM, equation-first-homotopy (Tag 01FN), omitted
-verification, prefix-deletion part.
+## References
+
+* Stacks Project, Tags 01FM and 01FN
 -/
 
 @[expose] public section

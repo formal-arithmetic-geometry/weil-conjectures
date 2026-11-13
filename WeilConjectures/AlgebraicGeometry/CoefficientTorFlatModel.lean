@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Bounded flat models for the coefficient-model Tor test
 
-Source: Stacks Project, Tags 08G0 and 08G1.
+## References
+
+* Stacks Project, Tags 08G0 and 08G1
 -/
 
 @[expose] public noncomputable section

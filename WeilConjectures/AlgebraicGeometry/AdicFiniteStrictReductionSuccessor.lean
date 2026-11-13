@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Normalization of the strict finite reduction tower
 
-Source: Stacks Project, Tags 06YY and 099M.
+## References
+
+* Stacks Project, Tags 06YY and 099M
 -/
 
 @[expose] public noncomputable section

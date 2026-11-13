@@ -19,7 +19,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 
 /-! # Transporting a tensor annihilator across a direct-image adjunction
 
-Source: Stacks Project, Tag 0E4G, projection-formula paragraph.
+## References
+
+* Stacks Project, Tag 0E4G
 -/
 
 @[expose] public section

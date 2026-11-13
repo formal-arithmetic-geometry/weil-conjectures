@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Local kernel-image comparison for tensor sections
 
-Source: Stacks Project, Tags 070S(2) and 03FH(1).
+## References
+
+* Stacks Project, Tags 070S and 03FH
 -/
 
 @[expose] public section

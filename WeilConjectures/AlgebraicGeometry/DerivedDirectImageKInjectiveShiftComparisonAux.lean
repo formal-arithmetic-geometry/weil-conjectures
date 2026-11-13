@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Naturality component for the shifted K-injective comparison
 
-Source: Stacks Project, Tag 079V.
+## References
+
+* Stacks Project, Tag 079V
 -/
 
 @[expose] public section

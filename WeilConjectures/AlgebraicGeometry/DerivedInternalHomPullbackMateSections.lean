@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackEvaluationSections
 
 /-! # Evaluation mate and its zeroth hypercohomology
 
-Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ.
+## References
+
+* Stacks Project, Tags 08I3, 079W and 08DJ
 -/
 
 @[expose] public section

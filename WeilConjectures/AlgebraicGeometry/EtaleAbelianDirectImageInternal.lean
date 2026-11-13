@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Internal group objects and the abelian direct image
 
-Source: Stacks Project, Section 00YR and Proposition 00YV, proof of (2).
+## References
+
+* Stacks Project, Tags 00YR and 00YV
 -/
 
 @[expose] public section

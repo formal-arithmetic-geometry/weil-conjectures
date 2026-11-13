@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresenta
 
 /-! # Affine derived classes for cartesian higher images
 
-Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

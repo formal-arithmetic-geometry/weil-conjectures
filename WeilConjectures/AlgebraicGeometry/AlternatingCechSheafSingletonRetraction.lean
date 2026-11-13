@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafConstruction
 
 /-! # Singleton projection retracts the local alternating augmentation
 
-Source: Stacks Project, Tag 02FU, the degree-zero insertion operator.
+## References
+
+* Stacks Project, Tag 02FU
 -/
 
 @[expose] public section

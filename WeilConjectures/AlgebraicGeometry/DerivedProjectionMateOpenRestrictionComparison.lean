@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Open restriction comparison for derived projection mates
 
-Source: Stacks Project, Tag 08EU, first sentence of the proof, and Tag 08FE.
+## References
+
+* Stacks Project, Tags 08EU and 08FE
 -/
 
 @[expose] public section

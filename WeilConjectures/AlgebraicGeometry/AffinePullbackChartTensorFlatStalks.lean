@@ -20,8 +20,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Tensor flatness on one pulled-back affine chart
 
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV; Morphisms Tag 01U4;
-Algebra Tag 00HT (6).
+## References
+
+* Stacks Project, Tags 01I4, 01IA, 01HV, 01U4 and 00HT
 -/
 
 @[expose] public section

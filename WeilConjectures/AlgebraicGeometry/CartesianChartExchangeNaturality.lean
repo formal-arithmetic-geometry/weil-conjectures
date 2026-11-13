@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartRestrictedMapEvaluation
 
 /-! # Naturality of the specified chart comparisons under exchange
 
-Source: Stacks Project, Tag 0EYM, second proof, commutativity of its comparison square.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

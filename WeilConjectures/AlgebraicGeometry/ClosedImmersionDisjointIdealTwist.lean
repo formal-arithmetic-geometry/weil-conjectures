@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionDisjointIdealTwistImage
 
 /-! # Restricting a disjoint ideal times an invertible module
 
-Source: Stacks Project, Varieties Remark 09NW and the local trivialization argument in
-Lemma 09NX.
+## References
+
+* Stacks Project, Tags 09NW and 09NX
 -/
 
 @[expose] public section

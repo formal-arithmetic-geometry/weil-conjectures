@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DiagonalConormalAffineComparison
 /-!
 # Conormal sheaf of the diagonal and relative differentials
 
-Source: Stacks Project, Tag 08S2.
+## References
+
+* Stacks Project, Tag 08S2
 -/
 
 @[expose] public section

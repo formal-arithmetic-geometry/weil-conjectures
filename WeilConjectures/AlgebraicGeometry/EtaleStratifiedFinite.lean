@@ -20,7 +20,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 /-!
 # Etale morphisms become finite etale on constructible strata
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.72.1, Tag 03S0.
+## References
+
+* Stacks Project, Tag 03S0
 -/
 
 @[expose] public section

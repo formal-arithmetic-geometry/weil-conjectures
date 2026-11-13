@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Etale charts for bounded lisse coefficient complexes
 
-Source: Stacks Project, Tags 094G and 09BI.
+## References
+
+* Stacks Project, Tags 094G and 09BI
 -/
 
 @[expose] public noncomputable section

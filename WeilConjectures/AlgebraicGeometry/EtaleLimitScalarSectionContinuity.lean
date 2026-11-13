@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionZeroEventually
 
 /-! # Scalar continuity for descended qcqs étale objects
 
-Source: Stacks Project, Tags 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section

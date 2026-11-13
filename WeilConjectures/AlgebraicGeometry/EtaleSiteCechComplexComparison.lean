@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.SiteCechMathlibComparison
 /-!
 # Comparison of the two étale Čech complex constructions
 
-Source: Stacks Project, Cohomology on Sites, Tags 03AK and 03AM.
+## References
+
+* Stacks Project, Tags 03AK and 03AM
 -/
 
 @[expose] public section

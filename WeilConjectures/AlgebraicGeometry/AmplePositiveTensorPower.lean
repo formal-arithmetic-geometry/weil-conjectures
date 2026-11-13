@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 
 /-! # Positive tensor powers preserve absolute ampleness
 
-Source: Stacks Project, Properties Definition 01PS and Lemma 01PT;
-Varieties Lemma 09NX, powering the component bundles.
+## References
+
+* Stacks Project, Tags 01PS, 01PT and 09NX
 -/
 
 @[expose] public section

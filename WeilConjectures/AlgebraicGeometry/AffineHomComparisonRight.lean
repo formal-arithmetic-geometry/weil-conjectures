@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.AffineHomComparisonGeneratorExte
 
 /-! # Covariant naturality of the affine Hom comparison
 
-Source: Stacks Project, Tag 01HV (4)-(5), and Tag 0BQZ. -/
+## References
+
+* Stacks Project, Tags 01HV and 0BQZ
+-/
 
 @[expose] public section
 

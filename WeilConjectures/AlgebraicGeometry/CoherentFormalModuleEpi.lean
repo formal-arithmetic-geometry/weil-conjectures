@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 
 /-! # Epimorphisms of coherent formal modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Y.
+## References
+
+* Stacks Project, Tag 087Y
 -/
 
 @[expose] public section

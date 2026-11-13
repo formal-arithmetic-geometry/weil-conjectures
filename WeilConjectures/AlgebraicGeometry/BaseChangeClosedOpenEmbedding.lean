@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Closed–open coefficient embedding
 
-Source: Stacks Project, Tag 0F07, closed–open part of the proof.
+## References
+
+* Stacks Project, Tag 0F07
 -/
 
 @[expose] public section

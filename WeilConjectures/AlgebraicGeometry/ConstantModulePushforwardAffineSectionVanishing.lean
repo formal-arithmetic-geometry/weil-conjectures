@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.
 
 /-! # Constant-module section vanishing at an inverse limit
 
-Source: Stacks Project, Tags 09Z1 and 09YQ, degree-zero continuity.
+## References
+
+* Stacks Project, Tags 09Z1 and 09YQ
 -/
 
 @[expose] public section

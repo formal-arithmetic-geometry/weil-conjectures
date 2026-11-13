@@ -24,7 +24,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 
 /-! # Acyclicity of extended injective torsion module sheaves
 
-Source: Stacks Project, Tags 0F1C, 03QU and 03FD.
+## References
+
+* Stacks Project, Tags 0F1C, 03QU and 03FD
 -/
 
 @[expose] public section

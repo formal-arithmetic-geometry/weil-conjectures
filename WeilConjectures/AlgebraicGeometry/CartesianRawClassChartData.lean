@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RawDerivedClassAffineDescent
 
 /-! # Finite-stage data for a raw cartesian class
 
-Source: Stacks Project, Tags 0EYL, 0EYM and 0GIT.
+## References
+
+* Stacks Project, Tags 0EYL, 0EYM and 0GIT
 -/
 
 @[expose] public section

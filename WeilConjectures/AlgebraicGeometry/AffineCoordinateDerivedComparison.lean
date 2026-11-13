@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.AffineCoordinateTensorComparison
 import WeilConjectures.CategoryTheory.CounitComparisonComposition
 
 /-! # Derived comparisons from concrete affine models
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08DW, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u w

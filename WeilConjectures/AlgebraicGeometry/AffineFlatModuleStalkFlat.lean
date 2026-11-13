@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-! # Flat stalks from flat sections on affine subopens
 
-Source: Stacks Project, Modules Tag 05NE, Algebra Tags 00H9 and 00HT.
+## References
+
+* Stacks Project, Tags 05NE, 00H9 and 00HT
 -/
 
 @[expose] public section

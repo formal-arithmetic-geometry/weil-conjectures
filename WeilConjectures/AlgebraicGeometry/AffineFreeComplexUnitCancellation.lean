@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeComplexModuleLift
 
 /-! # Cancelling a unit coefficient in an affine free cochain complex
 
-Source: Stacks Project, Tag 00MT.
+## References
+
+* Stacks Project, Tag 00MT
 -/
 
 @[expose] public section

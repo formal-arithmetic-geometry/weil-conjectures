@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystem
 
 /-! # Compatible injective coefficient systems
 
-Source: Stacks Project, Tags 0EXZ and 04JC.
+## References
+
+* Stacks Project, Tags 0EXZ and 04JC
 -/
 
 @[expose] public section

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleFilteredStepCohomology
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # The image predicate and the Cartan--Eilenberg abutment filtration
 
-Source: Stacks Project, Tag 015J.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section

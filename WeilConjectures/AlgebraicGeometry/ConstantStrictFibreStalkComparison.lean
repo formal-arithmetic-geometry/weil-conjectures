@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctorial
 
 /-! # Degree-zero strict-local stalk comparison for constant coefficients
 
-Source: Stacks Project, Tag 03Q9, applied in Tag 09Z5.
+## References
+
+* Stacks Project, Tags 03Q9 and 09Z5
 -/
 
 @[expose] public section

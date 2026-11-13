@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantLocalDimensionComponents
 
 /-! # Equidimensional fibre pieces
 
-Source: Stacks Project, Tags 02NM and 02NJ.
+## References
+
+* Stacks Project, Tags 02NM and 02NJ
 -/
 
 @[expose] public section

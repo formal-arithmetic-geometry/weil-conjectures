@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturalit
 /-!
 # Natural Ext identifications for resolution section complexes
 
-Source: Stacks Project, Tag 0A50, proof, and localization in Tag 03F3.
+## References
+
+* Stacks Project, Tags 0A50 and 03F3
 -/
 
 @[expose] public section

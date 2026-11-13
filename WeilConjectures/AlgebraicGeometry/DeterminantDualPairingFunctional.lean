@@ -14,7 +14,10 @@ import Mathlib.LinearAlgebra.ExteriorPower.Pairing
 import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # An internal determinant functional for a fixed tuple
-Source: Stacks Project, Tags 0BRT and 03CY.
+
+## References
+
+* Stacks Project, Tags 0BRT and 03CY
 -/
 
 @[expose] public section

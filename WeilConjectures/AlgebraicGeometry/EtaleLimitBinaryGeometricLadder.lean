@@ -16,7 +16,9 @@ import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Filtered.Connected
 /-! # Geometric Mayer--Vietoris ladder before continuity
 
-Source: Stacks Project, Tags 09YQ and 0A50.
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section

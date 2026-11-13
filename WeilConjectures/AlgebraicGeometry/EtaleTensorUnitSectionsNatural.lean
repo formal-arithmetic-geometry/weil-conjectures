@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorUnitRestrictionEquation
 
 /-! # Natural structure-sheaf coordinates for tensor sections
 
-Source: Stacks Project, Tags 0096, 01CA and 03DR.
+## References
+
+* Stacks Project, Tags 0096, 01CA and 03DR
 -/
 
 @[expose] public section

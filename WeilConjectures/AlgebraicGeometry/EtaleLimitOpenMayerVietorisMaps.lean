@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenBoundaryTransform
 
 /-! # Compatible Mayer--Vietoris maps on canonical open diagrams
 
-Source: Stacks Project, Tags 0A50 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50 and 09YQ
 -/
 
 @[expose] public section

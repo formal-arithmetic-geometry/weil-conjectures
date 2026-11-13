@@ -11,7 +11,9 @@ import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # A correction cochain from local horseshoe lifts
 
-Source: Stacks Project, Cohomology, Tag 01EQ and Tag 0B8S.
+## References
+
+* Stacks Project, Tags 01EQ and 0B8S
 -/
 
 @[expose] public section

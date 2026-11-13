@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparisonC
 
 /-! # Canonical module base change under changes of coordinates
 
-Source: Stacks Project, Tags 08HY, 0D5T, and 08IB.
+## References
+
+* Stacks Project, Tags 08HY, 0D5T and 08IB
 -/
 
 @[expose] public section

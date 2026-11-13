@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Eventual vanishing of one raw cartesian derived class
 
-Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT.
+## References
+
+* Stacks Project, Tags 0EYM, 0EYL and 0GIT
 -/
 
 @[expose] public section

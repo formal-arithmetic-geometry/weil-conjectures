@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 /-!
 # Values of functions on etale neighbourhoods are separable
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
+## References
+
+* Stacks Project, Tags 03QU and 03QV
 -/
 
 @[expose] public section

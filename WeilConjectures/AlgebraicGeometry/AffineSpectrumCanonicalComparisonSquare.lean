@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.AffineSpectrumCounitSquare
 
 /-! # The affine spectrum counit square on the canonical representative
 
-Source: Stacks Project, Tag 0DJ8, affine reduction; Tags 0098 and 0D5S.
+## References
+
+* Stacks Project, Tags 0DJ8, 0098 and 0D5S
 -/
 
 @[expose] public section

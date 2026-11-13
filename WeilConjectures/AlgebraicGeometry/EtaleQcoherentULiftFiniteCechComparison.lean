@@ -23,7 +23,9 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-! # Lifted étale cohomology computed by a finite affine section complex
 
-Source: Stacks Project, Tag 03P2, separated-case proof, and Tag 03DW (2).
+## References
+
+* Stacks Project, Tags 03P2 and 03DW
 -/
 
 @[expose] public section

@@ -15,7 +15,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Derived tensor preserves vanishing of cohomology at a stalk
 
-Source: Stacks Project, Cohomology, Tag 06YB; Tag 08EH, support conclusion.
+## References
+
+* Stacks Project, Tags 06YB and 08EH
 -/
 
 @[expose] public section

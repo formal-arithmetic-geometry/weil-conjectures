@@ -18,7 +18,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Transport of a discrete point presentation to the coefficient slice
 
-Source: Stacks, Tags 03CY and 00YV.
+## References
+
+* Stacks Project, Tags 03CY and 00YV
 -/
 
 @[expose] public section

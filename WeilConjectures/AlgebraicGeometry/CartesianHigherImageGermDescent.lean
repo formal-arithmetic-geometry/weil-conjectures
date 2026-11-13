@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Descent of germs of relative higher direct images
 
-Source: Stacks Project, Tag 0EYM, second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section

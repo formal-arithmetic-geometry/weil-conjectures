@@ -22,7 +22,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # The derived truncation comparison on an affine open
 
-Source: Stacks Project, Tag 08D4, parts (1)--(3), and Tag 0AVW.
+## References
+
+* Stacks Project, Tags 08D4 and 0AVW
 -/
 
 @[expose] public section

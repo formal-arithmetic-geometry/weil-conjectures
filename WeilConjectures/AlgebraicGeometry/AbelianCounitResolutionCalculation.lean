@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianResolutionComparisonEvaluation
 
 /-! # The abelian counit on a resolution
 
-Source: Stacks Project, Tags 01F7 and 06XR.
+## References
+
+* Stacks Project, Tags 01F7 and 06XR
 -/
 
 @[expose] public section

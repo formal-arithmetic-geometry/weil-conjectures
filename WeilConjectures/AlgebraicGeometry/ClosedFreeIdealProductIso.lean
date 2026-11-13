@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Closed finite free ideal-product comparison
 
-Source: Stacks Project, Tag 01QY, the affine quotient description of closed pushforward.
+## References
+
+* Stacks Project, Tag 01QY
 -/
 
 @[expose] public section

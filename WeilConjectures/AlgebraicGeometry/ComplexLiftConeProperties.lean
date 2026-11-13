@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # ComplexLiftConeProperties
 
-Source: Stacks Project, Tag 0BCA.
+## References
+
+* Stacks Project, Tag 0BCA
 -/
 
 @[expose] public section

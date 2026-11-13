@@ -17,7 +17,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 
 /-! # Finite-stage factorization with Noetherian coefficients
 
-Source: Stacks Project, Tags 09Z6, 09Z4, 09YZ and 09Z1.
+## References
+
+* Stacks Project, Tags 09Z6, 09Z4, 09YZ and 09Z1
 -/
 
 @[expose] public section

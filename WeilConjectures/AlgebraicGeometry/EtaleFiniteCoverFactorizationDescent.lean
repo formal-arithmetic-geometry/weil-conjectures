@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Descent of a finite affine covering with finitely many factorizations
 
-Source: Stacks Project, Étale Cohomology Tag 0EYL, and
-Limits Tags 01ZM and 01ZC, finite-presentation descent of objects and morphisms.
+## References
+
+* Stacks Project, Tags 0EYL, 01ZM and 01ZC
 -/
 
 @[expose] public section

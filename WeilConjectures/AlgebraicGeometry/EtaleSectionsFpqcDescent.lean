@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcSeparated
 /-!
 # Fpqc descent of sections of an etale sheaf of sets
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.39.2, Tag 09XN.
+## References
+
+* Stacks Project, Tag 09XN
 -/
 
 @[expose] public section

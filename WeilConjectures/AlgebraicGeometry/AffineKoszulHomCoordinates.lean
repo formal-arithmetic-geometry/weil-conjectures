@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine coordinates for the sheafified Koszul Hom complex
 
-Source: Stacks Project, Tag 0BQZ, displayed finite free Hom computation. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 

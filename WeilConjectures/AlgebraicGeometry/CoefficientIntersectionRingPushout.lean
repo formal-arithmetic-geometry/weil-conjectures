@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Affine coefficient intersection computation
 
-Source: Stacks Project, Tags 0097, 01I9, 01IA and 02KG.
+## References
+
+* Stacks Project, Tags 0097, 01I9, 01IA and 02KG
 -/
 
 @[expose] public section

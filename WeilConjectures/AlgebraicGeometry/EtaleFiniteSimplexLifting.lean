@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.HypercoverFiniteSimplexLifting
 /-!
 # Local extension of ordinary étale simplex families
 
-Source: Stacks, Tag 01GN. Apply finite-simplex lifting after the fully faithful
-singleton inclusion, and unpack the representing universal families.
+## References
+
+* Stacks Project, Tag 01GN
 -/
 
 @[expose] public section

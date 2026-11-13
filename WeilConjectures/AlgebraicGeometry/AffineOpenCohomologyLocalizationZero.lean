@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineOpenSectionFractionLocalization
 
 /-! # Localization of cohomology on an ambient affine open
 
-Source: Stacks Project, Tags 09MR (affine-open paragraph) and 01E1 (locality).
+## References
+
+* Stacks Project, Tags 09MR and 01E1
 -/
 
 @[expose] public section

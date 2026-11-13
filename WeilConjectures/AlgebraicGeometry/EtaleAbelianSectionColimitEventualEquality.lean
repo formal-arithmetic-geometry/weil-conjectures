@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 
 /-! # Equality in filtered colimits on a fixed small etale site
 
-Source: Stacks Project, Sites Tag 0738, proof of part (2).
+## References
+
+* Stacks Project, Tag 0738
 -/
 
 @[expose] public section
