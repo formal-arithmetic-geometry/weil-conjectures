@@ -376,7 +376,7 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   have : IsIso (b ≫ c) := IsIso.of_isIso_comp_left a _
   exact IsIso.of_isIso_comp_left b c
 
-set_option trace.profiler true in
+set_option maxHeartbeats 1600000 in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
 `N` of finite type, with projections compatible with the structure morphisms to `Spec Ω`, the
@@ -422,8 +422,7 @@ theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hgen.trans (Category.comp_id _).symm)
     ((special_comp_hom_snd hN hpb hP).trans (Category.comp_id _).symm)
     (L((M.ε)^*⟦Λ⟧).obj A) (L((N.ε)^*⟦Λ⟧).obj B)
-  have key := isIso_of_square sq inferInstance hκs hT (Functor.map_isIso _ _) hχP
-  exact key
+  exact isIso_of_square sq inferInstance hκs hT (Functor.map_isIso _ _) hχP
 
 end GlobalAbstract
 
