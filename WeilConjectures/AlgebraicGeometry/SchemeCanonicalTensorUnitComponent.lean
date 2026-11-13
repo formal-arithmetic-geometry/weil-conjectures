@@ -243,25 +243,16 @@ theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})
         e.f j ≫ (eta.app O).f j at hh
     rw [schemeOrdinaryEvaluationGraded_augmentation] at hh
     exact hh.symm
-  have hcoeff (h : r + q = 0) :
-      HomologicalComplex.ιMapBifunctor V P (curriedTensor _) (.up ℤ)
-          q r 0 (by change q + r = 0; omega) ≫ e.f 0 ≫
-            (HomologicalComplex.singleObjXSelf (.up ℤ) 0
-              (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom =
-        (β_ (V.X q) (P.X r)).hom ≫
-          (SheafOfModules.tensorHomEquiv (R := Y.sheaf) (P.X r) (V.X q)
-            (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).symm
-            (π P O q r 0 h ≫ SheafOfModules.homObjMap (R := Y.sheaf) (𝟙 (P.X r))
-              (HomologicalComplex.singleObjXSelf (.up ℤ) 0
-                (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom) := by
-    rw [he]
-    exact evaluation_summand_postcomp Y P O q r 0 h _ _
+  have hcoeff (h : r + q = 0) := evaluation_summand_postcomp Y P O q r 0 h
+    (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
+    (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))).hom
   have ha := tensor_unit_action_component F V P e p q r n k hpq hnr
   rw [HomologicalComplex.comp_f, ← Category.assoc, ← Category.assoc]
   apply congrArg (fun t ↦ t ≫ (eta.app F).f k)
   rw [Category.assoc, schemeTensorUnitAction, ha]
   split_ifs with h
-  · rw [hcoeff h]
+  · rw [he 0, hcoeff h]
   · rfl
 
 end AlgebraicGeometry
