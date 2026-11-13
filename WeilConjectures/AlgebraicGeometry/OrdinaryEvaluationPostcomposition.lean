@@ -94,10 +94,8 @@ private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U
         (curriedTensor _) (.up ℤ) i j n hij ≫ f.f n ≫
         (((homComplexFunctor (R := X.sheaf.over U)).obj (op P)).map t).f n ≫
         localEvaluationProjection X U P F' n p (p + n) rfl := by
-  rw [HomologicalComplex.ι_mapBifunctorMap_assoc]
-  simp only [HomologicalComplex.id_f]
-  rw [CategoryTheory.Functor.map_id]
-  simp only [Category.id_comp, curriedTensor_map_app]
+  simp only [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.id_f,
+    CategoryTheory.Functor.map_id, Category.id_comp, curriedTensor_map_app]
   rw [hf' i j n p hij]
   have hm := projection_postcomposition X U P F F' t n p
   erw [hm]
