@@ -61,6 +61,17 @@ private theorem resolution_homology_naturality {C : Type*} [Category* C] [Abelia
       HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) p).map α) ≫ _ = _ at hs
   rw [← hs, ← U.map_comp_assoc, ← hn, U.map_comp, Category.assoc]
 
+private theorem identity_diagram_cancel {C : Type*} [Category* C]
+    {A B C₁ D E K L : C} (rJ : A ≅ B) (sJ : C₁ ≅ B) (rI : D ≅ E) (sI : K ≅ E)
+    (β : C₁ ⟶ L) (μ : K ⟶ L) [IsIso μ] (α : C₁ ⟶ K) (ψ : A ⟶ D)
+    (hsplit : β = α ≫ μ)
+    (hn : rJ.hom ≫ sJ.inv ≫ α = ψ ≫ rI.hom ≫ sI.inv) :
+    rJ.hom ≫ sJ.inv ≫ β ≫ inv μ ≫ sI.hom ≫ rI.inv = ψ := by
+  rw [hsplit]
+  simp only [Category.assoc]
+  rw [IsIso.hom_inv_id_assoc, reassoc_of% hn, Iso.inv_hom_id_assoc,
+    Iso.hom_inv_id, Category.comp_id]
+
 set_option profiler true in
 -- Resolution transports compare both module-valued and additive-group-valued homology.
 set_option backward.isDefEq.respectTransparency.types false in
@@ -99,24 +110,17 @@ theorem moduleCohomologyFMap_basic_identity {Z : Scheme.{u}}
   let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   let Γc := (Γ ⋙ U).mapHomologicalComplex (ComplexShape.up ℕ)
   let α := InjectiveResolution.desc ψ D.I D.J
-  have hsplit := moduleCohomologyFMap_identity_resolution_homology GZ FZ ψ D p
-  change H.map (Γc.map D.β) = H.map (Γc.map α) ≫
-    H.map (D.a.hom ≫ Γc.map D.lambda) at hsplit
-  have hn := resolution_homology_naturality Γ ψ D.I D.J p
+  have := D.invertible p
   change D.map p = _
   dsimp only [ModuleCohomologyFMapData.map]
-  change U.map (D.J.isoRightDerivedObj Γ p).hom ≫
-    (((RingedSpace.globalSectionsComplex D.J).sc p).mapHomologyIso U).inv ≫
-    H.map (Γc.map D.β) ≫ inv (I := D.invertible p) (H.map (D.a.hom ≫ Γc.map D.lambda)) ≫
-    (((RingedSpace.globalSectionsComplex D.I).sc p).mapHomologyIso U).hom ≫
-    U.map (D.I.isoRightDerivedObj Γ p).inv = _
-  have := D.invertible p
-  rw [hsplit]
-  simp only [Category.assoc]
-  rw [IsIso.hom_inv_id_assoc]
-  rw [reassoc_of% hn, Iso.inv_hom_id_assoc, ← U.map_comp,
-    Iso.hom_inv_id, U.map_id, Category.comp_id]
-  rfl
+  refine identity_diagram_cancel (U.mapIso (D.J.isoRightDerivedObj Γ p))
+    (((RingedSpace.globalSectionsComplex D.J).sc p).mapHomologyIso U)
+    (U.mapIso (D.I.isoRightDerivedObj Γ p))
+    (((RingedSpace.globalSectionsComplex D.I).sc p).mapHomologyIso U)
+    (H.map (Γc.map D.β)) (H.map (D.a.hom ≫ Γc.map D.lambda)) (H.map (Γc.map α))
+    (U.map ((Γ.rightDerived p).map ψ)) ?_ ?_
+  · exact moduleCohomologyFMap_identity_resolution_homology GZ FZ ψ D p
+  · exact resolution_homology_naturality Γ ψ D.I D.J p
 
 
 end
