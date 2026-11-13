@@ -124,6 +124,7 @@ private theorem braided_descent (L : C ⥤ D) [L.Braided] (W : MorphismProperty 
 
 end Descent
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Monoidal localization and its coefficient instances require extra elaboration heartbeats.
 /-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
@@ -207,6 +208,7 @@ private theorem exists_normalizedOpen_coreMonoidal (X : Scheme.{u}) (U : X.Opens
   exact normalize E (Scheme.Modules.overEquivFunctorObjUnitIso U)
 
 
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Elaborating two nested bicomplex comparisons requires additional heartbeats.
 /-- The open-site tensor comparison has the prescribed unit, symmetry and total summands.
