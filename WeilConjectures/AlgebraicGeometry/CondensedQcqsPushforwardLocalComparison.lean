@@ -117,10 +117,21 @@ noncomputable local instance
     HasZeroMorphisms (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
       (condensedRingObj Λ X)) := inferInstance
 
+private local instance condensedComplexHasColimit
+    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+    [MonObj Λ] (X : Scheme.{u})
+    {I : Type (u + 1)} [SmallCategory I]
+    (D : I ⥤ CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+        (condensedRingObj Λ X)) ℤ) : HasColimit D := by
+  have : HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
+        (condensedRingObj Λ X)) := inferInstance
+  exact HasColimitsOfShape.has_colimit D
+
 set_option backward.isDefEq.respectTransparency false in
 -- The proof compares explicit composed cocones in internal module categories.
 set_option profiler true in
--- Colimit inference for internal module objects needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 /-- The canonical pushforward continuity comparison is invertible after evaluation
 at one affine weakly contractible target object.

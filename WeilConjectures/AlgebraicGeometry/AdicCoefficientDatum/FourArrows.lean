@@ -184,12 +184,9 @@ private theorem derivedComparison (n : ℕ) :
       let v := (pbcDerivedRestrict (pbcAdicProjection Y d n)).map
         (proEtaleRingDirectImageDerivedUnit f (d.finiteRing Y n) (d.finiteRing X n)
           (d.finiteRingIso f n) C)
-      change u ≫ P.map b.inv ≫ E.hom.app (DerivedCategory.Q.obj C) =
-        DerivedCategory.Q.map (t.inv.app C) ≫ a.inv ≫ v at hC
-      change v ≫ E.inv.app (DerivedCategory.Q.obj C) ≫ P.map b.hom =
-        a.hom ≫ DerivedCategory.Q.map (t.hom.app C) ≫ u
-      exact invertMappedSquare P DerivedCategory.Q b (t.app C)
+      have hsquare := invertMappedSquare P DerivedCategory.Q b (t.app C)
         (E.app (DerivedCategory.Q.obj C)) a u v hC
+      exact hsquare
   exact (congrArg Iso.symm hD).symm
 
 end AlgebraicGeometry.Scheme
