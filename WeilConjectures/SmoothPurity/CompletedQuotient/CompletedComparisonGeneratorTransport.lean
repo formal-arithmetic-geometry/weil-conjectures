@@ -295,6 +295,9 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [hbridge] at hs
   dsimp [pullBridge, rI, rP] at hs ⊢
   dsimp only [Functor.mapIso, Iso.trans, Iso.symm, Iso.prod] at hs ⊢
+  dsimp only [sequenceDirect, pullbackTensorSequenceDirect,
+    pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
+    IntegralCoherence.PullbackComparison.tensor] at hs ⊢
   exact hs
 
 end WeilConjectures.CompletedQuotient
