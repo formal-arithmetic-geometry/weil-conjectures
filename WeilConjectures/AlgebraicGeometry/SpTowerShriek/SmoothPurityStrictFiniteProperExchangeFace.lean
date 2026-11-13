@@ -386,12 +386,16 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+        NatTrans.comp_app] at HC ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
         let start ← IO.getNumHeartbeats
         exactByConversion h
         Lean.logInfo m!"coherence conversion heartbeats: {((← IO.getNumHeartbeats) - start) / 1000}")
     N (coordinates.property f n) (coordinates.property f' n)
+  dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     let start ← IO.getNumHeartbeats
