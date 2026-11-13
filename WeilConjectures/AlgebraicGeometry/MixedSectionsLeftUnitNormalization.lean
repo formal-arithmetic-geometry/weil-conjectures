@@ -166,7 +166,6 @@ private theorem mixedSections_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact h
 
 set_option profiler true in
--- The statement expands sheaf, scalar, and localization instances.
 /-- The left path becomes the iterated scalar-factor path before any unit cancellation.
 Source: Stacks Project, Cohomology, Tags 0D5T and 0D5W; the pinned-unit calculation
 in lem-sc-mixed-sections-composition-kinjective.
@@ -214,7 +213,6 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((mixedGlobalSectionsDirectImageIso f).hom.app F) = b := by
   intro K F Df Dfg HX HY HZ Sf Sg e p b
-  let Dg := RingedSpace.moduleDirectImage g.toLRSHom.toShHom
   have he := (Classical.choose_spec
     (@RingedSpace.exists_derivedModuleDirectImageComposition.{u, w, w, w}
       X.toRingedSpace Y.toRingedSpace Z.toRingedSpace
@@ -238,11 +236,7 @@ theorem mixedSections_left_unit_normalization
       (schemeGlobalScalarRestriction g).map
         ((schemeDerivedGlobalSections Y).map (Df.rightDerivedFunctorUnit.app K)) := by
     have hp := mixedSections_firstLayerPaste (schemeDerivedGlobalSections Z)
-      (HZ.rightDerivedFunctorUnit.app ((Dfg.mapHomotopyCategory (.up ℤ)).obj K))
-      (Dfg.rightDerivedFunctorUnit.app K) (e.inv.app F)
-      (Dg.rightDerivedFunctorUnit.app ((Df.mapHomotopyCategory (.up ℤ)).obj K))
-      ((schemeDerivedDirectImage g).map (Df.rightDerivedFunctorUnit.app K))
-      _ _ _ _ he hn hg₀
+      _ _ _ _ _ _ _ _ _ he hn hg₀
     simpa only [Category.assoc] using hp
   have hf := mixedSections_unit f K
   exact finish_unit_paste (schemeGlobalScalarRestriction g) p
