@@ -98,6 +98,7 @@ lemma isMonoidal_extendRestrictAdjunction :
   let := (extendRestrictAdjunction φ).leftAdjointOplaxMonoidal
   exact (inferInstance : (extendRestrictAdjunction φ).IsMonoidal)
 
+set_option profiler true in
 set_option synthInstance.maxHeartbeats 100000 in
 -- the search for `(extendScalars φ ⋙ extendScalars ψ).LaxMonoidal` first explores braidings
 /-- The transitivity isomorphism `T ⊗_R - ≅ T ⊗_S (S ⊗_R -)` of extension of scalars is a
