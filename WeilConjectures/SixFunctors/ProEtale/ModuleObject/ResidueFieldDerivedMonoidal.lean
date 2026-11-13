@@ -42,6 +42,20 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+-- Transport the comparisons abstractly so that rewriting does not expand derived categories.
+private lemma comparisonCompatible_of_eq
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
+    {F : D ⥤ C} {F' : D' ⥤ C'} {N_D : D ⥤ D'} {N_C : C ⥤ C'}
+    {α α' : N_D ⋙ F' ≅ F ⋙ N_C}
+    {φ φ' : F.TensorComparison} {ψ ψ' : F'.TensorComparison}
+    {m_C : N_C.TensorIso} {m_D : N_D.TensorIso}
+    (hα : α = α') (hφ : φ = φ') (hψ : ψ = ψ')
+    (h : Adjunction.ComparisonCompatible α' φ' ψ' m_C m_D) :
+    Adjunction.ComparisonCompatible α φ ψ m_C m_D := by
+  subst α' φ' ψ'
+  exact h
+
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
@@ -104,11 +118,13 @@ theorem exists_comparisonCompatible_residueFieldDerivedUpperStarIso :
       (asIso ((residueFieldModuleSheaf Y ℓ E).leftDerivedTensorComparisonOfNatTrans
         (residueFieldModuleSheafTensorIso Y ℓ E).hom))
       (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory, ?_⟩
-  -- Simplify the named comparisons without unfolding the derived categories to match rewrites.
-  simp only [residueFieldDerivedUpperStarIso_symm_eq,
-    CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
-      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f,
-    ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
+  refine comparisonCompatible_of_eq (residueFieldDerivedUpperStarIso_symm_eq ℓ E f)
+    ((CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
+      (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f).trans
+      (Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans _).symm)
+    ((ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison
+      (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f).trans
+      (Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans _).symm) ?_
   have h := Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison
     (f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧
     (Functor.OplaxMonoidal.δNatTrans _)
