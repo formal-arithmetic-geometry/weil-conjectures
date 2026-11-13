@@ -111,9 +111,37 @@ private theorem comparison_formula (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t 
     ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W,(t.hom.app W).hom] m) = _
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
+private theorem stalkTensor_addHom_ext (r : D ⟶ C)
+    (M : SheafOfModules.{u} (𝓡 D)) (x : T) {N : Type u} [AddCommGroup N]
+    (g h : (ModuleCat.extendScalars
+        ((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom).obj
+          (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) D.obj x)
+            (TopCat.Presheaf.stalk (C := Ab.{u}) M.val.presheaf x)) →+ N)
+    (hgh : ∀ (U : Opens T) (hx : x ∈ U) (c : C.obj.obj (Opposite.op U))
+        (m : M.val.obj (Opposite.op U)),
+      g (TopCat.Presheaf.germ C.obj U x hx c
+          ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) D.obj x,
+            ((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          TopCat.Presheaf.germ M.val.presheaf U x hx m) =
+      h (TopCat.Presheaf.germ C.obj U x hx c
+          ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) D.obj x,
+            ((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          TopCat.Presheaf.germ M.val.presheaf U x hx m)) : g = h := by
+  apply AddMonoidHom.ext
+  intro z
+  induction z using TensorProduct.inductionOn with
+  | add z w hz hw => simp only [map_add, hz, hw]
+  | tmul c m =>
+    obtain ⟨U, hxU, c, rfl⟩ := TopCat.Presheaf.exists_germ_eq C.obj c
+    obtain ⟨V, hxV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m
+    have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+    rw [← TopCat.Presheaf.germ_res_apply C.obj
+      (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx c,
+      ← TopCat.Presheaf.germ_res_apply M.val.presheaf
+        (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx m]
+    exact hgh (U ⊓ V) hx _ _
+
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- Comparing the stalk scalar actions unfolds the filtered-colimit module constructions.
 /-- A fixed comparison morphism with the tensor-unit formula is invertible over a
 pushout of ring sheaves. This concerns one module and does not construct the comparison
 or assert naturality in the module.
@@ -196,49 +224,33 @@ theorem sheafTensorPushoutComparison_isIso
   let gr := hr.hom.hom.toAddMonoidHom
   let gt := ht.hom.hom.toAddMonoidHom
   let g := PresheafOfModules.stalkAddMap (x := x) f.val
-  have hcomp (z : Cx ⊗[Dx] Mx) : g (gr z) = gt (E z) := by
-    induction z using TensorProduct.inductionOn with
-    | add z w hz hw => simp only [map_add, hz, hw]
-    | tmul c m =>
-      obtain ⟨U, hxU, c, rfl⟩ := TopCat.Presheaf.exists_germ_eq C.obj c
-      obtain ⟨V, hxV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.val.presheaf m
-      have hxUV : x ∈ U ⊓ V := ⟨hxU, hxV⟩
-      rw [← TopCat.Presheaf.germ_res_apply C.obj
-        (homOfLE inf_le_left : U ⊓ V ⟶ U) x hxUV c,
-        ← TopCat.Presheaf.germ_res_apply M.val.presheaf
-          (homOfLE inf_le_right : U ⊓ V ⟶ V) x hxUV m]
-      change g ((Φr ((restrictScalars (𝓻 s)).obj M)).hom
-        (TopCat.Presheaf.germ C.obj (U ⊓ V) x hxUV
-          (C.obj.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op c)
-          ⊗ₜ[Dx, rx] TopCat.Presheaf.germ M.val.presheaf (U ⊓ V) x hxUV
-            (M.val.presheaf.map (homOfLE inf_le_right : U ⊓ V ⟶ V).op m))) =
-        (Φt M).hom ((Algebra.IsPushout.cancelBaseChange Dx Cx Ax Bx Mx).symm _)
-      erw [hΦr, Algebra.IsPushout.cancelBaseChange_symm_tmul]
-      change g (TopCat.Presheaf.germ
-        (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf
-          (U ⊓ V) x hxUV _) =
-        (Φt M).hom (((TopCat.Presheaf.stalkFunctor CommRingCat x).map b.hom)
-          (TopCat.Presheaf.germ C.obj (U ⊓ V) x hxUV _) ⊗ₜ[Ax, tx] _)
-      rw [TopCat.Presheaf.stalkFunctor_map_germ_apply (U ⊓ V) x hxUV b.hom]
-      erw [hΦt]
-      change PresheafOfModules.stalkAddMap f.val
+  have hcomp : g.comp gr = gt.comp E.toLinearMap.toAddMonoidHom := by
+    apply stalkTensor_addHom_ext r ((restrictScalars (𝓻 s)).obj M) x
+    intro U hxU c m
+    change g ((Φr ((restrictScalars (𝓻 s)).obj M)).hom
+      (TopCat.Presheaf.germ C.obj U x hxU c
+        ⊗ₜ[Dx, rx] TopCat.Presheaf.germ M.val.presheaf U x hxU m)) =
+      (Φt M).hom ((Algebra.IsPushout.cancelBaseChange Dx Cx Ax Bx Mx).symm _)
+    erw [hΦr, Algebra.IsPushout.cancelBaseChange_symm_tmul]
+    change g (TopCat.Presheaf.germ
+      (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf U x hxU _) =
+      (Φt M).hom (((TopCat.Presheaf.stalkFunctor CommRingCat x).map b.hom)
+        (TopCat.Presheaf.germ C.obj U x hxU c) ⊗ₜ[Ax, tx] _)
+    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply U x hxU b.hom]
+    erw [hΦt]
+    change ((TopCat.Presheaf.stalkFunctor Ab.{u} x).map
+      ((PresheafOfModules.toPresheaf _).map f.val))
         (TopCat.Presheaf.germ
           (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf
-            (U ⊓ V) x hxUV _) = _
-      change ((TopCat.Presheaf.stalkFunctor Ab.{u} x).map
-        ((PresheafOfModules.toPresheaf _).map f.val))
-          (TopCat.Presheaf.germ
-            (changeOfRings.{u, u, u} r ((restrictScalars (𝓻 s)).obj M)).val.presheaf
-              (U ⊓ V) x hxUV _) = _
-      erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
-      exact congrArg
-        (TopCat.Presheaf.germ (changeOfRings.{u, u, u} t M).val.presheaf
-          (U ⊓ V) x hxUV)
-        (comparison_formula r s b t M f hf (Opposite.op (U ⊓ V)) _ _)
+            U x hxU _) = _
+    erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+    exact congrArg
+      (TopCat.Presheaf.germ (changeOfRings.{u, u, u} t M).val.presheaf U x hxU)
+      (comparison_formula r s b t M f hf (Opposite.op U) c m)
   have hg : Function.Bijective g := by
     have hgr : Function.Bijective gr := ConcreteCategory.bijective_of_isIso hr.hom
     have hgt : Function.Bijective gt := ConcreteCategory.bijective_of_isIso ht.hom
-    have hh : g ∘ gr = gt ∘ E := funext hcomp
+    have hh : g ∘ gr = gt ∘ E := congrArg DFunLike.coe hcomp
     have hb : Function.Bijective (g ∘ gr) := by
       rw [hh]
       exact hgt.comp he
