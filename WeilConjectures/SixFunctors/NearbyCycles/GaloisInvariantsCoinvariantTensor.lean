@@ -81,7 +81,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option trace.profiler true in
+set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
@@ -124,7 +124,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
               (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) ≫ φ = φ) →
         G.map (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ≫ φ = φ := by
-  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
+  refine (exists_complex_of_plusEtaleOrigin T₀ _ hC).elim fun K hK ↦ ?_
+  refine hK.elim fun a ha ↦ ?_
+  have hKa : K.IsStrictlyGE a := ha.1
+  have hterms := ha.2.1
+  refine ha.2.2.elim fun e ↦ ?_
   choose F₀ hF₀ using hterms
   have hd : ∀ (j : FiniteGaloisIntermediateField L Ω)
       (M : Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
@@ -146,6 +150,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
   have hlift : ∀ (j : FiniteGaloisIntermediateField L Ω) (b : (galoisTower Ω h).Γ j), ∃ k,
       pullbackAction h _ specGaloisAction_comp (act k) ≫ (galoisTower Ω h).π j =
         (galoisTower Ω h).π j ≫ (galoisTower Ω h).ρ j b := fun j b ↦ by
@@ -165,8 +170,10 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
           Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
             (condensedRingObj (Profinite.continuousMapRingObj T₀) Z)) ↦
     retraction_of_eq_comp_map_comp_of_coinvariant
-      R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧)
-      G _ ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app _) _
+      (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+        L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧)) (𝟭 _)
+      G _ ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app _)
+      (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C).hom
       (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C) rfl _ _ hα hRC
       (fun k ↦ derivedUnitTransport (Profinite.continuousMapRingObj T₀)
         (pullbackAction h _ specGaloisAction_comp (act k))
@@ -198,7 +205,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     hφ'
 
 
-set_option trace.profiler true in
+set_option profiler true in
 -- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
