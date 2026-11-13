@@ -322,7 +322,6 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.
@@ -386,20 +385,17 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      -- Normalize structural projections before constructing instance congruences.
       dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
         NatTrans.comp_app] at HC ⊢
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        let start ← IO.getNumHeartbeats
-        exactByConversion h
-        Lean.logInfo m!"coherence conversion heartbeats: {((← IO.getNumHeartbeats) - start) / 1000}")
+        exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
   dsimp only [Functor.comp_obj, Functor.comp_map, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app] at H ⊢
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    let start ← IO.getNumHeartbeats
     exactByConversion h
-    Lean.logInfo m!"final conversion heartbeats: {((← IO.getNumHeartbeats) - start) / 1000}"
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
