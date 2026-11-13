@@ -84,7 +84,6 @@ private theorem evaluationIso_changeAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
 /-- Tensor evaluation is invertible for a perfect first argument.
 Source: Stacks Project, Cohomology, Tags 08DQ and 08DM.
 Proof: refine the perfect neighbourhoods to affine opens and represent K by a

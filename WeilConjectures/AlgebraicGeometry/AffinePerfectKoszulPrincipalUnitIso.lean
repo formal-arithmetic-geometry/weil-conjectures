@@ -16,7 +16,6 @@ universe a b
 open CategoryTheory
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
 /-- The canonical shifted Koszul augmentation is invertible on the principal-open union.
 Source: Stacks Project, Tag 08CX; More on Algebra, Tags 0626 and 0663.
 (blueprint: lem-sc-affine-perfect-koszul-principal-unit-iso).

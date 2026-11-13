@@ -119,7 +119,6 @@ private theorem internalHom_shortExact_of_finiteFree_retract
         SheafOfModules.homObjMap_comp_homObjMap (R := R), hιπ, Category.id_comp,
         SheafOfModules.homObjMap_id]) hF
 
-set_option trace.profiler true in
 /-- On an affine open, the ordinary Hom complex from a strictly perfect complex represents
 its derived internal Hom. For every functorial K-injective replacement `η : 𝟭 ⟶ I`, the
 canonical map `𝓗om^•(P, M) ⟶ 𝓗om^•(P, I(M))` becomes an isomorphism in the derived
