@@ -91,13 +91,13 @@ theorem flatBaseChangeMap_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S'
             ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p xi)) := by
   let I := injectiveResolution F
   let J := injectiveResolution ((tensorPullback (pullback.snd g f)).obj F)
-  obtain ⟨t, ht⟩ := flatBaseChangeResolutionLift f g (F := F) I J
+  refine (flatBaseChangeResolutionLift f g (F := F) I J).elim fun t ht ↦ ?_
   refine ⟨flatBaseChangeResolutionBeta f g I J t p, ?_, ?_, ?_⟩
   · intro I₁ J₁ t₁ ht₁
     exact flatBaseChangeResolutionBeta_independent f g I₁ J₁ t₁ ht₁ I J t ht p
   · exact flatBaseChangeMap_sections_choices f g F
   · intro I₁ J₁ V D xi
-    obtain ⟨t₁, ht₁⟩ := flatBaseChangeResolutionLift f g (F := F) I₁ J₁
+    refine (flatBaseChangeResolutionLift f g (F := F) I₁ J₁).elim fun t₁ ht₁ ↦ ?_
     rw [← flatBaseChangeResolutionBeta_independent f g I₁ J₁ t₁ ht₁ I J t ht p]
     exact flatBaseChangeResolutionBeta_sections f g I₁ J₁ t₁ ht₁ p V D xi
 

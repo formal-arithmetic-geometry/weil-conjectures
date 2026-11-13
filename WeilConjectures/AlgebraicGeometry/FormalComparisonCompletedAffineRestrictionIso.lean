@@ -37,7 +37,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- A coherent realization of the canonical comparison is invertible off the
 extended exceptional ideal. Unlike the model theorem, this supplies no objects,
 map, or limit isomorphisms: all are inputs and the commuting square is a hypothesis.
