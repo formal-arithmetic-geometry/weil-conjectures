@@ -74,6 +74,17 @@ private theorem sectionCohomologyTheta_stalk_isIso {Y : Scheme.{u}}
   rw [Adjunction.homEquiv_unit, S.map_comp]
   infer_instance
 
+private theorem sectionCohomologyTheta_universal {Y : Scheme.{u}}
+    (K : CochainComplex Y.Modules ℕ) (p : ℕ) {T : Y.Modules} (e : T ≅ K.homology p)
+    (Q : Y.Modules) (a : Scheme.Modules.sectionCohomologyPresheaf K p ⟶
+      (SheafOfModules.forget Y.ringCatSheaf).obj Q) :
+    ∃! b : T ⟶ Q, Scheme.Modules.sectionCohomologyTheta K p ≫
+      (SheafOfModules.forget Y.ringCatSheaf).map (e.inv ≫ b) = a := by
+  have := sectionCohomologyComparison_isIso K p
+  exact higherDirectImagePresheaf_universal_aux
+    (PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj))
+    (Scheme.Modules.sectionCohomologyComparison K p) e a
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
@@ -149,7 +160,6 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
       (ComplexShape.up ℕ)).obj I.cocomplex
   let e := I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p
-  let A := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
   let : PreservesFiniteLimits
       (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) := by
     change PreservesFiniteLimits (Scheme.Modules.pushforward f)
@@ -159,8 +169,7 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
   refine ⟨?_, ?_, ?_, ?_, by infer_instance⟩
   · exact IsIso.comp_isIso' hc e.isIso_inv
   · intro Q a
-    exact higherDirectImagePresheaf_universal_aux A
-      (Scheme.Modules.sectionCohomologyComparison K p) e a
+    exact sectionCohomologyTheta_universal K p e Q a
   · intro y
     have := sectionCohomologyTheta_stalk_isIso K p y
     rw [Functor.map_comp]
