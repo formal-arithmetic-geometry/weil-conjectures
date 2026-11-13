@@ -189,10 +189,10 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
       (eW.hom ≫ ((L.sc p).mapHomologyIso EW).hom) =
         eV.hom ≫ ((L.sc p).mapHomologyIso EV).hom ≫ τ.app (L.sc p).homology
     rw [I.rightDerived_app_eq α p]
-    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    simp only [eW, Category.assoc, Iso.inv_hom_id_assoc]
     rw [cancel_epi]
     have h := congrArg (fun t ↦ t ≫ ((L.sc p).mapHomologyIso EW).hom)
       ((L.sc p).homologyMap_mapNatTrans τ)
-    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using! h
 
 end AlgebraicGeometry
