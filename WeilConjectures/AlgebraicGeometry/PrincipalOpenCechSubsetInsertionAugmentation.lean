@@ -63,7 +63,20 @@ private theorem sum_singleton_subsets (r : ℕ)
     · simp [hT]
   · simp
 
-set_option maxHeartbeats 300000 in
+private theorem principalSubsetInsertion_hom_apply
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    (J : CochainComplex (Spec (.of A)).Modules ℤ) (n : ℤ)
+    (c : principalSubsetCoordinates A r f J n) :
+    (principalSubsetInsertion A r f J n).hom c =
+      ∑ S, principalSubsetInsertOne A r f J n S (c S) := by
+  unfold principalSubsetInsertion
+  rw [show (∑ S, AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
+      principalSubsetInsertOne A r f J n S).hom =
+      ∑ S, (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
+        principalSubsetInsertOne A r f J n S).hom from
+    map_sum (AddCommGrpCat.homAddEquiv.toAddMonoidHom) _ _]
+  rw [AddMonoidHom.finsetSum_apply]
+
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
@@ -117,15 +130,7 @@ theorem principalSubsetInsertion_augmentation
         ((modulesSpecToSheaf.map (eqToHom (congrArg J.X (hes S h n)))).hom.app
           (op (principalSubsetUnion A r f)) s) else 0
   change (principalSubsetInsertion A r f J n).hom c = _
-  unfold principalSubsetInsertion
-  rw [show (∑ S, AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
-      principalSubsetInsertOne A r f J n S).hom =
-      ∑ S, (AddCommGrpCat.ofHom (Pi.evalAddMonoidHom _ S) ≫
-        principalSubsetInsertOne A r f J n S).hom from
-    map_sum (AddCommGrpCat.homAddEquiv.toAddMonoidHom) _ _]
-  rw [AddMonoidHom.finsetSum_apply]
-  change (∑ S, principalSubsetInsertOne A r f J n S
-    (if h : S.val.card = 1 then _ else 0)) = _
+  rw [principalSubsetInsertion_hom_apply]
   let V := principalSubsetUnion A r f
   let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)
   let J' := principalSubsetRestriction A r f J
