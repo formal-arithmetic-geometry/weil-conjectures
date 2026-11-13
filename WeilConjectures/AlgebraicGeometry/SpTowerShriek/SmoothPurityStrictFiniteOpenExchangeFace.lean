@@ -482,13 +482,14 @@ private theorem rotate_face {C : Type*} [Category C] {A B D E F G : C}
   rw [h]
   simp only [Iso.hom_inv_id_assoc]
 
--- Explicit comparison congruences are checked within this declaration.
+-- Normalize the unit equation before specializing to the derived categories.
 private theorem unit_equation_of_homEquiv
     {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
     (a : L ⊣ R) {X : C} {Y : D} {f : L.obj X ⟶ Y} {g : X ⟶ R.obj Y}
     (h : a.homEquiv X Y f = g) : a.unit.app X ≫ R.map f = g := by
   simpa only [Adjunction.homEquiv_unit] using h
 
+-- Explicit comparison congruences are checked within this declaration.
 private theorem native_open_unit_mate (A : Type u) [CommRing A]
     {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
     {j : U ⟶ Z} {g : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
@@ -626,6 +627,7 @@ private theorem open_exchange_inverse (b : Base l E)
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
   let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
+  -- Share the converted mate and cube proofs so the kernel checks their conversions once.
   have H := open_scalar_from_comparisons
     (comparisonFinitePull l E b g n).symm (comparisonFinitePull l E b h n).symm
     (comparisonFinitePull l E b j n).symm (comparisonFinitePull l E b j' n).symm
@@ -644,17 +646,17 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      simp only [B, Iso.symm_inv, Functor.comp_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      simp only [B, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (by
       as_aux_lemma =>
         intro M
         have HU := native_open_unit_mate (R l E n) sq M
-        simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+        simp only [B, Iso.symm_hom, Functor.comp_obj]
         exact HU)
     (fun K ↦ by
       as_aux_lemma =>
@@ -674,7 +676,7 @@ private theorem open_exchange_inverse (b : Base l E)
         run_tac Lean.Elab.Tactic.withMainContext do
           let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
           exactByConversion h) N
-  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
+  simp only [B, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
