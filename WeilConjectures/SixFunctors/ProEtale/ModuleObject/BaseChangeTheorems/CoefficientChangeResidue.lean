@@ -140,6 +140,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- the objects of the bounded constructible and of the ambient derived categories are compared
 /-- A public copy of the private lemma `pullbackSquareComparison_hom_app_hom_aux` of
 `CoefficientChangeCubeBoundedConstructible`: on the ambient derived categories, the pullback
