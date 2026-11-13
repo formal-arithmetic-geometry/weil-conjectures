@@ -146,7 +146,8 @@ private theorem scalarPresentation_homEquiv
   simp only [Category.assoc]
   rw [← F.map_comp_assoc]
   simp only [← Category.assoc]
-  rw [← adj.homEquiv_counit, adj.homEquiv_naturality_right,
+  change adj.homEquiv X Z'' (((adj.homEquiv X Z).symm (f ≫ g) ≫ h) ≫ k) = _
+  rw [adj.homEquiv_naturality_right,
     adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
 
 -- Compose the large derived functor interfaces without unfolding their constructions.
