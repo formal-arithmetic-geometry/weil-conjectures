@@ -105,7 +105,6 @@ private theorem finiteScalarComposite_exists {R S T : Sheaf J CommRingCat.{u}}
 include V adj hL
 
 -- The proof forms two successive mates under four adjunctions.
-set_option profiler true in
 private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     ∃ e : (F.algebra R).modules ⋙ change (F.rings.map a) ≅
         change a ⋙ (F.algebra S).modules,
@@ -127,6 +126,7 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
     R (F.rings.obj R) L V adj (F.algebra R)
   obtain ⟨PS, eS, amS, hS⟩ := WeilConjectures.SemilinearSections.normalizedModuleAdjunction_exists
     S (F.rings.obj S) L V adj (F.algebra S)
+  -- The mate construction only uses the forward restriction comparison.
   obtain ⟨ri, hri⟩ : ∃ ri : res a ⋙ (F.algebra R).modules ⟶
       (F.algebra S).modules ⋙ res (F.rings.map a),
       ∀ N : Mod S, (underlying (F.rings.obj R)).map (ri.app N) =
