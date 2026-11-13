@@ -590,30 +590,20 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | tmul a s => rfl
 
 set_option trace.profiler true in
-/-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
-Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
-`R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
-generated subalgebra `R₁` of `A` such that `(R ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `R` for every
-subalgebra `R` of `A` containing `R₁`.
-
-Every prime of `A ⊗[R₀] S₀` has a neighbourhood on which flatness holds at some finite stage
-(`Module.exists_fg_flat_localizedModule_baseChange` and openness of the flat locus), so by
-quasi-compactness flatness holds at a finite stage `R₁` at every prime coming from
-`A ⊗[R₀] S₀`. The complement of the flat locus of `R₁` is a closed set `V(I)` with
-`I (A ⊗[R₀] S₀) = (1)`; the relation `1 = ∑ cᵢ fᵢ` with `fᵢ ∈ I` holds at a finite stage `R₂`, and
-then every prime of `R ⊗[R₀] S₀` for `R ≥ R₂` lies over the flat locus of `R₁`. -/
-theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀ A]
-    [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
+/-- Compactness gives one finite stage that is flat at every prime coming from `A`. -/
+private lemma exists_fg_forall_flat_localizedModule_baseChange {A : Type u} [CommRing A]
+    [Algebra R₀ A] [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
     (hA : Flat A ((A ⊗[R₀] S₀) ⊗[S₀] M₀)) :
-    ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧
-      ∀ R : Subalgebra R₀ A, R₁ ≤ R → Flat R ((R ⊗[R₀] S₀) ⊗[S₀] M₀) := by
+    ∃ R : Subalgebra R₀ A, R.FG ∧ ∀ q : PrimeSpectrum (A ⊗[R₀] S₀),
+      Flat R (LocalizedModule
+        (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
+        ((R ⊗[R₀] S₀) ⊗[S₀] M₀)) := by
   classical
-  -- Elaborate the flat locus over an abstract algebra, then specialize to subalgebras.
-  let F (R : Type u) [CommRing R] [Algebra R₀ R] : Set (PrimeSpectrum (R ⊗[R₀] S₀)) :=
-    {Q | Flat R (LocalizedModule Q.asIdeal.primeCompl ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
   -- The set of primes of `A ⊗[R₀] S₀` at which `R` is flat.
   let W (R : Subalgebra R₀ A) : Set (PrimeSpectrum (A ⊗[R₀] S₀)) :=
-    PrimeSpectrum.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom ⁻¹' F R
+    {q | Flat R (LocalizedModule
+      (q.asIdeal.comap (Algebra.TensorProduct.map R.val (AlgHom.id R₀ S₀)).toRingHom).primeCompl
+      ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
   have hcomap {R R' : Subalgebra R₀ A} (h : R ≤ R') (q : Ideal (A ⊗[R₀] S₀)) :
       (q.comap (Algebra.TensorProduct.map R'.val (AlgHom.id R₀ S₀)).toRingHom).comap
         (Algebra.TensorProduct.map (Subalgebra.inclusion h) (AlgHom.id R₀ S₀)).toRingHom =
@@ -639,6 +629,31 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     (fun q _ ↦ Set.mem_iUnion.mpr (hWcov q))
     fun (R R' : {R : Subalgebra R₀ A // R.FG}) ↦ ⟨⟨R.1 ⊔ R'.1, R.2.sup R'.2⟩,
       hW le_sup_left, hW le_sup_right⟩
+  exact ⟨R₁, hR₁, fun q ↦ hK (Set.mem_univ q)⟩
+
+set_option trace.profiler true in
+/-- **Flatness descends to a finitely generated subalgebra** (Stacks, Tag 02JO; EGA IV₃, 11.2.6).
+Let `R₀` be noetherian, `S₀` a finite type `R₀`-algebra, `M₀` a finite `S₀`-module and `A` an
+`R₀`-algebra such that `(A ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `A`. Then there is a finitely
+generated subalgebra `R₁` of `A` such that `(R ⊗[R₀] S₀) ⊗[S₀] M₀` is flat over `R` for every
+subalgebra `R` of `A` containing `R₁`.
+
+Every prime of `A ⊗[R₀] S₀` has a neighbourhood on which flatness holds at some finite stage
+(`Module.exists_fg_flat_localizedModule_baseChange` and openness of the flat locus), so by
+quasi-compactness flatness holds at a finite stage `R₁` at every prime coming from
+`A ⊗[R₀] S₀`. The complement of the flat locus of `R₁` is a closed set `V(I)` with
+`I (A ⊗[R₀] S₀) = (1)`; the relation `1 = ∑ cᵢ fᵢ` with `fᵢ ∈ I` holds at a finite stage `R₂`, and
+then every prime of `R ⊗[R₀] S₀` for `R ≥ R₂` lies over the flat locus of `R₁`. -/
+theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀ A]
+    [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
+    (hA : Flat A ((A ⊗[R₀] S₀) ⊗[S₀] M₀)) :
+    ∃ R₁ : Subalgebra R₀ A, R₁.FG ∧
+      ∀ R : Subalgebra R₀ A, R₁ ≤ R → Flat R ((R ⊗[R₀] S₀) ⊗[S₀] M₀) := by
+  classical
+  obtain ⟨R₁, hR₁, hK⟩ := exists_fg_forall_flat_localizedModule_baseChange hA
+  -- Elaborate the flat locus over an abstract algebra, then specialize to subalgebras.
+  let F (R : Type u) [CommRing R] [Algebra R₀ R] : Set (PrimeSpectrum (R ⊗[R₀] S₀)) :=
+    {Q | Flat R (LocalizedModule Q.asIdeal.primeCompl ((R ⊗[R₀] S₀) ⊗[S₀] M₀))}
   -- The flat locus `U` of `R₁` and its closed complement `Z = V(I)`.
   have : Algebra.FiniteType R₀ R₁ := (Subalgebra.fg_iff_finiteType _).mp hR₁
   have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
@@ -656,7 +671,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
     have hmZ := hZ (PrimeSpectrum.comap φ₁.toRingHom ⟨m, hm.isPrime⟩)
       (Ideal.map_le_iff_le_comap.mp hle)
-    exact hmZ (hK (Set.mem_univ (⟨m, hm.isPrime⟩ : PrimeSpectrum (A ⊗[R₀] S₀))))
+    exact hmZ (hK ⟨m, hm.isPrime⟩)
   -- Descend the unit ideal to a finite stage.
   obtain ⟨R₂, hR₁₂, hR₂fg, hI₂⟩ :=
     Subalgebra.exists_map_tensorProduct_inclusion_eq_top hR₁ I hI
@@ -682,7 +697,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
   have hPZ : (⟨Q.comap ρ.toRingHom, inferInstance⟩ : PrimeSpectrum (R₁ ⊗[R₀] S₀)) ∈ Z := hP
   have hIQ : I ≤ Q.comap ρ.toRingHom := fun x hx ↦
     (PrimeSpectrum.mem_vanishingIdeal _ _).mp hx _ hPZ
-  have hQ := Ideal.map_le_iff_le_comap.mpr hIQ
+  have hQ : I.map ρ ≤ Q := Ideal.map_le_iff_le_comap.mpr hIQ
   rw [hIR] at hQ
   exact (Ideal.IsPrime.ne_top ‹_›) (top_le_iff.mp hQ)
 
