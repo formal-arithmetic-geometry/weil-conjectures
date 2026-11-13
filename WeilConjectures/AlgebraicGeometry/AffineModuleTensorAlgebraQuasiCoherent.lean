@@ -113,7 +113,7 @@ private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
   let C' := TopCat.Sheaf.inverseImageRing g C
   have : ∀ (F : (TopologicalSpace.Opens T')ᵒᵖ ⥤ CommRingCat.{u}),
       (Opens.map g).op.HasLeftKanExtension F := fun F ↦
-    inferInstanceAs ((Opens.map g).op.HasLeftKanExtension F)
+    Functor.HasLeftKanExtension.mk _ ((Opens.map g).op.pointwiseLeftKanExtensionUnit F)
   let η : (𝓡 C) ⟶ ((Opens.map g).sheafPushforwardContinuous RingCat.{u}
       (𝓙 T') (𝓙 T)).obj (𝓡 C') := (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map
     ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous.{u, u, u, u + 1, u, u}
