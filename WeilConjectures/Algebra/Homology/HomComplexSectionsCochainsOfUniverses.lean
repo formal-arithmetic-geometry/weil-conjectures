@@ -152,8 +152,9 @@ theorem homComplex_sections_cochainsOfUniverses
               (((π L I n p q hpq).val.app (op U)).hom x) +
             sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
               (((π L I n p q hpq).val.app (op U)).hom y)
-        rw [((π L I n p q hpq).val.app (op U)).hom.map_add,
-          sectionToLocalizedHom_add.{u, v, r}] }
+        exact (congrArg (sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q))
+          (((π L I n p q hpq).val.app (op U)).hom.map_add x y)).trans
+            (sectionToLocalizedHom_add.{u, v, r} R U (L.X p) (I.X q) _ _) }
   have hf (n : ℤ) : Function.Bijective (f n) := by
     let H := fun p : ℤ ↦ SheafOfModules.homObj (L.X p) (I.X (p + n))
     have hlim := (Classical.choose_spec
