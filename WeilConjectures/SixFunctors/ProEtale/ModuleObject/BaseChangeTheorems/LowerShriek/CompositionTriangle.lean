@@ -628,13 +628,11 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cf T''.cf)
     (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ T.cg T''.cg)
   have e₁ : a₀.inv = x.hom ≫ a''.inv ≫ u₀.inv := by
-    rw [← cancel_epi ((𝔽).compIso (triangleShriekTriangle T₀)).hom, Iso.hom_inv_id]
-    calc
-      _ = (u₀.hom ≫ a''.hom) ≫ a''.inv ≫ u₀.inv := by simp
-      _ = (a₀.hom ≫ x.hom) ≫ a''.inv ≫ u₀.inv := by
-        simpa only [a₀, x, a'', u₀, Category.assoc] using
-          congrArg (fun q => q ≫ a''.inv ≫ u₀.inv) n₁.symm
-      _ = a₀.hom ≫ x.hom ≫ a''.inv ≫ u₀.inv := by exact Category.assoc _ _ _
+    rw [← cancel_epi a₀.hom, Iso.hom_inv_id]
+    have h := congrArg (fun q => q ≫ a''.inv ≫ u₀.inv) n₁
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.id_comp,
+      Category.comp_id] at h
+    simpa only [a₀, x, a'', u₀, Category.assoc] using h.symm
   have e₂ : a''.inv = y.inv ≫ a.inv ≫ u.hom := by
     rw [← cancel_epi y.hom, Iso.hom_inv_id_assoc, ← cancel_epi a.hom]
     calc
