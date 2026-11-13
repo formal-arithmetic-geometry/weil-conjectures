@@ -25,14 +25,6 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-private theorem cochain_comp_eq_comp_comp_of_components
-    {ι : Type*} {c : ComplexShape ι} {V : Type*} [Category* V] [HasZeroMorphisms V]
-    {A B C D F : HomologicalComplex V c}
-    (a : A ⟶ B) (b : B ⟶ F) (c : A ⟶ C) (d : C ⟶ D) (e : D ⟶ F)
-    (h : ∀ i, a.f i ≫ b.f i = c.f i ≫ d.f i ≫ e.f i) :
-    a ≫ b = c ≫ d ≫ e :=
-  HomologicalComplex.hom_ext _ _ h
-
 /-- The actual comparison of exact cochain functors, before localization.
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
@@ -41,6 +33,36 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
     Functor.isoWhiskerLeft
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
+
+set_option profiler true in
+private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
+    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
+        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅
+      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙
+        normalizedDVRModuleRes l E Y (Nat.le_succ n))
+    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f
+      (Padic.coefficientExtensionTransition l E (n + 1))).symm)
+    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
+    (NatTrans.mapHomologicalComplex
+        (coefficientSequenceTransition l E X (Nat.le_succ n)) (.up ℤ)).app
+        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      ((normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).map
+        ((ordinaryPullEvaluationComplex l E f n).hom.app P) =
+    (ordinaryPullEvaluationComplex l E f (n + 1)).hom.app P ≫
+      ((sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapHomologicalComplex
+        (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex
+          (coefficientSequenceTransition l E Y (Nat.le_succ n)) (.up ℤ)).app P) ≫
+      (NatTrans.mapHomologicalComplex
+        ((mateEquiv
+            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
+            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
+        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
+  apply HomologicalComplex.hom_ext
+  intro i
+  simpa only [HomologicalComplex.comp_f] using
+    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
@@ -86,8 +108,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  have h := cochain_comp_eq_comp_comp_of_components _ _ _ _ _
-    (integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P)
-  exact h
+  simpa only [integralPullEvaluationComplex, ordinaryPullEvaluationComplex] using
+    ordinaryPullEvaluation_cochainSquare l E f n r₀ hr₀ P
 
 end WeilConjectures.IntegralSystemRealization
