@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- The composite open-site equivalence and its kernel comparison require this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
