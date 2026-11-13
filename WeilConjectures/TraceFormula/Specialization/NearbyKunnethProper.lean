@@ -193,6 +193,41 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.Noetheria
       (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
       heM heN hA hB)
 
+private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.NoetherianSpace X]
+    [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM)
+    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
+    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
+    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
+    {m m' : ℕ} (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    (hΨA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
+        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A))
+    (hΨB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
+        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B))
+    (hT : IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (Hom.id (traitGenericModel k'))
+      (Hom.id (traitGenericModel k'))
+      (R((gM)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+      (R((gN)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)))) :
+    ∃ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x}),
+      IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) ∧
+      IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
+  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB
+  have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
+  exact ⟨S, hS, hR, hU⟩
+
 set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
@@ -245,16 +280,8 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
       IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
         IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C) :
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  obtain ⟨S, hS, hU⟩ := exists_finite_isIso_upperStar_map_kunnethMap
-      (ℓ := ℓ) (k' := k') (X := X) (Y := Y) (Z := Z) (X' := X') (Y' := Y') (Z' := Z')
-      (M := M) (N := N) (P := P) (f₁ := f₁) (f₁' := f₁') (f₂ := f₂) (f₂' := f₂')
-      (qM := qM) (gM := gM) (qN := qN) (gN := gN) (φ₁ := φ₁) (φ₂ := φ₂)
-      hM hN hpb hP hgen hm hm' hslice heM heN hA hB
-  have hR := isIso_lowerStar_kunnethMap (ℓ := ℓ) (k' := k') (X := X) (Y := Y) (Z := Z)
-      (X' := X') (Y' := Y') (Z' := Z') (M := M) (N := N) (P := P) (f₁ := f₁)
-      (f₁' := f₁') (f₂ := f₂) (f₂' := f₂') (qM := qM) (gM := gM) (qN := qN) (gN := gN)
-      (φ₁ := φ₁) (φ₂ := φ₂) hM hN hpb hP hgen heM heN hA
-      hB hΨA hΨB hT
+  obtain ⟨S, hS, hR, hU⟩ := finiteSupport_and_lowerStar_kunnethMap
+    hM hN hpb hP hgen hm hm' hslice heM heN hA hB hΨA hΨB hT
   obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle (kunnethMap (Profinite.padicAlgClRingObj ℓ)
       φ₁ φ₂ A B)
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
