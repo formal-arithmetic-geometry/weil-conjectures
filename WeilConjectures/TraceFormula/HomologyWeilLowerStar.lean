@@ -108,7 +108,8 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
     (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
     (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left)
     (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
-  rw [h1, h2, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
+  refine Eq.trans ?_ h2.symm
+  rw [h1, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
   simp only [boundedConstructibleUpperStarComp_inv_app_hom,
     boundedConstructibleUpperStarComp_hom_app_hom]
   have e : ∀ {A B : Dᵇc(X'.left)⟦Λ⟧} (h : A = B),
@@ -118,7 +119,7 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
   simp only [e, leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc]
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `boundedConstructiblePullbackSquareComparison_hom_app_hom` through the compatibilities of the
 restricted derived pullbacks with the inclusions. -/
