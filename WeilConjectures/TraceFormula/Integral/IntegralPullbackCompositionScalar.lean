@@ -65,16 +65,14 @@ private abbrev integralCompositionFiniteScalarPullback {X Y : Scheme.{u}}
         integralCompositionFiniteScalar l E L ι X ≅
       integralCompositionFiniteScalar l E L ι Y ⋙
         finiteSystemDerivedPullback (integralSystemRings l L) (integralSystemTransition l L) f :=
-  NatIso.ofComponents (fun M ↦ (integralComparisonSystemScalarPullback l E L ι f).app M)
-    (fun a ↦ (integralComparisonSystemScalarPullback l E L ι f).hom.naturality a)
+  integralComparisonSystemScalarPullback l E L ι f
 
 private abbrev integralCompositionFiniteScalarIso (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)] :
     sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
         E L ι X ⋙ integralSystemReduction l L X ≅
       integralSystemReduction l E X ⋙ integralCompositionFiniteScalar l E L ι X :=
-  NatIso.ofComponents (fun M ↦ (integralSystemScalarIso l E L ι X).app M)
-    (fun a ↦ (integralSystemScalarIso l E L ι X).hom.naturality a)
+  integralSystemScalarIso l E L ι X
 
 private theorem integralCompositionFiniteScalar_square {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
