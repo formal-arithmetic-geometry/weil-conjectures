@@ -36,6 +36,48 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
+/-- Transport tensor compatibility of a square along isomorphisms of its vertical functors.
+The calculation only uses naturality in the first tensor variable. -/
+private lemma tensorComparison_square_transport
+    {C₁ C₂ D₁ D₂ : Type*} [Category* C₁] [Category* C₂] [Category* D₁] [Category* D₂]
+    [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory D₁] [MonoidalCategory D₂]
+    {F₁ G₁ : D₁ ⥤ C₁} {F₂ G₂ : D₂ ⥤ C₂} (U : C₁ ⥤ C₂) (V : D₁ ⥤ D₂)
+    (e₁ : F₁ ≅ G₁) (e₂ : F₂ ≅ G₂) (σ : V ⋙ F₂ ≅ F₁ ⋙ U)
+    (δ₁ : ∀ X Y, F₁.obj (X ⊗ Y) ≅ F₁.obj X ⊗ F₁.obj Y)
+    (δ₂ : ∀ X Y, F₂.obj (X ⊗ Y) ≅ F₂.obj X ⊗ F₂.obj Y)
+    (ψU : ∀ X Y, U.obj (X ⊗ Y) ⟶ U.obj X ⊗ U.obj Y)
+    (ψV : ∀ X Y, V.obj (X ⊗ Y) ⟶ V.obj X ⊗ V.obj Y)
+    (hU : ∀ {P Q} (f : P ⟶ Q) R, ψU P R ≫ U.map f ▷ U.obj R =
+      U.map (f ▷ R) ≫ ψU Q R)
+    (X Y : D₁)
+    (hσ : F₂.map (ψV X Y) ≫ (δ₂ (V.obj X) (V.obj Y)).hom ≫
+        (σ.hom.app X ⊗ₘ σ.hom.app Y) =
+      σ.hom.app (X ⊗ Y) ≫ U.map (δ₁ X Y).hom ≫ ψU (F₁.obj X) (F₁.obj Y)) :
+    U.map (e₁.inv.app X ▷ F₁.obj Y ≫ (δ₁ X Y).inv ≫ e₁.hom.app (X ⊗ Y)) ≫
+        (U.map (e₁.inv.app (X ⊗ Y)) ≫ σ.inv.app (X ⊗ Y) ≫ e₂.hom.app (V.obj (X ⊗ Y))) ≫
+        G₂.map (ψV X Y) =
+      ψU (G₁.obj X) (F₁.obj Y) ≫
+        (U.map (e₁.inv.app X) ≫ σ.inv.app X ≫ e₂.hom.app (V.obj X)) ▷ U.obj (F₁.obj Y) ≫
+        G₂.obj (V.obj X) ◁ σ.inv.app Y ≫
+        (e₂.inv.app (V.obj X) ▷ F₂.obj (V.obj Y) ≫
+          (δ₂ (V.obj X) (V.obj Y)).inv ≫ e₂.hom.app (V.obj X ⊗ V.obj Y)) := by
+  have key : U.map (δ₁ X Y).inv ≫ σ.inv.app (X ⊗ Y) ≫ F₂.map (ψV X Y) =
+      ψU (F₁.obj X) (F₁.obj Y) ≫ (σ.inv.app X ⊗ₘ σ.inv.app Y) ≫
+        (δ₂ (V.obj X) (V.obj Y)).inv := by
+    rw [← cancel_epi (U.map (δ₁ X Y).hom), ← Functor.map_comp_assoc,
+      Iso.hom_inv_id, Functor.map_id, Category.id_comp]
+    simp only [← Category.assoc]
+    rw [Iso.eq_comp_inv, ← cancel_mono (σ.hom.app X ⊗ₘ σ.hom.app Y)]
+    simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app]
+    rw [hσ, Iso.inv_hom_id_app_assoc, id_tensorHom_id, Category.comp_id]
+  simp only [Functor.map_comp, comp_whiskerRight, Category.assoc]
+  rw [← U.map_comp_assoc (e₁.hom.app (X ⊗ Y)) (e₁.inv.app (X ⊗ Y)),
+    e₁.hom_inv_id_app, U.map_id, Category.id_comp]
+  rw [← e₂.hom.naturality (ψV X Y), reassoc_of% key, reassoc_of% (hU (e₁.inv.app X) _)]
+  rw [← whisker_exchange_assoc,
+    ← comp_whiskerRight_assoc (e₂.hom.app (V.obj X)) (e₂.inv.app (V.obj X)), e₂.hom_inv_id_app,
+    id_whiskerRight, Category.id_comp, tensorHom_def, Category.assoc]
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -156,9 +198,6 @@ lemma unit_map_derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g'
 
 variable [Etale.UpperStarPreservesFlat A]
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
--- The tensor comparisons of the derived pullbacks make this rewriting expensive.
 omit [HasSmallSiteSheafify A] in
 /-- The square map `Dj^* ⋙ Lg'^* ⟶ Lg''^* ⋙ Dj'^*` and the square isomorphism of the derived
 pullbacks are compatible with the comparisons `Dj^*X ⊗ᴸ Lj^*Y ≅ Dj^*(X ⊗ᴸ Y)` and the tensor
@@ -175,53 +214,20 @@ lemma derivedOpenImmersionSquareMap_tensor (sq : CommSq g' j' j g'')
         ((mapDerivedCategoryUpperStarDerivedTensorIso A j').hom.app
           (L((g'')^*[A]).obj X)).app (L((g'')^*[A]).obj Y) := by
   rw [derivedOpenImmersionSquareMap_app, derivedOpenImmersionSquareMap_app]
-  simp only [mapDerivedCategoryUpperStarDerivedTensorIso, Iso.trans_hom, NatTrans.comp_app,
+  simpa only [mapDerivedCategoryUpperStarDerivedTensorIso, Iso.trans_hom, NatTrans.comp_app,
     Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom, Functor.whiskeringLeft₂_map_app_app_app_app,
-    Functor.postcompose₂_map_app_app_app, Functor.map_comp, Category.assoc]
-  have key₀ : L((g')^*[A]).map ((leftDerivedUpperStarTensorIso A j X Y).inv) ≫
-      (derivedSquareUpperStarIso A sq).inv.app (((-⊗ᴸ-(Z)[A]).obj X).obj Y) ≫
-      L((j')^*[A]).map (((leftDerivedUpperStarTensorComparison A g'').app X).app Y) =
-      ((leftDerivedUpperStarTensorComparison A g').app (L((j)^*[A]).obj X)).app
-          (L((j)^*[A]).obj Y) ≫
-        ((derivedSquareUpperStarIso A sq).inv.app X ⊗ₘ (derivedSquareUpperStarIso A sq).inv.app Y) ≫
-        (leftDerivedUpperStarTensorIso A j' (L((g'')^*[A]).obj X) (L((g'')^*[A]).obj Y)).inv := by
-    have h := derivedSquareUpperStarIso_hom_tensor A sq X Y
-    rw [← cancel_epi (L((g')^*[A]).map (leftDerivedUpperStarTensorIso A j X Y).hom),
-      ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
-    simp only [← Category.assoc]
-    rw [Iso.eq_comp_inv, ← cancel_mono ((derivedSquareUpperStarIso A sq).hom.app X ⊗ₘ
-      (derivedSquareUpperStarIso A sq).hom.app Y)]
-    simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.inv_hom_id_app,
-      leftDerivedUpperStarTensorIso_hom]
-    rw [h]
-    erw [Iso.inv_hom_id_app_assoc]
-    erw [id_tensorHom_id, Category.comp_id]
-  have c₁ : L((g')^*[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A j).hom.app
-      (((-⊗ᴸ-(Z)[A]).obj X).obj Y)) ≫ L((g')^*[A]).map
-        ((leftDerivedUpperStarIsoMapDerivedCategory A j).inv.app (((-⊗ᴸ-(Z)[A]).obj X).obj Y)) =
-      𝟙 _ := by
-    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
-  have c₂ := (leftDerivedUpperStarIsoMapDerivedCategory A j').hom.naturality
-    (((leftDerivedUpperStarTensorComparison A g'').app X).app Y)
-  rw [reassoc_of% c₁]
-  erw [← c₂]
-  erw [reassoc_of% key₀]
-  simp only [derivedTensor, curriedTensor_map_app, curriedTensor_obj_map]
-  have n₁ := leftDerivedUpperStarTensorComparison_naturality A g'
-    ((leftDerivedUpperStarIsoMapDerivedCategory A j).inv.app X) (𝟙 (L((j)^*[A]).obj Y))
-  simp only [CategoryTheory.Functor.map_id, tensorHom_id] at n₁
-  rw [reassoc_of% n₁]
-  have w : (leftDerivedUpperStarIsoMapDerivedCategory A j').hom.app (L((g'')^*[A]).obj X) ▷
-      L((g')^*[A]).obj (L((j)^*[A]).obj Y) ≫
-      D((j')^*[A]).obj (L((g'')^*[A]).obj X) ◁ (derivedSquareUpperStarIso A sq).inv.app Y ≫
-      (leftDerivedUpperStarIsoMapDerivedCategory A j').inv.app (L((g'')^*[A]).obj X) ▷
-        L((j')^*[A]).obj (L((g'')^*[A]).obj Y) =
-      L((j')^*[A]).obj (L((g'')^*[A]).obj X) ◁ (derivedSquareUpperStarIso A sq).inv.app Y := by
-    rw [← whisker_exchange_assoc]
-    erw [← comp_whiskerRight, Iso.hom_inv_id_app, id_whiskerRight, Category.comp_id]
-  erw [reassoc_of% w]
-  rw [tensorHom_def, Category.assoc]
-  rfl
+    Functor.postcompose₂_map_app_app_app, derivedTensor, curriedTensor_map_app,
+    curriedTensor_obj_map, Category.assoc] using
+    tensorComparison_square_transport L((g')^*[A]) L((g'')^*[A])
+      (leftDerivedUpperStarIsoMapDerivedCategory A j)
+      (leftDerivedUpperStarIsoMapDerivedCategory A j') (derivedSquareUpperStarIso A sq)
+      (leftDerivedUpperStarTensorIso A j) (leftDerivedUpperStarTensorIso A j')
+      (fun P Q ↦ ((leftDerivedUpperStarTensorComparison A g').app P).app Q)
+      (fun P Q ↦ ((leftDerivedUpperStarTensorComparison A g'').app P).app Q)
+      (fun {P Q} f R ↦ by
+        simpa only [Functor.map_id, tensorHom_id] using
+          leftDerivedUpperStarTensorComparison_naturality A g' f (𝟙 R))
+      X Y (derivedSquareUpperStarIso_hom_tensor A sq X Y)
 
 /-- **The projection formula for the extension by zero commutes with base change**: for a
 cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, `K` in `D(U_ét)` and `M` in
