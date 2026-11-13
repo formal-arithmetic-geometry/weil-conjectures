@@ -298,8 +298,8 @@ private theorem projectionMap_laxSquare
   erw [reassoc_of% hπ']
   rw [← Functor.LaxMonoidal.μ_natural_right_assoc]
   erw [hμ]
-  simp only [tensorHom_def, Category.assoc]
-  rw [whisker_exchange_assoc, whisker_exchange_assoc,
+  simp only [tensorHom_def, Functor.comp_obj, Category.assoc]
+  erw [whisker_exchange_assoc, whisker_exchange_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc,
     ← MonoidalCategory.whiskerLeft_comp_assoc]
   erw [hunit]
