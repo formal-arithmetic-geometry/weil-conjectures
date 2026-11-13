@@ -43,6 +43,13 @@ private lemma presheafHom_map_inv_comp {O M N : F.obj (.mk (op S))}
       inv ((F.presheafHom O M).map g.op φ) ≫ (F.presheafHom O N).map g.op ψ := by
   rw [Pseudofunctor.presheafHom_map_comp, Pseudofunctor.presheafHom_map_inv]
 
+private lemma presheafHom_map_comp_of_eq {M N K : F.obj (.mk (op S))}
+    {T T' : Over S} (g : T' ⟶ T) (φ : (F.presheafHom M N).obj (op T))
+    (ψ : (F.presheafHom N K).obj (op T)) (ψ' : (F.presheafHom N K).obj (op T'))
+    (hψ : (F.presheafHom N K).map g.op ψ = ψ') :
+    (F.presheafHom M K).map g.op (φ ≫ ψ) = (F.presheafHom M N).map g.op φ ≫ ψ' := by
+  rw [Pseudofunctor.presheafHom_map_comp, hψ]
+
 end
 
 namespace AlgebraicGeometry.Scheme.Modules
@@ -120,6 +127,7 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
       (isSheaf_iff_isSheaf_of_type _ _).2 ((Presieve.isSheaf_comp_uliftFunctor_iff _).2
         ((isSheaf_iff_isSheaf_of_type _ _).1 (isSheaf_etaleHom L L')))⟩
   let g : ∀ U, (etaleIsoTorsor L).sheaf.obj.obj U → F.obj.obj U := fun U x ↦
+    haveI : IsIso (etaleIsoTorsorVal L (U := U) x) := x.down.2
     ULift.up (inv (etaleIsoTorsorVal L (U := U) x) ≫
       etaleIsoTorsorVal L' (U := U) (e.iso.hom.hom.app U x))
   have : MorphismProperty.ContainsIdentities
@@ -130,6 +138,9 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
       F.obj.map f (g U x) = g V ((etaleIsoTorsor L).sheaf.obj.map f x) := by
     intro U V f x
     apply ULift.ext
+    have : IsIso (etaleIsoTorsorVal L (U := U) x) := x.down.2
+    have : IsIso (etaleIsoTorsorVal L (U := V) ((etaleIsoTorsor L).sheaf.obj.map f x)) :=
+      ((etaleIsoTorsor L).sheaf.obj.map f x).down.2
     change (modulesPseudofunctor.presheafHom L L').map (G.map f.unop).op
         (inv (etaleIsoTorsorVal L (U := U) x) ≫
           etaleIsoTorsorVal L' (U := U) (e.iso.hom.hom.app U x)) =
@@ -219,10 +230,10 @@ lemma etaleIsoTorsor_equiv_of_iso (e : L ≅ L') : etaleIsoTorsor L ≈ etaleIso
           rw [etaleIsoTorsorVal_restrict]
           dsimp only [ψ]
           rw [etaleIsoTorsorVal_mk, etaleIsoTorsorVal_mk, etaleIsoTorsorVal_restrict]
-          exact ((Pseudofunctor.presheafHom_map_comp
+          exact (presheafHom_map_comp_of_eq
             (F := modulesPseudofunctor) (M := unitObj X) (N := L) (K := L')
             (G.map f.unop) (etaleIsoTorsorVal L (U := U) x)
-            (ε U)).trans (congrArg (_ ≫ ·) (hεmap f))).symm }⟩
+            (ε' U) (ε' V) (hεmap f)).symm }⟩
   exact ⟨Sheaf.Torsor.Iso.ofHom φ fun U a x ↦ etaleIsoTorsorVal_injective L' (U := U)
     (Category.assoc _ _ _)⟩
 
