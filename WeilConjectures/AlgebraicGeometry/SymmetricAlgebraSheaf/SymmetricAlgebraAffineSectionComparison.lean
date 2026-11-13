@@ -271,7 +271,7 @@ theorem exists_affineSectionComparison {X : Scheme.{u}}
         · intro x y hx hy
           simp only [_root_.map_add, hx, hy]
         · intro r a
-          -- Keep each transport explicit so rewriting need not unfold the section-module structures.
+          -- Explicit transports avoid unfolding section-module structures during rewriting.
           let i := (inducedFunctor B).op.map j
           let k := hW.fromSpec.opensFunctor.op.map i
           have hi :
