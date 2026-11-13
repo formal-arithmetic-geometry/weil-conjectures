@@ -270,6 +270,23 @@ private lemma ιTensorObj_upperStarTensorComplexHomX
           (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h) := by
   exact HomologicalComplex.ι_mapBifunctorDesc _ p q h
 
+private lemma upperStarTensorComplexHomX_eq_mapCochainComplexμIso
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) (n : ℤ) :
+    upperStarTensorComplexHomX Λ f A B n =
+      ((f)^*⟦Λ⟧.mapCochainComplexμIso A B).hom.f n := by
+  have := hasColimitsOfShape_monoidalModule Λ
+  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
+  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
+  have := hasTensor_gradedModule Λ
+  have := hasTensor₄ObjExt_gradedModule Λ
+  have := hasGoodTensor₁₂Tensor_gradedModule Λ
+  have := hasGoodTensorTensor₂₃_gradedModule Λ
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  exact (ιTensorObj_upperStarTensorComplexHomX Λ f A B p q n h).trans
+    ((f)^*⟦Λ⟧.ιTensorObj_mapCochainComplexμIso_hom_f A B p q n h).symm
+
 set_option profiler true in
 /-- The degreewise comparison `upperStarTensorComplexHomX` is a section of the comparison
 `f^* ((A ⊗ B)^n) ⟶ (f^* A ⊗ f^* B)^n` induced by the comonoidal structure of `f^*`. -/
@@ -286,16 +303,8 @@ lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
   have := hasTensor₄ObjExt_gradedModule Λ
   have := hasGoodTensor₁₂Tensor_gradedModule Λ
   have := hasGoodTensorTensor₂₃_gradedModule Λ
-  apply HomologicalComplex.mapBifunctor.hom_ext
-  intro i₁ i₂ h
-  simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
-    HomologicalComplex.mapBifunctorComparison_f]
-  rw [← Category.assoc]
-  erw [ιTensorObj_upperStarTensorComplexHomX]
-  rw [Category.assoc]
-  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
-  erw [Category.comp_id]
-  exact Functor.Monoidal.μ_δ_assoc _ _ _ _
+  rw [upperStarTensorComplexHomX_eq_mapCochainComplexμIso]
+  exact congrArg (fun φ ↦ φ.f n) ((f)^*⟦Λ⟧.mapCochainComplexμIso A B).hom_inv_id
 
 set_option profiler true in
 /-- The degreewise comparisons `upperStarTensorComplexHomX` commute with the differentials. -/
@@ -651,6 +660,25 @@ lemma leftDerivedUpperStarTensor_fac :
       leftDerivedUpperStarTensorLeftCounit Λ f :=
   Functor.leftDerived₂_fac _ _ _ _ _ _
 
+open DerivedCategory in
+private lemma upperStarTensorComplexHom_Qh_δ (A B : HomotopyCategory
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)) :
+    Qh.map ((HomotopyCategory.quotient _ _).map
+      (upperStarTensorComplexHom Λ f A.as B.as)) ≫
+      Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
+          (f)^*⟦Λ⟧).app A).app B) = 𝟙 _ := by
+  have := hasColimitsOfShape_monoidalModule Λ
+  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
+  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
+  have := hasTensor_gradedModule Λ
+  have := hasTensor₄ObjExt_gradedModule Λ
+  have := hasGoodTensor₁₂Tensor_gradedModule Λ
+  have := hasGoodTensorTensor₂₃_gradedModule Λ
+  rw [← Functor.map_comp]
+  erw [Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app]
+  rw [← Functor.map_comp, upperStarTensorComplexHom_δ]
+  exact (congrArg Qh.map ((HomotopyCategory.quotient _ _).map_id _)).trans (Qh.map_id _)
+
 set_option profiler true in
 open DerivedCategory in
 /-- The defining property of the tensor comparison of `Lf^*`, in the form used by
@@ -679,29 +707,12 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
       ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B :=
     congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
   rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
-  have hδ : Qh.map ((HomotopyCategory.quotient _ _).map
-      (upperStarTensorComplexHom Λ f A.as B.as)) ≫
-      Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
-          (f)^*⟦Λ⟧).app A).app B) = 𝟙 _ := by
-    rw [← Functor.map_comp]
-    erw [Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app]
-    rw [← Functor.map_comp, upperStarTensorComplexHom_δ]
-    exact (congrArg Qh.map ((HomotopyCategory.quotient _ _).map_id _)).trans (Qh.map_id _)
-  calc _ = (((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
-        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B) ≫
-        Qh.obj (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A) ◁
-          (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app B ≫
-        Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
-          (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
-        Qh.map ((HomotopyCategory.quotient _ _).map
-          (upperStarTensorComplexHom Λ f A.as B.as))) ≫
-        Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
-          (f)^*⟦Λ⟧).app A).app B) := by
-        simp only [Category.assoc]
-        erw [hδ, Category.comp_id]
-    _ = _ := by
-        erw [h]
-        exact Category.assoc _ _ _
+  have hδ := upperStarTensorComplexHom_Qh_δ Λ f A B
+  have h' := congrArg
+    (· ≫ Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
+      (f)^*⟦Λ⟧).app A).app B)) h
+  simpa only [Category.assoc, hδ, Category.comp_id] using h'
+
 
 
 /-- Every object of `D(Mod_{Λ_Y})` is isomorphic to the image of a K-flat complex. -/
