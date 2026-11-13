@@ -236,8 +236,6 @@ private theorem scalar_unit_inv_section
     ← SheafOfModules.comp_val, Iso.hom_inv_id_app, SheafOfModules.id_val,
     PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
 
-set_option profiler true in
--- The signed tensor comparison has large sheafification and totalization instances.
 /-- A scalar tensor comparison normalized on homogeneous unit tensors is compatible
 with the scalar action unitor. Only the identity coefficient map is involved.
 Source: Stacks 03EL and 07A4; scalar-extension tower coherence, proof step 7
@@ -313,6 +311,7 @@ theorem scalarExtensionTensorUnit
   change (sigma.hom.app (P, Q)).f n ≫
     (T.map (Prod.mkHom (eC.hom.app P) (eC.hom.app Q))).f n =
       e.hom.app ((T.obj (P, Q)).X n)
+  -- Cancel the unitors before evaluating on sections.
   apply (cancel_epi (e.inv.app ((T.obj (P, Q)).X n))).1
   rw [Iso.inv_hom_id_app]
   apply total_tensor_sections_ext l E W P Q n
@@ -324,6 +323,7 @@ theorem scalarExtensionTensorUnit
   let a := (T.map (Prod.mkHom (eC.hom.app P) (eC.hom.app Q))).f (p + q)
   let b := (sigma.hom.app (P, Q)).f (p + q)
   change a.val.app V (b.val.app V ((e.inv.app ((T.obj (P, Q)).X (p + q))).val.app V z)) = z
+  -- Apply the section formulas directly, avoiding rewrite searches through the tensor model.
   refine (congrArg (fun t ↦ a.val.app V (b.val.app V t))
     (scalar_unit_inv_section l E W ((T.obj (P, Q)).X (p + q)) V z)).trans ?_
   refine (congrArg (fun t ↦ a.val.app V t) (h P Q p q V x y)).trans ?_
