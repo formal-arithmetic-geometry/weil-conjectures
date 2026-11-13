@@ -124,8 +124,8 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorLeftCounit X).app M) ≫ cL.app (X ⊗ M) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X).app M)) :
     NatTrans.CommShift τ ℤ := by
-  have : HasCoproducts.{0} C₁ := inferInstance
-  have : HasCoproducts.{0} C₂ := inferInstance
+  have : HasCoproducts.{0} C₁ := fun J ↦ inferInstance
+  have : HasCoproducts.{0} C₂ := fun J ↦ inferInstance
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
@@ -187,8 +187,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorRightCounit X).app M) ≫ cL.app (M ⊗ X) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app M).app X)) :
     NatTrans.CommShift τ ℤ := by
-  have : HasCoproducts.{0} C₁ := inferInstance
-  have : HasCoproducts.{0} C₂ := inferInstance
+  have : HasCoproducts.{0} C₁ := fun J ↦ inferInstance
+  have : HasCoproducts.{0} C₂ := fun J ↦ inferInstance
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
