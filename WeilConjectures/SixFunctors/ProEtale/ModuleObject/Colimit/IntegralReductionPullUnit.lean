@@ -91,6 +91,16 @@ private lemma pullUnit_comp_counit_diagram
   simp only [Category.assoc]
   rw [reassoc_of% h₁, h₂, h₃, reassoc_of% h₄, ← reassoc_of% h₅, reassoc_of% h₆]
 
+private lemma pullUnit_cancel_mapped_iso
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (F : C ⥤ D) {G H : E ⥤ C} (e : G ≅ H) (Z : E)
+    {A B C' : D} (a : A ⟶ B) (b : B ⟶ C') (c : C' ⟶ F.obj (G.obj Z))
+    {d : A ⟶ F.obj (H.obj Z)} (h : a ≫ b ≫ c ≫ F.map (e.hom.app Z) = d) :
+    a ≫ b ≫ c = d ≫ F.map (e.inv.app Z) := by
+  have h' : (a ≫ b ≫ c) ≫ (F.mapIso (e.app Z)).hom = d := by
+    simpa only [Functor.mapIso_hom, Iso.app_hom, Category.assoc] using h
+  exact ((Iso.comp_inv_eq (F.mapIso (e.app Z))).2 h'.symm).symm
+
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
 the counits. -/
@@ -250,11 +260,11 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
         (ComplexShape.up ℤ)).hom.app K)
   have i1 := derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp a f
     (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)
-  have i1' := i1 =≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-    (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
-      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
-  simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
+  have i1' := pullUnit_cancel_mapped_iso DerivedCategory.Qh
+    (Functor.mapHomotopyCategoryCompIso
+      (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ))
+    (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)
+    _ _ _ i1
   dsimp only [K, Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
