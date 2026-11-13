@@ -193,6 +193,7 @@ universe u
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {T X : Scheme.{u}}
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of derived trivializations of pullbacks**: let `g : T ⟶ X`, `F_X : X ⟶ X`,
