@@ -28,6 +28,14 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.SingleComplexBaseChange
 
+private theorem transport_automorphism_hom
+    {C D : Type*} [Category C] [Category D] (J : C ⥤ D)
+    {P K : C} {Q : D} (e : P ≅ K) (e0 : Q ≅ J.obj K) (d : Q ≅ J.obj P) :
+    (e0 ≪≫ J.mapIso e.symm ≪≫ d.symm).hom ≫ d.hom ≫ J.map e.hom = e0.hom := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, Iso.inv_hom_id]
+  rw [CategoryTheory.Functor.map_id, Category.comp_id]
+
 private theorem transport_representatives
     {C₁ C₂ D₁ D₂ A₀ : Type*}
     [Category C₁] [Category C₂] [Category D₁] [Category D₂] [Category A₀]
@@ -75,8 +83,6 @@ private theorem transport_representatives
 
 set_option linter.unusedVariables false in
 -- The quantified proof hypotheses occur only in the proof, not in the conclusion.
-set_option maxHeartbeats 1600000 in
--- Elaborating the stalk tensor-model instances and their scalar extensions needs this budget.
 /-- Transport the localized tensor comparison into derived pullback, independently
 of any coefficient morphism or target representative.
 
@@ -159,8 +165,11 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
       (DerivedCategory.Q.obj P) :=
     eqToIso (congrArg (fun W ↦ DerivedCategory.Q.obj W) hQ0) ≪≫
       (isoPullbackComplexCounitIso j).symm.app P
-  obtain ⟨l0, hl0⟩ := exists_affineSpectrum_canonicalComparison_square
+  -- Projections avoid rechecking the large stalk models during existential elimination.
+  have hcanonical := exists_affineSpectrum_canonicalComparison_square
     f f' g g' sq sq0 z0 i P Q hP hQ hcP hcQ hQ0
+  let l0 := hcanonical.choose
+  have hl0 := hcanonical.choose_spec
   change DerivedCategory.Q.obj Q ≅ (derivedPullback j).obj K at e0
   change DerivedCategory.Q.obj Q ≅ (derivedPullback j).obj (DerivedCategory.Q.obj P) at d
   let a : DerivedCategory.Q.obj Q ≅ DerivedCategory.Q.obj Q :=
@@ -170,16 +179,16 @@ theorem exists_affineSpectrum_comparisonIntoPullback_transport
   let := (tensorMap f0 f0' s0 g0 sq0 z0).toAlgebra
   let := HasDerivedCategory.standard (ModuleCat.{u} (R f0 g0 z0))
   let := HasDerivedCategory.standard (ModuleCat.{u} (B f0' z0))
-  obtain ⟨c, hc, _⟩ := exists_comparisonSourceIso f0 f0' s0 g0 sq0 z0 Q Q a i
+  have hsource := (exists_comparisonSourceIso f0 f0' s0 g0 sq0 z0 Q Q a i).exists
+  let c := hsource.choose
+  have hc := hsource.choose_spec
   let E := ModuleCat.extendScalars.{u, u, u}
     (algebraMap (TensorProduct (R f0 g0 z0) (A g0 z0) (B f0' z0)) (C z0))
   let b := F0.mapIso (E.mapIso c)
   have hn := comparisonIntoPullback_naturality f0 f0' s0 g0 sq0 z0
     Q Q hQ hQ hcQ hcQ a i c hc
-  have ha : a.hom ≫ d.hom ≫ (derivedPullback j).map e.hom = e0.hom := by
-    simp only [a, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-      Category.assoc, Iso.inv_hom_id_assoc, ← Functor.map_comp, Iso.inv_hom_id]
-    rw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have ha : a.hom ≫ d.hom ≫ (derivedPullback j).map e.hom = e0.hom :=
+    transport_automorphism_hom (derivedPullback j) e e0 d
   have hb := congrArg (fun k ↦ F0.map k) hn.symm
   simp only [Functor.map_comp] at hb
   change l0.hom ≫ F0.map
