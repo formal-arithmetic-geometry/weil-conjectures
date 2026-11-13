@@ -69,18 +69,54 @@ private lemma exactFunctor_truncation_comparison
   let c (b : ℤ) := (F.mapDerivedCategoryTruncGEIso b).symm.app E
   have hc (b : ℤ) : (s.truncGEπ b).app (R.obj E) ≫ (c b).hom =
       R.map ((t.truncGEπ b).app E) := by
-    have : s.IsGE (R.obj ((t.truncGE b).obj E)) b :=
+    have : s.IsGE ((t.truncGE b ⋙ R).obj E) b :=
       F.isGE_mapDerivedCategory_obj ((t.truncGE b).obj E) b
     change _ ≫ s.descTruncGE _ b = _
     exact s.π_descTruncGE _ _
   refine ⟨c, hc, ?_⟩
   intro b₁ b₂ h
-  have : s.IsGE (R.obj ((t.truncGE b₂).obj E)) b₂ :=
+  have : s.IsGE ((t.truncGE b₂ ⋙ R).obj E) b₂ :=
     F.isGE_mapDerivedCategory_obj ((t.truncGE b₂).obj E) b₂
-  have : s.IsGE (R.obj ((t.truncGE b₂).obj E)) b₁ := s.isGE_of_ge _ _ b₂ h
+  have : s.IsGE ((t.truncGE b₂ ⋙ R).obj E) b₁ := s.isGE_of_ge _ _ b₂ h
   apply s.from_truncGE_obj_ext
   rw [← Category.assoc, s.π_natTransTruncGEOfLE_app, hc,
     ← Category.assoc, hc, ← R.map_comp, t.π_natTransTruncGEOfLE_app]
+
+private lemma exactFunctor_truncationTower_comparison
+    {C D A : Type*} [Category C] [Category D] [Category A] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [Limits.PreservesFiniteLimits F]
+    [Limits.PreservesFiniteColimits F] (H : DerivedCategory D ⥤ A)
+    (G : DerivedCategory C ⥤ A) (eD : F.mapDerivedCategory ⋙ H ≅ G)
+    (E : DerivedCategory C) :
+    let R := F.mapDerivedCategory
+    let t := DerivedCategory.TStructure.t (C := C)
+    let s := DerivedCategory.TStructure.t (C := D)
+    ∃ (e : H.obj (R.obj E) ≅ G.obj E)
+      (en : ∀ n : ℕ, H.obj ((s.truncGE (-(n : ℤ))).obj (R.obj E)) ≅
+        G.obj ((t.truncGE (-(n : ℤ))).obj E)),
+      (∀ n : ℕ, H.map ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ≫ (en n).hom =
+        e.hom ≫ G.map ((t.truncGEπ (-(n : ℤ))).app E)) ∧
+      (∀ n : ℕ, H.map
+        ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app (R.obj E)) ≫
+          (en n).hom = (en (n + 1)).hom ≫ G.map
+            ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)) := by
+  let R := F.mapDerivedCategory
+  let t := DerivedCategory.TStructure.t (C := C)
+  let s := DerivedCategory.TStructure.t (C := D)
+  obtain ⟨c, hc, ht⟩ := exactFunctor_truncation_comparison F E
+  let en (n : ℕ) := H.mapIso (c (-(n : ℤ))) ≪≫ eD.app ((t.truncGE (-(n : ℤ))).obj E)
+  refine ⟨eD.app E, en, ?_, ?_⟩
+  · intro n
+    exact transport_comparison_projection R H G eD
+      ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ((t.truncGEπ (-(n : ℤ))).app E)
+      (c (-(n : ℤ))) (hc _)
+  · intro n
+    exact transport_comparison_naturality R H G eD
+      ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
+        (by omega)).app (R.obj E))
+      ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)
+      (c (-((n + 1 : ℕ) : ℤ))) (c (-(n : ℤ))) (ht _ _ (by omega))
 
 set_option profiler true in
 /-- Derived evaluation on an open agrees with sections after exact restriction,
@@ -138,10 +174,6 @@ theorem openDerivedSections_truncationTower_comparison
   let H := RingedSpace.openModuleSections V.toScheme.toRingedSpace ⊤
   let F := schemeOpenRestriction X V
   let R := F.mapDerivedCategory
-  let t := DerivedCategory.TStructure.t
-    (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))
-  let s := DerivedCategory.TStructure.t
-    (C := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))
   let : Functor.PreservesKInjectiveComplexes
       (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) V) :=
     ⟨fun I _ ↦ kInjective_of_restrict_open X.toRingedSpace V I⟩
@@ -166,19 +198,6 @@ theorem openDerivedSections_truncationTower_comparison
   let eD : R ⋙ H.rightDerivedFunctor ≅ G.rightDerivedFunctor :=
     Functor.isoWhiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.symm
       H.rightDerivedFunctor ≪≫ Functor.rightDerivedFunctorCompIso' F H under
-  obtain ⟨c, hc, ht⟩ := exactFunctor_truncation_comparison F E
-  let en (n : ℕ) := H.rightDerivedFunctor.mapIso (c (-(n : ℤ))) ≪≫
-    eD.app ((t.truncGE (-(n : ℤ))).obj E)
-  refine ⟨eD.app E, en, ?_, ?_⟩
-  · intro n
-    exact transport_comparison_projection R H.rightDerivedFunctor G.rightDerivedFunctor eD
-      ((s.truncGEπ (-(n : ℤ))).app (R.obj E)) ((t.truncGEπ (-(n : ℤ))).app E)
-      (c (-(n : ℤ))) (hc _)
-  · intro n
-    exact transport_comparison_naturality R H.rightDerivedFunctor G.rightDerivedFunctor eD
-      ((s.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
-        (by omega)).app (R.obj E))
-      ((t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E)
-      (c (-((n + 1 : ℕ) : ℤ))) (c (-(n : ℤ))) (ht _ _ (by omega))
+  exact exactFunctor_truncationTower_comparison F H.rightDerivedFunctor G.rightDerivedFunctor eD E
 
 end AlgebraicGeometry
