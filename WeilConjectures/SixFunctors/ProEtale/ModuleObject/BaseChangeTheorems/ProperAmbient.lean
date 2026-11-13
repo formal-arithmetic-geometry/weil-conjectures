@@ -97,7 +97,8 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
   have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
         K).hom = (pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq').hom.app K.obj :=
-    boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison ℓ _ sq K
+    boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq K
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
@@ -111,6 +112,7 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
     hθ K
   rw [← key, ObjectProperty.isIso_hom_iff]
-  exact hres
+  convert hres using 3
+  all_goals rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
