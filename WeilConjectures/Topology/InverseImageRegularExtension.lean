@@ -142,29 +142,30 @@ theorem inverseImageRegularExtension
     Equiv.ofBijective ((Opens.map g).op.sectionsPrecomp)
       (Functor.bijective_sectionsPrecomp (Opens.map g).op
         (N.val.presheaf ⋙ CategoryTheory.forget AddCommGrpCat.{u}))
-  let q (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
-    (Iso.homCongr (eqToIso (hE I)).symm (Iso.refl N)).trans
-      ((adj.homEquiv I N).trans (φ M (L.obj N)))
-  have hnq (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
+  let q (N : SheafOfModules.{u} S) : (E.obj I ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
+    (adj.homEquiv I N).trans (φ M (L.obj N))
+  have hnq (N N' : SheafOfModules.{u} S) (a : E.obj I ⟶ N) (b : N ⟶ N') :
       q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
-    change φ M (L.obj N') (adj.homEquiv I N' (eqToHom (hE I) ≫ (a ≫ b))) =
-      φ M (L.obj N) (adj.homEquiv I N (eqToHom (hE I) ≫ a)) ≫ Q.map (L.map b)
-    rw [← Category.assoc, adj.homEquiv_naturality_right]
+    dsimp only [q, Equiv.trans_apply]
+    rw [adj.homEquiv_naturality_right]
     exact hnφ M (L.obj N) (L.obj N') _ (L.map b)
-  obtain ⟨e, hs⟩ := exists_unitIso_of_sections (L ⋙ Q) F q hnq se
+  obtain ⟨e₀, hs⟩ := exists_unitIso_of_sections (L ⋙ Q) (E.obj I) q hnq se
     (fun _ _ _ _ ↦ rfl)
+  let e : F ≅ unit S := (eqToIso (hE I)).symm ≪≫ e₀
+  have he : eqToHom (hE I) ≫ e.hom = e₀.hom := by
+    simp [e]
   refine ⟨e, ?_⟩
   intro V a
   have hv := congrArg (fun z ↦ z.val V) hs
-  change (q (unit S) e.hom).val.app V (1 : A.obj.obj V) =
+  change (q (unit S) e₀.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
-  trans (q (unit S) e.hom).val.app V a
+  trans (q (unit S) e₀.hom).val.app V a
   · symm
     dsimp only [q, Equiv.trans_apply]
-    rw [hφ]
+    rw [hφ, ← he]
     exact hadj I (unit S) e.hom _ _
   rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
-  rw [(q (unit S) e.hom).val.app V |>.hom.map_smul, hv]
+  rw [(q (unit S) e₀.hom).val.app V |>.hom.map_smul, hv]
   change (t.hom.app ((Opens.map g).op.obj V)).hom
     (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
