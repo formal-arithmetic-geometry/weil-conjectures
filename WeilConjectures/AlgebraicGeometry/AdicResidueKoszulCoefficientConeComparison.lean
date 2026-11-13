@@ -502,8 +502,16 @@ theorem adicResidue_koszul_coefficient_cone_comparison
               (homOfLE h).op  := by
   have _ := hqA
   cases ha
-  intro O b ε hε
-  exact existsRingedKoszulConeFamilyComparison O _ r a εA tA qA hεA htA hc
+  dsimp only
+  intro ε hε
+  exact existsRingedKoszulConeFamilyComparison (A := A)
+    ((completed (coefficientProEtaleModelTopology.{u, v} X) A
+      (Ideal.span (Set.range a))).over U)
+    (fun x ↦ ringedKoszulSliceSection
+      (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
+      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
+        (Ideal.span (Set.range a))) x) U)
+    r a εA tA qA hεA htA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U)
