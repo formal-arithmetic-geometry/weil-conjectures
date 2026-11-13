@@ -144,14 +144,14 @@ private theorem tensorPullback_homotopy_unit
       (adj (𝟙 X)) (Scheme.Modules.pushforwardId X) (Category.id_comp f)
       (Scheme.Modules.pushforwardComp (𝟙 X) f) (by
         ext M U
-        simp) (ComplexShape.up ℤ) H
+        rfl) (ComplexShape.up ℤ) H
   · exact mapHomotopyCategory_leftAdjointCompIso_id_comp
       (fun k : X ⟶ Y ↦ Scheme.Modules.tensorPullback k)
       (fun k : X ⟶ Y ↦ Scheme.Modules.pushforward k) adj
       (adj (𝟙 Y)) (Scheme.Modules.pushforwardId Y) (Category.comp_id f)
       (Scheme.Modules.pushforwardComp f (𝟙 Y)) (by
         ext M U
-        simp) (ComplexShape.up ℤ) H
+        rfl) (ComplexShape.up ℤ) H
 
 
 /-- The two unit comparisons agree on a K-flat representative, for identity
