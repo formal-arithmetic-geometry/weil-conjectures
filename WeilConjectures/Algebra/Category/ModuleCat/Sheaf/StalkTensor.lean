@@ -114,7 +114,7 @@ private theorem tensorUnitMap_stalk_isIso (F G : SheafOfModules.{u} 𝓡) :
   rw [S.map_comp]
   infer_instance
 
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Comparing the adjunction tensorator with the localized tensor needs extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorUnitMap_natural

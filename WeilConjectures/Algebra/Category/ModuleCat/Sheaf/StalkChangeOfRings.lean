@@ -52,7 +52,7 @@ private theorem stalk_sheafification_bijective {X : TopCat.{u}}
   change Function.Bijective t
   exact ConcreteCategory.bijective_of_isIso t
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Stalk action transports through sheaf composition require additional elaboration.
 /-- Change of rings commutes with stalks, naturally in the module and compatibly with germs.
 Mathlib writes extension of scalars with the coefficient factor first: `a ⊗ s`
