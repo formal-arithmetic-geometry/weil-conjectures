@@ -183,9 +183,10 @@ private theorem mixedSections_composition_path
       (‹∀ Z : Scheme.{u}, HasDerivedCategory.{w}
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))› Z)
       f.toLRSHom.toShHom g.toLRSHom.toShHom)) K
-  rw [← HZ.rightDerivedFunctor.map_comp]
-  erw [he]
-  simp only [Functor.map_comp]
+  conv_lhs =>
+    rw [← HZ.rightDerivedFunctor.map_comp]
+    erw [he]
+    rw [Functor.map_comp]
   rfl
 
 set_option profiler true in
@@ -245,7 +246,7 @@ theorem mixedSections_left_unit_normalization
   dsimp only [p, b]
   erw [he]
   simp only [Category.assoc]
-  erw [hn]
+  erw [reassoc_of% hn]
   erw [reassoc_of% hg₀]
   rw [← (schemeGlobalScalarRestriction g).map_comp,
     ← (schemeGlobalScalarRestriction g).map_comp]
