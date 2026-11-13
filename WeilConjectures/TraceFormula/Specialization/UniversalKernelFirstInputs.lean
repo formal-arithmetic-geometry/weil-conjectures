@@ -43,7 +43,7 @@ namespace NearbyCyclesModel
 
 /-- The restricted pullback exchange respects the lax monoidal tensor maps. Keeping the models
 abstract here avoids rewriting tensor maps after substituting the deformation models. -/
-lemma Hom.boundedConstructiblePullbackExchange_lax_tensor
+private lemma Hom.boundedConstructiblePullbackExchange_lax_tensor
     {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k']
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]

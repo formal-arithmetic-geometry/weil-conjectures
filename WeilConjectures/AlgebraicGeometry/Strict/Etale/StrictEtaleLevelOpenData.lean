@@ -386,48 +386,27 @@ private abbrev quotientMap (O : Type (u + 1)) [CommRing O] (t : O)
     {m n : ℕ} (h : n ≤ m) : coefficient O t m →+* coefficient O t n :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-private theorem fixedRestriction_unit_comp (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
-    (t : O) {m n : ℕ} (h : n ≤ m) (U : T.Etaleᵒᵖ) :
-    ((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h) =
-      ((coefficientQuotientMap (J := T.smallEtaleTopology) O t h).hom.app U).hom.comp
-        ((unit T (coefficient O t m)).app U).hom := by
-  apply RingHom.ext
-  intro a
-  exact ConcreteCategory.congr_hom (congr_app
-    (toSheafify_naturality T.smallEtaleTopology
-      ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
-
-private def fixedRestrictionSection (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
-    (t : O) {m n : ℕ} (h : n ≤ m) (M : strictEtaleLevel T O t n) (U : T.Etaleᵒᵖ) :
-    (((coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙
-        fixed T (coefficient O t m)).obj M).obj.obj U) ≅
-      (((fixed T (coefficient O t n) ⋙
-        Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h)).obj M).obj.obj U) :=
-  (ModuleCat.restrictScalarsComp'App ((unit T (coefficient O t m)).app U).hom
-    ((coefficientQuotientMap (J := T.smallEtaleTopology) O t h).hom.app U).hom
-    (((unit T (coefficient O t n)).app U).hom.comp (quotientMap O t h))
-    (fixedRestriction_unit_comp T O t h U) (M.val.obj U)).symm ≪≫
-      ModuleCat.restrictScalarsComp'App (quotientMap O t h)
-        ((unit T (coefficient O t n)).app U).hom _ rfl (M.val.obj U)
-
--- Compare the two scalar restrictions through their composite ring homomorphisms.
+set_option maxHeartbeats 800000 in
+-- Compare the bundled coefficient presentations without unfolding their scalar actions.
 private def fixedRestrictionMap (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
     coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙ fixed T (coefficient O t m) ⟶
       fixed T (coefficient O t n) ⋙
         Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h) where
-  app M := ⟨{
-    app := fun U ↦ (fixedRestrictionSection T O t h M U).hom
-    naturality := by
-      intro U V f
-      ext x
-      rfl }⟩
+  app M := liftFixedMap T (coefficient O t m) _ _
+    ((coefficientRestrictionUnderlying (J := T.smallEtaleTopology) O t h).hom.app M)
+    (fun _ _ _ ↦ rfl) (fun U a x ↦ by
+      have hunit := ConcreteCategory.congr_hom (congr_app
+        (toSheafify_naturality T.smallEtaleTopology
+          ((Functor.const T.Etaleᵒᵖ).map (CommRingCat.ofHom (quotientMap O t h)))) U) a
+      exact (congrArg (fun b ↦ b • (show M.val.obj U from x)) hunit).symm)
   naturality := by
     intro M N f
     ext U x
     rfl
 
--- The section comparisons are already isomorphisms.
+set_option maxHeartbeats 800000 in
+-- Compare the bundled coefficient presentations without unfolding their scalar actions.
 private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (t : O) {m n : ℕ} (h : n ≤ m) :
     coefficientRestriction (J := T.smallEtaleTopology) O t h ⋙ fixed T (coefficient O t m) ≅
@@ -435,13 +414,13 @@ private def fixedRestriction (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
         Sheaf.restrictScalars T.smallEtaleTopology (quotientMap O t h) := by
   let α := fixedRestrictionMap T O t h
   have hi (M : strictEtaleLevel T O t n) : IsIso (α.app M) := by
-    have (U : T.Etaleᵒᵖ) : IsIso ((α.app M).hom.app U) :=
-      inferInstanceAs (IsIso (fixedRestrictionSection T O t h M U).hom)
-    have : IsIso (α.app M).hom := NatIso.isIso_of_isIso_app _
-    have : IsIso ((sheafToPresheaf T.smallEtaleTopology
-        (ModuleCat.{u + 1} (coefficient O t m))).map (α.app M)) :=
-      inferInstanceAs (IsIso (α.app M).hom)
-    exact isIso_of_reflects_iso _ (sheafToPresheaf T.smallEtaleTopology _)
+    have hi' : IsIso ((sheafCompose T.smallEtaleTopology
+        (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m)))).map (α.app M)) := by
+      change IsIso ((coefficientRestrictionUnderlying
+        (J := T.smallEtaleTopology) O t h).hom.app M)
+      infer_instance
+    exact isIso_of_reflects_iso _ (sheafCompose T.smallEtaleTopology
+      (CategoryTheory.forget (ModuleCat.{u + 1} (coefficient O t m))))
   let := NatIso.isIso_of_isIso_app α
   exact asIso α
 

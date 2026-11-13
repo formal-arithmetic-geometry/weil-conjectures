@@ -741,7 +741,7 @@ theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := 
 
 /-- The Hall–Witt identity after substitution into a local algebra, when the product of the
 three square-zero parameters kills the maximal ideal. -/
-theorem tangentMap_tangentBracket_hallWitt (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0)
+private theorem tangentMap_tangentBracket_hallWitt (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0)
     (h₂ : m₂ * m₂ = 0) (h₃ : m₃ * m₃ = 0) (hπ₁ : π m₁ = 0) (hπ₂ : π m₂ = 0)
     (hπ₃ : π m₃ = 0) (m : A) (hπ : π m = 0) (hm : ∀ a, π a = 0 → m * a = 0)
     (h : m₁ * m₂ * m₃ = m) (x y z : pointsKer G aug₁) :

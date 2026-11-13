@@ -238,7 +238,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_eqToHom_id' {W : Scheme.{u}} (f : W 
   comp_eqToHom_transport_aux _ _ _ h (leftDerivedUpperStarComp_inv_app_comp_eqToHom_id Λ f K)
 
 /-- Remove the identity pullback from the comparison of a square over `S`. -/
-lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
+private lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
     {p₁ : P ⟶ X} {p₂ : P ⟶ Y} {aX : X ⟶ S} {aY : Y ⟶ S}
     (sq : CommSq p₁ (p₂ ≫ aY) aX (𝟙 S)) (w : CommSq p₁ p₂ aX aY)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
@@ -255,7 +255,7 @@ lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_id
     (pullbackSquareComparison_hom_app Λ w K)
 
 /-- Remove the identity pullback from the comparison of a factorization. -/
-lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
+private lemma leftDerivedUpperStarComp_inv_app_comp_pullbackSquareComparison_self
     {p₂ : P ⟶ Y} {aY : Y ⟶ S} (sq : CommSq p₂ (p₂ ≫ aY) aY (𝟙 S))
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
       (condensedRingObj Λ S))) :

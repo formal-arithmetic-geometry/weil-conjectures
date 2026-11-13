@@ -161,7 +161,7 @@ lemma assemble_aux {A B B' B'' D E F : P} {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a�
 
 /-- Assemble two partial composites around a functorial map, transporting that map through
 a natural isomorphism. -/
-lemma assemble_natIso_aux {S R : C ⥤ P} (ι : S ≅ R) {A B B' D E F H : P} {M N : C}
+private lemma assemble_natIso_aux {S R : C ⥤ P} (ι : S ≅ R) {A B B' D E F H : P} {M N : C}
     {a₁ : A ⟶ B} {a₂ : B ⟶ B'} {a₃ : B' ⟶ S.obj M}
     {p₁ : A ⟶ D} {p₂ : D ⟶ E} {p₃ : E ⟶ R.obj M}
     (hA : a₁ ≫ a₂ ≫ a₃ = p₁ ≫ p₂ ≫ p₃ ≫ ι.inv.app M) (u : M ⟶ N)

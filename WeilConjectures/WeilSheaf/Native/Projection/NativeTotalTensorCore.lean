@@ -29,7 +29,7 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory
 
 /-- Paste the restriction, realization and tensor squares on a totalization summand. -/
-lemma tensorSquare_paste_summand {D : Type*} [Category* D]
+private lemma tensorSquare_paste_summand {D : Type*} [Category* D]
     {S T₀ T₁ T₂ U₀ U₁ U₂ V₀ V₁ V₂ W₀ W₁ : D}
     {i : S ⟶ T₀} {m : T₀ ⟶ T₁} {z : T₁ ⟶ T₂} {f : T₂ ⟶ U₂}
     {b : T₀ ⟶ U₀} {y : U₀ ⟶ U₁} {d : U₁ ⟶ U₂}

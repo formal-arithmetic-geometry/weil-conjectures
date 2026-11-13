@@ -217,7 +217,7 @@ theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n
 
 open scoped commutatorElement in
 /-- The commutator of two invertible matrices with square-zero scalar parts. -/
-theorem coe_commutator_of_eq_one_add_smul {A : Type u} [CommRing A] (e d : A)
+private theorem coe_commutator_of_eq_one_add_smul {A : Type u} [CommRing A] (e d : A)
     (he : e * e = 0) (hd : d * d = 0) (a b : GL n A) (X Y : Matrix n n A)
     (ha : (a : Matrix n n A) = 1 + e • X) (hb : (b : Matrix n n A) = 1 + d • Y) :
     (↑⁅a, b⁆ : Matrix n n A) = 1 + (e * d) • (X * Y - Y * X) := by
@@ -228,7 +228,7 @@ theorem coe_commutator_of_eq_one_add_smul {A : Type u} [CommRing A] (e d : A)
 
 open scoped commutatorElement in
 /-- The matrix commutator of tangent points after two square-zero substitutions. -/
-theorem coe_homMulEquiv_tangentMap_commutator {A : Type u} [CommRing A] [Algebra k A]
+private theorem coe_homMulEquiv_tangentMap_commutator {A : Type u} [CommRing A] [Algebra k A]
     [IsLocalRing A] {π : A →ₐ[k] k} [IsLocalHom π.toRingHom] (e d : A)
     (he : e * e = 0) (hd : d * d = 0) (hπe : π e = 0) (hπd : π d = 0)
     (p q : GrpObj.pointsKer 𝔾𝕃(n; k) GrpObj.aug₁) :

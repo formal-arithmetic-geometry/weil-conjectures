@@ -309,7 +309,7 @@ theorem derivedCube_of_isDerivedSquareOf
 
 /-- The ordinary mate transpose lifts degreewise, independently of adjunctions with
 identical units. -/
-theorem cochain_mate_transpose_of_unit_eq
+private theorem cochain_mate_transpose_of_unit_eq
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     {E₁ : A ⥤ B} {E₂ : C ⥤ D} {R₁ : B ⥤ A} {R₂ : D ⥤ C}
@@ -337,7 +337,7 @@ theorem cochain_mate_transpose_of_unit_eq
   exact (unit_mateEquiv_symm o₁ o₂ (TwoSquare.mk _ _ _ _ q) (P.X n)).symm
 
 /-- A localized right square identifies left mates through their cochain transposes. -/
-theorem derivedMate_app_of_transpose
+private theorem derivedMate_app_of_transpose
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]

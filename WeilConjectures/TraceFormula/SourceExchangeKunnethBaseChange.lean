@@ -33,7 +33,7 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj
 
 /-- A diagram chase for two pasted base-change squares, expressed in abstract functors. -/
-lemma CategoryTheory.Functor.comp_baseChangeIso_of_paste
+private lemma CategoryTheory.Functor.comp_baseChangeIso_of_paste
     {CS CX CY CP CW CV : Type*}
     [Category CS] [Category CX] [Category CY] [Category CP] [Category CW] [Category CV]
     (fU : CY ⥤ CX) (fL : CX ⥤ CY) (aYL : CY ⥤ CS) (aYU : CS ⥤ CY)

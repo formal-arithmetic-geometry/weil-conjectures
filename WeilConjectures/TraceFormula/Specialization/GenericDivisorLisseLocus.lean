@@ -86,7 +86,7 @@ theorem Stratification.isFiniteLocallyConstantSheaf_upperStar_interiorUnion
   exact IsFiniteLocallyConstantSheaf.of_openCover S.interiorUnionCover _
 
 /-- Pulling a complex back into the interiors of its lisse strata gives lisse homology. -/
-theorem Stratification.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
+private theorem Stratification.isFiniteLocallyConstantSheaf_homology_mapDerivedCategory_upperStar
     (S : Stratification X) {Y : Scheme.{u}} (g : Y ⟶ X)
     (hg : Set.range g.base ⊆ Set.range S.interiorUnion.ι.base)
     (F : DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ)
@@ -167,7 +167,7 @@ theorem exists_opens_inter_subset_image (hX : IsNormalScheme X.left) {h : Γ(X.l
 
 /-- A dense open in the divisor complement contains the complement in a neighbourhood of
 its generic point, together with the cartesian comparison of the two complements. -/
-lemma exists_opens_pullback_range_subset (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
+private lemma exists_opens_pullback_range_subset (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
     (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h})) (ζ : (centre X I).left)
     (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)

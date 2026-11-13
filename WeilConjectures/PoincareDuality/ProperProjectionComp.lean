@@ -34,7 +34,7 @@ open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 namespace CategoryTheory.Adjunction
 
 /-- Transport the projection morphism to a composite adjunction and expand its two factors. -/
-lemma projectionMorphism_eq_of_iso_comp
+private lemma projectionMorphism_eq_of_iso_comp
     {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃]
     [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory C₃]
     {F : C₃ ⥤ C₁} {G : C₁ ⥤ C₃} {F₁ : C₂ ⥤ C₁} {G₁ : C₁ ⥤ C₂}

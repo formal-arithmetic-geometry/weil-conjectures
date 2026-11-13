@@ -64,7 +64,7 @@ lemma range_subset_range_coprod_desc_right {A B C : Scheme.{u}} (f : A ⟶ C) (g
   exact ⟨(coprod.inr : B ⟶ A ⨿ B).base s, by rw [← Scheme.Hom.comp_apply, coprod.inr_desc]⟩
 
 /-- Membership in the image on constant special fibres can be checked on the ambient scheme. -/
-lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
+private lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
     (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
     (f : X' ⟶ X) (I : X.left.IdealSheafData)
     (y : (deformationSpecialFibre (centre X I) ⊥ k').left) :
@@ -74,7 +74,7 @@ lemma mem_range_centreSpecialFibreMap_iff {k : Type u} [Field k]
   rfl
 
 /-- Projection to the ambient scheme commutes with the map on constant special fibres. -/
-lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
+private lemma centreSpecialFibreMap_toBase_apply {k : Type u} [Field k]
     (k' : Type u) [Field k'] [Algebra k k'] {X X' : Over (Spec (.of k))}
     (f : X' ⟶ X) (I : X.left.IdealSheafData)
     (x : (deformationSpecialFibre (centre X' (I.comap f.left)) ⊥ k').left) :

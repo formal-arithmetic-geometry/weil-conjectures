@@ -193,7 +193,7 @@ attribute [local irreducible] DerivedCategory DerivedCategory.Q
   derivedInternalHomOfUniverses SheafOfModules.monoidalCategory
 
 -- The independent-universe representative square has large dependent module types.
-def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+private def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
     (R : Sheaf J CommRingCat.{max c v r})
@@ -211,7 +211,7 @@ def tensorModelsComparison {C : Type c} [Category.{v} C] (J : GrothendieckTopolo
       (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
     (CoefficientClosedStructure.comparison S T)
 
-theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+private theorem tensorModelsUncurryModel {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
     (R : Sheaf J CommRingCat.{max c v r})
@@ -263,9 +263,15 @@ def tensorModels {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (S T : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (M : CoefficientTensorModels.{r, c, v, w} J R S) :
     CoefficientTensorModels.{r, c, v, w} J R T where
-  comparison := tensorModelsComparison J R S T M
+  comparison := M.comparison ≪≫ Functor.isoWhiskerLeft
+    ((coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q).prod
+      (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
+    (CoefficientClosedStructure.comparison S T)
   uncurry_model := tensorModelsUncurryModel J R S T M
-    (tensorModelsComparison J R S T M) rfl
+    (M.comparison ≪≫ Functor.isoWhiskerLeft
+      ((coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q).prod
+        (coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q))
+      (CoefficientClosedStructure.comparison S T)) rfl
 
 /-- Fixed normalized closed structures, with the old representative models transported
 by the uniquely evaluation-preserving comparison. -/

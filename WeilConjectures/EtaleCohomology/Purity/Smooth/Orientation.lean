@@ -60,7 +60,7 @@ namespace Etale
 
 /-- A morphism into an object isomorphic to the constant complex vanishes if all its
 derived pullbacks to geometric points vanish. -/
-lemma constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero
+private lemma constantComplex_eq_zero_of_leftDerivedUpperStar_map_eq_zero
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (e : K ≅ constantComplex Λ X) (φ : constantComplex Λ X ⟶ K)
