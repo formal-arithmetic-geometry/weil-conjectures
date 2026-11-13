@@ -28,17 +28,17 @@ namespace CategoryTheory
 
 private theorem map_comp_of_pasted_squares
     {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
-    {X Y Z : C} {U V W T R : D} (a : U ⟶ V) (b : V ⟶ W) (c : W ⟶ T)
+    {X Y Z : C} {V W T R : D} (a : F.obj X ⟶ V) (b : V ⟶ W) (c : W ⟶ T)
     (d : T ⟶ R) {S : D} (e : R ⟶ S) (m : X ⟶ Y) (n : Y ⟶ Z)
-    (i : U ⟶ F.obj X) (t : F.obj Y ⟶ T) (p : F.obj Z ⟶ S)
-    (hm : a ≫ b ≫ c = i ≫ F.map m ≫ t)
+    (t : F.obj Y ⟶ T) (p : F.obj Z ⟶ S)
+    (hm : a ≫ b ≫ c = F.map m ≫ t)
     (ht : t ≫ d ≫ e = F.map n ≫ p) :
-    a ≫ b ≫ c ≫ d ≫ e = i ≫ F.map (m ≫ n) ≫ p := by
+    a ≫ b ≫ c ≫ d ≫ e = F.map (m ≫ n) ≫ p := by
   calc
     _ = (a ≫ b ≫ c) ≫ d ≫ e := by simp only [Category.assoc]
-    _ = (i ≫ F.map m ≫ t) ≫ d ≫ e := congrArg (fun k ↦ k ≫ d ≫ e) hm
-    _ = i ≫ F.map m ≫ (t ≫ d ≫ e) := by simp only [Category.assoc]
-    _ = i ≫ F.map m ≫ (F.map n ≫ p) := congrArg (fun k ↦ i ≫ F.map m ≫ k) ht
+    _ = (F.map m ≫ t) ≫ d ≫ e := congrArg (fun k ↦ k ≫ d ≫ e) hm
+    _ = F.map m ≫ (t ≫ d ≫ e) := Category.assoc _ _ _
+    _ = F.map m ≫ (F.map n ≫ p) := congrArg (fun k ↦ F.map m ≫ k) ht
     _ = _ := by rw [F.map_comp]; simp only [Category.assoc]
 
 variable {C : Type u} [Category.{v + 1} C] [Abelian C]
@@ -289,8 +289,7 @@ theorem residueOrdinaryTensorPull_homotopy
     exact residueOrdinaryTensorPull_module Λ A φ f (K.X n)
   have ht := tensor_single_homotopy_iso_inv F B B' e P
   dsimp only at ht
-  simpa only [Category.id_comp] using
-    map_comp_of_pasted_squares (F.mapHomotopyCategory (.up ℤ))
-      _ _ _ _ _ _ _ (𝟙 _) _ _ (by simpa only [Category.id_comp] using hm) ht
+  exact map_comp_of_pasted_squares (F.mapHomotopyCategory (.up ℤ))
+    _ _ _ _ _ _ _ _ _ hm ht
 
 end AlgebraicGeometry.ProEtale.CondensedRing
