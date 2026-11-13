@@ -25,36 +25,11 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-private theorem cochain_square_of_comparison_eq
-    {ι : Type*} {c : ComplexShape ι}
-    {S V W : Type*} [Category* S] [Category* V] [Category* W]
-    [HasZeroMorphisms V] [HasZeroMorphisms W]
-    {F₀ F₁ : S ⥤ HomologicalComplex W c} {G₀ G₁ : S ⥤ HomologicalComplex V c}
-    {R : HomologicalComplex W c ⥤ HomologicalComplex V c} {P : S}
-    {D : HomologicalComplex V c}
-    {α α' : F₀ ≅ F₁} {β β' : G₀ ≅ G₁}
-    {a : G₀.obj P ⟶ R.obj (F₀.obj P)}
-    {d : G₁.obj P ⟶ D} {e : D ⟶ R.obj (F₁.obj P)}
-    (hα : α = α') (hβ : β = β')
-    (h : ∀ i, a.f i ≫ (R.map (α'.hom.app P)).f i =
-      (β'.hom.app P).f i ≫ d.f i ≫ e.f i) :
-    a ≫ R.map (α.hom.app P) = β.hom.app P ≫ d ≫ e := by
-  subst α'
-  subst β'
-  exact HomologicalComplex.hom_ext _ _ h
-
 /-- The actual comparison of exact cochain functors, before localization.
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
-  (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
-    Functor.isoWhiskerLeft
-      ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
-      (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
-
-private theorem integralPullEvaluationComplex_eq_ordinary {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (n : ℕ) : integralPullEvaluationComplex l E f n = ordinaryPullEvaluationComplex l E f n :=
-  rfl
+  ordinaryPullEvaluationComplex l E f n
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
@@ -100,38 +75,8 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  refine cochain_square_of_comparison_eq
-    (c := .up ℤ) (V := normalizedDVRModules l E X (n + 1))
-    (W := normalizedDVRModules l E X n)
-    (α := integralPullEvaluationComplex l E f n)
-    (β := integralPullEvaluationComplex l E f (n + 1))
-    (α' := ordinaryPullEvaluationComplex l E f n)
-    (β' := ordinaryPullEvaluationComplex l E f (n + 1))
-    (R := (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ))
-    (P := P) (integralPullEvaluationComplex_eq_ordinary l E f n)
-    (integralPullEvaluationComplex_eq_ordinary l E f (n + 1)) ?_
-  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
-    let mut pending : Array (Lean.Expr × Lean.Expr) := #[(target, source)]
-    let mut count := 0
-    for _ in [:2000] do
-      if !pending.isEmpty && count < 10 then
-        let (a, b) := pending.back!
-        pending := pending.pop
-        let a := a.consumeMData
-        let b := b.consumeMData
-        if a != b then
-          if a.isApp && b.isApp then
-            pending := pending.push (a.appArg!, b.appArg!)
-            pending := pending.push (a.appFn!, b.appFn!)
-          else if a.isForall && b.isForall then
-            pending := pending.push (a.bindingBody!, b.bindingBody!)
-            pending := pending.push (a.bindingDomain!, b.bindingDomain!)
-          else
-            count := count + 1
-            Lean.logInfo m!"TARGET: {a}\nSOURCE: {b}"
-  exact h
+  apply HomologicalComplex.hom_ext
+  intro i
+  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 
 end WeilConjectures.IntegralSystemRealization
