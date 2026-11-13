@@ -112,7 +112,6 @@ lemma leftDerivedUpperStarTensorComp_app_app
   rw [MonoidalCategory.tensorHom_def]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_comp_eq :
     leftDerivedUpperStarTensor Λ (f ≫ g) = leftDerivedUpperStarTensorComp Λ f g := by
@@ -120,12 +119,13 @@ lemma leftDerivedUpperStarTensor_comp_eq :
     (leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
   ext P Q
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  simp only [NatTrans.comp_app]
+  change ((leftDerivedUpperStarTensor Λ (f ≫ g)).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)).app P).app Q =
+    ((leftDerivedUpperStarTensorComp Λ f g).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (f ≫ g)).app P).app Q
   rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
-  erw [leftDerivedUpperStarTensorComp_app_app]
-  exact leftDerivedUpperStarTensor_comp_aux Λ f g A B
+  rw [leftDerivedUpperStarTensorComp_app_app]
+  exact leftDerivedUpperStarTensor_comp_aux Λ f g P.as Q.as
 
 /-- **The composition isomorphism of the derived pullbacks of module objects is monoidal**: it
 commutes with the tensor comparisons `m : Lh^* (K ⊗ᴸ M) ⟶ Lh^* K ⊗ᴸ Lh^* M`. -/
@@ -182,7 +182,6 @@ lemma leftDerivedUpperStarTensorId_app_app
   rw [MonoidalCategory.tensorHom_def]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_id_aux
     (A B : CochainComplex
@@ -208,13 +207,9 @@ lemma leftDerivedUpperStarTensor_id_aux
     have : IsIso ((NatTrans.mapHomotopyCategory (upperStarId Λ W).hom (.up ℤ)).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
           (HomotopyCategory.quotient _ (.up ℤ)).obj B)) :=
-      ⟨(NatTrans.mapHomotopyCategory (upperStarId Λ W).inv (.up ℤ)).app _, by
-        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
-          NatTrans.mapHomotopyCategory_id]
-        rfl, by
-        rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
-          NatTrans.mapHomotopyCategory_id]
-        rfl⟩
+      inferInstanceAs (IsIso ((NatIso.mapHomotopyCategory (upperStarId Λ W) (.up ℤ)).app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj A ⊗
+          (HomotopyCategory.quotient _ (.up ℤ)).obj B)).hom)
     infer_instance
   exact derivedId_tensor_aux (𝟙 W)^*⟦Λ⟧.leftDerivedFunctorCounit (leftDerivedUpperStarId Λ W)
     ((HomotopyCategory.quotient _ _).obj A) ((HomotopyCategory.quotient _ _).obj B)
@@ -224,7 +219,6 @@ lemma leftDerivedUpperStarTensor_id_aux
     (Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ W))
     (quotient_map_upperStarTensorComplexHom_id Λ W A B)
 
-set_option maxHeartbeats 2000000 in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_id_eq :
     leftDerivedUpperStarTensor Λ (𝟙 W) = leftDerivedUpperStarTensorId Λ W := by
@@ -232,12 +226,13 @@ lemma leftDerivedUpperStarTensor_id_eq :
     (leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
   ext P Q
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  simp only [NatTrans.comp_app]
+  change ((leftDerivedUpperStarTensor Λ (𝟙 W)).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)).app P).app Q =
+    ((leftDerivedUpperStarTensorId Λ W).app (Qh.obj P)).app (Qh.obj Q) ≫
+      ((leftDerivedUpperStarTensorRightCounit Λ (𝟙 W)).app P).app Q
   rw [leftDerivedUpperStarTensorRightCounit_app_app_eq_tensorHom]
-  erw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_id_aux,
-    leftDerivedUpperStarTensor_app_app_comp]
+  rw [leftDerivedUpperStarTensorId_app_app, leftDerivedUpperStarTensor_app_app_comp]
+  exact (leftDerivedUpperStarTensor_id_aux Λ W P.as Q.as).symm
 
 /-- **The identity isomorphism of the derived pullbacks of module objects is monoidal**:
 `L(𝟙 W)^*(K ⊗ᴸ M) ⟶ L(𝟙 W)^* K ⊗ᴸ L(𝟙 W)^* M ⟶ K ⊗ᴸ M` is the identity isomorphism. -/
