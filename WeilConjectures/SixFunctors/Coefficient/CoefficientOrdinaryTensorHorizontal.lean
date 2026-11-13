@@ -328,8 +328,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
--- Normalized functor composites require extra elaborator heartbeats in the generator proof.
 /-- Ordinary quotient adjuncts commute with the tensor comparison and finite evaluation.
 Source: Zheng, Construction 4.1 and Proposition 4.17(a)
 (blueprint: lem-coef-ordinary-tensor-horizontal).
@@ -404,12 +402,14 @@ theorem coefficientOrdinaryTensorHorizontal {W : Scheme.{t}}
     funext k
     apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{t + 1, t, u}
       (R := integralCoefficientCommRingSheaf l E W m)
-    intro p q hpq U x y
+    intro p q hpq U
+    refine (evaluation_section_surjective l E (P.X p) m U).forall.mpr ?_
+    intro x0
+    refine (evaluation_section_surjective l E (Q.X q) m U).forall.mpr ?_
+    intro y0
     -- Compare sections after the explicit scalar-restriction transport.
     apply restriction_section_injective (normalizedDVRQuotient l E W hmn)
       (((finiteTensor l E W n).obj (level l E P n, level l E Q n)).X k) U
-    obtain ⟨x0, rfl⟩ := evaluation_section_surjective l E (P.X p) m U x
-    obtain ⟨y0, rfl⟩ := evaluation_section_surjective l E (Q.X q) m U y
     let x := coefficientEvaluationSection l E W (P.X p) m U x0
     let y := coefficientEvaluationSection l E W (Q.X q) m U y0
     change (((finiteTensor l E W n).map (Prod.mkHom f g)).f k).val.app U
