@@ -30,6 +30,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- Elaborating the nested kernel universal property and image transports needs a larger budget.
 /-- Removing the distinguished coordinate gives a short exact sequence of kernels
 with a quasi-coherent ideal quotient.
