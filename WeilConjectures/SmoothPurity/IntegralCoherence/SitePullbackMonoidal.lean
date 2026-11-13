@@ -343,6 +343,7 @@ theorem ordinary_braiding (M N : SheafOfModules.{r}
     moduleTmul_braiding]
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The pure-triple extensionality and rewriting chain is long.
 /-- The ordinary comparison is compatible with the associators. -/
 theorem ordinary_associativity (M N P : SheafOfModules.{r}
@@ -457,6 +458,7 @@ variable [UnivLE.{max c v, r}]
   (adj₁₂ : F₁₂ ⊣ SheafOfModules.pushforward.{r} (ringMap J L U₁₂ R T φ₁₂))
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The pure-tensor extensionality and rewriting chain is long.
 /-- A compositor sending unit images to restricted iterated unit images is compatible with
 the normalized ordinary comparisons. -/
