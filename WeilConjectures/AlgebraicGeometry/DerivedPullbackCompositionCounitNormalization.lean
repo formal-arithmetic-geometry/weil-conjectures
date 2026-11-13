@@ -144,6 +144,7 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf, moduleRings] at *
   apply derivedPullback_chosen_counit_precomp.{u, w} (f ≫ g) K
   exact derivedPullbackComposition_localized_counit.{u, w} f g K
 
