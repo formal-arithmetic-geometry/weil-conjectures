@@ -109,8 +109,7 @@ private theorem projectionMap_of_comparison
   erw [whisker_exchange_assoc]
   erw [← MonoidalCategory.whiskerLeft_comp_assoc, Iso.inv_hom_id_app,
     MonoidalCategory.whiskerLeft_id, Category.id_comp, whisker_exchange_assoc]
-  rw [reassoc_of% (Functor.LaxMonoidal.μ_natural_right R (G.obj A) (adj.unit.app T)),
-    ← R.map_comp]
+  erw [reassoc_of% (Functor.LaxMonoidal.μ_natural_right R (G.obj A) (adj.unit.app T))]
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -182,7 +181,6 @@ noncomputable instance monoidal_upperStar_mapHomologicalComplex :
     ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal :=
   Functor.mapCochainComplexMonoidal _
 
-set_option profiler true in
 open HomotopyCategory DerivedCategory in
 private lemma weaklyEtaleProjection_unit
     (T : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
@@ -197,7 +195,6 @@ private lemma weaklyEtaleProjection_unit
   rw [Adjunction.localization_unit_app]
   rfl
 
-set_option profiler true in
 open HomotopyCategory DerivedCategory in
 private lemma weaklyEtaleProjection_counit
     (A : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -213,7 +210,6 @@ private lemma weaklyEtaleProjection_counit
   rw [Adjunction.localization_counit_app]
   rfl
 
-set_option profiler true in
 omit [WeaklyEtale g] in
 open HomotopyCategory DerivedCategory in
 private lemma weaklyEtaleProjection_tensorComparison
@@ -245,7 +241,6 @@ private lemma weaklyEtaleProjection_tensorComparison
     _ _ _ _ h (by rw [← Functor.map_comp, Functor.Monoidal.δ_μ,
       CategoryTheory.Functor.map_id])
 
-set_option profiler true in
 open HomotopyCategory in
 private lemma weaklyEtaleProjection_mapProjection
     (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -263,14 +258,14 @@ private lemma weaklyEtaleProjection_mapProjection
           ((weaklyEtaleLowerShriek Λ g).mapHomotopyCategory (.up ℤ)).obj ((quotient _ _).obj T)) =
     (quotient _ _).map
       ((Functor.Monoidal.projectionMap
-        ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomologicalComplex (.up ℤ)) K).app T) := by
+        ((weaklyEtaleLowerShriekUpperStarAdjunction Λ g).mapHomologicalComplex
+          (.up ℤ)) K).app T) := by
   erw [Adjunction.mapHomotopyCategory_unit_app_quotient,
     Adjunction.mapHomotopyCategory_counit_app_quotient]
   erw [← HomotopyCategory.MonoidalCategory.quotient_map_whiskerLeft']
   rw [← Functor.map_comp, Functor.mapHomotopyCategory_map, ← Functor.map_comp]
   rfl
 
-set_option profiler true in
 open HomotopyCategory DerivedCategory in
 /-- On objects coming from cochain complexes, the derived projection map of `Dg_! ⊣ Lg^*` is
 the image of the projection map on cochain complexes, up to the tensor comparison maps of
