@@ -103,8 +103,10 @@ private lemma adicGlobalSectionsFrobeniusNatTransAppHB {Z W : Scheme.{u}} (g : Z
   dsimp only [adicLowerStarCompGlobalSectionsIsoHB]
   rw [IsoAlgebra.frobeniusNatTrans_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom,
-    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom]
-  rw [adicSheafForget_map_adicLowerStarGeometricFiberMapCompFrobeniusIso_hom_app]
+    Functor.comp_map, Mod.forget_map, Mod.comp_hom', adicLowerStar_map_hom,
+    Iso.trans_hom, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, NatTrans.comp_app,
+    Mod.comp_hom', Mod.comp_hom', adicLowerStarComp_hom_app_hom,
+    adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom]
   simp only [Category.assoc] at h ⊢
   exact h
 
