@@ -138,13 +138,17 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     CochainComplex.ιMapBifunctor (K.obj (G.obj P)) (K.obj (G.obj Q))
         (MonoidalCategory.curriedTensor _) i j n hij ≫
       ek.hom.f n ≫ k.pullback.map (eg.hom.f n) ≫ (γ.app (TY.obj (P, Q))).f n
-  rw [← MonoidalCategory.tensorHom_def_assoc]
-  rw [reassoc_of% (ringedTensorTotalComponent h (F.obj P) (F.obj Q) i j n hij),
-    reassoc_of% (ringedTensorTotalComponent k (G.obj P) (G.obj Q) i j n hij)]
+  conv_lhs => rw [← MonoidalCategory.tensorHom_def_assoc]
+  conv_lhs =>
+    arg 2
+    rw [reassoc_of% (ringedTensorTotalComponent h (F.obj P) (F.obj Q) i j n hij)]
+  conv_rhs =>
+    rw [reassoc_of% (ringedTensorTotalComponent k (G.obj P) (G.obj Q) i j n hij)]
   have hf := congrArg (fun a ↦ h.pullback.map a) (ringedTensorTotalComponent f P Q i j n hij)
   have hg := congrArg (fun a ↦ k.pullback.map a) (ringedTensorTotalComponent g P Q i j n hij)
   simp only [Functor.map_comp] at hf hg
-  rw [hf, reassoc_of% hg]
+  conv_lhs => arg 2; arg 2; rw [hf]
+  conv_rhs => arg 2; rw [reassoc_of% hg]
   have hn := s.modules.hom.naturality
     (CochainComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _) i j n hij)
   dsimp only [Functor.comp_map] at hn
@@ -154,7 +158,7 @@ theorem ringedSquareOrdinaryTensorHomCompatibility
     (g.pullback.obj (Q.X j))).inv ≫ k.pullback.map
       (g.ordinaryTensor.mu (P.X i) (Q.X j)).inv ≫
     k.pullback.map (g.pullback.map _) ≫ s.modules.hom.app _
-  rw [hn]
+  conv_rhs => arg 2; arg 2; rw [hn]
   have hm := congrArg (fun a ↦ a ≫ h.pullback.map (f.pullback.map
     (CochainComplex.ιMapBifunctor P Q (MonoidalCategory.curriedTensor _) i j n hij)))
     (inverse_module_square s (P.X i) (Q.X j))
