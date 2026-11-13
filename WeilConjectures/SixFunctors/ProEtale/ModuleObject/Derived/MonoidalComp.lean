@@ -44,10 +44,10 @@ lemma upperStarTensorComplexHom_comp
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  erewrite [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc,
+  rewrite (transparency := .default) [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc,
     HomologicalComplex.ι_mapBifunctorDesc_assoc]
   rewrite [Category.assoc, ← Functor.map_comp]
-  erewrite [HomologicalComplex.ι_mapBifunctorDesc]
+  rewrite (transparency := .default) [HomologicalComplex.ι_mapBifunctorDesc]
   simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
   rewrite [(upperStarComp Λ f g).hom.naturality, Functor.map_comp]
   have hμ := upperStarComp_hom_app_tensor_μ_assoc Λ f g (A.X p) (B.X q)
