@@ -43,6 +43,7 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
 
+/-- Reverse a tensor comparison square after identifying its isomorphism and comparison maps. -/
 private theorem comparisonCompatible_symm_of_tensorComparison
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory C'] [MonoidalCategory D']
@@ -72,8 +73,9 @@ private theorem comparisonCompatible_symm_of_tensorComparison
     curriedTensor_map_app, curriedTensor_obj_map, Functor.comp_obj]
   rw [reassoc_of% (h X Y), Iso.hom_inv_id_app_assoc, ← MonoidalCategory.tensorHom_def,
     MonoidalCategory.tensorHom_comp_tensorHom, Iso.hom_inv_id_app, Iso.hom_inv_id_app]
-  simp only [MonoidalCategory.id_tensorHom_id, Category.comp_id]
+  erw [MonoidalCategory.id_tensorHom_id, Category.comp_id]
 
+/-- Transport projection invertibility using an identified representative of the mate. -/
 private theorem isIso_projectionMap_of_mate_eq
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
@@ -123,7 +125,6 @@ noncomputable def derivedExtendScalarsTensorIso (X : Scheme.{u}) :
 variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
   {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option profiler true in
 /-- The derived (Pull) isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor
 comparisons of the derived pullbacks (`leftDerivedUpperStarTensor`) and of the derived extensions
 of scalars (`derivedExtendScalarsTensorIso`): it is the isomorphism of composites of left derived
@@ -146,7 +147,6 @@ theorem comparisonCompatible_derivedPullIso :
     (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ (f)^*⟦Λ⟧
     (Mod.extendScalars (coefficientMap a X)) (pullIso a f)
 
-set_option profiler true in
 /-- **The projection formula under a flat change of coefficients**: if the projection map
 `Rf_* K ⊗ᴸ M ⟶ Rf_*(K ⊗ᴸ Lf^* M)` with coefficients `Λ` is an isomorphism at `(K, M)` and the
 (Push) comparison `T Rf_* ⟶ Rf_* T` is an isomorphism at `K` and at `K ⊗ᴸ Lf^* M`, then the
