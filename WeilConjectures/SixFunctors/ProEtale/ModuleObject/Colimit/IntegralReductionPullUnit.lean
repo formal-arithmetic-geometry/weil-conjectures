@@ -68,12 +68,12 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
 
 private lemma pullUnit_tensorInstances
     (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
-    let C := Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R
-    (∀ M : C, PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).obj M)) ∧
-    (∀ M : C, PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C).flip.obj M)) ∧
-    (∀ A B C D : GradedObject ℤ C, GradedObject.HasTensor₄ObjExt A B C D) ∧
-    (∀ A B C : GradedObject ℤ C, GradedObject.HasGoodTensor₁₂Tensor A B C) ∧
-    (∀ A B C : GradedObject ℤ C, GradedObject.HasGoodTensorTensor₂₃ A B C) := by
+    let C₀ := Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R
+    (∀ M : C₀, PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C₀).obj M)) ∧
+    (∀ M : C₀, PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor C₀).flip.obj M)) ∧
+    (∀ A B C D : GradedObject ℤ C₀, GradedObject.HasTensor₄ObjExt A B C D) ∧
+    (∀ A B C : GradedObject ℤ C₀, GradedObject.HasGoodTensor₁₂Tensor A B C) ∧
+    (∀ A B C : GradedObject ℤ C₀, GradedObject.HasGoodTensorTensor₂₃ A B C) := by
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 private lemma pullUnit_comp_counit_diagram
