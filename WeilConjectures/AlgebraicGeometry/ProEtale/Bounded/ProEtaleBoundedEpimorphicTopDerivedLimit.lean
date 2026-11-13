@@ -117,7 +117,7 @@ Source: Stacks Project, Tag 0947, `proposition-enough-weakly-contractibles`, (5)
 and its proof (blueprint: lem-sf-bounded-epimorphic-top-derived-limit).
 
 Proof plan:
-1. By det-pe-products-exact and lem-weil-derived-limit-products-core, derived
+1. By proposition-exact-products--1 and lem-weil-derived-limit-products-core, derived
    homology preserves countable products. The canonical comparison identifies
    homology of the supplied product with the product of the homologies, with
    components given by homology of its projections. Additivity and the projection
@@ -130,7 +130,7 @@ Proof plan:
 3. For j < a or j > b + 1, both adjacent V's vanish by the common bounds.
    A product of zero objects is zero by its universal property, and exactness
    then forces H^j(L) to vanish.
-4. Apply the first assertion of det-pe-milnor-epimorphic to the module-sheaf
+4. Apply the first assertion of proposition-milnor-sequence--3 to the module-sheaf
    tower H^b(P_n), using exactly the assumed epimorphy. It makes `1 - T_b`
    epic. Reindexing the positive levels by ℕ changes no consecutive transition.
 5. At j = b + 1, V_(b+1) = 0. The connecting map out of V_b annihilates the

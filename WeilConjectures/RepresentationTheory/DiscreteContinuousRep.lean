@@ -11,7 +11,7 @@ public import Mathlib.Topology.Algebra.Group.Defs
 /-!
 # Blueprint statements
 
-lem-sc-sylow-module-filtration.
+theorem-cohomology-curves.
 -/
 
 @[expose] public section
@@ -20,7 +20,7 @@ universe u₁ v₁ w₁
 
 namespace Rep
 
-/-- Required definitions for lem-sc-sylow-module-filtration. -/
+/-- Required definitions for theorem-cohomology-curves. -/
 abbrev DiscreteContinuousRep (A : Type u₁) [Ring A] (G : Type v₁) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] : Type _ :=
   CategoryTheory.ObjectProperty.FullSubcategory

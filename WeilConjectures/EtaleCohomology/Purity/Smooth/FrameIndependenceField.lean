@@ -16,8 +16,8 @@ section of affine space is known
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`). This
 file reruns the proof of frame independence of
 `WeilConjectures/EtaleCohomology/Purity/Smooth/FrameIndependence.lean` (Step 3 of the proof of
-`sk-thm-regular`) with this input: for functions `f₁, …, f_c` on `U` and an invertible matrix
-`M`, the cup products of Kummer boundaries of `f` and of `M f` agree.
+`lemma-class-of-point--1`) with this input: for functions `f₁, …, f_c` on `U` and an invertible
+matrix `M`, the cup products of Kummer boundaries of `f` and of `M f` agree.
 
 ## Main statements
 
@@ -48,10 +48,11 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] {c : ℕ}
 
-/-- **Universal frame independence over a field** (Step 3 of the proof of `sk-thm-regular`).
-For `S` separated and locally of finite type over a field, on `𝔸^c_{GL_{c,S}}`, with coordinates
-`t` and universal matrix `A`, the frames `t` and `A t` of the zero section have the same class:
-restricting `∂κ(At₁) ∪ ⋯` to the support `V(t)` gives `∂κ(t₁) ∪ ⋯`. Same proof as
+/-- **Universal frame independence over a field** (Step 3 of the proof of
+`lemma-class-of-point--1`). For `S` separated and locally of finite type over a field, on
+`𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal matrix `A`, the frames `t` and `A t` of the
+zero section have the same class: restricting `∂κ(At₁) ∪ ⋯` to the support `V(t)` gives
+`∂κ(t₁) ∪ ⋯`. Same proof as
 `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_glMatrix`, using the Thom
 class isomorphism over a field
 `AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`. -/
@@ -187,7 +188,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix_of_field {k : Type
   calc b = (b ≫ inv a) ≫ a := by simp
     _ = a := by rw [hid, Category.id_comp]
 
-/-- **Frame independence over a field** (Step 3 of the proof of `sk-thm-regular`). For `U`
+/-- **Frame independence over a field** (Step 3 of the proof of `lemma-class-of-point--1`). For `U`
 separated and locally of finite type over a field, functions `f₁, …, f_c` on `U` and an invertible
 matrix `M`, the frames `f` and `M f` cut out the same closed subscheme and have the same class:
 restricting `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`.

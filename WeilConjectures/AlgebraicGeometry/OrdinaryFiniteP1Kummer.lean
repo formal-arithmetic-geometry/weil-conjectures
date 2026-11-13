@@ -49,8 +49,8 @@ attribute [local irreducible] ModuleCat.extendScalars
   Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFunctor
 
 /-- The existing chosen derived localization, cached before its object projections.
-Source: the canonical module-sheaf derived category in blueprint thm-amb-p1-adjunction
-(auxiliary; not a blueprint node). -/
+Source: the canonical module-sheaf derived category in blueprint
+proposition-adjunction-projective-line--1 (auxiliary; not a blueprint node). -/
 @[instance_reducible]
 def ordinaryFiniteDerivedCategoryInstance (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) :
@@ -60,7 +60,7 @@ def ordinaryFiniteDerivedCategoryInstance (A : Type (u + 1)) [CommRing A]
 attribute [local instance 100000] ordinaryFiniteDerivedCategoryInstance
 
 /-- The constant coefficient sheaf, in the existing finite-twist encoding.
-Source: blueprint thm-amb-p1-decomposition
+Source: blueprint lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 abbrev ordinaryFiniteConstant (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
   (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A)
@@ -257,14 +257,14 @@ def ordinaryFiniteRootMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
 attribute [local irreducible] ordinaryFiniteRootMap Sheaf.H.map
 
 /-- The twist line placed in degree zero, using the existing finite etale twist.
-Source: blueprint thm-amb-p1-decomposition
+Source: blueprint lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 abbrev ordinaryFiniteLine (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (T : Scheme.{u}) : DerivedCategoryModule A T :=
   ordinaryFiniteDegreeZero A T (Scheme.finiteEtaleTateLine T N A hA)
 
 /-- The untwisted coefficient sheaf in degree zero.
-Source: blueprint thm-amb-p1-decomposition
+Source: blueprint lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 abbrev ordinaryFiniteUnit (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     DerivedCategoryModule A T :=
@@ -280,7 +280,7 @@ def ordinaryFiniteKummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (T.kummerδ₁ N hT (Scheme.Pic.toCohomologicalPicardGroup T L))
 
 /-- The Picard class of the canonical O(1) on the projective line.
-Source: blueprint thm-amb-p1-decomposition and Stacks Tag 03PL
+Source: blueprint lemma-cohomology-projective-line-trace and Stacks Tag 03PL
 (auxiliary; not a blueprint node). -/
 def ordinaryFiniteP1PicardClass (S : Scheme.{u}) : (ProjectiveLine S).Pic :=
   Scheme.Pic.ofIsInvertible (ProjectiveSpace.twist (ULift.{u} (Fin 2)) S 1)
@@ -288,7 +288,7 @@ def ordinaryFiniteP1PicardClass (S : Scheme.{u}) : (ProjectiveLine S).Pic :=
 /-- The actual scalar-extended Kummer Chern class in abelian cohomology.
 The Picard class is that of the existing `ProjectiveSpace.twist ... 1`, whose
 transition is `g₀ = (x₁/x₀)⁻¹ g₁`.
-Source: Stacks, Tag 03PL; blueprint thm-amb-p1-decomposition
+Source: Stacks, Tag 03PL; blueprint lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def ordinaryFiniteP1KummerClass (A : Type (u + 1)) [CommRing A] (N : ℕ)
@@ -311,7 +311,7 @@ def ordinaryFiniteP1ChernSpec (A : Type (u + 1)) [CommRing A] (N : ℕ)
     ordinaryFiniteP1KummerClass A N hA S hP
 
 /-- The Chern specification is the scalar-extended Kummer class of O(1).
-Source: the defining normalization, blueprint thm-amb-p1-decomposition
+Source: the defining normalization, blueprint lemma-cohomology-projective-line-trace
 (auxiliary; not a blueprint node). -/
 theorem ordinaryFiniteP1ChernSpec_iff
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)

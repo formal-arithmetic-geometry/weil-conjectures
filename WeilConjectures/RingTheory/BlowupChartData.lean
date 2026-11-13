@@ -21,11 +21,12 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 Let `R` be a henselian regular local ring of dimension `2` with algebraically closed residue field
 `κ`, and let `D = V(f)`, `B = V(g)` be curves and `H = V(h)` a regular curve through the closed
 point `t` such that the tangent cones satisfy `C_t D ∩ C_t B = {0}` and `C_t D ∩ T_t H = {0}`.
-Blowing up `t` separates `D` from `B` and from `H` (blueprint `det-tf-blowup-configuration`,
-`det-tf-blowup-strict-transform`). After a generic choice of the regular system of parameters
-`(x, y)`, all the points of the exceptional divisor that matter lie on the single affine chart
-`R[T]/(xT - y)` of the blow-up (`blowupChart x y`). This file records what is used of this chart,
-`AlgebraicGeometry.BlowupChartData`; with `f = x^d f'`, `h = x h'` on the chart,
+Blowing up `t` separates `D` from `B` and from `H` (blueprint
+`lemma-vanishing-restrictions-after-blowing-up--1`,
+`lemma-vanishing-restrictions-after-blowing-up--1`). After a generic choice of the regular system of
+parameters `(x, y)`, all the points of the exceptional divisor that matter lie on the single affine
+chart `R[T]/(xT - y)` of the blow-up (`blowupChart x y`). This file records what is used of this
+chart, `AlgebraicGeometry.BlowupChartData`; with `f = x^d f'`, `h = x h'` on the chart,
 `Z = Spec (R[T]/(xT - y))[1/f']` is the open part of the chart off the strict transform `D'`,
 `Y = V(x) ⊆ Z` is the exceptional divisor and `X = V(h') ⊆ Z` the strict transform of `H`:
 
@@ -61,9 +62,10 @@ variable {R : Type u} [CommRing R] [IsLocalRing R]
 /-- The data of a chart `R[T]/(xT - y)` of the blow-up of `Spec R` at its closed point which
 separates the strict transforms of the curves `D = V(f)` and `B = V(g)` and meets the strict
 transform of the regular curve `H = V(h)` transversally away from `D` (blueprint
-`det-tf-blowup-configuration` and `det-tf-blowup-strict-transform`, in the chart containing all
-the relevant points of the exceptional divisor). The regular system of parameters is
-`x = x₀ + c i y₀`, `y = y₀` for an index `i` of the family of constants `c`. -/
+`lemma-vanishing-restrictions-after-blowing-up--1` and
+`lemma-vanishing-restrictions-after-blowing-up--1`, in the chart containing all the relevant points
+of the exceptional divisor). The regular system of parameters is `x = x₀ + c i y₀`, `y = y₀` for an
+index `i` of the family of constants `c`. -/
 structure BlowupChartData (f g h x₀ y₀ : R) {K : Type v} (c : K → R) where
   /-- the index of the constant in `x = x₀ + c i y₀` -/
   i : K
@@ -137,13 +139,14 @@ theorem _root_.IsLocalRing.HasOrder.unique {R : Type u} [CommRing R] [IsLocalRin
   · exact h.2 (Ideal.pow_le_pow_right (Nat.succ_le_of_lt hlt) h'.1)
   · exact h'.2 (Ideal.pow_le_pow_right (Nat.succ_le_of_lt hlt) h.1)
 
-/-- **The separating chart of the blow-up exists** (blueprint `det-tf-blowup-configuration` and
-`det-tf-blowup-strict-transform`, in a chart). Let `R` be a henselian regular local ring of
-dimension `2` with algebraically closed residue field, `(x₀, y₀)` a regular system of parameters,
-and `c` an infinite family of elements of `R` with distinct residues. Let `f, g` and `h` be such
-that `h ∈ 𝔪 ∖ 𝔪²` and the tangent cones satisfy `C_t V(f) ∩ C_t V(g) = {0}` and
-`C_t V(f) ∩ T_t V(h) = {0}`. Then for some index `i`, the chart `R[T]/(xT - y)` of the blow-up
-for `x = x₀ + c i y₀`, `y = y₀` carries the data `BlowupChartData`. -/
+/-- **The separating chart of the blow-up exists** (blueprint
+`lemma-vanishing-restrictions-after-blowing-up--1` and
+`lemma-vanishing-restrictions-after-blowing-up--1`, in a chart). Let `R` be a henselian regular
+local ring of dimension `2` with algebraically closed residue field, `(x₀, y₀)` a regular system of
+parameters, and `c` an infinite family of elements of `R` with distinct residues. Let `f, g` and `h`
+be such that `h ∈ 𝔪 ∖ 𝔪²` and the tangent cones satisfy `C_t V(f) ∩ C_t V(g) = {0}` and
+`C_t V(f) ∩ T_t V(h) = {0}`. Then for some index `i`, the chart `R[T]/(xT - y)` of the blow-up for
+`x = x₀ + c i y₀`, `y = y₀` carries the data `BlowupChartData`. -/
 theorem nonempty_blowupChartData [IsRegularLocalRing R]
     (hdim : ringKrullDim R = 2) [HenselianLocalRing R] [IsAlgClosed (ResidueField R)]
     {x₀ y₀ : R} (hm : maximalIdeal R = Ideal.span {x₀, y₀}) {K : Type v} [Infinite K]

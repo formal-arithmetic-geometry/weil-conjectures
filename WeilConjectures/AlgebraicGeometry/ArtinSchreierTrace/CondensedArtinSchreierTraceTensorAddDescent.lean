@@ -11,7 +11,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 /-! # Cover detection for condensed module isomorphisms
 
 Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lem-fd-as-characters, proof Step 5, sheaf descent
+lemma-artin-schreier-character-sheaf, proof Step 5, sheaf descent
 (blueprint: lem-fd-as-trace-tensor-add-descent).
 -/
 
@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.ArtinSchreierTrace
 /-- A morphism of condensed module sheaves which becomes invertible on a pro-etale cover
 is an isomorphism.
 Source: the equalizer descent clause of the sheaf tensor structure, as used in
-blueprint lem-fd-as-characters, proof Step 5 (blueprint:
+blueprint lemma-artin-schreier-character-sheaf, proof Step 5 (blueprint:
 lem-fd-as-trace-tensor-add-descent).
 
 Proof: apply the local isomorphism criterion for sheaves of modules to the underlying

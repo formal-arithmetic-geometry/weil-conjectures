@@ -37,7 +37,7 @@ every compatible family of linear maps factors uniquely through the tensor colim
 Source: Stacks Project, Algebra, Tag 00DD
 (blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
 Proof: first forget the filtered algebra colimit to modules using
-`lem-weil-pbc-filtered-colimit-algebras-underlying-module`, then apply
+`theorem-finite-etale-covers-proper-henselian--2`, then apply
 `lem-weil-pbc-tensor-commutes-with-colimits`. Unpack the resulting `IsColimit`
 using `def-weil-pbc-category-colimit`: compatibility gives a unique factorization. -/
 theorem filteredColimit_tensorProduct_universal
@@ -82,7 +82,7 @@ colimit of commutative algebras.
 Source: Stacks Project, Algebra, Tags 00DD, 00D6 and 00D7
 (blueprint: lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise).
 Proof:
-1. Apply `lem-weil-pbc-filtered-colimit-algebras-underlying-module` to the algebra
+1. Apply `theorem-finite-etale-covers-proper-henselian--2` to the algebra
    diagram and its colimit: forgetting to modules gives a module colimit, in the
    sense of `def-weil-pbc-category-colimit`.
 2. Apply `lem-weil-pbc-tensor-commutes-with-colimits` (Tag 00DD) to that module

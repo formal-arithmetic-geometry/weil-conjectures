@@ -18,7 +18,7 @@ import Mathlib.Tactic.NoncommRing
 # An integral commutative model of a quotient projector
 
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, first matrix construction.
-(blueprint: lem-weil-pbc-integral-model-finite-free-projector).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ commutative algebra, where that element is idempotent modulo the extended ideal.
 
 Source: Stacks Project, More on Algebra, proof of Lemma Tag 07M5, from the choice
 of the lifted matrix through the construction of the idempotent `ebar`.
-(blueprint: lem-weil-pbc-integral-model-finite-free-projector).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 Proof: Lift the entries of `toMatrix' pbar` to a matrix `X` over `A`. Put
 `f = charpoly X` and `B = A[x]/(f)`. Monicity makes `B` finite free and integral.

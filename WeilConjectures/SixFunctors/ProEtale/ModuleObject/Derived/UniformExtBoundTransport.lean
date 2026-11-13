@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 # Transport of the uniform `Ext` bound along isomorphisms of coefficient rings
 
 The property `ProEtale.HasUniformConstructibleExtBound R` of a ring object `R` of abelian sheaves
-on `X_proét` (blueprint `sk-lem-uniform-constructible-ext`) only depends on `R` up to
+on `X_proét` (blueprint `lemma-uniform-ext-bound`) only depends on `R` up to
 isomorphism of ring objects (`ProEtale.HasUniformConstructibleExtBound.of_isIso`): restriction of
 scalars along an isomorphism `φ : R ⟶ S` is an equivalence `Mod S ≌ Mod R` which preserves
 constructibility, and so is its levelwise extension to the derived categories.

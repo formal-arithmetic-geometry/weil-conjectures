@@ -125,7 +125,7 @@ dimension of `X`, read as `0` if `X` is empty or infinite-dimensional.
 The value is meaningful only for `f` proper and `M` coherent: otherwise the Euler
 characteristics involved may be junk values.
 
-This is also blueprint `def-sc-hilbert-degree`. -/
+This is also blueprint `proposition-multiplication-n--1`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
   Δ_[1] ^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
 
@@ -154,7 +154,7 @@ lemma Scheme.Hom.degree_eq_degree_of_topologicalKrullDim_eq_one (f : X ⟶ Spec 
     Scheme.Modules.eulerChar_congr K (MonoidalCategory.rightUnitor M)]
   rfl
 
-/-- Blueprint `lem-sc-hilbert-polynomial`: The Hilbert polynomial.
+/-- Blueprint `proposition-multiplication-n--1`: The Hilbert polynomial.
 
 Let `X` be a proper scheme of dimension `g` over a field `K` and `M` an ample invertible
 `𝒪_X`-module. Then `m ↦ χ(X, M^{⊗ m})` is a numerical polynomial of degree at most `g`: there is
@@ -176,7 +176,7 @@ theorem Scheme.Hom.exists_polynomial_hilbertFunction (f : X ⟶ Spec (.of K)) [I
     rfl)⟩
 
 open scoped fwdDiff in
-/-- Blueprint `def-sc-hilbert-degree`: The Hilbert degree of an ample line bundle.
+/-- Blueprint `proposition-multiplication-n--1`: The Hilbert degree of an ample line bundle.
 
 If the Hilbert function `m ↦ χ(X, M^{⊗ m})` is given by a polynomial `P` of degree at most
 `g = dim X`, then the degree of `X` with respect to `M` is `g!` times the coefficient of `m^g`
@@ -243,7 +243,7 @@ lemma Scheme.Hom.hilbertFunction_tensorPow (f : X ⟶ Spec (.of K)) (M : X.Modul
 Hilbert polynomial of `M`, then `m ↦ χ(X, M^{⊗ k m})` is given by the polynomial `P(k X)`, whose
 coefficient of `m^g` is `k^g` times that of `P`.
 
-This is a step of the proof of blueprint `sk-prop-av-isogeny`. -/
+This is a step of the proof of blueprint `proposition-multiplication-n`. -/
 theorem Scheme.Hom.degree_tensorPow (f : X ⟶ Spec (.of K)) [IsProper f] (M : X.Modules)
     (hM : IsAmple f M) (k : ℕ) :
     f.degree (M.tensorPow k) = k ^ ((topologicalKrullDim X).unbotD 0).toNat * f.degree M := by
@@ -289,8 +289,8 @@ for the cohomology of coherent modules on proper schemes (EGA III, 3.2.1),
 is locally free of rank one, hence of finite presentation.
 
 For `M = 𝒪_X` on a curve, this is the finiteness of the genus `dim_k H¹(X, 𝒪_X)`
-(blueprint `lem-pc-euler-characteristic-well-defined`). This is used in the proof of blueprint
-`lem-sc-ample-positive-degree`. -/
+(blueprint `theorem-riemann-roch-coherent-serre-duality--1`). This is used in the proof of blueprint
+`proposition-multiplication-n--1`. -/
 instance finiteDimensional_H [IsProper (X ↘ Spec (.of K))] (M : X.Modules) [M.IsInvertible]
     (q : ℕ) : FiniteDimensional K (M.H q) :=
   have := IsInvertible.sheafOfModules_isInvertible M
@@ -356,7 +356,7 @@ sections of `M_K`, which lie in the `K`-span of finitely many sections of `M`, s
 `H⁰(X_K, M_K) = H⁰(X, M) ⊗_k K`; these define a morphism `X ⟶ ℙ(V)` whose base change to `K`
 is a closed immersion, hence which is a closed immersion by fpqc descent.
 
-(blueprint: `lem-pc-very-ample-descends`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem IsVeryAmple.of_pullback {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) [IsProper f]
     (K : Type u) [Field K] [Algebra k K] (M : X.Modules) [M.IsInvertible]
     (h : IsVeryAmple (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))
@@ -466,7 +466,7 @@ support of `J`. Choose `m` with `𝒪_X(mD)` very ample, embedding `X` by the co
 system into `ℙ^N`; the `m`-th power of the canonical section of `𝒪_X(D)` is the pullback of a
 linear form `ℓ`, so `X \ D` is a closed subscheme of the affine space `ℙ^N \ V(ℓ)`.
 
-(blueprint: `lem-sc-ample-complement-affine`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
     (f : X ⟶ Spec (.of k)) [IsProper f] {J : X.IdealSheafData} (hJ : J.IsInvertible)
     (hample : IsAmple f J.toModulesᵛ) {V : Scheme.{u}} (j : V ⟶ X) [IsOpenImmersion j]
@@ -520,8 +520,8 @@ theorem isAffine_compl_of_isAmple_dual_toModules {k : Type u} [Field k]
 `K` and `M` an ample invertible `𝒪_X`-module. Then the degree of `X` with respect to `M` is
 positive.
 
-This is Stacks 0BEV, cited as classical input in the proof of blueprint `sk-prop-av-isogeny`
-(also `lem-sc-isogeny-facts`). -/
+This is Stacks 0BEV, cited as classical input in the proof of blueprint
+`proposition-multiplication-n` (also `proposition-multiplication-n--1`). -/
 @[stacks 0BEV]
 theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [IsProper f]
     [Nonempty X] (M : X.Modules) (hample : IsAmple f M) : 0 < f.degree M := by
@@ -543,7 +543,7 @@ theorem Scheme.Hom.degree_pos_of_isAmple_of_nonempty (f : X ⟶ Spec (.of K)) [I
 algebraically closed, `X` a connected proper curve over `K` and `L` an ample invertible
 `𝒪_X`-module. Then `deg L = χ(L) - χ(𝒪_X) > 0`.
 
-This is the connected case of blueprint `lem-sc-ample-positive-degree`, recorded there as
+This is the connected case of blueprint `proposition-multiplication-n--1`, recorded there as
 classical input without a separate proof. -/
 @[stacks 0B5X]
 theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
@@ -553,12 +553,13 @@ theorem Scheme.Hom.degree_pos_of_isAmple_of_connectedSpace [IsAlgClosed K]
   have _ := hdim
   exact f.degree_pos_of_isAmple_of_nonempty L hample
 
-/-- Blueprint `lem-sc-ample-positive-degree`: Ample modules on proper curves have positive degree.
+/-- Blueprint `proposition-multiplication-n--1`: Ample modules on proper curves have positive
+degree.
 
 Let `K` be algebraically closed, `C` a proper curve over `K` of dimension one (possibly
 disconnected) and `L` an ample invertible `𝒪_C`-module. Then `deg L > 0`.
 
-This is also blueprint `lem-sc-ample-positive-degree`. The proof decomposes `C` into its
+This is also blueprint `proposition-multiplication-n--1`. The proof decomposes `C` into its
 finitely many connected components `C_i`, which are open and closed. The degree is additive
 over them (`AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint`); a component
 of dimension `0` is a single point, so contributes `0`; a component of dimension `1` contributes
@@ -643,7 +644,7 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
 proper curve over `K` and `L` an ample invertible `𝒪_X`-module. Then `L ≇ 𝒪_X`: `L` has positive
 degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree `0`.
 
-This is the last assertion of blueprint `lem-sc-ample-positive-degree`. -/
+This is the last assertion of blueprint `proposition-multiplication-n--1`. -/
 theorem IsAmple.isEmpty_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
     (hdim : topologicalKrullDim X = 1) {L : X.Modules} (hL : IsAmple f L) :
     IsEmpty (L ≅ 𝟙_ X.Modules) := by
@@ -660,7 +661,7 @@ algebraically closed, `X` a proper curve over `K` and `L` an ample invertible `�
 positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`), whereas `𝒪_X` has degree
 `0`.
 
-This is used in the proof of blueprint `lem-sc-mult-n-finite-kernel`. -/
+This is used in the proof of blueprint `proposition-multiplication-n--2`. -/
 theorem IsAmple.isEmpty_tensorPow_iso_unit [IsAlgClosed K] {f : X ⟶ Spec (.of K)} [IsProper f]
     (hdim : topologicalKrullDim X = 1) {L : X.Modules} (hL : IsAmple f L)
     {k : ℕ} (hk : 0 < k) : IsEmpty (L.tensorPow k ≅ 𝟙_ X.Modules) := by
@@ -677,12 +678,12 @@ Let `Y` be an integral proper `K`-scheme of dimension `g`, `M` an ample invertib
 and `E` a coherent `𝒪_Y`-module which is free of rank `r` on a nonempty open subset of `Y`. Then
 the `g`-th forward difference at `0` of `m ↦ χ(Y, E ⊗ M^{⊗ m})` is `r` times the degree of `Y`
 with respect to `M`. Both `m ↦ χ(Y, E ⊗ M^{⊗ m})` and `m ↦ r χ(Y, M^{⊗ m})` are numerical
-polynomials of degree at most `g` (blueprint `lem-sc-hilbert-polynomial`), and their difference
-has degree at most `g - 1`: by additivity of `χ` and dévissage, `E` may be compared with
+polynomials of degree at most `g` (blueprint `proposition-multiplication-n--1`), and their
+difference has degree at most `g - 1`: by additivity of `χ` and dévissage, `E` may be compared with
 `𝒪_Y^{⊕ r}` up to coherent modules supported on a proper closed subset, of dimension `< g`.
 
 This is the input on Hilbert polynomials used in the proof of blueprint
-`lem-sc-deg-pullback-finite`. -/
+`proposition-multiplication-n--1`. -/
 theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
     (f : Y ⟶ Spec (.of K)) [IsProper f] (M : Y.Modules) (hample : IsAmple f M)
     (E : Y.Modules) [E.IsFinitePresentation] {U : Y.Opens} (hU : (U : Set Y).Nonempty) {r : ℕ}
@@ -806,14 +807,14 @@ theorem Scheme.Hom.fwdDiff_iter_eulerChar_tensorObj_tensorPow [IsIntegral Y]
     ring
   exact_mod_cast this
 
-/-- Blueprint `lem-sc-deg-pullback-finite`: Degree of a pullback under a finite morphism.
+/-- Blueprint `proposition-multiplication-n--1`: Degree of a pullback under a finite morphism.
 
 Let `g : X ⟶ Y` be a finite surjective morphism of proper `K`-varieties of the same dimension,
 let `M` be an ample invertible `𝒪_Y`-module and let `d = [k(X) : k(Y)]` be the degree of `g`.
 Then `deg_{g^*M}(X) = d * deg_M(Y)`.
 
-This is also blueprint `lem-sc-deg-pullback-finite` (Stacks 0BEX). Both sides are `g`-th forward
-differences at `0`, where `dim X = dim Y` since `g` is finite surjective
+This is also blueprint `proposition-multiplication-n--1` (Stacks 0BEX). Both sides are `g`-th
+forward differences at `0`, where `dim X = dim Y` since `g` is finite surjective
 (`AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective`). By the projection formula
 `χ(X, (g^* M)^{⊗ m}) = χ(X, g^* M^{⊗ m}) = χ(Y, g_* g^* M^{⊗ m}) = χ(Y, g_* 𝒪_X ⊗ M^{⊗ m})`, and
 `g_* 𝒪_X` is a coherent module of generic rank `d`, so the leading coefficients compare by

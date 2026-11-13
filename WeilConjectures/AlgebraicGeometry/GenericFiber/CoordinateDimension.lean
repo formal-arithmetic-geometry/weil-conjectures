@@ -18,7 +18,7 @@ Let `S` be an integral scheme, `f : X ⟶ S` locally of finite type and `t : X �
 over `S` (a coordinate). The generic fibre of `t`, over the generic point of `𝔸¹_S`, has
 dimension at most `dim X_K - 1`, where `X_K` is the generic fibre of `f`. This is the dimension
 count driving the induction in Deligne's generic constructibility theorem
-(`thm-fin-deligne-generic-open`).
+(`theorem-generic-constructibility-base-change-rj`).
 
 Dimensions are topological Krull dimensions with values in `WithBot ℕ∞`, so an empty fibre has
 dimension `⊥` and `⊥ + 1 = ⊥`.
@@ -26,7 +26,7 @@ dimension `⊥` and `⊥ + 1 = ⊥`.
 ## Main statements
 
 - `AlgebraicGeometry.topologicalKrullDim_fiber_genericPoint_add_one_le`
-  (`lem-fin-coordinate-generic-dimension`).
+  (`lemma-coordinate-projections--1`).
 
 ## Proof
 
@@ -129,7 +129,7 @@ lemma AffineSpace.over_genericPoint (S : Scheme.{u}) [IrreducibleSpace S] :
   exact iff_of_true (((genericPoint_spec _).specializes (Set.mem_univ w)).map
     (𝔸(PUnit; S) ↘ S).continuous) trivial
 
-/-- Blueprint `lem-fin-coordinate-generic-dimension`: Coordinate projections lower generic
+/-- Blueprint `lemma-coordinate-projections--1`: Coordinate projections lower generic
 dimension.
 
 Let `S` be integral with function field `K`, let `f : X ⟶ S` be locally of finite type (in the

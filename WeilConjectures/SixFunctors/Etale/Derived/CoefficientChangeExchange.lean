@@ -424,7 +424,7 @@ lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalar
 -- The proof uses neither the surjectivity of `ρ` nor the finiteness of `Λ'`.
 set_option linter.unusedVariables false in
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
+/-- Blueprint `lemma-sp-reduction--1` (subsection
 `sk-def-sfb-coefficient-comparisons`): for a surjection `ρ : Λ →+* Λ'` of finite rings whose
 exponent is invertible on the separably closed field `k` and a separated finite-type
 `a_X : X ⟶ Spec k`, the canonical coefficient comparison
@@ -448,7 +448,7 @@ theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [
 variable [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
 
 
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
+/-- Blueprint `lemma-sp-reduction--1` (subsection
 `sk-def-sfb-coefficient-comparisons`):
 compact cohomology commutes with finite-level coefficient reduction, compatibly with pullback.
 For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on the
@@ -468,14 +468,15 @@ theorem exists_isCoefficientChange_compactlySupportedGlobalSections
     fun _ _ sq _ ↦
       isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX sq⟩
 
-/-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: geometric stalks commute with finite-level coefficient
-reduction, compatibly with the stalk transports. For a morphism `ρ : Λ →+* Λ'` of finite
-coefficient rings whose exponent is invertible on `k` and a geometric point `x̄ : Spec k ⟶ X`,
-the geometric stalk commutes with restriction of scalars along `ρ` through a coefficient
-comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for every
-`K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄` along every pair of
-automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7` (subsection
+`theorem-grothendieck-lefschetz-trace-formula--7`), the pullback isomorphism at a geometric point:
+geometric stalks commute with finite-level coefficient reduction, compatibly with the stalk
+transports. For a morphism `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible
+on `k` and a geometric point `x̄ : Spec k ⟶ X`, the geometric stalk commutes with restriction of
+scalars along `ρ` through a coefficient comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is
+an isomorphism for every `K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄`
+along every pair of automorphisms fixing `x̄`
+(`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
 theorem exists_isCoefficientChange_geometricStalk
     [HasInvertibleExponent Λ (Spec (.of k))] (x : Spec (.of k) ⟶ X) :
     ∃ β, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x) β ∧

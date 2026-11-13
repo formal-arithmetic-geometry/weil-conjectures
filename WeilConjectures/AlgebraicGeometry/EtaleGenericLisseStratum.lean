@@ -47,7 +47,7 @@ private lemma lisse_of_iso {Y : Scheme.{u}}
 stratum in every irreducible closed subset, leaving a proper closed complement.
 No partition of that complement is asserted here.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 3;
+Source: blueprint `lemma-detection-proper-direct-image--1`, step 3;
 Stacks Project, Tags 01J3 and 01J4 for the reduced induced scheme.
 (blueprint: lem-weil-pbc-etale-generic-lisse-stratum).
 

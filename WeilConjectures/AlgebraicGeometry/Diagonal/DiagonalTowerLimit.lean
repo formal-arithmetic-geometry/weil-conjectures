@@ -132,7 +132,7 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimi
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-diagonal-tower/
 sk-prop-diagonal-tower-limit.md, clauses 1--3; Stacks Tags 099L and 099I
-(blueprint: det-prop-diagonal-tower-limit).
+(blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 Strict towers have constant discrete Z_l coefficients. Only the final arrow has
 coefficients in the completed ring sheaf. Positive exponent n+1 is indexed by n.
@@ -164,7 +164,7 @@ attribute [local irreducible] diagonalExactFunctorExtImage
 attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 /-- The generic direct-image assertion, sharing its categorical structures.
-Source: blueprint clause 1 (blueprint: det-prop-diagonal-tower-limit). -/
+Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
 def diagonalDirectImageAssertion
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -454,19 +454,19 @@ The reduction isomorphisms are normalized against the canonical limit projection
 the canonical derived quotient units.
 
 Source: blueprint main-20261015, sk-prop-diagonal-tower-limit.md, clauses 1 and 3;
-Stacks 099L, 099I and 099M (blueprint: det-prop-diagonal-tower-limit).
+Stacks 099L, 099I and 099M (blueprint: proposition-ell-adic-cycle-class-diagonal).
 
 Proof:
 1. Quotient transitions and the root power transitions are epimorphisms, the latter
-by lem-pur-twist-sheaf-locally-free and invertibility of ell. det-pe-milnor-epimorphic
+by lem-pur-twist-sheaf-locally-free and invertibility of ell. proposition-milnor-sequence--3
 identifies derived and ordinary limits. The ordinary limits are the completed
-coefficient sheaf and its Tate line, by det-prop-sfb-qlbar-colimit-x-integral-limit.
+coefficient sheaf and its Tate line, by lemma-comparison-completed-coefficients--1.
 2. The diagonal is Cartier. Its complementary open is quasi-compact, since locally
-it is the distinguished affine open D(t). lem-exc-proetale-closed-exact preserves
-coefficient epimorphisms. Apply the same Milnor comparison to its direct-image
+it is the distinguished affine open D(t). proposition-extension-zero-restriction-closed-subscheme--4
+preserves coefficient epimorphisms. Apply the same Milnor comparison to its direct-image
 tower; direct image commutes with ordinary limits sectionwise. This gives the
 supported completed constant. Clause 2 permits commuting the Tate line and shift.
-3. det-prop-diagonal-tower-system identifies simultaneous reduction of the
+3. proposition-ell-adic-cycle-class-diagonal identifies simultaneous reduction of the
 integral source and G_m[1] with the supported finite constants and roots shifted
 by two. Its completion formula identifies Rlim T(partial) with derived completion
 of partial, with the intrinsic ell-completeness criterion.

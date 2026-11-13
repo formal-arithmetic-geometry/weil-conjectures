@@ -23,8 +23,8 @@ set_option linter.privateModule false
 /-!
 # Levels of the smooth-purity tower direct image
 
-Source: blueprint main-20261015, sec-smooth-purity, sk-lem-sp-tower-levels,
-statement and its three proof paragraphs (blueprint: sk-lem-sp-tower-levels).
+Source: blueprint main-20261015, chap-Smooth-purity, prose-09-23,
+statement and its three proof paragraphs (blueprint: prose-09-23).
 
 All indices n denote the positive level n+1. The module category is the recorded
 varying-coefficient tower category, with its original small pro-etale site and

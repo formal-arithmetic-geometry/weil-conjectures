@@ -11,7 +11,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 /-!
 # Normalized DVR towers
 
-Source: Weil conjectures blueprint, `sec-six-functors`,
+Source: Weil conjectures blueprint, `chap-The-six-operations-on-Dbctf`,
 `sk-prop-sf-biduality-general`, node `def-coef-normalized-dvr-tower`, order 2131
 (blueprint: def-coef-normalized-dvr-tower).
 

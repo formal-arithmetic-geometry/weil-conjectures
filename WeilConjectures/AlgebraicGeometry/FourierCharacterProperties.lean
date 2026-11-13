@@ -33,7 +33,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 /-! # Properties of the canonical condensed Artin–Schreier sheaf
 
 Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/_section.md
-(blueprint: sk-lem-as-properties).
+(blueprint: lemma-artin-schreier-character-sheaf).
 
 Frobenius is the descent action on the geometric fibre of the actual projector
 image. The normalized root-evaluation model is explicitly identified with that
@@ -54,8 +54,8 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] CondensedRing.upperStar
 
 /-- The geometric fibre of an actual condensed module at a finite-field point.
-Source: blueprint sk-lem-as-properties, Frobenius paragraph
-(blueprint: sk-lem-as-properties). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, Frobenius paragraph
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 abbrev characterGeometricFibre
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -66,8 +66,8 @@ abbrev characterGeometricFibre
 /-- The return map on a geometric fibre over a fixed base point.
 The automorphism fixes π, so it fixes π ≫ g. Compose the inverse constant-point
 comparison with pullback composition and that equality. No return map is chosen.
-Source: blueprint sk-lem-as-properties, geometric Frobenius action
-(blueprint: sk-lem-as-properties). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, geometric Frobenius action
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def characterPointReturn
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -86,8 +86,8 @@ def characterPointReturn
 /-- Geometric Frobenius on the fibre of a sheaf descended to a finite field.
 Specialize the canonical point-return map to the fixed geometric Frobenius
 and its equality over Spec K.
-Source: blueprint sk-lem-as-properties, Frobenius convention and proof paragraph 3
-(blueprint: sk-lem-as-properties). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, Frobenius convention and proof paragraph 3
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 @[irreducible]
 def characterGeometricFrobenius
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -100,16 +100,16 @@ def characterGeometricFrobenius
 
 /-- A specified endomorphism acts by the specified scalar on its actual module.
 This merely packages the equality of underlying morphisms, without choosing a
-trace or replacing the module. Source: blueprint sk-lem-as-properties,
-Frobenius scalar clause (blueprint: sk-lem-as-properties). -/
+trace or replacing the module. Source: blueprint lemma-artin-schreier-character-sheaf,
+Frobenius scalar clause (blueprint: lemma-artin-schreier-character-sheaf). -/
 def characterHasScalarAction
     {C : Type v} [Category.{w} C] [MonoidalCategory C]
     {R : C} [MonObj R] {M : Mod C R} (e : End M) (c : MonObj.Γ R) : Prop :=
   e.asHom.hom = Mod.globalSmul c.hom M
 
 /-- The scalar ψ(Tr f(x)) uses the residue-field algebra structure supplied by X → Spec k₀.
-Source: blueprint sk-lem-as-properties, closed-point clause
-(blueprint: sk-lem-as-properties). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, closed-point clause
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 def characterResidueTrace
     (k₀ : Type u) [Field k₀] (X : Scheme.{u}) [X.Over (Spec (.of k₀))]
     (f : Γ(X, ⊤)) (x : X) : k₀ :=
@@ -118,8 +118,8 @@ def characterResidueTrace
 
 /-- The ordinary finite-coefficient character sheaf, with the unique lifted inverse
 of the field cardinality transported to the coefficient universe.
-Source: blueprint sk-lem-as-properties, finite-coefficient complement
-(blueprint: sk-lem-as-properties). -/
+Source: blueprint lemma-artin-schreier-character-sheaf, finite-coefficient complement
+(blueprint: lemma-artin-schreier-character-sheaf). -/
 def finiteEtaleCharacter
     (k₀ : Type u) [Field k₀] [Fintype k₀]
     (A : Type) [CommRing A] [Invertible (Fintype.card k₀ : A)]

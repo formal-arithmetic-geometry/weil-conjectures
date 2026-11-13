@@ -26,7 +26,7 @@ with `j` a quasi-compact open immersion and `ι` a quasi-compact open immersion.
 `F` on `U` and a closed point `y` of `X'`, the stalk of `j_* F` at `ι y` is the stalk of
 `j'_* (ι'^* F)` at `y`, compatibly with the local Frobenius
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage_of_isPullback`). This is Step 0
-of the proof of `lem-wf-boundary-semicontinuity`: the formation of `j_*` commutes with
+of the proof of `proposition-weights-j-boundary-points--1`: the formation of `j_*` commutes with
 restriction to an open.
 
 The proof goes through the Weil sheaf `j_* ι'_* ι'^* F = ι_* j'_* ι'^* F`. The image under
@@ -233,10 +233,10 @@ private lemma nonempty_iso_lowerStar_lowerStar (h : j' ≫ ι = ι' ≫ j) (G : 
       ((ProEtaleWeilSheaf.lowerStarCompIso k₀ l j' ι).app G.obj).symm ≪≫ eqToIso e₂)⟩
 
 /-- **The direct image commutes with restriction to an open** (Step 0 of the proof of
-`lem-wf-boundary-semicontinuity`). For a cartesian square `j' ≫ ι = ι' ≫ j` of quasi-compact
-open immersions of `k₀`-schemes, a Weil sheaf `F` on `U` and a closed point `y` of `X'` over the
-closed point `x = ι y` of `C`, the stalk of `j_* F` at `x` is the stalk of `j'_* (ι'^* F)` at
-`y`, compatibly with the local Frobenius.
+`proposition-weights-j-boundary-points--1`). For a cartesian square `j' ≫ ι = ι' ≫ j` of
+quasi-compact open immersions of `k₀`-schemes, a Weil sheaf `F` on `U` and a closed point `y` of
+`X'` over the closed point `x = ι y` of `C`, the stalk of `j_* F` at `x` is the stalk of
+`j'_* (ι'^* F)` at `y`, compatibly with the local Frobenius.
 
 Both are stalks of `ι^* j_* F`, resp. of `ι_* j'_* ι'^* F = j_* ι'_* ι'^* F`, and `ι^* j_*`
 of the unit `F ⟶ ι'_* ι'^* F` is an isomorphism

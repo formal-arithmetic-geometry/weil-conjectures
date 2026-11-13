@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Representing a sheaf from effective pro-etale descent
 
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2)
+Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2)
 (blueprint: lem-sfb-proetale-effective-sheaf-descent).
 -/
 
@@ -158,7 +158,7 @@ theorem effectivePointEquiv_transport {X V T : Scheme.{u}}
         (effectivePointEquiv p t Z q hq (Over.mk b) s).w.symm
 
 /-- Effective pro-etale descent represents the sheaf by the descended etale object.
-Source: blueprint `det-lem-stratified-lattice-scheme`, proof (2).
+Source: blueprint `lemma-lattices-lisse-e-sheaves`, proof (2).
 
 Proof. The pro-etale topology is subcanonical, so the lifted Yoneda presheaf `H` of `Z`
 is a sheaf. On the slice over `V` the pullback square gives `effectivePointEquiv`;

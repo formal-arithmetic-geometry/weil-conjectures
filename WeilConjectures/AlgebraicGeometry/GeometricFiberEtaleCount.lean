@@ -23,7 +23,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
 * `AlgebraicGeometry.etale_comp_ι_of_isPullback`, `AlgebraicGeometry.etale_pullback_snd_of_range`:
   étaleness over an open subset is stable under base change.
 
-These are used for the punctured diagonal of blueprint `det-tf-restriction-zero-covers` (ii).
+These are used for the punctured diagonal of blueprint `lemma-tangent-cones-on-cover` (ii).
 -/
 
 @[expose] public section

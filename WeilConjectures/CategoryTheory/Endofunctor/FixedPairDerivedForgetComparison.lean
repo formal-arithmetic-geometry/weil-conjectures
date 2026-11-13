@@ -54,7 +54,7 @@ Direct sums are filtered colimits of finite sums, so the free functor is exact. 
 right adjoint preserves injectives and K-injectives (lem-exc-rg-right-adjoint-preserves-
 injectives, lem-weil-pbc-right-adjoint-preserves-kinjective). Finally, forgetting
 commutes with cohomology and detects its isomorphisms, hence detects derived
-isomorphisms (lem-sf-exact-functor-derived-triangulated,
+isomorphisms (situation-conventions,
 lem-weil-pbc-unbounded-derived-iso-cohomology). -/
 theorem fixedPair_forget_properties
     {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]

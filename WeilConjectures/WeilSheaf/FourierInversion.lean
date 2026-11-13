@@ -13,7 +13,7 @@ public import WeilConjectures.WeilSheaf.FourierTraceAux
 # Fourier inversion for Weil complexes
 
 For a nontrivial additive character `ψ` the Fourier–Deligne transform of Weil complexes on the
-affine line is an equivalence (blueprint `sk-thm-inversion`, `lem-fd-inversion`):
+affine line is an equivalence (blueprint `sec-Fourier-inversion`, `proposition-fourier-inversion`):
 `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)` (`AlgebraicGeometry.nonempty_iso_fourierTransform_comp_inv`), and
 the same with `ψ` and `ψ⁻¹` exchanged.
 
@@ -93,8 +93,8 @@ instance : IsClosedImmersion (affineLine.diagonal k₀) :=
   inferInstanceAs (IsClosedImmersion
     (pullback.diagonal (affineLine k₀ ↘ Spec (CommRingCat.of k₀))))
 
-/-- **`FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`** (blueprint `lem-fd-inversion`, first formula), with the
-shifts `[-2][1][1]` left uncancelled. -/
+/-- **`FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)`** (blueprint `proposition-fourier-inversion`, first formula), with
+the shifts `[-2][1][1]` left uncancelled. -/
 theorem nonempty_iso_fourierTransform_comp_inv (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1) :
     Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ⁻¹ ≅
       WeilComplex.tateTwist k₀ l (affineLine k₀) (-1) ⋙ shiftFunctor _ (-2 : ℤ) ⋙
@@ -145,7 +145,7 @@ theorem nonempty_iso_fourierTransform_comp_inv (ψ : AddChar k₀ (PadicAlgCl l)
     Functor.isoWhiskerRight eA (tw ⋙ Dl ⋙ C ⋙ Sh) ≪≫
     Functor.isoWhiskerLeft (𝟭 _ ⋙ tw) (Functor.isoWhiskerRight eC Sh)⟩
 
--- TODO(unify): sk-thm-inversion
+-- TODO(unify): sec-Fourier-inversion
 /-- **Fourier inversion**: for a nontrivial additive character the Fourier–Deligne transform is
 an equivalence between the triangulated categories of Weil complexes on the two dual lines, with
 quasi-inverse `FT_{ψ⁻¹}` up to the Tate twist `(1)`. -/

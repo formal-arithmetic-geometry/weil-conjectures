@@ -22,7 +22,7 @@ public import WeilConjectures.FieldTheory.SeparablyGeneratedDifferentialsDimensi
 # Smoothness inputs of the Bertini argument
 
 Infinitesimal facts about a smooth algebra `A` of finite type over an algebraically closed field
-`k` used in the Bertini argument (blueprint `lem-zl-bertini-finite-cover-curve`): derivations
+`k` used in the Bertini argument (blueprint `lemma-curve-preserving-finite-cover--1`): derivations
 detect `m²` at maximal ideals, the transcendence degree is bounded by the rank of `Ω[A⁄k]`, and
 minors of the first-order jet `derivationJet` of a linear system.
 -/

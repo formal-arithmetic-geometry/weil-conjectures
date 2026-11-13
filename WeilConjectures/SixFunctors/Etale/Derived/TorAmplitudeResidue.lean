@@ -19,7 +19,7 @@ Let `Λ` be a finite commutative ring, `J ⊆ Λ` its Jacobson radical (a nilpot
 `D(X_ét, Λ)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ_X` has homology concentrated in
 `[a, b]`, where `κ_X` is the constant sheaf with value `κ`
 (`AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn`,
-blueprint `lem-exc-residue-tor-test`).
+blueprint `theorem-f-shriek-finite-coefficients--1`).
 
 This is the categorical residue test
 `DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn_of_ideal`, whose
@@ -179,7 +179,8 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-exc-residue-tor-test`: Testing finite Tor amplitude at the residue field.
+/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Testing finite Tor amplitude at the residue
+field.
 
 Let `Λ` be a finite ring with Jacobson radical `J`, and let `κ_X` be the constant étale sheaf on
 `X` with value `κ = Λ ⧸ J`. Then `K ∈ D(X_ét, Λ)` has Tor amplitude in `[a, b]` if and only if

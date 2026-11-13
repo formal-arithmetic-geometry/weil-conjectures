@@ -224,10 +224,10 @@ The set universe is any `max (u + 1) v`, without identifying site object and hom
 Proof (six steps):
 1. For any weakly étale `U → X`, its affine opens are again weakly étale over `X`:
    open immersions are étale (lem-weil-pbc-open-immersion-etale), hence weakly étale
-   (det-pe-morphisms-etale-comparison), and weakly étale maps compose
-   (sk-lem-pe-weakly-etale-stability). They cover by lem-weil-pbc-affine-opens-basis.
+   (proposition-etale-implications), and weakly étale maps compose
+   (lemma-stability). They cover by lem-weil-pbc-affine-opens-basis.
    For each affine open `W` of `U`, the member `W` itself witnesses the finite affine
-   refinement in def-weil-pbc-proetale-site. Thus image objects cover every object.
+   refinement in definition-small-pro-etale-site--1. Thus image objects cover every object.
 2. A finite weakly étale family between affine schemes is a pro-étale covering exactly
    when jointly surjective. Necessity uses the affine open equal to the target.
    For sufficiency pull the family back over any affine open of the target: the
@@ -235,13 +235,13 @@ Proof (six steps):
    their images cover that open. These are exactly the standard coverings of 098E.
 3. Pullbacks over an affine target are affine by lem-weil-pbc-fibre-product-affine-spectra.
    Weak étaleness is stable under base change and composition by
-   sk-lem-pe-weakly-etale-stability. The fpqc covering axioms
+   lemma-stability. The fpqc covering axioms
    (lem-weil-pbc-fpqc-covering-axioms) then give the site axioms; composites and
    pullbacks of finite standard coverings remain finite. The inclusion preserves
    these coverings and their pullbacks, so is continuous in the convention of
    def-weil-pbc-sites-and-cohomology.
 4. A pro-étale covering of an affine object has a finite affine refinement by the
-   defining covering condition of def-weil-pbc-proetale-site. Its affine opens
+   defining covering condition of definition-small-pro-etale-site--1. Its affine opens
    remain weakly étale by step 1 and stability. Step 2 makes the refinement standard;
    its arrows factor through members of the original covering. This is cocontinuity
    as in def-weil-pbc-special-cocontinuous-functor.

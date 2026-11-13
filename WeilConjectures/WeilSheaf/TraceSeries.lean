@@ -51,14 +51,15 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
 
 of the finite graded family of Frobenius modules `(Hⁱ(X ⊗ k̄, ℚ̄_ℓ), F)_{0 ≤ i ≤ 2d}`, the
 cohomology of the constant Weil sheaf `ℚ̄_ℓ` with its global geometric Frobenius `F`
-(blueprint: `def-zl-frobenius-trace-series`, geometric situation, `sk-def-frobmod`). -/
+(blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`, geometric situation,
+`lemma-logarithm-determinant`). -/
 noncomputable def adicConstantAlternatingTraceSeries (d : ℕ) : (PadicAlgCl l)⟦X⟧ :=
   FrobeniusModule.alternatingTraceSeries (Finset.Icc 0 (2 * d : ℤ))
     (adicConstant k₀ l X).cohomology
 
 /-- The `n`-th coefficient of the alternating trace series of the cohomology of `X` is
 `(∑_{i = 0}^{2d} (-1) ^ i tr (F ^ n ∣ Hⁱ(X ⊗ k̄, ℚ̄_ℓ))) / n`, and `0` for `n = 0`
-(blueprint: `def-zl-frobenius-trace-series`). -/
+(blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 theorem coeff_adicConstantAlternatingTraceSeries (d n : ℕ) :
     coeff n (adicConstantAlternatingTraceSeries k₀ l X d) =
       if n = 0 then 0
@@ -69,7 +70,7 @@ theorem coeff_adicConstantAlternatingTraceSeries (d n : ℕ) :
 
 /-- The alternating trace series of the cohomology of `X` is the alternating sum
 `∑_{i = 0}^{2d} (-1) ^ i tr_{F ∣ Hⁱ}(T)` of the trace series of the individual cohomology
-groups (blueprint: `def-zl-frobenius-trace-series`). -/
+groups (blueprint: `theorem-weil-conjectures-smooth-proper-schemes--7`). -/
 theorem adicConstantAlternatingTraceSeries_eq_sum (d : ℕ) :
     adicConstantAlternatingTraceSeries k₀ l X d =
       ∑ i ∈ Finset.Icc 0 (2 * d : ℤ), (i.negOnePow : ℤ) •

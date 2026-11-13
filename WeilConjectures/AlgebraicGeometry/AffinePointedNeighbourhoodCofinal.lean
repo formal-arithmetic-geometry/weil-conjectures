@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Cofinality of affine pointed étale neighbourhoods
 
-Source: Weil conjectures blueprint, chapter `sec-curve-estimates`, unit
+Source: Weil conjectures blueprint, chapter `chap-Cohomology-of-torsion-sheaves-on-curves`, unit
 `lem-sc-second-kummer-divisors` (blueprint: lemma-weil-pbc-affine-neighbourhood-cofinal); Stacks
 Project, Tags 04HX and 0BUC.
 -/
@@ -38,7 +38,7 @@ Proof:
    (`lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`), so each comma category
    of affine neighbourhoods mapping to a fixed neighbourhood is nonempty.
 2. Given two comma objects, cofilteredness of the ambient pointed neighbourhood category
-   (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`) gives a common refinement.
+   (`definition-torsion-sheaves--3`) gives a common refinement.
    Equalize its two composites to the fixed neighbourhood, then shrink the resulting
    refinement to an affine open as in step 1. Fullness gives arrows from this affine
    comma object to both original comma objects, hence a connecting zigzag. Thus every

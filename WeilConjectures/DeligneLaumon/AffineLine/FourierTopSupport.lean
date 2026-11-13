@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.SupportSubobject
 Let `K` be a Weil complex on the affine line concentrated in degrees `≤ m`. Then `FT_ψ(K)` is
 concentrated in degrees `≤ m + 1`, and its top cohomology sheaf `H = 𝓗^{m+1} FT_ψ(K)` has finite
 support (`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`, the key step 1(a) of
-blueprint `thm-a1-fourier-t-exact`).
+blueprint `proposition-fourier-transform-perverse-heart--1`).
 
 The blueprint computes the stalk of `H` at a geometric point `ξ` as
 `H²_c(U, F ⊗ ℒ_{ψ(ξ x)})`, the coinvariants of `F ⊗ ℒ_{ψ(ξ x)}`, and counts the linear
@@ -406,10 +406,10 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     simpa [V] using hmem
 
 /-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support** (step 1(a)
-of blueprint `thm-a1-fourier-t-exact`). Let `K ≤ m`, so that `FT_ψ(K) ≤ m + 1`, and let
-`N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each closed point `x` in the support of
-`𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a linear character `ℒ_{ψ(a x)}|_Ū`, with
-`-a` the coordinate of a geometric point over `x`
+of blueprint `proposition-fourier-transform-perverse-heart--1`). Let `K ≤ m`, so that
+`FT_ψ(K) ≤ m + 1`, and let `N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each closed point `x` in the
+support of `𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a linear character
+`ℒ_{ψ(a x)}|_Ū`, with `-a` the coordinate of a geometric point over `x`
 (`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). Distinct points give distinct
 irreducible characters, so there are at most `rank N|_U` of them
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`). -/

@@ -12,8 +12,8 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
 /-!
 # Rank-one Weil characters on normal curves over a finite field
 
-The blueprint states `prop-wf-open-curve-h1-no-frobenius-fixed` and
-`thm-wf-rank-one-finite-geometric-image-curve` for a curve `U₀ / 𝔽_q` which is normal,
+The blueprint states `proposition-no-fixed-class-degree-one--1` and
+`theorem-rank-one-sheaves-have-finite--1` for a curve `U₀ / 𝔽_q` which is normal,
 geometrically connected, separated, of finite type and pure of dimension one. Such a curve is
 smooth of relative dimension one over the perfect field `𝔽_q`
 (`AlgebraicGeometry.IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk`), so
@@ -49,7 +49,7 @@ namespace Scheme.EtaleTorsor
 
 open FiniteEtale
 
-/-- Blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`: No Frobenius-fixed compatible class
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: No Frobenius-fixed compatible class
 on an open normal curve.
 
 Let `U₀` be a normal geometrically connected curve of pure dimension one over a finite field
@@ -86,7 +86,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 
 include hC hdim
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`, the cohomological step, for a
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`, the cohomological step, for a
 normal geometrically connected curve `C₀ / 𝔽_q` of pure dimension one: a continuous
 homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift is trivial.
 The curve is smooth
@@ -100,7 +100,7 @@ theorem eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.eq_one_of_conj_invariant b hb
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
 rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of
@@ -113,7 +113,7 @@ theorem exists_pow_eq_one_of_continuous_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.exists_pow_eq_one_of_continuous χ hχ
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: Finite geometric image of a
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
 rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of

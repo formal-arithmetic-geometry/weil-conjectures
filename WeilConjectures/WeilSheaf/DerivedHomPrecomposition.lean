@@ -364,7 +364,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
 into a K-injective Weil complex.
 
 Source: Stacks Project, Tag 0A95, equivariant analogue, and Tag 08BJ
-(used for `lem-sf-hom-finite-projective`).
+(used for `proposition-six-operations-dctf--15`).
 
 Proof: forgetting Frobenius is right adjoint to exact integer-orbit induction, so
 preserves K-injective complexes. It is exact and conservative and preserves products.

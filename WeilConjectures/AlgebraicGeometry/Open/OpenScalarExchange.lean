@@ -20,9 +20,9 @@ Source: Stacks Project, Tag 03S6, label `lemma-shriek-base-change`, together wit
 Tags 07A4 and 09AE (blueprint: lem-fix-open-scalar-exchange).
 
 All objects are in the constant-ring module coordinates `proEtaleConstantRing T A`
-(`A` lifted to the site's coefficient universe) of def-weil-pbc-proetale-operations.
+(`A` lifted to the site's coefficient universe) of prose-03-02.
 The open base-change map is the recorded `StrictTower.singleBeta` of
-lem-cbc-proetale-extension-zero-base-change, at the lifted coefficient ring; its
+proposition-extension-zero-restriction-closed-subscheme--11, at the lifted coefficient ring; its
 constant coefficients, module pullback and open extension are definitionally the ones below.
 -/
 
@@ -57,7 +57,7 @@ noncomputable abbrev scalarRestriction {A B : Type u} [CommRing A] [CommRing B]
     (Scheme.proEtaleConstantRingMap (T := T) φ)).mapDerivedCategory
 
 /-- The exact derived constant-coefficient inverse image `f_A^{-1}`.
-Source: Stacks Section 0735 (blueprint: def-weil-pbc-proetale-operations). -/
+Source: Stacks Section 0735 (blueprint: prose-03-02). -/
 noncomputable abbrev constantPullback {A : Type u} [CommRing A]
     {U X : Scheme.{u}} (f : U ⟶ X) :
     DerivedCategory (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)) ⥤
@@ -67,7 +67,8 @@ noncomputable abbrev constantPullback {A : Type u} [CommRing A]
     (Scheme.proEtaleConstantRingComparison f A)
 
 /-- The exact derived extension by zero `j_!^A`, left adjoint to `j_A^{-1}`.
-Source: Stacks Tags 03DI and 09AE (blueprint: lem-cbc-proetale-extension-zero). -/
+Source: Stacks Tags 03DI and 09AE (blueprint:
+proposition-extension-zero-restriction-closed-subscheme). -/
 noncomputable abbrev openExtension {A : Type u} [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategory (Scheme.proEtaleRingModules U (Scheme.proEtaleConstantRing U A)) ⥤

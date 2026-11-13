@@ -23,7 +23,7 @@ frame `(f, g)` of `Y` (`AlgebraicGeometry.Scheme.Hom.EtaleFrame.inter`), whose c
 Applied to `Z₁ ×_k X₂` and `X₁ ×_k Z₂` in `X₁ ×_k X₂`, whose fundamental classes are the
 pullbacks of `[Z₁ ⊂ X₁]` and `[Z₂ ⊂ X₂]` along the smooth projections
 (`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_smooth`), this gives the
-compatibility with exterior products of clause (d) of blueprint `sk-thm-regular`,
+compatibility with exterior products of clause (d) of blueprint `lemma-class-of-point--1`,
 `[Z₁ × Z₂ ⊂ X₁ × X₂] = [Z₁ ⊂ X₁] ⊠ [Z₂ ⊂ X₂]`.
 
 ## Main statements
@@ -234,7 +234,7 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertib
         Scheme.range_zeroLocusSubschemeι_union]) _ _ _ hp₁ hp₂, e₁, e₂]
   exact kummerBoundaryProduct_append Λ f₁ f₂
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 Blueprint `prop-pur-regular-immersion-purity-compatibilities` (item 3, cup products).
 

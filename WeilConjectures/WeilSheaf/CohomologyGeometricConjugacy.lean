@@ -15,7 +15,7 @@ the `r`-th power of that of `X̄` makes the induced equivalence
 `Hⁱ(Y ⊗ k̄', ℚ̄_ℓ) ≃ Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` intertwine the Frobenius of the source with the `r`-th power
 of the Frobenius of the target
 (`AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso_map_frobenius`). This is
-the transport-of-structure part of the base-change clause of `thm-weil-poincare-duality`.
+the transport-of-structure part of the base-change clause of `theorem-poincare-duality-frobenius`.
 -/
 
 @[expose] public section
@@ -111,8 +111,8 @@ lemma cohomologyCarrierIso_inv_derivedGlobalSectionsUnitIso_pow (i : ℤ) (n : �
 /-- An isomorphism of geometric fibers conjugating one geometric Frobenius to a power of the other
 makes the cohomology equivalence
 `AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso` intertwine those
-operators. This is an ingredient of the base-change clause of `thm-weil-poincare-duality`, with
-the transport convention of `def-weil-global-geometric-frobenius`.
+operators. This is an ingredient of the base-change clause of `theorem-poincare-duality-frobenius`,
+with the transport convention of `definition-frobenius-operator--1`.
 
 Proof: under the identification of the carriers with `Hⁱ RΓ(-, ℚ̄_ℓ)`, the Frobenius is the
 transport along the inverse of the geometric Frobenius

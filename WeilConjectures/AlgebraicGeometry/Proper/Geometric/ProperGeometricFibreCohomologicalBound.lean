@@ -65,9 +65,9 @@ Proof:
    hence are inverse by the pullback universal property. Apply step 2; no
    quasi-compactness condition on S is needed.
 4. For a separably closed Ω and Spec Ω → Y, the fibre Z is finite type over Ω
-   and has dimension at most e. By `lem-weil-pbc-torsion-sheaf-characterizations`,
+   and has dimension at most e. By `definition-torsion-sheaves--3`,
    the colimit torsion hypothesis implies locally annihilated sections.
-   `lem-sf-separably-closed-torsion-cd` gives torsion cohomological dimension zero
+   `lemma-cohomological-dimension-base-field--1` gives torsion cohomological dimension zero
    for Ω. Apply `new-thm-sc-affine-torsion-cd-bound` with d = e and c = 0, then
    `new-thm-sc-finite-type-torsion-cd-affine-reduction` to obtain vanishing above
    2e. These bounds cover empty schemes and arbitrary torsion without a common

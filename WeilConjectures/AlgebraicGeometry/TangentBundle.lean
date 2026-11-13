@@ -64,7 +64,7 @@ instance isQuasicoherent_relativeDifferentials : f.relativeDifferentials.IsQuasi
   exact (presentationTilde _ Set.univ (by simp) _ (Submodule.span_eq _)).ofIsIso
     (f.relativeDifferentialsRestrictFromSpecIso (hU x) (hV x) (hVU x)).inv
 
-/-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
+/-- Blueprint `prose-09-15`: Relative tangent bundle
 
 The relative tangent bundle `T_{X/Y} = Spec_X Sym_{𝒪_X}(Ω¹_{X/Y})` of a morphism `f : X ⟶ Y`.
 The blueprint considers it for smooth `f`, where `Ω¹_{X/Y}` is locally free
@@ -73,13 +73,13 @@ construction makes sense for every morphism. -/
 noncomputable def tangentBundle : Scheme.{u} :=
   f.relativeDifferentials.symSpec
 
-/-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
+/-- Blueprint `prose-09-15`: Relative tangent bundle
 
 The projection `T_{X/Y} ⟶ X`. -/
 noncomputable def tangentBundleProj : f.tangentBundle ⟶ X :=
   f.relativeDifferentials.symSpecProj
 
-/-- Blueprint `pur9-dg-def-tangent`: Relative tangent bundle
+/-- Blueprint `prose-09-15`: Relative tangent bundle
 
 The zero section `X ⟶ T_{X/Y}`, corresponding to the augmentation
 `Sym_{𝒪_X}(Ω¹_{X/Y}) ⟶ 𝒪_X`. -/

@@ -31,7 +31,7 @@ long exact sequence give the additivity `χ(M₂) = χ(M₁) + χ(M₃)` of the 
   additive in short exact sequences of modules with finite-dimensional cohomology vanishing in
   large degrees.
 
-(blueprint: `lem-pc-euler-additive`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`)
 -/
 
 @[expose] public section
@@ -157,7 +157,7 @@ Write `a_q`, `b_q` and `c_q` for the ranks of `H^q(M₁) ⟶ H^q(M₂)`, `H^q(M�
 `h^q(M₂) = a_q + b_q` and `h^q(M₃) = b_q + c_q`, and the alternating sum of
 `h^q(M₂) - h^q(M₁) - h^q(M₃) = -(c_{q-1} + c_q)` telescopes to `± c_N = 0`.
 
-(blueprint: `lem-pc-euler-additive`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
 theorem eulerChar_eq_add_of_shortExact (hS : S.ShortExact) (N : ℕ)
     [∀ q, FiniteDimensional k (S.X₁.H q)] [∀ q, FiniteDimensional k (S.X₂.H q)]
     [∀ q, FiniteDimensional k (S.X₃.H q)]

@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.ProEtale
 the recorded
 finite constant local models on every affine open. This is a predicate on the ordinary
 standard derived localization, without any completeness condition.
-Source: blueprint sk-def-sfb-constructible and sk-thm-pe-constructible-comparison;
+Source: blueprint definition-constructible-sheaves and theorem-comparison-constructible-sheaves;
 Stacks Tags 09AJ and 09AL (blueprint: sk-def-sfb-bounded-constructible). -/
 def coefficientBoundedConstructibleProEtale (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]

@@ -190,7 +190,7 @@ theorem mono_of_injective_stalkMap (hM : M.IsEquivalenceAt B.t) {F G : WeilSheaf
   exact congrArg (fun f ↦ f.hom) h
 
 /-- **The Weil fundamental representation of an irreducible lisse Weil sheaf is irreducible**
-(cf. Deligne, Weil II, 1.3.14 and `def-wf-fundamental-representation`). A `W`-stable subspace
+(cf. Deligne, Weil II, 1.3.14 and `situation-weil`). A `W`-stable subspace
 `U` of the stalk `ℱ_t` is the Weil fundamental representation of a lisse Weil sheaf `𝒢`, and the
 inclusion `U ⊆ ℱ_t` is the stalk of a monomorphism `𝒢 ⟶ ℱ`; by irreducibility `𝒢` is zero or
 `𝒢 ⟶ ℱ` is an isomorphism, i.e. `U = 0` or `U = ℱ_t`. -/

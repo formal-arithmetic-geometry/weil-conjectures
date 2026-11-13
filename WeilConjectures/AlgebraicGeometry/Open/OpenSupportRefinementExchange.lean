@@ -11,7 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # Proper/open exchange along one cartesian refinement
 
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
 -/
 
 @[expose] public section
@@ -354,9 +354,9 @@ private lemma supportPullback_factor
 
 /-- Proper/open exchange intertwines the comparison for one cartesian refinement
 with its literal pullback. No common-refinement choice or graph comparison occurs.
-Source: blueprint `prop-asd-smooth-base-change`, coherence (i), restriction of the
-compactification diagram; the unit formula in `LowerShriekIndependenceUnbounded.lean`.
-(blueprint: lem-asd-open-support-refinement-exchange)
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i),
+restriction of the compactification diagram; the unit formula in
+`LowerShriekIndependenceUnbounded.lean`. (blueprint: lem-asd-open-support-refinement-exchange)
 
 Proof: form two triangles of compactifications with common output c.precomp a:
 (p,j), using c.ofIsPullback sq and the trivial compactification of j; and (a,f),

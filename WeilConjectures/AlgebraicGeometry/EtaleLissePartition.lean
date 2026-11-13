@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 pullback of `F` on every part. The support need not be all of `X`, so this records the
 induction claim for closed subsets without changing the ambient sheaf.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, steps 2--3.
+Source: blueprint `lemma-detection-proper-direct-image--1`, steps 2--3.
 (blueprint: lem-weil-pbc-constructible-etale-lisse-partition). -/
 structure EtaleLissePartition {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (Type (u + 1))) (T : Set X) where

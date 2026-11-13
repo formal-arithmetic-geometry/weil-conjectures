@@ -75,7 +75,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})
 
 /-- The ell-power projection of the existing completion, through the uniquely normalized
-cofinal-limit comparison. Source: coefficient setup in sk-lem-sp-tower, paragraph 1
+cofinal-limit comparison. Source: coefficient setup in proposition-sp-integral-towers, paragraph 1
 (blueprint: lem-sp-ell-coefficient-fiber). -/
 def spCompletedEllProjection (n : ℕ) :
     completedIntegralCoefficientSheafUnrestricted l E T ⟶ spCoefficientRing l E T n :=

@@ -33,7 +33,7 @@ Consequently:
   and a sheaf of `Λ`-modules killed by `p` is a sheaf of `Λ_p`-modules.
 
 This is the change of coefficients in the proof of the reduction of proper base change to the
-projective line (blueprint `sk-thm-reduction`).
+projective line (blueprint `proposition-proper-base-change-etale-site--1`).
 -/
 
 @[expose] public section
@@ -132,7 +132,7 @@ theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'
 property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients: restriction of scalars
 along `Λ ⟶ Λ ⧸ NΛ` is conservative, sends complexes of `Λ ⧸ NΛ`-modules to complexes with
 torsion cohomology, and carries the derived base change map over `Λ ⧸ NΛ` to the one over `Λ`.
-(blueprint: `sk-thm-reduction`, change of coefficients) -/
+(blueprint: `proposition-proper-base-change-etale-site--1`, change of coefficients) -/
 theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
     (hf : Etale.HasTorsionBaseChange Λ f) (N : ℕ) :
     Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(N : Λ)}) f := by
@@ -144,8 +144,8 @@ theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- **Base change property from prime coefficient rings.** Let `f` be quasi-compact and
 quasi-separated. If `f` satisfies the base change property with `Λ ⧸ pΛ`-coefficients for every
 prime `p`, then also with `Λ`-coefficients.
-(blueprint: `sk-thm-reduction`, change of coefficients;
-`lemma-weil-pbc-property-iff-acyclicity`, from prime to arbitrary torsion) -/
+(blueprint: `proposition-proper-base-change-etale-site--1`, change of coefficients;
+`theorem-pbc-injective-acyclicity--1`, from prime to arbitrary torsion) -/
 theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]
     (h : ∀ p : ℕ, p.Prime → Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(p : Λ)}) f) :
@@ -187,7 +187,7 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
 satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
 is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`, `IA_r(f)` for every prime `r` implies
+(blueprint: `theorem-pbc-injective-acyclicity--1`, `IA_r(f)` for every prime `r` implies
 `PBC(f)`) -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)

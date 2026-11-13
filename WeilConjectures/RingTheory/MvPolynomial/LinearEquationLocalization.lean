@@ -22,7 +22,7 @@ and fixes `xᵢ` because the relation gives
 Polynomial uniqueness, quotient surjectivity and localization uniqueness now
 show both composites are identities. The inverse therefore sends every free
 class to its variable, as claimed.
-(blueprint: `lem-weil-pbc-linear-equation-localization-polynomial-core`) -/
+(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
 theorem exists_algEquiv_away_linearEquation (A : Type u) [CommRing A]
     (r : ℕ) (f : Fin r → A) (i : Fin r) :
     let I : Ideal (MvPolynomial (Fin r) A) :=

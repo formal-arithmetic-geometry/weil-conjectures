@@ -42,9 +42,9 @@ For the determinant `ρ ↦ det ρ` this is the determinant morphism of arithmet
 ## Blueprint
 
 `RepresentedDegreeDatum.extensionMap` and its properties implement
-`lem-mg-degree-component-functoriality`; `RepresentedDegreeDatum.det` implements
-`def-mg-determinant-line`, and `RepresentedDegreeDatum.detExtensionMap` with its properties
-implements `lem-mg-determinant-monodromy-morphism`.
+`proposition-central-element-arithmetic-monodromy-group--2`; `RepresentedDegreeDatum.det` implements
+`definition-determinant-weight--1`, and `RepresentedDegreeDatum.detExtensionMap` with its properties
+implements `proposition-central-element-arithmetic-monodromy-group--2`.
 -/
 
 @[expose] public section
@@ -60,7 +60,7 @@ variable {W : Type*} [Group W] {n : Type*} [Fintype n] [DecidableEq n] {k : Type
 
 /-- The represented degree datum `ρ_Q = R ∘ ρ` obtained from a homomorphism `R : S →* GL m k`
 defined on a subgroup `S` containing the image of `ρ`.
-(blueprint: `lem-mg-degree-component-functoriality`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 def mapOn : RepresentedDegreeDatum W m k :=
   { D.toDegreeDatum with rep := R.comp (D.rep.codRestrict S hS) }
 
@@ -101,7 +101,7 @@ theorem coe_geometricMap_apply (hR : IsRegularOn S R) (h : zeroLocus D.geometric
 
 /-- **Functoriality of the arithmetic monodromy extension.** The homomorphism
 `Φ_Q : G_arith(ρ) → G_arith(R ∘ ρ)`, `(h, m) ↦ (R(h), m)`.
-(blueprint: `lem-mg-degree-component-functoriality`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 noncomputable def extensionMap (hR : IsRegularOn S R) :
     D.ArithmeticMonodromyExtension →* (D.mapOn S hS R).ArithmeticMonodromyExtension :=
   SemidirectProduct.map (D.geometricMap hS hH hR) (MonoidHom.id _) fun t ↦ by
@@ -122,7 +122,8 @@ theorem extensionMap_right (hR : IsRegularOn S R) (x : D.ArithmeticMonodromyExte
     (D.extensionMap hS hH hR x).right = x.right :=
   rfl
 
-/-- `Φ_Q` preserves the degree. (blueprint: `lem-mg-degree-component-functoriality`) -/
+/-- `Φ_Q` preserves the degree. (blueprint:
+`proposition-central-element-arithmetic-monodromy-group--2`) -/
 theorem rightHom_extensionMap (hR : IsRegularOn S R) (x : D.ArithmeticMonodromyExtension) :
     SemidirectProduct.rightHom (D.extensionMap hS hH hR x) = SemidirectProduct.rightHom x :=
   rfl
@@ -134,7 +135,7 @@ theorem extensionMap_mem_degreeComponent (hR : IsRegularOn S R) {t : ℤ}
   hx
 
 /-- On matrices, `Φ_Q` is `R`: `j_Q ∘ Φ_Q = R ∘ j`. In particular `Φ_Q` is regular on every degree
-component. (blueprint: `lem-mg-degree-component-functoriality`) -/
+component. (blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 theorem arithmeticMonodromyExtensionHom_extensionMap (hR : IsRegularOn S R)
     (x : D.ArithmeticMonodromyExtension) :
     (D.mapOn S hS R).arithmeticMonodromyExtensionHom (D.extensionMap hS hH hR x) =
@@ -158,7 +159,7 @@ theorem vanishingIdeal_image_geometricMap (hR : IsRegularOn S R) :
 
 /-- **Density.** For every degree `t`, the matrix image of `Φ_Q(G^[t])` is Zariski dense in the
 matrix image of the degree component `G_Q^[t]`: both have the same vanishing ideal.
-(blueprint: `lem-mg-degree-component-functoriality`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 theorem vanishingIdeal_image_degreeComponent (hR : IsRegularOn S R) (t : ℤ) :
     vanishingIdeal ((D.mapOn S hS R).arithmeticMonodromyExtensionHom ''
         (D.extensionMap hS hH hR '' D.degreeComponent t)) =
@@ -221,7 +222,7 @@ theorem commute_of_arithmeticMonodromyExtensionHom (x y : D.ArithmeticMonodromyE
   exact SemidirectProduct.ext (Subtype.ext h) hr
 
 /-- **Centrality.** `Φ_Q` maps central elements of `G_arith(ρ)` to central elements of
-`G_arith(ρ_Q)`. (blueprint: `lem-mg-degree-component-functoriality`) -/
+`G_arith(ρ_Q)`. (blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 theorem extensionMap_mem_center (hR : IsRegularOn S R) {x : D.ArithmeticMonodromyExtension}
     (hx : x ∈ Subgroup.center D.ArithmeticMonodromyExtension) :
     D.extensionMap hS hH hR x ∈ Subgroup.center (D.mapOn S hS R).ArithmeticMonodromyExtension := by
@@ -242,7 +243,7 @@ theorem extensionMap_mem_center (hR : IsRegularOn S R) {x : D.ArithmeticMonodrom
 section Determinant
 
 /-- The **determinant line** `det ρ`, the rank-one represented degree datum `g ↦ det (ρ g)`.
-(blueprint: `def-mg-determinant-line`) -/
+(blueprint: `definition-determinant-weight--1`) -/
 noncomputable def det : RepresentedDegreeDatum W (Fin 1) k :=
   D.mapOn ⊤ (fun _ ↦ trivial) ((detGL n k).comp (⊤ : Subgroup (GL n k)).subtype)
 
@@ -259,7 +260,7 @@ theorem isRegularOn_detGL :
 determinant on matrices (`arithmeticMonodromyExtensionHom_detExtensionMap`), has dense image on
 every degree component (`vanishingIdeal_image_degreeComponent`) and maps central elements to
 central elements (`extensionMap_mem_center`).
-(blueprint: `lem-mg-determinant-monodromy-morphism`) -/
+(blueprint: `proposition-central-element-arithmetic-monodromy-group--2`) -/
 noncomputable def detExtensionMap :
     D.ArithmeticMonodromyExtension →* D.det.ArithmeticMonodromyExtension :=
   D.extensionMap (S := ⊤) (fun _ ↦ trivial) (fun _ _ ↦ trivial) isRegularOn_detGL

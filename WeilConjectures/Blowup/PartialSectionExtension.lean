@@ -216,7 +216,7 @@ theorem exists_admissibleBlowup_extend_partialSection
       (B₁.preimage_blowupMap_mono hUV) (B₁.isCompact_coe_preimage_blowupMap hU)
       (B₁.isCompact_coe_preimage_blowupMap hV) f' hf'p hf'c)
 
-/-- Blueprint `cor-nagata-conrad-proper-target-extension`, section form.
+/-- Blueprint `corollary-extension-proper-target--1`, section form.
 
 **Conrad's Remark 2.5**: the case `V = U` of
 `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (blueprint:

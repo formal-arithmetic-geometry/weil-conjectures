@@ -142,8 +142,8 @@ modules of differentials. $C$ is of finite type over the Noetherian ring $k[x]$
 [lem-weil-pbc-finite-type-noetherian-finite-presentation]. By
 [lem-weil-pbc-smooth-free-differentials-strictly-standard-power] there is $c\ge1$ such that
 $x_1^c,\dots,x_d^c$ are strictly standard in $C$ over $k[x]$
-[def-weil-pbc-strictly-standard-element] (take $c$ at least each of the $d$ bounds $e_0$). Put
-$e=8c$ and $n=N+de$. (Stacks sets $n=N+dc$; the justification of item (item-sixth-resolve) needs
+[theorem-finite-etale-covers-proper-henselian--2] (take $c$ at least each of the $d$ bounds $e_0$).
+Put $e=8c$ and $n=N+de$. (Stacks sets $n=N+dc$; the justification of item (item-sixth-resolve) needs
 $\mathfrak p^nk[y]_{\mathfrak p}\subset(\pi_1^e,\dots,\pi_d^e)$ for a regular system of parameters
 $\pi_1,\dots,\pi_d$, i.e. $n\ge d(e-1)+1$, which $N+dc$ does not give when $e=8c$; $n=N+de$
 satisfies $n\ge N$ and $n\ge d(e-1)+1$, and nothing else in the proof bounds $n$, so this corrects
@@ -155,7 +155,7 @@ lem-weil-pbc-smooth-ring-map-principal-localization, lem-weil-pbc-smooth-ring-ma
 lem-weil-pbc-improve-presentation, lem-weil-pbc-finite-type-algebra-noetherian,
 lem-weil-pbc-finite-type-noetherian-finite-presentation,
 lem-weil-pbc-smooth-free-differentials-strictly-standard-power,
-def-weil-pbc-strictly-standard-element.
+theorem-finite-etale-covers-proper-henselian--2.
 
 3. (Item item-NP: the solution modulo $\mathfrak q^n$.) By [lem-weil-pbc-popescu-solution-modulo]
 (applicable: $k$ of characteristic $p$, $\Lambda$ Noetherian and geometrically regular, $n$ and
@@ -320,11 +320,11 @@ $R/(\gamma_1^e,\dots,\gamma_{i-1}^e)$ (Step 5) and to $x=\pi'_i$ on
 $\Lambda/({\pi'_1}^e,\dots,{\pi'_{i-1}}^e)$ (Step 6(b)) this is (1). Hypothesis (2): $x_i^c$ is
 strictly standard in $C$ over $k[x]$ (Step 2), so its image $x_i^c\otimes1=1\otimes\gamma_i^c$ is
 strictly standard in $C'$ over $R$ [lem-weil-pbc-strictly-standard-base-change]
-[def-weil-pbc-strictly-standard-element]. Hence it suffices to resolve $R/I\to
+[theorem-finite-etale-covers-proper-henselian--2]. Hence it suffices to resolve $R/I\to
 C\otimes_{k[x]}R/I\to\Lambda/I\Lambda\supset\mathfrak q/I\Lambda$ (note
 $C'/IC'=C\otimes_{k[x]}R/I$ and $I\Lambda=({\pi'_1}^e,\dots,{\pi'_d}^e)$). Uses:
 lem-weil-pbc-popescu-lift-solution, lem-weil-pbc-strictly-standard-base-change,
-def-weil-pbc-strictly-standard-element.
+theorem-finite-etale-covers-proper-henselian--2.
 
 9. (Items item-set-r, item-third-resolve: localization; the target becomes local Artinian.) Let
 $\mathfrak r\subset R$ be the inverse image of $\mathfrak q$. In $\Lambda_{\mathfrak q}$ the

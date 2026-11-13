@@ -19,7 +19,7 @@ import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 # The absolute Galois group of a finite field
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/
-sk-lem-base-field-cd-galois-group.md (blueprint: det-base-field-cd-galois-group).
+sk-lem-base-field-cd-galois-group.md (blueprint: lemma-cohomological-dimension-base-field--2).
 
 ## Main statements
 
@@ -159,7 +159,7 @@ private theorem frobenius_dense
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
 sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.md, paragraphs 1--2
-(blueprint: det-base-field-cd-galois-group).
+(blueprint: lemma-cohomological-dimension-base-field--2).
 
 Proof:
 1. Use `exists_unique_subfield_of_closure` in the algebraic closure supplied by

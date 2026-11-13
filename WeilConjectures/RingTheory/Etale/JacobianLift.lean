@@ -62,7 +62,7 @@ noncomputable def liftRelations : Option ι → MvPolynomial (Option ι) A
 `B̄ = (A ⧸ I)[x₁, …, xₘ] ⧸ (f̄₁, …, f̄ₘ)`, with coefficientwise lifts `fᵢ ∈ A[x₁, …, xₘ]` and
 `Δ = det (∂fᵢ / ∂xⱼ)`, this is `A[x₁, …, xₘ, t] ⧸ (f₁, …, fₘ, tΔ - 1)`. Its map to `B̄` is
 `Algebra.SquareJacobianPresentation.reduction`, sending `t` to `Δ̄⁻¹`.
-(blueprint: `def-exc-etale-algebra-lift`) -/
+(blueprint: `proposition-extension-zero-restriction-closed-subscheme`) -/
 abbrev Lift : Type (max t u) :=
   MvPolynomial (Option ι) A ⧸ Ideal.span (Set.range (P.liftRelations I))
 
@@ -287,7 +287,7 @@ square Jacobian presentation of `B̄` over `A ⧸ I` is étale over `A`, and its
 (`Algebra.SquareJacobianPresentation.reductionEquiv`). No nilpotence assumption on `I` is
 needed. Every étale `A ⧸ I`-algebra has a square Jacobian presentation, hence such a lift
 (`Algebra.Etale.exists_etale_quotientEquiv`).
-(blueprint: `lem-exc-etale-algebra-lift`) -/
+(blueprint: `proposition-extension-zero-restriction-closed-subscheme`) -/
 @[stacks 04D1]
 theorem etale_lift_and_ker_reduction_and_surjective :
     Etale A (P.Lift I) ∧ RingHom.ker (P.reduction I) = I.map (algebraMap A (P.Lift I)) ∧

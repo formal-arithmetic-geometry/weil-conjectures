@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-! # Additive functions on the small etale site
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim:
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim:
 the additive section groups used in the affine linearization.
 (blueprint: def-sc-etale-additive-structure-restriction)
 -/

@@ -118,7 +118,7 @@ The adjunction used in the resolution is the specified localization
 Source: ordinary-derived expansion, steps 3--4
 (blueprint: lem-sf-free-derived-weil-resolution).
 
-Proof: step 3 uses `lem-sf-exact-functor-derived-triangulated` and
+Proof: step 3 uses `situation-conventions` and
 `def-weil-exact-derived-adjunction`. Apply the heart unit and counit termwise and
 localize; their triangle identities persist, giving the indicated exact adjunction.
 The first paragraph of `lem-sf-fixed-pair-derived-forget-comparison` gives derived

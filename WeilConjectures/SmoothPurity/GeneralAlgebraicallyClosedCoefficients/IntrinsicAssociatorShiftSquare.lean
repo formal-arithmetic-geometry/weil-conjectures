@@ -454,7 +454,7 @@ and the ordinary-to-completed integral shifts, including the endpoint transports
 component the ordinary associator at `P^(r+n)`: both send `c ⊗ (b ⊗ x)` to
 `c j(b) ⊗ x`. The termwise comparisons are identities and both differentials have
 sign `(-1)^n`. The shift-compatible exact-functor factorization and uniqueness of
-localization descent (lem-weil-pbc-exact-functor-derived-factorization and
+localization descent (situation-conventions and
 lem-weil-pbc-localization-universal-property) give the ordinary derived square.
 (3) The normalization formula makes the ordinary-to-completed comparison and its
 inverse shift-compatible. Composition and whiskering preserve this property by

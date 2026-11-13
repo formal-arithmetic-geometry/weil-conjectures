@@ -49,7 +49,7 @@ Proof:
    faithfulness. Equal-ideal closed immersions identify the corresponding subschemes
    (lem-weil-pbc-closed-immersions-equal-ideal-isomorphic).
 4. Chow's lemma gives a proper surjective projective modification, an isomorphism over
-   a dense open (thm-chow-lemma). The immersion into projective space is
+   a dense open (theorem-chow-s-lemma-projective-form). The immersion into projective space is
    closed by properness (lem-weil-pbc-proper-over-separated,
    lem-weil-pbc-immersion-closed-image-closed-immersion).
 5. Pull back the formal system and algebraize it on that projective scheme

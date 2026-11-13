@@ -224,7 +224,7 @@ private theorem continuous_coefficient_function
 /-- Continuous finite-dimensional representations over the p-adic algebraic closure
 are exactly the representations with a continuous finite coefficient model.
 
-Source: blueprint `thm-lisse-qlbar-representations`, clause (5).
+Source: blueprint `proposition-lattices-representations-normal-scheme`, clause (5).
 (blueprint: lisse-qlbar-continuous-finite-model)
 
 Proof: choose a finite basis and apply compact-matrix coefficient descent to the

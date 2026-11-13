@@ -31,7 +31,7 @@ namespace WeilConjectures
 
 /-! The integral direct-image tower used by the generator statement.  This
 construction belongs to the owning item module: the recorded
-`def-weil-derived-direct-image` node keeps its landed common-stage declaration,
+`prose-03-02` node keeps its landed common-stage declaration,
 while this item needs the simultaneous strict-system specialization below. -/
 
 /-- The integral direct image is the total limit of the actual strict quotient

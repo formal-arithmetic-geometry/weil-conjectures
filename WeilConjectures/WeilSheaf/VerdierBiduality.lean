@@ -26,7 +26,7 @@ This file constructs the double-dual natural transformation `𝟭 ⟶ D_W D_W`
 (`AlgebraicGeometry.WeilComplex.toDualDual`) and shows that it is an isomorphism when the
 underlying `ℓ`-adic complex of `W` on the geometric fibre `X̄` is the dualizing complex of `X̄`
 (`AlgebraicGeometry.WeilComplex.nonempty_iso_dual_rightOp_comp_dual`). This is Verdier biduality
-for Weil complexes (blueprint: `det-pd-biduality-coefficients`).
+for Weil complexes (blueprint: `theorem-verdier-biduality`).
 
 ## Construction
 
@@ -50,7 +50,7 @@ complexes when the target represents the dualizing complex of `X̄`
 The underlying complex on `X̄` of `Ra_X^! ℚ̄_ℓ`, for the exceptional inverse image of Weil
 complexes, is the dualizing complex of `X̄`
 (`AlgebraicGeometry.WeilComplex.nonempty_nativeGeometricForget_obj_iso_of_adjunction`, blueprint
-`lem-fix-weil-operations`, in `WeilConjectures.WeilSheaf.UpperShriekGeometric`).
+`prose-10-20`, in `WeilConjectures.WeilSheaf.UpperShriekGeometric`).
 
 The constructible biduality of hom complexes of `ℓ`-adic sheaves
 (`AlgebraicGeometry.ProEtaleWeilSheaf.quasiIso_bifunctorHomBidual_ordinary`) is read off from the
@@ -189,7 +189,7 @@ noncomputable def toDualDual : 𝟭 (WeilComplex k₀ l X) ⟶ (dual W).rightOp 
       (ProEtaleWeilSheaf.precompQuasiIso k₀ l X
         (DerivedCategory.kInjectiveRep W.obj))).naturality f.hom)
 
-/-- **Verdier biduality for Weil complexes** (blueprint: `det-pd-biduality-coefficients`): if the
+/-- **Verdier biduality for Weil complexes** (blueprint: `theorem-verdier-biduality`): if the
 underlying complex on the geometric fibre `X̄` of the Weil complex `W` is the dualizing complex
 of `X̄`, the double-dual morphism `K ⟶ D_W D_W K` is an isomorphism. -/
 theorem isIso_toDualDual_app
@@ -235,7 +235,7 @@ theorem isIso_toDualDual_app
     exact ObjectProperty.prop_of_iso _ ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).mapIso
       e.symm ≪≫ F.mapDerivedCategory.mapIso (U.mapDerivedCategoryFactors.app M)) hK
 
-/-- **Verdier biduality for Weil complexes** (blueprint: `det-pd-biduality-coefficients`), as a
+/-- **Verdier biduality for Weil complexes** (blueprint: `theorem-verdier-biduality`), as a
 natural isomorphism `𝟭 ≅ D_W D_W`. -/
 theorem nonempty_iso_dual_rightOp_comp_dual
     (hW : Nonempty ((ProEtaleWeilSheaf.nativeGeometricForget k₀ l X).obj W.obj ≅

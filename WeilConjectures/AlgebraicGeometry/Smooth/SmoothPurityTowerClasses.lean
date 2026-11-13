@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassF
 
 /-! # Kummer and diagonal classes of coefficient towers
 
-Source: blueprint main-20261015, sec-smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: det-sp-tower-classes).
+Source: blueprint main-20261015, chap-Smooth-purity,
+`sk-prop-sp-tower-geometric-classes` (blueprint: proposition-sp-tower-geometric).
 -/
 
 @[expose] public noncomputable section
@@ -39,17 +39,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 system category and its ordinary unbounded derived category. All named maps above
 are definitions; the fields below assert the specified normalizations and that
 b_q, formed from the unit and the hyperplane Chern class, is an isomorphism.
-Source: blueprint main-20261015, sec-smooth-purity,
-sk-prop-sp-tower-geometric-classes (blueprint: det-sp-tower-classes).
+Source: blueprint main-20261015, chap-Smooth-purity,
+sk-prop-sp-tower-geometric-classes (blueprint: proposition-sp-tower-geometric).
 Proof plan from the DAG:
 
-1. Kummer exactness on the pro-etale site is a local consequence of [lem-amb-kummer-any-base].
-For a pro-etale object $U\to S$ and $u\in\Gamma(U,\mathcal O_U)^\times$, apply that lemma on the
-scheme $U$ with exponent $\ell^n$. It supplies an etale cover of $U$ on which $u$ is an
-$\ell^n$th power. Such a cover is also a cover in the pro-etale site [def-weil-pbc-proetale-
-site], so the power map on the specified pro-etale units sheaf is an epimorphism. Its kernel is
-$\mu_{\ell^n}$ by [def-pur-roots-of-unity-sheaf]. Kernels and cokernels of inverse systems are
-levelwise, as for the system topos in [det-sp-coefficient-towers-abelian]. The maps form a
+1. Kummer exactness on the pro-etale site is a local consequence of
+[lemma-cycle-class-cartier-divisor]. For a pro-etale object $U\to S$ and $u\in\Gamma(U,\mathcal
+O_U)^\times$, apply that lemma on the scheme $U$ with exponent $\ell^n$. It supplies an etale cover
+of $U$ on which $u$ is an $\ell^n$th power. Such a cover is also a cover in the pro-etale site
+[def-weil-pbc-proetale- site], so the power map on the specified pro-etale units sheaf is an
+epimorphism. Its kernel is $\mu_{\ell^n}$ by [definition-tate-twists--1]. Kernels and cokernels of
+inverse systems are levelwise, as for the system topos in [prose-09-21]. The maps form a
 sequence of towers because $(u^\ell)^{\ell^n}=u^{\ell^{n+1}}$, and a root of unity maps to its
 $\ell$th power. This proves (1); no change-of-site identification of the entire units sheaf is
 being assumed.
@@ -66,15 +66,16 @@ split. Thus this explicitly constructs an extension $0\to\mathbf G_m\to E_L\to\m
 the pro-etale site. Its connecting morphism $\lambda_L:\mathbf Z\to\mathbf G_m[1]$ exists and is
 the extension class by [lem-weil-pbc-ext-one-extension-classification]. Changing frames gives an
 isomorphic extension fixing endpoints. On the etale site the identical construction is precisely
-the line-bundle torsor class, by the named construction in [lem-sc-torsor-h1] and the line-
-bundle/torsor correspondence [lem-sc-line-bundle-torsor]; both statements allow arbitrary
-schemes. Hence the pro-etale extension just written fixes the same Kummer sign and convention,
-without assuming a pro-etale Picard comparison theorem. Taking constant towers is exact (all
-kernels and cokernels are levelwise), so the constant extension and its connecting morphism
-define the line-bundle class in the tower category.
+the line-bundle torsor class, by the named construction in
+[lemma-cohomology-multiplicative-group--3] and the line- bundle/torsor correspondence
+[lemma-cohomology-multiplicative-group--3]; both statements allow arbitrary schemes. Hence the
+pro-etale extension just written fixes the same Kummer sign and convention, without assuming a
+pro-etale Picard comparison theorem. Taking constant towers is exact (all kernels and cokernels are
+levelwise), so the constant extension and its connecting morphism define the line-bundle class in
+the tower category.
 
 3. Make coefficient linearity part of the construction. Let $\mathscr X$ be the topos of inverse
-systems of sheaves on $S_{\mathrm{proet}}$ supplied by [det-sp-coefficient-towers-abelian].
+systems of sheaves on $S_{\mathrm{proet}}$ supplied by [prose-09-21].
 Apply [lem-pur-derived-change-of-rings] on a site presenting this topos to the ring map $\mathbf
 Z_\bullet\to R_\bullet$. It gives the exact functor $T_R(K)=R_\bullet\otimes^L_{\mathbf
 Z_\bullet}\operatorname{const}(K)$ with values in $D(\operatorname{Mod}_{R_\bullet}(\mathscr
@@ -100,7 +101,7 @@ G_m]_n$ for this cohomology identification. Define the identification $T_R(\math
 G_m[1])\simeq(\mu_{\ell^n})_n[2]$ by shifting this identification through the exact functor's
 shift isomorphism; this fixes its sign. These are identifications inside the module derived
 category: canonical truncation identifies an object with its unique nonzero cohomology, and
-[lem-pur-torsion-sheaf-constant-module] identifies that cohomology's level-$n$ action with its
+[definition-tate-twists] identifies that cohomology's level-$n$ action with its
 unique $\mathbf Z/\ell^n$ action. Also $T_R(\mathbf Z)=R_\bullet$. Apply $T_R$ to $\lambda_L$ to
 obtain the stated $R_\bullet$-linear Chern morphism.
 
@@ -136,7 +137,7 @@ colimit proviso for right exactness imposes no additional hypothesis here.
 8. Extend $T_R(\lambda_L)$ along $R_\bullet\to A_\bullet$ using [lem-pur-derived-change-of-
 rings], on the same inverse-system topos. This constructs an $A_\bullet$-linear morphism, and
 evaluation computes finite scalar extension by the K-flat model argument of the K-flat scalar-
-extension step; the source becomes $A_\bullet$. Apply [det-def-sp-tate-twist-locally-free](1)
+extension step; the source becomes $A_\bullet$. Apply [definition-tate-twists](1)
 with $X=S$ and the fixed prime $\ell$ and extension $E$, choosing an auxiliary algebraic closure
 containing $E$ as in that node's preamble. Its clause (1) supplies one pro-etale cover
 $\widetilde S\to S$ and generators $\zeta_n$ with $\zeta_{n+1}^\ell=\zeta_n$. The maps
@@ -146,7 +147,7 @@ $\ell^n$. Thus the root tower is locally free of rank one over $R_\bullet$, and 
 it is exact because exactness and tensor are computed levelwise. Its derived extension is
 therefore the degree-zero tower $A_\bullet(1)$, and its dual is the inverse line tower. At each
 level the finite ring $A_n=\mathcal O_E/\ell^n$ is commutative and killed by $\ell^n$; taking
-$A=A_n$ and $r=n$ is precisely the finite-coefficient convention of [sk-def-sp-tate-twist],
+$A=A_n$ and $r=n$ is precisely the finite-coefficient convention of [definition-tate-twists],
 where finite discrete coefficient rings have constant coefficient sheaves. Its displayed
 $B_{E,n}$ is this $A_n$, and its transition $u\otimes a\mapsto u^\ell\otimes\bar a$ is exactly
 the transition of our $A_\bullet(1)$. The isomorphism of clause (2) of [det-def-sp-tate-twist-
@@ -222,14 +223,14 @@ proves clause (3) without inferring equality of supported morphisms from this co
 
 14. By [lemma-nagata-projective-space-base-change-proper] with the two-element index set
 $\{0,1\}$, $q:P\to S$ is proper. Use its compactification $q=q\circ\mathrm{id}_P$ when applying
-[det-sp-tower-shriek-levels]. The coefficient sheaf and its twists and shifts are bounded below,
+[prose-09-23]. The coefficient sheaf and its twists and shifts are bounded below,
 as required by that node's $D^+$ hypothesis. Use the canonical ringed-topos derived adjunction
 of [lem-weil-pbc-ringed-projection-mate-exact] for the levelwise morphism of inverse-system
 topoi induced by q. The hyperplane line on each affine base open is [def-pc-projective-space-
 twist] with $d=1$: its frames satisfy $e_i=(T_i/T_j)e_j$. These transition functions commute
 with restriction on the base, so they glue to the specified $\mathcal O_P(1)$. Form $b_q$ by the
 tower adjunction unit and the adjoint of the Chern morphism of $\mathcal O_P(1)$, untwisted and
-shifted on its source. Clause (1) of [det-sp-tower-shriek-levels] supplies the bounded-below
+shifted on its source. Clause (1) of [prose-09-23] supplies the bounded-below
 direct-image comparison. To check evaluation of the actual adjunction maps, apply [lem-coef-
 semilinear-derived-sections] with the strict coefficient system $B_n=(A_n)_S$ and the pro-etale
 inverse image of $q$. The pulled-back coefficient system is $(A_n)_P$, since inverse image
@@ -258,7 +259,7 @@ restriction of $(b_q)_n$ is the direct sum of these $R_n$ projective-line isomor
 $j$th basis vector its Chern component is $e_j\otimes c_1(\mathcal O(1))$ by the compatible-root
 trivialization step, and its unit component is $e_j$ times the unit. Finite direct sums commute
 with an additive derived direct image. Restriction keeps cohomology sheaves, so it reflects
-isomorphisms. Hence $(b_q)_n$ is invertible over $A_n$. Finally [det-sp-tower-shriek-levels](3)
+isomorphisms. Hence $(b_q)_n$ is invertible over $A_n$. Finally [prose-09-23](3)
 implies $b_q$ is invertible in the tower module derived category. For clause (4) of the scalar-
 change node, the sheaf category is abelian with additive tensor, so its revised clause (2)
 proviso holds.
@@ -278,7 +279,7 @@ specified in the cited node: transpose, cancel the inverse line and transpose ba
 these bijections backwards gives its inverse; their composites are identities by the
 evaluation/coevaluation cancellations for the line and the adjunction triangle identities. Thus
 the projection map is invertible for this $V$ over the arbitrary scheme $S$, without applying
-the restricted general projection theorem of [det-sp-tower-shriek-levels](2)(a). Take
+the restricted general projection theorem of [prose-09-23](2)(a). Take
 $C=A_{\bullet,P}$ and use $LV=A_{\bullet,P}(1)[2]$ from the generator calculation in the
 unit/Chern-map construction. Tensor $b_q$ with $V$ and compose with this projection isomorphism
 to obtain $A_{\bullet,S}(1)[2]\oplus A_{\bullet,S}\simeq Rq_{*,\bullet}(A_{\bullet,P}(1)[2])$.

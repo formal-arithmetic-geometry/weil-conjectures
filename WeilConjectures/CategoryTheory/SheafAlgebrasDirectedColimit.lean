@@ -45,14 +45,14 @@ Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
    and compatibility of the structure map with restriction.
 2. Each section is represented at a stage, and two representatives agree at a later
    stage. These facts give the module colimit sectionwise, hence in presheaves of modules
-   by lem-weil-pbc-presheaf-modules-colimits-sectionwise.
+   by situation-conventions.
 3. Sheafify the ring presheaf, using lem-weil-pbc-ring-sheafification-space-underlying-abelian.
    Compose the structure map and coprojections with the sheafification unit. They are
    algebra maps and satisfy the cocone identities.
 4. A compatible family of algebra maps gives a unique presheaf ring map from the
    sectionwise colimit. Sheafification factors this uniquely through the sheafified ring;
    the resulting map commutes with the structure maps, proving the algebra universal property.
-5. By lem-weil-pbc-left-adjoint-preserves-colimits, module sheafification takes the
+5. By situation-conventions, module sheafification takes the
    presheaf module colimit to a module sheaf colimit. The ring and module sheafifications
    have the same underlying abelian sheafification. Its comparison is an O-linear bijection,
    hence a module isomorphism, respecting the coprojections. Transport the module colimit

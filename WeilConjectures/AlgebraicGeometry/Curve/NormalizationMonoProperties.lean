@@ -19,9 +19,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 /-!
 # Cokernels of monomorphisms in the normalization comparison
 
-Source: the normalization exact-sequence blueprint, unit `sk-thm-p1`.
-This module isolates the constructibility and support calculation, after the comparison
-monomorphism has been constructed from the adjunction unit and finite/open comparison.
+Source: the normalization exact-sequence blueprint, unit
+`proposition-proper-base-change-projective-line`. This module isolates the constructibility and
+support calculation, after the comparison monomorphism has been constructed from the adjunction unit
+and finite/open comparison.
 -/
 
 @[expose] public section

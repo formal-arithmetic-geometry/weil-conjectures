@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 
 For every bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complex `M` on `X`, the pro-étale complex
 `Φ(M)` is of étale origin (`ProEtale.CondensedRing.etaleOriginReading`): this is
-`ProEtale.isEtaleOrigin_of_isConstructible` (blueprint `lem-sf-proetale-constructible-origin`)
+`ProEtale.isEtaleOrigin_of_isConstructible` (blueprint `theorem-comparison-constructible-sheaves`)
 at the finite coefficient ring `𝒪_E ⧸ ℓⁿ`.
 -/
 
@@ -34,7 +34,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 /-- **The étale reading lands in objects of étale origin**: for every bounded constructible
 condensed `𝒪_E ⧸ ℓⁿ`-complex `M` on `X`, the pro-étale complex `Φ(M)` is of étale origin
 (`ProEtale.isEtaleOrigin_of_isConstructible`, blueprint
-`lem-sf-proetale-constructible-origin`). -/
+`theorem-comparison-constructible-sheaves`). -/
 theorem etaleOriginReading (X : Over (Spec (.of k))) : EtaleOriginReading ℓ E n X := fun M ↦
   isEtaleOrigin_of_isConstructible _ M.property
 

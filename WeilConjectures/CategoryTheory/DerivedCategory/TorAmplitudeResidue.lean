@@ -30,7 +30,7 @@ complex `P ⊗ κ` of objects killed by `ϖ`
 (`ShortComplex.Exact.map_tensorRight_of_smul_eq_zero`). A general `F` has the finite
 filtration by the `ϖ^s F`, whose graded pieces are killed by `ϖ`.
 
-This is the categorical core of blueprint `lem-sf-proetale-residue-tor-test`.
+This is the categorical core of blueprint `lemma-bounds-finite-reductions--2`.
 -/
 
 @[expose] public section
@@ -204,7 +204,7 @@ lemma exists_shortExact_of_smul_pow_succ_eq_zero (r : R) {m : ℕ} {F : C}
       ← Linear.smul_comp]
     exact h
 
-/-- Blueprint `lem-sf-proetale-residue-tor-test`: The residue test on the pro-étale site (the
+/-- Blueprint `lemma-bounds-finite-reductions--2`: The residue test on the pro-étale site (the
 categorical statement).
 
 Let `r ∈ R` be nilpotent and `κ ≅ 𝟙 / r` the cokernel of `r` on the unit, and assume that

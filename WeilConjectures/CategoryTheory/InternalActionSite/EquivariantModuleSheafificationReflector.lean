@@ -431,14 +431,14 @@ Proof:
    unit are ordinary abelian sheafification. By lem-pc-sites-sheafification-underlying-sets
    the same holds after forgetting to sets. The universal property in
    def-weil-pbc-sheafification fixes the sheaves K and R. Finite-product preservation
-   (lem-weil-pbc-sheafification-sets-exact) identifies products of their identities and
+   (situation-conventions) identifies products of their identities and
    the unit of P with the corresponding sheafification units. Hence maps from these
    product sheaves are determined after those units.
 2. Extend the composite of the action K times P to P with the unit P to P-sharp
    uniquely across the product unit, by def-weil-pbc-sheafification. This gives the
    natural action map and its uniqueness among maps making the unit equivariant.
 3. Check identity, multiplication, addition and scalar-linearity after the product
-   units, using lem-weil-pbc-sheafification-sets-exact and
+   units, using situation-conventions and
    def-weil-pbc-sheafification. They become the corresponding laws on P; its unit is
    linear by lem-pc-sites-module-sheafification-interface. The action fixes zero
    directly. The action by the inverse group section is inverse to the action by
@@ -448,7 +448,7 @@ Proof:
    by lem-pc-sites-module-sheafification-interface. Compare its two action composites
    after the product unit. They agree by the original equivariance; product-unit
    uniqueness from def-weil-pbc-sheafification and
-   lem-weil-pbc-sheafification-sets-exact makes the extension equivariant. Ordinary
+   situation-conventions makes the extension equivariant. Ordinary
    uniqueness gives equivariant uniqueness.
 5. Extend the composite of each presheaf map with the target unit. The uniqueness
    from lem-pc-sites-module-sheafification-interface gives identity and composition

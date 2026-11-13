@@ -17,7 +17,7 @@ on finitely many closed points of the special fibre
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`), provided that
 `δ` becomes an isomorphism on the special fibre of the generic slice of every coordinate of the
 restrictions of the total space to opens (the generic-slice step of blueprint
-`det-tf-nearby-duality-slice`, taken as a hypothesis). This is the generic-base version of
+`lemma-nearby-duality-slice--1`, taken as a hypothesis). This is the generic-base version of
 `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap`. If the special fibre is
 finite, the cone is supported on all of its points
 (`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase_of_finite`).
@@ -73,11 +73,11 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar 
 
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map over a generic base, from the generic
-slices** (blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every
-open `V` of the total space embedded in an affine space `𝔸(ι_V; S)` over `S` (an immersion `c_V`),
-and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the
+slices** (blueprint `proposition-nearby-cycles-commute-verdier-duality`, "Dimension induction"): if,
+for every open `V` of the total space embedded in an affine space `𝔸(ι_V; S)` over `S` (an immersion
+`c_V`), and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the
 duality map of `M|_V` becomes an isomorphism on the special fibre of the generic slice of `b`
-(`hslice`, the generic-slice step of blueprint `det-tf-nearby-duality-slice`), then the duality
+(`hslice`, the generic-slice step of blueprint `lemma-nearby-duality-slice--1`), then the duality
 map `δ_{M,K}` is an isomorphism away from finitely many closed points of the special fibre. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)
@@ -166,8 +166,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase
       (traitSliceCoord k') hRM (hcoord a) _ hz
 
 /-- **The base case of the finite-support step over a generic base** (blueprint
-`sk-prop-tf-nearby-duality-foundation`, "This also supplies the base case `n = 0`"): if the
-special fibre `X'` has finitely many points, the duality map is an isomorphism away from all of
+`proposition-nearby-cycles-commute-verdier-duality`, "This also supplies the base case `n = 0`"): if
+the special fibre `X'` has finitely many points, the duality map is an isomorphism away from all of
 them, which are closed (`X'` is a finite Jacobson space, hence discrete). -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase_of_finite
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)

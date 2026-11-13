@@ -21,7 +21,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Conjugating an endomorphism of a trivial line to the tensor unit is independent
 of the chosen trivialization.
-Source: blueprint `sk-thm-frobenius`, elimination of the twist, and Step 9 of the
+Source: blueprint `theorem-poincare-duality-frobenius`, elimination of the twist, and Step 9 of the
 point-section transport argument.
 Proof: endomorphisms of the tensor unit commute, by the naturality of the unit
 endomorphism action. The two conjugates differ by conjugation with an automorphism

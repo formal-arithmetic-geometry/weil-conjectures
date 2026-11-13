@@ -365,19 +365,20 @@ Proof:
    Its composition is separated finite type too (def-weil-finite-type-morphism).
 4. The distinct primes imply that l is a unit in k and in every residue field.
    Cartesian coefficients identify all pulled-back rings and Tate lines and make
-   module inverse image exact (sk-prop-sfb-cartesian-coefficients).
+   module inverse image exact (lemma-inverse-image-coefficient-sheaves).
 5. On these qcqs schemes the constant-model Dctf and Dbc coincide
    (det-def-localizing-closure-ctf-equals-bc). Inverse image preserves their closures
-   (det-proper-base-change-unbounded-pullback). Proper direct image preserves them
+   (proposition-proper-base-change-localizing-categories--1). Proper direct image preserves them
    because the standing rational setting supplies its constructibility and sum
-   hypotheses (det-proper-image-localizing-proper).
+   hypotheses (proposition-proper-direct-image-extension-zero--1).
 6. The coefficient unit is free of rank one and the positive Tate line is locally
-   free of rank one (sk-def-sp-tate-twist). Both have finite constant local models
+   free of rank one (definition-tate-twists). Both have finite constant local models
    with scalar module Lambda(*) and are concentrated in degree zero
-   (sk-def-sfb-constructible). For the empty scheme use the empty stratification.
-7. Tensor closure is det-thm-sf-pf-field-tensor. The positive line belongs to the
+   (definition-constructible-sheaves). For the empty scheme use the empty stratification.
+7. Tensor closure is proposition-projection-formula-rational-coefficients--1. The positive line
+belongs to the
    generators; tensor with it preserves the closure, as does shift by two since
-   the closure is triangulated (sk-def-localizing-closure).
+   the closure is triangulated (definition-localizing-subcategory).
 8. Derived tensor is exact in each variable (lem-weil-pbc-ringed-projection-mate-exact).
    The even shift is exact by the cone description (def-weil-abstract-derived-category).
    Restriction to the inherited shifts and triangles is exact

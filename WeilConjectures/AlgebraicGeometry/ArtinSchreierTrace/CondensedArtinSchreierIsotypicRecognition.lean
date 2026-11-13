@@ -12,7 +12,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Conj
 
 /-! # Recognition of condensed character images
 
-Source: blueprint lem-fd-as-characters, proof Step 5, and the finite-torsor
+Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, and the finite-torsor
 isotypic argument in `WeilConjectures.SixFunctors.Finite.Isotypic`.
 -/
 
@@ -69,7 +69,7 @@ attribute [local irreducible] ProEtale.CondensedRing.upperStar
 
 /-- An eigenmap into the direct image of the regular module whose adjoint trivializes
 its domain. Scalars act on the regular coefficient module before direct image.
-Source: finite-cover isotypic descent in blueprint lem-fd-as-characters Step 5
+Source: finite-cover isotypic descent in blueprint lemma-artin-schreier-character-sheaf Step 5
 (blueprint: lem-fd-as-condensed-isotypic-recognition). -/
 def CondensedEigenmap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -132,7 +132,7 @@ private theorem exists_cover_satisfying
 -- Image and covering comparisons involve the concrete condensed module functors.
 /-- A character eigenmap with invertible adjoint identifies its domain locally with the
 image of the averaging projector on a finite etale torsor.
-Source: blueprint lem-fd-as-characters Step 5, finite-cover eigenfunctions;
+Source: blueprint lemma-artin-schreier-character-sheaf Step 5, finite-cover eigenfunctions;
 the argument of `Etale.isIso_upperStar_map_comp_factorThruImage_isotypicIdempotent`
 (blueprint: lem-fd-as-condensed-isotypic-recognition).
 

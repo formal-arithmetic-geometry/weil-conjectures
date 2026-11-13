@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.Derived.Point
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+/-! Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: lem-weil-point-sections-finite-torsion). -/
 @[expose] public section
 set_option autoImplicit false

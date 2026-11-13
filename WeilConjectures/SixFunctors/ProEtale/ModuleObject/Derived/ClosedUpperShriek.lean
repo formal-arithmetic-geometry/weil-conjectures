@@ -17,7 +17,7 @@ objects over `Λ_X` is exact and left adjoint to `i^!₀ = i^* Γ_Z`
 (`ProEtale.CondensedRing.lowerStarClosedUpperShriekAdjunction`), so the levelwise functor `D(i_*)`
 is left adjoint to the total right derived functor `Ri^!₀` on the unbounded derived categories
 (`ProEtale.CondensedRing.derivedLowerStarClosedUpperShriekAdjunction`). This is the module-object
-form of the adjunction `i_* ⊣ Ri^!` of blueprint `sk-lem-formal-closed-support`.
+form of the adjunction `i_* ⊣ Ri^!` of blueprint `lemma-sections-support-closed-subscheme`.
 -/
 
 @[expose] public section

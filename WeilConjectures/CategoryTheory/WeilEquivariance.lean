@@ -17,7 +17,7 @@ Let `G : C ⥤ C` be an endofunctor; in the `ℓ`-adic formalism `C = D(X, Λ)` 
 pullback along the geometric Frobenius `g` of `X`. A *Weil datum* on an object `M` is a morphism
 `φ : G M ⟶ M`, and `u : M ⟶ N` is *equivariant* for data `φ_M`, `φ_N` if
 `G u ≫ φ_N = φ_M ≫ u`. This file proves two formal equivariance statements of blueprint
-`cor-coef-verdier-weil-equivariance`.
+`prose-10-20`.
 
 **Adjunction data.** Let `L ⊣ R` be adjunctions `C ⇄ D` and `E ⇄ F` (`L₁ ⊣ R₁`, `L₂ ⊣ R₂`), and
 let `e : L₁ ⋙ H ≅ G ⋙ L₂` be an isomorphism (in the geometric case the compact-support base

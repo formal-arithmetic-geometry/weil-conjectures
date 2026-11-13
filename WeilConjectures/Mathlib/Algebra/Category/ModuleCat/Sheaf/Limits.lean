@@ -30,7 +30,7 @@ variable {C : Type u'} [Category.{v'} C] {J : GrothendieckTopology C} (R : Sheaf
 has all small limits; they are preserved by the forgetful functor to presheaves of `R`-modules
 and by evaluation at every object `X` of the site, so the sections of a limit over `X` are the
 limit of the `R(X)`-modules of sections over `X`.
-(blueprint: `lem-weil-pbc-module-sheaves-limits-sectionwise`) -/
+(blueprint: `situation-conventions`) -/
 theorem hasLimits_and_preservesLimits_evaluation :
     HasLimitsOfSize.{v, v} (SheafOfModules.{v} R) ∧
       PreservesLimitsOfSize.{v, v} (forget.{v} R) ∧

@@ -16,13 +16,14 @@ every projective morphism `f` between schemes of finite type over `k` satisfies 
 higher direct images preserve constructibility.
 
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine`
-  (`thm-fin-projective-line-constructible`): the projective line `ℙ¹_S ⟶ S`, by resolving a
-  constructible sheaf by finite pushforwards of constant sheaves and using the case of curves;
+  (`proposition-proper-direct-image-finite-coefficients`): the projective line `ℙ¹_S ⟶ S`, by
+  resolving a constructible sheaf by finite pushforwards of constant sheaves and using the case of
+  curves;
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_projectiveLine`
-  (`lem-finrepair-projective-from-line`): from the projective line to all projective morphisms,
-  through `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` (finite and surjective) and composition;
+  (`proposition-proper-direct-image-finite-coefficients`): from the projective line to all
+  projective morphisms, through `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` (finite and surjective) and composition;
 - `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isClosedImmersion`
-  (`thm-fin-projective-constructibility-complete`).
+  (`proposition-proper-direct-image-finite-coefficients`).
 
 A morphism `f : X ⟶ S` is projective (`def-pc-projective-morphism`) if it is the composite of a
 closed immersion `X ⟶ ℙ(N; S)`, for a finite type `N` of homogeneous coordinates, with the
@@ -69,12 +70,12 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
-/-- The case of an affine base of `thm-fin-projective-line-constructible`: every constructible
-sheaf `Q` on `ℙ¹_S` embeds into a finite direct sum `G = ⨁ᵢ (hᵢ)_* Mᵢ` of direct images of
-constant sheaves with finite values along finite morphisms `hᵢ : Yᵢ ⟶ ℙ¹_S`. Each `Yᵢ` is
+/-- The case of an affine base of `proposition-proper-direct-image-finite-coefficients`: every
+constructible sheaf `Q` on `ℙ¹_S` embeds into a finite direct sum `G = ⨁ᵢ (hᵢ)_* Mᵢ` of direct
+images of constant sheaves with finite values along finite morphisms `hᵢ : Yᵢ ⟶ ℙ¹_S`. Each `Yᵢ` is
 projective over the affine scheme `S`, with geometric fibres of dimension at most one, so the
 direct images `Rᵠ(hᵢ ≫ π)_* Mᵢ = Rᵠπ_*((hᵢ)_* Mᵢ)` are constructible by the case of curves
-`cor-fin-projective-curve-finite-group`; the resolution principle concludes. -/
+`proposition-proper-direct-image-finite-coefficients`; the resolution principle concludes. -/
 theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
     [HasInvertibleExponent Λ (Spec (.of k))] {S : Scheme.{u}} [IsAffine S]
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
@@ -105,8 +106,8 @@ theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
   exact isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf Λ aS _ j hj
     (fun Ω _ _ s ↦ topologicalKrullDim_pullback_comp_projectiveLine_le_one (h i) Ω s) (M i) q
 
-/-- Blueprint `thm-fin-projective-line-constructible`: Constructible coefficients on the
-projective line.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructible coefficients on
+the projective line.
 
 Let `S` be of finite type over a field `k`, and let `Λ` be a finite ring killed by an integer
 invertible in `k`. For every constructible sheaf `F` of `Λ`-modules on `ℙ¹_S`, every higher
@@ -158,8 +159,8 @@ theorem hasConstructibleDirectImages_projectiveLinePowProj
     exact hasConstructibleDirectImages_of_isFinite (𝟙 S)
   | succ n ih => exact (h _ (projectiveLinePowProj n S ≫ aS)).comp ih
 
-/-- Blueprint `lem-finrepair-projective-from-line`: Projective constructibility from
-projective-line constructibility.
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Projective constructibility
+from projective-line constructibility.
 
 Suppose `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of finite type over `k`. Then `𝒞(f)` holds for
 every projective morphism `f : X ⟶ S` with `S` of finite type over `k`: here `f` is the
@@ -189,7 +190,7 @@ theorem HasConstructibleDirectImages.of_projectiveLine
   subst he
   exact (hasConstructibleDirectImages_of_isFinite e).comp hP
 
-/-- Blueprint `thm-fin-projective-constructibility-complete`: Projective direct-image
+/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Projective direct-image
 constructibility.
 
 Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Every projective

@@ -15,11 +15,13 @@ public import WeilConjectures.TraceFormula.SourceExchange
 
 For a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed
 loci `h`, the Borel–Moore pushforward of the trace class of `u` is the trace class of the pushed
-correspondence: `h_* Tr_c(u) = Tr_b([f, g]_! u)` (blueprint `thm-trf-trace-proper-compatibility`,
-`sk-p-proper`). The proof goes through the exchange of the evaluation kernels along `f`
+correspondence: `h_* Tr_c(u) = Tr_b([f, g]_! u)` (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`, `theorem-proper-pushforward-lefschetz-verdier`).
+The proof goes through the exchange of the evaluation kernels along `f`
 (`ProEtale.CondensedRing.kernelPushforward_comp_evaluationKernel_lowerStar`, blueprint
-`lem-trf-trace-map-exchange`, (1)), of the support isomorphisms (`lem-trf-trace-map-exchange`,
-(2)) and of the trace-class sources (`lem-trf-trace-source-exchange`).
+`theorem-proper-pushforward-lefschetz-verdier--1`, (1)), of the support isomorphisms
+(`theorem-proper-pushforward-lefschetz-verdier--1`, (2)) and of the trace-class sources
+(`theorem-proper-pushforward-lefschetz-verdier--1`).
 
 -/
 
@@ -34,7 +36,8 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory
 
 /-- Bookkeeping for the proper pushforward of the trace class (blueprint
-`thm-trf-trace-proper-compatibility`, Step 4): two chains of points through a square agree. -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, Step 4): two chains of points through a square
+agree. -/
 private lemma comp_eq_comp_of_points {C : Type*} [Category C]
     {P₀ P₁ P₂ P₃ P₄ P₅ Q₁ Q₂ Q₃ Q₄ Q₅ R₁ R₂ S₁ S₂ N : C}
     (a₁ : P₀ ⟶ P₁) (a₂ : P₁ ⟶ P₂) (a₃ : P₂ ⟶ P₃) (a₄ : P₃ ⟶ P₄) (t : P₄ ⟶ P₅)
@@ -90,7 +93,7 @@ variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteTy
   (Fb : P.pushforward.FixedLocus)
 
 /-- The point `T_b = 𝔱 ∘ ũ` of the pushed correspondence is obtained from that of `c` by
-transport along `g` (blueprint `thm-trf-trace-proper-compatibility`, Step 3):
+transport along `g` (blueprint `theorem-proper-pushforward-lefschetz-verdier--1`, Step 3):
 `T_b = Ri_{b*} τ_h ∘ Rg_* T_c ∘ η_g`. -/
 lemma mate_comp_traceMap_pushforward :
     P.pushforward.mate ≫ P.pushforward.traceMap Fb =
@@ -132,12 +135,13 @@ lemma mate_comp_traceMap_pushforward :
   simpa only [Category.assoc] using e5
 
 /-- **Proper pushforward compatibility of the trace class** (blueprint
-`thm-trf-trace-proper-compatibility`, `sk-p-proper`; Varshavsky 1.2.5): for a proper pushforward
-diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper map of fixed loci `h`,
-`h_* Tr_c(u) = Tr_b([f, g]_! u)`. No properness over `s` and no cartesian leg square are needed.
-The special case `f = 𝟙` is blueprint `lem-trf-proper-pushforward-trace-class`. The proof goes
-through the exchange of the trace maps (`lem-trf-trace-map-exchange`) and of the trace-class
-sources (`lem-trf-trace-source-exchange`). -/
+`theorem-proper-pushforward-lefschetz-verdier--1`, `theorem-proper-pushforward-lefschetz-verdier`;
+Varshavsky 1.2.5): for a proper pushforward diagram `(f, g) : (C, c) ⟶ (D, b)` with induced proper
+map of fixed loci `h`, `h_* Tr_c(u) = Tr_b([f, g]_! u)`. No properness over `s` and no cartesian leg
+square are needed. The special case `f = 𝟙` is blueprint
+`theorem-proper-pushforward-lefschetz-verdier--1`. The proof goes through the exchange of the trace
+maps (`theorem-proper-pushforward-lefschetz-verdier--1`) and of the trace-class sources
+(`theorem-proper-pushforward-lefschetz-verdier--1`). -/
 theorem traceClassPushforward_eq :
     P.traceClassPushforward Fc Fb = P.pushforward.traceClass Fb := by
   have hTc : c.mate ≫ c.traceMap Fc =

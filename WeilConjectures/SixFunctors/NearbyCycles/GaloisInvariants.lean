@@ -26,7 +26,8 @@ retraction `r` of `α` whose idempotent `r ≫ α` is fixed by the action of `Au
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant`): `α` is the
 inclusion of a direct summand of `Ψ_{N_Ω}`, cut out by a Galois-invariant projector onto the
 invariant part. This is the formal part of the identification `Ψ_N = (Ψ_{N_Ω})^P` (SGA 4½,
-[Th. finitude], Lemme 3.4; blueprint `sk-prop-tf-nearby-external-kunneth`, identification (2)).
+[Th. finitude], Lemme 3.4; blueprint `proposition-external-kunneth-formula-nearby-cycles`,
+identification (2)).
 -/
 
 @[expose] public section

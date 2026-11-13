@@ -20,7 +20,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 # An algebra as the filtered colimit of finitely presented algebras over it
 
 Source: Stacks Project, Tag 0BUF, Lemma `lemma-ring-colimit-fp-category` and its footnote
-(blueprint: lem-weil-pbc-algebra-colimit-fp-algebras-over-it).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ namespace CommAlgCat
 
 /-- Stacks Project, Tag 0BUF, Lemma `lemma-ring-colimit-fp-category`, with a set `P`
 containing a representative of each finitely presented algebra.
-(blueprint: lem-weil-pbc-algebra-colimit-fp-algebras-over-it).
+(blueprint: theorem-finite-etale-covers-proper-henselian--2).
 
 `P` being a set of algebras of `CommAlgCat.{max u v} R` is `ObjectProperty.Small.{max u v} P`;
 `I` being small is `Small.{max u v}` of its objects (its hom types lie in `Type (max u v)`).

@@ -18,9 +18,9 @@ public import WeilConjectures.Algebra.Homology.DerivedTensor
 /-!
 # Derived tensor product on the small pro-etale site
 
-Source: the Weil conjectures blueprint, `def-weil-derived-tensor`, order 663;
+Source: the Weil conjectures blueprint, `prose-03-02`, order 663;
 Stacks Project, Cohomology on Sites, Tags 06YN, 06YS and 06YU
-(blueprint: def-weil-derived-tensor).
+(blueprint: prose-03-02).
 
 The constant sheaf is formed in commutative rings before forgetting to rings,
 so the recorded K-flat predicate and sheaf tensor product apply directly.
@@ -54,8 +54,8 @@ The constant ring sheaf `B_Y`, as a module over itself, is restricted along the
 constant-sheaf image of `φ` and placed in degree zero. Applying `derivedTensor`
 uses exactly the same chosen K-flat resolution of `K₁`.
 
-Source: blueprint `def-weil-derived-tensor`, order 663, last sentence;
-Stacks Project, Tag 06YU (blueprint: def-weil-derived-tensor). -/
+Source: blueprint `prose-03-02`, order 663, last sentence;
+Stacks Project, Tag 06YU (blueprint: prose-03-02). -/
 noncomputable def derivedTensorRing
     (B : Type w) [CommRing B] (φ : A →+* B)
     (K₁ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)

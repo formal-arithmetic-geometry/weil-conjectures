@@ -16,16 +16,16 @@ public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 # Étale locality and composition of the base-change map
 
 Two formal properties of the base-change map of the smooth base change theorem (blueprint
-subsection `sk-def-bc`), and their consequences for the base-change property `BC(p, Λ, q)` of
+subsection `prose-08-06`), and their consequences for the base-change property `BC(p, Λ, q)` of
 `AlgebraicGeometry.Etale.BaseChangeProperty`, used to reduce the smooth base change theorem to
 smooth morphisms of relative dimension one:
 
-- composition (blueprint `sbc-lem-base-change-composition`, Stacks 0EZS): the base-change map of
+- composition (blueprint `lemma-identity-pasting--2`, Stacks 0EZS): the base-change map of
   a composite square is the composite of the base-change maps of the two squares, so it is an
   isomorphism when they are, both for the derived base-change map and degreewise; in particular
   the derived base-change map of a square whose horizontal sides are isomorphisms is an
   isomorphism, as pasting it with the inverse square gives an identity square;
-- étale locality (blueprint `sbc-lem-etale-locality`, Stacks 0EZR): if `X` is covered by étale
+- étale locality (blueprint `prose-08-06`, Stacks 0EZR): if `X` is covered by étale
   `U_i ⟶ X` such that `U_i ⟶ S` factors as `f_i : U_i ⟶ V_i` followed by an étale
   `V_i ⟶ S`, the base-change map of a square on `X ⟶ S` is an isomorphism as soon as those of
   the induced squares on the `f_i` are, for the base-change map of sheaves, for the derived
@@ -88,8 +88,8 @@ variable {X Z S T Y₂ Y : Scheme.{u}} {g : T ⟶ S} {p₂ : Z ⟶ S} {e₂ : Y�
 `p₁` along the base change `h₂` of `g`, the derived base-change map of the composite square on
 `p₁ ≫ p₂` is the pullback along `p₁` of the base-change map of the first square followed by the
 base-change map of the second one, modulo the composition isomorphisms of the pullbacks.
-This is the derived exchange morphism of blueprint `sbc-def-base-change-map` read through the
-pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`. -/
+This is the derived exchange morphism of blueprint `definition-derived-base-change-map--1` read
+through the pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`. -/
 theorem Etale.baseChange_app_paste_horiz (sq₂ : CommSq e₂ h₂ g p₂) (sq₁ : CommSq e₁ h₁ h₂ p₁)
     (sq : CommSq (e₁ ≫ e₂) h₁ g (p₁ ≫ p₂))
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -107,7 +107,7 @@ theorem Etale.baseChange_app_paste_horiz (sq₂ : CommSq e₂ h₂ g p₂) (sq�
     (Etale.derivedBaseChangeMapPlus_paste_horiz (ModuleCat.{u + 1} Λ) sq₂ sq₁ sq) K
   simpa using this
 
-/-- Blueprint `sbc-lem-base-change-composition`: base change for a composite square. If the
+/-- Blueprint `lemma-identity-pasting--2`: base change for a composite square. If the
 derived base-change map of the square on `p₂` is an isomorphism at `K` and the one of the
 square on `p₁` is an isomorphism at the pullback `e₂^* K`, then the derived base-change map of
 the composite square is an isomorphism at `K`. The composite square is any square whose sides
@@ -125,7 +125,7 @@ theorem Etale.isIso_baseChange_app_of_paste_horiz {e : Y ⟶ T} {p : X ⟶ S}
   rw [Etale.baseChange_app_paste_horiz Λ sq₂ sq₁ sq K]
   infer_instance
 
-/-- Blueprint `sbc-lem-base-change-composition`, degreewise: the statement of
+/-- Blueprint `lemma-identity-pasting--2`, degreewise: the statement of
 `AlgebraicGeometry.Etale.isIso_baseChange_app_of_paste_horiz` for the degree-`q` homology of
 the derived base-change maps. The pullback along `p₁` is exact, so it preserves isomorphisms on
 cohomology sheaves. -/
@@ -189,7 +189,7 @@ theorem Etale.isIso_baseChangeHomologyMap_iff {X S T Y : Scheme.{u}} {p : X ⟶ 
   rw [Etale.baseChangeHomologyMap, Etale.baseChangeHomologyNatTrans_eq]
   exact isIso_whiskerLeft_whiskerRight_app_iff _ _ _ _
 
-/-- Blueprint `sbc-lem-base-change-composition`, for the degree-`q` base-change maps of an abelian
+/-- Blueprint `lemma-identity-pasting--2`, for the degree-`q` base-change maps of an abelian
 sheaf `F`: if `p₂⁻¹ R^q g_* F ⟶ R^q h₂_* e₂⁻¹ F` and
 `p₁⁻¹ R^q h₂_* (e₂⁻¹ F) ⟶ R^q h₁_* e₁⁻¹ e₂⁻¹ F` are isomorphisms, so is the base-change map
 `(p₁ ≫ p₂)⁻¹ R^q g_* F ⟶ R^q h₁_* (e₁ ≫ e₂)⁻¹ F` of the composite square. -/
@@ -386,7 +386,7 @@ private lemma exists_isPullback_upperStar (sq : IsPullback e h g p) (i : ι) :
   exact (sqi i).paste_horiz (hc i)
 
 include ha w hc in
-/-- Blueprint `sbc-lem-etale-locality` (2), degreewise: étale locality of the derived base-change
+/-- Blueprint `prose-08-06` (2), degreewise: étale locality of the derived base-change
 map on cohomology sheaves. Let `a i : U i ⟶ X` be a jointly surjective family of étale morphisms
 such that `U i ⟶ X ⟶ S` factors as `f i : U i ⟶ V i` followed by an étale `b i : V i ⟶ S`, and
 let `sqi i` be the base change of the Cartesian square `sq` along `V i ⟶ S` restricted to
@@ -414,7 +414,7 @@ theorem Etale.isIso_homologyFunctor_map_baseChange_app_of_etale_cover (sq : IsPu
       (sqi i).toCommSq _ hd (w i) K n inferInstance (hK i))
 
 include ha w hc in
-/-- Blueprint `sbc-lem-etale-locality` (2): étale locality of the derived base-change map. In the
+/-- Blueprint `prose-08-06` (2): étale locality of the derived base-change map. In the
 situation of `AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChange_app_of_etale_cover`,
 if the derived base-change maps of the squares `sqi i` at the restrictions of `K` are
 isomorphisms, so is the derived base-change map of `sq` at `K`. -/
@@ -429,7 +429,7 @@ theorem Etale.isIso_baseChange_app_of_etale_cover (sq : IsPullback e h g p)
       sq K n fun _ ↦ inferInstance
 
 include ha w hc in
-/-- Blueprint `sbc-lem-etale-locality` (3): étale locality of the degree-`q` base-change map
+/-- Blueprint `prose-08-06` (3): étale locality of the degree-`q` base-change map
 `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F`. In the situation of
 `AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChange_app_of_etale_cover`, if the
 degree-`q` base-change maps of the squares `sqi i` at the restrictions `F|_{T' i}` are
@@ -465,7 +465,7 @@ private lemma isIso_baseChangeMap_app_of_paste_horiz {X₁ Z₁ Y₁ Y₂ : Sche
   infer_instance
 
 include ha w hc in
-/-- Blueprint `sbc-lem-etale-locality` (1): étale locality of the base-change map
+/-- Blueprint `prose-08-06` (1): étale locality of the base-change map
 `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of sheaves. In the situation of
 `AlgebraicGeometry.Etale.isIso_homologyFunctor_map_baseChange_app_of_etale_cover`, if the
 base-change maps of the squares `sqi i` at the restrictions `F|_{T' i}` are isomorphisms, so is
@@ -495,7 +495,7 @@ end Locality
 variable {X S : Scheme.{u}} {p : X ⟶ S}
 
 /-- Etale locality of the base-change property (degree `q`). This is a consequence of
-blueprint `sbc-lem-etale-locality` (Stacks 0EZR), which is stated for a single Cartesian square
+blueprint `prose-08-06` (Stacks 0EZR), which is stated for a single Cartesian square
 and a single sheaf.
 
 Let `a_i : U_i ⟶ X` be a jointly surjective family of étale morphisms such that each composite
@@ -519,7 +519,7 @@ theorem Etale.BaseChangeProperty.of_etale_cover {q : ℤ} {ι : Type u} {U V : �
     (fun i ↦ (IsPullback.of_hasPullback _ _).flip) sq q F fun i ↦ hf i _ _ _ _ _
 
 /-- Base change for composites (degree `q`). This is a consequence of blueprint
-`sbc-lem-base-change-composition` (Stacks 0EZS), which is stated for a single composite square
+`lemma-identity-pasting--2` (Stacks 0EZS), which is stated for a single composite square
 and a single sheaf.
 
 If `BC(p₁, Λ, q)` and `BC(p₂, Λ, q)` hold, then so does `BC(p₁ ≫ p₂, Λ, q)`: a Cartesian square

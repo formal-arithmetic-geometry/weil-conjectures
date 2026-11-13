@@ -96,7 +96,7 @@ sum of pure tensors. Equalizers are kernels of differences, so the presheaf tens
 preserves finite limits, which are computed objectwise.
 3. By [lem-pc-sites-modules-sheafification-flat], sheafification gives flatness of N.
 Thus the sheaf tensor functor is exact [def-pc-flat-sheaf-modules] in the abelian module
-sheaf category [def-weil-sheaf-of-modules-category].
+sheaf category [situation-conventions].
 4. Apply [lem-sp-exact-functor-preserves-homology] to the three terms in degrees i-1,i,i+1.
 Its kernel and image comparisons, compatible with the cycle and quotient maps, give
 the displayed isomorphisms and naturality in chain maps. No boundedness is required.

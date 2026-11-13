@@ -35,7 +35,7 @@ Source: Stacks Project, Injectives, Lemma 01DI; Modules on Sites, Lemma 03DA
 Proof: Regard the open subsets of `X`, inclusions, and open covers as a small site.
 The structure sheaf is a sheaf of commutative rings on this site, and its module sheaves
 are exactly `SheafOfModules` over its underlying ring sheaf `moduleRings X`
-(`def-weil-locally-ringed-space-morphism`, `def-weil-sheaf-of-modules-category`).
+(`def-weil-locally-ringed-space-morphism`, `situation-conventions`).
 Mathlib supplies the abelian instance. The proved upstream theorem
 `SheafOfModules.isGrothendieckAbelian` supplies the Grothendieck structure.
 By `lem-sp-grothendieck-enough-injectives` it has

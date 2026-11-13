@@ -23,8 +23,8 @@ import Mathlib.RingTheory.Finiteness.Basic
 /-!
 # Graded Nakayama freeness criterion
 
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, graded Nakayama criterion applied to
-`K_2` (blueprint: lem-sc-p1-graded-nakayama-free).
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, graded Nakayama criterion
+applied to `K_2` (blueprint: lem-sc-p1-graded-nakayama-free).
 -/
 
 @[expose] public section
@@ -77,8 +77,8 @@ private theorem homogeneous_submodule_internal {R M : Type u} [Ring R]
 /-- A finitely generated graded module over `k[x₀,x₁]` whose first Tor with the residue
 field vanishes has a finite homogeneous basis.
 
-Source: blueprint `lem-sc-p1-graded-resolution`, proof, graded Nakayama criterion applied to
-`K_2`.
+Source: blueprint `theorem-riemann-roch-coherent-serre-duality`, proof, graded Nakayama criterion
+applied to `K_2`.
 
 Proof: choose homogeneous lifts of a basis modulo the irrelevant ideal and form the minimal
 finite graded free presentation. The minimal-presentation Tor calculation identifies the first

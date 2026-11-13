@@ -19,8 +19,8 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and 
 for the extension of scalars `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` on bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleToPadicAlgCl`, the functor
 `ProEtale.constructibleToPadicAlgCl` typed on the categories `Dᵇc(X)⟦Λ⟧`). This file gives the
-coefficient comparisons of blueprint `sk-prop-scalar-six` for `E ⟶ ℚ̄_ℓ` that do not involve
-`f^!`:
+coefficient comparisons of blueprint `proposition-six-operations-change-coefficients` for `E ⟶ ℚ̄_ℓ`
+that do not involve `f^!`:
 
 * **(Pull)** on bounded constructible complexes:
   `Lf^*_E ⋙ T_X ≅ T_Y ⋙ Lf^*_{ℚ̄_ℓ}`

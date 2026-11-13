@@ -94,8 +94,8 @@ theorem comp_assoc {c' : Compactification f} (r : Refinement c d) (s : Refinemen
 
 end Refinement
 
-/-- Blueprint `def-weil-compactifications-refinements`: Compactifications and refinements, the
-category `Comp(f)`; also part of `sk-prop-nagata-sketch-comp-category`.
+/-- Blueprint `definition-compactification-refinement`: Compactifications and refinements, the
+category `Comp(f)`; also part of `proposition-dense-compactifications-form-cofiltered-category`.
 
 The compactifications of `f : X ⟶ Y` form a category, with the refinements as
 morphisms: a morphism `r : c ⟶ d` is a morphism `r.hom : c.Z ⟶ d.Z` making both triangles

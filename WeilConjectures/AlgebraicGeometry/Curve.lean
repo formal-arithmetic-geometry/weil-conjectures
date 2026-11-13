@@ -86,9 +86,9 @@ class IsCurve (f : C ⟶ Spec (.of K)) : Prop
 
 A *connected curve* over `K` is a curve over `K` that is connected (hence nonempty) and of
 dimension exactly one. The last condition excludes points such as `Spec K`, for which the curve
-estimate `sk-thm-curveestimate` fails in degree two. It also implies nonemptiness on its own,
-since `topologicalKrullDim` is `⊥` exactly on the empty space. This is also part of blueprint
-`def-sc-curves`.
+estimate `proposition-smooth-proper-curves-torsion-prime` fails in degree two. It also implies
+nonemptiness on its own, since `topologicalKrullDim` is `⊥` exactly on the empty space. This is also
+part of blueprint `def-sc-curves`.
 
 The field `IsConnectedCurve.connectedSpace` is not an instance, since `f` cannot be inferred
 from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace (f := f)`. -/
@@ -130,7 +130,7 @@ For a smooth proper curve, Serre duality identifies this with the arithmetic gen
 `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. It is finite
 (`AlgebraicGeometry.Scheme.finiteDimensional_H_relativeDifferentials`).
 
-This is also blueprint `def-sc-genus`. -/
+This is also blueprint `prose-C-05`. -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
@@ -157,7 +157,7 @@ over `K` (Stacks 0AYQ), where `χ` is the Euler characteristic
 On a smooth projective geometrically integral curve this is the degree of any associated Weil
 divisor, and the Riemann-Roch formula `χ(L) = deg L + 1 - g` holds.
 
-(blueprint: `def-sc-pic0`) -/
+(blueprint: `corollary-degree-jacobian--1`) -/
 noncomputable def Scheme.Hom.picDegree (f : C ⟶ Spec (.of K)) (L : C.Pic) : ℤ :=
   letI : C.Over (Spec (.of K)) := ⟨f⟩
   Modules.degree K ((fromSkeleton C.Modules).obj L.val)
@@ -188,7 +188,7 @@ For a smooth proper curve the degree is the group homomorphism
 `AlgebraicGeometry.Scheme.picDegreeHom`, whose kernel is `picZero`
 (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`).
 
-(blueprint: `def-sc-pic0`) -/
+(blueprint: `corollary-degree-jacobian--1`) -/
 def Scheme.Hom.picZero (f : C ⟶ Spec (.of K)) : Set C.Pic :=
   {L | f.picDegree L = 0}
 

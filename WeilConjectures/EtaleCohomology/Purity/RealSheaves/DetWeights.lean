@@ -16,8 +16,8 @@ public import WeilConjectures.RepresentationTheory.CompositionFactors
 Let `W` be the Weil group of a smooth geometrically connected curve `C₀ / 𝔽_q`, `ℓ ≠ p`, and
 `ι : ℚ̄_ℓ →+* ℂ`. The determinant line `det ρ = ⋀^{rank ρ} ρ` of a lisse Weil representation is
 a rank-one lisse sheaf, hence punctually `ι`-pure of a unique weight `a` (rank-one purity,
-`sk-p-real-rankone`), and the *determinant weight* of `ρ` is `dw_ι(ρ) = a / rank ρ`
-(blueprint subsection `sk-d-real-detweights`).
+`theorem-rank-one-sheaves-have-finite`), and the *determinant weight* of `ρ` is
+`dw_ι(ρ) = a / rank ρ` (blueprint subsection `definition-determinant-weight--1`).
 
 This file defines `dw_ι` (`AlgebraicGeometry.WeilGroup.detWeight`) as the weight read off from
 the chosen Frobenius lift, `wt_{ι, q}(det ρ(γ)) / rank ρ`, and proves that it is the unique
@@ -42,7 +42,8 @@ composition series (Jordan–Hölder).
 - `AlgebraicGeometry.WeilGroup.isPunctuallyPure_detLine_iff_eq_mul_detWeight`: that weight is
   `rank ρ * dw_ι(ρ)`.
 - `AlgebraicGeometry.WeilGroup.hasFiniteGeometricDet_and_detWeight_eq`: `dw_ι` agrees with the
-  determinant weight `dw_{λ_ι}` of `sk-d-weights` for the real weight character `λ_ι`.
+  determinant weight `dw_{λ_ι}` of `definition-determinant-weight--1` for the real weight character
+  `λ_ι`.
 - `AlgebraicGeometry.WeilGroup.detWeightMultiset_eq`,
   `AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq`: independence of the composition series.
 - `AlgebraicGeometry.WeilGroup.rankAbove_eq_sum`,
@@ -66,7 +67,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V)
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Blueprint `def-wf-determinantal-weight`: Determinantal weight.
+/-- Blueprint `definition-determinant-weight--1`: Determinantal weight.
 
 The determinant weight `dw_ι(ρ) = a / r` of a Weil representation `ρ` of rank `r`, where
 `a = wt_{ι, q}(det ρ(γ)) = 2 log |ι det ρ(γ)| / log q` for the chosen Frobenius lift `γ` of
@@ -74,7 +75,7 @@ degree one. For a lisse `ρ`, `a` is the unique weight of which the determinant 
 punctually `ι`-pure (`AlgebraicGeometry.WeilGroup.existsUnique_isPunctuallyPure_detLine` and
 `AlgebraicGeometry.WeilGroup.isPunctuallyPure_detLine_iff_eq_mul_detWeight`), which is the
 definition of the blueprint; it involves no choice of a coefficient field, the coefficients
-being `ℚ̄_ℓ` throughout (compare `lem-wf-determinantal-weight-coefficient-field`). For `V = 0`
+being `ℚ̄_ℓ` throughout (compare `corollary-determinant-weights--2`). For `V = 0`
 it is the junk value `0`. -/
 noncomputable def detWeight : ℝ :=
   frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift)) /
@@ -88,8 +89,8 @@ theorem detWeight_of_equiv {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l
     W.detWeight l σ ι = W.detWeight l ρ ι := by
   rw [detWeight, detWeight, e.det_apply, e.finrank_eq]
 
-/-- The determinant weight `dw_ι` is the determinant weight of `sk-d-weights` for the real weight
-character `λ_ι = wt_{ι, q}` and the chosen Frobenius lift. -/
+/-- The determinant weight `dw_ι` is the determinant weight of `definition-determinant-weight--1`
+for the real weight character `λ_ι = wt_{ι, q}` and the chosen Frobenius lift. -/
 theorem detWeight_eq_detWeight_weightCharacter (σ : Representation (PadicAlgCl l) W.carrier V) :
     W.detWeight l σ ι = σ.detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
   (detWeight_weightCharacter ι σ _ _).symm
@@ -135,7 +136,7 @@ theorem nonempty_finitePoints (W : WeilGroup p) : Nonempty C.finitePoints := by
   obtain ⟨x, hx⟩ := p.exists_mem_finitePoints
   exact ⟨⟨x, hx⟩⟩
 
-/-- Blueprint `lem-wf-determinantal-weight-coefficient-field`: The determinant weight does not
+/-- Blueprint `corollary-determinant-weights--2`: The determinant weight does not
 depend on the coefficient field.
 
 Let `ρ` be a representation of the Weil group defined over a field `E`, and `E'` an extension
@@ -172,7 +173,7 @@ theorem IsLisse.continuous_det_apply (hρ : W.IsLisse l ρ) :
   simpa only [Representation.coe_detCharacter_apply, LinearMap.det_toMatrix] using h.matrix_det
 
 /-- The determinant line of a lisse Weil representation is punctually `ι`-pure of weight
-`wt_{ι, q}(det ρ(γ))`, by rank-one purity (`cor-wf-rank-one-punctual-purity-curve`). -/
+`wt_{ι, q}(det ρ(γ))`, by rank-one purity (`corollary-rank-one-weights--1`). -/
 theorem IsLisse.isPunctuallyPure_detLine (hρ : W.IsLisse l ρ) :
     W.IsPunctuallyPure l (W.detLine l ρ) ι
       (frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift))) := by
@@ -181,7 +182,7 @@ theorem IsLisse.isPunctuallyPure_detLine (hρ : W.IsLisse l ρ) :
   rw [← Representation.coe_detCharacter_apply, ← Representation.coe_detCharacter_apply]
   exact W.frobeniusWeight_eq_of_continuous ρ.detCharacter hρ.continuous_det_apply ι x
 
-/-- Blueprint `lem-wf-determinantal-weight-exists`: Purity of the determinant line.
+/-- Blueprint `corollary-determinant-weights--1`: Purity of the determinant line.
 
 The determinant line `det ρ` of a lisse Weil sheaf `ρ` on the curve is punctually `ι`-pure of
 exactly one real weight `a`: it is a rank-one lisse sheaf, with finite geometric image, hence
@@ -211,8 +212,8 @@ theorem IsLisse.hasDetWeight_detWeight (hρ : W.IsLisse l ρ) :
 
 /-- For a nonzero lisse Weil representation of rank `r`, the determinant line is punctually
 `ι`-pure of weight `a` exactly when `a = r * dw_ι(ρ)`; that is, `dw_ι(ρ) = a / r` for the
-unique weight `a` of `lem-wf-determinantal-weight-exists`, which is the definition
-`def-wf-determinantal-weight` of the blueprint. -/
+unique weight `a` of `corollary-determinant-weights--1`, which is the definition
+`definition-determinant-weight--1` of the blueprint. -/
 theorem isPunctuallyPure_detLine_iff_eq_mul_detWeight (hρ : W.IsLisse l ρ) {a : ℝ} :
     W.IsPunctuallyPure l (W.detLine l ρ) ι a ↔
       a = Module.finrank (PadicAlgCl l) V * W.detWeight l ρ ι := by
@@ -229,15 +230,15 @@ theorem HasDetWeight.detWeight_eq [Nontrivial V] (hρ : W.IsLisse l ρ) {γ : �
   exact mul_left_cancel₀ (Nat.cast_ne_zero.mpr Module.finrank_pos.ne')
     (((hρ.hasDetWeight_detWeight ι) x₀).symm.trans (h x₀))
 
-/-- Blueprint `lem-rp-determinant-weights-agree`: Rank-one purity discharges the
+/-- Blueprint `corollary-determinant-weights--1`: Rank-one purity discharges the
 finite-determinant hypotheses.
 
-A lisse Weil sheaf `ρ` has finite geometric determinant in the sense of `sk-d-weights` (the
-determinant character takes finitely many values on `π₁(C)`, by the finite geometric image
-result applied to its determinant line), and its determinant weight `dw_ι(ρ)` is the
-determinant weight `dw_{λ_ι}(ρ)` of `sk-d-weights` for the real weight character
-`λ_ι(a) = 2 log |ι a| / log q` (`AlgebraicGeometry.WeilGroup.weightCharacter`) and the degree
-one element `γ`. -/
+A lisse Weil sheaf `ρ` has finite geometric determinant in the sense of
+`definition-determinant-weight--1` (the determinant character takes finitely many values on `π₁(C)`,
+by the finite geometric image result applied to its determinant line), and its determinant weight
+`dw_ι(ρ)` is the determinant weight `dw_{λ_ι}(ρ)` of `definition-determinant-weight--1` for the real
+weight character `λ_ι(a) = 2 log |ι a| / log q` (`AlgebraicGeometry.WeilGroup.weightCharacter`) and
+the degree one element `γ`. -/
 theorem hasFiniteGeometricDet_and_detWeight_eq (hρ : W.IsLisse l ρ) :
     ρ.HasFiniteGeometricDet W.deg ∧
       W.detWeight l ρ ι = ρ.detWeight (weightCharacter ι (Nat.card K)) W.frobeniusLift :=
@@ -251,14 +252,14 @@ section Multiset
 variable [FiniteDimensional (PadicAlgCl l) V]
 
 variable (W l ρ) in
-/-- Blueprint `def-mg-determinantal-weight-multiset`: Determinantal-weight multiset.
+/-- Blueprint `definition-determinant-weight--2`: Determinantal-weight multiset.
 
 The multiset of the determinant weights `dw_ι(S)` of the composition factors `S` of a
 finite-dimensional Weil representation `ρ`, with one entry for every factor. These factors are
 the simple summands of the semisimplification `ρ^{ss}`, counted with multiplicity; the multiset is
 computed from a chosen composition series, and it does not depend on that choice
 (`AlgebraicGeometry.WeilGroup.detWeightMultiset_eq`). These are the *constituent determinant
-weights* of item 1 of `def-rp-weight-blocks`. -/
+weights* of item 1 of `theorem-purity-real-sheaves-curves`. -/
 noncomputable def detWeightMultiset : Multiset ℝ :=
   Subrepresentation.factorMultiset ρ fun N M ↦ W.detWeight l (M.subquotient N) ι
 
@@ -288,7 +289,8 @@ theorem mem_detWeightMultiset_iff {a : ℝ} :
     exact ⟨i, Finset.mem_univ_val i, detWeight_of_equiv ι e⟩
 
 variable (W l ρ) in
-/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
+blocks.
 
 The *rank-counted list* of determinant weights of `ρ` (item 2): the multiset in which the
 determinant weight `dw_ι(S)` of every composition factor `S` of `ρ` is repeated `rank S` times.
@@ -345,7 +347,8 @@ theorem rankDetWeightMultiset_eq_add (A : Subrepresentation ρ) :
     rw [Fin.val_natAdd, e.symm.finrank_eq, detWeight_of_equiv ι e.symm]
 
 variable (W l ρ) in
-/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
+blocks.
 
 The rank `N_γ` above the weight `γ` (item 3): the number of entries `> γ` of the rank-counted
 list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is `∑_{dw_ι(V_a) > γ} rank V_a`
@@ -354,7 +357,8 @@ noncomputable def rankAbove (γ : ℝ) : ℕ :=
   Multiset.card ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·))
 
 variable (W l ρ) in
-/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
+blocks.
 
 The weight sum `B_γ` above the weight `γ` (item 3): the sum of the entries `> γ` of the
 rank-counted list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is
@@ -363,7 +367,8 @@ noncomputable def weightSumAbove (γ : ℝ) : ℝ :=
   ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·)).sum
 
 variable (W l ρ) in
-/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
+blocks.
 
 The *weight block* `ρ(γ)` of weight `γ` (item 3): the sum of all irreducible subrepresentations
 of determinant weight `γ`. For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible it is

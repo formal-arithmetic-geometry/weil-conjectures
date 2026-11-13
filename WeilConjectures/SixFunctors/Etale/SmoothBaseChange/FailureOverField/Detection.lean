@@ -64,11 +64,11 @@ theorem Etale.exists_isAffineOpen_not_baseChangeProperty {q : ℤ}
   exact ⟨⟨U, hU⟩, y, hy⟩
 
 variable (p) in
-/-- Blueprint `sk-lem-failure-field`: A failure is detected on the generic fibre.
+/-- Blueprint `lemma-reduction-field--1`: A failure is detected on the generic fibre.
 
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
 `BC(p, Λ, q)` fails for some `q ≥ 1`, there is a counterexample over a field, that is, an
-`AlgebraicGeometry.Etale.FieldFailure`. Blueprint `sbc-lem-bc-failure-field` only assumes that
+`AlgebraicGeometry.Etale.FieldFailure`. Blueprint `lemma-reduction-field--1` only assumes that
 `BC(p, Λ, q)` does not hold universally; that form is
 `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`.
 
@@ -125,7 +125,7 @@ theorem Etale.nonempty_fieldFailure (q : ℤ) (hq : 1 ≤ q)
   exact ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).2 _
 
 variable (p) in
-/-- Blueprint `sbc-lem-bc-failure-field`: A failure of base change is detected over a field.
+/-- Blueprint `lemma-reduction-field--1`: A failure of base change is detected over a field.
 
 If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
 `BC(p, Λ, q)` fails after some base change for some `q ≥ 1`, there is a counterexample over

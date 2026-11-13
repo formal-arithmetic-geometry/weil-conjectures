@@ -63,11 +63,11 @@ Proof:
 1. The constant-section characterization of gamma and the universal property of the
 constant sheaf show that gamma for the composite agrees with successive gamma maps,
 after the abelian direct-image composition comparison. This uses
-lem-weil-pbc-constant-sheaf-maps-global-sections.
+situation-conventions.
 2. The direct-image comparison is restriction along the pullback-pasting isomorphism.
 Restrictions are semilinear, so step 1 makes this comparison linear over the target ring.
 3. The two module hom-equivalences restrict the abelian ones, by
-prop-weil-pbc-inverse-image-modules-exact. Their composite takes linear maps to linear maps.
+situation-conventions. Their composite takes linear maps to linear maps.
 4. The abelian inverse-image comparison is adjoint to the direct-image comparison after
 the composite-map unit, by lem-weil-pbc-inverse-image-composition. Steps 2 and 3 make it linear.
 5. Inverses of linear bijections are linear; abelian naturality gives module naturality.

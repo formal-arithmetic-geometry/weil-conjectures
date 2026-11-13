@@ -27,8 +27,8 @@ of the parity of `i` of absolute value `q^{-i/2}`.
   are coprime.
 - `AlgebraicGeometry.Scheme.roots_map_frobeniusCharpolyRev_eq_filter`: the roots of `ι P_{i,ℓ}`
   are the roots of `ι N_ℓ` or `ι D_ℓ` of absolute value `q^{-i/2}`.
-- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `det-prop-separation` and
-  `prop-weight-separation`.
+- `AlgebraicGeometry.Scheme.weight_separation`: blueprint `lemma-reciprocal-roots-zeta` and
+  `lemma-reciprocal-roots-zeta`.
 -/
 
 @[expose] public section
@@ -50,7 +50,7 @@ variable (k₀) (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] (X : Schem
 
 include d
 
-/-- Blueprint `prop-weight-separation`: for `i ≠ j` the determinant factors `P_{i,ℓ}` and
+/-- Blueprint `lemma-reciprocal-roots-zeta`: for `i ≠ j` the determinant factors `P_{i,ℓ}` and
 `P_{j,ℓ}` have no common root and are coprime in `ℚ̄_ℓ[T]`: under an embedding `ι : ℚ̄_ℓ → ℂ` their
 roots have the distinct absolute values `q^{-i/2}` and `q^{-j/2}`. -/
 theorem isCoprime_frobeniusCharpolyRev {i j : ℕ} (hij : i ≠ j) :
@@ -60,7 +60,7 @@ theorem isCoprime_frobeniusCharpolyRev {i j : ℕ} (hij : i ≠ j) :
     (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι i).isCoprime Finite.one_lt_card
       (isPureOfWeight_map_frobeniusCharpolyRev k₀ l X d ι j) hij
 
-/-- Blueprint `prop-weight-separation`: the parity products `N_ℓ` and `D_ℓ` are coprime, a
+/-- Blueprint `lemma-reciprocal-roots-zeta`: the parity products `N_ℓ` and `D_ℓ` are coprime, a
 common root coming from a pair of factors of distinct parities, hence of distinct weights. -/
 theorem isCoprime_oddFrobeniusProduct_evenFrobeniusProduct :
     IsCoprime (oddFrobeniusProduct k₀ l X d) (evenFrobeniusProduct k₀ l X d) := by
@@ -71,7 +71,7 @@ theorem isCoprime_oddFrobeniusProduct_evenFrobeniusProduct :
 omit [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] in
-/-- Blueprint `prop-weight-separation`: the odd parity product has constant coefficient `1`. -/
+/-- Blueprint `lemma-reciprocal-roots-zeta`: the odd parity product has constant coefficient `1`. -/
 theorem coeff_zero_oddFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
@@ -82,7 +82,8 @@ theorem coeff_zero_oddFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of
 omit [IsProper (X ↘ Spec (CommRingCat.of k₀))]
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] in
-/-- Blueprint `prop-weight-separation`: the even parity product has constant coefficient `1`. -/
+/-- Blueprint `lemma-reciprocal-roots-zeta`: the even parity product has constant coefficient
+`1`. -/
 theorem coeff_zero_evenFrobeniusProduct [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
@@ -95,7 +96,7 @@ even. -/
 noncomputable abbrev parityFrobeniusProduct (i : ℕ) : Polynomial (PadicAlgCl l) :=
   if Even i then evenFrobeniusProduct k₀ l X d else oddFrobeniusProduct k₀ l X d
 
-/-- Blueprint `prop-weight-separation`, multiset clause: for `i ≤ 2d` and an embedding
+/-- Blueprint `lemma-reciprocal-roots-zeta`, multiset clause: for `i ≤ 2d` and an embedding
 `ι : ℚ̄_ℓ → ℂ`, the ordinary root multiset of `ι P_{i,ℓ}` is the submultiset of the roots of the
 parity product of the parity of `i` whose reciprocals `α` satisfy `|α| = q^{i/2}`, i.e. of
 absolute value `q^{-i/2}`. -/
@@ -116,8 +117,8 @@ theorem roots_map_frobeniusCharpolyRev_eq_filter (ι : PadicAlgCl l →+* ℂ) {
     exact (Polynomial.roots_prod_filter_norm_eq Finite.one_lt_card (fun j _ ↦ hP j)
       (Finset.mem_filter.2 ⟨hmem, Nat.not_even_iff_odd.1 h⟩)).symm
 
-/-- Blueprint `det-prop-separation` and `prop-weight-separation` (weight separation and the
-parity factorization): for `X₀` smooth, proper and geometrically connected of pure dimension
+/-- Blueprint `lemma-reciprocal-roots-zeta` and `lemma-reciprocal-roots-zeta` (weight separation and
+the parity factorization): for `X₀` smooth, proper and geometrically connected of pure dimension
 `d`,
 
 * `P_{i,ℓ}` and `P_{j,ℓ}` are coprime for `i ≠ j`;

@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardCompos
 
 /-! # The two Chern components of the projective-line diagonal
 
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart Cartier calculation;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart Cartier calculation;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
@@ -36,7 +36,8 @@ attribute [local irreducible] AlgebraicGeometry.ProjectiveSpace
   projectiveLineTraceTransport
 
 /-- The short relative-Cartier proof used by diagonalImmersion_cartier.
-Source: det-prop-diagonal-tower-system, Cartier clause; lem-pc-cartier-criterion. -/
+Source: proposition-ell-adic-cycle-class-diagonal, Cartier clause;
+theorem-hilbert-schemes-points-smooth-curve--1. -/
 private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
     (pullback.diagonal (ProjectiveLine S ↘ S)).ker.IsInvertible := by
   let d := pullback.diagonal (ProjectiveLine S ↘ S)
@@ -54,7 +55,7 @@ private theorem finiteP1_diagonal_cartier (S : Scheme.{u}) :
     (J := d.ker) inferInstance inferInstance inferInstance
 
 /-- The Cartier diagonal has a supported Kummer boundary and its two Chern components.
-Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;
+Source: blueprint lemma-class-diagonal-projective-line, standard-chart proof;
 lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 (auxiliary; not a blueprint node)
 

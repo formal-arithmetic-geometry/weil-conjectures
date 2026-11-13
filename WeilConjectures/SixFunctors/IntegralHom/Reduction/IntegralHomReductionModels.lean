@@ -88,8 +88,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-! # Presentations for integral internal Hom and reduction
 
-Source: blueprint, sec-six-functors, sk-prop-sf-biduality-general,
-lem-coef-integral-hom-reduction, order 2134; Stacks Project, Tags 08J9, 07A6,
+Source: blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
+proposition-six-operations-change-coefficients--7, order 2134; Stacks Project, Tags 08J9, 07A6,
 07A4 and 08TC (blueprint: def-sf-integral-hom-reduction-models).
 
 The presentation records below specify ordinary, uncompleted derived tensor on

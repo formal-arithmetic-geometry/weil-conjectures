@@ -60,7 +60,7 @@ noncomputable abbrev ordinaryToCondensed :
     Mod.comap (ProEtale.nativeModuleCoefficientIso l Z.left).hom).mapDerivedCategory
 
 /-- **Verdier biduality for `ℓ`-adic complexes, at the level of hom complexes** (blueprint:
-`det-pd-biduality-coefficients`, case (iv), for the model of `ℓ`-adic sheaves as sheaves of
+`theorem-verdier-biduality`, case (iv), for the model of `ℓ`-adic sheaves as sheaves of
 `ℚ̄_ℓ,Z`-modules). Let `Z` be a separated scheme of finite type over a field `k` of characteristic
 `≠ ℓ`, `I` a K-injective complex of `ℓ`-adic sheaves representing the dualizing complex
 `ω_Z = Ra_Z^! ℚ̄_ℓ` (`ProEtale.CondensedRing.dualizingComplex`), and `M` a complex of `ℓ`-adic

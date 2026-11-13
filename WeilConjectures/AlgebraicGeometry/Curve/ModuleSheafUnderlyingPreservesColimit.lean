@@ -27,7 +27,7 @@ The sheaf-level forgetful functor from constant-ring module sheaves to abelian
 sheaves preserves colimits of any fixed diagram.  This is the bridge needed to
 transport a module-sheaf colimit cocone to the underlying abelian sheaves.
 Source: Stacks Project, Tags 03CO and 03CY.
-(blueprint: lem-pbc-u2-module-sheaf-underlying-preserves-colimit)
+(blueprint: theorem-cohomology-curves--7)
 
 Proof: The module forgetful functor preserves colimits and the limits used in
 matching families, so Mathlib's plus-construction comparison shows that it

@@ -38,16 +38,16 @@ The open and closed subscheme `j : B ⟶ X` cuts out the endomorphism
 e_B : L ⟶ Rj_* Lj^* L ≅ Rj_* Rj^! L ≅ Rj_! Rj^! L ⟶ L
 ```
 of the identity functor of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the unit of `Lj^* ⊣ Rj_*` followed by the counit of
-`Rj_! ⊣ Rj^!` (`ProEtale.CondensedRing.clopenIdempotent`, blueprint `sk-d-local-term`). The
-pushforward of the restriction of `α` to `B` is `α ∘ e_B`, so that
-`LT_B(α) = ∫_X α ∘ e_B` (`ProEtale.CondensedRing.BorelMooreSection.localTerm_eq_integral`).
-For a decomposition of `X` into finitely many open and closed pieces `B_β`, the idempotents are
-orthogonal and sum to the identity
+`Rj_! ⊣ Rj^!` (`ProEtale.CondensedRing.clopenIdempotent`, blueprint
+`definition-trace-class-local-terms--3`). The pushforward of the restriction of `α` to `B` is
+`α ∘ e_B`, so that `LT_B(α) = ∫_X α ∘ e_B`
+(`ProEtale.CondensedRing.BorelMooreSection.localTerm_eq_integral`). For a decomposition of `X` into
+finitely many open and closed pieces `B_β`, the idempotents are orthogonal and sum to the identity
 (`ProEtale.CondensedRing.sum_clopenIdempotent_app`): their pullbacks to each piece are detected
 by the finite-cover detection of `WeilConjectures.TraceFormula.OpenCover`. Hence
 `∫_X α = ∑_β LT_{B_β}(α)`
 (`ProEtale.CondensedRing.BorelMooreSection.integral_eq_sum_localTerm`, blueprint
-`lem-trf-integration-component-sum`).
+`theorem-proper-pushforward-lefschetz-verdier--3`).
 
 ## Sorried input
 
@@ -222,7 +222,8 @@ section Integral
 variable {T X : Over (Spec (.of k))} [QuasiCompact T.hom] [QuasiCompact X.hom]
 
 variable (ℓ X) in
-/-- The integral `∫_X`, as an additive map (blueprint `lem-trf-integration-linear`). -/
+/-- The integral `∫_X`, as an additive map (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--3`). -/
 noncomputable def integralAddMonoidHom [IsProper X.hom] :
     BorelMooreSection ℓ X →+ End (𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   AddMonoidHom.mk' integral integral_add
@@ -232,11 +233,13 @@ lemma integralAddMonoidHom_apply [IsProper X.hom] (α : BorelMooreSection ℓ X)
     integralAddMonoidHom ℓ X α = α.integral :=
   rfl
 
-/-- The integral of the zero section vanishes (blueprint `lem-trf-integration-linear`). -/
+/-- The integral of the zero section vanishes (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--3`). -/
 lemma integral_zero [IsProper X.hom] : (0 : BorelMooreSection ℓ X).integral = 0 :=
   (integralAddMonoidHom ℓ X).map_zero
 
-/-- The integral commutes with finite sums (blueprint `lem-trf-integration-linear`). -/
+/-- The integral commutes with finite sums (blueprint
+`theorem-proper-pushforward-lefschetz-verdier--3`). -/
 lemma integral_sum [IsProper X.hom] {ι : Type*} (s : Finset ι) (α : ι → BorelMooreSection ℓ X) :
     (∑ i ∈ s, α i).integral = ∑ i ∈ s, (α i).integral :=
   map_sum (integralAddMonoidHom ℓ X) α s
@@ -264,7 +267,7 @@ variable {B X : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B
 
 variable (ℓ) in
 /-- The idempotent `e_B` of an open and closed subscheme `j : B ⟶ X` (blueprint
-`sk-d-local-term`): the natural endomorphism
+`definition-trace-class-local-terms--3`): the natural endomorphism
 ```
 L ⟶ Rj_* Lj^* L ≅ Rj_* Rj^! L ≅ Rj_! Rj^! L ⟶ L
 ```
@@ -324,9 +327,9 @@ section LocalTerm
 
 variable {B X : Over (Spec (.of k))} [QuasiCompact B.hom] [QuasiCompact X.hom]
 
-/-- **The local term as an integral over the ambient scheme** (blueprint `sk-d-local-term`):
-for an open and closed subscheme `j : B ⟶ X` of a scheme proper over `s`,
-`LT_B(α) = ∫_X α ∘ e_B`, for the idempotent `e_B` of `B` (`clopenIdempotent`). -/
+/-- **The local term as an integral over the ambient scheme** (blueprint
+`definition-trace-class-local-terms--3`): for an open and closed subscheme `j : B ⟶ X` of a scheme
+proper over `s`, `LT_B(α) = ∫_X α ∘ e_B`, for the idempotent `e_B` of `B` (`clopenIdempotent`). -/
 theorem BorelMooreSection.localTerm_eq_integral [IsProper X.hom] [IsProper B.hom] (j : B ⟶ X)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left] (α : BorelMooreSection ℓ X) :
     α.localTerm j = BorelMooreSection.integral (X := X)
@@ -380,7 +383,7 @@ lemma isZero_boundedConstructibleUpperStar_obj_lowerShriek {W : Over (Spec (.of 
 
 /-- **The idempotents of a decomposition into open and closed pieces sum to the identity**: if
 `X` is the disjoint union of finitely many open and closed subschemes `j_i : B_i ⟶ X`, then
-`∑_i e_{B_i} = 𝟙` (blueprint `sk-p-local`). -/
+`∑_i e_{B_i} = 𝟙` (blueprint `theorem-proper-pushforward-lefschetz-verdier--3`). -/
 theorem sum_clopenIdempotent_app {ι : Type*} [Fintype ι] (B : ι → Over (Spec (.of k)))
     [∀ i, LocallyOfFiniteType (B i).hom] [∀ i, QuasiCompact (B i).hom]
     [∀ i, IsSeparated (B i).hom] (j : ∀ i, B i ⟶ X) [∀ i, IsOpenImmersion (j i).left]
@@ -448,7 +451,7 @@ namespace BorelMooreSection
 variable {X : Over (Spec (.of k))} [QuasiCompact X.hom]
 
 /-- **Decomposition of the integral into local terms** (blueprint
-`lem-trf-integration-component-sum`, `prop-trf-pairing-local-decomposition`, `sk-p-local`): if a
+`theorem-proper-pushforward-lefschetz-verdier--3`): if a
 scheme `X` proper over `s` is the disjoint union of finitely many open and closed subschemes
 `j_β : B_β ⟶ X`, the integral of a Borel–Moore section is the sum of its local terms,
 `∫_X α = ∑_β LT_{B_β}(α)`. -/
@@ -472,17 +475,17 @@ namespace BorelMooreSection
 variable {B E : Over (Spec (.of k))} [QuasiCompact B.hom] [LocallyOfFiniteType E.hom]
   [QuasiCompact E.hom] [IsSeparated E.hom]
 
-/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`,
-`rem-ptr-trf-local-term-9`): along an open and closed immersion `j : s ⟶ E` of the base point,
-the local term of `α` is its restriction `j^* α : ℚ̄_ℓ,s ⟶ ω_s`, read as an element of
+/-- **The local term at a point component** (blueprint `lemma-local-term-restriction-map--1`,
+`lemma-local-term-restriction-map--1`): along an open and closed immersion `j : s ⟶ E` of the base
+point, the local term of `α` is its restriction `j^* α : ℚ̄_ℓ,s ⟶ ω_s`, read as an element of
 `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem localTerm_point (j : point k ⟶ E) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (α : BorelMooreSection ℓ E) :
     α.localTerm j = .of (α.restrict j ≫ (dualizingComplexPointIso ℓ k).hom) :=
   integral_point _
 
-/-- **The local term at a point component** (blueprint `lem-trf-local-term-point`): for an open
-and closed subscheme `j : B ⟶ E` with an isomorphism `e : B ≅ s` over `s`, the local term of
+/-- **The local term at a point component** (blueprint `lemma-local-term-restriction-map--1`): for
+an open and closed subscheme `j : B ⟶ E` with an isomorphism `e : B ≅ s` over `s`, the local term of
 `α` is the restriction `j^* α`, transported to the base point along `e` and read as an element
 of `End (ℚ̄_ℓ,s)` through `ω_s ≅ ℚ̄_ℓ,s`. -/
 theorem localTerm_eq_of_iso [IsProper B.hom] (j : B ⟶ E) [IsOpenImmersion j.left]
@@ -542,10 +545,10 @@ namespace BorelMooreSection
 variable {T B X : Over (Spec (.of k))} [QuasiCompact T.hom] [QuasiCompact B.hom]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-- **The local term of a pushforward** (blueprint `thm-trf-frobenius-local-term`, Step 3): for an
-open and closed subscheme `j : B ⟶ X`, proper over `s`, and a proper morphism `h : T ⟶ X` from a
-scheme proper over `s` with image in `B`, the local term along `B` of the Borel–Moore pushforward
-`h_* γ` is `∫_T γ`. -/
+/-- **The local term of a pushforward** (blueprint `proposition-frobenius-local-term-curve--1`, Step
+3): for an open and closed subscheme `j : B ⟶ X`, proper over `s`, and a proper morphism `h : T ⟶ X`
+from a scheme proper over `s` with image in `B`, the local term along `B` of the Borel–Moore
+pushforward `h_* γ` is `∫_T γ`. -/
 theorem localTerm_pushforward [IsProper T.hom] [IsProper B.hom] (j : B ⟶ X)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left] (h : T ⟶ X) [IsProper h.left]
     (hh : Set.range h.left.base ⊆ Set.range j.left.base) (γ : BorelMooreSection ℓ T) :

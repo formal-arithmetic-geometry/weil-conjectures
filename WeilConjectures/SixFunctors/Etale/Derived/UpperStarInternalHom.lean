@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 For an étale morphism `u : U ⟶ X` and finite coefficients `Λ`, the comparison
 `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, blueprint
-`def-weil-derived-pullback-tensor-hom`). It is conjugate to the projection map of the derived
+`prose-03-02`). It is conjugate to the projection map of the derived
 adjunction `D(u_!) ⊣ Lu^*`, which is an isomorphism by the derived projection formula for étale
 morphisms (`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`).
 -/
@@ -39,7 +39,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
+/-- Blueprint `prose-03-02`: Derived pullback, tensor product, and
 internal Hom.
 
 For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal hom:

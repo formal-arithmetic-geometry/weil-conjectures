@@ -22,7 +22,7 @@ import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 Source: blueprint, sec-proper-base-change/sk-thm-properbasechange, order 1229;
 Stacks Project, Tag 097X, first paragraph of proof, properties (1), (3), (7), (9)
-(blueprint: lem-weil-pbc-strict-w-cover).
+(blueprint: theorem-existence-contractible-covers--1).
 -/
 
 @[expose] public section
@@ -85,7 +85,7 @@ private theorem maximal_of_indEtale (R S : Type u) [CommRing R] [CommRing S]
 its spectrum is w-local, its maximal local rings are strictly henselian, and its closed
 points map onto the whole base spectrum.
 Source: blueprint order 1229; Stacks Project, Tag 097X, first proof paragraph
-(blueprint: lem-weil-pbc-strict-w-cover).
+(blueprint: theorem-existence-contractible-covers--1).
 
 Proof: Put W = A^w, E = W^e, I the closed-point ideal of W, and T = V(IE).
 The point description of `PrincipalWLocalization.points` shows that V(I) consists of

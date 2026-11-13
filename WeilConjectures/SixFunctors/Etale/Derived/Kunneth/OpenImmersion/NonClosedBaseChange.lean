@@ -13,12 +13,12 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 # Base change along open immersions: base change to a strict localization
 
 Two inputs of the "stalks over points with positive transcendence degree" part of the proof of
-blueprint `lem-kun-0f1h`:
+blueprint `corollary-open-direct-image-over-field--2`:
 
 * `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization`: the
   base change `W' = W ×_S S_(s) ⟶ W` of the strict localization `S_(s) ⟶ S` at a geometric
   point is a limit of étale `W`-schemes, so smooth base change in the limit form (blueprint
-  `lem-kun-0f09`) holds along it.
+  `corollary-open-direct-image-over-field--2`) holds along it.
 * `AlgebraicGeometry.Etale.isIso_sheafFiber_map_of_isIso_upperStar`: if the pullback of a map
   of sheaves along `u : W' ⟶ W` is an isomorphism and the geometric point of `W` at `z` lifts
   to `W'`, then the map is an isomorphism on the geometric stalk at `z` (blueprint
@@ -40,11 +40,11 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Smooth base change along the base change of a strict localization (blueprint
-`lem-kun-0f09`): let `s` be a geometric point of a quasi-separated scheme `S`, `f : W ⟶ S` a
-morphism and `W' = W ×_S S_(s)`. The projection `W' ⟶ W` is the limit of the étale `W`-schemes
-`W ×_S V` for the affine pointed étale neighbourhoods `(V, v)` of `s`, so the base change maps
-along `W' ⟶ W` of a quasi-compact quasi-separated `g : T ⟶ W` are isomorphisms for sheaves
-which are torsion of orders invertible on `W`. -/
+`corollary-open-direct-image-over-field--2`): let `s` be a geometric point of a quasi-separated
+scheme `S`, `f : W ⟶ S` a morphism and `W' = W ×_S S_(s)`. The projection `W' ⟶ W` is the limit of
+the étale `W`-schemes `W ×_S V` for the affine pointed étale neighbourhoods `(V, v)` of `s`, so the
+base change maps along `W' ⟶ W` of a quasi-compact quasi-separated `g : T ⟶ W` are isomorphisms for
+sheaves which are torsion of orders invertible on `W`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization {S : Scheme.{u}}
     [QuasiSeparatedSpace S] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ S)
     {W W' : Scheme.{u}} (f : W ⟶ S) (uW : W' ⟶ W) (r : W' ⟶ strictLocalization s)

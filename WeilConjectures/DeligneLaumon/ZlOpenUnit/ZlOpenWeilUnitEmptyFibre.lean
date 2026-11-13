@@ -16,7 +16,7 @@ public import WeilConjectures.DeligneLaumon.ZlFrameworkPbc.ZlFrameworkOpenExchan
 
 /-! # Normalized Weil open unit and the empty geometric fibre
 
-Source: latest blueprint, sec-deligne-laumon-general,
+Source: latest blueprint, chap-The-Deligne-Laumon-theorem-in-general,
 lem-zl-morphism-open-closed-reduction.proof.md, Part 2, extension-by-zero sentence;
 Stacks 09BN, 09BP and 099N
 (blueprint: lem-zl-open-weil-unit-and-empty-fibre).
@@ -70,7 +70,7 @@ structure OpenData {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} 
 
 /-- Coefficient compatibility of the actual unit and beta; inversion gives the same
 square for inverse units. All four edge comparisons are the specified scalar maps.
-Source: Part 2; lem-fix-operation-reduction
+Source: Part 2; proposition-six-operations-change-coefficients
 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
 def ScalarLaws
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
@@ -572,7 +572,7 @@ variable (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The specified rational pullback scalar square with stage transition notation.
 This is just conjugation by the recorded transition identification.
-Source: coefficient passage, lem-fix-operation-reduction
+Source: coefficient passage, proposition-six-operations-change-coefficients
 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
 def rationalStageScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

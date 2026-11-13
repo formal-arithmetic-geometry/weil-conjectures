@@ -13,7 +13,7 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # The complement of a dense open in a curve
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 2 (normalization).
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
 (blueprint: lem-sc-dense-open-finite-complement)
 -/
 
@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- The complement of a dense open in a curve over an algebraically closed field is a finite
 set of closed points with separably closed residue fields.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 2 (normalization).
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
 (blueprint: lem-sc-dense-open-finite-complement)
 
 Proof: The curve is Noetherian because it is finite type over a field. For every

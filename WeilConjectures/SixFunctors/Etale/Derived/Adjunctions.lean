@@ -14,11 +14,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekCon
 # The adjunctions of the six-functor datum
 
 Blueprint `fix-prop-adjunctions` collects the adjunctions of the six-functor datum
-`def-fix-six-functor-datum`, and blueprint `lem-sf-mate` the mate calculus for the exceptional
-pair on the finite-Tor categories. The datum is the one of the six-operations package
-`AlgebraicGeometry.Etale.SixOperationsPackage`: the coefficients are `ModuleCat Λ` for a finite
-ring `Λ`, the schemes are of finite type over a field `k`, and the exponent of `Λ` is invertible
-on the base.
+`def-fix-six-functor-datum`, and blueprint
+`proposition-composition-open-restriction-compactifications-f--1` the mate calculus for the
+exceptional pair on the finite-Tor categories. The datum is the one of the six-operations package
+`AlgebraicGeometry.Etale.SixOperationsPackage`: the coefficients are `ModuleCat Λ` for a finite ring
+`Λ`, the schemes are of finite type over a field `k`, and the exponent of `Λ` is invertible on the
+base.
 
 1. The derived adjunction `Lf^* ⊣ Rf_*` restricts to the bounded constructible categories
    (`AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructible.leftDerivedUpperStarAdjunction`).
@@ -34,7 +35,8 @@ on the base.
    exceptional pair are the pasted ones under the mate of the composition isomorphism of `Rf_!`
    (`AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`, and on the
    finite-Tor categories `exists_rightDerivedLowerShriekAdjunction_comp_eq` in the namespace
-   `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor`, which is blueprint `lem-sf-mate`).
+   `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor`, which is blueprint
+   `proposition-composition-open-restriction-compactifications-f--1`).
 4. The transpose of the compact-support exchange `Ex_!` under the exceptional adjunctions and
    `Lg^* ⊣ Rg_*` is the exceptional-inverse-image identification `Rg'_* Rf'^! ≅ Rf^! Rg_*`
    (`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`); that `Ex_*` is the
@@ -240,16 +242,17 @@ noncomputable def DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
     (ObjectProperty.liftCompιIso _ _ _).symm (ObjectProperty.liftCompιIso _ _ _).symm
 
-/-- Blueprint `lem-sf-mate`: Mate calculus for a pasted adjunction.
+/-- Blueprint `proposition-composition-open-restriction-compactifications-f--1`: Mate calculus for a
+pasted adjunction.
 
 In the setting of the six-functor datum, let `X ⟶[f] Y ⟶[g] Z` be separated finite-type
 morphisms over a finite-type `k`-scheme `Z`, with the adjunctions `Rf_! ⊣ Rf^!`, `Rg_! ⊣ Rg^!`
 and `R(g ∘ f)_! ⊣ R(g ∘ f)^!` on the finite-Tor categories of axiom (A1)
 (`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). There is
 a composition isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the finite-Tor
-categories (`sk-thm-sf-comp-composition`) whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` carries the
-adjunction of `f ≫ g` to the composite adjunction: the unit and counit of the composite
-adjunction are the pasted ones. -/
+categories (`proposition-composition-base-change-rf-shriek--1`) whose mate
+`Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` carries the adjunction of `f ≫ g` to the composite adjunction: the unit
+and counit of the composite adjunction are the pasted ones. -/
 theorem DerivedCategoryFiniteTor.exists_rightDerivedLowerShriekAdjunction_comp_eq
     (aY : Y ⟶ Spec (.of k)) (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [LocallyOfFiniteType aZ] [QuasiCompact aZ] [HasInvertibleExponent Λ Y]
@@ -323,7 +326,7 @@ section Exchange
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `thm-sf-dual-base-change` (Dual base
+/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `definition-trace-morphism--1` (Dual base
 change): the transpose of the compact-support exchange
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` of a cartesian square
 ```
@@ -345,7 +348,7 @@ noncomputable def rightDerivedUpperShriekLowerStarBaseChangeMap [HasCompactifica
     ((rightDerivedUpperShriekAdjunction _ f).comp (derivedUpperStarLowerStarAdjunction _ g))
     (rightDerivedLowerShriekBaseChangeMap Λ sq)
 
-/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `thm-sf-dual-base-change` (Dual base
+/-- Blueprint `fix-prop-adjunctions` (4), and blueprint `definition-trace-morphism--1` (Dual base
 change; its isomorphism form is
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`): the
 exceptional-inverse-image exchange

@@ -24,7 +24,7 @@ namespace CommRingCat
 
 /-- The localization of a filtered colimit at a prime is a domain when every
 stage localization at a contracted prime is a domain.
-(blueprint: lem-weil-pbc-filtered-colimit-normal-ring-domain)
+(blueprint: proposition-proper-direct-image-constructible-complexes)
 
 This is the domain part of the proof of Stacks Project, Algebra, Tag 037D.
 Representatives of two factors are lifted to a common stage using filteredness;

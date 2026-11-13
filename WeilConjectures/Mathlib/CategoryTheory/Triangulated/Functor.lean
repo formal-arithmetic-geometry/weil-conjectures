@@ -55,25 +55,25 @@ variable [HasZeroObject C] [HasZeroObject D] [Preadditive C] [Preadditive D]
 
 include hT
 
-/-- Blueprint `lem-sf-triangle-two-out-of-three`: a natural transformation between triangulated
-functors, compatible with the shifts, which is an isomorphism on the first two terms of a
-distinguished triangle is an isomorphism on the third. -/
+/-- Blueprint `lemma-checking-isomorphisms-constructible-complexes--1`: a natural transformation
+between triangulated functors, compatible with the shifts, which is an isomorphism on the first two
+terms of a distinguished triangle is an isomorphism on the third. -/
 lemma isIso_app_obj₃_of_isIso_app_obj₁₂ (h₁ : IsIso (τ.app T.obj₁)) (h₂ : IsIso (τ.app T.obj₂)) :
     IsIso (τ.app T.obj₃) :=
   isIso₃_of_isIso₁₂ ((mapTriangle τ).app T) (F₁.map_distinguished T hT)
     (F₂.map_distinguished T hT) h₁ h₂
 
-/-- Blueprint `lem-sf-triangle-two-out-of-three`: a natural transformation between triangulated
-functors, compatible with the shifts, which is an isomorphism on the first and third terms of a
-distinguished triangle is an isomorphism on the second. -/
+/-- Blueprint `lemma-checking-isomorphisms-constructible-complexes--1`: a natural transformation
+between triangulated functors, compatible with the shifts, which is an isomorphism on the first and
+third terms of a distinguished triangle is an isomorphism on the second. -/
 lemma isIso_app_obj₂_of_isIso_app_obj₁₃ (h₁ : IsIso (τ.app T.obj₁)) (h₃ : IsIso (τ.app T.obj₃)) :
     IsIso (τ.app T.obj₂) :=
   isIso₂_of_isIso₁₃ ((mapTriangle τ).app T) (F₁.map_distinguished T hT)
     (F₂.map_distinguished T hT) h₁ h₃
 
-/-- Blueprint `lem-sf-triangle-two-out-of-three`: a natural transformation between triangulated
-functors, compatible with the shifts, which is an isomorphism on the last two terms of a
-distinguished triangle is an isomorphism on the first. -/
+/-- Blueprint `lemma-checking-isomorphisms-constructible-complexes--1`: a natural transformation
+between triangulated functors, compatible with the shifts, which is an isomorphism on the last two
+terms of a distinguished triangle is an isomorphism on the first. -/
 lemma isIso_app_obj₁_of_isIso_app_obj₂₃ (h₂ : IsIso (τ.app T.obj₂)) (h₃ : IsIso (τ.app T.obj₃)) :
     IsIso (τ.app T.obj₁) :=
   isIso₁_of_isIso₂₃ ((mapTriangle τ).app T) (F₁.map_distinguished T hT)

@@ -14,7 +14,7 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralConstructibleLinear
 
 /-! # Constant-scalar linearity of the normalized integral pullback
 
-Source: the rational paragraph of `def-weil-derived-pullback-tensor-hom`;
+Source: the rational paragraph of `prose-03-02`;
 Bhatt--Scholze, Lemma 6.5.9(4), and Stacks Tag 099N(5).
 -/
 
@@ -291,7 +291,7 @@ end Representatives
 
 /-- The normalized integral pullback preserves addition and the published constant
 valuation-ring action on ambient derived morphisms.
-Source: blueprint `def-weil-derived-pullback-tensor-hom`, rational paragraph;
+Source: blueprint `prose-03-02`, rational paragraph;
 Bhatt--Scholze, Lemma 6.5.9(4), and Stacks Tag 099N(5).
 (blueprint: lem-sf-integral-derived-pullback-linear).
 

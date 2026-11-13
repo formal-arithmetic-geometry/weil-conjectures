@@ -12,7 +12,7 @@ import Mathlib.Tactic.Ring
 /-! # Bilinear functors on raw scalar localizations
 
 Source: module base change, Stacks 00CV and 00CX; the rational tensor paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-bilinear-functor-scalar-localization).
 -/
 
@@ -100,7 +100,7 @@ private def tensorLocalizedFunctor :
 /-- A bilinear arrow action extends uniquely to the raw scalar-localized category,
 keeping the original output on objects and multiplying the two scalar factors.
 Source: module base change, Stacks 00CV and 00CX; the rational tensor paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-bilinear-functor-scalar-localization).
 
 Proof: lift the integral bilinear action to the tensor product, base change the

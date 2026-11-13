@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomTransposeExactCommShi
 /-! # Exactness of the evaluation-defined étale scalar Hom comparison
 
 Source: Stacks Project, Cohomology on Sites, Tags 08JA and 08JC; blueprint
-`thm-coef-finite-hom`, proof paragraph 2.
+`lemma-change-coefficients-internal-hom--1`, proof paragraph 2.
 -/
 
 @[expose] public section
@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The evaluation transpose commutes with the normalized reversed Hom shifts and
 maps distinguished triangles to morphisms of distinguished triangles.
-Source: Stacks 08JA and 08JC; blueprint thm-coef-finite-hom, proof paragraph 2
+Source: Stacks 08JA and 08JC; blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
 (blueprint: lem-coef-etale-hom-transpose-exact).
 
 Proof: compute derived Hom using a K-injective replacement of M and K-flat

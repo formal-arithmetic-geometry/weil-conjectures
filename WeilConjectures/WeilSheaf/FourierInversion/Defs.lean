@@ -15,7 +15,7 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 The Artin–Schreier sheaf `ℒ_{ψ,a}` of a function `a`
 (`AlgebraicGeometry.artinSchreierOf`) and the triple product `𝔸³` with points `(x, ξ, y)`
 (`AlgebraicGeometry.affineTripleProduct`) with its projections, used in the proof that the
-Fourier–Deligne transform of Weil complexes is an equivalence (blueprint `sk-thm-inversion`).
+Fourier–Deligne transform of Weil complexes is an equivalence (blueprint `sec-Fourier-inversion`).
 -/
 
 @[expose] public section
@@ -42,7 +42,7 @@ instance (a : Γ(X, ⊤)) :
   ⟨AffineSpace.homOfVector_over _ _⟩
 
 /-- The Artin–Schreier sheaf `ℒ_{ψ,a}` of a global function `a` on a `k₀`-scheme `X`: the
-pullback of `ℒ_ψ` along `a : X ⟶ 𝔸¹` (blueprint `def-fd-artin-schreier-sheaf`). -/
+pullback of `ℒ_ψ` along `a : X ⟶ 𝔸¹` (blueprint `lemma-artin-schreier-character-sheaf--1`). -/
 noncomputable def artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     WeilSheaf k₀ l X :=
   (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1)

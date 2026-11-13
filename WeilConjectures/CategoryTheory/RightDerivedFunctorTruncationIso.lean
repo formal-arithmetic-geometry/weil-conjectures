@@ -77,7 +77,7 @@ Source: Stacks, Derived Categories, Lemma 05TC (2), applied to the cone of the m
 
 Proof:
 1. Complete `c` to a distinguished triangle `L → M → C → L[1]`. The bounded-below
-subcategory is triangulated (`def-weil-pbc-bounded-derived-subcategories`). The long exact
+subcategory is triangulated (`situation-conventions`). The long exact
 cohomology sequence (`lem-sf-derived-homology-long-exact`) shows `H^j(C) = 0` for `j ≤ n`:
 `H^j(c)` is surjective, so the map `H^j(M) → H^j(C)` is zero and the connecting map
 `H^j(C) → H^(j+1)(L)` is monic. Its image is the kernel of `H^(j+1)(c)`, which is zero

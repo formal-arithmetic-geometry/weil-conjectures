@@ -41,7 +41,7 @@ Proof:
 (`def-pc-fibre-product`) gives the functor `f.Etale`.
 2. The adjunction identifies maps from `L(h_V)` to `F` with maps from `h_V` to
 `f_* F`. The representable-sheaf lemma above, the full sheaf subcategory
-(`def-weil-pbc-etale-sheaf-of-sets`), and Yoneda
+(`situation-conventions`), and Yoneda
 (`lem-galois-yoneda-hom-bijection`) identify these with `(f_* F)(V)`.
 3. By direct-image evaluation this is `F(V ×_Y X)`. The same representable-sheaf
 lemma and Yoneda identify it with maps from `h_(V ×_Y X)` to `F`, naturally in `F`.

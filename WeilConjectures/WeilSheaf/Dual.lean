@@ -224,7 +224,7 @@ noncomputable def dualStr (F : WeilSheaf k₀ l X) :
         (ProEtaleWeilSheaf.adicConstant k₀ l X).carrier :=
   (ProEtaleWeilSheaf.ihom k₀ l X F.obj (ProEtaleWeilSheaf.adicConstant k₀ l X)).str
 
--- TODO(unify): def-real-weil-representation-operations
+-- TODO(unify): definition-weil-representation
 /-- The dual `F^∨ = [F, ℚ̄_ℓ]` of a lisse Weil sheaf: the internal hom into the constant Weil
 sheaf `ℚ̄_ℓ`, with the Weil structure `AlgebraicGeometry.WeilSheaf.dualStr`. It is lisse
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.ihom`), hence constructible. -/
@@ -236,7 +236,7 @@ noncomputable def dual (F : WeilSheaf k₀ l X) (hF : F.IsLisse) : WeilSheaf k�
 theorem IsLisse.dual {F : WeilSheaf k₀ l X} (hF : F.IsLisse) : (F.dual hF).IsLisse :=
   ProEtale.IsAdicLisseSheaf.ihom hF (ProEtale.isAdicLisseSheaf_adicConstantSheaf _)
 
--- TODO(unify): def-real-weil-representation-operations
+-- TODO(unify): definition-weil-representation
 /-- The geometric coinvariants of a lisse Weil sheaf `F`: the dual `Γ(X̄, F^∨)^∨` of the global
 sections of the dual `F^∨`, with the dual of the Frobenius of
 `AlgebraicGeometry.WeilSheaf.globalSections`.

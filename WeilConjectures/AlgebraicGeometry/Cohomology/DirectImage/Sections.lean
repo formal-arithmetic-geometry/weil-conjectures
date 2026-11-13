@@ -53,7 +53,7 @@ Over an affine open `V` of `T`, `R^q f_* ℱ|_V` is the higher direct image alon
 images then shows quasi-coherence by induction on the number of affine opens
 (`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
 
-(blueprint: `det-thm-picard-coherence`, `lem-pc-finite-support-hi`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`, `lem-pc-finite-support-hi`) -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top _
@@ -406,7 +406,7 @@ into multiplication by their images in `Γ(X, ⊤)`
 
 Over `T = Spec κ` for a field `κ`, this is the identification of the `q`-th direct image to a
 point with `H^q` as `κ`-vector spaces, used in the local model of the proof of
-`thm-pc-semicontinuity-base-change`. -/
+`lemma-triviality-fibres--2`. -/
 theorem exists_bijective_semilinearMap_sections_higherDirectImage_H [IsAffine T] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
@@ -659,7 +659,7 @@ higher direct images gives `R^q f_* ℱ|_U = 0` for `q ≥ d` by induction on `d
 The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
 the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
 
-(blueprint: `det-thm-picard-coherence`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem exists_isZero_higherDirectImage_restrict (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
       ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -678,7 +678,7 @@ situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_r
 is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods
 given there cover `T`, and one takes for `N` the maximum of their bounds.
 
-(blueprint: `det-thm-picard-coherence`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem exists_isZero_higherDirectImage [CompactSpace T] :
     ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) := by
   classical
@@ -733,7 +733,7 @@ The two assertions are stated in separate acyclic modules, with proofs through l
 of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
 
 (blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
-(blueprint: `det-thm-picard-coherence`)
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`)
 (blueprint: new-higher-direct-image-affine-local-qcoherent) -/
 theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
     ∀ U : T.affineOpens,

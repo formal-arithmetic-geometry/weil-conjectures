@@ -317,7 +317,7 @@ Source: Stacks Project, sites-modules, Tags 093J, 093K, 093L
 (auxiliary; not a blueprint node).
 
 Proof: (1) Sheafification is exact and kernels of sheaves are sectionwise kernels
-(lem-weil-pbc-sheafification-exact). The module sheafification interface
+(situation-conventions). The module sheafification interface
 (lem-pc-sites-module-sheafification-interface) identifies the underlying abelian
 sheafification. A set-theoretic section of a surjective module map induces a section
 of its constant sheaf of sets, hence surjectivity on every object's sections.

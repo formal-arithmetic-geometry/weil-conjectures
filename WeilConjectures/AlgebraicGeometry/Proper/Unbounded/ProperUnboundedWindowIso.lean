@@ -31,9 +31,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # The window isomorphisms for proper direct image
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window-iso.md
-(blueprint: det-proper-unbounded-window-iso).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--2).
 
 The schemes and morphism have the standing separated finite-type setting over a
 positive-characteristic field of sk-def-sfb-dc-setting, as in the amplitude theorem.
@@ -106,24 +106,25 @@ private theorem window_maps_of_bounds
 
 /-- The canonical degree-q window maps for a finite subextension of the chosen algebraic closure.
 Source: blueprint main-20261015, sk-lem-proper-unbounded-window-iso, both displayed maps
-(blueprint: det-proper-unbounded-window-iso).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--2).
 
 Proof:
 1. On the small pro-etale sites, lem-weil-pbc-ring-sheaves-grothendieck and
-lem-sfb-grothendieck-k-injective give K-injective resolutions. The functor
-CondensedRing.lowerStar is additive (def-sfb-module-lower-star), so its total right
+prose-03-02 give K-injective resolutions. The functor
+CondensedRing.lowerStar is additive (prose-03-02), so its total right
  derived functor is triangulated by lem-pc-right-derived-functor-triangulated.
-2. Apply det-ambient-ind-derived-sums to keep good truncations in Dic.
+2. Apply corollary-ambient-ind-derived to keep good truncations in Dic.
 Set A = tau_le_q K and B = tau_ge_(q+1) K. Their cohomology is that of K in
- the retained ranges and zero elsewhere (def-kun-truncations), so both lie in Dic.
+ the retained ranges and zero elsewhere (proposition-open-direct-image-preserves-finite), so both
+ lie in Dic.
 Apply the derived pushforward to A -> K -> B -> A[1], the canonical triangle of
 lem-sf-derived-truncation-triangle. By the lower bound of
-det-proper-unbounded-window-arbitrary, H^(q-1)(Rp_*B) and H^q(Rp_*B) vanish.
+lemma-proper-direct-image-unbounded-complexes--1, H^(q-1)(Rp_*B) and H^q(Rp_*B) vanish.
 The cohomology sequence of lem-sf-derived-homology-long-exact gives
 0 -> H^q(Rp_*A) -> H^q(Rp_*K) -> 0, so the first canonical map is an isomorphism.
 3. Put r = q-2d-2, L = tau_le_r A and W = tau_ge_(r+1) A. They lie in Dic by
  the same truncation formulas. Apply Rp_* to L -> A -> W -> L[1]. The upper bound
-of det-proper-unbounded-window-arbitrary puts Rp_*L in degrees <= r+2d+1 = q-1.
+of lemma-proper-direct-image-unbounded-complexes--1 puts Rp_*L in degrees <= r+2d+1 = q-1.
 Thus H^q(Rp_*L) and H^(q+1)(Rp_*L) vanish. The same cohomology sequence gives
 0 -> H^q(Rp_*A) -> H^q(Rp_*W) -> 0. This is the second displayed canonical map,
 with W = tau_ge_(q-2d-1) tau_le_q K. The same amplitude theorem puts the direct
@@ -204,24 +205,25 @@ theorem proper_unbounded_window_iso
 
 /-- The canonical degree-q window maps for the condensed algebraic closure.
 Source: blueprint main-20261015, sk-lem-proper-unbounded-window-iso, both displayed maps
-(blueprint: det-proper-unbounded-window-iso).
+(blueprint: lemma-proper-direct-image-unbounded-complexes--2).
 
 Proof:
 1. On the small pro-etale sites, lem-weil-pbc-ring-sheaves-grothendieck and
-lem-sfb-grothendieck-k-injective give K-injective resolutions. The functor
-CondensedRing.lowerStar is additive (def-sfb-module-lower-star), so its total right
+prose-03-02 give K-injective resolutions. The functor
+CondensedRing.lowerStar is additive (prose-03-02), so its total right
  derived functor is triangulated by lem-pc-right-derived-functor-triangulated.
-2. Apply det-ambient-ind-derived-sums to keep good truncations in Dic.
+2. Apply corollary-ambient-ind-derived to keep good truncations in Dic.
 Set A = tau_le_q K and B = tau_ge_(q+1) K. Their cohomology is that of K in
- the retained ranges and zero elsewhere (def-kun-truncations), so both lie in Dic.
+ the retained ranges and zero elsewhere (proposition-open-direct-image-preserves-finite), so both
+ lie in Dic.
 Apply the derived pushforward to A -> K -> B -> A[1], the canonical triangle of
 lem-sf-derived-truncation-triangle. By the lower bound of
-det-proper-unbounded-window-arbitrary, H^(q-1)(Rp_*B) and H^q(Rp_*B) vanish.
+lemma-proper-direct-image-unbounded-complexes--1, H^(q-1)(Rp_*B) and H^q(Rp_*B) vanish.
 The cohomology sequence of lem-sf-derived-homology-long-exact gives
 0 -> H^q(Rp_*A) -> H^q(Rp_*K) -> 0, so the first canonical map is an isomorphism.
 3. Put r = q-2d-2, L = tau_le_r A and W = tau_ge_(r+1) A. They lie in Dic by
  the same truncation formulas. Apply Rp_* to L -> A -> W -> L[1]. The upper bound
-of det-proper-unbounded-window-arbitrary puts Rp_*L in degrees <= r+2d+1 = q-1.
+of lemma-proper-direct-image-unbounded-complexes--1 puts Rp_*L in degrees <= r+2d+1 = q-1.
 Thus H^q(Rp_*L) and H^(q+1)(Rp_*L) vanish. The same cohomology sequence gives
 0 -> H^q(Rp_*A) -> H^q(Rp_*W) -> 0. This is the second displayed canonical map,
 with W = tau_ge_(q-2d-1) tau_le_q K. The same amplitude theorem puts the direct

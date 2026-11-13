@@ -71,7 +71,7 @@ private theorem exists_isPushout_quotient_of_etale (R : CommRingCat.{u}) (I : Id
 affine, `i : Z ⟶ X` is a closed immersion and `p : V ⟶ Z` is étale with `V` affine, there are an
 affine scheme `U`, an étale `q : U ⟶ X` and `a : V ⟶ U` such that `(a, p, q, i)` is a pullback
 square.
-(blueprint: `lem-weil-pbc-affine-etale-closed-immersion-lift`) -/
+(blueprint: `theorem-gabber-affine-proper-base-change`) -/
 theorem Etale.exists_isPullback_of_isClosedImmersion_of_isAffine {X Z V : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i] (p : V ⟶ Z) [Etale p] [IsAffine V] :
     ∃ (U : Scheme.{u}) (_ : IsAffine U) (q : U ⟶ X) (_ : Etale q) (a : V ⟶ U),

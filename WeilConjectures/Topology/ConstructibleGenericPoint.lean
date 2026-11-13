@@ -22,8 +22,8 @@ Let `X` be a topological space with a generic point `η`.
   closed points (`Topology.IsConstructible.exists_finset_of_notMem`).
 
 This is used in the finite-support step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`): a constructible subset of a line which omits the generic
-point is a finite set of closed points.
+`proposition-external-kunneth-formula-nearby-cycles`): a constructible subset of a line which omits
+the generic point is a finite set of closed points.
 
 -/
 

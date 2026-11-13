@@ -24,8 +24,8 @@ point `x` of `X₀`.
   exactly when the stalk at `x` is pure of weight `w` relative to `q_x = q ^ deg x`
   (`AlgebraicGeometry.WeilSheaf.isPureOfWeight_stalk_iff_stalkAt`): `F_x^{(m)}` has the
   characteristic polynomial of `F_x ^ (m / deg x)`. This is "the same power calculation at `x`"
-  of blueprint `thm-zl-real-mixed-by-curves`, which allows to test punctual purity at any
-  geometric point fixed by a power of the Frobenius
+  of blueprint `theorem-real-constructible-sheaves-are-mixed--1`, which allows to test punctual
+  purity at any geometric point fixed by a power of the Frobenius
   (`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.stalkAt`,
   `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeight_of_forall_stalkAt`).
 -/
@@ -119,7 +119,8 @@ only if the stalk `F_x̄` with `F_x` is pure of weight `w` relative to `q_x = q 
 Indeed `deg x ∣ m`, and `F_x^{(m)}` has the characteristic polynomial of `F_x ^ (m / deg x)`
 (`AlgebraicGeometry.WeilSheaf.charpoly_frobeniusEnd_stalkAt_of_dvd`), while
 `qᵐ = q_x ^ (m / deg x)`: purity of `F_x` is purity of its `r`-th power relative to `q_xʳ`.
-This is "the same power calculation at `x`" of blueprint `thm-zl-real-mixed-by-curves`. -/
+This is "the same power calculation at `x`" of blueprint
+`theorem-real-constructible-sheaves-are-mixed--1`. -/
 theorem isPureOfWeight_stalk_iff_stalkAt (F : WeilSheaf k₀ l X) (ι : PadicAlgCl l →+* ℂ)
     (w : ℝ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)

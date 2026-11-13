@@ -204,7 +204,7 @@ The shift is first moved into the kernel
 `p₁^*(K ⊗ᴸ π^* N) ≅ p₁^* K ⊗ᴸ p₂^* π'^* N` by monoidality of `Lp₁^*` and
 `p₁ ≫ π = p₂ ≫ π'`, the factor `p₂^* π'^* N` is moved past `𝒦` with the associator and a
 braiding of `D((V ×_S V')_ét)`, and the projection formula for `p₂` concludes.
-(sketch blueprint: `prop-base-linear`, proof) -/
+(sketch blueprint: `proposition-base-change-fourier-inversion--2`, proof) -/
 theorem nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula
     [HasCompactification (pullback.snd π π')]
     (P : ObjectProperty (DerivedCategory (Sheaf V.smallEtaleTopology A)))

@@ -26,7 +26,7 @@ variable {k V ι : Type*} [DivisionRing k] [Infinite k] [AddCommGroup V] [Module
 
 Finite-dimensionality of `V`, assumed in the blueprint, is not needed.
 
-(blueprint: `lem-pc-finite-linear-avoidance`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
 theorem iUnion_ne_univ_of_ne_top {W : ι → Subspace k V} (hW : ∀ i, W i ≠ ⊤) :
     ⋃ i, (W i : Set V) ≠ Set.univ := fun h ↦
   (exists_eq_top_of_iUnion_eq_univ h).elim hW

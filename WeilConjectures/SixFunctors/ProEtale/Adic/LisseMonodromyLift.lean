@@ -30,7 +30,7 @@ universal cover at `t`. For a lisse sheaf `G`, restriction along `ξ` identifies
 
 For `f` the Frobenius and `ψ` the Weil structure this compares the Frobenius at a generic
 geometric point with the Weil fundamental representation (blueprint
-`lem-wf-boundary-stalk-invariants`).
+`lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section

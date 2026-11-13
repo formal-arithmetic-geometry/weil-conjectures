@@ -371,7 +371,7 @@ private theorem trans_aux : ∀ (m : ℕ)
 /-- **Refinement of a filtration.** If `ρ` has a filtration whose graded pieces satisfy `P i`,
 and every representation satisfying `P i` has a filtration with graded pieces `R i j`, then these
 refine the first filtration: `ρ` has a filtration with graded pieces `R i j` for all `(i, j)`.
-(blueprint: `lem-mg-filtration-refinement`) -/
+(blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`) -/
 theorem trans (h : HasGradedPieces ρ P) {κ : ι → Type*}
     {R : ∀ i, κ i → RepProp.{u, v} k W} (hR : ∀ i j, RepProp.IsInvariant (R i j))
     (hPR : ∀ i {Y : Type v} {_ : AddCommGroup Y} {_ : Module k Y} (τ : Representation k W Y),
@@ -434,7 +434,7 @@ finite filtration, and choose a composition series `t i` of each graded piece `F
 the composition factors of any composition series `c` of `V` are, up to equivalence and with
 multiplicities, the composition factors of all the `t i`: there is a bijection between the factors
 of `c` and the pairs `(i, j)` of an index `i` and a factor `j` of `t i`, matching equivalent
-factors. (blueprint: `lem-mg-filtration-refinement`) -/
+factors. (blueprint: `lemma-tensor-exterior-powers-filtered-representations--3`) -/
 theorem exists_equiv_sigma_of_monotone {m : ℕ} (F : Fin (m + 1) → Subrepresentation ρ)
     (hF : Monotone F) (h0 : F 0 = ⊥) (hl : F (Fin.last m) = ⊤)
     (t : ∀ i : Fin m, ((F i.succ).subquotient (F i.castSucc)).CompositionSeries)
@@ -579,7 +579,7 @@ variable {V V' : Type v} [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module
 /-- **The tensor product of two filtered representations.** For composition series `s` of `V` and
 `s'` of `V'`, with factors `A_i` and `B_j`, the representation `V ⊗ V'` has a finite filtration
 whose graded pieces, in a suitable order, are the `A_i ⊗ B_j`, each pair `(i, j)` occurring exactly
-once. (blueprint: `lem-mg-filtered-tensor-product`) -/
+once. (blueprint: `lemma-tensor-exterior-powers-filtered-representations--1`) -/
 theorem hasGradedPieces_tprod (s : ρ.CompositionSeries) (s' : σ.CompositionSeries) :
     HasGradedPieces (ρ.tprod σ) fun x : Fin s.length × Fin s'.length ↦
       EquivTo ((s.factor x.1).tprod (s'.factor x.2)) := by

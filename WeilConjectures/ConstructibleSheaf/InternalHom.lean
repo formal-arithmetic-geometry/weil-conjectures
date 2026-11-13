@@ -21,7 +21,7 @@ Let `Λ` be a commutative ring. For sheaves of `Λ`-modules on the small étale 
   (`AlgebraicGeometry.Etale.isIso_ihomComparison_constantSheaf_app`): it is monoidal and exact;
 - for `Λ` noetherian, the internal hom `[L, M]` of two finite locally constant sheaves is finite
   locally constant (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom`, blueprint
-  `lem-pur-lisse-morphism-rigidity`, clause (1)): on a common trivialising cover, pullback
+  `lemma-section-normal-bundle--1`, clause (1)): on a common trivialising cover, pullback
   commuting with internal homs, it is the constant sheaf at `Hom_Λ(P, Q)` for finitely generated,
   hence finitely presented, modules `P` and `Q`.
 
@@ -118,7 +118,7 @@ theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ
     (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
   exact ModuleCat.isIso_ihomComparison_app_of_finitePresentation _ P Q
 
-/-- Blueprint `lem-pur-lisse-morphism-rigidity`: Rigidity of morphisms of finite locally
+/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
 constant sheaves
 
 *The Hom sheaf*, clause (1): for `Λ` noetherian, the internal hom `[L, M]` of two finite

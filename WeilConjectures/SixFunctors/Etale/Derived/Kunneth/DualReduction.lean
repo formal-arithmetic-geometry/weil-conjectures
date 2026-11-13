@@ -18,9 +18,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 
 Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, and with Verdier
 biduality (`sk-prop-sf-biduality-general`), the three non-formal product comparisons of
-`sk-def-sf-kv-maps` — the exceptional Künneth map `α`, the external Hom map `β` and the
-Künneth–Verdier map `κ` — reduce formally to the single statement that Verdier duality commutes
-with external products,
+`lemma-external-duality-trace-morphism` — the exceptional Künneth map `α`, the external Hom map `β`
+and the Künneth–Verdier map `κ` — reduce formally to the single statement that Verdier duality
+commutes with external products,
 
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`
 
@@ -48,8 +48,8 @@ of the existence of isomorphisms.
 - `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`,
   `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_externalHom`,
   `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_exceptional`: the maps
-  `κ`, `β`, `α` of `sk-def-sf-kv-maps` are invertible if duality commutes with external
-  products.
+  `κ`, `β`, `α` of `lemma-external-duality-trace-morphism` are invertible if duality commutes with
+  external products.
 
 -/
 
@@ -185,7 +185,7 @@ theorem constructibleFiniteTor_externalProduct {B X Y : Scheme.{u}} (f : X ⟶ B
 `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`.
 
 At `P = Λ_X`, `Q = Λ_Y` this is `ω_{X ×_k Y} ≅ ω_X ⊠ ω_Y`. The three product comparisons
-`α`, `β`, `κ` of `sk-def-sf-kv-maps` follow from it formally, given biduality
+`α`, `β`, `κ` of `lemma-external-duality-trace-morphism` follow from it formally, given biduality
 (`AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`, ...). -/
 structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
   /-- `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q` for `P ∈ Dctf(X, Λ)`, `Q ∈ Dctf(Y, Λ)`. -/
@@ -207,10 +207,10 @@ structure VerdierDualExternalProduct (k : Type u) [Field k] : Prop where
 `RHom(p_Y^* N, Rp_X^! M) ≅ 𝔻_{X ×_k Y}(𝔻_X M ⊠ N)`.
 
 By biduality (`sk-prop-sf-biduality-general`) and duality against pullback
-(`cor-sf-duality-pullback`), `Rp_X^! M ≅ Rp_X^! 𝔻_X 𝔻_X M ≅ 𝔻(p_X^* 𝔻_X M)`, and the internal
-adjunction `RHom(A, 𝔻 C) ≅ 𝔻(C ⊗ᴸ A)`
-(`AlgebraicGeometry.Etale.derivedHomVerdierDualIso`) with `A = p_Y^* N`, `C = p_X^* 𝔻_X M`
-concludes. -/
+(`lemma-internal-adjunction-two-exchange-formulas--3`),
+`Rp_X^! M ≅ Rp_X^! 𝔻_X 𝔻_X M ≅ 𝔻(p_X^* 𝔻_X M)`, and the internal adjunction
+`RHom(A, 𝔻 C) ≅ 𝔻(C ⊗ᴸ A)` (`AlgebraicGeometry.Etale.derivedHomVerdierDualIso`) with `A = p_Y^* N`,
+`C = p_X^* 𝔻_X M` concludes. -/
 theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_fst {k : Type u} [Field k]
     [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
@@ -238,8 +238,8 @@ variable {Λ} {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (
   (hδ : VerdierDualExternalProduct Λ k)
 include hδ
 
-/-- The Künneth–Verdier comparison `κ` (`sk-def-sf-kv-maps` (iv)) is invertible if Verdier
-duality commutes with external products: for `M ∈ Dctf(X, Λ)` and `N ∈ Dctf(Y, Λ)`,
+/-- The Künneth–Verdier comparison `κ` (`lemma-external-duality-trace-morphism` (iv)) is invertible
+if Verdier duality commutes with external products: for `M ∈ Dctf(X, Λ)` and `N ∈ Dctf(Y, Λ)`,
 
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`.
 
@@ -263,8 +263,8 @@ theorem nonempty_iso_kunnethVerdier {X Y : Scheme.{u}} (a : X ⟶ Spec (.of k))
   obtain ⟨e₃⟩ := hδ.nonempty_iso a b (constructibleFiniteTor_verdierDual Λ a hM) hN
   exact ⟨externalProductMapIso _ a b e₁ (Iso.refl _) ≪≫ e₃.symm ≪≫ e₂.symm⟩
 
-/-- The external Hom comparison `β` (`sk-def-sf-kv-maps` (iii)) is invertible if Verdier
-duality commutes with external products:
+/-- The external Hom comparison `β` (`lemma-external-duality-trace-morphism` (iii)) is invertible if
+Verdier duality commutes with external products:
 
 `RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`.
 
@@ -308,9 +308,9 @@ theorem nonempty_iso_externalHom {Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ Spec 
     (derivedHomVerdierDualIso _ (pullback.fst c₁ c₂ ≫ c₁) _ _).symm ≪≫
     ((RHom(pullback c₁ c₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso b₃.symm⟩
 
-/-- The exceptional Künneth comparison `α` (`sk-def-sf-kv-maps` (ii)) is invertible if Verdier
-duality commutes with external products: for `fᵢ : Xᵢ ⟶ Yᵢ` between separated finite-type
-`k`-schemes and `Nᵢ ∈ Dctf(Yᵢ, Λ)`,
+/-- The exceptional Künneth comparison `α` (`lemma-external-duality-trace-morphism` (ii)) is
+invertible if Verdier duality commutes with external products: for `fᵢ : Xᵢ ⟶ Yᵢ` between separated
+finite-type `k`-schemes and `Nᵢ ∈ Dctf(Yᵢ, Λ)`,
 
 `Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`.
 
@@ -362,9 +362,9 @@ theorem nonempty_iso_exceptional {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁
 
 end VerdierDualExternalProduct
 
-/-- The Künneth–Verdier statement over a field `k` (`thm-trf-kunneth-verdier`, the `κ` of
-`sk-def-sf-kv-maps` (iv)): for separated finite-type `k`-schemes `X`, `Y`, with projections
-`p_X`, `p_Y` of `X ×_k Y`, and `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`,
+/-- The Künneth–Verdier statement over a field `k` (`lemma-external-duality-trace-morphism--1`, the
+`κ` of `lemma-external-duality-trace-morphism` (iv)): for separated finite-type `k`-schemes `X`,
+`Y`, with projections `p_X`, `p_Y` of `X ×_k Y`, and `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`,
 
 `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`. -/
 structure KunnethVerdier (k : Type u) [Field k] : Prop where
@@ -388,7 +388,7 @@ variable {Λ} {k : Type u} [Field k]
 Künneth–Verdier isomorphism implies that Verdier duality commutes with external products.
 
 For `P ∈ Dctf(X, Λ)` and `Q ∈ Dctf(Y, Λ)`, the internal adjunction and duality against
-pullback (`cor-sf-duality-pullback`) give
+pullback (`lemma-internal-adjunction-two-exchange-formulas--3`) give
 `𝔻(P ⊠ Q) ≅ RHom(p_Y^* Q, 𝔻(p_X^* P)) ≅ RHom(p_Y^* Q, Rp_X^! 𝔻P)`, and `κ` for the pair
 `(𝔻P, Q)` identifies the latter with `𝔻P ⊠ 𝔻Q`. Biduality is not needed in this direction,
 only that `𝔻_X` preserves `Dctf` (`sk-prop-sf-biduality-general`). -/
@@ -406,8 +406,8 @@ theorem KunnethVerdier.verdierDualExternalProduct [PerfectField k]
 external products.
 
 Over a field `k`, for a finite coefficient ring `Λ` of invertible exponent, the Künneth–Verdier
-isomorphism `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)` (`thm-trf-kunneth-verdier`) holds for all
-`M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)` if and only if Verdier duality commutes with external
+isomorphism `M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)` (`lemma-external-duality-trace-morphism--1`) holds
+for all `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)` if and only if Verdier duality commutes with external
 products, `𝔻_{X ×_k Y} (P ⊠ Q) ≅ 𝔻_X P ⊠ 𝔻_Y Q`. The forward implication is
 `AlgebraicGeometry.Etale.KunnethVerdier.verdierDualExternalProduct`; the backward one,
 `AlgebraicGeometry.Etale.VerdierDualExternalProduct.nonempty_iso_kunnethVerdier`, uses

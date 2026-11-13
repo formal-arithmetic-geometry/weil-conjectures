@@ -205,9 +205,9 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Finite coefficient descent and the rational coefficient two-colimit
 
-Source: Weil blueprint main-20261015, sec-six-functors-basics,
+Source: Weil blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-qlbar-two-colimit/_section.md, assertions (1)--(4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit).
+(blueprint: lemma-descent-finite-coefficient-field).
 
 The shifted Hom-colimit isomorphism is expressed by its representative and eventual
 equality conditions. We write the shifted target as T(D[r]); exact scalar extension
@@ -230,8 +230,8 @@ attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
   Functor.CommShift.ofIso Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 /-- The canonical derived scalar comparison for three finite coefficient fields.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, definition of C_F and proof (4),
-tensor transitivity (blueprint: sk-thm-sfb-qlbar-two-colimit).
+Source: blueprint lemma-descent-finite-coefficient-field, definition of C_F and proof (4),
+tensor transitivity (blueprint: lemma-descent-finite-coefficient-field).
 This is the existing exact-functor comparison applied to the ordinary tensor comparison.
 -/
 def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
@@ -242,8 +242,8 @@ def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     Functor.leftDerivedFunctorCompIso _ _
 
 /-- Evaluate a finite-field derived Hom representative in the algebraic closure.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, displayed isomorphism (2)
-(blueprint: sk-thm-sfb-qlbar-two-colimit). -/
+Source: blueprint lemma-descent-finite-coefficient-field, displayed isomorphism (2)
+(blueprint: lemma-descent-finite-coefficient-field). -/
 def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     {C D : DerivedCategory
@@ -257,8 +257,8 @@ def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
       (derivedExtendScalarsCompIso X ℓ h).hom.app D
 
 /-- The transition between finite-field Hom representatives, using tensor transitivity.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, displayed colimit (2) and proof (4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit). -/
+Source: blueprint lemma-descent-finite-coefficient-field, displayed colimit (2) and proof (4)
+(blueprint: lemma-descent-finite-coefficient-field). -/
 def finiteDescentDerivedHomTransition (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F H : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (a : F ≤ H)
     {C D : DerivedCategory
@@ -472,8 +472,8 @@ private lemma finiteDescentDerivedHom_bijective
 
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
-Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit, assertions (1)--(4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit).
+Source: blueprint main-20261015, lemma-descent-finite-coefficient-field, assertions (1)--(4)
+(blueprint: lemma-descent-finite-coefficient-field).
 
 Proof: finite type and quasi-compactness make X Noetherian. On each Noetherian
 stratum, finite constant models are locally finitely presented, and the finite-field

@@ -21,24 +21,26 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexDual
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, and
 for separated finite-type `k`-schemes `X`, `Y` with projections `p_X`, `p_Y` of `X ×_k Y`, the
-Künneth–Verdier isomorphism (`thm-trf-kunneth-verdier`) reads
+Künneth–Verdier isomorphism (`lemma-external-duality-trace-morphism--1`) reads
 
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`
 
 for `M ∈ Dctf(X, Λ)`, `N ∈ Dctf(Y, Λ)`. As in the blueprint it is the external Hom isomorphism
-`β` (`prop-trf-external-hom`) for the pairs `(Λ_X, M)` and `(N, ω_Y)`, followed by the
-exceptional Künneth isomorphism `α` (`prop-trf-exceptional-kunneth`) for `𝟙_X × a_Y`, which
-reads `M ⊠ ω_Y ≅ Rp_X^! M`.
+`β` (`lemma-external-duality-trace-morphism--1`) for the pairs `(Λ_X, M)` and `(N, ω_Y)`, followed
+by the exceptional Künneth isomorphism `α` (`proposition-exceptional-external-kunneth--1`) for
+`𝟙_X × a_Y`, which reads `M ⊠ ω_Y ≅ Rp_X^! M`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.verdierDual_obj`, `AlgebraicGeometry.Etale.dualizingComplex_eq`
-  (`def-trf-dualizing-complex`): `𝔻_X = RHom(-, ω_X)` and `ω_X = Ra^! Λ_S`.
-- `AlgebraicGeometry.Etale.nonempty_iso_externalHom` (`prop-trf-external-hom`): `β` as an
+  (`definition-verdier-dual-evaluation`): `𝔻_X = RHom(-, ω_X)` and `ω_X = Ra^! Λ_S`.
+- `AlgebraicGeometry.Etale.nonempty_iso_externalHom` (`lemma-external-duality-trace-morphism--1`):
+`β` as an
   isomorphism, from `AlgebraicGeometry.Etale.isIso_externalHomMap`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_pullbackFst`: `α` for
   `𝟙_X × a_Y`, `Rp_X^! M ≅ M ⊠ ω_Y`.
-- `AlgebraicGeometry.Etale.nonempty_iso_kunnethVerdier` (`thm-trf-kunneth-verdier`): `κ`.
+- `AlgebraicGeometry.Etale.nonempty_iso_kunnethVerdier`
+(`lemma-external-duality-trace-morphism--1`): `κ`.
 - `AlgebraicGeometry.Etale.kunnethVerdier`, `AlgebraicGeometry.Etale.verdierDualExternalProduct`
   (`rem-sf-kv-formal`): `κ` and its formal equivalent `𝔻(P ⊠ Q) ≅ 𝔻P ⊠ 𝔻Q`.
 
@@ -62,7 +64,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `def-trf-dualizing-complex`: Dualizing complex and Verdier dual.
+/-- Blueprint `definition-verdier-dual-evaluation`: Dualizing complex and Verdier dual.
 
 For `a : X ⟶ S`, the dualizing complex is `ω_X = Ra^! Λ_S`
 (`AlgebraicGeometry.Etale.dualizingComplex`, see
@@ -77,7 +79,7 @@ theorem verdierDual_obj {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a]
       (RHom(X)[ModuleCat.{u + 1} Λ].obj (op M)).obj (dualizingComplex _ a) :=
   rfl
 
-/-- Blueprint `def-trf-dualizing-complex`: the dualizing complex of `a : X ⟶ S` is
+/-- Blueprint `definition-verdier-dual-evaluation`: the dualizing complex of `a : X ⟶ S` is
 `ω_X = Ra^! Λ_S`. -/
 theorem dualizingComplex_eq {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
     dualizingComplex Λ a = (R(a)^![Λ]).obj (𝟙_ _) :=
@@ -101,8 +103,8 @@ noncomputable def externalProductUnitLeftIso {B X Y : Scheme.{u}} (f : X ⟶ B) 
 
 variable {k : Type u} [Field k]
 
-/-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map, as an isomorphism
-`RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`
+/-- Blueprint `lemma-external-duality-trace-morphism--1`: External Hom; the `β` map, as an
+isomorphism `RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`
 (`AlgebraicGeometry.Etale.isIso_externalHomMap`). -/
 theorem nonempty_iso_externalHom [HasInvertibleExponent Λ (Spec (.of k))] {Z₁ Z₂ : Scheme.{u}}
     (c₁ : Z₁ ⟶ Spec (.of k)) (c₂ : Z₂ ⟶ Spec (.of k))
@@ -128,8 +130,8 @@ theorem nonempty_iso_externalHom [HasInvertibleExponent Λ (Spec (.of k))] {Z₁
 
 `Rp_X^! M ≅ M ⊠ ω_Y`.
 
-This is `α` (`prop-trf-exceptional-kunneth`) for `f₁ = 𝟙_X`, `f₂ = b` and the coefficients
-`(M, Λ_k)`: the one-sided exceptional Künneth formula
+This is `α` (`proposition-exceptional-external-kunneth--1`) for `f₁ = 𝟙_X`, `f₂ = b` and the
+coefficients `(M, Λ_k)`: the one-sided exceptional Künneth formula
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`) for `b` and
 `X = k ×_k X`, read through `La^* Λ_k ≅ Λ_X` and the unitors. -/
 theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
@@ -147,17 +149,17 @@ theorem nonempty_iso_rightDerivedUpperShriek_pullbackFst
         derivedTensorLeftUnitor _ _ _ ≪≫ (leftDerivedUpperStarId _ X).app M).symm ≪≫ e ≪≫
     ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [Category.comp_id])) ≪≫ (β.app _).app _⟩
 
-/-- Blueprint `thm-trf-kunneth-verdier`: Künneth–Verdier isomorphism; the `κ` map.
+/-- Blueprint `lemma-external-duality-trace-morphism--1`: Künneth–Verdier isomorphism; the `κ` map.
 
 For `X`, `Y` separated of finite type over a field `k`, `Λ` finite of invertible exponent,
 `M ∈ Dctf(X, Λ)` and `N ∈ Dctf(Y, Λ)`,
 
 `κ : M ⊠ 𝔻_Y N ≅ RHom(p_Y^* N, Rp_X^! M)`.
 
-As in the blueprint it is the external Hom isomorphism `β` (`prop-trf-external-hom`) for the
-pairs `(Λ_X, M)` and `(N, ω_Y)`, using the unit identifications `RHom(Λ_X, M) ≅ M` and
-`Λ_X ⊠ N ≅ p_Y^* N`, followed by `RHom(1, α)` for the identification `M ⊠ ω_Y ≅ Rp_X^! M` of
-`prop-trf-exceptional-kunneth`. -/
+As in the blueprint it is the external Hom isomorphism `β`
+(`lemma-external-duality-trace-morphism--1`) for the pairs `(Λ_X, M)` and `(N, ω_Y)`, using the unit
+identifications `RHom(Λ_X, M) ≅ M` and `Λ_X ⊠ N ≅ p_Y^* N`, followed by `RHom(1, α)` for the
+identification `M ⊠ ω_Y ≅ Rp_X^! M` of `proposition-exceptional-external-kunneth--1`. -/
 theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) (b : Y ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
     [QuasiCompact a] [HasCompactification b] [QuasiCompact b]
@@ -181,7 +183,8 @@ theorem nonempty_iso_kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] {X
     ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso α.symm⟩
 
 /-- The Künneth–Verdier isomorphism over `k` for all separated finite-type `k`-schemes
-(`thm-trf-kunneth-verdier`), in the form of `AlgebraicGeometry.Etale.KunnethVerdier`. -/
+(`lemma-external-duality-trace-morphism--1`), in the form of
+`AlgebraicGeometry.Etale.KunnethVerdier`. -/
 theorem kunnethVerdier [HasInvertibleExponent Λ (Spec (.of k))] : KunnethVerdier Λ k :=
   ⟨fun _ _ a b _ _ _ _ _ _ _ _ hM hN ↦ nonempty_iso_kunnethVerdier Λ a b hM hN⟩
 
@@ -193,7 +196,7 @@ theorem verdierDualExternalProduct [PerfectField k] [HasInvertibleExponent Λ (S
   (kunnethVerdier Λ).verdierDualExternalProduct
 
 variable (k) in
-/-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
+/-- Blueprint `lemma-external-duality-trace-morphism`: Künneth–Verdier isomorphism.
 
 The four product comparison maps of `AlgebraicGeometry.Etale.HasKunnethComparisons` are
 isomorphisms: besides the `!`-Künneth map `Ku_!`, which is an isomorphism by construction,

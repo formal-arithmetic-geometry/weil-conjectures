@@ -110,7 +110,7 @@ open scoped Pointwise
 and `S` a finite nonempty set of maximal ideals. There is `f` in every `m ∈ S` such that
 `A ⧸ (f)` is a smooth domain whose differentials have rank `e + 1` and `B ⧸ f B` has connected
 spectrum: take a generic member of a linear system with base locus `S`.
-(blueprint: `lem-zl-bertini-finite-cover-curve`) -/
+(blueprint: `lemma-curve-preserving-finite-cover--1`) -/
 theorem Algebra.Smooth.exists_mem_quotient_span_singleton_connectedSpace {k A B : Type u}
     [Field k] [IsAlgClosed k] [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A]
     [Algebra.Smooth k A] {e : ℕ} (hA : Module.rank A Ω[A⁄k] = (e + 1 : ℕ) + 1)
@@ -172,7 +172,7 @@ theorem Algebra.Smooth.curve_connectedSpace_of_equiv {k R R' T T' : Type u} [Fie
   rw [← KaehlerDifferential.rank_eq_of_algEquiv e, h₃]
 
 /-- The induction behind `Algebra.Smooth.exists_quotient_curve_connectedSpace`, on the rank
-`e + 1` of the differentials. (blueprint: `lem-zl-bertini-finite-cover-curve`) -/
+`e + 1` of the differentials. (blueprint: `lemma-curve-preserving-finite-cover--1`) -/
 theorem Algebra.Smooth.exists_quotient_curve_connectedSpace_aux {k : Type u} [Field k]
     [IsAlgClosed k] (e : ℕ) :
     ∀ (A B : Type u) [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A]
@@ -232,7 +232,7 @@ connected spectrum and `S` a finite nonempty set of maximal ideals of `A`. There
 contained in every `m ∈ S` such that `A ⧸ J` is a smooth curve (a smooth domain whose
 differentials have rank one) and `B ⧸ J B` has connected spectrum. This is the ring-level form of
 the Bertini argument of Stacks 0FD5, 0FD6, 0G4F.
-(blueprint: `lem-zl-bertini-finite-cover-curve`) -/
+(blueprint: `lemma-curve-preserving-finite-cover--1`) -/
 theorem Algebra.Smooth.exists_quotient_curve_connectedSpace {k A B : Type u} [Field k]
     [IsAlgClosed k] [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A]
     [Algebra.Smooth k A] {d : ℕ} (hd : 2 ≤ d) (hA : Module.rank A Ω[A⁄k] = d)

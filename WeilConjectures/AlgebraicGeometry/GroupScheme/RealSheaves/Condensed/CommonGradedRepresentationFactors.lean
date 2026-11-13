@@ -12,7 +12,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.Filte
 /-!
 # Comparing representations with the same graded pieces
 
-This is the common-refinement comparison in paragraph 3 of `sk-r-linear-library`.
+This is the common-refinement comparison in paragraph 3 of
+`lemma-tensor-exterior-powers-filtered-representations--3`.
 -/
 
 @[expose] public section
@@ -27,8 +28,8 @@ universe u v w z
 composition factors with the same disjoint union; compose the two bijections and their factor
 isomorphisms. Every irreducible subquotient occurs in a composition series, so these same
 bijections also give both constituent inclusions.
-Source: `sk-r-linear-library`, proof paragraph 3, comparison of the two refinements
-(blueprint: lem-mg-common-graded-representation-factors).
+Source: `lemma-tensor-exterior-powers-filtered-representations--3`, proof paragraph 3, comparison of
+the two refinements (blueprint: lem-mg-common-graded-representation-factors).
 -/
 theorem commonGradedRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]

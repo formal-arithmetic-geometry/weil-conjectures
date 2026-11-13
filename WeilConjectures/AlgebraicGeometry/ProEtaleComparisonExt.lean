@@ -60,7 +60,7 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
 
 /-- For a scheme Z, a Grothendieck abelian coefficient category A in the stated size universes,
 etale A-sheaves X,Y and n≥0, exact etale-to-pro-etale comparison induces a bijection
-Ext^n(X,Y)→Ext^n(ν*X,ν*Y) [def-weil-pbc-site-comparison-morphism,
+Ext^n(X,Y)→Ext^n(ν*X,ν*Y) [proposition-comparison-morphism-inverse-image,
 def-weil-abstract-derived-category].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
 06YY and 0GLZ (auxiliary; not a blueprint node).

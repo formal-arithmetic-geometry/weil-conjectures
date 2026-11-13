@@ -17,7 +17,7 @@ import Mathlib.Algebra.Field.ZMod
 /-! # Finite shifted Hom over arbitrary algebraically closed base fields
 
 Source: SGA 4½, finiteness theorem; the mapping-limit argument in
-lem-coef-integral-finite-extension and the existing qcqs shifted-Hom proof.
+proposition-six-operations-change-coefficients and the existing qcqs shifted-Hom proof.
 -/
 
 @[expose] public noncomputable section

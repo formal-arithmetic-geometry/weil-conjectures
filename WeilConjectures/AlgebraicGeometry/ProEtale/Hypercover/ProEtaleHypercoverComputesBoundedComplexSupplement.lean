@@ -82,7 +82,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 set_option backward.isDefEq.respectTransparency false in
 /-- A weakly contractible hypercover computes bounded-below derived evaluation.
 Source: Stacks Project, Tags 09A2 and 0946, with ringed-module coefficients
-(blueprint: lem-weil-pbc-proetale-hypercover-computes-bounded-complex).
+(blueprint: proposition-weakly-contractible-hypercovers--2).
 
 The first conjunct gives a comparison for every bounded-below complex and every
 bounded-below termwise-injective chain resolution. Its target is precisely the

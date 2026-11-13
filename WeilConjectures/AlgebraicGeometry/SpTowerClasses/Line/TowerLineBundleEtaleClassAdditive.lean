@@ -50,7 +50,7 @@ private theorem mapExtensionEndpoints_add
 /-- Tensor multiplication becomes addition in the integral line class after changing
 from the etale site to the pro-etale site.
 
-Source: tower classes proof (2), Picard-to-H1 additivity (lem-sc-h1-gm-pic).
+Source: tower classes proof (2), Picard-to-H1 additivity (lemma-cohomology-multiplicative-group--3).
 (blueprint: lem-sfb-tower-line-bundle-etale-class-additive).
 
 Proof: the Picard-to-H1 map is additive. Its Ext realization preserves sums;

@@ -163,7 +163,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 # Integral exceptional inverse image along a closed immersion
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-`sk-thm-int-restriction-closed.md` (blueprint: det-thm-int-restriction-closed).
+`sk-thm-int-restriction-closed.md` (blueprint: theorem-f-shriek-ell-adic-coefficients--1).
 -/
 
 @[expose] public noncomputable section
@@ -323,8 +323,9 @@ private theorem closedCompactificationComparison (k : Type u) [Field k]
 /-- The inclusion of finite-constant bounded constructible complexes into the integral
 localizing category.  This records the ambient category in which the Brown right adjoint
 is compared with sections with support.
-Source: blueprint `sk-def-localizing-closure` and `det-thm-int-restriction-closed`
-(blueprint: det-thm-int-restriction-closed). -/
+Source: blueprint `definition-localizing-subcategory` and
+`theorem-f-shriek-ell-adic-coefficients--1` (blueprint:
+theorem-f-shriek-ell-adic-coefficients--1). -/
 def generatorsToLocalizing {X : Scheme.{u}}
     (h : ∀ K, generators (Profinite.padicIntegersRingObj ℓ E.val) X K →
       localizing (Profinite.padicIntegersRingObj ℓ E.val) X K) :
@@ -339,7 +340,7 @@ constructibility of derived sections with support.  The second clause says that,
 bounded-constructible generators, this support functor is naturally isomorphic to every
 right adjoint supplied by the integral Brown theorem, for every boundary compactification.
 Source: blueprint `sk-thm-int-restriction-closed.md`, both displayed clauses
-(blueprint: det-thm-int-restriction-closed). -/
+(blueprint: theorem-f-shriek-ell-adic-coefficients--1). -/
 def integralRestrictionClosedAssertions {k : Type u} [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     {X : Scheme.{u}} [X.Over (Spec (.of k))]
@@ -380,7 +381,7 @@ with support along the canonical open complement preserve bounded constructibili
 naturally with the integral exceptional inverse image.  The latter is the right adjoint of the
 integral Brown compact-support functor, independently of the chosen boundary compactification.
 Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-`sk-thm-int-restriction-closed.md` (blueprint: det-thm-int-restriction-closed).
+`sk-thm-int-restriction-closed.md` (blueprint: theorem-f-shriek-ell-adic-coefficients--1).
 
 Proof plan (the node's steps):
 1. Let `j : U ⟶ X` be the open complement `i.openComplement.ι`.  `k` is Noetherian, so `X` is
@@ -389,25 +390,27 @@ Proof plan (the node's steps):
    quasi-compact, of finite type (lem-weil-pbc-qc-open-immersion-finite-type) and separated
    (lem-weil-pbc-separated-cancellation (a)).  `U` with `a_X ∘ j` is a standing scheme
    (lem-weil-pbc-proper-fp-permanence (e), def-weil-finite-type-morphism).  The pulled-back
-   `O_E` is admissible in det-lem-formal-closed-support-sheaves; its (2) makes `i_*` exact.
+   `O_E` is admissible in lemma-sections-support-closed-subscheme--1; its (2) makes `i_*` exact.
 2. `i` is proper (lem-weil-pbc-closed-immersion-proper (a)); use the compactification
-   `(id_Z, i)`.  The formula and comparison of det-prop-int-brown-construction give
+   `(id_Z, i)`.  The formula and comparison of proposition-construction-independence-rf-shriek give
    `Ri_! ≅ Ri_* D((id_Z)_!) = Ri_*`, and exactness of `i_*` gives `Ri_* ≅ i_*`.
-3. det-lem-formal-closed-support-derived (1),(3) with `Λ = O_E`: the natural triangle
+3. lemma-sections-support-closed-subscheme (1),(3) with `Λ = O_E`: the natural triangle
    `F → K → Rj_* j^* K → F[1]` with `F = i_* RΓ_Z K`, the fibre formula
    `RΓ_Z K ≅ i^* F`, and the adjunction `Hom_X(i_* A, K) ≃ Hom_Z(A, RΓ_Z K)`.
-4. det-lem-int-tensor-pullback (1) for `j`: `J = j^* K ∈ Dbc(U, O_E)`.
-5. det-thm-sf-pf-adic-open for `J` and the quasi-compact open immersion `j`:
+4. lemma-inverse-image-tensor-product (1) for `j`: `J = j^* K ∈ Dbc(U, O_E)`.
+5. proposition-direct-image-along-open-immersion--1 for `J` and the quasi-compact open immersion
+`j`:
    `C = Rj_* J ∈ Dbc(X, O_E)`.
-6. det-lem-int-integral-heart-triangulated (1): `Dbc(X, O_E)` is triangulated.  Rotating
+6. lemma-structure-integral-constructible-complexes--1 (1): `Dbc(X, O_E)` is triangulated.  Rotating
    (TR2 of def-weil-triangulated-category) to `C[-1] → F → K → C`, the two-out-of-three
    condition of def-weil-triangulated-subcategory gives `F ∈ Dbc(X, O_E)`.
-7. det-lem-int-tensor-pullback (1) for `i`: `i^* F ∈ Dbc(Z, O_E)`; by the fibre formula and
-   isomorphism invariance (sk-def-sfb-constructible), `RΓ_Z K ∈ Dbc(Z, O_E)`.  This is the
+7. lemma-inverse-image-tensor-product (1) for `i`: `i^* F ∈ Dbc(Z, O_E)`; by the fibre formula and
+   isomorphism invariance (definition-constructible-sheaves), `RΓ_Z K ∈ Dbc(Z, O_E)`.  This is the
    first clause.
-8. Put `B = i^! K` (from `G`, the right adjoint of det-prop-int-brown-adjoint for `c`) and
+8. Put `B = i^! K` (from `G`, the right adjoint of theorem-existence-exceptional-inverse-image for
+`c`) and
    `H = RΓ_Z K`.  With det-def-localizing-closure-ctf-equals-bc (2), `K`, `H`, `B` lie in
-   the localizing categories (sk-def-localizing-closure, full).  For `A` in `Loc(Dbc(Z))`,
+   the localizing categories (definition-localizing-subcategory, full).  For `A` in `Loc(Dbc(Z))`,
    the Brown bijection, step 2 and step 3 give
    `Φ_A : Hom(A, B) ≃ Hom(i_* A, K) ≃ Hom(A, H)`, natural in `A` and `K`.
 9. Yoneda: `α_K = Φ_B (𝟙 B)` and `β_K = Φ_H⁻¹ (𝟙 H)` are inverse, and naturality of `Φ` in

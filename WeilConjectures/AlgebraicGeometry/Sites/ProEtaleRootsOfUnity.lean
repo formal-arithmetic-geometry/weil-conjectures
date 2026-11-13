@@ -70,7 +70,7 @@ forgetful functor from the small pro-étale site is continuous. -/
 theorem isSheaf_structurePresheaf : Presheaf.IsSheaf (ProEt.topology S) (structurePresheaf S) :=
   Functor.op_comp_isSheaf_of_isSheaf _ _ _ _ (isSheaf_Γ proetaleTopology)
 
-/-- Blueprint `def-pur-proetale-structure-sheaf`: The structure sheaf of rings on the small
+/-- Blueprint `definition-tate-twists--1`: The structure sheaf of rings on the small
 pro-etale site.
 
 The structure sheaf `𝒪_S` on the small pro-étale site `S_proét`: the sheaf of commutative rings
@@ -97,7 +97,7 @@ lemma gmPresheaf_map_apply {U V : S.ProEt} (h : V ⟶ U) (x : (gmPresheaf S).obj
       h.left.appTop ((Additive.toMul x.down : Γ(U.left, ⊤)ˣ) : Γ(U.left, ⊤)) :=
   rfl
 
-/-- Blueprint `def-pur-proetale-units-sheaf`: The multiplicative group sheaf G_m on the small
+/-- Blueprint `definition-tate-twists--1`: The multiplicative group sheaf G_m on the small
 pro-etale site.
 
 The multiplicative group `𝔾_{m,S} = 𝒪_S^×` on `S_proét`: `U ↦ Γ(U, 𝒪_U)ˣ`
@@ -111,7 +111,7 @@ noncomputable def gmSheaf : Sheaf (ProEt.topology S) AddCommGrpCat.{u + 1} :=
 
 variable (N : ℕ)
 
-/-- Blueprint `def-pur-roots-of-unity-sheaf`: The pro-etale sheaf of roots of unity.
+/-- Blueprint `definition-tate-twists--1`: The pro-etale sheaf of roots of unity.
 
 The sheaf `μ_{N,S}` of `N`-th roots of unity on the small pro-étale site: the kernel of the
 `N`-th power map `[N] = N • 𝟙 : 𝔾_{m,S} ⟶ 𝔾_{m,S}` (written additively). Its sections over `U`

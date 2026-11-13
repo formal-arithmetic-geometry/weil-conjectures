@@ -129,7 +129,7 @@ theorem Hom.exists_injective_fieldPoints_algHom [IsAffine X] (f : X ⟶ Spec (.o
 
 variable [Finite k]
 
-/-- Blueprint `lem-wf-point-count-linear-growth`: Linear growth of the point count on an affine
+/-- Blueprint `lemma-point-count-bound--1`: Linear growth of the point count on an affine
 curve.
 
 Let `X` be an affine scheme of finite type and of dimension at most one over a finite field `k`
@@ -198,7 +198,7 @@ theorem Hom.exists_pointCount_le_mul_pow [IsAffine X] (f : X ⟶ Spec (.of k))
 
 /-- On an affine scheme of finite type and dimension at most one over a finite field `k` with
 `q` elements, the closed points of degree `e` number at most `A q ^ e`, in any finite set of
-them (a form of `lem-wf-point-count-linear-growth`): each contributes `deg x ≥ 1` points over
+them (a form of `lemma-point-count-bound--1`): each contributes `deg x ≥ 1` points over
 `𝔽_(q ^ e)`. -/
 theorem Hom.exists_card_filter_degreeOver_le [IsAffine X] (f : X ⟶ Spec (.of k))
     [LocallyOfFiniteType f] (hX : topologicalKrullDim X ≤ 1) :

@@ -23,8 +23,8 @@ at a geometric point `y` (`AlgebraicGeometry.Scheme.UniversalCovers`). Every lis
 (`IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk`; the regular
 case is `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_upperStar_universalCover`).
 
-This is the `ℚ̄_ℓ`-part of the blueprint `cor-galois-lisse-representations` in the form needed
-here. The blueprint deduces it from the case of finite coefficients by passing to the
+This is the `ℚ̄_ℓ`-part of the blueprint `proposition-lattices-representations-normal-scheme` in the
+form needed here. The blueprint deduces it from the case of finite coefficients by passing to the
 coefficient stages; in the Bhatt–Scholze model of lisse sheaves used in this project
 (pro-étale locally free `ℚ̄_ℓ,Y`-modules, whose sections are *locally finite* continuous
 `ℚ̄_ℓ`-valued functions) we argue with the descent data of a trivialisation instead, following
@@ -73,10 +73,10 @@ lemma matrix_ext_eval {T : Type*} [TopologicalSpace T] {n : ℕ}
   Matrix.ext fun i j ↦ Subtype.ext (ContinuousMap.ext fun t ↦ congrFun (congrFun (h t) i) j)
 
 /-- **Lisse sheaves are constant on the universal cover** (blueprint:
-`cor-galois-lisse-representations`, the case `Λ = ℚ̄_ℓ`). On a connected normal Noetherian
-scheme `Y` (its local rings are integrally closed domains), the pullback of a lisse `ℓ`-adic
-sheaf to the universal profinite étale cover `Ỹ_y` at a geometric point `y` is isomorphic to
-`ℚ̄_ℓⁿ` for some `n`. -/
+`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`). On a connected normal
+Noetherian scheme `Y` (its local rings are integrally closed domains), the pullback of a lisse
+`ℓ`-adic sheaf to the universal profinite étale cover `Ỹ_y` at a geometric point `y` is isomorphic
+to `ℚ̄_ℓⁿ` for some `n`. -/
 theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk
     [IsLocallyNoetherian Y] [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))

@@ -24,8 +24,8 @@ points of the special fibre `X_s × Y_s`
 that its source and target are bounded constructible, that the total spaces locally embed into
 `𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the generic-slicing step holds in chart dimension `m + m' - 1`:
 by the generic-slicing step (`NearbyCyclesModel.SliceKunnethFormula`, blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"), `C` vanishes on the special fibre
-`(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"), `C` vanishes on the special
+fibre `(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
 
 ## Proof
 
@@ -479,11 +479,11 @@ private lemma exists_coordinates_isIso_kunnethMap_of_slice
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
-locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
-`N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
-Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
+`proposition-external-kunneth-formula-nearby-cycles`, "Finite support"; Illusie, *Autour du théorème
+de monodromie locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of
+models `M`, `N` of finite type and bounded constructible `A`, `B` such that the source and the
+target of the Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed
+into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
 (`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
 many closed points of the special fibre `X_s × Y_s`.
 

@@ -35,7 +35,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/
 lem-weil-pbc-standard-quotients-perfect.md, node order 1254; Stacks Project, Tag 0657
-(blueprint: lem-weil-pbc-standard-quotients-perfect).
+(blueprint: lemma-reduction-derived-nakayama--1).
 -/
 
 @[expose] public noncomputable section
@@ -50,7 +50,7 @@ namespace AlgebraicGeometry
 
 /-- An exact scalar presentation gives its normalized two-term finite-free resolution.
 Source: Stacks Tags 0115 and 0657, the cohomology calculation in proof steps 3--4
-(blueprint: lem-weil-pbc-standard-quotients-perfect). -/
+(blueprint: lemma-reduction-derived-nakayama--1). -/
 private theorem twoTermResolution {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R)
     (q : ModuleCat.of R R ⟶ M)
@@ -143,7 +143,7 @@ private theorem twoTermResolution {R : Type u} [CommRing R]
 
 /-- A quotient whose kernel is a principal ideal is exact after scalar multiplication.
 Source: the elementary divisibility calculation in proof step 2
-(blueprint: lem-weil-pbc-standard-quotients-perfect). -/
+(blueprint: lemma-reduction-derived-nakayama--1). -/
 private theorem principalExact {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R) (q : ModuleCat.of R R ⟶ M)
     (hq : ∀ x : R, q x = 0 ↔ x ∈ Ideal.span ({a} : Set R)) :
@@ -164,7 +164,7 @@ private theorem principalExact {R : Type u} [CommRing R]
 
 /-- The canonical quotient identification retains the specified reduction homomorphism.
 Source: Mathlib `PadicInt.ker_toZModPow`, proof step 1
-(blueprint: lem-weil-pbc-standard-quotients-perfect). -/
+(blueprint: lemma-reduction-derived-nakayama--1). -/
 private theorem baseEquiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
     ∃ e : ZMod (l ^ n) ≃+* PadicInt l ⧸
       (Ideal.span ({(l : PadicInt l)} : Set (PadicInt l))) ^ n,
@@ -182,7 +182,7 @@ private theorem baseEquiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
 
 /-- The recorded generator of the nonzero maximal ideal is nonzero.
 Source: `Padic.extension_integers_dvr`, proof step 1
-(blueprint: lem-weil-pbc-standard-quotients-perfect). -/
+(blueprint: lemma-reduction-derived-nakayama--1). -/
 private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Padic.coefficientExtensionUniformizer l E ≠ 0 := by
@@ -203,7 +203,7 @@ corresponding two-term finite-free complexes and are finite as sets.
 
 Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/
 lem-weil-pbc-standard-quotients-perfect.md, Proof and Source note; Stacks Project, Tag 0657
-(blueprint: lem-weil-pbc-standard-quotients-perfect).
+(blueprint: lemma-reduction-derived-nakayama--1).
 
 Proof plan (the five DAG steps):
 1. By `def-weil-l-adic-numbers`, the base ring is a DVR with uniformizer `l` and

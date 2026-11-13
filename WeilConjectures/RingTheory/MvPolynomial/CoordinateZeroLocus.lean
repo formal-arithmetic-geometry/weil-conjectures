@@ -24,7 +24,7 @@ finite-dimensional, hence artinian, `K`-algebra.
 Geometrically: the set of points of `𝔸ⁿ_K` all of whose coordinates lie in given finite sets of
 closed points of the line is a finite set of closed points. This is the "finite product of finite
 sets" in the finite-support step of Gabber's Künneth formula (blueprint
-`sk-prop-tf-nearby-external-kunneth`).
+`proposition-external-kunneth-formula-nearby-cycles`).
 
 -/
 

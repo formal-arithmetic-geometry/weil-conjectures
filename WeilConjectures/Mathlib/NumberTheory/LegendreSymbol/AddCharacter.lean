@@ -58,7 +58,8 @@ variable (L) in
 of `K`. For a finite field `k₀` of characteristic `p` and a nontrivial character `Ψ` of `𝔽_p`,
 `Ψ.compTrace k₀` is *the* nondegenerate additive character `ψ = Ψ ∘ Tr_{k₀/𝔽_p}` of `k₀`, and
 over `𝔽_{qⁿ}` the character `ψₙ = ψ ∘ Tr_{𝔽_{qⁿ}/k₀}` is `ψ.compTrace 𝔽_{qⁿ}`.
-(blueprint: `def-fd-additive-character`; sketch blueprint: `def-fd-additive-character`) -/
+(blueprint: `theorem-weight-bound-affine-line--1`; sketch blueprint:
+`theorem-weight-bound-affine-line--1`) -/
 noncomputable def compTrace (ψ : AddChar K R) : AddChar L R :=
   ψ.compAddMonoidHom (Algebra.trace K L).toAddMonoidHom
 
@@ -68,7 +69,7 @@ lemma compTrace_apply (ψ : AddChar K R) (x : L) :
   rfl
 
 /-- The induced character of a nontrivial character along a finite separable extension is
-nontrivial: the trace is surjective. (sketch blueprint: `def-fd-additive-character`) -/
+nontrivial: the trace is surjective. (sketch blueprint: `theorem-weight-bound-affine-line--1`) -/
 theorem compTrace_ne_one [FiniteDimensional K L] [Algebra.IsSeparable K L] {ψ : AddChar K R}
     (hψ : ψ ≠ 1) : ψ.compTrace L ≠ 1 := by
   obtain ⟨a, ha⟩ := ne_one_iff.mp hψ
@@ -78,7 +79,8 @@ theorem compTrace_ne_one [FiniteDimensional K L] [Algebra.IsSeparable K L] {ψ :
 /-- **The nondegenerate additive character is primitive**: for a nontrivial character `ψ` of
 `K` and a finite separable extension `L / K`, every scaling `x ↦ ψ_L(a x)`, `a ∈ Lˣ`, of the
 induced character is again nontrivial.
-(blueprint: `def-fd-additive-character`; sketch blueprint: `def-fd-additive-character`) -/
+(blueprint: `theorem-weight-bound-affine-line--1`; sketch blueprint:
+`theorem-weight-bound-affine-line--1`) -/
 theorem isPrimitive_compTrace [FiniteDimensional K L] [Algebra.IsSeparable K L]
     {ψ : AddChar K R} (hψ : ψ ≠ 1) : (ψ.compTrace L).IsPrimitive :=
   IsPrimitive.of_ne_one (compTrace_ne_one hψ)
@@ -86,7 +88,8 @@ theorem isPrimitive_compTrace [FiniteDimensional K L] [Algebra.IsSeparable K L]
 /-- Transitivity of induced characters: for a tower `M / L / K` of finite extensions,
 `(ψ_L)_M = ψ_M`, i.e. `ψ(Tr_{L/K}(Tr_{M/L}(x))) = ψ(Tr_{M/K}(x))`. In particular
 `ψₙ = ψ ∘ Tr_{𝔽_{qⁿ}/k₀} = Ψ ∘ Tr_{𝔽_{qⁿ}/𝔽_p}`.
-(blueprint: `def-fd-additive-character`; sketch blueprint: `def-fd-additive-character`) -/
+(blueprint: `theorem-weight-bound-affine-line--1`; sketch blueprint:
+`theorem-weight-bound-affine-line--1`) -/
 theorem compTrace_compTrace [IsScalarTower K L M] [Module.Free K L] [Module.Finite K L]
     [Module.Free L M] [Module.Finite L M] (ψ : AddChar K R) :
     (ψ.compTrace L).compTrace M = ψ.compTrace M := by
@@ -102,7 +105,7 @@ section Orthogonality
 group `A` with values in a domain and `c ∈ R`,
 `∑_{x ∈ A} c ψ(x) = c · #A` if `ψ = 1` and `0` otherwise. Applied to `ψ_a = ψ(a ·)` on
 `k₀ = 𝔽_q` this is `∑_x c ψ_a(x) = c q` or `0`.
-(blueprint: `lem-fd-character-orthogonality`; sketch blueprint: `lem-fd-additive-orthogonality`) -/
+(blueprint: `corollary-plancherel--1`; sketch blueprint: `corollary-plancherel--1`) -/
 theorem sum_const_mul_eq_ite {A : Type*} [AddGroup A] [Fintype A] [IsDomain R]
     (ψ : AddChar A R) (c : R) [Decidable (ψ = 1)] :
     ∑ x, c * ψ x = if ψ = 1 then c * Fintype.card A else 0 := by
@@ -117,7 +120,7 @@ finite separable extension `L / K` with `L` finite and the induced character
 `ψ_L = ψ ∘ Tr_{L/K}`,
 `∑_{y ∈ L} ψ_L((x - x') y) = #L` if `x = x'` and `0` otherwise. For `L = 𝔽_{qⁿ}` over
 `K = k₀` this is `∑_y ψₙ((x - x') y) = qⁿ δ_{x, x'}`.
-(blueprint: `lem-fd-additive-orthogonality`; sketch blueprint: `lem-fd-additive-orthogonality`) -/
+(blueprint: `corollary-plancherel--1`; sketch blueprint: `corollary-plancherel--1`) -/
 theorem sum_compTrace_sub_mul [Algebra K L] [FiniteDimensional K L] [Algebra.IsSeparable K L]
     [Fintype L] [DecidableEq L] [IsDomain R] {ψ : AddChar K R} (hψ : ψ ≠ 1) (x x' : L) :
     ∑ y : L, ψ.compTrace L ((x - x') * y) = if x = x' then (Fintype.card L : R) else 0 := by

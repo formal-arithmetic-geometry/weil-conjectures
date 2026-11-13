@@ -18,7 +18,8 @@ finite type. The cohomology groups `Hⁿ(S, ℤ/ℓᵐ)` are finite
 `Hⁿ(S_proét, ℤ/ℓᵐ) ≅ Hom_{D(S_ét, Λ)}(Λ_S, Λ_S[n])`, `Λ = ℤ/ℓᵐ`
 (`AlgebraicGeometry.ProEtale.unitShiftAddEquivFiniteAdicH`), they are the cohomology groups of
 `RΓ(S, Λ)`, a perfect complex of `Λ`-modules
-(`AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections`, blueprint `sk-lem-finite`).
+(`AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections`, blueprint
+`lemma-perfect-complexes-geometric-point`).
 -/
 
 @[expose] public section

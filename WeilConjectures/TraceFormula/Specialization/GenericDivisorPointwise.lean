@@ -23,8 +23,9 @@ Let `X` be a separated `k`-scheme of finite type and `Z = V(I) ⊆ X` a closed s
 * vanishing near a point can be checked on an open neighbourhood `V` of that point in `X`
   (`ProEtale.CondensedRing.defectVanishesNear_of_isOpenImmersion`), by the smooth exchange.
 
-Together, they reduce blueprint `det-sp-generic-divisor` to the vanishing of the defect near each
-generic point `ζ` of `Z`, on an arbitrarily small open neighbourhood of `ζ` in `X`
+Together, they reduce blueprint `lemma-vanishing-generic-points-principal-divisor--1` to the
+vanishing of the defect near each generic point `ζ` of `Z`, on an arbitrarily small open
+neighbourhood of `ζ` in `X`
 (`ProEtale.CondensedRing.exists_dense_isZero_specializationDefect_of_forall_isOpenImmersion`).
 
 -/
@@ -139,9 +140,9 @@ theorem defectVanishesNear_of_isOpenImmersion {V : Over (Spec (.of k))}
   exact ⟨(centreMap g I).left ''ᵁ U', ⟨z', hzU', rfl⟩,
     isZero_restrict_specializationDefect_image k' I g L U' hL⟩
 
-/-- **Reduction of blueprint `det-sp-generic-divisor` to neighbourhoods of the generic points**:
-suppose that for every generic point `ζ` of an irreducible component of `Z` there are an open
-immersion `g : V ⟶ X` and a point `ζ'` of `Z ∩ V` over `ζ` such that the defect
+/-- **Reduction of blueprint `lemma-vanishing-generic-points-principal-divisor--1` to neighbourhoods
+of the generic points**: suppose that for every generic point `ζ` of an irreducible component of `Z`
+there are an open immersion `g : V ⟶ X` and a point `ζ'` of `Z ∩ V` over `ζ` such that the defect
 `C_{V, Z ∩ V}(g^* L)` vanishes near `ζ'`. Then there is a dense open `U ⊆ Z` over which
 `C_{X,Z}(L)` vanishes. -/
 theorem exists_dense_isZero_specializationDefect_of_forall_isOpenImmersion

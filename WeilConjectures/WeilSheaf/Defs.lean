@@ -18,13 +18,13 @@ public import WeilConjectures.WeilSheaf.Stalk
 # The interface of `ℓ`-adic Weil sheaves
 
 The blueprint develops `ℓ`-adic Weil sheaves, their weights, their Fourier transform and the
-six operations in the blocks `sec-purity-real-sheaves`, `sec-fourier-transform`,
-`sec-six-functors`, `sec-trace-formula` and `sec-poincare-duality`. This file gathers, by
-importing them, the files that phrase that vocabulary, so that the blocks that share it share
-one copy.
+six operations in the blocks `chap-Purity-of-real-sheaves`, `chap-The-Fourier-transform`,
+`chap-The-six-operations-on-Dbctf`, `chap-The-trace-formula` and
+`chap-Verdier-and-Poincare-duality`. This file gathers, by importing them, the files that phrase
+that vocabulary, so that the blocks that share it share one copy.
 
 `AlgebraicGeometry.WeilSheaf` and `AlgebraicGeometry.WeilComplex` are defined in
-`WeilConjectures.WeilSheaf.Category`, following the blueprint (`def-weil-weil-sheaf-complex`):
+`WeilConjectures.WeilSheaf.Category`, following the blueprint (`definition-weil-structure`):
 a Weil sheaf is a constructible `ℓ`-adic sheaf of `ℚ̄_ℓ`-modules on the small pro-étale site of
 the geometric fiber `X̄ = X ×_{k₀} k̄` (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`,
 built on the constant sheaf `ℚ̄_ℓ,X̄` of continuous `ℓ`-adic functions) with an isomorphism

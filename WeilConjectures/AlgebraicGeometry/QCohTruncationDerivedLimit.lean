@@ -40,7 +40,7 @@ of its lower truncations. Source: Stacks Project, Tag 08D3
 
 Proof: On the basis of affine opens, all positive cohomology of every cohomology
 sheaf vanishes by pqf-lem-affine-vanishing, since schemeDerivedQCohProperty says these
-sheaves are quasi-coherent (def-pc-derived-category). Apply
+sheaves are quasi-coherent (lemma-coherent-base-change-invertible-sheaves). Apply
 lem-pc-ringed-space-truncation-derived-limit with bound zero. Its Roos triangle uses
 exactly the standard truncation projections (def-sbc-standard-tstructure-derived-category)
 and the product in D(O_X) (def-weil-derived-limit). This gives the displayed triangle,

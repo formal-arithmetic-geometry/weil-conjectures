@@ -289,7 +289,7 @@ is componentwise.
 2. Apply [lem-pur-ringed-site-grothendieck-abelian] and [prop-pur-kinjective-resolutions-exist] to
 that small ringed site. This gives Grothendieck abelianness and unbounded K-injective resolutions
 in $\mathscr S(B)$. Exact evaluation descends termwise by
-[lem-weil-pbc-exact-functor-derived-factorization]. A morphism in the derived category is
+[situation-conventions]. A morphism in the derived category is
 invertible exactly when its cone is acyclic; its evaluated cones are the cones of its evaluations.
 Componentwise cohomology therefore proves joint detection of isomorphisms. This uses only
 localization of complexes of systems, not a category of diagrams in triangulated categories.

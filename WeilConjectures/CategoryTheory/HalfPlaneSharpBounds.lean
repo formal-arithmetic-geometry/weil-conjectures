@@ -33,8 +33,8 @@ private theorem pullback_bot_eq_kernel
     exact (Subobject.bot_factors_iff_zero _).mpr (kernelSubobject_arrow_comp f)
 
 /-- Sharp numerical stabilization bounds for a lower-half-plane exact couple.
-Source: Stacks Tags 011T, 0BDU, 0BDV; blueprint steps 3--5 of thm-sp-truncation-e2
-(blueprint: lem-sp-half-plane-sharp-bounds).
+Source: Stacks Tags 011T, 0BDU, 0BDV; blueprint steps 3--5 of
+lemma-uniform-bound-proper-direct-image--1 (blueprint: lem-sp-half-plane-sharp-bounds).
 
 Proof: Each later E term is a subquotient of the initial E term, so induction
 preserves its lower-half-plane support. A nonzero term therefore has p>=0 and

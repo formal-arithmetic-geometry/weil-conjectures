@@ -56,12 +56,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- **Gabber's Künneth formula for proper models with `𝒪_E`-coefficients** (blueprint
-`sk-prop-tf-nearby-external-kunneth`; Illusie, *Autour du théorème de monodromie locale*, proof of
-Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`, `N` of finite
-type along proper structure morphisms, whose total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S`,
-if the generic-slicing step holds in chart dimension `m + m' - 1` with `𝒪_E`-coefficients for
-every `E` and with `ℚ̄_ℓ`-coefficients, the Künneth map `Π_{A,B}` of bounded constructible
-`𝒪_E`-complexes `A`, `B` on noetherian `X`, `Y` is an isomorphism.
+`proposition-external-kunneth-formula-nearby-cycles`; Illusie, *Autour du théorème de monodromie
+locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
+`N` of finite type along proper structure morphisms, whose total spaces locally embed into `𝔸ᵐ_S`,
+`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1` with
+`𝒪_E`-coefficients for every `E` and with `ℚ̄_ℓ`-coefficients, the Künneth map `Π_{A,B}` of bounded
+constructible `𝒪_E`-complexes `A`, `B` on noetherian `X`, `Y` is an isomorphism.
 
 This is the cone argument: the cone of `Π_{A,B}` has vanishing reduction and rationalization
 (`ProEtale.CondensedRing.isIso_of_isIso_extendScalars_residueField_padicAlgCl`), since the

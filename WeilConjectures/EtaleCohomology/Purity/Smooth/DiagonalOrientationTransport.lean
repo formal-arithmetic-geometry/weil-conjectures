@@ -189,9 +189,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [QuasiCompact f'] [HasInvertibleExponent Λ (pullback f f)]
   [HasInvertibleExponent Λ (pullback f' f')]
 
-/-- Blueprint `sk-prop-sp-purity-bc` at the unit, for an isomorphism of squares: the statement of
-`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for `g`, `g'` isomorphisms,
-given the compatibilities `hC` and `hε` of
+/-- Blueprint `proposition-compatibility-purity-base-change` at the unit, for an isomorphism of
+squares: the statement of `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange` for
+`g`, `g'` isomorphisms, given the compatibilities `hC` and `hε` of
 `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_baseChange_of_compat`, with
 `vω := Lg'^* ω_f ⟶ Rf'^! Lg^* Λ_Y ≅ ω_{f'}` the exceptional base change at the unit (an
 isomorphism, `g` being an open immersion). -/

@@ -35,7 +35,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 # Finite coefficient change for ordinary direct image
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-node order 2130 (blueprint: lem-coef-finite-direct-image).
+node order 2130 (blueprint: lemma-change-coefficients-direct-image--1).
 
 Scalar extension is the published left adjoint to exact derived restriction.
 The coefficient map is uniquely fixed by its scalar-unit/counit equation in D(B).
@@ -277,7 +277,7 @@ private theorem coefficient_naturality
 
 /-- Explicit size witness for the small etale site; no universe equality is imposed.
 Source: Mathlib essentiallySmall_of_small_of_locallySmall; blueprint order 2130
-(blueprint: lem-coef-finite-direct-image). -/
+(blueprint: lemma-change-coefficients-direct-image--1). -/
 instance AlgebraicGeometry.Etale.finiteCoefficientSiteSize (X : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -288,7 +288,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Canonical exact restriction/pullback comparison, in the unbounded categories.
 Source: blueprint order 2130; Stacks Tags 07A4 and 07A6
-(blueprint: lem-coef-finite-direct-image). -/
+(blueprint: lemma-change-coefficients-direct-image--1). -/
 def finiteCoefficientRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X) :
@@ -307,7 +307,7 @@ transpose with the pulled-back scalar unit gives the A-counit followed by the in
 scalar unit. This is precisely extension of the counit after pullback/scalar
 extension, expressed without choosing flat resolutions or an arbitrary comparison.
 Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6
-(blueprint: lem-coef-finite-direct-image). -/
+(blueprint: lemma-change-coefficients-direct-image--1). -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -335,7 +335,7 @@ def IsFiniteCoefficientDirectImageMap
 /-- Existence and uniqueness of the specified coefficient map, without finiteness or
 flatness of the coefficient morphism. These are properties of its construction.
 Source: blueprint order 2130, coefficient-map definition and proof Steps 2--3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: use lem-pur-derived-change-of-rings to compute scalar extension on flat K-flat
 representatives. Inverse image commutes with it by the canonical balancing comparison
@@ -364,7 +364,7 @@ theorem finiteCoefficientDirectImageMap_existsUnique
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
 uniquely determines it by the extended counit. Only that proof is postponed.
-Source: blueprint order 2130 (blueprint: lem-coef-finite-direct-image). -/
+Source: blueprint order 2130 (blueprint: lemma-change-coefficients-direct-image--1). -/
 def finiteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -384,7 +384,7 @@ transpose with the pulled-back scalar unit gives the A-counit followed by the in
 scalar unit. This is precisely extension of the counit after pullback/scalar
 extension, expressed without choosing flat resolutions or an arbitrary comparison.
 Source: blueprint order 2130, statement and proof Step 3; Stacks Tag 07A6
-(blueprint: lem-coef-finite-direct-image). -/
+(blueprint: lemma-change-coefficients-direct-image--1). -/
 def IsFiniteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -413,7 +413,7 @@ def IsFiniteCoefficientDirectImageMap
 /-- Existence and uniqueness of the specified coefficient map, without finiteness or
 flatness of the coefficient morphism. These are properties of its construction.
 Source: blueprint order 2130, coefficient-map definition and proof Steps 2--3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: use lem-pur-derived-change-of-rings to compute scalar extension on flat K-flat
 representatives. Inverse image commutes with it by the canonical balancing comparison
@@ -459,7 +459,7 @@ theorem finiteCoefficientDirectImageMap_existsUnique
 
 /-- The actual B-linear coefficient projection map, chosen from a theorem that
 uniquely determines it by the extended counit. Only that proof is postponed.
-Source: blueprint order 2130 (blueprint: lem-coef-finite-direct-image). -/
+Source: blueprint order 2130 (blueprint: lemma-change-coefficients-direct-image--1). -/
 def finiteCoefficientChangeDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -1047,7 +1047,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Naturality of the specified coefficient projection, as an equality in D(X,B).
 Source: blueprint order 2130, naturality clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: take B-geometric transposes. Naturality of the A-counit and the scalar units
 makes the two scalar-unit precomposites equal. The scalar-adjunction bijection and
@@ -1163,7 +1163,7 @@ attribute [-instance] ProEtale.pbcRestriction_isRightAdjoint
 
 /-- Geometric composition coherence, with the canonical direct-image compositors.
 Source: blueprint order 2130, composition clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: the canonical compositor is normalized by the pasted inverse-image adjunction.
 Take the B-coefficient composite geometric transpose. The one-step map transposes to
@@ -1240,7 +1240,7 @@ attribute [-instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint
 
 /-- Successive coefficient changes, including nonquotient maps and identity changes.
 Source: blueprint order 2130, coefficient-chain clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: take C-geometric transposes. The B-to-C defining equation followed by
 naturality reduces the two-step transpose to S_BC(S_AB(ε_A)). On flat K-flat models,
@@ -1292,7 +1292,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Naturality of the specified coefficient projection, as an equality in D(X,B).
 Source: blueprint order 2130, naturality clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: take B-geometric transposes. Naturality of the A-counit and the scalar units
 makes the two scalar-unit precomposites equal. The scalar-adjunction bijection and
@@ -1490,7 +1490,7 @@ private theorem composition_rightAdjointUniq
 
 /-- Geometric composition coherence, with the canonical direct-image compositors.
 Source: blueprint order 2130, composition clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: the canonical compositor is normalized by the pasted inverse-image adjunction.
 Take the B-coefficient composite geometric transpose. The one-step map transposes to
@@ -1576,7 +1576,7 @@ attribute [-instance] AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint
 
 /-- Successive coefficient changes, including nonquotient maps and identity changes.
 Source: blueprint order 2130, coefficient-chain clause and proof Step 3
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: take C-geometric transposes. The B-to-C defining equation followed by
 naturality reduces the two-step transpose to S_BC(S_AB(ε_A)). On flat K-flat models,
@@ -1934,7 +1934,7 @@ namespace AlgebraicGeometry.Etale
 finite-type direct image on a bounded constructible complex of finite Tor amplitude.
 No flatness of the finite algebra B over A is assumed.
 Source: blueprint order 2130, etale isomorphism clause
-(blueprint: lem-coef-finite-direct-image).
+(blueprint: lemma-change-coefficients-direct-image--1).
 
 Proof: the positive-level coefficient ring is finite, hence Noetherian, and B is
 finitely presented as a module over it. The finite-type source has finite Krull

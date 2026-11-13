@@ -106,7 +106,7 @@ Source: Stacks Project, Cohomology of Sheaves, Section 20.23, Definitions
 Proof:
 1. The Zariski site is a poset, so permuting intersections preserves their
    restriction maps. Restriction to increasing tuples commutes with the signed
-   face sum (Tag 01FK; def-sc-zariski-site, def-weil-pbc-site-cech-complex).
+   face sum (Tag 01FK; lemma-uniform-bounds-pro-etale-affines, def-weil-pbc-site-cech-complex).
 2. Extend an increasing-tuple cochain by the sign of the sorting permutation
    on distinct tuples and by zero on repeated tuples. Deleting an entry gives
    the same face sign on both sides, so this is a cochain map (Tags 01FJ, 01FK).

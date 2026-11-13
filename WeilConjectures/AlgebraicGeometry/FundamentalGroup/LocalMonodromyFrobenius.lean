@@ -20,7 +20,7 @@ geometric fibres `U ⊆ C`, and let `V ⊆ C` be an open with `V ∖ U = {z}`. A
 roots of unity of `𝔽̄_q` through `Q = q ^ m`. Hence `Q - 1` kills the local monodromy at `z` of a
 `ℤ / N`-torsor on `U` which is fixed by `Φ ^ m`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.exists_natCast_sub_one_mul_monodromy_eq_zero`). This is
-the Frobenius action on the boundary module of blueprint `lem-wf-open-curve-residue-sequence`.
+the Frobenius action on the boundary module of blueprint `proposition-no-fixed-class-degree-one--1`.
 -/
 
 @[expose] public section
@@ -90,7 +90,7 @@ open FiniteEtale
 
 variable {K : Type u} [Field K] [Finite K]
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the Frobenius acts on the boundary module
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the Frobenius acts on the boundary module
 `ℤ / N (-1)` at a boundary point `z` through `Q = q ^ m`, for a power `Φ ^ m` fixing `z`.
 
 Let `U₀ ⊆ C₀` be a smooth curve over `K = 𝔽_q` in a compactification `c` by a smooth curve,

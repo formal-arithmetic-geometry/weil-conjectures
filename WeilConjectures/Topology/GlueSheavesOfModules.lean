@@ -163,7 +163,7 @@ of comparison isomorphisms for iterated restriction enter the statement.
 
 Source: Stacks Project, Sheaves, Section 00AK, Lemmas 04TN, 00AL and 00AM
 (blueprint: lem-weil-pbc-glue-sheaves-of-modules).
-Proof (using def-weil-sheaf-of-modules-category throughout):
+Proof (using situation-conventions throughout):
 1. For `s ∈ F(W)`, glue the sections `φᵢ(s|W ∩ Uᵢ)` in `G` using overlap agreement.
 2. Check naturality, additivity and O-linearity after restriction to `W ∩ Uᵢ`;
    separation of `G` makes these local identities global.

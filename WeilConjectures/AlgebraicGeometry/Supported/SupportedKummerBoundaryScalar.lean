@@ -74,7 +74,7 @@ import WeilConjectures.AlgebraicGeometry.Supported.SupportedKummerScalarOfSource
 /-!
 # Derived scalar extension of the supported Kummer boundary
 
-Source: blueprint lem-amb-cartier-kummer-map; Stacks 03PL and 0A45
+Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
 (blueprint: lem-asd-supported-kummer-boundary-scalar).
 -/
 
@@ -91,7 +91,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 
 /-- The normalized supported boundary over A is the derived scalar extension of
 its normalized Z/N boundary, with the sectionwise coefficient maps.
-Source: Stacks 07A4, 03PL; blueprint lem-amb-cartier-kummer-map, final paragraph
+Source: Stacks 07A4, 03PL; blueprint lemma-cycle-class-cartier-divisor, final paragraph
 (blueprint: lem-asd-supported-kummer-boundary-scalar).
 
 Proof: the supported constant over Z/N has geometric stalk Z/N on D and zero off

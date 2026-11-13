@@ -47,7 +47,7 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
   affine space over an affine base
   (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`).
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
-  (blueprint `det-thm-picard-hilb-general`, `lem-pc-hilb-representable`).
+  (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
 -/
 
 @[expose] public section
@@ -74,10 +74,10 @@ lemma Scheme.IdealSheafData.support_comap_baseChangeMap_subset (f : X ⟶ S) {T 
 
 namespace Scheme.IdealSheafData
 
-/-- **Openness of `F_U`** (blueprint `lem-pc-hilb-representable`, Step 5). Let `I` be an ideal
-sheaf on `X_T` whose closed subscheme `Z` is universally closed over `T`, and let `U ⊆ X` be
-open. Then there is an open `O ⊆ T`, the complement of the image in `T` of the points of `Z`
-lying over `X \ U`, such that for every `a : W ⟶ T` the pullback `Z_W` lies over `U` if and only
+/-- **Openness of `F_U`** (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Step 5). Let
+`I` be an ideal sheaf on `X_T` whose closed subscheme `Z` is universally closed over `T`, and let
+`U ⊆ X` be open. Then there is an open `O ⊆ T`, the complement of the image in `T` of the points of
+`Z` lying over `X \ U`, such that for every `a : W ⟶ T` the pullback `Z_W` lies over `U` if and only
 if `a` factors through `O`. -/
 theorem exists_opens_support_comap_subset (f : X ⟶ S) {T : Over S}
     (I : (pullback f T.hom).IdealSheafData)
@@ -229,12 +229,12 @@ lemma IsHilbertSubscheme.comap_pullbackResLEMap {d : ℕ} {W : Over V.toScheme}
   rw [← key]
   exact (isFinite_flat_finrank_iso_comp_iff _ _ d).2 hI
 
-/-- **`F_{V,U}` is the Hilbert functor of `U ⟶ V`** (blueprint `lem-pc-hilb-representable`,
-Step 3). For opens `V ⊆ S` and `U ⊆ f⁻¹ V`, pushing forward closed subschemes along the open
-immersions `U ×[V] W ⟶ X ×[S] W` is a natural transformation from `Hilb^d_{U/V}` to the
-restriction of `Hilb^d_{X/S}` to `V`-schemes. It is injective with image the `Z ⊆ X_W` lying
-in `U_W`; this uses that a closed subscheme of `U_W` finite over `W` is closed in `X_W`, as
-`f` is separated. -/
+/-- **`F_{V,U}` is the Hilbert functor of `U ⟶ V`** (blueprint
+`theorem-hilbert-schemes-points-smooth-curve--1`, Step 3). For opens `V ⊆ S` and `U ⊆ f⁻¹ V`,
+pushing forward closed subschemes along the open immersions `U ×[V] W ⟶ X ×[S] W` is a natural
+transformation from `Hilb^d_{U/V}` to the restriction of `Hilb^d_{X/S}` to `V`-schemes. It is
+injective with image the `Z ⊆ X_W` lying in `U_W`; this uses that a closed subscheme of `U_W` finite
+over `W` is closed in `X_W`, as `f` is separated. -/
 noncomputable def hilbertPresheafResLEι [IsSeparated f] (d : ℕ) :
     hilbertPresheaf (f.resLE V U h) d ⟶ (Over.map V.ι).op ⋙ hilbertPresheaf f d where
   app W := TypeCat.ofHom fun J ↦
@@ -301,8 +301,9 @@ lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V
 
 end ResLE
 
-/-- **The affine claim** (blueprint `lem-pc-hilb-representable`, Steps 1 and 4). For a morphism
-of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is representable.
+/-- **The affine claim** (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, Steps 1 and
+4). For a morphism of affine schemes `f : X ⟶ S`, the Hilbert functor `Hilb^d_{X/S}` is
+representable.
 
 The functions on `X` define a closed immersion of `X` into an affine space over `S`, so this
 follows from the case of affine spaces,
@@ -331,7 +332,7 @@ The proof glues the Hilbert schemes of the morphisms of affine schemes `U ⟶ V`
 `V ⊆ S` and `U ⊆ f⁻¹ V`, using the gluing criterion
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`.
 
-(blueprint: `det-thm-picard-hilb-general`, `lem-pc-hilb-representable`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
     (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :

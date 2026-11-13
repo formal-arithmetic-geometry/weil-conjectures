@@ -21,8 +21,8 @@ namespace AlgebraicGeometry
 
 /-- Every positive-degree cocycle on an open of U_i has a sectionwise boundary.
 
-Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1 (insertion homotopy).
-(blueprint: lem-pc-cech-local-positive-section-boundary)
+Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1 (insertion
+homotopy). (blueprint: lem-pc-cech-local-positive-section-boundary)
 
 Proof: An open W of U_i identifies with an open V of X contained in U_i.
 Evaluate the isomorphisms e and their differential compatibility hd on V.

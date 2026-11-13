@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.SquareZeroRelativeSectionKernelId
 
 /-! # Square-zero kernels of relative restriction on functions
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-square-zero-relative-section-kernel)
 -/
 
@@ -23,7 +23,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Products of functions vanishing on the smaller subscheme are zero.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim.
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
 (blueprint: lem-sc-square-zero-relative-section-kernel)
 
 Proof: On an affine open Spec A of X the two subschemes are Spec(A/I) and

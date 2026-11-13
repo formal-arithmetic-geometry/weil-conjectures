@@ -13,7 +13,7 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # Boundary geometry and forward comparison of unit divisors
 
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
 -/
 
 @[expose] public section
@@ -149,7 +149,7 @@ private theorem open_restriction_natural
   exact Scheme.algebraMap_germ_eq_germToFunctionField Y hxV _
 
 /-- Boundary geometry, compatible rational maps, and preservation of unit orders.
-Source: blueprint thm-sc-constant-invariance, affine unit quotient paragraph.
+Source: blueprint proposition-cohomology-smooth-affine-curve, affine unit quotient paragraph.
 (blueprint: lem-sc-affine-unit-divisor-base-change-core).
 
 Proof: put V = c.i(C), a nonempty open in the integral compactification X. Define the

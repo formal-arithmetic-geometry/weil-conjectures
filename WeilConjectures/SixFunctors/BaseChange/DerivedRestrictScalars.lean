@@ -34,7 +34,7 @@ abstract coefficient categories keeps the kernel from unfolding the concrete pul
 pushforward functors.
 
 This is the change of coefficients in the proof of the proper base change theorem (blueprint
-`sk-thm-reduction`).
+`proposition-proper-base-change-etale-site--1`).
 -/
 
 @[expose] public section

@@ -54,7 +54,7 @@ Source: Stacks Project, Tags 06YN, 06YY (scalar-change context), 03EK and 03ER.
 
 Proof:
 1. Write U for scalar restriction. Its composite with forgetting to abelian sheaves is
-   the forgetful functor over B. By lem-weil-pbc-module-sheaves-colimits-forgetful both
+   the forgetful functor over B. By situation-conventions both
    forgetful functors are faithful and exact and preserve small direct sums. Faithfulness
    detects zero objects, so they detect exactness. Thus U is exact, preserves and reflects
    acyclicity, and preserves small direct sums with their induced scalar action.

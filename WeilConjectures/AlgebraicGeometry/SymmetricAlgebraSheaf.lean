@@ -24,7 +24,7 @@ affine open is the localization at `f`, since `Γ(ℰ, D(f)) = Γ(ℰ, U)_f` and
 commutes with localization (`AlgebraicGeometry.Scheme.Modules.coequifibered_toSymPresheaf`).
 Hence the relative spectrum `Spec_X (Sym^• ℰ) ⟶ X` is defined by relative gluing
 (`AlgebraicGeometry.Scheme.Modules.symSpec`, `AlgebraicGeometry.Scheme.Modules.symSpecProj`):
-this is the vector bundle `E = Spec_Z (Sym^• ℰ)` of `def-pur-vector-bundle-zero-section`.
+this is the vector bundle `E = Spec_Z (Sym^• ℰ)` of `proposition-purity-vector-bundles`.
 -/
 
 @[expose] public section
@@ -167,7 +167,7 @@ theorem coequifibered_toSymPresheaf [F.IsQuasicoherent] :
   rw [Algebra.algebraMapSubmonoid, Submonoid.map_powers] at H
   exact H
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 The relative spectrum `Spec_X (Sym^• ℰ)` of the symmetric algebra of a quasi-coherent sheaf,
 glued from the affine schemes `Spec (Sym_{Γ(X, U)} Γ(ℰ, U))` over the affine opens `U`. -/
@@ -215,7 +215,7 @@ instance :
     (MorphismProperty.isomorphisms.iff _).mpr
       (by rw [NatTrans.id_app, Spec.map_id]; infer_instance)
 
-/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
 
 The *zero section* `X ⟶ Spec_X (Sym^• ℰ)`, defined by the augmentation `Sym^• ℰ ⟶ 𝒪_X`. -/
 noncomputable def symSpecZeroSection [F.IsQuasicoherent] : X ⟶ F.symSpec :=

@@ -12,7 +12,7 @@ import WeilConjectures.Algebra.Homology.Slice.SliceSystemExtensionConstruction
 
 /-! # Finite evaluation of extension by zero on strict coefficient towers
 
-Source: current blueprint det-sp-field-extension-towers, proof (2), open factor.
+Source: current blueprint theorem-sp-qbar, proof (2), open factor.
 The coefficient diagram consists of actual ring sheaves. In particular it may be
 formed from the pulled-back continuous condensed ell-power quotient rings. No
 native-to-constant coefficient presentation or finiteOpenIso is used.
@@ -36,7 +36,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
 /-- The ordinary evaluation comparison is the identity on the prescribed level
-objects. Source: det-sp-field-extension-towers, proof (2), open evaluation
+objects. Source: theorem-sp-qbar, proof (2), open evaluation
 (blueprint: lem-pur-native-open-finite-evaluation). -/
 def SliceSystemExtensionPresentation.evaluationIso
     (P : SliceSystemExtensionPresentation.{c, v, r} B U) (n : ℕ) :
@@ -71,7 +71,7 @@ private theorem sliceExtension_map_exact
     (S.mapNatIso (P.evaluationIso B U n)).symm h
 
 /-- Extension is exact on whole strict systems, as detected by ordinary evaluation.
-Source: det-sp-field-extension-towers, proof (2), exact open factor
+Source: theorem-sp-qbar, proof (2), exact open factor
 (blueprint: lem-pur-native-open-finite-evaluation).
 Proof: the evaluation comparison identifies each component with exact slice
 extension. Exact evaluation and the componentwise isomorphism criterion jointly
@@ -92,7 +92,7 @@ presentation fixes its action on every extension summand and every semilinear
 transition, including equal levels. Thus this is a map of whole derived systems.
 For the purity application B is the diagram of section rings of the pulled-back
 continuous condensed O_E/ell^(n+1), and U is the open object of a compactification.
-Source: current blueprint det-sp-field-extension-towers, proof (2), open factor;
+Source: current blueprint theorem-sp-qbar, proof (2), open factor;
 Stacks 03DI and 03DJ (blueprint: lem-pur-native-open-finite-evaluation).
 
 Proof: construct ordinary strict extension by direct sums and sheafification.

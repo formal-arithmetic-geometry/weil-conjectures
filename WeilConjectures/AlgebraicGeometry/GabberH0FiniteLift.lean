@@ -79,8 +79,8 @@ Proof:
    filtered-colimit surjectivity lifts them to F(U_j). Use
    `lem-weil-pbc-site-sheafification-sections-local`,
    `lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`,
-   `lem-weil-pbc-etale-base-change-finite-limits`,
-   `lem-weil-pbc-presheaf-pullback-sets-left-exact`, and
+   `situation-conventions`,
+   `situation-conventions`, and
    `lem-weil-pbc-filtered-colimit-sets-elementwise`.
 3. The image of V_j in U_j ×_X Z is open since this map is étale. Since
    U_j ×_X Z → U_j is a closed immersion, shrink U_j to an open with precisely

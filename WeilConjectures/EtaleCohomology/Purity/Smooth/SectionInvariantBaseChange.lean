@@ -15,8 +15,8 @@ In a cartesian square `g' ≫ f = f' ≫ g` with sections `s` of `f` and `s'` of
 with `g'`, the canonical base change map of dualizing complexes `Lg'^* ω_f ⟶ ω_{f'}`
 (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`) induces
 `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')` on section invariants when it is invertible, which is the case for
-`f` smooth (`sk-prop-cohsm` (c)). These are the fibre identifications of the deformation to the
-normal cone (`lem-pur-dnc-section-geometry` (1)).
+`f` smooth (`proposition-exceptional-inverse-image-smooth-morphism` (c)). These are the fibre
+identifications of the deformation to the normal cone (`prose-09-12` (1)).
 
 ## Main definitions
 
@@ -35,7 +35,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y X' Y' : Scheme.{u}} 
   {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [HasCompactification f] [HasCompactification f']
   [QuasiCompact f']
 
-/-- Blueprint `lem-pur-dnc-section-geometry` (1): *base change of section invariants.* In a
+/-- Blueprint `prose-09-12` (1): *base change of section invariants.* In a
 cartesian square `g' ≫ f = f' ≫ g` whose base change map of dualizing complexes
 `Lg'^* ω_f ⟶ ω_{f'}` is invertible, and for sections `s` of `f` and `s'` of `f'` with
 `s' ≫ g' = g ≫ s`,
@@ -51,9 +51,9 @@ noncomputable def sectionInvariantBaseChangeIso (sq : IsPullback g' f' f g)
     (upperStar (ModuleCat.{u + 1} Λ) s').leftDerivedFunctor.mapIso
       (asIso (dualizingComplexBaseChangeMap Λ sq))
 
-/-- Blueprint `sk-prop-cohsm` (c): for `f` smooth of relative dimension `d` over a
-quasi-separated base, the base change map of dualizing complexes `Lg'^* ω_f ⟶ ω_{f'}` is an
-isomorphism. -/
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism` (c): for `f` smooth of
+relative dimension `d` over a quasi-separated base, the base change map of dualizing complexes
+`Lg'^* ω_f ⟶ ω_{f'}` is an isomorphism. -/
 theorem isIso_dualizingComplexBaseChangeMap_of_smoothOfRelativeDimension [QuasiSeparatedSpace Y]
     [HasInvertibleExponent Λ X] (d : ℕ) [SmoothOfRelativeDimension d f]
     (sq : IsPullback g' f' f g) : IsIso (dualizingComplexBaseChangeMap Λ sq) := by

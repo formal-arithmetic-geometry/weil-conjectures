@@ -470,9 +470,9 @@ constructible modules, for the coefficient ring `E` of a finite extension `E` of
 and a Noetherian base scheme (the other ℓ-adic coefficient rings follow below).
 
 Source: Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15;
-blueprint sk-lem-proper-heart-bound and
-sk-thm-sfb-proper-base-change, integral compactness/direct-sums clause (1).
-(blueprint: lem-sfb-noetherian-proper-heart-uniform-bound)
+blueprint lemma-uniform-bound-proper-direct-image and
+proposition-proper-direct-image-constructible-complexes, integral compactness/direct-sums clause
+(1). (blueprint: lem-sfb-noetherian-proper-heart-uniform-bound)
 
 Proof: a proper morphism is of finite type and the base is quasi-compact. A finite
 collection of affine charts bounds the dimensions of all its geometric fibres by one

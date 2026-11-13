@@ -45,8 +45,8 @@ private theorem comparison_natural_second
 /-- The evaluation transpose commutes, in a fixed degree `n` and at a fixed object `K`, with
 the normalized shifts: those of `EtaleHomLeft` (`F(sA)` followed by the scalar shift) and of
 `EtaleHomRight` (Hom of the inverse scalar shift followed by `sB`).
-Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`, proof
-paragraph 2.
+Source: Stacks Project, Tags 08JC and 08J9; blueprint `lemma-change-coefficients-internal-hom--1`,
+proof paragraph 2.
 
 Proof. Postcompose both sides with the inverse of the `sB` shift and transpose through the
 tensor--Hom adjunction; the evaluation normalization `hB` turns the transposed right side

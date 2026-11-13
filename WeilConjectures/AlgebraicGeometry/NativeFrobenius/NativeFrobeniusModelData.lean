@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.WeilFrobeniusAction.WeilFrobeniusActio
 
 /-! # Explicit ordinary small model for native Frobenius
 
-Source: cor-coef-verdier-weil-equivariance, internal-Hom paragraph; Stacks 03D6 and 03EO.
+Source: prose-10-20, internal-Hom paragraph; Stacks 03D6 and 03EO.
 (blueprint: def-sf-native-frobenius-model-data)
 -/
 

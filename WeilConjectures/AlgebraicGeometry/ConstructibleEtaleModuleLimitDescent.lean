@@ -50,18 +50,18 @@ Proof (the module argument expands the source's instruction to use Tag 095N):
    (`lem-weil-pbc-affine-etale-site-colimit`), using compatibility of base change.
 4. Inverse image carries the descended free modules to the original ones, compatibly
    with their generating sections (`lem-weil-pbc-inverse-image-free-etale-module`), and
-   preserves their finite sums (`prop-weil-pbc-inverse-image-modules-exact`).
+   preserves their finite sums (`situation-conventions`).
 5. Descend the finitely many generating sections of the presentation map to a common
    later stage (`lem-weil-pbc-limit-pullback-sections-colimit`).
 6. Use these sections to define a presentation map there. After inverse image it is
    the original map: check each generator, using the free-module compatibility from
    step 4, the section comparison from step 5 and inverse-image composition
-   (`lem-weil-pbc-inverse-image-composition`, `lem-weil-pbc-inverse-image-module-adjunction`).
+   (`lem-weil-pbc-inverse-image-composition`, `situation-conventions`).
 7. Take the cokernel at that stage. It is constructible: the free summands are
    constructible (`lem-weil-pbc-etale-free-sheaf-constructible`), inverse image preserves
    constructibility (`prop-constructible-pullback`), and constructible module sheaves
    are closed under finite sums and cokernels (`thm-constructible-serre`).
-8. Inverse image preserves cokernels (`prop-weil-pbc-inverse-image-modules-exact`), so
+8. Inverse image preserves cokernels (`situation-conventions`), so
    the commuting presentation square identifies its cokernel with F.
 
 The Lean proof uses Mathlib directly for qcqs of the given limit cone. Steps 3-6

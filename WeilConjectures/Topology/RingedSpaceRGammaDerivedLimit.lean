@@ -203,16 +203,16 @@ lemma-RGamma-commutes-with-Rlim (blueprint: lem-pc-ringed-space-rgamma-derived-l
 Proof, following Tag 0D60:
 1. The site of opens is small. K-injective resolutions exist by
    `prop-pur-kinjective-resolutions-exist`, and sections preserve limits by
-   `lem-weil-pbc-module-sheaves-limits-sectionwise`. The right derived functor
+   `situation-conventions`. The right derived functor
    is triangulated (`lem-pc-right-derived-functor-triangulated`). Products exist
    by the generic K-injective product construction and
-   `lem-weil-derived-limit-existence`, using exact products in abelian groups
+   `lemma-reduction-derived-nakayama`, using exact products in abelian groups
    (`lem-pc-abelian-groups-exact-products`).
 2. Resolve each tower term by a K-injective complex. Its termwise product is
    K-injective and represents the derived product
    (`lem-pc-ringed-space-product-kinjective`). Sections identify it with the
    product of the sections complexes; exact products of abelian groups identify
-   this with the target derived product (`lem-weil-derived-limit-existence`).
+   this with the target derived product (`lemma-reduction-derived-nakayama`).
    The projection equations characterize the comparison. The triangulated
    functor sends the Roos triangle to the target Roos triangle
    by a triangle isomorphism. Its middle square follows after every product projection

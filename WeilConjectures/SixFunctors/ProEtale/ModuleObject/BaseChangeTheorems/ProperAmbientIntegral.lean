@@ -114,11 +114,11 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     all_goals rfl
 
 /-- **Proper base change on the ambient derived categories** (blueprint
-`det-thm-sfb-proper-base-change-integral` (3), for `𝒪_E`-coefficients): for a cartesian square
-`g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` proper, the base change map
-`Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` of the ambient derived categories of module objects over `𝒪̲_E` is
-an isomorphism for every bounded constructible `K`. As for `ℚ̄_ℓ`, the underlying square of
-schemes is only required to be equal to the square of the underlying morphisms. -/
+`proposition-proper-direct-image-constructible-complexes` (3), for `𝒪_E`-coefficients): for a
+cartesian square `g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` proper, the base
+change map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` of the ambient derived categories of module objects over
+`𝒪̲_E` is an isomorphism for every bounded constructible `K`. As for `ℚ̄_ℓ`, the underlying square
+of schemes is only required to be equal to the square of the underlying morphisms. -/
 theorem isIso_baseChangeMap_app_padicIntegers_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) {S T S' T' : Scheme.{u}} {p : S ⟶ T} {q : T' ⟶ T} {p' : S' ⟶ T'}
     {q' : S' ⟶ S} (sq' : CommSq q' p' p q) (hS : X.left = S) (hT : Y.left = T)

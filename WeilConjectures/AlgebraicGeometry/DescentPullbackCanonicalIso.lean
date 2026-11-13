@@ -308,13 +308,13 @@ back to the original scheme; together with being over `U`, this specifies the ca
 associativity isomorphism uniquely.
 
 Proof: (1) The pair `(r₀,r₁)` defines a map to `X ×_S X` by the universal property
-[def-pc-fibre-product]. Pull back the descent isomorphism [def-pd-descent-datum] along this
-pair to obtain the comparison; compatibility of morphisms of descent data gives naturality.
-(2) On `T ×_S T`, the required descent-morphism equation follows by applying the cocycle
-identity twice on `X ×_S X ×_S X`; inverse transport gives the inverse morphism.
-(3) For composable maps, the universal property [def-pc-fibre-product] identifies the
-iterated and direct pullbacks preserving both projections. Functoriality identifies their
-descent data and morphisms, giving the natural associativity comparison. -/
+[def-pc-fibre-product]. Pull back the descent isomorphism
+[proposition-jacobian-over-ground-field--1] along this pair to obtain the comparison; compatibility
+of morphisms of descent data gives naturality. (2) On `T ×_S T`, the required descent-morphism
+equation follows by applying the cocycle identity twice on `X ×_S X ×_S X`; inverse transport gives
+the inverse morphism. (3) For composable maps, the universal property [def-pc-fibre-product]
+identifies the iterated and direct pullbacks preserving both projections. Functoriality identifies
+their descent data and morphisms, giving the natural associativity comparison. -/
 theorem descent_pullback_canonical_iso (S : Scheme.{v}) :
     ∃ (pull : ∀ ⦃X T : Scheme.{v}⦄ (a : X ⟶ S) (b : T ⟶ S)
         (r : T ⟶ X) (hr : r ≫ a = b), Over.DescentDataCategory a ⥤ Over.DescentDataCategory b)

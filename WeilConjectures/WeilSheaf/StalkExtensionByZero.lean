@@ -18,10 +18,10 @@ import WeilConjectures.WeilSheaf.StalkUpperStar
 
 Let `j : U ⟶ X` be a quasi-compact open immersion of `k₀`-schemes and `G` a Weil sheaf on `U`.
 The extension by zero `j₀!G` (`AlgebraicGeometry.WeilSheaf.extensionByZero`) has the stalk
-prescription of blueprint `lem-cbc-proetale-extension-zero`: at a closed point `j z` of `U` its
-geometric stalk, with its local Frobenius, is that of `G` at `z`, and at a closed point outside
-`U` it vanishes. In particular `j₀!` preserves punctual purity, and, being exact, mixed upper
-weight bounds.
+prescription of blueprint `proposition-extension-zero-restriction-closed-subscheme`: at a closed
+point `j z` of `U` its geometric stalk, with its local Frobenius, is that of `G` at `z`, and at a
+closed point outside `U` it vanishes. In particular `j₀!` preserves punctual purity, and, being
+exact, mixed upper weight bounds.
 
 ## Main statements
 
@@ -30,7 +30,7 @@ weight bounds.
   missing `Ū` vanishes.
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_extensionByZero`: the stalk of `j₀!G` at a
   closed point `j z` of `U` is that of `G` at `z`, with its local Frobenius
-  (`lem-cbc-proetale-extension-zero`).
+  (`proposition-extension-zero-restriction-closed-subscheme`).
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.extensionByZero` and
   `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.extensionByZero`: `j₀!` preserves
   punctual purity and mixed upper weight bounds.
@@ -92,9 +92,9 @@ private lemma stalkAt_eq_of_degree_eq (F : WeilSheaf k₀ l X)
   rfl
 
 /-- **The stalks of the extension by zero inside `U`** (blueprint:
-`lem-cbc-proetale-extension-zero`, `(j_!K)_x̄ = K_x̄` for a geometric point `x̄` of `U`): the
-geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local Frobenius, is that of
-`G` at `z`. -/
+`proposition-extension-zero-restriction-closed-subscheme`, `(j_!K)_x̄ = K_x̄` for a geometric point
+`x̄` of `U`): the geometric stalk of `j₀!G` at a closed point `j z` of `U`, with its local
+Frobenius, is that of `G` at `z`. -/
 theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.finitePoints) :
     Nonempty ((((extensionByZero j).obj G).stalk
       ⟨j.base z.1, (Scheme.Hom.mem_finitePoints_iff_of_isIso j z.1).2 z.2⟩).Equiv

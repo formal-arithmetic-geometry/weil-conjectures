@@ -279,7 +279,7 @@ factor.
 
 Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `lem-fd-first-formula`) -/
+(sketch blueprint: `lemma-fourier-transform-constant-sheaf`) -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :

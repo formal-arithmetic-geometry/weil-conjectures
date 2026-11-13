@@ -397,7 +397,7 @@ set x_(n+1) = sigma_n (x_n - y_n). This locally lifts any section of the product
 4. Sheaf uniqueness (`def-weil-pbc-sites-and-cohomology`) makes this local lifting an
 epimorphism. Its sectionwise kernel is exactly the compatible sequences, with inclusion
 the tuple of limit projections. Thus the displayed short complex is short exact.
-5. Exact countable products and clause 2 of `lem-weil-derived-limit-existence` show
+5. Exact countable products and clause 2 of `lemma-reduction-derived-nakayama` show
 that the degree-zero product, with its localized projections, is a derived product.
 No enough-injectives hypothesis is used. The short exact sequence gives the canonical
 triangle `hSES.singleTriangle` by `lem-sf-derived-ses-triangle`. The product comparison

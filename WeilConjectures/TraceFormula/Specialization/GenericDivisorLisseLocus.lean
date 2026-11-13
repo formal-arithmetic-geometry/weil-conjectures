@@ -218,12 +218,12 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **Reduction of the generic vanishing along a divisor to the lisse case** (the shrinking step
-of blueprint `det-sp-generic-divisor`): let `X` be normal, `Z = V(h)`, `j : X ∖ Z ⟶ X`, `ζ` a
-generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module objects on `X ∖ Z`.
-There is an open neighbourhood `V` of `ζ` in `X`, with `Z ∩ V = V(h|_V)` and `ζ` corresponding to
-a generic point `ζ_V` of `Z ∩ V`, such that the restriction `K` of `F` to `V ∖ Z` comes from a
-bounded étale complex `F'` with finite locally constant homology sheaves, and the vanishing of
-`Le^* Ψ_V(j_{V!} K)` near `ζ_V` implies that of `Le^* Ψ_X(j_! F)` near `ζ`. -/
+of blueprint `lemma-vanishing-generic-points-principal-divisor--1`): let `X` be normal, `Z = V(h)`,
+`j : X ∖ Z ⟶ X`, `ζ` a generic point of `Z` and `F` a bounded constructible complex of `𝔽_E`-module
+objects on `X ∖ Z`. There is an open neighbourhood `V` of `ζ` in `X`, with `Z ∩ V = V(h|_V)` and `ζ`
+corresponding to a generic point `ζ_V` of `Z ∩ V`, such that the restriction `K` of `F` to `V ∖ Z`
+comes from a bounded étale complex `F'` with finite locally constant homology sheaves, and the
+vanishing of `Le^* Ψ_V(j_{V!} K)` near `ζ_V` implies that of `Le^* Ψ_X(j_! F)` near `ζ`. -/
 theorem exists_opens_lisse_reduction (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)}
     (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))

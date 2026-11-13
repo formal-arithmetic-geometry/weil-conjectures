@@ -12,7 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsEpi
 
 /-! # The image of nil-ideal units is the pushforward of the relative unit kernel.
 
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-nil-ideal-unit-image-relative-kernel)
 -/
@@ -85,7 +85,7 @@ private lemma image_kernel_comp_iso {C : Type*} [Category C] [Abelian C]
   exact ⟨(image.isoStrongEpiMono k (kernel.ι r) hk).symm⟩
 
 /-- The image of nil-ideal units is the pushforward of the relative unit kernel.
-Source: blueprint `lem-sc-brauer-zero-all-curves`, Proof, Step 1 and its Claim;
+Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim;
 the affine argument in `lem-sc-nil-ideal-units-additive-image-comparison`.
 (blueprint: lem-sc-nil-ideal-unit-image-relative-kernel)
 

@@ -16,8 +16,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! Bounded constructibility needed by condensed kernel-transform composition.
 
-Source: boundedness clauses in the statement of `lem-fd-kernel-composition`
-(blueprint: lem-fd-kernel-composition).
+Source: boundedness clauses in the statement of `proposition-fourier-inversion`
+(blueprint: proposition-fourier-inversion).
 
 The statement isolates the three boundedness assertions used to lift the ambient
 comparison: the convolution kernel is bounded constructible and both sides preserve

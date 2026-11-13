@@ -31,7 +31,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Hom
 # Constant coefficient tensor comparison for an open immersion
 
 Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-a1-kummer,
-lemma lem-exc-constant-tensor (blueprint: lem-exc-constant-tensor).
+lemma proposition-open-direct-image-preserves-finite (blueprint:
+proposition-open-direct-image-preserves-finite).
 
 The comparison is the existing unbounded projection-formula morphism at the constant
 module sheaf in degree zero. Its target is identified with the tensor by the constant

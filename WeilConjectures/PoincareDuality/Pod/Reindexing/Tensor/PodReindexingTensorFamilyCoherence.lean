@@ -40,7 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Section-normalized identity and composition for fixed normalized comparisons.
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
+Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
 Stacks 03EL and 07A4 (blueprint: lem-pod-reindexing-tensor-family-coherence).
 
 Proof: use Over.mapId and Over.mapComp on each original local section to define

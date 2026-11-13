@@ -196,7 +196,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 # Construction of the affine-space counit trace
 
 Source: blueprint sec-smooth-purity/sk-prop-an, Steps 5(b) and 6, detailed lemma
-lem-amb-affine-space-top-trace (blueprint: def-amb-affine-trace-construction).
+lemma-integral-linear-character--1 (blueprint: def-amb-affine-trace-construction).
 
 The coordinate model is `affineTraceTower S d`. Its unbounded left functor and right
 functor are ordered composites of the affine-line functors; the zero-dimensional
@@ -236,13 +236,14 @@ def affineTraceOpenLeft (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     (ProjectiveLine.affineChart S)).mapDerivedCategory
 
 /-- One affine-line left functor, on its specified standard compactification.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 abbrev affineTraceLineLeft (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     DerivedCategoryModule A (AffineSpace PUnit.{u + 1} S) ⥤ DerivedCategoryModule A S :=
   affineTraceOpenLeft A S ⋙ ordinaryFinitePushforward A (ProjectiveLine S ↘ S)
 
 /-- The right functor obtained by restricting the normalized projective-line right
-functor to the standard affine chart. Source: blueprint sk-prop-an, Step 5(b)
+functor to the standard affine chart. Source: blueprint proposition-purity-vector-bundles, Step 5(b)
 (blueprint: def-amb-affine-trace-construction). -/
 abbrev affineTraceLineRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
@@ -274,14 +275,16 @@ abbrev affineTraceRightTower {C : ℕ → Type*} [∀ d, Category (C d)]
   Nat.rec (motive := fun d ↦ C 0 ⥤ C d) (𝟭 _) (fun d G ↦ G ⋙ R d)
 
 /-- The ordered unbounded left functor of the coordinate tower.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 abbrev affineTraceLeft (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     (d : ℕ) → DerivedCategoryModule A (affineTraceTower S d) ⥤ DerivedCategoryModule A S :=
   affineTraceLeftTower (C := fun d ↦ DerivedCategoryModule A (affineTraceTower S d))
     (fun d ↦ affineTraceLineLeft A (affineTraceTower S d))
 
 /-- The ordered right functor: p* K(d)[2d] written as the iterated shifted-line twists.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 abbrev affineTraceRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u}) :
     (d : ℕ) → DerivedCategoryModule A S ⥤ DerivedCategoryModule A (affineTraceTower S d) :=
@@ -344,7 +347,8 @@ theorem affineTraceComposeAdjunction_eq
   rfl
 
 /-- Compose the actual open adjunction with the actual normalized projective adjunction.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 abbrev affineTraceLineAdjunction (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
@@ -402,7 +406,8 @@ theorem affineTraceAdjunctionTower_counit_isIso {C : ℕ → Type*} [∀ d, Cate
     infer_instance
 
 /-- The literal composite adjunction, with the literal identity adjunction in dimension zero.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceAdjunction (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
@@ -420,7 +425,8 @@ attribute [irreducible] affineTraceAdjunction
 
 /-- The actual trace, the counit at the constant coefficient complex. Its source is
 F_d applied to the coordinate-tower model of A(d)[2d].
-Source: blueprint sk-prop-an, Steps 5(b), 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b), 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceCounit (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
@@ -429,7 +435,8 @@ def affineTraceCounit (A : Type (u + 1)) [CommRing A] (N : ℕ)
   (affineTraceAdjunction A N hA t D S hS d).counit.app (ordinaryFiniteUnit A S)
 
 /-- The bounded-below version of the same ordered left functor.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceLeftPlus (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     (d : ℕ) → DerivedCategory.Plus
         (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A)) ⥤
@@ -439,7 +446,8 @@ def affineTraceLeftPlus (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
       (affineTraceLineCompactification (affineTraceTower S d)) ⋙ affineTraceLeftPlus A S d
 
 /-- The canonical coherent comparison of the ordered tower with Rp_d! on D+.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceCompactSupportComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] : (d : ℕ) →
     affineTraceLeftPlus A S d ≅
@@ -462,7 +470,8 @@ def affineTraceCompactSupportComparison (A : Type (u + 1)) [CommRing A] [Finite 
           (AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d)) e₂ ≪≫ e₃
 
 /-- The restriction of the unbounded tower to D+ is its bounded-below tower.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTracePlusCompatibility (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     (d : ℕ) → affineTraceLeftPlus A S d ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ affineTraceLeft A S d
@@ -483,7 +492,8 @@ def affineTracePlusCompatibility (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}
 
 /-- The natural transformation underlying the standard affine-line exchange.
 It is the proper exchange followed by the open exchange and compactification comparison.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceLineExchangeTransformation (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) :
     affineTraceLineLeft A S ⋙ ordinaryFinitePullback A f ⟶
@@ -502,7 +512,8 @@ attribute [irreducible] affineTraceLineExchangeTransformation
 
 /-- Canonical proper exchange followed by open exchange and the coherent comparison
 back to the standard compactification on the changed base.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceLineExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (f : S' ⟶ S)
     (M : DerivedCategoryModule A (AffineSpace PUnit.{u + 1} S)) :
@@ -514,7 +525,8 @@ def affineTraceLineExchange (A : Type (u + 1)) [CommRing A] [Finite A]
 attribute [irreducible] affineTraceLineExchange
 
 /-- Packaging the line exchange preserves its original component map.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 theorem affineTraceLineExchange_eq (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (f : S' ⟶ S)
     (M : DerivedCategoryModule A (AffineSpace PUnit.{u + 1} S)) :
@@ -568,8 +580,8 @@ theorem affineTraceExchangeTower_succ {C C' : ℕ → Type*}
   simp [affineTraceExchangeTower]
 
 /-- The canonical exchange of the ordered coordinate tower, obtained by pasting the
-proper/open exchanges of its coordinate steps. Source: blueprint sk-prop-an, Step 6
-(blueprint: def-amb-affine-trace-construction). -/
+proper/open exchanges of its coordinate steps. Source: blueprint proposition-purity-vector-bundles,
+Step 6 (blueprint: def-amb-affine-trace-construction). -/
 def affineTraceExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) (d : ℕ)
     (M : DerivedCategoryModule A (affineTraceTower S d)) :
@@ -585,7 +597,8 @@ def affineTraceExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (fun d ↦ affineTraceLineExchangeTransformation A (affineTraceMap f d)) d).app M
 
 /-- The inverse-image comparison around the standard affine-chart square.
-Source: blueprint sk-prop-an, Step 5(b) (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 5(b) (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceOpenPullbackSquare (A : Type (u + 1)) [CommRing A]
     {S' S : Scheme.{u}} (f : S' ⟶ S) :
     ordinaryFinitePullback A (ProjectiveLine.affineChart S) ⋙
@@ -638,7 +651,7 @@ def affineTraceCompositeRightSquareIso
   affineTraceRightSquareIso s (R.obj K) c
 
 /-- Canonical pullback of the one-coordinate right functor, with the normalized
-roots-of-unity Tate comparison. Source: blueprint sk-prop-an, Step 5(b)
+roots-of-unity Tate comparison. Source: blueprint proposition-purity-vector-bundles, Step 5(b)
 (blueprint: def-amb-affine-trace-construction). -/
 abbrev affineTraceLineRightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -654,7 +667,8 @@ abbrev affineTraceLineRightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
 
 /-- One pasting step for the canonical right-functor base-change comparison.
 The last argument is the preceding coordinate comparison; no map is chosen here.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceRightBaseChangeStep (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
@@ -687,7 +701,8 @@ def affineTraceRightExchangeTower {C C' : ℕ → Type*}
   | d + 1, K => r d _ ≪≫ (R' d).mapIso (affineTraceRightExchangeTower R R' B r d K)
 
 /-- The canonical right-functor base-change comparison, pasted coordinatewise.
-Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+Source: blueprint proposition-purity-vector-bundles, Step 6 (blueprint:
+def-amb-affine-trace-construction). -/
 def affineTraceRightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     {S' S : Scheme.{u}} (f : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)

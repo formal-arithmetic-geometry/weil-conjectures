@@ -319,7 +319,7 @@ private theorem lisse_on_refined_stratum
       (constantModel_lfp (coefficientHeartRingObj Λ) S _ hM))
 
 /-- Lisse modules restrict to every locally closed refinement, including its given scheme
-structure. Source: blueprint det-lem-coefficient-heart-common-stratification, steps (5)--(6),
+structure. Source: blueprint lemma-constructible-sheaves, steps (5)--(6),
 and the finite-presentation pullback and immersion-range arguments of
 `CondensedConstructibleSerre.lean` and `ProEtaleModuleLfpImmersionTransport.lean`.
 (blueprint: new-det-lem-coefficient-heart-common-stratification-lisse).

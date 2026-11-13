@@ -12,7 +12,8 @@ public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 
 ## Main statements
 
-- `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist` (`prop-base-linear`, clause (2)):
+- `AlgebraicGeometry.nonempty_iso_fourierTransform_tateTwist`
+(`proposition-base-change-fourier-inversion--2`, clause (2)):
   `FT_ψ(K(m)) ≅ FT_ψ(K)(m)`, naturally in the Weil complex `K`.
 - `AlgebraicGeometry.nonempty_iso_fourierTransform_of_iso_constantTwist`: the Fourier transform
   commutes with constant twists `- ⊗ 𝓑_b`.
@@ -96,7 +97,7 @@ theorem nonempty_iso_fourierTransform_of_iso_constantTwist (ψ : AddChar k₀ (P
     (ProEtaleWeilSheaf.constantTwist k₀ l (affineLine k₀) b).mapDerivedCategory.mapIso
       ((fourierTransformCompιIso ψ).app K).symm⟩
 
--- TODO(unify): prop-base-linear
+-- TODO(unify): proposition-base-change-fourier-inversion--2
 /-- The Fourier–Deligne transform of Weil complexes on the affine line commutes with the Tate
 twist: `FT_ψ(K(m)) ≅ FT_ψ(K)(m)` as Weil complexes, naturally in `K`. This is the Weil
 structure part of the second clause of the base linearity proposition; the underlying
@@ -105,7 +106,7 @@ statement on étale complexes is `AlgebraicGeometry.Etale.nonempty_iso_fourierTr
 The Tate twist is the constant twist by `χ_ℓ(σ)^m`
 (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedFunctorIhomFunctorTateTwistIso`), and each
 constituent of the Fourier–Deligne transform commutes with constant twists.
-(blueprint: `prop-base-linear`, clause (2)) -/
+(blueprint: `proposition-base-change-fourier-inversion--2`, clause (2)) -/
 theorem nonempty_iso_fourierTransform_tateTwist (ψ : AddChar k₀ (PadicAlgCl l)) (m : ℤ) :
     Nonempty (WeilComplex.tateTwist k₀ l (affineLine k₀) m ⋙ fourierTransform ψ ≅
       fourierTransform ψ ⋙ WeilComplex.tateTwist k₀ l (affineLine k₀) m) := by

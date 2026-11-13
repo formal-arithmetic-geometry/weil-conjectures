@@ -50,9 +50,9 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime]
 
 /-- **Finite-level Poincaré duality for `Hⁱ(X_proét, ℤ_ℓ/ℓᵐ)`** (finite level of blueprint
-`sk-thm-transport`, for the constant sheaf). Let `k` be separably closed, `X` quasi-compact and
-quasi-separated, `a : X ⟶ Spec k` proper with a Tate orientation `γ` of relative dimension `d`
-for `Λ = ℤ/ℓᵐ`. For `i + j = 2d`, there is a `ℤ_ℓ`-bilinear pairing
+`theorem-poincare-duality--9`, for the constant sheaf). Let `k` be separably closed, `X`
+quasi-compact and quasi-separated, `a : X ⟶ Spec k` proper with a Tate orientation `γ` of relative
+dimension `d` for `Λ = ℤ/ℓᵐ`. For `i + j = 2d`, there is a `ℤ_ℓ`-bilinear pairing
 `Hⁱ(X, ℤ_ℓ/ℓᵐ) × Hʲ(X, ℤ_ℓ/ℓᵐ) ⟶ ℤ_ℓ/ℓᵐ` which is nondegenerate on both sides. -/
 theorem exists_injective_pairing_finiteAdicH {k : Type u} [Field k] [IsSepClosed k]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (a : X ⟶ Spec (.of k))

@@ -138,7 +138,7 @@ set_option backward.defeqAttrib.useBackward false
 
 /-- Semilinear comparison of localized bilinear functors.
 Source: module base change (Stacks 00CV, 00CX), and the rational paragraph of
-blueprint `def-weil-derived-pullback-tensor-hom`.
+blueprint `prose-03-02`.
 (blueprint: lem-sf-localized-bilinear-comparison).
 Proof: Construct a normalized natural isomorphism by conjugating localized integral components
 with the object equalities. Double tensor induction proves naturality from the integral naturality

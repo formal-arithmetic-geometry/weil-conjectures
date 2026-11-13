@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Left derived functors computed on K-flat complexes
 
-Source: blueprint main-20261015, `sec-proetale-coefficients`,
+Source: blueprint main-20261015, `chap-The-pro-etale-site`,
 `sk-def-sfb-derived-categories`, `def-sfb-left-derived-functor`
 (blueprint: def-sfb-left-derived-functor).
 

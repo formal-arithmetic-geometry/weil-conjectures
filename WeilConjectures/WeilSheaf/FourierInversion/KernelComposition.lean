@@ -22,7 +22,7 @@ For a lisse Weil sheaf `𝒦` on `𝔸¹ ×_{k₀} 𝔸¹` and `a : ℤ`, the *k
 transform with kernel `μ^* ℒ_ψ` and shift `1`.
 
 The composite of two kernel transforms is computed on the triple product `𝔸³` with points
-`(x, ξ, y)` (blueprint `lem-fd-kernel-composition`):
+`(x, ξ, y)` (blueprint `proposition-fourier-inversion`):
 
 `Φ_{𝒦'}(Φ_𝒦(K)) ≅ Rr₃!(r₁^* K ⊗ r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦')[a][b]`
 
@@ -61,7 +61,7 @@ end TripleProduct
 
 /-- The *kernel transform* `Φ_𝒦(K) = Rpr₂!(pr₁^* K ⊗ 𝒦)[a]` of Weil complexes on the affine
 line, for a lisse Weil sheaf `𝒦` on `𝔸¹ ×_{k₀} 𝔸¹` and a shift `a`
-(blueprint `lem-fd-kernel-composition`). -/
+(blueprint `proposition-fourier-inversion`). -/
 noncomputable def WeilComplex.kernelTransform (𝒦 : WeilSheaf k₀ l (affinePlane k₀))
     (h𝒦 : 𝒦.IsLisse) (a : ℤ) :
     WeilComplex k₀ l (affineLine k₀) ⥤ WeilComplex k₀ l (affineLine k₀) :=
@@ -74,7 +74,7 @@ theorem fourierTransform_eq_kernelTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
       WeilComplex.kernelTransform (fourierKernel ψ) (isLisse_fourierKernel ψ) 1 :=
   rfl
 
-/-- **Composition of kernel transforms** (blueprint `lem-fd-kernel-composition`). On the triple
+/-- **Composition of kernel transforms** (blueprint `proposition-fourier-inversion`). On the triple
 product `𝔸³` with points `(x, ξ, y)`,
 
 `Φ_{𝒦'}(Φ_𝒦(K)) ≅ Rr₃!(r₂₃^* 𝒦' ⊗ r₁₂^* 𝒦 ⊗ r₁^* K)[a][b]`

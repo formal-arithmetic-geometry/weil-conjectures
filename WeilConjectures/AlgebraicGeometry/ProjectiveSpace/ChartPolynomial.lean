@@ -22,7 +22,7 @@ functions `Γ(Uᵢ)` is the polynomial ring over `A` in the ratios `x_k / xᵢ`,
   of the chart isomorphism `D₊(xᵢ) ≅ 𝔸({k // k ≠ i}; S)` followed by the inclusion.
 - `AlgebraicGeometry.ProjectiveSpace.chartRingEquiv`: `A[x_k / xᵢ : k ≠ i] ≃ Γ(D₊(xᵢ))`.
 
-(blueprint: `lem-pc-projective-space-canonical`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section

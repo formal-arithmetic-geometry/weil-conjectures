@@ -16,7 +16,7 @@ import Mathlib.RingTheory.Int.Basic
 /-!
 # Primary decomposition of finite discrete representations
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 1.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
 (blueprint: lem-sc-finite-discrete-rep-primary-decomposition)
 -/
 
@@ -33,7 +33,7 @@ namespace Rep
 /-- A finite discrete continuous integral representation splits into finite primary
 representations equivariantly.
 
-Source: blueprint `lem-sc-affine-generic-second`, proof paragraph 1.
+Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 1.
 
 Proof: take the exponent n of the finite abelian group underlying M. If n = 1, M is
 zero and the empty family works. Otherwise enumerate the prime divisors p_i of n, and

@@ -157,12 +157,12 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator_of_mem_c
       N e ζ hζ V hζV hV
 
 /-- **The local computation at a generic point of a principal divisor for lisse generators**
-(the local nearby-cycles computation of the proof of blueprint `det-sp-generic-divisor`, for
-extensions by zero of lisse generators): let `X` be normal, `Z = V(h)` for a nonzero global
-function `h`, `j : X ∖ Z ⟶ X` the complement, `N` a lisse generator of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧` and `ζ`
-a generic point of an irreducible component of `Z`. Then the restriction `Le^* Ψ_X(j_! N)` to the
-zero section vanishes over a neighbourhood of `ζ`: the extension by zero is locally acyclic along
-the divisor near `ζ`. Unfinished. -/
+(the local nearby-cycles computation of the proof of blueprint
+`lemma-vanishing-generic-points-principal-divisor--1`, for extensions by zero of lisse generators):
+let `X` be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `N`
+a lisse generator of `Dᵇc(X ∖ Z)⟦ℚ̲̄_ℓ⟧` and `ζ` a generic point of an irreducible component of `Z`.
+Then the restriction `Le^* Ψ_X(j_! N)` to the zero section vanishes over a neighbourhood of `ζ`: the
+extension by zero is locally acyclic along the divisor near `ζ`. Unfinished. -/
 theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_lisseGenerator [IsSepClosed k']
     [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] (hX : IsNormalScheme X.left)
     {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}

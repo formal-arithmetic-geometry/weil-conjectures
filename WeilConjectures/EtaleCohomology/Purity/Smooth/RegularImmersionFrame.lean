@@ -19,8 +19,8 @@ A *frame* of a closed immersion `i : Z ⟶ X` of codimension `c`
 supports `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c) ∈ H^{2c}_{Z_U}(U, Λ(c))` of the Kummer boundaries
 (`AlgebraicGeometry.Etale.frameClass`), and a class with supports on `Z` restricts to every frame
 (`AlgebraicGeometry.Etale.frameRestriction`). These are the local pieces from which the
-fundamental class of a regular closed immersion (`sk-thm-regular`) and of a section of a smooth
-morphism are glued.
+fundamental class of a regular closed immersion (`lemma-class-of-point--1`) and of a section of a
+smooth morphism are glued.
 
 ## Main definitions
 
@@ -139,7 +139,7 @@ lemma EtaleFrame.mem_range_ofSpanEq_toZ {c : ℕ} (i : Z ⟶ X) [IsClosedImmersi
   obtain ⟨q, hq, -⟩ := (EtaleFrame.ofSpanEq i U f hf).isPullback.exists_scheme_point z p hp.symm
   exact ⟨q, hq⟩
 
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
 
 *Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a regular
 closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclusion of an affine

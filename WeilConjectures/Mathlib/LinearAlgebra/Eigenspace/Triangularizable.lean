@@ -46,7 +46,7 @@ variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
 /-- An `f`-invariant proper subspace `W` of a finite dimensional vector space over an
 algebraically closed field is contained in an `f`-invariant subspace of dimension one more:
 add an eigenvector of the endomorphism induced by `f` on `V ⧸ W`. This is the inductive step
-of the triangularization (blueprint: `p-linear-triangular`). -/
+of the triangularization (blueprint: `lemma-filtrations-spectra`). -/
 theorem exists_le_map_le_finrank_eq_succ [IsAlgClosed K] [FiniteDimensional K V] (f : End K V)
     {W : Submodule K V} (hW : W.map f ≤ W) (hne : W ≠ ⊤) :
     ∃ W' : Submodule K V, W ≤ W' ∧ W'.map f ≤ W' ∧
@@ -79,8 +79,8 @@ theorem exists_le_map_le_finrank_eq_succ [IsAlgClosed K] [FiniteDimensional K V]
 closed field `K` admits a complete flag of invariant subspaces: a monotone family
 `F : Fin (finrank K V + 1) → Submodule K V` with each `F i` mapped into itself by `f` and
 `finrank K (F i) = i`. A basis adapted to such a flag puts `f` in upper triangular form,
-with the eigenvalues of `f` on the diagonal (blueprint: `sk-p-linear-triangular`,
-`p-linear-triangular`). -/
+with the eigenvalues of `f` on the diagonal (blueprint: `lemma-filtrations-spectra`,
+`lemma-filtrations-spectra`). -/
 theorem exists_complete_invariant_flag [IsAlgClosed K] [FiniteDimensional K V] (f : End K V) :
     ∃ F : Fin (Module.finrank K V + 1) → Submodule K V,
       Monotone F ∧ (∀ i, (F i).map f ≤ F i) ∧ ∀ i, Module.finrank K (F i) = (i : ℕ) := by

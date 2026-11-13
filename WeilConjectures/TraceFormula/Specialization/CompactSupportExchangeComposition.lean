@@ -13,7 +13,7 @@ public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
 # Compact-support exchanges along a composite of open immersions
 
 Let `ν_C = χ_P⁻¹ ∘ R'_{P*}(ν_ι)` be the compact-support exchange of a compactification
-`ι : N ⊆ P` (blueprint `det-nearby-exchange-maps` (3); `ν_ι` the adjoint of the inverse of the
+`ι : N ⊆ P` (blueprint `prose-E-15` (3); `ν_ι` the adjoint of the inverse of the
 pullback exchange `α_ι`, `χ_P` the proper exchange). This file proves, in abstract categories, the
 formal steps showing that for an open sub-model `j : N ⊆ M` and a compactification `ι : M ⊆ P`,
 the compact-support exchange of the compactification `j ≫ ι : N ⊆ P` is the composite of the

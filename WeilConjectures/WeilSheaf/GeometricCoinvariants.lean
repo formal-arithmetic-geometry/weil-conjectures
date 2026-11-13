@@ -271,7 +271,7 @@ only assumed locally of finite type over `k₀`, which is what provides these cl
 Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points of
 `X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the coinvariants of a
 rank-one sheaf need not be pure of every weight.
-(blueprint: `lem-a1-geometric-coinvariants-pure`) -/
+(blueprint: `lemma-degree-zero-top-cohomology--7`) -/
 theorem isPureOfWeightOver_geometricCoinvariants (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
     (F.geometricCoinvariants hF).IsPureOfWeightOver k₀ ι w := by

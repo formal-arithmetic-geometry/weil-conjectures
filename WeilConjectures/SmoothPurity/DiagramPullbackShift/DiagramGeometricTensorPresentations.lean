@@ -17,7 +17,7 @@ the specified direct-image compositor. No alternate coefficient category is intr
 
 Source: latest blueprint, `sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence`,
 maps-used sentence, and `sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/`
-`def-weil-derived-pullback-tensor-hom`; Stacks 03D2, 03D8, 03EL, 0G7E and 07A4.
+`prose-03-02`; Stacks 03D2, 03D8, 03EL, 0G7E and 07A4.
 (blueprint: lem-pur-diagram-geometric-tensor-presentations).
 -/
 

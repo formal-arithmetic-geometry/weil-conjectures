@@ -28,7 +28,7 @@ public import WeilConjectures.Topology.ContinuousMapCondensedRing
 
 Source: blueprint `sec-proetale-coefficients/sk-def-sfb-condensed-ring/`
 `def-sfb-continuous-map-condensed-ring.md`
-(blueprint: def-sfb-continuous-map-condensed-ring).
+(blueprint: proposition-pro-etale-site-separably-closed--3).
 
 The upstream continuous-map construction fixes the coefficient ring in `Type 0`.
 These universe-polymorphic versions retain the same sections, restrictions and canonical

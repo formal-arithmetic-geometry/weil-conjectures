@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSyst
 
 /-! # Independent leaf occurrences in an integral-system expression
 
-Source: blueprint, adic transport in sk-thm-purity-transport, Step 2; independent
-occurrence-slot convention of lem-pur-integral-realization-shift-coherence
+Source: blueprint, adic transport in theorem-smooth-purity-all-admissible-coefficients, Step 2;
+independent occurrence-slot convention of lem-pur-integral-realization-shift-coherence
 (blueprint: def-pur-integral-expression-occurrences).
 -/
 

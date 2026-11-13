@@ -81,7 +81,7 @@ Proof (the node's steps):
 0. Use the sectionwise kernel and functoriality of stalk maps. Any other categorical
    kernel or cokernel is uniquely isomorphic compatibly with its structure map, so
    its stalk description is independent of these choices
-   (`def-weil-sheaf-of-modules-category`, `def-weil-pbc-module-stalk`).
+   (`situation-conventions`, `def-weil-pbc-module-stalk`).
 1. If a germ maps to zero, shrink its representative until its image is zero.
    Sectionwise injectivity makes the representative zero on that neighborhood,
    hence the original germ is zero (`def-weil-pbc-module-stalk`). For a sheaf
@@ -95,7 +95,7 @@ Proof (the node's steps):
    Every map out of G annihilating φ factors sectionwise through Q and then
    uniquely through its sheafification. This constructs the categorical cokernel
    (`def-weil-presheaf-modules-sheafification`,
-   `def-weil-sheaf-of-modules-category`).
+   `situation-conventions`).
 4. Every germ of Q lifts to a germ of G by sectionwise quotient surjectivity.
    A germ of G maps to zero in Q precisely when, after shrinking, its
    representative lies in the sectionwise image of φ. Thus the stalk quotient
@@ -112,7 +112,7 @@ Proof (the node's steps):
 7. The image is the kernel of the cokernel map. Step 2 applied to that map,
    and step 6, identify its stalk inclusion with the image of φ_x. Since
    φ_x factors through this injective inclusion, its map to the stalk image
-   is surjective (`def-weil-sheaf-of-modules-category`, `def-weil-pbc-module-stalk`).
+   is surjective (`situation-conventions`, `def-weil-pbc-module-stalk`).
 8. Use `lem-weil-pbc-ringed-space-module-exactness-local-lifting` (2): exactness
    is equivalent to locally lifting every section killed by the second map.
    Such local lifts give a preimage of every kernel germ. Conversely, stalkwise

@@ -52,7 +52,7 @@ the kernel transform of the convolution
 
 Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`), which need `[Finite Λ]`.
-(sketch blueprint: `lem-fd-kernel-composition`; blueprint: `lem-fd-kernel-composition`) -/
+(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
 theorem nonempty_iso_fourierTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [CharP Γ(pullback π π', ⊤) p] [CharP Γ(pullback π' π'', ⊤) p]

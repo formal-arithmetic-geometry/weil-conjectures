@@ -29,7 +29,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-! # Strict realization of coherent finite coefficient systems
 
 Source: the strict representative step in the inverse-limit assertion of
-prop-coef-integral-dualizing; Stacks, Derived Categories, lemma-K-injective.
+proposition-sp-integral-adjunction; Stacks, Derived Categories, lemma-K-injective.
 (blueprint: lem-coef-normalized-dvr-strict-realization).
 -/
 
@@ -94,7 +94,7 @@ private def transposeTower {A : Type*} [Category A] [HasZeroMorphisms A]
 realization. This assertion does not impose normalization or identify a limit.
 
 Source: the strict representative step of lem-coef-integral-dualizing-roos-model,
-expanded from the inverse-limit paragraph of prop-coef-integral-dualizing;
+expanded from the inverse-limit paragraph of proposition-sp-integral-adjunction;
 Stacks, Derived Categories, lemma-K-injective.
 (blueprint: lem-coef-normalized-dvr-strict-realization).
 

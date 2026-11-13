@@ -480,7 +480,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k').P
   [IsSeparated Y'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom] in
 /-- **The composition law of the exchanges `ν_h` of open immersions of models** (blueprint
-`det-nearby-exchange-maps`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
+`prose-E-15`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
 `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the composition isomorphisms of the pullbacks. -/
 theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
@@ -581,7 +581,7 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
-`det-nearby-exchange-maps`, compatibility of `ν` with composition): for open immersions of models
+`prose-E-15`, compatibility of `ν` with composition): for open immersions of models
 `φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
 structure morphism `a` to the trait, the compact-support exchange of the compactification
 `j ≫ ι : N ⊆ P` is the composite of `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange
@@ -762,7 +762,7 @@ lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
   rfl
 
 /-- **The compact-support exchanges along an open sub-model** (blueprint
-`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
+`prose-E-15`, `lemma-compatibilities-base-change-maps` (3)): for an open sub-model `N ⊆ M`
 over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
 the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
 `α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms

@@ -18,8 +18,8 @@ transition maps and limit `X`, the comparison maps `AlgebraicGeometry.Etale.unit
 exhibit the sections of the pullback of an abelian étale sheaf `G` on `R` over `W ×_R X` as the
 colimit of the sections over the `W ×_R Dⱼ`, for `W` quasi-compact and quasi-separated étale
 over a quasi-separated `R` (`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`).
-This is blueprint `lem-weil-pbc-etale-section-continuity`, which belongs to the subsection
-`lem-sc-second-kummer-divisors`.
+This is blueprint `proposition-comparison-morphism-inverse-image--3`, which belongs to the
+subsection `lem-sc-second-kummer-divisors`.
 
 ## Main statements
 
@@ -41,7 +41,7 @@ limit `V ×_{Dⱼ} X`, the open already contains the image of some `V ×_{Dⱼ} 
 *Surjectivity.* A section `t` over `W ×_R X` is, on finitely many affine étale pieces `Vₐ`
 covering `W ×_R X`, the pullback `φₐ^* gₐ` of sections of `G`. Each `Vₐ` descends to an affine
 étale scheme over some stage (`AlgebraicGeometry.Scheme.exists_isPullback_of_etale_of_isAffineOpen`,
-part of blueprint `lem-weil-pbc-etale-finite-data-descent`), together with `φₐ` and the map to
+part of blueprint `lemma-acyclicity-pulled-back-injectives`), together with `φₐ` and the map to
 `W` (`AlgebraicGeometry.Scheme.exists_isPullbackLift_comp_eq`). The pulled back sections at a
 common stage agree on the overlaps after passing to a later stage, by injectivity, the descended
 pieces cover `W ×_R Dⱼ` at a later stage, and they glue to the required section.
@@ -272,7 +272,7 @@ variable {R : Scheme.{u}} {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J
 /-- **Continuity of sections at an inverse limit, surjectivity**: every section of the pullback
 of `G` over `W ×_R lim Dⱼ` comes from a section over some `W ×_R Dⱼ`. This is the first half of
 `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`.
-(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
 theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)
@@ -455,7 +455,7 @@ theorem unitComparison_app_surjective_of_isLimit [∀ j, CompactSpace (D.obj j)]
 `G` over `W ×_R Dⱼ` which vanishes on `W ×_R lim Dⱼ` already vanishes on some `W ×_R Dⱼ'`,
 `j' ⟶ j`. This is the second half of
 `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`.
-(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
 theorem exists_unitComparison_app_eq_zero_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)
@@ -513,7 +513,7 @@ of the pullbacks of `G` over the `W ×_R Dⱼ`: every section over `W ×_R X` co
 `W ×_R Dⱼ'`, `j' ⟶ j`. The sections of the pullback of `G` over `W ×_R Dⱼ` are written as the
 sections of `πⱼ_* πⱼ^* G` over `W`, and the transition maps are
 `AlgebraicGeometry.Etale.unitComparison`.
-(blueprint: `lem-weil-pbc-etale-section-continuity`) -/
+(blueprint: `proposition-comparison-morphism-inverse-image--3`) -/
 theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
     [∀ j, QuasiSeparatedSpace (D.obj j)] [∀ {j k : J} (f : j ⟶ k), IsAffineHom (D.map f)]
     [QuasiSeparatedSpace R] (hc : IsLimit c)

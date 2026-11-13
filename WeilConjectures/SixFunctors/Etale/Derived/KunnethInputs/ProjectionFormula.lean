@@ -11,15 +11,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseC
 /-!
 # The projection formula morphism
 
-Inputs of the ordinary Künneth formula (blueprint subsection `sk-prop-sf-kunneth-ordinary`)
-about the projection formula morphism `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`.
+Inputs of the ordinary Künneth formula (blueprint subsection
+`proposition-ordinary-external-kunneth--1`) about the projection formula morphism
+`Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`.
 
 ## Main definitions and results
 
-- `AlgebraicGeometry.Etale.projectionFormulaMap` (`def-kun-projection-formula-map`).
+- `AlgebraicGeometry.Etale.projectionFormulaMap` (`definition-projection-formula-map--1`).
 - `AlgebraicGeometry.Etale.projectionFormulaMap_derivedBaseChangeMap`
   (`lem-kun-proj-formula-natural`).
-- `AlgebraicGeometry.Etale.isIso_projectionFormulaMap_of_isProper` (`lem-kun-0f0f`).
+- `AlgebraicGeometry.Etale.isIso_projectionFormulaMap_of_isProper`
+(`corollary-open-direct-image-over-field--2`).
 -/
 
 @[expose] public section
@@ -40,7 +42,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
 
-/-- Blueprint `def-kun-projection-formula-map`: for a morphism of schemes `f : X ⟶ Y`,
+/-- Blueprint `definition-projection-formula-map--1`: for a morphism of schemes `f : X ⟶ Y`,
 `E ∈ D(X_ét)` and `K ∈ D(Y_ét)`, the projection-formula morphism
 
 `PF_f(E, K) : Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)`
@@ -98,9 +100,9 @@ lemma projectionFormulaMap_derivedBaseChangeMap (sq : CommSq g' f' f g)
           ((derivedSquareUpperStarIso A sq).hom.app K)) :=
   rightDerivedLowerStarProjectionMap_derivedBaseChangeMap A sq E K
 
-/-- Blueprint `lem-kun-0f0f`: the projection formula for a proper morphism with torsion
-coefficients. Let `f : X ⟶ Y` be proper and `Λ` a ring which is torsion as an additive group
-(for instance `Λ = ℤ/n`). Then for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` the
+/-- Blueprint `corollary-open-direct-image-over-field--2`: the projection formula for a proper
+morphism with torsion coefficients. Let `f : X ⟶ Y` be proper and `Λ` a ring which is torsion as an
+additive group (for instance `Λ = ℤ/n`). Then for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` the
 projection-formula morphism `Rf_* E ⊗ᴸ K ⟶ Rf_*(E ⊗ᴸ Lf^* K)` is an isomorphism.
 
 The blueprint states this with integer coefficients, for `E ∈ D⁺(X_ét, ℤ)` with torsion

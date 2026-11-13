@@ -125,7 +125,7 @@ instance isIso_finiteEtaleReadingLowerShriekSquare (p : X ⟶ Y) [IsProper p.lef
     IsIso (finiteEtaleReadingLowerShriekSquare ℓ E n p) :=
   inferInstanceAs (IsIso (Iso.inv _))
 
-/-- Blueprint `det-prop-scalar-six-compact-support` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
+/-- Blueprint `lemma-change-coefficients-compact-support` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
 read on the étale site, for a proper `p`. **The canonical isomorphism
 `(Rp_! K)_{𝒪_E ⧸ ℓⁿ} ≅ Rp_! (K_{𝒪_E ⧸ ℓⁿ})`**, `Rp_! ⋙ red_Y ≅ red_X ⋙ Rp_!`: the inverse of the
 horizontal paste of the canonical condensed reduction square
@@ -142,8 +142,8 @@ noncomputable def etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
   (asIso ((boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p).hComp
     (finiteEtaleReadingLowerShriekSquare ℓ E n p))).symm
 
-/-- Blueprint `det-prop-scalar-six-exceptional` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on
-the étale site, for a proper `p`: the transpose
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image` for the coefficient map
+`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site, for a proper `p`: the transpose
 `(Rp^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rp^! (K_{𝒪_E ⧸ ℓⁿ})` of the canonical isomorphism
 `ProEtale.CondensedRing.etaleReductionLowerShriekIso` under `Rp_! ⊣ Rp^!` is an isomorphism. The
 mate of a paste is the paste of the mates (`CategoryTheory.isIso_mateEquiv_hComp`): the condensed

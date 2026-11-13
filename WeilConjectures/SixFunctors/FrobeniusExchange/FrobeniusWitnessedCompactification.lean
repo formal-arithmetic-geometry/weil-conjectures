@@ -335,7 +335,7 @@ def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
         (sfIntrinsicModuleEquivalence X A).functor).app O.L.obj) ≪≫ O.alpha)
 
 /-- The proper-open comparison conjugated by this very retained witness.
-Source: blueprint order 1485 part (a); lem-weil-pbc-proper-open-comparison-proetale
+Source: blueprint order 1485 part (a); proposition-construction-independence-rf-shriek--7
 (blueprint: def-weil-frobenius-witnessed-compactification). -/
 def fixedRefinementOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c ⟶ d) (O : CompactOrigin A X) :

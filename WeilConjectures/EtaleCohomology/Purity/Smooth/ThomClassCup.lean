@@ -17,9 +17,9 @@ invertible. If the adjoint of `α` is an isomorphism (`α` is a fundamental clas
 adjoint of the restriction `β|_{Z₁}` of `β` to `Z₁` is an isomorphism, then the adjoint of the cup
 product `α ∪ β` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_cupWithSupports`).
-This is the inductive step of the model computation `sk-prop-an` (i): the Thom class of
-`𝔸^{c+1}_B = 𝔸¹_{𝔸^c_B}` is the cup product of the Kummer boundary of the coordinate of the affine
-line and the pullback of the Thom class of `𝔸^c_B`.
+This is the inductive step of the model computation `proposition-purity-vector-bundles` (i): the
+Thom class of `𝔸^{c+1}_B = 𝔸¹_{𝔸^c_B}` is the cup product of the Kummer boundary of the coordinate
+of the affine line and the pullback of the Thom class of `𝔸^c_B`.
 
 The proof uses the language of reflections into objects with supports
 (`AlgebraicGeometry.Etale.IsSupportReflection`). The cup product factors as

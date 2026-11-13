@@ -40,8 +40,8 @@ Source: Stacks Project, Cohomology on Sites, Lemma 03AJ.
 
 Proof:
 1. Represent the class of T by the connecting image of 1 in the canonical extension
-0 → G → E_T → ℤ → 0 (`lem-sc-torsor-h1`). Pullback identifies this extension with the
-extension of the set inverse image, whose fibre over 1 is the inverse-image torsor
+0 → G → E_T → ℤ → 0 (`lemma-cohomology-multiplicative-group--3`). Pullback identifies this extension
+with the extension of the set inverse image, whose fibre over 1 is the inverse-image torsor
 (`lem-sc-etale-torsor-inverse-image-extension`).
 2. Pullback commutes with the connecting maps
 (`lem-weil-pbc-pullback-cohomology-long-exact-ladder`, clause 3) and in degree zero pulls back
@@ -53,8 +53,8 @@ representative description gives the asserted equality of classes under scheme p
 4. The maps (φ, E_T → pushout, id_ℤ) form a morphism of short exact sequences. Connecting
 maps are natural (`lem-weil-pbc-right-derived-universal-delta-functor`), so H¹(φ) sends the
 boundary of 1 to the boundary of 1 for the pushout. The canonical classification identifies
-these boundaries with the two torsor classes (`lem-sc-torsor-h1`), and the coefficient map
-is that of `lem-weil-pbc-cohomology-pullback-functorial`. -/
+these boundaries with the two torsor classes (`lemma-cohomology-multiplicative-group--3`), and the
+coefficient map is that of `proposition-cohomology-p-1-over-henselian--1`. -/
 theorem etale_torsor_h1_functoriality :
     (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)
       (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Torsor G),

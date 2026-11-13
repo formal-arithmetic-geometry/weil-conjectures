@@ -248,7 +248,7 @@ Proof:
    and the inverse laws on summand generators. Compose with the sheafification Hom
    equivalence of lem-pc-sites-module-sheafification-interface to obtain the adjunction.
 3. Forget a short exact complex to abelian sheaves using
-   lem-weil-pbc-module-sheaves-colimits-forgetful. Restriction commutes with forgetting
+   situation-conventions. Restriction commutes with forgetting
    sectionwise, so lem-weil-pbc-site-restriction-exact applies. Reflect short exactness
    through the faithful exact module forgetful functor. Restriction is additive
    sectionwise; the abelian exactness criteria give both finite preservation clauses.

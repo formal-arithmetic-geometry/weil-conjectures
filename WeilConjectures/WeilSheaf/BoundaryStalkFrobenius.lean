@@ -21,7 +21,7 @@ Weil structures of `F` and `j_* F` (`AlgebraicGeometry.WeilSheaf.counit_frobeniu
 
 This is used for the Frobenius equivariance of the generic specialization of sections of `j_* F`
 over a strictly henselian neighbourhood of a boundary point, in blueprint
-`lem-wf-boundary-stalk-invariants`. The statements are made for `WeilSheaf.lowerStar` and an
+`lemma-boundary-stalk--1`. The statements are made for `WeilSheaf.lowerStar` and an
 arbitrary functor `L` rather than for `WeilSheaf.directImage`: the kernel checks the unfolding of
 `directImage` and of the Weil structures of `j^* j_* F` very slowly.
 -/

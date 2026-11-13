@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 # The exceptional inverse image on `Loc(Dᵇc)`, `ℓ`-adic coefficients
 
 Let `Λ` be a commutative condensed ring. For a scheme `X` the localizing closure
-`Loc(Dᵇc(X)⟦Λ⟧)` (blueprint `sk-def-localizing-closure`) is the smallest triangulated
+`Loc(Dᵇc(X)⟦Λ⟧)` (blueprint `definition-localizing-subcategory`) is the smallest triangulated
 subcategory of `D(X_proét, Λ_X)` (module objects over `Λ_X = p_X^* Λ`) containing the bounded
 constructible complexes `Dᵇc(X)⟦Λ⟧` and closed under direct sums
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`). For the `ℓ`-adic
@@ -35,18 +35,19 @@ For a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of `f : X ⟶ Y` such that 
 `Loc(Dᵇc(X)⟦Λ⟧)` into `Loc(Dᵇc(Y)⟦Λ⟧)`, its restriction is the functor
 `Rf_! : Loc(Dᵇc(X)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)`
 (`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekLocalizing`). Under the
-hypotheses of Brown representability (blueprint `sk-lem-brown-hypotheses`) and the properties of
-`Rf_!(c)` of blueprint `det-sf-comp-coherence-single`, it has an exact right adjoint `f^!`,
-which preserves direct sums and is unique up to unique isomorphism
+hypotheses of Brown representability (blueprint `lemma-hypotheses-brown-representability`) and the
+properties of `Rf_!(c)` of blueprint `proposition-construction-independence-rf-shriek`, it has an
+exact right adjoint `f^!`, which preserves direct sums and is unique up to unique isomorphism
 (`AlgebraicGeometry.ProEtale.CondensedRing.exists_rightAdjoint_rightDerivedLowerShriekLocalizing`,
-blueprint `sk-prop-sf-existence`). This is uniform in `Λ`.
+blueprint `theorem-existence-exceptional-inverse-image`). This is uniform in `Λ`.
 
 For the three families of `ℓ`-adic coefficient rings, schemes separated of finite type over a
 field `k` in which `ℓ` is invertible and which is finite or separably closed (so that
 `cd_ℓ(k)` is finite; without this, the compact generation fails, e.g. for `k = ℝ`), the two
 inputs are the theorems
 
-| `Λ` | `sk-lem-brown-hypotheses` | `det-sf-comp-coherence-single` |
+| `Λ` | `lemma-hypotheses-brown-representability` |
+`proposition-construction-independence-rf-shriek` |
 | --- | --- | --- |
 | `E` | `compactlyGenerates_continuousMapRingObj` | `lowerShriek_continuousMapRingObj` |
 | `𝒪_E` | `compactlyGenerates_padicIntegersRingObj` | `lowerShriek_padicIntegersRingObj` |
@@ -59,19 +60,19 @@ existence theorem follows. The finite coefficient rings are treated in
 
 ## The formal reductions
 
-For `sk-lem-brown-hypotheses`, on a separated finite-type (hence noetherian) `k`-scheme `X`:
-`Loc(Dᵇc(X)⟦Λ⟧)` is idempotent complete, as is any pretriangulated category with countable
-coproducts (`ObjectProperty.isIdempotentComplete_localizingClosure`); `Dᵇc(X)⟦Λ⟧` is stable under
-shifts, so its objects detect zero objects of `Loc(Dᵇc(X)⟦Λ⟧)`
+For `lemma-hypotheses-brown-representability`, on a separated finite-type (hence noetherian)
+`k`-scheme `X`: `Loc(Dᵇc(X)⟦Λ⟧)` is idempotent complete, as is any pretriangulated category with
+countable coproducts (`ObjectProperty.isIdempotentComplete_localizingClosure`); `Dᵇc(X)⟦Λ⟧` is
+stable under shifts, so its objects detect zero objects of `Loc(Dᵇc(X)⟦Λ⟧)`
 (`ObjectProperty.isZero_of_forall_eq_zero_localizingClosure`); and it is essentially small, its
 objects being iterated extensions of shifted constructible sheaves
 (`exists_skeleton_boundedConstructible`). What remains is the compactness of the bounded
 constructible complexes in `Loc(Dᵇc(X)⟦Λ⟧)` (`compactlyGenerates_of_isCompactObj`), which reduces
 to that of the constructible sheaves.
 
-For `det-sf-comp-coherence-single`, with `X̄` noetherian: `j_!` is exact and preserves direct sums,
-so it maps `Dᵇc` into `Dᵇc`, as it maps constructible sheaves to constructible sheaves
-(`isConstructibleModuleObject_openImmersionLowerShriek_obj`), and then
+For `proposition-construction-independence-rf-shriek`, with `X̄` noetherian: `j_!` is exact and
+preserves direct sums, so it maps `Dᵇc` into `Dᵇc`, as it maps constructible sheaves to
+constructible sheaves (`isConstructibleModuleObject_openImmersionLowerShriek_obj`), and then
 `Loc` into `Loc` (`localizingBoundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj`);
 the composite `Rp_* ∘ j_!` then has the required properties as soon as `Rp_*` does
 (`lowerShriekLocalizingHypotheses_of_properLowerStarHypotheses`).
@@ -93,9 +94,9 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Blueprint `sk-def-localizing-closure`: the localizing closure `Loc(Dᵇc(X)⟦Λ⟧)`, the smallest
-triangulated subcategory of `D(X_proét, Λ_X)` closed under isomorphisms and direct sums which
-contains the bounded constructible complexes. For the `ℓ`-adic coefficient rings these are the
+/-- Blueprint `definition-localizing-subcategory`: the localizing closure `Loc(Dᵇc(X)⟦Λ⟧)`, the
+smallest triangulated subcategory of `D(X_proét, Λ_X)` closed under isomorphisms and direct sums
+which contains the bounded constructible complexes. For the `ℓ`-adic coefficient rings these are the
 blueprint's `Dctf(X, Λ)`. -/
 noncomputable abbrev localizingBoundedConstructible (X : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -125,9 +126,9 @@ section General
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- The properties of the compact-support direct image `Rf_!(c)⟦Λ⟧ = Rp_* ∘ j_!` along a
-compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of blueprint `det-sf-comp-coherence-single`: it maps
-`Loc(Dᵇc(X)⟦Λ⟧)` into `Loc(Dᵇc(Y)⟦Λ⟧)` and `Dᵇc(X)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`, and its restriction
-to `Loc(Dᵇc(X)⟦Λ⟧)` preserves direct sums. -/
+compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` of blueprint
+`proposition-construction-independence-rf-shriek`: it maps `Loc(Dᵇc(X)⟦Λ⟧)` into `Loc(Dᵇc(Y)⟦Λ⟧)`
+and `Dᵇc(X)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`, and its restriction to `Loc(Dᵇc(X)⟦Λ⟧)` preserves direct sums. -/
 def LowerShriekLocalizingHypotheses : Prop :=
   (∀ K, localizingBoundedConstructible Λ X K →
     localizingBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification Λ c).obj K)) ∧
@@ -146,17 +147,17 @@ noncomputable abbrev rightDerivedLowerShriekLocalizing :
   ObjectProperty.localizingClosureLift _ _ (rightDerivedLowerShriekOfCompactification Λ c) hc.1
 
 /-- `Rf_!` on the localizing closures preserves direct sums (blueprint
-`det-sf-comp-coherence-single`). -/
+`proposition-construction-independence-rf-shriek`). -/
 instance (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J) (rightDerivedLowerShriekLocalizing hc) :=
   have := hc.2.2 J
   ObjectProperty.preservesColimitsOfShape_localizingClosureLift _ _ _ _ J
 
 omit [IsCommMonObj Λ] in
-/-- Blueprint `sk-prop-sf-existence`, uniformly in the coefficient ring `Λ`: if
-`Dᵇc(X)⟦Λ⟧` and `Dᵇc(Y)⟦Λ⟧` compactly generate their localizing closures (blueprint
-`sk-lem-brown-hypotheses`) and `Rf_!(c)⟦Λ⟧` has the properties of blueprint
-`det-sf-comp-coherence-single`, then the coproduct-preserving functor
+/-- Blueprint `theorem-existence-exceptional-inverse-image`, uniformly in the coefficient ring `Λ`:
+if `Dᵇc(X)⟦Λ⟧` and `Dᵇc(Y)⟦Λ⟧` compactly generate their localizing closures (blueprint
+`lemma-hypotheses-brown-representability`) and `Rf_!(c)⟦Λ⟧` has the properties of blueprint
+`proposition-construction-independence-rf-shriek`, then the coproduct-preserving functor
 `Rf_! : Loc(Dᵇc(X)⟦Λ⟧) ⥤ Loc(Dᵇc(Y)⟦Λ⟧)` has a right adjoint `f^!`, which commutes with shifts
 compatibly with the adjunction, is exact (triangulated), preserves direct sums and is unique up
 to unique isomorphism compatible with the adjunction. -/
@@ -193,9 +194,9 @@ instance isClosedUnderIsomorphisms_isConstructibleModuleObject (X : Scheme.{u}) 
       (IsConstructibleModuleObject (condensedRingObj Λ X)) where
   of_iso e h := IsConstructibleModuleObject.of_iso e h
 
-/-- Blueprint `det-brown-hypotheses-small` (constructible hearts): the constructible module
-objects on a noetherian scheme are essentially small. A constructible sheaf embeds into a finite
-product of pushforwards of pullbacks of finitely presented module objects, which form a set
+/-- Blueprint `lemma-hypotheses-brown-representability--5` (constructible hearts): the constructible
+module objects on a noetherian scheme are essentially small. A constructible sheaf embeds into a
+finite product of pushforwards of pullbacks of finitely presented module objects, which form a set
 (`essentiallySmall_isConstructibleModuleObject_of_noetherianSpace`). -/
 theorem essentiallySmall_isConstructibleModuleObject (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] :
@@ -203,9 +204,9 @@ theorem essentiallySmall_isConstructibleModuleObject (X : Scheme.{u})
       (IsConstructibleModuleObject (condensedRingObj Λ X)) :=
   essentiallySmall_isConstructibleModuleObject_of_noetherianSpace Λ X
 
-/-- Blueprint `det-brown-hypotheses-small`: the bounded constructible complexes on a noetherian
-scheme are essentially small: a bounded complex with constructible cohomology is obtained from
-its shifted cohomology sheaves by finitely many extensions
+/-- Blueprint `lemma-hypotheses-brown-representability--5`: the bounded constructible complexes on a
+noetherian scheme are essentially small: a bounded complex with constructible cohomology is obtained
+from its shifted cohomology sheaves by finitely many extensions
 (`DerivedCategory.essentiallySmall_bounded_inf`), and the constructible sheaves are essentially
 small (`essentiallySmall_isConstructibleModuleObject`). -/
 theorem exists_skeleton_boundedConstructible (X : Scheme.{u})
@@ -223,10 +224,10 @@ theorem exists_skeleton_boundedConstructible (X : Scheme.{u})
   obtain ⟨K', hK', ⟨e⟩⟩ := hle K hK
   exact ⟨equivShrink _ ⟨K', hK'⟩, ⟨by simpa using e.symm⟩⟩
 
-/-- The formal part of blueprint `sk-lem-brown-hypotheses`: on a noetherian scheme `X`,
-`Loc(Dᵇc(X)⟦Λ⟧)` is idempotent complete (`det-brown-hypotheses-ambient`), and if the bounded
-constructible complexes are compact in it, they compactly generate it
-(`det-brown-hypotheses-generation`). -/
+/-- The formal part of blueprint `lemma-hypotheses-brown-representability`: on a noetherian scheme
+`X`, `Loc(Dᵇc(X)⟦Λ⟧)` is idempotent complete (`lemma-hypotheses-brown-representability`), and if the
+bounded constructible complexes are compact in it, they compactly generate it
+(`lemma-hypotheses-brown-representability`). -/
 theorem compactlyGenerates_of_isCompactObj (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (h : ∀ K : LocalizingBoundedConstructible Λ X,
       boundedConstructible (condensedRingObj Λ X) K.obj → BrownRepresentability.IsCompactObj K) :
@@ -244,7 +245,7 @@ noncomputable abbrev singleLocalizingBoundedConstructible (X : Scheme.{u})
     (boundedConstructible_singleFunctor_obj Λ X 0 M hM)⟩
 
 omit [IsCommMonObj Λ] in
-/-- Blueprint `det-constructible-compactness-devissage`: if the constructible sheaves are compact
+/-- Blueprint `theorem-compactness-rational-coefficients`: if the constructible sheaves are compact
 objects of `Loc(Dᵇc(X)⟦Λ⟧)`, then so are all bounded constructible complexes. Compact objects
 are stable under shifts and extensions, and a bounded constructible complex is an iterated
 extension of shifted constructible sheaves
@@ -278,9 +279,9 @@ theorem isCompactObj_of_isCompactObj_singleLocalizingBoundedConstructible (X : S
     exact ObjectProperty.FullSubcategory.isCompactObj_of_distTriang _ (Y := ⟨Y, hY'⟩)
       (Z := ⟨Z, hle Z hZ⟩) f g k hT (ih ⟨Y, hY'⟩ hY) (hsingle ⟨Z, hle Z hZ⟩ hZ)
 
-/-- Blueprint `sk-prop-proper-image-localizing` (extension by zero): for an open immersion
-`j : U ⟶ X` into a noetherian scheme, `j_!` maps `Dᵇc(U)⟦Λ⟧` into `Dᵇc(X)⟦Λ⟧`: `j_!` is exact,
-so `Hⁿ(j_! K) ≅ j_! Hⁿ(K)`. -/
+/-- Blueprint `proposition-proper-direct-image-extension-zero` (extension by zero): for an open
+immersion `j : U ⟶ X` into a noetherian scheme, `j_!` maps `Dᵇc(U)⟦Λ⟧` into `Dᵇc(X)⟦Λ⟧`: `j_!` is
+exact, so `Hⁿ(j_! K) ≅ j_! Hⁿ(K)`. -/
 theorem boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] [TopologicalSpace.NoetherianSpace X]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
@@ -295,9 +296,10 @@ theorem boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj {U 
       (isConstructibleModuleObject_openImmersionLowerShriek_obj Λ j _ (hK n))
 
 /-- The properties of the derived direct image `Rp_*` along a proper morphism `p` used in
-blueprint `det-sf-comp-coherence-single`: it maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧` (blueprint
-`sk-thm-sfb-proper-base-change`) and its restriction to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums
-(blueprint `sk-prop-proper-image-localizing`). -/
+blueprint `proposition-construction-independence-rf-shriek`: it maps `Dᵇc(Z)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`
+(blueprint `proposition-proper-direct-image-constructible-complexes`) and its restriction to
+`Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums (blueprint
+`proposition-proper-direct-image-extension-zero`). -/
 def ProperLowerStarHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
   (∀ K, boundedConstructible (condensedRingObj Λ Z) K →
     boundedConstructible (condensedRingObj Λ Y) ((R((p)_*⟦Λ⟧)).obj K)) ∧
@@ -321,8 +323,8 @@ instance preservesColimitsOfShape_mapDerivedCategory_openImmersionLowerShriek {U
     (openImmersionLowerShriekUpperStarAdjunction Λ j).leftAdjoint_preservesColimits
   exact Functor.preservesColimitsOfShape_mapDerivedCategory _ J
 
-/-- Blueprint `sk-prop-proper-image-localizing` (extension by zero, formal part): for an open
-immersion `j : U ⟶ X` into a noetherian scheme, `j_!` maps `Loc(Dᵇc(U)⟦Λ⟧)` into
+/-- Blueprint `proposition-proper-direct-image-extension-zero` (extension by zero, formal part): for
+an open immersion `j : U ⟶ X` into a noetherian scheme, `j_!` maps `Loc(Dᵇc(U)⟦Λ⟧)` into
 `Loc(Dᵇc(X)⟦Λ⟧)`. -/
 theorem localizingBoundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [TopologicalSpace.NoetherianSpace X]
@@ -333,8 +335,8 @@ theorem localizingBoundedConstructible_mapDerivedCategory_openImmersionLowerShri
   ObjectProperty.localizingClosure_obj_of_le _ _ _ (fun K hK ↦ ObjectProperty.le_localizingClosure
     _ _ (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ j K hK)) K hK
 
-/-- Blueprint `det-sf-comp-coherence-single`, reduced to its inputs: for a compactification
-`c = (X ⟶[j] X̄ ⟶[p] Y)` with `X̄` noetherian, if `Rp_*` has the properties
+/-- Blueprint `proposition-construction-independence-rf-shriek`, reduced to its inputs: for a
+compactification `c = (X ⟶[j] X̄ ⟶[p] Y)` with `X̄` noetherian, if `Rp_*` has the properties
 `ProperLowerStarHypotheses`, then `Rf_!(c) = Rp_* ∘ j_!` has the properties
 `LowerShriekLocalizingHypotheses`: each factor maps `Dᵇc` into `Dᵇc` and its restriction to the
 localizing closures preserves direct sums, hence so does the composite, which therefore maps

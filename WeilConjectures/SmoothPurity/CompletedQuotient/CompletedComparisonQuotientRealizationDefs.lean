@@ -50,7 +50,7 @@ The construction data are owned by
 (blueprint: def-pur-completed-comparison-quotient-realization-data).
 
 Source: the integral reduction compatibility in the Weil blueprint,
-`def-weil-derived-pullback-tensor-hom`, and its representative refinement
+`prose-03-02`, and its representative refinement
 (blueprint: lem-pur-completed-comparison-quotient-realization).
 
 Natural level n means positive quotient exponent n+1. All maps below are maps

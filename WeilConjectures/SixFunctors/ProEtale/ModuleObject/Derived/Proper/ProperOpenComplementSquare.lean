@@ -20,7 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 /-!
 # The proper square of an open subscheme and its closed complement
 
-Source: blueprint main-20261015, det-sf-comp-composition-interchange, proof (3)
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
 (blueprint: lem-sfb-proper-open-complement-square).
 
 The closed complement is arbitrary with the prescribed point set; no reducedness is assumed.
@@ -42,7 +42,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 complementary pair on the source, with separated finite-type schemes and vanishing mixed
 restriction of open extension by zero on every unbounded coefficient-module complex.
 
-Source: blueprint main-20261015, det-sf-comp-composition-interchange, proof (3)
+Source: blueprint main-20261015, proposition-composition-base-change-rf-shriek--1, proof (3)
 (blueprint: lem-sfb-proper-open-complement-square).
 
 Proof: (1) Base change the quasi-compact open immersion and the closed immersion to W;
@@ -57,7 +57,7 @@ residue-field point by lem-weil-pbc-morphism-from-spec-field. It factors through
 lem-weil-pbc-field-point-factors-through-closed-immersion, and the fibre-product universal
 property lifts it to T. Thus the two images are complementary without reducing Z or T.
 (4) Represent B by a cochain complex C. Extension by zero acts termwise. By
-det-prop-sfb-module-pullback-exact-main and def-sfb-left-derived-exact, the specified total
+prose-03-02 and def-sfb-left-derived-exact, the specified total
 pullback agrees with exact termwise pullback, also for unbounded complexes.
 (5) By lem-sfb-internal-open-extension-disjoint-vanishing and (3), each term of a^*j_!C
 is zero. Its unique maps to the zero complex give a complex isomorphism, which descends

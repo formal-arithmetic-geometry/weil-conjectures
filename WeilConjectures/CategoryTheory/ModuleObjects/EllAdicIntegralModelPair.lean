@@ -13,8 +13,9 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 Bounded constructible `ℚ̄_ℓ`-complexes `K` on `X` and `K'` on `X'` (topologically noetherian
 schemes) have integral models over a common ring of integers `𝒪_E` of a finite subextension
 `E ⊆ ℚ̄_ℓ` (`ProEtale.exists_padicAlgCl_iso_integralModel_pair`): both descend to finite
-subextensions (blueprint `sk-thm-sfb-qlbar-two-colimit`), hence to a common one containing both,
-where they have integral models (blueprint `sk-lem-tf-rational-model`).
+subextensions (blueprint `lemma-descent-finite-coefficient-field`), hence to a common one containing
+both, where they have integral models (blueprint
+`lemma-integral-models-rational-frobenius-correspondences`).
 `ProEtale.exists_derivedExtendScalars_iso_integralModel_pair` reads these isomorphisms in the
 ambient derived categories, with the derived extensions of scalars along the coefficient maps
 `ProEtale.coefficientMap`.
@@ -35,9 +36,9 @@ open Scheme PadicAlgCl
 /-- **Integral models over a common `𝒪_E`**: bounded constructible `ℚ̄_ℓ`-complexes `K` on `X` and
 `K'` on `X'` (topologically noetherian schemes) are isomorphic to `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` and
 `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀'` for one finite subextension `E` and bounded constructible `𝒪_E`-complexes
-`K₀`, `K₀'` (blueprints `sk-thm-sfb-qlbar-two-colimit` and `sk-lem-tf-rational-model`): both
-descend to finite subextensions, hence to a common one containing both, where they have
-integral models. -/
+`K₀`, `K₀'` (blueprints `lemma-descent-finite-coefficient-field` and
+`lemma-integral-models-rational-frobenius-correspondences`): both descend to finite subextensions,
+hence to a common one containing both, where they have integral models. -/
 lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace X']
     (K : PadicAlgClConstructible X ℓ) (K' : PadicAlgClConstructible X' ℓ) :

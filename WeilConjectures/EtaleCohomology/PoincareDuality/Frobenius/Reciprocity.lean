@@ -10,8 +10,8 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivari
 /-!
 # Frobenius: reciprocity
 
-Part (b) of `sk-thm-frobenius`. Over a field, if the line-valued Poincaré pairing is perfect,
-`F_{K^∨}` is conjugate to `q^d (F_{c,K}^{-1})^t`, so the eigenvalues of `F` on
+Part (b) of `theorem-poincare-duality-frobenius`. Over a field, if the line-valued Poincaré pairing
+is perfect, `F_{K^∨}` is conjugate to `q^d (F_{c,K}^{-1})^t`, so the eigenvalues of `F` on
 `H^{2d-i}(X, K^∨)` are the `q^d / α` for the eigenvalues `α` of `F` on `H^i_c(X, K)`, with
 multiplicities.
 
@@ -19,8 +19,8 @@ multiplicities.
 
 - `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`,
   `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`
-  (`cor-pod-reciprocal-eigenvalues`, `sk-thm-frobenius` (b)): conjugacy and reciprocal
-  eigenvalues.
+  (`theorem-poincare-duality-frobenius--6`, `theorem-poincare-duality-frobenius` (b)): conjugacy and
+  reciprocal eigenvalues.
 -/
 
 @[expose] public section
@@ -46,14 +46,14 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `cor-pod-reciprocal-eigenvalues`: Reciprocal eigenvalues.
+/-- Blueprint `theorem-poincare-duality-frobenius--6`: Reciprocal eigenvalues.
 
 **The Frobenius of the dual is conjugate to `q^d` times the inverse transpose.** If `Λ` is a
 field, then with the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`,
 `q` invertible in `Λ`, and the line-valued pairing
 `H^i_c(X, K) × H^{2d-i}(X, K^∨) ⟶ Λ(-d) ≃ Λ` perfect (for a trivialisation `ℓ` of the value
-line; at a field stage this is `thm-pod-degreewise-perfectness-over-a-field`), the adjoint
+line; at a field stage this is `corollary-degreewise-duality-over-fields--1`), the adjoint
 `Φ : H^{2d-i}(X, K^∨) ≃ H^i_c(X, K)^∨` of the pairing satisfies
 
 `Φ ∘ F_{K^∨} ∘ Φ⁻¹ = q^d (F_{c,K}^{-1})^t`.
@@ -85,7 +85,7 @@ theorem conj_frobeniusOperator_eq_smul_inverse_dualMap (sq : IsPullback g a a h)
     untwistedDegreewisePoincarePairing_frobeniusOperator sq γ φ ψ hψ τ hTr q hτ, map_smul,
     smul_eq_mul]
 
-/-- Blueprint `cor-pod-reciprocal-eigenvalues`: Reciprocal eigenvalues.
+/-- Blueprint `theorem-poincare-duality-frobenius--6`: Reciprocal eigenvalues.
 
 **Reciprocal eigenvalues.** With the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`, the

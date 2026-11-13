@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # A step of normalized compact-support scalar comparison
 
-Source: lem-fix-operation-reduction, compact-support and final paragraphs.
+Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
 -/
 
 @[expose] public noncomputable section
@@ -39,7 +39,7 @@ variable (l : ℕ) [Fact l.Prime]
 include hl xo yo xft xqc yft yqc fo fs fft fqc
 
 /-- Realization of the proper/open scalar mate is invertible on integral constructible
-inputs. Source: lem-fix-operation-reduction, compact-support paragraph;
+inputs. Source: proposition-six-operations-change-coefficients, compact-support paragraph;
 normalized scalar isomorphisms, proof steps 2--4
 (blueprint: lem-sf-compact-support-coefficient-exchange-invertible).
 Proof: scalar extension preserves bounded integral constructibility. At every quotient,

@@ -24,7 +24,7 @@ An isomorphism `e : Ȳ ≅ X̄` of geometric fibers, over possibly different fin
 induces a linear equivalence `Hⁱ(Y ⊗ k̄', ℚ̄_ℓ) ≃ Hⁱ(X ⊗ k̄, ℚ̄_ℓ)`
 (`AlgebraicGeometry.WeilSheaf.cohomologyLinearEquivOfGeometricFiberIso`), the transport of
 `RΓ(-, ℚ̄_ℓ)` along `e`. This is the isomorphism-invariance part of the base-change clause of
-`thm-weil-poincare-duality`.
+`theorem-poincare-duality-frobenius`.
 -/
 
 @[expose] public section
@@ -170,7 +170,7 @@ lemma cohomologyCarrierIso_hom_frobenius (i : ℤ) :
 `RΓ(Ȳ, ℚ̄_ℓ) ≅ RΓ(X̄, ℚ̄_ℓ)` along `e`, through the identifications
 `AlgebraicGeometry.WeilSheaf.cohomologyCarrierIso` of the carriers of the cohomology of the
 constant Weil sheaves. This is an ingredient of the base-change clause of
-`thm-weil-poincare-duality`. -/
+`theorem-poincare-duality-frobenius`. -/
 noncomputable def cohomologyLinearEquivOfGeometricFiberIso
     (k k' : Type u) [Field k] [Finite k] [Field k'] [Finite k']
     (l : ℕ) [Fact l.Prime] [Fact (ringChar k ≠ l)] [Fact (ringChar k' ≠ l)]

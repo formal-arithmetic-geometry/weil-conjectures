@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatIdeal
 
 Let `f : X ⟶ Y` be a morphism of schemes and `Λ` a noetherian commutative ring such that the
 higher direct images of `f` vanish above `N` on every sheaf of `Λ`-modules (`UDV(f, Λ; N)`,
-`def-sf-uniform-direct-image-vanishing`). Then `Rf_*` sends an object of Tor amplitude in
+`definition-cohomological-dimension--2`). Then `Rf_*` sends an object of Tor amplitude in
 `[a, b]` to an object of Tor amplitude in `[a, b + N]`
 (`Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`).
 
@@ -27,18 +27,18 @@ of an étale sheaf is tested on the inclusions `I_Y ⟶ Λ_Y` of ideals
 (`AlgebraicGeometry.Etale.flat_of_forall_mono_whiskerLeft`), so by the Tor amplitude test
 `DerivedCategory.torAmplitudeIn_of_forall_isGE` it suffices that every `Rf_* K ⊗ᴸ (Λ/I)_Y` lies
 in degrees `≥ a`. By the projection formula with the finitely generated constant coefficient
-`Λ/I` (`lem-sf-projection-finite-constant`) this is `Rf_*(K ⊗ᴸ (Λ/I)_X)`, the direct image of an
-object concentrated in `[a, b]`. This is the residue-field test of the blueprint
-(`lem-exc-residue-tor-test`), with the quotients `Λ/I` in place of the residue field: it needs
-neither the stalks of complexes nor minimal resolutions, and no constructibility.
+`Λ/I` (`proposition-open-direct-image-preserves-finite--1`) this is `Rf_*(K ⊗ᴸ (Λ/I)_X)`, the direct
+image of an object concentrated in `[a, b]`. This is the residue-field test of the blueprint
+(`theorem-f-shriek-finite-coefficients--1`), with the quotients `Λ/I` in place of the residue field:
+it needs neither the stalks of complexes nor minimal resolutions, and no constructibility.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`
 - `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`
-  (`thm-sf-direct-image-tor-amplitude`)
+  (`proposition-six-operations-dctf--2`)
 - `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_two_mul`
-  (`cor-sf-direct-image-ctf-nonproper`)
+  (`proposition-six-operations-dctf--2`)
 -/
 
 @[expose] public section

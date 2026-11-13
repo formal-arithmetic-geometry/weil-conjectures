@@ -67,7 +67,7 @@ is zero and its underlying set sheaf is the constant singleton sheaf.
 5. Finite exchange (`lemma-weil-pbc-finite-exchange`) identifies that direct
 image with the pullback of (g_*E)|V. Forgetting abelian structure commutes with
 inverse image and direct image by
-`lem-weil-pbc-etale-inverse-image-algebraic-structures`. Isomorphisms transport
+`situation-conventions`. Isomorphisms transport
 trivializations and finiteness of geometric stalks. Compose the trivializing
 etale cover with S' ×_S V → V to obtain a trivializing etale cover of V;
 every geometric point lifts to this surjective cover, so its stalk is finite.
