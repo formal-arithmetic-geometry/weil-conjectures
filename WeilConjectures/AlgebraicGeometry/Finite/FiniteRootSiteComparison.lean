@@ -773,8 +773,6 @@ private theorem sigmaMap_generator (A : Type (u + 1)) [CommRing A] (m : ℕ)
       (T.rootsOfUnitySheaf m)).hom.app U z)
   exact hn.trans (congrArg (finiteRootProGenerator A m hm hA T W a) hz.symm)
 
-set_option maxHeartbeats 600000 in
--- The section equivalence elaborates two evaluated inverse-image and kernel isomorphisms.
 private theorem rootComparison_sections (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (W : T.ProEt) :
@@ -803,13 +801,18 @@ private theorem rootComparison_sections (A : Type (u + 1)) [CommRing A]
     dsimp only [e, AddEquiv.trans_apply]
     exact r₀.apply_symm_apply _
   have hE := heE (eE.symm (eP (c x)))
-  rw [eE.apply_symm_apply] at hE
+  -- Transport the equality directly, avoiding rewriting through the evaluated sheaf objects.
+  have hE' := (congrArg
+    (fun y : Additive (rootsOfUnity m Γ(W.left, ⊤)) ↦
+      ULift.up.{u + 1} (Additive.ofMul (Additive.toMul y).val))
+    (eE.apply_symm_apply (eP (c x)))).symm.trans hE
   have hP := heP (c x)
   change ((proEtaleRootsOfUnityInclusion T m).hom.app (op W) (c x)).down =
     ((kernel.ι (m • 𝟙 W.left.gmSheaf)).hom.app
       (op (Etale.mk (𝟙 W.left))) (r₀ (e x))).down
-  rw [hr]
-  exact congrArg ULift.down (hP.symm.trans hE)
+  exact (congrArg ULift.down (hP.symm.trans hE')).trans
+    (congrArg (fun y ↦ ((kernel.ι (m • 𝟙 W.left.gmSheaf)).hom.app
+      (op (Etale.mk (𝟙 W.left))) y).down) hr.symm)
 
 attribute [local implicit_reducible] MorphismProperty Scheme.Etale Scheme.ProEt
   Scheme.smallEtaleTopology Scheme.toProEt MorphismProperty.Over.pullback
