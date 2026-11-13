@@ -345,7 +345,7 @@ private lemma resolutionComparison_existsUnique
     {C D : Type*} [Category C] [Category D] (P : ObjectProperty C)
     (W : MorphismProperty C) (L : C ⥤ C) (q : L ⟶ 𝟭 C)
     (hq : ∀ K, W (q.app K)) (hL : ∀ K, P (L.obj K)) (U V : C ⥤ D)
-    (i : ∀ K, P K → U.obj K ≅ V.obj K)
+    (i : ∀ K, P K → (U.obj K ≅ V.obj K))
     (hi : ∀ {K K'} (hK : P K) (hK' : P K') (p : K ⟶ K'),
       U.map p ≫ (i K' hK').hom = (i K hK).hom ≫ V.map p)
     (A : C) [∀ K, IsIso (U.map (q.app K))] [IsIso (V.map (q.app A))] :
@@ -367,7 +367,8 @@ private lemma resolutionComparison_existsUnique
       exact congrArg V.map (q.naturality p)
     calc
       U.map (q.app K) ≫ U.map p ≫ z.hom =
-          U.map (L.map p) ≫ U.map (q.app A) ≫ z.hom := by rw [← Category.assoc, hU]
+          U.map (L.map p) ≫ U.map (q.app A) ≫ z.hom := by
+        rw [← Category.assoc, hU, Category.assoc]
       _ = U.map (L.map p) ≫ (i (L.obj A) (hL A)).hom ≫ V.map (q.app A) := by rw [hz]
       _ = (i (L.obj K) (hL K)).hom ≫ V.map (L.map p) ≫ V.map (q.app A) := by
         rw [← Category.assoc, hi (hL K) (hL A), Category.assoc]
@@ -452,7 +453,7 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
   have hq (K : CochainComplex M ℤ) : QuasiIso (Λ.resolutionNatTrans.app K) := inferInstance
   have (K : CochainComplex M ℤ) : IsIso (U.map (Λ.resolutionNatTrans.app K)) := by
     have : IsIso (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K)) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso _).2 (hq K)
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 (hq K)
     let : IsIso (Prod.mkHom (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K))
         (𝟙 (DerivedCategory.Q.{u + 2}.obj F))) :=
       (Iso.prod (asIso (DerivedCategory.Q.{u + 2}.map (Λ.resolutionNatTrans.app K)))
@@ -460,7 +461,7 @@ theorem proEtaleMixedTensor_existsUnique (a : ProEtaleTensorModel Y R)
     change IsIso (a.tensor.map (Prod.mkHom _ _))
     infer_instance
   have : IsIso (V.map (Λ.resolutionNatTrans.app A)) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _).2 (htensor _ (hq A))
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 (htensor _ (hq A))
   exact resolutionComparison_existsUnique (proEtaleFlatRepresentatives Y R)
     (HomologicalComplex.quasiIso M (.up ℤ)) Λ.resolutionFunctor Λ.resolutionNatTrans
     hq hres U V (fun K hK ↦ (a.representative.app (⟨K, hK⟩, ⟨F, hf⟩)).symm)
