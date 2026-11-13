@@ -493,6 +493,7 @@ theorem finiteCoefficientDescentTwoColimit
         ((congrFun (hE E) D.obj).mp D.property)⟩
     have hh :=
       (coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C' D' 0).2.2.2.2.2
+    dsimp only [C', D'] at hh
     have hs := hh.1
     have hi := hh.2
     constructor
