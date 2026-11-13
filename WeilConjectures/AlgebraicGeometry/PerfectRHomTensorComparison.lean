@@ -235,11 +235,9 @@ theorem perfect_rhom_tensor_comparison
     intro A B f q
     have hh := hadj' B A D.obj D.obj (𝟙_ (schemeDerivedCategory X))
       (𝟙_ (schemeDerivedCategory X)) f (𝟙 _) (𝟙 _) q
-    have hmap : (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-        X.toRingedSpace.sheaf).map
-        ((𝟙 D.obj).op, 𝟙 (𝟙_ (schemeDerivedCategory X))) = 𝟙 _ :=
-      Functor.map_id _ _
-    simpa only [hmap, Category.comp_id] using hh
+    have hmap := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+      X.toRingedSpace.sheaf).map_id (op D.obj, 𝟙_ (schemeDerivedCategory X))
+    simpa only [op_id, ← prod_id', hmap, Category.comp_id] using hh
   refine ⟨D, hD, ev, rfl, hperfect, (fun N ↦ φ N.obj), ?_, hφ M.obj,
     hφ K.obj, bidual, ?_, hb, η, ?_, ?_, ⟨p, rfl, rfl⟩, ?_⟩
   · intro N
@@ -270,11 +268,9 @@ theorem perfect_rhom_tensor_comparison
       have hh := hadjT B A ((derivedPullback g).obj K.obj)
         ((derivedPullback g).obj K.obj) (𝟙_ (schemeDerivedCategory T))
         (𝟙_ (schemeDerivedCategory T)) f (𝟙 _) (𝟙 _) q
-      have hmap : (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace)
-          T.toRingedSpace.sheaf).map
-          ((𝟙 ((derivedPullback g).obj K.obj)).op,
-            𝟙 (𝟙_ (schemeDerivedCategory T))) = 𝟙 _ :=
-        Functor.map_id _ _
-      simpa only [hmap, Category.comp_id] using hh
+      have hmap := (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace)
+        T.toRingedSpace.sheaf).map_id
+        (op ((derivedPullback g).obj K.obj), 𝟙_ (schemeDerivedCategory T))
+      simpa only [op_id, ← prod_id', hmap, Category.comp_id] using hh
 
 end AlgebraicGeometry
