@@ -54,6 +54,44 @@ private theorem augmentationComparisonOfZero
   simp only [Category.assoc] at hun
   rw [hun, hε, hp]
 
+/-- Compute the single-complex comparison before specializing the coefficient category. -/
+private theorem mapExtendSingleIso_hom_f_zero
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (E : C ⥤ D) [E.Additive] (M : C) {N : D} (e : E.obj M ≅ N) :
+    (((E.mapHomologicalComplex (.up ℤ)).mapIso
+        (HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat M 0 0 rfl) ≪≫
+      (HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).app M ≪≫
+      (HomologicalComplex.single D (.up ℤ) 0).mapIso e).hom.f 0) =
+      E.map (((ChainComplex.single₀ C).obj M).extendXIso
+        ComplexShape.embeddingDownNat (i := 0) rfl).hom ≫
+        e.hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 N).inv := by
+  simp only [Iso.trans_hom, Iso.app_hom, HomologicalComplex.comp_f,
+    Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f,
+    HomologicalComplex.extendSingleIso_hom_f,
+    HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+    HomologicalComplex.single_map_f_self, Category.assoc,
+    Iso.inv_hom_id_assoc, ← E.map_comp_assoc]
+  rfl
+
+/-- Extension preserves an augmentation which is epimorphic in degree zero. -/
+private theorem epi_extendMap_single_of_epi_zero
+    {C : Type*} [Category C] [Abelian C] {K : ChainComplex C ℕ} {M : C}
+    (f : K ⟶ (ChainComplex.single₀ C).obj M) [Epi (f.f 0)] :
+    Epi (HomologicalComplex.extendMap f ComplexShape.embeddingDownNat) := by
+  have hepi (k : ℕ) : Epi (f.f k) := by
+    cases k with
+    | zero => infer_instance
+    | succ k =>
+      exact (HomologicalComplex.isZero_single_obj_X (.down ℕ) 0 M (k + 1)
+        (by omega)).epi _
+  apply HomologicalComplex.epi_of_epi_f
+  intro i
+  by_cases hi : ∃ k, ComplexShape.embeddingDownNat.f k = i
+  · obtain ⟨k, hk⟩ := hi
+    rw [HomologicalComplex.extendMap_f _ _ hk]
+    infer_instance
+  · exact (HomologicalComplex.isZero_extend_X _ _ i (by simpa using hi)).epi _
+
 attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
@@ -188,14 +226,8 @@ theorem adicResidue_koszul_coefficient_cone_comparison
   have heQ (n : ℕ) : (eQ n).hom.f 0 =
       E.map ((((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
         ComplexShape.embeddingDownNat (i := 0) rfl).hom) ≫
-      (q n).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv := by
-    simp only [eQ, H, Iso.trans_hom, Iso.app_hom, HomologicalComplex.comp_f,
-      Functor.mapIso_hom, Functor.mapHomologicalComplex_map_f,
-      HomologicalComplex.extendSingleIso_hom_f,
-      HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
-      HomologicalComplex.single_map_f_self, Category.assoc,
-      Iso.inv_hom_id_assoc, ← E.map_comp_assoc]
-    rfl
+      (q n).hom ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv :=
+    mapExtendSingleIso_hom_f_zero E (B n) (q n)
   have haug (n : ℕ) : H.map (f n) ≫ (eQ n).hom = (eK n).hom ≫ ε.app (op n) := by
     have hf0 : vK n ≫ (f n).f 0 ≫
         (((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extendXIso
@@ -232,25 +264,12 @@ theorem adicResidue_koszul_coefficient_cone_comparison
     apply HomologicalComplex.to_single_hom_ext
     exact hzero
   have hfepi (n : ℕ) : Epi (H.map (f n)) := by
-    have hepi (k : ℕ) : Epi ((εA n).f k) := by
-      cases k with
-      | zero =>
-        rw [hεA n]
-        apply (ModuleCat.epi_iff_surjective _).2
-        exact (Submodule.mkQ_surjective _).comp
-          (exteriorPower.zeroEquiv A (Fin r →₀ A)).surjective
-      | succ k =>
-        exact (HomologicalComplex.isZero_single_obj_X (.down ℕ) 0 (B n) (k + 1)
-          (by omega)).epi _
-    have : Epi (f n) := by
-      apply HomologicalComplex.epi_of_epi_f
-      intro i
-      by_cases hi : ∃ k, ComplexShape.embeddingDownNat.f k = i
-      · obtain ⟨k, hk⟩ := hi
-        dsimp only [f]
-        rw [HomologicalComplex.extendMap_f _ _ hk]
-        infer_instance
-      · exact (HomologicalComplex.isZero_extend_X _ _ i (by simpa using hi)).epi _
+    have : Epi ((εA n).f 0) := by
+      rw [hεA n]
+      apply (ModuleCat.epi_iff_surjective _).2
+      exact (Submodule.mkQ_surjective _).comp
+        (exteriorPower.zeroEquiv A (Fin r →₀ A)).surjective
+    have : Epi (f n) := epi_extendMap_single_of_epi_zero (εA n)
     infer_instance
   obtain ⟨e, he⟩ := additiveConeFamilyComparison E K L f
     (fun n m h ↦ HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
