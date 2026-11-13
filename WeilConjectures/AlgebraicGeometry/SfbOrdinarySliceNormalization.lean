@@ -138,9 +138,27 @@ theorem sfbOrdinarySliceNormalization
   refine ⟨G, hGa, hGl, hGc, ⟨?_⟩⟩
   let F := (proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
     ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W
-  let α := changeIsoRestriction c
-  refine NatIso.ofComponents (fun M ↦ α.app (F.obj M)) ?_
-  intro M N f
-  exact α.hom.naturality (F.map f)
+  let β : F ⋙ ConstantCompletion.res (asIso c).inv ≅
+      SheafOfModules.overFunctor ((adicLisseForget S).obj R) U ⋙ G := by
+    refine NatIso.ofComponents (fun M ↦ ?_) ?_
+    · refine
+        { hom := { val := { app := fun V ↦ ?_, naturality := ?_ } }
+          inv := { val := { app := fun V ↦ ?_, naturality := ?_ } }
+          hom_inv_id := ?_
+          inv_hom_id := ?_ }
+      · exact ModuleCat.ofHom
+          { toFun := fun x ↦ x
+            map_add' := fun _ _ ↦ rfl
+            map_smul' := fun _ _ ↦ rfl }
+      · intros; ext; rfl
+      · exact ModuleCat.ofHom
+          { toFun := fun x ↦ x
+            map_add' := fun _ _ ↦ rfl
+            map_smul' := fun _ _ ↦ rfl }
+      · intros; ext; rfl
+      · ext; rfl
+      · ext; rfl
+    · intros; ext; rfl
+  exact Functor.isoWhiskerLeft F (changeIsoRestriction c) ≪≫ β
 
 end AlgebraicGeometry.Scheme
