@@ -85,7 +85,6 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
       (ρ_ (DerivedCategory.Q.obj F)).hom := by
   classical
   dsimp only
-  have := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace)
   let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
     (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
   let V := homComplex (R := Y.sheaf) P O
