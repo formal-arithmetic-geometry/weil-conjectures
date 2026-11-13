@@ -268,6 +268,22 @@ lemma resIdeal_self {Z : Scheme.{u}} [Z.Over (Spec (.of K))] (I : Z.IdealSheafDa
   rw [show homOfLE (le_refl U) = 𝟙 U from rfl, op_id, CategoryTheory.Functor.map_id]
   rfl
 
+/-- Restrict the first tensor factor before multiplying ideal sections. -/
+private lemma mulIdeal_rTensor_res {U U' : X.Opens} {V : Y.Opens} (hU' : U' ≤ U) (w) :
+    mulIdeal I I' U' V ((resIdeal (K := K) I hU').rTensor _ w) =
+      (prod K X Y).presheaf.map (homOfLE (inf_le_inf ((prodFst K X Y).preimage_mono hU')
+        ((prodSnd K X Y).preimage_mono (le_refl V)))).op (mulIdeal I I' U V w) := by
+  rw [map_mulIdeal I I' hU' (le_refl V), resIdeal_self]
+  rfl
+
+/-- Restrict the second tensor factor before multiplying ideal sections. -/
+private lemma mulIdeal_lTensor_res {U : X.Opens} {V V' : Y.Opens} (hV' : V' ≤ V) (w) :
+    mulIdeal I I' U V' ((resIdeal (K := K) I' hV').lTensor _ w) =
+      (prod K X Y).presheaf.map (homOfLE (inf_le_inf ((prodFst K X Y).preimage_mono
+        (le_refl U)) ((prodSnd K X Y).preimage_mono hV'))).op (mulIdeal I I' U V w) := by
+  rw [map_mulIdeal I I' (le_refl U) hV', resIdeal_self]
+  rfl
+
 /-- Restrictions along two inclusions between equal opens are inverse to each other. -/
 lemma eq_of_presheaf_map_eq {Z : Scheme.{u}} {O₁ O₂ : Z.Opens} (h : O₂ = O₁) {s t : Γ(Z, O₁)}
     (hst : Z.presheaf.map (homOfLE h.le).op s = Z.presheaf.map (homOfLE h.le).op t) : s = t := by
@@ -295,17 +311,14 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
   have h1 := congrArg (fun x ↦ P.map (homOfLE h).op x) h0
   simp only [map_add, map_zsmul, map_zero] at h1
   have e0 : ![p, r, q] ∘ Fin.succAbove 0 = ![r, q] := by
-    apply funext
-    apply Fin.forall_fin_two.2
-    exact ⟨rfl, rfl⟩
+    funext l
+    fin_cases l <;> simp [Fin.succAbove]
   have e1 : ![p, r, q] ∘ (Fin.succ 0).succAbove = ![p, q] := by
-    apply funext
-    apply Fin.forall_fin_two.2
-    exact ⟨rfl, rfl⟩
+    funext l
+    fin_cases l <;> simp [Fin.succAbove]
   have e2 : ![p, r, q] ∘ (Fin.succ 0).succ.succAbove = ![p, r] := by
-    apply funext
-    apply Fin.forall_fin_two.2
-    exact ⟨rfl, rfl⟩
+    funext l
+    fin_cases l <;> simp [Fin.succAbove]
   simp only [TopCat.Presheaf.map_homOfLE_map_homOfLE_apply] at h1
   rw [TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e0 _ h₃,
     TopCat.Presheaf.map_homOfLE_apply_congr W P (k := 1) c e1 _ h₁,
@@ -318,7 +331,6 @@ private lemma cechCocycle_map_add {Z : TopCat.{u}} {ι : Type u}
     (P.map (homOfLE h₂).op (c ![p, r])), ← add_assoc, ← sub_eq_add_neg] at h1
   exact (sub_eq_zero.mp h1).symm.trans (add_comm _ _)
 
--- the proof checks many index cases of the Čech cocycle condition
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
 of `X` and `Y`, with affine pairwise intersections. If `I` and `I'` have no nonzero global
 sections, the Čech complex of `pr_X⁻¹ I ⊓ pr_Y⁻¹ I'` for the cover `U × V` of `X ×_K Y` is
@@ -365,19 +377,6 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       ∃ w, mulIdeal I I' U V w = x :=
     (range_mulIdeal I I' hU hV).ge hx
   choose θinv hθinv using hθ
-  -- restriction of `mulIdeal` along `U' ≤ U` in the first factor
-  have hresL {U U' : X.Opens} {V : Y.Opens} (hU' : U' ≤ U) (w) :
-      mulIdeal I I' U' V ((resIdeal (K := K) I hU').rTensor _ w) =
-        (prod K X Y).presheaf.map (homOfLE (inf_le_inf ((prodFst K X Y).preimage_mono hU')
-          ((prodSnd K X Y).preimage_mono (le_refl V)))).op (mulIdeal I I' U V w) := by
-    rw [map_mulIdeal I I' hU' (le_refl V), resIdeal_self]
-    rfl
-  have hresR {U : X.Opens} {V V' : Y.Opens} (hV' : V' ≤ V) (w) :
-      mulIdeal I I' U V' ((resIdeal (K := K) I' hV').lTensor _ w) =
-        (prod K X Y).presheaf.map (homOfLE (inf_le_inf ((prodFst K X Y).preimage_mono
-          (le_refl U)) ((prodSnd K X Y).preimage_mono hV'))).op (mulIdeal I I' U V w) := by
-    rw [map_mulIdeal I I' (le_refl U) hV', resIdeal_self]
-    rfl
   -- the opens over which the components live
   have hle {a a' : α} {b b' : β} {a₀ : α} {b₀ : β} (ha : a₀ = a ∨ a₀ = a')
       (hb : b₀ = b ∨ b₀ = b') :
@@ -387,10 +386,13 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       exacts [inf_le_left, inf_le_right]
     · rcases hb with rfl | rfl
       exacts [inf_le_left, inf_le_right]
-  have hD {a a' : α} {b b' : β} {n : ℕ} (y : Fin n → α × β)
-      (hy : ∀ l, ((y l).1 = a ∨ (y l).1 = a') ∧ ((y l).2 = b ∨ (y l).2 = b')) :
-      prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (y l) :=
-    le_iInf fun l ↦ hle (hy l).1 (hy l).2
+  have hpair {O : (prod K X Y).Opens} {p q : α × β}
+      (hp : O ≤ Wc p) (hq : O ≤ Wc q) : O ≤ ⨅ l, Wc (![p, q] l) :=
+    le_iInf (Fin.forall_fin_two.2 ⟨hp, hq⟩)
+  have htriple {O : (prod K X Y).Opens} {p r q : α × β}
+      (hp : O ≤ Wc p) (hr : O ≤ Wc r) (hq : O ≤ Wc q) :
+      O ≤ ⨅ l, Wc (![p, r, q] l) :=
+    le_iInf (Fin.cases hp (Fin.forall_fin_two.2 ⟨hr, hq⟩))
   -- the horizontal and vertical components of `c`
   have hOH (a a' : α) (b : β) :
       prodOpen K X Y (Ux a ⊓ Ux a') (Vy b) ≤ ⨅ l, Wc (![(a, b), (a', b)] l) := by
@@ -421,34 +423,16 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
       (resIdeal (K := K) I' (inf_le_right : Vy b ⊓ Vy b' ≤ Vy b')).lTensor _ (h a a' b') -
         (resIdeal (K := K) I' (inf_le_left : Vy b ⊓ Vy b' ≤ Vy b)).lTensor _ (h a a' b) := by
     apply injective_mulIdeal I I' (hUx₂ a a') (hVy₂ b b')
-    simp only [map_sub, hresL, hresR, hh, hvv, hcres_map]
-    have hDD {n : ℕ} (y : Fin n → α × β) (hy : ∀ l, y l = (a, b) ∨ y l = (a', b) ∨
-        y l = (a, b') ∨ y l = (a', b')) :
-        prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (y l) := by
-      refine hD y fun l ↦ ?_
-      rcases hy l with h | h | h | h
-      · exact ⟨Or.inl (congrArg Prod.fst h), Or.inl (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inr (congrArg Prod.fst h), Or.inl (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inl (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inr (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
-    have h1 : (a, b) = (a, b) ∨ (a, b) = (a', b) ∨ (a, b) = (a, b') ∨ (a, b) = (a', b') :=
-      .inl rfl
-    have h2 : (a', b) = (a, b) ∨ (a', b) = (a', b) ∨ (a', b) = (a, b') ∨ (a', b) = (a', b') :=
-      .inr (.inl rfl)
-    have h3 : (a, b') = (a, b) ∨ (a, b') = (a', b) ∨ (a, b') = (a, b') ∨ (a, b') = (a', b') :=
-      .inr (.inr (.inl rfl))
-    have h4 : (a', b') = (a, b) ∨ (a', b') = (a', b) ∨ (a', b') = (a, b') ∨
-        (a', b') = (a', b') := .inr (.inr (.inr rfl))
-    have c1 := hcocycle (a, b) (a', b) (a', b') (prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b'))
-      (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h2, h4⟩)))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h4⟩))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h2⟩))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h2, h4⟩))
-    have c2 := hcocycle (a, b) (a, b') (a', b') (prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b'))
-      (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h3, h4⟩)))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h4⟩))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h1, h3⟩))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h3, h4⟩))
+    simp only [map_sub, mulIdeal_rTensor_res I I', mulIdeal_lTensor_res I I', hh, hvv, hcres_map]
+    let D := prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b')
+    have h00 : D ≤ Wc (a, b) := hle (.inl rfl) (.inl rfl)
+    have h10 : D ≤ Wc (a', b) := hle (.inr rfl) (.inl rfl)
+    have h01 : D ≤ Wc (a, b') := hle (.inl rfl) (.inr rfl)
+    have h11 : D ≤ Wc (a', b') := hle (.inr rfl) (.inr rfl)
+    have c1 := hcocycle (a, b) (a', b) (a', b') D
+      (htriple h00 h10 h11) (hpair h00 h11) (hpair h00 h10) (hpair h10 h11)
+    have c2 := hcocycle (a, b) (a, b') (a', b') D
+      (htriple h00 h01 h11) (hpair h00 h11) (hpair h00 h01) (hpair h01 h11)
     exact (sub_eq_sub_iff_add_eq_add).2
       ((add_comm _ _).trans ((c1.symm.trans c2).trans (add_comm _ _)))
   obtain ⟨e, he₁, he₂⟩ := TensorProduct.exists_eq_rTensor_sub_and_eq_lTensor_sub
@@ -480,30 +464,18 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
         (prod K X Y).presheaf.map (homOfLE (hle (a₀ := a) (b₀ := b) (.inl rfl) (.inl rfl))).op
           (mulIdeal I I' _ _ (e a b)) =
         cres (a, b) (a', b') _ hpq := by
-    have h1 : (a, b) = (a, b) ∨ (a, b) = (a', b) ∨ (a, b) = (a, b') ∨ (a, b) = (a', b') :=
-      .inl rfl
-    have h2 : (a', b) = (a, b) ∨ (a', b) = (a', b) ∨ (a', b) = (a, b') ∨ (a', b) = (a', b') :=
-      .inr (.inl rfl)
-    have h4 : (a', b') = (a, b) ∨ (a', b') = (a', b) ∨ (a', b') = (a, b') ∨
-        (a', b') = (a', b') := .inr (.inr (.inr rfl))
-    have hDD {n : ℕ} (y : Fin n → α × β) (hy : ∀ l, y l = (a, b) ∨ y l = (a', b) ∨
-        y l = (a, b') ∨ y l = (a', b')) :
-        prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b') ≤ ⨅ l, Wc (y l) := by
-      refine hD y fun l ↦ ?_
-      rcases hy l with h | h | h | h
-      · exact ⟨Or.inl (congrArg Prod.fst h), Or.inl (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inr (congrArg Prod.fst h), Or.inl (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inl (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
-      · exact ⟨Or.inr (congrArg Prod.fst h), Or.inr (congrArg Prod.snd h)⟩
-    rw [hcocycle (a, b) (a', b) (a', b') _ (hDD _ (Fin.cases h1 (Fin.forall_fin_two.2 ⟨h2, h4⟩)))
-      hpq (hDD _ (Fin.forall_fin_two.2 ⟨h1, h2⟩))
-      (hDD _ (Fin.forall_fin_two.2 ⟨h2, h4⟩))]
+    let D := prodOpen K X Y (Ux a ⊓ Ux a') (Vy b ⊓ Vy b')
+    have h00 : D ≤ Wc (a, b) := hle (.inl rfl) (.inl rfl)
+    have h10 : D ≤ Wc (a', b) := hle (.inr rfl) (.inl rfl)
+    have h11 : D ≤ Wc (a', b') := hle (.inr rfl) (.inr rfl)
+    refine Eq.trans ?_ (hcocycle (a, b) (a', b) (a', b') D
+      (htriple h00 h10 h11) hpq (hpair h00 h10) (hpair h10 h11)).symm
     rw [← hcres_map (a, b) (a', b) (hOH a a' b)
         (inf_le_inf le_rfl ((prodSnd K X Y).preimage_mono inf_le_left)),
       ← hcres_map (a', b) (a', b') (hOV a' b b')
         (inf_le_inf ((prodFst K X Y).preimage_mono inf_le_right) le_rfl),
       ← hh, ← hvv, he₁, he₂]
-    simp only [map_sub, hresL, hresR, Scheme.presheaf_map_homOfLE_map_homOfLE_apply]
+    simp only [map_sub, mulIdeal_rTensor_res I I', mulIdeal_lTensor_res I I', Scheme.presheaf_map_homOfLE_map_homOfLE_apply]
     abel
   have hιmap {O O' : (prod K X Y).Opens} (hO : O' ≤ O) (s : Γ(J.toModules, O)) :
       J.toModulesι.app O' (P.map (homOfLE hO).op s) =
@@ -517,9 +489,8 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   set p := y 0
   set q := y 1
   have hy : y = ![p, q] := by
-    apply funext
-    apply Fin.forall_fin_two.2
-    exact ⟨rfl, rfl⟩
+    funext l
+    fin_cases l <;> simp [Fin.succAbove]
   have hyle : ⨅ l, Wc (y l) ≤ ⨅ l, Wc (![p, q] l) := hy ▸ le_rfl
   rw [show c y = P.map (homOfLE hyle).op (c ![p, q]) from
     ((TopCat.Presheaf.map_homOfLE_self_apply P le_rfl (c y)).symm.trans
@@ -529,8 +500,8 @@ lemma exactAt_one_cechComplex_prodIdeal {α β : Type u} [Finite α] [Finite β]
   set D := prodOpen K X Y (Ux p.1 ⊓ Ux q.1) (Vy p.2 ⊓ Vy q.2)
   have hDy : D = ⨅ l, Wc (y l) := by
     refine le_antisymm (le_iInf ?_) ?_
-    · apply Fin.forall_fin_two.2
-      exact ⟨hle (.inl rfl) (.inl rfl), hle (.inr rfl) (.inr rfl)⟩
+    · exact Fin.forall_fin_two.2
+        ⟨hle (.inl rfl) (.inl rfl), hle (.inr rfl) (.inr rfl)⟩
     · intro x hx
       have h0 : x ∈ Wc p := (iInf_le (fun l ↦ Wc (y l)) 0) hx
       have h1 : x ∈ Wc q := (iInf_le (fun l ↦ Wc (y l)) 1) hx
