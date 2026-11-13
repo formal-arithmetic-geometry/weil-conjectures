@@ -117,6 +117,7 @@ theorem exists_strictlyPerfect_evaluation_local_retraction (X : Scheme.{u})
     fun n ↦ isIso_localOrdinaryEvaluation_degree X U P F hstrict f hf n
   have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
   refine ⟨b.hom ≫ (Q.mapIso (asIso f)).inv ≫ a.inv, ?_⟩
+  change R.map g ≫ b.hom = a.hom ≫ (Q.mapIso (asIso f)).hom at hab
   rw [← Category.assoc, ← Category.assoc, hab]
   simp only [Category.assoc, Iso.hom_inv_id, Category.id_comp]
 
