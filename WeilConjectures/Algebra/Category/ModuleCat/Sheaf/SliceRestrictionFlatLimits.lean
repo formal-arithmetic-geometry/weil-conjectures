@@ -31,6 +31,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace SheafOfModules
 
+set_option trace.profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing the two restriction presentations in the naturality square needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in

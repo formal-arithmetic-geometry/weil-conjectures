@@ -52,6 +52,7 @@ private lemma homObjMap_units_smul_left
   · simp only [one_smul]
   · simp only [Units.neg_smul, one_smul, homObjMap_neg_left]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1600000 in
 -- The dependent product projection formulas require repeated complex-index transport.
 set_option backward.isDefEq.respectTransparency false in
