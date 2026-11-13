@@ -157,6 +157,17 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
+@[instance 2000]
+private theorem restrictionComp_preservesZero
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
+    (SheafOfModules.overFunctor.{max u r} R Y ⋙
+      SheafOfModules.overMap.{max u r} R f).PreservesZeroMorphisms := by
+  constructor
+  intro M N
+  ext W x
+  rfl
+
 -- Additivity of the composite restriction functor is found by a deep search.
 /-- The sectionwise identity for iterated restriction, on complexes.
 Source: Stacks 03DH (blueprint: lem-sp-subterminal-derived-image-calculus). -/
