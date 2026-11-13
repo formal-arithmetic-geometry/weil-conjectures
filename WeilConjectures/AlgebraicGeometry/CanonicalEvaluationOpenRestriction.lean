@@ -124,7 +124,7 @@ private theorem closedMonoidal_evaluation
   simp
 
 
--- Elaborating the mixed-universe sheaf tensor comparisons needs extra heartbeats.
+set_option profiler true in
 /-- Restriction preserves the canonical derived evaluation arrow, including its
 source and target comparisons. This is independent of any ordinary complex model.
 
@@ -180,8 +180,10 @@ theorem exists_canonicalEvaluation_open_restriction (X : Scheme.{u})
     ∃ a : R.obj (N ⊗ D) ≅ NU ⊗ DU,
       ∃ b : R.obj (H.obj (op K, N)) ≅ HU.obj (op KU, NU),
         R.map g ≫ b.hom = a.hom ≫ gU := by
-  obtain ⟨m, h, hh⟩ := exists_openRestriction_closedMonoidal X U
+  intro E R H HU KU NU D DU g gU
+  refine (exists_openRestriction_closedMonoidal X U).elim fun m hm ↦ ?_
   let := m
+  refine hm.elim fun h hh ↦ ?_
   exact closedMonoidal_evaluation _ _ _ (schemeDerivedTensorHomEquiv X)
     (schemeDerivedTensorHomEquiv U.toScheme)
     (fun A A' K N N' a c ξ ↦
