@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
-public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The base-change morphism and the coefficient change `𝒪_E ⟶ E`
@@ -87,7 +87,7 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational
     have : QuasiSeparated (f'.left ≫ Y'.hom) := by rw [Over.w f']; infer_instance
     exact QuasiSeparated.of_comp f'.left Y'.hom
   have ha := K₀.property.1.1.choose_spec
-  set a := K₀.property.1.1.choose
+  let a := K₀.property.1.1.choose
   have : K₀.obj.IsGE a := ha
   have : ((g'.left)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj
       K₀.obj).IsGE a := isGE_leftDerivedUpperStar_obj _ g'.left K₀.obj a
