@@ -80,6 +80,7 @@ private theorem common_lifts (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- The boundary comparison elaborates several derived-category transports.
 private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -123,6 +124,7 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The cocycle calculation elaborates the underlying modules and product projections.
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
