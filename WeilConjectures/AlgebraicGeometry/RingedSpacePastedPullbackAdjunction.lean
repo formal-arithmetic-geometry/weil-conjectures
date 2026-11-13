@@ -118,7 +118,7 @@ private theorem compatible_single_adjunction
     α (moduleDirectImage f).rightDerivedFunctorUnit K
 
 private theorem pasted_adjunction_unit_fac
-    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    {C₀ : Type*} {C₁ : Type*} {C₂ : Type*} {D₀ : Type*} {D₁ : Type*} {D₂ : Type*}
     [Category C₀] [Category C₁] [Category C₂]
     [Category D₀] [Category D₁] [Category D₂]
     (Q₀ : C₀ ⥤ D₀) (Q₁ : C₁ ⥤ D₁) (Q₂ : C₂ ⥤ D₂)
@@ -212,12 +212,24 @@ theorem exists_pasted_tensorPullback_adjunction
   obtain ⟨Pg, hg, hgm, hag, ⟨ag⟩⟩ := exists_tensorModulePullback g
   have := haf
   have := hag
-  obtain ⟨Lf, αf, hLf, hKf, habsf⟩ :=
-    exists_absolute_leftDerived_tensorModulePullback f Pf hf hfm
-  obtain ⟨Lg, αg, hLg, hKg, habsg⟩ :=
-    exists_absolute_leftDerived_tensorModulePullback g Pg hg hgm
-  obtain ⟨df, hdf⟩ := compatible_single_adjunction f Pf af Lf αf hLf habsf
-  obtain ⟨dg, hdg⟩ := compatible_single_adjunction g Pg ag Lg αg hLg habsg
+  have hf' := exists_absolute_leftDerived_tensorModulePullback f Pf hf hfm
+  have hg' := exists_absolute_leftDerived_tensorModulePullback g Pg hg hgm
+  let Lf := hf'.choose
+  let Lg := hg'.choose
+  let αf := hf'.choose_spec.choose
+  let αg := hg'.choose_spec.choose
+  have hLf := hf'.choose_spec.choose_spec.1
+  have hLg := hg'.choose_spec.choose_spec.1
+  have hKf := hf'.choose_spec.choose_spec.2.1
+  have hKg := hg'.choose_spec.choose_spec.2.1
+  have habsf := hf'.choose_spec.choose_spec.2.2
+  have habsg := hg'.choose_spec.choose_spec.2.2
+  have hfadj := compatible_single_adjunction f Pf af Lf αf hLf habsf
+  have hgadj := compatible_single_adjunction g Pg ag Lg αg hLg habsg
+  let df := hfadj.choose
+  let dg := hgadj.choose
+  have hdf := hfadj.choose_spec
+  have hdg := hgadj.choose_spec
   let G := Pg.mapHomotopyCategory (.up ℤ) ⋙ Pf.mapHomotopyCategory (.up ℤ)
   let L := Lg ⋙ Lf
   let α : DerivedCategory.Qh ⋙ L ⟶ G ⋙ DerivedCategory.Qh :=

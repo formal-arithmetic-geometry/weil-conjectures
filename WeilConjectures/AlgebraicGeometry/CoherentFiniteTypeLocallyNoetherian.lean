@@ -167,8 +167,9 @@ private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
   have : ∀ V : Over U, HasSheafify
       (((Opens.grothendieckTopology ↥X).over U).over V) AddCommGrpCat.{u} :=
     fun _ ↦ inferInstance
-  have : ∀ V : Over U, (((Opens.grothendieckTopology ↥X).over U).over V).
-      WEqualsLocallyBijective AddCommGrpCat.{u} := fun _ ↦ inferInstance
+  have : ∀ V : Over U,
+      (((Opens.grothendieckTopology ↥X).over U).over V).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := fun _ ↦ inferInstance
   have : HasSheafify (Opens.grothendieckTopology ↥U) AddCommGrpCat.{u} := inferInstance
   have : (Opens.grothendieckTopology ↥U).WEqualsLocallyBijective AddCommGrpCat.{u} :=
     inferInstance
