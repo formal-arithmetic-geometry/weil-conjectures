@@ -113,13 +113,11 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
     DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
   have : B₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
     DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
-  have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
-      (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
-    boundedConstructible_tensorObj
+  have hAB := boundedConstructible_tensorObj
       (PadicIntegersRingObj.lisseHypotheses ℓ E.1).toLisseTensorHypotheses
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
-  obtain ⟨c, hc⟩ := hAB.1.1
+  refine hAB.1.1.elim fun c hc ↦ ?_
   -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
   have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
       (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂
