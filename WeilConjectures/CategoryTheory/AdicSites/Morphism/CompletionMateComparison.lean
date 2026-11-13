@@ -1127,28 +1127,21 @@ section
 
 attribute [local semireducible] ConstantCompletion.pull
 
-/-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
-on every inverse-image generator, not merely its objects.
-Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
-Proof: both sides have the same underlying inverse-image additive sheaf and the
-same restricted constant A-action. The map is identity on its generalized sections.
-Its inverse is the same identity. The displayed insertion formula fixes it uniquely. -/
-theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
-    (f : Morphism V U) (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
-    ∃! e : ConstantCompletion.res (ConstantCompletion.quotient V.topology A I n) ⋙
-        f.modulePull A ≅ f.modulePull (quotientRing A I n) ⋙
-          ConstantCompletion.res (ConstantCompletion.quotient U.topology A I n),
-      Morphism.finiteModuleRestrictionPullIso_normalized f A I n e := by
+-- Prove the scalar-restriction comparison over an abstract coefficient square.
+-- This keeps quotient-ring constructions out of the normalization argument.
+set_option profiler true in
+private theorem restrictionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
+    {R S : Sheaf V.topology CommRingCat.{u}} {R' S' : Sheaf U.topology CommRingCat.{u}}
+    (a : R ⟶ S) (b : R' ⟶ S')
+    (c : f.algebra.rings.obj R ⟶ R') (d : f.algebra.rings.obj S ⟶ S')
+    [IsIso c] [IsIso d] (hs : f.algebra.rings.map a ≫ d = c ≫ b) :
+    ∃! e : ConstantCompletion.res a ⋙ ConstantCompletion.pull f.algebra c ≅
+        ConstantCompletion.pull f.algebra d ⋙ ConstantCompletion.res b,
+      ∀ M : ConstantCompletion.Mod S,
+        ConstantCompletion.pullInsertion f.algebra c ((ConstantCompletion.res a).obj M) ≫
+          (ConstantCompletion.underlying R').map (e.hom.app M) =
+        ConstantCompletion.pullInsertion f.algebra d M := by
   let F := f.algebra
-  let a := ConstantCompletion.quotient V.topology A I n
-  let b := ConstantCompletion.quotient U.topology A I n
-  let c := ConstantCompletion.constantMap F A
-  let d := ConstantCompletion.constantMap F (quotientRing A I n)
-  have hc : IsIso c := by dsimp [c, ConstantCompletion.constantMap]; infer_instance
-  have hd : IsIso d := by dsimp [d, ConstantCompletion.constantMap]; infer_instance
-  have hs : F.rings.map a ≫ d = c ≫ b :=
-    F.constants.hom.naturality
-      (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))
   let q₀ := ConstantCompletion.inverseRestriction F a ≫
     Functor.whiskerLeft (F.algebra _).modules
       (Functor.whiskerRight (ConstantCompletion.scalarAdj d).unit
@@ -1166,9 +1159,9 @@ theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
           (ConstantCompletion.scalarAdj c).homEquiv_naturality_right,
           Equiv.apply_symm_apply, Equiv.apply_symm_apply]
         exact q₀.naturality t }
-  have hn (M : V.modules (quotientRing A I n)) :
+  have hn (M : ConstantCompletion.Mod S) :
       ConstantCompletion.pullInsertion F c ((ConstantCompletion.res a).obj M) ≫
-        (ConstantCompletion.underlying (U.ring A)).map (q.app M) =
+        (ConstantCompletion.underlying R').map (q.app M) =
       ConstantCompletion.pullInsertion F d M := by
     rw [← ConstantCompletion.pull_homEquiv]
     change (F.algebra _).moduleUnderlying.inv.app _ ≫
@@ -1203,14 +1196,14 @@ theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
     have := hinsert t ((F.algebra R).modules.obj M)
     dsimp only [ConstantCompletion.pullInsertion]
     infer_instance
-  have hqi (M : V.modules (quotientRing A I n)) : IsIso (q.app M) := by
+  have hqi (M : ConstantCompletion.Mod S) : IsIso (q.app M) := by
     have := hp c ((ConstantCompletion.res a).obj M)
     have := hp d M
-    have hi : IsIso ((ConstantCompletion.underlying (U.ring A)).map (q.app M)) := by
+    have hi : IsIso ((ConstantCompletion.underlying R').map (q.app M)) := by
       apply (isIso_comp_left_iff (ConstantCompletion.pullInsertion F c _) _).mp
       rw [hn]
       infer_instance
-    exact isIso_of_reflects_iso _ (ConstantCompletion.underlying (U.ring A))
+    exact isIso_of_reflects_iso _ (ConstantCompletion.underlying R')
   have : IsIso q := NatIso.isIso_of_isIso_app q
   refine ⟨asIso q, hn, ?_⟩
   intro e he
@@ -1223,6 +1216,34 @@ theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
     ((ConstantCompletion.res a).obj M))).mp
   rw [ConstantCompletion.pull_homEquiv, ConstantCompletion.pull_homEquiv]
   exact (he M).trans (hn M).symm
+
+
+set_option profiler true in
+/-- Ordinary inverse image commutes with finite scalar restriction, fixing its map
+on every inverse-image generator, not merely its objects.
+Source: Stacks 03D2, 0E48 (blueprint: lem-sp-completion-mate-comparison).
+Proof: both sides have the same underlying inverse-image additive sheaf and the
+same restricted constant A-action. The map is identity on its generalized sections.
+Its inverse is the same identity. The displayed insertion formula fixes it uniquely. -/
+theorem Morphism.finiteModuleRestrictionPullIso_existsUnique {V U : Site.{u}}
+    (f : Morphism V U) (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
+    ∃! e : ConstantCompletion.res (ConstantCompletion.quotient V.topology A I n) ⋙
+        f.modulePull A ≅ f.modulePull (quotientRing A I n) ⋙
+          ConstantCompletion.res (ConstantCompletion.quotient U.topology A I n),
+      Morphism.finiteModuleRestrictionPullIso_normalized f A I n e := by
+  have : IsIso (ConstantCompletion.constantMap f.algebra A) := by
+    dsimp only [ConstantCompletion.constantMap]
+    infer_instance
+  have : IsIso (ConstantCompletion.constantMap f.algebra (quotientRing A I n)) := by
+    dsimp only [ConstantCompletion.constantMap]
+    infer_instance
+  exact restrictionPullIso_existsUnique f
+    (ConstantCompletion.quotient V.topology A I n)
+    (ConstantCompletion.quotient U.topology A I n)
+    (ConstantCompletion.constantMap f.algebra A)
+    (ConstantCompletion.constantMap f.algebra (quotientRing A I n))
+    (f.algebra.constants.hom.naturality
+      (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
 
 end
 
