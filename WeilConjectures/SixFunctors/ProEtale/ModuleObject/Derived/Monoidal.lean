@@ -679,7 +679,8 @@ private lemma leftDerivedUpperStarTensor_fac_components (A B : HomotopyCategory
           (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
         Qh.map ((HomotopyCategory.quotient _ _).map
           (upperStarTensorComplexHom Λ f A.as B.as)) =
-      ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B := by
+      L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ Qh A B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B) := by
   have h := congr_app (congr_app (leftDerivedUpperStarTensor_fac Λ f) A) B
   simp only [NatTrans.comp_app] at h
   rw [leftDerivedUpperStarTensorRightCounit_app_app] at h
@@ -722,9 +723,6 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
           (f)^*⟦Λ⟧).app A).app B) := by
   exact comp_four_cancel_last (leftDerivedUpperStarTensor_fac_components Λ f A B)
     (upperStarTensorComplexHom_Qh_δ Λ f A B)
-
-
-
 
 /-- Every object of `D(Mod_{Λ_Y})` is isomorphic to the image of a K-flat complex. -/
 lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
