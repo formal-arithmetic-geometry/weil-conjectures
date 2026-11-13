@@ -27,20 +27,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry
 
-attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
-
-noncomputable local instance ordinarySummandProjectionOverPreadditive
-    (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
-
-noncomputable local instance ordinarySummandProjectionSchemePreadditive (Y : Scheme.{u}) :
-    MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
-  Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
-
-attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
-  Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
-
 private theorem ordinaryEvaluation_transport_composition
     {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D)
     {A B E H : C} {A' B' E' H' V : D}
@@ -58,8 +44,21 @@ private theorem ordinaryEvaluation_transport_composition
   rw [reassoc_of% hi, hπ]
   simp only [Functor.map_comp, Category.assoc]
 
+attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
+
+noncomputable local instance ordinarySummandProjectionOverPreadditive
+    (X : Scheme.{u}) (U : X.Opens) :
+    MonoidalPreadditive (localEvaluationModules X U) :=
+  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+
+noncomputable local instance ordinarySummandProjectionSchemePreadditive (Y : Scheme.{u}) :
+    MonoidalPreadditive (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+  Classical.choice (SheafOfModules.tensorClosed Y.sheaf).1
+
+attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
+  Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
+
 set_option linter.unusedVariables false in
-set_option profiler true in
 /-- Transport of one tensor summand followed by one Hom projection.
 Source: Stacks Project, Tag 0A8X, total tensor and Hom-complex projections.
 (blueprint: lem-pc-ordinary-evaluation-transport-summand-projection).
@@ -142,7 +141,7 @@ theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
     simp only [curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight,
-      Category.id_comp, tensorHom_def, Functor.mapHomologicalComplex_map_f, Category.assoc]
+      Category.id_comp, tensorHom_def]
     set_option backward.isDefEq.respectTransparency false in
     set_option backward.isDefEq.respectTransparency.types false in
       exact ordinaryEvaluation_transport_composition L
