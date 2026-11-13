@@ -438,7 +438,57 @@ private theorem pushforward_action
       ((prod.snd : rset A ⨯ X ⟶ X).hom.app (F.op.obj U) q)
   exact congrArg₂ smul hf.symm hs.symm
 
-set_option maxHeartbeats 600000 in
+-- Prove naturality before specializing to the concrete sheaf functors: unfolding
+-- their underlying module constructions during categorical rewrites is expensive.
+private theorem adjunctionOfLinearMates
+    {C₀ D₀ E₀ C₁ D₁ : Type*}
+    [Category C₀] [Category D₀] [Category E₀] [Category C₁] [Category D₁]
+    (I : C₀ ⥤ D₀) (T : D₀ ⥤ E₀) (S : E₀ ⥤ D₀) (aT : T ⊣ S)
+    (P : E₀ ⥤ C₀) (U : C₀ ⥤ C₁) [U.Faithful] (W : D₀ ⥤ D₁) (Z : E₀ ⥤ D₁)
+    (L : C₁ ⥤ D₁) (V : D₁ ⥤ C₁) (adj : L ⊣ V)
+    (i : I ⋙ W ≅ U ⋙ L) (s : S ⋙ W ≅ Z) (p : P ⋙ U ≅ Z ⋙ V)
+    (E : ∀ M H, (I.obj M ⟶ S.obj H) ≃ (M ⟶ P.obj H))
+    (hE : ∀ M H a, U.map (E M H a) ≫ p.hom.app H =
+      adj.homEquiv _ _ (i.inv.app M ≫ W.map a ≫ s.hom.app H)) :
+    Nonempty (I ⋙ T ⊣ P) := by
+  have hBL {M N} (a : M ⟶ N) H b :
+      E M H (I.map a ≫ b) = a ≫ E N H b := by
+    apply U.map_injective
+    apply (cancel_mono (p.hom.app H)).mp
+    rw [U.map_comp, Category.assoc, hE, hE, ← adj.homEquiv_naturality_left]
+    congr 1
+    have hn : i.inv.app M ≫ W.map (I.map a) =
+        L.map (U.map a) ≫ i.inv.app N := (i.inv.naturality a).symm
+    simp only [W.map_comp, Category.assoc]
+    rw [← Category.assoc (i.inv.app M), hn, Category.assoc]
+  have hBR M {H H'} a (b : H ⟶ H') :
+      E M H' (a ≫ S.map b) = E M H a ≫ P.map b := by
+    apply U.map_injective
+    apply (cancel_mono (p.hom.app H')).mp
+    rw [U.map_comp, Category.assoc]
+    have hp : U.map (P.map b) ≫ p.hom.app H' =
+        p.hom.app H ≫ V.map (Z.map b) := p.hom.naturality b
+    rw [hp, ← Category.assoc, hE, hE, ← adj.homEquiv_naturality_right]
+    congr 1
+    simp only [W.map_comp, Category.assoc]
+    exact congrArg (fun f ↦ i.inv.app M ≫ W.map a ≫ f) (s.hom.naturality b)
+  let E' : ∀ M H, ((I ⋙ T).obj M ⟶ H) ≃ (M ⟶ P.obj H) :=
+    fun M H ↦ (aT.homEquiv (I.obj M) H).trans (E M H)
+  have hEL {M N} (a : M ⟶ N) H (b : (I ⋙ T).obj N ⟶ H) :
+      E' M H ((I ⋙ T).map a ≫ b) = a ≫ E' N H b :=
+    (congrArg (E M H) (aT.homEquiv_naturality_left (I.map a) b)).trans
+      (hBL a H (aT.homEquiv (I.obj N) H b))
+  exact ⟨Adjunction.mkOfHomEquiv {
+    homEquiv := E'
+    homEquiv_naturality_left_symm := by
+      intro M N H a b
+      apply (E' M H).injective
+      rw [Equiv.apply_symm_apply, hEL, Equiv.apply_symm_apply]
+    homEquiv_naturality_right := by
+      intro M H H' a b
+      exact (congrArg (E M H') (aT.homEquiv_naturality_right a b)).trans
+        (hBR M (aT.homEquiv (I.obj M) H a) b) }⟩
+
 -- Elaborate the sectionwise adjunction and its transported coefficient identities.
 -- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
 private theorem supplied_adjunction
@@ -505,45 +555,17 @@ private theorem supplied_adjunction
         convert hs using 1 <;> rfl) M
     exact ⟨E, fun a ↦ by simpa only [Iso.refl_hom, Category.comp_id] using hE a⟩
   choose B' hB using hEquiv
-  have hBL {M N} (a : M ⟶ N) H b :
-      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
-    apply (mset B).map_injective
-    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
-    have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
-        L.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
-  have hBR M {H H'} a (b : H ⟶ H') :
-      B' M H' (a ≫ (restrictScalars ((sheafCompose J
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)).map b) =
-        B' M H a ≫ P.map b := by
-    apply (mset B).map_injective
-    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
-    change adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) =
-        adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) ≫ V.map ((mset A).map b)
-    rw [← Category.assoc, adj.homEquiv_naturality_right]
-  let T := I.modules ⋙ tensorFunctor c
-  let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ P.obj H) :=
-    fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
-  have hEL {M N} (a : M ⟶ N) H (b : T.obj N ⟶ H) :
-      E' M H (T.map a ≫ b) = a ≫ E' N H b := by
-    dsimp only [E', Equiv.trans_apply, T, Functor.comp_map]
-    change B' M H ((tensorAdjunction c).homEquiv (I.modules.obj M) H
-      ((tensorFunctor c).map (I.modules.map a) ≫ b)) = _
-    rw [(tensorAdjunction c).homEquiv_naturality_left, hBL]
-    rfl
-  exact ⟨Adjunction.mkOfHomEquiv {
-    homEquiv := E'
-    homEquiv_naturality_left_symm := by
-      intro M N H a b
-      apply (E' M H).injective
-      rw [Equiv.apply_symm_apply, hEL, Equiv.apply_symm_apply]
-    homEquiv_naturality_right := by
-      intro M H H' a b
-      dsimp only [E', Equiv.trans_apply]
-      change B' M H' ((tensorAdjunction c).homEquiv (I.modules.obj M) H' (a ≫ b)) = _
-      rw [(tensorAdjunction c).homEquiv_naturality_right]
-      exact hBR M ((tensorAdjunction c).homEquiv (I.modules.obj M) H a) b }⟩
+  apply adjunctionOfLinearMates I.modules (tensorFunctor c)
+    (restrictScalars ((sheafCompose J
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)) (tensorAdjunction c)
+    P (mset B) (mset RI) (mset A) L V adj eI
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)) B'
+  intro M H a
+  change (mset B).map (B' M H a) ≫ 𝟙 _ =
+    adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a ≫ 𝟙 _)
+  rw [Category.comp_id, Category.comp_id]
+  exact hB M H a
 
 end GeneralizedRinged
 
