@@ -59,8 +59,31 @@ private theorem field_not_cohen (k : Type u) [Field k] (p : ℕ) :
   let := hdvr
   exact IsDiscreteValuationRing.not_isField k (Field.toIsField k)
 
+private theorem exists_derivation_isUnit_of_finite_model
+    (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsIntegrallyClosed A]
+    (q : Ideal A) [q.IsPrime] (M : Type u) [Field M]
+    [Algebra (⊥ : Ideal A).ResidueField M] [Algebra A M]
+    [IsScalarTower A (⊥ : Ideal A).ResidueField M]
+    [Module.Finite (⊥ : Ideal A).ResidueField M]
+    [IsPurelyInseparable (⊥ : Ideal A).ResidueField M]
+    (B : Subalgebra A M) [Module.Finite A B] [IsFractionRing B M]
+    (p : ℕ) [Fact p.Prime] [CharP M p] [CharP B p]
+    (R₀ : Type u) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]
+    [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]
+    [Algebra R₀ B] [Algebra.FiniteType R₀ B]
+    (a : M) (c s : B) (hc : (c : M) = (s : M) ^ p * a)
+    (hcn : ¬ ∃ x : M, x ^ p = algebraMap B M c) :
+    let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
+      (Localization.AtPrime q)
+    let R := TensorProduct (⊥ : Ideal A).ResidueField M ((⊥ : Ideal A).Fiber C)
+    ∃ E : Derivation ℤ R R, IsUnit (E (Algebra.TensorProduct.includeLeftRingHom a)) := by
+  intro C R
+  obtain ⟨D, hD⟩ := Derivation.exists_apply_ne_zero_of_not_pth_power p B M R₀ c hcn
+  obtain ⟨E, hE⟩ := Derivation.exists_formalFiber_extension A q M B D
+  exact ⟨E, unit_derivative M p R Algebra.TensorProduct.includeLeftRingHom E
+    a c s (D c) hc (hE c) (fun h ↦ hD (Subtype.ext h))⟩
+
 set_option profiler true in
--- Finite-model scalar towers and the normality argument require extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- A derivation detects the specified degree-p coefficient in the extended formal fibre.
 Source: Stacks Project, More on Algebra, Tags 07PR, 07PH and 07PE.
@@ -185,12 +208,8 @@ theorem exists_derivation_isUnit_tmul_formalFiber
     let : Algebra.FiniteType (MvPowerSeries (Fin n) k) B :=
       Algebra.FiniteType.trans (inferInstance : Algebra.FiniteType
         (MvPowerSeries (Fin n) k) A) (inferInstance : Algebra.FiniteType A B)
-    obtain ⟨D, hD⟩ := Derivation.exists_apply_ne_zero_of_not_pth_power
-      p B M (MvPowerSeries (Fin n) k) c hcn
-    obtain ⟨E, hE⟩ := Derivation.exists_formalFiber_extension A q M B D
-    refine ⟨E, ?_⟩
-    exact unit_derivative M p R Algebra.TensorProduct.includeLeftRingHom E
-      a c s (D c) hc (hE c) (fun h ↦ hD (Subtype.ext h))
+    exact exists_derivation_isUnit_of_finite_model A q M B p
+      (MvPowerSeries (Fin n) k) a c s hc hcn
   · obtain ⟨r, hr, _⟩ := hcohen
     exact False.elim (field_not_cohen k r hr)
 
