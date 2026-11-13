@@ -69,6 +69,7 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The explicit inverse-image and tensor transports require additional elaboration fuel.
 /-- Scalar compatibility of the transported pullback counit.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
