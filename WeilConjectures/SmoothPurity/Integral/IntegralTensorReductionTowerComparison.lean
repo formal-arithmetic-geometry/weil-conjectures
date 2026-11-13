@@ -104,7 +104,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 universe a₁ b₁ a₂ b₂
 
 -- Totalization uses only the additive tensor comparison and the adjunction.
-set_option profiler true in
 private theorem tensorTotalComparisonOfAdjunction
     {A : Type a₁} [Category.{b₁} A] [Abelian A] [MonoidalCategory A]
     {B : Type a₂} [Category.{b₂} B] [Abelian B] [MonoidalCategory B]
@@ -136,7 +135,8 @@ private theorem tensorTotalComparisonOfAdjunction
     (fun P ↦ @asIso _ _ _ _ (tensorPullbackTotal F e he P.1 P.2) (hiso P.1 P.2)) (by
       intro P Q f
       dsimp only [EC, tR, tS, Functor.comp_map, Functor.prod_map, Functor.prod_obj]
-      simp only [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex, asIso_hom,
+      simp only [Functor.uncurry_obj_map, Functor.map₂CochainComplex,
+        Functor.map₂HomologicalComplex, asIso_hom,
         ScalarHomTensor.tensorMap_factor]
       exact ScalarHomTensor.tensorPullbackTotal_naturality F e he f.1 f.2)
   refine ⟨b0.symm, ?_⟩
@@ -176,7 +176,6 @@ attribute [local implicit_reducible] SheafOfModules.restrictScalars
   PresheafOfModules.presheaf ModuleCat.restrictScalars ModuleCat.RestrictScalars.obj'
 
 -- Separate the ordinary unit and tensor identities from the total-complex construction.
-set_option profiler true in
 private theorem scalarTensorAdjunctionComparison
     (F : ScalarMod.{c, v, r} R ⥤ ScalarMod.{c, v, r} S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
@@ -295,7 +294,6 @@ private theorem scalarTensorAdjunctionComparison
     rfl
   exact ⟨am, e, he, hu, hgen⟩
 
-set_option profiler true in
 private theorem scalarTensorTotal
     (F : ScalarMod.{c, v, r} R ⥤ ScalarMod.{c, v, r} S)
     (hF : ∀ M, F.obj M = SheafOfModules.changeOfRings a M)
