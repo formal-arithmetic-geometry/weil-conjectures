@@ -90,7 +90,7 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   let V := homComplex (R := Y.sheaf) P O
   let eta := CochainComplex.toKInjectiveResolution.{u}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
-  let ⟨e, hO, hF⟩ := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
+  obtain ⟨e, hO, hF⟩ := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
   have hc := schemeTensorEvaluation_localization_coherence Y F V P e
   have hres (M : CochainComplex
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
@@ -103,10 +103,7 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
   dsimp only [eta] at hres
   have hrO := hres O
   dsimp only [O] at hrO
-  convert hc using 1 <;>
-    simp only [hF, hO, Functor.map_comp, Category.assoc, hres F, Category.comp_id]
-  all_goals
-    try rfl
-    try rw [reassoc_of% hrO]
+  simpa only [hF, hO, Functor.map_comp, Category.assoc, hres F, Category.comp_id,
+    reassoc_of% hrO] using hc
 
 end AlgebraicGeometry
