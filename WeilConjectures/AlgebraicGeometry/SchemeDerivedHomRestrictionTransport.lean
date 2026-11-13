@@ -24,7 +24,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] Functor.additive_of_preserves_binary_products
+  comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
 section
@@ -257,20 +258,6 @@ private lemma transport
 end RestrictionTransport
 
 end
-
-private instance overEquivFunctorAdditive (X : Scheme.{u}) (U : X.Opens) :
-    (Equivalence.functor
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv U)).Additive :=
-  Functor.additive_of_preserves_binary_products _
-
-private instance overEquivInverseAdditive (X : Scheme.{u}) (U : X.Opens) :
-    (Equivalence.inverse
-      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv U)).Additive :=
-  Functor.additive_of_preserves_binary_products _
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
