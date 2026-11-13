@@ -123,7 +123,6 @@ private theorem power_torsion_of_exact
   refine ⟨c + (a + b), ?_⟩
   rw [hmul, Functor.map_comp, Category.assoc, ← hγ, ← hδ, hc, map_zero]
 
-set_option trace.profiler true in
 /-- Maps from a perfect complex into a quasi-coherent complex supported on `V(f)` are
 annihilated by a power of `f`. Source: Stacks Project, Tag 08EJ
 (blueprint: lem-sc-perfect-into-support-on-T).
