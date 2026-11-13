@@ -50,6 +50,10 @@ private theorem moduleComparisonEquiv_apply_of_component
   rw [h]
   rfl
 
+private theorem comparisonNatIso_symm_app
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D} (e : F ≅ G) (X : C) :
+    e.symm.app X = (e.app X).symm := rfl
+
 set_option profiler true in
 private theorem siteSectionsSourceChange_app
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
@@ -63,8 +67,8 @@ private theorem siteSectionsSourceChange_app
       (siteSectionsObjIso J U F p).symm ≪≫
         (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
   simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl,
-    NatIso.trans_app, siteSectionsObjIso]
-  rfl
+    NatIso.trans_app, comparisonNatIso_symm_app, siteSectionsObjIso,
+    extSourceNatIso, NatIso.ofComponents.app]
 
 set_option profiler true in
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
