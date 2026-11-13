@@ -40,9 +40,7 @@ open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 set_option maxRecDepth 4096 in
-set_option synthInstance.maxHeartbeats 1000000 in
 -- Native derived-functor instance expressions are large.
-set_option maxHeartbeats 1000000 in
 -- Allow elaboration of the two explicit geometric shift squares.
 /-- The actual compactification-defined projection commutes separately with every integer
 shift of either finite-Tor input, using the native signed tensor comparisons and the

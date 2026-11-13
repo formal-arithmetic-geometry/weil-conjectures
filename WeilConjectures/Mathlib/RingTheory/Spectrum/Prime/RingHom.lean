@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 public import Mathlib.RingTheory.Spectrum.Maximal.Localization
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # General results on ring homomorphisms and localization

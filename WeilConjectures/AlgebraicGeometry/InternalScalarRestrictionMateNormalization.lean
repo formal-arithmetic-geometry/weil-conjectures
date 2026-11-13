@@ -118,7 +118,7 @@ private theorem scalar_mate_fac (a : Λ ⟶ Λ') [IsMonHom a]
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (CondensedRing.pullIso a f).hom (.up ℤ)).app P) =
       (((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-        (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv)).natTrans).app
+        (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv))).app
           (DerivedCategory.Qh.obj P) ≫
         (L Λ' f).map ((scalarCounit a Y).app P) ≫
         (pullCounit (Λ := Λ') f).app
@@ -238,7 +238,7 @@ private theorem normalized_inverse (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hb : PullNormalized a f b) :
     b.inv = ((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-      (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv)) := by
   have := comparisonCounit_derived a f
   apply Functor.leftDerived_ext _ (comparisonCounit a f)
     (HomotopyCategory.quasiIso (Modules Λ Y) (.up ℤ)) _
@@ -304,15 +304,15 @@ theorem scalar_restriction_mate_normalization (a : Λ ⟶ Λ') [IsMonHom a]
     CondensedRing.derivedComapUpperStarIso a f ≪≫
     Functor.isoWhiskerLeft (V a Y)
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm
-  (mateEquiv (adj Λ' f) (adj Λ f) (TwoSquare.mk _ _ _ _ b.inv)).natTrans =
+  (mateEquiv (adj Λ' f) (adj Λ f) (TwoSquare.mk _ _ _ _ b.inv)) =
     (restrictPush a f lam).hom := by
   have h := normalized_inverse a f lam hlam
   have hq : (mateEquiv (scalarAdj a Y) (scalarAdj a X)
-      (TwoSquare.mk _ _ _ _ lam.inv)).natTrans = (normalizationRestrictionPull a f).inv := by
+      (TwoSquare.mk _ _ _ _ lam.inv)) = (normalizationRestrictionPull a f).inv := by
     rw [h]
     change (mateEquiv (scalarAdj a Y) (scalarAdj a X)
       ((mateEquiv (scalarAdj a Y) (scalarAdj a X)).symm
-        (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv))).natTrans = _
+        (TwoSquare.mk _ _ _ _ (normalizationRestrictionPull a f).inv))) = _
     rw [Equiv.apply_symm_apply]
   have hi := iterated_mateEquiv_conjugateEquiv
     (scalarAdj a Y) (scalarAdj a X) (adj Λ f) (adj Λ' f)

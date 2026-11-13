@@ -25,7 +25,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry
-set_option maxHeartbeats 600000 in
 -- Affine functor identifications need to unfold the scheme module carrier.
 /-- The affine extension/sections comparison on associated sheaves, with its unit equation.
 Source: Stacks Project, Schemes, Tag 01I9, and perfect.tex, Tag 0AA7.

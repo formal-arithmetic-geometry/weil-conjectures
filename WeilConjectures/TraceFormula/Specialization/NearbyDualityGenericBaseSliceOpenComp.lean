@@ -219,7 +219,6 @@ noncomputable abbrev genericSliceExchangeComp :
       h.isTraitModelOver).preservesBoundedConstructible (ℓ := ℓ))
     (hc.preservesBoundedConstructible (ℓ := ℓ))
 
-set_option maxHeartbeats 1000000 in
 -- the instantiation of the abstract lemma elaborates large goals
 /-- **The twist equation of the generic slice from an ambient model without coordinate**: let
 `M` be an open sub-model of a trait model `M_c` over the generic base, through open immersions

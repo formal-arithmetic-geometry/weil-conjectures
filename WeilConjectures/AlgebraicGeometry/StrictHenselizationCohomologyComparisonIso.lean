@@ -31,7 +31,7 @@ private noncomputable def mappedMate
     (P : E ⥤ B) (Q : B ⥤ T) (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (sq : TwoSquare G L₁ L₂ H) (K : D) :
     Q.obj (P.obj ((R₁ ⋙ G).obj K)) ⟶ Q.obj (P.obj ((H ⋙ R₂).obj K)) :=
-  Q.map (P.map ((mateEquiv a b sq).natTrans.app K))
+  Q.map (P.map ((mateEquiv a b sq).app K))
 
 private theorem map_mate_eq_mappedMate
     {C D E A B T : Type*} [Category C] [Category D] [Category E]
@@ -40,7 +40,7 @@ private theorem map_mate_eq_mappedMate
     {L₂ : E ⥤ A} {R₂ : A ⥤ E}
     (P : E ⥤ B) (Q : B ⥤ T) (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (sq : TwoSquare G L₁ L₂ H) (K : D) :
-    Q.map (P.map ((mateEquiv a b sq).natTrans.app K)) =
+    Q.map (P.map ((mateEquiv a b sq).app K)) =
       mappedMate P Q a b sq K := rfl
 
 -- Transport at the level of the square, before projecting the derived mate.

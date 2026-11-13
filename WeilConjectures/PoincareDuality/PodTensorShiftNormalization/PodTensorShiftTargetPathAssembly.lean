@@ -75,7 +75,6 @@ variable [(isoReductionIntegralInverse l E g).Additive]
   [PreservesFiniteLimits (isoReductionIntegralInverse l E g)]
   [PreservesFiniteColimits (isoReductionIntegralInverse l E g)]
 
-set_option maxHeartbeats 600000 in
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
 /-- Normalize a target path whose input presentation factors through strict good-complex maps.
 Substitute the presented tensor model, factor the product presentation, use the target

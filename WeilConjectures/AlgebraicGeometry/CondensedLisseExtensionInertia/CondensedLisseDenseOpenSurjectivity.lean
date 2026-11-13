@@ -45,7 +45,7 @@ theorem dense_open_pullbackPathHom_surjective
         eC.inv)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ U)
     (σ : Aut (fiber (b ≫ j))) :
-    ∃ τ : Aut (fiber b), pullbackPathIso j τ = σ := by
+    ∃ τ : Aut (fiber b), Aut.of (pullbackPathIso j τ.asIso) = σ := by
   have : IsOpenImmersion j := by
     subst hj
     have : IsOpenImmersion j₀.left := by

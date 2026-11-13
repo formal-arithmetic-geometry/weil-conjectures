@@ -124,7 +124,6 @@ lemma isIso_homology_zero_map_leftDerivedUpperStar_unit_tateObject
     (leftDerivedUpperStarTateObjectIso g 1) 0
     ((NatTrans.isIso_app_iff_of_iso _ (leftDerivedUpperStarTateObjectIso _ 1)).2 hBC) h'
 
-set_option maxHeartbeats 1000000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 omit [HasInvertibleExponent Λ B] [HasInvertibleExponent Λ B'] in
 /-- Base change of the degree-one clause: for `g : B' ⟶ B` with base change `q : G' ⟶ G` of

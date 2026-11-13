@@ -361,7 +361,6 @@ noncomputable def exceptionalKunnethTraceOfSquare (pW : W ⟶ X) (qW : W ⟶ Z) 
       ((boundedConstructibleUpperStar _ ℓ pV).obj M))
     (isIso_boundedConstructibleExceptionalProjectionMorphism ℓ _ _ _)
 
-set_option maxHeartbeats 400000 in
 -- The instantiation of the abstract chase involves large terms.
 /-- **Functoriality of the adjoint of the exceptional Künneth map along a cartesian square**:
 for `G : W ⟶ V` over `X` and a cartesian square `q_W ≫ g = G ≫ q_V`, where `(p_W, q_W)` and

@@ -336,7 +336,7 @@ variable {C C' D D' : Type*} [Category C] [Category C'] [Category D] [Category D
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem open_mate_unit (adj : J ⊣ R) (adj' : J' ⊣ R')
     (adjG : G ⊣ Gs) (adjH : H ⊣ Hs) (χ : R ⋙ G ⟶ H ⋙ R')
-    (β : Hs ⋙ R ⟶ R' ⋙ Gs) (hβ : β = (mateEquiv adjH adjG χ).natTrans) (F : C) :
+    (β : Hs ⋙ R ⟶ R' ⋙ Gs) (hβ : β = (mateEquiv adjH adjG χ)) (F : C) :
     adj'.unit.app (G.obj F) ≫ R'.map
       (((conjugateEquiv (adj.comp adjH) (adjG.comp adj')).symm β).app F) =
       G.map (adj.unit.app F) ≫ χ.app (J.obj F) := by
@@ -453,7 +453,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem baseChange_mate (sq : CommSq g' j' j g'') :
     baseChangeMap A sq = (mateEquiv (upperStarLowerStarAdjunction A g'')
       (upperStarLowerStarAdjunction A g')
-      (TwoSquare.mk _ _ _ _ (upperStarCompIso A sq.w).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (upperStarCompIso A sq.w).hom)) := by
   have h := iterated_mateEquiv_conjugateEquiv
     (upperStarLowerStarAdjunction A g'') (upperStarLowerStarAdjunction A g')
     (upperStarLowerStarAdjunction A j) (upperStarLowerStarAdjunction A j')
@@ -466,8 +466,8 @@ private theorem baseChange_mate (sq : CommSq g' j' j g'') :
         (upperStarLowerStarAdjunction A g')
         (TwoSquare.mk _ _ _ _ (upperStarCompIso A sq.w).hom) := by
     apply (Equiv.symm_apply_eq _).mpr
-    exact TwoSquare.ext _ _ (fun X ↦ NatTrans.congr_app h.symm X)
-  exact congrArg TwoSquare.natTrans he
+    exact NatTrans.ext (funext (fun X ↦ NatTrans.congr_app h.symm X))
+  exact he
 
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 private theorem open_unit (sq : CommSq g' j' j g'')

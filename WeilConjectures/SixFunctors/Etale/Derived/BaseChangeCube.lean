@@ -51,7 +51,6 @@ variable {W W' X X' Y Y' Z Z' : Scheme.{u}} {a : W ⟶ Z} {b : W ⟶ X} {p : Z �
   {gb : Z' ⟶ Z} {p' : Z' ⟶ Y'} {g : Y' ⟶ Y} {h : W' ⟶ W} {b' : W' ⟶ X'} {g' : X' ⟶ X}
   {a' : W' ⟶ Z'} {e' : X' ⟶ Y'}
 
-set_option maxHeartbeats 400000 in
 -- a long chain of rewritings with the associativity of the composition isomorphisms
 /-- **Coherence of the square isomorphisms of a cube**: the two composites
 `Lb'^* Lg'^* Le^* ≅ La'^* Lgb^* Lp^*` of square isomorphisms of the derived pullbacks along the
@@ -99,7 +98,6 @@ lemma derivedSquareUpperStarIso_cube (S1 : CommSq a b p e) (S2 : CommSq gb p' p 
   rw [leftDerivedUpperStarComp_assoc'_app A a' gb p (h ≫ a) (gb ≫ p) (b' ≫ g' ≫ e)
       hr rfl ht₃]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 /-- **The derived base change maps of a cube paste coherently**: for a commutative cube as in the
 module docstring, the two composites `Lg'^* Le^* Rp_* ⟶ Rb'_* La'^* Lgb^*` of derived base
@@ -164,7 +162,6 @@ lemma derivedSquareUpperStarIso_paste (S1 : CommSq a b p e) (S3 : CommSq h₀ b�
     Iso.hom_inv_id_app]
   erw [Category.comp_id]
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 /-- **The derived base change maps of two stacked squares paste**: the derived base change map
 `Ex_*` of the composite of two squares `W₀ ⟶ W ⟶ Z` over `X₀ ⟶ X ⟶ Y` is `Lv^*` of the one of

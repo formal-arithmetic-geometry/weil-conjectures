@@ -51,7 +51,7 @@ noncomputable def affineLineMapUpperStarForget₂Iso {A B : Type u} [CommRing A]
         ((𝔸(ULift.{u} (Fin 1); Spec (.of B)) ↘ Spec (.of B))^*[ModuleCat.{u + 1} Λ].obj
           ((Spec.map (CommRingCat.ofHom φ))^*[ModuleCat.{u + 1} Λ].obj M)) :=
   asIso ((upperStarForget₂ Λ
-      (AffineSpace.map (ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom φ)))).natTrans.app _) ≪≫
+      (AffineSpace.map (ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom φ)))).app _) ≪≫
     (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).mapIso
       (((upperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) (Spec.map (CommRingCat.ofHom φ)))
         (𝔸(ULift.{u} (Fin 1); Spec (.of A)) ↘ Spec (.of A))).app M).symm ≪≫

@@ -298,7 +298,7 @@ theorem exists_condensedQbar_compatible_function_presentations
             ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
               ((V.ι ≫ C.f i) ≫ f)).obj P ≅
               cokernel (biproduct.matrix fun j k ↦
-                φ (condensedQbarFunctionComp V.ι.base.hom (B i k j)))) := by
+                (φ (condensedQbarFunctionComp V.ι.base.hom (B i k j))).asHom)) := by
   classical
   have : WeaklyEtale f := hf
   obtain ⟨q⟩ := exists_condensedQbar_function_coefficients ℓ X hcoeff
@@ -336,21 +336,21 @@ theorem exists_condensedQbar_compatible_function_presentations
       freePullbackPresentation (R Y) (R (C.X i)) (F i) (e i) ψ hψ⟩
   choose B₀ hB₀ using fun (i : C.I₀) (k : Fin n) (j : Fin m) ↦
     q.scalar_surjective (U i) (hU i) (wU i)
-      (biproduct.ι (fun _ : Fin m ↦ R (C.X i)) j ≫ ψi i ≫
-        biproduct.π (fun _ : Fin n ↦ R (C.X i)) k)
+      (End.of (biproduct.ι (fun _ : Fin m ↦ R (C.X i)) j ≫ ψi i ≫
+        biproduct.π (fun _ : Fin n ↦ R (C.X i)) k))
   let B : ∀ i : C.I₀,
       Matrix (Fin n) (Fin m) (PadicAlgCl.finiteIntermediateFieldValued ℓ (C.X i)) := B₀
   have hB (i : C.I₀) (k : Fin n) (j : Fin m) :
-      q.scalar (U i) (B i k j) =
+      (q.scalar (U i) (B i k j)).asHom =
         biproduct.ι (fun _ : Fin m ↦ R (C.X i)) j ≫ ψi i ≫
-          biproduct.π (fun _ : Fin n ↦ R (C.X i)) k := hB₀ i k j
+          biproduct.π (fun _ : Fin n ↦ R (C.X i)) k := congrArg End.asHom (hB₀ i k j)
   have hmatrix (i : C.I₀) :
-      biproduct.matrix (fun j k ↦ q.scalar (U i) (B i k j)) = ψi i := by
+      biproduct.matrix (fun j k ↦ (q.scalar (U i) (B i k j)).asHom) = ψi i := by
     simp only [hB]
     exact biproduct.components_matrix _
   have hpres (i : C.I₀) : Nonempty
       ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) (C.f i ≫ f)).obj P ≅
-        cokernel (biproduct.matrix (fun j k ↦ q.scalar (U i) (B i k j)))) := by
+        cokernel (biproduct.matrix (fun j k ↦ (q.scalar (U i) (B i k j)).asHom))) := by
     simpa only [hmatrix] using hi i
   have hd (i : C.I₀) (x : C.X i) :
       Module.finrank (PadicAlgCl ℓ) ((q.fiber (U i) x).obj
@@ -362,7 +362,7 @@ theorem exists_condensedQbar_compatible_function_presentations
     let : PreservesFiniteColimits H := q.fiber_colimits (U i) x
     let a := q.fiber_regular (U i) x
     let M := Matrix.map (B i) (condensedQbarFunctionEval x)
-    let ψB := biproduct.matrix (fun j k ↦ q.scalar (U i) (B i k j))
+    let ψB := biproduct.matrix (fun j k ↦ (q.scalar (U i) (B i k j)).asHom)
     obtain ⟨hp⟩ := hpres i
     let hc := H.mapIso hp ≪≫ PreservesCokernel.iso H ψB
     have hM : (finiteFreeEvaluationCoords (R (C.X i)) H a n).toLinearMap ∘ₗ
@@ -399,7 +399,7 @@ theorem exists_condensedQbar_compatible_function_presentations
     let eV := condensedQbarRegularPullbackIso ℓ V.ι
     have heq : (V.ι ≫ C.f i) ≫ f = V.ι ≫ (C.f i ≫ f) := Category.assoc _ _ _
     have hp' := freePullbackMatrixPresentation (R (C.X i)) (R V.toScheme) G eV
-      (fun j k ↦ q.scalar (U i) (B i k j)) hp
+      (fun j k ↦ (q.scalar (U i) (B i k j)).asHom) hp
     have hs (j : Fin m) (k : Fin n) := q.scalar_restrict_mk (C.f i ≫ f) V.ι (B i k j)
       (condensedQbarFunctionComp V.ι.base.hom (B i k j)) rfl
     have hc : (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)

@@ -6,8 +6,10 @@ Authors: Bin Wu
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Ring.Shrink
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
 public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
@@ -79,6 +81,7 @@ theorem discreteModules_abelian
   let : F.Additive := ha
   let : Small.{max u w} G := small_max G
   let A₀ := Shrink.{max u w} A
+  let : Ring A₀ := inferInstanceAs (Ring (Shrink.{max u w} A))
   obtain ⟨E⟩ := Rep.representation_liftedGroupAlgebra_equivalence.{max u w, u, w} A₀ G
   let : EnoughInjectives (Rep.{max u w} A₀ G) := E.enoughInjectives_iff.mpr inferInstance
   let e : Action (ModuleCat.{max u w} A) G ≌ Action (ModuleCat.{max u w} A₀) G :=

@@ -54,7 +54,7 @@ noncomputable def residueExchangeBaseChange (sq : CommSq g' f' f g) :
       residueExchangeUpperStar Λ g' ⋙ residueExchangeLowerStar Λ f' :=
   (mateEquiv (residueExchangeAdjunction Λ f)
     (residueExchangeAdjunction Λ f')
-    (TwoSquare.mk _ _ _ _ (residueExchangeSquare Λ sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (residueExchangeSquare Λ sq).hom))
 
 /-- The counit equation characterizing the ambient exchange mate.
 Source: Mathlib, mateEquiv_counit.

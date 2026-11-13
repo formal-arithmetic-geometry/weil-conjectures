@@ -225,7 +225,6 @@ theorem coefficientFiniteAdjunction_unit (n : ℕ) :
             (.up ℤ)).unit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
   exact (derivedScalarExtensionRestrictionAdjunction l E W n).choose_spec
 
-set_option maxHeartbeats 500000 in
 -- The normalized unit compares the explicit scalar extension on sections.
 /-- The actual integral-to-finite scalar pair, with the recorded adjunctions.
 Source: Stacks 03CZ, 07A4 (blueprint: lem-coef-actual-scalar-derived-pair).

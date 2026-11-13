@@ -20,7 +20,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 attribute [local irreducible] HasDerivedCategory.standard
 universe t u a b c d e f av bv cv dv ev fv
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
@@ -131,9 +130,9 @@ theorem evaluation_right_mate
       q.hom.app (R.obj N) ≫
         (mateEquiv adj fin (TwoSquare.mk _ _ _ _ α.inv)).app N := by
   let s : R ⋙ F ⟶ G ⋙ H :=
-    (mateEquiv adj sys (TwoSquare.mk _ _ _ _ r.inv)).natTrans
+    (mateEquiv adj sys (TwoSquare.mk _ _ _ _ r.inv))
   let sf : R ⋙ S ⟶ T ⋙ Rf :=
-    (mateEquiv adj fin (TwoSquare.mk _ _ _ _ α.inv)).natTrans
+    (mateEquiv adj fin (TwoSquare.mk _ _ _ _ α.inv))
   change ec.map (s.app N) ≫ ν.hom.app (G.obj N) ≫ Rf.map (p.hom.app N) =
     q.hom.app (R.obj N) ≫ sf.app N
   have hs : K.map (s.app N) ≫ sys.counit.app (G.obj N) =

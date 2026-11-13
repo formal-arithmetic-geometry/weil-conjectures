@@ -35,9 +35,9 @@ theorem isIso_inverseMate_of_equivalences
     {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (beta : R₁ ⋙ G ≅ H ⋙ R₂) :
-    IsIso (((mateEquiv adj₁ adj₂).symm beta.hom).natTrans) := by
+    IsIso (((mateEquiv adj₁ adj₂).symm beta.hom)) := by
   classical
-  let alpha := ((mateEquiv adj₁ adj₂).symm beta.hom).natTrans
+  let alpha := ((mateEquiv adj₁ adj₂).symm beta.hom)
   let gff := Functor.FullyFaithful.ofFullyFaithful G
   let hff := Functor.FullyFaithful.ofFullyFaithful H
   have component (x : C) : IsIso (alpha.app x) := by

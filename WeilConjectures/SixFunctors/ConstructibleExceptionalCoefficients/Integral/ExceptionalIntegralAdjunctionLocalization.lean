@@ -148,7 +148,7 @@ private theorem mate_shift
     (hc : ∀ L, q.hom.app (G.obj L) ≫ F'.map (b.app L) ≫
       adj'.counit.app (TY.obj L) = TY.map (adj.counit.app L)) :
     NatTrans.CommShift b ℤ := by
-  let m := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv)).natTrans
+  let m := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv))
   have hm : NatTrans.CommShift m ℤ := by
     dsimp [m, mateEquiv]
     infer_instance

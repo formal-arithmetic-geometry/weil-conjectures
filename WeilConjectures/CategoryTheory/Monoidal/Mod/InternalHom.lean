@@ -411,16 +411,16 @@ variable {C D : Type*} [Category C] [MonoidalCategory C] [SymmetricCategory C] [
 def mapHomModHom (Z : C) (N : Mod C A) :
     (comap ρ).obj ((F.mapMod A).obj (homMod A Z N)) ⟶
       homMod B (F.obj Z) ((comap ρ).obj ((F.mapMod A).obj N)) :=
-  homMk ((ihomComparison F Z).natTrans.app N.X) (by
+  homMk ((ihomComparison F Z).app N.X) (by
     change (ρ ▷ _ ≫ Functor.LaxMonoidal.μ F A ((CategoryTheory.ihom Z).obj N.X) ≫
         F.map (homAct A Z N)) ≫
-        (ihomComparison F Z).natTrans.app N.X =
-      B ◁ (ihomComparison F Z).natTrans.app N.X ≫
+        (ihomComparison F Z).app N.X =
+      B ◁ (ihomComparison F Z).app N.X ≫
         homAct B (F.obj Z) ((comap ρ).obj ((F.mapMod A).obj N))
     apply uncurry_injective
     rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, uncurry_natural_left,
       uncurry_homAct]
-    change _ = F.obj Z ◁ B ◁ (ihomComparison F Z).natTrans.app N.X ≫
+    change _ = F.obj Z ◁ B ◁ (ihomComparison F Z).app N.X ≫
       (α_ (F.obj Z) B ((CategoryTheory.ihom (F.obj Z)).obj (F.obj N.X))).inv ≫
       (β_ (F.obj Z) B).hom ▷ _ ≫ (α_ B (F.obj Z) _).hom ≫
       B ◁ (CategoryTheory.ihom.ev (F.obj Z)).app (F.obj N.X) ≫
@@ -443,8 +443,8 @@ def mapHomModHom (Z : C) (N : Mod C A) :
 /-- The comparison maps of internal homs are natural in the first variable. -/
 @[reassoc]
 lemma map_pre_app_comp_ihomComparison {Z Z' : C} (g : Z ⟶ Z') (Y : C) :
-    F.map ((pre g).app Y) ≫ (ihomComparison F Z).natTrans.app Y =
-      (ihomComparison F Z').natTrans.app Y ≫ (pre (F.map g)).app (F.obj Y) := by
+    F.map ((pre g).app Y) ≫ (ihomComparison F Z).app Y =
+      (ihomComparison F Z').app Y ≫ (pre (F.map g)).app (F.obj Y) := by
   apply uncurry_injective
   rw [uncurry_natural_left, uncurry_eq]
   erw [ihomComparison_ev]
@@ -454,7 +454,7 @@ lemma map_pre_app_comp_ihomComparison {Z Z' : C} (g : Z ⟶ Z') (Y : C) :
   rw [μ_natural_left_assoc, F.map_comp]
 
 lemma mapHomModHom_hom (Z : C) (N : Mod C A) :
-    (mapHomModHom F ρ Z N).hom = (ihomComparison F Z).natTrans.app N.X := rfl
+    (mapHomModHom F ρ Z N).hom = (ihomComparison F Z).app N.X := rfl
 
 /-- Compatibility of the comparison with `f ↦ f ∘ act_M`. -/
 lemma mapHomModHom_homModPre (M N : Mod C A) :
@@ -462,9 +462,9 @@ lemma mapHomModHom_homModPre (M N : Mod C A) :
         homModPre (ρ ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F A M.X) _ =
       mapHomModHom F ρ M.X N ≫ homModPre (act ((F.mapMod A ⋙ comap ρ).obj M).X) _ := by
   refine Mod.hom_ext _ _ ?_
-  change F.map ((pre (act M.X)).app N.X) ≫ (ihomComparison F (A ⊗ M.X)).natTrans.app N.X ≫
+  change F.map ((pre (act M.X)).app N.X) ≫ (ihomComparison F (A ⊗ M.X)).app N.X ≫
       (pre (ρ ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F A M.X)).app (F.obj N.X) =
-    (ihomComparison F M.X).natTrans.app N.X ≫
+    (ihomComparison F M.X).app N.X ≫
       (pre (ρ ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F A M.X ≫ F.map (act M.X))).app (F.obj N.X)
   rw [map_pre_app_comp_ihomComparison_assoc, ← NatTrans.comp_app, ← pre_map, Category.assoc]
 
@@ -476,9 +476,9 @@ lemma mapHomModHom_homModB [IsCommMonObj A] [IsCommMonObj B] (M N : Mod C A) :
   refine Mod.hom_ext _ _ ?_
   change F.map (curry ((α_ A M.X ((CategoryTheory.ihom M.X).obj N.X)).hom ≫
         A ◁ (CategoryTheory.ihom.ev M.X).app N.X ≫ act N.X)) ≫
-      (ihomComparison F (A ⊗ M.X)).natTrans.app N.X ≫
+      (ihomComparison F (A ⊗ M.X)).app N.X ≫
       (pre (ρ ▷ F.obj M.X ≫ Functor.LaxMonoidal.μ F A M.X)).app (F.obj N.X) =
-    (ihomComparison F M.X).natTrans.app N.X ≫
+    (ihomComparison F M.X).app N.X ≫
       curry ((α_ B (F.obj M.X) ((CategoryTheory.ihom (F.obj M.X)).obj (F.obj N.X))).hom ≫
         B ◁ (CategoryTheory.ihom.ev (F.obj M.X)).app (F.obj N.X) ≫
           ρ ▷ F.obj N.X ≫ Functor.LaxMonoidal.μ F A N.X ≫ F.map (act N.X))
@@ -499,7 +499,7 @@ lemma mapHomModHom_homModB [IsCommMonObj A] [IsCommMonObj B] (M N : Mod C A) :
 lemma mapHomModHom_naturality (Z : C) {N N' : Mod C A} (f : N ⟶ N') :
     (F.mapMod A ⋙ comap ρ).map (homModMap Z f) ≫ mapHomModHom F ρ Z N' =
       mapHomModHom F ρ Z N ≫ homModMap (F.obj Z) ((F.mapMod A ⋙ comap ρ).map f) :=
-  Mod.hom_ext _ _ ((ihomComparison F Z).natTrans.naturality f.hom)
+  Mod.hom_ext _ _ ((ihomComparison F Z).naturality f.hom)
 
 section Ihom
 
@@ -535,7 +535,7 @@ lemma mapIhom'Hom_naturality (M : Mod C A) {N N' : Mod C A} (f : N ⟶ N') :
 /-- If `F` commutes with internal homs and equalizers, the comparison of internal homs of modules
 is an isomorphism. -/
 lemma isIso_mapIhom'Hom (M N : Mod C A) [IsIso ρ]
-    [∀ Z : C, IsIso (ihomComparison F Z).natTrans]
+    [∀ Z : C, IsIso (ihomComparison F Z)]
     [IsIso (Functor.LaxMonoidal.μ F A M.X)]
     [PreservesLimit (parallelPair (homModPre (act M.X) N) (homModB A M N))
       (F.mapMod A ⋙ comap ρ)] :
@@ -551,10 +551,10 @@ lemma isIso_mapIhom'Hom (M N : Mod C A) [IsIso ρ]
   have hiso {X Y : Mod D B} (f : X ⟶ Y) (hf : IsIso f.hom) : IsIso f :=
     have : IsIso ((forget B).map f) := hf
     isIso_of_reflects_iso f (forget B)
-  have hu : IsIso u := hiso _ (inferInstanceAs (IsIso ((ihomComparison F M.X).natTrans.app N.X)))
+  have hu : IsIso u := hiso _ (inferInstanceAs (IsIso ((ihomComparison F M.X).app N.X)))
   have hv : IsIso v := by
     have : IsIso (mapHomModHom F ρ (A ⊗ M.X) N) :=
-      hiso _ (inferInstanceAs (IsIso ((ihomComparison F (A ⊗ M.X)).natTrans.app N.X)))
+      hiso _ (inferInstanceAs (IsIso ((ihomComparison F (A ⊗ M.X)).app N.X)))
     have : IsIso (homModPre p (Φ.obj N)) := hiso _ (inferInstanceAs (IsIso ((pre p).app _)))
     infer_instance
   have ha : Φ.map a ≫ v = u ≫ a' := mapHomModHom_homModPre F ρ M N

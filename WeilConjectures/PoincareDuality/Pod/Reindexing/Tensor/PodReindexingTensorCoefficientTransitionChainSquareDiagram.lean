@@ -81,7 +81,6 @@ attribute [local implicit_reducible] podTensorDiagramReindexFunctor
   podTensorDiagramPairReindex podTensorDiagramPairScalar podTensorDiagramPairMixed
   podTensorDiagramDerivedTransition podTensorDiagramPairTransition
 
-set_option maxHeartbeats 1600000 in
 -- The diagram wrappers involve several large exact-derived comparison types.
 /-- The mixed tensor square on the fixed good Roos representative diagram.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 07A4, 0941

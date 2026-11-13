@@ -230,8 +230,8 @@ theorem localTerm_traceClass_squaringFixedLocus
       (specPolynomialOver.origin k)).obj K)] :
     ((ofGraph K (specPolynomialOver.squaring k) v).traceClass (squaringFixedLocus v)).localTerm
         (originComponent k) =
-      trace (graphStalkMap K (specPolynomialOver.squaring k) v (specPolynomialOver.origin k)
-        (specPolynomialOver.origin_comp_squaring k)) := by
+      End.of (trace (graphStalkMap K (specPolynomialOver.squaring k) v (specPolynomialOver.origin k)
+        (specPolynomialOver.origin_comp_squaring k))) := by
   refine localTerm_traceClass_ofGraph_squaring v (squaringFixedLocus v) (originComponent k) ?_
   rw [liftPoint_squaringFixedLocus]
   exact RationalPoint.range_left_eq_singleton (originComponent k)

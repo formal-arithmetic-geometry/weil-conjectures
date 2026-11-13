@@ -158,7 +158,6 @@ private theorem comparison_isIso {A B : RingedTensorCorner.{u, w}}
     P hp.1 (fun n ↦ (exactFunctor _ _).prop_of_iso
       (siteSheafTensorRightIso A.ring _).symm (hp.2 n))
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the uniquely characterized comparison with both tensor models fixed.
 private theorem edge_equation {A B : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (a : RingedTensorModel A) (b : RingedTensorModel B)

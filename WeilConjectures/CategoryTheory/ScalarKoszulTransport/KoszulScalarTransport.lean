@@ -109,7 +109,6 @@ theorem inverseNaturality
   simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
   rw [h, Iso.inv_hom_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Prove the component calculation abstractly, before specializing to module sheaves.
 private theorem tensorTotalRightUnit
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
@@ -197,7 +196,6 @@ private theorem tensorTotalRightUnit
   simp only [Category.assoc]
   exact (HomologicalComplex.rightUnitor'_inv N n).symm
 
-set_option maxHeartbeats 800000 in
 -- Keep total-complex constructions abstract until their one sheaf specialization.
 private def tensorComparisonFamily
     {E : Type u} [Category.{w} E] [Abelian E] [MonoidalCategory E]
@@ -262,35 +260,35 @@ omit [Preadditive E] [HasZeroObject E] [Preadditive E'] [HasZeroObject E'] [P.Ad
 Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 (blueprint: lem-f5-koszul-scalar-transport). -/
 theorem map_power_intertwines (f : End X) (g : End Y) (e : P.obj X ≅ Y)
-    (h : P.map f ≫ e.hom = e.hom ≫ g) (n : ℕ) :
-    P.map (f ^ n) ≫ e.hom = e.hom ≫ g ^ n := by
+    (h : P.map f.asHom ≫ e.hom = e.hom ≫ g.asHom) (n : ℕ) :
+    P.map (f ^ n).asHom ≫ e.hom = e.hom ≫ (g ^ n).asHom := by
   induction n with
   | zero => simp
   | succ n ih =>
-    simp only [pow_succ, End.mul_def, P.map_comp, Category.assoc, ih]
+    simp only [pow_succ, End.mul_asHom, P.map_comp, Category.assoc, ih]
     rw [← Category.assoc, h, Category.assoc]
 
 noncomputable def doubleComparisonX (f : End X) (g : End Y)
     (e : P.obj X ≅ Y) (n : ℤ) :
-    P.obj ((HomologicalComplex.double f (by decide : (ComplexShape.up ℤ).Rel 0 1)).X n) ≅
-      (HomologicalComplex.double g (by decide : (ComplexShape.up ℤ).Rel 0 1)).X n := by
+    P.obj ((HomologicalComplex.double f.asHom (by decide : (ComplexShape.up ℤ).Rel 0 1)).X n) ≅
+      (HomologicalComplex.double g.asHom (by decide : (ComplexShape.up ℤ).Rel 0 1)).X n := by
   classical
   by_cases h : n = 0
   · subst n
-    exact P.mapIso (HomologicalComplex.doubleXIso₀ f _) ≪≫ e ≪≫
-      (HomologicalComplex.doubleXIso₀ g _).symm
+    exact P.mapIso (HomologicalComplex.doubleXIso₀ f.asHom _) ≪≫ e ≪≫
+      (HomologicalComplex.doubleXIso₀ g.asHom _).symm
   · by_cases h' : n = 1
     · subst n
-      exact P.mapIso (HomologicalComplex.doubleXIso₁ f _ (by decide)) ≪≫ e ≪≫
-        (HomologicalComplex.doubleXIso₁ g _ (by decide)).symm
-    · exact (P.map_isZero (HomologicalComplex.isZero_double_X f _ n h h')).iso
-        (HomologicalComplex.isZero_double_X g _ n h h')
+      exact P.mapIso (HomologicalComplex.doubleXIso₁ f.asHom _ (by decide)) ≪≫ e ≪≫
+        (HomologicalComplex.doubleXIso₁ g.asHom _ (by decide)).symm
+    · exact (P.map_isZero (HomologicalComplex.isZero_double_X f.asHom _ n h h')).iso
+        (HomologicalComplex.isZero_double_X g.asHom _ n h h')
 
 noncomputable def doubleComparison (f : End X) (g : End Y)
-    (e : P.obj X ≅ Y) (h : P.map f ≫ e.hom = e.hom ≫ g) :
+    (e : P.obj X ≅ Y) (h : P.map f.asHom ≫ e.hom = e.hom ≫ g.asHom) :
     (P.mapHomologicalComplex (.up ℤ)).obj
-        (HomologicalComplex.double f (by decide : (ComplexShape.up ℤ).Rel 0 1)) ≅
-      HomologicalComplex.double g (by decide : (ComplexShape.up ℤ).Rel 0 1) :=
+        (HomologicalComplex.double f.asHom (by decide : (ComplexShape.up ℤ).Rel 0 1)) ≅
+      HomologicalComplex.double g.asHom (by decide : (ComplexShape.up ℤ).Rel 0 1) :=
   HomologicalComplex.Hom.isoOfComponents (doubleComparisonX P f g e) (by
     intro n k hnk
     have hk : n + 1 = k := hnk
@@ -321,8 +319,8 @@ variable (t : (S.obj ⋙ forget CommRingCat).sections)
 noncomputable def factorIso
     (e : P.obj (SheafOfModules.unit (siteModuleRings R)) ≅
       SheafOfModules.unit (siteModuleRings S))
-    (h : P.map (ringedKoszulScalar R s) ≫ e.hom =
-      e.hom ≫ ringedKoszulScalar S t) (m : ℕ) :
+    (h : P.map (ringedKoszulScalar R s).asHom ≫ e.hom =
+      e.hom ≫ (ringedKoszulScalar S t).asHom) (m : ℕ) :
     (P.mapHomologicalComplex (.up ℤ)).obj (ringedKoszulFactor R s m) ≅
       ringedKoszulFactor S t m :=
   doubleComparison P _ _ e (map_power_intertwines P _ _ e h (m + 1))
@@ -333,8 +331,8 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 theorem factorIso_step
     (e : P.obj (SheafOfModules.unit (siteModuleRings R)) ≅
       SheafOfModules.unit (siteModuleRings S))
-    (h : P.map (ringedKoszulScalar R s) ≫ e.hom =
-      e.hom ≫ ringedKoszulScalar S t) (m : ℕ) :
+    (h : P.map (ringedKoszulScalar R s).asHom ≫ e.hom =
+      e.hom ≫ (ringedKoszulScalar S t).asHom) (m : ℕ) :
     (P.mapHomologicalComplex (.up ℤ)).map (ringedKoszulFactorStep R s m) ≫
         (factorIso P s t e h (m + 1)).hom =
       (factorIso P s t e h m).hom ≫ ringedKoszulFactorStep S t m := by
@@ -359,8 +357,8 @@ theorem factorIso_step
 noncomputable def factorsIso
     (e : P.obj (SheafOfModules.unit (siteModuleRings R)) ≅
       SheafOfModules.unit (siteModuleRings S))
-    (h : P.map (ringedKoszulScalar R s) ≫ e.hom =
-      e.hom ≫ ringedKoszulScalar S t) :
+    (h : P.map (ringedKoszulScalar R s).asHom ≫ e.hom =
+      e.hom ≫ (ringedKoszulScalar S t).asHom) :
     ringedKoszulFactors R s ⋙ P.mapHomologicalComplex (.up ℤ) ≅
       ringedKoszulFactors S t := by
   refine NatIso.ofComponents (factorIso P s t e h) ?_
@@ -386,8 +384,8 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 theorem factorIso_projection
     (u : (P.mapHomologicalComplex (.up ℤ)).obj (ringedSiteRingComplex R) ≅
       ringedSiteRingComplex S)
-    (h : P.map (ringedKoszulScalar R s) ≫ (rankOneIso P u).hom =
-      (rankOneIso P u).hom ≫ ringedKoszulScalar S t) (m : ℕ) :
+    (h : P.map (ringedKoszulScalar R s).asHom ≫ (rankOneIso P u).hom =
+      (rankOneIso P u).hom ≫ (ringedKoszulScalar S t).asHom) (m : ℕ) :
     (P.mapHomologicalComplex (.up ℤ)).map (ringedKoszulFactorProjection R s m) ≫
         u.hom =
       (factorIso P s t (rankOneIso P u) h m).hom ≫
@@ -563,8 +561,9 @@ theorem scalar_eq_smul {C : Type v} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{v}}
     (a : (R.obj ⋙ forget CommRingCat).sections) :
     ringedKoszulScalar R a =
-      (⟨PresheafOfModules.sectionsSMul (SheafOfModules.unit (siteModuleRings R)).val a⟩ :
+      (End.of ⟨PresheafOfModules.sectionsSMul (SheafOfModules.unit (siteModuleRings R)).val a⟩ :
         End (SheafOfModules.unit (siteModuleRings R))) := by
+  apply End.ext
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro U

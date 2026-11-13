@@ -154,7 +154,7 @@ private def brownInverseMateIso
     {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
     (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
     L ⋙ G ≅ F ⋙ L' := by
-  let α := ((mateEquiv a b).symm (.mk _ _ _ _ e.hom)).natTrans
+  let α := ((mateEquiv a b).symm (.mk _ _ _ _ e.hom))
   letI : IsIso α := isIso_inverseMate_of_equivalences a b e
   exact (asIso α).symm
 

@@ -166,11 +166,11 @@ theorem derivedExchangeUnitQ
         adj'.mapDerivedCategoryRightDerivedAdjunction
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategoryCompIso G L' ≪≫
           Functor.mapDerivedCategoryNatIso e ≪≫
-          (Functor.mapDerivedCategoryCompIso L H).symm).hom)).natTrans.app
+          (Functor.mapDerivedCategoryCompIso L H).symm).hom)).app
           (DerivedCategory.Q.obj I) =
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj I) ≫
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)).natTrans (.up ℤ)).app I) ≫
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ e.hom)) (.up ℤ)).app I) ≫
       R'.rightDerivedFunctorUnitQ ((H.mapHomologicalComplex (.up ℤ)).obj I) ≫
       R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.inv.app I) := by
   have h := Adjunction.derivedExact_mateEquiv_app_fac adj adj'

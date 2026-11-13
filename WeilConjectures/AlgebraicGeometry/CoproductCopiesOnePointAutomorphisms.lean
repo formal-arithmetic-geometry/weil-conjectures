@@ -85,9 +85,10 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
   let ρ : Aut C →* Equiv.Perm I :=
     e.permCongrHom.toMonoidHom.comp
       (Aut.mulEquivPerm.toMonoidHom.comp (F.mapAut C))
-  have hρ (a : Aut C) (i : I) : ρ a i = e (a.hom.left (e.symm i)) := rfl
+  have hρ (a : Aut C) (i : I) : ρ a i = e (a.asIso.hom.left (e.symm i)) := rfl
   refine ⟨MulEquiv.ofBijective ρ ⟨?_, ?_⟩⟩
   · intro a b hab
+    apply Aut.ext
     apply Iso.ext
     apply ext
     intro x
@@ -96,14 +97,14 @@ theorem coproductCopies_onePoint_aut (X : Scheme.{u}) [Subsingleton X] [Nonempty
     rw [hρ, hρ, Equiv.symm_apply_apply] at hh
     exact hh
   · intro q
-    let a : Aut C := Over.isoMk (Sigma.reindex q G) (by
+    let a : Aut C := .of (Over.isoMk (Sigma.reindex q G) (by
       change (Sigma.reindex q G).hom ≫ π = π
       apply Sigma.hom_ext
       intro i
       rw [← Category.assoc, Sigma.ι_reindex_hom q G i]
       change Sigma.ι G (q i) ≫ π = Sigma.ι G i ≫ π
       exact (Sigma.ι_comp_desc (fun _ : I ↦ 𝟙 X) (q i)).trans
-        (Sigma.ι_comp_desc (fun _ : I ↦ 𝟙 X) i).symm)
+        (Sigma.ι_comp_desc (fun _ : I ↦ 𝟙 X) i).symm))
     refine ⟨a, ?_⟩
     ext i
     rw [hρ, he]

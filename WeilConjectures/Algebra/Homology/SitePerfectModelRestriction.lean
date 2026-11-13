@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-! # Exact restriction and transport of strict-perfect packages
 

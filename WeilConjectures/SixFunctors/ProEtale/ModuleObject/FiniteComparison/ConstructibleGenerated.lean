@@ -61,7 +61,6 @@ lemma preservesFilteredColimitsOfSize_abSectionsFunctor {X : Scheme.{u}} (W : X.
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T] {X : Scheme.{u}}
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the instance search for the forgetful functor of module objects goes through its adjoints
 omit [DiscreteTopology T] [Finite T] in
 /-- The forgetful functor from `Λ_X`-module objects to abelian pro-étale sheaves preserves filtered

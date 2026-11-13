@@ -136,7 +136,6 @@ private theorem pull_eq_exact {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
         eqToIso (congrArg (exactUpper Λ) h) := by
   cases h
   simp
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
 private theorem square_exact {X' X Y' Y : Scheme.{u}}
     {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
@@ -163,17 +162,11 @@ private theorem square_exact {X' X Y' Y : Scheme.{u}}
   rw [pull_eq_exact Λ sq.toCommSq.w.symm]
   simp only [exactSquare, Iso.trans_assoc,
     Iso.symm_self_id_assoc]
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
-set_option maxHeartbeats 1000000 in
 -- Derived-functor instance synthesis and kernel conversion need a higher limit.
 private theorem triangle_assoc {A B C D : Scheme.{u}}
     (s : A ⟶ B) (a : B ⟶ C) (p : C ⟶ D) (q : B ⟶ D)

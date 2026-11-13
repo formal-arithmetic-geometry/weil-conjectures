@@ -48,9 +48,9 @@ private theorem mate_chain
     (γ : U ⋙ Q'' ⟶ Q ⋙ U') (c : S ⋙ T ≅ U) (c' : S' ⋙ T' ≅ U')
     (hγ : ∀ M : B, γ.app M = Q''.map (c.inv.app M) ≫ β.app (S.obj M) ≫
       T'.map (α.app M) ≫ c'.hom.app (Q.obj M)) (K : A) :
-    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ γ)).natTrans.app K =
-      c.inv.app (P.obj K) ≫ T.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α)).natTrans.app K) ≫
-        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ β)).natTrans.app (S'.obj K) ≫
+    (mateEquiv adj adj'' (TwoSquare.mk _ _ _ _ γ)).app K =
+      c.inv.app (P.obj K) ≫ T.map ((mateEquiv adj adj' (TwoSquare.mk _ _ _ _ α)).app K) ≫
+        (mateEquiv adj' adj'' (TwoSquare.mk _ _ _ _ β)).app (S'.obj K) ≫
         P''.map (c'.hom.app K) := by
   apply (adj''.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
@@ -58,7 +58,7 @@ private theorem mate_chain
   rw [mateEquiv_counit]
   rw [reassoc_of% (mateEquiv_counit adj' adj'' (TwoSquare.mk _ _ _ _ β) (S'.obj K)), hγ]
   simp only [Category.assoc]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   erw [β.naturality_assoc]
   simp only [Functor.comp_map]
   slice_rhs 3 4 => rw [← T'.map_comp, mateEquiv_counit, T'.map_comp]
@@ -184,7 +184,6 @@ private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom) M
   have hm := restriction_underived_mate φ f
-  dsimp only [TwoSquare.natTrans] at hm
   rw [hm] at h
   simpa using h.symm
 

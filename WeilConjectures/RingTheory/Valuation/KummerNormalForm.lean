@@ -409,7 +409,7 @@ theorem kummer_stage2_base (hp : p.Prime) (hp1 : v (p : Ω) < 1) (hp0 : (p : Ω)
           map_pow]
       obtain ⟨γ, hγK, hγ⟩ := hroot (E' i₀) (hE'K i₀ hi₀)
       have hvγ : v γ = σ := by
-        refine pow_left_injective (M := Γ₀) hp.ne_zero ?_
+        refine @pow_left_injective Γ₀ inferInstance inferInstance p hp.ne_zero _ _ ?_
         simp only
         rw [← map_pow, hγ, ← hvF, hvFσ]
       have hγ0 : γ ≠ 0 := by intro h; rw [h, map_zero] at hvγ; exact hσ0 hvγ.symm

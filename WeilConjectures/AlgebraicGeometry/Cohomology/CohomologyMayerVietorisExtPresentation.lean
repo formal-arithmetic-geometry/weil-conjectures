@@ -42,9 +42,9 @@ structure H.ExtRowPresentation
   eX : ∀ n, A n ≃+ Ext K.X₃ F n
   eP : ∀ n, B n ≃+ Ext K.X₂ F n
   eI : ∀ n, I n ≃+ Ext K.X₁ F n
-  scalarX : ∀ n a x, eX n (a • x) = (eX n x).comp (Ext.mk₀ (ρ a)) (add_zero n)
-  scalarP : ∀ n a x, eP n (a • x) = (eP n x).comp (Ext.mk₀ (ρ a)) (add_zero n)
-  scalarI : ∀ n a x, eI n (a • x) = (eI n x).comp (Ext.mk₀ (ρ a)) (add_zero n)
+  scalarX : ∀ n a x, eX n (a • x) = (eX n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)
+  scalarP : ∀ n a x, eP n (a • x) = (eP n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)
+  scalarI : ∀ n a x, eI n (a • x) = (eI n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)
 
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
@@ -69,18 +69,18 @@ private lemma pairScalar
     [Module T A] [Module T B] (ρ : T →+* End F) (n : ℕ)
     (e : A ≃+ Ext P F n) (e' : B ≃+ Ext Q F n)
     (p : Z ⟶ P) (q : Z ⟶ Q)
-    (he : ∀ a x, e (a • x) = (e x).comp (Ext.mk₀ (ρ a)) (add_zero n))
-    (he' : ∀ a x, e' (a • x) = (e' x).comp (Ext.mk₀ (ρ a)) (add_zero n))
+    (he : ∀ a x, e (a • x) = (e x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n))
+    (he' : ∀ a x, e' (a • x) = (e' x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n))
     (a : T) (x : A × B) :
     (Ext.mk₀ p).comp (e (a • x.1)) (zero_add n) +
       (Ext.mk₀ q).comp (e' (a • x.2)) (zero_add n) =
     ((Ext.mk₀ p).comp (e x.1) (zero_add n) +
-      (Ext.mk₀ q).comp (e' x.2) (zero_add n)).comp (Ext.mk₀ (ρ a)) (add_zero n) := by
+      (Ext.mk₀ q).comp (e' x.2) (zero_add n)).comp (Ext.mk₀ (ρ a).asHom) (add_zero n) := by
   rw [he, he', Ext.add_comp]
   exact congrArg₂ (· + ·)
-    (Ext.comp_assoc_of_third_deg_zero (Ext.mk₀ p) (e x.1) (Ext.mk₀ (ρ a))
+    (Ext.comp_assoc_of_third_deg_zero (Ext.mk₀ p) (e x.1) (Ext.mk₀ (ρ a).asHom)
       (zero_add n)).symm
-    (Ext.comp_assoc_of_third_deg_zero (Ext.mk₀ q) (e' x.2) (Ext.mk₀ (ρ a))
+    (Ext.comp_assoc_of_third_deg_zero (Ext.mk₀ q) (e' x.2) (Ext.mk₀ (ρ a).asHom)
       (zero_add n)).symm
 
 private lemma pairComparison

@@ -182,7 +182,7 @@ private theorem compact_exchange_projection
   let := leftDerivedUpperStarMonoidal A g'
   ext T
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.natTrans, TwoSquare.mk, Functor.LaxMonoidal.μTwoSquare,
+    TwoSquare.mk, Functor.LaxMonoidal.μTwoSquare,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.comp_obj, Functor.comp_map, Category.id_comp, Category.comp_id,

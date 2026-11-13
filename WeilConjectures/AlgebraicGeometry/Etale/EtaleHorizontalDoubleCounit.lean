@@ -53,7 +53,7 @@ noncomputable def etaleHorizontalCounitRightExchange
     G ⋙ (upperStar (ModuleCat.{u + 1} A) e').mapDerivedCategory ⟶
       (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory ⋙ G' :=
   (mateEquiv adj adj'
-    (TwoSquare.mk _ _ _ _ (etaleHorizontalSupportBaseChangeIso A sq).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (etaleHorizontalSupportBaseChangeIso A sq).inv))
 
 private lemma conjugate_transport
     {C D : Type*} [Category* C] [Category* D]
@@ -107,11 +107,11 @@ private lemma mate_cube
     (γ : TwoSquare U₀₂ L₀ L₂ V₀₂) (δ : TwoSquare U₂₃ L₂ L₃ V₂₃)
     (s : U₀₁ ⋙ U₁₃ ≅ U₀₂ ⋙ U₂₃) (t : V₀₁ ⋙ V₁₃ ≅ V₀₂ ⋙ V₂₃)
     (hc : α.hComp β = ((γ.hComp δ).whiskerTop s.hom).whiskerBottom t.inv) :
-    Functor.whiskerRight (mateEquiv a₀ a₁ α).natTrans U₁₃ ≫
-        Functor.whiskerLeft V₀₁ (mateEquiv a₁ a₃ β).natTrans =
+    Functor.whiskerRight (mateEquiv a₀ a₁ α) U₁₃ ≫
+        Functor.whiskerLeft V₀₁ (mateEquiv a₁ a₃ β) =
       Functor.whiskerLeft R₀ s.hom ≫
-        Functor.whiskerRight (mateEquiv a₀ a₂ γ).natTrans U₂₃ ≫
-        Functor.whiskerLeft V₀₂ (mateEquiv a₂ a₃ δ).natTrans ≫
+        Functor.whiskerRight (mateEquiv a₀ a₂ γ) U₂₃ ≫
+        Functor.whiskerLeft V₀₂ (mateEquiv a₂ a₃ δ) ≫
         Functor.whiskerRight t.inv R₃ := by
   ext K
   have hh := congrArg (fun q ↦ (mateEquiv a₀ a₃ q).app K) hc

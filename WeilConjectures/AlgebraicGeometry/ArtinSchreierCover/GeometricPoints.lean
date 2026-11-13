@@ -58,7 +58,7 @@ theorem artinSchreier_geometricPoints (hP : P = X ^ p - X - C f)
       ∀ s t : {s : Spec (.of Ω) ⟶ (adjoinRootCover S P).left //
           s ≫ (adjoinRootCover S P).hom = x},
         ∃! a : ZMod p, t.val = s.val ≫ (artinSchreierAction hP hchar
-          (Multiplicative.ofAdd a)).hom.left := by
+          (Multiplicative.ofAdd a)).asIso.hom.left := by
   let e : Γ(Spec (.of Ω), ⊤) ≃+* Ω := (Scheme.ΓSpecIso (.of Ω)).commRingCatIsoToRingEquiv
   have : CharP Ω p :=
     CharP.of_ringHom_of_prime (e.toRingHom.comp x.appTop.hom) (Fact.out : p.Prime) hchar
@@ -85,7 +85,7 @@ theorem artinSchreier_geometricPoints (hP : P = X ^ p - X - C f)
     rw [hker] at hd'
     obtain ⟨a, ha⟩ := hd'
     have key (b : ZMod p) : t.val = s.val ≫ (artinSchreierAction hP hchar
-        (Multiplicative.ofAdd b)).hom.left ↔ ZMod.castHom (dvd_refl p) Ω b = e v - e u := by
+        (Multiplicative.ofAdd b)).asIso.hom.left ↔ ZMod.castHom (dvd_refl p) Ω b = e v - e u := by
       rw [artinSchreierAction_hom_left, ZMod.castHom_apply, ← ZMod.natCast_val]
       constructor
       · intro h

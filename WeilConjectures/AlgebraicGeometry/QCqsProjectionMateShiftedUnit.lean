@@ -36,10 +36,10 @@ private theorem equivalence_projection_mate_isIso
   let a := A.symm.toAdjunction
   let b := B.symm.toAdjunction
   let β := (mateEquiv a b).symm (TwoSquare.mk _ _ _ _ α.hom)
-  have hβ : IsIso β.natTrans := by
+  have hβ : IsIso β := by
     dsimp [β, mateEquiv]
     infer_instance
-  let γ := conjugateEquiv (a.comp p) (p.comp b) β.natTrans
+  let γ := conjugateEquiv (a.comp p) (p.comp b) β
   have hγ : IsIso γ := conjugateEquiv_iso _ _ _
   have heq : γ.app L = p.homEquiv (A.functor.obj (G.obj L)) (B.functor.obj L)
       (α.hom.app (G.obj L) ≫ B.functor.map (p.counit.app L)) := by
@@ -48,9 +48,9 @@ private theorem equivalence_projection_mate_isIso
       Equivalence.toAdjunction_unit, Equivalence.symm_unit, Equivalence.toAdjunction_counit,
       Equivalence.symm_counit, Equiv.trans_apply, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom,
       Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc,
-      TwoSquare.equivNatTrans_symm_apply, Equiv.coe_fn_mk, Functor.whiskerRight_comp,
+      Equiv.coe_fn_mk, Functor.whiskerRight_comp,
       Functor.whiskerRight_twice, Iso.inv_hom_id_assoc, Functor.whiskerLeft_comp,
-      TwoSquare.equivNatTrans_apply, NatTrans.comp_app, Functor.id_obj,
+      NatTrans.comp_app, Functor.id_obj,
       Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Adjunction.comp_unit_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerRight_app,
       Functor.comp_map, Equivalence.fun_inv_map, Functor.map_comp, CategoryTheory.Functor.map_id,
@@ -66,7 +66,7 @@ private theorem equivalence_projection_mate_isIso
       G.map (B.functor.map (F.map (A.unitInv.app (G.obj L)))) ≫
       G.map (B.functor.map (p.counit.app L)) = _
     have hb (Z : D) : B.counitInv.app (B.functor.obj Z) ≫
-        B.functor.map (B.unitInv.app Z) = 𝟙 _ := B.counitIso_functor_comp Z
+        B.functor.map (B.unitInv.app Z) = 𝟙 _ := B.counitInv_functor_comp Z
     slice_lhs 4 5 =>
       rw [← G.map_comp, hb]
       dsimp only [Functor.comp_obj, Functor.id_obj]
@@ -84,7 +84,7 @@ private theorem equivalence_projection_mate_isIso
         B.functor.map (F.map (A.unitInv.app (G.obj L))) at ht
     slice_lhs 3 4 => rw [← G.map_comp, ← ht, G.map_comp]
     slice_lhs 2 3 =>
-      rw [← G.map_comp, ← F.map_comp, A.counitIso_functor_comp, F.map_id, G.map_id]
+      rw [← G.map_comp, ← F.map_comp, A.counitInv_functor_comp, F.map_id, G.map_id]
     dsimp only [Functor.comp_obj, Functor.id_obj]
     simp only [Category.id_comp]
   rw [← heq]

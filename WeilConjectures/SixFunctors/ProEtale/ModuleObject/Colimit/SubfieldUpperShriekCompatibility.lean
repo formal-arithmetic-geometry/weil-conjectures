@@ -62,7 +62,7 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
         (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g)
         (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g)
         (boundedConstructibleExtendScalarsSubfield Y.left ℓ h)
-        (inv (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)))).natTrans := by
+        (inv (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g)))) := by
   have := noetherianSpace_left_of_over Z
   have := noetherianSpace_left_of_over Y
   have hex := exists_isIso_biproductDesc_unit_smul.{u} ℓ h
@@ -84,8 +84,8 @@ theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsPr
     (boundedConstructibleLowerStarRestrictScalarsSubfieldIso ℓ h g)
     (TwoSquare.mk _ _ _ _ (boundedConstructibleLowerStarExtendScalarsSubfield ℓ h g))
     (Equiv.apply_symm_apply _ _)
-    (fun i ↦ Linear.toCatCenter F _ (b i))
-    (fun i ↦ Linear.toCatCenter F _ (b i))
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
+    (fun i ↦ (Linear.toCatCenter F _ (b i)).asHom)
     hμ hZ hY
   with_reducible exact H
 

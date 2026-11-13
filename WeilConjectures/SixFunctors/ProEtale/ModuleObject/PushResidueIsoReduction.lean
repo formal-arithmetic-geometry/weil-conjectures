@@ -179,7 +179,6 @@ lemma shortExact_regularEndSMulComplex (w : r.hom ≫ φ = 0)
 
 variable [Abelian.HasFunctorialFlatResolution C]
 
-set_option maxHeartbeats 400000 in
 -- the five lemma for complexes of module objects is slow to elaborate
 /-- **The derived extension of scalars along `R ⟶ R ⧸ r` is computed levelwise on complexes on
 which `r` acts injectively**: if `0 ⟶ R --r--> R --φ--> S ⟶ 0` is short exact and `r` acts

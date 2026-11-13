@@ -155,7 +155,6 @@ noncomputable def hypercoverRowAugmentationComplex
     obtain rfl : k = 1 := by simpa using hk.symm
     exact hypercoverRowAugmentation_d X R W U I)
 
-set_option maxHeartbeats 400000 in
 -- The total augmentation expands the section, extension and total functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical augmentation of a coefficient complex into total hypercover sections.

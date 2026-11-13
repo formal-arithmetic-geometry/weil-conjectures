@@ -17,6 +17,7 @@ import WeilConjectures.Algebra.Homology.CyclePullbackResolution
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.Algebra.Homology.Refinements
+public import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-!
 # Functorial bounded-above flat replacements on a ringed site

@@ -111,9 +111,9 @@ structure PullComparison {E F : Index P} {h : E ≤ F}
   ordinary : (s Y).model.E ⋙ (oF.geometry f).pull ≅
     (oE.geometry f).pull ⋙ (s X).model.E
   ordinary_mate :
-    (mateEquiv (s Y).ordinaryAdjunction (s X).ordinaryAdjunction ordinary.inv).natTrans =
+    (mateEquiv (s Y).ordinaryAdjunction (s X).ordinaryAdjunction ordinary.inv) =
       ((mateEquiv (oF.geometry f).ordinaryAdjunction
-        (oE.geometry f).ordinaryAdjunction).symm restrictionPush.inv).natTrans
+        (oE.geometry f).ordinaryAdjunction).symm restrictionPush.inv)
   derived : (s Y).T ⋙ SpTowerShriek.pull P.coefficients.l F.val bF (oF.geometry f) ≅
     SpTowerShriek.pull P.coefficients.l E.val bE (oE.geometry f) ⋙ (s X).T
   representative : ∀ (K : CochainComplex (SpTowerShriek.S P.coefficients.l E.val Y) ℤ),
@@ -154,7 +154,7 @@ structure Models where
     (j : X ⟶ Z) [IsOpenImmersion j],
     (openIso E F h j).inv =
       ((mateEquiv ((operations E).openOp j).derivedAdjunction
-        ((operations F).openOp j).derivedAdjunction).symm (pull E F h j).derived.inv).natTrans
+        ((operations F).openOp j).derivedAdjunction).symm (pull E F h j).derived.inv)
 
 /-- The proper coefficient comparison is the actual geometric counit mate.
 Source: blueprint (2), a_h (blueprint: def-sp-field-shriek-system-models). -/
@@ -163,7 +163,7 @@ def proper (D : Models P) {E F : Index P} (h : E ≤ F)
   (mateEquiv
     (SpTowerShriek.adjunction P.coefficients.l E.val (D.base E) ((D.operations E).geometry g))
     (SpTowerShriek.adjunction P.coefficients.l F.val (D.base F) ((D.operations F).geometry g))
-    (D.pull E F h g).derived.hom).natTrans
+    (D.pull E F h g).derived.hom)
 
 /-- The specified whole-system b: proper counit mate, followed by proper image of
 open tensor identification. The same compactification occurs on both sides.

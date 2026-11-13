@@ -159,7 +159,6 @@ private theorem transportedComparisonSquares
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 400000 in
 -- Affine stalk algebra instances and their homology transports require this budget.
 /--
 For an explicitly supplied affine tilde complex `P`, the common localization model

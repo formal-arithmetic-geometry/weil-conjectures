@@ -183,16 +183,16 @@ private theorem scalar_pull_mate
     {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (a₃ : F₁ ⊣ U₁) (a₄ : F₂ ⊣ U₂)
     (t : TwoSquare R₁ F₂ F₁ R₂)
-    [IsIso (mateEquiv a₄ a₃ t).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm t).natTrans := by
+    [IsIso (mateEquiv a₄ a₃ t)] :
+    IsIso ((mateEquiv a₁ a₂).symm t) := by
   have h := conjugateEquiv_symm_iso (a₁.comp a₄) (a₃.comp a₂)
-    (mateEquiv a₄ a₃ t).natTrans
-  have he := congrArg TwoSquare.natTrans
+    (mateEquiv a₄ a₃ t)
+  have he := 
     (iterated_mateEquiv_conjugateEquiv_symm a₁ a₂ a₃ a₄ ((mateEquiv a₄ a₃) t))
   simp only [Equiv.symm_apply_apply] at he
-  change ((mateEquiv a₁ a₂).symm t).natTrans =
+  change ((mateEquiv a₁ a₂).symm t) =
     (conjugateEquiv (a₁.comp a₄) (a₃.comp a₂)).symm
-      (mateEquiv a₄ a₃ t).natTrans at he
+      (mateEquiv a₄ a₃ t) at he
   rw [he]
   exact h
 
@@ -267,20 +267,20 @@ private theorem tripleComparison_mate_isIso
     (k₁ : R₀ ⋙ 𝟭 A ≅ Q ⋙ R₁) (k₂ : R₁ ⋙ T ≅ S ⋙ R₂)
     (k₃ : R₂ ⋙ 𝟭 E ≅ V ⋙ R₃)
     (h₂ : IsIso ((mateEquiv a₁ a₂).symm
-      (Functor.mapDerivedCategorySquareIso k₂).hom).natTrans) :
+      (Functor.mapDerivedCategorySquareIso k₂).hom)) :
     IsIso ((mateEquiv a₀ a₃).symm
-      (Functor.mapDerivedCategorySquareIso (tripleComparison k₁ k₂ k₃)).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso (tripleComparison k₁ k₂ k₃)).hom) := by
   let k₁₂ := pasteSquare k₁ k₂ (Functor.leftUnitor T).symm (Iso.refl (Q ⋙ S))
   have h₁ : IsIso ((mateEquiv a₀ a₁).symm
-      (Functor.mapDerivedCategorySquareIso k₁).hom).natTrans :=
+      (Functor.mapDerivedCategorySquareIso k₁).hom) :=
     isIso_inverseMate_of_equivalences a₀ a₁ (Functor.mapDerivedCategorySquareIso k₁)
   have h₁₂ : IsIso ((mateEquiv a₀ a₂).symm
-      (Functor.mapDerivedCategorySquareIso k₁₂).hom).natTrans :=
+      (Functor.mapDerivedCategorySquareIso k₁₂).hom) :=
     derivedScalarMatePasting R₀ R₁ R₂ (𝟭 A) T T Q S (Q ⋙ S)
       a₀ a₁ a₂ k₁ k₂ k₁₂ (Functor.leftUnitor T).symm (Iso.refl _)
       (pasteSquare_fac _ _ _ _) h₁ h₂
   have h₃ : IsIso ((mateEquiv a₂ a₃).symm
-      (Functor.mapDerivedCategorySquareIso k₃).hom).natTrans :=
+      (Functor.mapDerivedCategorySquareIso k₃).hom) :=
     isIso_inverseMate_of_equivalences a₂ a₃ (Functor.mapDerivedCategorySquareIso k₃)
   exact derivedScalarMatePasting R₀ R₂ R₃ T (𝟭 E) T (Q ⋙ S) V (Q ⋙ S ⋙ V)
     a₀ a₂ a₃ k₁₂ k₃ (tripleComparison k₁ k₂ k₃)
@@ -413,7 +413,7 @@ private theorem inverseImage_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (g 
       a b (Iso.refl _) (Iso.refl _)
       ((Category.id_comp _).trans (Category.comp_id _).symm)
     IsIso ((mateEquiv (pbcDerivedScalarAdjunction a)
-      (pbcDerivedScalarAdjunction b)).symm k.inv).natTrans := by
+      (pbcDerivedScalarAdjunction b)).symm k.inv) := by
   dsimp only
   let b := (adicTowerInverseImage g).map a
   let h := (Category.id_comp b).trans (Category.comp_id b).symm
@@ -423,7 +423,7 @@ private theorem inverseImage_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (g 
   let ac := proEtaleRingDerivedAdjunction g R ((adicTowerInverseImage g).obj R) (Iso.refl _)
   let ad := proEtaleRingDerivedAdjunction g S ((adicTowerInverseImage g).obj S) (Iso.refl _)
   let t := TwoSquare.mk _ _ _ _ k.inv
-  have he : (mateEquiv ad ac t).natTrans =
+  have he : (mateEquiv ad ac t) =
       (proEtaleRingRestrictionDerivedDirectImage g R S
         ((adicTowerInverseImage g).obj R) ((adicTowerInverseImage g).obj S)
         a b (Iso.refl _) (Iso.refl _) h).hom := by
@@ -438,9 +438,9 @@ private theorem inverseImage_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (g 
       exact Equiv.apply_symm_apply _ _
     dsimp only [ad] at hc
     erw [hc, CategoryTheory.Functor.map_id, Category.id_comp] at hh
-    simpa [t, k, ac, ad, TwoSquare.mk, TwoSquare.natTrans,
+    simpa [t, k, ac, ad, TwoSquare.mk,
       Adjunction.homEquiv_unit, mateEquiv_apply, Functor.comp_map, Category.assoc] using hh
-  have : IsIso (mateEquiv ad ac t).natTrans := by rw [he]; infer_instance
+  have : IsIso (mateEquiv ad ac t) := by rw [he]; infer_instance
   exact scalar_pull_mate (pbcDerivedScalarAdjunction a) (pbcDerivedScalarAdjunction b)
     ac ad t
 
@@ -460,11 +460,11 @@ private theorem constant_square_mate_isIso (X : AlgebraicGeometry.Scheme.{u})
     IsIso ((mateEquiv (ConstantScalarRealization.moduleDerivedAdjunction r)
       (ConstantScalarRealization.derivedAdjunction (ProEt.topology X) r)).symm
       (Functor.mapDerivedCategorySquareIso
-        (ConstantScalarRealization.restrictionIso (ProEt.topology X) r).symm).hom).natTrans := by
+        (ConstantScalarRealization.restrictionIso (ProEt.topology X) r).symm).hom) := by
   have ht : ((mateEquiv (ConstantScalarRealization.moduleDerivedAdjunction r)
       (ConstantScalarRealization.derivedAdjunction (ProEt.topology X) r)).symm
       (Functor.mapDerivedCategorySquareIso
-        (ConstantScalarRealization.restrictionIso (ProEt.topology X) r).symm).hom).natTrans =
+        (ConstantScalarRealization.restrictionIso (ProEt.topology X) r).symm).hom) =
       ConstantScalarRealization.comparisonTransformation (ProEt.topology X) r := by
     apply NatTrans.ext
     funext M
@@ -488,7 +488,7 @@ private theorem ordinaryComparison_mate_isIso (X : AlgebraicGeometry.Scheme.{u})
       ((d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)))).mapDerivedCategory) :
     IsIso ((mateEquiv adj
       (pbcDerivedScalarAdjunction ((constantAdicFiniteCone X d).π.app (op n)))).symm
-      (Functor.mapDerivedCategorySquareIso (ordinaryComparison X d n)).hom).natTrans := by
+      (Functor.mapDerivedCategorySquareIso (ordinaryComparison X d n)).hom) := by
   let C := AdicCompletion d.ideal A
   let q := constantAdicQuotientMap d.ideal n
   let r := (AdicCompletion.evalₐ d.ideal (n + 1)).toRingHom
@@ -540,7 +540,7 @@ private theorem pullComparison_mate_isIso {X Y : AlgebraicGeometry.Scheme.{u}} (
       ((d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1)))).mapDerivedCategory) :
     IsIso ((mateEquiv adj
       (pbcDerivedScalarAdjunction (constantAdicFiniteProjection g d n))).symm
-      (constantAdicQuotientPullComparison g d n (ordinaryComparison X d n)).hom).natTrans := by
+      (constantAdicQuotientPullComparison g d n (ordinaryComparison X d n)).hom) := by
   have := CompletedConstantReduction.constant_additive X (AdicCompletion d.ideal A)
   have := (constantAdicFinite_constant_exact X (AdicCompletion d.ideal A)).1
   have := (constantAdicFinite_constant_exact X (AdicCompletion d.ideal A)).2

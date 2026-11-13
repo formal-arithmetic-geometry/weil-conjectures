@@ -142,7 +142,6 @@ private lemma sections_unit_on_complex {S : Scheme.{v}}
     Iso.inv_hom_id_app, G.mapDerivedCategory.map_id, Category.id_comp,
     Iso.inv_hom_id_app_assoc]
 
-set_option maxHeartbeats 400000 in
 -- The long naturality calculation elaborates several composed derived functors.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

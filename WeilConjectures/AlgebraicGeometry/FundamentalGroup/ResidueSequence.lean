@@ -298,7 +298,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence at one
 boundary point.
@@ -360,7 +359,7 @@ theorem residue_eq_zero_iff_forall_monodromy_eq_one (V : C.Opens)
   constructor
   · intro h0 g hg
     -- a Kummer element against a primitive root of unity
-    obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+    obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
     let ζ : Ω := algebraMap C.functionField Ω (p.functionFieldConstants ζk)
     have hζ : IsPrimitiveRoot ζ N :=
       hζk.map_of_injective ((algebraMap C.functionField Ω).comp p.functionFieldConstants).injective

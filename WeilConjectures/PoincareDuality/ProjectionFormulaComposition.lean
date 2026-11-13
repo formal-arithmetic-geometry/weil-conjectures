@@ -310,7 +310,6 @@ private lemma whiskerLeft_eq_comp_eqToHom (T : Dᵇc(X.left)⟦𝐐⟧) (M : D�
           eqToHom h := by
   rw [comp_eqToHom_self]
 
-set_option maxHeartbeats 400000 in
 -- Comparing the two compactification triangles unfolds the lower shriek definitions.
 /-- **The exceptional projection morphism is compatible with the composition isomorphism attached
 to compactifications** (blueprint `prop-sf-pf-coherence`): for the chosen compactifications of

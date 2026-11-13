@@ -108,7 +108,6 @@ private theorem total_tensor_pure (K K' L L' : CochainComplex Mod ℤ)
           (x ⊗ₜ[R.obj.obj V] y))) at he
   exact he.trans (congrArg _ he')
 
-set_option maxHeartbeats 800000 in
 -- Localized Hom terms require extra elaboration of the two nested projection formulas.
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency true in

@@ -14,6 +14,7 @@ public import WeilConjectures.RingTheory.Depth
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 import Mathlib.RingTheory.Regular.IsSMulRegular
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineSectionAssociatedStalk
+public import Mathlib.RingTheory.Nakayama
 
 /-! # Uniqueness of restriction across a depth-positive boundary
 

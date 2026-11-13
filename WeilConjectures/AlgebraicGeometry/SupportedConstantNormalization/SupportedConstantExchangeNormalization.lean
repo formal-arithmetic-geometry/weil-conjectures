@@ -729,7 +729,7 @@ private lemma generic_unit_mate_named
     {r : C ⥤ D} {s : D ⥤ C} {r' : C' ⥤ D'} {s' : D' ⥤ C'}
     (a : s ⊣ r) (a' : s' ⊣ r') (L : C ⥤ C') (Q : D ⥤ D')
     (b : Q ⋙ s' ⟶ s ⋙ L) (t : r ⋙ Q ⟶ L ⋙ r')
-    (ht : (mateEquiv a a' b).natTrans = t) (d : D) :
+    (ht : (mateEquiv a a' b) = t) (d : D) :
     a'.unit.app (Q.obj d) ≫ r'.map (b.app d) =
       Q.map (a.unit.app d) ≫ t.app (s.obj d) := by
   rw [← ht]

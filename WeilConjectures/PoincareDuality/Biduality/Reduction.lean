@@ -48,7 +48,7 @@ variable {C D : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 /-- The comparison maps `ι [A, B] ⟶ [ι A, ι B]` of the inclusion of a full monoidal closed
 subcategory are identities. -/
 lemma ihomComparison_ι_app (A B : P.FullSubcategory) :
-    (ihomComparison P.ι A).natTrans.app B = 𝟙 ((ihom A.obj).obj B.obj) := by
+    (ihomComparison P.ι A).app B = 𝟙 ((ihom A.obj).obj B.obj) := by
   apply uncurry_injective
   rw [ihomComparison_app_eq_curry, uncurry_curry]
   exact (Category.id_comp _).trans (uncurry_id_eq_ev _ _).symm
@@ -56,8 +56,8 @@ lemma ihomComparison_ι_app (A B : P.FullSubcategory) :
 /-- The comparison maps of the restriction `P.ι ⋙ F` of a lax monoidal functor `F` to a full
 monoidal closed subcategory are those of `F`. -/
 lemma ihomComparison_ι_comp_app (F : C ⥤ D) [F.LaxMonoidal] (A B : P.FullSubcategory) :
-    (ihomComparison (P.ι ⋙ F) A).natTrans.app B =
-      (ihomComparison F A.obj).natTrans.app B.obj := by
+    (ihomComparison (P.ι ⋙ F) A).app B =
+      (ihomComparison F A.obj).app B.obj := by
   rw [ihomComparison_comp_app, ihomComparison_ι_app]
   exact (congrArg (· ≫ _) (F.map_id _)).trans (Category.id_comp _)
 
@@ -107,7 +107,7 @@ bounded constructible complexes of
 theorem isIso_ihomComparison_integersModPowReduction
     (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso ((Functor.LaxMonoidal.ihomComparison
-      L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) A.obj).natTrans.app B.obj) :=
+      L(Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)) A.obj).app B.obj) :=
   isIso_ihomComparison_leftDerivedIntegersModPowReduction_of_eq ℓ E.1 n X.left
     (leftDerivedIntegersModPowReductionMonoidal ℓ E n X) rfl A.obj B.obj
 
@@ -175,7 +175,7 @@ theorem isIso_verdierBiduality_of_isIso_toIhomIhom_reduction (hn : n ≠ 0)
   let := PadicIntegersRingObj.boundedConstructibleBraiding ℓ E.1 X
   let G := integersModPowReductionAmbient ℓ E n X
   have hG (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
-      IsIso ((Functor.LaxMonoidal.ihomComparison G A).natTrans.app B) := by
+      IsIso ((Functor.LaxMonoidal.ihomComparison G A).app B) := by
     rw [ObjectProperty.ihomComparison_ι_comp_app]
     -- the instances agree up to reducible unfolding; a default `exact` takes minutes
     with_reducible exact isIso_ihomComparison_integersModPowReduction ℓ E n X A B

@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import WeilConjectures.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-!
 # Exact restriction of module sheaves and injective objects

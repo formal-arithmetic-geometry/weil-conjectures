@@ -40,7 +40,6 @@ open scoped CategoryTheory.Obj DirectSum
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option maxHeartbeats 400000 in
 -- Elaborating the summand comparison unfolds the direct-sum model of the heart.
 /-- Ext from a constructible sheaf commutes with arbitrary small sums of
 ind-constructible sheaves, in every integer degree. The displayed additive homomorphism

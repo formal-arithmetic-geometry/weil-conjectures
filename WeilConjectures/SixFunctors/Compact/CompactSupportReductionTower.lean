@@ -190,7 +190,6 @@ private theorem compactSupportEvaluationRingCast (W : Scheme.{u}) (n : ℕ)
   rw [eqToHom_map, eqToHom_app]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Transport across normalized coefficient carriers requires additional elaboration steps.
 private theorem compactSupportSequenceRestrictionLinear (W : Scheme.{u}) :
     letI := compactSupportSequenceLinear l E W
@@ -402,7 +401,6 @@ private theorem compactSupportSystemScalarMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (ULift.up (Ideal.Quotient.mk
       (Padic.coefficientExtensionIdeal l E (V.unop.1 + 1)) a))).symm
 
-set_option maxHeartbeats 400000 in
 -- Transport across normalized coefficient carriers requires additional elaboration steps.
 -- The native module pushforward changes only the scalar action on sections.
 private theorem compactSupportSystemPushLinear {X Y : Scheme.{u}} (f : X ⟶ Y) :

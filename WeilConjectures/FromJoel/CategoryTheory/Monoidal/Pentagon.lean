@@ -165,8 +165,10 @@ lemma pentagon_curriedAssociatorNatIso_hom [MonoidalCategory C] :
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
+/-- (Named `ofBifunctorPentagon` since Mathlib v4.35.0, which provides its own
+`MonoidalCategory.ofBifunctor` with a different signature.) -/
 @[implicit_reducible]
-def ofBifunctor (unit : C) (F : C ⥤ C ⥤ C) (α : bifunctorComp₁₂ F F ≅ bifunctorComp₂₃ F F)
+def ofBifunctorPentagon (unit : C) (F : C ⥤ C ⥤ C) (α : bifunctorComp₁₂ F F ≅ bifunctorComp₂₃ F F)
     (leftUnitor : F.obj unit ≅ 𝟭 C) (rightUnitor : F.flip.obj unit ≅ 𝟭 C)
     (pentagon : NatTrans.Pentagon α.hom)
     (triangle : NatTrans.Triangle α.hom unit leftUnitor rightUnitor) :

@@ -340,10 +340,10 @@ private theorem squareSymm (e : L ⋙ H ≅ G ⋙ L') :
 
 private theorem rightSquareMate (a : L ⊣ R) (b : L' ⊣ R')
     (e : L ⋙ H ≅ G ⋙ L') (r : R ⋙ G ≅ H ⋙ R')
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) :
+    (hm : (mateEquiv a b e.inv) = r.hom) :
     (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
       b.mapDerivedCategoryRightDerivedAdjunction
-        (Functor.mapDerivedCategorySquareIso e).inv).natTrans =
+        (Functor.mapDerivedCategorySquareIso e).inv) =
       (rightSquareIso R G H R' r).hom := by
   have hf (P : HomotopyCategory B (.up ℤ)) :=
     squareFactorsh G L' L H e.symm P
@@ -411,14 +411,14 @@ private theorem normalizedMate_hom
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom)
+    (hm : (mateEquiv a b e.inv) = r.hom)
     (M : A) (N : B) (q : L.obj M ⟶ N) :
     b.homEquiv _ _ (e.inv.app M ≫ H.map q) = G.map (a.homEquiv _ _ q) ≫ r.hom.app N := by
-  have he : ((mateEquiv a b).symm r.hom).natTrans = e.inv := by
+  have he : ((mateEquiv a b).symm r.hom) = e.inv := by
     rw [← hm]
-    exact congrArg TwoSquare.natTrans ((mateEquiv a b).symm_apply_apply e.inv)
+    exact (mateEquiv a b).symm_apply_apply e.inv
   have h := adjunctionMate_transpose a b r.hom M N q
-  change b.homEquiv _ _ (((mateEquiv a b).symm r.hom).natTrans.app M ≫ H.map q) = _ at h
+  change b.homEquiv _ _ (((mateEquiv a b).symm r.hom).app M ≫ H.map q) = _ at h
   rw [he] at h
   exact h
 
@@ -428,11 +428,11 @@ private theorem normalizedMate_unit
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) (M : A) :
+    (hm : (mateEquiv a b e.inv) = r.hom) (M : A) :
     b.unit.app (G.obj M) = G.map (a.unit.app M) ≫ r.hom.app (L.obj M) ≫
       Rb.map (e.hom.app M) := by
   have h := unit_mateEquiv a b e.inv M
-  change G.map (a.unit.app M) ≫ (mateEquiv a b e.inv).natTrans.app (L.obj M) = _ at h
+  change G.map (a.unit.app M) ≫ (mateEquiv a b e.inv).app (L.obj M) = _ at h
   rw [hm] at h
   apply (cancel_mono (Rb.map (e.inv.app M))).mp
   simp only [Category.assoc, ← Rb.map_comp, Iso.hom_inv_id_app]
@@ -445,11 +445,11 @@ private theorem normalizedMate_counit
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb)
     (e : L ⋙ H ≅ G ⋙ Lb) (r : R ⋙ G ≅ H ⋙ Rb)
-    (hm : (mateEquiv a b e.inv).natTrans = r.hom) (N : B) :
+    (hm : (mateEquiv a b e.inv) = r.hom) (N : B) :
     b.counit.app (H.obj N) = Lb.map (r.inv.app N) ≫ e.inv.app (R.obj N) ≫
       H.map (a.counit.app N) := by
   have h := mateEquiv_counit a b e.inv N
-  change Lb.map ((mateEquiv a b e.inv).natTrans.app N) ≫ _ = _ at h
+  change Lb.map ((mateEquiv a b e.inv).app N) ≫ _ = _ at h
   rw [hm] at h
   apply (cancel_epi (Lb.map (r.hom.app N))).mp
   simp only [← Category.assoc, ← Lb.map_comp, Iso.hom_inv_id_app]
@@ -462,8 +462,8 @@ private theorem mate_transport_left
     {G : A ⥤ C} {H : B ⥤ D}
     (a : L ⊣ R) (b : Lb ⊣ Rb) (c : LF ≅ L) (e : L ⋙ H ≅ G ⋙ Lb) :
     (mateEquiv (a.ofNatIsoLeft c.symm) b
-      (Functor.isoWhiskerRight c H ≪≫ e).inv).natTrans =
-      (mateEquiv a b e.inv).natTrans := by
+      (Functor.isoWhiskerRight c H ≪≫ e).inv) =
+      (mateEquiv a b e.inv) := by
   have ht := conjugateEquiv_mateEquiv_vcomp (a.ofNatIsoLeft c.symm) a b c.inv e.inv
   have he : TwoSquare.whiskerLeft (TwoSquare.mk _ _ _ _ e.inv) c.inv =
       (Functor.isoWhiskerRight c H ≪≫ e).inv := by
@@ -477,7 +477,7 @@ private theorem mate_transport_left
       Iso.inv_hom_id_app, Category.comp_id]
     simp
   rw [he, hid] at ht
-  simpa [TwoSquare.whiskerTop] using congrArg TwoSquare.natTrans ht
+  simpa [TwoSquare.whiskerTop] using ht
 
 namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 
@@ -617,9 +617,9 @@ private theorem comparison_conjugate_comp
     (ab : Lb ⊣ Rb) (bb : Kb ⊣ Sb) (cb : Tb ⊣ Qb)
     (p : L ⋙ V ≅ U ⋙ Lb) (q : K ⋙ W ≅ V ⋙ Kb) (r : T ⋙ W ≅ U ⋙ Tb)
     (pr : R ⋙ U ≅ V ⋙ Rb) (qr : S ⋙ V ≅ W ⋙ Sb) (rr : Q ⋙ U ≅ W ⋙ Qb)
-    (hp : (mateEquiv a ab p.inv).natTrans = pr.hom)
-    (hq : (mateEquiv b bb q.inv).natTrans = qr.hom)
-    (hr : (mateEquiv c cb r.inv).natTrans = rr.hom)
+    (hp : (mateEquiv a ab p.inv) = pr.hom)
+    (hq : (mateEquiv b bb q.inv) = qr.hom)
+    (hr : (mateEquiv c cb r.inv) = rr.hom)
     (d : T ≅ L ⋙ K) (db : Tb ≅ Lb ⋙ Kb)
     (hd : ∀ X, r.hom.app X ≫ db.hom.app (U.obj X) =
       W.map (d.hom.app X) ≫ q.hom.app (L.obj X) ≫ Kb.map (p.hom.app X))
@@ -631,8 +631,8 @@ private theorem comparison_conjugate_comp
   have hm : mateEquiv (a.comp b) (ab.comp bb) α =
       TwoSquare.hComp qr.hom pr.hom := by
     rw [mateEquiv_hcomp]
-    change TwoSquare.hComp ((mateEquiv b bb q.inv).natTrans)
-      ((mateEquiv a ab p.inv).natTrans) = _
+    change TwoSquare.hComp ((mateEquiv b bb q.inv))
+      ((mateEquiv a ab p.inv)) = _
     rw [hp, hq]
   have he : (TwoSquare.mk _ _ _ _ r.inv).whiskerLeft d.hom =
       α.whiskerRight db.hom := by
@@ -654,7 +654,7 @@ private theorem comparison_conjugate_comp
   rw [he, ht, hm] at hl
   change mateEquiv c cb r.inv = rr.hom at hr
   rw [hr] at hl
-  have hx := congrArg (fun t ↦ t.natTrans.app N) hl
+  have hx := congrArg (fun t ↦ t.app N) hl
   simpa only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
@@ -741,7 +741,7 @@ private theorem derivedPullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 private theorem derivedMate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (normalizationInternalAdjunction Λ f) (derivedAdjunction Λ f)
-      (derivedPullComparison Λ f).inv).natTrans = (derivedPushComparison Λ f).hom := by
+      (derivedPullComparison Λ f).inv) = (derivedPushComparison Λ f).hom := by
   rw [internalAdjunction_eq, sectionAdjunction_eq]
   exact (mate_transport_left
     (CondensedRing.upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction

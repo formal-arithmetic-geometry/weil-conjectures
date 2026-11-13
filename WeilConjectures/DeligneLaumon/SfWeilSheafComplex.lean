@@ -75,7 +75,7 @@ Source: blueprint order 1507 (blueprint: def-weil-weil-sheaf-complex). -/
 def sfWeilFrobeniusPullback :
     sfRationalConstructibleCategory l E (D.geometricFiber Y₀).left ⥤
       sfRationalConstructibleCategory l E (D.geometricFiber Y₀).left :=
-  @rationalDerivedPullback l _ E _ _ _ _ _ (D.geometricFrobenius Y₀).hom
+  @rationalDerivedPullback l _ E _ _ _ _ _ (D.geometricFrobenius Y₀).asIso.hom
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
 
@@ -92,7 +92,7 @@ Source: blueprint order 1507 (blueprint: def-weil-weil-sheaf-complex). -/
 def sfCommonStageWeilFrobeniusPullback :
     generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left ⥤
       generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left :=
-  @commonStageDerivedPullback l _ Ω _ _ _ _ _ (D.geometricFrobenius Y₀).hom
+  @commonStageDerivedPullback l _ Ω _ _ _ _ _ (D.geometricFrobenius Y₀).asIso.hom
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
 
@@ -111,7 +111,7 @@ def sfWeilStagePullbackIdentification (L : AlgebraicallyClosedCoefficients.Index
         ((sfWeilFrobeniusPullback D l hl Y₀
           (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L)).obj K) :=
   eqToIso ((@commonStageDerivedPullback_existsUnique l _ Ω _ _ _ _ _
-    (D.geometricFrobenius Y₀).hom
+    (D.geometricFrobenius Y₀).asIso.hom
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)
     (fun x ↦ sfWeilPrimeInvertible D l hl Y₀ x)).exists.choose_spec.1 _)
 

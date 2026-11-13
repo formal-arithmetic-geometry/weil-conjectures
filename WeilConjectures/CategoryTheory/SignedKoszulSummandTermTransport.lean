@@ -66,7 +66,7 @@ private noncomputable def coefficientLinear : Linear S E :=
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).property
 
 private theorem scalar_eq_smul (b : S) :
-    ringedKoszulScalar O ⟨b.val, b.property⟩ =
+    (ringedKoszulScalar O ⟨b.val, b.property⟩).asHom =
       ringedKoszulCoefficientSMul O (RingHom.id S) b
         (𝟙 (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))) := by
   apply SheafOfModules.hom_ext
@@ -145,7 +145,8 @@ private theorem tensorLeft_smul (M N P : E) (f : N ⟶ P) (b : S) :
 private theorem unitor_tensor_scalar (M : E) (b : S) :
     letI := SheafOfModules.monoidalCategory O
     (MonoidalCategory.rightUnitor M).inv ≫
-        (MonoidalCategory.tensorLeft M).map (ringedKoszulScalar O ⟨b.val, b.property⟩) =
+        (MonoidalCategory.tensorLeft M).map
+          (ringedKoszulScalar O ⟨b.val, b.property⟩).asHom =
       ringedKoszulCoefficientSMul O (RingHom.id S) b
         (MonoidalCategory.rightUnitor M).inv := by
   let := SheafOfModules.monoidalCategory O
@@ -161,6 +162,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) where
   toFun b := ringedKoszulScalar O ⟨b.val, b.property⟩
   map_one' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -168,6 +170,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * 1 = x
     exact mul_one x
   map_mul' b b' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -177,6 +180,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * (c * c') = (x * c') * c
     ring
   map_zero' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -184,6 +188,7 @@ private noncomputable def scalarHom : S →+* End (SheafOfModules.unit
     change x * 0 = 0
     exact mul_zero x
   map_add' b b' := by
+    apply End.ext
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro U
@@ -221,7 +226,7 @@ private theorem signed_scalar_degree_transport
     ∀ (β : MonoidalCategory.tensorUnit E ⟶ Q.X n'),
     ((-1 : ℤˣ) ^ p) • (MonoidalCategory.rightUnitor (K.X p)).inv ≫
         (MonoidalCategory.tensorLeft (K.X p)).map
-          (ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩ ≫
+          ((ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩).asHom ≫
             β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
         CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
       ringedKoszulCoefficientSMul O ρ ((if Even p then 1 else -1) * b)
@@ -296,7 +301,7 @@ theorem ringedNegativeKoszulSummand_D₂_term
         (MonoidalCategory.rightUnitor (K.X (q + I.card))).inv ≫
       (MonoidalCategory.tensorLeft (K.X (q + I.card))).map
         (((-1 : ℤ) ^ (I.filter (fun j ↦ j < i)).card •
-            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)) ≫
+            (ringedKoszulScalar O ⟨(ρ (a i)).val, (ρ (a i)).property⟩) ^ (m + 1)).asHom ≫
           ringedNegativeKoszulBasis O
             (r + 1) (fun j ↦ ⟨(ρ (a j)).val, (ρ (a j)).property⟩) m
             (I.erase i) (-((I.erase i).card : ℤ)) ≫

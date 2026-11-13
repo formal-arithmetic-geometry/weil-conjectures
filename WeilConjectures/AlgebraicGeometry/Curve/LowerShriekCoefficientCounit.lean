@@ -88,15 +88,15 @@ theorem exists_lowerShriek_coefficient_counit {X : Scheme.{u}}
   let b₂ := openImmersionLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι
   let m := (mateEquiv b₁ b₂).symm r.hom
-  have : IsIso m.natTrans := isIso_inverseMate_of_equivalences b₁ b₂ r
+  have : IsIso m := isIso_inverseMate_of_equivalences b₁ b₂ r
   let e := (openImmersionLowerShriek
     (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).mapIso (r.app A).symm ≪≫
-      (asIso m.natTrans).app ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A)
+      (asIso m).app ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A)
   refine ⟨e, ?_⟩
   change _ ≫ TX.map (b₁.counit.app A) = b₂.counit.app (TX.obj A)
   change (openImmersionLowerShriek
       (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) U.ι).map (r.inv.app A) ≫
-    m.natTrans.app ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A) ≫
+    m.app ((upperStar AddCommGrpCat.{u + 1} U.ι).obj A) ≫
     TX.map (b₁.counit.app A) = b₂.counit.app (TX.obj A)
   rw [← mateEquiv_counit_symm b₁ b₂ r.hom A,
     ← Functor.map_comp_assoc]

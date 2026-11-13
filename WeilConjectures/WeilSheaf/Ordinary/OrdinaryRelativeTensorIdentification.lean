@@ -21,7 +21,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the concrete tensor instances requires large definitional comparisons.
 /-- The two ordinary coequalizer tensors agree by an isomorphism fixing their quotient maps.
 Source: the relative tensor coequalizer universal property, Stacks 03EK.

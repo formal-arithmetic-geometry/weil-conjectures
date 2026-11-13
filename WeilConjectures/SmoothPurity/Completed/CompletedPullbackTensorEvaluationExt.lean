@@ -54,7 +54,6 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceCommRingSystem coefficientSequenceTopology
   SheafOfModules.monoidalCategory
 
-set_option maxHeartbeats 800000 in
 -- Keep the target complex abstract while transposing through the evaluation mate.
 /-- A unit-generator criterion for the evaluated pullback tensor square.
 Source: Stacks Tags 07A4, 0941 and 03D2

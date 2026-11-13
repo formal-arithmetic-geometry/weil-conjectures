@@ -130,8 +130,6 @@ private theorem baseChange_homEquiv
 
 attribute [local irreducible] CategoryTheory.Adjunction.homEquiv
 
-set_option maxHeartbeats 800000 in
--- The explicit pinned comparison terms need extra elaboration heartbeats.
 /-- Compatibility of the pinned base-change arrow with the explicitly constructed
 open comparisons. All comparison data are already constructed; this statement
 is only the remaining mate calculation, with no existence claim.

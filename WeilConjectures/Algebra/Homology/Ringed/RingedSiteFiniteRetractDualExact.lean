@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 import all WeilConjectures.Algebra.Homology.SmoothPurity.PullbackDualFreeChart
 import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps

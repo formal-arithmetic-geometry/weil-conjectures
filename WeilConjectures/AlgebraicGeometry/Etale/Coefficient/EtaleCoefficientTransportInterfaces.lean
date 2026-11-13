@@ -477,11 +477,11 @@ def StrictEtaleCompactSupportTransportCoherence
     (record : StrictEtaleCompactSupportTransportData a c SA SB TX TY TZ) : Prop :=
     -- openMate
     ((mateEquiv SA.derivedOpenAdjunction SB.derivedOpenAdjunction
-      (.mk _ _ _ _ record.openComparison.hom)).natTrans = record.openSquare.derived.inv) ∧
+      (.mk _ _ _ _ record.openComparison.hom)) = record.openSquare.derived.inv) ∧
     -- properMate
     (record.properComparison.hom =
       (mateEquiv SA.properDerived.system.adjunction SB.properDerived.system.adjunction
-        (.mk _ _ _ _ record.properSquare.derived.hom)).natTrans)
+        (.mk _ _ _ _ record.properSquare.derived.hom)))
 
 /-- The specified data and canonical coherence of `StrictEtaleCompactSupportTransport`.
 Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)

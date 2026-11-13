@@ -117,8 +117,8 @@ theorem isIso_upperShriekMate_app_iff_of_adjunction
     (adj' : boundedConstructibleLowerShriek l h' ⊣ R')
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧) :
     IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-        (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).natTrans.app N) ↔
-      IsIso ((mateEquiv adj adj' (inv Ex.hom)).natTrans.app N) :=
+        (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).app N) ↔
+      IsIso ((mateEquiv adj adj' (inv Ex.hom)).app N) :=
   Adjunction.isIso_mateEquiv_app_iff _ _ _ _ _ N
 
 /-- **The exceptional base change map along a map with `Rh_! ⊣ h^*`**: if the mate of `Ex` under
@@ -130,10 +130,10 @@ theorem isIso_upperShriekMate_app_of_adjunction
     (adj' : boundedConstructibleLowerShriek l h' ⊣
       boundedConstructibleUpperStarOfMap l (X := X') (Y := U') h'.left)
     (w : πU ≫ h.left = h'.left ≫ πX)
-    (hEx : (mateEquiv adj adj' (inv Ex.hom)).natTrans = (upperStarOfMapSquareIso l h h' w).hom)
+    (hEx : (mateEquiv adj adj' (inv Ex.hom)) = (upperStarOfMapSquareIso l h h' w).hom)
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧) :
     IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).natTrans.app N) := by
+      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).app N) := by
   rw [isIso_upperShriekMate_app_iff_of_adjunction l h h' Ex adj adj', hEx]
   infer_instance
 
@@ -143,11 +143,11 @@ change map `πU^* Rh^! N ⟶ Rh'^! πX^* N` is invertible for every `N`. -/
 theorem isIso_upperShriekMate_app_of_isOpenImmersion [IsOpenImmersion h.left]
     [IsOpenImmersion h'.left] (w : πU ≫ h.left = h'.left ≫ πX)
     (hEx : (mateEquiv (boundedConstructibleOpenImmersionUpperStarAdjunction l h)
-        (boundedConstructibleOpenImmersionUpperStarAdjunction l h') (inv Ex.hom)).natTrans =
+        (boundedConstructibleOpenImmersionUpperStarAdjunction l h') (inv Ex.hom)) =
       (upperStarOfMapSquareIso l h h' w).hom)
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧) :
     IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).natTrans.app N) :=
+      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).app N) :=
   isIso_upperShriekMate_app_of_adjunction l h h' Ex _ _ w hEx N
 
 /-- **Step 2 for étale maps**: if `Ex` is compatible with some adjunctions `Rh_! ⊣ h^*` and
@@ -161,10 +161,10 @@ theorem isIso_upperShriekMate_app_of_etale
         boundedConstructibleUpperStarOfMap l (X := X) (Y := U) h.left)
       (adj' : boundedConstructibleLowerShriek l h' ⊣
         boundedConstructibleUpperStarOfMap l (X := X') (Y := U') h'.left),
-        IsIso (mateEquiv adj adj' (inv Ex.hom)).natTrans)
+        IsIso (mateEquiv adj adj' (inv Ex.hom)))
     (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj l⟧) :
     IsIso ((mateEquiv (boundedConstructibleUpperShriekAdjunction l h)
-      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).natTrans.app N) := by
+      (boundedConstructibleUpperShriekAdjunction l h') (inv Ex.hom)).app N) := by
   obtain ⟨adj, adj', hiso⟩ := hEx
   rw [isIso_upperShriekMate_app_iff_of_adjunction l h h' Ex adj adj']
   infer_instance

@@ -40,7 +40,6 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
   (sq : CommSq g' f' f g) (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)
   (hi : IsPullback g' c'.i c.i q) (hp : CommSq q c'.g c.g g)
 
-set_option maxHeartbeats 1000000 in
 -- The elaboration of the pasting of several derived adjunction counits is heavy.
 /-- **Pasting of derived base change maps along a compactification**: the derived base change
 map of `f = c.i ≫ c.g` is the pasting of those of `c.i` and of `c.g`, through the composition

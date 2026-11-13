@@ -147,7 +147,7 @@ variable {B B' C D : Type*} [Category B] [Category B'] [Category C] [Category D]
   {F : C ⥤ C} {G : D ⥤ D} {l : B ⥤ B'} {r : B' ⥤ B}
   {L : C ⥤ D} {R : D ⥤ C} (adjB : l ⊣ r) (adj : L ⊣ R)
   (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
-  (hmate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  (hmate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = eR.hom)
   {PB : B ⥤ IsoAlgebra F} {PB' : B' ⥤ IsoAlgebra G}
 
 /-- Compute a lifted mate using explicitly identified underlying functors. -/
@@ -157,9 +157,9 @@ lemma traceMate_forget {P₀ : B ⥤ C} {P₀' : B' ⥤ D}
     (hθ : ∀ b, (θ.inv.app b).hom.f = eqToHom (by rw [← hP]; rfl) ≫ θ₀.inv.app b ≫
       eqToHom (by rw [← hP']; rfl)) (b' : B') :
     ((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR hmate)
-      (TwoSquare.mk _ _ _ _ θ.inv)).natTrans.app b').hom.f =
+      (TwoSquare.mk _ _ _ _ θ.inv)).app b').hom.f =
       eqToHom (by rw [← hP]; rfl) ≫
-        (mateEquiv adjB adj (TwoSquare.mk _ _ _ _ θ₀.inv)).natTrans.app b' ≫
+        (mateEquiv adjB adj (TwoSquare.mk _ _ _ _ θ₀.inv)).app b' ≫
         eqToHom (by rw [← hP']; rfl) := by
   subst hP hP'
   have hθ' : Functor.whiskerRight θ.inv (forget G) = θ₀.inv := by

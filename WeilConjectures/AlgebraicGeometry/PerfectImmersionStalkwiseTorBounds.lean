@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkResolution
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel

@@ -308,7 +308,7 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.ofFiniteType) :
       exact (π ⁻¹ᵁ (I.deformationCenterSheaf.support.compl ⊓
         (polynomialSpecChartOpen X U).1)).isOpen
     · refine IsCompact.image ?_ g.continuous
-      exact QuasiCompact.isCompact_preimage (f := toSpec _) _ (centerCompl _).isOpen
+      exact (toSpec (deformationCenter (I.siteIdeal U))).isProperMap.isCompact_preimage
         (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨_, hJ, rfl⟩).1
   have : CompactSpace (W.ι ⁻¹ᵁ V U).toScheme := by
     refine isCompact_iff_compactSpace.mp ?_
