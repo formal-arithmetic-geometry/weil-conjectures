@@ -204,7 +204,6 @@ lemma hasInvertibleExponent_residueFieldCoeff {X : Scheme.{u}} (aX : X ⟶ Spec 
       by simpa using (Ne.isUnit hℓ).map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
   exact .of_hom aX
 
-set_option profiler true in
 omit [Fact (ringChar k ≠ ℓ)] in
 /-- **Torsion targets**: for a separated finite-type scheme `X` over a field `k` with
 `ℓ ≠ char k` and `cd_ℓ(k) < ∞`, and a bounded constructible `𝒪_E`-complex `P`, there is `d` with
