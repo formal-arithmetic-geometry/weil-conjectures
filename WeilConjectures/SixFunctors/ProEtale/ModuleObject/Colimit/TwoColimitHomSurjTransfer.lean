@@ -62,9 +62,6 @@ lemma compIsoTransfer_mapHomotopyCategory_subfieldExtendScalars (k : PadicSubfie
   Adjunction.compIsoTransfer_mapHomotopyCategory_quotient _ _ _ _ _ Y _ fun _ ↦ rfl
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
--- Unifying the generic `compIsoTransfer_comparison` with the derived categories of module objects
--- (and their many instances) is slow.
 /-- The adjoint transfer `D(Res_{E→k}) T^X_{F,k} (Q Y) ⟶ D(Res_{E→Ω}) T^X_{F,Ω} (Q Y)` is, modulo
 the counits and the factorizations of `D(Res)`, the image of the inclusion
 `Res_{E→k}(k_X ⊗_{F_X} Y) ⟶ Res_{E→Ω}(ℚ̄_ℓ,X ⊗_{F_X} Y)` of the colimit cocone. -/
@@ -89,7 +86,8 @@ theorem compIsoTransfer_derivedExtendScalars_Qh (k : PadicSubfieldAbove ℓ G) :
           _) ≫
       (Mod.comap
         (padicSubfieldRingObjToPadicAlgCl X ℓ E)).mapDerivedCategoryFactorsh.hom.app _ := by
-  have hc := Adjunction.compIsoTransfer_comparison
+  rw [← compIsoTransfer_mapHomotopyCategory_subfieldExtendScalars]
+  exact Adjunction.compIsoTransfer_comparison
     ((Mod.extendRestrictAdjunction
         (padicSubfieldRingObjMap X ℓ (hE.trans k.property))).mapHomotopyCategory
       (ComplexShape.up ℤ))
@@ -119,7 +117,5 @@ theorem compIsoTransfer_derivedExtendScalars_Qh (k : PadicSubfieldAbove ℓ G) :
     (derivedExtendScalarsCompIso_hom_app_Qh X ℓ (hE.trans k.property))
     (derivedExtendScalarsCompIso_hom_app_Qh X ℓ (hF.trans k.property))
     ((HomotopyCategory.quotient _ _).obj Y)
-  rw [compIsoTransfer_mapHomotopyCategory_subfieldExtendScalars] at hc
-  exact hc
 
 end AlgebraicGeometry.ProEtale
