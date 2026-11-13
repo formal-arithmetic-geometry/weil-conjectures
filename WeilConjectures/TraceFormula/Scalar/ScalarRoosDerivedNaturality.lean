@@ -73,7 +73,7 @@ private theorem scalarRoos_naturality_of_bridge
       G.map (eC.inv ≫ f ≫ eD.hom) ≫ cD ≫ rD := by
   have w' := congrArg (fun k ↦ G.map eC.inv ≫ k ≫ bD.hom) w
   simp only [Category.assoc, ← Functor.map_comp_assoc] at w'
-  simp only [eC.inv_hom_id, Functor.map_id, Category.id_comp,
+  simp only [eC.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp,
     bD.inv_hom_id, Category.comp_id] at w'
   simpa only [Functor.map_comp, Category.assoc] using w'
 
