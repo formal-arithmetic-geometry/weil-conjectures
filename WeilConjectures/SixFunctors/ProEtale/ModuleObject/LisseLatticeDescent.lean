@@ -58,7 +58,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C] [MonoidalPre
   {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
 
 /-- Evaluation in a field detects the rank of finite free module objects. -/
-lemma rank_eq_of_finiteFree_iso {K : Type*} [Field K]
+private lemma rank_eq_of_finiteFree_iso {K : Type*} [Field K]
     (ρ : End (regular R) →+* K) {m n : ℕ} (e : finiteFree R m ≅ finiteFree R n) :
     m = n := by
   apply Matrix.eq_of_mul_eq_one_of_mul_eq_one
@@ -70,7 +70,7 @@ lemma rank_eq_of_finiteFree_iso {K : Type*} [Field K]
 
 /-- Continuous invertible matrices give automorphisms of a finite free module object
 when its coefficient endomorphisms are continuous functions. -/
-lemma exists_finFreeIso_of_continuous {X K : Type*} [TopologicalSpace X]
+private lemma exists_finFreeIso_of_continuous {X K : Type*} [TopologicalSpace X]
     [TopologicalSpace K] [Ring K] [IsTopologicalRing K]
     (ev : End (regular R) ≃+* C(X, K)) {n : ℕ} (g : X → GL (Fin n) K)
     (hg : ∀ i i', Continuous fun x ↦ (g x : Matrix (Fin n) (Fin n) K) i i')
@@ -113,7 +113,6 @@ open Scheme PadicAlgCl CondensedRing
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
 
-set_option profiler true in
 /-- **Ranks of trivialisations agree on overlaps.** Two trivialisations `E_Vⁿ ≅ f^* L` and
 `E_V'ⁿ' ≅ f'^* L` whose pullbacks to a nonempty scheme `W` are comparable have the same rank: the
 values at a point of the transition matrices are mutually inverse matrices over `E`. -/
@@ -139,7 +138,6 @@ theorem rank_eq_of_comp_eq {S V V' W : Scheme.{u}}
     ((b)^*⟦Profinite.continuousMapRingObj E⟧.mapIso e').symm ≪≫
     upperStarFiniteFreeIso (Profinite.continuousMapRingObj E) b n'
 
-set_option profiler true in
 /-- **Transition values of a trivialisation, and descent from integral values.** For a finite
 pro-étale cover `{f_k : V_k ⟶ S}` trivialising `L`, `e_k : E_{V_k}ⁿ ≅ f_k^* L`, the values
 `Tval j k W a b h x ∈ GL_n(E)` of the transition matrices from the pullback of `e_k` along `b` to
