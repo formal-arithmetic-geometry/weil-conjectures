@@ -656,7 +656,7 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
   -- The flat locus `U` of `R₁` and its closed complement `Z = V(I)`.
   have : Algebra.FiniteType R₀ R₁ := (Subalgebra.fg_iff_finiteType _).mp hR₁
   have : IsNoetherianRing R₁ := Algebra.FiniteType.isNoetherianRing R₀ R₁
-  set U := F R₁
+  set U : Set (PrimeSpectrum (R₁ ⊗[R₀] S₀)) := F R₁
   have hU : IsOpen U := isOpen_setOf_flat_localizedModule_baseChange (M₀ := M₀) R₁
   set Z := Uᶜ
   set I := PrimeSpectrum.vanishingIdeal Z
