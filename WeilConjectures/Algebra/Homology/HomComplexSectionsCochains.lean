@@ -35,6 +35,7 @@ private theorem fan_projection_bijective.{t} {ι : Type} {X : ι → Type t}
   rw [hf]
   exact e.toEquiv.bijective
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Chosen products and section evaluation require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
