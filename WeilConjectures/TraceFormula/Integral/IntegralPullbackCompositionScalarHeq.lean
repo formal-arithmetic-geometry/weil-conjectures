@@ -186,7 +186,11 @@ private theorem derivedCompositor_heq {C C' : Type w₁} {D D' : Type w₂} {E' 
   obtain rfl := eq_of_heq eH
   obtain rfl := eq_of_heq ha
   rfl
-
+/-- Compare the ordinary inverse images once, before passing to derived categories. -/
+private theorem finiteSystemPullback_heq_integralComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    HEq (finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) f)
+      (integralComparisonSequencePullback l E f) := by
+  apply HEq.rfl
 
 set_option profiler true in
 /-- The finite-system composition comparison of integral pullback is the whole-system
@@ -234,14 +238,15 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       apply HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      apply HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact finiteSystemPullback_heq_integralComparison l E k)
+    (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      apply HEq.rfl) (by set_option backward.isDefEq.respectTransparency false in
+      exact finiteSystemPullback_heq_integralComparison l E h)
+    (by set_option backward.isDefEq.respectTransparency false in
       set_option backward.isDefEq.respectTransparency.types false in
-      apply HEq.rfl)
+      exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  exact eq_of_heq (a := finiteSystemDerivedComposition (integralSystemRings l E)
-    (integralSystemTransition l E) h k) (a' := integralComparisonSystemComposition l E h k) hh
+  exact eq_of_heq hh
 
 end Composition
 
