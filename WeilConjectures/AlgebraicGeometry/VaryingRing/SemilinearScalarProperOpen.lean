@@ -444,6 +444,7 @@ private theorem scalarSquare_termwise {U' U X' X : Scheme.{u}}
     (StrictTower.towerSquare_moduleSquareG B a j' j g h)
 
 set_option maxHeartbeats 700000 in
+set_option profiler true in
 -- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
@@ -524,6 +525,7 @@ private theorem scalarSection_direct (C : OrdinaryScalarRestriction R φ B ψ)
     ((G.d_sections f M n H x).trans (C.level_sections Y n _ H x).symm)
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The tower-level comparison unfolds several termwise adjunction squares.
 private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}}
