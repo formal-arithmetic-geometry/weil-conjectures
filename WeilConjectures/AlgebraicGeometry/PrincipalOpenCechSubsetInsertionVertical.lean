@@ -59,8 +59,6 @@ private theorem sectionTransport_natural
     N.presheaf.map (eqToHom hW).op ((g.app (principalSubsetOpen A r f S.val)) s) at hq
   exact (congrArg ((e.app N).app W) hq.symm).trans he
 
-set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- Elaborating both extension components and the section-transport coercions exceeds 200000.
 /-- The vertical total differential on explicit subset coordinates.
 
