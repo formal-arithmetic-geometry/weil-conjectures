@@ -25,7 +25,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- `erw` unfolds the tensor product of complexes of module objects to its components.
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
@@ -43,9 +42,10 @@ lemma upperStarTensorComplexHom_comp
   ext n : 1
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro p q h
-  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
-    upperStarTensorComplexHom, upperStarTensorComplexHomX]
-  erw [HomologicalComplex.ι_mapBifunctorMap_assoc, HomologicalComplex.ι_mapBifunctorDesc_assoc,
+  simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
+  erw [HomologicalComplex.ι_mapBifunctorMap_assoc]
+  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc,
     HomologicalComplex.ι_mapBifunctorDesc_assoc]
   rw [Category.assoc, ← Functor.map_comp]
   erw [HomologicalComplex.ι_mapBifunctorDesc]
