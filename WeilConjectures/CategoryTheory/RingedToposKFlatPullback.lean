@@ -497,6 +497,42 @@ private theorem h4_supplied_operations
   · simpa only [u, Equiv.apply_symm_apply] using
       (binary_mate_iff f.adj (msmul B (f.modules.obj H)) (msmul A H) f.ringMap u u).mp hs
 
+-- Naturality of a lifted mate correspondence can be checked after a faithful functor.
+private theorem faithful_mate_naturality_left
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (U : A ⥤ C) [U.Faithful] (V : B ⥤ D) (I : A ⥤ B)
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (e : I ⋙ V ≅ U ⋙ L)
+    {Y : B} {Z : A} (p : U.obj Z ≅ R.obj (V.obj Y))
+    (E : ∀ M, (I.obj M ⟶ Y) ≃ (M ⟶ Z))
+    (hE : ∀ M a, U.map (E M a) ≫ p.hom =
+      adj.homEquiv _ _ (e.inv.app M ≫ V.map a))
+    {M N : A} (a : M ⟶ N) (b : I.obj N ⟶ Y) :
+    E M (I.map a ≫ b) = a ≫ E N b := by
+  apply U.map_injective
+  apply (cancel_mono p.hom).mp
+  rw [hE, U.map_comp, Category.assoc, hE, V.map_comp]
+  have hn : e.inv.app M ≫ V.map (I.map a) =
+      L.map (U.map a) ≫ e.inv.app N := (e.inv.naturality a).symm
+  rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+
+private theorem faithful_mate_naturality_right
+    {A B C D H : Type*} [Category A] [Category B] [Category C] [Category D] [Category H]
+    (U : A ⥤ C) [U.Faithful] (V : B ⥤ D) (S : H ⥤ B) (P : H ⥤ A)
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (p : P ⋙ U ≅ (S ⋙ V) ⋙ R)
+    {X : B} {M : A} (e : V.obj X ≅ L.obj (U.obj M))
+    (E : ∀ Y, (X ⟶ S.obj Y) ≃ (M ⟶ P.obj Y))
+    (hE : ∀ Y a, U.map (E Y a) ≫ p.hom.app Y =
+      adj.homEquiv _ _ (e.inv ≫ V.map a))
+    {Y Y' : H} (a : X ⟶ S.obj Y) (b : Y ⟶ Y') :
+    E Y' (a ≫ S.map b) = E Y a ≫ P.map b := by
+  apply U.map_injective
+  apply (cancel_mono (p.hom.app Y')).mp
+  rw [hE, U.map_comp, Category.assoc]
+  have hn : U.map (P.map b) ≫ p.hom.app Y' =
+      p.hom.app Y ≫ R.map (V.map (S.map b)) := p.hom.naturality b
+  rw [hn, ← Category.assoc, hE, V.map_comp, ← Category.assoc,
+    adj.homEquiv_naturality_right]
+
 -- Keep the linearity witnesses inside the construction of the hom equivalence, so
 -- naturality uses only its underlying-sheaf equation.
 set_option trace.profiler true in
@@ -601,25 +637,15 @@ private theorem supplied_adjunction
   let eI := I.moduleUnderlying
   let eP := f.underlying
   have hBL {M N} (a : M ⟶ N) H b :
-      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H)).mp
-    rw [hB, (mset B).map_comp, Category.assoc, hB, (mset RI).map_comp]
-    have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
-        f.inverse.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, f.adj.homEquiv_naturality_left]
+      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b :=
+    faithful_mate_naturality_left (mset B) (mset RI) I.modules f.adj eI
+      (eP.app H) (fun M ↦ B' M H) (fun M ↦ hB M H) a b
   have hBR M {H H'} a (b : H ⟶ H') :
       B' M H' (a ≫ (restrictScalars ((sheafCompose J
-        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H')).mp
-    rw [hB, (mset B).map_comp, Category.assoc]
-    have hn : (mset B).map (f.modules.map b) ≫ eP.hom.app H' =
-        eP.hom.app H ≫ f.direct.map ((mset A).map b) := eP.hom.naturality b
-    rw [hn, ← Category.assoc, hB, (mset RI).map_comp]
-    change f.adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) = _
-    rw [← Category.assoc, f.adj.homEquiv_naturality_right]
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b :=
+    faithful_mate_naturality_right (mset B) (mset RI)
+      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map c))
+      f.modules f.adj eP (eI.app M) (B' M) (hB M) a b
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
