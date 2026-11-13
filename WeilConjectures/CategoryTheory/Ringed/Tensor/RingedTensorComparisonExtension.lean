@@ -124,7 +124,6 @@ private def resolvedTensorIso
     S.tensor.mapIso (Iso.prod (asIso (DerivedCategory.Q.{w}.map (η.app P)))
       (asIso (DerivedCategory.Q.{w}.map (η.app Q))))
 
-set_option maxHeartbeats 800000 in
 -- Naturality compares composites through dependent total-tensor and resolution models.
 private theorem resolvedTensorIso_naturality
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))

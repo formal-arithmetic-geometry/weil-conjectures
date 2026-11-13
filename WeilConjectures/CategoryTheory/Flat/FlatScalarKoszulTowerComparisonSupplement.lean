@@ -767,7 +767,6 @@ private theorem unitSquare
   rw [hu]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent endpoints of the chosen tower and localization functors.
 private theorem derivedUnitRestrictionOnComplex (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)

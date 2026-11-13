@@ -28,7 +28,6 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Transport through the fixed derived tensor involves several composed object types.
 /-- There is a global morphism `κ` from the pulled-back self-Ext sheaf to the dual of the
 pulled-back self-Tor sheaf which is an isomorphism on every regular affine chart.

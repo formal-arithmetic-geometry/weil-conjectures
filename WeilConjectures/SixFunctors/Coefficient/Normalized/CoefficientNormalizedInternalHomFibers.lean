@@ -173,7 +173,6 @@ private theorem tensor_map_comp {D : Type*} [Category* D] (K : D × D ⥤ D)
   rw [← K.map_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- The site and coefficient types require extra elaboration of the comparison equations.
 private theorem double_evaluation_naturality {D : Type*} [Category* D]
     {H : Dᵒᵖ × D ⥤ D} (S : CoefficientClosedStructure H)

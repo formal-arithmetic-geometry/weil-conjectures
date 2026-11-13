@@ -1159,7 +1159,6 @@ lemma affineLine.artinSchreierAverageModHom_splitModHom_of_restriction
     affineLine.artinSchreierSplitHom_comp_evalHom, affineLine.artinSchreierAverageModHom_hom,
     ProEtale.adicUpperStar_map_hom, h₂, Category.assoc]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Instance search for the (co)kernels in the category of sheaves of modules is slow.
 /-- The `ψ`-isotypic component `ℒ_ψ` of `AS_* ℚ̄_ℓ`, the image of the projector `e_ψ`, is lisse
 (of rank one): after pullback along the finite étale Galois cover `AS` itself, `AS_* ℚ̄_ℓ`

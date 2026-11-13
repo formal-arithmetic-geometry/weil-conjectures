@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option Elab.async false
 
-set_option maxHeartbeats 500000 in
 -- Elaborating the fixed-resolution interfaces requires several derived-functor instances.
 /-- Computation only on Mathlib's fixed standard injective resolution, with no
 change-of-resolution assertion.

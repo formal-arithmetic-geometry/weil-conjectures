@@ -57,7 +57,6 @@ private def homUnitOnRepresentatives
     simp only [Category.assoc]
     rw [hc]
 
-set_option maxHeartbeats 400000 in
 -- Naturality compares the product-localization factorization with chosen representatives.
 private theorem completion_unit_natural_core
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

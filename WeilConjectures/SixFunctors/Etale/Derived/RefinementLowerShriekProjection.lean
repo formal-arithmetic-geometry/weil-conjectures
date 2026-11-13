@@ -37,7 +37,6 @@ namespace Etale
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
 
-set_option maxHeartbeats 1000000 in
 -- The tensor comparisons of the derived pullbacks make this rewriting expensive.
 omit [HasSmallSiteSheafify A] in
 /-- The square map of a refinement is compatible with the comparisons

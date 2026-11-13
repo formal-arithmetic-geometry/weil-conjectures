@@ -232,7 +232,6 @@ private theorem extClass_heq {C : Type*} [Category C] [Abelian C] [HasExt C]
   cases h
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Compare the actual tower and finite Kummer short-complex presentations.
 private theorem evaluatedKummerExt (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (hn : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))) :

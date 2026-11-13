@@ -325,7 +325,6 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The comparison specializes four large derived adjunctions.
 private theorem path_conjugate :
     conjugateEquiv
@@ -354,9 +353,7 @@ attribute [local irreducible]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option synthInstance.maxHeartbeats 200000 in
 -- The statement shares geometric and scalar derived tensor instances.
-set_option maxHeartbeats 800000 in
 -- The categorical square specializes large derived adjunctions.
 /-- The specified scalar push mate and pull comparison commute with the actual projection
 morphism, on ordinary unbounded derived module-object categories.

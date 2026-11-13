@@ -64,7 +64,6 @@ attribute [local instance] sfIntrinsicPullback_additive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 800000 in
 -- The chosen exact-functor factorizations have large implicit coefficient types.
 /-- Descend the ordinary cochain square through the exact-functor factorization maps.
 Source: Stacks Tags 07A4, 0941 and 03D2

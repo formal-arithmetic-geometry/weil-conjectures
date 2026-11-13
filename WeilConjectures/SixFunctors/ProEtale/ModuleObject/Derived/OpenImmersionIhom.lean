@@ -64,7 +64,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The counit of the adjunction `Dj_! ⊣ Lj^*` along an open immersion `j` is an isomorphism at
 `M ⊗ᴸ Dj_! T`, which lies in the essential image of `Dj_!`. -/
@@ -95,7 +94,6 @@ lemma isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit
     infer_instance
   exact IsIso.of_isIso_comp_right _ e'.hom
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The projection map `Dj_! (Lj^* M ⊗ᴸ T) ⟶ M ⊗ᴸ Dj_! T` of the adjunction `Dj_! ⊣ Lj^*` along
 an open immersion `j` is an isomorphism. -/
@@ -130,7 +128,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (i : V ⟶ Y) [IsOpenImmersion i.left]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The projection map `j_! (Lj^* M ⊗ᴸ T) ⟶ M ⊗ᴸ j_! T` of the adjunction `j_! ⊣ Lj^*` along an
 open immersion `j` on bounded constructible complexes is an isomorphism. -/

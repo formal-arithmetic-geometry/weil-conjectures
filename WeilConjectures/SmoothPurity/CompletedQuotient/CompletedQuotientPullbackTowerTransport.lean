@@ -201,7 +201,6 @@ private theorem ordinary_level_hom_f {X Y : Scheme.{u}} (f : X ⟶ Y)
   simp only [NatTrans.comp_app, Category.id_comp, Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Componentwise tower comparison includes the fixed sheaf and complex functor interfaces.
 private theorem tower_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (scalarReductionSource l E Y) ℤ) :

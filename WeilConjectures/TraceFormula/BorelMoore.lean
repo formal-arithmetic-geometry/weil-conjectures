@@ -134,7 +134,6 @@ namespace BorelMooreSection
 
 variable {X : Over (Spec (.of k))} [QuasiCompact X.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the conjugation steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 variable [LocallyOfFiniteType X.hom] [IsSeparated X.hom] in
 /-- The counit coherence of `lowerShriek_map_dualizingComplexComp_inv_counit`, for a morphism

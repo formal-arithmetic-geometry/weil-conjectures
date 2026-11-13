@@ -33,7 +33,6 @@ variable {S : Type c} [Category.{cv} S] [Abelian S] [HasDerivedCategory.{d} S]
   {assocNorm : (∀ {l m n : ℕ} (h₁ : m ≤ l) (h₂ : n ≤ m),
     T h₁ ⋙ T h₂ ≅ T (h₂.trans h₁)) → Prop}
 
-set_option maxHeartbeats 800000 in
 -- Comparing the normalized derived adjunctions requires substantial instance synthesis.
 private theorem below_mate
     (E : CoefficientEvaluationExtensionData e r T atensor kflat flat norm unitNorm assocNorm)

@@ -575,7 +575,6 @@ private theorem line_derivedIso_eq
           q.iso.hom := by
   rfl
 
-set_option maxHeartbeats 1100000 in
 -- Instantiate cone transport on the independently normalized root systems.
 private theorem horizontal_root_unshifted (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X']

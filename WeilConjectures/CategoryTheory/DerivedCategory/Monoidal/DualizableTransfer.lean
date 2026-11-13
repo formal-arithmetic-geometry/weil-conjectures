@@ -254,7 +254,6 @@ lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
     (adj.mapHomologicalComplex (.up ℤ)) P
 
 
-set_option maxHeartbeats 400000 in
 -- Checking the fields of the mapped datum unfolds the monoidal structure of
 -- `G.mapHomologicalComplex`.
 variable {G} in

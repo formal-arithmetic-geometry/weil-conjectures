@@ -67,7 +67,6 @@ private theorem paste_horizontal_aux {C : Type*} [Category C]
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 20000000 in
 -- Instantiating the native coherence equations unifies large derived pullback objects.
 /-- Horizontal pasting of scheme squares gives the pasted native pullback comparison.
 

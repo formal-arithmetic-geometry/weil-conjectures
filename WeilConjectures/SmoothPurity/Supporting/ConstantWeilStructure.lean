@@ -314,7 +314,6 @@ private def identityRestrictionIso
 attribute [local irreducible] identityRestrictionIso regularExtensionPresheafIso
   PresheafOfModules.sheafificationAdjunction
 
-set_option maxHeartbeats 600000 in
 -- Elaborating the sheafification comparison traverses the coefficient transports.
 private def regularExtensionIso :
     SheafOfModules.changeOfRings.{v, c, r} α
@@ -402,7 +401,6 @@ end
 section ChainConstruction
 attribute [local irreducible] unrestrictedIntegralReductionExistence limit
 
-set_option maxHeartbeats 800000 in
 -- Explicit coefficient transports require a larger elaboration budget.
 private theorem reduction_map_tensor (Y : Scheme.{u}) (n : ℕ)
     {M N : integralTowerModules l E Y} (a : M ⟶ N) (U : Y.ProEtᵒᵖ)

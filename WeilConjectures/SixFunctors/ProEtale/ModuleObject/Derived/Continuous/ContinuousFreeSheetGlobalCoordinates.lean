@@ -271,7 +271,6 @@ variable (X : Scheme.{u}) (A E : Type)
   [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] [TotallyDisconnectedSpace A]
   [CommRing E] [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
   (φ : A →+* E) (hφ : Continuous φ)
-set_option maxHeartbeats 1000000 in
 -- The two encodings have the same underlying abelian sheaf.
 private def restrictSections
     (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -286,7 +285,6 @@ private def restrictSections
     left_inv := fun _ ↦ rfl
     right_inv := fun _ ↦ rfl
     map_add' := fun _ _ ↦ rfl }
-set_option maxHeartbeats 1000000 in
 -- Reduce the explicit comparison only for its sectionwise scalar equation.
 private theorem restricted_smul
     (Q : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -360,7 +358,6 @@ private def sheetExtensionIso :
   subst g
   exact (pullIso a t).app M ≪≫ (upperStar S t).mapIso e ≪≫
     ((upperStarComp S t p).app P).symm
-set_option maxHeartbeats 1000000 in
 -- The equality compares the full composed module pullback normalizations.
 private theorem sheetEmbedding_unit :
     finiteEtaleLatticeSheetEmbedding a P p M e g t w =
@@ -649,7 +646,6 @@ private theorem freeCoordinates
 
 attribute [local semireducible] continuousRingModuleEquivalence continuousRingRegularIso
 
-set_option maxHeartbeats 1000000 in
 -- Instantiate the abstract frames with the concrete module pullback constructions.
 /-- Global free frames give natural rational coordinate changes before extracting matrices.
 This assertion concerns the base Y itself, with no restriction to open subschemes.

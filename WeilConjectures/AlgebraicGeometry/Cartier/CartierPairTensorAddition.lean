@@ -201,7 +201,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- The cone-coordinate conversion traverses the injective-resolution representation.
 private theorem pair_restrict {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V)
     (I : InjectiveResolution T.gmSheaf) (P : Sheaf.Torsor T.gmSheaf)

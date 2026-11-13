@@ -174,7 +174,6 @@ def compute (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (DerivedCategory.quotientCompQhIso (Modules Λ' T)).hom.app
       (((extension a T).mapHomologicalComplex (.up ℤ)).obj P)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- Total tensor colimit search needs the same bound as the upstream module-object API.
 /-- Total tensor with the actual degree-zero coefficient is termwise tensor.
 Source: Stacks 06YY (auxiliary; not a blueprint node). -/

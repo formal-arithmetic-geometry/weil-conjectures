@@ -73,7 +73,6 @@ private theorem app_arrow_congr {C D : Type*} [Category C] [Category D]
   cases h
   exact ArrowHEq.refl _
 
-set_option maxHeartbeats 400000 in
 -- Compare the common-field normalization with the canonical target realization.
 /-- The inverse integral realization and operation transport respect stage change.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.

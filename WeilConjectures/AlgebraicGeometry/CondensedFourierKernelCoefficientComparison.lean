@@ -48,7 +48,6 @@ private theorem unitUnderlying
     (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))).X = condensedRingObj Λ X := rfl
 
-set_option maxHeartbeats 400000 in
 -- Explicit coefficient and module-object coercions require additional elaboration.
 private theorem translationCoefficient
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -198,7 +197,6 @@ private theorem characterImageScalar (ℓ : ℕ) [Fact ℓ.Prime]
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] Mod.extendScalars
 
--- The explicit coefficient-change comparison needs additional elaboration heartbeats.
 private theorem artinFunctionScalar
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k₀ : Type u) [Field k₀] [Fintype k₀]

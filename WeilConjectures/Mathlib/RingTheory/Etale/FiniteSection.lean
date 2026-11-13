@@ -57,7 +57,6 @@ lemma _root_.RingHom.PointsOver.restrictScalars_apply (φ : A →+* Ω) (ψ : Po
 
 variable [IsAlgClosed Ω]
 
-set_option maxHeartbeats 1600000 in
 -- long proof with many local algebra instances
 /-- **Étale-local sections through a geometric point.** Let `B` be a finite `A`-algebra with a
 unique point over the geometric point `φ : A →+* Ω`, `C` an étale `B`-algebra and `ψ` a point

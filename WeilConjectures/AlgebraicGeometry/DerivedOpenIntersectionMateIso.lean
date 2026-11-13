@@ -48,7 +48,6 @@ private theorem open_counit_isIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
 -- The transported overlap restriction requires additional instance search.
 -- The derived composition comparison requires a larger elaboration budget.
 /-- Restricting the canonical mate from the direct image on P to the direct image
