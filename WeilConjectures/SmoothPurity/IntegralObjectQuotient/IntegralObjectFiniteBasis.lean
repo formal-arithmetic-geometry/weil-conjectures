@@ -423,7 +423,6 @@ private theorem complexBasis_zero (n : ℕ) :
         ((singleModule l E X L).X 0))) ≫ _ = _
   rw [(integralOperationsLevelPullback l E W.hom n).map_id _, Category.id_comp]
 
-set_option profiler true in
 /-- A slice basis induces a normalized basis at one finite coefficient level.
 This asserts no compatibility between distinct coefficient levels.
 
