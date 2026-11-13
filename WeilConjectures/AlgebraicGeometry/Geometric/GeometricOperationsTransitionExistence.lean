@@ -22,6 +22,34 @@ attribute [local irreducible] WeilConjectures.SemilinearSections.hasDerived
 universe c v r
 open CategoryTheory CategoryTheory.Limits
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+private theorem localization_composite_transition_fac
+    {C X Y : Type*} [Category C] [Category X] [Category Y]
+    [Abelian C] [Abelian X] [Abelian Y]
+    [HasDerivedCategory C] [HasDerivedCategory X] [HasDerivedCategory Y]
+    (E₀ : C ⥤ X) (E₁ : C ⥤ Y) (p : Y ⥤ X)
+    [E₀.Additive] [E₁.Additive] [p.Additive]
+    [PreservesFiniteLimits E₀] [PreservesFiniteColimits E₀]
+    [PreservesFiniteLimits E₁] [PreservesFiniteColimits E₁]
+    [PreservesFiniteLimits p] [PreservesFiniteColimits p]
+    (τ : E₀ ⟶ E₁ ⋙ p) (K : CochainComplex C ℤ) :
+    ((Localization.liftNatTrans DerivedCategory.Q
+      (HomologicalComplex.quasiIso C (.up ℤ)) _ _
+      E₀.mapDerivedCategory (E₁ ⋙ p).mapDerivedCategory
+      (Functor.whiskerRight (NatTrans.mapHomologicalComplex τ (.up ℤ))
+        DerivedCategory.Q)) ≫ (Functor.mapDerivedCategoryCompIso E₁ p).inv).app
+          (DerivedCategory.Q.obj K) ≫
+        p.mapDerivedCategory.map (E₁.mapDerivedCategoryFactors.hom.app K) ≫
+        p.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      E₀.mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ (.up ℤ)).app K) := by
+  dsimp only [NatTrans.comp_app]
+  rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors,
+    Localization.liftNatTrans_app]
+  simp only [Category.assoc]
+  change _ ≫ _ ≫ (E₁ ⋙ p).mapDerivedCategoryFactors.inv.app K ≫ _ = _
+  simp only [Iso.inv_hom_id_app, Category.comp_id]
+  rfl
+
 private theorem localize_transition
     {C D X₀ X₁ Y₀ Y₁ : Type*}
     [Category C] [Category D] [Category X₀] [Category X₁] [Category Y₀] [Category Y₁]
@@ -250,9 +278,12 @@ private theorem pull_transition
     (derivedTransition.{c, v, max c v r} J'
       G.coefficients G.coefficientTransition h)
     ?_ ?_ ?_ M
-  · simpa only [resD, e] using derived_transition_fac.{c, v, max c v r} J B τ h
-  · simpa only [resD, e] using derived_transition_fac.{c, v, max c v r} J'
-      G.coefficients G.coefficientTransition h
+  · intro K
+    exact localization_composite_transition_fac _ _ _
+      (transition.{c, v, max c v r} J B τ h) K
+  · intro K
+    exact localization_composite_transition_fac _ _ _
+      (transition.{c, v, max c v r} J' G.coefficients G.coefficientTransition h) K
   · exact G.ordinaryPullTransition h
 
 /-- The canonical termwise construction satisfies the pull-transition equation.  On each
