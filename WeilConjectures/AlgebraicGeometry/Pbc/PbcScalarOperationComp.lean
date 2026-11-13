@@ -202,6 +202,7 @@ private theorem scalarAssociatorNormalization (T : Scheme.{u})
   exact scalarComposition_rep T φ ψ χ w P
 
 set_option maxHeartbeats 900000 in
+set_option trace.profiler true in
 -- Work with abstract coefficient data while checking the long tower calculation.
 private theorem scalarDerivedCoefficients
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
