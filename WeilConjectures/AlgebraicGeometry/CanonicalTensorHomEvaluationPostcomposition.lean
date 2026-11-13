@@ -69,7 +69,9 @@ private theorem evaluation_chain_hi (X : Scheme.{u})
   let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
     (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
     ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
-  have hi := schemeTensorHomUncurry_localized_evaluation X _ _ L L N N
+  have hi := schemeTensorHomUncurry_localized_evaluation X
+    (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj N))
+    (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M)) L L N N
     h (𝟙 L) (𝟙 N) (𝟙 _)
   have hid : ((𝟙 L).op, (schemeHomKInjectiveResolution X).map (𝟙 N)) =
       𝟙 (op L, (schemeHomKInjectiveResolution X).obj N) := by
@@ -99,7 +101,9 @@ private theorem evaluation_chain_hf (X : Scheme.{u})
   let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
     (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
     ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
-  have hf := schemeTensorHomUncurry_localized_evaluation X _ _ L L M N
+  have hf := schemeTensorHomUncurry_localized_evaluation X
+    (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M))
+    (homComplex (R := X.sheaf) L ((schemeHomKInjectiveResolution X).obj M)) L L M N
     (𝟙 _) (𝟙 L) f (𝟙 _)
   simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hf
   simp only [id_tensorHom_id, Category.id_comp] at hf
