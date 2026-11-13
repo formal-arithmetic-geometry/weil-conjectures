@@ -111,7 +111,6 @@ private theorem pullbackTensorModelMap_natural (X : Scheme.{u})
   let : Functor.LaxMonoidal (DerivedCategory.Q (C := X.Modules)) := pullbackDescentQLax X
   exact Functor.LaxMonoidal.μ_natural (DerivedCategory.Q (C := X.Modules)) a b
 
-set_option profiler true in
 private theorem pullback_tensor_total_composition_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)
@@ -344,7 +343,6 @@ private theorem pullback_tensor_total_composition_chain
     F.map (G.map iZ) ≫ bT ≫ φ.hom.f n
   exact tensorTotal_summand_square F hψ' hθ' hi hm hb hφ'
 
-set_option profiler true in
 private theorem pullback_tensor_total_composition_localized_of_chain
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)

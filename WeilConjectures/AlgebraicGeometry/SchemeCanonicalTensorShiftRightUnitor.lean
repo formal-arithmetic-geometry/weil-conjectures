@@ -88,7 +88,6 @@ private lemma rightUnitor_shift_lifting_square (P : CochainComplex.KFlat C) (n :
   rw [h₂, h₃] at h₁
   simpa only [assoc] using h₁
 
-set_option profiler true in
 open DerivedCategory.TensorCommShift₂ in
 private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
     (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
