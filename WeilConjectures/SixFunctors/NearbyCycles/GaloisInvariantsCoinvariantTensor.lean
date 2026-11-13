@@ -234,10 +234,9 @@ private theorem exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     (fun j ↦ isIso_galois_card_smul_id T₀ j (hp j) W) φ hφ
 
 private lemma exists_retraction_transfer
-    {E : Type*} [Category E] {P Q : E} (α : P ⟶ Q)
-    {R S : (Q ⟶ P) → Prop}
-    (h : ∃ r, α ≫ r = 𝟙 _ ∧ R r) (hRS : ∀ r, R r → S r) :
-    ∃ r, α ≫ r = 𝟙 _ ∧ S r := by
+    {A : Sort*} {P R S : A → Prop}
+    (h : ∃ r, P r ∧ R r) (hRS : ∀ r, R r → S r) :
+    ∃ r, P r ∧ S r := by
   obtain ⟨r, hr, hR⟩ := h
   exact ⟨r, hr, hRS r hR⟩
 
@@ -293,9 +292,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  letI := galoisTensorModuleColimit
-  letI := galoisTensorLeftColimit
-  letI := galoisTensorRightColimit
+  have := galoisTensorModuleColimit
+  have := galoisTensorLeftColimit
+  have := galoisTensorRightColimit
   obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
   have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
@@ -386,9 +385,9 @@ private theorem tensor_property_of_coinvariant
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  letI := galoisTensorModuleColimit
-  letI := galoisTensorLeftColimit
-  letI := galoisTensorRightColimit
+  have := galoisTensorModuleColimit
+  have := galoisTensorLeftColimit
+  have := galoisTensorRightColimit
   intro q V b hV W φ hφ
   refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
@@ -457,12 +456,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  letI := galoisTensorModuleColimit
-  letI := galoisTensorLeftColimit
-  letI := galoisTensorRightColimit
-  exact exists_retraction_transfer _
+  have := galoisTensorModuleColimit
+  have := galoisTensorLeftColimit
+  have := galoisTensorRightColimit
+  refine exists_retraction_transfer
     (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
-      hact)
-    (fun r hcoinv ↦ tensor_property_of_coinvariant T₀ N h Ω C f' r act hcoinv)
+      hact) ?_
+  intro r hcoinv
+  exact tensor_property_of_coinvariant T₀ N h Ω C f' r act hcoinv
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
