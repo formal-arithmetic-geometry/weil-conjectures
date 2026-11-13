@@ -23,7 +23,6 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option profiler true in
 /-- The pulled-back specified model has the ordered section formulas, naturally on all
 opens and linearly over their local rings. This is a termwise statement, before homology.
 Source: Stacks Project, Tag 02KE, affine Čech terms and arbitrary base change.

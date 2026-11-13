@@ -28,7 +28,6 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- A coefficient comparison morphism with the unit formula is bijective on affine opens.
 This is a single-open statement: no tuples, face maps, or gluing are involved.
 Source: Stacks Project, Tag 02KG (Lemma 30.5.1); Tags 01I9 and 01IA.
