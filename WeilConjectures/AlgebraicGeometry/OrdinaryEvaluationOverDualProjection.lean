@@ -143,6 +143,11 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
             (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))).hom := by
   classical
   intro L T e he b hπ a d q r h
+  let := SheafOfModules.monoidalCategory (X.sheaf.over U)
+  let := SheafOfModules.monoidalCategory U.toScheme.sheaf
+  let : HasZeroObject (localEvaluationModules X U) := inferInstance
+  let : HasZeroObject (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
   let π := Classical.choose
     (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf))
   let M := localEvaluationUnit X U
@@ -183,7 +188,11 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
     refine dualProjection_comp_transport L
       (localEvaluationProjection X U P M q r 0 h)
       (SheafOfModules.homObjMap (R := X.sheaf.over U) (𝟙 (P.X r)) s.hom)
-      _ _ _ _ _ _ _ _ _ (hπ M q r 0 h) hn' ?_ ?_
+      _ _ _ _ _ _ _ _
+      (SheafOfModules.homObjMap (R := U.toScheme.sheaf) (L.map (𝟙 (P.X r)))
+        (L.map s.hom) ≫
+        SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj (P.X r))) z.inv)
+      (hπ M q r 0 h) hn' ?_ ?_
     · exact (Category.assoc _ _ _).symm.trans ((congrArg (fun f ↦ f ≫
         SheafOfModules.homObjMap (R := U.toScheme.sheaf) (𝟙 (L.obj (P.X r))) z.inv)
         (he _ _ _ _ (𝟙 (P.X r)) s.hom)).trans (Category.assoc _ _ _))
