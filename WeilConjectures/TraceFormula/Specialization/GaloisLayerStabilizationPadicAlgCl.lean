@@ -168,16 +168,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
     (N.galoisLayerRestrict h Ω L'.toIntermediateField).commSq_j (N.galoisLayer h Ω).i _ n hc
     (by exact_mod_proofs hL')
   -- the integral model as an object of the ambient derived category, `ℚ̄_ℓ ⊗ (E ⊗ K₀) ≅ Lε^* C`
-  have hobj : (ObjectProperty.ι _).obj (⟨_, hC⟩ : PadicAlgClConstructible N.generic ℓ) =
-    L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C := rfl
-  have e₁ := (ObjectProperty.liftCompιIso (boundedConstructible (padicAlgClRingObj N.generic ℓ))
-    ((boundedConstructible (padicSubfieldRingObj N.generic ℓ E)).ι ⋙
-      derivedExtendScalarsToPadicAlgCl N.generic ℓ E)
-    (fun K ↦ boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj N.generic ℓ E K)).app
-      ((boundedConstructibleExtendScalars N.generic ℓ E).obj K₀)
-  have e₂ := (derivedExtendScalarsToPadicAlgCl N.generic ℓ E).mapIso
-    ((boundedConstructibleExtendScalarsCompatibility N.generic ℓ E).app K₀)
-  have e' := Nonempty.intro ((e₁ ≪≫ e₂).symm ≪≫ (ObjectProperty.ι _).mapIso e ≪≫ eqToIso hobj)
+  have e' := Nonempty.intro ((boundedConstructible (padicAlgClRingObj N.generic ℓ)).ι.mapIso e)
   have hgen := isIso_map_baseChangeMap_app_leftDerivedUpperStar_of_iso_extendScalars
     (padicIntegersRingObjToContinuousMapRingObj ℓ E)
     (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
@@ -191,7 +182,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
         (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
   -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
-  clear e₁ e₂ hobj e hK₀ hL' hc hgn hres hC i₁ i₂ i₃ i₄ i₅ i₆ i₇ i₈ i₉ i₁₀ i₁₁ i₁₂
+  clear e hK₀ hL' hc hgn hres hC i₁ i₂ i₃ i₄ i₅ i₆ i₇ i₈ i₉ i₁₀ i₁₁ i₁₂
   revert C E K₀ L' n hn h₃ e' hgen
   normalize_precoherent
   intro C E K₀ L' n hn h₃ e' hgen
