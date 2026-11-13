@@ -342,7 +342,7 @@ private theorem hom_roos_iso_zero
     apply (cancel_mono ((shiftFunctor _ r).mapIso e).hom).mp
     exact hQ.elim _ _⟩
 
-set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- Comparing the native Roos levels with the scalar-change bounds unfolds large functors.
 private theorem model_uniform_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -463,7 +463,7 @@ attribute [local instance 30000] brownHypothesesCondensedMonoidal
   brownHypothesesModuleMonoidalClosed
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
-set_option maxHeartbeats 2000000 in
+set_option profiler true in
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
 /-- Uniform Ext bounds for valuation-ring coefficients over a field of finite
 ℓ-cohomological dimension.
