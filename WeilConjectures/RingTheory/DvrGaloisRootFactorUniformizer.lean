@@ -104,10 +104,11 @@ theorem dvr_galois_root_factor_uniformizer
   let S := integralClosure A F
   intro Q hQ hcontract
   let := hQ
-  obtain ⟨hdomA, hdvrA, hmaxA⟩ :=
+  have hroot :=
     AlgebraicGeometry.Scheme.dvr_uniformizer_root_algebra B pi hpi n hnpos
-  let := hdomA
-  let := hdvrA
+  have hdomA := hroot.choose
+  have hdvrA := hroot.choose_spec.choose
+  have hmaxA := hroot.choose_spec.choose_spec
   let : Module.Finite B A :=
     (Polynomial.monic_X_pow_sub_C pi hnpos.ne').finite_adjoinRoot
   let : FaithfulSMul B A := (faithfulSMul_iff_algebraMap_injective B A).mpr (by

@@ -62,6 +62,104 @@ private theorem tensor_quotient_lift_surjective
     obtain ⟨y', hy'⟩ := hy
     exact ⟨x' + y', by rw [map_add, hx', hy', map_add]⟩
 
+set_option trace.profiler true in
+private theorem tensor_factor_baseChange_embedding
+    {B A A₁ E F : Type u}
+    [CommRing B] [CommRing A] [IsDomain A] [CommRing A₁] [IsDomain A₁]
+    [CommRing E] [Field F] [Algebra B A] [Algebra B E]
+    [Algebra A A₁] [Algebra B A₁] [IsScalarTower B A A₁]
+    [Module.Finite A A₁] [FaithfulSMul A A₁]
+    [Algebra A F] [Algebra B F] [Algebra E F]
+    [IsScalarTower B A F] [IsScalarTower B E F]
+    (q : E ⊗[B] A →+* F) (hq : Function.Surjective q)
+    (hq_tmul : ∀ e a, q (e ⊗ₜ[B] a) = algebraMap E F e * algebraMap A F a)
+    (hinj : Function.Injective (algebraMap A F)) :
+    ∃ (P₁ : Ideal (E ⊗[B] A₁)) (hP₁ : P₁.IsMaximal),
+    letI := hP₁
+    let F₁ := (E ⊗[B] A₁) ⧸ P₁
+    let alpha₁ : A₁ →+* F₁ := (Ideal.Quotient.mk P₁).comp
+      (Algebra.TensorProduct.includeRight : A₁ →ₐ[B] E ⊗[B] A₁).toRingHom
+    letI := alpha₁.toAlgebra
+    letI : Algebra A F₁ := (alpha₁.comp (algebraMap A A₁)).toAlgebra
+    Function.Injective alpha₁ ∧ Nonempty (F →ₐ[A] F₁) := by
+  classical
+  -- A maximal quotient of this nonzero tensor ring extends the chosen field factor.
+  let C := F ⊗[A] A₁
+  let : Nontrivial C :=
+    Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain A F A₁
+      hinj (FaithfulSMul.algebraMap_injective A A₁)
+  obtain ⟨M, hM⟩ := Ideal.exists_maximal C
+  let := hM
+  let G := C ⧸ M
+  let : Field G := Ideal.Quotient.field M
+  let : Algebra F G := inferInstance
+  let : Algebra A G := inferInstance
+  let : Algebra B G := inferInstance
+  let : Algebra E G := inferInstance
+  let : IsScalarTower A F G := inferInstance
+  let : IsScalarTower E F G := inferInstance
+  let : IsScalarTower B F G := inferInstance
+  let gamma : A₁ →+* G := (Ideal.Quotient.mk M).comp
+    (Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).toRingHom
+  let : Algebra A₁ G := gamma.toAlgebra
+  let : IsScalarTower A A₁ G := by
+    apply IsScalarTower.of_algebraMap_eq'
+    ext a
+    exact congrArg (Ideal.Quotient.mk M)
+      ((Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).commutes a).symm
+  have hgamma : Function.Injective gamma := by
+    apply (RingHom.injective_iff_ker_eq_bot gamma).mpr
+    apply Ideal.eq_bot_of_under_eq_bot (R := A)
+    rw [Ideal.under_def, RingHom.comap_ker]
+    change RingHom.ker ((algebraMap A₁ G).comp (algebraMap A A₁)) = ⊥
+    rw [← IsScalarTower.algebraMap_eq A A₁ G]
+    rw [IsScalarTower.algebraMap_eq A F G]
+    exact (RingHom.injective_iff_ker_eq_bot _).mp
+      ((algebraMap F G).injective.comp hinj)
+  let : IsScalarTower B A₁ G := IsScalarTower.to₁₃₄ B A A₁ G
+  let : IsScalarTower B E G := IsScalarTower.to₁₂₄ B E F G
+  let phi : E ⊗[B] A₁ →ₐ[B] G := Algebra.TensorProduct.lift
+    (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G)
+    (fun _ _ ↦ Commute.all _ _)
+  -- Each double pure tensor comes from e ⊗ (b * a), so this is a field quotient.
+  have hphi : Function.Surjective phi := by
+    apply tensor_quotient_lift_surjective q (Ideal.Quotient.mk M) phi.toRingHom
+      hq Ideal.Quotient.mk_surjective hq_tmul
+    · intro z a
+      change Ideal.Quotient.mk M (z ⊗ₜ[A] a) =
+        Ideal.Quotient.mk M (z ⊗ₜ[A] 1) * Ideal.Quotient.mk M (1 ⊗ₜ[A] a)
+      rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+    · intro e a
+      exact Algebra.TensorProduct.lift_tmul
+        (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G) _ e a
+  let P₁ := RingHom.ker phi
+  have hP₁ : P₁.IsMaximal := RingHom.ker_isMaximal_of_surjective phi hphi
+  refine ⟨P₁, hP₁, ?_⟩
+  let := hP₁
+  let F₁ := (E ⊗[B] A₁) ⧸ P₁
+  let alpha₁ : A₁ →+* F₁ := (Ideal.Quotient.mk P₁).comp
+    (Algebra.TensorProduct.includeRight : A₁ →ₐ[B] E ⊗[B] A₁).toRingHom
+  let := alpha₁.toAlgebra
+  let : Algebra A F₁ := (alpha₁.comp (algebraMap A A₁)).toAlgebra
+  let : IsScalarTower A A₁ F₁ := .of_algebraMap_eq' rfl
+  let e : F₁ ≃+* G := phi.toRingHom.quotientKerEquivOfSurjective hphi
+  have he (a : A₁) : e (alpha₁ a) = gamma a := by
+    change phi.toRingHom.quotientKerEquivOfSurjective hphi
+      (Ideal.Quotient.mk (RingHom.ker phi.toRingHom) (1 ⊗ₜ[B] a)) = gamma a
+    rw [RingHom.quotientKerEquivOfSurjective_apply_mk]
+    change phi (1 ⊗ₜ[B] a) = gamma a
+    simp only [phi, Algebra.TensorProduct.lift_tmul, map_one, one_mul,
+      IsScalarTower.toAlgHom_apply]
+    rfl
+  have halpha₁ : Function.Injective alpha₁ := by
+    intro a b h
+    apply hgamma
+    simpa only [he] using congrArg e h
+  let e₁ : F₁ ≃ₐ[A₁] G := { e with commutes' := he }
+  let f : F →ₐ[A] F₁ := (e₁.restrictScalars A).symm.toAlgHom.comp
+    (IsScalarTower.toAlgHom A F G)
+  exact ⟨halpha₁, ⟨f⟩⟩
+
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
 set_option linter.unusedVariables false in
 set_option trace.profiler true in
@@ -147,62 +245,12 @@ theorem dvr_normalized_tensor_factor_lift
     ext b
     exact congrArg (Ideal.Quotient.mk P)
       ((Algebra.TensorProduct.includeRight : A →ₐ[B] E ⊗[B] A).commutes b).symm
-  -- A maximal quotient of this nonzero tensor ring extends the chosen field factor.
-  let C := F ⊗[A] A₁
-  let : Nontrivial C :=
-    Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain A F A₁
-      halpha (FaithfulSMul.algebraMap_injective A A₁)
-  obtain ⟨M, hM⟩ := Ideal.exists_maximal C
-  let := hM
-  let G := C ⧸ M
-  let : Field G := Ideal.Quotient.field M
-  let : Algebra F G := inferInstance
-  let : Algebra A G := inferInstance
-  let : Algebra B G := inferInstance
-  let : Algebra E G := inferInstance
-  let : IsScalarTower A F G := inferInstance
-  let : IsScalarTower E F G := inferInstance
-  let : IsScalarTower B F G := inferInstance
-  let gamma : A₁ →+* G := (Ideal.Quotient.mk M).comp
-    (Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).toRingHom
-  let : Algebra A₁ G := gamma.toAlgebra
-  let : IsScalarTower A A₁ G := by
-    apply IsScalarTower.of_algebraMap_eq'
-    ext a
-    exact congrArg (Ideal.Quotient.mk M)
-      ((Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).commutes a).symm
-  have hgamma : Function.Injective gamma := by
-    apply (RingHom.injective_iff_ker_eq_bot gamma).mpr
-    apply Ideal.eq_bot_of_under_eq_bot (R := A)
-    rw [Ideal.under_def, RingHom.comap_ker]
-    change RingHom.ker ((algebraMap A₁ G).comp (algebraMap A A₁)) = ⊥
-    rw [← IsScalarTower.algebraMap_eq A A₁ G]
-    rw [IsScalarTower.algebraMap_eq A F G]
-    exact (RingHom.injective_iff_ker_eq_bot _).mp
-      ((algebraMap F G).injective.comp halpha)
-  let : IsScalarTower B A₁ G := IsScalarTower.to₁₃₄ B A A₁ G
-  let : IsScalarTower B E G := IsScalarTower.to₁₂₄ B E F G
-  let phi : E ⊗[B] A₁ →ₐ[B] G := Algebra.TensorProduct.lift
-    (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G)
-    (fun _ _ ↦ Commute.all _ _)
-  -- Each double pure tensor comes from e ⊗ (b * a), so this is a field quotient.
-  have hphi : Function.Surjective phi := by
-    apply tensor_quotient_lift_surjective (B := B) (A := A) (A₁ := A₁)
-      (E := E) (F := F) (G := G) (Ideal.Quotient.mk P) (Ideal.Quotient.mk M)
-      phi.toRingHom Ideal.Quotient.mk_surjective Ideal.Quotient.mk_surjective
-    · intro e a
-      change Ideal.Quotient.mk P (e ⊗ₜ[B] a) =
-        Ideal.Quotient.mk P (e ⊗ₜ[B] 1) * Ideal.Quotient.mk P (1 ⊗ₜ[B] a)
-      rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-    · intro z a
-      change Ideal.Quotient.mk M (z ⊗ₜ[A] a) =
-        Ideal.Quotient.mk M (z ⊗ₜ[A] 1) * Ideal.Quotient.mk M (1 ⊗ₜ[A] a)
-      rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
-    · intro e a
-      exact Algebra.TensorProduct.lift_tmul
-        (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G) _ e a
-  let P₁ := RingHom.ker phi
-  have hP₁ : P₁.IsMaximal := RingHom.ker_isMaximal_of_surjective phi hphi
+  obtain ⟨P₁, hP₁, halpha₁, ⟨f⟩⟩ :=
+    tensor_factor_baseChange_embedding (A₁ := A₁)
+      (Ideal.Quotient.mk P) Ideal.Quotient.mk_surjective (fun e a ↦ by
+        change Ideal.Quotient.mk P (e ⊗ₜ[B] a) =
+          Ideal.Quotient.mk P (e ⊗ₜ[B] 1) * Ideal.Quotient.mk P (1 ⊗ₜ[B] a)
+        rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]) halpha
   refine ⟨P₁, hP₁, ?_⟩
   let := hP₁
   let F₁ := (E ⊗[B] A₁) ⧸ P₁
@@ -211,22 +259,6 @@ theorem dvr_normalized_tensor_factor_lift
   let := alpha₁.toAlgebra
   let : Algebra A F₁ := (alpha₁.comp (algebraMap A A₁)).toAlgebra
   let : IsScalarTower A A₁ F₁ := .of_algebraMap_eq' rfl
-  let e : F₁ ≃+* G := phi.toRingHom.quotientKerEquivOfSurjective hphi
-  have he (a : A₁) : e (alpha₁ a) = gamma a := by
-    change phi.toRingHom.quotientKerEquivOfSurjective hphi
-      (Ideal.Quotient.mk (RingHom.ker phi.toRingHom) (1 ⊗ₜ[B] a)) = gamma a
-    rw [RingHom.quotientKerEquivOfSurjective_apply_mk]
-    change phi (1 ⊗ₜ[B] a) = gamma a
-    simp only [phi, Algebra.TensorProduct.lift_tmul, map_one, one_mul,
-      IsScalarTower.toAlgHom_apply]
-    rfl
-  have halpha₁ : Function.Injective alpha₁ := by
-    intro a b h
-    apply hgamma
-    simpa only [he] using congrArg e h
-  let e₁ : F₁ ≃ₐ[A₁] G := { e with commutes' := he }
-  let f : F →ₐ[A] F₁ := (e₁.restrictScalars A).symm.toAlgHom.comp
-    (IsScalarTower.toAlgHom A F G)
   have hinjBF : Function.Injective (algebraMap B F) := by
     rw [IsScalarTower.algebraMap_eq B E F]
     exact (algebraMap E F).injective.comp
