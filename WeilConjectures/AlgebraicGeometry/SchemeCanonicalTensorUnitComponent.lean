@@ -252,9 +252,9 @@ theorem schemeCanonicalTensorUnit_component (Y : Scheme.{u})
   simp only [schemeTensorUnitAction, HomologicalComplex.comp_f, Category.assoc] at ⊢
   simp only [HomologicalComplex.comp_f, Category.assoc] at ha'
   apply ha'.trans
-  congr 1
+  apply congrArg (fun t ↦ t ≫ (eta.app F).f k)
   split_ifs with h
-  · rw [he 0, hcoeff h]
+  · simp only [he 0, hcoeff h]
   · rfl
 
 end AlgebraicGeometry
