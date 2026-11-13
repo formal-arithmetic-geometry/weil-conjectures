@@ -39,6 +39,7 @@ lemma CategoryTheory.Pseudofunctor.presheafHom_map_inv {M N : F.obj (.mk (op S))
 variable {D : Type*} [Category D] (G : D ⥤ Over S)
   {O M N : F.obj (.mk (op S))}
 
+/-- Compare a local trivialisation with its image under a morphism of isomorphism presheaves. -/
 private noncomputable def presheafIsoDifference
     (e : (F.presheafIso G O M).toFunctor ⋙ uliftFunctor.{w} ⟶
       (F.presheafIso G O N).toFunctor ⋙ uliftFunctor.{w})
@@ -68,6 +69,7 @@ private lemma presheafIsoDifference_naturality
     (e.app U x).down.1).trans
       (congrArg (· ≫ _) (Pseudofunctor.presheafHom_map_inv (G.map f.unop) x.down.1))
 
+/-- Postcompose local isomorphisms by a natural family of isomorphisms. -/
 private noncomputable def presheafIsoPostcomp
     (ε : ∀ U : Dᵒᵖ, (G.op ⋙ F.presheafHom M N).obj U)
     (hε : ∀ U, IsIso (ε U))
@@ -140,7 +142,6 @@ lemma etaleIsoTorsorVal_vadd {U : X.Etaleᵒᵖ} (a : X.gmSheaf.obj.obj U)
         etaleIsoTorsorVal L x :=
   rfl
 
-set_option profiler true in
 /-- **The torsor `Isom(𝒪, L)` determines `L`.** An isomorphism of `𝔾ₘ`-torsors
 `Isom(𝒪, L) ≅ Isom(𝒪, L')` comes from an isomorphism `L ≅ L'`: the local isomorphisms
 `t⁻¹ ≫ e(t)`, for local trivialisations `t` of `L`, do not depend on `t` and glue. -/
@@ -199,7 +200,6 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
     @asIso _ _ _ _ σ.down hiso ≪≫
     (Cat.Hom.toNatIso (modulesPseudofunctor.mapId _)).app L'⟩
 
-set_option profiler true in
 /-- Isomorphic modules have isomorphic torsors of trivialisations. -/
 lemma etaleIsoTorsor_equiv_of_iso (e : L ≅ L') : etaleIsoTorsor L ≈ etaleIsoTorsor L' := by
   have : MorphismProperty.ContainsIdentities
