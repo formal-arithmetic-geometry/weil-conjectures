@@ -466,10 +466,10 @@ lemma boundaryStalkEquiv_apply (hz : z ∉ Set.range j.base)
     (c.boundaryStalkEquiv F hz y).1 = boundarySpecialization j c.point F y :=
   rfl
 
-local instance boundaryChartMulSemiringAction :
+noncomputable local instance boundaryChartMulSemiringAction :
     MulSemiringAction Gal(Ω/C.functionField) (integralClosure Γ(C, c.W) Ω) := inferInstance
 
-local instance boundaryChartMulAction :
+noncomputable local instance boundaryChartMulAction :
     MulAction Gal(Ω/C.functionField) (Ideal (integralClosure Γ(C, c.W) Ω)) :=
   (Ideal.pointwiseDistribMulAction (M := Gal(Ω/C.functionField))
     (R := integralClosure Γ(C, c.W) Ω)).toMulAction
