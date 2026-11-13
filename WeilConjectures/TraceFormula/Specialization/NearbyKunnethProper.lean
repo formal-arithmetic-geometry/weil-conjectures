@@ -228,21 +228,13 @@ private lemma finiteSupport_and_lowerStar_kunnethMap [TopologicalSpace.Noetheria
   have hR := isIso_lowerStar_kunnethMap hM hN hpb hP hgen heM heN hA hB hΨA hΨB hT
   exact ⟨S, hS, hR, hU⟩
 
-private lemma isIso_kunnethMap_of_finiteSupport
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      (L((f₁')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-        ((M.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj A) ⊗
-        L((f₂')^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj B)))
-    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left)
-      ((P.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
-          L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)))
+private lemma isIso_of_isIso_upperStar_and_lowerStar
+    [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))}
+    (f : K ⟶ L)
+    (hsrc : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) K)
+    (htgt : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left) L)
     (hdetect : ∀ (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
       (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z'.left) Ab.{u + 1})
         (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))),
@@ -250,17 +242,9 @@ private lemma isIso_kunnethMap_of_finiteSupport
         IsZero (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) →
           IsZero (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) → IsZero C)
     (S : Finset Z'.left) (hS : ∀ x ∈ S, IsClosed {x})
-    (hU : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-      (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)))
-    (hR : IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
-      (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B))) :
-    IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
-  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle
-    (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)
-  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
-    hP.locallyOfFiniteType
-  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
-  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
+    (hU : IsIso (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map f))
+    (hR : IsIso (R((Z'.hom)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map f)) : IsIso f := by
+  obtain ⟨C, g, δ, hT⟩ := distinguished_cocone_triangle f
   have : IsLocallyNoetherian Z'.left := LocallyOfFiniteType.isLocallyNoetherian Z'.hom
   have : CompactSpace Z'.left := QuasiCompact.compactSpace_of_compactSpace Z'.hom
   have : IsNoetherian Z'.left := ⟨⟩
@@ -325,7 +309,12 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
     IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) := by
   obtain ⟨S, hS, hR, hU⟩ := finiteSupport_and_lowerStar_kunnethMap
     hM hN hpb hP hgen hm hm' hslice heM heN hA hB hΨA hΨB hT
-  exact isIso_kunnethMap_of_finiteSupport hP hsrc htgt hdetect S hS hU hR
+  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
+    hP.locallyOfFiniteType
+  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
+  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
+  exact isIso_of_isIso_upperStar_and_lowerStar
+    (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B) hsrc htgt hdetect S hS hU hR
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
