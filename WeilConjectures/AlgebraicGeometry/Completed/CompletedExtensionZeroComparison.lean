@@ -1098,6 +1098,8 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
               (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
   let S := reductionModuleRing T (completedReductionCoefficient T d)
   let W := cbcOpenObject j hj
+  have : (ProEt.sliceFrom T W).IsContinuous (ProEt.topology U)
+      ((ProEt.topology T).over W) := openSliceFrom_continuous j hj
   let a :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
