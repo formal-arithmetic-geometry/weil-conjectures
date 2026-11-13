@@ -154,7 +154,8 @@ theorem moduleCup_naiveMap_comm
     change i + j = n at hij
     change HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _ =
       HomologicalComplex.ιTensorObj (T.obj K) (T.obj L) i j n hij ≫ _
-    rw [← Category.assoc, CochainComplex.ιTensorObj_d _ _ i j n m hij hnm]
+    have hsource := CochainComplex.ιTensorObj_d (T.obj K) (T.obj L) i j n m hij hnm
+    rw [← Category.assoc, hsource]
     rw [Preadditive.add_comp, Linear.units_smul_comp]
     simp only [Category.assoc]
     rw [naiveMapComponent_summand_fast X K L (i + 1) j m (by omega),
@@ -163,7 +164,8 @@ theorem moduleCup_naiveMap_comm
       naiveMapComponent_summand_fast X K L i j n hij]
     have hdiff := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
     rw [Category.assoc, ← S.map_comp]
-    exact (congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm))
+    have htarget := congrArg S.map (CochainComplex.ιTensorObj_d K L i j n m hij hnm)
+    exact htarget
     simp only [Functor.map_add, Functor.map_units_smul, Functor.map_comp,
       Preadditive.comp_add, Linear.comp_units_smul]
     apply congrArg₂ (· + ·)
