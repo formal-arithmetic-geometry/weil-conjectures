@@ -70,7 +70,6 @@ local notation "e₀" =>
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
-set_option profiler true in
 /-- Evaluating the tensor extension of the direct image at a ring retraction
 recovers each direct-image section on the canonical tensor unit. -/
 private theorem exists_affine_tensor_evaluation
@@ -117,10 +116,8 @@ private theorem exists_affine_tensor_evaluation
   let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
   let crAdj := SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
   let hE := crAdj.choose_spec.choose
-  let adE :=
-    crAdj.choose_spec.choose_spec.choose
-  have heE :=
-    crAdj.choose_spec.choose_spec.choose_spec
+  let adE := crAdj.choose_spec.choose_spec.choose
+  have heE := crAdj.choose_spec.choose_spec.choose_spec
   let d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶ N :=
     eqToHom (hE _).symm ≫ (adE.homEquiv _ N).symm v
   refine ⟨d, ?_⟩
@@ -141,7 +138,6 @@ private theorem exists_affine_tensor_evaluation
       (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
         ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)) heval).trans hv')
 
-set_option profiler true in
 /-- Scalar compatibility of the transported pullback counit.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-counit-smul).
@@ -198,21 +194,23 @@ theorem affine_module_tensor_counit_smul
   -- generation argument using the pushout is necessary.
   have _ := hpush
   intro F W c p
+  let G := (R).obj F
+  let adj := adj₀
   let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
   let evaluation := exists_affine_tensor_evaluation f B t ε ht F
   let d := evaluation.choose
   have hd := evaluation.choose_spec
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
-  let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
+  let dP : P.obj G ⟶ N := eqToHom (pobj _) ≫ d
   have hb' : (𝓻 b) ≫ (𝓻 ε) = 𝟙 U.ringCatSheaf :=
     congrArg ((sheafCompose (𝓙 U) (forget₂ CommRingCat.{u} RingCat.{u})).map) hb
-  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F :=
+  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj G) ⟶ F :=
     (SheafOfModules.restrictScalars (𝓻 b)).map dP ≫
       (SheafOfModules.restrictScalarsCancelIso (𝓻 b) (𝓻 ε) hb').hom.app F
-  let a : (tensorPullback f).obj ((S).obj ((R).obj F)) ⟶ F :=
-    κ.inv.app ((R).obj F) ≫ dU
+  let a : (tensorPullback f).obj ((S).obj G) ⟶ F :=
+    κ.inv.app G ≫ dU
   -- The κ-unit formula identifies the adjunct of this evaluation with the identity.
-  have ha : ((adj₀).homEquiv ((S).obj ((R).obj F)) F) a =
+  have ha : (adj.homEquiv ((S).obj G) F) a =
       𝟙 ((pushforward f).obj F) := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
@@ -220,19 +218,19 @@ theorem affine_module_tensor_counit_smul
     ext m
     change d.val.app ((Opens.map f.base).op.obj V)
       ((eqToHom (pobj _)).val.app ((Opens.map f.base).op.obj V)
-        ((κ.inv.app ((R).obj F)).val.app ((Opens.map f.base).op.obj V)
-          (((adj₀).unit.app ((S).obj ((R).obj F))).val.app V m))) = m
+        ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V)
+          ((adj.unit.app ((S).obj G)).val.app V m))) = m
     exact (congrArg (d.val.app ((Opens.map f.base).op.obj V))
-      (hP.2 ((R).obj F) V m)).trans (hd V m)
-  have hac : a = (adj₀).counit.app F :=
-    (((adj₀).homEquiv ((S).obj ((R).obj F)) F).eq_symm_apply.mpr ha).trans
-      ((adj₀).homEquiv_symm_id F)
-  have heq : κ.hom.app ((R).obj F) ≫ (adj₀).counit.app F = dU :=
-    (congrArg (fun q ↦ κ.hom.app ((R).obj F) ≫ q) hac.symm).trans
-      ((κ.app ((R).obj F)).hom_inv_id_assoc dU)
-  have hq (V : (Opens U)ᵒᵖ) (m : (P.obj ((R).obj F)).val.obj V) :
-      ((adj₀).counit.app F).val.app V
-        ((κ.hom.app ((R).obj F)).val.app V m) = dP.val.app V m :=
+      (hP.2 G V m)).trans (hd V m)
+  have hac : a = adj.counit.app F :=
+    ((adj.homEquiv ((S).obj G) F).eq_symm_apply.mpr ha).trans
+      (adj.homEquiv_symm_id F)
+  have heq : κ.hom.app G ≫ adj.counit.app F = dU :=
+    (congrArg (fun q ↦ κ.hom.app G ≫ q) hac.symm).trans
+      ((κ.app G).hom_inv_id_assoc dU)
+  have hq (V : (Opens U)ᵒᵖ) (m : (P.obj G).val.obj V) :
+      (adj.counit.app F).val.app V
+        ((κ.hom.app G).val.app V m) = dP.val.app V m :=
     congrArg (fun q ↦ q.val.app V m) heq
   exact (hq W (c • p)).trans (((dP.val.app W).hom.map_smul c p).trans
     (congrArg (fun m : F.val.obj W ↦ (ε.hom.app W c) • m) (hq W p).symm))
