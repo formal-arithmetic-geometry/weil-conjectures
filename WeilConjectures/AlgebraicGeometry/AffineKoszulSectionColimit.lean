@@ -146,9 +146,7 @@ private theorem transportHomColimit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 500000 in
 set_option trace.profiler true in
--- The restored localization comparison exhausted 200000 heartbeats; retain its original budget.
 /-- The whole Hom-colimit comparison, transported from the spectrum presentation.
 This asserts a compatible system of perfect derived augmentations and its colimit;
 it does not choose a finite-stage representative or any chain map or K-flat complex.
@@ -211,16 +209,14 @@ theorem affine_koszul_section_colimit
             ι.app n (cast (hD n).symm ξ) = v n ≫ R.map ξ) ∧
           Nonempty (IsColimit (Cocone.mk _ ι)) := by
   classical
-  let := SheafOfModules.monoidalCategory X.sheaf
-  let := (SheafOfModules.tensorClosed X.sheaf).1.some
-  let T := HomologicalComplex.tensorUnit
-    (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)
-  let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)).mapDerivedCategory
+  intro _ _ T R
+  -- Keep the chosen restriction functor and abelian structures shared.
+  let : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
   let A := Γ(X, ⊤)
+  let : Abelian (SheafOfModules.{uX} (moduleRings (Spec (.of A)).toRingedSpace)) :=
+    inferInstance
   let s : Spec (.of A) ≅ X := X.isoSpec.symm
   let V := s.hom ⁻¹ᵁ U
   have hV : IsCompact (V : Set (Spec (.of A))) := by

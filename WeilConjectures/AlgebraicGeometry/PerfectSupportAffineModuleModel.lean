@@ -56,9 +56,7 @@ private theorem affineSheafification_preservesFiniteLimits
   unfold affinePerfectSheafification
   exact comp_preservesFiniteLimits _ _
 
-set_option maxHeartbeats 500000 in
 set_option trace.profiler true in
--- Elaborating the two derived localization comparisons and the model witnesses needs this limit.
 set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target
 whose cohomology is elementwise power torsion. The comparison is full and additive
@@ -116,9 +114,14 @@ theorem perfect_support_affine_module_model
         ∀ a : RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u}),
           F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj P)) ≫ eP.hom =
             eP.hom ≫ R.map (schemeDerivedScalar X a (𝟙 E.obj)) := by
-  let A := ↑(X.presheaf.obj (op U))
-  let : HasDerivedCategory.{u + 1} (ModuleCat.{u} A) :=
-    HasDerivedCategory.standard (ModuleCat.{u} A)
+  intro A _ R
+  -- Reuse the abelian structures throughout the derived comparisons.
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=
+    inferInstance
+  let : Abelian
+      (SheafOfModules.{u} (moduleRings (Spec (X.presheaf.obj (op U))).toRingedSpace)) :=
+    inferInstance
   let H := affinePerfectSheafification X U hU
   let : PreservesFiniteLimits H := affineSheafification_preservesFiniteLimits X U hU
   let : H.Additive := Functor.additive_of_preserves_binary_products H
