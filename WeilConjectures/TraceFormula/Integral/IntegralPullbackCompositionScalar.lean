@@ -49,6 +49,36 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 set_option allowUnsafeReducibility true in
 attribute [local reducible] integralSystemReduction
 
+/-- Pasting of the scalar-composition diagram after mapping all of its edges into
+one category. Source: elementary category theory. -/
+private theorem scalar_composition_paste_mapped
+    {D : Type*} [Category D]
+    {O0 O1 O2 O3 O4 F0 F1 M1 M2 M3 N1 N2 N3 E0 E2 E3 E4 E5 : D}
+    {x1 : O0 ⟶ O1} {x2 : O1 ⟶ O2} {x3 : O2 ⟶ O3} {t1 : O3 ⟶ M1}
+    {bLk : M1 ⟶ M2} {pVk : M2 ⟶ M3} {b1 : O2 ⟶ N1} {sk : N1 ⟶ M1}
+    {pW : N1 ⟶ N2} {HWbEk : N2 ⟶ N3} {gk : N3 ⟶ M3}
+    {pZ1 : O1 ⟶ E2} {bEh : E2 ⟶ E3} {g1 : E3 ⟶ N2}
+    {UEhbEk : E3 ⟶ E4} {g2 : E4 ⟶ N3}
+    {pZ0 : O0 ⟶ E0} {cEr : E0 ⟶ E2} {bEhk : E0 ⟶ E5} {aE : E5 ⟶ E4}
+    {ghk : E5 ⟶ F1} {aL2 : F1 ⟶ M3}
+    {y1 : O0 ⟶ O4} {bLhk : O4 ⟶ F0} {q : F0 ⟶ F1} {aL1 : F0 ⟶ M2}
+    {y2 : O4 ⟶ O3}
+    (N1 : x3 ≫ t1 = b1 ≫ sk)
+    (IIIk : sk ≫ bLk ≫ pVk = pW ≫ HWbEk ≫ gk)
+    (IIIh : x2 ≫ b1 ≫ pW = pZ1 ≫ bEh ≫ g1)
+    (Ng : UEhbEk ≫ g2 = g1 ≫ HWbEk)
+    (Np : x1 ≫ pZ1 = pZ0 ≫ cEr)
+    (CE : cEr ≫ bEh ≫ UEhbEk = bEhk ≫ aE)
+    {aE' : E5 ⟶ E4} {aL2' : F1 ⟶ M3}
+    (mix : aE' ≫ g2 ≫ gk = ghk ≫ aL2') (eE : aE = aE') (eL : aL2 = aL2')
+    (IIIhk : y1 ≫ bLhk ≫ q = pZ0 ≫ bEhk ≫ ghk)
+    (Na : q ≫ aL2 = aL1 ≫ pVk)
+    (CL : y2 ≫ t1 ≫ bLk = bLhk ≫ aL1) :
+    x1 ≫ x2 ≫ x3 ≫ t1 ≫ bLk ≫ pVk = y1 ≫ y2 ≫ t1 ≫ bLk ≫ pVk := by
+  subst eE eL
+  rw [reassoc_of% N1, IIIk, reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
+    reassoc_of% CE, mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
+
 /-- The pasting calculation behind integralPullbackComposition_scalar, with all
 morphisms abstract. Source: elementary category theory. -/
 private theorem scalar_composition_paste
@@ -77,12 +107,11 @@ private theorem scalar_composition_paste
     (CL : y2 ≫ t1 ≫ U.map bLk = bLhk ≫ aL1) :
     x1 ≫ x2 ≫ x3 ≫ t1 ≫ U.map bLk ≫ U.map pVk =
       y1 ≫ y2 ≫ t1 ≫ U.map bLk ≫ U.map pVk := by
-  subst eE eL
   have IIIk' := congrArg U.map IIIk
   have CE' := congrArg H.map CE
   simp only [Functor.map_comp] at IIIk' CE'
-  rw [reassoc_of% N1, IIIk', reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
-    reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
+  exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix
+    (congrArg H.map eE) eL IIIhk Na CL
 
 private theorem integralComparisonSystemScalarPullback_finite_naturality
     {X Y : Scheme.{u}}
@@ -196,12 +225,11 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Np Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  exact scalar_composition_paste
-    (D := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) Z)
-    (DE := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
-    (WL := finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) W)
-    (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
-    N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
+  have IIIk' := congrArg (UL h).map IIIk
+  have CE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map CE
+  have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
+  simp only [Functor.map_comp] at IIIk' CE'
+  exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
 
 end SystemScalar
 
