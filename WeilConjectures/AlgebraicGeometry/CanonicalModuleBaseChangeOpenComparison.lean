@@ -27,7 +27,6 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
-set_option profiler true in
 /-- Restriction identifies the module base-change arrow with the arrow of the
 chosen pullback of the restricted maps. No affine chart is used.
 Source: Stacks Project, Tag 08FE, proof; Tag 08HY, counit construction;

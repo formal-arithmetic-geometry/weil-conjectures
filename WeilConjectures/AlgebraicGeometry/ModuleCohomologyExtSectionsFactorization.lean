@@ -54,7 +54,6 @@ private theorem comparisonNatIso_symm_app
     {C D : Type*} [Category C] [Category D] {F G : C ⥤ D} (e : F ≅ G) (X : C) :
     e.symm.app X = (e.app X).symm := rfl
 
-set_option profiler true in
 private theorem siteSectionsSourceChange_app
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -70,7 +69,6 @@ private theorem siteSectionsSourceChange_app
     NatIso.trans_app, comparisonNatIso_symm_app, siteSectionsObjIso,
     extSourceNatIso, NatIso.ofComponents.app]
 
-set_option profiler true in
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
 Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
 composite in ModuleCohomologyExtResolutionNaturality.
