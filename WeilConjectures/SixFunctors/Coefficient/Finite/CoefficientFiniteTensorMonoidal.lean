@@ -172,7 +172,6 @@ private theorem finiteCochainModel_counit (n : ℕ)
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
   rfl
 
-set_option profiler true in
 -- Compare the fixed tensorator through its recorded localization model.
 /-- The fixed finite tensorator is the inverse tensorator of a monoidal functor.
 Source: Stacks 07A4 and 06YY.
@@ -200,6 +199,7 @@ theorem coefficientFiniteTensorMonoidal
   let J := Scheme.ProEt.topology W
   let φ := completedIntegralCommRingProjectionUnrestricted l E W n
   let D := finiteCochainModel l E W n
+  -- Keep the counit formula in terms of D so simp can match it without expanding the model.
   have hε (P : CochainComplex (scalarReductionSource l E W) ℤ)
       (hP : CochainComplex.IsKFlatIndependentCoefficients
         (J := J) (R := completedIntegralCommRingSheafUnrestricted l E W) P) :
