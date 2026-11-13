@@ -47,22 +47,24 @@ instance preservesFlat_upperStar : ((f)^*⟦Λ⟧).PreservesFlat where
       ((HomologicalComplex.singleMapHomologicalComplex (f)^*⟦Λ⟧ (.up ℤ) 0).app M)
       (kFlat_upperStar_mapHomologicalComplex_obj Λ f hM)
 
-set_option maxHeartbeats 1000000 in
 -- the images of complexes in the homotopy category are unfolded
 /-- The tensor comparison `Lf^*(K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` of the derived pullback of module
 objects is the generic tensor comparison of the left derived functor of the strong monoidal
 functor `f^*`. -/
 theorem leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :
     leftDerivedUpperStarTensor Λ f = ((f)^*⟦Λ⟧).leftDerivedTensorComparison := by
-  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ f)
-    (leftDerivedUpperStarTensorRightCounit Λ f) (HomotopyCategory.quasiIso _ _)
+  refine Functor.leftDerived₂_ext ((f)^*⟦Λ⟧).derivedTensorLeftDerived
+    ((f)^*⟦Λ⟧).derivedTensorLeftDerivedCounit (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  ext A B
+  apply NatTrans.ext
+  funext A
+  apply NatTrans.ext
+  funext B
   have h₁ := leftDerivedUpperStarTensor_app_app_fac Λ f A B
   have h₂ := ((f)^*⟦Λ⟧).leftDerivedTensorComparison_app_app_comp_tensorHom A B
-  rw [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
-  simp only [NatTrans.comp_app]
-  rw [leftDerivedUpperStarTensorRightCounit_app_app]
-  erw [reassoc_of% h₁, reassoc_of% h₂]
+  simp only [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
+  simp only [NatTrans.comp_app, Functor.derivedTensorLeftDerivedCounit_app_app,
+    MonoidalCategory.tensorHom_def, Category.assoc]
+  exact h₁.trans h₂.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
