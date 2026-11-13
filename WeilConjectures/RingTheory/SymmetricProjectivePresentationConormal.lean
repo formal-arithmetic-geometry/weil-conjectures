@@ -34,7 +34,6 @@ open scoped TensorProduct
 
 namespace Algebra
 
-set_option profiler true in
 /-- Source: Stacks Project, proof of Lemma 07CE, lines 357–414, with projective `I/I²`
 (blueprint: lem-weil-pbc-symmetric-projective-presentation-conormal).
 
@@ -163,6 +162,7 @@ theorem symmetric_projective_presentation_conormal
     exact hαX j
   have hα : Function.Surjective α := by
     rw [hαeq]
+    -- Extract only surjectivity, without introducing the unused dependent conormal data.
     exact (AlgebraicGeometry.cotangentComplex_symmetricAlgebra
       (LinearMap.ker q) q hqsurj rfl).1.choose
   have hφeq : φ = α.toRingHom.comp (MvPolynomial.map (Ideal.Quotient.mk I)) := by

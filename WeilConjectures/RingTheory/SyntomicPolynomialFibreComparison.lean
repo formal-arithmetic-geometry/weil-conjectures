@@ -97,7 +97,6 @@ private theorem completeIntersection_of_algEquiv
     let H := PrimeSpectrum.homeomorphOfRingEquiv e.toRingEquiv
     exact H.isHomeomorph.topologicalKrullDim_eq.trans hdim
 
-set_option profiler true in
 /-- Base change and localization identify the presentation ideal in the closed fibre.
 This is a comparison assertion and contains no generator-count conclusion.
 Source: Stacks Project, Tag 00SY, proof of (3) implies (2), first two paragraphs;
@@ -208,6 +207,7 @@ theorem exists_syntomic_polynomial_fibre_comparison
     refine ⟨e, fun a ↦ ?_⟩
     rw [he]
     exact Localization.localRingHom_to_map _ _ _ rfl a
+  -- Direct elimination avoids generalizing through the full dependent localization goal.
   refine (model Q hcontract.symm).elim fun e₀ he₀ ↦ ?_
   have hm : m = (p.map (algebraMap R P)).map (algebraMap P A) := by
     rw [Ideal.map_map, ← IsScalarTower.algebraMap_eq]
