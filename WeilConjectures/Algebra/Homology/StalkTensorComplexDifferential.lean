@@ -29,32 +29,34 @@ namespace CochainComplex
 private theorem tensorComparison_differential
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [MonoidalCategory C] [MonoidalCategory D]
-    [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [(curriedTensor C).PreservesZeroMorphisms]
+    [∀ A, ((curriedTensor C).obj A).PreservesZeroMorphisms]
+    [(curriedTensor D).PreservesZeroMorphisms]
+    [∀ A, ((curriedTensor D).obj A).PreservesZeroMorphisms]
     [∀ F K : CochainComplex C ℤ,
       HomologicalComplex.HasMapBifunctor F K (curriedTensor C) (.up ℤ)]
     [∀ F K : CochainComplex D ℤ,
       HomologicalComplex.HasMapBifunctor F K (curriedTensor D) (.up ℤ)]
     (T : C ⥤ D) [T.Additive]
-    (φ : ∀ A B : C,
-      T.obj (A ⊗ B) ≅
-        T.obj A ⊗
-          T.obj B)
+    (φ : ∀ A B : C, T.obj (A ⊗ B) ≅ T.obj A ⊗ T.obj B)
     (hφ : ∀ (A B A' B' : C) (f : A ⟶ A') (g : B ⟶ B'),
       T.map (f ⊗ₘ g) ≫ (φ A' B').hom =
-        (φ A B).hom ≫ (T.map f ⊗ₘ
-          T.map g))
-    (e : ∀ (F K : CochainComplex (C) ℤ) (n : ℤ),
+        (φ A B).hom ≫ (T.map f ⊗ₘ T.map g))
+    (e : ∀ (F K : CochainComplex C ℤ) (n : ℤ),
       ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).X n ≅
-        (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).X n)
-    (he : ∀ (F K : CochainComplex (C) ℤ)
+        (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F)
+          ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).X n)
+    (he : ∀ (F K : CochainComplex C ℤ)
         (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n),
-      T.map
-          (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ) p q n h) ≫
+      T.map (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ) p q n h) ≫
         (e F K n).hom = (φ (F.X p) (K.X q)).hom ≫ HomologicalComplex.ιMapBifunctor
-          ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _) (.up ℤ) p q n h)
-    (F K : CochainComplex (C) ℤ) (n m : ℤ) :
-    (e F K n).hom ≫ (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).d n m =
-      ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).d n m ≫ (e F K m).hom := by
+          ((T.mapHomologicalComplex (.up ℤ)).obj F)
+          ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _) (.up ℤ) p q n h)
+    (F K : CochainComplex C ℤ) (n m : ℤ) :
+    (e F K n).hom ≫ (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F)
+          ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).d n m =
+      ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).d n m ≫
+        (e F K m).hom := by
   have hφ₁ (A B A' : C) (f : A ⟶ A') :
       T.map (f ▷ B) ≫ (φ A' B).hom =
         (φ A B).hom ≫ (T.map f ▷ T.obj B) := by
@@ -67,17 +69,18 @@ private theorem tensorComparison_differential
     have hh := hφ A B A B' (𝟙 A) g
     rw [T.map_id, id_tensorHom, id_tensorHom] at hh
     exact hh
-  have he0 (F K : CochainComplex (C) ℤ) (p q n : ℤ) :
+  have he0 (F K : CochainComplex C ℤ) (p q n : ℤ) :
       T.map (HomologicalComplex.ιMapBifunctorOrZero F K (curriedTensor _) (.up ℤ)
         p q n) ≫ (e F K n).hom = (φ (F.X p) (K.X q)).hom ≫
-          HomologicalComplex.ιMapBifunctorOrZero ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K)
+          HomologicalComplex.ιMapBifunctorOrZero ((T.mapHomologicalComplex (.up ℤ)).obj F)
+          ((T.mapHomologicalComplex (.up ℤ)).obj K)
             (curriedTensor _) (.up ℤ) p q n := by
     by_cases h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n
     · simpa only [HomologicalComplex.ιMapBifunctorOrZero_eq _ _ _ _ _ _ _ h] using
         he F K p q n h
     · simp only [HomologicalComplex.ιMapBifunctorOrZero_eq_zero _ _ _ _ _ _ _ h,
         Functor.map_zero, Limits.zero_comp, Limits.comp_zero]
-  have h_ext (F K : CochainComplex (C) ℤ) (n : ℤ)
+  have h_ext (F K : CochainComplex C ℤ) (n : ℤ)
       (M : D)
       (a b : ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).X n ⟶ M)
       (h : ∀ p q (hpq : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n),
@@ -119,7 +122,6 @@ private theorem tensorComparison_differential
     change (φ (F.X p) (K.X q)).hom ≫ (T.obj (F.X p) ◁ T.map (K.d q (q + 1))) ≫ _ =
       T.map (F.X p ◁ K.d q (q + 1)) ≫ (φ (F.X p) (K.X (q + 1))).hom ≫ _
     rw [← Category.assoc, ← hφ₂, Category.assoc]
-
 
 variable (X : RingedSpace.{u₁}) (x : X)
 
