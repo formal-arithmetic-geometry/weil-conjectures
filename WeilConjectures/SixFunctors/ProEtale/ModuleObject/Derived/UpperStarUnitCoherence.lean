@@ -246,9 +246,8 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
         L((f)^*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ g).hom ≫
           (leftDerivedUpperStarUnitIso Λ f).hom =
       (leftDerivedUpperStarUnitIso Λ (f ≫ g)).hom := by
-  rw [leftDerivedUpperStarUnitIso_hom_eq, leftDerivedUpperStarUnitIso_hom_eq,
-    leftDerivedUpperStarUnitIso_hom_eq, leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
-  simpa only [upperStarComp_hom_app_unit] using
+  simpa only [upperStarComp_hom_app_unit,
+    ← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] using
     Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
       (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
 
