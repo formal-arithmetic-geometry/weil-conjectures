@@ -327,7 +327,6 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option profiler true in
 /-- Ordinary quotient adjuncts commute with the tensor comparison and finite evaluation.
 Source: Zheng, Construction 4.1 and Proposition 4.17(a)
 (blueprint: lem-coef-ordinary-tensor-horizontal).
@@ -412,6 +411,7 @@ theorem coefficientOrdinaryTensorHorizontal {W : Scheme.{t}}
       (((finiteTensor l E W n).obj (level l E P n, level l E Q n)).X k) U
     let x := coefficientEvaluationSection l E W (P.X p) m U x0
     let y := coefficientEvaluationSection l E W (Q.X q) m U y0
+    -- Compose the section equations directly, avoiding rewrites through the complex functors.
     have hunit := tensor_generators_on_unit.{t + 1, t, u}
       (R := integralCoefficientCommRingSheaf l E W m)
       (S := integralCoefficientCommRingSheaf l E W n) (normalizedDVRQuotient l E W hmn)
