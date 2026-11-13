@@ -91,16 +91,22 @@ private theorem affine_comparison_factorization
       Category.assoc, Iso.inv_hom_id, Category.comp_id]
   refine ⟨Q, ψ, ι.mapIso c.symm ≪≫ β.app Q,
     γ.app Q ≪≫ D.mapIso (ι.mapIso c), γ.app B ≪≫ D.mapIso t, ?_, ?_⟩
-  · change ι.map δ = (ι.map c.inv ≫ (β.app Q).hom) ≫ C.map (R.map ψ) ≫ τ.hom
-    rw [Category.assoc, ← Category.assoc (β.app Q).hom, ← β.hom.naturality]
+  · have hβ := β.hom.naturality ψ
+    change ι.map (E.functor.map ψ) ≫ (β.app B).hom =
+      (β.app Q).hom ≫ C.map (R.map ψ) at hβ
+    change ι.map δ = (ι.map c.inv ≫ (β.app Q).hom) ≫ C.map (R.map ψ) ≫ τ.hom
+    rw [Category.assoc, ← Category.assoc (β.app Q).hom, ← hβ,
+      Category.assoc]
     change ι.map δ = ι.map c.inv ≫ ι.map (E.functor.map ψ) ≫ t.hom
     rw [hψt, ← ι.map_comp_assoc, c.inv_hom_id, ι.map_id, Category.id_comp]
-  · change R.map ψ ≫ ((γ.app B).hom ≫ D.map t.hom) =
+  · have hγ := γ.hom.naturality ψ
+    change R.map ψ ≫ (γ.app B).hom =
+      (γ.app Q).hom ≫ D.map (ι.map (E.functor.map ψ)) at hγ
+    change R.map ψ ≫ ((γ.app B).hom ≫ D.map t.hom) =
       ((γ.app Q).hom ≫ D.map (ι.map c.hom)) ≫ D.map (ι.map δ)
-    rw [← Category.assoc, γ.hom.naturality, Category.assoc, ← D.map_comp, hψt,
+    rw [← Category.assoc, hγ, Category.assoc, ← D.map_comp, hψt,
       D.map_comp, Category.assoc]
 
-set_option profiler true in
 /-- The affine dictionary identifies a formal morphism with a completed linear map,
 and identifies that map with the actual inverse limit of its section maps.
 No torsion hypothesis or annihilator conclusion is involved.

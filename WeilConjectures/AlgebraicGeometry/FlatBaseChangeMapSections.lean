@@ -28,7 +28,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
-set_option profiler true in
 /-- The base-change map constructed from resolutions is independent of the resolutions
 and augmented lifts. Its adjoint sends the canonical image of a class on f⁻¹V to the
 canonical image of its pullback along g' restricted to g'⁻¹(f⁻¹V).
