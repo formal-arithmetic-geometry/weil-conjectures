@@ -320,14 +320,28 @@ theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
         ((s.hom.f k).val.app V (coefficientRestrictionSection π _ V
           ((a.unit.app _).val.app V
             (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))))
-    rw [unit_map_section π a
-      (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) V,
-      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r} f g p p' k hpq V,
-      hs' p p' k hpq V, hs p p' k hpq V,
-      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
+    have hleft := (congrArg ((s'.hom.f k).val.app V)
+      (unit_map_section π a
+        (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) V
+        (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))).trans
+      ((congrArg (fun z ↦ (s'.hom.f k).val.app V
+        (coefficientRestrictionSection π _ V ((a.unit.app _).val.app V z)))
+        (CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
+          f g p p' k hpq V x y)).trans
+        (hs' p p' k hpq V ((f.f p).val.app V x) ((g.f p').val.app V y)))
+    have hright := (congrArg
+      ((((coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g))).f k).val.app V)
+      (hs p p' k hpq V x y)).trans
+      ((CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
         ((F.mapHomologicalComplex (.up ℤ)).map f)
-        ((F.mapHomologicalComplex (.up ℤ)).map g) p p' k hpq V]
-    rw [unit_map_section π a (f.f p) V x, unit_map_section π a (g.f p') V y]
+        ((F.mapHomologicalComplex (.up ℤ)).map g) p p' k hpq V _ _).trans
+        (congrArg₂ (coefficientTensorGenerator.{r, c, v} J B
+          ((F.mapHomologicalComplex (.up ℤ)).obj P')
+          ((F.mapHomologicalComplex (.up ℤ)).obj Q') p p' k hpq V)
+          (unit_map_section π a (f.f p) V x) (unit_map_section π a (g.f p') V y)))
+    exact hleft.trans hright.symm
   apply HomologicalComplex.Hom.ext
   funext k
   exact key k
