@@ -137,8 +137,22 @@ private theorem tensorSummand_map (R : Sheaf J CommRingCat.{max c v r})
   rw [tensorHom_def, Category.assoc]
   rfl
 
+/-- Paste the summand comparison squares using only functoriality and associativity. -/
+private theorem cochainReduction_summand_paste {D E : Type*} [Category D] [Category E]
+    (F : D ⥤ E) {X₁ X₂ X₃ X₄ : D} {Y₁ Y₂ Y₃ Y₄ Y₅ Y₆ : E}
+    {j : X₁ ⟶ X₂} {t : X₂ ⟶ X₄} {v : X₁ ⟶ X₃} {w : X₃ ⟶ X₄}
+    {i : Y₁ ⟶ Y₂} {s : Y₂ ⟶ F.obj X₂} {u : Y₁ ⟶ F.obj X₁}
+    {r : F.obj X₄ ⟶ Y₅} {a : Y₂ ⟶ Y₄} {b : Y₄ ⟶ Y₅}
+    {z : Y₁ ⟶ Y₃} {k : Y₃ ⟶ Y₄} {x : Y₃ ⟶ Y₆} {y : Y₆ ⟶ Y₅}
+    {r' : F.obj X₃ ⟶ Y₆}
+    (hs : i ≫ s = u ≫ F.map j) (hm : j ≫ t = v ≫ w)
+    (hn : k ≫ b = x ≫ y) (hmap : i ≫ a = z ≫ k)
+    (hnat : F.map w ≫ r = r' ≫ y) (hinv : u ≫ F.map v ≫ r' = z ≫ x) :
+    i ≫ s ≫ F.map t ≫ r = i ≫ a ≫ b := by
+  rw [reassoc_of% hs, ← F.map_comp_assoc, hm, F.map_comp, Category.assoc, hnat,
+    reassoc_of% hinv, reassoc_of% hmap, hn]
+
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 400000 in
 -- The summand calculation compares three dependent ringed module categories.
 /-- Cochain reduction commutes with the normalized total tensor comparisons.
 Source: Zheng Construction 4.1; Stacks 06YN, 07A4
@@ -187,18 +201,9 @@ theorem cochain_tensor_reduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n 
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Pm)
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Qm)
       p q k hpq ≫ _ = _
-  erw [← Category.assoc, hs, Category.assoc, ← (A.scalar h).model.E.map_comp_assoc, hm]
-  erw [(A.scalar h).model.E.map_comp, Category.assoc,
-    cochainReduction_f.{c, v, r} J B τ A h
-      ((totalTensor.{c, v, r} (coefficientSequenceTopology J)
-        (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) k]
-  erw [hnat]
-  erw [reassoc_of% hmap, hn]
-  erw [cochainReduction_f.{c, v, r} J B τ A h P p,
-    cochainReduction_f.{c, v, r} J B τ A h Q q]
-  erw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q),
-    A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)]
-  have hinv := ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q)
-  erw [reassoc_of% hinv]
+  rw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q)] at hm
+  rw [A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)] at hn
+  exact cochainReduction_summand_paste (A.scalar h).model.E hs hm hn hmap hnat
+    (ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q))
 
 end WeilConjectures.SemilinearSections
