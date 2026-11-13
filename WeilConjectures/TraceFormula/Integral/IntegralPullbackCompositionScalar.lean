@@ -203,71 +203,62 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
   exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
-private theorem integralCompositionSequence_mixed
-    {V W Z : Scheme.{u}}
-    [∀ v : V, Invertible (l : V.residueField v)]
-    [∀ w : W, Invertible (l : W.residueField w)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    (h : Z ⟶ W) (k : W ⟶ V)
-    (M : coefficientSequenceDerived l E V) :
-    (integralComparisonDerivedSequenceScalar l E L ι Z).map
-        ((integralComparisonSystemComposition l E h k).hom.app M) ≫
-      (integralComparisonSystemScalarPullback l E L ι h).hom.app
-        ((integralComparisonDerivedSequencePullback l E k).obj M) ≫
-      (integralComparisonDerivedSequencePullback l L h).map
-          ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
-      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
-        (integralComparisonSystemComposition l L h k).hom.app
-          ((integralComparisonDerivedSequenceScalar l E L ι V).obj M) := by
-  exact NatTrans.congr_app
-    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
-
-private theorem integralCompositionPullback_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f :
-      coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X) =
-        integralComparisonDerivedSequencePullback l E f := by
-  rfl
+private theorem scalar_mixed_component_heq
+    {EV EV' : Type*} [iEV : Category EV] [iEV' : Category EV']
+    {EW EW' : Type*} [iEW : Category EW] [iEW' : Category EW']
+    {EZ EZ' : Type*} [iEZ : Category EZ] [iEZ' : Category EZ']
+    {LV LV' : Type*} [iLV : Category LV] [iLV' : Category LV']
+    {LW LW' : Type*} [iLW : Category LW] [iLW' : Category LW']
+    {LZ LZ' : Type*} [iLZ : Category LZ] [iLZ' : Category LZ']
+    (eEV : EV = EV') (eiEV : HEq iEV iEV')
+    (eEW : EW = EW') (eiEW : HEq iEW iEW')
+    (eEZ : EZ = EZ') (eiEZ : HEq iEZ iEZ')
+    (eLV : LV = LV') (eiLV : HEq iLV iLV')
+    (eLW : LW = LW') (eiLW : HEq iLW iLW')
+    (eLZ : LZ = LZ') (eiLZ : HEq iLZ iLZ')
+    (UEk : EV ⥤ EW) (UEk' : EV' ⥤ EW') (eUEk : HEq UEk UEk')
+    (UEh : EW ⥤ EZ) (UEh' : EW' ⥤ EZ') (eUEh : HEq UEh UEh')
+    (UEhk : EV ⥤ EZ) (UEhk' : EV' ⥤ EZ') (eUEhk : HEq UEhk UEhk')
+    (ULk : LV ⥤ LW) (ULk' : LV' ⥤ LW') (eULk : HEq ULk ULk')
+    (ULh : LW ⥤ LZ) (ULh' : LW' ⥤ LZ') (eULh : HEq ULh ULh')
+    (ULhk : LV ⥤ LZ) (ULhk' : LV' ⥤ LZ') (eULhk : HEq ULhk ULhk')
+    (SV : EV ⥤ LV) (SV' : EV' ⥤ LV') (eSV : HEq SV SV')
+    (SW : EW ⥤ LW) (SW' : EW' ⥤ LW') (eSW : HEq SW SW')
+    (SZ : EZ ⥤ LZ) (SZ' : EZ' ⥤ LZ') (eSZ : HEq SZ SZ')
+    (gh : UEh ⋙ SZ ≅ SW ⋙ ULh) (gh' : UEh' ⋙ SZ' ≅ SW' ⋙ ULh') (egh : HEq gh gh')
+    (gk : UEk ⋙ SW ≅ SV ⋙ ULk) (gk' : UEk' ⋙ SW' ≅ SV' ⋙ ULk') (egk : HEq gk gk')
+    (ghk : UEhk ⋙ SZ ≅ SV ⋙ ULhk) (ghk' : UEhk' ⋙ SZ' ≅ SV' ⋙ ULhk') (eghk : HEq ghk ghk')
+    (aE : UEhk ≅ UEk ⋙ UEh) (aE' : UEhk' ≅ UEk' ⋙ UEh') (eaE : HEq aE aE')
+    (aL : ULhk ≅ ULk ⋙ ULh) (aL' : ULhk' ≅ ULk' ⋙ ULh') (eaL : HEq aL aL')
+    (mixed : Functor.whiskerRight aE'.hom SZ' ≫ Functor.whiskerLeft UEk' gh'.hom ≫
+        Functor.whiskerRight gk'.hom ULh' = ghk'.hom ≫ Functor.whiskerLeft SV' aL'.hom)
+    (M : EV) :
+    SZ.map (aE.hom.app M) ≫ gh.hom.app (UEk.obj M) ≫ ULh.map (gk.hom.app M) =
+      ghk.hom.app M ≫ aL.hom.app (SV.obj M) := by
+  subst eEV eEW eEZ eLV eLW eLZ
+  obtain rfl := eq_of_heq eiEV
+  obtain rfl := eq_of_heq eiEW
+  obtain rfl := eq_of_heq eiEZ
+  obtain rfl := eq_of_heq eiLV
+  obtain rfl := eq_of_heq eiLW
+  obtain rfl := eq_of_heq eiLZ
+  obtain rfl := eq_of_heq eUEk
+  obtain rfl := eq_of_heq eUEh
+  obtain rfl := eq_of_heq eUEhk
+  obtain rfl := eq_of_heq eULk
+  obtain rfl := eq_of_heq eULh
+  obtain rfl := eq_of_heq eULhk
+  obtain rfl := eq_of_heq eSV
+  obtain rfl := eq_of_heq eSW
+  obtain rfl := eq_of_heq eSZ
+  obtain rfl := eq_of_heq egh
+  obtain rfl := eq_of_heq egk
+  obtain rfl := eq_of_heq eghk
+  obtain rfl := eq_of_heq eaE
+  obtain rfl := eq_of_heq eaL
+  exact NatTrans.congr_app mixed M
 
 set_option profiler true in
-private theorem integralComparisonSystemScalarPullback_finite_mixed
-    {V W Z : Scheme.{u}}
-    [∀ v : V, Invertible (l : V.residueField v)]
-    [∀ w : W, Invertible (l : W.residueField w)]
-    [∀ z : Z, Invertible (l : Z.residueField z)]
-    (h : Z ⟶ W) (k : W ⟶ V)
-    (M : coefficientSequenceDerived l E V) :
-    (integralCompositionFiniteScalar l E L ι Z).map
-        ((integralComparisonSystemComposition l E h k).hom.app M) ≫
-      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
-        ((finiteSystemDerivedPullback (integralSystemRings l E)
-          (integralSystemTransition l E) k).obj M) ≫
-      (finiteSystemDerivedPullback (integralSystemRings l L)
-        (integralSystemTransition l L) h).map
-          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
-      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
-        (integralComparisonSystemComposition l L h k).hom.app
-          ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  have mixed := integralCompositionSequence_mixed l E L ι h k M
-  simp only [← integralCompositionPullback_eq] at mixed
-  exact mixed
-
-private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
-    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
-    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
-    (finiteSystemDerivedComposition (integralSystemRings l E)
-      (integralSystemTransition l E) h k).hom.app M =
-        (integralComparisonSystemComposition l E h k).hom.app M := by
-  exact NatTrans.congr_app (congrArg Iso.hom
-    (finiteSystemDerivedComposition_eq_integralComparison l E h k)) M
-
-private theorem scalar_mixed_of_compositor_eq {C D : Type*} [Category C] [Category D]
-    (F : C ⥤ D) {A B : C} {X Y Z : D} {a a' : A ⟶ B}
-    {g : F.obj B ⟶ X} {k : X ⟶ Y} {s : F.obj A ⟶ Z} {b b' : Z ⟶ Y}
-    (ha : a = a') (hb : b = b') (h : F.map a' ≫ g ≫ k = s ≫ b') :
-    F.map a ≫ g ≫ k = s ≫ b := by
-  rw [ha, hb]
-  exact h
-
 private theorem integralCompositionFinite_mixed
     {V W Z : Scheme.{u}}
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -288,12 +279,52 @@ private theorem integralCompositionFinite_mixed
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
-  apply scalar_mixed_of_compositor_eq (integralCompositionFiniteScalar l E L ι Z)
-    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
-    (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
-      ((integralCompositionFiniteScalar l E L ι V).obj M))
-  exact integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M
-
+  refine scalar_mixed_component_heq
+    (by rfl) (by exact HEq.rfl)
+    (by rfl) (by exact HEq.rfl)
+    (by rfl) (by exact HEq.rfl)
+    (by rfl) (by exact HEq.rfl)
+    (by rfl) (by exact HEq.rfl)
+    (by rfl) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l E)
+      (integralSystemTransition l E) k)
+    (integralComparisonDerivedSequencePullback l E k) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l E)
+      (integralSystemTransition l E) h)
+    (integralComparisonDerivedSequencePullback l E h) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l E)
+      (integralSystemTransition l E) (h ≫ k))
+    (integralComparisonDerivedSequencePullback l E (h ≫ k)) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l L)
+      (integralSystemTransition l L) k)
+    (integralComparisonDerivedSequencePullback l L k) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l L)
+      (integralSystemTransition l L) h)
+    (integralComparisonDerivedSequencePullback l L h) (by exact HEq.rfl)
+    (finiteSystemDerivedPullback (integralSystemRings l L)
+      (integralSystemTransition l L) (h ≫ k))
+    (integralComparisonDerivedSequencePullback l L (h ≫ k)) (by exact HEq.rfl)
+    (integralCompositionFiniteScalar l E L ι V)
+    (integralComparisonDerivedSequenceScalar l E L ι V) (by exact HEq.rfl)
+    (integralCompositionFiniteScalar l E L ι W)
+    (integralComparisonDerivedSequenceScalar l E L ι W) (by exact HEq.rfl)
+    (integralCompositionFiniteScalar l E L ι Z)
+    (integralComparisonDerivedSequenceScalar l E L ι Z) (by exact HEq.rfl)
+    (integralCompositionFiniteScalarPullback l E L ι h)
+    (integralComparisonSystemScalarPullback l E L ι h) (by exact HEq.rfl)
+    (integralCompositionFiniteScalarPullback l E L ι k)
+    (integralComparisonSystemScalarPullback l E L ι k) (by exact HEq.rfl)
+    (integralCompositionFiniteScalarPullback l E L ι (h ≫ k))
+    (integralComparisonSystemScalarPullback l E L ι (h ≫ k)) (by exact HEq.rfl)
+    (finiteSystemDerivedComposition (integralSystemRings l E)
+      (integralSystemTransition l E) h k)
+    (integralComparisonSystemComposition l E h k)
+    (heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l E h k))
+    (finiteSystemDerivedComposition (integralSystemRings l L)
+      (integralSystemTransition l L) h k)
+    (integralComparisonSystemComposition l L h k)
+    (heq_of_eq (finiteSystemDerivedComposition_eq_integralComparison l L h k))
+    ((integralQuotientMixedCoherence.{u, u} l).derived_mixed E L ι h k) M
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
