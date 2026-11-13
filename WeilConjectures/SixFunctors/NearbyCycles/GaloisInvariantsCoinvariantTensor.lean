@@ -336,12 +336,13 @@ private theorem tensor_property_of_coinvariant
     (T₀ : Type) [TopologicalSpace T₀] [Field T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀]
     [Finite T₀] {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
     (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
-    {Z : Scheme.{u}}
+    [QuasiCompact N.j] [QuasiSeparated N.j] {Z : Scheme.{u}}
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X))) (f' : Z ⟶ X')
     (r : ((N.galoisLayer h Ω).nearbyCycles (Profinite.continuousMapRingObj T₀)).obj
       (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) ⟶
-        (N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C)
+        L((𝟙 X')^*⟦Profinite.continuousMapRingObj T₀⟧).obj
+          ((N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C))
     {κ : Type*} (act : κ → (Ω ≃ₐ[L] Ω))
     (hcoinv : ∀ {Z : Scheme.{u}}
       (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
@@ -459,9 +460,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
-  exact exists_retraction_transfer
+  exact exists_retraction_transfer _
     (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
       hact)
-    (fun r hcoinv ↦ tensor_property_of_coinvariant T₀ N h Ω C f' r hcoinv act)
+    (fun r hcoinv ↦ tensor_property_of_coinvariant T₀ N h Ω C f' r act hcoinv)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
