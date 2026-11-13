@@ -43,8 +43,7 @@ private theorem naturalEquiv_add
     S.map biprod.snd (b (E ⊞ E) p) = _
   rw [← hb, ← hb, hp₁, hp₂]
 
-set_option maxHeartbeats 1000000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- Nested derived functors and the affine adjunction require extra elaboration heartbeats.
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
