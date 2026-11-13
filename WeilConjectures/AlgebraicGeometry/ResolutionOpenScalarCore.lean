@@ -26,9 +26,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- Comparing the two exact homology calculations needs additional elaboration.
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.
 (blueprint: lem-pc-resolution-open-scalar-core).
@@ -102,9 +100,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
         f.app W ≫ (f ⁻¹ᵁ W).topIso.inv := by
       rw [← hb]
       simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    change (eA.inv ≫ raw) ((((Scheme.ΓSpecIso Γ(T, W)).inv ≫ h.appTop).hom
-      (a ^ n)) • y) = a ^ n • (show (sectionCohomologyPresheaf K q).obj (op W) from
-        (eA.inv ≫ raw) y) at hs
+    dsimp only at hs
     rw [hb', map_pow] at hs
     exact hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj
