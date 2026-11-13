@@ -347,10 +347,14 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     subst F
     obtain ⟨adj, _⟩ := Scheme.Modules.exists_tensorPullbackAdjunction g
     exact ⟨_, ⟨adj⟩⟩
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  let : Fc.Monoidal := Functor.mapCochainComplexMonoidal F
   have hφeq (K L : CochainComplex
       (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ) :
       (φ K L).hom =
-        ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app K).app L := by
+        Functor.OplaxMonoidal.δ Fc K L := by
+    change (φ K L).hom =
+      ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app K).app L
     ext n : 1
     apply HomologicalComplex.mapBifunctor.hom_ext_of_map F
     intro p q h
@@ -360,8 +364,6 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
     rw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
     rfl
   have hεiso := pullback_counit_isIso g F hF hmap ε hε
-  let Fc := F.mapHomologicalComplex (.up ℤ)
-  let : Fc.Monoidal := Functor.mapCochainComplexMonoidal F
   let QX := DerivedCategory.Q
     (C := SheafOfModules.{uModel} (moduleRings X.toRingedSpace))
   let QT := DerivedCategory.Q
@@ -379,7 +381,7 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
           Functor.LaxMonoidal.μ QT (Fc.obj K) (Fc.obj L) =
         (derivedPullback g).map (Functor.LaxMonoidal.μ QX K L) ≫ e (K ⊗ L) ≫
           QT.map (Functor.OplaxMonoidal.δ Fc K L) := by
-    rw [Functor.mapCochainComplex_δ, ← hφeq K L, ← Iso.inv_comp_eq]
+    rw [← hφeq K L, ← Iso.inv_comp_eq]
     exact (hμ K L hK hL).symm
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
