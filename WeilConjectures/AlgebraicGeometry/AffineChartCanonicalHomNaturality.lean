@@ -175,28 +175,27 @@ theorem affine_chart_canonical_hom_naturality
                 (ModuleCat.extendScalars r₁).map s ≫
                 (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s) := by
   classical
-  let rep := (OrderEmbedding.ofAntisymmetrization
-    (α := {k : I // j ≤ k})).monotone.functor
-  let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))
-  let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ
-  let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})
-  let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by
-    let k := rep.obj t
-    let r := Spec.map (R.map (homOfLE k.property))
-    change ModuleCat.{u} Γ(pullback r g, ⊤)
-    exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)
-  let P := B M
-  let Q := B N
-  obtain ⟨δM, δN, ρ₀, e₀M, e₀N, α, _h₀M, h₀N, n₀M, n₀N, hα, hx⟩ :=
-    affine_chart_normalized_section_models R c hc i f j hij U a ha M N hMq hNq
+  intro rep g F t B P Q r₀ q₀
+  have models := affine_chart_normalized_section_models R c hc i f j hij U a ha M N hMq hNq
+  let δM := models.choose
+  let δN := models.choose_spec.choose
+  let ρ₀ := models.choose_spec.choose_spec.choose
+  let e₀M := models.choose_spec.choose_spec.choose_spec.choose
+  let e₀N := models.choose_spec.choose_spec.choose_spec.choose_spec.choose
+  let α := models.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose
+  have h₀ := models.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec.choose_spec
   refine ⟨α, ?_⟩
   intro x htx
-  obtain ⟨ρₓ, eₓM, eₓN, β, hₓM, hₓN, nₓM, nₓN, hβ, hAffine, hRing⟩ := hx x htx
+  have stage := h₀.2.2.2.2.2 x htx
+  let ρₓ := stage.choose
+  let eₓM := stage.choose_spec.choose
+  let eₓN := stage.choose_spec.choose_spec.choose
+  let β := stage.choose_spec.choose_spec.choose_spec.choose
+  have hₓ := stage.choose_spec.choose_spec.choose_spec.choose_spec
   refine ⟨β, ?_⟩
   intro s
   let r := (F.map (homOfLE htx)).hom
   let r₁ := (colimit.ι F x).hom
-  let r₀ := (colimit.ι F t).hom
   let cP := colimitScalarExtensionComp F (homOfLE htx) P
   let cQ := colimitScalarExtensionComp F (homOfLE htx) Q
   let τ := cP.hom ≫ (ModuleCat.extendScalars r₁).map s ≫ cQ.inv
@@ -210,9 +209,10 @@ theorem affine_chart_canonical_hom_naturality
       (colimitScalarExtensionComp_one_tmul F (homOfLE htx) P m)).trans
         (ModuleCat.ExtendScalars.map_tmul r₁ s 1 _)
   apply affine_chart_tensor_coordinate_recovery r r₁ r₀ _ _ _ _ U a M N hMq P Q
-    δM δN ρ₀ ρₓ e₀M e₀N eₓM eₓN h₀N hₓM hₓN n₀M n₀N nₓM nₓN hAffine
+    δM δN ρ₀ ρₓ e₀M e₀N eₓM eₓN h₀.2.1 hₓ.1 hₓ.2.1
+    h₀.2.2.1 h₀.2.2.2.1 hₓ.2.2.1 hₓ.2.2.2.1 hₓ.2.2.2.2.2.1
     cQ (colimitScalarExtensionComp_one_tmul F (homOfLE htx) Q)
-    τ s hτ (α τ) (β s) (hα τ) (hβ s)
-  exact hRing
+    τ s hτ (α τ) (β s) (h₀.2.2.2.2.1 τ) (hₓ.2.2.2.2.1 s)
+  exact hₓ.2.2.2.2.2.2
 
 end AlgebraicGeometry

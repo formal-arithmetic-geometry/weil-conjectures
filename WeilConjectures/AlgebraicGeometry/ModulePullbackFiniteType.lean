@@ -74,6 +74,15 @@ theorem tensorPullback_isFiniteType (X Y : Scheme.{u}) (f : X ⟶ Y) (G : Y.Modu
               ((tensorPullback f).obj G).over ((TopologicalSpace.Opens.map f.base).obj V),
             Epi ψ := by
   classical
+  -- These instances are shared by the free modules and local generators below.
+  have : ∀ V : Y.Opens, HasSheafify ((TopologicalSpace.Opens.grothendieckTopology Y).over V)
+      AddCommGrpCat.{u} := inferInstance
+  have : ∀ V : Y.Opens, ((TopologicalSpace.Opens.grothendieckTopology Y).over V).
+      WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+  have : ∀ U : X.Opens, HasSheafify ((TopologicalSpace.Opens.grothendieckTopology X).over U)
+      AddCommGrpCat.{u} := inferInstance
+  have : ∀ U : X.Opens, ((TopologicalSpace.Opens.grothendieckTopology X).over U).
+      WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
   have hlocal : ∀ (V : Y.Opens) (n : ℕ)
       (φ : SheafOfModules.free (R := Y.ringCatSheaf.over V) (ULift.{u} (Fin n)) ⟶
         G.over V), Epi φ → ∃ ψ : SheafOfModules.free

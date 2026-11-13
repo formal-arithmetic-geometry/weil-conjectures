@@ -61,6 +61,19 @@ theorem coherent_kernel_intersection_finiteType
   let Z : X.Opens := U.ι ''ᵁ V
   have hZ : Z = W ⊓ U := by
     simp [Z, V, Scheme.Hom.image_preimage_eq_opensRange_inf, inf_comm]
+  -- Reuse sheafification instances throughout the over-site comparisons.
+  have : HasSheafify ((Opens.grothendieckTopology X).over W) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology X).over W).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify ((Opens.grothendieckTopology X).over Z) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology X).over Z).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify ((Opens.grothendieckTopology U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology U).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
   let i : Z ⟶ W := homOfLE (by rw [hZ]; exact inf_le_left)
   let A : SheafOfModules.{u} (X.ringCatSheaf.over W) ⥤
       SheafOfModules.{u} (X.ringCatSheaf.over Z) :=
