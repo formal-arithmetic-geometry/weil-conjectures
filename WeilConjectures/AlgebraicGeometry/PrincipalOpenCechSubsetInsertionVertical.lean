@@ -74,7 +74,9 @@ private theorem verticalTotal_conjugate {R : Type u} [Ring R]
       p.negOnePow • (a ≫ e'.inv ≫ K.ιTotal (ComplexShape.up ℤ) p q' (n + 1) hpq') := by
   rw [HomologicalComplex₂.ι_D₂, K.d₂_eq (ComplexShape.up ℤ) p hqq' (n + 1) hpq', hd]
   simp only [ComplexShape.ε₂, Linear.comp_units_smul, Category.assoc, Iso.inv_hom_id_assoc]
+  rfl
 
+set_option profiler true in
 private theorem principalSubsetInsertOne_vertical
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex (Spec (.of A)).Modules ℤ) :
