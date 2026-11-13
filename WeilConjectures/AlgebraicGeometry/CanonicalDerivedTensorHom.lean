@@ -115,6 +115,9 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     have hmap := (congrArg DerivedCategory.Qh.map hφ).trans hv
     have hn := (DerivedCategory.quotientCompQhIso_hom_naturality φ).symm.trans
       (congrArg (fun v ↦ v ≫ (d.app _).hom) hmap)
+    change (d.app P).hom ≫ Q.map φ =
+      ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app (homComplex (R := X.sheaf) Lc I)).inv) ≫
+        (d.app (homComplex (R := X.sheaf) Lc I)).hom at hn
     apply (cancel_epi (d.app P).hom).1
     simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using hn
   have hg : Q.map φ ≫ j.inv = g := by
