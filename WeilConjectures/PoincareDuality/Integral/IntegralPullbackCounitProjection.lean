@@ -152,8 +152,14 @@ private theorem counit_projection_map_component
       simp only [Functor.map_comp, Category.assoc]
     _ = R.map (a ≫ t ≫ e) := by
       rw [ht]
-      simp only [Functor.map_comp, Category.assoc]
+      simp only [Functor.map_comp]
     _ = _ := congrArg R.map hf
+
+private theorem counit_projection_transport
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D}
+    (α : F ⟶ G) {X Y : C} (e : X ≅ Y) :
+    α.app Y = F.map e.inv ≫ α.app X ≫ G.map e.hom := by
+  rw [← α.naturality, ← F.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp]
 
 set_option profiler true in
 /-- Evaluating normalized realization followed by the coherent counit gives
@@ -270,7 +276,7 @@ theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
     apply counit_projection_map_component R (V.map a) _ _ r _ _
       (B.map (coefficientFiniteReductionModel l E Y P.obj hP n).inv) _ b
     · exact integralPullbackStrictFiniteComponent l E f P.obj C κ q hq n
-    · simpa only [Category.assoc] using hf
+    · simpa only [V, β, B, Category.assoc] using hf
   have hm' : M.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫
       (coefficientSequenceLimit l E X).map a ≫
       (integralComparisonRoosBridge l E X ρ D).hom ≫
@@ -295,17 +301,6 @@ theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
       B.obj ((scalarReductionDerivedExtension l E Y n).obj K) :=
     β.hom.app (S.reduction.obj K) ≫
     B.map ((S.reductionEvaluation n).hom.app K)
-  have hb : V.map (F.map (S.reduction.map e.hom)) ≫ bK =
-      b ≫ B.map ((scalarReductionDerivedExtension l E Y n).map e.hom) := by
-    dsimp only [bK, b]
-    have he := β.hom.naturality (S.reduction.map e.hom)
-    have hs := (S.reductionEvaluation n).hom.naturality e.hom
-    dsimp only [Functor.comp_map] at he hs
-    erw [reassoc_of% he]
-    dsimp only [B]
-    simp only [Category.assoc, ← Functor.map_comp]
-    erw [hs]
-    rfl
   change (T.reductionEvaluation n).inv.app ((integralDerivedPullback l E f).obj K) ≫
     V.map (T.reduction.map (M.realization.hom.app K) ≫
       T.adjunction.counit.app (F.obj (S.reduction.obj K))) ≫ bK = _
@@ -325,18 +320,19 @@ theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [Adjunction.homEquiv_naturality_right]
   dsimp only [coefficientFiniteAdjunction]
   erw [Equiv.apply_symm_apply]
-  apply (cancel_epi ((integralDerivedPullback l E f).map e.hom)).1
-  simp only [← Category.assoc]
-  rw [← (integralDerivedPullback l E f).map_comp, e.hom_inv_id,
-    (integralDerivedPullback l E f).map_id, Category.id_comp]
-  have hn := M.realization.hom.naturality e.hom
-  dsimp only [Functor.comp_map] at hn
-  rw [hn]
-  simp only [Category.assoc]
-  erw [reassoc_of% ((coefficientSequenceProjection l E X n).naturality
-    (F.map (S.reduction.map e.hom)))]
-  erw [← R.map_comp, hb, R.map_comp]
-  erw [reassoc_of% hproj]
-  simp only [c, r, R, B, Functor.map_comp, Category.assoc]
+  have htransport := counit_projection_transport
+    (M.realization.hom ≫
+      whiskerLeft (S.reduction ⋙ F) (coefficientSequenceProjection l E X n) ≫
+      whiskerRight (whiskerLeft S.reduction β.hom ≫
+        whiskerRight (S.reductionEvaluation n).hom B) R) e
+  change M.realization.hom.app K ≫
+      (coefficientSequenceProjection l E X n).app (F.obj (S.reduction.obj K)) ≫
+      R.map bK = (integralDerivedPullback l E f).map e.inv ≫
+        (M.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫
+          (coefficientSequenceProjection l E X n).app
+            (F.obj (S.reduction.obj (DerivedCategory.Q.obj P.obj))) ≫ R.map b) ≫
+        R.map (B.map ((scalarReductionDerivedExtension l E Y n).map e.hom)) at htransport
+  rw [hproj] at htransport
+  simpa only [c, r, R, B, Functor.map_comp, Category.assoc] using htransport
 
 end WeilConjectures
