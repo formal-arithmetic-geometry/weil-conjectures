@@ -154,7 +154,11 @@ theorem GaloisCover.stalk_normalization_trait_section_chart_generic_factor {S C 
               Spec.map (CommRingCat.ofHom (algebraMap K
                 (AdjoinRoot ((Polynomial.X : Polynomial K) ^ e -
                   Polynomial.C (π : K))))) := by
-  intro hPA hQC a n τ hn x hx B J
+  let : IsFinite PA.obj.hom := PA.property
+  let : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  intro a n τ hn x hx B J
   obtain ⟨R, hR, f, e, he, hf, hD, β, hβlocal, hβflat, hlocal, hJ,
       A, hA, hAtrait, K, hK, hAK, hfrac, ϖ, π, b, hϖ, hπ, g, hg, hw⟩ :=
     GaloisCover.stalk_normalization_trait_section_root_presentation
