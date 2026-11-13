@@ -81,9 +81,9 @@ private lemma pushHom_fac_of_comparison_units
     (hV : k ≫ v₁ = v₀ ≫ V.map b) (hxy : y ≫ k = p ≫ q) :
     G.map u ≫ ((mateEquiv adjX adjY).symm β).app Z ≫ P'.map cX = cY ≫ b ≫ r := by
   apply pushHom_fac_of_unit_compatibility adjX adjY P P' β
-  rw [hX, Functor.map_comp, ← Category.assoc, ← hP]
+  rw [hX, Functor.map_comp]
   simp only [Category.assoc]
-  rw [hβ, ← reassoc_of% hY, ← reassoc_of% hV, reassoc_of% hxy]
+  rw [← reassoc_of% hP, hβ, reassoc_of% hY, ← reassoc_of% hV, reassoc_of% hxy]
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
