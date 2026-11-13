@@ -148,6 +148,7 @@ end SiteHelpers
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 -- Transport across iterated slice sites requires additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
@@ -191,7 +192,13 @@ theorem module_binary_local_properties
     let E := Over.iteratedSliceEquiv (Over.mk (homOfLE hA : A ⟶ W ⊔ V))
     have : E.inverse.IsDenseSubsite (J.over A)
         ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) := by
-      infer_instance
+      refine { functorPushforward_mem_iff := ?_ }
+      intro T S
+      simp only [E, GrothendieckTopology.mem_over_iff, Sieve.overEquiv,
+        RelIso.coe_fn_mk, Equiv.coe_fn_mk]
+      dsimp [Over.iteratedSliceEquiv]
+      rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
+      rfl
     have : E.functor.IsContinuous
         ((J.over (W ⊔ V)).over (Over.mk (homOfLE hA : A ⟶ W ⊔ V))) (J.over A) := by
       infer_instance

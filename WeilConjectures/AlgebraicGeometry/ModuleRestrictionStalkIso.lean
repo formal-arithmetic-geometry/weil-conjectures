@@ -35,13 +35,13 @@ private theorem bijective_of_restrict_germ
         S.presheaf.germ (U.isOpenEmbedding.isOpenMap.functor.obj V) x
           ⟨⟨x, hx⟩, hV, rfl⟩ (d.hom.app (Opposite.op V) s)) :
     Function.Bijective c := by
-  let e := (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} ⟨x, hx⟩).mapIso d ≪≫
+  let e := (TopCat.Presheaf.stalkFunctor (X := TopCat.of U) AddCommGrpCat.{u} ⟨x, hx⟩).mapIso d ≪≫
     S.restrictStalkIso U.isOpenEmbedding ⟨x, hx⟩
   have he (m : N.stalk ⟨x, hx⟩) : c m = e.hom m := by
     obtain ⟨V, hV, s, rfl⟩ := TopCat.Presheaf.exists_germ_eq N m
     change c (N.germ V ⟨x, hx⟩ hV s) =
       (S.restrictStalkIso U.isOpenEmbedding ⟨x, hx⟩).hom
-        ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} ⟨x, hx⟩).map d.hom
+        ((TopCat.Presheaf.stalkFunctor (X := TopCat.of U) AddCommGrpCat.{u} ⟨x, hx⟩).map d.hom
           (N.germ V ⟨x, hx⟩ hV s))
     rw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
     exact (hc V hV s).trans
@@ -53,6 +53,7 @@ private theorem bijective_of_restrict_germ
   exact hb
 
 -- Identifying the slice-site restriction with the subspace presheaf unfolds colimit instances.
+set_option profiler true in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

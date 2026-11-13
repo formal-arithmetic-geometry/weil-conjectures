@@ -52,6 +52,7 @@ private theorem exists_epi_kernel_pullback_snd
     isIso_kernel_map_of_isPullback (IsPullback.of_hasPullback g q).flip
   exact ⟨a ≫ b, inferInstance⟩
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 -- Unfold the slice restriction functor in the kernel and pullback comparisons.
 /-- Finite-free replacement for cokernel relations on a neighbourhood of each point.
