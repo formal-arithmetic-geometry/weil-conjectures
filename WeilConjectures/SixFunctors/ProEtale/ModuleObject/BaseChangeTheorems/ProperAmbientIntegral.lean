@@ -65,9 +65,8 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
   have hθ (K : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
       ((boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ
         sq).hom.app K).hom =
-        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq').hom.app K.obj :=
-    boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicIntegersRingObj ℓ E) sq K
+        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq').hom.app K.obj := by
+    rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison]
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
@@ -85,7 +84,8 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight_padicIn
     (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) ℓ sq)
     hθ K
   rw [← key, ObjectProperty.isIso_hom_iff]
-  exact hres
+  convert hres using 3
+  all_goals rfl
 
 /-- **Proper base change on the ambient derived categories** (blueprint
 `det-thm-sfb-proper-base-change-integral` (3), for `𝒪_E`-coefficients): for a cartesian square
