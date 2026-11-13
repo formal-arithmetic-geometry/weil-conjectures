@@ -145,20 +145,8 @@ theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
           Algebra.TensorProduct.includeRight (R := R) (A := B)
             (ULift.up (Ideal.Quotient.mk J (d.includeX p))) := by
   classical
-  dsimp only
-  let J : Ideal d.polynomial := Ideal.span (Set.range (fun i : Fin d.m ⊕ Fin d.m ↦
-    match i with
-    | .inl j => d.equation (.inl j)
-    | .inr l => d.equation (.inr (k, l))))
+  intro J L β I
   let Rbar := R ⧸ Ideal.span ({π ^ 2} : Set R)
-  let L := B ⊗[Rbar] d.reducedQuotient
-  let β : MvPolynomial (Fin d.n) R →+* L :=
-    (Algebra.TensorProduct.includeRight (R := Rbar) (A := B)).toRingHom.comp
-      ((Ideal.Quotient.mk d.reducedIdeal).comp
-        (MvPolynomial.map (Ideal.Quotient.mk (Ideal.span ({π ^ 2} : Set R)))))
-  let I : Ideal (MvPolynomial (Fin d.m) L) := Ideal.span (Set.range (fun l ↦
-    MvPolynomial.C (β (d.a k)) * MvPolynomial.X l -
-      ∑ j : d.E k, MvPolynomial.C (β (d.h k l j)) * MvPolynomial.X (j : Fin d.m)))
   let mapB := MvPolynomial.map (σ := Fin d.n) (algebraMap R B)
   let F : Ideal (MvPolynomial (Fin d.n) B) :=
     Ideal.span (Set.range (fun j ↦ mapB (d.f j)))
@@ -182,7 +170,8 @@ theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     simp only [reducedIdeal, Ideal.map_span, ← Set.range_comp,
       Function.comp_def]
     exact congrArg Ideal.span (congrArg Set.range (funext (fun j ↦ hmapred (d.f j))))
-  obtain ⟨c₀, hc₀⟩ := baseChangeQuotient Rbar B (Fin d.n) d.reducedIdeal
+  let c₀ := (baseChangeQuotient Rbar B (Fin d.n) d.reducedIdeal).choose
+  have hc₀ := (baseChangeQuotient Rbar B (Fin d.n) d.reducedIdeal).choose_spec
   let c : L ≃ₐ[B] (MvPolynomial (Fin d.n) B ⧸ F) :=
     c₀.trans (Ideal.quotientEquivAlgOfEq B hF)
   have hc (p : MvPolynomial (Fin d.n) R) : c (β p) = Ideal.Quotient.mk F (mapB p) := by
@@ -198,7 +187,8 @@ theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     funext l
     simp [Function.comp_def, linear, q, cp, MvPolynomial.mapAlgEquiv_apply, hc]
   let ec := Ideal.quotientEquivAlg I (G.map q) cp hI
-  obtain ⟨ei, hei⟩ := iteratedQuotient B (MvPolynomial (Fin d.n) B) (Fin d.m) F G
+  let ei := (iteratedQuotient B (MvPolynomial (Fin d.n) B) (Fin d.m) F G).choose
+  have hei := (iteratedQuotient B (MvPolynomial (Fin d.n) B) (Fin d.m) F G).choose_spec
   let u := (MvPolynomial.renameEquiv B (Equiv.sumComm (Fin d.n) (Fin d.m))).trans
     (MvPolynomial.sumAlgEquiv B (Fin d.m) (Fin d.n))
   let mapQ := MvPolynomial.map (σ := Fin d.n ⊕ Fin d.m) (algebraMap R B)
@@ -245,7 +235,8 @@ theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     rw [heq, Set.Sum.elim_range, Ideal.span_union]
     simp only [D, F, G, Ideal.map_span, ← Set.range_comp, Function.comp_def]
   let eu := Ideal.quotientEquivAlg H D u huJ
-  obtain ⟨et₀, het₀⟩ := baseChangeQuotient R B (Fin d.n ⊕ Fin d.m) J
+  let et₀ := (baseChangeQuotient R B (Fin d.n ⊕ Fin d.m) J).choose
+  have het₀ := (baseChangeQuotient R B (Fin d.n ⊕ Fin d.m) J).choose_spec
   let euLift : B ⊗[R] (d.polynomial ⧸ J) ≃ₐ[B]
       B ⊗[R] ULift (d.polynomial ⧸ J) :=
     Algebra.TensorProduct.congr (AlgEquiv.refl : B ≃ₐ[B] B)
