@@ -116,6 +116,32 @@ private theorem naturalEquiv_transport_chain
     rw [Category.assoc, ← R.map_comp, Iso.inv_hom_id, R.map_id, Category.comp_id]
   rw [← hψ', hb, hx ψ₀ hψ₀]
 
+private theorem koszulOpenHomStageClass_colimit_of_cycle
+    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
+    [HasDerivedCategory.{v} (ModuleCat.{u} A)]
+    (F : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
+    (e : ℕ) (t : koszulOpenSheafComplex A r f e ⟶ F) :
+    let M := ((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj F
+    let L := (koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat
+    let K := CochainComplex.moduleHomComplex L M
+    let D := koszulCechHomDiagram A r f M
+    let C := koszulCechHomColimit A r f M
+    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
+    let η := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0
+    ∀ (g : L ⟶ M) (ht : koszulOpenHomTranspose A r f F e t = g)
+      (z : K.cycles 0) (hz : K.iCycles 0 z = CochainComplex.HomComplex.Cochain.ofHom g),
+      H.map (DerivedCategory.Q.map (colimit.ι D e))
+          (koszulOpenHomStageClass A r f F e t) =
+        (η.app C).inv (HomologicalComplex.homologyMap (colimit.ι D e) 0
+          (HomologicalComplex.homologyMap (koszulCechHomObjIso A r f M e).inv 0
+            (K.homologyπ 0 z))) := by
+  intro M L K D C H η g ht z hz
+  dsimp only [koszulOpenHomStageClass]
+  rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
+  rw [moduleHomologyFactors_inv_naturality_apply,
+    moduleHomologyFactors_inv_naturality_apply]
+
 set_option profiler true in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
@@ -194,7 +220,6 @@ theorem koszulChain_restriction_formula
   let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
   let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
   let T := (koszulOpenTilde A).mapHomologicalComplex (.up ℤ)
-  let η := DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0
   obtain ⟨b, hb, hchain⟩ := koszulOpenHom_chain_evaluation A r f
   let b' : (R.obj (koszulOpenStructure A) ⟶ R.obj E.obj) ≃+ H.obj (G.obj E.obj) :=
     { b E.obj with map_add' := naturalEquiv_add R (G ⋙ H) _ b hb E.obj }
@@ -206,23 +231,16 @@ theorem koszulChain_restriction_formula
   have hψt : R.map (koszulOpenUnit A r f e) ≫ ψ =
       R.map (DerivedCategory.Q.map t ≫ eF.hom) := by
     rw [hψ]
-    exact congrArg R.map (by simp only [t, Functor.map_comp, Category.assoc])
+    exact congrArg R.map (by simp only [t, T, Functor.map_comp, Category.assoc])
   have htransport := naturalEquiv_transport_chain R (G ⋙ H) (koszulOpenStructure A)
     b hb (koszulOpenUnit A r f e) (DerivedCategory.Q.map t) eF _
       (hchain F hF e t) ψ hψt
   change b E.obj ψ = _
   refine htransport.trans ?_
-  dsimp only [koszulOpenHomStageClass]
-  rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
-  let K := CochainComplex.moduleHomComplex
-    ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M
-  let j := (koszulCechHomObjIso A r f M e).inv
-  change (H.map (G.map eF.hom))
-    ((H.map (koszulCechDerivedComparison A r f F))
-      ((H.map (DerivedCategory.Q.map (colimit.ι D e)))
-        ((H.map (DerivedCategory.Q.map j)) ((η.app K).inv (K.homologyπ 0 z))))) = _
-  rw [moduleHomologyFactors_inv_naturality_apply j,
-    moduleHomologyFactors_inv_naturality_apply (colimit.ι D e)]
+  have hstage := koszulOpenHomStageClass_colimit_of_cycle A r f F e t g ht z hz
+  have hresult := congrArg
+    (fun x ↦ H.map (G.map eF.hom) (H.map (koszulCechDerivedComparison A r f F) x)) hstage
+  refine hresult.trans ?_
   simp only [β, Functor.map_comp, ModuleCat.comp_apply]
 
 end AlgebraicGeometry
