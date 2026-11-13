@@ -160,7 +160,6 @@ theorem completedAdicOrdinaryTower_map_succ (N : CompletedAdicModules X d) (n : 
   rw [Functor.ofOpSequence_map_homOfLE_succ]
   rfl
 
-set_option profiler true in
 /-- Under the tensor identifications, the ordinary quotient transition is the transition of the
 strict ordinary tensor tower. -/
 theorem finitePerfectAdicQuotientTensorIso_transition (n : ℕ) (N : CompletedAdicModules X d) :
@@ -173,6 +172,7 @@ theorem finitePerfectAdicQuotientTensorIso_transition (n : ℕ) (N : CompletedAd
     (finitePerfectAdicQuotientTensorIso X d (n + 1)).hom.app N ≫
       ((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op := by
   rw [completedAdicOrdinaryTower_map_succ]
+  -- Fix the extension functors before comparing the generic transition with the tower.
   have h := SheafOfModules.changeOfRingsTensorNatIso_transition
     (E₂ := completedAdicChange X (completedAdicCommProjection X d (n + 1)))
     (E₃ := completedAdicChange X (completedAdicCommProjection X d n))
