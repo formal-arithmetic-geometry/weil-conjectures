@@ -108,6 +108,7 @@ variable (F : C₁ ⥤ C₂) [F.Additive] [F.OplaxMonoidal]
   (cL : Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ Qh) [IsIso cL] [NatTrans.CommShift cL ℤ]
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- The factorisation through `Qh` elaborates large composites of whiskered transformations.
 open Functor in
 /-- A natural transformation `τ : LF(Qh X ⊗ᴸ -) ⟶ LF(Qh X) ⊗ᴸ LF(-)` which is compatible, on
@@ -164,6 +165,7 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
     (fun M ↦ ⟨Qh.objPreimage M, (Qh.objObjPreimageIso M).inv, inferInstance⟩)
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- The factorisation through `Qh` elaborates large composites of whiskered transformations.
 open Functor in
 /-- A natural transformation `τ : LF(- ⊗ᴸ Qh X) ⟶ LF(-) ⊗ᴸ LF(Qh X)` which is compatible, on
