@@ -268,7 +268,8 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralComparisonDerivedSequenceScalar l E L ι Z) CE
   have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
-  exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
+  have paste := scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
+  exact paste
 
 end SystemScalar
 
