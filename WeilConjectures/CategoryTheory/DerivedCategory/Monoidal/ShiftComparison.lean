@@ -166,6 +166,10 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
     fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   have : HasCoproducts.{0} C₂ :=
     fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have (X₁ X₂ : GradedObject ℤ C₁) : X₁.HasTensor X₂ :=
+    fun _ ↦ HasColimitsOfShape.has_colimit _
+  have (X₁ X₂ : GradedObject ℤ C₂) : X₁.HasTensor X₂ :=
+    fun _ ↦ HasColimitsOfShape.has_colimit _
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
@@ -213,6 +217,10 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
     fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   have : HasCoproducts.{0} C₂ :=
     fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have (X₁ X₂ : GradedObject ℤ C₁) : X₁.HasTensor X₂ :=
+    fun _ ↦ HasColimitsOfShape.has_colimit _
+  have (X₁ X₂ : GradedObject ℤ C₂) : X₁.HasTensor X₂ :=
+    fun _ ↦ HasColimitsOfShape.has_colimit _
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
