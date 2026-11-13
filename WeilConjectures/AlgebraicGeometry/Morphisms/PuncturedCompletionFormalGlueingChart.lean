@@ -25,8 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The dependent section modules and two pullback presentations require extra elaboration steps.
 /-- The sheaf equalizer identifies matching sections with compatible tuples,
 with the selected coordinate equal to restriction to the corresponding chart.
 
@@ -98,8 +96,9 @@ theorem exists_formalGlueingData_matching_chart
   let : Algebra A Γ(E, ⊤) := aE.toAlgebra
   let : ∀ j, Algebra A Γ(Y, V j) := fun j ↦
     ((Y.presheaf.map (homOfLE (le_top : V j ≤ ⊤)).op).hom.comp aY).toAlgebra
-  obtain ⟨hcover, X, e, d, hmem⟩ :=
-    D.exists_formalGlueingData_affine_datum hU t g hgen
+  have hdatum := D.exists_formalGlueingData_affine_datum hU t g hgen
+  dsimp only at hdatum
+  obtain ⟨hcover, X, e, d, hmem⟩ := hdatum
   let O := pullback q (completionSpecMap A ∣_ U)
   let p : O ⟶ Y := pullback.fst q (completionSpecMap A ∣_ U)
   let F := p.appTop
@@ -230,14 +229,14 @@ theorem exists_formalGlueingData_matching_chart
       rw [hrchart, hJP]
       exact ha j
   let b := (LinearEquiv.ofBijective r ⟨hinj, hsurj⟩).symm
-  obtain ⟨c0, hc0⟩ := D.exists_matching_chart_restriction (g i)
+  have hrestriction := D.exists_matching_chart_restriction (g i)
+  dsimp only at hrestriction
+  obtain ⟨c0, hc0⟩ := hrestriction
   refine ⟨X, b, (d i).trans c0, ?_⟩
   intro h
-  rw [hc0]
-  change c0 (res i (P (b h))) = c0 (d i (h.val.2 i))
-  congr 1
   have hb : r (b h) = h := (LinearEquiv.ofBijective r ⟨hinj, hsurj⟩).apply_symm_apply h
-  exact (hrchart (b h) i).symm.trans (congrArg (fun h ↦ d i (h.val.2 i)) hb)
+  exact (hc0 (b h)).trans (congrArg c0
+    ((hrchart (b h) i).symm.trans (congrArg (fun h ↦ d i (h.val.2 i)) hb)))
 
 
 end AlgebraicGeometry.Scheme.CompletionGluingData
