@@ -135,13 +135,15 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
     (Mod.comap (coefficientMap a Y)) (f)^*⟦Λ⟧ Z
   have s5 := (leftDerivedUpperStarIsoMapDerivedCategory Λ f).hom.naturality
     ((Mod.comap (coefficientMap a Y)).mapDerivedCategoryFactorsh.hom.app Z)
-  have s6 := Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_comp_factorsh (f)^*⟦Λ⟧
-    (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z)
+  have s6 := (((leftDerivedUpperStarIsoMapDerivedCategory Λ f).app
+    (DerivedCategory.Qh.obj
+      (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z))).inv_comp_eq.mp
+    (leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ
+      (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z))).symm
   simp only [Functor.map_comp] at s1
   dsimp only [Functor.comp_obj, Functor.comp_map] at s1 s2 s3 s4 s5 s6 ⊢
-  rw [reassoc_of% s1, s2, s3, reassoc_of% s4]
-  simp only [leftDerivedUpperStarIsoMapDerivedCategory] at s5 ⊢
-  rw [← reassoc_of% s5, reassoc_of% s6]
+  simp only [reassoc_of% s1, s2, s3, reassoc_of% s4]
+  simp only [← reassoc_of% s5, reassoc_of% s6]
 
 
 /-- The underived compatibility of (Pull) with the units of `Ext ⊣ Res`
@@ -219,32 +221,20 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have := pullUnit_hasTensor₄ObjExt Λ X
   have := pullUnit_hasGoodTensor₁₂Tensor Λ X
   have := pullUnit_hasGoodTensorTensor₂₃ Λ X
-  set K := (HomotopyCategory.quotient
+  let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
   have : IsIso ((f)^*⟦Λ'⟧.leftDerivedFunctorCounit) := inferInstance
-  have i1 : IsIso (L((f)^*⟦Λ'⟧).map
-      ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)) := inferInstance
-  have i2 : IsIso (((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K)) :=
-    inferInstance
-  have i3 : IsIso (DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-      (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-        (ComplexShape.up ℤ)).hom.app K)) := inferInstance
-  have i4 : IsIso (L((f)^*⟦Λ'⟧).map
+  let c := L((f)^*⟦Λ'⟧).map
       ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
-      ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-        (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-          (ComplexShape.up ℤ)).hom.app K)) := inferInstance
-  refine (cancel_mono (D(Mod.comap (coefficientMap a X)).map
-    (L((f)^*⟦Λ'⟧).map ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K) ≫
-      ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
-        (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
-      DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
-        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
-          (ComplexShape.up ℤ)).hom.app K)))).1 ?_
+    ((f)^*⟦Λ'⟧).leftDerivedFunctorCounit.app
+      (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K) ≫
+    DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
+      (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
+        (ComplexShape.up ℤ)).hom.app K)
+  have : IsIso c := by dsimp only [c]; infer_instance
+  refine (cancel_mono ((D(Mod.comap (coefficientMap a X))).map c)).1 ?_
+  dsimp only [c]
   refine (cancel_mono ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.app
       (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
         (ComplexShape.up ℤ)).obj K))).1 ?_
@@ -311,17 +301,20 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
       DerivedCategory.Q.objObjPreimageIso M
   have h := upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh a f P
     (CochainComplex.kFlat_flatResolutionFunctor_obj _)
-  have n1 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit.naturality
-    e.hom
-  have n2 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
-    (L(Mod.extendScalars (coefficientMap a Y)).map e.hom)
-  have n3 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.naturality
-    (L((f)^*⟦Λ⟧).map e.hom)
-  have n4 := (derivedUpperStarExtendScalarsIso a f).hom.naturality e.hom
-  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at n1 n2 n3 n4
-  rw [← cancel_epi (L((f)^*⟦Λ⟧).map e.hom), ← Functor.map_comp_assoc, n1, Functor.map_comp,
-    Category.assoc, n2, reassoc_of% h, reassoc_of% n3, ← Functor.map_comp, ← Functor.map_comp,
-    n4]
+  let lhs :=
+    Functor.whiskerRight
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)).unit L((f)^*⟦Λ⟧) ≫
+    Functor.whiskerLeft L(Mod.extendScalars (coefficientMap a Y))
+      (derivedComapLeftDerivedUpperStarIso a f).hom
+  let rhs :=
+    Functor.whiskerLeft L((f)^*⟦Λ⟧)
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit ≫
+    Functor.whiskerRight (derivedUpperStarExtendScalarsIso a f).hom
+      D(Mod.comap (coefficientMap a X))
+  change lhs.app M = rhs.app M
+  apply (cancel_epi (L((f)^*⟦Λ⟧).map e.hom)).1
+  rw [lhs.naturality, rhs.naturality]
+  exact congrArg (fun k ↦ k ≫ _) h
 
 end Comap
 
