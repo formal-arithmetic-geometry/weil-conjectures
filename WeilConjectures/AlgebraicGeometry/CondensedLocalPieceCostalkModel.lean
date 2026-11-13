@@ -251,8 +251,6 @@ private theorem localPieceCostalkModelModuleColimits
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := by
   infer_instance
 
-attribute [local instance 2000] localPieceCostalkModelModuleColimits
-
 private theorem localPieceCostalkModelComplexColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -260,8 +258,6 @@ private theorem localPieceCostalkModelComplexColimits
     HasColimitsOfShape I (CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
   infer_instance
-
-attribute [local instance 2000] localPieceCostalkModelComplexColimits
 
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
