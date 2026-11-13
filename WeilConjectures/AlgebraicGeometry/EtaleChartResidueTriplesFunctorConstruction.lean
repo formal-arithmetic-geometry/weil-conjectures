@@ -100,7 +100,6 @@ private lemma affine_triple_properties (A : CommRingCat.{v}) (p : Spec A)
     simpa only [Spec.map_comp, Category.assoc] using
       (congrArg (fun f ↦ f ≫ Spec.map ((ΓSpecIso A).inv ≫ g.appTop)) hp).trans hy'
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source: Stacks Project, proof of Tag 04HX (lemma-describe-etale-local-ring),
 first paragraph, and Tag 04HT (remark-etale-neighbourhoods).

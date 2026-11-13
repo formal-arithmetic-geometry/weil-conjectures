@@ -32,7 +32,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-set_option trace.profiler true in
 /-- On affine opens W and V with g(W) contained in V, bijectivity of the actual
 resolution comparison is exactly bijectivity of the canonical scalar-extension
 comparison for cohomology over the ring of sections of V.
@@ -114,12 +113,12 @@ theorem Scheme.Modules.flatBaseChangeResolutionBeta_affine_bijective_iff
             (((Scheme.Modules.pushforward f).rightDerived p).obj F)) V
           (D.sourceClass p (eH.symm xi)))) hn
       change _ = b (s • Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi)
-      simp only [b.map_smul, hb_pullback]
+      simp only [b.map_smul]
       congr 1
-      exact hn'.trans (congrArg
+      exact hn'.trans ((congrArg
         (fun z ↦ (((Scheme.Modules.pushforward (pullback.fst g f)).rightDerived p).obj
           ((Scheme.Modules.tensorPullback (pullback.snd g f)).obj F)).presheaf.map
-            (homOfLE e).op z) hs)
+            (homOfLE e).op z) hs).trans (hb_pullback xi).symm)
     | add z z' hz hz' => simp only [map_add, hz, hz']
   have hc : (Scheme.Modules.Hom.app β W : _ → _) ∘ a =
       b ∘ (Scheme.Modules.H.baseChange (S := Γ(S', W)) h N p) := funext hcomm

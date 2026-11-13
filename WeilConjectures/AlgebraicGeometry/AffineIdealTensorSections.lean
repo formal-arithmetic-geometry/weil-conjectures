@@ -24,7 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-set_option trace.profiler true in
 /-- The affine ideal tensor comparison, before identifying its source with `I/I²`.
 Source: Stacks Project, Morphisms, Lemma 01R3 (2), and Schemes, Tag 01I9.
 (blueprint: lem-weil-pbc-affine-ideal-tensor-sections)
@@ -112,6 +111,8 @@ theorem affine_ideal_tensor_sections {X Z : Scheme.{u}} (i : Z ⟶ X)
           simp only [q, map_mul]
           rfl }
     have hqc : i.ker.toModules.IsQuasicoherent := by
+      have := SheafOfModules.isQuasicoherent_unit (R := i.ker.subscheme.ringCatSheaf)
+      have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
       have h := isQuasicoherent_pushforward_of_isClosedImmersion i.ker.subschemeι
         (SheafOfModules.unit i.ker.subscheme.ringCatSheaf)
       have : ((SheafOfModules.pushforward i.ker.subschemeι.toRingCatSheafHom).obj
