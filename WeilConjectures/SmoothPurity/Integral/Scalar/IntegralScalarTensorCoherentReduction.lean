@@ -49,6 +49,7 @@ attribute [local implicit_reducible] integralScalarExtension integralScalarExten
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The proof compares the completed and entire-system derived normalizations.
 /-- The prescribed scalar tensor comparison respects the coherent tensor reductions.
 This assertion contains no braiding or signed-swap equation.
