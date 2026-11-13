@@ -306,13 +306,15 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   simp only [← nδ,
     Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wY hY P hS]
   have d2 := Mod.derivedExtendScalarsTriangleδ_app_Qh_obj_of_shortExact k wX hX _ hS'
-  erw [d2]
+  conv_rhs =>
+    enter [2, 2, 2]
+    erw [d2]
   have Φ :=
     derivedComapLeftDerivedUpperStarIso_hom_app_comp_map_derivedUpperStarExtendScalarsIso_inv
       a f ((HomotopyCategory.quotient _ _).obj P)
-  simp only [Mod.derivedExtendComapComparisonh, Functor.map_comp, Mod.derivedExtendComapComparisonh]
+  rw [Mod.derivedExtendComapComparisonh, Functor.map_comp, Mod.derivedExtendComapComparisonh]
   simp only [Category.assoc]
-  erw [reassoc_of% Φ]
+  conv_rhs => erw [reassoc_of% Φ]
   have : NatTrans.CommShift ((f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory).inv ℤ :=
     Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
   have hG := Functor.leftDerivedFunctor_map_triangleOfSESδ (f)^*⟦Λ⟧ hS
@@ -324,7 +326,9 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫
       (shiftFunctor _ (1 : ℤ)).map
         (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P)) = _ := hG
-  rw [hG']
+  conv_lhs =>
+    arg 2
+    rw [hG']
   have hV := congrArg DerivedCategory.Qh.map (upperStarExtendComapComplexIso_quotient_map a f P)
   simp only [Functor.map_comp] at hV
   have hq := DerivedCategory.quotientCompQhIso_hom_naturality
