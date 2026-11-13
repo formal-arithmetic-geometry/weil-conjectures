@@ -78,6 +78,15 @@ private theorem idempotent_section_prod
     change (1 - δ) * δ = 0
     rw [sub_mul, one_mul, hδ.eq, sub_self]
 
+private theorem quotient_away_isLocalization
+    {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
+    (r : R) [IsLocalization.Away r S] (I : Ideal R) :
+    IsLocalization.Away (Ideal.Quotient.mk I r) (S ⧸ I.map (algebraMap R S)) := by
+  have h : IsLocalization (Algebra.algebraMapSubmonoid (R ⧸ I) (Submonoid.powers r))
+      (S ⧸ I.map (algebraMap R S)) := inferInstance
+  rw [Algebra.algebraMapSubmonoid_powers] at h
+  exact h
+
 private theorem idempotent_mul_eq_of_localization_eq
     {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
     (δ : R) (hδ : IsIdempotentElem δ) [IsLocalization.Away δ S]
@@ -178,16 +187,8 @@ theorem quotient_section_factor_transfer
     obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
     exact hes x.1
   have hjδ : e (j δ) = (1, 0) := heb
-  let : IsLocalization.Away δ QD := by
-    have h : IsLocalization
-        (Algebra.algebraMapSubmonoid R (Submonoid.powers b)) QD := inferInstance
-    rw [Algebra.algebraMapSubmonoid_powers] at h
-    exact h
-  let : IsLocalization.Away (j δ) QB := by
-    have h : IsLocalization
-        (Algebra.algebraMapSubmonoid (B ⧸ JB) (Submonoid.powers b.1)) QB := inferInstance
-    rw [Algebra.algebraMapSubmonoid_powers] at h
-    exact h
+  let : IsLocalization.Away δ QD := quotient_away_isLocalization (S := LD) b JD
+  let : IsLocalization.Away (j δ) QB := quotient_away_isLocalization (S := LB) b.1 JB
   have H (x y : R) : s x = s y ↔ δ * x = δ * y := by
     constructor
     · intro hxy
@@ -201,7 +202,7 @@ theorem quotient_section_factor_transfer
         apply (IsLocalization.eq_iff_exists (Submonoid.powers (j δ)) QB).mpr
         exact ⟨⟨j δ, Submonoid.mem_powers _⟩, hjxy⟩
       have htD : tD x = tD y := kq.injective ((hcomp x).trans (htB.trans (hcomp y).symm))
-      exact idempotent_mul_eq_of_localization_eq δ hδ htD
+      exact idempotent_mul_eq_of_localization_eq (S := QD) δ hδ htD
     · intro hxy
       simpa only [map_mul, hsδ, one_mul] using congrArg s hxy
   obtain ⟨C, hC, hAC, Φ, hΦδ, hΦs⟩ := idempotent_section_prod s δ hδ hsδ H

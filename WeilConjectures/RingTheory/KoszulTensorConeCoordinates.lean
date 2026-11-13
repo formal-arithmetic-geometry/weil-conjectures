@@ -114,7 +114,6 @@ private theorem boundary_assembly_zero {R : Type u} [CommRing R] {r : ℕ}
   simp only [prefix_map_coe, contract_prefix]
   rfl
 
-set_option trace.profiler true in
 /-- Source: Stacks Project, Tags 0628 and 0629
 (blueprint: lem-weil-pbc-koszul-tensor-cone-coordinates).
 
