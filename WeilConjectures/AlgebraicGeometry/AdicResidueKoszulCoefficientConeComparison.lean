@@ -141,7 +141,7 @@ private theorem normalizedExtendedAugmentationComparison
     (((ChainComplex.single₀ C).obj Z).extendXIso
       ComplexShape.embeddingDownNat (i := 0) rfl) π c q u p
   · simp only [Iso.trans_hom, Iso.symm_hom,
-      HomologicalComplex.extendMap_f _ _ (i := 0) (i' := 0) rfl,
+      HomologicalComplex.extendMap_f f ComplexShape.embeddingDownNat (i := 0) (i' := 0) rfl,
       Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
     exact hf
   · exact mapExtendSingleIso_hom_f_zero E Z q
@@ -301,7 +301,8 @@ theorem adicResidue_koszul_coefficient_cone_comparison
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
-    simp
+    exact congrArg (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
+      ((exteriorPower.zeroEquiv A (Fin r →₀ A)).apply_symm_apply x)
   have hfepi (n : ℕ) : Epi (H.map (f n)) := by
     have : Epi ((εA n).f 0) := by
       rw [hεA n]
