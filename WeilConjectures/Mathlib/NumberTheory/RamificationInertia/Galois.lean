@@ -112,7 +112,7 @@ lemma injective_of_isIntegral {T : Type*} [CommRing T] [IsDomain T] [Algebra R T
   have : x ∈ RingHom.ker ψ.toRingHom := hx
   rwa [hker, Ideal.mem_bot] at this
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **Primes of a cover fixed by inertia are unramified.** Let `T` be a Dedekind domain finite
 over `R`, with an `R`-algebra map `ψ : T → Ω`, and `Q` a maximal ideal of the integral closure of
 `R` in `Ω` over a maximal ideal `m` of `R` with perfect residue field. If the inertia group of `Q`
@@ -220,7 +220,7 @@ theorem ramificationIdx_comap_integralClosureMap_eq_one {T : Type*} [CommRing T]
       have ht := hτ t
       have hiτ : iTB (τ • t) = τ' • b := Subtype.ext (hτ'M ⟨b, hb⟩).symm
       have : iTB (τ • t - t) ∈ Q := ht
-      rwa [map_sub, hiτ] at this
+      rwa [map_sub iTB, hiτ] at this
     have hσL' : L' ≤ IntermediateField.fixedField (Subgroup.zpowers σ) := by
       refine adjoin_le_iff.2 ?_
       rintro _ ⟨x, rfl⟩
