@@ -268,7 +268,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option maxHeartbeats 800000 in
 -- The section calculation passes through total tensor complexes and scalar restriction.
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
 natural in both complexes. Source: Stacks 03EK, 07A4. -/
@@ -310,16 +309,40 @@ theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
     apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{c, v, r} P Q k
     intro p p' hpq V x y
     apply restrictionSection_injective π _ V
-    erw [unit_comp_section, unit_comp_section, comp_section, comp_section, unit_map_section,
-      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}]
-    have h₁ := hs' p p' k hpq V ((f.f p).val.app V x) ((g.f p').val.app V y)
-    have h₂ := hs p p' k hpq V x y
-    beta_reduce at h₁ h₂
-    erw [h₁]
-    conv_rhs => erw [comp_section]
-    erw [h₂, CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r},
-      unit_map_section,
-      unit_map_section]
+    change (s'.hom.f k).val.app V
+        ((F.map (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k)).val.app V
+          (coefficientRestrictionSection π _ V ((a.unit.app _).val.app V
+            (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)))) =
+      (((coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g))).f k).val.app V
+        ((s.hom.f k).val.app V (coefficientRestrictionSection π _ V
+          ((a.unit.app _).val.app V
+            (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))))
+    -- Apply the generator formulas under fixed section maps, avoiding rewrite search
+    -- through the scalar restrictions and total tensor complexes.
+    have hleft := (congrArg ((s'.hom.f k).val.app V)
+      (unit_map_section π a
+        (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) V
+        (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))).trans
+      ((congrArg (fun z ↦ (s'.hom.f k).val.app V
+        (coefficientRestrictionSection π _ V ((a.unit.app _).val.app V z)))
+        (CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
+          f g p p' k hpq V x y)).trans
+        (hs' p p' k hpq V ((f.f p).val.app V x) ((g.f p').val.app V y)))
+    have hright := (congrArg
+      ((((coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g))).f k).val.app V)
+      (hs p p' k hpq V x y)).trans
+      ((CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}
+        ((F.mapHomologicalComplex (.up ℤ)).map f)
+        ((F.mapHomologicalComplex (.up ℤ)).map g) p p' k hpq V _ _).trans
+        (congrArg₂ (coefficientTensorGenerator.{r, c, v} J B
+          ((F.mapHomologicalComplex (.up ℤ)).obj P')
+          ((F.mapHomologicalComplex (.up ℤ)).obj Q') p p' k hpq V)
+          (unit_map_section π a (f.f p) V x) (unit_map_section π a (g.f p') V y)))
+    exact hleft.trans hright.symm
   apply HomologicalComplex.Hom.ext
   funext k
   exact key k
@@ -335,7 +358,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option maxHeartbeats 1600000 in
 -- The section calculation passes through several levels of composite functors.
 /-- The tensor product of two presentations of strict system complexes is again a
 presentation: its finite comparison commutes with the strict transitions.
@@ -456,15 +478,31 @@ theorem tensorPresentation_transition
     apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{c, v, r} P Q k
     intro p p' hpq V x y
     apply restrictionSection_injective pm _ V
-    erw [unit_comp_section, unit_comp_section]
+    change
+      (((evTm ≪≫ (coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm) ≪≫
+          sm.symm).inv.f k) ≫
+        τ.app (((coefficientTotalTensor.{r, c, v} (coefficientSequenceTopology J) R).obj
+          (CP, CQ)).X k) ≫ (SheafOfModules.restrictScalars q).map
+          ((evTn ≪≫ (coefficientTotalTensor.{r, c, v} J Bn).mapIso (κPn.prod κQn) ≪≫
+            sn.symm).hom.f k)).val.app V
+        (coefficientRestrictionSection pm _ V ((am.unit.app _).val.app V
+          (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y))) =
+      (quot.app _).val.app V
+        (coefficientRestrictionSection pm _ V ((am.unit.app _).val.app V
+          (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)))
     apply restrictionSection_injective q _ V
     refine Eq.trans ?_ (hq
       (((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)).X k) V
       (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)).symm
-    obtain ⟨x0, hx0⟩ := hσm (CP.X p) V ((κPm.inv.f p).val.app V
+    have hx := hσm (CP.X p) V ((κPm.inv.f p).val.app V
       (coefficientRestrictionSection pm (Em.obj (P.X p)) V ((am.unit.app (P.X p)).val.app V x)))
-    obtain ⟨y0, hy0⟩ := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
+    have hy := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
       (coefficientRestrictionSection pm (Em.obj (Q.X p')) V ((am.unit.app (Q.X p')).val.app V y)))
+    -- Select the lifts without eliminating existentials in the large section equality.
+    let x0 := hx.choose
+    let y0 := hy.choose
+    have hx0 : σm (CP.X p) V x0 = _ := hx.choose_spec
+    have hy0 : σm (CQ.X p') V y0 = _ := hy.choose_spec
     refine comp_restrict_section q _ _ _ V _
       (σm _ V (coefficientTensorGenerator.{r, c, v} (coefficientSequenceTopology J) R CP CQ
         p p' k hpq (op (m, V.unop)) x0 y0))
@@ -473,29 +511,50 @@ theorem tensorPresentation_transition
         ((CP.X p).val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)
         ((CQ.X p').val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0))) _
       ?_ ?_ ?_
-    · have hs := hsm p p' k hpq V x y
-      beta_reduce at hs
-      erw [trans_symm_inv_section, hs, mapIso_prod_inv_generator, ← hx0, ← hy0,
-        ← hevTm p p' k hpq V x0 y0, iso_hom_inv_section]
-    · rw [hτ, generator_presheaf_restrict]
+    · refine (congrArg ((evTm.inv.f k).val.app V) ?_).trans
+        (iso_hom_inv_section evTm k V _)
+      refine (congrArg
+        ((((coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm)).inv.f k).val.app V)
+        (hsm p p' k hpq V x y)).trans ?_
+      refine (mapIso_prod_inv_generator κPm κQm p p' k hpq V _ _).trans ?_
+      exact (congrArg₂ (coefficientTensorGenerator.{r, c, v} J Bm
+        ((evm.mapHomologicalComplex (.up ℤ)).obj CP)
+        ((evm.mapHomologicalComplex (.up ℤ)).obj CQ) p p' k hpq V)
+        hx0.symm hy0.symm).trans (hevTm p p' k hpq V x0 y0).symm
+    · exact (hτ _ V _).trans (congrArg (σn _ V)
+        (generator_presheaf_restrict R CP CQ p p' k hpq
+          (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0 y0))
     · have hxn : (κPn.hom.f p).val.app V (σn (CP.X p) V ((CP.X p).val.presheaf.map
           (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)) =
           coefficientRestrictionSection pn (En.obj (P.X p)) V
             ((an.unit.app (P.X p)).val.app V x) := by
-        erw [← hτ (CP.X p) V x0, ← restrict_map_section, ← comp_section, hP p, comp_section, hx0,
-          iso_inv_hom_section]
-        exact hq (P.X p) V x
+        have hcomp := congrArg (fun f ↦ coefficientRestrictionSection q _ V
+          (f.val.app V (σm (CP.X p) V x0))) (hP p)
+        have hx := (congrArg ((κPm.hom.f p).val.app V) hx0).trans
+          (iso_inv_hom_section κPm p V _)
+        exact (congrArg ((κPn.hom.f p).val.app V) (hτ (CP.X p) V x0).symm).trans
+          (hcomp.trans ((congrArg (fun z ↦ coefficientRestrictionSection q _ V
+            ((quot.app (P.X p)).val.app V z)) hx).trans (hq (P.X p) V x)))
       have hyn : (κQn.hom.f p').val.app V (σn (CQ.X p') V ((CQ.X p').val.presheaf.map
           (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0)) =
           coefficientRestrictionSection pn (En.obj (Q.X p')) V
             ((an.unit.app (Q.X p')).val.app V y) := by
-        erw [← hτ (CQ.X p') V y0, ← restrict_map_section, ← comp_section, hQ p', comp_section,
-          hy0, iso_inv_hom_section]
-        exact hq (Q.X p') V y
-      have hs' := hsn p p' k hpq V x y
-      beta_reduce at hs'
-      erw [trans_symm_hom_section, hevTn, mapIso_prod_hom_generator, hxn, hyn, ← hs',
-        iso_hom_inv_section]
+        have hcomp := congrArg (fun f ↦ coefficientRestrictionSection q _ V
+          (f.val.app V (σm (CQ.X p') V y0))) (hQ p')
+        have hy := (congrArg ((κQm.hom.f p').val.app V) hy0).trans
+          (iso_inv_hom_section κQm p' V _)
+        exact (congrArg ((κQn.hom.f p').val.app V) (hτ (CQ.X p') V y0).symm).trans
+          (hcomp.trans ((congrArg (fun z ↦ coefficientRestrictionSection q _ V
+            ((quot.app (Q.X p')).val.app V z)) hy).trans (hq (Q.X p') V y)))
+      refine (congrArg ((sn.inv.f k).val.app V) ?_).trans (iso_hom_inv_section sn k V _)
+      refine (congrArg
+        ((((coefficientTotalTensor.{r, c, v} J Bn).mapIso (κPn.prod κQn)).hom.f k).val.app V)
+        (hevTn p p' k hpq V _ _)).trans ?_
+      refine (mapIso_prod_hom_generator κPn κQn p p' k hpq V _ _).trans ?_
+      exact (congrArg₂ (coefficientTensorGenerator.{r, c, v} J Bn
+        ((En.mapHomologicalComplex (.up ℤ)).obj P)
+        ((En.mapHomologicalComplex (.up ℤ)).obj Q) p p' k hpq V)
+        hxn hyn).trans (hsn p p' k hpq V x y).symm
   refine (Iso.inv_comp_eq _).1 ?_
   apply HomologicalComplex.Hom.ext
   funext k
