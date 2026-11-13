@@ -72,9 +72,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-set_option maxHeartbeats 1200000 in
-set_option profiler true in
--- Elaborating the transported coefficient and derived-category instances needs extra heartbeats.
+set_option trace.profiler true in
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
 It does not involve a direct scalar realization model or a derived associator.
@@ -198,7 +196,9 @@ theorem scalarModelIteratedStrictCalculation
     integralOperationsRoosFunctor.map (q.inv ≫ wa.inv)
   have hcoords := scalarTensorRoosCoordinates l E L F ι j X P.obj C κ qEL hqEL q hq
   change (∀ i, _) ∧ (∀ i, _) ∧ _ at hcoords
-  obtain ⟨hf, hg, hfg⟩ := hcoords
+  have hf := hcoords.1
+  have hg := hcoords.2.1
+  have hfg := hcoords.2.2
   have hzero := scalarModelRoosZeroLift l E L F ι j X SL ρL ρF bLF P D f g hf hg hfg
   have hfirst : (completedScalarComparison l E L ι X).app K ≫
       bEL.realization.hom.app K ≫ TL.map v =
