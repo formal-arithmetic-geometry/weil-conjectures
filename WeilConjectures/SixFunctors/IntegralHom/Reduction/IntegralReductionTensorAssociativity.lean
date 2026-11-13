@@ -288,10 +288,12 @@ private theorem nativeReductionMonoidal
     RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J S
   let : MonoidalCategory (Derived.{t, u} Y R) :=
     RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1} J R
+  trace "PH805: source coherence"
   obtain ⟨⟨monR, adjR, evR⟩, hmonR, TR, βR, hR, _, hTR⟩ :=
     ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J R
   dsimp only [CoefficientClosedStructure.monoidal] at hmonR
   subst monR
+  trace "PH805: target coherence"
   obtain ⟨⟨monS, adjS, evS⟩, hmonS, TS, βS, hS, _, hTS⟩ :=
     ringedDerived_closed_symmetric_monoidal_native.{t + 1, t, u, max u (t + 1) + 1} J S
   dsimp only [CoefficientClosedStructure.monoidal] at hmonS
@@ -308,6 +310,7 @@ private theorem nativeReductionMonoidal
   let mu : AR.tensor ⋙ F ≅ F.prod F ⋙ AS.tensor :=
     Functor.isoWhiskerRight e.symm F ≪≫ m.mu ≪≫ Functor.isoWhiskerLeft (F.prod F) f
   let φ := completedIntegralCommRingProjectionUnrestricted l E Y n
+  trace "PH805: scalar comparison"
   obtain ⟨κ, hκ, _⟩ := ringedFiniteFreeHomBaseChange_complex.{t + 1, t, u,
     max u (t + 1) + 1} J φ D'
   have hc (P Q : CochainComplex (scalarReductionSource l E Y) ℤ) :
@@ -322,14 +325,18 @@ private theorem nativeReductionMonoidal
       exact h
     · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
       exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
+  trace "PH805: monoidal descent"
   obtain ⟨core, hcore⟩ := ringedScalarTensorMonoidal.{t + 1, t, u,
     max u (t + 1) + 1} J φ D' AR AS TR TS βR βS hR hS κ mu hκ (by
       intro P Q hP hQ
+      trace "PH805: presentation normalization"
       obtain ⟨hEP, hEQ, beta, hbeta, hgen, hnorm⟩ := m.normalization P Q hP hQ
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      trace "PH805: flat representatives"
       refine ⟨hEP, hEQ, ?_⟩
+      trace "PH805: representative comparisons"
       have hrepR := nativeIso_representative Y R a P Q hP hQ
       have hrepS := nativeIso_representative Y S m.target _ _ hEP hEQ
       have hTR' := eq_of_heq (hTR P Q hP hQ)
@@ -351,6 +358,7 @@ private theorem nativeReductionMonoidal
         change _ = _ ≫ _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ _
         simp only [CategoryTheory.Functor.map_id, Category.id_comp]
         with_unfolding_all rfl
+      trace "PH805: counit rewrites"
       rw [heps P hP, heps Q hQ, heps _
         (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
       let εP := reductionCounit l E Y D hl n P
@@ -372,6 +380,7 @@ private theorem nativeReductionMonoidal
       let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
           m.target.tensor.map (Prod.mkHom εP εQ)
+      trace "PH805: transport square"
       calc
         _ = G ≫ f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
           rw [hcr]
@@ -390,6 +399,7 @@ private theorem nativeReductionMonoidal
               totalTensor, coefficientTotalTensor, ordinaryTensor,
               CategoryTheory.Functor.uncurry_obj_obj, Category.assoc,
               reassoc_of% hcan, Category.id_comp] using hh)
+  trace "PH805: resulting tensorator"
   refine ⟨core, ?_⟩
   intro X Z
   have hi : core.μIso X Z = (mu.app (X, Z)).symm := Iso.ext (hcore X Z)
