@@ -341,8 +341,6 @@ theorem ideal_power_local_maps_eventually_agree
       φ.val.app (op (Over.mk (homOfLE hWT)))
         (((idealSheafPower ι n).1).presheaf.map (homOfLE hWU).op (one n)) = 0 := by
     rw [hφapp]
-    change α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left)))) _ -
-      β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right)))) _ = 0
     exact sub_eq_zero.mpr (heval W hWU _ _)
   obtain ⟨S, hfin, hcover⟩ :=
     isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens.mp
