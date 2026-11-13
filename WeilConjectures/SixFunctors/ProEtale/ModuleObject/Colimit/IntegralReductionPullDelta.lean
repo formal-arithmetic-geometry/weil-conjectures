@@ -56,7 +56,7 @@ section Comap
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option profiler true in
 /-- The inverse of (Pull) on the image of an object of the homotopy category, modulo the
 counits. -/
 lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
@@ -89,7 +89,7 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
   rw [reassoc_of% hp, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option profiler true in
 /-- The composite `Lf^* (Res (Ext M)) ⟶ Res (Lf^* (Ext M)) ⟶ Res (Ext (Lf^* M))` of `ι` and of `Res`
 of the inverse of (Pull), on the image of an object of the homotopy category, modulo the
 counits: it is the underived composite of `comapUpperStarIso` and of the inverse of `pullIso`. -/
@@ -253,7 +253,7 @@ lemma upperStarExtendComapComplexIso_quotient_map
 
 variable (hY : (ShortComplex.mk _ _ wY).ShortExact) (hX : (ShortComplex.mk _ _ wX).ShortExact)
 
-set_option maxHeartbeats 8000000 in -- large composites of derived functors on sheaf categories
+set_option profiler true in
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**, on the
 image of a complex of flat modules. -/
 lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
@@ -316,7 +316,7 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
   rw [reassoc_of% hV, reassoc_of% hq, ← reassoc_of% hσ]
   rfl
 
-set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option profiler true in
 /-- **(Pull) is compatible with the connecting morphisms of the reduction triangles**: for
 `M ∈ D(Y_proét, Λ)`, `Lf^*` of the connecting morphism `δ_M`, followed by the commutation of `Lf^*`
 with the shift, is the commutation `ι` of `Res` with `Lf^*`, followed by `Res` of the inverse of
