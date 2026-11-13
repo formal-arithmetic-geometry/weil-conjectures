@@ -42,8 +42,6 @@ theorem finiteSystemAdjunction_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Comparing the two presentations of the same adjunctions unfolds their module categories.
 /-- The finite-system compositor is the strict sequence compositor.
 Source: Stacks 0D6D, 03D3
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced).
@@ -52,34 +50,24 @@ pasting isomorphism for the same direct images and adjunctions. -/
 theorem finiteSystemComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSequenceComposition l E h k := by
-  obtain ⟨d, hd, hs⟩ := (finiteSystemComposition_existsUnique (integralSystemRings l E)
+  exact (integralComparisonSequenceComposition_existsUnique l E h k).unique
+    (finiteSystemComposition_existsUnique (integralSystemRings l E)
       (integralSystemTransition l E) h k).exists.choose_spec
-  have key : conjugateIsoEquiv
-      ((finiteSystemAdjunction (integralSystemRings l E) (integralSystemTransition l E) k).comp
-        (finiteSystemAdjunction (integralSystemRings l E) (integralSystemTransition l E) h))
-      (finiteSystemAdjunction (integralSystemRings l E) (integralSystemTransition l E) (h ≫ k)) =
-    conjugateIsoEquiv
-      ((Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E k)).comp
-        (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E h)))
-      (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E (h ≫ k))) := by
-    rw [finiteSystemAdjunction_eq, finiteSystemAdjunction_eq, finiteSystemAdjunction_eq]
-  have hd' := (congrArg (fun e ↦ e (finiteSystemComposition (integralSystemRings l E)
-    (integralSystemTransition l E) h k)) key).symm.trans hd
-  apply (integralComparisonSequenceComposition_existsUnique l E h k).unique ?_
     (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose_spec
-  exact ⟨d, hd', hs⟩
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Rewriting inside the derived compositor unfolds the same module categories.
 /-- The derived finite-system compositor is the derived strict sequence compositor.
 Source: Stacks 0D6D, 015F
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced). -/
 theorem finiteSystemDerivedComposition_eq {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  rw [finiteSystemComposition_eq]
-  rfl
+  exact congrArg
+    (fun e : integralComparisonSequencePullback l E (h ≫ k) ≅
+        integralComparisonSequencePullback l E k ⋙ integralComparisonSequencePullback l E h ↦
+      Functor.mapDerivedCategoryNatIso e ≪≫
+        (Functor.mapDerivedCategoryCompIso (integralComparisonSequencePullback l E k)
+          (integralComparisonSequencePullback l E h)).symm)
+    (finiteSystemComposition_eq l E h k)
 
 end WeilConjectures
