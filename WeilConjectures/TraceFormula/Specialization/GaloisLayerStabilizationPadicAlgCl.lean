@@ -222,9 +222,7 @@ theorem exists_isIso_pullbackExchange_galoisLayerRestrict_padicAlgCl [IsNoetheri
     (by exact_mod_proofs hL')
   -- reduction to the restricted base change map at `Lg^* (Lε^* C)`
   refine Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ _ C ?_
-  refine isIso_map_app_of_iso _ _ (A := L(upperStar (Profinite.padicAlgClRingObj ℓ)
-      (N.galoisLayerHom h L'.toIntermediateField).generic).obj
-        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ((leftDerivedUpperStarComp _
+  refine isIso_map_app_of_iso _ _ ((leftDerivedUpperStarComp (Profinite.padicAlgClRingObj ℓ)
     (N.galoisLayerHom h L'.toIntermediateField).generic N.ε).app C).symm ?_
   -- the hypotheses carry different proofs of `Precoherent Profinite`, which are identified
   clear e hL' K₀ E hres hC
