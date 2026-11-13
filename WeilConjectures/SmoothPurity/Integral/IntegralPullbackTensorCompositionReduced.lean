@@ -44,10 +44,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 4000000 in
 set_option profiler true in
--- Matching the transported system law and the reduced comparisons unfolds the two
--- presentations of the coherent derived system categories.
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
 (blueprint: lem-pur-pullback-tensor-integral-composition-reduced)
@@ -118,9 +115,8 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
   · exact canonicalIntegralPullbackTensor_systemReduction l E h
   · exact canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f)
   · intro A B
-    have hσ := integralSystemTensorComparison_comp l E h f A B
-    rw [← finiteSystemDerivedComposition_eq] at hσ
-    exact hσ
+    simpa only [finiteSystemDerivedComposition_eq] using
+      integralSystemTensorComparison_comp l E h f A B
 
 /-- Reduced form of the integral pullback/tensor composition equation.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
