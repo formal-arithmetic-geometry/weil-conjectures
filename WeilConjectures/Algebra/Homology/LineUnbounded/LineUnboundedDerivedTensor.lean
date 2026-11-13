@@ -366,6 +366,7 @@ def normalization (P : Modules.{t, a} X R)
         (single.{t, a} X R P) hK hP hKf hPf).symm ≪≫
           DerivedCategory.Q.mapIso ((collapse.{t, a} X R P).app K)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 300000 in
 -- The concrete sheaf instance conversions in this assembly exceed the default budget.
 /-- Tensoring an arbitrary unbounded complex with a locally free line is termwise,
