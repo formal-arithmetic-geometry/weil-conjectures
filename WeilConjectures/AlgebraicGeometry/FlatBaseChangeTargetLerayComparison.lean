@@ -40,7 +40,7 @@ private theorem equiv_transport_commutative_square
 
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
-set_option profiler true in
+
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change.
@@ -131,14 +131,25 @@ theorem exists_flatBaseChange_target_leray_comparison
     f g F I J p V W hV hW eVW D rfl E' hE'
   let b := edge.choose
   have hb := edge.choose_spec
-  refine ⟨b, ?_⟩
-  apply equiv_transport_commutative_square e0.toEquiv (hb := hb)
+  let L := (restrictFunctor (f ⁻¹ᵁ V).ι).obj F
+  let C := RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p
+  let M := baseChangedModule (S := Γ(S', W)) h N
+  let a : C.obj L → HOver (baseChangeSnd (S := Γ(S', W)) h) M p := fun x ↦
+    E' M (moduleCohomologyFMap (baseChangeFst (S := Γ(S', W)) h)
+      (baseChangeUnit (S := Γ(S', W)) h N) p ((C.map c.hom).hom x))
+  let k : HOver h N p → HOver (baseChangeSnd (S := Γ(S', W)) h) M p :=
+    H.baseChangeLinear (S := Γ(S', W)) h N p
+  let r : C.obj L → Γ(Q, W) := fun x ↦
+    Q.presheaf.map (homOfLE eVW).op
+      (D.targetClass p
+        (moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
+          ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p x))
+  refine ⟨b, equiv_transport_commutative_square e0.toEquiv
+    (a := a) (k := k) (b := b) (r := r) ?_ hb⟩
   intro x
-  have hx : E N
-      (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)
-      = e0 x := hE _ _ c.hom x
-  exact (hmap N
-    (((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).map c.hom).hom x)).trans
-      (congrArg (H.baseChangeLinear (S := Γ(S', W)) h N p) hx)
+  have hx : E N ((C.map c.hom).hom x) = e0 x := hE _ _ c.hom x
+  calc
+    a x = k (E N ((C.map c.hom).hom x)) := hmap N ((C.map c.hom).hom x)
+    _ = k (e0 x) := congrArg k hx
 
 end AlgebraicGeometry.Scheme.Modules
