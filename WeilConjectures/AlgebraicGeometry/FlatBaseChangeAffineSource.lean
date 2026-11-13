@@ -78,7 +78,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
               ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
               V (D.sourceClass p (eH.symm xi)))) := by
   classical
-  intro inst h N P
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  intro h N P
   obtain ⟨E, hE⟩ :=
     Scheme.Modules.exists_moduleCohomology_source_comparison (f ⁻¹ᵁ V).toScheme p
   let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
@@ -111,7 +112,9 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
       ((TensorProduct.comm Γ(S, V) Γ(P, V) Γ(S', W)).symm.bijective.comp t.bijective)
   · intro s xi
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
-    have he' : e xi = D.sourceClass p (eH.symm xi) := he xi
+    have he' : e xi = D.sourceClass p (eH.symm xi) := by
+      unfold Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass
+      exact he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
       ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
         (Scheme.Modules.Hom.app

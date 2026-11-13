@@ -163,7 +163,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
                 (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                   ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
   classical
-  intro inst h N P Q
+  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
+  intro h N P Q
   have : Module.Flat Γ(S, V) Γ(S', W) := g.flat_appLE hV hW eVW
   have : CompactSpace (f ⁻¹ᵁ V).toScheme :=
     isCompact_iff_compactSpace.mp (f.isCompact_preimage hV.isCompact)

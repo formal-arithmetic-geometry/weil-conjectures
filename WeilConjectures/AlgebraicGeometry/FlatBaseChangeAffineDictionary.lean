@@ -94,7 +94,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_dictionary
             (D.targetClass p
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
-  intro inst h N P Q
+  intro h N P Q
   obtain ⟨eH, a, ha, ha_formula⟩ :=
     Scheme.Modules.exists_flatBaseChange_affine_source f g F I J p V W hV hW eVW D
   obtain ⟨b, hb, hb_formula⟩ :=
