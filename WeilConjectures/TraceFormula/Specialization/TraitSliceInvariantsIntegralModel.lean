@@ -75,19 +75,21 @@ noncomputable def integralModelPullbackIso {Z W : Scheme.{u}} (w : Z ⟶ W)
             ((integralModelLeftDerivedUpperStar w).obj B₀)) ≅
       (integralModelLeftDerivedUpperStar w).obj B :=
   by
-    letI (priority := 2000) integralModelTensorLeftPreservesColimit
-        {J : Type} [SmallCategory J] (T : Scheme.{u})
-        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-        PreservesColimit F (MonoidalCategory.tensorLeft P) := by
+    letI (priority := 2000) integralModelTensorLeftPreservesColimit :
+        ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
+          (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+          (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+          (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
+          PreservesColimit F (MonoidalCategory.tensorLeft P) := by
+      intro J _ T Λ _ _ P F
       infer_instance
-    letI (priority := 2000) integralModelTensorRightPreservesColimit
-        {J : Type} [SmallCategory J] (T : Scheme.{u})
-        (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-        (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
-        (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
-        PreservesColimit F (MonoidalCategory.tensorRight P) := by
+    letI (priority := 2000) integralModelTensorRightPreservesColimit :
+        ∀ {J : Type} [SmallCategory J] (T : Scheme.{u})
+          (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+          (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+          (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)),
+          PreservesColimit F (MonoidalCategory.tensorRight P) := by
+      intro J _ T Λ _ _ P F
       infer_instance
     exact
       (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E)
