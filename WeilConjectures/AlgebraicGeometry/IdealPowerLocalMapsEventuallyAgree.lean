@@ -272,8 +272,10 @@ private theorem exists_overlap_difference {X : Scheme.{u}} {M N : X.Modules}
     ∃ φ : M.over (V ⊓ V') ⟶ N.over (V ⊓ V'),
       ∀ (W : X.Opens) (hWT : W ≤ V ⊓ V'),
         φ.val.app (op (Over.mk (homOfLE hWT))) =
-          α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left)))) -
-            β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right)))) := by
+          (show M.val.obj (op W) ⟶ N.val.obj (op W) from
+            α.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_left))))) -
+          (show M.val.obj (op W) ⟶ N.val.obj (op W) from
+            β.val.app (op (Over.mk (homOfLE (hWT.trans inf_le_right))))) := by
   let a : M.over (V ⊓ V') ⟶ N.over (V ⊓ V') :=
     (SheafOfModules.overMap X.ringCatSheaf
       (homOfLE inf_le_left : V ⊓ V' ⟶ V)).map α
