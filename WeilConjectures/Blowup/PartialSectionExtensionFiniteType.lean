@@ -17,9 +17,8 @@ of `p : Y ⟶ X` to be quasi-compact and quasi-separated. This follows from `X` 
 
 ## Main results
 
-- `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection'` (blueprint:
-  `theorem-extension-partial-section`): extension of a partial section after a
-  `V`-admissible blow-up, for `p` separated and of finite type over a qcqs base.
+- `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection'`: extension of a partial section
+  after a `V`-admissible blow-up, for `p` separated and of finite type over a qcqs base.
 
 -/
 
@@ -31,16 +30,12 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **Extension of a partial section** (blueprint: `theorem-extension-partial-section`).
+/-- **Extension of a partial section.**
 
 Let `X` be qcqs, `U ≤ V` quasi-compact opens of `X` with `U` dense, and `p : Y ⟶ X` separated
 and of finite type. A section `f` of `p` over `U` whose image is closed in `p⁻¹(V)` extends,
 after a `V`-admissible blow-up `π : X' ⟶ X`, to a section `g` of `p` over an open `W` of `X'`
-containing `π⁻¹(U)`, and the graph of `g` is closed in `Y ×_X X'`.
-
-This is `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (the clause
-`theorem-extension-partial-section--1`) without its hypothesis that `Y` is qcqs, which follows
-from the other hypotheses. -/
+containing `π⁻¹(U)`, and the graph of `g` is closed in `Y ×_X X'`. -/
 theorem exists_admissibleBlowup_extend_partialSection' {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hUdense : Dense (U : Set X))
