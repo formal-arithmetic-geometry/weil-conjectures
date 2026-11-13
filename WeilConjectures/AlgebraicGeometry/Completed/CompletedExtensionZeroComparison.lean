@@ -1101,10 +1101,19 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
   let a :=
     (openSliceAdjunction d j hj).comp
       (SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W)
+  trace "PH604: composite constructed"
   let core : Adjunction.CoreHomEquiv (cbcOpenShriek d j hj) (cbcOpenRestriction d j hj) :=
-    { homEquiv := fun M N ↦ a.homEquiv M N
-      homEquiv_naturality_left_symm := fun f g ↦ a.homEquiv_naturality_left_symm f g
-      homEquiv_naturality_right := fun f g ↦ a.homEquiv_naturality_right f g }
+    { homEquiv := fun M N ↦ by
+        trace "PH604: homEquiv type"
+        exact a.homEquiv M N
+      homEquiv_naturality_left_symm := by
+        trace "PH604: naturality left"
+        intro X' X Y f g
+        exact a.homEquiv_naturality_left_symm f g
+      homEquiv_naturality_right := by
+        trace "PH604: naturality right"
+        intro X Y Y' f g
+        exact a.homEquiv_naturality_right f g }
   let adj := Adjunction.mkOfHomEquiv core
   trace "PH604: adj constructed"
   have hu (M : pbcModules U (pbcAdicCompletion U d))
