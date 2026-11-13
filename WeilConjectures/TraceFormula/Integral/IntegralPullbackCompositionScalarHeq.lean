@@ -202,6 +202,9 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
   have hh := derivedCompositor_heq
+    (dC := SemilinearSections.hasDerived _ _)
+    (dD := SemilinearSections.hasDerived _ _)
+    (dE := SemilinearSections.hasDerived _ _)
     (F := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) k)
     (F' := integralComparisonSequencePullback l E k)
     (G := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) h)
@@ -244,15 +247,7 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  dsimp only [finiteSystemDerivedComposition, integralComparisonSystemComposition,
-    finiteSystemPullback, ProEtale.VaryingRing.pull,
-    integralComparisonSequencePullback] at hh ⊢
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.Elab.Tactic.getMainTarget
-    let localDecl ← Lean.Meta.getLocalDeclFromUserName `hh
-    Lean.logInfo m!"TARGET TYPE: {repr target.getAppArgs[0]!}"
-    Lean.logInfo m!"HH LEFT TYPE: {repr localDecl.type.getAppArgs[0]!}"
-    Lean.logInfo m!"HH RIGHT TYPE: {repr localDecl.type.getAppArgs[2]!}"
+  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
   exact eq_of_heq hh
 
 end Composition
