@@ -252,11 +252,13 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
+universe w
+
 /-- Realize a normalized Koszul cone family over an arbitrary ringed site. -/
 private theorem ringedKoszulConeFamilyComparison
-    {C : Type (max v (u + 1))} [SmallCategory C] {T : GrothendieckTopology C}
-    (O : Sheaf T CommRingCat.{max v (u + 1)}) {A : Type (max v (u + 1))} [CommRing A]
-    (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O)
+    {C : Type (w)} [SmallCategory C] {T : GrothendieckTopology C}
+    (O : Sheaf T CommRingCat.{w}) {A : Type (w)} [CommRing A]
+    (E : ModuleCat.{w} A ⥤ Mod O)
     [E.Additive] [PreservesFiniteColimits E]
     (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
     (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
@@ -264,15 +266,15 @@ private theorem ringedKoszulConeFamilyComparison
       (ringedKoszulScalar O (s x)).asHom ≫ c.hom)
     (r : ℕ) (a : Fin r → A)
     (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶
-      (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+      (ChainComplex.single₀ (ModuleCat.{w} A)).obj
         (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))
     (tA : ∀ n m : ℕ, n ≤ m →
       (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
         ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))
     (qA : ∀ n m : ℕ, n ≤ m →
-      ((ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+      ((ChainComplex.single₀ (ModuleCat.{w} A)).obj
           (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶
-        (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+        (ChainComplex.single₀ (ModuleCat.{w} A)).obj
           (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))
     (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom
       (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp
@@ -335,20 +337,20 @@ private theorem ringedKoszulConeFamilyComparison
 
 /-- Pass an exact scalar realization to the finite cone-family comparison. -/
 private theorem existsRingedKoszulConeFamilyComparison
-    {C : Type (max v (u + 1))} [SmallCategory C] {T : GrothendieckTopology C}
-    (O : Sheaf T CommRingCat.{max v (u + 1)}) {A : Type (max v (u + 1))} [CommRing A]
+    {C : Type (w)} [SmallCategory C] {T : GrothendieckTopology C}
+    (O : Sheaf T CommRingCat.{w}) {A : Type (w)} [CommRing A]
     (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
     (r : ℕ) (a : Fin r → A)
     (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶
-      (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+      (ChainComplex.single₀ (ModuleCat.{w} A)).obj
         (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))
     (tA : ∀ n m : ℕ, n ≤ m →
       (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
         ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))
     (qA : ∀ n m : ℕ, n ≤ m →
-      ((ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+      ((ChainComplex.single₀ (ModuleCat.{w} A)).obj
           (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶
-        (ChainComplex.single₀ (ModuleCat.{max v (u + 1)} A)).obj
+        (ChainComplex.single₀ (ModuleCat.{w} A)).obj
           (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))
     (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom
       (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp
@@ -364,7 +366,7 @@ private theorem existsRingedKoszulConeFamilyComparison
     (N : ℕ → Mod O) (ν : ∀ n, N (n + 1) ⟶ N n)
     (p : ∀ n, ringedSiteRingComplex O ⟶
       (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
-    (hreal : ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O) (_hadd : E.Additive)
+    (hreal : ∃ (E : ModuleCat.{w} A ⥤ Mod O) (_hadd : E.Additive)
         (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
         (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
         (q : ∀ n, E.obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))) ≅ N n),
@@ -378,7 +380,7 @@ private theorem existsRingedKoszulConeFamilyComparison
       (X := fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
       (fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (ν n)))
     (hε : ∀ n, ringedKoszulDualUnit O r (fun i ↦ s (a i)) n ≫ ε.app (op n) = p n) :
-    ∃ (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O) (_hadd : E.Additive)
+    ∃ (E : ModuleCat.{w} A ⥤ Mod O) (_hadd : E.Additive)
       (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
       (e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
         (HomologicalComplex.homotopyCofiber
