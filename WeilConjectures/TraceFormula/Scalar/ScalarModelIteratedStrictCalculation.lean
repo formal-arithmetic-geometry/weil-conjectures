@@ -116,7 +116,6 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-set_option profiler true in
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
 It does not involve a direct scalar realization model or a derived associator.
@@ -231,10 +230,7 @@ theorem scalarModelIteratedStrictCalculation
     (.up ℤ)).mapIso a
   let wa := HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso w
   let v := A.map e.hom ≫ M.ε.app C
-  have hnEL' := bEL.normalization P C e κ hC hcoh
-  let qEL := hnEL'.choose
-  have hqEL := hnEL'.choose_spec.1
-  have hnEL := hnEL'.choose_spec.2
+  obtain ⟨qEL, hqEL, hnEL⟩ := bEL.normalization P C e κ hC hcoh
   let f := (completedScalarChainComparison l E L ι X).app P.obj ≫
     integralOperationsRoosFunctor.map qEL.inv
   let g := (CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
