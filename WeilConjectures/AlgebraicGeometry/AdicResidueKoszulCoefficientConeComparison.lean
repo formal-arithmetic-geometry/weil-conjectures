@@ -252,158 +252,6 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
-universe w
-
-/-- Realize a normalized Koszul cone family over an arbitrary ringed site. -/
-private theorem ringedKoszulConeFamilyComparison
-    {C : Type (w)} [SmallCategory C] {T : GrothendieckTopology C}
-    (O : Sheaf T CommRingCat.{w}) {A : Type (w)} [CommRing A]
-    (E : ModuleCat.{w} A ⥤ Mod O)
-    [E.Additive] [PreservesFiniteColimits E]
-    (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
-    (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
-    (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-      (ringedKoszulScalar O (s x)).asHom ≫ c.hom)
-    (r : ℕ) (a : Fin r → A)
-    (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶
-      (ChainComplex.single₀ (ModuleCat.{w} A)).obj
-        (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))
-    (tA : ∀ n m : ℕ, n ≤ m →
-      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
-        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))
-    (qA : ∀ n m : ℕ, n ≤ m →
-      ((ChainComplex.single₀ (ModuleCat.{w} A)).obj
-          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶
-        (ChainComplex.single₀ (ModuleCat.{w} A)).obj
-          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))
-    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom
-      (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp
-        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap))
-    (htA : ∀ n m h k, (tA n m h).f k = ModuleCat.ofHom
-      (exteriorPower.map k
-        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n))))))
-    (hc : ∀ n m h,
-      HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat ≫
-        HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =
-      HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫
-        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
-    (N : ℕ → Mod O) (ν : ∀ n, N (n + 1) ⟶ N n)
-    (q : ∀ n, E.obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))) ≅ N n)
-    (p : ∀ n, ringedSiteRingComplex O ⟶
-      (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
-    (hp : ∀ n, c.hom ≫
-        E.map (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ) ≫ (q n).hom =
-      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ (p n).f 0 ≫
-        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (N n)).hom)
-    (ε : ringedKoszulDualTower O r (fun i ↦ s (a i)) ⟶ Functor.ofOpSequence
-      (X := fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
-      (fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (ν n)))
-    (hε : ∀ n, ringedKoszulDualUnit O r (fun i ↦ s (a i)) n ≫ ε.app (op n) = p n) :
-    ∃ e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
-        (HomologicalComplex.homotopyCofiber
-          (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅
-      (CochainComplex.mappingCone
-        ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj
-          (op n),
-      ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map
-          (HomologicalComplex.homotopyCofiber.mapArrowHom
-            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)
-            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)
-            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
-            (Arrow.homMk
-              (HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
-              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
-              (hc n m h))) ≫ (e n).hom =
-        (e m).hom ≫ (CochainComplex.mappingCone
-          ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
-            (homOfLE h).op := by
-  obtain ⟨eK, ht, hu⟩ := exteriorKoszul_scalar_realization O E c s hs r a tA htA
-  apply normalizedExtendedConeFamilyComparison E
-    (fun n ↦ ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)))
-    (fun n ↦ ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))
-    εA tA qA hc N ν ε eK ht
-    (fun _ ↦ (exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.symm)
-    (fun n ↦ ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
-    ?_ ?_ c q (ringedKoszulDualUnit O r (fun i ↦ s (a i))) p hu hp hε
-  · intro n
-    exact (ModuleCat.epi_iff_surjective _).2 (Submodule.mkQ_surjective _)
-  · intro n
-    rw [hεA n]
-    apply ModuleCat.hom_ext
-    apply LinearMap.ext
-    intro x
-    exact congrArg (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
-      ((exteriorPower.zeroEquiv A (Fin r →₀ A)).apply_symm_apply x)
-
-/-- Pass an exact scalar realization to the finite cone-family comparison. -/
-private theorem existsRingedKoszulConeFamilyComparison
-    {C : Type (w)} [SmallCategory C] {T : GrothendieckTopology C}
-    (O : Sheaf T CommRingCat.{w}) {A : Type (w)} [CommRing A]
-    (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
-    (r : ℕ) (a : Fin r → A)
-    (εA : ∀ n : ℕ, ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)) ⟶
-      (ChainComplex.single₀ (ModuleCat.{w} A)).obj
-        (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))))
-    (tA : ∀ n m : ℕ, n ≤ m →
-      (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (m + 1)) ⟶
-        ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))))
-    (qA : ∀ n m : ℕ, n ≤ m →
-      ((ChainComplex.single₀ (ModuleCat.{w} A)).obj
-          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (m + 1))) ⟶
-        (ChainComplex.single₀ (ModuleCat.{w} A)).obj
-          (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))))
-    (hεA : ∀ n, (εA n).f 0 = ModuleCat.ofHom
-      (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ.comp
-        (exteriorPower.zeroEquiv A (Fin r →₀ A)).toLinearMap))
-    (htA : ∀ n m h k, (tA n m h).f k = ModuleCat.ofHom
-      (exteriorPower.map k
-        (Finsupp.linearCombination A (fun i ↦ Finsupp.single i (a i ^ (m - n))))))
-    (hc : ∀ n m h,
-      HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat ≫
-        HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat =
-      HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat ≫
-        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
-    (N : ℕ → Mod O) (ν : ∀ n, N (n + 1) ⟶ N n)
-    (p : ∀ n, ringedSiteRingComplex O ⟶
-      (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
-    (hreal : ∃ (E : ModuleCat.{w} A ⥤ Mod O) (_hadd : E.Additive)
-        (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
-        (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
-        (q : ∀ n, E.obj (ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))) ≅ N n),
-      (∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
-        (ringedKoszulScalar O (s x)).asHom ≫ c.hom) ∧
-      ∀ n, c.hom ≫
-          E.map (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ) ≫ (q n).hom =
-        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ (p n).f 0 ≫
-          (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (N n)).hom)
-    (ε : ringedKoszulDualTower O r (fun i ↦ s (a i)) ⟶ Functor.ofOpSequence
-      (X := fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).obj (N n))
-      (fun n ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map (ν n)))
-    (hε : ∀ n, ringedKoszulDualUnit O r (fun i ↦ s (a i)) n ≫ ε.app (op n) = p n) :
-    ∃ (E : ModuleCat.{w} A ⥤ Mod O) (_hadd : E.Additive)
-      (_hlim : PreservesFiniteLimits E) (_hcolim : PreservesFiniteColimits E)
-      (e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
-        (HomologicalComplex.homotopyCofiber
-          (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)) ≅
-      (CochainComplex.mappingCone
-        ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj
-          (op n)),
-      ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map
-          (HomologicalComplex.homotopyCofiber.mapArrowHom
-            (HomologicalComplex.extendMap (εA m) ComplexShape.embeddingDownNat)
-            (HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat)
-            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
-            (Arrow.homMk
-              (HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
-              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
-              (hc n m h))) ≫ (e n).hom =
-        (e m).hom ≫ (CochainComplex.mappingCone
-          ((HomologicalComplex.functorEquivalence (Mod O) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
-            (homOfLE h).op := by
-  obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hp⟩ := hreal
-  exact ⟨E, hadd, hlim, hcolim,
-    ringedKoszulConeFamilyComparison O E c s hs r a εA tA qA hεA htA hc N ν q p hp ε hε⟩
-
 set_option profiler true in
 /-- Specialize the finite comparison to the ideal generated by the Koszul sequence. -/
 private theorem adicResidueConeComparison_span
@@ -468,19 +316,34 @@ private theorem adicResidueConeComparison_span
               (Mod R) (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
               (homOfLE h).op  := by
   intro O b ε hε
+  obtain ⟨E, hadd, hlim, hcolim, c, q, hs, hq⟩ :=
+    adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U
   let s := fun x : A ↦ ringedKoszulSliceSection
     (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
       (Ideal.span (Set.range a))) x) U
-  exact existsRingedKoszulConeFamilyComparison.{max v (u + 1)}
-    (C := Over U) (T := (coefficientProEtaleModelTopology.{u, v} X).over U) (A := A)
-    ((completed (coefficientProEtaleModelTopology.{u, v} X) A
-      (Ideal.span (Set.range a))).over U)
-    s r a εA tA qA hεA htA hc
+  obtain ⟨eK, ht, hu⟩ := exteriorKoszul_scalar_realization O E c s hs r a tA htA
+  refine ⟨E, hadd, hlim, hcolim, ?_⟩
+  apply normalizedExtendedConeFamilyComparison E
+    (fun n ↦ ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)))
+    (fun n ↦ ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))
+    εA tA qA hc
     (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
     (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U)
-    (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U)
-    (adicResidue_exact_coefficient_realization X (Ideal.span (Set.range a)) U) ε hε
+    ε eK ht (fun _ ↦ (exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.symm)
+    (fun n ↦ ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
+    ?_ ?_ c q (ringedKoszulDualUnit O r b)
+    (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U) hu hq hε
+  · intro n
+    exact (ModuleCat.epi_iff_surjective _).2 (Submodule.mkQ_surjective _)
+  · intro n
+    rw [hεA n]
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    exact congrArg (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
+      ((exteriorPower.zeroEquiv A (Fin r →₀ A)).apply_symm_apply x)
+
 
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
