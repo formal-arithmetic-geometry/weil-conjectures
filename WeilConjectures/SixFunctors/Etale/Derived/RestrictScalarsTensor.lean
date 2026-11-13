@@ -169,7 +169,6 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
         (Sheaf.extendScalarsTensorRestrictScalarsIso X.smallEtaleTopology hφ ha) P M) (.up ℤ)
 
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- the kernel checks the chain of isomorphisms below
 include hφ ha in
 /-- **The projection formula for extension and restriction of scalars.** For `L ∈ D(X_ét, Λ)` and
@@ -200,25 +199,25 @@ theorem nonempty_iso_derivedRestrictScalars_derivedTensor (L : 𝐃(X, Λ)) (N :
   let qRM := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
     ((R.mapHomologicalComplex _).obj M)
   -- `L ⊗ᴸ Λ' ≅ Qh (Λ' ⊗ P)`
-  let j₁ : (derivedExtendScalars hφ ha X).obj L ≅ _root_.DerivedCategory.Qh.obj qF :=
+  have j₁ : (derivedExtendScalars hφ ha X).obj L ≅ _root_.DerivedCategory.Qh.obj qF :=
     (derivedExtendScalars hφ ha X).mapIso e.symm ≪≫
       asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P')) ≪≫
       _root_.DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors _).app P')
   -- `Res N ≅ Qh (Res M)`
-  let j₂ : R.mapDerivedCategory.obj N ≅ _root_.DerivedCategory.Qh.obj qRM :=
+  have j₂ : R.mapDerivedCategory.obj N ≅ _root_.DerivedCategory.Qh.obj qRM :=
     R.mapDerivedCategory.mapIso (eN.symm ≪≫
         (_root_.DerivedCategory.quotientCompQhIso _).app M) ≪≫
       R.mapDerivedCategoryFactors.app M ≪≫
       ((_root_.DerivedCategory.quotientCompQhIso _).app ((R.mapHomologicalComplex _).obj M)).symm
-  let k₁ := R.mapDerivedCategory.mapIso (tensorIso j₁ eN.symm ≪≫
+  have k₁ := R.mapDerivedCategory.mapIso (tensorIso j₁ eN.symm ≪≫
       asIso ((_root_.DerivedCategory.tensorRightCounit qM).app qF) ≪≫
       _root_.DerivedCategory.Qh.mapIso
         (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) _ M) ≪≫
       (_root_.DerivedCategory.quotientCompQhIso _).app (((F.mapHomologicalComplex _).obj P') ⊗ M))
-  let k₂ := R.mapDerivedCategoryFactors.app (((F.mapHomologicalComplex _).obj P') ⊗ M)
-  let k₃ := _root_.DerivedCategory.Q.mapIso
+  have k₂ := R.mapDerivedCategoryFactors.app (((F.mapHomologicalComplex _).obj P') ⊗ M)
+  have k₃ := _root_.DerivedCategory.Q.mapIso
     (extendScalarsTensorRestrictScalarsComplexIso hφ ha X P' M)
-  let k₄ := ((_root_.DerivedCategory.quotientCompQhIso _).app
+  have k₄ := ((_root_.DerivedCategory.quotientCompQhIso _).app
       (P' ⊗ (R.mapHomologicalComplex _).obj M)).symm ≪≫
     _root_.DerivedCategory.Qh.mapIso
       (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) P' _).symm ≪≫

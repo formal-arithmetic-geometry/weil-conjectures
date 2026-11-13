@@ -437,6 +437,7 @@ lemma leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso (f : X ⟶ Y) (g :
     leftDerivedUpperStarComp Λ f g = Functor.leftDerivedFunctorFactorIso (upperStarComp Λ f g) :=
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Associativity** of the composition isomorphisms of the derived pullbacks of module
