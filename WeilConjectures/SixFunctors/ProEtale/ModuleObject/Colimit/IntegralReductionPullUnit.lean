@@ -198,18 +198,6 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
   have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ Y)
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ Y)
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ Y)
-  have := hasTensor₄ObjExt_mod Y (condensedRingObj Λ' Y)
-  have := hasGoodTensor₁₂Tensor_mod Y (condensedRingObj Λ' Y)
-  have := hasGoodTensorTensor₂₃_mod Y (condensedRingObj Λ' Y)
-  have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ' Y)
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ' Y)
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ' Y)
-  have := hasTensor₄ObjExt_mod X (condensedRingObj Λ X)
-  have := hasGoodTensor₁₂Tensor_mod X (condensedRingObj Λ X)
-  have := hasGoodTensorTensor₂₃_mod X (condensedRingObj Λ X)
-  have := hasColimitsOfShape_int_mod X (condensedRingObj Λ X)
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod X (condensedRingObj Λ X)
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod X (condensedRingObj Λ X)
   dsimp only
   have r1 := derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K
   have r2 := (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.naturality
@@ -237,8 +225,8 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
   have i1' := i1 =≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
-  simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
+  simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
@@ -276,12 +264,6 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have := hasColimitsOfShape_int_mod Y (condensedRingObj Λ' Y)
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod Y (condensedRingObj Λ' Y)
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod Y (condensedRingObj Λ' Y)
-  have := hasTensor₄ObjExt_mod X (condensedRingObj Λ X)
-  have := hasGoodTensor₁₂Tensor_mod X (condensedRingObj Λ X)
-  have := hasGoodTensorTensor₂₃_mod X (condensedRingObj Λ X)
-  have := hasColimitsOfShape_int_mod X (condensedRingObj Λ X)
-  have := preservesColimitsOfShape_int_curriedTensor_obj_mod X (condensedRingObj Λ X)
-  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod X (condensedRingObj Λ X)
   let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
@@ -297,7 +279,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   apply (Iso.cancel_iso_hom_right _ _ ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
     (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
       (ComplexShape.up ℤ)).obj K))).1
-  simpa only [Category.assoc] using
+  simpa only [c, Functor.mapIso_hom, Iso.trans_hom, Iso.app_hom, asIso_hom, Category.assoc] using
     upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh_counit a f K
 
 set_option trace.profiler true in
