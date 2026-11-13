@@ -462,7 +462,6 @@ theorem nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTowe
     (homologyLeftDerivedUpperStarIso f' (Profinite.continuousMapRingObj T₀) q).symm) hc'⟩
 
 set_option profiler true in
-set_option trace.profiler true in
 /-- Construct the projector using a bounded complex of étale origin. The exchange and action
 are shared in the conclusion, so their derived functors are elaborated only once. -/
 private theorem exists_retraction_galoisLayer_projector_of_complex
