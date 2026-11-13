@@ -69,26 +69,19 @@ private theorem epi_pushforward_closedEmbedding
     exact hzero.symm
 
 set_option profiler true in
-/-- The cohomology comparison for an exact adjunction is the Ext-adjunction bijection,
-precomposed with the identification of constant sheaves. -/
-private theorem bijective_cohomologyMap_counit
+/-- The Ext-adjunction bijection remains bijective after identifying its source object
+by an isomorphism. Precomposition commutes with composition by the counit. -/
+private theorem bijective_extMap_counit_precomp
     {C D : Type*} [Category C] [Category D]
-    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-    [HasSheafify J AddCommGrpCat.{u}] [HasSheafify K AddCommGrpCat.{u}]
-    [HasExt.{w} (Sheaf J AddCommGrpCat.{u})] [HasExt.{w} (Sheaf K AddCommGrpCat.{u})]
-    [EnoughInjectives (Sheaf K AddCommGrpCat.{u})]
-    {L : Sheaf J AddCommGrpCat.{u} ⥤ Sheaf K AddCommGrpCat.{u}}
-    {R : Sheaf K AddCommGrpCat.{u} ⥤ Sheaf J AddCommGrpCat.{u}}
+    [Abelian C] [Abelian D] [HasExt.{w} C] [HasExt.{w} D] [EnoughInjectives D]
+    {L : C ⥤ D} {R : D ⥤ C}
     [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
-    (adj : L ⊣ R)
-    (e : (constantSheaf K AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ)) ≅
-      L.obj ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ))))
-    (F : Sheaf K AddCommGrpCat.{u}) (p : ℕ) :
-    Function.Bijective ((Sheaf.H.map (adj.counit.app F) p).comp
-      (Sheaf.H.mapFunctor L e (R.obj F) p)) := by
-  have hb := adj.mapExtCounit_bijective
-    ((constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift ℤ))) F p
+    (adj : L ⊣ R) {A : C} {B : D} (e : B ≅ L.obj A) (F : D) (p : ℕ) :
+    Function.Bijective (fun x : CategoryTheory.Abelian.Ext A (R.obj F) p ↦
+      ((CategoryTheory.Abelian.Ext.mk₀ e.hom).comp (x.mapExactFunctor L) (zero_add p)).comp
+        (CategoryTheory.Abelian.Ext.mk₀ (adj.counit.app F)) (add_zero p)) := by
+  have hb := adj.mapExtCounit_bijective A F p
   have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e F p).bijective.comp hb
   convert hc using 1
   funext x
@@ -153,6 +146,6 @@ theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion
   let e := (g.constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Z)
     isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))
-  exact bijective_cohomologyMap_counit adj e Z.unitsSheaf p
+  exact bijective_extMap_counit_precomp adj e Z.unitsSheaf p
 
 end AlgebraicGeometry.Scheme
