@@ -88,7 +88,6 @@ private theorem single_comparison_finish
   rw [← Category.assoc (P.map (S.map t.hom)), ht, Category.id_comp]
   exact h
 
-set_option maxHeartbeats 300000 in
 -- Keep the pinned functors behind their interfaces while comparing the single maps.
 /-- Derived exchange commutes with the two canonical single-module comparisons.
 This identity concerns an arbitrary module and has no structure-sheaf unit maps.

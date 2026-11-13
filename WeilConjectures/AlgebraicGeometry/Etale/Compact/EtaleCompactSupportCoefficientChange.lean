@@ -42,7 +42,7 @@ def coefficientRestrictionOpenMap
         Sheaf.restrictScalars Z.smallEtaleTopology φ :=
   (mateEquiv (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
     (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).symm
-      (asIso (upperStarRestrictScalars φ j).natTrans).inv
+      (asIso (upperStarRestrictScalars φ j)).inv
 
 /-- The open coefficient mate is invertible. Source: Stacks Tags 03S2 and 0GL6
 (blueprint: lem-fix-compact-support-coefficient-change).
@@ -60,7 +60,7 @@ theorem coefficientRestrictionOpenMap_isIso
     have h := unit_mateEquiv_symm
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
-      (asIso (upperStarRestrictScalars φ j).natTrans).inv F
+      (asIso (upperStarRestrictScalars φ j)).inv F
     change _ = _ ≫ (j)^*[ModuleCat.{u + 1} A].map
       ((coefficientRestrictionOpenMap φ j).app F) at h
     dsimp only [Functor.id_obj] at h
@@ -92,7 +92,7 @@ theorem coefficientRestrictionOpenMap_isIso
       have h₂ := ((Sheaf.restrictScalars _ φ).map_isZero
         (isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
           (ModuleCat.{u + 1} B) j t hd F)).of_iso
-        ((asIso (upperStarRestrictScalars φ t).natTrans).app
+        ((asIso (upperStarRestrictScalars φ t)).app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).obj F))
       have hi : IsIso ((t)^*[ModuleCat.{u + 1} A].map
           ((coefficientRestrictionOpenMap φ j).app F)) :=

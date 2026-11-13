@@ -94,7 +94,7 @@ noncomputable def compIso (T : Compactification.Triangle f g) :
 lemma compIso_hom_app (T : Compactification.Triangle f g) (K : F.obj X) :
     haveI := HasBaseChange.isIso_baseChange (F := F) T.isPullback
     (F.compIso T).hom.app K =
-      (F.pf T.cg.g).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).natTrans.app
+      (F.pf T.cg.g).map ((F.exchange T.cf.g T.q T.cg.i T.p T.isPullback.w).app
           ((F.sh T.cf.i).obj K) ≫
         (F.pf T.p).map ((F.shComp' T.cf.i T.q T.cfg.i T.i_q).inv.app K)) ≫
       (F.pfComp' T.p T.cg.g T.cfg.g T.p_g).inv.app ((F.sh T.cfg.i).obj K) :=
@@ -159,7 +159,7 @@ lemma compIso_unitLeft (c : Compactification f) :
       Functor.whiskerRight (F.shriekOfIsProperIdIso X).hom (F.shriek c) ≫
         (Functor.leftUnitor _).hom := by
   have hw : 𝟙 X ≫ c.i = c.i ≫ 𝟙 c.Z := by rw [Category.id_comp, Category.comp_id]
-  have : IsIso (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hw).natTrans :=
+  have : IsIso (F.baseChange (𝟙 X) c.i c.i (𝟙 c.Z) hw) :=
     HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_horiz_isIso ⟨hw⟩)
   ext K
   have h₁ := congr_app (F.exchange_id_horiz c.i hw) ((F.sh (𝟙 X)).obj K)
@@ -186,7 +186,7 @@ lemma compIso_unitRight (c : Compactification f) :
       Functor.whiskerLeft (F.shriek c) (F.shriekOfIsProperIdIso Y).hom ≫
         (Functor.rightUnitor _).hom := by
   have hw : c.g ≫ 𝟙 Y = 𝟙 c.Z ≫ c.g := by rw [Category.id_comp, Category.comp_id]
-  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 Y) c.g hw).natTrans :=
+  have : IsIso (F.baseChange c.g (𝟙 c.Z) (𝟙 Y) c.g hw) :=
     HasBaseChange.isIso_baseChange (F := F) (IsPullback.of_vert_isIso ⟨hw⟩)
   ext K
   have h₁ := congr_app (F.exchange_id_vert c.g hw) ((F.sh c.i).obj K)

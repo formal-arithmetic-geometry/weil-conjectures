@@ -399,7 +399,6 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
     exact hh
 
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
 -- Keep both tensor representative interfaces explicit.
 /-- The canonical derived comparison selected by its unique representative characterization.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).

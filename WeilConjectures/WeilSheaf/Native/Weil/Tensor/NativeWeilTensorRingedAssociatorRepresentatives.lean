@@ -22,7 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option maxHeartbeats 800000 in
 -- Applying the normalized case unfolds the concrete monoidal and localization structures.
 /-- Associativity of the native comparison on three K-flat representatives.
 

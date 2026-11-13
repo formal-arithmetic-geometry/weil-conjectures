@@ -36,7 +36,6 @@ private theorem homEquiv_conjugate
     unit_conjugateEquiv, Category.assoc, ← Functor.map_comp,
     ← Adjunction.homEquiv_unit]
 
-set_option maxHeartbeats 400000 in
 -- Keep the chosen derived comparison families folded during mate rewriting.
 /-- The mate pasting law before cancellation of the upper-left adjunction unit.
 It applies to any morphism `t`, without an invertibility or cartesian assumption.

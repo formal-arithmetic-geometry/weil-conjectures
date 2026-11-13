@@ -44,7 +44,6 @@ variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
 variable (u : Underived.{c, v, r, d, vd, s} J R J' R' U)
 
 omit [PreservesFiniteLimits U] [PreservesFiniteColimits U]
-set_option maxHeartbeats 400000 in
 -- Component checking traverses the totalization and sheaf tensor instances.
 /-- The total-tensor comparison commutes with the signed chain swaps.
 Source: Stacks 0FPT and 06YU; the chain calculation in the symmetry part of

@@ -43,7 +43,6 @@ variable {V' : Type c'} [Category.{v'} V'] (J' : GrothendieckTopology V')
   (SU : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c', v', r', d'} J' R'))
   (TU : CoefficientTensorModels.{r', c', v', d'} J' R' SU)
 
-set_option maxHeartbeats 800000 in
 -- The model comparison uses four nested representative squares.
 /-- Four normalized binary squares and chain coherence imply derived associativity.
 Source: Stacks 0FPT, 06YU and 07A4

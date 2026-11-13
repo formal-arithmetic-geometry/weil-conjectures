@@ -263,7 +263,7 @@ private theorem properSheaf_graph_map_aux
   let a := α.inv.app F ≫ (lowerStar B p).map κ
   let θ := (mateEquiv (upperStarLowerStarAdjunction B p)
     (upperStarLowerStarAdjunction B c.g)
-    (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (etaleLowerShriekBaseChangeIso A sq).hom))
   let τ₀ := (etaleLowerShriek B v inferInstance).map a ≫ θ.app M ≫
     (lowerStar B c.g).map (comp.hom.app F)
   let lbg := lowerStarComp B b c.g

@@ -164,7 +164,6 @@ theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullba
     (sq.lift_fst _ _ _) (sq.lift_snd _ _ _) i sq₁ _ (sq.lift_fst _ _ _) (sq.lift_snd _ _ _) a'
     hae hah ha)
 
-set_option maxHeartbeats 400000 in
 -- the transition maps are compared through large terms of the derived categories
 /-- Step (2) of blueprint `sbc-lem-bc-failure-field`: the survival of `ξ` passes to cofiltered
 limits along affine transition morphisms. By the limit theorem for higher direct images

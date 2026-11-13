@@ -45,7 +45,7 @@ noncomputable def ihomMapLeft {A A' : ProEtaleWeilSheaf k₀ l X} (φ : A ⟶ A'
     (B : ProEtaleWeilSheaf k₀ l X) : ihom k₀ l X A' B ⟶ ihom k₀ l X A B :=
   ObjectProperty.homMk ⟨(Mod.ihomMap φ.hom.f).app B.carrier, by
     have h := adicLowerStarCompIhomIso_inv_app_comp_ihomMap l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv φ.hom.f B.carrier
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv φ.hom.f B.carrier
     have hφ : A.str.inv ≫ (WeilSheaf.frobeniusPullback k₀ l X).map φ.hom.f =
         φ.hom.f ≫ A'.str.inv := by
       rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]

@@ -261,7 +261,7 @@ Sh(X) --k_*--> Sh(D)
 lemma Etale.mateEquiv_upperStarBaseChange :
     (mateEquiv (Etale.upperStarLowerStarAdjunction A j) (Etale.upperStarLowerStarAdjunction A k)
       (TwoSquare.mk ((q)_*[A]) ((j)^*[A]) ((k)^*[A]) (𝟭 _)
-        (Etale.upperStarBaseChange A j q k hk))).natTrans =
+        (Etale.upperStarBaseChange A j q k hk))) =
       (Etale.lowerStarComp A j q k hk.symm).hom ≫ (Functor.leftUnitor _).inv := by
   subst hk
   have hconj : conjugateEquiv ((Etale.upperStarLowerStarAdjunction A q).comp
@@ -309,7 +309,7 @@ lemma Etale.upperStarBaseChange_eq :
       (Etale.openImmersionRestrictionLowerStarAdjunction A (j ≫ q))
       (TwoSquare.mk ((q)_*[A]) (Etale.openImmersionRestriction A j)
         (Etale.openImmersionRestriction A (j ≫ q)) (𝟭 _)
-        (Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl))).natTrans =
+        (Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl))) =
       (Etale.lowerStarComp A j q).hom ≫ (Functor.leftUnitor _).inv := by
     ext F b
     obtain ⟨b⟩ := b
@@ -350,7 +350,7 @@ lemma Etale.upperStarBaseChange_eq :
       (Etale.openImmersionRestrictionBaseChange A j q (j ≫ q) rfl))
   exact (mateEquiv (Etale.upperStarLowerStarAdjunction A j)
     (Etale.upperStarLowerStarAdjunction A (j ≫ q))).injective
-    (hA.trans (hsite.symm.trans (congrArg TwoSquare.natTrans hB).symm))
+    (hA.trans (hsite.symm.trans (hB).symm))
 
 include hk in
 /-- If the square is cartesian, the base change map `q_* ⋙ k^* ⟶ j^*` is an isomorphism. -/

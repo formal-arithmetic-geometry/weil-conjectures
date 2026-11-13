@@ -333,7 +333,6 @@ private lemma homPre_apply (E E' O : CX.{c, v, u} J R) (f : E' ⟶ E)
     (t.val.app U φ)) (homPre_proj.{c, v, u} J R E E' O f n a b h)
   with_unfolding_all exact he
 
-set_option maxHeartbeats 500000 in
 -- The two nested product-Hom projections carry independent site universes.
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]

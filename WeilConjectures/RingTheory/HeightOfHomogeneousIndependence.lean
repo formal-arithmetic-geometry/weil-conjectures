@@ -12,6 +12,8 @@ import Mathlib.RingTheory.KrullDimension.Field
 import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.RingTheory.HomogeneousIndependenceLocalization
 import WeilConjectures.RingTheory.HomogeneousIndependenceQuotient
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Height from homogeneous independence at a rational point

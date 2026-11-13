@@ -880,7 +880,6 @@ private theorem pushedRingIso_cancel
 
 open WeilConjectures WeilConjectures.SemilinearSections in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 600000 in
 -- Elaborate the sectionwise adjunction and its transported coefficient identities.
 private theorem systemsOpenExtension_exists {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology .systems X) CommRingCat.{u + 1}) :

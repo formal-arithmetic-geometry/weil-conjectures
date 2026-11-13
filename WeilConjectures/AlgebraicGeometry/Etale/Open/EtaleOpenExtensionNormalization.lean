@@ -90,7 +90,7 @@ private theorem normalization_components
     ext Z
     simpa only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop, TwoSquare.hComp_app,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-      TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hr Z
+      TwoSquare.mk, Category.assoc] using hr Z
   have h := normalization_cube (a₁₀.comp a₂₀) (b₁₀.comp b₂₀) (a₁.comp a₂) (b₁.comp b₂)
     c d (α₁ ≫ᵥ α₂) (β₁ ≫ᵥ β₂) e₀ e hc hd hr' P
   rw [← h₁, ← h₂]

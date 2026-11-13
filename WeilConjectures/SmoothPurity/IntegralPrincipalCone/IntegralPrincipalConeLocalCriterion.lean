@@ -233,7 +233,7 @@ theorem localCriterion
       (completedIntegralCoefficientSheafUnrestricted l E T).obj.map f (σ U) = σ V)
     (P : IntegralOnSlice.Cx l E T none) (μ : End P)
     (_hμ : ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x = σ U • x)
+      (μ.asHom.f q).val.app U x = σ U • x)
     (K : IntegralOnSlice.D l E T none) (e : DerivedCategory.Q.obj P ≅ K) :
     locallyComplete l E T σ (DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ)) ∧
       (locallyComplete l E T σ K ↔

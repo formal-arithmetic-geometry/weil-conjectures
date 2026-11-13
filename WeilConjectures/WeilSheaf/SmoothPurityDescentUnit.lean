@@ -91,10 +91,10 @@ noncomputable def geometricFiberPullbackUnitIso :
     (geometricFiberPullback k₀ l X).obj (AdicSheaf.unit l X) ≅ adicConstant k₀ l X :=
   IsoAlgebra.isoMk (adicUpperStarUnitIso l
     (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj) (by
-      change ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l].map
+      change ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᵃ[l].map
         (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom ≫
           (adicLowerStarUnitIso l
-            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom =
+            (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom =
         (geometricFiberPullbackFrobeniusIso k₀ l X).hom.app (AdicSheaf.unit l X) ≫
           (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).hom
       dsimp only [geometricFiberPullbackFrobeniusIso, Iso.trans_hom, NatTrans.comp_app,
@@ -102,7 +102,7 @@ noncomputable def geometricFiberPullbackUnitIso :
       simp only [Category.assoc]
       exact adicUpperStarUnitIso_descent_inv
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
         (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj _))
 
 /-- The native constant sheaf, in condensed coordinates, is descent of the unit. -/

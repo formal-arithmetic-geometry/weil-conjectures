@@ -63,7 +63,6 @@ private theorem evaluate_eq_projection
 
 attribute [local irreducible] homComplexFunctor derivedInternalHomOfUniverses
 
-set_option maxHeartbeats 800000 in
 -- Keep derived Hom opaque during the representative comparison.
 attribute [-instance] derivedCategory in
 /-- Signed interchange on representatives induces the adjunction exchange.

@@ -200,7 +200,7 @@ theorem ι_map_baseChange_app (h : g' ≫ π = π' ≫ g) (M : WeilComplex k₀ 
     Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id, Functor.comp_map,
     Functor.map_comp, ι_map_derivedLowerStar_map, ι_map_upperStar_map,
     ι_map_upperStarDerivedLowerStarAdjunction_unit_app,
-    ι_map_upperStarDerivedLowerStarAdjunction_counit_app, TwoSquare.natTrans,
+    ι_map_upperStarDerivedLowerStarAdjunction_counit_app,
     ι_map_upperStarCompUpperStarIso_hom_app]
   rfl
 

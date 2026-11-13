@@ -35,7 +35,7 @@ private theorem scalar_mate_unit
     (a : L ⊣ R) (b : S ⊣ T) (F : A ⥤ B)
     (r : R ⋙ F ⟶ F ⋙ T) (δ : R ≅ 𝟭 A) (ε : T ≅ 𝟭 B)
     (h : ∀ N, F.map (δ.inv.app N) ≫ r.app N = ε.inv.app (F.obj N)) (M : A) :
-    ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M ≫
+    ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).app M ≫
         F.map (((a.ofNatIsoRight δ).leftAdjointUniq Adjunction.id).hom.app M) =
       ((b.ofNatIsoRight ε).leftAdjointUniq Adjunction.id).hom.app (F.obj M) := by
   let i := (a.ofNatIsoRight δ).leftAdjointUniq Adjunction.id
@@ -58,7 +58,7 @@ private theorem scalar_mate_unit
   have hm := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ r) M
   change F.map (a.unit.app M) ≫ r.app (L.obj M) =
     b.unit.app (F.obj M) ≫
-      T.map (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M) at hm
+      T.map (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).app M) at hm
   apply (b.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc]
   rw [← hm]
@@ -74,18 +74,16 @@ private theorem mate_whisker
     {F F' : A ⥤ C} {G G' : B ⥤ D}
     (a : L ⊣ R) (b : L' ⊣ R') (t : TwoSquare F L L' G)
     (f : F' ⟶ F) (g : G ⟶ G') :
-    (mateEquiv a b ((t.whiskerTop f).whiskerBottom g)).natTrans =
-      Functor.whiskerLeft R f ≫ (mateEquiv a b t).natTrans ≫
+    (mateEquiv a b ((t.whiskerTop f).whiskerBottom g)) =
+      Functor.whiskerLeft R f ≫ (mateEquiv a b t) ≫
         Functor.whiskerRight g R' := by
   ext N
-  dsimp only [TwoSquare.natTrans]
   simp only [mateEquiv_apply, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Functor.comp_obj, Category.id_comp, Functor.map_comp, Category.assoc]
   rw [← b.unit_naturality_assoc]
-  dsimp only [TwoSquare.natTrans]
   simp only [Functor.comp_map]
   have hg := congrArg R'.map (g.naturality (a.counit.app N))
   simp only [R'.map_comp] at hg
@@ -99,7 +97,7 @@ private theorem mate_identity
     (a : L ⊣ R) {U : A ⥤ A} {V : B ⥤ B}
     (r : U ⋙ L ⟶ L ⋙ V) (i : U ≅ 𝟭 A) (j : V ≅ 𝟭 B)
     (h : ∀ M, L.map (i.hom.app M) = r.app M ≫ j.hom.app (L.obj M)) (N : B) :
-    (mateEquiv a a (TwoSquare.mk _ _ _ _ r)).natTrans.app N ≫ R.map (j.hom.app N) =
+    (mateEquiv a a (TwoSquare.mk _ _ _ _ r)).app N ≫ R.map (j.hom.app N) =
       i.hom.app (R.obj N) := by
   have hr : r.app (R.obj N) ≫ j.hom.app (L.obj (R.obj N)) =
       L.map (i.hom.app (R.obj N)) := (h _).symm
@@ -107,7 +105,7 @@ private theorem mate_identity
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
-    Functor.comp_obj, Functor.comp_map, TwoSquare.natTrans, TwoSquare.mk, Category.id_comp,
+    Functor.comp_obj, Functor.comp_map, TwoSquare.mk, Category.id_comp,
     Category.assoc]
   erw [Category.id_comp]
   change a.unit.app (U.obj (R.obj N)) ≫ R.map (r.app (R.obj N)) ≫
@@ -128,12 +126,12 @@ private theorem inverseMate_identity
     (r : R ⋙ F ⟶ G ⋙ R) (i : F ≅ 𝟭 A) (j : G ≅ 𝟭 B)
     (h : ∀ N, r.app N ≫ R.map (j.hom.app N) = i.hom.app (R.obj N)) (M : A) :
     L.map (i.hom.app M) =
-      ((mateEquiv a a).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M ≫
+      ((mateEquiv a a).symm (TwoSquare.mk _ _ _ _ r)).app M ≫
         j.hom.app (L.obj M) := by
   have hm := unit_mateEquiv_symm a a (TwoSquare.mk _ _ _ _ r) M
   change F.map (a.unit.app M) ≫ r.app (L.obj M) =
     a.unit.app (F.obj M) ≫
-      R.map (((mateEquiv a a).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M) at hm
+      R.map (((mateEquiv a a).symm (TwoSquare.mk _ _ _ _ r)).app M) at hm
   apply (a.homEquiv _ _).injective
   simp only [Adjunction.homEquiv_unit, Functor.map_comp, ← Category.assoc]
   rw [← hm]

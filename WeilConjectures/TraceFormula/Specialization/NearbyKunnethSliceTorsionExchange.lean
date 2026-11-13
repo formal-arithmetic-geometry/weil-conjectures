@@ -51,7 +51,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two product configurations are large terms
 /-- **Künneth maps along morphisms of models with invertible exchanges**: for morphisms of models
 `ρ_M : MU ⟶ M`, `ρ_N : NU ⟶ N`, `ρ_P : PU ⟶ P` compatible with two product configurations, whose
@@ -83,7 +82,6 @@ theorem isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange (φ₁ : P.Hom M 
   simp only [Functor.map_comp] at h'
   exact isIso_iff_of_comp_eq h'
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two product configurations are large terms
 /-- `NearbyCyclesModel.isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange` with the pullback
 exchange of `ρ_P` invertible as a natural transformation. -/

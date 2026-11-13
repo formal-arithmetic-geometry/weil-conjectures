@@ -43,9 +43,7 @@ private theorem change_eq_of_map {R S : PurCompactSupport.Coefficients.{u}}
   funext T
   exact h T
 
-set_option maxHeartbeats 1000000 in
 -- The chosen derived presentations require an extended conversion budget.
-set_option synthInstance.maxHeartbeats 200000 in
 /-- The proper/open comparison for a finite coefficient map is invertible on its finite-Tor domain.
 Source: Zheng, Lemma 5.22; finite scalar mates, Construction 2.26 and Proposition 2.29.
 

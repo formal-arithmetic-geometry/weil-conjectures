@@ -199,7 +199,6 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 1000000 in
 -- the total and derived comparisons are matched with the canonical insertions
 /-- **Derived restriction of the native tensor product** (blueprint:
 `fix-prop-projection-formula`, the comparison `Lf^*(K ⊗ L) ≅ Lf^* K ⊗ Lf^* L` entering the
@@ -422,7 +421,6 @@ def NativePullDerivedNormalization
     (nativeOpenTensorModel k₀ l Y) (fun P T ↦ t.app (P, T)) mu
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- Keep the exact functor abstract while assembling totalization and descent.
 private theorem pullAbstract
     (R : ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l Z)

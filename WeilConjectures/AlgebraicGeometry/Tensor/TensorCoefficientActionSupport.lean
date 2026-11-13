@@ -65,11 +65,11 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
         b * @id (T.B.right.obj.obj (op U)) (T.i.val.app (op U) y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
         kernel (tensorGradedUnit j (L.tensorPow (a + d))),
-      T.k d ≫ μ ((T.c a).app ⊤ s) = v ≫ T.k (a + d) := by
-  let r := T.k d ≫ μ ((T.c a).app ⊤ s)
+      T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom = v ≫ T.k (a + d) := by
+  let r := T.k d ≫ (μ ((T.c a).app ⊤ s)).asHom
   let π := (T.degree (a + d)).τ₁
   refine ⟨r ≫ π, ?_⟩
   change r = (r ≫ π) ≫ T.k (a + d)
@@ -108,7 +108,7 @@ private theorem homogeneous_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
       ((SheafOfModules.evaluation X.ringCatSheaf (op V)).map T.i)).mp inferInstance
     apply hinj
     change T.i.val.app (op V) (r.val.app (op V) yV) = T.i.val.app (op V) ((T.k (a + d)).app V z)
-    change T.i.val.app (op V) ((μ ((T.c a).app ⊤ s)).val.app (op V) ((T.k d).app V yV)) = _
+    change T.i.val.app (op V) ((μ ((T.c a).app ⊤ s)).asHom.val.app (op V) ((T.k d).app V yV)) = _
     rw [hglobal, hg]
     have hl := hlocal V ((T.b a).app V t) ((T.k d).app V yV)
     dsimp only [id] at hl
@@ -155,10 +155,10 @@ theorem tensorGradedCoefficient_action_support {X Z : Scheme.{u}} (j : Z ⟶ X)
       T.I.val.map a.op (σ U g y) = σ V (T.C.right.obj.map a.op g) (T.I.val.map a.op y))
     (hglobal : ∀ (g : T.C.right.obj.obj (op ⊤)) (U : X.Opens)
       (y : T.I.val.obj (op U)),
-      (μ g).val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
+      (μ g).asHom.val.app (op U) y = σ U (T.C.right.obj.map (homOfLE le_top).op g) y) :
     ∃ v : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
         kernel (tensorGradedUnit j (L.tensorPow (n + d))),
-      T.k d ≫ μ (tensorGradedSection T D 0 (tensorPowSection f 1)) =
+      T.k d ≫ (μ (tensorGradedSection T D 0 (tensorPowSection f 1))).asHom =
         v ≫ T.k (n + d) := by
   set_option backward.isDefEq.respectTransparency false in
   set_option backward.isDefEq.respectTransparency.types false in

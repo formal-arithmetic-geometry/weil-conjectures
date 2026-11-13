@@ -34,9 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Homology, restriction and truncation comparisons require substantial normalization.
-set_option synthInstance.maxHeartbeats 100000 in
 -- Exact restriction additivity witnesses need a larger typeclass-search budget.
 /-- A single lower truncation works on an affine open for every quasi-coherent
 derived object. This is uniform in the object, with no coproduct hypothesis.

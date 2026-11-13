@@ -26,7 +26,6 @@ local notation "η[" S "," T "]" e =>
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (baseChange e) _
       (Scheme.smallGrothendieckTopology @Etale S) (Scheme.smallGrothendieckTopology @Etale T))
 
-set_option maxHeartbeats 500000 in
 -- Expanding units and composition comparisons requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in

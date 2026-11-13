@@ -89,7 +89,7 @@ noncomputable def derivedUpperStarExtendScalarsPushHom {X Y : Scheme.{u}} (h : X
     R((h)_*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a Y)) ⟶
       L(Mod.extendScalars (coefficientMap a X)) ⋙ R((h)_*⟦Λ'⟧) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ h) (derivedUpperStarLowerStarAdjunction Λ' h)
-    (derivedUpperStarExtendScalarsIso a h).inv).natTrans
+    (derivedUpperStarExtendScalarsIso a h).inv)
 
 /-- The isomorphisms `derivedUpperStarExtendScalarsIso a` commute with the `eqToHom`s induced by
 an equality `u = v` of morphisms of schemes. -/
@@ -129,7 +129,6 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- The cube condition of `CategoryTheory.mateEquiv_app_cube` for the derived pullbacks with
 coefficients `Λ` and `Λ'` along a commutative square, their pullback square comparisons and the

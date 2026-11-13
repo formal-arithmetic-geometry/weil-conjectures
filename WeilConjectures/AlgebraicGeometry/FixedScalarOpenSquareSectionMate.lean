@@ -48,7 +48,7 @@ def fixedScalarOpenSquareRestrictionMate
       (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).inv ≫
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-      (upperStarCompIso (ModuleCat.{u + 1} A) w).hom).natTrans ≫
+      (upperStarCompIso (ModuleCat.{u + 1} A) w).hom) ≫
     Functor.whiskerRight (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j').hom
       (lowerStar (ModuleCat.{u + 1} A) gU)
 

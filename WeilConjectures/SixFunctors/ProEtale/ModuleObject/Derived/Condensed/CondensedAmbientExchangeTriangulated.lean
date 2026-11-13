@@ -128,7 +128,6 @@ private theorem finiteProper_comparison_comp_commShift
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom]
   infer_instance
 
-set_option maxHeartbeats 400000 in
 -- Shift synthesis for the exchange mate needs a larger budget.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

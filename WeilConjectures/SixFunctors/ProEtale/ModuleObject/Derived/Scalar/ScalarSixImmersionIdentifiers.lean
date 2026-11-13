@@ -28,7 +28,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option maxHeartbeats 1600000 in
 -- Transpose the direct-image composition through the three ring-sheaf adjunctions.
 private theorem ring_coefficient_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -67,7 +66,6 @@ private abbrev reconstructedRing {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :=
   sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology X) R
 
-set_option maxHeartbeats 1600000 in
 -- Keep reconstructed rings abstract while checking the section formula.
 private theorem reconstructed_coefficient_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

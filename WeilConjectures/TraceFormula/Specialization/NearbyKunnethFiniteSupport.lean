@@ -209,7 +209,6 @@ lemma isIso_map_iff_of_comp_eq {C D : Type*} [Category C] [Category D] (F : C �
   isIso_iff_of_comp_eq (b := F.map b) (c := F.map c) (d := F.map d) (e := F.map e)
     (by rw [← F.map_comp, ← F.map_comp, ← F.map_comp, ← F.map_comp, h])
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **Restriction of the Künneth map, after a further pullback**: for a restriction of the product
 along open immersions and any functor `F` on the derived category of the special fibre of the

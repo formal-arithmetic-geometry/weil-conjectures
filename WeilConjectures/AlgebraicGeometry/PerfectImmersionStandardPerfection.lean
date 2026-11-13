@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardCokernel
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 

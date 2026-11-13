@@ -166,7 +166,6 @@ private theorem completed_map_injective'
   exact congrArg (fun k ↦ k.hom) (ff.map_injective (X := ⟨_, hunit⟩)
     (Y := ⟨_, hsource⟩) (show (P.ι ⋙ F).map ⟨a⟩ = (P.ι ⋙ F).map ⟨b⟩ from h))
 
-set_option maxHeartbeats 400000 in
 -- The complete-object and comparison calculations use concrete localization instances.
 /-- Realization identifies a completed Chern adjunct with the canonical derived
 adjunct of its normalized local Chern class.

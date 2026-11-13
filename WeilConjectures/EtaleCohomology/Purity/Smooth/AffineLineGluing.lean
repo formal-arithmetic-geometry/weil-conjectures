@@ -278,7 +278,6 @@ theorem conj_leftDerivedUpperStar_section_eq {B B' P P' : Scheme.{u}}
   rw [reassoc_of% H'']
   simp [Functor.map_comp]
 
-set_option maxHeartbeats 1000000 in
 -- the comparison manipulates long composites of derived pullback isomorphisms
 /-- **Agreement on overlaps.** Let `a : P ⟶ B` with section `i`, `a' : P' ⟶ B'` with section
 `i'`, and `w : P' ⟶ P` over `v : B' ⟶ B` carrying `i'` to `i`; let `r₁, r₂ : P'' ⟶ P'` lie over

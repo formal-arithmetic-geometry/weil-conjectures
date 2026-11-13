@@ -46,9 +46,9 @@ private theorem unionBounded_flatOver_restrict
   convert hh using 1 <;> try rfl
   ext r m
   change (F.smul (((a.appIso U.1).inv.hom)
-    (((a ≫ f).appLE V.1 U.1 e).hom r))).hom m =
-      (F.smul ((f.appLE V.1 U'.1 e').hom r)).hom m
-  exact congrArg (fun t ↦ (F.smul t).hom m) (congrArg (fun t ↦ t.hom r) heq)
+    (((a ≫ f).appLE V.1 U.1 e).hom r))).asHom.hom m =
+      (F.smul ((f.appLE V.1 U'.1 e').hom r)).asHom.hom m
+  exact congrArg (fun t ↦ (F.smul t).asHom.hom m) (congrArg (fun t ↦ t.hom r) heq)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

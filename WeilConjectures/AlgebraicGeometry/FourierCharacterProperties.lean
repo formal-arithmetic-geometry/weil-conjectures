@@ -77,11 +77,11 @@ def characterPointReturn
     (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) (h : σ ≫ π = π) (g : Y ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
     End ((CondensedRing.upperStar Λ (π ≫ g)).obj M) :=
-  (CondensedRing.upperStarIsoIdOfIsSepClosed Λ σ).inv.app
+  .of ((CondensedRing.upperStarIsoIdOfIsSepClosed Λ σ).inv.app
       ((CondensedRing.upperStar Λ (π ≫ g)).obj M) ≫
     (CondensedRing.upperStarComp Λ σ (π ≫ g)).inv.app M ≫
     (CondensedRing.upperStarEqToIso Λ
-      ((Category.assoc σ π g).symm.trans (congrArg (fun t ↦ t ≫ g) h))).hom.app M
+      ((Category.assoc σ π g).symm.trans (congrArg (fun t ↦ t ≫ g) h))).hom.app M)
 
 /-- Geometric Frobenius on the fibre of a sheaf descended to a finite field.
 Specialize the canonical point-return map to the fixed geometric Frobenius
@@ -95,7 +95,7 @@ def characterGeometricFrobenius
     (K : Type u) [Field K] [hK : Finite K] (X : Scheme.{u}) (g : Spec (.of K) ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   characterPointReturn Λ (AlgebraicClosure K) (Spec (.of K)) X
-    (Scheme.specAlgebraicClosure K).hom (specGeometricFrobenius K).hom
+    (Scheme.specAlgebraicClosure K).hom (specGeometricFrobenius K).asIso.hom
     (specGeometricFrobenius_hom_comp_specAlgebraicClosure K) g M
 
 /-- A specified endomorphism acts by the specified scalar on its actual module.
@@ -105,7 +105,7 @@ Frobenius scalar clause (blueprint: sk-lem-as-properties). -/
 def characterHasScalarAction
     {C : Type v} [Category.{w} C] [MonoidalCategory C]
     {R : C} [MonObj R] {M : Mod C R} (e : End M) (c : MonObj.Γ R) : Prop :=
-  e.hom = Mod.globalSmul c.hom M
+  e.asHom.hom = Mod.globalSmul c.hom M
 
 /-- The scalar ψ(Tr f(x)) uses the residue-field algebra structure supplied by X → Spec k₀.
 Source: blueprint sk-lem-as-properties, closed-point clause

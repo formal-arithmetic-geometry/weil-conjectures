@@ -47,7 +47,6 @@ theorem bifunctor_map_mkHom_comp₃ {C D B : Type*} [Category* C] [Category* D] 
   rw [← T.map_comp, ← T.map_comp]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Without this, the unifier unfolds `integralOperationsRoos` into mapping cocones when comparing
 -- `integralOperationsRoosFunctor.obj` with `integralOperationsTensorComplexFunctor.obj`.
 attribute [local irreducible] integralOperationsRoos in

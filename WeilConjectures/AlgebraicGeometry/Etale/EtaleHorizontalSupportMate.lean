@@ -267,7 +267,7 @@ private theorem open_base_change_mate (A : Type (u + 1)) [CommRing A]
         (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
         (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j')).symm
         (TwoSquare.mk _ _ _ _
-          (squareUpperStarIso (ModuleCat.{u + 1} A) sq.flip).hom)).natTrans := by
+          (squareUpperStarIso (ModuleCat.{u + 1} A) sq.flip).hom)) := by
   let ja := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
   let j'a := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j'
   let va := upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v
@@ -275,7 +275,7 @@ private theorem open_base_change_mate (A : Type (u + 1)) [CommRing A]
   let tau := TwoSquare.mk _ _ _ _ (squareUpperStarIso (ModuleCat.{u + 1} A) sq.flip).hom
   let beta := (mateEquiv ja j'a).symm tau
   change (conjugateEquiv (ja.comp ba) (va.comp j'a)).symm
-    (mateEquiv ba va tau).natTrans = beta.natTrans
+    (mateEquiv ba va tau) = beta
   apply (conjugateEquiv (ja.comp ba) (va.comp j'a)).injective
   rw [Equiv.apply_symm_apply]
   have hi := iterated_mateEquiv_conjugateEquiv ja j'a va ba beta
@@ -297,14 +297,14 @@ private theorem derived_open_base_change_mate (A : Type (u + 1)) [CommRing A]
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j')).symm
         (TwoSquare.mk _ _ _ _
           (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq.flip).hom)
-        ).natTrans := by
+        ) := by
   let ja := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j
   let j'a := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j'
   let beta := @asIso _ _ _ _ _
     (isIso_openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} A) sq)
   let tau := squareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq.flip
   have hm := open_base_change_mate A sq.toCommSq
-  change beta.hom = ((mateEquiv ja j'a).symm (.mk _ _ _ _ tau.hom)).natTrans at hm
+  change beta.hom = ((mateEquiv ja j'a).symm (.mk _ _ _ _ tau.hom)) at hm
   have hu (K : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
       j'a.unit.app _ ≫ (upperStar (ModuleCat.{u + 1} A) j').map (beta.hom.app K) =
         (upperStar (ModuleCat.{u + 1} A) v).map (ja.unit.app K) ≫
@@ -318,7 +318,7 @@ private theorem derived_open_base_change_mate (A : Type (u + 1)) [CommRing A]
   let taud := (exactDerivedSquareUpperStarIso
     (ModuleCat.{u + 1} A) sq.toCommSq.flip).hom
   change betad = ((mateEquiv ja.mapDerivedCategoryAdjunction
-    j'a.mapDerivedCategoryAdjunction).symm (.mk _ _ _ _ taud)).natTrans
+    j'a.mapDerivedCategoryAdjunction).symm (.mk _ _ _ _ taud))
   ext K
   apply (j'a.mapDerivedCategoryAdjunction.homEquiv _ _).injective
   rw [j'a.mapDerivedCategoryAdjunction.homEquiv_unit]
@@ -348,7 +348,7 @@ private theorem derived_open_square_mate (A : Type (u + 1)) [CommRing A]
       (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq.flip)
     a.hom = ((mateEquiv va ba).symm
       (.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso
-        (ModuleCat.{u + 1} A) sq).hom)).natTrans := by
+        (ModuleCat.{u + 1} A) sq).hom)) := by
   dsimp only
   let va := derivedEtaleLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} A) v inferInstance
@@ -361,13 +361,11 @@ private theorem derived_open_square_mate (A : Type (u + 1)) [CommRing A]
   let a := (conjugateIsoEquiv (va.comp ja) (j'a.comp ba)).symm
     (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq.flip)
   rw [derived_open_base_change_mate A sq]
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv va ba).injective
   rw [Equiv.apply_symm_apply]
   apply (mateEquiv ja j'a).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have hi := iterated_mateEquiv_conjugateEquiv va ba j'a ja
     (TwoSquare.mk _ _ _ _ a.hom)
   have hi' := congr_app hi M
@@ -420,16 +418,14 @@ private lemma rotated_inverse_mate
     (t : T ⊣ P) (u : U ⊣ Q) (l : L ⊣ S) (b : B ⊣ R)
     (beta : U ⋙ B ≅ L ⋙ T) (ex : P ⋙ S ≅ R ⋙ Q)
     (h : conjugateEquiv (l.comp t) (u.comp b) beta.hom = ex.hom) :
-    (mateEquiv u t (.mk _ _ _ _ beta.inv)).natTrans =
-      ((mateEquiv b l).symm (.mk _ _ _ _ ex.inv)).natTrans := by
+    (mateEquiv u t (.mk _ _ _ _ beta.inv)) =
+      ((mateEquiv b l).symm (.mk _ _ _ _ ex.inv)) := by
   have he : conjugateIsoEquiv (l.comp t) (u.comp b) beta = ex := Iso.ext h
   have hi : conjugateEquiv (u.comp b) (l.comp t) beta.inv = ex.inv :=
     congrArg Iso.inv he
-  apply congrArg TwoSquare.natTrans
   apply (mateEquiv b l).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   exact congr_app ((iterated_mateEquiv_conjugateEquiv u t l b
     (.mk _ _ _ _ beta.inv)).trans hi) M
 
@@ -517,11 +513,11 @@ theorem etaleHorizontalSupportMate
     have (K : DerivedCategoryModule A c.Z) : IsIso (ex.app K) :=
       (isIso_derived_exchange_iff_exact A psq.toCommSq K).mp inferInstance
     exact NatIso.isIso_of_isIso_app ex
-  let gam := ((mateEquiv b l).symm (.mk _ _ _ _ (inv ex))).natTrans
+  let gam := ((mateEquiv b l).symm (.mk _ _ _ _ (inv ex)))
   let pa := mapDerivedUpperStarLowerStarAdjunction B₀ c.g
   let qa := mapDerivedUpperStarLowerStarAdjunction B₀ cs.g
   let tau := exactDerivedSquareUpperStarIso B₀ psq.toCommSq
-  let sumEx := ((mateEquiv l b).symm (.mk _ _ _ _ tau.hom)).natTrans
+  let sumEx := ((mateEquiv l b).symm (.mk _ _ _ _ tau.hom))
   have hconj : conjugateEquiv (l.comp pa) (qa.comp b) sumEx = ex := by
     have h := iterated_mateEquiv_conjugateEquiv l b qa pa
       ((mateEquiv l b).symm (.mk _ _ _ _ tau.hom))
@@ -531,7 +527,7 @@ theorem etaleHorizontalSupportMate
     rw [hconj]
     infer_instance
   have : IsIso sumEx := conjugateEquiv_of_iso (l.comp pa) (qa.comp b) sumEx
-  let gam' := (mateEquiv qa pa (.mk _ _ _ _ (inv sumEx))).natTrans
+  let gam' := (mateEquiv qa pa (.mk _ _ _ _ (inv sumEx)))
   have hgam : gam' = gam :=
     rotated_inverse_mate pa qa l b (asIso sumEx) (asIso ex) hconj
   let H := J'.obj (V.obj M)
@@ -556,7 +552,7 @@ theorem etaleHorizontalSupportMate
     have h := derived_open_square_mate A jsq
     change a = ((mateEquiv va b).symm
       (.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B₀ jsq).hom)
-        ).natTrans at h
+        ) at h
     rw [h]
     exact (mateEquiv_counit_symm va b
       (.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso B₀ jsq).hom)

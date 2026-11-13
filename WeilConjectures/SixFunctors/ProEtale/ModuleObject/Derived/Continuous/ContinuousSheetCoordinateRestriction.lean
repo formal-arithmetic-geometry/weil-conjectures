@@ -284,7 +284,6 @@ private theorem restriction_naturality
   exact (ProEtale.upperStarIsoSheafPushforward Ab.{u + 1} f inferInstance).hom.naturality
     m.hom
 
-set_option maxHeartbeats 1200000 in
 -- Unfolding the section encoding compares its underlying additive maps.
 private theorem restriction_sections_naturality
     {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
@@ -342,7 +341,6 @@ private theorem module_assoc
     (f : M ⟶ N) (g : N ⟶ P) (h : P ⟶ Q) : (f ≫ g) ≫ h = f ≫ g ≫ h :=
   Category.assoc f g h
 
-set_option maxHeartbeats 1200000 in
 -- Keep comparison isomorphisms abstract during the categorical calculation.
 private theorem sheet_pullback_aux
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -407,7 +405,6 @@ private theorem sheet_embedding_eq
 attribute [local irreducible] finiteEtaleLatticeSheetEmbedding latticeIntegralEmbedding
   comapUpperStarIso
 
-set_option maxHeartbeats 1200000 in
 -- Checking the pullback coherence involves large module-object comparison terms.
 private theorem sheet_pullback
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -490,7 +487,6 @@ private theorem sheet_pullback_iso
 
 attribute [local irreducible] pullback_comap_iso pullback_comp_iso
 
-set_option maxHeartbeats 1200000 in
 -- Keep both the restriction functor and its comparison abstract in the calculation.
 private theorem restricted_relation_via_functor
     {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
@@ -563,7 +559,6 @@ private theorem integral_star_eq
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1200000 in
 -- Keep the coefficient comparison abstract when applying the restriction construction.
 /-- A global coordinate equation for normalized sheet maps persists on every open.
 The matrices are arbitrary; freeness and invertibility are not assumed.

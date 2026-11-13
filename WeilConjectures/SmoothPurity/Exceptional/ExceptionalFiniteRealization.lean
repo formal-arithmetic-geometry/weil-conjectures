@@ -667,7 +667,7 @@ theorem integralExceptionalEtaleInverse_existsUnique (n : ℕ) :
     (ModuleCat.{u + 1} (ULift.{u + 1}
       (Padic.coefficientExtensionRing l E (n + 1)))) g
   let β := integralExceptionalEtaleRight l E g A n
-  let α := ((mateEquiv a b).symm β.hom).natTrans
+  let α := ((mateEquiv a b).symm β.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences a b β
   let e := (asIso α).symm
   have he M N (h : (A.lift n).modules.obj M ⟶ N) :

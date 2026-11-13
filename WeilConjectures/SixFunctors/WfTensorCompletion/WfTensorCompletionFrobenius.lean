@@ -130,7 +130,7 @@ def chi : ordinary D c X₀ E ⟶ completed D c X₀ E where
 
 /-- The integral Frobenius is the existing exact coefficient transport.
 Source: blueprint step 13 (blueprint: lem-wf-tensor-completion-frobenius). -/
-abbrev pullback := pbcIsoIntegralPullback (D.geometricFrobenius X₀).hom
+abbrev pullback := pbcIsoIntegralPullback (D.geometricFrobenius X₀).asIso.hom
   (pbcStageDatum.{u} c.l c.Qbar E)
 
 /-- The ordinary pullback/tensor comparison restricted through the full inclusion.
@@ -139,7 +139,7 @@ def ordinaryMu (M N : Integral D c X₀ E) :
     (pullback D c X₀ E).obj ((ordinary D c X₀ E).obj (M, N)) ≅
       (ordinary D c X₀ E).obj ((pullback D c X₀ E).obj M, (pullback D c X₀ E).obj N) :=
   ObjectProperty.isoMk _
-    ((proEtaleCanonicalTensorComparison (D.geometricFrobenius X₀).hom
+    ((proEtaleCanonicalTensorComparison (D.geometricFrobenius X₀).asIso.hom
       (pbcAdicCompletion _ (pbcStageDatum.{u} c.l c.Qbar E))
       (pbcAdicCompletion _ (pbcStageDatum.{u} c.l c.Qbar E))
       (asIso (completedCoefficientMap _ (pbcStageDatum.{u} c.l c.Qbar E)))

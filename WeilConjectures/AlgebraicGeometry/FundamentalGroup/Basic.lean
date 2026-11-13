@@ -219,7 +219,7 @@ the automorphism group `Aut_Y(P)` acts simply transitively — are exactly the G
 the Galois category of finite étale `Y`-schemes. -/
 theorem isGalois_iff (P : Y.FiniteEtale) :
     IsGalois P ↔ IsConnected P ∧
-      ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.hom x := by
+      ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.asIso.hom x := by
   refine ⟨fun _ ↦ ⟨inferInstance, evaluation_aut_bijective_of_isGalois (fiber s) P⟩,
     fun ⟨_, h⟩ ↦ (isGalois_iff_pretransitive (fiber s) P).mpr ⟨fun x y ↦ (h x).2 y⟩⟩
 
@@ -249,7 +249,7 @@ The action of `G` on the `G`-set attached to a finite étale `Y`-scheme `P` is t
 of `G` on the geometric fibre of `P`. -/
 lemma equivalenceContAction_functor_obj_obj_ρ_apply (P : Y.FiniteEtale) (g : G)
     (x : (fiber s).obj P) :
-    (((equivalenceContAction s G).functor.obj P).obj.ρ g).hom x = g • x := rfl
+    (((equivalenceContAction s G).functor.obj P).obj.ρ g).asHom.hom x = g • x := rfl
 
 /-- Blueprint `thm-galois-fundamental`: The fibre functor is an equivalence.
 

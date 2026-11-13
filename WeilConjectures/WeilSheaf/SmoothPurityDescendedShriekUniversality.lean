@@ -89,7 +89,7 @@ lemma geometricFiberWeilSmoothTrace_eq_shriekTrace :
 Weil smooth trace for an arbitrary, possibly non-proper, smooth morphism. -/
 theorem geometricFiberWeilSmoothTrace_weilUniversal
     (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.inv)))
+      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.asIso.inv)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
       X.hom.geometricFiber) ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K))
     (hε : ∀ Q : Dᵇc(X.hom.geometricFiber)⟦Profinite.padicAlgClRingObj l⟧,

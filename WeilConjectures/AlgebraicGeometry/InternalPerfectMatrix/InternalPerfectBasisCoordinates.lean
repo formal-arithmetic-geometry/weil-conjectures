@@ -107,7 +107,6 @@ theorem liftedBasisIso_matrix
   apply ULift.ext
   exact mul_comm _ _
 
-set_option maxHeartbeats 400000 in
 -- The composite realization functor needs additional instance and type reduction.
 /-- The already fixed quotient bases are the biproduct comparison of the composite
 realization functor, with the normalized rank-one quotient comparison.
@@ -154,7 +153,6 @@ theorem quotientIso_factor (W : Scheme.{u})
   simp only [← Functor.biproduct_map_comp, Functor.comp_map]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The composite realization functor needs additional instance and type reduction.
 /-- Every realized integral linear map has the matrix of its constant residue entries
 in the fixed quotient bases.
@@ -174,10 +172,10 @@ theorem quotientIso_map (W : Scheme.{u})
     let U := ModuleCat.uliftFunctor.{u + 1, u} (A l E)
     G.map (F.map (U.map f)) ≫ (quotientIso l E W P hfree n j).hom =
       (quotientIso l E W P hfree n i).hom ≫
-        biproduct.matrix (fun s t ↦ coefficientEndEquiv l E W n
+        biproduct.matrix (fun s t ↦ (coefficientEndEquiv l E W n
           (LocallyConstant.const _ (Ideal.Quotient.mk
             (Padic.coefficientExtensionIdeal l E (n + 1))
-              ((basis l E P hfree j).repr (f ((basis l E P hfree i) s)) t)))) := by
+              ((basis l E P hfree j).repr (f ((basis l E P hfree i) s)) t)))).asHom) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let F := FiniteConstantModel.modelFunctor (A l E) W
   let : F.Additive :=

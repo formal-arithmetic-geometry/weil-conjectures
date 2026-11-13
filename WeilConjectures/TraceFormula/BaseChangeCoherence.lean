@@ -145,7 +145,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ h).obj M) := by
   have hM :=
     congr_app (boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert' ℓ sq₁ sq₂) M
-  simp only [TwoSquare.hComp, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+  simp only [TwoSquare.hComp, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc] at hM
   exact hM
@@ -223,7 +223,6 @@ lemma Adjunction.map_unit_app_comp_exchangeRight_app {A B A' B' : Type*} [Catego
   erw [af.left_triangle_components]
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the `erw` steps unfold the restricted `ℚ̲̄_ℓ`-functors, which is expensive
 /-- **`Ex_!` is compatible with the units of `Lf^* ⊣ Rf_!`** for proper vertical maps:
 `Lg^*(η_f) ≫ Ex_! = η_{f'} ≫ Rf'_!(θ_sq)` with `θ_sq : Lg^* Lf'^* ≅ Lf^* Lg'^*`. -/

@@ -41,14 +41,14 @@ theorem purityCoefficientChange_iff_trace
     (γ : J ≅ G) (γ' : J' ≅ G') (K : D)
     (a : S.obj (J.obj K) ⟶ J'.obj (T.obj K)) :
     S.map (γ.hom.app K) ≫
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv)).natTrans.app K =
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv)).app K =
       a ≫ γ'.hom.app (T.obj K) ↔
     T.map (F.map (γ.hom.app K) ≫ adj.counit.app K) =
       b.hom.app (J.obj K) ≫ F'.map a ≫
         (F'.map (γ'.hom.app (T.obj K)) ≫ adj'.counit.app (T.obj K)) := by
   have h : (adj'.homEquiv _ _).symm
       (S.map (γ.hom.app K) ≫
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv)).natTrans.app K) =
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ b.inv)).app K) =
       b.inv.app (J.obj K) ≫ T.map (F.map (γ.hom.app K) ≫ adj.counit.app K) := by
     rw [Adjunction.homEquiv_counit, F'.map_comp, Category.assoc,
       mateEquiv_counit]

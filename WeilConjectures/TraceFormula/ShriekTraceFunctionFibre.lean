@@ -69,7 +69,6 @@ instance faithful_single_comp_quotient_comp_qh (C : Type*) [Category C] [Abelian
   Functor.Faithful.of_iso ((DerivedCategory.singleFunctorIsoCompQ C 0).trans
     (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso C).symm))
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- The ring structure on the endomorphisms of the unit of `Dᵇc` takes long to synthesize.
 omit [IsSeparated X.hom] in
 /-- Placing an endomorphism of the unit module in degree `0` is injective. -/
@@ -82,11 +81,12 @@ lemma homologyUnitEndRingHom_injective :
   have h₂ := (RingEquiv.injective (asIso (Functor.LaxMonoidal.ε
     (DerivedCategory.Qh (C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))))).symm.conjRingEquiv) h₁
+  apply End.ext
   exact Functor.map_injective (HomologicalComplex.single
     (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
       (ComplexShape.up ℤ) 0 ⋙ HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙
-        DerivedCategory.Qh) h₂
+        DerivedCategory.Qh) (congrArg End.asHom h₂)
 
 end Injective
 
@@ -249,7 +249,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (r
   (hZ : IsPullback i (toPoint Z) ((geometricBaseChange k (AlgebraicClosure k)).map f)
     (geometricBaseChangePoint y.1 y.2.1))
 
-set_option maxHeartbeats 400000 in
 -- the carriers of the Weil objects are compared up to unfolding
 include hZ in
 /-- **The local trace of the lower shriek as a trace on the geometric fibre**: placed in degree
@@ -259,8 +258,9 @@ the iterate `(K, φ^{(n+1)})`, a Weil object for the model Frobenius
 `Φ_X = (e_X^{n+1} ≫ F_X^{n+1}) ×_k k̄`. -/
 theorem homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek [IsProper f.left]
     (K : WeilBoundedConstructible ℓ eX.hom) :
-    homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
-        (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K)) =
+    (homologyUnitEndRingHom ℓ (point (AlgebraicClosure k))
+        (weilStalkTraceAlternatingSum ℓ (n + 1) y.1 y.2.2
+          ((weilLowerShriek ℓ eX eY hf).obj K))).asHom =
       trace ((weilUpperStar ℓ ΦZ _ i hi).obj
         ((weilGeometricBaseChange (AlgebraicClosure k) ℓ X (n + 1) (eX.pow (n + 1)).hom).obj
           (K.powSucc ℓ n))).compactFrobenius := by
@@ -305,7 +305,6 @@ lemma trace_weilStalk_frobenius_congr {Ω : Type u} [Field Ω] [IsSepClosed Ω]
   obtain rfl : hx = hx' := rfl
   rfl
 
-set_option maxHeartbeats 800000 in
 -- the carriers of the Weil objects are compared up to unfolding
 set_option linter.overlappingInstances false in
 include hZ in
@@ -332,9 +331,10 @@ theorem weilStalkTraceAlternatingSum_weilLowerShriek_eq_finsum_of_fibre [IsPrope
   let _ : Fintype {x : frobeniusFixedPoints eX (n + 1) // x.1 ≫ f.left = y.1} := Fintype.ofEquiv _ e
   refine homologyUnitEndRingHom_injective ℓ
     (point (AlgebraicClosure k)) ?_
+  apply End.ext
   rw [homologyUnitEndRingHom_weilStalkTraceAlternatingSum_weilLowerShriek ℓ hf y hi hZ K,
     ← WeilBoundedConstructible.globalOperator_one, htf, finsum_eq_sum_of_fintype, map_sum,
-    ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
+    End.sum_asHom, ← Fintype.sum_equiv e _ _ (fun _ ↦ rfl)]
   refine Finset.sum_congr rfl fun z _ ↦ ?_
   rw [WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar hi,
     WeilBoundedConstructible.trace_stalkFrobenius_one _ _ _ (by

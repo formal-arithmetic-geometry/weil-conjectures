@@ -74,7 +74,6 @@ private theorem exactTensorComparison
   simp only [Category.assoc]
   erw [NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the two monoidal presentations requires the exact pullback instances.
 /-- The specified derived tensor pullback comparison computes the termwise oplax
 comparison after the canonical localization factors.

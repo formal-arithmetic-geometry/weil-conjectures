@@ -1452,9 +1452,9 @@ private theorem kan_postcompose_rightAdjoint
   simp only [Functor.comp_obj, transpose_symm_app, Equiv.apply_symm_apply]
   have hm := NatTrans.congr_app m.w X
   have hn := NatTrans.congr_app (hg K.left K.hom) X
-  change m.left.app (Q.obj X) ≫ (𝟙 _ ≫ U.map (ε.app X)) = K.hom.app X ≫ 𝟙 _ at hm
+  change m.left.app (Q.obj X) ≫ (𝟙 _ ≫ U.map (ε.app X)) = K.hom.app X at hm
   change (g K.left K.hom).app (Q.obj X) ≫ (𝟙 _ ≫ U.map (ε.app X)) = K.hom.app X at hn
-  simp only [Category.id_comp, Category.comp_id] at hm hn
+  simp only [Category.id_comp] at hm hn
   exact hm.trans hn.symm
 
 private theorem scalarDerivedAdjunction_exists (T : Scheme.{t})

@@ -486,7 +486,6 @@ lemma exists_surjective_etale_pullSection_eq
     | some k => exact hg k.1
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- the proof assembles several constructions and is long
 include h in
 /-- **Surjectivity of restriction to the closed fibre over a henselian pair.** Every global

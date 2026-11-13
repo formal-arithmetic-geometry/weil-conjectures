@@ -56,7 +56,6 @@ private def towerLimitSquare {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     Functor.associator _ _ _
 
 
-set_option maxHeartbeats 800000 in
 -- The section calculation compares two presentations of the same finite quotient.
 /-- The unit of an ordinary quotient model, projected to level `n`, is its unit generator.
 Source: Stacks 06YY, 0941. -/

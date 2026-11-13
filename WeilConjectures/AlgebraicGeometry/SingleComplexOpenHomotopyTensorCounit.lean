@@ -62,7 +62,6 @@ private theorem map_homotopy_counit_square
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Comparing the chosen adjunctions with the named homotopy comparisons needs this budget.
 /-- The inverse tensor restriction comparison is the mate of the sectionwise
 open direct-image comparison, evaluated on a homotopy complex. All arrows here

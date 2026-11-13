@@ -36,7 +36,7 @@ def ringedNegativeKoszulFactorTransitionF
       (ringedNegativeKoszulFactor O b m).X n :=
   if h : n = -1 then
     eqToHom (congrArg (ringedNegativeKoszulFactor O b (m + 1)).X h) ≫
-      (HomologicalComplex.doubleXIso₀ _ _).hom ≫ ringedKoszulScalar O b ≫
+      (HomologicalComplex.doubleXIso₀ _ _).hom ≫ (ringedKoszulScalar O b).asHom ≫
       (HomologicalComplex.doubleXIso₀ _ _).inv ≫
       eqToHom (congrArg (ringedNegativeKoszulFactor O b m).X h.symm)
   else if h : n = 0 then
@@ -63,7 +63,7 @@ theorem ringedNegativeKoszulFactorTransitionF_comm
   by_cases hn : n = -1
   · subst n
     simp [ringedNegativeKoszulFactorTransitionF, ringedNegativeKoszulFactor,
-      HomologicalComplex.double_d, Category.assoc, pow_succ]
+      HomologicalComplex.double_d, Category.assoc, pow_succ, End.mul_asHom]
   · rw [show (ringedNegativeKoszulFactor O b m).d n (n + 1) = 0 from
       HomologicalComplex.double_d_eq_zero₀ _ _ _ _ hn,
       show (ringedNegativeKoszulFactor O b (m + 1)).d n (n + 1) = 0 from

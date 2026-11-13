@@ -236,7 +236,7 @@ def finiteRestrictionMate (tensor : TensorComparison l E j o) (n : ℕ) :
     restriction l E j o ⋙ scalarReductionExtension l E U n ⟶
       scalarReductionExtension l E X n ⋙ finiteRestriction l E j o n :=
   (mateEquiv (ordinaryAdjunction l E j o) (finiteOpenAdjunction l E j o n)
-    (TwoSquare.mk _ _ _ _ (tensor.ordinary n).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (tensor.ordinary n).inv))
 
 /-- The mate has the prescribed unit, inverse-tensor, counit word.
 Source: Stacks 0E8I (blueprint: lem-sf-ordinary-open-finite-restriction-mate-invertible). -/

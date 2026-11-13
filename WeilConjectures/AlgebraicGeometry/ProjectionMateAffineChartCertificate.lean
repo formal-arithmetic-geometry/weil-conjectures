@@ -26,7 +26,6 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- Eliminating the nested chart witnesses elaborates two standard localization instances.
 /-- Every affine chart supplies an affine projection mate whose invertibility implies
 invertibility of the original mate on the cohomology sheaves restricted to that chart.

@@ -74,7 +74,7 @@ instance isEtaleQuotient (W : WeilGroup p) : W.IsEtaleQuotient := by
     pullbackFiberIso p.geometricFiberProj t ≪≫
       (nonempty_iso_of_fiberFunctor (fiber (t ≫ p.geometricFiberProj))
         (fiber W.basePoint)).some
-  let τF := (nonempty_mapIso_fiber_iso t p.geometricGaloisFrobenius).some
+  let τF := (nonempty_mapIso_fiber_iso t p.geometricGaloisFrobenius.asIso).some
   let ρ := fundamentalGroupMap τ G' W.fundamentalGroup
   let ψ : G' →* weilGroup p W.basePoint W.fundamentalGroup :=
     (ρ.prod (1 : G' →* Multiplicative ℤ)).codRestrict _ fun k ↦

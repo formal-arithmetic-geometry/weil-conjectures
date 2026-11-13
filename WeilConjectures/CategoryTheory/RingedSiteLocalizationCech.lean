@@ -10,6 +10,7 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 import WeilConjectures.RingTheory.ModuleLocalizationFilteredColimit
 import WeilConjectures.RingTheory.TwoLocalizationExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # The binary localization Cech sequence
 
@@ -65,11 +66,11 @@ private noncomputable def localization_fraction_iso
       ringedSectionLocalization (R.over U) (ringedSliceSection R U f) := by
   let O := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
   let t : End (SheafOfModules.unit (O.over U)) :=
-    (SheafOfModules.unit (O.over U)).unitHomEquiv.symm
+    .of ((SheafOfModules.unit (O.over U)).unitHomEquiv.symm
       (PresheafOfModules.sectionsMk (fun X ↦ O.obj.map X.unop.hom.op f)
-        (fun {X Y} a ↦ ringedSiteSectionLocalization_compatible O U f X Y a))
+        (fun {X Y} a ↦ ringedSiteSectionLocalization_compatible O U f X Y a)))
   let D := Functor.ofSequence (X := fun _ : ℕ ↦ SheafOfModules.unit (O.over U))
-    (fun _ ↦ t)
+    (fun _ ↦ (t).asHom)
   let Dp := D ⋙ SheafOfModules.forget (O.over U)
   let s := ringedSliceSection R U f
   let F := ringedSectionLocalizationPresheaf (R.over U) s

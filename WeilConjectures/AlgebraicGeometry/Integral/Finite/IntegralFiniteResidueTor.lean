@@ -141,7 +141,6 @@ private theorem fixed_scalar
                   (RingCat.of (ULift.{u + 1} A)))).app U a))) x = _
   rw [constant_scalar_unit]
 
-set_option maxHeartbeats 600000 in
 -- Comparing the iterated scalar-restriction structures needs additional reduction.
 private def fixedRestrictionSquare
     (A B : Type u) [CommRing A] [CommRing B]

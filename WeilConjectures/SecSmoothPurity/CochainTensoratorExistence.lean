@@ -650,7 +650,6 @@ private theorem exists_forward
   rw [hf] at he
   exact (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) he).symm.trans (ha W m n)
 
-set_option maxHeartbeats 600000 in
 -- Comparing both module-sheafification adjunctions involves nested tensor maps.
 private theorem presheafTensorDescent
     (E F : PresheafOfModules.{u} (ringSheaf B).obj)
@@ -752,7 +751,6 @@ private noncomputable def ins (M : SheafOfModules.{u} (ringSheaf A))
   (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf B).obj)).unit.app
     (changeOfRingsPresheaf.{vC, uC, u} c M)).app W
       ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 private theorem scalar_tensor_ext
     (M N : SheafOfModules.{u} (ringSheaf A)) (H : SheafOfModules.{u} (ringSheaf B))

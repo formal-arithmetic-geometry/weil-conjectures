@@ -379,7 +379,7 @@ theorem exists_finset_lTensor_eq_zero_of_injective [IsNoetherianRing R₀] (p : 
       (TensorProduct.comm R₀ M₀ p ξ) = ψ.rTensor M₀ ((Submodule.inclusion hPQ).rTensor M₀ t) := by
     rw [LinearMap.rTensor_comp, LinearMap.comp_apply, LinearMap.rTensor_comp, LinearMap.comp_apply]
   rw [← hψ, ← (TensorProduct.comm R₀ p M₀).apply_symm_apply ξ, TensorProduct.comm_symm,
-    LinearMap.lTensor_comm, key, hQ, map_zero, map_zero]
+    LinearMap.lTensor_comm, key, hQ, LinearMap.map_zero, LinearEquiv.map_zero]
 
 
 end FiniteStage

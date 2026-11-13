@@ -222,7 +222,7 @@ theorem isIso_pullbackExchange_app_of_isIso_baseChangeMap_app (K : 𝔻(Y))
   isIso_pullbackExchange_app_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (baseChangeMap Λ φ.commSq_j) (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl K hK
 

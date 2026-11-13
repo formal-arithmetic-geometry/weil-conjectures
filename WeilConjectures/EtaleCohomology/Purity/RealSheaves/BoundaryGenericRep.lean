@@ -112,7 +112,8 @@ theorem genericStalkEquiv_fundamentalRep_of_deg_zero
   have h' : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ) ≫ UniversalCover.proj B₀.t =
       genericGeomPoint (U ↘ Spec (.of K)) j := by
     rw [Category.assoc, hξ, ha]
-  set g := UniversalCover.liftPath B₀.t _ h' ≪≫ (UniversalCover.liftPath B₀.t ξ hξ).symm
+  set g := Aut.of
+    (UniversalCover.liftPath B₀.t _ h' ≪≫ (UniversalCover.liftPath B₀.t ξ hξ).symm)
   have hgw : (⟨_, hw⟩ : weilGroup (U ↘ Spec (.of K)) sU GU) = (Bξ).geomHom g := by
     apply Subtype.ext
     have e := (Bξ).weilGroupEquiv_geomHom g
@@ -131,7 +132,6 @@ theorem genericStalkEquiv_fundamentalRep_of_deg_zero
   rw [genericStalkEquiv_apply B₀ ξ hξ, genericStalkEquiv_apply B₀ ξ hξ]
   exact e.symm
 
-set_option maxHeartbeats 400000 in
 -- the anonymous constructor of the Weil group element is checked against the carrier slowly
 /-- **Galois elements of degree `n` act through the Weil structure.** If the image
 `w = (ρ(σ), n)` of `σ ∈ Gal(Ω / k(C))` lies in the Weil group (for instance a residue Frobenius
@@ -148,7 +148,7 @@ theorem genericStalkEquiv_fundamentalRep
       weilGroup (U ↘ Spec (.of K)) sU GU)
     (ha : Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ genericGeomPoint (U ↘ Spec (.of K)) j =
       genericGeomPoint (U ↘ Spec (.of K)) j ≫
-        ((U ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).hom)
+        ((U ↘ Spec (.of K)).geometricGaloisFrobenius ^ n).asIso.hom)
     (v : LisseMonodromy.StalkSpace (Bξ).t (F.toLisse hF)) :
     genericStalkEquiv B₀ ξ hξ F hF (fundamentalRep M
         (Bξ).weilMonodromyData F hF
@@ -157,18 +157,18 @@ theorem genericStalkEquiv_fundamentalRep
         (globalSectionsTransport _ ha (F.frobeniusPowStr n))).hom
         (genericStalkEquiv B₀ ξ hξ F hF v) := by
   have h₁ : (Spec.map (CommRingCat.ofHom (σ : Ω →+* Ω)) ≫ ξ) ≫ UniversalCover.proj B₀.t =
-      genericGeomPoint (U ↘ Spec (.of K)) j ≫ (FrU ^ n).hom := by
+      genericGeomPoint (U ↘ Spec (.of K)) j ≫ (FrU ^ n).asIso.hom := by
     rw [Category.assoc, hξ, ha]
-  have h₂ : (ξ ≫ UniversalCover.map (FrU ^ n).hom B₀.t) ≫
-      UniversalCover.proj (B₀.t ≫ (FrU ^ n).hom) =
-        genericGeomPoint (U ↘ Spec (.of K)) j ≫ (FrU ^ n).hom := by
+  have h₂ : (ξ ≫ UniversalCover.map (FrU ^ n).asIso.hom B₀.t) ≫
+      UniversalCover.proj (B₀.t ≫ (FrU ^ n).asIso.hom) =
+        genericGeomPoint (U ↘ Spec (.of K)) j ≫ (FrU ^ n).asIso.hom := by
     rw [Category.assoc, UniversalCover.map_proj, ← Category.assoc, hξ]
-  have hd : (B₀.t ≫ (FrU ^ n).hom) ≫ (U ↘ Spec (.of K)).geometricFiberProj =
+  have hd : (B₀.t ≫ (FrU ^ n).asIso.hom) ≫ (U ↘ Spec (.of K)).geometricFiberProj =
       B₀.t ≫ (U ↘ Spec (.of K)).geometricFiberProj := by
     rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
   set δ := UniversalCover.liftPath B₀.t _ h₁ ≪≫
-    (UniversalCover.liftPath (B₀.t ≫ (FrU ^ n).hom) _ h₂).symm
-  set g' := δ ≪≫ ((Bξ).frobPathPow n).symm
+    (UniversalCover.liftPath (B₀.t ≫ (FrU ^ n).asIso.hom) _ h₂).symm
+  set g' := Aut.of (δ ≪≫ ((Bξ).frobPathPow n).symm)
   have hwB : (⟨_, hw⟩ : weilGroup (U ↘ Spec (.of K)) sU GU) =
       (Bξ).frobLift ^ n * (Bξ).geomHom g' := by
     have hdown := (Bξ).downAut_eq_mul_geomAut δ ((Bξ).frobPathPow n) hd
@@ -195,10 +195,10 @@ theorem genericStalkEquiv_fundamentalRep
   rw [show fundamentalRep M (Bξ).weilMonodromyData F hF ((Bξ).geomHom g') =
     LisseMonodromy.rep M (Bξ).t (F.toLisse hF) g' from hgeo]
   -- the transport along the square is `Ψ_n(δ)`
-  have e := liftStalkIso_globalSectionsTransport B₀.t ξ hξ (FrU ^ n).hom _ ha h₁ h₂
+  have e := liftStalkIso_globalSectionsTransport B₀.t ξ hξ (FrU ^ n).asIso.hom _ ha h₁ h₂
     (F.toLisse hF) (F.frobeniusPowStr n)
   have hΨ : (LisseMonodromy.mono M δ).hom.app (F.toLisse hF) ≫
-      (upperStarStalkIso l (FrU ^ n).hom B₀.t (F.toLisse hF).obj.X).hom ≫
+      (upperStarStalkIso l (FrU ^ n).asIso.hom B₀.t (F.toLisse hF).obj.X).hom ≫
       (stalkFunctor l B₀.t).map (F.frobeniusPowStr n) = frobPowStalk M (Bξ) F hF n δ := by
     rw [frobPowStalk, ← WeilSheaf.lisseFrobPowStr_hom_hom]
     rfl

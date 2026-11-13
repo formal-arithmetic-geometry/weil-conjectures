@@ -32,7 +32,7 @@ private theorem fixed_of_dense_generator
     {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (τ : G) (hd : DenseRange (zpowersHom G τ))
     (X : DiscreteModule.{w} G) (x : X.obj.V)
-    (hx : (X.obj.ρ τ).hom x = x) : ∀ g : G, (X.obj.ρ g).hom x = x := by
+    (hx : (X.obj.ρ τ).asHom.hom x = x) : ∀ g : G, (X.obj.ρ g).asHom.hom x = x := by
   intro g
   let U := X.obj.stabilizer x
   have hU : IsClosed (U : Set G) := U.isClosed_of_isOpen (X.isOpen_stabilizer x)
@@ -42,21 +42,21 @@ private theorem H_one_of_generator_surjective
     {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (τ : G) (hd : DenseRange (zpowersHom G τ))
     (X : DiscreteModule.{w} G)
-    (hsurj : ∀ x : X.obj.V, ∃ y : X.obj.V, (X.obj.ρ τ).hom y - y = x) :
+    (hsurj : ∀ x : X.obj.V, ∃ y : X.obj.V, (X.obj.ρ τ).asHom.hom y - y = x) :
     Subsingleton (H G X 1) := by
   change Subsingleton (Abelian.Ext (intTrivial.{w} G) (shortComplex₁.{w} X).X₁ 1)
   rw [subsingleton_ext_one_iff (shortExact₁.{w} X) (subsingleton_H_coind₁.{w} _ 0),
     forall_exists_comp_eq_iff.{w}]
   intro z hz
   obtain ⟨f, rfl⟩ := (QuotientAddGroup.mk_surjective z)
-  have hτf : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).hom f - f ∈ toCoind₁Range X := by
+  have hτf : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).asHom.hom f - f ∈ toCoind₁Range X := by
     rw [← QuotientAddGroup.eq_iff_sub_mem]
     exact hz τ
   obtain ⟨x, hx⟩ := hτf
   obtain ⟨y, hy⟩ := hsurj x
   let f' : ((coind₁.{w} G).obj X.obj.V).obj.V := f - (toCoind₁ X).hom.hom.hom y
-  have hf'τ : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).hom f' = f' := by
-    have h1 : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).hom f =
+  have hf'τ : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).asHom.hom f' = f' := by
+    have h1 : (((coind₁.{w} G).obj X.obj.V).obj.ρ τ).asHom.hom f =
         f + (toCoind₁ X).hom.hom.hom x := by
       rw [hx]; abel
     simp only [f', map_sub, h1, ← hom_comm_apply, ← hy, map_sub]
@@ -71,7 +71,7 @@ private theorem H_two_of_coker_generator_surjective
     (τ : G) (hd : DenseRange (zpowersHom G τ))
     (X : DiscreteModule.{w} G)
     (hsurj : ∀ z : (coker₁ X).obj.V,
-      ∃ y : (coker₁ X).obj.V, ((coker₁ X).obj.ρ τ).hom y - y = z) :
+      ∃ y : (coker₁ X).obj.V, ((coker₁ X).obj.ρ τ).asHom.hom y - y = z) :
     Subsingleton (H G X 2) := by
   exact subsingleton_ext_succ_of_shortExact (shortExact₁ X)
     (subsingleton_H_coind₁ _ 1) (H_one_of_generator_surjective τ hd (coker₁ X) hsurj)
@@ -149,7 +149,7 @@ theorem subsingleton_H_two_trivialZMod_of_finiteField
     exact h
   let X := trivialZMod.{u + 1} Gal(Ks/K) ℓ
   have hsurj (z : (coker₁.{u + 1} X).obj.V) :
-      ∃ y : (coker₁.{u + 1} X).obj.V, ((coker₁.{u + 1} X).obj.ρ τ).hom y - y = z := by
+      ∃ y : (coker₁.{u + 1} X).obj.V, ((coker₁.{u + 1} X).obj.ρ τ).asHom.hom y - y = z := by
     obtain ⟨f, rfl⟩ := QuotientAddGroup.mk_surjective z
     obtain ⟨h, hho, hh⟩ := exists_smooth_primitive_of_cyclic_residues τ hd residue hresidue
       ℓ (Fact.out : ℓ.Prime).one_lt f.1 f.2 (fun x ↦ by

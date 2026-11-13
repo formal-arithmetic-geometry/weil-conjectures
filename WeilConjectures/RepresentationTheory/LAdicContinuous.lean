@@ -220,7 +220,6 @@ private theorem continuous_coefficient_function
   let := spectralNorm.nontriviallyNormedField ℚ_[l] E
   exact (coefficient_inclusion_isometry l E).isEmbedding.isInducing.continuous_iff.mpr hc
 
-set_option maxHeartbeats 0 in
 -- Finite-field model transport compares the full scalar-restriction and tensor structures.
 /-- Continuous finite-dimensional representations over the p-adic algebraic closure
 are exactly the representations with a continuous finite coefficient model.

@@ -193,7 +193,6 @@ private theorem derived_comp_heq
   subst e'
   rfl
 
-set_option maxHeartbeats 600000 in
 -- Comparing the sectionwise associators elaborates dependent restriction functors.
 private theorem ordinary_restriction_comp
     (W : Scheme.{u}) {A B C : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

@@ -31,10 +31,10 @@ theorem inverseMateInterchange
     (ax : SX ⊣ UX) (ay : SY ⊣ UY) (ar : PA ⊣ RA) (az : PB ⊣ RB)
     (δ : UY ⋙ PA ≅ PB ⋙ UX) (β : PA ⋙ SX ≅ SY ⋙ PB)
     (d : RB ⋙ UY ≅ UX ⋙ RA)
-    (hβ : (mateEquiv ay ax (TwoSquare.mk _ _ _ _ β.hom)).natTrans = δ.hom)
-    (hd : (mateEquiv az ar (TwoSquare.mk _ _ _ _ δ.hom)).natTrans = d.hom) :
-    ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans =
-      (mateEquiv ar az (TwoSquare.mk _ _ _ _ β.inv)).natTrans := by
+    (hβ : (mateEquiv ay ax (TwoSquare.mk _ _ _ _ β.hom)) = δ.hom)
+    (hd : (mateEquiv az ar (TwoSquare.mk _ _ _ _ δ.hom)) = d.hom) :
+    ((mateEquiv ax ay).symm (TwoSquare.mk _ _ _ _ d.inv)) =
+      (mateEquiv ar az (TwoSquare.mk _ _ _ _ β.inv)) := by
   have hβ' : mateEquiv ay ax (TwoSquare.mk _ _ _ _ β.hom) =
       TwoSquare.mk _ _ _ _ δ.hom := by
     ext K
@@ -54,6 +54,6 @@ theorem inverseMateInterchange
     ext K
     exact congr_app ((iterated_mateEquiv_conjugateEquiv ar az ay ax
       (TwoSquare.mk _ _ _ _ β.inv)).trans hinv) K
-  exact congrArg TwoSquare.natTrans ((mateEquiv ax ay).symm_apply_eq.mpr hq.symm)
+  exact ((mateEquiv ax ay).symm_apply_eq.mpr hq.symm)
 
 end WeilConjectures.ExceptionalIntegralScalar

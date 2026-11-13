@@ -252,8 +252,8 @@ private theorem adjunct_square_core
     (θ : TwoSquare G L L' H) {P : C} {P' : E} {K : D} {K' : F}
     (z : L.obj P ⟶ K) (z' : L'.obj P' ⟶ K') (b : G.obj P ⟶ P')
     (d : H.obj K ⟶ K')
-    (hz : θ.natTrans.app P ≫ H.map z ≫ d = L'.map b ≫ z') :
-    G.map (adj.homEquiv _ _ z) ≫ (mateEquiv adj adj' θ).natTrans.app K ≫ R'.map d =
+    (hz : θ.app P ≫ H.map z ≫ d = L'.map b ≫ z') :
+    G.map (adj.homEquiv _ _ z) ≫ (mateEquiv adj adj' θ).app K ≫ R'.map d =
       b ≫ adj'.homEquiv _ _ z' := by
   rw [reassoc_of% adjunct_mate adj adj' G H θ z]
   rw [← adj'.homEquiv_naturality_right, ← adj'.homEquiv_naturality_left]

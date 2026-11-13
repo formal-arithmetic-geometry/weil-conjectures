@@ -23,7 +23,6 @@ attribute [local irreducible]
   AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedClosedComparison
 universe u a b
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
-set_option maxHeartbeats 800000 in
 -- Coherence compares the large localization and monoidal instance expressions.
 private theorem exact_total_tensor_square
     {C : Type a} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]

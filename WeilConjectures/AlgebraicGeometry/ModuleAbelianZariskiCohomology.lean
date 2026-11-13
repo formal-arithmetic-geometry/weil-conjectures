@@ -14,6 +14,7 @@ import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Cohomology of a module sheaf agrees with that of its underlying abelian sheaf
 
