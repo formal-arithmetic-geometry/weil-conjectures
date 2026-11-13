@@ -78,8 +78,8 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).homEquiv _ _
       ((pullbackTensorSequenceInverseEvaluation l E f n).hom.app M) = _ at h
   rw [Adjunction.homEquiv_unit] at h
-  have hh := congrArg (fun a ↦ a.val.app (op U)
-    (coefficientEvaluationSection l E Y M n (op U) x)) h
+  have hh0 := congrArg (fun a ↦ a.val.app (op U)) h
+  have hh := congrArg (fun a ↦ a (coefficientEvaluationSection l E Y M n (op U) x)) hh0
   simp only [Functor.comp_obj, SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply] at hh
   have hd := (pullbackTensorSequenceDirectEvaluation_existsUnique l E f n).exists.choose_spec
@@ -106,8 +106,7 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   have hh' : HEq _ _ := heq_of_eq hh
   have hdh : HEq _ _ := hd.trans hmap
   have hdh' : HEq _ _ := hdh.trans hsection.symm
-  apply eq_of_heq
-  exact hh'.trans hdh'
+  exact eq_of_heq (hh'.trans hdh')
 
 private theorem evaluation_complex_f {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (c : integralOperationsLevelPullback l E f n ≅
