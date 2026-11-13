@@ -82,6 +82,7 @@ private theorem dualProjection_isIso (X : Scheme.{u}) (U : X.Opens)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Naturality rewrites elaborate the sheaf tensor and internal Hom structures.
 /-- The diagonal component is invertible whenever its module evaluation is.
 Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`,
