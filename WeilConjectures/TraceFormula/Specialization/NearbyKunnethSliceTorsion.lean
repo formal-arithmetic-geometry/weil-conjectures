@@ -109,7 +109,8 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
   have hτN := isIso_pullbackExchange_toGeneric_baseChangeHom_traitMap_residueField
     (K := traitSliceField k') hN E hB
   -- the square of Künneth maps along the changes of trait
-  have sq := isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
+  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
+  refine (isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange 𝔽
     (coordinateSliceTraitMap φ₁ b D) (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
     (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (coordinateSliceTraitChangeHom hM b hb D)
@@ -124,11 +125,11 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    _ _ hτM hτN hτP (𝟭 _)
-  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  refine sq.2 ?_
-  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
-  exact isIso_kunnethMap_of_iso 𝔽 _ _
+    _ _ hτM hτN hτP (𝟭 _)).2 ?_
+  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
+    (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
+  exact isIso_kunnethMap_of_iso 𝔽
+    (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
     (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app _).symm ≪≫
       ((leftDerivedUpperStarCompOfEq 𝔽
         (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
