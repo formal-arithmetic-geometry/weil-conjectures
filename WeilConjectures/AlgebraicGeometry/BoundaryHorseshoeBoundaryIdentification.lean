@@ -76,13 +76,12 @@ theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
   obtain ⟨hH, hδ⟩ := hhorse S hS IA IB IC α β hαβ hιA hιB hrows
   have ht := htriangle S hS 0
   have hd := hδ 0
+  simp only [eqToHom_refl, Category.comp_id, Category.id_comp] at ht hd
   have hcompare : RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0 ≫
       (IA.isoRightDerivedObj v 1).hom =
       (IC.isoRightDerivedObj v 0).hom ≫ hH.δ 0 1 rfl := by
     apply (cancel_mono (IA.isoRightDerivedObj v 1).inv).1
     simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    apply (cancel_epi
-      (eqToHom (congrArg (fun F ↦ (F 0).obj S.X₃) hF))).1
     erw [← hd]
     apply (cancel_mono
       (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1).inv).1
