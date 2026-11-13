@@ -39,12 +39,6 @@ noncomputable local instance instMonoidalCategoryModulesOfDerivedPullbackTensorP
     MonoidalCategory (SheafOfModules.{uPull} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
--- Cache the canonical abelian structure used repeatedly by the derived and total complexes.
-noncomputable local instance instAbelianModulesOfDerivedPullbackTensorProduct
-    (X : Scheme.{uPull}) :
-    Abelian (SheafOfModules.{uPull} (moduleRings X.toRingedSpace)) :=
-  inferInstance
-
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -186,6 +180,8 @@ theorem derivedPullback_tensorProduct
               DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
                 (φ P N).hom)) := by
   classical
+  let : Abelian (SheafOfModules.{uPull} (moduleRings S.toRingedSpace)) := inferInstance
+  let : Abelian (SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) := inferInstance
   let : (curriedTensor (SheafOfModules.{uPull}
       (moduleRings S.toRingedSpace))).PreservesZeroMorphisms :=
     SheafOfModules.preservesZeroMorphisms_curriedTensor S.sheaf
@@ -209,13 +205,14 @@ theorem derivedPullback_tensorProduct
       HomologicalComplex.HasMapBifunctor P N (curriedTensor _) (.up ℤ) :=
     fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, uPull, uPull}
       (SheafOfModules.{uPull} (moduleRings T.toRingedSpace))).has_colimits_of_shape _).has_colimit _
-  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
-    F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
-      (derivedPullback_spec g)
+  obtain ⟨F, hF, hmap, hadd, ε, hder, htri, hε⟩ :=
+    (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
+      (Classical.choose_spec (derivedPullback_spec g))))).2.2.2
+  refine ⟨F, hF, hmap, hadd, ε, hder, ?_⟩
   -- The recorded object and map formulas determine the termwise functor strictly.
   have hEq : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
-  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g
+  let adj := Classical.choice (Scheme.Modules.nonempty_tensorPullbackAdjunction g)
   have : F.IsLeftAdjoint := by
     rw [hEq]
     exact ⟨_, ⟨adj⟩⟩
@@ -235,7 +232,7 @@ theorem derivedPullback_tensorProduct
   obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison
     (C := SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
     (D := SheafOfModules.{uPull} (moduleRings T.toRingedSpace)) F e hn
-  refine ⟨F, hF, hmap, hadd, ε, hder, φ, ?_, hnatural, ?_⟩
+  refine ⟨φ, ?_, hnatural, ?_⟩
   · intro P N p q n h
     simpa only [e, e₀, Iso.trans_hom, eqToIso.hom, tensorIso_hom,
       Category.assoc] using hφ P N p q n h
