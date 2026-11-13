@@ -21,8 +21,7 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 1000000 in
--- The restored proof exhausted 200000 heartbeats at hv₂; retain its original budget.
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Intermediate representability and colimit assertion; source Tags 08DC and 08DD.
 (blueprint: lem-sc-affine-perfect-open-represent-cohomology-colimit) -/
