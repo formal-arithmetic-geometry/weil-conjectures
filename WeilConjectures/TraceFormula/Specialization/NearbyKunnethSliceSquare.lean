@@ -52,18 +52,9 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
--- Cache the ambient existence properties before specializing to the schemes of the slice.
-local instance sliceSquareModulesGrothendieck (T : Scheme.{u}) :
-    IsGrothendieckAbelian.{u + 1}
-      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :=
-  inferInstance
-
-local instance sliceSquareModulesFlatResolution (T : Scheme.{u}) :
-    Abelian.HasFunctorialFlatResolution
-      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :=
-  inferInstance
-
-set_option profiler true in
+set_option maxHeartbeats 800000 in
+-- the statement involves the Künneth maps of the product and of its slice, whose instances
+-- on module objects over the slice need a long search
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
