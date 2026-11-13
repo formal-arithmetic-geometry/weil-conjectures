@@ -438,8 +438,6 @@ lemma leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso (f : X ⟶ Y) (g :
   rfl
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the instances of the general lemma are found for each of the categories of module objects
 /-- **Associativity** of the composition isomorphisms of the derived pullbacks of module
 objects: the two ways of identifying `L(f ≫ g ≫ h)^*` with `Lh^* ⋙ Lg^* ⋙ Lf^*` agree. -/
 lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
@@ -448,12 +446,12 @@ lemma leftDerivedUpperStarComp_assoc_app (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ 
         (leftDerivedUpperStarComp Λ f g).hom.app (L((h)^*⟦Λ⟧).obj K) =
       eqToHom (by rw [Category.assoc]) ≫ (leftDerivedUpperStarComp Λ f (g ≫ h)).hom.app K ≫
         L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarComp Λ g h).hom.app K) := by
-  simp only [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
-  rw [Functor.leftDerivedFunctorFactorIso_assoc_app (upperStarComp Λ (f ≫ g) h)
+  have hcomp := Functor.leftDerivedFunctorFactorIso_assoc_app (upperStarComp Λ (f ≫ g) h)
     (upperStarComp Λ f g) (upperStarComp Λ f (g ≫ h)) (upperStarComp Λ g h)
     (upperStarCongr Λ (Category.assoc f g h))
-    (upperStarComp_hom_app_comp_upperStarComp_hom_app Λ f g h) K,
-    upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
+    (upperStarComp_hom_app_comp_upperStarComp_hom_app Λ f g h) K
+  rw [upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app] at hcomp
+  exact hcomp
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Left unit law** for the composition isomorphisms of the derived pullbacks of module

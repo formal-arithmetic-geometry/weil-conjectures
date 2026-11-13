@@ -168,8 +168,18 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
       (HomologicalComplex.mapBifunctorHomologicalComplexObjObjIso
         (Sheaf.extendScalarsTensorRestrictScalarsIso X.smallEtaleTopology hφ ha) P M) (.up ℤ)
 
+/-- A K-flat representative can be chosen in the category of cochain complexes. -/
+private lemma exists_kFlat_quotient_iso (L : 𝐃(X, Λ)) :
+    ∃ (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ),
+      (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ∧
+        Nonempty (_root_.DerivedCategory.Qh.obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≅ L) := by
+  obtain ⟨P, hP, e⟩ := _root_.DerivedCategory.exists_kFlat_iso L
+  obtain ⟨P', rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  exact ⟨P', hP, e⟩
+
 set_option profiler true in
--- the kernel checks the chain of isomorphisms below
 include hφ ha in
 /-- **The projection formula for extension and restriction of scalars.** For `L ∈ D(X_ét, Λ)` and
 `N ∈ D(X_ét, Λ')`, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ N) ≅ L ⊗ᴸ Res N`: on a K-flat representative `P` of `L`
@@ -185,11 +195,9 @@ theorem nonempty_iso_derivedRestrictScalars_derivedTensor (L : 𝐃(X, Λ)) (N :
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
   let F := Sheaf.extendScalars X.smallEtaleTopology φ
   let R := Sheaf.restrictScalars X.smallEtaleTopology φ
-  obtain ⟨P, hP, ⟨e⟩⟩ := _root_.DerivedCategory.exists_kFlat_iso L
-  obtain ⟨P', rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  obtain ⟨P', hP, ⟨e⟩⟩ := exists_kFlat_quotient_iso X L
   have hP' := (HomotopyCategory.kFlat_quotient_obj_iff P').1 hP
-  obtain ⟨Q, hQ, ⟨eN⟩⟩ := _root_.DerivedCategory.exists_kFlat_iso N
-  obtain ⟨M, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
+  obtain ⟨M, hQ, ⟨eN⟩⟩ := exists_kFlat_quotient_iso X N
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P' hP'
   have := _root_.DerivedCategory.isIso_tensorLeftCounit _ hP
   have := _root_.DerivedCategory.isIso_tensorRightCounit _ hQ
