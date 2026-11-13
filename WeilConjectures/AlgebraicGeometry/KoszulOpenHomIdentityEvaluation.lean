@@ -62,7 +62,6 @@ private theorem koszulOpen_structure_evaluation_fast
   simpa only using koszulOpen_structure_evaluation.{u, w, v} A r f
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
 Source: Stacks Project, Tags 09M1, 08DC, 08DD and 08D1.
 (blueprint: lem-sc-koszul-open-hom-identity-evaluation).
