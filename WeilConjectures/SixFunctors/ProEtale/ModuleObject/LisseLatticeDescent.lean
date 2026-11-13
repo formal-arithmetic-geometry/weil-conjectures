@@ -55,7 +55,7 @@ lemma Matrix.eq_of_mul_eq_one_of_mul_eq_one {K : Type*} [Field K] {m n : ℕ}
 namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
+  {R : C} [MonObj R]
 
 /-- Evaluation commutes with the matrix of a composite. -/
 private lemma finFreeMatrix_map_comp {K : Type*} [Semiring K]
