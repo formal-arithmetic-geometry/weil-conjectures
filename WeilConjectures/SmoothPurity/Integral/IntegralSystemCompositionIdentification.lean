@@ -49,8 +49,8 @@ private theorem finiteSystemCompositor_heq_of_mates {C C' : Type w₁} {D D' : T
     (hiC : HEq iC iC') (hiD : HEq iD iD') (hiF : HEq iF iF')
     (Gk : D ⥤ C) (Gk' : D' ⥤ C') (Gh : F ⥤ D) (Gh' : F' ⥤ D') (Ghk : F ⥤ C)
     (Ghk' : F' ⥤ C')
-    [Gk.IsRightAdjoint] [Gh.IsRightAdjoint] [Ghk.IsRightAdjoint]
-    [Gk'.IsRightAdjoint] [Gh'.IsRightAdjoint] [Ghk'.IsRightAdjoint]
+    [raGk : Gk.IsRightAdjoint] [raGh : Gh.IsRightAdjoint] [raGhk : Ghk.IsRightAdjoint]
+    [raGk' : Gk'.IsRightAdjoint] [raGh' : Gh'.IsRightAdjoint] [raGhk' : Ghk'.IsRightAdjoint]
     (ek : HEq Gk Gk') (eh : HEq Gh Gh') (ehk : HEq Ghk Ghk')
     (a : Ghk.leftAdjoint ≅ Gk.leftAdjoint ⋙ Gh.leftAdjoint)
     (a' : Ghk'.leftAdjoint ≅ Gk'.leftAdjoint ⋙ Gh'.leftAdjoint)
@@ -83,7 +83,14 @@ private theorem finiteSystemComposition_heq {V W Z : Scheme.{u}}
   unfold finiteSystemAdjunction ProEtale.VaryingRing.moduleAdj at e1
   have e2 :=
     (integralComparisonSequenceComposition_existsUnique l E h k).exists.choose_spec.choose_spec
-  refine finiteSystemCompositor_heq_of_mates rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl
+  refine finiteSystemCompositor_heq_of_mates
+    (raGk := ProEtale.VaryingRing.push_isRightAdjoint _ _ k)
+    (raGk' := integralComparisonSequenceRightAdjoint l E k)
+    (raGh := ProEtale.VaryingRing.push_isRightAdjoint _ _ h)
+    (raGh' := integralComparisonSequenceRightAdjoint l E h)
+    (raGhk := ProEtale.VaryingRing.push_isRightAdjoint _ _ (h ≫ k))
+    (raGhk' := integralComparisonSequenceRightAdjoint l E (h ≫ k))
+    rfl rfl rfl HEq.rfl HEq.rfl HEq.rfl
     (finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) k)
     (integralComparisonSequenceDirectImage l E k)
     (finiteSystemPushforward (integralSystemRings l E) (integralSystemTransition l E) h)
@@ -123,13 +130,13 @@ private theorem finiteSystemDerivedCompositor_heq {C C' : Type w₁} {D D' : Typ
     (haC : HEq aC aC') (haD : HEq aD aD') (haE : HEq aE aE')
     (hdC : HEq dC dC') (hdD : HEq dD dD') (hdE : HEq dE dE')
     (F : C ⥤ D) (F' : C' ⥤ D') (G : D ⥤ E') (G' : D' ⥤ E'')
-    [F.Additive] [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
-    [G.Additive] [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
-    [F'.Additive] [Limits.PreservesFiniteLimits F'] [Limits.PreservesFiniteColimits F']
-    [G'.Additive] [Limits.PreservesFiniteLimits G'] [Limits.PreservesFiniteColimits G']
+    [addF : F.Additive] [limF : Limits.PreservesFiniteLimits F] [colF : Limits.PreservesFiniteColimits F]
+    [addG : G.Additive] [limG : Limits.PreservesFiniteLimits G] [colG : Limits.PreservesFiniteColimits G]
+    [addF' : F'.Additive] [limF' : Limits.PreservesFiniteLimits F'] [colF' : Limits.PreservesFiniteColimits F']
+    [addG' : G'.Additive] [limG' : Limits.PreservesFiniteLimits G'] [colG' : Limits.PreservesFiniteColimits G']
     (H : C ⥤ E') (H' : C' ⥤ E'')
-    [H.Additive] [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
-    [H'.Additive] [Limits.PreservesFiniteLimits H'] [Limits.PreservesFiniteColimits H']
+    [addH : H.Additive] [limH : Limits.PreservesFiniteLimits H] [colH : Limits.PreservesFiniteColimits H]
+    [addH' : H'.Additive] [limH' : Limits.PreservesFiniteLimits H'] [colH' : Limits.PreservesFiniteColimits H']
     (eF : HEq F F') (eG : HEq G G') (eH : HEq H H')
     (a : H ≅ F ⋙ G) (a' : H' ≅ F' ⋙ G') (ha : HEq a a') :
     HEq (Functor.mapDerivedCategoryNatIso a ≪≫ (Functor.mapDerivedCategoryCompIso F G).symm)
@@ -156,6 +163,33 @@ private theorem finiteSystemDerivedComposition_heq {V W Z : Scheme.{u}}
     HEq (finiteSystemDerivedComposition (integralSystemRings l E)
       (integralSystemTransition l E) h k) (integralComparisonSystemComposition l E h k) := by
   have hh := finiteSystemDerivedCompositor_heq
+    (addF := finiteSystemPullbackAdditive
+      (integralSystemRings l E) (integralSystemTransition l E) k)
+    (addF' := integralComparisonSequencePullbackAdditive l E k)
+    (limF := finiteSystemPullbackLimits
+      (integralSystemRings l E) (integralSystemTransition l E) k)
+    (limF' := integralComparisonSequencePullbackLimits l E k)
+    (colF := finiteSystemPullbackColimits
+      (integralSystemRings l E) (integralSystemTransition l E) k)
+    (colF' := integralComparisonSequencePullbackColimits l E k)
+    (addG := finiteSystemPullbackAdditive
+      (integralSystemRings l E) (integralSystemTransition l E) h)
+    (addG' := integralComparisonSequencePullbackAdditive l E h)
+    (limG := finiteSystemPullbackLimits
+      (integralSystemRings l E) (integralSystemTransition l E) h)
+    (limG' := integralComparisonSequencePullbackLimits l E h)
+    (colG := finiteSystemPullbackColimits
+      (integralSystemRings l E) (integralSystemTransition l E) h)
+    (colG' := integralComparisonSequencePullbackColimits l E h)
+    (addH := finiteSystemPullbackAdditive
+      (integralSystemRings l E) (integralSystemTransition l E) (h ≫ k))
+    (addH' := integralComparisonSequencePullbackAdditive l E (h ≫ k))
+    (limH := finiteSystemPullbackLimits
+      (integralSystemRings l E) (integralSystemTransition l E) (h ≫ k))
+    (limH' := integralComparisonSequencePullbackLimits l E (h ≫ k))
+    (colH := finiteSystemPullbackColimits
+      (integralSystemRings l E) (integralSystemTransition l E) (h ≫ k))
+    (colH' := integralComparisonSequencePullbackColimits l E (h ≫ k))
     (F := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) k)
     (F' := integralComparisonSequencePullback l E k)
     (G := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) h)
