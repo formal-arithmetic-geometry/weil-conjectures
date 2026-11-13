@@ -547,7 +547,14 @@ theorem pbcExchangeStageSquare_integral
       ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
         ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
           (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))) _ eRf'
-  simp only [βLg_inv, βLg'_inv, βRf_hom, βRf'_hom]
+  conv_lhs =>
+    arg 1
+    erw [βLg_inv]
+  conv_lhs =>
+    arg 2
+    arg 2
+    erw [βRf'_hom]
+  simp only [βLg'_inv, βRf_hom]
   by_cases hEF : E = F
   · sorry
   simp only [Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, Iso.symm_inv]
@@ -575,15 +582,21 @@ theorem pbcExchangeStageSquare_integral
   -- τ-naturality: move `τ F` to the localized integral scalar extension and use `hτ F`.
   have hτF₁ := eq_of_heq
     (hτ F ((pbcIntegralScalarExtension l Ω X dX.out iX.out h).obj K))
-  simp only [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
-  erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
-    (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
+  conv_rhs =>
+    arg 2
+    arg 1
+    erw [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁]
+  simp only [hτE₁]
+  conv_lhs =>
+    arg 2
+    arg 1
+    erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
+      (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
   set_option backward.isDefEq.respectTransparency false in
   simp only [Functor.map_comp, eqToHom_map, Category.comp_id,
     Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
   set_option backward.isDefEq.respectTransparency false in
   simp only [pbcDescentPullback_map_homMk, pbcDescentDirectImage_map_homMk]
-  trace_state
   set_option backward.isDefEq.respectTransparency false in
   simp only [localization_map_eqToHom_map_assoc]
   set_option backward.isDefEq.respectTransparency false in
