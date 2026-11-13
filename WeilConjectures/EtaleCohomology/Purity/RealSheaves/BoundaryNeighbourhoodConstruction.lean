@@ -162,6 +162,31 @@ lemma specMap_comp_eq_comp_geometricGaloisFrobenius_pow {A R : CommRingCat.{u}}
       Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberToAlgebraicClosure,
       hhalg, hσε, ← Category.assoc, hhalg]
 
+omit [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [ConnectedSpace C]
+  [Smooth (C ↘ Spec (.of K))] in
+private lemma comp_pullback_snd_eq_genericGeomPoint {A R : CommRingCat.{u}}
+    (g : Spec R ⟶ C) (alg : R ⟶ A) (ε : CommRingCat.of (AlgebraicClosure K) ⟶ A)
+    (ι : A ⟶ CommRingCat.of Ω) (ζ : R ⟶ CommRingCat.of Ω)
+    (h : Spec A ⟶ (C ↘ Spec (.of K)).geometricFiber)
+    (hhproj : h ≫ (C ↘ Spec (.of K)).geometricFiberProj = Spec.map alg ≫ g)
+    (hhalg : h ≫ (C ↘ Spec (.of K)).geometricFiberToAlgebraicClosure = Spec.map ε)
+    {T : Scheme.{u}} (p : Spec (.of Ω) ⟶ T) (e : T ⟶ pullback h j̄)
+    (hfst : p ≫ e ≫ pullback.fst h j̄ = Spec.map ι)
+    (hgen : genericBasePoint j ≫ j = Spec.map ζ ≫ g)
+    (hι : alg ≫ ι = ζ) (hε : ε ≫ ι = CommRingCat.ofHom (genericEmb (U ↘ Spec (.of K)) j)) :
+    p ≫ e ≫ pullback.snd h j̄ = genericGeomPoint (U ↘ Spec (.of K)) j := by
+  apply Scheme.Hom.geometricFiber_hom_ext
+  · rw [genericGeomPoint_geometricFiberProj, ← cancel_mono j, hgen]
+    change p ≫ (e ≫ pullback.snd h j̄) ≫ _ ≫ j = _
+    rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberProj j (comp_over j _)]
+    simp only [Category.assoc]
+    rw [← pullback.condition_assoc, hhproj, reassoc_of% hfst, ← Spec.map_comp_assoc, hι]
+  · rw [genericGeomPoint_geometricFiberToAlgebraicClosure]
+    change p ≫ (e ≫ pullback.snd h j̄) ≫ _ = _
+    rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure j (comp_over j _)]
+    simp only [Category.assoc]
+    rw [← pullback.condition_assoc, hhalg, reassoc_of% hfst, ← Spec.map_comp, hε]
+
 set_option profiler true in
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
@@ -309,8 +334,6 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     (congrArg (specFieldMap
       (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫ ·) he').trans
         (Spec.map_comp _ _).symm
-  have hsnd : e'.hom ≫ pullback.snd h j̄ ≫ j̄ = e'.hom ≫ pullback.fst h j̄ ≫ h :=
-    congrArg (e'.hom ≫ ·) (pullback.condition h j̄).symm
   have hgen : genericBasePoint j ≫ j =
       Spec.map (CommRingCat.ofHom (algebraMap Γ(C, c.W) Ω)) ≫ hW.fromSpec := by
     change (Spec.map (CommRingCat.ofHom (algebraMap C.functionField Ω)) ≫
@@ -318,30 +341,13 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     rw [Category.assoc, genericPointLift_comp, hW.fromSpecFunctionField_eq,
       ← Spec.map_comp_assoc]
     congr 2
-    ext a
-    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply]
-    exact (IsScalarTower.algebraMap_apply Γ(C, c.W) C.functionField Ω a).symm
   have hspec : specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
       k = genericGeomPoint (U ↘ Spec (.of K)) j := by
-    apply Scheme.Hom.geometricFiber_hom_ext
-    · rw [genericGeomPoint_geometricFiberProj, ← cancel_mono j, hgen]
-      change specFieldMap _ Ω ≫ (e'.hom ≫ pullback.snd h j̄) ≫ _ ≫ j = _
-      rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberProj j (comp_over j _)]
-      simp only [Category.assoc]
-      rw [← pullback.condition_assoc, hhproj, reassoc_of% hfst, specInertiaInvariantsTo,
-        ← Spec.map_comp_assoc]
-      simp only [← CommRingCat.ofHom_comp, AlgHom.toRingHom_eq_coe, AlgHom.comp_algebraMap]
-    · rw [genericGeomPoint_geometricFiberToAlgebraicClosure]
-      change specFieldMap _ Ω ≫ (e'.hom ≫ pullback.snd h j̄) ≫ _ = _
-      rw [← Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure j (comp_over j _)]
-      simp only [Category.assoc]
-      have hεc : CommRingCat.ofHom ε ≫
-          CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom =
-          CommRingCat.ofHom (genericEmb (U ↘ Spec (.of K)) j) :=
-        CommRingCat.hom_ext (RingHom.ext hε)
-      rw [reassoc_of% hsnd]
-      simp only [hhalg]
-      rw [reassoc_of% hfst, ← Spec.map_comp, hεc]
+    exact comp_pullback_snd_eq_genericGeomPoint j hW.fromSpec _ (CommRingCat.ofHom ε)
+      (CommRingCat.ofHom (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom)
+      (CommRingCat.ofHom (algebraMap Γ(C, c.W) Ω)) h hhproj hhalg _ e'.hom hfst hgen
+      (CommRingCat.hom_ext (RingHom.ext (Ideal.inertiaInvariantsToField C.functionField Q).commutes))
+      (CommRingCat.hom_ext (RingHom.ext hε))
   -- the Galois group of `Ω / K'` is the inertia group
   have hmem (σ : Gal(Ω/C.functionField)) : σ ∈ Q.inertia Gal(Ω/C.functionField) ↔
       ∀ b : IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField)),
