@@ -124,14 +124,13 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     (sliceFst_special_comp_coordinateSliceTraitChangeSpecial D)
     (sliceSnd_generic_comp_baseChangeHom_generic hN hpb hP hgen hb D)
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
-    ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
-    ((L((N.ε)^*⟦𝔽⟧)).obj B) hτM hτN hτP (𝟭 _)
+    _ _ hτM hτN hτP (𝟭 _)
   refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
   refine sq.2 ?_
   have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽 _ _ A B).1 h
   exact isIso_kunnethMap_of_iso 𝔽 _ _
     (((leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).app
-      ((L((M.ε)^*⟦𝔽⟧)).obj A)).symm ≪≫
+      _).symm ≪≫
       ((leftDerivedUpperStarCompOfEq 𝔽
         (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
           (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).app A).symm)
