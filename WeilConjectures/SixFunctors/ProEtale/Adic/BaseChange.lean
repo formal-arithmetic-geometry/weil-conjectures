@@ -43,6 +43,16 @@ open CategoryTheory Category Limits Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
+private lemma adicBaseChange_mate_symm_app {C D E F : Type*}
+    [Category* C] [Category* D] [Category* E] [Category* F]
+    {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
+    {L₂ : E ⥤ F} {R₂ : F ⥤ E} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (β : TwoSquare R₁ H G R₂) (M : C) :
+    ((mateEquiv adj₁ adj₂).symm β).app M =
+      L₂.map (G.map (adj₁.unit.app M)) ≫
+        L₂.map (β.app (L₁.obj M)) ≫ adj₂.counit.app (H.obj (L₁.obj M)) := by
+  simp
+
 variable (l : ℕ) [Fact l.Prime]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
@@ -65,23 +75,19 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (adicUpperStarLowerStarAdjunction l j)).symm
     (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom))
 
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
--- The kernel needs time to unfold the module structures of the lifted functors.
 omit [WeaklyEtale j] [WeaklyEtale j'] in
 /-- The underlying map of sheaves of `ℚ̄_ℓ`-modules of the base change map of `ℓ`-adic sheaves is
 the base change map of the underlying sheaves. -/
 lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
     ((adicBaseChangeMap l sq).app M).hom =
       (ProEtale.baseChangeMap (WeilCoefficients.{u} l) sq).app M.X := by
-  simp only [adicBaseChangeMap, ProEtale.baseChangeMap, mateEquiv, Equiv.coe_fn_symm_mk,
-    NatTrans.comp_app, Functor.comp_obj, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
-    Functor.rightUnitor_hom_app, Functor.id_obj, comp_id, id_comp, Mod.comp_hom', Mod.id_hom',
-    Functor.comp_map,
+  simp only [adicBaseChangeMap, ProEtale.baseChangeMap, adicBaseChange_mate_symm_app,
+    Mod.comp_hom',
     adicUpperStar_map_hom, adicLowerStar_map_hom, adicUpperStarLowerStarAdjunction,
     Adjunction.modAdjunction_unit_app_hom, Adjunction.modAdjunction_counit_app_hom,
     adicSquareLowerStarIso, ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app,
     adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom, adicLowerStarCongr_hom_app_hom]
   rfl
 
