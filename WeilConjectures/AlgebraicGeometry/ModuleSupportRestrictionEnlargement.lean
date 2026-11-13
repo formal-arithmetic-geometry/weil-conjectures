@@ -36,8 +36,13 @@ private theorem restrict_unit_factorization
         (overMap R (homOfLE (hZU.trans hUV))).map p) ≫
         (overMap R (homOfLE (hZU.trans hUV))).map q =
       (overMap R (homOfLE hZU)).map b := by
-  rw [Category.assoc, ← Functor.map_comp, hpq]
-  ext T t
+  subst r
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro T
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro t
   exact congrArg
     (fun k ↦ k.val.app (Opposite.op ((Over.map (homOfLE hZW)).obj T.unop)) t) ha
 
