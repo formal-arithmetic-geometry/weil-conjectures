@@ -33,9 +33,7 @@ universe u
 
 namespace MvPowerSeries
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- Comparing the nested formal-fibre tensor ring instances needs extra elaboration heartbeats.
+set_option trace.profiler true in
 /-- A degree-p final step in a purely inseparable extension presents the extended formal
 fibre as a binomial hypersurface over the preceding fibre. A derivation of that fibre
 sends its constant coefficient to a unit.
