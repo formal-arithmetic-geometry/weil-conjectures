@@ -518,43 +518,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
--- Reconcile the generic-ring instance expressions once at the finite coefficient level.
-private theorem finite_native_open_unit_mate
-    {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
-    {j : U ⟶ Z} {g : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
-    (sq : IsPullback h j' j g) (n : ℕ)
-    (N : DerivedCategory (Sheaf (ProEt.topology U)
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))))) :
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').unit.app
-        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.obj N) ≫
-      (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor.map
-        ((leftDerivedOpenImmersionLowerShriekBaseChangeIso
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).hom.app N) =
-    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.map
-        ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).unit.app N) ≫
-      (leftDerivedUpperStarSquareIso
-        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).inv.app
-        ((openImmersionLowerShriek
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
-  have he := unit_mateEquiv
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j')
-    (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).inv) N
-  rw [mateEquiv_leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso_inv] at he
-  simpa only [leftDerivedOpenImmersionLowerShriekBaseChangeIso,
-    leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso,
-    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
-    TwoSquare.mk, Functor.comp_obj, Functor.id_obj,
-    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
-    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    NatTrans.comp_app, Category.assoc] using he.symm
-
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
@@ -658,56 +621,51 @@ private theorem open_exchange_inverse (b : Base l E)
       (comparisonFinitePull l E b g n).hom.app
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
-  have H := open_scalar_from_comparisons
-    (H := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor)
-    (G := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) g).leftDerivedFunctor)
-    (J := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).leftDerivedFunctor)
-    (J' := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor)
-    (L := (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory)
-    (L' := (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').mapDerivedCategory)
+  let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
+  refine open_scalar_from_comparisons
     (comparisonFinitePull l E b g n).symm (comparisonFinitePull l E b h n).symm
     (comparisonFinitePull l E b j n).symm (comparisonFinitePull l E b j' n).symm
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j)
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j')
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction B j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction B j')
     (comparisonLevelOpenAdjunction l E b j n)
     (comparisonLevelOpenAdjunction l E b j' n)
-    (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).symm
+    (leftDerivedUpperStarSquareIso B sq.toCommSq).symm
     (proEtaleConstantRingPullbackComposition j' g (R l E n) ≪≫
       eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
         sq.w.symm) ≪≫
       (proEtaleConstantRingPullbackComposition h j (R l E n)).symm).symm
     (comparisonFiniteOpen l E b j n).inv (comparisonFiniteOpen l E b j' n).inv
-    (leftDerivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).hom
+    (leftDerivedOpenImmersionLowerShriekBaseChangeIso B sq).hom
     (levels.openExchange h j' j g sq n).inv
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (by
       intro M
-      have HU := finite_native_open_unit_mate l E sq n M
-      simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      exact HU)
+      have HU := native_open_unit_mate (R l E n) sq M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+        exactByConversion h)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      exact he)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+        exactByConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
-  simp only [Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  exact H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
