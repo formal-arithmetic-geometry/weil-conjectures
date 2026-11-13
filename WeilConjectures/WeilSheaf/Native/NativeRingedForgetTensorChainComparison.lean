@@ -147,19 +147,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
-section
-
-let := SheafOfModules.isMonoidal_W_independentCoefficients b.R
-let := SheafOfModules.isMonoidal_W_independentCoefficients b.Q
-let : MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) :=
-  SheafOfModules.monoidalCategory b.R
-let : MonoidalCategory (RingedTensorModules.{u + 1, u + 1, u + 1} b.K b.Q) :=
-  SheafOfModules.monoidalCategory b.Q
-let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients b.R
-let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients b.R
-let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients b.Q
-let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients b.Q
-
+set_option synthInstance.maxHeartbeats 200000 in
+-- Elaborate the two site tensors through their comparison APIs.
+set_option maxHeartbeats 1200000 in
+-- The independently chosen site tensors require large definitional equalities.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
@@ -224,7 +215,5 @@ theorem native_ringed_forget_tensor_chain_comparison :
   refine ⟨{ tensor := ε, summand := ?_, associativity := ha }⟩
   intro P Q p q n h
   exact hs P Q p q n h
-
-end
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
