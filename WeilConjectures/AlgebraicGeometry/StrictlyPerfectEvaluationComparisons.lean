@@ -110,11 +110,12 @@ private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (hS : S.ShortExact) :
     ∃ hz : SheafOfModules.homObjMap (R := R) (𝟙 E) S.f ≫
         SheafOfModules.homObjMap (R := R) (𝟙 E) S.g = 0,
-      (ShortComplex.mk _ _ hz).ShortExact := by
+      (ShortComplex.mk (SheafOfModules.homObjMap (R := R) (𝟙 E) S.f)
+        (SheafOfModules.homObjMap (R := R) (𝟙 E) S.g) hz).ShortExact := by
   obtain ⟨m, ι, π, hιπ⟩ := hE
   let B := SheafOfModules.free
     (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))
-  obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact
+  obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact.{u}
     (R := R) m B (Iso.refl B) S hS
   exact exact_hom_of_retract R E B ι π hιπ S hz hfree
 
