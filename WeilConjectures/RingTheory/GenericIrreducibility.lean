@@ -688,9 +688,7 @@ lemma exists_ne_zero_dvd_C_mul_of_map_dvd {σ A K : Type*} [CommRing A] [IsDomai
   rw [map_mul, map_mul, map_C, hR', hR]
   ring
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- the spreading-out argument is long and elaborates many tensor products
 /-- **Spreading out.** Let `φ : L ⊗[A] C → F` be a map to a field whose kernel is nil, such that
 `F` is birational to an (absolutely) irreducible hypersurface over the algebraically closed field
 `L ⊇ A`, as in `exists_hypersurface_of_perfectField`, where the coordinates `v` have a common
