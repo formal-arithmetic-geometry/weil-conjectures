@@ -172,13 +172,14 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
   dsimp only [Functor.comp_obj, Functor.comp_map] at t6 t7 t8
   simp only [← reassoc_of% t6, reassoc_of% t7]
   simp only [mapHomotopyCategoryCompIso_refl_map, Category.comp_id] at t8
-  change (leftDerivedUpperStarIso Λ f).hom.app (DerivedCategory.Qh.obj K) ≫
+  have t8' : (leftDerivedUpperStarIso Λ f).hom.app (DerivedCategory.Qh.obj K) ≫
       L(Mod.extendScalars (condensedPullbackHom Λ f)).map
         (((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapDerivedCategoryFactorsh.hom.app K) ≫
       (Mod.extendScalars (condensedPullbackHom Λ f)).leftDerivedFunctorCounit.app
         ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory
-          (ComplexShape.up ℤ)).obj K) = ((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K at t8
-  have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8
+          (ComplexShape.up ℤ)).obj K) = ((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K := by
+    simpa only [leftDerivedUpperStarIso] using t8
+  have t9 := congrArg (L(Mod.extendScalars (coefficientMap a X))).map t8'
   simp only [Functor.map_comp] at t9
   simp only [mapHomotopyCategoryCompIso_refl_map, Category.id_comp]
   simp only [reassoc_of% t9]
