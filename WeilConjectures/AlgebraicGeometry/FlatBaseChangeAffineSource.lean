@@ -22,7 +22,6 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.

@@ -93,7 +93,6 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_dictionary
             (D.targetClass p
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
-  intro h N P Q
   choose eH a ha ha_formula using
     Scheme.Modules.exists_flatBaseChange_affine_source f g F I J p V W hV hW eVW D
   choose b hb hb_formula using
