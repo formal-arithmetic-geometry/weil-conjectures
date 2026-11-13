@@ -41,6 +41,23 @@ noncomputable local instance ordinarySummandProjectionSchemePreadditive (Y : Sch
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
+private theorem ordinaryEvaluation_transport_composition
+    {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D)
+    {A B E H : C} {A' B' E' H' V : D}
+    (μ : A' ≅ L.obj A) (c : L.obj B ≅ B') (b : L.obj E ≅ E') (e : L.obj H ≅ H')
+    (i : A ⟶ B) (f : B ⟶ E) (π : E ⟶ H)
+    (j : A' ⟶ B') (q : E' ⟶ H') (t : V ⟶ A')
+    (hc : L.map i ≫ c.hom = μ.inv ≫ j)
+    (hπ : b.hom ≫ q = L.map π ≫ e.hom) :
+    t ≫ j ≫ c.inv ≫ L.map f ≫ b.hom ≫ q =
+      t ≫ μ.hom ≫ L.map (i ≫ f ≫ π) ≫ e.hom := by
+  have hi : j ≫ c.inv = μ.hom ≫ L.map i := by
+    apply (cancel_mono c.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id, hc,
+      Iso.hom_inv_id_assoc]
+  rw [reassoc_of% hi, hπ]
+  simp only [Functor.map_comp, Category.assoc]
+
 set_option linter.unusedVariables false in
 set_option profiler true in
 /-- Transport of one tensor summand followed by one Hom projection.
@@ -117,26 +134,23 @@ theorem ordinaryEvaluation_transport_summand_projection (X : Scheme.{u}) (U : X.
           localEvaluationProjection X U P F n r (r + n) rfl) ≫
         (e (P.X r) (F.X (r + n))).hom  := by
   intro L T e b hπ d m F c hc f p q n r hpq O D π
-  have hc' := hc p q n hpq
-  have hproj := hπ F n r (r + n) rfl
   simp only [HomologicalComplex.comp_f, Iso.trans_inv, Functor.mapIso_inv,
     Category.assoc]
   dsimp only [Functor.map₂CochainComplex, Functor.map₂HomologicalComplex]
   rw [HomologicalComplex.ι_mapBifunctorMap_assoc]
   simp only [HomologicalComplex.id_f]
-  have hi : HomologicalComplex.ιMapBifunctor (T.obj F)
-        (T.obj (localEvaluationDual X U P)) (curriedTensor _) (.up ℤ) p q n hpq ≫
-      c.inv.f n =
-      (m.μIso (F.X p) ((localEvaluationDual X U P).X q)).hom ≫
-        L.map (HomologicalComplex.ιMapBifunctor F (localEvaluationDual X U P)
-          (curriedTensor _) (.up ℤ) p q n hpq) := by
-    apply (cancel_mono (c.hom.f n)).1
-    simp only [Category.assoc, ← HomologicalComplex.comp_f, c.inv_hom_id,
-      HomologicalComplex.id_f, hc', Iso.hom_inv_id_assoc]
-    exact Category.comp_id _
-  rw [reassoc_of% hi, hproj]
-  simp only [curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight,
-    Category.id_comp, tensorHom_def, Functor.mapHomologicalComplex_map_f,
-    Functor.map_comp, Category.assoc]
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    simp only [curriedTensor_map_app, curriedTensor_obj_map, id_whiskerRight,
+      Category.id_comp, tensorHom_def, Functor.mapHomologicalComplex_map_f, Category.assoc]
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      exact ordinaryEvaluation_transport_composition L
+        (m.μIso (F.X p) ((localEvaluationDual X U P).X q))
+        ((HomologicalComplex.eval _ (.up ℤ) n).mapIso c)
+        ((HomologicalComplex.eval _ (.up ℤ) n).mapIso (b F))
+        (e (P.X r) (F.X (r + n))) _ (f.f n)
+        (localEvaluationProjection X U P F n r (r + n) rfl) _ _ _
+        (hc p q n hpq) (hπ F n r (r + n) rfl)
 
 end AlgebraicGeometry
