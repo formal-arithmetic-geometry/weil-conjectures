@@ -49,7 +49,7 @@ private theorem chart_double_transpose_of_unit
   rw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left]
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
     Iso.symm_hom, ← Category.assoc, ← Functor.map_comp,
-    Iso.hom_inv_id_app, Functor.map_id, Category.id_comp]
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
   simp only [Adjunction.comp_homEquiv] at hu
   rw [hu]
   apply (cancel_mono (ρ.hom.app (L₃.obj X))).mp
@@ -142,10 +142,15 @@ theorem restriction_chart_unit_normalization
   have hs := congrArg (fun z ↦ Hom.app z B) square
   simp only [Hom.comp_app, pushforward_map_app, pushforwardComp_hom_app_app,
     pushforwardCongr_hom_app_app] at hs
-  rewrite (transparency := .default) [Category.comp_id] at hs
-  rewrite (transparency := .default) [Category.id_comp] at hs
-  repeat' rewrite (transparency := .default) [Category.id_comp]
-  repeat' rewrite (transparency := .default) [Category.comp_id]
+  change Hom.app ((restrictAdjunction a).unit.app F) B ≫
+      Hom.app ψ (a ⁻¹ᵁ B) ≫ ((restrictFunctor u).obj G).presheaf.map _ =
+    Hom.app ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app F) B ≫
+      Hom.app ((restrictAdjunction u).unit.app G) (p ⁻¹ᵁ B) at hs
+  change Hom.app ((Classical.choose (exists_tensorPullbackAdjunction p)).unit.app F) B ≫
+      Hom.app ((restrictAdjunction l).unit.app G) (p ⁻¹ᵁ B) =
+    Hom.app ((restrictAdjunction a).unit.app F) B ≫
+      (Hom.app ψ (a ⁻¹ᵁ B) ≫ Hom.app r (q ⁻¹ᵁ (a ⁻¹ᵁ B)) ≫ M.presheaf.map _) ≫
+      M.presheaf.map _
   simp only [r, c, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Hom.comp_app,
     pushforward_map_app, restrictAdjunction_unit_app_app,
     restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app]
@@ -161,10 +166,7 @@ theorem restriction_chart_unit_normalization
   dsimp only [M] at *
   simp only [restrict_map]
   dsimp only [G] at hh ⊢
-  repeat' rewrite (transparency := .default) [Category.assoc] at hh
-  repeat' rewrite (transparency := .default) [Category.assoc]
-  repeat' rewrite (transparency := .default) [← Functor.map_comp] at hh
-  repeat' rewrite (transparency := .default) [← Functor.map_comp]
+  simp only [Category.assoc, ← Functor.map_comp] at hh ⊢
   convert hh.symm using 1
 
 end AlgebraicGeometry.Scheme.Modules

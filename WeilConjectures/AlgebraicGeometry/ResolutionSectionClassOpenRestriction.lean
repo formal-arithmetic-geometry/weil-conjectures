@@ -166,10 +166,10 @@ theorem resolutionSectionClass_open_restriction
     ((PresheafOfModules.toPresheaf S.ringCatSheaf.obj).map
       (sectionCohomologyTheta K p)).app (op W)
   let r := (NatTrans.mapHomologicalComplex
-    (Functor.whiskerLeft (SheafOfModules.forget S.ringCatSheaf ⋙
-      PresheafOfModules.toPresheaf S.ringCatSheaf.obj)
-      ((CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).map (homOfLE eWV).op))
-    (ComplexShape.up ℕ)).app K
+    (Functor.whiskerLeft (SheafOfModules.forget X.ringCatSheaf ⋙
+      PresheafOfModules.toPresheaf X.ringCatSheaf.obj)
+      ((CategoryTheory.evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).map
+        (homOfLE (f.preimage_mono eWV)).op)) (ComplexShape.up ℕ)).app I.cocomplex
   have hrSq : CommSq aV
       (cohomologyOpenRestriction F (f ⁻¹ᵁ V) (f ⁻¹ᵁ W) (f.preimage_mono eWV) p)
       (H.map r) aW := by
@@ -177,6 +177,14 @@ theorem resolutionSectionClass_open_restriction
     simpa only [aV, aW, Category.assoc, cohomologyOpenRestriction] using hr.symm
   have hnSq : CommSq tV (H.map r)
       ((K.homology p).presheaf.map (homOfLE eWV).op) tW := by
+    have hrmap : r = (NatTrans.mapHomologicalComplex
+        (Functor.whiskerLeft (SheafOfModules.forget S.ringCatSheaf ⋙
+          PresheafOfModules.toPresheaf S.ringCatSheaf.obj)
+          ((CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).map
+            (homOfLE eWV).op)) (ComplexShape.up ℕ)).app K := by
+      ext n
+      rfl
+    rewrite [hrmap]
     constructor
     simpa only [tV, tW, Category.assoc] using hn.symm
   have hs : cohomologyOpenRestriction F (f ⁻¹ᵁ V) (f ⁻¹ᵁ W)
