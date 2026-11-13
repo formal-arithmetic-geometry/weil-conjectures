@@ -54,8 +54,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec
 /-- **`H¹(C, 𝐅_p)` as Frobenius fixed points of `H¹(C, 𝒪_C)`.** Let `C` be a smooth proper
 connected curve over an algebraically closed field `k` of characteristic `p`. There is a
 `p`-linear endomorphism `φ` of (a universe lift of) the coherent cohomology `H¹(C, 𝒪_C)` with
-`H¹(C, 𝐅_p) ≅ H¹(C, 𝒪_C)^{φ = 1}`: this is the Artin–Schreier sequence together with the
-comparison of étale and Zariski cohomology of `𝒪_C`. -/
+`H¹(C, 𝐅_p) ≅ H¹(C, 𝒪_C)^{φ = 1}`. -/
 theorem exists_addEquiv_sheafH_one_constantZMod_fixedPoints [IsCurve f] [Smooth f]
     [ConnectedSpace C] [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] :
     letI : C.Over (Spec (.of k)) := ⟨f⟩
@@ -102,14 +101,7 @@ Then
 * it has at most `p ^ g` elements, that is (being an `𝐅_p`-vector space), its
   `𝐅_p`-dimension is at most `g`;
 * for every algebraically closed extension `k'` of `k` and every cartesian square
-  `C' = C ×_k k'`, the pullback map `H¹(C, 𝐅_p) ⟶ H¹(C', 𝐅_p)` is bijective.
-
-The first two hold because `H¹(C, 𝐅_p)` is the Frobenius-fixed part of `H¹(C, 𝒪_C)`
-(`AlgebraicGeometry.IsCurve.exists_addEquiv_sheafH_one_constantZMod_fixedPoints`), which has
-dimension `g`; the last because these fixed points are invariant under algebraically closed
-extension.
-(blueprint: proposition-p-torsion-smooth-proper-curve--4)
--/
+  `C' = C ×_k k'`, the pullback map `H¹(C, 𝐅_p) ⟶ H¹(C', 𝐅_p)` is bijective. -/
 theorem sheafH_one_constantZMod_of_charP [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (p : ℕ) [Fact p.Prime] [CharP k p] :
     Finite (Sheaf.H (C.constantZMod p) 1) ∧

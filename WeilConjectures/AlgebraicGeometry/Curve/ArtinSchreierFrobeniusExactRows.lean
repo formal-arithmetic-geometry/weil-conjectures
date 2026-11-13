@@ -32,8 +32,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.IsCurve
 
 /-- On a smooth proper connected curve over an algebraically closed field of characteristic `p`,
-the Artin--Schreier map `a ↦ a ^ p - a` of the additive sheaf is surjective on global sections:
-global functions are constants, and `x ^ p - x = c` is solvable in `k`. -/
+the Artin--Schreier map `a ↦ a ^ p - a` of the additive sheaf is surjective on global sections. -/
 theorem surjective_sheafH_zero_artinSchreier
     {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

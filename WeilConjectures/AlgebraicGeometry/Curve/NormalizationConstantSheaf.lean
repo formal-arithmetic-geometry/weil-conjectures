@@ -134,15 +134,11 @@ theorem Etale.nonempty_sheafFiber_cokernel_constantSheafToLowerStar_iso [IsFinit
 
 end Map
 
-/-- **Normalisation of a constant sheaf** (the cokernel). Let `X` be a curve over a field `k`,
-`ν : X' ⟶ X` a finite surjective morphism which is an isomorphism over a dense open `V ⊆ X`
-(e.g. the normalisation of a reduced curve) and `M` a `Λ`-module (e.g. a finite abelian group).
-Then the natural map `M_X ⟶ ν_* M_{X'}` is injective, its cokernel is supported on finitely many
-points (it vanishes at every geometric point outside a finite set), and at a geometric point `y`
-the cokernel has stalk `M^b / ΔM`, where the `b` geometric points of `X'` over `y` are the
-geometric branches of `X` at `y` and `Δ` is the diagonal.
-(blueprint: lemma-normalization-constant-sheaf--1)
--/
+/-- Let `X` be a curve over a field `k`, `ν : X' ⟶ X` a finite surjective morphism which is an
+isomorphism over a dense open `V ⊆ X` and `M` a `Λ`-module. Then the natural map
+`M_X ⟶ ν_* M_{X'}` is injective, its cokernel vanishes at every geometric point outside a finite
+set, and at a geometric point `y` the cokernel has stalk `M^b / ΔM`, where `b` runs over the
+geometric points of `X'` over `y` and `Δ` is the diagonal. -/
 theorem IsCurve.constantSheafToLowerStar_of_isIso_restrict {k : Type u} [Field k]
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] (ν : X' ⟶ X) [IsFinite ν]
     [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X)) [IsIso (ν ∣_ V)]
@@ -194,7 +190,7 @@ private lemma upperStarConstantSheafIso_comp_of_eq {X Y Z : Scheme.{u}} (g : X �
   subst hh
   exact upperStarConstantSheafIso_comp (ModuleCat.{u + 1} Λ) g h M
 
-/-- **Normalisation of a constant sheaf** (base change). For a cartesian square
+/-- For a cartesian square
 ```
 Y' --g'--> X'
 |          |
@@ -202,13 +198,9 @@ Y' --g'--> X'
 v          v
 Y  --g-->  X
 ```
-with `ν` finite (e.g. the base change of the normalisation `ν` of a curve over `k` along an
-algebraically closed extension `k'` of `k`), the natural map `M_X ⟶ ν_* M_{X'}`, its cokernel
-and the exact sequence `M_X ⟶ ν_* M_{X'} ⟶ Q ⟶ 0` pull back along `g` to the corresponding
-objects for `ν'`: there are isomorphisms `a : g^* M_X ≅ M_Y`, `b : g^* ν_* M_{X'} ≅ ν'_* M_{Y'}`
-and `c : g^* Q ≅ Q'` of the cokernels commuting with the maps.
-(blueprint: lemma-normalization-constant-sheaf--2)
--/
+with `ν` finite, there are isomorphisms `a : g^* M_X ≅ M_Y`, `b : g^* ν_* M_{X'} ≅ ν'_* M_{Y'}`
+and `c : g^* Q ≅ Q'` of the cokernels `Q`, `Q'` of the natural maps `M_X ⟶ ν_* M_{X'}` and
+`M_Y ⟶ ν'_* M_{Y'}`, commuting with these maps and the projections to the cokernels. -/
 theorem Etale.exists_upperStar_constantSheafToLowerStar_iso {X X' Y Y' : Scheme.{u}}
     {ν : X' ⟶ X} {g : Y ⟶ X} {g' : Y' ⟶ X'} {ν' : Y' ⟶ Y} [IsFinite ν]
     (h : IsPullback g' ν' ν g) (M : ModuleCat.{u + 1} Λ) :
