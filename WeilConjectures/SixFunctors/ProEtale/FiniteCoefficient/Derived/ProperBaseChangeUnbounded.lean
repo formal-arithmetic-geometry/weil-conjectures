@@ -18,8 +18,9 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 # Proper base change for unbounded classical complexes on the pro-étale site
 
 For finite `ℓ`-primary coefficients and schemes of finite type over the base field, the proper
-base change theorem holds for unbounded classical complexes on the pro-étale site
-(blueprint `theorem-results-from-etale-theory--1`).
+base change theorem holds for unbounded classical complexes on the pro-étale site.
+
+## Implementation details
 
 The étale statement is
 `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`
@@ -28,8 +29,12 @@ The étale statement is
 statement is transported from the étale one
 (`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_comparisonUpperStar`) using the
 comparison of unbounded direct images
-(`AlgebraicGeometry.ProEtale.isIso_unboundedDirectImageComparisonMap`, blueprint
-`proposition-unbounded-comparison-finite-coefficients--2`, still `sorry`).
+(`AlgebraicGeometry.ProEtale.isIso_unboundedDirectImageComparisonMap`, still `sorry`): a
+classical complex is `K ≅ ν_X^* L` with `L = Rν_* K`
+(`AlgebraicGeometry.ProEtale.comparisonUpperStar_isClassicalComplexFor`), and the pro-étale
+exchange map at `ν_X^* L` is the étale one conjugated by the comparison maps for `f` and `f'`.
+Since the unbounded comparison is applied to `f'` as well as to `f`, it needs `Y'` of finite
+type over `k` and `g` a morphism over `k`.
 -/
 
 @[expose] public section
@@ -49,23 +54,7 @@ X' --g'--> X
 Y' --g---> Y
 ```
 with `f` proper and every complex `K ∈ D(X_proét, Λ)` with classical cohomology sheaves, the
-base change map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism.
-
-This is blueprint `theorem-results-from-etale-theory--1`, under the extra assumption that `Y'`
-is of finite type over `k` and `g` is a morphism over `k` (the blueprint allows any
-`g : Y' ⟶ Y`): the unbounded comparison is applied to `f'` as well as to `f`, and it needs a
-target of finite type over `k`. On the étale site this is Stacks
-Project, Tag 0F0C
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`); for
-bounded below complexes the pro-étale statement is
-`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`.
-
-Proof: a classical complex is `K ≅ ν_X^* L` with `L = Rν_* K`
-(`AlgebraicGeometry.ProEtale.comparisonUpperStar_isClassicalComplexFor`). The pro-étale exchange
-map at `ν_X^* L` is the étale one conjugated by the comparison maps
-(`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_comparisonUpperStar`); the étale map
-is invertible by Tag 0F0C and the comparison maps for `f` and `f'` by the unbounded comparison
-(`AlgebraicGeometry.ProEtale.isIso_unboundedDirectImageComparisonMap`). -/
+base change map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_of_isProper_of_isClassicalComplexFor
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))

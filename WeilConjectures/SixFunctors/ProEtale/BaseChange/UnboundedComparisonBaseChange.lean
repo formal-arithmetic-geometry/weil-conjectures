@@ -39,6 +39,8 @@ Consequently (`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_compari
 the pro-étale exchange map at `ν_X^* L` is an isomorphism whenever the étale one at `L` and the
 two relevant unbounded direct image comparison maps are.
 
+## Implementation details
+
 The proof transports mates along comparison functors
 (`CategoryTheory.mateEquiv_app_comparison_transport`). Its inputs are the compatibility of the
 unbounded direct image comparison with the counits, which holds by construction, and the

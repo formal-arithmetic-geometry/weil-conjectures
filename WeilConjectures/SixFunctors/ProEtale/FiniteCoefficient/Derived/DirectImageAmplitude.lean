@@ -18,8 +18,22 @@ import WeilConjectures.CategoryTheory.DerivedCategory.IsLE
 
 We transport the finite cohomological amplitude of the étale functors `Rf_*` and `Rf_!` on
 torsion sheaves to the pro-étale site through the comparison functor `ν^*`, whose essential image
-on bounded below complexes consists of the classical complexes
-(blueprint `theorem-results-from-etale-theory--4`, `theorem-results-from-etale-theory--5`).
+on bounded below complexes consists of the classical complexes.
+
+## Implementation details
+
+For `Rf_*`, the étale bound is Stacks Project, Tag 0F10
+(`AlgebraicGeometry.torsionEtaleCohomologicalDimension_finite_of_finiteType`); it is transported
+to the pro-étale site by the comparison of direct images `ν_Y^* ∘ Rf_* ≅ Rf_* ∘ ν_X^*` on
+bounded below complexes
+(`AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`).
+
+For `Rf_!`, write `f = g ∘ j` for the chosen compactification; `Rf_! = Rg_* ∘ j_!` with `j_!`
+exact, and Tag 0F10 applies to the proper map `g`
+(`AlgebraicGeometry.Etale.exists_isLE_rightDerivedLowerShriekOfCompactification_obj`). The
+comparison `Rf_! ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!` on bounded below complexes
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`) transports the bound, since
+the exact functor `ν_Y^*` preserves it.
 -/
 
 @[expose] public section
@@ -34,13 +48,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- **Finite cohomological amplitude of `Rf_*` on classical torsion sheaves**: for a morphism
 `f : X ⟶ Y` of schemes of finite type over a field `K`, there is `N` such that for every torsion
 étale sheaf `F` on `X`, the pro-étale higher direct images `R^q f_* ν_X^* F` of the classical
-sheaf `ν_X^* F` vanish for `q > N`.
-
-This is blueprint `theorem-results-from-etale-theory--4`. The étale bound is Stacks Project,
-Tag 0F10 (`AlgebraicGeometry.torsionEtaleCohomologicalDimension_finite_of_finiteType`); it is
-transported to the pro-étale site by the comparison of direct images
-`ν_Y^* ∘ Rf_* ≅ Rf_* ∘ ν_X^*` on bounded below complexes
-(`AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`). -/
+sheaf `ν_X^* F` vanish for `q > N`. -/
 theorem exists_isZero_homology_rightDerivedLowerStar_comparisonUpperStar_of_finiteType
     (K : Type u) [Field K] {X Y : Scheme.{u}} [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))]
     [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))]
@@ -75,15 +83,7 @@ theorem exists_isZero_homology_rightDerivedLowerStar_comparisonUpperStar_of_fini
 coefficient ring `Λ` (so that every sheaf of `Λ`-modules is torsion) and `f : X ⟶ Y` admitting a
 compactification with `Y` quasi-compact, there is `N` such that the pro-étale `Rf_!` sends every
 bounded below classical complex `ν_X^* L`, `L ∈ D⁺(X_ét, Λ)`, concentrated in degrees `≤ n` to a
-complex concentrated in degrees `≤ n + N`.
-
-This is blueprint `theorem-results-from-etale-theory--5`. Write `f = g ∘ j` for the chosen
-compactification; `Rf_! = Rg_* ∘ j_!` with `j_!` exact, and Stacks Project, Tag 0F10 applies to
-the proper map `g`
-(`AlgebraicGeometry.Etale.exists_isLE_rightDerivedLowerShriekOfCompactification_obj`).
-The comparison `Rf_! ∘ ν_X^* ≅ ν_Y^* ∘ Rf_!` on bounded below complexes
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`) transports the bound, since
-the exact functor `ν_Y^*` preserves it. -/
+complex concentrated in degrees `≤ n + N`. -/
 theorem exists_isLE_rightDerivedLowerShriek_comparisonUpperStar
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [CompactSpace Y] :

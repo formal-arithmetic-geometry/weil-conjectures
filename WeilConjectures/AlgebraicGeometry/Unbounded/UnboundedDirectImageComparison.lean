@@ -13,10 +13,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 For schemes of finite type over a finite or algebraically closed field `k` and a finite
 `ℓ`-primary coefficient ring `A`, the comparison map `ν_Y^* Rg_* K ⟶ Rg_* ν_X^* K` is an
-isomorphism for every unbounded complex `K` of étale sheaves
-(blueprint `proposition-unbounded-comparison-finite-coefficients--2`). This is not formalised yet
-and is recorded with `sorry`; the bounded below case is
+isomorphism for every unbounded complex `K` of étale sheaves. The bounded below case is
 `AlgebraicGeometry.ProEtale.unboundedDirectImageComparison_boundedBelow`.
+
+## Implementation details
+
+The unbounded statement is not formalised yet and is recorded with `sorry`. Its proof reduces,
+degree by degree, to the bounded below case by the uniform cohomological bounds on pro-étale
+affines.
 -/
 
 @[expose] public section
@@ -31,11 +35,7 @@ namespace AlgebraicGeometry.ProEtale
 algebraically closed field, `ℓ` a prime invertible in `k`, `A` a finite `ℓ`-primary ring and
 `g : X ⟶ Y` a morphism of schemes of finite type over `k`. For every
 `K ∈ D(X_ét, A)`, the comparison map `ν_Y^* Rg_* K ⟶ Rg_* ν_X^* K`
-(`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap`) is an isomorphism.
-
-This is blueprint `proposition-unbounded-comparison-finite-coefficients--2`. Its proof reduces,
-degree by degree, to the bounded below case by the uniform cohomological bounds on pro-étale
-affines (blueprint `lemma-uniform-bounds-pro-etale-affines`); it is not formalised yet. -/
+(`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap`) is an isomorphism. -/
 theorem isIso_unboundedDirectImageComparisonMap
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))

@@ -16,8 +16,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 For a proper morphism `f : X ⟶ S`, a geometric point `x̄ : Spec Ω ⟶ S` and a bounded below
 classical complex `K` of pro-étale sheaves with finite coefficients, the derived geometric stalk of
-`Rf_* K` at `x̄` is the pro-étale cohomology of the geometric fibre `X_x̄`
-(blueprint `theorem-results-from-etale-theory--2`).
+`Rf_* K` at `x̄` is the pro-étale cohomology of the geometric fibre `X_x̄`.
+
+## Implementation details
+
+The isomorphism is the proper base change isomorphism `Lx̄^* Rf_* K ≅ Rf'_* Lx̄'^* K`
+(`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`) followed by the Leray
+isomorphism for the projection `f' : X_x̄ ⟶ Spec Ω`.
 -/
 
 @[expose] public section
@@ -33,8 +38,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The Leray isomorphism `RΓ(W, Rg_* K) ≅ RΓ(Z, K)` for a morphism `g : Z ⟶ W` on the
 pro-étale site: the composition of right derived functors applied to `g_* ⋙ Γ_W ≅ Γ_Z`
-(`AlgebraicGeometry.ProEtale.globalSectionsLowerStarIso`), which is valid since `g_*` preserves
-K-injective complexes. -/
+(`AlgebraicGeometry.ProEtale.globalSectionsLowerStarIso`). -/
 noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
     {Z W : Scheme.{u}} (g : Z ⟶ W) :
     R(ProEtale.lowerStar A g) ⋙ rightDerivedGlobalSections A W ≅ rightDerivedGlobalSections A Z :=
@@ -47,12 +51,7 @@ morphism `f : X ⟶ S`, a geometric point `x̄ : Spec Ω ⟶ S` with `Ω` separa
 bounded below classical complex `K` on `X_proét` (that is, `K ≅ ν_X^* L` with
 `L ∈ D⁺(X_ét, Λ)`), the derived geometric stalk of `Rf_* K` at `x̄` is the pro-étale cohomology
 of the geometric fibre `X_x̄ = X ×_S Spec Ω`:
-`RΓ(Spec Ω, Lx̄^* Rf_* K) ≅ RΓ(X_x̄, Lx̄'^* K)`.
-
-This is blueprint `theorem-results-from-etale-theory--2`, for bounded below complexes: it is the
-proper base change isomorphism `Lx̄^* Rf_* K ≅ Rf'_* Lx̄'^* K`
-(`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`) followed by the Leray
-isomorphism for the projection `f' : X_x̄ ⟶ Spec Ω`. -/
+`RΓ(Spec Ω, Lx̄^* Rf_* K) ≅ RΓ(X_x̄, Lx̄'^* K)`. -/
 noncomputable def derivedGeometricStalkRightDerivedLowerStarIsoOfIsProper [Finite Λ]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (x : Spec (.of Ω) ⟶ S)
