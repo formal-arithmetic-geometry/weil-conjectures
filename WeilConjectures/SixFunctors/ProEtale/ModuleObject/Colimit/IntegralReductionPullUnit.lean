@@ -226,9 +226,8 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
   -- Focus on the identity map to avoid rebuilding the whole comparison equation.
   conv_lhs at i1' =>
-    arg 2; arg 2; arg 2
-    rw (transparency := .default) [CategoryTheory.Functor.map_id]
-  simp only [Category.comp_id] at i1'
+    arg 2; arg 2
+    rw (transparency := .default) [CategoryTheory.Functor.map_id, Category.comp_id]
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
