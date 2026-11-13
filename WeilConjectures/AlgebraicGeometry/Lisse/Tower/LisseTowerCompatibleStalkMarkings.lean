@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] constantAdicQuotientRealization constantAdicFiniteRealization
   constantAdicQuotientRightIso pbcDerivedRestrict constantAdicFiniteProjection
 
-set_option trace.profiler true in
 /-- Separate local markings of a fixed normalized finite algebraic tower can be
 chosen compatibly on a common pro-etale cover. The tower K, its bounds and its
 normalization arrows are inputs; this theorem constructs only compatible markings.
@@ -151,8 +150,7 @@ theorem lisse_tower_compatible_stalk_markings
     refine ⟨b, ?_⟩
     intro a₀ H z
     let F := Functor.ofOpSequence
-      (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s ⋙
-        a₀
+      (X := fun n : ℕ ↦ (R n).mapDerivedCategory.obj (K n)) s ⋙ a₀
     let N := constantAdicRestrictedTower (W.hom ≫ g) d M
     let α : F ⟶ N := NatTrans.ofOpSequence (F := F) (G := N) z (by
       intro n
