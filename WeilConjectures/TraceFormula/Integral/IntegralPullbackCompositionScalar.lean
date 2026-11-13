@@ -154,11 +154,9 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   refine scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
-    N1 IIIk IIIh ?_ Np CE ?_ eE eL IIIhk Na CL
-  · trace "pasting naturality"
-    exact Ng
-  · trace "pasting mixed coherence"
-    exact mix
+    N1 IIIk IIIh Ng Np CE ?_ eE eL IIIhk Na CL
+  trace "pasting mixed coherence"
+  exact mix
 
 end SystemScalar
 
