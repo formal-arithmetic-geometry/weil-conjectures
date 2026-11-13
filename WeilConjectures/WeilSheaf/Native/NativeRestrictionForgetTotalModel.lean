@@ -723,6 +723,12 @@ private theorem native_restriction_complex_square_hom
   erw [Category.comp_id]
   rfl
 
+omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))] in
 /-- The chain comparison follows from the balanced summand equations, independently of
 any derived models. -/
 private theorem native_restriction_chain
