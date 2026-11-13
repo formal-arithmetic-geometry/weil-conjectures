@@ -55,7 +55,8 @@ private theorem chart_double_transpose_of_unit
     (((a₀.comp (a₁.comp a₂)).leftAdjointUniq (a₃.ofNatIsoRight ρ.symm)).hom.app X))) = _ at hu
   rw [hu]
   apply (cancel_mono (ρ.hom.app (L₃.obj X))).mp
-  simpa only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using h
+  rw [Category.assoc, Iso.inv_hom_id_app]
+  exact (Category.comp_id (a₃.unit.app X)).trans h
 
 /-- The unit square pins the double transpose to the canonical pullback comparison.
 Source: Stacks Project, Sheaves, Tags 0096 and 0097, adjunction and composition.
