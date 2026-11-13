@@ -173,12 +173,13 @@ private lemma kummerBoundary_comp_baseChange
     (σ : K' ⟶ F.obj K) (a : K ⟶ X⟦(1 : ℤ)⟧) (a' : K' ⟶ X'⟦(1 : ℤ)⟧)
     (δ : X ⟶ Y⟦(1 : ℤ)⟧) (δ' : X' ⟶ Y'⟦(1 : ℤ)⟧)
     (b : F.obj X ⟶ X') (ψ : F.obj Y ⟶ Y')
+    (γ : K ⟶ Y⟦(2 : ℤ)⟧) (γ' : K' ⟶ Y'⟦(2 : ℤ)⟧)
+    (hγ : γ = a ≫ (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y))
+    (hγ' : γ' = a' ≫ (δ'⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Y'))
     (hδ : F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app Y ≫ ψ⟦(1 : ℤ)⟧' = b ≫ δ')
     (ha : σ ≫ F.map a ≫ (F.commShiftIso (1 : ℤ)).hom.app X ≫ b⟦(1 : ℤ)⟧' = a') :
-    σ ≫ F.map (a ≫ (δ⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' C (1 : ℤ) 1 2 rfl).inv.app Y)) ≫
-        (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' =
-      a' ≫ (δ'⟦(1 : ℤ)⟧' ≫ (shiftFunctorAdd' D (1 : ℤ) 1 2 rfl).inv.app Y') := by
-  rw [F.map_comp, Category.assoc,
+    σ ≫ F.map γ ≫ (F.commShiftIso (2 : ℤ)).hom.app Y ≫ ψ⟦(2 : ℤ)⟧' = γ' := by
+  rw [hγ, hγ', F.map_comp, Category.assoc,
     Functor.map_shift_comp_shiftFunctorAdd'_inv, hδ,
     (shiftFunctor D (1 : ℤ)).map_comp, Category.assoc, reassoc_of% ha]
 
@@ -249,7 +250,6 @@ lemma kummerBoundary_eq (f : Γ(U, ⊤)) :
   rw [kummerBoundary, Adjunction.homEquiv_unit]
   simp only [Category.assoc]
 
-set_option trace.profiler true in
 /-- **Base change of the Kummer boundary.** For `e : U' ⟶ U` and a global function `f` on `U`, the
 restriction of `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` to `U'` — the pullback `Le^* ∂κ(f)` read through
 `Λ_{U'} ≅ Le^* Λ_U`, the shift compatibility of `Le^*` and the restriction of supports
@@ -303,9 +303,9 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
         (leftDerivedUpperStarTateObjectIso e 1).hom)
   conv_rhs at hG1 => rw [← Category.assoc]
   rw [hK] at hA
-  rw [kummerBoundary_eq, kummerBoundary_eq]
   exact kummerBoundary_comp_baseChange (L((e)^*[ModuleCat.{u + 1} Λ]))
-    (leftDerivedUpperStarConstantComplexIso Λ e).inv _ _ _ _ _ _ hG1 hA
+    (leftDerivedUpperStarConstantComplexIso Λ e).inv _ _ _ _ _ _ _ _
+    (kummerBoundary_eq Λ f) (kummerBoundary_eq Λ (e.appTop f)) hG1 hA
 
 /-- `AlgebraicGeometry.Etale.kummerBoundary_baseChange` for a function `f'` on `U'` equal to the
 pullback of `f`. -/
