@@ -73,15 +73,9 @@ structure OrdinaryRingedTensorChainComparison
       E.functor.map ((κ P Q).hom.f n) ≫
         (tensor.hom.app (Q, P)).f n =
       (p * q).negOnePow • ((d.underived (P.X p) (Q.X q)).hom ≫
-        (show _ ⟶ (((E.functor.mapHomologicalComplex (.up ℤ)).obj Q) ⊗
-            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n by
-          -- Identify the two presentations of the total tensor before elaborating the equality.
-          change _ ⟶ ((coefficientTotalTensor J R).obj
-            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q,
-              (E.functor.mapHomologicalComplex (.up ℤ)).obj P)).X n
-          exact RingedForgetTensorTransposition.tensorSummand J R
-            ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
-            ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp))
+        RingedForgetTensorTransposition.tensorSummand J R
+          ((E.functor.mapHomologicalComplex (.up ℤ)).obj Q)
+          ((E.functor.mapHomologicalComplex (.up ℤ)).obj P) q p n hqp)
   associativity (P Q N : CochainComplex (ProEtale.AdicSheaf l
       Y) ℤ) :
     let G := E.functor.mapHomologicalComplex (.up ℤ)
