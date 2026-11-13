@@ -80,6 +80,31 @@ private lemma specMap_comp_geometricFiberPoint_of_section
   · rw [Category.assoc, hhalg, ← Spec.map_comp, hrε, Spec.map_id,
       Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberToAlgebraicClosure]
 
+private lemma exists_proEtale_pointLift_of_residueMap
+    {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
+    {A : Type u} [CommRing A] [IsLocalRing A] (x : C.finitePoints)
+    (h : Spec (.of A) ⟶ (C ↘ Spec (.of K)).geometricFiber) [WeaklyEtale h]
+    (r : A →+* AlgebraicClosure K) (hr : ∀ a, r a = 0 ↔ ¬ IsUnit a)
+    (hw : Spec.map (CommRingCat.ofHom r) ≫ h =
+      𝟙 _ ≫ (C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) :
+    ∃ t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
+        (MorphismProperty.Over.pullback @WeaklyEtale ⊤
+          ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h),
+      t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) =
+        Spec.map (CommRingCat.ofHom r) ∧
+      (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
+        (closedPoint (AlgebraicClosure K)) = closedPoint A := by
+  let t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤
+        ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h) :=
+    MorphismProperty.Over.homMk (pullback.lift (Spec.map (CommRingCat.ofHom r)) (𝟙 _) hw)
+      (pullback.lift_snd _ _ _)
+  have htl : t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) =
+      Spec.map (CommRingCat.ofHom r) := pullback.lift_fst _ _ _
+  refine ⟨t, htl, ?_⟩
+  rw [htl]
+  exact specMap_closedPoint_of_forall_eq_zero_iff r hr
+
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} [C.Over (Spec (.of K))]
   [U.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))]
   [ConnectedSpace C] [Smooth (C ↘ Spec (.of K))] [IsIntegral C]
@@ -271,19 +296,7 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
       ((congrArg (Spec.map (CommRingCat.ofHom r) ≫ ·) hhproj).trans
         (hpt.trans (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricFiberProj
           (C ↘ Spec (.of K)) x).symm)) hhalg
-  let t : ProEt.mk (𝟙 (Spec (.of (AlgebraicClosure K)))) ⟶
-      (MorphismProperty.Over.pullback @WeaklyEtale ⊤
-        ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x)).obj (ProEt.mk h) :=
-    MorphismProperty.Over.homMk (pullback.lift (Spec.map (CommRingCat.ofHom r)) (𝟙 _) hw)
-      (pullback.lift_snd _ _ _)
-  have htl : t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x) =
-      Spec.map (CommRingCat.ofHom r) :=
-    pullback.lift_fst _ _ _
-  have ht : (t.left ≫ pullback.fst h ((C ↘ Spec (.of K)).geometricFiberPointOfFinitePoint x))
-      (closedPoint (AlgebraicClosure K)) =
-        closedPoint (Ideal.inertiaInvariants C.functionField Q) := by
-    rw [htl]
-    exact specMap_closedPoint_of_forall_eq_zero_iff r hr
+  obtain ⟨t, htl, ht⟩ := exists_proEtale_pointLift_of_residueMap x h r hr hw
   -- the punctured neighbourhood
   obtain ⟨e', he'⟩ := exists_iso_pullback_geometricFiberMap hW Q x hxW j c.ϖ (c.opensRange_inf hz)
     c.ϖ_mem (c.ϖ_ne_zero hz) h hhproj
@@ -292,20 +305,22 @@ theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.ran
     MorphismProperty.Over.isoMk e' rfl
   have hfst : specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
       e'.hom ≫ pullback.fst h j̄ = Spec.map (CommRingCat.ofHom
-        (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) := by
-    rw [he', ← Spec.map_comp]
-    rfl
-  have hsnd : e'.hom ≫ pullback.snd h j̄ ≫ j̄ = e'.hom ≫ pullback.fst h j̄ ≫ h := by
-    rw [pullback.condition]
+        (Ideal.inertiaInvariantsToField C.functionField Q).toRingHom) :=
+    (congrArg (specFieldMap
+      (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫ ·) he').trans
+        (Spec.map_comp _ _).symm
+  have hsnd : e'.hom ≫ pullback.snd h j̄ ≫ j̄ = e'.hom ≫ pullback.fst h j̄ ≫ h :=
+    congrArg (e'.hom ≫ ·) (pullback.condition h j̄).symm
   have hgen : genericBasePoint j ≫ j =
       Spec.map (CommRingCat.ofHom (algebraMap Γ(C, c.W) Ω)) ≫ hW.fromSpec := by
-    rw [pointOfAlgebra_comp_eq_specAtPrime j hW Q, specAtPrime, ← Category.assoc, ← Spec.map_comp]
+    change (Spec.map (CommRingCat.ofHom (algebraMap C.functionField Ω)) ≫
+      genericPointLift j) ≫ j = _
+    rw [Category.assoc, genericPointLift_comp, hW.fromSpecFunctionField_eq,
+      ← Spec.map_comp_assoc]
     congr 2
     ext a
     simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.comp_apply]
-    rw [IsScalarTower.algebraMap_apply Γ(C, c.W) (integralClosure Γ(C, c.W) Ω)
-      (Localization.AtPrime Q), Ideal.atPrimeToField_algebraMap]
-    rfl
+    exact (IsScalarTower.algebraMap_apply Γ(C, c.W) C.functionField Ω a).symm
   have hspec : specFieldMap (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField))) Ω ≫
       k = genericGeomPoint (U ↘ Spec (.of K)) j := by
     apply Scheme.Hom.geometricFiber_hom_ext
