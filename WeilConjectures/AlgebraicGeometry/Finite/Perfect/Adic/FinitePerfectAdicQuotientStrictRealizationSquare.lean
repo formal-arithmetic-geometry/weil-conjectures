@@ -98,6 +98,6 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
   dsimp only [finitePerfectAdicQuotientStrictRealizationIso, Iso.trans_hom,
     Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, finitePerfectAdicQuotientRealizationIso]
-  exact hsquare
+  simpa only [← finitePerfectAdicScalarModules_eq, Iso.app_hom] using hsquare
 
 end AlgebraicGeometry.Scheme
