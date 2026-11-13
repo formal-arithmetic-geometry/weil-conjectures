@@ -84,7 +84,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply HomologicalComplex.hom_ext
   intro i
-  simpa only [integralPullEvaluationComplex_eq_ordinary, HomologicalComplex.comp_f] using
-    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  simp only [integralPullEvaluationComplex_eq_ordinary, HomologicalComplex.comp_f]
+  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 
 end WeilConjectures.IntegralSystemRealization
