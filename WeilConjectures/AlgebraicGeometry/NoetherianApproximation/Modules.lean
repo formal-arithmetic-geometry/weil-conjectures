@@ -209,7 +209,8 @@ private lemma pullHom_glueCocRHS_preimage (a b d : ι) :
     (r₃ := fun a b d ↦ resTo r hr (le_refl (U a ⊓ U b ⊓ U d)))
     (h₁₃ := resTo_p₁₃ U r hr) (hr₃₁ := resTo_p₁' U r hr) (hr₃₃ := resTo_p₃' U r hr) a b d
 
-/-- Glue finite presentation modules and identify their pullback from compatible local isomorphisms. -/
+/-- Glue finite presentation modules and identify their pullback from compatible local
+isomorphisms. -/
 private lemma exists_isFinitePresentation_pullback_iso_of_glue (hU : ⨆ a, U a = ⊤)
     (hN : ∀ a, (N a).IsFinitePresentation)
     (hself : DescentData'.GlueSelf (H := H) (preimageDiag U g) (preimageDiag_p₁ U g)
@@ -279,7 +280,6 @@ end Stages
 
 variable {I : Type u} [Category.{u} I] {D : I ⥤ Scheme.{u}} {c : Cone D}
 
-set_option profiler true in
 open Scheme.Modules in
 /-- **Modules of finite presentation descend to a finite stage** (Stacks, Tag 01ZR). Let `{Dⱼ}`
 be a cofiltered system of quasi-compact separated schemes with affine transition morphisms and

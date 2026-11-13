@@ -45,6 +45,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] {Ω : Type u} [Field Ω] 
 
 namespace SplitNbhd
 
+omit [IsAlgClosed Ω] in
 private lemma affinePoint_comp_ringHomOfSpec_of_comp_eq {Z : Scheme.{u}}
     {B : Type u} [CommRing B] (pt : Spec (.of Ω) ⟶ Z) {W : Z.Opens}
     (hW : IsAffineOpen W) (hpt : pt default ∈ W) (g : Z ⟶ Spec (.of B))
@@ -56,7 +57,6 @@ private lemma affinePoint_comp_ringHomOfSpec_of_comp_eq {Z : Scheme.{u}}
       ← Category.assoc, SpecMap_affinePoint_fromSpec, hψ]
   exact congrArg CommRingCat.Hom.hom (Spec.map_injective key)
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Every pointed étale neighbourhood of `t` receives a morphism from a piece of a split
 neighbourhood of `y`.** -/
