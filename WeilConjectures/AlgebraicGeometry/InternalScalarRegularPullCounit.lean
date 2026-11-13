@@ -136,7 +136,6 @@ private theorem regular_restriction_iso (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
   apply Iso.ext
   exact regular_restriction_hom a T
 
-set_option trace.profiler true in
 -- The single-object comparison traverses several exact derived functor isomorphisms.
 private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -157,6 +156,7 @@ private theorem regular_pull_eq (a : Λ ⟶ Λ') [IsMonHom a]
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc]
+  -- Normalize the mapped unit without rechecking the preceding comparison maps.
   conv_lhs =>
     arg 2; arg 2; arg 2
     rw [← (V a X).map_comp_assoc, exact_unit Λ' f]
