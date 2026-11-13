@@ -28,6 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Scalar transport unfolds two section functors and the affine chart in quotient types.
 set_option backward.isDefEq.respectTransparency false in

@@ -29,6 +29,7 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
+set_option trace.profiler true in
 set_option maxHeartbeats 700000 in
 -- Elaborating the nested right-derived scalar transports needs additional heartbeats.
 /-- An arbitrary isomorphism beta from the local pullback of G to the local higher
