@@ -85,7 +85,6 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
           ((DerivedCategory.quotientCompQhIso _).app O).inv) ≫
       (ρ_ (DerivedCategory.Q.obj F)).hom := by
   classical
-  dsimp only
   let O := (HomologicalComplex.single _ (.up ℤ) 0).obj
     (𝟙_ (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
   let V := homComplex (R := Y.sheaf) P O
@@ -93,26 +92,19 @@ theorem schemeOrdinaryEvaluation_uncurry_calculation (Y : Scheme.{u})
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
   obtain ⟨e, hO, hF⟩ := schemeOrdinaryEvaluation_chain_calculation Y P F f hf
   have hc := schemeTensorEvaluation_localization_coherence Y F V P e
-  have hresF : DerivedCategory.Q.map (eta.app F) ≫ schemeHomResolutionInverse Y F =
-      𝟙 (DerivedCategory.Q.obj F) := by
-    dsimp only [eta]
-    have : IsIso (DerivedCategory.Q.map
-        ((CochainComplex.toKInjectiveResolution.{u}
-          (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).app F)) :=
+  have hres (M : CochainComplex
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
+      DerivedCategory.Q.map (eta.app M) ≫ schemeHomResolutionInverse Y M =
+        𝟙 (DerivedCategory.Q.obj M) := by
+    have : IsIso (DerivedCategory.Q.map (eta.app M)) :=
       (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
-        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ F).2
+        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2
     exact IsIso.hom_inv_id _
-  have hrO : DerivedCategory.Q.map (eta.app O) ≫ schemeHomResolutionInverse Y O =
-      𝟙 (DerivedCategory.Q.obj O) := by
-    dsimp only [eta]
-    have : IsIso (DerivedCategory.Q.map
-        ((CochainComplex.toKInjectiveResolution.{u}
-          (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).app O)) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2
-        (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ O).2
-    exact IsIso.hom_inv_id _
+  dsimp only [eta] at hres
+  have hrO := hres O
+  dsimp only [O] at hrO
   convert hc using 1 <;>
-    simp only [hF, hO, Functor.map_comp, Category.assoc, hresF, Category.comp_id]
+    simp only [hF, hO, Functor.map_comp, Category.assoc, hres F, Category.comp_id]
   all_goals
     try rfl
     try rw [reassoc_of% hrO]
