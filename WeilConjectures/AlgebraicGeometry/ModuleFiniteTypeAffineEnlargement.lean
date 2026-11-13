@@ -108,24 +108,15 @@ theorem exists_finiteType_affine_enlargement
   have : IsIso (Q.map q) := isIso_of_mono_of_epi _
   let e : (Abelian.image ψ).over U ≅ G := (asIso (Q.map q)).symm ≪≫ α
   have hft : ((Abelian.image ψ).over U).IsFiniteType :=
-    finiteType_of_affine_enlargement_iso e.symm
+    finiteType_of_affine_enlargement_iso.{u, u, u} e.symm
   have hψW : IsIso (P.map ψ) := by
-    have heq : P.map ψ = (η.app K).inv ≫ T.map (Q.map ψ) ≫ (η.app H).hom := by
-      have hn := η.hom.naturality ψ
-      change T.map (Q.map ψ) ≫ (η.app H).hom = (η.app K).hom ≫ P.map ψ at hn
-      rw [hn]
-      simp
-    rw [heq, hψU, Functor.map_comp]
+    apply (NatIso.isIso_map_iff η ψ).mp
+    change IsIso (T.map (Q.map ψ))
+    rw [hψU, Functor.map_comp]
     infer_instance
   have hqW : IsIso (P.map q) := by
-    have heq : P.map q = (η.app K).inv ≫ T.map (Q.map q) ≫
-        (η.app (Abelian.image ψ)).hom := by
-      have hn := η.hom.naturality q
-      change T.map (Q.map q) ≫ (η.app (Abelian.image ψ)).hom =
-        (η.app K).hom ≫ P.map q at hn
-      rw [hn]
-      simp
-    rw [heq]
+    apply (NatIso.isIso_map_iff η q).mp
+    change IsIso (T.map (Q.map q))
     infer_instance
   have hjW : IsIso (P.map j) := by
     have heq : P.map j = inv (P.map q) ≫ P.map ψ := by

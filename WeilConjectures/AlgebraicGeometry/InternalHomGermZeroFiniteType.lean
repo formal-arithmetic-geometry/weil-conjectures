@@ -58,7 +58,6 @@ private theorem map_generators_hom_eq_zero.{u₁, v₁, u₂, v₂}
   rw [hs, Limits.comp_zero]
   exact h a.as
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 private theorem zero_on_generators (X : RingedSpace.{u}) (F G : Modules X)
     (A U V : Opens X) (j : V ⟶ A) (i : V ⟶ U)

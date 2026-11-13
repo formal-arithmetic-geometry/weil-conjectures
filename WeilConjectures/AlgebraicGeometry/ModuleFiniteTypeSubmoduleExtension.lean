@@ -87,7 +87,7 @@ theorem exists_quasicoherent_finiteType_submodule_extension
   obtain ⟨H, hH, ψ, α, hψ⟩ :=
     exists_quasiCoherent_extension_of_quasiCompact_open X U inferInstance F G ι
   have : H.IsQuasicoherent := hH
-  have : (H.over U).IsFiniteType := finiteType_of_submodule_extension_iso α.symm
+  have : (H.over U).IsFiniteType := finiteType_of_submodule_extension_iso.{u, u, u} α.symm
   obtain ⟨E, hE, hEft, j, hj, hjU⟩ := exists_finiteType_global_approximation X U hU H
   have : E.IsQuasicoherent := hE
   have : E.IsFiniteType := hEft
