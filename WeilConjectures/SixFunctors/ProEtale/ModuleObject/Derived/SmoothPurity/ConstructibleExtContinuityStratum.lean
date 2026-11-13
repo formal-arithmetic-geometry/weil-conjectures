@@ -231,10 +231,7 @@ private theorem complexColimits
 
 attribute [local instance 2000] complexColimits
 
-set_option maxHeartbeats 800000 in
--- Derived functor comparisons require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem qcqsCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -398,10 +395,7 @@ private theorem qcqsCostalkContinuity
   change IsIso (colimit.desc (D ⋙ V) (V.mapCocone d))
   exact isIso_of_reflects_iso _ ipush
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem qcqsInjectiveCostalkContinuity
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -466,10 +460,7 @@ private theorem qcqsInjectiveCostalkContinuity
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem qcqsCostalkModel
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -607,10 +598,7 @@ private theorem qcqsCostalkModel
     exact H.map_isZero ((J.obj s).isZero_of_isStrictlyGE a r hr)
   · exact homCoconeOfInjectiveCocone E H adj P n N J c β βv hβ
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem qcqsFiniteFreeHomEvaluation
     (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -650,10 +638,7 @@ private theorem qcqsFiniteFreeHomEvaluation
     Functor.isoWhiskerRight F.mapDerivedCategoryFactors
       (Γ.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor _ n)⟩
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem qcqsFiniteFreeHomContinuity
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -703,7 +688,6 @@ private theorem qcqsFiniteFreeHomContinuity
   apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
   exact ⟨IsColimit.mapCoconeEquiv e.symm hcomp⟩
 
-set_option synthInstance.maxSize 4096 in
 private theorem freeComap {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
@@ -716,10 +700,7 @@ private theorem freeComap {X : Scheme.{u}}
       biproduct.mapIso (fun _ ↦ ?_)⟩⟩
   simpa using Mod.regularIsoOfIsIso (inv φ)
 
-set_option maxHeartbeats 800000 in
--- Derived module functors require additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
-set_option synthInstance.maxSize 4096 in
+set_option profiler true in
 private theorem lisseRawCover
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
