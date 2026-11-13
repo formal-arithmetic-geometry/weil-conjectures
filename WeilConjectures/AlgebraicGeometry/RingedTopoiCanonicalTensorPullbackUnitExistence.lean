@@ -60,7 +60,6 @@ private theorem pure_right_unitor
   have ht := congrArg (fun f ↦ f.app W (r • m)) (adj.right_triangle_components M)
   exact h.trans ((congrArg ((adj.counit.app M).val.app W) hh.symm).trans ht)
 
-set_option profiler true in
 -- Check the transported rank-one action and its sectionwise linear equivalences.
 private theorem inverseImage_unit_iso :
     ∃ e : unit (RingedTensor.ringSheaf RI) ≅
@@ -94,10 +93,8 @@ private theorem inverseImage_unit_iso :
     have hm := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
       (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
     simp only [uInv.map_id] at hm
-    change (I.moduleUnderlying.inv.app U).hom.app W t =
-      I.ringUnderlying.hom.hom.app W t •
-        (I.moduleUnderlying.inv.app U).hom.app W ((uInv.map one).hom.app W t) at hm
-    exact hm.trans (congrArg₂ (· • ·) ht
+    exact hm.trans (congrArg₂
+      (fun (a : RI.obj.obj W) (b : (I.modules.obj U).val.obj W) ↦ a • b) ht
       (congrArg ((I.moduleUnderlying.inv.app U).hom.app W) hi))
   let eW (W : Dᵒᵖ) : RI.obj.obj W ≃ₗ[RI.obj.obj W] (I.modules.obj U).val.obj W :=
     { toEquiv := (((sheafToPresheaf JD (Type u)).mapIso e).app W).toEquiv.symm
@@ -206,7 +203,6 @@ private theorem comparison_q_hom_ext
   simpa only [comparison_q_eq R S RI uInv I c L hobj k M,
     Functor.map_comp, Category.assoc] using h
 
-set_option profiler true in
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
 /--
 The proof constructs the unit map from pure tensors and scalar extension.
