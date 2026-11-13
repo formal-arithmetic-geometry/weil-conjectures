@@ -24,6 +24,8 @@ set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
+-- Use the sheaf-module abelian structure directly during instance synthesis.
+attribute [local instance 30000] SheafOfModules.instAbelian
 -- Compare the recorded functors through their interfaces, without unfolding the
 -- chosen resolutions or adjunction witnesses during statement elaboration.
 -- Open the pinned adjunction explicitly only at its defining Hom equation.
