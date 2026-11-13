@@ -195,7 +195,6 @@ private theorem exists_base_element_model_localization_of_injective
     hc, hprops⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- Core construction of a nonzero localization of a finite étale model.
 
 The proof follows the denominator-clearing and localization argument in the

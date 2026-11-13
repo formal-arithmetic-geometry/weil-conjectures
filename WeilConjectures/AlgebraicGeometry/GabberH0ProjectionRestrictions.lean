@@ -127,14 +127,16 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
     Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Category.comp_id] at hp
   trace "comparison: pasting"
-  rw [pasting_transport (j ≫ g) f (j ≫ g ≫ f) (Category.assoc j g f).symm U] at hp
+  have hp' := hp.trans (congrArg
+    (fun k ↦ k ≫ (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) j g).hom.app
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))
+    (pasting_transport (j ≫ g) f (j ≫ g ≫ f) (Category.assoc j g f).symm U))
   let e := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
     (Category.assoc j g f)
   let e' := congrArg (fun k : V ⟶ X ↦ (MorphismProperty.Over.pullback @Etale ⊤ k).obj U)
     (Category.assoc j g f).symm
   trace "comparison: associating hp"
-  rw [Category.assoc (eqToHom e') _ _] at hp
-  have hv := cancel_cast_comp e e' _ _ hp
+  have hv := cancel_cast_comp e e' _ _ (hp'.trans (Category.assoc _ _ _))
   trace "comparison: map_comp"
   erw [← ((Scheme.etaleSetPullback (j ≫ g ≫ f)).obj F).obj.map_comp_apply, ← op_comp]
   refine (map_transport (Category.assoc j g f) F U
