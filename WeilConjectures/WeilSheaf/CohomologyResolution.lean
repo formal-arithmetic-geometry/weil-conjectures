@@ -71,7 +71,7 @@ private noncomputable abbrev adicGlobalSectionsHB (l : ℕ) [Fact l.Prime] (Z : 
     AdicSheaf l Z ⥤ WeilCoefficients.{u} l :=
   AdicSheaf.forget Z ⋙ Sheaf.Γ _ _
 
-private noncomputable abbrev adicLowerStarCompGlobalSectionsIsoHB (l : ℕ) [Fact l.Prime]
+private noncomputable def adicLowerStarCompGlobalSectionsIsoHB (l : ℕ) [Fact l.Prime]
     {Z W : Scheme.{u}} (g : Z ⟶ W) :
     (g)_*ᵃ[l] ⋙ adicGlobalSectionsHB l W ≅ adicGlobalSectionsHB l Z :=
   Functor.isoWhiskerLeft (AdicSheaf.forget Z) (globalSectionsLowerStarIso _ g)
