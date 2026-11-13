@@ -23,7 +23,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
 -- Comparing the explicit resolution class maps unfolds several homology transports.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -79,11 +78,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
               ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
               V (D.sourceClass p (eH.symm xi)))) := by
   classical
-  dsimp only
-  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
-  let P := ((Scheme.Modules.pushforward f).rightDerived p).obj F
+  intro inst h N P
   obtain ⟨E, hE⟩ :=
     Scheme.Modules.exists_moduleCohomology_source_comparison (f ⁻¹ᵁ V).toScheme p
   let eH : ((RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj

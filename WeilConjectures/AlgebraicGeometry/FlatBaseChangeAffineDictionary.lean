@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
 set_option trace.profiler true in
-set_option maxHeartbeats 700000 in
 -- The affine cohomology comparison elaborates substantial derived-category terms.
 /-- Normalized affine section identifications, before choosing a resolution lift.
 Source: Stacks Project, Tags 02KH (affine-local reduction), 01XJ, 01E4 and 03FD.
@@ -95,6 +94,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_dictionary
             (D.targetClass p
               (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                 ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
+  intro inst h N P Q
   obtain ⟨eH, a, ha, ha_formula⟩ :=
     Scheme.Modules.exists_flatBaseChange_affine_source f g F I J p V W hV hW eVW D
   obtain ⟨b, hb, hb_formula⟩ :=

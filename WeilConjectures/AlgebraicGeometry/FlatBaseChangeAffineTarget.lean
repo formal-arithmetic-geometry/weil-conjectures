@@ -85,7 +85,6 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
 -- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.
 Source: Stacks Project, Tags 02KH (both parts), 01XJ, 01E4 and 03FD.
@@ -164,10 +163,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
                 (Scheme.Modules.moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
                   ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) D.psi p (eH.symm xi)))) := by
   classical
-  dsimp only
-  let : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
-  let h := f.resLE V (f ⁻¹ᵁ V) le_rfl ≫ V.toSpecΓ
-  let N := (Scheme.Modules.pullback (f ⁻¹ᵁ V).ι).obj F
+  intro inst h N P Q
   have : Module.Flat Γ(S, V) Γ(S', W) := g.flat_appLE hV hW eVW
   have : CompactSpace (f ⁻¹ᵁ V).toScheme :=
     isCompact_iff_compactSpace.mp (f.isCompact_preimage hV.isCompact)
