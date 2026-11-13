@@ -92,6 +92,31 @@ private lemma pullUnit_hasGoodTensorTensor₂₃
       (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
     GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
 
+private lemma pullUnit_preservesColimits_tensorLeft
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (T : Scheme.{u})
+    (A : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj A) := inferInstance
+
+private lemma pullUnit_preservesColimits_tensorRight
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (T : Scheme.{u})
+    (A : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj A) := inferInstance
+
+private lemma pullUnit_comp_counit_diagram
+    {C : Type*} [Category* C] {A₀ A₁ A₂ A₃ A₄ A₅ A₆ A₇ A₈ A₉ A₁₀ A₁₁ A₁₂ : C}
+    {a : A₀ ⟶ A₁} {b : A₁ ⟶ A₂} {c : A₂ ⟶ A₃} {d : A₃ ⟶ A₄}
+    {e : A₄ ⟶ A₅} {f : A₅ ⟶ A₆} {g : A₆ ⟶ A₇} {h : A₇ ⟶ A₈}
+    {i : A₀ ⟶ A₉} {j : A₉ ⟶ A₁₀} {k : A₁₀ ⟶ A₁₁} {l : A₁₁ ⟶ A₈}
+    {q : A₄ ⟶ A₆} {r : A₃ ⟶ A₈} {s : A₂ ⟶ A₁₁}
+    {t : A₁ ⟶ A₁₂} {u : A₁₂ ⟶ A₁₀} {v : A₉ ⟶ A₁₂}
+    (h₁ : e ≫ f = q) (h₂ : d ≫ q ≫ g ≫ h = r) (h₃ : c ≫ r = s ≫ l)
+    (h₄ : b ≫ s = t ≫ u ≫ k) (h₅ : i ≫ v = a ≫ t) (h₆ : v ≫ u = j) :
+    (a ≫ b ≫ c ≫ d ≫ e) ≫ f ≫ g ≫ h = i ≫ j ≫ k ≫ l := by
+  simp only [Category.assoc]
+  rw [reassoc_of% h₁, h₂, h₃, reassoc_of% h₄, ← reassoc_of% h₅, reassoc_of% h₆]
+
 set_option trace.profiler true in
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
@@ -114,19 +139,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (comapUpperStarIso a f).inv (ComplexShape.up ℤ)).app Z) :
         (D(Mod.comap (coefficientMap a Y)) ⋙ L((f)^*⟦Λ⟧)).obj (DerivedCategory.Qh.obj Z) ⟶ _) := by
-  have := pullUnit_hasTensor Λ Y
-  have := pullUnit_hasTensor₄ObjExt Λ Y
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
-  have := pullUnit_hasTensor Λ' Y
-  have := pullUnit_hasTensor₄ObjExt Λ' Y
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ' Y
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ' Y
-  rw [derivedComapLeftDerivedUpperStarIso_hom_eq]
-  simp only [derivedComapUpperStarIso, Iso.trans_hom,
-    Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Category.assoc]
   have s1 := congrArg (D(Mod.comap (coefficientMap a X))).map
     (leftDerivedUpperStarIsoMapDerivedCategory_inv_app_comp_counit f Λ' Z)
   have s2 := Functor.mapDerivedCategoryCompIso_fach (f)^*⟦Λ'⟧ (Mod.comap (coefficientMap a X)) Z
@@ -142,8 +154,12 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_app_Qh_comp
       (((Mod.comap (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj Z))).symm
   simp only [Functor.map_comp] at s1
   dsimp only [Functor.comp_obj, Functor.comp_map] at s1 s2 s3 s4 s5 s6 ⊢
-  simp only [reassoc_of% s1, s2, s3, reassoc_of% s4]
-  simp only [← reassoc_of% s5, reassoc_of% s6]
+  simpa only [derivedComapLeftDerivedUpperStarIso_hom_eq, derivedComapUpperStarIso,
+    Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.comp_obj, Category.assoc] using
+      (pullUnit_comp_counit_diagram s1 s2 s3 s4 s5 s6)
+
 
 
 /-- The underived compatibility of (Pull) with the units of `Ext ⊣ Res`
@@ -213,14 +229,20 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   have := pullUnit_hasTensor₄ObjExt Λ Y
   have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
   have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
+  have := pullUnit_preservesColimits_tensorLeft Λ Y
+  have := pullUnit_preservesColimits_tensorRight Λ Y
   have := pullUnit_hasTensor Λ' Y
   have := pullUnit_hasTensor₄ObjExt Λ' Y
   have := pullUnit_hasGoodTensor₁₂Tensor Λ' Y
   have := pullUnit_hasGoodTensorTensor₂₃ Λ' Y
+  have := pullUnit_preservesColimits_tensorLeft Λ' Y
+  have := pullUnit_preservesColimits_tensorRight Λ' Y
   have := pullUnit_hasTensor Λ X
   have := pullUnit_hasTensor₄ObjExt Λ X
   have := pullUnit_hasGoodTensor₁₂Tensor Λ X
   have := pullUnit_hasGoodTensorTensor₂₃ Λ X
+  have := pullUnit_preservesColimits_tensorLeft Λ X
+  have := pullUnit_preservesColimits_tensorRight Λ X
   let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
@@ -294,6 +316,8 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
   have := pullUnit_hasTensor₄ObjExt Λ Y
   have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
   have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
+  have := pullUnit_preservesColimits_tensorLeft Λ Y
+  have := pullUnit_preservesColimits_tensorRight Λ Y
   let P := (CochainComplex.flatResolutionFunctor _).obj (DerivedCategory.Q.objPreimage M)
   let e : DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P) ≅ M :=
     (DerivedCategory.quotientCompQhIso _).app P ≪≫
@@ -313,7 +337,10 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
       D(Mod.comap (coefficientMap a X))
   change lhs.app M = rhs.app M
   apply (cancel_epi (L((f)^*⟦Λ⟧).map e.hom)).1
-  rw [lhs.naturality, rhs.naturality]
+  have hl := lhs.naturality e.hom
+  have hr := rhs.naturality e.hom
+  dsimp only [Functor.comp_map, Functor.id_map] at hl hr
+  rw [hl, hr]
   exact congrArg (fun k ↦ k ≫ _) h
 
 end Comap
