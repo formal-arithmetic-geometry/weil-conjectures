@@ -250,7 +250,7 @@ lemma pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm
               (traitGenericField K)) τ).autAction Λ C) ≫
         ((baseChangeToGaloisLayer hM b hb v hv).pullbackExchange Λ).app C := by
   obtain ⟨σ, rfl⟩ := GenericAut.galoisEquiv.surjective τ
-  rw [MulEquiv.symm_apply_apply]
-  exact pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
+  simpa only [MulEquiv.symm_apply_apply] using
+    pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction hM b hb v hv Λ σ C
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
