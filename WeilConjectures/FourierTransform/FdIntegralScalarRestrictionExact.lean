@@ -77,9 +77,7 @@ private theorem scalarExact
 attribute [local irreducible] integralScalarExtension integralOrdinaryScalar
   sfIntegralOrdinaryComparison
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
--- The shift instances of the now-proved finite scalar extension make the elaboration heavier.
 private theorem scalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -210,9 +208,7 @@ private theorem scalarShift
         Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom]
       dsimp only [r, Iso.refl_hom, NatTrans.id_app, Iso.refl_inv,
         Functor.associator_hom_app, Functor.associator_inv_app]
-      repeat erw [Category.id_comp]
-      repeat erw [Category.comp_id]
-      repeat erw [Category.assoc]
+      simp only [Category.id_comp, Category.comp_id, Category.assoc]
       have hl := hlift h P hP
       let z := ((b h).hom.app K).hom ≫ aL.hom.app ((U l Ω T h).obj K) ≫
         dL.map t ≫ f
