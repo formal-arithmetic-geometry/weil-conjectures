@@ -201,7 +201,6 @@ private theorem scalarAssociatorNormalization (T : Scheme.{u})
   rw [scalarBalanceComplex, scalarLeftAdjointCompEq]
   exact scalarComposition_rep T φ ψ χ w P
 
-set_option maxHeartbeats 900000 in
 set_option profiler true in
 -- Work with abstract coefficient data while checking the long tower calculation.
 private theorem scalarDerivedCoefficients
