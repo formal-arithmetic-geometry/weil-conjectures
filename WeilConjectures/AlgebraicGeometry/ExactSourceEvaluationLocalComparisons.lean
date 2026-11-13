@@ -48,6 +48,7 @@ private theorem descend_comparison_squares
     _ = (c.hom ≫ a.hom) ≫ E.map f := by
       simpa only [Category.assoc] using congrArg (fun t ↦ c.hom ≫ t) h₂
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Derived equivalence instance comparisons need a larger declaration-local budget.
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
