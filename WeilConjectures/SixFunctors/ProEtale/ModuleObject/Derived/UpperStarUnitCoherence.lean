@@ -206,7 +206,6 @@ lemma leftDerivedFunctorFactorIso_hom_app_single
   erw [reassoc_of% (leftDerivedFunctorCounit_naturality
     (A := H) (mapHomotopyCategorySingleHom G φ)),
     reassoc_of% (leftDerivedFunctorFactorIso_hom_app_comp_counit e _)]
-  rfl
 
 end Derived
 
@@ -248,7 +247,7 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
           (leftDerivedUpperStarUnitIso Λ f).hom =
       (leftDerivedUpperStarUnitIso Λ (f ≫ g)).hom := by
   rw [leftDerivedUpperStarUnitIso_hom_eq, leftDerivedUpperStarUnitIso_hom_eq,
-    leftDerivedUpperStarUnitIso_hom_eq]
+    leftDerivedUpperStarUnitIso_hom_eq, leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso]
   simpa only [upperStarComp_hom_app_unit] using
     Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
       (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
