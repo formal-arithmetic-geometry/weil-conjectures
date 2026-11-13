@@ -227,7 +227,6 @@ noncomputable def descentMap :
       (pullback.fst f f ≫ f)_*ᵃ[l].obj (⨁ fun _ : Fin n ↦ unit l (Limits.pullback f f)) :=
   descentMapFst f γ - descentMapSnd f
 
-set_option profiler true in
 -- The kernel needs time to unfold the composites of sheaf morphisms in `descentMap`.
 /-- The descent map is the difference of its two halves. -/
 lemma descentMap_eq : descentMap (l := l) f γ = descentMapFst f γ - descentMapSnd f := rfl
