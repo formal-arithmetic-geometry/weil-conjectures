@@ -101,12 +101,20 @@ localization. The latter has its canonical shifts and preserves triangles.
 Its comparison components are isomorphisms on every complex. The unit formula
 is the component formula for the localization of the ordinary adjunction. -/
 theorem derived_scalar_data : DerivedScalarData l E T := by
-  refine ⟨⟨(ordinaryExtension l E T).leftDerivedFunctorIsoMapDerivedCategory⟩,
-    ⟨(ordinaryRestriction l E T).rightDerivedFunctorIsoMapDerivedCategory⟩,
+  let F := ordinaryExtension l E T
+  let G := ordinaryRestriction l E T
+  have : F.Additive := inferInstance
+  have : G.Additive := inferInstance
+  have : PreservesFiniteLimits F := inferInstance
+  have : PreservesFiniteColimits F := inferInstance
+  have : PreservesFiniteLimits G := inferInstance
+  have : PreservesFiniteColimits G := inferInstance
+  refine ⟨⟨F.leftDerivedFunctorIsoMapDerivedCategory⟩,
+    ⟨G.rightDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨inferInstance⟩, ⟨inferInstance⟩, inferInstance, inferInstance,
     (fun P ↦ inferInstance), (fun P ↦ inferInstance), ?_⟩
   intro P
-  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit
+  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit (F := F) (G := G)
     (Mod.extendRestrictAdjunction (inclusion l E T)) P
 
 /-- The exact ordinary and derived scalar clauses together.
