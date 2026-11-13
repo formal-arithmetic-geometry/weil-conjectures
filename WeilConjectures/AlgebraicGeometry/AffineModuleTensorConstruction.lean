@@ -81,6 +81,61 @@ set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option profiler true in
+private theorem tensorConstruction_of_pushout [IsAffineHom f]
+    (B : U.toTopCat.Sheaf CommRingCat.{u})
+    (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)
+    (hp : IsPushout r₀ t₀ b t) (hb : b ≫ ε = 𝟙 U.sheaf) (ht : t ≫ ε = e₀) :
+    ∃ (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))
+        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))
+        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f),
+        (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),
+          P.map a = eqToHom (pobj G) ≫
+            SheafOfModules.changeOfRingsHom.{u, u, u} t (I G)
+              (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫
+            eqToHom (pobj G').symm) ∧
+        (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V),
+          ((eqToHom (pobj G)).val.app ((Opens.map f.base).op.obj V))
+            ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V)
+              (((adj₀).unit.app ((S).obj G)).val.app V g)) =
+            ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
+              (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app
+                ((Opens.map f.base).op.obj V)
+                ((1 : B.obj.obj ((Opens.map f.base).op.obj V)) ⊗ₜ[
+                  (IA).obj.obj ((Opens.map f.base).op.obj V),
+                  (t.hom.app ((Opens.map f.base).op.obj V)).hom]
+                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+                    (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+                      ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g))) ∧
+        ∃ (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules)
+          (hobj : ∀ G, H.obj G = SheafOfModules.changeOfRings.{u, u, u} ε (P.obj G))
+          (γ : S ⋙ tensorPullback f ⟶ H),
+          (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),
+            H.map a = eqToHom (hobj G) ≫
+              SheafOfModules.changeOfRingsHom.{u, u, u} ε (P.obj G) (P.map a) ≫
+              eqToHom (hobj G').symm) ∧
+          (∀ (G : SheafOfModules.{u} (𝓡 A)) (W : (Opens U)ᵒᵖ)
+              (p : (P.obj G).val.obj W),
+            ((eqToHom (hobj G)).val.app W)
+              ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) =
+              ((PresheafOfModules.sheafificationAdjunction (𝟙 U.ringCatSheaf.obj)).unit.app
+                (SheafOfModules.changeOfRingsPresheaf.{u, u, u} ε (P.obj G))).app W
+                  ((1 : U.sheaf.obj.obj W) ⊗ₜ[B.obj.obj W, (ε.hom.app W).hom] p)) ∧
+          (∀ G : SheafOfModules.{u} (𝓡 A),
+            G.IsQuasicoherent → (H.obj G).IsQuasicoherent) ∧
+          ∃ (α : R ⋙ H ⟶ 𝟭 U.Modules) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R),
+            (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧
+            (∀ G : SheafOfModules.{u} (𝓡 A),
+              (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
+  obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
+    affine_module_tensor_baseChange (U := U) (X := X) f B b t hp
+  obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
+    affine_module_tensor_extensionUnit (U := U) (X := X) f B b t ε hb P pobj κ
+  obtain ⟨hqc, α, β, hα, hβ⟩ :=
+    affine_module_tensor_coherenceComparisons (U := U) (X := X) f B b t ε
+      hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
+  exact ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, hqc, α, β, hα, hβ⟩
+
+set_option profiler true in
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
 This assertion constructs the maps; it does not assert that they are isomorphisms.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
@@ -165,15 +220,7 @@ theorem affine_module_tensor_construction [IsAffineHom f] :
   have hb : b ≫ ε = 𝟙 U.sheaf := pushout.inl_desc _ _ _
   have ht : t ≫ ε = e₀ := pushout.inr_desc _ _ _
   refine ⟨B, b, t, ε, hp, hb, ht, ?_⟩
-  clear_value ε t b B
-  obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
-    affine_module_tensor_baseChange f B b t hp
-  obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
-    affine_module_tensor_extensionUnit f B b t ε hb P pobj κ
-  obtain ⟨hqc, α, β, hα, hβ⟩ :=
-    affine_module_tensor_coherenceComparisons f B b t ε
-      hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
-  exact ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, hqc, α, β, hα, hβ⟩
+  exact tensorConstruction_of_pushout f B b t ε hp hb ht
 
 end
 end AlgebraicGeometry.Scheme.Modules
