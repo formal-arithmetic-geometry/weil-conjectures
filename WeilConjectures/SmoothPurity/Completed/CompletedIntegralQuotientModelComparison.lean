@@ -1004,7 +1004,6 @@ attribute [local irreducible] integralScalarExtensionOfUniverses
   integralScalarExtensionComparisonOfUniverses
 
 -- The comparison combines two derived counits across independent coefficient universes.
-set_option profiler true in
 private theorem completedIntegralComparison_descent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -1068,7 +1067,6 @@ private theorem completedIntegralComparison_descent
 attribute [local semireducible] PrincipalQuotientCompletion.quotientRoos
 
 -- The normalized tower and cone comparisons involve independent site/coefficient sizes.
-set_option profiler true in
 /-- Completing ordinary extension is the actual coefficient-reduction Roos functor,
 with the specified scalar augmentation, on every input.
 
