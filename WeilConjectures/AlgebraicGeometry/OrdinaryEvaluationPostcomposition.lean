@@ -78,8 +78,7 @@ private theorem projection_postcomposition (X : Scheme.{u}) (U : X.Opens)
     Category.id_comp, HomologicalComplex.id_f] using hm
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The localized tensor and Hom projection types require additional elaboration steps.
+set_option profiler true in
 private theorem ordinaryEvaluation_component_postcomposition (X : Scheme.{u}) (U : X.Opens)
     (P F F' : CochainComplex (localEvaluationModules X U) ℤ) (t : F ⟶ F')
     (f : localEvaluationTensor X U P F ⟶ homComplex (R := X.sheaf.over U) P F)
