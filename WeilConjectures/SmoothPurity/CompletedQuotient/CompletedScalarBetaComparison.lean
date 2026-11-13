@@ -138,7 +138,6 @@ attribute [local implicit_reducible] pullbackTensorReferenceTensor pullbackTenso
   pullbackTensorSequenceDerived coefficientKFlatInclusion
 
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
 -- Elaborating the K-flat comparison across the two strict pullback interfaces is expensive.
 private theorem strict_comparison_square
     {X Y : Scheme.{u}} (f : X ⟶ Y)
