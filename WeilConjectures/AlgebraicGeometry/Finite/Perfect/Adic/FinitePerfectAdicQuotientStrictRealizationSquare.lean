@@ -20,6 +20,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Instantiating the generic realization square unfolds the completed coefficient rings.
 /-- The explicit scalar realizations carry the ordinary quotient arrows to the transition maps of
