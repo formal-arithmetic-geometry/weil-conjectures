@@ -168,17 +168,23 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
   · intro Q
     have hu := compactSupportOrdinaryPullbackUnit l E f m Q
     dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hu ⊢
+      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
+      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
+      Functor.comp_obj, Functor.comp_map] at hu ⊢
     exact hu
   · intro Q
     have hu := compactSupportOrdinaryPullbackUnit l E f n Q
     dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hu ⊢
+      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
+      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
+      Functor.comp_obj, Functor.comp_map] at hu ⊢
     exact hu
   · intro M
     have hd := compactSupportOrdinaryDirectImageTransition l E f h M
     dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
-      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hd ⊢
+      SemilinearSections.evaluation, integralCoefficientSheaf, compactSupportSystemLevel,
+      proEtaleConstantRing, ProEtale.StrictTower.coefficients, ProEtale.VaryingRing.coefficients,
+      Functor.comp_obj, Functor.comp_map] at hd ⊢
     exact hd
   · intro M
     exact (unit_mateEquiv_symm
