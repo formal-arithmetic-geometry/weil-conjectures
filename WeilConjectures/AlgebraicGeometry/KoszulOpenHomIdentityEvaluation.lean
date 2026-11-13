@@ -26,7 +26,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
--- Nested derived restriction functors require extra elaboration heartbeats.
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
 Source: Stacks Project, Tags 09M1, 08DC, 08DD and 08D1.
 (blueprint: lem-sc-koszul-open-hom-identity-evaluation).
