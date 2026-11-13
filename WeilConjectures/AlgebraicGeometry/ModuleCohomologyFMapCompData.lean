@@ -89,7 +89,6 @@ private theorem sections_iso_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     pushforward_obj_presheaf_map, ← Functor.map_comp]
   congr 1
 
-set_option trace.profiler true in
 private theorem comp_data_beta_homotopy {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
     {H : Z.Modules} {G : Y.Modules} {F : X.Modules}
     (ψ : H ⟶ (pushforward k).obj G) (φ : G ⟶ (pushforward h).obj F)
@@ -143,8 +142,7 @@ private theorem comp_data_beta_homotopy {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : 
     apply HomologicalComplex.from_single_hom_ext
     rw [HomologicalComplex.comp_f, HomologicalComplex.comp_f, hξ]
     exact Cc.compatible
-  have hJ : Cc.J.ι ≫ αH = Ck.J.ι := by
-    simp only [αH, InjectiveResolution.desc_commutes, Functor.map_id, Category.id_comp]
+  have hJ : Cc.J.ι ≫ αH = Ck.J.ι := by simp [αH]
   have hleft : Cc.J.ι ≫ (Cc.β ≫ f) = ξ ≫ (Cc.lambda ≫ f) := by
     rw [← Category.assoc, hβc, Category.assoc]
   have hright : Cc.J.ι ≫ (αH ≫ Ck.β ≫ e) = η ≫ (Ck.lambda ≫ e) := by
@@ -176,6 +174,46 @@ private theorem comp_data_beta_homotopy {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : 
   rw [hleft, hright]
   exact ⟨(hf.some.compLeft ξ).trans (hmiddle ▸ (he.some.compLeft η).symm)⟩
 
+private theorem comp_data_sections_square {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
+    {A B : CochainComplex X.Modules ℕ} {K : CochainComplex Y.Modules ℕ}
+    {L : CochainComplex Z.Modules ℕ} (d : A ⟶ B)
+    (l : ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj B ⟶ K)
+    (m : ((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ⟶ L) :
+    let HX := (RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    let HY := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    let HZ := (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    (pushforward_sections_iso (h ≫ k) A).hom ≫
+      HZ.map (((pushforward (h ≫ k)).mapHomologicalComplex (ComplexShape.up ℕ)).map d ≫
+        (Functor.mapHomologicalComplexCompIso (pushforwardComp h k)
+          (ComplexShape.up ℕ)).inv.app B ≫
+        ((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).map l ≫ m) =
+      HX.map d ≫ (pushforward_sections_iso h B).hom ≫ HY.map l ≫
+        (pushforward_sections_iso k K).hom ≫ HZ.map m := by
+  intro HX HY HZ
+  have h1 := sections_iso_naturality (h ≫ k) d
+  have h2 := sections_iso_comp h k B
+  have h3 := sections_iso_naturality k l
+  simp only [Functor.map_comp]
+  simp only [reassoc_of% h1, reassoc_of% h2, reassoc_of% h3]
+
+private theorem comp_data_single_sections_square {Y Z : Scheme.{u}} (k : Y ⟶ Z)
+    {A B : CochainComplex Y.Modules ℕ} {L : CochainComplex Z.Modules ℕ}
+    (d : A ⟶ B)
+    (m : ((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).obj B ⟶ L) :
+    let HY := (RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    let HZ := (RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
+      forget₂ _ AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℕ)
+    (pushforward_sections_iso k A).hom ≫
+      HZ.map (((pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)).map d ≫ m) =
+      HY.map d ≫ (pushforward_sections_iso k B).hom ≫ HZ.map m := by
+  intro HY HZ
+  simpa only [Functor.map_comp, Category.assoc] using
+    congrArg (fun f ↦ f ≫ HZ.map m) (sections_iso_naturality k d)
+
 private theorem map_comp_eq_of_map_comp_eq
     {A B D : Type*} [Category* A] [Category* B] [Category* D]
     (F : A ⥤ B) (G : B ⥤ D) {X Y Z : A} {S : B}
@@ -185,7 +223,6 @@ private theorem map_comp_eq_of_map_comp_eq
     G.map (a ≫ F.map b) ≫ G.map (F.map c) = G.map e := by
   rw [← G.map_comp, Category.assoc, ← F.map_comp, G.map_comp, h, ← G.map_comp, he]
 
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The section-complex homology maps for two successive scheme maps admit a common
 comparison target. This is the diagram step, before cancellation or transport through
@@ -244,7 +281,6 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     dsimp only [RingedSpace.globalSectionsFunctor, SheafOfModules.evaluation]
     infer_instance
   intro HX HY HZ Hp
-  let PX := (pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)
   let PY := (pushforward k).mapHomologicalComplex (ComplexShape.up ℕ)
   let PC := (pushforward (h ≫ k)).mapHomologicalComplex (ComplexShape.up ℕ)
   let T := Functor.mapHomologicalComplexCompIso (pushforwardComp h k) (ComplexShape.up ℕ)
@@ -280,22 +316,8 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     change Hp.map (HZ.map (Cc.lambda ≫ f)) = Hp.map (HZ.map δ) at hh
     have hs : Cc.a.hom ≫ HZ.map δ =
         HX.map αF ≫ Ch.a.hom ≫ HY.map Ch.lambda ≫ a.hom ≫ HZ.map μ := by
-      have h1 := sections_iso_naturality (h ≫ k) αF
-      have h2 := sections_iso_comp h k Ch.I.cocomplex
-      have h3 := sections_iso_naturality k Ch.lambda
-      change (pushforward_sections_iso (h ≫ k) Cc.I.cocomplex).hom ≫
-        HZ.map (PC.map αF) = HX.map αF ≫
-          (pushforward_sections_iso (h ≫ k) Ch.I.cocomplex).hom at h1
-      change (pushforward_sections_iso (h ≫ k) Ch.I.cocomplex).hom ≫
-        HZ.map (T.inv.app Ch.I.cocomplex) =
-          (pushforward_sections_iso h Ch.I.cocomplex).hom ≫
-            (pushforward_sections_iso k (PX.obj Ch.I.cocomplex)).hom at h2
-      change (pushforward_sections_iso k (PX.obj Ch.I.cocomplex)).hom ≫
-        HZ.map (PY.map Ch.lambda) = HY.map Ch.lambda ≫ a.hom at h3
-      dsimp only [δ]
-      simp only [HZ.map_comp]
-      simp only [data_sections_iso Cc, reassoc_of% h1, reassoc_of% h2, reassoc_of% h3,
-        ← data_sections_iso Ch]
+      simpa only [data_sections_iso Cc, data_sections_iso Ch] using
+        comp_data_sections_square h k αF Ch.lambda μ
     change Hp.map (Cc.a.hom ≫ HZ.map Cc.lambda) ≫ Hp.map (HZ.map f) = _
     refine (map_comp_eq_of_map_comp_eq HZ Hp Cc.a.hom Cc.lambda f δ _ hh hs).trans ?_
     simp only [Functor.map_comp, Category.assoc]
@@ -305,13 +327,8 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     change Hp.map (HZ.map (Ck.lambda ≫ e)) = Hp.map (HZ.map γ) at hh
     have hs : Ck.a.hom ≫ HZ.map γ =
         HY.map αG ≫ HY.map Ch.β ≫ a.hom ≫ HZ.map μ := by
-      dsimp only [γ]
-      simp only [HZ.map_comp, ← Category.assoc, data_sections_iso Ck]
-      have hn := sections_iso_naturality k (αG ≫ Ch.β)
-      change (pushforward_sections_iso k Ck.I.cocomplex).hom ≫
-        HZ.map (PY.map (αG ≫ Ch.β)) = HY.map (αG ≫ Ch.β) ≫ a.hom at hn
-      rw [hn, HY.map_comp]
-      simp only [Category.assoc]
+      simpa only [data_sections_iso Ck, Functor.map_comp, Category.assoc] using
+        comp_data_single_sections_square k (αG ≫ Ch.β) μ
     change Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda) ≫ Hp.map (HZ.map e) = _
     refine (map_comp_eq_of_map_comp_eq HZ Hp Ck.a.hom Ck.lambda e γ _ hh hs).trans ?_
     simp only [Functor.map_comp]

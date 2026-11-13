@@ -23,7 +23,6 @@ set_option hygiene false in
 local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).obj S
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
-set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The presheaf change-of-rings map exists with its section formula.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB.
@@ -106,7 +105,7 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
           (φ.right.hom.app W).hom] p) = _
         exact (congrArg (fun s : C.right.obj.obj W ↦ η.app W
           ((s * (show C.right.obj.obj W from c))
-            ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] (show P.val.obj W from p)))) h).trans
+            ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] (show P.val.obj W from p))) h).trans
           ((η.app W).hom.map_smul (C.hom.hom.app W r)
             (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p)))
   refine ⟨{ app := a, naturality := ?_ }, ?_⟩
