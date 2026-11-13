@@ -388,7 +388,6 @@ private theorem tensor_galois_complexCocone_isColimit
     (fun p ↦ (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N
       (galoisTower Ω h) K hcab a f' p).some) V b hV q
 
-set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
