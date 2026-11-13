@@ -122,6 +122,19 @@ private lemma isZero_upperStar_upperStar_nearbyCycles_lowerShriek_flat_composite
       ((M.nearbyCycles Λ₂).obj (D((o)_!open⟦Λ₂⟧).obj
         ((L(Mod.extendScalars (coefficientMap b U))).obj
           ((L(Mod.extendScalars (coefficientMap a U))).obj K₀)))))) := by
+  -- Share the tensor properties of module categories across the derived functors below.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt A B C D := by infer_instance
   have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_extendScalars
     a M o e ι K₀ (derivedPushHom a M.j) (ha _ n hn) h
   have hn₁ : ((L((M.ε)^*⟦Λ₀⟧) ⋙ L(Mod.extendScalars (coefficientMap a M.generic))).obj
@@ -282,9 +295,9 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
       (coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
         (overRestrict X I.support.compl).left))).obj N₀.obj) :=
     boundedConstructible_derivedExtendScalars_residueField _ ℓ E N₀.obj hN₀
-  let U := (core hF').choose
-  have hU := (core hF').choose_spec
-  refine ⟨U, hU.1, ?_⟩
+  have hcore := core hF'
+  have hU := hcore.choose_spec
+  refine ⟨hcore.choose, hU.1, ?_⟩
   have hU := hU.2
   -- the integral case, by derived Nakayama
   have hK := boundedConstructible_openImmersionLowerShriek_obj _ ℓ
@@ -297,17 +310,15 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
   have h₀ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_residueField
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
-    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj
-    (derivedCompleteIntegers_of_boundedConstructible hK) n hn' (by
-      dsimp only [U]
-      transport_mod_proofs hU)
+    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι) N₀.obj
+    (derivedCompleteIntegers_of_boundedConstructible hK) n hn' (by transport_mod_proofs hU)
   -- from `𝒪_E` to `ℚ̄_ℓ`
   have h₁ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicIntegers
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
-    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι) N₀.obj n hn' h₀
+    (((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι) N₀.obj n hn' h₀
   refine h₁.of_iso ?_
-  exact (L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
+  exact (L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ hcore.choose).ι)^*⟦
     Profinite.padicAlgClRingObj ℓ⟧)).mapIso
     ((L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
       (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).mapIso
