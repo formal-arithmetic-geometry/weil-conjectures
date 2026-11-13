@@ -53,13 +53,6 @@ private lemma adicBaseChange_mate_symm_app {C D E F : Type*}
         L₂.map (β.app (L₁.obj M)) ≫ adj₂.counit.app (H.obj (L₁.obj M)) := by
   simp
 
-private lemma adicBaseChange_map_iso_trans_app {C D E : Type*}
-    [Category* C] [Category* D] [Category* E] {F₁ F₂ F₃ F₄ : C ⥤ D}
-    (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃) (P : D ⥤ E) (M : C) :
-    P.map ((e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M) =
-      P.map (e₁.hom.app M) ≫ P.map (e₂.hom.app M) ≫ P.map (e₃.inv.app M) := by
-  simp
-
 variable (l : ℕ) [Fact l.Prime]
 
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
@@ -76,13 +69,15 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  change (AdicSheaf.forget Z).map ((adicSquareLowerStarIso l sq).hom.app M) = _
-  unfold adicSquareLowerStarIso
-  rewrite [adicBaseChange_map_iso_trans_app]
-  change ((adicLowerStarComp l j' g'').hom.app M).hom ≫
-      ((adicLowerStarCongr l sq.w.symm).hom.app M).hom ≫
-      ((adicLowerStarComp l g' j).inv.app M).hom = _
-  rw [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
+  unfold adicSquareLowerStarIso ProEtale.squareLowerStarIso
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  repeat' rewrite [Mod.comp_hom']
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  rewrite [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
     adicLowerStarComp_inv_app_hom]
   rfl
 
