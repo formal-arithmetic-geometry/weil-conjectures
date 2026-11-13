@@ -37,7 +37,7 @@ private lemma transport_hom_equiv
         ((derivedExtendScalarsCompIso X ℓ he).inv.app K₁ ≫
           (derivedExtendScalarsToPadicAlgCl X ℓ G).map
             (((finiteCoefficientDerivedAdjunction X ℓ he).homEquiv K₁
-              ((derivedExtendScalarsSubfield X ℓ hf).obj L₀)).symm
+              ((derivedExtendScalarsSubfield X ℓ hf).obj L₁)).symm
                 ((k ≫ g) ≫ (finiteCoefficientDerivedRestriction X ℓ he).map
                   ((derivedExtendScalarsSubfield X ℓ hf).map f))) ≫
           (derivedExtendScalarsCompIso X ℓ hf).hom.app L₁) =
