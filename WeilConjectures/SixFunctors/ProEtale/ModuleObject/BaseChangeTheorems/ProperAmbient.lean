@@ -101,7 +101,7 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
           (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj := by
     simp only [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
       ℓ (Profinite.padicAlgClRingObj ℓ) sq K,
-      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso]
+      pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq']
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
