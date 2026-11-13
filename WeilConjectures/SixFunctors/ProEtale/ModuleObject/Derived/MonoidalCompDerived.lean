@@ -25,7 +25,6 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
-set_option maxHeartbeats 2000000 in
 -- the images of complexes in the homotopy category are unfolded
 lemma leftDerivedUpperStarTensor_comp_aux
     (A B : CochainComplex
@@ -84,7 +83,6 @@ lemma leftDerivedUpperStarTensor_comp_aux
     (leftDerivedUpperStarTensor_naturality Λ f _ _)
     (quotient_map_upperStarTensorComplexHom_comp Λ f g A B)
 
-set_option maxHeartbeats 1000000 in
 -- the derived tensor products of module objects are unfolded
 /-- The composite `L(f ≫ g)^*(K ⊗ᴸ M) ≅ Lf^* Lg^*(K ⊗ᴸ M) ⟶ Lf^*(Lg^* K ⊗ᴸ Lg^* M) ⟶
 Lf^* Lg^* K ⊗ᴸ Lf^* Lg^* M ≅ L(f ≫ g)^* K ⊗ᴸ L(f ≫ g)^* M` of the tensor comparisons of `Lg^*` and

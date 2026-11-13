@@ -13,6 +13,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 public import Mathlib.NumberTheory.Padics.RingHoms
 public import Mathlib.RingTheory.DedekindDomain.Dvr
 public import Mathlib.RingTheory.Ideal.Norm.AbsNorm
+public import Mathlib.RingTheory.TensorProduct.Finite
 public import WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevel
 
 /-!

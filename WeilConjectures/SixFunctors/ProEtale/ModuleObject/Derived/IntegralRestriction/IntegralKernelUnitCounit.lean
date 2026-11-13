@@ -339,7 +339,6 @@ section RawScalarTransport
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Check the naturality square before specializing the coefficient ring.
 private theorem transported_unit_naturality (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
@@ -363,7 +362,6 @@ private theorem transported_unit_naturality (Y : Scheme.{u})
     (RationalP1.unitComponent_naturality Λ Y L d ep f hM hN)
     (e.inv.naturality ((moduleObjectDerivedPushforward Λ (ProjectiveLine Y ↘ Y)).map f))
 
-set_option maxHeartbeats 800000 in
 -- Check the naturality square before specializing the coefficient ring.
 private theorem transported_counit_naturality (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (d : Diagram Λ Y L)
@@ -711,7 +709,6 @@ private theorem integral_pair_of_inversions (family : Family ℓ Y)
 
 end IntegralAssembly
 
-set_option maxHeartbeats 800000 in
 -- Check the geometric witnesses separately from the transformation data.
 /-- The fixed exchange and two projections are invertible on the localizing objects. -/
 private theorem integral_inversion_conditions
@@ -810,7 +807,6 @@ private theorem integral_inversion_conditions
     exact counit_inversion_of_native Λ Y (fun X ↦ spIntegralTwist X ℓ E) K.obj hp
   exact ⟨hI, hJ⟩
 
-set_option maxHeartbeats 1600000 in
 -- Specializing the ambient formulas requires extended typeclass and reduction search.
 /-- The fixed diagonal and trace formulas form a unique natural pair.
 Source: paragraph (1), construction of eta and epsilon.

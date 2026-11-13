@@ -68,8 +68,8 @@ abbrev ShriekTriangle.ofComp {X Y S : 𝒞} (i₁ : X ⟶ Y) (i₂ : Y ⟶ S) (i
 isomorphism of the extensions by zero, read through `(𝟙)_* ≅ 𝟭`. -/
 lemma compIso_ofComp_hom_app {X Y S : 𝒞} (i₁ : X ⟶ Y) (i₂ : Y ⟶ S) (i : X ⟶ S) [Fact (𝒪 i₁)]
     [Fact (𝒪 i₂)] [Fact (𝒪 i)] (h : i₁ ≫ i₂ = i)
-    [IsIso (F.baseChange (𝟙 Y) i₂ i₂ (𝟙 S) (ShriekTriangle.ofComp 𝒪 i₁ i₂ i h).w).natTrans]
-    [IsIso (F.exchange (𝟙 Y) i₂ i₂ (𝟙 S) (ShriekTriangle.ofComp 𝒪 i₁ i₂ i h).w).natTrans]
+    [IsIso (F.baseChange (𝟙 Y) i₂ i₂ (𝟙 S) (ShriekTriangle.ofComp 𝒪 i₁ i₂ i h).w)]
+    [IsIso (F.exchange (𝟙 Y) i₂ i₂ (𝟙 S) (ShriekTriangle.ofComp 𝒪 i₁ i₂ i h).w)]
     (K : F.obj X) :
     (F.compIso (ShriekTriangle.ofComp 𝒪 i₁ i₂ i h)).hom.app K =
       (F.pf (𝟙 S)).map ((F.sh i₂).map ((F.pfId Y).hom.app ((F.sh i₁).obj K)) ≫
@@ -197,7 +197,7 @@ noncomputable abbrev openImmersionShriekTriangle (j : Y ⟶ X) (ι : X ⟶ Z) [I
 lemma isIso_baseChange_openImmersionShriekTriangle (j : Y ⟶ X) (ι : X ⟶ Z)
     [IsOpenImmersion j.left] [IsOpenImmersion ι.left] [IsOpenImmersion (j ≫ ι).left] :
     IsIso ((𝔽).baseChange (𝟙 (SepFinType.mk X)) (SepFinType.homMk ι) (SepFinType.homMk ι)
-      (𝟙 (SepFinType.mk Z)) (openImmersionShriekTriangle j ι).w).natTrans :=
+      (𝟙 (SepFinType.mk Z)) (openImmersionShriekTriangle j ι).w) :=
   isIso_baseChange_triangleShriekTriangle ℓ
     (Compactification.Triangle.ofIsOpenImmersion j.left ι.left)
 
@@ -205,7 +205,7 @@ lemma isIso_exchange_openImmersionShriekTriangle (j : Y ⟶ X) (ι : X ⟶ Z)
     [IsOpenImmersion j.left] [IsOpenImmersion ι.left] [IsOpenImmersion (j ≫ ι).left] :
     haveI := isIso_baseChange_openImmersionShriekTriangle ℓ j ι
     IsIso ((𝔽).exchange (𝟙 (SepFinType.mk X)) (SepFinType.homMk ι) (SepFinType.homMk ι)
-      (𝟙 (SepFinType.mk Z)) (openImmersionShriekTriangle j ι).w).natTrans :=
+      (𝟙 (SepFinType.mk Z)) (openImmersionShriekTriangle j ι).w) :=
   isIso_exchange_triangleShriekTriangle ℓ
     (Compactification.Triangle.ofIsOpenImmersion j.left ι.left)
 

@@ -636,7 +636,6 @@ private theorem constantRingMap_isIso (T : Scheme.{u})
 attribute [local irreducible] constantPresheafRingMap constantRingMap
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Reconstructed section actions need a larger elaboration budget; compilation stays under 60 s.
 private theorem completed_of_identification [IsNoetherianRing A] (T : Scheme.{u}) (p : A)
     (h : CompletedIdentification A T p) : CompletedAssertions A T p := by

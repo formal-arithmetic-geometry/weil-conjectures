@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Gluing sections modulo a submodule with vanishing `H¹`

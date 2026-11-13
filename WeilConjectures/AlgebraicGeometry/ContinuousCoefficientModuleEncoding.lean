@@ -485,18 +485,11 @@ lemma lisseScalar_square (ℓ : ℕ) [Fact ℓ.Prime]
   all_goals first
     | exact lisseIntegerSheaf_eq ℓ E X
     | exact lisseFieldSheaf_eq ℓ E X
-    | exact congrArg (fun F ↦ F.obj) (lisseIntegerSheaf_eq ℓ E X)
-    | exact congrArg (fun F ↦ F.obj) (lisseFieldSheaf_eq ℓ E X)
-    | exact hi
-    | exact hi.symm
-    | exact ht
-    | exact proof_irrel_heq _ _
     | (rename_i U V hUV
        cases hUV
        dsimp only [continuousMapRingPresheafMap]
        congr! 16
        all_goals first
-         | exact hi
          | exact hi.symm
 )
 

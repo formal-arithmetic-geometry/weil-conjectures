@@ -757,7 +757,7 @@ def traceAbstractMate
     {F : C ⥤ D} {P : D ⥤ C} {U₁ U₂ : D ⥤ V} {Q : V ⥤ D}
     (a : F ⊣ P) (b : U₂ ⊣ Q) (s : F ⋙ U₂ ≅ F ⋙ U₁) :
     P ⋙ F ⟶ U₁ ⋙ Q :=
-  (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans
+  (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom))
 
 section Symmetry
 variable {C D : Type*} [Category C] [Category D]

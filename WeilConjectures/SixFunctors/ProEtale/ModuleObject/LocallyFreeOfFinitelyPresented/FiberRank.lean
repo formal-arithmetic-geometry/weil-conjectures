@@ -48,18 +48,20 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [Abelian C] [MonoidalPre
 `ι_b ≫ φ ≫ π_a` of the regular module `R`. -/
 noncomputable def finFreeEntry {m n : ℕ} (φ : finiteFree R m ⟶ finiteFree R n) (a : Fin n)
     (b : Fin m) : End (regular R) :=
-  biproduct.ι (fun _ : Fin m ↦ regular R) b ≫ φ ≫ biproduct.π (fun _ : Fin n ↦ regular R) a
+  .of (biproduct.ι (fun _ : Fin m ↦ regular R) b ≫ φ ≫
+    biproduct.π (fun _ : Fin n ↦ regular R) a)
 
 omit [PreservesFiniteColimits (tensorLeft R)] in
 /-- A morphism of free module objects is determined by its entries. -/
 lemma finFree_hom_ext {m n : ℕ} {φ ψ : finiteFree R m ⟶ finiteFree R n}
     (h : ∀ a b, finFreeEntry φ a b = finFreeEntry ψ a b) : φ = ψ :=
-  biproduct_fin_hom_ext h
+  biproduct_fin_hom_ext fun a b ↦ congr($(h a b).asHom)
 
 omit [PreservesFiniteColimits (tensorLeft R)] in
 @[simp]
 lemma finFreeEntry_zero {m n : ℕ} (a : Fin n) (b : Fin m) :
     finFreeEntry (0 : finiteFree R m ⟶ finiteFree R n) a b = 0 := by
+  apply End.ext
   simp [finFreeEntry]
 
 end CategoryTheory.Mod
@@ -98,6 +100,7 @@ lemma ι_upperStarFinFreeMap_π {W' W : Scheme.{u}} (g : W' ⟶ W) {m n : ℕ}
     (a : Fin n) (b : Fin m) :
     Mod.finFreeEntry (upperStarFinFreeMap Λ g φ) a b =
       restrictEnd Λ g (Mod.finFreeEntry φ a b) := by
+  apply End.ext
   simp [Mod.finFreeEntry, upperStarFinFreeMap, upperStarFiniteFreeIso, Mod.finiteFreeIsoMap,
     restrictEnd_apply]
 
@@ -145,7 +148,7 @@ nonzero endomorphism is invertible. -/
 lemma isIso_of_ne_zero_residueField {W : Scheme.{u}} (x : W)
     (t : End (Mod.regular
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) (Spec (W.residueField x)))))
-    (ht : t ≠ 0) : IsIso t :=
+    (ht : t ≠ 0) : IsIso t.asHom :=
   isIso_of_ne_zero_of_subsingleton t ht
 
 /-- **The fibre rank is unique.** -/

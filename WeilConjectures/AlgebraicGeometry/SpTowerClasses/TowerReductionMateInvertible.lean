@@ -66,7 +66,7 @@ private def ordinaryMate {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : IntegralCoefficientPullback l E f cY cX) :
     abPull f ⋙ cX.reduction.ordinary ⟶ cY.reduction.ordinary ⋙ d.pull :=
   ((mateEquiv cY.reduction.model.adjunction cX.reduction.model.adjunction).symm
-    (TwoSquare.mk _ _ _ _ d.forgetIso.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ d.forgetIso.hom))
 
 private theorem ordinaryMate_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     {cY : Chern l E Y} {cX : Chern l E X}
@@ -162,7 +162,7 @@ private theorem mate_representative (e : UY ⋙ F ≅ P ⋙ UX)
       F.map (rY.adjunction.unit.app M) ≫ e.hom.app (EY.obj M))
     (K : CochainComplex A ℤ) :
     let m := ((mateEquiv rY.derivedAdjunction rX.derivedAdjunction).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom))
     let ac := Functor.mapHomologicalComplexCompIso a (.up ℤ) ≪≫
       (Functor.mapHomologicalComplexCompIso (Iso.refl (EY ⋙ P)) (.up ℤ)).symm
     m.app (DerivedCategory.Q.obj K) ≫
@@ -173,7 +173,7 @@ private theorem mate_representative (e : UY ⋙ F ≅ P ⋙ UX)
         DerivedCategory.Q.map (ac.hom.app K) := by
   dsimp only
   let m := ((mateEquiv rY.derivedAdjunction rX.derivedAdjunction).symm
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom))
   let ac := Functor.mapHomologicalComplexCompIso a (.up ℤ) ≪≫
     (Functor.mapHomologicalComplexCompIso (Iso.refl (EY ⋙ P)) (.up ℤ)).symm
   let Fc := F.mapHomologicalComplex (.up ℤ)
@@ -252,7 +252,7 @@ def reductionPullbackMate {X Y : Scheme.{u}} {f : X ⟶ Y}
     (abPull f).mapDerivedCategory ⋙ cX.reduction.derived ⟶
       cY.reduction.derived ⋙ d.pull.mapDerivedCategory :=
   ((mateEquiv cY.reduction.derivedAdjunction cX.reduction.derivedAdjunction).symm
-    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d.forgetIso).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d.forgetIso).hom))
 
 /-- Exact geometric inverse image commutes with integral quotient reduction, before
 specifying either the integer or Kummer normalization.

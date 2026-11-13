@@ -339,7 +339,7 @@ private theorem restriction_pull_mate_normalization_canonical
     ∃ (aX : D.rho X ≅ rhoOrdinary C τ B φ hφ X)
       (aY : D.rho Y ≅ rhoOrdinary C τ B φ hφ Y),
       HEq ((mateEquiv (VaryingRing.moduleAdj C τ f)
-        (VaryingRing.scalarTowerAdj B f)).symm e.inv).natTrans
+        (VaryingRing.scalarTowerAdj B f)).symm e.inv)
         (Functor.whiskerRight aY.inv (StrictTower.towerPullback B f) ≫
           (G.b f).inv ≫ Functor.whiskerLeft (VaryingRing.pull C τ f) aX.hom) := by
   obtain ⟨aX, haX⟩ := restriction_rho_iso C τ B φ hφ D X
@@ -376,18 +376,17 @@ private theorem restriction_pull_mate_normalization_canonical
       (VaryingRing.scalarTowerAdj B f) w = TwoSquare.mk _ _ _ _ d.hom := by
     dsimp only [w]
     erw [mateEquiv_whiskerTop_whiskerBottom]
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     change aY.inv.app ((VaryingRing.push C τ f).obj N) ≫
       (mateEquiv (VaryingRing.moduleAdj C τ f) (VaryingRing.scalarTowerAdj B f)
-        (G.b f).inv).natTrans.app N ≫
+        (G.b f).inv).app N ≫
         (StrictTower.towerDirectImage B f).map (aX.hom.app N) = d.hom.app N
     rw [G.mate]
     rfl
   refine ⟨aX, aY, ?_⟩
   rw [← hd]
   change HEq ((mateEquiv (VaryingRing.moduleAdj C τ f)
-    (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans _
+    (VaryingRing.scalarTowerAdj B f)).symm (TwoSquare.mk _ _ _ _ d.hom)) _
   rw [← hw, Equiv.symm_apply_apply]
   exact HEq.rfl
 
@@ -407,7 +406,7 @@ private theorem restriction_pull_mate_normalization
     ∃ (aX : D.rho X ≅ rhoOrdinary C τ B φ hφ X)
       (aY : D.rho Y ≅ rhoOrdinary C τ B φ hφ Y),
       HEq ((mateEquiv (Adjunction.ofIsRightAdjoint F)
-        (VaryingRing.scalarTowerAdj B f)).symm e.inv).natTrans
+        (VaryingRing.scalarTowerAdj B f)).symm e.inv)
         (Functor.whiskerRight aY.inv (StrictTower.towerPullback B f) ≫
           (G.b f).inv ≫ Functor.whiskerLeft (VaryingRing.pull C τ f) aX.hom) := by
   subst F

@@ -72,7 +72,7 @@ def perfectHomOpenModuleMate {S Y T : Scheme.{u}}
         Scheme.Modules.pushforward (pullback.fst (B.ι ≫ s) r) :=
   ((mateEquiv (Scheme.Modules.restrictAdjunction (perfectHomOpenMap s B r))
     (schemeOpenModuleAdjunction Y B)).symm
-      (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (perfectHomOpenModuleComposition s B r).hom))
 
 set_option maxHeartbeats 600000 in
 -- Sectionwise evaluation unfolds the module-restriction adjunction and comparisons.

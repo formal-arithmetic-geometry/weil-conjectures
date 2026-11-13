@@ -84,7 +84,6 @@ def withSheaf (D : LisseOnDenseOpen k₀ l) (G : WeilSheaf k₀ l D.U) (hG : G.I
 
 variable (ι : PadicAlgCl l →+* ℂ)
 
-set_option maxHeartbeats 400000 in
 -- Instance search for the structures over `Spec k₀` of the affine line is slow.
 /-- **Reduction to irreducible factors** (Step 3 of `thm-a1-line-middle-extension-upper`). Let
 `F = D.sheaf` be punctually `ι`-pure of weight `w` on the dense open `U₀` of the affine line,

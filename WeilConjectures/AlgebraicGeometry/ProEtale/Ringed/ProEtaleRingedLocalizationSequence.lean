@@ -29,6 +29,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.CategoryTheory.Adjunction.Limits
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

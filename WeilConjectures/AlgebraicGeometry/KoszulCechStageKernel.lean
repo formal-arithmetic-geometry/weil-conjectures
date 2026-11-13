@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.KoszulCechComparisonConstruction
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import Mathlib.Data.Fintype.Order
 
 /-! # Eventual vanishing in the kernel of the Koszul-to-Čech cocone
 

@@ -96,14 +96,14 @@ class NativeGeometry extends NativeRings.{u} l where
   upper_normalized : ∀ {U V : Scheme.{u}} (g : U ⟶ V),
     (mateEquiv (ProEtale.adicUpperStarLowerStarAdjunction l g)
       (proEtaleRingModuleAdjunction g (ringSheaf l V) (ringSheaf l U) (pull g))
-      (.mk _ _ _ _ (upper g).inv)).natTrans = (lower g).hom
+      (.mk _ _ _ _ (upper g).inv)) = (lower g).hom
   extension : ∀ {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j],
     ProEtale.adicOpenImmersionLowerShriek l j ⋙ sections l V ≅ sections l U ⋙
       PurCompactSupport.openExtension (nativeCoefficients l) j
   extension_normalized : ∀ {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j],
     (mateEquiv (ProEtale.adicOpenImmersionLowerShriekAdjunction l j)
       (PurCompactSupport.openAdjunction (nativeCoefficients l) j)
-      (.mk _ _ _ _ (extension j).inv)).natTrans = (upper j).hom
+      (.mk _ _ _ _ (extension j).inv)) = (upper j).hom
 
 attribute [instance] NativeGeometry.additive NativeGeometry.limits NativeGeometry.colimits
   NativeGeometry.equivalence

@@ -8,6 +8,10 @@ module
 public import Mathlib.Algebra.Central.TensorProduct
 public import Mathlib.RingTheory.SimpleRing.Basic
 public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!
 # Base change of central simple algebras

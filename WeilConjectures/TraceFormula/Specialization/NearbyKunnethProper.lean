@@ -100,7 +100,6 @@ lemma boundedConstructible_kunnethMap_source
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
 
-set_option maxHeartbeats 800000 in
 -- instance search for the monoidal structure of bounded constructible complexes
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 include φ₁ φ₂ in

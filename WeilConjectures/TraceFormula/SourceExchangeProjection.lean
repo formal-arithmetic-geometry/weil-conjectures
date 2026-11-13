@@ -206,7 +206,6 @@ lemma leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : 
     hi, Category.id_comp, reassoc_of% hn, ← Functor.map_comp_assoc,
     hu]
 
-set_option maxHeartbeats 1000000 in
 -- the compactly supported direct images are unfolded in the defeq checks
 /-- `leftProjection_lowerShriek_comp_unit` for a composite `s = g ≫ b`, mapped by a functor. -/
 lemma map_leftProjection_lowerShriek_comp_unit (g : C ⟶ Y) [IsProper g.left] (b : Y ⟶ Z)

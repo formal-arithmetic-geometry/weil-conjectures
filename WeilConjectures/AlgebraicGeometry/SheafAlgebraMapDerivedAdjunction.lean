@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.AlgebraicGeometry.SheafAlgebraHomAdjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Deriving the algebra-valued Hom adjunction and comparing its localization
 

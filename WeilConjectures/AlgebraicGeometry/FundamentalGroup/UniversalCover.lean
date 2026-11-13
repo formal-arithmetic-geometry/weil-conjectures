@@ -114,13 +114,13 @@ structure UniversalCovers where
   exists_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (p : (pullback (proj y) (proj y) : Scheme.{u})) :
     ∃ (g : Aut (fiber y)) (x : cover y),
-      (pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+      (pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g.asIso).hom
         (by rw [Category.id_comp, transport_proj])).base x = p
   /-- The point `(ỹ, g ỹ)` of `Ỹ_y ×_Y Ỹ_y` depends continuously on `g ∈ π₁(Y, y)`. -/
   continuous_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y)
     (x : Spec (.of (AlgebraicClosure Ω))) :
     Continuous fun g : Aut (fiber y) ↦ (pullback.lift (f := proj y) (g := proj y) (pt y)
-      (pt y ≫ (transport g).hom)
+      (pt y ≫ (transport g.asIso).hom)
       (by rw [Category.assoc, transport_proj])).base x
   /-- The loop `g ∈ π₁(Y, y)` of a point `(x, g x)` of `Ỹ_y ×_Y Ỹ_y`. -/
   loop (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) :
@@ -130,7 +130,7 @@ structure UniversalCovers where
   /-- The loop of `(x, g x)` is `g`: the graphs of the transports along distinct loops are
   disjoint. -/
   loop_graph (y : Spec (.of (AlgebraicClosure Ω)) ⟶ Y) (g : Aut (fiber y)) (x : cover y) :
-    loop y ((pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g).hom
+    loop y ((pullback.lift (f := proj y) (g := proj y) (𝟙 _) (transport g.asIso).hom
       (by rw [Category.id_comp, transport_proj])).base x) = g
 
 /-- **The universal profinite étale covers** of a connected quasi-compact quasi-separated

@@ -26,13 +26,13 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 private theorem integral_epi_end_isIso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (E : PadicAlgCl.FiniteIntermediateField l)
-    (q : End (spIntegralTwist X l E)) [Epi q] : IsIso q := by
+    (q : End (spIntegralTwist X l E)) [Epi q.asHom] : IsIso q.asHom := by
   let B := condensedRingObj (Profinite.padicIntegersRingObj.{u} l E.1) X
   let J := Scheme.ProEt.topology X
   let O := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} J B
   let R := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O
   let S := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J B
-  let f := S.functor.map q
+  let f := S.functor.map q.asHom
   have : Epi f := inferInstance
   obtain ⟨I, U, v, _, _, hc, _, _, _, hIR, _⟩ := spTwists_commonCover X l
   have hU : J.CoversTop U := by
@@ -53,23 +53,23 @@ private theorem integral_epi_end_isIso (l : ℕ) [Fact l.Prime]
     change IsIso ((SheafOfModules.toSheaf (R.over (U i))).map (f.over (U i)))
     infer_instance
   have : IsIso f := isIso_of_reflects_iso f (SheafOfModules.toSheaf R)
-  exact isIso_of_reflects_iso q S.functor
+  exact isIso_of_reflects_iso q.asHom S.functor
 
 private theorem zlLine_epi_end_isIso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
-    (q : End (zlLine l X)) [Epi q] : IsIso q := by
+    (q : End (zlLine l X)) [Epi q.asHom] : IsIso q.asHom := by
   let a := coefficientMap (integralMap.{u} l (bottomField l)) X
   have : IsIso (integralMap.{u} l (bottomField l)) := bottomMap_isIso l
   have : IsIso a := (upperStarFromPoint X).map_isIso _
   let F : Modules (Profinite.padicIntegersRingObj.{u} l (bottomField l).1) X ⥤
       Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X := Mod.comap a
   have : F.IsEquivalence := (Mod.comapEquivalenceOfIsIso a).isEquivalence_functor
-  let r : End (spIntegralTwist X l (bottomField l)) := F.preimage q
-  have hr : F.map r = q := F.map_preimage q
-  have : Epi (F.map r) := hr.symm ▸ inferInstance
-  have : Epi r := F.epi_of_epi_map inferInstance
-  have : IsIso r := integral_epi_end_isIso l X (bottomField l) r
-  exact hr ▸ F.map_isIso r
+  let r : End (spIntegralTwist X l (bottomField l)) := .of (F.preimage q.asHom)
+  have hr : F.map r.asHom = q.asHom := F.map_preimage q.asHom
+  have : Epi (F.map r.asHom) := hr.symm ▸ inferInstance
+  have : Epi r.asHom := F.epi_of_epi_map inferInstance
+  have : IsIso r.asHom := integral_epi_end_isIso l X (bottomField l) r
+  exact hr ▸ F.map_isIso r.asHom
 
 /-- Every split monomorphism from the shifted integral Tate line to itself is invertible.
 
@@ -87,15 +87,15 @@ theorem diagonalIntegralLine_splitMono_isIso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (q : End (((DerivedCategory.singleFunctor
       (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) 0).obj
-        (zlLine l X))⟦(2 : ℤ)⟧)) [IsSplitMono q] : IsIso q := by
+        (zlLine l X))⟦(2 : ℤ)⟧)) [IsSplitMono q.asHom] : IsIso q.asHom := by
   let G := DerivedCategory.singleFunctor
     (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) 0 ⋙ shiftFunctor _ (2 : ℤ)
-  let r := G.preimage (retraction q)
-  have hr : G.map r = retraction q := G.map_preimage _
+  let r := G.preimage (retraction q.asHom)
+  have hr : G.map r = retraction q.asHom := G.map_preimage _
   have : Epi (G.map r) := hr.symm ▸ inferInstance
   have : Epi r := G.epi_of_epi_map inferInstance
-  have : IsIso r := zlLine_epi_end_isIso l X r
-  have : IsIso (retraction q) := hr ▸ G.map_isIso r
-  exact IsIso.of_mono_retraction q
+  have : IsIso r := zlLine_epi_end_isIso l X (.of r)
+  have : IsIso (retraction q.asHom) := hr ▸ G.map_isIso r
+  exact IsIso.of_mono_retraction q.asHom
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

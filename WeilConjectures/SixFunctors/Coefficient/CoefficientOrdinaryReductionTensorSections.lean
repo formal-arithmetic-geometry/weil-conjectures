@@ -173,7 +173,6 @@ def OrdinaryModel.tensorPresentation (M : OrdinaryModel l E W) (n : ℕ)
         ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)) ≪≫
     (coefficientScalarTensorIso l E W n P Q).symm
 
-set_option maxHeartbeats 1600000 in
 -- Instantiating the generic calculation checks several large coefficient interfaces.
 /-- The finite presentations of a system tensor product commute with strict transitions.
 Source: Stacks 03EK, 07A4 and 0941. -/

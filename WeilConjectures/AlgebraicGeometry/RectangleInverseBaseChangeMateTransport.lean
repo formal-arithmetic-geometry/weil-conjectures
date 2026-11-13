@@ -57,8 +57,8 @@ private theorem mate_comparison
     (α : TwoSquare U F P B) (δ : TwoSquare V F Q H)
     (ht : ∀ Z : T, Q.map (t.hom.app Z) ≫ ad.counit.app Z =
       p.hom.app (c.obj Z) ≫ ac.counit.app Z)
-    (hα : ∀ Z : C, Q.map (s.hom.app Z) ≫ δ.natTrans.app Z =
-      p.hom.app (U.obj Z) ≫ α.natTrans.app Z ≫ b.hom.app (F.obj Z))
+    (hα : ∀ Z : C, Q.map (s.hom.app Z) ≫ δ.app Z =
+      p.hom.app (U.obj Z) ≫ α.app Z ≫ b.hom.app (F.obj Z))
     (K : D) :
     L.map ((mateEquiv af ac α).app K) ≫ t.hom.app (B.obj K) ≫
         d.map (b.hom.app K) =
@@ -66,9 +66,9 @@ private theorem mate_comparison
   let m : U.obj (a.obj K) ⟶ c.obj (B.obj K) := (mateEquiv af ac α).app K
   let n : V.obj (a.obj K) ⟶ d.obj (H.obj K) := (mateEquiv af ad δ).app K
   have hm : P.map m ≫ ac.counit.app (B.obj K) =
-      α.natTrans.app (a.obj K) ≫ B.map (af.counit.app K) := mateEquiv_counit af ac α K
+      α.app (a.obj K) ≫ B.map (af.counit.app K) := mateEquiv_counit af ac α K
   have hn : Q.map n ≫ ad.counit.app (H.obj K) =
-      δ.natTrans.app (a.obj K) ≫ H.map (af.counit.app K) := mateEquiv_counit af ad δ K
+      δ.app (a.obj K) ≫ H.map (af.counit.app K) := mateEquiv_counit af ad δ K
   have hp : Q.map (L.map m) ≫ p.hom.app (c.obj (B.obj K)) =
       p.hom.app (U.obj (a.obj K)) ≫ P.map m := p.hom.naturality m
   have hb : B.map (af.counit.app K) ≫ b.hom.app K =

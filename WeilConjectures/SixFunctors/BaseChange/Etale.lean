@@ -123,7 +123,7 @@ Sh(U)  --j_*-->  Sh(Z)
 lemma Etale.mateEquiv_localizationRestrictionBaseChangeMap (sq : CommSq g' j' j g'') :
     (mateEquiv (Etale.localizationRestrictionLowerStarAdjunction A j' inferInstance)
       (Etale.localizationRestrictionLowerStarAdjunction A j inferInstance)
-      (TwoSquare.mk _ _ _ _ (Etale.localizationRestrictionBaseChangeMap A sq))).natTrans =
+      (TwoSquare.mk _ _ _ _ (Etale.localizationRestrictionBaseChangeMap A sq))) =
       (Etale.squareLowerStarIso A sq.flip).hom := by
   ext F ⟨b⟩
   simp only [Functor.comp_obj, mateEquiv, Etale.localizationRestrictionLowerStarAdjunction,

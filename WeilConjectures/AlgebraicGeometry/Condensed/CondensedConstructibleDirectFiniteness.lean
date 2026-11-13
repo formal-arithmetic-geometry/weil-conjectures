@@ -97,7 +97,7 @@ private theorem finiteFree_direct_finiteness
     exact mul_eq_one_comm.mp hm
   apply biproduct_fin_hom_ext
   intro i j
-  exact congrFun (congrFun hm' i) j
+  exact congrArg End.asHom (congrFun (congrFun hm' i) j)
 
 private theorem isIso_of_iso_finiteFree
     {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]

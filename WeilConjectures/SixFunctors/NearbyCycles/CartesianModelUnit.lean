@@ -73,7 +73,7 @@ lemma _root_.CategoryTheory.Iso.hom_app_obj_eq_map_hom_app (e : T ≅ 𝟭 D) (x
 `L_G ⊣ R_G`**: the mate `β : R_N ⋙ T ⟶ L_G ⋙ R_M` of `θ`, followed by the comparison
 `κ : R_M ⟶ R_N R_G`, is `e ∘ R_N(η_G)`. -/
 lemma mateEquiv_app_comp_eq (e : T ≅ 𝟭 D) (θ : T ⋙ LM ⟶ LN ⋙ LG) [IsIso θ] (y : E) :
-    (mateEquiv adjN adjM (TwoSquare.mk _ _ _ _ θ)).natTrans.app y ≫
+    (mateEquiv adjN adjM (TwoSquare.mk _ _ _ _ θ)).app y ≫
         (adjN.unit.app (RM.obj (LG.obj y)) ≫ RN.map (adjG.unit.app (LN.obj (RM.obj (LG.obj y))) ≫
           RG.map ((inv (Functor.whiskerRight e.inv LM ≫ θ)).app (RM.obj (LG.obj y)) ≫
             adjM.counit.app (LG.obj y)))) =
@@ -109,7 +109,7 @@ natural isomorphism `T ≅ 𝟭` and an isomorphism `θ : T ⋙ L_M ⟶ L_N ⋙ 
 `y ⟶ R_G L_G y` is. -/
 lemma isSplitMono_mateEquiv_app_of_isSplitMono_unit (e : T ≅ 𝟭 D) (θ : T ⋙ LM ⟶ LN ⋙ LG)
     [IsIso θ] (y : E) [IsSplitMono (adjG.unit.app y)] :
-    IsSplitMono ((mateEquiv adjN adjM (TwoSquare.mk _ _ _ _ θ)).natTrans.app y) :=
+    IsSplitMono ((mateEquiv adjN adjM (TwoSquare.mk _ _ _ _ θ)).app y) :=
   IsSplitMono.mk' ⟨(adjN.unit.app (RM.obj (LG.obj y)) ≫
     RN.map (adjG.unit.app (LN.obj (RM.obj (LG.obj y))) ≫
       RG.map ((inv (Functor.whiskerRight e.inv LM ≫ θ)).app (RM.obj (LG.obj y)) ≫
@@ -163,13 +163,13 @@ theorem isSplitMono_pullbackExchange_app_of_isSplitMono_mate (ψ : M.Hom N f f')
       (condensedRingObj Λ Y)))
     (h : IsSplitMono ((mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ ψ.commSq_j).hom).natTrans.app ((L((N.ε)^*⟦Λ⟧)).obj C))) :
+      (pullbackSquareComparison Λ ψ.commSq_j).hom).app ((L((N.ε)^*⟦Λ⟧)).obj C))) :
     IsSplitMono ((ψ.pullbackExchange Λ).app C) := by
   have key := isSplitMono_app_whiskerLeft_comp_whiskerRight (L((N.ε)^*⟦Λ⟧)) R((N.j)_*⟦Λ⟧)
     L((M.i)^*⟦Λ⟧) R((M.j)_*⟦Λ⟧) (pullbackSquareComparison Λ ψ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ ψ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ ψ.commSq_j).hom)
     (pullbackSquareComparison Λ ψ.commSq_ε).hom C inferInstance inferInstance h
   unfold pullbackExchange
   exact_mod_proofs key

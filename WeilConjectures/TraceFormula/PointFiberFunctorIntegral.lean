@@ -183,8 +183,8 @@ noncomputable def pointModExtendScalarsUnitIso :
 the unit to the multiplication by its image in `ℚ̄_ℓ`. -/
 lemma pointModExtendScalarsUnitIso_inv_comp_map (a : Shrink.{u + 1} (integers ℓ E.1)) :
     (pointModExtendScalarsUnitIso ℓ k E).inv ≫
-        (pointModExtendScalars ℓ k E).map (pointIntegersScalarsOp ℓ k E a).unop =
-      (pointScalarsOp ℓ k (integersToULift ℓ E.1 a)).unop ≫
+        (pointModExtendScalars ℓ k E).map (pointIntegersScalarsOp ℓ k E a).unop.asHom =
+      (pointScalarsOp ℓ k (integersToULift ℓ E.1 a)).unop.asHom ≫
         (pointModExtendScalarsUnitIso ℓ k E).inv := by
   let r := (shrinkRingEquiv ℓ E.1).symm a
   have h₁ : (pointIntegersScalarsOp ℓ k E a).unop = Mod.regularEndRingHom
@@ -221,7 +221,7 @@ instance isIso_pointSectionsExtendScalarsComparison_app_unit :
     IsIso ((pointSectionsExtendScalarsComparison ℓ k E).app (𝟙_ (PointModIntegral ℓ k E))) := by
   refine isIso_coyonedaSectionsExtendScalarsComparison_app_self _ _ _ _ _ _ (fun t ↦ ?_)
     ((bijective_pointUnitEndRingHom ℓ k).comp Equiv.ulift.bijective)
-  obtain ⟨r, hr⟩ := surjective_pointIntegersUnitEndRingHom ℓ k E t
+  obtain ⟨r, hr⟩ := surjective_pointIntegersUnitEndRingHom ℓ k E (End.of t)
   exact ⟨shrinkRingEquiv ℓ E.1 r, (congrArg (pointIntegersUnitEndRingHom ℓ k E)
     ((shrinkRingEquiv ℓ E.1).symm_apply_apply r)).trans hr⟩
 

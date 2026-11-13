@@ -62,7 +62,7 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 import Mathlib.CategoryTheory.Limits.Yoneda
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 import Mathlib.CategoryTheory.Functor.Flat
-import Mathlib.Topology.Separation.Profinite
+import Mathlib.Topology.Separation.Regular
 import Mathlib.Topology.Sheaves.Stalks
 
 /-!

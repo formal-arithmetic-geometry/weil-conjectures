@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.CategoryTheory.Filtered.FinallySmall
 public import Mathlib.CategoryTheory.Limits.FinallySmall
 public import WeilConjectures.Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 
 /-!
 # Étale algebras with a point and a residue embedding

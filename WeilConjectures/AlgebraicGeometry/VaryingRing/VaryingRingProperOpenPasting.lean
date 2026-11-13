@@ -53,9 +53,8 @@ private theorem mate_whisker
         (Functor.whiskerRight t L₂ ≫ a ≫ Functor.whiskerLeft L₁ b) =
       Functor.whiskerLeft R₁ t ≫ mateEquiv adj₁ adj₂ a ≫
         Functor.whiskerRight b R₂ := by
-  apply TwoSquare.ext
-  intro X
-  dsimp [mateEquiv, TwoSquare.natTrans]
+  refine NatTrans.ext (funext fun X ↦ ?_)
+  dsimp [mateEquiv]
   simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
   have ht := adj₂.unit.naturality (t.app (R₁.obj X))
   dsimp at ht
@@ -846,11 +845,10 @@ theorem properOpenPasting :
     have ha : TwoSquare.vComp a₂ a₁ =
         (a.whiskerLeft (gComp R φ r₁ r₂).hom).whiskerRight
           (gComp R φ p₁ p₂).inv := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       dsimp [a₁, a₂, a, TwoSquare.vComp, TwoSquare.whiskerLeft,
         TwoSquare.whiskerRight]
-      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using
+      simpa [TwoSquare.mk, Category.assoc] using
         (congrArg (fun f ↦ (gComp R φ p₁ p₂).inv.app ((J R φ j).obj N) ≫ f)
           (alpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h N))
     have hm := congrArg
@@ -873,14 +871,13 @@ theorem properOpenPasting :
     have ha : TwoSquare.hComp a₁ a₂ =
         (a.whiskerTop (jComp R φ i j).hom).whiskerBottom
           (jComp R φ k l).inv := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       dsimp [a₁, a₂, a, TwoSquare.hComp, TwoSquare.whiskerTop,
         TwoSquare.whiskerBottom]
       have hh := alpha_horizontal R φ k l i j r p q h₁ h₂ h N
       have hh' := congrArg
         (fun f ↦ f ≫ (jComp R φ k l).inv.app ((G R φ r).obj N)) hh
-      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hh'.symm
+      simpa [TwoSquare.mk, Category.assoc] using hh'.symm
     have hm := congrArg (mateEquiv (adj R φ r) (adj R φ q)) ha
     rw [mateEquiv_vcomp (adj R φ r) (adj R φ p) (adj R φ q)] at hm
     have hmM := congrArg (fun s ↦ s.app M) hm
@@ -1346,10 +1343,9 @@ theorem gamma_identities :
     let a := TwoSquare.mk _ _ _ _ (alpha R φ j (𝟙 U) (𝟙 X) j h)
     have ha : (a.whiskerLeft (gId R φ U).hom).whiskerRight
         (gId R φ X).inv = TwoSquare.vId (J R φ j) := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       dsimp [a, TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vId]
-      simpa [TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using
+      simpa [TwoSquare.mk, Category.assoc] using
         (congrArg (fun f ↦ (gId R φ X).inv.app ((J R φ j).obj N) ≫ f)
           ((alpha_identities R φ).1 j h N))
     have hm := congrArg (mateEquiv Adjunction.id Adjunction.id) ha
@@ -1367,17 +1363,16 @@ theorem gamma_identities :
     let a := TwoSquare.mk _ _ _ _ (alpha R φ (𝟙 U) p p (𝟙 X) h)
     have ha : (a.whiskerTop (jId R φ X).inv).whiskerBottom
         (jId R φ U).hom = TwoSquare.hId (G R φ p) := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       dsimp [a, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hId]
       have hh := (alpha_identities R φ).2 p h N
       have hh' := congrArg
         (fun f ↦ (G R φ p).map ((jId R φ X).inv.app N) ≫ f) hh
-      simpa [TwoSquare.mk, TwoSquare.natTrans, ← Functor.map_comp,
+      simpa [TwoSquare.mk, ← Functor.map_comp,
         Category.assoc] using hh'
     have hm := congrArg (mateEquiv (adj R φ p) (adj R φ p)) ha
     simp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-      TwoSquare.natTrans, TwoSquare.mk, Category.assoc] at hm
+      Category.assoc] at hm
     rw [mate_whisker] at hm
     have hmM := congrArg (fun s ↦ s.app M) hm
     have hh : (jId R φ X).inv.app ((P R φ p).obj M) ≫
@@ -1399,7 +1394,7 @@ private def evaluationOfMate
     {L : X ⥤ Y} {P : Y ⥤ X} {l : x ⥤ y} {p : y ⥤ x}
     (a : L ⊣ P) (b : l ⊣ p) (e : L ⋙ F ≅ E ⋙ l)
     (v : P ⋙ E ≅ F ⋙ p)
-    (hv : v.hom = (mateEquiv a b e.inv).natTrans) :
+    (hv : v.hom = (mateEquiv a b e.inv)) :
     AdjunctionEvaluation E F a b where
   left := e
   right := v

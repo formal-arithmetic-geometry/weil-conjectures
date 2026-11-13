@@ -43,15 +43,15 @@ private theorem scalarPow_apply
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (s : (O.obj ⋙ forget CommRingCat).sections)
     (k : ℕ) (V : Cᵒᵖ) (x : O.obj.obj V) :
-    ((ringedKoszulScalar O s) ^ k).val.app V x =
+    ((ringedKoszulScalar O s) ^ k).asHom.val.app V x =
       x * (show O.obj.obj V from s.val V) ^ k := by
   induction k with
   | zero => change x = x * _ ^ 0; simp
   | succ k ih =>
     rw [pow_succ']
-    change (ringedKoszulScalar O s).val.app V
-      (((ringedKoszulScalar O s) ^ k).val.app V x) = _
-    change (show O.obj.obj V from ((ringedKoszulScalar O s) ^ k).val.app V x) *
+    change (ringedKoszulScalar O s).asHom.val.app V
+      (((ringedKoszulScalar O s) ^ k).asHom.val.app V x) = _
+    change (show O.obj.obj V from ((ringedKoszulScalar O s) ^ k).asHom.val.app V x) *
       (show O.obj.obj V from s.val V) = _
     rw [ih, pow_succ, mul_assoc]
 
@@ -83,7 +83,7 @@ theorem ringedNegativeKoszulLowDegrees
     ∃ (e₀ : K.X 0 ≅ M) (e₁ : (⨁ fun _ : Fin r ↦ M) ≅ K.X (-1)),
       e₀.inv = ringedNegativeKoszulBasis O r b m ∅ 0 ∧
       ∀ i : Fin r, biproduct.ι _ i ≫ e₁.hom ≫ K.d (-1) 0 ≫ e₀.hom =
-        (ringedKoszulScalar O (b i)) ^ (m + 1) := by
+        ((ringedKoszulScalar O (b i)) ^ (m + 1)).asHom := by
   classical
   let M := SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
   let K := ringedSiteRingComplex O
@@ -189,7 +189,7 @@ theorem ringedNegativeKoszulLowDegrees
     apply LinearMap.ext
     intro x
     change (show O.obj.obj V from (a i ^ (m + 1)).val V) * (show O.obj.obj V from x) =
-      ((ringedKoszulScalar O (b i)) ^ (m + 1)).val.app V x
+      ((ringedKoszulScalar O (b i)) ^ (m + 1)).asHom.val.app V x
     rw [scalarPow_apply]
     exact mul_comm _ _
 

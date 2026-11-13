@@ -19,7 +19,6 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-set_option maxHeartbeats 600000 in
 -- The assembly elaborates several large localized composites at once.
 /-- The scalar transpose formula for one explicit zero-cycle representative.
 Source: Stacks 03CZ, 079P and 08JA.

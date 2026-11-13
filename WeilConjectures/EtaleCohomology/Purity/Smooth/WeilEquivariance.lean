@@ -267,7 +267,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {k₀ :
         (dualizingComplex Λ (Hom.geometricFiberMap f₀ hf₀)) ≅
     R(Hom.geometricFiberMap f₀ hf₀)^![Λ])
   {K : DerivedCategoryModule Λ aY.geometricFiber}
-  (φK : (L((aY.geometricGaloisFrobenius.hom)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
+  (φK : (L((aY.geometricGaloisFrobenius.asIso.hom)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
 
 /-- Blueprint `prop-pur-weil-equivariance-scheme-frobenius`: Scheme-Frobenius forms of Weil
 equivariance, the purity square.

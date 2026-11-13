@@ -211,7 +211,7 @@ lemma pow (m : ℕ) : (End.asHom (End.of F ^ m)).IsFrobenius (Nat.card k ^ m) :=
   | zero =>
     intro R t φ hφ
     obtain rfl : φ = 𝟙 R := by ext r; simp [hφ]
-    simp [End.one_def]
+    simp [End.one_asHom]
   | succ m ih =>
     intro R t φ hφ
     obtain ⟨ψ, hψ, -⟩ := exists_specMap_pow_comp (t ≫ f₀)
@@ -226,7 +226,7 @@ lemma pow (m : ℕ) : (End.asHom (End.of F ^ m)).IsFrobenius (Nat.card k ^ m) :=
       ext r
       simp [hφ, hχ, hψ, ← pow_mul, pow_succ']
     change t ≫ End.asHom (End.of F ^ m * End.of F) = _
-    rw [End.mul_def, Spec.map_comp, Category.assoc, ← Category.assoc t, hF t ψ hψ,
+    rw [End.mul_asHom, Spec.map_comp, Category.assoc, ← Category.assoc t, hF t ψ hψ,
       Category.assoc, ← ih _ _ hχ, Category.assoc]
 
 end Scheme.Hom.IsFrobenius

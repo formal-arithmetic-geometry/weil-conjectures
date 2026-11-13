@@ -69,7 +69,7 @@ private theorem inverse_mate_cube
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc] using
-    congrArg (fun w ↦ w.natTrans.app N) hc
+    congrArg (fun w ↦ w.app N) hc
 
 private theorem square_symm
     {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]

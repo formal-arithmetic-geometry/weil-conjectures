@@ -277,7 +277,7 @@ lemma boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app :
 private lemma mateEquiv_app_aux {C D E F : Type*} [Category C] [Category D] [Category E]
     [Category F] {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H) (X : D) :
-    (mateEquiv adj₁ adj₂ α).natTrans.app X =
+    (mateEquiv adj₁ adj₂ α).app X =
       adj₂.unit.app (G.obj (R₁.obj X)) ≫ R₂.map (α.app (R₁.obj X) ≫ H.map (adj₁.counit.app X)) := by
   simp [mateEquiv]
 
@@ -290,7 +290,7 @@ private lemma mateEquiv_app_hom_aux {C D E F : Type*} [Category C] [Category D] 
     {R₁ : PD.FullSubcategory ⥤ PC.FullSubcategory} {L₂ : PE.FullSubcategory ⥤ PF.FullSubcategory}
     {R₂ : PF.FullSubcategory ⥤ PE.FullSubcategory} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (α : TwoSquare G L₁ L₂ H) (X : PD.FullSubcategory) :
-    ((mateEquiv adj₁ adj₂ α).natTrans.app X).hom =
+    ((mateEquiv adj₁ adj₂ α).app X).hom =
       (adj₂.unit.app (G.obj (R₁.obj X))).hom ≫
         (R₂.map (α.app (R₁.obj X) ≫ H.map (adj₁.counit.app X))).hom := by
   rw [mateEquiv_app_aux]
@@ -309,7 +309,7 @@ private lemma liftExchange_eq_mateEquiv_aux
     (adj : L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⊣ R((f.left)_*⟦Profinite.padicAlgClRingObj
         ℓ⟧)) (adj' : L((f'.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⊣
             R((f'.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
-    (hχ : χ = (mateEquiv adj adj' α).natTrans)
+    (hχ : χ = (mateEquiv adj adj' α))
     (hη : ∀ K : Dᵇc(Y'.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
       ((boundedConstructibleUpperStarLowerStarAdjunction ℓ f').unit.app K).hom =
         adj'.unit.app K.obj)
@@ -332,7 +332,7 @@ private lemma liftExchange_eq_mateEquiv_aux
         boundedConstructibleNearbyCycles hN ⋙ boundedConstructibleUpperStar
             (Profinite.padicAlgClRingObj ℓ) ℓ f' ⟶
           boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f ⋙
-              boundedConstructibleNearbyCycles hM)).natTrans := by
+              boundedConstructibleNearbyCycles hM)) := by
   subst hχ
   refine NatTrans.ext (funext fun K ↦ ObjectProperty.hom_ext _ ?_)
   refine (liftExchange_pushforward_app_hom_aux ℓ hM hN K _).trans
@@ -350,7 +350,7 @@ lemma boundedConstructiblePushforwardExchange_eq_mateEquiv :
     φ.boundedConstructiblePushforwardExchange ℓ hM hN =
       (mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
         (boundedConstructibleUpperStarLowerStarAdjunction ℓ f')
-        (φ.boundedConstructiblePullbackExchange ℓ hM hN)).natTrans := by
+        (φ.boundedConstructiblePullbackExchange ℓ hM hN)) := by
   rw [boundedConstructiblePushforwardExchange_eq_liftExchange,
     boundedConstructiblePullbackExchange_eq_liftExchange]
   exact liftExchange_eq_mateEquiv_aux ℓ hM hN (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))

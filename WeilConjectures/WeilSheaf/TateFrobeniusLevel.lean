@@ -142,7 +142,7 @@ cyclotomic character of the geometric Frobenius. -/
 theorem unitToRootsOfUnitySheaf_comp_specGeometricFrobenius
     (f : U ⟶ Spec (.of (AlgebraicClosure k))) (n : ℕ) {ζ : AlgebraicClosure k}
     (hζ : ζ ^ (ℓ ^ n) = 1) :
-    unitToRootsOfUnitySheaf (f ≫ (specGeometricFrobenius k).hom) hζ =
+    unitToRootsOfUnitySheaf (f ≫ (specGeometricFrobenius k).asIso.hom) hζ =
       (((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val : ℤ) •
         unitToRootsOfUnitySheaf f hζ := by
   let := Fintype.ofFinite k
@@ -169,17 +169,17 @@ units, where `c ∈ ℤ/ℓⁿ` is the value of the modular cyclotomic character
 Frobenius (`c q = 1`). -/
 theorem upperStar_map_unitToRootsOfUnitySheaf_geometricGaloisFrobenius
     (n : ℕ) {ζ : AlgebraicClosure k} (hζ : ζ ^ (ℓ ^ n) = 1) :
-    (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}].map
+    (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}].map
         (unitToRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure hζ ≫
           (rootsOfUnitySheafIso a.geometricFiber (ℓ ^ n)).hom) ≫
-        upperStarRootsOfUnityComparison a.geometricGaloisFrobenius.hom (ℓ ^ n) =
-      η (a.geometricGaloisFrobenius.hom)^*[Ab.{u + 1}] ≫
+        upperStarRootsOfUnityComparison a.geometricGaloisFrobenius.asIso.hom (ℓ ^ n) =
+      η (a.geometricGaloisFrobenius.asIso.hom)^*[Ab.{u + 1}] ≫
         ((((geometricFrobeniusModularCharacter k ℓ n : (ZMod (ℓ ^ n))ˣ) : ZMod (ℓ ^ n)).val : ℤ) •
           unitToRootsOfUnitySheaf a.geometricFiberToAlgebraicClosure hζ) ≫
         (rootsOfUnitySheafIso a.geometricFiber (ℓ ^ n)).hom := by
   rw [upperStar_map_unitToRootsOfUnitySheaf_comp_upperStarRootsOfUnityComparison
-    a.geometricGaloisFrobenius.hom a.geometricFiberToAlgebraicClosure
-    (a.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).hom)
+    a.geometricGaloisFrobenius.asIso.hom a.geometricFiberToAlgebraicClosure
+    (a.geometricFiberToAlgebraicClosure ≫ (specGeometricFrobenius k).asIso.hom)
     (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure a) hζ,
     unitToRootsOfUnitySheaf_comp_specGeometricFrobenius]
 

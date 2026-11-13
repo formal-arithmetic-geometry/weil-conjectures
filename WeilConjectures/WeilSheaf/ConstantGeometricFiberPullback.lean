@@ -73,7 +73,8 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 /-- The Weil structure of the constant Weil sheaf, unfolded. -/
 lemma adicConstant_obj_str :
     (adicConstant k₀ l X).obj.str =
-      (adicLowerStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+      (adicLowerStarUnitIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 /-- The Weil structure of the pulled-back constant sheaf, unfolded. -/
@@ -90,25 +91,25 @@ lemma frobeniusPullback_map_adicUpperStarUnitIso_inv_comp :
         (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv ≫
         ((geometricFiberPullbackFrobeniusIso k₀ l X).app (AdicSheaf.unit l X)).hom =
       (adicLowerStarUnitIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom ≫
         (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv := by
   have h1 : (adicLowerStarUnitIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom =
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom =
       (adicUpperStarIsoLowerStarInv l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
         (adicUpperStarUnitIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).hom := by
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).hom := by
     rw [← adicUpperStarIsoLowerStarInv_hom_app_unit_comp, Iso.inv_hom_id_app_assoc]
   have h2 : (WeilSheaf.frobeniusPullback k₀ l X).map
         (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv ≫
         (adicUpperStarIsoLowerStarInv l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ =
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ =
       (adicUpperStarIsoLowerStarInv l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.app _ ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.app _ ≫
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
           (adicUpperStarUnitIso l (X ↘ Spec (CommRingCat.of k₀)).geometricFiberProj).inv :=
     (adicUpperStarIsoLowerStarInv l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius).inv.naturality _
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso).inv.naturality _
   rw [geometricFiberPullbackFrobeniusIso_hom_app, h1, ← Category.assoc, h2]
   simp only [Category.assoc]
   refine (cancel_epi _).2 ?_

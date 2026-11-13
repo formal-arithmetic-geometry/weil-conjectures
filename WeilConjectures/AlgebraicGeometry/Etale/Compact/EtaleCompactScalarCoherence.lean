@@ -129,17 +129,17 @@ theorem compactScalarOpen_normalization (φ : A →+* B) {U T : Scheme.{u}}
   let u := Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)
   let α := (mateEquiv x u).symm
     (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ j).hom)
-  have he : α.natTrans = (scalarPullbackIso φ j).inv := by
+  have he : α = (scalarPullbackIso φ j).inv := by
     exact congrArg Iso.inv
       (ProEtale.scalarPullbackEtaleIso_eq_fromMate φ j).symm
-  have h := congrArg TwoSquare.natTrans
+  have h := 
     (iterated_mateEquiv_conjugateEquiv_symm a b u x
       (TwoSquare.mk _ _ _ _ (scalarRestrictionPullbackIso φ j).hom))
-  change ((mateEquiv a b).symm α).natTrans = (ExceptionalCoefficients.openIso φ j).inv at h
+  change ((mateEquiv a b).symm α) = (ExceptionalCoefficients.openIso φ j).inv at h
   have ht := unit_mateEquiv_symm a b α M
-  change (scalarExtension φ U).map (a.unit.app M) ≫ α.natTrans.app _ =
+  change (scalarExtension φ U).map (a.unit.app M) ≫ α.app _ =
     b.unit.app _ ≫ (upperStar (ModuleCat.{u + 1} B) j).leftDerivedFunctor.map
-      (((mateEquiv a b).symm α).natTrans.app M) at ht
+      (((mateEquiv a b).symm α).app M) at ht
   rw [h] at ht
   rw [he] at ht
   apply ((derivedOpenImmersionLowerShriekUpperStarAdjunction

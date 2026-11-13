@@ -50,7 +50,7 @@ abbrev strictEtaleBrownOrdinaryInverse
   ((mateEquiv (A.levelAdj n)
     (Etale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)).symm
-      (.mk _ _ _ _ R.val.ordinaryRight.hom)).natTrans
+      (.mk _ _ _ _ R.val.ordinaryRight.hom))
 
 set_option maxHeartbeats 1600000 in
 -- The transpose compares all four realization factors.
@@ -103,11 +103,11 @@ theorem strictEtaleBrownInverse_representative
   let bd := b.mapDerivedCategoryRightDerivedAdjunction
   let F := (A.lift n).modules.mapHomologicalComplex (.up ℤ)
   have hm : ((mateEquiv B.adjunction bd).symm
-      (.mk _ _ _ _ R.right.hom)).natTrans = R.inverse.hom := by
+      (.mk _ _ _ _ R.right.hom)) = R.inverse.hom := by
     have he : mateEquiv B.adjunction bd (.mk _ _ _ _ R.inverse.hom) =
         .mk _ _ _ _ R.right.hom := by
       exact R.property.2.2
-    exact congrArg TwoSquare.natTrans
+    exact
       ((mateEquiv B.adjunction bd).symm_apply_eq.mpr he.symm)
   have he : B.adjunction.homEquiv _ _ (B.inverseFactors.hom.app K) =
       DerivedCategory.Q.map (a.unit.app K) ≫ B.directUnit.app (F.obj K) := by

@@ -240,7 +240,7 @@ theorem evaluationComparison_isIso (a : F ⊣ G) (n : ℕᵒᵖ) :
   have hm : (mateEquiv (a.whiskerRight ℕᵒᵖ) a
       (TwoSquare.mk ((evaluation ℕᵒᵖ B).obj n)
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F) F ((evaluation ℕᵒᵖ A).obj n)
-        (Iso.refl (((evaluation ℕᵒᵖ B).obj n) ⋙ F)).hom)).natTrans =
+        (Iso.refl (((evaluation ℕᵒᵖ B).obj n) ⋙ F)).hom)) =
       𝟙 (((evaluation ℕᵒᵖ A).obj n) ⋙ G) := by
     ext T
     simp [mateEquiv]

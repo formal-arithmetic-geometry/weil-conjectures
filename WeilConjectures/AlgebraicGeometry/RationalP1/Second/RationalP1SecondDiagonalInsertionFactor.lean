@@ -132,7 +132,6 @@ private def native_sheaf_symmetric (Z : Scheme.{u}) :
   { sheafSymmetricCategory Z with toBraidedCategory := sheafBraidedCategory Ab Z }
 attribute [local instance 20001] native_sheaf_symmetric
 
-set_option maxHeartbeats 800000 in
 -- The native braidings compare the fixed module-site instances.
 attribute [-instance] internalMonoidal in
 private theorem trace_projection_naturality_right
@@ -245,7 +244,6 @@ attribute [local irreducible] firstProjection secondProjection square
 attribute [local irreducible] supportedUnitIso pushSectionIso
 attribute [local irreducible] tensorShiftIso diagonalClassMap
 
-set_option maxHeartbeats 800000 in
 -- Keep the fixed derived tensor interfaces folded in the categorical calculation.
 private theorem diagonal_insertion_from_section
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -320,7 +318,6 @@ private theorem diagonal_insertion_from_section
   simpa only [b, diagonalClassMap,
     MonoidalCategory.whiskerLeft_comp, Functor.map_comp, Category.assoc] using h
 
-set_option maxHeartbeats 800000 in
 -- The statement compares several fixed derived pullback and tensor interfaces.
 /-- The section/projection factorization of the insertion, before applying any trace.
 No trace, counit, exchange inverse, projection inverse, localizing hypothesis or completed

@@ -104,7 +104,6 @@ private theorem dimension_bound_of_finite_lower_bounds (D : WithBot ℕ∞) (d :
       rw [ite_eq_right hd]
       exact_mod_cast (show n ≤ d.toNat by omega)
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 private theorem properHeartHigherDirectImage_preservesFilteredColimits
@@ -114,7 +113,6 @@ private theorem properHeartHigherDirectImage_preservesFilteredColimits
       (properHeartHigherDirectImage Λ p q) := by
   exact CondensedRing.higherDirectImage_filtered Λ p q
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Coproduct inference for internal modules needs the same search budget as filtered colimits.
 set_option synthInstance.maxSize 4096 in
 private theorem properHeartHigherDirectImage_preservesSums

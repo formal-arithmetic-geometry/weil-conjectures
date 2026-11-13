@@ -178,7 +178,6 @@ private theorem chosenProjection_naturality :
     type_of% ((chosenProjection_spec.{c, v, r} J R U).choose_spec.2) :=
   (chosenProjection_spec.{c, v, r} J R U).choose_spec.2
 
-set_option maxHeartbeats 2000000 in
 -- Descending the unbounded tensor comparison elaborates several localization functors.
 private def complexProjection :
     ((𝟭 _).prod (ringedOpenRestrictionOnComplexes.{c, v, r} R U)) ⋙
@@ -203,7 +202,6 @@ variable [HasDerivedCategory.{w} (RingedDerivedNative.Modules.{c, v, r} J R)]
   [HasDerivedCategory.{w}
     (RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U))]
 
-set_option maxHeartbeats 2000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 attribute [local irreducible] complexProjection RingedDerivedNative.comparison
   coefficientTotalTensor in

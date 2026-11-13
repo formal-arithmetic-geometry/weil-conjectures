@@ -182,9 +182,9 @@ private theorem scalar_sum_comp
     {r : ℕ} (I : Finset (Fin r)) (c : Fin r → A)
     (f : SheafOfModules.unit
       ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O) ⟶ M) :
-    ρ (∑ i ∈ I, c i) ≫ f = ∑ i ∈ I, ρ (c i) ≫ f := by
-  rw [map_sum]
-  exact Preadditive.sum_comp I (fun i ↦ ρ (c i)) f
+    (ρ (∑ i ∈ I, c i)).asHom ≫ f = ∑ i ∈ I, (ρ (c i)).asHom ≫ f := by
+  rw [map_sum, End.sum_asHom]
+  exact Preadditive.sum_comp I (fun i ↦ (ρ (c i)).asHom) f
 
 /-- The differential of a specified negative pure tensor has the actual exterior
 contraction coefficients. This fixes every basis map in advance and concerns one
@@ -219,7 +219,7 @@ theorem ringedNegativeKoszulBasis_exterior_d
     ringedNegativeKoszulBasis O r s n I.1 q ≫
         (ringedNegativeKoszul O r s n).d q (q + 1) =
       ∑ L : exteriorKoszulIndex r (q + 1),
-        ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L) ≫
+        (ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L)).asHom ≫
           ringedNegativeKoszulBasis O r s n L.1 (q + 1) := by
   classical
   rw [ringedNegativeKoszulBasis_signed_d O ρ r a s hρ n q I]
@@ -239,7 +239,7 @@ theorem ringedNegativeKoszulBasis_exterior_d
     have hne : I.1.erase i ≠ L.1 := by
       intro h
       exact hL (Subtype.ext h.symm)
-    simp only [ite_eq_right hne, map_zero, zero_comp]
+    simp only [ite_eq_right hne, map_zero, End.zero_asHom, zero_comp]
   · intro h
     exact (h (Finset.mem_univ _)).elim
 

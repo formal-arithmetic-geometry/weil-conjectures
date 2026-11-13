@@ -97,7 +97,7 @@ theorem smallModel_strictLocalDerivedExchange_leray {X S : Scheme.{v}} (f : X �
             (pullback.snd f (Scheme.strictHenselizationStructuralMap s))).derivedPlus
           (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
             (IsPullback.of_hasPullback f
-              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).natTrans.app K)) ≫
+              (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom)).app K)) ≫
       ℓ =
     DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex b (.up ℤ)).app M) ≫
       (DerivedCategory.quotientCompQhIso AddCommGrpCat.{v + 1}).inv.app

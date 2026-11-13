@@ -70,7 +70,6 @@ theorem primarySheafSequence_shortExact
   have : Mono (F.map i) := inferInstance
   constructor
   · change (ShortComplex.mk (F.map i) (cokernel.π (F.map i)) (cokernel.condition _)).ShortExact
-    have hmono : Mono (F.map i) := inferInstance
     exact { exact := ShortComplex.exact_cokernel (F.map i) }
   · let N := primaryRelativeSubmodule K Ks R A B
     let Q := primaryTrivialQuotient K Ks H R A B

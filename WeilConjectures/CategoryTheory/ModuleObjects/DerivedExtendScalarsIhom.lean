@@ -95,7 +95,7 @@ theorem isIso_ihomComparison_leftDerivedExtendScalars (k : ℤ) (w : (k • 𝟙
     (hφ : (ShortComplex.mk _ _ w).ShortExact) (A B : DerivedCategory (Mod C R)) :
     letI := extendScalarsMonoidal φ
     letI := (extendScalars φ).leftDerivedFunctorMonoidal
-    IsIso ((Functor.LaxMonoidal.ihomComparison (extendScalars φ).leftDerivedFunctor A).natTrans.app
+    IsIso ((Functor.LaxMonoidal.ihomComparison (extendScalars φ).leftDerivedFunctor A).app
       B) := by
   let := extendScalarsMonoidal φ
   let := (extendScalars φ).leftDerivedFunctorMonoidal

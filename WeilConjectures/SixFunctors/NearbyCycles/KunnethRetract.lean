@@ -62,7 +62,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {e₁' : ZU' ⟶ XU'} {e₂ : ZU ⟶ YU} {e₂' : ZU' ⟶ YU'} {r₁ : XU ⟶ X} {r₁' : XU' ⟶ X'}
   {r₂ : YU ⟶ Y} {r₂' : YU' ⟶ Y'} {r : ZU ⟶ Z} {r' : ZU' ⟶ Z'}
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **The pullback of the Künneth map is a retract of the Künneth map of the pullback models**:
 for morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` compatible with
@@ -96,7 +95,6 @@ theorem isIso_map_kunnethMap_of_isSquareRetract (φ₁ : P.Hom M f₁ f₁')
     IsIso (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B)) :=
   hR.isIso
 
-set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
 /-- **The pullback of the Künneth map is a retract of the Künneth map of the pullback models**,
 tensor form: in the square of `NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`, if the

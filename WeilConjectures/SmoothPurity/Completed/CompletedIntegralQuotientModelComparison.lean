@@ -366,7 +366,6 @@ private noncomputable def extensionComp {B : Sheaf J CommRingCat.{r}}
       (SheafOfModules.systemScalarRestrictionComposition φ c g hg))
     (extensionAdjunction g)
 
-set_option maxHeartbeats 800000 in
 -- Comparing successive scalar adjunctions elaborates three coefficient actions.
 private theorem extensionComp_pure {B : Sheaf J CommRingCat.{r}}
     (φ : R ⟶ S) (c : S ⟶ B) (g : R ⟶ B) (hg : g = φ ≫ c)

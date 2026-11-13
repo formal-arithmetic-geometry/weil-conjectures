@@ -46,7 +46,7 @@ Source: Stacks Project, Tag 0037; `unit_mateEquiv` and `mateEquiv_counit`.
 (blueprint: new-lem-sf-adjunction-compatible-right-comparison) -/
 def compatibleRightComparison (adj : F ⊣ G) (adj' : F' ⊣ G')
     (q : F ⋙ V ≅ U ⋙ F') : CompatibleRightComparison adj adj' q where
-  hom := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv)).natTrans
+  hom := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv))
   unit K := by
     have h := unit_mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv) K
     change U.map (adj.unit.app K) ≫ _ =

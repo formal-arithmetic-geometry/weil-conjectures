@@ -51,8 +51,8 @@ theorem charpoly_frobeniusEnd_stalk_upperStar (z : X.finitePoints) :
     (X ↘ Spec (CommRingCat.of k₀)) z
   have ht' : (s ≫ Scheme.Hom.geometricFiberMap φ hφ) ≫
       ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+        (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom ≫
         (s ≫ Scheme.Hom.geometricFiberMap φ hφ) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]

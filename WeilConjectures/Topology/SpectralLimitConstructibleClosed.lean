@@ -13,6 +13,7 @@ import WeilConjectures.SixFunctors.ConstructibleTopologyHausdorff
 import Mathlib.Topology.Spectral.ConstructibleTopology
 import Mathlib.Topology.Spectral.Hom
 import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Topology.WithTopology
 
 /-!
 # Quasi-compact limits of constructibly closed subsets

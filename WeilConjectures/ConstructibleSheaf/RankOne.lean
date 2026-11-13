@@ -140,7 +140,7 @@ by a unique unit `u` of `End Λ_X`, a locally constant function `X → Λˣ`: `�
 theorem existsUnique_hom_eq_comp_unitEndAction_of_hasRankOneStalks [IsLocallyConstantSheaf M]
     (hM : HasRankOneStalks M) (φ ψ : L ≅ M) :
     ∃! u : (End (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))ˣ,
-      ψ.hom = φ.hom ≫ unitEndAction M u :=
+      ψ.hom = φ.hom ≫ (unitEndAction M u).asHom :=
   have := isIso_id_of_hasRankOneStalks M hM
   existsUnique_hom_eq_comp_unitEndAction φ ψ
 

@@ -491,6 +491,6 @@ def pbcActualScalarDirectImageMap :
     pbcActualDerivedPush g dA ⋙ pbcDerivedExtend φY ⟶
       pbcDerivedExtend φX ⋙ pbcActualDerivedPush g dB :=
   (mateEquiv (pbcActualDerivedAdjunction g dA) (pbcActualDerivedAdjunction g dB)
-    (TwoSquare.mk _ _ _ _ (pbcActualScalarDerivedPullIso g dA dB φY φX hφ).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pbcActualScalarDerivedPullIso g dA dB φY φX hφ).hom))
 
 end AlgebraicGeometry.Scheme

@@ -136,14 +136,14 @@ private theorem ordinary_counit {X S X' S' : Scheme.{u}}
     dsimp only [adj, Functor.comp_obj]
     rw [Scheme.Modules.moduleBaseChangeMap, Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
     exact (unit_mateEquiv_symm (adj p) (adj g) r F).symm
-  have he : ((mateEquiv (adj f) (adj f')).symm b).natTrans =
+  have he : ((mateEquiv (adj f) (adj f')).symm b) =
       (ordinarySquare f f' g p h).hom := by
     dsimp only [b]
     rw [iterated_mateEquiv_conjugateEquiv_symm]
     exact ordinarySquare_mate f f' g p h
   have hc := mateEquiv_counit_symm (adj f) (adj f') b F
   rw [hb] at hc
-  change _ = ((mateEquiv (adj f) (adj f')).symm b).natTrans.app
+  change _ = ((mateEquiv (adj f) (adj f')).symm b).app
     ((Scheme.Modules.pushforward f).obj F) ≫ _ at hc
   rw [he] at hc
   exact hc.symm

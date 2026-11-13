@@ -145,7 +145,7 @@ lemma ProEtaleWeilSheaf.adicConstant_str_hom_hom (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))] :
     (ProEtaleWeilSheaf.adicConstant k₀ l X).str.hom.hom =
       (ProEtale.adicConstantSheafLowerStarIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm).hom :=
   rfl
 
 variable {Z W : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
@@ -187,15 +187,16 @@ lemma ProEtaleWeilSheaf.lowerStar_obj_str (F : ProEtaleWeilSheaf k₀ l W) :
 Frobenius pushforwards followed by `π̄_*` of the Weil structure of `ℚ̄_ℓ`. -/
 lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' :
     (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom =
-      ((ProEtale.lowerStarComp _ π̄ (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+      ((ProEtale.lowerStarComp _ π̄
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv π̄).symm).app
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv π̄).symm).app
           (ProEtaleWeilSheaf.adicConstant k₀ l W).carrier.X ≪≫
         (π̄)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom := by
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom := by
   rw [ProEtaleWeilSheaf.lowerStar_obj_str, Iso.trans_hom, Mod.comp_hom',
     Functor.mapIso_hom, ProEtale.adicLowerStar_map_hom]
   erw [ProEtaleWeilSheaf.adicConstant_str_hom_hom]
@@ -209,15 +210,16 @@ lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' :
 /-- The Weil structure of `π_* ℚ̄_ℓ`, on underlying sheaves. -/
 lemma ProEtaleWeilSheaf.torsorPushforward_str_hom_hom :
     (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom =
-      ((ProEtale.lowerStarComp _ π̄ (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≪≫
+      ((ProEtale.lowerStarComp _ π̄
+          (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv ≪≫
           ProEtale.lowerStarCongr _
             (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) ≪≫
           (ProEtale.lowerStarComp _
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv π̄).symm).app
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv π̄).symm).app
           (ProEtale.adicConstantSheaf l (W ↘ Spec (CommRingCat.of k₀)).geometricFiber) ≪≫
         (π̄)_*[WeilCoefficients.{u} l].mapIso
           (ProEtale.adicConstantSheafLowerStarIso l
-            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)).hom :=
+            (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)).hom :=
   ProEtaleWeilSheaf.torsorPushforward_str_hom_hom' π
 
 /-- The action of `τ_g` on `π_* ℚ̄_ℓ` commutes with its Weil structure: `τ_g` and `π` are
@@ -234,8 +236,8 @@ lemma ProEtaleWeilSheaf.torsorTranslation_comm (g : G) :
     ProEtale.torsorTranslation_hom, ← Endofunctor.IsoAlgebra.str_hom,
     ProEtaleWeilSheaf.torsorPushforward_str_hom_hom]
   exact ProEtale.lowerStar_map_deckAction_comp_lowerStarExchange l π̄
-    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
     (geometricTorsorAut k₀ τ g)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
     (geometricTorsorAut_comp k₀ π τ hτ g)
@@ -293,16 +295,18 @@ lemma ProEtaleWeilSheaf.torsorPushforward_str_mul :
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom) ≫
       MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
         (W ↘ Spec (CommRingCat.of k₀)).geometricFiber)) =
-      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l]
           _ _ ≫
-        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].map
+        ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u}
+          l].map
           (MonObj.mul (X := (π̄)_*[WeilCoefficients.{u} l].obj (ProEtale.adicConstantSheaf l
             (W ↘ Spec (CommRingCat.of k₀)).geometricFiber))) ≫
         (ProEtaleWeilSheaf.torsorPushforward k₀ l π).str.hom.hom := by
   rw [ProEtaleWeilSheaf.torsorPushforward_str_hom_hom]
   exact ProEtale.lowerStarExchange_mul π̄
-    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
-    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
+    (W ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
 
@@ -364,7 +368,8 @@ theorem ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic [Etale π] [QuasiCompact
     congrArg (fun f ↦ f.hom.f) (hφ g)
   obtain ⟨r, hr₁, hr₂⟩ := ProEtale.exists_retraction_of_isotypic π̄ (geometricTorsorAut k₀ τ) hτb
     hadd' hsplit' (χ₁ * χ₂) hG φ₃.hom.f (hgeom φ₃ _ hφ₃) hθ₃
-  set Fr := ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+  set Fr :=
+    ((Z ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[WeilCoefficients.{u} l]
   have hstr {A B : ProEtaleWeilSheaf k₀ l Z} (f : A ⟶ B) :
       Fr.map f.hom.f.hom ≫ B.str.hom.hom = A.str.hom.hom ≫ f.hom.f.hom := by
     have := congrArg Mod.Hom.hom f.hom.h

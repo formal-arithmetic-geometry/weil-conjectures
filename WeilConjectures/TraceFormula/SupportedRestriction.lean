@@ -322,14 +322,14 @@ strict localization `T` of `X × X` at `(y, y)`, and the last isomorphisms are
 theorem localTerm_point_traceClass_eq_supportedRestriction (y : point k ⟶ F.F)
     [IsOpenImmersion y.left] [IsClosedImmersion y.left] :
     (c.traceClass F).localTerm y =
-      (Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ y)).hom ≫
+      .of ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ y)).hom ≫
         (boundedConstructibleUpperStar _ ℓ y).map
           ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ F.ι)).hom ≫
             (boundedConstructibleUpperStar _ ℓ F.ι).map (c.mate ≫ c.verdierDualityIso.hom)) ≫
         (boundedConstructibleUpperStar _ ℓ y).map (F.supportedRestriction _) ≫
         (boundedConstructibleUpperStar _ ℓ y).map F.supportedEvaluation ≫
         (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ y).inv.app _ ≫
-        (dualizingComplexComp ℓ y).hom ≫ (dualizingComplexPointIso ℓ k).hom := by
+        (dualizingComplexComp ℓ y).hom ≫ (dualizingComplexPointIso ℓ k).hom) := by
   rw [BorelMooreSection.localTerm_point, restrict_traceClass_eq_supportedRestriction]
   simp only [Category.assoc]
 

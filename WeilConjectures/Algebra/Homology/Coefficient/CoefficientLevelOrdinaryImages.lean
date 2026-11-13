@@ -338,7 +338,6 @@ private theorem ordinaryScalarRestriction_hom_app
       (sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w}))).hom.app M = 𝟙 _ := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Normalizing the mate across four module categories needs additional reductions.
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   [HasWeakSheafify J CommRingCat.{w}] [HasWeakSheafify J (Type w)]

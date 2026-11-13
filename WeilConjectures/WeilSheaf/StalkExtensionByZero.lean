@@ -83,10 +83,10 @@ theorem subsingleton_stalk_extensionByZero (G : WeilSheaf k₀ l U) (x : X.finit
 private lemma stalkAt_eq_of_degree_eq (F : WeilSheaf k₀ l X)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     {m n : ℕ} (h : m = n)
-    (hm : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
-    (hn : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).hom =
-      (specGeometricFrobenius k₀ ^ n).hom ≫ s) :
+    (hm : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
+    (hn : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ n).asIso.hom =
+      (specGeometricFrobenius k₀ ^ n).asIso.hom ≫ s) :
     F.stalkAt s m hm = F.stalkAt s n hn := by
   subst n
   rfl
@@ -111,8 +111,8 @@ theorem nonempty_equiv_stalk_extensionByZero (G : WeilSheaf k₀ l U) (z : U.fin
   have ht := Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
     (U ↘ Spec (CommRingCat.of k₀)) z
   have ht' : (t ≫ J) ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
-      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom =
-      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).hom ≫
+      (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom =
+      (specGeometricFrobenius k₀ ^ (U ↘ Spec (CommRingCat.of k₀)).degreeOver z.1).asIso.hom ≫
         (t ≫ J) := by
     rw [Category.assoc, Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_pow,
       ← Category.assoc, ht, Category.assoc]

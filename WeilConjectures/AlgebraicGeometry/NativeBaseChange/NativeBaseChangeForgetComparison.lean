@@ -377,7 +377,7 @@ def mate (sq : CommSq v p' p g) :
       (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p))
     (Adjunction.mapDerivedCategoryRightDerivedAdjunction
       (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p'))
-    (TwoSquare.mk _ _ _ _ (pullSquare k₀ l sq).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pullSquare k₀ l sq).hom))
 
 /-- The exact pullback forgetting comparison, localized from the actual carrier square.
 Source: native WeilSheaf/Category.lean.
@@ -424,7 +424,7 @@ private theorem pushForget_mate {X Y : Scheme.{u}}
         (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l f))
       (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (ProEtale.adicUpperStarLowerStarAdjunction l (geometricMap k₀ f)))
-      (TwoSquare.mk _ _ _ _ (pullForget k₀ l f).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullForget k₀ l f).inv)) =
         (pushForget k₀ l f).hom := by
   let := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
     (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
@@ -646,14 +646,14 @@ theorem forget_mate (sq : CommSq v p' p g)
         (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p))
       (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (ProEtale.adicUpperStarLowerStarAdjunction l (geometricMap k₀ p)))
-      (TwoSquare.mk _ _ _ _ (pullForget k₀ l p).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullForget k₀ l p).inv)) =
         (pushForget k₀ l p).hom := pushForget_mate k₀ l p
   have hK : (mateEquiv
       (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l p'))
       (Adjunction.mapDerivedCategoryRightDerivedAdjunction
         (ProEtale.adicUpperStarLowerStarAdjunction l (geometricMap k₀ p')))
-      (TwoSquare.mk _ _ _ _ (pullForget k₀ l p').inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (pullForget k₀ l p').inv)) =
         (pushForget k₀ l p').hom := pushForget_mate k₀ l p'
   have hc := pullForget_cube k₀ l sq
   have h := exchangeMate_cube
@@ -670,14 +670,14 @@ theorem forget_mate (sq : CommSq v p' p g)
     (pullSquare k₀ l sq).hom
     (ProEtale.adicDerivedPullSquare l (geometricSquare k₀ sq)).hom hc K
   change (forget k₀ l T').map ((mate k₀ l sq).app K) ≫
-      (mateEquiv _ _ (TwoSquare.mk _ _ _ _ (pullForget k₀ l p').inv)).natTrans.app
+      (mateEquiv _ _ (TwoSquare.mk _ _ _ _ (pullForget k₀ l p').inv)).app
         ((ProEtaleWeilSheaf.upperStar k₀ l v).mapDerivedCategory.obj K) ≫
       (ProEtale.adicLowerStar l (geometricMap k₀ p')).rightDerivedFunctor.map
         ((pullForget k₀ l v).hom.app K) =
     (pullForget k₀ l g).hom.app
         ((ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor.obj K) ≫
       (ProEtale.adicUpperStar l (geometricMap k₀ g)).mapDerivedCategory.map
-        ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (pullForget k₀ l p).inv)).natTrans.app K) ≫
+        ((mateEquiv _ _ (TwoSquare.mk _ _ _ _ (pullForget k₀ l p).inv)).app K) ≫
       (ProEtale.adicDerivedBaseChange l (geometricSquare k₀ sq)).app
         ((forget k₀ l Z).obj K) at h
   rw [hF, hK] at h

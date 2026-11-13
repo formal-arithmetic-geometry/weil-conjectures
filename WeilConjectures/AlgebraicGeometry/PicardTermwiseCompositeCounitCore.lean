@@ -88,7 +88,6 @@ private theorem tensor_composition_inv
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-set_option maxHeartbeats 600000 in
 -- The pinned dependent counits require substantial instance elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

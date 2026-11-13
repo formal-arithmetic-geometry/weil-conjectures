@@ -177,7 +177,7 @@ theorem cohomologyMap_one_puncturedTraitι_ne_zero [IsAlgClosed k] :
     C.exists_puncturedTrait_iso_spec_fractionRing zbar hz
   have : NeZero (ℓ : k) := ⟨hℓ⟩
   have : NeZero ℓ := ⟨(Fact.out : ℓ.Prime).ne_zero⟩
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k ℓ
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k ℓ
   refine Etale.cohomologyMap_one_constantZMod_ne_zero_of_forall_pow_ne (n := ℓ)
     (C.puncturedTraitι zbar) (pullback.fst _ _ ≫ C.j ≫ C.aZ) hℓ hζ u fun v hv ↦ ?_
   rw [hu] at hv

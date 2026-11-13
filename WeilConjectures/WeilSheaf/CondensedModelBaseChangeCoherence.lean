@@ -325,8 +325,8 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
 
 /-- The components of the mate of a square along two adjunctions. -/
 lemma mateEquiv_natTrans_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H)
-    (d : B) : (mateEquiv adj₁ adj₂ α).natTrans.app d =
-      adj₂.unit.app (G.obj (R₁.obj d)) ≫ R₂.map (α.natTrans.app (R₁.obj d)) ≫
+    (d : B) : (mateEquiv adj₁ adj₂ α).app d =
+      adj₂.unit.app (G.obj (R₁.obj d)) ≫ R₂.map (α.app (R₁.obj d)) ≫
         R₂.map (H.map (adj₁.counit.app d)) := by
   simp [mateEquiv_apply]
 
@@ -540,7 +540,7 @@ lemma mateEquiv_lowerStarFrobeniusExchange {X Y : Scheme.{u}} (FX : X ≅ X) (FY
     (φ : X ⟶ Y) (hφ : φ ≫ FY.inv = FX.inv ≫ φ) (hφ' : FX.hom ≫ φ = φ ≫ FY.hom) :
     (mateEquiv (lowerStarInvAdjunction Λ FX) (lowerStarInvAdjunction Λ FY)
       (TwoSquare.mk _ _ _ _ (lowerStarComp Λ φ FY.inv ≪≫ lowerStarCongr Λ hφ ≪≫
-        (lowerStarComp Λ FX.inv φ).symm).hom)).natTrans =
+        (lowerStarComp Λ FX.inv φ).symm).hom)) =
       (lowerStarComp Λ FX.hom φ).hom ≫ (lowerStarCongr Λ hφ').hom ≫
         (lowerStarComp Λ φ FY.hom).inv :=
   NatTrans.ext (funext fun M ↦ (mateEquiv_natTrans_app _ _ _ M).trans

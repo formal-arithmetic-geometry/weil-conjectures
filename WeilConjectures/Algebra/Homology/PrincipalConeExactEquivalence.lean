@@ -190,22 +190,23 @@ private theorem mapTowerCoconeComparison [HasCountableProducts A] [HasCountableP
   exact (completedCoconeLift_natural B _ _ p.hom p.hom hsq (𝟙 _)
     (G.map (Pi.lift u)) (Pi.lift v) hz' hw hn).symm.trans (Category.id_comp _)
 private theorem mapPow {P : CochainComplex A ℤ} (μ : End P) (n : ℕ) :
-    (H.mapHomologicalComplex (.up ℤ)).map (μ ^ n) =
-      (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ) ^ n).asHom :=
-  (map_pow ((H.mapHomologicalComplex (.up ℤ)).mapEnd P) μ n)
+    (H.mapHomologicalComplex (.up ℤ)).map (μ ^ n).asHom =
+      (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom) ^ n).asHom :=
+  congrArg End.asHom (map_pow ((H.mapHomologicalComplex (.up ℤ)).mapEnd P) μ n)
 
 private def principalLevelIso {P : CochainComplex A ℤ} (μ : End P) (n : ℕ) :
     (H.mapHomologicalComplex (.up ℤ)).obj (PrincipalCone.level μ n) ≅
-      PrincipalCone.level (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)) n :=
+      PrincipalCone.level (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n :=
   mappingCone.mapHomologicalComplexIso _ H ≪≫
-    coneSquareIso ((H.mapHomologicalComplex (.up ℤ)).map (μ ^ (n + 1)))
-      (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ) ^ (n + 1))
+    coneSquareIso ((H.mapHomologicalComplex (.up ℤ)).map (μ ^ (n + 1)).asHom)
+      (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom) ^ (n + 1)).asHom
       (Iso.refl _) (Iso.refl _) (by simpa using mapPow H μ (n + 1))
 
 private theorem principalLevelIso_inr {P : CochainComplex A ℤ} (μ : End P) (n : ℕ) :
-    (H.mapHomologicalComplex (.up ℤ)).map (mappingCone.inr (μ ^ (n + 1))) ≫
+    (H.mapHomologicalComplex (.up ℤ)).map (mappingCone.inr (μ ^ (n + 1)).asHom) ≫
         (principalLevelIso H μ n).hom =
-      mappingCone.inr (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ) ^ (n + 1)) := by
+      mappingCone.inr
+        (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom) ^ (n + 1)).asHom := by
   simp only [principalLevelIso, Iso.trans_hom]
   rw [← Category.assoc, mappingCone.map_inr]
   simp [coneSquareIso, mappingCone.map]
@@ -214,7 +215,7 @@ private theorem principalLevelIso_step {P : CochainComplex A ℤ} (μ : End P) (
     (H.mapHomologicalComplex (.up ℤ)).map (PrincipalCone.step μ n) ≫
         (principalLevelIso H μ n).hom =
       (principalLevelIso H μ (n + 1)).hom ≫
-        PrincipalCone.step (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)) n := by
+        PrincipalCone.step (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) n := by
   simp only [principalLevelIso, Iso.trans_hom, Category.assoc, PrincipalCone.step]
   rw [← Category.assoc, mapCone_natural H]
   simp only [Category.assoc]
@@ -235,13 +236,14 @@ preservation of the cocone inclusion and the zero homotopy. -/
 theorem principalCompletionMap [HasCountableProducts A] [HasCountableProducts B]
     [H.IsEquivalence] {P : CochainComplex A ℤ} (μ : End P) :
     ∃ i : (H.mapHomologicalComplex (.up ℤ)).obj (PrincipalCone.completion μ) ≅
-        PrincipalCone.completion (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)),
+        PrincipalCone.completion (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)),
       (H.mapHomologicalComplex (.up ℤ)).map (PrincipalCone.unit μ) ≫ i.hom =
-        PrincipalCone.unit (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ)) := by
+        PrincipalCone.unit (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom)) := by
   exact mapTowerCoconeComparison H _ _ (PrincipalCone.step μ)
     (PrincipalCone.step _) (principalLevelIso H μ) (principalLevelIso_step H μ)
-    (fun n ↦ mappingCone.inr (μ ^ (n + 1)))
-    (fun n ↦ mappingCone.inr (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ) ^ (n + 1)))
+    (fun n ↦ mappingCone.inr (μ ^ (n + 1)).asHom)
+    (fun n ↦ mappingCone.inr
+      (End.of ((H.mapHomologicalComplex (.up ℤ)).map μ.asHom) ^ (n + 1)).asHom)
     (principalLevelIso_inr H μ) (PrincipalCone.productUnit_comp μ)
     (PrincipalCone.productUnit_comp _)
 

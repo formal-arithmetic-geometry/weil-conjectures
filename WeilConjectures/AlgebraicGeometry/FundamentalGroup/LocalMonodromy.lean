@@ -43,7 +43,6 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C U : Scheme.{u}} {p : C ⟶ Sp
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- **`Q - 1` kills the local monodromy of a Frobenius-invariant torsor.** Let `E` be an
 automorphism of `C`, restricting to `U`, fixing `z ∈ C ∖ U` and semilinear over an automorphism
@@ -131,7 +130,7 @@ theorem natCast_sub_one_mul_monodromy_eq_zero
   change ((Q : ZMod N) - 1) * (T.monodromy s G (ρ σ)).toAdd.down = 0
   -- a primitive `N`-th root of unity of `k`, in the function field and in `Ω`
   have : NeZero (N : k) := ⟨hN⟩
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   set F := C.functionField
   let ι : F →+* Ω := algebraMap F Ω
   let κ : k →+* F := (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp

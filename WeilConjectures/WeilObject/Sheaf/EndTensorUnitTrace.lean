@@ -61,7 +61,7 @@ theorem endTensorUnitRingEquiv_traceOrZero_eq_trace
     {W : Type*} [AddCommGroup W] [Module (_root_.PadicAlgCl ℓ) W]
     [FiniteDimensional (_root_.PadicAlgCl ℓ) W] (e : W ≃+ (𝟙_ _ ⟶ V))
     (he : ∀ (c : _root_.PadicAlgCl ℓ) (w : W),
-      e (c • w) = scalarEndRingHom ℓ (Spec (.of Ω)) c ≫ e w)
+      e (c • w) = (scalarEndRingHom ℓ (Spec (.of Ω)) c).asHom ≫ e w)
     (f : W →ₗ[_root_.PadicAlgCl ℓ] W) (hf : ∀ w, e (f w) = e w ≫ φ) :
     endTensorUnitRingEquiv ℓ Ω (traceOrZero φ) = LinearMap.trace _ W f := by
   have h := LinearMap.trace_eq_ringEquiv_trace_of_addEquiv (endTensorUnitOpRingEquiv ℓ Ω) e

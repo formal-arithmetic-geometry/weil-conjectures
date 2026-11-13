@@ -266,15 +266,15 @@ private theorem restriction_mate_transpose
     (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ A} {H : D ⥤ B}
     (β : TwoSquare R H G R') {M : C} {N : D} (f : M ⟶ R.obj N) :
     (adj'.homEquiv _ _)
-        (((mateEquiv adj adj').symm β).natTrans.app M ≫
+        (((mateEquiv adj adj').symm β).app M ≫
           H.map ((adj.homEquiv _ _).symm f)) =
-      G.map f ≫ β.natTrans.app N := by
-  have hu : G.map (adj.unit.app M) ≫ β.natTrans.app (L.obj M) =
+      G.map f ≫ β.app N := by
+  have hu : G.map (adj.unit.app M) ≫ β.app (L.obj M) =
       adj'.unit.app (G.obj M) ≫
-        R'.map (((mateEquiv adj adj').symm β).natTrans.app M) :=
+        R'.map (((mateEquiv adj adj').symm β).app M) :=
     unit_mateEquiv_symm adj adj' β M
   rw [adj'.homEquiv_unit, R'.map_comp, ← Category.assoc, ← hu, Category.assoc]
-  have hn := β.natTrans.naturality ((adj.homEquiv _ _).symm f)
+  have hn := β.naturality ((adj.homEquiv _ _).symm f)
   dsimp only [Functor.comp_map] at hn
   rw [← hn, ← Category.assoc, ← G.map_comp]
   change G.map ((adj.homEquiv _ _) ((adj.homEquiv _ _).symm f)) ≫ _ = _

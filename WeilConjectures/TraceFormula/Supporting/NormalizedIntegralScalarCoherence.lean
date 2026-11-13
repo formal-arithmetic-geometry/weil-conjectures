@@ -155,7 +155,6 @@ private theorem transport_tower
   rw [hS]
   simp only [Functor.map_comp, Category.assoc]
   rw [hk, reassoc_of% hnb, reassoc_of% hX]
-  try simp only [Category.assoc]
   rw [← hV]
 
 private theorem mixed_unit_of_composition

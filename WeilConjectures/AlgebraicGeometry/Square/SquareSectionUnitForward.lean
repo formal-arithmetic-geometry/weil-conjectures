@@ -53,7 +53,7 @@ attribute [local implicit_reducible] Scheme.Modules Scheme.Modules.Hom
   RingedSpace.openModuleSections HomologicalComplex.homologyMap
   Scheme.Hom.toRingCatSheafHom SheafOfModules.pushforward SheafOfModules.forget
   SheafOfModules.toSheaf PresheafOfModules.toPresheaf HomologicalComplex.homology
-  HomologicalComplex.shortComplexFunctor HomologicalComplex.shortComplexFunctor'
+  HomologicalComplex.shortComplexFunctor
   PresheafOfModules.pushforward PresheafOfModules.pushforward₀
   PresheafOfModules.pushforward₀Obj PresheafOfModules.restrictScalars
   PresheafOfModules.restrictScalarsObj ModuleCat.restrictScalars
@@ -394,8 +394,6 @@ private theorem sections_to_inverse {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
   simp only [Iso.inv_hom_id_assoc]
   exact inverseOpen_unit f q B K a
 
-set_option maxHeartbeats 800000 in
--- Elaborating the comparison carriers requires the larger heartbeat budget.
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
 private theorem sections_to_inverseAt {X S : Scheme.{u}} (f : X ⟶ S) (q : ℤ)
     (V : S.Opens) (B : CochainComplex X.Modules ℤ) (K : schemeDerivedCategory X)

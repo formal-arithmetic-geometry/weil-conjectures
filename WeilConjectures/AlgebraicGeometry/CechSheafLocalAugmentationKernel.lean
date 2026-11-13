@@ -9,6 +9,7 @@ module
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # The degree-zero kernel of a locally restricted Cech augmentation
 
 Source: blueprint `lem-pc-cech-resolution`, proof paragraph 1.
