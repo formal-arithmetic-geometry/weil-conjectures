@@ -101,6 +101,9 @@ theorem isSheaf_etaleStructurePresheaf_aux :
   refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
   intro V W f
   ext a
+  dsimp only [types_comp_apply, Equiv.toIso_hom_hom_apply, eqv, Equiv.ofBijective_apply,
+    etaleHom, Functor.comp_map, Functor.op_map, Pseudofunctor.presheafHom_map,
+    TypeCat.ofHom_apply, Quiver.Hom.unop_op]
   exact (pullHom_smulHom (unitObj X) V.unop.hom f.unop.left W.unop.hom
     (MorphismProperty.Over.w f.unop) a).symm
 
