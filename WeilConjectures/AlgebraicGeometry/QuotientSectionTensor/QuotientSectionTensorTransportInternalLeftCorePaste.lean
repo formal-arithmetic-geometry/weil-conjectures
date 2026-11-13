@@ -67,6 +67,7 @@ private theorem paste_output_computation {𝒞 : Type*} [Category 𝒞]
   simp only [Category.assoc]
   rw [hq, reassoc_of% hn, ← reassoc_of% ht, reassoc_of% hw, reassoc_of% hr]
 
+-- Prove the categorical identities before instantiating the large derived-category expressions.
 private theorem paste_cancel_pair_inv {𝒜 ℬ 𝒞 : Type*}
     [Category 𝒜] [Category ℬ] [Category 𝒞]
     (B : 𝒜 × ℬ ⥤ 𝒞) {X X' : 𝒜} {Y Y' : ℬ} (e : X ≅ X') (f : Y ≅ Y')
@@ -120,8 +121,6 @@ private theorem paste_map_three {𝒞 𝒟 : Type*} [Category 𝒞] [Category �
 
 -- Preserve the existing binder names for the three inputs unused by this output-side proof.
 set_option linter.unusedVariables false in
-set_option profiler true in
--- Elaborating the derived comparison components requires the cached module structures.
 /--
 The algebraic paste after the three normalization equations have been supplied.
 The proof is the categorical reassociation and cancellation in the proof of the
