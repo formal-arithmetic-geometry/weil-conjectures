@@ -128,7 +128,7 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   let T : CochainComplex (localEvaluationModules X U) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) ℤ :=
     L.mapHomologicalComplex (.up ℤ)
-  let E : DerivedCategory (localEvaluationModules X U) ⥤ schemeDerivedCategory U.toScheme :=
+  let E : DerivedCategory.{w} (localEvaluationModules X U) ⥤ schemeDerivedCategory U.toScheme :=
     L.mapDerivedCategory
   let v : DerivedCategory.Q ⋙ E ≅ T ⋙ DerivedCategory.Q := L.mapDerivedCategoryFactors
   obtain ⟨t, b, hhom, hdual, hF, hf⟩ :=
