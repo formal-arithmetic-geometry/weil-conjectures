@@ -130,7 +130,7 @@ private theorem free_comp_eq_of_sections
   intro i
   simp only [freeCofan_inj]
   rw [← Category.assoc, ← Category.assoc, ιFree_mapFreeIso_hom,
-    Category.assoc, ← F.map_comp]
+    Category.assoc η.hom, ← F.map_comp]
   apply (F.obj M).unitHomEquiv.injective
   rw [unitHomEquiv_comp_apply]
   exact h i
@@ -184,7 +184,7 @@ private theorem finite_free_lift
   refine ⟨U, hUA.trans hAK, hxU, n, l, ?_⟩
   have heq : l ≫ F.map p =
       (mapFreeIso FA I (overMapUnitIso (R := R) (homOfLE hUA)).symm).hom ≫ FA.map q := by
-    refine free_comp_eq_of_sections FA I _ l (F.map p) q (fun i ↦ ?_)
+    refine free_comp_eq_of_sections FA I _ (M := H.over A) l (F.map p) q (fun i ↦ ?_)
     simp only [l, Equiv.apply_symm_apply, overMapUnitIso, Iso.symm_hom, Iso.refl_inv,
       Category.id_comp]
     apply PresheafOfModules.sections_ext

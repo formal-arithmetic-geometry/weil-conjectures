@@ -84,8 +84,9 @@ theorem binarySubmodule_on_V
         pullback.lift (𝟙 _) T.unop.hom (Subsingleton.elim _ _)
       exact ⟨⟨g, Subsingleton.elim _ _, Subsingleton.elim _ _⟩⟩
     have : IsIso ((Over.mapPullbackAdj j).counit.app A) := by
-      apply isIso_of_reflects_iso _ (Over.forget (W ⊔ V))
-      exact hfst
+      have : IsIso ((Over.forget (W ⊔ V)).map ((Over.mapPullbackAdj j).counit.app A)) :=
+        hfst
+      exact isIso_of_reflects_iso _ (Over.forget (W ⊔ V))
     have hη : IsIso ((adj.unit.app (H.over (W ⊔ V))).val.app (op A)) :=
       overMap_unit_component_isIso R j (H.over (W ⊔ V)) A
     have hp := (SheafOfModules.evaluation.{u} (R.over (W ⊔ V)) (op A)).map_isPullback
