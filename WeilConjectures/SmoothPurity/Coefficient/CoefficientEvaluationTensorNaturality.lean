@@ -79,7 +79,6 @@ attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
-set_option profiler true in
 /-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, and Modules on Sites, Tag 03EK
 (blueprint: lem-coef-evaluation-total-tensor-naturality).
@@ -112,6 +111,7 @@ theorem pullbackTensorEvaluationTensor_naturality (W : Scheme.{u}) (n : ℕ)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q) k _
   intro p q hpq U
+  -- Lift the sections without substituting through the tensor constructions.
   refine (evaluationSection_surjective l E W (P.X p) n U).forall.2 ?_
   intro x0
   refine (evaluationSection_surjective l E W (Q.X q) n U).forall.2 ?_
@@ -141,6 +141,7 @@ theorem pullbackTensorEvaluationTensor_naturality (W : Scheme.{u}) (n : ℕ)
     (coefficientEvaluationSection l E W (Q.X q) n U y0)
   have ha := evaluationSection_map l E W (a.f p) n U x0
   have hb := evaluationSection_map l E W (b.f q) n U y0
+  -- Compose the generator formulas without rewriting the surrounding large types.
   exact (congrArg (fun z ↦ (e'.hom.f k).val.app U
       (((coefficientSequenceEvaluation l E W n).map (t.f k)).val.app U z)) hi).trans
     ((congrArg (fun z ↦ (e'.hom.f k).val.app U z)
