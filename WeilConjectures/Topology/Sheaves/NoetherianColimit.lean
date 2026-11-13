@@ -302,9 +302,9 @@ lemma hColimitProp_succ (n : ℕ) (ih : ∀ D : J ⥤ TopCat.Sheaf AddCommGrpCat
         simp only [ShortComplex.map_f, colim_map, ι_colimMap, evaluation_obj_map]
       comm₂₃ := by
         simp only [ShortComplex.map_g, colim_map, ι_colimMap, evaluation_obj_map] }
-  have hTj (j : J) : Subsingleton (Sheaf.H (S.X₂.obj j) (n + 1)) :=
+  have hTj (j : J) : Subsingleton (Sheaf.H (S.map ((evaluation J _).obj j)).X₂ (n + 1)) :=
     IsFlasque.subsingleton_H n (S.X₂.obj j)
-  have hTc : Subsingleton (Sheaf.H (colimit S.X₂) (n + 1)) := by
+  have hTc : Subsingleton (Sheaf.H (S.map colim).X₂ (n + 1)) := by
     have : Presheaf.IsFlasque (colimit S.X₂).obj :=
       isFlasque_of_isColimit (colimit.isColimit S.X₂) hT
     exact IsFlasque.subsingleton_H n (colimit S.X₂)
