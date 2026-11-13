@@ -240,14 +240,12 @@ theorem affine_koszul_section_colimit
   have hp : ∀ n, IsPerfect X (F.functor.obj (koszulOpenObject A r f n)) := by
     intro n
     exact scheme_iso_derived_inverse_preserves_perfect s.symm F.symm hi _ (hperf n)
-  obtain ⟨v', hav', hva', D, hD, ι', hι', hc'⟩ :=
-    transportHomColimit F G _ R β (koszulOpenStructure A) ES.obj
-      (DerivedCategory.Q.obj T) E.obj q (F.counitIso.app E.obj)
-      (koszulOpenObject A r f) (koszulOpenUnit A r f) v hav hva
-      (koszulOpenHomDiagram A r f ES.obj) (fun _ ↦ rfl) ι
-      (by simpa only [cast_eq] using hι) hc
-  exact ⟨fun n ↦ F.functor.obj (koszulOpenObject A r f n),
-    fun n ↦ F.functor.map (koszulOpenUnit A r f n) ≫ q.hom, hp,
-    v', hav', hva', D, hD, ι', hι', hc'⟩
+  refine ⟨fun n ↦ F.functor.obj (koszulOpenObject A r f n),
+    fun n ↦ F.functor.map (koszulOpenUnit A r f n) ≫ q.hom, hp, ?_⟩
+  exact transportHomColimit F G _ R β (koszulOpenStructure A) ES.obj
+    (DerivedCategory.Q.obj T) E.obj q (F.counitIso.app E.obj)
+    (koszulOpenObject A r f) (koszulOpenUnit A r f) v hav hva
+    (koszulOpenHomDiagram A r f ES.obj) (fun _ ↦ rfl) ι
+    (by simpa only [cast_eq] using hι) hc
 
 end AlgebraicGeometry.Scheme
