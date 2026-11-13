@@ -103,10 +103,10 @@ lemma map_leftDerivedUpperStarIso_hom_app_comp_counit
           ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomotopyCategory (.up ℤ)).obj
             K)) =
     L(Mod.extendScalars (coefficientMap a X)).map (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app K) := by
-  exact Functor.map_comp_comp_of_eq L(Mod.extendScalars (coefficientMap a X))
-    (Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_Qh
-      ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
-      (Mod.extendScalars (condensedPullbackHom Λ f)) K)
+  have h := Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_Qh
+    ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y))
+    (Mod.extendScalars (condensedPullbackHom Λ f)) K
+  exact Functor.map_comp_comp_of_eq L(Mod.extendScalars (coefficientMap a X)) h
 
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **The derived (Pull) isomorphism through the counits**: for every coefficient change `a` and
