@@ -438,7 +438,6 @@ private theorem pushforward_action
       ((prod.snd : rset A ⨯ X ⟶ X).hom.app (F.op.obj U) q)
   exact congrArg₂ smul hf.symm hs.symm
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
 -- Elaborate the sectionwise adjunction and its transported coefficient identities.
 -- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
@@ -509,20 +508,37 @@ private theorem supplied_adjunction
   have hBL {M N} (a : M ⟶ N) H b :
       B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
     apply (mset B).map_injective
-    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
     have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
         L.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+    calc
+      _ = adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map (I.modules.map a ≫ b)) :=
+        hB M H _
+      _ = adj.homEquiv _ _ (L.map ((mset B).map a) ≫
+          (eI.inv.app N ≫ (mset RI).map b)) := congrArg (adj.homEquiv _ _) (by
+        rw [(mset RI).map_comp, ← Category.assoc, hn, Category.assoc])
+      _ = (mset B).map a ≫ adj.homEquiv _ _ (eI.inv.app N ≫ (mset RI).map b) :=
+        adj.homEquiv_naturality_left _ _
+      _ = (mset B).map a ≫ (mset B).map (B' N H b) :=
+        congrArg ((mset B).map a ≫ ·) (hB N H b).symm
+      _ = _ := ((mset B).map_comp _ _).symm
   have hBR M {H H'} a (b : H ⟶ H') :
       B' M H' (a ≫ (restrictScalars ((sheafCompose J
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)).map b) =
         B' M H a ≫ P.map b := by
     apply (mset B).map_injective
-    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
-    change adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) =
-        adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) ≫ V.map ((mset A).map b)
-    rw [← Category.assoc, adj.homEquiv_naturality_right]
+    calc
+      _ = adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map
+          (a ≫ (restrictScalars ((sheafCompose J
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)).map b)) := hB M H' _
+      _ = adj.homEquiv _ _ ((eI.inv.app M ≫ (mset RI).map a) ≫ (mset A).map b) :=
+        congrArg (adj.homEquiv _ _) (by
+          rw [(mset RI).map_comp, Category.assoc]
+          rfl)
+      _ = adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) ≫
+          V.map ((mset A).map b) := adj.homEquiv_naturality_right _ _
+      _ = (mset B).map (B' M H a) ≫ V.map ((mset A).map b) :=
+        congrArg (· ≫ V.map ((mset A).map b)) (hB M H a).symm
+      _ = _ := ((mset B).map_comp _ _).symm
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ P.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
