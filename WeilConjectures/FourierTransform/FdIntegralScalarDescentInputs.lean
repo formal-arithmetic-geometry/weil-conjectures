@@ -68,8 +68,6 @@ private theorem inverseForwardComparison
     c.inv_hom_id_assoc]
 
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- Comparing the coefficient presentations requires extra unification heartbeats.
 /-- The integral completion comparison in both coefficient presentations, ready for raw
 localization. This statement makes no assertion about rational comparisons or stage systems.
 Source: trace-definition final coefficient-category sentence, integral comparison steps 1--6
