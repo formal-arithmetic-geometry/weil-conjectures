@@ -190,7 +190,7 @@ theorem relativelyFlat_derivedBaseChange_complex
                 (.up ℤ)).obj (CochainComplex.mapBifunctor P G
                   (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))))) := by
   classical
-  letI := relativelyFlat_tensorHasMapBifunctor X P G
+  let := relativelyFlat_tensorHasMapBifunctor X P G
   simp only [cast_eq]
   let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
     IsPullback.of_hasPullback f g
