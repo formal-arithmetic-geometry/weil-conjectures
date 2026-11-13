@@ -76,7 +76,6 @@ private lemma Scheme.isClosed_range_pullbackLift_of_chartwise {Bl : Scheme.{u}} 
     exact Scheme.isClosed_preimage_range_pullbackLift π g hg (chart k) (qk k)
       (hqk_fst k) (hqk_snd k) lam hlam (hclosed k lam hlam)
 
-set_option profiler true in
 /-- **Closedness of the graph of the glued extension.** -/
 lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
     (K : X.IdealSheafData) (V : X.affineOpens) {σ ι : Type u}
@@ -95,6 +94,7 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
         (AffineBlowup.awaySlope (K.ideal V) (ha i) (hb i j)))) :
     IsClosed (Set.range (pullback.lift W.ι g hg.symm)) := by
   classical
+  -- Only bind the generators: rewriting the dependent goal with `set` unfolds chart rings.
   let gen : ι ⊕ ι × σ → Γ(X, V.1) := Sum.elim a fun p ↦ b p.1 p.2
   have hgen : ∀ k, gen k ∈ K.ideal V := by
     rintro (i | ⟨i, j⟩)
