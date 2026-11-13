@@ -18,6 +18,12 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
+attribute [local irreducible] SheafOfModules.monoidalCategory
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+  SheafOfModules.monoidalCategory
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
@@ -41,11 +47,10 @@ structure NativeRingedForgetTensorChainComparison where
       (p q n : ℤ) (h : p + q = n) :
     b.forget.map (RingedForgetTensorTransposition.tensorSummand b.J b.R P Q p q n h) ≫
         (tensor.hom.app (P, Q)).f n =
-      (by
-        exact b.underived.tensor.hom.app (P.X p, Q.X q) ≫
-          RingedForgetTensorTransposition.tensorSummand b.K b.Q
-            ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
-            ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h)
+      b.underived.tensor.hom.app (P.X p, Q.X q) ≫
+        RingedForgetTensorTransposition.tensorSummand b.K b.Q
+          ((b.forget.mapHomologicalComplex (.up ℤ)).obj P)
+          ((b.forget.mapHomologicalComplex (.up ℤ)).obj Q) p q n h
   associativity (P Q N :
       CochainComplex (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R) ℤ) :
     let F := b.forget.mapHomologicalComplex (.up ℤ)
