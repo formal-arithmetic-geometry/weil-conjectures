@@ -57,7 +57,10 @@ theorem leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :
   refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ f)
     (leftDerivedUpperStarTensorRightCounit Λ f) (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
-  ext A B
+  apply NatTrans.ext
+  intro A
+  apply NatTrans.ext
+  intro B
   have h₁ := leftDerivedUpperStarTensor_app_app_fac Λ f A B
   have h₂ := ((f)^*⟦Λ⟧).leftDerivedTensorComparison_app_app_comp_tensorHom A B
   rw [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
