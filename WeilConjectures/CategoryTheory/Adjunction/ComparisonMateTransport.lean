@@ -57,14 +57,14 @@ theorem CategoryTheory.mateEquiv_app_comparison_transport (e : l ⊣ r) (e' : l'
       A₃.map (e'.counit.app K))
     (hsq : ∀ M, A₃.map (θ.app M) ≫ c'.hom.app (l.obj M) ≫ t.map (a.hom.app M) =
       a'.hom.app (g.obj M) ≫ p'.map (c.hom.app M) ≫ ϑ.app (A₀.obj M)) (K : E₁) :
-    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫ b' (h.obj K) ≫
+    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K) ≫ b' (h.obj K) ≫
       s'.map (c'.hom.app K) =
     c.hom.app (r.obj K) ≫ q.map (b K) ≫
-      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).natTrans.app (A₁.obj K) := by
+      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).app (A₁.obj K) := by
   apply (d'.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   apply (cancel_epi (a'.hom.app (g.obj (r.obj K)))).1
-  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K)
+  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
   rw [d'.counit_naturality, reassoc_of% hb']
