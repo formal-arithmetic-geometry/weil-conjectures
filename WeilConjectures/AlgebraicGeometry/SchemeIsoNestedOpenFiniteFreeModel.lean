@@ -26,8 +26,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 500000 in
--- The nested functor comparisons require additional definitional equality checks.
 set_option backward.isDefEq.respectTransparency false in
 set_option trace.profiler true in
 /-- Transport one specified bounded-above finite-free model on a nested open across a
@@ -140,6 +138,15 @@ theorem exists_scheme_iso_nested_open_finite_free_model
     let GY := R ⋙ G
     let H := SheafOfModules.overFunctor.{u} (moduleRings U.toScheme.toRingedSpace) V
     let L := SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) W
+    have : G.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : R.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : GY.PreservesZeroMorphisms := inferInstance
+    have : H.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : L.PreservesZeroMorphisms := ⟨fun _ _ ↦ rfl⟩
+    have : Abelian (SheafOfModules.{u}
+        ((moduleRings U.toScheme.toRingedSpace).over V)) := inferInstance
+    have : Abelian (SheafOfModules.{u}
+        ((moduleRings Y.toRingedSpace).over W)) := inferInstance
     have : G.Additive := Functor.additive_of_preserves_binary_products G
     let ER := CategoryTheory.Equivalence.mk R (Modules.restrictFunctor s.inv)
       ((Modules.restrictFunctorComp s.inv s.hom).symm ≪≫

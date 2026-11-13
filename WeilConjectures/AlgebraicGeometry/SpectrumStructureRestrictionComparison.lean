@@ -30,8 +30,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 1000000 in
--- The derived localization and full restriction comparisons require extra heartbeats.
 set_option trace.profiler true in
 /-- Isomorphism transport identifies the spectrum structure complex and the full
 restriction functor, including transport from localized sites to open subschemes.
@@ -108,10 +106,22 @@ theorem exists_spectrum_structure_restriction_comparison
   let V := s.hom ⁻¹ᵁ U
   let EV : SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V) ≌
       SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace) := Modules.overEquiv V
+  have : Abelian (SheafOfModules.{u}
+      ((moduleRings (Spec (.of A)).toRingedSpace).over V)) := inferInstance
+  have : Abelian (SheafOfModules.{u}
+      (moduleRings V.toScheme.toRingedSpace)) := inferInstance
+  have : Abelian (SheafOfModules.{u}
+      ((moduleRings X.toRingedSpace).over U)) := inferInstance
+  have : Abelian (SheafOfModules.{u}
+      (moduleRings U.toScheme.toRingedSpace)) := inferInstance
   obtain ⟨hLoc⟩ := hasDerivedCategory_of_equivalence EV.symm
   let := hLoc
   let EU : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
       SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) := Modules.overEquiv U
+  have : EV.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+  have : EV.inverse.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+  have : EU.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
+  have : EU.inverse.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
   have : EV.functor.Additive := Functor.additive_of_preserves_binary_products _
   have : EV.inverse.Additive := Functor.additive_of_preserves_binary_products _
   have : EU.functor.Additive := Functor.additive_of_preserves_binary_products _
@@ -135,6 +145,7 @@ theorem exists_spectrum_structure_restriction_comparison
         (ModuleCat.of A A) ≪≫
       (HomologicalComplex.single M (.up ℤ) 0).mapIso tildeSelf
     let e₀ := moduleIsoEquivalence s
+    have : e₀.functor.PreservesZeroMorphisms := Functor.preservesZeroMorphisms_of_full _
     have : e₀.functor.Additive := Functor.additive_of_preserves_binary_products _
     let b : e₀.functor ≅ Modules.restrictFunctor s.inv :=
       Adjunction.leftAdjointUniq e₀.toAdjunction (Modules.restrictAdjunction s.inv)
