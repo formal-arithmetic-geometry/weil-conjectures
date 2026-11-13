@@ -361,7 +361,6 @@ theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option trace.profiler true in
 attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceEvaluation coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
