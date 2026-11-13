@@ -113,7 +113,6 @@ private theorem scalarPower_quotientProjection (a : A) (ha : a ∈ J) (n : ℕ) 
 attribute [local irreducible] completed homComplexFunctor
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Elaborating the explicit chain-map components traverses the finite tensor constructions.
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
@@ -223,7 +222,7 @@ theorem adicResidue_koszul_coefficient_augmentation
           (adicResidueQuotientModule X J U k))
         (fun k ↦ (HomologicalComplex.single (Mod O) (.up ℤ) 0).map
           (adicResidueQuotientModuleStep X J U k)) n
-    refine Eq.trans ?_ (congrArg (fun f ↦ e (n + 1) ≫ f) hmap.symm)
+    rw [hmap]
     apply HomologicalComplex.to_single_hom_ext
     let u := HomologicalComplex.singleObjXSelf (.up ℤ) 0 _ ≪≫
       (z (n + 1)).symm ≪≫ (HomologicalComplex.eval (Mod O) (.up ℤ) 0).mapIso
