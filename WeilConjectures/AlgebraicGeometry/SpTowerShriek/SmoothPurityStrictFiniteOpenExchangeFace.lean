@@ -640,36 +640,37 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
         let x ← Lean.Meta.zetaReduce (← Lean.Meta.inferType h)
         let y ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
-        let count ← IO.mkRef (0 : Nat)
-        let seen ← IO.mkRef ({} : Std.HashSet (Lean.Expr × Lean.Expr))
-        let rec diff (a b : Lean.Expr) (depth : Nat) : Lean.MetaM Unit := do
+        let mut count := 0
+        let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
+        let mut todo := #[(x, y)]
+        while !todo.isEmpty && count < 12 do
+          let (a, b) := todo.back!
+          todo := todo.pop
           let a := a.consumeMData
           let b := b.consumeMData
-          if a == b || depth == 0 || (← count.get) >= 12 then return
-          if (← seen.get).contains (a, b) then return
-          seen.modify fun s => s.insert (a, b)
-          if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then return
+          if a == b || seen.contains (a, b) then continue
+          seen := seen.insert (a, b)
+          if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then continue
           if a.getAppFn == b.getAppFn && a.getAppNumArgs == b.getAppNumArgs then
             for a' in a.getAppArgs, b' in b.getAppArgs do
-              diff a' b' (depth - 1)
+              todo := todo.push (a', b')
           else
-            count.modify (· + 1)
+            count := count + 1
             Lean.logInfo m!"NATIVE DIFFERENCE: {a.getAppFn} versus {b.getAppFn}"
-        diff x y 30
         exactByConversion h)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
@@ -682,9 +683,9 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
-  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
+  dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
     exactByConversion h
