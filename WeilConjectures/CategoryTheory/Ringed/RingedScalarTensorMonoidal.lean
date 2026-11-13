@@ -336,8 +336,7 @@ variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
   (M : CoefficientTensorModels.{r, c, v, w} J R A)
   (β : @SymmetricCategory _ _ A.monoidal)
   (h : RingedDerivedTensorCoherence.{c, v, r, w} J R A M β)
-set_option profiler true in
-set_option maxHeartbeats 5000000 in
+set_option trace.profiler true in
 -- Elaborating the model coherences unfolds nested sheaf and complex tensor structures.
 private def modelCore :
     letI := complexMonoidal.{c, v, r} J R
@@ -514,8 +513,7 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option profiler true in
-set_option maxHeartbeats 3000000 in
+set_option trace.profiler true in
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
