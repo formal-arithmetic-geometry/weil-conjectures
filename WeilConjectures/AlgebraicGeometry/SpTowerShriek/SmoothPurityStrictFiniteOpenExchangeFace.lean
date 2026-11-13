@@ -518,6 +518,31 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
+-- Reconcile the generic-ring instance expressions once at the finite coefficient level.
+private theorem finite_native_open_unit_mate
+    {U' U Z' Z : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ Z'}
+    {j : U ⟶ Z} {g : Z' ⟶ Z} [IsOpenImmersion j] [IsOpenImmersion j']
+    (sq : IsPullback h j' j g) (n : ℕ)
+    (N : DerivedCategory (Sheaf (ProEt.topology U)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))))) :
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').unit.app
+        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.obj N) ≫
+      (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j').leftDerivedFunctor.map
+        ((leftDerivedOpenImmersionLowerShriekBaseChangeIso
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq).hom.app N) =
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) h).leftDerivedFunctor.map
+        ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).unit.app N) ≫
+      (leftDerivedUpperStarSquareIso
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).inv.app
+        ((openImmersionLowerShriek
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
+  have HU := native_open_unit_mate (R l E n) sq N
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
+    exactByConversion h
+
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
@@ -640,30 +665,34 @@ private theorem open_exchange_inverse (b : Base l E)
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      convert (preTransparency := .reducible) HU <;> rfl) (by
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      convert (preTransparency := .reducible) HU <;> rfl)
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      exact HU)
     (by
       intro M
-      have HU := native_open_unit_mate (R l E n) sq M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      convert (preTransparency := .reducible) HU <;> rfl)
+      have HU := finite_native_open_unit_mate l E sq n M
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      exact HU)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      convert (preTransparency := .reducible) he <;> rfl)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+        exactByConversion h)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      convert (preTransparency := .reducible) HC <;> rfl) N
-  dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  convert (preTransparency := .reducible) H <;> rfl
+      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
+      exact HC) N
+  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    exactByConversion h
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
