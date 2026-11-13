@@ -87,10 +87,9 @@ private theorem finiteSystemDerivedComposition_hom_app_sequence {X Y Z : Scheme.
           (integralComparisonDerivedSequencePullback l E h).obj
             ((integralComparisonDerivedSequencePullback l E f).obj A)) =
       (integralComparisonSystemComposition l E h f).hom.app A := by
-  exact congrArg (fun a : integralComparisonDerivedSequencePullback l E (h ≫ f) ≅
-      integralComparisonDerivedSequencePullback l E f ⋙
-        integralComparisonDerivedSequencePullback l E h ↦ a.hom.app A)
+  have e := congrArg (fun a ↦ a.hom.app A)
     (finiteSystemDerivedComposition_eq l E h f)
+  exact e
 
 set_option profiler true in
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
