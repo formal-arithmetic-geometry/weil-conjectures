@@ -242,7 +242,12 @@ theorem abelianCechHorseshoe_total_boundary
         HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ  := by
   classical
   let R := ShortComplex.mk α β hαβ
-  let V := R.map (totalCechFunctor U)
+  let V := ShortComplex.mk
+    (X₁ := (abelianCechDouble U I₁).total (.up ℕ))
+    (X₂ := (abelianCechDouble U I₂).total (.up ℕ))
+    (X₃ := (abelianCechDouble U I₃).total (.up ℕ))
+    ((totalCechFunctor U).map α) ((totalCechFunctor U).map β)
+    (by rw [← Functor.map_comp, hαβ, Functor.map_zero])
   have hV : V.ShortExact := totalCech_shortExact U R hrows (fun n ↦ I₁.injective n)
   let A := (ShortComplex.mk α β hαβ).map
     ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj
