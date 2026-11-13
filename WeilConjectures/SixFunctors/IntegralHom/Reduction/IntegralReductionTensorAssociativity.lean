@@ -31,6 +31,12 @@ private theorem reduction_iso_inv_section_of_hom_section
   rw [← h]
   exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
 
+private theorem reduction_map_inverse_cancel
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {X Y : C} (e : X ≅ Y) (f : Y ≅ X) (h : e.symm = f) :
+    F.map e.hom ≫ F.map f.hom = 𝟙 (F.obj X) := by
+  rw [← h, ← F.map_comp, e.hom_inv_id, F.map_id]
+
 private theorem reduction_tensorComparison_transport
     {C D : Type*} [Category C] [Category D]
     {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
@@ -385,14 +391,7 @@ private theorem nativeReductionMonoidal
         dsimp only [cS]
         rw [hTS']
         exact hrepS.symm
-      have hcan : DerivedCategory.Q.map beta ≫ DerivedCategory.Q.map (κ.hom.app (P, Q)) =
-          𝟙 _ := by
-        rw [← Functor.map_comp]
-        have hh : beta ≫ κ.hom.app (P, Q) = 𝟙 _ := by
-          change beta ≫ (κ.app (P, Q)).hom = _
-          rw [← hbκ]
-          exact (asIso beta).hom_inv_id
-        rw [hh, CategoryTheory.Functor.map_id]
+      have hcan := reduction_map_inverse_cancel DerivedCategory.Q (asIso beta) _ hbκ
       let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
           m.target.tensor.map (Prod.mkHom εP εQ)
