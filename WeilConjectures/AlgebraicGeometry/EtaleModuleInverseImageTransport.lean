@@ -284,6 +284,20 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
   let FU := SheafOfModules.toSheaf ((sheafCompose U.smallEtaleTopology
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
   let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
+  let RM := SheafOfModules.pushforward.{u + 1}
+    (S := (sheafCompose V.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RV)
+    (R := (sheafCompose U.smallEtaleTopology
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RU)
+    (J := V.smallGrothendieckTopology @Etale) (K := U.smallGrothendieckTopology @Etale)
+    (F := MorphismProperty.Over.pullback @Etale ⊤ f)
+    ((sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      gamma)
+  let d := Iso.refl (RM ⋙ FV)
+  have huc := adjunctionForgetUnitCounit LM RM
+    (Etale.upperStar AddCommGrpCat.{u + 1} f)
+    (Etale.lowerStar AddCommGrpCat.{u + 1} f) FV FU am a e d
+    (fun G F h ↦ (Category.comp_id _).symm.trans (hm G F h))
   have hd := etaleModuleRingIsoTensor U V f RV RU Lr c L0 LM t
   refine ⟨L0, LM, e0, e, t, am, ht, ?_, hd, hm, ?_, ?_⟩
   · intro G
@@ -297,14 +311,13 @@ theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
       ext W x
       exact (eq_of_heq (hnu.1 W x)).trans (hu W x).symm
   · intro G
-    simpa only [Adjunction.homEquiv_unit, Functor.map_id,
-      Category.comp_id] using hm G (LM.obj G) (𝟙 _)
+    exact (Category.comp_id _).symm.trans (huc.1 G)
   · intro F
-    have h := hm _ F (am.counit.app F)
-    rw [← am.homEquiv_symm_id F, Equiv.apply_symm_apply, FV.map_id] at h
-    have h' := congrArg (fun t ↦ (a.homEquiv _ (FU.obj F)).symm t) h
-    simp only [a, FV, FU, Adjunction.homEquiv_symm_id, Equiv.symm_apply_apply] at h'
-    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using
-      congrArg (fun t ↦ e.hom.app _ ≫ t) h'.symm
+    have h := huc.2 F
+    change FU.map (am.counit.app F) = e.hom.app (RM.obj F) ≫
+      (Etale.upperStar AddCommGrpCat.{u + 1} f).map (𝟙 (FU.obj F)) ≫
+        a.counit.app (FU.obj F) at h
+    rw [(Etale.upperStar AddCommGrpCat.{u + 1} f).map_id, Category.id_comp] at h
+    exact h
 
 end AlgebraicGeometry
