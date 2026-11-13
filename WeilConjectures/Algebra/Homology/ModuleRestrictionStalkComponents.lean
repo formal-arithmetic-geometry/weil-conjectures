@@ -37,7 +37,7 @@ private theorem stalkMap_smul_of_germ_smul {Y : TopCat.{u}}
     ← PresheafOfModules.germ_smul (R := R) M]
   exact h (U ⊓ V) hy _ _
 
-set_option profiler true in
+set_option trace.profiler true in
 -- Comparing stalk module structures through restriction unfolds nested colimit instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -78,38 +78,28 @@ theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Open
   let N (F : SheafOfModules.{u} (moduleRings X)) : RingedSpace.Modules Y :=
     (W.sheafOfModulesEquivOver (moduleRings X)).functor.obj
       ((SheafOfModules.overFunctor (moduleRings X) W).obj F)
-  let C (F : SheafOfModules.{u} (moduleRings X)) :
-      Limits.Cocone ((OpenNhds.inclusion y).op ⋙ (N F).val.presheaf) :=
-    { pt := TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x
-      ι :=
-        { app := fun (V : (OpenNhds y)ᵒᵖ) ↦ AddCommGrpCat.ofHom <|
-            AddMonoidHom.mk'
-              (fun s ↦ TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
-                F.val.presheaf (W.isOpenEmbedding.isOpenMap.functor.obj V.unop.1)
-                x ⟨y, V.unop.2, rfl⟩ s)
-              (fun s t ↦ map_add _ s t)
-          naturality := by
-            intro U V f
-            ext s
-            change TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
-              F.val.presheaf _ x _
-                (F.val.presheaf.map (W.isOpenEmbedding.isOpenMap.functor.map
-                  (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)).op s) = _
-            exact TopCat.Presheaf.germ_res_apply (C := Ab.{u}) (X := X.carrier)
-              F.val.presheaf
-              (W.isOpenEmbedding.isOpenMap.functor.map
-                (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)) x ⟨y, V.unop.2, rfl⟩ s } }
+  let S (F : SheafOfModules.{u} (moduleRings X)) : PresheafedSpace Ab.{u} :=
+    ⟨X.carrier, F.val.presheaf⟩
+  let d (F : SheafOfModules.{u} (moduleRings X)) :
+      (N F).val.presheaf ≅ ((S F).restrict W.isOpenEmbedding).presheaf :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl)
   let a (F : SheafOfModules.{u} (moduleRings X)) :
       TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y ⟶
         TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x :=
-    Limits.colimit.desc _ (C F)
+    (TopCat.Presheaf.stalkFunctor (X := Y.carrier) Ab.{u} y).map (d F).hom ≫
+      ((S F).restrictStalkIso W.isOpenEmbedding y).hom
   have hg (F : SheafOfModules.{u} (moduleRings X)) (V : Opens W) (hV : y ∈ V)
       (s : F.val.obj (op (W.isOpenEmbedding.isOpenMap.functor.obj V))) :
       a F (TopCat.Presheaf.germ (C := Ab.{u}) (X := Y.carrier)
         (N F).val.presheaf V y hV s) =
         TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) F.val.presheaf
           (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨y, hV, rfl⟩ s := by
-    exact ConcreteCategory.congr_hom (Limits.colimit.ι_desc (C F) (op ⟨V, hV⟩)) s
+    change ((S F).restrictStalkIso W.isOpenEmbedding y).hom
+      ((TopCat.Presheaf.stalkFunctor (X := Y.carrier) Ab.{u} y).map (d F).hom
+        (TopCat.Presheaf.germ (C := Ab.{u}) (X := Y.carrier)
+          (N F).val.presheaf V y hV s)) = _
+    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+    exact (S F).restrictStalkIso_hom_eq_germ_apply W.isOpenEmbedding V y hV s
   have hs (F : SheafOfModules.{u} (moduleRings X))
       (r : Y.presheaf.stalk y)
       (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y) :
