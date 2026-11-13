@@ -24,6 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing the geometric chart restrictions with the formal datum needs extra elaboration.
 set_option backward.isDefEq.respectTransparency false in

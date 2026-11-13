@@ -24,6 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CompletionGluingData
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- The dependent section modules and two pullback presentations require extra elaboration steps.
 /-- The sheaf equalizer identifies matching sections with compatible tuples,

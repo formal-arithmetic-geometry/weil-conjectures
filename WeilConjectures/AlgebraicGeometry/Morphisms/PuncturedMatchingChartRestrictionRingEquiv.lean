@@ -58,6 +58,7 @@ private theorem principalOpen_image
     inf_eq_right.mpr hf]
   exact SpecMap_preimage_basicOpen D.baseMap f
 
+set_option trace.profiler true in
 set_option maxHeartbeats 600000 in
 -- The dependent chart equivalences and their scalar actions require extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
