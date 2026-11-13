@@ -177,7 +177,19 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
   apply scalar_composition_paste (U := UL h)
-    (H := integralComparisonDerivedSequenceScalar l E L ι Z) <;> assumption
+    (H := integralComparisonDerivedSequenceScalar l E L ι Z)
+  · exact N1
+  · exact IIIk
+  · exact IIIh
+  · exact Ng
+  · exact Np
+  · exact CE
+  · exact mix
+  · exact eE
+  · exact eL
+  · exact IIIhk
+  · exact Na
+  · exact CL
 
 end SystemScalar
 
