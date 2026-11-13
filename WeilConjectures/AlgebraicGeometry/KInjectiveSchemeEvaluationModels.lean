@@ -88,6 +88,7 @@ private theorem tensorModel_isIso_right (Y : Scheme.{u})
   change IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q F V)
   infer_instance
 
+-- Keep the monoidal transport calculation independent of the concrete derived instances.
 private theorem tensorHomEquiv_evaluation_models {C : Type*} [Category* C]
     [MonoidalCategory C] (H : Cᵒᵖ × C ⥤ C)
     (e : ∀ A B D : C, (A ⟶ H.obj (op B, D)) ≃ (A ⊗ B ⟶ D))
@@ -122,7 +123,6 @@ private theorem tensorHomEquiv_evaluation_models {C : Type*} [Category* C]
   apply (cancel_epi (N ◁ d.hom)).1
   simpa [tensorIso_hom, tensorHom_def', Category.assoc, ← whiskerLeft_comp] using heq
 
-set_option profiler true in
 /-- Compute derived evaluation using ordinary complexes on the same scheme site.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ, representative calculation.
 (blueprint: lem-pc-kinjective-scheme-evaluation-models).
