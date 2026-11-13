@@ -131,14 +131,11 @@ lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f
         L((g'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ f).inv.app K) ≫
         (boundedConstructibleUpperStarCompatibility Λ ℓ g').inv.app
           ((boundedConstructibleUpperStar Λ ℓ f).obj K) := by
-  change L((f'.left)^*⟦Λ⟧).map (𝟙 (L((g.left)^*⟦Λ⟧).obj K.obj)) ≫ 𝟙 _ ≫
-      ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
-    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
-      ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj ≫
-      L((g'.left)^*⟦Λ⟧).map (𝟙 (L((f.left)^*⟦Λ⟧).obj K.obj)) ≫ 𝟙 _
-  simpa only [(L((f'.left)^*⟦Λ⟧)).map_id, (L((g'.left)^*⟦Λ⟧)).map_id,
-    Category.id_comp, Category.comp_id] using
-    boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
+  simp only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso_inv_app,
+    (L((f'.left)^*⟦Λ⟧)).map_id, (L((g'.left)^*⟦Λ⟧)).map_id,
+    Category.id_comp, Category.comp_id]
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K).trans
+    (Category.comp_id _).symm
 
 end SquareComparison
 
