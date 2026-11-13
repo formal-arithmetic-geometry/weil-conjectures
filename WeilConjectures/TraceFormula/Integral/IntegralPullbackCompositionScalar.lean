@@ -52,8 +52,11 @@ attribute [local reducible] integralSystemReduction
 /-- Scalar extension with the finite-system source and target displayed explicitly. -/
 private abbrev integralCompositionFiniteScalar (X : Scheme.{u}) :
     finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) X ⥤
-      finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X :=
-  integralComparisonDerivedSequenceScalar l E L ι X
+      finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X where
+  obj := (integralComparisonDerivedSequenceScalar l E L ι X).obj
+  map := (integralComparisonDerivedSequenceScalar l E L ι X).map
+  map_id := (integralComparisonDerivedSequenceScalar l E L ι X).map_id
+  map_comp := (integralComparisonDerivedSequenceScalar l E L ι X).map_comp
 
 private abbrev integralCompositionFiniteScalarPullback {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -62,14 +65,16 @@ private abbrev integralCompositionFiniteScalarPullback {X Y : Scheme.{u}}
         integralCompositionFiniteScalar l E L ι X ≅
       integralCompositionFiniteScalar l E L ι Y ⋙
         finiteSystemDerivedPullback (integralSystemRings l L) (integralSystemTransition l L) f :=
-  integralComparisonSystemScalarPullback l E L ι f
+  NatIso.ofComponents (fun M ↦ (integralComparisonSystemScalarPullback l E L ι f).app M)
+    (fun a ↦ (integralComparisonSystemScalarPullback l E L ι f).hom.naturality a)
 
 private abbrev integralCompositionFiniteScalarIso (X : Scheme.{u})
     [∀ x : X, Invertible (l : X.residueField x)] :
     sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
         E L ι X ⋙ integralSystemReduction l L X ≅
       integralSystemReduction l E X ⋙ integralCompositionFiniteScalar l E L ι X :=
-  integralSystemScalarIso l E L ι X
+  NatIso.ofComponents (fun M ↦ (integralSystemScalarIso l E L ι X).app M)
+    (fun a ↦ (integralSystemScalarIso l E L ι X).hom.naturality a)
 
 private theorem integralCompositionFiniteScalar_square {X Y : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
