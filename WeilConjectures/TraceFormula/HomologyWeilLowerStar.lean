@@ -115,7 +115,6 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
   simpa only [leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc] using h2.symm
 
-set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `boundedConstructiblePullbackSquareComparison_hom_app_hom` through the compatibilities of the
 restricted derived pullbacks with the inclusions. -/
