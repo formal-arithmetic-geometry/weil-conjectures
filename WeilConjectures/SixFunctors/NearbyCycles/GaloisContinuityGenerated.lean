@@ -132,7 +132,7 @@ theorem exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated [QuasiComp
   let κ := N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C
   have hgen : IsGeneratedByFinitelyPresentable.{u} (Φ.mapCocone
       ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K)).pt :=
-    hfg.of_epi (H.map κ.inv ≫ Ψ.map eK.inv)
+    hfg.of_iso ((Ψ.mapIso eK) ≪≫ H.mapIso κ).symm
   obtain ⟨j, hj⟩ := hgen.exists_epi_ι hΦ
   let L' : FiniteGaloisIntermediateField L Ω := j
   refine ⟨L', fun σ hσ ↦ ?_⟩
