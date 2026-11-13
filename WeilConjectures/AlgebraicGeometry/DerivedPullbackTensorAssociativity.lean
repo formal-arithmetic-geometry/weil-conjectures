@@ -383,7 +383,8 @@ private theorem derivedPullback_tensor_associativity_kFlat {T X : Scheme.{uModel
           Functor.LaxMonoidal.μ QT (Fc.obj K) (Fc.obj L) =
         (derivedPullback g).map (Functor.LaxMonoidal.μ QX K L) ≫ e (K ⊗ L) ≫
           QT.map (Functor.OplaxMonoidal.δ Fc K L) := by
-    rw [← hφeq K L, ← Iso.inv_comp_eq]
+    rw [← hφeq K L]
+    apply (Iso.inv_comp_eq ((μ.app (QX.obj K)).app (QX.obj L))).2
     exact (hμ K L hK hL).symm
   have hFE : F = Scheme.Modules.tensorPullback g :=
     CategoryTheory.Functor.ext hF (fun _ _ a ↦ hmap a)
