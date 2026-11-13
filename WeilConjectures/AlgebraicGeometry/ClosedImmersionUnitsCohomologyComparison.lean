@@ -69,6 +69,8 @@ private theorem epi_pushforward_closedEmbedding
     exact hzero.symm
 
 set_option profiler true in
+/-- The cohomology comparison for an exact adjunction is the Ext-adjunction bijection,
+precomposed with the identification of constant sheaves. -/
 private theorem bijective_cohomologyMap_counit
     {C D : Type*} [Category C] [Category D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -90,13 +92,9 @@ private theorem bijective_cohomologyMap_counit
   have hc := (CategoryTheory.Abelian.Ext.precompAddEquiv e F p).bijective.comp hb
   convert hc using 1
   funext x
-  change (Sheaf.H.map (adj.counit.app F) p)
-    ((Sheaf.H.mapFunctor L e (R.obj F) p) x) =
-      (CategoryTheory.Abelian.Ext.precompAddEquiv e F p) (adj.mapExtCounit _ F p x)
-  rw [Sheaf.H.map_apply, Sheaf.H.mapFunctor_apply,
-    Adjunction.mapExtCounit_apply, CategoryTheory.Abelian.Ext.precompAddEquiv_apply]
-  exact CategoryTheory.Abelian.Ext.comp_assoc _ _ _
-    (zero_add p) (add_zero p) (by omega)
+  exact CategoryTheory.Abelian.Ext.comp_assoc_of_third_deg_zero
+    (CategoryTheory.Abelian.Ext.mk₀ e.hom) (x.mapExactFunctor L)
+    (CategoryTheory.Abelian.Ext.mk₀ (adj.counit.app F)) (zero_add p)
 
 namespace AlgebraicGeometry.Scheme
 
