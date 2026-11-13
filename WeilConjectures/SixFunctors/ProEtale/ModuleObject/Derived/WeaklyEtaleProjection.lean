@@ -116,15 +116,21 @@ instance preservesColimitsOfShape_weaklyEtaleLowerShriek_discrete_π (j : ℤ) :
     (weaklyEtaleLowerShriekUpperStarAdjunction Λ g).leftAdjoint_preservesColimits
   inferInstance
 
-set_option synthInstance.maxHeartbeats 400000 in
 set_option profiler true in
--- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The pullback of module objects is monoidal on cochain complexes. -/
 noncomputable instance monoidal_upperStar_mapHomologicalComplex :
-    ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal :=
-  Functor.mapCochainComplexMonoidal _
+    ((g)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).Monoidal := by
+  have (Z : Scheme.{u}) : HasColimitsOfSize.{0, 0}
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+    inferInstance
+  have (Z : Scheme.{u})
+      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+      PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
+  have (Z : Scheme.{u})
+      (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+      PreservesColimitsOfSize.{0, 0} (tensorRight M) := inferInstance
+  exact Functor.mapCochainComplexMonoidal _
 
-set_option maxHeartbeats 3200000 in
 set_option profiler true in
 -- the chase unfolds the derived unit, counit and tensor comparison on complexes of module objects
 open HomotopyCategory DerivedCategory in
