@@ -36,8 +36,6 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-set_option profiler true in
-
 /-- A section of the pushforward of an open extension has a finite support diagram
 coming from a quasi-compact open in the affine test object. The maps `a` and `b` are
 homomorphisms of section groups and intertwine the two specified open counits.
@@ -132,6 +130,7 @@ theorem sfOpenCounit_finiteSupportDiagram {V W T : Scheme.{u}} (p : V ⟶ T)
   have hloc := ProEtale.openExtension_localSupport R
     (pullback.fst p i) ((sfIntrinsicModuleEquivalence (pullback p i) A).inverse.obj M)
       (Lr.obj Q₀)
+  -- Select witnesses without repeatedly eliminating into the large dependent diagram goal.
   let S := (hloc s).choose
   have hS := (hloc s).choose_spec.1
   have hsupport := (hloc s).choose_spec.2
