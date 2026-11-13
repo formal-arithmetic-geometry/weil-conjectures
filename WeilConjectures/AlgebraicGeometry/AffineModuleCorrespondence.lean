@@ -54,6 +54,17 @@ local instance instHasLeftKanExtension_affineModuleCorrespondence
   exact Functor.HasLeftKanExtension.mk _
     (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
 
+-- Share the sheafification instances used by the quasi-coherence predicates.
+local instance instHasWeakSheafifyOver_affineModuleCorrespondence
+    (Y : Scheme.{u}) (V : Opens Y) :
+    HasWeakSheafify ((Opens.grothendieckTopology Y).over V) AddCommGrpCat.{u} :=
+  inferInstance
+
+local instance instWEqualsLocallyBijectiveOver_affineModuleCorrespondence
+    (Y : Scheme.{u}) (V : Opens Y) :
+    (Opens.grothendieckTopology Y).over V |>.WEqualsLocallyBijective AddCommGrpCat.{u} :=
+  inferInstance
+
 set_option hygiene false in
 local notation "𝓙" T => Opens.grothendieckTopology T
 set_option hygiene false in
@@ -115,7 +126,7 @@ private theorem equivalence_on_full_subcategories
         exact β.naturality f.hom)
   exact ⟨CategoryTheory.Equivalence.mk F' G' a.symm b.symm, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
