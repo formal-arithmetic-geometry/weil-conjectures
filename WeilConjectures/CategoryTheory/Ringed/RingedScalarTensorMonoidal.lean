@@ -331,13 +331,148 @@ private theorem kFlatMonoidal :
   exact {
   prop_unit := unitKFlat.{c, v, r} J R
   prop_tensor P Q hP hQ := coefficientTotalTensor_isKFlat.{r, c, v} J R P Q hP hQ }
+private theorem scalarModelUnitInverse {D : Type*} [Category* D]
+    {X Y Z T : D} (u : X ≅ Y) (v : Z ≅ Y) (f : X ⟶ T) (g : T ⟶ Z)
+    (h : f ≫ g ≫ v.hom = u.hom) : v.inv = u.inv ≫ f ≫ g := by
+  apply (cancel_mono v.hom).1
+  simp only [Category.assoc, h, Iso.inv_hom_id]
+
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
   (A : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
   (M : CoefficientTensorModels.{r, c, v, w} J R A)
   (β : @SymmetricCategory _ _ A.monoidal)
   (h : RingedDerivedTensorCoherence.{c, v, r, w} J R A M β)
-set_option trace.profiler true in
--- Elaborating the model coherences unfolds nested sheaf and complex tensor structures.
+set_option profiler true in
+private theorem scalarTensorModel_naturality_left
+    {P P' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ}
+    (Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) (f : P ⟶ P')
+    (hP : P.IsKFlatIndependentCoefficients) (hP' : P'.IsKFlatIndependentCoefficients)
+    (hQ : Q.IsKFlatIndependentCoefficients) :
+    letI := complexMonoidal.{c, v, r} J R
+    letI := A.monoidal
+    (M.iso J R A P Q hP hQ).hom ≫
+        DerivedCategory.Q.map f ▷ DerivedCategory.Q.obj Q =
+      DerivedCategory.Q.map (f ▷ Q) ≫
+        (M.iso J R A P' Q hP' hQ).hom := by
+  letI := complexMonoidal.{c, v, r} J R
+  letI := A.monoidal
+  letI := complexStruct.{c, v, r} J R
+  have hh := M.comparison.hom.naturality (X := (⟨P, hP⟩, ⟨Q, hQ⟩)) (Y := (⟨P', hP'⟩, ⟨Q, hQ⟩))
+    (ObjectProperty.homMk f, 𝟙 _)
+  change DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map
+      (f, 𝟙 Q)) ≫ (M.iso J R A P' Q hP' hQ).hom =
+    (M.iso J R A P Q hP hQ).hom ≫
+      A.tensor.map (DerivedCategory.Q.map f, DerivedCategory.Q.map (𝟙 Q)) at hh
+  with_unfolding_all simpa only [coefficientTotalTensor, Functor.uncurry_obj_map, Functor.map_id,
+    Category.comp_id, Functor.map₂HomologicalComplex_map_app,
+    CoefficientClosedStructure.tensor, MonoidalCategory.tensor, tensorHom_id,
+    complex_whiskerRight.{c, v, r} J R] using hh.symm
+
+set_option profiler true in
+private theorem scalarTensorModel_naturality_right
+    {Q Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ}
+    (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) (f : Q ⟶ Q')
+    (hQ : Q.IsKFlatIndependentCoefficients) (hQ' : Q'.IsKFlatIndependentCoefficients)
+    (hP : P.IsKFlatIndependentCoefficients) :
+    letI := complexMonoidal.{c, v, r} J R
+    letI := A.monoidal
+    (M.iso J R A P Q hP hQ).hom ≫
+        DerivedCategory.Q.obj P ◁ DerivedCategory.Q.map f =
+      DerivedCategory.Q.map (P ◁ f) ≫
+        (M.iso J R A P Q' hP hQ').hom := by
+  letI := complexMonoidal.{c, v, r} J R
+  letI := A.monoidal
+  letI := complexStruct.{c, v, r} J R
+  have hh := M.comparison.hom.naturality (X := (⟨P, hP⟩, ⟨Q, hQ⟩)) (Y := (⟨P, hP⟩, ⟨Q', hQ'⟩))
+    (𝟙 _, ObjectProperty.homMk f)
+  change DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map
+      (𝟙 P, f)) ≫ (M.iso J R A P Q' hP hQ').hom =
+    (M.iso J R A P Q hP hQ).hom ≫
+      A.tensor.map (DerivedCategory.Q.map (𝟙 P), DerivedCategory.Q.map f) at hh
+  with_unfolding_all simpa only [coefficientTotalTensor, Functor.uncurry_obj_map, Functor.map_id,
+    NatTrans.id_app, Category.id_comp, Functor.map₂HomologicalComplex_obj_map,
+    CoefficientClosedStructure.tensor, MonoidalCategory.tensor, id_tensorHom,
+    complex_whiskerLeft.{c, v, r} J R] using hh.symm
+
+set_option profiler true in
+private theorem scalarTensorModel_associativity
+    (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
+    (hN : N.IsKFlatIndependentCoefficients) :
+    letI := complexMonoidal.{c, v, r} J R
+    letI := A.monoidal
+    (M.iso J R A (P ⊗ Q) N
+        (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ hP hQ) hN).hom ≫
+        (M.iso J R A P Q hP hQ).hom ▷
+          DerivedCategory.Q.obj N ≫
+        (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
+          (DerivedCategory.Q.obj N)).hom =
+      DerivedCategory.Q.map (α_ P Q N).hom ≫
+        (M.iso J R A P (Q ⊗ N) hP
+          (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ hQ hN)).hom ≫
+        DerivedCategory.Q.obj P ◁
+          (M.iso J R A Q N hQ hN).hom := by
+  letI := complexMonoidal.{c, v, r} J R
+  letI := A.monoidal
+  letI := complexStruct.{c, v, r} J R
+  have hh := RingedKFlatModel.associator_model_native.{c, v, r, w} J R A M β h
+    P Q N hP hQ hN
+  simp only [h.tensorIso_both _ _ (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _
+    hP hQ) hN,
+    h.tensorIso_both _ _ hP (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _
+      hQ hN)] at hh
+  with_unfolding_all simpa only [CoefficientClosedStructure.tensor,
+    MonoidalCategory.tensor, tensorHom_id, id_tensorHom] using hh
+
+set_option profiler true in
+private theorem scalarTensorModel_left_unitality
+    (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) :
+    letI := complexMonoidal.{c, v, r} J R
+    letI := A.monoidal
+    (λ_ (DerivedCategory.Q.obj P)).inv =
+      DerivedCategory.Q.map (λ_ P).inv ≫
+        (M.iso J R A (𝟙_ _) P (unitKFlat.{c, v, r} J R) hP).hom ≫
+        h.unitIso.inv ▷ DerivedCategory.Q.obj P := by
+  letI := complexMonoidal.{c, v, r} J R
+  letI := A.monoidal
+  letI := complexStruct.{c, v, r} J R
+  have hh := RingedKFlatModel.leftUnitor_model_native.{c, v, r, w} J R A M β h
+    P hP
+  simp only [h.tensorIso_both _ _ (unitKFlat.{c, v, r} J R) hP] at hh
+  with_unfolding_all change (M.iso J R A (𝟙_ _) P (unitKFlat.{c, v, r} J R) hP).hom ≫
+    (h.unitIso.inv ⊗ₘ 𝟙 (DerivedCategory.Q.obj P)) ≫
+      (λ_ (DerivedCategory.Q.obj P)).hom =
+    DerivedCategory.Q.map (λ_ P).hom at hh
+  simpa only [tensorHom_id] using
+    scalarModelUnitInverse (DerivedCategory.Q.mapIso (λ_ P))
+      (λ_ (DerivedCategory.Q.obj P)) _ _ hh
+
+set_option profiler true in
+private theorem scalarTensorModel_right_unitality
+    (P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) :
+    letI := complexMonoidal.{c, v, r} J R
+    letI := A.monoidal
+    (ρ_ (DerivedCategory.Q.obj P)).inv =
+      DerivedCategory.Q.map (ρ_ P).inv ≫
+        (M.iso J R A P (𝟙_ _) hP (unitKFlat.{c, v, r} J R)).hom ≫
+        DerivedCategory.Q.obj P ◁ h.unitIso.inv := by
+  letI := complexMonoidal.{c, v, r} J R
+  letI := A.monoidal
+  letI := complexStruct.{c, v, r} J R
+  have hh := RingedKFlatModel.rightUnitor_model_native.{c, v, r, w} J R A M β h
+    P hP
+  simp only [h.tensorIso_both _ _ hP (unitKFlat.{c, v, r} J R)] at hh
+  with_unfolding_all change (M.iso J R A P (𝟙_ _) hP (unitKFlat.{c, v, r} J R)).hom ≫
+    (𝟙 (DerivedCategory.Q.obj P) ⊗ₘ h.unitIso.inv) ≫
+      (ρ_ (DerivedCategory.Q.obj P)).hom =
+    DerivedCategory.Q.map (ρ_ P).hom at hh
+  simpa only [id_tensorHom] using
+    scalarModelUnitInverse (DerivedCategory.Q.mapIso (ρ_ P))
+      (ρ_ (DerivedCategory.Q.obj P)) _ _ hh
+
+set_option profiler true in
 private def modelCore :
     letI := complexMonoidal.{c, v, r} J R
     letI := kFlatMonoidal.{c, v, r} J R
@@ -351,95 +486,18 @@ private def modelCore :
     (F := coefficientKFlatInclusion.{r, c, v} J R ⋙ DerivedCategory.Q.{w}) h.unitIso
     (fun P Q ↦ (M.iso J R A P.obj Q.obj P.property Q.property).symm) ?_ ?_ ?_ ?_ ?_
   · intro P P' f Q
-    with_unfolding_all change
-      (M.iso J R A P.obj Q.obj P.property Q.property).hom ≫
-          DerivedCategory.Q.map f.hom ▷ DerivedCategory.Q.obj Q.obj =
-        DerivedCategory.Q.map (f.hom ▷ Q.obj) ≫
-          (M.iso J R A P'.obj Q.obj P'.property Q.property).hom
-    have hh := h.tensorIso_naturality P.obj Q.obj P'.obj Q.obj
-      (Or.inl P.property) (Or.inl P'.property) f.hom (𝟙 Q.obj)
-    rw [h.tensorIso_both P.obj Q.obj P.property Q.property,
-      h.tensorIso_both P'.obj Q.obj P'.property Q.property] at hh
-    with_unfolding_all simpa only [coefficientTotalTensor, Functor.uncurry_obj_map, Functor.map_id,
-      Category.comp_id, Functor.map₂HomologicalComplex_map_app,
-      CoefficientClosedStructure.tensor, MonoidalCategory.tensor, tensorHom_id,
-      complex_whiskerRight.{c, v, r} J R] using hh.symm
+    exact scalarTensorModel_naturality_left J R A M Q.obj f.hom
+      P.property P'.property Q.property
   · intro Q Q' P f
-    with_unfolding_all change
-      (M.iso J R A P.obj Q.obj P.property Q.property).hom ≫
-          DerivedCategory.Q.obj P.obj ◁ DerivedCategory.Q.map f.hom =
-        DerivedCategory.Q.map (P.obj ◁ f.hom) ≫
-          (M.iso J R A P.obj Q'.obj P.property Q'.property).hom
-    have hh := h.tensorIso_naturality P.obj Q.obj P.obj Q'.obj
-      (Or.inl P.property) (Or.inl P.property) (𝟙 P.obj) f.hom
-    rw [h.tensorIso_both P.obj Q.obj P.property Q.property,
-      h.tensorIso_both P.obj Q'.obj P.property Q'.property] at hh
-    with_unfolding_all simpa only [coefficientTotalTensor, Functor.uncurry_obj_map, Functor.map_id,
-      NatTrans.id_app, Category.id_comp, Functor.map₂HomologicalComplex_obj_map,
-      CoefficientClosedStructure.tensor, MonoidalCategory.tensor, id_tensorHom,
-      complex_whiskerLeft.{c, v, r} J R] using hh.symm
+    exact scalarTensorModel_naturality_right J R A M P.obj f.hom
+      Q.property Q'.property P.property
   · intro P Q N
-    with_unfolding_all change
-      (M.iso J R A (P.obj ⊗ Q.obj) N.obj
-          (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ P.property Q.property) N.property).hom ≫
-          (M.iso J R A P.obj Q.obj P.property Q.property).hom ▷
-            DerivedCategory.Q.obj N.obj ≫
-          (α_ (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)
-            (DerivedCategory.Q.obj N.obj)).hom =
-        DerivedCategory.Q.map (α_ P.obj Q.obj N.obj).hom ≫
-          (M.iso J R A P.obj (Q.obj ⊗ N.obj) P.property
-            (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ Q.property N.property)).hom ≫
-          DerivedCategory.Q.obj P.obj ◁
-            (M.iso J R A Q.obj N.obj Q.property N.property).hom
-    have hh := RingedKFlatModel.associator_model_native.{c, v, r, w} J R A M β h
-      P.obj Q.obj N.obj P.property Q.property N.property
-    rw [h.tensorIso_both _ _ (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _
-      P.property Q.property) N.property,
-      h.tensorIso_both _ _ P.property (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _
-        Q.property N.property)] at hh
-    with_unfolding_all change
-      (M.iso J R A (P.obj ⊗ Q.obj) N.obj
-          (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ P.property Q.property) N.property).hom ≫
-          ((M.iso J R A P.obj Q.obj P.property Q.property).hom ⊗ₘ
-            𝟙 (DerivedCategory.Q.obj N.obj)) ≫
-          (α_ (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj)
-            (DerivedCategory.Q.obj N.obj)).hom =
-        DerivedCategory.Q.map (α_ P.obj Q.obj N.obj).hom ≫
-          (M.iso J R A P.obj (Q.obj ⊗ N.obj) P.property
-            (coefficientTotalTensor_isKFlat.{r, c, v} J R _ _ Q.property N.property)).hom ≫
-          (𝟙 (DerivedCategory.Q.obj P.obj) ⊗ₘ
-            (M.iso J R A Q.obj N.obj Q.property N.property).hom) at hh
-    simpa only [tensorHom_id, id_tensorHom] using hh
+    exact scalarTensorModel_associativity J R A M β h P.obj Q.obj N.obj
+      P.property Q.property N.property
   · intro P
-    with_unfolding_all change (λ_ (DerivedCategory.Q.obj P.obj)).inv =
-      DerivedCategory.Q.map (λ_ P.obj).inv ≫
-        (M.iso J R A (𝟙_ _) P.obj (unitKFlat.{c, v, r} J R) P.property).hom ≫
-        h.unitIso.inv ▷ DerivedCategory.Q.obj P.obj
-    have hh := RingedKFlatModel.leftUnitor_model_native.{c, v, r, w} J R A M β h
-      P.obj P.property
-    rw [h.tensorIso_both _ _ (unitKFlat.{c, v, r} J R) P.property] at hh
-    with_unfolding_all change (M.iso J R A (𝟙_ _) P.obj (unitKFlat.{c, v, r} J R) P.property).hom ≫
-      (h.unitIso.inv ⊗ₘ 𝟙 (DerivedCategory.Q.obj P.obj)) ≫
-        (λ_ (DerivedCategory.Q.obj P.obj)).hom =
-      DerivedCategory.Q.map (λ_ P.obj).hom at hh
-    apply (cancel_mono (λ_ (DerivedCategory.Q.obj P.obj)).hom).1
-    rw [Category.assoc, Category.assoc, ← tensorHom_id, hh]
-    simp [← Functor.map_comp]
+    exact scalarTensorModel_left_unitality J R A M β h P.obj P.property
   · intro P
-    with_unfolding_all change (ρ_ (DerivedCategory.Q.obj P.obj)).inv =
-      DerivedCategory.Q.map (ρ_ P.obj).inv ≫
-        (M.iso J R A P.obj (𝟙_ _) P.property (unitKFlat.{c, v, r} J R)).hom ≫
-        DerivedCategory.Q.obj P.obj ◁ h.unitIso.inv
-    have hh := RingedKFlatModel.rightUnitor_model_native.{c, v, r, w} J R A M β h
-      P.obj P.property
-    rw [h.tensorIso_both _ _ P.property (unitKFlat.{c, v, r} J R)] at hh
-    with_unfolding_all change (M.iso J R A P.obj (𝟙_ _) P.property (unitKFlat.{c, v, r} J R)).hom ≫
-      (𝟙 (DerivedCategory.Q.obj P.obj) ⊗ₘ h.unitIso.inv) ≫
-        (ρ_ (DerivedCategory.Q.obj P.obj)).hom =
-      DerivedCategory.Q.map (ρ_ P.obj).hom at hh
-    apply (cancel_mono (ρ_ (DerivedCategory.Q.obj P.obj)).hom).1
-    rw [Category.assoc, Category.assoc, ← id_tensorHom, hh]
-    simp [← Functor.map_comp]
+    exact scalarTensorModel_right_unitality J R A M β h P.obj P.property
 
 end CategoryTheory.ScalarMonoidalProof
 
@@ -513,7 +571,7 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option trace.profiler true in
+set_option profiler true in
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
