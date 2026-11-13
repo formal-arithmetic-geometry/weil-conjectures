@@ -48,18 +48,22 @@ private theorem tensor_naturality {C : Type*} [Category* C] [MonoidalCategory C]
   rw [← Category.assoc, ← comp_whiskerRight, h, comp_whiskerRight, Category.assoc, k]
   exact (Category.assoc _ _ _).symm
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem evaluation_chain_natural (X : Scheme.{u})
+private theorem evaluation_chain_localized (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (f : M ⟶ N) :
     letI := schemeDerivedTensorMonoidal X
-    ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
-        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) ⊗ₘ
-      𝟙 (DerivedCategory.Q.obj L)) ≫ evaluation X L N =
-      evaluation X L M ≫ DerivedCategory.Q.map f := by
+    let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+    let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+      (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+      ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+    (DerivedCategory.Q.map h ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫
+        (pullbackTensorModelMap X _ L ≫
+          DerivedCategory.Q.map (schemeTensorHomUncurry X _ L N (𝟙 _)) ≫
+          schemeHomResolutionInverse X N) =
+      (pullbackTensorModelMap X _ L ≫
+          DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
+          schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map f := by
   let := schemeDerivedTensorMonoidal X
   let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
   let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
@@ -76,39 +80,66 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
   rw [hid, H.map_id] at hi
   simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hi hf
   simp only [id_tensorHom_id, Category.id_comp] at hf
-  have he : (DerivedCategory.Q.map h ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫
-      (pullbackTensorModelMap X _ L ≫
-        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L N (𝟙 _)) ≫
-        schemeHomResolutionInverse X N) =
-      (pullbackTensorModelMap X _ L ≫
-        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
-        schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map f := hi.symm.trans hf
-  have hn : (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
-      (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) ≫
+  exact hi.symm.trans hf
+
+private theorem evaluation_chain_resolution_natural (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (f : M ⟶ N) :
+    letI := schemeDerivedTensorMonoidal X
+    let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+    let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+      (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+      ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+    (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
+        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) ≫
         (schemeDerivedInternalHomResolutionIso X L N).hom =
       (schemeDerivedInternalHomResolutionIso X L M).hom ≫ DerivedCategory.Q.map h := by
-    have := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
-    have hn₀ := (Localization.fac _
-      (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf
-        (CochainComplex.kInjectiveResolutionFunctor.{u}
-          (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-        (CochainComplex.toKInjectiveResolution.{u} _)
-        (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
-          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
-      (DerivedCategory.Q.op.prod DerivedCategory.Q)).hom.naturality
-      (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)
-    change (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
-        ((DerivedCategory.Q.op.prod DerivedCategory.Q).map
-          (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)) ≫
-          (schemeDerivedInternalHomResolutionIso X L N).hom =
-        (schemeDerivedInternalHomResolutionIso X L M).hom ≫ DerivedCategory.Q.map h at hn₀
-    have hQ : (DerivedCategory.Q.op.prod DerivedCategory.Q).map
-        (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f) =
-        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) := by
-      change ((DerivedCategory.Q.map (𝟙 L)).op, DerivedCategory.Q.map f) = _
-      rw [DerivedCategory.Q.map_id, op_id]
-    rw [hQ] at hn₀
-    exact hn₀
+  let := schemeDerivedTensorMonoidal X
+  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+  have := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  have hn₀ := (Localization.fac _
+    (derivedInternalHom_inverts (Opens.grothendieckTopology X) X.sheaf
+      (CochainComplex.kInjectiveResolutionFunctor.{u}
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+      (CochainComplex.toKInjectiveResolution.{u} _)
+      (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
+    (DerivedCategory.Q.op.prod DerivedCategory.Q)).hom.naturality
+    (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)
+  change (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
+      ((DerivedCategory.Q.op.prod DerivedCategory.Q).map
+        (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f)) ≫
+        (schemeDerivedInternalHomResolutionIso X L N).hom =
+      (schemeDerivedInternalHomResolutionIso X L M).hom ≫ DerivedCategory.Q.map h at hn₀
+  have hQ : (DerivedCategory.Q.op.prod DerivedCategory.Q).map
+      (X := (op L, M)) (Y := (op L, N)) (𝟙 (op L), f) =
+      (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) := by
+    change ((DerivedCategory.Q.map (𝟙 L)).op, DerivedCategory.Q.map f) = _
+    rw [DerivedCategory.Q.map_id, op_id]
+  rw [hQ] at hn₀
+  exact hn₀
+
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem evaluation_chain_natural (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (f : M ⟶ N) :
+    letI := schemeDerivedTensorMonoidal X
+    ((derivedInternalHom (Opens.grothendieckTopology X) X.sheaf).map
+        (𝟙 (op (DerivedCategory.Q.obj L)), DerivedCategory.Q.map f) ⊗ₘ
+      𝟙 (DerivedCategory.Q.obj L)) ≫ evaluation X L N =
+      evaluation X L M ≫ DerivedCategory.Q.map f := by
+  let := schemeDerivedTensorMonoidal X
+  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+  have he := evaluation_chain_localized X L M N f
+  have hn := evaluation_chain_resolution_natural X L M N f
   exact tensor_naturality _ _ _ _ _ _ _ hn he
 
 set_option backward.isDefEq.respectTransparency.types true in
