@@ -47,6 +47,7 @@ set_option synthInstance.maxHeartbeats 200000 in
 -- Transporting finite generators through iterated slice sites needs extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base
 when its underlying module has proper support.
 Source: Stacks Project, Lemma 09ZT, final sentence, and Lemma 0CYS (3).
