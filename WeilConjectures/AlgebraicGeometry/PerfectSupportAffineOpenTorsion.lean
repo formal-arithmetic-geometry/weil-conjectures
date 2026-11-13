@@ -84,7 +84,7 @@ theorem perfect_support_affine_open_torsion
   let α := F.preimage (eP.hom ≫ β ≫ eM.inv)
   obtain ⟨n, hn⟩ := DerivedCategory.bounded_projective_hom_power_torsion
     A (f.val (op U)) P hb hf hp M hM α
-  exact ⟨n, comp_eq_zero_of_scalar_preimage F eP eM ((f.val (op U)) ^ n)
+  exact ⟨n, comp_eq_zero_of_scalar_preimage (A := A) F eP eM ((f.val (op U)) ^ n)
     (R.map (schemeDerivedScalar X (f ^ n) (𝟙 E.obj))) β (hscalar (f ^ n)) hn⟩
 
 end AlgebraicGeometry.Scheme
