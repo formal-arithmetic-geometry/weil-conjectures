@@ -87,7 +87,7 @@ private theorem factor_idempotent
       simp only [Pi.mul_apply, Pi.single_eq_same, ht₀, mul_zero, Pi.zero_apply]
     · simp only [Pi.mul_apply, Pi.single_eq_of_ne ha, zero_mul, Pi.zero_apply]
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Completion coordinates and tensor-product algebra instances need extra elaboration heartbeats.
 /-- Select the finite completion factor before transferring it to the larger tensor.
 

@@ -59,7 +59,7 @@ private theorem field_not_cohen (k : Type u) [Field k] (p : ℕ) :
   let := hdvr
   exact IsDiscreteValuationRing.not_isField k (Field.toIsField k)
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Finite-model scalar towers and the normality argument require extra elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 /-- A derivation detects the specified degree-p coefficient in the extended formal fibre.

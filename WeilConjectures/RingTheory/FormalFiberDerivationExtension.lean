@@ -87,7 +87,7 @@ private theorem localize {R : Type u} {S : Type v} [CommRing R] [CommRing S]
       leibniz' := IsLocalization.extendDerivation_mul W ψ δ hδ }
   exact ⟨E, fun x ↦ IsLocalization.extendDerivation_algebraMap W ψ δ hδ x⟩
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Completion and tensor scalar towers require extra elaboration work.
 /-- Every absolute derivation of a finite integral model extends to the base-changed
 formal fibre, compatibly with the model's inclusion into its fraction field.
