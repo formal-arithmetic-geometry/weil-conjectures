@@ -103,22 +103,27 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
     (R := (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ))
     (P := P) rfl rfl ?_
   have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
-  run_tac
+  run_tac Lean.Elab.Tactic.withMainContext do
     let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
     let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
-    let rec differences (fuel : Nat) (a b : Lean.Expr) : List (Lean.Expr × Lean.Expr) :=
-      if a == b then [] else
-      match fuel, a, b with
-      | 0, _, _ => [(a, b)]
-      | k + 1, .app f x, .app g y =>
-        (differences k f g ++ differences k x y).take 10
-      | k + 1, .forallE _ t x _, .forallE _ s y _ =>
-        (differences k t s ++ differences k x y).take 10
-      | k + 1, .mdata _ a, b => differences k a b
-      | k + 1, a, .mdata _ b => differences k a b
-      | _, _, _ => [(a, b)]
-    for (a, b) in differences 60 target source do
-      Lean.logInfo m!"TARGET: {a}\nSOURCE: {b}"
+    let mut pending : Array (Lean.Expr × Lean.Expr) := #[(target, source)]
+    let mut count := 0
+    for _ in [:2000] do
+      if !pending.isEmpty && count < 10 then
+        let (a, b) := pending.back!
+        pending := pending.pop
+        let a := a.consumeMData
+        let b := b.consumeMData
+        if a != b then
+          if a.isApp && b.isApp then
+            pending := pending.push (a.appArg!, b.appArg!)
+            pending := pending.push (a.appFn!, b.appFn!)
+          else if a.isForall && b.isForall then
+            pending := pending.push (a.bindingBody!, b.bindingBody!)
+            pending := pending.push (a.bindingDomain!, b.bindingDomain!)
+          else
+            count := count + 1
+            Lean.logInfo m!"TARGET: {a}\nSOURCE: {b}"
   exact h
 
 end WeilConjectures.IntegralSystemRealization
