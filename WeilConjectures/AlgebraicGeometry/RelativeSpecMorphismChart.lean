@@ -12,9 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 universe u
 open CategoryTheory Opposite TopologicalSpace
 namespace AlgebraicGeometry
-set_option maxHeartbeats 800000 in
 set_option profiler true in
--- The dependent object transports require extra elaboration heartbeats.
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
 its forward functor acts on morphisms by the canonical section maps (`hmap`).
 Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX
@@ -51,7 +49,7 @@ theorem relative_spec_morphism_chart (S : Scheme.{u})
     (congrArg (fun f ↦ f.app (op U))
       (eqToHom_map (TopCat.Sheaf.forget CommRingCat.{u} S) e)).trans
         (eqToHom_app _ (op U))
-  rw [← Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc]
+  simp only [← Scheme.Opens.toSpecΓ_SpecMap_appLE_assoc]
   simp only [← Spec.map_comp]
   congr 1
   congr 1
@@ -62,7 +60,7 @@ theorem relative_spec_morphism_chart (S : Scheme.{u})
   simp only [Quiver.Hom.op_unop] at hm
   simp only [Functor.id_map, Functor.comp_map, ObjectProperty.FullSubcategory.comp_hom,
     Under.comp_right, TopCat.Sheaf.comp_app] at hn
-  rw [hm] at hn
+  simp only [hm] at hn
   simp only [Under.comp_right, Under.eqToHom_right, TopCat.Sheaf.comp_app,
     htransport, Category.assoc] at hn ⊢
   have ht := congrArg (· ≫ eqToHom
