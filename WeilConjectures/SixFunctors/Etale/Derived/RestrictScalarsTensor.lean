@@ -168,6 +168,7 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
       (HomologicalComplex.mapBifunctorHomologicalComplexObjObjIso
         (Sheaf.extendScalarsTensorRestrictScalarsIso X.smallEtaleTopology hφ ha) P M) (.up ℤ)
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- the kernel checks the chain of isomorphisms below
 include hφ ha in
