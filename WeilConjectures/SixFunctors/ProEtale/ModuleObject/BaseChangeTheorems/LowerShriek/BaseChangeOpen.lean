@@ -57,10 +57,7 @@ lemma CategoryTheory.Functor.whiskerLeft_comp_whiskerRight_comp_aux {A B A' B' :
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  rw [reassoc_of% hn]
-  rw [hθ']
-  rw [Category.comp_id]
-  rw [hE']
+  rw [reassoc_of% hn, hθ', Category.comp_id, hE']
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -182,8 +179,6 @@ lemma boundedConstructibleBaseChange_ofIsOpenImmersion :
   rw [boundedConstructibleBaseChange_ofIsOpenImmersion_eq]
   exact boundedConstructibleBaseChange_id ℓ
 
-set_option maxHeartbeats 1000000 in
--- the identification of the trivial compactification of `f` with `f` unfolds the functors
 /-- **`Ex_!` for open immersions**, on the trivial compactifications: the compact-support exchange
 map of `X ⟶[f] Y ⟶[𝟙] Y` and `X' ⟶[f'] Y' ⟶[𝟙] Y'`, followed by `R(𝟙)_* ≅ 𝟭` and the
 extension-by-zero exchange morphism, is `R(𝟙)_* ≅ 𝟭`. -/
@@ -208,7 +203,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange_ofIsOpenImmersion_eq ℓ sq]
     simp [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso]
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChange_eq]
-  ext K
+  refine NatTrans.ext (funext fun K ↦ ?_)
   have hE' := congr_app (boundedConstructibleBaseChange_ofIsOpenImmersion ℓ
       (f := f) (f' := f') (g := g))
     ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -222,8 +217,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_ofIsOpenImmers
     Functor.id_obj, Functor.id_map, NatTrans.id_app] at hE' hθ' hn ⊢
   simp only [Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.assoc, Functor.comp_obj]
-  trace_state
-  sorry
+  rw [reassoc_of% hn, hθ', Category.comp_id, hE']
 
 /-- **`Ex_!` for open immersions is the extension-by-zero base change**: through `Rf_! ≅ f_!` and
 `Rf'_! ≅ f'_!`, the compact-support base change of a cartesian square with `f` and `f'` open
