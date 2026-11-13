@@ -393,8 +393,9 @@ private theorem nativeReductionMonoidal
           D'.ε.app A = reductionCounit l E Y D hl n A :=
         finiteCochainModel_reductionCounit l E Y D hl n A hA
       trace "PH805: counit rewrites"
-      simp only [heps P hP, heps Q hQ, heps _
-        (coefficientTotalTensor_isKFlat J R P Q hP hQ)]
+      have hepsPQ := heps _ (coefficientTotalTensor_isKFlat J R P Q hP hQ)
+      dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor] at hepsPQ ⊢
+      simp only [heps P hP, heps Q hQ, hepsPQ]
       trace "PH805: counits rewritten"
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
@@ -416,11 +417,11 @@ private theorem nativeReductionMonoidal
         (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) hcr εP εQ
       trace "PH805: tensor comparison transported"
       dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
-        F, integralDerivedReduction, mu, AS, CoefficientClosedStructure.tensor, εP, εQ,
+        F, integralDerivedReduction, reductionExtension_eq_scalarExtension, e, f, mu,
+        AS, CoefficientClosedStructure.tensor, εP, εQ,
         J, R, S, completedIntegralCommRingSheaf, totalTensor, coefficientTotalTensor,
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj,
-        CategoryTheory.Functor.prod_obj] at ht hn ⊢
-      trace_state
+        CategoryTheory.Functor.prod_obj, Functor.comp_obj, ObjectProperty.ι_obj] at ht hn ⊢
       have hsquare := ht.trans hn
       trace "PH805: square composed"
       with_unfolding_all
