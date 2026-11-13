@@ -98,23 +98,24 @@ private theorem exact_hom_of_retract {C : Type u} [SmallCategory C]
   exact ⟨hz, shortExact_of_retraction i r hir hB⟩
 
 private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
-    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
-    (E : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u})
+    (E : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
     (hE : ∃ m : ℕ,
       ∃ (ι : E ⟶ SheafOfModules.free
-          (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m)))
+          (R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) (ULift.{u} (Fin m)))
         (π : SheafOfModules.free
-          (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))
+          (R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) (ULift.{u} (Fin m))
           ⟶ E), ι ≫ π = 𝟙 E)
     (S : ShortComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (hS : S.ShortExact) :
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) (hS : S.ShortExact) :
     ∃ hz : SheafOfModules.homObjMap (R := R) (𝟙 E) S.f ≫
         SheafOfModules.homObjMap (R := R) (𝟙 E) S.g = 0,
       (ShortComplex.mk (SheafOfModules.homObjMap (R := R) (𝟙 E) S.f)
         (SheafOfModules.homObjMap (R := R) (𝟙 E) S.g) hz).ShortExact := by
   obtain ⟨m, ι, π, hιπ⟩ := hE
   let B := SheafOfModules.free
-    (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R) (ULift.{u} (Fin m))
+    (R := (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) (ULift.{u} (Fin m))
   obtain ⟨hz, hfree, _⟩ := SheafOfModules.finiteFreeInternalHomExact.{u}
     (R := R) m B (Iso.refl B) S hS
   exact exact_hom_of_retract R E B ι π hιπ S hz hfree
