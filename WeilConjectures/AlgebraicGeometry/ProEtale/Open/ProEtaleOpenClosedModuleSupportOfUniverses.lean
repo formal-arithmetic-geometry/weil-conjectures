@@ -46,6 +46,7 @@ import WeilConjectures.RingTheory.ProperBaseChange.WContractibleClosedLocalizati
 import WeilConjectures.AlgebraicGeometry.Affine.AffineClosedSpecializationLocalization
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WContractibleAffineEvaluation
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Open and closed support for modules in independent universes
 

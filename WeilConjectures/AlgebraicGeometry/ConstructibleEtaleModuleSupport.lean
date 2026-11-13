@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.AlgebraicGeometry.EtaleSupport
+public import Mathlib.Algebra.Category.Grp.Zero
 import WeilConjectures.AlgebraicGeometry.GeometricStalkSupport
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk

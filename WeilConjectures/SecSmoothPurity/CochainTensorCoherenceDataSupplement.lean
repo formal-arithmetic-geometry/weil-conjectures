@@ -190,7 +190,6 @@ variable (c : A ⟶ B)
 @[no_expose] private noncomputable def ins (M : SheafOfModules.{u} (𝓡 A))
     (W : Dᵒᵖ) (m : M.val.obj W) : (changeOfRings.{vD, uD, u} c M).val.obj W :=
   CochainScalarConstruction.ins c M W m
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 private theorem scalar_tensor_ext
     (M N : SheafOfModules.{u} (𝓡 A)) (H : SheafOfModules.{u} (𝓡 B))
@@ -249,7 +248,6 @@ section TensorUniqueness
 
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 600000 in
 -- Detect inverse tensorators on scalar-extension generators and universal products.
 private theorem comparison_subsingleton [PreservesFiniteLimits uInv] :
     Subsingleton (CanonicalRingedTensorComparison R S RI uInv I c L hobj) := by

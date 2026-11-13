@@ -101,7 +101,6 @@ private theorem pinnedBaseChange_naturality
   rw [hx, hx]
   exact adj'.homEquiv_naturality_left_square _ _ _ _ (σ.naturality a)
 
-set_option maxHeartbeats 400000 in
 -- Comparing the scheme-module and ringed-space category instances needs this budget.
 /-- Compute the mate using precisely the family of counits that defines the
 canonical derived composition and adjunction comparisons. This lemma makes no

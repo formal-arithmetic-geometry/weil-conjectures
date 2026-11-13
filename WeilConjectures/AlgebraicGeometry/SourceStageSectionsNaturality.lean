@@ -46,7 +46,6 @@ private theorem sectionsPullbackNat_app {Y Z : Scheme.{v}} (m : Y ⟶ Z)
     (K.obj.map (PreservesTerminal.iso m.Etale).inv.op ≫ tY.inv.app K)
 
 set_option maxRecDepth 2048 in
-set_option maxHeartbeats 800000 in
 -- Unfolding the stage comparison and the complex components needs additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

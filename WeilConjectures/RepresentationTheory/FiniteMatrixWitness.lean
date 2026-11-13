@@ -76,7 +76,7 @@ theorem span_range_eq_top_of_det_ne_zero (c : Basis ι F M) (f : ι × ι → Mo
     Submodule.span F (Set.range f) = ⊤ := by
   have : FiniteDimensional F M := .of_basis c
   have hli : LinearIndependent F (c.endEquivPiProd ∘ f) :=
-    Matrix.linearIndependent_rows_iff_isUnit.mpr ((Matrix.isUnit_iff_isUnit_det _).mpr h.isUnit)
+    Matrix.linearIndependent_row_iff_isUnit.mpr ((Matrix.isUnit_iff_isUnit_det _).mpr h.isUnit)
   refine (LinearIndependent.of_comp c.endEquivPiProd.toLinearMap hli)
     |>.span_eq_top_of_card_eq_finrank' ?_
   rw [c.endEquivPiProd.finrank_eq, Module.finrank_fintype_fun_eq_card]
@@ -93,7 +93,7 @@ theorem exists_det_ne_zero_of_span_range_eq_top {α : Type*} (c : Basis ι F M)
   let e := (Basis.mk hli htop.ge).indexEquiv (Pi.basisFun F (ι × ι))
   refine ⟨a ∘ e.symm, ?_⟩
   exact ((Matrix.isUnit_iff_isUnit_det _).mp
-    (Matrix.linearIndependent_rows_iff_isUnit.mp (hli.comp e.symm e.symm.injective))).ne_zero
+    (Matrix.linearIndependent_row_iff_isUnit.mp (hli.comp e.symm e.symm.injective))).ne_zero
 
 end Module.Basis
 

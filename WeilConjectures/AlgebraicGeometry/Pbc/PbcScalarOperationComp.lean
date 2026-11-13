@@ -468,11 +468,11 @@ private theorem scalarMate_coefficients
     {H : C ⥤ E} {H' : C' ⥤ E'}
     (α : TwoSquare F L₁ L₂ F') (β : TwoSquare G L₂ L₃ G')
     (γ : TwoSquare H L₁ L₃ H') (u : F ⋙ G ≅ H) (v : F' ⋙ G' ≅ H')
-    (ho : ∀ T : C, β.natTrans.app (F.obj T) ≫ G'.map (α.natTrans.app T) ≫
-      v.hom.app (L₁.obj T) = L₃.map (u.hom.app T) ≫ γ.natTrans.app T) (K : C') :
-    G.map ((mateEquiv a₁ a₂ α).natTrans.app K) ≫
-        (mateEquiv a₂ a₃ β).natTrans.app (F'.obj K) ≫ R₃.map (v.hom.app K) =
-      u.hom.app (R₁.obj K) ≫ (mateEquiv a₁ a₃ γ).natTrans.app K := by
+    (ho : ∀ T : C, β.app (F.obj T) ≫ G'.map (α.app T) ≫
+      v.hom.app (L₁.obj T) = L₃.map (u.hom.app T) ≫ γ.app T) (K : C') :
+    G.map ((mateEquiv a₁ a₂ α).app K) ≫
+        (mateEquiv a₂ a₃ β).app (F'.obj K) ≫ R₃.map (v.hom.app K) =
+      u.hom.app (R₁.obj K) ≫ (mateEquiv a₁ a₃ γ).app K := by
   have hs : ((TwoSquare.hComp α β).whiskerTop u.inv).whiskerBottom v.hom = γ := by
     ext T
     have ht := congrArg (fun z ↦ L₃.map (u.inv.app T) ≫ z) (ho T)
@@ -485,7 +485,7 @@ private theorem scalarMate_coefficients
   have hm := mateEquiv_whiskerTop_whiskerBottom a₁ a₃ (TwoSquare.hComp α β)
     u.inv v.hom
   rw [hs, mateEquiv_vcomp a₁ a₂ a₃] at hm
-  have hc := congrArg (fun z ↦ z.natTrans.app K) hm
+  have hc := congrArg (fun z ↦ z.app K) hm
   apply (cancel_epi (u.inv.app (R₁.obj K))).mp
   change _ = u.inv.app _ ≫ u.hom.app _ ≫ _
   simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.vComp,

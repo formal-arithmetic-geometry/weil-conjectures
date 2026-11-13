@@ -208,7 +208,6 @@ private theorem unit_factorization_generic
   simp only [unitComponent, diagonalClassMap, firstKernelInsertion,
     Functor.map_comp, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- Fix the coefficient and all native endpoints before spelling out the unit paste.
 /-- Factor the normalized unit into kernel insertion and the remaining inverse exchange paste.
 No counit, trace functional, trace transport or integration equation occurs in this statement.

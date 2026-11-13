@@ -1389,7 +1389,6 @@ lemma Stage.toSpec_comp_SpecMap_algHom {T T' : E.Stage} (f : T ⟶ T') :
   rw [Stage.toSpec, Stage.toSpec, Category.assoc, ← Spec.map_comp, Stage.Hom.algHom_ρ,
     Spec.map_comp, ← Category.assoc, ← Scheme.toSpecΓ_naturality, Category.assoc]
 
-set_option maxHeartbeats 1600000 in
 -- Elaborating the pushout functor forces repeated defeq checks between the two
 -- `Algebra` structures on the coefficient algebra of a stage.
 /-- (Implementation) The system of stage schemes: the scheme attached to a stage is the
@@ -1438,7 +1437,6 @@ lemma isPullback_Wι {T T' : E.Stage} (f : T ⟶ T') :
   refine IsOpenImmersion.isPullback _ _ _ _ (WD_map_Wι f.base).symm ?_
   rw [opensRange_Wι, opensRange_Wι, ← Scheme.Hom.comp_preimage, ← E.N.D.map_comp, Over.w f.base]
 
-set_option maxHeartbeats 1600000 in
 -- The basic opens of the tautological elements have to be compared through
 -- `Spec.map` of the coefficient algebra map, which unfolds the stage structure.
 /-- (Implementation) The `Spec A`-squares of the system of stages are cartesian. -/
@@ -1799,7 +1797,6 @@ noncomputable def chartUIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map]
       rfl)
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the chart isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the `U`-chart is a limit cone. -/
@@ -1848,7 +1845,6 @@ noncomputable def interIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inl_stageDiagram_map,
         WD_map_Wι_assoc])
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the overlap isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the overlap of the two charts is a
@@ -1928,7 +1924,6 @@ noncomputable def algCocone (E : ExtensionData.{u}) : Cocone E.algOp.leftOp wher
       naturality := fun _ _ f ↦
         (Stage.Hom.algHom_φ f.unop).trans (Category.comp_id _).symm }
 
-set_option maxHeartbeats 1600000 in
 -- Reflecting the colimit through the forgetful functor unfolds the subalgebra
 -- coercions of every stage.
 /-- (Implementation) `Γ(X, V)` is the filtered colimit of the coefficient algebras of the
@@ -1983,7 +1978,6 @@ noncomputable def chartVIso (E : ExtensionData.{u}) (T₀ : E.Stage) :
         opensDiagram_map_ι, IsOpenImmersion.isoOfRangeEq_hom_fac_assoc, inr_stageDiagram_map]
       rfl)
 
-set_option maxHeartbeats 1600000 in
 -- Transporting the limit along the chart isomorphism compares two cones on the
 -- opens diagram of the pushout.
 /-- (Implementation) The restriction of the stage cone to the `Spec A`-chart is a limit
@@ -2009,7 +2003,6 @@ noncomputable def charts (E : ExtensionData.{u}) (T₀ : E.Stage) (b : Bool) :
     (E.stageDiagram.obj T₀).Opens :=
   bif b then T₀.chartU else T₀.chartV
 
-set_option maxHeartbeats 1600000 in
 -- Each of the four cases unfolds the pushout defining the stage scheme.
 /-- (Implementation) The stage cone is a limit cone: its restrictions to the two charts of a
 stage scheme and to their overlap are limit cones. -/
@@ -3630,7 +3623,6 @@ section SeparatingPair
 
 variable (i₀ : I) {U V : (D.obj i₀).Opens}
 
-set_option maxHeartbeats 1000000 in
 -- descending the finitely many generators through the three systems of opens is a long
 -- computation
 omit [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] in
@@ -3843,7 +3835,6 @@ lemma exists_isSeparatingPair_of_isLimit
 end SeparatingPair
 
 
-set_option maxHeartbeats 1000000 in
 -- the reduction to the affine criterion goes through two common refinements of stages
 include hc in
 /-- **Separatedness descends to a finite stage.**
@@ -3913,7 +3904,6 @@ theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
 
 variable {S : Scheme.{u}} (t : D ⟶ (Functor.const I).obj S) [∀ i, QuasiCompact (t.app i)]
 
-set_option maxHeartbeats 1000000 in
 -- the reduction to the absolute case goes through a finite affine cover of the image
 include hc in
 /-- **Separatedness over a fixed base descends to a finite stage.**

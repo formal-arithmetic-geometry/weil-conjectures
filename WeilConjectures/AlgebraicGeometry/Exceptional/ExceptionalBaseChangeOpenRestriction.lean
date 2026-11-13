@@ -107,9 +107,9 @@ theorem isIso_leftDerivedUpperStar_map_baseChange_of_open_restriction
   dsimp only [aa, aa', aj, aj'] at hc
   rw [mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso,
     mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso] at hc
-  have hk := congrArg (fun t ↦ t.natTrans.app K) hc
+  have hk := congrArg (fun t ↦ t.app K) hc
   dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
-    TwoSquare.natTrans, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.comp_obj] at hk
   simp only [Category.id_comp, Category.comp_id, Category.assoc] at hk

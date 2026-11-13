@@ -392,7 +392,7 @@ private theorem mate_on_unit (r : StrictTowerRingedSquare sq)
       proEtaleBaseChange g ⋙ proEtaleBaseChange f')
     (hn : SquareUnitFormula r F P H T aF aP aH aT θ σ)
     (m₀ : verticalPush r ⋙ P ⟶ H ⋙ targetPush r)
-    (hm₀ : m₀ = (mateEquiv aF aT (TwoSquare.mk _ _ _ _ θ.hom)).natTrans)
+    (hm₀ : m₀ = (mateEquiv aF aT (TwoSquare.mk _ _ _ _ θ.hom)))
     : MateUnitFormula r P H aP aH σ m₀ := by
   intro M V s
   subst m₀
@@ -459,7 +459,7 @@ private theorem mate_on_unit (r : StrictTowerRingedSquare sq)
 
 private theorem ordinary_eq_mate (r : StrictTowerRingedSquare sq) :
     ordinary r = (mateEquiv (adjF r) (adjT r)
-      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)).natTrans := rfl
+      (TwoSquare.mk _ _ _ _ r.exchangeModuleSquare.hom)) := rfl
 
 attribute [local irreducible] ordinary
 

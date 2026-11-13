@@ -67,7 +67,7 @@ lemma fieldExtendScalarsCompIso_frobenius :
           (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).hom := by
   refine NatTrans.ext (funext fun M ↦ ?_)
   have K := congr_app (fieldExtendScalarsCompIso_paste
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom he₁ he₂ hc₁ hc₂) M
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom he₁ he₂ hc₁ hc₂) M
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at K
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     IsoAlgebra.compCommIso_hom_app, fieldExtendScalarsFrobeniusIso, Iso.trans_hom, Iso.symm_hom,

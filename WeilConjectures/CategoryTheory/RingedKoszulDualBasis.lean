@@ -67,11 +67,11 @@ private theorem unit_tensor_scalars
     {E : Type*} [Category E] [MonoidalCategory E]
     (f g : End (MonoidalCategory.tensorUnit E)) :
     (MonoidalCategory.leftUnitor (MonoidalCategory.tensorUnit E)).inv ≫
-      MonoidalCategory.tensorHom f g =
-    (f * g) ≫ (MonoidalCategory.leftUnitor (MonoidalCategory.tensorUnit E)).inv := by
+      MonoidalCategory.tensorHom f.asHom g.asHom =
+    (f * g).asHom ≫ (MonoidalCategory.leftUnitor (MonoidalCategory.tensorUnit E)).inv := by
   rw [MonoidalCategory.leftUnitor_inv_comp_tensorHom,
     MonoidalCategory.unitors_inv_equal, ← MonoidalCategory.rightUnitor_inv_naturality]
-  simp only [End.mul_def, Category.assoc]
+  simp only [End.mul_asHom, Category.assoc]
 
 private theorem subset_prod_succ {A : Type w} [CommRing A] (r : ℕ)
     (a : Fin (r + 1) → A) (I : Finset (Fin (r + 1))) :
@@ -92,7 +92,7 @@ private theorem negative_factor_basis_step
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℕ) (q : ℤ) :
     ringedNegativeKoszulFactorBasis O s (n + 1) q ≫
         (ringedNegativeKoszulFactorTransition O s n).f q =
-      (if q = -1 then ringedKoszulScalar O s else 𝟙 _) ≫
+      (if q = -1 then (ringedKoszulScalar O s).asHom else 𝟙 _) ≫
         ringedNegativeKoszulFactorBasis O s n q := by
   by_cases hq : q = -1
   · subst q
@@ -188,7 +188,7 @@ private theorem negative_basis_step
     (n : ℕ) (q : ℤ) (I : Finset (Fin r)) :
     ringedNegativeKoszulBasis O r s (n + 1) I q ≫
         (ringedNegativeKoszulTransition O r s n).f q =
-      ρ (∏ i ∈ I, a i) ≫ ringedNegativeKoszulBasis O r s n I q := by
+      (ρ (∏ i ∈ I, a i)).asHom ≫ ringedNegativeKoszulBasis O r s n I q := by
   classical
   let := SheafOfModules.isGrothendieckAbelian
     ((sheafCompose T (forget₂ CommRingCat RingCat)).obj O)
@@ -207,8 +207,8 @@ private theorem negative_basis_step
     have ht := ih (fun i ↦ a i.succ) (fun i ↦ s i.succ) (fun i ↦ hρ i.succ)
       (q - p) J
     have hf := negative_factor_basis_step O (s 0) n p
-    have hp : (if p = -1 then ringedKoszulScalar O (s 0) else 𝟙 _) =
-        ρ (if (0 : Fin (r + 1)) ∈ I then a 0 else 1) := by
+    have hp : (if p = -1 then (ringedKoszulScalar O (s 0)).asHom else 𝟙 _) =
+        (ρ (if (0 : Fin (r + 1)) ∈ I then a 0 else 1)).asHom := by
       by_cases h : (0 : Fin (r + 1)) ∈ I
       · simp [p, h, hρ]
       · simp [p, h]
@@ -269,10 +269,10 @@ theorem exists_ringedKoszulDualBasis
       (∀ n q, Nonempty (IsColimit (Cofan.mk ((D.obj (op n)).X q) (b n q)))) ∧
       (∀ n q I, b n q I ≫ (D.obj (op n)).d q (q + 1) =
         ∑ L : exteriorKoszulIndex r (q + 1),
-          ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L) ≫
+          (ρ (exteriorKoszulCoefficient r (fun i ↦ a i ^ (n + 1)) q I L)).asHom ≫
             b n (q + 1) L) ∧
       (∀ n m (h : n ≤ m) q I, b m q I ≫ (D.map (homOfLE h).op).f q =
-        ρ (∏ i ∈ I.1, a i ^ (m - n)) ≫ b n q I) ∧
+        (ρ (∏ i ∈ I.1, a i ^ (m - n))).asHom ≫ b n q I) ∧
       ∀ n, b n 0 ⟨∅, rfl⟩ =
         (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫
           (ringedKoszulDualUnit O r s n).f 0 := by
@@ -295,7 +295,7 @@ theorem exists_ringedKoszulDualBasis
     ringedNegativeKoszulBasis O r s n I.1 q ≫ (e n).hom.f q
   have hstep (n : ℕ) (q : ℤ) (I : exteriorKoszulIndex r q) :
       b (n + 1) q I ≫ (D.map (homOfLE (Nat.le_succ n)).op).f q =
-        ρ (∏ i ∈ I.1, a i) ≫ b n q I := by
+        (ρ (∏ i ∈ I.1, a i)).asHom ≫ b n q I := by
     dsimp only [b]
     have ht := congrArg (fun f ↦ f.f q) (he n)
     simp only [HomologicalComplex.comp_f] at ht
@@ -332,7 +332,7 @@ theorem exists_ringedKoszulDualBasis
     | base =>
       change b n q I ≫ (D.map (𝟙 (op n))).f q = _
       simp only [Functor.map_id, HomologicalComplex.id_f, Nat.sub_self, pow_zero,
-        Finset.prod_const_one, map_one]
+        Finset.prod_const_one, map_one, End.one_asHom, Category.id_comp]
       exact Category.comp_id _
     | succ m h ih =>
       have hm : D.map (homOfLE (h.trans (Nat.le_succ m))).op =
@@ -340,7 +340,7 @@ theorem exists_ringedKoszulDualBasis
         rw [← Functor.map_comp]
         congr 1
       rw [hm, HomologicalComplex.comp_f, ← Category.assoc, hstep, Category.assoc, ih,
-        ← Category.assoc, ← End.mul_def, ← map_mul]
+        ← Category.assoc, ← End.mul_asHom, ← map_mul]
       congr 2
       have hsub : m + 1 - n = (m - n) + 1 := by omega
       simp only [hsub, pow_succ, Finset.prod_mul_distrib]

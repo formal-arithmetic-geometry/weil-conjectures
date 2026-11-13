@@ -153,7 +153,7 @@ theorem hasEtaleReductionLowerShriekIso_of_isOpenImmersion :
     have := ff.full
     have := ff.faithful
     infer_instance
-  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.natTrans.app K) := by
+  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.app K) := by
     let i := overClosedComplement j
     refine (Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' A j.left i.left
       (range_overClosedComplement j)).isIso_of_pairFunctor _ ?_ ?_
@@ -187,8 +187,8 @@ theorem hasEtaleReductionLowerShriekIso_of_isOpenImmersion :
             ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicIntegers ℓ E j).app
               K))
       exact ⟨0, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩
-  have : IsIso θ.natTrans := NatIso.isIso_of_isIso_app _
-  refine ⟨(asIso θ.natTrans).symm, ?_⟩
+  have : IsIso θ := NatIso.isIso_of_isIso_app _
+  refine ⟨(asIso θ).symm, ?_⟩
   rw [Iso.symm_inv, asIso_hom]
   exact hθ ▸ inferInstance
 

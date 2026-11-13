@@ -74,7 +74,7 @@ theorem isIso_ihom_ev_app_unit_of_upperStar_iso (F : Sheaf X.smallEtaleTopology 
     have : (tensorLeft Y).IsEquivalence :=
       Functor.isEquivalence_of_iso (((tensoringLeft _).mapIso eY ≪≫ leftUnitorNatIso _).symm)
     exact NatIso.isIso_app_of_isIso (ihom.adjunction Y).counit Z
-  have hc : IsIso ((ihomComparison G F).natTrans.app (𝟙_ _)) := by
+  have hc : IsIso ((ihomComparison G F).app (𝟙_ _)) := by
     have := isIso_ihomComparison_upperStar A (g i) F
     infer_instance
   have hμ : IsIso (μ G F ((ihom F).obj (𝟙_ _))) := inferInstance

@@ -63,7 +63,7 @@ theorem geometricFiberWeilDirectTrace_weilUniversal [IsIso γ]
     [IsIso ((upperShriekBaseChangeOfMap l (f := f) (f' := traceGeometricFiberOverMap f)
       (Scheme.Hom.isPullback_geometricFiberMap f.left (Over.w f)).flip).app N)]
     (K : DerivedCategory (Endofunctor.IsoAlgebra
-      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.inv)))
+      (lowerStar (Profinite.padicAlgClRingObj l) X.hom.geometricGaloisFrobenius.asIso.inv)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj l)
       X.hom.geometricFiber) ((Endofunctor.IsoAlgebra.forget _).mapDerivedCategory.obj K)) :
     (geometricFiberMapWeilLowerStar (Profinite.padicAlgClRingObj l)

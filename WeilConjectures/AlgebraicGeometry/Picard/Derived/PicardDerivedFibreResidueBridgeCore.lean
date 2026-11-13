@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedCoefficientMap
 public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti

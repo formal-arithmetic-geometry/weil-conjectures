@@ -112,7 +112,6 @@ lemma map_unit_comp_pullbackComp_inv_comp_counit {X Y Y' : Scheme.{u}} (s : Y' �
   erw [Adjunction.left_triangle_components_assoc, Adjunction.left_triangle_components]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the pushforwards of sheaves along the localization functors are large terms
 /-- **The unit transport along `s` for the restrictions along the localization functors**, on
 sections over `V`: it is the restriction along `V ×_X Y' ⟶ V ×_X Y`, the transpose of the
@@ -221,7 +220,6 @@ noncomputable def baseChangeTransportSheafHom {X Y Y' : Scheme.{u}} (s : Y' ⟶ 
         ((localizationRestriction AddCommGrpCat.{u + 1} p₁ inferInstance).obj H) :=
   ObjectProperty.homMk (Functor.whiskerRight (NatTrans.op (baseChangeTransport s g hp)) H.obj)
 
-set_option maxHeartbeats 1000000 in
 -- the pushforwards of sheaves along the localization functors are large terms
 /-- **(a1)** The unit transport along `s` for the restrictions along the localization functors
 is the restriction along `baseChangeTransport`. -/
@@ -248,7 +246,6 @@ lemma conjugateIsoEquiv_symm_symm_hom {C E : Type*} [Category C] [Category E]
   rw [Equiv.eq_symm_apply]
   exact congrArg Iso.inv ((conjugateIsoEquiv A B).apply_symm_apply r.symm)
 
-set_option maxHeartbeats 1000000 in
 -- the pushforwards of sheaves along the localization functors are large terms
 /-- **The abelian unit transport along `s`** of `g_* g^*`, transported along `s ≫ g = p₁`, is the
 restriction along `baseChangeTransport`, through the identifications `g^* ≅ j_g^*`. -/

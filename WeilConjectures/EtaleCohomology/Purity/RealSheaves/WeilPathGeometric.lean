@@ -62,7 +62,7 @@ lemma geomAut_eq_fundamentalGroupMap [ConnectedSpace p.geometricFiber] (G' : Typ
   obtain ⟨y', rfl⟩ : ∃ y', B.geomPath.hom.app P y' = y :=
     ⟨B.geomPath.inv.app P y, ConcreteCategory.congr_hom (B.geomPath.inv_hom_id_app P) y⟩
   have hg (x : (fiber B.t).obj ((pullback p.geometricFiberProj).obj P)) :
-      (toAutMulEquiv (fiber B.t) G').symm g • x = g.hom.app _ x := by
+      (toAutMulEquiv (fiber B.t) G').symm g • x = g.asIso.hom.app _ x := by
     rw [← toAut_hom_app_apply, ← toAutMulEquiv_apply, MulEquiv.apply_symm_apply]
   rw [toAutMulEquiv_apply, toAut_hom_app_apply, fundamentalGroupMap_smul, hg]
   simp only [geomPath, pullbackPathIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,

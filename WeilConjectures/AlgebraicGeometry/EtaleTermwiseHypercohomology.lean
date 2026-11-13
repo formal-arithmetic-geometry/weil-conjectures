@@ -46,7 +46,6 @@ noncomputable def resolutionEtaleCohomologyIso (X : Scheme.{uHyper})
       (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uHyper + 1}).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj I)).symm
 
-set_option maxHeartbeats 700000 in
 -- The dependent CE, filtered-total and canonical abutment witnesses are elaborated together.
 /-- A presentation of the first hypercohomology spectral sequence, its signed E₁
 identifications and its canonical finite abutment filtration. The bicomplex and all

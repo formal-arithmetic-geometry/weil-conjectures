@@ -13,6 +13,7 @@ import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import WeilConjectures.Algebra.Homology.OpenRestrictionTensorNatural
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # K-flatness under restriction to an open localized site
 

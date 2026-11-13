@@ -34,7 +34,7 @@ private theorem restrict_sections_smul {Y S : Scheme.{u}} (p : Y ⟶ S)
     (F : Y.Modules) (U : S.Opens) (r : Γ(U, ⊤))
     (x : Γ(F.restrict (p ⁻¹ᵁ U).ι, ⊤)) :
     F.presheaf.map (eqToHom (p ⁻¹ᵁ U).ι_image_top.symm).op
-      (((F.restrict (p ⁻¹ᵁ U).ι).smul ((p ∣_ U).appTop r)).hom x) =
+      (((F.restrict (p ⁻¹ᵁ U).ι).smul ((p ∣_ U).appTop r)).asHom.hom x) =
         p.app U (U.topIso.hom r) •
           F.presheaf.map (eqToHom (p ⁻¹ᵁ U).ι_image_top.symm).op x := by
   have hs := smul_restrictAppIso_hom_apply (p ⁻¹ᵁ U).ι F ⊤ ((p ∣_ U).appTop r) x

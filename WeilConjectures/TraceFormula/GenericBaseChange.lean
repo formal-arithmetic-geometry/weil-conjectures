@@ -182,7 +182,7 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_comp {Z : Over (Spec (.of k
   have key : IsIso ((𝔽).pfBaseChange (SepFinType.homMk (prod.snd : X ⨯ U ⟶ U))
       (SepFinType.homMk (prod.map (𝟙 X) (i ≫ p))) (SepFinType.homMk (i ≫ p))
       (SepFinType.homMk (prod.snd : X ⨯ Y ⟶ Y))
-      (SepFinType.homMk_comp_homMk (commSq_prodMap_snd (i ≫ p)).w)).natTrans := by
+      (SepFinType.homMk_comp_homMk (commSq_prodMap_snd (i ≫ p)).w)) := by
     rw [h]
     dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp]
     infer_instance

@@ -41,7 +41,7 @@ theorem scalarMate_restrictionTranspose
       (mateEquiv
         (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars V.smallEtaleTopology φ))
         (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ))
-        (.mk _ _ _ _ (scalarMate φ g))).natTrans = δ.hom := by
+        (.mk _ _ _ _ (scalarMate φ g))) = δ.hom := by
   let a := Adjunction.ofIsRightAdjoint
     (Sheaf.derivedRestrictScalars W.smallEtaleTopology φ)
   let b := Adjunction.ofIsRightAdjoint
@@ -50,7 +50,7 @@ theorem scalarMate_restrictionTranspose
   let am := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g
   let δ := conjugateIsoEquiv (an.comp b) (a.comp am) (scalarPullbackIso φ g)
   have hs : ((mateEquiv a b).symm
-      (.mk _ _ _ _ (scalarRestrictionPullbackIso φ g).hom)).natTrans =
+      (.mk _ _ _ _ (scalarRestrictionPullbackIso φ g).hom)) =
       (scalarPullbackIso φ g).inv := by
     have hh := congrArg Iso.inv (scalarPullback_eq φ g)
     simpa only [ProEtale.scalarPullbackEtaleIsoFromMate, Iso.symm_inv, asIso_hom,
@@ -62,7 +62,7 @@ theorem scalarMate_restrictionTranspose
     change scalarRestrictionDirectImageMap φ g =
       conjugateEquiv (a.comp am) (an.comp b)
         (((mateEquiv a b).symm
-          (.mk _ _ _ _ (scalarRestrictionPullbackIso φ g).hom)).natTrans) at hh
+          (.mk _ _ _ _ (scalarRestrictionPullbackIso φ g).hom))) at hh
     rw [hs] at hh
     exact hh.symm
   · exact iterated_mateEquiv_conjugateEquiv an am a b

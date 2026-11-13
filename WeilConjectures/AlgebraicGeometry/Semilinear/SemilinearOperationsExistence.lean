@@ -160,7 +160,7 @@ private theorem operationOpenSystems (systems : Data.{c, v, r} J B τ) (U : C) :
   have : ((𝟭 ℕ).prod (Over.forget U)).IsContinuous
       (coefficientSequenceTopology (J.over U)) (coefficientSequenceTopology J) :=
     openSite_continuous J U
-  have hi (n : ℕ) : IsIso ((mateEquiv adj (a n)).symm (δ n).hom).natTrans := by
+  have hi (n : ℕ) : IsIso ((mateEquiv adj (a n)).symm (δ n).hom) := by
     apply WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (J.over U) J (Over.forget U)
       (ring.{max c v, v, max c v r} (coefficientSequenceTopology (J.over U))
@@ -174,7 +174,7 @@ private theorem operationOpenSystems (systems : Data.{c, v, r} J B τ) (U : C) :
         (openRings.{c, v, r} J B U) (openTransitions.{c, v, r} J B τ U) n)
       (evaluation_ring.{c, v, max c v r} J B τ n) (𝟙 _)
       L _ adj (a n) (δ n)
-  let ι (n : ℕ) := (asIso ((mateEquiv adj (a n)).symm (δ n).hom).natTrans).symm
+  let ι (n : ℕ) := (asIso ((mateEquiv adj (a n)).symm (δ n).hom)).symm
   have : L.Additive := adj.left_adjoint_additive
   have he : ∀ S : ShortComplex _, S.Exact → (S.map L).Exact := by
     intro S hs
@@ -216,8 +216,8 @@ private theorem operationOpenSystems (systems : Data.{c, v, r} J B τ) (U : C) :
     rw [reassoc_of% h, ← Functor.map_comp]
     change (a n).unit.app _ ≫
       (SheafOfModules.localizedSystemRestriction.{c,v,r} (B n) U).map
-        ((asIso ((mateEquiv adj (a n)).symm (δ n).hom).natTrans).hom.app M ≫
-          (asIso ((mateEquiv adj (a n)).symm (δ n).hom).natTrans).inv.app M) = _
+        ((asIso ((mateEquiv adj (a n)).symm (δ n).hom)).hom.app M ≫
+          (asIso ((mateEquiv adj (a n)).symm (δ n).hom)).inv.app M) = _
     rw [Iso.hom_inv_id_app]
     erw [(SheafOfModules.localizedSystemRestriction.{c,v,r} (B n) U).map_id,
       Category.comp_id]

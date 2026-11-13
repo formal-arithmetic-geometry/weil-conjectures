@@ -214,7 +214,7 @@ def proper {X Y : Scheme.{u}} (g : X ⟶ Y) :
     R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) g ⋙ T l E F i Y ⟶
       T l E F i X ⋙ R (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g :=
   ((mateEquiv (scalarAdj l E F i X) (scalarAdj l E F i Y)).symm
-    (TwoSquare.mk _ _ _ _ (properRestriction l E F i g).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (properRestriction l E F i g).inv))
 
 /-- The open restriction square on strict towers is the actual ordinary open mate.
 Source: Stacks 0E8I (blueprint: def-pur-constant-scalar-tower-mates). -/
@@ -239,7 +239,7 @@ def openTensor {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) j ⋙ T l E F i Y ⟶
       T l E F i X ⋙ J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) j :=
   ((mateEquiv (scalarAdj l E F i X) (scalarAdj l E F i Y)).symm
-    (TwoSquare.mk _ _ _ _ (openRestriction l E F i j).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (openRestriction l E F i j).hom))
 
 /-- The proper/open functor on constant integral towers, deriving the proper part
 separately after exact open extension.

@@ -102,6 +102,9 @@ theorem WeilBoundedConstructible.trace_globalOperator_graph_eq_sum [IsProper X.h
         K.carrier)] :
     trace (K.graph m).globalOperator =
       ∑ x : FixedPoint Φ m, trace (K.stalkFrobenius m x.1 x.2) := by
+  suffices h : End.of (trace (K.graph m).globalOperator) =
+      ∑ x : FixedPoint Φ m, End.of (trace (K.stalkFrobenius m x.1 x.2)) by
+    simpa only [End.sum_asHom] using congrArg End.asHom h
   let F := hΦ.graphFixedLocus hm K
   have : IsProper F.F.hom := inferInstanceAs (IsProper (sigmaPoint k (FixedPoint Φ m)).hom)
   rw [(K.graph m).trace_globalOperator_eq_sum_localTerm F (fun _ ↦ point k)

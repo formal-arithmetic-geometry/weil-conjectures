@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory.Adjunction
 
-attribute [local implicit_reducible] TwoSquare
+-- `TwoSquare` is already reducible in Mathlib.
 
 /-- The unit law for a tensor-compatible comultiplication forces tensor compatibility
 of its counit. This avoids a separate localization calculation for identity pullback. -/
@@ -416,7 +416,7 @@ theorem mate_composite_unit
     {H : C ⥤ E} {T : E ⥤ C}
     (a : F ⊣ R) (b : G ⊣ S) (q : H ⊣ T) (l : H ⟶ F ⋙ G) (L : D) :
     R.map (b.unit.app L) ≫ (conjugateEquiv (a.comp b) q l).app (G.obj L) =
-      (mateEquiv a q (TwoSquare.mk (𝟭 C) F H G l)).natTrans.app L := by
+      (mateEquiv a q (TwoSquare.mk (𝟭 C) F H G l)).app L := by
   apply (q.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, H.map_comp, Category.assoc]
   rw [conjugateEquiv_counit, mateEquiv_counit]
@@ -436,9 +436,9 @@ theorem mate_bottom_naturality
     {Q : C ⥤ D} {R : D ⥤ C} {H : E ⥤ F} {T : F ⥤ E}
     (a : Q ⊣ R) (b : H ⊣ T) {U : C ⥤ E} {V V' : D ⥤ F}
     (c : U ⋙ H ⟶ Q ⋙ V) (d : V ⟶ V') (M : D) :
-    (mateEquiv a b (TwoSquare.mk U Q H V c)).natTrans.app M ≫ T.map (d.app M) =
+    (mateEquiv a b (TwoSquare.mk U Q H V c)).app M ≫ T.map (d.app M) =
       (mateEquiv a b
-        (TwoSquare.mk U Q H V' (c ≫ Functor.whiskerLeft Q d))).natTrans.app M := by
+        (TwoSquare.mk U Q H V' (c ≫ Functor.whiskerLeft Q d))).app M := by
   apply (b.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, H.map_comp, Category.assoc]
   rw [b.counit_naturality, ← Category.assoc, mateEquiv_counit, mateEquiv_counit]
@@ -455,25 +455,25 @@ theorem mate_chart_pasting
     (a : Q ⊣ R) (b : P ⊣ S) (e : J ⊣ K) (h : H ⊣ T)
     {U : C ⥤ E} {V : D ⥤ F}
     (c : U ⋙ P ⟶ Q ⋙ V) (l : H ⟶ P ⋙ J) (M : D) :
-    (mateEquiv a b (TwoSquare.mk U Q P V c)).natTrans.app M ≫
+    (mateEquiv a b (TwoSquare.mk U Q P V c)).app M ≫
         S.map (e.unit.app (V.obj M)) ≫
         (conjugateEquiv (b.comp e) h l).app (J.obj (V.obj M)) =
       (mateEquiv a h (TwoSquare.mk U Q H (V ⋙ J)
-        (Functor.whiskerLeft U l ≫ Functor.whiskerRight c J))).natTrans.app M := by
+        (Functor.whiskerLeft U l ≫ Functor.whiskerRight c J))).app M := by
   rw [mate_composite_unit b e h l]
   apply (h.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, H.map_comp, Category.assoc]
   rw [mateEquiv_counit]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   have hn := l.naturality
-    ((mateEquiv a b (TwoSquare.mk U Q P V c)).natTrans.app M)
+    ((mateEquiv a b (TwoSquare.mk U Q P V c)).app M)
   dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
   rw [reassoc_of% hn]
   simp only [← J.map_comp]
   have hr := mateEquiv_counit a h
     (TwoSquare.mk U Q H (V ⋙ J)
       (Functor.whiskerLeft U l ≫ Functor.whiskerRight c J)) M
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj] at hr
+  dsimp only [TwoSquare.mk, Functor.comp_obj] at hr
   rw [mateEquiv_counit, hr]
   simp only [TwoSquare.mk, J.map_comp, Functor.comp_map, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,

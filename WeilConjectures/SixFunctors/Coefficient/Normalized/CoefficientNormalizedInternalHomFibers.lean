@@ -173,7 +173,6 @@ private theorem tensor_map_comp {D : Type*} [Category* D] (K : D × D ⥤ D)
   rw [← K.map_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- The site and coefficient types require extra elaboration of the comparison equations.
 private theorem double_evaluation_naturality {D : Type*} [Category* D]
     {H : Dᵒᵖ × D ⥤ D} (S : CoefficientClosedStructure H)
@@ -308,7 +307,7 @@ private theorem closed_evaluation_of_projection
       intro X Y f
       simpa [CoefficientClosedStructure.tensor, MonoidalCategory.tensorRight] using
         μ.inv.naturality (Prod.mkHom f (𝟙 M)))
-  let p := ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ θ.hom)).natTrans
+  let p := ((mateEquiv adj adj).symm (TwoSquare.mk _ _ _ _ θ.hom))
   have hcomponent (P : D) : p.app P = (adj.homEquiv _ _).symm
       (T.tensor.map (Prod.mkHom (adj.unit.app P) (𝟙 (E.obj M))) ≫
         μ.inv.app (L.obj P, M)) := by
@@ -319,7 +318,7 @@ private theorem closed_evaluation_of_projection
     exact hp P
   have : IsIso p := NatIso.isIso_of_isIso_app p
   let β := (mateEquiv (S.adjunction M) (T.adjunction (E.obj M))
-    (TwoSquare.mk _ _ _ _ θ.hom)).natTrans
+    (TwoSquare.mk _ _ _ _ θ.hom))
   have hβ : β = conjugateEquiv (adj.comp (S.adjunction M))
       ((T.adjunction (E.obj M)).comp adj) p := by
     have h := iterated_mateEquiv_conjugateEquiv adj adj

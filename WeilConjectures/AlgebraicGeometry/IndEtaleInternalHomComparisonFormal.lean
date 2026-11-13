@@ -79,7 +79,7 @@ private theorem monoidal_of_whiskerLeft
 
 private theorem closedComparison_id
     {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C] (P Q : C) :
-    (Functor.LaxMonoidal.ihomComparison (𝟭 C) P).natTrans.app Q = 𝟙 _ := by
+    (Functor.LaxMonoidal.ihomComparison (𝟭 C) P).app Q = 𝟙 _ := by
   rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry]
   simpa only [Functor.LaxMonoidal.id_μ, Functor.id_map, Functor.id_obj, Functor.comp_obj,
     Category.id_comp, ← uncurry_id_eq_ev] using curry_uncurry (𝟙 ((ihom P).obj Q))
@@ -151,7 +151,7 @@ theorem derivedHomUpperStarComparison_shift_right {Y Z : Scheme.{u}} (g : Z ⟶ 
   let : (ihom K).CommShift ℤ := commShiftDerivedHomObj B (op K)
   let : (ihom ((L((g)^*[B])).obj K)).CommShift ℤ :=
     commShiftDerivedHomObj B (op ((L((g)^*[B])).obj K))
-  have he : (Functor.LaxMonoidal.μTwoSquare L((g)^*[B]) K).natTrans =
+  have he : (Functor.LaxMonoidal.μTwoSquare L((g)^*[B]) K) =
       inv (leftDerivedUpperStarTensorComparisonApp B g K) := by
     ext V
     apply (cancel_mono (((leftDerivedUpperStarTensorComparison B g).app K).app V)).mp
@@ -160,7 +160,7 @@ theorem derivedHomUpperStarComparison_shift_right {Y Z : Scheme.{u}} (g : Z ⟶ 
     simp only [Functor.Monoidal.μ_δ, NatIso.isIso_inv_app, IsIso.inv_hom_id]
     rfl
   have : NatTrans.CommShift
-      (Functor.LaxMonoidal.μTwoSquare L((g)^*[B]) K).natTrans ℤ := by
+      (Functor.LaxMonoidal.μTwoSquare L((g)^*[B]) K) ℤ := by
     rw [he]
     exact NatTrans.CommShift.of_isIso (leftDerivedUpperStarTensorComparisonApp B g K) ℤ
   have hm := NatTrans.CommShift.mateEquiv (A := ℤ)
@@ -168,12 +168,12 @@ theorem derivedHomUpperStarComparison_shift_right {Y Z : Scheme.{u}} (g : Z ⟶ 
     (derivedTensorHomAdjunction B ((L((g)^*[B])).obj K))
     (Functor.LaxMonoidal.μTwoSquare L((g)^*[B]) K)
   have : NatTrans.CommShift
-      (Functor.LaxMonoidal.ihomComparison L((g)^*[B]) K).natTrans ℤ := hm
+      (Functor.LaxMonoidal.ihomComparison L((g)^*[B]) K) ℤ := hm
   simpa only [Functor.commShiftIso_comp_hom_app, Functor.comp_obj,
     derivedHomUpperStarComparison,
     derivedHom, MonoidalClosed.internalHom, Category.assoc] using
     (NatTrans.shift_app_comm
-      (Functor.LaxMonoidal.ihomComparison L((g)^*[B]) K).natTrans n M).symm
+      (Functor.LaxMonoidal.ihomComparison L((g)^*[B]) K) n M).symm
 
 -- Combine the two tensor shift squares and cancel the strong monoidal comparisons.
 private theorem tensor_interchange {Y Z : Scheme.{u}} (g : Z ⟶ Y)

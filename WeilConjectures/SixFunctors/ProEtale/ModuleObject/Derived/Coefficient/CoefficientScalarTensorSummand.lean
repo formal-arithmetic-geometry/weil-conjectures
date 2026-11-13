@@ -49,7 +49,6 @@ attribute [local irreducible] HomologicalComplex₂.total Mod.inducingFunctorDat
 
 attribute [local irreducible] coefficientSectionScalarTotal
 
-set_option maxHeartbeats 800000 in
 -- Normalize the four functor images of each total-complex summand.
 /-- The signed scalar tensor square commutes after each coproduct-summand inclusion.
 Source: Stacks Project, Cohomology on Sites, Tag 07A4.

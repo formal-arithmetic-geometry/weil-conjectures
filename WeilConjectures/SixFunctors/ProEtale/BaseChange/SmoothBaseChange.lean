@@ -82,14 +82,14 @@ with `e : l ⊣ r`, `e' : l' ⊣ r'`, `d : p ⊣ s`, `d' : p' ⊣ s'`, and compa
 and the cube of left adjoints commutes (`hsq`), then the mate of `θ`, conjugated by the
 comparison functors, is the mate of `ϑ`. -/
 private theorem comparison_mate_transport (K : E₁) :
-    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K) ≫ b'.app (h.obj K) ≫
+    A₂.map ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K) ≫ b'.app (h.obj K) ≫
       s'.map (c'.hom.app K) =
     c.hom.app (r.obj K) ≫ q.map (b.app K) ≫
-      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).natTrans.app (A₁.obj K) := by
+      (mateEquiv d d' (TwoSquare.mk _ _ _ _ ϑ)).app (A₁.obj K) := by
   apply (d'.homEquiv _ _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   apply (cancel_epi (a'.hom.app (g.obj (r.obj K)))).1
-  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).natTrans.app K)
+  have hn := a'.hom.naturality ((mateEquiv e e' (TwoSquare.mk _ _ _ _ θ)).app K)
   simp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
   rw [d'.counit_naturality, reassoc_of% hb']
@@ -237,7 +237,7 @@ theorem comparison_derivedBaseChangeMap [QuasiCompact f] [QuasiSeparated f] [Qua
   simpa [baseChangeSourceComparisonIso, baseChangeTargetComparisonIso,
     derivedBaseChangeMap, Etale.baseChange_app, Etale.baseChangeUnitStep_app,
     Etale.baseChangeSquareStep_hom_app, Etale.baseChangeCounitStep_app,
-    mateEquiv_apply, TwoSquare.natTrans, TwoSquare.mk, Category.assoc] using h
+    mateEquiv_apply, TwoSquare.mk, Category.assoc] using h
 
 
 end ProEtale

@@ -26,8 +26,8 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 /-- Whether an inverse mate is invertible does not depend on the choice of left adjoints. -/
 theorem isIso_mateEquiv_symm_of_isIso {G : A ⥤ C} {H : B ⥤ D} {L₁ L₁' : A ⥤ B} {R₁ : B ⥤ A}
     {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C} (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₁' ⊣ R₁)
-    (b₂ : L₂' ⊣ R₂) (β : TwoSquare R₁ H G R₂) [IsIso ((mateEquiv b₁ b₂).symm β).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm β).natTrans := by
+    (b₂ : L₂' ⊣ R₂) (β : TwoSquare R₁ H G R₂) [IsIso ((mateEquiv b₁ b₂).symm β)] :
+    IsIso ((mateEquiv a₁ a₂).symm β) := by
   let e₁ : L₁' ≅ L₁ := (conjugateIsoEquiv a₁ b₁).symm (Iso.refl R₁)
   let e₂ : L₂' ≅ L₂ := (conjugateIsoEquiv a₂ b₂).symm (Iso.refl R₂)
   have h₁ : conjugateEquiv a₁ b₁ e₁.hom = 𝟙 R₁ :=
@@ -43,10 +43,10 @@ theorem isIso_mateEquiv_symm_of_isIso {G : A ⥤ C} {H : B ⥤ D} {L₁ L₁' : 
     simp only [w, w', Equiv.apply_symm_apply, h₁, h₂]
     ext X
     simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
-  have (X : A) : IsIso (w.natTrans.app X) := by
-    have hc := congrArg (fun t ↦ t.natTrans.app X) h
+  have (X : A) : IsIso (w.app X) := by
+    have hc := congrArg (fun t ↦ t.app X) h
     change w'.app X ≫ H.map (e₁.hom.app X) = e₂.hom.app (G.obj X) ≫ w.app X at hc
-    have : IsIso (w'.natTrans.app X) := inferInstance
+    have : IsIso (w'.app X) := inferInstance
     have : IsIso (e₂.hom.app (G.obj X) ≫ w.app X) := by
       rw [← hc]
       exact @IsIso.comp_isIso _ _ _ _ _ _ _ this inferInstance

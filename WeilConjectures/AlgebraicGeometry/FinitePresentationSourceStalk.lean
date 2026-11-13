@@ -13,6 +13,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.Algebra.Exact.Basic
 import WeilConjectures.AlgebraicGeometry.FinitePresentationStalkOfLocalPresentation
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Finite presentations of module stalks
 

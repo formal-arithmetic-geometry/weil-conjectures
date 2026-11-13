@@ -172,14 +172,14 @@ lemma exchange_paste_horiz {U'' U' U Z'' Z' Z : 𝒞} (t₁ : U'' ⟶ U')
     (t : U'' ⟶ U) (b : Z'' ⟶ Z) [Fact (𝒪 l)] [Fact (𝒪 m)] [Fact (𝒪 r)]
     (w₁ : t₁ ≫ m = l ≫ b₁) (w₂ : t₂ ≫ r = m ≫ b₂)
     (ht : t₁ ≫ t₂ = t) (hb : b₁ ≫ b₂ = b) (w : t ≫ r = l ≫ b)
-    [IsIso (F.baseChange t₁ l m b₁ w₁).natTrans] [IsIso (F.baseChange t₂ m r b₂ w₂).natTrans]
-    [IsIso (F.baseChange t l r b w).natTrans] :
+    [IsIso (F.baseChange t₁ l m b₁ w₁)] [IsIso (F.baseChange t₂ m r b₂ w₂)]
+    [IsIso (F.baseChange t l r b w)] :
     F.exchange t l r b w =
       ((F.exchange t₁ l m b₁ w₁ ≫ₕ F.exchange t₂ m r b₂ w₂).whiskerTop
         (F.pfComp' t₁ t₂ t ht).hom).whiskerBottom (F.pfComp' b₁ b₂ b hb).inv := by
-  have key : inv (F.baseChange t l r b w).natTrans =
-      ((TwoSquare.vComp (TwoSquare.mk _ _ _ _ (inv (F.baseChange t₂ m r b₂ w₂).natTrans))
-        (TwoSquare.mk _ _ _ _ (inv (F.baseChange t₁ l m b₁ w₁).natTrans))).whiskerLeft
+  have key : inv (F.baseChange t l r b w) =
+      ((TwoSquare.vComp (TwoSquare.mk _ _ _ _ (inv (F.baseChange t₂ m r b₂ w₂)))
+        (TwoSquare.mk _ _ _ _ (inv (F.baseChange t₁ l m b₁ w₁)))).whiskerLeft
           (F.pbComp' t₁ t₂ t ht).inv).whiskerRight (F.pbComp' b₁ b₂ b hb).hom := by
     apply IsIso.inv_eq_of_hom_inv_id
     rw [F.baseChange_paste_horiz t₁ t₂ l m r b₁ b₂ t b w₁ w₂ ht hb w]
@@ -208,14 +208,14 @@ lemma exchange_paste_vert {U' U W' W Z' Z : 𝒞} (t : U' ⟶ U) (h : W' ⟶ W)
     [Fact (𝒪 r₂)] [Fact (𝒪 l)] [Fact (𝒪 r)]
     (w₁ : t ≫ r₁ = l₁ ≫ h) (w₂ : h ≫ r₂ = l₂ ≫ b) (hl : l₁ ≫ l₂ = l)
     (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b)
-    [IsIso (F.baseChange t l₁ r₁ h w₁).natTrans] [IsIso (F.baseChange h l₂ r₂ b w₂).natTrans]
-    [IsIso (F.baseChange t l r b w).natTrans] :
+    [IsIso (F.baseChange t l₁ r₁ h w₁)] [IsIso (F.baseChange h l₂ r₂ b w₂)]
+    [IsIso (F.baseChange t l r b w)] :
     F.exchange t l r b w =
       ((F.exchange t l₁ r₁ h w₁ ≫ᵥ F.exchange h l₂ r₂ b w₂).whiskerRight
         (F.shComp' r₁ r₂ r hr).hom).whiskerLeft (F.shComp' l₁ l₂ l hl).inv := by
-  have key : inv (F.baseChange t l r b w).natTrans =
-      ((TwoSquare.hComp (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l₁ r₁ h w₁).natTrans))
-        (TwoSquare.mk _ _ _ _ (inv (F.baseChange h l₂ r₂ b w₂).natTrans))).whiskerTop
+  have key : inv (F.baseChange t l r b w) =
+      ((TwoSquare.hComp (TwoSquare.mk _ _ _ _ (inv (F.baseChange t l₁ r₁ h w₁)))
+        (TwoSquare.mk _ _ _ _ (inv (F.baseChange h l₂ r₂ b w₂)))).whiskerTop
           (F.shComp' r₁ r₂ r hr).hom).whiskerBottom (F.shComp' l₁ l₂ l hl).inv := by
     apply IsIso.inv_eq_of_hom_inv_id
     rw [F.baseChange_paste_vert t h b l₁ r₁ l₂ r₂ l r w₁ w₂ hl hr w]

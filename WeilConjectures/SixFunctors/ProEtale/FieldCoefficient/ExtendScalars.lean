@@ -86,7 +86,6 @@ noncomputable def fieldConstantSheafToRestrictScalarsField :
       (fieldFunctionsToFieldFunctions he U.unop.left)
      naturality _ _ _ := rfl }⟩
 
-set_option maxHeartbeats 400000 in
 -- the pointwise computation goes through `erw` in tensor products of `ModuleCat` objects
 /-- Composing functions with `e` is a morphism of sheaves of rings: on sections, both
 multiplications are pointwise. -/

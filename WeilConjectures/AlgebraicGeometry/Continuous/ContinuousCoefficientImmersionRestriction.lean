@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbac
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPullbackIso
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Continuous coefficient sheaves and immersion restriction

@@ -156,7 +156,7 @@ theorem trace_leftDerivedUpperStar_extendScalars
       ((leftDerivedSheafExtendScalarsCompUpperStarIso g).hom.app K ≫
         (L(sheafExtendScalars (algebraMap R S) Z)).map w ≫
           (leftDerivedSheafExtendScalarsCompUpperStarIso g).inv.app K) =
-      (L(sheafExtendScalars (algebraMap R S) Z)).unitEndRingHom (trace w) :=
+      ((L(sheafExtendScalars (algebraMap R S) Z)).unitEndRingHom (.of (trace w))).asHom :=
   Functor.trace_eq_unitEndRingHom_trace (L(sheafExtendScalars (algebraMap R S) Z))
     (X' := (L((g)^*[ModuleCat.{u + 1} S])).obj ((L(sheafExtendScalars (algebraMap R S) Y)).obj K))
     w _ ((leftDerivedSheafExtendScalarsCompUpperStarIso g).app K).symm (by simp)
@@ -208,8 +208,8 @@ theorem trace_rightDerivedLowerShriekOfCompactification_map_extendScalars
     [HasRightDual ((Rf_!(c)[ModuleCat.{u + 1} S]).obj
       ((L(sheafExtendScalars (algebraMap R S) X)).obj K))] :
     trace ((Rf_!(c)[ModuleCat.{u + 1} S]).map ((L(sheafExtendScalars (algebraMap R S) X)).map v)) =
-      (L(sheafExtendScalars (algebraMap R S) Y)).unitEndRingHom
-        (trace ((Rf_!(c)[ModuleCat.{u + 1} R]).map v)) :=
+      ((L(sheafExtendScalars (algebraMap R S) Y)).unitEndRingHom
+        (.of (trace ((Rf_!(c)[ModuleCat.{u + 1} R]).map v)))).asHom :=
   Functor.trace_eq_unitEndRingHom_trace (L(sheafExtendScalars (algebraMap R S) Y))
     (X' := (Rf_!(c)[ModuleCat.{u + 1} S]).obj ((L(sheafExtendScalars (algebraMap R S) X)).obj K))
     _ _

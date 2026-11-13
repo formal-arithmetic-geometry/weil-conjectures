@@ -42,8 +42,10 @@ additive monoid. -/
 lemma ULift.isAddTorsionFree_continuousMap (S T : Type*) [TopologicalSpace S] [TopologicalSpace T]
     [AddMonoid T] [ContinuousAdd T] [IsAddTorsionFree T] :
     IsAddTorsionFree (ULift.{w} C(S, T)) :=
-  ⟨fun _ hn _ _ h ↦ ULift.ext (ContinuousMap.ext fun s ↦
-    nsmul_right_injective hn (congrArg (fun z : ULift.{w} C(S, T) ↦ z.down s) h))⟩
+  ⟨fun _ hn _ _ hab h ↦ ULift.ext (ContinuousMap.ext fun s ↦
+    eq_of_nsmul_eq_nsmul_of_addCommute hn
+      (congrArg (fun z : ULift.{w} C(S, T) ↦ z.down s) hab)
+      (congrArg (fun z : ULift.{w} C(S, T) ↦ z.down s) h))⟩
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -61,6 +63,8 @@ lemma preservesMonomorphisms_tensorLeft_continuousMapComparison (T : Type) [Topo
   have hflat (U : X.ProEtᵒᵖ) : Module.Flat ℤ (((sheafCompose (ProEt.topology X)
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf X T)).obj.obj U) := by
     have := ULift.isAddTorsionFree_continuousMap.{u + 1} U.unop.left T
+    have : HasUniqueDiv (ULift.{u + 1} C(U.unop.left, T)) :=
+      ⟨fun _ hn _ _ h ↦ eq_of_nsmul_eq_nsmul_of_addCommute hn (add_comm _ _) h⟩
     have : Module.IsTorsionFree ℤ (ULift.{u + 1} C(U.unop.left, T)) := inferInstance
     exact inferInstanceAs (Module.Flat ℤ (ULift.{u + 1} C(U.unop.left, T)))
   have := Sheaf.preservesMonomorphisms_tensorLeft_of_flat (ProEt.topology X) _ hflat

@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Étale sheaves supported in low dimension

@@ -89,6 +89,7 @@ lemma nonempty_hasRightDual_Q_obj [Abelian.HasFunctorialFlatResolution (ModuleCa
 lemma algebraMap_end_unit_injective [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)] :
     Function.Injective (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) := by
   intro r r' h
+  replace h := congr($(h).asHom)
   rw [← ε_Qh_comp_map_single_map_algebraMap_comp_inv,
     ← ε_Qh_comp_map_single_map_algebraMap_comp_inv] at h
   replace h := (cancel_mono (inv (Functor.LaxMonoidal.ε Qh))).1
@@ -99,10 +100,10 @@ lemma algebraMap_end_unit_injective [Abelian.HasFunctorialFlatResolution (Module
           ((HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).map x)) ≫
           (quotientCompQhIso _).hom.app _ :=
     (NatIso.naturality_1 (quotientCompQhIso _) _).symm
-  have h₃ := congrArg (fun f : End (𝟙_ (ModuleCat.{u} R)) ↦ f.hom 1)
+  have h₃ := congrArg (fun f : 𝟙_ (ModuleCat.{u} R) ⟶ 𝟙_ (ModuleCat.{u} R) ↦ f.hom 1)
     ((singleFunctor (ModuleCat.{u} R) 0).map_injective
       ((key _).trans ((congrArg (fun f ↦ _ ≫ f ≫ _) h).trans (key _).symm)))
-  simp only [Algebra.algebraMap_eq_smul_one] at h₃
+  simp only [Algebra.algebraMap_eq_smul_one, End.smul_asHom, End.one_asHom] at h₃
   change (r • 𝟙 (ModuleCat.of R R)).hom 1 = (r' • 𝟙 (ModuleCat.of R R)).hom 1 at h₃
   simpa using h₃
 
@@ -322,8 +323,8 @@ lemma trace_Q_map_complexMulNat [Fact ℓ.Prime] (v : complexMulNat ℓ ⟶ comp
     [hP : HasRightDual (Q.obj (complexMulNat ℓ))] :
     letI := braidedCategory' (ModuleCat.{0} (ZMod (ℓ ^ 2)))
     MonoidalCategory.trace (Q.map v) =
-      algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
-        (a - b) := by
+      (algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
+        (a - b)).asHom := by
   have := fact_one_lt_sq ℓ
   rw [trace_eq_algebraMap_sum_negOnePow_linearMapTrace (complexMulNat ℓ) v {0, 1}
     (fun i hi ↦ isZero_complexMulNat_X ℓ i (by simp_all) (by simp_all))
@@ -341,8 +342,8 @@ lemma trace_id_Q_obj_singleUnit [Fact ℓ.Prime] (n : ℤ)
     [hP : HasRightDual (Q.obj (singleUnit ℓ n))] :
     letI := braidedCategory' (ModuleCat.{0} (ZMod (ℓ ^ 2)))
     MonoidalCategory.trace (𝟙 (Q.obj (singleUnit ℓ n))) =
-      algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
-        ((n.negOnePow : ℤ) : ZMod (ℓ ^ 2)) := by
+      (algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
+        ((n.negOnePow : ℤ) : ZMod (ℓ ^ 2))).asHom := by
   have := fact_one_lt_sq ℓ
   rw [← Q.map_id, trace_eq_algebraMap_sum_negOnePow_linearMapTrace (singleUnit ℓ n) (𝟙 _) {n}
     (fun i hi ↦ HomologicalComplex.isZero_single_obj_X _ _ _ _ (by simpa using hi))
@@ -383,8 +384,8 @@ theorem trace_not_determined_by_homology :
         letI := braidedCategory' (ModuleCat.{0} (ZMod (ℓ ^ 2)))
         MonoidalCategory.trace (𝟙 (Q.obj (complexMulNat ℓ))) = 0 ∧
         MonoidalCategory.trace (Q.map (endComplexMulNat ℓ)) =
-          algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
-            (ℓ : ZMod (ℓ ^ 2)) ∧
+          (algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
+            (ℓ : ZMod (ℓ ^ 2))).asHom ∧
         MonoidalCategory.trace (Q.map (endComplexMulNat ℓ)) ≠
           MonoidalCategory.trace (𝟙 (Q.obj (complexMulNat ℓ))) := by
   refine ⟨homologyMap_endComplexMulNat ℓ, nonempty_hasRightDual_Q_obj_complexMulNat ℓ, ?_⟩
@@ -392,15 +393,16 @@ theorem trace_not_determined_by_homology :
   let := braidedCategory' (ModuleCat.{0} (ZMod (ℓ ^ 2)))
   have h₁ : MonoidalCategory.trace (𝟙 (Q.obj (complexMulNat ℓ))) = 0 := by
     rw [← Q.map_id, trace_Q_map_complexMulNat ℓ (𝟙 _) 1 1 (by simp) (by simp), sub_self,
-      map_zero]
+      map_zero, End.zero_asHom]
   have h₂ : MonoidalCategory.trace (Q.map (endComplexMulNat ℓ)) =
-      algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
-        (ℓ : ZMod (ℓ ^ 2)) := by
+      (algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
+        (ℓ : ZMod (ℓ ^ 2))).asHom := by
     rw [trace_Q_map_complexMulNat ℓ _ (1 + ℓ) 1 (endComplexMulNat_f_zero ℓ)
       (by rw [endComplexMulNat_f_one, one_smul]), add_sub_cancel_left]
   refine ⟨h₁, h₂, ?_⟩
   rw [h₁, h₂]
-  exact fun h ↦ natCast_ne_zero_of_sq ℓ (algebraMap_end_unit_injective (h.trans (map_zero _).symm))
+  exact fun h ↦ natCast_ne_zero_of_sq ℓ
+    (algebraMap_end_unit_injective (End.ext (h.trans (by simp))))
 
 /-- Blueprint `remark-coherent-additivity`: over `A = ℤ/ℓ²`, the trace is not additive for
 endomorphisms of distinguished triangles whose squares only commute in `D(A)`. There are a
@@ -422,19 +424,20 @@ theorem exists_triangle_endomorphism_trace_ne_add :
     nonempty_hasRightDual_Q_obj_singleUnit ℓ 1, nonempty_hasRightDual_Q_obj_complexMulNat ℓ,
     nonempty_hasRightDual_Q_obj_singleUnit ℓ 0, fun {h₁ h₂ h₃} ↦ ?_⟩
   let := braidedCategory' (ModuleCat.{0} (ZMod (ℓ ^ 2)))
-  have e₁ : MonoidalCategory.trace (triangleMulNatEnd ℓ).hom₁ = algebraMap (ZMod (ℓ ^ 2))
-      (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2)))))) (-1) :=
+  have e₁ : MonoidalCategory.trace (triangleMulNatEnd ℓ).hom₁ = (algebraMap (ZMod (ℓ ^ 2))
+      (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2)))))) (-1)).asHom :=
     (trace_id_Q_obj_singleUnit ℓ 1 (hP := h₁)).trans (by simp)
   have e₂ : MonoidalCategory.trace (triangleMulNatEnd ℓ).hom₂ =
-      algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
-        ((1 + ℓ : ZMod (ℓ ^ 2)) - 1) :=
+      (algebraMap (ZMod (ℓ ^ 2)) (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))))
+        ((1 + ℓ : ZMod (ℓ ^ 2)) - 1)).asHom :=
     trace_Q_map_complexMulNat ℓ _ (1 + ℓ) 1 (endComplexMulNat_f_zero ℓ)
       (by rw [endComplexMulNat_f_one, one_smul]) (hP := h₂)
-  have e₃ : MonoidalCategory.trace (triangleMulNatEnd ℓ).hom₃ = algebraMap (ZMod (ℓ ^ 2))
-      (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2)))))) 1 :=
+  have e₃ : MonoidalCategory.trace (triangleMulNatEnd ℓ).hom₃ = (algebraMap (ZMod (ℓ ^ 2))
+      (End (𝟙_ (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2)))))) 1).asHom :=
     (trace_id_Q_obj_singleUnit ℓ 0 (hP := h₃)).trans (by simp)
   rw [e₁, e₂, e₃, add_sub_cancel_left]
-  exact fun h ↦ natCast_ne_zero_of_sq ℓ (algebraMap_end_unit_injective (h.trans (by simp)))
+  exact fun h ↦ natCast_ne_zero_of_sq ℓ
+    (algebraMap_end_unit_injective (End.ext (h.trans (by simp))))
 
 end Counterexample
 

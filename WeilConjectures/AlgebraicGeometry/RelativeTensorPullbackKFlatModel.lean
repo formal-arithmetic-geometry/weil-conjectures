@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
 import WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackComplexComparison
 import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The relative tensor comparison on K-flat representatives
 

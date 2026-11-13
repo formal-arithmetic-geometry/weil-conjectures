@@ -62,7 +62,7 @@ exact restriction/pullback. Invertibility is a property, not chosen data. -/
           (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f :=
   ((mateEquiv (residueExchangeReductionAdjunction ℓ E Y)
       (residueExchangeReductionAdjunction ℓ E X)).symm
-    (TwoSquare.mk _ _ _ _ (residueExchangeRestrictPullIso ℓ E f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (residueExchangeRestrictPullIso ℓ E f).hom))
 
 /-- The defining counit identity of the constructed scalar pull comparison. -/
 theorem residueExchangePullHom_counit {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -89,9 +89,9 @@ set_option backward.isDefEq.respectTransparency false in
 private lemma boundedPushforward_scalar (ℓ : ℕ) [Fact ℓ.Prime]
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
-    (sheafScalar ℓ Y a).hom ≫ boundedPushforward ℓ g =
+    (sheafScalar ℓ Y a).asHom.hom ≫ boundedPushforward ℓ g =
       boundedPushforward ℓ g ≫ (lowerStar Ab.{u + 1} g).map
-        (sheafScalar ℓ Z (boundedComp ℓ g.base.hom a)).hom := by
+        (sheafScalar ℓ Z (boundedComp ℓ g.base.hom a)).asHom.hom := by
   apply ((sheafificationAdjunction (Scheme.ProEt.topology Y) Ab.{u + 1}).homEquiv _ _).injective
   change toSheafify _ _ ≫ (sheafifyMap _ (boundedMul ℓ Y a)) ≫
       (boundedPushforward ℓ g).hom =
@@ -235,17 +235,17 @@ private theorem regular_pullback_hom (ℓ : ℕ) [Fact ℓ.Prime]
 
 private theorem scalar_hom (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
-    (condensedQbarScalar ℓ Y a).hom =
+    (condensedQbarScalar ℓ Y a).asHom.hom =
       (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y).hom.hom ≫
-        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom ≫
+        (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom ≫
           (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y).inv.hom := by
   unfold condensedQbarScalar CondensedQbarScalarConstruction.transportedScalar
   change inv (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y).inv.hom ≫
-    (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom ≫ _ = _
+    (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom ≫ _ = _
   let e := (Mon.forget _).mapIso
     (CondensedQbarCoefficientRealization.globalCoefficientIso ℓ Y)
-  change inv e.inv ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom ≫ e.inv =
-    e.hom ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom ≫ e.inv
+  change inv e.inv ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom ≫ e.inv =
+    e.hom ≫ (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom ≫ e.inv
   rw [IsIso.inv_eq_of_hom_inv_id e.inv_hom_id]
 
 private theorem conjugate_square
@@ -302,9 +302,9 @@ theorem condensedQbar_scalar_pullback (ℓ : ℕ) [Fact ℓ.Prime]
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :
     (condensedQbarRegularPullbackIso ℓ g).inv ≫
       (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) g).map
-        (condensedQbarScalar ℓ Y a) ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
-      condensedQbarScalar ℓ Z
-        (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a) := by
+        (condensedQbarScalar ℓ Y a).asHom ≫ (condensedQbarRegularPullbackIso ℓ g).hom =
+      (condensedQbarScalar ℓ Z
+        (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a)).asHom := by
   apply Mod.hom_ext
   rw [regular_pullback_hom]
   let α := condensedPullbackHom (Profinite.padicAlgClRingObj ℓ) g
@@ -315,9 +315,9 @@ theorem condensedQbar_scalar_pullback (ℓ : ℕ) [Fact ℓ.Prime]
   have hn := conjugate_square G eY eZ
     (condensedPushforwardHom (Profinite.padicAlgClRingObj ℓ) g)
     (CondensedQbarScalarConstruction.boundedPushforward ℓ g)
-    (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).hom
+    (CondensedQbarScalarConstruction.sheafScalar ℓ Y a).asHom.hom
     (CondensedQbarScalarConstruction.sheafScalar ℓ Z
-      (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a)).hom
+      (CondensedQbarScalarConstruction.boundedComp ℓ g.base.hom a)).asHom.hom
     (boundedCoefficient_scheme_naturality ℓ g)
     (CondensedQbarScalarConstruction.boundedPushforward_scalar ℓ g a)
   rw [scalar_hom, scalar_hom]

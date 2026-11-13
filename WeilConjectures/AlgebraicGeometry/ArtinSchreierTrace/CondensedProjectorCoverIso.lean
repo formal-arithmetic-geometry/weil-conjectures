@@ -6,9 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.ArtinSchreierTraceComparison
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
-
-import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 
 /-! # Transport of character-projector images under an isomorphism of covers -/
 
@@ -154,7 +153,7 @@ private lemma coefficient_section
 private lemma regularEnd_hom {C : Type*} [Category* C] [MonoidalCategory C]
     [BraidedCategory C] [Preadditive C] [MonoidalPreadditive C]
     {R : C} [MonObj R] [IsCommMonObj R] (c : MonObj.Γ R) :
-    (Mod.regularEndRingHom c).hom = Mod.globalSmul c.hom (Mod.regular R) := by
+    (Mod.regularEndRingHom c).asHom.hom = Mod.globalSmul c.hom (Mod.regular R) := by
   exact Mod.rightUnitor_inv_whiskerLeft_mul_eq c.hom
 
 private lemma pushed_scalar
@@ -163,7 +162,7 @@ private lemma pushed_scalar
     (c : MonObj.Γ Λ) :
     (ProEtale.CondensedRing.lowerStar Λ p).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) c)) =
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y) c)).asHom =
       (Mod.smulNatTrans
         (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) c).hom).app
         ((ProEtale.CondensedRing.lowerStar Λ p).obj (condensedUnit Λ Y)) := by
@@ -188,11 +187,11 @@ private lemma pull_scalar
     (c : MonObj.Γ Λ) :
     (ProEtale.CondensedRing.lowerStar Λ Z.hom).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z.left) c)) ≫
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Z.left) c)).asHom ≫
         condensedPull Λ h =
       condensedPull Λ h ≫ (ProEtale.CondensedRing.lowerStar Λ Y.hom).map
         (Mod.regularEndRingHom
-          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) c)) := by
+          (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint Y.left) c)).asHom := by
   rw [pushed_scalar, pushed_scalar]
   exact (NatTrans.naturality (Mod.smulNatTrans
     (MonObj.Γ.mapFunctorMonoidHom (ProEtale.upperStarFromPoint X) c).hom)
@@ -230,20 +229,20 @@ theorem condensedProjector_coverIso
     (σY : G → (Y ⟶ Y)) (σZ : G → (Z ⟶ Z))
     (hσ : ∀ c, σY c ≫ u.hom = u.hom ≫ σZ c)
     (χ : AddChar G (MonObj.Γ Λ)) :
-    ∃ J : image (condensedProjector Λ G Y σY χ) ≅
-        image (condensedProjector Λ G Z σZ χ),
+    ∃ J : image (condensedProjector Λ G Y σY χ).asHom ≅
+        image (condensedProjector Λ G Z σZ χ).asHom,
       ∀ (P : Over X) (h : Y ⟶ P)
         (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
           (ProEtale.condensedRingObj Λ X))
         (ι : M ⟶ (ProEtale.CondensedRing.lowerStar Λ P.hom).obj (condensedUnit Λ P.left))
-        (e : M ≅ image (condensedProjector Λ G Y σY χ)),
-        e.hom ≫ image.ι (condensedProjector Λ G Y σY χ) = ι ≫ condensedPull Λ h →
-        (e ≪≫ J).hom ≫ image.ι (condensedProjector Λ G Z σZ χ) =
+        (e : M ≅ image (condensedProjector Λ G Y σY χ).asHom),
+        e.hom ≫ image.ι (condensedProjector Λ G Y σY χ).asHom = ι ≫ condensedPull Λ h →
+        (e ≪≫ J).hom ≫ image.ι (condensedProjector Λ G Z σZ χ).asHom =
           ι ≫ condensedPull Λ (u.inv ≫ h) ∧
         ∀ (T : Scheme.{u}) (x : T ⟶ X) (s : Over.mk x ⟶ Z),
           (ProEtale.CondensedRing.upperStar Λ x).map (e ≪≫ J).hom ≫
               condensedEvaluation Λ x s
-                (image.ι (condensedProjector Λ G Z σZ χ)) =
+                (image.ι (condensedProjector Λ G Z σZ χ).asHom) =
             condensedEvaluation Λ x (s ≫ u.inv ≫ h) ι := by
   classical
   let U :
@@ -260,23 +259,24 @@ theorem condensedProjector_coverIso
     change condensedPull Λ (σY c) ≫ condensedPull Λ u.inv =
       condensedPull Λ u.inv ≫ condensedPull Λ (σZ c)
     rw [← pull_comp, ← pull_comp, hi]
-  have hp : condensedProjector Λ G Y σY χ ≫ U.hom =
-      U.hom ≫ condensedProjector Λ G Z σZ χ := by
+  have hp : (condensedProjector Λ G Y σY χ).asHom ≫ U.hom =
+      U.hom ≫ (condensedProjector Λ G Z σZ χ).asHom := by
     unfold condensedProjector
+    simp only [End.sum_asHom]
     erw [Preadditive.sum_comp, Preadditive.comp_sum]
     apply Finset.sum_congr rfl
     intro c _
     change (condensedPull Λ (σY c) ≫ _) ≫ condensedPull Λ u.inv = _
     rw [Category.assoc, pull_scalar, ← Category.assoc, ht, Category.assoc]
-  let A : Arrow.mk (condensedProjector Λ G Y σY χ) ≅
-      Arrow.mk (condensedProjector Λ G Z σZ χ) := Arrow.isoMk U U hp.symm
+  let A : Arrow.mk (condensedProjector Λ G Y σY χ).asHom ≅
+      Arrow.mk (condensedProjector Λ G Z σZ χ).asHom := Arrow.isoMk U U hp.symm
   let J := CategoryTheory.Limits.im.mapIso A
-  have hJ : J.hom ≫ image.ι (condensedProjector Λ G Z σZ χ) =
-      image.ι (condensedProjector Λ G Y σY χ) ≫ condensedPull Λ u.inv :=
+  have hJ : J.hom ≫ image.ι (condensedProjector Λ G Z σZ χ).asHom =
+      image.ι (condensedProjector Λ G Y σY χ).asHom ≫ condensedPull Λ u.inv :=
     image.map_ι A.hom
   refine ⟨J, ?_⟩
   intro P h M ι e he
-  have heJ : (e ≪≫ J).hom ≫ image.ι (condensedProjector Λ G Z σZ χ) =
+  have heJ : (e ≪≫ J).hom ≫ image.ι (condensedProjector Λ G Z σZ χ).asHom =
       ι ≫ condensedPull Λ (u.inv ≫ h) := by
     rw [Iso.trans_hom, Category.assoc, hJ, ← Category.assoc, he,
       Category.assoc, ← pull_comp]

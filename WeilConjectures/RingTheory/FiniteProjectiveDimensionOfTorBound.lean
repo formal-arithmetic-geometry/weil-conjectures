@@ -9,6 +9,7 @@ module
 public import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Projective
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import WeilConjectures.Algebra.FlatTorIdealCriterion
 import WeilConjectures.Algebra.TorDimensionShiftFree

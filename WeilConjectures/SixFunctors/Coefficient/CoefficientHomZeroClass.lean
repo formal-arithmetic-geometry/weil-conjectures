@@ -315,7 +315,6 @@ variable {D : Type a} [Category.{v} D] [Abelian D] [HasDerivedCategory.{w} D]
   inv (DerivedCategory.Q.map (η.app M))
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
 -- The homotopy-localization comparison checks its chosen localization functors.
 @[no_expose] private noncomputable def zeroDerivedHomotopyIso :
     (HomotopyCategory.quotient D (.up ℤ)).op.prod

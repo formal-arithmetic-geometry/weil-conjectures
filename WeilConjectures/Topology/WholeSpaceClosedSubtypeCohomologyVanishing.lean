@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
 
 import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Passing from the whole closed subtype to the ambient space
 

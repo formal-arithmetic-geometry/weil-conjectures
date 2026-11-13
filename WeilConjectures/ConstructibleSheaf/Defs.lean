@@ -15,6 +15,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.Topology.Stratification
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Constructible sheaves on the small étale site

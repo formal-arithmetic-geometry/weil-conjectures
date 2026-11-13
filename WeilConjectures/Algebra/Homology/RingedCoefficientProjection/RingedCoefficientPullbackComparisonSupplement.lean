@@ -420,7 +420,7 @@ private def pushRestriction [PreservesFiniteLimits uInv]
     g.push S ⋙ SuccessiveDerivedQuotient.restriction a ⟶
       SuccessiveDerivedQuotient.restriction (g.rings.map a) ⋙ g.push R :=
   (mateEquiv (g.ordinaryAdjunction S) (g.ordinaryAdjunction R)
-    (TwoSquare.mk _ _ _ _ (restrictionIso g a).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (restrictionIso g a).hom))
 
 private theorem pushRestriction_underlying [PreservesFiniteLimits uInv]
     {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (N : Mod K (g.rings.obj S)) :
@@ -482,7 +482,7 @@ private def ordinaryBackward [PreservesFiniteLimits uInv]
     (g.inverse R).modules ⋙ (pX (g.rings.map a)).ordinary ⟶
       (pY a).ordinary ⋙ (g.inverse S).modules :=
   ((mateEquiv (nY.ordinaryAdjunction a) (nX.ordinaryAdjunction (g.rings.map a))).symm
-    (TwoSquare.mk _ _ _ _ (restrictionIso g a).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (restrictionIso g a).hom))
 
 private theorem ordinaryBackward_isIso [PreservesFiniteLimits uInv]
     {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :

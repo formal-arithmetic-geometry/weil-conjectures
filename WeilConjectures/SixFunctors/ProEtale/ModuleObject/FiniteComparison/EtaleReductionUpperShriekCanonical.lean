@@ -95,7 +95,7 @@ conservativity on `X_ét`): after `j^*` it is identified, through the invertible
 adjunctions `Rj_! ⊣ Rj^!`, with `etaleReductionUpperShriekIsoOfIsOpenImmersion`; after `i^*`,
 its source and target vanish. -/
 instance isIso_etaleReductionLowerShriekSquareOfIsOpenImmersion :
-    IsIso (etaleReductionLowerShriekSquareOfIsOpenImmersion ℓ E n j).natTrans := by
+    IsIso (etaleReductionLowerShriekSquareOfIsOpenImmersion ℓ E n j) := by
   have := HasCompactification.of_over j
   let A := ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)
   let adj₁ := PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E j
@@ -119,7 +119,7 @@ instance isIso_etaleReductionLowerShriekSquareOfIsOpenImmersion :
     have := ff.full
     have := ff.faithful
     infer_instance
-  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.natTrans.app K) := by
+  have (K : Dᵇc(U.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) : IsIso (θ.app K) := by
     let i := overClosedComplement j
     refine (Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' A j.left i.left
       (range_overClosedComplement j)).isIso_of_pairFunctor _ ?_ ?_
@@ -164,7 +164,7 @@ noncomputable def etaleReductionLowerShriekIsoOfIsOpenImmersion :
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E j ⋙ etaleReduction ℓ E n X ≅
       etaleReduction ℓ E n U ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) j.left :=
-  (asIso (etaleReductionLowerShriekSquareOfIsOpenImmersion ℓ E n j).natTrans).symm
+  (asIso (etaleReductionLowerShriekSquareOfIsOpenImmersion ℓ E n j)).symm
 
 /-- The transpose of `etaleReductionLowerShriekIsoOfIsOpenImmersion` under the adjunctions
 `Rj_! ⊣ Rj^!` is the canonical isomorphism `etaleReductionUpperShriekIsoOfIsOpenImmersion`. -/
@@ -246,9 +246,9 @@ instance isIso_etaleReductionLowerShriekSquareOfComp (w : f ≫ g = h)
       etaleReduction ℓ E n Y ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n))
           g.left) :
-    IsIso (etaleReductionLowerShriekSquareOfComp ℓ E n w γf γg).natTrans := by
-  have : IsIso (TwoSquare.mk _ _ _ _ γf.inv).natTrans := inferInstanceAs (IsIso γf.inv)
-  have : IsIso (TwoSquare.mk _ _ _ _ γg.inv).natTrans := inferInstanceAs (IsIso γg.inv)
+    IsIso (etaleReductionLowerShriekSquareOfComp ℓ E n w γf γg) := by
+  have : IsIso (TwoSquare.mk _ _ _ _ γf.inv) := inferInstanceAs (IsIso γf.inv)
+  have : IsIso (TwoSquare.mk _ _ _ _ γg.inv) := inferInstanceAs (IsIso γg.inv)
   have := quasiCompact_left_of_over h
   have := (TwoSquare.mk _ _ _ _ γf.inv).isIso_vComp (TwoSquare.mk _ _ _ _ γg.inv)
   have := ((TwoSquare.mk _ _ _ _ γf.inv).vComp (TwoSquare.mk _ _ _ _ γg.inv)).isIso_whiskerLeft
@@ -273,7 +273,7 @@ noncomputable def etaleReductionLowerShriekIsoOfComp (w : f ≫ g = h)
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E h ⋙ etaleReduction ℓ E n S ≅
       etaleReduction ℓ E n X ⋙
         Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) h.left :=
-  (asIso (etaleReductionLowerShriekSquareOfComp ℓ E n w γf γg).natTrans).symm
+  (asIso (etaleReductionLowerShriekSquareOfComp ℓ E n w γf γg)).symm
 
 /-- **Transposes of reduction comparisons compose**: if the transposes of `γ_f` and `γ_g` under
 `Rf_! ⊣ Rf^!` and `Rg_! ⊣ Rg^!` are invertible, so is the transpose of

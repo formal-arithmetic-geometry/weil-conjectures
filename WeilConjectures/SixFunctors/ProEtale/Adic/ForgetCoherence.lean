@@ -174,11 +174,12 @@ variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ �
 
 private lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq :
     adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h =
-      Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius).symm ≪≫
+      Functor.isoWhiskerLeft _
+        (adicUpperStarIsoLowerStarInv l f.geometricGaloisFrobenius.asIso).symm ≪≫
       (adicUpperStarComp l _ _).symm ≪≫
       adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm ≪≫
       adicUpperStarComp l _ _ ≪≫
-      Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius) _ :=
+      Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l g.geometricGaloisFrobenius.asIso) _ :=
   rfl
 
 /-- The exchange isomorphism `φ̄^* ⋙ Fr_X^* ≅ Fr_Y^* ⋙ φ̄^*` of `ℓ`-adic sheaves, on the
@@ -187,17 +188,17 @@ underlying sheaves: `Fr_X^* φ̄^* ≅ (Fr_X ≫ φ̄)^* = (φ̄ ≫ Fr_Y)^* ≅
 lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom
     (M : AdicSheaf l g.geometricFiber) :
     ((adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).hom.app M).hom =
-      (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) f.geometricGaloisFrobenius).inv.app
+      (upperStarIsoLowerStarInv (WeilCoefficients.{u} l) f.geometricGaloisFrobenius.asIso).inv.app
           ((Scheme.Hom.geometricFiberMap φ h)^*ᵃ[l].obj M).X ≫
-        (upperStarComp _ f.geometricGaloisFrobenius.hom (Scheme.Hom.geometricFiberMap φ h)).inv.app
-          M.X ≫
+        (upperStarComp _ f.geometricGaloisFrobenius.asIso.hom
+          (Scheme.Hom.geometricFiberMap φ h)).inv.app M.X ≫
         (upperStarCongr _
           (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom.app M.X ≫
-        (upperStarComp _ (Scheme.Hom.geometricFiberMap φ h) g.geometricGaloisFrobenius.hom).hom.app
-          M.X ≫
+        (upperStarComp _ (Scheme.Hom.geometricFiberMap φ h)
+          g.geometricGaloisFrobenius.asIso.hom).hom.app M.X ≫
         (Scheme.Hom.geometricFiberMap φ h)^*[WeilCoefficients.{u} l].map
-          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l) g.geometricGaloisFrobenius).hom.app
-            M.X) :=
+          ((upperStarIsoLowerStarInv (WeilCoefficients.{u} l)
+            g.geometricGaloisFrobenius.asIso).hom.app M.X) :=
   (congrArg (fun i ↦ (i.hom.app M).hom)
     (adicUpperStarGeometricFiberMapCompFrobeniusIso_eq (l := l) φ h)).trans
     (exchange_hom_app_hom _ _ _ _ M)

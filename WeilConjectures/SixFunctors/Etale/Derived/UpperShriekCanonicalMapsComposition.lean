@@ -197,10 +197,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff
     (rightDerivedLowerShriekBaseChangeMap Λ sqf) (rightDerivedLowerShriekBaseChangeMap Λ sqg)
     (rightDerivedLowerShriekBaseChangeMap Λ sqh) (E f g h w) (E f' g' h' w')
     (hEx sqf sqg sqh w w') K
-  change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqh))).natTrans.app K) ↔
+  change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqh))).app K) ↔
     IsIso ((R(f')^![Λ]).map
-      ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqg))).natTrans.app K))
-  change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqf))).natTrans.app
+      ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqg))).app K))
+  change IsIso ((mateEquiv _ _ (inv (rightDerivedLowerShriekBaseChangeMap Λ sqf))).app
     ((R(g)^![Λ]).obj K)) at hf
   rw [← isIso_comp_right_iff _ ((Adjunction.rightAdjointUniq
       ((rightDerivedUpperShriekAdjunction _ h').ofNatIsoLeft (E f' g' h' w'))

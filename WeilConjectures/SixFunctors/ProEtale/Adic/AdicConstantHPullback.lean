@@ -87,8 +87,8 @@ noncomputable def adicConstantHPullback (n : ℕ) :
     (Ext.mk₀CompMk₀_add _ _ _ _)
   map_smul' c x := by
     change Ext.mk₀CompMk₀ _ (Ext.mapExactFunctor _ (Ext.comp x
-        (Ext.mk₀ (adicScalarRingHom l Y c)) (add_zero n))) _ =
-      (Ext.mk₀CompMk₀ _ (Ext.mapExactFunctor _ x) _).comp (Ext.mk₀ (adicScalarRingHom l X c))
+        (Ext.mk₀ (adicScalarRingHom l Y c).asHom) (add_zero n))) _ =
+      (Ext.mk₀CompMk₀ _ (Ext.mapExactFunctor _ x) _).comp (Ext.mk₀ (adicScalarRingHom l X c).asHom)
         (add_zero n)
     rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀, Ext.mk₀CompMk₀_comp_mk₀_right,
       Ext.mk₀CompMk₀_comp_mk₀]

@@ -37,7 +37,6 @@ variable {R : Type (u + 1)} [Ring R] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImm
 
 /-- **Sections of `j_! F` vanish near the complement of `U`.** A section `s` of the extension
 by zero `j_! F` over `V` vanishes on a weakly étale neighbourhood `V' ⟶ V` of each point `x` of
-set_option synthInstance.maxHeartbeats 400000 in
 `V` lying over the complement of `U`. -/
 lemma exists_map_eq_zero_openImmersionLowerShriek
     (F : Sheaf (ProEt.topology U) (ModuleCat.{u + 1} R)) {V : X.ProEt}

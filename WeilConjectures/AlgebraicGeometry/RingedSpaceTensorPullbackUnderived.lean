@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.KFlatPullback
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Concrete tensor pullback on modules of a ringed space
 

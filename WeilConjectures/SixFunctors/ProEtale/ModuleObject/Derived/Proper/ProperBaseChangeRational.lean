@@ -169,7 +169,7 @@ private theorem push_iso
     [IsIso adj₁.unit] [IsIso adj₂.counit] :
     IsIso (Adjunction.pushHomOfComapIso adj₁ adj₂ e) := by
   unfold Adjunction.pushHomOfComapIso
-  dsimp [mateEquiv, TwoSquare.natTrans, TwoSquare.mk]
+  dsimp [mateEquiv, TwoSquare.mk]
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in

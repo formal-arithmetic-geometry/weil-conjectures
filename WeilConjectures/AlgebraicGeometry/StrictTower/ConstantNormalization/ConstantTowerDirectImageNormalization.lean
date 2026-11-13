@@ -380,7 +380,7 @@ private theorem squareComparison_eq_mate
     [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions T]
     [P.PreservesKInjectiveComplexes]
     (a : LF ⊣ F) (b : LH ⊣ H) (s : Q ⋙ LH ≅ LF ⋙ P) (e : F ⋙ Q ≅ P ⋙ H)
-    (he : (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)).natTrans = e.hom) :
+    (he : (mateEquiv a b (TwoSquare.mk _ _ _ _ s.hom)) = e.hom) :
     ((Functor.rightDerivedFunctorCompMapDerivedCategoryIso F Q).symm ≪≫
       Functor.rightDerivedFunctorNatIso e ≪≫
       Functor.rightDerivedFunctorCompIso P H ≪≫
@@ -391,7 +391,7 @@ private theorem squareComparison_eq_mate
       (TwoSquare.mk _ _ _ _
         (Functor.mapDerivedCategoryCompIso Q LH ≪≫
           Functor.mapDerivedCategoryNatIso s ≪≫
-            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)).natTrans := by
+            (Functor.mapDerivedCategoryCompIso LF P).symm).hom)) := by
   apply Functor.rightDerived_ext (F.rightDerivedFunctor ⋙ Q.mapDerivedCategory)
     (Functor.rightDerivedFunctorCompMapDerivedCategoryUnit F Q)
     (HomotopyCategory.quasiIso C (.up ℤ))
@@ -467,10 +467,10 @@ private theorem comparison_of_resolving
 private theorem const_mate {B E J : Type*} [Category B] [Category E] [Category J]
     (L : B ⥤ E) (R : E ⥤ B) (a : L ⊣ R) :
     (mateEquiv a (a.whiskerRight J)
-      (TwoSquare.mk _ _ _ _ (Functor.compConstIso J L).inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.compConstIso J L).inv)) =
       (Functor.compConstIso J R).hom := by
   ext M j
-  simp only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+  simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
     Category.id_comp]
@@ -738,13 +738,13 @@ private theorem extensionPullInv_isIso :
   let α := TwoSquare.mk _ _ _ _ b
   let γ := (mateEquiv av au).symm α
   have hm : mateEquiv av au γ = α := (mateEquiv av au).apply_symm_apply α
-  have hmate : (mateEquiv az ar α).natTrans = d.hom :=
+  have hmate : mateEquiv az ar α = d.hom :=
     AlgebraicGeometry.Scheme.restrictionPullback_mate
       f RY SY RX SX aY aX cR cS comm
-  have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ.natTrans) := by
+  have hc : IsIso (conjugateEquiv (av.comp az) (ar.comp au) γ) := by
     rw [← iterated_mateEquiv_conjugateEquiv av au ar az γ, hm, hmate]
     infer_instance
-  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ.natTrans
+  exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem restrictionPullback_unit
@@ -759,7 +759,7 @@ private theorem restrictionPullback_unit
   have h := unit_mateEquiv (proEtaleRingModuleAdjunction f SY SX cS)
     (proEtaleRingModuleAdjunction f RY RX cR) (TwoSquare.mk _ _ _ _ b) M
   have hm : (mateEquiv (proEtaleRingModuleAdjunction f SY SX cS)
-      (proEtaleRingModuleAdjunction f RY RX cR) (TwoSquare.mk _ _ _ _ b)).natTrans =
+      (proEtaleRingModuleAdjunction f RY RX cR) (TwoSquare.mk _ _ _ _ b)) =
       d.hom := AlgebraicGeometry.Scheme.restrictionPullback_mate
         f RY SY RX SX aY aX cR cS comm
   have hmapp : (mateEquiv (proEtaleRingModuleAdjunction f SY SX cS)
@@ -868,7 +868,7 @@ private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (chi A f).hom = (mateEquiv
       (proEtaleRingDerivedAdjunction f (coefficients A Y) (coefficients A X)
         (constantRingIso A f)) (adj A f)
-      (TwoSquare.mk _ _ _ _ (deltaPull A f).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (deltaPull A f).hom)) := by
   let a := proEtaleRingModuleAdjunction f (coefficients A Y) (coefficients A X)
     (constantRingIso A f)
   exact squareComparison_eq_mate (moduleDirectImage A f) (Functor.const ℕᵒᵖ)

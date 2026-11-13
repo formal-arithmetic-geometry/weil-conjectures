@@ -252,7 +252,7 @@ fibre `X` of `f`, iterating
 with iteration by `AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso_add_hom_app`. -/
 noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIterateIso (m : ℕ) :
     L((iterateHom f.geometricFiberFrobenius m)^*[A]) ≅
-      L((iterateHom f.geometricGaloisFrobenius.hom m)^*[A]) :=
+      L((iterateHom f.geometricGaloisFrobenius.asIso.hom m)^*[A]) :=
   leftDerivedUpperStarIterateHomIso (leftDerivedUpperStarGeometricFiberFrobeniusIso A f) m
 
 /-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (`ψ_m = φ_m κ_m`, for an arbitrary
@@ -260,7 +260,7 @@ morphism `φ`): for a morphism `φ : LFr_X^* K ⟶ K`, the iterates of
 `ψ = φ ∘ κ_{1,K} : LΦ_X^* K ⟶ K` are `ψ_m = φ_m ∘ κ_{m,K}`. -/
 theorem weilDatumIterate_comp_geometricFiberFrobenius
     {K : _root_.DerivedCategory (Sheaf f.geometricFiber.smallEtaleTopology A)}
-    (φ : L((f.geometricGaloisFrobenius.hom)^*[A]).obj K ⟶ K) (m : ℕ) :
+    (φ : L((f.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ⟶ K) (m : ℕ) :
     weilDatumIterate ((leftDerivedUpperStarGeometricFiberFrobeniusIso A f).hom.app K ≫ φ) m =
       (leftDerivedUpperStarGeometricFiberFrobeniusIterateIso A f m).hom.app K ≫
         weilDatumIterate φ m :=
@@ -271,7 +271,7 @@ structure `φ : LFr_X^* K ≅ K`, the iterates of its scheme-Frobenius form `ψ 
 (`AlgebraicGeometry.Etale.schemeFrobeniusForm`) are `ψ_m = φ_m ∘ κ_{m,K}`. -/
 theorem weilDatumIterate_schemeFrobeniusForm_hom
     {K : _root_.DerivedCategory (Sheaf f.geometricFiber.smallEtaleTopology A)}
-    (φ : L((f.geometricGaloisFrobenius.hom)^*[A]).obj K ≅ K) (m : ℕ) :
+    (φ : L((f.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ≅ K) (m : ℕ) :
     weilDatumIterate (schemeFrobeniusForm A φ).hom m =
       (leftDerivedUpperStarGeometricFiberFrobeniusIterateIso A f m).hom.app K ≫
         weilDatumIterate φ.hom m :=

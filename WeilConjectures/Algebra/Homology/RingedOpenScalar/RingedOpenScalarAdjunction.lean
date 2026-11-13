@@ -175,16 +175,16 @@ variable {A B C D : Type t} [Category.{h} A] [Category.{h} B]
 private theorem inverseMate_of_unit
     (hu : ∀ N : A, rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) ≫
       qR.map (e.hom.app N) = adjR.unit.app (rU.obj N)) :
-    ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv := by
+    ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)) = e.inv := by
   ext N
   apply (adjR.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   change adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) = _
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) = _
   have h := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
   change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
     adjR.unit.app (rU.obj N) ≫ qR.map
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at h
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) at h
   rw [← h, ← hu N]
   simp only [Category.assoc]
   rw [← qR.map_comp, Iso.hom_inv_id_app]
@@ -192,7 +192,7 @@ private theorem inverseMate_of_unit
   erw [Category.comp_id]
 
 private theorem equations_of_inverseMate
-    (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans = e.inv) :
+    (hm : ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)) = e.inv) :
     Equations e d adjS adjR := by
   have hu (N : A) := unit_mateEquiv_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) N
   have hc (Q : C) := mateEquiv_counit_symm adjS adjR (TwoSquare.mk _ _ _ _ d.inv) Q
@@ -202,7 +202,7 @@ private theorem equations_of_inverseMate
     have hu' := hu N
     change rU.map (adjS.unit.app N) ≫ d.inv.app (JS.obj N) =
       adjR.unit.app (rU.obj N) ≫ qR.map
-        (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app N) at hu'
+        (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app N) at hu'
     rw [hm] at hu'
     rw [reassoc_of% hu']
     rw [← qR.map_comp, Iso.inv_hom_id_app]
@@ -211,7 +211,7 @@ private theorem equations_of_inverseMate
   · intro Q
     have hc' := hc Q
     change JR.map (d.inv.app Q) ≫ adjR.counit.app (rT.obj Q) =
-      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans.app (qS.obj Q)) ≫
+      (((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).app (qS.obj Q)) ≫
         rT.map (adjS.counit.app Q) at hc'
     rw [hm] at hc'
     rw [hc', Iso.hom_inv_id_app_assoc]
@@ -282,19 +282,19 @@ private theorem equations_derived (he : Equations e d adjS adjR) :
       (OpenTensorNormalization.exactDerivedAdjunction adjR) := by
   have hm := inverseMate_of_unit e d adjS adjR he.1
   have : IsIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans := by
-    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv)).natTrans
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)) := by
+    change IsIso ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.inv))
     rw [hm]
     infer_instance
   have hiso : asIso
-      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)).natTrans = e.symm := by
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ d.symm.hom)) = e.symm := by
     apply Iso.ext
     exact hm
   have hd := (exact_localization_inverse_mate adjS adjR d.symm).2.1
   rw [hiso] at hd
   change ((mateEquiv (OpenTensorNormalization.exactDerivedAdjunction adjS)
       (OpenTensorNormalization.exactDerivedAdjunction adjR)).symm
-      (TwoSquare.mk _ _ _ _ (derivedSquare qS rU rT qR d.symm).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (derivedSquare qS rU rT qR d.symm).hom)) =
         (derivedSquare rU JR JS rT e.symm).hom at hd
   rw [derivedSquare_symm, derivedSquare_symm] at hd
   exact equations_of_inverseMate _ _ _ _ hd

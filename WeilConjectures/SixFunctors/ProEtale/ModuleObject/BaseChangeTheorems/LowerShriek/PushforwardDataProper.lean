@@ -169,7 +169,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
     [IsIso ((𝔽).baseChange (SepFinType.homMk (ofIsProperBaseChangeHom sq))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj))
-      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw).natTrans] :
+      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw)] :
     P.lowerShriekOfCompactificationBaseChange (Compactification.ofIsProper f.left)
         (Compactification.ofIsProper f'.left) (ofIsProperBaseChangeHom sq)
         (isPullback_ofIsProper_overI sq) (isPullback_ofIsProper_overG sq) =
@@ -179,7 +179,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper_eq (sq : IsPullback g' 
         (SepFinType.homMk (Compactification.ofIsProper f'.left).overG)
         (SepFinType.homMk (ofIsProperBaseChangeHom sq))
         (SepFinType.homMk (ofIsProperBaseChangeHom sq)) (SepFinType.homMk g) hw
-        (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)).natTrans := by
+        (SepFinType.homMk_comp_homMk (isPullback_ofIsProper_overG sq).w)) := by
   obtain ⟨Xl, ⟨⟨⟩⟩, Xh⟩ := X
   obtain ⟨Xl', ⟨⟨⟩⟩, Xh'⟩ := X'
   obtain ⟨fl, ⟨⟨⟨⟩⟩⟩, fw⟩ := f
@@ -213,7 +213,7 @@ lemma lowerShriekOfCompactificationBaseChange_ofIsProper (sq : IsPullback g' f' 
   have : IsIso ((𝔽).baseChange (SepFinType.homMk (ofIsProperBaseChangeHom sq))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f'.left).overObj))
       (𝟙 (SepFinType.mk (Compactification.ofIsProper f.left).overObj))
-      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw).natTrans :=
+      (SepFinType.homMk (ofIsProperBaseChangeHom sq)) hw) :=
     P.isIso_baseChange_exchangeFormalism (IsPullback.of_id_snd (f := ofIsProperBaseChangeHom sq))
   have key := (𝔽).shriekBaseChange_id_left
     (SepFinType.homMk (Compactification.ofIsProper f.left).overG)
@@ -268,7 +268,7 @@ theorem lowerShriekBaseChange_of_isProper_mateEquiv (hP : P.IsIsoRefinementPushf
       (mateEquiv (P.adj (Compactification.ofIsProper f.left).overG)
         (P.adj (Compactification.ofIsProper f'.left).overG)
         (boundedConstructiblePullbackSquareComparison Λ ℓ
-          (isPullback_ofIsProper_overG sq).toCommSq).hom).natTrans =
+          (isPullback_ofIsProper_overG sq).toCommSq).hom) =
     lowerShriekBaseChange hP sq ≫
       Functor.whiskerLeft (boundedConstructibleUpperStar Λ ℓ g')
         (lowerShriekIsoLowerStar hP f').hom := by

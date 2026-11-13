@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.AnnihilatorSubsheaf
 import WeilConjectures.AlgebraicGeometry.AnnihilatorAffineCriterion
 import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent
 import WeilConjectures.AlgebraicGeometry.AnnihilatorStalkLocalLift
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # The subsheaf of sections annihilated by an ideal
 

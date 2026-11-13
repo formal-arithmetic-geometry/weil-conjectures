@@ -95,7 +95,7 @@ private theorem finiteProperComparison_app_mate
             (R.ring V) (S.ring V) (R.ring U) (S.ring U)
             (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv.app
               ((pbcDerivedExtend (a.map U)).obj K)) := by
-  simp only [finiteProperComparison, mateEquiv_symm_apply, TwoSquare.mk, TwoSquare.natTrans,
+  simp only [finiteProperComparison, mateEquiv_symm_apply, TwoSquare.mk,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,

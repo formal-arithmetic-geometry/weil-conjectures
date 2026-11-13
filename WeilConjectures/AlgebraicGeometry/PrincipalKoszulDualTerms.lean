@@ -177,7 +177,7 @@ def dualZeroTerm (m : ℕ) :
   dualFactorTerm R a m 0 ≪≫
     homObjMapIso R
       (HomologicalComplex.doubleXIso₀
-        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1))
+        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
         zeroOneRel).symm (Iso.refl _) ≪≫
     SheafOfModules.homObjUnitIso (R := R) _
 
@@ -191,7 +191,7 @@ def dualNegOneTerm (m : ℕ) :
   dualFactorTerm R a m (-1) ≪≫
     homObjMapIso R
       (HomologicalComplex.doubleXIso₁
-        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1))
+        ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
         zeroOneRel (by decide)).symm (Iso.refl _) ≪≫
     SheafOfModules.homObjUnitIso (R := R) _
 
@@ -204,7 +204,7 @@ theorem dualOtherTerm (m : ℕ) (q : ℤ) (h0 : q ≠ 0) (h1 : q ≠ -1) :
   apply IsZero.of_iso _ (dualFactorTerm R a m q)
   exact ((SheafOfModules.homFunctor R).flip.obj (SheafOfModules.unit _)).map_isZero
     (HomologicalComplex.isZero_double_X
-      ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1))
+      ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
       zeroOneRel (-q) (by omega) (by omega)).op
 
 /-- The explicit degreewise cone-to-dual identification. At the two supported degrees use
@@ -256,7 +256,7 @@ theorem dualZeroTerm_hom (m : ℕ) :
       (dualFactorTerm R a m 0).hom ≫
         SheafOfModules.homObjMap (R := R)
           (HomologicalComplex.doubleXIso₀
-            ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1))
+            ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
             zeroOneRel).inv (𝟙 _) ≫
           (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom := rfl
 
@@ -268,7 +268,7 @@ theorem dualNegOneTerm_hom (m : ℕ) :
       (dualFactorTerm R a m (-1)).hom ≫
         SheafOfModules.homObjMap (R := R)
           (HomologicalComplex.doubleXIso₁
-            ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1))
+            ((ringedKoszulScalar R ⟨a.val, a.property⟩) ^ (m + 1)).asHom
             zeroOneRel (by decide)).inv (𝟙 _) ≫
           (SheafOfModules.homObjUnitIso (R := R) (SheafOfModules.unit _)).hom := rfl
 

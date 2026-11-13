@@ -753,7 +753,7 @@ private theorem betaInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
       Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _]
   ext N
   dsimp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans]
+    TwoSquare.hComp, TwoSquare.mk]
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id]
@@ -798,7 +798,7 @@ private theorem beta_open_comp_aux {V U X V₁ U₁ X₁ : Scheme.{u}}
     erw [(G B k₁).map_id, Category.comp_id]
   have hi := congr_app (betaInv_open_comp B k j k₁ j₁ a b g wk wj w hp) M
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans] at hi
+    TwoSquare.mk] at hi
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id] at hi
@@ -1209,7 +1209,7 @@ theorem normalizedProperOpenCalculus :
       apply (cancel_mono ((J B k).map ((gComp B r₁ r₂).hom.app N))).1
       simpa [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
         Iso.hom_inv_id_app, Functor.map_id, Category.comp_id,
-        TwoSquare.mk, TwoSquare.natTrans] using
+        TwoSquare.mk] using
         (alpha_vertical B k i j r₁ r₂ p₁ p₂ h₁ h₂ h N).symm
     have hm := congrArg (fun α ↦ (mateEquiv (adj B (r₁ ≫ r₂))
       (adj B (p₁ ≫ p₂)) α).app M) hs
@@ -1236,7 +1236,7 @@ theorem normalizedProperOpenCalculus :
         TwoSquare.hComp_app]
       apply (cancel_epi ((G B q).map ((jComp B i j).hom.app N))).1
       simpa [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-        Functor.map_id, Category.id_comp, TwoSquare.mk, TwoSquare.natTrans] using
+        Functor.map_id, Category.id_comp, TwoSquare.mk] using
         alpha_horizontal B k l i j r p q h₁ h₂ h N
     have hm := congrArg (fun α ↦ (mateEquiv (adj B r) (adj B q) α).app M) hs
     rw [mateEquiv_whiskerTop_whiskerBottom,
@@ -1261,7 +1261,7 @@ theorem normalizedProperOpenCalculus :
         (δr.hComp α₁).whiskerTop (beta B c i₁ i b wi si).hom := by
       ext N
       simp only [TwoSquare.whiskerBottom_app, TwoSquare.whiskerTop_app,
-        TwoSquare.hComp_app, α, α₁, δp, δr, TwoSquare.mk, TwoSquare.natTrans]
+        TwoSquare.hComp_app, α, α₁, δp, δr, TwoSquare.mk]
       apply (cancel_mono
         ((J B k₁).map ((squareG B d r₁ r c wr).inv.app N))).1
       simpa [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
@@ -1278,7 +1278,7 @@ theorem normalizedProperOpenCalculus :
     rw [ht, mateEquiv_vcomp (adj B r) (adj B r₁) (adj B p₁)] at hm
     simpa [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
       TwoSquare.vComp_app, α, α₁, δp, δr, gamma, exchange,
-      TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hm
+      TwoSquare.mk, Category.assoc] using hm
 
 section GammaIdentities
 set_option backward.isDefEq.respectTransparency true
@@ -1296,9 +1296,8 @@ private theorem mate_whisker
         (Functor.whiskerRight t L₂ ≫ a ≫ Functor.whiskerLeft L₁ b) =
       Functor.whiskerLeft R₁ t ≫ mateEquiv adj₁ adj₂ a ≫
         Functor.whiskerRight b R₂ := by
-  apply TwoSquare.ext
-  intro X
-  dsimp [mateEquiv, TwoSquare.natTrans]
+  refine NatTrans.ext (funext fun X ↦ ?_)
+  dsimp [mateEquiv]
   simp only [Category.id_comp, Category.comp_id, Functor.map_comp, Category.assoc]
   have ht := adj₂.unit.naturality (t.app (R₁.obj X))
   dsimp at ht
@@ -1316,25 +1315,23 @@ private theorem mate_identity_vertical
       F.map (((conjugateIsoEquiv Adjunction.id adj₀ e₀).symm).hom.app M) := by
   let A := TwoSquare.mk _ _ _ _ a
   have hA : A.whiskerLeft e₀.hom = (TwoSquare.vId F).whiskerRight e₁.hom := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     dsimp [A, TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vId]
-    simpa only [TwoSquare.mk, TwoSquare.natTrans, Category.comp_id, Category.id_comp]
+    simpa only [TwoSquare.mk, Category.comp_id, Category.id_comp]
       using ha N
   have hm := mateEquiv_whiskerTop_conjugateEquiv
     Adjunction.id adj₀ Adjunction.id adj₁ e₀.hom e₁.hom (TwoSquare.vId F) A hA
   have hmM := congrArg (fun t ↦ t.app M) hm
   have hi : mateEquiv Adjunction.id Adjunction.id (TwoSquare.vId F) =
       TwoSquare.hId F := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     simp [mateEquiv, TwoSquare.vId, TwoSquare.hId, Adjunction.id]
   rw [hi] at hmM
   have hh : F.map ((conjugateIsoEquiv Adjunction.id adj₀ e₀).hom.app M) ≫
       (mateEquiv adj₀ adj₁ a).app M =
         (conjugateIsoEquiv Adjunction.id adj₁ e₁).hom.app (F.obj M) := by
     simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
-      TwoSquare.hId_app, A, TwoSquare.mk, TwoSquare.natTrans] at hmM
+      TwoSquare.hId_app, A, TwoSquare.mk] at hmM
     dsimp only [Functor.id_obj] at hmM
     erw [Category.id_comp] at hmM
     simpa only [conjugateIsoEquiv_apply_hom] using hmM
@@ -1355,15 +1352,14 @@ private theorem mate_identity_horizontal
       e₀.hom.app (R₀.obj M) := by
   let A := TwoSquare.mk _ _ _ _ a
   have hA : (A.whiskerTop e₀.inv).whiskerBottom e₁.hom = TwoSquare.hId L := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     dsimp [A, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hId]
     have hh := congrArg (fun f ↦ L.map (e₀.inv.app N) ≫ f) (ha N)
-    simpa [TwoSquare.mk, TwoSquare.natTrans, ← Functor.map_comp,
+    simpa [TwoSquare.mk, ← Functor.map_comp,
       Category.assoc] using hh
   have hm := congrArg (mateEquiv adj₀ adj₀) hA
   simp only [A, TwoSquare.whiskerTop, TwoSquare.whiskerBottom,
-    TwoSquare.natTrans, TwoSquare.mk, Category.assoc] at hm
+    TwoSquare.mk, Category.assoc] at hm
   rw [mate_whisker] at hm
   have hmM := congrArg (fun t ↦ t.app M) hm
   have hh : e₀.inv.app (R₀.obj M) ≫ (mateEquiv adj₀ adj₀ a).app M ≫

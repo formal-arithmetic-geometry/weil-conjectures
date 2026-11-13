@@ -99,10 +99,10 @@ structure PurityFrobeniusDatum (f₀ : X₀ ⟶ Y₀) (hf₀ : f₀ ≫ aY = aX)
   isFrobenius_frobY : frobY.IsFrobenius (Nat.card k₀)
   /-- The comparison `κ_X : LΦ_X^* ≅ Lg_{X,γ}^*`. -/
   κX : L((Hom.geometricFiberMap frobX (isFrobenius_frobX.comp_eq aX))^*[ModuleCat.{u + 1} Λ]) ≅
-    L((aX.geometricGaloisFrobenius.hom)^*[ModuleCat.{u + 1} Λ])
+    L((aX.geometricGaloisFrobenius.asIso.hom)^*[ModuleCat.{u + 1} Λ])
   /-- The comparison `κ_Y : LΦ_Y^* ≅ Lg_{Y,γ}^*`. -/
   κY : L((Hom.geometricFiberMap frobY (isFrobenius_frobY.comp_eq aY))^*[ModuleCat.{u + 1} Λ]) ≅
-    L((aY.geometricGaloisFrobenius.hom)^*[ModuleCat.{u + 1} Λ])
+    L((aY.geometricGaloisFrobenius.asIso.hom)^*[ModuleCat.{u + 1} Λ])
   /-- The compatibility `Lf^* κ_Y = κ_X Lf^*`. -/
   κ_comm : ∀ K, ((leftDerivedUpperStarComp _ (Hom.geometricFiberMap frobX
       (isFrobenius_frobX.comp_eq aX)) (Hom.geometricFiberMap f₀ hf₀)).inv.app K ≫
@@ -115,10 +115,10 @@ structure PurityFrobeniusDatum (f₀ : X₀ ⟶ Y₀) (hf₀ : f₀ ≫ aY = aX)
           exact (isFrobenius_frobX.comp_eq_comp aX isFrobenius_frobY f₀).symm)).hom.app K) ≫
       (L((Hom.geometricFiberMap f₀ hf₀)^*[ModuleCat.{u + 1} Λ])).map (κY.hom.app K) ≫
       ((leftDerivedUpperStarComp _ (Hom.geometricFiberMap f₀ hf₀)
-        aY.geometricGaloisFrobenius.hom
-        (aX.geometricGaloisFrobenius.hom ≫ Hom.geometricFiberMap f₀ hf₀)
+        aY.geometricGaloisFrobenius.asIso.hom
+        (aX.geometricGaloisFrobenius.asIso.hom ≫ Hom.geometricFiberMap f₀ hf₀)
         (Hom.geometricFiberMap_comp_geometricGaloisFrobenius f₀ hf₀).symm).inv.app K ≫
-      (leftDerivedUpperStarComp _ aX.geometricGaloisFrobenius.hom
+      (leftDerivedUpperStarComp _ aX.geometricGaloisFrobenius.asIso.hom
         (Hom.geometricFiberMap f₀ hf₀)).hom.app K) =
     κX.hom.app ((L((Hom.geometricFiberMap f₀ hf₀)^*[ModuleCat.{u + 1} Λ])).obj K)
 

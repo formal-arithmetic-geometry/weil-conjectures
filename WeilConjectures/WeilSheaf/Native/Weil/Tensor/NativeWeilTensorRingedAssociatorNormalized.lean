@@ -37,7 +37,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
   nativeRingedAssociatorComplex nativeRingedTripleLeft nativeRingedTripleRight
   nativeWeilRingedTensorComplexModel
 
-set_option maxHeartbeats 800000 in
 -- Keep localization and total-tensor definitions folded in the concrete representative types.
 /-- Associativity after normalizing the ordinary monoidal structure.
 Source: Stacks 06YU, 0FPT

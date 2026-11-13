@@ -151,11 +151,11 @@ def upperStarOfMapIhomIso (π : X'.left ⟶ X.left) [WeaklyEtale π]
       (ihom ((boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π).obj A)).obj
         ((boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π).obj B) :=
   haveI : IsIso ((Functor.LaxMonoidal.ihomComparison
-      (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π) A).natTrans.app B) := by
+      (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π) A).app B) := by
     have := isIso_nearbyDualityMap_upperStarOfMap_id_of_weaklyEtale ℓ (P := X) (P' := X') π B A
     rwa [Verdier.nearbyDualityMap_id_eq_ihomComparison] at this
   asIso ((Functor.LaxMonoidal.ihomComparison
-    (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π) A).natTrans.app B)
+    (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := X') π) A).app B)
 
 /-- **An isomorphism `πX^* Rf^! ℚ̄_ℓ ≅ Rf'^! ℚ̄_ℓ` by Verdier duality**, for a commutative square
 `πX ≫ f = f' ≫ πY` with `πX` weakly étale, given isomorphisms `πX^* ω_X ≅ ω_X'` and
