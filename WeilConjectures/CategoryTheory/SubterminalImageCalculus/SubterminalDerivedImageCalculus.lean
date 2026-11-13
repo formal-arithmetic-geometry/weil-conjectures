@@ -157,7 +157,7 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
-@[local instance 2000]
+@[instance 2000]
 private theorem restrictionComp_preservesZero
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
