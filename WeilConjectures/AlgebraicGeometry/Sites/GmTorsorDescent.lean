@@ -300,14 +300,18 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
     (by rw [← Quiver.Hom.comp_toLoc, ← op_comp, hf₁])
   let mc₂ := modulesPseudofunctor.mapComp' (V i₂).hom.op.toLoc f₂.op.toLoc q.op.toLoc
     (by rw [← Quiver.Hom.comp_toLoc, ← op_comp, hf₂])
-  have key := comp_eq_of_comm ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X))
+  have hc := φ.comm q f₁ f₂ hf₁ hf₂
+  dsimp only [descentData, unitDescentData, Pseudofunctor.toDescentData,
+    Pseudofunctor.DescentData.ofObj] at hc
+  have key := comp_eq_of_comm (𝒞 := modulesPseudofunctor.obj (.mk (op Y)))
+    ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X))
     ((Cat.Hom.toNatIso mc₁).app M) ((Cat.Hom.toNatIso mc₂).app (Modules.unitObj X))
     ((Cat.Hom.toNatIso mc₂).app M)
     ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.map (φ.hom i₁))
     ((modulesPseudofunctor.map f₂.op.toLoc).toFunctor.map (φ.hom i₂))
-    _ _ (smulMor_naturality ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X)).hom
+    _ _ (smulMor_naturality (Y := Y) ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X)).hom
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
-    (φ.comm q f₁ f₂ hf₁ hf₂)
+    hc
   simp only [Iso.app_hom, Iso.app_inv, Cat.Hom.toNatIso_hom, Cat.Hom.toNatIso_inv, mc₁,
     mc₂] at key
   exact key.symm
@@ -319,7 +323,10 @@ private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     Modules.etaleIsoTorsorVal M ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op x) =
       pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
         (f₁ := V.hom) (f₂ := V.hom) (Modules.etaleIsoTorsorVal M x) a.left Z.hom Z.hom
-        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := rfl
+        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := by
+  change (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
+    ((toProEt X ⋙ ProEt.forget X).map a).op (Modules.etaleIsoTorsorVal M x) = _
+  simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
