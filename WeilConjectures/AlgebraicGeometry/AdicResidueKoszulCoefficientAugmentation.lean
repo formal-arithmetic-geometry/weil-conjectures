@@ -269,9 +269,11 @@ theorem adicResidue_koszul_coefficient_augmentation
       (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
       (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
         (a i)) U)
-    (adicResidueQuotientModule X J U) (adicResidueQuotientModuleStep X J U)
-    (quotientProjection X J U) (quotientProjection_step X J U)
-    (fun n i ↦ scalarPower_quotientProjection X J U (a i)
+    (adicResidueQuotientModule.{u, v} X J U)
+    (fun n ↦ adicResidueQuotientModuleStep.{u, v} X J U n)
+    (fun n ↦ quotientProjection.{u, v} X J U n)
+    (fun n ↦ quotientProjection_step.{u, v} X J U n)
+    (fun n i ↦ scalarPower_quotientProjection.{u, v} X J U (a i)
       (ha (Ideal.subset_span (Set.mem_range_self i))) n)
   simpa only [quotientProjection, adicResidueQuotientCoefficientTower,
     adicResidueQuotientCoefficientUnit] using h
