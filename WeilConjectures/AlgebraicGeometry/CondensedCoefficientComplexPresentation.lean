@@ -21,8 +21,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
-set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Instantiating adjunction naturality in four derived module categories needs extra heartbeats.
 /-- Source: archived master `ModuleObject/Colimit/TwoColimit.lean`, the Hom paragraph
 of the module docstring; the coefficient complex construction in step 3 of
