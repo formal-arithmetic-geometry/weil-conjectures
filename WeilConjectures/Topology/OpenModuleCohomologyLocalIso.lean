@@ -25,6 +25,7 @@ open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing the section functors unfolds two composed functors and their complex maps.
 /-- Open cohomology depends only on the restriction of a module morphism.
 Source: Stacks Project, Cohomology, Tag 01E1, restriction of injective resolutions.
