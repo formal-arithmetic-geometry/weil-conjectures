@@ -123,7 +123,7 @@ private theorem tensorModelRealization_hom (W : Scheme.{u})
 
 attribute [local irreducible] tensorModelRealization pullbackTensorReferenceTensorModel
 
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- The normalization composes several derived-category naturality equations.
 /-- The constructed tensor realization has the prescribed strict quotient formula
 and Roos equation on every pair of whole-system coherent presentations.
