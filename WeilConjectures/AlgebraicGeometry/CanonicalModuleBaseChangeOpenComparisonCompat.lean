@@ -77,8 +77,7 @@ theorem restricted_base_change_compatibility
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G
     let E0 := (DerivedCategory.singleFunctor
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj H
-    let R := (schemeOpenRestriction S' W).mapDerivedCategory
-    ∀ (c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶
+      ∀ (c0 : (derivedPullback (pullback.fst fA gA)).obj E0 ⟶
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj
             ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj H))
@@ -100,12 +99,7 @@ theorem restricted_base_change_compatibility
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
        := by
   classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  intro c0 hc0
-  let U := f ⁻¹ᵁ V
-  let fA := f ∣_ V
-  let gA := g.resLE V W hWV
-  let H : (f ⁻¹ᵁ V).toScheme.Modules := (schemeOpenRestriction X U).obj G
+  intro U fA gA H E E0 R c0 hc0
   let p := pullback.fst fA gA
   let q := pullback.snd fA gA
   let t := (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g'))
@@ -123,7 +117,6 @@ theorem restricted_base_change_compatibility
   obtain ⟨α, hα⟩ := modulePullbackComparison_target_automorphism.{u, w} g' G c₁ c hc₁ hc
   obtain ⟨γ, hγ⟩ := modulePullbackComparison_target_automorphism.{u, w} p H c₂ c0 hc₂ hc0
   obtain ⟨a, b, hb⟩ := restricted_base_change_fixed_counits.{u, w} f g g' f' sq G V W hWV
-  let R := (schemeOpenRestriction S' W).mapDerivedCategory
   let T := DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0
   let T0 := DerivedCategory.singleFunctor

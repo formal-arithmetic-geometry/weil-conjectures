@@ -83,8 +83,7 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
       let gA := eT.inv ≫ g ≫ eS.hom
       let E := (DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G
-      let T := schemeDerivedDirectImage eT.inv
-      ∃ a : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ≅
+          ∃ a : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ≅
             T.obj ((derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E)),
         ∃ b : (schemeDerivedDirectImage f').obj
               ((DerivedCategory.singleFunctor
@@ -101,20 +100,15 @@ theorem canonicalModuleBaseChange_iso_comparison_ab
                 pullback.condition E ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
        := by
   classical
-  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
-  let fA := f ≫ eS.hom
-  let gA := eT.inv ≫ g ≫ eS.hom
+  intro fA gA E T
   let p := pullback.fst fA gA
   let q := pullback.snd fA gA
-  let E := (DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G
   let M := (DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj
       ((Scheme.Modules.tensorPullback g').obj G)
   let S0 := DerivedCategory.singleFunctor
     (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0
   let R := schemeDerivedDirectImage q
-  let T := schemeDerivedDirectImage eT.inv
   obtain ⟨e, hp, _, j, k, a, hβ⟩ :=
     exists_derivedBaseChange_coordinate_naturality f g g' f' sq eS eT
   obtain ⟨cT, hcT, m, hm⟩ :=
