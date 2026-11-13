@@ -109,7 +109,6 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 -- Retain the original exactness hypothesis, although transport only uses the supplied data.
 set_option linter.unusedSectionVars false in
-set_option profiler true in
 -- Elaborate the whiskered naturality diagram without unfolding the derived tensor data.
 /-- Transport an equation known on all internal complexes to arbitrary section
 complexes satisfying the same flat-term and K-flat hypotheses. The proof uses the
@@ -206,6 +205,7 @@ theorem coefficientScalarTensorRepresentative_transport
     have h₂ (K : CochainComplex (ModuleRingedComparison.modules S Z) ℤ) :
         (DerivedCategory.quotientCompQhIso _).hom.app K = 𝟙 _ := rfl
     erw [h₁, h₂, F.map_id, Category.id_comp, Category.comp_id]
+  -- Reuse the total-complex comparison's naturality before specializing to sheaves.
   let δ : TR ⋙ E ⟶ E.prod E ⋙ TS :=
     HomologicalComplex.mapBifunctorComparisonUncurried
       (Functor.OplaxMonoidal.δNatTrans d.b.extension) (.up ℤ)
