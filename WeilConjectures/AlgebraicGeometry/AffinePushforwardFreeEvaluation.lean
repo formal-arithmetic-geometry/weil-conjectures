@@ -102,7 +102,6 @@ private theorem epi_iff_surjective_app_top {Y : Scheme.{u}} [IsAffine Y]
     exact epi_of_surjective_app φ (fun _ : Unit ↦ ⊤)
       (fun _ ↦ isAffineOpen_top _) (by simp) (fun _ ↦ h)
 
-set_option profiler true in
 /-- A finite free evaluation map into the algebra-valued direct image is epi on an
    affine open exactly when its map on sections over that open is surjective.
    Source: Stacks Project, Morphisms, Tag 01SB; Schemes, Tag 01IC

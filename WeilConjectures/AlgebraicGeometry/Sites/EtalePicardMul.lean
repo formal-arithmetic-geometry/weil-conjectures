@@ -38,6 +38,13 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op X)))
   [SheafOfModules.IsInvertible.{u, u, u} (A : X.Modules)]
 
+private lemma etaleIsoTorsorVal_map_mk {V Z : X.Etale} (a : Z ⟶ V)
+    (φ : (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj (unitObj X) ⟶
+      (modulesPseudofunctor.map V.hom.op.toLoc).toFunctor.obj A) (hφ : IsIso φ) :
+    etaleIsoTorsorVal A ((etaleIsoTorsor A).sheaf.obj.map a.op (etaleIsoTorsorMk A φ hφ)) =
+      pullHom (F := modulesPseudofunctor) φ a.left Z.hom Z.hom
+        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := rfl
+
 private lemma homSection_eq_scalar_of_generators {Y : Scheme.{u}} (f : Y ⟶ X)
     {U₁ U₂ : X.Opens} (e₁ : Γ((A : X.Modules), U₁)) (e₂ : Γ((A : X.Modules), U₂))
     (he₁ : IsFreeGenerator e₁) (c : Γ(X, U₁ ⊓ U₂))
@@ -81,10 +88,7 @@ lemma etaleIsoTorsor_sub_eq {V₁ V₂ Z : X.Etale} (a : Z ⟶ V₁) (b : Z ⟶ 
   set x₂ := (etaleIsoTorsor A).sheaf.obj.map b.op (etaleIsoTorsorMk A φ₂ hφ₂)
   have hv := congrArg (etaleIsoTorsorVal A) ((etaleIsoTorsor A).sub_vadd x₁ x₂)
   rw [etaleIsoTorsorVal_vadd] at hv
-  change smulMor _ _ ≫ pullHom (F := modulesPseudofunctor) φ₁ a.left Z.hom Z.hom
-      (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) =
-    pullHom (F := modulesPseudofunctor) φ₂ b.left Z.hom Z.hom
-      (MorphismProperty.Over.w b) (MorphismProperty.Over.w b) at hv
+  simp only [x₁, x₂, etaleIsoTorsorVal_map_mk] at hv
   exact homSection_eq_scalar_of_generators A Z.hom e₁ e₂ he₁ c h hZ₁ hZ₂ _ _
     (homSection_pullHom V₁.hom a.left Z.hom _ e₁ hU₁ hZ₁ φ₁ hs₁)
     (homSection_pullHom V₂.hom b.left Z.hom _ e₂ hU₂ hZ₂ φ₂ hs₂) _ hv

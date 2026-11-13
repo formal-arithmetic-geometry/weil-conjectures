@@ -281,6 +281,7 @@ private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M�
   rw [this, ← Category.assoc, ← Category.assoc, ← Category.assoc, hs]
   simp
 
+set_option profiler true in
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
     (M : modulesPseudofunctor.obj (.mk (op X)))
@@ -304,7 +305,17 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
     _ _ (smulMor_naturality ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X)).hom
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
     (φ.comm q f₁ f₂ hf₁ hf₂)
+  simp only [Iso.app_hom, Iso.app_inv, Cat.Hom.toNatIso_hom, Cat.Hom.toNatIso_inv, mc₁,
+    mc₂] at key
   exact key.symm
+
+private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
+    (M : modulesPseudofunctor.obj (.mk (op X)))
+    [SheafOfModules.IsInvertible.{u, u, u} (M : X.Modules)]
+    {V Z : X.Etale} (a : Z ⟶ V) (x : (Modules.etaleIsoTorsor M).sheaf.obj.obj (op V)) :
+    Modules.etaleIsoTorsorVal M ((Modules.etaleIsoTorsor M).sheaf.obj.map a.op x) =
+      pullHom (F := modulesPseudofunctor) (Modules.etaleIsoTorsorVal M x) a.left Z.hom Z.hom
+        (MorphismProperty.Over.w a) (MorphismProperty.Over.w a) := rfl
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
@@ -359,10 +370,7 @@ theorem exists_etaleIsoTorsor_equiv :
         (by rw [MorphismProperty.Over.w a, MorphismProperty.Over.w b]) :=
     e1.symm
   erw [e2]
-  change smulMor _ _ ≫ (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
-      ((toProEt X ⋙ ProEt.forget X).map a).op (e.inv.hom ⟨V₁, h₁⟩) =
-    (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
-      ((toProEt X ⋙ ProEt.forget X).map b).op (e.inv.hom ⟨V₂, h₂⟩)
+  simp only [etaleIsoTorsorVal_map_eq, Modules.etaleIsoTorsorVal_mk]
   exact descentData_pullHom_comm T V t M e.inv Z.hom b.left a.left
     (MorphismProperty.Over.w b) (MorphismProperty.Over.w a)
 
