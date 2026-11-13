@@ -28,9 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- Scalar transport unfolds two section functors and the affine chart in quotient types.
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport degree-zero formal functions to an arbitrary affine open of the base.
@@ -87,7 +85,7 @@ theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoethe
   obtain ⟨hg, hP, hK, a, b, hb⟩ :=
     formalFunctions_affine_restriction_dictionary J f F U hU
   let : IsProper g := hg
-  obtain ⟨θ₀, hθ₀, _, e₀, he₀⟩ := globalSections_formal_functions I g K hK P hP
+  obtain ⟨θ₀, hθ₀, _, e₀, he₀⟩ := globalSections_formal_functions (A := R) I g K hK P hP
   let α := a.toLinearEquiv
   let θ : ∀ n : ℕ, (Γ(H, U) ⧸ (I ^ (n + 1) • (⊤ : Submodule R Γ(H, U)))) →ₗ[R]
       E.obj (T.obj (op n)) := fun n ↦ (b.hom.app (op n)).hom.comp
@@ -110,8 +108,8 @@ theorem formalFunctions_affine_pushforward_sections {X Y : Scheme.{u}} [IsNoethe
   refine ⟨θ, hθ, e, ?_⟩
   intro n
   dsimp only [e, Iso.trans_hom, Iso.symm_hom]
-  rw [Category.assoc, Category.assoc, Category.assoc, preservesLimitIso_inv_π,
-    HasLimit.isoOfNatIso_hom_π, ← Category.assoc e₀.hom, he₀]
+  simp only [Category.assoc, preservesLimitIso_inv_π, HasLimit.isoOfNatIso_hom_π]
+  rw [← Category.assoc e₀.hom, he₀]
   apply ModuleCat.hom_ext
   ext x
   rfl
