@@ -47,6 +47,8 @@ private lemma extTransport_apply
     (he' : ∀ a x, e' (a • x) =
       (e' x).comp (CategoryTheory.Abelian.Ext.mk₀ (ρ a).asHom) (add_zero m)) (x : A) :
     extTransport ρ α h e e' he he' x = e'.symm (α.comp (e x) h) := rfl
+
+/-- Scalar-compatible Ext transport commutes with an exact functor and a coefficient map. -/
 private lemma extTransport_naturality
     {T T' : Type u} [CommRing T] [CommRing T']
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -134,6 +136,8 @@ private theorem extRow_exact
     · exact transport_exact (E.eI n) (E.eX (n + 1)) (E.eP (n + 1)) _ _
         ((ShortComplex.ab_exact_iff_function_exact _).mp
           (CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃' hK F n (n + 1) (by omega)))
+
+/-- Construct the two exact rows and their naturality squares before specializing the objects. -/
 private theorem extRows_naturality
     {T T' : Type u} [CommRing T] [CommRing T']
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
@@ -203,7 +207,6 @@ private theorem extRows_naturality
       _ _ (hi n) (hx (n + 1)) x
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The original and pulled-back Mayer--Vietoris sequences are compatible with
 `H.baseChangeLinear`, before tensoring. Neither flatness nor quasi-coherence is needed.
 

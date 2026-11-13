@@ -106,6 +106,7 @@ private lemma beta_naturality {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens
     Functor.map_comp, HomologicalComplex.comp_f, Category.assoc]
   rfl
 
+/-- Two maps of short exact sequences have the same target connecting morphism. -/
 private theorem boundary_naturality_pair
     {C : Type u} [Category C] [Abelian C]
     {A B V : ShortComplex (CochainComplex C ℕ)}
@@ -125,6 +126,7 @@ private theorem boundary_naturality_pair
     HomologicalComplex.HomologySequence.δ_naturality
       (ShortComplex.homMk b₁ b₂ b₃ hb₁ hb₂) hB hV q (q + 1) rfl⟩
 
+/-- Finite-diagonal totalization preserves short exact sequences of double complexes. -/
 private theorem total_shortExact_of_shortExact
     (D : ShortComplex (HomologicalComplex₂ AddCommGrpCat.{u} (.up ℕ) (.up ℕ)))
     (hD : D.ShortExact) :
@@ -165,6 +167,7 @@ private theorem total_shortExact_of_shortExact
   change (D.map F).ShortExact
   exact hD.map_of_exact F
 
+/-- Split resolution rows remain exact after taking Cech cochains and totalizing. -/
 private theorem totalCech_shortExact {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     (R : ShortComplex
       (CochainComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) ℕ))
@@ -192,7 +195,6 @@ private theorem totalCech_shortExact {X : Scheme.{u}} {ι : Type u} (U : ι → 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
 /-- A prescribed horseshoe gives a common total boundary for alpha and beta.
 Source: Stacks 01EQ (the two augmentations) and 0117 (boundary naturality).
 (blueprint: lem-pc-abelian-cech-horseshoe-total-boundary)
@@ -242,6 +244,7 @@ theorem abelianCechHorseshoe_total_boundary
         HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ  := by
   classical
   let R := ShortComplex.mk α β hαβ
+  -- Specify the total objects once, so the augmentation maps have matching endpoints.
   let V := ShortComplex.mk
     (X₁ := (abelianCechDouble U I₁).total (.up ℕ))
     (X₂ := (abelianCechDouble U I₂).total (.up ℕ))
