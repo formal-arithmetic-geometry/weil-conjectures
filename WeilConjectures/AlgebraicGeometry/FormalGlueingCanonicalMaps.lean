@@ -237,6 +237,7 @@ private noncomputable def tensor_restrict_equiv {R : Type u} {S : Type w}
       map_smul' := fun r x ↦ (algebraMap_smul S r x).symm }
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Tensor and restricted-scalar instances require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison has the pure-tensor fraction formula, is the unique R-linear

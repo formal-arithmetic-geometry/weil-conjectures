@@ -269,6 +269,7 @@ private theorem local_affine_eventually_zero
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Allow elaboration of repeated restrictions to the over-site.
 /-- Two local maps with equal evaluation agree on a sufficiently high ideal power
 on their quasi-compact overlap. No lifting or quotient construction is asserted.
