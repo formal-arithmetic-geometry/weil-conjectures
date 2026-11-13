@@ -143,8 +143,6 @@ private theorem exists_tildeTensorEquiv {R : CommRingCat.{u}} (M : ModuleCat R)
   rw [ht]
   congr 1
 
-set_option maxHeartbeats 400000 in
-set_option profiler true in
 -- Elaborating the chart transports compares several section-module scalar structures.
 private theorem exists_sectionEquiv {X : Scheme.{u}} (F : X.Modules)
     [F.IsQuasicoherent] {W : X.Opens} (hW : IsAffineOpen W)
@@ -214,7 +212,6 @@ private theorem restriction_comp {X : Scheme.{u}} (F : X.Modules)
   exact (CategoryTheory.congr_fun ((presheaf F).map_comp i j) a).symm
 
 set_option maxHeartbeats 600000 in
-set_option profiler true in
 -- The affine-basis naturality proof elaborates several equivalent section-module presentations.
 /-- The restricted sectionwise symmetric algebra maps to the tilde of its affine sections,
 on the affine basis, bijectively on each affine open, with composite the unit.
