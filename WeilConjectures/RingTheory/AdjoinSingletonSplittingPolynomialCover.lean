@@ -43,6 +43,46 @@ private theorem exists_fin_roots_prod_aeval
   rw [he]
   simp [l]
 
+private theorem splitting_polynomial_cover_of_finite_away
+    (R S T : Type*) [CommRing R] [IsDomain R] [CommRing S] [IsDomain S]
+    [CommRing T] [IsDomain T] [Algebra R T]
+    (m : Ideal S) [m.IsMaximal] (s : S) (hs : s ∉ m)
+    (g : Localization.Away s →+* T) (hg : Function.Injective g) (hfin : g.Finite)
+    (t : T) (f : Polynomial R) (hf : f.Monic) (hd : 0 < f.natDegree) (hsplit : f.Splits)
+    (hmem : Polynomial.aeval t f ∈ m.map (g.comp (algebraMap S (Localization.Away s)))) :
+    ∃ M : Submonoid T, M ≤ nonZeroDivisors T ∧
+      ∃ (_ : Algebra (Localization.AtPrime m) (Localization M)),
+        Function.Injective (algebraMap (Localization.AtPrime m) (Localization M)) ∧
+        Module.Finite (Localization.AtPrime m) (Localization M) ∧
+        ∃ (d : ℕ) (roots : Fin d → R), 0 < d ∧
+          ∀ (q : Ideal (Localization M)) [q.IsMaximal],
+            (q.comap (algebraMap T (Localization M))).IsMaximal ∧
+            (∏ i, (t - algebraMap R T (roots i))) ∈
+              q.comap (algebraMap T (Localization M)) := by
+  classical
+  let h : S →+* T := g.comp (algebraMap S (Localization.Away s))
+  let M := m.primeCompl.map h
+  have hs0 : s ≠ 0 := fun e ↦ hs (e ▸ m.zero_mem)
+  have hinj : Function.Injective h := hg.comp
+    (IsLocalization.injective (Localization.Away s) (Submonoid.powers_le.mpr
+      (mem_nonZeroDivisors_iff_ne_zero.mpr hs0)))
+  have hM : M ≤ nonZeroDivisors T := by
+    rintro t ⟨a, ha, rfl⟩
+    apply mem_nonZeroDivisors_iff_ne_zero.mpr
+    intro he
+    have ha0 : a = 0 := hinj (he.trans h.map_zero.symm)
+    exact ha (ha0 ▸ m.zero_mem)
+  obtain ⟨alg, hi, hfinite, hq⟩ :=
+    exists_finite_away_maximal_localization S T m s hs g hg hfin
+  let := alg
+  obtain ⟨d, roots, hd, heval⟩ := exists_fin_roots_prod_aeval R T f hf hd hsplit
+  refine ⟨M, hM, alg, hi, hfinite, d, roots, hd, ?_⟩
+  intro q hqmax
+  refine ⟨(hq q).1, ?_⟩
+  change (∏ i : Fin d, (t - algebraMap R T (roots i))) ∈ _
+  rw [heval]
+  exact (hq q).2 hmem
+
 set_option profiler true in
 /-- A finite localized splitting cover carries a single positive-degree split polynomial
 whose evaluation belongs to every maximal contraction.
@@ -94,30 +134,7 @@ theorem exists_adjoin_singleton_splitting_polynomial_cover
   classical
   obtain ⟨s, hs, R', K', cR, dR, nR, cK, aK, frac, hR', z, g, hg, hfin, f, hf, hd, hsplit,
     hmem⟩ := exists_adjoin_singleton_finite_split_algebra R K hR x m
-  let S := Algebra.adjoin R ({x} : Set K)
-  let T := Algebra.adjoin R' ({z} : Set K')
-  let h : S →+* T := g.comp (algebraMap S (Localization.Away s))
-  let M := m.primeCompl.map h
-  have hs0 : s ≠ 0 := fun e ↦ hs (e ▸ m.zero_mem)
-  have hinj : Function.Injective h := hg.comp
-    (IsLocalization.injective (Localization.Away s) (Submonoid.powers_le.mpr
-      (mem_nonZeroDivisors_iff_ne_zero.mpr hs0)))
-  have hM : M ≤ nonZeroDivisors T := by
-    rintro t ⟨a, ha, rfl⟩
-    apply mem_nonZeroDivisors_iff_ne_zero.mpr
-    intro he
-    have ha0 : a = 0 := hinj (he.trans h.map_zero.symm)
-    exact ha (ha0 ▸ m.zero_mem)
-  obtain ⟨alg, hi, hfinite, hq⟩ :=
-    exists_finite_away_maximal_localization S T m s hs g hg hfin
-  let := alg
-  let t : T := ⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩
-  obtain ⟨d, roots, hd, heval⟩ := exists_fin_roots_prod_aeval R' T f hf hd hsplit
-  refine ⟨R', K', cR, dR, nR, cK, aK, frac, hR', z, M, hM, alg, hi, hfinite,
-    d, roots, hd, ?_⟩
-  intro q hqmax
-  refine ⟨(hq q).1, ?_⟩
-  change (∏ i : Fin d, (t - algebraMap R' T (roots i))) ∈ _
-  rw [heval]
-  exact (hq q).2 hmem
-
+  refine ⟨R', K', cR, dR, nR, cK, aK, frac, hR', z, ?_⟩
+  exact splitting_polynomial_cover_of_finite_away R'
+    (Algebra.adjoin R ({x} : Set K)) (Algebra.adjoin R' ({z} : Set K'))
+    m s hs g hg hfin ⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩ f hf hd hsplit hmem
