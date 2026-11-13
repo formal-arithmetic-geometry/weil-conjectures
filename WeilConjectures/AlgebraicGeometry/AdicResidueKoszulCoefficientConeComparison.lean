@@ -168,6 +168,86 @@ private theorem epi_extendMap_single_of_epi_zero
     infer_instance
   · exact (HomologicalComplex.isZero_extend_X _ _ i (by simpa using hi)).epi _
 
+/-- Assemble normalized finite cone comparisons in abstract coefficient categories. -/
+private theorem normalizedExtendedConeFamilyComparison
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    (E : C ⥤ D) [E.Additive] [PreservesFiniteColimits E]
+    (K : ℕ → ChainComplex C ℕ) (B : ℕ → C)
+    (f : ∀ n, K n ⟶ (ChainComplex.single₀ C).obj (B n))
+    (t : ∀ n m : ℕ, n ≤ m → (K m ⟶ K n))
+    (qA : ∀ n m : ℕ, n ≤ m →
+      ((ChainComplex.single₀ C).obj (B m) ⟶ (ChainComplex.single₀ C).obj (B n)))
+    (hc : ∀ n m h,
+      HomologicalComplex.extendMap (t n m h) ComplexShape.embeddingDownNat ≫
+        HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat =
+      HomologicalComplex.extendMap (f m) ComplexShape.embeddingDownNat ≫
+        HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
+    (N : ℕ → D) (ν : ∀ n, N (n + 1) ⟶ N n)
+    {T : ℕᵒᵖ ⥤ CochainComplex D ℤ}
+    (ε : T ⟶ Functor.ofOpSequence
+      (X := fun n ↦ (HomologicalComplex.single D (.up ℤ) 0).obj (N n))
+      (fun n ↦ (HomologicalComplex.single D (.up ℤ) 0).map (ν n)))
+    (eK : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
+      ((K n).extend ComplexShape.embeddingDownNat) ≅ T.obj (op n))
+    (ht : ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map
+        (HomologicalComplex.extendMap (t n m h) ComplexShape.embeddingDownNat) ≫
+      (eK n).hom = (eK m).hom ≫ T.map (homOfLE h).op)
+    {V : C} {W : D} (v : ∀ n, V ≅ (K n).X 0) (π : ∀ n, V ⟶ B n)
+    (hπ : ∀ n, Epi (π n)) (hf : ∀ n, (v n).hom ≫ (f n).f 0 = π n)
+    (c : W ≅ E.obj V) (q : ∀ n, E.obj (B n) ≅ N n)
+    (u : ∀ n, (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶ T.obj (op n))
+    (p : ∀ n, (HomologicalComplex.single D (.up ℤ) 0).obj W ⟶
+      (HomologicalComplex.single D (.up ℤ) 0).obj (N n))
+    (hu : ∀ n, c.hom ≫ E.map ((v n).hom ≫
+        ((K n).extendXIso ComplexShape.embeddingDownNat (i := 0) rfl).inv) ≫
+      (eK n).hom.f 0 = (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ (u n).f 0)
+    (hp : ∀ n, c.hom ≫ E.map (π n) ≫ (q n).hom =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 W).inv ≫ (p n).f 0 ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (N n)).hom)
+    (hε : ∀ n, u n ≫ ε.app (op n) = p n) :
+    ∃ e : ∀ n, (E.mapHomologicalComplex (.up ℤ)).obj
+        (HomologicalComplex.homotopyCofiber
+          (HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat)) ≅
+      (CochainComplex.mappingCone
+        ((HomologicalComplex.functorEquivalence D (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.obj
+          (op n),
+      ∀ n m h, (E.mapHomologicalComplex (.up ℤ)).map
+          (HomologicalComplex.homotopyCofiber.mapArrowHom
+            (HomologicalComplex.extendMap (f m) ComplexShape.embeddingDownNat)
+            (HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat)
+            (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
+            (Arrow.homMk
+              (HomologicalComplex.extendMap (t n m h) ComplexShape.embeddingDownNat)
+              (HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
+              (hc n m h))) ≫ (e n).hom =
+        (e m).hom ≫ (CochainComplex.mappingCone
+          ((HomologicalComplex.functorEquivalence D (.up ℤ) ℕᵒᵖ).inverse.map ε)).asFunctor.map
+            (homOfLE h).op := by
+  let H := E.mapHomologicalComplex (.up ℤ)
+  let eQ (n : ℕ) :=
+    H.mapIso (HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat
+      (B n) 0 0 rfl) ≪≫
+    (HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).app (B n) ≪≫
+    (HomologicalComplex.single D (.up ℤ) 0).mapIso (q n)
+  have haug (n : ℕ) :
+      H.map (HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat) ≫
+        (eQ n).hom = (eK n).hom ≫ ε.app (op n) :=
+    normalizedExtendedAugmentationComparison E (v n) (f n) (π n)
+      (ε.app (op n)) (eK n) c (q n) (u n) (p n) (hf n) (hu n) (hp n) (hε n)
+  have hfepi (n : ℕ) :
+      Epi (H.map (HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat)) := by
+    have := hπ n
+    have : Epi ((f n).f 0) := epi_of_epi_fac (hf n)
+    have := epi_extendMap_single_of_epi_zero (f n)
+    infer_instance
+  exact additiveConeFamilyComparison E
+    (fun n ↦ (K n).extend ComplexShape.embeddingDownNat)
+    (fun n ↦ ((ChainComplex.single₀ C).obj (B n)).extend ComplexShape.embeddingDownNat)
+    (fun n ↦ HomologicalComplex.extendMap (f n) ComplexShape.embeddingDownNat)
+    (fun n m h ↦ HomologicalComplex.extendMap (t n m h) ComplexShape.embeddingDownNat)
+    (fun n m h ↦ HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
+    hc ε eK eQ haug ht hfepi
+
 attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
@@ -276,44 +356,26 @@ theorem adicResidue_koszul_coefficient_cone_comparison
     (completed (coefficientProEtaleModelTopology.{u, v} X) A (Ideal.span (Set.range a)))
     (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A
       (Ideal.span (Set.range a))) x) U
-  let H := E.mapHomologicalComplex (.up ℤ)
-  let B (n : ℕ) := ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1))
-  let K (n : ℕ) := (ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1))).extend
-    ComplexShape.embeddingDownNat
-  let L (n : ℕ) := ((ChainComplex.single₀ (ModuleCat A)).obj (B n)).extend
-    ComplexShape.embeddingDownNat
-  let f (n : ℕ) : K n ⟶ L n :=
-    HomologicalComplex.extendMap (εA n) ComplexShape.embeddingDownNat
-  let Q := adicResidueQuotientCoefficientTower X (Ideal.span (Set.range a)) U
   obtain ⟨eK, ht, hu⟩ := exteriorKoszul_scalar_realization O E c s hs r a tA htA
-  let eQ (n : ℕ) : H.obj (L n) ≅ Q.obj (op n) :=
-    H.mapIso (HomologicalComplex.extendSingleIso ComplexShape.embeddingDownNat
-      (B n) 0 0 rfl) ≪≫
-    (HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).app (B n) ≪≫
-    (HomologicalComplex.single (Mod O) (.up ℤ) 0).mapIso (q n)
-  have haug (n : ℕ) : H.map (f n) ≫ (eQ n).hom = (eK n).hom ≫ ε.app (op n) := by
-    apply normalizedExtendedAugmentationComparison E
-      (exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.symm (εA n)
-      (ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
-      (ε.app (op n)) (eK n) c (q n) _ _ ?_ (hu n) (hq n) (hε n)
+  refine ⟨E, hadd, hlim, hcolim, ?_⟩
+  apply normalizedExtendedConeFamilyComparison E
+    (fun n ↦ ExteriorAlgebra.koszulComplex A r (fun i ↦ a i ^ (n + 1)))
+    (fun n ↦ ModuleCat.of A (A ⧸ (Ideal.span (Set.range a)) ^ (n + 1)))
+    εA tA qA hc
+    (adicResidueQuotientModule X (Ideal.span (Set.range a)) U)
+    (adicResidueQuotientModuleStep X (Ideal.span (Set.range a)) U)
+    ε eK ht (fun _ ↦ (exteriorPower.zeroEquiv A (Fin r →₀ A)).toModuleIso.symm)
+    (fun n ↦ ModuleCat.ofHom ((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
+    ?_ ?_ c q (ringedKoszulDualUnit O r b)
+    (adicResidueQuotientCoefficientUnit X (Ideal.span (Set.range a)) U) hu hq hε
+  · intro n
+    exact (ModuleCat.epi_iff_surjective _).2 (Submodule.mkQ_surjective _)
+  · intro n
     rw [hεA n]
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro x
     exact congrArg (((Ideal.span (Set.range a)) ^ (n + 1)).mkQ)
       ((exteriorPower.zeroEquiv A (Fin r →₀ A)).apply_symm_apply x)
-  have hfepi (n : ℕ) : Epi (H.map (f n)) := by
-    have : Epi ((εA n).f 0) := by
-      rw [hεA n]
-      apply (ModuleCat.epi_iff_surjective _).2
-      exact (Submodule.mkQ_surjective _).comp
-        (exteriorPower.zeroEquiv A (Fin r →₀ A)).surjective
-    have : Epi (f n) := epi_extendMap_single_of_epi_zero (εA n)
-    infer_instance
-  refine ⟨E, hadd, hlim, hcolim, ?_⟩
-  exact additiveConeFamilyComparison E K L f
-    (fun n m h ↦ HomologicalComplex.extendMap (tA n m h) ComplexShape.embeddingDownNat)
-    (fun n m h ↦ HomologicalComplex.extendMap (qA n m h) ComplexShape.embeddingDownNat)
-    hc ε eK eQ haug ht hfepi
 
 end AlgebraicGeometry.Scheme
