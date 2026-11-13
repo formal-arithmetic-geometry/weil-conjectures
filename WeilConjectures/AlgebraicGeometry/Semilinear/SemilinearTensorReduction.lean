@@ -180,6 +180,7 @@ private theorem ordinary_tensor_reduction_inv (S : SystemScalarCoherence.{c, v, 
   simp only [Category.id_comp, Iso.inv_hom_id_assoc]
 
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- The total-summand identity crosses three dependent ringed module categories.
 private theorem cochain_tensor_reduction (S : SystemScalarCoherence.{c, v, r} J B τ)
     (A : SystemTensorBase.{c, v, r} J B τ)

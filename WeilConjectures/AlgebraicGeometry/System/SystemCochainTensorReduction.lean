@@ -139,6 +139,7 @@ private theorem tensorSummand_map (R : Sheaf J CommRingCat.{max c v r})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- The summand calculation compares three dependent ringed module categories.
 /-- Cochain reduction commutes with the normalized total tensor comparisons.
 Source: Zheng Construction 4.1; Stacks 06YN, 07A4
