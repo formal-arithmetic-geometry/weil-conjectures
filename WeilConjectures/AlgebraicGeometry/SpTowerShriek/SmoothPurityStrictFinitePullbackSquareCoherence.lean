@@ -626,10 +626,28 @@ private theorem native_pullback_square (A : Type u) [CommRing A] [Finite A]
     (proEtaleConstantRingPullbackComposition f' g A).symm
     (proEtaleConstantRingPullbackComposition h f A).symm
     (eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback A a) sq.w.symm)) M
-    (native_comp_square A f' g M) (native_comp_square A h f M)
-    (native_congr_square A sq.w.symm M)
-  simpa only [B, Iso.symm_hom, Iso.symm_inv, leftDerivedUpperStarSquareIso,
-    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using he
+    (by
+      have H := native_comp_square A f' g M
+      simp only [Iso.symm_hom]
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+    (by
+      have H := native_comp_square A h f M
+      simp only [Iso.symm_hom]
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+    (by
+      have H := native_congr_square A sq.w.symm M
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+        exactByConversion h)
+  simp only [B, Iso.symm_hom, Iso.symm_inv, leftDerivedUpperStarSquareIso,
+    Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] at he ⊢
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
+    exactByConversion h
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
