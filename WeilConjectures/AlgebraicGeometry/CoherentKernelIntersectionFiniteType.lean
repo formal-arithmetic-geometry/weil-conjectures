@@ -25,8 +25,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option trace.profiler true in
--- The composite open-site equivalence and its kernel comparison require this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
 of a kernel initially defined on `W`. This comparison requires neither an open
@@ -158,8 +156,9 @@ theorem coherent_kernel_intersection_finiteType
       ((Functor.IsDenseSubsite.coverPreserving _ _
         (Over.iteratedSliceEquiv D).functor).overPost B)
   have : (H.functor.obj (A.obj (kernel f))).IsFiniteType :=
-    finiteType_pushforward_leftAdjoint (Over.iteratedSliceEquiv D).functor
-      (𝟙 _) (Iso.refl _)
+    finiteType_pushforward_leftAdjoint
+      (R := X.ringCatSheaf.over Z) (S := (X.ringCatSheaf.over W).over D)
+      (M := A.obj (kernel f)) (Over.iteratedSliceEquiv D).functor (𝟙 _) (Iso.refl _)
   let eover : H.functor.obj (A.obj (kernel f)) ≅ (kernel f).over D :=
     (SheafOfModules.fullyFaithfulForget _).preimageIso
       (PresheafOfModules.isoMk (fun B ↦ Iso.refl _))
