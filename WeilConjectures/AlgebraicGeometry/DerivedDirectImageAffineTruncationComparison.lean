@@ -51,6 +51,7 @@ private theorem isQuasicoherent_overEquiv (X : Scheme.{u}) (U : X.Opens)
 set_option maxHeartbeats 400000 in
 -- Exact restriction through the site equivalences needs additional elaboration heartbeats.
 set_option synthInstance.maxHeartbeats 100000 in
+set_option profiler true in
 /-- On an affine open, a sufficiently low canonical truncation induces an
 isomorphism on any fixed higher direct image. The assertion concerns the actual
 canonical map, and does not assert quasi-coherence of either higher direct image.
