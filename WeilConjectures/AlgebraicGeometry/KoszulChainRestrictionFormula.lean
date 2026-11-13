@@ -43,6 +43,35 @@ private theorem naturalEquiv_add
     S.map biprod.snd (b (E ⊞ E) p) = _
   rw [← hb, ← hb, hp₁, hp₂]
 
+private theorem koszulHomChainClass_eq_homologyπ {A : Type u} [CommRing A]
+    {L M : CochainComplex (ModuleCat.{u} A) ℤ} (g : L ⟶ M)
+    (z : (CochainComplex.moduleHomComplex L M).cycles 0)
+    (hz : (CochainComplex.moduleHomComplex L M).iCycles 0 z =
+      CochainComplex.HomComplex.Cochain.ofHom g) :
+    koszulHomChainClass g = (CochainComplex.moduleHomComplex L M).homologyπ 0 z := by
+  let K := CochainComplex.moduleHomComplex L M
+  let S := K.sc 0
+  have hc : S.moduleCatCyclesIso.inv
+      ⟨CochainComplex.HomComplex.Cochain.ofHom g,
+        CochainComplex.HomComplex.δ_ofHom g⟩ = z := by
+    apply (ModuleCat.mono_iff_injective (K.iCycles 0)).1 inferInstance
+    change ((S.moduleCatCyclesIso.inv ≫ S.iCycles) _) = _
+    rw [S.moduleCatCyclesIso_inv_iCycles]
+    exact hz.symm
+  change S.homologyπ (S.moduleCatCyclesIso.inv _) = _
+  exact congrArg S.homologyπ hc
+
+private theorem moduleHomologyFactors_inv_naturality_apply
+    {A : Type u} [CommRing A] [HasDerivedCategory.{v} (ModuleCat.{u} A)]
+    {K L : CochainComplex (ModuleCat.{u} A) ℤ} (g : K ⟶ L) (n : ℤ)
+    (x : K.homology n) :
+    (DerivedCategory.homologyFunctor (ModuleCat.{u} A) n).map (DerivedCategory.Q.map g)
+        (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) n).app K).inv x) =
+      ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) n).app L).inv
+        (HomologicalComplex.homologyMap g n x) :=
+  (ConcreteCategory.congr_hom
+    ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) n).inv.naturality g) x).symm
+
 set_option profiler true in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
@@ -142,23 +171,6 @@ theorem koszulChain_restriction_formula
       exact (hs n).symm
     rw [hc]
     rfl
-  have hzclass : koszulHomChainClass g =
-      (CochainComplex.moduleHomComplex
-        ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M).homologyπ 0 z := by
-    let K := CochainComplex.moduleHomComplex
-      ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M
-    let S := K.sc 0
-    have hc : S.moduleCatCyclesIso.inv
-        ⟨CochainComplex.HomComplex.Cochain.ofHom g,
-          CochainComplex.HomComplex.δ_ofHom g⟩ = z := by
-      apply (ModuleCat.mono_iff_injective (K.iCycles 0)).1 inferInstance
-      change ((S.moduleCatCyclesIso.inv ≫ S.iCycles) _) = _
-      rw [S.moduleCatCyclesIso_inv_iCycles]
-      exact hz.symm
-    change (S.moduleCatCyclesIso.inv ≫ S.homologyπ) _ = _
-    change S.homologyπ (S.moduleCatCyclesIso.inv _) = _
-    rw [hc]
-    rfl
   let ψ₀ := ψ ≫ R.map eF.inv
   have hψ₀ : R.map (koszulOpenUnit A r f e) ≫ ψ₀ =
       R.map (DerivedCategory.Q.map t) := by
@@ -173,46 +185,16 @@ theorem koszulChain_restriction_formula
   change b E.obj ψ = _
   rw [← hψ', hb, hchain F hF e t ψ₀ hψ₀]
   dsimp only [koszulOpenHomStageClass]
-  rw [ht, hzclass]
+  rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
   let K := CochainComplex.moduleHomComplex
     ((koszulOpenTail A r f e).extend ComplexShape.embeddingDownNat) M
   let j := (koszulCechHomObjIso A r f M e).inv
-  have hj := η.inv.naturality j
-  have hi := η.inv.naturality (colimit.ι D e)
-  change HomologicalComplex.homologyMap j 0 ≫ (η.app (D.obj e)).inv =
-    (η.app K).inv ≫ H.map (DerivedCategory.Q.map j) at hj
-  change HomologicalComplex.homologyMap (colimit.ι D e) 0 ≫ (η.app C).inv =
-    (η.app (D.obj e)).inv ≫ H.map (DerivedCategory.Q.map (colimit.ι D e)) at hi
   change (H.map (G.map eF.hom))
     ((H.map (koszulCechDerivedComparison A r f F))
       ((H.map (DerivedCategory.Q.map (colimit.ι D e)))
         ((H.map (DerivedCategory.Q.map j)) ((η.app K).inv (K.homologyπ 0 z))))) = _
-  have hji : (η.app K).inv ≫ H.map (DerivedCategory.Q.map j) ≫
-      H.map (DerivedCategory.Q.map (colimit.ι D e)) =
-      HomologicalComplex.homologyMap j 0 ≫
-        HomologicalComplex.homologyMap (colimit.ι D e) 0 ≫ (η.app C).inv := by
-    rw [← Category.assoc, ← hj, Category.assoc, ← hi]
-  change ((η.app K).inv ≫ H.map (DerivedCategory.Q.map j) ≫
-    H.map (DerivedCategory.Q.map (colimit.ι D e)) ≫
-    H.map (koszulCechDerivedComparison A r f F) ≫ H.map (G.map eF.hom))
-      (K.homologyπ 0 z) = _
-  have hall : (η.app K).inv ≫ H.map (DerivedCategory.Q.map j) ≫
-      H.map (DerivedCategory.Q.map (colimit.ι D e)) ≫
-      H.map (koszulCechDerivedComparison A r f F) ≫ H.map (G.map eF.hom) =
-      HomologicalComplex.homologyMap j 0 ≫
-        HomologicalComplex.homologyMap (colimit.ι D e) 0 ≫ (η.app C).inv ≫
-          H.map (koszulCechDerivedComparison A r f F ≫ G.map eF.hom) := by
-    calc
-      _ = ((η.app K).inv ≫ H.map (DerivedCategory.Q.map j) ≫
-          H.map (DerivedCategory.Q.map (colimit.ι D e))) ≫
-          H.map (koszulCechDerivedComparison A r f F) ≫ H.map (G.map eF.hom) := by
-            simp only [Category.assoc]
-      _ = (HomologicalComplex.homologyMap j 0 ≫
-          HomologicalComplex.homologyMap (colimit.ι D e) 0 ≫ (η.app C).inv) ≫
-          H.map (koszulCechDerivedComparison A r f F) ≫ H.map (G.map eF.hom) := by
-            rw [hji]
-      _ = _ := by rw [H.map_comp]; simp only [Category.assoc]
-  rw [hall]
+  rw [moduleHomologyFactors_inv_naturality_apply j,
+    moduleHomologyFactors_inv_naturality_apply (colimit.ι D e)]
   rfl
 
 end AlgebraicGeometry
