@@ -125,8 +125,6 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_change
     (sliceSnd_special_comp_baseChangeSpecialMap hN hpb hP hb D)
     A B hτM hτN hτP (𝟭 _)
   run_tac Lean.throwError "PH468: abstract square elaborated"
-  refine isIso_of_isIso_map_coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D 𝔽 _ ?_
-  exact sq.2 h
 
 -- the Künneth maps of the two product configurations are large terms
 omit [Fact (ringChar k').Prime] in
@@ -157,27 +155,8 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
       (coordinateSliceTraitSnd hP hb D (φ₂ := φ₂))
       ((L((coordinateSliceTraitGeneric hM b hb D)^*⟦𝔽⟧)).obj ((L((M.ε)^*⟦𝔽⟧)).obj A))
       ((L((N.ε)^*⟦𝔽⟧)).obj B)) := by
-  -- Infer the complex from its étale-origin proof to reuse the derived-functor instances.
   run_tac Lean.throwError "PH468: transport skipped for square diagnostic"
-  have hAS :=
-    ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj
-      _ (coordinateSliceTraitGeneric hM b hb D) hA
-  refine isIso_kunnethMap_coordinateSliceTrait_of_isIso_change E hM hN hpb hP hgen hb D
-    hAS hB ?_
-  have h₀ := (isIso_kunnethMap_iff_toGeneric 𝔽
-    (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B).1 h
-  -- Compose the natural isomorphisms before evaluating them at `A`.
-  have eA := isoWhiskerLeft _
-      (leftDerivedUpperStarCompOfEq 𝔽 (coordinateSliceTraitChangeGeneric_comp hM b hb D)).symm ≪≫
-    (leftDerivedUpperStarCompOfEq 𝔽
-      (p := (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
-        (traitSlice_over (traitSliceCoord k'))).generic) (q := M.ε) rfl).symm
-  exact isIso_kunnethMap_of_iso 𝔽
-    (sliceFst hM hP hb).toGeneric (sliceSnd hN hpb hP hgen hb).toGeneric
-    (eA.app A)
-    ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
-      (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
-    h₀
+
 -- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
