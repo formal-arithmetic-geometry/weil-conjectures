@@ -100,6 +100,22 @@ private theorem completionSections_dictionary {X : Scheme.{u}}
     rw [Category.assoc, preservesLimitIso_hom_π, he]
   exact ⟨q, e', hq, he'⟩
 
+/-- Compatibility with quotient projections determines the map on ideal quotients. -/
+private theorem reduceModIdeal_naturality_of_mkQ
+    {R M N P Q : Type*} [CommRing R] [AddCommGroup M] [Module R M]
+    [AddCommGroup N] [Module R N] [AddCommGroup P] [Module R P]
+    [AddCommGroup Q] [Module R Q] (J : Ideal R) (f : M →ₗ[R] N)
+    (pM : M →ₗ[R] P) (pN : N →ₗ[R] Q)
+    (qM : (M ⧸ (J • ⊤ : Submodule R M)) →ₗ[R] P)
+    (qN : (N ⧸ (J • ⊤ : Submodule R N)) →ₗ[R] Q) (g : P →ₗ[R] Q)
+    (hqM : qM.comp (Submodule.mkQ (J • ⊤)) = pM)
+    (hqN : qN.comp (Submodule.mkQ (J • ⊤)) = pN)
+    (hg : g.comp pM = pN.comp f) (x : M ⧸ (J • ⊤ : Submodule R M)) :
+    g (qM x) = qN (f.reduceModIdeal J x) := by
+  obtain ⟨y, rfl⟩ := (J • (⊤ : Submodule R M)).mkQ_surjective x
+  exact (congrArg g (LinearMap.congr_fun hqM y)).trans
+    ((LinearMap.congr_fun hg y).trans (LinearMap.congr_fun hqN (f y)).symm)
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian X]
@@ -134,24 +150,20 @@ private theorem completionSections_map_injective {X : Scheme.{u}} [IsNoetherian 
     apply LinearMap.ext
     intro x
     change (E.map (formalModuleQuotientMap I f (Nat.le_refl _)))
-      ((qM n.unop).hom (AdicCompletion.eval J Γ(M, U.1) (n.unop + 1) x)) =
-      (qN n.unop).hom (AdicCompletion.eval J Γ(N, U.1) (n.unop + 1)
-        (AdicCompletion.map J L x))
-    change (E.map (formalModuleQuotientMap I f (Nat.le_refl _)))
       ((qM n.unop).hom (x.val (n.unop + 1))) =
       (qN n.unop).hom (L.reduceModIdeal (J ^ (n.unop + 1)) (x.val (n.unop + 1)))
-    generalize x.val (n.unop + 1) = z
-    obtain ⟨y, rfl⟩ := (J ^ (n.unop + 1) • (⊤ : Submodule A Γ(M, U.1))).mkQ_surjective z
-    have hqm := ConcreteCategory.congr_hom (hqM n.unop) y
-    have hqn := ConcreteCategory.congr_hom (hqN n.unop) (L y)
-    have hnatu := ConcreteCategory.congr_hom
-      (congrArg (fun g ↦ E.map g)
-        (show formalModuleQuotientπ I (n.unop + 1) M ≫
-          formalModuleQuotientMap I f (Nat.le_refl _) =
-          f ≫ formalModuleQuotientπ I (n.unop + 1) N by
-            simp [formalModuleQuotientMap, formalModuleQuotientπ])) y
-    exact (congrArg (E.map (formalModuleQuotientMap I f (Nat.le_refl _))) hqm).trans
-      (hnatu.trans hqn.symm)
+    apply reduceModIdeal_naturality_of_mkQ (J ^ (n.unop + 1)) L
+      (E.map (formalModuleQuotientπ I (n.unop + 1) M)).hom
+      (E.map (formalModuleQuotientπ I (n.unop + 1) N)).hom
+      (qM n.unop).hom.hom (qN n.unop).hom.hom
+      (E.map (formalModuleQuotientMap I f (Nat.le_refl _))).hom
+      (congrArg ModuleCat.Hom.hom (hqM n.unop))
+      (congrArg ModuleCat.Hom.hom (hqN n.unop))
+    have hnatu : formalModuleQuotientπ I (n.unop + 1) M ≫
+        formalModuleQuotientMap I f (Nat.le_refl _) =
+        f ≫ formalModuleQuotientπ I (n.unop + 1) N := by
+      simp only [formalModuleQuotientMap, formalModuleQuotientπ, cokernel.π_desc]
+    exact congrArg (fun g ↦ (E.map g).hom) hnatu
   intro x y hxy
   obtain ⟨x', rfl⟩ := eM.toLinearEquiv.surjective x
   obtain ⟨y', rfl⟩ := eM.toLinearEquiv.surjective y
