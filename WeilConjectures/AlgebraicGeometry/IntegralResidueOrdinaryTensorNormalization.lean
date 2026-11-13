@@ -182,6 +182,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local irreducible] residueOrdinaryUpperStarMonoidal
 
+set_option profiler true in
 set_option maxHeartbeats 900000 in
 -- The degreewise calculation compares several concrete module-functor composites.
 /-- The scalar tensor square agrees with ordinary pullback's comonoidal map.
