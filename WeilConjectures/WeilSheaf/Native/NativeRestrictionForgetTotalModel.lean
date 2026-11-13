@@ -580,6 +580,40 @@ private theorem ordinary_sheaf_restriction_tensor
 
 end OrdinarySheafRestriction
 
+/-- On a balanced tensor summand, the inverse ordinary total comparison is the
+pullback tensorator followed by the image of the ordinary insertion. -/
+private theorem ordinary_restriction_total_summand
+    (P T : CochainComplex (ProEtale.AdicSheaf l
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ)
+    (p q n : ℤ) (hpq : p + q = n) :
+    let R := ProEtale.adicUpperStar l
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))));
+    let G := ProEtale.upperStar (WeilCoefficients.{u} l)
+      (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))));
+    Mod.tensorObjπ (R.obj (P.X p)) (R.obj (T.X q)) ≫
+        (HomologicalComplex.ιTensorObj ((R.mapHomologicalComplex (.up ℤ)).obj P)
+          ((R.mapHomologicalComplex (.up ℤ)).obj T) p q n hpq).hom ≫
+        ((nativeOrdinaryRestrictionTotal k₀ l j P T).inv.f n).hom =
+      Functor.LaxMonoidal.μ G (P.X p).X (T.X q).X ≫
+        G.map (Mod.tensorObjπ (P.X p) (T.X q)) ≫
+        G.map (HomologicalComplex.ιTensorObj P T p q n hpq).hom := by
+  intro R G
+  let : G.Braided :=
+    { toMonoidal := inferInstance
+      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
+  let : R.Monoidal := by
+    dsimp only [R, ProEtale.adicUpperStar, Adjunction.modLeft]
+    infer_instance
+  let : R.IsLeftAdjoint :=
+    (ProEtale.adicUpperStarLowerStarAdjunction l
+      (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
+  change _ ≫ _ ≫ ((R.mapCochainComplexμIso P T).hom.f n).hom = _
+  have hι := congrArg Mod.Hom.hom
+    (R.ιTensorObj_mapCochainComplexμIso_hom_f P T p q n hpq)
+  simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
+  rw [hι, reassoc_of% (ordinary_sheaf_restriction_tensor k₀ l j (P.X p) (T.X q))]
+
+
 -- Keep the concrete presentation types folded while transporting the restriction fields.
 private theorem native_restriction_data
     (R0 : ProEtaleWeilSheaf k₀ l Z ⥤ ProEtaleWeilSheaf k₀ l U) [R0.Additive]
@@ -629,15 +663,14 @@ private theorem balanced_restriction_summand
     {A B O W T : C} {A' B' O' W' T' : D}
     {π : A ⟶ B} {π₀ : A ⟶ O} {i : B ⟶ W} {c : W ⟶ T} {i₀ : O ⟶ T}
     {π' : A' ⟶ B'} {π₀' : A' ⟶ O'} {i' : B' ⟶ W'} {c' : W' ⟶ T'}
-    {i₀' : O' ⟶ T'} {μ : T' ⟶ G.obj T} {μ₀ : O' ⟶ G.obj O}
+    {i₀' : O' ⟶ T'} {μ : T' ⟶ G.obj T}
     {μA : A' ⟶ G.obj A} {r : B' ⟶ G.obj B}
     (hu : π' ≫ i' ≫ c' = π₀' ≫ i₀')
-    (hi : i₀' ≫ μ = μ₀ ≫ G.map i₀)
-    (hs : π₀' ≫ μ₀ = μA ≫ G.map π₀)
+    (ht : π₀' ≫ i₀' ≫ μ = μA ≫ G.map π₀ ≫ G.map i₀)
     (hr : π' ≫ r = μA ≫ G.map π)
     (hz : π ≫ i ≫ c = π₀ ≫ i₀) :
     π' ≫ i' ≫ c' ≫ μ = π' ≫ r ≫ G.map i ≫ G.map c := by
-  rw [reassoc_of% hu, hi, reassoc_of% hs, reassoc_of% hr]
+  rw [reassoc_of% hu, ht, reassoc_of% hr]
   simp only [← G.map_comp, ← G.map_comp_assoc, hz]
 
 section AbstractTransport
@@ -718,31 +751,12 @@ private theorem native_restriction_chain
           (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
   let := hL
   intro F FU R RP RT P₀ T₀ tr cZ cU restriction_summands hcZ hcU
-  have : HasColimitsOfSize.{0, 0}
-      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-    hasColimitsOfSizeShrink _
-  have : HasColimitsOfSize.{0, 0}
-      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-    hasColimitsOfSizeShrink _
-  have : HasColimitsOfSize.{0, 0} (ProEtaleWeilSheaf k₀ l Z) :=
-    hasColimitsOfSizeShrink _
   let G := ProEtale.upperStar (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
-  let : G.Braided :=
-    { toMonoidal := inferInstance
-      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
-  let : R.Monoidal := by
-    dsimp only [R, ProEtale.adicUpperStar, Adjunction.modLeft]
-    infer_instance
-  let : R.IsLeftAdjoint :=
-    (ProEtale.adicUpperStarLowerStarAdjunction l
-      (Scheme.Hom.geometricFiberMap j (comp_over j _))).isLeftAdjoint
   dsimp only [nativeOpenTensorInsertion] at restriction_summands hcZ hcU
   dsimp only [RP, RT, Functor.mapHomologicalComplex_obj_X] at hcU
-  apply (cancel_mono (R.mapCochainComplexμIso P₀ T₀).hom).1
-  change _ = ((R.mapHomologicalComplex (.up ℤ)).map cZ.hom ≫
-    (R.mapCochainComplexμIso P₀ T₀).inv) ≫ (R.mapCochainComplexμIso P₀ T₀).hom
-  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  apply (cancel_mono (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).inv).1
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   ext n : 1
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   apply HomologicalComplex.mapBifunctor.hom_ext_of_map ((Lα) ⋙ FU)
@@ -763,11 +777,8 @@ private theorem native_restriction_chain
   apply Mod.tensorLeft_obj_hom_ext
   simp only [Mod.comp_hom']
   simp only [R, ProEtale.adicUpperStar_map_hom]
-  have hι := congrArg Mod.Hom.hom
-    (R.ιTensorObj_mapCochainComplexμIso_hom_f P₀ T₀ p q n hpq)
-  simp only [R, Mod.comp_hom', ProEtale.adicUpperStar_map_hom] at hι
-  exact balanced_restriction_summand G (hcU p q n hpq) hι
-    (ordinary_sheaf_restriction_tensor k₀ l j (P.X p).carrier (T.X q).carrier)
+  exact balanced_restriction_summand G (hcU p q n hpq)
+    (ordinary_restriction_total_summand k₀ l j P₀ T₀ p q n hpq)
     (ProEtale.tensorπ_adicUpperStarTensorLeftIso_inv_app
       (l := l) (g := Scheme.Hom.geometricFiberMap j (comp_over j _))
         (P.X p).carrier (T.X q).carrier)
