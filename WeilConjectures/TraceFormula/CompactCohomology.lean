@@ -480,17 +480,17 @@ lemma baseChange_comp_weilLowerShriekFrobeniusComparison_stalk {ΦY : Y ⟶ Y} {
     Functor.associator_hom_app, Functor.associator_inv_app, eqToIso.hom, eqToHom_app,
     Category.id_comp, Functor.comp_obj, Functor.id_obj]
   simp only [Functor.map_comp, Category.assoc]
-  rw [cH, hH]
-  rw [eqToHom_refl ((boundedConstructibleLowerShriek ℓ
+  simp only [cH, hH]
+  simp only [eqToHom_refl ((boundedConstructibleLowerShriek ℓ
       (r ≫ f')).obj ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (r ≫ p)).obj K))]
-  rw [CategoryTheory.Functor.map_id, Category.id_comp
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp
       (X := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
         ((boundedConstructibleLowerShriek ℓ (r ≫ f')).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K)))
       ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app _)]
   simp only [Category.assoc]
-  rw [hk]
+  simp only [hk]
 
 end Fibre
 

@@ -119,8 +119,6 @@ lemma pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app {ΦZ : Z �
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K)
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K) w.w.symm hi K
 
-set_option profiler true in
--- the instances of the categories of sheaves make the rewriting slow
 /-- The relative Frobenius part of `θ_f` at a fibre (blueprint
 `lem-trf-weil-shriek-operator-fibres`, proof of (2)): under the base change to the fibre `Z`
 of `y`, `Rf'_!(η_r)` followed by the composition isomorphisms becomes the pullback `Φ_Z^♯`. -/
@@ -194,7 +192,8 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))
   simp only [eqToHom_refl, Category.id_comp, Category.assoc]
-  simp only [← Functor.map_comp_assoc (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y)
+  simp only [← Functor.map_comp_assoc
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y)
       ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
         ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))]
