@@ -93,6 +93,7 @@ private def evaluation (X : Scheme.{u})
       DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
         schemeHomResolutionInverse X M
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The localization factorization elaborates through the sheaf and derived tensor instances.
 set_option backward.isDefEq.respectTransparency.types true in
