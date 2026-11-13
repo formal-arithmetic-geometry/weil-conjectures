@@ -392,9 +392,8 @@ private lemma cechCoboundary_of_ideal_sections {Z : Scheme.{u}} {ι : Type u}
     (hD (y 0) (y 1)).trans (congrArg (fun t : Fin 2 → ι ↦ ⨅ l, W (t l)) hy).symm
   refine eq_of_presheaf_map_eq hDy ?_
   simp only [map_sub, hιmap, Scheme.presheaf_map_homOfLE_map_homOfLE_apply]
-  simpa only [hιmap] using hd (y 0) (y 1)
+  exact (hd (y 0) (y 1)).trans (hιmap (hD (y 0) (y 1)).le (c ![y 0, y 1]))
 
-set_option profiler true in
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers
 of `X` and `Y`, with affine pairwise intersections. If `I` and `I'` have no nonzero global
 sections, the Čech complex of `pr_X⁻¹ I ⊓ pr_Y⁻¹ I'` for the cover `U × V` of `X ×_K Y` is
