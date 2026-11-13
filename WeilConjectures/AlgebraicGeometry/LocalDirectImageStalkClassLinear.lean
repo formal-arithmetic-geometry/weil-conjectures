@@ -82,11 +82,12 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     have hc := homology_comparison_commutes (A.sc p) (B.sc p) U E
       ((ModuleCat.smulNatTrans (Z.ringCatSheaf.obj.obj (op ⊤)) (h.appTop.hom t)).asHom)
       τ (𝟙 _) (by simpa only [Category.comp_id, Category.id_comp] using hscalar)
-    simpa only [ShortComplex.homologyMap_id, Category.id_comp] using hc
+    simpa only [ShortComplex.homologyMap_id, Category.id_comp,
+      ModuleCat.smulNatTrans, cA, cB, U] using hc
   have hc' (z : (A.sc p).homology) :
       cB.hom (cA.inv (h.appTop.hom t • z)) =
         t • (show (B.sc p).homology.obj (op ⊤) from cB.hom (cA.inv z)) := by
-    exact ConcreteCategory.congr_hom hc z
+    exact congrArg (fun q ↦ q z) hc
   let e := (K.isoRightDerivedObj (RingedSpace.globalSectionsFunctor Z.toRingedSpace) p).hom
   let θ := (Scheme.Modules.sectionCohomologyTheta L p).app (op ⊤)
   dsimp only [Scheme.Modules.resolutionSectionClass]
@@ -95,7 +96,8 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
   erw [Category.id_comp]
   change θ (cB.hom (cA.inv (e (h.appTop.hom t • x)))) =
     t • (show (L.homology p).val.obj (op ⊤) from θ (cB.hom (cA.inv (e x))))
-  rw [e.hom.map_smul, hc', θ.hom.map_smul]
+  exact (congrArg (fun z ↦ θ (cB.hom (cA.inv z))) (e.hom.map_smul _ _)).trans
+    ((congrArg θ (hc' (e x))).trans (θ.hom.map_smul _ _))
 
 private theorem local_germ_smul {Y : Scheme.{u}} (y : Y)
     (G : (Spec (CommRingCat.of (Y.presheaf.stalk y))).Modules)
