@@ -141,8 +141,8 @@ private theorem koszulOpenHomStageClass_colimit_of_cycle
   rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
   rw [moduleHomologyFactors_inv_naturality_apply,
     moduleHomologyFactors_inv_naturality_apply]
+  rfl
 
-set_option profiler true in
 /-- The canonical comparison on an actual chain representative is restriction followed
 by inverse augmentation and evaluation at one.
 Source: Stacks Project, Equation 36.9.4.1, Tag 08DC; Tags 08D1 and 08DD.
@@ -242,5 +242,6 @@ theorem koszulChain_restriction_formula
     (fun x ↦ H.map (G.map eF.hom) (H.map (koszulCechDerivedComparison A r f F) x)) hstage
   refine hresult.trans ?_
   simp only [β, Functor.map_comp, ModuleCat.comp_apply]
+  rfl
 
 end AlgebraicGeometry
