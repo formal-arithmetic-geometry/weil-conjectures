@@ -239,6 +239,7 @@ theorem _root_.PrimeSpectrum.exists_finset_eq_iUnion_basicOpen_inter_zeroLocus {
     exact hxb (hxg (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hb)))
 
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The `let`-bound strata are unfolded repeatedly by the kernel.
 /-- **Stratifications of an affine scheme descend to a finite stage.** Every stratification of
