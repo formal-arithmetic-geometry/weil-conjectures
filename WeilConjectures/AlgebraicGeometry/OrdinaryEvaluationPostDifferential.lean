@@ -29,10 +29,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-local instance ordinaryPostMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
-    MonoidalPreadditive (localEvaluationModules X U) :=
-  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
-
 -- Prove tensor naturality before specializing to the sheaf tensor instances.
 private theorem ordinaryPost_contraction_naturality {C : Type*} [Category C]
     [MonoidalCategory C] [BraidedCategory C] {E D B B' T : C}
@@ -43,9 +39,11 @@ private theorem ordinaryPost_contraction_naturality {C : Type*} [Category C]
   rw [BraidedCategory.braiding_naturality_right_assoc,
     associator_naturality_left_assoc, ← whisker_exchange_assoc, rightUnitor_naturality_assoc]
 
+local instance ordinaryPostMonoidalPreadditive (X : Scheme.{u}) (U : X.Opens) :
+    MonoidalPreadditive (localEvaluationModules X U) :=
+  Classical.choice (SheafOfModules.tensorClosed (X.sheaf.over U)).1
+
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
--- Naturality rewrites involve the expanded sheaf tensor and internal Hom instances.
 /-- Evaluation commutes with the differential in the output complex.
 Source: Stacks Project, Tag 08DQ, ordinary evaluation calculation, and Section 20.41.
 (blueprint: lem-pc-ordinary-evaluation-post-differential).
