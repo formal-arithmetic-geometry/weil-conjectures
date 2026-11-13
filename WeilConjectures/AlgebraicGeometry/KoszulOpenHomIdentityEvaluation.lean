@@ -44,22 +44,20 @@ private theorem koszulOpen_structure_evaluation_fast
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
     let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0
     let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
+    let c := fun e : ℕ ↦ H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))
+        (H.map (DerivedCategory.Q.map (colimit.ι
+          (koszulCechHomDiagram A r f
+            (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
+              (koszulOpenSheafComplex A r f e))) e))
+          (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _)))
     ∃ b : ∀ E : schemeDerivedCategory (Spec (.of A)),
       (R.obj (koszulOpenStructure A) ⟶ R.obj E) ≃ H.obj (G.obj E),
       (∀ (E E' : schemeDerivedCategory (Spec (.of A))) (g : E ⟶ E')
         (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E),
         b E' (ψ ≫ R.map g) = H.map (G.map g) (b E ψ)) ∧
-      ∀ (e : ℕ) (v : R.obj (koszulOpenStructure A) ⟶
-          R.obj (koszulOpenObject A r f e)),
-        R.map (koszulOpenUnit A r f e) ≫ v = 𝟙 _ →
-        b (koszulOpenObject A r f e) v =
-          H.map (koszulCechDerivedComparison A r f (koszulOpenSheafComplex A r f e))
-            (H.map (DerivedCategory.Q.map (colimit.ι
-              (koszulCechHomDiagram A r f
-                (((affineOpenSections A ⊤).mapHomologicalComplex (.up ℤ)).obj
-                  (koszulOpenSheafComplex A r f e))) e))
-              (koszulOpenHomStageClass A r f (koszulOpenSheafComplex A r f e) e (𝟙 _))) := by
-  simpa only using koszulOpen_structure_evaluation.{u, w, v} A r f
+      b (koszulOpenStructure A) (𝟙 _) =
+        H.map (G.map (koszulOpenUnit A r f 0)) (c 0) := by
+  exact koszulOpen_structure_evaluation.{u, w, v} A r f
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Natural evaluation, normalized only on the identity of each Koszul tail.
