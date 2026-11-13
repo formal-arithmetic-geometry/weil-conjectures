@@ -97,7 +97,7 @@ private theorem exists_totalTensorComparison
   · intro P P' N N' a b
     exact HomologicalComplex.mapBifunctorComparison_naturality τ (.up ℤ) a b
 
-set_option profiler true in
+set_option trace.profiler true in
 set_option synthInstance.maxSize 256 in
 /-- (blueprint: lem-pc-derived-pullback-tensor-product) For a morphism of schemes
 `g : T ⟶ S`, derived pullback commutes with derived tensor product:
@@ -224,7 +224,7 @@ theorem derivedPullback_tensorProduct
     subst F
     intro M N M' N' a b
     simpa only [e, Iso.trans_hom, eqToIso.hom, tensorIso_hom, eqToHom_refl,
-      tensorHom_id, Category.id_comp, Category.comp_id] using
+      tensorHom_id, MonoidalCategory.id_whiskerRight, Category.id_comp, Category.comp_id] using
       (Classical.choose_spec (Scheme.Modules.module_pullback_tensor g)).1 M N M' N' a b
   obtain ⟨φ, hφ, hnatural⟩ := exists_totalTensorComparison
     (C := SheafOfModules.{uPull} (moduleRings S.toRingedSpace))
