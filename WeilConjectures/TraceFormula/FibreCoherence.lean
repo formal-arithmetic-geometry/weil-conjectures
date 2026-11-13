@@ -187,7 +187,7 @@ lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     (pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app ℓ hT.toCommSq hi K)
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn₁ hn₂ hn₃ hn₄ hU' hPB hV
   simp only [hn₁]
-  simp only [cV]
+  erw [cV]
   simp only [hV]
   have hC := boundedConstructibleLowerShriekCompToPoint_hom_app ℓ ΦZ
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj
