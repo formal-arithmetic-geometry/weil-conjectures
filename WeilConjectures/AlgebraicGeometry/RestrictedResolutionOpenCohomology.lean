@@ -9,6 +9,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyAugmentedLift
+import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Restriction on the homology of fixed-resolution section complexes
 
@@ -144,7 +146,7 @@ private theorem restrictedResolution_open_sections_component {Z : Scheme.{u}}
   congr 1
 
 set_option backward.defeqAttrib.useBackward true in
-set_option trace.profiler true in
+set_option profiler true in
 /-- Restriction between arbitrary opens on the homology of a fixed resolution's
 section complexes, before the map to a cohomology sheaf.
 Source: Stacks Project, Equation 20.7.1.1 (Tag 01E2), Remark 20.14.2 (Tag 01FB).
@@ -208,6 +210,7 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
   let j := Z.homOfLE e
   let P := pushforward j
   let Q := restrictFunctor j
+  have : Q.Additive := (restrictAdjunction j).left_adjoint_additive
   let c : restrictFunctor U.ι ⋙ Q ≅ restrictFunctor L.ι :=
     (restrictFunctorComp j U.ι).symm ≪≫
     restrictFunctorCongr (Z.homOfLE_ι e)
@@ -218,8 +221,8 @@ theorem restrictedResolution_open_cohomology {Z : Scheme.{u}} {F : Z.Modules}
       R'.comparison.inv
   let β : R.resolution.cocomplex ⟶
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).obj R'.resolution.cocomplex :=
-    (NatTrans.mapHomologicalComplex (restrictAdjunction j).unit
-    (ComplexShape.up ℕ)).app R.resolution.cocomplex ≫
+    ((restrictAdjunction j).mapHomologicalComplex (ComplexShape.up ℕ)).unit.app
+      R.resolution.cocomplex ≫
       (P.mapHomologicalComplex (ComplexShape.up ℕ)).map t
   let φ : (restrictFunctor U.ι).obj F ⟶ P.obj ((restrictFunctor L.ι).obj F) :=
     (restrictAdjunction j).unit.app ((restrictFunctor U.ι).obj F) ≫
