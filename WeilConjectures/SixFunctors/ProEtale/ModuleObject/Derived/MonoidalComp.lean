@@ -52,8 +52,10 @@ lemma upperStarTensorComplexHom_comp
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
   erw [HomologicalComplex.ι_mapBifunctorMap_assoc]
-  rw [upperStarTensorComplexHom_f, upperStarTensorComplexHom_f,
-    upperStarTensorComplexHom_f]
+  rw [upperStarTensorComplexHom_f (Λ := Λ) (f := f)
+      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
+      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj B) n]
+  rw [upperStarTensorComplexHom_f (Λ := Λ) (f := f ≫ g) A B n]
   erw [HomologicalComplex.ι_mapBifunctorDesc_assoc,
     HomologicalComplex.ι_mapBifunctorDesc_assoc]
   rw [Category.assoc, ← Functor.map_comp]
