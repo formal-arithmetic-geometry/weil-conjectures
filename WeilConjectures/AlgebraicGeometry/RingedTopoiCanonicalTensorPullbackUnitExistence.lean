@@ -61,7 +61,6 @@ private theorem pure_right_unitor
   exact h.trans ((congrArg ((adj.counit.app M).val.app W) hh.symm).trans ht)
 
 set_option profiler true in
-set_option maxHeartbeats 500000 in
 -- Check the transported rank-one action and its sectionwise linear equivalences.
 private theorem inverseImage_unit_iso :
     ∃ e : unit (RingedTensor.ringSheaf RI) ≅
@@ -91,22 +90,24 @@ private theorem inverseImage_unit_iso :
         I.ringUnderlying.inv.hom.app W (I.ringUnderlying.hom.hom.app W x) = x :=
       congrArg (fun f ↦ f.hom.app W x) I.ringUnderlying.hom_inv_id
     simp only [id_eq] at hi
-    rw [hc] at hi
+    simp only [hc] at hi
     have hm := I.moduleSMul U Z (𝟙 Z) one (𝟙 Z)
       (fun W x ↦ (mul_one (show R.obj.obj W from x)).symm) W t
-    erw [uInv.map_id] at hm
-    erw [ht, hi] at hm
+    simp only [uInv.map_id] at hm
+    simp only [ht, hi] at hm
     exact hm
   let eW (W : Dᵒᵖ) : RI.obj.obj W ≃ₗ[RI.obj.obj W] (I.modules.obj U).val.obj W :=
     { toEquiv := (((sheafToPresheaf JD (Type u)).mapIso e).app W).toEquiv.symm
       map_add' := by
         intro r s
         change g W (r + s) = g W r + g W s
-        rw [hf W (r + s), hf W r, hf W s, add_smul]
+        exact (hf W (r + s)).trans
+          ((add_smul r s (g W 1)).trans (congrArg₂ (· + ·) (hf W r).symm (hf W s).symm))
       map_smul' := by
         intro r s
         change g W (r * s) = r • g W s
-        rw [hf W (r * s), hf W s, mul_smul] }
+        exact (hf W (r * s)).trans
+          ((mul_smul r s (g W 1)).trans (congrArg (r • ·) (hf W s).symm)) }
   let ep : (unit (RingedTensor.ringSheaf RI)).val ≅ (I.modules.obj U).val :=
     PresheafOfModules.isoMk (fun W ↦ (eW W).toModuleIso) (by
       intro W V f
@@ -203,7 +204,6 @@ private theorem comparison_q_hom_ext
     Functor.map_comp, Category.assoc] using h
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Transport scalar extension and evaluate the comparison on generalized unit tensors.
 /--
 The proof constructs the unit map from pure tensors and scalar extension.
@@ -318,7 +318,7 @@ theorem canonicalRingedTensorComparison_unit_exists
         (1 : S.obj.obj W) := by
     have hh := congrArg (fun f ↦ f.hom.app W
       ((uInv.map one ≫ I.moduleUnderlying.inv.app U).hom.app W t)) hj
-    rw [heI'] at hh
+    simp only [heI'] at hh
     have hcancel := congrArg (fun f ↦ f.hom.app W ((uInv.map one).hom.app W t))
       (I.moduleUnderlying.inv_hom_id_app U)
     have hOne := I.ringOne Z one (fun _ _ ↦ rfl) W t
@@ -335,8 +335,7 @@ theorem canonicalRingedTensorComparison_unit_exists
       ((I.moduleUnderlying.inv.app U).hom.app W ((uInv.map one).hom.app W t)) =
         (uInv.map one).hom.app W t at hcancel
     simp only [id_eq] at hOne
-    erw [hcancel, heS, hOne, map_one] at hh
-    exact hh
+    simpa only [hcancel, heS, hOne, map_one] using hh
   have hp' : (k.mu M U).hom.val.app W
       ((L.map (ρ_ M).inv).val.app W ((k.q M).hom.app W m)) =
       RingedTensor.pure S (L.obj M) (L.obj U) W ((k.q M).hom.app W m)
@@ -345,29 +344,29 @@ theorem canonicalRingedTensorComparison_unit_exists
         ((uInv.map z).hom.app W t) =
       (I.modules.map (ρ_ M).inv).val.app W
         ((I.moduleUnderlying.inv.app M).hom.app W t) at hn
-    rw [ht] at hn
+    simp only [ht] at hn
     change (k.q (M ⊗ U)).hom.app W ((I.modules.map (ρ_ M).inv).val.app W m) =
       (L.map (ρ_ M).inv).val.app W ((k.q M).hom.app W m) at hu
-    erw [uInv.map_id] at hp
+    simp only [uInv.map_id] at hp
     change (k.mu M U).hom.val.app W
         ((k.q (M ⊗ U)).hom.app W
           ((I.moduleUnderlying.inv.app (M ⊗ U)).hom.app W ((uInv.map z).hom.app W t))) =
       RingedTensor.pure S (L.obj M) (L.obj U) W
         ((k.q M).hom.app W ((I.moduleUnderlying.inv.app M).hom.app W t))
         ((uInv.map one ≫ I.moduleUnderlying.inv.app U ≫ k.q U).hom.app W t) at hp
-    rw [ht, hn, hu] at hp
+    simp only [ht, hn, hu] at hp
     exact hp
   change (ρ_ (L.obj M)).hom.val.app W
       ((𝟙 (L.obj M) ⊗ₘ j.hom).val.app W
         ((k.mu M U).hom.val.app W
           ((L.map (ρ_ M).inv).val.app W ((k.q M).hom.app W m)))) =
     (k.q M).hom.app W m
-  rw [hp', RingedTensor.pure_map]
+  simp only [hp', RingedTensor.pure_map]
   change (ρ_ (L.obj M)).hom.val.app W
     (RingedTensor.pure S (L.obj M) (unit (RingedTensor.ringSheaf S)) W
       ((k.q M).hom.app W m)
       (j.hom.val.app W
         ((uInv.map one ≫ I.moduleUnderlying.inv.app U ≫ k.q U).hom.app W t))) = _
-  rw [hj1, pure_right_unitor, one_smul]
+  simp only [hj1, pure_right_unitor, one_smul]
 
 end SheafOfModules
