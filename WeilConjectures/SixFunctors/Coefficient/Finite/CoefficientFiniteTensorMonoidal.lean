@@ -200,6 +200,11 @@ theorem coefficientFiniteTensorMonoidal
   let J := Scheme.ProEt.topology W
   let φ := completedIntegralCommRingProjectionUnrestricted l E W n
   let D := finiteCochainModel l E W n
+  have hε (P : CochainComplex (scalarReductionSource l E W) ℤ)
+      (hP : CochainComplex.IsKFlatIndependentCoefficients
+        (J := J) (R := completedIntegralCommRingSheafUnrestricted l E W) P) :
+      D.ε.app P = (coefficientFiniteReductionModel l E W P hP n).hom :=
+    finiteCochainModel_counit l E W n P hP
   obtain ⟨κ, hκ, _⟩ := ringedFiniteFreeHomBaseChange_complex.{t+1, t, u,
     max (t+2) (u+1)} J φ D
   have hc (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
@@ -222,10 +227,8 @@ theorem coefficientFiniteTensorMonoidal
         (coefficientTensorModelPreservation l E W).1 Q hQ n, ?_⟩
       have hh := hF n P Q hP hQ
       unfold CoefficientTensorComparisonSquare at hh
-      simp only [D, show κ.hom.app (P, Q) = (coefficientScalarTensorIso l E W n P Q).hom from
-        congrArg Iso.hom (hc P Q), finiteCochainModel_counit l E W n P hP,
-        finiteCochainModel_counit l E W n Q hQ,
-        finiteCochainModel_counit l E W n _
+      simp only [show κ.hom.app (P, Q) = (coefficientScalarTensorIso l E W n P Q).hom from
+        congrArg Iso.hom (hc P Q), hε P hP, hε Q hQ, hε _
           (coefficientTotalTensor_isKFlat.{u, t+1, t} J
             (completedIntegralCommRingSheafUnrestricted l E W) P Q hP hQ)]
       dsimp only [coefficientIntegralTensorModelIso, coefficientFiniteTensorModelIso] at hh
