@@ -28,9 +28,6 @@ attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option trace.profiler true in
-set_option maxHeartbeats 500000 in
--- Explicit section comparisons require unfolding several categorical functor composites.
 /-- The canonical section class map intertwines multiplication endomorphisms.
 No Ext comparison, affine open, finiteness or quasi-coherence is assumed.
 Source: Stacks Project, Tags 01E4 and 01E5; naturality of derived functors.
@@ -80,12 +77,13 @@ theorem resolutionSectionClass_map_smulHom
         (PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
           (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V))).hom
   let δ := Hom.app (I.isoRightDerivedObj (pushforward f) p).inv V
-  have hT : T (b • e.hom.hom x) = a •
-      (show (sectionCohomologyPresheaf K p).obj (op V) from T (e.hom.hom x)) := hs
+  dsimp only [resolutionSectionClass, AddCommGrpCat.comp_apply]
   change δ (θ.hom (T (e.hom.hom
     (((RingedSpace.moduleCohomology U.toScheme.toRingedSpace p).map
       (M.smulHom b)).hom x)))) = a • δ (θ.hom (T (e.hom.hom x)))
-  rw [hscalar, e.hom.hom.map_smul, hT, θ.hom.map_smul]
-  exact hi _
+  exact (congrArg (fun z ↦ δ (θ.hom (T (e.hom.hom z)))) hscalar).trans
+    ((congrArg (fun z ↦ δ (θ.hom (T z))) (e.hom.hom.map_smul b x)).trans
+      ((congrArg (fun z ↦ δ (θ.hom z)) hs).trans
+        ((congrArg (fun z ↦ δ z) (θ.hom.map_smul a _)).trans (hi _))))
 
 end AlgebraicGeometry.Scheme.Modules

@@ -96,9 +96,6 @@ def cohomologyOpenRestriction {Y : Scheme.{u}} (G : Y.Modules)
       (pushforward j).map c.hom) p
 
 set_option backward.defeqAttrib.useBackward true in
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- Comparing section complexes unfolds the scheme and ringed-space module interfaces.
 /-- The normalized resolution class commutes with restriction between arbitrary opens.
 No affineness, quasi-coherence, base change or scalar extension is assumed.
 Source: Stacks Project, Tag 01E4, Lemma 20.7.3; Tag 01FB, Remark 20.14.2.
@@ -149,7 +146,7 @@ theorem resolutionSectionClass_open_restriction
       (K.homology p).presheaf.map (homOfLE eWV).op := by
     unfold resolutionSectionClass
     simp only [Category.assoc]
-    rw [← hn]
+    rewrite [← hn]
     have hrmap :
         ((NatTrans.mapHomologicalComplex
           (Functor.whiskerLeft (SheafOfModules.forget X.ringCatSheaf ⋙
@@ -165,7 +162,7 @@ theorem resolutionSectionClass_open_restriction
           (ComplexShape.up ℕ)).app K) := by
       ext n
       rfl
-    rw [hrmap] at hr
+    rewrite [hrmap] at hr
     have hr' := congrArg (fun q ↦ q ≫
       (((((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
         (ComplexShape.up ℕ)).obj K).sc p).mapHomologyIso
@@ -181,7 +178,7 @@ theorem resolutionSectionClass_open_restriction
     Hom.app φ V ≫ Q.presheaf.map (homOfLE eWV).op at hφ
   have ht := congrArg (fun q ↦ q ≫ Hom.app φ W) hs
   simp only [Category.assoc] at ht
-  rw [hφ] at ht
+  rewrite [hφ] at ht
   dsimp only
   intro y
   have hy := ConcreteCategory.congr_hom ht y

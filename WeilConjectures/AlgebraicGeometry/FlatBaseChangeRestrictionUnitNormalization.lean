@@ -24,9 +24,6 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- The statement elaborates nested pullback and pushforward comparisons.
 /-- The unit square pins the double transpose to the canonical pullback comparison.
 Source: Stacks Project, Sheaves, Tags 0096 and 0097, adjunction and composition.
 (blueprint: lem-pc-restriction-chart-unit-normalization)
@@ -121,7 +118,7 @@ theorem restriction_chart_unit_normalization
   simp only [adj₂, Adjunction.comp_unit_app, Iso.symm_hom]
   apply (cancel_mono (rightIso.hom.app M)).mp
   simp only [Category.assoc]
-  erw [Iso.inv_hom_id_app, Category.comp_id]
+  simp only [Iso.inv_hom_id_app, Category.comp_id]
   apply hom_ext
   intro B
   simp only [Hom.comp_app, pushforward_map_app, Functor.map_comp, rightIso,
@@ -152,10 +149,7 @@ theorem restriction_chart_unit_normalization
   dsimp only [M] at *
   simp only [restrict_map]
   dsimp only [G] at hh ⊢
-  repeat' erw [Category.assoc] at hh
-  repeat' erw [Category.assoc]
-  repeat' erw [← Functor.map_comp] at hh
-  repeat' erw [← Functor.map_comp]
+  simp only [Category.assoc, ← Functor.map_comp] at hh ⊢
   convert hh.symm using 1
 
 end AlgebraicGeometry.Scheme.Modules
