@@ -97,9 +97,7 @@ private def evG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
   ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
     (compactSupportSystemQuotient l E) f n
 
-set_option maxHeartbeats 600000 in
 set_option profiler true in
--- Comparing the native and normalized coefficient carriers needs additional heartbeats.
 /-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
 Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
 (blueprint: lem-weil-compact-support-ordinary-pullback-transition).
@@ -123,9 +121,12 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
         ((compactSupportOrdinaryCoefficientTransition l E Y h).app N) ≫
       (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h)).app
         ((coefficientSequenceEvaluation l E Y n).obj N) := by
-  let R := compactSupportSystemLevel l E
-  let q := compactSupportSystemQuotient l E
-  refine horizontalLeftMate (systemAdj l E f)
+  refine horizontalLeftMate
+    (Lm := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E m) f)
+    (Rm := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f)
+    (Ln := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f)
+    (Rn := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E n) f)
+    (systemAdj l E f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
     (coefficientSequenceEvaluation l E Y m) (coefficientSequenceEvaluation l E Y n)
