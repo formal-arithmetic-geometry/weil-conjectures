@@ -148,7 +148,7 @@ private theorem openModuleDerivedSections_preservesCountableProducts
   exact preservesLimitsOfShape_of_discrete _
 
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The product/triangle comparisons elaborate across two independent localization universes.
 /-- Derived sections over an open preserve Roos triangles and satisfy the Milnor
 short exact sequence.  The functor `RΓ(U,-)` is represented by K-injective
