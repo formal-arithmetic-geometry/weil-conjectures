@@ -94,8 +94,6 @@ private theorem iteratedQuotient
   rw [Ideal.quotientEquivAlgOfEq_mk]
   exact (Ideal.quotientKerAlgEquivOfSurjective_mk (f := φ) hφ p).symm
 
-set_option profiler true in
--- Comparing the two presentations requires several nested ideal and polynomial transports.
 set_option backward.isDefEq.respectTransparency false in
 /-- Before localization, scalar extension removes precisely the pi terms.
 
@@ -170,6 +168,7 @@ theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     simp only [reducedIdeal, Ideal.map_span, ← Set.range_comp,
       Function.comp_def]
     exact congrArg Ideal.span (congrArg Set.range (funext (fun j ↦ hmapred (d.f j))))
+  -- Select the equivalences directly to avoid existential elimination over the large goal.
   let c₀ := (baseChangeQuotient Rbar B (Fin d.n) d.reducedIdeal).choose
   have hc₀ := (baseChangeQuotient Rbar B (Fin d.n) d.reducedIdeal).choose_spec
   let c : L ≃ₐ[B] (MvPolynomial (Fin d.n) B ⧸ F) :=
