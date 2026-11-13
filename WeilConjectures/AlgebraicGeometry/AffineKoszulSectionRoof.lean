@@ -64,10 +64,23 @@ private theorem kflat_augmentation_realization
   dsimp only [Q]
   simp only [Functor.map_comp, IsIso.hom_inv_id_assoc]
 
+/-- Transport a section along an isomorphic realization of an augmentation. -/
+private theorem map_section_of_realization
+    {C D : Type*} [Category C] [Category D] (R : C ⥤ D)
+    {P T E J : C} (a : P ⟶ T) (v : R.obj T ⟶ R.obj P)
+    (hav : R.map a ≫ v = 𝟙 _) (hva : v ≫ R.map a = 𝟙 _)
+    (s : R.obj T ⟶ R.obj E) (ξ : P ⟶ E) (hs : v ≫ R.map ξ = s)
+    (c : J ≅ P) (u : J ⟶ T) (hu : u = c.hom ≫ a) :
+    IsIso (R.map u) ∧ R.map u ≫ s = R.map (c.hom ≫ ξ) := by
+  let j : R.obj P ≅ R.obj T := ⟨R.map a, v, hav, hva⟩
+  constructor
+  · rw [hu, Functor.map_comp]
+    exact (R.mapIso c ≪≫ j).isIso_hom
+  · rw [hu, Functor.map_comp, Functor.map_comp, ← hs]
+    rw [Category.assoc, ← Category.assoc (R.map a), hav, Category.id_comp]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 600000 in
--- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
 There is no perfect source, tensor product, or lifted morphism in this statement.
@@ -114,6 +127,15 @@ theorem affine_koszul_section_roof
           IsIso (R.map (DerivedCategory.Q.map u)) ∧
           R.map (DerivedCategory.Q.map u) ≫ s = R.map ξ := by
   classical
+  -- Reuse the sheaf abelian structures throughout the restriction comparisons.
+  let _ : Abelian (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) := inferInstance
+  let _ (V : X.Opens) :
+      Abelian (SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over V)) := inferInstance
+  let _ : Abelian (SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace)) :=
+    inferInstance
+  have _ (V : X.Opens) :
+      (SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) V).Additive :=
+    Functor.additive_of_preserves_binary_products _
   let := SheafOfModules.monoidalCategory X.sheaf
   let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let C := SheafOfModules.{uX} (moduleRings X.toRingedSpace)
@@ -124,8 +146,9 @@ theorem affine_koszul_section_roof
   let R := (LX ⋙ EX.functor).mapDerivedCategory
   change ∀ s : R.obj (DerivedCategory.Q.obj T) ⟶ R.obj E.obj, _
   intro s
-  obtain ⟨P, a, hP, v, hav, hva, D, hD, ι, hι, ⟨hc⟩⟩ :=
-    affine_koszul_section_colimit X U hU E
+  have hcol := affine_koszul_section_colimit X U hU E
+  dsimp only at hcol
+  obtain ⟨P, a, hP, v, hav, hva, D, hD, ι, hι, ⟨hc⟩⟩ := hcol
   obtain ⟨n, z, hz⟩ := Types.jointly_surjective D hc s
   let ξ : P n ⟶ E.obj := cast (hD n) z
   have hξ : ι.app n (cast (hD n).symm ξ) = s := by
@@ -137,17 +160,9 @@ theorem affine_koszul_section_roof
     exact ⟨V, hx, K, hK,
       ⟨(SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) V).mapDerivedCategory.mapIso
         c ≪≫ eK⟩⟩
-  let j : R.obj (P n) ≅ R.obj (DerivedCategory.Q.obj T) :=
-    ⟨R.map (a n), v n, hav n, hva n⟩
-  have hiu : IsIso (R.map (DerivedCategory.Q.map u)) := by
-    rw [hu, Functor.map_comp]
-    change IsIso (R.map c.hom ≫ j.hom)
-    exact (R.mapIso c ≪≫ j).isIso_hom
-  refine ⟨J, hJ, hp, u, c.hom ≫ ξ, hiu, ?_⟩
   have hs : v n ≫ R.map ξ = s := (hι n ξ).symm.trans hξ
-  rw [hu, Functor.map_comp, Functor.map_comp, ← hs]
-  change (R.map c.hom ≫ R.map (a n)) ≫ (v n ≫ R.map ξ) =
-    R.map c.hom ≫ R.map ξ
-  rw [Category.assoc, ← Category.assoc (R.map (a n)), hav n, Category.id_comp]
+  obtain ⟨hiu, hsection⟩ := map_section_of_realization R (a n) (v n) (hav n) (hva n)
+    s ξ hs c (DerivedCategory.Q.map u) hu
+  exact ⟨J, hJ, hp, u, c.hom ≫ ξ, hiu, hsection⟩
 
 end AlgebraicGeometry.Scheme
