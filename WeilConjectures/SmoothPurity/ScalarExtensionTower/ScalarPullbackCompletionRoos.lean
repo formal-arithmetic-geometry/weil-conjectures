@@ -103,7 +103,29 @@ private theorem map_coordinate_composite
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hσ]
 
-set_option profiler true in
+private theorem completion_roos_composite
+    {𝒜 ℬ 𝒞 𝒟 : Type*} [Category* 𝒜] [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
+    (O : 𝒜 ⥤ 𝒟) (R : 𝒜 ⥤ ℬ) (I : ℬ ⥤ 𝒟) (Q : 𝒞 ⥤ 𝒟)
+    (α : O ⟶ R ⋙ I)
+    {X X₀ X₁ X₂ X₃ X₄ : 𝒜} {V : ℬ} {P₀ P₁ P₂ P₃ P₄ : 𝒞}
+    (r : X ⟶ X₀) (s : X₀ ⟶ X₁) (t : X₁ ⟶ X₂)
+    (v : X₂ ⟶ X₃) (w : X₃ ⟶ X₄) (γ : X ⟶ X₄)
+    (ε : R.obj X₄ ⟶ V) (b : I.obj V ⟶ Q.obj P₂)
+    (f₂ : O.obj X₂ ⟶ Q.obj P₀) (f₃ : O.obj X₃ ⟶ Q.obj P₁)
+    (a : P₀ ⟶ P₁) (c : P₁ ⟶ P₂) (τ : P₂ ⟶ P₃) (q : P₃ ⟶ P₄)
+    (k : P₀ ⟶ P₄)
+    (hγ : γ = r ≫ s ≫ t ≫ v ≫ w)
+    (hc : O.map w ≫ α.app X₄ ≫ I.map ε ≫ b = f₃ ≫ Q.map c)
+    (hf : O.map v ≫ f₃ = f₂ ≫ Q.map a)
+    (hk : a ≫ c ≫ τ ≫ q = k) :
+    α.app X ≫ I.map (R.map γ ≫ ε) ≫ b ≫ Q.map τ ≫ Q.map q =
+      O.map r ≫ O.map s ≫ O.map t ≫ f₂ ≫ Q.map k := by
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% (α.naturality γ), hγ]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hc, reassoc_of% hf]
+  simp only [Category.assoc, ← Q.map_comp, hk]
+
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
 Source: Stacks 06YY, 07A4 and 0941; the quotient calculation in step 1 of
@@ -330,24 +352,38 @@ theorem scalarPullbackCompletionRoos (W : Bool → Scheme.{u})
       (DerivedCategory.Q.map (integralOperationsRoosMap q.hom)) hAdj hσ
   change χ.app _ ≫ SX.realization.hom.app _ ≫ _ ≫ c = _
   rw [hCoord]
-  have hNat := SX.realization.hom.naturality γ
-  dsimp only [Functor.comp_map] at hNat
-  have hχNat := χ.naturality γ
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% hNat]
-  change _ ≫ (integralScalarExtension l E L ι X).map γ ≫ _ = _
-  rw [← reassoc_of% hχNat]
-  rw [hγ]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hCounit]
-  simp only [Functor.map_comp, Category.assoc]
   have hfac := (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.naturality
     (integralOperationsRoosMap qE.inv)
   dsimp only [Functor.comp_map] at hfac
-  rw [reassoc_of% hfac]
-  have hQ := congrArg (fun g ↦ DerivedCategory.Q.map g) hchain
-  simp only [Functor.map_comp] at hQ
-  rw [hQ]
-  rfl
+  have hcounit : O.map (integralComparisonRoosBridge l E X (ME.roos true) H).inv ≫
+      (χ ≫ SX.realization.hom).app (TE.obj (DerivedCategory.Q.obj H)) ≫
+      (A ⋙ T).map ε ≫
+      (T.map ((integralComparisonSequenceScalarModel l E L ι X).ε.app H) ≫
+        (integralComparisonRoosBridge l L X ρ SH).hom) =
+      (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app
+        (integralOperationsRoos CE.asFunctor) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app
+            (integralOperationsRoos CE.asFunctor) ≫
+          scalarRoosMap (completedOrdinaryScalarExtension l E L ι X) CE.asFunctor ≫
+          integralOperationsRoosMap a) := by
+    simpa only [NatTrans.comp_app, Functor.comp_map, Category.assoc] using hCounit
+  have h := completion_roos_composite O S.reduction (A ⋙ T) DerivedCategory.Q
+    (χ ≫ SX.realization.hom)
+    eR.hom (F.map eP.inv) ((integralDerivedPullbackComparison l E f).hom.app P)
+    (DerivedCategory.Q.map (integralOperationsRoosMap qE.inv))
+    (integralComparisonRoosBridge l E X (ME.roos true) H).inv γ ε
+    (T.map ((integralComparisonSequenceScalarModel l E L ι X).ε.app H) ≫
+      (integralComparisonRoosBridge l L X ρ SH).hom) _ _
+    (((integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)).map
+      (integralOperationsRoosMap qE.inv))
+    ((NatIso.mapHomologicalComplex t (.up ℤ)).hom.app
+        (integralOperationsRoos CE.asFunctor) ≫
+      scalarRoosMap (completedOrdinaryScalarExtension l E L ι X) CE.asFunctor ≫
+      integralOperationsRoosMap a)
+    (integralOperationsRoosMap τ) (integralOperationsRoosMap q.hom)
+    (scalarPullbackChain l E L ι f P.obj) hγ hcounit hfac
+    (by simpa only [Category.assoc] using hchain)
+  simpa only [NatTrans.comp_app, Functor.comp_map, Category.assoc] using h
 
 end WeilConjectures.ScalarExtensionTower
