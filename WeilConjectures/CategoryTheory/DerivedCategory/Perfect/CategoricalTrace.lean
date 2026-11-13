@@ -105,7 +105,8 @@ in `D(A)`, with a coevaluation `A ⟶ P ⊗ᴸ P^∨` and an evaluation `P^∨ �
 theorem IsPerfect.nonempty_exactPairing_ihom_unit {P : DerivedCategory (ModuleCat.{u} R)}
     (hP : P.IsPerfect) : Nonempty (ExactPairing P ((ihom P).obj (𝟙_ _))) := by
   obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
-  exact hP.isDualizable.nonempty_exactPairing_ihom_unit
+  obtain ⟨_⟩ := hP.isDualizable
+  exact ⟨exactPairingCongrRight (ihomUnitIsoRightDual P)⟩
 
 /-- Blueprint `definition-categorical-trace--2`: the categorical trace of an endomorphism
 `v : P ⟶ P` of a perfect complex is the scalar
