@@ -20,6 +20,29 @@ Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
 
 universe u v
 
+private theorem exists_fin_roots_prod_aeval
+    (R T : Type*) [CommRing R] [IsDomain R] [CommRing T] [Algebra R T]
+    (f : Polynomial R) (hf : f.Monic) (hd : 0 < f.natDegree) (hsplit : f.Splits) :
+    ∃ (d : ℕ) (roots : Fin d → R), 0 < d ∧
+      ∀ t : T, (∏ i, (t - algebraMap R T (roots i))) = Polynomial.aeval t f := by
+  classical
+  let l := f.roots.toList
+  refine ⟨l.length, l.get, ?_, ?_⟩
+  · have hlen : l.length = f.natDegree := by
+      simpa [l] using hsplit.natDegree_eq_card_roots.symm
+    exact hlen.symm ▸ hd
+  intro t
+  conv_rhs => rw [hsplit.eq_prod_roots_of_monic hf]
+  simp only [map_multiset_prod, Multiset.map_map, Function.comp_def, map_sub,
+    Polynomial.aeval_X, Polynomial.aeval_C]
+  rw [← List.prod_ofFn]
+  have he : List.ofFn (fun i ↦ t - algebraMap R T (l.get i)) =
+      l.map (fun a ↦ t - algebraMap R T a) := by
+    simpa only [Function.comp_def, List.ofFn_get] using
+      (List.map_ofFn (f := l.get) (g := fun a ↦ t - algebraMap R T a)).symm
+  rw [he]
+  simp [l]
+
 set_option profiler true in
 /-- A finite localized splitting cover carries a single positive-degree split polynomial
 whose evaluation belongs to every maximal contraction.
@@ -89,30 +112,12 @@ theorem exists_adjoin_singleton_splitting_polynomial_cover
     exists_finite_away_maximal_localization S T m s hs g hg hfin
   let := alg
   let t : T := ⟨z, Algebra.subset_adjoin (Set.mem_singleton z)⟩
-  let l := f.roots.toList
-  let roots : Fin l.length → R' := l.get
-  have hlen : l.length = f.natDegree := by
-    simpa [l] using hsplit.natDegree_eq_card_roots.symm
-  have heval : (∏ i : Fin l.length, (t - algebraMap R' T (roots i))) =
-      Polynomial.aeval t f := by
-    rw [hsplit.eq_prod_roots_of_monic hf]
-    simp only [map_multiset_prod, Multiset.map_map, Function.comp_def, map_sub,
-      Polynomial.aeval_X, Polynomial.aeval_C]
-    change (∏ i : Fin l.length, (t - algebraMap R' T (l.get i))) =
-      (f.roots.map (fun a ↦ t - algebraMap R' T a)).prod
-    rw [← List.prod_ofFn]
-    have he : List.ofFn (fun i ↦ t - algebraMap R' T (l.get i)) =
-        l.map (fun a ↦ t - algebraMap R' T a) := by
-      simpa only [Function.comp_def, List.ofFn_get] using
-        (List.map_ofFn (f := l.get) (g := fun a ↦ t - algebraMap R' T a)).symm
-    rw [he]
-    simp [l]
+  obtain ⟨d, roots, hd, heval⟩ := exists_fin_roots_prod_aeval R' T f hf hd hsplit
   refine ⟨R', K', cR, dR, nR, cK, aK, frac, hR', z, M, hM, alg, hi, hfinite,
-    l.length, roots, hlen.symm ▸ hd, ?_⟩
+    d, roots, hd, ?_⟩
   intro q hqmax
-  obtain ⟨hqM, hle⟩ := hq q
-  refine ⟨hqM, ?_⟩
-  change (∏ i : Fin l.length, (t - algebraMap R' T (roots i))) ∈ _
+  refine ⟨(hq q).1, ?_⟩
+  change (∏ i : Fin d, (t - algebraMap R' T (roots i))) ∈ _
   rw [heval]
-  exact hle hmem
+  exact (hq q).2 hmem
 
