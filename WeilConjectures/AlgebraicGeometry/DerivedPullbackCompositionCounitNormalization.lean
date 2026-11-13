@@ -89,6 +89,31 @@ private theorem derivedPullback_chosen_counit_normalization
   dsimp only [a] at he
   exact he
 
+-- Normalize after an arbitrary precomposition while the scheme morphism is still
+-- a parameter. Composite morphisms can then use this equation without re-elaborating it.
+set_option profiler true in
+private theorem derivedPullback_chosen_counit_precomp
+    {X Y : Scheme.{u}} (s : X ⟶ Y)
+    (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+      (ComplexShape.up ℤ))
+    {M : DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))}
+    (p : M ⟶ (derivedPullback s).obj
+      (DerivedCategory.Qh.obj (((Scheme.Modules.pushforward s).mapHomotopyCategory
+        (ComplexShape.up ℤ)).obj K)))
+    (t : M ⟶ DerivedCategory.Qh.obj K)
+    (h : let ε := (Classical.choose
+          (Classical.choose_spec exists_derivedPullbackComposition.{u, w})) s
+        let b := (Classical.choose
+          (Scheme.Modules.exists_tensorPullbackAdjunction s)).mapHomotopyCategory
+            (ComplexShape.up ℤ)
+        p ≫ ε.app (((Scheme.Modules.pushforward s).mapHomotopyCategory
+          (ComplexShape.up ℤ)).obj K) ≫ DerivedCategory.Qh.map (b.counit.app K) = t) :
+    p ≫ (derivedPullback s).map
+        ((RingedSpace.moduleDirectImage s.toLRSHom.toShHom).rightDerivedFunctorUnit.app K) ≫
+      (schemeHomPullbackAdjunction s).counit.app (DerivedCategory.Qh.obj K) = t := by
+  exact normalizeCounitPrecomposition p
+    (derivedPullback_chosen_counit_normalization.{u, w} s K) h
+
 set_option profiler true in
 /-- The chosen pullback comparison and composite direct-image unit transpose to the
 explicit pasted underived counits.
@@ -119,13 +144,7 @@ theorem derivedPullbackComposition_counit_normalization
       (schemeHomPullbackAdjunction (f ≫ g)).counit.app (DerivedCategory.Qh.obj K) =
       derivedCompositionCounitApex f g K
     := by
-  run_tac Lean.logInfo m!"before normalization: {(← Lean.getRemainingHeartbeats) / 1000}"
-  have he := derivedPullback_chosen_counit_normalization.{u, w} (f ≫ g) K
-  run_tac Lean.logInfo m!"after normalization: {(← Lean.getRemainingHeartbeats) / 1000}"
-  have hl := derivedPullbackComposition_localized_counit.{u, w} f g K
-  run_tac Lean.logInfo m!"after localized counit: {(← Lean.getRemainingHeartbeats) / 1000}"
-  exact normalizeCounitPrecomposition
-    (C := DerivedCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)))
-    _ he hl
+  exact derivedPullback_chosen_counit_precomp.{u, w} (f ≫ g) K _ _
+    (derivedPullbackComposition_localized_counit.{u, w} f g K)
 
 end AlgebraicGeometry
