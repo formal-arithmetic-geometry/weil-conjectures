@@ -28,7 +28,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
-open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -106,15 +105,20 @@ lemma upperStarTensorHomotopyHom_braiding
           ((HomotopyCategory.quotient _ _).obj A) :=
   quotient_map_upperStarTensorComplexHom_braiding Λ f A B
 
-set_option profiler true in
 /-- The comparison `upperStarTensorHomotopyHom` is an isomorphism on images of complexes. -/
 instance isIso_upperStarTensorHomotopyHom
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
     IsIso (upperStarTensorHomotopyHom Λ f ((HomotopyCategory.quotient _ (.up ℤ)).obj A)
       ((HomotopyCategory.quotient _ (.up ℤ)).obj B)) := by
-  have : IsIso (upperStarTensorComplexHom Λ f A B) :=
-    IsIso.of_isIso_fac_right (upperStarTensorComplexHom_δ Λ f A B)
+  have h := upperStarTensorComplexHom_δ Λ f A B
+  have : IsIso (upperStarTensorComplexHom Λ f A B ≫
+      ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
+        (f)^*⟦Λ⟧).app A).app B) := by
+    rw [h]
+    infer_instance
+  have : IsIso (upperStarTensorComplexHom Λ f A B) := IsIso.of_isIso_comp_right _
+    (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B)
   exact Functor.map_isIso (HomotopyCategory.quotient _ (.up ℤ))
     (upperStarTensorComplexHom Λ f A B)
 
@@ -130,7 +134,6 @@ lemma derivedBraiding_hom_μ_Qh {Z : Scheme.{u}}
     (β_ (Qh.obj K) (Qh.obj M)).hom ≫ μ Qh M K = μ Qh K M ≫ Qh.map (β_ K M).hom :=
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) K M
 
-set_option profiler true in
 /-- The tensor comparison of `Lf^*` commutes with the derived braidings at images of K-flat
 complexes. -/
 lemma leftDerivedUpperStarTensor_braiding_Qh
@@ -144,6 +147,20 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
       ((leftDerivedUpperStarTensor Λ f).app _).app _ ≫
         (β_ (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj A)))
           (L((f)^*⟦Λ⟧).obj (Qh.obj ((HomotopyCategory.quotient _ _).obj B)))).hom := by
+  have := CachedModInstances.cached_hasTensor₄ObjExt Λ
+  have := CachedModInstances.cached_hasGoodTensor₁₂Tensor Λ
+  have := CachedModInstances.cached_hasGoodTensorTensor₂₃ Λ
+  have := CachedModInstances.cached_hasColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasExactColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasCountableCoproducts Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorRight Λ
+  have := CachedModInstances.cached_hasFunctorialFlatResolution Λ
+  have := CachedModInstances.cached_hasTensor Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorRight Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorLeft Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorRight Λ
   have hA' := (HomotopyCategory.kFlat_quotient_obj_iff A).2 hA
   have hB' := (HomotopyCategory.kFlat_quotient_obj_iff B).2 hB
   have : IsIso ((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj A)) :=
@@ -163,7 +180,6 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
     (derivedBraiding_hom_μ_Qh Λ _ _) (derivedBraiding_hom_μ_Qh Λ _ _)
     (upperStarTensorHomotopyHom_braiding Λ f A B)
 
-set_option profiler true in
 /-- **The derived pullback of module objects is braided**: the tensor comparison
 `m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` commutes with the derived braidings,
 `Lf^* β_{K, M} ≫ m_{M, K} = m_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
@@ -173,6 +189,20 @@ theorem leftDerivedUpperStarTensor_braiding
     L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K =
       ((leftDerivedUpperStarTensor Λ f).app K).app M ≫
         (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom := by
+  have := CachedModInstances.cached_hasTensor₄ObjExt Λ
+  have := CachedModInstances.cached_hasGoodTensor₁₂Tensor Λ
+  have := CachedModInstances.cached_hasGoodTensorTensor₂₃ Λ
+  have := CachedModInstances.cached_hasColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasExactColimitsOfShape_int Λ
+  have := CachedModInstances.cached_hasCountableCoproducts Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimitsOfShape_int_tensorRight Λ
+  have := CachedModInstances.cached_hasFunctorialFlatResolution Λ
+  have := CachedModInstances.cached_hasTensor Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorLeft Λ
+  have := CachedModInstances.cached_preservesColimit_empty_tensorRight Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorLeft Λ
+  have := CachedModInstances.cached_preservesZeroMorphisms_tensorRight Λ
   obtain ⟨P, hP, ⟨eP⟩⟩ := exists_kFlat_iso_Qh_obj Λ K
   obtain ⟨Q, hQ, ⟨eQ⟩⟩ := exists_kFlat_iso_Qh_obj Λ M
   have key := leftDerivedUpperStarTensor_braiding_Qh Λ f P.as Q.as
