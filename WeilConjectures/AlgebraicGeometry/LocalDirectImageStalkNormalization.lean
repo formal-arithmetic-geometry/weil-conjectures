@@ -81,7 +81,6 @@ private theorem restriction_iso {Y : Scheme.{u}} (U : Y.Opens) (hU : U = ⊤)
   exact fmap_iso _ _ p
 
 
-set_option profiler true in
 /-- Normalization of the inverse of the specified canonical class map.
 Source: Stacks Project, Tags 01E4 and 01FB; Tag 02OD for the local spectrum.
 (blueprint: lem-weil-pbc-local-direct-image-stalk-cohomology-normalization)
@@ -156,8 +155,9 @@ theorem localDirectImage_stalk_cohomology_normalization
     ((Scheme.Modules.restrictAdjunction
       ((pullback.snd (Y.fromSpecStalk y) f) ⁻¹ᵁ (f ⁻¹ᵁ V)).ι).unit.app
         ((Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F)) p
+  have : IsIso r := hi
   have hr : Function.Surjective r := (ConcreteCategory.bijective_of_isIso r).2
-  apply hr.forall.mpr
+  refine hr.forall.mpr ?_
   intro eta
   have hclass := localDirectImage_stalk_class_restriction f y F p I K V hy D eta
   have heclass := (he eta).trans hclass
