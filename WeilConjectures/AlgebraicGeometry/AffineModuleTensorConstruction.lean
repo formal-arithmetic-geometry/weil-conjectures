@@ -126,8 +126,9 @@ private theorem tensorConstruction_of_pushout [IsAffineHom f]
             (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = (adj₀).counit.app F) ∧
             (∀ G : SheafOfModules.{u} (𝓡 A),
               (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
-  obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
+  have hbase :=
     affine_module_tensor_baseChange (U := U) (X := X) f B b t hp
+  rcases hbase with ⟨P, pobj, κ, hmapP, hunitP⟩
   obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
     affine_module_tensor_extensionUnit (U := U) (X := X) f B b t ε hb P pobj κ
   refine ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, ?_⟩
