@@ -40,7 +40,6 @@ private theorem equiv_transport_commutative_square
 
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
-
 /-- Choose the natural source module/Ext comparison together with the target affine
 Leray equivalence, compatibly with the cohomological pullback. This does not construct
 or assume a source tensor comparison, nor assert invertibility of base change.
@@ -115,22 +114,20 @@ theorem exists_flatBaseChange_target_leray_comparison
   letI : Algebra Γ(S, V) Γ(S', W) := (g.appLE V W eVW).hom.toAlgebra
   intro h N Q
   let c := (restrictFunctorIsoPullback (f ⁻¹ᵁ V).ι).app F
-  have comparison := exists_moduleCohomology_ext_pullback_comparison (B := Γ(S', W)) h p
-  let E := comparison.choose
-  let E' := comparison.choose_spec.choose
-  have hE := comparison.choose_spec.choose_spec.1
-  have hE' := comparison.choose_spec.choose_spec.2.1
-  have hmap := comparison.choose_spec.choose_spec.2.2
+  refine (exists_moduleCohomology_ext_pullback_comparison (B := Γ(S', W)) h p).elim
+    fun E comparison ↦ ?_
+  refine comparison.elim fun E' compatibility ↦ ?_
+  have hE := compatibility.1
+  have hE' := compatibility.2.1
+  have hmap := compatibility.2.2
   let e0 : ((RingedSpace.moduleCohomology
       (f ⁻¹ᵁ V).toScheme.toRingedSpace p).obj
         ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)) ≃+ HOver h N p :=
     (E ((restrictFunctor (f ⁻¹ᵁ V).ι).obj F)).trans
     (H.mapLinearEquiv c p).toAddEquiv
   refine ⟨E, hE, e0, rfl, ?_⟩
-  have edge := exists_flatBaseChange_module_leray_comparison
-    f g F I J p V W hV hW eVW D rfl E' hE'
-  let b := edge.choose
-  have hb := edge.choose_spec
+  refine (exists_flatBaseChange_module_leray_comparison
+    f g F I J p V W hV hW eVW D rfl E' hE').elim fun b hb ↦ ?_
   let L := (restrictFunctor (f ⁻¹ᵁ V).ι).obj F
   let C := RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p
   let M := baseChangedModule (S := Γ(S', W)) h N

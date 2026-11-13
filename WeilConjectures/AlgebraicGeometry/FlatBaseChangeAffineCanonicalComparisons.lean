@@ -31,7 +31,6 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
 
-
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical source and target affine comparisons, compatible with the cohomological
@@ -118,12 +117,11 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
   let : ∀ G : S.Modules, Module Γ(S, V)
       Γ((Scheme.Modules.tensorPullback g).obj G, W) :=
     fun G ↦ Module.compHom _ (g.appLE V W eVW).hom
-  have sections :=
-    Scheme.Modules.exists_tensorPullback_affine_sections g ⟨V, hV⟩ ⟨W, hW⟩ eVW
-  let c := sections.choose
-  have hc := sections.choose_spec.1
-  have hs := sections.choose_spec.2.1
-  have ht := sections.choose_spec.2.2.1
+  refine (Scheme.Modules.exists_tensorPullback_affine_sections
+    g ⟨V, hV⟩ ⟨W, hW⟩ eVW).elim fun c sections ↦ ?_
+  have hc := sections.1
+  have hs := sections.2.1
+  have ht := sections.2.2.1
   have target :=
     Scheme.Modules.exists_flatBaseChange_target_leray_comparison
       f g F I J p V W hV hW eVW D
@@ -161,6 +159,5 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
         (Scheme.Modules.Hom.app
           ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app P)
           V z)) he')
-  · dsimp only at hb0
-    exact hb0
+  · exact hb0
 end AlgebraicGeometry
