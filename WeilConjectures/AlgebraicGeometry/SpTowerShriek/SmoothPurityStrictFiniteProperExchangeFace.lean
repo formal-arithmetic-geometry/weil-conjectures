@@ -322,36 +322,6 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-private theorem finitePullbackSquareCoherenceCube (b : Base l E)
-    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y}
-    (sq : IsPullback h f' f g) (n : ℕ) :
-    ∀ (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y)
-      (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))))),
-    (proEtaleConstantRingDerivedPullback (R l E n) f').map
-        ((comparisonFinitePull l E b g n).inv.app M) ≫
-      (comparisonFinitePull l E b f' n).inv.app
-        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
-          g).leftDerivedFunctor.obj M) ≫
-      (comparisonFiniteRealization l E b X' n).map
-        ((leftDerivedUpperStarSquareIso
-          (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq).hom.app M) =
-    (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
-        eqToIso (congrArg (fun a ↦
-          proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm) ≪≫
-        (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom.app
-          ((comparisonFiniteRealization l E b Y n).obj M) ≫
-      (proEtaleConstantRingDerivedPullback (R l E n) h).map
-        ((comparisonFinitePull l E b f n).inv.app M) ≫
-      (comparisonFinitePull l E b h n).inv.app
-        ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
-          f).leftDerivedFunctor.obj M) := by
-  intro M
-  have HC := strictFinitePullbackSquareCoherence l E b sq n M
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-    exactByConversion h
-
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.
@@ -406,16 +376,38 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
       sq.w.symm) ≪≫
     (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
-  have H := coordinates_cube_from_coordinates
-    (coordinates.val f n) (coordinates.val f' n)
+  have H := coordinates_cube_maps
+    (derivedUpperStarLowerStarAdjunction B f)
+    (derivedUpperStarLowerStarAdjunction B f')
+    (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (proEtaleConstantRingAdjunction (R l E n) f))
+    (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (proEtaleConstantRingAdjunction (R l E n) f'))
+    (comparisonFiniteRealization l E b Y n)
+    (comparisonFiniteRealization l E b X n)
+    (comparisonFiniteRealization l E b Y' n)
+    (comparisonFiniteRealization l E b X' n)
     (comparisonFinitePull l E b f n) (comparisonFinitePull l E b g n)
     (comparisonFinitePull l E b h n) (comparisonFinitePull l E b f' n)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
+    (mateEquiv
+      (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+        (proEtaleConstantRingAdjunction (R l E n) f))
+      (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+        (proEtaleConstantRingAdjunction (R l E n) f'))
+      (TwoSquare.mk _ _ _ _ θ'))
     (by
       have HN := native_base_change_mate (R l E n) sq.toCommSq
       simpa only [StrictFiniteCoordinates] using HN)
-    (finitePullbackSquareCoherenceCube l E b sq n)
-    N (coordinates.property f n) (coordinates.property f' n)
+    rfl
+    (by
+      intro M
+      have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        exactByConversion h)
+    N (coordinates.val f n) (coordinates.val f' n)
+    (coordinates.property f n) (coordinates.property f' n)
   sorry
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
