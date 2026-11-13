@@ -29,7 +29,6 @@ private theorem hom_restrict_apply {S : Scheme.{u}} {A D : S.Modules}
     φ.app B (A.presheaf.map i.op s) = D.presheaf.map i.op (φ.app C s) := by
   exact congrArg (fun k ↦ k s) (φ.mapPresheaf.naturality i.op)
 
-set_option profiler true in
 /-- The concrete mate sends the three-unit generator to the pullback-unit section.
 Source: Stacks Project, Tag 01I6, Lemma 26.7.1; Tags 0096 and 0097.
 (blueprint: lem-pc-coefficient-comparison-morphism-generator).
