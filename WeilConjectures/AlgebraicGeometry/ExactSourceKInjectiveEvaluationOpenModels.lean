@@ -47,9 +47,10 @@ private theorem comparison_of_transported_evaluation
     (T : C₁ ⥤ C₂) (Q : C₂ ⥤ D) (E : C₁ ⥤ D) (v : E ≅ T ⋙ Q)
     {A B : C₁} {A' B' : C₂} {S H : D} (f : A ⟶ B) (g : S ⟶ H)
     (t : T.obj A ≅ A') (b : T.obj B ≅ B')
-    (a' : S ≅ Q.obj A') (b' : H ≅ Q.obj B')
-    (h : g ≫ b'.hom = a'.hom ≫ Q.map (t.inv ≫ T.map f ≫ b.hom)) :
+    (h : ∃ a' : S ≅ Q.obj A', ∃ b' : H ≅ Q.obj B',
+      g ≫ b'.hom = a'.hom ≫ Q.map (t.inv ≫ T.map f ≫ b.hom)) :
     ∃ a : S ≅ E.obj A, ∃ b : H ≅ E.obj B, g ≫ b.hom = a.hom ≫ E.map f := by
+  obtain ⟨a', b', h⟩ := h
   refine ⟨a' ≪≫ (Q.mapIso t).symm ≪≫ (v.app A).symm,
     b' ≪≫ (Q.mapIso b).symm ≪≫ (v.app B).symm, ?_⟩
   dsimp only [Iso.trans_hom, Iso.symm_hom]
@@ -137,10 +138,9 @@ theorem exists_exactSource_kInjective_evaluation_open_models (X : Scheme.{u}) (U
   have eK : DerivedCategory.Q.obj (T.obj P) ≅ K := (v.app P).symm ≪≫ _eK
   have eN : DerivedCategory.Q.obj (T.obj F) ≅ N := (v.app F).symm ≪≫ _eN
   trace "PH413: comparisons ready"
-  obtain ⟨a', b', h⟩ := exists_kInjective_scheme_evaluation_models U.toScheme K N
+  apply comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
+    v f g t b
+  exact exists_kInjective_scheme_evaluation_models U.toScheme K N
     (T.obj P) (T.obj F) hhom hdual eK eN (t.inv ≫ T.map f ≫ b.hom) hf
-  trace "PH413: scheme models ready"
-  exact comparison_of_transported_evaluation T DerivedCategory.Q (DerivedCategory.Q ⋙ E)
-    v f _ t b a' b' h
 
 end AlgebraicGeometry
