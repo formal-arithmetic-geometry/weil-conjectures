@@ -136,9 +136,11 @@ theorem sfbOrdinarySliceNormalization
   have hGl : PreservesFiniteLimits G := SheafOfModules.pushforward_finiteLimits φ
   have hGc : PreservesFiniteColimits G := SheafOfModules.pushforward_finiteColimits φ
   refine ⟨G, hGa, hGl, hGc, ⟨?_⟩⟩
+  let h : ConstantCompletion.change c ≅ ConstantCompletion.res (asIso c).inv :=
+    changeIsoRestriction c
   exact Functor.isoWhiskerLeft
     ((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
       ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W)
-    (changeIsoRestriction c)
+    h
 
 end AlgebraicGeometry.Scheme
