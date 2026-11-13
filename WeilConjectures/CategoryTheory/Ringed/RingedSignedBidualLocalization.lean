@@ -386,8 +386,6 @@ private lemma homZero {A B X : Mod.{c, v, u} J R} (hB : IsZero B)
   exact (zeroSection.{c, v, u} J R B hB _ _).trans
     (zeroSection.{c, v, u} J R B hB _ _).symm
 
-set_option profiler true in
--- Elaborate five localized product-Hom projections with independent site universes.
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
@@ -404,6 +402,7 @@ private lemma beta_post_pre_apply (E O I P V : CX.{c, v, u} J R)
         ((((homComplexFunctor (R := R)).obj (op P)).map eta).f b |>.val.app U
           (((((homComplexFunctor (R := R)).map p.op).app O).f b).val.app U
             ((t.f b).val.app U y)))).app (op (Over.mk (𝟙 U.unop)))).hom x := by
+  -- Pin the complexes and degrees before matching the nested Hom evaluations.
   erw [homPost_apply.{c, v, u} J R V O I eta a b (a + b) (add_comm b a) U,
     homPost_apply.{c, v, u} J R P O I eta b a (a + b) rfl U,
     homPre_apply.{c, v, u} J R (homComplex (R := R) E O) V O t
@@ -487,6 +486,7 @@ private lemma bidual_eq_of_uncurry
   have hu := uncurry_swap S s A B P T O p t c
   simpa only [Category.assoc] using hu.trans h.symm
 
+-- Transport the representative equality across the two comparison isomorphisms.
 private lemma uncurry_model_swap {A B X Y Z : D}
     (i : X ≅ A) (j : Y ≅ B) (swap : X ⟶ Y) (s : A ⟶ B)
     (f : A ⟶ Z) (g : B ⟶ Z) (v : X ⟶ Z) (u : Y ⟶ Z)
@@ -545,6 +545,7 @@ private lemma comparison_pre (E P F : CX.{c, v, u} J R) (p : P ⟶ E) :
     ← NatTrans.naturality, Functor.map_comp, Category.assoc, resolutionIso_pre]
   simp only [Category.assoc]
 
+-- Naturality after an arbitrary map into the ordinary Hom complex.
 private lemma comparison_pre_comp (E P F V : CX.{c, v, u} J R) (p : P ⟶ E)
     (t : V ⟶ homComplex (R := R) E F) :
     DerivedCategory.Q.map (t ≫ ((homComplexFunctor (R := R)).map p.op).app F ≫
@@ -588,7 +589,7 @@ private lemma total_ext (P V I : CX.{c, v, u} J R)
   apply ModuleCat.MonoidalCategory.tensor_ext
   exact h a b U
 
-set_option profiler true in
+-- The signed chain-model identity gives symmetry of the derived uncurrying maps.
 private lemma comparison_uncurry_swap
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -637,8 +638,6 @@ private lemma comparison_uncurry_swap
     (s.braiding (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)).hom
     _ _ _ _ hnh hng (by rw [hvg, Functor.map_comp, Category.assoc]) hswapQ
 
-set_option profiler true in
--- Elaborate the two independent-universe resolution and tensor model squares.
 private lemma comparison_beta
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
