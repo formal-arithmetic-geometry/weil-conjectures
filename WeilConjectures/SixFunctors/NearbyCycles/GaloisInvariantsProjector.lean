@@ -564,9 +564,8 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
         ⟨σ.restrictNormal j, pullbackAction_comp_galoisLevelProjection h j σ⟩)
   have hret := exists_galoisLayer_retraction_projector (Profinite.continuousMapRingObj T₀)
     N h Ω C R hR hinv
-  obtain ⟨r, hr₁, hr₂, hr₃⟩ := hret
-  refine ⟨r, hr₁, hr₂, ?_⟩
-  intro Z f' q H W φ κ S hS hφ
+  refine hret.imp fun r ↦ And.imp_right (And.imp_right ?_)
+  intro hr₃ Z f' q H W φ κ S hS hφ
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
     K a hKe f' q
   rw [hr₃]
