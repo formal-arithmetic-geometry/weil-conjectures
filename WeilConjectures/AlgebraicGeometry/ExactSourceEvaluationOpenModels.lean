@@ -119,12 +119,14 @@ private theorem comparison_of_mapped_resolution_square
     {S H : D} {T T' V V' : C}
     (g : S ⟶ H) (f : T ⟶ V) (f' : T' ⟶ V') (t : T ⟶ T') (h : V ⟶ V')
     [IsIso (L.map t)] [IsIso (L.map h)]
-    (a' : S ≅ L.obj T') (b' : H ≅ L.obj V')
-    (hg : g ≫ b'.hom = a'.hom ≫ L.map f') (hs : t ≫ f' = f ≫ h) :
+    (hs : t ≫ f' = f ≫ h)
+    (hg : ∃ a' : S ≅ L.obj T', ∃ b' : H ≅ L.obj V',
+      g ≫ b'.hom = a'.hom ≫ L.map f') :
     ∃ a : S ≅ L.obj T, ∃ b : H ≅ L.obj V, g ≫ b.hom = a.hom ≫ L.map f := by
+  obtain ⟨a', b', hg⟩ := hg
   apply comparison_of_resolution_square g (L.map f) (L.map f')
     (asIso (L.map t)) (asIso (L.map h)) a' b' hg
-  simpa only [Functor.map_comp] using L.congr_map hs
+  simpa only [asIso_hom, Functor.map_comp] using L.congr_map hs
 
 set_option profiler true in
 /-- The ordinary evaluation calculation, entirely on the open scheme. The functor E
@@ -205,8 +207,8 @@ theorem exists_exactSource_evaluation_open_models (X : Scheme.{u}) (U : X.Opens)
   have : IsIso (E.map (Q.map t)) := inferInstance
   have : IsIso (E.map (Q.map h)) := inferInstance
   let eI : E.obj (Q.obj I) ≅ N := (E.mapIso (asIso (Q.map η))).symm ≪≫ _eN
-  obtain ⟨aI, bI, habI⟩ := exists_exactSource_kInjective_evaluation_open_models
+  apply comparison_of_mapped_resolution_square (Q ⋙ E) g f fI t h hs
+  exact exists_exactSource_kInjective_evaluation_open_models
     X U K N P I hhom hdual _eK eI fI hfI
-  exact comparison_of_mapped_resolution_square (Q ⋙ E) g f fI t h aI bI habI hs
 
 end AlgebraicGeometry
