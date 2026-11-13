@@ -80,6 +80,7 @@ private theorem comparison_of_resolution_square
   simp only [Iso.inv_hom_id_assoc]
 
 set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The localized comparison elaborates the sheaf tensor and Hom structures together.
 /-- The ordinary evaluation calculation, entirely on the open scheme. The functor E
 only changes from the over-site to its equivalent scheme site; it does not restrict
