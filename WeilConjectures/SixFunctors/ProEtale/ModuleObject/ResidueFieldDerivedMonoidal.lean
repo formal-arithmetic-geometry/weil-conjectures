@@ -79,8 +79,6 @@ lemma residueFieldDerivedUpperStarIso_symm_eq :
     ProEtale.leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategoryNatIso_symm]
 
 set_option trace.profiler true in
--- rewriting the tensor comparison of the derived pullback unfolds the derived categories of module
--- objects
 /-- **`D(G)` is monoidal, compatibly with the derived pullbacks**: there are isomorphisms
 `D(G_X)(A ⊗ᴸ B) ≅ D(G_X) A ⊗ᴸ D(G_X) B` such that the isomorphism
 `Lf^* ⋙ D(G_X) ≅ D(G_Y) ⋙ Lf^*` is compatible with them and with the tensor comparisons of the
@@ -107,12 +105,10 @@ theorem exists_comparisonCompatible_residueFieldDerivedUpperStarIso :
       (asIso ((residueFieldModuleSheaf Y ℓ E).leftDerivedTensorComparisonOfNatTrans
         (residueFieldModuleSheafTensorIso Y ℓ E).hom))
       (residueFieldModuleSheaf Y ℓ E).leftDerivedFunctorIsoMapDerivedCategory, ?_⟩
-  rw [residueFieldDerivedUpperStarIso_symm_eq,
+  simp only [residueFieldDerivedUpperStarIso_symm_eq,
     CondensedRing.leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison
       (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f,
-    ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
-    ← Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans,
-    ← Functor.leftDerivedTensorComparisonOfNatTrans_δNatTrans]
+    ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
   exact (Functor.comparisonCompatible_leftDerivedFunctorCompNatIso_of_tensorComparison _ _ _ _
     _ _ _ _ _ (tensorCompatible_residueFieldModuleSheafUpperStarIso ℓ E f).inv).ofIso _ _
 
