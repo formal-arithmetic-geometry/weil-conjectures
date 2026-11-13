@@ -46,6 +46,40 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl CondensedRing
 
+-- Prove the categorical vanishing arguments with an abstract category, so their
+-- elaboration does not repeatedly unfold the concrete derived category of sheaves.
+private lemma hom_eq_zero_of_target_iso {C : Type*} [Category C] [HasZeroMorphisms C]
+    {A Y Y' : C} (e : Y ≅ Y') (h : ∀ f : A ⟶ Y, f = 0) (f : A ⟶ Y') : f = 0 :=
+  (cancel_mono e.inv).1 ((h (f ≫ e.inv)).trans zero_comp.symm)
+
+private lemma hom_eq_zero_of_source_iso {C : Type*} [Category C] [HasZeroMorphisms C]
+    {A A' Y : C} (e : A ≅ A') (h : ∀ f : A ⟶ Y, f = 0) (f : A' ⟶ Y) : f = 0 :=
+  (cancel_epi e.hom).1 ((h (e.hom ≫ f)).trans comp_zero.symm)
+
+private lemma hom_eq_zero_of_distinguished {C : Type*} [Category C] [HasZeroObject C]
+    [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] (T : Triangle C) (hT : T ∈ distTriang C) {A : C}
+    (h₁ : ∀ f : A ⟶ T.obj₁, f = 0) (h₃ : ∀ f : A ⟶ T.obj₃, f = 0)
+    (f : A ⟶ T.obj₂) : f = 0 := by
+  obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ T hT f (h₃ _)
+  exact hg.trans ((congrArg (fun k ↦ k ≫ T.mor₁) (h₁ g)).trans zero_comp)
+
+private lemma hom_eq_zero_to_of_distinguished {C : Type*} [Category C] [HasZeroObject C]
+    [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] (T : Triangle C) (hT : T ∈ distTriang C) {B : C}
+    (h₁ : ∀ f : T.obj₁ ⟶ B, f = 0) (h₃ : ∀ f : T.obj₃ ⟶ B, f = 0)
+    (f : T.obj₂ ⟶ B) : f = 0 := by
+  obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ T hT f (h₁ _)
+  exact hg.trans ((congrArg (fun k ↦ T.mor₂ ≫ k) (h₃ g)).trans comp_zero)
+
+private lemma prop_of_exists_iso_image {C : Type*} [Category C] {D : Type*}
+    (F : D → C) (Q : D → Prop) (P : C → Prop)
+    (hiso : ∀ {Y Y'}, (Y ≅ Y') → P Y → P Y')
+    (hF : ∀ M, Q M → P (F M)) {Y : C}
+    (h : ∃ M, Q M ∧ Nonempty (Y ≅ F M)) : P Y := by
+  obtain ⟨M, hM, ⟨e⟩⟩ := h
+  exact hiso e.symm (hF M hM)
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
 
 /-- The generators `Rc_* j_! Rc'_* L` of the dévissage over a perfect field
@@ -138,21 +172,18 @@ theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k
       (fun Y hY m _ g ↦ ((shiftFunctor _ (-m)).map_isZero hY).eq_of_tgt _ _)
       (fun {Y Y'} e hY m hm g ↦ ?_) (fun Tr hTr h₁ h₃ m hm g ↦ ?_)
       (fun D c _ V S c' _ _ _ _ L hL m hm g ↦ ?_) B hB
-    · exact (cancel_mono ((shiftFunctor _ (-m)).map e.inv)).1
-        ((hY m hm _).trans zero_comp.symm)
-    · obtain ⟨g', hg'⟩ := Triangle.coyoneda_exact₂ _
-        (Triangle.shift_distinguished Tr hTr (-m)) g (h₃ m hm _)
-      exact hg'.trans ((congrArg (fun k ↦ k ≫ _) (h₁ m hm g')).trans zero_comp)
+    · exact hom_eq_zero_of_target_iso ((shiftFunctor _ (-m)).mapIso e) (hY m hm) g
+    · exact hom_eq_zero_of_distinguished _ (Triangle.shift_distinguished Tr hTr (-m))
+        (h₁ m hm) (h₃ m hm) g
     · obtain ⟨H₀, hH₀, ⟨eY⟩⟩ :=
         exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek ℓ E c V
           c' L hL
       let e := (shiftFunctor _ (-m)).mapIso eY ≪≫
         ((DerivedCategory.singleFunctors _).shiftIso (-m) m 0 (by omega)).app _
-      exact (cancel_mono e.hom).1
-        ((eq_zero_of_extendScalars_padicIntegersToPadicSubfield
-          ℓ E hc N hN H₀ hH₀ m hm (g ≫ e.hom)).trans zero_comp.symm)
+      exact hom_eq_zero_of_target_iso e.symm
+        (eq_zero_of_extendScalars_padicIntegersToPadicSubfield ℓ E hc N hN H₀ hH₀ m hm) g
   let e := ((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).app B
-  exact (cancel_mono e.inv).1 ((hP n hn (f ≫ e.inv)).trans zero_comp.symm)
+  exact hom_eq_zero_of_target_iso e (hP n hn) f
 
 set_option profiler true in
 /-- Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`: on a noetherian scheme
@@ -182,21 +213,20 @@ theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRin
     (fun Tr hTr h₁ h₃ ↦ ?_) (fun D c _ V S c' _ _ _ _ L hL ↦ ?_) M hM
   · obtain ⟨N, hN⟩ := hK
     refine ⟨N, fun B hB n hn f ↦ ?_⟩
-    exact (cancel_epi e.hom).1 ((hN B hB n hn _).trans comp_zero.symm)
+    exact hom_eq_zero_of_source_iso e (hN B hB n hn) f
   · obtain ⟨N₁, h₁⟩ := h₁
     obtain ⟨N₃, h₃⟩ := h₃
     refine ⟨min N₁ N₃, fun B hB n hn f ↦ ?_⟩
-    obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ _ hTr f
-      (h₁ B hB n (hn.trans (min_le_left _ _)) _)
-    exact hg.trans ((congrArg (fun k ↦ Tr.mor₂ ≫ k)
-      (h₃ B hB n (hn.trans (min_le_right _ _)) g)).trans comp_zero)
+    exact hom_eq_zero_to_of_distinguished Tr hTr
+      (h₁ B hB n (hn.trans (min_le_left _ _)))
+      (h₃ B hB n (hn.trans (min_le_right _ _))) f
   · obtain ⟨G₀, hG₀, ⟨eY⟩⟩ :=
       exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek ℓ E c V c'
         L hL
     obtain ⟨N, hN⟩ := hb G₀ hG₀
     refine ⟨N, fun B hB n hn f ↦ ?_⟩
-    exact (cancel_epi eY.inv).1
-      ((eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
-        (hc G₀ hG₀) N hN B hB n hn (eY.inv ≫ f)).trans comp_zero.symm)
+    exact hom_eq_zero_of_source_iso eY.symm
+      (eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField ℓ E aX
+        (hc G₀ hG₀) N hN B hB n hn) f
 
 end AlgebraicGeometry.ProEtale
