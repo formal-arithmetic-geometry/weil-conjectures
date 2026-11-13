@@ -475,9 +475,9 @@ private theorem adjunctionOfLinearMates
   let E' : ∀ M H, ((I ⋙ T).obj M ⟶ H) ≃ (M ⟶ P.obj H) :=
     fun M H ↦ (aT.homEquiv (I.obj M) H).trans (E M H)
   have hEL {M N} (a : M ⟶ N) H (b : (I ⋙ T).obj N ⟶ H) :
-      E' M H ((I ⋙ T).map a ≫ b) = a ≫ E' N H b := by
-    dsimp only [E', Equiv.trans_apply, Functor.comp_map]
-    rw [aT.homEquiv_naturality_left (I.map a) b, hBL]
+      E' M H ((I ⋙ T).map a ≫ b) = a ≫ E' N H b :=
+    (congrArg (E M H) (aT.homEquiv_naturality_left (I.map a) b)).trans
+      (hBL a H (aT.homEquiv (I.obj N) H b))
   exact ⟨Adjunction.mkOfHomEquiv {
     homEquiv := E'
     homEquiv_naturality_left_symm := by
@@ -486,11 +486,9 @@ private theorem adjunctionOfLinearMates
       rw [Equiv.apply_symm_apply, hEL, Equiv.apply_symm_apply]
     homEquiv_naturality_right := by
       intro M H H' a b
-      dsimp only [E', Equiv.trans_apply]
-      rw [aT.homEquiv_naturality_right a b]
-      exact hBR M (aT.homEquiv (I.obj M) H a) b }⟩
+      exact (congrArg (E M H') (aT.homEquiv_naturality_right a b)).trans
+        (hBR M (aT.homEquiv (I.obj M) H a) b) }⟩
 
-set_option profiler true in
 -- Elaborate the sectionwise adjunction and its transported coefficient identities.
 -- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
 private theorem supplied_adjunction
