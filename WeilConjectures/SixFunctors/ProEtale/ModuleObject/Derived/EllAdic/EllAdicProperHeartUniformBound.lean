@@ -212,7 +212,6 @@ private theorem qbar_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
     (((adicConstructibilityPredicateComparison ℓ X Λ .algebraicClosure).1 N).mp hN))
     inferInstance inferInstance inferInstance inferInstance hsum
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 private theorem higherDirectImage_filtered
@@ -237,6 +236,9 @@ private theorem higherDirectImage_filtered
     change PreservesColimit M (HomologicalComplex.single A (.up ℤ) 0)
     infer_instance
   let D := M ⋙ S
+  -- Use the colimits of complexes directly, avoiding degreewise inference through truncation.
+  have : HasColimit (D ⋙ (ComplexShape.embeddingUpIntGE 0).truncGEFunctor A) :=
+    HasColimitsOfShape.has_colimit _
   let π := Functor.whiskerLeft D ((ComplexShape.embeddingUpIntGE 0).πTruncGENatTrans A)
   have hπ (i : I) : IsIso (π.app i) :=
     inferInstanceAs (IsIso ((S.obj (M.obj i)).πTruncGE 0))
