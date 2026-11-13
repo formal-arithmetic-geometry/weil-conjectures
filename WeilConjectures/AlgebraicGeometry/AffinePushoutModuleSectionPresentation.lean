@@ -108,7 +108,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option profiler true in
 -- The affine-section comparison requires transport between restricted section-module instances.
 /-- The affine pullback comparison, transported through κ, is linear for the first
 section-ring action and sends `1 tensor n` to the canonical pullback unit. -/
@@ -180,7 +179,6 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
   exact ⟨p, affine_pushout_first_action (b.hom.app (op (f ⁻¹ᵁ V))).hom
     (fun d n ↦ p (d ⊗ₜ[Γ(X, V)] n)) _ hp⟩
 
-set_option profiler true in
 -- The canonical unit calculation unfolds inverse-image and change-of-rings section instances.
 /-- Affine first-tensor module section presentation with both actions and the canonical unit.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
