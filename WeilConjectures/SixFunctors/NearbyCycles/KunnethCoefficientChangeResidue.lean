@@ -96,8 +96,7 @@ theorem nonempty_arrowIso_map_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ 
   with_reducible
     have k := nonempty_arrowIso_map_map_kunnethMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-      φ₁ φ₂ h A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
-      (by exact_mod_proofs hAB)
+      φ₁ φ₂ h A₀ B₀ hA hB hAB
     cast_proofs k
 -- elaborating the Künneth maps of the derived categories of module objects is slow
 /-- **The Künneth map and the reduction `𝒪_E ⟶ 𝔽_E`**: for bounded below `𝒪_E`-complexes `A₀`,
@@ -148,8 +147,7 @@ theorem nonempty_arrowIso_map_kunnethMap_residueField (φ₁ : P.Hom M f₁ f₁
   with_reducible
     have k := nonempty_arrowIso_map_kunnethMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
-      φ₁ φ₂ A₀ B₀ (by exact_mod_proofs hA) (by exact_mod_proofs hB)
-      (by exact_mod_proofs hAB)
+      φ₁ φ₂ A₀ B₀ hA hB hAB
     cast_proofs k
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
