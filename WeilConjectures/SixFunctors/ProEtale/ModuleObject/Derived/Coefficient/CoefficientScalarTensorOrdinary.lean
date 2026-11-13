@@ -213,7 +213,6 @@ private theorem coefficient_pure_smul_unit (Z : Scheme.{u})
     Mod.extendRestrictAdjunction_unit_app_hom, map_smul] at hh
   exact hh
 
-set_option trace.profiler true in
 /-- The ordinary scalar tensor square under the section equivalence.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
 Precompose with the scalar coequalizer and the internal tensor coequalizer.
