@@ -295,6 +295,10 @@ theorem condensed_closed_costalk_derived_continuity
   have : HasExactColimitsOfShape I B := inferInstance
   have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
+  -- Use the colimits of the ambient categories directly, including for composite diagrams.
+  have (E : I ⥤ A) : HasColimit E := HasColimitsOfShape.has_colimit E
+  have (E : I ⥤ B) : HasColimit E := HasColimitsOfShape.has_colimit E
+  have (E : I ⥤ CochainComplex A ℤ) : HasColimit E := HasColimitsOfShape.has_colimit E
   let W : T.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
   have : TopologicalSpace.NoetherianSpace W :=
     W.ι.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
@@ -319,6 +323,7 @@ theorem condensed_closed_costalk_derived_continuity
   let C := Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1}) (condensedRingObj Λ W)
   have : HasColimitsOfShape I C := inferInstance
   have : HasColimitsOfShape I (CochainComplex C ℤ) := inferInstance
+  have (E : I ⥤ CochainComplex C ℤ) : HasColimit E := HasColimitsOfShape.has_colimit E
   let kstar : A ⥤ C := CondensedRing.upperStar Λ W.ι
   let kpush : C ⥤ A := CondensedRing.lowerStar Λ W.ι
   let ipush : B ⥤ A := CondensedRing.lowerStar Λ i
