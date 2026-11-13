@@ -31,7 +31,7 @@ of `CategoryTheory.GrpObj.Hom.group`; it is written additively as
 
 "Prime to the characteristic" is spelled `¬ p ∣ n`, which for `p = 0` says exactly `n ≠ 0`.
 
-The proofs follow the blueprint: `A[n]` is finite of order `n ^ (2 * g)`
+Outline: `A[n]` is finite of order `n ^ (2 * g)`
 (`AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`), hence étale
 (`AlgebraicGeometry.etale_of_not_dvd_finrankΓ`), so its points over an algebraically closed
 field are counted by `AlgebraicGeometry.card_points_eq_finrankΓ`; together with divisibility of
@@ -58,15 +58,8 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- The `n`-torsion of an abelian variety is étale.
-
-Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
-`p`. Then `A[n]` is an étale group scheme over `K`. This is also the first part of blueprint
-`proposition-multiplication-n--2`.
-
-`A[n]` is a finite group scheme of order `n ^ (2 * g)`
-(`AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`), which is prime to `p`, so it is étale by
-`AlgebraicGeometry.etale_of_not_dvd_finrankΓ`. -/
+/-- Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
+`p`. Then `A[n]` is an étale group scheme over `K`. -/
 theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) (hnp : ¬ p ∣ n) :
     Etale (torsionSubgroupScheme A n).hom := by
@@ -78,17 +71,8 @@ theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K
   · exact hnp (hp.dvd_of_dvd_pow h)
   · exact pow_ne_zero _ hn.ne' (zero_dvd_iff.1 h)
 
-/-- Multiplication by `d` prime to the characteristic
-is étale.
-
-Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
-`p`. Then `[n] : A ⟶ A` is étale; equivalently, its kernel `A[n]` is étale
-(`AlgebraicGeometry.etale_torsionSubgroupScheme`).
-
-By translation (`CategoryTheory.GrpObj.isPullback_ker_tensor`), the base change of `[n]` along
-itself is the projection `A[n] ⊗ A ⟶ A`, a base change of the étale `A[n] ⟶ Spec K`. As `[n]`
-is finite, flat and surjective (`AlgebraicGeometry.isIsogeny_npow_id`), étaleness descends
-along it. -/
+/-- Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
+`p`. Then `[n] : A ⟶ A` is étale. -/
 theorem etale_npow_id (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (n : ℕ) (hn : 0 < n) (hnp : ¬ p ∣ n) :
     Etale (𝟙 A ^ n).left := by
@@ -107,15 +91,9 @@ theorem etale_npow_id (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
   rw [Category.id_comp]
   exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
 
-/-- The `n`-torsion of an abelian variety is étale.
-
-For `n` prime to the characteristic of an algebraically closed base field `K`, the canonical
+/-- For `n` prime to the characteristic of an algebraically closed base field `K`, the canonical
 base-change map `A[n](K) ⟶ A[n](K')` is a bijection for every extension `K ⊆ K'` of
-algebraically closed fields. This is also the second part of blueprint
-`proposition-multiplication-n--2`.
-
-`A[n]` is finite étale (`AlgebraicGeometry.etale_torsionSubgroupScheme`), so this is
-`AlgebraicGeometry.bijective_toUnit_comp`. -/
+algebraically closed fields. -/
 theorem bijective_toUnit_comp_torsionSubgroupScheme [IsAlgClosed K] (p : ℕ) [CharP K p]
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (n : ℕ) (hn : 0 < n)
     (hnp : ¬ p ∣ n) (K' : Type u) [Field K'] [Algebra K K'] [IsAlgClosed K'] :
@@ -126,17 +104,8 @@ theorem bijective_toUnit_comp_torsionSubgroupScheme [IsAlgClosed K] (p : ℕ) [C
   have := etale_torsionSubgroupScheme p A n hn hnp
   exact bijective_toUnit_comp (torsionSubgroupScheme A n)
 
-/-- The `n`-torsion of an abelian variety is étale.
-
-Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` of
-characteristic `p` and let `n` be prime to `p`. Then `A(K)[n] ≅ (ℤ/nℤ) ^ (2 * g)`. This is also
-the third part of blueprint `proposition-multiplication-n--2`.
-
-The group `A(K)` is abelian and divisible (`AlgebraicGeometry.surjective_npow_points`). For a
-prime `ℓ ∣ n` the `K`-points of the finite étale `A[ℓ]` are its `ℓ`-torsion
-(`AlgebraicGeometry.torsionByEquiv`), so there are `ℓ ^ (2 * g)` of them
-(`AlgebraicGeometry.card_points_eq_finrankΓ`), and
-`AddSubgroup.nonempty_addEquiv_torsionBy_of_forall_prime` concludes. -/
+/-- Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` of
+characteristic `p` and let `n` be prime to `p`. Then `A(K)[n] ≅ (ℤ/nℤ) ^ (2 * g)`. -/
 theorem nonempty_addEquiv_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K p]
     (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] (n : ℕ) (hn : 0 < n)
     (hnp : ¬ p ∣ n) :

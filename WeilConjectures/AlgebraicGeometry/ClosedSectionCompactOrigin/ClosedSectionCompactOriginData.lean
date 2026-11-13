@@ -41,7 +41,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-! # Canonical data for the closed-section compact-origin equation
 
 The constant objects, proper and exact closed-image identifications, source maps and
-retained witnesses are the existing data of lem-pur-closed-section-compact-origin.
+retained witnesses are the data used by
+`AlgebraicGeometry.ClosedSectionCompactOrigin.closed_section_compact_origin`.
 This module separates their construction from the source-normalization theorem.
 -/
 

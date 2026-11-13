@@ -77,6 +77,16 @@ the hypotheses of the reduction statements) a sheaf of modules over `ULift (ZMod
 - `AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients`: the
   assertions for `j_! 𝐅_ℓ` on a reduced curve follow from those on its normalisation.
 
+## Implementation details
+
+Mathlib's `Scheme.Hom.normalization` is the relative normalisation of a morphism, and does not
+directly provide the normalisation of a reduced curve together with its finiteness; the
+normalisation exact sequence
+(`AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar`) is therefore stated for
+an arbitrary finite surjective `ν` which is an isomorphism over a dense open, the properties of
+the normalisation that are used. Its compatibility with field extension and restriction to opens
+is not recorded in this existential form.
+
 ## References
 
 - Stacks Project, Section 59.83, <https://stacks.math.columbia.edu/tag/03SB>
@@ -252,11 +262,7 @@ private theorem constructible_outer {X : Scheme.{u}} [IsNoetherian X]
 
 /-- **Short exact dévissage for the eight curve assertions.** Let `X` be a curve over `k` and
 `0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` a short exact sequence of étale sheaves of `Λ`-modules on `X`. If the
-eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the long exact
-cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
-and bijectivity to the middle term, the hypotheses of the assertions being inherited by
-subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
-`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`. -/
+eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`. -/
 theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
     {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]
@@ -337,9 +343,7 @@ v          v
 Spec k' -ι-> Spec k
 ```
 
-the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`: both sides vanish for
-`q > 0`, and in degree zero both are the finite product of the stalks of `F` at the points of
-`C`. -/
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`. -/
 theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
@@ -412,13 +416,7 @@ algebraically closed. Suppose that `C₇` holds for every reduced proper curve `
 every prime `r` and every constructible sheaf `G` of `𝐅_r`-modules on `X` (modules over
 `ULift (ZMod r)`), i.e. that the pullback `Hᵠ(X, G) ⟶ Hᵠ(X', ι'^* G)` is bijective for every
 base change `X'` of `X` to an algebraically closed extension `k'` of `k`. Then `C₇(C, F)`
-holds for every proper curve `C` over `k` and every torsion sheaf `F` of `Λ`-modules.
-
-The proof replaces `C` by `C_red` (a universal homeomorphism), writes the underlying abelian
-sheaf of `F` as the filtered colimit of its constructible subsheaves
-(`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`), splits a constructible sheaf into
-its primary parts and dévisses an `r`-primary one along `0 → F[r] → F → F/F[r] → 0`
-(`AlgebraicGeometry.IsCurve.Assertions.of_shortExact`). -/
+holds for every proper curve `C` over `k` and every torsion sheaf `F` of `Λ`-modules. -/
 theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X X' : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsProper g] [IsReduced X]
@@ -511,14 +509,8 @@ theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field 
 closed. Suppose that the eight assertions `C(X, G)` hold for every reduced curve `X` over `k`,
 every prime `ℓ` and every constructible sheaf `G` of `𝐅_ℓ`-modules on `X` (modules over
 `ULift (ZMod ℓ)`). Then `C(C, F)` holds for every curve `C` over `k` and every torsion sheaf
-`F` of `Λ`-modules, for a finite ring `Λ` (over an infinite ring such as `𝐅_ℓ[t]` the constant
-sheaf is constructible and its `H⁰` on a proper curve is infinite); in particular so does the field
-extension invariance `C₇`.
-
-The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`,
-run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
-and continuity of cohomology, primary decomposition, and induction on the exponent along
-`0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`. -/
+`F` of `Λ`-modules, for a finite ring `Λ`; in particular so does the field extension invariance
+`C₇`. -/
 theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsReduced X] (ℓ : ℕ)
@@ -560,10 +552,7 @@ theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k
 closed field `k` and `F` a constructible sheaf of `Λ`-modules killed by a prime `r`, over a
 finite ring `Λ`. There is a dense open `j : U ⟶ X` whose connected components are irreducible
 and on which `F` is finite locally constant, and for it the eight assertions for `F` are
-equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0`
-has third term
-supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
-degree zero and invariant under field extension. -/
+equivalent to those for `j_! j^* F`. -/
 theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -595,9 +584,7 @@ algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules kil
 `r`, over a finite ring `Λ`. There are finitely many pairwise disjoint irreducible opens
 `U_a ⊆ C`, with dense union `U` and zero-dimensional complement `Z = C ∖ U`, on each of which
 `F` is finite locally constant, such that, writing `j_a : U_a ⟶ C` for the inclusions,
-`C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
-`0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
-decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage. -/
+`C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. -/
 theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
     [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
@@ -636,14 +623,7 @@ monomorphism
 
 (the extension by zero of the unit of `ν|_{U'}^* ⊣ ν|_{U'*}`, stalkwise the diagonal into the
 fibre) whose cokernel `Q` is constructible and supported on the finite set `X ∖ V`, giving the
-short exact sequence `0 → j_! 𝐅_ℓ → ν_* j'_! 𝐅_ℓ → Q → 0`.
-
-Mathlib's `Scheme.Hom.normalization` is the relative normalisation of a morphism, and does not
-directly provide the normalisation of a reduced curve together with its finiteness; we therefore
-state the lemma for an arbitrary finite surjective `ν` which is an isomorphism over a dense open,
-the properties of the normalisation that are used. The compatibility of the sequence with field
-extension and restriction to opens, also part of the blueprint statement, is not recorded in
-this existential form. -/
+short exact sequence `0 → j_! 𝐅_ℓ → ν_* j'_! 𝐅_ℓ → Q → 0`. -/
 theorem exists_mono_lowerShriek_constantModSheaf_lowerStar {k : Type u} [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X))
@@ -697,10 +677,7 @@ algebraically closed field `k`, `ν : X' ⟶ X` a finite surjective morphism fro
 `k`-scheme which is an isomorphism over a dense open (e.g. the normalisation of `X`),
 `j : U ⟶ X` an open immersion and `j' : U' ⟶ X'` its pullback along `ν`. Then the eight
 assertions for `j_! 𝐅_ℓ` on `X` follow from those for `j'_! 𝐅_ℓ` on the smooth curve `X'`
-(which are the Kummer and Artin–Schreier calculations): finite direct image is exact and
-preserves cohomology, and the normalisation exact sequence
-`AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar` has a third term whose
-cohomology is concentrated in degree zero and invariant under field extension. -/
+(which are the Kummer and Artin–Schreier calculations). -/
 theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients {k : Type u}
   [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

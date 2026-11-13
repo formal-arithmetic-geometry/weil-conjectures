@@ -198,12 +198,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A universal constant coefficient arrow remains universal after restriction to an
 etale source and transport through the canonical coefficient mate.
 
-Source: Stacks Project, Tags 06YY and 03ED.
-
-The proof transports the initial structured arrow along the exact slice equivalence
-and the coefficient mate. The mate is invertible by the inverse-image scalar
-comparison, and the source and target constants are identified by the localization
-comparison. Initial objects are preserved by these isomorphisms. -/
+Source: Stacks Project, Tags 06YY and 03ED. -/
 theorem etaleNormalizationArrow_universal_of_constant
     (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S]
     (q : R →+* S)

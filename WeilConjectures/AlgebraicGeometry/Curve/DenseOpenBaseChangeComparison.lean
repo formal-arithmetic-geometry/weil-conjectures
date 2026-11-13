@@ -94,7 +94,10 @@ private theorem comparison_iso_iff {X Y : Scheme.{u}} (a : Y ⟶ X)
     (cohomology_iso_bijective ((Etale.upperStar _ a).mapIso e) q)
     (fun x ↦ Etale.cohomologyMap_map a q e.hom x)
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
+/-- For a dense open `U` of a curve, the two base change assertions (torsion of invertible order
+and proper case) pass from the extension by zero `j_! j^* F` to `F`, and conversely when `F` has
+torsion of invertible order or is `p`-primary for `p = char k`.
+Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_baseChange_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

@@ -188,17 +188,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The natural isomorphism by which termwise residue extension of sections computes local
 derived fibre cohomology in degree one on strictly perfect complexes.
-Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
-
-Construction: Work in the full subcategory of strictly perfect complexes. Transport each
-complex by the canonical over-site equivalence. Boundedness and finite-free
-retractions imply K-flatness, so the chosen derived-pullback counit is invertible
-on this whole subcategory. Compute its ordinary pullback by the natural affine
-associated-sheaf/base-change formula, using the natural terminal-section
-reconstruction counit. The canonical field transport makes the coefficient map
-exactly section evaluation. Take homology and global sections on the residue
-spectrum; these sections are exact and undo associated sheaves. All factors
-are natural isomorphisms on the full subcategory. -/
+Source: Stacks Project, Tags 01IB, 08DW and 06YJ. -/
 def affinePerfectResidueModelIso
     (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU : w ∈ U) (hU : IsAffineOpen U) :
     let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤

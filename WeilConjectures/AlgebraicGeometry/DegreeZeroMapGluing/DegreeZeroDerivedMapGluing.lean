@@ -28,8 +28,8 @@ Sites, Tag 04TQ; Homology, Tag 0118.
 The auxiliary predicates only spell out the conclusion, using the actual exact inverse
 images and their canonical composition isomorphisms. They assume no descent property.
 Both small sites use fixed-ring module sheaves. For finite coefficients the canonical
-coefficient realization identifies this with modules over the constant ring sheaf, as in
-`definition-small-pro-etale-site--1`. No new derived category or restriction is constructed.
+coefficient realization identifies this with modules over the constant ring sheaf. No new
+derived category or restriction is constructed.
 -/
 
 @[expose] public noncomputable section
@@ -115,8 +115,7 @@ def HasCanonicalIdentifications (T : Scheme.{u}) : Prop :=
             ((DerivedCategory.homologyFunctorFactors (B X) 0).inv.app K))
 
 /-- The full conclusion of degree-zero derived-map gluing, with the restriction bijection
-written as compatibility iff a unique preimage exists. Thus no choice of a compatibility
-proof is needed to define a map into a subtype. The last two clauses identify this with
+written as compatibility iff a unique preimage exists. The last two clauses identify this with
 sheaf-map gluing through `H⁰` and state the equality test explicitly. Source: Stacks 06XS,
 03EM and 04TQ. -/
 def Conclusion (T : Scheme.{u}) {I : Type wI} (U : I → T.Opens) : Prop :=

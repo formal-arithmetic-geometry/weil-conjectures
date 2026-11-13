@@ -35,14 +35,8 @@ variable [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]
 
 /-- **Cohomology and base change on the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, the `i`-th higher
-direct image commutes with the base change: `R^i f'_* ℱ' ≅ g^* R^i f_* ℱ`.
-
-Locally on `U_i`, `R f_* ℱ` is a finite locally free module placed in degree `i`, and its
-formation commutes with base change.
-
-The isomorphism is only asserted to exist: it is not stated to be the canonical base-change map,
-which is not available (see
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`). -/
+direct image commutes with the base change: `R^i f'_* ℱ' ≅ g^* R^i f_* ℱ`. The isomorphism is
+only asserted to exist, not to be the canonical base-change map. -/
 theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -71,12 +65,7 @@ theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlat
 /-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`
 lies in the rank-`r` perfect locus `U_{i,r}`, then the higher direct image `R^i f'_* ℱ'` is
-finite locally free of rank `r`.
-
-This also follows from
-`AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_pullback_of_isPullback`, the
-case of the inclusion of `U_{i,r}`, and the stability of finite local freeness of rank `r`
-under pullback, which is not available. -/
+finite locally free of rank `r`. -/
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f)
     {i r : ℕ} {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -113,16 +102,7 @@ v          v
 T' --g---> T
 ```
 with `ℱ'` the pullback of `ℱ` to `X'`. If `R f'_* ℱ'` is a finite locally free module of rank `r`
-placed in degree `i`, then the image of `g` lies in the rank-`r` perfect locus `U_{i,r}`.
-
-Locally on `T'`, `R f'_* ℱ'` is computed by the pullback `g^* P` of the bounded complex of finite
-free modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`.
-A bounded complex of finite free modules whose cohomology is finite locally free and
-concentrated in degree `i` is locally homotopy equivalent to that cohomology placed in degree
-`i`, so its fibre at a point `t'` of `T'` has cohomology of dimension `r` in degree `i` only.
-This gives `h^q_{ℱ'}(t') = 0` for `q ≠ i` and `h^i_{ℱ'}(t') = r`, and these are the fibre
-dimensions of `ℱ` at `g t'` by
-`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
+placed in degree `i`, then the image of `g` lies in the rank-`r` perfect locus `U_{i,r}`. -/
 theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) {i r : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -188,12 +168,8 @@ theorem range_subset_setOf_hFiber_eq_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
 proper of finite presentation, `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`,
 and `i r : ℕ`, there is an open subscheme `U` of `T`, namely `U_{i,r}`, such that a morphism
 `g : T' ⟶ T` factors through `U` if and only if `R f'_* ℱ'` is a finite locally free module of
-rank `r` placed in degree `i` [Stacks, Tag 0B9S].
-
-Here `f' : X' ⟶ T'` and `g' : X' ⟶ X` are the base change of `f` along `g`, and `ℱ'` is the
-pullback of `ℱ` to `X'`. The set `U_{i,r}` is open by
-`AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`, and the factorisation criterion is
-`AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`. -/
+rank `r` placed in degree `i` [Stacks, Tag 0B9S]. Here `f' : X' ⟶ T'`, `g' : X' ⟶ X` and `ℱ'`
+are the base changes of `f` and `ℱ` along `g`. -/
 theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.IsFlatOver f)
     (i r : ℕ) :
     ∃ U : T.Opens, (U : Set T) = ℱ.perfectLocusOfRank f i r ∧

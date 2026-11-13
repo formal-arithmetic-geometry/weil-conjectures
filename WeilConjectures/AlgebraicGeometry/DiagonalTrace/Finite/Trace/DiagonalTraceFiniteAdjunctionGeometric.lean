@@ -46,11 +46,7 @@ private theorem adjunct_naturality
     _ = _ := by
       rw [Category.assoc, ← FS.map_comp, adj.homEquiv_naturality_right]
 
-/-- The actual finite direct-image operation has the geometric adjunction equation.
-
-The previous arbitrary-function interface was false: its values on supported
-classes do not determine it on all geometric classes. The source uses the
-operation induced by direct image, which is the explicit operation below. -/
+/-- The actual finite direct-image operation has the geometric adjunction equation. -/
 theorem diagonalTrace_finiteAdjunction_geometric
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

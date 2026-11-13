@@ -28,10 +28,8 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 
 /-- For a commutative ring A, scheme D and a∈A, the etale constant-presheaf generator a, followed by
 the comparison adjunction unit and the canonical constant-sheaf comparison, equals the pro-etale
-constant-presheaf generator a at the terminal object [def-weil-pbc-constant-sheaf,
-proposition-comparison-morphism-inverse-image].
-Source: Stacks 0152,
-06YY and 0GLZ. -/
+constant-presheaf generator a at the terminal object.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem comparison_constant_generator (A : Type (u + 1)) [CommRing A]
     (D : Scheme.{u}) (a : A) :
     (((comparisonUpperStarConstantSheafIso A D).app (ModuleCat.of A A)).hom).hom.app

@@ -17,9 +17,9 @@ space `k^m` with a homomorphism of group schemes `r : G ⟶ GL_m`, a rational re
 `r`; this is the representation `RationalHom.representation`, and the stable subspaces, the
 simple and the semisimple algebraic-group modules are those of this representation.
 
-Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`,
-the setting of the blueprint. There `G(k)` is schematically dense in an algebraic group `G`, so
-stability under `G(k)` is stability under `G`; over a general field it is not.
+Simple and semisimple modules are only defined for `k` algebraically closed of characteristic `0`.
+There `G(k)` is schematically dense in an algebraic group `G` (which is reduced by Cartier's
+theorem), so stability under `G(k)` is stability under `G`; over a general field it is not.
 
 ## Main definitions
 
@@ -70,14 +70,8 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
   {m : Type u} [Fintype m] [DecidableEq m] (r : RationalHom G m) [IsMonHom r]
 
 /-- A *simple* algebraic-group module: `k^m` is nonzero and has no nonzero proper subspace stable
-under `G` (`RationalHom.isSimple_iff`).
-
-Stability is tested on the `k`-points `G(k)` only. This is the scheme-theoretic notion (a
-subcomodule, i.e. stable under `G(R)` for every `k`-algebra `R`) because `G` is an algebraic
-group, i.e. locally of finite type over `k`, and `k` is algebraically closed of characteristic
-`0`, the standing hypotheses of `det-d-linear`: then `G` is reduced (Cartier) and `G(k)` is
-schematically dense in `G`. Without these hypotheses the two notions differ, which is why
-`[LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k]` are imposed. -/
+under `G` (`RationalHom.isSimple_iff`). Stability is tested on the `k`-points `G(k)`, which
+agrees with the scheme-theoretic notion under the imposed hypotheses. -/
 abbrev IsSimple [LocallyOfFiniteType G.hom] [IsAlgClosed k] [CharZero k] : Prop :=
   r.representation.IsIrreducible
 

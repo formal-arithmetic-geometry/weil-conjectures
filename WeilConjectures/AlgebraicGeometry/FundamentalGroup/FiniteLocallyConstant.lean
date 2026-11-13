@@ -42,9 +42,7 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 variable (Y) in
-/-- Finite etale covers and finite locally constant sheaves.
-
-The category `FLC(Y)` of finite locally constant sheaves of sets on the small étale site of
+/-- The category `FLC(Y)` of finite locally constant sheaves of sets on the small étale site of
 `Y`, with morphisms of sheaves; the category `FÉt(Y)` of finite étale `Y`-schemes is
 `AlgebraicGeometry.Scheme.FiniteEtale`. The small étale site `Y_ét` is Mathlib's
 `AlgebraicGeometry.Scheme.smallEtaleTopology`, and finite torsors are `CategoryTheory.Sheaf.Torsor`.
@@ -57,9 +55,9 @@ namespace FiniteLocallyConstant
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-/-- The stalk `F_s` of a finite locally constant sheaf at
-a geometric point `s : Spec Ω ⟶ Y`, as a functor `FLC(Y) ⥤ FintypeCat`; the corresponding
-fibre `|P_s|` of a finite étale `P` is `AlgebraicGeometry.Scheme.FiniteEtale.fiber`. -/
+/-- The stalk `F_s` of a finite locally constant sheaf at a geometric point `s : Spec Ω ⟶ Y`, as a
+functor `FLC(Y) ⥤ FintypeCat`; the corresponding fibre `|P_s|` of a finite étale `P` is
+`AlgebraicGeometry.Scheme.FiniteEtale.fiber`. -/
 noncomputable def fiber : Y.FiniteLocallyConstant ⥤ FintypeCat.{u + 1} :=
   ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber)
     fun F ↦ (ConcreteCategory.isFinitelyGenerated_iff_finite _).1

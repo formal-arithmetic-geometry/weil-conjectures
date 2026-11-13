@@ -21,9 +21,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The algebraic conversion on one etale chart.  This is the local algebra step
-in the proof of `finiteQuotient_previous_local_complexes`; the covering-sieve
-assembly is performed there. -/
+/-- The algebraic conversion on one etale chart, used chartwise in
+`finiteQuotient_previous_local_complexes`. -/
 theorem finiteQuotient_previous_local_complexes_chart
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

@@ -37,8 +37,8 @@ namespace AlgebraicGeometry
 
 /-- The canonical map to the base from the reduced closed complement of the open union
 of the `O i` in the coproduct of the `C i`. The open union is the supremum of the open
-images of `u i` followed by the coprojections. Its complement carries the reduced
-induced closed structure given by the existing vanishing-ideal construction.
+images of `u i` followed by the coprojections; its complement carries the reduced
+induced closed subscheme structure.
 Source: Stacks Project, Tag 0GKX, second boundary Zprime; Tags 01J3 and 01J4. -/
 noncomputable def goodCurvesBoundaryMap
     {I : Type u} (B : Scheme.{u}) (T C O : I → Scheme.{u})
@@ -86,35 +86,12 @@ private theorem proper_sigmaMap
     (hpb i).isoPullback.hom, (hpb i).isoPullback_hom_snd]
   infer_instance
 
-/-- Source: Stacks Project, Tag 0GKX, the assertion that the second boundary Zprime
-is quasi-finite, with the good-curves hypotheses of Tag 0GK7 made explicit.
-
-Proof plan:
-1. Each finite `t i` is proper, so `b i ≫ t i` is proper.
-2. Their finite coproduct is proper: finite type follows by combining finite affine
-   covers; separatedness is checked on the pieces `C i ×[B] C j` of the diagonal,
-   empty off the equal-index pieces; universal closedness follows from a finite union
-   of closed images after any base change.
-3. The reduced complement is a closed immersion,
-hence its map to `B` is proper. It is separated and of finite type. Over the locally Noetherian base
-it is locally of finite presentation; properness also gives quasi-compactness and a quasi-compact
-diagonal, hence quasi-separatedness.
-4. Each fibre of `b i` is proper and smooth over its residue field
-   (lem-weil-pbc-proper-base-change, sbc-lem-smooth-criterion). It is Noetherian,
-and regular by the smooth-field criterion applied to the identity field extension. Geometric
-   connectedness gives connectedness; nonemptiness and regularity give irreducibility. No perfection
-   of the residue field is needed.
-5. The open fibre is nonempty. On an irreducible scheme of dimension at most one,
-   every point outside it is closed (lem-sc-scheme-sober,
-   lem-sc-dim-one-point-outside-open-closed). Its closed complement is finite
-   by Noetherianity. In dimension zero the complement is empty.
-6. For any point of `B`, each `t i` has a finite fibre (pqf-lem-finite-qf,
-   pqf-lem-qf-finitefibres). The boundary fibre is the disjoint union of the finite
-   complements from step 5 over these points and over the finite set `I`.
-   The fibre homeomorphism and the image of the reduced closed immersion justify this set-level
-   decomposition; reduction need not commute with base change.
-7. Finite type and finite fibres imply quasi-finiteness. The other conclusions were obtained in step
-   3. Empty `I`, `B` or `T i` contribute no points and are permitted throughout. -/
+/-- Let `t i : T i ⟶ B` be finite étale and `b i : C i ⟶ T i` smooth and proper with nonempty
+geometrically connected fibres of dimension at most one, and let `u i : O i ⟶ C i` be open
+immersions with nonempty fibres over `T i`. Then the reduced complement of the union of the
+`O i` in `∐ C i` is separated, quasi-finite, locally of finite presentation, quasi-compact and
+quasi-separated over `B`.
+Source: Stacks Project, Tag 0GKX, with the good-curves hypotheses of Tag 0GK7 made explicit. -/
 theorem good_curves_boundary_quasiFinite
     {I : Type u} [Finite I] (B : Scheme.{u}) [IsLocallyNoetherian B] [CompactSpace B]
     (T C O : I → Scheme.{u})

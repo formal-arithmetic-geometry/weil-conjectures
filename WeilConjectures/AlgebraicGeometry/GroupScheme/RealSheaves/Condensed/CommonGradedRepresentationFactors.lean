@@ -12,8 +12,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.Filte
 /-!
 # Comparing representations with the same graded pieces
 
-This is the common-refinement comparison in paragraph 3 of
-`lemma-tensor-exterior-powers-filtered-representations--3`.
+This is the common-refinement comparison of filtered representations with the same graded
+pieces, used for filtered tensor and exterior powers.
 -/
 
 @[expose] public section

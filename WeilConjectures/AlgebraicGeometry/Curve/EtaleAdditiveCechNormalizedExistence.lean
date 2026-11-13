@@ -23,8 +23,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The additive étale Čech edge equivalence has its augmentation normalization.
-This concerns one scheme, with no endomorphism or inverse-image assertion.
-
 Source: Stacks Project, Tag 03P2, separated-case affine-cover proof; Tag 01EQ,
 construction of the two augmentations; Tag 01FD, augmented double-complex diagram. -/
 theorem exists_etaleAdditiveCech_normalized

@@ -27,9 +27,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale
 
 /-- The bounded below exact comparison in the fixed-ring sheaf presentation.
-Its realization as modules over the continuous-function coefficient sheaf is the
-previously recorded `finiteCoefficientDerivedComparisonPlus`. Here the fixed-ring
-presentation agrees directly with both open extension and the canonical direct-image mate.
+Its realization as modules over the continuous-function coefficient sheaf is
+`finiteCoefficientDerivedComparisonPlus`.
 Source: Stacks Project, Tag 099R. -/
 noncomputable abbrev siteComparisonDerivedPullbackPlus (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] :

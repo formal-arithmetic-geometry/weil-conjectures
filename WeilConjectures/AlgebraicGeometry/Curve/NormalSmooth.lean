@@ -20,9 +20,7 @@ smooth `k`-scheme is its dimension
 (`AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`).
 
 This lets statements about smooth geometrically connected curves over a finite field be applied
-to curves which are normal, separated, of finite type and of pure dimension one, the form used in
-the blueprint (`theorem-rank-one-sheaves-have-finite--1`,
-`proposition-no-fixed-class-degree-one--1`).
+to curves which are normal, separated, of finite type and of pure dimension one.
 
 ## Main statements
 

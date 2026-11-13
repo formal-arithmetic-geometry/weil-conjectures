@@ -258,13 +258,7 @@ private theorem localTest_denominator {R : Type u} [CommRing R]
 attribute [local irreducible] Proj.fromOfGlobalSections
 
 /-- The comparison of a prescribed fraction morphism with the trivialized Proj map
-holds on an open neighbourhood of every point of the test scheme.
-
-This is the local geometric step in the proof of
-`gradedLineFraction_test`.  The unit ideal hypothesis supplies a positive-degree
-basic-open neighbourhood; the free-frame and fraction formulas identify the two
-maps there.  The global equality is obtained from this local statement by
-`Scheme.hom_ext_of_forall`. -/
+holds on an open neighbourhood of every point of the test scheme. -/
 theorem gradedLineFraction_test_local
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

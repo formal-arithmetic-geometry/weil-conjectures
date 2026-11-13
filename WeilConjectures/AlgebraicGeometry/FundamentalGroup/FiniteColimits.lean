@@ -33,7 +33,7 @@ isomorphism (`AlgebraicGeometry.Scheme.FiniteEtale.isIso_of_forall_isIso_fiber_m
 - `AlgebraicGeometry.Scheme.FiniteEtale.instHasFiniteColimits`: `FÉt(Y)` has finite colimits.
 - `AlgebraicGeometry.Scheme.FiniteEtale.preservesFiniteLimits_pullback`,
   `AlgebraicGeometry.Scheme.FiniteEtale.preservesFiniteColimits_pullback`: base change is exact.
-- `AlgebraicGeometry.Scheme.FiniteEtale.finite_limits_colimits`: the blueprint statement.
+- `AlgebraicGeometry.Scheme.FiniteEtale.finite_limits_colimits`: the two statements together.
 -/
 
 @[expose] public section

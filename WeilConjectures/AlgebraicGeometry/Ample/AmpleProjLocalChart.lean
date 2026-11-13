@@ -29,31 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical section-ring morphism identifies any affine nonvanishing chart when `L`
 is ample. Here `X_s` is `nonvanishingLocus (L.tensorPow d) (s.val d)`.
-Source: Stacks Project, Properties, Tags 01PZ and 01Q1.
-
-Step 1: `lem-sc-ample-proj-canonical-map` supplies the morphism from the assumed cover,
-its inverse-image identity, and its localized sections formula (that statement writes
-`X_s` as the generating locus, which equals the nonvanishing locus for an invertible
-module). The formula below specifies the canonical map: the pullback of `ξ / s^n`,
-multiplied by the restricted section `s^n`, is the restricted numerator. Since `s`
-generates on its nonvanishing open, this determines the pullback of every fraction,
-including on the empty open.
-
-Step 2: ampleness gives quasi-compactness by `def-weil-pbc-ample-invertible-module` and
-separatedness, hence quasi-separatedness, by `lem-weil-pbc-ample-scheme-separated`.
-
-Step 3: for a section of degree `d > 0`, apply `lem-sc-invert-s-cohomology` in degree
-zero to the invertible module `L^{⊗ d}` and the structure sheaf. It identifies the
-localized Veronese section ring with the functions on `X_s`. Reindexing degrees
-identifies that degree-zero localization with `S_(s)`.
-
-Step 4: by `def-pc-proj`, the chart is `Spec S_(s)`. The localization formula from
-Step 1 identifies its induced functions map with the isomorphism of Step 3.
-
-Step 5: `lem-sc-affine-global-sections-iso` makes the chart morphism an isomorphism,
-since its source and target are affine and its functions map is an isomorphism.
-The source of `f ∣_ D₊(s)` is the inverse image of the chart, identified with `X_s`
-by the first equality; thus this is precisely the induced morphism in the node. -/
+Source: Stacks Project, Properties, Tags 01PZ and 01Q1. -/
 theorem exists_sectionRing_proj_affine_charts (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible]
     (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d),

@@ -281,7 +281,7 @@ def balancing {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : Scalar
 
 /-- The actual counit-tensor comparison in the larger coefficient derived category.
 By the mate formula its component is the `Lq_S* ⊣ Rq_S*` adjunct of
-`balancing.hom ≫ C_Z(ε_R)`. No scalar-forgetting functor is used to define the arrow.
+`balancing.hom ≫ C_Z(ε_R)`.
 Source: Stacks Tag 0B56. -/
 def comparison {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :

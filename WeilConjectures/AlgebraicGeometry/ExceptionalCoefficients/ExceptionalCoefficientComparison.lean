@@ -32,7 +32,7 @@ Source: Stacks 0GL6 and 0F7L.
 
 All scalar functors are the published left adjoints to exact scalar restriction.
 The scalar/pullback identification and the proper coefficient map are the recorded
-`scalarPullbackIso` and `scalarMate` of lem-pur-etale-scalar-mate-projection.
+`scalarPullbackIso` and `scalarMate`.
 The comparison for compact support is constructed from its open and proper parts.
 The auxiliary tensor and pullback identifications are fixed by their ordinary
 adjunctions and their computation on cochain representatives.

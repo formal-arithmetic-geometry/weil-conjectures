@@ -67,10 +67,7 @@ theorem _root_.UpperSemicontinuous.finite_range_and_isConstructible {Z : Type*}
     simp only [Set.mem_preimage, Set.mem_singleton_iff, Set.mem_sdiff, Set.mem_Iio, not_lt]
     omega
 
-/-- Constructible dimensions from
-coherent base change.
-
-Let `f : X ⟶ S` be projective (`f = π ∘ i` for a closed immersion `i : X ⟶ ℙ(n; S)`) with `S`
+/-- Let `f : X ⟶ S` be projective (`f = π ∘ i` for a closed immersion `i : X ⟶ ℙ(n; S)`) with `S`
 Noetherian, and let `𝒢` be a coherent `𝒪_X`-module flat over `S`. For each `r`, the function
 `s ↦ dim_{κ(s̄)} H^r(X_{s̄}, 𝒢_{s̄})`, for the geometric fibre `X_{s̄} = X ×_S Spec κ(s)‾`,
 is constructible: it takes finitely many values, each on a constructible subset of `S`. -/

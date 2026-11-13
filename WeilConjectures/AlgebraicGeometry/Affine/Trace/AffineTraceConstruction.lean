@@ -277,9 +277,8 @@ abbrev affineTraceRight (A : Type (u + 1)) [CommRing A] (N : ℕ)
   affineTraceRightTower (C := fun d ↦ DerivedCategoryModule A (affineTraceTower S d))
     (fun d ↦ affineTraceLineRight A N hA (affineTraceTower S d))
 
-/-- Composite adjunction with its counit written componentwise.
-This is Mathlib's composite, with the same unit and counit; the explicit components
-avoid expanding the associator implementation in coordinate inductions. -/
+/-- Composite adjunction with its counit written componentwise; it has the same unit and counit
+as Mathlib's composite. -/
 def affineTraceComposeAdjunction
     {C : Type*} {E : Type*} {F : Type*}
     [Category C] [Category E] [Category F]

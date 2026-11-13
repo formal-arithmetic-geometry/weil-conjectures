@@ -94,15 +94,7 @@ private lemma chosen_to_model
   rfl
 
 /-- Factorization normalization of the chosen compositor.
-Source: Stacks Project, Tags 0F7I and 0F7J.
-
-Proof in words: use the triangle whose three compactifications are the identity-proper
-compactification of the open leg, the identity-open compactification of the proper leg,
-and c. Its middle square is the identity square on c.Z. The every-triangle composition
-formula reduces its interchange to the identity. Remove the identity open and proper
-functors using their adjunction unit normalizations. The common-refinement cocycle
-identifies the three remaining comparisons with the chosen ones. This proves the displayed
-identity, including when c.i is empty or an identity. -/
+Source: Stacks Project, Tags 0F7I and 0F7J. -/
 theorem graph_compactification_factorization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]

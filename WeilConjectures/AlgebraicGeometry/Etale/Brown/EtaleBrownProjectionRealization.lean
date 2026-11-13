@@ -43,7 +43,7 @@ def strictEtaleBrownRingMap {m n : ℕ} (h : m ≤ n) :
     strictEtaleBrownRing O t n →+* strictEtaleBrownRing O t m :=
   Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
 
-/-- Reuse the coefficient-projection node's restriction to constant scalars.
+/-- The restriction of the coefficient projection to constant scalars.
 Source: Zheng, Construction 4.1; Stacks 03CV. -/
 abbrev strictEtaleBrownConstant (W : Scheme.{u}) (n : ℕ) :=
   Etale.SystemProjection.constantModule W (.of (strictEtaleBrownRing O t n))

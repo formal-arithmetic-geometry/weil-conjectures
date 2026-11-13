@@ -74,7 +74,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CompletedLisse
 
-/-- The coefficients and scheme in BS 6.8.4, with exactly the hypotheses of this node.
+/-- The coefficients and scheme in BS 6.8.4.
 Source: BS 6.8.4. -/
 structure Base (l : ℕ) [Fact l.Prime] where
   E : Type (u + 1)

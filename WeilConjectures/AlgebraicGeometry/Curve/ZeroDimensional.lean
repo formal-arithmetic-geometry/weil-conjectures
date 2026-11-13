@@ -115,18 +115,10 @@ theorem subsingleton_sheafH_of_topologicalKrullDim_le_zero {X : Scheme.{u}}
   have := Scheme.isAlgClosed_residueField_of_isClosed g x (hcl x)
   infer_instance
 
-/-- Degree zero: **étale cohomology in
-dimension zero.** Let `k` be algebraically closed and `X` a scheme of finite type over `k` of
-dimension at most zero, and `F` an abelian étale sheaf on `X`. Then
-`H⁰(X, F) ≅ ∏ₓ F_x̄`, the (finite) product of the geometric stalks of `F` at the points of `X`.
-
-The points of `X` are finitely many closed points with algebraically closed residue fields
-(`AlgebraicGeometry.Scheme.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero`); the
-unit maps assemble to an isomorphism `F ≅ ⨁ₓ iₓ_* iₓ^* F` along `iₓ : Spec κ(x) ⟶ X`, and
-`H⁰(X, iₓ_* iₓ^* F) = H⁰(Spec κ(x), iₓ^* F)` is the stalk of `iₓ^* F` at the tautological
-geometric point (`AlgebraicGeometry.Scheme.bijective_toPresheafFiber_etalePoint`), which is
-the stalk of `F` at `x̄`. The vanishing in positive degrees is
-`AlgebraicGeometry.subsingleton_sheafH_of_topologicalKrullDim_le_zero`. -/
+/-- **Étale cohomology in dimension zero.** Let `k` be algebraically closed,
+`X` a scheme of finite type over `k` of dimension at most zero, and `F` an abelian étale sheaf
+on `X`. Then `H⁰(X, F) ≅ ∏ₓ F_x̄`, the (finite) product of the geometric stalks of `F` at the
+points of `X`. -/
 theorem nonempty_addEquiv_sheafH_zero_pi_sheafFiber {X : Scheme.{u}}
     (g : X ⟶ Spec (.of k)) [LocallyOfFiniteType g] [QuasiCompact g]
     (hX : topologicalKrullDim X ≤ 0) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :

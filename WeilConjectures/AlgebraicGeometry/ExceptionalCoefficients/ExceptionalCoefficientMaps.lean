@@ -33,10 +33,16 @@ Source: Stacks 0GL6 and 0F7L.
 
 All scalar functors are the published left adjoints to exact scalar restriction.
 The scalar/pullback identification and the proper coefficient map are the recorded
-`scalarPullbackIso` and `scalarMate` of lem-pur-etale-scalar-mate-projection.
+`scalarPullbackIso` and `scalarMate`.
 The comparison for compact support is constructed from its open and proper parts.
 The auxiliary tensor and pullback identifications are fixed by their ordinary
 adjunctions and their computation on cochain representatives.
+
+## Implementation details
+
+The all-complex tensor normalization keeps its monoidal arguments inside one generic body; this
+avoids repeated comparison of the nested sheafification and derived-monoidal proofs in
+specialized theorem types.
 -/
 
 @[expose] public noncomputable section
@@ -147,8 +153,6 @@ def TensorNormalizationAux
 
 /-- The all-complex normalization with site tensor functors kept as shared constants.
 This is exactly `TensorNormalizationAux` on the small etale sheaf categories.
-Keeping its monoidal arguments inside this generic body avoids repeated comparison
-of the nested sheafification and derived-monoidal proofs in specialized theorem types.
 Source: Stacks 07A4. -/
 def SiteTensorNormalizationAux
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]

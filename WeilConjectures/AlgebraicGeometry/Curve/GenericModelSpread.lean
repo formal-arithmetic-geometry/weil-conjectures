@@ -20,12 +20,10 @@ spreads out to a generic curve model (`AlgebraicGeometry.IsGenericCurveModel`) o
 nonempty affine open of `Spec B` (`AlgebraicGeometry.exists_isGenericCurveModel_of_isFractionRing`).
 
 We write `Spec L` as the cofiltered limit of the `Spec B[1/b]`. The finite morphisms of the datum
-descend to finite morphisms at a stage (as in
-`proposition-proper-direct-image-finite-coefficients`); smoothness and the closed immersion property
-spread to later stages (EGA IV 8, 17), which are opens of the base; surjectivity and the finiteness
-of the comparison boundary hold over the complement of a proper closed image
-(`lem-weil-pbc-proper-closed-image`, `proposition-proper-direct-image-finite-coefficients`). This is
-the spreading step of `proposition-proper-direct-image-finite-coefficients`.
+descend to finite morphisms at a stage; smoothness and the closed immersion property spread to
+later stages (EGA IV 8, 17), which are opens of the base; surjectivity and the finiteness of the
+comparison boundary hold over the complement of a proper closed image. This is the spreading step
+of `AlgebraicGeometry.exists_isFinite_sigmaDesc_genericCurveModel`.
 -/
 
 @[expose] public section

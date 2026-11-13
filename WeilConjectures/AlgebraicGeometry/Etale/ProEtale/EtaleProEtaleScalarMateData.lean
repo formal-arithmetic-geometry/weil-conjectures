@@ -26,9 +26,9 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalarTen
 /-!
 # Scalar mates commute with the etale/pro-etale comparison
 
-This module contains the item statement and the canonical scalar and direct-image
-comparison helpers it uses. The helpers are specialized interfaces for the
-recorded tensor-pullback and direct-image comparison nodes.
+This module contains the canonical scalar and direct-image comparison helpers used by
+`AlgebraicGeometry.ProEtale.etaleProEtale_scalar_mate`. The helpers are specialized
+interfaces for the tensor-pullback and direct-image comparison results.
 -/
 
 @[expose] public noncomputable section
@@ -58,9 +58,9 @@ private theorem counitIsoOnImage
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the reverse scalar/pullback
-comparison is the inverse scalar-adjunction mate of the exact pro-etale
-restriction/pullback square. It specializes `lem-weil-pbc-ringed-topoi-derived-tensor-pullback`.
+/-- The reverse scalar/pullback comparison is the inverse scalar-adjunction mate of the
+exact pro-etale restriction/pullback square. It specializes the derived tensor-pullback
+comparison for ringed topoi.
 Source: Stacks 07A4. -/
 def scalarPullbackReverseProEtale
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -74,9 +74,9 @@ def scalarPullbackReverseProEtale
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) a))).symm
     (TwoSquare.mk _ _ _ _ (leftDerivedUpperStarRestrictScalarsIso a f).hom))
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the reverse comparison
-on the etale site uses the actual exact restriction/pullback square. It specializes
-`lem-weil-pbc-ringed-topoi-derived-tensor-pullback`. Source: Stacks 07A4. -/
+/-- The reverse comparison on the etale site uses the actual exact restriction/pullback
+square. It specializes the derived tensor-pullback comparison for ringed topoi.
+Source: Stacks 07A4. -/
 def scalarPullbackReverseEtale
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -89,9 +89,8 @@ def scalarPullbackReverseEtale
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars X.smallEtaleTopology a))).symm
     (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom))
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the canonical tensor/pullback
-comparison is invertible for arbitrary ring maps. This is the constant-coefficient
-specialization of `lem-weil-pbc-ringed-topoi-derived-tensor-pullback`.
+/-- The canonical tensor/pullback comparison is invertible for arbitrary ring maps.
+This is the constant-coefficient case of the derived tensor-pullback comparison.
 Source: Stacks 07A4 and 0G7E. -/
 theorem scalarPullbackReverse_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -100,9 +99,8 @@ theorem scalarPullbackReverse_isIso
       IsIso (scalarPullbackReverseEtale a f) := by
   exact ⟨proEtaleScalarPullbackMate_isIso a f, etaleScalarPullbackMate_isIso a f⟩
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the specified forward
-pro-etale tensor/pullback isomorphism is the inverse of the actual scalar mate.
-It specializes `lem-weil-pbc-ringed-topoi-derived-tensor-pullback` and is not arbitrary.
+/-- The specified forward pro-etale tensor/pullback isomorphism is the inverse of the
+actual scalar mate.
 Source: Stacks 07A4. -/
 def scalarPullbackProEtaleIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -114,12 +112,8 @@ def scalarPullbackProEtaleIso
   haveI := (scalarPullbackReverse_isIso a f).1
   (asIso (scalarPullbackReverseProEtale a f)).symm
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the specified forward
-etale tensor/pullback isomorphism is the inverse of the actual scalar mate.
-It specializes `lem-weil-pbc-ringed-topoi-derived-tensor-pullback`.
-It reuses the published `AlgebraicGeometry.Etale.scalarPullbackIso`.
-The proved private comparison at the end of this file identifies this abbreviation
-with the original inverse-mate expression, preserving its canonical normalization.
+/-- The specified forward etale tensor/pullback isomorphism, the inverse of the actual
+scalar mate; it is `AlgebraicGeometry.Etale.scalarPullbackIso`.
 Source: Stacks 07A4. -/
 abbrev scalarPullbackEtaleIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -130,9 +124,8 @@ abbrev scalarPullbackEtaleIso
         pbcFixedScalarExtension X.smallEtaleTopology a :=
   Etale.scalarPullbackIso a f
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the canonical inverse-image
-square identifies exact termwise inverse images with their left derived functors.
-It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6. -/
+/-- The canonical inverse-image square identifies exact termwise inverse images with
+their left derived functors. Source: Stacks Tag 09A6. -/
 def directImageComparisonAmbientPullbackIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ⋙
@@ -148,9 +141,8 @@ def directImageComparisonAmbientPullbackIso
     Functor.isoWhiskerRight
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).symm _
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient site/direct-image
-comparison is the actual counit mate of the specified inverse-image square.
-It specializes `theorem-comparison-direct-images`. Source: Stacks Tag 09A6. -/
+/-- The ambient site/direct-image comparison is the actual counit mate of the specified
+inverse-image square. Source: Stacks Tag 09A6. -/
 def directImageComparisonAmbient
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R(Etale.lowerStar (ModuleCat.{u + 1} A) f) ⋙
@@ -166,9 +158,8 @@ attribute [local irreducible] HasDerivedCategory.standard
   Functor.mapDerivedCategory Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.leftAdjoint Functor.rightAdjoint
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the ambient canonical
-comparison is invertible at every bounded-below input. It specializes
-`theorem-comparison-direct-images`. Source: Stacks Tag 09A6. -/
+/-- The ambient canonical comparison is invertible at every bounded-below input.
+Source: Stacks Tag 09A6. -/
 theorem directImageComparisonAmbient_isIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]
@@ -195,9 +186,8 @@ theorem directImageComparisonAmbient_isIso
 
 end AmbientComparisonProof
 
-/-- Item helper for `lem-sfb-etale-proetale-scalar-mate`: the inverse of beta is
-taken only at the specified bounded-below input. It specializes
-`theorem-comparison-direct-images`. Source: Stacks Tag 09A6. -/
+/-- The ambient canonical comparison as an isomorphism at a specified bounded-below input.
+Source: Stacks Tag 09A6. -/
 def directImageComparisonAmbientIso
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

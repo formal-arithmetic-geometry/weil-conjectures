@@ -44,22 +44,14 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Abelian varieties.
-
-An *abelian variety* over a field `K` is a group scheme over `K` which is proper, smooth and
+/-- An *abelian variety* over a field `K` is a group scheme over `K` which is proper, smooth and
 connected; its *dimension* is `AlgebraicGeometry.IsAbelianVariety.dim`, the Krull dimension of
-its underlying space.
-
-As blueprint `lemma-abelian-variety-commutative--1` records, that these are exactly the complete
-group varieties is `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral`. -/
+its underlying space. -/
 class IsAbelianVariety (A : Over (Spec (.of K))) : Prop
     extends IsProper A.hom, Smooth A.hom, ConnectedSpace A.left
 
-/-- The dimension of an abelian
-variety, that is, the Krull dimension of its underlying topological space, as a natural number.
-
-`AlgebraicGeometry.IsAbelianVariety.topologicalKrullDim_eq` says that this really is the Krull
-dimension: an abelian variety is nonempty and finite-dimensional. -/
+/-- The dimension of an abelian variety, that is, the Krull dimension of its underlying
+topological space, as a natural number. -/
 noncomputable def IsAbelianVariety.dim (A : Over (Spec (.of K))) [IsAbelianVariety A] : ℕ :=
   ((topologicalKrullDim A.left).unbotD 0).toNat
 

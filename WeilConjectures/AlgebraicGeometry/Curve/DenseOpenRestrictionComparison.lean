@@ -30,7 +30,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
+/-- For a dense open `U` of a curve, the surjectivity assertion for restriction in degree two
+holds for `F` if and only if it holds for the extension by zero `j_! j^* F`.
+Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

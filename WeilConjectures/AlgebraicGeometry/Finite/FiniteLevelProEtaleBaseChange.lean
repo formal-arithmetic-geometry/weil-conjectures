@@ -21,7 +21,7 @@ Tag 09C8, the finite-coefficient step in Tag 09C9.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.finiteLevelProEtaleBaseChange`:
-  the recorded construction or statement of this node.
+  finite-coefficient proper exchange is invertible for objects with a bounded-below etale origin.
 -/
 
 @[expose] public section
@@ -82,9 +82,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 
 include sq in
 /-- Finite coefficient identifications agree around the chosen square.
-Source: Stacks Tags 098T and 07A7. Proof: finite constant comparisons commute with composition by
-the finite-level coherence of profinite-coefficient-inverse-image. Apply it to both paths of sq and
-identify their composite scheme maps by sq.w. -/
+Source: Stacks Tags 098T and 07A7. -/
 theorem finiteCoefficientRingIso_coherent :
     HEq (proEtaleRingCompositeCoefficients g' f (finiteOriginFunctionRing Y Λ)
       (finiteOriginFunctionRing X Λ) (finiteOriginFunctionRing X' Λ)

@@ -142,13 +142,8 @@ noncomputable def centerIdeal [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType 
 variable [IsAlgClosed k] [CharZero k] [LocallyOfFiniteType G.hom]
 
 /-- The centre `Z(G)` of a group scheme `G` locally of finite type over an algebraically closed
-field `k` of characteristic zero, a closed subgroup scheme of `G`. It is constructed as the
-intersection of the centralizers `C_G(g)` of the rational points `g` of `G`, so its `X`-points are
-the `X`-points of `G` commuting with all rational points (`exists_comp_centerι_iff`). This is the
-centre of `G` because `G(k)` is schematically dense in `G`: `G` is reduced (Cartier, `k` of
-characteristic zero) and its rational points are its closed points, which are dense (`k`
-algebraically closed, `G` locally of finite type). Over a general field this intersection can be
-strictly larger than the centre, hence the hypotheses. -/
+field `k` of characteristic zero, a closed subgroup scheme of `G`: the intersection of the
+centralizers `C_G(g)` of the rational points `g` of `G`. -/
 noncomputable def center : Over (Spec (.of k)) :=
   Over.mk ((centerIdeal G).subschemeι ≫ G.hom)
 

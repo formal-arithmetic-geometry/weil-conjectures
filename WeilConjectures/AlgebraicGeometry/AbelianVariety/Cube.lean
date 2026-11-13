@@ -90,12 +90,7 @@ private lemma toSkeleton_overPullback_one (A : Over (Spec (.of K))) [GrpObj A]
 Let `A` be an abelian variety over a field `K` and let `L` be an invertible `𝒪_A`-module. For
 `1 ≤ i₁ < ⋯ < i_t ≤ 3` let `m_{i₁…i_t} : A × A × A ⟶ A` be the partial sum map
 `(x₁, x₂, x₃) ↦ x_{i₁} + ⋯ + x_{i_t}`. Then
-`m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`.
-
-The proof applies the general theorem of the cube
-`AlgebraicGeometry.nonempty_iso_of_nonempty_iso_overPullback_slices` with `X = Y = Z = A` and the
-unit as rational point: on each of the slices `{e} × A × A`, `A × {e} × A` and `A × A × {e}` both
-sides restrict to `n₁₂^* L ⊗ n₁^* L ⊗ n₂^* L`, since `e^* L` is trivial. -/
+`m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`. -/
 theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
@@ -140,17 +135,8 @@ private lemma toSkeleton_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVar
   simpa only [toSkeleton_overPullback_tensorObj, toSkeleton_overPullback_comp, comp_mul,
     lift_fst_assoc, lift_fst, lift_snd] using this
 
-/-- Pullback of symmetric modules under
-multiplication by `n`.
-
-Let `A` be an abelian variety over `K` and let `N` be an invertible `𝒪_A`-module which is
-*symmetric*, that is `[-1]^* N ≅ N`. Then `[n]^* N ≅ N^{⊗ n²}` for every `n`.
-
-The proof compares isomorphism classes in the commutative monoid `Skeleton A.left.Modules`, in which
-the class of `N` is a unit since `N` is invertible. Pulling back the theorem of the cube
-`AlgebraicGeometry.nonempty_iso_cube` along `x ↦ (x, x, -x)` gives `[2]^* N ≅ N^{⊗ 4}`, and along `x
-↦ (x, x, [n] x)` gives `[n + 2]^* N ⊗ N^{⊗ 2} ⊗ [n]^* N ≅ [2]^* N ⊗ ([n + 1]^* N)^{⊗ 2}`, from which
-the claim follows by induction on `n`. -/
+/-- Let `A` be an abelian variety over `K` and let `N` be an invertible `𝒪_A`-module which is
+*symmetric*, that is `[-1]^* N ≅ N`. Then `[n]^* N ≅ N^{⊗ n²}` for every `n`. -/
 theorem nonempty_iso_overPullback_npow_id (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] (N : A.left.Modules) [N.IsInvertible]
     (hsymm : Nonempty (overPullback ι[A] N ≅ N)) (n : ℕ) :

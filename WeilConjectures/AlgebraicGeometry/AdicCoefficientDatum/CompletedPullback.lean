@@ -21,8 +21,7 @@ Source: Stacks Tag 099N.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPull`
 -/
 
 @[expose] public noncomputable section
@@ -62,7 +61,7 @@ theorem AdicCoefficientDatum.towerComplete_iff_intrinsic (T : Scheme.{t})
         (h r a ha _ _)
 
 /-- Completed pullback is precisely Rlim of tower pullback of the strict reduction tower.
-The formula extends to ambient inputs; its restriction is the completed pullback of the node.
+The formula extends to ambient inputs.
 Source: Stacks 099N. -/
 def AdicCoefficientDatum.completedPull {U V : Scheme.{t}} (f : U ⟶ V) :
     d.derived V ⥤ d.derived U :=

@@ -21,8 +21,7 @@ twisting sheaves `𝒪(m)`, for the `k`-vector space structure
   and the trace `Hᵈ(ℙᵈ_k, 𝒪(-d-1)) ≅ k`.
 
 They are the specialisations to `A = k` of the isomorphisms over a commutative ring `A` of
-`WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceSerrePairing`. The existence
-statements of `lemma-coherent-base-change-invertible-sheaves--1` follow.
+`WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceSerrePairing`.
 
 ## Main definitions and statements
 

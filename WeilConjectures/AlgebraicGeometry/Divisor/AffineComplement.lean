@@ -51,13 +51,7 @@ namespace AlgebraicGeometry
 
 /-- **Algebraic Hartogs lemma.** Let `X` be an affine integral scheme whose ring of global
 sections is a UFD, and let `W ⊆ X` be a nonempty affine open which meets the zero locus of every
-prime element of `Γ(X, ⊤)`. Then `W = X`.
-
-The restriction `Γ(X, ⊤) → Γ(X, W)` is injective since `X` is integral. It is surjective:
-write the image of a section over `W` in the function field as a reduced fraction `a / b`; a
-prime factor `π` of `b` vanishes at some point `y ∈ W`, and writing the germ at `y` as `c / d`
-with `d` a unit at `y` gives `a d = b c`, so `π ∣ a`, a contradiction. Hence the affine open `W`
-has the same ring of sections as `X`, so `W = X`. -/
+prime element of `Γ(X, ⊤)`. Then `W = X`. -/
 theorem Scheme.eq_top_of_isAffineOpen_of_not_le_basicOpen {X : Scheme.{u}} [IsAffine X]
     [IsIntegral X] [UniqueFactorizationMonoid Γ(X, ⊤)] {W : X.Opens} (hW : IsAffineOpen W)
     [Nonempty W] (h : ∀ π : Γ(X, ⊤), Prime π → ¬W ≤ X.basicOpen π) : W = ⊤ := by

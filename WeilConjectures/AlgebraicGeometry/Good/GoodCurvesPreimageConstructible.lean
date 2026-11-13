@@ -166,10 +166,7 @@ private theorem finite_support
       rw [he]
       exact h k.succ
 
-/-- A finite constant module has constructible cohomology in every degree.
-
-This helper is shared by the constant-shriek proof and is stated publicly so
-that the latter does not duplicate the same theorem in its own module. -/
+/-- A finite constant module has constructible cohomology in every degree. -/
 theorem constantSingle_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
     (M : ModuleCat.{u + 1} Λ) [Finite M] :

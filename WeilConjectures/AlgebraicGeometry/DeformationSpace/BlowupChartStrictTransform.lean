@@ -20,8 +20,7 @@ is the spectrum of the extended Rees algebra `R[t, I t⁻¹]`
 
 `Spec R[t, I t⁻¹] ≅ Bl_{V(I) × 0} (Spec R × 𝔸¹) ∖ (strict transform of Spec R × 0)`,
 
-which is the blow-up description of the deformation to the normal cone in blueprint
-`definition-deformation-normal-bundle`.
+which is the blow-up description of the deformation to the normal cone.
 
 The two inclusions:
 - on `D₊(t·X) = Spec R[t, I t⁻¹]`, if `t` vanishes at a point then so does `x = (x t⁻¹)·t` for

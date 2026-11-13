@@ -28,8 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A separated finite-type scheme over a field of dimension at most one admits a closed
 immersion into an open subscheme of a finite-dimensional projective space over that field.
-Here `ℙᴺ_k = Proj(k[x₀, …, x_N])` is `ℙ(ULift (Fin (N + 1)); Spec k)`, the projective space
-of `def-pc-projective-morphism` (`IsHProjective`).
+Here `ℙᴺ_k = Proj(k[x₀, …, x_N])` is `ℙ(ULift (Fin (N + 1)); Spec k)`.
 Source: Stacks Project, Varieties, Lemma 0A25. -/
 theorem exists_closed_open_immersion_projectiveSpace_of_dim_le_one
     {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))

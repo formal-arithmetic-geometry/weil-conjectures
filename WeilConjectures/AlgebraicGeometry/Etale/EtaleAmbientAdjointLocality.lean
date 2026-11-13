@@ -217,17 +217,11 @@ noncomputable def etaleAmbientLeftComparison
     rightDerivedLowerShriekOfCompactificationIso A (c.comp (d.ofComp c)) d
 
 /-- For finite commutative coefficients the ordinary ambient right adjoint localizes along
-separated etale maps of finite type. The isomorphism is natural in every unbounded input K.
-Here `F` and `G`, with the supplied adjunctions, denote the right adjoints f^× and (fu)^×;
-quantifying over them avoids imposing a choice of Brown right adjoint. Compactifications
-are arbitrary. Their sources are Noetherian as finite-type schemes over the Noetherian base.
-The canonical isomorphism is obtained from the Hom bijections in the proof below, by sending
-the identity to its image; its inverse is obtained from the inverse bijections. In particular
-its adjoint transpose is the inverse compact-support composition comparison followed by
-the sum-extension counit and then the compact-support counit. The displayed equation records
-this normalization in Lean. It holds for every graph-normalized comparison family `N` from
-lemma-affine-space-etale-localization--5, which has a recorded existence theorem. Thus `N`
-is not an additional hypothesis or an unconstrained choice of comparison. -/
+separated etale maps of finite type: for arbitrary right adjoints `F` and `G` of the
+compact-support functors of `f` and `u ≫ f`, there is a unique natural isomorphism
+`F ⋙ u^* ≅ G` whose adjoint transpose is, for every comparison family `N` of type
+`EtaleCompactSupportNormalization`, the inverse compact-support composition comparison followed
+by the sum-extension counit and the compact-support counit. -/
 theorem existsUnique_etaleAmbientAdjointLocalityIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S)

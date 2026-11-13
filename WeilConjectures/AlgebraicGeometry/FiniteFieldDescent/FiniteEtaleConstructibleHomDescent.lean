@@ -172,13 +172,9 @@ theorem finiteEtaleConstructibleHomContinuity
   sorry
 
 /-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
-descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
-Proof steps: (1) finite intermediate fields give a filtered affine finite-etale system; (2) bounded
-finite-flat constructible models and their differentials descend simultaneously; (3) internal-Hom
-and derived-cohomology continuity gives finite-stage representatives; (4) injectivity of that
-continuity gives eventual equality of morphisms; (5) the concrete `FiniteStageHomSystem` has
-objects the finite-stage Hom sets, transitions `finiteStageHomTransition`, and legs
-`finiteStageHomLeg`, and its cocone is colimiting. Source: Stacks Lemma 09YU (3). -/
+descent of morphisms, and eventual equality; the last says that the cocone of
+`FiniteStageHomSystem` (finite-stage Hom sets, transitions `finiteStageHomTransition`, legs
+`finiteStageHomLeg`) is colimiting. Source: Stacks Lemma 09YU (3). -/
 theorem finiteEtaleConstructibleHomDescent
     {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
     [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]

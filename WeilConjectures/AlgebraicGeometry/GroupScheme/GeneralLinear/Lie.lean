@@ -486,12 +486,7 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
 namespace RationalHom
 
 /-- For a reduced group scheme `G` locally of finite type over an algebraically closed field, a
-subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers.
-
-The condition `r(g) U ⊆ U` is cut out by the matrix coefficients `g ↦ l(r(g) w)`, `U ≤ ker l`,
-`w ∈ U`, which are functions on `G`. They vanish at the `k`-points, so they vanish on the reduced
-scheme `G` (`AlgebraicGeometry.eq_zero_of_forall_appTop_eq_zero`), and `r(g)` preserves
-`U ⊗ k[ε]` for every `g ∈ G(k[ε])`. -/
+subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers. -/
 theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g)))
@@ -541,15 +536,7 @@ theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
 
 /-- Over an algebraically closed field of characteristic zero, a subspace stable under the
 differential of a rational representation of a connected group scheme `G` locally of finite type
-is stable under `G(k)`.
-
-It suffices that the matrix coefficients `f = l(r(·) w)`, `U ≤ ker l`, `w ∈ U`, vanish on `G`.
-On an affine open `Spec A` around the identity `e`, the invariant derivation `D_X` of a tangent
-vector `X` is the infinitesimal right translation by `1 + εX`
-(`AlgebraicGeometry.GrpObj.exists_algHom_specMap_comp_eq_mul`), so
-`D_X l(r(·) w) = l(r(·) dr(X) w)` and these functions form a set stable under all `D_X`, vanishing
-at `e`. By Cartier's lemma (`AlgHom.mem_iInf_pow_ker_of_forall_exists_derivation`) they vanish
-in the local ring at `e`, hence on the irreducible reduced scheme `G`. -/
+is stable under `G(k)`. -/
 theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)))

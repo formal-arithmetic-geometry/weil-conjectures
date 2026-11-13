@@ -51,7 +51,7 @@ variable {O : Type (u + 1)} [CommRing O] {t : O}
     DerivedCategory (strictEtaleLevel X O t n)}
   (adjN : ∀ n : ℕ, S.levelFunctor n ⊣ g n)
 
-/-- The six Hom bijections in the node, in their specified order. The middle bijection
+/-- The six Hom bijections, in their specified order. The middle bijection
 precomposes with the inverse of the canonical left-extension comparison.
 Source: Zheng, (5.16.2) and Lemma 5.22. -/
 def strictEtaleEvaluationHomChain (n : ℕ)

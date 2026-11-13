@@ -133,10 +133,8 @@ private theorem finiteFreeDirectImageTower {Z W : Scheme.{u}} (q : Z ⟶ W)
 
 /-- Finite-free scalar change commutes canonically with ordinary unbounded derived
 pushforward, as an isomorphism of exact functors, with input-shift, identity and tower
-coherence. All equalities take place in the enlarged coefficient module category.
-The existential scalar models only present the recorded universal derived functors;
-their ordinary tensors, derived counits, units, adjunctions and associators are normalized.
-In particular neither a balancing isomorphism nor a shift structure is an extra hypothesis.
+coherence. All equalities take place in the enlarged coefficient module category; neither a
+balancing isomorphism nor a shift structure is an extra hypothesis.
 
 Source: Stacks Tags 0B56 and 0944. -/
 theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :

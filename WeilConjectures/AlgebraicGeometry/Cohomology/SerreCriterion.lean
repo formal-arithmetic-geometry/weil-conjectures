@@ -72,13 +72,7 @@ theorem surjective_subschemeι_appTop_of_subsingleton_H_one (J : X.IdealSheafDat
 
 /-- **Reduction to ideal sheaves of finite type.** Let `X` be quasi-compact and
 quasi-separated, and suppose that `Γ(X, 𝒪_X) → Γ(V(K), 𝒪_{V(K)})` is surjective for every ideal
-sheaf `K` of finite type. Then it is surjective for every quasi-coherent ideal sheaf `J`.
-
-A section `s` over `V(J)` lifts to sections `e a` of `𝒪_X` over the members `U a` of a finite
-affine cover. The differences `e a - e b` are sections of `J` over the quasi-compact opens
-`U a ⊓ U b`, so they are sections of a single finite-type subsheaf `K ≤ J`. Modulo `K` the
-`e a` glue to a section over `V(K)`, which lifts to a global function `f`; then `f` restricts to
-`s` on `V(J)`, since `f - e a` is a section of `K ≤ J` over `U a`. -/
+sheaf `K` of finite type. Then it is surjective for every quasi-coherent ideal sheaf `J`. -/
 theorem surjective_subschemeι_appTop_of_ofFiniteType [CompactSpace X] [QuasiSeparatedSpace X]
     (h : ∀ K : X.IdealSheafData, K.ofFiniteType → Function.Surjective K.subschemeι.appTop)
     (J : X.IdealSheafData) : Function.Surjective J.subschemeι.appTop := by
@@ -160,12 +154,7 @@ lemma Scheme.mem_radical_span_singleton_of_basicOpen_le [CompactSpace X]
 
 /-- Let `Y` be a quasi-compact quasi-separated scheme along all of whose closed immersions global
 functions lift. If the basic opens `Y_{f i}`, `i ∈ s`, cover `Y`, then the `f i` generate the unit
-ideal of `Γ(Y, 𝒪_Y)`.
-
-By induction on `s`: the remaining functions cover the closed subscheme `V(f i₀)`, so by
-induction they generate the unit ideal there; lifting a relation `1 = ∑ cᵢ fᵢ` from `V(f i₀)`
-to `Y` leaves an error term `h` vanishing on `V(f i₀)`, hence with `Y_h ⊆ Y_{f i₀}`, so that a
-power of `h` is a multiple of `f i₀`. -/
+ideal of `Γ(Y, 𝒪_Y)`. -/
 theorem Scheme.span_eq_top_of_forall_mem_basicOpen {ι : Type*} (s : Finset ι) :
     ∀ (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y],
       (∀ {Z : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i], Function.Surjective i.appTop) →

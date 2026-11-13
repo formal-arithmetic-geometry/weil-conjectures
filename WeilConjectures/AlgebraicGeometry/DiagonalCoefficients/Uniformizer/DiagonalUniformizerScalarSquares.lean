@@ -13,8 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.Diagon
 
 /-! # Perfect uniformizer reduction and direct image
 
-This repair restores the quarantined module and re-applies the completed finite-free
-rank-one comparison proof against the current sheaf-dag dependency snapshot.
 -/
 
 @[expose] public noncomputable section

@@ -268,9 +268,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec
 
 /-- **`C₁` for `𝐅_n`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 2`, where `𝐅_n` is the constant
-sheaf `Λ/nΛ` and `Hᵠ` is the cohomology of its underlying abelian sheaf. This is the
-cohomological dimension bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`,
-the constant sheaf being killed by `n`. -/
+sheaf `Λ/nΛ` and `Hᵠ` is the cohomology of its underlying abelian sheaf. -/
 theorem subsingleton_sheafH_constantModSheaf_of_two_lt [IsCurve f] [Smooth f] [ConnectedSpace C]
     (n : ℕ) [Fact n.Prime] (q : ℕ) (hq : 2 < q) :
     Subsingleton (Sheaf.H
@@ -280,9 +278,7 @@ theorem subsingleton_sheafH_constantModSheaf_of_two_lt [IsCurve f] [Smooth f] [C
     (Etale.isTorsion_constantModSheaf Λ C (Fact.out : n.Prime).pos) q hq
 
 /-- **`C₂` for `𝐅_n`.** Let `C` be a smooth affine connected curve over an algebraically closed
-field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 1`. This is the cohomological dimension
-bound `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`, the constant sheaf
-being killed by `n`. -/
+field `k` and `n` a prime. Then `Hᵠ(C, 𝐅_n) = 0` for `q > 1`. -/
 theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine [IsCurve f] [Smooth f]
     [ConnectedSpace C] [IsAffine C] (n : ℕ) [Fact n.Prime] (q : ℕ) (hq : 1 < q) :
     Subsingleton (Sheaf.H
@@ -292,10 +288,9 @@ theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_isAffine [IsCurve f] [
     (Etale.isTorsion_constantModSheaf Λ C (Fact.out : n.Prime).pos) q hq
 
 /-- **`C₃` for `𝐅_p`.** Let `k` be algebraically closed of characteristic `p > 0` and `C` a
-smooth separated connected curve over `k`. Then `Hᵠ(C, 𝐅_p) = 0` for `q > 1`: by the
-Artin–Schreier sequence `0 → 𝐅_p → 𝒪_C → 𝒪_C → 0` and the surjectivity of `F - 1`, the
-`p`-cohomological dimension of `C` is at most one. The `p`-primary hypothesis of the field
-`C₃` of `AlgebraicGeometry.IsCurve.Assertions` holds automatically for `𝐅_p` and is omitted. -/
+smooth separated connected curve over `k`. Then `Hᵠ(C, 𝐅_p) = 0` for `q > 1`. The `p`-primary
+hypothesis of the field `C₃` of `AlgebraicGeometry.IsCurve.Assertions` holds automatically
+for `𝐅_p`. -/
 theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smooth f]
     [ConnectedSpace C] (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (hq : 1 < q) :
     Subsingleton (Sheaf.H
@@ -310,8 +305,7 @@ theorem subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP [IsCurve f] [Smo
 
 /-- **`C₄` for `𝐅_r`.** Let `C` be a smooth separated connected curve over an algebraically
 closed field `k` and `r` a prime different from `char k`. If `Λ/rΛ` is finite, then
-`Hᵠ(C, 𝐅_r)` is finite for every `q`: `C` is proper or affine, and the
-groups are computed by the Kummer sequence. The torsion hypothesis of the field `C₄` of
+`Hᵠ(C, 𝐅_r)` is finite for every `q`. The torsion hypothesis of the field `C₄` of
 `AlgebraicGeometry.IsCurve.Assertions` is replaced by `(r : k) ≠ 0`. -/
 theorem finite_sheafH_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] [ConnectedSpace C]
     (r : ℕ) [Fact r.Prime] (hr : (r : k) ≠ 0)
@@ -381,9 +375,7 @@ theorem finite_sheafH_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] [Connec
 
 /-- **`C₅` for `𝐅_r`.** Let `C` be a smooth proper connected curve over an algebraically closed
 field `k` and `r` an arbitrary prime. If `Λ/rΛ` is finite, then `Hᵠ(C, 𝐅_r)` is finite for
-every `q`: for `r ≠ char k` by the curve estimates, and for
-`r = char k = p` by the Artin–Schreier sequence, which identifies `H¹(C, 𝐅_p)` with the
-Frobenius-fixed part of `H¹(C, 𝒪_C)` and kills the higher groups. -/
+every `q`. -/
 theorem finite_sheafH_constantModSheaf_of_isProper [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (r : ℕ) [Fact r.Prime] [Finite (Λ ⧸ (Ideal.span {(r : Λ)} : Ideal Λ))]
     (q : ℕ) :
@@ -480,10 +472,7 @@ v          v
 Spec k' -ι-> Spec k
 ```
 
-the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for every `q`. For `Λ = ℤ` and
-the standard square this is `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`. The
-torsion hypothesis of the field `C₆` of `AlgebraicGeometry.IsCurve.Assertions` is replaced by
-`(r : k) ≠ 0`. -/
+the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for every `q`. -/
 theorem bijective_cohomologyMap_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f]
     [ConnectedSpace C] (r : ℕ) [Fact r.Prime] (hr : (r : k) ≠ 0) (k' : Type u) [Field k']
     [IsAlgClosed k'] {C' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
@@ -528,8 +517,7 @@ v          v
 Spec k' -ι-> Spec k
 ```
 
-the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for every `q`. For `r = char k`
-this is the invariance of the Frobenius-fixed part of `H¹(C, 𝒪_C)` under the extension `k'/k`. -/
+the pullback map `Hᵠ(C, 𝐅_r) ⟶ Hᵠ(C', ι'^* 𝐅_r)` is bijective for every `q`. -/
 theorem bijective_cohomologyMap_constantModSheaf_of_isProper [IsCurve f] [Smooth f]
     [ConnectedSpace C] [IsProper f] (r : ℕ) [Fact r.Prime] (k' : Type u) [Field k']
     [IsAlgClosed k'] {C' : Scheme.{u}} {ι : Spec (.of k') ⟶ Spec (.of k)}
@@ -626,17 +614,11 @@ algebraically closed field `k` and `n` a prime. The constant sheaf `𝐅_n` (rea
 * `C₁` and `C₈`;
 * `C₂` when `C` is affine, `C₅` and `C₇` when `C` is proper;
 * `C₄` and `C₆` when `n ≠ char k`, the finiteness in `C₄` and `C₅` when `Λ/nΛ` is finite;
-* `C₃` when `n = char k` (part (b));
+* `C₃` when `n = char k`;
 
 each in the form of the corresponding field of `AlgebraicGeometry.IsCurve.Assertions`, with the
 coefficient hypotheses specialised to `𝐅_n` as in the lemmas above. The maps in `C₆`, `C₇`,
-`C₈` are the pullback maps `AlgebraicGeometry.Etale.cohomologyMap` (part (c)).
-
-Only the assertions are stated here; the explicit groups of part (a) are the curve estimates
-`AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_zero_constantZMod`,
-`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one` and
-`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_two`, and their invariance
-under algebraically closed extension is `AlgebraicGeometry.bijective_cohomologyMap_constantZMod`. -/
+`C₈` are the pullback maps `AlgebraicGeometry.Etale.cohomologyMap`. -/
 theorem constantModSheaf_curveCalculations [IsCurve f] [Smooth f] [ConnectedSpace C] (n : ℕ)
     [Fact n.Prime] :
     let F := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
@@ -750,8 +732,7 @@ algebraically closed, `C` a smooth separated `k`-scheme of finite type of dimens
 one (not necessarily connected) and `ℓ` a prime different from `char k`. Then the constant sheaf
 `𝐅_ℓ` (read over `Λ` as `Λ/ℓΛ`, assumed finite) satisfies all eight assertions
 `AlgebraicGeometry.IsCurve.Assertions`; their maps are the pullback maps
-`AlgebraicGeometry.Etale.cohomologyMap`. The proof goes through the Kummer sequence, the
-compactification of `C` and purity for the boundary points. -/
+`AlgebraicGeometry.Etale.cohomologyMap`. -/
 theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ) [Fact ℓ.Prime]
     (hℓ : (ℓ : k) ≠ 0) [Finite (Λ ⧸ (Ideal.span {(ℓ : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C ℓ) :=
@@ -763,11 +744,7 @@ theorem assertions_constantModSheaf_of_ne_zero [IsCurve f] [Smooth f] (ℓ : ℕ
 algebraically closed of characteristic `p > 0` and `C` a smooth separated `k`-scheme of finite
 type of dimension at most one (not necessarily connected). Then the constant sheaf `𝐅_p` (read
 over `Λ` as `Λ/pΛ`, assumed finite) satisfies all eight assertions
-`AlgebraicGeometry.IsCurve.Assertions`
-(`C₄` and `C₆` hold since their torsion hypothesis forces the sheaf to vanish). The proof goes
-through the Artin–Schreier sequence `0 → 𝐅_p → 𝒪_C → 𝒪_C → 0`; for proper `C` the invariance
-`C₇` comes from that of the kernel of `F - 1` on `H¹(C, 𝒪_C)` (this description of the map is
-not stated). -/
+`AlgebraicGeometry.IsCurve.Assertions`. -/
 theorem assertions_constantModSheaf_of_charP [IsCurve f] [Smooth f] (p : ℕ) [Fact p.Prime]
     [CharP k p] [Finite (Λ ⧸ (Ideal.span {(p : Λ)} : Ideal Λ))] :
     IsCurve.Assertions Λ f (Etale.constantModSheaf Λ C p) :=

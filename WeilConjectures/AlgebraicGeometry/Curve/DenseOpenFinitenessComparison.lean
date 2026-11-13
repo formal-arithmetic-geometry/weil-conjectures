@@ -107,7 +107,10 @@ private theorem isZero_of_primary_invertible
   have hc : (p ^ m).Coprime n := (hp.coprime_iff_not_dvd.mpr hndiv).pow_left m
   exact (nsmul_eq_zero_iff_of_coprime hc).mp ⟨hm, hn⟩
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
+/-- For a dense open `U` of a curve and a constructible `F`, the two finiteness assertions
+(torsion of invertible order and proper case) pass from the extension by zero `j_! j^* F` to `F`,
+and conversely when `F` has torsion of invertible order or is `p`-primary for `p = char k`.
+Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_finiteness_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

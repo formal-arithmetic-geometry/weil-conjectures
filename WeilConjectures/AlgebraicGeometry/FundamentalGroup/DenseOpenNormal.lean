@@ -18,8 +18,7 @@ of `X` has integrally closed local domains as local rings again
 irreducible, so its restriction to `U`, a nonempty open subscheme of `P`, is irreducible, hence
 connected. Consequently the map `π₁(U) → π₁(X)` is surjective (SGA 1, Exp. V, Prop. 8.2;
 Stacks `0BQM`).
-This is part (1) of the blueprint lemma `theorem-purity-real-sheaves-curves`; the regular case is
-`WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen`.
+The regular case is `WeilConjectures.AlgebraicGeometry.FundamentalGroup.DenseOpen`.
 
 ## Main statements
 

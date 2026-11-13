@@ -138,10 +138,9 @@ lemma chartBlowupHom_blowupι_blowupMap (U : X.AffineZariskiSite) :
   rw [AffineBlowup.hom_toSpec_assoc, IsAffineOpen.isoSpec_inv_ι, CommRingCat.ofHom_hom,
     ι_eq_specMap_sectionsIso_hom_fromSpec X.coequifibered_toPolynomialPresheaf U]
 
-/-- Deformation space of a closed section. The
-image of the Rees model `D_I X` in the blow-up `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of
-the closure of the locus over the zero section off the center, i.e. of the strict transform of the
-zero section. -/
+/-- The image of the Rees model `D_I X` in the blow-up `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the
+complement of the closure of the locus over the zero section off the center, i.e. of the strict
+transform of the zero section. -/
 theorem range_deformationSpaceToBlowup :
     Set.range I.deformationSpaceToBlowup =
       (closure (I.deformationCenterSheaf.blowupMap ⁻¹'
@@ -203,8 +202,7 @@ theorem range_deformationSpaceToBlowup :
     refine ⟨colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor U d', ?_⟩
     exact (congr($(I.ι_deformationSpaceToBlowup U) d')).trans (hloc d')
 
-/-- Deformation space of a closed section. When
-the strict transform of the zero section is the closure of its open locus (e.g. under the
+/-- When the strict transform of the zero section is the closure of its open locus (e.g. under the
 quasi-compactness hypothesis below, which holds when `I` is of finite type by
 `IdealSheafData.quasiCompact_strictTransformOpen_ι`), the image of `D_I X` in the blow-up model
 is the complement of the strict transform. -/
@@ -317,8 +315,7 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.ofFiniteType) :
     rwa [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι, Set.inter_comm]
   infer_instance
 
-/-- Deformation space of a closed section. For an
-ideal sheaf `I` of finite type, the image of the Rees model `D_I X` in the blow-up model
+/-- For an ideal sheaf `I` of finite type, the image of the Rees model `D_I X` in the blow-up model
 `Bl_{V(I) × 0} (Spec_X 𝒪_X[t])` is the complement of the strict transform of the zero section
 `X × 0`. -/
 theorem range_deformationSpaceToBlowup_eq_compl_strictTransform_of_ofFiniteType
@@ -338,8 +335,7 @@ noncomputable def blowupModelOpen : I.deformationCenterSheaf.blowup.Opens :=
       ((I.deformationCenterSheaf.support : Set X.polynomialSpec)ᶜ ∩
         Set.range X.polynomialSpecZeroSection)))ᶜ, isClosed_closure.isOpen_compl⟩
 
-/-- Deformation space of a closed section. The
-Rees model `D_I X = Spec_X 𝒪_X[t, I t⁻¹]` is isomorphic to the open subscheme
+/-- The Rees model `D_I X = Spec_X 𝒪_X[t, I t⁻¹]` is isomorphic to the open subscheme
 `Bl_{V(I) × 0} (Spec_X 𝒪_X[t]) ∖ (closure of the locus over the zero section off the center)` of
 the blow-up model, compatibly with the maps to `Spec_X 𝒪_X[t]`
 (`deformationSpaceIsoBlowupModelOpen_hom_ι`, `deformationSpaceToBlowup_blowupMap`). -/

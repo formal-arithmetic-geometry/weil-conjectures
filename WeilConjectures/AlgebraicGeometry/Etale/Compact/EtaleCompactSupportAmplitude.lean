@@ -59,53 +59,7 @@ noncomputable def compactSupportAmplitudeCompactification
 /-- For a separated finite-type morphism of finite-type schemes over a field, the higher
 compact-support direct image of any etale module sheaf over a finite coefficient ring of
 invertible exponent vanishes above twice the dimension bound on the original geometric fibres.
-All derived functors are on the ordinary unbounded derived categories.
-
-Proof, following the node's nine steps:
-1. A field is Noetherian. By lem-weil-pbc-finite-type-over-noetherian, X and Y are
-Noetherian, and Y is quasi-separated by lem-weil-pbc-locally-noetherian-quasi-separated.
-Use theorem-nagata-s-compactification-theorem--1 to write f = j followed by r with j open and r
-proper. By proposition-construction-independence-rf-shriek and
-proposition-construction-independence-rf-shriek--7, Rf_! F is Rr_* j_! F. The bounded-below
-injective resolution from lem-weil-pbc-dplus-injective-representative is K-injective, so this
-computes the same object in the ordinary unbounded derived category.
-2. Fix y and its algebraic-closure geometric point. Set T equal to the compactified fibre,
-and U equal to the original fibre. By lem-weil-pbc-open-immersion-base-change the map U to T
-is open. Apply the derived clause of corollary-cohomology-geometric-fibres--2 and
-proposition-extension-zero-restriction-closed-subscheme--11 to identify the pulled-back direct image
-with the derived sections of G = j_! F on T. Exactness from situation-conventions and
-lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk identifies the q-th geometric
-stalk with H^q_A(T,G). By lem-weil-pbc-etale-module-cohomology-forget its underlying group is
-H^q(T,G_ab). No finiteness assumption is made on F.
-3. By lem-pc-proper-base-change, T is proper and finite type over the algebraic closure.
-Use lem-weil-pbc-reduced-induced-closed-subscheme for the reduced closure C of U in T.
-By lem-weil-pbc-closed-immersion-proper, C is proper and finite type. Its finitely many
-components have reduced induced integral scheme structures, by def-pc-integral-scheme. No
-factorization of nonreduced U through C is used.
-4. Each component C_a meets U: otherwise the finite closed union of the other components
-would contain U and hence its closure C. The nonempty open V_a = C_a intersect U has the
-same dimension as C_a by lem-sc-integral-locally-algebraic-opens-dimension. It is closed
-in U, so def-kun-topological-krull-dimension gives dim C_a = dim V_a <= dim U <= d.
-5. Each finite chain in nonempty C lies in one of its components, because its largest
-irreducible member lies in a component of the finite closed cover. Thus dim C <= d.
-If C is empty, U is empty, and lem-weil-pbc-extension-by-zero-stalks together with
-lemma-weil-pbc-geometric-stalk-conservative makes G_ab zero; all its cohomology vanishes.
-6. Extension-by-zero stalks vanish outside U, hence outside C. By
-proposition-extension-zero-restriction-closed-subscheme--5, G_ab is the closed direct image of H =
-i^-1 G_ab on C. A positive additive exponent of the finite ring kills every module. The additive
-exact inverse image of prop-weil-pbc-inverse-image-exact therefore makes H torsion, without a
-constructibility or finite-stalk assumption.
-7. The closed immersion is finite by lem-weil-pbc-closed-immersion-finite, and
-lemma-finite-morphisms-cohomology--2 identifies H^q(T,G_ab) with H^q(C,H).
-8. The algebraic closure is separably closed, so lemma-cohomological-dimension-base-field--1 gives
-torsion cohomological dimension zero. Apply lemma-uniform-bounds-pro-etale-affines to C of dimension
-e <= d to obtain torsion cohomological dimension at most 2e, in the sense of
-definition-cohomological-dimension. Thus H^q(C,H) vanishes for q > 2d. Retain the stated
-invertibility hypothesis; no stronger coefficient assumption is used.
-9. By lem-kun-support-geometric-point-independent the vanishing holds at every geometric
-point over y. Apply lemma-weil-pbc-geometric-stalk-conservative to the map from zero to the
-underlying abelian sheaf. A module sheaf with zero underlying sheaf is zero. Only the
-original fibre U and its closed support C were bounded, never the whole compactified fibre T. -/
+All derived functors are on the ordinary unbounded derived categories. -/
 theorem isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE
     (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]

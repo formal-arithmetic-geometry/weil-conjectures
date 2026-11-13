@@ -55,10 +55,8 @@ abbrev qlbarCharacter (ℓ : ℕ) [Fact ℓ.Prime] {G : Type v} [AddMonoid G]
     AddChar G (MonObj.Γ (Profinite.padicAlgClRingObj.{u} ℓ)) :=
   (Profinite.PadicAlgCl.constRingHom ℓ).toMonoidHom.compAddChar χ
 
-/-- The recorded degree-q sheaf of lemma-artin-schreier-character-sheaf--1,
-`ProEtale.condensedArtinSchreierSheafOf`, with its actual condensed Qbar coefficients
-and the character Psi composed with the field trace. This is an abbreviation, not a
-second Artin–Schreier construction. -/
+/-- The degree-`q` Artin–Schreier sheaf `ProEtale.condensedArtinSchreierSheafOf`, with its
+condensed `Q̄_ℓ` coefficients and the character `Ψ` composed with the field trace. -/
 abbrev qlbarTraceSheafOf (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
     (k : Type u) [Field k] [Fintype k] [Algebra (ZMod p) k]
     (Ψ : AddChar (ZMod p) (PadicAlgCl ℓ))

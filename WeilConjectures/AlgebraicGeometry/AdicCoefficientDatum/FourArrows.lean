@@ -22,8 +22,7 @@ part of this definition. All scalar extensions and pullbacks are uncompleted.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourArrows`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourArrows`
 -/
 
 @[expose] public section

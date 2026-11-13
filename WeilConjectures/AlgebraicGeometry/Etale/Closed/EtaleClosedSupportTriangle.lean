@@ -32,10 +32,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- For a complementary closed-open pair and a finite, possibly noncommutative ring,
 the closed adjunction counit and open adjunction unit extend to a natural distinguished
-triangle on the ordinary unbounded derived category. Module-valued etale sheaves encode
-left modules over the sheafification of the constant ring presheaf: a locally represented
-constant scalar acts locally, and the resulting sections glue uniquely. This is the same
-encoding as the recorded closed-ambient adjoint, without constructibility conditions.
+triangle on the ordinary unbounded derived category of module-valued etale sheaves.
 
 Source: Stacks Project,
 Tags 0A45 (support triangle), 0152 (boundary), 079P (injective-term replacement),

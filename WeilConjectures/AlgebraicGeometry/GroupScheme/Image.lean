@@ -79,12 +79,7 @@ closed subgroup scheme.
 Let `f : G ⟶ H` be a homomorphism of group schemes over a field `K`, with `G` proper and `H`
 separated and of finite type over `K`. Then the scheme-theoretic image `Z` of `f` is of finite
 type over `K`, the induced morphism `G ⟶ Z` is surjective, and `Z` is a closed subgroup scheme
-of `H`: it carries a group structure for which the closed immersion `Z ⟶ H` is a homomorphism.
-
-The morphism `f' : G ⟶ Z` is proper and dominant, hence surjective. It is
-scheme-theoretically dominant, and so is `f' × f'`, every `K`-scheme being flat over `K`. Since
-`(f' × f') ≫ (m_H ∘ (j × j)) = m_G ≫ f` factors through `j`, so does `m_H ∘ (j × j)`; similarly
-for the inverse, and the unit `e_H = e_G ≫ f` factors through `j`. -/
+of `H`: it carries a group structure for which the closed immersion `Z ⟶ H` is a homomorphism. -/
 theorem exists_isMonHom_imageι (f : G ⟶ H) [IsMonHom f] [IsProper G.hom] [IsSeparated H.hom]
     [LocallyOfFiniteType H.hom] :
     LocallyOfFiniteType (f.left.imageι ≫ H.hom) ∧ Surjective f.left.toImage ∧
@@ -139,11 +134,7 @@ closed subgroup scheme.
 Let `f : G ⟶ H` be a homomorphism of group schemes over a field `K`, with `G` proper and `H`
 separated and of finite type over `K`. Then the scheme-theoretic image `Z` of `f` is of finite
 type over `K` (locally of finite type and quasi-compact), the induced morphism `G ⟶ Z` is
-surjective, and `Z ⟶ H` is a closed subgroup scheme.
-
-This completes `AlgebraicGeometry.exists_isMonHom_imageι`: `Z` is quasi-compact as the image of
-the quasi-compact `G`, and the closed immersion `Z ⟶ H` is a monomorphism, hence injective on
-points. -/
+surjective, and `Z ⟶ H` is a closed subgroup scheme. -/
 theorem exists_isClosedSubgroupScheme_imageι (f : G ⟶ H) [IsMonHom f] [IsProper G.hom]
     [IsSeparated H.hom] [LocallyOfFiniteType H.hom] :
     LocallyOfFiniteType (f.left.imageι ≫ H.hom) ∧ QuasiCompact (f.left.imageι ≫ H.hom) ∧

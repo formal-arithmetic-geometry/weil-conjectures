@@ -192,7 +192,7 @@ def LisseFiniteHomRepresentative (E : Padic.FiniteCoefficientFields ℓ (PadicAl
       (Mod.extendScalars (padicSubfieldRingObjMap X ℓ F.property)).obj N)
 
 /-- A generating scalar-extension relation on finite-field Hom representatives.
-Its equivalence closure is precisely the relation in the colimit specified by the node. -/
+Its equivalence closure is the relation defining the Hom colimit. -/
 def LisseFiniteHomRelation (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))
     (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
     (a b : LisseFiniteHomRepresentative X ℓ E M N) : Prop :=
@@ -382,33 +382,7 @@ private lemma lisseFiniteHomToAlgCl_eq_iff
 /-- Lisse objects descend to a finite coefficient field, and the canonical Hom-colimit
 comparison is bijective, expressed on representatives: every target morphism is represented,
 and two representatives have equal images if and only if the scalar-extension equivalence
-identifies them. This includes well-definedness of the induced quotient map.
-
-Proof plan (the seven steps of the DAG node):
-1. Refine the local finite-free trivializations to a finite common affine pro-etale cover.
-Use site covering composition and qcqs permanence to make pair and triple overlaps
-quasi-compact. For the empty scheme use the empty cover; ranks may vary and may be zero.
-2. On each slice, morphisms between finite free module objects are matrices of coefficient
-sections. The relative coequalizer gives the usual balanced tensor; extension sends a
-matrix to its entrywise scalar extension. Its transitivity comparison is the canonical
-map c tensor (b tensor m) to cb tensor m, so the Hom transitions above are the specified ones.
-3. Apply lemma-descent-lisse-qbar-sheaves-finite--1 (2) to the finitely many transition
-entries and inverse entries. Directed finite subextensions give one E containing them all.
-Injectivity on quasi-compact overlaps descends inverse and cocycle equations. Do not impose
-an identity on the whole repeated-index overlap of a non-monomorphic covering arrow.
-4. Glue the finite free E_X-modules and their transition maps by
-lemma-descent-lisse-qbar-sheaves-finite--1, obtaining a lisse module L_E.
-5. Extend scalars and use the original trivializations to glue an isomorphism to L;
-lemma-descent-lisse-qbar-sheaves-finite--1 glues its inverse and verifies the two inverse equations.
-6. For M and N over E take a common finite trivializing cover. The matrices of a morphism
-between their algebraic-closure extensions have entries in one finite F containing E.
-Injectivity of coefficient sections descends the overlap equations; glue the F-linear maps.
-Their scalar extension is the original map by uniqueness of morphism gluing.
-7. If representatives at F and F' have the same image, pass to a finite common H.
-The difference matrices have zero algebraic-closure extension, hence vanish over H by
-injectivity on quasi-compact trivializing objects. Uniqueness of gluing gives equality
-at H, and thus the generated equivalence. Conversely each generating scalar extension
-preserves the image by tensor transitivity, and so does its equivalence closure. -/
+identifies them. This includes well-definedness of the induced quotient map. -/
 theorem coefficient_finite_descent_lisse [CompactSpace X] [QuasiSeparatedSpace X] :
     (∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ),
       IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) L →

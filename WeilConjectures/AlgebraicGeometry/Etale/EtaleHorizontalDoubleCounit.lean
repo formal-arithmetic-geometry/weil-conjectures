@@ -144,7 +144,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
   (adj' : rightDerivedLowerShriek (ModuleCat.{u + 1} A) h' ⊣ G')
 
 /-- Conjugate the specified inverse delta under the two normalized composite adjunctions.
-This is the map b of the node; the compositor formula is recorded below.
 Source: Stacks Project, Tags 0037 and 0DV0. -/
 noncomputable def etaleHorizontalDoubleCounitIso :
     G ⋙ (upperStar (ModuleCat.{u + 1} A) e').mapDerivedCategory ≅

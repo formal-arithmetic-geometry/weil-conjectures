@@ -65,13 +65,7 @@ theorem canonicalDiagonalUnit_universal (F : C ⥤ D) [F.Additive]
 K-injective computation, shift structure and triangulation.
 
 Source: Stacks Project, Tag 070G, and the library's canonical right derived
-functor.
-
-Proof of the fields: a quasi-isomorphism between K-injective complexes is a
-homotopy equivalence. The additive functor preserves that homotopy equivalence,
-so the K-injective localizer derives the functor. Its canonical unit is an
-isomorphism on K-injectives, which proves its universal property. The canonical
-right derived functor supplies the shift and triangulated structures. -/
+functor. -/
 def canonicalDiagonalRightDerived (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] : DiagonalRightDerived F where
   R := F.rightDerivedFunctor

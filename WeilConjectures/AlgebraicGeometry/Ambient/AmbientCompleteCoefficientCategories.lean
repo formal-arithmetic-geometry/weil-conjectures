@@ -1259,7 +1259,7 @@ def pbcRawQbarToComplete : pbcQbarCategory l Ω W ⥤
 /-- The constructible-to-ambient functor on the full nested Karoubi categories.
 Objects `((E,(K,p)),e)` are sent to `((E,(j K,j p)),J e)`; both projectors survive.
 The finite-stage aliases, normalized tensor systems, quotient representatives and
-this outer functor together render the coefficient categories in the node. -/
+this outer functor together give the complete coefficient categories. -/
 def pbcConstructibleCompleteQbarInclusion
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (W : Scheme.{u})

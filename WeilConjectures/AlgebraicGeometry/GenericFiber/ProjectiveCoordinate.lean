@@ -165,14 +165,11 @@ theorem finite_setOf_over_genericPoint {S : Scheme.{u}} [IrreducibleSpace S] {σ
     exact hr
   · exact hzz σ z
 
-/-- A projective coordinate complement is
-finite.
-
-Let `S` be integral and locally noetherian and let `p : Y ⟶ S` be proper. Let `Y = ⋃_α Y_α` be a
+/-- Let `S` be integral and locally noetherian and let `p : Y ⟶ S` be proper. Let `Y = ⋃_α Y_α` be a
 finite open cover with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`, and for each coordinate
-`t_{α r} : Y_α ⟶ 𝔸¹_S` let `V_{α r} ⊆ 𝔸¹_S` be a nonempty open. Then there is a nonempty open `W ⊆
-S` over which every closed subscheme `Z` of `Y` supported in the complement of `⋃_{α, r} t_{α
-r}⁻¹(V_{α r})` (for instance the reduced one) is finite over `W`. -/
+`t_{α r} : Y_α ⟶ 𝔸¹_S` let `V_{α r} ⊆ 𝔸¹_S` be a nonempty open. Then there is a nonempty open
+`W ⊆ S` over which every closed subscheme `Z` of `Y` supported in the complement of
+`⋃_{α, r} t_{α r}⁻¹(V_{α r})` (for instance the reduced one) is finite over `W`. -/
 theorem exists_isFinite_morphismRestrict_of_range_subset {S Y : Scheme.{u}} [IsIntegral S]
     [IsLocallyNoetherian S] (p : Y ⟶ S) [IsProper p] {ι : Type u} [Finite ι]
     (U : ι → Y.Opens) (hU : ⨆ α, U α = ⊤) (σ : ι → Type u) [∀ α, Finite (σ α)]

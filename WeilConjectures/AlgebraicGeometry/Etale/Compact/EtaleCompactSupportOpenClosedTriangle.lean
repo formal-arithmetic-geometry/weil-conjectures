@@ -32,24 +32,7 @@ with the specified compactification-dependent bounded-below pushforwards, viewed
 ambient derived category. Since `D⁺` is strictly full and triangulated, this also specifies
 its triangle in `D⁺`.
 
-Source: Stacks Project, Tag 0GKP.
-
-Proof plan: (1) The quasi-compact open `U` and closed complement `Z` are qcqs, by the
-quasi-separated affine-cover criterion and qcqs permanence. The open immersion is separated
-of finite type; the closed immersion is finite and proper, so its composite with `f` is
-separated of finite type as well. No finite presentation of the closed ideal is required.
-(2) Apply `proposition-extension-zero-restriction-closed-subscheme--8` to obtain the absolute
-triangle with terms `j_! j⁻¹ K`, `K`, `i_* i⁻¹ K`; the closed direct image is exact.
-(3) Apply `Rp_* j_f!` from `c_f`. Extension by zero is exact; derived direct image is
-triangulated, using enough injectives and the additive left exact module direct image.
-(4) Compactify `j` by `(j, id)` and `i` by `(id, i)`. Their compact-support functors are
-respectively `j_!` and `Ri_* = i_*`. The qcqs composition theorem identifies the outer
-terms after applying `Rf_!` with those for the independently specified `c_g` and `c_h`.
-Transport the arrows along these isomorphisms; invariance under triangle isomorphisms
-preserves distinguishedness.
-(5) The module-sheaf category is abelian. Apply the derived homology long exact sequence
-at every integer degree. Its connecting map is induced by the third arrow followed by
-the cohomology-shift isomorphism; exactness holds at all three positions. -/
+Source: Stacks Project, Tag 0GKP. -/
 theorem exists_compactSupport_openClosed_triangle
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U Z X Y : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

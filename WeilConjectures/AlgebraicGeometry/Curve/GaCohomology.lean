@@ -29,6 +29,12 @@ In characteristic `p`, the Artin–Schreier sequence `0 → ℤ/p → 𝔾ₐ �
 - `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gaSheaf`: `Hᵠ(C, 𝔾ₐ) = 0` for `q ≥ 2`.
 - `AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantZMod`: `Hᵠ(C, ℤ/p) = 0` for `q ≥ 2`,
   provided `℘` is surjective on `H¹(C, 𝔾ₐ)`; for `q ≥ 3` this is unconditional.
+
+## Implementation details
+
+The identification `Hᵠ(C_ét, 𝔾ₐ) ≅ Hᵠ(C, 𝒪_C)` with Zariski cohomology is not formalised here.
+For a proper smooth curve, the surjectivity of `℘` on the finite-dimensional `H¹(C, 𝒪_C)` is
+Lang–Steinberg; this also needs the comparison with Zariski cohomology and is not formalised.
 -/
 
 @[expose] public section
@@ -78,8 +84,7 @@ theorem subsingleton_sheafH_add_two_of_forall_isAffine (f : C ⟶ Spec (.of k)) 
 /-- **`𝔾ₐ` has no cohomology in degrees `≥ 2` on a curve.** For a curve `C` over an algebraically
 closed field, `Hᵠ(C_ét, 𝔾ₐ) = 0` for `q ≥ 2`, since `𝔾ₐ` is acyclic on affine schemes
 (`AlgebraicGeometry.Scheme.subsingleton_sheafH_gaSheaf_of_isAffine`). Neither smoothness nor
-connectedness is needed. The identification `Hᵠ(C_ét, 𝔾ₐ) ≅ Hᵠ(C, 𝒪_C)` with Zariski cohomology
-in the blueprint statement is not formalised here. -/
+connectedness is needed. -/
 theorem subsingleton_sheafH_gaSheaf (f : C ⟶ Spec (.of k)) [IsCurve f] (n : ℕ) :
     Subsingleton (Sheaf.H C.gaSheaf (n + 2)) :=
   subsingleton_sheafH_add_two_of_forall_isAffine f _ (fun W w _ _ q ↦
@@ -90,11 +95,7 @@ theorem subsingleton_sheafH_gaSheaf (f : C ⟶ Spec (.of k)) [IsCurve f] (n : �
 
 /-- **Artin–Schreier vanishing on a curve.** Let `C` be a curve over an algebraically closed
 field of characteristic `p`. Then `Hᵠ(C, ℤ/p) = 0` for `q ≥ 3`, and `H²(C, ℤ/p) = 0` as soon as
-the Artin–Schreier map `℘ = F - 1` is surjective on `H¹(C, 𝔾ₐ)`: in the long exact sequence of
-`0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` the groups `Hᵠ(C, 𝔾ₐ)` vanish for `q ≥ 2`
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_gaSheaf`). For a proper smooth curve the
-surjectivity of `℘` on the finite-dimensional `H¹(C, 𝒪_C)` is Lang–Steinberg; this part of the
-blueprint statement, which needs the comparison with Zariski cohomology, is not formalised here. -/
+the Artin–Schreier map `℘ = F - 1` is surjective on `H¹(C, 𝔾ₐ)`. -/
 theorem subsingleton_sheafH_constantZMod (f : C ⟶ Spec (.of k)) [IsCurve f] (p : ℕ)
     [Fact p.Prime] (hp : (p : Γ(C, ⊤)) = 0) (q : ℕ) (hq : 2 ≤ q)
     (h℘ : q = 2 → Function.Surjective (Sheaf.H.map (C.gaArtinSchreier p hp) 1)) :

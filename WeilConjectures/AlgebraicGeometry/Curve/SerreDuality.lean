@@ -56,6 +56,13 @@ degree of a principal divisor is zero.
 - `AlgebraicGeometry.Scheme.finsum_ord_eq_finrank` and
   `AlgebraicGeometry.Scheme.finsum_ord_eq_zero`: degrees of pulled back points and of principal
   divisors.
+
+## Implementation details
+
+The duality statements along a finite flat morphism `f : X ⟶ ℙ¹_k` assume `f` generically
+unramified, i.e. `k(X)/k(t)` separable: the isomorphism is induced by the trace of differentials,
+which vanishes for inseparable `f` (see `exists_isIso_pushforwardHomObjComparison_unit`). A
+separable `f` always exists (`exists_isFinite_flat_hom_projectiveLine`).
 -/
 
 @[expose] public section
@@ -212,10 +219,7 @@ noncomputable abbrev functionFieldCoordinates [IsIntegral X] (t : X.functionFiel
 set_option linter.unusedSectionVars false in
 /-- **Rational functions define morphisms to `ℙ¹`.** Let `X` be a proper smooth integral curve
 over `k` and `t ∈ k(X)` transcendental over `k`. Then there is a morphism `π_t : X ⟶ ℙ¹_k` over
-`k` with `π_t^* (x₁ / x₀) = t`: at the generic point it is the point `[1 : t]` of `ℙ¹(k(X))`.
-The local rings of `X` are discrete valuation rings or fields (`valuationRing_stalk`), so by the
-valuative criterion for the proper `ℙ¹_k` this point extends over every point of `X`
-(`exists_hom_of_valuationRing_stalk`). -/
+`k` with `π_t^* (x₁ / x₀) = t`. -/
 theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functionField)
     (_ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t) :
     ∃ π : X ⟶ ProjectiveLine (Spec (.of k)), π.IsOver (Spec (.of k)) ∧
@@ -235,9 +239,7 @@ theorem exists_hom_projectiveLine_of_functionField [IsIntegral X] (t : X.functio
 /-- **Rational functions define finite morphisms to `ℙ¹`.** Let `X` be a proper smooth integral
 curve over `k`, `t ∈ k(X)` transcendental over `k`, and `π_t : X ⟶ ℙ¹_k` the morphism of
 `exists_hom_projectiveLine_of_functionField`. Then `π_t` is finite, surjective and flat, of
-degree `[k(X) : k(t)]`. It is surjective since its image is closed and not a point; its fibres
-are finite, so it is finite; and `π_* 𝒪_X` is torsion free on the smooth curve `ℙ¹_k`, hence
-locally free, so `π_t` is flat. -/
+degree `[k(X) : k(t)]`. -/
 theorem isFinite_flat_of_hom_projectiveLine_of_functionField [IsIntegral X]
     (t : X.functionField) (ht : letI := (functionFieldRingHom k X).toAlgebra; Transcendental k t)
     (π : X ⟶ ProjectiveLine (Spec (.of k))) [π.IsOver (Spec (.of k))]
@@ -462,8 +464,7 @@ omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Separating functions give generically unramified morphisms.** Let `X` be a proper smooth
 integral curve over `k`, `t ∈ k(X)` with `dt ≠ 0` in `Ω[k(X)⁄k]`, and `π_t : X ⟶ ℙ¹_k` the
 morphism with `π_t^* (x₁ / x₀) = t`. Then the stalk map of `π_t` at the generic point, the field
-extension `k(t) ⊆ k(X)`, is formally unramified: `Ω[k(X)⁄k]` is spanned by `dt`
-(`finrank_kaehlerDifferential_functionField`), and `t` comes from `k(t)`. -/
+extension `k(t) ⊆ k(X)`, is formally unramified. -/
 theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
     (t : X.functionField)
     (ht : letI := ((X ↘ Spec (.of k)).appTop ≫
@@ -493,13 +494,7 @@ theorem formallyUnramified_stalkMap_genericPoint_of_functionField [IsIntegral X]
     (mem_range_stalkMap_genericPoint_of_functionField t π hπ)
 
 /-- **Finite flat morphisms to the projective line.** Every smooth proper curve `X` over `k` has
-a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. Each
-connected component of `X` is integral (`AlgebraicGeometry.IsRegular.irreducibleSpace`) of
-dimension one, so its function field has a transcendental element `t` with `dt ≠ 0`
-(`exists_transcendental_and_D_ne_zero`), and `π_t` is finite flat
-(`isFinite_flat_of_hom_projectiveLine_of_functionField`) and generically unramified
-(`formallyUnramified_stalkMap_genericPoint_of_functionField`); there are finitely many
-components, and the morphisms on the components glue. -/
+a finite flat morphism `X ⟶ ℙ¹_k` over `k`, unramified at the generic points of `X`. -/
 theorem exists_isFinite_flat_hom_projectiveLine :
     ∃ f : X ⟶ ProjectiveLine (Spec (.of k)), f.IsOver (Spec (.of k)) ∧ IsFinite f ∧ Flat f ∧
       LocallyOfFinitePresentation f ∧
@@ -633,14 +628,8 @@ variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
 /-- **Duality along a finite flat morphism to `ℙ¹`, comparison map.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. There is a trace map
 `τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that `f_* Hom(ℳ, Ω¹_{X/k}) ⟶ Hom(f_* ℳ, Ω¹_{ℙ¹_k/k})`,
-`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`. For `ℳ = 𝒪_X` this is the
-trace identification `exists_isIso_pushforwardHomObjComparison_unit`; the general case follows
-since `ℳ` is a direct summand of a free module of finite rank over the affine opens `f⁻¹V`
-(`Modules.isIso_pushforwardHomObjComparison_of_isIso_unit`).
-
-The hypothesis `hf` (`f` generically unramified, i.e. `k(X)/k(t)` separable) is not in the
-blueprint statement; it is needed since the trace of differentials vanishes for inseparable `f`,
-see `exists_isIso_pushforwardHomObjComparison_unit`. -/
+`φ ↦ τ ∘ f_* φ`, is an isomorphism for every finite locally free `ℳ`, provided `f` is generically
+unramified. -/
 theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
@@ -654,9 +643,7 @@ theorem exists_isIso_pushforwardHomObjComparison (f : X ⟶ ProjectiveLine (Spec
 /-- **Duality along a finite flat morphism to `ℙ¹`, sheaf-level.** Let `X` be a smooth curve
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ f_* Hom_{𝒪_X}(ℳ, Ω¹_{X/k})` as sheaves of modules on `ℙ¹_k`,
-naturally in finite locally free `ℳ`: the isomorphism `φ ↦ τ ∘ f_* φ` of
-`exists_isIso_pushforwardHomObjComparison`. The hypothesis `hf` (`f` generically unramified)
-is not in the blueprint statement; see `exists_isIso_pushforwardHomObjComparison_unit`. -/
+naturally in finite locally free `ℳ`, provided `f` is generically unramified. -/
 theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
@@ -681,16 +668,7 @@ theorem nonempty_homObj_pushforward_iso_pushforward_homObj (f : X ⟶ Projective
 /-- **Duality along a finite flat morphism to `ℙ¹`.** Let `X` be a smooth curve over `k` and
 `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`. Then
 `Hom_{𝒪_{ℙ¹}}(f_* ℳ, Ω¹_{ℙ¹_k/k}) ≅ H⁰(X, ℳᵛ ⊗ Ω¹_{X/k})`, naturally in finite locally free
-`ℳ`. Taking global sections in `nonempty_homObj_pushforward_iso_pushforward_homObj` gives
-`Hom(f_* ℳ, Ω¹_{ℙ¹}) ≅ H⁰(ℙ¹, f_* Hom(ℳ, Ω¹_{X/k})) = H⁰(X, Hom(ℳ, Ω¹_{X/k}))`
-(`Modules.pushforwardCompCohomologyFunctorZeroIso`), and `Hom(ℳ, Ω¹_{X/k}) ≅ ℳᵛ ⊗ Ω¹_{X/k}`
-since `Ω¹_{X/k}` is invertible (`Modules.dualTensorHomIso`).
-
-The hypothesis `hf` (`f` generically unramified, i.e. `k(X)/k(t)` separable) is not in the
-blueprint statement; it is needed since the isomorphism is induced by the trace of differentials,
-which vanishes for inseparable `f` (see `exists_isIso_pushforwardHomObjComparison_unit`). The
-blueprint's proof uses this separability too, and downstream a separable `f` is always chosen
-(`exists_isFinite_flat_hom_projectiveLine`). -/
+`ℳ`, provided `f` is generically unramified. -/
 theorem nonempty_homObj_pushforward_iso (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :
@@ -1134,8 +1112,7 @@ variable (k X) in
 include k in
 /-- **Principal divisors have degree zero.** For a nonzero rational function `f` on a proper
 smooth integral curve over an algebraically closed field `k`,
-`deg div(f) = ∑_x v_x(f) = 0`. For `f ∉ k` this is `div(f) = π_f^*([0] - [∞])` for the finite
-flat morphism `π_f : X ⟶ ℙ¹_k` of degree `d`, whose degree is `d - d = 0`. -/
+`deg div(f) = ∑_x v_x(f) = 0`. -/
 theorem finsum_ord_eq_zero [IsIntegral X] [IsLocallyNoetherian X] {f : X.functionField}
     (hf : f ≠ 0) : ∑ᶠ x : X, X.ord f x = 0 := by
   classical
@@ -1256,10 +1233,7 @@ variable [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
 
 /-- **Serre duality on a curve, `q = 1`.** On a smooth proper curve `X` over `k`, with
 `ω = Ω¹_{X/k}`, there is an isomorphism `H¹(X, ℳ)^∨ ≅ H⁰(X, ℳᵛ ⊗ ω)`, natural in finite locally
-free `ℳ`. Choose a finite flat `f : X ⟶ ℙ¹_k` (`exists_isFinite_flat_hom_projectiveLine`); then
-`H¹(X, ℳ) ≅ H¹(ℙ¹_k, f_* ℳ)` since `f` is affine, `H¹(ℙ¹_k, f_* ℳ)^∨ ≅ Hom(f_* ℳ, ω_{ℙ¹})` by
-duality on `ℙ¹_k` (`f_* ℳ` is finite locally free, hence coherent), and
-`Hom(f_* ℳ, ω_{ℙ¹}) ≅ H⁰(X, ℳᵛ ⊗ ω)` by duality along `f`. -/
+free `ℳ`. -/
 theorem nonempty_dual_H_one_iso :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k 1).op ⋙ ModuleCat.dualFunctor k ≅
@@ -1290,8 +1264,7 @@ theorem nonempty_dual_H_one_iso :
 
 /-- **Serre duality on a curve, `q = 0`.** On a smooth proper curve `X` over `k`, with
 `ω = Ω¹_{X/k}`, there is an isomorphism `H⁰(X, ℳ)^∨ ≅ H¹(X, ℳᵛ ⊗ ω)`, natural in finite locally
-free `ℳ`. Apply `nonempty_dual_H_one_iso` to `𝒩 = ℳᵛ ⊗ ω` and use `(ℳᵛ ⊗ ω)ᵛ ⊗ ω ≅ ℳ` (`ω` is
-invertible) to get `H¹(X, 𝒩)^∨ ≅ H⁰(X, ℳ)`; then dualise, `H¹(X, 𝒩)` being finite-dimensional. -/
+free `ℳ`. -/
 theorem nonempty_dual_H_zero_iso :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅

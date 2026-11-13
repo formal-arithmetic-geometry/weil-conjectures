@@ -19,8 +19,7 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Canonical top cohomology of derived module pullback
 
 Source: Stacks Project, derived.tex, Tag 05TC (dual upper-bound and truncation argument),
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the agent assembly
-specified in the DAG.
+cohomology.tex, Tags 06YJ and 0D5S.
 
 The comparison in degree n is the selected derived counit evaluated at the single
 complex in degree n. The pinned counit shift theorem identifies it with c[-n].
@@ -777,9 +776,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived pullback preserves the upper bound; H^0 of its normalized module comparison
 and the specified top comparison are isomorphisms. The top comparison is natural for
 all derived morphisms between upper-bounded objects and respects composition.
-The existential `hbound` records the first conclusion and supplies its proof to κ_h.
 Source: Stacks, derived.tex, Tags 05TC and 08J5, dual upper-bound/truncation argument;
-cohomology.tex, Tags 06YJ and 0D5S. Naturality and composition are the DAG assembly. -/
+cohomology.tex, Tags 06YJ and 0D5S. -/
 theorem derivedPullback_topCohomology {T S : Scheme.{u}} (g : T ⟶ S)
     (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) :
     ∃ hbound : ((derivedPullback g).obj C).IsLE n,

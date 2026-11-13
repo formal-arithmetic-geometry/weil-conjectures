@@ -126,7 +126,7 @@ noncomputable def specHomEquivKummerAlgebraHom :
   left_inv g := Subtype.ext ((homSpecEquiv T _).symm_apply_apply g.1)
   right_inv ψ := Subtype.ext ((homSpecEquiv T _).apply_symm_apply ψ.1)
 
-/-- Blueprint `def-pur-affine-line-datum` (torsor form): the Kummer cover `𝒯_f` of a global
+/-- The Kummer cover `𝒯_f` of a global
 function `f` on `Y` is the scheme of `n`-th roots of `f`: for `h : T ⟶ Y`, the morphisms
 `T ⟶ 𝒯_f` over `Y` correspond to the global functions `w` on `T` with `wⁿ = h^* f`, by
 `g ↦ g^* T₀`. -/

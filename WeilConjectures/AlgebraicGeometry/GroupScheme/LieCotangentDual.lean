@@ -89,14 +89,9 @@ theorem identityResidueEquiv_apply {k : Type u} [Field k] (G : Over (Spec (.of k
 
 /-- The Lie algebra is the dual of the cotangent space at the rational identity, with
 scalars transported by the residue-field identification `identityResidueEquiv`. No smoothness
-is required. It is the composite of `lieIdentityTangentEquiv`, the rational
-tangent-cotangent duality `exists_rationalPoint_tangent_cotangent_linearEquiv` (the
-epsilon coefficient of the induced stalk map), and transport of the values of a functional
-along `identityResidueEquiv`. Its defining formula is
-`lieCotangentDualEquiv_apply_toCotangent`.
+is required. Its defining formula is `lieCotangentDualEquiv_apply_toCotangent`.
 
-Source: Stacks Project, Tag
-0B2C. -/
+Source: Stacks Project, Tag 0B2C. -/
 def lieCotangentDualEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))
     letI : RingHomInvPair (identityResidueEquiv G).toRingHom

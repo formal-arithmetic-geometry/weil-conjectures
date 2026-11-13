@@ -185,14 +185,7 @@ theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy (L : Type u) [Field L]
 include f in
 /-- **`H²` of a split `ℓ`-primary sheaf.** Let `L` be a finite Galois extension of the function
 field `K` of a smooth affine connected curve `C`, and `N` a sheaf on the generic point `η` split by
-`L`, with finite `ℓ`-primary sections over `Spec L`. Then `H²(C, η_* N) = 0`.
-
-Let `K₀ ⊆ L` be the fixed field of a Sylow `ℓ`-subgroup, of degree `d` prime to `ℓ` over `K`, and
-`h : C' ⟶ C` the normalization of `C` in `K₀`, whose function field is `K₀`. The unit and the
-trace of `Spec K₀ ⟶ Spec K` compose to `d`, so `d` kills `H²(C, η_* N)`, as this class factors
-through `H²(C, h_* η'_* N|_{K₀}) = H²(C', η'_* N|_{K₀}) = 0`
-(`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy`); and a
-power of `ℓ` kills it too. -/
+`L`, with finite `ℓ`-primary sections over `Spec L`. Then `H²(C, η_* N) = 0`. -/
 theorem subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_isGalois (L : Type u) [Field L]
     [Algebra C.functionField L] [Algebra.Etale C.functionField L] [IsGalois C.functionField L]
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -537,14 +530,7 @@ lemma isAffine_fromSpecFunctionField_etale_obj [IsAffine C] [IsIntegral C] (W : 
 /-- **Second cohomology of a generic extension on an affine curve.** Let `C` be a smooth integral
 affine connected curve over an algebraically closed field `k`, with generic point
 `η : Spec k(C) ⟶ C`. Then `H²(C_ét, η_* M) = 0` for every torsion étale sheaf `M` on
-`Spec k(C)`.
-
-The sheaf `M` is the filtered union of its subsheaves split by a finite Galois extension of
-`k(C)` with finite sections over it (`AlgebraicGeometry.Scheme.SplitFamily`), so `η_* M` is the
-filtered union of their pushforwards, and cohomology commutes with filtered colimits on the
-quasi-compact quasi-separated scheme `C`. For each of them
-`AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_two_lowerStar_of_isSplitBy_of_finite`
-applies. -/
+`Spec k(C)`. -/
 theorem subsingleton_sheafH_two_lowerStar (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsAffine C] [IsIntegral C]
     (M : Sheaf (Spec C.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})

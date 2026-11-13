@@ -170,7 +170,7 @@ Source: Stacks Project,
 Cohomology on Sites, Tag 07A7, and Derived Categories, Tags 0DVC and 0FND.
 
 The comparison is the conjugate of the specified inverse open exchange. Hence its
-Hom map is the five-adjunction chain in the node, including the inverse of beta.
+Hom map is the five-adjunction chain, including the inverse of beta.
 All categories are ordinary uncompleted unbounded constant-ring module categories.
 
 ## Main definitions

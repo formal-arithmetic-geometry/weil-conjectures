@@ -13,8 +13,7 @@ set_option linter.privateModule false
 /-!
 # Coefficient cocycle of the normalized pro-etale derived direct image
 
-Source: Stacks Project, derived.tex, Tag 070Y, and the agent-written coefficient-composition
-argument in the DAG.
+Source: Stacks Project, derived.tex, Tag 070Y.
 
 The comparisons are the specified `fixedScalarRestrictionDirectImage` isomorphisms.
 The restriction associators are the existing sectionwise identity isomorphisms localized

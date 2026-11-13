@@ -363,11 +363,7 @@ theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
 
 /-- **Serre vanishing on projective space over a noetherian ring.** Let `A` be noetherian and
 `ℱ` a coherent module on `ℙⁿ_A`. There is `d₀` such that `H^q(ℙⁿ_A, ℱ(d)) = 0` for all
-`d ≥ d₀` and all `q > 0`.
-
-The proof is that of the field case
-`AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist`, with the vanishing of
-`H^q(ℙⁿ_A, 𝒪(e))` for `q > 0`, `e ≥ 0` computed over `A` by the monomial Čech complex. -/
+`d ≥ d₀` and all `q > 0`. -/
 theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist_of_isNoetherianRing (A : Type u)
     [CommRing A] [IsNoetherianRing A] (ℱ : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
@@ -432,14 +428,7 @@ open scoped AlgebraicGeometry.Scheme.Modules in
 /-- **Serre's theorem B over a noetherian ring.** Let `A` be noetherian, `X ⊆ ℙⁿ_A` a closed
 subscheme, i.e. a closed immersion `i : X ⟶ ℙ(n; Spec A)`, and `ℱ` a coherent sheaf on `X`.
 Then `H^q(X, ℱ ⊗ 𝒪_X(m)) = 0` for all `q > 0` and all `m ≫ 0`, where `𝒪_X(m)` is the pullback
-along `i` of the twisting sheaf `𝒪(m)`. This extends
-`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist`
- from a field to a noetherian ring.
-
-As in the field case, `H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙⁿ_A, (i_* ℱ)(m))` by the projection formula
-and the affineness of `i`, and Serre vanishing on `ℙⁿ_A`
-(`AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist_of_isNoetherianRing`)
-applies to the coherent module `i_* ℱ`. -/
+along `i` of the twisting sheaf `𝒪(m)`. -/
 theorem Scheme.Modules.exists_subsingleton_H_tensor_twist_of_isNoetherianRing (A : Type u)
     [CommRing A] [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i]
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]

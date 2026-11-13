@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTrace
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 
 /-! # The normalized limit data used in diagonal pullback
+
+## Implementation details
+
+`diagonalSurfaceSystemsHasExt` names the `Ext` structure as a constant applied to variables:
+instance search through the class projection `DiagonalTraceLocalizations.ext` at
+`diagonalSurface Y` produces an auxiliary proof whose statement the kernel only matches against
+`HasExt` by unfolding derived categories, in every declaration generated for the structure.
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +31,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
 /-- The `Ext` structure on strict systems over the diagonal surface, as a constant applied to
-variables. Instance search through the class projection `DiagonalTraceLocalizations.ext` at
-`diagonalSurface Y` produces an auxiliary proof whose statement the kernel only matches against
-`HasExt` by unfolding derived categories, in every declaration generated for the structure. -/
+variables. -/
 abbrev diagonalSurfaceSystemsHasExt (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [i : DiagonalTraceLocalizations l (diagonalSurface Y)] :
     HasExt.{u + 1} (DiagonalSystems l (diagonalSurface Y)) :=

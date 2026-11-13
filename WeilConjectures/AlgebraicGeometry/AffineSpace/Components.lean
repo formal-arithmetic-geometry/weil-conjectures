@@ -16,10 +16,10 @@ complement `G` of the zero section (`G = 𝔾_{m, B}` for `n` a singleton). In p
 connected component of `𝔸(n; B)` meets `G`, and every connected component of either meets the
 image of the unit section `t = 1`.
 
-The argument is the one of the blueprint: `π` is open and surjective, hence a quotient map, and
+The argument: `π` is open and surjective, hence a quotient map, and
 its fibres are irreducible, hence connected; the same holds for `π ∘ j` with `j : G ⟶ 𝔸(n; B)`
 the open immersion, whose fibres are nonempty open subsets of the irreducible fibres of `π`.
-Unlike the blueprint, no noetherian hypothesis on `B` is needed.
+No noetherian hypothesis on `B` is needed.
 
 ## Implementation notes
 
@@ -86,23 +86,22 @@ lemma isCoinducing_comp_over [Nonempty n] {G : Scheme.{u}} (j : G ⟶ 𝔸(n; B)
   · obtain ⟨g, hg⟩ := oneSection_mem_range_of_range_eq hj y
     exact ⟨g, by simp [hg, ← Scheme.Hom.comp_apply]⟩
 
-/-- Blueprint `lemma-section-normal-bundle--1` (1), for the affine space: the connected components
-of `𝔸(n; B)` are exactly the inverse images of the connected components of `B`. -/
+/-- The connected components of `𝔸(n; B)` are exactly the inverse images of the connected
+components of `B`. -/
 theorem preimage_connectedComponent_over (x : 𝔸(n; B)) :
     (𝔸(n; B) ↘ B) ⁻¹' connectedComponent ((𝔸(n; B) ↘ B) x) = connectedComponent x :=
   isCoinducing_over.preimage_connectedComponent isConnected_preimage_singleton_over x
 
-/-- Blueprint `lemma-section-normal-bundle--1` (1), for the complement of the zero section: the
-connected components of `G = 𝔸(n; B) ∖ 0(B)` are exactly the inverse images of the connected
-components of `B`. -/
+/-- The connected components of `G = 𝔸(n; B) ∖ 0(B)` are exactly the inverse images of the
+connected components of `B`. -/
 theorem preimage_connectedComponent_comp_over [Nonempty n] {G : Scheme.{u}} (j : G ⟶ 𝔸(n; B))
     [IsOpenImmersion j] (hj : Set.range j = (Set.range (zeroSection n B))ᶜ) (g : G) :
     (j ≫ 𝔸(n; B) ↘ B) ⁻¹' connectedComponent ((j ≫ 𝔸(n; B) ↘ B) g) = connectedComponent g :=
   (isCoinducing_comp_over j hj).preimage_connectedComponent
     (isConnected_preimage_singleton_comp_over j hj) g
 
-/-- Blueprint `lemma-section-normal-bundle--1` (2), (3): every connected component of a space over
-`B` whose components are inverse images of components of `B` meets the image of any section. -/
+/-- Every connected component of a space over `B` whose components are inverse images of
+components of `B` meets the image of any section. -/
 lemma exists_mem_connectedComponent_range_of_preimage {T : Scheme.{u}} (p : T ⟶ B)
     (s : B ⟶ T) (hs : s ≫ p = 𝟙 B)
     (hp : ∀ x, p ⁻¹' connectedComponent (p x) = connectedComponent x) (x : T) :
@@ -114,20 +113,13 @@ lemma exists_mem_connectedComponent_range_of_preimage {T : Scheme.{u}} (p : T �
     rw [← hp, Set.mem_preimage, h]
     exact mem_connectedComponent, p x, rfl⟩
 
-/-- The connected components of the affine line over a
-base.
-
-(2), first half: every connected component of `𝔸(n; B)` meets the image of the unit section. -/
+/-- Every connected component of `𝔸(n; B)` meets the image of the unit section. -/
 theorem exists_mem_connectedComponent_range_oneSection (x : 𝔸(n; B)) :
     (connectedComponent x ∩ Set.range (oneSection n B)).Nonempty :=
   exists_mem_connectedComponent_range_of_preimage _ _ (oneSection_comp_over n B)
     preimage_connectedComponent_over x
 
-/-- The connected components of the affine line over a
-base.
-
-(2), second half: every connected component of `𝔸(n; B)` meets the complement `G` of the zero
-section. -/
+/-- Every connected component of `𝔸(n; B)` meets the complement `G` of the zero section. -/
 theorem exists_mem_connectedComponent_range_of_range_eq [Nonempty n] {G : Scheme.{u}}
     {j : G ⟶ 𝔸(n; B)}
     (hj : Set.range j = (Set.range (zeroSection n B))ᶜ) (x : 𝔸(n; B)) :
@@ -135,11 +127,8 @@ theorem exists_mem_connectedComponent_range_of_range_eq [Nonempty n] {G : Scheme
   obtain ⟨_, hx, y, rfl⟩ := exists_mem_connectedComponent_range_oneSection x
   exact ⟨_, hx, oneSection_mem_range_of_range_eq hj y⟩
 
-/-- The connected components of the affine line over a
-base.
-
-(3): every connected component of the complement `G` of the zero section meets the image of
-the unit section `i₁ : B ⟶ G`. -/
+/-- Every connected component of the complement `G` of the zero section meets the image of the
+unit section `i₁ : B ⟶ G`. -/
 theorem exists_mem_connectedComponent_range_of_comp_eq_oneSection [Nonempty n]
     {G : Scheme.{u}}
     (j : G ⟶ 𝔸(n; B)) [IsOpenImmersion j] (hj : Set.range j = (Set.range (zeroSection n B))ᶜ)

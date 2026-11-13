@@ -46,8 +46,8 @@ attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFuncto
 attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
-/-- Apply the successive realization identity to the proved criterion from the preceding step.
-The other independent proof arguments remain available in its inferred type. -/
+/-- The criterion `UniformizerSquareData.cyclicSquare`, further specialized by the successive
+realization identity. -/
 @[irreducible] def UniformizerSquareData.realizedSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

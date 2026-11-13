@@ -83,22 +83,15 @@ lemma dense_of_forall_exists_specializes {X : Type*} [TopologicalSpace X] {s : S
   obtain ⟨y, hy, hyx⟩ := h x
   exact closure_mono (Set.singleton_subset_iff.mpr hy) (specializes_iff_mem_closure.mp hyx)
 
-/-- A smooth dense open after a finite radicial
-base change.
-
-Let `S` be integral of finite type over a field `k` and let `f : X ⟶ S` be of finite type with
-`X` nonempty. Then there are a nonempty open `U ⊆ S` and a finite, surjective, radicial
-(universally injective) `π : S' ⟶ U`, with base change `f' : X' ⟶ S'` of `f` over `U`, and an
-immersion `v : V ⟶ X'` from a reduced scheme, with open dense image (so that `V` is a dense open
-of `(X')_red`), such that `V` is smooth over `S'`; `S'` is integral, being the spectrum of a
-domain in the blueprint construction. For a given constructible sheaf `F` on `X`,
-one may require the pullback of `F` to `V` to be finite locally constant.
+/-- Let `S` be integral of finite type over a field `k` and let `f : X ⟶ S` be of finite type with
+`X` nonempty. Then there are a nonempty open `U ⊆ S` and a finite, surjective, radicial (universally
+injective) `π : S' ⟶ U`, with base change `f' : X' ⟶ S'` of `f` over `U`, and an immersion
+`v : V ⟶ X'` from a reduced scheme, with open dense image (so that `V` is a dense open of
+`(X')_red`), such that `V` is smooth over `S'` and `S'` is integral. For a given constructible sheaf
+`F` on `X`, one may require the pullback of `F` to `V` to be finite locally constant.
 
 Moreover, every point `x` of the generic fibre of `f'` outside `V` is a proper specialization of
-a point of `V` in the generic fibre: in the generic fibre, the closure of `x` is a proper closed
-subset of the irreducible closed subset of `X'` containing it, so that (the generic fibre being
-of finite type over a field) every component of the complement of `V` in the generic fibre has
-dimension strictly smaller than the component of `X'` containing it. -/
+a point of `V` in the generic fibre. -/
 theorem exists_isFinite_universallyInjective_smooth_dense {k : Type u} [Field k]
     {S X : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X]

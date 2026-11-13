@@ -37,10 +37,9 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   CartierEtaleReductionSpec CartierProReductionSpec cartierResidueReducedPro
 
 /-- Let n>0 be invertible on Z, R=ULift(Z/n), A a commutative ring killed by n, i:D→Z any scheme
-morphism and φ:R→A. If two Cartier Ext classes have GeoCartierScalarCompatibility
-[lemma-cycle-class-cartier-divisor], then the normalized full pro-etale Kummer class
-G_m,pro→forget(A_Z(1))[1] is a degree-one scalar unit [def-sfb-cartier-reduction-data,
-def-sp-derived-scalar-ext-unit]. Source: Stacks 0152, 06YY and 0GLZ. -/
+morphism and φ:R→A. If two Cartier Ext classes have GeoCartierScalarCompatibility, then the
+normalized full pro-etale Kummer class G_m,pro→forget(A_Z(1))[1] is a degree-one scalar unit.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem pro_kummer_derived_unit
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) (hR : (n : ULift.{u + 1} (ZMod n)) = 0)

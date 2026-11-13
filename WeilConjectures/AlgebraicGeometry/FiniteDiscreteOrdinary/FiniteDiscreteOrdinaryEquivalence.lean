@@ -115,50 +115,7 @@ end Localizing
 section-action equivalence, its actual unbounded termwise extension, relative derived
 tensor, every ordered Tor interval, finite local models, bounded constructible finite-Tor
 objects, triangulated and coproduct structure, localizing closures, and the two composites
-for each fixed compactification.
-
-Proof following the twelve DAG steps:
-1. The finite-discrete condensed-ring constant comparison and its scheme inverse-image
-comparison give the normalized ringIso. The canonical map is sheafified constant functions
-followed by constantSchemeIso and upperStarFromPoint. Zero rings and empty schemes are allowed.
-2. Apply def-weil-pbc-internal-abelian-sheaf-module-equivalence and restrict scalars along
-ringIso. The maps and underlying abelian sheaves are identical. Both functors are additive
-and inverse equivalences preserve kernels and cokernels, hence are exact.
-3. Restrict to constant scalars to identify the intrinsic module category with fixed scalar
-module sheaves. Conversely local scalar sections act by gluing constant actions. The unit and counit
-are identity on underlying sections.
-4. Apply situation-conventions to the two additive equivalences and
-inverses. Units and counits extend termwise and descend through quasi-isomorphisms. Homology,
-shifts and distinguished triangles are preserved.
-5. Apply lem-pe-internal-section-tensor-comparison. Its local pure-tensor comparison is the
-identity. Restriction along ringIso preserves the same balancing relations and coherence.
-6. The equivalences preserve coproducts by their Hom bijections. Their termwise comparisons
-therefore identify direct-sum total tensors, including their signed differential. The cited
-tensor comparison preserves and reflects acyclicity and K-flatness. The mapping-cone test
-identifies this K-flatness with def-sfb-preserves-kflat-quasi-iso. Compute both relative derived
-tensors on the same K-flat resolution to obtain the monoidal derived comparison.
-7. Every module sheaf in degree zero corresponds in both directions. Tensor comparison and
-homology compatibility identify all zero tests outside each specified interval. This is
-exactly def-weil-proetale-tor-amplitude in intrinsic coordinates, and the generic Tor predicate
-in fixed scalar coordinates. No test sheaf or interval is omitted.
-8. lem-weil-pbc-finite-discrete-coefficient-sections identifies the scalar maps under every
-scheme pullback. Adjoint transposition gives compatibility of ringIso with inverse image.
-The balanced tensor description then identifies both module pullbacks.
-9. A finite presentation over A is the cokernel of a finite scalar matrix. Both encodings
-send it to the identical matrix, and sheafification preserves cokernels. Thus the same cover
-trivializes the constant models. Over finite A, finite and finitely presented modules agree.
-Apply this on the same constructible locally closed strata, and affine-locally on arbitrary
-schemes. Homology and Tor compatibility identify the bounded constructible finite-Tor objects.
-10. The derived equivalence preserves shifts, triangles, isomorphisms and small coproducts.
-Transport the subcategories in the intersection defining definition-localizing-subcategory. Apply
-the same argument to the inverse to obtain equality of localizing-closure membership.
-11. Both direct images have sections M(V times_T U). The coefficient-sections equation
-identifies their actions. For an open immersion both extensions by zero are left adjoint
-to the same restriction, so adjunction uniqueness identifies them naturally.
-12. Each equivalence is right adjoint to its exact inverse and hence preserves K-injectives
-by lem-weil-pbc-right-adjoint-preserves-kinjective. Compute direct images on corresponding
-K-injective resolutions, then compose with the termwise exact extension-by-zero comparison.
-This gives exactly Rp_*D(j_!) and Rp_*j_! for the same specified compactification. -/
+for each fixed compactification. -/
 theorem moduleObject_ordinary_coefficient_equivalence [Finite A] [DiscreteTopology A] :
     ∃ E : ∀ T : Scheme.{u}, Encoding A T,
       (∀ T : Scheme.{u},

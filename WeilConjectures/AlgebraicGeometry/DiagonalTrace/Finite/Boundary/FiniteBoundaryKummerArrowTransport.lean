@@ -48,10 +48,8 @@ abbrev target_endpoint_statement
     S.map (cartierProRootMap A (l ^ (n + 1)) hA T
       (pow_pos (Fact.out : l.Prime).pos _) hN)
 
-/-- Assemble the finite boundary square once the source coefficient-one and
-root endpoint equations have been supplied.  The assembly is the exact
-single-arrow naturality square followed by the two endpoint substitutions; its
-proof is independent of the coefficient and root calculations. -/
+/-- The finite boundary square, given the source coefficient-one and root endpoint
+equations. -/
 theorem finiteBoundary_transport_assembly
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

@@ -17,8 +17,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 The ordinary direct image requires no separatedness. For the compact-support clauses,
 use the Nagata compactification already supplied by `compactSupportAmplitudeCompactification`.
-On the degree-zero input this candidate agrees with compactification-independent compact
-support by `proposition-construction-independence-rf-shriek--7`.
+On the degree-zero input this candidate agrees with the compactification-independent compact
+support direct image.
 -/
 
 @[expose] public section
@@ -68,31 +68,7 @@ private theorem isBoundedConstructible_of_iso
 /-- Direct image of a finite constructible etale module sheaf along a finite-type map of
 finite-type schemes over a field is bounded constructible. For a separated map the compact
 support direct image is also bounded constructible, and its cohomology vanishes above twice
-a bound on the dimensions of the original geometric fibres.
-
-Proof, following the node's five steps:
-1. The coefficient convention gives a finite commutative ring killed by positive N invertible
-in k, hence on every k-scheme. Place F in degree zero; it is bounded constructible by
-`def-weil-pbc-constructible-complexes`. Apply `proposition-six-operations-dctf--2` to obtain
-the ordinary direct-image assertion, including nonseparated maps.
-2. For separated f, finite type over the Noetherian field makes X and Y Noetherian;
-local Noetherianity makes Y quasi-separated. Use `theorem-nagata-s-compactification-theorem--1` and
-`definition-compactification-refinement--1` to factor f as an open immersion j followed by a proper
-r. Properness includes finite type. Finite affine covers and the union of algebra generators show
-the compactification is finite type over k, hence Noetherian. All three schemes admit finite
-Noetherian affine covers. No bound on the compactified fibres is required.
-3. By `proposition-six-operations-dctf--6`, j_!F is constructible. Place it in degree zero and apply
-`theorem-results-from-etale-theory--3` to r to obtain bounded constructibility of Rr_*(j_!F).
-4. By `proposition-construction-independence-rf-shriek`, the chosen candidate is Rr_* Dj_!. Its
-localization normalization identifies Dj_!(F[0]) with (j_!F)[0]. The bounded-below comparison of
-`proposition-construction-independence-rf-shriek--7` identifies this with
-compactification-independent Rf_!F. Isomorphisms preserve cohomology, constructibility, and
-vanishing, giving the second clause.
-5. The additive order m of 1 in the finite ring is positive, divides N, and is its additive
-exponent: multiplication by m kills each ring element, and any annihilator kills 1. This
-also holds for the zero ring with m = 1. Since N is invertible, so is m on Y. Apply
-`theorem-results-from-etale-theory--5` to F and the original geometric-fibre bound to obtain
-R^q f_! F = 0 for q > 2d. -/
+a bound on the dimensions of the original geometric fibres. -/
 theorem finiteType_directImages_finiteConstructible
     (k : Type u) [Field k] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (N : ℕ) (hΛ : IsSmoothBaseChangeCoefficients N Λ (Spec (.of k)))

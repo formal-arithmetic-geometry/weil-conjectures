@@ -11,7 +11,15 @@ public import WeilConjectures.AlgebraicGeometry.IndEtaleMapping.IndEtaleDerivedI
 
 The isomorphisms retain the evaluation normalization of restriction. There is no
 continuity assertion and no choice of mapping-complex representatives here.
-Source: Bhatt--Scholze 6.3.16, adjunction step.
+Source: Bhatt--Scholze 6.3.16.
+
+## Implementation details
+
+In `homIso_naturality_of_counit` all functors are variables, so that the coherence computation
+happens with opaque functors. The coefficient variance `γ` of the target global Hom is also a
+variable: when the lemma is applied, `γ` matches the goal syntactically, so the kernel never
+compares `NatTrans.app` of two definitionally equal but distinct transformations, which it does
+by unfolding the derived functors.
 -/
 
 @[expose] public noncomputable section
@@ -28,14 +36,9 @@ namespace AlgebraicGeometry.Etale.IndEtaleMapping
 variable (A : Type (u + 1)) [CommRing A]
 variable {X : Scheme.{u}} (K M : DerivedCategoryModule A X)
 
-/-- Naturality of a conjugate global-Hom comparison, in abstract form. All functors are
-variables, so that the coherence computation happens with opaque functors.
-The hypotheses are the counit normalizations of the comparisons, naturality of the
-target counits, and compatibility of the left-adjoint comparisons with composition.
-The coefficient variance `γ` of the target global Hom is a variable: when the lemma is
-applied, `γ` matches the goal syntactically, so the kernel never compares `NatTrans.app` of
-two definitionally equal but distinct transformations, which it does by unfolding the
-derived functors. -/
+/-- Naturality of a conjugate global-Hom comparison, in abstract form with all functors as
+variables, from the counit normalizations of the comparisons, naturality of the target counits,
+and compatibility of the left-adjoint comparisons with composition. -/
 private theorem homIso_naturality_of_counit
     {B DX DS DT : Type*} [Category* B] [Category* DX] [Category* DS] [Category* DT]
     [MonoidalCategory DX] [MonoidalCategory DS] [MonoidalCategory DT]

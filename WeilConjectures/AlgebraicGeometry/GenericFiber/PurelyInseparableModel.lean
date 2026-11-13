@@ -24,7 +24,8 @@ finite over `R[1/c]`, such that `Spec B ⟶ Spec R[1/c]` is a universal homeomor
 then satisfies `b ^ q' ∈ R[1/c]` for a fixed power `q'`, so two points of `Spec B` with values
 in a field which agree on `R[1/c]` agree (injectivity of Frobenius).
 
-This is the radicial base change in the proof of `lemma-generic-smooth-open--1`.
+This is the radicial base change used for
+`AlgebraicGeometry.exists_isFinite_universallyInjective_smooth_dense`.
 
 ## Main statements
 

@@ -150,10 +150,7 @@ end
 set_option maxHeartbeats 800000 in
 -- Comparing dependent inverse-image scalar actions requires extra elaboration steps.
 /-- Canonical algebra pushout comparison for the chosen tensor pullback adjunction.
-
-Source: Stacks Project, Tags 0095 and 0096; Tag 09MS, coefficient quotient. The proof constructs the
-sheaf pushout of the inverse-image structure sheaf and the inverse-image algebra, then identifies
-its underlying module by the sheaf tensor pushout comparison and inverse-image regular extension. -/
+Source: Stacks Project, Tags 0095 and 0096; Tag 09MS, coefficient quotient. -/
 private theorem exists_algebraTensorPullbackComparison_canonical {X Z : Scheme.{u}} (j : Z ⟶ X)
     (B : X.CommAlgebraSheaf) :
     ∃ (C : X.CommAlgebraSheaf) (p : B ⟶ C)

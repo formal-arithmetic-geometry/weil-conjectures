@@ -21,12 +21,7 @@ namespace AlgebraicGeometry
 open Etale
 
 /-- Assertions transfer across a surjective closed universal homeomorphism of curves.
-Source: Stacks Project, Theorem 59.83.10 (03SC), Proposition 59.45.4 (03SI).
-
-The proof compares the eight cohomology assertions through the equivalence of etale
-sheaf categories induced by a universal homeomorphism. Pullback preserves the
-constructibility and torsion conditions, and the comparison maps are compatible
-with composition and base change. -/
+Source: Stacks Project, Theorem 59.83.10 (03SC), Proposition 59.45.4 (03SI). -/
 theorem IsCurve.assertions_of_universalHomeomorphism
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {C D : Scheme.{u}} (f : C ⟶ Spec (.of k)) (i : D ⟶ C)

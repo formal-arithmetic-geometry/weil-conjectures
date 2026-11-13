@@ -15,8 +15,6 @@ Let `X` be a connected locally noetherian regular scheme and `j : U ⟶ X` an op
 `U` nonempty. A connected finite étale cover `P` of `X` is again regular, hence irreducible, so
 its restriction to `U`, a nonempty open subscheme of `P`, is irreducible, hence connected.
 Consequently the map `π₁(U) → π₁(X)` is surjective (SGA 1, Exp. V, Prop. 8.2; Stacks `0BQM`).
-This is part (1) of the blueprint lemma `theorem-purity-real-sheaves-curves`, with normality
-strengthened to regularity.
 
 ## Main statements
 

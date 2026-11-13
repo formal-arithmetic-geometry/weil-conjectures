@@ -23,14 +23,11 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A projective modification of a reduced
-proper scheme.
-
-Let `S` be Noetherian and `f : X ⟶ S` proper. There are a proper map `π : Y ⟶ X` and a dense open
-`U ⊆ X` such that `π⁻¹(U) ⟶ U` is an isomorphism and `Y ⟶ S` is projective: `π ≫ f` factors as
-a closed immersion `e : Y ⟶ ℙ(N; S)` followed by the structure morphism, for a finite index type
-`N` of homogeneous coordinates. The blueprint takes `S` affine and `X` reduced; neither is
-needed. The modification is moreover surjective. -/
+/-- **A projective modification of a proper scheme.** Let `S` be Noetherian and `f : X ⟶ S`
+proper. There are a proper map `π : Y ⟶ X` and a dense open `U ⊆ X` such that `π⁻¹(U) ⟶ U` is
+an isomorphism and `Y ⟶ S` is projective: `π ≫ f` factors as a closed immersion
+`e : Y ⟶ ℙ(N; S)` followed by the structure morphism, for a finite index type `N` of homogeneous
+coordinates. Moreover `π` is surjective. -/
 theorem exists_projective_modification {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S]
     [IsProper f] :
     ∃ (Y : Scheme.{u}) (π : Y ⟶ X) (U : X.Opens), IsProper π ∧ Surjective π ∧

@@ -44,8 +44,7 @@ Source: Stacks Project Tags 07A7 and 099M.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourCorners`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourCorners`
 -/
 
 @[expose] public section
@@ -149,7 +148,7 @@ theorem proEtaleReductionPullbackInv_isIso :
     infer_instance
   exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
 
-/-- The coefficient-reduction comparison chi, in the displayed direction of the node.
+/-- The coefficient-reduction comparison chi.
 Source: Stacks Tags 06YY and 0D6D. -/
 noncomputable def proEtaleReductionPullbackIso :
     proEtaleRingDerivedExtension aV ⋙ proEtaleRingDerivedPullback f SV SU cS ≅

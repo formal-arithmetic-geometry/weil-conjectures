@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 /-! # The derived scalar mate and its thick isomorphism locus
 
 The normalized comparison data are publicly reexported from DerivedScalarMateData.
-The geometric normalization and exact-structure lemmas are separate proof dependencies.
 -/
 
 @[expose] public noncomputable section
@@ -42,32 +41,10 @@ private theorem retract_inverse {C D : Type*} [Category C] [Category D]
 /-- Restricting the canonical derived scalar mate gives exactly the normalized projection
 arrow. Its restricted functors have the canonical transported exact structures; the
 transformation preserves shifts and all three squares of distinguished triangles.
-Its full isomorphism locus is thick, with the specified inverse on each split retract.
+Its full isomorphism locus is thick, with the specified inverse on each split retract;
+no idempotent-completion assumption is needed.
 
-Source: Stacks 03EL, 06YY, 07A4, 07A6, 0G7E, 0FPT and 014A.
-
-Proof, following the eight DAG steps:
-1. The normalized ordinary tensor symmetry and flat K-flat resolutions give e_V.
-The first factor is K-flat, so resolving B gives an equivalence without flatness of B.
-2. On those representatives both balanced pullback/tensor routes send s tensor x to
-pullback(x) tensor pullback(s); the inverse mate of the normalized restriction square
-is lambda. Localize and cancel the K-flat resolution comparisons.
-3. Apply the adjunction-compatible restriction/direct-image comparison to the adjunct
-T_Z(epsilon) lambda. Step 2 and naturality of e_Z identify the restricted adjunct
-with (epsilon tensor identity) mu. Adjunction injectivity identifies it with pi.
-4. Exact restriction commutes with canonical pullback shifts. The uniquely compatible
-right-adjoint shift makes d shift-compatible, by adjunction-shift compatibility.
-5. Tensor normalization, step 4 and ringed-projection-first-shift give the displayed
-shift compatibility. Naturality gives the first two triangle squares; the shift
-square gives the connecting square. Both image triangles are distinguished.
-6. Additivity gives zero and finite sums. Naturality gives isomorphism invariance.
-The shift equation and restriction conservativity give all integer shifts.
-7. For any distinguished triangle, the restricted comparison is a morphism of
-its two distinguished image triangles. Two invertible components force the third
-invertible by triangle-morphism-iso; conservative restriction reflects this.
-8. For a split retract, naturality and r i = identity show that F(r) beta_G^{-1} H(i)
-is both a left and a right inverse of beta_K. This proves retract closure with no
-idempotent-completion assumption, and completes thickness. -/
+Source: Stacks 03EL, 06YY, 07A4, 07A6, 0G7E, 0FPT and 014A. -/
 theorem derivedScalarMateThickLocus
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

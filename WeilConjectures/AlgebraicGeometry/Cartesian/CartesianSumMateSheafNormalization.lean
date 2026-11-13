@@ -220,23 +220,7 @@ private theorem graph_unit_exchange
     C.hom_inv_id, op_id, F.obj.map_id, Category.comp_id]
 
 /-- The sheaf mate of Cartesian sum base change preserves its underlying section.
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F.
-
-Proof in words: transpose the equation under the sum/restriction adjunction for v.
-The graph extension defining etaleLowerShriekToLowerStar is identity on the graph
-of a lifted etale section and zero on its clopen complement. The Cartesian
-base-change isomorphism, defined by uniqueness of the composed left adjoints,
-transports its unit to the unit for the corresponding pulled-back lifted section.
-Consequently the forward mate along q* ⊣ q_* and p* ⊣ p_* carries that graph
-extension to the same underlying section over W times_Y the test object. On
-the complement both composites are zero. Apply graph_hom_ext to these two
-restrictions; naturality of the direct-image composition comparisons identifies
-both ordinary direct images with the one along b followed by p. Sheafification
-and the injective adjunction Hom bijection give the equation for every sheaf F.
-Only a Cartesian square and separated etale horizontal arrows are used; neither
-properness nor any derived category or coefficient finiteness is needed. For an
-empty graph both restrictions vanish, and for identity squares this is the
-triangle identity of the sum/restriction adjunction. -/
+Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F. -/
 theorem cartesian_sum_mate_sheaf_normalization
     (A : Type (u + 1)) [CommRing A]
     {W Y' Z Y : Scheme.{u}}

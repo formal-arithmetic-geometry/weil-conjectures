@@ -864,12 +864,8 @@ lemma IdealSheafData.IsInvertible.finite_setOf_ordAt_ne_zero {I : C.IdealSheafDa
 
 include f in
 /-- **Every effective Cartier divisor on a smooth curve is a sum of closed points.** An
-invertible ideal sheaf `I` on a smooth integral curve is the ideal sheaf `𝒪_C(-E)` of the
-effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators of `I` and of
-`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. Here
-`𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` has order `n_P` at the closed point `P`
-(`AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`), i.e. its stalk at `P` is `(t_P^{n_P})`
-for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere. -/
+invertible ideal sheaf `I` on a smooth integral curve is the ideal sheaf `𝒪_C(-E) = ∏_P 𝓘_P^{n_P}`
+of the effective divisor `E = ∑_P ord_P(I) [P]`. -/
 theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
     (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
   have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=
@@ -1022,14 +1018,7 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
 include f in
 /-- **Every invertible module on a smooth curve comes from divisors.** For an invertible module
 `ℒ` on a smooth integral curve there are effective divisors `E₁` and `E₂` with
-`ℒ ≅ 𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, where `𝒪_C(E₁) = 𝒪_C(-E₁)ᵛ`.
-
-Fix a trivialization `e₀` of `ℒ` on a nonempty open `U₀`, and trivializations `eᵢ` on a finite
-open cover. The rational functions `gᵢ = e₀ / eᵢ` have finitely many zeros and poles; let `E₂`
-be a large multiple of the sum of these points. Near every point, with a local generator `b` of
-`𝒪_C(-E₂)`, the function `b gᵢ` is regular, and `b ↦ b gᵢ eᵢ = b e₀` glues to a nonzero morphism
-`ψ : 𝒪_C(-E₂) ⟶ ℒ` (which is "multiplication by `e₀`"). Its zero scheme is an effective
-Cartier divisor `E₁`, so `ℒ ≅ 𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`. -/
+`ℒ ≅ 𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, where `𝒪_C(E₁) = 𝒪_C(-E₁)ᵛ`. -/
 theorem Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj (ℒ : C.Modules)
     [ℒ.IsInvertible] : ∃ E₁ E₂ : closedPoints C →₀ ℕ,
       Nonempty (ℒ ≅ (Divisor.idealSheaf E₁).toModulesᵛ ⊗ (Divisor.idealSheaf E₂).toModules) := by

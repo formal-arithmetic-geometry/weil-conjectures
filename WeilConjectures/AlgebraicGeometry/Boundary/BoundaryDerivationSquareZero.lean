@@ -27,8 +27,8 @@ The algebra sheaves are `Scheme.CommAlgebraSheaf`s and their underlying `𝒪_X`
 `commAlgebraSheafModule`, with the module map of `p` given by `commAlgebraSheafModuleFunctor`.
 The kernel `I` is tied by the short exactness of `0 → I → O' → O → 0`.
 The connecting map is the snake boundary of any compatible injective resolutions,
-transported to the recorded module cohomology (independent of the choice by
-lem-weil-pbc-horseshoe-delta-functor). No boundary is an arbitrary function.
+transported to the recorded module cohomology (independent of the choice of resolutions).
+No boundary is an arbitrary function.
 -/
 
 @[expose] public section

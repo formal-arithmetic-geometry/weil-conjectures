@@ -88,15 +88,7 @@ with `S = Spec A` and `T = Spec B` affine, `g` flat and `f` quasi-compact and qu
 and let `ℱ` be a quasi-coherent `𝒪_X`-module. Then `RΓ(X, ℱ) ⊗_A B ≅ RΓ(Y, g'^* ℱ)` in `D(B)`,
 where `RΓ(X, ℱ) ∈ D(A)` through `f^♯` and `RΓ(Y, g'^* ℱ) ∈ D(B)` through `f'^♯`. Since `B` is
 flat over `A`, the derived tensor product `- ⊗^L_A B` is the functor induced by the exact functor
-`- ⊗_A B`.
-
-The proof goes through the derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*`, which is an
-isomorphism on `D_QCoh` since `g` is flat (`isIso_schemeDerivedBaseChangeMap_of_flat`):
-```
-RΓ(X, ℱ) ⊗_A B ≅ RΓ(T, Lg^* Rf_* ℱ) ≅ RΓ(T, Rf'_* Lg'^* ℱ) ≅ RΓ(Y, Lg'^* ℱ) ≅ RΓ(Y, g'^* ℱ),
-```
-using the affine sections base change mate (`exists_mixedAffineSectionsBaseChangeMate`), the
-Leray isomorphism for `f'` and flatness of `g'`. -/
+`- ⊗_A B`. -/
 @[stacks 02KH]
 theorem nonempty_derivedGlobalSectionsOver_baseChange_iso :
     Nonempty ((ModuleCat.extendScalars.{u, u, u} g.appTop.hom).mapDerivedCategory.obj
@@ -128,12 +120,7 @@ T --g---> S
 with `S = Spec A` and `T = Spec B` affine, `g` flat and `f` quasi-compact and quasi-separated,
 and let `ℱ` be a quasi-coherent `𝒪_X`-module. Then `B ⊗_A H^n(X, ℱ) ≅ H^n(Y, g'^* ℱ)` as
 `B`-modules, where `A` acts on `H^n(X, ℱ)` through `f^♯` and `B` on `H^n(Y, g'^* ℱ)` through
-`f'^♯`.
-
-This is the degree `n` cohomology of the derived statement
-`nonempty_derivedGlobalSectionsOver_baseChange_iso`, `RΓ(X, ℱ) ⊗_A B ≅ RΓ(Y, g'^* ℱ)`: the
-cohomology of `RΓ` is sheaf cohomology (`homologyDerivedGlobalSectionsOverLinearEquiv`), and
-`- ⊗_A B` commutes with cohomology since `B` is flat over `A`. -/
+`f'^♯`. -/
 @[stacks 02KH]
 theorem nonempty_H_baseChange_linearEquiv (n : ℕ) :
     Nonempty (Γ(T, ⊤) ⊗[Γ(S, ⊤)] WithAction (baseAction f ℱ) ((constantSheaf

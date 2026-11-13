@@ -66,7 +66,7 @@ import Mathlib.CategoryTheory.PUnit
 Source: Stacks Project, derived.tex, Tags 015F and 05RU; sites-modules.tex, Tag 0GMW;
 sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU.
 
-All restrictions are the sectionwise functors of the module-gluing node. Tensor products
+All restrictions are the sectionwise functors of module gluing. Tensor products
 and their constraints are the existing sheafification and K-flat localization constructions.
 -/
 

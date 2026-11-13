@@ -31,25 +31,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 /-- Normalize just the proper-first tower against a single compactification of its composite.
 There is no second proper/etale factorization in this assertion.
 Source: Stacks Project, more-etale.tex Tags 0F7B, 0F7I and 0F7J; graph normalization:
-etale-cohomology.tex Tag 0F4L.
-
-Proof in words: compactify v by d and q followed by d.i by e. The every-tower formula
-computes the chosen composition by the proper/open interchange for this tower. On a
-K-injective complex J on W, q_*J is K-injective. Expand the inverse graph comparison for v:
-it is degreewise graph extension followed by the right-derived unit of d.g. The
-proper/open interchange is the section-preserving map of Tag 0F7B followed by direct
-image of a resolution map. The sheaf composition identifies its sections with the
-proper-support subsheaf for q followed by v. The normalization of tau identifies its
-sections with that same subsheaf, because the compactification inclusion is monic.
-The graph refinement equation and the normalized refinement equation transport this
-calculation from d.comp e to c; the refinement cocycle makes the transport independent
-of the common refinement. Naturality of the right-derived units then identifies the
-result with degreewise tau followed by the unit for c.g. This is the asserted equality
-on J. For an arbitrary complex, map it to a K-injective resolution and use naturality:
-the target functor factors through Qh, so its map of that resolution is invertible and
-can be cancelled. This proves the equality on every homotopy object. Identity proper
-maps remove an identity-open factor; empty schemes and zero coefficients give zero maps.
-No exactness of q_* and no Cartesian square are used. -/
+etale-cohomology.tex Tag 0F4L. -/
 theorem graph_proper_precomposition_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

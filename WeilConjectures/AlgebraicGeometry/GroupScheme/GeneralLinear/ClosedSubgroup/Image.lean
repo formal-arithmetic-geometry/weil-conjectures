@@ -335,12 +335,7 @@ theorem mem_range_zeroLocusPoints_iff {x : GL m k} :
 closed subgroup over an algebraically closed field `k` and `r : G ⟶ GL_m` a homomorphism. The
 image `S = r(G(k))` of the `k`-points is Zariski closed: a matrix on which every equation vanishing
 on `S` vanishes lies in `S`. So `S` is the set of `k`-points of the reduced closed subgroup
-`V(vanishingIdeal S)` of `GL_m`.
-
-The image of `G°` is constructible with irreducible closure `T`, hence contains a nonempty open
-`U ∩ T`; for a `k`-point `x` of `T`, the open subsets `U ∩ T` and `x (U ∩ T)⁻¹` of `T` meet in a
-`k`-point `z`, so that `x = z (z⁻¹ x) ∈ r(G°(k))`. Then `S` is the finite union of the translates
-of `T` by `r` of coset representatives of `G°(k)` in `G(k)`. -/
+`V(vanishingIdeal S)` of `GL_m`. -/
 theorem mem_range_points_iff {x : GL m k} :
     x ∈ (r.points k).range ↔
       ∀ a ∈ vanishingIdeal ((r.points k).range : Set (GL m k)), evalAlgHom x a = 0 := by

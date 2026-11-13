@@ -158,13 +158,7 @@ end Reduced
 /-- **Reduction of Stacks 0BF7 to smooth group schemes.** Let `k` be algebraically closed. If
 every smooth group scheme of finite type over `k` carries an invertible module with finitely many
 sections whose non-vanishing loci are affine and cover it, then so does every group scheme `G` of
-finite type over `k`.
-
-In characteristic zero, `G` is reduced by Cartier's theorem
-(`AlgebraicGeometry.isReduced_of_grpObj`), hence smooth. In characteristic `p`, the reduced
-subgroup scheme `G_red` is smooth and carries such a family, which descends to `G` along the
-Frobenius (`AlgebraicGeometry.exists_isAffineOpen_compl_support_zeroLocus_of_nilradical`,
-Stacks 0BD4). -/
+finite type over `k`. -/
 theorem GrpObj.exists_isAffineOpen_compl_support_zeroLocus_of_smooth [IsAlgClosed k]
     (h : ∀ (H : Over (Spec (.of k))) [GrpObj H] [LocallyOfFiniteType H.hom]
       [QuasiCompact H.hom] [Smooth H.hom],

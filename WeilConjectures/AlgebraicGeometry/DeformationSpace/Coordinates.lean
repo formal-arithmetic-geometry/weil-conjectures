@@ -15,7 +15,7 @@ Let `g : V ⟶ B` be smooth of relative dimension `d` with a closed section `s`.
 chart `u_i = x_i / t` the deformation space `D_s V` is étale over `𝔸^d_{𝔸¹_B}`, with the section
 `s̃` going to the zero section. Together with the constructions of
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`, this gives the deformation datum of
-blueprint `prose-09-12`.
+the deformation to the normal cone.
 
 ## Main definitions
 
@@ -318,18 +318,9 @@ theorem exists_etale_coordinates_deformationSpace (d : ℕ) (g : V ⟶ B)
   obtain ⟨b, hb, hx⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
   exact Set.mem_iUnion.mpr ⟨⟨b, hb⟩, hx⟩
 
-/-- Geometry of the deformation of a section
-
-**The deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure relative
-dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
-(`AlgebraicGeometry.Scheme.Hom.normalConeData`) with its zero section. This is the deformation
-datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` with fibre `N_s` over
-`t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
-extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
-normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
-dimension `d`. As `g` is separated and quasi-compact over a quasi-compact quasi-separated base,
-`g̃` is separated and compactifiable. Étale-locally on `B` it has étale coordinates in which
-`s̃` is the zero section (`exists_etale_coordinates_deformationSpace`). -/
+/-- **The deformation to the normal cone** of a closed section `s` of a smooth morphism
+`g : V ⟶ B` of pure relative dimension `d`: the deformation datum whose deformation space is
+`D_s V = Spec_V 𝒪_V[t, I t⁻¹]`, with the normal cone `N_s` as fibre over `t = 0`. -/
 noncomputable def deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [CompactSpace B]
     [QuasiSeparatedSpace B] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :

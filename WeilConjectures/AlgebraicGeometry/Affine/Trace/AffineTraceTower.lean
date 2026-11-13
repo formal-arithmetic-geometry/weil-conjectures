@@ -236,9 +236,7 @@ theorem affineTracePullbackInvertible (N : ℕ) {S' S : Scheme.{u}} (f : S' ⟶ 
     (hS : IsUnit (N : Γ(S, ⊤))) : IsUnit (N : Γ(S', ⊤)) := by
   simpa only [map_natCast] using hS.map f.appTop.hom
 
-/-- Pullback of N-invertibility to the projective-line compactification.
- Proof: apply the global-sections ring homomorphism of q to a unit representing N; ring
-homomorphisms preserve units and natural-number casts. -/
+/-- Pullback of N-invertibility to the projective-line compactification. -/
 theorem affineTraceProjectiveInvertible (N : ℕ) (S : Scheme.{u})
     (hS : IsUnit (N : Γ(S, ⊤))) : IsUnit (N : Γ(ProjectiveLine S, ⊤)) :=
   by

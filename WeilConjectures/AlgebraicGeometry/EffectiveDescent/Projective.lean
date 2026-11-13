@@ -95,9 +95,7 @@ it factors as a closed immersion `V ⟶ ℙ(n; X)`, with `n` finite, followed by
 `ℙ(n; X) ⟶ X` (in particular this applies when `V ⟶ X` is projective,
 `AlgebraicGeometry.IsProjective`). Then every descent datum on `V` relative to `p` is effective.
 
-This is Stacks 0CCJ: finitely many points of `V` over one point of `Y` lie in an affine open
-(`AlgebraicGeometry.IsHProjective.exists_isAffineOpen_superset`), which is the criterion
-`isEffective_of_isFinite_of_fibre` (Stacks 0CCI). -/
+Source: Stacks 0CCJ. -/
 theorem isEffective_of_isHProjective [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X} [IsHProjective V.hom] (D : Over.DescentDatum p V) :
     D.IsEffective := by

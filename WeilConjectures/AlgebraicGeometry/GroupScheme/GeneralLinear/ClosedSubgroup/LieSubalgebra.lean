@@ -358,10 +358,7 @@ theorem forall_mem_lieSubalgebra_of_forall_mem_zeroLocus [IsAlgClosed k] (hI : I
 subgroup of `GL_n` (`I` prime) over an algebraically closed field of characteristic zero, and let
 `P` be a property of the points of `G` cut out by equations `E` on `GL_n` and stable under the
 group law. Then every point of `G(k)` has `P` if and only if every tangent vector `1 + εX`,
-`X ∈ Lie G`, has `P`.
-
-The closed subgroup `V(I ⊔ span E)` of `G` has the Lie algebra of `G`, hence is `G`
-(`eq_of_le_of_lieSubalgebra_eq`). -/
+`X ∈ Lie G`, has `P`. -/
 theorem forall_zeroLocus_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
     (E : Set (CoordinateRing n k))
     (P : (R : Type u) → [CommRing R] → [Algebra k R] → zeroLocus I R → Prop)
@@ -470,11 +467,7 @@ theorem one_add_eps_smul_mem_ofIsIdempotentElem_iff {P : Matrix n n k} (hPi : Is
 
 /-- **Group-invariant and Lie-invariant subspaces agree.** Over an algebraically closed field of
 characteristic zero, a subspace `U ⊆ kⁿ` is stable under a connected closed subgroup `G = V(I)` of
-`GL_n` if and only if it is stable under its Lie algebra.
-
-The stabilizer of `U` in `G` is the closed subgroup cut out by the linear equations
-`(1 - P) g P = 0` for a projection `P` onto `U`; its Lie algebra is the stabilizer of `U` in
-`Lie G`. -/
+`GL_n` if and only if it is stable under its Lie algebra. -/
 theorem forall_mulVec_mem_iff_forall_lieSubalgebra [IsAlgClosed k] [CharZero k] [I.IsPrime]
     (U : Submodule k (n → k)) :
     (∀ g ∈ zeroLocus I k, ∀ u ∈ U, (g : Matrix n n k) *ᵥ u ∈ U) ↔
@@ -579,11 +572,7 @@ theorem center_eq_sup_span [IsAlgClosed k] [CharZero k] :
 
 /-- **The Lie algebra of the centre.** Over an algebraically closed field of characteristic zero,
 the Lie algebra of the centre `Z(G)` of a connected closed subgroup `G = V(I)` of `GL_n` is the
-centre of the Lie algebra of `G`: the `X ∈ Lie G` commuting with all of `Lie G`.
-
-A tangent vector of `Z(G)` is a tangent vector of `G` commuting with `G(k)` (the scheme-theoretic
-centralizer is reduced, `center_eq_sup_span`), and a matrix commutes with the connected `G(k)` if
-and only if it commutes with `Lie G` (`forall_commute_iff_forall_lieSubalgebra`). -/
+centre of the Lie algebra of `G`: the `X ∈ Lie G` commuting with all of `Lie G`. -/
 theorem mem_lieSubalgebra_center_iff [IsAlgClosed k] [CharZero k] [I.IsPrime]
     {X : Matrix n n k} :
     X ∈ lieSubalgebra (center I) ↔ X ∈ lieSubalgebra I ∧ ∀ Y ∈ lieSubalgebra I, X * Y = Y * X := by

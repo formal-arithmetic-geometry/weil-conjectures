@@ -92,8 +92,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- **Projective dominations are stable under base change**: the base change of a projective
 domination of `f : X ⟶ Y` along `g : Y' ⟶ Y` is a projective domination of
-`X ×_Y Y' ⟶ Y'`. The closed immersion into `ℙ(n; Y')` is the base change of the given one along
-`ℙ(n; Y') ⟶ ℙ(n; Y)`. -/
+`X ×_Y Y' ⟶ Y'`. -/
 noncomputable def pullback (D : ProjectiveDomination f) {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     ProjectiveDomination (Limits.pullback.snd f g) :=
   have h : IsPullback (Limits.pullback.fst (D.π ≫ f) g) (Limits.pullback.snd (D.π ≫ f) g)
@@ -124,14 +123,7 @@ noncomputable def pullback (D : ProjectiveDomination f) {Y' : Scheme.{u}} (g : Y
 /-- **Proper schemes over an affine base are dominated by projective ones.** Let `f : X ⟶ Y`
 be proper with `Y` affine; no Noetherian or finite presentation hypothesis is imposed. Then
 there are a proper surjection `π : X̃ ⟶ X` and a closed immersion `i : X̃ ⟶ ℙ(n; Y)` over `Y`,
-with `n` finite.
-
-The separated finitely presented envelope `X ⟶ X'` of `f` (Stacks Project Tag 01ZJ) is the base
-change of a separated finitely presented `X₀' ⟶ Y₀` over a stage `Y₀` of the Noetherian
-approximation of `Y` (Stacks Project Tag 01ZQ). Chow's lemma over `Y₀` gives a proper surjection
-`π₀ : X₀'' ⟶ X₀'` and an immersion `X₀'' ⟶ ℙ(n; Y₀)`; base changing `π₀` along `X' ⟶ X₀'` and
-then along `X ⟶ X'` gives `π`, and the induced morphism to `ℙ(n; Y)` is an immersion whose
-source is proper over `Y`, hence a closed immersion. -/
+with `n` finite. -/
 theorem nonempty_of_isAffine [IsAffine Y] [IsProper f] : Nonempty (ProjectiveDomination f) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f

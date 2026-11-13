@@ -273,8 +273,7 @@ private theorem clopenLocalizedSquarePlus_fac (σ : G ⋙ L' ⟶ L ⋙ G')
 
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃]
   [EnoughInjectives C₁] [EnoughInjectives C₃] in
-/-- Component factorization of the exact localized square. This exposes the
-normalization of the constructed map without exposing its implementation.
+/-- Component factorization of the exact localized square.
 Source: Stacks Tags 015F and 070K. -/
 theorem clopenLocalizedSquarePlus_factorization (σ : G ⋙ L' ⟶ L ⋙ G')
     (K : HomotopyCategory.Plus C₂) :
@@ -1127,8 +1126,7 @@ private theorem ordinary_normalized [Finite Λ] {V W S T : Scheme.{u}}
 
 /-- The underived mate is exactly the section-preserving proper-support identification;
 the derived mate is the named normalized finite comparison and agrees with its ambient
-unbounded construction. Quasi-compactness is required only as in the node, with no
-cartesian assumption. The representative and transpose clauses are stated below.
+unbounded construction. No cartesian assumption is made.
 Source: Stacks Tag 0F7B, first proof paragraph. -/
 theorem etaleClopenMateNormalization [Finite Λ] {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)

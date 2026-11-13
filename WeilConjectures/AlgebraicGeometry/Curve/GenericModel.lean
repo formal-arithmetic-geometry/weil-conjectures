@@ -67,9 +67,7 @@ lemma IsGenericCurveModel.of_iso {X₁ X₂ S : Scheme.{u}} (e : X₁ ≅ X₂) 
   · simpa using hD
   · simpa using hY a
 
-/-- A generic curve model with
-finite comparison boundary.
-
+/-- **A generic curve model with finite comparison boundary.**
 Let `S` be integral of finite type over a field `k`, `f : X ⟶ S` projective (`f = π ∘ i` for a
 closed immersion `i : X ⟶ ℙ(n; S)`) with geometric fibres of dimension at most one. There are
 

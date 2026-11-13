@@ -77,15 +77,9 @@ lemma Scheme.HasTorsionCohomologicalDimensionLE.spec_of_isFractionRing (R : Comm
     (IsLocalization.algEquiv (nonZeroDivisors R) (Spec R).functionField K).toRingEquiv
   exact hlim.of_isUniversalHomeomorphism (Spec.map (CommRingCat.ofHom e.symm.toRingHom))
 
-/-- One-variable fields over a separably closed
-field.
-
-If `F` is a separably closed field, then the rational function field `F(x)` has torsion
-cohomological dimension at most one: `cd_tor(Spec F(x)) ≤ 1`. Indeed `Spec F(x)` is the limit of
-the nonempty affine opens `U` of the affine line over `F`
-(`AlgebraicGeometry.Scheme.HasTorsionCohomologicalDimensionLE.spec_of_isFractionRing`), and each
-`U` is an affine curve over `F`, so that `cd_tor(U) ≤ 1`
-(`AlgebraicGeometry.IsCurve.hasTorsionCohomologicalDimensionLE_of_isSepClosed`). -/
+/-- **One-variable fields over a separably closed field.** If `F` is a separably closed field,
+then the rational function field `F(x)` has torsion cohomological dimension at most one:
+`cd_tor(Spec F(x)) ≤ 1`. -/
 theorem Scheme.hasTorsionCohomologicalDimensionLE_one_ratFunc (F : Type u) [Field F]
     [IsSepClosed F] : (Spec (.of (RatFunc F))).HasTorsionCohomologicalDimensionLE 1 := by
   have : IsDomain (CommRingCat.of (Polynomial F)) := inferInstanceAs (IsDomain (Polynomial F))

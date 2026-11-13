@@ -22,11 +22,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 /-!
 # Varieties, projective morphisms and smooth projective curves
 
-This file sets up the conventions of the curve-calculation chapter of the blueprint: varieties
-and curves over a field, (H-)projective morphisms, the relative dimension of a morphism, and
-smooth projective curves. It compares them with the curves of
-`WeilConjectures/AlgebraicGeometry/Curve.lean` (`AlgebraicGeometry.IsCurve`,
-`AlgebraicGeometry.IsConnectedCurve`), which are the curves of the smooth-curve chapter.
+This file sets up conventions for varieties and curves over a field, (H-)projective morphisms,
+the relative dimension of a morphism, and smooth projective curves. It compares them with the
+curves of `WeilConjectures/AlgebraicGeometry/Curve.lean` (`AlgebraicGeometry.IsCurve`,
+`AlgebraicGeometry.IsConnectedCurve`).
 
 ## Main definitions
 
@@ -142,8 +141,7 @@ instance (priority := 100) IsIntegralCurve.isConnectedCurve (f : X ⟶ Spec (.of
 
 /-- **Smooth projective curves are smooth connected curves.** A smooth projective curve `X`
 over a field `K` is a smooth connected curve: `X` is nonempty, connected, separated, of finite
-type and of dimension one over `K`, and smooth over `K`. The blueprint states this over an
-algebraically closed field, but the argument does not use it. -/
+type and of dimension one over `K`, and smooth over `K`. -/
 theorem IsSmoothProjectiveCurve.isConnectedCurve_and_smooth (f : X ⟶ Spec (.of K))
     [IsSmoothProjectiveCurve f] : IsConnectedCurve f ∧ Smooth f ∧ IsProper f :=
   ⟨inferInstance, inferInstance, inferInstance⟩

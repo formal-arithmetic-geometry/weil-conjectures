@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 /-!
 # Multiplicative, additive, roots-of-unity and Frobenius-kernel group schemes
 
-Blueprint `def-sc-gm-ga`; Stacks Project, Tags 022U, 022V, 040M and 0CC9.
+Source: Stacks Project, Tags 022U, 022V, 040M and 0CC9.
 
 The underlying affine schemes and all coordinate maps are explicit. Group structures
 are chosen from unique-existence theorems fixing all three structure maps

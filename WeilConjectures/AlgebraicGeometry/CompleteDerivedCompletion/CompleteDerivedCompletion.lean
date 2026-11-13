@@ -36,66 +36,15 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.finiteModulesDerived
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
 
-/-- All six assertions about integral module towers and their derived completion.
-
-Proof plan, following the node's fifteen steps:
-1. On the small pro-étale site identify internal modules with sheaves of modules using
-   `def-weil-pbc-internal-abelian-sheaf-module-equivalence`. Apply
-   `lem-weil-pbc-small-module-diagrams-grothendieck`; evaluation is exact by
-   `lem-weil-tower-category-levelwise-abelian`.
-2. The free diagram at n is N below n and zero above n. Its adjunction to evaluation
-   and levelwise exactness give the exact left adjoint. Apply
-   `lem-weil-pbc-right-adjoint-preserves-kinjective` to evaluation.
-3. Both module and tower categories have K-injective resolutions by
-   `prose-03-02`. Apply `lem-weil-pbc-kinjective-total-derived`
-   to ordinary limit and levelwise pushforward; the derived-limit exactness also follows
-   from `lem-weil-pbc-ringed-strict-tower-homotopy-limit`.
-4. Represent a derived tower arrow by a map between K-injective resolutions using
-   `lem-weil-pbc-kinjective-hom-derived`. Evaluation commutes with cohomology; an arrow
-   whose evaluations are isomorphisms is a quasi-isomorphism levelwise and hence globally.
-5. Whisker the ordinary module adjunction levelwise. Pullback is exact by
-   `prose-03-02`. Apply
-   `lem-weil-pbc-tower-derived-evaluation-normalization` to obtain the canonical mate
-   isomorphisms, their transition compatibility and their unit and counit equations.
-6. Ordinary pushforward and limit have exact left adjoints and preserve K-injectives.
-   The right adjoint pushforward preserves ordinary limits by
-   `situation-conventions`. Derive that ordinary isomorphism;
-   equivalently conjugate the constant-pullback comparison under the derived adjunctions.
-7. Products are exact by `proposition-exact-products--1`. Apply
-   `lem-weil-pbc-exact-products-roos-comparison` to identify Rlim with the functorial
-   Milnor fibre of 1-shift, normalized by the ordinary limit inclusion.
-8. For a constant tower, 1-shift is split surjective, by successive subtraction.
-   Its kernel is the diagonal complex and the extra summand is contractible. The
-   constant-limit unit is therefore an isomorphism, with the specified diagonal map.
-9. An exact equivalence preserves products and intertwines the shift endomorphism by
-   its projections. By `situation-conventions`, applying it to the
-   Milnor fibre gives the comparison for the levelwise equivalence. This is the
-   isomorphism obtained by conjugating the constant comparison for its inverse.
-10. For bounded finite-free P only finitely many finite sums occur in each total degree.
-   They commute with products and the shift. Use `lem-pc-tensor-mapping-cone-iso` for
-   cone compatibility and `lem-weil-pbc-independent-bounded-flat-kflat` for K-flatness.
-   This gives the tensor comparison naturally on the entire derived tower category.
-11. The two-term resolutions R_n=[A→A] use π^(n+1) and transitions (π,1).
-   `lemma-reduction-derived-nakayama--1` identifies them with finite reductions.
-   `lem-pur-kflat-tensor-quasiiso-independent` gives descent of the strict cone tower;
-   tensor-cone compatibility gives exactness. Degree-zero inclusions commute with
-   transitions and identify the resulting completion unit with
-   `definition-derived-adic-completeness--1`.
-12. Choose a K-flat representative by `lem-pc-kflat-resolution`. For fixed m, commute
-   tensor with R_m through Rlim by step 10, replace R_m by A_m, and restrict to the
-   cofinal tail n≥m using `lem-fix-cofinal-roos-restriction`. The resulting tower splits
-   into the constant reduction and the shifted reduction with transition π.
-13. The shift on the second tower has m+1-st power zero. Hence 1-shift has the finite
-   geometric-series inverse and its fibre is contractible. The constant summand has
-   limit the m-th reduction by step 8. Track the augmented degree-zero inclusions:
-   the specified map κ_M induces the identity of that constant summand, hence its
-   actual finite reduction is invertible.
-14. The map red(κ_M) already lives in the derived category of towers. Its evaluations
-   are the maps of step 13. Apply the conservativity from step 4 to this map itself.
-15. Apply `lem-weil-pbc-ringed-koszul-completion-reflector` with the singleton
-   uniformizer. Its tower and unit are those of step 11. Its completion is complete;
-   its unit criterion, identified with `definition-derived-adic-completeness--1`, gives the stated
-   completeness of every output without assuming completeness of the input. -/
+/-- All six assertions about integral module towers and their derived completion: the tower
+category is Grothendieck abelian; evaluation and the free diagram are exact and evaluation
+preserves K-injective complexes; the derived evaluations detect isomorphisms; pullback of
+towers is exact and compatible with evaluation and with derived pushforward; the derived limit
+commutes with pushforward, exact equivalences and tensoring with bounded finite free complexes;
+and the derived completion is derived complete, with unit `kappa` inducing isomorphisms on
+reductions and invertible exactly on derived complete objects, together with the auxiliary
+statements on reductions, constant towers and the Milnor fibre description of the derived
+limit. -/
 theorem completeDerivedCompletion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

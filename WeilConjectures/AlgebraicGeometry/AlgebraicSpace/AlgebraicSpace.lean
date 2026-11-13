@@ -244,8 +244,8 @@ theorem structurePresheaf_isSheaf (F : AlgebraicSpace S) :
     (Functor.op_comp_isSheaf_of_isSheaf F.etaleForget _ _ _
       (Scheme.isSheaf_Γ Scheme.etaleTopology))
 
-/-- The structure sheaf: its data are the explicit global-sections presheaf; only the
-sheaf-condition proof is postponed in the preceding named theorem.
+/-- The structure sheaf of an algebraic space: the global-sections presheaf
+`structurePresheaf`, which is a sheaf by `structurePresheaf_isSheaf`.
 Source: Stacks, Tag 03G7. -/
 def structureSheaf (F : AlgebraicSpace S) : Sheaf F.etaleTopology RingCat.{u} :=
   ⟨F.structurePresheaf, F.structurePresheaf_isSheaf⟩

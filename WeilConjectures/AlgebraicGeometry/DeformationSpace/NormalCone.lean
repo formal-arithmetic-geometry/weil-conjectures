@@ -16,8 +16,8 @@ Let `g : V ⟶ B` have a section `s`. The projection `π_N : N_s ⟶ B` of the n
 quasi-compact as soon as `g` is. When `g` is smooth of relative dimension `d` and `s` is a closed
 section, `π_N` is smooth of relative dimension `d`, being the fibre over `t = 0` of the smooth
 deformation `g̃`. It is then compactifiable over a quasi-compact quasi-separated base, by Nagata's
-theorem. These are the hypotheses under which the section invariant `𝒞(π_N, 0_N)` of
-`lemma-section-normal-bundle` is defined.
+theorem. These are the hypotheses under which the section invariant `𝒞(π_N, 0_N)` of the
+normal bundle is defined.
 
 ## Main statements
 

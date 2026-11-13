@@ -499,8 +499,8 @@ private theorem constant_coherence_Q (n : ℕ)
 end ProjectionSquare
 
 /-- Roos triangles, product comparison and the projection compatibility for direct image,
-with the levelwise evaluation isomorphisms: assertion (1) of
-proposition-proper-base-change-complete-integral--1, with its Milnor-cone description.
+with the levelwise evaluation isomorphisms: the derived direct image commutes with the derived
+limit of towers, with its Milnor-cone description.
 Source: Stacks Tag 0A07. -/
 theorem directImage_roos_limit_data :
     (∀ n : ℕ, IsIso (pushEvaluationMap l E f n)) ∧

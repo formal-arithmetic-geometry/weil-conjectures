@@ -22,7 +22,7 @@ locally free `ℱ` the pairing
 ```
 is perfect. Here `Hom(ℱ, ω) = H⁰(X, Hom(ℱ, ω)) ≅ H⁰(X, ℱᵛ ⊗ ω)` (`ω` is invertible,
 `AlgebraicGeometry.Scheme.Modules.dualTensorHomIso`), and the pairing is the cup-product /
-evaluation pairing of the blueprint: for `b ∈ H⁰(X, Hom(ℱ, ω))` and `a ∈ H¹(X, ℱ)`, the cup
+evaluation pairing: for `b ∈ H⁰(X, Hom(ℱ, ω))` and `a ∈ H¹(X, ℱ)`, the cup
 product `a ∪ b ∈ H¹(X, ℱ ⊗ Hom(ℱ, ω))` followed by evaluation `ℱ ⊗ Hom(ℱ, ω) ⟶ ω` is
 `H¹(b)(a)`, since cup product with a global section `b` is `H¹` of the morphism
 `ℱ ⟶ ℱ ⊗ Hom(ℱ, ω)`, `s ↦ s ⊗ b`, and evaluation after it is `b` itself.
@@ -33,7 +33,7 @@ locally free modules (`ω` is itself finite locally free) is determined by the i
 (`AlgebraicGeometry.Scheme.Modules.dualPairing`).
 
 The form `t` is obtained abstractly. For `X` integral, the same duality statements with the
-residue trace `H¹(X, ω) → k` of the blueprint (sum of Tate residues over the closed points) in
+residue trace `H¹(X, ω) → k` (sum of Tate residues over the closed points) in
 place of `t` are proved in `WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace`
 (`AlgebraicGeometry.Scheme.serreDuality_residueTrace`), deduced from the results here.
 
@@ -46,7 +46,7 @@ place of `t` are proved in `WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
   `H¹(X, ℱ) ≅ H⁰(X, Hom(ℱ, ω))^∨` of the perfect pairing (the case `q = 0` of duality, applied
   to `ℱᵛ ⊗ ω`).
 - `AlgebraicGeometry.Scheme.exists_trace_perfect_cupPairing`: the same perfect pairing in the
-  cup-product form `H¹(ℱ) ⊗ H⁰(ℱᵛ ⊗ ω) → H¹(ℱ ⊗ ℱᵛ ⊗ ω) → H¹(ω) → k` of the blueprint.
+  cup-product form `H¹(ℱ) ⊗ H⁰(ℱᵛ ⊗ ω) → H¹(ℱ ⊗ ℱᵛ ⊗ ω) → H¹(ω) → k`.
 -/
 
 @[expose] public section
@@ -80,12 +80,7 @@ variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spe
 with canonical module `ω = Ω¹_{X/k}`. There is a `k`-linear form `t : H¹(X, ω) → k` such that
 for every finite locally free `ℱ` the duality pairing `Hom(ℱ, ω) → H¹(X, ℱ)^∨`,
 `φ ↦ t ∘ H¹(φ)`, is bijective. Under `Hom(ℱ, ω) = H⁰(X, Hom(ℱ, ω)) ≅ H⁰(X, ℱᵛ ⊗ ω)` this is the
-trace pairing `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ω) → k` (cup product, evaluation, trace): for a
-global section `b` of `Hom(ℱ, ω)`, cup product with `b` followed by evaluation is `H¹(b)`.
-
-The form `t` is the image of `𝟙 ω` under the natural isomorphism `Hom(-, ω) ≅ H¹(X, -)^∨` of
-`nonempty_dual_H_one_iso`. For `X` integral, the statement for the residue trace of the blueprint
-is `bijective_dualPairing_residueTrace` (file `Curve/ResidueTrace`). -/
+trace pairing `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ω) → k` (cup product, evaluation, trace). -/
 theorem exists_trace_bijective_dualPairing :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →
@@ -126,9 +121,7 @@ such that for every finite locally free `ℱ` the `k`-bilinear pairing
 ```
 is perfect: both `H⁰(X, Hom(ℱ, ω)) → H¹(X, ℱ)^∨` (the case `q = 1` of duality) and
 `H¹(X, ℱ) → H⁰(X, Hom(ℱ, ω))^∨` (the case `q = 0` of duality for `ℱᵛ ⊗ ω`, as
-`Hom(ℱ, ω) ≅ ℱᵛ ⊗ ω`) are bijective. As explained in `exists_trace_bijective_dualPairing`,
-this is the cup-product / evaluation / trace pairing of the blueprint. For `X` integral, the
-statement for the residue trace is `bijective_dualPairingH_residueTrace`. -/
+`Hom(ℱ, ω) ≅ ℱᵛ ⊗ ω`) are bijective. -/
 theorem exists_trace_bijective_dualPairingH :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →
@@ -159,10 +152,7 @@ curve over `k` with canonical module `ω = Ω¹_{X/k}`. There is a `k`-linear fo
   H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) --∪--> H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) --H¹(ev)--> H¹(X, ω) --t--> k
 ```
 (`Modules.cupPairing`: cup product `Modules.cupH0`, evaluation `Modules.evalTensor`) is perfect:
-both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is
-`exists_trace_bijective_dualPairingH` transported along `ℱᵛ ⊗ ω ≅ Hom(ℱ, ω)`
-(`Modules.cupPairing_eq`). For `X` integral, the statement for the residue trace of the
-blueprint is `serreDuality_residueTrace` (file `Curve/ResidueTrace`). -/
+both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. -/
 theorem exists_trace_perfect_cupPairing :
     ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
       ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →

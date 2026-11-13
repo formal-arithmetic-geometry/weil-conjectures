@@ -21,6 +21,14 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 - `affineRoots_representability`: the natural bijections, their sheaf identification, and
   their compatibility with arbitrary base change.
+
+## Implementation details
+
+In `affineRoots_representability`, the representable presheaf is transported by the standard
+`ULift` functor to the coefficient universe `u+1`, and the roots are described through the
+kernel inclusion into `gmSheaf`, whose sections are lifted, additively written units. Mathlib's
+`Over.pullback` chooses `P ×_V V'`, with projection `pullback.fst` to `P`, for the base change
+written `V' ×_V P` in the literature.
 -/
 
 @[expose] public section
@@ -133,14 +141,8 @@ private theorem roots_sections_equiv (S : Scheme.{u}) (n : ℕ) (U : S.Etaleᵒ�
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine root scheme represents roots of unity on all test schemes, naturally and
-compatibly with arbitrary base change. The presheaf isomorphism is the identification of
-sheaves: the left side is a sheaf by `smallEtaleRepresentablePresheaf_isSheaf`, and the right
-side is the underlying presheaf of the recorded roots sheaf. The representable presheaf is
-transported by the standard `ULift` functor to the coefficient universe `u+1`. The formula
-is specified using
-the kernel inclusion into `gmSheaf`, whose sections are lifted, additively written units.
-Mathlib's `Over.pullback` chooses `P ×_V V'`, with projection `pullback.fst` to `P`, for the
-base change denoted `V' ×_V P` in the source.
+compatibly with arbitrary base change. The presheaf isomorphism is an identification of
+sheaves with the recorded roots sheaf, a subsheaf of `gmSheaf`.
 
 Source: Stacks, Tag 040M and Tag 03PK. -/
 theorem affineRoots_representability (R : Type u) [CommRing R] (n : ℕ) (hn : 1 ≤ n) :

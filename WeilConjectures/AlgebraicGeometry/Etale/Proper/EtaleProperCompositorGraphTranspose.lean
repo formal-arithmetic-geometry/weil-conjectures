@@ -69,20 +69,7 @@ private theorem graphTransferNat_app
   rfl
 
 /-- The transpose of compact-support composition is the clopen graph transfer.
-Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J; SGA 4 XVII 6.2.11.
-
-Proof in words: proper support constructs a normalized sheaf map into c. Compute the
-chosen compositor after the raw direct-image unit on a compatible tower, using the
-proper comparison, etale graph comparison, and open/proper interchange unit formulas;
-then transport by common refinements. The sheaf graph-transpose theorem identifies
-the transpose of this mixed unit, followed by proper base change, with the explicit
-graph transfer after the same direct-image unit. Package the graph transfer and the
-compositor transpose followed by base change as natural transformations. Adjunction
-naturality gives equality after the right-derived unit on every homotopy object.
-Uniqueness of transformations out of the right-derived functor gives equality on all
-derived objects. The unit and support formulas also cover empty and identity maps.
-No representative complex, derived-functor unit, or sheaf transformation tau occurs
-in the assertion. -/
+Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J; SGA 4 XVII 6.2.11. -/
 theorem properCompositor_graph_transpose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

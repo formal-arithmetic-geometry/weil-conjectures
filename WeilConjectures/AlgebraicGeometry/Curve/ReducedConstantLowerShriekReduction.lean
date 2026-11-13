@@ -45,11 +45,8 @@ def ReducedConstantLowerShriekReductionData {k : Type u} [Field k] [IsAlgClosed 
         ((@Etale.openImmersionLowerShriek _ _ _ _ U' Y j' hopen).obj
            (Etale.constantModSheaf (ULift.{u + 1} (ZMod r)) U' r))
 
-/-- Transfer from smooth modification data.
-Source: Stacks 0A3Q, proof, finite pushforward and dense-open comparison paragraphs.
-Unpack the finite, surjective, smooth, dense-open-isomorphism and pullback hypotheses,
-install their typeclass instances, and apply
-`Assertions.lowerShriek_constantModSheaf_of_finite_coefficients` to the smooth assertion package. -/
+/-- The lower-shriek assertions for a reduced curve follow from smooth modification data.
+Source: Stacks 0A3Q, proof, finite pushforward and dense-open comparison paragraphs. -/
 theorem reducedConstantLowerShriekAssertions_of_reduction_data
     {k : Type u} [Field k] [IsAlgClosed k] {X U : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X] (j : U ⟶ X)

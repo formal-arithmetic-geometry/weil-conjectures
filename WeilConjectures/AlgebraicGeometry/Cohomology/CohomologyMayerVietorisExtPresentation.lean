@@ -105,10 +105,8 @@ variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     {X : Scheme.{u}}
 
 /-- The geometric realization of the two cohomology rows as contravariant Ext
-from one short exact sequence and its exact inverse image. The vertical identities
-identify the actual comparison maps with exact-functor action on Ext followed by
-the coefficient morphism. No row maps, row exactness, or connecting squares are
-asserted here.
+from one short exact sequence and its exact inverse image, identifying the comparison maps
+with exact-functor action on Ext followed by the coefficient morphism.
 
 Source: Stacks Project, Tag 01EB (the free-sheaf Mayer--Vietoris sequence),
 Section 01F7 (pullback of cohomology), and Tag 02KH (the two-open argument). -/

@@ -14,8 +14,7 @@ Source: Stacks Tags 09C9 and 099N.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedBaseChangeMap`
 -/
 
 @[expose] public noncomputable section
@@ -41,10 +40,8 @@ def AdicCoefficientDatum.completedExchange (K : d.derived X) :
       (d.directImageRlimIso f').inv.app
         ((d.towerPull g').obj ((completedReductionTower X d).obj K))
 
-/-- The completed base-change map on the precise domain of the blueprint: proper f,
-derived-complete K, and a retained bounded-below etale-origin witness at every finite
-quotient. The formula itself is the ambient ordered composite above; the witnesses
-certify its finite exchange maps and impose no compatibility or uniform bound. -/
+/-- The completed base-change map for proper `f` and derived-complete `K` with a bounded-below
+étale-origin witness at every finite quotient: the ordered composite above. -/
 def AdicCoefficientDatum.completedBaseChangeMap [IsProper f]
     (K : d.derived X) (_hK : d.TowerComplete X K)
     (_W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))

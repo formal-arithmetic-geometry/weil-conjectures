@@ -86,7 +86,6 @@ Source: Stacks Project, Tag 0F10.
 
 The common annihilator diagram gives the canonical filtered-colimit torsion condition
 on both sites. Its local sectionwise form is also stated for the pro-étale site.
-The comparison and finiteness statements are the corresponding blueprint clauses.
 -/
 
 @[expose] public section
@@ -119,10 +118,7 @@ noncomputable def ellPowerKernel {A : Type v} [Category.{w} A] [Abelian A]
     (ℓ : ℕ) {F : A} (r : ℕ) : A :=
   kernel ((ℓ ^ r : ℕ) • 𝟙 F)
 
-/-- The scalar-power annihilation identity needed by the kernel lift.
- Proof: write s = r + (s - r). Multiplication by `ℓ ^ s` factors as multiplication by `ℓ ^ r`
-followed by multiplication by `ℓ ^ (s - r)`; the kernel inclusion annihilates the first factor, so
-their composite is zero. -/
+/-- For `r ≤ s`, multiplication by `ℓ ^ s` annihilates the kernel of multiplication by `ℓ ^ r`. -/
 theorem ellPowerKernelMap_condition {A : Type v} [Category.{w} A] [Abelian A]
     (ℓ : ℕ) {F : A} {r s : ℕ} (h : r ≤ s) :
     kernel.ι ((ℓ ^ r : ℕ) • 𝟙 F) ≫ ((ℓ ^ s : ℕ) • 𝟙 F) = 0 := by
@@ -140,16 +136,14 @@ noncomputable def ellPowerKernelMap {A : Type v} [Category.{w} A] [Abelian A]
   kernel.lift ((ℓ ^ s : ℕ) • 𝟙 F) (kernel.ι ((ℓ ^ r : ℕ) • 𝟙 F))
     (ellPowerKernelMap_condition ℓ h)
 
-/-- Identity law for the annihilator transition maps.
- Proof: uniqueness of kernel lifts for the identity transition. -/
+/-- Identity law for the annihilator transition maps. -/
 theorem ellPowerKernelFunctor_map_id {A : Type v} [Category.{w} A] [Abelian A]
     (ℓ : ℕ) {F : A} (r : ℕ) :
     ellPowerKernelMap ℓ (F := F) (le_refl r) = 𝟙 _ := by
   apply (cancel_mono (kernel.ι ((ℓ ^ r : ℕ) • 𝟙 F))).1
   simp only [ellPowerKernelMap, kernel.lift_ι, Category.id_comp]
 
-/-- Composition law for the annihilator transition maps.
- Proof: uniqueness of kernel lifts and transitivity of `≤`. -/
+/-- Composition law for the annihilator transition maps. -/
 theorem ellPowerKernelFunctor_map_comp {A : Type v} [Category.{w} A] [Abelian A]
     (ℓ : ℕ) {F : A} {r s t : ℕ}
     (f : r ⟶ s) (g : s ⟶ t) :
@@ -167,8 +161,7 @@ noncomputable def ellPowerKernelFunctor {A : Type v} [Category.{w} A] [Abelian A
   map_id := fun r ↦ ellPowerKernelFunctor_map_id ℓ r
   map_comp := fun f g ↦ ellPowerKernelFunctor_map_comp ℓ f g
 
-/-- Naturality of the annihilator inclusions into `F`.
- Proof: the defining equation of the kernel lift. -/
+/-- Naturality of the annihilator inclusions into `F`. -/
 theorem ellPowerKernelCocone_naturality {A : Type v} [Category.{w} A] [Abelian A]
     (ℓ : ℕ) {F : A} {r s : ℕ} (f : r ⟶ s) :
     ellPowerKernelMap ℓ (F := F) (CategoryTheory.leOfHom f) ≫
@@ -786,13 +779,7 @@ theorem relativeCohomologicalDimension_eq_etale
 
 /-- Over a field of finite `ℓ`-cohomological dimension, a finite-type morphism between
 finite-type schemes over that field has finite relative dimension.
-Source: Stacks Tag 0F10. Proof: finite-type schemes over a field are Noetherian, hence
-qcqs; every morphism from such a source is qcqs, since inverse images of affine opens, also for its
-diagonal, are quasi-compact opens of a Noetherian scheme. A locally prime-power torsion sheaf
-is torsion by the local-section criterion of `definition-torsion-sheaves--3`.
-Apply `theorem-results-from-etale-theory--6` to the underlying étale torsion sheaves and
-use the relative comparison to transport its uniform vanishing bound to classical prime-power
-torsion sheaves. -/
+Source: Stacks Tag 0F10. -/
 theorem relativeCohomologicalDimension_lt_top_of_finiteType
     (ℓ : ℕ) (hℓ : Nat.Prime ℓ) {K : Type u} [Field K]
     (hK : cohomologicalDimension ℓ hℓ (Spec (.of K)) < ⊤)
@@ -826,15 +813,7 @@ theorem relativeCohomologicalDimension_lt_top_of_finiteType
 
 /-- Over a field of finite `ℓ`-cohomological dimension, every finite-type scheme has
 finite absolute dimension.
-Source: Stacks Tag 0F10. Proof: use `theorem-results-from-etale-theory--6` for a
-relative bound e on the structure morphism. The field hypothesis and the comparison give an absolute
-bound c for prime-power torsion sheaves on the field. By `lem-sbc-qcqs-higher-images-prime-torsion`,
-all higher direct images are again locally prime-power torsion, using exact conservative geometric
-stalks and filtered colimits to identify this with the kernel-colimit convention. Apply
-`lem-sc-leray-vanishing-bound` to obtain the bound c + e, then use the absolute
-comparison. Finite type over a field gives a Noetherian source, so the scheme and
-its structure morphism are qcqs, as in the relative finiteness proof.
-Empty schemes satisfy the same bound. -/
+Source: Stacks Tag 0F10. -/
 theorem cohomologicalDimension_lt_top_of_finiteType
     (ℓ : ℕ) (hℓ : Nat.Prime ℓ) {K : Type u} [Field K]
     (hK : cohomologicalDimension ℓ hℓ (Spec (.of K)) < ⊤)

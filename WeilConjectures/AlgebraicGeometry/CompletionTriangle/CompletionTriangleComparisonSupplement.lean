@@ -1456,39 +1456,7 @@ private def roosTriangleIso
 /-- Principal completion descends with its specified augmentation, coherent shifts,
 and morphism of distinguished triangles.
 
-Source: Stacks Tag 05RU.
-
-Proof, following the nine steps of the updated DAG node:
-1. Assemble the additive principal-reduction tower and apply the Roos functor.
-   Their quasi-isomorphism clauses imply that this composite preserves quasi-isomorphisms.
-   The compatible principal units give its strict natural augmentation.
-2. Descend the composite and augmentation through DerivedCategory.Q with Localization.lift,
-   Localization.fac and Localization.liftNatTrans. The application formula gives the
-   specified equality between the descended and strict augmentations.
-3. Transfer additivity through the descent isomorphism, the homotopy quotient and Qh.
-4. Assemble the coherent principal shifts by evaluation and compose with the Roos shifts.
-   Roos augmentation naturality and shift compatibility give strict augmentation compatibility.
-   Descend both shifts and augmentation compatibility through the localization.
-5. Work in the actual internal-module category of the completion definition. Its adopted
-   flat K-flat resolution supplies flat representatives without changing coefficient encoding.
-6. Pull back the exact coefficient sequence of lemma-reduction-derived-nakayama--1 and
-   identify its scalar with the canonical principal scalar. Tensor exactness and the
-   cone-to-quotient theorem give the cone-to-tensor quasi-isomorphism for flat complexes.
-   Transfer this result to arbitrary K-flat complexes along a flat K-flat resolution,
-   using tensor invariance, cone two-out-of-three and naturality. Coordinate formulas
-   prove transition compatibility and preservation of the specified units.
-7. Apply the Roos quasi-isomorphism clause to this augmented tower map. The explicit
-   biproduct sign change (v,u) ↦ (v,-u) identifies its result with AdicCompletion.roos
-   and fixes the augmentation. Localizing and transporting along any representative
-   gives exactly completionMap by naturality. The recorded completeness criterion
-   then identifies completeness with invertibility of the descended augmentation.
-8. Assemble the principal cone comparisons by evaluation, including the inclusion and
-   signed-boundary equations, and compose with the Roos cone-triangle comparison.
-   Thus the strict composite sends a cone triangle to the corresponding cone triangle.
-9. Every distinguished derived triangle has a chain-map cone representative. Transport
-   step 8 through the descent isomorphism to prove that F preserves distinguished triangles.
-   Naturality gives the first two squares of the augmentation morphism; naturality at
-   the last arrow followed by augmentation shift compatibility gives its third square. -/
+Source: Stacks Tag 05RU. -/
 theorem completion_triangle_comparison :
     ∃ data : PrincipalReductionConeData l E X, data.IsCanonical l E X ∧
     ∃ (a : 𝟭 (CochainComplex (Modules l E X) ℤ) ⟶ complexCompletion l E X data)

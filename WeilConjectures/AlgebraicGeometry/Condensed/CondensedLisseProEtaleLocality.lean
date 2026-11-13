@@ -57,18 +57,9 @@ noncomputable instance condensedDerivedBraiding
   DerivedCategory.braidedCategory' _
 
 /-- Inverse image along any scheme morphism, using the canonical coefficient identification,
-is exact and strong symmetric monoidal. Between symmetric categories, `Functor.Braided`
-is exactly strong symmetric monoidality, including invertible tensor and unit comparisons.
-Source: HRS Section 3, paragraph before (3.1).
-
-Proof (DAG step 1): `condensedPullbackHom` is the component at Λ of the monoidal comparison
-`upperStarFromPointComp`, hence a ring isomorphism. The published module inverse image
-extends scalars along this exact map and is exact. Its termwise derived functor is
-triangulated. Use the explicit balanced-tensor monoidal structure and braiding of
-IntegralResidueOrdinaryMonoidal. InverseImageModuleFlat proves preservation of flat modules.
-The generic left-derived monoidal construction then supplies a braided structure on LF.
-Transport it along the canonical comparison LF ≅ D(F), using the induced monoidal
-natural isomorphism to transport the braided axiom. -/
+is exact and strong symmetric monoidal (`Functor.Braided`, with invertible tensor and unit
+comparisons).
+Source: HRS Section 3, paragraph before (3.1). -/
 theorem condensed_derivedPullback_exact_symmetricMonoidal
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {T X : Scheme.{u}} (f : T ⟶ X) :
@@ -99,11 +90,7 @@ theorem condensed_derivedPullback_exact_symmetricMonoidal
     braided := (Functor.LaxBraided.ofNatIso e).braided }⟩⟩
 
 /-- Arbitrary scheme inverse image preserves lisse (dualizable) condensed complexes.
-Source: HRS Definition 3.3 and the Section 3 pullback paragraph.
-
-Proof (DAG step 2): apply the strong symmetric monoidal functor of step 1 to a dual,
-its evaluation and its coevaluation. Compose with the invertible tensor and unit
-comparisons. Their coherence transports both triangle identities, so the image is dualizable. -/
+Source: HRS Definition 3.3 and the Section 3 pullback paragraph. -/
 theorem condensed_derivedPullback_preserves_dualizable
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -130,16 +117,7 @@ attribute [local reducible] sheafSymmetricCategory sheafBraidedCategory
 
 -- The derived-category isomorphisms in the pullback branch need extra unification.
 /-- A single morphism tests dualizability before and after every weakly etale pullback.
-
-Choose a K-flat resolution P of K and the generic DualizabilityDatum for P. Its map χ
-models [P,1] ⊗ P → [P,P]. Weakly etale abelian pullback has an exact left adjoint:
-left Kan extension over the discrete set of lifts, then sheafification. The ordinary
-closed comparison gives its projection formula, which lifts the adjunction to modules.
-Coefficient transport is an exact equivalence. Thus the lifted left adjoint is exact,
-and pullback preserves K-injectives. The native module closed comparison and preservation
-of flat modules let DualizabilityDatum.map use the same χ after pullback. The two generic
-criteria identify dualizability with invertibility of Q(χ) and its image.
-Source: HRS Lemma 4.5, proof, and the source-library DualizableTransfer construction. -/
+Source: HRS Lemma 4.5. -/
 private theorem condensed_dualizability_test
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})
     (K : DerivedCategory
@@ -277,16 +255,7 @@ private theorem condensed_dualizability_test
 
 /-- Dualizability is local for every pro-etale covering family, including empty and
 infinite families. The index universe is independent of the universe of schemes.
-Source: HRS Definition 3.3 and Lemma 4.5, lisse assertion.
-
-Proof (DAG step 4): the forward direction is monoidal preservation of a dual.
-For the converse use condensed_dualizability_test: one derived morphism a is invertible
-exactly when K is dualizable, and every weakly etale inverse image of a is invertible
-exactly when the corresponding inverse image of K is dualizable. The private helper
-constructs a using K-flat and K-injective resolutions and proves these equivalences with
-the generic chain-level dualizability criterion. Joint conservativity from
-lem-zl-condensed-cover-restriction-conservative detects invertibility of a. This works
-for every cover, including an empty or infinite family. -/
+Source: HRS Definition 3.3 and Lemma 4.5, lisse assertion. -/
 theorem condensed_dualizable_iff_proetale_cover
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})
     (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X)

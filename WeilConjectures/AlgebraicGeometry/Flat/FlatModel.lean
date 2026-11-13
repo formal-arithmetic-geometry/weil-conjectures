@@ -208,19 +208,7 @@ def etaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Fin
         ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).obj L)))
 
 /-- The Noetherian complement on the etale site, with the recorded finite-value
-constructibility and the recorded Tor tests on every module sheaf in degree zero.
-
-Proof (node steps 1 and 3--7): use lem-sf-etale-flat-constructible directly, without
-comparison descent. Clauses 1--2 of lemma-flat-models-generators--2 give an ordered
-stratification and a finite extension filtration of each flat constructible term.
-Finite stalks give finite generation on each locally constant restriction, and inverse
-image preserves flatness. The canonical open factor through the scheme-theoretic image
-therefore identifies each filtration factor with an etaleClosureGenerators object.
-The short exact sequences give distinguished single-object triangles, so finite
-induction proves the property for each term, starting with the zero filtration member.
-Apply HomotopyCategory.mem_subcategory_of_strictly_bounded to the inverse image of P
-under Qh; this implements the bounded stupid-tail induction. Finally transport across
-the quotient-comparison and representing isomorphisms. -/
+constructibility and the recorded Tor tests on every module sheaf in degree zero. -/
 theorem boundedConstructible_induction
     (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [Finite A]
     (P : ObjectProperty (Etale.DerivedCategoryModule A X))

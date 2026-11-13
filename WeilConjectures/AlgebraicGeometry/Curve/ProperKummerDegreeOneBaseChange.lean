@@ -38,17 +38,9 @@ private theorem proper_units_divisible {k : Type u} [Field k] [IsAlgClosed k]
   have : Module.Finite k Γ(C, ⊤) := Scheme.finite_globalSectionsRingHom_of_isProper
   exact IsAlgClosed.exists_pow_eq_of_finite hn
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in
-degree one (blueprint: lem-sc-proper-kummer-degree-one-base-change).
-
-Proof: Global units of a proper curve over an algebraically closed field are n-divisible.
-The Kummer sequence therefore identifies H¹(mu_n) with Picard n-torsion, naturally
-under pullback. Torsion has degree zero, so Jacobian representability identifies this
-map with pullback on Jacobian n-torsion points. Jacobian base change identifies the
-target with the scalar extension of the source Jacobian. Its n-torsion is finite
-etale because n is invertible. A finite etale scheme over an algebraically closed
-field is a disjoint union of rational points, and extension preserves those points.
-Thus the map on n-torsion, and hence the displayed cohomology map, is bijective. -/
+/-- For a proper smooth connected curve over an algebraically closed field `k` and an extension `K`
+of algebraically closed fields, with `n` invertible in `k`, pullback on `H¹(C, μ_n)` along the base
+change `C_K → C`, composed with the comparison of Kummer sequences `φ`, is bijective. -/
 theorem IsConnectedCurve.proper_kummer_degree_one_baseChange_bijective
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

@@ -142,8 +142,7 @@ private theorem baseConstantExact (X : Scheme.{t}) (B : Type t) [CommRing B] :
 /--
 The homology of the derived constant realization of a tensor complex is the
 ordinary constant realization of its algebraic homology when the coefficient
-maps are isomorphisms.  This is the termwise homology calculation together
-with transport along the coefficient isomorphism and restriction to the chart.
+maps are isomorphisms.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 094H (locally constant tensor
 products) and Tag 06YU (bounded-above flat-complex calculation). -/

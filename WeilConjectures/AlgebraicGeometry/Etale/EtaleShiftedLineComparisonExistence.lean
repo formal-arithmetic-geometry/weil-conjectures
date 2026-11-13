@@ -16,8 +16,8 @@ import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-! # Existence of normalized shifted-line comparisons
 
-This is the existence part of the gluing argument in the blueprint, separated from
-rigidity and independence of comparisons. Affine-line fullness makes this existence
+This is the existence part of the gluing argument, separated from rigidity and
+independence of comparisons. Affine-line fullness makes this existence
 result valid for arbitrary sheaves placed in a common degree and arbitrary rings.
 -/
 

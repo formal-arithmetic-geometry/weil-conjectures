@@ -964,8 +964,8 @@ private theorem orderedDirectProjection_naturality
     (orderedDirectProjectionNat R p K).naturality a
 
 /-- Scalar coherence for the fixed compactification: natural invertibility, the ordered
-projection square on every derived input, and proper-refinement compatibility on precisely
-the bounded-below pair of inputs specified in the node.
+projection square on every derived input, and proper-refinement compatibility on the
+bounded-below pair of inputs.
 Source: Stacks 0GL6, 0E48 and 0F7I. -/
 theorem compactScalarMap_coherence
     [Finite A] [Finite B] (φ : A →+* B)

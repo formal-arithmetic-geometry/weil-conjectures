@@ -27,8 +27,7 @@ base: `H^q(Č(U, ℱ)) ≅ Γ(S, R^q f_* ℱ)` as `A`-modules
 (`AlgebraicGeometry.Scheme.Modules.nonempty_homology_cechModuleComplex_linearEquiv`), and it is
 exact in degrees `≥ #ι` (`AlgebraicGeometry.Scheme.Modules.exactAt_cechModuleComplex`). Over an
 affine base, where quasi-coherent `𝒪_S`-modules are `A`-modules, it is the module-theoretic
-incarnation of the derived direct image `Rf_* ℱ`; this is the form in which the blueprint's Čech
-resolution is used.
+incarnation of the derived direct image `Rf_* ℱ`.
 -/
 
 @[expose] public section
@@ -190,19 +189,9 @@ theorem exists_homology_cechModuleComplex_equiv_H [IsAffine S] [IsSeparated f]
 
 /-- **The Čech resolution computes the derived direct image over an affine base.** Let
 `f : X ⟶ S` be quasi-compact and separated with `S = Spec A` affine, `U` a cover of `X` by affine
-opens (whose finite intersections are then affine) and `ℱ` a quasi-coherent `𝒪_X`-module. Then
-the Čech complex `Č(U, ℱ)`, a complex of `A`-modules, computes the higher direct images of `ℱ`:
-`H^q(Č(U, ℱ)) ≅ Γ(S, R^q f_* ℱ)` as `A`-modules. Over the affine base, where quasi-coherent
-`𝒪_S`-modules are `A`-modules, this says that `Č(U, ℱ)` represents `Rf_* ℱ` (its cohomology
-modules are the `Γ(S, R^q f_* ℱ)`, and `R^q f_* ℱ` is quasi-coherent).
-
-The blueprint proves this by showing that the sheafified Čech complex is a resolution of `ℱ` by
-`f_*`-acyclic sheaves; here it is the combination of Leray's theorem
-(`AlgebraicGeometry.Scheme.Modules.nonempty_cechComplex_linearEquiv_H_of_isSeparated`) and of the
-identification `Γ(S, R^q f_* ℱ) ≅ H^q(X, ℱ)` over an affine base
-(`AlgebraicGeometry.Scheme.Modules.exists_bijective_semilinearMap_sections_higherDirectImage_H`).
-The complex is concentrated in degrees `≥ 0` and is exact in degrees `≥ #ι`
-(`AlgebraicGeometry.Scheme.Modules.exactAt_cechModuleComplex`). -/
+opens and `ℱ` a quasi-coherent `𝒪_X`-module. Then the Čech complex `Č(U, ℱ)`, a complex of
+`A`-modules, computes the higher direct images of `ℱ`: `H^q(Č(U, ℱ)) ≅ Γ(S, R^q f_* ℱ)` as
+`A`-modules. -/
 theorem nonempty_homology_cechModuleComplex_linearEquiv [IsAffine S] [QuasiCompact f]
     [IsSeparated f] [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i))
     (hU' : iSup U = ⊤) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :

@@ -375,10 +375,7 @@ lemma fundamentalGroupMap_smul_constantExtensionFiberMap {A : FiniteEtaleAlgebra
     exact ConcreteCategory.congr_hom ((pullbackFiberIso _ s').hom_inv_id_app _) _
   rw [key, key, fundamentalGroupMap_smul, IsNaturalSMul.naturality]
 
-/-- Weil group after a finite
-constant-field extension.
-
-The map `ρ : π₁(X₀', s') → π₁(X₀, s)` induced by the projection `π : X₀ ×_K Spec L ⟶ X₀` carries
+/-- The map `ρ : π₁(X₀', s') → π₁(X₀, s)` induced by the projection `π : X₀ ×_K Spec L ⟶ X₀` carries
 the Weil group of `X₀'` over `L` into that of `X₀` over `K`, multiplying the degree by
 `m = [L : K]`: an element acting on the constant covers of `X₀'` as the `n`-th power of the
 geometric Frobenius over `L` acts on those of `X₀` as the `m n`-th power of the geometric
@@ -418,12 +415,7 @@ lemma smul_diagonalPoint (g : G') : g • diagonalPoint p s' = diagonalPoint p s
   smul_eq_self_of_section s' G' _ (pullback.lift (𝟙 _) (𝟙 _) rfl) (pullback.lift_snd _ _ _) _ rfl g
 
 omit [Finite L] in
-/-- Weil group after a finite
-constant-field extension.
-
-The image under `ρ` of an element of `π₁(X₀', s')` has degree divisible by `m = [L : K]`: it
-fixes the image of the diagonal point of `π^* (X₀ ×_K Spec L)`, on which the geometric Frobenius
-over `K` has order `m`. -/
+/-- The image under `ρ` of an element of `π₁(X₀', s')` has degree divisible by `m = [L : K]`. -/
 theorem dvd_of_mem_weilGroup_constantExtension (g : G') (n : Multiplicative ℤ)
     (h : (fundamentalGroupMap τ G' G g, n) ∈ weilGroup p s G) :
     (Module.finrank K L : ℤ) ∣ n.toAdd := by
@@ -445,13 +437,8 @@ variable [Finite K] [Finite L] [GeometricallyConnected p] [ConnectedSpace X₀]
   [∀ P, MulAction G' ((fiber s').obj P)] [IsFundamentalGroup (fiber s') G']
 
 omit [Finite L] in
-/-- Weil group after a finite
-constant-field extension.
-
-An element of the Weil group of `X₀` whose degree is divisible by `m = [L : K]` lies in the image
-of `ρ : π₁(X₀', s') → π₁(X₀, s)`. The image of `ρ` is closed, and a point `u` of a geometric fibre
-fixed by it comes, through a section of the base change to `X₀'`, from a point of the geometric
-fibre of `X₀ ×_K Spec L ≅ X₀'`, on which the `m`-th power of the geometric Frobenius is trivial. -/
+/-- An element of the Weil group of `X₀` whose degree is divisible by `m = [L : K]` lies in the
+image of `ρ : π₁(X₀', s') → π₁(X₀, s)`. -/
 theorem mem_range_of_mem_weilGroup_constantExtension (h : G) (n : Multiplicative ℤ)
     (hmem : (h, n) ∈ weilGroup p s G) (hdvd : (Module.finrank K L : ℤ) ∣ n.toAdd) :
     h ∈ (fundamentalGroupMap τ G' G).range := by
@@ -571,12 +558,10 @@ theorem not_isOfFinOrder_geometricFrobenius : ¬IsOfFinOrder (geometricFrobenius
 variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
   [ConnectedSpace X₀] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Blueprint `situation-weil`: Pointer to the properties of `situation-weil`.
-
-The exact sequence of `situation-weil` for the Weil group of a connected,
-geometrically connected scheme over a finite field: the degree map is surjective, the elements of
-degree zero are those of `π₁(X₀, s)` acting trivially on the constant covers, and every lift of
-the geometric Frobenius has degree one. -/
+/-- The exact sequence for the Weil group of a connected, geometrically connected scheme
+over a finite field: the degree map is surjective, the elements of degree zero are those of
+`π₁(X₀, s)` acting trivially on the constant covers, and every lift of the geometric Frobenius has
+degree one. -/
 theorem exact_weilGroupDeg [GeometricallyConnected p] :
     Function.Surjective (weilGroupDeg p s G) ∧
       Function.Injective ((constantCoverAction p s G).kerToWeilGroup (geometricFrobenius p s)) ∧

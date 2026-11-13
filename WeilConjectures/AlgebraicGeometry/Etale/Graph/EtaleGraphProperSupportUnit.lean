@@ -366,24 +366,7 @@ private theorem graph_proper_support_unit_aux
 
 /-- A sheaf map normalized in the common ordinary direct image computes the
 compact-support tower interchange after the source right-derived unit.
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J.
-
-Proof in words: use the chosen compactification c of b and postcompose it by p.
-Compose theta with the sheaf graph map for b and then the ordinary direct-image
-compositor for c.g and p, obtaining tau with target the sheaf model of c.postcomp p.
-Naturality of the direct-image compositor, its associativity equation, graph sheaf
-normalization and htheta prove that tau has the required normalization into (b followed
-by p)_*. Apply graph_proper_precomposition_unit to q, v, and this single model.
-For the other path, graph_proper_postcomposition identifies the chosen compositor
-with composition of the two proper direct images. The defining homotopy formula of
-the graph-derived comparison and the unit equation of proper direct-image composition
-show that the unit for D(b_!) followed by Rp_* becomes degreewise tau followed by the
-model's unit. This calculation uses naturality of the right-derived unit twice, then
-cancels the exact-functor factor and the inverse composition isomorphism. Postcompose
-both sides with the inverse of the terminal compactification word and the model
-comparison. The two established unit equations agree there; cancel this isomorphism.
-The calculation is on arbitrary homotopy objects and uses no boundedness or Cartesian
-hypothesis. No noncanonical functor or resolution is chosen in this reduction. -/
+Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J. -/
 theorem graph_proper_support_unit
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Y' Z Y : Scheme.{u}}

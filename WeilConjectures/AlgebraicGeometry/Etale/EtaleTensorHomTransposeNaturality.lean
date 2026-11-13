@@ -26,8 +26,7 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
   _root_.DerivedCategory.commShift₂CurriedTensor
 
 /-- Naturality of the derived tensor-Hom transpose in its first variable.
-Source: Stacks Project, Tag 08J9; Mathlib's parametrized adjunction naturality. Proof: apply
-homEquiv_symm_naturality_one to the published parametrized derived tensor-Hom adjunction. -/
+Source: Stacks Project, Tag 08J9. -/
 theorem etaleTensorHomTranspose_naturality
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

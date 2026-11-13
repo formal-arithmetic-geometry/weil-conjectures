@@ -109,8 +109,7 @@ structure CyclicCartierFrame (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     (diagonalResidue.{u} l n) Y eP eW
 
 /-- Apply the specified derived scalar functor and its normalized endpoints,
-then take the ordinary finite realization. This is an explicit construction,
-independent of every completed class, trace, or geometric normalization theorem. -/
+then take the ordinary finite realization. -/
 def CyclicCartierFrame.reduce (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     (p : CyclicCartierFrame l Y n)
     (α : (DerivedCategory.singleFunctor

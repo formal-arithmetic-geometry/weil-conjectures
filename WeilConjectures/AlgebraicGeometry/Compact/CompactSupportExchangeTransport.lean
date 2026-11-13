@@ -747,30 +747,8 @@ private theorem compactSupport_exchange_transport_square
 
 /-- The normalized compact-support comparison identifies the specified etale and
 ambient pro-etale exchanges, naturally in every bounded-below input. Transport through
-any retained witness equals the ambient exchange at its target; hence it is unchanged
-under isomorphisms of witnesses (indeed it is independent of the witness).
-
-Proof plan, following the node's four steps:
-1. Put M = j_! L. Exact open extension preserves bounded-below objects. The proper
-parts of c and its base change are qcqs. Apply lemma-naturality-pasting-comparison--3
-at M, using the normalized mate of lem-weil-pbc-comparison-direct-image-canonical-mate.
-This gives the proper exchange square, without assuming its invertibility or any
-separatedness of g.
-2. The degreewise site/open comparisons are those of
-proposition-comparison-immersions--1. Apply lem-fix-site-open-exchange to the upper
-open square, with rho = a^{-1}, and multiply by the two pullback comparisons. This says
-beta^p A(L) composed with the pulled-back site/open comparison and a_bar equals
-j'_!(a_w) composed with the base-changed site/open comparison and A(beta^e).
-3. Expand both compact-support exchanges as the proper exchange followed by the image
-of beta. Naturality of the pro-etale proper exchange moves the open comparison across
-it. Substitute the proper square from step 1 and the open square from step 2. Naturality
-of the base-changed proper mate then gives T A(E^e) = E^p S. All factors are natural;
-thus the equation is an equality of natural transformations.
-4. Conjugate the equation by S^{-1} and by the source and target images of alpha.
-Naturality of E^p in alpha cancels these images, leaving precisely E^p(N). This right
-side contains no witness, proving the stated invariance, including isomorphic witnesses.
-The identity base change, identity open/proper factors, empty schemes and zero ring
-are included. No completion is used. -/
+any retained witness equals the ambient exchange at its target; hence it is independent of the
+witness. -/
 theorem compactSupport_exchange_transport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

@@ -39,9 +39,7 @@ private theorem homology_iso_of_derived_iso
 
 /--
 The chartwise homology of the actual layer agrees with the chartwise homology of
-its derived constant tensor model.  This is the derived-tensor and exact-slice
-part of the comparison; the final identification with ordinary algebraic
-homology is recorded separately.
+its derived constant tensor model.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 094I (balancing identity)
 and Tag 06YU (bounded-above flat-complex calculation). -/

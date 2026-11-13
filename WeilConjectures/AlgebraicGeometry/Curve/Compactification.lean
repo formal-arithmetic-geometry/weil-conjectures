@@ -187,10 +187,7 @@ theorem exists_smooth_properCompactification_of_perfectField [PerfectField K]
 Every smooth geometrically connected curve `U₀` over a finite field `K` admits a smooth proper
 completion: a compactification `c : Compactification p` of the structure morphism
 `p : U₀ ⟶ Spec K` whose ambient scheme `c.Z = C₀` is again a smooth geometrically connected
-curve over `K`, and whose boundary `C₀ \ U₀` is a finite set of closed points of `C₀`.
-
-The open immersion `U₀ ⟶ C₀` and the properness of `C₀ ⟶ Spec K` are part of the data of a
-`Compactification`, so they do not appear among the conclusions. -/
+curve over `K`, and whose boundary `C₀ \ U₀` is a finite set of closed points of `C₀`. -/
 theorem exists_smooth_properCompactification
     {K : Type u} [Field K] [Finite K] {U : Scheme.{u}} (p : U ⟶ Spec (.of K)) [IsCurve p]
     [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] :
@@ -244,16 +241,7 @@ theorem exists_smooth_projectiveCompactification [PerfectField K] (p : U ⟶ Spe
 
 attribute [local instance] MvPolynomial.gradedAlgebra in
 /-- **Smooth curves are quasi-projective.** A smooth curve `U` over a field `K` (separated, of
-finite type, of dimension at most one) admits an immersion into a projective space over `K`.
-
-Each of the finitely many connected components of `U` is an integral curve, hence a dense open
-subscheme of a closed subscheme of a projective space
-(`AlgebraicGeometry.IsCurve.exists_projectiveClosure`), so it has a coordinate cover by affine
-charts (`AlgebraicGeometry.exists_isAffineOpen_preimage_of_isImmersion`). These glue to a
-coordinate cover of `U` by affine charts (`AlgebraicGeometry.Scheme.CoordinateCover.sigma`), which
-gives an immersion into projective space
-(`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`). The blueprint instead glues
-embeddings of the members of an affine cover one at a time (Stacks `0A25`). -/
+finite type, of dimension at most one) admits an immersion into a projective space over `K`. -/
 theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p] :
     IsQuasiProjective p := by
   classical
@@ -317,11 +305,7 @@ theorem IsCurve.isQuasiProjective (p : U ⟶ Spec (.of K)) [IsCurve p] [Smooth p
 
 /-- **Compactification of a smooth curve.** A smooth connected curve `U` over an algebraically
 closed field `K` admits a compactification `c` whose ambient scheme `c.Z` is a smooth proper
-connected curve over `K`, in which `U` is open with complement a finite set of closed points.
-
-The compactification is the normalization of a Nagata compactification of `U` in `U`, as in
-`AlgebraicGeometry.exists_smooth_properCompactification_of_perfectField`; the blueprint uses the
-normalization of the closure of `U` in a projective space instead. -/
+connected curve over `K`, in which `U` is open with complement a finite set of closed points. -/
 theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
     (p : U ⟶ Spec (.of K)) [IsConnectedCurve p] [Smooth p] :
     ∃ c : Compactification p, IsConnectedCurve c.g ∧ Smooth c.g ∧ (Set.range c.i.base)ᶜ.Finite ∧

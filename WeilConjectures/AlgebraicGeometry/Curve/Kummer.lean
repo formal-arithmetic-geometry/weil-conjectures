@@ -47,13 +47,7 @@ namespace AlgebraicGeometry
 variable {k : Type u} [Field k] {C : Scheme.{u}}
 
 /-- **`H¹(C, μₙ) = Pic(C)[n]` for proper `C`.** Let `C` be a proper scheme over an algebraically
-closed field `k` and let `n ≥ 1` be prime to `char k`. Then `H¹(C, μₙ) ≅ H¹(C, 𝔾ₘ)[n]`.
-
-The ring `𝒪(C)` is a finite `k`-algebra
-(`AlgebraicGeometry.Scheme.finite_globalSectionsRingHom_of_isProper`), so its units are `n`-th
-powers (`IsAlgClosed.exists_pow_eq_of_finite`) and the first term `𝒪(C)ˣ/n` of the short exact
-sequence of
-`AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one` vanishes. -/
+closed field `k` and let `n ≥ 1` be prime to `char k`. Then `H¹(C, μₙ) ≅ H¹(C, 𝔾ₘ)[n]`. -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper [IsAlgClosed k]
     (f : C ⟶ Spec (.of k)) [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 1 ≃+
@@ -78,12 +72,7 @@ assume `H²(C, 𝔾ₘ) = 0`. Then:
 * `H²(C, μₙ) ≅ H¹(C, 𝔾ₘ)/n`, the cokernel of multiplication by `n`;
 * if `C` is connected, `H⁰(C, μₙ) ≅ ℤ/n`;
 * if every unit of `𝒪(C)` is an `n`-th power, `H¹(C, μₙ) ≅ H¹(C, 𝔾ₘ)[n]`. This holds when `C`
-  is proper, see `AlgebraicGeometry.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper`.
-
-All four come from the long exact cohomology sequence of the Kummer sequence. In degree zero a
-primitive `n`-th root of unity of `k` (`IsSepClosed.exists_isPrimitiveRoot`) identifies `μₙ` with
-`ℤ/n` (`AlgebraicGeometry.Scheme.constantZModIsoRootsOfUnitySheaf`), whose global sections on a
-connected scheme are `ℤ/n`. -/
+  is proper, see `AlgebraicGeometry.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper`. -/
 theorem sheafH_rootsOfUnitySheaf_of_subsingleton [IsAlgClosed k] (f : C ⟶ Spec (.of k))
     [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) (hBr : Subsingleton C.CohomologicalBrauerGroup) :
     (∃ (α : Additive Γ(C, ⊤)ˣ →+ Sheaf.H (C.rootsOfUnitySheaf n) 1)
@@ -115,13 +104,7 @@ theorem sheafH_rootsOfUnitySheaf_of_subsingleton [IsAlgClosed k] (f : C ⟶ Spec
 /-- **`H²` via the Kummer sequence, smooth case.** For a smooth curve `C` over an algebraically
 closed field `k` and every `n ≥ 1` prime to `char k`,
 
-`H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`.
-
-In the long exact sequence of the Kummer sequence
-(`AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_two`) the last term is the
-Brauer group `H²(C, 𝔾ₘ)`, which vanishes for smooth curves, so `H²(C, μₙ)` is the cokernel of
-multiplication by `n` on `Pic(C) = H¹(C, 𝔾ₘ)`. The blueprint states this for smooth proper curves;
-properness is not needed. -/
+`H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`. -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
     (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.rootsOfUnitySheaf n) 2 ≃+
@@ -140,9 +123,7 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
 
 `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`.
 
-This is the remark of blueprint `lem-sc-second-kummer-divisors` that the identity holds for every
-curve, since the Brauer group of every curve vanishes;
-for smooth curves see
+For smooth curves see
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`. -/
 theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two [IsAlgClosed k] (f : C ⟶ Spec (.of k))
     [IsCurve f] (n : ℕ) (hn : (n : k) ≠ 0) :

@@ -131,42 +131,7 @@ private theorem coefficientBounded_triangulated (ℓ : ℕ) [Fact ℓ.Prime]
 construction from shifted locally closed extensions of lisse coefficient modules.
 `Fin (N + 1)` lists the objects K_1,...,K_{N+1}; its last entry equals K. A distinguished
 triangle with third vertex `(F r)[n]` says that `F r` is a cone up to integer shift and
-isomorphism, since distinguished triangles are closed under isomorphism.
-
-Proof plan (the five steps of the DAG node):
-1. Let T be the class admitting such finite witnesses. Zero is a generator: take the
-identity immersion and rank zero. Concatenate two witnesses and append their cone.
-For an isomorphic replacement append a cone of zero into the old object. Shift every
-entry to shift a witness; three rotations, or three inverse rotations, of a cone triangle
-give the required signed shifted triangle. Iterate for every integer shift. These are
-finite constructions and never require a direct summand or an infinite closure.
-2. Factor a locally closed immersion through its scheme-theoretic closure, as in
-lemma-constructible-sheaves. Apply corollary-coefficient-heart-b--2 with the Cartesian
-coefficient identifications of lemma-inverse-image-coefficient-sheaves. Its extension restricts
-to L on S and zero on the closure minus S and outside the closure. All complementary
-open immersions are quasi-compact: every open in Noetherian X is quasi-compact by
-corollary-coefficient-heart-b--2; an open in the closed closure is a
-closed subset of an open of X, hence quasi-compact. Thus the three pieces, omitting empty
-ones, give a finite lisse stratification. The criterion of lemma-constructible-sheaves gives
-constructibility. Shifts and cones preserve bounded constructibility by
-corollary-coefficient-heart-b--1, so induction on a witness proves the converse.
-3. For a constructible sheaf take an adapted stratification from lemma-constructible-sheaves.
-Refine and order it by lemma-constructible-sheaves, preserving lisse
-restrictions. Apply lemma-constructible-sheaves--7 to get a finite filtration
-0 = F_0 contained in .. contained in F_m = F with quotients A_k = a_{k!}L_k.
-4. Regard each filtration sequence as a degree-zero short exact sequence of complexes.
-corollary-coefficient-heart-b--2 gives F_{k-1} -> F_k -> A_k -> F_{k-1}[1]. Inverse
-rotation gives A_k[-1] -> F_{k-1} -> F_k -> A_k with the negative shifted connecting
-map. Starting from zero, append this generator and cone at each stage. Shift this finite
-witness to construct every F[n]. The zero sheaf requires only the rank-zero generator.
-5. For a bounded constructible complex choose a representative C with cohomology in
-[a,b]. By proposition-open-direct-image-preserves-finite, the image of tau_le(a-1) C is zero in the
-derived category and tau_le b C is isomorphic to K. For q from a to b,
-theorem-pbc-injective-acyclicity and inverse rotation exhibit tau_le q C as the cone of
-H^q(C)[-q-1] -> tau_le(q-1) C, with the signed connecting map. Steps 3--4 give a witness
-for the first term. Concatenate witnesses and append each cone, then use isomorphism
-closure to end at K. Vanishing intermediate cohomology and an acyclic C use the same
-zero case. Together with step 2 this proves the equivalence. -/
+isomorphism, since distinguished triangles are closed under isomorphism. -/
 theorem coefficientHeart_generation (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

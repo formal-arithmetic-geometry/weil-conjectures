@@ -127,12 +127,9 @@ lemma AffineSpace.over_genericPoint (S : Scheme.{u}) [IrreducibleSpace S] :
   exact iff_of_true (((genericPoint_spec _).specializes (Set.mem_univ w)).map
     (𝔸(PUnit; S) ↘ S).continuous) trivial
 
-/-- Coordinate projections lower generic
-dimension.
-
-Let `S` be integral with function field `K`, let `f : X ⟶ S` be locally of finite type and let `t :
-X ⟶ 𝔸¹_S` be a morphism over `S`. If `dim X_K ≤ n`, then the fibre of `t` over the generic point of
-`𝔸¹_S` has dimension at most `n - 1`, an empty fibre having dimension `⊥`. -/
+/-- Let `S` be integral with function field `K`, let `f : X ⟶ S` be locally of finite type and let
+`t : X ⟶ 𝔸¹_S` be a morphism over `S`. If `dim X_K ≤ n`, then the fibre of `t` over the generic
+point of `𝔸¹_S` has dimension at most `n - 1`, an empty fibre having dimension `⊥`. -/
 theorem topologicalKrullDim_fiber_genericPoint_add_one_le {S X : Scheme.{u}} [IsIntegral S]
     (f : X ⟶ S) [LocallyOfFiniteType f] (t : X ⟶ 𝔸(PUnit; S))
     (ht : t ≫ 𝔸(PUnit; S) ↘ S = f) :

@@ -193,7 +193,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 All module categories use the actual condensed coefficient ring pulled back from the point.
 Constructibility is the finite constant scalar model predicate, and locally closed extension
 is the previously constructed open extension into the scheme-theoretic closure followed by
-closed direct image. The assertion predicates below spell out the clauses of the node.
+closed direct image. The assertion predicates below spell out the clauses of the main statement.
 -/
 
 @[expose] public noncomputable section
@@ -264,9 +264,9 @@ def CoefficientHeartExtensionAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop
         (coefficientHeartLocallyClosedExtension Λ a ha).mapHomologicalComplex (.up ℤ) ⋙
           DerivedCategory.Q)
 
-/-- Every assertion of the constructible-heart node, including its introductory derived
-and locally closed extension clauses. Exact descent is characterized by the localization
-square with the termwise functor, so no arbitrary derived map is substituted. -/
+/-- The assertions about the constructible heart, including the derived and locally closed
+extension clauses. Exact descent is characterized by the localization square with the termwise
+functor. -/
 def CoefficientHeartAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ((constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
     constantModelBoundedConstructible Λ X) ∧
@@ -436,56 +436,8 @@ set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency true in
 /-- Constructible sheaves over E or Qbar_l form an essentially small abelian heart, with
 finite locally closed lisse filtrations and the stated curve localization sequence.
-The Noetherian structure used to state the assertion is constructed from the standing
-finite-type-over-a-field hypotheses, rather than imposed as an additional assumption.
-
-Proof plan:
-1. The standing finite-type scheme is Noetherian. Its open, closed and locally closed subschemes are
-Noetherian, all opens quasi-compact, and X quasi-separated. Identify the actual condensed
-coefficients using lemma-comparison-completed-coefficients; these are not discrete constant field
-sheaves.
-2. The scalar ring is a field. A finite constant presentation is therefore finite free,
-and conversely. This gives the finite-stratification lisse criterion. The field case of
-lemma-constructible-sheaves--7 gives Dctf = Dbc. Truncation only removes cohomology
-sheaves or replaces them by zero, so preserves bounded constructibility.
-3. Factor an immersion through its scheme-theoretic image using
-lemma-schematic-closure-uniqueness--1. Restriction to an open in which it is closed identifies this
-image with S; thus the map to its image is open (lemma-nagata-scheme-image-restrict-open
-and -of-closed-immersion). Use prose-03-02 and lemma-constructible-sheaves--7 for exactness
-of both factors. Their composite preserves quasi-isomorphisms and induces the localization
-functor with the displayed termwise comparison, without resolutions.
-4. Use lemma-constructible-sheaves for a common adapted stratification
-and exact restriction. On each stratum kernels and cokernels are lisse by
-lemma-constructible-sheaves, so the criterion in step 2 makes them constructible.
-5. Restrict an extension to the same common stratification. Locally lift finitely many basis
-sections of its free quotient to split it. Its middle term is finite free. Thus extensions
-are constructible. Zero has rank zero; split extensions give finite sums. The ambient kernels
-and cokernels now give an abelian full subcategory and exact inclusion, as in the closure node.
-6. lemma-constructible-sheaves--6 supplies a set of representatives, including the control
-of gluing between strata by embeddings into the product of stratum direct images.
-7. Order and refine an adapted stratification by lemma-constructible-sheaves.
-Apply lemma-constructible-sheaves--7 to its open prefixes: their counit image subobjects
-start at zero and end at F, are nested, and their quotients are the specified a_! of the
-lisse restrictions. Equality between successive subobjects is permitted, including F = 0.
-8. On a curve choose a generic point of each of its finitely many irreducible components
-(lemma-constructible-sheaves--7, lemma-constructible-sheaves--7). Its adapted stratum
-contains a neighborhood after other components are removed. Base change this neighborhood
-with that stratum. The projection is a surjective immersion, hence closed; this follows from
-lemma-constructible-sheaves--7 and lemma-constructible-sheaves--7. The other projection
-is open, so the pulled-back sheaf is lisse. No factorization through a nonreduced stratum is
-inferred just from containment of underlying point sets.
-9. Lift the trivializing cover through this surjective closed immersion by
-new-lem-weil-pbc-proetale-surjective-closed-cover-refinement. Each base change is a universal
-homeomorphism, and its coefficient pullback is an equivalence. Cartesian coefficients identify free
-modules. Fullness lifts a trivialization and its inverse; faithfulness gives their inverse
-identities. These neighborhoods give a dense lisse open U.
-10. Give its complement the reduced induced closed scheme structure.
-It misses every component's generic point, so a chain of length one in the complement would give
-length two in X. The complement has dimension at most zero, is Noetherian and T0, hence consists of
-finitely many closed points. Apply lemma-constructible-sheaves--7 with
-lemma-inverse-image-coefficient-sheaves. Its actual counit and unit give the short exact sequence;
-open restriction of the closed term is zero, giving its support. The argument allows reducible and
-nonreduced curves, the empty complement, the zero sheaf and empty X. -/
+The Noetherian structure used to state the assertion is derived from the standing
+finite-type-over-a-field hypotheses. -/
 theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj L)]

@@ -184,29 +184,7 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 
 /-- A finite sum of full lattices has a continuous linear section; continuous
 functions preserve this sum, and on every small pro-etale site the resulting
-module sheaf is free of rank r and its actual inclusion rationalizes to an isomorphism.
-
-Proof plan:
-1. Apply lem-sfb-finite-sum-lattice to obtain an integral basis of the sum
-   that is also a field basis. Restrict the continuous field coordinate map
-   to obtain continuity of integral coordinates in the actual subspace topology.
-2. Lift each basis vector to the finite product of the input lattices. Extend
-   these lifts A-linearly using the coordinate homeomorphism. Coordinatewise
-   finite sums and scalar multiplication show continuity and q composed with s is identity.
-3. Postcompose any continuous function with the components of s. The resulting
-   continuous functions sum to the given function, for every space Z.
-4. Continuous functions into each lattice and the sum satisfy the sheaf condition:
-   use lem-cbc-continuous-functions-fpqc-sheaf and restrict to the pro-etale site.
-   Postcomposition with the basis homeomorphism gives the displayed rank-r
-   trivializations. They commute with restriction, which is precomposition.
-5. Step 3 identifies the sectionwise submodule sum with the sum-lattice sheaf.
-   Since this is already a sheaf, it is also the sum as submodule sheaves.
-6. Under the trivialization, the actual inclusion is the constant matrix whose
-   columns are the basis vectors. Tensor the integral coordinate equivalence,
-   distribute the tensor over the finite power, and reconstruct using the field
-   basis. The pure-tensor formula specifies this actual comparison. These are
-   exactly the sectionwise tensor assertions of the existing statement.
-   All formulas also hold for r = 0. -/
+module sheaf is free of rank r and its actual inclusion rationalizes to an isomorphism. -/
 theorem continuous_lattice_sum
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

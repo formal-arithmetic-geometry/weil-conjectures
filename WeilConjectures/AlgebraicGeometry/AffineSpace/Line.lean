@@ -43,10 +43,7 @@ universe u
 open CategoryTheory Limits
 
 /-- A finitely generated algebra `B` of Krull dimension at most one over a field `K` is a finite
-module over a polynomial ring `K[T]` (along some `K`-algebra map `K[T] → B`).
-
-If `B = 0` any map works; otherwise Noether normalization gives a finite injective map from a
-polynomial ring in `dim B ≤ 1` variables, and in zero variables we precompose with `T ↦ 0`. -/
+module over a polynomial ring `K[T]` (along some `K`-algebra map `K[T] → B`). -/
 theorem Algebra.exists_finite_algHom_polynomial_of_ringKrullDim_le_one
     (K B : Type*) [Field K] [CommRing B] [Algebra K B] [Algebra.FiniteType K B]
     (hB : ringKrullDim B ≤ 1) :

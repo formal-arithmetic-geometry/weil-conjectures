@@ -56,9 +56,8 @@ lemma rootsOfUnityPowMap_ι {m m' : ℕ} (d : ℕ) (h : m * d = m') :
 variable {k : Type u} [Field k] [IsAlgClosed k] [X.Over (Spec (.of k))]
   [IsProper (X ↘ Spec (.of k))]
 
-/-- Blueprint `proposition-h-1-curve-tate-module--1` (transition maps): the Kummer
-identifications `H¹(X, μ_m) ≅ Pic(X)[m]` carry the map induced by the `d`-th power map
-`μ_{m d} ⟶ μ_m` to multiplication by `d` on line bundles. -/
+/-- Transition maps: the Kummer identifications `H¹(X, μ_m) ≅ Pic(X)[m]` carry the map induced
+by the `d`-th power map `μ_{m d} ⟶ μ_m` to multiplication by `d` on line bundles. -/
 lemma coe_kummerTorsionEquiv_map_rootsOfUnityPowMap {m m' : ℕ} (d : ℕ) (h : m * d = m')
     (hm : (m : k) ≠ 0) (hm' : (m' : k) ≠ 0) (x : Sheaf.H (X.rootsOfUnitySheaf m') 1) :
     (kummerTorsionEquiv m hm (Sheaf.H.map (X.rootsOfUnityPowMap d h) 1 x) : Additive X.Pic) =

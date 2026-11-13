@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Ample.AmpleSquareZeroThickening
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
 
-The invertibility of the pullback `i^*L` (the node's parenthetical) is the first clause of
+The invertibility of the pullback `i^*L` is the first clause of
 the landed `Scheme.Modules.invertible_pullback_tensor`;
 it is not restated here.
 -/
@@ -34,10 +34,8 @@ namespace AlgebraicGeometry
 
 universe u
 
-/-- The kernel is locally contained in the nilradical because its support is all of `X`.
-On a finite affine cover, Noetherianity makes each section ideal finitely generated,
-so each has a zero power. The maximum of these exponents kills the ideal on the cover,
-and ideal-sheaf extensionality gives global vanishing. This includes the empty cover.
+/-- The ideal sheaf of a closed immersion that is a homeomorphism onto a quasi-compact locally
+Noetherian scheme is nilpotent.
 Source: Stacks Project, Lemma 09MS, first paragraph; Lemma 01Y9, its affine proof. -/
 private theorem exists_ker_pow_eq_bot {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [IsLocallyNoetherian X] [CompactSpace X]
@@ -106,12 +104,8 @@ private theorem ker_square_eq_bot_of_comp {Z Y X : Scheme.{u}}
   simpa only [Scheme.IdealSheafData.ideal_pow, Pi.pow_apply, Scheme.Hom.ker_apply]
     using h V
 
-/-- Induct on an exponent `n + 2` killing the ideal. At `n = 0`, use square-zero
-lifting. In the successor case factor through the subscheme defined by the square
-of the ideal. The first immersion has square-zero kernel, while the second has
-nilpotency exponent at most `n + 2`, since `n + 3 ≤ 2 * (n + 2)`. Lift first along the
-square-zero immersion, transport via composition of tensor pullbacks, and apply the
-induction hypothesis to the second immersion.
+/-- If the ideal of a closed immersion `i : Z ⟶ X` of locally Noetherian schemes satisfies
+`i.ker ^ (n + 2) = ⊥`, an invertible module `L` on `X` is ample if its pullback to `Z` is.
 Source: Stacks Project, Lemma 09MS, first paragraph, reduction to the square-zero case. -/
 private theorem isAmple_of_ker_pow_eq_bot (n : ℕ) {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]

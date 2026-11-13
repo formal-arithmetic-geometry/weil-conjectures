@@ -29,10 +29,9 @@ Let `Z` be a finite étale `U`-scheme and `t` a point of `Z` over `η` fixed by 
 (`Ideal.exists_etale_localization_away_of_inertia`), and `V ×_C U ⊆ N ×_C U = Z`. In general `t`
 lies in a connected component of `Z`.
 
-This is the geometric input for the surjectivity part of blueprint
-`lemma-boundary-stalk--1`: an inertia invariant of the generic stalk of a finite locally
-constant sheaf comes from a section over the punctured part of an étale neighbourhood of the
-boundary point.
+This is the geometric input for showing that an inertia invariant of the generic stalk of a
+finite locally constant sheaf comes from a section over the punctured part of an étale
+neighbourhood of the boundary point.
 -/
 
 @[expose] public section

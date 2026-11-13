@@ -199,14 +199,10 @@ private theorem constant_field_model
 
 /-- A separated finite type scheme of dimension at most one has, after finite purely
 inseparable extension, componentwise normalization with smooth projective geometrically
-irreducible completions over finite separable constant fields.
-Source: Stacks Project, Varieties, Tag 0GK5.
-
-The integral closed immersions `c i` enumerate the reduced irreducible components of
-`X_K`: an integral closed subscheme with a given irreducible-component support is exactly
-its reduced induced subscheme, equivalently that of `(X_K)_red`. The isomorphisms `e i`
-identify `Y i` with their normalizations. Thus the equation for `ν` specifies the full
-componentwise normalization map, including its scheme structure. -/
+irreducible completions over finite separable constant fields. The closed immersions `c i`
+are the reduced irreducible components of `X_K`, and the `e i` identify `Y i` with their
+normalizations.
+Source: Stacks Project, Varieties, Tag 0GK5. -/
 theorem exists_field_curve_completion_insep
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

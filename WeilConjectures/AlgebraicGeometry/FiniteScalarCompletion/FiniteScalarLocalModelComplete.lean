@@ -1021,11 +1021,9 @@ attribute [local irreducible] freeComplex
 
 /-- Finite constant scalar local models are complete, including global models and
 finite free powers. In the free case the strict cone-to-quotient map is fixed in
-coordinates, is a quasi-isomorphism at every level, and respects the augmentations.
-The derived isomorphism to the quotient Roos limit has exactly the scalar quotient
-projections. Every strict completion augmentation with the coordinate formula of
-`completion_triangle_comparison` maps to this cone under the Roos image of that same
-strict tower map q; thus the comparison carries the specified completion unit to it.
+coordinates, is a quasi-isomorphism at every level, and respects the augmentations; the
+derived isomorphism to the quotient Roos limit has exactly the scalar quotient projections
+and carries the specified completion unit to this cone.
 
 Source: Bhatt--Scholze, Propositions 3.1.9--3.1.10 and Section 3.4. -/
 theorem finite_scalar_local_model_complete :

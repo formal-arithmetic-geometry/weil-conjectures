@@ -64,11 +64,15 @@ into a single projective space `ℙ(N; S)` over `S`, is the separate statement
   and `AlgebraicGeometry.ProperClosedModel`, the outcome is not packaged as a structure: the
   graph is a definition and its properties are separate statements, so that a consumer obtains
   them by typeclass inference rather than by destructing an existential.
-* The hypotheses are minimal rather than the ones of the blueprint: the members of the cover
+* The hypotheses are minimal: the members of the cover
   need not be affine and need not cover `X`, only the tuple morphism needs to be quasi-compact
   (which holds for instance if `X` is a Noetherian space), and `U∞` need not be dense in `X`.
 * `Nonempty ι` is genuinely needed: for an empty cover the product is `S` itself and the tuple
   morphism is the structure morphism of `U∞`, which is not an immersion.
+* In `AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over`, the index type `ι` of the
+  cover lives in an arbitrary universe, while the Segre embedding is stated for an index type in
+  the universe of the schemes; the two are matched up by reindexing the product along an
+  equivalence `ι ≃ ULift.{u} (Fin k)`.
 
 ## References
 
@@ -231,10 +235,7 @@ instance isSchemeTheoreticallyDominant_opensRange_toGraph [Nonempty ι] :
   (toGraph M).isoOpensRange_inv_comp ▸ inferInstance
 
 /-- **The projection of the graph onto the `i`-th closed model.** It is the unique morphism
-`pᵢ : Z ⟶ Mᵢ.Z` compatible with the `i`-th projection `∏_S ℙ(Mⱼ.n; S) ⟶ ℙ(Mᵢ.n; S)`; it exists
-by the universal property of the closed immersion `Mᵢ.Z ⟶ ℙ(Mᵢ.n; S)`, because the composition
-of the tuple morphism with the `i`-th projection factors through `Mᵢ.Z` by construction and
-`U∞` is scheme-theoretically dense in `Z`. -/
+`pᵢ : Z ⟶ Mᵢ.Z` compatible with the `i`-th projection `∏_S ℙ(Mⱼ.n; S) ⟶ ℙ(Mᵢ.n; S)`. -/
 @[stacks 01R9 "combined with 0200, step 4 of the proof"]
 noncomputable def proj (i : ι) : ChowGraph M ⟶ (M i).Z :=
   IsClosedImmersion.lift (M i).emb (emb M ≫ ambientπ M i) <| by
@@ -282,11 +283,7 @@ end QuasiCompact
 closed immersion `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` of `AlgebraicGeometry.ChowGraph.emb` with the `m`-fold
 Segre embedding `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi` yields a closed
 immersion of `Z` into a projective space `ℙ(N; S)` with `N` finite, compatible with the
-structure morphisms over `S`.
-
-The index type `ι` of the cover lives in an arbitrary universe, while the Segre embedding is
-stated for an index type in the universe of the schemes; the two are matched up by reindexing
-the product along an equivalence `ι ≃ ULift.{u} (Fin k)`. -/
+structure morphisms over `S`. -/
 @[stacks 0200 "step 7 of the proof"]
 theorem exists_isClosedImmersion_over :
     ∃ (N : Type u) (_ : Finite N) (g : ChowGraph M ⟶ ℙ(N; S)),

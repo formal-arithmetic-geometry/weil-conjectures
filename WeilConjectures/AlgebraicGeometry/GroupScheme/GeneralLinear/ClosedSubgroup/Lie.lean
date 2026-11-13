@@ -108,13 +108,7 @@ theorem fst_comp_evalAlgHom_dualUnit (X : Matrix n n k) :
 
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
 component, in matrix form: a point `1 + εX` of `V(I)` with values in the dual numbers is a point
-of `V(identityComponent I)`.
-
-`identityComponent I` is the ideal of the *reduced* identity component. By Cartier's lemma
-(`Bialgebra.isPrime_iInf_pow_ker_counitAlgHom`) the functions on `G` vanishing near the identity
-form a prime ideal `P`, so `V(P)` is an irreducible closed subset of `V(I)` through the identity,
-contained in the identity component. A function vanishing on the identity component thus lies
-in `P`, hence vanishes in the local ring at the identity and on every tangent vector there. -/
+of `V(identityComponent I)`. -/
 theorem dualUnit_mem_zeroLocus_identityComponent [IsAlgClosed k] [CharZero k] {X : Matrix n n k}
     (hX : dualUnit X ∈ zeroLocus I (DualNumber k)) :
     dualUnit X ∈ zeroLocus (identityComponent I) (DualNumber k) := by
@@ -184,13 +178,7 @@ theorem exists_kerPost_eq_of_mem_zeroLocus {J : Ideal (CoordinateRing n k)} [J.I
 
 -- the group structure on points of the quotient scheme makes instance search slow
 /-- In characteristic zero, every tangent vector of `G = V(I)` is tangent to the reduced identity
-component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective.
-
-`CharZero` is needed because `identityComponent I` is the ideal of the *reduced* identity
-component. The matrix form, for the points `1 + εX` of `V(I)` over the dual numbers, is
-`dualUnit_mem_zeroLocus_identityComponent`: a tangent vector `1 + εX` of `V(I)` satisfies the
-equations of `identityComponent I`, so it is the image of a tangent vector of
-`V(identityComponent I)` (`exists_kerPost_eq_of_mem_zeroLocus`). -/
+component `V(identityComponent I)`: the differential `Lie(G°) → Lie(G)` is bijective. -/
 theorem lieAlgebraMap_identityComponent_bijective [IsAlgClosed k] [CharZero k] :
     Function.Bijective (lieAlgebraMap (le_identityComponent I)) := by
   refine ⟨lieAlgebraMap_injective _, fun x ↦ ?_⟩
@@ -386,8 +374,7 @@ Let `H = V(J) ⊆ G = V(I)` be closed subgroup schemes of `GL_n`, `I ≤ J`, suc
 `H ⟶ G` contains the commutators of `G` (`AlgebraicGeometry.IsMonHom.ContainsCommutators`), the
 scheme-theoretic form of `⁅G, G⁆ ⊆ H`; then `H` is normal in `G`
 (`AlgebraicGeometry.IsMonHom.Normal.of_containsCommutators`). The arithmetic and geometric
-monodromy groups of a represented degree datum are such a pair, and the statements of the blueprint
-about them are instances of the statements of this section. -/
+monodromy groups of a represented degree datum are such a pair. -/
 
 section Pair
 

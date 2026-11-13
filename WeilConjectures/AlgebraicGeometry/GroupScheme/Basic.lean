@@ -65,6 +65,12 @@ the whole group.
   finite type over `k` is irreducible.
 - `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`: a closed subgroup of a connected reduced
   group of the same dimension is the whole group.
+
+## Implementation details
+
+In `AlgebraicGeometry.isClosed_range_of_isMonHom` the source must be quasi-compact: the
+homomorphism `ℤ ⟶ 𝔾ₐ`, `n ↦ n`, from the constant group scheme over `ℚ` has image the infinite
+non-closed set of closed points `n ∈ 𝔸¹_ℚ`.
 -/
 
 @[expose] public section
@@ -355,12 +361,7 @@ theorem irreducibleSpace_of_connectedSpace_of_isAlgClosed (G : Over (Spec (.of K
 end AlgClosed
 
 /-- A connected group scheme locally of finite type over a field is irreducible (SGA 3, VI_A,
-Proposition 2.4).
-
-Having the rational point `e`, the connected scheme `G` is geometrically connected
-(`GeometricallyConnected.of_connectedSpace_of_section`), so its base change to an algebraic
-closure is connected, hence irreducible (`irreducibleSpace_of_connectedSpace_of_isAlgClosed`);
-`G` is the image of this base change. -/
+Proposition 2.4). -/
 theorem irreducibleSpace_of_connectedSpace (G : Over (Spec (.of k))) [GrpObj G]
     [LocallyOfFiniteType G.hom] [ConnectedSpace G.left] : IrreducibleSpace G.left := by
   let g : Spec (.of (AlgebraicClosure k)) ⟶ Spec (.of k) :=
@@ -672,13 +673,7 @@ theorem Scheme.Hom.exists_isOpen_inter_closure_range_subset {X Y : Scheme.{u}} (
   exact exists_isOpen_inter_closure_subset_of_subtype V.2 hu hne hsub
 
 /-- The image of a homomorphism from a group scheme of finite type to a group scheme locally of
-finite type over an algebraically closed field `K` is closed.
-
-Let `S` be the image and `Z` its closure. By Chevalley's theorem `S` contains a nonempty open
-subset `U` of `Z`; the translates of `U` by the rational points of `S` cover the closed points of
-`S`, so their union `U'` is a dense open subset of `Z` contained in `S`. If `Z ⊄ U'`, pick a closed
-point `y ∈ Z \ U'`. Then `y U'` and `U'` are open in `Z` and meet in a closed point `w = y x`,
-with `x, w` rational points of `S`, so `y = w x⁻¹ ∈ S ⊆ U'`, a contradiction. -/
+finite type over an algebraically closed field `K` is closed. -/
 theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgClosed K]
     {G H : Over (Spec (.of K))} [GrpObj G] [GrpObj H] [LocallyOfFiniteType G.hom]
     [QuasiCompact G.hom] [LocallyOfFiniteType H.hom] (f : G ⟶ H) [IsMonHom f] :
@@ -846,15 +841,7 @@ theorem isClosed_range_of_isMonHom_of_isAlgClosed {K : Type u} [Field K] [IsAlgC
   exact closure_subset_iff_isClosed.mp fun y hy ↦ hu'S ⟨hZu' hy, hy⟩
 
 /-- The image of a homomorphism from a group scheme of finite type to a group scheme locally of
-finite type over a field is closed (SGA 3, VI_B, Proposition 1.2).
-
-The source must be quasi-compact: the homomorphism `ℤ ⟶ 𝔾ₐ` from the constant group scheme,
-`n ↦ n`, over `ℚ` has image the infinite non-closed set of closed points `n ∈ 𝔸¹_ℚ`.
-
-After base change to an algebraic closure the image is closed by
-`isClosed_range_of_isMonHom_of_isAlgClosed`, and closedness descends along the closed surjection
-from the base change. The matrix-group case over an algebraically closed
-field is `AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff`. -/
+finite type over a field is closed (SGA 3, VI_B, Proposition 1.2). -/
 theorem isClosed_range_of_isMonHom {G K : Over (Spec (.of k))} [GrpObj G] [GrpObj K]
     [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [LocallyOfFiniteType K.hom] (f : G ⟶ K)
     [IsMonHom f] :

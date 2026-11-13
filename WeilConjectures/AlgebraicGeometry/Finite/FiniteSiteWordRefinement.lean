@@ -337,41 +337,7 @@ private theorem proEtaleOpenComp_symm (R : Type (u + 1)) [CommRing R]
 /-- Finite-site word comparisons, lower bounds, normalized compositor and unit laws,
 and compatibility with pushed proper/open refinements.
 
-Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF; more-etale.tex, Tag 0F7I.
-
-Proof (the node's eight steps):
-1. Etale and pro-etale extension by zero and comparison inverse image are exact
-   (lem-weil-pbc-extension-by-zero-exact, proposition-extension-zero-restriction-closed-subscheme,
-   lem-sf-comparison-pullback-exact). The exact-functor cohomology comparison
-   (situation-conventions) preserves every specified lower bound.
-2. Use enough injectives and an injective representative vanishing below the chosen
-   bound (lem-weil-pbc-module-sheaves-enough-injectives,
-   lem-weil-pbc-dplus-injective-representative). Direct image computes its right
-   derived functor on that representative, so every intermediate etale direct image remains bounded
-   below.
-3. Apply the canonical sheaf open comparison and its composition law in every degree
-   (proposition-comparison-immersions--1, proposition-composition-base-change-rf-shriek--1).
-   Naturality makes chain maps; exactness preserves quasi-isomorphisms. Localization
- descends the maps and equations.
-4. Finite affine covers give quasi-compactness; local Noetherianness gives
-   quasi-separatedness (lem-weil-pbc-affine-scheme-qcqs,
-   lem-weil-pbc-locally-noetherian-quasi-separated). Morphism permanence
- gives qcqs proper maps. The specified mate is invertible, hence so is B. Its domain is exactly the
-   comparison of the bounded-below etale word, the witness.
-5. The coherent pullback comparisons descend termwise by exactness (situation-conventions,
-   prop-weil-pbc-proetale-constant-exact, situation-conventions). Mate pasting
-   (lem-weil-pbc-mate-pasting, parts 2 and 3) gives the compositor equation for the specified counit
-   mates; adjunction conjugation fixes the canonical compositors.
-6. The identity pullback comparison and identity mate law give the proper unit law.
-   The open composition law at two identities gives e=e squared; cancellation by
-   its inverse gives the open unit law.
-7. Expand B and rho. Apply the proper compositor equation, then naturality of d_r2
-   at alpha_u and of the pro-etale compositor at e_j1. The three middle factors are
-   P_u(e_j1), d_u, and N(alpha_u), all on bounded-below etale inputs from step 2.
-8. Substitute the site equation of lem-sp-refinement-coefficient-mate to replace
-   those factors by alpha_u_pro after e_j2. Functoriality of P_r2 gives precisely
-   rho_pro after B_r2,j2. All constituents are natural, hence so is this equation.
-   No Cartesian refinement square, base field, or coefficient presentation is used. -/
+Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF; more-etale.tex, Tag 0F7I. -/
 theorem finiteSiteWordRefinement (R : Type (u + 1)) [CommRing R] [Finite R] :
     (∀ {X W : Scheme.{u}} [IsNoetherian X] [IsNoetherian W]
       (j : X ⟶ W) [IsOpenImmersion j]

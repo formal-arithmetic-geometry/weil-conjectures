@@ -39,13 +39,8 @@ private def comparisonTensorModel (T : Scheme.{u})
 
 /-- After forgetting the target coefficient action and transporting the completed ring
 along its canonical constant-system comparison, the scalar-adjunction mate is the
-ordinary tensor projection morphism. This statement concerns the specified arrows;
-it asserts no invertibility of either projection morphism. The coefficient maps
-φY and φX are arbitrary compatible maps, and P is their restricted target ring;
-no finiteness, flatness or perfectness is assumed for these target rings.
-The ordinary direct-image presentations F and G are identified with the canonical
-ringed functors by hF and hG; deriving these exact presentations avoids unfolding
-the chosen localization constructions when applying the comparison.
+ordinary tensor projection morphism. The coefficient maps φY and φX are arbitrary
+compatible maps, with no finiteness, flatness or perfectness assumed.
 
 Source: Stacks Project, Tags 0B56 and 06YY. -/
 theorem completedScalarProjectionTensorComparison

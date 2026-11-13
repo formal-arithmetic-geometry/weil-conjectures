@@ -25,12 +25,8 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Once the finite quotients have specified bounded-below etale origins, their
-consecutive maps descend and their scalar realizations compare with the actual tower.
-This asserts neither existence of those origins nor any local marking, finite local
-constancy, perfectness or geometric-stalk property. The comparisons supplied in the
-hypothesis identify the actual quotients, rather than just their isomorphism classes
-at geometric points. The assertion applies to every supplied family of origins and
-comparison isomorphisms.
+consecutive maps descend and their scalar realizations compare with the actual tower,
+for every supplied family of origins and comparison isomorphisms.
 
 Source: Stacks Project, Tag 09C6, the arrows L_(n+1) -> L_n, using full faithfulness
 in Tag 09AL and derived tensor balancing in Tag 06YY. -/

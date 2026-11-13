@@ -205,33 +205,7 @@ def diagonalRlimVaryingSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
 -- `whiskeringRight` functor of `LocalChernConeMate`. Mixed spellings under projections such as
 -- `Functor.obj` make the kernel unfold derived-category functors on every comparison.
 /-- The normalized mate on the actual quotient and root towers, its full ordinary cones,
-shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms.
-
-Proof plan:
-1. Use derived_tower_counit_projections to normalize the constant/limit adjunctions.
-   The full counit on K-injective towers is the ordinary cone; its evaluation is the
-   specified derived projection. These equations exclude sign-modified adjunctions.
-2. Transpose the canonical constant-tower interchange followed by the source counit.
-   Adjunction injectivity gives the counit equation. Evaluation gives every finite
-   projection equation; naturality of the mate gives equality before evaluation.
-3. For an ordinary cone transpose both routes into the pulled derived limit. Both
-   transposes are its full pulled strict cone, so the routes agree. No faithfulness
-   of derived evaluation is used. Apply this to the coefficient and root cones in aS.
-4. The coefficientForget and lineForget fields identify the two specified towers with
-   (Z/l^(n+1))_S and mu_(l^(n+1),S), including transitions and unit/root normalization.
-   Profinite coefficient inverse image preserves the coefficient limit and quotients.
-   Cartesian integral Tate pullback preserves the root limit and every root projection.
-5. Quotient and power transitions are epic. Apply new-sfb-diagonal-trace-ordinary-rlim-epi
-   on both schemes. The ordinary-to-derived comparisons are invertible; step 3 then
-   expresses the mate as a composite of these maps and the ordinary limit isomorphism.
-6. The scalar squares commute on each scalar, with residue action at each finite level.
-   The underlying-sheaf adjunction equations fix the exact restriction/pullback squares.
-   Localize those exact comparisons to obtain the derived scalar squares.
-7. Insert the canonical single comparisons into step 3. By exactConeComparison this is
-   the coefficient-unit/lineMap equation. The normalized cones give every endpoint.
-8. The normalized unit, constant/limit adjunction, exact inverse image and restrictions
-   commute with canonical shifts. Transpose after shifting; injectivity gives the shift
-   equation, hence the shifted endpoint equations and compatibility with Chern arrows. -/
+shifted coefficient and root-line arrows, scalar restrictions, and derived morphisms. -/
 theorem diagonalRlim_pullback_endpoints (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     [∀ x : X, Invertible (l : X.residueField x)]

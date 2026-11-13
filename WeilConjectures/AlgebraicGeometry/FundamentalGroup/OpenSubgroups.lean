@@ -24,6 +24,11 @@ group `π₁(Y, s)`).
   connected covers are isomorphic if and only if their stabilizers are conjugate (and pointed covers
   are isomorphic if and only if the stabilizers of the points agree); the degree of a connected
   cover is the index of the stabilizer.
+
+## Implementation details
+
+The stabilizer of a point is only well-defined up to conjugacy (changing the point conjugates
+it), so the bijection with open subgroups is stated in terms of conjugate stabilizers.
 -/
 
 @[expose] public section
@@ -36,9 +41,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-/-- Galois covers.
-
-A finite étale `Y`-scheme `P` is a *Galois cover* (relative to the geometric point `s` of `Y`)
+/-- A finite étale `Y`-scheme `P` is a *Galois cover* (relative to the geometric point `s` of `Y`)
 if `P` is connected and the group `Aut_Y(P)` of `Y`-automorphisms of `P` acts simply
 transitively on the geometric fibre `P_s`: for every `x ∈ P_s` the evaluation `σ ↦ σ(x)` is a
 bijection `Aut_Y(P) → P_s`. -/
@@ -214,11 +217,8 @@ theorem nonempty_iso_iff (P Q : Y.FiniteEtale) [IsConnected P] [IsConnected Q]
   · rintro ⟨g, hg⟩
     exact ⟨((exists_iso_fiber_map_eq_iff s G P Q x (g • y)).2 hg).choose⟩
 
-/-- Open subgroups and finite etale
-covers.
-
-Let `Y` be connected with geometric point `s`, and `G` the fundamental group `π₁(Y, s)` (any
-fundamental group of the fibre functor `F_s`). Assigning to a connected finite étale cover `P`
+/-- Let `Y` be connected with geometric point `s`, and `G` the fundamental group `π₁(Y, s)`.
+Assigning to a connected finite étale cover `P`
 the stabilizer in `G` of a point of `P_s` is a bijection between isomorphism classes of connected
 finite étale covers and open subgroups of `G` up to conjugacy, and the degree `#P_s` of `P` is
 the index of the subgroup:
@@ -227,10 +227,7 @@ the index of the subgroup:
 2. two connected covers are isomorphic if and only if the stabilizers of points of their fibres
    are conjugate (for pointed covers: if and only if the stabilizers agree,
    `AlgebraicGeometry.Scheme.FiniteEtale.exists_iso_fiber_map_eq_iff`);
-3. the degree is the index of the stabilizer.
-
-The blueprint states the bijection with open subgroups; the stabilizer of a point is only
-well-defined up to conjugacy (changing the point conjugates it), which is the form stated in (2). -/
+3. the degree is the index of the stabilizer. -/
 theorem galois_openSubgroups :
     (∀ (P : Y.FiniteEtale) (x : (fiber s).obj P), IsOpen (MulAction.stabilizer G x : Set G)) ∧
     (∀ H : OpenSubgroup G, ∃ (P : Y.FiniteEtale) (x : (fiber s).obj P),

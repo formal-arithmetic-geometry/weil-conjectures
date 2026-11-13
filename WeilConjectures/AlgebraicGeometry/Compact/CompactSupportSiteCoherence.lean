@@ -597,8 +597,7 @@ inductive CompactSupportSiteDiagram (P : WeilConjectures.PurityFiniteSetting.{u}
       (D : CompactSupportSiteDiagram P b₀ b₁) : CompactSupportSiteDiagram P c₀ c₁
 
 /-- The etale boundary composite, constructed solely with the recorded etale maps.
-The refinement uses the inverse of the upstream comparison because its upstream direction
-is d to c, whereas the node's rho is c to d. -/
+The refinement step uses the inverse of the upstream refinement comparison. -/
 def CompactSupportSiteDiagram.etaleMap {P : WeilConjectures.PurityFiniteSetting.{u}}
     {T : Scheme.{u}} {b₀ b₁ : CompactSupportSiteBoundary P.Coefficient T}
     (D : CompactSupportSiteDiagram P b₀ b₁) : b₀.etale ⟶ b₁.etale :=

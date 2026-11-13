@@ -29,8 +29,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {V B : Scheme.{u}} (g : V ⟶ B) (s : B ⟶ V)
 
-/-- Deformation space of a closed section. The map
-`g̃ : D_s V ⟶ 𝔸¹_B` is the composite of the open immersion of `D_s V` into the blow-up
+/-- The map `g̃ : D_s V ⟶ 𝔸¹_B` is the composite of the open immersion of `D_s V` into the blow-up
 `Bl_{s(B) × 0} (V ×_B 𝔸¹_B)`, the blow-up map and `V ×_B 𝔸¹_B ⟶ 𝔸¹_B`. -/
 lemma deformationSpaceProj_eq_blowup :
     deformationSpaceProj g s =

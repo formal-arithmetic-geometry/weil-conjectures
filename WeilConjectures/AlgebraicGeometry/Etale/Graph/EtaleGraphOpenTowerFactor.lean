@@ -178,32 +178,11 @@ private lemma support_associativity
   simp only [unboundedEtaleLowerShriekCongr, Category.comp_id, Iso.refl_hom,
     NatTrans.id_app]
 
-/-- The graph tower identity before the terminal compactification comparison.
-
-This is the normalized identity after postcomposition with the inverse of the endpoint
-comparison `k`; the original tower formula follows by cancellation.
+/-- The graph tower identity before the terminal compactification comparison: the
+normalized identity after postcomposition with the inverse of the endpoint comparison `k`.
 This involves only one compact-support composition, and no proper/etale interchange.
 Source: Stacks Project, etale-cohomology.tex Tag 0F4L (graph comparison), and
-more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower).
-
-Proof in words:
-Take the tower e over c. The every-tower composition formula writes the left
-side using the compactification e.restrict of v'. Replace its inverse comparison
-by the explicit graph-derived map. On sheaves, extending a sheet section first
-to the clopen graph of v' and then across c.i agrees with extending it to the
-graph of r = v' followed by c.i. Both sections agree on that graph and vanish
-off it. The sheaf axiom, followed by sum-presheaf sheafification, identifies the
-maps. Transposition under the two composite sum/open adjunctions identifies the
-change of factorization with a inverse followed by s. Apply the equality
-termwise, compose with the right-derived direct-image units, and use the unit
-characterization of direct-image composition. The graph-derived component
-formula and homotopy localization give the equality on every unbounded input.
-Postcompose with the inverse of the endpoint comparison k, so the terminal
-compactification disappears. The remaining equality is the graph-derived
-factorization through the two conjugate adjunction comparisons a and s. The
-component formula and homotopy localization identify this equality on every
-unbounded input; identity opens reduce to triangle identities, and empty graphs
-or zero coefficients give zero maps. -/
+more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower). -/
 theorem etaleGraph_open_tower_factor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Z' : Scheme.{u}}

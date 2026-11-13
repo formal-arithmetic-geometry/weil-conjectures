@@ -319,51 +319,9 @@ private theorem cofiltered_comparisons {C D : Type*} [Category* C] [Category* D]
 /-- The canonical refinement maps form natural isomorphisms, are unital and transitive,
 and determine comparison isomorphisms independently of the common refinement and its
 arrows. Every finite family has a common refinement, including the empty family; the
-pairwise comparisons satisfy the cocycle law. The normalization by the recorded
-`refinementComparisonIsomorphism` specifies the proper-composition map followed by
-proper pushforward of the inverse proper-open map, rather than an arbitrary isomorphism.
-The domain consists of bounded below etale-origin triples, with all ambient morphisms.
-
-Proof plan:
-1. Finite type over the field makes X, Y and every proper compactification Noetherian.
-Refinements are proper, hence qcqs (definition-compactification-refinement and
-   lem-weil-pbc-proper-fp-permanence).
-2. In the defining etale proper-open map, derived open restriction, extension-zero
-   base change, and restriction to the clopen section are natural. Compose their
-   naturality squares and invert the restriction comparison; the adjunction counit
-   gives naturality of the specified etale proper-open map
-   (proposition-construction-independence-rf-shriek--7,
-   proposition-construction-independence-rf-shriek--7,
-   proposition-extension-zero-restriction-closed-subscheme--11,
-   proposition-construction-independence-rf-shriek--7).
-3. Transport this square using the natural extension-zero site comparison and the
-   direct-image comparison; exactness descends the termwise construction to complexes
-   and roofs (proposition-comparison-immersions--1,
-   lem-weil-pbc-extension-by-zero-exact, def-sf-comparison-derived-pullback,
-   theorem-comparison-direct-images--1, proposition-construction-independence-rf-shriek--7).
-4. Conjugate by the retained alpha. Full faithfulness of comparison pullback lifts
-   every ambient map between witnessed objects to an etale map, proving naturality
-   for all domain morphisms. The identity map between two witnesses gives witness
-   independence (def-sf-etale-origin-subcategory, theorem-bounded-below-cohomology-comparison).
-5. Invert that proper-open isomorphism and apply the proper direct image after its
-   canonical compositor. This is precisely refinementComparisonIsomorphism; naturality
-   of its two factors gives theta (def-sf-refinement-comparison-isomorphism,
-   lem-weil-derived-direct-image-composition, proposition-construction-independence-rf-shriek).
-6. The proper-open identity and composition laws survive witness conjugation: cancel
-   the intermediate witness maps and move the compositor past alpha by naturality.
-   Associativity of the direct-image compositor then gives theta_id and theta_comp
-   (proposition-construction-independence-rf-shriek--7,
-   lem-weil-derived-direct-image-composition).
-7. For d mapping to c1 and c2, put T12 = theta(d,c1)^(-1) followed by theta(d,c2).
-   Transitivity cancels theta for any further refinement of d.
-8. For two choices d,d', first take a common refinement and successively equalize
-   the two resulting parallel arrows to c1 and to c2. The first equality survives
-   the second precomposition. Step 7 identifies the resulting comparisons, including
-   different choices of arrows.
-9. Use the finite-family clause of the same cofilteredness theorem. A single common
-   refinement for three objects cancels the middle theta and proves the cocycle law.
-   Nonemptiness handles the empty family and identities handle a singleton. All these
-   equations are on the witnessed domain, never on arbitrary pro-etale complexes. -/
+pairwise comparisons satisfy the cocycle law. The comparisons are normalized by
+`refinementComparisonIsomorphism`. The domain consists of bounded below etale-origin triples,
+with all ambient morphisms. -/
 theorem compactification_coherence (K₀ : Type u) [Field K₀]
     (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : K₀))
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

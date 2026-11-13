@@ -109,7 +109,7 @@ abbrev clopenTensorComplexRestriction {X Y : Scheme.{t}} (j : Y ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :=
   (clopenTensorRestriction.{t, u} j R).mapHomologicalComplex (.up ℤ)
 
-/-- The comparison in the direction displayed in the node is the inverse tensorator.
+/-- The tensor comparison is the inverse tensorator.
 Its input structure contains the associativity, symmetry and both unit diagrams.
 Source: Stacks 0GMW. -/
 def clopenTensorComparison {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]

@@ -57,13 +57,7 @@ private theorem opposite_composite_component
   rfl
 
 /-- The normalized étale Hom shift data except for the left comparison equation.
-Source: Stacks Project, Tags 08JC and 08J9.
-
-The native signed exact Hom theorem and its mate evaluation identity supply
-both normalized Hom shifts. Triangulated adjunction gives exactness of scalar
-extension; the composite and opposite shift formulas give the right component
-equation and both composite triangulated structures. The omitted left component
-equation is the definitional composition formula proved in the parent module. -/
+Source: Stacks Project, Tags 08JC and 08J9. -/
 theorem etaleHomComparison_reversedExact_shiftCore
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X) :

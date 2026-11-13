@@ -82,13 +82,9 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
 /-- A local isomorphism to the completed constant module, linear over the completed
-coefficient sheaf. The abelian-sheaf isomorphism is tested on every quotient projection.
-For a completed scalar `r`, locally lift its `n`th residue to a constant-ring section `a`;
-the displayed equality says that the projection of `r • x` is `a` times that of `x`.
-The quotient-ring maps are epimorphisms, so such lifts exist locally. This is precisely
-componentwise completed-scalar linearity; it also specifies the action after inverse image.
-The limit in module sheaves has the sectionwise compatible-family underlying abelian sheaf.
-Source: Tag 09BT. -/
+coefficient sheaf: the abelian-sheaf isomorphism `e` is compatible with every quotient
+projection, the projection of `r • x` being a local lift of the `n`th residue of `r` times that
+of `x`. Source: Tag 09BT. -/
 def IsAdicLisseLocalModel (X : Scheme.{u})
     (R₀ Rhat : Sheaf (ProEt.topology X) RingCat.{u + 1})
     (Rₙ : ℕ → Sheaf (ProEt.topology X) RingCat.{u + 1})

@@ -46,11 +46,7 @@ private theorem iso_transport_square
     congrArg (fun z ↦ a.hom ≫ b.hom ≫ z) h
 
 /-- The normalized open scalar mate satisfies the transport square.
-Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 03S6, 07A4.
-
-The proof transposes both paths through the open adjunction, applies the
-normalization of the supplied comparison `jo` and of the supplied mate `op`,
-and uses the scalar/open exchange identity on cochain representatives. -/
+Source: Zheng, Constructions 5.14--5.15 and Lemma 5.16; Stacks 03S6, 07A4. -/
 theorem etaleBrownOpenScalarTransport_square
     (O : Type (u + 1)) [CommRing O] (t : O)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

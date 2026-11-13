@@ -46,8 +46,8 @@ attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFuncto
 attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
-/-- Apply the supported-source calculation to the proved criterion from the preceding step.
-The other independent proof arguments remain available in its inferred type. -/
+/-- The endpoint criterion `UniformizerSquareData.endpointSquare`, specialized by the
+supported-source calculation. -/
 @[irreducible] def UniformizerSquareData.sourceSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

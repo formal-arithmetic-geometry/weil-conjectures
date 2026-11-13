@@ -303,11 +303,7 @@ theorem zeroLocusMulEquiv_comp_subgroupSchemeHom {R : Type u} [CommRing R] [Alge
 
 /-- If `V(I)(R)` has its commutators in `V(J)(R)` for every `k`-algebra `R`, then the closed
 immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
-(`AlgebraicGeometry.IsMonHom.ContainsCommutators`).
-
-Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
-`Γ(X)`; the hypothesis for `R = Γ(X)`, transported through `zeroLocusMulEquiv`, factors their
-commutator through `V(J)`. -/
+(`AlgebraicGeometry.IsMonHom.ContainsCommutators`). -/
 theorem containsCommutators_subgroupSchemeHom
     (hIJ : ∀ (R : Type u) [CommRing R] [Algebra k R],
       ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
@@ -467,10 +463,7 @@ theorem le_derivedIdeal : I ≤ derivedIdeal I :=
   le_sSup ⟨inferInstance, le_refl I,
     IsMonHom.ContainsCommutators.of_eq (subgroupSchemeHom_refl (I := I)).symm⟩
 
-/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme.
-
-Proof sketch (not formalised): if `Δ(a) ∈ J ⊗ A + A ⊗ J` and `Δ(b) ∈ J' ⊗ A + A ⊗ J'`, then
-`Δ(a + b) ∈ (J + J') ⊗ A + A ⊗ (J + J')`; likewise for the counit and the antipode. -/
+/-- The sum of Hopf ideals is a Hopf ideal, so the derived subgroup is a closed subgroup scheme. -/
 instance : (derivedIdeal I).IsHopfIdeal k :=
   Ideal.isHopfIdeal_sSup fun _ ⟨hJ, _, _⟩ ↦ hJ
 

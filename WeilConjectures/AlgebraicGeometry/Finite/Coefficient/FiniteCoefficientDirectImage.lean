@@ -346,8 +346,8 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
     (finiteCoefficientRestrictionPullback φ f) (ProEtale.scalarPullbackReverse_isIso φ f).2 K
 
-/-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed. -/
+/-- The B-linear coefficient projection map: the unique map determined by the extended
+counit. -/
 def finiteCoefficientDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)
@@ -429,8 +429,8 @@ theorem finiteCoefficientDirectImageMap_existsUnique
     (pbcFixedScalarExtension (Scheme.ProEt.topology T) φ)
     (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology T) φ) adt e hk K
 
-/-- The actual B-linear coefficient projection map, chosen from a theorem that
-uniquely determines it by the extended counit. Only that proof is postponed. -/
+/-- The B-linear coefficient projection map: the unique map determined by the extended
+counit. -/
 def finiteCoefficientChangeDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {T X : Scheme.{u}} (f : T ⟶ X)

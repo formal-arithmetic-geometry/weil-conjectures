@@ -227,8 +227,7 @@ def D (E : DE R X) :=
     (PP R q).map ((JP R i).map (B R a s E))
 
 /-- The unbounded etale proper/open tower, with the canonical conjugate and open
-compositors. This is the normalized tower prescription of
-lem-amb-unbounded-compact-support-comparisons, not an arbitrary isomorphism.
+compositors: the normalized tower prescription, not an arbitrary isomorphism.
 Source: Stacks 0F7J. -/
 def AEUnbounded (E : Etale.DerivedCategoryModule R X) :=
   (Etale.lowerStar (ModuleCat.{u + 1} R) q).rightDerivedFunctor.map

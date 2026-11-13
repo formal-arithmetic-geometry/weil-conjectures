@@ -50,14 +50,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The source isomorphism on the small coordinate-ring colimit model, using its unique germ
 restriction and commutation of exact inverse image with homology.
-Source: Stacks, Tags 03Q9 and 03QO.
-
-Construction: choose the uniquely specified restriction of `strictLocalSectionCone`.
-The pointed residue identification supplies a compatible geometric lift to the closed point.
-Global sections there compute the geometric stalk, so the general section-cone criterion
-proves invertibility of this same restriction. Compose with the global-sections image of
-the exact inverse-image/homology comparison. The restriction is uniquely determined;
-no arbitrary witness or sheafification isomorphism supplies its data. -/
+Source: Stacks, Tags 03Q9 and 03QO. -/
 @[irreducible] noncomputable def smallModel_strictLocalCohomologySourceIso {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -130,11 +123,7 @@ theorem smallModel_strictLocalCohomologySourceIso_hom {S : Scheme.{v}}
 
 /-- Canonical source legs: a presheaf germ, the canonical map to the cohomology-sheaf
 stalk, and the unique strict-local germ restriction transported through exact inverse image.
-Source: Stacks, Tags 03Q8 and 03Q9.
-
-Construction: use the adopted derived-sections presheaf and its canonical homology germ
-map, followed by the source isomorphism for this small model. Naturality is the cocone
-identity for presheaf germs on the pointed affine representative diagram. -/
+Source: Stacks, Tags 03Q8 and 03Q9. -/
 noncomputable def smallModel_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

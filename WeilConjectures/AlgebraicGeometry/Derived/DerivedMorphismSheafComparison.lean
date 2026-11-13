@@ -866,7 +866,7 @@ theorem proEtaleDerivedUnits_bijective (U : X.ProEt) [IsAffine U.left]
       (proEtaleDerivedHom_finiteProducts X B I W c hc hsec) _ _
 
 /-- The canonical evaluation map: the comparison map followed by the unique inverse of the bijective
-pro-etale sheafification unit. Only the proof of bijectivity is postponed.
+pro-etale sheafification unit.
 
 Source: Stacks Project, Pro-etale Cohomology, Tags 09B1 and 0F63. -/
 noncomputable def derivedHomEvaluation (U : X.ProEt) [IsAffine U.left]

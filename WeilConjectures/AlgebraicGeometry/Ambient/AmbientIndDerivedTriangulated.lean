@@ -68,42 +68,7 @@ private lemma indCohomology_triangulated
 
 /-- The full subcategory of the ordinary derived category whose cohomology objects are
 ind-constructible in every degree is triangulated, for each of the two canonical coefficient
-rings. `ObjectProperty.ind` uses small filtered colimits in the ambient module category.
-
-Proof, separately for the canonical coefficients `E` and `Q̄_ℓ`:
-
-1. The zero module is constructible: on each affine open use the single stratum and the zero
-   finitely presented scalar module. Its constant diagram on the one-object filtered category makes
-   it ind-constructible. Since every cohomology of the zero complex is zero, the derived predicate
-   contains zero. An isomorphism of complexes induces isomorphisms on every cohomology object;
-   transport the filtered-colimit presentation along these isomorphisms to obtain isomorphism
-   closure.
-2. For any integers `n,r`, the cohomology-shift isomorphism identifies `Hⁿ(K[r])` with
-   `Hⁿ⁺ʳ(K)`. Thus the predicate is stable under every integer shift, including both `[1]` and
-   `[-1]`.
-3. For a distinguished triangle `K → L → M → K[1]` with `K,L` in the predicate, apply the
-   long exact cohomology sequence in the abelian category of module objects
-   (`lem-sf-derived-homology-long-exact`, `pur713-def-module-category`). In each degree it
-   gives the exact segment `Hⁿ(K) →α Hⁿ(L) →u Hⁿ(M) →v Hⁿ⁺¹(K) →β Hⁿ⁺¹(L)`.
-4. Exactness identifies `ker u` with `im α`, hence `coker α` with the coimage of `u`.
-   The coimage map is monic with image `ker v`. Apply the same result to `v` in the opposite abelian
-   category; taking opposites gives an epimorphism from `Hⁿ(M)` to `im v = ker β`. Its kernel is
-   `ker v`, since the inclusion of `ker β` in `Hⁿ⁺¹(K)` is monic. Therefore these maps form the
-   ambient short exact sequence `0 → coker α → Hⁿ(M) → ker β → 0`.
-5. The four outer cohomology objects belong to `IndCons`. Fullness makes `α,β` morphisms
-   between its objects. Closure under ambient kernels and cokernels
- puts `coker α` and `ker β` in `IndCons`. Closure under extensions puts `Hⁿ(M)` there too. Since `n`
-   was arbitrary, `M` satisfies the derived predicate.
-6. If instead `L,M` satisfy the predicate, rotate to the distinguished triangle
-   `L → M → K[1] → L[1]`. Steps 3--5 give `K[1]` in the predicate; shift by `[-1]` and use
-   `(K[1])[-1] ≅ K` and steps 1--2 to obtain `K`. If `K,M` satisfy it, first shift `K` and rotate
-   twice to `M → K[1] → L[1] → M[1]`. Steps 3--5 give `L[1]`; shifting back and using the shift
-   isomorphism gives `L`. The rotation maps carry the usual signs, which do not change the vertex
-   predicates. This proves all three cases of two-out-of-three.
-7. The predicate defines a full subcategory of the ordinary triangulated derived category.
-Steps 1--6 give zero, all shifts, isomorphism closure and the middle-vertex condition. Apply
-   `def-weil-triangulated-subcategory`: the inherited shifts and distinguished triangles make this
-   full subcategory triangulated. -/
+rings. `ObjectProperty.ind` uses small filtered colimits in the ambient module category. -/
 theorem indConstructibleDerived_isTriangulated
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

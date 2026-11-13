@@ -59,9 +59,8 @@ private theorem etale_root_scalar (n : ℕ) {R A : Type (u + 1)}
 
 /-- Let n>0, A a finite commutative ring killed by n, Z a scheme on which n is invertible, and i:D→Z
 an effective Cartier closed immersion. The normalized etale Kummer class G_m→forget(A_Z(1))[1] is a
-degree-one unbounded scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: Stacks 0152,
-06YY and 0GLZ. -/
+degree-one unbounded scalar unit.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem etale_kummer_derived_unit
     (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]

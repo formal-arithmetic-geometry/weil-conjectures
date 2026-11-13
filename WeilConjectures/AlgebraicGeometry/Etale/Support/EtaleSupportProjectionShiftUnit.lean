@@ -572,35 +572,7 @@ shift and equal to the identity at the unit. The same is true after restriction 
 constant derived coefficients, for both the map and its inverse. Pullback of constant
 complexes is the existing canonical comparison, with its shift and unit normalization.
 Source: Zheng Theorem 2.18(2), printed p. 12, Construction 2.26, printed p. 15;
-Stacks Tags 0F0G, 0B56, 0GL1.
-
-Proof plan:
-1. Apply proposition-proper-direct-image-constructible-complexes--9 to the proper part c.g, E = j_!
-K and unbounded L. A ring killed
-   by a power of ell is torsion, including the zero ring. Conjugate the proper counit
-   projection of definition-projection-formula-map--1 by lem-kun-tensor-sym.
-2. Apply lem-pur-etale-open-derived-tensor to M = r^* L. Its inverse projection is the
-   derived sheaf extension-by-zero tensor map. Compose with the proper map and with
-   lem-kun-derived-pullback-composition-monoidal. All comparisons are derived natural
-   transformations, hence independent of resolutions and natural in both variables.
-3. lem-weil-pbc-ringed-projection-mate-exact supplies the proper shift/unit square;
-   situation-conventions identifies exact and ringed pullback, and
-   lem-weil-pbc-derived-adjunction-shift identifies the right-derived shift comparison.
-   Iterate the shift square forwards and backwards. For degrees p,q and shift n,
-   the signs from the second-factor shift and the swap multiply as
-   (-1)^(n*p) * (-1)^(p*(q-n)) = (-1)^(p*q), by proposition-open-direct-image-preserves-finite.
-4. On K-flat coefficient models the coefficient-first open tensor map is degreewise
-   and has no extra sign. Reindexing commutes with this map in every summand of the
-   direct-sum total, including unbounded totals. At the unit it is scalar action,
-   the left unitor of lem-kun-tensor-unit.
-5. Paste the proper/open shift squares and use the pullback composition unit equation
-   of lem-kun-derived-pullback-composition-monoidal. This gives exactly the canonical
-   source/target comparisons and the identity component at C_Y.
-6. By lem-weil-pbc-finite-type-constant-exact, constants descend termwise to D(C-Mod).
-   Apply lem-kun-pullback-constant degreewise; it commutes with differential signs and
-   reindexing and at C[0] is the coefficient-ring identification. Substitute constant
-   L in the preceding identities. Inverting the shift square and the unit identity
-   gives the same properties for the inverse projection. -/
+Stacks Tags 0F0G, 0B56, 0GL1. -/
 theorem etaleSupportProjectionShiftUnit
     (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [CharP k p]
     (_hp : 0 < p) (_hell : ell.Prime) (_hne : ell ≠ p)

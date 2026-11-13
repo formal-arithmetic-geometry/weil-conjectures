@@ -55,8 +55,7 @@ Source: Stacks Tags 079P and 08TC.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.completedRlim_computation`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.completedRlim_computation`
 -/
 
 @[expose] public noncomputable section

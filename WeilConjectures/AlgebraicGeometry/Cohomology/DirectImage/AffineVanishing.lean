@@ -62,15 +62,7 @@ lemma epi_pushforward_map_g_of_cechAcyclicOnAffines (f : X ⟶ T) [IsAffineHom f
   exact ⟨V, hVW, hxV, z, hz⟩
 
 /-- **The higher direct images along an affine morphism vanish.** Let `f : X ⟶ T` be affine
-and `ℱ` a quasi-coherent `𝒪_X`-module. Then `R^q f_* ℱ = 0` for `q > 0`.
-
-The underlying abelian sheaves of quasi-coherent modules and of injective `𝒪_X`-modules, which
-are flasque, are Čech-acyclic on the affine opens of `X`, and this class is stable under
-cokernels of monomorphisms. A short exact sequence `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` with `M₁` in this
-class is surjective on the sections over the affine opens `f ⁻¹ᵁ V`, `V` affine in `T`, so `f_*`
-keeps it short exact; hence `ℱ` is `f_*`-acyclic by dimension shifting
-(`CategoryTheory.Functor.rightAcyclic_of_epi_map_g`). This is the vanishing of
-`H^q(f⁻¹ V, ℱ)` for the affine schemes `f⁻¹ V` of the blueprint proof, in Čech form. -/
+and `ℱ` a quasi-coherent `𝒪_X`-module. Then `R^q f_* ℱ = 0` for `q > 0`. -/
 theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
     [HasInjectiveResolutions X.Modules] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 0 < q) :
@@ -88,10 +80,7 @@ theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
   exact h q
 
 /-- **The pushforward along an affine morphism is quasi-coherent.** For `f : X ⟶ T` affine and
-`ℱ` quasi-coherent, `f_* ℱ` is quasi-coherent: for an affine open `V` of `T` and `g ∈ Γ(T, V)`,
-the preimage `f ⁻¹ᵁ V` is affine with `f ⁻¹ᵁ D(g) = D(f^♯ g)`, so `Γ(D(g), f_* ℱ)` is the
-localization of `Γ(V, f_* ℱ) = Γ(f ⁻¹ᵁ V, ℱ)` at `g`
-(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_forall_isAffineOpen`). -/
+`ℱ` quasi-coherent, `f_* ℱ` is quasi-coherent. -/
 theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     ((pushforward f).obj ℱ).IsQuasicoherent := by

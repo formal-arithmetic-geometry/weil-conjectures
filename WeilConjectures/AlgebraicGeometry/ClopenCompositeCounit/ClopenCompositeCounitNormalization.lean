@@ -64,7 +64,6 @@ def comparison {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
   ((adjunction Λ s).whiskerRight _).homEquiv _ _ (openUnit Λ s).inv
 
 /-- The canonical sheaf comparison is invertible on a clopen immersion.
-This is the published comparison, with its existing invertibility proof.
 Source: Stacks 04TS. -/
 def sheafComparison {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :

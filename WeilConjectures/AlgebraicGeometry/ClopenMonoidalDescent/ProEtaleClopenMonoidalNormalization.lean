@@ -15,8 +15,8 @@ public import Mathlib.CategoryTheory.Pi.Monoidal
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7D, 06YU and 0FPT.
 
-Restriction and its localization comparison are those of the module-gluing and unbounded
-localization nodes. The native derived tensor carries the prescribed total-tensor constraints.
+Restriction and its localization comparison are those of module gluing and unbounded
+localization. The native derived tensor carries the prescribed total-tensor constraints.
 -/
 
 @[expose] public noncomputable section

@@ -66,7 +66,7 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarHomoto
 Source: Stacks Project, derived.tex, Tags 015F and 05RU; sites-modules.tex, Tag 0GMW;
 sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU.
 
-All restrictions are the sectionwise functors of the module-gluing node. Tensor products
+All restrictions are the sectionwise functors of module gluing. Tensor products
 and their constraints are the existing sheafification and K-flat localization constructions.
 -/
 
@@ -149,24 +149,7 @@ end DerivedPi
 symmetric monoidal derived restriction. Each `Braided` structure contains invertible
 tensorators and unit comparison, their naturality, associativity, both unit diagrams,
 and the symmetry diagram; the tensor products are the existing ones on both sides.
-Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT.
-
-Proof (node steps 4-9): the bilinear universal property constructs the restriction
-tensorator. Its inverse is obtained by gluing the component bilinear maps. Both
-composites fix pure tensors, so they are identities. Reassociation, exchange and unit
-multiplication agree on generators. Restriction is left adjoint to zero insertion,
-hence preserves the sums over p+q=n. Apply the tensorator on each summand: both
-differentials send x tensor y to dx tensor y + (-1)^p x tensor dy. This gives the natural
-chain isomorphism below. Test exact tensoring first by restriction and then by exact
-zero insertion to obtain both directions of flatness. Test K-flatness against arbitrary
-acyclic complexes, using restriction in one direction and insertion in the other.
-Choose flat-term K-flat resolutions. Their restrictions are again such resolutions.
-The K-flat localization equivalence and its unique natural-transformation extension
-clause descend the chain tensorator and its inverse to all derived morphisms. The
-representative square below fixes this descent to the native K-flat tensor models.
-Associativity, units and Koszul symmetry descend because their diagrams agree on pure
-triple tensors and degree (p,q) generators, with the same sign (-1)^(pq). Empty and zero
-categories have unique maps and satisfy all these formulas. -/
+Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT. -/
 theorem finite_clopen_tensor_calculus
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

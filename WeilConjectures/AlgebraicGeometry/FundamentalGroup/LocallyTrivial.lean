@@ -18,8 +18,8 @@ Over an affine open `Spec R ∋ y` the finite étale `R`-algebra `A = Γ(P_R)` h
 near `y`, so it splits after a faithfully flat finite étale base change `R_f → T`
 (`Algebra.IsFiniteSplit.exists_tensorProduct_of_etale`), and `U = Spec T`.
 
-The blueprint states the result with a single finite set `S`; since the degree of `P` is only
-locally constant, the trivialising cover is given locally around each point.
+Since the degree of `P` is only locally constant, the trivialising cover is given locally around
+each point, rather than with a single finite set `S`.
 -/
 
 @[expose] public section

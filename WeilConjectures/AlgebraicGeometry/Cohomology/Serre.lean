@@ -25,8 +25,7 @@ import Mathlib.Order.Int.ConditionallyCompleteOrder
 /-!
 # Serre's theorems on the cohomology of projective schemes
 
-This file states, for the Picard-framework block of the blueprint, the three results of
-Serre's *Faisceaux algébriques cohérents* that the rest of the block uses: the computation of
+This file states three results of Serre's *Faisceaux algébriques cohérents*: the computation of
 the cohomology of the twisting sheaves on projective space, and Serre's theorems A and B for a
 coherent sheaf on a closed subscheme of projective space.
 
@@ -56,6 +55,9 @@ the homogeneous part is anyway the object Serre's theorem produces.
 Mathlib has no `IsCoherent` predicate for sheaves of modules; "coherent" is spelled here as
 `SheafOfModules.IsFinitePresentation` together with `SheafOfModules.IsQuasicoherent`, which
 agrees with coherence on a noetherian scheme such as a closed subscheme of `ℙᵈ_k`.
+
+Serre vanishing for an ample module does not require `X` to be proper over `k`, since
+`AlgebraicGeometry.IsVeryAmple` already provides a closed immersion into projective space.
 
 ## Main statements
 
@@ -92,12 +94,7 @@ section Pn
 `k` be a field and `Uᵢ = D₊(xᵢ)` the standard opens of `ℙ(n; Spec k)`. The sections of `𝒪(m)`
 over `U_J = ⋂_{j ∈ J} U_j` are the degree-`m` part of `k[xᵢ, x_j⁻¹ : j ∈ J]`, the restriction
 maps being the inclusions; so the Čech complex of `𝒪(m)` on the covering `(Uᵢ)ᵢ`, as a complex
-of `k`-vector spaces, is `ProjectiveSpace.monomialCechComplex n k m`.
-
-This is the first step of the proof of `lem-pc-projective-space-twist-cohomology`: the
-transition rule `e_i^{(m)} = (x_i/x_j)^m e_j^{(m)}` of `def-pc-projective-space-twist`, a
-well-defined gluing by `lem-pc-twist-cocycle`, identifies the section `(x^e / x_i^m) e_i^{(m)}`
-on `U_J ⊆ U_i` with the Laurent monomial `xᵉ`. -/
+of `k`-vector spaces, is `ProjectiveSpace.monomialCechComplex n k m`. -/
 theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : Type u)
     [Field k] [Fintype n] (m : ℤ) :
     Nonempty (((ModuleCat.restrictScalars
@@ -186,14 +183,7 @@ variable {n}
 
 /-- **A coherent module is a quotient of a finite sum of twists.** Let `A` be noetherian and
 `ℱ` a coherent module on `ℙⁿ_A = ℙ(n; Spec A)`. There are `m₁, …, m_r ≥ 0` and an epimorphism
-`⨁ⱼ 𝒪(-mⱼ) ⟶ ℱ`, whose kernel is coherent.
-
-On each standard chart `D₊(Tᵢ)` choose finitely many generators `tᵢₐ` of `ℱ`. Clearing
-denominators (`lem-pc-section-clearing-denominators`, applied to the section `Tᵢ` of `𝒪(1)`,
-`ℙⁿ_A` being separated over `Spec A`) extends `tᵢₐ ⊗ Tᵢ^{mᵢₐ}` to a global section of
-`ℱ(mᵢₐ)`, i.e. to a map `𝒪(-mᵢₐ) ⟶ ℱ` whose image contains `tᵢₐ` on `D₊(Tᵢ)`. The
-sum of these maps is surjective on every chart, hence surjective. Its kernel is coherent, the
-charts being spectra of noetherian rings. -/
+`⨁ⱼ 𝒪(-mⱼ) ⟶ ℱ`, whose kernel is coherent. -/
 theorem ProjectiveSpace.exists_epi_sigma_twist (A : Type u) [CommRing A] [IsNoetherianRing A]
     [Finite n] (F : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) F]
@@ -276,19 +266,7 @@ lemma ProjectiveSpace.subsingleton_H_twist_of_pos [Finite n] {d : ℕ} (hn : Nat
   · exact ProjectiveSpace.subsingleton_H_twist_of_ne n k d hn q e hq.ne' hqd
 
 /-- **Serre vanishing on projective space.** Let `ℱ` be a coherent module on `ℙᵈ_k`. There is
-`d₀` such that `H^q(ℙᵈ_k, ℱ(d)) = 0` for all `d ≥ d₀` and all `q > 0`.
-
-By descending induction on `q`, for all coherent modules at once. For `q > d` the cohomology
-vanishes (`AlgebraicGeometry.ProjectiveSpace.subsingleton_H_of_lt`). In general,
-`AlgebraicGeometry.ProjectiveSpace.exists_epi_sigma_twist` gives `0 ⟶ 𝒦 ⟶ ⨁ⱼ 𝒪(-mⱼ) ⟶ ℱ ⟶ 0`
-with `𝒦` coherent; twisting by the invertible `𝒪(d)` keeps it exact, and in its long exact
-sequence `⨁ⱼ H^q(𝒪(d - mⱼ)) ⟶ H^q(ℱ(d)) ⟶ H^{q+1}(𝒦(d))` the left term vanishes for
-`d ≥ maxⱼ mⱼ` and the right one for `d ≫ 0` by induction.
-
-The blueprint states this over a noetherian ring `A`; it is stated here over a field, where
-the cohomology of the twisting sheaves
-(`AlgebraicGeometry.ProjectiveSpace.subsingleton_H_twist_of_ne` and `subsingleton_H_twist_top`)
-is available. -/
+`d₀` such that `H^q(ℙᵈ_k, ℱ(d)) = 0` for all `d ≥ d₀` and all `q > 0`. -/
 theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist [Finite n]
     (ℱ : (ℙ(n; Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of k))).ringCatSheaf) ℱ]
@@ -357,19 +335,7 @@ open scoped AlgebraicGeometry.Scheme.Modules in
 /-- **Serre's theorem B: vanishing after a twist.** Let `X ⊆ ℙᵈ_k` be a closed subscheme, i.e. a
 closed immersion `i : X ⟶ ℙ(n; Spec k)`, and let `ℱ` be a coherent sheaf on `X`. Then
 `H^q(X, ℱ ⊗ 𝒪_X(m)) = 0` for all `q > 0` and all `m ≫ 0`, where `𝒪_X(m)` is the pullback along
-`i` of the twisting sheaf `𝒪(m)`.
-
-Mathlib has no `IsCoherent` predicate, so "coherent" is spelled as
-`SheafOfModules.IsFinitePresentation` together with `SheafOfModules.IsQuasicoherent`; on the
-noetherian scheme `X` these two conditions together are coherence.
-
-The pushforward `i_* ℱ` is coherent
-(`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pushforward_of_isClosedImmersion`), with
-`i_* (ℱ ⊗ 𝒪_X(m)) ≅ (i_* ℱ)(m)` by the projection formula and
-`H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙᵈ_k, i_* (ℱ ⊗ 𝒪_X(m)))` since a closed immersion is affine
-(`AlgebraicGeometry.Scheme.Modules.nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`),
-so this is Serre vanishing on `ℙᵈ_k`,
-`AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist`, for `i_* ℱ`. -/
+`i` of the twisting sheaf `𝒪(m)`. -/
 theorem Scheme.Modules.exists_subsingleton_H_tensor_twist [Finite n]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
@@ -396,23 +362,8 @@ open scoped AlgebraicGeometry.Scheme.Modules in
 open ProjectiveSpace in
 /-- **Serre's theorem A: global generation after a twist.** Let `X ⊆ ℙᵈ_k` be a closed
 subscheme, i.e. a closed immersion `i : X ⟶ ℙ(n; Spec k)`, and let `ℱ` be a coherent sheaf on
-`X`. Then `ℱ ⊗ 𝒪_X(m)` is generated by its global sections for all `m ≫ 0`.
-
-"Generated by its global sections" is `Nonempty (SheafOfModules.GeneratingSections _)`: the
-sections `σ.s : σ.I → M.sections` of a `GeneratingSections` are by construction global
-sections of `M`, and `σ.π : free σ.I ⟶ M` being an epimorphism is exactly the statement that
-the map from the free module on those global sections is surjective as a map of sheaves.
-
-As for theorem B, "coherent" is `SheafOfModules.IsFinitePresentation` together with
-`SheafOfModules.IsQuasicoherent`.
-
-The proof follows Hartshorne: `𝒢 = i_* ℱ` is coherent on `P = ℙ(n; Spec k)`, and is a
-quotient `⊕ₐ 𝒪(-mₐ) ⟶ 𝒢` of a finite sum of twists (`ProjectiveSpace.exists_epi_sigma_twist`).
-For `m ≥ max mₐ`, tensoring with the invertible module `𝒪(m)` gives a surjection
-`⊕ₐ 𝒪(m - mₐ) ⟶ 𝒢(m)` from a sum of twists of non-negative degree, each generated by global
-sections (`ProjectiveSpace.generatingSectionsTwist`). Finally `𝒢(m) ≅ i_* (ℱ(m))` by the
-projection formula, and global generation descends along `i` because `i_*` is faithful
-(`Scheme.Modules.GeneratingSections.ofPushforward`). -/
+`X`. Then `ℱ ⊗ 𝒪_X(m)` is generated by its global sections, in the sense of
+`Nonempty (SheafOfModules.GeneratingSections _)`, for all `m ≫ 0`. -/
 theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
     (i : X ⟶ ℙ(n; Spec (.of k))) [IsClosedImmersion i] (F : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
@@ -455,16 +406,7 @@ theorem Scheme.Modules.exists_generatingSections_tensor_twist [Finite n]
 
 /-- **Serre vanishing for an ample module.** Let `X` be a scheme over a field `k`, `ℒ` an ample
 invertible `𝒪_X`-module and `ℱ` a coherent `𝒪_X`-module. Then there is `n₀` with
-`H^p(X, ℱ ⊗ ℒ^{⊗ n}) = 0` for all `n ≥ n₀` and all `p > 0`.
-
-Some power `ℒ^{⊗ m}`, `m ≥ 1`, is `i^* 𝒪(1)` for a closed immersion `i : X ⟶ ℙᴺ_k`. For each of
-the finitely many `0 ≤ r < m`, Serre's theorem B
-(`AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist`) applied to
-`ℱ ⊗ ℒ^{⊗ r}` gives `t_r` with `H^q(X, ℱ ⊗ ℒ^{⊗ (m t + r)}) = H^q(X, ℱ ⊗ ℒ^{⊗ r} ⊗ 𝒪_X(t)) = 0`
-for `t ≥ t_r` and `q > 0`; take `n₀ = m · maxᵣ t_r` and write `n = m t + r`.
-
-The blueprint asks `X` to be proper over `k`; this is not needed here, since
-`AlgebraicGeometry.IsVeryAmple` already provides a closed immersion into projective space. -/
+`H^p(X, ℱ ⊗ ℒ^{⊗ n}) = 0` for all `n ≥ n₀` and all `p > 0`. -/
 @[stacks 0B5U]
 theorem Scheme.Modules.exists_subsingleton_H_tensorObj_tensorPow (f : X ⟶ Spec (.of k))
     (ℒ : X.Modules) (hℒ : IsAmple f ℒ) (ℱ : X.Modules)

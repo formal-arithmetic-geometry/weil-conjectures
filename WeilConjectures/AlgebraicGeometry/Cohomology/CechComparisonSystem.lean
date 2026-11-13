@@ -28,7 +28,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- A normalized morphism from Čech cohomology to sheaf cohomology.
 Source: Stacks Project, Tag 01EQ, the augmented double-complex comparison;
-Tag 01FD, functoriality. This is data with laws, with no postponed data. -/
+Tag 01FD, functoriality. -/
 structure CechComparisonSystem {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) where
   comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶
@@ -64,7 +64,7 @@ noncomputable def cechOverHomologyAddEquiv
       (presheafOverForgetIso f M)) q).addCommGroupIsoToAddEquiv
 
 /-- The additive comparison induced by a fixed normalized system.
-Source: Stacks Project, Tag 01EQ. No existence theorem is used to choose this map. -/
+Source: Stacks Project, Tag 01EQ. -/
 noncomputable def CechComparisonSystem.overMap
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     {U : ι → X.Opens} {hcover : iSup U = ⊤} (c : CechComparisonSystem U hcover)

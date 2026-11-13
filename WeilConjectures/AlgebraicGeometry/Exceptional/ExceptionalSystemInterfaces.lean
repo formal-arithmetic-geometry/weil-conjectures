@@ -732,7 +732,7 @@ variable (G : StrictEtaleExceptionalAdjoint O ell c S)
   (R : ExceptionalSystemCompactificationComparison S CX CY CZ P)
 
 /-- The adjunction, finite evaluations, quotient transposes, exactness and uniform bound
-of system transport. All geometric data are the previously specified constructions.
+of system transport.
 Source: Zheng Lemmas 4.10 and 5.22, Proposition 5.24; Stacks 0037, 09B1 and 0B65. -/
 structure ExceptionalSystemTransportData where
   siteX : ExceptionalSystemSiteEquivalence CX

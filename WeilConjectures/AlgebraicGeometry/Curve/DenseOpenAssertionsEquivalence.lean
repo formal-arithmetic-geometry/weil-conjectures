@@ -131,10 +131,7 @@ private theorem isConstructible_openImmersionLowerShriek {k : Type u} [Field k]
 constructible torsion abelian sheaf. Let `k` be algebraically closed, `(C, F)` a curve
 coefficient pair over `k` with `F` constructible and `j : U ⟶ C` an open immersion. Then
 `C(C, F)` holds if and only if `C(C, j_! j^* F)` holds, both sheaves viewed as sheaves of
-`ULift ℤ`-modules. Unlike `AlgebraicGeometry.IsCurve.dense_open_assertions`, no condition on the
-torsion of `F` is needed; and the statement holds for every open `U`, in particular for every
-dense open.
-
+`ULift ℤ`-modules. No condition on the torsion of `F` is needed.
 Source: Stacks Project, Lemma 0GJA. -/
 theorem IsCurve.assertions_iff_dense_open {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : Scheme.IsConstructibleEtaleSheafOfSets

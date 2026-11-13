@@ -145,10 +145,6 @@ private theorem finitePerfectAdic_connected_model_cover
 
 /-- Descend the quotient diagram and extract its algebraic stalk levels and reduction maps.
 
-This conclusion contains no local isomorphisms with constant stalk complexes and no
-finite-level marking sieves. Those are obtained separately from finite-ring derived
-local constancy on each connected chart.
-
 Source: Stacks Project, Tag 09C6, the paragraph constructing normalized algebraic M_n
 before taking their limit, with Tags 09AL, 09B1 and 094G. -/
 theorem finitePerfectAdic_etale_stalk_data

@@ -156,7 +156,7 @@ import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 The six statements give the three clauses separately on the etale and pro-etale sites.
 `Dctf` is expanded using constructible cohomology, finite cohomological bounds, and the
 recorded Tor-amplitude predicates. In particular no etale-origin condition is imposed.
-The auxiliary definitions spell out parts of this node: ordered tails, finite projective
+The auxiliary definitions spell out its parts: ordered tails, finite projective
 lisse restrictions, the canonical locally closed extension, and a finite sheaf filtration.
 All their data are explicit. The pro-etale site retains object universe u+1 and Hom universe u.
 -/

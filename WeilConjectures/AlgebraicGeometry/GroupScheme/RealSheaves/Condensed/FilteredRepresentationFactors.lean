@@ -10,8 +10,7 @@ public import WeilConjectures.RepresentationTheory.Filtration
 /-!
 # Composition factors of prescribed graded pieces
 
-Refinement and Jordan–Hölder, as used in paragraph 3 of
-`lemma-tensor-exterior-powers-filtered-representations--3`.
+Refinement and Jordan–Hölder, as used for filtered tensor and exterior powers.
 -/
 
 @[expose] public section

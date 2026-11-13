@@ -53,8 +53,8 @@ def continuousPresheaf (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The continuous condensed coefficient ring, with its actual section construction.
-Sheafification is included so the construction does not require a sheaf proof as data.
+/-- The continuous condensed coefficient ring: the sheafification of the presheaf of continuous
+maps into `T`.
 Source: Bhatt--Scholze, Definition 6.5.1. -/
 def continuousPoint (T : Type (u + 1)) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) CommRingCat.{u + 1} :=

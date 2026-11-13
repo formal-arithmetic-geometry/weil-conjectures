@@ -1605,26 +1605,7 @@ derived completeness. The completed base-change map is the unique natural map
 compatible with ordinary base change and the specified completion units. It is
 an isomorphism, and both sides are derived complete.
 
-Source: Stacks Tags 03DI, 09BP, 099N.
-
-Proof plan: identify completed coefficients on the two ringed slice sites by
-the projection-normalized localization maps. Exact extension by zero commutes
-with tensor after restriction, preserving K-flat complexes and their strict
-quotient reduction towers, including every transition. For a quasi-compact open,
-recollement expresses j! as the kernel of j* to i*i^-1j*. Both direct images
-preserve products, and closed inverse image preserves products on the pro-etale
-site; thus j! preserves all products, including the empty one. Exact countable
-products identify Rlim with the signed Roos fibre, naturally for maps of strict
-towers. Applying j! to that fibre gives its canonical Rlim comparison, compatible
-with structure maps. Apply this first to the finite free Koszul tower and its
-unit: j!K is complete when K is. Finite coefficient base-change is the inverse
-adjoint mate above; its local-section formulas commute with quotient transitions.
-Apply functorial Rlim to those strict tower maps and use the j'! Rlim comparison.
-This constructs the displayed completed map. It commutes with ordinary-to-completed
-units by the quotient-unit normalization. Source and target are complete, so the
-completion universal property proves uniqueness. The finite maps and the Rlim
-comparison are isomorphisms; so is the completed map. Completeness of completed
-pullback and the first assertion for j' give completeness of both sides. -/
+Source: Stacks Tags 03DI, 09BP, 099N. -/
 theorem cbcCompletedExchange_exists [QuasiCompact j]
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     ∃! β : (cbcCompleteProperty d U r a ha).ι ⋙

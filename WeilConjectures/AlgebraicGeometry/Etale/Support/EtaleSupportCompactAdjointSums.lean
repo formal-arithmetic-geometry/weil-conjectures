@@ -73,32 +73,7 @@ set_option linter.unusedVariables false in
 its fixed right adjoint preserves coproducts and is exact with adjunction-compatible shifts.
 The termwise constant and the two coefficient tensor functors are exact and preserve sums.
 
-Source: Bhatt--Scholze, Section 6.4, Example 6.4.1 and Proposition 6.4.8, Definition 6.3.1.
-
-Proof plan:
-1. Apply `theorem-results-from-etale-theory` to each nonzero cohomology sheaf. Reconstruct
-   the input by the successive good-truncation triangles of
-   `proposition-open-direct-image-preserves-finite`. Exactness and `thm-constructible-serre` give
-   bounded constructibility of its image.
-2. For a sheaf Q on Y use exact inverse image and the assumed projection formula,
-   together with `lem-kun-tensor-sym`, to identify FE tensor Q with F(E tensor f*Q).
-   The assumed interval bound gives Tor amplitude [a,b+N], including nonregular C.
-3. `lem-pur-etale-finite-ring-compact-generators` on X and Y makes all such images
-   compact and supplies bounded constructible finite-Tor compact generators on X.
-   Their shifts have the same properties and therefore compact F-images.
-4. Apply `lem-sc-compact-tests-right-adjoint-coproducts` to the family indexed by
-   S times the integers. Adjunction identifies its Hom tests with the compactness
-   comparisons for F(E_s[n]); detection proves the G-coproduct comparison invertible.
-5. `lem-weil-pbc-adjunction-shift-compatibility-unique` supplies the coherent G-shifts
-   normalized by the fixed adjunction. `lem-sf-triangulated-right-adjoint` gives exactness.
-6. Constant presheaves preserve exact sequences and coproducts sectionwise.
-   Exact colimit-preserving sheafification gives the same for constant module sheaves.
-Apply the exact derived functor theorem. Module and module-sheaf Grothendieck abelianness and
-   `lem-kun-grothendieck-derived-coproducts` identify derived sums termwise.
-7. Compose these constant functors with tensor by GM or M, and then G where appropriate.
-   `proposition-open-direct-image-preserves-finite` and
-   `proposition-open-direct-image-preserves-finite` give exactness and preservation of arbitrary
-   sums with the composite shift comparisons. -/
+Source: Bhatt--Scholze, Section 6.4, Example 6.4.1 and Proposition 6.4.8, Definition 6.3.1. -/
 theorem support_compactImages_adjoint_sums
     {k : Type u} [Field k] [IsAlgClosed k]
     (p ℓ : ℕ) [CharP k p] (hp : Nat.Prime p) (hℓ : Nat.Prime ℓ) (hℓp : ℓ ≠ p)

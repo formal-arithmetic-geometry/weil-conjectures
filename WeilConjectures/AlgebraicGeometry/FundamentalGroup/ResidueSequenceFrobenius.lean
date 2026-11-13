@@ -17,7 +17,7 @@ automorphism of `C` restricting to an automorphism of `U` and semilinear over an
 `σ₀` of `k`. Transport along `E` acts on torsors over `U` (in the torsor model of `H¹`), and the
 residues of the transported torsor are those of the torsor, moved along `E` and twisted by `σ₀`
 on the roots of unity (`AlgebraicGeometry.Scheme.EtaleTorsor.residue_mapIso`). This is the
-Frobenius equivariance of the residue map of blueprint `proposition-no-fixed-class-degree-one--1`.
+Frobenius equivariance of the residue map.
 
 For a power `Φ ^ m` of the geometric Frobenius fixing a boundary point `z`, `σ₀ = φ ^ m` with
 `σ₀(x) ^ Q = x`, `Q = q ^ m`, so the pullback along `Φ ^ m` (transport along its inverse) acts on
@@ -73,9 +73,7 @@ open FiniteEtale
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-/-- Frobenius equivariance of the residue map.
-
-Let `E_C` be an automorphism of `C`, semilinear over an automorphism `σ₀` of `k`, restricting to
+/-- Let `E_C` be an automorphism of `C`, semilinear over an automorphism `σ₀` of `k`, restricting to
 an automorphism `E_U` of `U`. The residue at `E_C z` against `ξ` of the transport of a torsor `T`
 along `E_U` is the residue of `T` at `z` against `σ₀ ξ`. -/
 theorem residue_mapIso (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom ≫ j = j ≫ EC.hom)
@@ -157,10 +155,7 @@ theorem residue_mapIso (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom ≫ j = j ≫ 
   · rw [← hconj, hxσ, map_mul, map_pow, hκ, hχ]
     rfl
 
-/-- A Frobenius power fixing a boundary point
-acts on the residues there as multiplication by `Q`.
-
-Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` (for a
+/-- Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` (for a
 power `Φ ^ m` of the geometric Frobenius over `𝔽_q`, `Q = q ^ m`), and restricting to `E_U` on `U`.
 Then the residue at `z` of the pullback of a torsor `T` along `E_U`, i.e. its transport along
 `E_U⁻¹`, is `Q` times the residue of `T`: `Φ_Q` acts on `ℤ / N (-1)` as multiplication by `Q`. -/
@@ -260,15 +255,11 @@ variable {C U : Scheme.{u}} [IsIntegral C] [IsLocallyNoetherian C] (j : U ⟶ C)
   [IsOpenImmersion j] [Nonempty U] {k : Type u} [Field k] [IsAlgClosed k]
   (p : C ⟶ Spec (.of k))
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1` (as used in
-`proposition-no-fixed-class-degree-one--1`): the residues of a compatible Frobenius-fixed system
-vanish.
-
-Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` for some
-`Q ≥ 2` (a power `Φ_Q` of the geometric Frobenius), restricting to `E_U` on `U`. Let `(t_n)` be
-`ℤ / lⁿ`-torsors on `U` whose Galois characters are compatible under reduction and which are all
-fixed by `E_U`. Then the residues `r_n = res_z(t_n)` form a compatible element of
-`lim_n ℤ / lⁿ(-1)` fixed by `Φ_Q`, which acts there as `Q`; hence they vanish. -/
+/-- The residues of a compatible Frobenius-fixed system vanish: let `E_C` be an automorphism of `C`
+fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` for some `Q ≥ 2` (a power `Φ_Q` of the
+geometric Frobenius), restricting to `E_U` on `U`. Let `(t_n)` be `ℤ / lⁿ`-torsors on `U` whose
+Galois characters are compatible under reduction and which are all fixed by `E_U`. Then the residues
+`res_z(t_n)` all vanish. -/
 theorem residue_eq_zero_of_compatible_of_isIsomorphic_mapIso (EC : C ≅ C) (EU : U ≅ U)
     (hE : EU.hom ≫ j = j ≫ EC.hom) (σ₀ : k ≃+* k)
     (hσ₀ : EC.hom ≫ p = p ≫ Spec.map (CommRingCat.ofHom (σ₀ : k →+* k)))

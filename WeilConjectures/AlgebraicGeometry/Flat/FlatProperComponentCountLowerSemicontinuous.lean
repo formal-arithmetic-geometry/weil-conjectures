@@ -83,14 +83,10 @@ private theorem card_le_of_clopen_partition {Y : Type*} [TopologicalSpace Y]
     exact congrArg Sigma.fst (e.symm.injective h)
   simpa only [Nat.card_fin] using Nat.card_le_card_of_injective a ha
 
-/-- Source: Stacks Project, More on Morphisms, Tag 0BUI.
-
-The geometric fibres of a proper flat finitely presented morphism have finitely many
-connected components. Their count is zero for an empty fibre and is lower semicontinuous,
-expressed by the neighbourhood inequality. The function `n` is specified by `Nat.card` of
-`ConnectedComponents`, the quotient by equality of maximal connected subsets.
-Properness already implies quasi-compactness and quasi-separatedness, so finite
-presentation is expressed by the remaining locally-of-finite-presentation condition. -/
+/-- The geometric fibres of a proper flat finitely presented morphism have finitely many
+connected components. Their count `n` (`Nat.card` of `ConnectedComponents`) is zero for an
+empty fibre and is lower semicontinuous, expressed by the neighbourhood inequality.
+Source: Stacks Project, More on Morphisms, Tag 0BUI. -/
 theorem Scheme.Hom.geometricComponentCount_lowerSemicontinuous
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]
     [LocallyOfFinitePresentation f] :

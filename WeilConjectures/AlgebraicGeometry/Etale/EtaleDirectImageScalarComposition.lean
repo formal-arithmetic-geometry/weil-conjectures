@@ -321,16 +321,7 @@ theorem scalarMate_directImage_composition
   rfl
 
 /-- Under the canonical identity direct-image comparisons the coefficient mate is identity.
-Source: Stacks Project, Tags 0E46, 07A6 and 0D6E, identity normalization.
-
-Proof (step 7 of the node): the canonical identity pullback compositor is identity
-on K-flat representatives, and every object has such a representative by
-lem-pc-kflat-resolution. Apply lem-sf-scalar-pullback-composition to two identity
-maps. The identity scalar/pullback comparison is idempotent; it is invertible by
-def-pur-etale-scalar-pullback-iso, so it is identity. The identity adjunction has
-identity counit by lem-sfb-ringed-derived-monoidal-comparisons. The defining transpose
-of scalarMate is therefore identity, and the Hom bijection gives the displayed
-identity after the two canonical direct-image identifications. -/
+Source: Stacks Project, Tags 0E46, 07A6 and 0D6E, identity normalization. -/
 theorem scalarMate_directImage_identity
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) (M : DerivedCategoryModule A T) :

@@ -37,7 +37,7 @@ theorem closedSupportEtaleHasSheafify (A : Type (u + 1)) [CommRing A] (T : Schem
 
 attribute [local instance 200000] closedSupportEtaleHasSheafify
 
-/-- The same weak sheafification instance, with its proof fixed once on the site.
+/-- The weak sheafification instance on the small étale site induced by the sheafification instance.
 Source: Stacks, Tag 00W1. -/
 theorem closedSupportEtaleHasWeakSheafify (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance

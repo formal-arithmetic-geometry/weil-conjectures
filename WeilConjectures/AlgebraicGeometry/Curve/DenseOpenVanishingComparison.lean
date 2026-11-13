@@ -153,7 +153,10 @@ private noncomputable def cohomologyIsoEquiv {X : Scheme.{u}}
   right_inv x := by rw [← Sheaf.H.map_comp_apply, e.inv_hom_id]; simp
   map_add' := map_add _
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
+/-- For a dense open `U` of a curve, `F` and the extension by zero `j_! j^* F` have isomorphic
+cohomology in degrees above one; hence the primary vanishing assertion passes from `j_! j^* F` to
+`F`, and conversely when `F` has torsion of invertible order or is `p`-primary for `p = char k`.
+Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_vanishing_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

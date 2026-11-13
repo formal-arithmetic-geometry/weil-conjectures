@@ -110,9 +110,7 @@ lemma artinSchreierMap_Spec (R : CommRingCat.{u}) (q : ℕ) :
 variable (n S)
 
 /-- For `q ≠ 1` and finitely many coordinates, the Artin–Schreier map `x ↦ x ^ q - x` is
-finite. (For `q = 0` it is the isomorphism `x ↦ 1 - x`; for `q = 1` it is the zero map.)
-This is the finiteness of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1`. -/
+finite. (For `q = 0` it is the isomorphism `x ↦ 1 - x`; for `q = 1` it is the zero map.) -/
 lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
     IsFinite (artinSchreierMap n S q) := by
   -- over `Spec Γ(S, ⊤)` each coordinate ring map `T ↦ T ^ q - T` is integral and of finite
@@ -124,9 +122,7 @@ lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
     infer_instance
   exact MorphismProperty.of_isPullback (isPullback_map_artinSchreierMap S.toSpecΓ q) (this _)
 
-/-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. This is
-the étaleness of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1`. -/
+/-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. -/
 lemma etale_artinSchreierMap [Finite n] {q : ℕ} (hq : (q : Γ(S, ⊤)) = 0) :
     Etale (artinSchreierMap n S q) := by
   -- the Jacobian of `x ↦ x ^ q - x` is `q x ^ (q - 1) - 1 = -1`, a unit; over
@@ -229,13 +225,7 @@ lemma pullback_fst_artinSchreierMap_over (q : ℕ) :
 
 /-- Over a scheme `S` with a ring map `φ : k →+* Γ(S, 𝒪_S)` from a finite field `k` with `q`
 elements, the Artin–Schreier map `AS_q` of `𝔸(n; S)` is a torsor under `kⁿ` acting by
-translations: `AlgebraicGeometry.AffineSpace.artinSchreierTorsorMap` is an isomorphism.
-This is the torsor structure of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1`.
-
-The idempotents `E_a`, `a ∈ kⁿ`, obtained by evaluating Lagrange interpolation polynomials at
-the differences `d = y - x` (which satisfy `d ^ q = d`) split the fibre product into the open
-subschemes `D(E_a)`, and the summand indexed by `a` maps isomorphically onto `D(E_a)`. -/
+translations: `AlgebraicGeometry.AffineSpace.artinSchreierTorsorMap` is an isomorphism. -/
 lemma isIso_artinSchreierTorsorMap [Finite n] (k : Type u) [Field k] [Fintype k]
     (φ : k →+* Γ(S, ⊤)) :
     IsIso (artinSchreierTorsorMap k φ : ∐ (fun _ : n → k ↦ 𝔸(n; S)) ⟶ _) := by
@@ -344,8 +334,7 @@ lemma exists_comp_artinSchreierMap_eq (k : Type u) [Field k] [Fintype k] {Ω : T
     exact (Scheme.ΓSpecIso (.of Ω)).hom_inv_id_apply _
 
 /-- Over a finite field `k` with `q` elements, the Artin–Schreier map `AS_q` of `𝔸¹_k` is
-surjective: every point has a geometric point over it, which lifts along `AS_q`
-(`AlgebraicGeometry.AffineSpace.exists_comp_artinSchreierMap_eq`). -/
+surjective. -/
 lemma surjective_artinSchreierMap (k : Type u) [Field k] [Fintype k] :
     Function.Surjective (artinSchreierMap PUnit (Spec (.of k)) (Fintype.card k)).base := by
   intro x

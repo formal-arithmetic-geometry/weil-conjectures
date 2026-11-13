@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 
 The chapter's definition concerns positive codimension and separated finite-type schemes
 over a field. Unlike the upstream affine-local predicate, it records stalk dimensions as
-well as regular generators. The current blueprint_update removes the old tangent-bundle
-conclusion. The rank-zero clopen case used by the consumer is expressed there directly.
+well as regular generators. The rank-zero clopen case is expressed directly in the definition.
 -/
 
 @[expose] public section

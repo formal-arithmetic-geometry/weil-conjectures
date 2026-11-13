@@ -86,9 +86,7 @@ Spec k' -ι-> Spec k
 
 the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
 sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the eight curve
-calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
-splitting off the zero-dimensional components, localising to a dense open, passing to the
-normalisation and to the smooth constant case of the curve calculations. -/
+calculations. -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
     [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
@@ -115,14 +113,7 @@ v          v
 Spec k' -ι-> Spec k
 ```
 
-the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`.
-
-Choose compatible algebraic closures `k̄ ⊆ k̄'`. As `k` and `k'` are separably closed, `k̄/k`
-and `k̄'/k'` are purely inseparable, so the base changes `C_{k̄} ⟶ C` and `C_{k̄'} ⟶ C'` are
-universal homeomorphisms and are bijective on étale cohomology
-(`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
-four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
-`H`. -/
+the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`. -/
 theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
     (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
       {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
@@ -219,10 +210,7 @@ Spec k' -ι-> Spec k
 ```
 
 the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the underlying abelian
-sheaves is bijective for every `q`: the algebraically closed case
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
-closed fields by
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`. -/
+sheaves is bijective for every `q`. -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepClosed k]
     [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]

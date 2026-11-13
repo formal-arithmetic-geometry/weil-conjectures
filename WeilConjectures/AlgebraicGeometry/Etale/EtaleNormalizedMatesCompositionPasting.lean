@@ -616,7 +616,7 @@ theorem etaleNormalizedMates_normalization_pasting
     (etaleNormalizedMates_baseChange_pasting A sq sq' sq'' c d k G G' G'' adj adj' adj'' K)
     (etaleNormalizedMates_pullback_pasting A sq sq' sq'' K) hw hz
 
-/-- The component of B is the adjunct specified in the node.
+/-- The component of B is the specified adjunct.
 Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_exchange_adjunct
     (A : Type (u + 1)) [CommRing A] [Finite A]

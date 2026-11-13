@@ -35,11 +35,7 @@ open Polynomial IsLocalRing
 
 /-- Let `B` be a noetherian local domain of dimension at most one with fraction field `K`, and let
 `g ∈ K` satisfy `p(g) = 1` for a polynomial `p` with coefficients in the maximal ideal `𝔪` of
-`B`, i.e. `𝔪 B[g] = B[g]`. Then some positive power of `g⁻¹` lies in `𝔪`.
-
-Indeed `h = g⁻¹` is integral over `B` with `hⁿ ∈ 𝔪 B[h]`, and the finite `B`-module `B[h]` is
-fractional: `d B[h] ⊆ B` for some `d ≠ 0`, and `𝔪ᵏ ⊆ d B` as `𝔪` is the only nonzero prime.
-Hence `h^{n(k+1)} ∈ 𝔪^{k+1} B[h] ⊆ 𝔪 B`. -/
+`B`, i.e. `𝔪 B[g] = B[g]`. Then some positive power of `g⁻¹` lies in `𝔪`. -/
 theorem exists_pow_inv_mem_maximalIdeal {B K : Type*} [CommRing B] [IsLocalRing B] [IsDomain B]
     [IsNoetherianRing B] [Ring.KrullDimLE 1 B] [Field K] [Algebra B K] [IsFractionRing B K]
     (g : K) (p : B[X]) (hp : ∀ i, p.coeff i ∈ maximalIdeal B) (hpg : aeval g p = 1) :
@@ -281,12 +277,7 @@ variable {X : Scheme.{u}}
 
 /-- For a nonempty affine open `U` of an integral curve `X` over a field `K` there is a nonzero
 `f ∈ Γ(X, U)` such that `f⁻¹` lies in the maximal ideal of `𝒪_{X,x}` for every `x ∉ U`: `f` has a
-pole at every point of the boundary of `U` (Stacks, Tag 09NB).
-
-Choose `g` with `Γ(X, U)` integral over `K[g]` (Noether normalization). For `x ∉ U`, separatedness
-gives `𝔪_x 𝒪_{X,x}[g] = 𝒪_{X,x}[g]` (`AlgebraicGeometry.map_maximalIdeal_eq_top_of_notMem`), so a
-power of `g⁻¹` lies in `𝔪_x` (`exists_pow_inv_mem_maximalIdeal`); as the boundary is finite,
-`f = g^N` works for a common `N`. -/
+pole at every point of the boundary of `U` (Stacks, Tag 09NB). -/
 theorem exists_inv_mem_maximalIdeal_of_notMem {K : Type u} [Field K] (p : X ⟶ Spec (.of K))
     [IsCurve p] [IsIntegral X] {U : X.Opens} (hU : IsAffineOpen U) [Nonempty U] :
     ∃ f : Γ(X, U), X.germToFunctionField U f ≠ 0 ∧ ∀ x ∉ U, ∃ b ∈ maximalIdeal

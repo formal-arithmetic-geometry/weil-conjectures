@@ -46,10 +46,8 @@ attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFuncto
 attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
-/-- The fully proved endpoint criterion specialized to the supplied coefficient
-routes. Its four arguments are the independent source comparison, target
-comparison, and two realization identities. These independent hypotheses remain
-proof arguments to the criterion. -/
+/-- The endpoint criterion specialized to the supplied coefficient routes. Its four arguments
+are the source comparison, the target comparison, and two realization identities. -/
 @[irreducible] def UniformizerSquareData.endpointSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

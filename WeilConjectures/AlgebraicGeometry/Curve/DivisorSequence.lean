@@ -314,10 +314,7 @@ lemma injective_toLocalGenericRing_appTop (W : C.Etale) [PreirreducibleSpace W.l
 /-- **Units of order zero at the punctures extend.** Let `C` be an integral regular noetherian
 scheme of dimension one, `S` a finite set of closed points, `j : U ⟶ C` the open immersion of
 the complement of `S`, and `V` an étale `C`-scheme. A unit `f` on `V ×_C U` whose order at the
-points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `𝒪_V`: at a point
-over `S` the local ring is a discrete valuation ring and `f` is a unit of it
-(`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`); its extension agrees with `f` on the punctured
-neighbourhood by `AlgebraicGeometry.IsCurve.injective_toLocalGenericRing_appTop`. -/
+points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `𝒪_V`. -/
 lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS : S.Finite)
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale) (y : V.left)
     (f : Γ(pullback V.hom j, ⊤)ˣ)
@@ -622,18 +619,8 @@ let `j : U ⟶ C` be an open immersion with image the complement of `S`. Then th
 
 a short exact sequence of étale sheaves on `C`, where the first map is restriction of units
 along `j` and the third term is the vertex of any colimit cocone `c` on the family
-`P ↦ i_{P*} ℤ` of `AlgebraicGeometry.Scheme.pointConstantInt`. A connected curve has
-dimension exactly one, which is the hypothesis `hC`; without it `S` could be all of
-`C = Spec k`, where `j_* 𝔾ₘ = 0` but `𝔾ₘ ≠ 0`.
-
-The curve is regular (`AlgebraicGeometry.IsRegular.of_smooth`), hence integral. The first map
-is a monomorphism since its composite with the restriction to the generic point is
-(`AlgebraicGeometry.Scheme.mono_gmSheafToLowerStarGmSheaf_fromSpecFunctionField`). For the
-cokernel, `j_* 𝔾ₘ` maps to the sheaf `V ↦ (V → ℤ)` of functions on points by the orders of
-vanishing at the points over `S`, and `⨁_{P ∈ S} i_{P*} ℤ` maps to it by extension by zero;
-on geometric stalks the second map is injective, the two images agree by
-`AlgebraicGeometry.IsCurve.exists_ord_eq_extendByZero`, and the kernel of the first is the
-image of `𝔾ₘ` by `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`. -/
+`P ↦ i_{P*} ℤ` of `AlgebraicGeometry.Scheme.pointConstantInt`. The hypothesis `hC` says that `C`
+has dimension one. -/
 theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (S : Set C)
     (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) {U : Scheme.{u}} (j : U ⟶ C)

@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
 
 /-- Realize the ordinary intrinsic pullback by uniqueness of its left adjoint.
-Source: Stacks Tags 00YV and 03D3, and the private nativePullRealization proof in
-DiagonalTraceUnitArrowComparison. -/
+Source: Stacks Tags 00YV and 03D3. -/
 def finiteNativePullCoordinate (A : Type u) [CommRing A] [Finite A]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     (Scheme.sfIntrinsicModuleEquivalence S A).functor.mapDerivedCategory ⋙

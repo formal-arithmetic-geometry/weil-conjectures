@@ -17,8 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorResidue
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
 `k`, with boundary `D = C ∖ U`, and let `N` be invertible in `k`. The residues
 `res_z : H¹(U, ℤ / N) → Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` at the boundary points
-(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`) fit in the exact sequence (5.1) of blueprint
-`proposition-no-fixed-class-degree-one--1`
+(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`) fit in the exact sequence
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ D} ℤ / N (-1)`.
 
@@ -36,7 +35,7 @@ In the torsor model of `H¹`:
 
 In `H¹ = Sheaf.H` of the constant sheaves, with the restriction map
 `AlgebraicGeometry.Scheme.EtaleTorsor.restrictH1` and the residue map
-`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1`, this is the exactness of (5.1)
+`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1`, this is the exactness of the sequence
 (`AlgebraicGeometry.Scheme.EtaleTorsor.injective_restrictH1`,
 `AlgebraicGeometry.Scheme.EtaleTorsor.range_restrictH1_eq_ker_residueH1`). Both maps are
 compatible with the reduction of coefficients
@@ -105,10 +104,7 @@ lemma residue_eq_add_of_galoisCharacter_eq_add {T T₁ T₂ : EtaleTorsor (ULift
     show T.galoisCharacter j = T₁.galoisCharacter j + T₂.galoisCharacter j from funext h]
   exact kummerResidue_add z hξΩ hx₁ hf₁ hχ₁ hx₂ hf₂ hχ₂
 
-/-- The residues are compatible with the
-reduction of coefficients `ℤ / N d → ℤ / N`.
-
-If the Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a
+/-- If the Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a
 `ℤ / N d`-torsor `T`, then the residues of `T'` are the reductions of those of `T`, along the
 transition map `Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
 theorem residue_eq_castHom_of_galoisCharacter {d : ℕ} [NeZero (N * d)]
@@ -299,10 +295,7 @@ local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Exactness of the residue sequence at one
-boundary point.
-
-Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
+/-- Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
 `k`, `V ⊆ C` an open with `V ∖ U = {z}`, and `N` invertible in `k`. The residue at `z` of a
 `ℤ / N`-torsor `T` on `U` vanishes if and only if the monodromy of `T` is trivial on the kernel
 of `π₁(U) → π₁(V)`, i.e. if and only if `T` extends over `z`. -/
@@ -424,9 +417,7 @@ lemma monodromy_pullback_eq_one_of_mem_fixingSubgroup {M : Type (u + 1)} [AddCom
     (by rw [fiber_map_vaddHom_zero]; exact (hg T.toFiniteEtale y).symm)
 
 omit [IsCurve p] [SmoothOfRelativeDimension 1 p] in
-/-- Injectivity of `H¹(C, M) → H¹(U, M)`.
-
-Torsors on a connected regular locally noetherian scheme `C` (for instance a smooth connected
+/-- Torsors on a connected regular locally noetherian scheme `C` (for instance a smooth connected
 curve over a field) whose restrictions to a nonempty open `U` are isomorphic are isomorphic. -/
 theorem isIsomorphic_of_isIsomorphic_pullback_of_isRegular [IsRegular C] {M : Type (u + 1)}
     [AddCommGroup M] [Finite M] {T₁ T₂ : EtaleTorsor M C}
@@ -440,10 +431,7 @@ theorem isIsomorphic_of_isIsomorphic_pullback_of_isRegular [IsRegular C] {M : Ty
   exact isIsomorphic_of_isIsomorphic_pullback j s
     (fundamentalGroupMap_surjective_of_isRegular j (pullbackFiberIso j s) G G') h
 
-/-- Exactness of the residue sequence
-`0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)` in the middle.
-
-Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
+/-- Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
 `k`, and `N` invertible in `k`. A `ℤ / N`-torsor on `U` is the restriction of a torsor on `C` if
 and only if its residues at all the boundary points vanish. -/
 theorem exists_isIsomorphic_pullback_iff_residue_eq_zero {N : ℕ} [NeZero N] [NeZero (N : k)]
@@ -537,7 +525,7 @@ theorem injective_restrictH1 [IsRegular C] {M : Type (u + 1)} [AddCommGroup M] [
   rw [restrictH1_classH1, restrictH1_classH1, classH1_eq_classH1_iff] at h
   exact classH1_eq_classH1_iff.2 (isIsomorphic_of_isIsomorphic_pullback_of_isRegular h)
 
-/-- Exactness of the residue sequence (5.1)
+/-- Exactness of the residue sequence
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)`
 

@@ -127,12 +127,7 @@ private theorem rotate_right_mapped_square
 set_option maxHeartbeats 8000000 in
 -- Specialize mate-pasting to the concrete coefficient and sheaf derived categories.
 /-- The normalized realization square for a chosen proper scalar projection.
-Source: Zheng, Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-
-The proof is the mate-pasting calculation on cochain representatives. The
-ordinary restriction comparison is sectionwise the identity, its derived square
-is fixed by localization, and the scalar unit equation identifies the two
-transposes. -/
+Source: Zheng, Lemma 5.16; Stacks 03CY, 06YY and 07A4. -/
 theorem etaleBrownProperScalarSquare
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

@@ -22,19 +22,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, compatible primitive roots in the proper case
-(blueprint: lem-sc-root-trivialization-base-change).
-
-Proof: compose both sides with the inclusion of roots of unity into Gm. The defining
-commutative square of φ replaces its first component by the units comparison after the
-pulled-back inclusion. The original trivialization sends a locally constant class a to
-ζ^a. Pullback of units preserves powers and sends ζ to algebraMap k K ζ, so both composites
-send a to (algebraMap k K ζ)^a. This equality can be checked on constant presheaf sections,
-because the constant sheaf is their sheafification and pullback commutes with sheafification.
-The roots-of-unity inclusion is a monomorphism, so cancel it. No smoothness, connectedness,
-properness or algebraic closedness is needed for this identity. For n = 1 the constant and
-roots-of-unity sheaves are zero and the identity still holds. -/
+/-- The trivialization `ℤ/n ≅ μ_n` given by a primitive root `ζ` is compatible with base change
+along `C_K → C`: pulled back and followed by the comparison `φ`, it agrees with the trivialization
+on `C_K` given by the image of `ζ` in `K`. -/
 theorem constant_root_trivialization_baseChange
     {k K : Type u} [Field k] [Field K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (n : ℕ) [NeZero n]

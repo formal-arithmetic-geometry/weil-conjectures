@@ -138,7 +138,6 @@ theorem existsUnique_etaleModuleStalkSpecialization
 
 /-- Specialization of geometric module stalks, the unique map carrying each affine
 pointed-neighbourhood germ to its germ along the strict-localization projection.
-Only the proof of its unique characterization is postponed; the object is determined.
 Source: Stacks Project, Tag 0GJ2, section-specialization. -/
 noncomputable def etaleModuleStalkSpecialization
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]

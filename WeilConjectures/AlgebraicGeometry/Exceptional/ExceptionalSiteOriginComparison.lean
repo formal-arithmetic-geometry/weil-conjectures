@@ -25,12 +25,7 @@ namespace AlgebraicGeometry
 
 /-- Construct comparison at a fixed etale evaluation package, and restrict its actual
 unit and counit to bounded-below objects and finite etale origins.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1.
-
-The core comparison theorem supplies the actual system comparison, its equivalence,
-and all levelwise unit, counit, and inverse-origin assertions. Exact evaluation
-preserves the common lower bound, while the origin witness in `C.origin` is already
-the required finite-level origin witness. -/
+Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 09B1. -/
 theorem exceptionalSiteOriginComparison
     (O : Type (u + 1)) [CommRing O] (ell : O)
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]

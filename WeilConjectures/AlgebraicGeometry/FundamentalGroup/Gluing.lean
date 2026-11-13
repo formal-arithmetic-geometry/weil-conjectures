@@ -52,17 +52,7 @@ scheme over `A ⊔_D B` restricting to the given ones. For the span and its push
 ```
 
 and finite étale `P_A ⟶ A`, `P_B ⟶ B` with `dA^* P_A ≅ dB^* P_B`, there is a finite étale
-`P ⟶ A ⊔_D B` with `inl^* P ≅ P_A` and `inr^* P ≅ P_B`; it is the pushout
-`P_A ⊔_{P_D} P_B`, and the squares
-
-```
-  P_A ──▶ P          P_B ──▶ P
-   │      │           │      │
-   ▼      ▼           ▼      ▼
-   A ──▶ A ⊔_D B      B ──▶ A ⊔_D B
-```
-
-are cartesian. -/
+`P ⟶ A ⊔_D B` with `inl^* P ≅ P_A` and `inr^* P ≅ P_B`. -/
 theorem exists_pullback_inl_iso (PA : A.FiniteEtale) (PB : B.FiniteEtale)
     (e : (pullback dA).obj PA ≅ (pullback dB).obj PB) :
     ∃ P : (Limits.pushout dA dB).FiniteEtale,

@@ -86,7 +86,9 @@ private theorem directImage_completion_compatibility_eq
   rw [← hs]
 
 /-- Reduction, completion-unit compatibility, and reconstruction for direct image:
-assertions (2) and (3) of proposition-proper-base-change-complete-integral--1.
+`pushReductionMap` is invertible, the completion unit `kappa` commutes with direct image, and
+the direct image of a derived complete object is derived complete and the derived limit of its
+reductions.
 Source: Stacks Tags 099N, 0944. -/
 theorem directImage_completion_compatibility :
     (∀ K : DerivedCategory (AdicCompletion.Modules l E X),

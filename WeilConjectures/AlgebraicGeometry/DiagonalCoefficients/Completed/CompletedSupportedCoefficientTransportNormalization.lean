@@ -195,9 +195,7 @@ private theorem additive_comparison_ab (Y : Scheme.{u})
   exact heq_of_eq (congrArg (fun e ↦ e.hom.app A) hc')
 
 /-- The composite ordinary comparison has the support normalization required
-by a normalized source.  This is the ordinary part of the proof of
-`completedSupportedCoefficient_transport`; the derived square and acyclicity
-are handled separately there. -/
+by a normalized source. -/
 theorem completedSupportedCoefficient_transport_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

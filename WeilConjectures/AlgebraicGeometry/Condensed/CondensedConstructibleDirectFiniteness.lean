@@ -63,8 +63,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 
 /-! # Direct finiteness of constructible condensed coefficient complexes
 
-The finiteness argument is the agent-formulated ingredient recorded in the DAG.
-
 The ordinary derived category is taken of internal module objects over the pulled-back
 coefficient ring; no completion condition is imposed.
 -/
@@ -246,33 +244,7 @@ private theorem stratified_direct_finiteness (ℓ : ℕ) [Fact ℓ.Prime]
   exact isIso_of_reflects_iso a (Mod.forget _)
 
 /-- A left inverse of an endomorphism of a bounded finite-constant-model constructible
-complex over the condensed algebraic closure is also a right inverse.
-
-Proof (the six steps of the DAG):
-1. For each integer q apply the homology functor: u = H^q(a), v = H^q(b) satisfy u ≫ v = 1
-on M = H^q(K). The constructibility part of `hK` gives `IsConstantModelConstructible`
-for M; X is Noetherian and quasi-separated,
-so `definition-constructible-sheaves` gives a finite stratification by immersions with Noetherian,
-quasi-compactly immersed strata.
-2. On each stratum `HasFiniteConstantLocalModel.isLocallyFinitelyPresented`
- and `condensedQbar_lfp_locally_free` give a pro-etale cover on which the pulled-back module is
-isomorphic to a finite biproduct of the unit (regular) module.
-3. Conjugated by such an isomorphism, the endomorphisms are square matrices over the
-commutative endomorphism ring of the tensor unit (`biproductFinMatrix`); commutative
-square-matrix direct finiteness gives the reverse identity, so the restricted endomorphism is
-invertible (rank 0 included).
-4. Extension of scalars along the invertible coefficient map is restriction along its
-inverse (`Mod.extendScalarsIsoComapInv`), so the underlying abelian inverse image is
-invertible on every covering member; inverse image to a covering object is restriction
-(`upperStarIsoLocalizationRestriction`), and `isIso_of_isIso_localizationRestriction`
-descends invertibility to the stratum.
-5. Abelian inverse image is exact, so kernel and cokernel of the underlying map of u have
-zero inverse image on every stratum; finite quasi-compact jointly surjective detection
-(`eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp`) makes them zero, so u is monic and
-epic, hence invertible; the forgetful module functor reflects isomorphisms.
-6. Every H^q(a) is invertible, so a is invertible (`DerivedCategory.isIso_iff`,
-`lem-weil-pbc-unbounded-derived-iso-cohomology`); cancelling the epimorphism a from
-a ≫ b ≫ a = a gives b ≫ a = 1. -/
+complex over the condensed algebraic closure is also a right inverse. -/
 theorem condensed_constructible_direct_finiteness (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     [∀ x : X, Invertible (ℓ : X.residueField x)]

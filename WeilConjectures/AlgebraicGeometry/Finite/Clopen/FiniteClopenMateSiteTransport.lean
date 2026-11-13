@@ -113,38 +113,7 @@ namespace ProEtale
 
 /-- Canonical site comparison carries the clopen alpha and its proper mate to the
 corresponding pro-etale maps, with the finite etale and refinement normalizations.
-Source: Stacks Tags 099R, 09AF, 0F7B and 0B65.
-
-Proof plan (the seven steps of the node):
-1. Properness makes p and r finite type and hence quasi-compact. Their closed
-   diagonals are quasi-compact, giving quasi-separatedness. Exact k_! preserves
-   cohomological lower bounds, so L and k_!L belong to the comparison domains.
-   Apply the canonical direct-image mate theorem at (r,L) and (p,k_!L).
-2. Compare the inverses of the two cartesian open comparisons under the open
-   adjunction. Their transposes are the pulled-back open units followed by the
-   cartesian pullback compositor. The canonical pullback and open comparisons
-   respect these units and compositors; injectivity of transpose proves equality.
-3. On the clopen image and its open complement, sheaf gluing characterizes the
-   projection by (x,y) mapping to (x,0). Comparison respects both restrictions
-   and extension by zero, hence this map, degreewise and after localization.
-   No faithfulness of evaluation on the derived category is asserted.
-4. Compose the beta equality, projector equality and canonical compositors to
-   obtain the first displayed alpha equation. Etale clopen-mate normalization
-   identifies the etale mate with the resolution-normalized finite interchange,
-   including the identity-left/refinement case.
-5. Transpose the left route of the mate equation under p's proper adjunction,
-   precomposing with a_p. Naturality of alpha in b_r and the r-counit equation
-   reduce it to o_k followed after A_W of J_k(epsilon_r) composed with alpha_e.
-6. Transpose the right route with the same precomposition. Naturality of the
-   pro-etale counit moves o_k outside. Naturality of a_p and its counit equation
-   reduce to o_k after A_W of epsilon_p composed with G_p(gamma_e). The etale
-   mate identity makes this the expression in step 5. Cancel a_p and transpose.
-7. The open comparisons, b_r, b_p and normalized gamma_e are isomorphisms.
-   Cancel their composites in the equation to deduce invertibility of the
-   specified gamma_p at A_V L. All normalizations were fixed before mating.
-These steps use the named canonical-mate, pullback and open-comparison dependencies,
-etale/pro-etale extension-zero base change, separated-implies-quasi-separated,
-and the finite proper/open coherence and clopen normalization nodes. -/
+Source: Stacks Tags 099R, 09AF, 0F7B and 0B65. -/
 theorem finiteClopenMateSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)

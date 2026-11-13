@@ -56,41 +56,7 @@ normalization, all nonnegative tensor powers, pullback squares, exponent transit
 and uniqueness of the descent with its comparison. Both positive exponents are indexed
 by their predecessor: the finite quotient is at `n+1`, and the annihilator is `l^(r+1)`.
 There is no condition relating `n+1` to the ramification index.
-Source: Stacks Project, Tags 03PK, 099R, 0GLZ, 099T and 03EL.
-
-Proof plan:
-1. Write L for the recorded root limit and C for completed Z_l. Its specified finite
-   reduction is L tensor_C Z/l^(r+1), identified with the finite roots by the root projection.
-   The constant-completion equivalence identifies the coefficient quotient with Z/l^(r+1).
-2. Reassociate the two discrete coefficient tensors defining purTwistFiniteOne, obtaining
-   L tensor_Z_l A. Since l^(r+1)A=0, quotienting L by that power before tensoring gives the
-   same sheaf. The mutually inverse pure-tensor maps use no flatness of A over Z/l^(r+1).
-3. The comparison-pullback section formula and etale finite-root pullback identify the
-   inverse image of the etale root sheaf with the pro-etale root sheaf. Both restrictions
-   and power transitions act on the same units; the constant coefficient maps agree.
-4. Inverse image preserves the balanced tensor coequalizer and the canonical scalar maps.
-   Compose this tensor comparison with the inverse finite reduction of step 2. It sends
-   every etale root tensor to the specified pro-etale root-limit tensor on local lifts.
-   This is IsFiniteTateSiteComparison, including arbitrary pro-etale tests over etale U.
-5. For larger r', the identity p_r = power(r',r) p_r' proves the transition square on
-   generators. The etale finite-twist theorem makes this transition invertible. Its power
-   formula composes, and a common larger exponent compares any two annihilators canonically.
-6. For scheme pullback, the compatible pulled-back finite root projections induce the
-   map to the root limit by its universal property. Do not commute inverse image with
-   that infinite limit. Tensor with A and apply finite reduction; the resulting comparison
-   is invertible. Its generator formula and the etale root pullback give the displayed
-   comparison square. These same formulas determine identity and composition comparisons.
-7. At tensor exponent zero use the constant coefficient map. At positive exponents tensor
-   the first comparison repeatedly, using the sheafification-unit tensor generators.
-   They give precisely the recorded powers on both sides, with the normalizations below.
-   Thus all transition and pullback squares tensor factor by factor. In the derived
-   categories use K-flat total tensors of proposition-open-direct-image-preserves-finite; exact
-   comparison acts termwise and its canonical derived tensor comparison carries these same
-   degree-zero isomorphisms, so the construction has the stipulated derived tensor convention.
-8. The comparison unit is invertible for module sheaves, so inverse image is fully
-   faithful. Lift alpha inverse composed with beta, and its inverse, uniquely. Faithfulness
-   gives their inverse identities and the unique comparison-preserving isomorphism.
-   The zero tensor power and the empty scheme are included throughout. -/
+Source: Stacks Project, Tags 03PK, 099R, 0GLZ, 099T and 03EL. -/
 theorem finite_tate_site_descent :
     ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

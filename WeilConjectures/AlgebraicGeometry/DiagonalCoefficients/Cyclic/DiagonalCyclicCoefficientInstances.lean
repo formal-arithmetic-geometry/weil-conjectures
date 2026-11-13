@@ -19,7 +19,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Coefficient sheaves have Ext, with the standard proof shared by name.
+/-- Coefficient sheaves have Ext groups.
 Source: Mathlib `IsGrothendieckAbelian.hasExt`. -/
 theorem cyclicCoefficientHasExt (l : ℕ) [Fact l.Prime] (W : Scheme.{u}) :
     HasExt.{u + 1} (DiagonalMod l W) := by

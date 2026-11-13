@@ -38,7 +38,7 @@ generic point; it is the fraction field of `Γ(X, U)` for every nonempty affine 
 
 ## Implementation notes
 
-As in the blueprint, divisors are supported on the closed points. On a connected curve these
+Divisors are supported on the closed points. On a connected curve these
 are exactly the points of codimension one, the only points where `ord` can be nonzero; for a
 smooth proper curve this is `AlgebraicGeometry.Scheme.isClosed_of_ord_ne_zero`.
 -/
@@ -109,13 +109,7 @@ lemma exists_isUnit_germToFunctionField_eq [IsIntegral X] {f : X.functionField} 
 variable [IsIntegral X] [IsNoetherian X]
 
 /-- **Zeros and poles of a rational function are finite.** A nonzero rational function `f` on a
-Noetherian integral scheme `X` has `ord_x f = 0` for all but finitely many points `x`.
-
-The function `f` is a unit on a nonempty open `W`, so its order vanishes on `W`. Every point `x`
-of codimension one outside `W` is the generic point of an irreducible component of the closed
-set `X ∖ W`: otherwise `x` would be a proper specialization of such a generic point `z`, itself a
-proper specialization of the generic point of `X`, and `x` would have codimension at least two.
-There are finitely many such components since `X` is Noetherian. -/
+Noetherian integral scheme `X` has `ord_x f = 0` for all but finitely many points `x`. -/
 theorem finite_setOf_ord_ne_zero {f : X.functionField} (hf : f ≠ 0) :
     {x : X | X.ord f x ≠ 0}.Finite := by
   obtain ⟨W, hW, s, hs, rfl⟩ := exists_isUnit_germToFunctionField_eq hf
@@ -155,13 +149,9 @@ lemma ord_one (x : X) : X.ord 1 x = 0 := by
   omega
 
 variable (X) in
-/-- Divisors, principal divisors, class group
-
-The *divisor* `div f = ∑_P v_P(f) [P]` of a nonzero rational function `f ∈ k(X)ˣ` on a Noetherian
-integral scheme `X`, where `v_P` is the order of vanishing
-`AlgebraicGeometry.Scheme.ord` at the closed point `P`. Its support is finite by
-`AlgebraicGeometry.Scheme.finite_setOf_ord_ne_zero`. On a smooth curve, `v_P` is the normalized
-valuation of the discrete valuation ring `𝒪_{X,P}`. -/
+/-- The *divisor* `div f = ∑_P v_P(f) [P]` of a nonzero rational function `f ∈ k(X)ˣ` on a
+Noetherian integral scheme `X`, where `v_P` is the order of vanishing `AlgebraicGeometry.Scheme.ord`
+at the closed point `P`. -/
 noncomputable def div : Additive X.functionFieldˣ →+ X.Divisor where
   toFun f := Finsupp.ofSupportFinite (fun P : closedPoints X ↦ X.ord (f.toMul : X.functionField) P)
     ((finite_setOf_ord_ne_zero f.toMul.ne_zero).preimage Subtype.val_injective.injOn)

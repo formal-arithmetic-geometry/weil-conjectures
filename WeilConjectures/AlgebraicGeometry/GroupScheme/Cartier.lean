@@ -59,13 +59,7 @@ variable {K : Type u} [Field K]
 /-- **Invariant vector fields.** Let `G` be a group scheme over a field `K` and let
 `j : Spec A ⟶ G` be an affine open subscheme. Every tangent vector of `A` at a `K`-point `e` of
 `A`, given as a linear form `φ` on the cotangent space `𝔪/𝔪²` at `e`, extends to a derivation `D`
-of `A`.
-
-Let `x` be the rational point of `G` given by `e` and `v : Spec K[ε] ⟶ G` the tangent vector.
-The morphism `Φ : Spec A[ε] ⟶ G`, `(g, t) ↦ g x⁻¹ v(t)`, restricts to the inclusion `j` along
-`Spec A ⟶ Spec A[ε]`; as `Spec A[ε]` and `Spec A` have the same points, `Φ` factors through
-`j`, as `Spec ψ` for a section `ψ : A → A[ε]`, `ψ a = a + D(a) ε`, of the reduction modulo `ε`.
-Evaluating at `x` recovers `v`, so `e ∘ D` is the derivation `φ`. -/
+of `A`. -/
 theorem GrpObj.exists_derivation_of_isOpenImmersion {G : Over (Spec (.of K))} [GrpObj G]
     {A : Type u} [CommRing A] [Algebra K A] (j : Spec (.of A) ⟶ G.left) [IsOpenImmersion j]
     (hj : j ≫ G.hom = Spec.map (CommRingCat.ofHom (algebraMap K A))) (e : A →ₐ[K] K)
@@ -286,13 +280,7 @@ theorem isReduced_of_grpObj_of_isAffine [IsAffine G] : IsReduced G := by
 
 include f in
 /-- **Cartier's theorem** over an algebraically closed field: a group scheme locally of finite type
-over an algebraically closed field of characteristic zero is reduced.
-
-Let `Spec A ⟶ G` be an affine open subscheme and `b` a nilpotent element of `A`. Every maximal
-ideal of `A` is the kernel of a `K`-point `e`, and every tangent vector of `A` at `e` extends to a
-derivation of `A` (`GrpObj.exists_derivation_of_isOpenImmersion`). By Cartier's lemma
-(`AlgHom.exists_apply_eq_one_mul_eq_zero_of_forall_exists_derivation`) the annihilator of `b` is
-not contained in the kernel of `e`. Hence it is the unit ideal and `b = 0`. -/
+over an algebraically closed field of characteristic zero is reduced. -/
 theorem isReduced_of_grpObj_of_isAlgClosed [IsAlgClosed K] : IsReduced G := by
   have key (R : CommRingCat.{u}) (j : Spec R ⟶ G) [IsOpenImmersion j] : _root_.IsReduced R := by
     let : Algebra K R := (Spec.preimage (j ≫ f)).hom.toAlgebra

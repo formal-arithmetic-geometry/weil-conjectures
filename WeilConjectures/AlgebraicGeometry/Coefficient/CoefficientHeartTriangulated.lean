@@ -76,34 +76,7 @@ private theorem bounded_homology_thick
 triangulated full subcategories of the ambient derived categories of `Λ_X`-modules.
 `IsTriangulated` includes zero, all integer shifts and extension closure; together with
 isomorphism closure, rotation gives the two-out-of-three property for all distinguished
-triangles. `IsStableUnderRetracts` is closure under direct summands, i.e. thickness.
-
-Proof plan:
-1. Work with the actual pulled-back ring `Λ_X` and its abelian module category, using
-   prose-01-10, situation-conventions and
-   corollary-coefficient-heart-b--1. By corollary-coefficient-heart-b--1,
-   membership means finite cohomological support and constructible cohomology. Zero has
-   the zero finite constant model, with the empty stratification on an empty scheme. Cohomology
-   preserves isomorphisms, so constructibility and finite support are invariant under isomorphism.
-2. By corollary-coefficient-heart-b--1, H^q(K[n]) is H^{q+n}(K). Translate the finite
-   cohomological support by -n and transport the local models through this isomorphism.
-   This gives all shifts, including +1 and -1.
-3. For a distinguished triangle K → K' → K'' → K[1], apply
-   corollary-coefficient-heart-b--1 in the category of corollary-coefficient-heart-b--1.
-   If K and K' have finite supports S and S', the support of K'' lies in S' ∪ (S-1).
-4. The five consecutive cohomology terms give
-   0 → coker(H^q K → H^q K') → H^q K'' → ker(H^{q+1} K → H^{q+1} K') → 0.
-   This uses the image/coimage identity in corollary-coefficient-heart-b--1 and
-   corollary-coefficient-heart-b--1. By lemma-constructible-sheaves, the endpoints and then the
-   middle term are constructible, for precisely the stated field coefficients and Noetherian base.
-5. Rotate the triangle once or twice to cover the other two choices of vertices; undo shifts by step
-   2. Zero, shifts and extension closure give corollary-coefficient-heart-b--1 in the ambient
-   triangulated category.
-6. If K is a retract of L, applying H^q gives maps a : H^q K → H^q L and b back with
-   a ≫ b = 1. The first map identifies H^q K with ker(1 - b ≫ a), an endomorphism of
-   the constructible H^q L. Kernel closure in lemma-constructible-sheaves therefore
-   gives constructibility. Vanishing for L forces vanishing for K, so its support stays
-   finite. Thus retracts, and in particular direct summands, belong to the subcategory. -/
+triangles. `IsStableUnderRetracts` is closure under direct summands, i.e. thickness. -/
 theorem constantModelBoundedConstructible_field_triangulated
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] :
     (∀ E : PadicAlgCl.FiniteIntermediateField ℓ,

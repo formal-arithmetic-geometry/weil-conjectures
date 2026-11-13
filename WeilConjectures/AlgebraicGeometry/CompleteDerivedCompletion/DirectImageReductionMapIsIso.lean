@@ -28,14 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The direct-image reduction mate is invertible at every derived object.
-
-Proof source: proof (2) of the direct-image limits proposition. Represent K by a
-K-injective complex I. The finite scalar cone model, strict direct-image cone
-comparison, and split-perfect tensor K-injectivity identify each finite evaluation
-of the mate with an isomorphism. Apply levelwise detection in complete derived
-completion. This is the K-injective/levelwise-detection subclaim isolated from
-the parent proposition. -/
+/-- The direct-image reduction mate is invertible at every derived object. -/
 theorem directImage_pushReductionMap_isIso :
     ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)

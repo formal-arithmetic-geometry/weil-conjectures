@@ -161,13 +161,10 @@ Source: Stacks Tags 06YT and 0FPT. -/
       (ProEt.topology W) R _ _ _ _ _ _ f.1.hom f.2.hom)
 
 /-- Changing from literal inverse-image coefficients to the canonically identified
-completed coefficients transports the specified tensor projection arrow.
-This concerns only tensor, geometric pullback and direct image. There are no scalar
-extension functors or scalar mates in this statement. The isomorphism r transports
-an arbitrary coefficient object; neither it nor K need be perfect.
+completed coefficients transports the specified tensor projection arrow, for an
+arbitrary coefficient object.
 
-Source: Stacks Project, sites-cohomology.tex, equation-projection-formula-map
-(Tag 0B56), and the adjunction comparison of Tag 07A6. -/
+Source: Stacks Project, Tags 0B56 and 07A6. -/
 theorem completedTensorProjectionCoefficientTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)

@@ -355,20 +355,7 @@ private theorem properSheaf_graph_map_aux
   rfl
 
 /-- The normalized proper-support map transposes to the ordinary clopen-graph map.
-Source: Stacks Project, Tags 0F7B and 0F4L; SGA 4 XVII 6.2.11.
-
-Proof in words: factor q_* through the direct image of its proper clopen graph,
-identify that direct image with graph extension by zero, and apply the Cartesian
-etale sum mate followed by the canonical composition of open and etale extension.
-The comparison maps commute with this composition: after transposing, their unit
-identities and the conjugate direct-image composition identity reduce the claim
-to the identity of F. Cartesian sum mate normalization and direct-image
-associativity now give the required normalization of the constructed map.
-Extension by zero into direct image is monic, so hτ identifies τ with this map.
-Finally the unit identity for the Cartesian sum mate computes its transpose,
-and left-adjoint uniqueness identifies the remaining unit with open extension
-base change. These categorical identities also cover empty graphs and zero
-coefficients. -/
+Source: Stacks Project, Tags 0F7B and 0F4L; SGA 4 XVII 6.2.11. -/
 theorem properSheaf_graph_map
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

@@ -363,11 +363,10 @@ private lemma annihilated_retract (X : Scheme.{u}) (n : ℕ) (hn : n ≠ 0)
 /-- For a qcqs morphism of finite torsion etale cohomological dimension, total
 K-injective direct image preserves coproducts of arbitrary unbounded complexes killed
 by one fixed positive integer. The coefficient ring is arbitrary. The comparison is
-`Limits.sigmaComparison`, whose composite with each coprojection is the image of the
-corresponding coprojection (`Limits.ι_comp_sigmaComparison`). Empty families are allowed.
+`Limits.sigmaComparison`. Empty families are allowed.
 
 Source: Stacks Project, Tags 0F11(1), 0D6J(3), and the divisibility argument in
-Tag 0DD7. The fixed-annihilator extension uses the dual kernel construction below. -/
+Tag 0DD7. -/
 theorem isIso_sigmaComparison_rightDerivedLowerStar_of_fixedExponent
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

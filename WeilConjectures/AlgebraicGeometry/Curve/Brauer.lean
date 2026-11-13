@@ -150,13 +150,7 @@ theorem subsingleton_cohomologicalBrauerGroup_of_connectedSpace (f : C ⟶ Spec 
   exact C.injective_cohomologyMap_gmSheaf_two.subsingleton
 
 /-- **The Brauer group of a smooth curve vanishes.** For a smooth curve `C` over an
-algebraically closed field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. The blueprint states this for
-smooth proper curves; properness is not needed.
-
-The finitely many connected components of `C` are clopen, so `Br(C)` vanishes as soon as the
-Brauer group of every component does
-(`AlgebraicGeometry.Etale.subsingleton_H_of_isClopen`), and each component is a smooth
-connected curve, to which `subsingleton_cohomologicalBrauerGroup_of_connectedSpace` applies. -/
+algebraically closed field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. -/
 theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] : Subsingleton C.CohomologicalBrauerGroup := by
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f

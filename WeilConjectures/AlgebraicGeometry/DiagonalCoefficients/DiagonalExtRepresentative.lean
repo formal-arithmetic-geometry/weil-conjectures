@@ -18,7 +18,8 @@ universe u v w t
 open CategoryTheory CategoryTheory.Abelian
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Ext-smallness supplies the shifted-single localization proof directly.
+/-- If `C` has small Ext groups, then morphisms between shifted single complexes are small in
+the derived category.
 Source: Mathlib `HasExt` and `HasSmallLocalizedShiftedHom`. -/
 theorem cyclicSmallShiftedSingleHom
     {C : Type u} [Category.{v} C] [Abelian C] [h : HasExt.{w} C]

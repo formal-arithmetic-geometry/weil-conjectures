@@ -48,13 +48,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
 /-- **Cohomological dimension of a curve, by reduction to integral curves.** Let `C` be a curve
 over an algebraically closed field `k`. Then `Hᵠ(C, F) = 0` for every torsion étale sheaf `F` on
-`C` and `q ≥ 3`. Let `cₚ : Zₚ ⟶ C` be the irreducible components with their reduced structure.
-The units `F ⟶ cₚ_* cₚ^* F` assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an isomorphism away
-from the finitely many closed points lying on two components
-(`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_isUniversalHomeomorphism`), hence
-bijective on `Hᵠ` (`AlgebraicGeometry.Etale.bijective_H_map_of_isIso_upperStar_map`), and
-`Hᵠ(C, cₚ_* cₚ^* F) = Hᵠ(Zₚ, cₚ^* F) = 0` by the integral case
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`. -/
+`C` and `q ≥ 3`. -/
 theorem subsingleton_sheafH_of_three_le_generic (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) := by

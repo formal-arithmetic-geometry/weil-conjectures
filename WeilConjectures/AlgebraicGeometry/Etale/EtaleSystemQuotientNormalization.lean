@@ -257,28 +257,7 @@ end SingleRing
 /-- Finite-ring restriction commutes canonically with the exceptional adjoint. The
 coefficient mate is invertible even for nonflat quotients. Its restricted map is exactly
 the constant-tensor counit transpose, using the canonical scalar/tensor identifications.
-Source: Zheng, Proposition 2.29(2), Construction 2.26 and Lemma 5.22.
-
-Proof (steps 1--4 of the node):
-1. Compose the six adjunction Hom bijections in quotientRestrictionHomChain. Yoneda
-produces rho and its inverse from the two identity maps. Naturality gives a natural
-isomorphism. The scalar-unit normalization of q identifies this Hom bijection with
-transposition of U(epsilon_D) after the inverse singleRestriction map; setting the input
-map equal to the identity gives the displayed rho counit equation.
-2. On flat-term K-flat representatives, restricted scalar extension is tensor by D[0].
-The recorded change-of-rings tensor comparison, constant-sheaf comparison and signed
-symmetry give quotientConstantTensorIso, independent of representatives. The coefficient
-projection q, after restriction and singleRestriction, is the constant projection P.
-3. Define b as the mate of q inverse. Its transpose is q inverse followed by the scalar
-image of epsilon_C. Put w = rho after U(b). Apply F_C and epsilon_C. The counit equation
-for rho and naturality of singleRestriction turn this into U(T(epsilon_C)) after U(q
-inverse) and inverse singleRestriction. Step 2 identifies it with tensor(epsilon_C)
-after P inverse. Injectivity of the adjunction Hom bijection proves the last equality.
-4. The constant-tensor theorem applies to D[0] without finite projective dimension, so
-this transpose is invertible. Thus U(b) is invertible, and exact scalar restriction
-reflects isomorphisms: it leaves the underlying cohomology sheaves of the cone unchanged.
-Therefore b is invertible. All constructions are natural on the whole unbounded
-categories, and their deriving comparisons make them independent of resolutions. -/
+Source: Zheng, Proposition 2.29(2), Construction 2.26 and Lemma 5.22. -/
 theorem etaleCoefficientQuotientNormalization
     (k : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ k.p)
     {X Y : Scheme.{u}}

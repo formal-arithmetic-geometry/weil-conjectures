@@ -50,8 +50,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The ordinary closed exceptional right adjoint supplied by
-lemma-local-cohomology-right-adjoint--1. -/
+/-- The ordinary closed exceptional functor: the right adjoint of the derived closed
+direct image. -/
 abbrev etaleShriekClosedExceptional (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] :=
   (R(lowerStar (ModuleCat.{u + 1} A) g)).rightAdjoint
@@ -544,49 +544,7 @@ private lemma closedCoefficient_isIso
   exact isIso_of_reflects_iso b G
 
 /-- Finite quotient coefficient change commutes with ordinary étale locally closed
-exceptional restriction and compact support, with the normalized counit identity.
-
-Proof (the twelve steps of the DAG node):
-1. The closed subscheme and the two opens are separated finite type over k: use
-   lem-weil-pbc-finite-type-over-noetherian, the Noetherian-open lemma and the
-   quasi-compact-open finite-type lemma. The coefficient rings are finite and B is
-   a finite A-module since it is a quotient.
-2. The complementary open has finite cohomological dimension by
-   lem-etale-finite-type-sep-closed-derived-dimension. Its higher images are
-   constructible by theorem-results-from-etale-theory. A power of l kills A, since
-   l is a unit times a positive power of the uniformizer.
-Apply theorem-f-shriek-finite-coefficients--1 to get finite-Tor bounded constructibility of Ng in
-   the ambient ordinary adjunction.
-3. Exact inverse image preserves constructibility. Bounded flat models, K-flatness of bounded flat
-   complexes, and lem-weil-pbc-ringed-topoi-derived-tensor-pullback give the Tor bounds on both open
-   restrictions; lem-coef-etale-open-tensor fixes their scalar comparison.
-4. The closed-support equivalence proposition-extension-zero-restriction-closed-subscheme--5 lifts
-to module sheaves by transporting
-   scalar actions. The closed stalk formula and exact conservative geometric stalks
-   show that g_* is exact. The inverse-image/direct-image adjunction descends,
-   with invertible counit, so derived g_* is fully faithful and reflects isomorphisms.
-   On its image, composition with the exceptional counit is a Hom bijection.
-5. Apply lemma-change-coefficients-direct-image--1 to Ng and to the complementary-open restriction
-   of M. Its counit normalization fixes the comparisons, including the third terms
-   of the closed-support triangles.
-6. Transpose the complementary-open unit square. The defining coefficient-counit
-   equation and the triangle identity identify both transposes with the identity.
-7. Apply the exact scalar functor to the A-support triangle. Rotate, use TR3, and rotate back. The
-   identity on middle terms and the isomorphism on third terms give an isomorphism on first terms,
-   whose counit composite is F(epsilon_A).
-8. The Hom bijection in step 4 identifies that first map with g_*b_g composed with c_g.
-   Reflect invertibility to obtain b_g. Its defining adjunction transpose gives naturality.
-9. Apply exact restriction to b_g and the canonical open scalar identification to get b_s.
-   Extension by zero preserves bounded constructibility and finite Tor amplitude by
-   lem-coef-etale-open-tensor and its K-flat models.
-10. Compose the degreewise open adjunction with the ambient closed adjunction.
-    Its counit is g_*(epsilon_j) followed by epsilon_g. Compose c_g with g_*(q_j)
-    to obtain q_s, natural and invertible on the specified domain.
-11. Expand q_s, b_s and the pasted counit. Naturality of the closed B-counit moves
-    j^*b_g past the open counit; the open coefficient-counit identity removes q_j;
-    naturality of c_g then reduces the result to the defining transpose of b_g.
-12. For S=Z and j the identity, the open adjunction and comparisons identify with
-    identities, giving exactly the closed comparison and its counit equation. -/
+exceptional restriction and compact support, with the normalized counit identity. -/
 theorem etaleLocallyClosedShriekComparisons
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

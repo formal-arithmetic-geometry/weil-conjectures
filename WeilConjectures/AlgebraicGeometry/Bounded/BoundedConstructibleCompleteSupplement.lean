@@ -370,7 +370,7 @@ def pbcFunctionReduction (n : ℕ) :
   asIso (pbcFunctionReductionMap T d n)
 
 /-- Intrinsic completeness transported along the normalized completed-ring comparison.
-The generator tuple and complex representative are existential proof witnesses only. -/
+The generator tuple and complex representative are existential witnesses only. -/
 def PbcIsIntrinsicallyComplete (K : PbcCompletedDerived T d) : Prop :=
   ∃ (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = d.ideal)
     (C : CochainComplex (adicDatumModules T

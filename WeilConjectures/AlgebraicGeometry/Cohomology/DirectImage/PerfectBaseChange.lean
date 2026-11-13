@@ -25,6 +25,13 @@ affine scheme `S` with Noetherian ring of global sections
 Mumford's complex
 (`exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`);
 base changes of `f` over `V` are base changes of `p`.
+
+## Implementation details
+
+In `perfect_and_baseChange_cechModuleComplex_of_isProper`, perfectness in `D(A)` over a
+non-noetherian base is not deduced from the finite free local models, as the comparison of the
+two representatives of `Rf_* ℱ` would need the finite free complexes to be quasi-isomorphic to
+the Čech complex.
 -/
 
 @[expose] public section
@@ -69,15 +76,7 @@ f'                  f
 v                   v
 T' --g--> U --U.ι--> T
 ```
-there is an isomorphism `g^* P ≅ R f'_* g'^* ℱ` in `D(𝒪_{T'})`.
-
-Over an affine neighbourhood `V` of `t`, the pair `(f, ℱ)` is the base change of a pair `(p, 𝒢)`
-over an affine scheme `S` with Noetherian ring of global sections
-(`AlgebraicGeometry.Scheme.Modules.exists_isNoetherianRing_model`), and the statement for
-`(p, 𝒢)` is Mumford's complex
-`exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`;
-base changes of `f` over `V` are base changes of `p`. The per-degree form is
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`. -/
+there is an isomorphism `g^* P ≅ R f'_* g'^* ℱ` in `D(𝒪_{T'})`. -/
 theorem exists_isFiniteFreeComplex_derivedPushforward [IsProper f] [LocallyOfFinitePresentation f]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (P : CochainComplex U.toScheme.Modules ℤ) (d : ℕ), t ∈ U ∧
@@ -157,25 +156,16 @@ variable {X S : Scheme.{u}} (f : X ⟶ S) (ℱ : X.Modules) {ι : Type u} (U : �
 include hU hU' in
 /-- **Perfectness of `Rf_* ℱ` and base change.** Let `f : X ⟶ S` be proper of finite
 presentation with `S = Spec A` affine, and `ℱ` an `𝒪_X`-module of finite presentation, flat over
-`S`. Then `Rf_* ℱ` is perfect and its formation commutes with arbitrary base change:
+`S`. Then:
 
 * locally on `S`, `Rf_* ℱ` is represented by a bounded complex of finite free modules whose
-  pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`; this is the
-  classical input `exists_isFiniteFreeComplex_higherDirectImage` of
-  `lemma-coherent-base-change-invertible-sheaves` [Stacks, Tag 0B91];
+  pullback along every `g : T' ⟶ S` computes the higher direct images of `ℱ_{T'}`
+  [Stacks, Tag 0B91];
 * over the affine base, `Rf_* ℱ` is represented by the bounded complex `K` of flat `A`-modules
   of `AlgebraicGeometry.Scheme.Modules.isIso_cechModuleComplexBaseChangeComparison`, and for every
-  cartesian square with `T = Spec B` affine, `Lg^* Rf_* ℱ = B ⊗[A] K ≅ Rf_{T*} ℱ_T` in `D(B)`
-  (`lemma-coherent-base-change-invertible-sheaves--2`; proper morphisms are quasi-compact and
-  separated);
+  cartesian square with `T = Spec B` affine, `Lg^* Rf_* ℱ = B ⊗[A] K ≅ Rf_{T*} ℱ_T` in `D(B)`;
 * if `A` is noetherian, `Rf_* ℱ` is a perfect object of `D(A)`, and so are all its base changes
-  `Rf_{T*} ℱ_T` in `D(B)`
-  (`AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_of_isNoetherianRing`,
-  `AlgebraicGeometry.Scheme.Modules.isPerfect_Q_cechModuleComplex_baseChange`).
-
-Perfectness in `D(A)` over a non-noetherian base is the classical input of the first item; it is
-not deduced here from it, as the comparison of the two representatives of `Rf_* ℱ` would need
-the finite free complexes to be quasi-isomorphic to the Čech complex. -/
+  `Rf_{T*} ℱ_T` in `D(B)`. -/
 theorem perfect_and_baseChange_cechModuleComplex_of_isProper [IsProper f]
     [LocallyOfFinitePresentation f] [HasInjectiveResolutions X.Modules] [Fintype ι]
     [ℱ.IsFinitePresentation] (hℱ : ℱ.IsFlatOver f) :

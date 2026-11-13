@@ -64,9 +64,7 @@ theorem freeDiagram_exact (T : Scheme.{u}) (n : ℕ) :
   exact ⟨hG, inferInstance⟩
 
 /-- Evaluation of towers is exact and preserves K-injective complexes, and the free diagram
-is exact. Proof: evaluation is exact since limits and colimits of towers are levelwise; the free
-diagram is `freeDiagram_exact`, and an exact left adjoint makes its right adjoint preserve
-K-injectives. -/
+is exact. -/
 theorem evaluation_properties (T : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (ev l E T n) ∧
       PreservesFiniteColimits (ev l E T n) ∧

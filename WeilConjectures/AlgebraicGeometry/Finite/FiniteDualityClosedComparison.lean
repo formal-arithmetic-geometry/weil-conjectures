@@ -23,9 +23,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedSupportTr
 Source: Stacks Project, Tags 04CA, 04JC and 014A.
 
 The comparison below is formulated with the actual derived direct-image adjunctions.
-The isomorphism `δ` is the canonical direct-image comparison of
-`lem-weil-pbc-comparison-direct-image-canonical-mate`, transported from its bounded-below
-mate along an explicit bounded-below lift by the named Plus/full compatibility isomorphisms.
+The isomorphism `δ` is the canonical direct-image comparison, transported from its
+bounded-below mate `ProEtale.fixedComparisonDirectImageMatePlus` along an explicit
+bounded-below lift by the named Plus/full compatibility isomorphisms.
 The transpose formula is the definition of the comparison map `α`.
 -/
 
@@ -108,12 +108,7 @@ noncomputable def finiteDualityClosedComparisonDelta
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategory.map e.inv)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The transported canonical closed-comparison component is invertible.
-
-Proof plan: unfold the transported component and use the qcqs invertibility
-of `ProEtale.fixedComparisonDirectImageMatePlus`; the named Plus/full
-compatibility isomorphisms and the isomorphism `e` preserve `IsIso` under
-composition and functorial mapping. -/
+/-- The transported canonical closed-comparison component is invertible. -/
 theorem isIso_finiteDualityClosedComparisonDelta_proof
     {A : Type (u + 1)} [CommRing A] [Finite A]
     {Z T : Scheme.{u}} (i : Z ⟶ T) [QuasiCompact i] [QuasiSeparated i]
@@ -127,8 +122,8 @@ theorem isIso_finiteDualityClosedComparisonDelta_proof
   dsimp -failIfUnchanged only [Etale.rightDerivedLowerStar]
   infer_instance
 
-/- The postponed theorem is registered as an instance directly, so that `asIso` applies
-to the canonical component; no further declaration or proof is added. -/
+/- The theorem is registered as an instance directly, so that `asIso` applies
+to the canonical component. -/
 attribute [instance] isIso_finiteDualityClosedComparisonDelta_proof
 
 set_option backward.isDefEq.respectTransparency false in

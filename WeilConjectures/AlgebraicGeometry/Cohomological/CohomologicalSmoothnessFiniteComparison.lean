@@ -26,8 +26,8 @@ are comparison pullbacks of the specified counit mates, not arbitrary endpoint m
 Every pro-etale Dctf object has an etale origin, so testing all etale representatives
 whose images are Dctf tests precisely the original domain, independently of witnesses.
 Comparison is fully faithful and monoidal on these objects. Its canonical unit, tensor,
-pullback and compact-support comparisons identify these maps with the two transposes
-in the node. Thus this uses the transported constructible adjunction, rather than an
+pullback and compact-support comparisons identify these maps with the two
+transposes. Thus this uses the transported constructible adjunction, rather than an
 ambient pro-etale adjunction. The legacy module imports two incompatible versions of
 the inverse-image API; this module uses the published canonical etale maps directly.
 -/

@@ -133,11 +133,9 @@ instance isNormalSubgroupScheme_kerι : IsNormalSubgroupScheme (GrpObj.kerι f) 
     rw [GrpObj.range_monoidHom_kerι]
     infer_instance
 
-/-- Blueprint `definition-abelian-variety--3` (and `def-sc-group-scheme`): Kernels are closed
-subgroup schemes.
-
-For a homomorphism `f : A ⟶ B` of group schemes over `K`, `kerι f : ker f ⟶ A` is a closed
-subgroup scheme (`AlgebraicGeometry.isClosedImmersion_kerι`). -/
+/-- Kernels are closed subgroup schemes: for a homomorphism `f : A ⟶ B` of group schemes over
+`K`, `kerι f : ker f ⟶ A` is a closed subgroup scheme
+(`AlgebraicGeometry.isClosedImmersion_kerι`). -/
 instance isClosedSubgroupScheme_kerι : IsClosedSubgroupScheme (GrpObj.kerι f) where
   isClosedImmersion := isClosedImmersion_kerι f
 
@@ -278,10 +276,8 @@ theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : 
 /-- Isogenies and their degree.
 
 An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphism with finite
-kernel. The blueprint defines isogenies between abelian varieties; the definition makes sense
-for arbitrary group schemes, but it is only for abelian varieties that
-`AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite flat morphism (see
-`AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
+kernel. For abelian varieties, `AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite
+flat morphism (see `AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
 class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) : Prop
     extends IsMonHom f, Surjective f.left where
   /-- The kernel of an isogeny is a finite group scheme. -/

@@ -11,9 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveFinite
 # The cohomology of the twisting sheaves on `ℙⁿ_A` over a commutative ring
 
 Let `A` be a commutative ring and `ℙᵈ_A = ℙ(n; Spec A)` with `Fintype.card n = d + 1`. This file
-packages the sheaf-level statements of `lem-pc-projective-space-twist-cohomology` over `A`, as
-`A`-modules (through `Scheme.Modules.moduleHOfSpec`), by composing Leray's theorem for the
-standard affine covering with the computation of the monomial Čech complex:
+computes the cohomology of the twisting sheaves over `A`, as `A`-modules (through
+`Scheme.Modules.moduleHOfSpec`), by composing Leray's theorem for the standard affine covering
+with the computation of the monomial Čech complex:
 
 * `H⁰(ℙᵈ_A, 𝒪(D)) ≅ A[x₀, …, x_d]_D` for `D ≥ 0`, and `H⁰(ℙᵈ_A, 𝒪(m)) = 0` for `m < 0`, `d ≥ 1`;
 * `H^q(ℙᵈ_A, 𝒪(m)) = 0` for `q ∉ {0, d}`;

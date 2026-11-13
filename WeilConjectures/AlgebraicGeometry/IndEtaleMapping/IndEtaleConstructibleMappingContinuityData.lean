@@ -126,16 +126,15 @@ variable {K' M'} in
 /-- The map of global RHom induced by the coefficient maps `α : K' ⟶ K`
 (contravariantly) and `β : M ⟶ M'` (covariantly), after exact inverse image
 to a scheme over X.
-Source: Bhatt--Scholze 6.3.16, Step 7. -/
+Source: Bhatt--Scholze 6.3.16. -/
 def coefficientMap (T : Over X) : value A K M T ⟶ value A K' M' T :=
   ExternalRHom.homMap A ((ExternalRHom.pull A T.hom).map α)
     ((ExternalRHom.pull A T.hom).map β)
 
 /-- Compatible strict representatives for the global RHom diagram and its
 pullback cocone. The two equations normalize every transition and every leg
-against the canonical pullback of morphisms. This is computational input for an
-exact filtered colimit, not an assumed continuity isomorphism.
-Source: Bhatt--Scholze 6.3.16, p. 48; the node's proof, Steps 2--6. -/
+against the canonical pullback of morphisms.
+Source: Bhatt--Scholze 6.3.16, p. 48. -/
 structure Model where
   /-- The strict diagram of representatives. -/
   diagram : Iᵒᵖ ⥤ CochainComplex (ModuleCat.{u + 1} A) ℤ
@@ -161,7 +160,7 @@ def comparison (P : Model A K M D c) :
 
 /-- A compatible representative map without the cone-square field.
 The geometric cone equation is supplied separately by the square hypothesis.
-Source: Bhatt--Scholze 6.3.16, Step 7. -/
+Source: Bhatt--Scholze 6.3.16. -/
 structure ModelMapSkeleton (P : Model A K M D c) (Q : Model A K' M' E d)
     (η : E ⟶ r ⋙ D) (v : d.pt ⟶ c.pt) where
   stages : r.op ⋙ P.diagram ⟶ Q.diagram

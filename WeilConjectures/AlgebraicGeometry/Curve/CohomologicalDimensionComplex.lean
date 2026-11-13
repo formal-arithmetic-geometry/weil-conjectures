@@ -32,6 +32,12 @@ notion of a curve coefficient pair.
   hypercohomology of bounded complexes with torsion cohomology sheaves in degrees `> b + 2`.
 - `AlgebraicGeometry.IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth`: the sheaf case
   for smooth connected curves.
+
+## Implementation details
+
+The complex case is proved by induction on the amplitude of `K`, using the truncation triangles
+`τ_{< b} K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` of the canonical t-structure and the sheaf case, instead of the
+hypercohomology spectral sequence.
 -/
 
 @[expose] public section
@@ -99,12 +105,7 @@ theorem IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth (f : C ⟶ Spec
 closed field `k` and `K` a bounded complex of abelian étale sheaves on `C` (an object of the
 derived category whose cohomology sheaves `𝓗ⁱ(K)` vanish outside `[a, b]`) all of whose
 cohomology sheaves are torsion. Then the hypercohomology
-`Hᵠ(C, K) = Hom_{D(C_ét)}(ℤ, K[q])` vanishes for `q > b + 2`.
-
-The proof is by induction on the amplitude of `K`, using the truncation triangles
-`τ_{< b} K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` of the canonical t-structure and the sheaf case
-`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`; this replaces the
-hypercohomology spectral sequence of the blueprint proof. -/
+`Hᵠ(C, K) = Hom_{D(C_ét)}(ℤ, K[q])` vanishes for `q > b + 2`. -/
 theorem IsCurve.subsingleton_shiftedHom_of_isGE_of_isLE (f : C ⟶ Spec (.of k)) [IsCurve f]
     [HasDerivedCategory.{w} (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (K : DerivedCategory (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})) (a b : ℤ)

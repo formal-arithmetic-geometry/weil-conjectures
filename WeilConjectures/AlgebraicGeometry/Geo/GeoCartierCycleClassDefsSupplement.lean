@@ -184,8 +184,8 @@ public import WeilConjectures.AlgebraicGeometry.GeoCartierCycleClassDefs
 Source: Stacks Project, Tag 03PL.
 
 We use the fixed-scalar sheaf presentation of ordinary pro-etale modules, canonically
-realized by `finiteCoefficientRealization` over the coefficient ring sheaf of
-`definition-small-pro-etale-site--1`. `Ext.homEquiv` identifies every degree-two Ext class
+realized by `finiteCoefficientRealization` over the coefficient ring sheaf of the
+small pro-étale site. `Ext.homEquiv` identifies every degree-two Ext class
 below with the displayed morphism from the degree-zero supported constant object to
 its finite Tate line shifted by two. No condensed or completed coefficient category occurs.
 The auxiliary definitions only spell out this class and its normalization diagrams.

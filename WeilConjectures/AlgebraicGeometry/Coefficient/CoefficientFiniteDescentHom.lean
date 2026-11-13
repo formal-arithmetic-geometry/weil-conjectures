@@ -626,42 +626,7 @@ private lemma descentHomToAlgCl_injective
   simpa only [← Category.assoc, cancel_mono] using e'
 
 /-- Derived coefficient Hom adjunction, its coefficient naturality, the uniformly
-bounded-below coefficient tensor colimit, and bijectivity on finite representatives.
-
-Proof, following the ten DAG steps:
-1. On a small skeleton of the pro-etale site, sheaf tensor is closed and preserves
-colimits. The extension/restriction adjunction of lemma-descent-finite-coefficient-field--1 has
-exact restriction; prose-03-27 and prose-03-27 make extension exact as well.
-2. Lift this adjunction to complexes by lemma-descent-finite-coefficient-field--1.
-Exact functors preserve quasi-isomorphisms by
-situation-conventions. Apply lemma-descent-finite-coefficient-field--1:
-the Hom map is restriction followed by the unit, and its inverse is extension
-followed by the counit. Restriction commutes with shifts.
-3. Identify the recorded left-derived extensions with these termwise extensions
-by the exact-functor clause of lemma-descent-finite-coefficient-field--1.
-4. Tensor multiplication and insertion of 1 give inverse transitivity maps.
-Their unit compatibility and situation-conventions identify
-them with definition-sp-scalar-extension--2 and the recorded finite comparison.
-5. The inclusion map sends the old unit to the new one. Counit naturality gives
-the two displayed Hom-naturality identities, also for the algebraic closure.
-6. The finite fields containing E form a nonempty directed poset, by finite
-composita. The ring cocone of lemma-comparison-completed-coefficients remains colimiting on this
-tail: extend a cocone on the tail to every finite H via EH. All legs remain the actual inclusions.
-7. Use lemma-descent-finite-coefficient-field--1 and
-lemma-descent-finite-coefficient-field--1 to identify this same cocone as a
-colimit of E-module sheaves.
-8. Tensor with each term of the representative preserves this colimit, by
-lemma-descent-finite-coefficient-field--1; its balancing maps are those of
-prose-03-02. The comparisons commute with differentials.
-Additivity preserves every zero term below the given lower bound.
-9. The standing scheme is Noetherian by lemma-descent-finite-coefficient-field--1.
-Bounded constructibility and lemma-descent-finite-coefficient-field--1 give a bounded
-representative of D.
-10. Apply lemma-continuity-ext-out-constructible-complex--1 with source C, the coefficient
-diagram of steps 6--8, and degree r. The identities of step 5 identify its
-comparison with coefficient extension on Hom. A filtered-colimit element is a
-finite representative, and equality is equality at a common later stage. Thus
-the last two clauses say exactly that this canonical comparison is bijective. -/
+bounded-below coefficient tensor colimit, and bijectivity on finite representatives. -/
 theorem coefficient_finite_descent_hom
     {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ)
     [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

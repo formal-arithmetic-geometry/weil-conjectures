@@ -200,15 +200,7 @@ theorem IsConnectedCurve.baseChangeField_of_compactification [IsAlgClosed k] [Is
 
 /-- **Invariance of the cohomology of a smooth affine curve.** Let `k ⊆ k'` be algebraically
 closed fields, `C` a smooth affine connected curve over `k` and `n` prime to `char k`. Then the
-pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. It is injective
-(`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`); both sides are `ℤ/n`
-for `q = 0` and vanish for `q ≥ 2`
-(`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isAffine`). For `q = 1`, if `C̄` is
-a smooth compactification of `C` of genus `g` with `r` boundary points, then `C̄_{k'}` is a smooth
-compactification of the smooth affine connected curve `C_{k'}`, of genus `g`
-(`AlgebraicGeometry.Scheme.Hom.genus_baseChangeField`) with `r` boundary points
-(`AlgebraicGeometry.Compactification.natCard_compl_baseChangeField`), so both groups have order
-`n ^ (2g + r - 1)` (`AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul`). -/
+pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

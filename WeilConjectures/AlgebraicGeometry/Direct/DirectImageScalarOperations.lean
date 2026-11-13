@@ -55,12 +55,8 @@ def directImageConstantAdjunction (A : Type u) [CommRing A]
     (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRing T A)
     (Scheme.proEtaleConstantRingComparison f A)
 
-/-- The canonical scalar/inverse-image isomorphism. The existing reduction/pullback
-construction is the inverse mate of the exact restriction comparison, whose ordinary
-map is fixed by identity on sections. Its tensor-unit normalization is the balancing
-map on flat K-flat representatives, sending the pullback of x tensor b to the
-pullback of x tensor b. Naturality of the constant-section comparison supplies the
-coefficient square, with no extra hypothesis.
+/-- The canonical scalar/inverse-image isomorphism, the inverse mate of the exact restriction
+comparison.
 Source: Stacks Tags 03EL, 06YY and 0D6D. -/
 def directImageScalarPullbackIso {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) {T V : Scheme.{u}} (f : T ⟶ V) :
@@ -112,7 +108,7 @@ def directImageConstantPullbackIso (A : Type u) [CommRing A]
 /-- The ambient ringed exchange specialized to the canonical constant rings.
 Its pullback square is built from the canonical composition comparisons. The two
 composite coefficient identifications are the constant comparison for the same
-scheme map; the proof below supplies that compatibility, rather than assuming it.
+scheme map.
 Source: Stacks Tags 07A7, 0D6D and 0E47. -/
 def directImageConstantExchange (A : Type u) [CommRing A]
     {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}

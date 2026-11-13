@@ -26,30 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Over a finite commutative ring on a Noetherian scheme, a bounded constructible etale
 complex has Tor amplitude in `[a,b]`, with `a ≤ b`, exactly when it has a flat constructible
-model supported in that same interval.
-
-Proof plan:
-1. Apply `lem-weil-pbc-constructible-etale-module-sheaf-comparison` to every cohomology
-   sheaf, converting the finite-value predicate to `Scheme.IsConstructibleSheaf`.
-   Let `T` be this source predicate and `S` its conjunction with flatness.
-2. By the kernel and cokernel clauses of `thm-constructible-serre`, and the comparison
-   on the source, target and resulting sheaf, `T` is closed under kernels and cokernels.
-3. Zero sheaves are constant with zero value on the one-stratum partition, and
-   isomorphisms preserve stratum trivializations and flatness. Tensor with zero is exact.
-   The split exact sequence for a binary biproduct, `thm-constructible-serre`, and the
-   comparison give its constructibility; `lem-weil-pbc-flat-coproduct` gives its flatness.
-   Thus `S` contains zero, is invariant under isomorphisms and binary biproducts, and
-   is contained in both `T` and the flat objects.
-4. The lifting condition for `S,T` is `lem-sf-etale-flat-constructible-lifting`: lift a
-   map from a constructible sheaf along an epimorphism after an epimorphic cover by a
-   flat constructible sheaf. This does not require the original sheaf to be flat.
-5. Given Tor amplitude, apply `lem-sf-flat-model-class-resolution` with these classes.
-   The result is supported in `[a,b]`, with flat terms in `T`, and isomorphic to `K`.
-   Its lower good truncation term is a constructible cokernel. Invert the isomorphism
-   and apply the comparison to each term to obtain finite-value constructibility.
-6. Conversely forget termwise constructibility and apply the reverse direction of
-   `lem-sf-etale-flat-model`, converting the bounded-constructibility hypothesis using
-   the same comparison. Bounded constructibility alone is not finite Tor amplitude. -/
+model supported in that same interval. -/
 theorem hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) [IsNoetherian X]
     (a b : ℤ) (hab : a ≤ b) (K : DerivedCategoryModule Λ X)

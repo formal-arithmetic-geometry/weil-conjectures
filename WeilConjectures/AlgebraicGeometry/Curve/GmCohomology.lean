@@ -41,21 +41,14 @@ namespace AlgebraicGeometry.IsCurve
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 
-/-- The cohomology of `𝔾ₘ` on a smooth curve,
-étale version.
-
-Let `C` be a smooth separated curve of finite type over an algebraically closed field `k`. Then
-the canonical map `Pic(C) → H¹(C_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_C, L)]`
+/-- The cohomology of `𝔾ₘ` on a smooth curve, étale version. Let `C` be a
+smooth separated curve of finite type over an algebraically closed field `k`. Then the canonical
+map `Pic(C) → H¹(C_ét, 𝔾ₘ)`, `L ↦ [Isom(𝒪_C, L)]`
 (`AlgebraicGeometry.Scheme.Pic.toCohomologicalPicardGroupAddEquiv`), is an isomorphism of
 groups, and `Hᵠ(C_ét, 𝔾ₘ) = 0` for `q ≥ 2`; in particular `Br(C) = 0`. The identification in
 degree one is natural under restriction to open subschemes `U ⊆ C`, and more generally under
 pullback along any morphism `h : X ⟶ C`, for instance the projection `C_{k'} ⟶ C` for an
-extension `k ⊆ k'` of algebraically closed fields (in degrees `q ≥ 2` both sides vanish).
-
-The vanishing is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_gmSheaf_of_smooth`, the
-identification in degree one is Hilbert 90 and its naturality is
-`AlgebraicGeometry.Scheme.etaleRestrictionH_toCohomologicalPicardGroup` and
-`AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup`. -/
+extension `k ⊆ k'` of algebraically closed fields (in degrees `q ≥ 2` both sides vanish). -/
 theorem sheafH_gmSheaf_of_smooth (f : C ⟶ Spec (.of k)) [IsCurve f] [Smooth f] :
     (∀ L : C.Pic, Scheme.Pic.toCohomologicalPicardGroupAddEquiv C (.ofMul L) =
         Scheme.Pic.toCohomologicalPicardGroup C L) ∧
@@ -79,15 +72,10 @@ lemma nonempty_rightDerived_sectionsFunctor_iso_sheafH (X : Scheme.{u}) (q : ℕ
   Sheaf.nonempty_rightDerived_sections_obj_iso_functorH X.smallEtaleTopology
     (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X) q F
 
-/-- The cohomology of the classical
-multiplicative sheaf on a smooth curve, pro-étale version.
-
+/-- The cohomology of the classical multiplicative sheaf on a smooth curve, pro-étale version.
 Let `C` be a smooth separated curve of finite type over an algebraically closed field `k` and
 `𝒢ₘ^cl = ν^* 𝔾ₘ` the classical multiplicative sheaf on the small pro-étale site of `C`. Then
-`H¹(C_proét, 𝒢ₘ^cl) ≅ Pic(C)` and `Hᵠ(C_proét, 𝒢ₘ^cl) = 0` for `q ≥ 2`: the comparison
-`RΓ(C_proét, ν^* F) ≅ RΓ(C_ét, F)`
-(`ProEtale.rightDerivedGlobalSectionsFunctorComparisonUpperStarObjIso`)
-transports `AlgebraicGeometry.IsCurve.sheafH_gmSheaf_of_smooth`. -/
+`H¹(C_proét, 𝒢ₘ^cl) ≅ Pic(C)` and `Hᵠ(C_proét, 𝒢ₘ^cl) = 0` for `q ≥ 2`. -/
 theorem rightDerived_globalSections_comparisonUpperStar_gmSheaf (f : C ⟶ Spec (.of k))
     [IsCurve f] [Smooth f] :
     Nonempty (((ProEtale.globalSectionsFunctor AddCommGrpCat.{u + 1} C).rightDerived 1).obj

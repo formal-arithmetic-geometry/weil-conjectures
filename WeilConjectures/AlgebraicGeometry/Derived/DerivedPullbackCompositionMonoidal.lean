@@ -48,14 +48,8 @@ private theorem derivedPullbackCompositionTensor
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Canonical derived étale inverse-image composition is monoidal.
-
-Specialize the source library's tensor-composition and unit-composition coherence,
-rewrite its tensor comparisons and unit comparisons as the canonical isomorphisms,
-and use its left and right unitor equations. The final clause is the existing
-componentwise associativity of the derived inverse-image composition isomorphism.
-The tensor calculation is first made at a general coefficient category to keep the
-monoidal instance in `derivedTensor` fixed before specializing to modules. -/
+/-- Canonical derived étale inverse-image composition is monoidal: it is compatible
+with the tensor and unit comparisons, and componentwise associative. -/
 theorem canonicalDerivedPullbackCompositionMonoidal
     (Λ : Type (u + 1)) [CommRing Λ]
     {X Y Z T : Scheme.{u}}

@@ -213,7 +213,6 @@ attribute [local instance 20000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 /-- The existing module-sheaf Abelian structure with a variable site.
-Keeping the site variable retains the coefficient-universe proof arguments directly.
 Source: Stacks 03DA. -/
 abbrev adicDatumSiteModulesAbelian {B : Type (t + 1)} [Category.{t} B]
     [EssentiallySmall.{t + 1} B] (J : GrothendieckTopology B)

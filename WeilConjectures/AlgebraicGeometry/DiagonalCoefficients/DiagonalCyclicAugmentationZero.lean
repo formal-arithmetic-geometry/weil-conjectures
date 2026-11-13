@@ -14,8 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # The degree-zero cyclic augmentation endpoint -/
 
-/- Repair note: this proved helper is delivered together with its DAG node. -/
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

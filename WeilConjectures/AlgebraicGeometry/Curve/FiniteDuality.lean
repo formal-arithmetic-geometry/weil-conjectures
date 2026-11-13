@@ -28,6 +28,14 @@ bijective on the sections over these opens by the local duality for the trace of
   sections is compatible with restriction between affine opens.
 - `AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit`: the trace
   identification `f_* Ω¹_{X/k} ≅ Hom(f_* 𝒪_X, Ω¹_{ℙ¹/k})`.
+
+## Implementation details
+
+In `AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit`, the hypothesis that
+`f` is unramified at the generic points (i.e. `k(X)/k(t)` separable) cannot be dropped: the
+comparison is induced by the trace of differentials, which vanishes identically when `f` is
+inseparable (e.g. a Frobenius-type map). Downstream (`nonempty_dual_H_one_iso`), `f` is chosen by
+`exists_isFinite_flat_hom_projectiveLine`, which provides such a separable `f`.
 -/
 
 @[expose] public section
@@ -55,8 +63,7 @@ lemma traceSections_restrict_of_eq {V W : Y.Opens} (hV : IsAffineOpen V)
   exact traceSections_restrict hV hV' hfree hfin r hW hfree' hfin' ω
 
 /-- **The trace of differentials on sections is compatible with restriction** between affine
-opens `V₂ ⊆ V₁`: both sides agree on the opens which are basic in both `V₁` and `V₂`, and these
-cover `V₂`. -/
+opens `V₂ ⊆ V₁`. -/
 lemma traceSections_restrict_of_le [IsAffineHom f] {V₁ V₂ : Y.Opens} (h₁ : IsAffineOpen V₁)
     (h₂ : IsAffineOpen V₂) (hle : V₂ ≤ V₁) (h₁' : IsAffineOpen (f ⁻¹ᵁ V₁))
     (h₂' : IsAffineOpen (f ⁻¹ᵁ V₂)) (hfree₁) (hfin₁) (hfree₂) (hfin₂)
@@ -94,18 +101,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`, unramified at the generic points of
 `X`. There is a trace map `τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that
 `f_* Ω¹_{X/k} ⟶ Hom(f_* 𝒪_X, Ω¹_{ℙ¹_k/k})`, `ω ↦ (a ↦ τ(a ω))`, is an isomorphism: the comparison
-`φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. Locally over `V = Spec R ⊆ ℙ¹_k` with `f⁻¹V = Spec B` this is
-`Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`, the codifferent of the finite flat extension `R ⊆ B`, i.e.
-Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`; `τ` is glued from the traces of
-differentials `c da ↦ Tr(C · dA)` over the basic opens of the standard charts of `ℙ¹_k`.
-
-The hypothesis `hf` (`f` unramified at the generic points, i.e. `k(X)/k(t)` separable) is not
-in the blueprint statement, but the blueprint's own proof uses it: the generic-point step is the
-perfect trace pairing of the separable extension `k(X) ⊇ k(t)` together with left exactness of
-the Kähler sequence. It cannot be dropped: the isomorphism is induced by the trace of
-differentials, which vanishes identically when `f` is inseparable (e.g. a Frobenius-type map),
-so for such `f` the comparison is the zero map. Downstream (`nonempty_dual_H_one_iso`) `f` is
-chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`. -/
+`φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :

@@ -24,15 +24,8 @@ namespace AlgebraicGeometry
 
 /-- One compactification of a morphism of `k`-schemes, chosen once and for all.
 The source is separated and of finite type over `k`; the target is separated and
-quasi-compact over `k`. The chosen object's underlying compactification has maps
-`i` and `g` with `i ≫ g = f`, an open immersion `i`, and a proper map `g`;
-its full-subcategory membership additionally supplies quasi-compactness of `i`.
-No uniqueness or functoriality is asserted.
-
-Construction: `Spec k` is affine, hence quasi-compact and quasi-separated. The structure morphisms
-and `f.IsOver` give the required triangle. Apply `compactification_over_base` with this base and
-exactly the displayed relative hypotheses. Apply classical choice to its nonempty type of
-compactifications. -/
+quasi-compact over `k`. The chosen compactification `i ≫ g = f` has a quasi-compact open
+immersion `i` and a proper map `g`. No uniqueness or functoriality is asserted. -/
 noncomputable def compactificationOverField (k : Type u) [Field k] {X Y : Scheme.{u}}
     [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] (f : X ⟶ Y)
     [f.IsOver (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]

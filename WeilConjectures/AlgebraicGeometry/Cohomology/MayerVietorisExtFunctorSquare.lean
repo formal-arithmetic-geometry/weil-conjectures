@@ -10,6 +10,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 /-! # Ext naturality for a square of exact functors
 
 Source: Stacks Project, Section 01F7, functoriality of derived inverse image.
+
+## Implementation details
+
+`compositionComparison` is adapted from `exactFunctorCompositionComparison`, allowing each Ext
+universe to be chosen independently.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -18,10 +23,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace CategoryTheory.Abelian.Ext
 
 /-- The composition comparison with independent Ext universes.
-Source: Stacks Project, Tag 015F. Adapted from the complete proof of
-`exactFunctorCompositionComparison` in Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison.
-Identify Ext classes with derived morphisms, verify the single-complex comparison
-degreewise, and apply shifted naturality. Each Ext universe can be chosen independently. -/
+Source: Stacks Project, Tag 015F. -/
 private theorem compositionComparison
     {C : Type u₁} {D : Type u₂} {E : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₄} E]

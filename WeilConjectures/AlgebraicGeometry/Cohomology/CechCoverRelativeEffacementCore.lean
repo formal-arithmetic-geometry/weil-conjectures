@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Limits.Types.Products
 
 /-! # Cover effacement before inverse image
 
-The construction is an expansion of that node's argument, given here;
-Stacks Project, Tags 01EQ and 01FD, supply its comparison context.
+Source: Stacks Project, Tags 01EQ and 01FD.
 -/
 
 @[expose] public section

@@ -224,13 +224,9 @@ lemma card_continuousMonoidHom_zmod [Nonempty X] (m : ℕ) [NeZero m] (hm : (m :
   rw [Nat.card_congr ((sheafHEquivContinuousMonoidHom (ULift.{u + 1} (ZMod m)) s G).symm.trans
     e.toEquiv), Nat.card_fun, Nat.card_zmod, Nat.card_fin]
 
-/-- Finite-level degree-one Poincaré
-pairing on a curve.
-
-Let `X` be a smooth proper connected curve over an algebraically closed field `k` (e.g. the
-geometric fibre of a curve over a finite field), `s` a geometric point with fundamental group
-`G = π₁(X, s)`, and `A_n = ℤ / lⁿ` with `l` a prime invertible in `k`. The cup product followed
-by the trace,
+/-- Let `X` be a smooth proper connected curve over an algebraically closed field `k`, `s` a
+geometric point with fundamental group `G = π₁(X, s)`, and `A_n = ℤ / lⁿ` with `l` a prime
+invertible in `k`. The cup product followed by the trace,
 
 `H¹(X, A_n) × H¹(X, A_n(1)) ⟶ H²(X, A_n(1)) ≅ A_n`,
 

@@ -59,32 +59,7 @@ namespace AlgebraicGeometry.ProEtale
 canonical pullback comparison.  This is the objectwise map used in the
 proper-base-change comparison theorem.
 
-Source: Stacks Tag 0B65.
-
-Proof (the node's steps): For each bounded-below etale complex, use the
-pullback comparison and the etale counit to form the underived base-change
-map, then take its mate under the pro-etale adjunction
-(`proposition-comparison-etale-derived-category--5`, `def-weil-pbc-adjunction-mate`).
-The mate bijection is natural in the complex, so these components form the
-displayed natural transformation. On an affine target, evaluate on an
-affine ind-etale basis and use derived-cohomology continuity twice; the
-middle identification is evaluation of etale direct image on an injective
-resolution (`theorem-bounded-below-cohomology-comparison--3`,
-`corollary-cohomology-pro-etale-affine`,
-`lemma-acyclicity-pulled-back-injectives`). Compare the final etale
-sections with pro-etale sections using the global comparison and the
-pro-etale restriction and exactness statements
-(`theorem-bounded-below-cohomology-comparison--3`,
-`lemma-acyclicity-pulled-back-injectives`,
-`prop-weil-pbc-proetale-constant-exact`). On injective representatives,
-the comparison-sections formula identifies the evaluated map with the
-continuity map; direct-image injectivity and comparison acyclicity justify
-the derived evaluations. Basis-derived detection then proves the mate is
-an isomorphism (`proposition-comparison-morphism-inverse-image--3`,
-`lemma-acyclicity-pulled-back-injectives`,
-`theorem-comparison-direct-images`). Finally, the derived
-base-change universal-property equation gives the displayed unit
-factorization and hence the counit-mate normalization. -/
+Source: Stacks Tag 0B65. -/
 noncomputable def comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (u : U ⟶ V) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) u ⋙

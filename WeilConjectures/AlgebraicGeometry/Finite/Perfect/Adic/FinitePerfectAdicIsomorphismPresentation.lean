@@ -46,13 +46,9 @@ abbrev finitePerfectAdicIsomorphismComplex {A : Type t} [CommRing A]
   DerivedCategory (Sheaf Y.smallEtaleTopology
     (ModuleCat.{t + 1} (finitePerfectAdicIsomorphismRing d n)))
 
-/-- Etale finite-level data before sheafification and section evaluation.
-
-The presheaf maps have their normalization equation only on etale generators.
-The scalar-forgetting realization functors, coefficient interchange and two level
-comparisons have their actual normalization identities. Transport of raw isomorphisms
-and preservation of a supplied raw square are then constructed and proved below. Neither
-evaluation on pro-etale sheaf sections nor its reduction square is contained in the datum.
+/-- Etale finite-level data before sheafification and section evaluation: presheaf maps
+normalized on etale generators, together with the scalar-forgetting realization functors,
+coefficient interchange and two level comparisons with their normalization identities.
 Source: Stacks Tags 09C6, 09BV and 06YY. -/
 structure FinitePerfectAdicIsomorphismPresentation
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

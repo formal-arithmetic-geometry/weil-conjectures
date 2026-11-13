@@ -12,8 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ResidueSequence
 # Residues under shrinking the open
 
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
-`k` and `U' ⊆ U` a smaller nonempty open. For the residue sequence of blueprint
-`proposition-no-fixed-class-degree-one--1` we compare the residues of torsors on `U` and `U'`:
+`k` and `U' ⊆ U` a smaller nonempty open. For the residue sequence we compare
+the residues of torsors on `U` and `U'`:
 
 * the residues of a torsor on `U` are those of its restriction to `U'`
   (`AlgebraicGeometry.Scheme.EtaleTorsor.residue_pullback`);
@@ -161,9 +161,7 @@ theorem residue_eq_zero_of_mem_range {N : ℕ} [NeZero N] [NeZero (N : k)]
   have := fixingSubgroup_le_comp s _ G j.isoOpensRange.inv hg
   rwa [hl] at this
 
-/-- Extension over finitely many points.
-
-Let `U' ⊆ U` be nonempty opens of a smooth connected curve `C` over an algebraically closed
+/-- Let `U' ⊆ U` be nonempty opens of a smooth connected curve `C` over an algebraically closed
 field. A `ℤ / N`-torsor on `U'` whose residues vanish at the points of `U ∖ U'` is the
 restriction of a torsor on `U`. -/
 theorem exists_isIsomorphic_pullback_of_residue_eq_zero {U' : Scheme.{u}} (ι : U' ⟶ U)

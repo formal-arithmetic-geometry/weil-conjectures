@@ -106,45 +106,7 @@ private lemma compact_comparison_naturality {X Y : Scheme.{u}} {v : X ⟶ Y}
     (compactExchangeTransportComparison P.Coefficient c).hom.naturality t
 
 /-- The identity-normalized source equation and transport of the given closed-section map.
-Source: Stacks 0F7B, 0F7J.
-
-Proof, following the node's ten steps:
-1. Exact etale extension by zero preserves a lower cohomological bound. Resolve its
-bounded-below output by bounded-below injectives (lem-weil-pbc-module-sheaves-enough-injectives,
-lem-weil-pbc-dplus-injective-representative). They are K-injective, and total derived proper
-image is their termwise image, still bounded below.
-2. The section is proper. Finite type over the field makes B, X and the compactification
-ambient Noetherian. Etale closed image is exact; pro-etale closed image is exact for a
-quasi-compact open complement. The identity-open comparison removes identity extension,
-and exact-derived single-complex comparison gives the displayed closed identifications.
-3. The identity-open site comparison identifies beta_s with the named direct-image counit
-mate. Supported-constant normalization identifies epsilon_s with that mate followed by
-s_* of chi, by its constant-restriction characterization; the identity-open comparison is
-identity after removing identity extension.
-4. Compose the inverse closed identification, the published compact-support compositor,
-the section equality and the canonical identity comparison. These are etaleSigma and
-proSigma, including the canonical comparisons from the specified compactification c.
-5. Write c=(j,r) and t=sj. The proper-to-separated-target triangle makes t proper because
-rt=id. The square (id,s,t,j) is Cartesian: t factors through the open j. This supplies a
-compatible tower for exactly c, with identity inner and composite opens.
-6. The unbounded etale composition and pro-etale tower-normalization statements identify
-both compositors with Sigma = v D_(r,t) P_r(Gamma), where Gamma is the open adjunct of
-inverse open-restriction exchange. Remove the inner identity extensions. Naturality at
-chi extends the pro-etale formula from C_B A_B^e to A_B^p.
-7. Apply the site clause of lem-sp-proper-open-coefficient-mate to this square: since the
-top open is identity, b_t C(Gamma_e) = Gamma_p J_j(b_s) e_j. The specified inverse compact
-comparison is beta_N = P_r(e_j) b_r on the same compactification.
-8. Expand Sigma_p F^p(b_s) beta. The preceding square and naturality of b_r replace its
-middle factors by P_r(b_t) b_r C(Gamma_e). Composite compatibility of the named mate then
-gives b_(rt) C(D_(r,t) Gamma_e). Identity compatibility removes b_id; naturality at chi
-and epsilon_s = P_s(chi) b_s give exactly the first displayed equation below.
-9. Naturality of beta at the actual ce, followed by F^p(theta) and the assumed class-map
-square, gives psi C(F^e ce) = F^p(cp) F^p(epsilon_s) beta_source. Psi is an isomorphism
-because theta and beta are isomorphisms.
-10. Precompose with C(sigma_e inverse) and use step 8 to cancel the two sigma factors.
-The result is psi C(tau_e) = tau_p chi. The degree-zero source and bounded-below target,
-with sourceWitness and targetWitness, retain the actual antecedent and map tau_e.
-No cancellation or invertibility assumption is applied to ce, cp or either tau. -/
+Source: Stacks 0F7B, 0F7J. -/
 theorem closed_section_compact_origin {B X : Scheme.{u}}
     (b : B ⟶ Spec (.of P.field.k))
     [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]

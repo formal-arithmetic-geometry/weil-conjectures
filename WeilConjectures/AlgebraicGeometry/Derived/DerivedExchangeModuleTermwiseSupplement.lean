@@ -27,11 +27,10 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
 # The unbounded module exchange on K-injective representatives
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
-Tags 070I, 070K and 0DVC. Blueprint main-20261015, definition-derived-base-change-map, final
-paragraph.
+Tags 070I, 070K and 0DVC.
 
-The comparison below is the agent-formulated unbounded representative statement,
-using the exact inverse-image mate of `definition-derived-base-change-map`.
+The comparison below is the unbounded representative statement, using the exact
+inverse-image mate of the derived base change map.
 The three auxiliary definitions spell out its canonical maps, without additional choices.
 -/
 
@@ -277,11 +276,8 @@ noncomputable def moduleExchangeRepresentativeMap
     (((f')_*[ModuleCat.{u + 1} Λ]).mapHomologicalComplex (.up ℤ)).map j
 
 /-- The specified unbounded module exchange is computed on any K-injective representative
-and any K-injective replacement of its inverse image. The two sides are respectively
-`σsrc ≫ Ex_K` and `Q(e) ≫ χ_(J,t)`, with `χ_(I,s)`, `t`, and `e` explicitly defined above.
-Consequently conjugating `Q(e)` by the displayed comparison isomorphisms always yields
-this fixed exchange mate. This includes bounded below injective representatives, and
-requires no K-injectivity of the inverse image of `I`.
+and any K-injective replacement of its inverse image: the two sides are `σsrc ≫ Ex_K` and
+`Q(e) ≫ χ_(J,t)`. No K-injectivity of the inverse image of `I` is required.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0736 and 07A7; derived.tex,
 Tags 070I, 070K, 08BJ and 0DVC. -/

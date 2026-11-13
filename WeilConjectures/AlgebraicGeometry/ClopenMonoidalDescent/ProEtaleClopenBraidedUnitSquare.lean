@@ -61,7 +61,8 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
-/-- Expand the specified unit isomorphism without unfolding it in the cancellation proof. -/
+/-- The forward map of `unitComparison` is the composite of the derived unit isomorphisms, the
+factorization `factors`, and the single-complex image of the sheaf-level unit comparison. -/
 private theorem unitComparison_hom_aux
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

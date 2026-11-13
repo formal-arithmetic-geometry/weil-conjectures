@@ -28,8 +28,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # Finite-ring derived local constancy
 
-Source: the bounded finite-source
-extension of Tag 09BE and connected constancy described in the DAG.
+Source: Stacks Project, Tag 09BE.
 -/
 
 @[expose] public section

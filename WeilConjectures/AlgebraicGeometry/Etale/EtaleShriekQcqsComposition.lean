@@ -28,24 +28,7 @@ namespace AlgebraicGeometry.Etale
 schemes, the bounded-below compact-support functors attached to any three chosen
 compactifications compose up to natural isomorphism.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7I.
-
-Proof plan:
-1. Apply `lem-weil-pbc-compatible-compactification-triangle` to the compactification of `g`.
-   This gives a compactification of `f` over its open part and a compatible one of `f ≫ g`.
-2. The successive-open adjunctions of `lem-weil-pbc-extension-by-zero-adjunction` identify
-   the composite extensions by zero with extension along the composite. The exactness of
-   `lem-weil-pbc-extension-by-zero-exact` descends this isomorphism to bounded-below complexes.
-3. Apply `lem-weil-pbc-etale-open-proper-interchange` to the proper/open pullback square,
-   then whisker with extension by zero from `X`. A finite coefficient ring is torsion;
-   no restriction on residue characteristics is required.
-4. Direct image preserves injectives since its left adjoint is exact. Apply the proved
-   bounded-below `Functor.rightDerivedFunctorPlusCompIso'` to `lowerStarComp` for the
-   proper maps. Together with step 2 this identifies the compatible models' composite
-   with the model for `f ≫ g`; all functors preserve bounded-below objects.
-5. Whisker the comparison from `lem-weil-pbc-etale-shriek-compactification-independence`
-   for `f` with the functor for `g`, and then compose with its comparison for `f ≫ g`.
-   This gives the asserted isomorphism for the original three choices. -/
+Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7I. -/
 theorem nonempty_iso_etaleShriek_qcqs_compactification_comp
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}}

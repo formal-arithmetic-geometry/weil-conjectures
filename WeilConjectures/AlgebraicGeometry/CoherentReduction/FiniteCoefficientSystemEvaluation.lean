@@ -34,8 +34,8 @@ namespace AlgebraicGeometry.ProEtale.CoherentReduction
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
   AlgebraicGeometry.ProEtale.VaryingRing.sequenceSiteSmall
 
-/-- Proof alias of the existing exactness-reflection criteria for scalar restriction.
-The underlying abelian sheaf is unchanged; no new exactness theorem is postulated.
+/-- Restriction of scalars along a morphism of pro-étale ring sheaves is exact, since the
+underlying abelian sheaf is unchanged.
 Source: Stacks 03D7. -/
 private abbrev ringRestriction_exact (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (a : R ⟶ S) :

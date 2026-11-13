@@ -225,28 +225,7 @@ The cone is limiting after forgetting to schemes; its legs are the specified pro
 The singleton belongs to the precoverage of the small pro-étale site. The chart
 isomorphism respects every projection and the structure morphism to the base chart.
 
-Source: Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S.
-
-Proof plan:
-1. Every tower map is finite by cancellation against the finite structure maps, hence
-   affine. Reindex along `ULift ℕ` and apply `lem-weil-pbc-limit-affine-transition`
-   (`exists_limit_affine_transition_core`); `Over.forget X` creates this connected limit.
-   The first projection is affine, so the structure map to `X` is affine.
-2. On an affine open `U`, the base-changed stages are affine with finite étale coordinate
-   ring maps (`Scheme.Hom.finite_appTop`, `HasRingHomProperty.appTop`;
-   `lem-weil-pbc-etale-scheme-base-change`).
-3. `Over.pullback U.ι` and `Over.forget` preserve the limit; `Γ` of the affine limit is the
-   ring colimit, and `isoSpec` naturality gives the chart isomorphism with its projection
-   and `FiniteEtaleTower.baseMap` equations.
-4. The base-changed cone is a pro-affine-étale presentation of the chart, hence weakly étale
-   and flat by `lem-pur-pro-affine-etale-weakly-etale`.
-5. Base-changed transitions stay surjective; by `lem-pur-sequential-spectrum-surjective`
-   the spectrum of the ring colimit maps onto the first stage, so the chart maps onto `U`.
-6. Flat and surjective `Spec (baseMap)` is faithfully flat
-   (`def-weil-pbc-faithfully-flat-ring-map`, Mathlib `flat_and_surjective_SpecMap_iff`).
-7. Target locality over the affine-open cover gives global weak étaleness and surjectivity; the
-   affine, hence quasi-compact, weakly étale singleton is a small pro-étale cover. No compactness or
-   separation assumption on `X` is used. -/
+Source: Stacks Project, Tags 01YX, 01YW, 097N, 090N, 00HP, 00HQ and 094S. -/
 theorem exists_finiteEtale_surjective_limit_cover {X : Scheme.{u}}
     (D : ℕᵒᵖ ⥤ Over X)
     (hfinite : ∀ n : ℕ, IsFinite (D.obj (op n)).hom)

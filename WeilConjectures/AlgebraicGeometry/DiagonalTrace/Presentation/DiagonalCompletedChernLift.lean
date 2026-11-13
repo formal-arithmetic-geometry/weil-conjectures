@@ -105,7 +105,7 @@ def Presentation.systemChern (l : ℕ) [Fact l.Prime]
       (p.model.chernAdjoint l (ULift.{u} (Padic l))) ≫ p.varying.hom.app _
 
 /-- Lift the system Chern adjunct using the full subcategory of complete objects.
-Source: diagonal tower trace proof (1), and Stacks 099I and 099L. -/
+Source: Stacks 099I and 099L. -/
 theorem diagonalTrace_completedChern_lift
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

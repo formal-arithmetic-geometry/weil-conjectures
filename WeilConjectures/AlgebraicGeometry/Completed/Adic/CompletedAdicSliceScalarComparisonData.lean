@@ -365,9 +365,7 @@ private theorem sliceChangeMap (X : Scheme.{t}) (U : X.ProEt)
   (sliceChangeExistence X U f).choose_spec.choose_spec.choose a
 
 /-- Ordinary scalar extension commutes with restriction to the pro-etale slice.
-The proof is the presheaf tensor comparison followed by the sheafification
-universal property.  This is the ordinary (underived) step in the derived
-comparison theorem.
+This is the ordinary (underived) step in the derived comparison theorem.
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D. -/
 theorem completedAdic_slice_scalarComparison_underived (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :

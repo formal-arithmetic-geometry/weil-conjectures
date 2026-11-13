@@ -110,16 +110,7 @@ private theorem epiOver (X : Scheme.{u})
   exact (SheafOfModules.toSheaf.{u + 1} (O.over W)).epi_of_epi_map (f := f.over W) inferInstance
 
 /-- An epic morphism of module sheaves is invertible on a slice where both
-modules have specified rank-one bases over the same commutative coefficient ring.
-
-Proof in words. Restrict the epic map to the slice; restriction preserves local
-surjectivity and the forgetful functor reflects epimorphisms. Conjugate by the two
-bases to obtain an epic regular-module endomorphism. Such an endomorphism is
-multiplication by its value on 1. Local surjectivity supplies local preimages of 1,
-so that value is locally a unit in the commutative section rings. Cancellation and
-sheaf separatedness prove injectivity. The endomorphism is mono and epi in an
-abelian category and hence invertible. Undoing the two bases proves the claim.
-This includes the zero ring and an empty slice. -/
+modules have specified rank-one bases over the same commutative coefficient ring. -/
 theorem diagonalLocalRankOne_isIso (X : Scheme.{u})
     (O : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     {M N : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)

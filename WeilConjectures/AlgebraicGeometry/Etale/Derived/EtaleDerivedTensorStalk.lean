@@ -148,8 +148,7 @@ theorem ExactFunctorTensorComparison.exists_iso
   exact ⟨e⟩
 
 /-- An exact monoidal functor preserving flat objects has the normalized derived tensor
-comparison. The proof transports the source left-derived comparison through the exact
-functor comparison and checks its naturality and counit square.
+comparison.
 Source: Stacks Project, Tag 0DEN. -/
 theorem exactFunctor_tensor_comparison
     {C : Type uC} [Category.{u + 1} C] [Abelian C]

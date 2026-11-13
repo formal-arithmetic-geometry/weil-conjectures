@@ -42,11 +42,7 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (k' : 
 
 /-- **Invariance of the cohomology of a smooth connected curve.** Let `k ⊆ k'` be algebraically
 closed fields, `C` a smooth connected curve over `k` and `n` prime to `char k`. Then the pullback
-`Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. If the smooth compactification
-`C ⊆ C̄` is all of `C̄`, then `C` is proper
-(`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper`);
-otherwise `C` is affine (`AlgebraicGeometry.IsConnectedCurve.isAffine_of_ne_top`,
-`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine`). -/
+`Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
@@ -111,11 +107,7 @@ lemma IsCurve.isIso_of_connectedSpace [IsAlgClosed k] [IsCurve f] [Smooth f] [Co
 
 /-- **Invariance of the cohomology of a connected smooth curve.** Let `k ⊆ k'` be algebraically
 closed fields, `C` a connected smooth curve over `k` (possibly a point) and `n` prime to
-`char k`. Then the pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`.
-If `C` has dimension one, this is
-`AlgebraicGeometry.IsConnectedCurve.bijective_fieldExtensionCohomologyMap`; otherwise `C` and
-`C_{k'}` are the points `Spec k` and `Spec k'`, with cohomology `ℤ/n` in degree zero only
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed`). -/
+`char k`. Then the pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace [IsAlgClosed k]
     [IsCurve f] [Smooth f] [ConnectedSpace C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) :
@@ -159,12 +151,7 @@ theorem IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace [IsAlgCl
     exact ⟨hinj, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
 
 /-- **Finiteness of the cohomology of a connected smooth curve.** For a connected smooth curve `C`
-over an algebraically closed field `k` and `n` prime to `char k`, every `Hᵠ(C, ℤ/n)` is finite:
-by the curve estimate if `C` is proper
-(`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`), by
-`AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul` and
-`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isAffine` if `C` is affine, and since
-`C = Spec k` otherwise. -/
+over an algebraically closed field `k` and `n` prime to `char k`, every `Hᵠ(C, ℤ/n)` is finite. -/
 theorem IsCurve.finite_sheafH_constantZMod_of_connectedSpace [IsAlgClosed k] [IsCurve f]
     [Smooth f] [ConnectedSpace C] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Finite (Sheaf.H (C.constantZMod n) q) := by
@@ -211,16 +198,7 @@ theorem IsCurve.finite_sheafH_constantZMod_of_connectedSpace [IsAlgClosed k] [Is
 
 /-- **Invariance of the cohomology of a smooth curve.** Let `k ⊆ k'` be algebraically closed
 fields, `C` a smooth separated curve over `k` and `n` prime to `char k`. Then the pullback
-`Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`.
-
-It is injective (`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`). The
-finitely many connected components `Cᵢ` of `C` are clopen, and so are their preimages `C'ᵢ` in
-`C_{k'}`, with `C'ᵢ ≅ (Cᵢ)_{k'}`; cohomology takes these decompositions to products
-(`AlgebraicGeometry.Etale.nonempty_equiv_pi_H_of_isClopen`). Each `Hᵠ(Cᵢ, ℤ/n)` is finite
-(`AlgebraicGeometry.IsCurve.finite_sheafH_constantZMod_of_connectedSpace`) and in bijection with
-`Hᵠ((Cᵢ)_{k'}, ℤ/n)`
-(`AlgebraicGeometry.IsCurve.bijective_fieldExtensionCohomologyMap_of_connectedSpace`),
-so both sides are finite of the same order. -/
+`Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`. -/
 theorem IsCurve.bijective_fieldExtensionCohomologyMap [IsAlgClosed k] [IsCurve f] [Smooth f]
     [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0) (q : ℕ) :
     Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

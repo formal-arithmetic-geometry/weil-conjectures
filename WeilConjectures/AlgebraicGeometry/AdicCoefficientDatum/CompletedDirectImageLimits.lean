@@ -86,8 +86,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso`:
-  the recorded construction or statement of this node.
+- `AlgebraicGeometry.Scheme.AdicCoefficientDatum.directImageRlimIso`
 -/
 
 @[expose] public noncomputable section

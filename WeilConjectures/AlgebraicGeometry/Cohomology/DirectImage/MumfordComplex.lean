@@ -73,16 +73,7 @@ lemma isFiniteFreeComplex_freeComplexOfBasis {Z : Scheme.{u}} {R : Type u} [Comm
 global sections, and `𝒢` an `𝒪_Y`-module of finite presentation which is flat over `S`. Every
 point `s₀` of `S` lies in a basic open `D(a)` over which there is a bounded complex `P` of finite
 free modules such that for every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` there
-is an isomorphism `g^* P ≅ R p'_* g'^* 𝒢` in `D(𝒪_{T'})`.
-
-The Čech complex `Č(U, 𝒢)` of a finite affine cover is, over `Spec A`, quasi-isomorphic to a
-perfect complex of flat `A`-modules, which near `s₀` is modelled by a complex `P` of finite free
-modules compatibly with every base change (`CochainComplex.exists_free_away_quasiIso_baseChange`).
-After base change along `g`, the complex of free sheaves with the matrices of `P` maps
-quasi-isomorphically to `p'_* Č(g'⁻¹ U, g'^* 𝒢)`
-(`AlgebraicGeometry.Scheme.Modules.quasiIso_mumfordFreeHom`), which is `R p'_* g'^* 𝒢`
-(`AlgebraicGeometry.Scheme.Modules.derivedPushforwardSingleIsoCechResolution`). The per-degree
-form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`. -/
+is an isomorphism `g^* P ≅ R p'_* g'^* 𝒢` in `D(𝒪_{T'})`. -/
 theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S : Scheme.{u}}
     [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
     [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]

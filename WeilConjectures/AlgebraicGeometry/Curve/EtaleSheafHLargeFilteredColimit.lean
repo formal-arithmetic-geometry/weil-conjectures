@@ -26,11 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Large-universe filtered-colimit continuity for the derived etale cohomology functor.
-Source: Stacks Project, Tags 03Q5 and 0739.
-
-The proof repeats the filtered-colimit continuity argument while tracking the larger
-indexing universe. This intermediate result is isolated so the Ext comparison can be
-transported separately. -/
+Source: Stacks Project, Tags 03Q5 and 0739. -/
 theorem etaleCohomology_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]
@@ -48,7 +44,9 @@ theorem etaleCohomology_isColimit_large_filtered
   obtain ⟨hH⟩ := etaleCohomology_isColimit_of_isDirected X hF q
   exact ⟨Functor.Final.isColimitWhiskerEquiv F _ hH⟩
 
-/-- (blueprint: lem-pbc-u2-sheafH-large-filtered-colimit) -/
+/-- On a quasi-compact quasi-separated scheme, étale sheaf cohomology `Sheaf.H` in each degree
+commutes with filtered colimits indexed by a category in the larger universe.
+Source: Stacks Project, Tags 03Q5 and 0739. -/
 theorem sheafH_isColimit_large_filtered
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {A : Type (u + 1)} [SmallCategory A] [IsFiltered A]

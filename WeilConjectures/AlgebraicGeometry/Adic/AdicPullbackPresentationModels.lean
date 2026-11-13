@@ -237,7 +237,7 @@ private theorem constantDirect_naturality
     (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map φ))
       ((proEtaleBaseChange g).op.obj V)
 
-/-- Proof that the published strict-tower pair is a universal left-derived pair.
+/-- The published strict-tower pair is a universal left-derived pair.
 Source: Stacks 05S7. -/
 theorem adicPresentationTowerUniversal_proof :
     (completedTowerPullback g d).IsLeftDerivedFunctor

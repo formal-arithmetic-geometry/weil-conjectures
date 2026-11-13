@@ -27,18 +27,7 @@ Let `C` be a proper smooth connected curve over the algebraically closed field `
 sequence `0 → Pic⁰(C) → Pic(C) → ℤ → 0` splits: `Pic⁰(C)` is a subgroup `P0` of `Pic(C)` with
 underlying set `f.picZero`, and there is an isomorphism `Pic(C) ≅ ℤ × Pic⁰(C)` (`ℤ` written
 multiplicatively, as the group law of `Pic(C)`) whose first component is the degree and which
-restricts to the identity on `Pic⁰(C)`.
-
-Proof, step 1: by lem-sc-smooth-connected-curve-local-rings (2) `C` has a closed point `P`,
-which is `k`-rational by lem-weil-pbc-closed-point-residue-field-base. The degree of
-corollary-degree-jacobian--1 is the degree of divisors transported along `Cl(C) ≅ Pic(C)`
-(proposition-cohomology-smooth-affine-curve, well defined by
-theorem-riemann-roch-coherent-serre-duality), a homomorphism; `λ = [𝒪_C(P)]` has degree
-`deg [P] = 1`, so `s : n ↦ λ^n` is a homomorphism with `deg ∘ s = id`, and the degree is surjective.
-Step 2: `Pic⁰(C) = ker deg`, so the sequence is exact at `Pic⁰(C)` and at `Pic(C)`, and step 1 gives
-exactness at `ℤ`. The map `x ↦ (deg x, x · s(deg x)⁻¹)` lands in `ℤ × Pic⁰(C)`, is a homomorphism,
-and has inverse `(n, y) ↦ s(n) · y`; its first component is the degree and it restricts to the
-identity on `Pic⁰(C)`, i.e. the sequence splits. -/
+restricts to the identity on `Pic⁰(C)`. -/
 theorem Scheme.Hom.exists_mulEquiv_prod_picZero
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] :

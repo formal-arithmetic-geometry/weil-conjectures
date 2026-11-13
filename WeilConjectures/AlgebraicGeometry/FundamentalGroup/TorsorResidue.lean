@@ -31,8 +31,7 @@ and the Kummer residues against products of roots of unity add up. This defines 
 
 `res_z(T) : μ_N(k) →+ ℤ / N`, an element of `Hom(μ_N, ℤ / N) = ℤ / N (-1)`
 
-(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`), the residue map of blueprint
-`proposition-no-fixed-class-degree-one--1`.
+(`AlgebraicGeometry.Scheme.EtaleTorsor.residue`).
 -/
 
 @[expose] public section

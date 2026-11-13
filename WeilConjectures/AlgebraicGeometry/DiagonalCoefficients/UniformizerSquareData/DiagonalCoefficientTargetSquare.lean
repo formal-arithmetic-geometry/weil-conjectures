@@ -46,8 +46,8 @@ attribute [local irreducible] Ext.homEquiv Ext.comp Ext.mk₀ Ext.mapExactFuncto
 attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
-/-- Apply the positive-root calculation to the proved criterion from the preceding step.
-The other independent proof arguments remain available in its inferred type. -/
+/-- The criterion `UniformizerSquareData.sourceSquare`, further specialized by the positive-root
+calculation. -/
 @[irreducible] def UniformizerSquareData.targetSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

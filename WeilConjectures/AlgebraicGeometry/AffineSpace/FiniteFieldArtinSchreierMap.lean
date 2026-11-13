@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.AffineSpace
 
 /-- For a finite field `k`, the map `t ↦ t ^ |k| - t` on the affine line is finite étale and
   surjective, invariant under translations by `k`, and its canonical translation torsor map is an
-  isomorphism. This is the finite-field affine-line torsor assertion in the proof of the
-  Artin–Schreier comparison. -/
+  isomorphism. -/
 theorem finiteField_artinSchreier_map (k : Type u) [Field k] [Fintype k] :
     IsFinite (artinSchreierMap PUnit.{u + 1} (Spec (.of k)) (Fintype.card k)) ∧
       Etale (artinSchreierMap PUnit.{u + 1} (Spec (.of k)) (Fintype.card k)) ∧

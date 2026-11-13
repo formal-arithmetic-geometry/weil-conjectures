@@ -71,12 +71,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
 over `k`, and `H` a `k`-scheme representing `Hilb^d_{X/k}`. The morphism `π : X^d ⟶ H` sending a
 point `(x₁, …, x_d)` of the fibre power to the divisor `x₁ + ⋯ + x_d` (the product of the ideals
 of the graphs, `AlgebraicGeometry.fiberPowerGraphSum`) is finite locally free of degree `d!` and
-surjective.
-
-By induction on `d`: `π_{d + 1}` is `π_d × 𝟙 : X^d ×_k X ⟶ H_d ×_k X`, a base change of `π_d`,
-followed by the addition morphism `H_d ×_k X ⟶ H_{d + 1}`
-(`AlgebraicGeometry.exists_addition_hilbertPresheaf`), which is finite locally free of degree
-`d + 1`. -/
+surjective. -/
 theorem exists_iteratedAddition_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f]
     [IsProper f] [GeometricallyIntegral f] (d : ℕ) (H : Over (Spec (.of k)))
     (e : (hilbertPresheaf f d).RepresentableBy H) :

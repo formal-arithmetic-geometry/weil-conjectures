@@ -86,9 +86,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 
 /-! # Shared definitions for the completed diagonal limit
 
-These are the existing completed endpoints, normalized comparison maps, and limit
-specifications, extracted unchanged so their proof dependencies can be imported below
-the final assembly theorem.
+The completed endpoints, normalized comparison maps, and limit specifications, kept separate
+from the final assembly theorem so that their dependencies can be imported below it.
 -/
 
 @[expose] public noncomputable section
@@ -272,10 +271,7 @@ private theorem diagonalRestrictScalarsExact
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{b} R),
     preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{b} R)⟩
 
-/-- Constant-scalar restriction is additive and exact.
- Proof: all three factors retain the underlying additive sheaf. Kernels are sectionwise and
-cokernels are additive sheafifications, so finite limits, finite colimits and sums of morphisms are
-unchanged. The constant-ring equivalence extends the scalar action uniquely by local gluing. -/
+/-- Constant-scalar restriction is additive and exact. -/
 theorem diagonalCompletedRestriction_exact (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :
     (diagonalCompletedRestriction ℓ X).Additive ∧
     PreservesFiniteLimits (diagonalCompletedRestriction ℓ X) ∧

@@ -27,9 +27,8 @@ cut out of `X₀ ×_{k₀} L` by the same generators.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.exists_finiteModel_of_isClosedImmersion`: blueprint
-  `corollary-curve-preserving-geometric-irreducibility--1` ("the curve and inclusion descend to a
-  finite constant extension").
+- `AlgebraicGeometry.Scheme.Hom.exists_finiteModel_of_isClosedImmersion`: the curve and inclusion
+  descend to a finite constant extension.
 -/
 
 @[expose] public section

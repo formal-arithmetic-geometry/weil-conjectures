@@ -37,8 +37,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Present the source of the strict-local mate as neighbourhood hypercohomology,
 and identify its germ components with projection pullbacks to the limit.
-This supplies the input to derived continuity, without applying continuity and without
-asserting that either the target cocone is a colimit or the mate is invertible.
 Source: Stacks Project, Tag 03Q9, proof paragraphs 1 and 3; Tag 03Q8. -/
 theorem smallModel_nonempty_strictLocalBaseChange_continuityPresentation
     {X S : Scheme.{v}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]

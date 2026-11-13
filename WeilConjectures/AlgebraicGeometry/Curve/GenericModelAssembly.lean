@@ -18,8 +18,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 # Assembling the generic curve model over a base
 
 The predicate `AlgebraicGeometry.IsGenericCurveModel F` for a morphism `F : X ⟶ S` records the
-conclusion of `proposition-proper-direct-image-finite-coefficients` over the base `S` (without the
-projective embeddings of the curve pieces, which are recovered from finiteness over an affine base):
+existence of a generic curve model over the base `S` (without the projective embeddings of the
+curve pieces, which are recovered from finiteness over an affine base):
 the reduction `T` of `X` receives a finite surjection `ν : ∐ Yₐ ⟶ T` from smooth curve families and
 finite étale families, which is an isomorphism outside a closed subscheme of `T` finite over `S`.
 
@@ -37,11 +37,11 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The conclusion of `proposition-proper-direct-image-finite-coefficients` over a base `S` for
-`F : X ⟶ S` (without projective embeddings): a reduced scheme `T` with a surjective closed immersion
-`t : T ⟶ X`, finitely many `Yₐ` with a finite surjection `ν : ∐ Yₐ ⟶ T`, each `Yₐ` smooth of
-relative dimension one over `S` or finite étale over `S`, and a closed subscheme `d : D ⟶ T` finite
-over `S` outside of which `ν` is an isomorphism. -/
+/-- A generic curve model for `F : X ⟶ S` over the base `S` (without projective
+embeddings): a reduced scheme `T` with a surjective closed immersion `t : T ⟶ X`, finitely many
+`Yₐ` with a finite surjection `ν : ∐ Yₐ ⟶ T`, each `Yₐ` smooth of relative dimension one over `S`
+or finite étale over `S`, and a closed subscheme `d : D ⟶ T` finite over `S` outside of which `ν`
+is an isomorphism. -/
 def IsGenericCurveModel {X S : Scheme.{u}} (F : X ⟶ S) : Prop :=
   ∃ (T : Scheme.{u}) (t : T ⟶ X) (_ : IsClosedImmersion t) (_ : Surjective t) (_ : IsReduced T)
     (ι : Type u) (_ : Finite ι) (Y : ι → Scheme.{u}) (ν : ∐ Y ⟶ T) (_ : IsFinite ν)

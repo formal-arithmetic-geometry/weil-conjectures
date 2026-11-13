@@ -28,8 +28,8 @@ Source: Stacks Tags 09AI and 09BT.
 Positive level n+1 is indexed by n : ℕ. Normalizations are stored for every comparable
 pair; their cocycle determines the nonconsecutive ones from the consecutive ones.
 Compatibility is expressed on their adjoints M_b→Res(M_a). The tensor-unit normalized
-scalar-extension adjunction makes this equivalent to the displayed normalization
-identities in the blueprint. This permits restrictions to retain their actual
+scalar-extension adjunction makes this equivalent to the normalization identities
+`e_a ρ = σ (L e_b)`. This permits restrictions to retain their actual
 inverse-image coefficients, without choosing a tensor/pullback comparison.
 
 ## Main definitions
@@ -337,8 +337,7 @@ def adicTowerRestrictedTransition (M : AdicTower X d) (b a : ℕ) (hab : a ≤ b
 
 /-- A common local bounded model with adic-lisse finite-type terms, finite-lisse
 cohomology in every finite reduction, and compatible quotient-linear identifications.
-The compatibility equation is the adjoint form of e_aρ=σ(Le_b); scalar-extension Hom
-bijections make it equivalent to the blueprint's equation.
+The compatibility equation is the adjoint form of `e_a ρ = σ (L e_b)`.
 Source: Stacks Tags 09AI and 09BT. -/
 structure AdicTowerLocalModel (M : AdicTower X d) (d₀ d₁ : ℤ) where
   /-- One complex over the restricted completed coefficients, independent of the level. -/

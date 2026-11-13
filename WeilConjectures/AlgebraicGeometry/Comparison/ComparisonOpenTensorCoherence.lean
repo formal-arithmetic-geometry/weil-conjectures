@@ -284,7 +284,7 @@ noncomputable def comparisonOpenDerivedPullbackIso
     Functor.isoWhiskerLeft D(comparisonUpperStar (ModuleCat.{u + 1} Λ) X)
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm
 
-/-- The map `h_{K,N} = (1 ⊗ a_{j,N}) ∘ t_U` of the node. The tensor comparison is
+/-- The map `h_{K,N} = (1 ⊗ a_{j,N}) ∘ t_U`. The tensor comparison is
 that of the strong monoidal comparison pullback, computed on K-flat representatives;
 `a` is the canonical comparison of pullbacks localized degreewise. These constructions
 are natural in both inputs.

@@ -25,8 +25,8 @@ import Mathlib.AlgebraicGeometry.Properties
 /-!
 # Finite-type ambient geometry and a uniform geometric-fibre dimension bound
 
-Source: Stacks Project, Morphisms, Tag 0A3V, with the affine polynomial-presentation
-refinement described in the DAG node. The refinement also uses Algebra Tags 00FN, 00KE and 00P3,
+Source: Stacks Project, Morphisms, Tag 0A3V, with an affine polynomial-presentation
+refinement. The refinement also uses Algebra Tags 00FN, 00KE and 00P3,
 Schemes Tag 01IJ, and `MvPolynomial.ringKrullDim_of_isNoetherianRing`.
 -/
 

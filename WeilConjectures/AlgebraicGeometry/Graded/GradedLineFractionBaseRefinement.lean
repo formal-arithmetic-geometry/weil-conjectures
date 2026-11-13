@@ -101,7 +101,7 @@ private theorem fractionCoefficient_restrict
 
 /-- Restrict one framed fraction chart to a smaller affine base, locally at a point.
 The comparison chart uses the restricted original frame and denominator, without a
-change of degree. This compares a chart only with its own affine-base restriction.
+change of degree.
 
 Source: Stacks Project, Constructions, Tag 01O9, characterization (3) and its proof,
 using the localization construction of Tag 01NK. -/

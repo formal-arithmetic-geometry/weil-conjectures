@@ -194,33 +194,7 @@ end ContinuousFiltration
 The canonical section-action equivalence retains the underlying abelian sheaves, identifies
 finite free scalar models, and intertwines locally closed restriction.
 Source: Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.10, Lemma 6.8.13,
-Proposition 6.8.14(2), and Lemma 6.8.2.
-
-Proof plan, following the seven DAG steps:
-1. `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal` gives the Noetherian space.
-The continuous realization and internal/sectionwise equivalence identify E-valued local
-models with the finite constant models: e tensor (c_i) maps to (e*c_i), with inverse
-(e_i) maps to the sum of e_i tensor the coordinate vectors. These formulas commute with
-restriction and preserve the underlying abelian sheaves. The comparisons of
-`lem-sfb-internal-module-operations-transport` carry each given stratum restriction and
-its trivializing cover to the internal category, proving constructibility there.
-2. Apply `lem-sfb-finite-model-stratum-filtration` to get ordered opens, their reduced
-closed differences, qcqs open immersions, monic counits and successive quotients.
-3. The field clause of `lem-sfb-scalar-finite-free-resolutions` gives a finite basis of
-each scalar model. Tensor its coordinate isomorphism and inverse with the coefficient
-ring. The restriction comparisons identify the resulting locally finite free L_k.
-4. `lem-sfb-internal-module-operations-transport` preserves exactness and the actual
-adjunction counits. With `lem-weil-pbc-proetale-ringed-open-closed` and the normalized
-continuous coefficient restriction, it transports the internal filtration and cokernels
-to the displayed sectionwise operations, retaining their underlying abelian sheaves.
-5. `lem-weil-pbc-noetherian-open-subscheme-noetherian` gives Noetherian V_k. Affine
-closed pieces have quotient rings of Noetherian rings, and are quasi-compact closed
-subsets, so S_k is Noetherian as well (def-weil-pbc-noetherian-ring, pqf-def-locnoeth).
-6. `lem-weil-pbc-open-subspace-dimension-monotone` bounds the dimension of each V_k.
-Closed embeddings carry strict irreducible closed chains to such chains in V_k, so
-also bound dim S_k. Open stalk identifications and local ring maps preserve the unit l.
-7. For empty X take m=0; the empty-cover sheaf condition makes F zero. All inclusions
-are non-strict and ranks may be zero, so zero objects and zero quotients are included. -/
+Proposition 6.8.14(2), and Lemma 6.8.2. -/
 theorem exists_continuousFiltration_admissibleStrata
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

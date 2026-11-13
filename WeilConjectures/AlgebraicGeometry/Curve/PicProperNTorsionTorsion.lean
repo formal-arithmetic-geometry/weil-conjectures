@@ -48,25 +48,9 @@ private def kernelTorsionEquiv (G : Type*) [CommGroup G] (n : ℕ) :
   right_inv x := rfl
   map_mul' x y := rfl
 
-/-- The prime-to-characteristic Picard torsion for a proper smooth curve.
-
-Proof in words: Finite type gives local Noetherianity, smoothness gives regularity,
-and connectedness then gives irreducibility. The dimension-one condition therefore makes
-`f` smooth of relative dimension one. Over the separably closed field, connectedness is
-geometric connectedness. Smoothness makes each field base change regular and reduced;
-geometric connectedness makes it irreducible, so the curve is geometrically integral.
-Apply `exists_jacobian`: its degree-zero Picard group is the group of rational points of
-an abelian variety J, smooth of relative dimension the arithmetic genus. Its topological
-Krull dimension is consequently that genus; Serre duality identifies it with `f.genus`.
-The nonzero image of n in k implies n > 0 and that the characteristic does not divide n.
-Clause (c) of `abelianVariety_estimate_of_isAlgClosed` computes the additive n-torsion of
-J(k). For a Picard class L with L^n = 1, applying the degree homomorphism gives
-n * degree(L) = 0 in the integers. Since n is nonzero, degree(L) = 0. Inclusion therefore
-identifies the power-map kernel in Pic(C) with that in Pic⁰(C), with inverse the same class
-viewed in the degree-zero subgroup. Restrict the Jacobian group equivalence to these kernels,
-identify the power-map kernel with the additive n-torsion subgroup, and compose with the
-abelian-variety torsion equivalence written multiplicatively. This works also for n = 1
-and genus zero, when the resulting finite function group is trivial. -/
+/-- The prime-to-characteristic Picard torsion for a proper smooth curve: if `n` is nonzero in
+the algebraically closed field `k`, the kernel of the `n`th-power map on `Pic(C)` is isomorphic
+to `(ℤ/n)^(2g)`, where `g = f.genus`. -/
 theorem Scheme.Hom.pic_proper_ntorsion_torsion
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

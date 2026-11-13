@@ -47,8 +47,7 @@ v          v
 T' --g---> T
 ```
 and let `ℱ'` be the pullback of `ℱ` to `X'`. Then `h^q_{ℱ'}(t') = h^q_ℱ(g t')` for every point
-`t'` of `T'`: the fibre `X'_{t'}` is the base change of `X_{g t'}` along the field extension
-`κ(g t') ⟶ κ(t')`, and cohomology commutes with flat base change. -/
+`t'` of `T'`. -/
 theorem hFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X)
     (f' : X' ⟶ T') (sq : IsPullback g' f' f g) (q : ℕ) (t' : T') :
     ((Modules.pullback g').obj ℱ).hFiber f' q t' = ℱ.hFiber f q (g.base t') := by
@@ -99,12 +98,7 @@ theorem eulerCharFiber_pullback_of_isPullback {T' X' : Scheme.{u}} (g : T' ⟶ T
 /-- **The fibre Euler characteristic is locally constant.** With `f : X ⟶ T` proper of finite
 presentation and `ℱ` an `𝒪_X`-module of finite presentation which is flat over `T`, the Euler
 characteristic `t ↦ Σ_q (-1)^q dim_{κ(t)} H^q(X_t, ℱ_t)` of the fibres is locally constant on
-`T`.
-
-Near a point of `T` it is the alternating sum of the ranks of the bounded complex `P` of finite
-free modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`,
-since the Euler characteristic of a bounded complex of finite-dimensional vector spaces is that
-of its cohomology. -/
+`T`. -/
 theorem isLocallyConstant_eulerCharFiber (hℱ : ℱ.IsFlatOver f) :
     IsLocallyConstant (ℱ.eulerCharFiber f) := by
   rw [IsLocallyConstant.iff_eventually_eq]

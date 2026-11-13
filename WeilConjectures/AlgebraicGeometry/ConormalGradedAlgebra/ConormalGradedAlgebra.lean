@@ -593,57 +593,8 @@ private theorem presentation_comparison (A B : Presentation i) :
     exact congrArg (fun k ↦ k.val.app U x) hmod
 
 /-- The conormal algebra exists, with its unique homogeneous-inclusion-preserving comparison
-to any other presentation. This is a universal property, not a mere existence of an
-unconstrained algebra or normal-cone datum.
-Source: Stacks Divisors Tags 0630--0633; coherent sheaves Tag 01XZ.
-
-Proof (the ten steps of `lem-pur-conormal-graded-algebra`):
-1. Form the sheaf cokernels B_n = I^n/I^(n+1) on X. Quasi-coherent cokernels and the
-   affine tilde adjunction identify B_n on Spec R with the module J^n/J^(n+1), carrying
-   quotient representatives to their classes. The shared image-power construction
-   identifies with `(i.ker ^ n).toModules` by its inclusion into O_X on affine opens;
-   both inclusions have image J^n, so these identifications glue uniquely.
-2. Multiply local lifts a and b and take the class of ab. Changing the lifts changes
-   this product by an element of J^(m+n+1). These products glue, commute with restriction,
-   and satisfy the ring laws on an affine refinement by the associated-graded ring laws.
-   Degree-zero constants give the unit. No sectionwise cokernel on arbitrary opens is used.
-3. The ideal I annihilates B_n, since a product of an element of J with one of J^n lies
-   in J^(n+1). This includes n=0.
-4. The closed-immersion annihilation theorem descends B_n to Z, with its pushforward
-   identified by the canonical unit; fully faithful pushforward determines this descent.
-   On Spec(R/J), the maps a tensor r-bar to ra modulo J^(n+1) and [a] to a tensor 1
-   identify the fixed piece i^*(I^n) with that descent. Tensor balancing proves both
-   composites are identities. The affine tilde adjunction glues these identifications.
-5. The tensor formula transports products to the pieces. Their sheaf coproduct is
-   quasi-coherent. On affine opens its sections are the direct sum J^n/J^(n+1), with
-   the representative products and constants above. Affine tilde preserves this coproduct;
-   no commutation of arbitrary non-affine sections with infinite sums is assumed.
-6. Degree one is literally i^*I. On an affine chart, a tensor r-bar maps to ra modulo
-   J^2, and the inverse sends [a] to a tensor 1. The tensor relations kill J^2 and prove
-   that these are inverse. Degree zero similarly identifies with O_Z.
-7. Structure and tilde stalks are localizations. Localization exactness gives
-   (J^n/J^(n+1))_p = J_p^n/J_p^(n+1); localization commutes with powers by the fraction
-   product formula, also for n=0. Stalks commute with the sheaf coproduct. Thus the stalk
-   algebra is gr_(J_p)(R_p), and degree one is its cotangent module. The quotient-stalk
-   equivalence is the first-isomorphism equivalence of the actual surjective stalk map.
-8. Extend the degree-one inclusion by the symmetric-algebra universal property. On affine
-   charts the map sends every generator to its degree-one class. Products of generators
-   have the same total degree, so this is the canonical graded comparison.
-9. Symmetric-algebra base change along localization identifies the symmetric sheaf stalk
-   with the symmetric algebra of the module stalk. The identification fixes scalar germs
-   and carries each generator germ to the corresponding generator. In particular it is
-   canonical even for a zero module stalk. Naturality and Step 7 give the comparison's
-   specified degree-one stalk formula.
-10. If X is locally Noetherian, so is Z. Each J^n is finite by the Noetherian submodule
-    theorem, and its quotient is finite over R/J. The affine finite-type criterion and
-    the coherent/quasi-coherent finite-type equivalence give coherence of each piece.
-    No coherence assertion is made about the infinite coproduct.
-Finally the coproduct property and representative products determine the algebra up to
-its unique homogeneous-inclusion-preserving isomorphism: the unique module comparison
-preserves products and constants locally, and the opposite comparison is its inverse.
-Projection to degree zero fixes constants and kills positive degrees, hence is the unique
-augmentation; nonnegative degrees make it multiplicative. This includes empty schemes,
-the zero and unit ideals and n=0. -/
+to any other presentation.
+Source: Stacks Divisors Tags 0630--0633; coherent sheaves Tag 01XZ. -/
 theorem exists_conormalGradedAlgebra :
     ∃ A : Presentation i, ∀ B : Presentation i,
       ∃! e : A.algebra ≅ B.algebra,

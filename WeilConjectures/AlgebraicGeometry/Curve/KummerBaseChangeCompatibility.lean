@@ -145,11 +145,7 @@ private theorem kummer_comparison (C P : Scheme.{u}) (π : P ⟶ C) (n : ℕ) :
   exact kernel.lift_ι _ _ _
 
 /-- Kummer sequences, their connecting maps, and affine Picard torsion commute with extension of
-algebraically closed ground fields. The proof follows the blueprint: base change preserves the
-curve hypotheses; the comparison of units is adjoint to pullback; naturality of the derived
-cohomology long exact sequence gives the ladder; degree zero is pullback of units and degree one
-is pullback of invertible modules; in the affine case the Jacobian quotient and the abelian-variety
-estimate give the isomorphism on `n`-torsion. -/
+algebraically closed ground fields. -/
 theorem kummer_base_change_compatibility
     (k k' : Type u) [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

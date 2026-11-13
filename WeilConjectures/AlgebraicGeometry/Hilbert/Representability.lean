@@ -39,6 +39,10 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
   lie in an affine open of `X`, which can be shrunk into `f⁻¹ V`
   (`AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le_of_finite`).
 
+Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
+every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
+representable.
+
 ## Main statements
 
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isAffine`: the affine case, from the
@@ -299,12 +303,7 @@ lemma exists_hilbertPresheafResLEι_app_eq [IsSeparated f] (d : ℕ) {W : Over V
 end ResLE
 
 /-- **The affine claim**. For a morphism of affine schemes `f : X ⟶ S`, the Hilbert functor
-`Hilb^d_{X/S}` is representable.
-
-The functions on `X` define a closed immersion of `X` into an affine space over `S`, so this
-follows from the case of affine spaces,
-`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`, by the closed-immersion claim
-`AlgebraicGeometry.isRepresentable_hilbertPresheaf_of_isClosedImmersion`. -/
+`Hilb^d_{X/S}` is representable. -/
 theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [IsAffine S]
     (d : ℕ) : (hilbertPresheaf f d).IsRepresentable := by
   let i : X ⟶ 𝔸(Γ(X, ⊤); S) := AffineSpace.homOfVector f id
@@ -318,15 +317,7 @@ theorem isRepresentable_hilbertPresheaf_of_isAffine (f : X ⟶ S) [IsAffine X] [
 every finite set of at most `d` points of the fibre `X_s` there is an affine open of `X`
 containing all of them; this holds for instance when `X ⟶ S` is quasi-projective, or when `X`
 carries an ample invertible module. If moreover `X ⟶ S` is separated, then `Hilb^d_{X/S}` is
-representable by a scheme.
-
-Separatedness cannot be dropped: for the line with doubled origin over a field and `d = 1`,
-every finite set of at most one point lies in an affine open, but `Hilb^1_{X/S}` is not
-representable.
-
-The proof glues the Hilbert schemes of the morphisms of affine schemes `U ⟶ V`, for affine opens
-`V ⊆ S` and `U ⊆ f⁻¹ V`, using the gluing criterion
-`AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`. -/
+representable by a scheme. -/
 theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
     (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :

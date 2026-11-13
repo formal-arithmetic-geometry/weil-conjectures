@@ -19,8 +19,7 @@ import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-! # Generic local constancy reflected by a finite direct image
 
-Source: Stacks Project, Tags 095K, 0959, 04DZ and 0A5D, with the module direct-factor
-argument in the parent node's proof, steps 1--3.
+Source: Stacks Project, Tags 095K, 0959, 04DZ and 0A5D.
 -/
 
 @[expose] public section

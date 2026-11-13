@@ -772,8 +772,7 @@ def recordedEquivalence :
 attribute [irreducible] recordedEquivalence
 attribute [local irreducible] restriction
 
-/-- The sectionwise gluing inverse, determined by the full section and morphism formulas
-of the recorded dependency; only the proofs of its properties may be postponed.
+/-- The sectionwise gluing inverse of the recorded module equivalence.
 Source: Stacks 015F. -/
 def gluing : Components.{t, u, v, w} X I Y j R ⥤ Modules.{t, u, v, w} R :=
   (recordedEquivalence.{t, u, v, w} X I Y j hd hc R hcomm).inverse
@@ -850,9 +849,7 @@ private theorem insertionOffDiagonal (i k : I) (hki : k ≠ i) (M) :
   exact hz.of_iso ((insertionCoordinate.{t, u, v, w} X I Y j hd hc R hcomm i k).app M)
 
 /-- Zero insertion is additive, since it inserts coordinatewise zeros and then applies
-an additive gluing functor. Source: Stacks 015F. Proof (step 1): addition is coordinatewise in the
-product. Zero insertion preserves it, and the sectionwise product gluing of the dependency preserves
-it as well. -/
+an additive gluing functor. Source: Stacks 015F. -/
 theorem insertion_additive (i : I) :
     (insertion.{t, u, v, w} X I Y j hd hc R hcomm i).Additive := by
   let E := moduleEquivalence.{t, u, v, w} X I Y j hd hc R hcomm
@@ -864,9 +861,8 @@ theorem insertion_additive (i : I) :
 
 attribute [instance] insertion_additive
 
-/-- Exactness of insertion, needed for its unbounded localization.
-Source: Stacks 015F. Proof (step 1): the tuple kernel and cokernel have the given kernel and
-cokernel in coordinate i and zero elsewhere. The exact gluing equivalence preserves both. -/
+/-- Zero insertion is exact: it preserves finite limits and finite colimits.
+Source: Stacks 015F. -/
 theorem insertion_exact (i : I) :
     PreservesFiniteLimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) ∧
       PreservesFiniteColimits (insertion.{t, u, v, w} X I Y j hd hc R hcomm i) := by
@@ -1161,37 +1157,9 @@ def LocalizationStatement : Prop :=
     Nonempty ((Derived.{t, u, v, w} X R) ≌ Discrete PUnit.{1}) ∧ Nonempty ((DerivedComponents.{t,
         u, v, w} X I Y j R) ≌ Discrete PUnit.{1}))
 
-/-- Finite-clopen degreewise gluing and its normalized unbounded derived localization.
-Source: Stacks 015F and 05RU, the finite-product argument.
-
-Proof, following the node's nine steps:
-1. The recorded module equivalence gives additive exact restriction and gluing;
-   insertion is exact because kernels and cokernels in a product are coordinatewise.
-2. Apply these functors degreewise. Naturality of the module unit and counit for
-   differentials gives chain maps. Their module triangle equations hold in every
-   degree. Additivity preserves the equation f-g = dh+hd, giving homotopy descent.
-3. Exact-functor cohomology comparison gives both displayed cohomology isomorphisms.
-   The module equivalence detects zero cohomology and invertible cohomology maps,
-   proving acyclicity and quasi-isomorphism detection.
-4. The finite product of the component localization functors is a localization,
-including the empty product. Descend degreewise restriction and gluing by the localization universal
-   property.
-5. Descend the specified degreewise unit and counit and their inverses. Faithfulness
-   of precomposition with a localization descends both triangle equations; the
-   normalization fields give the exact composites after precomposition.
-6. Exact-functor derived restriction is triangulated. For gluing, finite-coordinate
-   cone triangles glue to the cone triangle of the glued map: the differential
-   matrix is (d, f; 0, -d). The signed shift constraints and their coherences hold
-   degreewise and descend by uniqueness of natural-transformation localization.
-7. Combine the complex cohomology comparison with the factors through Q and
-   descend the natural isomorphism; this includes inverses of quasi-isomorphisms.
-8. Localize the module insertion identities. The tuple is the finite biproduct of
-   its zero insertions; gluing, an equivalence, preserves this biproduct. This gives
-   both bilimit bicones with the identity and gluing as their vertices.
-9. Coordinate zeros and coordinate inverses give joint detection. Empty sites and
-   zero ring sheaves have only zero modules, hence zero complexes; localizing their
-   already invertible maps gives the one-object, one-arrow category. An empty
-   covering forces X empty. No boundedness or nonempty-index hypothesis is used. -/
+/-- Finite-clopen degreewise gluing and its normalized unbounded derived localization satisfy
+`LocalizationStatement`.
+Source: Stacks 015F and 05RU, the finite-product argument. -/
 theorem clopen_unbounded_derived_localization :
     LocalizationStatement.{t, u, v, w} X I Y j hd hc R hcomm := by
   classical

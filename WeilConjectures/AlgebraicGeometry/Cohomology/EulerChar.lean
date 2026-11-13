@@ -122,12 +122,8 @@ variable (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
 /-- The **arithmetic genus** `dim_k H^1(X, 𝒪_X)` of a `k`-scheme `X`.
 
 When `X` is a smooth proper curve over `k` with `H⁰(X, 𝒪_X) = k`
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective`) this is the genus of `X`; no hypotheses
-are imposed on `X` here, so for other `X` the value carries no meaning.
-
-For a smooth proper curve `X ↘ Spec k`, Serre duality identifies this with
-`AlgebraicGeometry.Scheme.Hom.genus (X ↘ Spec k) = dim_k H^0(X, Ω¹_{X/k})`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
+(`AlgebraicGeometry.Scheme.GlobalSectionsBijective`) this is the genus of `X`
+(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`). -/
 noncomputable def arithmeticGenus : ℕ :=
   Modules.finrankH (X := X) k (SheafOfModules.unit X.ringCatSheaf) 1
 
@@ -143,17 +139,7 @@ quasi-separated scheme over a field `k`, let `K/k` be a field extension and let 
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
 `X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
 
-Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover has affine
-intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
-section formula identifies the base-changed complex with its tensor product by `K`.
-Tensoring over the field `k` is exact, hence commutes with cohomology. For general
-quasi-separated `X`, use compact-open induction. Its step adds an affine open `V` to a
-compact open `U`. The overlap `U ∩ V` is compact by quasi-separatedness and separated
-because it is open in the affine scheme `V`; it need not be affine. The separated case
-applies to `V` and the overlap, while the induction hypothesis applies to `U`.
-Mayer--Vietoris gluing of the canonical comparisons proves bijectivity on `U ∪ V` in
-all degrees. Apply the induction at the whole scheme and invert the resulting
-`K`-linear comparison from `K ⊗[k] H^q(X, M)` to the pullback cohomology. -/
+Source: Stacks Project, Tag 02KH. -/
 @[stacks 02KH]
 theorem Modules.nonempty_H_pullback_linearEquiv [QuasiCompact (X ↘ Spec (.of k))]
     [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
@@ -334,14 +320,7 @@ private theorem finrankH_eq_sum_of_pairwise_disjoint_aux {ι : Type} [Fintype ι
 /-- **Cohomology of a finite disjoint union.** If `X` is the disjoint union of finitely many
 open subschemes `U i`, then `H^q(X, M) ≅ ⊕ᵢ H^q(U i, M|_{U i})`; in particular, when
 `H^q(X, M)` is finite-dimensional, `h^q(X, M) = ∑ᵢ h^q(U i, M|_{U i})`. Each `U i` is a scheme
-over `k` through `X`.
-
-Each `U i` is open and closed, `M` is the direct sum of the pushforwards of its restrictions to
-the `U i` (`AlgebraicGeometry.Scheme.Modules.isIso_biproduct_lift_restrictAdjunction_unit`), and
-the pushforward along the inclusion of an open and closed subscheme does not change cohomology
-(`AlgebraicGeometry.Scheme.Modules.finrankH_pushforward_ι`).
-
-This is used in the proof of blueprint `proposition-multiplication-n--1`. -/
+over `k` through `X`. -/
 theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ)
     [FiniteDimensional k (M.H q)] :
@@ -410,12 +389,7 @@ theorem eulerChar_eq_sum_range_of_subsingleton (M : X.Modules) {D : ℕ}
 /-- **The Euler characteristic of a quasi-coherent module is additive over a finite disjoint
 union.** If a quasi-compact separated scheme `X` is the disjoint union of finitely many open
 subschemes `U i`, and the cohomology of the quasi-coherent module `M` is finite-dimensional, then
-`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`.
-
-This is `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint` without the
-appeal to Grothendieck vanishing: the cohomology of quasi-coherent modules on `X` and on the `U i`
-vanishes above the number of affine opens needed to cover them
-(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). -/
+`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`. -/
 theorem eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent [CompactSpace X]
     [IsSeparated (Limits.terminal.from X)] {ι : Type*} [Fintype ι] (U : ι → X.Opens)
     (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules)
