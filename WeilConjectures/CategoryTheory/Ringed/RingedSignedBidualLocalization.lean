@@ -387,7 +387,6 @@ private lemma homZero {A B X : Mod.{c, v, u} J R} (hB : IsZero B)
     (zeroSection.{c, v, u} J R B hB _ _).symm
 
 set_option profiler true in
-set_option maxHeartbeats 600000 in
 -- Elaborate five localized product-Hom projections with independent site universes.
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
@@ -405,9 +404,12 @@ private lemma beta_post_pre_apply (E O I P V : CX.{c, v, u} J R)
         ((((homComplexFunctor (R := R)).obj (op P)).map eta).f b |>.val.app U
           (((((homComplexFunctor (R := R)).map p.op).app O).f b).val.app U
             ((t.f b).val.app U y)))).app (op (Over.mk (𝟙 U.unop)))).hom x := by
-  erw [homPost_apply.{c, v, u} J R, homPost_apply.{c, v, u} J R,
-    homPre_apply.{c, v, u} J R, homPre_apply.{c, v, u} J R,
-    betaTerm_apply.{c, v, u} J R]
+  erw [homPost_apply.{c, v, u} J R V O I eta a b (a + b) (add_comm b a) U,
+    homPost_apply.{c, v, u} J R P O I eta b a (a + b) rfl U,
+    homPre_apply.{c, v, u} J R (homComplex (R := R) E O) V O t
+      a b (a + b) (add_comm b a) U,
+    homPre_apply.{c, v, u} J R E P O p b a (a + b) rfl U,
+    betaTerm_apply.{c, v, u} J R E O a b (a + b) (add_comm b a) U]
   simp only [Over.mk_left, Over.mk_hom, unop_op, op_unop, op_id,
     restriction_id.{c, v, u} J R, Units.smul_def]
   have he := map_zsmul ((eta.f (a + b)).val.app U).hom
@@ -485,6 +487,19 @@ private lemma bidual_eq_of_uncurry
   have hu := uncurry_swap S s A B P T O p t c
   simpa only [Category.assoc] using hu.trans h.symm
 
+private lemma uncurry_model_swap {A B X Y Z : D}
+    (i : X ≅ A) (j : Y ≅ B) (swap : X ⟶ Y) (s : A ⟶ B)
+    (f : A ⟶ Z) (g : B ⟶ Z) (v : X ⟶ Z) (u : Y ⟶ Z)
+    (hf : i.hom ≫ f = v) (hg : j.hom ≫ g = u)
+    (hv : v = swap ≫ u) (hs : i.hom ≫ s = swap ≫ j.hom) :
+    f = s ≫ g := by
+  apply (cancel_epi i.hom).1
+  calc
+    i.hom ≫ f = v := hf
+    _ = swap ≫ u := hv
+    _ = swap ≫ (j.hom ≫ g) := congrArg (fun k ↦ swap ≫ k) hg.symm
+    _ = i.hom ≫ (s ≫ g) := by rw [← Category.assoc, ← hs, Category.assoc]
+
 end ClosedCalculation
 
 private noncomputable def comparison (E F : CX.{c, v, u} J R) :
@@ -561,7 +576,6 @@ private lemma total_ext (P V I : CX.{c, v, u} J R)
   exact h a b U
 
 set_option profiler true in
-set_option maxHeartbeats 800000 in
 -- Elaborate the two independent-universe resolution and tensor model squares.
 private lemma comparison_beta
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
@@ -646,19 +660,10 @@ private lemma comparison_beta
           (DerivedCategory.Q.obj O)).symm
           (DerivedCategory.Q.map g ≫
             (coefficientHomResolutionIso.{u, c, v, w} J R P O).inv) := by
-    change (T.iso J R S V P hV hP).hom ≫ _ = _ at hng
-    change (T.iso J R S P V hP hV).hom ≫ _ = _ at hnh
-    apply (cancel_epi (T.iso J R S P V hP hV).hom).1
-    calc
-      _ = DerivedCategory.Q.map vh ≫ coefficientHomResolutionInverse.{u, c, v, w} J R O :=
-        hnh
-      _ = DerivedCategory.Q.map swap.hom ≫
-          (DerivedCategory.Q.map ug ≫ coefficientHomResolutionInverse.{u, c, v, w} J R O) := by
-        rw [hvg, Functor.map_comp, Category.assoc]
-      _ = DerivedCategory.Q.map swap.hom ≫
-          ((T.iso J R S V P hV hP).hom ≫ _) := congrArg
-        (fun f ↦ DerivedCategory.Q.map swap.hom ≫ f) hng.symm
-      _ = _ := by rw [← Category.assoc, ← hswapQ, Category.assoc]
+    exact uncurry_model_swap (T.iso J R S P V hP hV) (T.iso J R S V P hV hP)
+      (DerivedCategory.Q.map swap.hom)
+      (s.braiding (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj V)).hom
+      _ _ _ _ hnh hng (by rw [hvg, Functor.map_comp, Category.assoc]) hswapQ
   have : IsIso (DerivedCategory.Q.map p) :=
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 hp
   have : IsIso (DerivedCategory.Q.map t) :=
@@ -669,7 +674,7 @@ private lemma comparison_beta
   have : IsIso ((derivedInternalHomOfUniverses.{c, v, u, w} J R).map
       (Prod.mkHom (DerivedCategory.Q.map t).op (𝟙 (DerivedCategory.Q.obj O)))) :=
     inferInstance
-  rw [hhQ, hgQ] at hs
+  simp only [hhQ, hgQ] at hs
   exact bidual_eq_of_uncurry
     (D := DerivedCategory (Mod.{c, v, u} J R))
     (H := derivedInternalHomOfUniverses.{c, v, u, w} J R)
