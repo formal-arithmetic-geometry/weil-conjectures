@@ -371,36 +371,36 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
-  obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
-    T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
-  have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
-    (Profinite.continuousMapRingObj T₀) N h Ω C
-  refine Exists.imp ?_ (exists_retraction_of_eq_comp_map_comp_of_coinvariant
-    (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧))
-    (A₀ := L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)
-    (T := R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))_*⟦
-      Profinite.continuousMapRingObj T₀⟧).obj
-      (L((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))^*⟦
-        Profinite.continuousMapRingObj T₀⟧).obj
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)))
-    (((N.galoisLayerHom h Ω).pullbackExchange (Profinite.continuousMapRingObj T₀)).app C)
-    ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T₀) X').app
-      ((N.nearbyCycles (Profinite.continuousMapRingObj T₀)).obj C))
-    (N.galoisLayerExchangeIso h Ω (Profinite.continuousMapRingObj T₀) C)
-    ((CondensedRing.derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj T₀)
-      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
-    R hα hRC
-      (fun k ↦ derivedUnitTransport (Profinite.continuousMapRingObj T₀)
-        (pullbackAction h _ specGaloisAction_comp (act k))
-        (pullbackAction_fst h _ specGaloisAction_comp (act k))
-        (pullbackAction_fst h _ specGaloisAction_comp (act k))
-        (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
-      (fun k ↦ N.galoisLayerAction (Profinite.continuousMapRingObj T₀) h Ω (act k)
-        (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C))
-      (fun k ↦ galoisLayerAut_autAction (Profinite.continuousMapRingObj T₀) N h Ω (act k) C))
-  intro r hr
-  refine ⟨hr.1, ?_⟩
-  sorry
+  let Λ := Profinite.continuousMapRingObj T₀
+  let α := ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C
+  change ∃ r, α ≫ r = 𝟙 _ ∧ _
+  obtain ⟨r, hr, hcoinv⟩ :=
+    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
+      hact
+  refine ⟨r, hr, ?_⟩
+  intro q V b hV W φ hφ
+  refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+    DerivedCategory.homologyFunctor _ q) ?_ φ hφ
+  intro K a _ hcab
+  -- the cohomology of the tensor product is continuous along the finite layers
+  let F := DerivedCategory.Q ⋙ R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
+    L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ L((f')^*⟦Profinite.continuousMapRingObj T₀⟧)
+  have hGE : ∀ (Y : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T₀) N.generic)) ℤ), Y.IsStrictlyGE a →
+        (F.obj Y).IsGE a := fun Y hY ↦ by
+    have := Functor.isGE_rightDerivedFunctor_obj ((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧)
+      (DerivedCategory.Q.obj Y) a
+    have := isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj T₀) N.i
+      (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧).obj (DerivedCategory.Q.obj Y)) a
+    exact isGE_leftDerivedUpperStar_obj (Profinite.continuousMapRingObj T₀) f' _ a
+  have hpt : ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).pt.IsStrictlyGE
+      a := (CochainComplex.isStrictlyGE_iff _ a).2 fun i hi ↦
+    (ProEtale.GaloisTower.infFunctor (Profinite.continuousMapRingObj T₀) _).map_isZero
+      (CochainComplex.isZero_of_isStrictlyGE K a i hi)
+  exact isColimit_homology_tensorRight_mapCocone' T₀
+    ((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K) F a
+    (fun j ↦ hGE _ inferInstance) (hGE _ hpt)
+    (fun p ↦ (nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone T₀ N
+      (galoisTower Ω h) K hcab a f' p).some) V b hV q
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
