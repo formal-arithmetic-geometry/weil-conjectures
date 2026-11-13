@@ -170,6 +170,7 @@ noncomputable abbrev inverseRingMap {X Y : Scheme.{u}} (f : X ⟶ Y)
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Elaborate the two scalar actions in the sectionwise bilinear pairing.
 /-- The coefficient quotient is uniquely fixed by local pure tensors.
 Source: Stacks, Section 03EK; clause 2
@@ -385,6 +386,7 @@ section TensorPairing
 universe uC vC uD vD r
 
 set_option maxHeartbeats 500000 in
+set_option profiler true in
 -- Construct and sheafify the sectionwise bilinear pairing.
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
 property and module sheafification. The uniqueness is the same universal property.
