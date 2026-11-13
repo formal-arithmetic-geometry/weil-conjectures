@@ -98,8 +98,6 @@ private theorem evaluatedAssociator_generator_section (n : ℕ)
   exact evaluatedAssociator_generator l E W n X Y Z b' hb'
     p q r pq qr k hpq hqr hk hk' U x y z
 
-set_option profiler true in
--- The unit-section comparison elaborates several large nested generator terms.
 attribute [local semireducible] coefficientSequenceEvaluation in
 /-- The scalar-coordinate form of tensor associativity for the quotient system: on unit
 insertions of triple generators both composites are the reassociated generator.
@@ -175,6 +173,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
     (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P))
     (coefficientScalarTensorIso l E W n Q N).hom
     p (q + r) k hk' V (u _ x) (u _ (g Q N q r (q + r) rfl V y z))
+  -- Normalize the generator equations without reducing the whole associativity goal.
   simp only [u, g, coefficientScalarTensorIso_hom_unitSection] at L4
   have R1 := coefficientScalarTensorIso_hom_unitSection l E W n
     ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -273,8 +272,6 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
       ((congrArg (fun v ↦ (m9.f k).val.app V v) R4).trans c4))
   exact cL.trans cR.symm
 
-set_option profiler true in
--- Instantiating the formal associativity lemma unifies the concrete evaluated tensor terms.
 /-- The ordinary tensor comparison of the quotient system is compatible with the native
 total associators: both composites agree after every finite evaluation, where they become
 the reassociation of the scalar tensor comparisons.
