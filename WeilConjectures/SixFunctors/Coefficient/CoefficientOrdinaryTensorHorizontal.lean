@@ -327,6 +327,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Normalized functor composites require extra elaborator heartbeats in the generator proof.
 /-- Ordinary quotient adjuncts commute with the tensor comparison and finite evaluation.
