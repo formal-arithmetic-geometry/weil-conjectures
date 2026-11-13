@@ -83,7 +83,7 @@ lemma mapHomotopyCategoryCompIso_extendScalarsComp_comp_mapModUpperStarExtendSca
   erw [Iso.inv_hom_id_app]
   erw [Mod.id_hom', Category.id_comp, Category.id_comp]
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- **(Pull) is the underived (Pull) modulo the counits**: on the image `Qh K` of an object of the
 homotopy category, `derivedUpperStarExtendScalarsIso a f` followed by the counits of `L(Ext_{a_Y})`
 and `Lf^*_Λ'` is the counit of `Lf^*_Λ`, followed by the counit of `L(Ext_{a_X})` and the
@@ -109,6 +109,19 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
           ((NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K) :
         (L((f)^*⟦Λ⟧) ⋙ L(Mod.extendScalars (coefficientMap a X))).obj
           (DerivedCategory.Qh.obj K) ⟶ _) := by
+  -- Reuse the tensor instances when specializing the generic counit lemmas.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt P Q S U := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor P Q S := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (P Q S : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ P Q S := inferInstance
   simp only [derivedUpperStarExtendScalarsIso, Iso.trans_hom, NatTrans.comp_app,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
     Functor.whiskerLeft_app, Iso.symm_hom, Functor.associator_hom_app, Category.id_comp,
