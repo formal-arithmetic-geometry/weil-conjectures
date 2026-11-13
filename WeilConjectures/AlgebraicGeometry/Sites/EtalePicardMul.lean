@@ -38,6 +38,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X : Scheme.{u}} (A : modulesPseudofunctor.obj (.mk (op X)))
   [SheafOfModules.IsInvertible.{u, u, u} (A : X.Modules)]
 
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in

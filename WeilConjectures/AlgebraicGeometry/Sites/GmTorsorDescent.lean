@@ -283,6 +283,7 @@ private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M�
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 4000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 set_option backward.isDefEq.respectTransparency.types false in

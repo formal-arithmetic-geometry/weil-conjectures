@@ -61,6 +61,7 @@ private noncomputable def scalarOver (V : X.Opens) :=
       ((Opens.grothendieckTopology X).over V) (Opens.grothendieckTopology X)).map
         f.toRingCatSheafHom) ⋙ (overEquiv V).functor
 
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Transport through the over-site and scalar restriction unfolds several ring actions.
 /-- A finite free evaluation map into the algebra-valued direct image is epi on an
