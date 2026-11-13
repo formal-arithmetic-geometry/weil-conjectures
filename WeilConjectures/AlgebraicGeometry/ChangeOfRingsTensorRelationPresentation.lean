@@ -67,7 +67,6 @@ private theorem exists_cokernelIso_of_equalizing_universal
       inv_hom_id := hkh }
   exact ⟨e, hh⟩
 
-set_option profiler true in
 /-- The tensor relation presentation, without any quasi-coherence hypotheses.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB (change of rings), and
 Sheaves, Lemma 0089 (sheafification universal property).
