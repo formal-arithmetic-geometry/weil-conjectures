@@ -191,8 +191,6 @@ private theorem transition_sections_apply (M : Systems.{c, v, max c v r} J B τ)
       M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x :=
   congrFun (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec M U)) x
 
-set_option trace.profiler true in
--- Normalization checks the scalar-restriction identifications for both component maps.
 private theorem horizontal_natural
     (ht : ∀ {m n : ℕ} (h : n ≤ m),
       (transition.{c, v, max c v r} J B τ h).app M ≫
@@ -205,6 +203,7 @@ private theorem horizontal_natural
       assemble_app.{c, v, r} J B τ d (op (n, U.unop))
         (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
   rw [assemble_app_apply, assemble_app_apply]
+  -- Fix the section carriers before comparing the scalar-restricted component maps.
   let f : M.val.obj (op (m, U.unop)) → N.val.obj (op (m, U.unop)) :=
     ((d m).val.app U).hom.toFun
   let g : M.val.obj (op (n, U.unop)) → N.val.obj (op (n, U.unop)) :=
