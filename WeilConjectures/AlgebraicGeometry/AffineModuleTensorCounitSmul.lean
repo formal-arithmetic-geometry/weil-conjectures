@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalarsSquare
 /-! # Scalar compatibility of the affine tensor counit
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
@@ -99,17 +100,11 @@ private theorem exists_affine_tensor_evaluation
     have he := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf
         |>.apply_symm_apply (𝟙 A)
-    rw [Adjunction.homEquiv_unit] at he
     ext V r
-    change ε.hom.app ((Opens.map f.base).op.obj V)
-      (t.hom.app ((Opens.map f.base).op.obj V)
-        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-          (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A).hom.app V r)) = r
-    rw [show ∀ z, ε.hom.app ((Opens.map f.base).op.obj V)
-        (t.hom.app ((Opens.map f.base).op.obj V) z) =
-          (e₀).hom.app ((Opens.map f.base).op.obj V) z from
-      fun z ↦ congrArg (fun a ↦ a.hom.app ((Opens.map f.base).op.obj V) z) ht]
-    exact congrArg (fun a ↦ a.hom.app V r) he
+    exact (congrArg (fun a ↦ a.hom.app ((Opens.map f.base).op.obj V)
+      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A).hom.app V r)) ht).trans
+        (congrArg (fun a ↦ a.hom.app V r) he)
   -- The ring triangle makes direct-image identity linear for the composite action.
   let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
   let K := (SheafOfModules.restrictScalars (𝓻 t)).obj N
@@ -204,32 +199,21 @@ theorem affine_module_tensor_counit_smul
   have _ := hpush
   intro F W c p
   let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
-  obtain ⟨d, hd⟩ := exists_affine_tensor_evaluation f B t ε ht F
+  let evaluation := exists_affine_tensor_evaluation f B t ε ht F
+  let d := evaluation.choose
+  have hd := evaluation.choose_spec
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
   let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
-  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F := by
-    refine ⟨PresheafOfModules.homMk
-      ((PresheafOfModules.toPresheaf (𝓡 B).obj).map dP.val) ?_⟩
-    intro V r m
-    have hh := (dP.val.app V).hom.map_smul (b.hom.app V r)
-      (show (P.obj ((R).obj F)).val.obj V from m)
-    change dP.val.app V ((b.hom.app V r) •
-      (show (P.obj ((R).obj F)).val.obj V from m)) =
-      (ε.hom.app V (b.hom.app V r)) •
-        (show F.val.obj V from dP.val.app V m) at hh
-    have hbr : ε.hom.app V (b.hom.app V r) = r :=
-      congrArg (fun a ↦ a.hom.app V r) hb
-    change dP.val.app V ((b.hom.app V r) •
-      (show (P.obj ((R).obj F)).val.obj V from m)) =
-        r • (show F.val.obj V from dP.val.app V m)
-    rw [hbr] at hh
-    exact hh
+  have hb' : (𝓻 b) ≫ (𝓻 ε) = 𝟙 U.ringCatSheaf :=
+    congrArg ((sheafCompose (𝓙 U) (forget₂ CommRingCat.{u} RingCat.{u})).map) hb
+  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F :=
+    (SheafOfModules.restrictScalars (𝓻 b)).map dP ≫
+      (SheafOfModules.restrictScalarsCancelIso (𝓻 b) (𝓻 ε) hb').hom.app F
   let a : (tensorPullback f).obj ((S).obj ((R).obj F)) ⟶ F :=
     κ.inv.app ((R).obj F) ≫ dU
   -- The κ-unit formula identifies the adjunct of this evaluation with the identity.
   have ha : ((adj₀).homEquiv ((S).obj ((R).obj F)) F) a =
       𝟙 ((pushforward f).obj F) := by
-    rw [Adjunction.homEquiv_unit]
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
