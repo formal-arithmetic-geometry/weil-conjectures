@@ -269,7 +269,7 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through total tensor complexes and scalar restriction.
-set_option profiler true in
+set_option trace.profiler true in
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
 natural in both complexes. Source: Stacks 03EK, 07A4. -/
 theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
