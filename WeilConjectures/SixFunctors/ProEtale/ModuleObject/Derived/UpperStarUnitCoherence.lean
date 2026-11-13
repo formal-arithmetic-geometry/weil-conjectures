@@ -183,7 +183,6 @@ variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃
   [∀ (X : C₂), PreservesColimitsOfShape ℤ ((curriedTensor C₂).flip.obj X)]
   [Abelian.HasFunctorialFlatResolution C₂]
 
-set_option profiler true in
 /-- The composition comparison of exact derived functors respects morphisms out of complexes
 concentrated in degree `0`, after composing with the derived counits. -/
 lemma leftDerivedFunctorFactorIso_hom_app_single
@@ -238,7 +237,6 @@ lemma leftDerivedUpperStarId_hom_app_unit (X : Scheme.{u}) :
     ← Functor.mapHomotopyCategorySingleHom_id]
   exact Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ X) (𝟙_ _)
 
-set_option profiler true in
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks of module
 objects is compatible with the unit comparisons. -/
 lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -247,7 +245,7 @@ lemma leftDerivedUpperStarComp_hom_app_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
           (leftDerivedUpperStarUnitIso Λ f).hom =
       (leftDerivedUpperStarUnitIso Λ (f ≫ g)).hom := by
   have h := Functor.leftDerivedFunctorFactorIso_hom_app_single (upperStarComp Λ f g)
-      (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
+    (Functor.Monoidal.εIso (g)^*⟦Λ⟧).inv (Functor.Monoidal.εIso (f)^*⟦Λ⟧).inv
   simp only [upperStarComp_hom_app_unit,
     ← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso] at h
   exact h
