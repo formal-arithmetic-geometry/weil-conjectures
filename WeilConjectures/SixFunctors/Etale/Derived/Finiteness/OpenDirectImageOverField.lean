@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.OpenImmersionField
 Let `j : X ⟶ Y` be an open immersion of schemes of finite type over a field `k` and let `Λ` be a
 finite ring whose exponent is invertible in `k`. On the étale sites, `Rj_*` preserves bounded
 constructibility, and it commutes with base change along `Y ×_k T ⟶ Y` for every `k`-scheme `T`
-of finite type, on bounded constructible complexes (blueprint
-`corollary-open-direct-image-over-field`).
+of finite type, on bounded constructible complexes.
 
 ## Main statements
 
@@ -38,17 +37,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] {X Y : Scheme.{u}}
 
-/-- Blueprint `corollary-open-direct-image-over-field`: Open direct image over a field.
-
-Let `k` be a field, let `Λ` be a finite ring killed by a positive integer invertible in `k`, and
+/-- Let `k` be a field, let `Λ` be a finite ring killed by a positive integer invertible in `k`, and
 let `j : X ⟶ Y` be an open immersion with `Y` of finite type over `k`. Then:
 
-1. (`corollary-open-direct-image-over-field--1`) `Rj_*` carries `D^b_c(X, Λ)` into
-   `D^b_c(Y, Λ)`;
-2. (`corollary-open-direct-image-over-field--2`) for every `k`-scheme `T` of finite type, with
-   `g_Y : Y_T ⟶ Y` the projection from `Y_T = Y ×_k T` and `j_T : X_T ⟶ Y_T`,
-   `g_X : X_T ⟶ X` the base change of `j` along `g_Y`, and every `K ∈ D^b_c(X, Λ)`, the base
-   change map `g_Y^* Rj_* K ⟶ Rj_{T,*} g_X^* K` is an isomorphism. -/
+1. `Rj_*` carries `D^b_c(X, Λ)` into `D^b_c(Y, Λ)`;
+2. for every `k`-scheme `T` of finite type, with `g_Y : Y_T ⟶ Y` the projection from
+   `Y_T = Y ×_k T` and `j_T : X_T ⟶ Y_T`, `g_X : X_T ⟶ X` the base change of `j` along `g_Y`,
+   and every `K ∈ D^b_c(X, Λ)`, the base change map
+   `g_Y^* Rj_* K ⟶ Rj_{T,*} g_X^* K` is an isomorphism. -/
 theorem boundedConstructible_rightDerivedLowerStar_and_isIso_baseChange [Finite Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (j : X ⟶ Y) [IsOpenImmersion j] :

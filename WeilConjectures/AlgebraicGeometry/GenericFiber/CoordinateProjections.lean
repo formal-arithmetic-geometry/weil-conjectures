@@ -14,8 +14,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinat
 Let `p : Y ⟶ S` be proper over an integral locally noetherian scheme, covered by finitely many
 opens `Y_α` with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`, and write
 `t_{α r} : Y_α ⟶ 𝔸¹_S` for the coordinate functions. This file bundles the two facts about the
-`t_{α r}` used in Deligne's generic constructibility theorem (blueprint
-`lemma-coordinate-projections`):
+`t_{α r}` used in Deligne's generic constructibility theorem:
 
 1. the coordinates lower the dimension of the generic fibre of any open `X ⊆ Y` by one
    (`AlgebraicGeometry.topologicalKrullDim_fiber_genericPoint_add_one_le`);
@@ -26,6 +25,12 @@ opens `Y_α` with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`, a
 ## Main statements
 
 - `AlgebraicGeometry.coordinate_projections`
+
+## Implementation details
+
+The source takes `S` affine and noetherian and `p` projective; the statement here only needs `S`
+integral and locally noetherian and `p` proper. The bound `dim ≤ n - 1` on the generic fibre is
+stated as `dim + 1 ≤ n`, so that an empty fibre (of dimension `⊥`) is covered.
 -/
 
 @[expose] public section
@@ -49,19 +54,15 @@ lemma topologicalKrullDim_fiber_comp_le {X X' S : Scheme.{u}} (g : X' ⟶ X) [Is
       exact x.2) ?_
   exact ((IsPreimmersion.isEmbedding g).isInducing.comp IsInducing.subtypeVal).codRestrict _
 
-/-- Blueprint `lemma-coordinate-projections`: Coordinate projections.
+/-- Let `S` be an integral locally noetherian scheme with generic point `η`, let `p : Y ⟶ S` be
+proper, let `Y = ⋃_α Y_α` be a finite open cover with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S`
+over `S`, and write `t_{α r} : Y_α ⟶ 𝔸¹_S` for the coordinate functions. Then:
 
-Let `S` be an integral locally noetherian scheme with generic point `η` and let `p : Y ⟶ S` be
-proper (the blueprint takes `S` affine and noetherian and `p` projective). Let
-`Y = ⋃_α Y_α` be a finite open cover with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`,
-and write `t_{α r} : Y_α ⟶ 𝔸¹_S` for the coordinate functions. Then:
-
-1. (`lemma-coordinate-projections--1`) if `X ⊆ Y` is open with `dim X_η ≤ n`, then for all
-   `α, r` the generic fibre of `t_{α r} : X ∩ Y_α ⟶ 𝔸¹_S` has dimension at most `n - 1`, stated
-   as `dim + 1 ≤ n` (an empty fibre has dimension `⊥`);
-2. (`lemma-coordinate-projections--2`) if `V_{α r} ⊆ 𝔸¹_S` are dense opens and
-   `G = ⋃_{α, r} t_{α r}⁻¹(V_{α r})`, then after shrinking `S` to a nonempty open `W`, the reduced
-   closed complement `Z = Y \ G` is finite over `W`. -/
+1. if `X ⊆ Y` is open with `dim X_η ≤ n`, then for all `α, r` the generic fibre of
+   `t_{α r} : X ∩ Y_α ⟶ 𝔸¹_S` has dimension at most `n - 1`;
+2. if `V_{α r} ⊆ 𝔸¹_S` are dense opens and `G = ⋃_{α, r} t_{α r}⁻¹(V_{α r})`, then after
+   shrinking `S` to a nonempty open `W`, the reduced closed complement `Z = Y \ G` is finite
+   over `W`. -/
 theorem coordinate_projections {S Y : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S]
     (p : Y ⟶ S) [IsProper p] {ι : Type u} [Finite ι] (U : ι → Y.Opens) (hU : ⨆ α, U α = ⊤)
     (σ : ι → Type u) [∀ α, Finite (σ α)] (e : ∀ α, (U α).toScheme ⟶ 𝔸(σ α; S))
