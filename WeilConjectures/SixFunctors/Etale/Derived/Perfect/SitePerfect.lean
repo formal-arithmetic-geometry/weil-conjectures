@@ -274,6 +274,7 @@ noncomputable def derivedEtaleLowerShriekLeftDerivedUpperStarAdjunction {U : Sch
       DerivedCategory.Qh (HomotopyCategory.quasiIso _ _) _ _
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the chase unfolds the derived unit, counit and tensor comparison on large objects
 omit [HasSmallSiteSheafify A] in
 open HomotopyCategory _root_.DerivedCategory in
