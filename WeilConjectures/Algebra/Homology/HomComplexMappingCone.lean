@@ -50,7 +50,6 @@ private lemma homObjMap_zero_right
   ext X φ
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The product comparison unfolds the chosen Hom-complex functor repeatedly.
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal Hom in the second variable commutes with mapping cones.
@@ -83,6 +82,7 @@ theorem homComplex_mappingCone_iso
     Nonempty (CochainComplex.mappingCone
         (((homComplexFunctor (R := R)).obj (op E)).map f) ≅
       homComplex (R := R) E (CochainComplex.mappingCone f)) := by
+  rw [CochainComplex.mappingCone, CochainComplex.mappingCone]
   classical
   let A := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
   let HG := ((homComplexFunctor (R := R)).obj (op E)).obj G
@@ -141,7 +141,7 @@ theorem homComplex_mappingCone_iso
     apply Fan.IsLimit.hom_ext (hp G (n + 1))
     intro p
     change (a n ≫ bg n) ≫ proj G (n + 1) p = pg n ≫ proj G (n + 1) p
-    rw [Category.assoc, hbg, ← Category.assoc, ha]
+    rw [Category.assoc, hbg n p, ← Category.assoc, ha n p]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
     dsimp only [ig, ii, fg]
@@ -153,7 +153,7 @@ theorem homComplex_mappingCone_iso
     apply Fan.IsLimit.hom_ext (hp I n)
     intro p
     change (a n ≫ bi n) ≫ proj I n p = pi n ≫ proj I n p
-    rw [Category.assoc, hbi, ← Category.assoc, ha]
+    rw [Category.assoc, hbi n p, ← Category.assoc, ha n p]
     simp only [Preadditive.add_comp, Category.assoc,
       SheafOfModules.homObjMap_comp_homObjMap, Category.id_comp]
     dsimp only [ig, ii, fi]
@@ -164,14 +164,14 @@ theorem homComplex_mappingCone_iso
   have hab (n : ℤ) : a n ≫ b n = 𝟙 (K.X n) := by
     apply HomologicalComplex.homotopyCofiber.ext_to_X hf n (n + 1) rfl
     · change (a n ≫ b n) ≫ pg n = (𝟙 _) ≫ pg n
-      rw [Category.assoc, hb₁, habg, Category.id_comp]
+      simp only [Category.assoc, hb₁ n, habg n, Category.id_comp]
     · change (a n ≫ b n) ≫ pi n = (𝟙 _) ≫ pi n
-      rw [Category.assoc, hb₂, habi, Category.id_comp]
+      simp only [Category.assoc, hb₂ n, habi n, Category.id_comp]
   have hba (n : ℤ) : b n ≫ a n = 𝟙 (H.X n) := by
     apply Fan.IsLimit.hom_ext (hp cf n)
     intro p
     change (b n ≫ a n) ≫ proj cf n p = (𝟙 _) ≫ proj cf n p
-    rw [Category.assoc, ha, Preadditive.comp_add]
+    rw [Category.assoc, ha n p, Preadditive.comp_add]
     simp only [← Category.assoc, hb₁, hb₂, hbg, hbi]
     simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
       Category.id_comp, ← Preadditive.comp_add, ← homObjMap_add_right]

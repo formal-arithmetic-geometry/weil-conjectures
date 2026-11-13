@@ -82,7 +82,7 @@ are only asserted to exist; they should be the maps induced by
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory Polynomial Pretriangulated Opposite TopologicalSpace
 
@@ -177,8 +177,31 @@ noncomputable def WeilSheaf.lowerStarConstantTwistIso {X Y : Scheme.{u}}
       (ProEtaleWeilSheaf.constantTwistCompLowerStarIso k₀ l φ b).app P.obj ≪≫
       (((WeilSheaf.lowerStar φ).obj P).constantTwistObjIso b).symm)
 
-set_option maxHeartbeats 1000000 in
--- the kernel unfolds the Weil-structure isomorphisms of the stalk comparisons
+/-- Transport a rescaled Frobenius comparison into a pairing with the dual module. -/
+private theorem exists_pairing_of_rescale_equiv
+    {K : Type v} [Field K] {M N H Q : FrobeniusModule.{max u v, v} K}
+    (q : K) {c t : K} (hc : c ≠ 0) (ht : t = 1) (hqc : q * c = 1)
+    (E : (M.rescale c).Equiv (N.rescale t)) (S : N.Equiv H.dual) (e : H.Equiv Q) :
+    ∃ f : M.carrier ≃ₗ[K] Module.Dual K Q.carrier,
+      ∀ x y, f (M.frobenius x) (Q.frobenius y) = q * f x y := by
+  refine ⟨E.toLinearEquiv ≪≫ₗ S.toLinearEquiv ≪≫ₗ e.toLinearEquiv.symm.dualMap,
+    fun x y ↦ ?_⟩
+  have hE := E.map_frobenius x
+  rw [show (M.rescale c).frobenius x = c • M.frobenius x from
+      FrobeniusModule.frobeniusEnd_rescale_apply hc x,
+    show (N.rescale t).frobenius (E.toLinearEquiv x) = t • N.frobenius (E.toLinearEquiv x) from
+      FrobeniusModule.frobeniusEnd_rescale_apply (ht ▸ one_ne_zero) _, map_smul] at hE
+  simp only [ht, one_smul] at hE
+  have hE' : E.toLinearEquiv (M.frobenius x) = q • N.frobenius (E.toLinearEquiv x) := by
+    rw [← hE, smul_smul, hqc, one_smul]
+  simp only [LinearEquiv.trans_apply]
+  erw [hE', map_smul, S.map_frobenius]
+  erw [LinearEquiv.dualMap_apply]
+  rw [LinearMap.smul_apply, FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
+    FrobeniusModule.Equiv.symm_map_frobenius e y, LinearEquiv.coe_coe,
+    LinearEquiv.symm_apply_apply, smul_eq_mul]
+  rfl
+
 /--
 For a dense open immersion `j : U₀ ↪ C₀` of smooth curves, a lisse Weil sheaf `F` on `U₀` and a
 closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perfect pairing
@@ -301,57 +324,96 @@ theorem exists_linearEquiv_dual_stalk_higherDirectImage
       zf).some
   have S₇ := (WeilSheaf.nonempty_equiv_stalk_upperStar i ((WeilComplex.homologySheaf 1).obj
       ((WeilComplex.derivedLowerStar j).obj (WeilSheaf.toComplex.obj F))) zf s hz hdeg).some
-  -- the linear algebra
-  set q : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l)
-  set d := (C ↘ Spec (CommRingCat.of k₀)).degreeOver s.1
+  -- Apply the pairing calculation to the stalk comparison as abstract Frobenius modules.
+  let q : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l)
+  let d := (C ↘ Spec (CommRingCat.of k₀)).degreeOver s.1
   have hcd : (c : PadicAlgCl l) ^ d = (q ^ d)⁻¹ := by
     rw [WeilSheaf.cyclotomicUnit_zpow_eq, zpow_neg, zpow_one, inv_pow]
   have hq : q ≠ 0 := Nat.cast_ne_zero.2 Nat.card_pos.ne'
-  have hk : (c : PadicAlgCl l) ^ d ≠ 0 := by
-    rw [hcd]
-    exact inv_ne_zero (pow_ne_zero _ hq)
   have hone : ((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-      (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 = 1 := by
-    simp
-  let Ψ := S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))
-  let ψ := S₆.trans S₇
-  refine ⟨Ψ.toLinearEquiv ≪≫ₗ S₅.toLinearEquiv ≪≫ₗ ψ.toLinearEquiv.symm.dualMap, fun a b ↦ ?_⟩
-  have hΨ := Ψ.map_frobenius a
-  rw [show ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).rescale
-      ((c : PadicAlgCl l) ^ d)).frobenius a = (c : PadicAlgCl l) ^ d •
-        (((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a from
-      FrobeniusModule.frobeniusEnd_rescale_apply hk a,
-    show (((H.dual hH).stalk zf).rescale
-      (((WeilSheaf.cyclotomicUnit k₀ l ^ (0 : ℤ) : (PadicAlgCl l)ˣ) : PadicAlgCl l) ^
-        (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1)).frobenius (Ψ.toLinearEquiv a) =
-      _ • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) from
-      FrobeniusModule.frobeniusEnd_rescale_apply (by rw [hone]; exact one_ne_zero) _,
-    map_smul] at hΨ
-  simp only [hone, one_smul] at hΨ
-  have hΨ' : Ψ.toLinearEquiv ((((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s).frobenius a) =
-      (q ^ d) • ((H.dual hH).stalk zf).frobenius (Ψ.toLinearEquiv a) := by
-    rw [← hΨ, smul_smul, show q ^ d * (c : PadicAlgCl l) ^ d = 1 by
-      rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)], one_smul]
-  simp only [LinearEquiv.trans_apply]
-  refine (congrArg (fun v ↦ ψ.toLinearEquiv.symm.dualMap (S₅.toLinearEquiv v) _) hΨ').trans ?_
-  rw [map_smul, S₅.map_frobenius]
-  have key (v : Module.Dual (PadicAlgCl l) (H.stalk zf).carrier) :
-      ψ.toLinearEquiv.symm.dualMap (q ^ d • (H.stalk zf).dual.frobenius v)
-          ((((WeilComplex.homologySheaf 1).obj ((WeilComplex.derivedLowerStar j).obj
-            (WeilSheaf.toComplex.obj F))).stalk s).frobenius b) =
-        q ^ d * ψ.toLinearEquiv.symm.dualMap v b := by
-    rw [LinearEquiv.dualMap_apply, LinearEquiv.dualMap_apply, LinearMap.smul_apply,
-      FrobeniusModule.dual_frobenius_apply, LinearMap.comp_apply,
-      FrobeniusModule.Equiv.symm_map_frobenius ψ b, LinearEquiv.coe_coe,
-      LinearEquiv.symm_apply_apply, smul_eq_mul]
+      (Z ↘ Spec (CommRingCat.of k₀)).degreeOver zf.1 = 1 := by simp
   have hqd : q ^ d = ((C ↘ Spec (CommRingCat.of k₀)).residueCard s.1 : PadicAlgCl l) := by
     simp [Scheme.Hom.residueCard, q, d]
-  refine (key _).trans ?_
-  rw [hqd]
-  rfl
+  rw [← hqd]
+  exact exists_pairing_of_rescale_equiv
+    (M := ((WeilSheaf.lowerStar j).obj (F.dual hF)).stalk s)
+    (N := (H.dual hH).stalk zf) (H := H.stalk zf)
+    (Q := ((WeilComplex.homologySheaf 1).obj ((WeilComplex.derivedLowerStar j).obj
+      (WeilSheaf.toComplex.obj F))).stalk s)
+    (q ^ d) (by rw [hcd]; exact inv_ne_zero (pow_ne_zero _ hq)) hone
+    (by rw [hcd, mul_inv_cancel₀ (pow_ne_zero _ hq)])
+    (S₂.symm.trans (S₁.symm.trans (S₃.trans S₄))) S₅ (S₆.trans S₇)
 
-set_option maxHeartbeats 1600000 in
--- the cohomology of the three terms of the triangle unfolds through the Weil structures
+/-- Transport the cohomology sequence of a triangle whose third term is concentrated in
+degree zero along Frobenius-equivariant comparisons of its outer terms. -/
+private theorem exact_boundary_of_triangle
+    (T : Triangle (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
+    (hT : T ∈ distTriang (WeilComplex k₀ l (Spec (CommRingCat.of k₀))))
+    (U R : ℤ → FrobeniusModule.{u + 1, 0} (PadicAlgCl l))
+    (EU : ∀ r, (T.obj₁.cohomologyFrobeniusModule r).Equiv (U r))
+    (EZ : ∀ r, (T.obj₃.cohomologyFrobeniusModule r).Equiv (R r))
+    (hZ : ∀ r, r ≠ 0 → Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier) :
+    (∃ (δ : (R 0).carrier →ₗ[PadicAlgCl l] (U 1).carrier)
+        (g : (U 1).carrier →ₗ[PadicAlgCl l]
+          (T.obj₂.cohomologyFrobeniusModule 1).carrier),
+        Function.Exact δ g ∧ Function.Surjective g ∧
+          (∀ x, δ ((R 0).frobenius x) = (U 1).frobenius (δ x)) ∧
+          ∀ x, g ((U 1).frobenius x) =
+            (T.obj₂.cohomologyFrobeniusModule 1).frobenius (g x)) ∧
+      ∃ h : (U 0).carrier →ₗ[PadicAlgCl l]
+          (T.obj₂.cohomologyFrobeniusModule 0).carrier,
+        Function.Injective h ∧ ∀ x, h ((U 0).frobenius x) =
+          (T.obj₂.cohomologyFrobeniusModule 0).frobenius (h x) := by
+  refine ⟨⟨(EU 1).toLinearEquiv.toLinearMap ∘ₗ WeilComplex.cohomologyδ T 0 1 rfl ∘ₗ
+      (EZ 0).toLinearEquiv.symm.toLinearMap,
+    WeilComplex.cohomologyMap T.mor₁ 1 ∘ₗ (EU 1).toLinearEquiv.symm.toLinearMap, ?_, ?_, ?_, ?_⟩,
+    WeilComplex.cohomologyMap T.mor₁ 0 ∘ₗ (EU 0).toLinearEquiv.symm.toLinearMap, ?_, ?_⟩
+  · intro y
+    have hex := WeilComplex.exact_cohomologyδ_right T 0 1 rfl hT ((EU 1).toLinearEquiv.symm y)
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm y) = 0 ↔
+      ∃ x, (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm x)) = y
+    rw [hex]
+    constructor
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv x, ?_⟩
+      rw [LinearEquiv.symm_apply_apply, hx, LinearEquiv.apply_symm_apply]
+    · rintro ⟨x, hx⟩
+      refine ⟨(EZ 0).toLinearEquiv.symm x, ?_⟩
+      rw [← hx, LinearEquiv.symm_apply_apply]
+  · intro z
+    have := hZ 1 one_ne_zero
+    obtain ⟨x, hx⟩ := (WeilComplex.exact_cohomologyMap T 1 hT z).1 (Subsingleton.elim _ _)
+    refine ⟨(EU 1).toLinearEquiv x, ?_⟩
+    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm
+      ((EU 1).toLinearEquiv x)) = z
+    rw [LinearEquiv.symm_apply_apply, hx]
+  · intro x
+    change (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
+        ((EZ 0).toLinearEquiv.symm ((R 0).frobenius x))) =
+      (U 1).frobenius ((EU 1).toLinearEquiv
+        (WeilComplex.cohomologyδ T 0 1 rfl ((EZ 0).toLinearEquiv.symm x)))
+    erw [(EZ 0).symm_map_frobenius x, WeilComplex.cohomologyδ_frobenius, (EU 1).map_frobenius]
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 1
+        ((EU 1).toLinearEquiv.symm ((U 1).frobenius x)) =
+      (T.obj₂.cohomologyFrobeniusModule 1).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm x))
+    erw [(EU 1).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+  · refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
+    change WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x) = 0 at hx
+    obtain ⟨z, hz⟩ := (WeilComplex.exact_cohomologyδ_right T (-1) 0 (by norm_num) hT _).1 hx
+    have := hZ (-1) (by norm_num)
+    rw [Subsingleton.elim z 0, map_zero] at hz
+    have := congrArg (EU 0).toLinearEquiv hz
+    rwa [LinearEquiv.apply_symm_apply, map_zero, eq_comm] at this
+  · intro x
+    change WeilComplex.cohomologyMap T.mor₁ 0
+        ((EU 0).toLinearEquiv.symm ((U 0).frobenius x)) =
+      (T.obj₂.cohomologyFrobeniusModule 0).frobenius
+        (WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x))
+    erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
+
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
 of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
 open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
@@ -418,57 +480,8 @@ theorem exists_exact_compactlySupportedCohomology_boundary
   have hZ (r : ℤ) (hr : r ≠ 0) : Subsingleton (T.obj₃.cohomologyFrobeniusModule r).carrier := by
     have h := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite B hr
     exact ⟨fun a b ↦ (EZ r).toLinearEquiv.injective (h.elim _ _)⟩
-  refine ⟨⟨(EU 1).toLinearEquiv.toLinearMap ∘ₗ WeilComplex.cohomologyδ T 0 1 rfl ∘ₗ
-      (EZ 0).toLinearEquiv.symm.toLinearMap,
-    WeilComplex.cohomologyMap T.mor₁ 1 ∘ₗ (EU 1).toLinearEquiv.symm.toLinearMap, ?_, ?_, ?_, ?_⟩,
-    WeilComplex.cohomologyMap T.mor₁ 0 ∘ₗ (EU 0).toLinearEquiv.symm.toLinearMap, ?_, ?_⟩
-  · intro y
-    have hex := WeilComplex.exact_cohomologyδ_right T 0 1 rfl hT ((EU 1).toLinearEquiv.symm y)
-    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm y) = 0 ↔
-      ∃ x, (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
-        ((EZ 0).toLinearEquiv.symm x)) = y
-    rw [hex]
-    constructor
-    · rintro ⟨x, hx⟩
-      refine ⟨(EZ 0).toLinearEquiv x, ?_⟩
-      rw [LinearEquiv.symm_apply_apply, hx, LinearEquiv.apply_symm_apply]
-    · rintro ⟨x, hx⟩
-      refine ⟨(EZ 0).toLinearEquiv.symm x, ?_⟩
-      rw [← hx, LinearEquiv.symm_apply_apply]
-  · intro z
-    have := hZ 1 one_ne_zero
-    obtain ⟨x, hx⟩ := (WeilComplex.exact_cohomologyMap T 1 hT z).1 (Subsingleton.elim _ _)
-    refine ⟨(EU 1).toLinearEquiv x, ?_⟩
-    change WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm
-      ((EU 1).toLinearEquiv x)) = z
-    rw [LinearEquiv.symm_apply_apply, hx]
-  · intro x
-    change (EU 1).toLinearEquiv (WeilComplex.cohomologyδ T 0 1 rfl
-        ((EZ 0).toLinearEquiv.symm ((B.compactlySupportedCohomology 0).frobenius x))) =
-      (F.compactlySupportedCohomology 1).frobenius ((EU 1).toLinearEquiv
-        (WeilComplex.cohomologyδ T 0 1 rfl ((EZ 0).toLinearEquiv.symm x)))
-    erw [(EZ 0).symm_map_frobenius x, WeilComplex.cohomologyδ_frobenius, (EU 1).map_frobenius]
-    rfl
-  · intro x
-    change WeilComplex.cohomologyMap T.mor₁ 1
-        ((EU 1).toLinearEquiv.symm ((F.compactlySupportedCohomology 1).frobenius x)) =
-      (A.compactlySupportedCohomology 1).frobenius
-        (WeilComplex.cohomologyMap T.mor₁ 1 ((EU 1).toLinearEquiv.symm x))
-    erw [(EU 1).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
-    rfl
-  · refine (injective_iff_map_eq_zero _).2 fun x hx ↦ ?_
-    change WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x) = 0 at hx
-    obtain ⟨z, hz⟩ := (WeilComplex.exact_cohomologyδ_right T (-1) 0 (by norm_num) hT _).1 hx
-    have := hZ (-1) (by norm_num)
-    rw [Subsingleton.elim z 0, map_zero] at hz
-    have := congrArg (EU 0).toLinearEquiv hz
-    rwa [LinearEquiv.apply_symm_apply, map_zero, eq_comm] at this
-  · intro x
-    change WeilComplex.cohomologyMap T.mor₁ 0
-        ((EU 0).toLinearEquiv.symm ((F.compactlySupportedCohomology 0).frobenius x)) =
-      (A.compactlySupportedCohomology 0).frobenius
-        (WeilComplex.cohomologyMap T.mor₁ 0 ((EU 0).toLinearEquiv.symm x))
-    erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
-    rfl
+  exact exact_boundary_of_triangle T hT
+    (fun r ↦ F.compactlySupportedCohomology r)
+    (fun r ↦ B.compactlySupportedCohomology r) EU EZ hZ
 
 end AlgebraicGeometry

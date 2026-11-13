@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.AffineRectangleProjectionSectionsTensor
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -152,8 +153,6 @@ private def rightSectionEquiv :
   simp only [← CommRingCat.comp_apply, ← Y.presheaf.map_comp]
   rfl
 
-set_option maxHeartbeats 1000000 in
--- The section tensor comparison elaborates several compatible restricted scalar actions.
 private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
     (hA : IsAffineOpen A) (hV : IsAffineOpen V)
     (K : (Limits.pullback f g).Opens)
@@ -171,84 +170,13 @@ private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
             (((Classical.choose (exists_tensorPullbackAdjunction
               (pullback.snd f g))).unit.app G).val.app (op V) t)) := by
   classical
+  subst K
+  let K := (pullback.fst f g) ⁻¹ᵁ A ⊓ (pullback.snd f g) ⁻¹ᵁ V
   let Z := Limits.pullback f g
-  let R := Γ(X, A)
-  let S := Γ(Y, V)
-  let C := Γ(Z, K)
-  let i := (pullback.fst f g).appLE A K hK
-  let j := (pullback.snd f g).appLE V K hKV
-  let : Algebra k R := (scalarMap f A).toAlgebra
-  let : Algebra k S := (scalarMap g V).toAlgebra
-  let : Algebra k C := (scalarMap (pullback.fst f g ≫ f) K).toAlgebra
-  let : Algebra R C := i.hom.toAlgebra
-  let : Algebra S C := j.hom.toAlgebra
-  have hi : scalarMap (pullback.fst f g ≫ f) K = i.hom.comp (scalarMap f A) := by
-    exact (scalarMap_appLE f A (pullback.fst f g) K hK).symm
-  have hj : scalarMap (pullback.fst f g ≫ f) K = j.hom.comp (scalarMap g V) := by
-    rw [pullback.condition]
-    exact (scalarMap_appLE g V (pullback.snd f g) K hKV).symm
-  let : IsScalarTower k R C := IsScalarTower.of_algebraMap_eq' hi
-  let : IsScalarTower k S C := IsScalarTower.of_algebraMap_eq' hj
-  let H := IsPullback.of_hasPullback f g
-  have htopA : A ≤ f ⁻¹ᵁ ⊤ := by simp
-  have htopV : V ≤ g ⁻¹ᵁ ⊤ := by simp
-  have hp := (isIso_pushoutSection_iff H htopV htopA hKeq).mp
-    (isIso_pushoutSection_of_isAffineOpen H htopV htopA hKeq
-      (isAffineOpen_top _) hV hA)
-  have hp' : IsPushout (CommRingCat.ofHom (scalarMap f A))
-      (CommRingCat.ofHom (scalarMap g V)) i j := by
-    refine hp.of_iso (Scheme.ΓSpecIso (.of k)) (Iso.refl _) (Iso.refl _)
-      (Iso.refl _) ?_ ?_ (by rfl) (by rfl)
-    · simp [scalarMap, Scheme.Hom.appTop, Scheme.Hom.appLE]
-    · simp [scalarMap, Scheme.Hom.appTop, Scheme.Hom.appLE]
-  let : Algebra.IsPushout k R S C := CommRingCat.isPushout_iff_isPushout.mp hp'
-  have hAffineK : IsAffineOpen K := by
-    rw [hKeq]
-    exact isAffineOpen_preimage_inf_preimage_pullback f g hA hV
-  obtain ⟨cF, hcF, hlinF, hpF, _⟩ := exists_tensorPullback_affine_sections
-    (pullback.fst f g) ⟨A, hA⟩ ⟨K, hAffineK⟩ hK
-  obtain ⟨cG, hcG, hlinG, hpG, _⟩ := exists_tensorPullback_affine_sections
-    (pullback.snd f g) ⟨V, hV⟩ ⟨K, hAffineK⟩ hKV
-  let M : Type w := Γ(F, A)
-  let N : Type w := Γ(G, V)
-  let P : Type w := Γ((tensorPullback (pullback.fst f g)).obj F, K)
-  let Q : Type w := Γ((tensorPullback (pullback.snd f g)).obj G, K)
-  let : Module k M := Module.compHom _ (scalarMap f A)
-  let : Module k N := Module.compHom _ (scalarMap g V)
-  let : Module R M := inferInstanceAs (Module Γ(X, A) Γ(F, A))
-  let : Module S N := inferInstanceAs (Module Γ(Y, V) Γ(G, V))
-  let : Module C P := inferInstanceAs
-    (Module Γ(Z, K) Γ((tensorPullback (pullback.fst f g)).obj F, K))
-  let : Module C Q := inferInstanceAs
-    (Module Γ(Z, K) Γ((tensorPullback (pullback.snd f g)).obj G, K))
-  let eF : C ⊗[R] M ≃ₗ[C] P := LinearEquiv.ofBijective
-    { toFun := fun z ↦ cF F inferInstance (TensorProduct.comm R C M z)
-      map_add' := by intros; simp only [map_add]
-      map_smul' := by
-        intro c z
-        have h := hlinF F inferInstance c (TensorProduct.comm R C M z)
-        change cF F inferInstance ((TensorProduct.comm R M C).symm
-          (c • (TensorProduct.comm R M C) ((TensorProduct.comm R M C).symm z))) =
-            c • cF F inferInstance ((TensorProduct.comm R M C).symm z) at h
-        rw [LinearEquiv.apply_symm_apply] at h
-        exact h }
-    ((hcF F inferInstance).comp (TensorProduct.comm R C M).bijective)
-  let eG : C ⊗[S] N ≃ₗ[C] Q := LinearEquiv.ofBijective
-    { toFun := fun z ↦ cG G inferInstance (TensorProduct.comm S C N z)
-      map_add' := by intros; simp only [map_add]
-      map_smul' := by
-        intro c z
-        have h := hlinG G inferInstance c (TensorProduct.comm S C N z)
-        change cG G inferInstance ((TensorProduct.comm S N C).symm
-          (c • (TensorProduct.comm S N C) ((TensorProduct.comm S N C).symm z))) =
-            c • cG G inferInstance ((TensorProduct.comm S N C).symm z) at h
-        rw [LinearEquiv.apply_symm_apply] at h
-        exact h }
-    ((hcG G inferInstance).comp (TensorProduct.comm S C N).bijective)
-  let : IsScalarTower k R M := IsScalarTower.of_algebraMap_smul (by intros; rfl)
-  let : IsScalarTower k S N := IsScalarTower.of_algebraMap_smul (by intros; rfl)
-  let d := externalTensorAlgebraEquiv k R S C M N
-  let e := d.symm.toAddEquiv.trans (TensorProduct.congr eF eG).toAddEquiv
+  have hAffineK : IsAffineOpen K :=
+    isAffineOpen_preimage_inf_preimage_pullback f g hA hV
+  obtain ⟨e, he⟩ := exists_affine_rectangle_projection_sections_tensor
+    k X Y f g A V hA hV F G
   let P' := (tensorPullback (pullback.fst f g)).obj F
   let Q' := (tensorPullback (pullback.snd f g)).obj G
   have hP : P'.IsQuasicoherent := by
@@ -267,18 +195,9 @@ private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
     ((quasiCoherent_tensor_product_affine_sections P' Q').2 K hAffineK)
   refine ⟨e.trans b.toAddEquiv, ?_⟩
   intro s t
-  change M at s
-  change N at t
-  have hd : d.symm (s ⊗ₜ[k] t) = (1 ⊗ₜ[R] s) ⊗ₜ[C] (1 ⊗ₜ[S] t) := by
-    apply d.injective
-    rw [d.apply_symm_apply]
-    exact (externalTensorAlgebraEquiv_tmul k R S C M N s t).symm
-  change tensorSectionsMap P' Q' K
-    ((TensorProduct.congr eF eG) (d.symm (s ⊗ₜ[k] t))) = _
-  rw [hd, TensorProduct.congr_tmul, tensorSectionsMap_tmul]
-  change tmulSection (cF F inferInstance (s ⊗ₜ[R] (1 : C)))
-    (cG G inferInstance (t ⊗ₜ[S] (1 : C))) = _
-  rw [hpF, hpG, one_smul, one_smul]
+  change tensorSectionsMap P' Q' K (e (s ⊗ₜ[k] t)) = _
+  rw [he, tensorSectionsMap_tmul]
+  rfl
 
 /-- On one affine product open, the external tensor-section map is an additive
 isomorphism, normalized by the original projection adjunction units.

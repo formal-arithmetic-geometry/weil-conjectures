@@ -66,8 +66,6 @@ namespace Correspondence.ProperPushforwardDiagram
 variable {c : Correspondence ℓ K} {Y : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] (P : c.ProperPushforwardDiagram Y)
 
-set_option maxHeartbeats 2000000 in
--- the compactly supported direct images are unfolded in the defeq checks
 /-- **The class of the coefficient pushforward** (blueprint `lem-trf-trace-source-exchange`,
 identity (b)): `[δ ∘ Rg_* u ∘ γ] = Φ ∘ Rq_* [u] ∘ Ξ ∘ Rb_! η_g`. -/
 theorem class_pushforward :
@@ -80,13 +78,16 @@ theorem class_pushforward :
         (boundedConstructibleLowerStar ℓ (prod.map P.f P.f)).map c.class ≫
         classTransportMap ℓ P.f K := by
   apply classTest_injective
-  rw [classTest_comp, classTest_comp, classTest_map_comp_classTransportMap]
+  conv_rhs => rw [classTest_comp, classTest_comp]
+  simp only [classTest_map_comp_classTransportMap]
   simp only [Correspondence.class]
-  rw [classTest_correspondenceClassEquiv_symm, classTest_correspondenceClassEquiv_symm,
+  simp only [classTest_correspondenceClassEquiv_symm,
     lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ P.pushforward.support_fst.symm,
     lowerShriek_map_comp_comp_eqToHom_comp_counit ℓ c.support_fst.symm]
   simp only [pushforwardCoeff, pushforwardCoeffCounit, lowerStarUpperShriekExchange]
-  rw [Adjunction.map_comp_mateEquiv_app_comp_counit]
+  simp only [Adjunction.map_comp_mateEquiv_app_comp_counit
+    (boundedConstructibleUpperShriekAdjunction ℓ c.c₁)
+    (boundedConstructibleUpperShriekAdjunction ℓ P.b₁)]
   have h := congrArg (· ≫ (boundedConstructibleLowerStar ℓ P.f).map
     ((boundedConstructibleLowerShriek ℓ c.c₁).map c.u ≫
       (boundedConstructibleUpperShriekAdjunction ℓ c.c₁).counit.app K)) P.class_pushforward_core

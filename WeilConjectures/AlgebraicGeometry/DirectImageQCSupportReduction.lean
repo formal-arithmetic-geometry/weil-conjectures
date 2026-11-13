@@ -39,7 +39,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 700000 in
 -- Derived restriction and composition expand large localization and scalar-restriction terms.
 -- Coherence is redundant because proper-support hypotheses already include closedness.
 set_option linter.unusedVariables false in
@@ -134,7 +133,9 @@ theorem directImage_qc_support_reduction
                 (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj E) ≅
           (schemeDerivedDirectImage f).obj E) := by
   classical
-  obtain ⟨a, b, hab⟩ := hbounded
+  let a := hbounded.choose
+  let b := hbounded.choose_spec.choose
+  have hab := hbounded.choose_spec.choose_spec
   choose Z hZ hpZ using hsupport
   let I := {n : ℤ // n ∈ Finset.Icc a b}
   let e := Fintype.equivFin I
@@ -168,7 +169,12 @@ theorem directImage_qc_support_reduction
   have : IsProper (i ≫ f) := hpT
   let : CompactSpace (Scheme.IdealSheafData.vanishingIdeal T).subscheme :=
     QuasiCompact.compactSpace_of_compactSpace (i ≫ f)
-  obtain ⟨U, g, hUc, hg, hgi⟩ := i.exists_isCompact_isClosedImmersion
+  have hshrink := i.exists_isCompact_isClosedImmersion
+  let U := hshrink.choose
+  let g := hshrink.choose_spec.choose
+  have hUc := hshrink.choose_spec.choose_spec.1
+  have hg := hshrink.choose_spec.choose_spec.2.1
+  have hgi := hshrink.choose_spec.choose_spec.2.2
   have hTU : (T : Set X) ⊆ (U : Set X) := by
     have hi : Set.range i = (T : Set X) := by simp [i]
     rw [← hi]

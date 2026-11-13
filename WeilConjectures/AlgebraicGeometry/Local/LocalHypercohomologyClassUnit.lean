@@ -129,7 +129,22 @@ private theorem sheafification_normalization
   erw [Category.comp_id] at hh
   simpa only [Category.assoc] using hh.symm
 
-set_option maxHeartbeats 800000 in
+-- Pasting the resolution, homology, and sheafification squares reduces the
+-- comparison to cancellation along the homology isomorphism of the resolution.
+private theorem sheafification_resolution_diagram
+    {C : Type*} [Category C] {A B D E K L M N P Q : C}
+    {u : A ⟶ B} {a : B ⟶ D} {b : D ⟶ E} {s : E ⟶ K} [Mono s]
+    {v : B ⟶ L} {m : L ⟶ M} {g : D ⟶ M} {h : M ⟶ K}
+    {r : L ⟶ N} {p : N ⟶ P} {c : P ⟶ K}
+    {t : A ⟶ N} {d : A ⟶ Q} {e : Q ⟶ P} {f : Q ⟶ E}
+    (hn : v ≫ m = a ≫ g) (hf : g ≫ h = b ≫ s)
+    (hm : m ≫ h = r ≫ p ≫ c) (hu : u ≫ v ≫ r = t)
+    (hp : t ≫ p = d ≫ e) (hc : e ≫ c = f ≫ s) :
+    u ≫ a ≫ b = d ≫ f := by
+  apply (cancel_mono s).1
+  simp only [Category.assoc]
+  rw [← hf, ← reassoc_of% hn, hm, reassoc_of% hu, reassoc_of% hp, hc]
+
 -- This compares homology in module sheaves, abelian sheaves and abelian presheaves.
 private theorem sheafification_unit_of_resolution
     {Y : RingedSpace.{u}}
@@ -154,40 +169,19 @@ private theorem sheafification_unit_of_resolution
   let H := DerivedCategory.homologyFunctor ((Opens Y)ᵒᵖ ⥤ AddCommGrpCat.{u}) q
   let r := asIso (DerivedCategory.Q.map s)
   have hn := sheafification_normalization q J (DerivedCategory.Q.obj I) r
+  change S.map (H.map ((RingedSpace.derivedLocalAbelianSections Y).map
+      (DerivedCategory.Q.map s))) ≫
+      (RingedSpace.localHypercohomologySheafificationModel q J).hom =
+    (RingedSpace.localHypercohomologySheafificationAt q (DerivedCategory.Q.obj I)).hom ≫
+      T.map ((DerivedCategory.homologyFunctor _ q).map (DerivedCategory.Q.map s)) at hn
   have hc := (RingedSpace.complexSheafificationIso Y q).hom.naturality s
   have hf := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality s
   have hp := (DerivedCategory.homologyFunctorFactors _ q).hom.naturality
     ((F.mapHomologicalComplex (.up ℤ)).map s)
-  have hu := localComplexUnit_resolution F (RingedSpace.localSectionsEnoughKInjectives Y) s
-  have : IsIso (T.map (HomologicalComplex.homologyMap s q)) := by infer_instance
-  apply (cancel_mono (T.map (HomologicalComplex.homologyMap s q))).1
   dsimp only [Functor.comp_map] at hf hp hc
-  change (DerivedCategory.homologyFunctor _ q).map (DerivedCategory.Q.map s) ≫
-      (DerivedCategory.homologyFunctorFactors _ q).hom.app J =
-    (DerivedCategory.homologyFunctorFactors _ q).hom.app I ≫
-      HomologicalComplex.homologyMap s q at hf
-  change S.map (H.map ((localComplexUnit F
-      (RingedSpace.localSectionsEnoughKInjectives Y)).app I)) ≫
-      (RingedSpace.localHypercohomologySheafificationAt q (DerivedCategory.Q.obj I)).hom ≫
-      T.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app I) ≫
-      T.map (HomologicalComplex.homologyMap s q) = _
-  erw [← T.map_comp, ← hf, T.map_comp]
-  erw [← Category.assoc _ (T.map _) (T.map _), ← hn]
-  dsimp only [RingedSpace.localHypercohomologySheafificationModel,
-    Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom, Iso.app_inv]
-  simp only [Functor.map_comp, Category.assoc]
-  change S.map (H.map ((localComplexUnit F
-      (RingedSpace.localSectionsEnoughKInjectives Y)).app I)) ≫
-      S.map (H.map ((RingedSpace.derivedLocalAbelianSections Y).map
-        (DerivedCategory.Q.map s))) ≫
-      S.map (H.map ((F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
-        (RingedSpace.localSectionsEnoughKInjectives Y) (𝟙 J)).hom)) ≫
-      S.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app
-        ((F.mapHomologicalComplex (.up ℤ)).obj J)) ≫
-      (RingedSpace.localSectionComplexSheafificationIso Y q J).hom ≫
-      T.map ((DerivedCategory.homologyFunctorFactors _ q).inv.app J) ≫
-      T.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app J) = _
-  erw [← T.map_comp, Iso.inv_hom_id_app, T.map_id, Category.comp_id]
+  have hf' := congrArg T.map hf
+  have hp' := congrArg S.map hp
+  simp only [Functor.map_comp] at hf' hp'
   have hcomp :
       (RingedSpace.derivedLocalAbelianSections Y).map (DerivedCategory.Q.map s) ≫
         (F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
@@ -196,13 +190,25 @@ private theorem sheafification_unit_of_resolution
         (RingedSpace.localSectionsEnoughKInjectives Y) s).hom := by
     simp [Functor.rightDerivedFunctorOfQuasiIsoResolutionsObjIso,
       RingedSpace.derivedLocalAbelianSections, F]
-  erw [← S.map_comp_assoc
-    (H.map ((RingedSpace.derivedLocalAbelianSections Y).map (DerivedCategory.Q.map s)))
-    (H.map ((F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
-      (RingedSpace.localSectionsEnoughKInjectives Y) (𝟙 J)).hom)),
-    ← H.map_comp, hcomp, ← S.map_comp_assoc, ← H.map_comp, hu]
-  erw [← S.map_comp_assoc, hp, S.map_comp_assoc, hc]
-  rfl
+  have hu := localComplexUnit_resolution F (RingedSpace.localSectionsEnoughKInjectives Y) s
+  rw [← hcomp] at hu
+  have hu' := congrArg (fun z ↦ S.map (H.map z)) hu
+  simp only [Functor.map_comp] at hu'
+  have hm : (RingedSpace.localHypercohomologySheafificationModel q J).hom ≫
+      T.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app J) =
+    S.map (H.map ((F.rightDerivedFunctorOfQuasiIsoResolutionsObjIso
+      (RingedSpace.localSectionsEnoughKInjectives Y) (𝟙 J)).hom)) ≫
+      S.map ((DerivedCategory.homologyFunctorFactors _ q).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj J)) ≫
+      (RingedSpace.localSectionComplexSheafificationIso Y q J).hom := by
+    dsimp only [RingedSpace.localHypercohomologySheafificationModel,
+      Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom, Iso.app_inv]
+    simp only [Functor.map_comp, Category.assoc]
+    erw [((DerivedCategory.homologyFunctorFactors _ q).app J).inv_hom_id_map T,
+      Category.comp_id]
+  have : Mono (T.map ((HomologicalComplex.homologyFunctor _ (.up ℤ) q).map s)) :=
+    inferInstanceAs (Mono (T.map (HomologicalComplex.homologyMap s q)))
+  exact sheafification_resolution_diagram hn hf' hm hu' hp' hc
 
 private theorem sheafification_unit
     {Y : RingedSpace.{u}}

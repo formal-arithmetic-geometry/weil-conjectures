@@ -38,8 +38,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 600000 in
--- Comparing the derived direct-image expressions and localized module instances is expensive.
 /-- Construct the local finite-free model and its degree-one comparison square, without
 assuming injectivity on H¹ and without realizing degree-zero cycles as sections.
 Source: Stacks Project, Tag 0BF2, through the displayed chain maps, using Tags 0B91,
@@ -117,8 +115,21 @@ theorem picard_h1_base_descent_local_model
                   (((Over.pullback (S.fromSpecResidueField s)).map
                     (Over.homMk (U := Over.mk (fi i)) (V := Over.mk f)
                       (ui i) (hui i))).left) 1 (α z) := by
-  obtain ⟨U, hwU, hU, htrivial, m, K, hbounded, hbetti, hrank, e0, e1, hE, hdw⟩ :=
-    picard_h1_common_minimal_model f Xi fi ui hui hO hOi L W k w s hw hLi hLs
+  -- Explicit existential elimination avoids generalizing the large dependent conclusion.
+  refine (picard_h1_common_minimal_model
+    f Xi fi ui hui hO hOi L W k w s hw hLi hLs).elim fun U hmodel ↦ ?_
+  refine hmodel.elim fun hwU hmodel ↦ ?_
+  have hU := hmodel.1
+  have htrivial := hmodel.2.1
+  refine hmodel.2.2.elim fun m hmodel ↦ ?_
+  refine hmodel.elim fun K hmodel ↦ ?_
+  have hbounded := hmodel.1
+  have hbetti := hmodel.2.1
+  have hrank := hmodel.2.2.1
+  refine hmodel.2.2.2.elim fun e0 hmodel ↦ ?_
+  refine hmodel.elim fun e1 hmodel ↦ ?_
+  have hE := hmodel.1
+  have hdw := hmodel.2
   have hK : IsStrictlyPerfect W U K := by
     refine ⟨hbounded, fun j ↦ ?_⟩
     obtain ⟨e⟩ := hrank j
@@ -135,12 +146,13 @@ theorem picard_h1_base_descent_local_model
       ext i
       exact Fin.elim0 i.down
     exact hfree.of_iso e
-  obtain ⟨q, b, hb, hcomparison⟩ :=
-    picard_h1_fixed_model_comparison f Xi fi ui hui hO hOi L W k w s hw hLs
-      U hwU hU htrivial m K hK hnegative hrank e0 e1 hE
+  refine (picard_h1_fixed_model_comparison f Xi fi ui hui hO hOi L W k w s hw hLs
+    U hwU hU htrivial m K hK hnegative hrank e0 e1 hE).elim fun q hcomparison ↦ ?_
+  refine hcomparison.elim fun b hcomparison ↦ ?_
+  have hb := hcomparison.1
   let d := e1 ((K.d 0 1).val.app (.op (Over.mk (𝟙 U))) (e0.symm 1))
   refine ⟨U, hwU, hU, m, q, d, b, K, hK, hnegative, e0, e1, hE, ?_, hdw,
-    hb 1, hcomparison⟩
+    hb 1, hcomparison.2⟩
   intro a
   have ha : e0.symm a = a • e0.symm 1 := by
     rw [← e0.symm.map_smul]
