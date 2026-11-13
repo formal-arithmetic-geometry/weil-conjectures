@@ -382,20 +382,20 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
         sq.w.symm) ≪≫
       (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom
     (derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) sq.toCommSq)
-    (by
-      have HN := native_base_change_mate (R l E n) sq.toCommSq
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
-        exactByConversion h)
+    (by rfl)
     (by
       intro M
       have HC := strictFinitePullbackSquareCoherence l E b sq n M
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
-        exactByConversion h)
+        let start ← IO.getNumHeartbeats
+        exactByConversion h
+        Lean.logInfo m!"coherence conversion heartbeats: {((← IO.getNumHeartbeats) - start) / 1000}")
     N (coordinates.property f n) (coordinates.property f' n)
   run_tac Lean.Elab.Tactic.withMainContext do
     let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    let start ← IO.getNumHeartbeats
     exactByConversion h
+    Lean.logInfo m!"final conversion heartbeats: {((← IO.getNumHeartbeats) - start) / 1000}"
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek
