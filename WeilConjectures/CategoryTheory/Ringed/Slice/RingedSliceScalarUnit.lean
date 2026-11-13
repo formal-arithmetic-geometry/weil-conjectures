@@ -258,7 +258,6 @@ private theorem total_hom_ext
 
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
-set_option maxHeartbeats 800000 in
 -- Keep the representative scalar square at its normalized endpoints.
 include hd in
 set_option backward.isDefEq.respectTransparency true in
