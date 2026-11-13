@@ -243,6 +243,26 @@ private theorem localPieceBoundedInjectiveCocone
     exact hβvq
   exact ⟨J, c, β, βv, hβ, hβq, hβvq, hJa, hca, hJi, hci, hq⟩
 
+private theorem localPieceCostalkModelModuleColimits
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (I : Type (u + 1)) [SmallCategory I] :
+    HasColimitsOfShape I
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) := by
+  infer_instance
+
+attribute [local instance 2000] localPieceCostalkModelModuleColimits
+
+private theorem localPieceCostalkModelComplexColimits
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (I : Type (u + 1)) [SmallCategory I] :
+    HasColimitsOfShape I (CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
+  infer_instance
+
+attribute [local instance 2000] localPieceCostalkModelComplexColimits
+
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
@@ -309,11 +329,13 @@ theorem condensed_local_piece_costalk_model
   classical
   let A := Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)
   let B := Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)
-  have : HasColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I A := localPieceCostalkModelModuleColimits Λ T I
   have : HasExactColimitsOfShape I A := inferInstance
-  have : HasColimitsOfShape I B := inferInstance
-  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
-  have : HasColimitsOfShape I (CochainComplex B ℤ) := inferInstance
+  have : HasColimitsOfShape I B := localPieceCostalkModelModuleColimits Λ U I
+  have : HasColimitsOfShape I (CochainComplex A ℤ) :=
+    localPieceCostalkModelComplexColimits Λ T I
+  have : HasColimitsOfShape I (CochainComplex B ℤ) :=
+    localPieceCostalkModelComplexColimits Λ U I
   obtain ⟨hclosed, H₀, ⟨ash⟩⟩ := closedAdjoint T Λ i
   let _ := hclosed
   have := ash.right_adjoint_additive
@@ -331,6 +353,8 @@ theorem condensed_local_piece_costalk_model
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=
     (CondensedRing.upperStarLowerStarAdjunction Λ j).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
+  have : HasColimit (J ⋙ H.mapHomologicalComplex (.up ℤ)) :=
+    HasColimitsOfShape.has_colimit _
   have hH : QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
     exact quasiIso_desc_mapCocone (CondensedRing.upperStar Λ j)
