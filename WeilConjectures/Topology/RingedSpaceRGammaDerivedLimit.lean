@@ -194,7 +194,6 @@ private theorem map_isDerivedLimitTriangle_of_preservesProduct
             e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
         simp))
 
-set_option profiler true in
 /-- Derived sections over an open preserve Roos triangles and satisfy the Milnor
 short exact sequence.  The functor `RΓ(U,-)` is represented by K-injective
 resolutions of complexes of modules, via `openModuleDerivedSections`.
