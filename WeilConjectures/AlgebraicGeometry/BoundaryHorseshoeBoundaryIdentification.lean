@@ -85,7 +85,6 @@ theorem boundary_horseshoe_boundary_identification (X : Scheme.{u})
     erw [← hd]
     apply (cancel_mono
       (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1).inv).1
-    simp only [Category.assoc]
     erw [ht]
     simp only [RingedSpace.moduleCohomologyBoundary,
       Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso,
