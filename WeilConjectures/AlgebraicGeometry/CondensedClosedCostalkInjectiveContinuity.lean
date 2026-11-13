@@ -124,11 +124,7 @@ private theorem injectiveContinuity_of_derived
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
-set_option maxHeartbeats 400000 in
--- Comparing the strict models needs additional elaboration heartbeats.
-set_option synthInstance.maxHeartbeats 100000 in
--- Internal module colimit inference needs a larger typeclass search budget.
-set_option synthInstance.maxSize 4096 in
+set_option trace.profiler true in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
 of injective complexes with a common lower bound.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), closed costalk step, using (3.4)
