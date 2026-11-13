@@ -268,7 +268,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option maxHeartbeats 800000 in
 -- The section calculation passes through total tensor complexes and scalar restriction.
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
 natural in both complexes. Source: Stacks 03EK, 07A4. -/
@@ -335,7 +334,6 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option maxHeartbeats 1600000 in
 -- The section calculation passes through several levels of composite functors.
 /-- The tensor product of two presentations of strict system complexes is again a
 presentation: its finite comparison commutes with the strict transitions.
