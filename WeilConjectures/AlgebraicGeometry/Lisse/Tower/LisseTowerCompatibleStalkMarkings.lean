@@ -25,8 +25,8 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] constantAdicQuotientRealization constantAdicFiniteRealization
   constantAdicQuotientRightIso pbcDerivedRestrict constantAdicFiniteProjection
 
--- Matching the explicit derived scalar-comparison types in the assembly needs more
--- elaboration heartbeats; this file compiles in about 25 seconds.
+set_option trace.profiler true in
+set_option trace.profiler.threshold 0 in
 /-- Separate local markings of a fixed normalized finite algebraic tower can be
 chosen compatibly on a common pro-etale cover. The tower K, its bounds and its
 normalization arrows are inputs; this theorem constructs only compatible markings.
