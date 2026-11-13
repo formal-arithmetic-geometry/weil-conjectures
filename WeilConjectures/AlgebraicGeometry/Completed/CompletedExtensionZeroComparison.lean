@@ -1129,7 +1129,8 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
     rw [compAdjunction_homEquiv_apply]
     exact (openSliceAdjunction_homEquiv_apply d j hj M
       ((SheafOfModules.overFunctor S W).obj N)
-      ((SheafOfModules.extensionSheafAdjunction S W).homEquiv _ N α) V x).trans
+      ((SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} S W).homEquiv _ N α)
+        V x).trans
         (extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x)
   refine ⟨adj, hu, ?_⟩
   intro adj' hadj'
