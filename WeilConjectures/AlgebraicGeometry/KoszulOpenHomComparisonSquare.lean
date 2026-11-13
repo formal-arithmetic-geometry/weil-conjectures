@@ -92,8 +92,10 @@ theorem koszulOpenHom_comparison_square
       (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
   let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
   let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
-  obtain ⟨a₀, ha₀, hrep⟩ := koszulOpenHom_chain_representatives A r f F hF
-  obtain ⟨b, hb, hchain⟩ := koszulOpenHom_chain_evaluation A r f
+  obtain ⟨a₀, ha₀, hrep⟩ :=
+    koszulOpenHom_chain_representatives.{uMain, wMain, vMain} A r f F hF
+  obtain ⟨b, hb, hchain⟩ :=
+    koszulOpenHom_chain_evaluation.{uMain, wMain, vMain} A r f
   let a (e : ℕ) := (Iso.homCongr (Iso.refl (koszulOpenObject A r f e)) i.symm).trans
     (a₀ e)
   refine ⟨a, b E.obj, ?_⟩
