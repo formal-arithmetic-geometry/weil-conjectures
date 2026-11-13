@@ -186,7 +186,8 @@ private theorem exists_single_tensor_shifts_of_counit
       ∀ n G, (τ.hom n).app G =
         cast (by rfl) (ε.app ((HomotopyCategory.singleFunctor A n).obj G) ≫
           DerivedCategory.Qh.map ((HomotopyCategory.quotient B (ComplexShape.up ℤ)).map
-            ((HomologicalComplex.singleMapHomologicalComplex T (ComplexShape.up ℤ) n).hom.app G))) := by
+            ((HomologicalComplex.singleMapHomologicalComplex T
+              (ComplexShape.up ℤ) n).hom.app G))) := by
   let F := HomotopyCategory.singleFunctors A
   let c := (F.postcompPostcompIso DerivedCategory.Qh L).hom ≫
     SingleFunctors.postcompNatTrans F ε ≫
@@ -240,7 +241,6 @@ def pinnedSingleTensorCounit
       ((HomologicalComplex.singleMapHomologicalComplex
         (Scheme.Modules.tensorPullback g') (ComplexShape.up ℤ) n).hom.app G)))
 
-set_option trace.profiler true in
 /-- The tensor comparison is a morphism of single-functor families.
 Source: Stacks Project, Tag 08HY; the derived counit universal property and
 Mathlib's termwise mapped-single shift identity.

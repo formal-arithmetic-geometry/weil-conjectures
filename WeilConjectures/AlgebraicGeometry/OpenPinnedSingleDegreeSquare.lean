@@ -66,6 +66,39 @@ private theorem transport_square
   rw [← Category.assoc x₀ b.hom, h₀, hy]
   simp only [Iso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
 
+/-- Transport a pointwise square through compatible comparisons with a common functor. -/
+private theorem transport_functor_square
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (r : A ⥤ B) (J : C ⥤ C)
+    {F G F₀ G₀ : A ⥤ C} {F' G' F₀' G₀' : B ⥤ C}
+    (x : ∀ M, F.obj M ⟶ G.obj M) (x₀ : ∀ M, F₀.obj M ⟶ G₀.obj M)
+    (y : ∀ M, F'.obj M ⟶ G'.obj M) (y₀ : ∀ M, F₀'.obj M ⟶ G₀'.obj M)
+    (h₀ : ∃ a₀ : F₀ ≅ r ⋙ F₀', ∃ b₀ : G₀ ≅ r ⋙ G₀',
+      ∀ M, x₀ M ≫ b₀.hom.app M = a₀.hom.app M ≫ y₀ (r.obj M))
+    (h₁ : ∃ a₁ : F ≅ F₀ ⋙ J, ∃ b₁ : G ≅ G₀ ⋙ J,
+      ∀ M, x M ≫ b₁.hom.app M = a₁.hom.app M ≫ J.map (x₀ M))
+    (h₂ : ∃ a₂ : F' ⋙ 𝟭 C ≅ (F₀' ⋙ 𝟭 C) ⋙ J,
+      ∃ b₂ : G' ⋙ 𝟭 C ≅ (G₀' ⋙ 𝟭 C) ⋙ J,
+      ∀ M, (𝟭 C).map (y M) ≫ b₂.hom.app M =
+        a₂.hom.app M ≫ J.map ((𝟭 C).map (y₀ M))) :
+    ∃ a : F ≅ r ⋙ F', ∃ b : G ≅ r ⋙ G',
+      ∀ M, x M ≫ b.hom.app M = a.hom.app M ≫ y (r.obj M) := by
+  obtain ⟨a₀, b₀, h₀⟩ := h₀
+  obtain ⟨a₁, b₁, h₁⟩ := h₁
+  obtain ⟨a₂, b₂, h₂⟩ := h₂
+  simp only [Functor.comp_id, Functor.id_map] at a₂ b₂ h₂
+  let a₂' := Functor.isoWhiskerLeft r a₂
+  let b₂' := Functor.isoWhiskerLeft r b₂
+  refine ⟨a₁ ≪≫ Functor.isoWhiskerRight a₀ J ≪≫ a₂'.symm,
+    b₁ ≪≫ Functor.isoWhiskerRight b₀ J ≪≫ b₂'.symm, ?_⟩
+  intro M
+  have hshift := congrArg J.map (h₀ M)
+  simp only [Functor.map_comp] at hshift
+  exact transport_square (a₁.app M) (b₁.app M) (a₂'.app M) (b₂'.app M)
+    ((Functor.isoWhiskerRight a₀ J).app M) ((Functor.isoWhiskerRight b₀ J).app M)
+    (x M) (J.map (x₀ M)) (y (r.obj M)) (J.map (y₀ (r.obj M)))
+    (h₁ M) (h₂ (r.obj M)) hshift
+
 set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural restriction isomorphisms commute with the base-change mate for the
@@ -148,28 +181,14 @@ theorem open_pinned_single_degree_square
   let r := schemeOpenRestriction X U
   let R := (schemeOpenRestriction S' W).mapDerivedCategory
   let J := shiftFunctor (schemeDerivedCategory.{u, w} W.toScheme) (-n)
-  obtain ⟨a₀, b₀, h₀⟩ := open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V W hWV
-  obtain ⟨a₁, b₁, h₁⟩ := pinned_single_base_change_shift.{u, w} f g g' f' sq.w R n
-  obtain ⟨a₂, b₂, h₂⟩ :=
-    pinned_single_base_change_shift.{u, w} fA gA p q pullback.condition
-      (𝟭 (schemeDerivedCategory.{u, w} W.toScheme)) n
-  simp only [Functor.comp_id, Functor.id_map] at a₂ b₂ h₂
-  let a₂' := Functor.isoWhiskerLeft r a₂
-  let b₂' := Functor.isoWhiskerLeft r b₂
-  let a := a₁ ≪≫ Functor.isoWhiskerRight a₀ J ≪≫ a₂'.symm
-  let b := b₁ ≪≫ Functor.isoWhiskerRight b₀ J ≪≫ b₂'.symm
-  refine ⟨a, b, ?_⟩
-  intro G
-  have hshift := congrArg J.map (h₀ G)
-  simp only [Functor.map_comp] at hshift
-  have h := transport_square (C := schemeDerivedCategory.{u, w} W.toScheme)
-    (a₁.app G) (b₁.app G) (a₂'.app G) (b₂'.app G)
-    ((Functor.isoWhiskerRight a₀ J).app G) ((Functor.isoWhiskerRight b₀ J).app G)
-    (R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w n G))
-    (J.map (R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w 0 G)))
-    (singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition n (r.obj G))
-    (J.map (singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition 0 (r.obj G)))
-    (h₁ G) (h₂ (r.obj G)) hshift
-  exact h
+  exact transport_functor_square r J
+    (fun G ↦ R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w n G))
+    (fun G ↦ R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w 0 G))
+    (fun G ↦ singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition n G)
+    (fun G ↦ singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition 0 G)
+    (open_pinned_single_degree_zero_square.{u, w} f g g' f' sq V W hWV)
+    (pinned_single_base_change_shift.{u, w} f g g' f' sq.w R n)
+    (pinned_single_base_change_shift.{u, w} fA gA p q pullback.condition
+      (𝟭 (schemeDerivedCategory.{u, w} W.toScheme)) n)
 
 end AlgebraicGeometry
