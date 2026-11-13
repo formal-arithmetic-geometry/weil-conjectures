@@ -279,7 +279,6 @@ lemma hColimitProp_zero (D : J ⥤ TopCat.Sheaf AddCommGrpCat.{u} X) : HColimitP
     refine ⟨j', a, (Sheaf.H.equiv₀ _ isTerminalTop).injective ?_⟩
     rw [← Sheaf.H.equiv₀_naturality, map_zero, ha, map_zero]
 
-set_option trace.profiler true in
 /-- The dimension shifting step: if `Hⁿ` commutes with all filtered colimits, so does `Hⁿ⁺¹`,
 on the first term of a short exact sequence of diagrams whose middle term is pointwise flasque.
 -/
