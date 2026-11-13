@@ -176,7 +176,6 @@ private theorem moduleHomComplex_of_full_functor
   obtain ⟨c, hc⟩ := kProjective_homEquiv_of_full_functor A F P η M
   exact moduleHomComplex_of_homEquiv A P M c hc
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- For any module target complex, affine derived arrows out of a K-projective module
 complex are its linear Hom-complex cohomology, with chain representatives and naturality.

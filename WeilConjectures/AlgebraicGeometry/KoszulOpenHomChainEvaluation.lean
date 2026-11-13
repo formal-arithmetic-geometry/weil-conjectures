@@ -63,7 +63,6 @@ private theorem naturalEquiv_apply_of_isIso
   rw [hfac, hb]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- Evaluation at one is natural and agrees with the fraction comparison on chain maps.
 The statement concerns chain maps into F; it does not identify arbitrary stage derived
 maps with Hom-complex homology, nor does it transport F to another derived object.

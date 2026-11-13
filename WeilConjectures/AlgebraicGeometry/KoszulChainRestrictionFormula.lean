@@ -93,7 +93,8 @@ private theorem koszulOpenHomTranspose_tilde_counit
     funext n
     exact (hs n).symm
   change adj.homEquiv _ _ (_ ≫ s.hom) = g
-  rw [← hc, ← Adjunction.homEquiv_counit, Equiv.apply_symm_apply]
+  rw [← hc, ← Adjunction.homEquiv_counit]
+  exact (adj.homEquiv _ _).apply_symm_apply g
 
 private theorem naturalEquiv_transport_chain
     {C D : Type*} [Category C] [Category D] {A : Type*} [CommRing A]
@@ -205,12 +206,12 @@ theorem koszulChain_restriction_formula
   have hψt : R.map (koszulOpenUnit A r f e) ≫ ψ =
       R.map (DerivedCategory.Q.map t ≫ eF.hom) := by
     rw [hψ]
-    exact congrArg R.map (by rw [Functor.map_comp]; rfl)
+    exact congrArg R.map (by simp only [t, Functor.map_comp, Category.assoc])
   have htransport := naturalEquiv_transport_chain R (G ⋙ H) (koszulOpenStructure A)
     b hb (koszulOpenUnit A r f e) (DerivedCategory.Q.map t) eF _
       (hchain F hF e t) ψ hψt
   change b E.obj ψ = _
-  rw [htransport]
+  refine htransport.trans ?_
   dsimp only [koszulOpenHomStageClass]
   rw [ht, koszulHomChainClass_eq_homologyπ g z hz]
   let K := CochainComplex.moduleHomComplex
@@ -222,6 +223,6 @@ theorem koszulChain_restriction_formula
         ((H.map (DerivedCategory.Q.map j)) ((η.app K).inv (K.homologyπ 0 z))))) = _
   rw [moduleHomologyFactors_inv_naturality_apply j,
     moduleHomologyFactors_inv_naturality_apply (colimit.ι D e)]
-  rfl
+  simp only [β, Functor.map_comp, ModuleCat.comp_apply]
 
 end AlgebraicGeometry
