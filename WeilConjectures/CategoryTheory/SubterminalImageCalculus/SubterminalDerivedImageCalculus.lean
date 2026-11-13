@@ -157,6 +157,18 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
 
+private instance restrictionComp_overFunctor_preservesZero
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u r}) (Z : C) :
+    (SheafOfModules.overFunctor.{max u r} R Z).PreservesZeroMorphisms :=
+  ⟨by intro M N; ext W x; rfl⟩
+
+private instance restrictionComp_overMap_preservesZero
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{max u r}) {X Y : C} (f : X ⟶ Y) :
+    (SheafOfModules.overMap.{max u r} R f).PreservesZeroMorphisms :=
+  ⟨by intro M N; ext W x; rfl⟩
+
 set_option synthInstance.maxHeartbeats 100000 in
 set_option profiler true in
 -- Additivity of the composite restriction functor is found by a deep search.
@@ -168,12 +180,6 @@ def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     (SheafOfModules.overFunctor.{max u r} (ring R) X).mapHomologicalComplex (.up ℤ) ≅
       (SheafOfModules.overFunctor.{max u r} (ring R) Y).mapHomologicalComplex (.up ℤ) ⋙
         (SheafOfModules.overMap.{max u r} (ring R) f).mapHomologicalComplex (.up ℤ) :=
-  letI : (SheafOfModules.overFunctor.{max u r} (ring R) X).Additive :=
-    overAdditive (ring R) X
-  letI : (SheafOfModules.overFunctor.{max u r} (ring R) Y).Additive :=
-    overAdditive (ring R) Y
-  letI : (SheafOfModules.overMap.{max u r} (ring R) f).Additive :=
-    overMapAdditive (ring R) f
   NatIso.mapHomologicalComplex
     (SheafOfModules.overFunctorMap.{max u r} (ring R) f).symm (.up ℤ)
 
