@@ -85,6 +85,7 @@ private theorem isIso_adjunct_left_evaluation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
 base change, and the tensor--internal-Hom comparison.
 Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
