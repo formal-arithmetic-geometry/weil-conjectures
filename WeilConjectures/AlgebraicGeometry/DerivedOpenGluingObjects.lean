@@ -85,44 +85,12 @@ private theorem compatible_of_difference
   rw [hnU, hnV] at he
   simpa only [Functor.map_comp, Category.assoc] using sub_eq_zero.mp he
 
-private theorem gluing_of_difference
-    {C C₁ C₂ C₃ : Type*} [Category C] [Category C₁] [Category C₂] [Category C₃]
-    [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    [Preadditive C₁] [HasZeroObject C₁] [HasShift C₁ ℤ]
-    [∀ n : ℤ, (shiftFunctor C₁ n).Additive] [Pretriangulated C₁]
-    [Preadditive C₂] [HasZeroObject C₂] [HasShift C₂ ℤ]
-    [∀ n : ℤ, (shiftFunctor C₂ n).Additive] [Pretriangulated C₂] [Preadditive C₃]
-    (rU : C ⥤ C₁) (rV : C ⥤ C₂) (rW : C ⥤ C₃) (sU : C₁ ⥤ C₃) (sV : C₂ ⥤ C₃)
-    [rU.CommShift ℤ] [rU.IsTriangulated] [rV.CommShift ℤ] [rV.IsTriangulated]
-    [rW.PreservesZeroMorphisms]
-    (eU : rU ⋙ sU ≅ rW) (eV : rV ⋙ sV ≅ rW)
-    (A : C₁) (B : C₂) (c : sU.obj A ≅ sV.obj B)
-    {E D : C} (d : E ⟶ D) (pU : rU.obj E ⟶ A) (pV : rV.obj E ⟶ B)
-    (k : rW.obj D ⟶ sV.obj B)
-    [HasBinaryBiproduct A (rU.obj D)] [HasBinaryBiproduct B (rV.obj D)]
-    (hU : IsIso (biprod.lift pU (rU.map d)))
-    (hV : IsIso (biprod.lift pV (rV.map d)))
-    (hdiff : eU.inv.app E ≫ sU.map pU ≫ c.hom - eV.inv.app E ≫ sV.map pV =
-      rW.map d ≫ k) :
-    ∃ (F : C) (iU : rU.obj F ≅ A) (iV : rV.obj F ≅ B),
-      eU.inv.app F ≫ sU.map iU.hom ≫ c.hom = eV.inv.app F ≫ sV.map iV.hom := by
-  obtain ⟨F, f, h, ht⟩ := Pretriangulated.distinguished_cocone_triangle₁ d
-  let T : Pretriangulated.Triangle C := Pretriangulated.Triangle.mk f d h
-  have ht' : T ∈ distTriang C := ht
-  have : IsIso (rU.map f ≫ pU) :=
-    isIso_fiber_projection (rU.mapTriangle.obj T) (rU.map_distinguished T ht') A pU hU
-  have : IsIso (rV.map f ≫ pV) :=
-    isIso_fiber_projection (rV.mapTriangle.obj T) (rV.map_distinguished T ht') B pV hV
-  refine ⟨F, asIso (rU.map f ≫ pU), asIso (rV.map f ≫ pV), ?_⟩
-  exact compatible_of_difference rU rV rW sU sV eU eV c f d pU pV k
-    (Pretriangulated.comp_distTriang_mor_zero₁₂ T ht') hdiff
-
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
 set_option synthInstance.maxHeartbeats 400000 in
 -- Additivity of the three-fold composite restriction functors exceeds the default size.
-set_option trace.profiler true in
+set_option maxHeartbeats 800000 in
+-- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Objects of the derived category glue across a two-open cover with their prescribed
 transition, without an assertion about morphisms into another object.
 Source: Stacks Project, Cohomology, Tag 08DG, first assertion and cone construction
@@ -259,8 +227,30 @@ theorem derived_open_gluing_objects
   let eV := schemeDerivedOpenRestrictionCompIso X (homOfLE inf_le_right : U ⊓ V ⟶ V)
   change ∃ (F : schemeDerivedCategory X) (iU : rU.obj F ≅ A) (iV : rV.obj F ≅ B),
     eU.inv.app F ≫ sU.map iU.hom ≫ c.hom = eV.inv.app F ≫ sV.map iV.hom
+  let E := (schemeDerivedDirectImage U.ι).obj A ⊞ (schemeDerivedDirectImage V.ι).obj B
+  let D := (schemeDerivedDirectImage (U ⊓ V).ι).obj (sV.obj B)
   obtain ⟨d, pU, pV, k, hU, hV, hdiff⟩ :=
     derived_open_difference_diagram.{u, w} X U V hcover A B c
-  exact gluing_of_difference rU rV rW sU sV eU eV A B c d pU pV k hU hV hdiff
+  obtain ⟨F, f, h, ht⟩ := Pretriangulated.distinguished_cocone_triangle₁
+    (C := schemeDerivedCategory X) (Y := E) (Z := D) d
+  let T : Pretriangulated.Triangle (schemeDerivedCategory X) := Pretriangulated.Triangle.mk f d h
+  have ht' : T ∈ distTriang (schemeDerivedCategory X) := ht
+  have hiU : IsIso (rU.map f ≫ pU) :=
+    isIso_fiber_projection (rU.mapTriangle.obj T) (rU.map_distinguished T ht') A pU (by
+      dsimp only [Functor.mapTriangle, T, Pretriangulated.Triangle.mk]
+      exact hU)
+  have hiV : IsIso (rV.map f ≫ pV) :=
+    isIso_fiber_projection (rV.mapTriangle.obj T) (rV.map_distinguished T ht') B pV (by
+      dsimp only [Functor.mapTriangle, T, Pretriangulated.Triangle.mk]
+      exact hV)
+  let _ := hiU
+  let _ := hiV
+  refine ⟨F, asIso (rU.map f ≫ pU), asIso (rV.map f ≫ pV), ?_⟩
+  change eU.inv.app F ≫ sU.map (rU.map f ≫ pU) ≫ c.hom =
+    eV.inv.app F ≫ sV.map (rV.map f ≫ pV)
+  have hz : f ≫ d = 0 := Pretriangulated.comp_distTriang_mor_zero₁₂ T ht'
+  change eU.inv.app E ≫ sU.map pU ≫ c.hom - eV.inv.app E ≫ sV.map pV =
+    rW.map d ≫ k at hdiff
+  exact compatible_of_difference rU rV rW sU sV eU eV c f d pU pV k hz hdiff
 
 end AlgebraicGeometry
