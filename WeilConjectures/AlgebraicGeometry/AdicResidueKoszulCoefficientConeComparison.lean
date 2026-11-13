@@ -172,7 +172,6 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
   completed ringedKoszulDualUnit adicResidueQuotientCoefficientUnit
   adicResidueQuotientModule
 
-set_option trace.profiler true in
 /-- Exact realization identifies the finite algebraic augmentation cones and their
 strict transitions with those of any normalized coefficient augmentation.
 This is a finite comparison: it asserts no eventual vanishing, uses no complex P,
