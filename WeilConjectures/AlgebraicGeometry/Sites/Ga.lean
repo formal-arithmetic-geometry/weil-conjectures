@@ -52,37 +52,14 @@ noncomputable def gaPresheaf : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the defeq checks through the small étale and pro-étale sites are slow
 open Pseudofunctor.LocallyDiscreteOpToCat Modules in
 /-- The underlying presheaf of sets of `V ↦ Γ(V, 𝒪_V)` is a sheaf on the small étale site:
 `a ↦ a ·` identifies it with the étale sheaf `V ↦ End(V^* 𝒪_X)`. -/
 theorem isSheaf_etaleStructurePresheaf_comp_forget :
     Presieve.IsSheaf X.smallEtaleTopology
       (X.etaleStructurePresheaf ⋙ CategoryTheory.forget CommRingCat) := by
-  have h := (isSheaf_iff_isSheaf_of_type _ _).1
-    (Modules.isSheaf_etaleHom (unitObj X) (unitObj X))
-  let G := toProEt X ⋙ ProEt.forget X
-  have : (Modules.unit X).IsInvertible := isInvertible_tensorUnit
-  let eqv (V : X.Etaleᵒᵖ) : Γ(V.unop.left, ⊤) ≃ (etaleHom (unitObj X) (unitObj X)).obj V :=
-    have hA : ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)).IsInvertible :=
-      inferInstance
-    Equiv.ofBijective (fun a ↦ smulMor
-      ((modulesPseudofunctor.map (G.obj V.unop).hom.op.toLoc).toFunctor.obj (unitObj X)) a)
-      ⟨fun a b hab ↦
-        eq_of_smulHom_eq ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) hab,
-        fun φ ↦ by
-          obtain ⟨c, hc⟩ :=
-            exists_eq_smulHom ((Modules.pullback (G.obj V.unop).hom).obj (Modules.unit X)) φ
-          exact ⟨c, hc.symm⟩⟩
-  refine Presieve.isSheaf_iso _ (NatIso.ofComponents (fun V ↦ (eqv V).toIso) ?_).symm h
-  intro V W f
-  ext a
-  change smulMor _ (f.unop.left.appTop a) =
-    pullHom (F := modulesPseudofunctor) (smulMor _ a) f.unop.left (G.obj W.unop).hom
-      (G.obj W.unop).hom (MorphismProperty.Over.w f.unop) (MorphismProperty.Over.w f.unop)
-  unfold smulMor
-  exact (pullHom_smulHom _ _ _ _ _ _).symm
+  exact (isSheaf_iff_isSheaf_of_type _ _).1
+    (Presheaf.isSheaf_comp_of_isSheaf _ _ _ X.isSheaf_etaleStructurePresheaf)
 
 /-- The presheaf `𝔾ₐ` is a sheaf for the small étale topology. -/
 theorem isSheaf_gaPresheaf : Presheaf.IsSheaf X.smallEtaleTopology X.gaPresheaf := by

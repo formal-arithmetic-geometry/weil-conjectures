@@ -115,7 +115,6 @@ private noncomputable def coherentSwapSequenceFunctor :
 
 set_option backward.isDefEq.respectTransparency true in
 set_option profiler true in
-set_option maxHeartbeats 700000 in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.
@@ -328,9 +327,9 @@ theorem exists_etale_complex_coherent_filtrations
     (fun r s ↦ (T₀ c.pt ⟨L.pt, hLK⟩).firstPageIso r s),
     ?_, ?_, ?_, ?_, V, W, htop, hbot, ?_⟩
   · intro i j f
-    change coherentSwapSequenceMap _ ≫ coherentSwapSequenceMap _ =
-      coherentSwapSequenceMap _
-    exact congrArg coherentSwapSequenceMap (hmcone i.unop j.unop f.unop)
+    change coherentSwapSequenceFunctor.map _ ≫ coherentSwapSequenceFunctor.map _ =
+      coherentSwapSequenceFunctor.map _
+    rw [← Functor.map_comp, hmcone i.unop j.unop f.unop]
   · intro i j f r s
     exact hfirst (D.map f) ⟨F i, hFK i⟩ ⟨F j, hFK j⟩ (φ f) r s
   · intro i r s
