@@ -274,9 +274,6 @@ theorem mapDerivedCategoryComposition_factors (F₁ : C ⥤ D) (F₂ : D ⥤ F) 
 
 end Factors
 
-set_option profiler true in
--- Matching the strict law against the descent data unfolds instance paths of the
--- abelian categories of strict quotient systems.
 /-- The coherent system pullback/tensor comparisons satisfy the composition law with the
 derived adjunction-normalized compositor.
 Source: Stacks 07A4, 0D6D and 0941
@@ -345,6 +342,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
     (IntegralCoherence.compositor l E h f) (integralComparisonSystemComposition l E h f)
     ?_ ?_ ?_ ?_ A B
   · exact ff.faithful
+  -- Normalize model components so the descent hypotheses match at reducible transparency.
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
