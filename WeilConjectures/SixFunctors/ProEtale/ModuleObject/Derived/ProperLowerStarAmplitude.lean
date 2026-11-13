@@ -77,6 +77,7 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [IsCommMonObj
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- instance search for the t-structure on module objects, with the exactness hypotheses on all
 -- schemes in context, is slow
 /-- **Amplitude along an exact change of coefficients.** Let `a : Λ ⟶ Λ'` have exact extensions
