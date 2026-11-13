@@ -335,6 +335,26 @@ lemma isIso_app_of_forall_upperStar {X'' : Scheme.{u}} {M : NearbyCyclesModel X 
 
 end Transport
 
+/-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
+constructible complex on the total space. -/
+private lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
+    {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)]
+    {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+    {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+    (h : M.IsTraitModelOver q g) [IsProper q]
+    (U : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.generic) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)))
+    (hU : ∃ C₀ : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C₀ ∧
+        Nonempty (U ≅ L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) :
+    IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app U) := by
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := hU
+  have : IsIso ((h.toTraitGeneric.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
+      (L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C₀)) := by
+    exact_mod_proofs h.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) C₀ hC₀
+  exact NatTrans.isIso_app_of_iso' _ e
+
 /-! ### The global-sections step, for general coefficients -/
 
 section GlobalAbstract
@@ -356,7 +376,6 @@ lemma isIso_of_square {C : Type*} [Category C] {W X₁ X₂ X₃ Y₁ Y₂ : C} 
   have : IsIso (b ≫ c) := IsIso.of_isIso_comp_left a _
   exact IsIso.of_isIso_comp_left b c
 
-set_option maxHeartbeats 1600000 in
 set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step, abstractly**: for the product `P` over the trait of models `M`,
@@ -403,7 +422,8 @@ theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
     (hgen.trans (Category.comp_id _).symm)
     ((special_comp_hom_snd hN hpb hP).trans (Category.comp_id _).symm)
     (L((M.ε)^*⟦Λ⟧).obj A) (L((N.ε)^*⟦Λ⟧).obj B)
-  exact isIso_of_square sq inferInstance hκs hT (Functor.map_isIso _ _) hχP
+  have key := isIso_of_square sq inferInstance hκs hT (Functor.map_isIso _ _) hχP
+  exact key
 
 end GlobalAbstract
 
@@ -437,7 +457,6 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option maxHeartbeats 1600000 in
 set_option trace.profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
@@ -545,37 +564,27 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
-  -- the proper exchanges
-  · have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hM C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂ (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  -- Transport each proper exchange directly along its pullback isomorphism.
+  · have hχ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
+      (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
-    exact_mod_proofs h₃
-  · have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hN C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂ (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
+    exact_mod_proofs hχ
+  · have hχ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
+      (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
-    exact_mod_proofs h₃
-  · have hqP' : IsProper (φ₁.total ≫ qM) := hqP
-    have h₁ := fun C₀ hC₀ ↦
-      IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app (ℓ := ℓ) hP C₀ hC₀
-    have h₂ := isIso_app_of_forall_upperStar (Profinite.padicAlgClRingObj ℓ) _ h₁
-    have h₃ := h₂
-      (L((φ₁.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A) ⊗
-        L((φ₂.generic)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
-          (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B))
+    exact_mod_proofs hχ
+  · have hχ := hP.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       (exists_boundedConstructible_tensor_iso _ φ₁ φ₂ heM heN hA hB htensor)
-    exact_mod_proofs h₃
+    exact_mod_proofs hχ
   -- the ordinary Künneth formulas on the special fibres and on the geometric generic fibres
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := X') (Y := Y') (P := Z') f₁' f₂'
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (X := X') (Y := Y') (P := Z') f₁' f₂'
       (hs₁.trans (Category.comp_id _).symm) (hs₂.trans (Category.comp_id _).symm)
       (isPullback_special hM hN hpb hP) _ hΨA' _ hΨB'
-  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (X := Over.mk gM)
+  · exact_mod_proofs isIso_lowerStarKunnethMap'_of_isPullback (ℓ := ℓ)
+      (K := traitGenericField k') (X := Over.mk gM)
       (Y := Over.mk gN)
       (P := Over.mk (φ₁.generic ≫ gM)) φ₁.generic φ₂.generic (Category.comp_id _).symm
       (hgen.trans (Category.comp_id _).symm) (isPullback_generic hM hN hpb hP hgen) _ hA' _ hB'
