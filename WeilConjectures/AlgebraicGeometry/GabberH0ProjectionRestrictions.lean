@@ -149,13 +149,21 @@ private theorem comparison_assoc {X Y W V : Scheme.{u}}
   erw [hc']
   have hv := pullbackComp_assoc_hom (@Etale) f g j U
   trace "comparison: map_comp"
-  erw [← ((Scheme.etaleSetPullback (j ≫ g ≫ f)).obj F).obj.map_comp_apply, ← op_comp]
+  erw [← ((Scheme.etaleSetPullback (j ≫ g ≫ f)).obj F).obj.map_comp_apply
+    (((MorphismProperty.Over.pullback @Etale ⊤ j).map (pc.hom.app U)).op)
+    (((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) j (g ≫ f)).hom.app U).op)]
+  trace "comparison: op_comp"
+  rw [← op_comp]
+  trace "comparison: map_transport"
   refine (map_transport (Category.assoc j g f) F U
     ((MorphismProperty.Over.pullback @Etale ⊤ j).obj ((MorphismProperty.Over.pullback @Etale ⊤
       g).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))) _ _ hv _).trans ?_
   simp only [ConcreteCategory.comp_apply] at hn₄
+  trace "comparison: hu"
   erw [hu]
+  trace "comparison: hn₄"
   erw [hn₄]
+  trace "comparison: second map_comp"
   erw [← ((Scheme.etaleSetPullback ((j ≫ g) ≫ f)).obj F).obj.map_comp_apply, ← op_comp]
   erw [@Category.assoc V.Etale inferInstance, Iso.hom_inv_id_app, Category.comp_id]
   rfl
