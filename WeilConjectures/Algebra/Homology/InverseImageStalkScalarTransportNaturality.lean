@@ -68,6 +68,7 @@ private theorem explicitStalkMap_germ
 
 set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Comparing stalk module actions unfolds both the ringed-space and sheaf interfaces.
 /-- Natural semilinear comparison for the explicitly constructed inverse image.
 Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.

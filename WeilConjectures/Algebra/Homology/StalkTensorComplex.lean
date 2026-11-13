@@ -52,6 +52,7 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rfl
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The stalk tensor comparison exceeds the default elaboration heartbeat budget.
 /-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor

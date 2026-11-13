@@ -39,6 +39,7 @@ noncomputable local instance stalkTensorDifferentialMonoidal :
 
 -- The simultaneous total tensor constructions require extra elaboration heartbeats.
 set_option maxHeartbeats 1500000 in
+set_option profiler true in
 -- Elaborating both total tensor coproducts exceeds the default heartbeat budget.
 /-- Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification,
 third step (blueprint: lem-pc-stalk-tensor-complex-differential).
