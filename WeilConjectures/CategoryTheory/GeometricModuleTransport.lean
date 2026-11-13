@@ -379,6 +379,8 @@ private theorem restrictHomEquiv_map
     G.map (restrictHomEquiv F G E h f) = E (F.map f) :=
   Classical.choose_spec ((h (F.map f)).mp ⟨f, rfl⟩)
 
+-- Work with abstract functors here to avoid unfolding the sheaf and restriction-of-scalars
+-- constructions at every naturality rewrite.
 private theorem linear_mate_naturality_left
     {C₀ D₀ M₀ A₀ : Type*} [Category C₀] [Category D₀] [Category M₀] [Category A₀]
     {L : C₀ ⥤ D₀} {V : D₀ ⥤ C₀} (adj : L ⊣ V)
@@ -491,7 +493,8 @@ private theorem linear_mate_equiv
     (eP : P ⋙ moduleSets R ≅ moduleSets S ⋙ V)
     (hI : ∀ M, ∃ (aM : (moduleSets R).obj M ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
       (sM : ringSets R ⨯ (moduleSets R).obj M ⟶ (moduleSets R).obj M)
-      (aI : (moduleSets A).obj (I.obj M) ⨯ (moduleSets A).obj (I.obj M) ⟶ (moduleSets A).obj (I.obj M))
+      (aI : (moduleSets A).obj (I.obj M) ⨯ (moduleSets A).obj (I.obj M) ⟶
+        (moduleSets A).obj (I.obj M))
       (sI : ringSets A ⨯ (moduleSets A).obj (I.obj M) ⟶ (moduleSets A).obj (I.obj M)),
       addSpec M aM ∧ smulSpec M sM ∧ addSpec (I.obj M) aI ∧ smulSpec (I.obj M) sI ∧
       L.map aM = prodComparison L _ _ ≫
@@ -499,7 +502,8 @@ private theorem linear_mate_equiv
       L.map sM = prodComparison L _ _ ≫ prod.map eR.inv (eI.inv.app M) ≫ sI ≫ eI.hom.app M)
     (hP : ∀ H, ∃ (aH : (moduleSets S).obj H ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
       (sH : ringSets S ⨯ (moduleSets S).obj H ⟶ (moduleSets S).obj H)
-      (aP : (moduleSets R).obj (P.obj H) ⨯ (moduleSets R).obj (P.obj H) ⟶ (moduleSets R).obj (P.obj H))
+      (aP : (moduleSets R).obj (P.obj H) ⨯ (moduleSets R).obj (P.obj H) ⟶
+        (moduleSets R).obj (P.obj H))
       (sP : ringSets R ⨯ (moduleSets R).obj (P.obj H) ⟶ (moduleSets R).obj (P.obj H))
       (k : ringSets R ⨯ (moduleSets R).obj (P.obj H) ⟶
         V.obj (ringSets S ⨯ (moduleSets S).obj H)),
@@ -517,6 +521,7 @@ private theorem linear_mate_equiv
       ∀ M H f, (moduleSets R).map (B M H f) ≫ eP.hom.app H =
         adj.homEquiv _ _ (eI.inv.app M ≫ (moduleSets A).map f) := by
   have : K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  let Q := restrictScalars ((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).map c)
   let E : ∀ M H, ((moduleSets A).obj (I.obj M) ⟶ (moduleSets S).obj H) ≃
       ((moduleSets R).obj M ⟶ (moduleSets R).obj (P.obj H)) :=
     fun M H ↦ mateIsoEquiv adj (eI.app M) (eP.app H)
@@ -536,15 +541,14 @@ private theorem linear_mate_equiv
   refine ⟨B, ?_, ?_, hB⟩
   · intro M N a H f
     exact linear_mate_naturality_left adj (moduleSets R) (moduleSets A) I eI
-      (eP.app H) a f _ _ (hB M H _) (hB N H f)
+      (Y := Q.obj H) (eP.app H) a f _ _ (hB M H _) (hB N H f)
   · intro M H H' f b
     exact linear_mate_naturality_right adj (moduleSets R) (moduleSets A)
-      (eI.app M) (eP.app H) (eP.app H') f
-      ((restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)).map b)
+      (Y := Q.obj H) (Y' := Q.obj H') (eI.app M) (eP.app H) (eP.app H') f (Q.map b)
       (P.map b) _ _ (hB M H f) (hB M H' _) (eP.hom.naturality b)
+
 end Helpers
 
-set_option trace.profiler true in
 -- The statement records every operation and its underlying comparison.
 
 /-- Transport module structures and restrict the given set adjunction to linear maps.
