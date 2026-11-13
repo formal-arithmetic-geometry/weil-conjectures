@@ -292,7 +292,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
     (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (act k)) hlift (fun j ↦ hdZ j W) φ'
     hφ'
 
-
 /-- Tensoring a Galois tower with a bounded below complex preserves its homology colimits. -/
 private lemma tensor_coinvariant_isColimit (T₀ : Type)
     [TopologicalSpace T₀] [Field T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀] [Finite T₀]
@@ -370,8 +369,6 @@ private lemma tensor_coinvariant_property (T₀ : Type)
     DerivedCategory.homologyFunctor _ q)
     (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ T K a hcab f' V b hV q) φ hφ
 
-set_option profiler true in
--- the objects of the Galois layer are large terms
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
