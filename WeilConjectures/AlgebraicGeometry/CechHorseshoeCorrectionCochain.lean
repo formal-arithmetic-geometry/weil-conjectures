@@ -343,15 +343,17 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
       dsimp only [jB]
       simp
     rw [mapCochain_comp_apply, haug, mapCochain_zero_apply, zero_sub]
-    rw [moduleCechZero_naturality_apply, ← ha, moduleCechZero_naturality_apply]
+    erw [moduleCechZero_naturality_apply U (IB.cocomplex.d 0 1), ← ha,
+      moduleCechZero_naturality_apply U (α.f 1)]
   · have : Mono (α.f 0) := (hrows 0).mono_f
     apply cechMap_injective U (α.f 0) 1
     change (F.map (α.f 0)).f 1 (A₀.d 0 1 t) =
       (F.map (α.f 0)).f 1 ((F.map jA).f 1
         (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z))
-    rw [← cochain_comm_apply, hαt]
+    erw [← cochain_comm_apply (F.map (α.f 0)), hαt]
     dsimp only [v]
-    rw [map_sub, moduleCechZero_d_apply, sub_zero, cochain_comm_apply, hdx]
+    erw [map_sub, moduleCechZero_d_apply U, sub_zero,
+      cochain_comm_apply (F.map jB), hdx]
     have hιA₀ : jA ≫ α.f 0 = S.f ≫ jB := by
       simpa [jA, jB] using congrArg (fun f ↦ f.f 0) hιA
     rw [mapCochain_comp_apply, mapCochain_comp_apply, hιA₀]
