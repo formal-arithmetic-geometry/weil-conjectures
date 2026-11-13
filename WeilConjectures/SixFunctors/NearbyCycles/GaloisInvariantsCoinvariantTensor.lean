@@ -374,6 +374,7 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   obtain ⟨r, hr, hcoinv⟩ :=
     exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
       hact
+  refine ⟨r, hr, ?_⟩
   sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
