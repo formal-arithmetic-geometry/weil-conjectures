@@ -70,7 +70,6 @@ private theorem graphTransferNat_app
 
 /-- The transpose of compact-support composition is the clopen graph transfer.
 Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J; SGA 4 XVII 6.2.11.
-(blueprint: lem-pur-proper-compositor-graph-transpose).
 
 Proof in words: proper support constructs a normalized sheaf map into c. Compute the
 chosen compositor after the raw direct-image unit on a compatible tower, using the

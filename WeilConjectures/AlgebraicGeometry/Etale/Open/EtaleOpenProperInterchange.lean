@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenInterchangeCohere
 
 /-!
 # Open extension by zero and proper derived pushforward
-
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-`lemma-shriek-proper-and-open`, Cartesian open-immersion specialization, case (b)
-(blueprint: lem-weil-pbc-etale-open-proper-interchange).
 -/
 
 @[expose] public section
@@ -36,10 +32,6 @@ square, on bounded-below derived categories of etale sheaves of modules over a f
 commutative ring. The two projections from `pullback p i` are `b = pullback.fst p i`
 and `p_V = pullback.snd p i`.
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-`lemma-shriek-proper-and-open`, case (b)
-(blueprint: lem-weil-pbc-etale-open-proper-interchange).
-
 Proof plan:
 Apply `AlgebraicGeometry.Etale.properOpenInterchangeCoherence`
 [lem-cbc-proper-open-interchange-coherence] with top-left `pullback p i`, top-right `T`,
@@ -49,8 +41,7 @@ map `pullback.snd p i`, and right proper map `p`. The square commutes by
 [lem-weil-pbc-open-immersion-base-change], and the left map is proper by base change
 [lem-weil-pbc-proper-base-change]. The derived isomorphism supplied by that theorem is
 exactly the claimed isomorphism of functors. Finite coefficient rings are torsion, so
-case (b) of Tag 0F7B applies without a residue-characteristic restriction.
--/
+case (b) of Tag 0F7B applies without a residue-characteristic restriction. -/
 theorem nonempty_iso_etale_open_proper_interchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {T B V : Scheme.{u}} (p : T ⟶ B) (i : V ⟶ B)

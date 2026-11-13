@@ -35,8 +35,7 @@ private theorem finiteBoundaryTargetRestriction_inv_app
 comparison, the inverse restriction comparison and the coefficient lineForget
 map, followed by the Cartier root map, equal the Cartier root map.  The proof
 expands `finiteBoundary_rootMap`, uses the ordinary scalar unit and
-`line_tensor`, and cancels the evaluation and restriction isomorphisms.
-(blueprint: lem-diagonal-local-finite-target-endpoint-transport) -/
+`line_tensor`, and cancels the evaluation and restriction isomorphisms. -/
 theorem finiteBoundary_target_endpoint
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

@@ -133,7 +133,6 @@ import Mathlib.Algebra.Module.Shrink
 /-! # Reverse transport from fixed-scalar pro-etale models to etale finite models
 
 Source: Stacks Project, proetale.tex, Tag 099Y; sites-modules.tex, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-reverse).
 
 This is the reverse direction of the local-model comparison. It is split from
 `finiteCoefficient_etaleLocal_encoding` so that the descent from pro-etale
@@ -303,13 +302,7 @@ private theorem ringed_model_of_fixed (X : Scheme.{t}) (B : Type t) [CommRing B]
 
 /-- Fixed-scalar pro-etale finite local models give etale finite local models.
 
-Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX.
-(blueprint: lem-weil-pbc-finite-coefficient-etale-local-encoding-reverse).
-
-Proof: Restrict fixed-scalar charts to etale objects and use finite presentation
-over the finite coefficient ring. Apply the coefficient-sized etale-cover theorem,
-then transport the resulting charts through the normalized constant-module and
-ringed-slice comparisons. -/
+Source: Stacks Project, proetale.tex, Tag 099Y, and sites-modules.tex, Tag 04IX. -/
 theorem finiteCoefficient_etaleLocal_encoding_reverse
     (X : Scheme.{t}) (B : Type t) [CommRing B] [Finite B]
     [(koszulConstantFunctor X B).PreservesZeroMorphisms]

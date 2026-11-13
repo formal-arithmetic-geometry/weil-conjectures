@@ -12,9 +12,6 @@ import all WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Exact-single transposition and the scalar adjunction shift structures
-
-Source: the exact functor single comparisons and adjunction triangle identities.
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
 -/
 
 @[expose] public noncomputable section
@@ -105,11 +102,7 @@ private lemma target_derivedId_shift :
 
 variable {C}
 
-/-- The exact derived equivalence transpose on single objects is the ordinary transpose.
-Source: coefficient changes (1), finite realization
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: compute the derived counit on a single object by the composition, identity and
-natural-isomorphism comparisons; inverse transposition then uses the ordinary triangle. -/
+/-- The exact derived equivalence transpose on single objects is the ordinary transpose. -/
 theorem equivalence_single_transpose (e : C ≌ D)
     [e.functor.Additive] [e.inverse.Additive]
     {M : C} {N : D} (i : e.functor.obj M ⟶ N) :
@@ -157,11 +150,7 @@ theorem equivalence_single_transpose (e : C ≌ D)
   rw [hi]
   rfl
 
-/-- Degree-zero endpoint normalization composes along the actual scalar adjunctions.
-Source: coefficient changes (1), successive coefficient extension
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: expand composite transposition, use each normalization and exact-single
-naturality, and cancel the collected-right composition comparison. -/
+/-- Degree-zero endpoint normalization composes along the actual scalar adjunctions. -/
 theorem composite_single_transpose
     (R : D ⥤ C) (S : K ⥤ D)
     [R.Additive] [S.Additive]
@@ -204,11 +193,7 @@ theorem composite_single_transpose
   erw [R.mapDerivedCategory.map_id, Category.id_comp, Iso.inv_hom_id_app]
   rfl
 
-/-- Transport along a shift-compatible right isomorphism preserves adjunction shifts.
-Source: coefficient changes (1), collected exact restrictions
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: the new unit is the original unit followed by the whiskered isomorphism;
-both factors commute with shifts, and unit compatibility implies counit compatibility. -/
+/-- Transport along a shift-compatible right isomorphism preserves adjunction shifts. -/
 theorem rightIso_commShift
     {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
     {F : C ⥤ D} {R S : D ⥤ C}
@@ -221,12 +206,7 @@ theorem rightIso_commShift
   change NatTrans.CommShift (a.unit ≫ Functor.whiskerLeft F e.hom) ℤ
   infer_instance
 
-/-- The actual derived equivalence adjunction respects the exact shift structures.
-Source: coefficient changes (1), finite realization
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: descend shift compatibility of the identity comparison from complexes through
-homotopy and derived localization. The derived equivalence counit is a composite of
-this comparison with the shift-compatible composition and counit comparisons. -/
+/-- The actual derived equivalence adjunction respects the exact shift structures. -/
 theorem equivalence_commShift (e : C ≌ D)
     [e.functor.Additive] [e.inverse.Additive] :
     @Adjunction.CommShift (DerivedCategory C) (DerivedCategory D)
@@ -264,10 +244,7 @@ attribute [local irreducible] derivedScalars quotientLine quotientLineMap cyclic
 attribute [local semireducible] UniformizerSquareData.cyclicEndpoints
   UniformizerSquareData.quotientEndpoints
 
-/-- The named scalar adjunction has exactly the supplied endpoint normalization.
-Source: coefficient changes (1), scalar units
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: unfold the named adjunction and its left functor and use the endpoint field. -/
+/-- The named scalar adjunction has exactly the supplied endpoint normalization. -/
 theorem scalarEndpoint_transpose
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -280,10 +257,7 @@ theorem scalarEndpoint_transpose
   unfold scalarAdjunction derivedScalars
   exact e.normalization
 
-/-- The scalar compatibility adjunction has exactly the supplied endpoint normalization.
-Source: coefficient changes (1), scalar units
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: unfold the named adjunction and its left functor and use the endpoint field. -/
+/-- The scalar compatibility adjunction has exactly the supplied endpoint normalization. -/
 theorem compatibilityEndpoint_transpose
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -296,10 +270,7 @@ theorem compatibilityEndpoint_transpose
   unfold ScalarCompatibility.scalarAdjunction derivedScalars
   exact e.normalization
 
-/-- The finite adjunction transposes a realized line to its ordinary root insertion.
-Source: coefficient changes (1), finite realization
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: use the derived equivalence transpose and unfold the ordinary root insertion. -/
+/-- The finite adjunction transposes a realized line to its ordinary root insertion. -/
 theorem finiteEndpoint_transpose
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {B : Type (u + 1)} [CommRing B]
@@ -314,11 +285,7 @@ theorem finiteEndpoint_transpose
   unfold finiteAdjunction FiniteRealization.rootInsertion
   exact equivalence_single_transpose e.F.asEquivalence i.hom
 
-/-- Scalar extension has the shift structure induced by its actual adjunction.
-Source: coefficient changes (1), derived scalar extension
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: unfold the named scalar adjunction and its left shift structure, then apply
-the compatibility theorem for the shift induced by an adjunction. -/
+/-- Scalar extension has the shift structure induced by its actual adjunction. -/
 theorem scalarAdjunction_commShift
     {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -331,11 +298,7 @@ theorem scalarAdjunction_commShift
     (isCommMonObj_condensedRingObj R X) (isCommMonObj_condensedRingObj S X)
     (coefficientMap a X) _).commShift_of_rightAdjoint ℤ
 
-/-- The finite realization adjunction respects the exact derived shifts.
-Source: coefficient changes (1), finite realization
-(blueprint: lem-diagonal-root-endpoint-transpose-core).
-Proof: apply compatibility of the actual derived equivalence adjunction to the
-finite realization equivalence. -/
+/-- The finite realization adjunction respects the exact derived shifts. -/
 theorem finiteAdjunction_commShift
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {B : Type (u + 1)} [CommRing B]

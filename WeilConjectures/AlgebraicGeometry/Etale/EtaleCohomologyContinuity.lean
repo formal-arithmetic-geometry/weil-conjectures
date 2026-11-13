@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleCohomologyClassDescent
 /-!
 # Continuity of etale cohomology at inverse limits
 
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, lemma Etale cohomology continuity
-(blueprint: corollary-cohomology-pro-etale-affine); Stacks Project, Tag 03Q6.
+Source: Stacks Project, Tag 03Q6.
 
 The canonical filtered-colimit isomorphism is stated by its elementwise criterion:
 every limit class descends, and every stage class in the kernel eventually vanishes.
@@ -65,24 +64,7 @@ The two conjuncts express surjectivity and injectivity of the canonical comparis
 with the indexing category of later stages given by arrows `f : j ⟶ i`.
 The composition isomorphism identifies iterated inverse images with direct inverse images.
 
-Source: blueprint `sec-curve-estimates/sk-prop-h2`, Etale cohomology continuity;
-Stacks Project, Tag 03Q6 (the base-change case of the continuity theorem).
-(blueprint: corollary-cohomology-pro-etale-affine).
-
-Proof:
-1. The class-descent theorem `exists_cohomology_class_of_isLimit` gives the first
-   conjunct by descending a finite hypercover cocycle and its cocycle equation.
-2. For the second conjunct, invertibility of the composition comparison shows that
-   the original class pulls back to zero along the projection to its own stage j.
-   Restrict D to Over j. The forgetful functor is initial, so the whiskered cone
-   is still limiting; its stages retain the qcqs and affine-transition hypotheses.
-3. Apply `exists_cofiltered_etale_cohomology_cocone` to the pullback sheaf on D_j.
-   In its filtered cohomology colimit, the compatible image of the class equals zero.
-   Since the forgetful functor to types preserves filtered colimits, `IsColimit.eq_iff'`
-   gives a later arrow where that image is zero. The stage identification gives
-   vanishing of the canonical cohomology pullback there.
-4. The later object of Over j supplies k and g : k to j. Apply the composition
-   isomorphism on cohomology to this zero class; additive maps preserve zero. -/
+Source: Stacks Project, Tag 03Q6 (the base-change case of the continuity theorem). -/
 theorem cohomology_continuity_of_isLimit
     {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u})
     [∀ j : J, CompactSpace (D.obj j)] [∀ j : J, QuasiSeparatedSpace (D.obj j)]

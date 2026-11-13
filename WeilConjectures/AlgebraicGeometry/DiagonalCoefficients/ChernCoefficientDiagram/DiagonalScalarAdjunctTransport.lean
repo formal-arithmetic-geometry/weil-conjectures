@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarUnitPush
 
 /-! # Transport through the two scalar changes
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -76,9 +74,7 @@ variable {B R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   {A : Type (u + 1)} [CommRing A] [Finite A]
   {N : ℕ} {hN : 0 < N} {hA : (N : A) = 0} {hY : IsUnit (N : Γ(Y, ⊤))}
 
-/-- The completed local arrow after the two scalar changes.
-Source: coefficient changes (1).
-(blueprint: lem-diagonal-scalar-adjunct-transport). -/
+/-- The completed local arrow after the two scalar changes. -/
 @[irreducible]
 def ChernCoefficientDiagram.scalarLocalArrow
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
@@ -96,9 +92,7 @@ def ChernCoefficientDiagram.scalarLocalArrow
     x.toIntegral.lineP.shift x.b
   ((x.scalar.units (ProjectiveLine Y)).iso.inv ≫ G₂.map z₁) ≫ x.scalar.lineP.shift x.q
 
-/-- Transport through completion and the two scalar changes, before finite realization.
-Source: coefficient changes (1).
-(blueprint: lem-diagonal-scalar-adjunct-transport). -/
+/-- Transport through completion and the two scalar changes, before finite realization. -/
 @[irreducible]
 def ChernCoefficientDiagram.ScalarTransportTo
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
@@ -121,12 +115,7 @@ def ChernCoefficientDiagram.ScalarTransportTo
   (F₀ ⋙ F₁ ⋙ F₂).map c ≫ (F₂.map (F₁.map v₀ ≫ v₁) ≫ v₂) =
     (F₂.map (F₁.map u₀ ≫ u₁) ≫ u₂) ≫ w
 
-/-- The two scalar-unit squares transport any completed first square.
-Source: coefficient changes (1), scalar adjunction and mate naturality.
-(blueprint: lem-diagonal-scalar-adjunct-transport).
-Proof: scalar_unit_push gives the unit square for each coefficient map.
-Naturality of each mate transports an arbitrary local arrow. Compose both squares
-with the supplied first square and identify the nested local arrow. -/
+/-- The two scalar-unit squares transport any completed first square. -/
 theorem scalar_adjunct_transport
     (x : ChernCoefficientDiagram l Y B R A N hN hA hY)
     (z : DiagonalTrace.completedUnit l (ProjectiveLine Y) ⟶

@@ -93,14 +93,7 @@ private theorem open_unit
   exact h
 
 /-- The right mate of the exact open localization factor is the inverse restriction factor.
-Source: Stacks 06YY, 0E8I; normalization proof step 1.
-
-Proof: The derived adjunction unit formula on a homotopy representative identifies its unit
-with the localized cochain unit, after postcomposing the two exact localization factors.
-The homotopy factors on quotient objects equal the cochain factors. Cancel the restriction
-factor, which is an isomorphism. The resulting unit identity characterizes the mate. The
-argument holds for every complex and for the empty open immersion.
-(blueprint: lem-coef-etale-open-localization-mate). -/
+Source: Stacks 06YY, 0E8I. -/
 theorem etaleOpenLocalizationMate
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

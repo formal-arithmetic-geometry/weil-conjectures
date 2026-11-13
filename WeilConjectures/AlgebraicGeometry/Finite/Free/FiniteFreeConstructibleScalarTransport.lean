@@ -155,9 +155,7 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 /-!
 # Finite-free transport of integral constructible local models
 
-Source: blueprint main-20261015, prop-weil-pbc-scalar-extension, exactness clause;
-Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 05CF, 08H3 and 03EL
-(blueprint: lem-weil-pbc-finite-free-constructible-scalar-transport).
+Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 05CF, 08H3 and 03EL.
 
 The coefficient rings are the actual valuation rings. Every auxiliary comparison is
 fixed by quotient projections, tensor sections, or the published derived counits.

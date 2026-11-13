@@ -24,14 +24,12 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The lifted finite quotient ring at a level.
-Source: Stacks Tag 09C6, with coefficient universes made explicit.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tag 09C6, with coefficient universes made explicit. -/
 abbrev finitePerfectAdicIsomorphismRing {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) := ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))
 
 /-- Consecutive quotient homomorphism in the lifted coefficient universe.
-Source: Stacks Tag 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tag 09C6. -/
 def finitePerfectAdicIsomorphismQuotient {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     finitePerfectAdicIsomorphismRing d (n + 1) →+* finitePerfectAdicIsomorphismRing d n :=
@@ -42,8 +40,7 @@ def finitePerfectAdicIsomorphismQuotient {A : Type t} [CommRing A]
         (A ⧸ d.ideal ^ (n + 1 + 1))).toRingHom)
 
 /-- A finite-coefficient etale complex on a chart.
-Source: Stacks Tags 09AL and 05RU.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tags 09AL and 05RU. -/
 abbrev finitePerfectAdicIsomorphismComplex {A : Type t} [CommRing A]
     (Y : Scheme.{t}) (d : AdicCoefficientDatum A) (n : ℕ) :=
   DerivedCategory (Sheaf Y.smallEtaleTopology
@@ -56,8 +53,7 @@ The scalar-forgetting realization functors, coefficient interchange and two leve
 comparisons have their actual normalization identities. Transport of raw isomorphisms
 and preservation of a supplied raw square are then constructed and proved below. Neither
 evaluation on pro-etale sheaf sections nor its reduction square is contained in the datum.
-Source: Stacks Tags 09C6, 09BV and 06YY.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tags 09C6, 09BV and 06YY. -/
 structure FinitePerfectAdicIsomorphismPresentation
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -162,8 +158,7 @@ private theorem conjugate_normalization_square
   rw [← F.map_comp_assoc, ← he, F.map_comp, Category.assoc, ha]
 
 /-- Apply the scalar-forgetting realization and the two specified level comparisons.
-Source: Stacks Tag 09C6.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tag 09C6. -/
 def FinitePerfectAdicIsomorphismPresentation.transport
     {X : Scheme.{t}} {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     {M : DerivedCategory (CompletedAdicModules X d)} {V : X.Etale}
@@ -178,8 +173,7 @@ def FinitePerfectAdicIsomorphismPresentation.transport
   (D.model U W f n).symm ≪≫ (D.realization U W f n).mapIso e ≪≫ D.actual U W f n
 
 /-- The two normalization identities transport a raw square to the actual diagrams.
-Source: Stacks Tag 09C6; naturality of the coefficient comparison.
-(blueprint: def-weil-pbc-finite-perfect-adic-isomorphism-presentation). -/
+Source: Stacks Tag 09C6. -/
 theorem FinitePerfectAdicIsomorphismPresentation.transport_square
     {X : Scheme.{t}} {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     {M : DerivedCategory (CompletedAdicModules X d)} {V : X.Etale}
@@ -211,30 +205,7 @@ theorem FinitePerfectAdicIsomorphismPresentation.transport_square
 This supplies no pro-etale sheaf-section evaluation or evaluated reduction square.
 
 Source: Stacks Project, Tag 09C6, finite quotient descent and normalized algebraic levels;
-Tag 09BV, Isom presheaves; Tag 06YY, universal normalization arrows.
-(blueprint: lem-weil-pbc-finite-perfect-adic-isomorphism-presentation).
-
-Proof: descend the finite quotient complexes restricted to V by finite-ring derived
-comparison. Lift the supplied perfect algebraic levels to the coefficient universe and
-apply the exact constant functor to obtain C; use the descended quotient levels for K.
-Separate local markings identify K with C on covering sieves. The perfect levels over
-finite rings are bounded with finite cohomology; their exact constant realizations and
-local identifications give boundedness and lisse cohomology for C and K. Every geometric
-point lifts to each covering sieve, whose marking gives a local Isom section and hence
-an inhabited stalk of its sheafification. Descend the actual consecutive quotient maps
-by full faithfulness. The algebraic normalization and balancing of the strict derived
-quotient tower make both consecutive arrows universal for scalar restriction. On each
-etale slice, extend an isomorphism by scalars and conjugate by these two universal arrows.
-Uniqueness of universal factorizations makes this construction natural in the slice and
-proves the generator normalization square; this gives p. For transport, compare the
-pulled descended K with the actual finite quotient, and the pulled constant C with the
-realization of the supplied algebraic level. Forget quotient scalars, conjugate by these
-comparisons, and apply exact slice restriction along W to U. The coefficient compatibility
-of φ gives the two normalization identities relating these realized arrows to the
-specified strict tower and model transitions. Naturality of the coefficient comparison
-then proves transport_square separately, rather than assuming it in the presentation.
-There is no inverse limit or simultaneous marking choice. The zero ring and empty chart
-use the same constructions. -/
+Tag 09BV, Isom presheaves; Tag 06YY, universal normalization arrows. -/
 theorem finitePerfectAdic_isomorphism_presentation
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

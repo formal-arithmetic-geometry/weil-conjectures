@@ -106,16 +106,7 @@ private lemma comparison_square
 /-- The ordinary comparison has a coherent rank-one quotient component.
 
 Source: Stacks Project, Tags 093J and 093M; Tag 03CY for the associated module
-sheaf.
-(blueprint: new-s3-finite-perfect-adic-ordinary-scalar-components)
-
-Proof: identify the constant sections after the etale and pro-etale inverse-image
-maps, then use the completed finite-reduction comparison on the free rank-one
-quotient.  Restriction along the next quotient is compatible with the two
-projection maps, so the resulting family of component isomorphisms commutes on
-the rank-one quotient object.  The construction is natural in the chart and
-covers zero rings and empty charts.
--/
+sheaf. -/
 theorem finitePerfectAdicOrdinaryScalar_components
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

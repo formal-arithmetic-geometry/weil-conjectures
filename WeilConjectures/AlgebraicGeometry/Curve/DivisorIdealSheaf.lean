@@ -23,9 +23,7 @@ An effective divisor `E = ∑_P n_P [P]` defines the invertible ideal sheaf
 local generator of `𝒪_C(-E)` is `n_P`, and every invertible ideal sheaf is of this form. These
 ideal sheaves give a concrete description of line bundles on `C`: `𝒪_C(-E₁) ≅ 𝒪_C(-E₂)` if and
 only if `E₁ - E₂` is principal, and every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`. This is the
-input for the identification of the divisor class group with the Picard group
-(`AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`, blueprint
-`proposition-cohomology-smooth-affine-curve`).
+input for the identification of the divisor class group with the Picard group.
 
 ## Main definitions
 
@@ -51,8 +49,7 @@ input for the identification of the divisor class group with the Picard group
   `AlgebraicGeometry.Scheme.Divisor.exists_ord_eq_of_nonempty_iso`: `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)` if and
   only if `E₁ - E₂` is the divisor of a rational function.
 - `AlgebraicGeometry.Scheme.Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj`:
-  every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)` (blueprint
-  `theorem-riemann-roch-coherent-serre-duality--1`).
+  every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`.
 -/
 
 @[expose] public section
@@ -473,10 +470,7 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
 
 include f in
 /-- The ideal sheaf of an effective divisor on a smooth curve is invertible: every effective
-divisor is an effective Cartier divisor.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality`) -/
+divisor is an effective Cartier divisor. -/
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
@@ -490,9 +484,7 @@ include f in
 set `s` of closed points and multiplicities `n`, the ideal sheaf `∏_{P ∈ s} 𝓘_P^{n_P}` of the
 effective divisor `∑_{P ∈ s} n_P [P]` is invertible: each `𝓘_P` is invertible
 (`isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`), and products of invertible
-ideal sheaves are invertible.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+ideal sheaves are invertible. -/
 lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
     (n : closedPoints C → ℕ) :
     (∏ P ∈ s, IdealSheafData.vanishingIdeal ⟨{P.1}, P.2⟩ ^ n P).IsInvertible := by
@@ -877,10 +869,7 @@ effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators o
 `𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. Here
 `𝒪_C(-E) = ∏_P 𝓘_P^{n_P}` has order `n_P` at the closed point `P`
 (`AlgebraicGeometry.Scheme.Divisor.ordAt_idealSheaf`), i.e. its stalk at `P` is `(t_P^{n_P})`
-for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`,
-`theorem-riemann-roch-coherent-serre-duality`, `theorem-riemann-roch-coherent-serre-duality`) -/
+for a uniformizer `t_P` of the discrete valuation ring `𝒪_{C,P}`, and order `0` elsewhere. -/
 theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
     (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
   have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=

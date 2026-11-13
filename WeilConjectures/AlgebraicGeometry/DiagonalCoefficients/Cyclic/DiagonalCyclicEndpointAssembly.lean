@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyc
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicEndpointAssemblySpec
 
 /-! # Calculation of cyclic transport with a named equation type
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-endpoint-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -65,10 +62,7 @@ attribute [local semireducible] cyclicReductionAssemblySpec cyclicArrowAssemblyS
 
 attribute [local semireducible] cyclicFixedArrowAssemblySpec
 
-/-- Apply the quotient comparison before introducing the varying Ext classes.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-endpoint-assembly).
-Proof: specialize the fixed reduction assembly, and provide its source and root
-comparison by endpointComparison. The remaining class argument is universal. -/
+/-- Apply the quotient comparison before introducing the varying Ext classes. -/
 theorem cyclicExtAssembly_endpoints
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (hY : IsUnit (l : Γ(Y, ⊤)))

@@ -64,8 +64,7 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarHomoto
 # Tensor and unbounded derived calculus for a finite clopen partition
 
 Source: Stacks Project, derived.tex, Tags 015F and 05RU; sites-modules.tex, Tag 0GMW;
-sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU; finite-component application
-(blueprint: lem-pur-finite-product-derived-tensor-calculus).
+sites-cohomology.tex, Tags 06YN, 06YS, 0G7D and 06YU.
 
 All restrictions are the sectionwise functors of the module-gluing node. Tensor products
 and their constraints are the existing sheafification and K-flat localization constructions.
@@ -150,8 +149,7 @@ end DerivedPi
 symmetric monoidal derived restriction. Each `Braided` structure contains invertible
 tensorators and unit comparison, their naturality, associativity, both unit diagrams,
 and the symmetry diagram; the tensor products are the existing ones on both sides.
-Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT
-(blueprint: lem-pur-finite-product-derived-tensor-calculus).
+Source: Stacks 0GMW, 06YN, 06YS, 0G7D, 06YU and 0FPT.
 
 Proof (node steps 4-9): the bilinear universal property constructs the restriction
 tensorator. Its inverse is obtained by gluing the component bilinear maps. Both
@@ -245,7 +243,7 @@ theorem finite_clopen_tensor_calculus
 open SheafOfModules.SuccessiveDerivedQuotient
 
 /-- The already defined universal coefficient-extension presentations on this site.
-Source: Stacks 06YY (blueprint: lem-pur-finite-product-derived-tensor-calculus). -/
+Source: Stacks 06YY. -/
 abbrev Presentations (X : Scheme.{t}) :=
   ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),
     Presentation.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
@@ -253,7 +251,7 @@ abbrev Presentations (X : Scheme.{t}) :=
 
 /-- Apply the existing normalized scalar compositor to the restricted ring maps.
 The final equality transport is only functoriality of ring restriction.
-Source: Stacks 0D6D (blueprint: lem-pur-finite-product-derived-tensor-calculus). -/
+Source: Stacks 0D6D. -/
 def scalarComposite {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (p : Presentations.{t, u} Y) (N : Normalization (J := topology Y) p)
     {R S T : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S) (b : S ⟶ T) :

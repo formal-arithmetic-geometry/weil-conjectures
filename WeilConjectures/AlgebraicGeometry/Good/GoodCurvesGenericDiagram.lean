@@ -23,9 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesFibreDensity
 
 /-!
 # Good curve diagrams near a generic point
-
-Source: Stacks Project, More on Morphisms, Tag 0GK7, lemma-make-good-curves,
-assertions (1)-(8) (blueprint: lem-weil-pbc-good-curves-generic-diagram).
 -/
 
 @[expose] public section
@@ -37,7 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: lem-weil-pbc-good-curves-generic-diagram)
+/--
 Stacks Project, Tag 0GK7: a separated finitely presented family with generic fibre of
 dimension at most one admits a good curve diagram after a finite radicial base cover.
 
@@ -192,8 +189,7 @@ nonempty open and meets the dense subset. Its image is exactly $W_v$ since $\nu$
 Consequently $W$ is dense in every fibre of $X_V\to V$. This proves all clauses. If $I$ is empty,
 the descended surjection from the empty scheme forces $X_V$ to be empty; choose $W=\varnothing$.
 Inputs: lem-weil-pbc-surjective-base-change, lem-weil-pbc-scheme-coproduct-family, def-pc-scheme-
-fibre.
--/
+fibre. -/
 theorem exists_good_curves_generic_diagram
     {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

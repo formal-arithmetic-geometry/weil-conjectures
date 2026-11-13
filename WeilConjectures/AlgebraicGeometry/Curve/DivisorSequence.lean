@@ -45,12 +45,6 @@ unit, and that a uniformiser at a point over `S` is a unit on the punctured neig
 
 - `AlgebraicGeometry.IsCurve.exists_shortExact_divisorSequence`: the divisor sequence of a
   punctured curve is short exact.
-
-## Blueprint references
-
-The labels quoted below are labels of the *sketch* blueprint, which lives in the separate
-repository `formal-arithmetic-geometry/weil-conjectures-blueprint`, not of `blueprint/src` in
-this repository.
 -/
 
 @[expose] public section
@@ -323,8 +317,7 @@ the complement of `S`, and `V` an étale `C`-scheme. A unit `f` on `V ×_C U` wh
 points of `V` over `S` vanishes extends, near every point of `V`, to a unit of `𝒪_V`: at a point
 over `S` the local ring is a discrete valuation ring and `f` is a unit of it
 (`Ring.exists_eq_algebraMap_of_ordOf_eq_zero`); its extension agrees with `f` on the punctured
-neighbourhood by `AlgebraicGeometry.IsCurve.injective_toLocalGenericRing_appTop`.
-(blueprint: `lemma-cohomology-multiplicative-group--6`, exactness in the middle) -/
+neighbourhood by `AlgebraicGeometry.IsCurve.injective_toLocalGenericRing_appTop`. -/
 lemma exists_eq_of_ord_eq_zero (hC : topologicalKrullDim C = 1) {S : Set C} (hS : S.Finite)
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale) (y : V.left)
     (f : Γ(pullback V.hom j, ⊤)ˣ)
@@ -473,8 +466,7 @@ open Classical in
 integer-valued function on the points of `V` over `P`. Near every point of `V` there is a unit on
 `V ×_C U` whose order is `c` at the points over `P` and `0` at the other points over `S`: a
 power of a uniformiser of the discrete valuation ring `𝒪_{V,y}`, which near `y` vanishes only
-at `y` (`AlgebraicGeometry.Scheme.exists_opens_isolate`).
-(blueprint: `lemma-cohomology-multiplicative-group--6`, surjectivity) -/
+at `y` (`AlgebraicGeometry.Scheme.exists_opens_isolate`). -/
 lemma exists_ord_eq_extendByZero (hC : topologicalKrullDim C = 1) {S : Set C}
     (hSc : ∀ P ∈ S, IsClosed {P}) (hj : Set.range j = Sᶜ) (V : C.Etale)
     (y : V.left) {P : C} (hP : P ∈ S)
@@ -641,8 +633,7 @@ cokernel, `j_* 𝔾ₘ` maps to the sheaf `V ↦ (V → ℤ)` of functions on po
 vanishing at the points over `S`, and `⨁_{P ∈ S} i_{P*} ℤ` maps to it by extension by zero;
 on geometric stalks the second map is injective, the two images agree by
 `AlgebraicGeometry.IsCurve.exists_ord_eq_extendByZero`, and the kernel of the first is the
-image of `𝔾ₘ` by `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`.
-(blueprint: `lemma-cohomology-multiplicative-group--6`) -/
+image of `𝔾ₘ` by `AlgebraicGeometry.IsCurve.exists_eq_of_ord_eq_zero`. -/
 theorem exists_shortExact_divisorSequence [IsAlgClosed k] (f : C ⟶ Spec (.of k)) [IsCurve f]
     [Smooth f] [IsProper f] [ConnectedSpace C] (hC : topologicalKrullDim C = 1) (S : Set C)
     (hS : S.Finite) (hSc : ∀ P ∈ S, IsClosed {P}) {U : Scheme.{u}} (j : U ⟶ C)

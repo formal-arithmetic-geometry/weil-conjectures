@@ -22,10 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.AffineKummerDegreeOneBaseChange
 
 /-!
 # Canonical pullback in degrees zero and one
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper and affine cases in degrees zero and one
-(blueprint: lem-sc-constant-low-degree-base-change).
 -/
 
 @[expose] public section

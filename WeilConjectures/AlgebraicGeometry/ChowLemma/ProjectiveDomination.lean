@@ -43,10 +43,6 @@ and the immersion obtained is closed since its source is proper over `Y`.
 
 * [Stacks, Tag 0200](https://stacks.math.columbia.edu/tag/0200)
 * [Stacks, Tag 0202](https://stacks.math.columbia.edu/tag/0202)
-
-## Blueprint
-
-The declarations of this file implement `lemma-weil-pbc-chow-factorization`.
 -/
 
 @[expose] public section
@@ -70,7 +66,7 @@ closed immersion `i : X̃ ⟶ ℙ(n; Y)` with `n` finite, such that
           f
 ```
 
-commutes. (Blueprint `theorem-chow-s-lemma-projective-form--1`.) -/
+commutes. -/
 structure ProjectiveDomination {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- the dominating scheme `X̃` -/
   X' : Scheme.{u}
@@ -97,7 +93,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 /-- **Projective dominations are stable under base change**: the base change of a projective
 domination of `f : X ⟶ Y` along `g : Y' ⟶ Y` is a projective domination of
 `X ×_Y Y' ⟶ Y'`. The closed immersion into `ℙ(n; Y')` is the base change of the given one along
-`ℙ(n; Y') ⟶ ℙ(n; Y)`. (Blueprint `theorem-chow-s-lemma-projective-form--1`, base change part.) -/
+`ℙ(n; Y') ⟶ ℙ(n; Y)`. -/
 noncomputable def pullback (D : ProjectiveDomination f) {Y' : Scheme.{u}} (g : Y' ⟶ Y) :
     ProjectiveDomination (Limits.pullback.snd f g) :=
   have h : IsPullback (Limits.pullback.fst (D.π ≫ f) g) (Limits.pullback.snd (D.π ≫ f) g)
@@ -135,8 +131,7 @@ change of a separated finitely presented `X₀' ⟶ Y₀` over a stage `Y₀` of
 approximation of `Y` (Stacks Project Tag 01ZQ). Chow's lemma over `Y₀` gives a proper surjection
 `π₀ : X₀'' ⟶ X₀'` and an immersion `X₀'' ⟶ ℙ(n; Y₀)`; base changing `π₀` along `X' ⟶ X₀'` and
 then along `X ⟶ X'` gives `π`, and the induced morphism to `ℙ(n; Y)` is an immersion whose
-source is proper over `Y`, hence a closed immersion.
-(Blueprint `theorem-chow-s-lemma-projective-form--1`.) -/
+source is proper over `Y`, hence a closed immersion. -/
 theorem nonempty_of_isAffine [IsAffine Y] [IsProper f] : Nonempty (ProjectiveDomination f) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
   have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated f

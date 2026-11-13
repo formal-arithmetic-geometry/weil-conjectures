@@ -29,9 +29,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.Diagon
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedScalarSource
 
 /-! # Scalar endpoints and supported sources for a uniformizer quotient
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-uniformizer-scalar-frame).
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +43,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The fixed canonical model, parameterized by its coefficient ring to keep
-endpoint structures small. Source: coefficient changes paragraph (1).
-(blueprint: lem-diagonal-uniformizer-scalar-frame). -/
+endpoint structures small. -/
 abbrev scalarRightDerived
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}} (f : X ⟶ S) :=
@@ -55,9 +51,7 @@ abbrev scalarRightDerived
 
 /-- Scalar endpoints, direct-image squares and normalized supported sources,
 without a transported class, trace or integration identity. Parameterizing the two
-rings and lines avoids expanding a concrete quotient tensor product in every field.
-Source: coefficient changes paragraph (1).
-(blueprint: lem-diagonal-uniformizer-scalar-frame). -/
+rings and lines avoids expanding a concrete quotient tensor product in every field. -/
 structure ScalarFrame
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -270,32 +264,7 @@ private theorem scalarFrame_of_squares
     source₂ := hs₂ }⟩
 
 /-- Construct the scalar frame before transporting any class or trace. In particular,
-this assertion does not identify a finite Cartier class or choose a quotient diagram.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient reduction.
-(blueprint: lem-diagonal-uniformizer-scalar-frame).
-
-Proof: The regular module is flat. The K-flat transpose of the ordinary scalar
-extension unit computes its derived scalar endpoint; transport by the uniquely
-normalized regular scalar multiplication isomorphism. The actual integral Tate
-line is locally free of rank one. The signed-line tensor equivalence proves its
-flatness in the section-module category, hence in internal modules. The same
-single-complex argument gives its two quotient-line endpoints.
-
-For the three projections use the full-unit-normalized uniformizer scalar square.
-Its scalar mate is invertible on every complex by the two-term finite free quotient
-resolution and the perfect projection argument; in particular it is invertible on
-the required shifted lines. This uses no projective-line cohomology computation.
-
-Apply closed-support scalar compatibility separately to both projections, using
-their integral normalized sources and the common regular endpoint. This supplies
-the quotient normalized sources and the two source equations. Two endpoints for
-the same underlying supported coefficient map have equal semilinear maps, and
-their adjoint normalization therefore makes their derived homs equal. Replace the
-second endpoint hom by the first in the second source equation and assemble the
-frame. The argument applies at n = 0 and for ramified uniformizers without requiring
-flatness of the quotient coefficient map. -/
+this assertion does not identify a finite Cartier class or choose a quotient diagram. -/
 theorem diagonalUniformizer_scalarFrame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

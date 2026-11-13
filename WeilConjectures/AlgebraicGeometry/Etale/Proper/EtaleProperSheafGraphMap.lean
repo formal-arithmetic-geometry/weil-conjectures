@@ -356,7 +356,6 @@ private theorem properSheaf_graph_map_aux
 
 /-- The normalized proper-support map transposes to the ordinary clopen-graph map.
 Source: Stacks Project, Tags 0F7B and 0F4L; SGA 4 XVII 6.2.11.
-(blueprint: lem-pur-proper-sheaf-graph-map).
 
 Proof in words: factor q_* through the direct image of its proper clopen graph,
 identify that direct image with graph extension by zero, and apply the Cartesian

@@ -58,7 +58,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `proposition-multiplication-n--2`: The `n`-torsion of an abelian variety is étale.
+/-- The `n`-torsion of an abelian variety is étale.
 
 Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
 `p`. Then `A[n]` is an étale group scheme over `K`. This is also the first part of blueprint
@@ -78,7 +78,7 @@ theorem etale_torsionSubgroupScheme (p : ℕ) [CharP K p] (A : Over (Spec (.of K
   · exact hnp (hp.dvd_of_dvd_pow h)
   · exact pow_ne_zero _ hn.ne' (zero_dvd_iff.1 h)
 
-/-- Blueprint `proposition-multiplication-n--2`: Multiplication by `d` prime to the characteristic
+/-- Multiplication by `d` prime to the characteristic
 is étale.
 
 Let `A` be an abelian variety over a field `K` of characteristic `p` and let `n` be prime to
@@ -107,7 +107,7 @@ theorem etale_npow_id (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) [GrpObj A]
   rw [Category.id_comp]
   exact ⟨⟨inferInstance, inferInstance⟩, inferInstance⟩
 
-/-- Blueprint `proposition-multiplication-n--2`: The `n`-torsion of an abelian variety is étale.
+/-- The `n`-torsion of an abelian variety is étale.
 
 For `n` prime to the characteristic of an algebraically closed base field `K`, the canonical
 base-change map `A[n](K) ⟶ A[n](K')` is a bijection for every extension `K ⊆ K'` of
@@ -126,7 +126,7 @@ theorem bijective_toUnit_comp_torsionSubgroupScheme [IsAlgClosed K] (p : ℕ) [C
   have := etale_torsionSubgroupScheme p A n hn hnp
   exact bijective_toUnit_comp (torsionSubgroupScheme A n)
 
-/-- Blueprint `proposition-multiplication-n--2`: The `n`-torsion of an abelian variety is étale.
+/-- The `n`-torsion of an abelian variety is étale.
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` of
 characteristic `p` and let `n` be prime to `p`. Then `A(K)[n] ≅ (ℤ/nℤ) ^ (2 * g)`. This is also

@@ -30,7 +30,6 @@ scalar action directly through `Sheaf.H.map`, avoiding expanded module wrappers.
 
 Source: Stacks Project, Cohomology, Section 01F7 (pullback of cohomology), and
 Cohomology of Schemes, Lemma 30.5.2 (Tag 02KH), the canonical comparison map.
-(blueprint: def-pc-flat-cohomology-comparison)
 -/
 
 @[expose] public section
@@ -41,23 +40,20 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 attribute [-instance] instAddCommGroupH moduleH
 /-- The canonical sheafification instance, shared by all comparisons.
-Source: Mathlib's sheafification for abelian sheaves.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Mathlib's sheafification for abelian sheaves. -/
 theorem cohomologyHasSheafify (Z : Scheme.{u}) :
     HasSheafify (Opens.grothendieckTopology Z) AddCommGrpCat.{u} := by infer_instance
 attribute [local instance] cohomologyHasSheafify
 
 /-- The canonical small Ext instance, shared by all comparisons.
-Source: Mathlib `IsGrothendieckAbelian.hasExt`.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Mathlib `IsGrothendieckAbelian.hasExt`. -/
 theorem cohomologyHasExt (Z : Scheme.{u}) :
     HasExt.{u} (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u}) := by infer_instance
 attribute [local instance] cohomologyHasExt
 
 variable {X Y : Scheme.{u}}
 /-- Exact inverse image on abelian sheaves.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 def invImage (f : X ⟶ Y) :
     Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} ⥤
       Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
@@ -65,21 +61,13 @@ def invImage (f : X ⟶ Y) :
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)
 /-- Inverse image of abelian sheaves preserves finite limits.
 Source: Mathlib `lan_preservesFiniteLimits_of_flat` and
-`Functor.sheafPullbackConstruction.preservesFiniteLimits`.
-Proof: the preimage functor on opens is representably flat: the category of opens
-whose preimage contains a given open is nonempty and cofiltered by intersection.
-The cited Lan theorem gives finite-limit preservation for abelian presheaves;
-left-exact sheafification and the sheaf pullback construction transfer it to sheaves.
-(blueprint: lem-pc-abelian-inverse-image-finite-limits) -/
+`Functor.sheafPullbackConstruction.preservesFiniteLimits`. -/
 instance invImage_preservesFiniteLimits (f : X ⟶ Y) : PreservesFiniteLimits (invImage f) := by
   have := lan_preservesFiniteLimits_of_flat (E := AddCommGrpCat.{u}) (Opens.map f.base)
   exact Functor.sheafPullbackConstruction.preservesFiniteLimits _ _ _ _
 /-- Inverse image of abelian sheaves preserves finite colimits.
 Source: Mathlib `Functor.sheafAdjunctionContinuous` and
-`Adjunction.leftAdjoint_preservesColimits`.
-Proof: sheaf pullback is left adjoint to continuous sheaf pushforward. The cited
-adjunction theorem gives preservation of all colimits, hence of finite colimits.
-(blueprint: lem-pc-abelian-inverse-image-finite-colimits) -/
+`Adjunction.leftAdjoint_preservesColimits`. -/
 instance invImage_preservesFiniteColimits (f : X ⟶ Y) : PreservesFiniteColimits (invImage f) := by
   have := ((Opens.map f.base).sheafAdjunctionContinuous AddCommGrpCat.{u}
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).leftAdjoint_preservesColimits
@@ -94,8 +82,7 @@ instance invImage_additive (f : X ⟶ Y) : (invImage f).Additive := by
     (Opens.grothendieckTopology Y) (Opens.grothendieckTopology X)).left_adjoint_additive
 
 /-- The abelian-sheaf coefficient map adjoint to the underlying module morphism.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 def coeff (f : X ⟶ Y) {M : Y.Modules} {N : X.Modules}
     (φ : M ⟶ (pushforward f).obj N) :
     (invImage f).obj ((SheafOfModules.toSheaf Y.ringCatSheaf).obj M) ⟶
@@ -104,8 +91,7 @@ def coeff (f : X ⟶ Y) {M : Y.Modules} {N : X.Modules}
     ((SheafOfModules.toSheaf Y.ringCatSheaf).map φ)
 
 /-- Inverse image of the constant integer sheaf is the constant integer sheaf.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 def constIso (f : X ⟶ Y) :
     (invImage f).obj ((constantSheaf (Opens.grothendieckTopology Y)
       AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ≅
@@ -116,8 +102,7 @@ def constIso (f : X ⟶ Y) :
     isTerminalTop isTerminalTop).app (AddCommGrpCat.of (ULift.{u} ℤ))
 
 /-- Naturality of the adjoint coefficient maps.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 lemma coeff_naturality (f : X ⟶ Y) {M M' : Y.Modules} {N N' : X.Modules}
     (φ : M ⟶ (pushforward f).obj N) (ψ : M' ⟶ (pushforward f).obj N')
     (a : M ⟶ M') (b : N ⟶ N') (h : a ≫ ψ = φ ≫ (pushforward f).map b) :
@@ -132,8 +117,7 @@ lemma coeff_naturality (f : X ⟶ Y) {M M' : Y.Modules} {N N' : X.Modules}
   rw [← Functor.map_comp, ← Functor.map_comp, h]
 
 /-- Naturality of the comparison on Ext-based abelian-sheaf cohomology.
-Source: Stacks Project, Section 01F7, and `Sheaf.H.mapFunctor_map`.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Section 01F7, and `Sheaf.H.mapFunctor_map`. -/
 lemma sheafComparison_naturality
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -154,8 +138,7 @@ lemma sheafComparison_naturality
 variable {R S : Type u} [CommRing R] [CommRing S]
 
 /-- Cohomology with its scalar action from the displayed morphism to Spec R.
-Source: Stacks Project, Section 01F7.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Section 01F7. -/
 def HOver (_f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Type u :=
   M.H q
 
@@ -164,8 +147,7 @@ instance HOver_addCommGroup (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
   exact instAddCommGroupH M q
 
 /-- A scalar representation on a sheaf acts on its Ext cohomology.
-Source: Mathlib's functoriality and additivity of `Sheaf.H.map`.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Mathlib's functoriality and additivity of `Sheaf.H.map`. -/
 @[instance_reducible]
 def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
@@ -193,9 +175,7 @@ def cohomologyModule {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     rw [add_zero] at h
     exact left_eq_add.mp h
 
-/-- The scalar representation on the underlying abelian sheaf of a module.
-Source: the source library's `smulHom` identities and functoriality of `toSheaf`.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+/-- The scalar representation on the underlying abelian sheaf of a module. -/
 def scalarRep (M : X.Modules) :
     Γ(X, ⊤) →+* End ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) where
   toFun a := .of ((SheafOfModules.toSheaf X.ringCatSheaf).map (M.smulHom a))
@@ -224,41 +204,35 @@ instance HOver_module (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) : Modul
 variable [Algebra R S]
 
 /-- The morphism of affine schemes induced by the scalar-extension homomorphism.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 def baseChangeMap (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] :
     Spec (.of S) ⟶ Spec (.of R) :=
   Spec.map (CommRingCat.ofHom (algebraMap R S))
 
 /-- The scheme in the cartesian base-change square.
-Source: Stacks Project, Tag 02KH.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH. -/
 def baseChangedScheme (f : X ⟶ Spec (.of R)) : Scheme.{u} :=
   Limits.pullback f (baseChangeMap R S)
 
 /-- Projection to the original scheme.
-Source: Stacks Project, Tag 02KH.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH. -/
 def baseChangeFst (f : X ⟶ Spec (.of R)) : baseChangedScheme (S := S) f ⟶ X :=
   Limits.pullback.fst f (baseChangeMap R S)
 
 /-- Projection to the base-changed affine base.
-Source: Stacks Project, Tag 02KH.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH. -/
 def baseChangeSnd (f : X ⟶ Spec (.of R)) :
     baseChangedScheme (S := S) f ⟶ Spec (.of S) :=
   Limits.pullback.snd f (baseChangeMap R S)
 
 /-- The module on the cartesian base change, using the module pullback functor.
-Source: Stacks Project, Tag 02KH.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH. -/
 def baseChangedModule (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     (baseChangedScheme (S := S) f).Modules :=
   (pullback (baseChangeFst (S := S) f)).obj M
 
 /-- The scalar maps commute in the cartesian base-change square.
-Source: Stacks Project, Sections 01F7 and 02KE.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Sections 01F7 and 02KE. -/
 lemma scalarMap_baseChange (f : X ⟶ Spec (.of R)) (a : R) :
     (baseChangeFst (S := S) f).appTop
         (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom a) =
@@ -289,16 +263,14 @@ instance HOver_scalarTower (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
   IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
 
 /-- The adjunction unit into the direct image of the base-changed module.
-Source: Stacks Project, Tag 02KH, the canonical comparison.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH, the canonical comparison. -/
 def baseChangeUnit (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     M ⟶ (pushforward (baseChangeFst (S := S) f)).obj
       (baseChangedModule (S := S) f M) :=
   (pullbackPushforwardAdjunction (baseChangeFst (S := S) f)).unit.app M
 
 /-- An exact inverse-image comparison is linear for compatible scalar representations.
-Source: Stacks Project, Section 01F7; naturality of the Ext comparison.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Section 01F7. -/
 def cohomologyComparisonLinear
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -324,8 +296,7 @@ def cohomologyComparisonLinear
         sheafComparison_naturality G e φ φ (ρ a).asHom (τ a).asHom (h a) q x }
 
 /-- The pullback on cohomology before extending scalars.
-Source: Stacks Project, Tag 02KH, canonical comparison.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH, canonical comparison. -/
 def H.baseChangeLinear (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
     HOver f M q →ₗ[R] HOver (baseChangeSnd (S := S) f)
       (baseChangedModule (S := S) f M) q :=
@@ -351,8 +322,7 @@ def H.baseChangeLinear (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
       exact smulHom_naturality (baseChangeUnit (S := S) f M) _) q
 
 /-- Extend an R-linear comparison uniquely to its S-linear tensor comparison.
-Source: Mathlib `TensorProduct.AlgebraTensorModule.lift`.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Mathlib `TensorProduct.AlgebraTensorModule.lift`. -/
 def extendComparison {A B : Type u} [AddCommGroup A] [AddCommGroup B]
     [Module R A] [Module R B] [Module S B] [IsScalarTower R S B]
     (l : A →ₗ[R] B) : TensorProduct R S A →ₗ[S] B :=
@@ -362,8 +332,7 @@ def extendComparison {A B : Type u} [AddCommGroup A] [AddCommGroup B]
       map_smul' := fun _ _ ↦ mul_smul _ _ _ }
 
 /-- The canonical base-change comparison; it is defined without assuming flatness.
-Source: Stacks Project, Tag 02KH, canonical comparison.
-(blueprint: def-pc-flat-cohomology-comparison) -/
+Source: Stacks Project, Tag 02KH, canonical comparison. -/
 def H.baseChange (f : X ⟶ Spec (.of R)) (M : X.Modules) (q : ℕ) :
     TensorProduct R S (HOver f M q) →ₗ[S]
       HOver (baseChangeSnd (S := S) f)

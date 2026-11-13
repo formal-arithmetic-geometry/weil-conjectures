@@ -167,24 +167,7 @@ extension functors or scalar mates in this statement. The isomorphism r transpor
 an arbitrary coefficient object; neither it nor K need be perfect.
 
 Source: Stacks Project, sites-cohomology.tex, equation-projection-formula-map
-(Tag 0B56), and the adjunction comparison of Tag 07A6; blueprint order 1275.
-(blueprint: lem-pbc-completed-tensor-projection-coefficient-transport).
-
-Proof: restriction along the coefficient isomorphism c_f is an exact equivalence
-of module categories, with inverse restriction along c_f inverse. Its unit and
-counit are the identity on sections. Transport the flat K-flat representative
-class and the signed total tensor through this equivalence. The resulting
-bifunctor and representative comparison give aX. The canonical restriction/direct
-image comparison identifies pushforward of the restricted K with the completed
-pushforward of K. Tensor this identification with r to obtain s. Restriction
-commutes with pullback by the action square; combine this with the transported
-tensor and direct-image comparisons to obtain t. On each pair of flat K-flat
-representatives the pullback/tensor comparisons agree on every pure tensor and
-hence on all sections after sheafification. Their localizations therefore agree.
-The coefficient-change adjunction theorem identifies the transported counit with
-the original counit. Transpose the defining tensor-comparison/counit composite:
-naturality of the Hom equivalence gives exactly the asserted equation. The same
-formulas apply to the zero coefficient object, zero ring and empty site. -/
+(Tag 0B56), and the adjunction comparison of Tag 07A6. -/
 theorem completedTensorProjectionCoefficientTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)

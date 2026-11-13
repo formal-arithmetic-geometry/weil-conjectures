@@ -104,9 +104,7 @@ right-hand side carries the `Γ(X, ⊤)`-module structure
 The isomorphism ought to be the edge map of the Čech-to-derived spectral sequence
 `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`, which is an isomorphism because
 the higher rows of that spectral sequence vanish by `subsingleton_H_succ_of_isAffine`; see the
-implementation notes of this module for what is lost by not naming it.
-
-(blueprint: `lem-pc-cech-computes`) -/
+implementation notes of this module for what is lost by not naming it. -/
 @[stacks 01XD]
 theorem nonempty_cechComplex_linearEquiv_H {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
@@ -143,9 +141,7 @@ quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have `Ȟ^q(𝔘, ℱ) ≅ 
 the `U i` being affine because `X` is separated.
 
 Restricting scalars along `f.appTop`, the isomorphism is `Γ(S, 𝒪_S)`-linear, and `k`-linear
-when `S = Spec k`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+when `S = Spec k`. -/
 theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : X ⟶ S)
     [IsSeparated f] [IsAffine S] {ι : Type u} (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (hU' : iSup U = ⊤) (ℱ : X.Modules)

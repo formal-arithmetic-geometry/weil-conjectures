@@ -40,8 +40,7 @@ public import WeilConjectures.AlgebraicGeometry.FourCorners
 /-!
 # The four finite-coefficient corners
 
-Source: blueprint, proper base change, four corners; Stacks Project Tags 07A7 and 099M
-(blueprint: def-weil-pbc-four-corners).
+Source: Stacks Project Tags 07A7 and 099M.
 
 ## Main definitions
 
@@ -66,25 +65,23 @@ attribute [instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 variable {T : Scheme.{u}} {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
 
 /-- Its universal left derived functor, including quotient-coefficient actions.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tag 06YY. -/
 noncomputable abbrev proEtaleRingDerivedExtension :
     DerivedCategory (proEtaleRingModules T R) ⥤ DerivedCategory (proEtaleRingModules T S) :=
   reductionDerivedChange T a
 
 /-- The universal derived counit comparing scalar extension with ordinary tensor.
-Source: Stacks 06YY (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks 06YY. -/
 noncomputable abbrev proEtaleRingDerivedExtensionCounit := reductionDerivedCounit T a
 
 /-- The selected ordinary functor has the recorded tensor objects.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-four-corners).
-Proof: this is the object-identification clause of the recorded derived-change-of-rings
-existence theorem, specialized to its selected ordinary functor. -/
+Source: Stacks Tag 06YY. -/
 theorem proEtaleRingExtension_obj (M : proEtaleRingModules T R) :
     (proEtaleRingExtension a).obj M = SheafOfModules.changeOfRings a M := by
   exact (reductionChangeExistence T a).choose_spec.choose M
 
 /-- Reuse the published universal-counit normalized derived scalar adjunction.
-Source: Stacks 06YY, 0DVC (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks 06YY, 0DVC. -/
 noncomputable abbrev proEtaleRingDerivedExtensionAdjunction :
     proEtaleRingDerivedExtension a ⊣ (proEtaleRingRestrictScalars a).mapDerivedCategory :=
   pbcDerivedScalarAdjunction a
@@ -100,8 +97,7 @@ variable {U V : Scheme.{u}} (f : U ⟶ V)
 /-- Reduction followed by finite pullback, in the inverse direction of chi, is the mate
 of the canonical restriction/pullback identification. Its tensor-unit normalization fixes
 the ordinary balancing map on K-flat representatives.
-Source: blueprint four corners; Stacks Tags 06YY and 0D6D
-(blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tags 06YY and 0D6D. -/
 noncomputable def proEtaleReductionPullbackInv :
     proEtaleRingDerivedPullback f RV RU cR ⋙ proEtaleRingDerivedExtension aU ⟶
       proEtaleRingDerivedExtension aV ⋙ proEtaleRingDerivedPullback f SV SU cS :=
@@ -112,15 +108,7 @@ noncomputable def proEtaleReductionPullbackInv :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified reduction/pullback mate is invertible in the quotient-coefficient
-category itself. Source: blueprint four corners; Stacks Tags 06YY and 0D6D
-(blueprint: def-weil-pbc-four-corners).
-Proof: choose a flat-term K-flat representative Q. Pullback preserves K-flatness and
-flat terms, including for the identity-topos scalar-extension map. Hence all four derived
-operations are computed by ordinary tensors on these representatives. The normalized
-scalar and pullback adjunctions identify this mate with the balancing map
-(u*Q) tensor SU → u_n*(Q tensor SV). Compatibility of the coefficient square makes this
-SU-linear. Its inverse is the ordinary tensor reassociation. Both maps commute with
-restriction and differentials, and localization preserves their inverse identities. -/
+category itself. Source: Stacks Tags 06YY and 0D6D. -/
 theorem proEtaleReductionPullbackInv_isIso :
     IsIso (proEtaleReductionPullbackInv f RV SV RU SU aV aU cR cS comm) := by
   -- The other mate is the published invertible direct-image comparison.
@@ -162,8 +150,7 @@ theorem proEtaleReductionPullbackInv_isIso :
   exact conjugateEquiv_of_iso (av.comp az) (ar.comp au) γ
 
 /-- The coefficient-reduction comparison chi, in the displayed direction of the node.
-Source: blueprint four corners; Stacks Tags 06YY and 0D6D
-(blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tags 06YY and 0D6D. -/
 noncomputable def proEtaleReductionPullbackIso :
     proEtaleRingDerivedExtension aV ⋙ proEtaleRingDerivedPullback f SV SU cS ≅
       proEtaleRingDerivedPullback f RV RU cR ⋙ proEtaleRingDerivedExtension aU :=
@@ -172,10 +159,7 @@ noncomputable def proEtaleReductionPullbackIso :
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- Every level of the quotient ring tower is finite, including the zero quotient ring.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners).
-Proof: level n is A/I^(n+1). The finite-quotient clause of the adic datum
-gives its finiteness, including when the quotient is the zero ring. -/
+/-- Every level of the quotient ring tower is finite, including the zero quotient ring. -/
 theorem AdicCoefficientDatum.ringTower_finite (n : ℕᵒᵖ) : Finite (d.ringTower.obj n) := by
   change Finite (A ⧸ d.ideal ^ (n.unop + 1))
   infer_instance
@@ -185,7 +169,7 @@ attribute [instance] AdicCoefficientDatum.ringTower_finite
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The completed coefficient structure map is the actual limit lift of its projections.
-Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks 098T. -/
 noncomputable def AdicCoefficientDatum.integralRingMap {U V : Scheme.{u}} (f : U ⟶ V) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (d.completedRing V) ⟶
       d.completedRing U :=
@@ -212,12 +196,7 @@ private noncomputable def fourCornersConstantTowerIso (T : Scheme.{u}) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The specified limit structure map is invertible by the profinite coefficient theorem.
-Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners).
-Proof: the published constant-system comparison identifies both coefficient limits
-with the limits of finite constant quotients. Under these isomorphisms the displayed
-limit lift has the projections of proEtaleProfiniteComparison, hence equals that map.
-The profinite inverse-image theorem makes it invertible. No preservation of arbitrary
-infinite limits is assumed. -/
+Source: Stacks 098T. -/
 theorem AdicCoefficientDatum.integralRingMap_isIso {U V : Scheme.{u}} (f : U ⟶ V) :
     IsIso (d.integralRingMap f) := by
   let L := proEtaleSheafInverseImage f CommRingCat.{u + 1}
@@ -250,45 +229,37 @@ theorem AdicCoefficientDatum.integralRingMap_isIso {U V : Scheme.{u}} (f : U ⟶
   infer_instance
 
 /-- The canonical profinite coefficient comparison in the published function presentation.
-Source: blueprint four corners; Stacks 098T (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks 098T. -/
 noncomputable def AdicCoefficientDatum.integralRingIso {U V : Scheme.{u}} (f : U ⟶ V) :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (d.completedRing V) ≅
       d.completedRing U :=
   @asIso _ _ _ _ (d.integralRingMap f) (d.integralRingMap_isIso f)
 
 /-- The projection compatibility is exactly the projection clause of the canonical
-profinite comparison. Source: blueprint four corners; Stacks Tag 098T
-(blueprint: def-weil-pbc-four-corners).
-Proof: specialize the projection identity of profinite-coefficient-inverse-image to the
-quotient tower and its index n. The homs of asIso are the original comparisons. -/
+profinite comparison. Source: Stacks Tag 098T. -/
 theorem AdicCoefficientDatum.projection_comm {U V : Scheme.{u}} (f : U ⟶ V) (n : ℕ) :
     (d.integralRingIso f).hom ≫ d.projection U n =
       (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map (d.projection V n) ≫
         (d.finiteRingIso f n).hom := by
   exact limit.lift_π _ (op n)
 
-/-- Ordinary integral derived pullback, without completion.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- Ordinary integral derived pullback, without completion. -/
 noncomputable abbrev AdicCoefficientDatum.pull {U V : Scheme.{u}} (f : U ⟶ V) :=
   proEtaleRingDerivedPullback f (d.completedRing V) (d.completedRing U) (d.integralRingIso f)
 
-/-- Ordinary integral derived direct image in all modules.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- Ordinary integral derived direct image in all modules. -/
 noncomputable abbrev AdicCoefficientDatum.push {U V : Scheme.{u}} (f : U ⟶ V) :=
   proEtaleRingDerivedDirectImage f (d.completedRing V) (d.completedRing U) (d.integralRingIso f)
 
-/-- Finite-coefficient derived pullback with its quotient action.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- Finite-coefficient derived pullback with its quotient action. -/
 noncomputable abbrev AdicCoefficientDatum.finitePull {U V : Scheme.{u}} (f : U ⟶ V) (n : ℕ) :=
   proEtaleRingDerivedPullback f (d.finiteRing V n) (d.finiteRing U n) (d.finiteRingIso f n)
 
-/-- Finite-coefficient derived direct image with its quotient action.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- Finite-coefficient derived direct image with its quotient action. -/
 noncomputable abbrev AdicCoefficientDatum.finitePush {U V : Scheme.{u}} (f : U ⟶ V) (n : ℕ) :=
   proEtaleRingDerivedDirectImage f (d.finiteRing V n) (d.finiteRing U n) (d.finiteRingIso f n)
 
-/-- The canonical chi comparison with its original quotient coefficients retained.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- The canonical chi comparison with its original quotient coefficients retained. -/
 noncomputable def AdicCoefficientDatum.chi {U V : Scheme.{u}} (f : U ⟶ V) (n : ℕ) :
     d.reduction V n ⋙ d.finitePull f n ≅ d.pull f ⋙ d.reduction U n :=
   proEtaleReductionPullbackIso f (d.completedRing V) (d.finiteRing V n)
@@ -343,11 +314,7 @@ private theorem fourCornersIntegral_comp {U V W : Scheme.{u}}
 
 include sq in
 /-- Commutativity of integral coefficients around the square follows from the composite
-coherence of the profinite comparison. Source: blueprint four corners; Stacks Tag 098T
-(blueprint: def-weil-pbc-four-corners).
-Proof: apply the composite-coherence clause to both paths and identify the composite
-scheme morphisms using sq.w. Both maps are the canonical comparison for that morphism;
-their inverse maps agree because both are isomorphisms. -/
+coherence of the profinite comparison. Source: Stacks Tag 098T. -/
 theorem AdicCoefficientDatum.integral_coherent :
     HEq (proEtaleRingCompositeCoefficients g' f (d.completedRing Y) (d.completedRing X)
       (d.completedRing X') (d.integralRingIso f) (d.integralRingIso g'))
@@ -358,9 +325,7 @@ theorem AdicCoefficientDatum.integral_coherent :
 
 include sq in
 /-- The same composition identity for each finite coefficient level.
-Source: blueprint four corners; Stacks Tag 098T (blueprint: def-weil-pbc-four-corners).
-Proof: apply the finite-level composite-coherence clause of the profinite comparison
-along both paths of sq; identify the scheme composites by sq.w. -/
+Source: Stacks Tag 098T. -/
 theorem AdicCoefficientDatum.finite_coherent (n : ℕ) :
     HEq (proEtaleRingCompositeCoefficients g' f (d.finiteRing Y n) (d.finiteRing X n)
       (d.finiteRing X' n) (d.finiteRingIso f n) (d.finiteRingIso g' n))
@@ -370,14 +335,14 @@ theorem AdicCoefficientDatum.finite_coherent (n : ℕ) :
   exact congr_arg_heq (fun q : X' ⟶ Y ↦ d.finiteRingIso q n) sq.w
 
 /-- The canonical ambient exchange with integral completed coefficients.
-Source: blueprint four corners; Stacks Tag 07A7 (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tag 07A7. -/
 noncomputable abbrev AdicCoefficientDatum.integralExchange :=
   proEtaleAmbientRingedExchange sq (d.completedRing X) (d.completedRing Y)
     (d.completedRing X') (d.completedRing Y') (d.integralRingIso f) (d.integralRingIso g)
     (d.integralRingIso g') (d.integralRingIso f') (d.integral_coherent sq)
 
 /-- The same canonical ambient exchange with the actual finite quotient coefficients.
-Source: blueprint four corners; Stacks Tag 07A7 (blueprint: def-weil-pbc-four-corners). -/
+Source: Stacks Tag 07A7. -/
 noncomputable abbrev AdicCoefficientDatum.finiteExchange (n : ℕ) :=
   proEtaleAmbientRingedExchange sq (d.finiteRing X n) (d.finiteRing Y n)
     (d.finiteRing X' n) (d.finiteRing Y' n) (d.finiteRingIso f n) (d.finiteRingIso g n)
@@ -385,7 +350,7 @@ noncomputable abbrev AdicCoefficientDatum.finiteExchange (n : ℕ) :=
 
 /-- Four corners at one positive finite level. Index n denotes the paper's n+1.
 These use ordinary pullback of K, including when no completeness condition is needed to
-form the objects. Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+form the objects. -/
 noncomputable def AdicCoefficientDatum.fourCorners (K : d.derived X) (n : ℕ) :
     Fin 4 → DerivedCategory (proEtaleRingModules Y' (d.finiteRing Y' n)) :=
   ![(d.finitePull g n).obj ((d.reduction Y n).obj ((d.push f).obj K)),
@@ -393,8 +358,7 @@ noncomputable def AdicCoefficientDatum.fourCorners (K : d.derived X) (n : ℕ) :
     (d.reduction Y' n).obj ((d.push f').obj ((d.pull g').obj K)),
     (d.finitePush f' n).obj ((d.finitePull g' n).obj ((d.reduction X n).obj K))]
 
-/-- The comparison delta is chi inverse at K, with quotient coefficients intact.
-Source: blueprint four corners (blueprint: def-weil-pbc-four-corners). -/
+/-- The comparison delta is chi inverse at K, with quotient coefficients intact. -/
 noncomputable def AdicCoefficientDatum.delta (K : d.derived X) (n : ℕ) :
     (d.reduction X' n).obj ((d.pull g').obj K) ≅
       (d.finitePull g' n).obj ((d.reduction X n).obj K) :=

@@ -20,8 +20,7 @@ import Mathlib.Data.Finset.Order
 /-!
 # The finite colimit construction for coherent affine étale sites
 
-Source: Stacks Project, Categories 004A; Sites 0A34 and 09YL; Étale Cohomology 0EYL.
-(blueprint: lem-weil-pbc-affine-etale-finite-colimit-construction).
+Source: Stacks Project, Categories 004A.
 -/
 
 @[expose] public section

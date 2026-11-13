@@ -15,7 +15,6 @@ import all WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExa
 /-! # Canonical exact structures of the scalar mate
 
 Source: Stacks Project, Tags 03EL, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-derived-scalar-canonical-exact-structures).
 -/
 
 @[expose] public noncomputable section
@@ -83,23 +82,7 @@ private theorem native_shifts {W : Scheme.{u}}
   simp
 
 /-- The restricted scalar functors have compatible canonical exact structures.
-Source: Stacks 06YY, 07A4, 0A8D, 0FPT; steps 4--5 of the scalar-mate argument
-(blueprint: lem-sfb-derived-scalar-canonical-exact-structures).
-Proof: signed totalization and resolving localization supply the canonical tensor
-shifts, normalized on flat K-flat representatives. Exact pullback commutes termwise
-with shifts; its right adjoint has the unique shift compatible with the geometric
-unit and counit. The ordinary tensor symmetry with a coefficient in degree zero has
-no shift sign in the first variable, so the representative normalization proves shift
-compatibility of the derived tensor identification. Restriction and pullback commute
-termwise with shifts. Transposing the shift square of the restriction/direct-image
-comparison gives that restriction/pullback square, so adjunction injectivity proves its
-shift compatibility. Transport these structures along sourceIso and targetIso.
-The derived scalar functors, restriction, and the geometric derived functors are
-exact; hence their composites are exact with these transported structures. The
-projection first-variable shift equation and the projection normalization identify the
-restricted beta shift square with this equation. This proves the asserted CommShift
-for the prescribed beta, including all integer coherence. No invertibility of beta
-or projection formula is required. -/
+Source: Stacks 06YY, 07A4, 0A8D, 0FPT. -/
 theorem scalarMate_canonical_exact_structures
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

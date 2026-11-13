@@ -24,9 +24,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficient
 
 /-! # Change of coefficients and base change for the diagonal class
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: proposition-ell-adic-cycle-class-diagonal).
-
 ## Main statements
 
 - `diagonalTower_coefficients`: coefficient extension and every finite reduction.
@@ -48,34 +45,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- Extension to every integral finite-extension coefficient, every positive
 uniformizer quotient, rational coefficients and the finite-extension-valued
 algebraic closure preserves the diagonal class, its traces and both integration
-identities.
-
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.md, clauses 1--2
-(blueprint: proposition-ell-adic-cycle-class-diagonal).
-
-Proof: A finite free Z_l-basis of O_E identifies scalar extension with a finite
-biproduct functor. It is exact, commutes with products and hence with the cone
-of 1-shift computing the specified derived inverse limit. Additive derived
-direct images preserve that same finite biproduct, so the canonical scalar mate
-is invertible on the unit and positive Tate objects. Transport the whole-system
-limit class and the three completed unit/Chern traces, including their two
-integration equalities. For every pi^(n+1) quotient, choose r with ell^(r+1)
-killing it, using ell = unit times pi^e. First reduce the whole coherent class
-and trace system modulo ell^(r+1), then extend coefficients to this quotient.
-The positive Cartier roof is compatible with this scalar map. The finite trace
-is inverse to the unit/Chern biproduct splitting followed by the constant
-summand projection; this construction commutes with coefficient extension.
-This identifies every uniformizer quotient, without restricting to cofinal
-levels. For localization and the filtered system of finite subextensions,
-the unit and shifted lines have the common lower bound -2. The projections
-q,p1,p2 are qcqs, as verified by the standard two affine charts and affine
-overlap of a relative projective line. Bounded continuity of direct image and
-exactness of filtered colimits of abelian sheaves identify their canonical
-colimit/direct-image maps. Apply these actual functors to the arrows and
-composites to obtain the rational and closure stages, preserving both identities.
-The endpoint comparisons are fixed by their adjunctions, unit projections and
-root projections; they are precisely the comparisons in Family and Reference. -/
+identities. -/
 theorem diagonalTower_coefficients (l : ℕ) [Fact l.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

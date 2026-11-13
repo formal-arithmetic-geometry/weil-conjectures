@@ -16,9 +16,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 /-!
 # The spectrum of a finite free algebra
-
-Source: Stacks Project, morphisms.tex, Tag 02KB, lemma-finite-flat, proof of (1) implies (2),
-affine finite free case (blueprint: lem-weil-pbc-finite-free-algebra-spectrum).
 -/
 
 @[expose] public section
@@ -30,15 +27,10 @@ namespace AlgebraicGeometry
 /-- The spectrum of an algebra admitting a finite module basis is finite locally free.
 No nonzero-ring or Noetherian hypothesis is needed, and the index type may be empty.
 
-Source: Stacks Project, Tag 02KB, lemma-finite-flat, proof of (1) implies (2), affine finite
-free case (blueprint: lem-weil-pbc-finite-free-algebra-spectrum).
-
 Proof plan:
-1. The finitely many basis elements span `S`, so `S` is a finite `A`-module
-   (def-weil-finitely-generated-module). The finite ring-map spectrum criterion
-   (lem-weil-pbc-spec-finite-ring-map-finite) makes the structural morphism finite.
-2. Freeness implies flatness (lem-weil-pbc-projective-module-flat); the affine flatness
-   criterion (lem-weil-pbc-flat-ring-map-iff-flat-affine) makes the morphism flat.
+1. The finitely many basis elements span `S`, so `S` is a finite `A`-module.
+The finite ring-map spectrum criterion makes the structural morphism finite.
+2. Freeness implies flatness; the affine flatness criterion makes the morphism flat.
 3. Write the coordinates of the unit and each product of basis elements. Present an algebra
    on variables indexed by the basis, imposing the unit relation and these multiplication
    relations. Relabel the finite index type by `Fin n`, obtaining finitely many relations
@@ -50,8 +42,7 @@ Proof plan:
    polynomial generators. For the empty basis, `S` is zero and the unit relation is `1 = 0`,
    so the same construction gives the zero algebra, including when `A` is zero.
 5. Use the whole affine source and target as neighbourhoods to obtain local finite
-   presentation (def-sbc-locally-finite-presentation). Together with steps 1 and 2 this is
-   finite local freeness (def-pc-finite-locally-free). -/
+   presentation. Together with steps 1 and 2 this is finite local freeness. -/
 theorem specMap_isFiniteLocallyFree_of_basis
     (A S : Type u) [CommRing A] [CommRing S] [Algebra A S]
     {I : Type v} [Finite I] (_b : Module.Basis I A S) :

@@ -19,8 +19,7 @@ the projection `π : X₀' ⟶ X₀` and a path `τ` induce an injective map
 `ρ : π₁(X₀', s') → π₁(X₀, s)` (`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap`).
 
 This file shows that `ρ` identifies the Weil group of `X₀'` over `L` with the elements of degree
-divisible by `m` of the Weil group of `X₀` over `K`, the degree being divided by `m`
-(blueprint `lemma-geometric-constituents-after-constant-extension`):
+divisible by `m` of the Weil group of `X₀` over `K`, the degree being divided by `m`:
 
 * `(g, n) ∈ W(X₀', s')` if and only if `(ρ g, m n) ∈ W(X₀, s)`
   (`AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_constantExtension_iff`);
@@ -376,7 +375,7 @@ lemma fundamentalGroupMap_smul_constantExtensionFiberMap {A : FiniteEtaleAlgebra
     exact ConcreteCategory.congr_hom ((pullbackFiberIso _ s').hom_inv_id_app _) _
   rw [key, key, fundamentalGroupMap_smul, IsNaturalSMul.naturality]
 
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+/-- Weil group after a finite
 constant-field extension.
 
 The map `ρ : π₁(X₀', s') → π₁(X₀, s)` induced by the projection `π : X₀ ×_K Spec L ⟶ X₀` carries
@@ -419,7 +418,7 @@ lemma smul_diagonalPoint (g : G') : g • diagonalPoint p s' = diagonalPoint p s
   smul_eq_self_of_section s' G' _ (pullback.lift (𝟙 _) (𝟙 _) rfl) (pullback.lift_snd _ _ _) _ rfl g
 
 omit [Finite L] in
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+/-- Weil group after a finite
 constant-field extension.
 
 The image under `ρ` of an element of `π₁(X₀', s')` has degree divisible by `m = [L : K]`: it
@@ -446,7 +445,7 @@ variable [Finite K] [Finite L] [GeometricallyConnected p] [ConnectedSpace X₀]
   [∀ P, MulAction G' ((fiber s').obj P)] [IsFundamentalGroup (fiber s') G']
 
 omit [Finite L] in
-/-- Blueprint `lemma-geometric-constituents-after-constant-extension`: Weil group after a finite
+/-- Weil group after a finite
 constant-field extension.
 
 An element of the Weil group of `X₀` whose degree is divisible by `m = [L : K]` lies in the image

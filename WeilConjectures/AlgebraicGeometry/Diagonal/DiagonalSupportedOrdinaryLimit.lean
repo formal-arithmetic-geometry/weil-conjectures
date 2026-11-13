@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedQuotientCoeff
 /-! # The normalized ordinary limit of the supported quotient tower
 
 Source: diagonal tower limit proof, paragraph (1), and Stacks Tag 099L.
-(blueprint: lem-sfb-diagonal-supported-ordinary-limit).
 -/
 
 @[expose] public noncomputable section
@@ -70,29 +69,7 @@ private theorem quotientKilled (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 /-- The completed supported constant is the ordinary limit of its quotient tower,
 with the coefficient-unit normalization at every projection.
 
-Source: blueprint latest, `sk-prop-diagonal-tower-limit.proof.md`, paragraph (1);
-the cokernel source calculation in `sk-prop-diagonal-tower-system`, step (3);
-Stacks Tag 099L.
-(blueprint: lem-sfb-diagonal-supported-ordinary-limit).
-
-Proof: extend the supported integral constant to constant Z_l coefficients.
-The normalized supported scalar-extension isomorphism identifies this with the
-supported constant Z_l-module. At level n, the coefficient quotient map has kernel
-l^(n+1) and is an epimorphism. Exact closed direct image preserves its cokernel.
-The cokernel universal property of D identifies each level, uniquely preserving
-the quotient map, with that supported finite constant. The transition equations
-of D make these identifications a natural isomorphism of towers. Closed direct
-image preserves inverse limits, and forgetting module structure creates them.
-The inverse limit of the finite constant coefficient rings is the actual
-completed coefficient sheaf; its scalar action is the action restricted along
-the canonical constant-to-completed coefficient map. Thus this tower limit is
-the restriction of diagonalCompletedSource. Its map from the supported integral
-constant takes an integer to that integer times one. The uniqueness assertion
-for diagonalCompletedGenerator identifies this map with the named generator.
-Composing the limit comparison with the n-th projection therefore recovers the
-specified scalar-adjunction unit followed by D's quotient map. This construction
-uses only the ordinary presentation, includes n=0, and on the empty scheme all
-maps and objects are zero. No derived-limit or completeness assertion is used. -/
+Source: Stacks Tag 099L. -/
 theorem diagonal_supported_ordinary_limit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y))) :
     ∃ s : (diagonalCompletedRestriction l (diagonalSurface Y)).obj

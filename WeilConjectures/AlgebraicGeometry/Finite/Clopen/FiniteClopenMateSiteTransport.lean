@@ -37,8 +37,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenAlphaSiteTran
 /-!
 # Finite clopen proper/open mates under site comparison
 
-Source: Stacks Project, Tags 099R, 09AF, 0F7B and 0B65; the explicit transpose
-calculation of the DAG node (blueprint: lem-cbc-finite-clopen-mate-site-transport).
+Source: Stacks Project, Tags 099R, 09AF, 0F7B and 0B65.
 
 The alphas are constructed on sheaves from open-unit base change and the clopen
 projection, then localized. Their proper mates are defined independently on both sites.
@@ -114,8 +113,7 @@ namespace ProEtale
 
 /-- Canonical site comparison carries the clopen alpha and its proper mate to the
 corresponding pro-etale maps, with the finite etale and refinement normalizations.
-Source: Stacks Tags 099R, 09AF, 0F7B and 0B65
-(blueprint: lem-cbc-finite-clopen-mate-site-transport).
+Source: Stacks Tags 099R, 09AF, 0F7B and 0B65.
 
 Proof plan (the seven steps of the node):
 1. Properness makes p and r finite type and hence quasi-compact. Their closed
@@ -146,8 +144,7 @@ Proof plan (the seven steps of the node):
    specified gamma_p at A_V L. All normalizations were fixed before mating.
 These steps use the named canonical-mate, pullback and open-comparison dependencies,
 etale/pro-etale extension-zero base change, separated-implies-quasi-separated,
-and the finite proper/open coherence and clopen normalization nodes.
--/
+and the finite proper/open coherence and clopen normalization nodes. -/
 theorem finiteClopenMateSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)

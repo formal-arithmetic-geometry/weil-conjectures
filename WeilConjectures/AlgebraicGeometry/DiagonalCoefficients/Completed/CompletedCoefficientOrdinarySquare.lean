@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.D
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.CompletedCoefficientPushAction
 
 /-! # Ordinary direct image under normalized completed realizations
-
-Source: diagonal tower coefficient changes, initial coefficient identification.
-(blueprint: lem-diagonal-completed-ordinary-square).
 -/
 
 @[expose] public noncomputable section
@@ -164,24 +161,7 @@ private theorem ordinaryUnderlyingIso_normalization {l : ℕ} [Fact l.Prime]
       (completedPushInputIso_hom_heq f eS M)
 
 /-- A normalized completed realization commutes with ordinary direct image.
-This contains no derived functor or supported-source assertion.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient/direct-image
-identification; integral pullback compatibility of lemma-comparison-completed-coefficients.
-(blueprint: lem-diagonal-completed-ordinary-square).
-
-Proof: identify both underlying abelian sheaves with direct image of the original
-underlying sheaf. Transport the identity through the two underlying-sheaf
-isomorphisms. The unit normalizations determine the ring comparison at every
-finite projection. Naturality on maps from free modules on local representables
-then identifies each realization's module action with scalar transport along
-that ring comparison. Pullback compatibility of the integral comparison makes
-the transported identity linear. Its inverse is linear by the same argument,
-so it is an isomorphism. Naturality follows from
-naturality of the underlying comparisons and faithfulness of forgetting the
-module action. The resulting underlying-sheaf equation is exactly the required
-normalization. -/
+This contains no derived functor or supported-source assertion. -/
 theorem completedCoefficientOrdinarySquare_exists (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (eX : CompletedRealization l X) (eS : CompletedRealization l S) :

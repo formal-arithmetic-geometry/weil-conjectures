@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModel
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 
 /-! # Coefficient projections of the normalized ordinary-to-derived limit map
-
-Source: diagonal tower trace proof, ordinary coefficient cones in steps 5--7.
 -/
 
 @[expose] public noncomputable section
@@ -63,15 +61,7 @@ private theorem cone_comparison
     E.map_id, Category.id_comp, hn, hq]
 
 /-- Evaluating the normalized derived-limit comparison of an ordinary cone gives
-its actual ordinary projection under the canonical single-object comparisons.
-
-Source: diagonal tower trace proof steps 5--7
-(blueprint: lem-sfb-diagonal-trace-exact-cone-projection).
-Proof: normalize the derived-limit projection on the single complex of the tower.
-Naturality moves the inverse restriction/single comparison across that projection;
-its inverse cancels the forward comparison. The normalized ordinary-limit arrow
-then becomes the single of the ordinary limit projection. Functoriality and the
-ordinary cone lift equation give the specified component of the input cone. -/
+its actual ordinary projection under the canonical single-object comparisons. -/
 theorem diagonalTrace_exactConeComparison_projection
     {A : Type*} {B : Type*} {C : Type*}
     [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]

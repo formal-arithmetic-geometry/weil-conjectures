@@ -18,9 +18,6 @@ import all WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
 
 /-! Compactification-level compositor and forget-supports calculation.
-Source: blueprint latest, rank-one proof of proposition-purity-vector-bundles;
-compatible-tower calculation as in the first triangle of thm-amb-p1-adjunction.proof.md.
-(blueprint: lem-pur-coordinate-section-forget-supports)
 -/
 
 @[expose] public noncomputable section
@@ -39,21 +36,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- Forget supports commutes with composition on compatible compactifications.
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, first triangle, common pullback counits.
-
-Proof: expand the compatible compositor into the open/proper exchange, the composition
-of open extensions, and the ordinary proper direct-image compositor. Move the open
-forget-supports map across exchange using its adjunction-unit mate equation. Composition
-of the two open forget-supports maps is the forget-supports map for their composite,
-by the composite counit formula and uniqueness of adjoints. Naturality and associativity
-of the ordinary direct-image compositor then identify the remaining three proper
-pushforward factors with the displayed compositor for p and f. The equality
-`e.restrict.i ≫ pullback.fst e.g d.i = e.i` removes the final open congruence.
-This calculation has no comparison between different compactifications.
-(blueprint: lem-pur-coordinate-section-forget-supports)
--/
+/-- Forget supports commutes with composition on compatible compactifications. -/
 theorem coordinateSection_compactificationForgetSupports {W X S : Scheme.{u}}
     (p : W ⟶ X) (f : X ⟶ S)
     (d : Compactification f) (e : Compactification (p ≫ d.i))

@@ -13,9 +13,6 @@ import WeilConjectures.CategoryTheory.ProEtaleCoefficients.RegularScalarExtensio
 import WeilConjectures.CategoryTheory.SixFunctors.IntegrationTransport
 
 /-! # Scalar transport of a normalized diagonal diagram
-
-Source: diagonal tower coefficient changes, paragraphs (1)--(2).
-(blueprint: lem-diagonal-scalar-diagram-transport).
 -/
 
 @[expose] public noncomputable section
@@ -110,22 +107,7 @@ private abbrev scalarRightDerived
   canonicalDiagonalRightDerived (CondensedRing.lowerStar Λ f)
 
 /-- Construct a compatible scalar diagram from line endpoints and normalized
-scalar/direct-image squares invertible on those lines.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraphs (1)--(2).
-(blueprint: lem-diagonal-scalar-diagram-transport).
-
-Proof: Use flat regular modules and the normalized regular scalar multiplication
-isomorphism for unit endpoints. The supported-source comparison gives the two
-normalized source squares. Their supported endpoint homs agree because the
-scalar adjunction and their common underlying map determine each hom uniquely.
-Define the new class by conjugating its scalar image with the supported and
-shifted line endpoints. Define each trace by conjugating its scalar image with
-the invertible direct-image mate and shifted line endpoint. Inverse cancellation
-proves the class and trace squares. Integration transport applied to the source,
-class and trace squares gives both integration identities. The canonical derived
-models have the required full-unit normalization by their definitions. -/
+scalar/direct-image squares invertible on those lines. -/
 theorem diagonal_scalar_diagram_of_squares
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

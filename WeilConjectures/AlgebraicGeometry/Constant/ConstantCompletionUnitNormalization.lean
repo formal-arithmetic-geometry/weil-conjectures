@@ -10,8 +10,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 
 /-! # The quotient-completion unit on arbitrary complexes
 
-Source: Stacks Tags 099M and 0941; naturality of localization and derived comparisons.
-(blueprint: lem-constant-completion-unit-normalization).
+Source: Stacks Tags 099M and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -60,15 +59,7 @@ private theorem constantOrdinaryUnit_naturality
 
 /-- The representative normalization of quotient completion holds on every complex.
 
-Source: Stacks Tags 06YY, 099M and 0941.
-(blueprint: lem-constant-completion-unit-normalization).
-
-Proof: resolve the input by a flat-term K-flat complex. Its localization map is an
-isomorphism, so cancel it. Naturality of the derived completion unit and the universal
-reduction comparison reduces the equation to the stipulated K-flat normalization.
-The ordinary strict-limit unit is natural because its finite projections are the
-natural quotient units. This naturality and that of the universal limit comparison
-identify the remaining composite with the required normalization at the input. -/
+Source: Stacks Tags 06YY, 099M and 0941. -/
 theorem constantCompletionUnit_normalization_all
     {C : Type t} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type t) [CommRing A] (I : Ideal A) (b : Bool)

@@ -16,9 +16,7 @@ import Mathlib.Algebra.Category.ModuleCat.Algebra
 
 /-! # Eight assertions for constructible prime coefficients on reduced curves
 
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves),
-03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
-(blueprint: e1-prime-coefficient-curve-assertions)
+Source: Stacks Project, 03SC, 03SD, 0A3Q, 03SG.
 -/
 
 @[expose] public section
@@ -31,9 +29,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- All eight assertions for a constructible prime-field sheaf on a reduced curve.
 
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), constructible prime-field
-case; 03SD (lemma-vanishing-easier), 0A3Q (lemma-somewhat-easier), 03SG (lemma-even-easier).
-(blueprint: e1-prime-coefficient-curve-assertions)
+Source: Stacks Project, 03SC, constructible prime-field case.
 
 Proof, matching the nine steps of the node. The auxiliary claims in steps 1--8 concern
 all separated finite-type reduced curves, so they can also be applied to the nonproper
@@ -220,8 +216,7 @@ C7.
 
 Dependency nodes: lem-weil-pbc-constructible-torsion-modules-agree,
 theorem-cohomology-curves, def-weil-pbc-etale-constructible-sheaf,
-proposition-extension-zero-restriction-closed-subscheme--7, def-weil-pbc-direct-image.
--/
+proposition-extension-zero-restriction-closed-subscheme--7, def-weil-pbc-direct-image. -/
 theorem primeCoefficientCurveAssertions {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
     {r : ℕ} [Fact r.Prime]

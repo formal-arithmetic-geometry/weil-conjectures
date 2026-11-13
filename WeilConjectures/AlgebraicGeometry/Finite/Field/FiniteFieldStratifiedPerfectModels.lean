@@ -39,8 +39,7 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Proposition 6.6.11,
 forward implication (residue stratification), and Proposition 6.8.11(3);
-Stacks Project, Tags 095E, 03RZ and 094G
-(blueprint: lem-weil-pbc-finite-field-stratified-perfect-models).
+Stacks Project, Tags 095E, 03RZ and 094G.
 -/
 
 @[expose] public section
@@ -172,38 +171,7 @@ constant complex model. The same complex models its pro-etale comparison pullbac
 in the continuous-function coefficient-ring presentation.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, forward implication, and 6.8.11(3);
-Stacks Project, Tags 095E, 03RZ and 094G
-(blueprint: lem-weil-pbc-finite-field-stratified-perfect-models).
-
-Proof:
-1. Choose cohomological bounds a <= b. Constructibility gives a finite stratification
-for each of the finitely many cohomology degrees in this interval. Repeatedly use
-lem-weil-pbc-constructible-stratification-intersection to obtain a common refinement,
-using actual fibre products of stratum schemes and constructible intersections.
-The first stratification starts the induction; empty fibre products may be retained.
-2. Exact inverse image (situation-conventions) identifies homology
-on a refined stratum with the inverse image of the original homology. Pull back each
-trivializing etale cover along the refinement projection. The natural constant-module
-comparison (lem-sfb-geometric-inverse-image-constant-module) preserves its finite values.
-This works on every etale object of the stratum, and outside the bounds use zero.
-3. Apply lem-weil-pbc-etale-site-bounded-constant-models, Stacks 094G, on each stratum.
-It gives an etale cover and actual complexes of finite k-modules, zero outside [a,b],
-whose constant differentials give the required derived models. A finite k-module is
-finite-dimensional because its finite set of elements spans it.
-4. Every k-vector space is projective (lem-weil-pbc-vector-space-projective). Thus
-these bounded finite-dimensional complexes themselves witness IsPerfectRingComplex
-(def-pc-perfect-ring-complex), including the zero complex and zero terms.
-5. Put h = v followed by the stratum immersion. The canonical comparison-pullback
-isomorphisms (proposition-comparison-etale-derived-category--5) commute inverse image with nu^*.
-Exactness (lem-pe-constant-left-module-inverse-image) descends them termwise to derived
-categories. The constant-preserving coefficient identification of
-prop-weil-pbc-proetale-constant-ring-map is precisely the realization used by
-finiteCoefficientDerivedComparison and finiteCoefficientDerivedPullback.
-6. Apply nu^* to the etale model. Naturality in every module differential of
-lem-sfb-geometric-inverse-image-constant-module gives the same constant complex on
-the pro-etale site, not merely isomorphic graded objects. Realize it over the recorded
-coefficient ring sheaf. Etale covers are pro-etale covers (lem-pur-etale-proetale-cover).
-There is no integral lifting or completeness hypothesis; empty strata need no model. -/
+Stacks Project, Tags 095E, 03RZ and 094G. -/
 theorem finite_field_stratified_perfect_models
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (k : Type (u + 1)) [Field k] [Finite k] [TopologicalSpace k] [DiscreteTopology k]

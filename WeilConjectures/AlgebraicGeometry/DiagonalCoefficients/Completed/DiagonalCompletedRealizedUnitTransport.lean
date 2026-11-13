@@ -51,11 +51,7 @@ private theorem realization_singleFactor (M : A) :
   exact (Iso.inv_comp_eq (U.mapDerivedCategoryFactors.app _)).mp
     (U.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app M)
 
-/-- The full derived-unit square evaluated on a single coefficient object.
-Source: diagonal trace universal-unit normalization.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: evaluate the normalization on the single complex and cancel the canonical
-single-complex comparisons. Their coherence is checked in each degree. -/
+/-- The full derived-unit square evaluated on a single coefficient object. -/
 private theorem realization_single_square
     (s : DiagonalTrace.ExactSquareOfUniverses F G U V RF RG ordinary) (M : A) :
     V.mapDerivedCategory.map (singlePushComparison RF M) ≫
@@ -235,17 +231,7 @@ private theorem completed_ordinary_unit_general
     congrArg (fun k ↦ Functor.LaxMonoidal.ε G ≫ G.map k) hP
 
 -- Concrete coefficient instances are compared only at the generic lemma boundary.
-/-- The realized completed unit transport, with an arbitrary local arrow.
-
-Source: diagonal tower coefficient changes (1), exact completed push-square
-normalization and the ordinary coefficient-unit normalization.
-(blueprint: lem-diagonal-completed-realized-unit-transport).
-
-Proof: evaluate the exact square on the single completed unit, use naturality
-of the single comparison and of the realization's degree-zero comparison, then
-apply the ordinary unit equation. The result is postcomposed with an arbitrary
-local arrow, so this statement contains no Chern normalization.
--/
+/-- The realized completed unit transport, with an arbitrary local arrow. -/
 theorem diagonalCompletedRealizedUnitTransport (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [DiagonalTraceLocalizations l X]
     [DiagonalTraceLocalizations l S]

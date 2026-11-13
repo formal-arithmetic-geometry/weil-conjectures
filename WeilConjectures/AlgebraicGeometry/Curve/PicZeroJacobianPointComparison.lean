@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # Picard pullback as extension of Jacobian points
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-`lem-sc-piczero-torsion-base-change`, steps 1 and 2.
 -/
 
 @[expose] public section
@@ -29,29 +26,7 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
-/-- The degree-zero Picard comparison is extension of points of one abelian variety.
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-`lem-sc-piczero-torsion-base-change`, steps 1 and 2.
-(blueprint: lem-sc-piczero-jacobian-point-comparison)
-
-Proof: over the algebraically closed base, connectedness gives geometric connectedness;
-smoothness gives geometric irreducibility and geometric reducedness, hence integrality.
-The dimension criterion for an integral smooth scheme gives relative dimension one.
-Jacobian representability supplies one commutative group scheme J representing Pic^0,
-proper, smooth and geometrically integral, hence an abelian variety. Transport G and G'
-to the degree-zero Picard subgroups using their underlying-set equalities. The existing
-rational-point comparisons identify these subgroups with Pic^0 at Spec k and Spec k',
-and record that the comparisons send a class to its image under the sheafification unit.
-For the canonical pullback square, the comparison isomorphism with that pullback is the
-identity, so the second comparison sends a class directly to its sheafification. The
-tensor-compatible representation turns both comparisons into multiplicative equivalences.
-Apply naturality of the representation and of the sheafification unit along Spec k' to
-Spec k. Picard functoriality and the first-projection identity for the base-change map
-identify the resulting class with the specified pullback hj. This gives the displayed
-square without comparing two separately chosen Jacobians. Identity extensions and genus
-zero are covered by the same argument.
--/
+/-- The degree-zero Picard comparison is extension of points of one abelian variety. -/
 theorem pic_zero_jacobian_point_comparison
     {k k' : Type u} [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k))

@@ -21,8 +21,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.ProEtale
 
 /-- Native bidual evaluation is the transpose of the identity of the dual.
-Source: Stacks 03EO, the tensor-Hom adjunction
-(blueprint: lem-sf-adic-native-bidual). -/
+Source: Stacks 03EO, the tensor-Hom adjunction. -/
 noncomputable def adicNativeBidual {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) :
     M ⟶ (AdicSheaf.ihom ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X))).obj
@@ -30,9 +29,7 @@ noncomputable def adicNativeBidual {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   Mod.transpose (𝟙 ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)))
 
 /-- The native bidual map is the transpose of braided evaluation.
-Source: Stacks 03EO (blueprint: lem-sf-adic-native-bidual).
-Proof: uncurry the transpose of the identity. The transpose-uncurry identity gives
-braided evaluation, and the identity morphism disappears from its first factor. -/
+Source: Stacks 03EO. -/
 theorem adicNativeBidual_transpose {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (M : AdicSheaf l X) :
     (adicNativeBidual M).hom ▷ ((AdicSheaf.ihom M).obj (AdicSheaf.unit l X)).X ≫

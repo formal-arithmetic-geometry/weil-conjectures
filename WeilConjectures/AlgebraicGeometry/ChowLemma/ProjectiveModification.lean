@@ -11,10 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma
 # A projective modification of a proper scheme
 
 Over a Noetherian base `S`, a proper `X ⟶ S` is dominated by a projective `S`-scheme through a
-proper morphism which is an isomorphism over a dense open subset of `X`
-(`AlgebraicGeometry.exists_projective_modification`, blueprint
-`theorem-chow-s-lemma-projective-form--1`). This is Chow's lemma
-(`AlgebraicGeometry.ChowModification`) for proper morphisms.
+proper morphism which is an isomorphism over a dense open subset of `X`.
+This is Chow's lemma (`AlgebraicGeometry.ChowModification`) for proper morphisms.
 -/
 
 @[expose] public section
@@ -25,7 +23,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `theorem-chow-s-lemma-projective-form--1`: A projective modification of a reduced
+/-- A projective modification of a reduced
 proper scheme.
 
 Let `S` be Noetherian and `f : X ⟶ S` proper. There are a proper map `π : Y ⟶ X` and a dense open

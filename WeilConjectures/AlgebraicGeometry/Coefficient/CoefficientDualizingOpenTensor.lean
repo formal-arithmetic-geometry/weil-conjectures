@@ -17,10 +17,8 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Open coefficient tensor, evaluation, and finite Tor bounds
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower,
-lem-coef-finite-dualizing.proof.md, paragraphs 2-3; Stacks Tags 03DI, 03DJ,
-03S6, 03TT, 0GKB, 06YY, 0E8I and 0GL1
-(blueprint: lem-coef-dualizing-open-tensor).
+Source: Stacks Tags 03DI, 03DJ,
+03S6, 03TT, 0GKB, 06YY, 0E8I and 0GL1.
 
 The comparison is the existing B-linear `openScalarExtension`, with the existing
 `openScalarRestrictionMap` mate in its evaluation equation. The ordinary
@@ -40,7 +38,7 @@ namespace AlgebraicGeometry.Etale
 /-- The ordinary open tensor/evaluation composite, using the fixed ordinary scalar
 comparisons and the actual open adjunction counit. Its degreewise application is
 the direct-sum total tensor comparison with B in degree zero.
-Source: Stacks 03DI, 0E8I (blueprint: lem-coef-dualizing-open-tensor). -/
+Source: Stacks 03DI, 0E8I. -/
 def openTensorEvaluationZero
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U Y : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] :

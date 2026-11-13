@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOrigi
 
 /-! # Etale derived origin on a finite-coefficient slice
 
-Source: Stacks Project, proetale.tex, Tag 09AL
-(blueprint: lem-weil-pbc-finite-coefficient-etale-slice-origin).
+Source: Stacks Project, proetale.tex, Tag 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -33,32 +32,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.unusedVariables false in
 /-- A bounded object with finite etale-local cohomology descends to the etale site
 of the chart. The final clause transports a supplied constant complex model; it
-asserts no existence of such a complex.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-with the finite-level comparison and weakly etale localization (099R, 03DJ).
-(blueprint: lem-weil-pbc-finite-coefficient-etale-slice-origin).
-
-Proof: restrict scalars along the given coefficient isomorphism. Exact slice
-restriction identifies the homology of the restricted derived object with the
-restrictions of its homology. The hypotheses therefore make that restricted
-object bounded in [a,b] with finite etale-local constant cohomology. Identify the
-localized pro-etale site at V with the pro-etale site of V.left. Finite constant
-module sheaves are constructible with the one-stratum presentation; their local
-finite models descend to the etale site. Use the existing bounded derived-origin
-theorem on the descended cohomology sheaves; its proof inducts along bounded
-truncation triangles. Bounded-below full faithfulness lifts every connecting morphism and
-identifies the resulting cones. The comparison functor is exact and faithful,
-so it preserves and reflects the given bounds. Its homology comparison identifies
-the etale cohomology with the finite local systems just descended. Express their
-trivializing covers as the displayed covering families. For the final clause,
-apply comparison to the supplied model isomorphism, then compose the etale and
-pro-etale localization equivalences and the coefficient identification. These
-functors commute with further slice restriction and constant realization, in
-all module differentials, so the result is the specified actual restriction
-isomorphism. No bounded complex of finite modules is constructed here. All
-functors send the zero object to zero, including on empty charts and for the
-zero coefficient ring. -/
+asserts no existence of such a complex. -/
 theorem finiteCoefficient_etale_slice_origin
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     (B : Type t) [CommRing B] [Finite B]

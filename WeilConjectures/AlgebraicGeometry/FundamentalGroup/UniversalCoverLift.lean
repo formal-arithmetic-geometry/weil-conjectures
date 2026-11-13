@@ -27,8 +27,7 @@ fields are compared through fibre functors. Lifts are compatible with the morphi
 `Ỹ_t ⟶ Ỹ_{t ≫ f}` (`AlgebraicGeometry.Scheme.UniversalCover.liftPath_map`).
 
 These are used to compare the stalks of lisse sheaves at geometric points with values in
-different fields, as needed for the inertia invariants at a boundary point (blueprint
-`lemma-boundary-stalk--1`).
+different fields, as needed for the inertia invariants at a boundary point.
 -/
 
 @[expose] public section

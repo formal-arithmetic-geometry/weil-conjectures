@@ -22,9 +22,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Restrict
 /-!
 # Bounded-below classical pro-étale complexes
 
-Source: the Weil conjectures blueprint, `det-pe-classical-derived-equivalence`,
-and `definition-classical-pro-etale-sheaves` (blueprint: det-pe-classical-derived-equivalence).
-
 The module-valued predicate and full subcategory used below are supplied by
 `WeilConjectures.AlgebraicGeometry.Classical.ClassicalDerivedDefinitions`.
 -/
@@ -42,15 +39,12 @@ namespace AlgebraicGeometry.ProEtale
 /-- The bounded-below comparison has classical essential image and is an equivalence
 onto that image, with the comparison functors as its forward and inverse functors.
 The explicit counit clause is the essential-surjectivity assertion.
-Source: current blueprint, classical derived-equivalence detail
-(blueprint: corollary-bounded-below-classical-complexes--2).
 
 Proof, following the node's eight steps:
-1. The ringed-site categories are Grothendieck abelian
-   (corollary-bounded-below-classical-complexes--2), hence admit K-injective resolutions
-   (prose-03-02) computing corollary-bounded-below-classical-complexes--2.
-   The module comparison theorem-classical-sheaves-essential-image--1 makes inverse image
-   exact with classical essential image. Its right adjoint is additive and left exact.
+1. The ringed-site categories are Grothendieck abelian,
+hence admit K-injective resolutions computing corollary-bounded-below-classical-complexes--2. The
+module comparison theorem-classical-sheaves-essential-image--1 makes inverse image exact with
+classical essential image. Its right adjoint is additive and left exact.
 2. By situation-conventions, inverse image commutes with
    cohomology and preserves lower bounds. Its image is therefore classical.
    By corollary-bounded-below-classical-complexes--2, the right derived direct

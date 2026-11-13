@@ -47,24 +47,7 @@ private theorem heartPush_comp (e : Mon.mk R ≅ Mon.mk (coefficient A))
 
 /-- The constructed heart comparison respects the published underived compositors.
 
-Source: blueprint proper-base-change-finite, Transport and clause (2); the inverse-image
-coefficient-encoding proof, steps 1--2; Stacks 03D3 and 0D6D.
-(blueprint: lem-sfb-finite-coefficient-heart-pullback-composition).
-
-Proof: The isomorphism heartPush is scalar restriction along the inverse coefficient
-isomorphism followed by the normalized section-action comparison. The former has identity
-underlying sheaf maps, by the coefficient-map naturality square. The latter has identity
-underlying maps on every section. Hence the two composites of heartPush along f and g agree
-with heartPush along f followed by g and the direct-image composition maps: after forgetting
-module actions they are the same additive sheaf map induced by the canonical isomorphism
-between iterated base change and base change along the composite. Faithfulness of the
-forgetful functors proves the equality of module maps. Conjugate this equality under the
-specified geometric adjunctions and the encoding equivalences. Conjugation reverses
-composition and exchanges the two whiskerings. The published underived upperStarComp
-is conjugate to lowerStarComp. The inverse-mate definition identifies
-the conjugated heartPush with the explicitly constructed heartPull, so the conjugated
-equality is the displayed equality. This argument is on hearts only. Neither localization
-nor a derived direct image is used. The zero ring and empty schemes require no change. -/
+Source: Stacks 03D3 and 0D6D. -/
 theorem heartPull_comp (e : Mon.mk R ≅ Mon.mk (coefficient A))
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (EX : Encoding A X) (EY : Encoding A Y) (EZ : Encoding A Z)

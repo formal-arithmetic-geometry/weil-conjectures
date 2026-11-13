@@ -18,7 +18,6 @@ import all WeilConjectures.AlgebraicGeometry.Localized.LocalizedStrictPerfectRes
 /-! # Natural derived pullback calculation on strictly perfect affine complexes
 
 Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
-(blueprint: new-affine-perfect-residue-model-naturality)
 -/
 
 public section
@@ -190,7 +189,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The natural isomorphism by which termwise residue extension of sections computes local
 derived fibre cohomology in degree one on strictly perfect complexes.
 Source: Stacks Project, Tags 01IB, 08DW and 06YJ.
-(blueprint: new-affine-perfect-residue-model-naturality)
 
 Construction: Work in the full subcategory of strictly perfect complexes. Transport each
 complex by the canonical over-site equivalence. Boundedness and finite-free

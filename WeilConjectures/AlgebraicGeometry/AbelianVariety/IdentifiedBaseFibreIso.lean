@@ -8,8 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! Pullback pasting over identified bases.
-
-(blueprint: new-identified-base-fibre-iso)
 -/
 
 @[expose] public section
@@ -19,14 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Identify an iterated pullback with a fibre product over an isomorphic base.
-Source: Stacks Project, Tag 01JP, fibre products and base change.
-(blueprint: new-identified-base-fibre-iso)
-
-Proof: First paste the two pullback squares. Then apply the pullback map induced
-by the identity of X and the given base isomorphism r. The induced pullback map
-is an isomorphism. The first projection follows from the two pullback projection
-identities. The second projection follows from the same identities and cancellation
-of r followed by its inverse. The argument includes empty fibre products. -/
+Source: Stacks Project, Tag 01JP, fibre products and base change. -/
 theorem identifiedBaseFibreIso
     {X S W T T' : Scheme.{v}} (f : X ⟶ S) (k : W ⟶ S)
     (g : T ⟶ W) (t : T' ⟶ S) (r : T ≅ T') (h : g ≫ k = r.hom ≫ t) :

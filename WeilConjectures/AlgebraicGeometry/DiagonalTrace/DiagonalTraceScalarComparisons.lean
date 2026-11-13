@@ -119,34 +119,7 @@ private def squareOfAcyclic
 set_option linter.unusedVariables false in
 /-- Scalar restrictions retain the coefficient cones and the normalized push squares.
 
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-scalar restriction before the Milnor step; Stacks Tag 070G for K-injective derivation.
-(blueprint: lem-sfb-diagonal-trace-scalar-comparisons).
-
-Proof: restrict the actual coefficient tower at level n by the residue map from
-Z_l, retaining section groups, restrictions, transitions and morphisms. This gives
-rS and rX; componentwise kernels and sheafified cokernels show exactness. For the
-coefficient field ULift Q_l, its integers modulo l^(n+1) identify canonically with
-Z_l/l^(n+1). This identifies the coefficient unit with the finite coefficient ring
-and the scalar-extended root line with the root sheaf. Apply the completed ring
-and root-limit projections to obtain Coefficients, with the indicated one and
-pure-tensor normalizations. Direct image on a chart is evaluation on the pulled-back
-chart, so it commutes with both scalar restrictions by maps that are identity on
-sections. Resolve by K-injectives and apply the ringed-topos composition comparison
-to these same ordinary squares. Its acyclicity check resolves test modules by
-K-flat complexes: the two pullback/direct-image adjunctions identify localized
-Hom groups, so the second direct image inverts the relevant resolution map.
-Its common-unit equation, specialized to a
-K-injective system, gives the trace comparison normalization; both squares retain the
-full ExactSquare normalization. The comparison is invertible because both sides
-compute the same ringed direct image with its scalar action restricted. No claim
-that scalar restriction preserves K-injectives is used. The two supplied right
-derived functors may be arbitrary universal models: transport through their
-unique unit-normalized isomorphisms. Choose Rc by K-injective resolution of the
-completed category. All these constructions apply to empty sites and to identity
-maps and commute with the level-zero quotient; no Milnor acyclicity or splitting
-is asserted.
--/
+Source: Stacks Tag 070G for K-injective derivation. -/
 theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

@@ -62,7 +62,7 @@ namespace Ideal
 
 variable {R S : Type*} [CommRing R] [CommRing S] (I : Ideal R) (φ : R →+* S)
 
-/-- Blueprint `lemma-functoriality-deformation`: for `J = I S`, the extended Rees algebra
+/-- For `J = I S`, the extended Rees algebra
 `S[t, J t⁻¹]` is generated as a ring by `S` and the image of `R[t, I t⁻¹]`; i.e. the natural map
 `S ⊗_R R[t, I t⁻¹] ⟶ S[t, (I S) t⁻¹]` is surjective. -/
 theorem mem_closure_extendedReesAlgebraMap {J : Ideal S} (hJ : I.map φ = J)
@@ -270,8 +270,7 @@ lemma map_siteIdeal_le_comap ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZari
     (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ (I.comap h).siteIdeal U' :=
   (ideal_comap_appLE I h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).ge
 
-/-- The morphism `D_J X' ⟶ X' ×_X D_I X` induced by `D_J X' ⟶ D_I X` and `D_J X' ⟶ X'`
-(blueprint `lemma-functoriality-deformation`). -/
+/-- The morphism `D_J X' ⟶ X' ×_X D_I X` induced by `D_J X' ⟶ D_I X` and `D_J X' ⟶ X'`. -/
 noncomputable def deformationSpaceToPullback :
     J.deformationSpace ⟶ pullback I.deformationSpaceProj h :=
   (extendedReesPullbackData h I J hJ).toPullback _ _

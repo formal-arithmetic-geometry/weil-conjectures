@@ -55,9 +55,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 /-!
 # Bounded flat models at finite coefficient levels
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-lem-sf-flat-model`,
-`lem-sf-flat-model.md`, all three clauses (blueprint: lemma-flat-models-generators--1).
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.finiteCoefficient_torAmplitude_iff_flatModel`
@@ -82,19 +79,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option synthInstance.maxSize 2048 in
-/-- The pro-etale flat-model equivalence at the finite coefficient ring `A_{E,n}`.
-Source: blueprint `sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`,
-conditions (i) and (ii) (blueprint: lemma-flat-models-generators--1).
-
-Proof: work directly in the recorded constant-ring module category, identify site
-flatness with categorical flatness, and compare the explicit K-flat tensor model with
-the categorical derived tensor. Apply the generic bounded-flat-model theorem, whose
-construction chooses a bounded-above flat resolution zero above b. Amplitude tested on
-the coefficient sheaf gives exactness
-below a. The cokernel of the differential into degree a is flat, since its Tor_1 with
-any module is H^(a-1) of the tensor resolution and vanishes by the amplitude bound.
-Good truncation at a gives the model. Conversely a bounded complex of flat sheaves is
-K-flat and its tensor with a degree-zero sheaf is zero outside the same interval. -/
+/-- The pro-etale flat-model equivalence at the finite coefficient ring `A_{E,n}`. -/
 theorem finiteCoefficient_torAmplitude_iff_flatModel
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
@@ -211,12 +196,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Etale
 
-/-- The same equivalence on the small etale site, with finite-value constructibility.
-Source: blueprint `sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`,
-the small-etale clause (blueprint: lemma-flat-models-generators--1).
-
-Proof: convert bounded constructibility using the constructible-sheaf comparison and
-apply lem-sf-etale-flat-model. The flat terms and support interval are unchanged. -/
+/-- The same equivalence on the small etale site, with finite-value constructibility. -/
 theorem finiteCoefficient_hasTorAmplitude_iff_flatModel
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

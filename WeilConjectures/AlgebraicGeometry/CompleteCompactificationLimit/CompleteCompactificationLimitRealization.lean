@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.Compactif
 
 /-!
 # Complete compactification images: canonical limit realization
-Source: blueprint paragraph (2)
-(blueprint: lem-sp-complete-compactification-limit-realization).
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical strict-system scalar comparisons. The ordinary comparisons are
 normalized before localization by the actual finite scalar maps. The derived direct-image
-comparison is fixed by the two composition units on every cochain complex.
-Source: blueprint paragraph (2), scalar comparisons and transition compatibility
-(blueprint: lem-sp-complete-compactification-limit-realization). -/
+comparison is fixed by the two composition units on every cochain complex. -/
 structure ScalarComparison (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b) (h : ScalarSquares l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -69,8 +65,7 @@ structure ScalarComparison (b : SpTowerShriek.Base l E)
     pushOrdinary pushDerived
 
 /-- The normalization of direct-image evaluation on actual K-injective strict towers.
-Source: blueprint paragraph (2); Stacks 0A07
-(blueprint: lem-sp-complete-compactification-limit-realization). -/
+Source: Stacks 0A07. -/
 def IsFixedPushEvaluation {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
     (v : (fixedPushOrd l E p).rightDerivedFunctor ⋙
         coefficientConstantTowerEvaluation l E Y n ≅
@@ -89,9 +84,7 @@ def IsFixedPushEvaluation {Z Y : Scheme.{u}} (p : Z ⟶ Y) (n : ℕ)
 
 /-- The actual augmentation to positive quotient n+1, before changing finite coordinates.
 Its composite with the exact forgetting/evaluation isomorphism is the scalar adjunction
-unit by LimitPresentation.unit_projection.
-Source: blueprint paragraph (2), actual quotient augmentation
-(blueprint: lem-sp-complete-compactification-limit-realization). -/
+unit by LimitPresentation.unit_projection. -/
 def quotientAugmentation (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
     (r : SpReductionTower l E T D) (a : LimitPresentation l E T D r)
     (M : Integral l E T) (n : ℕ) :=
@@ -102,9 +95,7 @@ def quotientAugmentation (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
 /-- The finite projection of the canonical strict scalar composite, before the
 canonical finite-coordinate identification. The first two factors are the inverse
 exact-open and derived-pushforward evaluation comparisons; the last is evaluation
-of the strict scalar comparison itself, hence retains all semilinear transitions.
-Source: blueprint paragraph (2), b_(n,N)
-(blueprint: lem-sp-complete-compactification-limit-realization). -/
+of the strict scalar comparison itself, hence retains all semilinear transitions. -/
 def finiteScalarComposite (b : SpTowerShriek.Base l E)
     (o : SpTowerShriek.Operations l E b)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

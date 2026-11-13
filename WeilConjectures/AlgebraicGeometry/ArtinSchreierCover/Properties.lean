@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ArtinSchreierCover.Centralizer
 All properties of the Artin–Schreier cover `adjoinRootCover S (T ^ p - T - f)`: it is a finite
 étale cover of degree `p`, a torsor under `𝔽_p` acting by translations, and its automorphisms
 commuting with the translations are the locally constant functions `S → 𝔽_p`.
-Source: blueprint, lemma-artin-schreier-character-sheaf.
 -/
 
 @[expose] public section
@@ -40,9 +39,8 @@ lemma injective_artinSchreierAction (hP : P = X ^ p - X - C f) (hchar : (p : Γ(
     exact congr_arg (fun g : Aut (adjoinRootCover S P) ↦ g.asIso.hom.left) h
   exact congr_arg ULift.down ((artinSchreierEtaleTorsor hP hchar).eq_of_comp_vadd_eq _ h' y₀)
 
-/-- **Properties of the Artin–Schreier cover** (blueprint: lemma-artin-schreier-character-sheaf),
-for the cover `adjoinRootCover S P` of a polynomial `P = T ^ p - T - f` over a scheme `S` on which
-`p = 0`. -/
+/-- **Properties of the Artin–Schreier cover**, for the cover `adjoinRootCover S P` of a polynomial
+`P = T ^ p - T - f` over a scheme `S` on which `p = 0`. -/
 theorem adjoinRootCover_artinSchreier_properties (hP : P = X ^ p - X - C f)
     (hchar : (p : Γ(S, ⊤)) = 0) :
     IsFinite (adjoinRootCover S P).hom ∧

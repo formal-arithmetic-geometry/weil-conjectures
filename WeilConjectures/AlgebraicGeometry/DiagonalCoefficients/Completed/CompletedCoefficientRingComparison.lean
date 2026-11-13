@@ -23,9 +23,6 @@ import Mathlib.CategoryTheory.Monoidal.Internal.Limits
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # The projection-normalized completed coefficient ring comparison
-
-Source: the integral limit comparison in lemma-comparison-completed-coefficients.
-(blueprint: lem-diagonal-completed-coefficient-ring-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -321,22 +318,7 @@ private theorem finiteDiagramIso_inv_ab (l : ℕ) [Fact l.Prime] (X : Scheme.{u}
 attribute [local irreducible] finiteDiagramIso
 
 /-- The reconstructed section ring of the pulled-back condensed integers agrees with
-completion, with every finite reduction fixed.
-
-Source: blueprint latest, sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x,
-integral comparison and its Q_l specialization; the finite reductions are those of
-lem-pur-condensed-zl-reduction-mod-ell-power.
-(blueprint: lem-diagonal-completed-coefficient-ring-comparison).
-
-Proof: form the cone whose vertex is the pulled-back condensed integers and whose
-positive projections are purZlReduction. The normalized integral comparison makes
-this a limiting cone of constant finite rings. Reconstruct section rings and identify
-the finite constants by sfbConstantRingAbIso. This identifies the diagram with
-purTwistZlTower, whose specified limit is purTwistZlCompletion. Uniqueness of limits
-gives the ring isomorphism. Its projection equations are exactly the displayed
-normalization. These projections jointly distinguish maps, proving uniqueness.
-The construction applies also on the empty scheme; the positive tower suffices
-because the omitted exponent-zero ring is terminal. -/
+completion, with every finite reduction fixed. -/
 theorem completedCoefficientRingComparison_existsUnique (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) :
     ∃! e : (sheafCompose (Scheme.ProEt.topology X)

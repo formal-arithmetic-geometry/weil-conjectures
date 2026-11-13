@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEq
 
 /-!
 # The Lie algebra and the cotangent dual at the identity
-
-Source: blueprint `proposition-cartier-s-theorem`, third paragraph, and the dimension paragraph of
-`lemma-connected-components-images-homomorphisms--3`.
 -/
 
 @[expose] public section
@@ -98,8 +95,7 @@ epsilon coefficient of the induced stalk map), and transport of the values of a 
 along `identityResidueEquiv`. Its defining formula is
 `lieCotangentDualEquiv_apply_toCotangent`.
 
-Source: blueprint `proposition-cartier-s-theorem`, third paragraph, and
-`lemma-connected-components-images-homomorphisms--3`, dimension paragraph; Stacks Project, Tag
+Source: Stacks Project, Tag
 0B2C. -/
 def lieCotangentDualEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))

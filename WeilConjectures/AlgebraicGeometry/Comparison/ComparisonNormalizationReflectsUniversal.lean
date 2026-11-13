@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 /-! # Reflection of universal scalar arrows through etale comparison
 
 Source: Stacks Project, Tags 06YS, 0G7E, 0D6D and 09B1.
-(blueprint: lem-weil-pbc-comparison-normalization-reflects-universal).
 -/
 
 @[expose] public noncomputable section
@@ -96,27 +95,7 @@ private theorem comparison_coefficients_eq (Z : Scheme.{u})
     Iso.trans_inv, Iso.symm_inv, Functor.mapDerivedCategoryNatIso_symm,
     Sheaf.restrictScalars, Category.assoc]
 
-/-- Comparison reflects universality of a coefficient arrow between bounded complexes.
-
-Source: `sites-cohomology.tex`, K-flat resolutions (06YS), their pullback (0G7E),
-and composition of derived pullbacks (0D6D); `proetale.tex`, comparison (09B1).
-(blueprint: lem-weil-pbc-comparison-normalization-reflects-universal).
-
-Proof: realize fixed-ring sheaves as modules over the constant ring sheaf. Derived
-extension of coefficients is left adjoint to the exact restriction functor in this
-presentation. Resolve the source by a K-flat complex with flat terms. Comparison
-inverse image preserves such complexes. Its scalar-extension comparison is the
-canonical isomorphism between the two sheafified balanced tensor products; the
-unit in both orders sends x to 1 tensor x. Therefore the adjunct of the displayed
-compared arrow is the comparison image of the original scalar adjunct, after this
-isomorphism. The assumed initiality says the compared adjunct is invertible.
-Comparison inverse image is exact and conservative on sheaves: its sheaf unit is
-invertible. Hence it reflects acyclic cones, so it reflects isomorphisms in the
-derived category. The original adjunct is consequently invertible. Transporting
-the initial adjunction unit along that isomorphism proves the stated initiality.
-This argument uses K-flat resolutions without a Tor bound, also for zero rings and
-on the empty scheme; the boundedness assumptions on the given objects are harmless.
--/
+/-- Comparison reflects universality of a coefficient arrow between bounded complexes. -/
 theorem comparisonNormalization_reflects_universal (Z : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] [Finite R] [Finite S]
     (q : R →+* S)

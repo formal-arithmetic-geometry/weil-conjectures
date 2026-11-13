@@ -158,13 +158,13 @@ def finitePerfectAdicScalarModelLiftRestrict {B D : Type t} [CommRing B] [CommRi
   NatIso.ofComponents (fun _ ↦ Iso.refl _)
 
 /-- Consecutive quotient restriction commutes with coefficient-universe transport.
-Source: Stacks Tag 05RU; each component is the identity linear map. -/
+Source: Stacks Tag 05RU. -/
 def finitePerfectAdicScalarModelLiftStep {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   finitePerfectAdicScalarModelLiftRestrict (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
 
 /-- Paste a coefficient square with a comparison for the remaining composite.
-Source: Stacks Tag 06YY; composition and whiskering of natural isomorphisms. -/
+Source: Stacks Tag 06YY. -/
 def finitePerfectAdicPasteCoefficientStep
     {C D E E' F : Type*} [Category C] [Category D] [Category E] [Category E'] [Category F]
     {R : C ⥤ D} {L : C ⥤ E'} {H : D ⥤ E} {S : E' ⥤ E}

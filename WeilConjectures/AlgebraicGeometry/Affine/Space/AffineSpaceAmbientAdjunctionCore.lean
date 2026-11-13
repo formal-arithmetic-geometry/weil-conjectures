@@ -428,9 +428,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
 
 /-! A compactification-specific form of the affine-space ambient adjunction.
 
-Source: blueprint `lemma-affine-space-etale-localization--1`.
-(blueprint: cor-amb-affine-space-adjunction-compactification-core).
-
 This is the geometric core: the compact-support functor attached to an explicitly chosen
 compactification of affine space is left adjoint to the finite torsion Tate-twist pullback.
 The final theorem transports this adjunction to the project-wide compactification-independent
@@ -455,8 +452,7 @@ by `Compactification.ofIsImmersionAffineSpace`. The induction composes the norma
 projective-line adjunction along the coordinate tower, identifies the resulting right functor
 with the explicit finite Tate-twist pullback and even shift, and transports along the chosen
 compactification comparison. This theorem is a strict sub-result of the compactification-
-independent assertion below.
-(blueprint: cor-amb-affine-space-adjunction-compactification-core). -/
+independent assertion below. -/
 theorem affineSpaceAmbientAdjunction_of_compactification
     (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

@@ -78,31 +78,7 @@ private def rootCone (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
 
 -- The finite constructions do not use the derived Chern normalization.
 set_option linter.unusedVariables false in
-/-- The exact finite-coefficient restriction and its two normalized cones at one site.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-coefficient restriction and its coefficient-unit and Tate-line identifications.
-(blueprint: lem-sfb-diagonal-trace-coefficient-restriction).
-
-Proof: restrict each level action along the constant-section map from Z_l to
-O_(ULift Q_l)/l^(n+1). Retain the additive section groups, all vertical restrictions,
-all horizontal transitions, and all maps. The quotient maps commute with residues,
-so these are Z_l-linear and define a functor on strict systems. The residue of z acts
-as its representative natural number; this proves the prescribed scalar equation.
-Kernels are sectionwise, and additive sheafification computes cokernels, so this
-restriction preserves finite limits and colimits and is additive.
-Identify the valuation-one subring of ULift Q_l with Z_l by the lifted identity.
-Its quotients by l^(n+1) identify with Z/l^(n+1), compatibly with all quotient maps.
-The resulting isomorphism of constant ring towers gives coefficientForget and sends
-one to one. Extension along the same ring isomorphism has the tensor unitor as its
-counit: on a pure tensor with scalar one it sends x tensor one to x. Compose this
-with c.rootForget to obtain lineForget, with the required line_tensor equation.
-Transport the actual completed ring projections through coefficientForget inverse,
-and the actual root-limit projections through lineForget inverse. These maps are
-Z_l-linear, commute with the quotient transitions, and give the two cones.
-Cancelling the corresponding inverse isomorphisms proves coefficient_projection
-and line_projection. These constructions include the first positive quotient and
-empty sites; they impose no condition on a scheme morphism or on direct image. -/
+/-- The exact finite-coefficient restriction and its two normalized cones at one site. -/
 theorem exists_diagonalTraceCoefficientRestriction (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

@@ -48,8 +48,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-! # Etale pullback, finite Tate twists and Tor windows
 
-Source: Stacks Project, Tags 03TT, 0963, 095I and Section 03PK
-(blueprint: lem-sp-etale-pullback-twist-tor-window).
+Source: Stacks Project, Tags 03TT, 0963, 095I and Section 03PK.
 -/
 
 @[expose] public section
@@ -64,8 +63,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The existing signed-total-tensor monoidal structure on etale module complexes,
 with the canonical sheaf monoidal structure made explicit.
-Source: Stacks Project, Tag 06YH and Tag 03TT
-(blueprint: lem-sp-etale-pullback-twist-tor-window). -/
+Source: Stacks Project, Tag 06YH and Tag 03TT. -/
 @[instance_reducible]
 noncomputable def pullbackTwistComplexMonoidal
     (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
@@ -74,8 +72,7 @@ noncomputable def pullbackTwistComplexMonoidal
   inferInstance
 
 /-- The actual termwise inverse image, tensor with the finite Tate line, and signed shift.
-Source: Stacks Project, Tags 0963, 095I and Section 03PK
-(blueprint: lem-sp-etale-pullback-twist-tor-window). -/
+Source: Stacks Project, Tags 0963, 095I and Section 03PK. -/
 noncomputable def pullbackTwistComplex
     (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (f : T' ⟶ T)
     (N : ℕ) (hR : (N : R) = 0)
@@ -88,8 +85,7 @@ noncomputable def pullbackTwistComplex
 
 /-- The exact derived inverse image tensored with the actual finite Tate twist in degree
 zero, followed by the shift of the whole derived tensor.
-Source: Stacks Project, Tags 0963, 095I and Section 03PK
-(blueprint: lem-sp-etale-pullback-twist-tor-window). -/
+Source: Stacks Project, Tags 0963, 095I and Section 03PK. -/
 noncomputable def pullbackTwistDerived
     (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (f : T' ⟶ T)
     (N : ℕ) (hR : (N : R) = 0) (K : DerivedCategoryModule R T) (c : ℕ) (s : ℤ) :
@@ -102,9 +98,7 @@ noncomputable def pullbackTwistDerived
 attribute [local instance] Sheaf.monoidalCategory
 
 /-- Transport a model's constructible cohomology and Tor window to its represented object.
-Boundedness follows by testing Tor amplitude against the tensor unit.
-Source: Stacks Project Tag 03TT, lemma-when-ctf
-(blueprint: lem-sp-etale-pullback-twist-tor-window). -/
+Boundedness follows by testing Tor amplitude against the tensor unit. -/
 private theorem boundedConstructible_of_model
     (R : Type (u + 1)) [CommRing R] [Finite R] (X : Scheme.{u})
     (Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
@@ -132,8 +126,7 @@ private theorem boundedConstructible_of_model
     · exact (_root_.DerivedCategory.isLE_iff L b).1 hh.2 j hj
 
 /-- Invert the canonical model comparison and move the shift out of its second factor.
-Source: Stacks Project Tags 0963 and 0FNH
-(blueprint: lem-sp-etale-pullback-twist-tor-window). -/
+Source: Stacks Project Tags 0963 and 0FNH. -/
 private noncomputable def lineModelIso
     (R : Type (u + 1)) [CommRing R] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
@@ -158,31 +151,7 @@ constructible representative in [a,b] to a K-flat representative in [a-s,b-s].
 The represented object is bounded constructible with that same Tor interval.
 The last clause applies to every bounded constructible K, independently of a chosen P.
 
-Source: Stacks Project, Tags 03TT (lemma-when-ctf), 0963 (lemma-pullback-ctf),
-095I (lemma-tensor-product-constructible) and Section 03PK (section-kummer)
-(blueprint: lem-sp-etale-pullback-twist-tor-window).
-
-Proof:
-1. A field is Noetherian. Apply lem-weil-pbc-finite-type-over-noetherian to the
-   structure maps of T and T' to obtain Noetherian schemes.
-2. The prime ell differs from ringChar k, so N = ell^n is invertible in k
-   and every local ring of T', including characteristic zero and n=0. Apply
-   lem-asd-finite-etale-twist-line to obtain the locally trivial rank-one module
-   R(c), including the zeroth twist; R need not be flat over Z/N.
-3. Apply lem-sp-etale-pullback-line-flat-model to P, its representing isomorphism,
-   the morphism f and that line. It gives flat constructible terms, K-flatness,
-   and support [a-s,b-s]. The chain-shift comparison of
-   lem-weil-pbc-total-tensor-integer-shifts and localization identify the represented
-   object with the shift of the whole derived tensor, as in
-   proposition-open-direct-image-preserves-finite. In degree j the term comes from P in degree j+s,
-   fixing the endpoint signs.
-4. The line-model theorem gives constructible cohomology and vanishing after
-   tensor with every degree-zero module outside [a-s,b-s]. These are precisely
-   constructibility and def-kun-tor-amplitude; finite support gives boundedness.
-5. For an arbitrary bounded constructible K in the given Tor interval, use
-   lem-sf-etale-flat-constructible directly to obtain P. Apply
-   the line-model theorem with the constant R line and zero shift; multiplication
-   identifies tensor with R with the original pullback, preserving [a,b]. -/
+Source: Stacks Project, Tags 03TT, 0963, 095I and Section 03PK (section-kummer). -/
 theorem etale_pullback_twist_tor_window
     (k : Type u) [Field k] (ell : ℕ) (_hell : ell.Prime) (_hne : ringChar k ≠ ell)
     (T T' : Over (Spec (CommRingCat.of k)))

@@ -23,14 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The compact scalar map factors through its proper scalar mate and the open
 coefficient comparison. This is the proper-factor expansion used in the tensor
-projection calculation (blueprint: lem-pur-etale-quotient-tensor-projection).
-
-Proof: unfold `compactScalarMap` and the defining natural transformation
-`ExceptionalCoefficients.compactSupportMap`; the displayed composite is exactly
-its component at `K`. The statement is valid for identity and zero ring maps,
-empty schemes, and identity compactifications because no cancellation or
-invertibility is used.
--/
+projection calculation. -/
 theorem compactScalarMap_proper_open_factor
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

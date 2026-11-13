@@ -17,9 +17,6 @@ import Mathlib.CategoryTheory.Abelian.ShortExact
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # The algebraic residue of a finite-quotient constant model
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I)
-(blueprint: lem-weil-pbc-finite-quotient-model-residue-projective).
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +54,7 @@ private theorem residueOverMap_exact (X : Scheme.{t})
   exact ⟨hAdd, (Functor.exact_tfae F).out 1 4 |>.mp h⟩
 
 /-- The exact derived restriction agrees with the chosen representative formula.
-Source: Stacks Tags 03DJ and 05RU
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tags 03DJ and 05RU. -/
 private def residueRestrictionComparison (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (M : DerivedCategory (SheafOfModules.{t + 1} R)) :
@@ -72,8 +68,7 @@ private def residueRestrictionComparison (X : Scheme.{t})
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage M)
 
 /-- A local isomorphism persists on every smaller chart.
-Source: Stacks Tag 03DJ
-(blueprint: lem-weil-pbc-residue-perfect-finite-quotient-models). -/
+Source: Stacks Tag 03DJ. -/
 private theorem residueRestrictIso_further (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) {U V : X.ProEt} (f : U ⟶ V)
     (M N : DerivedCategory (SheafOfModules.{t + 1} R))
@@ -106,25 +101,7 @@ private theorem residueRestrictIso_further (X : Scheme.{t})
 has a projective representative in the residue interval. This asserts a model only
 AFTER reduction modulo the image of the coefficient ideal, not a Tor bound before reduction.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 094I (lemma-bounded, part (2))
-and 094G (lemma-locally-constant); proetale.tex, Tag 09C2.
-(blueprint: lem-weil-pbc-finite-quotient-model-residue-projective).
-
-Proof: let B = A/I^(n+1), J be the image of I in B, and identify B/J with A/I.
-Scalar extension along B -> B/J has a total left derived functor: take flat K-flat
-resolutions and extend scalars termwise, which preserves their quasi-isomorphisms.
-Choose a geometric point of the nonempty chart W. Pull the covering sieve in the
-residue-model hypothesis back along W -> V and choose a member through that point.
-At the chosen geometric stalk, the constant realization of P has algebraic value P,
-with the stated universe lift. Exactness of stalks and derived tensor pullback identify
-its derived B/J-extension with the stalk of the residue reduction of M: iterate the
-quotient compatibility square and use the scalar compatibility square to identify the
-coefficient actions. On the chosen covering member, the hypothesis identifies that
-residue with a complex of finite projective A/I-modules in [a,b]. Taking its stalk
-recovers that algebraic complex. Transport it along B/J = A/I and remove the universe
-lift by the module equivalence. The resulting complex E has zero terms outside [a,b],
-projective terms, and its localization is the derived residue of Q(P). No nilpotent
-lifting, Tor bound for Q(P), or finiteness assumption on P is used in this step. -/
+Source: proetale.tex, Tag 09C2. -/
 theorem finiteQuotient_model_residueProjective
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtensi
 # Testing geometric connectedness on an algebraically closed extension
 
 Source: Stacks Project, `varieties.tex`, Lemma 33.7.7 (Tag 0387), Lemma 33.7.3
-(Tag 054N), and the remark after Definition 33.7.1
-(blueprint: lem-weil-geometrically-connected-algebraic-closure).
+(Tag 054N), and the remark after Definition 33.7.1.
 
 ## Main statements
 
@@ -37,16 +36,7 @@ namespace AlgebraicGeometry
 
 /-- A scheme over a field is geometrically connected if and only if its base change to
 any fixed algebraically closed extension is connected.
-Source: Stacks Project, `varieties.tex`, Tags 0387 and 054N
-(blueprint: lem-weil-geometrically-connected-algebraic-closure).
-Proof: Forward, apply the definition of geometric connectedness to the extension `Ω/k`
-(def-pc-geometrically-irreducible, def-pc-base-change). Conversely, an algebraically
-closed field is separably closed (def-weil-algebraic-closure, def-pc-separably-closed).
-Thus connectedness of `X_Ω` implies its geometric connectedness over `Ω` by
-lem-weil-separably-closed-geometrically-connected. Descend this to `k` using
-lem-weil-geometrically-connected-check-after-extension: every extension of `k` has a
-common extension with `Ω`, and connectedness descends along the surjective projection
-from that common base change. -/
+Source: Stacks Project, `varieties.tex`, Tags 0387 and 054N. -/
 theorem geometricallyConnected_iff_connectedSpace_of_isAlgClosed
     {k Ω : Type u} [Field k] [Field Ω] [Algebra k Ω] [IsAlgClosed Ω]
     (X : Scheme.{u}) [X.Over (Spec (.of k))] :

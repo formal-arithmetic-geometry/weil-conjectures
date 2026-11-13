@@ -230,18 +230,7 @@ private lemma support_compositor_global
       hk'
 
 /-- The graph comparison identifies etale/open composition with composition of left adjoints.
-Source: Stacks Project, Tags 0F4L and 0F7J.
-(blueprint: lem-pur-graph-etale-open-composition).
-
-Proof: use the graph refinement equation for the identity refinement of the open
-immersion's identity-proper compactification. Cancel its invertible graph map and
-use the proper identity composition law and naturality to identify its comparison
-with removal of the identity direct image. Localized exact adjunctions agree with
-the derived open adjunction by their counits on complexes. The sum composition
-counit theorem identifies the sum compositor with the inverse conjugate of
-inverse-image composition. Apply the support/sum compositor equation and transport
-through the chosen compactification comparisons by naturality and cancellation.
-Identity and empty opens and zero coefficients obey the same identities. -/
+Source: Stacks Project, Tags 0F4L and 0F7J. -/
 theorem graph_etale_open_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X Z : Scheme.{u}}

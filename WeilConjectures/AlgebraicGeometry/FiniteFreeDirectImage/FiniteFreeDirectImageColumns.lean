@@ -73,26 +73,7 @@ private theorem mate_columns_private
 
 /-- In finite-free coordinates the restricted canonical mate has the direct images
 of the basis inclusions as its columns. This does not assert invertibility.
-Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0944.
-(blueprint: lem-sp-finite-free-direct-image-columns).
-
-Proof: choose the given basis of S_W over R_W and pull it back using the specified
-coefficient identifications to obtain the basis on Z. On module sheaves the maps
-(x_i) to sum e_i tensor x_i and e_i tensor x to the i-th coordinate are inverse
-by the tensor balancing relations. They are natural in the module, respect
-restrictions, and yield the isomorphisms after passing to complexes and localizing:
-finite sums preserve quasi-isomorphisms, so these compute the universal scalar
-extensions on every unbounded complex. This includes rank zero.
-The balancing map in the definition is the conjugate of the actual restriction
-comparison. The tensor-unit normalization of the scalar adjunctions and the
-identity-on-sections normalization of the restriction comparison identify it with
-the balanced pullback map. Apply the scalar-restriction adjunct identity of
-proEtaleRingSheafChangeAdjunction to the defining transpose of comparison.
-On the i-th basis summand that transpose is the R-counit followed by the i-th
-basis inclusion on Z: both send a local pure tensor to its counit image tensor e_i.
-The naturality of the R-adjunction identifies its adjunct with Rq of that inclusion.
-These are equations of actual module-derived maps before forgetting any further
-scalars; no faithfulness on derived Hom sets is used. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0944. -/
 theorem finiteFreeDirectImage_columns {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

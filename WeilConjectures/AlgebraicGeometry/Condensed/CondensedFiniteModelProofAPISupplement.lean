@@ -367,15 +367,7 @@ private lemma bounded_tri_of_serre {X : Scheme.{u}}
 -- Build the specific condensed-field triangulated structures from their Serre closure
 -- statements; no arbitrary-coefficient closure assertion is used.
 /-- Bounded constructible complexes over a finite coefficient field form a triangulated
-subcategory.
-
-Source: `Colimit/TwoColimit.lean`, the private `finiteBoundedTriangulated` helper.
-Proof: finite-field constructible modules are closed under kernels, cokernels, and
-extensions by `isConstructibleModuleObject_serre_padicSubfield`. Transport these
-closures across isomorphisms and apply the existing conditional bounded-constructible
-triangulated instance. This extracts the existing proof without adding an obligation.
-(blueprint: lem-weil-pbc-condensed-finite-model-proof-api)
--/
+subcategory. -/
 lemma finiteBoundedTriangulated (E : FiniteIntermediateField ℓ) :
     (boundedConstructible (padicSubfieldRingObj X ℓ E)).IsTriangulated := by
   obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E

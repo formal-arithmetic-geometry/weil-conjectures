@@ -18,12 +18,11 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The actual coefficient pullback is the identity on functions after localization.
-Source: Stacks 03CE and the native coefficient pullback adjunction.
-(blueprint: lem-sf-adic-coefficient-localization).
-The two inverse-image functors are left adjoints to the same direct image. Apply the
-localization adjunction to their comparison followed by the identity on coefficient
-functions. Its adjunct is precomposition with the pullback projection, which is the
-native coefficient map to direct image. Adjunction injectivity identifies the maps. -/
+Source: Stacks 03CE and the native coefficient pullback adjunction. The two inverse-image functors
+are left adjoints to the same direct image. Apply the localization adjunction to their comparison
+followed by the identity on coefficient functions. Its adjunct is precomposition with the pullback
+projection, which is the native coefficient map to direct image. Adjunction injectivity identifies
+the maps. -/
 theorem comparisonNativeCoefficient {l : ℕ} [Fact l.Prime]
     {V W : Scheme.{u}} (g : W ⟶ V) (hg : WeaklyEtale g) :
     upperStarAdicConstantSheafHom l g =

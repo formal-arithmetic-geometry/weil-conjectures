@@ -213,8 +213,7 @@ private lemma triangle_derivedMate_generic
 
 /-- Exact localization carries the ordinary triangular adjunction unit relation
 for an ordinary natural transformation to its derived adjunction mate.
-Source: Stacks Project Tag 0F7B, functoriality of the graph adjunct through localization.
-(blueprint: lem-pur-proper-graph-derived-mate). -/
+Source: Stacks Project Tag 0F7B, functoriality of the graph adjunct through localization. -/
 theorem properGraphTriangle_derivedMate
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

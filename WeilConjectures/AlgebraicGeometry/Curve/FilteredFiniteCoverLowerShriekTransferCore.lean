@@ -32,8 +32,7 @@ short-exact devissage assertion.  Transport the result across `hend`.  Finite
 pushforward and the exchange isomorphism for lower shriek transfer the resulting
 assertions to the lower-star of the upper-star of `G`.  This is precisely the
 conclusion below. No unit retraction is needed for this step; descent along the
-retraction is performed only in the separate retract theorem.
-(blueprint: k1-filtered-finite-cover-lower-shriek-transfer-core) -/
+retraction is performed only in the separate retract theorem. -/
 theorem filteredFiniteCoverLowerShriekTransfer_core {k : Type u} [Field k] [IsAlgClosed k]
     {X U V : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]

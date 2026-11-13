@@ -48,8 +48,7 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 
 /-! # Constructible cohomology with coefficients in the site universe
-Source: Stacks Tags 09B5, 093U and 06UQ.
-(blueprint: lem-weil-constructible-coefficient-homology-triangulated). -/
+Source: Stacks Tags 09B5, 093U and 06UQ. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -123,18 +122,7 @@ private theorem coefficientConstructible_of_isZero
 
 /-- Intrinsically constructible cohomology is an isomorphism-closed triangulated
 property, with no boundedness hypothesis and coefficients in Type (u+1).
-Source: Stacks Tags 09B5, 093U and 06UQ; the coefficient-universe version of the
-finite-level argument (blueprint: lem-weil-constructible-coefficient-homology-triangulated).
-Proof: refine two finite locally closed stratifications by their intersections.
-Exact inverse image identifies kernels and cokernels with those of restricted maps.
-Locally constant finite modules over a finite ring form a Serre class: finite-type
-locally constant closure applies since the ring is Noetherian, and finite generation
-over a finite ring gives finite underlying sets. The same refinement proves extension
-closure. Zero has the one empty stratum on the empty scheme, and one whole stratum
-otherwise. Transport local trivializations along isomorphisms. Thus the sheaf property
-contains zero and is closed under isomorphisms, kernels, cokernels and extensions.
-Apply the derived homology-property instances (Stacks 06UQ). The size of the finite
-ring never enters this argument; all local module carriers have universe u+1. -/
+Source: Stacks Tags 09B5, 093U and 06UQ. -/
 theorem constructibleCoefficientHomology_isTriangulated
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     ObjectProperty.IsClosedUnderIsomorphisms

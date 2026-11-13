@@ -145,9 +145,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
 /-!
 # The completed coefficient ring and its strict derived reduction tower
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-adic-coefficient-datum, order 1239; Stacks Tags 06XN, 06YS, 06YY.
-(blueprint: def-weil-pbc-adic-coefficient-datum).
+Source: Stacks Tags 06XN, 06YS, 06YY.
 
 The index n : ℕ denotes the positive exponent n+1. Every quotient reduction retains
 its own coefficient action; tower levels restrict that action along the limit projection.
@@ -177,8 +175,7 @@ private theorem commRingHasWeakSheafify (T : Scheme.{u}) :
 
 open scoped ChangeOfRings MonoidalCategory TensorProduct
 
-/-- The nth quotient coefficient module with its completed scalar action.
-Source: blueprint, Tags 06YY and 09BT (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The nth quotient coefficient module with its completed scalar action. -/
 def residue (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) (n : ℕ) :
     SheafOfModules.{u + 1} ((adicLisseForget T).obj (completedRing T I hf)) :=
@@ -190,25 +187,18 @@ end AlgebraicGeometry.Scheme.AdicCoefficients
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Postcomposition by the actual quotient homomorphism, followed by sheafification.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Postcomposition by the actual quotient homomorphism, followed by sheafification. -/
 noncomputable def reductionCoefficientMap (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     reductionCoefficient T d b ⟶ reductionCoefficient T d a :=
   (AdicCoefficients.ringSystem T d.ideal d.quotientFinite).map (homOfLE h).op
 
-/-- Equal-index quotient coefficient maps are identities.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: quotient induction identifies the quotient map with the identity. Postcomposition
-is then identity on component functions, and sheafification preserves identities. -/
+/-- Equal-index quotient coefficient maps are identities. -/
 theorem reductionCoefficientMap_id (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (a : ℕ) : reductionCoefficientMap T d a a (le_refl a) = 𝟙 _ := by
   exact (AdicCoefficients.ringSystem T d.ideal d.quotientFinite).map_id (op a)
 
-/-- Quotient coefficient maps satisfy the quotient cocycle.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: both quotient composites send the class of x to its class modulo I^(a+1).
-Postcomposition and sheafification preserve that equality and composition. -/
+/-- Quotient coefficient maps satisfy the quotient cocycle. -/
 theorem reductionCoefficientMap_comp (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :
     reductionCoefficientMap T d c b hbc ≫ reductionCoefficientMap T d b a hab =
@@ -217,19 +207,12 @@ theorem reductionCoefficientMap_comp (T : Scheme.{t}) {A : Type (t + 1)} [CommRi
     (homOfLE hbc).op (homOfLE hab).op).symm
 
 /-- Strict inverse sequences and compatible levelwise maps, indexed n↦n+1.
-The coefficient ring B may be noncommutative.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+The coefficient ring B may be noncommutative. -/
 abbrev reductionTowerCategory (T : Scheme.{t}) (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :=
   ℕᵒᵖ ⥤ ringedSiteModules.{t + 1} B
 
 /-- Strict module towers are Grothendieck abelian, including noncommutative coefficients.
-Source: blueprint order 1239; Stacks Tags 079B and 079Q
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: replace the pro-etale site by its small skeleton in universe t+1. Apply
-lem-weil-pbc-small-module-diagrams-grothendieck to the inverse-sequence index category.
-Restriction along the site equivalence identifies the two module and diagram categories
-and transports the Grothendieck structure. Kernels, cokernels, and exactness are
-levelwise by lem-weil-tower-category-levelwise-abelian. -/
+Source: Stacks Tags 079B and 079Q. -/
 theorem reductionTower_isGrothendieckAbelian (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :
     IsGrothendieckAbelian.{t + 1} (reductionTowerCategory T B) := by
@@ -255,26 +238,23 @@ theorem reductionTower_isGrothendieckAbelian (T : Scheme.{t})
     IsGrothendieckAbelian.of_equivalence (Equivalence.congrLeft eJ.symm)
   exact IsGrothendieckAbelian.of_equivalence (Equivalence.congrRight e)
 
-/-- Exact evaluation of a strict inverse sequence at the positive exponent n+1.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Exact evaluation of a strict inverse sequence at the positive exponent n+1. -/
 noncomputable abbrev reductionTowerEvaluation (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) (n : ℕ) :=
   (CategoryTheory.evaluation ℕᵒᵖ (ringedSiteModules.{t + 1} B)).obj (op n)
 
-/-- The standard derived category of completed-coefficient towers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The standard derived category of completed-coefficient towers. -/
 noncomputable instance reductionTowerHasDerivedCategory (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) :
     HasDerivedCategory (reductionTowerCategory T B) := HasDerivedCategory.standard _
 
-/-- Derived evaluation is induced by the exact termwise evaluation functor.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Derived evaluation is induced by the exact termwise evaluation functor. -/
 noncomputable abbrev reductionTowerDerivedEvaluation (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) (n : ℕ) :=
   (reductionTowerEvaluation T B n).mapDerivedCategory
 
 /-- The left-derived universal property determining scalar extension and its counit.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+Source: Stacks Tag 06YY. -/
 noncomputable instance reductionDerivedUniversal (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     (reductionDerivedChange T φ).IsLeftDerivedFunctor (reductionDerivedCounit T φ)
@@ -283,8 +263,7 @@ noncomputable instance reductionDerivedUniversal (T : Scheme.{t})
 
 attribute [local instance] reductionModulesHasDerivedCategory
 
-/-- Ordinary reduction, with the completion's action restored by restriction of scalars.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Ordinary reduction, with the completion's action restored by restriction of scalars. -/
 noncomputable def completedReductionLevel (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   reductionChange T (completedReductionProjection T d n) ⋙
@@ -575,13 +554,7 @@ private theorem scalarTransition_exists (X : Scheme.{u})
     intro V s x
     exact (hτ' M V s x).trans (hf M V s x).symm
 
-/-- The unique natural transition sending s⊗x to q(s)⊗x after scalar restriction.
-Source: blueprint order 1239, Stacks Tag 03EK
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the limit relation π_a=q_(b,a)π_b makes the displayed tensor formula balanced.
-Extend on presheaf tensors and sheafify. It is linear over the completion, commutes with
-restrictions, and is natural in M. Local pure tensors generate the sheafification, giving
-uniqueness of the natural transformation. -/
+/-- The unique natural transition sending s⊗x to q(s)⊗x after scalar restriction. -/
 theorem completedReductionTransition_exists (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     ∃! τ : completedReductionLevel T d b ⟶ completedReductionLevel T d a,
@@ -595,24 +568,19 @@ theorem completedReductionTransition_exists (T : Scheme.{t}) {A : Type (t + 1)} 
     (completedReductionProjection T d a) (reductionCoefficientMap T d b a h)
     (limit.w (reductionCoefficientSystem T d) (homOfLE h).op)
 
-/-- The canonical transition, specified uniquely on tensor generators.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonical transition, specified uniquely on tensor generators. -/
 noncomputable def completedReductionTransition (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     completedReductionLevel T d b ⟶ completedReductionLevel T d a :=
   (completedReductionTransition_exists T d b a h).exists.choose
 
-/-- The ordinary strict tower of a module sheaf, at all positive powers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The ordinary strict tower of a module sheaf, at all positive powers. -/
 noncomputable def completedReductionModuleTower (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (M : reductionModules T (completedReductionCoefficient T d)) :=
   Functor.ofOpSequence (X := fun n ↦ (completedReductionLevel T d n).obj M)
     (fun n ↦ (completedReductionTransition T d (n + 1) n (Nat.le_succ n)).app M)
 
-/-- Naturality at consecutive indices supplies a compatible levelwise map of towers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the transitions are natural transformations; their naturality square is exactly
-this equality. Functor.ofOpSequence has the stipulated consecutive transition. -/
+/-- Naturality at consecutive indices supplies a compatible levelwise map of towers. -/
 theorem completedReductionTowerMap_naturality (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     {M N : reductionModules T (completedReductionCoefficient T d)} (f : M ⟶ N)
@@ -624,8 +592,7 @@ theorem completedReductionTowerMap_naturality (T : Scheme.{t}) {A : Type (t + 1)
   simpa only [completedReductionModuleTower, Functor.ofOpSequence_map_homOfLE_succ] using
     ((completedReductionTransition T d (n + 1) n (Nat.le_succ n)).naturality f).symm
 
-/-- The ordinary tower construction on module morphisms.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The ordinary tower construction on module morphisms. -/
 noncomputable def completedReductionModuleTowerFunctor (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     reductionModules T (completedReductionCoefficient T d) ⥤
@@ -636,10 +603,7 @@ noncomputable def completedReductionModuleTowerFunctor (T : Scheme.{t})
   map_id M := NatTrans.ext (funext (fun n ↦ (completedReductionLevel T d n.unop).map_id M))
   map_comp f g := NatTrans.ext (funext (fun n ↦ (completedReductionLevel T d n.unop).map_comp f g))
 
-/-- The module-to-tower tensor construction is additive, levelwise.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: scalar extension and scalar restriction are additive. Equality of tower morphisms
-is equality of their components, so their composite level functors prove additivity. -/
+/-- The module-to-tower tensor construction is additive, levelwise. -/
 @[instance]
 theorem completedReductionModuleTowerFunctor_additive (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
@@ -654,21 +618,18 @@ theorem completedReductionModuleTowerFunctor_additive (T : Scheme.{t})
   exact (completedReductionLevel T d n.unop).map_add (f := f) (g := g)
 
 /-- Apply the additive tower construction to terms and differentials. This gives actual
-complexes in the tower category, not merely towers of derived objects.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+complexes in the tower category, not merely towers of derived objects. -/
 noncomputable def completedReductionComplexTowerFunctor (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :=
   (completedReductionModuleTowerFunctor T d).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The exact functor from the homotopy category to the derived category of towers.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The exact functor from the homotopy category to the derived category of towers. -/
 noncomputable def completedReductionHomotopyFunctor (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :=
   (completedReductionModuleTowerFunctor T d).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
     DerivedCategory.Qh
 
-/-- The universal property and representative computation of a reduction-tower pair.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The universal property and representative computation of a reduction-tower pair. -/
 def IsCompletedReductionTowerPair (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (LF : reductionDerivedCategory T (completedReductionCoefficient T d) ⥤
@@ -791,14 +752,7 @@ private theorem derivedPair_from_complex_resolutions
 
 /-- The reduction tower has its universal left derived pair, computed on every K-flat
 complex; in particular the construction is functorial only after derived localization.
-Source: blueprint order 1239; Stacks Tags 06XN, 06YS, 06YY
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the additive termwise tower construction preserves shifts and mapping cones.
-Every representative has a K-flat resolution by lem-pc-kflat-resolution. By
-lem-pur-derived-change-of-rings it sends quasi-isomorphisms between K-flat complexes to
-levelwise quasi-isomorphisms. Tower cohomology is levelwise, hence these are tower
-quasi-isomorphisms. Apply lem-pur-left-derived-from-kflat-class to obtain the universal
-pair, its exactness and its counit isomorphisms at K-flat representatives. -/
+Source: Stacks Tags 06XN, 06YS, 06YY. -/
 theorem completedReductionTower_exists (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     ∃ (LF : reductionDerivedCategory T (completedReductionCoefficient T d) ⥤
@@ -824,8 +778,7 @@ theorem completedReductionTower_exists (T : Scheme.{t}) {A : Type (t + 1)} [Comm
       (reductionRestrict T (completedReductionProjection T d n.unop)) a
       (reductionChange_quasiIso T (completedReductionProjection T d n.unop) a hP hQ ha)
 
-/-- K↦K_bullet is the canonical left derived functor, with its universal comparison.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- K↦K_bullet is the canonical left derived functor, with its universal comparison. -/
 noncomputable def completedReductionTower (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) :
     reductionDerivedCategory T (completedReductionCoefficient T d) ⥤
@@ -833,21 +786,14 @@ noncomputable def completedReductionTower (T : Scheme.{t}) {A : Type (t + 1)} [C
         (reductionModuleRing T (completedReductionCoefficient T d))) :=
   (completedReductionTower_exists T d).choose
 
-/-- The ordinary coefficient-change complex, with its actual scalar-extension differential.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The ordinary coefficient-change complex, with its actual scalar-extension differential. -/
 noncomputable def reductionChangeComplex (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     CochainComplex (reductionModules T R) ℤ ⥤ CochainComplex (reductionModules T S) ℤ :=
   (reductionChange T φ).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The canonical balancing chain map is uniquely determined on local tensor generators.
-Source: blueprint order 1239, normalization paragraph; Stacks Tag 03EK
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: send s tensor (r tensor x) to (s*ψ(r)) tensor x. The relation ψφ=χ makes
-this balanced over both rings. Sheafification extends it uniquely; restrictions and
-differentials commute with the formula. The inverse sends s tensor x to s tensor
-(1 tensor x). Balancing verifies both inverse identities. Local tensor generation
-proves uniqueness, including on the empty site object. -/
+Source: Stacks Tag 03EK. -/
 theorem reductionBalance_exists (T : Scheme.{t})
     {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (_h : φ ≫ ψ = χ)
@@ -863,8 +809,7 @@ theorem reductionBalance_exists (T : Scheme.{t})
   unfold reductionChangeComplex reductionChange reductionTensorSection
   exact completedAdicBalance_exists T φ ψ χ _h P
 
-/-- The canonical balancing map, selected from its unique local tensor formula.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonical balancing map, selected from its unique local tensor formula. -/
 noncomputable def reductionBalance (T : Scheme.{t})
     {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
@@ -873,18 +818,14 @@ noncomputable def reductionBalance (T : Scheme.{t})
       (reductionChangeComplex T χ).obj P :=
   (reductionBalance_exists T φ ψ χ h P).exists.choose
 
-/-- The balancing map is invertible, by its defining characterization.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The balancing map is invertible, by its defining characterization. -/
 noncomputable instance reductionBalance_isIso (T : Scheme.{t})
     {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
     (P : CochainComplex (reductionModules T R) ℤ) : IsIso (reductionBalance T φ ψ χ h P) :=
   (reductionBalance_exists T φ ψ χ h P).exists.choose_spec.1
 
-/-- The completion projection followed by a quotient transition is the earlier projection.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: this is the limit cone's naturality equation for the arrow b to a in the
-strict quotient coefficient system. -/
+/-- The completion projection followed by a quotient transition is the earlier projection. -/
 theorem completedReductionProjection_comp (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     completedReductionProjection T d b ≫ reductionCoefficientMap T d b a h =
@@ -943,10 +884,7 @@ private theorem reductionBalance_hom_ext (T : Scheme.{t})
   rw [hc]
   exact hf p V s 1 x
 
-/-- Balancing is natural on all representatives and therefore on K-flat computations.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: both composites send s tensor (r tensor x) to (s*ψ(r)) tensor f(x).
-Local tensor generators give equality in each degree, and localization preserves it. -/
+/-- Balancing is natural on all representatives and therefore on K-flat computations. -/
 theorem reductionBalance_naturality (T : Scheme.{t})
     {R S U : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ)
@@ -967,9 +905,7 @@ theorem reductionBalance_naturality (T : Scheme.{t})
   rw [reductionTensor_map, reductionTensor_map, reductionBalance_tmul,
     reductionBalance_tmul, reductionTensor_map]
 
-/-- The consecutive transition is natural in strict towers.
-Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the naturality square of a tower morphism at n+1 to n is the stated equation. -/
+/-- The consecutive transition is natural in strict towers. -/
 theorem completedTowerEvaluationStep_naturality (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) (n : ℕ)
     {M N : reductionTowerCategory T B} (f : M ⟶ N) :
@@ -977,16 +913,14 @@ theorem completedTowerEvaluationStep_naturality (T : Scheme.{t})
       M.map (homOfLE (Nat.le_succ n)).op ≫ f.app (op n) := by
   exact (f.naturality (homOfLE (Nat.le_succ n)).op).symm
 
-/-- The natural transformation between consecutive exact evaluation functors.
-Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The natural transformation between consecutive exact evaluation functors. -/
 def completedTowerEvaluationStep (T : Scheme.{t})
     (B : Sheaf (ProEt.topology T) RingCat.{t + 1}) (n : ℕ) :
     reductionTowerEvaluation T B (n + 1) ⟶ reductionTowerEvaluation T B n where
   app M := M.map (homOfLE (Nat.le_succ n)).op
   naturality _ _ f := completedTowerEvaluationStep_naturality T B n f
 
-/-- The evaluated derived objects, including arbitrary derived strict towers.
-Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The evaluated derived objects, including arbitrary derived strict towers. -/
 noncomputable def completedTowerDerivedSequence (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T
@@ -994,8 +928,7 @@ noncomputable def completedTowerDerivedSequence (T : Scheme.{t})
   (reductionTowerDerivedEvaluation T
     (reductionModuleRing T (completedReductionCoefficient T d)) n).obj M
 
-/-- Derived transitions are the termwise transitions of exact evaluation, localized.
-Source: blueprint order 1240 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Derived transitions are the termwise transitions of exact evaluation, localized. -/
 noncomputable def completedTowerDerivedStep (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (reductionTowerCategory T
@@ -1028,7 +961,7 @@ attribute [local irreducible] completedReductionCoefficient
 attribute [local irreducible] reductionCoefficientSystem AdicCoefficients.ringSystem
 
 /-- Read a universal homotopy counit on a complex using the canonical factorization maps.
-Source: Stacks Tags 06XN and 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+Source: Stacks Tags 06XN and 06YY. -/
 noncomputable def reductionComplexCounit
     {B : Type u₁} [Category.{v₁} B] [Abelian B] [HasDerivedCategory.{w₁} B]
     {D : Type u₂} [Category.{v₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
@@ -1045,7 +978,7 @@ noncomputable def reductionComplexCounit
       ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
 
 /-- The canonical scalar-extension comparison on any complex representative.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+Source: Stacks Tag 06YY. -/
 noncomputable abbrev reductionScalarComplexCounit (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (P : CochainComplex (reductionModules T R) ℤ) :=
@@ -1053,8 +986,7 @@ noncomputable abbrev reductionScalarComplexCounit (T : Scheme.{t})
     (reductionDerivedCounit T φ) P
 
 /-- The exact derived coefficient restriction, applied termwise before localization.
-Source: blueprint order 1239; Stacks Tag 015F
-(blueprint: def-weil-pbc-adic-coefficient-datum). -/
+Source: Stacks Tag 015F. -/
 noncomputable abbrev reductionDerivedRestrict (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   (reductionRestrict T φ).mapDerivedCategory
@@ -1313,15 +1245,7 @@ private theorem derivedReductionComposition (T : Scheme.{t})
 
 /-- The quotient normalization is uniquely specified on every K-flat computation by
 ordinary balancing and the universal scalar-extension counits.
-Source: blueprint order 1239, normalization paragraph; Stacks Tag 06YY
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: scalar extension carries K-flat complexes to K-flat complexes, by testing against
-acyclic target complexes and restricting scalars. On those representatives the two
-successive derived changes are computed by successive ordinary changes. Balancing gives
-an isomorphism to direct scalar extension. The local tensor formula proves naturality,
-so these maps descend through quasi-isomorphisms between K-flat complexes. Every object
-has such a representative. The universal counits give the displayed characterization
-and show uniqueness, since their components are invertible on those representatives. -/
+Source: Stacks Tag 06YY. -/
 theorem completedReductionDerivedNormalization_exists (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     ∃! τ : reductionDerivedChange T (completedReductionProjection T d b) ⋙
@@ -1345,8 +1269,7 @@ theorem completedReductionDerivedNormalization_exists (T : Scheme.{t})
     (reductionCoefficientMap T d b a h) (completedReductionProjection T d a)
     (completedReductionProjection_comp T d b a h)
 
-/-- The canonical normalization natural transformation, fixed by its K-flat formula.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonical normalization natural transformation, fixed by its K-flat formula. -/
 noncomputable def completedReductionDerivedNormalization (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (b a : ℕ) (h : a ≤ b) :
     reductionDerivedChange T (completedReductionProjection T d b) ⋙
@@ -1355,8 +1278,7 @@ noncomputable def completedReductionDerivedNormalization (T : Scheme.{t})
   (completedReductionDerivedNormalization_exists T d b a h).choose
 
 /-- The universal counit of the reduction tower, selected together with its left derived
-functor and hence determining all resolution comparisons.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+functor and hence determining all resolution comparisons. -/
 noncomputable def coherenceReductionTowerCounit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     DerivedCategory.Qh ⋙ completedReductionTower T d ⟶
@@ -1364,13 +1286,7 @@ noncomputable def coherenceReductionTowerCounit (T : Scheme.{t})
   (completedReductionTower_exists T d).choose_spec.choose
 
 /-- The canonical reduction tower is universal, triangulated and computed on K-flat models.
-Source: blueprint order 1239; Stacks Tags 06XN, 06YS and 06YY
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the total left derived functor has the universal right Kan extension counit.
-The published existence theorem completedReductionTower_exists identifies this pair
-with the exact homotopy functor on K-flat representatives. It therefore transports the
-shift and triangle structure and makes the counit invertible on these representatives.
-Uniqueness of derived pairs makes these the canonical resolution comparisons. -/
+Source: Stacks Tags 06XN, 06YS and 06YY. -/
 theorem completedReductionTower_properties (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
     (completedReductionTower T d).IsLeftDerivedFunctor (coherenceReductionTowerCounit T d)
@@ -1389,8 +1305,7 @@ attribute [local irreducible] Functor.mapDerivedCategory
 attribute [local irreducible] Functor.mapDerivedCategoryFactors
 attribute [local irreducible] Functor.mapDerivedCategoryFactorsh
 
-/-- The tower counit on a complex, using canonical localization factorizations.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The tower counit on a complex, using canonical localization factorizations. -/
 noncomputable def completedReductionTowerComplexCounit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (reductionModules T (completedReductionCoefficient T d)) ℤ) :
@@ -1626,14 +1541,7 @@ attribute [local semireducible] completedReductionModuleTowerFunctor
 /-- Derived tower evaluation is canonically restriction of the quotient object K_n.
 The equation fixes this comparison on every K-flat representative by the actual tower
 and scalar-extension counits; no arbitrary identification is chosen.
-Source: blueprint order 1239, evaluation paragraph; Stacks Tags 015F and 06YY
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: on a K-flat complex P both functors are computed by P tensor (P_n)_T with
-its completion action. The two universal counits and exact evaluation identify that
-same ordinary complex and all its maps. This gives the displayed comparison and its
-naturality on K-flat representatives. Quasi-isomorphisms between these representatives
-are inverted, so the comparison descends. Every object has a K-flat representative;
-the displayed equality with invertible counits forces uniqueness and invertibility. -/
+Source: Stacks Tags 015F and 06YY. -/
 theorem completedReductionEvaluation_exists (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     ∃! τ : completedReductionTower T d ⋙
@@ -1688,8 +1596,7 @@ theorem completedReductionEvaluation_exists (T : Scheme.{t})
     intro P hP
     exact heq_of_eq (hτ'.2 P hP)
 
-/-- The canonical evaluation comparison, fixed by its formula on K-flat representatives.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The canonical evaluation comparison, fixed by its formula on K-flat representatives. -/
 noncomputable def completedReductionEvaluation (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     completedReductionTower T d ⋙ reductionTowerDerivedEvaluation T
@@ -1698,31 +1605,24 @@ noncomputable def completedReductionEvaluation (T : Scheme.{t})
         reductionDerivedRestrict T (completedReductionProjection T d n) :=
   (completedReductionEvaluation_exists T d n).choose
 
-/-- The canonical evaluation comparison is invertible as a natural transformation.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the defining unique-existence theorem asserts invertibility of the selected
-natural transformation. Apply its existence specification to its chosen witness
-and take the invertibility conjunct. -/
+/-- The canonical evaluation comparison is invertible as a natural transformation. -/
 @[instance]
 theorem completedReductionEvaluation_isIso (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     IsIso (completedReductionEvaluation T d n) := by
   exact (completedReductionEvaluation_exists T d n).choose_spec.1.1
 
-/-- The ambient derived category of modules over the completed coefficient sheaf.
-Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The ambient derived category of modules over the completed coefficient sheaf. -/
 noncomputable abbrev AdicCoefficientDatum.derived {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) :=
   reductionDerivedCategory T (d.completedRing T)
 
-/-- The strict tower category over the completed coefficient sheaf.
-Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The strict tower category over the completed coefficient sheaf. -/
 noncomputable abbrev AdicCoefficientDatum.towers {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) :=
   reductionTowerCategory T (reductionModuleRing T (d.completedRing T))
 
-/-- Finite reduction retains the quotient coefficient action.
-Source: blueprint adic coefficient datum (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- Finite reduction retains the quotient coefficient action. -/
 noncomputable abbrev AdicCoefficientDatum.reduction {A : Type (t + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (T : Scheme.{t}) (n : ℕ) :=
   reductionDerivedChange T (d.projection T n)

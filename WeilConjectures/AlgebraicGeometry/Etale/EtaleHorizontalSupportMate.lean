@@ -40,9 +40,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 
 /-!
 # Etale horizontal compact-support exchange is the composition mate
-
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K
-(blueprint: lem-pur-etale-horizontal-support-mate).
 -/
 
 set_option autoImplicit false
@@ -56,9 +53,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The compactification-independent proper-support comparison for an etale map.
-Source: literature/stacks-project/more-etale.tex, Tags 0F4L and 0GKM
-(blueprint: lem-pur-etale-horizontal-support-mate). -/
+/-- The compactification-independent proper-support comparison for an etale map. -/
 noncomputable def etaleCanonicalCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] [IsSeparated e]
@@ -71,9 +66,7 @@ noncomputable def etaleCanonicalCompactSupportComparison
   (rightDerivedLowerShriekIso A (HasCompactification.compactification e)).symm ≪≫
     N.comparison e (HasCompactification.compactification e)
 
-/-- The specified composition mate built from the normalized compact-support comparisons.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K
-(blueprint: lem-pur-etale-horizontal-support-mate). -/
+/-- The specified composition mate built from the normalized compact-support comparisons. -/
 noncomputable def etaleHorizontalSupportMateDelta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
@@ -106,9 +99,7 @@ noncomputable def etaleHorizontalSupportMateDelta
       (etaleCanonicalCompactSupportComparison A v N)
 
 /-- The specified unbounded compact-support exchange `C_{f,v} : v^* Rf_! ≅ Rf'_! v'^*` as an
-isomorphism; its `hom` is the recorded exchange and its `inv` is `C_{f,v}⁻¹`.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7L
-(blueprint: lem-pur-etale-horizontal-support-mate). -/
+isomorphism; its `hom` is the recorded exchange and its `inv` is `C_{f,v}⁻¹`. -/
 noncomputable def etaleHorizontalSupportBaseChangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -436,28 +427,7 @@ attribute [local irreducible] rightDerivedLowerShriekIso
 -- Keep the pullback compactification and its projection definitionally aligned.
 set_option maxRecDepth 10000 in
 set_option backward.isDefEq.respectTransparency false in
-/-- The counit identity for the composition mate of compact-support exchange.
-Source: literature/stacks-project/more-etale.tex, Tags 0F7J and 0F7K
-(blueprint: lem-pur-etale-horizontal-support-mate).
-
-Proof: the sheaf comparison into direct image is monic. The graph and homotopy
-normalization equations therefore identify N with the explicit canonical graph
-comparison. Expand the inverse composition comparison on the proper/open tower of a
-compactification of f. The separate tower lemma identifies this geometric normalization
-before either horizontal counit is applied. Conjugacy of iterated mates identifies
-its proper/sum factor with the inverse mate of inverse proper exchange. The open
-square comparison is an iterated
-mate of the inverse-image square; descend the sheaf mate identity for the two open
-extensions, and use the actual localized etale adjunctions for the horizontal arrows.
-The mate counit identity replaces the open comparison followed by the v' counit with
-open base change followed by the pulled-back etale counit. On the proper square, the
-unit identity for mates and its triangle identity show that the resulting transpose
-is inverse proper exchange. Naturality transports this calculation through the two
-model-to-chosen comparisons. The specified compact-support exchange is exactly the
-proper exchange followed by inverse open base change in this model. Cancelling that
-isomorphism identifies the adjunct with its inverse. Apply the adjunction bijection
-backwards to obtain the displayed counit identity on every unbounded input.
--/
+/-- The counit identity for the composition mate of compact-support exchange. -/
 theorem etaleHorizontalSupportMate
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

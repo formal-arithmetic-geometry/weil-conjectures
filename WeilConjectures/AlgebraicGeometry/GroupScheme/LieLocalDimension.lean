@@ -13,9 +13,6 @@ import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Lie dimension and the local ring at a smooth identity
-
-Source: blueprint `proposition-cartier-s-theorem`, third proof paragraph, and the dimension
-paragraph of `lemma-connected-components-images-homomorphisms--3`.
 -/
 
 @[expose] public section
@@ -27,22 +24,7 @@ open scoped MonObj
 
 namespace AlgebraicGeometry.GrpObj
 
-/-- The Lie algebra of a smooth group scheme has the dimension of its local ring at the identity.
-
-Source: blueprint `proposition-cartier-s-theorem`, third proof paragraph, and
-`lemma-connected-components-images-homomorphisms--3`, the dimension paragraph.
-
-Proof: Write `e` for the image of the unique point of `Spec k` under the identity section.
-The section identifies the residue field at `e` with `k`. Restrict to an affine neighbourhood
-of `e`. Its algebra is smooth over `k`, so the local ring `R` at `e` is Noetherian and regular.
-The fibre of relative differentials at this rational point is canonically the cotangent space
-`m/m²`: the conormal exact sequence is split by the structural map from `k`, and the
-induced derivation on `R` gives the inverse identification. Pulling the cotangent sheaf back
-along the identity section therefore gives the sheaf associated to `m/m²` on `Spec k`.
-Morphisms from it to the structure sheaf identify, linearly over `k` via the global-sections
-isomorphism of `Spec k`, with the dual of `m/m²`. This is exactly the definition of `Lie G`.
-The cotangent space is finite dimensional, its dual has the same finrank, and regularity
-identifies that finrank with the Krull dimension of `R`. -/
+/-- The Lie algebra of a smooth group scheme has the dimension of its local ring at the identity. -/
 theorem finrank_lie_eq_localKrullDim_of_smooth
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] :
     (Module.finrank k (Lie G) : WithBot ℕ∞) =

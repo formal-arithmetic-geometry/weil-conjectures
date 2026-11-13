@@ -15,8 +15,7 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! # Module sheaves on discrete schemes over an algebraically closed field
 
-Source: Stacks Project, Tags 06LH, 04DZ and 03P5; step 4 of the parent node.
-(blueprint: lem-weil-pbc-discrete-scheme-module-locally-constant)
+Source: Stacks Project, Tags 06LH, 04DZ and 03P5.
 -/
 
 @[expose] public section
@@ -46,21 +45,7 @@ private theorem isConstant_module_spec
 
 /-- Every module sheaf on a discrete scheme locally of finite type over an algebraically
 closed field is locally constant. No finiteness condition is imposed on the module.
-Source: Stacks Project, Tags 06LH, 04DZ and 03P5.
-(blueprint: lem-weil-pbc-discrete-scheme-module-locally-constant)
-
-Proof: Cover Z by its singleton open subschemes T. At the unique point t of T the
-residue-field map Spec kappa(t) -> T is a closed immersion and is surjective, hence is a
-universal homeomorphism. The Nullstellensatz identifies kappa(t) with k, since T is locally
-of finite type over k and t is closed. Every set sheaf on Spec kappa(t) has an invertible
-constant-sheaf counit. The constant-sheaf counit for a module sheaf becomes that counit
-under the forgetful functor, up to the constant-sheaf comparison isomorphism. Forgetting
-module structure reflects isomorphisms, so the module counit is invertible too and the
-module sheaf is constant. Its pullback along the residue-field map is therefore locally
-constant. Universal-homeomorphism invariance descends this to T. Finally local constancy
-is etale local, so the singleton open cover gives local constancy on Z. The empty scheme
-uses the empty cover. Infinite discrete schemes are allowed because the cover need not
-be finite; no finite generation or Noetherian coefficient hypothesis is used. -/
+Source: Stacks Project, Tags 06LH, 04DZ and 03P5. -/
 theorem isLocallyConstantSheaf_of_discrete_finiteType_module
     (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k]
     {Z : Scheme.{u}} [DiscreteTopology Z]

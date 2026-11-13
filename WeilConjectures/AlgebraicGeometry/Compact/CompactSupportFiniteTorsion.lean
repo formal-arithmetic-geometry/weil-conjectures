@@ -18,9 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenComparisonComposi
 /-!
 # Compact-support base change with finite coefficients and arbitrary refinements
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/thm-cbc-finite-torsion;
-Stacks Project, Tags 0DDE, 0F7I, 0F7J and 0F7F (blueprint:
-proposition-composition-base-change-rf-shriek).
+Source: Stacks Project, Tags 0DDE, 0F7I, 0F7J and 0F7F.
 
 The exchange map, its invertibility, identity and horizontal pasting, and its canonical
 compactification-independent version and vertical pasting already exist upstream. The theorem
@@ -40,8 +38,8 @@ namespace AlgebraicGeometry.Etale
 /-- The comparison `C_r = Rp₂*(α_r)`, followed by direct-image composition, for any
 proper refinement fixing the open. The map `α_r` is exactly `properOpenComparison`, not an
 exchange requiring a Cartesian refinement square.
-Source: blueprint proposition-composition-base-change-rf-shriek, proof steps 4 and 5; Stacks
-Project, Tag 0F7I (blueprint: proposition-composition-base-change-rf-shriek). -/
+Source: Stacks
+Project, Tag 0F7I. -/
 noncomputable def compactSupportProperOpenRefinementMap
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
@@ -247,23 +245,7 @@ private theorem compactSupportProperOpenRefinementMap_cartesian
 /-- Compact-support exchange is invertible at every bounded-below complex, and the
 specified proper/open refinement maps are the canonical comparison isomorphisms, for all
 refinements without a Cartesian or density hypothesis.
-Source: blueprint proposition-composition-base-change-rf-shriek; Stacks Project, Tags 0DDE and 0F7I
-(blueprint: proposition-composition-base-change-rf-shriek).
-
-Proof:
-1. The existing proper-base-change instance makes the compactification exchange invertible.
-2. For a Cartesian refinement, transpose both comparisons under the open-extension
-   adjunction. The unit formula for open base change and the normalization of
-   `properOpenIdentification` identify the transposes. Cancel the restriction isomorphism
-   and the open-extension unit, and apply the adjunction triangle identity.
-3. Proper/open comparison composition, direct-image compositor naturality and
-   direct-image associativity give the reverse composition equation for refinement maps.
-4. Put `w = infFst c c`. Both `w` and `w.comp r` are Cartesian over the open. Invertibility
-   of the proper/open comparison makes the map for `w` invertible. The composition equation
-   writes the map for `r` as the map for `w.comp r` followed by the inverse map for `w`.
-5. Replace those two maps by the formalism refinement comparisons. Their ratio is exactly
-   `shriekIso d c` by its common-refinement formula. The other clauses of the mixed DAG node
-   remain supplied by the existing upstream declarations recorded in its Lean attachment. -/
+Source: Stacks Project, Tags 0DDE and 0F7I. -/
 theorem compactSupportFiniteTorsion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

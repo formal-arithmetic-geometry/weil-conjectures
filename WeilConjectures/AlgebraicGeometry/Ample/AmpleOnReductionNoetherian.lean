@@ -18,12 +18,11 @@ import WeilConjectures.AlgebraicGeometry.Ample.AmpleSquareZeroThickening
 
 /-! # Ampleness on a Noetherian reduction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS
-(blueprint: lem-sc-ample-on-reduction-noetherian).
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
 
 The invertibility of the pullback `i^*L` (the node's parenthetical) is the first clause of
-the landed `Scheme.Modules.invertible_pullback_tensor`
-(lem-weil-pbc-invertible-pullback-tensor); it is not restated here.
+the landed `Scheme.Modules.invertible_pullback_tensor`;
+it is not restated here.
 -/
 
 @[expose] public section
@@ -168,16 +167,7 @@ private theorem isAmple_of_ker_pow_eq_bot (n : ℕ) {Z X : Scheme.{u}}
 
 /-- Ampleness of an invertible module is unchanged on a Noetherian closed subscheme
 with the same underlying topological space.
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS
-(blueprint: lem-sc-ample-on-reduction-noetherian).
-Proof: the forward implication follows from affine pullback along a closed immersion.
-For the converse, the ideal sheaf is nilpotent, by the finitely generated ideal
-radical-power lemma on a finite affine cover. Induct on its nilpotency exponent:
-factor the immersion through the subscheme defined by the square of its ideal.
-The first factor has square-zero kernel; the second has a smaller nilpotency bound.
-Composition of tensor pullbacks and invariance of ampleness under module isomorphism
-allow square-zero lifting followed by the induction hypothesis.
--/
+Source: Stacks Project, Cohomology of Schemes, Lemma 09MS. -/
 theorem isAmple_iff_of_isClosedImmersion_of_isHomeomorph {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i]
     [IsLocallyNoetherian Z] [IsLocallyNoetherian X]

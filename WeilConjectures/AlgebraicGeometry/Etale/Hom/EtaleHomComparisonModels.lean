@@ -24,8 +24,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 
 /-! # Models for the étale scalar internal-Hom comparison
 
-Source: blueprint `lemma-change-coefficients-internal-hom--1`, proof paragraph 2; Stacks 06YY, 07A4,
-08J9 and 08JC (blueprint: `lem-coef-etale-hom-thick-locus`).
+Source: Stacks 06YY, 07A4,
+08J9 and 08JC.
 
 The scalar extension functor and the derived internal Hom are the published étale
 constructions.  The comparison is specified by its tensor--Hom transpose, so that
@@ -51,17 +51,13 @@ attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
 
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
-/-- Scalar extension of Hom, contravariant in K.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+/-- Scalar extension of Hom, contravariant in K. -/
 abbrev EtaleHomLeft (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X) :
     (DerivedCategoryModule A X)ᵒᵖ ⥤ DerivedCategoryModule B X :=
   (derivedHom (ModuleCat.{u + 1} A) X).flip.obj M ⋙ scalarExtension φ X
 
-/-- Hom of scalar extensions, contravariant in K.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+/-- Hom of scalar extensions, contravariant in K. -/
 abbrev EtaleHomRight (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X) :
     (DerivedCategoryModule A X)ᵒᵖ ⥤ DerivedCategoryModule B X :=
@@ -69,8 +65,7 @@ abbrev EtaleHomRight (X : Scheme.{u}) (φ : A →+* B)
     (derivedHom (ModuleCat.{u + 1} B) X).flip.obj ((scalarExtension φ X).obj M)
 
 /-- Type of binary tensor comparisons; canonicity is imposed below.
-Source: Stacks 07A4, tensor compatibility
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 07A4, tensor compatibility. -/
 abbrev EtaleHomTensorComparison (X : Scheme.{u}) (φ : A →+* B) : Type _ :=
   ∀ K L : DerivedCategoryModule A X,
     ((derivedTensor (ModuleCat.{u + 1} B) X).obj ((scalarExtension φ X).obj K)).obj
@@ -92,8 +87,7 @@ variable (C : Type w₁) [Category.{u + 1} C] [Abelian C]
 The equation is imposed on K-flat complexes with flat terms. Its bottom arrow is
 ordinary scalar balancing, inverse to (x tensor b) tensor (y tensor c) ↦
 (x tensor y) tensor bc. The comparison maps r are the derived-extension counit.
-Source: Stacks 06YY and 07A4, proof step 1 of the node
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 06YY and 07A4, proof step 1 of the node. -/
 def EtaleHomTensorModelNormalization
     (E : Sheaf X.smallEtaleTopology C ⥤ Sheaf X.smallEtaleTopology D) [E.Additive] [E.IsLeftAdjoint]
     [E.OplaxMonoidal]
@@ -112,8 +106,7 @@ end TensorNormalization
 /-- Naturality in both tensor variables and the flat-term K-flat normalization.
 The ordinary oplax structure is the mate of the fixed lax restriction-of-scalars
 structure, so it cannot be twisted by per-object automorphisms.
-Source: Stacks 07A4, proof step 1 of the node
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 07A4, proof step 1 of the node. -/
 def IsEtaleHomTensorCanonical (X : Scheme.{u}) (φ : A →+* B)
     (μ : EtaleHomTensorComparison X φ) : Prop :=
   (∀ {K K' : DerivedCategoryModule A X} (f : K ⟶ K') (L : DerivedCategoryModule A X),
@@ -290,15 +283,7 @@ private theorem extension_preservesKFlatQuasiIso {R S : Type (u + 1)}
   exact hE
 
 /-- The canonical binary tensor comparison exists uniquely.
-Source: Stacks 06YY and 07A4, proof step 1 of the node
-(blueprint: lem-coef-etale-tensor-model-comparison).
-Proof: on two flat-term K-flat resolutions, termwise scalar balancing is the
-isomorphism (x tensor b) tensor (y tensor c) ↦ (x tensor y) tensor bc.
-The total differential is preserved because the coefficients have degree zero.
-The displayed counit equation expresses this map after localization. Naturality
-of balancing permits descent along quasi-isomorphisms between K-flat models.
-Every object has such a model, and naturality along its resolution determines
-every component, proving uniqueness. No flatness of B over A is needed. -/
+Source: Stacks 06YY and 07A4, proof step 1 of the node. -/
 theorem etaleHomTensorComparison_existsUnique (X : Scheme.{u}) (φ : A →+* B) :
     ∃! μ : EtaleHomTensorComparison X φ, IsEtaleHomTensorCanonical X φ μ := by
   let E := ProEtale.etaleSheafExtendScalars φ X
@@ -331,15 +316,12 @@ theorem etaleHomTensorComparison_existsUnique (X : Scheme.{u}) (φ : A →+* B) 
 end ScalarTensorProof
 
 /-- The uniquely normalized binary comparison, used in the evaluation transpose.
-Source: Stacks 07A4, proof step 1 of the node
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 07A4, proof step 1 of the node. -/
 def etaleHomTensorComparison (X : Scheme.{u}) (φ : A →+* B) :
     EtaleHomTensorComparison X φ :=
   (etaleHomTensorComparison_existsUnique X φ).choose
 
-/-- The defining evaluation-transpose equation for the canonical comparison.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+/-- The defining evaluation-transpose equation for the canonical comparison. -/
 def IsEtaleHomTranspose (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)
     (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M) : Prop :=
@@ -351,9 +333,7 @@ def IsEtaleHomTranspose (X : Scheme.{u}) (φ : A →+* B)
       ((derivedTensorHomAdjunction (ModuleCat.{u + 1} B) (X := X)
           ((scalarExtension φ X).obj K)).homEquiv _ _).symm (v.app (op K))
 
-/-- Naturality of the family of evaluation transposes in the second variable.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+/-- Naturality of the family of evaluation transposes in the second variable. -/
 def IsEtaleHomNaturalInM (X : Scheme.{u}) (φ : A →+* B)
     (v : ∀ M : DerivedCategoryModule A X,
       EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M) : Prop :=
@@ -374,8 +354,7 @@ variable (C : Type w) [Category.{u + 1} C] [Abelian C]
   (X : Scheme.{u})
 
 /-- Canonical cancellation of the two opposite tensor shifts, with the tensor signs.
-Source: Stacks 08JC and the tensor-shift calculation in proof step 4
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 08JC and the tensor-shift calculation in proof step 4. -/
 def etaleHomTensorShiftCancellation
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) (n : ℤ) :
     ((derivedTensor C X).obj (K⟦-n⟧)).obj (L⟦n⟧) ⟶ ((derivedTensor C X).obj K).obj L :=
@@ -395,8 +374,7 @@ the opposite triangulated convention requires. It satisfies
 cancellations, so the normalized family obeys the `CommShift` addition axiom
 (a multiplicative factor such as `n.negOnePow` would not). It applies to both
 coefficient Hom functors.
-Source: Stacks 08JC, proof steps 4 and 5
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 08JC, proof steps 4 and 5. -/
 def EtaleHomShiftNormalization
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
     (s : ((derivedHom C X).flip.obj M).CommShift ℤ) : Prop :=
@@ -406,8 +384,7 @@ end HomShiftNormalization
 
 /-- The scalar shift is the canonical adjoint mate of exact restriction's shift.
 This is the counit-compatible shift, hence on K-flat models the termwise shift.
-Source: Stacks 05SU and 06YY, proof step 1
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 05SU and 06YY, proof step 1. -/
 @[instance_reducible]
 def etaleHomScalarCommShift (X : Scheme.{u}) (φ : A →+* B) :
     (scalarExtension φ X).CommShift ℤ :=
@@ -419,8 +396,7 @@ The two component equations are chi_Phi = F(s_A) followed by sigma and
 chi_Psi = H_B(sigma inverse,1) followed by s_B. The very same structures make
 both functors triangulated and v a shift-compatible natural transformation;
 therefore its third triangle square includes the connecting map and its sign.
-Source: Stacks 08JC, proof steps 4--6
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+Source: Stacks 08JC, proof steps 4--6. -/
 def IsEtaleHomReversedExact (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)
     (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M) : Prop :=
@@ -446,9 +422,7 @@ def IsEtaleHomReversedExact (X : Scheme.{u}) (φ : A →+* B)
     (EtaleHomLeft X φ M).IsTriangulated ∧
     (EtaleHomRight X φ M).IsTriangulated ∧ NatTrans.CommShift v ℤ
 
-/-- The isomorphism locus and its thick-subcategory closure properties.
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2
-(blueprint: lem-coef-etale-hom-thick-locus). -/
+/-- The isomorphism locus and its thick-subcategory closure properties. -/
 def IsEtaleHomThickIsoLocus (X : Scheme.{u}) (φ : A →+* B)
     (M : DerivedCategoryModule A X)
     (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M) : Prop :=

@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Good.GoodCurvesPreimageBoundary
 
 /-!
 # Constructibility on the open part of a good-curves compactification
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof after
-replacing the dense open by its inverse image under the finite good-curves cover.
-(blueprint: lem-weil-pbc-good-curves-preimage-constructible)
 -/
 
 @[expose] public section
@@ -204,30 +200,7 @@ theorem constantSingle_constructible
       ((_root_.DerivedCategory.Plus.singleFunctorιIso _ 0).app F).symm)
 
 /-- Constructibility on each proper model implies constructibility on the inverse image
-of a fibrewise dense open in a finite good-curves diagram.
-
-Source: Stacks Project, Tag 0GKX, `lemma-constant-shriek-rel-dim-1`, proof from
-"Let Z' be the complement" through the finite sum of the proper smooth families.
-(blueprint: lem-weil-pbc-good-curves-preimage-constructible)
-
-Proof: The geometric preimage-boundary theorem gives an open immersion of the
-pullback P into the proper Noetherian coproduct C, over V, whose closed
-complement Z is quasi-finite over V. The finite constant complex on Z has
-constructible cohomology, so quasi-finite shriek preserves its constructibility.
-
-Assemble constructibility on C by induction on the finite component family. The
-empty coproduct has no points; every sheaf and the resulting compact-support object
-are zero. In the successor case, the first component is open and its complementary
-finite coproduct is both open and closed. The disjoint component ranges and their
-open cover prove the complement equality. The induction hypothesis, hmodels for the
-first component, and the open-closed compact-support triangle give constructibility
-on C. This avoids a separate Mayer-Vietoris or compactification-independence lemma.
-
-Finally apply the open-closed triangle to P in C and Z. Constant-pullback
-isomorphisms identify the three constant complexes. Its second and third vertices
-have constructible cohomology by the two preceding arguments. The Serre homology
-property is triangulated and hence contains its first vertex, giving the result
-for every prescribed compactification cW. -/
+of a fibrewise dense open in a finite good-curves diagram. -/
 theorem goodCurvesPreimage_constantShriek_constructible
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]

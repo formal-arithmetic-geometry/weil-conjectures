@@ -74,8 +74,7 @@ private lemma openSquare_cover {X : Scheme.{u}} (U V : X.Opens) (hc : U ⊔ V = 
     exact Sieve.le_generate _ _ _ (Presieve.ofArrows.mk WalkingPair.right)
 
 /-- The free-sheaf two-open complex is short exact for a cover.
-Source: Stacks Project, Tag 01EB; Mathlib's MayerVietorisSquare.shortComplex_shortExact.
-(blueprint: lem-pc-free-mayer-vietoris-short-exact) -/
+Source: Stacks Project, Tag 01EB; Mathlib's MayerVietorisSquare.shortComplex_shortExact. -/
 theorem H.openFreeShortComplex_shortExact {X : Scheme.{u}} (U V : X.Opens)
     (hc : U ⊔ V = ⊤) : (H.openFreeShortComplex U V).ShortExact := by
   have hs : (openSquare U V).IsPullback := by

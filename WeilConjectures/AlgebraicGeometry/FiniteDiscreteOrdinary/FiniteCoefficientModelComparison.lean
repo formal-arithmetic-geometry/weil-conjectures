@@ -47,9 +47,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite constant models and finite-stalk constructibility
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-integral-criterion-reductions.proof.md, second paragraph; Stacks Tags 099Y and 09AJ
-(blueprint: lem-pe-finite-coefficient-model-comparison).
+Source: Stacks Tags 099Y and 09AJ.
 
 The coefficient encoding is the normalized section-action equivalence already supplied by
 FiniteDiscreteOrdinary. The witness clauses retain each stratum and each cover. Arbitrary
@@ -71,25 +69,19 @@ namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
 /-- The finite geometric-stalk clause of the existing ordinary constructibility definition,
-without its separate local-constancy clause. No field characteristic is excluded.
-Source: Stacks Tag 09AJ, definition-constructible
-(blueprint: lem-pe-finite-coefficient-model-comparison). -/
+without its separate local-constancy clause. No field characteristic is excluded. -/
 def ordinaryFiniteStalks (T : Scheme.{u}) (F : Ordinary A T) : Prop :=
   ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ T),
     Finite (Scheme.proEtaleGeometricModuleStalk x (Scheme.proEtaleConstantRing T A) F)
 
 /-- The ordinary local condition on one stratum, using the recorded localized-site
-local constancy and actual geometric stalks, rather than etale origin or finite Tor amplitude.
-Source: Stacks Tag 09AJ, definition-constructible
-(blueprint: lem-pe-finite-coefficient-model-comparison). -/
+local constancy and actual geometric stalks, rather than etale origin or finite Tor amplitude. -/
 def ordinaryFiniteLocalCondition (T : Scheme.{u}) (F : Ordinary A T) : Prop :=
   Scheme.IsLocallyConstantProEtaleModuleSheaf T A F ∧ ordinaryFiniteStalks A T F
 
 /-- Finite constant ordinary models on a specified cover. Module pullback uses the canonical
 constant-coefficient comparison, and the constant model is simultaneous ring/module
-sheafification. This spells out the ordinary side of the same-cover comparison.
-Source: Stacks Tag 099Y, lemma-compare-locally-constant
-(blueprint: lem-pe-finite-coefficient-model-comparison). -/
+sheafification. This spells out the ordinary side of the same-cover comparison. -/
 def ordinaryFiniteCoverModels (T : Scheme.{u}) (F : Ordinary A T)
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage T) : Prop :=
   ∀ i : C.I₀, ∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A), Finite P ∧
@@ -99,8 +91,7 @@ def ordinaryFiniteCoverModels (T : Scheme.{u}) (F : Ordinary A T)
 /-- Bounded constructibility in the intrinsic ordinary constant-ring module category:
 standard bounded cohomology and the existing finite-stalk constructibility predicate in
 every degree. This is the ordinary target of the comparison, with no Tor restriction.
-Source: blueprint definition-constructible-sheaves, final paragraph; Stacks Tag 09AL
-(blueprint: lem-pe-finite-coefficient-model-comparison). -/
+Source: Stacks Tag 09AL. -/
 def ordinaryIntrinsicBoundedConstructible [Finite A] (T : Scheme.{u}) :
     ObjectProperty (Scheme.proEtaleDerivedCategory T A) :=
   DerivedCategory.TStructure.t.bounded ⊓ fun K ↦ ∀ q : ℤ,
@@ -110,8 +101,7 @@ def ordinaryIntrinsicBoundedConstructible [Finite A] (T : Scheme.{u}) :
 /-- All clauses of the finite-coefficient comparison for the specified normalized encoding.
 The stratum clauses are pointwise, so zero strata and empty strata are included. The global
 ordinary predicate retains its recorded convention of a positive number of strata.
-Source: blueprint sk-prop-integral-criterion-reductions.proof.md, second paragraph;
-Stacks Tags 099Y and 09AJ (blueprint: lem-pe-finite-coefficient-model-comparison). -/
+Source: Stacks Tags 099Y and 09AJ. -/
 structure FiniteCoefficientModelComparison [Finite A] (X : Scheme.{u}) (e : Encoding A X) :
     Prop where
   /-- Constructibility agrees for the original sheaf and its section-action image. -/
@@ -574,10 +564,6 @@ private theorem derived_boundedEquivalence [Finite A] (X : Scheme.{u}) (e : Enco
 finite-stalk constructibility, retaining strata, covers after deletion of empty objects, and
 all cohomological vanishing intervals under the induced bounded-constructible equivalence.
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-integral-criterion-reductions.proof.md, second paragraph
-(blueprint: lem-pe-finite-coefficient-model-comparison).
-
 Proof following the seven DAG steps:
 1. Use lem-sf-module-object-ordinary-coefficient-equivalence for the normalized Encoding.
 Its ringIso is the canonical constant-coefficient identification. The section-action
@@ -609,8 +595,7 @@ kernels, images and cokernels, and the inverse gives reflection of zero cohomolo
 every vanishing interval is unchanged. Step 6 identifies every cohomology sheaf's
 constructibility. Restrict the equivalence and its inverse to the full bounded
 constructible subcategories; their unit and counit give the asserted equivalence and its
-commuting comparison with the ambient functor. No completeness or Tor bound is used.
--/
+commuting comparison with the ambient functor. No completeness or Tor bound is used. -/
 theorem finiteCoefficientModelComparison [Finite A] [DiscreteTopology A]
     (X : Scheme.{u}) [IsNoetherian X] :
     ∃ e : Encoding A X, FiniteCoefficientModelComparison A X e := by

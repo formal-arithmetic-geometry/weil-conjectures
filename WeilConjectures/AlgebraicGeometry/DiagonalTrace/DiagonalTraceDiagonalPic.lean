@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line.ProjectiveLineAuto
 
 /-! # The diagonal divisor line relative to an arbitrary projective-line model
 
-Source: the diagonal equation in the proof of lem-amb-p1-diagonal-chern-components;
-EGA II, Remark 4.2.7, and its arbitrary-base extension in the projective-bundle
+Source: EGA II, Remark 4.2.7, and its arbitrary-base extension in the projective-bundle
 Picard classification (Stacks, Tag 0B8W), for changing the projective-line model.
 -/
 
@@ -62,23 +61,8 @@ private theorem pic_map_injective {X Y : Scheme.{u}} (e : X ≅ Y) :
 /-- The diagonal divisor has relative degree one in either projection, including after
 changing its projective-line model. Its remaining factor is pulled back from the base.
 
-Source: lem-amb-p1-diagonal-chern-components, proof, the equation x0 y1 - x1 y0;
-EGA II, Remark 4.2.7, with the arbitrary-base projective bundle Picard
-classification (Stacks, Tag 0B8W, finite-presentation descent).
-(blueprint: lem-sfb-diagonal-trace-diagonal-pic).
-
-Proof: the four standard product charts identify the dual diagonal ideal with
-pr1* O(1) tensor pr2* O(1): the section x0 y1 - x1 y0 cuts out the diagonal
-and its transition units are exactly those of this tensor product. Thus the
-line has degree one on every fibre of either projection. Transport along e.
-The projective bundle Picard classification writes the transported line as
-O(d) tensor the pullback of a base line. Restriction to every residue-field
-fibre shows d = 1, because e is an isomorphism over the base and the diagonal
-is a section of f. Pull back this decomposition along e and use he to identify
-the base pullback with f*. Passing to Picard classes gives the stated product.
-The statement includes disconnected and nonreduced bases: the locally constant
-degree function is one on every component. On the empty base all Picard classes
-are the unit, and the base unit module supplies the witness. -/
+Source: EGA II, Remark 4.2.7, with the arbitrary-base projective bundle Picard
+classification (Stacks, Tag 0B8W, finite-presentation descent). -/
 theorem diagonalTrace_diagonalPic_factorization (Y : Scheme.{u})
     (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (hf : f = pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y) ∨

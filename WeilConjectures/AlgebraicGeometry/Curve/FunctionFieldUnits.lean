@@ -146,8 +146,7 @@ namespace IsCurve
 an algebraically closed field, `C` an integral curve over `k` and `L` an algebraic extension of
 its function field `k(C)`. Then `Hᵠ(Spec L_ét, 𝔾ₘ) = 0` for every `q ≥ 1`: the field `L` is
 `C₁` by Tsen's theorem (`AlgebraicGeometry.IsCurve.isQuasiAlgClosed_functionField`), and
-`AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed` applies.
-(blueprint: `lemma-cohomology-multiplicative-group`) -/
+`AlgebraicGeometry.Scheme.subsingleton_sheafH_gmSheaf_of_isQuasiAlgClosed` applies. -/
 theorem subsingleton_sheafH_gmSheaf_of_isAlgebraic_functionField {k : Type u}
     [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     [IsIntegral C] (L : Type u) [Field L] [Algebra C.functionField L]

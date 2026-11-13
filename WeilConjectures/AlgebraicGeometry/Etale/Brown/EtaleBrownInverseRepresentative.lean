@@ -34,8 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
 /-- The ordinary inverse comparison is the mate of the supplied sectionwise direct
-comparison. Source: Zheng, Construction 5.15; Stacks 07A4.
-(blueprint: lem-pur-etale-brown-inverse-representative). -/
+comparison. Source: Zheng, Construction 5.15; Stacks 07A4. -/
 abbrev strictEtaleBrownOrdinaryInverse
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)
@@ -55,19 +54,7 @@ abbrev strictEtaleBrownOrdinaryInverse
 
 -- The transpose compares all four realization factors.
 /-- The inverse Brown comparison is the exact localization of its ordinary mate.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
-(blueprint: lem-pur-etale-brown-inverse-representative).
-
-Proof: transpose the proposed representative under the derived geometric
-adjunction. Naturality moves the localization factor through the derived counit.
-The mate equation for R.inverse turns its transpose into R.right followed by the
-geometric counit. Apply the specified cochain right-derived-unit equation for
-R.right and the normalized transpose for B. On ordinary complexes the
-inverse/direct-image adjunction identifies this with the ordinary inverse mate
-of R.ordinaryRight. The ordinary geometric transpose and the derived adjunction
-unit comparison give the other side. Cancel the invertible localization factors
-and apply injectivity of the derived Hom transposition. Thus no scalar-extension
-or proper projection invertibility is needed here. -/
+Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND. -/
 theorem strictEtaleBrownInverse_representative
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)

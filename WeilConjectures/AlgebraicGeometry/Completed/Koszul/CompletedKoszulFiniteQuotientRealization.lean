@@ -34,27 +34,7 @@ local instance finiteQuotientRealizationCochainMonoidalStruct
 
 /-- Exactness and the normalized finite quotient comparison for the concrete
 constant-module/scalar-extension functor. This statement has no exterior complexes,
-augmentation maps, cones, or inverse limits of complexes.
-
-Source: Stacks Project, sites-modules.tex, Tags 093J--093M, and proetale.tex,
-proof of lemma-naive-completion (099M).
-(blueprint: lem-weil-pbc-completed-koszul-finite-quotient-realization).
-
-Proof: constant module sheafification is additive and exact. Identify the completed
-ring and its scalar map with the constant-presentation completion through the
-finite coefficient comparisons, using their section formulas and the uniqueness
-of the scalar map. Completed constant sheaf reduction makes the completed unit
-flat over the constant ring. Consequently scalar extension preserves finite
-limits and colimits. Multiplication identifies the extension of the regular
-module with the completed unit; take its inverse as c. The ring equivalence
-ULift.ringEquiv identifies the span of the lifted generators with the lifted
-ideal d.ideal, by ha, and identifies every positive quotient with its lift.
-Finite coefficient identification, then extension of the single-complex
-comparison and the left tensor unitor, gives eQ. On a local pure tensor its map
-sends s tensor [x] to the residue of s times the recorded constant section [x].
-For x=1 this is exactly the specified quotient tensor unit, proving the displayed
-normalization. These formulas include the zero ring, unit ideal, empty scheme,
-and the empty generator list; no nonzero generator is required. -/
+augmentation maps, cones, or inverse limits of complexes. -/
 theorem completedKoszulFiniteQuotientRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :

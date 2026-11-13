@@ -22,9 +22,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 
 /-!
 # Constant coefficients under algebraically closed field extension
-
-Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
 -/
 
 @[expose] public section
@@ -35,9 +32,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proposition-cohomology-smooth-affine-curve (blueprint: proposition-cohomology-smooth-affine-curve).
-
+/--
 The witness `r` is constrained to be the canonical cohomology pullback followed by the
 constant-sheaf comparison. The witness `t` is the primitive-root trivialization on cohomology.
 The equations for the Kummer inclusion, the units boundary, and the Picard boundary express

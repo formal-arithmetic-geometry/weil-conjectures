@@ -115,18 +115,7 @@ private theorem transport_shifted_cone
 /--
 The post-shift-isomorphism core of generic root-projection transport.  Removing
  the common source shift isomorphism makes this the finite projection transport
- equation itself; the enclosing theorem reinstates that common isomorphism.
-
-Source: diagonal-limit clause (3), normalization of the root-limit comparison;
-diagonal trace proof (1), root cone and exact single/shift comparisons.
-(blueprint: lem-sfb-diagonal-trace-shifted-root-projection-transport-core).
-
-Proof: expand the normalized shifted single comparison and the strict root
-transport, apply the normalized ordinary-limit projection to the single complex,
-then use the cone component equation.  Naturality of each shift comparison moves
-those arrows through the finite projection; the canonical single comparisons
-cancel in the displayed composite.
--/
+ equation itself; the enclosing theorem reinstates that common isomorphism. -/
 theorem diagonalTrace_shiftedRootProjection_transport_core
     {A : Type*} {B : Type*} {C : Type*}
     [Category A] [Category B] [Category C] [Abelian A] [Abelian B] [Abelian C]

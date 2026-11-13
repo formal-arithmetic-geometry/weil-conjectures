@@ -302,10 +302,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-! # Assembling the finite projective-line diagonal kernel
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-`thm-amb-p1-adjunction.proof.md`, unit construction and both triangles.
-(blueprint: lem-sp-finite-p1-adjunction-of-integrals).
 -/
 
 @[expose] public section
@@ -384,10 +380,7 @@ theorem right_triangle_components
 /-- The adjunction `Rf_! ⊣ f^*(-) ⊗ᴸ B` of a trace-diagonal kernel whose two diagonal
 integrals are identities, for `B` the pullback of an even-shifted lisse rank-one line: its unit is
 `SfDiagonalKernel.unit` and its counit is `SfDiagonalKernel.counit`, the inverse projection map
-followed by the trace and the left unitor. The functors are kept abstract.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the unit construction and both
-triangles (blueprint: lem-sp-finite-p1-adjunction-of-integrals). -/
+followed by the trace and the left unitor. The functors are kept abstract. -/
 noncomputable def adjunction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
@@ -443,11 +436,6 @@ theorem isLisseRankOneSheaf_finiteEtaleTateLine
 splitting and a supported diagonal class `κ` whose two diagonal integrals are identities: the
 kernel adjunction `SfDiagonalKernel.adjunction` of `finiteP1CoordinateKernel`, read through
 `Rq_! ≅ Rq_*`, with the shift moved outside the right tensor factor.
-
-Source: blueprint `thm-amb-p1-adjunction.proof.md`, the displayed unit and both
-triangle computations, using the arbitrary-base integrals of
-`sk-prop-sp-tower-geometric-p1.proof.md`.
-(blueprint: lem-sp-finite-p1-adjunction-of-integrals).
 
 Proof in words: write q for the projective-line projection. Reindex the standard
 ULift (Fin 2) homogeneous coordinates by Option (ULift (Fin 1)); the induced

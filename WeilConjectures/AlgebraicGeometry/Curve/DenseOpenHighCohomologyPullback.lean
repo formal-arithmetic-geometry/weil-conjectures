@@ -53,8 +53,7 @@ private theorem shortExact_underlying_abelian (Λ : Type (u + 1)) [CommRing Λ]
       epi_g := Sheaf.epi_of_isLocallySurjective (T.map S.g) }
 
 /-- The degree-two pullback component of dense-open cohomology comparison.
-Source: Stacks Project, Tag 0GJA, remark (d). (blueprint: lem-pbc-s2-dense-open-cohomology-pullback)
--/
+Source: Stacks Project, Tag 0GJA, remark (d). -/
 theorem dense_open_high_cohomology_pullback (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

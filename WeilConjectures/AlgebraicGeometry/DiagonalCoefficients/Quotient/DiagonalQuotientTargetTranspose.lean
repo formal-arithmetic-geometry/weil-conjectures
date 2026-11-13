@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareD
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointsTranspose
 
 /-! # The successive target endpoint under its actual adjunction
-
-Source: diagonal tower coefficient changes (1), normalized scalar extension.
-(blueprint: lem-diagonal-quotient-target-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -58,10 +55,7 @@ private theorem homEquiv_shift
 
 namespace UniformizerSquareData
 
-/-- The degree-two endpoint is the shifted degree-zero endpoint.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-quotient-target-transpose).
-Proof: Use exact shift naturality to collect the successive shifted endpoint maps. -/
+/-- The degree-two endpoint is the shifted degree-zero endpoint. -/
 private theorem quotientTarget_shift
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -82,24 +76,7 @@ end UniformizerSquareData
 attribute [local semireducible] UniformizerSquareData.quotientAdjunction
   UniformizerSquareData.quotientEndpoints
 
-/-- The successive endpoint transposes to the shifted single of its ordinary root insertion.
-
-Source: latest blueprint, diagonal tower coefficient changes (1), scalar units and
-finite realization; the first transposition in lem-diagonal-cyclic-uniformizer-target.
-(blueprint: lem-diagonal-quotient-target-transpose).
-
-Proof: expand the finite target map as the realized shifted scalar endpoint followed
-by the finite single/shift comparisons and line isomorphism. Transpose first through
-the derived finite equivalence: its counit is the derived ordinary counit. Exact single
-coherence and the ordinary equivalence triangle identify this transpose with the single
-of rootInsertion, followed by the inverse single comparison of the inverse equivalence.
-Transpose through the quotient and integral scalar adjunctions, using each
-Endpoint.normalization. Exact single
-composition coherence collects the three ordinary restrictions into quotientRight. The
-scalar shift is induced by that adjunction, and exact realization commutes with shifts,
-so shifting the degree-zero calculation gives the displayed formula. No cyclic reduction,
-scalar comparison from the cyclic ring to A,
-or root-limit comparison is used. -/
+/-- The successive endpoint transposes to the shifted single of its ordinary root insertion. -/
 theorem diagonalQuotientTargetTranspose
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

@@ -189,15 +189,13 @@ private theorem exists_geometricFiber_iso_of_quotient_equiv
   rw [he, Category.assoc, geometricFiberMap_comp_geometricGaloisFrobenius_pow,
     geometricFiberExtensionMap_comp_geometricGaloisFrobenius_pow_finrank_assoc]
 
-/-- **Finite-field models of closed subschemes of a geometric fiber** (blueprint:
-`corollary-curve-preserving-geometric-irreducibility--1`, "the curve and inclusion descend to a
-finite constant extension"). Let `f : X₀ ⟶ Spec k₀` be an affine scheme of finite type over a finite
-field, with geometric fiber `X`, and let `i : C ⟶ X` be a closed immersion of a smooth connected
-curve over `k̄₀` with a `k̄₀`-point `c₀`. For every `M > 0` there are a finite extension `L` of `k₀`
-of degree divisible by `M` and a smooth geometrically connected affine curve `g : Y ⟶ Spec L` with
-an isomorphism `e : Ȳ ≅ C` of its geometric fiber, lying over a `k₀`-embedding `θ : k̄₀ ↪ k̄_L`,
-such that `e ≫ i` intertwines the geometric Galois Frobenius of `Ȳ` with the `[L : k₀]`-th power
-of that of `X`. -/
+/-- **Finite-field models of closed subschemes of a geometric fiber**. Let `f : X₀ ⟶ Spec k₀` be an
+affine scheme of finite type over a finite field, with geometric fiber `X`, and let `i : C ⟶ X` be a
+closed immersion of a smooth connected curve over `k̄₀` with a `k̄₀`-point `c₀`. For every `M > 0`
+there are a finite extension `L` of `k₀` of degree divisible by `M` and a smooth geometrically
+connected affine curve `g : Y ⟶ Spec L` with an isomorphism `e : Ȳ ≅ C` of its geometric fiber,
+lying over a `k₀`-embedding `θ : k̄₀ ↪ k̄_L`, such that `e ≫ i` intertwines the geometric Galois
+Frobenius of `Ȳ` with the `[L : k₀]`-th power of that of `X`. -/
 theorem exists_finiteModel_of_isClosedImmersion {k₀ : Type u} [Field k₀] [Finite k₀]
     {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀)) [IsAffine X₀] [LocallyOfFiniteType f]
     {C : Scheme.{u}} (i : C ⟶ f.geometricFiber) [IsClosedImmersion i]

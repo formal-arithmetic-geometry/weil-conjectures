@@ -135,18 +135,7 @@ private theorem towerTransitions_of_iso
 attribute [local irreducible] diagonalCompletedRestriction
   Coefficients.unitMap exactConeComparison diagonalOrdinaryRlim
 
-/-- The completed coefficient-unit cone induces an invertible derived comparison.
-
-Source: the quotient-tower comparison in the diagonal trace proof, paragraph (1).
-(blueprint: new-sfb-diagonal-trace-unit-comparison-iso).
-
-Proof: after forgetting scalars, the projection equations identify the cone with
-the additive image of the coefficient-ring limit cone. Scalar forgetting reflects
-limits, so its ordinary cone lift is invertible. The transitions are constant
-sheaves of surjective quotient maps; scalar forgetting reflects their epimorphy.
-Apply the epimorphic-tower comparison and compose the four invertible factors in
-the specified coefficient comparison.
--/
+/-- The completed coefficient-unit cone induces an invertible derived comparison. -/
 theorem diagonalUnitComparison_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}}

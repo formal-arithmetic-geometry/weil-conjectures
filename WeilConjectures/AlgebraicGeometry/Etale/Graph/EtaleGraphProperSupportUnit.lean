@@ -366,8 +366,7 @@ private theorem graph_proper_support_unit_aux
 
 /-- A sheaf map normalized in the common ordinary direct image computes the
 compact-support tower interchange after the source right-derived unit.
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J
-(blueprint: lem-pur-graph-proper-support-unit).
+Source: Stacks Project, Tags 0F7B, 0F7F, 0F7I and 0F7J.
 
 Proof in words: use the chosen compactification c of b and postcompose it by p.
 Compose theta with the sheaf graph map for b and then the ordinary direct-image

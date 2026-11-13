@@ -21,9 +21,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Constructibility descends through surjective pullback
-
-Source: Stacks Project, Tag 095Q, lemma-check-constructible (3), for finite commutative rings
-(blueprint: lem-weil-pbc-etale-constructible-surjective-pullback).
 -/
 
 @[expose] public section
@@ -35,25 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Constructibility of a module sheaf over a finite commutative ring can be checked after
-surjective pullback between quasi-compact quasi-separated schemes.
-
-Source: Stacks Project, Tag 095Q, lemma-check-constructible (3)
-(blueprint: lem-weil-pbc-etale-constructible-surjective-pullback).
-
-Proof:
-1. Compare finite constant values with the source library's finite-stalk constructibility
-   predicate and use `IsConstructibleSheaf.upperStar` for preservation by arbitrary pullback.
-2. Present any sheaf H with constructible pullback as a filtered colimit of constructible
-   sheaves. Pullback preserves this colimit since it is a left adjoint. Factor the identity
-   of its constructible pullback through a pulled-back colimit leg, making that leg a split
-   epimorphism. Surjective module pullback is faithful by the geometric-stalk comparison,
-   so it reflects epimorphisms. Thus H is a quotient of a constructible sheaf.
-3. Apply this to F, obtaining an epimorphism p : G ⟶ F with G constructible. Exactness of
-   pullback and constructibility of kernels show that the pullback of kernel p is
-   constructible. Apply step 2 again to obtain an epimorphism r : C ⟶ kernel p with C
-   constructible.
-4. The cokernel of r followed by the kernel inclusion is the cokernel of the kernel
-   inclusion, hence F, since p is epi. Constructibility of cokernels completes the proof. -/
+surjective pullback between quasi-compact quasi-separated schemes. -/
 theorem isConstructibleEtaleModuleSheaf_iff_surjective_pullback
     {U V : Scheme.{u}} [CompactSpace U] [QuasiSeparatedSpace U]
     [CompactSpace V] [QuasiSeparatedSpace V] (f : V ⟶ U) [Surjective f]

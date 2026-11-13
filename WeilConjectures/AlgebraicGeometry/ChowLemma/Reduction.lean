@@ -95,8 +95,7 @@ Step 1 covers `X` by finitely many affine opens `Wᵢ` all containing the generi
 irreducible components of `X`; their intersection `V` is then dense, and quasi-compact since
 `X` is quasi-separated. Step 2 replaces `X` by the scheme-theoretic image `X*` of the
 quasi-compact immersion `V ⟶ X`, in which the copy of `V` is scheme-theoretically dense.
-This is the form of steps 1 and 2 used in the non-Noetherian variant of Chow's lemma
-(blueprint `rem-chow-lemma-non-noetherian`). -/
+This is the form of steps 1 and 2 used in the non-Noetherian variant of Chow's lemma. -/
 @[stacks 0203]
 theorem nonempty_chowReduction_of_finite_irreducibleComponents {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : (irreducibleComponents X).Finite) :

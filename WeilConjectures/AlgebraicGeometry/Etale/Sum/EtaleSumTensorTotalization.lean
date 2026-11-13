@@ -14,9 +14,6 @@ open scoped CategoryTheory
 
 /-!
 # Étale sum extension and unbounded tensor totalization
-
-Source: literature/stacks-project/more-etale.tex, Tag 0GKF
-(blueprint: lem-pur-etale-sum-tensor-totalization).
 -/
 
 @[expose] public section
@@ -47,18 +44,14 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [∀ P H : CochainComplex D ℤ, HomologicalComplex.HasMapBifunctor P H G (.up ℤ)]
   (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
 
-/-- Comparison families for additive functors and total tensor bifunctors.
-Source: literature/stacks-project/homology.tex, Tag 012Z, with more-etale.tex Tag 0GKF;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- Comparison families for additive functors and total tensor bifunctors. -/
 def TotalTensorComparison :=
   ∀ (P : CochainComplex C ℤ) (H : CochainComplex D ℤ),
     HomologicalComplex.mapBifunctor ((L.mapHomologicalComplex (.up ℤ)).obj P) H G (.up ℤ) ≅
       (L.mapHomologicalComplex (.up ℤ)).obj (HomologicalComplex.mapBifunctor P
         ((R.mapHomologicalComplex (.up ℤ)).obj H) F (.up ℤ))
 
-/-- Naturality of a comparison in both chain-map variables.
-Source: literature/stacks-project/more-etale.tex, Tag 0GKF, natural projection;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- Naturality of a comparison in both chain-map variables. -/
 def TotalTensorNaturality (Ψ : TotalTensorComparison F G L R) : Prop :=
   ∀ (P P' : CochainComplex C ℤ) (H H' : CochainComplex D ℤ)
     (f : P ⟶ P') (g : H ⟶ H'),
@@ -68,9 +61,7 @@ def TotalTensorNaturality (Ψ : TotalTensorComparison F G L R) : Prop :=
         (HomologicalComplex.mapBifunctorMap f
           ((R.mapHomologicalComplex (.up ℤ)).map g) F (.up ℤ))
 
-/-- The comparison has the prescribed canonical component on every total summand.
-Source: literature/stacks-project/homology.tex, Tag 012Z, coproduct terms;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- The comparison has the prescribed canonical component on every total summand. -/
 def TotalTensorSummandNormalization (Ψ : TotalTensorComparison F G L R)
     (a : ∀ (M : C) (N : D),
       (G.obj (L.obj M)).obj N ⟶ L.obj ((F.obj M).obj (R.obj N))) : Prop :=
@@ -82,18 +73,14 @@ def TotalTensorSummandNormalization (Ψ : TotalTensorComparison F G L R)
           (HomologicalComplex.ιMapBifunctor P ((R.mapHomologicalComplex (.up ℤ)).obj H)
             F (.up ℤ) p q n h)
 
-/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ Tot(L P ⊗ H)`, on homotopy categories.
-Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ Tot(L P ⊗ H)`, on homotopy categories. -/
 noncomputable def TotalTensorHomotopyLeft :
     (HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) :=
   (((whiskeringLeft₂ _).obj (L.mapHomotopyCategory (.up ℤ))).obj
     (𝟭 (HomotopyCategory D (.up ℤ)))).obj
     (G.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))
 
-/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ L Tot(P ⊗ R H)`, on homotopy categories.
-Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- The induced bifunctor `K(C) × K(D) ⥤ K(D)`, `(P,H) ↦ L Tot(P ⊗ R H)`, on homotopy categories. -/
 noncomputable def TotalTensorHomotopyRight :
     (HomotopyCategory C (.up ℤ) ⥤ HomotopyCategory D (.up ℤ) ⥤ HomotopyCategory D (.up ℤ)) :=
   ((CategoryTheory.Functor.postcompose₂.obj (L.mapHomotopyCategory (.up ℤ))).obj
@@ -102,9 +89,7 @@ noncomputable def TotalTensorHomotopyRight :
       (F.bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))))
 
 /-- Descent is a natural isomorphism between the actual induced bifunctors on
-homotopy categories; its components on quotient objects are precisely `Q(Ψ)`.
-Source: literature/stacks-project/homology.tex, Section 010V, maps modulo homotopy;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+homotopy categories; its components on quotient objects are precisely `Q(Ψ)`. -/
 noncomputable def TotalTensorHomotopyIso
     (Ψ : TotalTensorComparison F G L R) : Prop :=
   ∃ η : TotalTensorHomotopyLeft G L ≅ TotalTensorHomotopyRight F L R,
@@ -262,23 +247,12 @@ private noncomputable def totalTensorIso
 
 end GenericHomotopies
 
-/-- The category of sheaves of `A`-modules on the small étale site.
-Source: literature/stacks-project/sites-cohomology.tex, Section 06YL;
-(blueprint: lem-pur-etale-sum-tensor-totalization). -/
+/-- The category of sheaves of `A`-modules on the small étale site. -/
 abbrev EtaleModuleSheaf (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)
 
 /-- Unbounded étale sum extension has a total-tensor projection comparison
-without quasi-compactness. Source: Stacks Tag 0GKF
-(blueprint: lem-coef-etale-open-total-tensor).
-
-Proof: the canonical sheaf projection isomorphism is natural in both factors.
-On the summand (p,q), use its inverse, then the canonical inclusion into
-j-shriek of the direct-sum total tensor. The left adjoint preserves coproducts,
-so each degree map is an isomorphism. Naturality for the two differentials and
-additivity preserve their common sign (-1)^p, giving a chain map; the degreewise
-inverses give its inverse. The generic totalTensorIso is exactly this construction.
-No quasi-compactness, boundedness, flatness or homotopy hypothesis is used. -/
+without quasi-compactness. Source: Stacks Tag 0GKF. -/
 theorem etale_sum_tensor_comparison
     (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (u : U ⟶ X) (hu : Etale u)

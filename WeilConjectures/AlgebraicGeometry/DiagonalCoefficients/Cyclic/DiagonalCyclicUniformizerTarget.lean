@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Quotient.DiagonalQ
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalShiftedRootInsertionComparison
 
 /-! # The positive-root endpoint of cyclic coefficient continuation
-
-Source: diagonal tower coefficient changes (1), root projections and tensor units.
-(blueprint: lem-diagonal-cyclic-uniformizer-target).
 -/
 
 @[expose] public noncomputable section
@@ -97,36 +94,7 @@ local elab "criterionHypothesis% " i:num f:term:max : term => do
   return domain
 
 /-- The mate of any underlying-identity restriction comparison has the prescribed
-positive-root endpoint. No constant-source or diagonal-class equation is assumed.
-
-Source: latest blueprint, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md (1), root projection and derived
-scalar transitivity; parent coefficient-square proof, step 2.
-(blueprint: lem-diagonal-cyclic-uniformizer-target).
-
-Proof: transpose the two target maps through the actual scalar adjunctions.
-Endpoint.normalization identifies their transposes with the single of the
-prescribed semilinear maps. On underlying sheaves, the normalization of the
-restriction comparison cancels the inverse realization counits. IntegralRoots
-projections identify integralLineMap with the bottom-to-E transition on every
-finite root projection. The scalar extension units and the two LineEndpoint
-normalizations therefore identify both maps on pure root tensors with the n-th
-root projection followed by coefficient extension. FiniteRoots comparisons
-coincide since their composites with the monic kernel inclusion coincide.
-The supplied line_normalization identifies coefficient extension on these root
-tensors with maps.line. At the bottom field, each coefficient-root module is the root sheaf itself:
-free extension over Z/l^(r+1) is an isomorphism on an l^(r+1)-torsion sheaf.
-Consequently the bottom IntegralRoots map is an isomorphism, by the limit
-universal property. Precomposing the bottom-to-E transition with this map gives
-the E-root map, since every projection agrees. Thus it suffices to compare the
-two transposed arrows on this bottom root sheaf. The finite root calculation
-and balanced-tensor unit equations above give exactly that comparison.
-The derived adjunction is compatible with shifts; naturality of the exact single
-and shift comparisons translates the transposed equality to TargetEquation.
-Adjunction injectivity completes the proof. No property of the initial arrow,
-no finite evaluation detection of arbitrary derived morphisms, and no flatness
-of A over the cyclic ring is needed. The same tensor calculation includes n=0,
-the empty base, and the zero target ring. -/
+positive-root endpoint. No constant-source or diagonal-class equation is assumed. -/
 private theorem diagonalCyclic_uniformizerTarget_proof
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

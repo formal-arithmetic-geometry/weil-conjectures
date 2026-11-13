@@ -9,9 +9,6 @@ public import Mathlib.Algebra.Group.Equiv.Basic
 
 /-! # Composition of affine and geometric residue comparisons
 
-Source: elementary additive-equivalence composition.
-(blueprint: lem-sc-picard-residue-homology-chosen-geometric-maps)
-
 The theorem is the final algebraic glue after the affine and geometric comparison
 statements have been supplied separately. -/
 

@@ -59,7 +59,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 /-! # Data for the component square on ordinary unbounded derived categories
 
 Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9, and the naturality
-used in Corollary 4.4(2) (blueprint: lem-zl-component-derived-pullback-square).
+used in Corollary 4.4(2).
 
 The data structures below spell out the simultaneous witnesses and normalizations of
 this one statement. All inverse images are the actual site inverse images. Module
@@ -81,7 +81,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.ComponentDerivedSquare
 
 /-- The direct image of the relative component site is restriction along the recorded tests.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def componentDirect (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -92,7 +92,7 @@ def componentDirect (X : Scheme.{u}) [IsAffine X]
     (Scheme.ProEt.topology X)
 
 /-- Restriction carries the canonical pointwise lax tensor maps.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance componentDirectMonoidal (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -101,7 +101,7 @@ instance componentDirectMonoidal (X : Scheme.{u}) [IsAffine X]
   infer_instance
 
 /-- The actual component-site adjunction, including its specified unit.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def componentAdjunction (X : Scheme.{u}) [IsAffine X]
     (hc : (CondensedRing.componentTests X).IsContinuous
       ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -113,14 +113,14 @@ def componentAdjunction (X : Scheme.{u}) [IsAffine X]
     (Scheme.ProEt.topology X)
 
 /-- The slice projection adjunction; its inverse image is restriction to the slice.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def slicePointAdjunction (P : Profinite.{u}) :=
   (Over.forgetAdjStar P).sheafPushforwardContinuous
     ((coherentTopology Profinite.{u}).over P) (coherentTopology Profinite.{u})
     (E := Ab.{u + 1})
 
 /-- The structural adjunction with absolute profinite tests as its direct image.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def absoluteAdjunction (X : Scheme.{u}) :=
   (pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).ofNatIsoRight
@@ -131,7 +131,7 @@ def absoluteAdjunction (X : Scheme.{u}) :=
 
 /-- Simultaneous site and coefficient witnesses, with canonical adjunctions and
 absolute-test normalization. These fields add no hypothesis to the theorem.
-Source: HRS construction (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS construction (4.1). -/
 structure Corner (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X] where
   [continuous : (CondensedRing.componentTests X).IsContinuous
     ((coherentTopology Profinite.{u}).over (affineComponentSpace X))
@@ -179,7 +179,7 @@ attribute [instance] Corner.braided Corner.finiteLimits Corner.finiteColimits
   Corner.beta_monoidal
 
 /-- The actual module inverse image, transporting along the prescribed coefficient iso.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def Corner.modules (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) :
     Mod (Sheaf ((coherentTopology Profinite.{u}).over (affineComponentSpace X)) Ab.{u + 1})
@@ -189,7 +189,7 @@ def Corner.modules (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine
     Mod.comap s.coefficient.inv.hom
 
 /-- Additivity comes from finite-product preservation of the actual inverse image.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Corner.modulesAdditive (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) : (s.modules Λ X).Additive :=
   letI : PreservesFiniteLimits (s.modules Λ X) := by
@@ -198,32 +198,32 @@ instance Corner.modulesAdditive (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{
   Functor.additive_of_preserves_binary_products _
 
 /-- The actual direct image for a map of component spaces is restriction along base change.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def sliceDirect {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   (Over.pullback h).sheafPushforwardContinuous Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
 /-- Slice restriction carries its canonical pointwise lax tensor maps.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance sliceDirectMonoidal {P Q : Profinite.{u}} (h : Q ⟶ P) :
     (sliceDirect h).LaxMonoidal := by
   dsimp only [sliceDirect]
   infer_instance
 
 /-- The inverse image left adjoint to restriction along the profinite base-change functor.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def sliceInverse {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   Functor.sheafPullbackConstruction.sheafPullback (Over.pullback h) Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
 /-- Its canonical adjunction, used to specify all mate normalizations.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def sliceAdjunction {P Q : Profinite.{u}} (h : Q ⟶ P) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Over.pullback h) Ab.{u + 1}
     ((coherentTopology Profinite.{u}).over P) ((coherentTopology Profinite.{u}).over Q)
 
 /-- The coefficient comparison on a profinite slice is fixed by the canonical product map.
-Source: HRS construction (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS construction (4.1). -/
 structure Slice (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} (h : Q ⟶ P) where
   inverse : Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1} ⥤
     Sheaf ((coherentTopology Profinite.{u}).over Q) Ab.{u + 1}
@@ -256,7 +256,7 @@ structure Slice (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} (h : Q 
 attribute [instance] Slice.braided Slice.finiteLimits Slice.finiteColimits Slice.beta_monoidal
 
 /-- The actual slice module inverse image with the canonical coefficient transport.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def Slice.modules (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} {h : Q ⟶ P}
     (s : Slice Λ h) :
     Mod (Sheaf ((coherentTopology Profinite.{u}).over P) Ab.{u + 1})
@@ -267,21 +267,21 @@ def Slice.modules (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} {h : 
     Mod.comap s.coefficient.inv.hom
 
 /-- Finite limits of the component module pullback are computed on underlying sheaves.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Corner.modulesFiniteLimits (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u})
     [IsAffine X] (s : Corner Λ X) : PreservesFiniteLimits (s.modules Λ X) := by
   unfold Corner.modules
   infer_instance
 
 /-- Finite colimits of the component module pullback are computed on underlying sheaves.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Corner.modulesFiniteColimits (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u})
     [IsAffine X] (s : Corner Λ X) : PreservesFiniteColimits (s.modules Λ X) := by
   unfold Corner.modules
   infer_instance
 
 /-- Finite limits of the slice module pullback are computed on underlying sheaves.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Slice.modulesFiniteLimits (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
     PreservesFiniteLimits (s.modules Λ) := by
@@ -289,7 +289,7 @@ instance Slice.modulesFiniteLimits (Λ : Profinite.CondensedRing.{u})
   infer_instance
 
 /-- Finite colimits of the slice module pullback are computed on underlying sheaves.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Slice.modulesFiniteColimits (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
     PreservesFiniteColimits (s.modules Λ) := by
@@ -297,13 +297,13 @@ instance Slice.modulesFiniteColimits (Λ : Profinite.CondensedRing.{u})
   infer_instance
 
 /-- Additivity of the slice module inverse image.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Slice.modulesAdditive (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) : (s.modules Λ).Additive :=
   Functor.additive_of_preserves_binary_products _
 
 /-- Exact module inverse image on the ordinary unbounded derived category.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def Corner.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Corner Λ X) :
@@ -314,7 +314,7 @@ def Corner.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine
   (s.modules Λ X).mapDerivedCategory
 
 /-- The slice pullback on the ordinary unbounded derived category is termwise localization.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def Slice.derived (Λ : Profinite.CondensedRing.{u})
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) :
@@ -325,7 +325,7 @@ def Slice.derived (Λ : Profinite.CondensedRing.{u})
   (s.modules Λ).mapDerivedCategory
 
 /-- Identify extension along the scheme coefficient isomorphism with transported scalars.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def schemeUnderlying (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} (f : Y ⟶ X) :
     CondensedRing.upperStar Λ.X f ⋙ Mod.forget (condensedRingObj Λ.X Y) ≅
@@ -336,7 +336,7 @@ def schemeUnderlying (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (Mod.forget (condensedRingObj Λ.X Y))
 
 /-- The two actual module inverse-image paths for one affine scheme morphism.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 structure Square (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X)
     (sX : Corner Λ X) (sY : Corner Λ Y) (sh : Slice Λ (affineComponentMap f)) where
@@ -364,13 +364,13 @@ structure Square (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
       (schemeUnderlying Λ f).hom.app ((sX.modules Λ X).obj M) ≫ abelian.hom.app M.X
 
 /-- The left derived path is the localization of the actual scheme/module inverse images.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 abbrev leftPath (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] (sX : Corner Λ X) (f : Y ⟶ X) :=
   sX.derived Λ X ⋙ (CondensedRing.upperStar Λ.X f).mapDerivedCategory
 
 /-- The right derived path is the localization of the actual slice/module inverse images.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 abbrev rightPath (Λ : Profinite.CondensedRing.{u})
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (sY : Corner Λ Y) (f : Y ⟶ X) (sh : Slice Λ (affineComponentMap f)) :=
@@ -378,7 +378,7 @@ abbrev rightPath (Λ : Profinite.CondensedRing.{u})
 
 /-- The derived square is the specified termwise module comparison, localized, with
 both canonical derived composition comparisons inserted.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def Square.theta (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] {f : Y ⟶ X}
@@ -405,14 +405,14 @@ def Square.theta (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
         (Functor.mapDerivedCategoryCompIso (sh.modules Λ) (sY.modules Λ Y)).symm
 
 /-- The ordinary component module tensor is the existing transported relative tensor.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Corner.modulesMonoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     (X : Scheme.{u}) [IsAffine X] (s : Corner Λ X) : (s.modules Λ X).Monoidal := by
   unfold Corner.modules
   infer_instance
 
 /-- The ordinary slice module tensor is the existing transported relative tensor.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 instance Slice.modulesMonoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {P Q : Profinite.{u}} {h : Q ⟶ P} (s : Slice Λ h) : (s.modules Λ).Monoidal := by
   unfold Slice.modules
@@ -431,7 +431,7 @@ variable {C D : Type w} [Category.{v} C] [Category.{v} D] [Abelian C] [Abelian D
 
 /-- The ordinary derived monoidal structure is normalized by termwise tensor and Q.
 The braidings are the existing Koszul braidings, rather than unspecified structures.
-Source: HRS Section 3 and (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS Section 3 and (4.1). -/
 structure TensorLift where
   [colimits : PreservesColimitsOfSize.{0, 0} F]
   [monoidal : F.mapDerivedCategory.Monoidal]
@@ -447,7 +447,7 @@ structure TensorLift where
 end Tensor
 
 /-- Identity on the actual slice pullback, normalized by the projection of the test object.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 structure SliceIdentity (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     (s : Slice Λ (affineComponentMap (𝟙 X))) where
   tests : Over.pullback (affineComponentMap (𝟙 X)) ≅ 𝟭 (Over (affineComponentSpace X))
@@ -462,7 +462,7 @@ structure SliceIdentity (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsA
   ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
 
 /-- Composition of slice inverse images, with both test-object projections prescribed.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 structure SliceComposition (Λ : Profinite.CondensedRing.{u})
     {X Y Z : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine Z]
     (f : Y ⟶ X) (g : Z ⟶ Y)
@@ -488,7 +488,7 @@ structure SliceComposition (Λ : Profinite.CondensedRing.{u})
   ordinary_underlying : ∀ M, (ordinary.hom.app M).hom = abelian.hom.app M.X
 
 /-- Derived identity of a slice pullback, obtained by the existing localization operation.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def SliceIdentity.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
     {s : Slice Λ (affineComponentMap (𝟙 X))} (i : SliceIdentity Λ X s) :
@@ -497,7 +497,7 @@ def SliceIdentity.derived (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [I
   exact Functor.mapDerivedCategoryNatIso i.ordinary ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- Derived slice composition, with the existing canonical localization comparisons.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def SliceComposition.derived (Λ : Profinite.CondensedRing.{u})
     {X Y Z : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine Z]
@@ -514,7 +514,7 @@ def SliceComposition.derived (Λ : Profinite.CondensedRing.{u})
       (Functor.mapDerivedCategoryCompIso (sf.modules Λ) (sg.modules Λ)).symm
 
 /-- Derived scheme identity, with the published ordinary identity and localization maps.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def schemeIdentity (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) :
     (CondensedRing.upperStar Λ.X (𝟙 X)).mapDerivedCategory ≅ 𝟭 _ :=
@@ -522,7 +522,7 @@ def schemeIdentity (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : S
     Functor.mapDerivedCategoryIdIso _
 
 /-- Derived scheme composition, with the published ordinary adjunction comparison.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 @[irreducible]
 def schemeComposition (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) :
@@ -542,8 +542,7 @@ universe v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄
 
 /-- Monoidality of a square with four explicitly supplied tensor structures.
 Keeping the structures as parameters avoids recomputing their derived constructions.
-Source: the tensor and unit equations of HRS (4.1)
-(blueprint: def-zl-component-derived-square-data). -/
+Source: the tensor and unit equations of HRS (4.1). -/
 def tensorSquareMonoidal
     {A : Type w₁} [Category.{v₁} A] [MonoidalCategory A]
     {B : Type w₂} [Category.{v₂} B] [MonoidalCategory B]
@@ -562,7 +561,7 @@ end TensorSquare
 
 /-- Monoidality of the specified comparison, with canonical termwise-localized structures.
 This includes the coefficient-unit equation and both tensor comparisons.
-Source: HRS (4.1) (blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1). -/
 def Square.monoidal (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
     {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] {f : Y ⟶ X}
     {sX : Corner Λ X} {sY : Corner Λ Y} {sh : Slice Λ (affineComponentMap f)}
@@ -580,7 +579,7 @@ section SquareCoherence
 universe v₁ v₂ v₃ v₄ v₅ v₆ w₁ w₂ w₃ w₄ w₅ w₆
 
 /-- The identity equation of an isomorphism square, kept independent of its construction.
-Source: HRS (4.1) (blueprint: def-zl-component-derived-square-data). -/
+Source: HRS (4.1). -/
 def squareIdentity
     {A : Type w₁} [Category.{v₁} A] {B : Type w₂} [Category.{v₂} B]
     (F : A ⥤ B) (G : B ⥤ B) (H : A ⥤ A)
@@ -588,7 +587,7 @@ def squareIdentity
   ∀ M, e.hom.app M ≫ F.map (i.hom.app M) = j.hom.app (F.obj M)
 
 /-- The pasting equation of two isomorphism squares, independent of the edge constructions.
-Source: HRS (4.1) (blueprint: def-zl-component-derived-square-data). -/
+Source: HRS (4.1). -/
 def squareComposition
     {A : Type w₁} [Category.{v₁} A] {B : Type w₂} [Category.{v₂} B]
     {C : Type w₃} [Category.{v₃} C] {D : Type w₄} [Category.{v₄} D]
@@ -605,8 +604,7 @@ end SquareCoherence
 
 /-- A single coherent family of the square, its exact symmetric tensor structures and
 its termwise descent. Identity/composition maps are normalized by test-object projections.
-Source: HRS (4.1), Corollary 4.4(2)
-(blueprint: lem-zl-component-derived-pullback-square). -/
+Source: HRS (4.1), Corollary 4.4(2). -/
 structure System (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] where
   corner : ∀ (X : Scheme.{u}) [IsAffine X], Corner Λ X
   slice : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),

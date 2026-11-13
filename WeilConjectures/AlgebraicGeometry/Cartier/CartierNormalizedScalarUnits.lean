@@ -443,25 +443,7 @@ private theorem supported_universal {R S : Type (u + 1)}
   exact (Function.Bijective.of_comp_iff' eR.bijective _).mp hb''
 
 /-- The supported constant and the comparison Tate line admit their normalized
-unbounded derived coefficient units. No divisor ideal or cycle class is involved.
-Source: blueprint sk-lem-geo-cartier.proof.md, finite coefficient extension paragraph
-and opening comparison paragraph (blueprint: lem-sfb-cartier-normalized-scalar-units).
-Proof: On the ordinary etale site, form the constant coefficient map by sheafifying
-r mapped to phi(r). Form the roots coefficient map by sheafifying the balanced map
-r tensor z mapped to phi(r) tensor z. The supported constant has stalk R on the
-closed support and zero elsewhere, and the roots line is locally free of rank one
-because N is positive and invertible. Both are flat over the constant R sheaf.
-The ordinary tensor comparisons identify their scalar extensions with the supported
-S constant and the S roots line. The flat-source derived scalar adjunction therefore
-gives their Hom universal properties against every unbounded complex, even if S is
-not flat over R. Exact comparison inverse image commutes with derived scalar
-extension. Transport the two units through this comparison, using the closed-source
-mate for the first and the defining comparison pullback of the roots line for the
-second. The comparison adjunction unit commutes with coefficient maps, giving the
-stated formula on pure roots. The constant comparison sends each constant generator
-to itself, giving the first formula. Closed direct image of this constant map is
-exactly the supported unit, by the mate unit equation. These arguments also cover
-empty support, the zero ring, and the identity coefficient map. -/
+unbounded derived coefficient units. No divisor ideal or cycle class is involved. -/
 theorem geoCartier_normalized_scalar_units
     (R S : Type (u + 1)) [CommRing R] [CommRing S] [Finite R] [Finite S]
     (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (hS : (N : S) = 0)

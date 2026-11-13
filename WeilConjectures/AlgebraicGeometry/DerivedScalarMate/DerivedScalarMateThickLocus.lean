@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 The normalized comparison data are publicly reexported from DerivedScalarMateData.
 The geometric normalization and exact-structure lemmas are separate proof dependencies.
-(blueprint: lem-sfb-derived-scalar-mate-thick-locus).
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +44,7 @@ arrow. Its restricted functors have the canonical transported exact structures; 
 transformation preserves shifts and all three squares of distinguished triangles.
 Its full isomorphism locus is thick, with the specified inverse on each split retract.
 
-Source: blueprint main-20261015, direct-image proof paragraph (3), extracted subargument;
-Stacks 03EL, 06YY, 07A4, 07A6, 0G7E, 0FPT and 014A
-(blueprint: lem-sfb-derived-scalar-mate-thick-locus).
+Source: Stacks 03EL, 06YY, 07A4, 07A6, 0G7E, 0FPT and 014A.
 
 Proof, following the eight DAG steps:
 1. The normalized ordinary tensor symmetry and flat K-flat resolutions give e_V.

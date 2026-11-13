@@ -151,10 +151,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.ProEtaleComparisonPullbackSections
 
 /-! # Finite root comparison between the etale and pro-etale sites
-
-Source: Stacks Project, proetale.tex, Tag 0GLZ, lemma-describe-pullback-from-etale;
-sites-modules.tex, Tag 03EL, lemma-tensor-product-pullback
-(blueprint: lem-amb-finite-root-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -171,7 +167,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The recorded root module in the fixed `ZMod m` coefficient presentation.
 Restriction along constant sections retains exactly the original root sections.
-Source: Stacks Tags 03CY and 03PK (blueprint: lem-amb-finite-root-site-comparison). -/
+Source: Stacks Tags 03CY and 03PK. -/
 def finiteRootProModule (T : Scheme.{u}) (m : ℕ) (hm : 0 < m) :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ZMod m)) :=
   (sheafCompose (ProEt.topology T)
@@ -182,7 +178,7 @@ def finiteRootProModule (T : Scheme.{u}) (m : ℕ) (hm : 0 < m) :
 
 /-- The actual balanced scalar extension of the root sheaf, sheafified sectionwise.
 This is `D_m,T`, with the `A` factor first, as in the recorded etale construction.
-Source: Stacks Tags 03EK and 03EL (blueprint: lem-amb-finite-root-site-comparison). -/
+Source: Stacks Tags 03EK and 03EL. -/
 def finiteRootProTensor (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
     (hA : (m : A) = 0) (T : Scheme.{u}) :
     Sheaf (ProEt.topology T) (ModuleCat.{u + 1} A) :=
@@ -191,7 +187,7 @@ def finiteRootProTensor (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
       ModuleCat.extendScalars (finiteEtaleTwistScalar m A hA))
 
 /-- A local tensor `z ⊗ a`, written `a ⊗ z`, followed by the sheafification unit.
-Source: Stacks Tags 03EK and 03EL (blueprint: lem-amb-finite-root-site-comparison). -/
+Source: Stacks Tags 03EK and 03EL. -/
 def finiteRootProGenerator (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m)
     (hA : (m : A) = 0) (T : Scheme.{u}) (W : T.ProEtᵒᵖ) (a : A)
     (z : (proEtaleRootsOfUnitySheaf T m).obj.obj W) :
@@ -207,8 +203,7 @@ attribute [irreducible] finiteRootProModule finiteRootProTensor finiteRootProGen
 The root comparison is the already constructed `ProEtale.cartierRootsIso`. Additive root
 maps are linear for the unique constant `ZMod m` actions; the tensor arrows live in
 `ModuleCat A` and hence are linear for the corresponding constant ring sheaves.
-Source: Stacks Tags 0GLZ, 03CY and 03EL
-(blueprint: lem-amb-finite-root-site-comparison). -/
+Source: Stacks Tags 0GLZ, 03CY and 03EL. -/
 def FiniteRootSiteComparisonSpec (A : Type (u + 1)) [CommRing A] : Prop :=
   ∃ (sigma : ∀ (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)
     (T : Scheme.{u}), IsUnit (m : Γ(T, ⊤)) →
@@ -1448,40 +1443,7 @@ private theorem rootPullback_comp {T T' T'' : Scheme.{u}}
     (Additive.toMul (((proEtaleRootsOfUnityInclusion T m).hom.app U z).down)).val) hp).symm
 
 /-- The finite root comparison with its specified scalar and scheme coherence exists.
-Source: Stacks Project, proetale.tex, Tag 0GLZ; sites-modules.tex, Tag 03EL
-(blueprint: lem-amb-finite-root-site-comparison).
-
-Proof:
-1. Use the existing Cartier root isomorphism and its kernel-inclusion formula. Evaluate
-   the etale and pro-etale kernels to identify their sections with actual roots of
-   unity. Composing these equivalences with normalized etale root pullback gives the
-   required section equivalence. Transposing the Cartier units map proves the unit law;
-   naturality then gives restriction to every pro-etale test.
-2. Sheafification and extension/restriction of scalars give natural Hom equivalences
-   from each root tensor to any A-module sheaf, with additive maps out of roots on the
-   other side. Additive maps between Z/m-modules are automatically Z/m-linear. Combine
-   these equivalences with the comparison adjunction and the Cartier root isomorphism
-   to construct sigma. Precomposition with sigma is bijective, so sigma is invertible.
-   The adjunction units give the formula on generators, with the A scalar unchanged.
-3. Construct d by transposing the recorded projection map on pro-etale roots through
-   the scalar-extension Hom equivalence and the scheme inverse-image adjunction.
-   Its formula on every generator follows directly from these adjunctions.
-4. Transpose the canonical comparison mate under the two composite adjunctions.
-   Both root-square adjuncts pull units back along the same fibre-product projection;
-   the monic inclusion into units proves their equality. The scalar Hom equivalences
-   and normalized etale generator law give the tensor square. Its other factors are
-   invertible, hence d is invertible whenever m is invertible on the base.
-5. The canonical comparisons and normalized etale pullback give the tensor identity
-   and composition laws. For roots, transpose the canonical identity and composition
-   comparisons; their section maps are restriction along the fibre-product identity
-   and associativity maps. Functoriality of global sections proves both laws.
-6. Use the normalized etale exponent-change map q. Scalar extension of the recorded
-   pro-etale power map defines tP. Its generator formula is the scalar-adjunction unit.
-   Postcompose the root power square with its monic inclusion into units; naturality
-   and integer linearity of Cartier comparison prove equality. The scalar Hom
-   equivalences then prove the tensor power square. No nonempty, affine, Noetherian,
-   finite-type or nonzero-ring hypothesis is introduced.
--/
+Source: Stacks Project, proetale.tex, Tag 0GLZ; sites-modules.tex, Tag 03EL. -/
 theorem finiteRootSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] :
     FiniteRootSiteComparisonSpec A := by
   have (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)

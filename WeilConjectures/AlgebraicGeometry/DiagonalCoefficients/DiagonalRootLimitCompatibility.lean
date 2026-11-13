@@ -11,9 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Integral.Diago
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwistConstructionsSupplement
 
 /-! # Detection and scalar compatibility of integral root limits
-
-Source: diagonal tower coefficient changes (1), the limit universal property.
-(blueprint: lem-diagonal-root-limit-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The bottom root comparison is an isomorphism, since its every level is.
-Source: coefficient changes (1) (blueprint: lem-diagonal-root-limit-compatibility).
-Proof: the free units form a natural isomorphism of inverse systems. Transport the
-limiting root cone along it and compare with the scalar-forgotten integral limit. -/
+/-- The bottom root comparison is an isomorphism, since its every level is. -/
 theorem diagonalBottomIntegralRoots_isIso
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) (r : IntegralRoots l (bottomField l) X) :
     IsIso r.hom := by
@@ -63,10 +57,7 @@ theorem diagonalBottomIntegralRoots_isIso
   have : IsIso f := IsLimit.hom_isIso hc hd f
   exact (Cone.forget _).map_isIso f
 
-/-- Integral extension carries the bottom root map to the prescribed E root map.
-Source: coefficient changes (1) (blueprint: lem-diagonal-root-limit-compatibility).
-Proof: compare every finite projection, use the specified integral transition and
-naturality of the free-module unit, then cancel the limiting cone projections. -/
+/-- Integral extension carries the bottom root map to the prescribed E root map. -/
 theorem diagonalIntegralRoots_transition
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l)

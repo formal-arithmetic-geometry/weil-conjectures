@@ -89,8 +89,7 @@ private lemma chosen_to_model
   rfl
 
 /-- A proper postcomposition only composes the two proper direct images.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: lem-pur-graph-proper-postcomposition).
+Source: Stacks Project, Tags 0F7I and 0F7J.
 
 Proof in words: take the triangle with compactifications c, ofIsProper p, and c.postcomp p.
 Its open map between the compactification ambients is the identity, and its Cartesian

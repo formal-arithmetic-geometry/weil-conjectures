@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalSca
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSourceAdjunctionTransport
 
 /-! # Finite realization of a composite scalar transpose
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-finite-scalar-source-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -69,10 +66,7 @@ variable {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (s : ScalarCompatibility a Y L₀ L₁ m d₀ d₁)
   (t : ScalarCompatibility b Y L₁ L₂ v d₁ d₂)
 
-/-- Finite realization preserves the normalized composite scalar transpose.
-Source: coefficient changes (1). (blueprint: lem-diagonal-finite-scalar-source-transpose).
-Proof: apply finite-equivalence adjunction transport to the proved scalar-composition
-transpose and its explicitly constructed finiteSourceIso endpoint. -/
+/-- Finite realization preserves the normalized composite scalar transpose. -/
 theorem realized_compatibility_transpose
     {A : Type (u + 1)} [CommRing A]
     (e : FiniteRealization R₂ A (diagonalSurface Y))

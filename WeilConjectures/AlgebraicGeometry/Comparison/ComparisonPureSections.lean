@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 
 /-! # Pure sections of the etale to pro-etale comparison
 
-Source: the monoidal comparison adjunction; Stacks Project, Tag 0GLZ.
+Source: Stacks Project, Tag 0GLZ.
 -/
 
 @[expose] public noncomputable section
@@ -115,16 +115,7 @@ private theorem comparison_unit_sections (A : Type (u + 1)) [CommRing A]
 
 /-- The comparison adjunction preserves constant scalars and pure tensors on
 arbitrary pro-etale tests over etale objects.
-Source: Stacks Tag 0GLZ and the monoidal comparison adjunction
-(blueprint: lem-amb-comparison-pure-sections).
-
-Proof: apply the tensor axiom for the adjunction unit, then precompose the
-underlying presheaf tensor inclusion. Naturality of that inclusion and the
-component formula for the continuous direct-image tensor map give the tensor
-formula over U. Naturality along f gives the formula over W. The unit axiom
-of the same adjunction, followed by the direct-image unit formula, identifies
-constant scalars over U. Naturality of the constant-presheaf sheafification
-unit gives their formula over W. No flatness or root lifting is required. -/
+Source: Stacks Tag 0GLZ and the monoidal comparison adjunction. -/
 theorem comparison_pure_sections (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     (∀ (M N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ) (f : W.unop ⟶ (toProEt T).obj U.unop)

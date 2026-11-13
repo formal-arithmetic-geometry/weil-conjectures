@@ -13,9 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 Let `g : V ⟶ B` be smooth of relative dimension `d` with a closed section `s`. Étale-locally on
 `B` there are coordinates `x₁, …, x_d` on `V` over `B` in which `s` is the origin, and on the
 chart `u_i = x_i / t` the deformation space `D_s V` is étale over `𝔸^d_{𝔸¹_B}`, with the section
-`s̃` going to the zero section (blueprint `prose-09-12` (2), (4), (5)). Together with the
-constructions of `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`, this gives the
-deformation datum of blueprint `prose-09-12`.
+`s̃` going to the zero section. Together with the constructions of
+`WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`, this gives the deformation datum of
+blueprint `prose-09-12`.
 
 ## Main definitions
 
@@ -289,11 +289,10 @@ lemma exists_etale_coordinates_deformationSpace_of_mem (d : ℕ) (g : V ⟶ B)
         AffineSpace.zeroSection_appTop_coord]
       exact (congrArg _ hΓ).trans (map_zero _)
 
-/-- **Étale coordinates on the deformation space** (blueprint `prose-09-12` (2), (4), (5)).
-There are a separated surjective étale `v : B' ⟶ B` and a quasi-compact open `j : W ⟶ 𝒟'` of the
-base change `𝒟' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}` containing the base-changed section `σ`, with a
-quasi-compact compactifiable étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the
-zero section. -/
+/-- **Étale coordinates on the deformation space**. There are a separated surjective étale `v : B' ⟶
+B` and a quasi-compact open `j : W ⟶ 𝒟'` of the base change `𝒟' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}` containing
+the base-changed section `σ`, with a quasi-compact compactifiable étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over
+`𝔸¹_{B'}` carrying `σ` to the zero section. -/
 theorem exists_etale_coordinates_deformationSpace (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [CompactSpace B] (s : B ⟶ V)
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
@@ -319,7 +318,7 @@ theorem exists_etale_coordinates_deformationSpace (d : ℕ) (g : V ⟶ B)
   obtain ⟨b, hb, hx⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
   exact Set.mem_iUnion.mpr ⟨⟨b, hb⟩, hx⟩
 
-/-- Blueprint `prose-09-12`: Geometry of the deformation of a section
+/-- Geometry of the deformation of a section
 
 **The deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure relative
 dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
@@ -363,7 +362,7 @@ noncomputable def deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
         deformationSpaceSection_toBase, Category.assoc], P.lift_snd _ _ _, P.lift_fst _ _ _⟩
     exists_etale_coordinates := exists_etale_coordinates_deformationSpace d g s hs }
 
-/-- Blueprint `prose-09-12`: the deformation datum exists, see
+/-- The deformation datum exists, see
 `AlgebraicGeometry.Scheme.Hom.deformationToNormalConeData`. -/
 theorem nonempty_deformationToNormalConeData (d : ℕ) (g : V ⟶ B)
     [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [CompactSpace B]

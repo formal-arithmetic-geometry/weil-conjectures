@@ -108,8 +108,7 @@ lemma isQuasicoherent_of_isZero {M : X.Modules} (hM : IsZero M) :
 
 /-- A binary biproduct of quasi-coherent modules is quasi-coherent.
 
-Source: Stacks Project, Modules, Lemma 01BF
-(blueprint: lem-weil-pbc-quasi-coherent-module-direct-sum). -/
+Source: Stacks Project, Modules, Lemma 01BF. -/
 lemma isQuasicoherent_biprod (M N : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N] :

@@ -19,8 +19,7 @@ import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 
 /-! # Exact derived sum base change as an actual mate
 
-Source: Stacks Project, Tag 03S6; exact localization of the sum-adjunction calculation.
-(blueprint: lem-pur-etale-exact-sum-base-change-mate).
+Source: Stacks Project, Tag 03S6.
 -/
 
 @[expose] public section
@@ -138,17 +137,7 @@ private lemma exact_cell_counit
   rfl
 
 /-- Exact sum base change is the mate of the inverse exact pullback-square comparison.
-Source: Stacks Project, Tag 03S6; the ordinary sum base-change unit equation and its exact
-localization. (blueprint: lem-pur-etale-exact-sum-base-change-mate).
-
-Proof: The ordinary sum base-change unit equation identifies its mate with the inverse
-ordinary pullback-square comparison. Transpose it to a counit equation. Express both
-sides as finite pastings of the exact inverse-image and sum functors, their square and
-base-change cells, and their two counits. Exact-derived transformation pasting descends
-the equality. The comparison cells descend to the specified exact square and sum
-base-change isomorphisms. Localization of the complex adjunction identifies the counit
-cells with the specified derived sum counits. Injectivity of the second adjunction's
-hom-bijection gives the asserted equality on every unbounded object. -/
+Source: Stacks Project, Tag 03S6. -/
 theorem etaleExactSumBaseChangeMate
     (A : Type (u + 1)) [CommRing A]
     {U U' X X' : Scheme.{u}} {e : U ⟶ X} {e' : U' ⟶ X'}

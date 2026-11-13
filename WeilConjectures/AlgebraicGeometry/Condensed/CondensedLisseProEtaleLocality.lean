@@ -26,8 +26,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
 /-! # Pro-etale locality and pullback of dualizable condensed complexes
 
 Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Section 3,
-pullback paragraph before (3.1), Definition 3.3 and Lemma 4.5
-(blueprint: lem-zl-condensed-lisse-proetale-locality).
+pullback paragraph before (3.1), Definition 3.3 and Lemma 4.5.
 
 The ordinary unbounded derived categories and their ordinary derived tensor are the
 published internal-module constructions. Lisse means `Nonempty (HasRightDual K)`;
@@ -50,8 +49,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Register the existing Koszul braiding of the ordinary derived tensor on internal modules.
 This is the generic published construction specialized to the coefficient module category;
 it selects no arbitrary braiding or new tensor structure.
-Source: HRS Section 3, ordinary symmetric derived tensor
-(blueprint: lem-zl-condensed-lisse-proetale-locality). -/
+Source: HRS Section 3, ordinary symmetric derived tensor. -/
 noncomputable instance condensedDerivedBraiding
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) :
     BraidedCategory (DerivedCategory
@@ -61,8 +59,7 @@ noncomputable instance condensedDerivedBraiding
 /-- Inverse image along any scheme morphism, using the canonical coefficient identification,
 is exact and strong symmetric monoidal. Between symmetric categories, `Functor.Braided`
 is exactly strong symmetric monoidality, including invertible tensor and unit comparisons.
-Source: HRS Section 3, paragraph before (3.1)
-(blueprint: lem-zl-condensed-lisse-proetale-locality).
+Source: HRS Section 3, paragraph before (3.1).
 
 Proof (DAG step 1): `condensedPullbackHom` is the component at Λ of the monoidal comparison
 `upperStarFromPointComp`, hence a ring isomorphism. The published module inverse image
@@ -102,8 +99,7 @@ theorem condensed_derivedPullback_exact_symmetricMonoidal
     braided := (Functor.LaxBraided.ofNatIso e).braided }⟩⟩
 
 /-- Arbitrary scheme inverse image preserves lisse (dualizable) condensed complexes.
-Source: HRS Definition 3.3 and the Section 3 pullback paragraph
-(blueprint: lem-zl-condensed-lisse-proetale-locality).
+Source: HRS Definition 3.3 and the Section 3 pullback paragraph.
 
 Proof (DAG step 2): apply the strong symmetric monoidal functor of step 1 to a dual,
 its evaluation and its coevaluation. Compose with the invertible tensor and unit
@@ -143,8 +139,7 @@ Coefficient transport is an exact equivalence. Thus the lifted left adjoint is e
 and pullback preserves K-injectives. The native module closed comparison and preservation
 of flat modules let DualizabilityDatum.map use the same χ after pullback. The two generic
 criteria identify dualizability with invertibility of Q(χ) and its image.
-Source: HRS Lemma 4.5, proof, and the source-library DualizableTransfer construction.
-(blueprint: lem-zl-condensed-lisse-proetale-locality). -/
+Source: HRS Lemma 4.5, proof, and the source-library DualizableTransfer construction. -/
 private theorem condensed_dualizability_test
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})
     (K : DerivedCategory
@@ -282,8 +277,7 @@ private theorem condensed_dualizability_test
 
 /-- Dualizability is local for every pro-etale covering family, including empty and
 infinite families. The index universe is independent of the universe of schemes.
-Source: HRS Definition 3.3 and Lemma 4.5, lisse assertion
-(blueprint: lem-zl-condensed-lisse-proetale-locality).
+Source: HRS Definition 3.3 and Lemma 4.5, lisse assertion.
 
 Proof (DAG step 4): the forward direction is monoidal preservation of a dual.
 For the converse use condensed_dualizability_test: one derived morphism a is invertible

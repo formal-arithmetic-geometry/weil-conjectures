@@ -25,8 +25,7 @@ import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Scalar tensor comparison on resolving representatives
 
-Source: Stacks Tags 06YY, 07A4 and 07A6
-(blueprint: lem-sfb-scalar-tensor-representative-normalization).
+Source: Stacks Tags 06YY, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -98,15 +97,7 @@ private theorem ordinaryComplexIso_naturality {W : Scheme.{u}}
 attribute [local irreducible] ordinaryComplexIso
 
 /-- The scalar/tensor comparison on flat-term K-flat representatives.
-Source: Stacks 06YY, 07A4, 07A6
-(blueprint: lem-sfb-scalar-tensor-representative-normalization).
-Proof: resolve the coefficient complex by a flat-term K-flat Q. Tensoring its
-augmentation with a K-flat P is a quasi-isomorphism. Compose the inverse of this
-map with the tensor-model representative and the localized augmentation. The
-fixed-factor comparison identifies this composite for every other augmentation.
-Compose with the invertible scalar counit and ordinary complex comparison. Their
-naturality makes this an isomorphism of functors on the representative category.
-Cancel the component isomorphisms to obtain the stated normalization. -/
+Source: Stacks 06YY, 07A4, 07A6. -/
 theorem representativeScalarTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}

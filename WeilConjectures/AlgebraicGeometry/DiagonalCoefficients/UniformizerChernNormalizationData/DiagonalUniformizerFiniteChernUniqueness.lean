@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSuppleme
 import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
 
 /-! # Uniqueness of the normalized finite Chern comparison image
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: lem-diagonal-uniformizer-local-chern-finite-spec-unique-map).
 -/
 
 @[expose] public noncomputable section
@@ -42,9 +39,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 namespace UniformizerChernNormalizationData
 
 /-- A finite normalized factor has the canonical comparison image.
-
-Source: diagonal tower coefficient changes proof (1), finite Kummer normalization.
-(blueprint: lem-diagonal-uniformizer-local-chern-finite-spec-unique-map).
 
 The ordinary finite class comparison is bijective. Applying its uniqueness to
 `hk` identifies the finite arrow with the canonical projective-line trace arrow;

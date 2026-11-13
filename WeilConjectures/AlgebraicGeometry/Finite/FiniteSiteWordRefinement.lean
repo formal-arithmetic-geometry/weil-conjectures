@@ -31,8 +31,7 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenComparison
 # Finite-site words and pushed proper/open refinements
 
 Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF, and more-etale.tex,
-Tag 0F7I; blueprint exceptional reduction, Locality paragraph
-(blueprint: lem-sp-finite-site-word-refinement).
+Tag 0F7I.
 -/
 
 @[expose] public noncomputable section
@@ -202,8 +201,7 @@ end DerivedTools
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The specified finite-site comparison for a proper/open word, with canonical
-associators. Source: Stacks Tags 09A6, 09AF and 0F7I
-(blueprint: lem-sp-finite-site-word-refinement). -/
+associators. Source: Stacks Tags 09A6, 09AF and 0F7I. -/
 def finiteSiteWordComparison (R : Type (u + 1)) [CommRing R]
     {X W V : Scheme.{u}} (j : X ⟶ W) [IsOpenImmersion j] (r : W ⟶ V) :
     ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus ⋙
@@ -222,7 +220,7 @@ def finiteSiteWordComparison (R : Type (u + 1)) [CommRing R]
     (Functor.associator _ _ _).hom
 
 /-- The canonical etale pushed-refinement component, with r1 defined as r2 after u.
-Source: Stacks Tag 0F7I (blueprint: lem-sp-finite-site-word-refinement). -/
+Source: Stacks Tag 0F7I. -/
 def finiteSiteEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
     {X W₁ W₂ V : Scheme.{u}} (j₁ : X ⟶ W₁) (j₂ : X ⟶ W₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -241,7 +239,7 @@ def finiteSiteEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
 
 /-- The canonical pro-etale pushed-refinement component on etale-origin input.
 The open-adjunct comparison is the published three-constituent theta comparison.
-Source: Stacks Tag 0F7I (blueprint: lem-sp-finite-site-word-refinement). -/
+Source: Stacks Tag 0F7I. -/
 def finiteSiteProEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
     {X W₁ W₂ V : Scheme.{u}} (j₁ : X ⟶ W₁) (j₂ : X ⟶ W₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂]
@@ -260,8 +258,7 @@ def finiteSiteProEtaleRefinement (R : Type (u + 1)) [CommRing R] [Finite R]
         ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E))
 
 /-- Termwise descent of the canonical Etale open compositor, in the orientation
-from iterated to composite extension. Source: Stacks Tags 09AF and 03EH
-(blueprint: lem-sp-finite-site-word-refinement). -/
+from iterated to composite extension. Source: Stacks Tags 09AF and 03EH. -/
 def finiteSiteEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] :
@@ -273,7 +270,7 @@ def finiteSiteEtaleOpenComp (R : Type (u + 1)) [CommRing R]
       a b).symm
 
 /-- Termwise descent of the canonical Etale open unit identification.
-Source: Stacks Tags 09AF and 03EH (blueprint: lem-sp-finite-site-word-refinement). -/
+Source: Stacks Tags 09AF and 03EH. -/
 def finiteSiteEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) (𝟙 X)).mapDerivedCategoryPlus ≅
       𝟭 _ :=
@@ -284,8 +281,7 @@ def finiteSiteEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     Functor.mapDerivedCategoryPlusIdIso _
 
 /-- Termwise descent of the canonical ProEtale open compositor, in the orientation
-from iterated to composite extension. Source: Stacks Tags 09AF and 03EH
-(blueprint: lem-sp-finite-site-word-refinement). -/
+from iterated to composite extension. Source: Stacks Tags 09AF and 03EH. -/
 def finiteSiteProEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] :
@@ -296,7 +292,7 @@ def finiteSiteProEtaleOpenComp (R : Type (u + 1)) [CommRing R]
     Functor.mapDerivedCategoryPlusNatIso (proEtaleOpenExtensionComp R a b).symm
 
 /-- Termwise descent of the canonical ProEtale open unit identification.
-Source: Stacks Tags 09AF and 03EH (blueprint: lem-sp-finite-site-word-refinement). -/
+Source: Stacks Tags 09AF and 03EH. -/
 def finiteSiteProEtaleOpenId (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :
     (openImmersionLowerShriek (ModuleCat.{u + 1} R) (𝟙 X)).mapDerivedCategoryPlus ≅
       𝟭 _ :=
@@ -341,9 +337,7 @@ private theorem proEtaleOpenComp_symm (R : Type (u + 1)) [CommRing R]
 /-- Finite-site word comparisons, lower bounds, normalized compositor and unit laws,
 and compatibility with pushed proper/open refinements.
 
-Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF; more-etale.tex, Tag 0F7I;
-blueprint exceptional reduction, Locality paragraph
-(blueprint: lem-sp-finite-site-word-refinement).
+Source: Stacks Project, proetale.tex, Tags 09A6 and 09AF; more-etale.tex, Tag 0F7I.
 
 Proof (the node's eight steps):
 1. Etale and pro-etale extension by zero and comparison inverse image are exact
@@ -353,24 +347,21 @@ Proof (the node's eight steps):
 2. Use enough injectives and an injective representative vanishing below the chosen
    bound (lem-weil-pbc-module-sheaves-enough-injectives,
    lem-weil-pbc-dplus-injective-representative). Direct image computes its right
-   derived functor on that representative (lem-weil-pbc-right-derived-plus-injective),
-   so every intermediate etale direct image remains bounded below.
+   derived functor on that representative, so every intermediate etale direct image remains bounded
+   below.
 3. Apply the canonical sheaf open comparison and its composition law in every degree
    (proposition-comparison-immersions--1, proposition-composition-base-change-rf-shriek--1).
    Naturality makes chain maps; exactness preserves quasi-isomorphisms. Localization
-   (lem-weil-pbc-localization-universal-property) descends the maps and equations.
+ descends the maps and equations.
 4. Finite affine covers give quasi-compactness; local Noetherianness gives
    quasi-separatedness (lem-weil-pbc-affine-scheme-qcqs,
    lem-weil-pbc-locally-noetherian-quasi-separated). Morphism permanence
-   (lem-weil-pbc-qcqs-morphism-permanence) gives qcqs proper maps. The specified mate
-   is invertible (lem-weil-pbc-comparison-direct-image-canonical-mate), hence so is B.
-   Its domain is exactly the comparison of the bounded-below etale word, the witness.
-5. The coherent pullback comparisons (proposition-comparison-etale-derived-category--5) descend
-   termwise by exactness (situation-conventions,
-   prop-weil-pbc-proetale-constant-exact,
-   situation-conventions). Mate pasting
-   (lem-weil-pbc-mate-pasting, parts 2 and 3) gives the compositor equation for the
-   specified counit mates; adjunction conjugation fixes the canonical compositors.
+ gives qcqs proper maps. The specified mate is invertible, hence so is B. Its domain is exactly the
+   comparison of the bounded-below etale word, the witness.
+5. The coherent pullback comparisons descend termwise by exactness (situation-conventions,
+   prop-weil-pbc-proetale-constant-exact, situation-conventions). Mate pasting
+   (lem-weil-pbc-mate-pasting, parts 2 and 3) gives the compositor equation for the specified counit
+   mates; adjunction conjugation fixes the canonical compositors.
 6. The identity pullback comparison and identity mate law give the proper unit law.
    The open composition law at two identities gives e=e squared; cancellation by
    its inverse gives the open unit law.

@@ -24,12 +24,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- Exact etale inverse image is full on bounded below complexes.
-Source: Bhatt--Scholze, Corollary 5.1.6
-(blueprint: lem-weil-pbc-finite-discrete-etale-realization-full).
-
-Proof. The comparison derived adjunction has invertible unit on bounded below
-complexes, so its hom map is bijective. Restrict the source along the fully faithful
-inclusion of the bounded below derived category. -/
+Source: Bhatt--Scholze, Corollary 5.1.6. -/
 theorem finiteDiscreteEtaleRealization_full (B : Type) [CommRing B] (T : Scheme.{u}) :
     (DerivedCategory.Plus.ι ⋙
       D(ν^*(T)[ModuleCat.{u + 1} (ULift.{u + 1} B)])).Full where

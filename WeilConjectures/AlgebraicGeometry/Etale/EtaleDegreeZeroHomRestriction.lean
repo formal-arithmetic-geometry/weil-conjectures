@@ -9,9 +9,6 @@ public import WeilConjectures.CategoryTheory.Etale.EtaleDegreeZeroHom
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleSingleRestrictionComp
 
 /-! # The inverse degree-zero Hom correspondence and restriction
-
-Source: blueprint vector integration, compatibility with restriction.
-(blueprint: lem-amb-etale-degree-zero-hom-restriction).
 -/
 
 @[expose] public noncomputable section
@@ -100,9 +97,7 @@ private theorem hom_restriction_symm
   exact restriction_conjugation E₀ E₁ E₂ F G H P Q R ηv ηp ηw c r hc α ψ
 
 /-- The inverse degree-zero Hom correspondence commutes with the specified etale
-restriction compositor. This applies to any source isomorphic to a sheaf in degree zero.
-Source: blueprint vector integration, exact inverse image and degree-zero restriction.
-(blueprint: lem-amb-etale-degree-zero-hom-restriction). -/
+restriction compositor. This applies to any source isomorphic to a sheaf in degree zero. -/
 theorem etaleDegreeZeroHomEquiv_symm_compRestriction (A : Type (u + 1)) [CommRing A]
     {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
     [Etale p] [Etale v] [Etale w] (hw : w = p ≫ v)

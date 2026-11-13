@@ -27,18 +27,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Functor.mapDerivedCategorySingleFunctor
   Functor.rightDerivedFunctorObjQIso
 
-/-- The varying comparison transports the coefficient adjunct through degree zero.
-
-Source: diagonal tower trace proof (2), coefficient-unit compatibility, and
-geometric classes proof (3), normalized coefficient pullback.
-(blueprint: lem-sfb-diagonal-trace-varying-single-adjunct).
-
-Proof: extend the varying comparison's normalization from K-injective complexes
-using the supplied acyclicity. The single-complex comparison for this exact square
-identifies the ordinary right-derived map. The canonical derived adjunction unit
-on a single object is the ordinary adjunct followed by that right-derived map.
-Naturality of the exact single-object comparisons and cancellation give the stated
-identity. This uses the actual coefficient pullback and its derived localization. -/
+/-- The varying comparison transports the coefficient adjunct through degree zero. -/
 theorem diagonalTrace_varying_single_adjunct
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}

@@ -24,7 +24,6 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 # DenseOpenFinitenessComparison
 
 Source: Stacks Project, Lemma 0GJA.
-(blueprint: lem-pbc-j2-dense-open-finiteness-comparison).
 -/
 
 @[expose] public section
@@ -108,23 +107,7 @@ private theorem isZero_of_primary_invertible
   have hc : (p ^ m).Coprime n := (hp.coprime_iff_not_dvd.mpr hndiv).pow_left m
   exact (nsmul_eq_zero_iff_of_coprime hc).mp ⟨hm, hn⟩
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
-(blueprint: lem-pbc-j2-dense-open-finiteness-comparison).
-
-Proof: The reduced closed complement Z is a finite set of k-rational points. In the open-closed
-short exact sequence the third term Q = i_* i^* F has zero positive cohomology and finite
-H^0, since its stalks are quotients of the finite constructible stalks of F. In degrees
-at least two the first and middle terms have isomorphic cohomology. In degrees zero and
-one the exact sequence is 0 → H^0(G) → H^0(F) → H^0(Q) → H^1(G) → H^1(F) → 0.
-For either proper constructible finiteness or invertible-order constructible finiteness,
-this exact sequence transfers finiteness from G to F: subgroups, quotients and extensions
-of finite groups are finite. In the reverse direction it transfers finiteness from F
-to G by the same argument and the finite H^0(Q). Constructibility of F is the assumption
-hP, transported to the module coefficient encoding. For invertible-order finiteness in
-the reverse direction, if F is primary and G has invertible order then G is zero by
-stalk conservativity; otherwise the assumed torsion alternative gives invertible order
-of F. All arguments apply to empty Z and the zero sheaf.
--/
+/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_finiteness_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

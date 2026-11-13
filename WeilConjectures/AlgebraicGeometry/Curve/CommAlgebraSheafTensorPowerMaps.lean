@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 /-! # Tensor-power maps into an algebra sheaf
 
 Source: Stacks Project, Modules, Section 01CF; Tag 09MS.
-(blueprint: lem-sc-algebra-sheaf-tensor-power-maps).
 -/
 
 @[expose] public section
@@ -148,19 +147,7 @@ private lemma algebraPowers_transport {X : Scheme.{u}} (L : X.Modules)
 
 /-- A map from an invertible module into an algebra sheaf extends to all tensor powers.
 
-Source: Stacks Project, Modules, Section 01CF (tensor and symmetric algebras); Tag 09MS.
-(blueprint: lem-sc-algebra-sheaf-tensor-power-maps).
-Proof: Multiplication of sections is bilinear over the structure sheaf and commutes with
-restriction. The presheaf tensor-product universal property, followed by the module
-sheafification adjunction, gives a map U(B) tensor U(B) to U(B). Define b_0 by the
-structure map and b_(n+1) by j tensor b_n followed by this multiplication map. The unit
-law identifies b_1 with j after the right unitor. Induct on a in the multiplication
-formula: a=0 is the left unit law, including the zero_add transport in tensorPowAddIso;
-the successor case uses its recursive associator formula and associativity of section
-multiplication. Equality of maps from sheaf tensor products can be tested on elementary
-tensors before sheafification. For three factors, locally choose a frame of L; every
-section of L tensor N is then an elementary tensor, and sheaf separation globalizes
-the calculation. The zero algebra, degree zero and empty open obey the same laws. -/
+Source: Stacks Project, Modules, Section 01CF (tensor and symmetric algebras); Tag 09MS. -/
 theorem exists_commAlgebraSheaf_tensorPower_maps {X : Scheme.{u}} (L : X.Modules) [L.IsInvertible]
     (B : X.CommAlgebraSheaf) (j : L ⟶ commAlgebraSheafModule X.sheaf B) :
     ∃ b : ∀ d : ℕ, L.tensorPow d ⟶ commAlgebraSheafModule X.sheaf B,

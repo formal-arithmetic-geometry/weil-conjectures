@@ -23,9 +23,7 @@ set_option linter.privateModule false
 /-!
 # Galois representations attached to lisse sheaves
 
-Source: Stacks Project, Tag 0DV5; the blueprint, `chap-Verdier-and-Poincare-duality`,
-`lemma-perfect-complexes-geometric-point` (blueprint:
-proposition-lattices-representations-normal-scheme); Deligne, Weil II (1.1.1), (1.1.6).
+Source: Stacks Project, Tag 0DV5; Deligne, Weil II (1.1.1), (1.1.6).
 -/
 
 @[expose] public section

@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.GradedLineFractionChart.GradedLi
 /-! # Local restriction of one fraction chart to an affine base open
 
 Source: Stacks Project, Constructions, Tags 01NK and 01O9.
-(blueprint: lem-trf-graded-line-fraction-base-refinement).
 -/
 
 @[expose] public section
@@ -105,26 +104,7 @@ The comparison chart uses the restricted original frame and denominator, without
 change of degree. This compares a chart only with its own affine-base restriction.
 
 Source: Stacks Project, Constructions, Tag 01O9, characterization (3) and its proof,
-using the localization construction of Tag 01NK.
-(blueprint: lem-trf-graded-line-fraction-base-refinement).
-
-Proof: Choose an affine W around the image of x contained in the original framed open
-and h inverse V. Restrict the original frame l to W and the denominator e to V, keeping
-the degree d. The restriction law of psi, hc, and injectivity of multiplication by the
-restricted frame powers show that the new denominator coefficient is the restriction
-of the old one. Hence the new localization spectrum is the inverse image of W inside
-the old localization spectrum; it is an open neighborhood of x. Its projection to the
-old chart is induced by the ordinary-localization map of section restrictions. Identify
-this open subscheme with an open O in the old chart, and use its inverse identification
-as f. The source equation follows from the affine section restriction square. The
-restriction map A(U) to A(V) induces the homogeneous-localization map on standard Proj
-charts. The fraction formula hρ and the coefficient restriction identity show that the
-two ring maps commute with these localization maps: verify on a/e^n, including n=0,
-and use homogeneous-fraction surjectivity. Naturality of the standard Proj embeddings
-and the relative-Proj transition equation then give the target equation. No comparison
-of different frames or different denominators is involved, and no covering of the whole
-source by denominator charts or global generation is required. All denominators are
-inverted in ordinary localizations, so zero divisors and nilpotents cause no exception. -/
+using the localization construction of Tag 01NK. -/
 theorem gradedLineFraction_baseRefinement
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

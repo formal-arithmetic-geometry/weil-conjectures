@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Scalar.FiniteScala
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.FiniteCoefficientScalarTransport
 
 /-! # Arbitrary ordinary root classes in finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-root-class-route).
 -/
 
 @[expose] public noncomputable section
@@ -43,13 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- An ordinary arrow with a scalar root class has the corresponding normalized
-finite integral-root route, before any Picard or Kummer specialization.
-Source: exact scalar transport and the root-coordinate section equation
-(blueprint: lem-sfb-finite-ordinary-root-class-route).
-
-Proof: scalar realization gives the normalized additive class route. Apply
-congruence to the given class equation using the actual normalized cohomology
-route function. Compose with finiteScalarNormalizedRootRoute_eq. -/
+finite integral-root route, before any Picard or Kummer specialization. -/
 theorem finiteOrdinaryCoordinateArrow_root_class (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}

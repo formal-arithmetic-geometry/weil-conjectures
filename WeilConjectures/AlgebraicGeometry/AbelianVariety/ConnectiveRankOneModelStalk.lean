@@ -80,26 +80,7 @@ private theorem epi_map_of_natIso {C : Type*} [Category C]
 
 -- The composed homology/stalk functors require substantial definitional-equality checking.
 /-- The local unit calculation for an already supplied strictly perfect representative.
-Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD.
-(blueprint: lem-sc-connective-rank-one-model-stalk).
-
-Proof: Restrict the structure-sheaf single complex and the given arrow to U. The
-restriction of the source is the single structure-sheaf complex on the localized site.
-It is strictly perfect. Conjugate the restricted arrow by that identification and e,
-and apply perfect_affine_map_representative to obtain a chain map into P. Take stalks
-at s; the degree-zero source and target are free of rank one. Since P has zero negative
-terms, its residue H^0 is the kernel of its outgoing degree-zero differential, with
-no quotient by incoming boundaries. The assumed residue H^0 isomorphism implies that
-the degree-zero chain-map component has nonzero residue: it sends the generator to a
-nonzero element of the rank-one residue term. Its coefficient in the local ring is
-therefore a unit. The chain-map equation says that the outgoing differential composed
-with this invertible degree-zero component is zero, so the outgoing differential at
-the stalk is zero. There are no incoming boundaries. Every degree-zero cohomology germ
-is consequently a vector in P^0_s, and the inverse unit gives a source preimage.
-Restriction preserves the stalk at a point of U. Exactness of stalks identifies stalks
-of cohomology with cohomology of the stalk complex. Naturality of these identifications
-and the representing equality Q.map α = f transport each preimage back along e to the
-original H^0(a)_s. Higher terms and all other fibres are unrestricted. -/
+Source: Stacks Project, Tag 0E62, local argument, and Tag 0BCD. -/
 theorem surjective_stalk_homology_of_connective_rank_one_model (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ U : S.Opens,

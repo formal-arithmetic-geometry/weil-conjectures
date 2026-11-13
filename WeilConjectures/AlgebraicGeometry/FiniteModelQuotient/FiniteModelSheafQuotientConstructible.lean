@@ -181,50 +181,7 @@ private theorem bounded_from_vanishing
 /-- Finite reductions of integral constructible scalar models, including the prescribed
 matrix calculation. No completeness or geometric condition on the prime is assumed.
 
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof, Local models,
-Locality and Strata; Stacks Tags 093M, 093J, 06YQ, 06YY, 0G7E and 09AJ
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible).
-
-Proof:
-1. The integral scalar ring is a DVR with finite residue field
-(lem-weil-l-adic-extension-integers-dvr). Its positive quotients are finite by
-lem-weil-valued-dvr-finite-quotients. The open coset basis of
-lem-sfb-integers-coset-basis makes their quotient topology discrete. The constant
-integral sheaf maps flatly to B, with quotient k_n, by
-lemma-integral-models--1 and
-lemma-comparison-completed-coefficients--1. Use
-lem-sf-module-object-ordinary-coefficient-equivalence for the finite encoding.
-2. For stratum and cover restrictions, sk-def-sfb-pullback-from-point-comp identifies
-the coefficient rings and their actual quotient maps. Exactness follows from
-lemma-inverse-image-coefficient-sheaves and lem-sfb-internal-module-operations-transport.
-A flat-term K-flat resolution (lem-pc-kflat-resolution) remains such after pullback
-(lem-weil-pbc-ringed-topos-kflat-pullback). The balanced comparisons of
-lem-sfb-scalar-inverse-image-tower-diagram and lem-pur-derived-change-of-rings
-identify reduction before and after restriction, compatibly for composites.
-3. On a chosen cover chart take the specified exact scalar resolution; such resolutions
-exist by lem-sfb-scalar-finite-free-resolutions. Flat extension preserves that exact
-sequence with its original matrix, by lem-sfb-constant-finite-free-presentation-extension.
-4. The resulting two-term free complex is K-flat by
-lem-sfb-ringed-finite-free-resolution-tensor. Tensoring with the quotient computes the
-derived reduction in its own coefficient category (lem-pur-derived-change-of-rings).
-Its differential on basis vectors is the entrywise image of the original matrix under
-the actual quotient homomorphism.
-5. Exact constant realization and lem-weil-pbc-exact-functor-complex-cohomology identify
-the cohomology with constant kernel and cokernel. Both are finite: one is a subset of
-a finite power and the other a quotient. A finite module over a finite ring has a finite
-presentation: use all elements as generators and all elements of its finite kernel as
-relations. Rank zero and the zero module are included.
-6. For other degrees the cohomology vanishes on each cover and stratum. Use
-lem-sfb-proetale-object-inverse-image-restriction and lem-sfb-sheaf-cover-local-isomorphism
-to descend from covers. Use lem-fix-constructible-open-closed-refinement to refine the
-finite constructible partition to a finite open/closed tree. Induct upward using
-proposition-extension-zero-restriction-closed-subscheme. Thus the interval [-1,0] is uniform in n.
-7. Keep the original strata and covers. The finite kernel and cokernel models are
-internal finite scalar models by lem-pe-finite-discrete-scalar-constant-models and
-lem-pe-finite-discrete-encoding-pullback-fixed. They are ordinary locally constant
-sheaves with finite stalks by lem-weil-pbc-proetale-finite-model-stalks. The two recorded
-constructibility definitions give both bounded constructibility conclusions. Empty
-strata have only the zero sheaf. No completion property of M is used. -/
+Source: Stacks Tags 093M, 093J, 06YQ, 06YY, 0G7E and 09AJ. -/
 theorem finite_model_sheaf_quotient_constructible
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V]
     (M : AdicCompletion.Modules l E V)

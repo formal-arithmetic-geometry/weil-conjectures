@@ -32,8 +32,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 import Mathlib.CategoryTheory.Abelian.ShortExact
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -55,14 +53,8 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 /-- For a closed immersion i:D→Z and n>0, the normalized supported integral generator
 i_*Z_D→forget(i_*(ULift(Z/n))_D) on the pro-etale site has the unbounded DerivedUnit property
 [def-sfb-cartier-reduction-data, def-sp-exact-functor-derived-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-pro-integral-residue-derived-unit).
-Proof: Pull the supported etale integer/residue short exact sequence back by exact comparison.
-Transport its two integral terms by the canonical supported integral comparison and its residue term
-by the coefficient-forgetting comparison followed by the supported residue comparison. All are
-isomorphisms. The defining formula for the pro integral generator identifies the transported
-quotient map. Thus the sequence nF→F→forget(i_*R_D) is short exact. Apply the site-general
-quotient-derived-unit theorem directly on the pro-etale site. -/
+Source: Stacks 0152,
+06YY and 0GLZ. -/
 theorem pro_integral_residue_derived_unit (n : ℕ) (hn : 0 < n)
     {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] :
     (cartierForget (ULift.{u + 1} (ZMod n)) Z).DerivedUnit

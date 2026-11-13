@@ -27,8 +27,7 @@ variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
 variable {X : Scheme.{u}} {ι : Type u}
 
 /-- Identify categorical scalar extension with tensor using the given algebra action.
-Source: Mathlib's definition of extendScalars and the algebra smul identity.
-(blueprint: lem-pc-flat-cech-cohomology-square) -/
+Source: Mathlib's definition of extendScalars and the algebra smul identity. -/
 noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R A] :
     (ModuleCat.extendScalars (algebraMap R S)).obj (ModuleCat.of R A) ≅
       ModuleCat.of S (TensorProduct R S A) := by
@@ -53,8 +52,7 @@ noncomputable def extendScalarsTensorIso (A : Type u) [AddCommGroup A] [Module R
   exact eS.toModuleIso
 
 /-- The tensor identification is the identity on pure tensors.
-Source: the defining tensor maps in Mathlib.
-(blueprint: lem-pc-flat-cech-cohomology-square) -/
+Source: the defining tensor maps in Mathlib. -/
 lemma extendScalarsTensorIso_hom_tmul (A : Type u) [AddCommGroup A] [Module R A]
     (b : S) (a : A) :
     (extendScalarsTensorIso (R := R) (S := S) A).hom
@@ -64,8 +62,7 @@ lemma extendScalarsTensorIso_hom_tmul (A : Type u) [AddCommGroup A] [Module R A]
 
 /-- Exact scalar extension commutes with the homology of the ordered Cech complex.
 This uses only the three terms at the selected degree; boundedness is unnecessary.
-Source: Mathlib `ShortComplex.mapHomologyIso`, as in Stacks Tag 02KH.
-(blueprint: lem-pc-flat-tensor-complex-cohom) -/
+Source: Mathlib `ShortComplex.mapHomologyIso`, as in Stacks Tag 02KH. -/
 noncomputable def flatCechHomologyIso [Module.Flat R S] (f : X ⟶ Spec (.of R))
     (U : ι → X.Opens) (M : X.Modules) (q : ℕ) :
     (ModuleCat.extendScalars (algebraMap R S)).obj ((cechOver f U M).homology q) ≅
@@ -141,27 +138,7 @@ pure-tensor formula induces the specified sheaf cohomology comparison. This is a
 compatibility statement; it does not assert that the chain map is invertible.
 
 Source: Stacks Project, Lemma 30.5.2 (Tag 02KH), separated-case paragraph;
-Lemma 30.2.6 (Tag 01XD), and the canonical comparison of Tag 02KE.
-(blueprint: lem-pc-flat-cech-cohomology-square)
-
-Proof: Separatedness over an affine base makes the tuple intersections of U affine;
-base change gives an affine-intersection cover on X_S. The pulled-back module is
-quasi-coherent. Apply the Cech-to-sheaf comparison to these two covers. Affine
-acyclicity makes the comparison maps isomorphisms. The Cech-to-sheaf edge maps
-are natural for the inverse-image coefficient map induced by the module adjunction
-unit: construct them from the augmented Cech double complexes of injective
-resolutions, and use a resolution comparison for this coefficient map. On each
-tuple intersection the map of augmentations is exactly the map specified by
-IsCechBaseChange. Thus the resulting square commutes on cocycles and boundaries.
-The scalar action on each comparison is induced by multiplication on the module,
-so the first edge map is R-linear and the second S-linear. Restricting scalars from
-global functions gives e and e'. Finally extend the original edge map to S tensor,
-and use the canonical exact-tensor homology comparison flatCechHomologyIso.
-On pure tensors b tensor x the composite is b times the inverse-image cohomology
-map of the unit. This is the defining formula for H.baseChange; tensor induction
-then gives the displayed equality. No invertibility of c is used in this argument.
-The comparison is valid in degree zero, on the empty scheme, and for any flat
-algebra including the zero ring. -/
+Lemma 30.2.6 (Tag 01XD), and the canonical comparison of Tag 02KE. -/
 theorem exists_cechBaseChange_cohomology_square [Module.Flat R S]
     (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]
     (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)

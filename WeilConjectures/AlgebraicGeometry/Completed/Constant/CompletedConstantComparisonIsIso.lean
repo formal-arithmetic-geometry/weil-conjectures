@@ -70,29 +70,7 @@ private theorem isIso_on_finite_free
       _ = 𝟙 _ := by rw [htotal, G.map_id]
   exact ⟨⟨β, hleft, hright⟩⟩
 
-/-- The already constructed tensor-to-limit map is invertible for finite modules.
-Source: Stacks Project, More on Algebra, Tag 0912 (lemma-limit-flat), and Modules on
-Sites, Tags 093J--093M (lemma-constant-exact, lemma-tensor-with-finitely-presented,
-lemma-flat-sections, lemma-completion-flat).
-(blueprint: lem-weil-pbc-completed-constant-comparison-is-iso).
-
-Proof: put C = AdicCompletion I A and J = IC. The Noetherian completion theorem makes
-C Noetherian; its evaluation maps identify C/J^(n+1) with A/I^(n+1), preserving transitions.
-For any C-module N, J^k N = I^k N after restriction to A: multiplication by elements of C
-can be absorbed into the module factor. In particular the quotient towers agree.
-For finite N, choose a finite presentation over C. On each site object U the sections of
-the constant quotient rings are flat over their quotient rings, and have surjective
-transition maps by exactness of constant sections. Tag 0912 therefore identifies
-N tensor_C H(U) with the compatible families in N tensor_C constant(C/J^(n+1))(U).
-Tag 093K identifies the factors with the sections of constant(N/J^(n+1)N), using the
-finite presentation. Every map used sends a pure tensor h tensor x to the product of
-the projected h with residue(x). They commute with restrictions. Locally every section
-of constant N is represented by an actual element, so sheafifying sectionwise scalar
-extension gives the same map from H tensor_(constant C) constant N. Its finite
-projections agree with completedConstantProjection by their pure-tensor formula and
-local tensor generation. Hence the resulting invertible map is precisely the fixed
-completedConstantComparisonMap. The argument includes N = 0, the zero ring, I = 0
-and I = top; all presentations and quotient diagrams retain those cases. -/
+/-- The already constructed tensor-to-limit map is invertible for finite modules. -/
 theorem completedConstantComparisonMap_isIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

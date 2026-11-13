@@ -33,13 +33,7 @@ private theorem ordinary_unit_mate
     (Functor.LaxMonoidal.ε (Sheaf.restrictScalars T.smallEtaleTopology φ))
 
 /-- The regular etale scalar unit is the exact adjunction insertion of the ordinary
-restriction unit, after the canonical single/unit identifications.
-Source: finite-dualizing coefficient normalization, paragraphs 1--3.
-Proof: the published unit comparison satisfies the representative normalization.
-Its representative is the transpose formed from the ordinary and derived scalar
-adjunctions. The ordinary oplax unit has the ordinary lax restriction unit as
-adjunct. Apply the normalized representative/single comparison.
-(blueprint: lem-coef-etale-scalar-unit-insertion) -/
+restriction unit, after the canonical single/unit identifications. -/
 theorem scalarUnit_eq_adjointInsertion
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :

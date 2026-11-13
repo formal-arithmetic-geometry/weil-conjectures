@@ -22,10 +22,6 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- A prescribed cyclic root basis trivializes the internal free module over any
 commutative coefficient sheaf annihilated by the same positive ell-power.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), finite root bases.
-(blueprint: lem-diagonal-finite-root-basis).
-
 Proof in words. On the prescribed slice, the root module is the constant Z/N
 module with the given generator. Tensor its basis with B. The map b -> b tensor 1
 from B to B tensor_Z Z/N is bijective because N annihilates B: its inverse is the

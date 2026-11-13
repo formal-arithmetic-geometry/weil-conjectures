@@ -197,7 +197,6 @@ interchange is the Cartesian square of the proper maps c'.g and p.
 Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F (proper/quasi-finite
 interchange and change of base), Tag 0F7J (composition), and Tag 0F7L, final
 proof paragraph item (3); etale-cohomology.tex Tag 0F4L (graph normalization).
-(blueprint: lem-pur-etale-graph-proper-tower).
 
 Proof in words:
 Expand the composition of f' and v on a nested proper/open compactification

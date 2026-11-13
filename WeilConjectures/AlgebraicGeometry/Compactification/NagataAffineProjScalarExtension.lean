@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 
 /-!
 # Scalar extension of affine Proj with its chart maps
-
-Source: literature/stacks-project/constructions.tex, Tags 01N2 and 01MY
-(blueprint: lem-nagata-affine-proj-scalar-extension)
 -/
 
 @[expose] public section
@@ -27,21 +24,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Scalar extension of affine Proj, with the standard-open descriptions.
-Source: Stacks Project, Tags 01N2 and 01MY (blueprint: lem-nagata-affine-proj-scalar-extension).
-Proof: the graded scalar-extension condition expresses every positive-degree element of B
-as a finite S-linear combination of images of homogeneous elements of A. These images generate
-the irrelevant ideal, so their standard opens cover (definition-admissible-blow-up--1). On each such
-open, lem-nagata-homogeneous-localization-scalar-extension and
-lem-weil-pbc-fibre-product-affine-spectra identify the chart with the affine fibre product.
-The projection is induced by Away.map, whose fraction formula is Away.map_mk.
-On intersections, lem-weil-pbc-proj-basic-open-intersection and
-lemma-nagata-proj-chart-ring-cocycle identify both projections with the same fraction map.
-Then lem-weil-pbc-scheme-morphism-gluing glues them and proves the inverse-image formula.
-For any test scheme with compatible maps to Proj A and Spec S, restrict to these opens,
-use chartwise pullback uniqueness, and glue the lifts; this proves the cartesian square
-(def-pc-fibre-product). Finally, maps with the stated chart formulas agree on the cover,
-so gluing uniqueness proves the final clause. No cancellation or flatness is used.
--/
+Source: Stacks Project, Tags 01N2 and 01MY. -/
 theorem lem_nagata_affine_proj_scalar_extension
     {R : Type u} [CommRing R] {S : Type u} [CommRing S]
     {A : Type u} [CommRing A] {B : Type u} [CommRing B]

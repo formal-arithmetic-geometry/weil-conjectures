@@ -11,10 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact condensed coefficient changes and their derived tensor calculus
 
-Source: archived master ModuleObject/Colimit/Compatibility.lean, A0.2 and Flat;
-ModuleObject/Colimit/TwoColimit.lean, ExtendScalars
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-
 All modules below are the master internal module objects. The constructible categories
 are `PadicSubfieldConstructible` and `PadicAlgClConstructible`, with no completeness
 condition. The adjunctions are on the ambient unbounded derived categories.
@@ -1155,21 +1151,7 @@ theorem condensedAlgClCoefficientCalculus
   let := scalarHasDerived (C := Sheaf (ProEt.topology T) Ab.{u + 1})
   exact scalarCalculus (padicSubfieldRingObjToPadicAlgCl T ℓ E)
 
-/-- Coherence of the canonical multiplication and unit comparisons.
-Source: TwoColimit.lean, ExtendScalars; sheaf tensor coherence and localization
-(blueprint: lem-weil-pbc-condensed-flat-coefficient-calculus).
-Proof: multiplication and its inverse are balanced and natural before sheafification.
-The two associativity paths send `d ⊗ (c ⊗ (b ⊗ p))` to `dcb ⊗ p`.
-Together with associativity of functor composition this gives the five-ring pentagon:
-every path sends `h ⊗ (d ⊗ (c ⊗ (b ⊗ p)))` to `hdcb ⊗ p`.
-The unit sends `a ⊗ p` to `ap`; either insertion of it in a multiplication comparison
-has the same value. The same calculations hold with the last ring the closure.
-These are equalities of maps from presheaf tensors and pass through the universal
-property of sheafification, without asserting that global sections are pure tensors.
-Apply these comparisons termwise. Shifts introduce the same differential sign on both
-sides, and all coefficient factors have degree zero. Localization descends these
-transformations and detects their equalities, proving the unit, associativity,
-pentagon and shift compatibility laws. -/
+/-- Coherence of the canonical multiplication and unit comparisons. -/
 theorem condensedCoefficientCoherence
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T] (ℓ : ℕ) [Fact ℓ.Prime] :
     (∀ (E F G H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

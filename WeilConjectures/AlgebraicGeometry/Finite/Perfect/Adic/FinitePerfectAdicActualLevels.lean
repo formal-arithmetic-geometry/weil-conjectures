@@ -26,8 +26,7 @@ attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The levelwise part of the actual quotient normalization package.
-Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-levels). -/
+Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing. -/
 structure FinitePerfectAdicActualLevelData
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)

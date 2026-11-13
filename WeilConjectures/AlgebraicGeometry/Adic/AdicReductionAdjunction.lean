@@ -26,9 +26,6 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 import WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
 
 /-! # The canonical derived reduction Hom equivalence
-
-Source: blueprint proper base change, order 1260, proof step 6.
-(blueprint: lem-weil-pbc-adic-reduction-adjunction-hom-equiv).
 -/
 
 @[expose] public section
@@ -44,10 +41,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars is exact, also when the small site's object and morphism
-universes differ. Source: order 1260, proof step 6; Stacks Tag 03D3.
-Proof: restriction leaves the underlying abelian sheaf unchanged. Kernels and cokernels
-are computed on those sheaves, with the restricted action, so it preserves both.
-(blueprint: lemma-weil-pbc-adic-completion-reduction) -/
+universes differ. Source: Stacks Tag 03D3. -/
 theorem adicRestrictScalars_exact (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)) ∧
@@ -77,8 +71,7 @@ theorem adicRestrictScalars_exact (X : Scheme.{t}) {A B : Type t}
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves F UA,
     preservesFiniteColimits_of_reflects_of_preserves F UA⟩
 
-/-- Exact derived restriction along the constant coefficient map.
-Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction). -/
+/-- Exact derived restriction along the constant coefficient map. -/
 noncomputable def adicDerivedRestrict (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     proEtaleDerivedCategory X B ⥤ proEtaleDerivedCategory X A :=

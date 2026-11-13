@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 
 /-! # The abelian counit comparisons for a coefficient square
-
-(blueprint: def-weil-pbc-coefficient-sheafification-section-data).
 -/
 
 @[expose] public noncomputable section

@@ -8,10 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalResidueDerivedFactorization
 
-/-! # Exact quotient realization of restricted finite evaluation
-
-Source: diagonal tower system proof (4), using the actual sheaf quotient construction.
-(blueprint: lem-sfb-diagonal-trace-finite-residue-functor). -/
+/-! # Exact quotient realization of restricted finite evaluation -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
@@ -20,9 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] diagonalFiniteToPadic
 
-/-- Ordinary residue scalar restriction is fully faithful.
-Source: surjective scalar restriction for module sheaves
-(blueprint: lem-sfb-diagonal-trace-finite-residue-functor). -/
+/-- Ordinary residue scalar restriction is fully faithful. -/
 theorem finiteResidueRestriction_full_faithful (l n : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) :
     (diagonalFiniteToPadic l n T).Full ∧ (diagonalFiniteToPadic l n T).Faithful := by
@@ -45,14 +40,7 @@ private theorem restriction_killed (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
   rw [hz, ZMod.val_zero, zero_nsmul] at h
   simpa only [← Nat.cast_pow, Nat.cast_smul_eq_nsmul] using h
 
-/-- Restricted evaluation factors through an exact residue functor.
-Source: diagonal tower system proof (4)
-(blueprint: lem-sfb-diagonal-trace-finite-residue-functor).
-
-Proof: the scalar equation kills the positive prime power. The quotient projection is
-epic and, by its exactness, monic on these objects. Its natural isomorphism identifies
-scalar restriction of the quotient functor with the original exact evaluation.
-Scalar restriction reflects isomorphisms, and therefore reflects its exactness. -/
+/-- Restricted evaluation factors through an exact residue functor. -/
 theorem exactFiniteResidueFunctor_exists (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
     (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ) :

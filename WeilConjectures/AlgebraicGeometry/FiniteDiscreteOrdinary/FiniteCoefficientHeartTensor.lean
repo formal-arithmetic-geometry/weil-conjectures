@@ -88,9 +88,6 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Pure tensor normalization of the coefficient heart functor
-
-Source: the finite coefficient transport paragraph, and the normalized internal/section,
-ring-isomorphism, and constant-scalar tensor comparisons.
 -/
 
 @[expose] public noncomputable section
@@ -170,10 +167,7 @@ variable {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R]
 
 /-- Restriction along the inverse coefficient isomorphism preserves the internal pure
-pairing. Source: the coequalizer tensor comparison for restriction along an isomorphism
-(blueprint: lem-sfb-finite-coefficient-section-tensor-normalization).
-Proof: precompose the inverse tensorator with the relative tensor projection and use
-its defining coequalizer equation; evaluate the resulting sheaf map on a pure tensor. -/
+pairing. -/
 private theorem comap_μ_pure (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (T : Scheme.{u})
     (M N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))
@@ -190,14 +184,7 @@ private theorem comap_μ_pure (e : Mon.mk R ≅ Mon.mk (coefficient A))
       M.X N.X).app V).hom (x ⊗ₜ[ℤ] y))) h
 
 /-- The actual composite section encoding has a tensorator normalized on every local
-pure tensor. This assertion is independent of any scheme morphism or adjunction mate.
-Source: normalized internal/section, ring-isomorphism, and constant-scalar tensor transport
-(blueprint: lem-sfb-finite-coefficient-section-tensor-normalization).
-Proof: choose the internal/section comparisons together with their generator formula,
-build their strong monoidal structure without discarding that formula, and compose with
-the normalized ring-isomorphism and constant-scalar tensor structures. Each of the three
-tensorators and coefficient restriction preserves the pure pairing, so their composite
-does too. No finiteness or nonzero-ring hypothesis is needed. -/
+pure tensor. This assertion is independent of any scheme morphism or adjunction mate. -/
 theorem coefficientSectionTensor_normalized
     (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u})
     (c : realizationRing (Scheme.ProEt.topology T) (ULift.{u + 1} A) ≅ sectionRing A T)

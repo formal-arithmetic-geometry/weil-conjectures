@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleTraceDegreeTrace
 import Mathlib.Data.Int.GCD
 
 /-! # Rescaled trace transported through a commuting generic-point square
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 2.
-(blueprint: lem-sc-generic-primary-coarse-trace-retraction-maps)
 -/
 
 @[expose] public section
@@ -26,13 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.IsConnectedCurve
 
 /-- A finite etale generic cover of degree coprime to an annihilator gives a
-retraction after generic direct image and terminal-sheaf identification.
-
-Source: blueprint `theorem-cohomology-curves--2`, proof paragraph 2.
-Proof: Bezout rescales trace to invert degree multiplication on M. Apply generic
-pushforward and identify both composites of pushforwards using the commuting
-square. Conjugate by the terminal-sheaf isomorphism.
-(blueprint: lem-sc-generic-primary-coarse-trace-retraction-maps) -/
+retraction after generic direct image and terminal-sheaf identification. -/
 theorem exists_generic_primary_coarse_trace_maps
     {C D : Scheme.{u}} [IsIntegral C] [IsIntegral D] (π : D ⟶ C)
     (q : Spec D.functionField ⟶ Spec C.functionField) [Etale q]

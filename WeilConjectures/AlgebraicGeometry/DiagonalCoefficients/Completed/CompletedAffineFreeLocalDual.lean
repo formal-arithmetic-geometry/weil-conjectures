@@ -13,10 +13,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # Local linear tests on an affine completed free representable
-
-Source: the finite-support argument for local completed generators, with pro-affine etale
-representables in place of arbitrary representables.
-(blueprint: lem-sfb-completed-affine-free-local-dual).
 -/
 
 @[expose] public noncomputable section
@@ -28,38 +24,8 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 /-- Local linear functionals into the completed coefficient ring detect sections
 of the sheafified free module on a pro-affine etale representable.
 
-Source: the finite-support step of lem-sfb-completed-free-adic-separation, corrected
-by restricting generators to inverse limits of affine etale schemes; the canonical
-clopen-neighborhood localizations of Stacks 097C give the closed restrictions below.
-(blueprint: lem-sfb-completed-affine-free-local-dual).
-
-Proof: locally on an affine test object V, lift the section to a finite sum
-of basis maps s_j : V to U with completed coefficients a_j. Use the given small
-cofiltered presentation U = lim U_i. Each U_i is absolutely affine, hence separated
-over X, and etale over X. The graph of s_j at stage i in U_i times_X V is therefore
-open and closed. Its characteristic function, with values 0 and 1 in the completed
-ring, defines a natural map from the representable to that ring on the slice over V.
-The free-module and sheafification adjunctions extend it to a local linear test.
-
-The tests vanish by hypothesis. Their values are the sums of a_j weighted by the
-clopen equalities of stage maps. Identify completed coefficients on V with
-continuous functions from its profinite connected-component space to Z_l: each
-finite constant sheaf is the sheaf of locally constant functions, and limits are
-computed on sections. At a component c, cofilteredness supplies one stage separating
-all the finitely many distinct limit images of the basis maps at c. Its tests give
-zero for the sum of a_j in each equality class at c.
-
-There are finitely many possible equality patterns. On the closure of a pattern's
-stratum every within-class equality persists: equality of limit maps is the
-intersection of their clopen stage equalities. Every class coefficient sum also
-remains zero, by continuity into the Hausdorff ring Z_l. Restrict the affine V to
-each such closed component subset by the canonical colimit of localizations at
-idempotents of its clopen neighborhoods. These restrictions are ind-Zariski, hence
-weakly etale, and their finite family covers V. On each restriction, basis maps
-within each pattern class agree and the corresponding coefficient sum is zero.
-Thus the finite free-presheaf sum vanishes there. Sheaf separatedness gives x = 0.
-Empty support and the empty test object give the zero sum and empty covering.
-No countable intersection of arbitrary covering sieves is used. -/
+Source: the canonical
+clopen-neighborhood localizations of Stacks 097C give the closed restrictions below. -/
 theorem completedAffineFree_localDual_detect (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) :
     let R := Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)

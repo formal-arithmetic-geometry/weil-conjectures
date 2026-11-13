@@ -21,31 +21,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- The normalized finite comparison sends the actual coefficient unit to the
 geometric coefficient unit. Only the unit component is asserted, with no Chern
-arrow, supported class, or arbitrary operation on Hom sets.
-
-Source: diagonal tower trace proof (2), evaluation of the direct image;
-geometric classes proof (3), the coefficient-pullback unit normalization.
-(blueprint: lem-sfb-diagonal-trace-finite-push-unit).
-
-Proof: the completed coefficient map and the coefficient projections commute
-with inverse image, since both are induced by the unital finite quotient maps.
-The coefficient_one and coefficient_projection equations identify this ordinary
-square with the coefficientPullback normalization: each sends one to one.
-Use the exact-cone projection identity to identify unitMap followed by projection
-with the single of that ordinary quotient. The completed exact square and the
-evaluation exact square transport that
-ordinary square through their full common-unit equations. For the varying
-comparison, its equation on K-injective complexes extends to the required
-natural transformation by uniqueness of the right derived functor. The derived
-adjunction on single objects identifies the derived coefficient adjunct with
-the ordinary adjunct followed by the underived-to-derived direct-image unit.
-Thus the ordinary square gives the same derived arrow on both routes. Cancel
-the single-object comparisons and the varying isomorphism to obtain the
-displayed equation.
-The geometric coefficient arrow is the adjunction unit followed by pushforward
-of coefficientPullback.derivedIso.hom, by homEquiv_apply. The ordinary unital
-square therefore gives precisely this seed equation. The calculation uses the
-positive quotient n+1, including n=0, and is valid on empty schemes. -/
+arrow, supported class, or arbitrary operation on Hom sets. -/
 theorem diagonalTrace_finitePush_unit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) (n : ℕ) :

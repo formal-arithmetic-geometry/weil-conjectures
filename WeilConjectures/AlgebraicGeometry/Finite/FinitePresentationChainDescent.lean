@@ -238,25 +238,7 @@ on arrows are precisely the limit properties stable under the cited descent resu
 No generic point, radicial cover, field extension or fibre geometry is involved.
 
 Source: Stacks Project, Limits, Tags 01ZM, 01ZO, 07RR, 07RP, 0EUU, 0C0C and 081F;
-the diagram-descent paragraph of More on Morphisms, Tag 0GK7.
-(blueprint: lem-weil-pbc-finite-presentation-chain-descent)
-
-Proof: Descend the finite family A, B, C by 01ZM(1), together with the already
-specified model E. Descend A→B, B→C and A→E by 01ZM(2) at a common stage. Their
-structure equations agree after the limit pullback, so 01ZM(3) makes them agree
-at a common later stage. Take the coproduct of the A models; universality of
-scheme coproducts identifies its limit pullback with the supplied coproduct.
-All these models and their arrows are of finite presentation and qcqs. Apply
-finite descent 01ZO and surjectivity descent 07RR to its comparison with E,
-finite descent 01ZO and etale descent 07RP to the C structure maps, open immersion
-descent 0EUU to A→B, and smooth descent 0C0C and proper descent 081F to B→C.
-There are finitely many conditions, so a common later stage satisfies them all;
-base change preserves every condition already obtained. Pullback cancellation
-and the arrow equations supply the three object comparisons, their compatibility
-with the two chain arrows, and the cartesian square for the coproduct comparison.
-This argument also covers an empty family, since its coproduct is initial and
-all indexed conditions are vacuous.
--/
+the diagram-descent paragraph of More on Morphisms, Tag 0GK7. -/
 theorem exists_finitePresentation_chain_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -9,11 +9,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Equivalence
 
 /-! # Adjunction transport with specified comparison formulas
-
-Source: the final comparison paragraph of sk-prop-geo-p1-adjunction.proof.md,
-in literature/blueprint/latest/blueprint/part-six-operations/
-sec-constructibility-upper-shriek/sec-the-cycle-class-of-a-divisor-and-the-projective-line/
-sk-prop-geo-p1-adjunction/ (blueprint: geo-p1-adjunction-transport).
 -/
 
 @[expose] public noncomputable section
@@ -23,18 +18,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.GeoP1Adjunction
 
 set_option linter.flexible false in
-/-- Transport an adjunction across equivalences, retaining both canonical formulas.
-Source: the final comparison paragraph of sk-prop-geo-p1-adjunction.proof.md
-(blueprint: geo-p1-adjunction-transport).
-
-Proof: compose the inverse source equivalence adjunction, the given adjunction,
-and the target equivalence adjunction. The two comparison isomorphisms and the
-counits of the equivalences identify its functors with the desired functors.
-Transport along these isomorphisms. For the unit formula, use naturality of both
-comparisons and the given unit, followed by the two equivalence triangle laws.
-For the counit formula, naturality moves the equivalence units across the comparisons;
-the inverse comparison components cancel. The equivalence triangle laws and
-naturality of the original counit reduce the composite to its stated image. -/
+/-- Transport an adjunction across equivalences, retaining both canonical formulas. -/
 theorem transportAdjunction
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
     (E : C ≌ C') (F : D ≌ D')

@@ -23,16 +23,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] Functor.mapDerivedCategory
 
 /-- A local tower Chern arrow has a unique completed lift with its whole-system
-normalization.
-
-Source: diagonal trace proof (1), full faithfulness on complete objects.
-(blueprint: lem-diagonal-completed-local-chern-lift).
-
-Proof: the completed unit and the shifted completed Tate line are complete.
-The line comparison into the derived tower limit is invertible. Compose the
-unit comparison with the derived limit of the specified tower arrow and the
-inverse line comparison. Fullness on complete objects lifts this map, and
-faithfulness and invertibility of the line comparison give uniqueness. -/
+normalization. -/
 theorem diagonalCompletedLocalChern_lift (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [DiagonalTraceLocalizations l X]
     [DiagonalTraceLocalizations l S] {f : X ⟶ S}

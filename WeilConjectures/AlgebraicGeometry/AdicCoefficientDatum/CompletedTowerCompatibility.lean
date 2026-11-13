@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedTo
 import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 
 /-! # Compatibility of the specified strict four towers
-
-Source: blueprint proper base change, tower compatibility
-(blueprint: lem-weil-pbc-tower-compatibility).
 -/
 
 @[expose] public noncomputable section

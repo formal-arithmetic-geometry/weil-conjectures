@@ -18,9 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar transport of the regular coefficient unit along any morphism
-
-Source: current blueprint, diagonal tower coefficient changes, proof (1)--(2),
-regular coefficient-unit square (blueprint: lem-sfb-diagonal-scalar-regular-unit-push).
 -/
 
 @[expose] public noncomputable section
@@ -62,41 +59,7 @@ private theorem mate_transpose
 
 -- The two scalar adjunctions require conversion across dependent coefficient categories.
 /-- Scalar extension preserves the canonical regular coefficient-unit adjunct for any
-scheme morphism, through the normalized restriction/direct-image mate.
-Source: current blueprint, diagonal tower coefficient changes, proof (1)--(2),
-regular coefficient-unit square (blueprint: lem-sfb-diagonal-scalar-regular-unit-push).
-
-Proof:
-1. Write G and G' for the ordinary pushforwards, r_T for restriction, V_T and V'_T
-   for regular modules, b_T for the endpoint's semilinear map, and delta for the
-   ordinary restriction/pushforward comparison. The module-adjunction formula sends
-   the inverse monoidal unit comparison to the structural coefficient map: on the
-   pullback it is t tensor r mapped to t alpha_f(r); restricting to 1 tensor r gives
-   alpha_f, and its abelian adjunct is the unit followed by f_* alpha_f.
-   This is also `CondensedRing.homEquiv_εIso_inv_hom`. Thus m and m' have underlying
-   maps eta_f and eta'_f. Endpoint normalization fixes the underlying maps of b_T
-   to a_T. The coefficient-pushforward square and the identity underlying delta give
-   m ≫ G(b_X) = b_S ≫ r_S(m') ≫ delta, by faithfulness of the module forgetful functor.
-2. Write R_T for derived restriction, h for the given derived square, l_T for the
-   exact restriction/single comparison, and sigma for `singlePushComparison`.
-   Evaluating the full universal-unit normalization on V'_X gives
-   R_S(sigma') ≫ h ≫ D(l_X) = l_S ≫ delta[0] ≫ sigma.
-   This is `singlePushComparison_square`; `singlePushComparison_naturality` moves
-   ordinary module arrows through sigma.
-3. Under the actual scalar adjunction bijection Phi_S, the mate formula and its
-   triangle identity give Phi_S(F_S(c) ≫ tau ≫ D'(v)) =
-   c ≫ D(Phi_X(v)) ≫ h.inv. Indeed the unit-mate identity is
-   eta_S ≫ R_S(tau) = D(eta_X) ≫ h.inv, and naturality moves c and v past it.
-4. Transpose the desired equality and insert endpoint normalization
-   Phi_T(e_T) = b_T[0] ≫ l_T.inv. For c = m[0] ≫ sigma and v = e_X,
-   naturality of sigma and the ordinary square in step 1 rewrite the transpose as
-   b_S[0] ≫ r_S(m')[0] ≫ delta[0] ≫ sigma ≫ D(l_X.inv) ≫ h.inv.
-   Cancel the invertible factors in step 2 to replace the last four factors by
-   l_S.inv ≫ R_S(sigma'). Naturality of l_S at m' rewrites the result as
-   b_S[0] ≫ l_S.inv ≫ R_S(m'[0] ≫ sigma'), which is Phi_S(e_S ≫ A').
-   Injectivity of Phi_S proves the equation. Only restriction and the supplied
-   square are inverted; extension need not be exact. This includes nonflat maps,
-   zero coefficient rings, empty schemes, and arbitrary scheme morphisms. -/
+scheme morphism, through the normalized restriction/direct-image mate. -/
 theorem scalar_regular_unit_push
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

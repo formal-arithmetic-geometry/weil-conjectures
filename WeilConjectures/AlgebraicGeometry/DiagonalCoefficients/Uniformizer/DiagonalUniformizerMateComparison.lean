@@ -375,17 +375,7 @@ private theorem restrictionReflectsIsomorphisms {Λ Λ' : ScalarSixRing.{u}}
 
 /-- A finite free point resolution supplies a normalized restriction square and makes
 the scalar mate of every full-unit-normalized restriction square invertible.
-Source: current scalar-six direct-image proof, finite free
-coefficient argument and formal properties; Stacks Tag 0944.
-(blueprint: lem-diagonal-finite-resolution-scalar-mate).
-
-Proof: the finite free derived comparison identifies restricted scalar extension with
-tensoring by the specified cone. The actual mate becomes the projection map for this cone.
-Projection is invertible on each finite free term, hence on the cone. Cancel the normalized
-comparison isomorphisms and use conservativity of restriction. Full-unit normalization
-uniquely determines the restriction square. Transport the canonical integral model to R
-by the unique unit-preserving isomorphism; taking its scalar mate preserves invertibility.
--/
+Source: Stacks Tag 0944. -/
 private theorem finiteFreePointResolution_scalarSquares
     {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (P : ShortComplex (PointModules Λ))
@@ -425,15 +415,7 @@ private theorem finiteFreePointResolution_scalarSquares
   have : IsIso (gamma D a f K) := isIso_of_reflects_iso _ (restriction a Y)
   exact mate_isIso_of_gamma D a f R s K
 
-/-- A rank-one short exact point resolution supplies the normalized scalar squares.
-Source: finite free coefficient argument in the current scalar-six direct-image proof.
-(blueprint: lem-diagonal-finite-resolution-scalar-mate).
-
-Proof: identify the regular terms with their Fin 1 biproducts and apply the proved
-finite-free comparison. Its square is fixed by the full cochain-unit equation, and
-its mate is the cone projection after exact conservative restriction of scalars.
-The coefficients remain arbitrary commutative condensed rings; no arithmetic is used.
--/
+/-- A rank-one short exact point resolution supplies the normalized scalar squares. -/
 theorem rankOnePointResolution_scalarSquares
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

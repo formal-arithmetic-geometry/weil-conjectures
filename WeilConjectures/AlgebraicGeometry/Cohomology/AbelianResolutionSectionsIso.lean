@@ -13,7 +13,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2, the identification of
 resolution-section cohomology with sheaf cohomology.
-(blueprint: new-abelian-resolution-sections-iso)
 -/
 
 @[expose] public section
@@ -85,22 +84,7 @@ private noncomputable def homSectionsComplexIso {X : Scheme.{u}}
 /-- Section homology computes Ext from the constant integer sheaf, with its
 specified cocycle formula.
 
-Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2.
-(blueprint: new-abelian-resolution-sections-iso)
-
-Proof: The constant-sheaf adjunction, followed by evaluation at the generator
-of the lifted integers, is an additive bijection from morphisms out of the
-constant integer sheaf to global sections. Naturality identifies the induced
-differentials. Extend the resolution by zero to integer degrees; the Hom complex
-from the sheaf placed in degree zero then has the same cycles and boundaries as
-the section complex in every nonnegative degree. Hence this additive bijection
-induces an additive isomorphism of cohomology groups. Compose its inverse with
-InjectiveResolution.extAddEquivCohomologyClass.symm to obtain the displayed
-isomorphism. The lemma extEquivCohomologyClass_extMk computes it on representatives;
-monicity of iCycles identifies the representative with z. This formula determines
-the isomorphism, since homologyπ is surjective. The construction works in degree
-zero (there are no incoming boundaries), for the zero sheaf, and on the empty
-space as well. No cover or quasi-isomorphism hypothesis is involved. -/
+Source: Stacks Project, Tag 01EQ, proof of Lemma 20.11.2. -/
 theorem exists_abelianResolutionSectionsIso
     {X : Scheme.{u}}
     {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

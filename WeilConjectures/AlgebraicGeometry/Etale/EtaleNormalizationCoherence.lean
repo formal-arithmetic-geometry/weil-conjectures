@@ -56,17 +56,7 @@ private theorem coefficients_comp {T Z Y : Scheme.{u}} (f : T ⟶ Z) (g : Z ⟶ 
 /-- The canonical coefficient arrow commutes with successive etale inverse images.
 This equation holds for arbitrary arrows; universality and towers are not required.
 
-Source: Stacks Project, Tags 03DA, 03ED and 06YY.
-(blueprint: lem-weil-pbc-etale-normalization-coherence).
-
-Proof: identify the specified exact coefficient comparison with the source library's
-upperStarRestrictScalarsIso. Apply its ordinary composition identity and the
-exact-localization square-pasting theorem, retaining the specified equality of scheme
-maps. This gives coefficient compatibility with localIsomorphismRestrictionComp.
-Conjugate that equation by its two component isomorphisms, then use naturality on delta.
-Functoriality and cancellation give the displayed inverse-compositor equation for every
-arrow. No boundedness, coefficient finiteness, flatness or Tor-amplitude assumption
-enters this argument; zero rings, zero complexes and empty schemes are included. -/
+Source: Stacks Project, Tags 03DA, 03ED and 06YY. -/
 theorem etaleNormalization_coherence (Y : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))}

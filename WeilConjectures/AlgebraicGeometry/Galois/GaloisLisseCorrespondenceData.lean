@@ -25,8 +25,7 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseTensorScalarExtension
 /-!
 # Data of the Galois correspondence for lisse sheaves
 
-Source: Stacks Project, Tag 0DV5; the blueprint, `chap-Verdier-and-Poincare-duality`,
-`lemma-perfect-complexes-geometric-point` (blueprint: def-pod-galois-correspondence-data-e4);
+Source: Stacks Project, Tag 0DV5;
 Deligne, Weil II (1.1.1), (1.1.6).
 -/
 
@@ -43,22 +42,21 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] lisseRationalFiberFunctor
 
 /-- The invertible linear action of a representation. Source: Stacks 0DV5 (3),
-Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Weil II (1.1.6). -/
 noncomputable def galoisRepLinearAction (R : Type (u + 1)) [CommRing R]
     {G : Type u} [Group G] (X : Rep.{u + 1} R G) : G →* (X.V ≃ₗ[R] X.V) :=
   (LinearMap.GeneralLinearGroup.generalLinearEquiv R X.V).toMonoidHom.comp
     (Representation.asGroupHom (k := R) (G := G) (V := X.V) X.ρ)
 
 /-- Finite representations with open stabilizers (discrete continuity), including
-noncommutative finite coefficient rings. Source: Stacks 0DV5 (3)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+noncommutative finite coefficient rings. Source: Stacks 0DV5 (3). -/
 @[reducible] def galoisFiniteRepresentations (R : Type (u + 1)) [Ring R]
     (G : Type u) [Group G] [TopologicalSpace G] :=
   ObjectProperty.FullSubcategory
     (fun X : Rep.{u + 1} R G ↦ Finite X.V ∧ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})
 
 /-- Continuous integral representations, transported along the specified profinite model.
-Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (1.1.6). -/
 @[reducible] noncomputable def galoisIntegralRepresentations (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
@@ -68,7 +66,7 @@ Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
         ((galoisRepLinearAction _ X).comp δ.symm.toMonoidHom))
 
 /-- Continuous finite-extension representations over the same profinite model.
-Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (1.1.6). -/
 @[reducible] noncomputable def galoisCoefficientRepresentations (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
@@ -77,7 +75,7 @@ Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
       ((galoisRepLinearAction E X).comp δ.symm.toMonoidHom))
 
 /-- Algebraic l-adic representations over the same profinite model.
-Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (1.1.6). -/
 @[reducible] noncomputable def galoisAdicRepresentations (l : ℕ) [Fact l.Prime]
     (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
     {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
@@ -86,28 +84,27 @@ Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
       ((galoisRepLinearAction Q X).comp δ.symm.toMonoidHom))
 
 /-- The underlying sheaf of sets of a module sheaf. Its FLC witness is supplied in
-`galoisUnderlyingFLC`. Source: Stacks 0DV5 (3)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+`galoisUnderlyingFLC`. Source: Stacks 0DV5 (3). -/
 noncomputable def galoisUnderlyingSetSheaf {Y : Scheme.{u}}
     (R : Type (u + 1)) [Ring R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
   (sheafCompose Y.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} R))).obj F
 
 /-- The underlying set sheaf bundled with its specified FLC witness.
-Source: Stacks 0DV5 (3) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3). -/
 noncomputable def galoisUnderlyingFLC {Y : Scheme.{u}}
     (R : Type (u + 1)) [Ring R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
     (h : IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf R F)) : Y.FLC :=
   ⟨galoisUnderlyingSetSheaf R F, h⟩
 
 /-- Diagonal action on the tensor product of the underlying representation modules.
-Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (1.1.6). -/
 noncomputable def galoisTensorAction (R : Type (u + 1)) [CommRing R]
     {G : Type u} [Group G] (X Z : Rep.{u + 1} R G) :=
   Representation.tensorDiagonal R G X.V Z.V
     (galoisRepLinearAction R X) (galoisRepLinearAction R Z)
 
 /-- Scalar-extension action on the underlying representation module (`1 ⊗ σ`).
-Source: Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (1.1.6). -/
 noncomputable def galoisScalarAction (E L : Type (u + 1)) [Field E] [Field L] [Algebra E L]
     {G : Type u} [Group G] (X : Rep.{u + 1} E G) :=
   Representation.coefficientScalarExtension E L G X.V (galoisRepLinearAction E X)
@@ -115,7 +112,7 @@ noncomputable def galoisScalarAction (E L : Type (u + 1)) [Field E] [Field L] [A
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- The shared group, equivalence and fibre-comparison data of part (1).
-Source: Stacks 0DV5 (3) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3). -/
 structure GaloisLisseFiniteData
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -132,8 +129,7 @@ structure GaloisLisseFiniteData
     ModuleCat.{u + 1} Λ)
 
 /-- Clause `yonedaComparison` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisYonedaComparison
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -143,8 +139,7 @@ def galoisYonedaComparison
     Y.smallEtaleTopology.uliftYoneda.{u + 1})
 
 /-- Clause `finiteEtaleAction` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteEtaleAction
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -155,8 +150,7 @@ def galoisFiniteEtaleAction
     (d.η.hom.app P z).down⟩
 
 /-- Clause `finiteAbelian` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteAbelian
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -165,8 +159,7 @@ def galoisFiniteAbelian
   ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], Nonempty (Abelian (LisseModuleSheafCategory Y Λ))
 
 /-- Clause `finiteKernels` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteKernels
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -176,8 +169,7 @@ def galoisFiniteKernels
     (Y := Y) (Λ := Λ))
 
 /-- Clause `finiteCokernels` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteCokernels
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -187,8 +179,7 @@ def galoisFiniteCokernels
     (IsLisseModuleSheaf (Y := Y) (Λ := Λ))
 
 /-- Clause `finiteLimits` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteLimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -197,8 +188,7 @@ def galoisFiniteLimits
   ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], PreservesFiniteLimits (d.e Λ).functor
 
 /-- Clause `finiteColimits` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteColimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -207,8 +197,7 @@ def galoisFiniteColimits
   ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], PreservesFiniteColimits (d.e Λ).functor
 
 /-- Clause `finiteUnit` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteUnit
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -219,8 +208,7 @@ def galoisFiniteUnit
     (((d.e Λ).functor.obj C).obj ≅ Rep.trivial Λ G Λ))
 
 /-- Clause `finiteEvaluationAction` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteEvaluationAction
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -237,8 +225,7 @@ def galoisFiniteEvaluationAction
     (galoisUnderlyingFLC Λ F.obj h) (κ ((d.τ Λ).hom.app F z))
 
 /-- Clause `finiteTensor` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteTensor
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -255,8 +242,7 @@ def galoisFiniteTensor
     Rep.trivial R G R)
 
 /-- Clause `finiteScalarExtension` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisFiniteScalarExtension
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -295,7 +281,7 @@ attribute [local irreducible] galoisYonedaComparison
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- The simultaneous finite-coefficient correspondence and all clauses of part (1).
-Source: Stacks 0DV5 (3) (blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3). -/
 structure GaloisLisseFiniteCorrespondence
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -316,8 +302,7 @@ structure GaloisLisseFiniteCorrespondence
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
 /-- The profinite model, three equivalences and fibre comparisons of part (2).
-Source: Weil II (0.1), (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Weil II (0.1), (1.1.1), (1.1.6). -/
 structure GaloisLisseAdicData
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -342,8 +327,7 @@ structure GaloisLisseAdicData
     lisseAlgebraicFiberFunctor l Y y Q
 
 /-- Clause `rationalSheavesAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalSheavesAbelian
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -356,8 +340,7 @@ def galoisRationalSheavesAbelian
   ∀ E : Padic.FiniteCoefficientFields l Q, Nonempty (Abelian (LisseRationalSheaf l E.val Y))
 
 /-- Clause `rationalRepresentationsAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalRepresentationsAbelian
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -371,8 +354,7 @@ def galoisRationalRepresentationsAbelian
     E.val d.P d.δ))
 
 /-- Clause `rationalFiniteLimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalFiniteLimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -385,8 +367,7 @@ def galoisRationalFiniteLimits
   ∀ E : Padic.FiniteCoefficientFields l Q, PreservesFiniteLimits (d.eR E).functor
 
 /-- Clause `rationalFiniteColimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalFiniteColimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -399,8 +380,7 @@ def galoisRationalFiniteColimits
   ∀ E : Padic.FiniteCoefficientFields l Q, PreservesFiniteColimits (d.eR E).functor
 
 /-- Clause `algebraicSheavesAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicSheavesAbelian
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -413,8 +393,7 @@ def galoisAlgebraicSheavesAbelian
   Nonempty (Abelian (LisseAlgebraicSheaf l Y Q))
 
 /-- Clause `algebraicRepresentationsAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicRepresentationsAbelian
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -427,8 +406,7 @@ def galoisAlgebraicRepresentationsAbelian
   Nonempty (Abelian (galoisAdicRepresentations l Q d.P d.δ))
 
 /-- Clause `algebraicFiniteLimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicFiniteLimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -441,8 +419,7 @@ def galoisAlgebraicFiniteLimits
   PreservesFiniteLimits d.eA.functor
 
 /-- Clause `algebraicFiniteColimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicFiniteColimits
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -455,8 +432,7 @@ def galoisAlgebraicFiniteColimits
   PreservesFiniteColimits d.eA.functor
 
 /-- Clause `integralEvaluationAction` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisIntegralEvaluationAction
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -482,8 +458,7 @@ def galoisIntegralEvaluationAction
     (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) ((d.τI E).hom.app F z)))
 
 /-- Clause `rationalEvaluationAction` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalEvaluationAction
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -501,8 +476,7 @@ def galoisRationalEvaluationAction
     F.integral).obj.ρ g z))
 
 /-- Clause `integralMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisIntegralMonoidal
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -520,8 +494,7 @@ def galoisIntegralMonoidal
     ObjectProperty.ι _))
 
 /-- Clause `rationalMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalMonoidal
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -538,8 +511,7 @@ def galoisRationalMonoidal
     (Rep.{u + 1} E.val G) _ _ ((d.eR E).functor ⋙ ObjectProperty.ι _))
 
 /-- Clause `algebraicMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicMonoidal
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -555,8 +527,7 @@ def galoisAlgebraicMonoidal
     (LisseAlgebraicSheaf l Y Q) _ m (Rep.{u + 1} Q G) _ _ (d.eA.functor ⋙ ObjectProperty.ι _))
 
 /-- Clause `integralTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisIntegralTensor
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -576,8 +547,7 @@ def galoisIntegralTensor
     H)).obj.ρ g (c z))
 
 /-- Clause `integralUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisIntegralUnit
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -592,8 +562,7 @@ def galoisIntegralUnit
     (Padic.coefficientExtensionIntegers l E.val))
 
 /-- Clause `rationalTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalTensor
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -611,8 +580,7 @@ def galoisRationalTensor
     F H)).obj.ρ g (c z))
 
 /-- Clause `rationalUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalUnit
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -626,8 +594,7 @@ def galoisRationalUnit
     E.val Y)).obj ≅ Rep.trivial E.val G E.val)
 
 /-- Clause `algebraicTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicTensor
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -644,8 +611,7 @@ def galoisAlgebraicTensor
     l Y Q F H)).obj.ρ g (c z))
 
 /-- Clause `algebraicUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicUnit
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -658,8 +624,7 @@ def galoisAlgebraicUnit
   Nonempty ((d.eA.functor.obj (lisseAlgebraicUnit l Y Q)).obj ≅ Rep.trivial Q G Q)
 
 /-- Clause `algebraicModelScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisAlgebraicModelScalarExtension
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -680,8 +645,7 @@ def galoisAlgebraicModelScalarExtension
     F z))
 
 /-- Clause `integralScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisIntegralScalarExtension
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
@@ -699,8 +663,7 @@ def galoisIntegralScalarExtension
     (Padic.coefficientExtensionIntegers l L.val) G).inverse)
 
 /-- Clause `rationalScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: def-pod-galois-correspondence-data-e4). -/
+Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6). -/
 def galoisRationalScalarExtension
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]

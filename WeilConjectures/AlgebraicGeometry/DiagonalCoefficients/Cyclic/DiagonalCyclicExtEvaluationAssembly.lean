@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalExt
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicExtAssembly
 
 /-! # Ext assembly at one evaluation of strict diagonal systems
-
-Source: diagonal limit (3).
-(blueprint: lem-diagonal-cyclic-ext-evaluation-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -33,7 +30,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   Ext.comp Ext.mk₀ Ext.mapExactFunctor Functor.mapDerivedCategory shiftFunctor
 
 /-- The normalized evaluation assembly contract with abstract coefficient categories.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-ext-evaluation-assembly).
 This is the literal finite cycle, arrow and endpoint argument, not a chosen object. -/
 @[irreducible] def cyclicEvaluationAssemblySpec
     {A : Type uA} [Category.{vA} A] [Abelian A]
@@ -81,10 +77,7 @@ This is the literal finite cycle, arrow and endpoint argument, not a chosen obje
             ((DerivedCategory.singleFunctor A 0).map t.hom)⟦(m : ℤ)⟧')),
     d = goalClass
 
-/-- Normalized evaluation assembly before substituting geometric objects or classes.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-ext-evaluation-assembly).
-Proof: unfold the literal contract and use normalized generic Ext assembly for exact
-level evaluation. All coefficient categories, endpoints and classes remain parameters. -/
+/-- Normalized evaluation assembly before substituting geometric objects or classes. -/
 theorem cyclicExtAssembly_atLevel
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]

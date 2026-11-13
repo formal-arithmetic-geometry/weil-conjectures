@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszul
 
 /-! # Tensor comparison for normalized completed Koszul augmentation cones
 
-Source: Stacks Project, Tags 099M and 06YP; the signed total-tensor cone formula.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-cone-comparison).
+Source: Stacks Project, Tags 099M and 06YP.
 -/
 
 @[expose] public noncomputable section
@@ -32,36 +31,7 @@ attribute [local irreducible] completedAdicRing
 
 /-- The actual cone tower at P is tensor of its coefficient cone tower. This is
 an isomorphism of strict towers of complexes, before any localization. It imposes
-no K-flatness and asserts neither eventual vanishing nor a derived-limit result.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M), and
-sites-cohomology.tex, lemma-K-flat-quasi-isomorphism (06YP), tensor-cone calculation.
-(blueprint: lem-weil-pbc-completed-koszul-tensor-cone-comparison).
-
-Proof: put U equal to the cochain tensor unit and K_n equal to the completed
-exterior Koszul complex. At each level the source of beta at U is U tensor K_n.
-The left unitor identifies it with K_n. In its target the left unitor on modules
-identifies the ordinary quotient tensor of U with the quotient module in degree
-zero. Under these identifications beta_U is the coefficient augmentation epsilon_n.
-Its degree-zero component is fixed by the unit equation, since the degree-zero
-Koszul unit is an isomorphism; every other component is zero by the stated total
-summand equation. For any P, use the inverse associator followed by the right
-unitor to identify P tensor (U tensor K_n) with P tensor K_n. On the target use
-the same unitors and the total-tensor/single-degree-zero comparison to identify
-P tensor (U tensor Q_n[0]) with the ordinary termwise P tensor Q_n. The square
-with beta_P and P tensor beta_U commutes: on the (p,q) summand with q nonzero
-both maps vanish; on (p,0) precompose by P^p tensor the invertible Koszul unit.
-The resulting equality is the unit equation for beta_P and beta_U and naturality
-of the unitors. Joint detection by total summand inclusions proves the square.
-All comparisons commute with strict successors: associators and unitors are
-natural, and the single-degree-zero comparison is natural in the quotient map.
-Apply the natural tensor-cone isomorphism at every level to these commuting
-squares. On the shifted source component in tensor degree p its sign is (-1)^p;
-on the target component it is the identity. The differential identity follows
-from (-1)^(p+1) = -(-1)^p, including the mixed cone differential. The same sign
-occurs on both sides of every transition square, so the component isomorphisms
-assemble into the displayed tower isomorphism. This uses no boundedness of P,
-products, or regularity of the generators, and includes r=0 and the zero ring. -/
+no K-flatness and asserts neither eventual vanishing nor a derived-limit result. -/
 theorem completedKoszulTensorConeComparison
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A)

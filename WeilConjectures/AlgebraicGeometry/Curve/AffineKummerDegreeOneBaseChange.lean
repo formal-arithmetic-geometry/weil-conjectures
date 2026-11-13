@@ -17,9 +17,6 @@ import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Affine Kummer degree-one base change
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in degree
-one (blueprint: lem-sc-affine-kummer-degree-one-base-change).
 -/
 
 @[expose] public section

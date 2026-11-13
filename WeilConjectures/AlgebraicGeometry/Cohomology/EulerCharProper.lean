@@ -37,9 +37,7 @@ include k in
 scheme proper over a field `k`, only finitely many cohomology groups `H^q(X, ℱ)` are nonzero
 (`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). For
 coherent `ℱ` each `H^q(X, ℱ)` is moreover finite-dimensional over `k`
-(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`). -/
 theorem finite_setOf_nontrivial_H_of_isProper (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     {q : ℕ | Nontrivial (ℱ.H q)}.Finite := by
@@ -58,9 +56,7 @@ theorem finite_setOf_nontrivial_H_of_isProper (ℱ : X.Modules)
 scheme proper over a field `k`, only finitely many of the dimensions `h^q(X, ℱ)` are nonzero, so
 the `finsum` defining `χ(X, ℱ) = ∑ (-1)^q h^q(X, ℱ)` is a finite sum. For coherent `ℱ` the
 `h^q(X, ℱ)` are the dimensions of finite-dimensional vector spaces
-(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`). -/
 theorem finite_support_finrankH_of_isProper (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     (Function.support (ℱ.finrankH k)).Finite := by

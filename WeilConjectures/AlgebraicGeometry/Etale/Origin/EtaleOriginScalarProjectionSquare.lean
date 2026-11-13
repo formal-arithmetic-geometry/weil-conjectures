@@ -130,24 +130,7 @@ through the canonical tensor comparisons and the bounded-below direct-image mate
 The morphism is only required to be qcqs. In particular, this statement neither
 uses properness nor claims that either projection morphism is invertible.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E48,
-remark-compatible-with-diagram, and Tag 0B56, equation-projection-formula-map;
-proetale.tex, Tag 09A6.
-(blueprint: lem-fix-etale-origin-scalar-projection-square).
-
-Proof: identify the two bounded-below included mates with the ambient site
-mate. Transpose the square under the A-geometric adjunction. The ring-sheaf
-restriction counit formula and the scalar-extension mate counit formula compute
-the scalar side. Naturality and the local scalar/tensor pullback square identify
-its initial factors. Tensor-comparison naturality moves the etale geometric
-counit to the other side. The ambient site-mate counit identity and the counit
-formula for the actual etale projection identify the remaining factors.
-Injectivity of the adjunction Hom equivalence gives the displayed square.
-The local pullback square is assembled from the separate tensor-free restriction
-and extension realization cubes and the proved etale scalar/tensor pullback square.
-The bounds on E and H are used only for the two included-mate identifications;
-no bound is imposed on scalar extension of the target direct image.
--/
+Source: proetale.tex, Tag 09A6. -/
 theorem etaleOriginScalarProjectionSquare
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

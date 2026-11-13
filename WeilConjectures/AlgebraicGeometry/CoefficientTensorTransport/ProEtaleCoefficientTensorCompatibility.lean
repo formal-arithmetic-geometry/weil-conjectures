@@ -13,8 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullb
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 /-! # Compatibility of coefficient restriction with tensor pullback
-
-(blueprint: lem-pbc-coefficient-restriction-tensor-comparison-compatibility)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,10 +35,7 @@ Source: Stacks Tags 03EL and 07A4. Construct the coefficient tensor comparison b
 representative descent of the chain tensor square. On a flat K-flat pair, the three
 representative normalization equations reduce the desired square to that chain
 square. Full faithfulness of restriction to resolving representatives extends the
-square to all derived pairs.
-
-(blueprint: lem-pbc-coefficient-restriction-tensor-comparison-compatibility)
--/
+square to all derived pairs. -/
 theorem tensorComparison_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

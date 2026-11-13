@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Finite-free direct-image coefficient coherence
 
-Source: Stacks Project, Tags 0B56 and 0944
-(blueprint: lem-sp-finite-free-direct-image-coherence).
+Source: Stacks Project, Tags 0B56 and 0944.
 
 All module and derived categories are the existing ones. The auxiliary records bundle
 coefficient squares and normalized presentations of the existing scalar functors.
@@ -74,13 +73,7 @@ private theorem comparison_isIso_app_private {Z W : Scheme.{u}} (q : Z ⟶ W)
   exact isIso_of_reflects_iso f U
 
 /-- The identity equation for the actual direct-image mate.
-Source: Stacks Project, Tags 0B56 and 0D6D.
-(blueprint: lem-sp-finite-free-direct-image-coherence).
-
-Proof: whisker the balancing square by the scalar multiplication units. Balancing
-coherence identifies this square with the identity square. Whiskering commutes
-with the mates correspondence, and the mate of the identity square is the identity.
-Evaluating this equality gives the displayed equation. -/
+Source: Stacks Project, Tags 0B56 and 0D6D. -/
 private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z) (R : Coefficients q)
     (M : DerivedCategory (proEtaleRingModules Z R.source)) :
@@ -105,14 +98,7 @@ private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
   simpa [comparison, α, TwoSquare.whiskerRight, TwoSquare.whiskerLeft] using hc.symm
 
 /-- The coefficient tower equation for the actual direct-image mate.
-Source: Stacks Project, Tags 0B56 and 0D6D.
-(blueprint: lem-sp-finite-free-direct-image-coherence).
-
-Proof: horizontally paste the two balancing squares and whisker by the inverse
-target associator and source associator. Balancing coherence identifies this with
-the single square for the composite ring map. Mate pasting identifies its mate
-with the vertical paste of the two direct-image comparisons. Compatibility of
-whiskering with mates supplies the two displayed associators. -/
+Source: Stacks Project, Tags 0B56 and 0D6D. -/
 private theorem finiteFreeDirectImageTower {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S B : Coefficients q) (a : CoefficientMap R S) (b : CoefficientMap S B)
@@ -152,32 +138,7 @@ The existential scalar models only present the recorded universal derived functo
 their ordinary tensors, derived counits, units, adjunctions and associators are normalized.
 In particular neither a balancing isomorphism nor a shift structure is an extra hypothesis.
 
-Source: Stacks Tags 0B56 and 0944; shift and coefficient-tower coherences are extracted
-from the counit-tensor construction (blueprint: lem-sp-finite-free-direct-image-coherence).
-
-Proof:
-1. Construct normalized scalar models by transporting the recorded restriction models
-through their localization factorizations. Multiplication is the counit for identity
-scalars; its universal localization gives the derived unit.
-2. The inverse mate of exact restriction's factorization is the universal scalar counit
-on flat-term K-flat complexes, hence on all complexes by resolving and naturality.
-It commutes with shifts. The left adjoint of triangulated restriction is triangulated.
-3. The finite-basis column calculation gives two biproduct coordinate isomorphisms.
-Biproduct extensionality identifies the restricted comparison with the inverse
-mapBiproduct comparison followed by the direct image of the source coordinates.
-This is invertible, including for the empty biproduct. Conservative restriction
-reflects its invertibility.
-4. The canonical derived geometric adjunctions commute with their canonical shifts.
-The restriction/direct-image comparison is the mate of the termwise restriction/
-pullback comparison. Conjugating and taking its mate therefore proves the required
-shift compatibility for the specified comparison.
-5. Whisker balancing by the multiplication units. Its coherence equation identifies
-this square with the identity square. Compatibility of mates with whiskering and
-the mate of the identity square give the displayed identity equation.
-6. Horizontally paste the two balancing squares and whisker with the two scalar
-associators. Balancing coherence identifies this with the composite coefficient
-square. Mate pasting gives the displayed tower equation in the stated factor order.
--/
+Source: Stacks Tags 0B56 and 0944. -/
 theorem finiteFreeDirectImageCoherence {Z W : Scheme.{u}} (q : Z ⟶ W) :
     ∃ (sW : ScalarModel W) (sZ : ScalarModel Z),
       (∀ {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S),

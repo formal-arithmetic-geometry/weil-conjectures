@@ -30,8 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Invertibility of the canonical projection morphism, with the endpoint calculations
-kept inside a named proposition. Source: proper-base-change-finite, clause (3).
-(blueprint: lem-sfb-finite-coefficient-projection-encoding). -/
+kept inside a named proposition. -/
 def finiteCoefficientProjectionIsIso
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -62,9 +61,7 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Invertibility of the ordinary fixed-scalar projection, with its endpoints hidden.
-Source: the ordinary right-adjoint projection construction.
-(blueprint: lem-sfb-finite-coefficient-projection-encoding). -/
+/-- Invertibility of the ordinary fixed-scalar projection, with its endpoints hidden. -/
 def ordinaryFiniteCoefficientProjectionIsIso
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     {X Y : Scheme.{u}} (p : X ⟶ Y)
@@ -115,31 +112,8 @@ attribute [local irreducible] CategoryTheory.Adjunction.rightAdjointProjectionMa
 
 /-- Normalized coefficient encoding preserves and reflects the canonical projection property.
 
-Source: blueprint sk-thm-sfb-proper-base-change-finite.proof.md, step 8;
-lem-sf-finite-discrete-encoding-tensor-tor, tensor comparison; Stacks Tags 03D3,
-08BJ, 08FZ and 0F0G, together with the adjunction mate defining projection.
-(blueprint: lem-sfb-finite-coefficient-projection-encoding).
-
-Proof:
-1. Scalar restriction along the inverse isomorphism, followed by the normalized
-section-action equivalence, identifies the two module tensors by their universal
-property for balanced bilinear maps. It carries a pure tensor to the same pure tensor.
-The comparison respects the associator and unitors.
-2. Apply these maps termwise to K-flat resolutions and totalize with the usual signs.
-Exact equivalences preserve and reflect acyclicity and K-flatness, giving the derived
-tensor comparisons on the specified unbounded derived categories.
-3. Direct image is identified by the identity on sections over each fibre product.
-Its adjoint pullback comparison satisfies the unit and counit equations. On pure
-tensors its tensor comparison is the comparison of step 1; step 2 gives the same
-equality after deriving.
-4. Transpose the image of the internal projection under the ordinary geometric
-adjunction. The counit equation and tensor equation identify its transpose with the
-ordinary counit tensored with the identity, after the source and target comparisons.
-Injectivity of the adjunction Hom equivalence identifies the projection arrows.
-The two endpoint comparison isomorphisms give an arrow isomorphism. The encoding
-is an equivalence, so it preserves and reflects invertibility. Conjugation by the
-endpoint isomorphisms therefore gives the stated equivalence of invertibility.
-No properness, boundedness or etale origin is used in this change of presentation. -/
+Source: Stacks Tags 03D3,
+08BJ, 08FZ and 0F0G, together with the adjunction mate defining projection. -/
 theorem finiteCoefficientProjectionEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

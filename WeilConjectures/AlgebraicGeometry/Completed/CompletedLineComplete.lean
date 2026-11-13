@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Ringed.Site.RingedSitePerfectDuality
 
 /-! # Completeness of a locally free completed-coefficient line
 
-Source: coefficient-twist blueprint, proof step 11; Bhatt--Scholze, Section 6.5.
-(blueprint: lem-pur-completed-line-complete)
+Source: Bhatt--Scholze, Section 6.5.
 -/
 
 @[expose] public section
@@ -103,22 +102,8 @@ private theorem sf_complete_iso (l : ℕ) [Fact l.Prime]
 
 /-- A locally free completed-coefficient line in degree zero is derived complete.
 
-Source: coefficient-twist blueprint, proof step 11; Bhatt--Scholze, Sections 3.4
-and 6.5; Stacks Project, Tag 08JJ.
-(blueprint: lem-pur-completed-line-complete)
-
-Proof: use a local rank-one trivialization to represent the line by a bounded
-single complex of regular modules on a covering sieve. In degree zero the
-regular module is the product indexed by Fin 1; in every other degree both the
-term and the product indexed by Fin 0 are zero. These splittings give a strict
-perfect coefficient package. Perfect duality identifies the line with its
-bidual relative to the regular coefficient object. That regular object is
-complete by the constant-coefficient theorem. Internal Hom into a complete
-object is complete, so the bidual is complete. Transport its actual augmented
-reduction triangle along the bidual isomorphism, using naturality of the
-reduction transitions and units. Finally the proved comparison of the intrinsic
-and finite-field presentations gives exactly IsDerivedComplete for any supplied
-datum. This uses no invertibility or nonemptiness assumption on the base. -/
+Source: Bhatt--Scholze, Sections 3.4
+and 6.5; Stacks Project, Tag 08JJ. -/
 theorem completedLine_complete (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : SheafOfModules.{u + 1}

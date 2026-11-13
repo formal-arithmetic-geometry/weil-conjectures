@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicFunctorCalculus
 
 /-! # Finite scalar evaluation functor and its endpoints
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-finite-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +32,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   diagonalFiniteToPadic cyclicLine cyclicLineMap derivedScalars
   geoCartierConstant geoCartierLine
 
-/-- Explicit finite evaluation functor or endpoint composite.
-Source: coefficient changes (1), scalar quotient and finite realization.
-(blueprint: def-diagonal-cyclic-finite-evaluation). -/
+/-- Explicit finite evaluation functor or endpoint composite. -/
 def cyclicFiniteEvaluationFunctor
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -47,9 +42,7 @@ def cyclicFiniteEvaluationFunctor
   derivedScalars (cyclicMap l n) (diagonalSurface Y) ⋙ p.eW.F.mapDerivedCategory ⋙
     (diagonalFiniteToPadic l n (diagonalSurface Y)).mapDerivedCategory
 
-/-- Explicit finite evaluation functor or endpoint composite.
-Source: coefficient changes (1), scalar quotient and finite realization.
-(blueprint: def-diagonal-cyclic-finite-evaluation). -/
+/-- Explicit finite evaluation functor or endpoint composite. -/
 def cyclicFiniteEvaluationSource
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -66,9 +59,7 @@ def cyclicFiniteEvaluationSource
     p.eW.F (diagonalFiniteToPadic l n (diagonalSurface Y))
     p.supported.iso.inv p.sourceComparison.iso
 
-/-- Explicit finite evaluation functor or endpoint composite.
-Source: coefficient changes (1), scalar quotient and finite realization.
-(blueprint: def-diagonal-cyclic-finite-evaluation). -/
+/-- Explicit finite evaluation functor or endpoint composite. -/
 def cyclicFiniteEvaluationTarget
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ)
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

@@ -21,7 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 /-! # Constructible preservation with the original adic coefficient datum
 
 The coefficient ring has the same universe as the module sheaves, with no lift or
-replacement of the datum. Source: Stacks 09C7 and 09C2; blueprint preservation proposition.
+replacement of the datum. Source: Stacks 09C7 and 09C2.
 -/
 
 -- After pruning, this module only keeps private declarations.

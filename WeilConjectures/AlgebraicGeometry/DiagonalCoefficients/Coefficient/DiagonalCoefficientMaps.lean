@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Normalized diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-maps).
-
 ## Main definitions
 
 - `integralMap`, `zlLine`: the actual integral coefficient map and base line.
@@ -34,49 +31,42 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 
 /-- The bottom finite subextension, used only to write the actual Z_l Tate line
-using the published root-limit construction. Source: blueprint coefficient convention
-(blueprint: def-sfb-diagonal-coefficient-maps). -/
+using the published root-limit construction. -/
 abbrev bottomField : PadicAlgCl.FiniteIntermediateField l := ⟨⊥, inferInstance⟩
 
-/-- The actual condensed inclusion Z_l to O_E. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-maps). -/
+/-- The actual condensed inclusion Z_l to O_E. -/
 def integralMap (E : PadicAlgCl.FiniteIntermediateField l) :
     Profinite.continuousMapRingObj.{u} ℤ_[l] ⟶ Profinite.padicIntegersRingObj.{u} l E.1 :=
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (Profinite.padicIntCondensedRingToPadicIntegersCondensedRing l E.1)
 
-/-- The inclusion is a map of ring objects. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-maps). -/
+/-- The inclusion is a map of ring objects. -/
 instance integralMap_isMonHom (E : PadicAlgCl.FiniteIntermediateField l) :
     IsMonHom (integralMap.{u} l E) := by
   dsimp only [integralMap]
   infer_instance
 
 /-- The base-field integral Tate line, retaining the actual root-limit module and
-restricting along the specified Z_l to O_Q_l identification. Source: blueprint
-coefficient convention (blueprint: def-sfb-diagonal-coefficient-maps). -/
+restricting along the specified Z_l to O_Q_l identification. -/
 abbrev zlLine (X : Scheme.{u}) : Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X :=
   (Mod.comap (coefficientMap (integralMap l (bottomField l)) X)).obj
     (spIntegralTwist X l (bottomField l))
 
 /-- The root-limit map for Z_l to O_E, fixed by all root projections in the
-published integral transition. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-maps). -/
+published integral transition. -/
 def integralLineMap (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) :
     (zlLine l X).X ⟶ (spIntegralTwist X l E).X := by
   change (spIntegralTwist X l (bottomField l)).X ⟶ (spIntegralTwist X l E).X
   exact spIntegralTwistMap X l (E := bottomField l) (F := E)
     (bot_le : (⊥ : IntermediateField ℚ_[l] (PadicAlgCl l)) ≤ E.1)
 
-/-- The localization map on the Tate line is the actual balanced-tensor unit.
-Source: blueprint clause 2 (blueprint: def-sfb-diagonal-coefficient-maps). -/
+/-- The localization map on the Tate line is the actual balanced-tensor unit. -/
 def rationalLineMap (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) :
     (spIntegralTwist X l E).X ⟶ (spRationalTwist X l E).X :=
   Mod.extendUnitHom (padicIntegersToPadicSubfield X l E) (spIntegralTwist X l E)
 
-/-- The finite-field leg in the sheafified colimit Tate line. Source: blueprint
-clause 2 (blueprint: def-sfb-diagonal-coefficient-maps). -/
+/-- The finite-field leg in the sheafified colimit Tate line. -/
 def closureLineMap (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) :
     (spRationalTwist X l E).X ⟶ (spQbarTwist X l).X :=
   colimit.ι (spRationalTwistDiagram X l) E

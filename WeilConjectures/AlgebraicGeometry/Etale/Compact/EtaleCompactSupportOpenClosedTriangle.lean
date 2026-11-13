@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenClosedRecollement
 
 /-!
 # Open-closed localization for relative etale compact support
-
-Source: Stacks Project, Tag 0GKP, `lemma-relative-triangle-associated-to-open`
-(blueprint: lem-weil-pbc-etale-compact-support-open-closed-triangle).
 -/
 
 @[expose] public section
@@ -35,8 +32,7 @@ with the specified compactification-dependent bounded-below pushforwards, viewed
 ambient derived category. Since `D⁺` is strictly full and triangulated, this also specifies
 its triangle in `D⁺`.
 
-Source: Stacks Project, Tag 0GKP
-(blueprint: lem-weil-pbc-etale-compact-support-open-closed-triangle).
+Source: Stacks Project, Tag 0GKP.
 
 Proof plan: (1) The quasi-compact open `U` and closed complement `Z` are qcqs, by the
 quasi-separated affine-cover criterion and qcqs permanence. The open immersion is separated

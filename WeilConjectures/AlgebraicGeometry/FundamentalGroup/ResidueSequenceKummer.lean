@@ -77,7 +77,7 @@ variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k))
   [NeZero N] [NeZero (N : k)] [HasEnoughRootsOfUnity k N] [ConnectedSpace U]
 
 -- instance search through `SeparableClosure` is slow
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: residues of Kummer torsors.
+/-- Residues of Kummer torsors.
 
 For a unit `g` on a nonempty connected open `U` of `C` and a primitive `N`-th root of unity `ζ`
 of `k`, the Kummer torsor of `N`-th roots of `g` has residue `ord_z g mod N` against `ζ` at

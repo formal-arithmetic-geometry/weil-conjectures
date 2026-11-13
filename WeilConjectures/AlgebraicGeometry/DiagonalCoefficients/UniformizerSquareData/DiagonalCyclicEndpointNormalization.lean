@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.RootEndpointTransp
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRealizedEndpointTranspose
 
 /-! # Cyclic endpoint normalization before and after shifting
-
-Source: diagonal tower coefficient changes (1), normalized scalar extension.
-(blueprint: lem-diagonal-cyclic-endpoint-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -49,10 +46,8 @@ attribute [local semireducible] scalarAdjunction ScalarCompatibility.scalarAdjun
   finiteAdjunction cyclicAdjunction quotientAdjunction
 attribute [local semireducible] cyclicEndpoints quotientEndpoints
 
-/-- The explicit collected-right adjunction for this coefficient route.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-cyclic-endpoint-normalization).
-Construction: Construct it from the actual scalar and finite adjunctions. -/
+/-- The explicit collected-right adjunction for this coefficient route. Construction: Construct it
+from the actual scalar and finite adjunctions. -/
 def cyclicAdjunctionAux
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -63,10 +58,7 @@ def cyclicAdjunctionAux
       (Functor.mapDerivedCategoryCompIso q.cyclic.eW.F.asEquivalence.inverse
         (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y))))
 
-/-- The explicit route adjunction respects the prescribed shifts.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-cyclic-endpoint-normalization).
-Proof: Compose the scalar and finite shift compatibilities and collect restrictions. -/
+/-- The explicit route adjunction respects the prescribed shifts. -/
 theorem cyclicAdjunction_commShift
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -87,10 +79,8 @@ theorem cyclicAdjunction_commShift
     (Functor.mapDerivedCategoryCompIso q.cyclic.eW.F.asEquivalence.inverse
       (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y)))) hcomp
 
-/-- The realized degree-zero endpoint of this coefficient route.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-cyclic-endpoint-normalization).
-Construction: Apply exact finite realization to the scalar endpoint and line isomorphism. -/
+/-- The realized degree-zero endpoint of this coefficient route. Construction: Apply exact finite
+realization to the scalar endpoint and line isomorphism. -/
 def cyclicEndpointZero
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -100,10 +90,7 @@ def cyclicEndpointZero
     (q.cyclic.eW.F.mapDerivedCategorySingleFunctor 0).hom.app _ ≫
       (DerivedCategory.singleFunctor _ 0).map q.cyclic.lineEndpoint.iso.hom
 
-/-- The degree-zero endpoint transposes to its ordinary root insertion.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-cyclic-endpoint-normalization).
-Proof: Compose the scalar endpoint normalizations with the finite equivalence transpose. -/
+/-- The degree-zero endpoint transposes to its ordinary root insertion. -/
 theorem cyclicEndpointZero_transpose
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}

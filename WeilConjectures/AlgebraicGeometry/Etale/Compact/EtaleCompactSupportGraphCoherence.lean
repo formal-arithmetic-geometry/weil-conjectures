@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Coherence of the specified compact-support graph map
 
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C
-(blueprint: lem-asd-compact-support-graph-coherence).
+Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C.
 -/
 
 @[expose] public section
@@ -397,32 +396,7 @@ private theorem graph_derived_refinement
     (lowerStarComp (ModuleCat.{u + 1} A) r.hom d.g c.g r.hom_g.symm) hs K
 
 /-- Base change, proper refinement and identity for the specified graph comparison.
-Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C.
-(blueprint: lem-asd-compact-support-graph-coherence).
-
-Proof:
-1. Use the existing forward graph-comparison exchange equation for an arbitrary base
-change. Identify its comparison with the specified graph-derived map, and cancel the
-invertible graph comparisons to obtain the equation for their inverses.
-2. The inclusion from open extension by zero into direct image is monic: its pullback
-on the open is invertible, while its pullback on the closed complement has zero
-source. The kernel therefore vanishes. Direct image preserves this monomorphism.
-For a proper refinement, postcompose the two graph maps with this inclusion. Graph
-normalization and associativity of direct-image composition identify the results.
-Cancel the monomorphism to obtain the forward sheaf refinement equation.
-3. Normalize the derived graph component on a homotopy representative using the exact
-source factorization, the sheaf graph map and the right-derived unit. In its composite
-cancel the intermediate exact factors, move the unit by naturality, and apply the
-existing derived direct-image composition factorization and unit formula. The sheaf
-refinement equation then gives derived refinement. Localization extends the equality
-to all derived objects; cancel the invertible graph maps for the required orientation.
-4. For the proper identity compactification, sheaf normalization, monicity, and the
-right unit law for direct image identify the graph map with the inverse direct-image
-identity comparison. Its derived unit cancels against the exact-derived comparison.
-The exact identity factorization equation and a degreewise homotopy cancellation
-identify the remaining map with the identity. Localization and cancellation give
-exactly the specified identityEtaleCompactSupportComparison.
-These equalities hold on all unbounded complexes, with empty fibres allowed. -/
+Source: SGA 4 XVII 5.2.2, 6.2.11; Stacks Project Tags 03S6, 0F7B and 0F7C. -/
 theorem etaleCompactSupportGraph_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     EtaleCompactSupportCoherence A (canonicalEtaleCompactSupportCore A) := by

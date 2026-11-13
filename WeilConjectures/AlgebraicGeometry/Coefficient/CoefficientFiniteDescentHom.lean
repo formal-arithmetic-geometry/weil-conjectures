@@ -394,10 +394,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedStratumModelInductionSt
 /-!
 # Finite descent of derived coefficient morphisms
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sfb-qlbar-two-colimit/sk-lem-coefficient-finite-descent-hom.md and its proof
-(blueprint: lemma-descent-finite-coefficient-field--1).
-
 All coefficient maps, adjunctions, and tensor comparisons below are the recorded
 constructions. The Hom-colimit assertion is expressed by surjectivity on finite
 representatives and equality after passing to a common finite field.
@@ -417,8 +413,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 
 /-- Transport a shifted morphism by scalar extension and the given canonical tensor
-comparison. Source: blueprint coefficient-finite-descent-hom, proof paragraph (1),
-tensor transitivity (blueprint: lemma-descent-finite-coefficient-field--1). -/
+comparison. -/
 def coefficientDescentDerivedHomMap
     {A : Type uA} [Category.{vA} A]
     {B : Type uB} [Category.{vB} B] [HasShift B ℤ]
@@ -430,9 +425,7 @@ def coefficientDescentDerivedHomMap
     (α.hom.app D)⟦r⟧'
 
 /-- The coefficient-inclusion map on restricted extensions is the adjunction mate
-of tensor transitivity and the old counit. This fixes the actual transition map.
-Source: blueprint coefficient-finite-descent-hom, proof paragraph (1), unit and counit
-formulas (blueprint: lemma-descent-finite-coefficient-field--1). -/
+of tensor transitivity and the old counit. This fixes the actual transition map. -/
 def coefficientDescentDerivedRestrictionMap
     {A : Type uA} [Category.{vA} A]
     {B : Type uB} [Category.{vB} B] [HasShift B ℤ]
@@ -500,9 +493,7 @@ private theorem adjunction_comparison_naturality {A : Type uA} [Category.{vA} A]
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- The specified finite-field extension map on shifted derived Hom.
-Source: blueprint coefficient-finite-descent-hom, clauses (1) and (3)
-(blueprint: lemma-descent-finite-coefficient-field--1). -/
+/-- The specified finite-field extension map on shifted derived Hom. -/
 def coefficientDescentHomTransition
     {E F G : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (k : F ≤ G)
     (C D : DerivedCategory
@@ -515,9 +506,7 @@ def coefficientDescentHomTransition
   coefficientDescentDerivedHomMap (derivedExtendScalarsSubfield X ℓ k)
     (condensedCoefficientCompIso X ℓ h k) C D r f
 
-/-- The specified extension-to-algebraic-closure map on shifted derived Hom.
-Source: blueprint coefficient-finite-descent-hom, clauses (1) and (3)
-(blueprint: lemma-descent-finite-coefficient-field--1). -/
+/-- The specified extension-to-algebraic-closure map on shifted derived Hom. -/
 def coefficientDescentHomToAlgCl
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (C D : DerivedCategory
@@ -530,9 +519,7 @@ def coefficientDescentHomToAlgCl
   coefficientDescentDerivedHomMap (derivedExtendScalarsToPadicAlgCl X ℓ F)
     (derivedExtendScalarsCompIso X ℓ h) C D r f
 
-/-- The finite-stage transition on restricted shifted derived extensions.
-Source: blueprint coefficient-finite-descent-hom, clause (1), transition identity
-(blueprint: lemma-descent-finite-coefficient-field--1). -/
+/-- The finite-stage transition on restricted shifted derived extensions. -/
 def coefficientDescentRestrictionTransition
     {E F G : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (k : F ≤ G)
     (D : DerivedCategory
@@ -547,9 +534,7 @@ def coefficientDescentRestrictionTransition
     (finiteCoefficientDerivedAdjunction X ℓ (h.trans k))
     (condensedCoefficientCompIso X ℓ h k) D r
 
-/-- The algebraic-closure transition on restricted shifted derived extensions.
-Source: blueprint coefficient-finite-descent-hom, clause (1), transition identity
-(blueprint: lemma-descent-finite-coefficient-field--1). -/
+/-- The algebraic-closure transition on restricted shifted derived extensions. -/
 def coefficientDescentRestrictionToAlgCl
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (D : DerivedCategory
@@ -564,9 +549,7 @@ def coefficientDescentRestrictionToAlgCl
     (finiteCoefficientDerivedAlgClAdjunction X ℓ E)
     (derivedExtendScalarsCompIso X ℓ h) D r
 
-/-- The poset of finite fields containing E, lifted to the coefficient universe.
-Source: blueprint coefficient-finite-descent-hom, proof paragraph (2)
-(blueprint: lemma-descent-finite-coefficient-field--1). -/
+/-- The poset of finite fields containing E, lifted to the coefficient universe. -/
 def coefficientDescentFields (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     AsSmall.{u + 1} (Under E) ⥤ PadicAlgCl.FiniteIntermediateField ℓ :=
   (AsSmall.equiv (C := Under E)).inverse ⋙ Under.forget E
@@ -644,15 +627,11 @@ private lemma descentHomToAlgCl_injective
 
 /-- Derived coefficient Hom adjunction, its coefficient naturality, the uniformly
 bounded-below coefficient tensor colimit, and bijectivity on finite representatives.
-Source: blueprint main-20261015, lemma-descent-finite-coefficient-field,
-sk-lem-coefficient-finite-descent-hom.md, clauses (1)--(3)
-(blueprint: lemma-descent-finite-coefficient-field--1).
 
 Proof, following the ten DAG steps:
 1. On a small skeleton of the pro-etale site, sheaf tensor is closed and preserves
-colimits (lemma-descent-finite-coefficient-field--1). The extension/restriction adjunction of
-lemma-descent-finite-coefficient-field--1 has exact restriction; prose-03-27 and
-prose-03-27 make extension exact as well.
+colimits. The extension/restriction adjunction of lemma-descent-finite-coefficient-field--1 has
+exact restriction; prose-03-27 and prose-03-27 make extension exact as well.
 2. Lift this adjunction to complexes by lemma-descent-finite-coefficient-field--1.
 Exact functors preserve quasi-isomorphisms by
 situation-conventions. Apply lemma-descent-finite-coefficient-field--1:
@@ -666,9 +645,8 @@ them with definition-sp-scalar-extension--2 and the recorded finite comparison.
 5. The inclusion map sends the old unit to the new one. Counit naturality gives
 the two displayed Hom-naturality identities, also for the algebraic closure.
 6. The finite fields containing E form a nonempty directed poset, by finite
-composita (prose-02-50). The ring cocone of
-lemma-comparison-completed-coefficients remains colimiting on this tail: extend a cocone on
-the tail to every finite H via EH. All legs remain the actual inclusions.
+composita. The ring cocone of lemma-comparison-completed-coefficients remains colimiting on this
+tail: extend a cocone on the tail to every finite H via EH. All legs remain the actual inclusions.
 7. Use lemma-descent-finite-coefficient-field--1 and
 lemma-descent-finite-coefficient-field--1 to identify this same cocone as a
 colimit of E-module sheaves.
@@ -683,8 +661,7 @@ representative of D.
 diagram of steps 6--8, and degree r. The identities of step 5 identify its
 comparison with coefficient extension on Hom. A filtered-colimit element is a
 finite representative, and equality is equality at a common later stage. Thus
-the last two clauses say exactly that this canonical comparison is bijective.
--/
+the last two clauses say exactly that this canonical comparison is bijective. -/
 theorem coefficient_finite_descent_hom
     {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ)
     [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

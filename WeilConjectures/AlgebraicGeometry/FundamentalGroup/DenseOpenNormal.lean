@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1), second formulation: a connected
+/-- Part (1), second formulation: a connected
 finite étale cover of a connected locally noetherian normal scheme `X` stays connected over a
 nonempty open `U`. The cover is normal, being étale over `X`, hence irreducible, and its
 restriction to `U` is a nonempty open of it. -/
@@ -63,7 +63,7 @@ variable [ConnectedSpace U] [ConnectedSpace X] {Ω Ω' : Type u} [Field Ω] [IsS
   (GX : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX]
   [∀ P, MulAction GX ((fiber t).obj P)] [IsFundamentalGroup (fiber t) GX]
 
-/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1): **the fundamental group of a
+/-- Part (1): **the fundamental group of a
 nonempty open of a connected normal scheme surjects onto that of the scheme.** For a connected
 locally noetherian scheme `X` whose local rings are integrally closed domains, an open immersion
 `j : U ⟶ X` with `U` nonempty and a path `τ` between the fibre functors, the map

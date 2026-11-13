@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientPul
 /-! # Continuous coefficient pullback for arbitrary scheme morphisms
 
 Source: Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation detects equality of rational coefficient sections.
-Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 theorem rationalCoefficientValue_ext (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (V : X.ProEtᵒᵖ)
@@ -43,8 +41,7 @@ theorem rationalCoefficientValue_ext (l : ℕ) [Fact l.Prime] (E : Type u)
   exact ULift.down_injective (hab x)
 
 /-- Continuous precomposition for the spectral norm, with the original field structure.
-Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 noncomputable def rationalContinuousPullback
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -55,8 +52,7 @@ noncomputable def rationalContinuousPullback
   exact continuousCoefficientPullback (ULift.{u + 1, u} E) h
 
 /-- The spectral precomposition map has its specified adjunct.
-Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso) -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 theorem rationalContinuousPullback_normalized
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -67,16 +63,7 @@ theorem rationalContinuousPullback_normalized
 
 /-- The normalized integral and rational continuous coefficient pullbacks are
 isomorphisms along every scheme morphism.
-Source: Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
-
-Proof. The finite constant quotient tower is preserved by inverse image, and
-its limit is the continuous integral coefficient sheaf. Projectionwise reduction
-identifies its comparison with the canonical pullback. To obtain a rational
-inverse, pull back integral inclusion through the integral inverse. Constants
-show that this map inverts the uniformizer. The localization universal property
-extends it uniquely to rational coefficients. Naturality of inclusion and
-uniqueness on integral numerators prove the two inverse equations. -/
+Source: Bhatt--Scholze, Lemma 4.2.12 and Lemma 6.8.2. -/
 theorem continuousCoefficientPullback_isIso_of_finiteExtension
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -190,9 +177,7 @@ theorem continuousCoefficientPullback_isIso_of_finiteExtension
   exact ⟨v, hleft, hright⟩
 
 /-- The spectral rational coefficient pullback is invertible.
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2.
-(blueprint: lem-weil-pbc-continuous-coefficient-general-pullback-isIso)
-Proof: apply the preceding finite-extension pullback theorem to the spectral norm. -/
+Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2. -/
 instance rationalContinuousPullback_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

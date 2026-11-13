@@ -19,10 +19,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.Fini
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientRestriction
 
 /-! # Finite quotient coefficient models and normalized functor comparisons
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-uniformizer-finite-models).
- -/
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -195,30 +192,7 @@ private theorem finiteSource_of_pushSquare
 
 set_option linter.unusedVariables false in
 /-- Finite coefficient models, endpoints and direct-image squares, without any
-assertion about a cycle class or a trace arrow.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), expected finite reductions.
-(blueprint: lem-diagonal-uniformizer-finite-models).
-
-Proof: The quotient is a finite discrete ring. Identify its condensed ring with
-its sheafified constant ring using the unital constant-function map, and pull
-this comparison to each scheme. Transport internal modules across that ring
-isomorphism, then use the equivalence with sheaves of modules over the ordinary
-quotient ring. Retain the underlying-sheaf comparison and the regular-module
-unit; unitality gives its normalization. The integral twist is the inverse
-limit of its coefficient/root tensor systems. Since l is invertible, the root
-tower is a locally free rank-one Tate module. Extension to the quotient killed
-by l^(n+1) is its n-th finite root line tensored with the quotient. The integral
-root projections and the kernel inclusions in the supplied FiniteRoots fix the
-line endpoints, including the sign. Use the ordinary direct-image comparison
-on underlying sheaves to identify the supported coefficient source. Its unit
-component gives exactly the displayed source normalization. For q, the same
-sectionwise realization commutes with ordinary direct image, with the displayed
-underlying-sheaf normalization. No right derivation is part of this statement.
-This constructs only coefficient and ordinary-functor comparisons,
-independently of all completed classes, scalar-compatible diagrams and traces.
-The exponent is n+1 throughout, also for n=0; no unramifiedness is assumed. -/
+assertion about a cycle class or a trace arrow. -/
 theorem diagonalUniformizer_finiteModels
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

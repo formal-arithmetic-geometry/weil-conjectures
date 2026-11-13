@@ -41,7 +41,6 @@ bounded finite-free tensor commutes with the derived limit; the completion is de
 complete, the completion unit `kappa` becomes invertible after every finite reduction, and
 its invertibility characterizes derived completeness; the completion is computed by the
 Roos model of any K-flat representative.
-Source: blueprint Assertions 5--6 (blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -72,12 +71,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The specified right derived inverse limit has the normalized strict Roos model.
-Source: blueprint Notation 1, Stacks Tag 0941
-(blueprint: det-pbc-complete-derived-completion).
-Proof: use the exact-products comparison for the integral module category. Its
-comparison with ordinary inverse limit is invertible on K-injective towers by the
-construction of the total right derived functor. Reverse the resulting comparison. -/
+/-- The specified right derived inverse limit has the normalized strict Roos model. -/
 theorem roosComparison (T : Scheme.{u}) :
     Nonempty (DerivedCategory.Q ⋙ rlim l E T ≅ ExactProductsRoos.fibre ⋙ DerivedCategory.Q) := by
   let : CountableAB4Star (AdicCompletion.Modules l E T) :=
@@ -96,12 +90,7 @@ theorem roosComparison (T : Scheme.{u}) :
   exact ⟨e.symm⟩
 
 /-- The constant-tower functor on derived categories is fully faithful, so the
-canonical constant-limit unit is invertible.
-Source: blueprint Notation 4 (blueprint: det-pbc-complete-derived-completion).
-Proof: evaluation at the terminal level is exact and left adjoint to the constant
-functor. Derive this adjunction. The composite constant then evaluation is the identity,
-so the derived constant functor is fully faithful. The unit of any adjunction with
-fully faithful left adjoint is invertible, in particular the specified limit adjunction. -/
+canonical constant-limit unit is invertible. -/
 theorem constantLimitUnit_isIso (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) :
     IsIso ((constantLimitAdjunction l E T).unit.app M) := by
@@ -119,11 +108,7 @@ theorem constantLimitUnit_isIso (T : Scheme.{u})
   let := h.faithful
   infer_instance
 
-/-- Scalar powers are respected by the induced action on every integral module.
-Source: blueprint Notation 3 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: the scalar action is the composite of pullback, conjugation by the regular-module
-comparison, tensoring on the left, and conjugation by the left unitor. Each is a monoid
-homomorphism on endomorphisms, so their composite preserves powers. -/
+/-- Scalar powers are respected by the induced action on every integral module. -/
 theorem scalarOnModules_pow (T : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (k : ℕ) :
     DerivedNakayama.scalarOnModules l E T (d ^ k) =
@@ -136,15 +121,7 @@ theorem scalarOnModules_pow (T : Scheme.{u})
   let F₄ := (leftUnitorNatIso A).conj.toMonoidHom
   exact congrArg End.asHom ((F₄.comp (F₃.comp (F₂.comp F₁))).map_pow d k)
 
-/-- The derived reduction tower is triangulated with its totalization shift.
-Source: blueprint Notation 3 and Assertion 6
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: the strict functor is the cone of a termwise natural transformation between
-additive functors. Its two-column totalization is exact on homotopy categories.
-The factorization through complexes agrees with the specified localized functor.
-Fully faithful precomposition with the homotopy quotient gives the comparison on
-homotopy categories. Transport its shift through localization and descend exactness
-using the essential surjectivity of localization on arrows. -/
+/-- The derived reduction tower is triangulated with its totalization shift. -/
 theorem red_triangulated (T : Scheme.{u}) :
     ∃ (_shift : (red l E T).CommShift ℤ), (red l E T).IsTriangulated := by
   let A := AdicCompletion.Modules l E T
@@ -305,14 +282,7 @@ private theorem tensorTower_realization (T : Scheme.{u})
   exact ⟨r ≪≫ (curriedTensor (DerivedCategory B)).flip.mapIso
     ((constant l E T).mapDerivedCategoryFactors.app P).symm⟩
 
-/-- Bounded finite-free tensor commutes naturally with derived inverse limit.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: form functorial flat covers of towers levelwise, so the pointwise monoidal
-structure has its derived tensor. The exact constant tower functor is strong monoidal
-on derived categories. A bounded finite-free complex is dualizable. The projection
-formula for its constant/limit adjunction is therefore an isomorphism. The K-flat
-comparison identifies derived tensor by its constant tower with the specified
-localized strict total tensor, giving the asserted natural comparison. -/
+/-- Bounded finite-free tensor commutes naturally with derived inverse limit. -/
 theorem tensorLimitIso (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
     (hb : ∃ a b : ℤ, P.IsStrictlyGE a ∧ P.IsStrictlyLE b)
@@ -352,12 +322,7 @@ theorem tensorLimitIso (T : Scheme.{u})
   obtain ⟨r⟩ := tensorTower_realization l E T P hb hf
   exact ⟨asIso p ≪≫ Functor.isoWhiskerRight r.symm (rlim l E T)⟩
 
-/-- The finite scalar tensor functor is the restricted derived reduction.
-Source: blueprint Assertion 5 and the normalized internal K-flat scalar comparison
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: the pulled-back finite coefficient module is the regular quotient module with
-scalars restricted. Apply the natural K-flat scalar-tower realization; its canonical
-unit and transition equations imply, in particular, the asserted natural isomorphism. -/
+/-- The finite scalar tensor functor is the restricted derived reduction. -/
 theorem finiteScalarComparison (T : Scheme.{u}) (n : ℕ) :
     Nonempty (DerivedNakayama.reductionFunctor l E T (n + 1) ≅
       AdicCompletion.derivedReduction l E T n ⋙ AdicCompletion.restrict l E T n) := by
@@ -692,14 +657,7 @@ private def coneEvaluationComparison (T : Scheme.{u}) (n : ℕ) :
   rw [evaluatedPowerMap]
   rfl
 
-/-- Evaluation of the derived cone tower is naturally the actual finite reduction.
-Source: blueprint Assertion 5, the two-term uniformizer resolution
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: exact evaluation carries the tower cone to the scalar cone. Scalar action
-preserves powers. The coefficient resolution identifies that cone with derived tensor
-by the finite coefficient module. The K-flat scalar comparison identifies this tensor
-with restriction of the canonical derived scalar extension. Fully faithful
-precomposition with localization descends the resulting natural isomorphism. -/
+/-- Evaluation of the derived cone tower is naturally the actual finite reduction. -/
 theorem reductionEvaluation (T : Scheme.{u}) (n : ℕ) :
     Nonempty (red l E T ⋙ dev l E T n ≅
       AdicCompletion.derivedReduction l E T n ⋙ AdicCompletion.restrict l E T n) := by
@@ -784,10 +742,7 @@ private theorem roosComparisonNormalized (T : Scheme.{u}) :
   exact ⟨e, fun I ↦ NatTrans.congr_app he I⟩
 
 /-- On complexes the specified completion unit is the derived ordinary adjoint
-of the degree-zero cone inclusion.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: apply the factorization equation of the localized augmentation, the derived
-adjunction unit formula, and naturality of the total right derived cochain comparison. -/
+of the degree-zero cone inclusion. -/
 private theorem kappa_on_complex (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     (kappa l E T).app (DerivedCategory.Q.obj P) ≫
@@ -835,15 +790,7 @@ private theorem principalCompletionComparison (T : Scheme.{u})
     DerivedCategory.Q.map_comp, Category.assoc, he]
   exact (kappa_on_complex l E T P).symm
 
-/-- The quotient Roos complex represents the specified completion, preserving its unit.
-Source: blueprint Notation 4, Stacks Tags 099B, 0A0E and 0941
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: evaluate the strict reduction cone tower and identify it, with its transitions
-and degree-zero inclusions, with the principal power-cone tower. Exact products give
-its Roos comparison. Change the sign of the second product to match the normalized
-right-derived-limit comparison. The ordinary constant/limit adjoint of the strict
-inclusion followed by that comparison is exactly kappa. Finally the K-flat principal
-cone-to-quotient comparison identifies its strict augmentation with the quotient unit. -/
+/-- The quotient Roos complex represents the specified completion, preserving its unit. -/
 theorem completionComparison_on_complex (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
     (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E T) (.up ℤ)).kFlat P) :
@@ -858,10 +805,7 @@ theorem completionComparison_on_complex (T : Scheme.{u})
   rw [Iso.trans_hom, Iso.symm_hom, ← hc, Category.assoc, Iso.hom_inv_id_assoc]
   exact hb
 
-/-- Every K-flat representative has the normalized comparison required by Notation 4.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: compose the complex comparison with the image of the representative isomorphism.
-Naturality of kappa cancels that representative on the specified completion map. -/
+/-- Every K-flat representative has the normalized comparison required by Notation 4. -/
 theorem completionComparison (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T))
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ)
@@ -888,10 +832,7 @@ private theorem existsKFlatRepresentative (T : Scheme.{u})
   let := hq
   exact ⟨P, hP, ⟨asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso M⟩⟩
 
-/-- Completeness is equivalent to invertibility of the specified completion unit.
-Source: blueprint Notation 4 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: choose a K-flat representative and use the normalized quotient Roos comparison.
-The existing representative-independent completeness criterion applies to its unit. -/
+/-- Completeness is equivalent to invertibility of the specified completion unit. -/
 theorem isDerivedComplete_iff (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) :
     IsDerivedComplete l E T M ↔ IsIso ((kappa l E T).app M) := by
@@ -900,12 +841,7 @@ theorem isDerivedComplete_iff (T : Scheme.{u})
   rw [AdicCompletion.isDerivedComplete_iff l E T M P hP e, ← hε]
   exact (isIso_comp_right_iff (AdicCompletion.completionMap l E T M P e) ε.hom).symm
 
-/-- The output of completion is derived complete for every input.
-Source: blueprint Assertion 6 and Stacks Tag 099B
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: on a K-flat representative the completion is isomorphic to the quotient Roos
-output, whose completeness is already proved by the singleton Koszul reflector.
-Transport the witnessing K-flat representative along this isomorphism. -/
+/-- The output of completion is derived complete for every input. -/
 theorem completion_isDerivedComplete (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) :
     IsDerivedComplete l E T ((completion l E T).obj M) := by
@@ -1014,16 +950,7 @@ private theorem finiteReduction_kappa_complex (T : Scheme.{u})
   rw [F.map_comp]
   infer_instance
 
-/-- Finite reduction inverts the specified completion unit.
-Source: blueprint Assertion 6, Stacks Tags 0941 and 099B
-(blueprint: proposition-proper-base-change-complete-integral).
-Proof: the uniformizer is invertible on the derived limit of the scalar source tower:
-its inverse is the index shift up to homotopy on the Roos fibre. Every quotient-power
-reduction of that limit is therefore zero, by the uniformizer cone resolution. Apply
-reduction and derived inverse limit to the source-constant-cone triangle. Its first
-term vanishes, so its second arrow is invertible. This arrow, preceded by the
-invertible constant-limit unit, is precisely kappa. Finally use exact conservative
-restriction of quotient coefficients and invariance under the choice of complex. -/
+/-- Finite reduction inverts the specified completion unit. -/
 theorem finiteReduction_kappa (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) (n : ℕ) :
     IsIso ((AdicCompletion.derivedReduction l E T n).map ((kappa l E T).app M)) := by

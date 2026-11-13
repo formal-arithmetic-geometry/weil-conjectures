@@ -28,10 +28,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImme
 
 /-!
 # Locally closed exceptional comparison with its adjunction normalization
-
-Source: Weil blueprint, main-20261015, sec-smooth-purity/sk-lem-sp-tower,
-lem-weil-finite-duality-site-comparison.proof.md, second paragraph
-(blueprint: lem-weil-finite-duality-locally-closed-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +42,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- All clauses of locally closed exceptional comparison, on exactly bounded
 constructible targets and bounded-below etale-origin tests. The natural transformations
 are fixed by the counit and comparison-unit equations. The relative Hom equation is
-required for every witness of etale origin and every normalized comparison-class datum.
-Source: blueprint locally closed exceptional comparison, Steps 1--12
-(blueprint: lem-weil-finite-duality-locally-closed-comparison). -/
+required for every witness of etale origin and every normalized comparison-class datum. -/
 structure LocallyClosedExceptionalComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V T : Scheme.{u}} (c : S ⟶ V) (v : V ⟶ T)
     [IsClosedImmersion c] [IsOpenImmersion v] [IsNoetherian T] [QuasiCompact (c ≫ v)] where

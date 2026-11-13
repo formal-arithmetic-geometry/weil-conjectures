@@ -15,7 +15,6 @@ import all WeilConjectures.RingTheory.KoszulProjectiveResolution
 /-! # The degree-zero quotient cycle of the completed exterior Koszul complex
 
 Source: Stacks Project, Tags 091N and 099M.
-(blueprint: new-p6-completed-koszul-quotient-projection).
 -/
 
 @[expose] public noncomputable section
@@ -39,16 +38,7 @@ private theorem moduleIso_inv_apply {R : Type*} [Ring R] {M N : ModuleCat R}
 
 /-- The degree-zero residue projection of the completed Koszul complex kills boundaries.
 Source: Stacks Project, Tag 0623, Koszul augmentation; Tags 03DA and 03EK,
-module sheafification and scalar extension.
-(blueprint: new-p6-completed-koszul-quotient-projection).
-Proof: identify exterior degree zero with the coefficient ring and compose with
-A → A/I^(n+1). The degree-one Koszul boundary is the linear combination of the
-powers a_i^(n+1), so its residue is zero. On constant presheaves map x to the
-constant section of that residue. This map is linear for the composite scalar
-map by the recorded residue normalization. Extend it first by module
-sheafification, then by the normalized scalar-extension adjunction. Their
-section formulas give the required unit normalization, and naturality of the
-adjunction transports the zero boundary composite. -/
+module sheafification and scalar extension. -/
 theorem completedKoszulQuotientProjection_exists
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (n : ℕ) :
     ∃ p : (completedAdicKoszul T d r a n).X 0 ⟶ completedAdicFiniteModule T d n,

@@ -65,7 +65,7 @@ def finitePerfectAdicTensorProjection (X : Scheme.{t}) {A : Type t} [CommRing A]
   (ρ_ M).inv ≫ M ◁ finitePerfectAdicCoefficientProjection X d n
 
 /-- Tensor projection commutes with every module map.
-Source: Stacks Tag 09C6; functoriality of tensor and its right unitor. -/
+Source: Stacks Tag 09C6. -/
 theorem finitePerfectAdicTensorProjection_naturality
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     {M N : CompletedAdicModules X d} (f : M ⟶ N) (n : ℕ) :
@@ -261,23 +261,7 @@ end TensorPowers
 /-- A free algebraic module gives precisely a finite power of the coefficient cone.
 
 Source: Stacks Project, Tag 09C6, finite-free case of the displayed coefficient calculation;
-Modules on Sites, Tags 093J--093M.
-(blueprint: lem-weil-pbc-finite-perfect-adic-free-tensor-cone).
-
-Proof: the constant realization of A is the unit module of the constant ring sheaf.
-Ordinary scalar extension sends that unit to the completed-ring unit: on local tensor
-sections the isomorphism sends s tensor a to s times the scalar image of a, and the
-inverse sends s to s tensor 1. Balancing and local generation prove both identities.
-The constant realization and scalar extension are additive, hence preserve finite
-biproducts. Apply these unit comparisons to the coordinate decomposition of A^r.
-Tensor with a coefficient module also preserves finite biproducts. The left unitor
-identifies the tensor of the unit with each coefficient module. These comparisons
-are natural for all coefficient maps and hence define the diagram isomorphism e.
-On each coordinate the cone square is the equality sending s tensor a to
-projection(s) times scalar(a); it follows from naturality of the unitors. Equality
-of the coordinate maps proves the displayed cone equation. For r = 0 all objects
-are zero and the same argument uses the empty biproduct; no nonzero-ring assumption
-is made. This statement concerns only free modules, with no complex or derived data. -/
+Modules on Sites, Tags 093J--093M. -/
 theorem finitePerfectAdicFreeTensorCone_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) :
     let M := (finitePerfectAdicOrdinary X d).obj (ModuleCat.of A (Fin r → A))

@@ -32,22 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 comparison square. This is the categorical transport portion of
 `comparison_square`; the underived square is supplied separately so that arbitrary commutative
 coefficient rings are allowed.
-Source: blueprint `stage3-proetale-comparison-square`, proof step 4; Stacks Project, Tag 0B65.
-(blueprint: stage3-proetale-comparison-square-transport)
-
-Proof: the component equations make the two pasted natural transformations equal by
-extensionality. Apply the exact functors degreewise to complexes and localize at
-quasi-isomorphisms. The naturality and associativity equations for
-`mapDerivedCategoryCompIso` identify the resulting pasted maps with the induced maps on
-unbounded derived categories. Conjugate the pro-étale pullbacks by
-`leftDerivedUpperStarIsoMapDerivedCategory`; its composition and equality-transport
-compatibilities identify the conjugated square with `leftDerivedUpperStarSquareIso`.
-On the étale side restrict along the bounded-below inclusion and use
-`mapDerivedCategoryPlusCompatibility` for each edge and each composition. Cancel the
-invertible comparison factors. The remaining composites are exactly the displayed equation.
-Only the supplied component equations enter this calculation; it does not invoke the theorem
-`comparison_square` or a theorem asserting underived coherence.
--/
+Source: Stacks Project, Tag 0B65. -/
 theorem comparison_square_of_component
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

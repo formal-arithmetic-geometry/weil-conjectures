@@ -11,9 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 
 /-! # Finite exceptional inverse image in fixed coefficient coordinates
 
-Source: Weil blueprint, sk-def-sf-operations (vi), finite-level exceptional inverse image
-(blueprint: theorem-f-shriek-finite-coefficients).
-
 The coefficient universe is that of the module values on the actual small sites.
 The right adjoint is determined by its ordinary etale compact-support adjunction.
 -/
@@ -30,9 +27,7 @@ R nu_* followed by the ordinary etale right adjoint, followed by exact nu^*.
 It uses the unique-adjoint construction, not an arbitrarily chosen pro-etale adjoint.
 The fixed-ring module presentation is canonically equivalent to modules over the constant
 coefficient sheaf. No boundedness hypothesis is part of this definition of an ambient
-functor; the node's assertion concerns D+ and the bounded constructible scope.
-Source: Weil blueprint, sk-def-sf-operations (vi)
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+functor; the node's assertion concerns D+ and the bounded constructible scope. -/
 def sfFiniteExceptionalAt (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     [(Etale.rightDerivedLowerShriekOfCompactification

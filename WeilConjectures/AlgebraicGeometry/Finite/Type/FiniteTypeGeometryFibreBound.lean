@@ -26,9 +26,8 @@ import Mathlib.AlgebraicGeometry.Properties
 # Finite-type ambient geometry and a uniform geometric-fibre dimension bound
 
 Source: Stacks Project, Morphisms, Tag 0A3V, with the affine polynomial-presentation
-refinement described in the DAG node (blueprint: lem-cbc-compactification-geometry-fibre-bound).
-The refinement also uses Algebra Tags 00FN, 00KE and 00P3, Schemes Tag 01IJ,
-and `MvPolynomial.ringKrullDim_of_isNoetherianRing`.
+refinement described in the DAG node. The refinement also uses Algebra Tags 00FN, 00KE and 00P3,
+Schemes Tag 01IJ, and `MvPolynomial.ringKrullDim_of_isNoetherianRing`.
 -/
 
 @[expose] public section
@@ -101,25 +100,7 @@ Krull dimension has the same source finiteness properties, a uniform dimension b
 geometric fibres, and preserves invertibility of integers in local rings.
 
 Source: Stacks Project, Morphisms, Tag 0A3V and its affine-generator refinement; Algebra
-Tags 00FN, 00KE and 00P3; Schemes Tag 01IJ
-(blueprint: lem-cbc-compactification-geometry-fibre-bound).
-
-Proof:
-1. The finite Noetherian affine cover makes Y Noetherian. Finite type makes T locally
-   Noetherian and quasi-compact. A finite affine subcover of T has Noetherian rings.
-2. Around each point of T choose affine opens U and V with U contained in p⁻¹(V).
-   The coordinate algebra of U is a quotient of a polynomial ring in finitely many
-   variables over the Noetherian coordinate ring of V. The latter has dimension at
-   most dim Y, by open-subspace monotonicity and the affine spectrum comparison.
-   The polynomial dimension theorem and the quotient inequality give a natural
-   dimension bound for U. Take a finite subcover, the maximum of its bounds, and
-   apply the open-cover dimension lemma to bound dim T. An empty subcover has bound zero.
-3. For any field-valued point, `topologicalKrullDim_pullback_le` bounds the pullback
-   dimension by dim T. It factors the point through its residue field, uses dimension
-   preservation under field extension, and compares the residue-field fibre with its
-   underlying subspace of T. Thus the bound from step 2 works for every geometric fibre.
-4. The stalk map of p takes an inverse of an integer to an inverse of that integer.
-   The source cover, dimension bound and stalk assertion include the empty source. -/
+Tags 00FN, 00KE and 00P3; Schemes Tag 01IJ. -/
 theorem finiteType_noetherianCover_dimension_geometricFibres
     {T Y : Scheme.{u}} (p : T ⟶ Y) [LocallyOfFiniteType p] [QuasiCompact p]
     (hYCover : ∃ (n : ℕ) (U : Fin n → Y.affineOpens),

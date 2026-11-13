@@ -72,7 +72,7 @@ theorem exists_hopfAlgebra_iso (G : Over (Spec (.of K))) [GrpObj G] [IsFinite G.
         Iso.inv_hom_id_assoc])]
     exact Scheme.Hom.finrankΓ_SpecMap K H.unop
 
-/-- Blueprint `proposition-multiplication-n--2`: Connected finite group schemes have `p`-power order
+/-- Connected finite group schemes have `p`-power order
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p > 0`. If `G` is
 connected, then its order `|G| = dim_K Γ(G, 𝒪_G)` is a power of `p`.
@@ -96,7 +96,7 @@ theorem exists_finrankΓ_eq_pow (p : ℕ) [Fact p.Prime] [CharP K p]
   rw [hfin]
   exact Bialgebra.exists_finrank_eq_pow K H p
 
-/-- Blueprint `proposition-multiplication-n--2`: Group schemes of order prime to `p` are étale
+/-- Group schemes of order prime to `p` are étale
 
 Let `G` be a finite group scheme over a field `K` of characteristic `p`, of order `m`. If
 `p ∤ m` — which for `p = 0` just says `m ≠ 0` — then `G` is étale over `K`. This also proves
@@ -130,7 +130,7 @@ noncomputable def pointsEquivAlgHom (G : Over (Spec (.of K))) [IsAffine G.left] 
     (𝟙_ (Over (Spec (.of K))) ⟶ G) ≃ (Γ(G.left, ⊤) →ₐ[K] K) :=
   specAlgebraMapSelfIso.symm.homCongr (Iso.refl G) |>.trans (G.hom.overHomEquivAlgHom K)
 
-/-- Blueprint `proposition-integral-tate-module`: Points of finite étale group schemes
+/-- Points of finite étale group schemes
 
 A finite étale group scheme `G` of order `m` over an algebraically closed field `K` has exactly
 `m` points with values in `K`. This is the first half of blueprint
@@ -147,7 +147,7 @@ theorem card_points_eq_finrankΓ [IsAlgClosed K] (G : Over (Spec (.of K))) [GrpO
   rw [Nat.card_congr (pointsEquivAlgHom G), Algebra.Etale.natCard_algHom_eq_finrank]
   rfl
 
-/-- Blueprint `proposition-integral-tate-module`: Points of finite étale group schemes
+/-- Points of finite étale group schemes
 
 Let `G` be a finite étale group scheme over an algebraically closed field `K` and let `K'` be an
 algebraically closed extension of `K`. Then base change along `K ⊆ K'`, that is precomposition

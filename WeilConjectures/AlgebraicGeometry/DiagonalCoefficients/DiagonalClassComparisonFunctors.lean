@@ -12,8 +12,6 @@ public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Elementary comparison functors for the completed diagonal
-
-Source: blueprint coefficient changes (3), exact pullback and constant/limit mates.
 -/
 
 @[expose] public noncomputable section
@@ -26,29 +24,23 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 open DiagonalTrace
 
 /-- The actual exact pullback, its termwise tower functor, the normalized
-constant/limit mate, and exact localization of a comparison square.
-Source: blueprint coefficient changes (3)
-(blueprint: def-diagonal-class-comparison-functors).
-Construction: termwise application is whiskering right. Transpose the canonical
-constant-tower interchange under the specified adjunctions. Localize an exact
-square by the two canonical composition comparisons and its natural isomorphism. -/
+constant/limit mate, and exact localization of a comparison square. Construction: termwise
+application is whiskering right. Transpose the canonical constant-tower interchange under the
+specified adjunctions. Localize an exact square by the two canonical composition comparisons and its
+natural isomorphism. -/
 abbrev diagonalClassPull (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] :
     DiagonalMod l S ⥤ DiagonalMod l X :=
   upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f
 
-/-- Its strict termwise tower functor.
-Source: blueprint coefficient proof (3)
-(blueprint: def-diagonal-class-comparison-functors). -/
+/-- Its strict termwise tower functor. -/
 abbrev diagonalClassTowerPull (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] :
     DiagonalSystems l S ⥤ DiagonalSystems l X :=
   (Functor.whiskeringRight ℕᵒᵖ (DiagonalMod l S) (DiagonalMod l X)).obj
     (diagonalClassPull l f)
 
-/-- Transpose the canonical constant-tower interchange under the specified adjunctions.
-Source: blueprint coefficient changes (3)
-(blueprint: def-diagonal-class-comparison-functors). -/
+/-- Transpose the canonical constant-tower interchange under the specified adjunctions. -/
 def diagonalClassLimitMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (LX : DiagonalRlim (DiagonalMod l X)) (LS : DiagonalRlim (DiagonalMod l S))
@@ -59,9 +51,7 @@ def diagonalClassLimitMate (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X �
   (mateEquiv adjS adjX (TwoSquare.mk _ _ _ _
     (ringedConstantTowerPullback (diagonalClassPull l f)).inv))
 
-/-- Localize an exact comparison square using the canonical composition isomorphisms.
-Source: blueprint coefficient changes (3)
-(blueprint: def-diagonal-class-comparison-functors). -/
+/-- Localize an exact comparison square using the canonical composition isomorphisms. -/
 def diagonalClassExactSquare
     {A : Type a} {B : Type b} {C : Type c} {D : Type d}
     [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]

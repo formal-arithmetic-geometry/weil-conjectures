@@ -178,35 +178,7 @@ the scalar extensions.  The comparison is natural in both variables, its two
 contravariant functors are exact with their canonical shifts (hence carry every
 distinguished triangle to the reversed triangle, including the connecting sign), and
 its isomorphism locus is thick: zero, isomorphisms, all integer shifts, cones, and
-retracts.  No flatness assumption on `φ` is made.
-
-Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraph 2 (localization
-reduction), and Stacks 06YY, 07A4, 08J9, 08JC; expanded proof steps 1--9 of this node.
-
-Proof:
-1. The canonical comparison on flat-term K-flat models is coefficient multiplication;
-   use its uniqueness theorem above. The scalar shift is its counit-compatible one.
-2. Transpose scalar extension of the evaluation counit along the B tensor-Hom
-   adjunction. K-injective target models compute the given internal Hom.
-3. Naturality of evaluation, scalar balancing and the adjunction gives naturality in
-   K and M on all derived morphisms, by injectivity of transposition.
-4. On Hom complexes the source-shift map is f ↦ (-1)^a f in degree a (node's H ⊗ K
-   order, shift one). In the library's K ⊗ H order, for shift n it is
-   f ↦ (-1)^(n*j + n*(n+1)/2) f in degree j, and the tensor cancellation has the sign
-   (-1)^(p*n) on K^p. Their evaluation equation is precisely
-   EtaleHomShiftNormalization. K-flat/K-injective models descend this equation.
-5. Transpose the shift square. Both sides reduce to the evaluation equation in step 4
-   and the degree-preserving scalar balancing formula in step 1. Iterate for all integers.
-6. The cone calculation gives the reversed distinguished triangles. Naturality gives
-   their first two squares; the shift square gives their third, retaining its reversal sign.
-7. Exact functors preserve zero; naturality preserves invertibility under isomorphisms;
-   the normalized shift square preserves invertibility under every integer shift.
-8. Two-out-of-three for the resulting morphism of triangles gives closure under cones.
-9. For i : K → L and r : L → K with ri = 1, the inverse at K is
-   Phi(i) v_L inverse Psi(r). Naturality verifies both inverse identities, giving retract
-   closure. No flatness, boundedness, or idempotent-completeness hypothesis is used.
-(blueprint: lem-coef-etale-hom-thick-locus)
--/
+retracts.  No flatness assumption on `φ` is made. -/
 theorem etaleHomComparison_thickLocus (X : Scheme.{u}) (φ : A →+* B) :
     ∃ (v : ∀ M : DerivedCategoryModule A X,
       EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M),

@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalEvaluationUnit
 import all WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalReductionCompletion
 
-/-! # Integral multiplication sequences for evaluated reduction
-Source: diagonal tower system proof, step (2).
-(blueprint: lem-sfb-diagonal-evaluation-complex-sequence). -/
+/-! # Integral multiplication sequences for evaluated reduction -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,9 +26,7 @@ variable {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
   (ad : L ⊣ U) (D : DiagonalDerivedReduction ℓ L) (n : ℕ)
 
 /-- Apply the quotient-unit map termwise, retaining the canonical identity and
-composition comparisons of complexes.
-Source: diagonal tower system proof, step (2)
-(blueprint: lem-sfb-diagonal-evaluation-complex-sequence). -/
+composition comparisons of complexes. -/
 def diagonalEvaluationComplexMap (P : CochainComplex A ℤ) :
     P ⟶ ((diagonalEvaluationForget U n).mapHomologicalComplex (.up ℤ)).obj
       ((D.ordinary.E.mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -40,9 +36,7 @@ def diagonalEvaluationComplexMap (P : CochainComplex A ℤ) :
       diagonalEvaluationForget U n)) (.up ℤ)).inv.app P
 
 omit [PreservesFiniteLimits U] [PreservesFiniteColimits U] in
-/-- Components of the actual quotient-unit complex map.
-Source: termwise definition
-(blueprint: lem-sfb-diagonal-evaluation-complex-sequence). -/
+/-- Components of the actual quotient-unit complex map. -/
 theorem diagonalEvaluationComplexMap_f (P : CochainComplex A ℤ) (i : ℤ) :
     (diagonalEvaluationComplexMap U ad D n P).f i =
       (diagonalEvaluationQuotient U ad D n).app (P.X i) := by
@@ -60,14 +54,7 @@ attribute [local irreducible] diagonalScalarExtension diagonalForget diagonalSca
   reductionPresentation
 
 /-- On a torsion-free representative the underlying evaluated quotient gives a
-short exact multiplication sequence.
-Source: diagonal tower system proof, step (2).
-(blueprint: lem-sfb-diagonal-evaluation-complex-sequence).
-Proof: compare the p-adic quotient to the integral quotient using the existing
-ordinary_level_comparison, which carries the scalar-adjunction unit to the quotient
-map. The integral cokernel presentation is short exact because the supplied
-multiplication map is degreewise monic. Transport it by this quotient comparison
-in every degree, then use the degreewise short-exactness criterion for complexes. -/
+short exact multiplication sequence. -/
 theorem diagonal_evaluation_complex_shortExact
     (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb W)]

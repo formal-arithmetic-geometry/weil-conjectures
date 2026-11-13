@@ -18,10 +18,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 /-!
 # Étale sections with closed support
 
-Source: the blueprint, sec-smooth-purity/sk-prop-a1-kummer,
-proposition-purity-vector-bundles, definition of supported sections and proof step 1;
-Stacks Project, Cohomology, Tag 0G6Y.
-(blueprint: def-pur-etale-derived-supported-sections).
+Source: Stacks Project, Cohomology, Tag 0G6Y.
 
 The complement `W` determines the closed support. The section functor is an actual kernel,
 and its right derived functor uses the existing bounded below localization construction.
@@ -38,30 +35,21 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Sections supported on the closed complement of `W`, as the kernel of restriction.
-Source: blueprint proposition-purity-vector-bundles, proof step 1; Stacks Tag 0G6Y.
-(blueprint: def-pur-etale-derived-supported-sections). -/
+Source: Stacks Tag 0G6Y. -/
 noncomputable def supportedEtaleSections (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) :
     Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R) ⥤ ModuleCat.{u + 1} R :=
   kernel (Sheaf.natTransΓRes X.smallEtaleTopology (ModuleCat.{u + 1} R)
     (op (Scheme.Etale.mk W.ι)))
 
-/-- Inclusion of supported sections into global sections.
-Source: blueprint proposition-purity-vector-bundles, proof step 1.
-(blueprint: def-pur-etale-derived-supported-sections). -/
+/-- Inclusion of supported sections into global sections. -/
 noncomputable def supportedEtaleSectionsι (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) :
     supportedEtaleSections R X W ⟶ Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} R) :=
   kernel.ι _
 
 /-- The kernel section functor is additive.
-Source: blueprint proposition-purity-vector-bundles, proof step 1; Stacks Tag 0G6Y.
-(blueprint: def-pur-etale-derived-supported-sections).
-
-Proof: the global section functor is additive. The kernel inclusion is a monomorphism
-in the functor category and hence on every component. Compose the desired addition
-identity with its component at the target sheaf. Naturality of the inclusion reduces
-both sides to the addition identity for global sections. Cancel the monomorphism. -/
+Source: Stacks Tag 0G6Y. -/
 @[instance]
 theorem supportedEtaleSections_additive (R : Type (u + 1)) [CommRing R]
     (X : Scheme.{u}) (W : X.Opens) : (supportedEtaleSections R X W).Additive := by

@@ -17,8 +17,7 @@ meta import Mathlib.Lean.Meta.CongrTheorems
 # Module and derived comparison for pullback from the condensed point
 
 Source: Hemo--Richarz--Scholbach, Constructible sheaves on schemes, Section 3,
-pp. 5--6, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5
-(blueprint: lem-zl-condensed-point-module-comparison).
+pp. 5--6, pullback paragraph before (3.1), Remark 3.2 and Definition 3.5.
 
 The ordinary comparison is the existing `CondensedRing.upperStarFromPointModComp`.
 Its scalar cancellation uses the specified coefficient isomorphism, and its underlying
@@ -42,13 +41,7 @@ namespace AlgebraicGeometry.ProEtale
 attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
 
 /-- Point-module inverse image preserves finite limits.
-Source: HRS Section 3, pp. 5--6 (blueprint: lem-zl-condensed-point-module-comparison).
-Proof: Step 1. The profinite test-object functor preserves finite limits and coverings.
-The site inverse-image tensor lemma therefore makes its sheafified left Kan extension
-exact on abelian sheaves. Compose with the exact scheme inverse image along the structure
-map. The action transported by `mapMod` does not change the underlying functor; finite
-limits of modules are computed on underlying abelian sheaves, by the lifted-exactness
-lemma. Thus point-module pullback preserves finite limits. -/
+Source: HRS Section 3, pp. 5--6. -/
 @[instance]
 theorem condensedPointModule_preservesFiniteLimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -66,12 +59,7 @@ theorem condensedPointModule_preservesFiniteLimits
   infer_instance
 
 /-- Point-module inverse image preserves finite colimits.
-Source: HRS Section 3, pp. 5--6 (blueprint: lem-zl-condensed-point-module-comparison).
-Proof: Step 1. The sheafified left Kan extension and scheme inverse image preserve finite
-colimits on abelian sheaves. Tensoring on either site preserves colimits. Module
-categories are abelian, and finite colimits are computed on underlying abelian sheaves.
-The module transport's equality of underlying functors therefore gives finite-colimit
-preservation by the lifted-exactness lemma. -/
+Source: HRS Section 3, pp. 5--6. -/
 @[instance]
 theorem condensedPointModule_preservesFiniteColimits
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -84,10 +72,7 @@ theorem condensedPointModule_preservesFiniteColimits
   infer_instance
 
 /-- Point-module inverse image is additive.
-Source: HRS Section 3, pp. 5--6 (blueprint: lem-zl-condensed-point-module-comparison).
-Proof: Step 1. The abelian inverse image is additive by the site inverse-image tensor
-lemma and exact scheme inverse image. The module transport commutes with forgetting the
-action, which is faithful and additive; the lifted-exactness lemma gives additivity. -/
+Source: HRS Section 3, pp. 5--6. -/
 @[instance]
 theorem condensedPointModule_additive
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

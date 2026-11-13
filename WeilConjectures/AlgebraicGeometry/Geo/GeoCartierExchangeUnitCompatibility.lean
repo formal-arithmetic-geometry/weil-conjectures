@@ -35,10 +35,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantMapCo
 
 /-!
 # Supported-unit compatibility of the Cartier exchange
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-pullback paragraph: unit compatibility of `geoCartierExchange`
-(blueprint: lem-sfb-cartier-exchange-unit-compatibility).
 -/
 
 @[expose] public noncomputable section
@@ -55,10 +51,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The hom-equivalence calculation for a square of adjoint functors.
 This is the formal naturality and injectivity calculation in Steps 1, 3 and 4
-of the item's existing proof (blueprint: lem-sfb-cartier-exchange-unit-compatibility).
-Proof: substitute the two adjunct identities, transpose, and move the first map
-through the natural square comparison,
-and use the assumed equality of the resulting constant structure maps. -/
+of the item's existing proof. -/
 private theorem exchange_unit_of_transposes {C₁ C₂ C₃ C₄ : Type (u + 2)}
     [Category.{u + 1} C₁] [Category.{u + 1} C₂]
     [Category.{u + 1} C₃] [Category.{u + 1} C₄]
@@ -146,8 +139,7 @@ attribute [local irreducible] upperStar lowerStar
   upperStarLowerStarAdjunction Scheme.proEtaleConstantDirectImageMap
 attribute [local semireducible] geoCartierPullbackSquare
 
-/-- Transport of a constant structure map along equality of scheme morphisms.
-Proof: eliminate the equality, then compose with the identity. -/
+/-- Transport of a constant structure map along equality of scheme morphisms. -/
 private theorem constant_pullback_transport (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f g : X ⟶ Y) (e : f = g) :
     (eqToIso (congrArg (upperStar (ModuleCat.{u + 1} A)) e)).hom.app
@@ -165,8 +157,7 @@ private theorem pullback_square_eq (A : Type (u + 1)) [CommRing A]
         upperStarComp (ModuleCat.{u + 1} A) w i := by
   rfl
 
-/-- The component formula of the defined square comparison.
-Proof: unfold the comparison and the components of composite natural isomorphisms. -/
+/-- The component formula of the defined square comparison. -/
 private theorem pullback_square_component (A : Type (u + 1)) [CommRing A]
     {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')
     (h : Z' ⟶ Z) (w : D' ⟶ D) (sq : CommSq w i' i h) :
@@ -178,11 +169,7 @@ private theorem pullback_square_component (A : Type (u + 1)) [CommRing A]
   rw [pullback_square_eq A i i' h w sq]
   simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom]
 
-/-- The square comparison preserves the constant structure maps.
-Source: the two composition laws and equality transport in Step 2
-(blueprint: lem-sfb-cartier-exchange-unit-compatibility).
-Proof: apply the composition law to `(w, i)` and `(i', h)`, transport the constant
-map along `sq.w.symm`, and cancel the first comparison isomorphism. -/
+/-- The square comparison preserves the constant structure maps. -/
 private theorem constant_square
     (A : Type (u + 1)) [CommRing A]
     {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')
@@ -233,20 +220,7 @@ private theorem unit_compatibility_bridge
 end ConstantSquare
 
 /-- The closed exchange carries the constant direct-image unit to the pulled-back
-constant unit.  This is the unit-compatibility square for `geoCartierExchange`.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md, pullback paragraph
-(blueprint: lem-sfb-cartier-exchange-unit-compatibility).
-Proof: expand `geoCartierExchange` as the mate of the inverse-image square
-comparison.  Naturality of that comparison with the constant direct-image map,
-the defining constant-map composition law, and the equality in the commuting
-square identify the transpose of the left composite with
-`c^i' ≫ i'^*(c^h)`.  The transpose of the right composite is the same by the
-adjunction definition of the constant inverse-image map.  Injectivity of the
-adjunction hom bijection gives the equality. This uses hom-equivalence naturality,
-the inverse-image/direct-image interface, and the constant-map composition statement.
--/
+constant unit.  This is the unit-compatibility square for `geoCartierExchange`. -/
 theorem geoCartierExchange_unit_compatibility
     (A : Type (u + 1)) [CommRing A]
     {D D' Z Z' : Scheme.{u}} (i : D ⟶ Z) (i' : D' ⟶ Z')

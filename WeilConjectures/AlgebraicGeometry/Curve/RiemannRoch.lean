@@ -169,9 +169,7 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
 
 /-- **Duals of invertible modules.** For an invertible `𝒪_X`-module `M`, the dual `Mᵛ` is
 invertible, the evaluation `ev : M ⊗ Mᵛ ⟶ 𝒪_X`, `x ⊗ φ ↦ φ(x)`, is an isomorphism, and the
-canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism.
-
-(blueprint: `lem-pc-tensor-dual-invertible`) -/
+canonical biduality morphism `M ⟶ Mᵛᵛ` is an isomorphism. -/
 theorem Modules.isInvertible_dual_and_isIso_dualEvaluation_and_isIso_bidual {X : Scheme.{u}}
     (M : X.Modules) [M.IsInvertible] :
     Mᵛ.IsInvertible ∧ IsIso (Modules.dualEvaluation M) ∧
@@ -241,9 +239,7 @@ affine, `H^q(X, ℱ) ≅ H^q(ℙ¹_k, π_* ℱ)` with `π_* ℱ` quasi-coherent
 (`nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom`), and the cohomology of a
 quasi-coherent module on `ℙ¹_k`, which is computed by the Čech complex of the two standard affine
 opens, vanishes in degrees `q ≥ 2` (`ProjectiveLine.subsingleton_H_of_two_le`). The blueprint
-uses instead a cover of `X` by two affine opens.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+uses instead a cover of `X` by two affine opens. -/
 theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) := by
@@ -280,9 +276,7 @@ lemma IdealSheafData.isQuasicoherent_cokernel_whiskerRight (J : X.IdealSheafData
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
 it is proper over `k`, being closed in `X`, and quasi-finite, since a local equation of `D` is a
 non-zerodivisor
-(`IdealSheafData.IsInvertible.locallyQuasiFinite_subschemeι_comp_of_field`).
-
-(blueprint: `def-pc-divisor-line-bundle`) -/
+(`IdealSheafData.IsInvertible.locallyQuasiFinite_subschemeι_comp_of_field`). -/
 theorem IdealSheafData.IsInvertible.isFinite_subschemeι_comp {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) :=
   have := hJ.locallyQuasiFinite_subschemeι_comp_of_field (X ↘ Spec (.of k))
@@ -326,9 +320,7 @@ effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible
 
 Its cohomology is that of `ι^* M` on the finite `k`-scheme `D`, which vanishes in positive
 degrees, and `h⁰(D, ι^* M) = dim_k Γ(D, 𝒪_D)`
-(`AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_finrankΓ_of_isFinite`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`, part (2)) -/
+(`AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_finrankΓ_of_isFinite`). -/
 theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
     (cokernel (J.toModulesι ▷ M)).eulerChar k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
@@ -355,9 +347,7 @@ Write `M = ℒ ⊗ 𝒪_X(D)`. Tensoring `0 → J → 𝒪_X → 𝒪_D → 0` w
 sequence `0 → J ⊗ M → M → M|_D → 0`, where `J ⊗ M ≅ ℒ` since `J ⊗ 𝒪_X(D) ≅ 𝒪_X`. The Euler
 characteristic is additive in short exact sequences
 (`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`), and `χ(M|_D) = deg D`
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`, part (2)) -/
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight`). -/
 theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (ℒ : X.Modules) [ℒ.IsInvertible] :
     (ℒ ⊗ J.toModulesᵛ).eulerChar k =
@@ -391,10 +381,7 @@ theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.Id
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`. Then the χ-degree
 `χ(𝒪_X(D)) - χ(𝒪_X)` of its line bundle `𝒪_X(D) = J.toModulesᵛ` is the degree
 `dim_k Γ(D, 𝒪_D) = ∑_x n_x [κ(x) : k]` of `D`. With
-`AlgebraicGeometry.Scheme.eulerChar_unit_eq` this is `χ(𝒪_X(D)) = deg D + 1 - g`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--1`) -/
+`AlgebraicGeometry.Scheme.eulerChar_unit_eq` this is `χ(𝒪_X(D)) = deg D + 1 - g`. -/
 theorem IdealSheafData.IsInvertible.degree_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) :
     J.toModulesᵛ.degree k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
@@ -409,9 +396,7 @@ divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 
 a `k`-rational point: `Γ(D, 𝒪_D) = k` is one-dimensional. Then the χ-degree of `𝒪_X(D)` of
 blueprint `def-pc-degree-line-bundle` is `1`, the degree of the divisor `[P]` of
 `corollary-degree-jacobian--1`. For an arbitrary effective `D` the agreement of the two degrees is
-`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules`. -/
 theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (h : (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ = 1) :
     J.toModulesᵛ.degree k = 1 := by
@@ -476,9 +461,7 @@ proper curve, so `ℒ ⊗ 𝒪_X(n D)` has a non-zero section on `V i` for `n �
 (`AlgebraicGeometry.Scheme.Modules.exists_finrankH_zero_pos_tensorObj_dual_pow`). These glue to
 a global section `s`, since `X` is the disjoint union of the `V i`. Its zero scheme is locally
 principal, and non-zero on each `V i`, which is integral; hence it is invertible
-(`AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`).
-
-(blueprint: part of the proof of `theorem-riemann-roch-coherent-serre-duality--1`) -/
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`). -/
 theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [ℒ.IsInvertible] :
     ∃ J₂ : X.IdealSheafData, J₂.IsInvertible ∧
       ∃ s : 𝟙_ X.Modules ⟶ ℒ ⊗ J₂.toModulesᵛ, (Modules.Hom.zeroLocus s).IsInvertible := by
@@ -602,10 +585,7 @@ zero scheme `D₁` is an effective Cartier divisor
 
 With `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules` and
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj` this gives `deg ℒ = deg D₁ - deg D₂`: the
-χ-degree of every line bundle is its divisor degree.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--1`) -/
+χ-degree of every line bundle is its divisor degree. -/
 theorem Modules.exists_tensorObj_dual_toModules_iso (ℒ : X.Modules) [ℒ.IsInvertible] :
     ∃ J₁ J₂ : X.IdealSheafData, J₁.IsInvertible ∧ J₂.IsInvertible ∧
       Nonempty (ℒ ⊗ₘ J₂.toModulesᵛ ≅ J₁.toModulesᵛ) := by
@@ -623,10 +603,7 @@ Write `ℳ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`
 (`AlgebraicGeometry.Scheme.Modules.exists_tensorObj_dual_toModules_iso`); twisting by the
 effective divisors `D₁` and `D₂`
 (`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules`)
-adds their degrees to `χ`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--1`) -/
+adds their degrees to `χ`. -/
 theorem Modules.degree_tensorObj (ℒ ℳ : X.Modules) [ℒ.IsInvertible] [ℳ.IsInvertible] :
     (ℒ ⊗ₘ ℳ).degree k = ℒ.degree k + ℳ.degree k := by
   obtain ⟨J₁, J₂, h₁, h₂, ⟨e⟩⟩ := Modules.exists_tensorObj_dual_toModules_iso (k := k) ℳ
@@ -663,9 +640,7 @@ omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Rational points are Cartier divisors on smooth curves.** The ideal sheaf `ker x` of a
 `k`-rational point `x : Spec k ⟶ X` of a smooth curve `X` over `k` is invertible: the local ring
 `𝒪_{X,x}` is regular of dimension one, hence a discrete valuation ring, and its maximal ideal,
-the stalk of `ker x`, is generated by a uniformizer.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+the stalk of `ker x`, is generated by a uniformizer. -/
 theorem Hom.isInvertible_ker_fieldPoints (x : (X ↘ Spec (.of k)).fieldPoints k) :
     x.1.ker.IsInvertible :=
   Hom.isInvertible_ker_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) x.1 (by
@@ -699,10 +674,7 @@ over `k` with `H⁰(X, 𝒪_X) = k`, of genus `g`: `χ(𝒪_X) = h⁰(𝒪_X) - 
 `h⁰(𝒪_X) = 1`.
 
 Without the hypothesis `H⁰(X, 𝒪_X) = k` the statement fails, as for `ℙ¹_ℂ` over `ℝ`, where
-`χ(𝒪) = 2`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--1`) -/
+`χ(𝒪) = 2`. -/
 theorem eulerChar_unit_eq :
     Modules.eulerChar (X := X) k (SheafOfModules.unit X.ringCatSheaf) =
       1 - (arithmeticGenus k X : ℤ) := by
@@ -719,10 +691,7 @@ theorem eulerChar_unit_eq :
 
 Together with `AlgebraicGeometry.Scheme.Modules.degree`, which measures the degree of a
 rank-`r` sheaf against `𝒪_X^{⊕ r}`, this is the content of the Riemann–Roch identity
-`χ(ℱ) = deg ℱ + r (1 - g)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`,
-`theorem-riemann-roch-coherent-serre-duality--1`) -/
+`χ(ℱ) = deg ℱ + r (1 - g)`. -/
 theorem eulerChar_free_eq (r : ℕ) :
     Modules.eulerChar (X := X) k (SheafOfModules.free (ULift.{u} (Fin r))) =
       r * (1 - (arithmeticGenus k X : ℤ)) := by
@@ -746,9 +715,7 @@ theorem eulerChar_free_eq (r : ℕ) :
 smooth proper curve with `H⁰(X, 𝒪_X) = k`, of genus `g`, where by
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj` and
 `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules` the degree is the
-divisor degree.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`, part (1)) -/
+divisor degree. -/
 theorem Modules.eulerChar_eq_degree_add (ℒ : X.Modules) :
     ℒ.eulerChar k = ℒ.degree k + 1 - arithmeticGenus k X := by
   rw [Modules.degree, eulerChar_unit_eq]
@@ -776,9 +743,7 @@ commutes. No hypothesis `H⁰(X, 𝒪_X) = k` is needed.
 
 The case `q = 1` is `AlgebraicGeometry.Scheme.nonempty_dual_H_one_iso`, obtained from a finite flat
 morphism `X ⟶ ℙ¹_k` and duality on `ℙ¹_k`; the case `q = 0` is
-`AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`AlgebraicGeometry.Scheme.nonempty_dual_H_zero_iso`, deduced from it by biduality. -/
 theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] (p q : ℕ) (hpq : p + q = 1) :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
@@ -883,9 +848,7 @@ free modules the square
 ```
 commutes. The isomorphism is the one induced by the trace pairing
 `H^0(ℱ) ⊗ H^0(ℱᵛ) → H^0(𝒪_X) = A → k`, whose last map is the trace `Tr_{A/k}`. In degrees
-`q > 0` both sides vanish.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`q > 0` both sides vanish. -/
 theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
@@ -924,9 +887,7 @@ relative dimension `0` over `k`, so `X = Spec A` with `A = Γ(X, ⊤)` finite é
 is an isomorphism `e : (ℱ ↦ H^0(X, ℱ)^∨) ≅ (ℱ ↦ H^0(X, ℱᵛ))` of contravariant functors on finite
 locally free `ℱ` whose inverse is the trace pairing: a global section `x` of `ℱᵛ`, i.e. a
 morphism `ℱ ⟶ 𝒪_X`, is sent to the functional `m ↦ Tr_{A/k}(x(m))` on `H^0(X, ℱ)`. That is,
-the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, case `n = 0`) -/
+the duality morphism `t_X : H^0(X, 𝒪_X) = A → k` is the trace `Tr_{A/k}`. -/
 theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     letI := (globalSectionsRingHom k (X := X)).toAlgebra
@@ -973,9 +934,7 @@ theorem exists_serreDuality_zero_iso_trace [SmoothOfRelativeDimension 0 (X ↘ S
 /-- **Serre duality in dimension `0`, positive degrees.** Let `X` be smooth and proper of
 relative dimension `0` over `k`, so `X` is affine (finite étale over `k`). Then for every finite
 locally free `ℱ` and every `q > 0`, both sides of Serre duality vanish:
-`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, case `n = 0`) -/
+`H^q(X, ℱ) = 0` and `H^q(X, ℱᵛ) = 0` (here `ω_X = 𝒪_X`, so `ℱᵛ ⊗ ω_X ≅ ℱᵛ`). -/
 theorem subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero
     [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] {q : ℕ} (hq : 0 < q) :
@@ -1010,16 +969,13 @@ theorem finrankH_relativeDifferentials_zero_eq_arithmeticGenus
 
 /-- **The two genera agree.** On a smooth proper curve over `k`, the genus
 `dim_k Γ(X, Ω¹_{X/k})` of `def-sc-curves` is the arithmetic genus `dim_k H¹(X, 𝒪_X)`, the genus
-of blueprint `def-pc-genus`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`,
-`theorem-riemann-roch-coherent-serre-duality--6`) -/
+of blueprint `def-pc-genus`. -/
 theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] :
     (X ↘ Spec (.of k)).genus = arithmeticGenus k X := by
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
 
-/-- Blueprint `prose-C-05`: The genus of a curve.
+/-- The genus of a curve.
 
 The genus of a smooth proper curve `X` over `k` is finite: `H⁰(X, Ω¹_{X/k})`, whose dimension is
 the genus (`AlgebraicGeometry.Scheme.Hom.genus_eq_finrankH_zero`), is a finite-dimensional
@@ -1369,9 +1325,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 /-- **The degree of the canonical module.** `deg Ω¹_{X/k} = 2g - 2` on a smooth proper curve
 with `H⁰(X, 𝒪_X) = k`, of genus `g`: Serre duality gives `h⁰(Ω¹) = g`
 (`AlgebraicGeometry.Scheme.finrankH_relativeDifferentials_zero_eq_arithmeticGenus`) and
-`h¹(Ω¹) = h⁰(𝒪_X) = 1`, so `χ(Ω¹) - χ(𝒪_X) = (g - 1) - (1 - g)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`h¹(Ω¹) = h⁰(𝒪_X) = 1`, so `χ(Ω¹) - χ(𝒪_X) = (g - 1) - (1 - g)`. -/
 theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
     (X ↘ Spec (.of k)).relativeDifferentials.degree k = 2 * (arithmeticGenus k X : ℤ) - 2 := by
   -- Serre duality for `ℱ = 𝒪_X` and `q = 0`, with `𝒪_Xᵛ ⊗ Ω¹ ≅ Ω¹`.
@@ -1404,9 +1358,7 @@ theorem degree_relativeDifferentials [GlobalSectionsBijective k X] :
 would give `ℳ ≅ 𝒪_X(div s)` with `div s` effective, of degree `≥ 0`.
 
 The hypothesis `H⁰(X, 𝒪_X) = k`, which makes `X` connected, cannot be dropped: on
-`X = ℙ¹ ⊔ ℙ¹` the line bundle `𝒪(1) ⊔ 𝒪(-3)` has degree `-2` and nonzero sections.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--4`) -/
+`X = ℙ¹ ⊔ ℙ¹` the line bundle `𝒪(1) ⊔ 𝒪(-3)` has degree `-2` and nonzero sections. -/
 theorem Modules.finrankH_zero_eq_zero_of_degree_neg [GlobalSectionsBijective k X]
     (ℳ : X.Modules) [ℳ.IsInvertible] (hd : ℳ.degree k < 0) : ℳ.finrankH k 0 = 0 := by
   by_contra h0
@@ -1454,9 +1406,7 @@ theorem Modules.finrankH_one_eq_zero_of_degree [GlobalSectionsBijective k X] (�
 /-- **Riemann–Roch for curves, `h⁰` of a line bundle of large degree.** A line bundle `ℒ` of
 degree `d ≥ 2g - 1` on a smooth proper curve with `H⁰(X, 𝒪_X) = k` of genus `g` has
 `h^0(ℒ) = d + 1 - g`; equivalently `h^1(ℒ) = 0`
-(`AlgebraicGeometry.Scheme.Modules.finrankH_one_eq_zero_of_degree`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+(`AlgebraicGeometry.Scheme.Modules.finrankH_one_eq_zero_of_degree`). -/
 theorem finrankH_zero_eq [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible]
     (hd : 2 * (arithmeticGenus k X : ℤ) - 1 ≤ ℒ.degree k) :
     (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - arithmeticGenus k X := by
@@ -1474,9 +1424,7 @@ the complete linear system `|ℳ|` is base point free, so it defines a morphism 
 second condition with `P ≠ Q` gives a section vanishing at `P` but not at `Q`, so `φ` is
 injective, and with `P = Q` a section vanishing to order exactly one at `P`, so `φ` is unramified.
 Being proper with finite fibres, `φ` is finite, and a finite morphism which is injective and
-unramified, with trivial residue field extensions, is a closed immersion (Nakayama).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, second part of the proof) -/
+unramified, with trivial residue field extensions, is a closed immersion (Nakayama). -/
 theorem isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker [IsAlgClosed k]
     [GlobalSectionsBijective k X] (ℳ : X.Modules) [ℳ.IsInvertible]
     (h₁ : ∀ x : (X ↘ Spec (.of k)).fieldPoints k,
@@ -1578,9 +1526,7 @@ genus `g`. For closed points `P, Q`, Riemann–Roch in degree `≥ 2g - 1`
 (`AlgebraicGeometry.Scheme.finrankH_zero_eq`) gives `h⁰(ℳ(-P)) = h⁰(ℳ) - 1` and
 `h⁰(ℳ(-P-Q)) = h⁰(ℳ) - 2`: the complete linear system `|ℳ|` is base point free and separates
 points and tangent vectors, so it defines a closed immersion into projective space
-(`AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker`).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+(`AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker`). -/
 theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ : X.Modules)
     [ℳ.IsInvertible] (hd : 2 * (arithmeticGenus k X : ℤ) + 1 ≤ ℳ.degree k) :
     IsVeryAmple (X ↘ Spec (.of k)) ℳ := by
@@ -1605,9 +1551,7 @@ theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ
 
 /-- **Positive degree implies ample, over an algebraically closed field.** If `deg ℒ > 0` then
 `deg ℒ^{⊗ m} = m deg ℒ ≥ 2g + 1` for `m = 2g + 1`, so `ℒ^{⊗ m}` is very ample
-(`AlgebraicGeometry.Scheme.isVeryAmple_of_degree`).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+(`AlgebraicGeometry.Scheme.isVeryAmple_of_degree`). -/
 theorem isAmple_of_degree_pos_of_isAlgClosed [IsAlgClosed k] [GlobalSectionsBijective k X]
     (ℒ : X.Modules) [ℒ.IsInvertible] (hd : 0 < ℒ.degree k) :
     IsAmple (X ↘ Spec (.of k)) ℒ := by
@@ -1622,9 +1566,7 @@ proper curve over `k` with `H⁰(X, 𝒪_X) = k` is ample: after base change to 
 `k̄`, where the degree is unchanged (`AlgebraicGeometry.Scheme.Modules.degree_pullback`), some
 power `ℒ_{k̄}^{⊗ m}` is very ample
 (`AlgebraicGeometry.Scheme.isAmple_of_degree_pos_of_isAlgClosed`), and very ampleness
-descends (`AlgebraicGeometry.IsVeryAmple.of_pullback`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`, part (G)) -/
+descends (`AlgebraicGeometry.IsVeryAmple.of_pullback`). -/
 theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible]
     (hd : 0 < ℒ.degree k) :
     IsAmple (X ↘ Spec (.of k)) ℒ := by
@@ -1644,9 +1586,7 @@ theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [�
 /-- **Ample if and only if positive degree.** An invertible sheaf on a smooth proper curve over
 `k` with `H⁰(X, 𝒪_X) = k` is ample if and only if it has positive degree. Ampleness and degree
 are both invariant under base change to an algebraic closure, where an ample line bundle has
-positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+positive degree (`AlgebraicGeometry.Scheme.Hom.degree_pos_of_isAmple`). -/
 theorem isAmple_iff_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.IsInvertible] :
     IsAmple (X ↘ Spec (.of k)) ℒ ↔ 0 < ℒ.degree k := by
   refine ⟨fun h ↦ ?_, isAmple_of_degree_pos ℒ⟩
@@ -1671,9 +1611,7 @@ omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
 with invertible ideal sheaf `J = 𝒪_X(-D)`, whose line bundle `𝒪_X(D) = J.toModulesᵛ` is ample.
 Then `X \ Supp D` is affine. The open complement of the support of `D` is presented by an open
 immersion `j` whose range is the complement of the support of `J`. This is the case of curves of
-`AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`, part (H)) -/
+`AlgebraicGeometry.isAffine_compl_of_isAmple_dual_toModules`. -/
 theorem isAffine_compl_of_isAmple {J : X.IdealSheafData} (hJ : J.IsInvertible)
     (hample : IsAmple (X ↘ Spec (.of k)) J.toModulesᵛ) {V : Scheme.{u}} (j : V ⟶ X)
     [IsOpenImmersion j] (hj : Set.range j.base = (J.support : Set X)ᶜ) :
@@ -1689,9 +1627,7 @@ variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **Base change of a smooth curve.** The base change `X_K = X ×_{Spec k} Spec K` of a scheme
 `X` smooth of relative dimension `n` over `k` along a field extension `K/k` is smooth of relative
-dimension `n` over `K`.
-
-(blueprint: `prose-C-04`, part (2)) -/
+dimension `n` over `K`. -/
 theorem smoothOfRelativeDimension_baseChange (n : ℕ)
     [SmoothOfRelativeDimension n (X ↘ Spec (.of k))] :
     SmoothOfRelativeDimension n (Limits.pullback (X ↘ Spec (.of k))
@@ -1700,18 +1636,14 @@ theorem smoothOfRelativeDimension_baseChange (n : ℕ)
     (IsPullback.of_hasPullback _ _) ‹_›
 
 /-- **Base change of a proper scheme.** The base change `X_K` of a proper `k`-scheme `X` along a
-field extension `K/k` is proper over `K`.
-
-(blueprint: `prose-C-04`, part (2), and `lem-pc-projective-proper`) -/
+field extension `K/k` is proper over `K`. -/
 theorem isProper_baseChange [IsProper (X ↘ Spec (.of k))] :
     IsProper (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)) :=
   IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
 
 /-- **Base change of a geometrically reduced scheme.** The base change `X_K` of a geometrically
-reduced `k`-scheme `X`, e.g. a smooth one, along a field extension `K/k` is reduced.
-
-(blueprint: `prose-C-04`, part (2)) -/
+reduced `k`-scheme `X`, e.g. a smooth one, along a field extension `K/k` is reduced. -/
 theorem isReduced_baseChange [GeometricallyReduced (X ↘ Spec (.of k))] :
     IsReduced (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
@@ -1720,9 +1652,7 @@ theorem isReduced_baseChange [GeometricallyReduced (X ↘ Spec (.of k))] :
 
 /-- **Smooth morphisms with geometrically connected fibres are geometrically integral**: their
 base changes to fields are smooth over a field, hence regular, so they are reduced and, being
-connected, irreducible.
-
-(blueprint: `prose-C-04`, part (2)) -/
+connected, irreducible. -/
 theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected
     {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] [GeometricallyConnected f] :
     GeometricallyIntegral f :=
@@ -1732,9 +1662,7 @@ theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricall
 
 /-- **Geometric integrality.** A smooth connected scheme `X` over a separably closed field `k`,
 e.g. a smooth projective curve, is geometrically integral over `k`: it is geometrically
-connected (`AlgebraicGeometry.GeometricallyConnected.of_isSepClosed`) and smooth.
-
-(blueprint: `prose-C-04`, part (2)) -/
+connected (`AlgebraicGeometry.GeometricallyConnected.of_isSepClosed`) and smooth. -/
 theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed [IsSepClosed k]
     [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] : GeometricallyIntegral (X ↘ Spec (.of k)) :=
   have := GeometricallyConnected.of_isSepClosed (k := k) X
@@ -1742,9 +1670,7 @@ theorem _root_.AlgebraicGeometry.GeometricallyIntegral.of_isSepClosed [IsSepClos
 
 /-- **Base change of a smooth curve is integral.** For a smooth connected scheme `X` over a
 separably closed field `k`, e.g. a smooth projective curve, and a field extension `K/k`, the base
-change `X_K = X ×_{Spec k} Spec K` is integral.
-
-(blueprint: `prose-C-04`, part (2)) -/
+change `X_K = X ×_{Spec k} Spec K` is integral. -/
 theorem isIntegral_baseChange [IsSepClosed k] [Smooth (X ↘ Spec (.of k))] [ConnectedSpace X] :
     IsIntegral (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :=
@@ -1768,9 +1694,7 @@ Of the hypothesis `H⁰(X, 𝒪_X) = k`, only `h⁰(X, 𝒪_X) = 1` is used, thr
 `χ(𝒪_{X_K}) = χ(𝒪_X) = h⁰(X, 𝒪_X) - g = 1 - g`. Without it the statement fails: for
 `X = ℙ¹_ℂ` over `k = ℝ` and `K = ℂ`, the base change `X_ℂ` is two copies of `ℙ¹_ℂ`, so
 `χ(𝒪_{X_ℂ}) = 2` rather than `1 - g = 1`, and the line bundle that is `𝒪(-1)` on one copy and
-`𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`.
-
-(blueprint: `proposition-divisors-degree-g-open-chart--1`) -/
+`𝒪` on the other has `χ(ℒ) = 1`, hence `deg ℒ = 1 - 2 = -1 ≠ g = 0`. -/
 theorem degree_eq_genus [GlobalSectionsBijective k X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
@@ -1796,9 +1720,7 @@ theorem degree_eq_genus [GlobalSectionsBijective k X]
 
 /-- **The degree of a twist.** For an invertible sheaf `ℒ` on `X_K` and an invertible sheaf `ℳ`
 on the smooth proper curve `X`, `deg (ℒ ⊗ ℳ_K) = deg ℒ + deg ℳ`, by additivity of the degree on
-the smooth proper curve `X_K` and its invariance under base change.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--1`) -/
+the smooth proper curve `X_K` and its invariance under base change. -/
 theorem degree_tensorObj_pullback_fst
     (L : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
@@ -1894,9 +1816,7 @@ be a global section and let `x` be a `k`-rational point of `X` such that `s` doe
 The pullback of `𝒪_X(-x)` is the ideal sheaf `𝓘` of `x_K`, by flatness of `X_K ⟶ X`, and there
 is an exact sequence `0 ⟶ 𝓘 ⊗ ℒ ⟶ ℒ ⟶ i_* i^* ℒ ⟶ 0` for `i : x_K ⟶ X_K`. On global sections,
 `H⁰(i_* i^* ℒ) = ℒ(x_K) ≅ K` is one-dimensional and `H⁰(ℒ) ⟶ ℒ(x_K)` is onto, since its image
-contains `s(x_K) ≠ 0`; the claim follows from left exactness of `H⁰`.
-
-(blueprint: `lemma-twisting-h-0-1-h`, Step 3) -/
+contains `s(x_K) ≠ 0`; the claim follows from left exactness of `H⁰`. -/
 theorem finrankH_zero_tensorObj_pullback_toModules_ker_add_one
     (L : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
@@ -1970,9 +1890,7 @@ At each step a non-zero section `s` of `ℒ ⊗ ℳ_K` does not vanish at some `
 (`AlgebraicGeometry.Scheme.Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus`).
 Twisting by `𝒪_X(-x)` lowers `h⁰` by one
 (`AlgebraicGeometry.Scheme.finrankH_zero_tensorObj_pullback_toModules_ker_add_one`) and lowers
-`χ = h⁰ - h¹` by `deg 𝒪_X(-x) = -1`, so `h¹ = 0` is preserved.
-
-(blueprint: `lemma-twisting-h-0-1-h`, Step 3) -/
+`χ = h⁰ - h¹` by `deg 𝒪_X(-x) = -1`, so `h¹ = 0` is preserved. -/
 theorem exists_isInvertible_twist_of_finrankH_zero_eq [IsSepClosed k]
     (L : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible] (t : ℕ) :
@@ -2031,9 +1949,7 @@ The proof has three steps. Step 1: a `k`-rational point `x` gives the line bundl
 degree one. Step 2: by Riemann–Roch on the smooth proper curve `X_K`, which has
 `H⁰(X_K, 𝒪) = K`, the twist `ℒ ⊗ 𝒪_X(n x)_K` has `h⁰ ≥ 1` and `h¹ = 0` once its degree is at
 least `2g`. Step 3: remove `h⁰ - 1` rational points
-(`AlgebraicGeometry.Scheme.exists_isInvertible_twist_of_finrankH_zero_eq`).
-
-(blueprint: `lemma-twisting-h-0-1-h`) -/
+(`AlgebraicGeometry.Scheme.exists_isInvertible_twist_of_finrankH_zero_eq`). -/
 theorem exists_isInvertible_twist [IsSepClosed k] [ConnectedSpace X]
     (ℒ : (Limits.pullback (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)

@@ -94,8 +94,7 @@ private lemma chosen_to_model
   rfl
 
 /-- Factorization normalization of the chosen compositor.
-Source: Stacks Project, Tags 0F7I and 0F7J
-(blueprint: lem-pur-graph-compactification-factorization).
+Source: Stacks Project, Tags 0F7I and 0F7J.
 
 Proof in words: use the triangle whose three compactifications are the identity-proper
 compactification of the open leg, the identity-open compactification of the proper leg,

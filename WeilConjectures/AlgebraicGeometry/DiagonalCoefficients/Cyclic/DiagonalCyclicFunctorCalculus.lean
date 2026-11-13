@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassR
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalExtRepresentative
 
 /-! # Generic finite evaluation and completed-reference functor calculations
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-functor-calculus).
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +31,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   DerivedCategory.singleFunctors DerivedCategory.singleFunctorIsoCompQ
   Functor.mapDerivedCategory shiftFunctor
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 @[irreducible] def threeFunctorSource
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -59,9 +54,7 @@ Source: coefficient changes (1), exact-single and shift comparisons.
       ((DerivedCategory.singleFunctor A₃ 0).map s.inv ≫
         (G.mapDerivedCategorySingleFunctor 0).inv.app X₂ ≫ G.mapDerivedCategory.map q)
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 @[irreducible] def threeFunctorTarget
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -88,9 +81,7 @@ Source: coefficient changes (1), exact-single and shift comparisons.
     ((H.mapDerivedCategorySingleFunctor 0).hom.app Y₃)⟦(n : ℤ)⟧'
 
 /-- Exact functors carry the actual Ext representative to the single-arrow map.
-Source: Mathlib Ext.mapExactFunctor_hom.
-(blueprint: def-diagonal-cyclic-functor-calculus).
-Proof: unfold the representative and single-arrow map, then apply the Ext formula. -/
+Source: Mathlib Ext.mapExactFunctor_hom. -/
 theorem mapExactFunctorRepresentative
     {A : Type a₃} [Category.{b₃} A] [Abelian A]
     {B : Type a₄} [Category.{b₄} B] [Abelian B]
@@ -104,9 +95,7 @@ theorem mapExactFunctorRepresentative
   rw [Ext.mapExactFunctor_hom]
   simp only [SpTowerClasses.mapSingleArrow, ShiftedHom.map, Category.assoc]
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 @[irreducible] def threeFunctorArrowEquation
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -133,9 +122,7 @@ Source: coefficient changes (1), exact-single and shift comparisons.
         (R ⋙ G.mapDerivedCategory ⋙ H.mapDerivedCategory).map α ≫
         threeFunctorTarget R G H n r t
 
-/-- The normalized three-functor equation.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-functor-calculus).
-Proof: expand the single-arrow maps and use functoriality and associativity. -/
+/-- The normalized three-functor equation. -/
 theorem threeFunctorArrowCalculation
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -159,9 +146,8 @@ theorem threeFunctorArrowCalculation
   simp only [threeFunctorSource, threeFunctorTarget, SpTowerClasses.mapSingleArrow,
     Functor.map_comp, Functor.comp_map, Category.assoc]
 
-/-- The three-functor equation for a supplied finite representative.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-functor-calculus).
-The body is an equality of explicit arrows; it asserts no equality by itself. -/
+/-- The three-functor equation for a supplied finite representative. The body is an equality of
+explicit arrows; it asserts no equality by itself. -/
 @[irreducible] def threeFunctorRepresentativeEquation
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -187,10 +173,7 @@ The body is an equality of explicit arrows; it asserts no equality by itself. -/
       (R ⋙ G.mapDerivedCategory ⋙ H.mapDerivedCategory).map α ≫
       threeFunctorTarget R G H n r t
 
-/-- Transfer the normalized arrow calculation to an equal supplied representative.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-functor-calculus).
-Proof: map hβ by the exact single-arrow operation, then use the normalized
-three-functor calculation and transitivity. -/
+/-- Transfer the normalized arrow calculation to an equal supplied representative. -/
 theorem threeFunctorRepresentativeCalculation
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
     {A₂ : Type a₂} [Category.{b₂} A₂] [Abelian A₂]
@@ -220,9 +203,7 @@ theorem threeFunctorRepresentativeCalculation
   unfold threeFunctorArrowEquation at hn
   exact (congrArg (SpTowerClasses.mapSingleArrow H (n : ℤ)) hβ).trans hn
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 @[irreducible] def completedFunctorSource
     {A₀ : Type a₀} [Category.{b₀} A₀] [Abelian A₀]
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
@@ -238,9 +219,7 @@ Source: coefficient changes (1), exact-single and shift comparisons.
   σ ≫ K.map ((DerivedCategory.singleFunctor A₁ 0).map s.inv ≫
     (F.mapDerivedCategorySingleFunctor 0).inv.app X₀)
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 @[irreducible] def completedFunctorTarget
     {A₀ : Type a₀} [Category.{b₀} A₀] [Abelian A₀]
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]
@@ -257,9 +236,7 @@ Source: coefficient changes (1), exact-single and shift comparisons.
     ((F.mapDerivedCategorySingleFunctor 0).hom.app Y₀)⟦(n : ℤ)⟧' ≫
     ((DerivedCategory.singleFunctor A₁ 0).map t.hom)⟦(n : ℤ)⟧') ≫ τ
 
-/-- An explicit functorial composite used by cyclic transport.
-Source: coefficient changes (1), exact-single and shift comparisons.
-(blueprint: def-diagonal-cyclic-functor-calculus). -/
+/-- An explicit functorial composite used by cyclic transport. -/
 theorem completedFunctorCalculation
     {A₀ : Type a₀} [Category.{b₀} A₀] [Abelian A₀]
     {A₁ : Type a₁} [Category.{b₁} A₁] [Abelian A₁]

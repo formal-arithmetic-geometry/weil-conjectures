@@ -50,9 +50,7 @@ variable [IsNoetherianRing A]
 
 /-- **Finiteness of coherent cohomology on proper schemes over a noetherian ring.** Let `A` be
 noetherian, `p : X ⟶ Spec A` proper and `𝒢` a coherent `𝒪_X`-module. Then every `H^q(X, 𝒢)`
-is a finite `A`-module [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
-
-(blueprint: `lem-pc-coherent-hi`) -/
+is a finite `A`-module [Stacks, Tag 02O6], [EGA III₁, 3.2.1]. -/
 theorem hasFiniteH_of_isProper {X : Scheme.{u}} (p : X ⟶ Spec (.of A)) [IsProper p]
     (G : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) G]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) G] : HasFiniteH p G := by

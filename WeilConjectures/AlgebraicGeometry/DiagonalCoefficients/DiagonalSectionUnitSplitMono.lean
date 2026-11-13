@@ -40,17 +40,7 @@ private theorem adj_unit_splitMono_of_iso
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   CondensedRing.upperStar CondensedRing.lowerStar
 
-/-- A scheme section gives a retraction of the twisted derived adjunction unit.
-
-Source: the projective-line unit summand, using the infinity section
-(blueprint: lem-diagonal-section-unit-split-mono).
-
-Proof: the composite inverse images along a map and its section are canonically
-isomorphic to inverse image along the identity, hence to the identity functor.
-The composite adjunction thus has invertible unit. The individual unit followed
-by the image of the second unit equals this composite unit, so composing the
-image of the second unit with its inverse is a retraction. Postcomposition by
-the direct image of the specified endpoint isomorphism preserves split injectivity. -/
+/-- A scheme section gives a retraction of the twisted derived adjunction unit. -/
 theorem diagonalSectionUnit_splitMono
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S : Scheme.{u}}

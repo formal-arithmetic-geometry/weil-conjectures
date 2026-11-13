@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrd
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.FiniteIntegralBoundaryPackaging
 
 /-! # Ordinary Kummer classes in finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-boundary-of-scalar-class).
 -/
 
 @[expose] public noncomputable section
@@ -44,9 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Any ordinary line arrow representing the scalar Kummer class satisfies the
-finite boundary equation in the specified normalized coordinates.
-Source: diagonal-tower trace (1), exact scalar and integral comparisons
-(blueprint: lem-sfb-finite-ordinary-boundary-of-scalar-class). -/
+finite boundary equation in the specified normalized coordinates. -/
 theorem finiteOrdinary_boundary_of_scalar_class (T : Scheme.{u}) (k : Kummer l T)
     (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}

@@ -31,8 +31,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 
 /-- The compact-support interchange for a proper Cartesian square with etale horizontal
 maps is the mate of inverse sum exchange. This statement has no open source leg.
-Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F
-(blueprint: lem-pur-graph-proper-interchange).
+Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F.
 
 Proof in words: represent an input by a K-injective complex. The proper-support sheaf
 composition identifies the two functors before deriving, as subsheaves of the common

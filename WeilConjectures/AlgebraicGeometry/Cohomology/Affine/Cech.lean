@@ -199,9 +199,7 @@ This is the ordered Čech complex `TopCat.Presheaf.cechComplex`; exactness of th
 complex in degree `0` is the sheaf condition for `ℱ`. The proof localizes at each `fⱼ`: after
 inverting `fⱼ` the covering contains the whole space and the complex is contractible, so every
 cocycle is killed by a power of each `fⱼ` up to a coboundary, and these powers still generate
-the unit ideal.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+the unit ideal. -/
 theorem exactAt_cechComplex_basicOpen (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {V : X.Opens} (hV : IsAffineOpen V)
     {n : ℕ} (f : Fin n → Γ(X, V)) (hf : ⨆ i, X.basicOpen (f i) = V) (q : ℕ) :
@@ -241,9 +239,7 @@ abelian group `ℱ.H (q + 1)` is expressed as it being a subsingleton.
 
 This is the Čech criterion `TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` applied to the
 affine opens and their standard coverings by basic opens, on which the Čech complex of `ℱ` is
-exact in positive degrees by `exactAt_cechComplex_basicOpen`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `pqf-lem-affine-vanishing`) -/
+exact in positive degrees by `exactAt_cechComplex_basicOpen`. -/
 theorem subsingleton_H_succ_of_isAffine [IsAffine X] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Subsingleton (ℱ.H (q + 1)) := by

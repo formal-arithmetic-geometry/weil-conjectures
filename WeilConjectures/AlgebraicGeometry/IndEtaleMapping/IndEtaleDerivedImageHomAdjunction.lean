@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.IndEtaleMapping.IndEtaleDerivedI
 
 The isomorphisms retain the evaluation normalization of restriction. There is no
 continuity assertion and no choice of mapping-complex representatives here.
-Source: Bhatt--Scholze 6.3.16, adjunction step
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
+Source: Bhatt--Scholze 6.3.16, adjunction step.
 -/
 
 @[expose] public noncomputable section
@@ -114,18 +113,7 @@ private theorem homIso_naturality_of_counit
 /-- The global-Hom isomorphisms of derived adjunction are compatible with the
 specified pullback-of-evaluation transition maps.
 
-Source: Bhatt--Scholze 6.3.16, proof, adjunction; Stacks 08JA
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: imageHomIso is the conjugate of the canonical monoidal and
-constant-pullback comparisons under the global tensor-Hom and direct-image
-adjunctions. To check naturality for f, apply these adjunction bijections. The
-definition of imagePullback is pullback of the earlier
-counit, while ExternalRHom.restriction is the transpose of pulled evaluation.
-Naturality of the counit, the two triangle identities, and the constant and tensor
-composition constraints identify the transposes. Inverse-image composition
-then gives precisely the two displayed final normalization factors.
--/
+Source: Bhatt--Scholze 6.3.16, proof, adjunction; Stacks 08JA. -/
 theorem imageHomIso_naturality {T S : Over X} (f : T ⟶ S) :
     ((ExternalRHom.globalHom A X).obj (op K)).map (imagePullback A M f) ≫
       (imageHomIso A M K T).hom =

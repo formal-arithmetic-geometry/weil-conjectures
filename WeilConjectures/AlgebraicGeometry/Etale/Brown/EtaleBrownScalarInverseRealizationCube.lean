@@ -34,22 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
 /-- Scalar extension respects a normalized inverse-image realization.
-Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-scalar-inverse-realization-cube).
-
-Proof: first take scalar mates of both sides. The realization scalar comparisons
-become the recorded restriction comparisons; the coefficient-system tensor comparison
-becomes the ordinary restriction/inverse-image comparison by tensor_unit and the
-derived Hom transpose formulas. On ordinary modules the resulting cube commutes:
-apply the faithful underlying set-sheaf functor, use restrictInverseUnderlying, and
-use the section identity for ordinaryRestriction. Both paths are the pullback of
-the same section. Prolong to complexes. The supplied inverse representative equations
-and restriction representative equations identify its localized faces. For the
-nonexact scalar faces choose flat-term K-flat resolutions, apply derivedTensor_rep
-and the scalar computation counits, and cancel their invertible components.
-Naturality transports the equality from these resolutions to every derived input.
-Taking inverse scalar mates gives exactly the displayed cube. No finiteness,
-flatness of the quotient map, boundedness, or open-immersion hypothesis is used. -/
+Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 03CY, 06YY and 07A4. -/
 theorem etaleBrownScalarInverseRealization_cube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

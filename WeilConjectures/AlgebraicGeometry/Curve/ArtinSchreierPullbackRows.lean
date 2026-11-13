@@ -23,22 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- Artin--Schreier rows commute with structural pullback of regular functions.
-Source: Stacks Project, Tag 0A3J, opening sequence and its functoriality.
-(blueprint: lem-pbc-artin-schreier-pullback-rows)
-
-Proof: On U over C, map a section to its pullback along U ×_C C' → U,
-using a and a' to identify both section groups with regular functions.
-The pullback square and the naturality of a and a' make this a morphism
-G → lowerStar G'. Its adjoint is q and satisfies the displayed section formula.
-Ring pullback commutes with powers and subtraction. The adjunction, applied to
-that sectionwise equality, proves the square with wp and wp'. Let i' be the
-constant-sheaf comparison upperStar(constant Z/p) ≅ constant Z/p on C',
-followed by i0. Both composites from the pulled-back constant sheaf agree on
-the constant-presheaf unit: they send c to c.val times one. The sheafification
-universal property and the adjunction prove the square with i. Transport the
-second given short exact sequence by this constant-sheaf isomorphism; its
-middle and right terms stay fixed. This gives z' and short exactness. The
-construction also works on empty schemes; it asserts no cohomology comparison. -/
+Source: Stacks Project, Tag 0A3J, opening sequence and its functoriality. -/
 theorem exists_artinSchreier_pullback_rows
     {C C' : Scheme.{u}} (ι' : C' ⟶ C) (p : ℕ) [Fact p.Prime]
     (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})

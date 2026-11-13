@@ -63,11 +63,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 
 /-! # Direct finiteness of constructible condensed coefficient complexes
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-poincare-duality/
-sec-perfect-complexes-on-the-point-and-two-exchange-formulas/sk-def-ops/sk-thm-sf-package/
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence.
 The finiteness argument is the agent-formulated ingredient recorded in the DAG.
-(blueprint: lem-sf-condensed-constructible-direct-finiteness).
 
 The ordinary derived category is taken of internal module objects over the pulled-back
 coefficient ring; no completion condition is imposed.
@@ -252,26 +248,19 @@ private theorem stratified_direct_finiteness (ℓ : ℕ) [Fact ℓ.Prime]
 /-- A left inverse of an endomorphism of a bounded finite-constant-model constructible
 complex over the condensed algebraic closure is also a right inverse.
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-poincare-duality/
-sec-perfect-complexes-on-the-point-and-two-exchange-formulas/sk-def-ops/sk-thm-sf-package/
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-agent-formulated finiteness ingredient of native cone detection.
-(blueprint: lem-sf-condensed-constructible-direct-finiteness).
-
 Proof (the six steps of the DAG):
 1. For each integer q apply the homology functor: u = H^q(a), v = H^q(b) satisfy u ≫ v = 1
 on M = H^q(K). The constructibility part of `hK` gives `IsConstantModelConstructible`
-for M; X is Noetherian and quasi-separated
-(`lem-weil-pbc-locally-noetherian-quasi-separated`), so `definition-constructible-sheaves` gives
-a finite stratification by immersions with Noetherian, quasi-compactly immersed strata.
+for M; X is Noetherian and quasi-separated,
+so `definition-constructible-sheaves` gives a finite stratification by immersions with Noetherian,
+quasi-compactly immersed strata.
 2. On each stratum `HasFiniteConstantLocalModel.isLocallyFinitelyPresented`
-(`definition-constructible-sheaves--1`) and `condensedQbar_lfp_locally_free`
-(`lem-weil-pbc-condensed-qbar-lfp-local-triviality`) give a pro-etale cover on which the
-pulled-back module is isomorphic to a finite biproduct of the unit (regular) module.
+ and `condensedQbar_lfp_locally_free` give a pro-etale cover on which the pulled-back module is
+isomorphic to a finite biproduct of the unit (regular) module.
 3. Conjugated by such an isomorphism, the endomorphisms are square matrices over the
 commutative endomorphism ring of the tensor unit (`biproductFinMatrix`); commutative
-square-matrix direct finiteness (`lem-sf-commutative-square-matrix-direct-finiteness`)
-gives the reverse identity, so the restricted endomorphism is invertible (rank 0 included).
+square-matrix direct finiteness gives the reverse identity, so the restricted endomorphism is
+invertible (rank 0 included).
 4. Extension of scalars along the invertible coefficient map is restriction along its
 inverse (`Mod.extendScalarsIsoComapInv`), so the underlying abelian inverse image is
 invertible on every covering member; inverse image to a covering object is restriction

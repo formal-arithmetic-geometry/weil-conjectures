@@ -39,15 +39,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- The transpose of a consecutive quotient arrow under extension of scalars along the
 consecutive quotient map is invertible.
-Source: Stacks Project, Tags 06YY and 09C6.
-
-Proof: by uniqueness the arrow is the explicit one, which is the chart image of the ring-level
-transition `R_(n+1) ⊗ N ⟶ R_n ⊗ N` followed by the strict square of scalar restrictions.
-Its transpose is the mate of that square followed by the chart image of the ring-level
-transpose. The ring-level transpose is the comparison of two left adjoints of restriction
-along `R → R_n`, as both units send `x` to `1 ⊗ x`. The iterated mate of the square along the
-chart adjunctions is the mate along the constant-scalar equivalences, which is invertible,
-pasted with the mate along `j^* ⊣ j_*`, which is the identity; hence the mate is invertible. -/
+Source: Stacks Project, Tags 06YY and 09C6. -/
 theorem finitePerfectAdicQuotientTransition_transpose_isIso
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

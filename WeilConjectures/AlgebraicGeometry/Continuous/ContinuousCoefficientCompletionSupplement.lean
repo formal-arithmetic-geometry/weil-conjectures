@@ -231,8 +231,7 @@ noncomputable def continuousCoefficientResidueCone (l : ℕ) [Fact l.Prime]
         rfl }
 
 /-- Pointwise lifting of compatible residues makes the continuous residue cone limiting.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-continuous-coefficient-completion). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 theorem continuousCoefficientResidueCone_isLimit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) : Nonempty (CategoryTheory.Limits.IsLimit
@@ -318,23 +317,7 @@ theorem continuousCoefficientResidueCone_isLimit (l : ℕ) [Fact l.Prime]
 /-- Continuous integral coefficients are the limit of the positive constant residue tower,
 with constants fixed and projections given by pointwise reduction.
 
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1)
-(blueprint: lem-weil-pbc-continuous-coefficient-completion).
-
-Proof: For a discrete finite quotient, the constant presheaf maps to continuous functions
-by constant functions. Its map is locally surjective on the open fibres of each function,
-and locally injective because equality of constants can be checked on any nonempty
-object. The empty object has the unique section forced by the empty cover. These fibre
-covers are pro-etale coverings: open immersions are weakly etale, and on each affine
-open quasi-compactness supplies a finite affine refinement. Hence sheafification gives
-the unique constant-preserving ring isomorphism, naturally in quotient maps.
-The profinite-tower theorem for the valuation ring identifies it, topologically and as
-a ring, with compatible residues. Composition with this homeomorphism identifies
-continuous functions on any test scheme with compatible continuous residue functions.
-The inverse is continuous because congruence cosets form a neighbourhood basis; their
-inverse images are the open fibres of the coordinates. All ring operations and all
-restriction maps agree pointwise. Ring-sheaf limits are computed sectionwise, so these
-maps give the stated isomorphism and the displayed projection normalization. -/
+Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.8.2(1). -/
 theorem continuousCoefficientCompletion (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) :

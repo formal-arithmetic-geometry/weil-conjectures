@@ -26,17 +26,7 @@ namespace AlgebraicGeometry.Scheme
 The sheaf-level forgetful functor from constant-ring module sheaves to abelian
 sheaves preserves colimits of any fixed diagram.  This is the bridge needed to
 transport a module-sheaf colimit cocone to the underlying abelian sheaves.
-Source: Stacks Project, Tags 03CO and 03CY.
-(blueprint: theorem-cohomology-curves--7)
-
-Proof: The module forgetful functor preserves colimits and the limits used in
-matching families, so Mathlib's plus-construction comparison shows that it
-commutes with sheafification. The resulting natural isomorphism identifies
-module sheafification followed by forgetting with presheaf forgetting followed
-by abelian sheafification. Both functors on the latter side preserve colimits.
-The sheafification adjunction has fully faithful right adjoint, so preservation
-after precomposition with sheafification implies preservation on sheaves.
--/
+Source: Stacks Project, Tags 03CO and 03CY. -/
 theorem moduleSheaf_underlying_preserves_colimit
     {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     {A : Type (u + 1)} [SmallCategory A]

@@ -9,10 +9,6 @@ public import Mathlib.RepresentationTheory.Basic
 import WeilConjectures.AlgebraicGeometry.CondensedWeilRepresentation.WeilActionIntertwining
 
 /-! # Extending tensor equivariance from geometric monodromy and Frobenius
-
-Source: latest blueprint, prop-wf-weil-sheaf-representation-equivalence.proof.md,
-Frobenius descent and the final tensor paragraph.
-(blueprint: lem-wrp-weil-tensor-intertwining).
 -/
 
 @[expose] public noncomputable section
@@ -23,17 +19,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.ProEtale.CondensedWeilRepresentation
 
 /-- Equivariance of a linear tensor map can be checked on geometric elements and the
-chosen degree-one lift, and only on pure tensors at those elements.
-
-Source: prop-wf-weil-sheaf-representation-equivalence.proof.md, Frobenius descent's
-morphism criterion and the tensor comparison in the exactness paragraph.
-(blueprint: lem-wrp-weil-tensor-intertwining).
-
-Proof: pure tensors span the tensor product, so each stipulated pure-tensor identity
-is the equality of the two linear maps on the whole tensor product. The diagonal
-tensor representation and the target representation give actions of W on the two
-modules. Apply the geometric-subgroup and degree-one equivariance criterion to the
-underlying function of b, then specialize the resulting identity to a pure tensor. -/
+chosen degree-one lift, and only on pure tensors at those elements. -/
 theorem tensor_equivariant_of_kernel_and_degreeOne
     {W : Type u} [Group W] (deg : W →* Multiplicative ℤ)
     (γ : W) (hγ : deg γ = Multiplicative.ofAdd 1)

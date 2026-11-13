@@ -290,29 +290,7 @@ private theorem line_zero_detects
     (DerivedCategory.isInvertible.of_iso e.symm hunit) r hr
 
 /-- An automorphism over an algebraically closed field fixes the degree-zero homology
-of the shifted, twisted compact-support object of affine space.
-
-Source: latest blueprint sec-smooth-purity/sk-prop-an,
-cor-pur-vector-bundle-purity.proof.md, paragraph 2
-(blueprint: lem-pur-affine-space-geometric-top-action).
-
-Proof: use the polynomial family H(t,x)=(e(tx)-e(0))/t+t*e(0), with
-polynomial inverse as described in affineSpace_polynomial_deformation. Its fibre
-at zero is an invertible linear map, and its fibre at one is e. The ordered trace
-identifies the compact-support source over the parameter line with the constant
-complex; in particular this source is tensor-invertible. Every point of the line
-lies in a preconnected fibre of the projection meeting the closed zero section.
-Thus the existing identity detector for invertible complexes detects the identity
-on the zero section. The universal linear action specializes to the identity at
-its identity section, so rigidity on the general linear group makes every linear
-action the identity. Exchange pasting and coherence of coefficient descent show
-that pulling the family action back along either endpoint conjugates it to the
-corresponding endpoint action. The zero endpoint therefore detects that the family
-action is identity; the one endpoint gives that e acts as identity. Apply the
-homology functor. This proves identity of the actual derived endomorphism before
-passing to homology; no general faithfulness of derived pullback is used. Dimension
-zero and the zero coefficient ring satisfy the same argument.
--/
+of the shifted, twisted compact-support object of affine space. -/
 theorem affineSpaceIsoTraceAction_homology_zero
     (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

@@ -24,20 +24,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] diagonalFiniteToPadic
   SpTowerClasses.lineModule cartierProRootMap
 
-/-- Construct normalized finite coordinates from a normalized root coordinate.
-Source: blueprint latest, diagonal trace proof (2), finite coefficient and root
-identifications (blueprint: lem-sfb-diagonal-trace-supported-finite-frame-construction).
-
-Proof: compose coefficientForget with the canonical constant finite-ring additive
-comparison. Lift its inverse to a Z_l-linear map by the finite-exponent scalar
-identity, and reflect invertibility through scalar forgetting. The constant-sheaf
-unit comparison and coefficient_one prove that the coefficient coordinate preserves
-one. The same explicit comparison also preserves one measured through
-coefficientForget, independently of the source object's presentation.
-The line coordinate is e_n inverse followed by t. Forgetting this composite,
-the relation he cancels e_n against roots, and ht identifies the remaining t with
-the prescribed root map. These constructions apply also at n=0 and on the empty
-scheme. -/
+/-- Construct normalized finite coordinates from a normalized root coordinate. -/
 theorem diagonalTrace_supportedFiniteBoundary_frame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

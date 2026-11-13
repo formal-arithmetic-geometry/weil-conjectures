@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Quotient.DiagonalQuotientRootEndpoint
 
 /-! # Coefficient maps preserve the normalized finite-root arrow
-
-Source: diagonal tower coefficient changes (1), pure-root tensor normalization.
-(blueprint: lem-diagonal-finite-root-coefficient-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -35,19 +32,7 @@ private theorem finiteRoots_unique {X : Scheme.{u}} {N : ℕ}
   apply (cancel_mono (Scheme.proEtaleRootsOfUnityInclusion X N)).mp
   exact r.inclusion.trans s.inclusion.symm
 
-/-- A scalar map normalized on pure root tensors preserves the root arrow.
-
-Source: latest blueprint, diagonal tower coefficient changes (1), finite coefficient
-extension; the definition of CartierScalarMaps.line_normalization.
-(blueprint: lem-diagonal-finite-root-coefficient-comparison).
-
-Proof: the two finite-root isomorphisms agree after the monic kernel inclusion, hence
-agree. Transpose the remaining equality through the comparison adjunction. The
-forget-comparison isomorphism is the transpose of the module comparison unit.
-Naturality reduces both sides on an etale root section z to the prescribed pure root
-tensor with coefficient one. The line_normalization equation at one identifies these
-sections, since a unital ring map preserves one. This also covers the zero ring and
-empty site. -/
+/-- A scalar map normalized on pure root tensors preserves the root arrow. -/
 theorem finiteRoots_toLine_scalar
     {R A : Type (u + 1)} [CommRing R] [CommRing A] {φ : R →+* A}
     {N : ℕ} {hR : (N : R) = 0} {hA : (N : A) = 0} {Y : Scheme.{u}}

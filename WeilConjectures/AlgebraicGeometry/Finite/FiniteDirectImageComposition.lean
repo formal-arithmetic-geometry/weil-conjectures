@@ -38,8 +38,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Canonical finite-level composition of derived direct images
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations, order 1470, clause (1);
-Stacks Tag 0D6E (blueprint: lem-weil-derived-direct-image-composition).
+Source: Stacks Tag 0D6E.
 
 This is the specialization used by refinement comparisons. It derives the actual
 fibre-product-pasting map, with the universal right-derived unit normalization.
@@ -59,8 +58,7 @@ namespace AlgebraicGeometry.ProEtale
 The exact inverse-image adjunction makes the first direct image preserve K-injectives.
 The generic universal-property compositor is applied to the underived fibre-product
 pasting isomorphism, and inverted to have the source's orientation.
-Source: blueprint order 1470, clause (1), finite-level proof; Stacks Tag 0D6E
-(blueprint: lem-weil-derived-direct-image-composition). -/
+Source: Stacks Tag 0D6E. -/
 def finiteDirectImageComposition (Λ : Type (u + 1)) [CommRing Λ]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (lowerStar (ModuleCat.{u + 1} Λ) (f ≫ g)).rightDerivedFunctor ≅

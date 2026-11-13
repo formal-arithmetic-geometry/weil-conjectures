@@ -32,7 +32,6 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 There is no second proper/etale factorization in this assertion.
 Source: Stacks Project, more-etale.tex Tags 0F7B, 0F7I and 0F7J; graph normalization:
 etale-cohomology.tex Tag 0F4L.
-(blueprint: lem-pur-graph-proper-precomposition-unit).
 
 Proof in words: compactify v by d and q followed by d.i by e. The every-tower formula
 computes the chosen composition by the proper/open interchange for this tower. On a

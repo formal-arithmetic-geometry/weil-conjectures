@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveStructureShea
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Kernel of restriction on an additive ideal
-(blueprint: lem-sc-etale-nested-ideal-kernel)
 -/
 
 @[expose] public section
@@ -19,22 +18,7 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The additive kernel for J embeds in that for I and is the kernel of restriction to J.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-etale-nested-ideal-kernel)
-
-Proof: The closed-subscheme inclusion Z_I to Z_J, base changed to each etale
-object, factors the projection to X through the projection for J. Contravariance
-of global functions therefore shows that the additive kernel for J vanishes on
-restriction to I. Lift its kernel inclusion through the kernel for I to obtain k.
-The lift equation gives compatibility of the two inclusions, and the kernel
-condition for J gives the zero composite. For an arbitrary map g into the kernel
-for I killed by restriction to J, compose g with its inclusion into additive
-functions and lift uniquely through the kernel for J. Cancel the monomorphic
-kernel inclusion for I to verify factorization through k, and cancel that for J
-to verify uniqueness. This proves the limiting fork without affine covers or
-gluing. For I=J the inclusion is the identity; for J=0 the vertex is zero, and
-for empty objects all additive groups are zero. -/
+/-- The additive kernel for J embeds in that for I and is the kernel of restriction to J. -/
 theorem exists_etaleNestedIdealKernel (X : Scheme.{u})
     (I J : X.IdealSheafData) (hJI : J ≤ I) :
     ∃ k : kernel (etaleAdditiveSheafToLowerStar J.subschemeι) ⟶

@@ -177,23 +177,7 @@ private theorem pullback_shifted_sheaf (A : Type (u + 1)) [CommRing A]
 -- Transport through single complexes, shifts, and the section compositor.
 /-- For arbitrary sheaves placed in a common degree, normalized local comparisons give
 a normalized global comparison with the prescribed restrictions.
-Source: blueprint sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md, Gluing;
-Stacks Tags 0A3H, 015F, 06XS, 03EM, and 04TQ.
-(blueprint: lem-trf-etale-shifted-line-comparison-existence).
-
-Proof: shift both objects by -m and identify them with the sheaves in the hypotheses.
-Exact inverse image preserves these single complexes and its compositors. Full faithfulness
-of the single functor therefore turns the local isomorphisms into sheaf isomorphisms.
-On the affine line over each pairwise fibre product, the ratio of the two comparisons
-restricts to the identity at the unit section. Fullness of affine-line inverse image
-lifts this ratio to an endomorphism on the base; its section restriction makes that
-endomorphism the identity. Thus both the maps and their inverses agree on overlaps.
-The affine-line base changes form an etale cover, so glue the maps and the inverses
-by the sheaf morphism gluing theorem. Its uniqueness proves the inverse identities.
-Testing on the original base cover proves normalization of the glued map. Undo the
-shift and the chosen single-complex identifications to obtain the asserted comparison.
-The sheaf gluing theorem includes the empty cover, and this proof uses no nonzero-ring
-or reducedness hypothesis. -/
+Source: Stacks Tags 0A3H, 015F, 06XS, 03EM, and 04TQ. -/
 theorem exists_normalized_shifted_line_comparison (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u})
     (m : ℤ) (C : DerivedCategoryModule A S)

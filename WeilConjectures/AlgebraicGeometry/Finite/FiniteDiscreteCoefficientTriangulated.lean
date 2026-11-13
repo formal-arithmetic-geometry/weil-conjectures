@@ -286,22 +286,7 @@ set_option linter.unusedVariables false in
 /-- For a noetherian scheme, bounded constructible complexes are triangulated for each
 allowed coefficient ring: a finite extension field, its ring of integers, the algebraic closure,
 or a finite discrete ring killed by a power of the fixed prime. The ring objects carry their
-canonical commutative ring-object structures.
-
-Proof: each of the four clauses is one of the instances above, found by typeclass inference.
-Each instance is the weak-Serre argument of the blueprint proof:
-the constructible modules (`IsConstructibleModuleObject`) contain `0`, are stable under
-isomorphisms, and are closed under kernels, cokernels and extensions, so by Stacks 06UQ
-(lem-sbc-cohomology-in-weak-serre-subcategory) the bounded complexes with constructible
-cohomology form a triangulated subcategory.
-1. `E̲`, `𝒪̲_E`, `ℚ̲̄_ℓ`: the instances `isTriangulated_boundedConstructible_continuousMapRingObj`,
-   `_padicIntegersRingObj`, `_padicAlgClRingObj`
-   (lem-sfb-bounded-constructible-triangulated-finiteness), with the closures from
-   lem-weil-pbc-condensed-constructible-serre and lem-weil-pbc-integral-constructible-serre.
-2. `T̲`: the instance `isTriangulated_boundedConstructible_finiteDiscreteRingObj`, with kernels by
-   lem-sfb-finite-discrete-internal-constructible-kernels and cokernels and extensions by
-   lem-weil-pbc-constructible-cokernels-extensions; the hypothesis `ℓ ^ n T = 0` is not needed.
-(blueprint: prop-sfb-bounded-constructible-triangulated) -/
+canonical commutative ring-object structures. -/
 theorem isTriangulated_boundedConstructible
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
     (∀ (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

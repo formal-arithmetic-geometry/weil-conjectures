@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.Flat.FlatConstantTensorProZeroConesSupplem
 /-! # Finite exact realization of completed Koszul coefficient cones
 
 Source: Stacks Project, Tags 099M, 0921 and 093M.
-(blueprint: lem-weil-pbc-completed-koszul-coefficient-cone-realization).
 -/
 
 @[expose] public noncomputable section
@@ -29,7 +28,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 
 /-- The existing total tensor structure, with the completed coefficient sheaf explicit.
-Source: Stacks 06YN (blueprint: lem-weil-pbc-completed-koszul-coefficient-cone-realization). -/
+Source: Stacks 06YN. -/
 instance completedKoszulCochainMonoidal
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalCategory (CochainComplex (CompletedAdicModules T d) ℤ) :=
@@ -40,7 +39,7 @@ attribute [-instance] completedKoszulCochainMonoidal
 attribute [local instance] completedKoszulCochainMonoidal
 
 /-- Use precisely the tensor data of completedKoszulCochainMonoidal.
-Source: Stacks 06YN (blueprint: lem-weil-pbc-completed-koszul-coefficient-cone-realization). -/
+Source: Stacks 06YN. -/
 instance completedKoszulCochainMonoidalStruct
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     MonoidalCategoryStruct (CochainComplex (CompletedAdicModules T d) ℤ) :=
@@ -67,35 +66,7 @@ private theorem mapToExtendedSingle_ext
 set_option linter.unusedVariables false in
 /-- Finite exact realization identifies the algebraic augmentation cones with the
 completed coefficient cones, including their actual strict transition maps. There
-is no arbitrary complex P, K-flatness, eventual vanishing, or inverse limit here.
-
-Source: Stacks Project, proetale.tex, proof of lemma-naive-completion (099M),
-more-algebra.tex, lemma-sequence-Koszul-complexes (0921), and Modules on Sites (093M).
-(blueprint: lem-weil-pbc-completed-koszul-coefficient-cone-realization).
-
-Proof: work over the universe lift of A. Use constant module sheafification,
-followed by extension along completedAdicScalar, as E. The constant functor is
-exact; the completed ring is flat over the constant ring by completed constant
-sheaf reduction. Hence E is additive and preserves finite limits and colimits.
-The lifted quotient of A by I^(n+1) is the quotient of the lifted ring, through
-the quotient map induced by ULift.ringEquiv. Finite coefficient identification
-identifies its constant sheaf with completedAdicFiniteModule. The identification
-sends a quotient representative x to its recorded constant section and therefore
-commutes with every quotient transition. The exterior complexes are exactly the
-ones in completedAdicKoszul: their degree-zero maps use exteriorPower.zeroEquiv,
-and their successors are exterior powers of the diagonal a_i. Tensoring with
-the cochain unit and its left unitor identifies these with the source of gamma.
-In degree zero the Koszul unit is invertible: exterior degree zero is the rank-one
-coefficient module, and extension of scalars preserves the scalar-unit isomorphism.
-The unit equation therefore determines gamma on exterior degree zero. The second
-equation determines it to be zero on all other exterior degrees. The total
-summand inclusions jointly detect morphisms, so gamma equals the realized
-algebraic augmentation under the two identifications. The given formulas for
-sA and qA determine their components; for qA cancel the surjective quotient map.
-They therefore identify all strict squares, for every n <= m. The additive
-mapping-cone comparison gives e, and its naturality at those strict squares is
-the displayed equation. For r=0 only exterior degree zero remains; the empty
-scheme, zero ring and unit ideal use the same quotient and unitor formulas. -/
+is no arbitrary complex P, K-flatness, eventual vanishing, or inverse limit here. -/
 theorem completedKoszulCoefficientConeRealization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)

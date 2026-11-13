@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerS
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # The actual compared ordinary scalar class
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-ordinary-compared-class).
 -/
 
 @[expose] public noncomputable section
@@ -36,9 +33,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 attribute [local instance 100001] finiteIntegralAbDerived finiteIntegralAbExt
   finiteIntegralEtaleDerived finiteIntegralEtaleExt
 
-/-- The actual Hom of a compared additive ordinary cohomology class.
-Source: exact additive site comparison
-(blueprint: def-sfb-finite-ordinary-compared-class). -/
+/-- The actual Hom of a compared additive ordinary cohomology class. -/
 def OrdinaryFiniteComparedClassArrow (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
@@ -49,9 +44,7 @@ def OrdinaryFiniteComparedClassArrow (A : Type (u + 1)) [CommRing A]
       ((comparisonUpperStar AddCommGrpCat.{u + 1} T).obj
         ((Etale.moduleAbelianForget A T).obj M)))⟦(2 : ℤ)⟧
 
-/-- Exact comparison of an arbitrary additive class at the ordinary endpoint.
-Source: exact additive site comparison
-(blueprint: def-sfb-finite-ordinary-compared-class). -/
+/-- Exact comparison of an arbitrary additive class at the ordinary endpoint. -/
 def ordinaryFiniteComparedCohomologyClass (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
     (b : Sheaf.H ((Etale.moduleAbelianForget A T).obj M) 2) :

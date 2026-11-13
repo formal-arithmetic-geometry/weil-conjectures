@@ -16,8 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
 
 /-! # Eigenmaps on the product Artin--Schreier torsor
-
-Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5, root addition.
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +28,7 @@ open scoped CategoryTheory.Obj
 open AlgebraicGeometry ProEtale ProEtale.CondensedRing
 namespace AlgebraicGeometry.ArtinSchreierTrace
 
-/-- The character of the product torsor, (a,b) ↦ ψ(a)ψ(b).
-Source: blueprint lemma-artin-schreier-character-sheaf Step 5
-(blueprint: lem-fd-as-tensor-eigenmaps). -/
+/-- The character of the product torsor, (a,b) ↦ ψ(a)ψ(b). -/
 def tensorAddCharacter {k R : Type*} [AddCommGroup k] [CommMonoid R]
     (ψ : AddChar k R) : AddChar (k × k) R :=
   ψ.compAddMonoidHom (AddMonoidHom.fst k k) *
@@ -815,25 +811,7 @@ private theorem combineRootMaps {X : Scheme.{u}} (Y : Over X)
 -- The nontriviality hypothesis is part of the recorded statement but is not needed.
 set_option linter.unusedVariables false in
 /-- The tensor sheaf and the sum-function sheaf have normalized eigenmaps into the
-same finite etale direct image, with character (a,b) ↦ ψ(a)ψ(b).
-Source: blueprint lemma-artin-schreier-character-sheaf Step 5, root addition and eigen-generators
-(blueprint: lem-fd-as-tensor-eigenmaps).
-
-Proof: reuse the universal product geometry `artinSchreierMapProd`,
-`artinSchreierTranslationProd`, their composition and addition laws, and geometric
-transitivity from the ordinary source module. Pull the product torsor back along (f,g).
-Equivalently Y is the product over X of the covers y^q-y=f and z^q-z=g; it is finite
-etale and surjective, with the pulled-back translation action of k times k.
-The root equations identify pullbacks of the three function sheaves with pullbacks
-of the universal character image along y, z and y+z. Pull back the universal counit
-evaluation, already an isomorphism by condensedArtinSchreierProjector_evaluation, to
-obtain maps α_f, α_g and α_sum to the regular coefficient module on Y. Define φ₁ as
-the adjoint of α_f tensor α_g followed by the regular-module unit isomorphism, using
-strong monoidality of pullback; define φ₂ as the adjoint of α_sum. The source root
-translation identities and the deck-evaluation equation give eigencharacters ψ(a)ψ(b)
-and ψ(a+b), equal by additivity. Composition comparisons identify the adjoints with
-the constructed α maps by the adjunction triangular identities. These are isomorphisms,
-as is their tensor, which proves both adjoint clauses. Empty schemes and p=2 are included. -/
+same finite etale direct image, with character (a,b) ↦ ψ(a)ψ(b). -/
 theorem condensed_artinSchreier_tensor_eigenmaps
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

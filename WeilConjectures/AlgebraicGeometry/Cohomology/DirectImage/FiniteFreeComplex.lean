@@ -49,9 +49,7 @@ This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`. Since `T`
 `AlgebraicGeometry.Scheme.Modules.hasFiniteH_of_isProper` (Chow's lemma, the projective case
 and noetherian induction, Stacks 02O6). It is the only input to
 `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
-properties of the higher direct images.
-
-(blueprint: `lem-pc-coherent-hi`) -/
+properties of the higher direct images. -/
 theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     Module.Finite Γ(T, ⊤) Γ((higherDirectImage f q).obj ℱ, ⊤) := by
@@ -75,9 +73,7 @@ The Noetherian hypothesis cannot be dropped, even for `ℱ` flat over `T`. Let `
 which are trivial on `E` are classified by `H¹(E, 𝒪_E) ⊗_k V ≅ V`; let `ℒ` be the one with class
 a nonzero `v ∈ V`. The sequence `0 ⟶ 𝒪_E ⊗_k V ⟶ ℒ ⟶ 𝒪_E ⟶ 0` has connecting map
 `k ⟶ H¹(E, 𝒪_E) ⊗_k V` sending `1` to `v`, so `f_* ℒ` corresponds to the module `V`, which is
-killed by `V` and infinite-dimensional over `k`, hence not of finite type over `k ⊕ V`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+killed by `V` and infinite-dimensional over `k`, hence not of finite type over `k ⊕ V`. -/
 theorem isFinitePresentation_higherDirectImage [IsLocallyNoetherian T]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
@@ -187,11 +183,7 @@ of a finite affine cover, which is a bounded complex of flat modules by the flat
 together with `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`; the
 general case reduces to this by Noetherian approximation of `(f, ℱ)` [EGA IV₃, §8 and §11.2].
 Alternatively, it follows from Kiehl's theorem that `R f_* ℱ` is pseudo-coherent, and finite
-Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H].
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) 
-(blueprint: lemma-coherent-base-change-invertible-sheaves--1)
--/
+Tor-amplitude coming from flatness [Stacks, Tags 0B91 and 0A1H]. -/
 theorem exists_isFiniteFreeComplex_higherDirectImage [IsProper f] [LocallyOfFinitePresentation f]
     [QuasiCompact f] [HasInjectiveResolutions X.Modules] [ℱ.IsFinitePresentation]
     (hℱ : ℱ.IsFlatOver f) (t : T) :

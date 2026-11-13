@@ -54,7 +54,6 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! # Homology transport for the previous quotient chart model
 Source: Stacks Project, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes-chart-homology).
 
 The hard comparison step is isolated here: after restriction of scalars along
 the quotient from the successor coefficient ring, the supplied chart
@@ -395,9 +394,7 @@ Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
 The quotient map from `A ⧸ I^(n+2)` to `A ⧸ I^(n+1)` is exact on modules,
 slice restriction, and constant realization. Applying the derived homology
 functor to the supplied comparison and composing the coefficient compatibility
-isomorphisms gives the displayed isomorphism in every degree.
-(blueprint: lem-weil-pbc-finite-quotient-previous-local-complexes-chart-homology).
--/
+isomorphisms gives the displayed isomorphism in every degree. -/
 theorem finiteQuotient_previous_local_complexes_chart_homology
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

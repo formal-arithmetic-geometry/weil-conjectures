@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Direct.DirectImageIntegerLocalClass
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NonnegativeComplexLocalClass
 
 /-! # Local classes computed on an arbitrary nonnegative K-injective complex
-
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-complex-local-class).
 -/
 
 @[expose] public section
@@ -35,28 +31,7 @@ variable [∀ Y : Scheme.{u},
 /-- The class map of a nonnegative complex agrees with the derived local-class map,
 when its integer extension is K-injective. The input is an arbitrary derived object
 identified with that extension. There is no classical right-derived functor, coefficient
-object, injective-resolution augmentation, or restricted-resolution choice in this statement.
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images
-(the bounded-below-complex assertion), and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-complex-local-class).
-
-Proof: First take K = Q(L extended by zero) and r the identity. Compute the inverse-open
-presheaf by applying the section functor to that K-injective complex; this is b. The
-unit equation defining localLerayComparison identifies the local derived sections of
-Rf_*K with that same complex. Its comparison with the published direct image is
-normalized by the inverse of the direct-image derived unit. Consequently the induced
-cohomology-sheaf comparison is d. For the local class map, use the normalization of
-localHypercohomologySheafificationAt on K-injective representatives and its naturality.
-The abelian and module sheafification units have the same underlying map, by the
-sheafification adjunctions after forgetting scalars. Commute their exact functors with
-homology and use the counits: both maps take a cycle to its class in the cohomology
-sheaf. Extension by zero commutes with these cycle and boundary quotients; the explicit
-extendHomologyIso and mapExtendIso are exactly the factors in a and d. Evaluation is
-exact and gives the displayed mapHomologyIso on the left and at the end of a. This
-proves the equality on every open. For arbitrary K and r, transport this computation by
-naturality of the local derived-section functors, the Leray comparison and the
-sheafification unit. All intermediate isomorphisms cancel, leaving the stated b and d.
-The argument includes degree zero, empty opens, and the zero complex. -/
+object, injective-resolution augmentation, or restricted-resolution choice in this statement. -/
 theorem directImageComplex_localClass {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℕ)
     [CochainComplex.IsKInjective (L.extend ComplexShape.embeddingUpNat)]

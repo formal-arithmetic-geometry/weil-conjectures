@@ -40,10 +40,8 @@ import all WeilConjectures.AlgebraicGeometry.Cartier.CartierClosedExchangeCompar
 /-!
 # Normalization and naturality of the Cartier constant comparison
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-sk-lem-geo-cartier.proof.md, opening comparison paragraph; Stacks Project, Sites and
-Sheaves, Tags 0H7J and 00WX
-(blueprint: lem-sfb-cartier-constant-comparison-normalization).
+Source: Stacks Project, Sites and
+Sheaves, Tags 0H7J and 00WX.
 
 The inverse images below are the functors on fixed-coefficient module-valued sheaves.
 The etale constant structure map is written as the adjunct of the sheafification extension
@@ -64,42 +62,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The Cartier constant comparison equals the uniqueness-of-left-adjoints isomorphism,
 is invertible, and commutes with inverse image along every closed immersion.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening comparison paragraph;
-Stacks Project, Sites and Sheaves, Tags 0H7J (example-constant-sheaf) and
-00WX (lemma-adjoint-sheaves)
-(blueprint: lem-sfb-cartier-constant-comparison-normalization).
-
-Proof:
-1. By def-weil-pbc-sheafification and def-weil-pbc-constant-sheaf, maps from a constant
-   sheaf are maps from the constant presheaf. Such a map is determined by its component
-   at the terminal object, with all other components obtained by restriction. This gives
-   the constant-sheaf/sections adjunction with unit the sheafification unit at the terminal
-   object. Compose it with the comparison adjunction using def-weil-pbc-composite-adjunction
-   and proposition-comparison-morphism-inverse-image. The inclusion preserves the terminal object,
-   so both right adjoints are pro-etale sections.
-2. By situation-conventions, the left-adjoint uniqueness isomorphism
-   corresponds to the pro-etale constant unit. The explicit definition of
-   cartierConstantComparison first extends that presheaf unit by sheafification and then
-   transposes under the comparison adjunction. Evaluating on the etale constant unit at
-   the terminal object gives the pro-etale unit. Injectivity of the composite hom bijection
-   identifies the maps. The comparison is therefore invertible.
-3. For the closed immersion, def-weil-pbc-inverse-image and
-   def-weil-proetale-inverse-image identify the adjuncts of both constant structure maps
-   with the constant-section direct-image maps. Under the further constant/sections
-   adjunction each is the constant unit at D. The base change of the terminal object is
-   terminal, and its unique terminal isomorphism does not change the constant section.
-4. Transpose the left side successively through pro-etale inverse image, the comparison
-   inverse image, and the etale constant functor, using def-weil-pbc-composite-adjunction.
-   The defining conjugate unit equation for the commutation isomorphism, supplied by
-   situation-conventions, rewrites this as transposition through the
-   etale inverse image and then the comparison at D. The remaining adjuncts from steps
-   2 and 3 send a to its pro-etale constant section on D. The right-adjoint commutation
-   identifies the two base-change objects; its terminal component changes no section.
-5. Naturality of the inverse-image hom bijection transposes the right side to the same
-   constant-section map. Injectivity of the bijection proves the displayed equation in
-   diagrammatic order. The calculations also apply to the zero ring, empty schemes,
-   empty support, and the identity immersion. No supported unit identity is asserted.
--/
+Source: Stacks Project, Sites and Sheaves, Tags 0H7J and 00WX. -/
 theorem cartierConstantComparison_normalization (A : Type (u + 1)) [CommRing A] :
     (∀ T : Scheme.{u},
       cartierConstantComparison A T =

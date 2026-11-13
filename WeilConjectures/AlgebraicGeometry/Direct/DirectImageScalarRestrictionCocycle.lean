@@ -13,9 +13,8 @@ set_option linter.privateModule false
 /-!
 # Coefficient cocycle of the normalized pro-etale derived direct image
 
-Source: Stacks Project, derived.tex, Tag 070Y (`lemma-K-injective-defined`), and the
-agent-written coefficient-composition argument in the DAG
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle).
+Source: Stacks Project, derived.tex, Tag 070Y, and the agent-written coefficient-composition
+argument in the DAG.
 
 The comparisons are the specified `fixedScalarRestrictionDirectImage` isomorphisms.
 The restriction associators are the existing sectionwise identity isomorphisms localized
@@ -33,9 +32,7 @@ open scoped CategoryTheory.Functor
 
 -- The coefficient-chain calculation uses only exact localization and adjunctions.
 /-- Mates preserve a pasted coefficient square: transpose along the final adjunction and use
-its counit, naturality, and the two individual mate identities.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+its counit, naturality, and the two individual mate identities. -/
 private theorem mate_chain
     {A B C D E F : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]
@@ -67,9 +64,7 @@ private theorem mate_chain
   rfl
 
 /-- Exact localization preserves coefficient pasting. Apply the square-composition API to
-the inverse squares and cancel the comparison isomorphisms.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+the inverse squares and cancel the comparison isomorphisms. -/
 private theorem derive_chain
     {A₀ A₁ A₂ B₀ B₁ B₂ : Type (u + 1)}
     [Category.{u} A₀] [Category.{u} A₁] [Category.{u} A₂]
@@ -133,9 +128,7 @@ private theorem derive_chain
   rfl
 
 /-- Transport coefficient pasting along three natural isomorphisms. Naturality moves
-the source associator past the first comparison; the intermediate inverses cancel.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+the source associator past the first comparison; the intermediate inverses cancel. -/
 private theorem transport_chain
     {A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
     [Category A₀] [Category A₁] [Category A₂]
@@ -169,9 +162,7 @@ private theorem transport_chain
 namespace AlgebraicGeometry.ProEtale
 
 /-- The ordinary pullback/scalar comparison satisfies the adjunction unit identity,
-since its supplied ordinary mate is the identity on direct images.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+since its supplied ordinary mate is the identity on direct images. -/
 private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {T X : Scheme.{u}} (f : T ⟶ X)
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) :
@@ -188,9 +179,7 @@ private theorem e_unit {A B : Type (u + 1)} [CommRing A] [CommRing B]
   simpa using h.symm
 
 /-- Ordinary scalar-pullback comparisons compose. Transpose along the pullback
-adjunction, use the unit identity twice, and compare sectionwise identity associators.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+adjunction, use the unit identity twice, and compare sectionwise identity associators. -/
 private theorem e_chain {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) {T X : Scheme.{u}} (f : T ⟶ X)
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C)) :
@@ -219,9 +208,7 @@ private theorem e_chain {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRi
   rfl
 
 /-- Localize the ordinary coefficient chain termwise and transport to the specified
-derived pullbacks; no preservation of K-injectives is used.
-Source: the coefficient-pasting argument of
-(blueprint: lem-sf-direct-image-scalar-restriction-cocycle). -/
+derived pullbacks; no preservation of K-injectives is used. -/
 private theorem scalarRestriction_chain
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) {T X : Scheme.{u}} (f : T ⟶ X)

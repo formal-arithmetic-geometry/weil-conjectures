@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Abelian.AbelianSheavesGModulesAction
 
 /-!
 # Abelian etale sheaves on a field and discrete Galois modules
-
-Source: Stacks Project, Etale Cohomology, Tag 04JQ,
-`lemma-equivalence-abelian-sheaves-point`, deduced from Tag 03QT
-(blueprint: lem-exc-abelian-sheaves-gmodules).
 -/
 
 @[expose] public section

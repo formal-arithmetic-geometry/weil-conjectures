@@ -17,13 +17,11 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.style.haveILetI false in
 /-- The normalized shifts and exact functor structures needed by the étale Hom comparison.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint
-`lem-coef-etale-hom-transpose-exact`, proof steps 1--2.
+Source: Stacks Project, Tags 08JC and 08J9.
 
 The proof constructs K-injective and flat-term K-flat models, transports the signed
 source reindexing through evaluation, and applies the cone calculation for internal Hom.
-This is the shift and functor-exactness part of the parent comparison theorem.
-(blueprint: lem-coef-etale-hom-transpose-exact-shift-data) -/
+This is the shift and functor-exactness part of the parent comparison theorem. -/
 theorem etaleHomComparison_reversedExact_shiftData
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X) :

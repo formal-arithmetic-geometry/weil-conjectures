@@ -43,8 +43,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The two canonical B-linear composites transporting the scalar mate agree.
-Source: blueprint main-20261015, scalar-six direct-image proof, finite rings paragraph
-(blueprint: lem-sfb-etale-proetale-scalar-mate).
 
 Proof, following the node's five steps:
 1. Write C for comparison inverse image and l,p,r,s for the etale/pro-etale

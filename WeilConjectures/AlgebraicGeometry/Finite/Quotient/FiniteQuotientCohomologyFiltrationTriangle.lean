@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientPreviousL
 
 /-! # The controlled outer terms of the coefficient-filtration triangle
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094I and 094H
-(blueprint: lem-weil-pbc-finite-quotient-cohomology-filtration-triangle).
+Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094I and 094H.
 -/
 
 @[expose] public noncomputable section
@@ -32,32 +31,7 @@ whose middle term is the actual successor reduction and whose outer terms have
 bounded finite etale-local cohomology. No assertion is made about the homology of
 the middle term.
 
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (0942), first proof
-paragraph, and lemma-locally-constant-bounded (094I), with lemma-locally-constant-tensor-product
-(094H); proetale.tex, Tag 09C2.
-(blueprint: lem-weil-pbc-finite-quotient-cohomology-filtration-triangle).
-
-Proof: put B = A/I^(n+2) and Q = I^(n+1)/I^(n+2), and regard the exact sequence
-0 -> Q -> B -> A/I^(n+1) -> 0 as a sequence of B-modules. Resolve M by a flat-term
-K-flat complex over the completed ring. Extend to B and tensor the displayed
-sequence with that complex. Exact constant realization and termwise flatness
-give a short exact sequence of complexes, hence its distinguished triangle.
-The unit tensor comparison and the specified universal scalar-extension counit
-identify its middle term with the actual successor reduction. Balancing and the
-coefficient compatibility squares identify its last term with the scalar restriction
-of the previous reduction, and its first term with the scalar restriction of the
-residue reduction tensored over A/I with Q. The ideal I kills Q and its finite ideal
-generators give finite generators over A/I. Intersect the residue and previous
-trivializing etale covers. On the residue cover the first term is computed by the
-ordinary tensor of the finite-projective residue complex with Q. The last term is
-computed by the previous finite-projective complex. Both are supported in [a,b]
-and have finite terms, so their homology is finite over the finite Noetherian ring B.
-Constant realization, exact restriction and coefficient isomorphisms identify the
-cohomology sheaves with the constant finite algebraic homology modules on these
-etale covers. Vanishing on the covers implies vanishing on V by sheaf
-separatedness. Pull back and compose the covers for every W over V. On an empty
-chart take zero modules, and for the zero ring all terms are zero. This uses only
-outer-term homology, never the desired middle-term cohomology conclusion. -/
+Source: proetale.tex, Tag 09C2. -/
 theorem finiteQuotient_cohomology_filtration_triangle
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

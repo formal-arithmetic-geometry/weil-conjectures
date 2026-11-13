@@ -18,7 +18,6 @@ import all WeilConjectures.CategoryTheory.FlatScalarUnit
 /-! # The normalized derived scalar endpoint of a flat internal module
 
 Source: Stacks Project, Tag 06YY, K-flat computation of derived scalar extension.
-(blueprint: lem-diagonal-flat-scalar-endpoint).
 -/
 
 @[expose] public noncomputable section
@@ -38,19 +37,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor
 /-- A flat internal module has a unique scalar-endpoint isomorphism with the
 prescribed ordinary unit as its derived adjoint.
 
-Source: Stacks Project, Tag 06YY; coefficient changes paragraph (1).
-(blueprint: lem-diagonal-flat-scalar-endpoint).
-
-Proof: A single complex on a flat module is K-flat. Localize the cochain scalar
-adjunction unit and apply the K-flat representative theorem for the exact right
-adjoint given by scalar restriction. Its transpose is an isomorphism. Compose it
-with the single-complex scalar comparison. The ordinary single-unit square holds
-in degree zero by the unit formula and in every other degree because the source
-is zero. Naturality of localization and the single-functor comparison gives its
-derived version, so the displayed adjoint is exactly the ordinary scalar unit.
-This proves existence. The adjunction Hom equivalence is injective, hence any
-other normalized hom equals this one. An isomorphism is determined by its hom,
-which proves uniqueness. No flatness of the coefficient map is assumed. -/
+Source: Stacks Project, Tag 06YY. -/
 theorem diagonal_flat_scalar_endpoint_iso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

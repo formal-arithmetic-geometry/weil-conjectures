@@ -32,7 +32,7 @@ open AffineZariskiSite AffineBlowup
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData) (U : X.AffineZariskiSite)
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+/-- Deformation space of a closed section,
 comparison of the Rees model with the blow-up model over an affine open `U` of `X`. The chart of
 `D_I X = Spec_X 𝒪_X[t, I t⁻¹]` over `U`, which is `Spec Γ(U)[t, I(U) t⁻¹]`, maps by the open
 immersion `deformationChart` onto the complement of the strict transform of `U × {0}` in

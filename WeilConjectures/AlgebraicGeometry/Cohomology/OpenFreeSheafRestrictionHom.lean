@@ -33,22 +33,7 @@ private theorem freeSectionsEquiv_naturality {X : Scheme.{u}} (W : X.Opens)
   rfl
 
 /-- Restriction is bijective on morphisms out of the free sheaf of the image open.
-Source: Stacks Project, Tags 03DI and 03DJ; the represented free-sheaf adjunction.
-(blueprint: lem-pc-open-free-restriction-hom)
-
-Proof: Identify morphisms from the represented free sheaf of W with sections on
-W, using the sheafification, free/forgetful and Yoneda adjunctions. Naive open
-restriction R is left adjoint to direct image G: take the opposite of the
-image/preimage adjunction on opens, whisker it by abelian groups, and restrict
-it to the full subcategories of sheaves. Its unit on F at the image open W is
-F applied to the counit inclusion j(j⁻¹W) ⟶ W. This inclusion is invertible
-because W is the image open. Thus postcomposition with the unit is bijective
-on morphisms from the free sheaf of W. The adjunction identifies this map with
-restriction followed by its Hom equivalence, so restriction is bijective.
-Finally transport along Mathlib's natural isomorphism from inverse image to
-naive open restriction. The image/preimage identity includes the empty and top
-opens without exceptions; the coefficient sheaf F is arbitrary.
--/
+Source: Stacks Project, Tags 03DI and 03DJ. -/
 theorem H.openFreeSheaf_restrictionHom_bijective {X Y : Scheme.{u}}
     (j : Y ⟶ X) [IsOpenImmersion j]
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :

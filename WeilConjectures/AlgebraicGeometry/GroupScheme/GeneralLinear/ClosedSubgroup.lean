@@ -54,12 +54,6 @@ definition, and it is the only place where the scheme and the matrix groups meet
   scheme-theoretically.
 - `AlgebraicGeometry.GeneralLinearGroup.containsCommutators_iff_le_derivedIdeal`: a closed subgroup
   of `V(I)` contains the commutators if and only if it contains the derived subgroup.
-
-## Blueprint
-
-- `det-d-geometry`: matrix algebraic groups as closed subgroup schemes of `GL(V)`.
-- `lemma-restriction-normal-subgroup`: closed subgroups containing the commutators, and the derived
-subgroup.
 -/
 
 @[expose] public section
@@ -120,8 +114,7 @@ end AffineFactor
 section SubgroupScheme
 
 /-- The closed subgroup scheme `V(I) = Spec (k[x_ij, det⁻¹] ⧸ I)` of `GL_n` cut out by a Hopf ideal
-`I`. It is a group object by Mathlib's quotient Hopf algebra structure.
-(blueprint: `det-d-geometry`) -/
+`I`. It is a group object by Mathlib's quotient Hopf algebra structure. -/
 noncomputable abbrev subgroupScheme (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k] :
     Over (Spec (.of k)) :=
   (Spec (.of (CoordinateRing n k ⧸ I))).asOver (Spec (.of k))
@@ -136,8 +129,7 @@ instance : IsAffine (subgroupScheme I).left :=
 instance : LocallyOfFiniteType (subgroupScheme I).hom :=
   locallyOfFiniteType_specOverSpec
 
-/-- The closed immersion of the closed subgroup scheme `V(I)` into `GL_n`.
-(blueprint: `det-d-geometry`) -/
+/-- The closed immersion of the closed subgroup scheme `V(I)` into `GL_n`. -/
 noncomputable def subgroupSchemeι : subgroupScheme I ⟶ 𝔾𝕃(n; k) :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mkₐ k I).toRingHom)).asOver (Spec (.of k))
 
@@ -166,7 +158,7 @@ theorem mapMulEquiv_comp_subgroupSchemeι {R : Type u} [CommRing R] [Algebra k R
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the invertible matrices over `R`
 satisfying the equations in `I`: the identification of `G(R)` with a classical matrix group is a
-theorem, not a definition. (blueprint: `det-d-geometry`) -/
+theorem, not a definition. -/
 theorem range_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
     Set.range (fun φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I ↦
       GeneralLinearGroup.homMulEquiv n k R (φ ≫ subgroupSchemeι I)) = zeroLocus I R := by
@@ -199,8 +191,7 @@ theorem injective_homMulEquiv_comp (R : Type u) [CommRing R] [Algebra k R] :
 
 /-- The `R`-points of the closed subgroup scheme `V(I)` are the group `zeroLocus I R` of matrices
 satisfying the equations in `I`: a point `φ : Spec R ⟶ V(I)` corresponds to the matrix of the
-point `φ ≫ ι` of `GL_n`, where `ι : V(I) ⟶ GL_n` is the closed immersion.
-(blueprint: `det-d-geometry`) -/
+point `φ ≫ ι` of `GL_n`, where `ι : V(I) ⟶ GL_n` is the closed immersion. -/
 noncomputable def zeroLocusMulEquiv (R : Type u) [CommRing R] [Algebra k R] :
     zeroLocus I R ≃* ((Spec (.of R)).asOver (Spec (.of k)) ⟶ subgroupScheme I) :=
   (MulEquiv.subgroupCongr (SetLike.coe_injective (range_homMulEquiv_comp I R)).symm).trans
@@ -244,8 +235,7 @@ section Inclusion
 variable {I J : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k] [J.IsHopfIdeal k]
 
 /-- The closed immersion `V(J) ⟶ V(I)` of closed subgroup schemes of `GL_n` induced by an
-inclusion `I ≤ J` of Hopf ideals: the spectrum of the quotient map `k[GL_n] ⧸ I → k[GL_n] ⧸ J`.
-(blueprint: `det-d-geometry`) -/
+inclusion `I ≤ J` of Hopf ideals: the spectrum of the quotient map `k[GL_n] ⧸ I → k[GL_n] ⧸ J`. -/
 noncomputable def subgroupSchemeHom (h : I ≤ J) : subgroupScheme J ⟶ subgroupScheme I :=
   (Spec.map (CommRingCat.ofHom (Ideal.Quotient.factorₐ k h).toRingHom)).asOver (Spec (.of k))
 
@@ -317,7 +307,7 @@ immersion `V(J) ⟶ V(I)` contains the commutators scheme-theoretically
 
 Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
 `Γ(X)`; the hypothesis for `R = Γ(X)`, transported through `zeroLocusMulEquiv`, factors their
-commutator through `V(J)`. (blueprint: `lemma-restriction-normal-subgroup`) -/
+commutator through `V(J)`. -/
 theorem containsCommutators_subgroupSchemeHom
     (hIJ : ∀ (R : Type u) [CommRing R] [Algebra k R],
       ⁅zeroLocus I R, zeroLocus I R⁆ ≤ zeroLocus J R) :
@@ -467,8 +457,7 @@ the largest Hopf ideal `J ≥ I` with this property, the sum of all of them. -/
 variable (I : Ideal (CoordinateRing n k)) [I.IsHopfIdeal k]
 
 /-- The Hopf ideal of the derived subgroup `[V(I), V(I)]`: the sum of all Hopf ideals `J ≥ I` such
-that `V(J) ⟶ V(I)` contains the commutators of `V(I)`. (blueprint:
-`lemma-restriction-normal-subgroup`) -/
+that `V(J) ⟶ V(I)` contains the commutators of `V(I)`. -/
 noncomputable def derivedIdeal : Ideal (CoordinateRing n k) :=
   sSup {J | ∃ (hJ : J.IsHopfIdeal k) (h : I ≤ J),
     haveI := hJ; IsMonHom.ContainsCommutators (subgroupSchemeHom h)}
@@ -489,7 +478,7 @@ instance : (derivedIdeal I).IsHopfIdeal k :=
 
 Two points `X ⟶ V(I)` factor through the affine scheme `Spec Γ(X)`, where they are matrices over
 `Γ(X)`. Their commutator satisfies the equations of every Hopf ideal in the family defining
-`derivedIdeal I`, hence those of their sum. (blueprint: `lemma-restriction-normal-subgroup`) -/
+`derivedIdeal I`, hence those of their sum. -/
 instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) := by
   refine ⟨fun {X} a b ↦ ?_⟩
   let : Group (X ⟶ subgroupScheme I) := Hom.group
@@ -535,8 +524,7 @@ instance : IsMonHom.ContainsCommutators (subgroupSchemeHom (le_derivedIdeal I)) 
 variable {I} {J : Ideal (CoordinateRing n k)} [J.IsHopfIdeal k] (h : I ≤ J)
 
 /-- A closed subgroup `V(J) ⊆ V(I)` contains the commutators of `V(I)` if and only if it contains
-the derived subgroup `[V(I), V(I)]`, that is, `J ≤ derivedIdeal I`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+the derived subgroup `[V(I), V(I)]`, that is, `J ≤ derivedIdeal I`. -/
 theorem containsCommutators_iff_le_derivedIdeal :
     IsMonHom.ContainsCommutators (subgroupSchemeHom h) ↔ J ≤ derivedIdeal I := by
   refine ⟨fun hc ↦ le_sSup ⟨inferInstance, h, hc⟩, fun hJ ↦ ⟨fun a b ↦ ?_⟩⟩
@@ -600,7 +588,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (I : Ideal (CoordinateRing n k))
 /-- The closed subgroup scheme `V(identityComponent I)` cut out by the ideal of the reduced
 identity component is the reduced closed subscheme of `V(I)` on the identity component
 `GrpObj.identityComponent (subgroupScheme I)`: its image in `V(I)` is the connected component of the
-identity point. (blueprint: `lemma-connected-components-images-homomorphisms`) -/
+identity point. -/
 theorem range_subgroupSchemeHom_le_identityComponent :
     Set.range (subgroupSchemeHom (le_identityComponent I)).left.base =
       connectedComponent (GrpObj.onePoint (subgroupScheme I)) := by
@@ -643,8 +631,7 @@ theorem mem_zeroLocus_identityComponent_of_range_subset {g : zeroLocus I k}
 
 /-- The `k`-points of the identity component `G°` have finite index in the `k`-points of
 `G = V(I)`. This is `AlgebraicGeometry.GrpObj.finiteIndex_range_identityComponentι` for the group
-scheme `V(I)`, read on matrices through `zeroLocusMulEquiv`. (blueprint:
-`lemma-connected-components-images-homomorphisms`) -/
+scheme `V(I)`, read on matrices through `zeroLocusMulEquiv`. -/
 theorem finiteIndex_subgroupOf_zeroLocus_identityComponent :
     ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).FiniteIndex := by
   let X := (Spec (.of k)).asOver (Spec (.of k))
@@ -706,8 +693,7 @@ central scheme-theoretically: its points commute with all points of `G`.
 
 Both points factor through the affine scheme `Spec Γ(X)`, where they are matrices, and these
 commute by `Matrix.GeneralLinearGroup.commute_of_mem_zeroLocus_center`: the commutation equations
-vanish on the rational points of `Z(G) × G`, which are dense in this reduced scheme.
-(blueprint: `lemma-stable-subspaces-center`) -/
+vanish on the rational points of `Z(G) × G`, which are dense in this reduced scheme. -/
 theorem central_subgroupSchemeHom_le_center [IsAlgClosed k] (hI : I.IsRadical)
     {X : Over (Spec (.of k))} (a : X ⟶ subgroupScheme (center I)) (b : X ⟶ subgroupScheme I) :
     (a ≫ subgroupSchemeHom (le_center I)) * b = b * (a ≫ subgroupSchemeHom (le_center I)) := by

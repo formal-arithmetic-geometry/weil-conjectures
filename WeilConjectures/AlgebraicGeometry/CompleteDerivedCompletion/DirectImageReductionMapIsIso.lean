@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.Direct
 import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageReductionMapLevelwiseDetection
 
 /-! # Isomorphism of the direct-image reduction mate
-
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md, proof (2).
-(blueprint: lem-weil-pbc-direct-image-completion-compatibility-isIso)
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +35,7 @@ K-injective complex I. The finite scalar cone model, strict direct-image cone
 comparison, and split-perfect tensor K-injectivity identify each finite evaluation
 of the mate with an isomorphism. Apply levelwise detection in complete derived
 completion. This is the K-injective/levelwise-detection subclaim isolated from
-the parent proposition.
-(blueprint: lem-weil-pbc-direct-image-completion-compatibility-isIso) -/
+the parent proposition. -/
 theorem directImage_pushReductionMap_isIso :
     ∀ K : DerivedCategory (AdicCompletion.Modules l E X),
       IsIso ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)

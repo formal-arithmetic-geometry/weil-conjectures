@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Closed subsets are cut out by quasi-coherent ideals
 
-Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3), construction in its proof
-(blueprint: lem-sc-closed-subset-qc-ideal).
+Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3), construction in its proof.
 -/
 
 @[expose] public section
@@ -24,15 +23,7 @@ Quasi-coherent ideal sheaves `𝒥 ⊆ 𝒪_Y` are Mathlib's `Y.IdealSheafData` 
 ideals with `I(D(f)) = I(U)_f`), and the vanishing set `V(𝒥) = {y : 𝒥_y ≠ 𝒪_{Y,y}}` is its
 `support`.
 
-Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3), proof
-(blueprint: lem-sc-closed-subset-qc-ideal).
-
-Proof: Apply `lem-weil-pbc-reduced-induced-closed-subscheme` to the scheme and the closed
-subset. Its vanishing ideal is quasi-coherent and on each affine open `Spec R` is the
-radical ideal `I` with `V(I)` equal to the prescribed closed subset on that open. At the
-point corresponding to a prime `p`, its stalk is `I_p` inside `R_p`; this equals `R_p`
-exactly when `I` is not contained in `p`. Thus the vanishing set of this ideal is exactly
-the prescribed subset. Take this vanishing ideal as `J`. -/
+Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3), proof. -/
 theorem exists_idealSheafData_support_eq (Y : Scheme.{u}) (Z : Set Y) (hZ : IsClosed Z) :
     ∃ J : Y.IdealSheafData, (J.support : Set Y) = Z := by
   exact ⟨IdealSheafData.vanishingIdeal ⟨Z, hZ⟩,

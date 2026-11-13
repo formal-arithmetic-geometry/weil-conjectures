@@ -17,12 +17,7 @@ open Functor.LaxMonoidal
 namespace AlgebraicGeometry.ProEtale.CoefficientHomComparison
 
 /-- A braided lax monoidal functor respects the tensor product of internal morphisms.
-Source: Stacks 07A4, 0D6D; Step 10 of the constructible coefficient Hom comparison.
-Proof: uncurry the equation. The evaluation equation for the closed comparison removes
-its components. The braided monoidal tensor-interchange identity replaces the image
-of the middle interchange. Naturality of the tensorator then moves the two evaluations
-past it, and the two sides coincide by naturality of the middle interchange.
-(blueprint: lem-per-coefficient-hom-tensor-compatibility). -/
+Source: Stacks 07A4, 0D6D. -/
 theorem closed_comparison_tensor
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     [BraidedCategory C] [BraidedCategory D] [MonoidalClosed C] [MonoidalClosed D]

@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.Diagonal
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedFlat
 
 /-! # Scalar compatibility of the normalized diagonal source
-
-Source: diagonal tower coefficient changes, paragraph (1), and the supported-source
-normalization in the diagonal tower trace construction.
-(blueprint: lem-diagonal-supported-scalar-source).
 -/
 
 @[expose] public noncomputable section
@@ -505,40 +501,7 @@ attribute [local irreducible] SupportNormalization DiagonalTrace.NormalizedSourc
 /-- Closed diagonal support commutes with scalar extension, with the ordinary
 composition normalization retained in the derived source map.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and
-sk-prop-diagonal-tower-trace.proof.md, supported-source identification;
-Stacks Tags 09AD, 09AA and 09AH.
-(blueprint: lem-diagonal-supported-scalar-source).
-
-Proof: On the diagonal the supported regular module is the regular module, and on
-its open complement it is zero. Closed/open restriction is jointly conservative and
-commutes with tensor, so this module is flat. The ordinary closed projection formula
-identifies its scalar extension with the supported regular module for the new ring.
-The extension unit followed by this comparison is precisely supportMap: closed
-restriction gives the coefficient unit and open restriction gives the zero map.
-Compute on the flat single complex. The scalar adjunction transpose is therefore an
-isomorphism and gives e with its required normalization.
-
-For the target normalized source, compose ordinary closed direct image with f_*,
-use Delta f = id from r.over_eq, and use the identity direct-image comparison.
-This defines its ordinary isomorphism, with exactly SupportNormalization. Closed direct
-image is exact and preserves K-injective complexes, since closed inverse image is exact.
-Resolve the regular module on the diagonal by a K-injective resolution and push it forward.
-Its further pushforward by f is the original resolution by Delta f = id. Consequently
-the full right-derived unit on the supported source is invertible, giving t.acyclic.
-
-Finally transpose the asserted equation through the scalar adjunction on the base.
-The two endpoint normalizations replace their transposes by the actual coefficient
-maps in degree zero. The full-unit normalization of s, evaluated on the single
-supported complex, moves the derived unit across the coefficient restriction square.
-The remaining equation is naturality of ordinary direct-image composition with
-respect to the coefficient map. Both ordinary source isomorphisms have this specified
-composition normalization, so it holds before deriving. Injectivity of the scalar Hom
-equivalence proves the equation. This uses no line, class, trace, projective-line
-cohomology, quotient arithmetic, or flatness of the scalar map. Empty schemes and
-zero coefficient rings obey the same unit and composition equations.
--/
+Source: Stacks Tags 09AD, 09AA and 09AH. -/
 theorem diagonal_supported_scalar_source
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

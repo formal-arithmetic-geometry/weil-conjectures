@@ -32,8 +32,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleExactPullbackSquarePasting
 /-! # Composition and pasting of actual normalized etale mates
 
 Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7K;
-Etale Cohomology, Tag 03S6; blueprint etale locality Step 1
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
+Etale Cohomology, Tag 03S6.
 
 All compactifications and all right adjunctions are arbitrary. The support/sum comparison
 is the existing constructed graph comparison. The helpers only transport the specified
@@ -57,8 +56,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekOfCompactificationIso unboundedEtaleCompactSupportExchange
 
 /-- The specified proper/open compositor transported to three fixed compactifications.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting). -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 noncomputable def etaleNormalizedSupportCompositor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} {e : U ⟶ X} {v : X ⟶ T}
@@ -73,8 +71,7 @@ noncomputable def etaleNormalizedSupportCompositor
     rightDerivedLowerShriekOfCompactificationIso A (d.comp (k.ofComp d)) k
 
 /-- The actual proper/open exchange, followed by the canonical compactification comparison.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting). -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 noncomputable def etaleNormalizedSupportExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} {e : U ⟶ X} {e' : U' ⟶ X'}
@@ -100,8 +97,7 @@ noncomputable def etaleNormalizedSupportExchange
 
 /-- The right mate B on the entire unbounded category, for arbitrary fixed adjunctions.
 Its defining transpose is the inverse support exchange followed by the pulled-back counit.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting). -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 noncomputable def etaleNormalizedRightExchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} {e : U ⟶ X} {e' : U' ⟶ X'}
@@ -352,17 +348,7 @@ attribute [local irreducible] unboundedEtaleCompactSupportBaseChange
 end
 
 /-- The normalized conjugates respect the actual compact-support compositor, at every K.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Use the composition clause of lem-sfb-quasifinite-compact-support-exact to identify
-   d_ve alpha with sigma (d_v S_e)(F_v d_e). The nested-summand counit calculation of
-   lem-pur-etale-sum-composition-counit identifies sigma's conjugate with the canonical
-   exact pullback compositor. Conjugate the equality using
-   def-weil-pbc-adjunction-conjugate and lem-weil-pbc-mate-pasting(2). Vertical composition
-   reverses; horizontal conjugacy gives rho_e G_v followed by e^* rho_v. This is the
-   displayed equation, with c pointing out of G_ve. No inverse compositor is inserted.
-   These are steps 1 and 2 of the DAG proof. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_composition
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -422,13 +408,7 @@ theorem etaleNormalizedMates_composition
   simpa only [conjugateIsoEquiv_apply_hom, Iso.symm_hom] using hc
 
 /-- The identity normalization for every compactification and right adjunction.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: For the proper identity compactification the proper-support/sum comparison is the
-   identity comparison by lem-sfb-quasifinite-compact-support-exact. Conjugacy with the
-   identity adjunction gives the canonical right comparison. Step 3 transports this to
-   every compactification by the refinement cocycle and conjugacy composition law. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_identity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X] (c : Compactification (𝟙 X))
@@ -477,15 +457,7 @@ theorem etaleNormalizedMates_identity
   rfl
 
 /-- The actual right exchange mates paste for an arbitrary further change of base.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Step 4: set A_w = C_w inverse. Its right mate is B_w by the defining transpose.
-   Invert the composite-base-change equation of
-   lem-amb-unbounded-compact-support-comparisons. Apply
-   lem-weil-pbc-mate-pasting(1) to A_w and A_z. This gives the equality after the two
-   explicit pullback compositors. All adjunctions are unbounded. Open restriction is
-   the special case where z is an open immersion. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_baseChange_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -546,16 +518,7 @@ theorem etaleNormalizedMates_baseChange_pasting
       exact Category.comp_id _
 
 /-- The canonical inverse-image square maps paste with their exact composition maps.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Apply the sheaf square-pasting law to the two flipped squares, identify a
-   flipped square comparison with the inverse comparison, and cancel the pullback
-   compositors. Encode the two routes as finite pasting expressions of exact sheaf
-   inverse images. The exact derived transformation pasting theorem descends their
-   equality to the unbounded derived categories. Expand its word comparison formulas
-   to identify each cell with exactDerivedSquareUpperStarIso or
-   unboundedEtaleUpperStarCompIso. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_pullback_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -581,14 +544,7 @@ theorem etaleNormalizedMates_pullback_pasting
   exact etaleExactPullbackSquarePasting A sq sq' sq'' K
 
 /-- The two normalized exchange squares imply the normalized square for the pasted base change.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Step 7: substitute the mate-pasting equation of step 4. Substitute the two assumed
-   rho B equations, moving rho through z'^* by functoriality. The resulting composite
-   is chi_z z'^*(chi_w) times the pulled-back rho. Replace its first factors using
-   step 6. Naturality of the canonical pullback compositors gives the displayed final
-   equation. This is conditional: no normalization antecedent is silently assumed. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_normalization_pasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' U'' X X' X'' : Scheme.{u}}
@@ -661,13 +617,7 @@ theorem etaleNormalizedMates_normalization_pasting
     (etaleNormalizedMates_pullback_pasting A sq sq' sq'' K) hw hz
 
 /-- The component of B is the adjunct specified in the node.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Unfold the definition of etaleNormalizedRightExchange and apply
-   def-weil-pbc-adjunction-mate's component formula. Its transpose is exactly the
-   inverse exchange followed by w^* of the original counit. This also confirms that
-   B is the actual mate on every unbounded K, rather than a freely chosen map. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_exchange_adjunct
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} [IsNoetherian U] [IsNoetherian U']
@@ -697,17 +647,7 @@ attribute [local irreducible] etaleNormalizedSupportExchange
 end
 
 /-- The normalization square is preserved by every Cartesian open restriction, at every K.
-Source: Stacks Tags 0F7J, 0F7K, 03S6; blueprint etale locality Step 1.
-(blueprint: lem-pur-etale-normalized-mates-composition-pasting).
-
-Proof: Step 8 applies lem-pur-etale-support-exchange-right-mate to the open base change.
-The theorem identifies the inverse actual exchange with the inverse sum exchange after
-both graph comparisons. Conjugacy expresses the two compact-support counits through the
-sum counits. Transpose both displayed sides through the sum adjunction: the sum counit's
-base-change identity makes the transposes equal. Cancel the adjunction bijection. The
-refinement equation identifies the result for every c and d. Applied to the further
-base-changed arrow this is the open-restriction assertion; the B-pasting equation and
-pullback-pasting equation identify it with the restriction of the original square. -/
+Source: Stacks Tags 0F7J, 0F7K, 03S6. -/
 theorem etaleNormalizedMates_openRestriction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}} [IsNoetherian U] [IsNoetherian U']

@@ -135,9 +135,6 @@ import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 /-!
 # Scalar extension of completed integral coefficients and its raw rationalization
 
-Source: blueprint, proper base change, order 1307
-(blueprint: def-weil-pbc-finite-stage-pair-category).
-
 The coefficient map is fixed by every finite quotient. Its derived tensor functor
 is the recorded K-flat construction. Rationalization is uniquely fixed by its
 composite with the integral localization, including its object function.
@@ -169,9 +166,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
   {C : I → Type z} [∀ i, Category.{v} (C i)] [∀ i, Preadditive (C i)]
   (S : StageSystem C)
 
-/-- Addition on classes is fixed by addition of representatives at any common stage.
-Source: blueprint finite-stage pair category
-(blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- Addition on classes is fixed by addition of representatives at any common stage. -/
 def PairPreadditiveNormalized (P : Preadditive S.PairCategory) : Prop := by
   letI := P
   exact ∀ (X Y : S.PairCategory) (n : I) (hX : X.stage ≤ n) (hY : Y.stage ≤ n)
@@ -339,15 +334,7 @@ private abbrev pairPreadditiveStructure : Preadditive S.PairCategory where
 
 end AdditiveConstruction
 
-/-- The common-stage formulas determine a unique preadditive structure.
-Source: blueprint finite-stage pair category
-(blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: transport is conjugation of an additive functor by associators, so it is
-additive. For two representatives pass to their finite common upper stage and
-add there. A second choice agrees after transport to a common further stage.
-Negation and zero descend in the same way. All abelian-group identities and
-bilinearity of composition hold after passing to one common stage. Every
-morphism has a representative, so these equations also prove uniqueness. -/
+/-- The common-stage formulas determine a unique preadditive structure. -/
 theorem pairPreadditive_exists [∀ i j (h : i ≤ j), (S.T h).Additive] :
     ∃! P : Preadditive S.PairCategory, S.PairPreadditiveNormalized P := by
   refine ⟨pairPreadditiveStructure S, ?_, ?_⟩
@@ -362,9 +349,7 @@ theorem pairPreadditive_exists [∀ i j (h : i ≤ j), (S.T h).Additive] :
       PairCategory.exists_common_stage f g X.stage
     exact ((hP X Y n hX hY f g).1).symm.trans (pairHomAdd_mk S f g).symm
 
-/-- The preadditive structure determined by the common-stage group laws.
-Source: blueprint finite-stage pair category
-(blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The preadditive structure determined by the common-stage group laws. -/
 instance pairPreadditive [∀ i j (h : i ≤ j), (S.T h).Additive] :
     Preadditive S.PairCategory := (S.pairPreadditive_exists).exists.choose
 
@@ -378,29 +363,24 @@ variable {E F G : Padic.FiniteCoefficientFields l Ω}
 
 variable (T : Scheme.{u})
 
-/-- The existing bounded constructible complete integral stage, with its coefficient fixed.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The existing bounded constructible complete integral stage, with its coefficient fixed. -/
 abbrev pbcIntegralStage (E : Padic.FiniteCoefficientFields l Ω) :=
   PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)
 
-/-- The ambient derived coefficient stage used by the integral full inclusion.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The ambient derived coefficient stage used by the integral full inclusion. -/
 abbrev pbcAmbientStage (E : Padic.FiniteCoefficientFields l Ω) :=
   PbcCompletedDerived T (pbcStageDatum.{u} l Ω E)
 
-/-- The existing full inclusion of the integral stage into its ambient derived category.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The existing full inclusion of the integral stage into its ambient derived category. -/
 abbrev pbcStageInclusion (E : Padic.FiniteCoefficientFields l Ω) :
     pbcIntegralStage l Ω T E ⥤ pbcAmbientStage l Ω T E :=
   ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E))
 
-/-- The recorded raw rationalization at the canonical small model of E.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The recorded raw rationalization at the canonical small model of E. -/
 abbrev pbcStageCategory (E : Padic.FiniteCoefficientFields l Ω) :=
   PbcRationalCategory T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)
 
-/-- The recorded integral localization functor at this coefficient stage.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The recorded integral localization functor at this coefficient stage. -/
 abbrev pbcStageLocalization (E : Padic.FiniteCoefficientFields l Ω) :=
   pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)
 
@@ -443,14 +423,7 @@ private theorem pbcStageCoefficientMap_eq (h : E ≤ F) :
     exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
       (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T).exists.choose_spec n
 
-/-- Finite coefficient extension preserves the three defining integral conditions.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: the target integer ring is finite free over the source integer ring.
-Compute derived extension on K-flat representatives. Finite freeness commutes
-with the reduction tower and its derived limit and preserves completion.
-Tensor the common bounded local models and the compatible etale origins.
-Their normalization equations follow from ordinary tensor balancing at every
-finite quotient; neither the bounds nor the finite stratification changes. -/
+/-- Finite coefficient extension preserves the three defining integral conditions. -/
 theorem pbcAmbientScalarExtension_preserves (h : E ≤ F)
     [IsNoetherian T] (_hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
     (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
@@ -466,8 +439,7 @@ theorem pbcAmbientScalarExtension_preserves (h : E ≤ F)
 variable [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
-/-- Restriction of the specified ambient tensor extension to the integral subcategories.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- Restriction of the specified ambient tensor extension to the integral subcategories. -/
 def pbcIntegralScalarExtension (h : E ≤ F) :
     pbcIntegralStage l Ω T E ⥤
       pbcIntegralStage l Ω T F :=
@@ -528,13 +500,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] ULift.module in
 /-- Integral tensor extension has a unique factorization through raw localization.
 The equality fixes objects as well as integral morphisms; inverses of uniformizer
-multiples then fix every fraction. No arbitrary functor is chosen.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: the image of the source uniformizer is a unit times a positive power of
-the target uniformizer, so it becomes invertible in the target localization.
-Send a fraction f/pi^n to the integral tensor image of f divided by the image of
-pi^n. The tensor relations, bilinearity and balancing prove well-definedness
-and functoriality. Every localized morphism is such a fraction, proving uniqueness. -/
+multiples then fix every fraction. No arbitrary functor is chosen. -/
 theorem pbcRationalScalarExtension_exists (h : E ≤ F) :
     ∃! B : pbcStageCategory l Ω T E ⥤
         pbcStageCategory l Ω T F,
@@ -562,8 +528,7 @@ theorem pbcRationalScalarExtension_exists (h : E ≤ F) :
   intro B' hB'
   exact pbcStageFunctor_ext l Ω T hdim hl B' B (hB'.trans hb.symm)
 
-/-- Raw rationalized tensor extension. Equal coefficient fields use identity literally.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- Raw rationalized tensor extension. Equal coefficient fields use identity literally. -/
 def pbcScalarExtension (h : E ≤ F) :
     pbcStageCategory l Ω T E ⥤
       pbcStageCategory l Ω T F :=
@@ -573,10 +538,7 @@ def pbcScalarExtension (h : E ≤ F) :
       (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose
 
 set_option linter.unusedSectionVars false in
-/-- Coefficient maps compose exactly, including repeated fields.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: both composites have the same quotient projections, because the field
-inclusions compose. Use uniqueness of the completed limit map. -/
+/-- Coefficient maps compose exactly, including repeated fields. -/
 theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
     pbcCompletedScalarMap l Ω T h ≫ pbcCompletedScalarMap l Ω T k =
       pbcCompletedScalarMap l Ω T (h.trans k) := by
@@ -670,12 +632,7 @@ private theorem pbcTensorSection_smul
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedSectionVars false in
-/-- The tensor unit comparison is fixed on sheafified pure tensors.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: inclusion E→E is identity, also on completions. The balanced map
-r tensor x ↦ r*x and x ↦ 1 tensor x are inverse sectionwise, commute with
-restriction, and descend through sheafification. Pure tensors generate locally,
-so the indicated formula determines the natural isomorphism uniquely. -/
+/-- The tensor unit comparison is fixed on sheafified pure tensors. -/
 theorem pbcOrdinaryScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E)) ≅
         𝟭 (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))),
@@ -710,8 +667,7 @@ theorem pbcOrdinaryScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     (e.hom.app M).val.app U ((pbcScalarAdjunction φ).unit.app M |>.val.app U x)
   erw [(pbcScalarAdjunction_exists φ).exists.choose_spec M U x, he', he]
 
-/-- The section-normalized ordinary tensor unit.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The section-normalized ordinary tensor unit. -/
 def pbcOrdinaryScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
     pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E)) ≅
         𝟭 (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) :=
@@ -776,12 +732,7 @@ private theorem pbcDerivedScalarUnit_homotopy (E : Padic.FiniteCoefficientFields
       (DerivedCategory.Qh.map ((pbcHomotopyScalarUnit l Ω T E).hom.app H) ≫ 𝟙 _) at h
   simpa only [Category.comp_id] using h
 
-/-- The derived tensor unit is uniquely fixed by its universal counit on complexes.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: tensor extension along identity is exact. Its universal left-derived
-counit is invertible; descend the section-normalized ordinary tensor unit.
-Localization of complexes is essentially surjective and full on natural
-transformations, so this normalization determines the comparison uniquely. -/
+/-- The derived tensor unit is uniquely fixed by its universal counit on complexes. -/
 theorem pbcAmbientScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcAmbientScalarExtension l Ω T (le_refl E) ≅
         𝟭 (pbcAmbientStage l Ω T E),
@@ -903,8 +854,7 @@ private theorem pbcAdjunction_complexUnit
   rw [← he]
   exact hn P
 
-/-- The canonical derived tensor unit, rather than an arbitrary unit isomorphism.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The canonical derived tensor unit, rather than an arbitrary unit isomorphism. -/
 def pbcAmbientScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
     pbcAmbientScalarExtension l Ω T (le_refl E) ≅
         𝟭 (pbcAmbientStage l Ω T E) :=
@@ -1005,11 +955,7 @@ private theorem pbcAmbientScalarUnit_mate (E : Padic.FiniteCoefficientFields l �
   rw [hv, Category.comp_id] at h
   exact h
 
-/-- The integral tensor unit is the restriction of the canonical ambient one.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: the integral subcategories are full. Lift each component of the ambient
-unit and its inverse. Faithfulness gives naturality, inverse equations and
-uniqueness. -/
+/-- The integral tensor unit is the restriction of the canonical ambient one. -/
 theorem pbcIntegralScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcIntegralScalarExtension l Ω T hdim hl (le_refl E) ≅
         𝟭 (pbcIntegralStage l Ω T E),
@@ -1033,21 +979,14 @@ theorem pbcIntegralScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
   apply ObjectProperty.hom_ext _
   exact congrArg (fun η ↦ η.app K) he'
 
-/-- Integral unit with its ambient normalization.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- Integral unit with its ambient normalization. -/
 def pbcIntegralScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
     pbcIntegralScalarExtension l Ω T hdim hl (le_refl E) ≅
         𝟭 (pbcIntegralStage l Ω T E) :=
   (pbcIntegralScalarUnit_exists l Ω T hdim hl E).exists.choose
 
 /-- The integral/rational comparison is fixed by the tensor unit at equal fields
-and the unique localization factorization at distinct fields.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: at equal fields use the section-normalized tensor unit. Otherwise use the
-equality in the unique factorization through scalar localization. These cases
-are exhaustive. Heterogeneous equality retains the exact functor indices under
-the literal identity normalization. Either formula specifies every component
-and hence gives uniqueness. -/
+and the unique localization factorization at distinct fields. -/
 theorem pbcScalarIntegralComparison_exists (h : E ≤ F) :
     ∃! c : pbcStageLocalization l Ω T E ⋙
         pbcScalarExtension l Ω T hdim hl h ≅
@@ -1085,8 +1024,7 @@ theorem pbcScalarIntegralComparison_exists (h : E ≤ F) :
     intro e' he'
     exact eq_of_heq (he'.2 hEF)
 
-/-- The uniquely normalized comparison with integral scalar extension.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The uniquely normalized comparison with integral scalar extension. -/
 def pbcScalarIntegralComparison (h : E ≤ F) :
     pbcStageLocalization l Ω T E ⋙
         pbcScalarExtension l Ω T hdim hl h ≅
@@ -1095,8 +1033,7 @@ def pbcScalarIntegralComparison (h : E ≤ F) :
   (pbcScalarIntegralComparison_exists l Ω T hdim hl h).exists.choose
 
 /-- The ambient tensor associator is the mate of composition of actual scalar
-restrictions, normalized by their identity on sections.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+restrictions, normalized by their identity on sections. -/
 def pbcAmbientScalarAssociator (h : E ≤ F) (k : F ≤ G) :
     pbcAmbientScalarExtension l Ω T h ⋙ pbcAmbientScalarExtension l Ω T k ≅
       pbcAmbientScalarExtension l Ω T (h.trans k) :=
@@ -1108,11 +1045,7 @@ def pbcAmbientScalarAssociator (h : E ≤ F) (k : F ≤ G) :
       (pbcCompletedScalarMap l Ω T k) (pbcCompletedScalarMap l Ω T (h.trans k))
       (pbcCompletedScalarMap_comp l Ω T h k))
 
-/-- Restriction of the canonical ambient associator to the full integral subcategories.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: lift its components and inverse components using fullness. Naturality and
-inverse equations follow after the faithful inclusion; the same inclusion gives
-uniqueness. -/
+/-- Restriction of the canonical ambient associator to the full integral subcategories. -/
 theorem pbcIntegralScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! e : pbcIntegralScalarExtension l Ω T hdim hl h ⋙
         pbcIntegralScalarExtension l Ω T hdim hl k ≅
@@ -1138,8 +1071,7 @@ theorem pbcIntegralScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
   apply ObjectProperty.hom_ext _
   exact congrArg (fun η ↦ η.app K) he'
 
-/-- The integral associator with the ambient tensor normalization.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The integral associator with the ambient tensor normalization. -/
 def pbcIntegralScalarAssociator (h : E ≤ F) (k : F ≤ G) :
     pbcIntegralScalarExtension l Ω T hdim hl h ⋙
         pbcIntegralScalarExtension l Ω T hdim hl k ≅
@@ -1375,11 +1307,7 @@ private theorem pbcIntegralScalarAssociator_cocycle
   simp only [ObjectProperty.FullSubcategory.comp_hom, pbcIntegralScalarAssociator_hom]
   exact pbcAmbientScalarAssociator_cocycle l Ω T h k j K.obj
 
-/-- The rational associator is uniquely determined on the unchanged integral objects.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: apply target rationalization to the integral associator, conjugating by
-the integral comparisons. Naturality holds on integral morphisms and hence on
-their fractions. Rationalization is surjective on objects, giving uniqueness. -/
+/-- The rational associator is uniquely determined on the unchanged integral objects. -/
 theorem pbcScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! e : pbcScalarExtension l Ω T hdim hl h ⋙
         pbcScalarExtension l Ω T hdim hl k ≅
@@ -1436,8 +1364,7 @@ theorem pbcScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
   funext K
   exact (he' K.obj).trans (he K.obj).symm
 
-/-- The scalar associator induced by tensor balancing, including the normalized units.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The scalar associator induced by tensor balancing, including the normalized units. -/
 def pbcScalarAssociator (h : E ≤ F) (k : F ≤ G) :
     pbcScalarExtension l Ω T hdim hl h ⋙
         pbcScalarExtension l Ω T hdim hl k ≅
@@ -1466,12 +1393,7 @@ private theorem pbcScalarAssociator_normalization (h : E ≤ F) (k : F ≤ G)
 attribute [local irreducible] pbcScalarIntegralComparison pbcScalarAssociator
   pbcIntegralScalarAssociator
 
-/-- The tensor associators satisfy the pentagon in component form.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: the ambient associators are mates of identity-on-sections restriction
-comparisons. Their two four-field composites therefore agree. Full integral
-inclusions and rational integral comparisons transport that equality; every
-rational object is an integral object, so these tests prove the displayed equality. -/
+/-- The tensor associators satisfy the pentagon in component form. -/
 theorem pbcScalarAssociator_cocycle {H : Padic.FiniteCoefficientFields l Ω}
     (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
     (K : pbcStageCategory l Ω T E) :
@@ -1592,13 +1514,7 @@ private theorem pbcScalarAssociator_rightUnit (h : E ≤ F)
     ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)
   simpa only [eqToIso.hom, eqToHom_app, Functor.id_map] using hn.symm
 
-/-- Normalized tensor identities give the literal identity transitions and unit associators.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: the equal-field branch of pbcScalarExtension is identity by definition.
-The ambient tensor-unit comparison is multiplication on pure tensors, and the
-ambient associator is tensor balancing with the same ordinary adjunction units.
-Their unit equations hold on those generators. Faithful integral inclusions and
-rationalization transport the equations, including repeated coefficient fields. -/
+/-- Normalized tensor identities give the literal identity transitions and unit associators. -/
 theorem pbcScalarSystem_units (h : E ≤ F) :
     pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _ ∧
       HEq (pbcScalarAssociator l Ω T hdim hl (le_refl E) h)
@@ -1618,11 +1534,7 @@ theorem pbcScalarSystem_units (h : E ≤ F) :
       (pbcTransportIso_heq
         (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hsF) _)
 
-/-- Rationalized tensor extension is additive.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
-Proof: tensor extension is additive on complexes and derived morphisms. The
-localization formula sends sums of fractions to sums; identity fields are
-literal identity functors, which are additive as well. -/
+/-- Rationalized tensor extension is additive. -/
 @[instance] theorem pbcScalarExtension_additive (h : E ≤ F) :
     (pbcScalarExtension l Ω T hdim hl h).Additive := by
   classical
@@ -1658,8 +1570,7 @@ literal identity functors, which are additive as well. -/
     rw [hB]
     infer_instance
 
-/-- The concrete finite-stage scalar system on the PBC raw rational categories.
-Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The concrete finite-stage scalar system on the PBC raw rational categories. -/
 abbrev pbcScalarSystem :
     StageSystem (fun E : Padic.FiniteCoefficientFields l Ω ↦
       pbcStageCategory l Ω T E) where
@@ -1667,9 +1578,7 @@ abbrev pbcScalarSystem :
   assoc h k := pbcScalarAssociator l Ω T hdim hl h k
   cocycle h k j K := pbcScalarAssociator_cocycle l Ω T hdim hl h k j K
 
-/-- Finite composita give the common coefficient stages.
-Source: blueprint finite-stage pair category
-(blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- Finite composita give the common coefficient stages. -/
 instance pbcFiniteCoefficientFields_directed :
     IsDirectedOrder (Padic.FiniteCoefficientFields l Ω) :=
   ⟨fun E F ↦ ⟨Padic.finiteCoefficientCompositum l Ω E F,
@@ -1677,13 +1586,10 @@ instance pbcFiniteCoefficientFields_directed :
 
 /-- The concrete PBC finite-stage pair category, without an idempotent envelope.
 Its quotient representatives, transport, identities and common-stage composition
-are exactly StageSystem.PairCategory with this concrete coefficient system.
-Source: blueprint finite-stage pair category
-(blueprint: def-weil-pbc-finite-stage-pair-category). -/
+are exactly StageSystem.PairCategory with this concrete coefficient system. -/
 abbrev PbcFiniteStagePairCategory := (pbcScalarSystem l Ω T hdim hl).PairCategory
 
-/-- The base field witnesses nonemptiness, including the empty-diagram case.
-Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
+/-- The base field witnesses nonemptiness, including the empty-diagram case. -/
 instance pbcFiniteCoefficientFields_nonempty : Nonempty (Padic.FiniteCoefficientFields l Ω) :=
   ⟨Padic.finiteCoefficientBase l Ω⟩
 

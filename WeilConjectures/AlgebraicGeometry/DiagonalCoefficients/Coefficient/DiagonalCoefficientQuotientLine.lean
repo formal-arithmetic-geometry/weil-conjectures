@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Root-normalized quotient Tate-line realizations
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-quotient-line).
-
 ## Main definitions
 
 - `QuotientLineRealization`: quotient line compared through every root projection.
@@ -30,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The exact shift/single comparison for the positive torsion Tate line.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-quotient-line). -/
+/-- The exact shift/single comparison for the positive torsion Tate line. -/
 def finiteLineComparison (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (X : Scheme.{u}) :
     geoP1Twist A N hA X 1 2 ≅
@@ -44,8 +40,7 @@ def finiteLineComparison (A : Type (u + 1)) [CommRing A] (N : ℕ)
     ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategorySingleFunctor 0)
     (Scheme.finiteEtaleTateLine X N A hA) (geoCartierLine A N hA X) (Iso.refl _) 2
 
-/-- A shifted positive-line endpoint in the specified finite trace presentation.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-quotient-line). -/
+/-- A shifted positive-line endpoint in the specified finite trace presentation. -/
 def FiniteRealization.shiftedLine
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}} (e : FiniteRealization R A X)
@@ -59,9 +54,7 @@ def FiniteRealization.shiftedLine
       (finiteLineComparison A N hA X).inv
 
 /-- The finite realization of one positive quotient line, fixed by all integral
-root projections. The exponent N is a positive ell power killing the quotient.
-Source: blueprint clause 1, every uniformizer quotient
-(blueprint: def-sfb-diagonal-coefficient-quotient-line). -/
+root projections. The exponent N is a positive ell power killing the quotient. -/
 def QuotientLineRealization (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)
     (n r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)
@@ -76,8 +69,7 @@ def QuotientLineRealization (l : ℕ) [Fact l.Prime]
       (limit.π (Scheme.proEtaleRootsOfUnityTower X l (Fact.out : l.Prime)) (op r) ≫
         finiteRoots.toLine (ULift.{u + 1} (completedResidue l E π n)) hA)
 
-/-- The specified finite quotient line isomorphism. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-quotient-line). -/
+/-- The specified finite quotient line isomorphism. -/
 def QuotientLineRealization.iso (l : ℕ) [Fact l.Prime]
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E}
     {n r : ℕ} {hA : ((l ^ (r + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0}
@@ -90,8 +82,7 @@ def QuotientLineRealization.iso (l : ℕ) [Fact l.Prime]
       geoCartierLine (ULift.{u + 1} (completedResidue l E π n)) (l ^ (r + 1)) hA X :=
   a.2.2.iso
 
-/-- The line realization into the trace's shifted positive finite Tate object.
-Source: blueprint clause 1 (blueprint: def-sfb-diagonal-coefficient-quotient-line). -/
+/-- The line realization into the trace's shifted positive finite Tate object. -/
 def QuotientLineRealization.shifted (l : ℕ) [Fact l.Prime]
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E}
     {n r : ℕ} {hA : ((l ^ (r + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0}

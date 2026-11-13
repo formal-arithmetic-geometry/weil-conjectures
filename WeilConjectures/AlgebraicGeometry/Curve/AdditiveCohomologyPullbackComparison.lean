@@ -76,33 +76,7 @@ private theorem coordinateIso_pullback
   exact hq U x
 
 /-- Coordinate-normalized additive comparisons commute with structural scalar
-endomorphisms and untensored pullback. No module actions on G.H or G'.H are inputs.
-Source: Stacks Project, Tag 03P2, Theorem etale-cohomology-theorem-zariski-fpqc-quasi-coherent,
-and Tag 02KH, the canonical cohomology comparison before tensor extension.
-(blueprint: lem-pbc-additive-cohomology-pullback-comparison)
-
-Proof: Use natural section coordinates for the associated etale unit module to
-identify G with its coefficient lift: on U send x to the lift of the inverse
-unit coordinate applied to a U x. Naturality of both coordinate families gives
-an isomorphism of sheaves. Do the same for G'. Compose their cohomology maps
-with the natural coefficient-lift, etale/Zariski, and ordinary Ext comparisons.
-Transport the target unit module through the pullback-unit isomorphism and the
-unique isomorphism between the displayed cartesian square and the categorical
-pullback. These give additive equivalences e and e'. For each scalar, the
-section-coordinate formula determines its endomorphism uniquely. Naturality
-of all comparisons for these endomorphisms therefore give the two scalar
-endomorphism identities, in the ordinary structural module actions.
-For pullback compatibility choose a finite affine cover of C and a finite
-affine cover of C' refining its inverse image cover. The refinement exists by
-quasi-compactness of C'. Tuple intersections within either affine cover are
-affine by separatedness. The section formula hq identifies the coefficient
-map with structural pullback on the refined intersections. The natural affine
-Cech inverse-image comparison thus gives the same map on cycle classes as
-H.baseChangeLinear. Every cohomology class is
-represented by such a cycle, giving the stated equality. Transport the equality
-through the displayed-pullback isomorphism. No tensor exactness, flatness,
-injectivity, surjectivity, dimension bound or properness is used. Empty schemes
-and degree zero are included by the same section complexes. -/
+endomorphisms and untensored pullback. No module actions on G.H or G'.H are inputs. -/
 theorem exists_additive_cohomology_pullback_comparison
     {k k' : Type u}
     [CommRing k] [CommRing k'] [Algebra k k']

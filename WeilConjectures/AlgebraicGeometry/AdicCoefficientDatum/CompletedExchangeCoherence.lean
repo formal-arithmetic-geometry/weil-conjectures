@@ -16,8 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAd
 /-!
 # Naturality, units, and pasting of completed exchange
 
-Source: blueprint proper base change, completed exchange coherence, order 1348
-(blueprint: lemma-weil-pbc-completed-exchange-coherence).
 The comparison maps below retain ordinary tensor-unit normalization. They do not
 replace canonical completed pullback compositions by arbitrary natural isomorphisms.
 
@@ -147,16 +145,7 @@ private theorem compositeUnit_bijective {U V W : Scheme.{t}}
   exact h₃.comp (h₂.comp h₁)
 
 /-- Completed composition is uniquely fixed by its ordinary completion-unit equation.
-Source: blueprint coherence, canonical associativity and proof step 5; Stacks Tag 099N (5)
-(blueprint: lemma-weil-pbc-completed-exchange-coherence).
-Proof: under constant-to-completed restriction, completed pullback is ordinary pullback
-followed by the derived completion reflector. Pullback of quotient reductions is the
-strict tensor balancing map. The two successive completion units therefore factor
-uniquely through the completion of the composite pullback. On strict K-flat quotient
-models the inverse comparison is tensor reassociation, sending (x tensor b) tensor a
-to x tensor q(b)a. The quotient cocycle and unit identities make both composites
-identities. The reflector universal property proves uniqueness of the displayed natural
-iso, so no choice of arbitrary comparison is permitted. -/
+Source: Stacks Tag 099N (5). -/
 theorem AdicCoefficientDatum.completedPullComp_existsUnique {U V W : Scheme.{t}}
     (h : U ⟶ V) (g : V ⟶ W) :
     ∃! α : d.completedPull (h ≫ g) ≅ d.completedPull g ⋙ d.completedPull h,
@@ -191,20 +180,14 @@ theorem AdicCoefficientDatum.completedPullComp_existsUnique {U V W : Scheme.{t}}
       simpa only [ordinaryToCompletedNat] using
         (d.completedPull_reflection (h ≫ g)).2 K N hN) hq
 
-/-- The canonical completed pullback composition, fixed by its completion units.
-Source: blueprint coherence, canonical associativity
-(blueprint: lemma-weil-pbc-completed-exchange-coherence). -/
+/-- The canonical completed pullback composition, fixed by its completion units. -/
 def AdicCoefficientDatum.completedPullComp {U V W : Scheme.{t}}
     (h : U ⟶ V) (g : V ⟶ W) :
     d.completedPull (h ≫ g) ≅ d.completedPull g ⋙ d.completedPull h :=
   (d.completedPullComp_existsUnique h g).choose
 
 /-- On complete inputs the identity completed pullback has its unique unit-normalized
-identity comparison. Source: blueprint coherence, proof steps 5 and 6
-(blueprint: lemma-weil-pbc-completed-exchange-coherence).
-Proof: constant tower identity and its derived mate identify the displayed comparison
-with the canonical completion unit. Completeness makes it invertible. Compose its
-inverse with ordinary pullback identity; invertibility forces the asserted uniqueness. -/
+identity comparison. -/
 theorem AdicCoefficientDatum.completedPullId_existsUnique (T : Scheme.{t})
     (K : d.derived T) (hK : d.TowerComplete T K) :
     ∃! α : (d.completedPull (𝟙 T)).obj K ≅ K,
@@ -253,9 +236,7 @@ theorem AdicCoefficientDatum.completedPullId_existsUnique (T : Scheme.{t})
     apply (cancel_epi (d.ordinaryToCompleted (𝟙 T) K)).1
     simpa using hβ
 
-/-- The completed identity comparison on a complete object, retaining its unit.
-Source: blueprint coherence, identity-square clause
-(blueprint: lemma-weil-pbc-completed-exchange-coherence). -/
+/-- The completed identity comparison on a complete object, retaining its unit. -/
 def AdicCoefficientDatum.completedPullId (T : Scheme.{t})
     (K : d.derived T) (hK : d.TowerComplete T K) :
     (d.completedPull (𝟙 T)).obj K ≅ K :=

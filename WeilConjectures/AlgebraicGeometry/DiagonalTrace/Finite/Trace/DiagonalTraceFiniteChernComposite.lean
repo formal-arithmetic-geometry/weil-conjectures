@@ -24,9 +24,7 @@ attribute [local instance] AlgebraicGeometry.ProEtale.diagonalHasLimit
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
-/-- Project the coefficient input and compose the evaluated Chern arrow.
-Source: diagonal trace proof (2), the finite coefficient Chern composite.
-(blueprint: def-sfb-diagonal-trace-finite-chern-composite). -/
+/-- Project the coefficient input and compose the evaluated Chern arrow. -/
 @[irreducible]
 def finiteChernComposite (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]

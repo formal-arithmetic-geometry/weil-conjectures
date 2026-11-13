@@ -35,10 +35,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresenta
 
 /-! # Continuity maps and classical pro-étale sheaves
 
-Source: current blueprint, sec-proetale-coefficients/sk-def-pe-classical-definition,
-`sk-def-pe-classical-definition-continuity-map.md`, clauses 1--4 and final paragraph
-(blueprint: det-pe-classical-definition-continuity-map).
-
 The index categories and section values live in the common larger universe `u + 1`.
 Module coefficients use the intrinsic constant-ring module category of the recorded
 small pro-étale site, with the same coefficient lift as `Scheme.proEtaleDerivedCategory`.
@@ -65,9 +61,7 @@ variable (F : ringedSiteModules.{u + 1}
         (CommRingCat.of (ULift.{u + 1, u} Λ)))))
 
 /-- Sections with scalars restricted along the constant-section sheafification unit.
-This is a presheaf of modules over the lifted discrete coefficient ring itself.
-Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map). -/
+This is a presheaf of modules over the lifted discrete coefficient ring itself. -/
 noncomputable def moduleSectionPresheaf : X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1, u} Λ) := by
   let M := PresheafOfModules.restrictScalarsObj F.val
     (Functor.whiskerRight
@@ -81,29 +75,19 @@ noncomputable def moduleSectionPresheaf : X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (U
       map_comp f g := by ext x; exact congrArg (fun h ↦ h x) (M.map_comp f g) }
 
 /-- The linear continuity map, taking the colimit in coefficient modules.
-Its scalar action is restriction along the canonical constant-section maps.
-Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map). -/
+Its scalar action is restriction along the canonical constant-section maps. -/
 noncomputable def moduleContinuityMap {I : Type (u + 1)} [SmallCategory I]
     [IsCofiltered I] (P : AffinePresentation X I) :
     colimit (sectionDiagram P (moduleSectionPresheaf Λ F)) ⟶
       (moduleSectionPresheaf Λ F).obj (op P.cone.pt) :=
   continuityMap P (moduleSectionPresheaf Λ F)
 
-/-- Classicality of intrinsic constant-ring module sheaves.
-Source: current blueprint, continuity-map detail, clause 3
-(blueprint: definition-classical-pro-etale-sheaves--1). -/
+/-- Classicality of intrinsic constant-ring module sheaves. -/
 def IsClassicalModule : Prop :=
   ∀ {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I]
     (P : AffinePresentation X I), IsIso (moduleContinuityMap Λ F P)
 
-/-- Module classicality agrees with classicality of the underlying set sheaf.
-Source: current blueprint, continuity-map detail, clause 3
-(blueprint: det-pe-classical-definition-continuity-map).
-Proof: filtered module colimits have the corresponding set colimits as underlying sets:
-every element comes from a stage and equality is witnessed at a common later stage.
-Under this comparison the two continuity maps agree on every coprojection. A linear
-map is invertible precisely when its underlying function is bijective. -/
+/-- Module classicality agrees with classicality of the underlying set sheaf. -/
 theorem isClassicalModule_iff :
     IsClassicalModule Λ F ↔
       IsClassical ((sheafCompose (Scheme.ProEt.topology X)
@@ -129,9 +113,7 @@ theorem isClassicalModule_iff :
   · intro hF I _ _ P
     exact (h I P).mpr (hF P)
 
-/-- Classicality of the recorded intrinsic derived category, using its cohomology sheaves.
-Source: current blueprint, continuity-map detail, clause 4
-(blueprint: definition-classical-pro-etale-sheaves--2). -/
+/-- Classicality of the recorded intrinsic derived category, using its cohomology sheaves. -/
 def IsClassicalComplex {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
     (K : Scheme.proEtaleDerivedCategory X Λ) : Prop :=
   ∀ q : ℤ, IsClassicalModule Λ

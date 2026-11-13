@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDeriv
 
 The six assertions about integral module towers and their derived completion, for the
 definitions of `CompleteDerivedCompletionDefs`.
-
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/det-pbc-complete-derived-completion.md
-(blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +37,6 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesProducts AdicCompletion.complexProducts
 
 /-- All six assertions about integral module towers and their derived completion.
-Source: blueprint Notation 1--4 and Assertions 1--6
-(blueprint: proposition-proper-base-change-complete-integral).
 
 Proof plan, following the node's fifteen steps:
 1. On the small pro-étale site identify internal modules with sheaves of modules using
@@ -101,8 +95,7 @@ Proof plan, following the node's fifteen steps:
 15. Apply `lem-weil-pbc-ringed-koszul-completion-reflector` with the singleton
    uniformizer. Its tower and unit are those of step 11. Its completion is complete;
    its unit criterion, identified with `definition-derived-adic-completeness--1`, gives the stated
-   completeness of every output without assuming completeness of the input.
--/
+   completeness of every output without assuming completeness of the input. -/
 theorem completeDerivedCompletion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

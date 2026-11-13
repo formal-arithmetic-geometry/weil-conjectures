@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientSourcePullback
 
 /-! # Completed diagonal class under geometric inverse image
-
-Source: the latest blueprint, diagonal coefficient changes, proof paragraph (3).
 -/
 
 @[expose] public noncomputable section
@@ -26,28 +24,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Geometric inverse image of the completed positive diagonal class, before any
 trace or extension of coefficients is considered. The supported source comparison
-and the positive-line endpoint are normalized on ordinary sheaves.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md, paragraph (3),
-Cartier extension, whole Kummer system, and its completed class.
-(blueprint: lem-diagonal-completed-class-pullback).
-
-Proof: pull the positive Cartier extension along the diagonal square. On the
-standard charts the equation a-b remains a non-zero-divisor over every base, and
-the inverse equation still maps to +1. The units map and this generator define a
-map of the two-term roofs. Exact inverse image and the canonical tensor comparison
-therefore give a square of entire Kummer systems, with ell in degree -1 and the
-identity in degree zero in the quotient resolutions. Use closed base change for
-the supported constant source. Its explicit limit and the Cartesian root-line
-limit make the inverse-image/derived-limit comparison invertible on both endpoints.
-Apply naturality of that comparison to the single system morphism. The defining
-whole-system equations in hdelta and hdelta' identify the completed arrows, without
-inferring equality of derived morphisms from their finite evaluations. Finally
-transport through eW and eW'. The source normalizations hs and hs' identify the
-supported mate; the unit and root normalizations of the realizations identify the
-coefficient and line endpoints. Thus the square is the one displayed below.
-Neither traces nor the other coefficient stages are used. -/
+and the positive-line endpoint are normalized on ordinary sheaves. -/
 theorem diagonalCompletedClass_pullback (l : ℕ) [Fact l.Prime]
     (Y Y' : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

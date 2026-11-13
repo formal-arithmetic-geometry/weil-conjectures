@@ -39,7 +39,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Comparing the actual diagonal scalar functor with small-site coefficients
 
-Source: Stacks Tags 00YY, 03CY and 093M; the diagonal tower limit, clause (3).
+Source: Stacks Tags 00YY, 03CY and 093M.
 -/
 
 @[expose] public noncomputable section
@@ -371,24 +371,7 @@ attribute [local irreducible] moduleSiteEquivalence completedRingIso finiteTower
 /-- The small-site and constant-ring encodings identify the actual scalar functor,
 including its action on all derived morphisms. No completeness assertion occurs here.
 
-Source: Stacks Tags 00YY, 03CY and 093M; blueprint diagonal tower limit, clause (3).
-(blueprint: lem-sfb-diagonal-completion-coefficient-transport-core).
-
-Proof: precompose sheaves with the canonical AsSmall equivalence of the pro-etale site.
-This gives exact equivalences for both coefficient categories. The constant-ring
-module equivalence identifies constant Z_l-module sheaves with modules over the
-constant ring sheaf. For each positive exponent m, the surjective residue map
-Z_l to Z/l^m has kernel (l^m), so it induces the quotient ring isomorphism
-Z_l/(l^m) = Z/l^m. Lift the ring isomorphisms to the coefficient universe and
-apply constant sheafification. The residue-map equations identify every transition.
-The universal property of limits gives the completed-ring isomorphism, and its
-projection equations identify the actual constant-to-completed coefficient map.
-Restriction along this ring isomorphism, combined with the site equivalences,
-gives the completed-category equivalence. On the abelian categories the restriction
-square is the identity on underlying sections, hence a natural isomorphism.
-Exact-functor localization transports the square and both equivalences through
-arbitrary choices of derived localization. Exactness also makes both directions
-of the constant-category equivalence additive. -/
+Source: Stacks Tags 00YY, 03CY and 093M. -/
 theorem diagonalCompletionCoefficientTransportCore (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l S)]
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l S)] :

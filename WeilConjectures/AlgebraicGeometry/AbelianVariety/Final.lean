@@ -31,8 +31,7 @@ implication inside a conclusion.
 - `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`: clauses (c) and (d), over an
   algebraically closed field.
 - `AlgebraicGeometry.surjective_comp_torsionSubgroupSchemeMul`: the transition maps
-  `A[ℓ ^ (n + 1)](K̄) ⟶ A[ℓ ^ n](K̄)` of the Tate module are surjective (the remark after the
-  blueprint theorem).
+  `A[ℓ ^ (n + 1)](K̄) ⟶ A[ℓ ^ n](K̄)` of the Tate module are surjective.
 -/
 
 @[expose] public section
@@ -45,7 +44,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (a) and (b).
+/-- Abelian-variety estimate, clauses (a) and (b).
 
 Let `A` be an abelian variety of dimension `g` over a field `K`, let `p = char K` and let
 `0 < n`.
@@ -68,7 +67,7 @@ theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) 
     flat_torsionSubgroupScheme, finrankΓ_torsionSubgroupScheme,
     etale_torsionSubgroupScheme p A⟩
 
-/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
+/-- Abelian-variety estimate, clauses (c) and (d).
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K`, let
 `p = char K` and let `0 < n`.
@@ -97,7 +96,7 @@ theorem abelianVariety_estimate_of_isAlgClosed [IsAlgClosed K] (p : ℕ) [CharP 
     surjective_npow_points, fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_tateModule ℓ A p hℓ,
     fun ℓ _ hℓ ↦ IsAbelianVariety.nonempty_linearEquiv_rationalTateModule ℓ A p hℓ⟩
 
-/-- Blueprint `sk-the-final-theorem-the-abelian-variety-estimate--remark-1`: where the
+/-- Where the
 abelian-variety estimate feeds in.
 
 The divisibility of clause (d) of `AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed` is

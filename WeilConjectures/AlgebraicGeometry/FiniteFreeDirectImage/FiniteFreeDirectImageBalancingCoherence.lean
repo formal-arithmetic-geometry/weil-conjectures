@@ -124,8 +124,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Units and associators of scalar/pullback balancing
-
-Source: Stacks Project, Tag 0D6D, lemma-derived-pullback-composition.
 -/
 
 @[expose] public noncomputable section
@@ -908,21 +906,7 @@ alias tower := tower_private
 
 end Conjugation
 
-/-- Balancing respects scalar multiplication units and balanced tensor associators.
-Source: Stacks Project, Tag 0D6D, lemma-derived-pullback-composition;
-finite-free direct-image proof, Step 3.
-(blueprint: lem-sp-finite-free-balancing-coherence).
-
-Proof: flat-term K-flat resolutions and the derived Hom comparison identify the
-specified scalar adjunctions with the universal scalar-extension adjunctions. The
-ordinary pure-tensor formulas identify multiplication and composition with the
-canonical left-adjoint unit and composition isomorphisms; the representative
-normalizations give the same identifications after localization. On the right,
-restriction/direct-image comparisons are identity maps on sections. Their unit and
-tower equations lift uniquely using the specified derived-unit normalization.
-Finally conjugation preserves composition, whiskering, unitors and associators.
-Applying these identities to the normalized right comparisons proves the two
-assertions. No finite-basis choice or finite-free assumption is required. -/
+/-- Balancing respects scalar multiplication units and balanced tensor associators. -/
 theorem finiteFreeDirectImageBalancingCoherence {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z) :
     (∀ (R : Coefficients q) (K : DerivedCategory (proEtaleRingModules W R.target)),

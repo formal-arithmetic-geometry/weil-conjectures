@@ -22,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 
 /-- The canonical consecutive quotient map, obtained by transposing the level unit.
-Source: Stacks Tag 09AW.
-(blueprint: lem-weil-pbc-finite-perfect-adic-quotient-diagram). -/
+Source: Stacks Tag 09AW. -/
 def finitePerfectAdicQuotientTransition
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -36,8 +35,7 @@ def finitePerfectAdicQuotientTransition
     ((adj n).unit.app C ≫ (DerivedCategory.adicRestrictionComp I n).hom.app ((L n).obj C))
 
 /-- The actual algebraic quotient diagram of a specified complex.
-Source: Stacks Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-quotient-diagram). -/
+Source: Stacks Tag 09C6. -/
 def finitePerfectAdicQuotientDiagram
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤
@@ -66,14 +64,7 @@ private theorem quotientTransition_unit
 /-- Compatible level markings identify the entire diagram with the canonical quotient diagram.
 
 Source: Stacks Project, Tag 09C6, compatibility with the actual quotient transitions;
-More on Algebra, Tag 09AW.
-(blueprint: lem-weil-pbc-finite-perfect-adic-quotient-diagram).
-
-Proof: transpose each proposed consecutive square under the (n+1)-st adjunction.
-Its two transposes agree by the given unit equation and naturality of iterated
-scalar restriction. Injectivity of the adjunction Hom bijection gives that square.
-The level isomorphisms then define an isomorphism of sequential diagrams: consecutive
-naturality implies naturality for all composites, including identity transitions. -/
+More on Algebra, Tag 09AW. -/
 theorem finitePerfectAdicQuotientDiagram_marking
     {A : Type t} [CommRing A] (I : Ideal A)
     (L : ∀ n : ℕ, DerivedCategory (ModuleCat.{t} A) ⥤

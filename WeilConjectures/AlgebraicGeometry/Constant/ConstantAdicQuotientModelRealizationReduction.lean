@@ -28,16 +28,7 @@ attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 lower level of the adic tower.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3 for the constant scalar comparison.
-(blueprint: lem-weil-pbc-constant-adic-quotient-model-realization-reduction).
-
-Proof: pull the normalization isomorphism of the supplied adic tower from the
-upper quotient to the lower quotient along the pointed etale chart.  Paste it
-with the canonical quotient scalar comparison and with the realization/scalar
-extension comparison.  The supplied upper model isomorphism transports the
-resulting comparison to the displayed lower realization.  Completion
-evaluation commutes with the quotient projections, so all maps are over the
-actual coefficient rings. -/
+Tags 0D6D and 03Q3 for the constant scalar comparison. -/
 theorem constantAdicQuotient_model_realization_reduction
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

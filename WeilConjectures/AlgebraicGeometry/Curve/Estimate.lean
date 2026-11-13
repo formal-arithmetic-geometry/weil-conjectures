@@ -58,8 +58,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
 omit [IsAlgClosed k] in
 /-- **The curve estimate in degree zero.** Let `C` be a smooth proper connected curve over a
 field `k`, and let `n ≥ 1` be prime to `char k`. Then `H⁰(C_ét, ℤ/n) ≅ ℤ/n`; this only uses
-that `C` is connected, so `k` need not be algebraically closed.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+that `C` is connected, so `k` need not be algebraically closed. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) :=
@@ -80,15 +79,14 @@ lemma Scheme.nonempty_addEquiv_sheafH_constantZMod_rootsOfUnitySheaf (f : C ⟶ 
 `g` over an algebraically closed field `k`, and let `n ≥ 1` be prime to `char k`. Then
 `H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`.
 
-The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
-(`def-sc-curves`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
+The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint.
+For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
 `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch block
 (`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
 
 After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H¹(C, μₙ) ≅ Pic(C)[n]`
 (`AlgebraicGeometry.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_one_of_isProper`), which is
-`(ℤ/n)^{2g}` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+`(ℤ/n)^{2g}` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 1 ≃+ (Fin (2 * f.genus) → ZMod n)) := by
@@ -114,8 +112,7 @@ dimension exactly one (`AlgebraicGeometry.IsConnectedCurve.krullDim_eq_one`); wi
 
 After choosing a primitive `n`-th root of unity, `ℤ/n ≅ μₙ`, and `H²(C, μₙ) ≅ Pic(C)/n`
 (`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`), which is
-`ℤ/n` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`.
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`) -/
+`ℤ/n` by `AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`. -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_two (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 2 ≃+ ZMod n) := by
@@ -138,11 +135,7 @@ genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `
 
 The proof is the one of the remark closing the curve estimates: degree zero is `μₙ(k) = ℤ/n`,
 degree one is `Pic(C)[n] = J(C)[n]`, degree two is `Pic(C)/n = ℤ/n` via the Kummer sequence and
-`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `lem-sc-second-kummer-divisors`), and the vanishing above two is
-the bound on the cohomological dimension (blueprint `theorem-cohomology-curves`).
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`,
-`sk-the-final-theorem-the-curve-estimate--remark-1`,
-`the-final-theorem-the-curve-estimate--remark-1`) -/
+`H²(C, μₙ) ≅ Pic(C)/n`, and the vanishing above two is the bound on the cohomological dimension. -/
 theorem IsConnectedCurve.sheafH_constantZMod_of_isProper (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
     Nonempty (Sheaf.H (C.constantZMod n) 0 ≃+ ZMod n) ∧

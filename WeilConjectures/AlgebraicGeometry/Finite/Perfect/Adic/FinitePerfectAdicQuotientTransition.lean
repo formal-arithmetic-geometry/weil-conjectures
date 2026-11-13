@@ -207,12 +207,7 @@ def finitePerfectAdicQuotientStrictTransition
 
 /-- The ordinary quotient arrows exist between the fixed-scalar coordinates. This uses the
 compatibility of the finite comparisons `φ` with the quotient maps.
-Source: Stacks Project, Tags 03CY and 09C6.
-
-Proof sketch: the unit of ordinary scalar extension along the finite projection, composed with
-the identification of restriction along the composite projection, transposes to an arrow of
-ordinary scalar extensions; since `φ` intertwines the constant and the actual quotient maps,
-its fixed-scalar encoding is semilinear over the constant quotient map. -/
+Source: Stacks Project, Tags 03CY and 09C6. -/
 theorem finitePerfectAdic_quotient_transition_exists
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

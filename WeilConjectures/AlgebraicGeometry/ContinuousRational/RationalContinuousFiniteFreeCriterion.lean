@@ -99,8 +99,7 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantModelStratificationTra
 
 /-! # Finite free local models of continuous rational sheaves
 
-Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10
-(blueprint: lem-per-rational-continuous-finite-free-criterion).
+Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10.
 -/
 
 @[expose] public noncomputable section
@@ -349,23 +348,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 /-- Over a coefficient field the finitely presented continuous local models are exactly
 finite locally free models. The normalized coefficient encoding preserves this condition.
-Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10
-(blueprint: lem-per-rational-continuous-finite-free-criterion).
-
-Proof: the spectral absolute value is nonarchimedean, so its WithAbs field is
-ultrametric and totally disconnected. Its continuous inverse-image coefficient map is
-therefore an isomorphism for every scheme morphism. The scalar-identification comparison
-and uniqueness of left adjoints identify continuous pullback after coefficient encoding
-with restriction of the site inverse image along a ring isomorphism. Restriction along
-an isomorphism preserves and reflects finite local freeness. A finitely presented module
-over the field is finite dimensional; a finite basis identifies its additive continuous
-constant model with a finite coproduct of the coefficient unit. Conversely a finite free
-sheaf is the continuous constant model of a finite product field module. The over functor
-preserves these free-unit identifications on every covering object. A finite locally
-closed stratification of a noetherian space has constructible strata; equip the same
-stratification with these certificates. Zero rank and the empty stratification are
-allowed. This argument works for every coefficient ring isomorphism e, so its pointwise
-normalization hypothesis is not needed. -/
+Source: Bhatt--Scholze, Definitions 6.8.1, 6.8.6 and 6.8.10. -/
 theorem rationalContinuousFiniteFreeCriterion (X : Base.{u} l)
     (e : AlgebraicGeometry.ProEtale.latticeCoefficientSheaf X.scheme
       (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) ≅

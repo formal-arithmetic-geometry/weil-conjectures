@@ -19,10 +19,6 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Uniform dimension bound for fibres of a finite-type morphism
-
-Source: Stacks Project, Morphisms, Tag 0A3V,
-lemma-morphism-finite-type-bounded-dimension
-(blueprint: lem-fin-finite-type-fibre-dimension-bound).
 -/
 
 @[expose] public section
@@ -109,16 +105,7 @@ private theorem fibre_dimension_resLE
 
 /-- A finite local fibre dimension bounds the local fibre dimension on a neighbourhood.
 
-Source: Stacks Project, Morphisms, Tag 02FZ, affine reduction to Algebra Tag 00QH.
-(blueprint: lem-weil-pbc-bounded-local-fibre-dimension-neighbourhood)
-
-Proof: choose affine neighbourhoods of `f x` and `x` and restrict `f` to them. The
-restricted coordinate-ring map is finite type. Open immersions on source and target
-preserve local fibre dimension, so the affine coordinate fibre comparison identifies
-the dimension at the coordinate prime of `x` with `d`. Apply the bounded-open-upstairs
-lemma to that prime. Pull its open neighbourhood back along the affine isomorphism
-and include it into `X`. At every point of this neighbourhood the same restriction
-and affine comparisons transport the coordinate bound to the required fibre bound. -/
+Source: Stacks Project, Morphisms, Tag 02FZ, affine reduction to Algebra Tag 00QH. -/
 theorem exists_bounded_fibre_dimension_neighbourhood
     {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
     (x : X) (d : ℕ) (hd : topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞)) :
@@ -156,31 +143,7 @@ theorem exists_bounded_fibre_dimension_neighbourhood
       ((hcoord z').le.trans hb)
 
 /-- A finite-type morphism with quasi-compact target has a uniform finite bound on the
-Krull dimensions of its scheme-theoretic fibres, including empty fibres of dimension bottom.
-
-Source: Stacks Project, Morphisms, Tag 0A3V,
-lemma-morphism-finite-type-bounded-dimension.
-(blueprint: lem-fin-finite-type-fibre-dimension-bound)
-
-Proof:
-1. Quasi-compactness of f and Y gives quasi-compactness of X by
-   `lem-weil-pbc-quasi-compact-morphism-preimage-qc-open`.
-2. Each whole fibre is quasi-compact and locally of finite type over its residue field.
-   Apply `lem-kun-dimension-finite-type` to bound its dimension by a natural number.
-   The local dimension e(x) at the point over x is at most this bound and is nonnegative:
-   every neighbourhood contains x and hence the irreducible closed subset given by its
-   singleton closure. Thus e(x) is itself a natural number.
-3. Choose affine neighbourhoods U of x and V of f(x), with U contained in f⁻¹(V).
-   Restricting the source induces an open immersion on fibres, and restricting the target
-   leaves the set-theoretic fibre unchanged. Homeomorphism invariance and
-   `lem-weil-pbc-dimension-at-point-open-subspace` identify local dimensions with those
-   for U → V. Now `lem-sbc-affine-coordinate-fibre-dimension` and
-   `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` give an open neighbourhood W(x)
-   of x on which all local fibre dimensions are at most e(x).
-4. A finite collection of the W(x) covers X. Take the maximum d of its bounds, using
-   zero for an empty collection. Every local dimension in every fibre is at most d.
-   Apply `lem-weil-pbc-dimension-supremum-local-dimensions` to bound its global dimension.
-   This also covers empty fibres, whose empty supremum is bottom. -/
+Krull dimensions of its scheme-theoretic fibres, including empty fibres of dimension bottom. -/
 theorem exists_fibre_dimension_bound {X Y : Scheme.{u}} (f : X ⟶ Y)
     [LocallyOfFiniteType f] [QuasiCompact f] [CompactSpace Y] :
     ∃ d : ℕ, ∀ y : Y, topologicalKrullDim (f.fiber y) ≤ (d : WithBot ℕ∞) := by

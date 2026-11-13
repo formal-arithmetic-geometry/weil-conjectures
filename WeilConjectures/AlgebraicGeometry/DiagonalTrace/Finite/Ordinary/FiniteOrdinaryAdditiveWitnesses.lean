@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryCoefficientModel
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-additive-witnesses).
 -/
 
 @[expose] public noncomputable section
@@ -45,9 +42,7 @@ attribute [local instance 100000] CategoryTheory.Abelian.toPreadditive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Exact realization is additive with the inherited abelian preadditive structures.
-Source: additivity of comparison and intrinsic realization
-(blueprint: lem-sfb-finite-ordinary-additive-witnesses). -/
+/-- Exact realization is additive with the inherited abelian preadditive structures. -/
 theorem finiteOrdinaryRealizationCompositeAdditive (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u}) :
     (finiteOrdinaryComparison (FiniteRing l E n) T ⋙
@@ -56,18 +51,14 @@ theorem finiteOrdinaryRealizationCompositeAdditive (n : ℕ)
   intro M N f g
   simp only [Functor.comp_map, Functor.map_add]
 
-/-- Finite forgetting is additive with the inherited abelian preadditive structures.
-Source: the underlying additive sheaf map
-(blueprint: lem-sfb-finite-ordinary-additive-witnesses). -/
+/-- Finite forgetting is additive with the inherited abelian preadditive structures. -/
 theorem finiteOrdinaryScalarForgetAdditive (T : Scheme.{u}) (n : ℕ) :
     (finiteForget l E T n).Additive := by
   constructor
   intro M N f g
   rfl
 
-/-- The alternate ordinary scalar route is additive with those same structures.
-Source: module-to-abelian forgetting and exact abelian comparison
-(blueprint: lem-sfb-finite-ordinary-additive-witnesses). -/
+/-- The alternate ordinary scalar route is additive with those same structures. -/
 theorem finiteOrdinaryAbelianCompositeAdditive (T : Scheme.{u}) (n : ℕ) :
     (Etale.moduleAbelianForget (FiniteRing l E n) T ⋙
       comparisonUpperStar AddCommGrpCat.{u + 1} T).Additive := by

@@ -15,8 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdin
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! Existence of the normalized supported source for a projection trace.
-Source: diagonal tower trace proof paragraph (2), construction step 9
-(blueprint: lem-sfb-diagonal-trace-supported-source-existence).
 -/
 
 @[expose] public noncomputable section
@@ -291,16 +289,7 @@ private theorem completedPush_congr (l : ℕ) [Fact l.Prime]
   rfl
 
 /-- Completed module pushforward along a section followed by its retraction is the
-identity, with the canonical underlying additive-sheaf comparison.
-
-Source: diagonal tower trace proof paragraph (2), construction step 9
-(blueprint: lem-sfb-diagonal-trace-supported-source-existence).
-Proof: identify inverse image of the completed coefficient ring with the completed
-coefficient ring using its finite residue-ring projections. Those projections also
-verify the composition and identity coherence. Apply the module composition and
-identity comparisons, and transport along the section equation. Their underlying
-additive maps are the canonical lower-star composition and identity maps.
--/
+identity, with the canonical underlying additive-sheaf comparison. -/
 private theorem completedPush_section (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (s : Y ⟶ X) (f : X ⟶ Y) (h : s ≫ f = 𝟙 Y) :
     ∃ e : diagonalTracePush l s ⋙ diagonalTracePush l f ≅ 𝟭 _,
@@ -501,19 +490,7 @@ private theorem supported_acyclic (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 
 attribute [local irreducible] diagonalTracePush supportedIso
 
-/-- The ordinary diagonal source comparison is available for either projection.
-
-Source: diagonal tower trace proof paragraph (2), construction step 9
-(blueprint: lem-sfb-diagonal-trace-supported-source-existence).
-Proof: compose the closed diagonal pushforward with the chosen projection. The
-identity of the diagonal followed by that projection gives the ordinary source
-comparison, with its additive normalization verified on sections. Ringed closed
-pushforward and scalar restriction are exact; identified-coefficient inverse image is
-exact, so its right adjoint preserves K-injectives. Resolve the coefficient unit before
-pushing along the diagonal. Naturality of the derived unit, its computation on the
-resulting K-injective complex, and exactness of the composite (naturally the identity)
-prove the required acyclicity. These data assemble the prescribed `SupportedSource`.
--/
+/-- The ordinary diagonal source comparison is available for either projection. -/
 theorem diagonalTrace_supportedSource_exists
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

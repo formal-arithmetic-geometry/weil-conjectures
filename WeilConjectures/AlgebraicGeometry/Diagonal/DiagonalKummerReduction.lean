@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSourceQuotientNormaliz
 import WeilConjectures.AlgebraicGeometry.SixFunctors.SheafKummerTransportAssembly
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalFiniteCartierNormalization
 
-/-! # Kummer calculation of the simultaneously reduced Cartier boundary
-Source: diagonal tower proof steps 5--7, Cartier unit proof paragraphs 4--5. -/
+/-! # Kummer calculation of the simultaneously reduced Cartier boundary -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,37 +36,7 @@ attribute [local irreducible] normalizedBoundaryTarget DiagonalSourceNormalizati
 /-- Once the source counit is invertible, Kummer reduction identifies the target
 and the evaluated reduced boundary with the normalized finite Cartier classes.
 
-Source: blueprint diagonal tower proof steps 5--7 and the Cartier unit proof
-paragraphs 4--5; Stacks Tags 03PL, 0152 and 06YY
-(blueprint: lem-sfb-diagonal-kummer-reduction).
-
-Proof: use the supported integer/residue exact sequence to identify the ordinary
-source quotients with supported finite constants. Their quotient generators
-uniquely fix these isomorphisms and the adjunction-unit normalization. Compute
-simultaneous reduction on one flat resolution. At level n compare it with the
-two-term resolution [Z --ell^(n+1)--> Z], in degrees -1 and 0. Kummer exactness
-on the etale site and exact comparison pullback identify its sole cohomology
-on comparison units with the actual roots of unity. The transition between the
-two-term resolutions is multiplication by ell in degree -1 and identity in
-degree 0, so its cohomology transition is the power-ell map. The canonical finite
-coefficient action gives the Z_l action through its residue projection. Thus
-the degree -2 cohomology of the reduced shifted units is one strict system H,
-whose underlying abelian tower is the roots tower. Good truncation gives the
-system isomorphism b. Choose its sign to be the negative normalized Kummer
-identification. This sign commutes with every transition.
-Apply divisible-extension derived reduction to the pole extension, on both
-sites. Its quotient-unit normalization gives the source comparison already
-fixed above; its Kummer-unit normalization gives the negative of b. The pole
-boundary in this item is also the negative of the short-exact-sequence boundary,
-so these signs cancel. Exact inverse-image naturality and the common flat
-resolution identify the evaluated morphism with the full finite Cartier class,
-as a residue-linear derived morphism, before restriction to Z_l. This is the
-class's defining supported-boundary construction, and therefore does not infer
-equality merely from equality of its Chern composites. The root-to-line
-comparison fixes t and its stated underlying-map equation. The source and
-root comparisons together give precisely the level normalization asserted below.
-No compatibility is reconstructed from independent level maps: all transitions
-and the reduced boundary were already maps in the strict system category. -/
+Source: Stacks Tags 03PL, 0152 and 06YY. -/
 theorem diagonal_kummer_reduction (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

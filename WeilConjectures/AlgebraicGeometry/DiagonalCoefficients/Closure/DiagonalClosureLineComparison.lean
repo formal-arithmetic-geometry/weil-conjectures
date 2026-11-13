@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Closure.DiagonalCl
 import WeilConjectures.AlgebraicGeometry.QlbarDirectImageComparison
 
 /-! # Bounded scalar comparison on a rational root line
-
-Source: diagonal coefficient changes, paragraph (2).
-(blueprint: lem-diagonal-closure-line-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -148,36 +145,7 @@ private theorem closureSquare_mate
 set_option linter.unusedVariables false in
 /-- A single rational root line extends to the prescribed closure line, and
 its shifted scalar/direct-image mate is invertible for a qcqs morphism.
-This statement contains no diagonal class, trace, supported source or integration identity.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), common bounded-below colimits.
-(blueprint: lem-diagonal-closure-line-comparison).
-
-Proof: Restrict the finite-subextension index to fields containing E; it is filtered
-and cofinal. Finite extension of the rational root line is scalar extension:
-finite freeness permits scalar extension through the integral root limit, and
-localization gives the rational comparison. Take the filtered colimit. The
-coefficient colimit is the prescribed condensed algebraic closure and the line
-colimit is spQbarTwist; the composite of the scalar unit with the line comparison
-is exactly closureLineMap, by the colimit-leg equations. The rational line is
-locally free of rank one and hence flat. Apply the K-flat single-complex endpoint
-comparison and transport through this ordinary line comparison; adjunction
-injectivity gives the required normalization.
-
-Derive the ordinary restriction/direct-image comparison using exact coefficient
-restriction and direct-image-acyclic resolutions. Equivalently, derive its
-adjoint scalar/inverse-image comparison and take the conjugate. Transport from
-the canonical source model to R using hR and its full-unit equation hunit. This
-gives the normalized RestrictionSquare, including its equation on every complex.
-On the root line shifted by two the scalar mate is the filtered colimit of the
-finite-free projection comparisons. All single root-line complexes shifted by
-two vanish below -2. Bounded continuity for the qcqs morphism identifies direct
-image of the colimit with the colimit of direct images, and exactness of filtered
-colimits identifies the derived coefficient endpoints. The finite comparisons
-and their colimit are isomorphisms, so this mate component is invertible. No
-continuity claim is made on arbitrary unbounded complexes. The proof includes
-identity morphisms and the bottom field, and is valid on empty schemes. -/
+This statement contains no diagonal class, trace, supported source or integration identity. -/
 theorem diagonalClosure_lineComparison
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]

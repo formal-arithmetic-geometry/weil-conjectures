@@ -424,10 +424,6 @@ set_option linter.privateModule false
 /-!
 # Finite coefficient comparison on localizing closures
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-ctf-finite-comparison/
-sk-prop-ctf-finite-comparison-localizing.md
-(blueprint: proposition-comparison-etale-derived-category--2).
-
 This file contains the abstract localizing-closure argument used for the comparison: the
 localizing closure of a class of objects is a localizing subcategory, localizing
 subcategories are stable under images along coreflective triangulated functors, and a

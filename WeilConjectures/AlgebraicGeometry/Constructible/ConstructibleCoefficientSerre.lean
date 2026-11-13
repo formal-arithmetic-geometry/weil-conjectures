@@ -63,8 +63,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Exact closure of constructible sheaves in the site coefficient universe
-Source: Stacks Tags 09B5 and 093U, with finite global partitions.
-(blueprint: lem-weil-constructible-coefficient-serre). -/
+Source: Stacks Tags 09B5 and 093U, with finite global partitions. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -576,22 +575,7 @@ end CoefficientSerre
 
 /-- Intrinsically constructible coefficient-module sheaves are closed under kernels,
 cokernels and extensions for the canonical constant-ring presentation.
-Source: Stacks Tags 09B5 and 093U(3), with the global finite partitions of Tag 03RZ
-(blueprint: lem-weil-constructible-coefficient-serre).
-Proof: restriction to the canonical constant sections identifies modules over the
-constant ring sheaf with sheaves of ordinary coefficient modules. The sheafification
-adjunction gives full faithfulness and essential surjectivity. Uniqueness of left
-adjoints identifies this encoding with inverse image, including on slices and on
-constant modules. A terminal covering sieve of finite constant models is equivalent
-to finite local constancy, hence the encoding preserves and reflects constructibility.
-For kernels and cokernels choose constructible etale origins, lift the morphism by
-full faithfulness, and apply etale constructible Serre closure; exact comparison
-identifies their kernels and cokernels. For extensions, the existing origin theorem
-makes the middle sheaf an etale comparison object. The comparison counit identifies
-the whole short complex with the comparison of its direct image. Faithful exact
-comparison reflects short exactness, so etale Serre closure applies to the middle
-term. Transport these three closure assertions through the encoding equivalence.
-Positive stratifications include the empty scheme, and zero coefficients are allowed. -/
+Source: Stacks Tags 09B5 and 093U(3), with the global finite partitions of Tag 03RZ. -/
 theorem constructibleCoefficient_exactClosure
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     (∀ (F G : pbcModules T (adicLisseConstantRing T A)) (f : F ⟶ G),

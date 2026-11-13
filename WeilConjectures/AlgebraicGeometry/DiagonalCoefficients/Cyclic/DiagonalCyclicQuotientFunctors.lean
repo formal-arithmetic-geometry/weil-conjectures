@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimitInterface
 
 /-! # Shared derived quotient, evaluation and boundary constructions
-
-Source: diagonal limit (3).
-(blueprint: def-diagonal-cyclic-quotient-functors).
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
-/-- Completed quotient followed by evaluation, shared as one actual functor.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -/
+/-- Completed quotient followed by evaluation, shared as one actual functor. -/
 @[irreducible] def cyclicCompletedQuotient (l : ℕ) [Fact l.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l W)]
     [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted l W)]
@@ -34,8 +30,7 @@ Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -
   M.derived.T ⋙ ((evaluation ℕᵒᵖ
     (DiagonalCompleted l W)).obj (op n)).mapDerivedCategory
 
-/-- Derived discrete restriction, shared before inserting quotient objects.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -/
+/-- Derived discrete restriction, shared before inserting quotient objects. -/
 @[irreducible] def cyclicDiscreteRestriction (l : ℕ) [Fact l.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalCompleted l W)]
     [HasDerivedCategory.{u + 1} (DiagonalMod l W)] :
@@ -43,8 +38,7 @@ Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -
       DerivedCategory.{u + 1} (DiagonalMod l W) :=
   (diagonalCompletedRestriction l W).mapDerivedCategory
 
-/-- Derived evaluation at one coefficient level.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -/
+/-- Derived evaluation at one coefficient level. -/
 @[irreducible] def cyclicSystemEvaluation (l : ℕ) [Fact l.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod l W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems l W)] (n : ℕ) :
@@ -53,7 +47,6 @@ Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors). -
   ((evaluation ℕᵒᵖ (DiagonalMod l W)).obj (op n)).mapDerivedCategory
 
 /-- The actual strict-system image of the integral boundary, shared as one arrow.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-quotient-functors).
 This is functorial application to the given boundary, with no class chosen. -/
 @[irreducible] def cyclicStrictBoundary (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

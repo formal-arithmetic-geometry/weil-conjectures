@@ -52,8 +52,7 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 # Tensor with a flat constructible etale sheaf
 
 Source: Stacks Project, Etale Cohomology, Tags 095I and 0961, with the exact-functor
-cohomology computation of Homology, Tag 010N
-(blueprint: lem-fd-flat-constructible-tensor).
+cohomology computation of Homology, Tag 010N.
 
 The two auxiliary bifunctors express naturality in both the bounded constructible complex
 and the flat constructible sheaf. They use the existing small-etale module-sheaf tensor,

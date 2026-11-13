@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-finite-laws).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -51,9 +47,7 @@ variable (P : PurityFiniteSetting.{u})
 attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 attribute [local irreducible] restrictionEvaluation supportEvaluation comparison
 
-/-- Finite evaluation with its actual scalar and support coordinates.
-Source: blueprint (2), specified finite b
-(blueprint: def-sp-field-shriek-system-finite-laws). -/
+/-- Finite evaluation with its actual scalar and support coordinates. -/
 structure EvaluationLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) where
   scalarEvaluation : ∀ (E F : Index P) (h : E ≤ F) (T : Scheme.{u}) (n : ℕ),
     ScalarEvaluation P D h T n

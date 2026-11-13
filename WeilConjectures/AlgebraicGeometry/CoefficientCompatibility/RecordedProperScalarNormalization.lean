@@ -160,8 +160,7 @@ import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplem
 
 /-! # Realization normalization for the proper scalar factor
 
-Source: Stacks Tags 00YV, 03D3 and 07A6; the proper-factor argument in
-`lem-sp-recorded-compact-scalar-fixed-normalization`.
+Source: Stacks Tags 00YV, 03D3 and 07A6.
 -/
 
 @[expose] public noncomputable section

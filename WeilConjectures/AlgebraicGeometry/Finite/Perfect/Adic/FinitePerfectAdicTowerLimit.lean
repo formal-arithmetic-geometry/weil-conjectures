@@ -116,25 +116,7 @@ private theorem restrictedRlim_isDerivedLimit
 /-- A compatible finite-projective marking computes the local derived inverse limit.
 
 Source: Stacks Project, Tag 09C6, the inverse-limit calculation for finite-projective
-complexes; Cohomology on Sites, Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-tower-limit).
-
-Proof: identify each chosen left adjoint with derived tensor by uniqueness of a left
-adjoint to exact restriction of scalars. The markings and their displayed unit equations
-then identify the entire restricted quotient diagram with the canonical quotient
-system of P, including all longer transitions. For each projective finite term of P,
-choose an idempotent splitting it from a finite free module. The quotient tower has
-sectionwise surjective transitions. Recursive lifting proves that one minus shift on
-its product is sectionwise surjective. Its kernel is the same idempotent summand of
-the completed coefficient sheaf. Thus the degreewise Roos short exact sequence
-identifies its derived limit with completed scalar extension of the constant P.
-The boundedness of P permits the termwise computation for the total complex.
-Exact slice restriction preserves products and carries Roos triangles to Roos
-triangles. The strict-tower homotopy-limit comparison identifies the specified total
-right derived inverse limit, after restriction, with the derived limit of its
-levelwise diagram. Apply the diagram isomorphism and uniqueness of Roos limits.
-This argument concerns a specified compatible marking and requires no local
-constancy, geometric stalk, or perfect-model existence assertion. -/
+complexes; Cohomology on Sites, Tags 0940 and 0941. -/
 theorem finitePerfectAdicTower_limit
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [IsAdicComplete d.ideal A] (U : X.ProEt)

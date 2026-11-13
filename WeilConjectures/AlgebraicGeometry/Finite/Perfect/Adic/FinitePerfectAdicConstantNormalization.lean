@@ -27,21 +27,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 with its canonical coefficient and restriction coherence. It constructs no descended
 actual quotient, realization functor, or map of Isom presheaves.
 
-Source: Stacks Project, Tags 06YY, 093J and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-constant-normalization).
-
-Proof: the adjoint transpose of T.transition is invertible by T.normalized, so that
-transition is universal for algebraic restriction of scalars. Termwise universe lift
-commutes with scalar extension: compute on projective resolutions and identify the
-lifted tensor products by the identity on pure tensors. Its unit equation identifies
-the lifted universal arrow with finitePerfectAdicLiftedTransition. Exact constants
-preserve this universal arrow by normalizationConstantArrow_isUniversal. Pullback to
-an etale source commutes with scalar extension; the mate isomorphism and its unit
-identity identify the pulled universal arrow with precisely
-etaleIsomorphismNormalizationArrow. Universal arrows are preserved under these
-isomorphisms. Pasting the coefficient mates for two successive etale inverse images,
-and localizing their underived composition identity, proves coherence. The argument
-uses no point or nonzero coefficient, so includes empty schemes and the zero ring. -/
+Source: Stacks Project, Tags 06YY, 093J and 09C6. -/
 theorem finitePerfectAdicEtaleConstant_normalization (Y : Scheme.{t})
     {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :

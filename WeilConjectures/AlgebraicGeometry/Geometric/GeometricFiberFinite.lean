@@ -25,10 +25,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 /-!
 # Finite-coefficient geometric-fibre formula
 
-Source: Stacks Project, Tag 0DDF; SGA 4, Expose XII, Corollaire 5.2(iii);
-blueprint `sec-proper-base-change/sk-thm-properbasechange/`
-`cor-weil-pbc-geometric-fiber-finite.md`
-(blueprint: corollary-cohomology-geometric-fibres--2).
+Source: Stacks Project, Tag 0DDF; SGA 4, Expose XII, Corollaire 5.2(iii).
 
 The cohomological formula includes the two endpoint identifications explicitly:
 global sections of the source are the geometric stalk, and global sections of the
@@ -44,14 +41,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Finite-coefficient proper base change at a geometric point, Stacks Tag 0DDF(2).
-(blueprint: corollary-cohomology-geometric-fibres--2)
-
-Proof: form the pullback square with projections i_y and a_y. A finite additive
-group is torsion (`isAddTorsion_of_finite`), so every complex of Λ-module sheaves
-has torsion cohomology (`moduleTorsionHomology_of_isTorsion`). Apply the module
-version of bounded-below proper base change directly. No coefficient-forgetting
-comparison is needed. -/
+/-- Finite-coefficient proper base change at a geometric point, Stacks Tag 0DDF(2). -/
 theorem isIso_geometricFiber_finite
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
@@ -107,20 +97,7 @@ private noncomputable def module_identityGermIso
     (MorphismProperty.Over.mkIdTerminal (@AlgebraicGeometry.Etale) _) ≪≫ asIso τ
 
 /-- The geometric-stalk formula, with its endpoint comparisons and its base-change map.
-Source: Stacks Tag 0DDF(1); SGA 4 XII, Corollaire 5.2(iii).
-(blueprint: corollary-cohomology-geometric-fibres--2)
-
-Proof: apply isIso_geometricFiber_finite to F in degree zero. Exactness of y^{-1}
-identifies the source homology sheaf with y^{-1} R^q f_* F
-(def-weil-pbc-inverse-image, def-weil-pbc-direct-image). Its sections are the stalk
-at y (def-weil-pbc-geometric-stalks, lem-weil-pbc-geometric-point-pullback-stalk).
-Global sections on Spec Omega are exact, so they commute with cohomology.
-The generic Leray isomorphism
-`rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`, together with
-`rightDerivedFunctorPlusCompatibility`, identifies the target sections with H^q(X_y, i_y^{-1} F)
-(def-weil-pbc-etale-cohomology). These comparisons transport the global sections of
-the degree-q exchange map to the displayed stalk-to-fibre map. Functors and transport
-by isomorphisms preserve isomorphisms. Finiteness of F is not needed in this argument. -/
+Source: Stacks Tag 0DDF(1); SGA 4 XII, Corollaire 5.2(iii). -/
 theorem geometricFiber_finite_stalk_formula
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]

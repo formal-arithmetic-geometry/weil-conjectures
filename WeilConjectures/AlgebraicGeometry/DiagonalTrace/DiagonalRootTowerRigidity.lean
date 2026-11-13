@@ -18,18 +18,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- Pullback to the diagonal detects maps between ordinary p-adic root towers.
-Source: diagonal coefficient changes (3), connected-fibre root-map rigidity.
-(blueprint: lem-diagonal-root-tower-rigidity).
-
-Proof: at each level forget the p-adic action and conjugate the two maps by
-the prescribed identifications with the ordinary roots sheaf. The canonical
-forgetting/inverse-image comparison carries equality after module inverse
-image to equality after abelian inverse image. Restriction to the diagonal
-detects the resulting root maps. Cancel the root identifications, use
-faithfulness of forgetting scalars, and apply natural-transformation
-extensionality. This argument concerns ordinary maps, not arbitrary derived
-morphisms of systems. -/
+/-- Pullback to the diagonal detects maps between ordinary p-adic root towers. -/
 private theorem diagonalRootTower_restriction_injective (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     (H K : DiagonalSystems l (diagonalSurface Y))
@@ -119,16 +108,7 @@ private def pulledRoots (l : ℕ) [Fact l.Prime]
     Functor.isoWhiskerRight r B ≪≫ asIso c
 
 /-- Pullback to the diagonal detects maps from a geometrically pulled-back root
-tower to a root tower on the new base.
-Source: diagonal coefficient changes (3), cartesian root sheaves and
-connected-fibre scalar rigidity.
-(blueprint: lem-diagonal-root-tower-rigidity).
-
-Proof: ordinary roots commute with arbitrary inverse image when the exponent
-is invertible. This follows from the finite-root site comparison square: its
-other three maps are isomorphisms. The canonical fixed-scalar forgetting
-comparison therefore gives the pulled-back tower a roots presentation. Apply
-the ordinary root-tower restriction theorem on the new base. -/
+tower to a root tower on the new base. -/
 theorem diagonalPulledRootTower_restriction_injective (l : ℕ) [Fact l.Prime]
     {Y Y' : Scheme.{u}} (f : diagonalSurface Y' ⟶ diagonalSurface Y)
     (hY : IsUnit (l : Γ(Y, ⊤))) (hY' : IsUnit (l : Γ(Y', ⊤)))

@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The tensor part of the normalized comparison for the explicit adic section equivalence.
-Source: Stacks 03EK and 03EO
-(blueprint: lem-sf-adic-module-tensor-comparison-core). -/
+Source: Stacks 03EK and 03EO. -/
 structure AdicModuleTensorComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   /-- The tensor comparison is natural in the first variable. -/
   tensorIso : ∀ M : AdicSheaf l X,
@@ -321,15 +320,7 @@ private lemma nativeTensorImage_exists {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   exact congrArg (fun t : T ⟶ T ↦ t.val.app V
     (SheafOfModules.siteSheafTensorTmul (F.obj M) (F.obj N) V x y)) e.inv_hom_id
 
-/-- The normalized tensor comparison exists for every prime and scheme.
-
-Proof: construct the map from the native balanced coequalizer and the sectionwise
-sheaf tensor by the universal property of sheafification.  The two balancing
-squares are checked on threefold pure tensors, and the inverse is obtained from
-the native quotient pairing.  Pure-tensor extensionality proves the two maps
-inverse and gives both naturality and the displayed section formula.
-Source: Stacks 03EK and 03EO
-(blueprint: lem-sf-adic-module-tensor-comparison-core). -/
+/-- The normalized tensor comparison exists for every prime and scheme. -/
 theorem adicModuleTensorComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (AdicModuleTensorComparisonCore l X) := by
   classical

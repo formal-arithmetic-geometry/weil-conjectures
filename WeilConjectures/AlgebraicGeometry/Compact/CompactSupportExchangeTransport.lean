@@ -31,11 +31,6 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareSupplement
 /-!
 # Transport of the chosen compact-support exchange
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-composition.proof.md, final base-change sentence, expanded by
-sk-prop-sf-cbc/thm-cbc-finite-level-proetale.proof.md, lines 4--22
-(blueprint: lem-pur-co-smooth-exchange-transport).
-
 The comparisons use the normalized proper counit mate and exact open extension.
 All inputs are bounded below; the pro-etale operations are ordinary ambient derived
 operations. The two comparison paths are natural isomorphisms, and witness transport
@@ -325,9 +320,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The normalized proper/open comparison, with bounded-below etale source and ambient
 pro-etale target. This only inserts the canonical bounded-below inclusions into the
-existing compact-support site comparison; its proper factor is the counit mate.
-Source: blueprint finite-level compact-support transport proof, lines 4--19
-(blueprint: lem-pur-co-smooth-exchange-transport). -/
+existing compact-support site comparison; its proper factor is the counit mate. -/
 def compactExchangeTransportComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c ⋙
@@ -404,9 +397,7 @@ private theorem compactComparison_hom (Λ : Type (u + 1)) [CommRing Λ] [Finite 
         ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).mapDerivedCategoryPlus.obj
           K)) ≫ t) hn
 
-/-- The source path `S = v^* C_c ∘ a_v` as a natural isomorphism.
-Source: blueprint finite-level compact-support transport proof, lines 4--20
-(blueprint: lem-pur-co-smooth-exchange-transport). -/
+/-- The source path `S = v^* C_c ∘ a_v` as a natural isomorphism. -/
 def compactExchangeTransportSource (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Y' : Scheme.{u}} {f : X ⟶ Y} (g : Y' ⟶ Y) (c : Compactification f) :
     (Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c ⋙
@@ -422,9 +413,7 @@ def compactExchangeTransportSource (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight (compactExchangeTransportComparison Λ c) _
 
-/-- The target path `T = F_{u'}^p(a_w) ∘ C_{c'}` as a natural isomorphism.
-Source: blueprint finite-level compact-support transport proof, lines 15--20
-(blueprint: lem-pur-co-smooth-exchange-transport). -/
+/-- The target path `T = F_{u'}^p(a_w) ∘ C_{c'}` as a natural isomorphism. -/
 def compactExchangeTransportTarget (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (c : Compactification f) :
@@ -449,9 +438,7 @@ def compactExchangeTransportTarget (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Transport the specified etale exchange through a retained etale-origin witness
 `(L, alpha)` in the fixed-scalar module-sheaf presentation. Both endpoint paths are
-canonical, so this definition contains no arbitrary exchange or comparison choice.
-Source: blueprint finite-level compact-support transport proof, lines 21--22
-(blueprint: lem-pur-co-smooth-exchange-transport). -/
+canonical, so this definition contains no arbitrary exchange or comparison choice. -/
 def compactExchangeTransportAtWitness (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) (c : Compactification f)
@@ -699,9 +686,7 @@ private theorem proetale_exchange_app (Λ : Type (u + 1)) [CommRing Λ] [Finite 
   simp [rightDerivedLowerShriekOfCompactificationBaseChangeMap,
     rightDerivedLowerShriekOfCompactificationBaseChangeIso]
 
-/-- The canonical compact-support exchange square.
-Source: blueprint finite-level compact-support transport proof, lines 4--20
-(blueprint: lem-pur-co-smooth-exchange-transport). -/
+/-- The canonical compact-support exchange square. -/
 private theorem compactSupport_exchange_transport_square
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
@@ -764,9 +749,6 @@ private theorem compactSupport_exchange_transport_square
 ambient pro-etale exchanges, naturally in every bounded-below input. Transport through
 any retained witness equals the ambient exchange at its target; hence it is unchanged
 under isomorphisms of witnesses (indeed it is independent of the witness).
-Source: blueprint main-20261015, lem-pur-co-smooth-composition.proof.md, final sentence;
-thm-cbc-finite-level-proetale.proof.md, lines 4--22
-(blueprint: lem-pur-co-smooth-exchange-transport).
 
 Proof plan, following the node's four steps:
 1. Put M = j_! L. Exact open extension preserves bounded-below objects. The proper

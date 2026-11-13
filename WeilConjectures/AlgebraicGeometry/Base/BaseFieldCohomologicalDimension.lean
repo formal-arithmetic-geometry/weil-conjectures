@@ -14,10 +14,8 @@ import WeilConjectures.AlgebraicGeometry.Base.BaseFieldFiniteTorsionCohomologica
 /-!
 # Cohomological dimension of the base field
 
-Source: blueprint `sec-six-functors-basics/sk-lem-base-field-cd`, order 1507;
-Stacks Project, Tags 03QQ and 010T (blueprint: lemma-cohomological-dimension-base-field).
-The dimension and its local prime-power torsion convention are those of
-`definition-cohomological-dimension`.
+Source: Stacks Project, Tags 03QQ and 010T. The dimension and its local prime-power torsion
+convention are those of `definition-cohomological-dimension`.
 -/
 
 @[expose] public section
@@ -33,8 +31,7 @@ open CategoryTheory
 /-- The `ℓ`-cohomological dimension of an algebraically closed field is zero, and
 that of a finite field is at most one. There is no restriction on the characteristic.
 
-Source: blueprint `sec-six-functors-basics/sk-lem-base-field-cd`, order 1507;
-Stacks Project, Tags 03QQ and 010T (blueprint: lemma-cohomological-dimension-base-field).
+Source: Stacks Project, Tags 03QQ and 010T.
 
 Proof (the eight steps of the DAG node):
 1. Choose a separable closure inside an algebraic closure of `K`. The additive
@@ -96,8 +93,7 @@ Proof (the eight steps of the DAG node):
    its cohomology with the continuous cohomology vanishing in step 7. In particular
    this holds for every prime-power torsion sheaf. Part (2) of
    `lemma-cohomological-dimension-base-field`, again using the identity of the qcqs spectrum as its
-   auxiliary morphism, bounds the supremum of nonvanishing degrees by one.
--/
+   auxiliary morphism, bounds the supremum of nonvanishing degrees by one. -/
 theorem cohomologicalDimension_baseField (ℓ : ℕ) (hℓ : Nat.Prime ℓ)
     (K : Type u) [Field K] :
     (IsAlgClosed K → cohomologicalDimension ℓ hℓ (Spec (.of K)) = 0) ∧

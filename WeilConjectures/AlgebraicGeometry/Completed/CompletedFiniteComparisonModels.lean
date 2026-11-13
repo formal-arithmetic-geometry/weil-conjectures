@@ -12,8 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerived
 /-!
 # Representative models for the finite completed-ring comparisons
 
-Source: Stacks 06YY, 099N and 06XN; finite-exchange proof Step 7
-(blueprint: def-cbc-finite-comparison-models).
+Source: Stacks 06YY, 099N and 06XN.
 
 These model maps and normalization predicates retain exactly the original
 finite scalar action and universal counit equations.
@@ -42,7 +41,7 @@ variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
 open AlgebraicGeometry.ProEtale.StrictTower
 
 /-- The finite reduction's universal comparison, retaining its own finite action.
-Source: Stacks 06YY (blueprint: def-cbc-finite-comparison-models). -/
+Source: Stacks 06YY. -/
 def cbcFiniteReductionModelMap (T : Scheme.{u}) (n : ℕ)
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     (cbcFiniteReduction d T n).obj (DerivedCategory.Q.obj P) ⟶
@@ -54,7 +53,7 @@ def cbcFiniteReductionModelMap (T : Scheme.{u}) (n : ℕ)
       (((reductionChange T (pbcAdicProjection T d n)).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Finite source comparison on representatives.
-Source: Stacks 06YY (blueprint: def-cbc-finite-comparison-models). -/
+Source: Stacks 06YY. -/
 def cbcFiniteSourceModelMap (n : ℕ)
     (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (cbcFiniteReduction d U n ⋙ (cbcFiniteSource d sq n).mapDerivedCategory).obj
@@ -67,7 +66,7 @@ def cbcFiniteSourceModelMap (n : ℕ)
       (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Finite target comparison on representatives.
-Source: Stacks 06YY (blueprint: def-cbc-finite-comparison-models). -/
+Source: Stacks 06YY. -/
 def cbcFiniteTargetModelMap (n : ℕ)
     (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (cbcFiniteReduction d U n ⋙ (cbcFiniteTarget d sq n).mapDerivedCategory).obj
@@ -80,7 +79,7 @@ def cbcFiniteTargetModelMap (n : ℕ)
       (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- Normalization of the finite source comparison on every K-flat representative.
-Source: Stacks 099N, 06XN (blueprint: def-cbc-finite-comparison-models). -/
+Source: Stacks 099N, 06XN. -/
 def CbcSourceFiniteNormalization (n : ℕ)
     (e : completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
         completedTowerPullback g d ⋙ pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅
@@ -102,7 +101,7 @@ def CbcSourceFiniteNormalization (n : ℕ)
       (e.hom.app (DerivedCategory.Q.obj P) ≫ cbcFiniteSourceModelMap d sq n P)
 
 /-- Normalization of the finite target comparison on the identical representative class.
-Source: Stacks 099N, 06XN (blueprint: def-cbc-finite-comparison-models). -/
+Source: Stacks 099N, 06XN. -/
 def CbcTargetFiniteNormalization (n : ℕ)
     (e : completedReductionTower U d ⋙ completedTowerPullback gU d ⋙
         cbcStrictOpen d j' sq.isOpenImmersion' ⋙

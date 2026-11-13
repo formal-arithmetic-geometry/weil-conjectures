@@ -11,9 +11,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # A uniform nilpotence exponent for a Noetherian scheme
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1.
-(blueprint: lem-sc-reduction-nilradical-nilpotent)
 -/
 
 @[expose] public section
@@ -24,15 +21,7 @@ open CategoryTheory Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A positive power of the nilradical ideal sheaf of a Noetherian scheme is zero.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1.
-(blueprint: lem-sc-reduction-nilradical-nilpotent)
-
-Proof: Each point has an affine neighbourhood whose section ring is Noetherian.
-The ring nilradical is nilpotent. Compactness selects finitely many of these
-neighbourhoods. One more than the maximum of their exponents kills the nilradical
-on every member of the cover; equality of ideal sheaves is tested on that cover.
-The empty scheme is included: the empty maximum is zero. -/
+/-- A positive power of the nilradical ideal sheaf of a Noetherian scheme is zero. -/
 theorem exists_nilradical_pow_succ_eq_bot (X : Scheme.{u}) [IsNoetherian X] :
     ∃ n : ℕ, X.nilradical ^ (n + 1) = ⊥ := by
   have key (x : X) : ∃ (V : X.affineOpens) (N : ℕ), x ∈ V.1 ∧

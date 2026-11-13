@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalSupportedOrdinaryLimit
 import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimitEndpointsAux
 
 /-! # Normalized completed diagonal endpoints
-
-Source: the diagonal tower limit proof, paragraphs (1) and (3).
-(blueprint: lem-sfb-diagonal-limit-endpoints).
 -/
 
 @[expose] public noncomputable section
@@ -35,28 +32,7 @@ set_option linter.unusedVariables false in
 /-- The ordinary supported constant and root limits, their canonical derived-limit
 comparisons, and intrinsic completeness of the two completed endpoints.
 
-Source: blueprint `sk-prop-diagonal-tower-limit.proof.md`, paragraphs (1) and (3);
-Stacks 099L and 099M (blueprint: lem-sfb-diagonal-limit-endpoints).
-Proof: the cokernel presentation of D.ordinary identifies the source tower, including
-its quotient maps, with the supported finite constant tower. Closed direct image is
-exact and preserves limits; its limit is the restricted completed constant. The unit
-section of this comparison is diagonalCompletedGenerator, so composing with each
-finite projection gives the displayed source normalization. At level n the root
-groups are ell^(n+1)-torsion, so their Z_l actions factor through
-Z_l/ell^(n+1) = Z/ell^(n+1). Hence the underlying root comparison is Z_l-linear.
-Forgetting scalars creates limits, giving t with underlying map precisely the
-inverse of diagonalRootLimitComparison. Quotient transitions are
-epic, as are root power transitions when ell is invertible. The Milnor calculation on
-weakly contractible affines makes the canonical ordinary-to-derived-limit maps
-isomorphisms. Uniqueness of total right derived limits identifies these maps with the
-unit of L; compose with a and b and the shift comparison. Finally, the difference
-operator on a countable power is invertible on each finite-torsion level by a finite
-geometric inverse, and hence on the ordinary limits. Scalar restriction preserves
-products and reflects isomorphisms. Exact countable products make the single-complex
-embedding preserve them, so maps from ell-invertible objects vanish by successive
-ell-division and invertibility of the difference operator. Shift and derived
-restriction comparisons transport this to all four required assertions.
-No choice of a map between the endpoints occurs in this assertion. -/
+Source: Stacks 099L and 099M. -/
 theorem diagonal_limit_endpoints (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

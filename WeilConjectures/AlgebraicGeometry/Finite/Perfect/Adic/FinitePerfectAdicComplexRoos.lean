@@ -45,8 +45,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 /-- Exact products for the completed coefficient modules.
-Source: Stacks Tags 07KC and 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-complex-roos). -/
+Source: Stacks Tags 07KC and 0941. -/
 theorem finitePerfectAdicModules_exactProducts
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     CountableAB4Star (CompletedAdicModules X d) := by
@@ -70,16 +69,7 @@ theorem finitePerfectAdicModules_exactProducts
 
 /-- Termwise epimorphic complex towers have their ordinary limit as their Roos limit.
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-finite-perfect-adic-complex-roos).
-
-Proof: form the termwise product and its one-minus-shift operator. In every degree,
-the pro-etale epimorphic-tower theorem makes this operator an epimorphism. The
-ordinary limit cone is its kernel, by the universal property of compatible families.
-Thus these two maps are a short exact sequence of complexes. Exact countable
-products identify the localized product cone with a derived product. Transport the
-short-exact-sequence triangle through that product isomorphism, checking the first
-two arrows on every projection. No boundedness of the complexes is needed. -/
+Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941. -/
 theorem finitePerfectAdicComplex_roos
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ)

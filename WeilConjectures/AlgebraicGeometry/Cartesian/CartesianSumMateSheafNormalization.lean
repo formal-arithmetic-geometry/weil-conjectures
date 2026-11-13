@@ -220,8 +220,7 @@ private theorem graph_unit_exchange
     C.hom_inv_id, op_id, F.obj.map_id, Category.comp_id]
 
 /-- The sheaf mate of Cartesian sum base change preserves its underlying section.
-Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F
-(blueprint: lem-pur-cartesian-sum-mate-sheaf-normalization).
+Source: Stacks Project, Tags 0F4L, 0F7B and 0F7F.
 
 Proof in words: transpose the equation under the sum/restriction adjunction for v.
 The graph extension defining etaleLowerShriekToLowerStar is identity on the graph

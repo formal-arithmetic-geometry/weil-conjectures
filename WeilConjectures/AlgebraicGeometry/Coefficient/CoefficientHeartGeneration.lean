@@ -17,10 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulate
 /-!
 # Finite cone generation of the bounded constructible coefficient category
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-coefficient-heart-ii/
-sk-cor-coefficient-heart-ii-generation.md and its proof
-(blueprint: corollary-coefficient-heart-b--2).
-
 The witness below is a nonempty finite sequence ending at the specified object. Its
 entries are shifted lisse extensions or shifted cones between strictly earlier entries.
 Distinguished triangles express cones intrinsically in the ordinary derived category.
@@ -137,9 +133,6 @@ construction from shifted locally closed extensions of lisse coefficient modules
 triangle with third vertex `(F r)[n]` says that `F r` is a cone up to integer shift and
 isomorphism, since distinguished triangles are closed under isomorphism.
 
-Source: blueprint corollary-coefficient-heart-b--2 and its proof
-(blueprint: corollary-coefficient-heart-b--2).
-
 Proof plan (the five steps of the DAG node):
 1. Let T be the class admitting such finite witnesses. Zero is a generator: take the
 identity immersion and rank zero. Concatenate two witnesses and append their cone.
@@ -160,7 +153,7 @@ corollary-coefficient-heart-b--1, so induction on a witness proves the converse.
 3. For a constructible sheaf take an adapted stratification from lemma-constructible-sheaves.
 Refine and order it by lemma-constructible-sheaves, preserving lisse
 restrictions. Apply lemma-constructible-sheaves--7 to get a finite filtration
-0 = F_0 contained in ... contained in F_m = F with quotients A_k = a_{k!}L_k.
+0 = F_0 contained in .. contained in F_m = F with quotients A_k = a_{k!}L_k.
 4. Regard each filtration sequence as a degree-zero short exact sequence of complexes.
 corollary-coefficient-heart-b--2 gives F_{k-1} -> F_k -> A_k -> F_{k-1}[1]. Inverse
 rotation gives A_k[-1] -> F_{k-1} -> F_k -> A_k with the negative shifted connecting

@@ -24,7 +24,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.StageSystemFunctorDesce
 These are the unchanged raw operations and coherence predicates used by
 `FiniteStageRationalExchangeCoherence`. The raw-only predicate isolates the
 coefficient construction before the supported Karoubi extension.
-(blueprint: def-sbc-finite-stage-rational-exchange-data)
 -/
 
 @[expose] public noncomputable section
@@ -43,9 +42,7 @@ namespace AlgebraicGeometry.Scheme.FiniteStageRationalExchange
 variable (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
   [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The raw extension of the actual integral completed pullback.
-Source: sketch32, lines 1218--1228
-(blueprint: lem-sbc-finite-stage-rational-exchange-coherence). -/
+/-- The raw extension of the actual integral completed pullback. -/
 abbrev rawPull (E : Padic.FiniteCoefficientFields l Ω)
     {U V : Scheme.{u}} (q : U ⟶ V) :=
   ScalarLocalization.between (PbcIntegralRing l (pbcFiniteField.{u} l Ω E))

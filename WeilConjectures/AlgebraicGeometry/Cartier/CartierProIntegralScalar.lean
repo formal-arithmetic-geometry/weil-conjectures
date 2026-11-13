@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupp
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonConstantGenerator
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -107,15 +105,8 @@ private theorem constant_generator_scalar {R A : Type (u + 1)} [CommRing R] [Com
 normalized on constant-presheaf generators, the normalized pro-etale supported integral generator
 for R followed by forget(i_*η) equals the generator for A [def-sfb-cartier-reduction-data,
 lemma-cycle-class-cartier-divisor].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-pro-integral-scalar).
-Proof: Transpose the generator comparison under the abelian comparison adjunction. The unit equation
-for the mate defining closed direct-image comparison reduces the supported maps to direct images of
-the corresponding constant-sheaf maps. The direct-image/restriction comparison is the identity on
-sections. For the constant maps, apply the integral constant-sections adjunction: the constant
-comparison preserves a generator by its unit equation, and η sends each integral cast to its image
-under φ. Since φ preserves integer casts, both maps agree. Evaluate this equality on each
-base-changed etale object to finish the supported identity. -/
+Source: Stacks 0152,
+06YY and 0GLZ. -/
 theorem pro_supported_generator_scalar {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
     (η : geoCartierConstant R D ⟶

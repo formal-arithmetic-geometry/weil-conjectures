@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCartierFrame
 
 /-! # Literal proposition wrapper for the cyclic transport equation
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: def-diagonal-cyclic-transport-equation).
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +44,7 @@ attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 
 attribute [local irreducible] CyclicCartierFrame.reduce
 
-/-- The cyclic finite transport equation, unchanged under this wrapper.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-transport-equation). -/
+/-- The cyclic finite transport equation, unchanged under this wrapper. -/
 @[irreducible] def cyclicTransportEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

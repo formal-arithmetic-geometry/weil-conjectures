@@ -170,8 +170,7 @@ lemma Compactification.natCard_compl_baseChangeField [IsAlgClosed k] (c : Compac
 /-- **Base change of a connected curve.** Over an algebraically closed field `k`, the base change
 of a smooth connected curve `C` with a smooth proper connected compactification `C̄` to a field
 extension `k'` is a smooth connected curve: it is a nonempty open subscheme of the irreducible
-curve `C̄_{k'}` (`AlgebraicGeometry.IsConnectedCurve.baseChangeField`).
-(blueprint: `lem-sc-base-change-curve`) -/
+curve `C̄_{k'}` (`AlgebraicGeometry.IsConnectedCurve.baseChangeField`). -/
 theorem IsConnectedCurve.baseChangeField_of_compactification [IsAlgClosed k] [IsConnectedCurve f]
     [Smooth f] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] :
     IsConnectedCurve (f.baseChangeField k') := by
@@ -209,8 +208,7 @@ a smooth compactification of `C` of genus `g` with `r` boundary points, then `C�
 compactification of the smooth affine connected curve `C_{k'}`, of genus `g`
 (`AlgebraicGeometry.Scheme.Hom.genus_baseChangeField`) with `r` boundary points
 (`AlgebraicGeometry.Compactification.natCard_compl_baseChangeField`), so both groups have order
-`n ^ (2g + r - 1)` (`AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul`).
-(blueprint: `proposition-cohomology-smooth-affine-curve`, affine case) -/
+`n ^ (2g + r - 1)` (`AlgebraicGeometry.IsConnectedCurve.natCard_sheafH_one_constantZMod_mul`). -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isAffine [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsAffine C] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

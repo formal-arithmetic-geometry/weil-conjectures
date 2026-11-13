@@ -25,9 +25,7 @@ import WeilConjectures.RingTheory.SmoothAtPrimeFieldExtensionDescent
 /-!
 # Geometric regularity and smoothness over a field
 
-Source: Stacks Project, Varieties, Tags 038X (lemma-geometrically-regular-smooth)
-and 038T (definition-geometrically-regular).
-(blueprint: lem-weil-pbc-geometric-regularity-smooth-field-criterion)
+Source: Stacks Project, Varieties, Tags 038X and 038T.
 -/
 
 @[expose] public section
@@ -158,7 +156,6 @@ private theorem smooth_affine_chart_of_regular_baseChange
 finitely generated field base change has regular local rings at all points.
 Finite generation is as a field, expressed by `IntermediateField.FG` for the top field.
 Source: Stacks Project, Varieties, Tags 038X and 038T.
-(blueprint: lem-weil-pbc-geometric-regularity-smooth-field-criterion)
 
 Proof following the node:
 1. If `f` is smooth, take a smooth affine chart around the image of a point after

@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteE
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinarySingleComparison
 
 /-! # Single comparison in the ordinary coefficient presentation
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-ordinary-coordinate-via-single).
 -/
 
 @[expose] public noncomputable section
@@ -51,14 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The normalized image of an arbitrary single arrow under the actual
-comparison-realization composite is successive exact single-arrow transport.
-Source: exact functor composition and the single comparison isomorphisms
-(blueprint: lem-sfb-finite-ordinary-coordinate-via-single).
-
-Proof: apply coordinate_composite to the cached actual comparison and realization
-functors, with arbitrary endpoint isomorphisms. The two single comparison
-identities are finiteOrdinarySingleComparison_eq. Unfold the actual comparison
-and composite functor to identify the normalized left side. -/
+comparison-realization composite is successive exact single-arrow transport. -/
 theorem finiteOrdinaryCoordinateArrow_via_single (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

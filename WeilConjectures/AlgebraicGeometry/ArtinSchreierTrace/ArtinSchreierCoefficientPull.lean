@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedCoefficient
 
 /-! # Coefficient pullback along actual morphisms of covers
 
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, restriction of
-coefficient functions in the first paragraph and the negating-roots construction
-(blueprint: lem-wft-as-coefficient-pull-calculus).
-
 The regular lift is the adjunct of the inverse monoidal unit comparison. Comparing
 its value on one identifies its underlying map with the coefficient morphism.
 The coefficient identity and composition laws then combine with lower-star unit,

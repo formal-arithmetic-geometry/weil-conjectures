@@ -16,8 +16,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-! # Proper direct image preserves a universal finite-coefficient tensor unit
 
-Source: Stacks Project, Tags 0F0G and 0GL6
-(blueprint: lem-fix-etale-proper-coefficient-tensor-unit).
+Source: Stacks Project, Tags 0F0G and 0GL6.
 -/
 
 -- After pruning, this module only keeps private declarations.

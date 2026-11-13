@@ -93,8 +93,7 @@ public import WeilConjectures.AlgebraicGeometry.CompletedConstantSheafReduction
 # Completed constant sheaves and finite reduction
 
 Source: Stacks Project, Modules on Sites, Tags 093J--093M;
-Cohomology on Sites, Tags 06YN and 06YU
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
+Cohomology on Sites, Tags 06YN and 06YU.
 -/
 
 @[expose] public noncomputable section
@@ -112,7 +111,7 @@ namespace AlgebraicGeometry.Scheme.CompletedConstantReduction
 open AdicCoefficients
 
 /-- The completed coefficient sheaf as a module over the constant coefficient sheaf.
-Source: Stacks Tag 093M (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+Source: Stacks Tag 093M. -/
 def completedModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseConstantRing T A)) :=
   (SheafOfModules.restrictScalars ((adicLisseForget T).map (base T I))).obj
@@ -252,8 +251,7 @@ private theorem tensorHomEquiv_tmul (T : Scheme.{u})
   exact hh
 
 /-- A direct summand of a finite sum of copies of the completed coefficient ring.
-The zero-fold sum is included. Source: Stacks Tag 093J, split finite-projective argument
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+The zero-fold sum is included. Source: Stacks Tag 093J, split finite-projective argument. -/
 def IsFiniteRetract (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseCompletedRing T I))) : Prop :=
   ∃ r : ℕ,
@@ -467,8 +465,7 @@ private theorem constantChange_retract (T : Scheme.{u})
     exact hip⟩
 
 /-- The augmentation of the constant sheaf resolution, with the standard degree-zero
-comparison. Source: Stacks Tag 093J
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+comparison. Source: Stacks Tag 093J. -/
 def constantAugmentation (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (n : ℕ) (F : CochainComplex (ModuleCat.{u + 1} A) ℤ)
     (f : F ⟶ (CochainComplex.singleFunctor _ 0).obj
@@ -479,19 +476,7 @@ def constantAugmentation (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Flatness, the canonical derived reduction, and its bounded finite-projective model.
-Source: Stacks Tags 093J--093M and 06YU
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
-Proof: (1) Constant quotient sections are flat over their Noetherian quotient rings and have
-surjective transitions (`lem-weil-pbc-constant-module-section-properties`). Apply
-`lem-weil-pbc-limit-flat-modules` sectionwise, then
-`lem-pc-sites-modules-sheafification-flat`, obtaining flatness over the constant ring sheaf.
-(2) The tensor-limit comparison for the finite module A/I^(n+1) is eventually constant;
-its projection-and-multiplication formula is precisely `reduction`, hence it is invertible.
-(3) Exact scalar extension preserves quasi-isomorphisms, so on every K-flat resolution
-its canonical reduction is a quasi-isomorphism and represents the required derived iso.
-(4) Finite projectives split off finite free modules. Constant sheafification and scalar
-extension preserve the splitting. Their exactness preserves the augmented resolution,
-and termwise application retains the given two bounds. -/
+Source: Stacks Tags 093J--093M and 06YU. -/
 theorem completed_constant_sheaf_reduction (T : Scheme.{u}) {A : Type (u + 1)}
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     SheafOfModules.IsFlatOnSite (completedModule T I) ∧
@@ -549,11 +534,7 @@ theorem completed_constant_sheaf_reduction (T : Scheme.{u}) {A : Type (u + 1)}
       exact (completedAdicChange T (base T I)).map_isZero
         ((adicLisseConstantModules T A).map_isZero (hb i hi))
 
-/-- Constants-to-functions comparisons commute with every quotient transition.
-Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
-Proof: both presheaf composites send a constant value to the constant function of its quotient
-image. Sheafification preserves this equality, and composites give every tower transition. -/
+/-- Constants-to-functions comparisons commute with every quotient transition. -/
 theorem systemComparison_naturality (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1)))
     (m n : ℕᵒᵖ) (f : m ⟶ n) :
@@ -570,36 +551,26 @@ theorem systemComparison_naturality (T : Scheme.{u}) {A : Type (u + 1)} [CommRin
       congr 1)
   exact c.naturality f
 
-/-- The canonical comparison of quotient ring diagrams, retaining the quotient maps.
-Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+/-- The canonical comparison of quotient ring diagrams, retaining the quotient maps. -/
 def systemComparison (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :
     adicLisseRingSystem T I ⟶ ringSystem T I hf where
   app n := @constantComparison T (A ⧸ I ^ (n.unop + 1)) _ (hf n.unop)
   naturality m n f := systemComparison_naturality T I hf m n f
 
-/-- The canonical comparison of inverse-limit coefficient rings.
-Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+/-- The canonical comparison of inverse-limit coefficient rings. -/
 def completedComparison (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :
     adicLisseCompletedRing T I ⟶ completedRing T I hf :=
   lim.map (systemComparison T I hf)
 
-/-- The quotient function sheaf as a module over completed function coefficients.
-Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+/-- The quotient function sheaf as a module over completed function coefficients. -/
 def finiteResidue (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) (n : ℕ) :=
   AdicCoefficients.residue T I hf n
 
 /-- The finite-coefficient reduction is fixed by projection and the image of each constant
-quotient value. Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
-Proof: the specified formula is balanced over the constant A action. Its restrictions commute
-with the formula, so it sheafifies. Constant module generators and local tensor generators
-prove uniqueness. This is the transport of the ordinary reduction along the ring comparisons. -/
+quotient value. -/
 theorem finiteReduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) (n : ℕ) :
     ∃! r : (completedAdicChange T (base T I ≫ completedComparison T I hf)).obj
@@ -746,15 +717,13 @@ theorem finiteReduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     convert hx using 1
     rfl
 
-/-- The finite-coefficient reduction map, specified uniquely on tensor generators.
-Source: blueprint finite-coefficient interpretation, Stacks Tag 093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+/-- The finite-coefficient reduction map, specified uniquely on tensor generators. -/
 def finiteReduction (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) (n : ℕ) :=
   (finiteReduction_exists T I hf n).choose
 
 /-- The canonical derived finite reduction on a chosen K-flat representative of the quotient.
-Source: Stacks Tag 06YY (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
+Source: Stacks Tag 06YY. -/
 def finiteReductionComplex (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) (n : ℕ)
     (P : CochainComplex
@@ -817,16 +786,7 @@ private theorem constantComparison_isIso (T : Scheme.{u}) (Λ : Type (u + 1))
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite function coefficients are precisely constant finite quotient sheaves, naturally
 in the quotient system, and the canonical reduction agrees after this identification.
-Source: blueprint finite-coefficient interpretation; Stacks Tags 093J--093M
-(blueprint: lem-weil-pbc-completed-constant-sheaf-reduction).
-Proof: a continuous function to a finite discrete ring has finitely many clopen fibres in the
-underlying scheme. These form a pro-etale cover. Gluing the constant values on that cover
-proves the universal property of the constant sheafification. The empty object is handled by
-its empty covering. Postcomposition with ring maps respects those gluings, so the quotient
-comparisons are compatible. Limits preserve these natural isomorphisms. On local tensor
-generators the transported reduction is exactly the formula defining finiteReduction.
-The ordinary reduction and every K-flat representative are thus isomorphic by the first
-four clauses of completed_constant_sheaf_reduction. -/
+Source: Stacks Tags 093J--093M. -/
 theorem finite_coefficient_identification (T : Scheme.{u}) {A : Type (u + 1)}
     [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :

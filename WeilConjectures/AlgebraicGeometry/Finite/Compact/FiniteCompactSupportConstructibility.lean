@@ -21,9 +21,7 @@ set_option linter.privateModule false
 /-!
 # Finite-level bounded constructibility for proper support
 
-Source: Stacks Project, Tags 0GL0, 095U and 0GL6; current blueprint,
-sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility
-(blueprint: theorem-results-from-etale-theory--3).
+Source: Stacks Project, Tags 0GL0, 095U and 0GL6.
 
 We use intrinsic finite-torsion constructibility and the recorded compactification
 candidate. The scalar comparison is the adjunct of compact support of the tensor unit,

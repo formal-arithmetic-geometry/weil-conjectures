@@ -21,8 +21,6 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 scalar endpoint, the exact-single comparison for the finite realization, its
 ordinary line map and the final exact-single comparison.
 
-Source: coefficient changes (1), exact realization of one finite reduction.
-(blueprint: def-exact-realization-target-zero).
 This is an explicit construction; it uses no existence theorem or chosen endpoint. -/
 @[irreducible] def exactRealizationTargetZero
     {A B C D E : Type*}

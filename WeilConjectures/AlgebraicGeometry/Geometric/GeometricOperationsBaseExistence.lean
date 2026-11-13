@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 /-! # Existence of the geometric operation data
 
 Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-coef-semilinear-geometric-operations-base-existence)
 -/
 
 @[expose] public noncomputable section

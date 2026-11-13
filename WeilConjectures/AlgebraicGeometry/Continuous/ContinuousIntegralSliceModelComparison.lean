@@ -84,7 +84,6 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 # Integral scalar models on a slice site
 
 Source: Bhatt--Scholze, Lemma 6.5.8(1) and Definition 6.8.10.
-(blueprint: lem-weil-pbc-continuous-integral-slice-model-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -467,24 +466,7 @@ end ContinuousIntegralSlice
 /-- Coefficient transport identifies the finite scalar models on each slice after a
 locally closed immersion. Both sides use ordinary scalar extension, with torsion allowed.
 Source: Bhatt--Scholze, Lemma 6.5.8(1), Definition 6.8.10 and the completed coefficient
-presentation of Definition 6.5.1.
-(blueprint: lem-weil-pbc-continuous-integral-slice-model-comparison).
-
-Proof: use the given normalized coefficient isomorphism c.
-For a locally closed immersion h, inverse image commutes with the finite-quotient
-inverse limit by Lemma 6.5.8(1). The resulting coefficient comparison is the adjunct of
-precomposition of continuous functions: after every finite projection this is the
-constant-ring pullback comparison. The same computation on constant sections shows
-that the two scalar maps agree. Thus ordinary inverse image and scalar extension,
-transported through these ring isomorphisms, commute by their adjunction universal
-properties. The resulting isomorphism sends the pullback of integralConstantModule X N
-to continuousCoefficientModule Z P, with P and N related by the lifted valuation-ring
-isomorphism s. This is an equivalence of scalar-module categories and preserves finite
-presentation. All the functor comparisons restrict to slice sites via overFunctor;
-the coefficient isomorphisms induce equivalences there. Applying these equivalences
-and their fully faithful inverses to the local model isomorphisms proves both directions.
-The argument includes zero modules, torsion modules, the empty base and the empty slice;
-it asserts no completeness for an arbitrary M. -/
+presentation of Definition 6.5.1. -/
 theorem continuousIntegralSliceModelComparison
     (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian X]

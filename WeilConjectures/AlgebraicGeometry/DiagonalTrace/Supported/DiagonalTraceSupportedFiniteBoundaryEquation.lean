@@ -41,9 +41,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   completedSupportedUnit
 
 /-- The source equation with the fixed reduced Cartier endpoint.
-This definition only names a composite equation; it asserts no normalization.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: def-sfb-diagonal-trace-supported-finite-boundary-cartier-equation). -/
+This definition only names a composite equation; it asserts no normalization. -/
 @[irreducible] def supportedFiniteBoundaryCartierEquation
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

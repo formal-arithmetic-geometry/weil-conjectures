@@ -14,9 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Transport of abelian group objects across a set-valued sheaf equivalence
-
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-abelian-sheaves-gmodules-transport)
 -/
 
 @[expose] public section

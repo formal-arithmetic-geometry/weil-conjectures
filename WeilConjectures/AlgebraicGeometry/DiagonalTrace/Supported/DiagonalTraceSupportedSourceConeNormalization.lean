@@ -39,9 +39,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
 /-- The ordinary source cone has the canonical integral generator at every level.
-This is the source-cone equation in IsDiagonalLimit, named without changing it.
-Source: diagonal-limit clause (3), normalization of the supported source.
-(blueprint: def-sfb-diagonal-trace-supported-source-cone-normalization). -/
+This is the source-cone equation in IsDiagonalLimit, named without changing it. -/
 @[irreducible]
 def SupportedSourceConeNormalization (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y)))

@@ -26,10 +26,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.Conde
 /-!
 # Exact locally closed extension of condensed coefficient modules
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart,
-introductory closure-factorization paragraph and proof paragraphs (1), (3);
-Stacks Project, Tags 09BM, 03DJ, 010N, 015F
-(blueprint: lem-sfb-coefficient-heart-locally-closed-extension).
+Source: Stacks Project, Tags 09BM, 03DJ, 010N, 015F.
 
 The functor is the existing canonical open extension into the scheme-theoretic image
 followed by its closed direct image. Cohomology comparisons are natural in complexes.
@@ -51,21 +48,19 @@ closure factorization has exact coefficient-module factors and exact composite; 
 termwise functor commutes naturally with cohomology, preserves quasi-isomorphisms and
 descends to the unbounded derived categories with its localization comparison.
 
-Source: blueprint lemma-constructible-sheaves, introductory paragraph and proof (1), (3);
-Stacks Tags 01OW, 01OZ, 01OY, 01R8, 09BM, 03DJ, 010N, 015F
-(blueprint: lem-sfb-coefficient-heart-locally-closed-extension).
+Source: Stacks Tags 01OW, 01OZ, 01OY, 01R8, 09BM, 03DJ, 010N, 015F.
 
 Proof plan:
 1. Open subschemes are Noetherian by lem-weil-pbc-noetherian-open-subscheme-noetherian.
-Closed subschemes of them are finite type (lem-weil-pbc-closed-immersion-proper), hence
-Noetherian by lem-weil-pbc-finite-type-over-noetherian. Their spaces are Noetherian by
+Closed subschemes of them are finite type, hence Noetherian by
+lem-weil-pbc-finite-type-over-noetherian. Their spaces are Noetherian by
 lem-weil-pbc-noetherian-scheme-closed-subsets-minimal. Every subset is compact by
-lem-sfb-noetherian-space-compact-subsets, so every open immersion is quasi-compact.
-Use lem-weil-pbc-locally-noetherian-quasi-separated for quasi-separatedness.
+lem-sfb-noetherian-space-compact-subsets, so every open immersion is quasi-compact. Use
+lem-weil-pbc-locally-noetherian-quasi-separated for quasi-separatedness.
 2. Compactness of every subset of the source proves quasi-compactness of a and its
 diagonal. By lemma-nagata-immersion-open-in-scheme-image, a.toImage is open and dense.
-The image inclusion is closed, with composite a (lemma-schematic-closure-uniqueness--1);
-density identifies its range with the topological closure of the range of a.
+The image inclusion is closed, with composite a; density identifies its range with the topological
+closure of the range of a.
 3. Use sk-def-sfb-sheaf-tensor and
 def-weil-pbc-internal-abelian-sheaf-module-equivalence to identify internal modules with
 sectionwise modules over the actual coefficient ring sheaf. Their categories are abelian

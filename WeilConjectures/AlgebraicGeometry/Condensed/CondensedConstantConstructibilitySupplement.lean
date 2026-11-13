@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibilit
 /-!
 # Constructibility with finite constant scalar models
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sfb-constructible,
-clauses 1--2 and the final paragraph (blueprint: definition-constructible-sheaves).
-
 A finite presentation over the condensed ring on the point is a finite matrix over
 its scalar ring: maps between copies of the regular module are global sections of
 the condensed ring. Pulling its cokernel to a scheme therefore gives precisely the
@@ -41,9 +38,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 open Classical in
-/-- The full subcategory Cons of constructible module sheaves with finite constant models.
-Source: blueprint definition-constructible-sheaves, final paragraph
-(blueprint: definition-constructible-sheaves). -/
+/-- The full subcategory Cons of constructible module sheaves with finite constant models. -/
 abbrev ConstantModelConstructible (X : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (IsConstantModelConstructible Λ X)
 

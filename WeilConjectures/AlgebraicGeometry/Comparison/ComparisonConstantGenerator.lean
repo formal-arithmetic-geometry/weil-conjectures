@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -32,13 +30,8 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 the comparison adjunction unit and the canonical constant-sheaf comparison, equals the pro-etale
 constant-presheaf generator a at the terminal object [def-weil-pbc-constant-sheaf,
 proposition-comparison-morphism-inverse-image].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-comparison-constant-generator).
-Proof: The canonical constant comparison is uniqueness of left adjoints between the composite of
-constant-sheaf and comparison adjunctions and the pro-etale constant-sheaf adjunction. Their unit
-compatibility equation, evaluated on the coefficient module and then on a, is precisely the
-displayed formula. The section-functor comparison at the terminal object is definitionally the
-identity. -/
+Source: Stacks 0152,
+06YY and 0GLZ. -/
 theorem comparison_constant_generator (A : Type (u + 1)) [CommRing A]
     (D : Scheme.{u}) (a : A) :
     (((comparisonUpperStarConstantSheafIso A D).app (ModuleCat.of A A)).hom).hom.app

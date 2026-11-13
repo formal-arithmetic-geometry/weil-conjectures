@@ -33,9 +33,6 @@ import WeilConjectures.AlgebraicGeometry.Exchange.ExchangeStrictLocalCohomologyS
 public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 
 /-! # Testing exchange on strict-local cohomology
-
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks
-(blueprint: lem-weil-pbc-exchange-strict-local-cohomology).
 -/
 
 @[expose] public section
@@ -51,30 +48,7 @@ pullbacks are bijective. The ring map `a` is specified by its structural and geo
 compatibilities: these characterize the canonical map of strict henselizations. Thus
 quantifying over such `a` does not choose an arbitrary map over the base. The target of
 `cohomologyMap` uses the iterated inverse image of `F`, canonically identified with its
-inverse image under the projection to `T`.
-
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks
-(blueprint: lem-weil-pbc-exchange-strict-local-cohomology).
-
-Proof:
-1. Base change preserves quasi-compactness and quasi-separatedness, so the projection
-from `X ×_S T` to `X` is qcqs. Strict-henselization functoriality gives the specified map `a`.
-The universal property identifies its strict-local base change with the displayed product.
-2. The inverse-image stalk comparison and the unrestricted strict-henselization stalk
-formula identify the two stalks of exchange with the two displayed cohomology groups.
-The comparisons are the canonical strict-henselization restrictions; no torsion is needed.
-3. Represent a stalk class on an affine pointed etale neighbourhood. Refine its pullback
-by an affine neighbourhood of the lifted geometric point. The injective-resolution formula
-for higher exchange, the underived exchange formula, and the cohomology-pullback recipe
-identify the resulting map on representatives with pullback of cohomology classes.
-4. The canonical strict-local restrictions send these same representatives to pullbacks
-along the limit legs. Compatibility of the functorial strict-local map with neighbourhoods
-and functoriality of cohomology pullback show that this identification commutes with
-exchange. Thus its stalk map is conjugate to the stated cohomology pullback.
-5. The comparisons are invertible, so exchange is invertible on every geometric stalk
-exactly when these pullbacks are. Geometric stalks jointly reflect isomorphisms of sheaves
-of sets; the sectionwise inverses are additive and natural, hence give an inverse of
-abelian sheaves. This also applies when `X` is empty. -/
+inverse image under the projection to `T`. -/
 theorem isIso_exchange_iff_strictLocalCohomology
     {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g]

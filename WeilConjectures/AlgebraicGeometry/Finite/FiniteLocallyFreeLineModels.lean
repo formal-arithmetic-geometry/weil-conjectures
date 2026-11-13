@@ -12,8 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantM
 
 /-! # Finite local models for a locally free coefficient line
 
-Source: Stacks Project, Tag 03RV; coefficient-twist blueprint, proof steps 1 and 8.
-(blueprint: lem-pur-finite-locally-free-line-models)
+Source: Stacks Project, Tag 03RV.
 -/
 
 @[expose] public section
@@ -26,16 +25,7 @@ namespace AlgebraicGeometry.Scheme
 /-- A rank-one module over a finite constant coefficient ring is locally constant,
 constructible, and has finite geometric stalks.
 
-Source: Stacks Project, Tag 03RV; coefficient-twist blueprint, proof steps 1 and 8.
-(blueprint: lem-pur-finite-locally-free-line-models)
-
-Proof: the rank-one trivializing cover identifies the module on every chart with
-its regular coefficient module. The constant-scalar comparison identifies these
-with constant finite modules in the fixed-ring sheaf category. The proved finite
-local-model theorem therefore supplies finite stalks and local constancy. The
-trivial stratification witnesses fixed-ring constructibility; transport it back
-through the constant-scalar constructibility equivalence. The equivalence uses a
-positive identity stratum also on the empty scheme, and allows the zero ring. -/
+Source: Stacks Project, Tag 03RV. -/
 theorem finiteLocallyFreeLine_models (S : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A]
     (L : proEtaleRingModules S (proEtaleConstantRing S A))

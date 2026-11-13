@@ -46,11 +46,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The published finite Cartier map is the generic finite coordinate composite.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-map-coordinates).
-Proof: specialize the expansion to the canonical Cartier class. Its exact image is
-finiteCartierClass, whose Hom is the named finiteCartierArrow. -/
+/-- The published finite Cartier map is the generic finite coordinate composite. -/
 theorem supportedFiniteCartierMap_coordinates
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

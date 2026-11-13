@@ -30,8 +30,7 @@ import all WeilConjectures.AlgebraicGeometry.Open.OpenClosedAdjunctionTransport
 /-!
 # Fixed finite coordinates for completed-ring open exchange
 
-Source: Stacks 03DI, 03D7, 04J0 and 099N; blueprint finite exchange before Rlim
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
+Source: Stacks 03DI, 03D7, 04J0 and 099N.
 
 The scalar comparisons are mates of the sectionwise specified right comparisons.
 The level coordinate change is identity on sections. Thus no unrelated finite
@@ -60,26 +59,23 @@ variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
 
 open AlgebraicGeometry.ProEtale.StrictTower
 
-/-- The positive finite quotient, bundled once to avoid repeated ring elaboration.
-Source: the coefficient datum (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+/-- The positive finite quotient, bundled once to avoid repeated ring elaboration. -/
 def cbcFiniteRing (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (A ⧸ d.ideal ^ (n + 1))
 
-/-- The bundled finite ring is finite by the coefficient datum.
-Source: the coefficient datum (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: this is exactly d.quotientFinite at the positive exponent n+1. -/
+/-- The bundled finite ring is finite by the coefficient datum. -/
 @[instance] theorem cbcFiniteRing_finite (n : ℕ) : Finite (cbcFiniteRing d n) := by
   exact d.quotientFinite n
 
 /-- The completed-ring action on constant finite coefficients is the projection
 followed by the inverse of the fixed constant-section comparison.
-Source: Stacks 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 099N. -/
 def cbcFiniteProjection (T : Scheme.{u}) (n : ℕ) :
     pbcAdicCompletion T d ⟶ coefficients (cbcFiniteRing d n) T :=
   pbcAdicProjection T d n ≫ (pbcLevelConstantComparison T d n).inv
 
 /-- Finite modules with their actual completed-ring scalar action.
-Source: Stacks 03CY (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03CY. -/
 def cbcFiniteRes (T : Scheme.{u}) (n : ℕ) := pbcRestrict (cbcFiniteProjection d T n)
 
 private theorem inverseMate_isIso_change_left
@@ -139,10 +135,7 @@ private theorem finiteProjection_direct {S T : Scheme.{u}} (f : S ⟶ T) (n : �
 
 /-- Direct-image coefficient restriction is the identity on underlying sections.
 This normalization fixes its mate, rather than choosing a pullback isomorphism.
-Source: Stacks 03D7 (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: both direct images evaluate on the same base-changed site object. Their
-scalar actions agree after the completed finite projection. Identity on sections
-is thus linear, natural, and invertible, and it determines the comparison uniquely. -/
+Source: Stacks 03D7. -/
 theorem cbcFiniteDirectRes_existsUnique {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     ∃! e : moduleDirectImage (cbcFiniteRing d n) f ⋙ cbcFiniteRes d T n ≅
         cbcFiniteRes d S n ⋙ cbcCompletedModuleDirectImage d f,
@@ -209,12 +202,12 @@ theorem cbcFiniteDirectRes_existsUnique {S T : Scheme.{u}} (f : S ⟶ T) (n : �
   exact he' M V x
 
 /-- The sectionwise direct-image comparison, with its fixed identity normalization.
-Source: Stacks 03D7 (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03D7. -/
 @[irreducible] def cbcFiniteDirectRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :=
   (cbcFiniteDirectRes_existsUnique d f n).exists.choose
 
 /-- The finite pullback comparison is the mate of identity on direct-image sections.
-Source: Stacks 03D7 (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03D7. -/
 def cbcFinitePullRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     cbcFiniteRes d T n ⋙ completedModulePullback f d ⟶
       modulePullback (cbcFiniteRing d n) f ⋙ cbcFiniteRes d S n :=
@@ -224,10 +217,7 @@ def cbcFinitePullRes {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
       (TwoSquare.mk _ _ _ _ (cbcFiniteDirectRes d f n).hom))
 
 /-- The ordinary pullback mate is invertible at finite coefficients.
-Source: Stacks 03EK, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: on inverse-image tensor generators the mate sends b tensor m to pi_n(b)
-tensor m. The inverse inserts 1 in the completed tensor factor. The finite
-constant-ring comparison and balancing make these maps mutually inverse. -/
+Source: Stacks 03EK, 099N. -/
 @[instance] theorem cbcFinitePullRes_isIso {S T : Scheme.{u}} (f : S ⟶ T) (n : ℕ) :
     IsIso (cbcFinitePullRes d f n) := by
   have hc : IsIso (completedCoefficientMap f d) := completedCoefficient_isIso f d
@@ -490,11 +480,7 @@ private theorem finiteOpenModel_generator {W T : Scheme.{u}}
 /-- Open restriction commutes with finite scalar restriction, normalized on the
 inverse-image unit generators. The site adjunction supplies the actual restricted
 section, so no unidentified comparison of underlying abelian sheaves is used.
-Source: Stacks 03DI, 04J0 (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: localization evaluates a sheaf on the same object over the open. On a
-base-change generator its value is restriction along the adjoint site arrow.
-The coefficient projections identify scalar actions. These formulas give inverse
-linear maps after sheafification; the generators determine them uniquely. -/
+Source: Stacks 03DI, 04J0. -/
 theorem cbcFiniteOpenRestriction_existsUnique {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     ∃! q : modulePullback (cbcFiniteRing d n) e ⋙ cbcFiniteRes d W n ≅
@@ -624,14 +610,14 @@ theorem cbcFiniteOpenRestriction_existsUnique {W T : Scheme.{u}}
     (hq M V.unop _ (a.unit.app V.unop) m).symm
 
 /-- The uniquely normalized finite open-restriction comparison.
-Source: Stacks 03DI (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI. -/
 @[irreducible] def cbcFiniteOpenRestriction {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :=
   (cbcFiniteOpenRestriction_existsUnique d e he n).exists.choose
 
 /-- Open extension commutes with the completed action through the finite projection.
 This is the mate of the specified open-restriction comparison.
-Source: Stacks 03DI (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI. -/
 def cbcFiniteOpenRes {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     cbcFiniteRes d W n ⋙ cbcOpenShriek d e he ⟶
@@ -977,12 +963,7 @@ private def completedExtension_fullyFaithful {W T : Scheme.{u}}
     (sliceExtension_fullyFaithful e he (pbcAdicCompletion T d))
 
 /-- The normalized open-extension comparison is invertible.
-Source: Stacks 03DI (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: the finite extension unit is invertible, and the adjunct of the specified
-mate is this unit followed by the fixed open-restriction isomorphism. The existing
-ringed-slice scalar comparison places its target in the essential image of the
-fully faithful completed extension. Its counit is therefore invertible, and the
-adjunction formula expresses the mate as a composite of two isomorphisms. -/
+Source: Stacks 03DI. -/
 @[instance] theorem cbcFiniteOpenRes_isIso {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     IsIso (cbcFiniteOpenRes d e he n) := by
@@ -1025,7 +1006,7 @@ adjunction formula expresses the mate as a composite of two isomorphisms. -/
 
 /-- Finite coordinates for the source of the ordinary exchange, built by the
 specified open and pullback mates.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcFiniteSourceRes (n : ℕ) :
     cbcFiniteRes d U n ⋙ cbcOpenShriek d j sq.isOpenImmersion ⋙ completedModulePullback g d ≅
       (@moduleJ.{u} (cbcFiniteRing d n) _ U X j sq.isOpenImmersion) ⋙
@@ -1036,7 +1017,7 @@ def cbcFiniteSourceRes (n : ℕ) :
     Functor.isoWhiskerLeft _ (asIso (cbcFinitePullRes d g n))
 
 /-- Finite coordinates for the target, in the prescribed pullback-then-open order.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcFiniteTargetRes (n : ℕ) :
     cbcFiniteRes d U n ⋙ completedModulePullback gU d ⋙
         cbcOpenShriek d j' sq.isOpenImmersion' ≅
@@ -1050,33 +1031,27 @@ def cbcFiniteTargetRes (n : ℕ) :
 
 /-- Reduction to finite constant coefficients, using the existing scalar extension
 and the fixed constant-section coefficient isomorphism.
-Source: Stacks 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 099N. -/
 def cbcFiniteReductionModule (T : Scheme.{u}) (n : ℕ) :=
   reductionChange T (pbcAdicProjection T d n) ⋙
     pbcRestrict (pbcLevelConstantComparison T d n).hom
 
 /-- Finite reduction followed by coefficient restriction is additive.
-Source: Stacks 03EK, 099N
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: sheafified scalar extension and scalar restriction both preserve sums of
-morphisms. Composing their sum equations proves additivity. -/
+Source: Stacks 03EK, 099N. -/
 @[instance] theorem cbcFiniteReductionModule_additive (T : Scheme.{u}) (n : ℕ) :
     (cbcFiniteReductionModule d T n).Additive := by
   unfold cbcFiniteReductionModule
   infer_instance
 
 /-- The finite quotient object in its own constant coefficient derived category.
-Source: Stacks 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 099N. -/
 def cbcFiniteReduction (T : Scheme.{u}) (n : ℕ) :=
   reductionDerivedChange T (pbcAdicProjection T d n) ⋙
     pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom
 
 /-- Reexpressing an ordinary reduction tower level in constant finite coordinates
 leaves every section unchanged and only transports its coefficient action.
-Source: Stacks 099N (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: the projection followed by the inverse constant comparison is the specified
-completed action. Restricting successively along the comparison and its inverse
-cancels, so identity sections give the unique natural isomorphism. -/
+Source: Stacks 099N. -/
 theorem cbcFiniteLevel_existsUnique (T : Scheme.{u}) (n : ℕ) :
     ∃! e : completedReductionModuleTowerFunctor T d ⋙
           (CategoryTheory.evaluation ℕᵒᵖ (pbcModules T (pbcAdicCompletion T d))).obj (op n) ≅
@@ -1112,78 +1087,67 @@ theorem cbcFiniteLevel_existsUnique (T : Scheme.{u}) (n : ℕ) :
   exact he' M V x
 
 /-- The finite coordinate change fixed by identity on sections.
-Source: Stacks 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 099N. -/
 @[irreducible] def cbcFiniteLevel (T : Scheme.{u}) (n : ℕ) :=
   (cbcFiniteLevel_existsUnique d T n).exists.choose
 
 /-- The finite source functor, including the completed action through the projection.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcFiniteSource (n : ℕ) :=
   (@moduleJ.{u} (cbcFiniteRing d n) _ U X j sq.isOpenImmersion) ⋙
     modulePullback (cbcFiniteRing d n) g ⋙ cbcFiniteRes d X' n
 
 /-- The finite target functor in the pullback-then-extension order.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcFiniteTarget (n : ℕ) :=
   modulePullback (cbcFiniteRing d n) gU ⋙
     (@moduleJ.{u} (cbcFiniteRing d n) _ U' X' j' sq.isOpenImmersion') ⋙
       cbcFiniteRes d X' n
 
 /-- Both finite source and target are exact and additive.
-Source: Stacks 03DI, 03DJ, 03EK
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: open extension and finite constant pullback are exact and additive, as
-is scalar restriction. Compose these properties in the indicated order. -/
+Source: Stacks 03DI, 03DJ, 03EK. -/
 @[instance] theorem cbcFiniteSource_additive (n : ℕ) :
     (cbcFiniteSource d sq n).Additive := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
 /-- Exactness of the finite source, checked before derived localization.
-Source: Stacks 03DJ, 03EK (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: compose exact open extension, finite pullback and scalar restriction. -/
+Source: Stacks 03DJ, 03EK. -/
 @[instance] theorem cbcFiniteSource_limits (n : ℕ) :
     PreservesFiniteLimits (cbcFiniteSource d sq n) := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
 /-- The finite source preserves cokernels and finite sums.
-Source: Stacks 03DI, 03EK (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: all three functors preserve finite colimits, hence so does their composite. -/
+Source: Stacks 03DI, 03EK. -/
 @[instance] theorem cbcFiniteSource_colimits (n : ℕ) :
     PreservesFiniteColimits (cbcFiniteSource d sq n) := by
   unfold cbcFiniteSource cbcFiniteRes
   infer_instance
 
 /-- Additivity of the finite target.
-Source: Stacks 03DI, 03EK (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: finite pullback, open extension and scalar restriction are additive. -/
+Source: Stacks 03DI, 03EK. -/
 @[instance] theorem cbcFiniteTarget_additive (n : ℕ) :
     (cbcFiniteTarget d sq n).Additive := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
 /-- Exactness of the finite target on kernels.
-Source: Stacks 03DJ, 03EK (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: each of the three factors preserves finite limits. -/
+Source: Stacks 03DJ, 03EK. -/
 @[instance] theorem cbcFiniteTarget_limits (n : ℕ) :
     PreservesFiniteLimits (cbcFiniteTarget d sq n) := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
 /-- Exactness of the finite target on cokernels.
-Source: Stacks 03DI, 03EK (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: each of the three factors preserves finite colimits. -/
+Source: Stacks 03DI, 03EK. -/
 @[instance] theorem cbcFiniteTarget_colimits (n : ℕ) :
     PreservesFiniteColimits (cbcFiniteTarget d sq n) := by
   unfold cbcFiniteTarget cbcFiniteRes
   infer_instance
 
 /-- Finite reduction followed by the finite source preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: both functors are additive. Their sum equations imply that their composite
-sends the zero map to zero, including the completed scalar restriction. -/
+Source: Stacks 03DI, 03EK, 099N. -/
 theorem cbcFiniteSourceModel_preservesZeroMorphisms (n : ℕ) :
     (cbcFiniteReductionModule d U n ⋙ cbcFiniteSource d sq n).PreservesZeroMorphisms := by
   have := cbcFiniteReductionModule_additive d U n
@@ -1191,10 +1155,7 @@ theorem cbcFiniteSourceModel_preservesZeroMorphisms (n : ℕ) :
   exact Functor.preservesZeroMorphisms_of_additive _
 
 /-- Finite reduction followed by the finite target preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: compose the zero-map equations of finite scalar extension, pullback,
-open extension and scalar restriction. -/
+Source: Stacks 03DI, 03EK, 099N. -/
 theorem cbcFiniteTargetModel_preservesZeroMorphisms (n : ℕ) :
     (cbcFiniteReductionModule d U n ⋙ cbcFiniteTarget d sq n).PreservesZeroMorphisms := by
   have := cbcFiniteReductionModule_additive d U n
@@ -1202,10 +1163,7 @@ theorem cbcFiniteTargetModel_preservesZeroMorphisms (n : ℕ) :
   exact Functor.preservesZeroMorphisms_of_additive _
 
 /-- The evaluated source model preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: reduction is additive levelwise, as are open extension and module pullback.
-Evaluation preserves zero maps. Their composite therefore sends zero to zero. -/
+Source: Stacks 03DI, 03EK, 099N. -/
 theorem cbcSourceLevel_preservesZeroMorphisms (n : ℕ) :
     (completedReductionModuleTowerFunctor U d ⋙ cbcStrictOpenModule d j sq.isOpenImmersion ⋙
       completedTowerModulePullback g d ⋙
@@ -1217,10 +1175,7 @@ theorem cbcSourceLevel_preservesZeroMorphisms (n : ℕ) :
   exact Functor.preservesZeroMorphisms_of_additive _
 
 /-- The evaluated target model preserves zero morphisms.
-Source: Stacks 03DI, 03EK, 099N
-(blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: each constituent sends zero morphisms to zero, including the evaluation.
-Composing those equations in pullback-then-open order proves the assertion. -/
+Source: Stacks 03DI, 03EK, 099N. -/
 theorem cbcTargetLevel_preservesZeroMorphisms (n : ℕ) :
     (completedReductionModuleTowerFunctor U d ⋙ completedTowerModulePullback gU d ⋙
       cbcStrictOpenModule d j' sq.isOpenImmersion' ⋙
@@ -1233,7 +1188,7 @@ theorem cbcTargetLevel_preservesZeroMorphisms (n : ℕ) :
 
 /-- The ordinary finite-coordinate source comparison: first change the reduction
 level's coordinates, then use the fixed scalar/open/pullback mates.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcSourceLevel (n : ℕ) :
     completedReductionModuleTowerFunctor U d ⋙ cbcStrictOpenModule d j sq.isOpenImmersion ⋙
         completedTowerModulePullback g d ⋙
@@ -1245,7 +1200,7 @@ def cbcSourceLevel (n : ℕ) :
     Functor.isoWhiskerLeft _ (cbcFiniteSourceRes d sq n)
 
 /-- The analogous ordinary target comparison, with the identical finite coordinate change.
-Source: Stacks 03DI, 099N (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 03DI, 099N. -/
 def cbcTargetLevel (n : ℕ) :
     completedReductionModuleTowerFunctor U d ⋙ completedTowerModulePullback gU d ⋙
         cbcStrictOpenModule d j' sq.isOpenImmersion' ⋙
@@ -1257,7 +1212,7 @@ def cbcTargetLevel (n : ℕ) :
     Functor.isoWhiskerLeft _ (cbcFiniteTargetRes d sq n)
 
 /-- The actual universal reduction counit on cochain representatives.
-Source: Stacks 06XN (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 06XN. -/
 def cbcReductionModelMap (T : Scheme.{u})
     (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
     (completedReductionTower T d).obj (DerivedCategory.Q.obj P) ⟶
@@ -1267,7 +1222,7 @@ def cbcReductionModelMap (T : Scheme.{u})
     (completedReductionTower T d) (completedReductionTowerCounit d T) P
 
 /-- Source comparison to its ordinary strict model, using only the universal counits.
-Source: Stacks 06XN (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 06XN. -/
 def cbcSourceModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
       completedTowerPullback g d).obj (DerivedCategory.Q.obj P) ⟶
@@ -1284,7 +1239,7 @@ def cbcSourceModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d))
         (((completedReductionModuleTowerFunctor U d).mapHomologicalComplex (.up ℤ)).obj P))
 
 /-- Target comparison to the same ordinary strict model convention.
-Source: Stacks 06XN (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
+Source: Stacks 06XN. -/
 def cbcTargetModelMap (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
     (completedReductionTower U d ⋙ completedTowerPullback gU d ⋙
       cbcStrictOpen d j' sq.isOpenImmersion').obj (DerivedCategory.Q.obj P) ⟶

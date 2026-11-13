@@ -190,9 +190,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # The constructible coefficient heart
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart,
-_section.md and sk-lem-coefficient-heart.proof.md (blueprint: lemma-constructible-sheaves).
-
 All module categories use the actual condensed coefficient ring pulled back from the point.
 Constructibility is the finite constant scalar model predicate, and locally closed extension
 is the previously constructed open extension into the scheme-theoretic closure followed by
@@ -214,9 +211,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The curve specialization: the actual open counit and complementary closed unit give
-its short exact sequence. The closed term restricts to zero on the dense lisse open.
-Source: blueprint lemma-constructible-sheaves, final paragraph
-(blueprint: lemma-constructible-sheaves). -/
+its short exact sequence. The closed term restricts to zero on the dense lisse open. -/
 def CoefficientHeartCurveAssertions (X : Scheme.{u}) : Prop :=
   topologicalKrullDim X ≤ 1 →
   ∀ F : ConstantModelConstructible Λ X,
@@ -237,8 +232,7 @@ def CoefficientHeartCurveAssertions (X : Scheme.{u}) : Prop :=
 
 /-- A finite, non-strict filtration of each constructible sheaf by subsheaves, with the
 specified locally closed extensions as successive quotients. Zero and empty filtrations
-are allowed. Source: blueprint lemma-constructible-sheaves, clause (3)
-(blueprint: lemma-constructible-sheaves). -/
+are allowed. -/
 def CoefficientHeartFiltrationAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ∀ F : ConstantModelConstructible Λ X,
     ∃ (m : ℕ) (T : Fin (m + 1) → Subobject F.obj), T 0 = ⊥ ∧ T (Fin.last m) = ⊤ ∧
@@ -250,9 +244,7 @@ def CoefficientHeartFiltrationAssertions (X : Scheme.{u}) [IsNoetherian X] : Pro
             (coefficientHeartLocallyClosedExtension Λ j hj).obj L)
 
 /-- Exactness of both factors in extension through the scheme-theoretic closure, exactness
-of their composite, and descent by applying this composite termwise to complexes.
-Source: blueprint lemma-constructible-sheaves, introductory locally closed extension paragraph
-(blueprint: lemma-constructible-sheaves). -/
+of their composite, and descent by applying this composite termwise to complexes. -/
 def CoefficientHeartExtensionAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ∀ (S : Scheme.{u}) (a : S ⟶ X) (ha : IsImmersion a),
     letI : IsImmersion a := ha
@@ -274,9 +266,7 @@ def CoefficientHeartExtensionAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop
 
 /-- Every assertion of the constructible-heart node, including its introductory derived
 and locally closed extension clauses. Exact descent is characterized by the localization
-square with the termwise functor, so no arbitrary derived map is substituted.
-Source: blueprint lemma-constructible-sheaves, introduction, clauses (1)--(3), final paragraph
-(blueprint: lemma-constructible-sheaves). -/
+square with the termwise functor, so no arbitrary derived map is substituted. -/
 def CoefficientHeartAssertions (X : Scheme.{u}) [IsNoetherian X] : Prop :=
   ((constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
     constantModelBoundedConstructible Λ X) ∧
@@ -449,14 +439,11 @@ finite locally closed lisse filtrations and the stated curve localization sequen
 The Noetherian structure used to state the assertion is constructed from the standing
 finite-type-over-a-field hypotheses, rather than imposed as an additional assumption.
 
-Source: blueprint lemma-constructible-sheaves and its proof, all ten steps
-(blueprint: lemma-constructible-sheaves).
-
 Proof plan:
-1. The standing finite-type scheme is Noetherian (lemma-constructible-sheaves--7).
-Its open, closed and locally closed subschemes are Noetherian, all opens quasi-compact,
-and X quasi-separated. Identify the actual condensed coefficients using
-lemma-comparison-completed-coefficients; these are not discrete constant field sheaves.
+1. The standing finite-type scheme is Noetherian. Its open, closed and locally closed subschemes are
+Noetherian, all opens quasi-compact, and X quasi-separated. Identify the actual condensed
+coefficients using lemma-comparison-completed-coefficients; these are not discrete constant field
+sheaves.
 2. The scalar ring is a field. A finite constant presentation is therefore finite free,
 and conversely. This gives the finite-stratification lisse criterion. The field case of
 lemma-constructible-sheaves--7 gives Dctf = Dbc. Truncation only removes cohomology
@@ -489,18 +476,16 @@ is open, so the pulled-back sheaf is lisse. No factorization through a nonreduce
 inferred just from containment of underlying point sets.
 9. Lift the trivializing cover through this surjective closed immersion by
 new-lem-weil-pbc-proetale-surjective-closed-cover-refinement. Each base change is a universal
-homeomorphism (lemma-constructible-sheaves--7), and its
-coefficient pullback is an equivalence (new-lem-weil-pbc-condensed-surjective-closed-equivalence).
-Cartesian coefficients identify free modules. Fullness lifts a trivialization and its inverse;
-faithfulness gives their inverse identities. These neighborhoods give a dense lisse open U.
-10. Give its complement the reduced induced closed scheme structure
-(lemma-constructible-sheaves--7). It misses every component's generic point,
-so a chain of length one in the complement would give length two in X. The complement has
-dimension at most zero, is Noetherian and T0, hence consists of finitely many closed points
-(lemma-constructible-sheaves--7). Apply lemma-constructible-sheaves--7 with
+homeomorphism, and its coefficient pullback is an equivalence. Cartesian coefficients identify free
+modules. Fullness lifts a trivialization and its inverse; faithfulness gives their inverse
+identities. These neighborhoods give a dense lisse open U.
+10. Give its complement the reduced induced closed scheme structure.
+It misses every component's generic point, so a chain of length one in the complement would give
+length two in X. The complement has dimension at most zero, is Noetherian and T0, hence consists of
+finitely many closed points. Apply lemma-constructible-sheaves--7 with
 lemma-inverse-image-coefficient-sheaves. Its actual counit and unit give the short exact sequence;
-open restriction of the closed term is zero, giving its support. The argument allows
-reducible and nonreduced curves, the empty complement, the zero sheaf and empty X. -/
+open restriction of the closed term is zero, giving its support. The argument allows reducible and
+nonreduced curves, the empty complement, the zero sheaf and empty X. -/
 theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj L)]

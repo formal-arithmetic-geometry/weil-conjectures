@@ -262,31 +262,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Every cohomology class of a sheaf pulled back from a fixed base descends to a stage.
 
-Source: Stacks Project, Theorem 59.51.3, Tag 09YQ, and directed reindexing, Tag 0032.
-(blueprint: lem-weil-pbc-fixed-base-cohomology-class-descent).
-
-Proof:
-1. Choose a nonempty small directed preorder and a final functor to I opposite.
-   Its opposite is initial, so the reindexed underlying scheme cone is still limiting.
-   Quasi-compactness, quasi-separatedness and affineness of transitions are inherited.
-2. At each stage pull F back along its structure morphism to S. Use the inverse
-   upperStarComp as transition. compatiblePullbackSheafSystem proves the identity,
-   composition and cone compatibility equations. The corresponding diagram on the
-   limit is constant with value the pullback of F along c.pt.hom.
-3. The directed category is connected, so this constant sheaf cocone is colimiting.
-   etale_limit_canonical_cohomology_diagram constructs the cohomology diagram and
-   its cocone with the specified pullback-comparison legs. Apply
-   nonempty_isColimit_etale_cohomology_of_isLimit to obtain its colimit property.
-4. The forgetful functor from abelian groups preserves these filtered colimits.
-   Hence every class is represented at a stage by Concrete.isColimit_exists_rep.
-   The specified cocone leg identifies that representative's pullback, followed by
-   H of the inverse composition comparison, with x. Apply H of the forward
-   comparison and cancel the two isomorphisms. This is the displayed equation.
-
-Edge cases: cofilteredness supplies a nonempty index; q = 0 needs no negative
-cochains. Empty schemes and the zero sheaf give only the zero class. A constant
-one-object diagram gives the usual inverse-image composition identification.
--/
+Source: Stacks Project, Theorem 59.51.3, Tag 09YQ, and directed reindexing, Tag 0032. -/
 theorem exists_cohomologyMap_preimage_of_isLimit {S : Scheme.{u}}
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) {I : Type u} [SmallCategory I]
     [IsCofiltered I] (D : I ⥤ Over S) [∀ i, CompactSpace (D.obj i).left]

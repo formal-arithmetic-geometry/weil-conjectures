@@ -127,9 +127,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Tor bounds over a constant field sheaf
 
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Project, Tags 03ER, 08FC, 010N, 06YS and 08FZ
-(blueprint: lem-sfb-constant-field-tor-bounds).
+Source: Stacks Project, Tags 03ER, 08FC, 010N, 06YS and 08FZ.
 
 The existing coefficient-sized small representative accommodates every enclosing
 coefficient universe. All objects are intrinsic module sheaves over the constant ring.
@@ -148,24 +146,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Over a constant field sheaf, cohomological support and Tor amplitude have exactly
  the same ordered interval. No finiteness or enough-points hypothesis is used.
 
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Tags 03ER, 08FC, 010N, 06YS and 08FZ
-(blueprint: lem-sfb-constant-field-tor-bounds).
-
-Proof:
-1. Every module sheaf M over the constant field is flat by
-lem-exc-constant-field-module-flat. The site/monoidal tensor comparison therefore
-makes tensorRight M exact, so it commutes with cohomology (Stacks Tag 010N).
-2. For any representative Q(P) isomorphic to B, derived cohomology agrees with the
-cohomology of P. The total tensor P tensor M[0] is isomorphic to termwise tensoring
-P with M. Its cohomology is thus H^i(P) tensor M, zero whenever H^i(B) is zero.
-This verifies every K-flat representative in the Tor predicate, with the same bounds.
-3. Conversely choose a K-flat resolution P of an arbitrary representative of B
-by lem-pc-kflat-resolution and test with the coefficient module. The canonical
-right unit isomorphism identifies P tensor R[0] with P. The resulting cohomology
-vanishing transfers to B through the localization cohomology comparison.
-4. No bounded representative, enough-points assumption, or geometric finiteness
-condition is required. -/
+Source: Stacks Tags 03ER, 08FC, 010N, 06YS and 08FZ. -/
 theorem constant_field_tor_bounds (X : Scheme.{u})
     (κ : Type (max v (u + 1))) [Field κ]
     (B : ConstantCompletion.D
@@ -229,12 +210,7 @@ theorem constant_field_tor_bounds (X : Scheme.{u})
 /-- Finite Tor amplitude over the constant field is equivalent to bounded cohomology.
 The ordered interval is a single common bound for every test module sheaf.
 
-Source: blueprint main-20261015, sk-lem-integral-models.proof, first paragraph;
-Stacks Tag 08FZ (blueprint: lem-sfb-constant-field-tor-bounds).
-
-Proof: apply constant_field_tor_bounds to each ordered integer interval and take
-existence of its endpoints. This is proof step 4 of the node. The zero object works
-in every ordered interval, including [0,0], and no geometric hypothesis enters. -/
+Source: Stacks Tag 08FZ. -/
 theorem constant_field_finite_tor_amplitude_iff (X : Scheme.{u})
     (κ : Type (max v (u + 1))) [Field κ]
     (B : ConstantCompletion.D

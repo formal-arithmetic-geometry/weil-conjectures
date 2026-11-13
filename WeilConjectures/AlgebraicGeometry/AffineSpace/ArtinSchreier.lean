@@ -112,8 +112,7 @@ variable (n S)
 /-- For `q ≠ 1` and finitely many coordinates, the Artin–Schreier map `x ↦ x ^ q - x` is
 finite. (For `q = 0` it is the isomorphism `x ↦ 1 - x`; for `q = 1` it is the zero map.)
 This is the finiteness of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1` (sketch blueprint:
-`lemma-artin-schreier-character-sheaf--1`). -/
+`lemma-artin-schreier-character-sheaf--1`. -/
 lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
     IsFinite (artinSchreierMap n S q) := by
   -- over `Spec Γ(S, ⊤)` each coordinate ring map `T ↦ T ^ q - T` is integral and of finite
@@ -127,8 +126,7 @@ lemma isFinite_artinSchreierMap [Finite n] {q : ℕ} (hq : q ≠ 1) :
 
 /-- If `q = 0` on `S`, the Artin–Schreier map `x ↦ x ^ q - x` of `𝔸(n; S)` is étale. This is
 the étaleness of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1` (sketch blueprint:
-`lemma-artin-schreier-character-sheaf--1`). -/
+`lemma-artin-schreier-character-sheaf--1`. -/
 lemma etale_artinSchreierMap [Finite n] {q : ℕ} (hq : (q : Γ(S, ⊤)) = 0) :
     Etale (artinSchreierMap n S q) := by
   -- the Jacobian of `x ↦ x ^ q - x` is `q x ^ (q - 1) - 1 = -1`, a unit; over
@@ -233,8 +231,7 @@ lemma pullback_fst_artinSchreierMap_over (q : ℕ) :
 elements, the Artin–Schreier map `AS_q` of `𝔸(n; S)` is a torsor under `kⁿ` acting by
 translations: `AlgebraicGeometry.AffineSpace.artinSchreierTorsorMap` is an isomorphism.
 This is the torsor structure of the Artin–Schreier covering of the blueprint definition
-`lemma-artin-schreier-character-sheaf--1` (sketch blueprint:
-`lemma-artin-schreier-character-sheaf--1`).
+`lemma-artin-schreier-character-sheaf--1`.
 
 The idempotents `E_a`, `a ∈ kⁿ`, obtained by evaluating Lagrange interpolation polynomials at
 the differences `d = y - x` (which satisfy `d ^ q = d`) split the fibre product into the open

@@ -15,12 +15,11 @@ Let `Y` be a connected scheme with a geometric point `s : Spec Ω ⟶ Y` and let
 fundamental group of the fibre functor `F_s` on finite étale `Y`-schemes (the étale fundamental
 group `π₁(Y, s)`).
 
-- `AlgebraicGeometry.Scheme.FiniteEtale.IsGaloisCover` (blueprint `def-galois-object`): a finite
-  étale `P ⟶ Y` is a Galois cover if `P` is connected and `Aut_Y(P)` acts simply transitively on
-  the geometric fibre `P_s`. These are the Galois objects of the Galois category `FÉt(Y)`
+- `AlgebraicGeometry.Scheme.FiniteEtale.IsGaloisCover`: a finite étale `P ⟶ Y` is a Galois cover if
+  `P` is connected and `Aut_Y(P)` acts simply transitively on the geometric fibre `P_s`. These are
+  the Galois objects of the Galois category `FÉt(Y)`
   (`AlgebraicGeometry.Scheme.FiniteEtale.isGaloisCover_iff_isGalois`).
-- `AlgebraicGeometry.Scheme.FiniteEtale.galois_openSubgroups` (blueprint
-  `lemma-cohomology-near-two-transverse-divisors--1`): the stabilizers of the points of the
+- `AlgebraicGeometry.Scheme.FiniteEtale.galois_openSubgroups`: the stabilizers of the points of the
   geometric fibres of connected finite étale covers are exactly the open subgroups of `G`; two
   connected covers are isomorphic if and only if their stabilizers are conjugate (and pointed covers
   are isomorphic if and only if the stabilizers of the points agree); the degree of a connected
@@ -37,7 +36,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-/-- Blueprint `def-galois-object`: Galois covers.
+/-- Galois covers.
 
 A finite étale `Y`-scheme `P` is a *Galois cover* (relative to the geometric point `s` of `Y`)
 if `P` is connected and the group `Aut_Y(P)` of `Y`-automorphisms of `P` acts simply
@@ -215,7 +214,7 @@ theorem nonempty_iso_iff (P Q : Y.FiniteEtale) [IsConnected P] [IsConnected Q]
   · rintro ⟨g, hg⟩
     exact ⟨((exists_iso_fiber_map_eq_iff s G P Q x (g • y)).2 hg).choose⟩
 
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`: Open subgroups and finite etale
+/-- Open subgroups and finite etale
 covers.
 
 Let `Y` be connected with geometric point `s`, and `G` the fundamental group `π₁(Y, s)` (any
@@ -231,8 +230,7 @@ the index of the subgroup:
 3. the degree is the index of the stabilizer.
 
 The blueprint states the bijection with open subgroups; the stabilizer of a point is only
-well-defined up to conjugacy (changing the point conjugates it), which is the form stated in (2).
--/
+well-defined up to conjugacy (changing the point conjugates it), which is the form stated in (2). -/
 theorem galois_openSubgroups :
     (∀ (P : Y.FiniteEtale) (x : (fiber s).obj P), IsOpen (MulAction.stabilizer G x : Set G)) ∧
     (∀ H : OpenSubgroup G, ∃ (P : Y.FiniteEtale) (x : (fiber s).obj P),

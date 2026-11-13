@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 /-!
 # Nested summands in section-preserving support composition
 
-Source: Stacks Project, Tags 0F4Y and 0F50
-(blueprint: lem-sfb-etale-support-nested-summands).
+Source: Stacks Project, Tags 0F4Y and 0F50.
 -/
 
 @[expose] public section
@@ -216,18 +215,7 @@ private lemma graphExtend_comp
 set_option backward.isDefEq.respectTransparency false in
 /-- The composition determined inside direct image sends a pair of etale lifts to their
 composite lift.
-Source: Stacks Project, Tags 0F4Y and 0F50
-(blueprint: lem-sfb-etale-support-nested-summands).
-
-Proof: postcompose the two arrows with the injective support inclusion on the final
-etale test object. Substitute the three sum-to-direct-image normalization equations and
-the section-preserving equation of sigma. The adjunction units select the summands
-indexed by the structural lifts. Extending first along the inner graph and then along
-the outer graph gives the extension along the composite graph: the sections agree on
-that graph and are zero on its clopen complement. Two applications of graph/complement
-sheaf extensionality prove equality directly. The mapComp inverse is the
-canonical identification of the two composite test objects. Injectivity cancels the
-postcomposition and proves the claimed equation. -/
+Source: Stacks Project, Tags 0F4Y and 0F50. -/
 theorem etaleSupportNestedSummands
     (A : Type (u + 1)) [CommRing A]
     {V T B : Scheme.{u}} (h : V ⟶ T) (e : T ⟶ B) [Etale h] [Etale e]

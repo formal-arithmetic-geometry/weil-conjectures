@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSourceAdjunctionTransport
 
 /-! # Transpose of the cyclic supported endpoint
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-source-cyclic-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -82,11 +79,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 
 attribute [local semireducible] cyclicAdjunction
 
-/-- The supported endpoint transpose in degree zero.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-cyclic-transpose).
-Proof: apply exact single-object adjunction transport to the supplied scalar endpoint
-normalization and finite realization. For the successive route, first compose the two
-scalar normalizations. -/
+/-- The supported endpoint transpose in degree zero. -/
 theorem cyclic_transpose : q.cyclicTranspose = q.cyclicSingleNormalized := by
   unfold cyclicTranspose cyclicSingleNormalized cyclicOrdinary
   exact realized_endpoint_transpose q.cyclic.supported q.cyclic.eW _

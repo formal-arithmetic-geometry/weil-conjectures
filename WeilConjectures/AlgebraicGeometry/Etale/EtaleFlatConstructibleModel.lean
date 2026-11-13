@@ -12,11 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Bounded flat constructible models on the small etale site
 
-Source: `WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean`, theorem
-`hasTorAmplitudeIn_iff_exists_flatConstructibleModel`, and the constructible variant of
-blueprint `sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`
-(blueprint: lem-sf-etale-flat-constructible).
-
 This statement uses the recorded finite-constant-value constructibility predicate, both
 on cohomology sheaves and on the terms of the model.
 -/
@@ -32,11 +27,6 @@ namespace AlgebraicGeometry.Etale
 /-- Over a finite commutative ring on a Noetherian scheme, a bounded constructible etale
 complex has Tor amplitude in `[a,b]`, with `a ≤ b`, exactly when it has a flat constructible
 model supported in that same interval.
-
-Source: `WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean`, theorem
-`hasTorAmplitudeIn_iff_exists_flatConstructibleModel`, lines 160-214; blueprint
-`sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`, constructible variant
-(blueprint: lem-sf-etale-flat-constructible).
 
 Proof plan:
 1. Apply `lem-weil-pbc-constructible-etale-module-sheaf-comparison` to every cohomology

@@ -22,10 +22,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 /-!
 # Bounded constructible derived comparison for arbitrary finite rings
 
-Source: Stacks Project, Tag 09AL, lemma-compare-constructible-derived, and its exact
-cohomology comparison, with the blueprint's global finite-stratification convention
-(blueprint: lem-weil-pbc-finite-ring-constructible-derived-origin).
-
 The induced equivalence is stated by its equivalent full-faithfulness and essential-image
 criterion. The functor is the specified exact inverse image, in the canonical constant-ring
 presentation used by intrinsic constructibility. Its source is the existing full bounded
@@ -77,26 +73,7 @@ onto the pro-etale complexes with intrinsically constructible bounded cohomology
 preserves and reflects every cohomological interval. Fullness, faithfulness and the
 specified essential image are the standard criterion for this induced equivalence.
 The ring is any finite commutative ring, including the zero ring; no valuation ring is used.
-Source: Stacks Project, Tag 09AL, with the global finite partitions of the blueprint
-(blueprint: lem-weil-pbc-finite-ring-constructible-derived-origin).
-
-Proof: factor the specified inverse image into fixed-coefficient inverse image and
-constant-ring realization. The latter is an exact equivalence; its sheafification counit
-identifies it with the inverse of restriction to constant scalars. The proved restriction
-comparison therefore identifies intrinsic constructibility with fixed-module constructibility,
-without changing the global finite-stratification convention.
-
-Full faithfulness on bounded below complexes restricts to the bounded constructible
-subcategory, and is unchanged by composition with the realization equivalence. For the
-essential-image criterion, exact cohomology comparison proves the forward implication.
-For the converse, transfer the complex through realization, descend its constructible
-cohomology sheaves, and apply the existing theorem
-`ProEtale.DerivedCategory.boundedConstructible_of_homology`. That theorem performs the
-bounded truncation induction, lifting connecting maps by full faithfulness and using
-triangulated closure of the essential image. Convert the resulting etale cohomology
-predicates and bounds to the stated bounded constructible subcategory. Finally exactness
-preserves cohomological vanishing and faithfulness reflects it degreewise; this proves the
-interval assertion, also when the interval is empty. -/
+Source: Stacks Project, Tag 09AL, with the global finite partitions of. -/
 theorem finiteRing_constructibleDerived_origin (X : Scheme.{u})
     (B : Type u) [CommRing B] [Finite B] :
     (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible

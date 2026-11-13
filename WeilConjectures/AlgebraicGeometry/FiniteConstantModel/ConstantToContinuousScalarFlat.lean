@@ -55,8 +55,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
 
 /-! # Flatness of continuous coefficients over discrete constant scalars
 
-Source: Stacks Project, Tags 093J, 03EI, 03EP and 08FC; the torsion-free flatness criterion
-for a principal ideal domain (blueprint: lem-sfb-constant-to-continuous-scalar-flat).
+Source: Stacks Project, Tags 093J, 03EI, 03EP and 08FC.
 -/
 
 @[expose] public noncomputable section
@@ -76,22 +75,7 @@ namespace AlgebraicGeometry.ProEtale.FiniteConstantModel
 any principal ideal domain.
 
 Source: Stacks Project, Tags 093J, 03EI, 03EP and 08FC, together with torsion-free flatness
-criterion for a principal ideal domain.
-(blueprint: lem-sfb-constant-to-continuous-scalar-flat).
-
-Proof: the sheafification unit induces a ring homomorphism from A into every section
-ring of the constant sheaf. Its composite with φ acts by ordinary scalar multiplication,
-by hφ. Continuous A-valued functions on each profinite test object are torsion-free
-pointwise, hence flat over the PID A. For any finite relation over the sheafified constant
-ring, local surjectivity of the sheafification unit lifts its coefficients to A on a common
-covering sieve. Restrict the relation there and apply the ordinary equational criterion
-for flatness. Map the resulting finite factorization matrix into the section ring; the
-scalar-action calculation verifies its equations. The local equational criterion gives
-flatness of the section module. Transport it to internal flatness through the tensor
-comparison equivalence, and identify extension of scalars followed by forgetful with
-tensoring by the restricted regular module followed by forgetful. Since forgetful is exact
-and reflects finite limits, extension of scalars preserves them. The argument includes
-empty finite relations and empty profinite test objects. No completeness is used. -/
+criterion for a principal ideal domain. -/
 theorem constantToContinuous_preservesFiniteLimits
     (A : Type u) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]
     [TopologicalSpace A] [IsTopologicalRing A]

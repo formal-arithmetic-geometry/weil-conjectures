@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 /-!
 # Etale cohomological dimension of a smooth connected curve
 
-Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md;
-Stacks Project, Tag 03SC (1) (blueprint: theorem-cohomology-curves--1).
+Source: Stacks Project, Tag 03SC (1).
 -/
 
 @[expose] public section
@@ -30,8 +29,6 @@ namespace AlgebraicGeometry
 /-- For a smooth separated connected curve over an algebraically closed field, every torsion
 abelian etale sheaf has zero cohomology above degree two. Cohomology is the homology of derived
 global sections, applied to the sheaf in degree zero.
-Source: blueprint sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-cohomological-dimension.md,
-and Stacks Project, Tag 03SC (1) (blueprint: theorem-cohomology-curves--1).
 
 Proof (the nine steps of the node):
 1. Choose an affine open U with finite complement of closed points using
@@ -46,7 +43,7 @@ Proof (the nine steps of the node):
    0 -> G -> J -> G' -> 0 and 0 -> G' -> J' -> G'' -> 0. Both envelopes and both quotients
    are killed by n; J and J' are acyclic on U, after j_*, and after etale inverse image.
 4. The long exact sequence and lem-sc-affine-curve-h2-vanishing give H^1(U,G'') = 0.
-   Injectivity of the edge map (lem-sc-edge-map-h1-injective) gives H^1(C,j_*G'') = 0.
+   Injectivity of the edge map gives H^1(C,j_*G'') = 0.
 5. The sequence 0 -> j_*G' -> j_*J' -> j_*G'' -> 0 is exact: left exactness gives the first
    two terms. On affine etale pieces V over C, V times_C U is an affine curve. Exact inverse
    image, the first envelope and affine H^2 vanishing give H^1(V times_C U,G') = 0.

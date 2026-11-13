@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 import WeilConjectures.CategoryTheory.SixFunctors.CompIsoApp
 
 /-! # Finite realization of a unit followed by a local arrow
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -56,9 +54,7 @@ private theorem transport_unit_adjunct
       simp only [Category.assoc]
     _ = _ := by rw [h]; simp only [Category.assoc]
 
-/-- The specified finite realization unit isomorphism in the derived category.
-Source: coefficient changes (1), the finite single-object unit comparison.
-(blueprint: lem-diagonal-finite-unit-arrow-transport). -/
+/-- The specified finite realization unit isomorphism in the derived category. -/
 @[irreducible]
 def FiniteRealization.unitIsoDerived
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
@@ -67,10 +63,7 @@ def FiniteRealization.unitIsoDerived
   (e.F.mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso e.unitIso ≪≫ (finiteUnitComparison A X).symm
 
-/-- The hom of the finite derived unit is the prescribed unit arrow.
-Source: coefficient changes (1), finite single-object unit comparison.
-(blueprint: lem-diagonal-finite-unit-arrow-transport).
-Proof: expand the composite isomorphism and the prescribed derived unit. -/
+/-- The hom of the finite derived unit is the prescribed unit arrow. -/
 theorem FiniteRealization.unitIsoDerived_hom
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}} (e : FiniteRealization R A X) :
@@ -79,12 +72,7 @@ theorem FiniteRealization.unitIsoDerived_hom
   try unfold Functor.compIsoApp
   rfl
 
-/-- Finite realization transports the coefficient-unit arrow followed by any local arrow.
-Source: coefficient changes (1), finite unit normalization and adjunction naturality.
-(blueprint: lem-diagonal-finite-unit-arrow-transport).
-Proof: finite_unit_push gives the unit square. Naturality of its direct-image
-comparison transports the local arrow. Insert and cancel the specified derived
-unit isomorphism on P, then use finiteUnitAdjunct_naturality. -/
+/-- Finite realization transports the coefficient-unit arrow followed by any local arrow. -/
 theorem finite_unit_arrow_transport
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})

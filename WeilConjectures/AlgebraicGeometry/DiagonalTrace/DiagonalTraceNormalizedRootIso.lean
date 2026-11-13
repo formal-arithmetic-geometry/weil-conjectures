@@ -86,16 +86,7 @@ theorem whiskerRight_diagonalTraceNormalizedRootHom (l : ℕ) [Fact l.Prime] (T 
   ext n U x
   rfl
 
-/-- The lifted root identification is an isomorphism of strict systems.
-Source: diagonal tower trace proof (1), root-system identification, and the scalar
-restriction convention in the geometric classes construction.
-(blueprint: lem-sfb-diagonal-trace-normalized-root-iso).
-
-Proof: the restricted target at level n is killed by l^(n+1). An additive map into
-such a target is Z_l-linear: approximate a scalar by an integer modulo l^(n+1)
-and the error term acts by zero. Apply this to roots.hom followed by
-k.lineForget.inv. Faithfulness proves naturality, and reflection of isomorphisms
-by forgetting scalars makes the resulting strict-system map invertible. -/
+/-- The lifted root identification is an isomorphism of strict systems. -/
 instance isIso_diagonalTraceNormalizedRootHom (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)
@@ -120,8 +111,7 @@ instance isIso_diagonalTraceNormalizedRootHom (l : ℕ) [Fact l.Prime] (T : Sche
   exact NatIso.isIso_of_isIso_app _
 
 /-- The normalized isomorphism between the strict root system `H` and the restricted
-line module, lifting `roots.hom ≫ k.lineForget.inv`.
-(blueprint: lem-sfb-diagonal-trace-normalized-root-iso). -/
+line module, lifting `roots.hom ≫ k.lineForget.inv`. -/
 def diagonalTraceNormalizedRootIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

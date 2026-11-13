@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenRestrictionComparison
 /-!
 # The eight curve assertions on a dense open
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52
-(blueprint: lemma-removing-finitely-many-points).
+Source: Stacks Project, Etale Cohomology, Lemma 0GJA, Situation 0A52.
 
 The unconditional equivalence, without a condition on the torsion of the sheaf, is
 `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`, a corollary of the curve package.
@@ -40,9 +39,9 @@ namespace AlgebraicGeometry
  the original constructible torsion sheaf. The converse holds for primary or prime-to-the-
  characteristic torsion, and hence for a sheaf killed by a prime.
  Source: Stacks Project, Lemma 0GJA and Situation 0A52, with the converse torsion condition
- recorded in the node (blueprint: lemma-removing-finitely-many-points). The equivalence without the
- torsion condition is `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`: both sides hold by
- the curve package, whose proof goes through the prime-torsion comparison
+ recorded in the node. The equivalence without the torsion condition is
+ `AlgebraicGeometry.IsCurve.assertions_iff_dense_open`: both sides hold by the curve package, whose
+ proof goes through the prime-torsion comparison
  `AlgebraicGeometry.IsCurve.assertions_iff_dense_open_prime`.
 
  Abelian sheaves are converted to modules by precisely the coefficient functor used in
@@ -103,7 +102,7 @@ lem-weil-pbc-open-closed-short-exact, def-weil-pbc-inverse-image, def-weil-pbc-d
 def-weil-pbc-geometric-stalks, theorem-cohomology-curves, def-weil-pbc-primary-torsion,
 lemma-weil-pbc-geometric-stalk-conservative.
 
-4. Cohomology of $G$ (Stacks 0GJA, proof: '$H^q(X,i_*i^{-1}F)=H^q(Z,i^*F)$ ... by Proposition 03QP
+4. Cohomology of $G$ (Stacks 0GJA, proof: '$H^q(X,i_*i^{-1}F)=H^q(Z,i^*F)$ .. by Proposition 03QP
 and the Leray spectral sequence; since $Z$ is a disjoint union of spectra of algebraically closed
 fields, $H^q(Z,i^*F)=0$ for $q>0$ and $H^0=\bigoplus F_{x_i}$, which is finite as $F$ is
 constructible'). Since $i$ is finite, [lemma-weil-pbc-finite-direct-image-exact] gives $Ri_*E\cong
@@ -233,8 +232,7 @@ H^2(U,a^{-1}F')$ is surjective. With the previous three steps, $\mathcal C(X,F')
 since a sheaf killed by a prime $r$ is $p$-primary if $r=p$ and prime to $p$ otherwise
 [def-weil-pbc-primary-torsion]. Dependencies: theorem-cohomology-curves--8,
 lem-weil-pbc-pullback-cohomology-long-exact-ladder, theorem-cohomology-curves,
-def-weil-pbc-primary-torsion.
--/
+def-weil-pbc-primary-torsion. -/
 theorem IsCurve.dense_open_assertions {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k) (hP : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

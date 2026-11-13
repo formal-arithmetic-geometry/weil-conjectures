@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperTower
 
 /-! # The normalized compactification tower for etale horizontal composition
 
-Source: Stacks Project, Tags 0F7B, 0F7F, 0F7J and 0F7L
-(blueprint: lem-pur-etale-horizontal-support-tower).
+Source: Stacks Project, Tags 0F7B, 0F7F, 0F7J and 0F7L.
 -/
 
 @[expose] public section
@@ -75,8 +74,7 @@ inverse-image/direct-image adjunctions. In particular it does not involve invers
 base change, or the full compact-support exchange for f.
 Source: Stacks Project, Tags 0F7B and 0F7F for proper/quasi-finite interchange,
 Tag 0F7J for composition, and Tag 0F7L, item (3), for its base-change compatibility;
-Tag 0F4L for the canonical graph comparison
-(blueprint: lem-pur-etale-horizontal-support-tower).
+Tag 0F4L for the canonical graph comparison.
 
 Proof in words:
 1. Choose a compactification d of v' followed by f, and set e=d.ofComp c. For the

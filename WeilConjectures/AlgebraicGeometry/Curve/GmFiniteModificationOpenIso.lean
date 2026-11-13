@@ -9,9 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-! # Units comparison on the isomorphism locus of a finite morphism
-
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization).
-(blueprint: lem-sc-gm-finite-modification-open-iso)
 -/
 
 @[expose] public section
@@ -24,21 +21,7 @@ open scoped AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Scheme
 
 /-- For a finite morphism which is an isomorphism over an open, the comparison from units
-to the direct image of units is an isomorphism after restriction to that open.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 2 (normalization),
-the assertion that the units cokernel vanishes on the isomorphism locus.
-(blueprint: lem-sc-gm-finite-modification-open-iso)
-
-Proof: Inverse image along the open immersion V → C is naturally isomorphic to
-restriction of sheaves along composition of etale objects with this immersion. On an
-etale object T → V, the restricted units comparison is induced by the projection
-T ×_C Y → T. The Cartesian square defining ν restricted to V, together with pullback
-pasting, identifies this projection as a base change of ν restricted to V. It is
-therefore an isomorphism. Applying global sections and the functor of units preserves
-this isomorphism. Thus the restricted morphism of presheaves is objectwise an
-isomorphism, hence so is the morphism of sheaves. Naturality of the isomorphism from
-inverse image to restriction gives the stated result. Empty opens and empty schemes
-are included. -/
+to the direct image of units is an isomorphism after restriction to that open. -/
 theorem isIso_upperStar_map_gmSheafToLowerStar_of_isIso_restrict
     {C Y : Scheme.{u}} (ν : Y ⟶ C) [IsFinite ν] (V : C.Opens)
     [IsIso (ν ∣_ V)] :

@@ -33,14 +33,7 @@ private theorem derivedUnit_assoc
   intro K
   simpa only [Category.assoc] using h K
 
-/-- The canonical scalar universal property implies the Cartier scalar-unit predicate.
-Source: blueprint lemma-cycle-class-cartier-divisor, coefficient paragraph, and the canonical
-exact-degree-zero scalar interface (blueprint: lem-sfb-geo-cartier-scalar-unit-of-universal).
-Proof: The existing scalarUniversal_derivedUnit theorem expresses the canonical scalar
-universal property in the abstract exact-functor interface. A general category lemma
-reassociates its composition with single(eta) and the inverse exact-single comparison.
-Unfold GeoCartierScalarUnit and IsDerivedBaseChange to obtain precisely that formula.
-All unbounded test complexes remain. No finiteness or flatness assumption is used. -/
+/-- The canonical scalar universal property implies the Cartier scalar-unit predicate. -/
 theorem geoCartierScalarUnit_of_scalarUniversal
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (Z : Scheme.{u})

@@ -416,8 +416,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceRightNormalForm
 
 /-!
 # The affine-space top trace
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
-(blueprint: lemma-integral-linear-character--1).
 -/
 
 @[expose] public noncomputable section
@@ -427,9 +425,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The counit is invertible along the entire ordered coordinate tower.
-Source: blueprint affine-space top trace, step 7
-(blueprint: lemma-integral-linear-character--1). -/
+/-- The counit is invertible along the entire ordered coordinate tower. -/
 private theorem towerCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -447,23 +443,7 @@ private theorem towerCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The affine-space trace is the actual composite counit, is invertible, and obeys
 arbitrary Noetherian base change. The exchange is the pasted compact-support exchange;
-the right-object comparison is the normalized Tate pullback comparison above.
-Source: blueprint proposition-purity-vector-bundles, Steps 5(b), 6, detailed affine-space top trace
-lemma (blueprint: lemma-integral-linear-character--1).
-
-Proof: use the normalized projective-line adjunction and its base-change datum.
-Push the open-closed triangle to the base and use the projective decomposition.
-Only the first restriction component needs to be identity: a triangular coordinate
-change makes restriction first projection while preserving trace as second projection.
-A morphism to the split distinguished triangle makes the composite line counit
-invertible. Induct along the ordered adjunction tower from the identity at dimension
-zero. The separately proved tensor, shift and inverse-image induction supplies the
-right-functor Tate normal form and boundedness at the constant input.
-For base change, naturality of the open counit pastes its exchange square with the
-normalized projective-line counit square. Induct through the coordinate tower, then
-apply counit naturality to the canonical constant-coefficient pullback comparison.
-Every map is the actual specified adjunction counit or canonical comparison.
--/
+the right-object comparison is the normalized Tate pullback comparison above. -/
 theorem exists_affineSpaceTopTrace (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
     ∃ (t : OrdinaryFiniteTwistTransport A N hA)

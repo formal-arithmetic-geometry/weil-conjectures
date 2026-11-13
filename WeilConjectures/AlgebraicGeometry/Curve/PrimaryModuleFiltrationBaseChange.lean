@@ -42,12 +42,7 @@ private theorem discreteRep_iso_of_additive_iso
 /-- The stalk comparison and the supplied action formula identify the pullback along the
 fixed-field inclusion with the sheaf transported by the fixed-field equivalence.  This is the
 first (before transport along `e`) part of the inverse-image comparison; its proof is the
-represented-germ construction from Stacks, Tags 03QT, 03QW and 04JQ.
-(blueprint: lem-sc-primary-fixed-field-pullback-iso)
-
-Proof: identify stalks by the pullback stalk theorem, use the supplied germ-action formula and
-extensions of Galois automorphisms to obtain equivariance, then apply the full faithful
-fixed-field equivalence and its unit/counit. -/
+represented-germ construction from Stacks, Tags 03QT, 03QW and 04JQ. -/
 theorem primary_fixedField_pullback_iso
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

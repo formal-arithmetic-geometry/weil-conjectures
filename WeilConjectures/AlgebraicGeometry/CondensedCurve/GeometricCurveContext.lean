@@ -10,9 +10,6 @@ import Mathlib.Algebra.CharP.Basic
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # The geometric domain of the curve monodromy comparison
-
-Source: latest blueprint, `sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/`
-`sk-l-dl-a1-endpoints.proof.md`, smooth curve duality and monodromy hypotheses.
 -/
 
 @[expose] public noncomputable section
@@ -23,16 +20,7 @@ open CategoryTheory AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale.CondensedCurve
 
-/-- A curve has the absolute hypotheses needed for the monodromy fibre.
-Source: step 1 of `lem-per-geometric-curve-compact-cohomology`
-(blueprint: lem-per-geometric-curve-context).
-
-Proof: curve hypotheses supply finite type and separatedness.
-Finite type over a field gives local
-Noetherianness; quasi-compactness then gives Noetherianness. Separatedness over a
-field gives absolute separatedness. The coefficient prime is nonzero in the base
-field, hence a unit, and its image is a unit in each residue field.
-No descent or Weil structure enters this argument. -/
+/-- A curve has the absolute hypotheses needed for the monodromy fibre. -/
 theorem geometricCurve_context
     (k : Type u) [Field k] (p ℓ : ℕ)
     [CharP k p] [Fact ℓ.Prime] (hℓp : ℓ ≠ p)

@@ -60,7 +60,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 /-! # Universal data for the completed adic slice comparison
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -76,9 +75,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.defProp false in
 /-- The universal ordinary and derived scalar-extension witness on the slice.
 Its object and map equations determine ordinary tensor extension, while its
-counit determines the derived functor.  Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+counit determines the derived functor.  Source: Stacks Tag 06YY. -/
 def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
@@ -92,26 +89,20 @@ def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
     (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f)
 
 /-- Ordinary scalar extension along the coefficient map restricted to the slice.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+Source: Stacks Tag 06YY. -/
 def completedAdicSliceChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose
 
 /-- The chosen slice scalar-extension witness is additive.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+Source: Stacks Tag 06YY. -/
 instance completedAdicSliceChange_additive (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     (completedAdicSliceChange X U f).Additive :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose
 
 /-- The total left derived scalar-extension functor on the slice.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+Source: Stacks Tag 06YY. -/
 def completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
   (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
@@ -377,9 +368,7 @@ private theorem sliceChangeMap (X : Scheme.{t}) (U : X.ProEt)
 The proof is the presheaf tensor comparison followed by the sheafification
 universal property.  This is the ordinary (underived) step in the derived
 comparison theorem.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-underived).
--/
+Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D. -/
 theorem completedAdic_slice_scalarComparison_underived (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     Nonempty
@@ -558,18 +547,7 @@ The composite of exact slice restriction with derived slice extension, and the
 composite of derived extension with exact slice restriction, each carry a counit to
 the localized ordinary composite exhibiting it as a left derived functor along the
 quasi-isomorphisms.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D.
-Proof: every complex of R-modules has a flat-term K-flat resolution, and slice
-restriction is exact and carries K-flat complexes to K-flat complexes (pullback by
-the localization morphism of ringed topoi, Tag 0G7E). The universal counits of both
-derived scalar extensions are invertible on K-flat complexes and their ordinary
-extensions preserve quasi-isomorphisms between K-flat complexes. Hence both ordinary
-composites send quasi-isomorphisms between K-flat complexes to isomorphisms, both
-derived composites are computed on K-flat representatives, and the induced counits
-are isomorphisms there; a functor with this property is a left derived functor, by
-the universal property of the localization restricted to K-flat complexes.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data).
--/
+Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D. -/
 theorem completedAdic_slice_scalarComparison_derived_data (X : Scheme.{t}) (U : X.ProEt)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
     let O_R := (sheafCompose (ProEt.topology X)

@@ -42,7 +42,7 @@ lemma connectedSpace_of_isOpenImmersion [IrreducibleSpace X] [Nonempty U] : Conn
   have := j.isOpenEmbedding.irreducibleSpace
   infer_instance
 
-/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1), second formulation: a connected
+/-- Part (1), second formulation: a connected
 finite étale cover of a connected locally noetherian regular scheme `X` stays connected over a
 nonempty open `U`. The cover is regular, being étale over `X`, hence irreducible, and its
 restriction to `U` is a nonempty open of it. -/
@@ -68,7 +68,7 @@ variable [ConnectedSpace U] [ConnectedSpace X] {Ω Ω' : Type u} [Field Ω] [IsS
   (GX : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX]
   [∀ P, MulAction GX ((fiber t).obj P)] [IsFundamentalGroup (fiber t) GX]
 
-/-- Blueprint `theorem-purity-real-sheaves-curves`, part (1): **the fundamental group of a
+/-- Part (1): **the fundamental group of a
 nonempty open of a connected regular scheme surjects onto that of the scheme.** For a connected
 locally noetherian regular scheme `X`, an open immersion `j : U ⟶ X` with `U` nonempty and a
 path `τ` between the fibre functors, the map `π₁(U) → π₁(X)` is surjective: connected finite

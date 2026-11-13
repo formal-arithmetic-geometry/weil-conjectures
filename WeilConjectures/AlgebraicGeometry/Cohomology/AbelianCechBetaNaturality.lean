@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechTotalMap
 /-! # Naturality of the coefficient augmentation
 
 Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: lem-pc-abelian-cech-beta-square)
 -/
 
 @[expose] public section
@@ -22,12 +21,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 /-- The coefficient augmentation commutes with a lift of a coefficient morphism.
-Source: Stacks Project, Tags 01EQ and 01FD, beta square.
-(blueprint: lem-pc-abelian-cech-beta-square)
-
-Proof: Compare each degree using naturality of the total-complex summand
-inclusion. The resolution lifting equation identifies the two coefficient
-morphisms into the zeroth resolution term; apply the Čech functor to it. -/
+Source: Stacks Project, Tags 01EQ and 01FD, beta square. -/
 theorem abelianCechBeta_square
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

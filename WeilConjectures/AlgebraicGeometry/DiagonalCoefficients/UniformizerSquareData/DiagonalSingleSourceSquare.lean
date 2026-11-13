@@ -10,9 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSource
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalOrdinarySourceNormalization
 
 /-! # The single image of the ordinary source square
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-single-source-square).
 -/
 
 @[expose] public noncomputable section
@@ -63,10 +60,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 attribute [local semireducible] quotientSingleNormalized cyclicSingleNormalized
   extendQuotientTranspose extendCyclicTranspose
 
-/-- Exact single comparisons carry the ordinary source square to derived morphisms.
-Source: coefficient changes (1). (blueprint: lem-diagonal-single-source-square).
-Proof: apply naturality of the exact single comparisons to the normalized ordinary
-source equation, first for the right comparison and then for the source map. -/
+/-- Exact single comparisons carry the ordinary source square to derived morphisms. -/
 theorem source_single_square
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (hs : q.RestrictionNormalized s) :

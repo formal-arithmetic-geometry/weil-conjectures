@@ -33,9 +33,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Bounded-below derived smooth base change
 
-Source: blueprint, chap-Smooth-base-change, sk-rem-rest, order 1440
-(blueprint: theorem-smooth-base-change-classical-torsion-2--1).
-
 The conclusion includes membership of both images in the full allowable-torsion
 subcategory as well as invertibility of the specified canonical exchange arrow.
 -/

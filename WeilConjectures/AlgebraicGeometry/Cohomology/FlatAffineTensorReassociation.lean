@@ -54,20 +54,7 @@ variable {X : Scheme.{u}}
 
 /-- Reassociate scalar extension with the coefficient ring of a cartesian affine open.
 This concerns the original section module only, and assumes no quasi-coherence.
-Source: Stacks Project, Tag 02KG, proof of Lemma 30.5.1.
-(blueprint: lem-pc-flat-affine-tensor-reassociation)
-
-Proof: Put A = Gamma(W,O_X), B = Gamma(W',O_{X_S}). The cartesian square of
-Spec S and W over Spec R identifies B with S tensor_R A, respecting the maps
-from A and S (Stacks 01I4). The scalar action of R on Gamma(W,M) is the
-restriction of its A-action, by naturality of the structure map. Tensor
-associativity and the tensor-unit equivalence identify
-(S tensor_R A) tensor_A Gamma(W,M) with S tensor_R Gamma(W,M).
-Compose the inverse with the coefficient ring identification. On pure tensors
-this sends b tensor s to the image of b in B tensor s. Each map is S-linear,
-so their composite is the asserted equivalence. No flatness is used. If W is
-empty, A and B are zero rings and both section tensors are zero; the same
-isomorphisms still apply. -/
+Source: Stacks Project, Tag 02KG, proof of Lemma 30.5.1. -/
 theorem exists_baseChange_affine_tensor_reassociation (f : X ⟶ Spec (.of R))
     (W : X.Opens) (hW : IsAffineOpen W) (M : X.Modules)
     (W' : (baseChangedScheme (S := S) f).Opens)

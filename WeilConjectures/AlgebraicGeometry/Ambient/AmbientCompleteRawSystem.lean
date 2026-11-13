@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationLift
 
 /-! # Canonical raw ambient scalar system
 
-Source: literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex,
-lines 1191--1228 and 1291--1338
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-
 ## Main definitions
 
 * `pbcAmbientCompleteStage`: the raw rational ambient complete category.
@@ -40,23 +36,18 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Use the existing division-ring torsion-free instance directly for coefficient fields.
 This specializes Mathlib's instance, avoiding its slower flatness search path.
-Source: sketch32, coefficient fields throughout lines 1191--1438;
-Mathlib `DivisionSemiring.to_moduleIsTorsionFree`
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+Source: Mathlib `DivisionSemiring.to_moduleIsTorsionFree`. -/
 instance (priority := 3000) pbcCompleteCoefficientTorsionFree
     (l : ℕ) [Fact l.Prime] (L : Type v) [Field L] [Algebra (Padic l) L] :
     Module.IsTorsionFree (Padic l) L := DivisionSemiring.to_moduleIsTorsionFree
 
-/-- The ambient complete coefficient stage before idempotent completion.
-Source: sketch32, lines 1192--1207 (blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The ambient complete coefficient stage before idempotent completion. -/
 def pbcAmbientCompleteStage (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
     (W : Scheme.{u}) (E : Padic.FiniteCoefficientFields l Ω) : Type (u + 2) :=
   WeilConjectures.PbcRationalComplete l (pbcFiniteField.{u} l Ω E) W
 
-/-- Name the existing category structure on the unchanged raw ambient stage.
-Source: sketch32, lines 1192--1207
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- Name the existing category structure on the unchanged raw ambient stage. -/
 noncomputable instance pbcAmbientCompleteStageCategory
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -65,9 +56,7 @@ noncomputable instance pbcAmbientCompleteStageCategory
   inferInstanceAs (Category (WeilConjectures.PbcRationalComplete
     l (pbcFiniteField.{u} l Ω E) W))
 
-/-- The existing addition on raw ambient arrows, through the named category instance.
-Source: sketch32, lines 1192--1207
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The existing addition on raw ambient arrows, through the named category instance. -/
 noncomputable instance pbcAmbientCompleteStagePreadditive
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]
     [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
@@ -97,12 +86,7 @@ private theorem pbcAmbientScalarExtension_eq (h : E ≤ F) :
 
 -- Keep the recorded base hypotheses in the public signature.
 set_option linter.unusedSectionVars false in
-/-- Finite coefficient tensor preserves intrinsic completeness without constructible bounds.
-Source: sketch32, finite-stage pair categories, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: finite freeness makes tensor commute with the Koszul completion limit.
-The source and target uniformizer powers are cofinal. Thus tensor carries the
-invertible source completion unit to the target completion unit. -/
+/-- Finite coefficient tensor preserves intrinsic completeness without constructible bounds. -/
 theorem pbcAmbientCompleteTensor_preserves (h : E ≤ F)
     (K : WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W) :
     WeilConjectures.IsPbcComplete l (pbcFiniteField.{u} l Ω F) W
@@ -110,9 +94,7 @@ theorem pbcAmbientCompleteTensor_preserves (h : E ≤ F)
   rw [pbcAmbientScalarExtension_eq l Ω W h]
   exact pbcScalarPreservesComplete l _ _ (pbcFiniteFieldInclusion l Ω h) W K
 
-/-- Restrict the actual finite-projection-normalized tensor to complete objects.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- Restrict the actual finite-projection-normalized tensor to complete objects. -/
 @[irreducible] def pbcAmbientCompleteIntegralTransition (h : E ≤ F) :
     WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W ⥤
       WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω F) W :=
@@ -121,9 +103,7 @@ Source: sketch32, lines 1291--1311
       pbcAmbientScalarExtension l Ω W h)
     (pbcAmbientCompleteTensor_preserves l Ω W h)
 
-/-- Localization of the complete integral stage; no idempotents are adjoined.
-Source: sketch32, lines 1192--1207
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- Localization of the complete integral stage; no idempotents are adjoined. -/
 abbrev pbcAmbientCompleteLocalization (E : Padic.FiniteCoefficientFields l Ω) :=
   ScalarLocalization.localization (PbcIntegralRing l (pbcFiniteField.{u} l Ω E))
     (WeilConjectures.PbcComplete l (pbcFiniteField.{u} l Ω E) W)
@@ -224,13 +204,7 @@ private theorem pbcAmbientCompleteRawExtension_additive (h : E ≤ F) :
     (pbcAmbientCompleteRawExtension l Ω W h).Additive :=
   ScalarLocalization.extensionAdditive _ _ _ _ _ _
 
-/-- The rational tensor functor is uniquely determined on integral objects and arrows.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: the coefficient inclusion sends a source uniformizer to a unit times a
-positive power of the target uniformizer. Send a fraction to the tensor image
-with its denominator mapped by that inclusion. Bilinearity gives the tensor-Hom
-formula, functoriality descends, and fractions generate every Hom, proving uniqueness. -/
+/-- The rational tensor functor is uniquely determined on integral objects and arrows. -/
 theorem pbcAmbientCompleteRaw_exists (h : E ≤ F) :
     ∃! T : pbcAmbientCompleteStage l Ω W E ⥤ pbcAmbientCompleteStage l Ω W F,
       pbcAmbientCompleteLocalization l Ω W E ⋙ T =
@@ -240,9 +214,7 @@ theorem pbcAmbientCompleteRaw_exists (h : E ≤ F) :
     fun _ hB ↦ ScalarLocalization.functor_ext
       (hB.trans (pbcAmbientCompleteRawExtension_spec l Ω W h).symm)⟩
 
-/-- Canonical rational tensor, normalized to the literal identity at equal fields.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- Canonical rational tensor, normalized to the literal identity at equal fields. -/
 @[irreducible] def pbcAmbientCompleteRawTransition (h : E ≤ F) :
     pbcAmbientCompleteStage l Ω W E ⥤ pbcAmbientCompleteStage l Ω W F := by
   classical
@@ -258,11 +230,7 @@ private theorem pbcAmbientCompleteRawTransition_of_ne (h : E ≤ F) (hEF : E ≠
       (pbcAmbientCompleteRaw_exists l Ω W h).exists.choose := by
   simp [pbcAmbientCompleteRawTransition, hEF]
 
-/-- The complete integral tensor unit is the restriction of the canonical derived unit.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: the ambient unit is normalized on tensor sections. Completeness is a full
-subcategory, so lift its components and inverses. Faithfulness proves uniqueness. -/
+/-- The complete integral tensor unit is the restriction of the canonical derived unit. -/
 theorem pbcAmbientCompleteIntegralUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! e : pbcAmbientCompleteIntegralTransition l Ω W (le_refl E) ≅ 𝟭 _,
       HEq (Functor.whiskerRight e.hom
@@ -284,17 +252,11 @@ theorem pbcAmbientCompleteIntegralUnit_exists (E : Padic.FiniteCoefficientFields
   apply ObjectProperty.hom_ext
   exact congrArg (fun η ↦ η.app K) (eq_of_heq he')
 
-/-- The section-normalized complete tensor unit.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The section-normalized complete tensor unit. -/
 @[irreducible] def pbcAmbientCompleteIntegralUnit (E : Padic.FiniteCoefficientFields l Ω) :=
   (pbcAmbientCompleteIntegralUnit_exists l Ω W E).exists.choose
 
-/-- Integral normalization of raw rational extension, including the equal-field branch.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: at equal fields use the inverse tensor unit. At distinct fields use the
-unique localization factorization. These formulas fix every component. -/
+/-- Integral normalization of raw rational extension, including the equal-field branch. -/
 theorem pbcAmbientCompleteIntegralComparison_exists (h : E ≤ F) :
     ∃! c : pbcAmbientCompleteLocalization l Ω W E ⋙
         pbcAmbientCompleteRawTransition l Ω W h ≅
@@ -323,17 +285,11 @@ theorem pbcAmbientCompleteIntegralComparison_exists (h : E ≤ F) :
     intro e' he'
     exact eq_of_heq (he'.2 hEF)
 
-/-- The uniquely normalized integral/rational tensor comparison.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The uniquely normalized integral/rational tensor comparison. -/
 @[irreducible] def pbcAmbientCompleteIntegralComparison (h : E ≤ F) :=
   (pbcAmbientCompleteIntegralComparison_exists l Ω W h).exists.choose
 
-/-- Restriction of the specified balanced ambient associator to complete objects.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: both complete subcategories are full. Lift the balanced tensor comparison
-and its inverse. Faithfulness proves the naturality, inverse equations and uniqueness. -/
+/-- Restriction of the specified balanced ambient associator to complete objects. -/
 theorem pbcAmbientCompleteIntegralAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! a : pbcAmbientCompleteIntegralTransition l Ω W h ⋙
         pbcAmbientCompleteIntegralTransition l Ω W k ≅
@@ -359,18 +315,11 @@ theorem pbcAmbientCompleteIntegralAssociator_exists (h : E ≤ F) (k : F ≤ G) 
   apply ObjectProperty.hom_ext
   exact congrArg (fun η ↦ η.app K) (eq_of_heq ha')
 
-/-- Complete integral tensor balancing, with its ambient normalization.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- Complete integral tensor balancing, with its ambient normalization. -/
 @[irreducible] def pbcAmbientCompleteIntegralAssociator (h : E ≤ F) (k : F ≤ G) :=
   (pbcAmbientCompleteIntegralAssociator_exists l Ω W h k).exists.choose
 
-/-- Rational associators are fixed by the integral balanced components.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: localize the integral associator and conjugate by the integral/rational
-comparisons. Naturality holds on integral arrows and hence on their fractions.
-Every raw object is integral, so the formula also gives uniqueness. -/
+/-- Rational associators are fixed by the integral balanced components. -/
 theorem pbcAmbientCompleteRawAssociator_exists (h : E ≤ F) (k : F ≤ G) :
     ∃! a : pbcAmbientCompleteRawTransition l Ω W h ⋙
         pbcAmbientCompleteRawTransition l Ω W k ≅
@@ -416,9 +365,7 @@ theorem pbcAmbientCompleteRawAssociator_exists (h : E ≤ F) (k : F ≤ G) :
   funext K
   exact (he' K.obj).trans (he K.obj).symm
 
-/-- The canonical rational tensor associator.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The canonical rational tensor associator. -/
 @[irreducible] def pbcAmbientCompleteRawAssociator (h : E ≤ F) (k : F ≤ G) :=
   (pbcAmbientCompleteRawAssociator_exists l Ω W h k).exists.choose
 
@@ -613,13 +560,7 @@ private theorem pbcAmbientCompleteRawAssociator_cocycle
       Bj.map ((pbcAmbientCompleteIntegralComparison l Ω W k).hom.app (Ih.obj KE)) ≫
       (pbcAmbientCompleteIntegralComparison l Ω W j).hom.app (Ik.obj (Ih.obj KE)) ≫ f) hh
 
-/-- The canonical raw system has additive transitions, normalized units and tensor pentagon.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system).
-Proof: finite tensor and localization preserve addition. The equal-field branch
-is identity. The section-normalized tensor unit satisfies the unit equations
-with balancing. The two tensor-balancing composites agree on pure tensors.
-Their derived, full-subcategory and localized images give the displayed pentagon. -/
+/-- The canonical raw system has additive transitions, normalized units and tensor pentagon. -/
 theorem pbcAmbientCompleteRaw_laws (h : E ≤ F) (k : F ≤ G)
     {H : Padic.FiniteCoefficientFields l Ω} (j : G ≤ H) :
     (pbcAmbientCompleteRawTransition l Ω W h).Additive ∧
@@ -656,9 +597,7 @@ theorem pbcAmbientCompleteRaw_laws (h : E ≤ F) (k : F ≤ G)
 
 end Construction
 
-/-- The actual ambient raw scalar-extension system, rather than an arbitrary diagram.
-Source: sketch32, lines 1291--1311
-(blueprint: def-sbc-ambient-complete-raw-scalar-system). -/
+/-- The actual ambient raw scalar-extension system, rather than an arbitrary diagram. -/
 def pbcAmbientCompleteRawSystem :
     StageSystem (fun E : Padic.FiniteCoefficientFields l Ω ↦ pbcAmbientCompleteStage l Ω W E)
     where

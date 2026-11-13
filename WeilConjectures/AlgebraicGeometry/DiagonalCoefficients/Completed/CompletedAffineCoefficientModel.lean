@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 import Mathlib.NumberTheory.Padics.ProperSpace
 
 /-! Continuous-function coordinates for completed coefficients.
-(blueprint: lem-sfb-completed-affine-coefficient-model)
 -/
 
 @[expose] public noncomputable section
@@ -21,10 +20,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- A sectionwise continuous-function presentation, compatible with every restriction.
-Source: the coefficient-identification step in the docstring of
-`completedAffineFree_localDual_detect`.
-(blueprint: lem-sfb-completed-affine-coefficient-model) -/
+/-- A sectionwise continuous-function presentation, compatible with every restriction. -/
 structure CompletedAffineCoefficientModel (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   equiv (V : X.ProEt) :
     (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.obj (op V) ≃+*
@@ -77,22 +73,8 @@ private theorem positiveLift_exists (l : ℕ) [Fact l.Prime]
   exact ⟨⟨f, hc⟩, hf⟩
 
 /-- Completed scalar sections are continuous p-adic functions, naturally in the test object.
-Source: `CompletedAffineFreeLocalDual.lean`, coefficient-identification step of the
-proof of `completedAffineFree_localDual_detect`; finite constant sheaves and sectionwise
-limits, Stacks Tags 03CO and 0906.
-(blueprint: lem-sfb-completed-affine-coefficient-model)
-
-Proof: identify the constant finite ring sheaf at level n with locally constant
-functions into Z/l^(n+1). A locally constant function gives its section by gluing
-constant sections on its open level sets; conversely a section is locally constant
-by local surjectivity of the constant-sheaf unit. Descent along pro-etale covers
-identifies these functions on the underlying scheme. These inverse identifications
-commute with restriction and finite reduction. Limits of sheaves are computed
-sectionwise. A compatible family of finite functions has a unique Z_l-valued lift,
-continuous because the finite reductions generate the p-adic topology. This gives
-the ring equivalence and its naturality. Functions on connected components give
-the same functions on the scheme by the quotient topology. The empty scheme gives
-the zero ring on both sides, so no nonemptiness assumption is needed. -/
+Source: finite constant sheaves and sectionwise
+limits, Stacks Tags 03CO and 0906. -/
 theorem completedAffineCoefficientModel_exists (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (CompletedAffineCoefficientModel l X) := by
   classical

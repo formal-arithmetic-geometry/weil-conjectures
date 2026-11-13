@@ -11,11 +11,6 @@ import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageCo
 
 /-! # Completion augmentation square for direct image
 
-Source: literature/blueprint/latest/blueprint/sec-proper-base-change/
-sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md, (3): the completion map
-is induced by `c(N) → red(N)` and the direct image of this augmentation
-(blueprint: lem-weil-pbc-direct-image-completion-unit-square).
-
 The reduction/direct-image comparison `h` is written as the adjunction mate of the
 canonical pullback/reduction comparison `pullReduction`. This is verbatim the body of
 `pushReductionMap` of `proposition-proper-base-change-complete-integral--1`. That node's proof uses
@@ -89,8 +84,7 @@ Proof steps:
 2. Apply `directImage_augmentation_pullReduction_coherence` to the underlying
    pullback/reduction square.
 3. Apply the local mate naturality calculation to this commuting square; its counit
-   identities give the displayed equality at every derived object.
-(blueprint: lem-weil-pbc-direct-image-completion-unit-square) -/
+   identities give the displayed equality at every derived object. -/
 theorem directImageCompletionUnitSquare :
     ∃ χ : rpushModule l E f ⋙ dconstant l E Y ≅ dconstant l E X ⋙ rpush l E f,
       χ.hom = (mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)

@@ -571,20 +571,8 @@ private theorem finiteFixedMate
     (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) X) M
 
 /-- The proper mate is invertible on bounded-below finite etale coefficient objects.
-Source: Stacks 099R and 0B65; the canonical finite-coefficient direct-image comparison;
-Zheng Lemma 4.10 and Construction 5.15.
-(blueprint: lem-sf-exceptional-finite-proper-mate).
-
-Proof: identify modules over the constant quotient-ring sheaf with fixed-ring
-module-valued sheaves. The ordinary transpose and scalar conditions identify the
-supplied inverse images with the geometric ones. Localize these squares and
-transport the supplied proper square along the realization equivalences. For any
-such fixed-coefficient square, the comparison units are invertible at a
-bounded-below object and its derived etale direct image. The canonical finite
-comparison identifies its proetale direct image with an object in the image of
-the comparison inverse image, so the counit there is invertible by the triangle
-identity. The unit-and-counit criterion proves the mate is invertible. Transport
-this conclusion back through the realization equivalences. -/
+Source: Stacks 099R and 0B65;
+Zheng Lemma 4.10 and Construction 5.15. -/
 theorem exceptionalFiniteProperMate
     {O : Type (u + 1)} [CommRing O] {ell : O}
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]

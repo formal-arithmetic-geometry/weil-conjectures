@@ -164,25 +164,7 @@ private theorem finite_generic_fibers
 
 /-- The closed complement of a dense open of a relative affine line becomes finite over a
 suitable dense affine open of a finite-type integer base.
-Source: Stacks Project, Tag 0GKZ, dense-open step, and Tag 02NW.
-(blueprint: lem-weil-pbc-affine-line-dense-open-finite-complement)
-
-Proof: The projection is open, continuous and surjective, so the image of the dense
-open U is a dense open of the base. It contains every component generic point: remove the
-other finitely many components and use density there, then specialize from the generic
-point. Thus U meets each generic fibre. Such a fibre is an affine line over a residue
-field; its nonempty open has finite complement by irreducibility, Noetherianity and the
-dimension-one bound. Injectivity of the closed immersion gives finite generic fibres for
-the closed complement. Apply the generic-finiteness neighborhood theorem to obtain a
-dense open V over which the complement is finite. To find a dense principal open W in V,
-apply finite prime avoidance to the ideal defining the complement of V: it is contained
-in none of the finitely many minimal primes. Its chosen element avoids all minimal primes,
-so its principal open is dense. W is affine and finite type over the integers. Identify
-W with its affine spectrum and pull back the original closed complement to the relative
-line over W. The cartesian squares for restriction and affine space identify its projection
-as a base change of the finite morphism over V. This constructs the closed subscheme and
-proves finiteness without identifying reduced scheme structures. Every step also applies
-to the empty base and to nonreduced bases. -/
+Source: Stacks Project, Tag 0GKZ, dense-open step, and Tag 02NW. -/
 theorem exists_dense_affine_open_isFinite_closedComplement
     (Y : Scheme.{u}) [IsAffine Y] [Algebra.FiniteType ℤ Γ(Y, ⊤)]
     (U : (AffineSpace (ULift.{u} (Fin 1)) Y).Opens)

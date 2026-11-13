@@ -28,17 +28,7 @@ attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 scalar extension along the canonical quotient map.
 
 Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3 for constant scalar comparison and stalk detection.
-(blueprint: lem-weil-pbc-constant-adic-quotient-model-extension-iso).
-
-Proof: Apply the tower normalization after inverse image to the etale chart,
-then use the tensor-pullback comparison and the supplied constant model
-isomorphisms.  The canonical quotient maps commute with the completion
-projections.  The constant realization scalar comparison identifies the
-resulting geometric reduction with derived scalar extension of E'.  Passing to
-a geometric stalk over the chosen point identifies this extension with E.
-The nonempty point is needed for this stalk detection; no perfectness or
-boundedness hypothesis is used. -/
+Tags 0D6D and 03Q3 for constant scalar comparison and stalk detection. -/
 theorem constantAdicQuotient_model_extension_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

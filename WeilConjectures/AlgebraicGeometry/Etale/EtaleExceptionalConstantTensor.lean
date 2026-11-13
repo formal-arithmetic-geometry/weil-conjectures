@@ -32,8 +32,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedTensorDirectS
 /-! # Constant coefficient tensor calculus for the exceptional adjoint
 
 Source: Zheng, Theorem 2.18(2), Corollary 2.19, Construction 2.26 and Proposition 2.29(2)
-(printed pp. 12, 14--16), specialized to schemes over an algebraically closed field
-(blueprint: lem-pur-etale-exceptional-constant-tensor).
+(printed pp. 12, 14--16), specialized to schemes over an algebraically closed field.
 
 ## Main definitions
 
@@ -75,8 +74,7 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A]
 It applies signed symmetry, the compactification projection map, tensor of the identification,
 and signed symmetry on the source. This generic constructor keeps these maps shared when
 specialized to constant coefficient complexes.
-Source: Zheng, Theorem 2.18(2) and Construction 2.26
-(blueprint: lem-pur-etale-exceptional-constant-tensor). -/
+Source: Zheng, Theorem 2.18(2) and Construction 2.26. -/
 noncomputable def exceptionalProjectionConstruction
     {D : Type*} [Category D] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (H : D ⥤ DerivedCategory (Sheaf Y.smallEtaleTopology A))
@@ -98,8 +96,7 @@ end ProjectionConstruction
 
 /-- Tensor by a termwise constant coefficient complex, as a bifunctor in the sheaf complex
 and coefficient complex. This uses the existing constant-sheaf descent and derived tensor.
-Source: Zheng, Theorem 2.18(2) and Proposition 2.29(2)
-(blueprint: lem-pur-etale-exceptional-constant-tensor). -/
+Source: Zheng, Theorem 2.18(2) and Proposition 2.29(2). -/
 noncomputable def exceptionalCoefficientTensor (C : Type (u + 1)) [CommRing C]
     (T : Scheme.{u}) :
     DerivedCategoryModule C T ⥤ DerivedCategory (ModuleCat.{u + 1} C) ⥤
@@ -110,8 +107,7 @@ noncomputable def exceptionalCoefficientTensor (C : Type (u + 1)) [CommRing C]
 
 /-- The canonical pullback identification for termwise constant complexes. It is obtained
 by descending the existing constant-sheaf pullback isomorphism through localization.
-Source: Zheng, Theorem 2.18(2), constant-coefficient specialization
-(blueprint: lem-pur-etale-exceptional-constant-tensor). -/
+Source: Zheng, Theorem 2.18(2), constant-coefficient specialization. -/
 noncomputable def exceptionalConstantPullbackIso (C : Type (u + 1)) [CommRing C]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} C)).mapDerivedCategory ⋙
@@ -126,8 +122,7 @@ noncomputable def exceptionalConstantPullbackIso (C : Type (u + 1)) [CommRing C]
 /-- The actual compact-support projection map with the constant factor first. Compose the
 signed symmetry, the existing compactification projection map, the canonical pullback of
 constants, and the signed symmetry on the source. All factors are maps on derived categories.
-Source: Zheng, Theorem 2.18(2), and Construction 2.26
-(blueprint: lem-pur-etale-exceptional-constant-tensor). -/
+Source: Zheng, Theorem 2.18(2), and Construction 2.26. -/
 noncomputable def exceptionalConstantProjectionMap (C : Type (u + 1)) [CommRing C]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (V : DerivedCategory (ModuleCat.{u + 1} C)) (K : DerivedCategoryModule C X) :
@@ -141,8 +136,6 @@ noncomputable def exceptionalConstantProjectionMap (C : Type (u + 1)) [CommRing 
     (exceptionalConstantPullbackIso C f) V K
 
 /-- Assemble an invertible natural transformation from the two mate naturality equations.
-Source: the assembly step of `lem-pur-etale-exceptional-constant-tensor`.
-(blueprint: lem-pur-etale-exceptional-constant-tensor).
 
 The components are the specified coefficient-action mates. Naturality in the coefficient and
 in the sheaf object gives a natural isomorphism; the component invertibility is supplied by
@@ -595,8 +588,7 @@ attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
 coefficient exceptional adjoint has coefficient-uniform cohomological amplitude and canonical
 natural constant-coefficient tensor isomorphisms for every fixed right adjunction. No
 boundedness or perfectness of the coefficient complex is required. Source: Zheng, Theorem
-2.18(2), Corollary 2.19, Construction 2.26 and Proposition 2.29(2), printed pp. 12, 14–16
-(blueprint: lem-pur-etale-exceptional-constant-tensor).
+2.18(2), Corollary 2.19, Construction 2.26 and Proposition 2.29(2), printed pp. 12, 14–16.
 
 Proof (the complete ten-step proof of the DAG node):
 
@@ -763,8 +755,7 @@ Proof (the complete ten-step proof of the DAG node):
 
    Uses: lemma-checking-isomorphisms-constructible-complexes--1,
    lem-pc-derived-module-free-generation, lem-amb- proper-coproducts-projection,
-   lem-pur-etale-open-derived-tensor, thm-amb-etale-exceptional- adjoint.
--/
+   lem-pur-etale-open-derived-tensor, thm-amb-etale-exceptional- adjoint. -/
 theorem exceptionalConstantTensor
     (k : Type u) [Field k] [IsAlgClosed k] (p ell : ℕ) [Fact p.Prime] [Fact ell.Prime]
     [CharP k p] (hne : ell ≠ p)

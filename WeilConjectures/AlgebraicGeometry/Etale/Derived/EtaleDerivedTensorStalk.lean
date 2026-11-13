@@ -23,7 +23,7 @@ concrete localization structures behind an API. Its isomorphism, naturality and
 normalization clauses are exposed by `exactFunctorTensorComparison_iff`.
 
 Source: Stacks Project, `sites-cohomology.tex`, Tag 0DEN, clause (1), and Tags 06YS,
-06YT, 06YU and 07A4 (blueprint: lem-sfb-etale-derived-tensor-stalk).
+06YT, 06YU and 07A4.
 
 ## Main statements
 
@@ -49,8 +49,7 @@ namespace AlgebraicGeometry.Etale
 /-- The existing additive structure on the geometric module-stalk functor, exposed for
 termwise passage to complexes and derived categories. This is precisely the structure
 `Point.sheafFiber_additive`, obtained from the skyscraper adjunction.
-Source: Stacks Project, Tag 04EQ
-(blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+Source: Stacks Project, Tag 04EQ. -/
 noncomputable instance moduleSheafFiber_additive
     (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
@@ -65,7 +64,7 @@ attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
 /-- Naturality and the localization-counit normalization of a tensor comparison for
 an exact monoidal functor. Keeping this proposition named avoids repeatedly reducing
 localized monoidal structures at concrete coefficient categories.
-Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+Source: Stacks Project, Tag 0DEN. -/
 @[irreducible]
 def ExactFunctorTensorComparison
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
@@ -97,8 +96,7 @@ def ExactFunctorTensorComparison
             (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app Q)
 
 /-- The defining tensor-comparison clauses, exposed without unfolding the concrete
-localization constructions. Source: Stacks Project, Tag 0DEN
-(blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+localization constructions. Source: Stacks Project, Tag 0DEN. -/
 theorem exactFunctorTensorComparison_iff
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -132,7 +130,7 @@ theorem exactFunctorTensorComparison_iff
   rfl
 
 /-- The objectwise isomorphisms supplied by a normalized tensor comparison.
-Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+Source: Stacks Project, Tag 0DEN. -/
 theorem ExactFunctorTensorComparison.exists_iso
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -152,8 +150,7 @@ theorem ExactFunctorTensorComparison.exists_iso
 /-- An exact monoidal functor preserving flat objects has the normalized derived tensor
 comparison. The proof transports the source left-derived comparison through the exact
 functor comparison and checks its naturality and counit square.
-Source: Stacks Project, Tag 0DEN
-(blueprint: lem-sfb-exact-flat-tensor-derived-counit-comparison). -/
+Source: Stacks Project, Tag 0DEN. -/
 theorem exactFunctor_tensor_comparison
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -198,8 +195,7 @@ theorem exactFunctor_tensor_comparison
 
 /-- The component of the exact-functor comparison at two given derived objects.
 The objects are explicit parameters so their chosen derived-category instances determine
-the source of the component. Source: Stacks Project, Tag 0DEN
-(blueprint: lem-sfb-exact-flat-tensor-derived-counit-comparison). -/
+the source of the component. Source: Stacks Project, Tag 0DEN. -/
 theorem exactFunctor_tensor_iso
     {C : Type uC} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -219,7 +215,7 @@ theorem exactFunctor_tensor_iso
 
 /-- A geometric module-stalk preserves flat objects, by the geometric-fiber criterion
 and the canonical comparison with the lifted point.
-Source: Stacks Project, Tag 0DEN (blueprint: lem-sfb-etale-derived-tensor-stalk). -/
+Source: Stacks Project, Tag 0DEN. -/
 instance geometricStalk_preservesFlat
     (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :

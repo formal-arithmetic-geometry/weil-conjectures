@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.FiniteReali
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointsTranspose
 
 /-! # The successive target endpoint under its actual adjunction
-
-Source: diagonal tower coefficient changes (1), normalized scalar extension.
-(blueprint: lem-diagonal-quotient-endpoint-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -64,10 +61,8 @@ instance quotientRight_preservesFiniteColimits : PreservesFiniteColimits q.quoti
 
 end
 
-/-- The explicit collected-right adjunction for this coefficient route.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-quotient-endpoint-normalization).
-Construction: Construct it from the actual scalar and finite adjunctions. -/
+/-- The explicit collected-right adjunction for this coefficient route. Construction: Construct it
+from the actual scalar and finite adjunctions. -/
 def quotientAdjunctionAux
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -80,10 +75,7 @@ def quotientAdjunctionAux
       (Functor.mapDerivedCategoryCompIso q.eW.F.asEquivalence.inverse
         (ScalarCompatibility.compositeRestriction q.route.first q.route.second))
 
-/-- The explicit route adjunction respects the prescribed shifts.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-quotient-endpoint-normalization).
-Proof: Compose the scalar and finite shift compatibilities and collect restrictions. -/
+/-- The explicit route adjunction respects the prescribed shifts. -/
 theorem quotientAdjunction_commShift
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}
@@ -93,10 +85,8 @@ theorem quotientAdjunction_commShift
   unfold quotientAdjunctionAux
   exact scalarRealizedAdjunction_commShift q.route.first q.route.second q.eW
 
-/-- The realized degree-zero endpoint of this coefficient route.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-quotient-endpoint-normalization).
-Construction: Apply exact finite realization to the scalar endpoint and line isomorphism. -/
+/-- The realized degree-zero endpoint of this coefficient route. Construction: Apply exact finite
+realization to the scalar endpoint and line isomorphism. -/
 def quotientEndpointZero
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}

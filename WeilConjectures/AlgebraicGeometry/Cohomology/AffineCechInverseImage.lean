@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImage
 /-! # Inverse image on affine Čech cocycles
 
 Source: Stacks Project, Tags 01FD, 01ET and 01XD.
-(blueprint: lem-pc-affine-cech-inverse-image)
 -/
 
 @[expose] public section
@@ -29,25 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 This is a statement about sections and inverse image only, without tensor products.
 
 Source: Stacks Project, Tag 01FD (functoriality of the Čech comparison),
-Tags 01ET and 01XD (affine acyclicity).
-(blueprint: lem-pc-affine-cech-inverse-image)
-
-Proof: Choose injective resolutions of the underlying abelian sheaves. The
-coefficient map M -> g_*N lifts into a resolution of the pushed-forward target
-resolution, giving a comparison of augmented Čech double complexes. Restriction
-commutes with the resolution maps. The coordinate matching hypothesis identifies
-the original cocycle in the source augmentation with the target cocycle in this
-comparison. Injective Čech acyclicity identifies the total cohomology with sheaf
-cohomology. Affine-intersection acyclicity makes both coefficient Čech edge maps
-isomorphisms. Multiplication by a global function commutes with every augmentation
-and comparison, making the edge maps linear over the global-function rings and
-hence over the displayed bases. The comparison on sheaf cohomology is obtained by
-applying exact inverse image to Ext, precomposing with the constant integer sheaf
-isomorphism, and postcomposing with the adjoint coefficient map; thus it is the
-right side of the formula. The augmentation diagram then gives the claimed
-identity. The same argument applies in degree zero, when it is the section map;
-empty covers force empty schemes and zero cohomology. No finiteness of the cover,
-flatness, affine property of g, or chain-map invertibility is needed. -/
+Tags 01ET and 01XD (affine acyclicity). -/
 theorem exists_affineCech_inverseImage
     {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u}
     (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S))

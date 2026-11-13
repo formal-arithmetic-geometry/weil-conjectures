@@ -145,7 +145,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-! # Transport of the two strict completion presentations to the small constant site
 
 Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
-(blueprint: lem-weil-pbc-completed-koszul-constant-transport).
 -/
 
 @[expose] public noncomputable section
@@ -673,18 +672,7 @@ set_option linter.style.haveILetI false in
 /-- A scalar-preserving completed coefficient isomorphism carries the localized
 Koszul fiber and its specified unit to constant-sheaf quotient completion.
 
-Source: Stacks Tags 099L, 099M and 0A0E.
-(blueprint: lem-weil-pbc-completed-koszul-constant-transport).
-
-Proof: the kernel ideal of the first constant quotient is generated sectionwise by the
-images of the chosen generators. Pulling this ideal along the ring isomorphism gives
-the corresponding ideal on the small completed site. These global generators give
-surjections from finite free module sheaves on every slice. The ringed Koszul reflector
-therefore exists for this ideal. Exact restriction along the ring isomorphism preserves
-local derived completeness, so uniqueness of reflections gives its unit-preserving
-comparison with constant quotient completion. The completed fiber/strict-limit
-comparison identifies the published Koszul fiber with this reflector, with its unit.
-Finally transport the comparison along the supplied natural isomorphism of functors. -/
+Source: Stacks Tags 099L, 099M and 0A0E. -/
 theorem completed_koszul_constant_transport
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (β : completedCechRing T d ≅

@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionFamily
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionRigidity
 
 /-! # Linear changes of coordinates preserve the affine-space counit trace
-
-Source: blueprint sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.md,
-proof paragraphs 1 and 2 (blueprint: proposition-purity-vector-bundles).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +22,6 @@ namespace AlgebraicGeometry.Etale
 /-- Every invertible linear coordinate change preserves the actual coordinate-tower
 counit trace. The existential square is the Cartesian-square certificate for the concrete
 polynomial map v ↦ gv; it is not an extra hypothesis on g or a choice of action.
-Source: blueprint linear-trace lemma, statement and both proof paragraphs
-(blueprint: proposition-purity-vector-bundles).
 
 Proof, following the node's seven steps:
 1. Construct G = D(det) in affine matrix space. Its coordinate ring on Spec R is
@@ -47,13 +42,12 @@ Proof, following the node's seven steps:
    domain localized at the nonzero determinant, whose value at the identity is 1.
    Its zero prime lies in every nonempty basic open. This includes dimension zero.
 5. On each such fibre beta equals 1 at the identity by Step 2. A locally constant map
-   on a connected space is constant (lem-weil-pbc-connected-locally-constant-map).
+   on a connected space is constant.
 6. Every point of G lifts to its residue-field fibre. Thus beta is everywhere 1, hence
    b = 1 by the constant-sheaf section identification. Degree-zero faithfulness gives
    t_G rho_a = t_G as an actual derived equality. The empty base causes no exception.
 7. Pull back along s_g and use exchange pasting and trace base change. Cancel C_(s_g)
-   to obtain t_S rho_g = t_S. In dimension zero this is the identity-adjunction equation.
--/
+   to obtain t_S rho_g = t_S. In dimension zero this is the identity-adjunction equation. -/
 theorem affineSpaceLinearTraceInvariance (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

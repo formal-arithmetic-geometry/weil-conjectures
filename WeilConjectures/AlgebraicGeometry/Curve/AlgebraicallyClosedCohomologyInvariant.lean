@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PrimeCoefficientCurveAssertions
 # Algebraically closed extension for reduced proper curves
 
 Source: Stacks Project, Theorem 03SC, item (7), and Lemmas 03SD, 0A3Q, 03SG.
-(blueprint: e1-algebraically-closed-cohomology-invariant)
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.IsCurve
 
 /-- Field extension invariance for reduced proper curves with constructible prime coefficients.
-Source: Stacks Project, 03SC (theorem-vanishing-affine-curves), item (7).
-(blueprint: e1-algebraically-closed-cohomology-invariant)
+Source: Stacks Project, 03SC, item (7).
 
 1. Apply `primeCoefficientCurveAssertions` to `f` and `F`. Its hypotheses are the existing
 algebraically closed base field, reduced curve, prime `r`, and constructible sheaf; properness
@@ -38,8 +36,7 @@ It gives `IsCurve.Assertions (ULift (ZMod r)) f F`, uniformly in extensions and 
 2. Apply the C7 projection `Assertions.bijective_cohomologyMap_of_isProper` to this package,
 `k'`, the pullback square `h`, and `q`. Properness is already an instance. The projection
 uses the same `sheafCompose` forgetful functor and `Etale.cohomologyMap` as the conclusion,
-so its type is the required bijectivity without any transport or additional hypothesis.
--/
+so its type is the required bijectivity without any transport or additional hypothesis. -/
 theorem algebraicallyClosedCohomologyInvariant {k : Type u} [Field k] [IsAlgClosed k]
     {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f] [IsReduced C]
     (k' : Type u) [Field k'] [IsAlgClosed k'] {ι : Spec (.of k') ⟶ Spec (.of k)}

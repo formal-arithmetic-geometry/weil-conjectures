@@ -205,10 +205,6 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Finite coefficient descent and the rational coefficient two-colimit
 
-Source: Weil blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sfb-qlbar-two-colimit/_section.md, assertions (1)--(4)
-(blueprint: lemma-descent-finite-coefficient-field).
-
 The shifted Hom-colimit isomorphism is expressed by its representative and eventual
 equality conditions. We write the shifted target as T(D[r]); exact scalar extension
 canonically identifies this with (TD)[r]. Every transition and evaluation is the
@@ -230,10 +226,7 @@ attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
   Functor.CommShift.ofIso Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 /-- The canonical derived scalar comparison for three finite coefficient fields.
-Source: blueprint lemma-descent-finite-coefficient-field, definition of C_F and proof (4),
-tensor transitivity (blueprint: lemma-descent-finite-coefficient-field).
-This is the existing exact-functor comparison applied to the ordinary tensor comparison.
--/
+This is the existing exact-functor comparison applied to the ordinary tensor comparison. -/
 def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F H : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (a : F ≤ H) :
     derivedExtendScalarsSubfield X ℓ (h.trans a) ≅
@@ -241,9 +234,7 @@ def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   Functor.leftDerivedFunctorNatIso _ (lisseFiniteExtensionCompIso X ℓ h a) ≪≫
     Functor.leftDerivedFunctorCompIso _ _
 
-/-- Evaluate a finite-field derived Hom representative in the algebraic closure.
-Source: blueprint lemma-descent-finite-coefficient-field, displayed isomorphism (2)
-(blueprint: lemma-descent-finite-coefficient-field). -/
+/-- Evaluate a finite-field derived Hom representative in the algebraic closure. -/
 def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     {C D : DerivedCategory
@@ -256,9 +247,7 @@ def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (derivedExtendScalarsToPadicAlgCl X ℓ F).map f ≫
       (derivedExtendScalarsCompIso X ℓ h).hom.app D
 
-/-- The transition between finite-field Hom representatives, using tensor transitivity.
-Source: blueprint lemma-descent-finite-coefficient-field, displayed colimit (2) and proof (4)
-(blueprint: lemma-descent-finite-coefficient-field). -/
+/-- The transition between finite-field Hom representatives, using tensor transitivity. -/
 def finiteDescentDerivedHomTransition (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F H : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (a : F ≤ H)
     {C D : DerivedCategory
@@ -407,23 +396,7 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
 set_option maxHeartbeats 400000 in
 -- The four-clause assembly elaborates several derived functor and zero-shift interfaces.
 /-- All four finite coefficient descent assertions, including the rational identification
-and the ordinary-category filtered two-colimit.
-Source: blueprint main-20261015, lemma-descent-finite-coefficient-field, assertions (1)--(4)
-(blueprint: lemma-descent-finite-coefficient-field).
-
-Proof: finite type and quasi-compactness make X Noetherian. On each Noetherian
-stratum, finite constant models are locally finitely presented, and the finite-field
-and algebraic-closure local-triviality theorems give the converse. Pullback preserves
-finite free modules, so both constructibility predicates agree, also on cohomology.
-Apply the existing lisse and object-descent theorems for assertions (1) and (3).
-For (2), apply the Hom-descent theorem to C and D[r] at degree zero. The canonical
-zero-shift isomorphism converts representatives and eventual equalities to the
-maps in this statement. Tensor transitivity agrees with the specified comparison,
-as follows by compatibility of scalar-map equality and derived isomorphism inversion.
-For (4), the rational case of localizingClosure_ctf_equals_bc supplies finite Tor
-amplitude, and constructibleCocone_isFilteredTwoColimit supplies the two-colimit of
-the same canonical cocone. No definition or conclusion is changed.
--/
+and the ordinary-category filtered two-colimit. -/
 theorem finiteCoefficientDescentTwoColimit
     (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact ℓ.Prime]
     (hp : 0 < p) (hpℓ : p ≠ ℓ)

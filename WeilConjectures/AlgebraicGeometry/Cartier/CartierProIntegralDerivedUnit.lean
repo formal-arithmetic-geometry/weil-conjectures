@@ -96,8 +96,6 @@ import WeilConjectures.AlgebraicGeometry.Cartier.CartierProIntegralScalar
 import WeilConjectures.CategoryTheory.DerivedUnit.DerivedScalarExtUnitZero
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -119,14 +117,8 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 Cartier classes cR,cA satisfy GeoCartierScalarCompatibility [lemma-cycle-class-cartier-divisor],
 then the pro-etale supported integral generator i_*Z_D→forget(i_*A_D) is a degree-zero unbounded
 scalar unit [def-sfb-cartier-reduction-data, def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-pro-integral-derived-unit).
-Proof: Use the supported pro-etale residue quotient unit. Extract from coefficient compatibility the
-derived unit on supported constants for extension R→A. Compose the ordinary derived-unit Hom
-bijections. Composite coefficient forgetting is definitionally direct forgetting. The normalized
-supported integral scalar identity identifies the composite map with the stated integral generator.
-Finally the zero-shift comparison identifies its ordinary unit property with the degree-zero
-Ext-unit property. -/
+Source: Stacks 0152,
+06YY and 0GLZ. -/
 theorem pro_integral_derived_unit
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) (hR : (n : ULift.{u + 1} (ZMod n)) = 0)

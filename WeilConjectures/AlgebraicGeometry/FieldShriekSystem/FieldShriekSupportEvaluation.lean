@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldShriekSystem.FieldShriekSys
 
 /-! # Normalized compact-support evaluation
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-support-evaluation).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -46,8 +42,7 @@ variable (P : PurityFiniteSetting.{u})
 attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 
 /-- Finite compact-support evaluation in the recorded direct-image coordinates.
-The ordinary pushforward change is the identity on sections.
-Source: blueprint (2), finite b (blueprint: def-sp-field-shriek-support-evaluation). -/
+The ordinary pushforward change is the identity on sections. -/
 structure FiniteCoordinates (E : Index P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ) where
   push : proEtaleConstantRingPushforward (SpTowerShriek.R P.coefficients.l E.val n) c.g ≅
@@ -63,9 +58,7 @@ structure FiniteCoordinates (E : Index P)
     HEq (((push.hom.app M).val.app U) x) x
 
 /-- Finite support comparison, using the specified termwise open comparison and
-right-derived section-identity proper comparison.
-Source: blueprint (2), finite support evaluation
-(blueprint: def-sp-field-shriek-support-evaluation). -/
+right-derived section-identity proper comparison. -/
 def supportEvaluation (D : Models P) (E : Index P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ)
     (z : FiniteCoordinates P E c n) :

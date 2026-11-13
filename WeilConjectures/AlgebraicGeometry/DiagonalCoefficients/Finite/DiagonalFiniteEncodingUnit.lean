@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
 
 /-! # The regular-module normalization of the sectionwise encoding
-
-Source: finite coefficient reductions in diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-encoding-unit).
 -/
 
 @[expose] public noncomputable section
@@ -52,10 +49,6 @@ def finiteEncodingUnderlying (X : Scheme.{u}) :
 
 /-- Encoding the regular internal module gives the constant coefficient unit,
 with its actual unital coefficient comparison.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), finite reductions.
-(blueprint: lem-diagonal-finite-encoding-unit).
 
 Proof in words. Restrict the regular module along the pulled-back ring isomorphism;
 its inverse identifies this with the regular module of the sheafified constant ring.

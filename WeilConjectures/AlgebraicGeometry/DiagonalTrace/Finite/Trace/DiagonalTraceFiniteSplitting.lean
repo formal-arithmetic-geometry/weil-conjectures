@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTrac
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The finite evaluation of the normalized projective-line splitting
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -65,27 +63,7 @@ private lemma isIso_map_desc_of_isZero_left
     infer_instance
   exact IsIso.of_isIso_comp_left (F.map (biprod.inr : V ⟶ U ⊞ V)) _
 
-/-- At one positive finite level the actual unit/Chern map is invertible.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1), and
-`lemma-cohomology-projective-line-trace`, decomposition (G2).
-(blueprint: lem-sfb-diagonal-trace-finite-splitting).
-
-Proof: use the normalized evaluation comparison for the geometric system
-adjunction to evaluate the unit summand. It becomes the ordinary finite
-coefficient adjunction unit. Evaluate the integral Cartier extension and its
-Kummer boundary using p.finiteX. The positive Cartier sign and the sectionwise
-root-to-tensor comparison identify the evaluated Chern arrow with the usual
-finite Kummer class of the pullback of O(1). Evaluation preserves shifts, the
-line tensor/Hom equivalence, and its unit and counit, so the evaluated second
-summand is the negative twist of that same Chern adjunct. The resulting map is
-therefore the finite projective-line decomposition (G2), transported along
-p.model.model and its equation over S. That map is invertible by
-geoP1Cohomology, with coefficient ring the level n+1 quotient of Z_l. The
-hypothesis hS makes l^(n+1) invertible, and n+1 is positive even for n=0.
-Conjugation by the source and target comparison isomorphisms preserves
-invertibility, proving the assertion for the specified model and its actual bq.
-The argument uses no claim that evaluations detect equality of derived arrows. -/
+/-- At one positive finite level the actual unit/Chern map is invertible. -/
 theorem diagonalTrace_finite_splitting
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

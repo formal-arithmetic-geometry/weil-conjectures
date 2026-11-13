@@ -411,21 +411,7 @@ presentation, for any isomorphism presenting the finite constant coefficient rin
 This is an assertion about a single sheaf, with no derived objects or bounds.
 
 Source: Stacks Project, proetale.tex, Tags 09AJ and 099Y; Tag 00YV for associated
-module sheaves (blueprint: lem-weil-pbc-finite-coefficient-intrinsic-constructibility).
-
-Proof: forget each relative finite module model to its finite underlying set.
-The module inverse-image comparison and preservation of constant sheaves identify
-these with constant finite set models of the fixed-ring sheaf on each stratum.
-Scalar restriction leaves underlying sets unchanged, including for an arbitrary
-presenting isomorphism e. After a finite covering refinement, addition, zero and
-every scalar multiple of the finitely many constant sections are constant.
-Their values form a finite submodule N of the sections on that cover member.
-The induced map from the constant N-module presheaf is locally bijective on
-underlying sets, so sheafification makes it an isomorphism of module sheaves.
-Compose the covers and use the equivalence between the slice site and the
-pro-etale site of the covering object. The original finite stratification now
-witnesses fixed-ring constructibility. Empty strata and the zero coefficient
-ring satisfy the same construction. -/
+module sheaves. -/
 theorem finiteCoefficient_intrinsic_constructible
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (u + 1)) [CommRing B] [Finite B]

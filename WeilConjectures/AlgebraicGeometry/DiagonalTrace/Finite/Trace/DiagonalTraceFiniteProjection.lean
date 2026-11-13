@@ -174,19 +174,7 @@ private theorem normalized_projection
 /-- The normalized limit/direct-image comparison commutes with the actual
 unit-normalized evaluation/direct-image comparison.
 
-Source: diagonal tower limit proof (1), projection compatibility of derived
-right adjoints; Stacks Tag 0A07.
-(blueprint: lem-sfb-diagonal-trace-finite-evaluation-projection).
-
-Proof: both sides are natural transformations out of the right derived functor
-of limit followed by ordinary direct image. The exact constant-tower left
-adjoint makes limit preserve K-injectives, so this composite computes that
-right derived functor. Its universal property reduces the equality to the
-common units on complexes. Insert the full normalization of the limit square
-and of the evaluation square. Naturality of the limit projection moves the
-tower direct-image unit to evaluation. The remaining equality is limit.post
-followed by the ordinary projection, which is direct image of the projection.
-Thus no levelwise faithfulness of arbitrary derived morphisms is used. -/
+Source: Stacks Tag 0A07. -/
 theorem diagonalTrace_finiteEvaluation_projection
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

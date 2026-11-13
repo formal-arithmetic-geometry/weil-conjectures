@@ -11,9 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteExtensionCompactSuppor
 import WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 
 /-! # Exchange at one rational coefficient stage
-
-Source: current blueprint, coefficient coherence of units, counits and mates.
-(blueprint: lem-cbc-rational-exchange-stage)
 -/
 
 @[expose] public noncomputable section

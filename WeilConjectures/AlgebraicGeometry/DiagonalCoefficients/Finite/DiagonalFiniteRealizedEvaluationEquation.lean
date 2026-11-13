@@ -12,8 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 
 These proposition wrappers have exactly the original equation bodies. Their
 irreducibility keeps existential proof motives small during kernel checking.
-Source: diagonal tower coefficient changes (1).
-(blueprint: def-diagonal-finite-realized-evaluation-equation).
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +35,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   Functor.mapDerivedCategory shiftFunctor geoCartierConstant geoCartierLine
 
 /-- The finite-realization and exact-restriction equation at generic coefficients.
-Source: coefficient changes (1)
-(blueprint: def-diagonal-finite-realized-evaluation-equation).
 The definition is a literal representative equation and chooses no object. -/
 @[irreducible] def finiteRealizedEvaluationEquation
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

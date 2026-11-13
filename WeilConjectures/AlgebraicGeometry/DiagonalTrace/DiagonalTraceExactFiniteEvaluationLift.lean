@@ -70,14 +70,7 @@ private theorem nested_ext_hom
     Iso.app_inv, Iso.app_hom, Functor.map_comp, Category.assoc, Nat.cast_ofNat]
   erw [Functor.commShiftIso_hom_naturality_assoc]
 
-/-- An exact lift of evaluation and fully faithful scalar restriction lift any derived arrow.
-Source: exact Ext functoriality and single/shift comparison naturality
-(blueprint: lem-sfb-diagonal-trace-exact-finite-evaluation-lift).
-
-Proof: express the arrow as an Ext class; apply the exact lifting functor; lift the two
-endpoint isomorphisms through the fully faithful restriction; and transport the Ext class.
-The exact-functor composition formula identifies its restricted image. Ext hom, the single
-comparisons and shift naturality give precisely the finiteEvaluationEquation property. -/
+/-- An exact lift of evaluation and fully faithful scalar restriction lift any derived arrow. -/
 theorem exactFiniteEvaluation_lift
     {C B D : Type*} [Category C] [Category B] [Category D]
     [Abelian C] [Abelian B] [Abelian D]

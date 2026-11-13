@@ -141,22 +141,8 @@ private theorem pullback_reduction
 
 /-- A specified scalar resolution computes the restriction of derived reduction.
 
-Source: blueprint latest, ctf-equals-bc, Local models; Stacks Tags 093M, 06YQ,
-06YY and 0G7E (blueprint: lem-sfb-finite-model-quotient-chart-comparison).
-
-Proof: identify the coefficient pullbacks and actual quotient morphisms using
-upperStarFromPointComp and cartesianCoefficients. Resolve M[0] by a flat-term
-K-flat complex. Its pullback is still K-flat, and the scalar inverse-image tensor
-comparison identifies restriction of reduction with reduction of the restricted
-module. On T, extend the specified exact sequence along the flat map from the
-constant integral ring to B_T. Constant finite free presentation extension keeps
-its original differential. The resulting two-term complex is K-flat and resolves
-the given model. Derived change of rings therefore computes its reduction in the
-quotient coefficient category. On each basis vector its differential has entries
-given by the actual quotient homomorphism. The normalized encoding identifies
-this complex with ordinaryComplex, and its inverse gives the displayed isomorphism.
-No constructibility or quasi-compactness is required for this chart calculation.
--/
+Source: Stacks Tags 093M, 06YQ,
+06YY and 0G7E. -/
 theorem chart_comparison
     (V T : Scheme.{u}) (f : T ⟶ V) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (e : Encoding l E n T) (P : ModuleCat.{u + 1} (A l E))

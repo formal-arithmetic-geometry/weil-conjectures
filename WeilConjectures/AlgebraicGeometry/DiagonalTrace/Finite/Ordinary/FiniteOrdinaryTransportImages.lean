@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.Fi
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteIntegralCategoryWitnesses
 
 /-! # The actual transported ordinary arrows
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-ordinary-transport-images).
 -/
 
 @[expose] public noncomputable section
@@ -48,9 +45,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Hom type for the actual comparison-realization image of ordinary endpoints.
-Source: exact coefficient comparison and intrinsic realization
-(blueprint: def-sfb-finite-ordinary-transport-images). -/
+/-- Hom type for the actual comparison-realization image of ordinary endpoints. -/
 def FiniteOrdinaryIntrinsicImageArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) (M N : OrdinaryEtaleModules (FiniteRing l E n) T) :=
   (DerivedCategory.singleFunctor _ 0).obj
@@ -60,9 +55,7 @@ def FiniteOrdinaryIntrinsicImageArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
       ((finiteOrdinaryRealization l E n T).obj
         ((finiteOrdinaryComparison (FiniteRing l E n) T).obj N)))⟦(2 : ℤ)⟧
 
-/-- Hom type for the actual forgotten ordinary endpoints after additive comparison.
-Source: exact scalar forgetting and additive site comparison
-(blueprint: def-sfb-finite-ordinary-transport-images). -/
+/-- Hom type for the actual forgotten ordinary endpoints after additive comparison. -/
 def FiniteOrdinaryAbelianImageArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) (M N : OrdinaryEtaleModules (FiniteRing l E n) T) :=
   (DerivedCategory.singleFunctor (DiagonalAb T) 0).obj
@@ -72,9 +65,7 @@ def FiniteOrdinaryAbelianImageArrow (n : ℕ) [Finite (SpTowerShriek.R l E n)]
       ((comparisonUpperStar AddCommGrpCat.{u + 1} T).obj
         ((Etale.moduleAbelianForget (FiniteRing l E n) T).obj N)))⟦(2 : ℤ)⟧
 
-/-- The comparison-realization image of the given ordinary derived arrow.
-Source: exact coefficient comparison and intrinsic realization
-(blueprint: def-sfb-finite-ordinary-transport-images). -/
+/-- The comparison-realization image of the given ordinary derived arrow. -/
 def finiteOrdinaryIntrinsicImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {M N : OrdinaryEtaleModules (FiniteRing l E n) T}
     (a : (DerivedCategory.singleFunctor _ 0).obj M ⟶
@@ -83,9 +74,7 @@ def finiteOrdinaryIntrinsicImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
   mapSingleArrow (finiteOrdinaryRealization l E n T) (2 : ℤ)
     (mapSingleArrow (finiteOrdinaryComparison (FiniteRing l E n) T) (2 : ℤ) a)
 
-/-- The additive comparison image of the ordinary arrow after forgetting scalars.
-Source: exact scalar forgetting and additive site comparison
-(blueprint: def-sfb-finite-ordinary-transport-images). -/
+/-- The additive comparison image of the ordinary arrow after forgetting scalars. -/
 def finiteOrdinaryAbelianImage (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {M N : OrdinaryEtaleModules (FiniteRing l E n) T}
     (a : (DerivedCategory.singleFunctor _ 0).obj M ⟶

@@ -130,20 +130,7 @@ private theorem openScalar_transport_base
 /-- The open scalar mate is compatible with the canonical site and realization
 comparisons. This assertion involves only extension by zero, with no proper map.
 
-Source: Stacks Tags 03DI, 09AF and 00YV; blueprint compact-support
-constructibility proof, Step 5, and the open factor of scalar transport.
-(blueprint: lem-finite-open-scalar-transport).
-
-Proof: factor the site/scalar and open/site comparisons through fixed-coefficient
-pro-etale comparison and intrinsic realization. Naturality of the intrinsic open
-scalar transpose transports intrinsicSiteFunctorIso at the input. Apply
-fixedOpenScalar_realization_transport, move the fixed site/scalar comparison
-past openRealizationIso by naturality, and apply fixedOpenScalar_site_transport.
-Naturality of realizationScalarIso and intrinsicSiteFunctorIso aligns the etale
-open scalar map. Cancel the adjacent inverse comparison factors. Finally,
-postcompose by extension by zero of the realization of eGB; naturality of
-openSiteIso gives the displayed arbitrary output isomorphism. No boundedness,
-flatness, nonzero ring, or nonempty scheme is used. -/
+Source: Stacks Tags 03DI, 09AF and 00YV. -/
 theorem openScalar_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

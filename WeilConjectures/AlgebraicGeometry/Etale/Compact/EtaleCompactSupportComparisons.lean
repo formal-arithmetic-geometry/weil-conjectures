@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 /-!
 # Canonical comparisons for ordinary etale compact support
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc, and Stacks Project,
-Tags 0F7I, 0F7J, 0F7K (blueprint: proposition-construction-independence-rf-shriek--7).
-
 The existing bounded-below API supplies the natural isomorphisms and their coherence:
 * `rightDerivedLowerShriekOfCompactificationPlusRefinementIso`, with its `_id` and `_comp`;
 * `rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso`, `_refl`, `_trans`;
@@ -41,8 +38,7 @@ namespace AlgebraicGeometry.Etale
 proper/open comparison, followed by the canonical direct-image composition identification.
 No Cartesian-square or density assumption is placed on the refinement.
 
-Source: Stacks Project, Tags 0F7I, 0F7J, 0F7K, and the blueprint
-(blueprint: proposition-construction-independence-rf-shriek--7).
+Source: Stacks Project, Tags 0F7I, 0F7J, 0F7K.
 
 Proof plan for the full comparison and composition package:
 1. A finite affine Noetherian cover gives local Noetherianity and quasi-compactness;
@@ -51,8 +47,8 @@ Proof plan for the full comparison and composition package:
    invertibility and transitivity. The adjoint of the specified restriction identification
    is alpha; identify its ambient pushforward with the canonical refinement comparison.
    For two common refinements, refine both and successively equalize their arrows to the
-   two original compactifications (remark-base-change-compactification--1). Transitivity
-   cancels the invertible refinement factors, proving independence and the cocycle law.
+   two original compactifications. Transitivity cancels the invertible refinement factors, proving
+   independence and the cocycle law.
 2. Choose a compactification of g and apply
    lem-weil-pbc-compatible-compactification-triangle to compactify f over its open part.
    The resulting candidates for f and fg are the actual Rp_* Dj_! constructions.

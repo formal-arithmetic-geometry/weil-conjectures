@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite cohomology of the projective-line coefficient unit
 
-Source: blueprint latest, diagonal-tower trace proof (1), and projective-line
-cohomology (G2). Only the coefficient unit and degrees other than two occur here.
+ Only the coefficient unit and degrees other than two occur here.
 -/
 
 @[expose] public noncomputable section
@@ -92,28 +91,7 @@ private theorem component_cohomology
   rw [H.map_comp]
   infer_instance
 
-/-- The evaluated coefficient unit is an isomorphism on cohomology outside degree two.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), the unit component of (G2) in
-`lemma-cohomology-projective-line-trace`.
-(blueprint: lem-sfb-diagonal-trace-finite-unit-cohomology).
-
-Proof: set A to the actual quotient of the ring of integers of E by l^(n+1).
-It is finite by b.finite, and coefficient_annihilates makes it an admissible
-coefficient ring for (G2). The exponent is positive and invertible on S by hS.
-The normalized evaluation comparison identifies the derived direct image of
-the system coefficient unit with the ordinary A-coefficient direct image.
-The coefficient-pullback normalization sends each constant section to itself;
-thus the evaluated adjunction unit is the ordinary coefficient unit, not a
-scalar multiple of it. Realize fixed-scalar sheaves as modules over the
-constant ring sheaf; this is an exact equivalence, so preserves cohomology
-and reflects its isomorphisms. Transport along e and he to the projective-line
-projection. In (G2) the first injection is precisely this unit. Its other
-summand A(-1)[-2] has cohomology only in degree two. In every degree q different
-from two the first injection, followed by (G2), is therefore an isomorphism.
-Transport this assertion back through the exact coefficient comparisons.
-No Chern data, trace, or system splitting is used. This also covers negative
-q, where both cohomology sheaves are zero, and the zero coefficient ring. -/
+/-- The evaluated coefficient unit is an isomorphism on cohomology outside degree two. -/
 theorem diagonalTrace_finite_unit_cohomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

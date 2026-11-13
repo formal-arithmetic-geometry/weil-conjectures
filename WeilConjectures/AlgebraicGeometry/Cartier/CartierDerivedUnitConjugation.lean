@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Supported.ProEtaleSuppo
 
 /-! # Conjugation invariance of derived scalar units
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md, finite coefficient extension paragraph
-(blueprint: lem-amb-cartier-derived-unit-conjugation).
-
 ## Main statements
 
 * `isCartierDerivedScalarUnit_of_iso_conj`: the derived scalar-unit property is
@@ -35,18 +31,7 @@ open Scheme
 /--
 The unbounded derived scalar-unit Hom bijections are preserved when the source
 and target are replaced by isomorphic sheaves and the map is conjugated by
-those isomorphisms.  Source: the finite coefficient extension paragraph of
-the GeoCartier proof (blueprint: lem-amb-cartier-derived-unit-conjugation).
-
-Proof: for each unbounded target, naturality of the degree-zero comparison
-identifies the new Hom map with the composite of the old Hom bijection and the
-Hom-set equivalences induced by the two displayed isomorphisms.  The inverse
-isomorphisms give inverses to these two additional bijections.  Explicitly, if
-`Φ_η` denotes the defining map, naturality gives
-`Φ_(eF.hom ≫ η ≫ Res.map eG.hom) f = eF.hom[0] ≫
-Φ_η (eG.hom[0] ≫ f)` for every `f`, and the two inverse isomorphisms invert
-the outer Hom-set maps.
--/
+those isomorphisms. -/
 theorem isCartierDerivedScalarUnit_of_iso_conj
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u})

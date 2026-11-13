@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 
 /-!
 # Proper Kummer degree-one base change
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree
-one (blueprint: lem-sc-proper-kummer-degree-one-base-change).
 -/
 
 @[expose] public section

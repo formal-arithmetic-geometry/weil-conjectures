@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedTo
 /-!
 # The completed base-change map as the specified ordered composite
 
-Source: blueprint proper base change, completed base-change map; Stacks Tags 09C9 and 099N
-(blueprint: def-weil-pbc-completed-base-change-map).
+Source: Stacks Tags 09C9 and 099N.
 
 ## Main definitions
 
@@ -32,9 +31,7 @@ variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
 /-- The ordered construction, extended to ambient inputs. Its first arrow is Rlim(h),
 with completed pullback definitionally Rlim(A); its middle arrow is Rlim(v'); its last
 arrow is the inverse of the specified direct-image/Rlim conjugate. No arbitrary
-isomorphism between the resulting objects is substituted for a comparison.
-Source: blueprint completed base-change map, displayed ordered composite
-(blueprint: def-weil-pbc-completed-base-change-map). -/
+isomorphism between the resulting objects is substituted for a comparison. -/
 def AdicCoefficientDatum.completedExchange (K : d.derived X) :
     (d.completedPull g).obj ((d.push f).obj K) ⟶
       (d.push f').obj ((d.completedPull g').obj K) :=
@@ -47,9 +44,7 @@ def AdicCoefficientDatum.completedExchange (K : d.derived X) :
 /-- The completed base-change map on the precise domain of the blueprint: proper f,
 derived-complete K, and a retained bounded-below etale-origin witness at every finite
 quotient. The formula itself is the ambient ordered composite above; the witnesses
-certify its finite exchange maps and impose no compatibility or uniform bound.
-Source: blueprint completed base-change map, order 1338
-(blueprint: def-weil-pbc-completed-base-change-map). -/
+certify its finite exchange maps and impose no compatibility or uniform bound. -/
 def AdicCoefficientDatum.completedBaseChangeMap [IsProper f]
     (K : d.derived X) (_hK : d.TowerComplete X K)
     (_W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))

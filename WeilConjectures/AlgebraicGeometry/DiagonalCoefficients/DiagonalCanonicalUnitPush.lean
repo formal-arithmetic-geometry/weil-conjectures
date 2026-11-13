@@ -217,17 +217,7 @@ private theorem canonical_unit_push_general
 
 -- The concrete coefficient specialization can require substantial kernel conversion.
 /-- The single condensed coefficient-unit push is the canonical derived
-adjunction unit after the chosen endpoint and right-derived identifications.
-
-Source: diagonal coefficient pullback endpoints and the universal right-derived
-unit normalization.
-(blueprint: lem-diagonal-canonical-unit-push).
-
-Proof: expand `singlePushComparison`, use the canonical right-derived equation
-on the single complex, and use the normalized endpoint to identify the
-ordinary monoidal-unit adjunct. The resulting mate is exactly
-`modelLocalAdjunct` after the canonical equality.
--/
+adjunction unit after the chosen endpoint and right-derived identifications. -/
 theorem diagonalCanonicalUnitPush (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [DiagonalTraceLocalizations l X]
     [DiagonalTraceLocalizations l S]

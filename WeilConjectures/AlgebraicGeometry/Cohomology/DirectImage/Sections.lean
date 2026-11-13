@@ -51,9 +51,7 @@ Over an affine open `V` of `T`, `R^q f_* ℱ|_V` is the higher direct image alon
 `f⁻¹ V ⟶ V` (`AlgebraicGeometry.Scheme.Modules.higherDirectImagePullbackIsoRestrict`), and
 `f⁻¹ V` is a finite union of affine opens; the Mayer–Vietoris sequence of the higher direct
 images then shows quasi-coherence by induction on the number of affine opens
-(`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`, `lem-pc-finite-support-hi`) -/
+(`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`). -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top _
@@ -611,9 +609,7 @@ functors `AlgebraicGeometry.Scheme.Modules.derivedPushforward` and
 `AlgebraicGeometry.Scheme.Modules.derivedPullback`; it holds for every `f` and `ℱ`: twisting
 by an invertible module is an autoequivalence, and the projection formula
 `f_* (ℱ ⊗ f^* 𝒩) ≅ f_* ℱ ⊗ 𝒩` is natural in `ℱ`
-(`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`).
-
-(blueprint: `lem-pc-projection-formula`) -/
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`). -/
 theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [𝒩.IsInvertible]
     (q : ℕ) :
     Nonempty ((higherDirectImage f q).obj (ℱ ⊗ (Modules.pullback f).obj 𝒩) ≅
@@ -657,9 +653,7 @@ higher direct images gives `R^q f_* ℱ|_U = 0` for `q ≥ d` by induction on `d
 (`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
 
 The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
-the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`. -/
 theorem exists_isZero_higherDirectImage_restrict (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧
       ∀ q ≥ d, IsZero (((higherDirectImage f q).obj ℱ).restrict U.ι) := by
@@ -676,9 +670,7 @@ theorem exists_isZero_higherDirectImage_restrict (t : T) :
 /-- **Vanishing of the higher direct images in large degrees over a quasi-compact base.** In the
 situation of `AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_restrict`, if `T`
 is quasi-compact then `R^q f_* ℱ = 0` for all large `q`: finitely many of the neighbourhoods
-given there cover `T`, and one takes for `N` the maximum of their bounds.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+given there cover `T`, and one takes for `N` the maximum of their bounds. -/
 theorem exists_isZero_higherDirectImage [CompactSpace T] :
     ∃ N, ∀ q ≥ N, IsZero ((higherDirectImage f q).obj ℱ) := by
   classical
@@ -723,18 +715,7 @@ variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
 set_option backward.isDefEq.respectTransparency.types true in
 /-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
 quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-Proof: the two localization assertions for sections of the higher direct image give the
-quasi-coherence criterion `isQuasicoherent_of_forall_isAffineOpen`: sections on a principal
-open lift after multiplying by a power of its defining function, and sections restricting
-to zero are annihilated by a power. Apply the criterion and restrict to each affine open.
-The two assertions are stated in separate acyclic modules, with proofs through localization
-of cohomology (Stacks, Tag 09MR) and the cohomology-presheaf description (Tag 01E4).
-
-(blueprint: lem-pc-sections-higher-direct-image-quasi-coherent)
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`)
-(blueprint: new-higher-direct-image-affine-local-qcoherent) -/
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ]. -/
 theorem higherDirectImage_isQuasicoherent_on_affines (q : ℕ) :
     ∀ U : T.affineOpens,
       (((higherDirectImage f q).obj ℱ).over U.1).IsQuasicoherent := by

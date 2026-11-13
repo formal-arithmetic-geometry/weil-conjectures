@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.Finite
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteCohomologyMapNormalization
 
 /-! # Arbitrary ordinary root classes in finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-scalar-root-route-equation).
 -/
 
 @[expose] public noncomputable section
@@ -42,14 +39,7 @@ attribute [local implicit_reducible] diagonalAbSheafAbelian towerAbelian systems
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The normalized image of root insertion is the integral-root route.
-Source: exact cohomology-map naturality and the root section normalization
-(blueprint: lem-sfb-finite-scalar-root-route-equation).
-
-Proof: apply finiteCohomologyMap_normalization to the ordinary root map, the
-scalar line coordinate, Cartier roots comparison and finiteRootMap. The required
-target-map factorization is finiteScalarLineCoordinate_root; the source map is
-the actual inverse integer comparison. No ordinary arrow is used here. -/
+/-- The normalized image of root insertion is the integral-root route. -/
 theorem finiteScalarNormalizedRootRoute_eq (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}

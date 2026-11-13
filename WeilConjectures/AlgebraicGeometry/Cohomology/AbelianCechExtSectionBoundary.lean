@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-! # Ext boundary equals the horseshoe section boundary
 
 Source: Stacks Project, Tags 01EQ and 0117.
-(blueprint: lem-pc-abelian-cech-ext-section-boundary)
 -/
 
 @[expose] public section
@@ -29,18 +28,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The sheaf cohomology boundary sends a lifted cocycle to its differential factor.
-Source: Stacks Project, Tags 05TE and 06XR.
-
-Proof: Compute the injective-resolution boundary in the standard Ext universe by
-`InjectiveResolution.extMk_resolution_connecting_eq_triangle`: the lift b of c has
-differential a through the first row map, so the triangle boundary sends extMk(c)
-to extMk(a). The triangle connecting morphism is composition with the short-exact
-extension class, with degree q followed by degree one and no sign. The canonical
-change-of-universe equivalence preserves extMk, the short-exact extension class,
-and their compositions. Transport the equation through that equivalence to the
-small sheaf Ext instance used by functorHδ. This proves the displayed equation for
-any supplied lifts; it requires neither a section complex nor an identification
-of Ext with section homology. The same formula holds at q=0. -/
+Source: Stacks Project, Tags 05TE and 06XR. -/
 private theorem abelianExt_boundary_cocycle
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))
@@ -83,32 +71,7 @@ private theorem abelianExt_boundary_cocycle
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The cocycle-compatible Ext/section identifications preserve the boundary.
-Source: Stacks 0117 (lift-differentiate-lift) and 01EQ (resolution sections).
-(blueprint: lem-pc-abelian-cech-ext-section-boundary)
-
-Proof: Fix an Ext class t in degree q of the last sheaf and use he₃ to
-represent it by a cocycle c and section cycle z₃. Split the horseshoe row
-in degree q and compose c with its section to obtain b in the middle
-resolution. Its differential maps to zero in the last resolution, hence
-factors uniquely through the first inclusion in degree q+1 as a. The
-next differential of a is zero because its composite with the monic first
-inclusion is the square of the middle differential. The injective-resolution
-formula for the Ext boundary sends extMk(c) to extMk(a). Under the
-constant-sheaf adjunction evaluated at 1, b lifts the section represented
-by c, and its differential is the image of the section represented by a:
-the adjunction is natural in each row map and differential. The concrete
-homology boundary formula for hS therefore sends homologyπ(z₃) to the
-homology class y of this latter section. To identify its Ext class using
-he₁ without choosing a preferred representative, apply he₁ to e₁.inv(y).
-Its section class is y by the isomorphism equation. The section-homology
-injectivity lemma therefore identifies its Ext class with extMk(a).
-Applying e₁.hom gives e₁.hom(extMk(a)) = y. Substitute the he₃ class
-equation and use extensionality of additive maps. The Ext boundary formula
-may first be computed in the standard large Ext universe; transport through
-the canonical change-of-universe equivalence, which preserves cocycle
-classes and composition with the short-exact extension class.
-The lift formula also holds for q=0, with no negative-degree terms. No
-cover, tuple set, or total complex is involved in this assertion. -/
+Source: Stacks 0117 (lift-differentiate-lift) and 01EQ (resolution sections). -/
 theorem abelianCechExtSection_boundary
     {X : Scheme.{u}}
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

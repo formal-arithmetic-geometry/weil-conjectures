@@ -28,8 +28,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 /-!
 # The uniform affine étale bound for ordinary finite-coefficient module sheaves
 
-Source: blueprint, `sk-prop-pe-unbounded-classical-unit.proof.md`, Fixed-degree truncation;
-Stacks Project, Tags 099W and 03FD (blueprint: lem-sfb-etale-module-affine-bound).
+Source: Stacks Project, Tags 099W and 03FD.
 -/
 
 @[expose] public section
@@ -49,8 +48,7 @@ The conclusion evaluates an arbitrary injective resolution of that module invers
 at the terminal étale object of W and takes its cohomology. Integer degrees above the
 positive bound are nonnegative, so `q.toNat` retains precisely the stated degree.
 
-Source: blueprint, `sk-prop-pe-unbounded-classical-unit.proof.md`, Fixed-degree truncation;
-Stacks Project, Tags 099W and 03FD (blueprint: lem-sfb-etale-module-affine-bound).
+Source: Stacks Project, Tags 099W and 03FD.
 
 Proof (the six steps of the node):
 1. Put N = ℓ^a. The scalar N * 1 is zero, so N kills every section of the underlying

@@ -57,9 +57,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # Étale sum extension preserves flatness and K-flatness
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0GKF
-(`lemma-f-shriek-projection`), with the unbounded total-tensor expansion recorded in
-(blueprint: lem-pur-etale-sum-flat-kflat).
+Source: Stacks Project, More on Étale Cohomology, Tag 0GKF,
+with the unbounded total-tensor expansion recorded in.
 
 The three helper functors apply the published constant-scalar equivalence, its
 canonical coefficient-ring transport, and the published sum extension degreewise.
@@ -79,7 +78,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Realize module-valued étale sheaves as modules over the constant commutative
 ring sheaf, using the existing constant-scalar extension and canonical ring isomorphism.
 Source: Stacks, Modules on Sites, Tags 093I and 03CV; the coefficient convention in
-Tag 0GKF (blueprint: lem-pur-etale-sum-flat-kflat). -/
+Tag 0GKF. -/
 def etaleSumFlatModuleRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) ⥤
       SheafOfModules.{u + 1} ((sheafCompose T.smallEtaleTopology
@@ -90,8 +89,7 @@ def etaleSumFlatModuleRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
       (constantModuleHomRingIso T.smallEtaleTopology A).inv
 
 /-- Apply the canonical constant-coefficient realization degreewise, including to
-unbounded complexes. Source: Stacks Tag 0GKF and the total-tensor expansion in
-(blueprint: lem-pur-etale-sum-flat-kflat). -/
+unbounded complexes. Source: Stacks Tag 0GKF and the total-tensor expansion in. -/
 def etaleSumFlatComplexRealization (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ ⥤
       CochainComplex (SheafOfModules.{u + 1} ((sheafCompose T.smallEtaleTopology

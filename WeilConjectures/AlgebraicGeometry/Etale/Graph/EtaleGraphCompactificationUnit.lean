@@ -25,7 +25,6 @@ attribute [local irreducible] lowerStar etaleLowerShriek openImmersionLowerShrie
 /-- The inverse graph comparison is normalized by the right-derived unit for the proper
 leg of the compactification.
 Source: SGA 4 XVII 6.2.11 and Stacks Project, Tag 0F4L.
-(blueprint: lem-pur-graph-compactification-unit).
 
 Proof in words: the canonical etale comparison is the inverse of the explicitly
 constructed derived graph map. Its inverse is therefore that graph map itself.

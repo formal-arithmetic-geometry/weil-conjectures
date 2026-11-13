@@ -294,9 +294,9 @@ theorem exists_kummerElement [NeZero (N : k)] [HasEnoughRootsOfUnity k N] {ξ : 
   exact ⟨x₀ ^ b, f, pow_ne_zero _ hx₀, hf, hχ⟩
 
 /-- The **residue** `res_z(T) ∈ Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` of a `ℤ / N`-torsor `T` on `U`
-at a point `z` of `C` (blueprint `proposition-no-fixed-class-degree-one--1`): an `N`-th root of
-unity `ξ` is sent to `ord_z (x ^ N) mod N`, for a Kummer element `x` of `T` against `ξ`, i.e.
-`x ≠ 0` in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x` for `σ ∈ Gal(Ω / k(C))`. -/
+at a point `z` of `C`: an `N`-th root of unity `ξ` is sent to `ord_z (x ^ N) mod N`, for a Kummer
+element `x` of `T` against `ξ`, i.e. `x ≠ 0` in `Ω` with `x ^ N ∈ k(C)` and `σ x = ξ ^ χ_T(σ) x` for
+`σ ∈ Gal(Ω / k(C))`. -/
 noncomputable def residue [NeZero (N : k)] [HasEnoughRootsOfUnity k N] (z : C) :
     Additive (rootsOfUnity N k) →+ ZMod N where
   toFun ξ := kummerResidue C (T.galoisCharacter j) z

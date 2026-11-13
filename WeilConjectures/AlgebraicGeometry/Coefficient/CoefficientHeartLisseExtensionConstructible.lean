@@ -161,8 +161,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 /-! # Constructibility of locally closed lisse extensions
-Source: blueprint generation, Converse paragraph.
-(blueprint: lem-sfb-coefficient-heart-lisse-extension-constructible)
 -/
 
 @[expose] public noncomputable section
@@ -372,19 +370,8 @@ private theorem single_constructible (X : Scheme.{u})
 /-- The degree-zero derived object of a lisse locally closed extension is bounded
 constructible for the finite-constant-model convention.
 
-Source: blueprint generation, Converse paragraph; Stacks Tags 09AA, 09BM, 09BN, 09AH,
-and 09AG (blueprint: lem-sfb-coefficient-heart-lisse-extension-constructible).
-
-Proof: factor a through its scheme-theoretic closure as an open immersion followed by
-a closed immersion. Both ambient spaces are topologically Noetherian, so all their
-opens are quasi-compact, as are the complementary open immersions. The ringed
-open-closed formulas and Cartesian coefficient comparisons identify the three
-restrictions of i_*u_!L with L on S and zero on the two complementary pieces. These
-are locally finite free, including rank zero on the complements. The finite-constant
-local model criterion gives constructibility of i_*u_!L on this finite constructible
-stratification. Its degree-zero complex has only this cohomology sheaf, and therefore
-is bounded constructible. Empty pieces may be discarded; the zero and empty cases
-require no separate hypothesis. -/
+Source: Stacks Tags 09AA, 09BM, 09BN, 09AH,
+and 09AG. -/
 theorem coefficientHeart_lisse_extension_constructible (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

@@ -10,12 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Cbc.CbcOpenCoefficientSquare
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import all WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProetale
 import WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
-/-! Integral normalized square, after the proper and open coefficient mates.
-Source: coefficient-coherence proof steps 5--10.
-(blueprint: lem-cbc-integral-normalized-coefficient-square).
-Proof: paste the unit-normalized proper and open coefficient squares, use naturality
-of the proper pushforward comparison, then substitute the four beta specifications
-and cancel the endpoint conjugations. -/
+/-! Integral normalized square, after the proper and open coefficient mates. Proof: paste the
+unit-normalized proper and open coefficient squares, use naturality of the proper pushforward
+comparison, then substitute the four beta specifications and cancel the endpoint conjugations. -/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

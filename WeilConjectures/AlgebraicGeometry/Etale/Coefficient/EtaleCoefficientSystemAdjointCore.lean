@@ -64,10 +64,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleFiniteFreeMateA
 /-!
 # The strict étale coefficient-system adjoint
 Source: Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,
-Lemmas 5.16 and 5.22, and Proposition 5.24 (blueprint:
-lem-pur-etale-coefficient-system-adjoint).
-The structure records the actual compact-support system functor, its right adjoint,
-the finite-level adjunctions, and the asserted coefficient-system coherences.
+Lemmas 5.16 and 5.22, and Proposition 5.24. The structure records the actual compact-support system
+functor, its right adjoint, the finite-level adjunctions, and the asserted coefficient-system
+coherences.
 * `StrictEtaleCompactSupport` specifies the ordinary and unbounded derived functors.
 * `StrictEtaleExceptionalAdjoint` records the exact linear adjoint and finite-level mates.
 * `StrictEtaleExceptionalTransport` specifies the scalar and cofinal comparison maps.
@@ -75,10 +74,9 @@ the finite-level adjunctions, and the asserted coefficient-system coherences.
 * The identity/composition theorems state coherence with canonical tensor identifications.
 This core module holds the exceptional-adjoint and transport records, the integer-ring
 and coefficient-change definitions, the scalar transport projection
-`strictEtaleScalarTransportProjection` (blueprint: lem-pur-etale-scalar-transport-projection)
-and the identity/composition theorems;
-`WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjoint` re-exports
-it and proves the existence theorems (split for the per-file compile limit).
+`strictEtaleScalarTransportProjection` and the identity/composition theorems;
+`WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjoint` re-exports it
+and proves the existence theorems (split for the per-file compile limit).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -100,8 +98,7 @@ attribute [local irreducible] CategoryTheory.constantSheaf SheafOfModules.siteCo
   SheafOfModules.siteCoefficientTensorAdj
 set_option backward.defeqAttrib.useBackward true
 /-- Use the recorded proper inverse-image additive witness at the strict site sizes.
-Source: Zheng, Construction 4.1 and Construction 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1 and Construction 5.15. -/
 theorem strictEtaleProperInverseAdditive
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
@@ -109,8 +106,7 @@ theorem strictEtaleProperInverseAdditive
     (S.val.properImage.lift n).modules.Additive := S.val.properImage.inverseAdditive n
 
 /-- Use the recorded proper direct-image additive witness at the strict site sizes.
-Source: Zheng, Construction 4.1 and Construction 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1 and Construction 5.15. -/
 theorem strictEtaleProperDirectAdditive
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
@@ -129,8 +125,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O)
 /-- The right adjoint with actual evaluated units, counits, and transition mates.
 The isomorphisms are uniquely characterized by the two adjunction equations. Quotient
 coefficient maps use the recorded universal derived tensor, including nonflat quotients.
-Source: Zheng, Lemmas 5.16 and 5.22, Proposition 5.24, and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Lemmas 5.16 and 5.22, Proposition 5.24, and Proposition 2.29(2). -/
 structure StrictEtaleExceptionalAdjointData (S : StrictEtaleCompactSupport O ell c) where
   right : DerivedCategory (strictEtaleCoefficientSystem Y O ell) ⥤
     DerivedCategory (strictEtaleCoefficientSystem X O ell)
@@ -160,8 +155,7 @@ attribute [instance] StrictEtaleExceptionalAdjointData.rightAdditive
   StrictEtaleExceptionalAdjointData.shift
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleExceptionalAdjointCoherence (S : StrictEtaleCompactSupport O ell c)
     (record : StrictEtaleExceptionalAdjointData O ell c S) : Prop :=
     -- exact
@@ -224,8 +218,7 @@ def StrictEtaleExceptionalAdjointCoherence (S : StrictEtaleCompactSupport O ell 
             (J := X.smallEtaleTopology) O ell S.PX (record.right.obj M))
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleExceptionalAdjoint (S : StrictEtaleCompactSupport O ell c) :=
   { record : StrictEtaleExceptionalAdjointData O ell c S //
     StrictEtaleExceptionalAdjointCoherence O ell c S record }
@@ -235,42 +228,36 @@ variable (S : StrictEtaleCompactSupport O ell c)
 variable {O ell c S}
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.right (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   record.val.right
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.adjunction
     (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   record.val.adjunction
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.levelRight
     (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   record.val.levelRight
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.levelAdjunction
     (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   record.val.levelAdjunction
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.evaluation
     (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   record.val.evaluation
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalAdjoint.quotientComparison
     (record : StrictEtaleExceptionalAdjoint O ell c S) :=
   fun {m n : ℕ} (h : n ≤ m) ↦ record.val.quotientComparison h
@@ -292,8 +279,7 @@ variable (GA : StrictEtaleExceptionalAdjoint O ell c SA)
 /-- The actual exceptional coefficient comparison. Its transpose is the inverse
 compact-support projection followed by the extended counit. Evaluations identify it
 with the identical finite-level transpose, including every quotient transition.
-Source: Zheng, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Lemma 5.22 and Proposition 2.29(2). -/
 structure StrictEtaleExceptionalTransportData where
   compact : StrictEtaleCompactSupportTransport a c SA SB TX TY TZ
   right : GA.right ⋙ TX.derived ≅ TY.derived ⋙ GB.right
@@ -305,8 +291,7 @@ structure StrictEtaleExceptionalTransportData where
   quotientY : StrictEtaleTransportQuotient TY
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalTransport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleExceptionalTransportCoherence
     (record : StrictEtaleExceptionalTransportData a c SA SB TX TY TZ GA GB) : Prop :=
     -- mate
@@ -342,8 +327,7 @@ def StrictEtaleExceptionalTransportCoherence
         (GB.levelRight n).map ((TY.derivedEvaluation n).hom.app M))
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalTransport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 def StrictEtaleExceptionalTransport :=
   { record : StrictEtaleExceptionalTransportData a c SA SB TX TY TZ GA GB //
     StrictEtaleExceptionalTransportCoherence a c SA SB TX TY TZ GA GB record }
@@ -352,8 +336,7 @@ section
 variable {a c SA SB TX TY TZ GA GB}
 
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalTransport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2). -/
 abbrev StrictEtaleExceptionalTransport.right
     (record : StrictEtaleExceptionalTransport a c SA SB TX TY TZ GA GB) :=
   record.val.right
@@ -370,10 +353,7 @@ variable (l : ℕ) [Fact l.Prime]
   [Algebra (Padic l) E] [Algebra (Padic l) F]
   [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
 /-- A finite p-adic field embedding preserves the recorded integer rings.
-Source: Zheng, coefficient change in Proposition 2.29(2); Serre, Local Fields II.2
-(blueprint: lem-pur-etale-coefficient-system-adjoint).
-Proof: uniqueness of the extending absolute value identifies the two absolute values
-on E. The integer rings are their unit balls, so the embedding preserves membership. -/
+Source: Zheng, coefficient change in Proposition 2.29(2); Serre, Local Fields II.2. -/
 theorem strictEtaleIntegerMap_mem (i : E →ₐ[Padic l] F)
     (x : Padic.coefficientExtensionIntegers l E) :
     i (x : E) ∈ Padic.coefficientExtensionIntegers l F := by
@@ -388,8 +368,7 @@ theorem strictEtaleIntegerMap_mem (i : E →ₐ[Padic l] F)
   rw [hmap]
   exact (hE.1 _).mp x.property
 /-- Restrict the actual field embedding to the integer rings.
-Source: Zheng, Proposition 2.29(2); Serre, Local Fields II.2
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Source: Zheng, Proposition 2.29(2); Serre, Local Fields II.2. -/
 def strictEtaleIntegerMap (i : E →ₐ[Padic l] F) :
     Padic.coefficientExtensionIntegers l E →+* Padic.coefficientExtensionIntegers l F :=
   (i.toRingHom.comp (Padic.coefficientExtensionIntegers l E).subtype).codRestrict

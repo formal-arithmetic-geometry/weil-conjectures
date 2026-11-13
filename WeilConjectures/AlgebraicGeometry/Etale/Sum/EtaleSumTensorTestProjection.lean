@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumTensorTotalization
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Acyclic tensor tests for étale sum extension
-
-Source: Stacks Project, More on Étale Cohomology, Tag 0GKF, and the unbounded
-totalization expansion of lem-pur-etale-sum-tensor-totalization.
 -/
 
 -- After pruning, this module only keeps private declarations.

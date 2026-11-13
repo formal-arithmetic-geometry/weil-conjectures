@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalDerivedSourceSquareMaps
 
 /-! # Transpose of the right supported endpoint
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-source-endpoint-right-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -64,11 +61,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The actual right endpoint composite has the prescribed cyclic transpose.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-endpoint-right-transpose).
-Proof: unfold the constructed right endpoint map. Naturality of the cyclic
-adjunction hom equivalence moves the single source map through the transpose,
-which is exactly the constructed cyclic extension. -/
+/-- The actual right endpoint composite has the prescribed cyclic transpose. -/
 theorem source_endpoint_right_transpose
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight) :
     q.cyclicAdjunction.homEquiv _ _ (q.sourceEndpointRight s) =

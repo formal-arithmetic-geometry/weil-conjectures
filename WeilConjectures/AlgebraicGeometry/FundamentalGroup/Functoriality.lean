@@ -29,10 +29,9 @@ its fibre functors.
 An element `g` of a fundamental group `G = π₁(Y, s)` is a *Frobenius element at `x`*
 (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`) if it acts on the fibre functor at
 `s` as `F_x`, transported along some isomorphism of fibre functors (a "path") from `x̄` to `s`.
-Changing the path conjugates `g`, so this defines the Frobenius conjugacy class at `x`
-(blueprint `definition-weil-representation--1`). On the geometric fibre `Hom_{k₀}(A, Ω)` of a
-constant cover `Y ×_{k₀} Spec A` the element `F_x` acts as the `[κ(x) : k₀]`-th power of the
-geometric Frobenius of `k₀`.
+Changing the path conjugates `g`, so this defines the Frobenius conjugacy class at `x`.
+On the geometric fibre `Hom_{k₀}(A, Ω)` of a constant cover `Y ×_{k₀} Spec A` the element `F_x` acts
+as the `[κ(x) : k₀]`-th power of the geometric Frobenius of `k₀`.
 
 ## Main definitions
 
@@ -172,8 +171,7 @@ lemma specMapIso_hom_comp_residueFieldPoint (x : Y)
 automorphism of the fibre functor at `x̄ : Spec κ(x)‾ ⟶ Y` given by precomposition with
 `Spec σ_x⁻¹`, where `σ_x : a ↦ a ^ #κ(x)` is the arithmetic Frobenius of `κ(x)‾`. On the
 geometric fibre `Hom_{k₀}(A, κ(x)‾)` of a constant cover `Y ×_{k₀} Spec A` it acts by
-`β ↦ σ_x⁻¹ ∘ β`, the `[κ(x) : k₀]`-th power of the geometric Frobenius of `k₀`.
-(blueprint `definition-weil-representation--1`) -/
+`β ↦ σ_x⁻¹ ∘ β`, the `[κ(x) : k₀]`-th power of the geometric Frobenius of `k₀`. -/
 noncomputable def geometricFrobeniusAt (x : Y) [Finite (Y.residueField x)] :
     fiber (residueFieldPoint Y x) ≅ fiber (residueFieldPoint Y x) :=
   fiberPrecompIso _ (specMapIso (arithmeticFrobeniusAt x).symm.toRingEquiv)
@@ -186,8 +184,7 @@ element at a point `x` with finite residue field if, for some isomorphism `τ` o
 from the geometric point `x̄` over `x` to the base point `s` (a path from `x̄` to `s`), `g` acts
 on the geometric fibres at `s` as the geometric Frobenius `F_x` at `x`, transported along `τ`:
 `g • τ y = τ (F_x y)`. The Frobenius elements at `x` form a single conjugacy class of `G`,
-since the paths from `x̄` to `s` form a torsor under `G`. (blueprint
-`definition-weil-representation--1`) -/
+since the paths from `x̄` to `s` form a torsor under `G`. -/
 def IsFrobeniusElement (x : Y) [Finite (Y.residueField x)] (g : G) : Prop :=
   ∃ τ : fiber (residueFieldPoint Y x) ≅ fiber s, ∀ (P : Y.FiniteEtale)
     (y : (fiber (residueFieldPoint Y x)).obj P),

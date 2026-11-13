@@ -28,9 +28,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
 # Finite-ring derived local constancy
 
-Source: Stacks Project, Tag 094G, lemma-locally-constant; the bounded finite-source
-extension of Tag 09BE and connected constancy described in the DAG
-(blueprint: lem-weil-pbc-finite-ring-derived-local-constancy).
+Source: the bounded finite-source
+extension of Tag 09BE and connected constancy described in the DAG.
 -/
 
 @[expose] public section
@@ -470,29 +469,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Bounded finite lisse complexes have finite constant local models, finite lisse
 Hom and isomorphism sheaves, and on a connected scheme the model is any geometric fibre.
-Source: Stacks, Tag 094G and the finite-source extension of Tag 09BE
-(blueprint: lem-weil-pbc-finite-ring-derived-local-constancy).
-
-Proof:
-1. Use finite_locally_constant_module_values_iff to obtain finite module values for
-   every cohomology sheaf on every localized site. Apply the general-site bounded
-   constant-model theorem. Identify localized etale sheaves with sheaves on the cover
-   schemes, and reduce the covering index to the universe of X using joint surjectivity.
-2. For a second complex L, refine its model cover and K's model cover by fiber products.
-   Pullback composition and the constant-sheaf comparison transport both local models
-   to this common cover.
-3. The constant-complex mapping comparison identifies local Hom and Isom with the
-   corresponding algebraic sets. Restriction of mapping presheaves, followed by
-   Mathlib's sheafification compatibility, identifies their sheaves with the restrictions
-   of the global mapping sheaves. Algebraic Hom is finite by a bounded-above finite
-   free resolution; Isom injects into Hom. Constant finite local values give local
-   constancy and finite geometric stalks, hence finite local constancy for both sheaves.
-4. On a connected X, choose the derived stalk at the given geometric point. The union
-   of images of cover members with that model class is open. Its complement is the
-   union of the other images: a common geometric point on an overlap identifies the
-   two models. Thus the union is also closed and is all X by connectedness. Discard
-   empty members and compose the model isomorphisms with their identifications with
-   the chosen derived stalk. No finite Tor bound is used. -/
+Source: Stacks, Tag 094G and the finite-source extension of Tag 09BE. -/
 theorem finiteRing_derived_local_constancy
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))

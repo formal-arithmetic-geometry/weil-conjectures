@@ -12,7 +12,6 @@ public import WeilConjectures.Topology.Sheaves.CechCohomology
 /-! # Ordered Čech cochains under inverse image
 
 Source: Stacks Project, Tag 01FD, the maps of Čech complexes in Lemma 20.15.1.
-(blueprint: def-pc-cech-inverse-image-cochain-map)
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 Source: Stacks Project, Tag 01FD, Lemma 20.15.1, map of Čech complexes.
 The component on a tuple is the coefficient map followed by restriction to the
 smaller tuple intersection. Naturality of the coefficient map and functoriality of
-restriction identify the two orders of applying each face, hence the differentials.
-(blueprint: def-pc-cech-inverse-image-cochain-map) -/
+restriction identify the two orders of applying each face, hence the differentials. -/
 noncomputable def cechInverseImageCochainMap
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens)

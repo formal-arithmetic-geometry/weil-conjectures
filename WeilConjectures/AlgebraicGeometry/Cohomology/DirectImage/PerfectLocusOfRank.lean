@@ -42,9 +42,7 @@ formation commutes with base change.
 
 The isomorphism is only asserted to exist: it is not stated to be the canonical base-change map,
 which is not available (see
-`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`).
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`). -/
 theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlatOver f) {i : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -78,9 +76,7 @@ finite locally free of rank `r`.
 This also follows from
 `AlgebraicGeometry.Scheme.Modules.nonempty_higherDirectImage_iso_pullback_of_isPullback`, the
 case of the inclusion of `U_{i,r}`, and the stability of finite local freeness of rank `r`
-under pullback, which is not available.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+under pullback, which is not available. -/
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.IsFlatOver f)
     {i r : ℕ} {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -95,9 +91,7 @@ theorem isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback (hℱ : ℱ.Is
 open subscheme `U` of `T` contained in the rank-`r` perfect locus `U_{i,r}`, the higher direct
 image `R^i f_* ℱ|_U` is finite locally free of rank `r`. This is the case of the inclusion of
 `U` in
-`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_higherDirectImage_of_isPullback`. -/
 theorem isFiniteLocallyFreeOfRank_higherDirectImage_restrict (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     (U : T.Opens)
     (hU : ↑U ⊆ {t : T | (∀ q, q ≠ i → ℱ.hFiber f q t = 0) ∧ ℱ.hFiber f i t = r}) :
@@ -128,9 +122,7 @@ concentrated in degree `i` is locally homotopy equivalent to that cohomology pla
 `i`, so its fibre at a point `t'` of `T'` has cohomology of dimension `r` in degree `i` only.
 This gives `h^q_{ℱ'}(t') = 0` for `q ≠ i` and `h^i_{ℱ'}(t') = r`, and these are the fibre
 dimensions of `ℱ` at `g t'` by
-`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`AlgebraicGeometry.Scheme.Modules.hFiber_pullback_of_isPullback`. -/
 theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) {i r : ℕ}
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
@@ -167,9 +159,7 @@ theorem range_subset_perfectLocusOfRank_of_isPullback (hℱ : ℱ.IsFlatOver f) 
 `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_of_isPullback`, the image of
 `g` lies in `U_{i,r}` if and only if `R f'_* ℱ'` is a finite locally free module of rank `r`
 placed in degree `i`: the higher direct images `R^q f'_* ℱ'` vanish for `q ≠ i` and
-`R^i f'_* ℱ'` is finite locally free of rank `r`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`R^i f'_* ℱ'` is finite locally free of rank `r`. -/
 theorem range_subset_perfectLocusOfRank_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) :
@@ -185,9 +175,7 @@ theorem range_subset_perfectLocusOfRank_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ
 `AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`, the image of `g` lies in
 the locus of points at which the fibre cohomology vanishes outside degree `i` and has dimension
 `r` in degree `i` if and only if `R^q f'_* ℱ'` vanishes for `q ≠ i` and `R^i f'_* ℱ'` is finite
-locally free of rank `r`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+locally free of rank `r`. -/
 theorem range_subset_setOf_hFiber_eq_iff (hℱ : ℱ.IsFlatOver f) (i r : ℕ)
     {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g) :
@@ -205,11 +193,7 @@ rank `r` placed in degree `i` [Stacks, Tag 0B9S].
 Here `f' : X' ⟶ T'` and `g' : X' ⟶ X` are the base change of `f` along `g`, and `ℱ'` is the
 pullback of `ℱ` to `X'`. The set `U_{i,r}` is open by
 `AlgebraicGeometry.Scheme.Modules.isOpen_perfectLocusOfRank`, and the factorisation criterion is
-`AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) 
-(blueprint: lemma-coherent-base-change-invertible-sheaves--3)
--/
+`AlgebraicGeometry.Scheme.Modules.range_subset_perfectLocusOfRank_iff`. -/
 theorem exists_opens_range_subset_iff_isFiniteLocallyFreeInDegree (hℱ : ℱ.IsFlatOver f)
     (i r : ℕ) :
     ∃ U : T.Opens, (U : Set T) = ℱ.perfectLocusOfRank f i r ∧

@@ -163,15 +163,7 @@ private def evaluationIso (PE : StrictEtaleEvaluation T O ell) (n : ℕ) :
 
 /-- Every bounded-below finite coefficient object is the evaluation of a system
 with the same lower bound, whose other evaluations vanish.
-Source: Zheng Construction 4.1, the exact evaluation and its single-level section.
-(blueprint: lem-sf-exceptional-evaluation-singleton).
-
-Proof: put the given module at level n, zero at every other level, and zero in
-all successive transition maps. This defines an additive exact functor: after
-each evaluation it is the identity or zero, and evaluations jointly reflect
-finite limits and colimits. Apply its exact functor on derived categories.
-The uniqueness of exact localization identifies its evaluations with identity
-and zero, and exactness preserves the original lower bound. -/
+Source: Zheng Construction 4.1, the exact evaluation and its single-level section. -/
 theorem exceptionalEvaluationSingleton (PE : StrictEtaleEvaluation T O ell)
     (n : ℕ) (N : DerivedCategory (strictEtaleLevel T O ell n)) (a : ℤ) (hN : N.IsGE a) :
     ∃ M : DerivedCategory (strictEtaleCoefficientSystem T O ell),

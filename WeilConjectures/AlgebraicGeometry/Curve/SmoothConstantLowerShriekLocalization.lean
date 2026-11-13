@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.UnderlyingAbelianAssertions
 /-! # Localization of smooth constant-coefficient curve assertions
 
 Source: Stacks Project, Tags 03SG, 0GJA and 0A5C, proofs.
-(blueprint: lem-pbc-u2-smooth-constant-lower-shriek-localization)
 -/
 
 @[expose] public section
@@ -31,19 +30,7 @@ namespace AlgebraicGeometry.IsCurve
 
 /-- The constant-coefficient calculations on all smooth curves imply the corresponding
 extension-by-zero calculations for every open immersion into a smooth curve.
-Source: Stacks Project, Tags 03SG, 0GJA (dense-open localization) and 0A5C (finite sums).
-(blueprint: lem-pbc-u2-smooth-constant-lower-shriek-localization)
-
-Proof: Put V = image(j) and E = X minus closure(V). These are disjoint opens, and
-V union E is dense, by the dense coborder lemma. The constant finite-coefficient sheaf
-is constructible and annihilated by r. Apply H to X and dense-open prime-torsion
-localization to V union E. The disjoint-open comparison then gives the assertions
-for V_! of the restriction of the constant sheaf. Pullback preserves constant sheaves.
-Identify U with V by the canonical open-immersion image isomorphism. Composition of
-extension by zero, and its identification with inverse pullback for an isomorphism,
-identify this sheaf with j_! of the constant sheaf on U. Transport all eight assertions
-along that isomorphism. Smoothness supplies reducedness; no component decomposition
-is needed. Empty opens and empty schemes are covered by the same two-open argument. -/
+Source: Stacks Project, Tags 03SG, 0GJA (dense-open localization) and 0A5C (finite sums). -/
 theorem smoothConstantLowerShriekAssertions_of_constant
     {k : Type u} [Field k] [IsAlgClosed k] (r : ℕ) [Fact r.Prime]
     (H : ∀ {C : Scheme.{u}} (g : C ⟶ Spec (.of k)) [IsCurve g] [Smooth g],

@@ -188,19 +188,7 @@ private theorem site_normalized_core
 
 /-- The fixed scalar left adjoint is strong monoidal for the published tensor and unit
 comparisons, and respects the actual Koszul braiding.
-Source: Stacks 07A4 and 0FPT; the tensor-model and left-unit normalization theorems
-(blueprint: lem-coef-etale-scalar-monoidal).
-
-Proof: ordinary sheaf extension preserves flat objects and quasi-isomorphisms of
-K-flat complexes. Its native left derived functor is therefore strong monoidal.
-Transport that structure to the fixed scalar adjoint using uniqueness of left adjoints.
-The transported cochain counit is the published scalar representative. Uniqueness
-of the right-exact tensor comparison identifies its tensorator with tensorIso.
-The published left unit law then identifies its unit: tensoring with the image
-of the source unit is faithful, since that image is isomorphic to the target unit.
-Finally ordinary restriction is braided lax monoidal, so its scalar left adjoint
-respects braiding by adjunction. The derived braiding theorem and transport along
-the adjoint isomorphism give the signed Koszul compatibility displayed below. -/
+Source: Stacks 07A4 and 0FPT. -/
 theorem scalarExtension_coreMonoidal (A B : Type (u + 1)) [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     ∃ c : (scalarExtension φ T).CoreMonoidal,

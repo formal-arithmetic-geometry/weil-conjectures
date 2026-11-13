@@ -18,8 +18,7 @@ import all WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
 /-!
 # Pullback of the integral Cartier pole extension
 
-Source: blueprint lemma-cycle-class-cartier-divisor, relative trivialization paragraph;
-Stacks 03AJ and 0A45 (blueprint: lem-asd-cartier-pole-boundary-pullback).
+Source: Stacks 03AJ and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -90,23 +89,7 @@ private theorem pole_pullback_of_framed_map {D D' T T' : Scheme.{u}}
 of its Cartier pair. This is a degree-one identity with integral coefficients and
 units, before either the Kummer connecting map or coefficient extension.
 
-Source: blueprint lemma-cycle-class-cartier-divisor, paragraph beginning "All the cone
-maps"; Stacks 03AJ and 0A45
-(blueprint: lem-asd-cartier-pole-boundary-pullback).
-
-Proof: identify the inverse-image ideal with the primed ideal by the cartesian
-square. The Cartier dual comparison preserves their canonical sections, hence
-induces an equivariant natural map of frame torsors preserving the complementary
-frames. Identify each normalized pole class with the relative extension of this
-framed torsor. Choose a representing primed relative extension. The mate of
-closed exchange preserves supported one by the constant-unit compatibility. The
-frame map induces a morphism from the source relative extension to its direct
-image; its complementary frame is sent to zero. Adjunction gives a morphism
-from the exact inverse image of the source extension to the primed extension,
-with kernel map the units comparison and quotient map closed exchange.
-Naturality of short-exact extension classes is the displayed equation. Only the
-exchange morphism is needed, with no invertibility or flatness assumption on the
-base map. The construction also applies to empty schemes and empty support. -/
+Source: Stacks 03AJ and 0A45. -/
 theorem cartierPoleBoundary_pullback {D D' T T' : Scheme.{u}}
     (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
     (i' : D' ⟶ T') [IsClosedImmersion i'] (hI' : i'.ker.IsInvertible)

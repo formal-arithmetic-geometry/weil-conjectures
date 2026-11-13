@@ -18,10 +18,7 @@ import Mathlib.CategoryTheory.Presentable.Directed
 import Mathlib.CategoryTheory.Limits.Final
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
-/-! # Eventual vanishing in the kernel of an approximation counit
-
-Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1, injectivity argument.
-(blueprint: lem-sc-affine-limit-sheaf-approximation-germ-kernel). -/
+/-! # Eventual vanishing in the kernel of an approximation counit -/
 
 @[expose] public section
 
@@ -284,30 +281,7 @@ private theorem inverse_stalk_iso_germ_unit
   rw [← hh] at h₁
   exact h₁
 
-/-- A germ killed by an approximation counit dies at a later stage.
-
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-sc-cd-affine-limit.md,
-proof step 1, the injectivity argument by finite-data descent.
-(blueprint: lem-sc-affine-limit-sheaf-approximation-germ-kernel).
-
-Proof: Identify the stalk of pᵢ⁻¹pᵢ*F at x with the stalk of pᵢ*F at pᵢ(x).
-Represent the latter germ by a section a of F on the limit pullback of an
-étale neighbourhood Vᵢ. The counit sends it to the germ of that section on
-the limit. Its vanishing gives an étale neighbourhood W of the lifted point
-and a map W → Vᵢ × X on which a restricts to zero. Refine W around the point
-by an affine étale neighbourhood. Use a final directed reindexing and finite
-étale-data descent to descend W. Over that model, the limit is a base-changed
-limit. Since Vᵢ is étale, hence locally of finite presentation over Xᵢ,
-Mathlib's factorization theorem descends the map to Vᵢ to a common stage j over i.
-The point of W projects to a point of this stage model. The zero section
-on W is literally a section of pⱼ*F on that model. The inverse-image unit
-therefore makes its germ zero in pⱼ⁻¹pⱼ*F. Naturality of the units and the
-composition isomorphisms identifies this germ with the transition image of
-the original germ. Return along the reindexing functor to obtain j → i in
-the original cofiltered category. Only one local representative and its
-zero relation are descended; no cohomological bound is assumed. Empty
-neighbourhoods have no pointed germs, and a zero germ may use the identity
-transition, so no nonzero or nonempty-section hypothesis is needed. -/
+/-- A germ killed by an approximation counit dies at a later stage. -/
 theorem affineLimitSheafApproximation_germ_eventually_zero
     {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})
     [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]

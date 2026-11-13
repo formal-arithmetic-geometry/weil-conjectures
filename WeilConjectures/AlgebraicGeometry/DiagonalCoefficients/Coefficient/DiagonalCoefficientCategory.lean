@@ -32,9 +32,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 
 /-! # Normalized diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-category).
-
 ## Main definitions
 
 - `Modules`, `unit`, `source`: the coefficient category and fixed endpoints.
@@ -56,9 +53,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- A model of right derivation is identified with the canonical functor
 through its full unit on complexes. Merely equating the functors would allow
-rescaling the universal unit and hence a trace. Source: blueprint canonical
-trace and coefficient/direct-image normalizations
-(blueprint: def-sfb-diagonal-coefficient-category). -/
+rescaling the universal unit and hence a trace. -/
 def IsCanonicalRightDerived
     {C : Type a} [Category.{v} C] [Abelian C]
     {D : Type b} [Category.{v'} D] [Abelian D]
@@ -73,25 +68,20 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Modules over the specified pulled-back condensed coefficient, without changing
-its site or coefficient universe. Source: blueprint diagonal coefficient changes
-(blueprint: def-sfb-diagonal-coefficient-category). -/
+its site or coefficient universe. -/
 abbrev Modules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
-/-- The coefficient unit in degree zero. Source: blueprint coefficient changes
-(blueprint: def-sfb-diagonal-coefficient-category). -/
+/-- The coefficient unit in degree zero. -/
 abbrev unit (X : Scheme.{u}) :=
   (DerivedCategory.singleFunctor (Modules Λ X) 0).obj (Mod.regular (condensedRingObj Λ X))
 
-/-- The actual supported coefficient source of the diagonal class. Source: blueprint
-coefficient changes (blueprint: def-sfb-diagonal-coefficient-category). -/
+/-- The actual supported coefficient source of the diagonal class. -/
 abbrev source (Y : Scheme.{u}) :=
   (CondensedRing.lowerStar Λ (diagonalImmersion Y)).obj
     (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))
 
-/-- The canonical supported-source normalization, on underlying sheaves. Source:
-blueprint coefficient changes, integration identities
-(blueprint: def-sfb-diagonal-coefficient-category). -/
+/-- The canonical supported-source normalization, on underlying sheaves. -/
 def SupportNormalization (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveLine Y)
     (i : Mod.regular (condensedRingObj Λ (ProjectiveLine Y)) ≅
       (CondensedRing.lowerStar Λ f).obj (source Λ Y))
@@ -105,8 +95,7 @@ def SupportNormalization (Y : Scheme.{u}) (f : diagonalSurface Y ⟶ ProjectiveL
 /-- A diagonal class and the three projective-line traces, including the two
 normalized integration identities. The right derived functors retain their universal
 units and K-injective computation; the supported-source maps are fixed by composition,
-not chosen arbitrary arrows. Source: blueprint coefficient changes, clauses 1--3
-(blueprint: def-sfb-diagonal-coefficient-category). -/
+not chosen arbitrary arrows. -/
 structure Diagram (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) where
   Rq : DiagonalRightDerived (CondensedRing.lowerStar Λ (ProjectiveLine Y ↘ Y))

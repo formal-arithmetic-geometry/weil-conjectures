@@ -136,9 +136,7 @@ lemma finite_H_sigma {ι : Type u} [Finite ι] (G : ι → X.Modules) (q : ℕ)
 
 /-- **Cohomology along an affine morphism, with its module structure.** For an affine morphism
 `g : X ⟶ Y` and a quasi-coherent `𝒪_X`-module `ℱ`, `H^q(X, ℱ) ≅ H^q(Y, g_* ℱ)`, the isomorphism
-taking the action of `g^♯ r` to that of `r`, for every global function `r` on `Y`.
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+taking the action of `g^♯ r` to that of `r`, for every global function `r` on `Y`. -/
 theorem exists_H_addEquiv_pushforward_of_isAffineHom {Y : Scheme.{u}} (g : X ⟶ Y)
     [IsAffineHom g] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     (q : ℕ) : ∃ e : ℱ.H q ≃+ ((pushforward g).obj ℱ).H q,
@@ -165,9 +163,7 @@ variable {n : Type u}
 /-- **The cohomology of `𝒪(m)` on `ℙ(n; Spec A)` is that of the monomial Čech complex**, as
 `A`-modules, for any commutative ring `A`: Leray's theorem for the standard affine covering of
 the separated scheme `ℙ(n; Spec A)`, combined with the identification of the Čech complex of
-`𝒪(m)` with the monomial Čech complex.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+`𝒪(m)` with the monomial Čech complex. -/
 theorem nonempty_H_twist_linearEquiv_monomialCechComplex_homology (A : Type u) [CommRing A]
     [Fintype n] (m : ℤ) (q : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) q
@@ -231,9 +227,7 @@ lemma finite_monomialCechComplex_homology (A : Type u) [CommRing A] [Fintype n] 
         (Fintype.equivFinOfCardEq hn).symm (.inl hq0.ne')).symm
 
 /-- **The cohomology of the twisting sheaves over a ring is finite**: each `H^q(ℙⁿ_A, 𝒪(m))` is
-a finite `A`-module, for any commutative ring `A`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+a finite `A`-module, for any commutative ring `A`. -/
 theorem finite_H_twist (A : Type u) [CommRing A] [Finite n] (m : ℤ) (q : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) q
     Module.Finite A ((twist n (Spec (.of A)) m).H q) := by
@@ -252,9 +246,7 @@ theorem finite_H_twist (A : Type u) [CommRing A] [Finite n] (m : ℤ) (q : ℕ) 
       (twist n (Spec (.of A)) m) hq
     infer_instance
 
-/-- `H^q(ℙⁿ_A, 𝒪(e)) = 0` for `q > 0` and `e ≥ 0`, over any commutative ring `A`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+/-- `H^q(ℙⁿ_A, 𝒪(e)) = 0` for `q > 0` and `e ≥ 0`, over any commutative ring `A`. -/
 lemma subsingleton_H_twist_of_pos_of_commRing (A : Type u) [CommRing A] [Finite n] {q : ℕ}
     (hq : 0 < q) {e : ℤ} (he : 0 ≤ e) : Subsingleton ((twist n (Spec (.of A)) e).H q) := by
   have := Fintype.ofFinite n
@@ -275,9 +267,7 @@ lemma subsingleton_H_twist_of_pos_of_commRing (A : Type u) [CommRing A] [Finite 
 
 /-- `H^q(ℙᵈ_A, 𝒪(m)) = 0` for `0 < q < d` and every `m`, over any commutative ring `A`, where
 `ℙᵈ_A = ℙ(n; Spec A)` with `n` of cardinality `d + 1`: the middle homology of the monomial Čech
-complex vanishes.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+complex vanishes. -/
 lemma subsingleton_H_twist_of_pos_of_lt (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) (m : ℤ) {q : ℕ} (hq : 0 < q) (hqd : q < d) :
     Subsingleton ((twist n (Spec (.of A)) m).H q) := by
@@ -288,9 +278,7 @@ lemma subsingleton_H_twist_of_pos_of_lt (A : Type u) [CommRing A] [Fintype n] {d
   exact e.toEquiv.subsingleton
 
 /-- `H^0(ℙⁿ_A, 𝒪(m)) = 0` for `m < 0` and `n ≥ 1`, over any commutative ring `A`: a global
-section of `𝒪(m)` is a combination of monomials of degree `m` with nonnegative exponents.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+section of `𝒪(m)` is a combination of monomials of degree `m` with nonnegative exponents. -/
 lemma subsingleton_H_zero_twist_of_neg (A : Type u) [CommRing A] [Finite n] [Nontrivial n]
     {m : ℤ} (hm : m < 0) : Subsingleton ((twist n (Spec (.of A)) m).H 0) := by
   have := Fintype.ofFinite n
@@ -307,9 +295,7 @@ and `ℱ` a coherent module on `ℙⁿ_A`. Then each `H^q(ℙⁿ_A, ℱ)` is a f
 
 By descending induction on `q`, for all coherent modules at once: for `q > n` the cohomology
 vanishes; in general, a surjection `ℰ ⟶ ℱ` from a finite sum `ℰ` of twists `𝒪(m)` with coherent
-kernel `𝒦` gives an exact sequence `H^q(ℰ) ⟶ H^q(ℱ) ⟶ H^{q+1}(𝒦)` whose outer terms are finite.
-
-(blueprint: `lem-pc-projective-space-coherent-finiteness`) -/
+kernel `𝒦` gives an exact sequence `H^q(ℰ) ⟶ H^q(ℱ) ⟶ H^{q+1}(𝒦)` whose outer terms are finite. -/
 theorem ProjectiveSpace.finite_H (A : Type u) [CommRing A] [IsNoetherianRing A]
     (ℱ : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
@@ -351,9 +337,7 @@ variable {X : Scheme.{u}}
 /-- **Coherent cohomology of a projective scheme over a noetherian ring.** Let `A` be
 noetherian, `i : X ⟶ ℙⁿ_A` a closed immersion and `ℱ` a coherent `𝒪_X`-module. Then each
 `H^q(X, ℱ)` is a finite `A`-module: `i_* ℱ` is coherent with the same cohomology as `ℱ`, and
-`AlgebraicGeometry.ProjectiveSpace.finite_H` applies to it.
-
-(blueprint: `lem-pc-projective-coherent-finiteness`) -/
+`AlgebraicGeometry.ProjectiveSpace.finite_H` applies to it. -/
 theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
     [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
@@ -383,9 +367,7 @@ theorem Scheme.Modules.finite_H_of_isClosedImmersion (A : Type u) [CommRing A]
 
 The proof is that of the field case
 `AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist`, with the vanishing of
-`H^q(ℙⁿ_A, 𝒪(e))` for `q > 0`, `e ≥ 0` computed over `A` by the monomial Čech complex.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+`H^q(ℙⁿ_A, 𝒪(e))` for `q > 0`, `e ≥ 0` computed over `A` by the monomial Čech complex. -/
 theorem ProjectiveSpace.exists_subsingleton_H_tensor_twist_of_isNoetherianRing (A : Type u)
     [CommRing A] [IsNoetherianRing A] (ℱ : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ]
@@ -452,14 +434,12 @@ subscheme, i.e. a closed immersion `i : X ⟶ ℙ(n; Spec A)`, and `ℱ` a coher
 Then `H^q(X, ℱ ⊗ 𝒪_X(m)) = 0` for all `q > 0` and all `m ≫ 0`, where `𝒪_X(m)` is the pullback
 along `i` of the twisting sheaf `𝒪(m)`. This extends
 `AlgebraicGeometry.Scheme.Modules.exists_subsingleton_H_tensor_twist`
-(`lemma-coherent-base-change-invertible-sheaves--1`) from a field to a noetherian ring.
+ from a field to a noetherian ring.
 
 As in the field case, `H^q(X, ℱ ⊗ 𝒪_X(m)) ≅ H^q(ℙⁿ_A, (i_* ℱ)(m))` by the projection formula
 and the affineness of `i`, and Serre vanishing on `ℙⁿ_A`
 (`AlgebraicGeometry.ProjectiveSpace.exists_subsingleton_H_tensor_twist_of_isNoetherianRing`)
-applies to the coherent module `i_* ℱ`.
-
-(blueprint: `lem-pc-serre-vanishing`, `lemma-coherent-base-change-invertible-sheaves--1`) -/
+applies to the coherent module `i_* ℱ`. -/
 theorem Scheme.Modules.exists_subsingleton_H_tensor_twist_of_isNoetherianRing (A : Type u)
     [CommRing A] [IsNoetherianRing A] (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i]
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]

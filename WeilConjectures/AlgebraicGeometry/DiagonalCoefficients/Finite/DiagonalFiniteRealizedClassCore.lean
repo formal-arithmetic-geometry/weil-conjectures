@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCartierFrame
 
 /-! # Explicit Ext classes of derived coefficient arrows
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-finite-realized-class-core).
 -/
 
 @[expose] public noncomputable section

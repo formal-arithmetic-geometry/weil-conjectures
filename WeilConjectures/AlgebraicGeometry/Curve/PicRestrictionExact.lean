@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicRestrictionDivisorCorrection
 
 /-!
 # Exactness of Picard restriction at the boundary
-
-Source: blueprint, sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-pic-affine,
-first paragraph, restriction and boundary divisors
-(blueprint: lem-sc-pic-restriction-exact).
 -/
 
 @[expose] public section

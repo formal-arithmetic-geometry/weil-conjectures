@@ -253,34 +253,8 @@ private theorem tower_resolution_quasiIso (l : ℕ) [Fact l.Prime]
 /-- Restricted K-injective complexes are acyclic for geometric direct image,
 for the strict finite-coefficient systems and for completed coefficients.
 
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-scalar/direct-image comparison; Stacks Tag 0D6E, composition of ringed-topos
-right derived direct images.
-(blueprint: lem-sfb-diagonal-trace-restricted-push-acyclic).
-
-Proof: present the strict systems as module sheaves on the sequence site.
-The section, transition and residue-action conditions on rX identify its functor
-with ordinary restriction along the constant Z_l-to-coefficient-system ring map.
-The completed restriction is already the analogous coefficient-ring restriction,
-followed by the constant-ring module equivalence. For either ringed site, compose
-this identity-site ringed morphism with geometric direct image. Resolve a
-K-injective I after scalar restriction by a K-injective J. The ringed-topos
-composition theorem shows that applying direct image to this resolution arrow
-is a quasi-isomorphism. Its proof uses flat-term K-flat test resolutions:
-extension of scalars and geometric pullback take the test resolutions to the
-corresponding K-flat classes, and their Hom adjunctions identify the localized
-Hom groups into I and J. Yoneda makes the localized direct-image resolution map
-invertible. Since scalar restriction is exact, its ordinary value computes its
-derived value, so the composite-unit equation makes the direct-image unit on
-the restricted I invertible. Transport this fact through the section-preserving
-constant-ring and sequence-site presentations. Finally, the universal units of
-Rf and Rt determine their unique comparisons with these computed models; their
-components are isomorphisms, so the same unit invertibility holds for the given
-models. The argument uses no preservation of K-injectives by scalar restriction,
-no finite-level K-injectivity assertion, and no invertibility of l on X or S.
-For identity maps the unit is already invertible on every complex; empty sites
-and the first positive quotient satisfy the same argument.
--/
+Source: Stacks Tag 0D6E, composition of ringed-topos
+right derived direct images. -/
 theorem diagonalTrace_restrictedPush_acyclic (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

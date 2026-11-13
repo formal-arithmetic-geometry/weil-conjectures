@@ -173,10 +173,6 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Closure of lisse and constructible coefficient sheaves
-
-Source: Weil blueprint main-20261015, sec-six-functors-basics/sk-lem-coefficient-heart/
-sk-lem-coefficient-heart-closure.md, clauses (1)--(2) and the concluding paragraph
-(blueprint: lemma-constructible-sheaves).
 -/
 
 @[expose] public section
@@ -457,22 +453,7 @@ private lemma heart_closure_generic
 /-- Lisse coefficient sheaves are closed under extensions, kernels and cokernels on a
  topologically Noetherian scheme. On a Noetherian scheme, constructible sheaves form an
  abelian full subcategory with exact inclusion and are exactly the sheaves lisse on a
- finite stratification.
-Source: blueprint coefficient-heart-closure, clauses (1)--(2) and concluding paragraph
-(blueprint: lemma-constructible-sheaves).
-
-Proof: identify lisse modules with locally finitely presented modules using the existing
-finite-field and bounded-image algebraic-closure local-triviality results. The proved
-conditional Serre helpers in `CondensedConstructibleSerre` then give local kernel,
-cokernel and extension closure: cokernels have finite presentations, and local basis
-lifts split epimorphisms onto free modules and extensions. On a Noetherian scheme,
-finite constant stratified models are equivalent to stratified local finite presentation.
-The same generic helpers refine the two stratifications and use exact restriction on
-each stratum, giving global closure. Zero has an identity presentation on the identity
-stratification. Mathlib's full-subcategory construction gives abelianity, and preservation
-of kernels and cokernels gives exactness of the inclusion. Finally the Noetherian-space
-criterion that locally closed sets are constructible identifies the two finite
-stratification conventions. Rank zero, empty strata and the empty scheme are included. -/
+ finite stratification. -/
 theorem coefficientHeart_closure (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

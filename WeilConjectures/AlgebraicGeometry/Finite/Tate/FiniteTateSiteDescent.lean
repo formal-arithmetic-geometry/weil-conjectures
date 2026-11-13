@@ -13,8 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Finite Tate descent
 
-Source: Stacks Project, Tags 03PK and 099R
-(blueprint: lem-amb-finite-tate-site-descent).
+Source: Stacks Project, Tags 03PK and 099R.
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +56,7 @@ normalization, all nonnegative tensor powers, pullback squares, exponent transit
 and uniqueness of the descent with its comparison. Both positive exponents are indexed
 by their predecessor: the finite quotient is at `n+1`, and the annihilator is `l^(r+1)`.
 There is no condition relating `n+1` to the ramification index.
-Source: Stacks Project, Tags 03PK, 099R, 0GLZ, 099T and 03EL;
-finite reduction in `lem-pur-twist-sheaf-locally-free`, clauses (2)--(3)
-(blueprint: lem-amb-finite-tate-site-descent).
+Source: Stacks Project, Tags 03PK, 099R, 0GLZ, 099T and 03EL.
 
 Proof plan:
 1. Write L for the recorded root limit and C for completed Z_l. Its specified finite
@@ -93,8 +90,7 @@ Proof plan:
 8. The comparison unit is invertible for module sheaves, so inverse image is fully
    faithful. Lift alpha inverse composed with beta, and its inverse, uniquely. Faithfulness
    gives their inverse identities and the unique comparison-preserving isomorphism.
-   The zero tensor power and the empty scheme are included throughout.
--/
+   The zero tensor power and the empty scheme are included throughout. -/
 theorem finite_tate_site_descent :
     ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

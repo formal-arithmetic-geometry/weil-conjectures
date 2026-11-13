@@ -32,8 +32,7 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectChara
 /-!
 # Completed-to-continuous coefficient transport and shifted Hom sums
 
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12
-(blueprint: lem-per-completed-continuous-hom-hypotheses).
+Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12.
 
 The transport is derived restriction along the inverse of the recorded normalized
 coefficient isomorphism. The continuous scalar action uses actual constant functions.
@@ -67,8 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Constant functions give the scalar action on continuous integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 def continuousIntegralSections (X : Scheme.{u}) :
     PbcIntegralRing l E →+* RingCat.sectionsSubring
       ((integralCoefficientSheaf l X E).obj ⋙ forget₂ CommRingCat RingCat) := by
@@ -81,8 +79,7 @@ def continuousIntegralSections (X : Scheme.{u}) :
       map_add' := fun _ _ ↦ rfl }
 
 /-- The ordinary module category is linear over constant integral coefficients.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 instance continuousIntegralLinear (X : Scheme.{u}) :
     Linear (PbcIntegralRing l E)
       (pbcModules X (integralCoefficientSheaf l X E)) :=
@@ -98,8 +95,7 @@ instance continuousIntegralLinear (X : Scheme.{u}) :
       Linear.comp_smul M N P f (continuousIntegralSections l E X a) g }
 
 /-- The induced constant action on the continuous-coefficient derived category.
-Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F. -/
 instance continuousIntegralDerivedLinear (X : Scheme.{u}) :
     Linear (PbcIntegralRing l E)
       (DerivedCategory (pbcModules X (integralCoefficientSheaf l X E))) := inferInstance
@@ -110,14 +106,12 @@ variable (X : Scheme.{u}) [IsNoetherian X]
 
 /-- The fixed transport is restriction along the inverse normalized coefficient map,
 derived by the exact-functor construction; it is not an arbitrarily chosen equivalence.
-Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1); Stacks Project, Tag 015F. -/
 abbrev completedContinuousTransport (R : RationalModuleRealization l E X) :=
   pbcDerivedRestrict R.integralIso.inv
 
 /-- The canonical commutation with integer shifts for exact derived restriction.
-Source: Stacks Project, Tag 015F
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Stacks Project, Tag 015F. -/
 instance completedContinuousTransportShift (R : RationalModuleRealization l E X) :
     (completedContinuousTransport l E X R).CommShift ℤ :=
   inferInstanceAs ((pbcRestrict R.integralIso.inv).mapDerivedCategory.CommShift ℤ)
@@ -128,8 +122,7 @@ The two bijective maps below are the direct-sum extensions of composition with t
 shifted coprojections. The formulas for `φ` and `ψ` and the generator square identify
 these actual maps, including their constant-coefficient module structures. The complete
 predicate in `integral` retains every compatible etale-origin witness.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12
-(blueprint: lem-per-completed-continuous-hom-hypotheses). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12. -/
 structure CompletedContinuousHomHypotheses (R : RationalModuleRealization l E X) where
   /-- Derived restriction is an equivalence. -/
   equivalence : (completedContinuousTransport l E X R).IsEquivalence
@@ -298,40 +291,7 @@ private theorem completedTransport_bounds (R : RationalModuleRealization l E X)
       exact F.isLE_mapDerivedCategory_obj N n
 
 /-- The normalized completed-to-continuous transport verifies all shifted Hom hypotheses.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12
-(blueprint: lem-per-completed-continuous-hom-hypotheses).
-
-Proof:
-1. The quotient-normalized `R.integralIso` preserves constant sections and quotient
-projections. Apply `lem-pur-ring-iso-derived-transport` to this coefficient isomorphism.
-Restriction along its inverse is the exact ordinary module equivalence and induces the
-specified derived equivalence. Its action on roofs preserves scalar multiplication,
-because the coefficient isomorphism preserves every constant integral coefficient.
-2. Termwise transport leaves kernels and images unchanged, so cohomological bounds are
-preserved and reflected. The exact-derived shift isomorphism is the termwise one.
-Transport a coproduct universal property through the inverse equivalence: a map from
-its image is equivalent to one map from each transported summand. This identifies the
-transported coprojections and works for the empty family too. The resulting unique
-coproduct isomorphism is `c` in the comparison field.
-3. Apply `lem-weil-pbc-integral-stratified-perfect-characterization`. Its third condition
-provides bounded cohomology with finitely presented models on finitely many strata,
-and its last clause gives all integer shifts. Quotient normalization and locally closed
-restriction compatibility identify the same models in continuous coordinates. The
-characterization retains intrinsic completeness, uniform bounds and compatible
-etale-origin witnesses, so it gives `integral`, `bounded`, and `shifts`. The models may
-have torsion; their cohomology modules need not be flat or projective.
-4. The image family has the original common lower bound. Apply
-`lem-weil-pbc-integral-constructible-hom-sums`, in the equivalent coefficient
-presentation, to the transported integral object and the image family with the given
-integer shift. This gives bijectivity of the continuous shifted-coprojection map.
-5. On each summand put φ(f) = T(f) followed by the canonical shift isomorphism. On the
-target put ψ(f) = T(f) followed by that shift isomorphism and c[q]. The equivalence and
-constant normalization make these linear equivalences. Naturality of the shift
-isomorphism and the coprojection normalization of c give the displayed generator
-square. The direct-sum universal property extends it to the whole comparison square,
-so bijectivity of the continuous comparison implies bijectivity of the completed one.
-For an empty family both coproducts are zero, and both Hom comparison maps are between
-zero modules. The continuity argument is used only with the supplied common lower bound. -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), Proposition 6.8.11(3), and Lemma 6.8.12. -/
 theorem completedContinuousHomHypotheses (R : RationalModuleRealization l E X) :
     Nonempty (CompletedContinuousHomHypotheses l E X R) := by
   classical

@@ -20,7 +20,7 @@ blueprint `prose-09-12` (4).
   `D_0 𝔸^n_B ⟶ 𝔸^n_{𝔸¹_B}` given by the coordinates `u_k = x_k t⁻¹`, with `x_k = t u_k`;
 - `AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`: it is an isomorphism;
 - `AlgebraicGeometry.Scheme.Hom.isPullback_deformationSpaceMap`: the deformation space of the
-  standard pair commutes with base change in `B` (blueprint `prose-09-12` (5)).
+  standard pair commutes with base change in `B`.
 -/
 
 @[expose] public section

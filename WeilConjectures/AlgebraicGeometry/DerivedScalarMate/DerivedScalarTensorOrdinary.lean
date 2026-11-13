@@ -22,8 +22,7 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 The ordinary part of the scalar mate construction, extracted as a separate module
 so that the ordinary and derived comparisons compile independently.
-Source: Stacks Tags 03EK and 06YY
-(blueprint: lem-sfb-scalar-tensor-ordinary-normalization).
+Source: Stacks Tags 03EK and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -36,14 +35,14 @@ namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
 /-- The actual scalar restriction, with unchanged underlying abelian sheaf.
-Source: Stacks 03EK (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev restriction {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
   Scheme.proEtaleRingRestrictScalars φ
 
 /-- The coefficient B_W with its A_W action, without deriving or resolving B.
-Source: Stacks 0B56 (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 0B56. -/
 noncomputable abbrev coefficient {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
@@ -52,7 +51,7 @@ noncomputable abbrev coefficient {W : Scheme.{u}}
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B))
 
 /-- The degree-zero coefficient complex B_W, as an A_W-module complex.
-Source: Stacks 0B56 (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 0B56. -/
 noncomputable abbrev coefficientComplex {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
@@ -60,7 +59,7 @@ noncomputable abbrev coefficientComplex {W : Scheme.{u}}
     A) (0 : ℤ)).obj (coefficient φ)
 
 /-- The existing ordinary tensor with B as its last factor.
-Source: Stacks 03EK (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev ordinaryTensor {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B) :=
@@ -68,7 +67,7 @@ noncomputable abbrev ordinaryTensor {W : Scheme.{u}}
     (coefficient φ)
 
 /-- The original sheafification image of b tensor m in scalar extension.
-Source: Stacks 03EK (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 03EK. -/
 noncomputable def pureSection {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B)
@@ -85,7 +84,7 @@ noncomputable def pureSection {W : Scheme.{u}}
     (b ⊗ₜ[_, (φ.hom.app U).hom] m)
 
 /-- The normalization on all sectionwise pure tensors, including nonconstant local scalars.
-Source: Stacks 03EK (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 03EK. -/
 def IsOrdinaryTensor {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
     (φ : A ⟶ B)
@@ -254,13 +253,7 @@ private theorem ordinaryComponent_naturality {W : Scheme.{u}}
   rfl
 
 /-- The canonical ordinary identification, uniquely fixed by balanced pure tensors.
-Source: Stacks 03EK, 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-normalization).
-Proof: the restricted scalar extension and tensor have the same balanced tensor
-abelian presheaf, with factors reversed. Sheafify this identification. The inverse
-reverses the factors back; both composites fix pure tensors. The balancing relation
-proves linearity, and id tensor a proves naturality. Sheafification uniqueness proves
-that the displayed formula determines the natural isomorphism uniquely. This is
-step 1 of the node, retaining its specified normalization. -/
+Source: Stacks 03EK, 06YY. -/
 theorem ordinaryTensorIso_existsUnique
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -301,7 +294,7 @@ theorem ordinaryTensorIso_existsUnique
   exact (he M U b m).trans (hn M U b m).symm
 
 /-- The uniquely normalized ordinary identification; its data are determined by the formula.
-Source: Stacks 03EK (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 03EK. -/
 noncomputable def ordinaryTensorIso
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}
@@ -310,7 +303,7 @@ noncomputable def ordinaryTensorIso
 
 /-- On complexes, reverse the balanced tensors degreewise and use the degree-zero
 single-factor identification. This is an actual chain isomorphism.
-Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-normalization). -/
+Source: Stacks 06YY. -/
 noncomputable def ordinaryComplexIso
     {W : Scheme.{u}}
     {A B : Sheaf (Scheme.ProEt.topology W) CommRingCat.{u + 1}}

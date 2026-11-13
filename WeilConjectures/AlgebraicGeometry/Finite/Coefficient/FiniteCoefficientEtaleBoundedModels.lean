@@ -14,8 +14,7 @@ import Mathlib.Algebra.Module.Shrink
 
 /-! # Bounded constant models from finite etale-local cohomology
 
-Source: Stacks Project, Tags 09AL and 094G
-(blueprint: lem-weil-pbc-finite-coefficient-etale-bounded-models).
+Source: Stacks Project, Tags 09AL and 094G.
 -/
 
 @[expose] public noncomputable section
@@ -130,28 +129,7 @@ private theorem small_finite_complex (R : Type t) [CommRing R]
 /-- Finite etale-local cohomology and fixed cohomological bounds give bounded
 constant finite-module complexes on a further etale cover. This assertion is for an
 arbitrary derived object over a coefficient sheaf identified with a finite constant
-ring; it contains no adic filtration or perfect-residue hypothesis.
-
-Source: Stacks Project, proetale.tex, lemma-compare-constructible-derived (09AL),
-and sites-cohomology.tex, lemma-locally-constant (094G).
-(blueprint: lem-weil-pbc-finite-coefficient-etale-bounded-models).
-
-Proof: use the coefficient isomorphism to restrict scalars to the constant ring.
-On the slice at V, the supplied etale-local finite module descriptions make every
-cohomology sheaf constructible with one stratum. Exact localization commutes with
-cohomology, so its cohomology vanishes outside [a,b]. Identify the localized
-pro-etale site with that of V. The finite-ring bounded constructible comparison
-(09AL) descends the derived object to the etale site and preserves these bounds.
-Exact fully faithful comparison identifies its etale cohomology with the given
-finite local systems. Apply bounded constant-model descent (094G), preserving
-[a,b]. Its construction descends the differentials as well as the terms.
-Each finite module over the finite ring has a finite underlying set, so transport
-its complex, including all differentials, to the coefficient universe t. Apply
-the exact constant realization and the coefficient isomorphism to the resulting
-etale model. Compatibility with exact slice restriction gives the displayed
-isomorphism. Compose the covers and close under further restriction to obtain a
-covering sieve. Only nonempty charts are requested; empty charts require no model
-in this statement. The zero coefficient ring gives the zero complex. -/
+ring; it contains no adic filtration or perfect-residue hypothesis. -/
 theorem finiteCoefficient_etale_bounded_models
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     (B : Type t) [CommRing B] [Finite B]

@@ -11,11 +11,6 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Common counit transpose of the site/scalar direct-image composites
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-scalar-six,
-det-prop-scalar-six-direct-image.proof.md, Formal properties and Finite rings paragraphs;
-Stacks Tag 07A7, remark-base-change.
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes).
-
 The comparisons and mates are the existing canonical constructions. The four helpers
 below name only the displayed composites and their counit transpose. All categories
 are ordinary uncompleted unbounded derived categories of constant-coefficient modules.
@@ -36,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The composite U: scalar extension of beta_A, then the pro-etale scalar mate,
 then direct image of delta_X.
 Source: scalar-six direct-image proof, Formal properties and Finite rings paragraphs,
-Stacks Tag 07A7 (blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Stacks Tag 07A7. -/
 def scalarSiteDirectImageU
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -58,7 +53,7 @@ def scalarSiteDirectImageU
 /-- The composite V: delta_Y, comparison inverse image of the etale scalar mate,
 then beta_B.
 Source: scalar-six direct-image proof, Formal properties and Finite rings paragraphs,
-Stacks Tag 07A7 (blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Stacks Tag 07A7. -/
 def scalarSiteDirectImageV
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -76,8 +71,7 @@ def scalarSiteDirectImageV
     (directImageComparisonAmbient B f).app ((Etale.scalarExtension a X).obj J)
 
 /-- The counit transpose q-flat, for any map with the source and target of U and V.
-Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7. -/
 def scalarSiteCounitTranspose
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -101,8 +95,7 @@ def scalarSiteCounitTranspose
 
 /-- The specified common normal form: p_B(delta_Y), then d_B, then C_X^B of
 c^e followed by T_X^e of the etale A-counit.
-Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes). -/
+Source: scalar-six direct-image proof, counit-transpose calculation, Stacks Tag 07A7. -/
 def scalarSiteCounitNormalForm
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -128,9 +121,6 @@ def scalarSiteCounitNormalForm
 
 /-- Both counit transposes have the specified common normal form, assuming the cube
 identity only at P = r_A J.
-Source: blueprint main-20261015 scalar-six direct-image proof, Formal properties and
-Finite rings paragraphs; Stacks Tag 07A7, remark-base-change
-(blueprint: lem-sfb-etale-proetale-scalar-counit-transposes).
 
 Proof, following the node's seven steps:
 1. Put E = epsilon^e_A,J, K = C_X^A J, h = beta^A_J, D = delta_X,J.

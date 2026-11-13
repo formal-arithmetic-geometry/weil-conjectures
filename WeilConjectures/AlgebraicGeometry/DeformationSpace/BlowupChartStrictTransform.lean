@@ -326,8 +326,7 @@ end AwayChart
 
 /-- **The Rees chart is the complement of the strict transform of the zero fibre**: in the
 blow-up of `Spec R[t]` along `J = I R[t] + (t)`, the complement of the closure of the locus over
-`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]` (blueprint `definition-deformation-normal-bundle`,
-affine-local form). -/
+`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]`. -/
 theorem compl_closure_zeroFibreOffCenter :
     (closure (zeroFibreOffCenter I))ᶜ =
       ((deformationChart I).opensRange : Set (AffineBlowup (deformationCenter I))) := by
@@ -365,7 +364,7 @@ lemma quasiCompact_strictTransformOpen_ι (hI : I.FG) :
   exact quasiCompact_strictTransformOpen_ι_of_isCompact _ _ _
     (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨_, deformationCenter_fg hI, rfl⟩).1
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+/-- Deformation space of a closed section,
 affine-local form. For a finitely generated ideal `I ⊆ R` (the ideal of the section `s(B) = V(I)` in
 `V = Spec R`), the Rees model `Spec R[t, I t⁻¹]` of the deformation to the normal cone is, via
 `deformationChart`, the open complement in `Bl_{V(I) × 0} (Spec R[t])` of the strict transform of
@@ -396,7 +395,7 @@ noncomputable def strictTransformCompl : (AffineBlowup (deformationCenter I)).Op
       (centerCompl I)))ᶜ,
     (strictTransformMap _ _ _).isClosedEmbedding.isClosed_range.isOpen_compl⟩
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section,
+/-- Deformation space of a closed section,
 affine-local form as an isomorphism of schemes: for finitely generated `I`,
 `Spec R[t, I t⁻¹] ≅ Bl_{V(I) × 0} (Spec R[t]) ∖ (strict transform of Spec R × 0)`. -/
 noncomputable def extendedReesSpecIsoStrictTransformCompl (hI : I.FG) :

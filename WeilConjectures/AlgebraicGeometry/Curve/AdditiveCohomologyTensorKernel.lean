@@ -24,29 +24,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.IsCurve
 
 /-- The tensor-linear extension of canonical additive pullback has trivial kernel.
-Source: Stacks Project, Tags 02KH (finite affine cover proof) and 03P2.
-(blueprint: lem-pbc-additive-cohomology-tensor-kernel)
-
-Proof: IsCurve makes C quasi-compact and separated. Choose a finite affine open
-cover and its inverse-image cover on C'. Finite intersections and their base
-changes are affine. The natural coordinates identify G and G' with the lifted
-associated structure sheaves. Their scalar endomorphisms are uniquely fixed by
-the section formulas, so the scalar-natural coefficient and etale/Zariski
-comparisons identify the specified cohomology actions with structural scalars.
-Compute both cohomology groups using the chosen covers. Affine section base change
-identifies the latter Cech complex with k' tensor the former; the section formula
-hq identifies the map on cochains with x mapping to 1 tensor x. Naturality of the
-Cech-to-cohomology comparison identifies the induced map with H(q) after the
-canonical Ext cohomology pullback. Pure tensors generate, so hβ identifies β
-with the induced scalar-extension map.
-For injectivity, tensoring over k is exact and identifies the cycles and the
-boundaries of the tensor complex with the tensors of the original cycles and
-boundaries. Thus its homology is the tensor of the original homology. A class z
-with β z = 0 corresponds to a tensor-cycle which is a tensor-boundary, and hence
-z = 0 in tensor homology. Transporting back gives the claimed kernel equality.
-The displayed pullback is transported to the categorical pullback by its unique
-isomorphism. Empty and affine schemes have zero first cohomology, so the argument
-also covers those cases. No properness or finite-dimensionality is used. -/
+Source: Stacks Project, Tags 02KH (finite affine cover proof) and 03P2. -/
 theorem additive_cohomology_tensor_kernel
     {k k' : Type u}
     [Field k] [Field k'] [Algebra k k']

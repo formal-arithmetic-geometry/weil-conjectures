@@ -19,8 +19,7 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 # Constructibility descends from finite direct image on curves
 
 Source: Stacks Project, Etale Cohomology, Tags 03QP (1), 095G and 09BH (2),
-combined in the converse of Tag 095R in the blueprint
-(blueprint: lem-weil-pbc-finite-pushforward-constructible-descent).
+combined in the converse of Tag 095R in.
 -/
 
 @[expose] public section
@@ -32,11 +31,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A torsion quotient of a constructible torsion middle term is constructible.
-Source: Stacks Project, Proposition 09BH (2)
-(blueprint: lem-weil-pbc-finite-pushforward-constructible-descent).
-
-Proof: make the middle term a curve coefficient pair on the same curve. Apply
-`constructible_sub_quotient` to the given short exact sequence and take its quotient clause. -/
+Source: Stacks Project, Proposition 09BH (2). -/
 theorem CurveCoefficientPair.constructible_of_short_exact
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     (Fmid K : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -66,27 +61,7 @@ theorem CurveCoefficientPair.constructible_of_short_exact
 -- Keep the inherited compatibility binder; the counit construction does not need it.
 set_option linter.unusedVariables false in
 /-- The finite direct image supplies a torsion constructible middle term and a short exact
-sequence ending in the original sheaf. Source: Stacks Project, Tags 03QP (1), 095G and 03PU;
-the counit argument is a composition of these results
-(blueprint: lem-weil-pbc-finite-pushforward-data).
-
-Proof:
-1. Put G = f_* P.F, Fmid = f⁻¹ G and beta equal to the adjunction counit. Convert the
-   torsion hypothesis on G to local-section torsion, apply `Etale.isTorsion_upperStar`,
-   and convert back. Pullback preserves finite-stalk constructibility of the underlying
-   set sheaf by `isConstructibleEtaleSheafOfSets_upperStar` (095G).
-2. For each geometric point s of P.C, the finite stalk isomorphism identifies restriction
-   with the product projection onto the factor indexed by s. This projection is an epi
-   in abelian groups. `stalkRestrict_eq_counit` identifies restriction with the counit
-   stalk map preceded by an isomorphism, so the counit stalk map is an epi.
-3. The universe-lifted algebraic-closure points jointly reflect epimorphisms. Naturality
-   of `uliftSheafFiberIso` transports step 2 to these points, proving beta is an epi.
-4. Take K = kernel beta. Geometric stalks preserve finite limits (03PU), so the kernel
-   inclusion remains injective at every stalk. Each element maps to a torsion element
-   in the stalk of Fmid. Its positive annihilator also kills the original element by
-   injectivity. The torsion characterization makes K a torsion sheaf.
-5. The kernel inclusion and beta form the canonical exact kernel sequence. Its first
-   arrow is mono and its second arrow is epi by step 3, hence it is short exact. -/
+sequence ending in the original sheaf. Source: Stacks Project, Tags 03QP (1), 095G and 03PU. -/
 theorem CurveCoefficientPair.finite_pushforward_data
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]
@@ -175,12 +150,7 @@ theorem CurveCoefficientPair.finite_pushforward_data
 
 /-- Constructibility descends from a finite direct image of a torsion sheaf on a curve.
 Source: a composition of Stacks Project, Tags 03QP (1), 095G and 09BH (2),
-forming the converse of Tag 095R
-(blueprint: lem-weil-pbc-finite-pushforward-constructible-descent).
-
-Proof: obtain the torsion constructible inverse-image middle term and the kernel short
-exact sequence from `finite_pushforward_data`. Apply `constructible_of_short_exact`,
-which uses the quotient clause of `constructible_sub_quotient` (09BH (2)). -/
+forming the converse of Tag 095R. -/
 theorem CurveCoefficientPair.isConstructible_of_finite_pushforward
     {k : Type u} [Field k] [IsAlgClosed k] (P : CurveCoefficientPair k)
     {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k)) [IsCurve g]

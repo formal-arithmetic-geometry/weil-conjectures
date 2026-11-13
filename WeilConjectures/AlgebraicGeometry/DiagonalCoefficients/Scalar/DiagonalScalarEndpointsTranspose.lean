@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.RootEndpointTransp
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRealizedEndpointTranspose
 
 /-! # Normalized scalar endpoint composition
-
-Source: the exact functor single comparisons and adjunction triangle identities.
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -54,12 +51,7 @@ private theorem shifted_composition
     (shiftFunctor K k).map_comp, Category.assoc]
   rw [G.commShiftIso_hom_naturality_assoc]
 
-/-- Degree-zero scalar endpoint normalizations compose under the actual adjunction.
-Source: diagonal tower coefficient changes (1), successive scalar extension
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
-Proof: expand the collected-right composite adjunction. Apply exact-single
-transposition of composite adjunctions to the two endpoint normalizations. Naturality
-of the exact single comparison combines the two ordinary semilinear insertions. -/
+/-- Degree-zero scalar endpoint normalizations compose under the actual adjunction. -/
 theorem scalarEndpoints_transpose
     {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R₀] [IsCommMonObj R₀] [MonObj R₁] [IsCommMonObj R₁]
@@ -90,11 +82,7 @@ theorem scalarEndpoints_transpose
     s.lineW.iso.hom t.lineW.iso.hom s.lineW.semilinear.hom t.lineW.semilinear.hom
     (compatibilityEndpoint_transpose a s.lineW) (compatibilityEndpoint_transpose b t.lineW)
 
-/-- Successive scalar endpoint shifts form the shift of the degree-zero composite.
-Source: diagonal tower coefficient changes (1), exact shift comparisons
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
-Proof: unfold the two shifted endpoints and the composite target, and apply
-naturality of the second functor's shift comparison to the first endpoint. -/
+/-- Successive scalar endpoint shifts form the shift of the degree-zero composite. -/
 theorem scalarEndpoints_shift
     {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R₀] [IsCommMonObj R₀] [MonObj R₁] [IsCommMonObj R₁]
@@ -117,12 +105,7 @@ theorem scalarEndpoints_shift
   exact shifted_composition (derivedScalars a (diagonalSurface Y))
     (derivedScalars b (diagonalSurface Y)) s.lineW.iso.hom t.lineW.iso.hom (2 : ℤ)
 
-/-- Successive scalar normalizations prescribe the endpoint after finite realization.
-Source: diagonal tower coefficient changes (1), root insertion normalization
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
-Proof: compose the two scalar endpoint normalizations, then transpose through finite
-realization. Substitute the supplied equality of ordinary insertions before forming
-the exact single comparison, so the resulting formula uses its prescribed insertion. -/
+/-- Successive scalar normalizations prescribe the endpoint after finite realization. -/
 theorem scalarRealizedEndpoints_transpose
     {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R₀] [IsCommMonObj R₀] [MonObj R₁] [IsCommMonObj R₁]
@@ -166,11 +149,7 @@ theorem scalarRealizedEndpoints_transpose
       (Mod.comap (coefficientMap a (diagonalSurface Y))).map t.lineW.semilinear.hom)
     (scalarEndpoints_transpose s t) i w hw
 
-/-- Finite realization preserves the successive shifted endpoint normalization.
-Source: diagonal tower coefficient changes (1), exact shift comparisons
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
-Proof: rewrite the successive scalar endpoint as its degree-zero shift, then apply
-finite realization shift naturality to collect the composite shift comparison. -/
+/-- Finite realization preserves the successive shifted endpoint normalization. -/
 theorem scalarRealizedEndpoints_shift
     {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R₀] [IsCommMonObj R₀] [MonObj R₁] [IsCommMonObj R₁]
@@ -203,12 +182,7 @@ theorem scalarRealizedEndpoints_shift
 attribute [local semireducible] ScalarCompatibility.scalarAdjunction
   UniformizerSquareData.scalarAdjunction
 
-/-- The actual scalar and finite composite adjunction commutes with shifts.
-Source: diagonal tower coefficient changes (1), exact derived adjunctions
-(blueprint: lem-diagonal-scalar-endpoints-transpose).
-Proof: the two scalar adjunctions and the finite equivalence adjunction commute
-with shifts. Compose these structures and transport the result across the exact
-right-functor composition comparison. -/
+/-- The actual scalar and finite composite adjunction commutes with shifts. -/
 theorem scalarRealizedAdjunction_commShift
     {R₀ R₁ R₂ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R₀] [IsCommMonObj R₀] [MonObj R₁] [IsCommMonObj R₁]

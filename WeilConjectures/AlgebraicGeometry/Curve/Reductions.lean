@@ -256,9 +256,7 @@ eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the
 cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
 and bijectivity to the middle term, the hypotheses of the assertions being inherited by
 subsheaves and quotients, constructibility for subsheaves since `Λ` is noetherian; for `C₈` one uses
-`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
-(blueprint: theorem-cohomology-curves)
--/
+`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`. -/
 theorem IsCurve.Assertions.of_shortExact [IsNoetherianRing Λ] {k : Type u} [Field k]
     {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]
@@ -341,9 +339,7 @@ Spec k' -ι-> Spec k
 
 the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` is bijective for every `q`: both sides vanish for
 `q > 0`, and in degree zero both are the finite product of the stalks of `F` at the points of
-`C`. (blueprint: `lemma-sheaves-finite-support-finite-morphisms--2`) 
-(blueprint: lemma-sheaves-finite-support-finite-morphisms--2)
--/
+`C`. -/
 theorem IsCurve.bijective_cohomologyMap_of_topologicalKrullDim_le_zero {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)
@@ -422,9 +418,7 @@ The proof replaces `C` by `C_red` (a universal homeomorphism), writes the underl
 sheaf of `F` as the filtered colimit of its constructible subsheaves
 (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`), splits a constructible sheaf into
 its primary parts and dévisses an `r`-primary one along `0 → F[r] → F → F/F[r] → 0`
-(`AlgebraicGeometry.IsCurve.Assertions.of_shortExact`).
-(blueprint: theorem-cohomology-curves--7)
--/
+(`AlgebraicGeometry.IsCurve.Assertions.of_shortExact`). -/
 theorem IsCurve.bijective_cohomologyMap_of_forall_isReduced {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X X' : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsProper g] [IsReduced X]
@@ -524,9 +518,7 @@ extension invariance `C₇`.
 The proof is that of `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_forall_isReduced`,
 run for all eight assertions simultaneously: reduction to `C_red`, constructible approximation
 and continuity of cohomology, primary decomposition, and induction on the exponent along
-`0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`.
-(blueprint: theorem-cohomology-curves)
--/
+`0 → F[ℓ] → F → F/F[ℓ] → 0` using `AlgebraicGeometry.IsCurve.Assertions.of_shortExact`. -/
 theorem IsCurve.Assertions.of_forall_isReduced [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k]
     (H : ∀ {X : Scheme.{u}} (g : X ⟶ Spec (.of k)) [IsCurve g] [IsReduced X] (ℓ : ℕ)
@@ -571,9 +563,7 @@ and on which `F` is finite locally constant, and for it the eight assertions for
 equivalent to those for `j_! j^* F`: the open–closed sequence `0 → j_! j^* F → F → i_* i^* F → 0`
 has third term
 supported on the zero-dimensional complement `Z` of `U`, whose cohomology is concentrated in
-degree zero and invariant under field extension.
-(blueprint: theorem-cohomology-curves)
--/
+degree zero and invariant under field extension. -/
 theorem IsCurve.exists_dense_assertions_iff_lowerShriek [Finite Λ] {k : Type u} [Field k]
     [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -607,9 +597,7 @@ algebraically closed field `k` and `F` a constructible sheaf of `Λ`-modules kil
 `F` is finite locally constant, such that, writing `j_a : U_a ⟶ C` for the inclusions,
 `C(C, F) ↔ ∀ a, C(C, j_{a,!}(F|_{U_a}))`. This combines the open–closed sequence
 `0 → j_! j^* F → F → i_* i^* F → 0`, the assertions on the zero-dimensional `Z`, the
-decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage.
-(blueprint: theorem-cohomology-curves)
--/
+decomposition `j_! j^* F = ⨁_a j_{a,!}(F|_{U_a})` and dévissage. -/
 theorem IsCurve.exists_dense_assertions_iff_forall_lowerShriek [Finite Λ] {k : Type u}
     [Field k]
     [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C]
@@ -655,9 +643,7 @@ directly provide the normalisation of a reduced curve together with its finitene
 state the lemma for an arbitrary finite surjective `ν` which is an isomorphism over a dense open,
 the properties of the normalisation that are used. The compatibility of the sequence with field
 extension and restriction to opens, also part of the blueprint statement, is not recorded in
-this existential form. (blueprint: `lemma-normalization-constant-sheaf--1`) 
-(blueprint: lemma-normalization-constant-sheaf--1)
--/
+this existential form. -/
 theorem exists_mono_lowerShriek_constantModSheaf_lowerStar {k : Type u} [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
     (ν : X' ⟶ X) [IsFinite ν] [Surjective ν] (V : X.Opens) (hV : Dense (V : Set X))
@@ -714,9 +700,7 @@ assertions for `j_! 𝐅_ℓ` on `X` follow from those for `j'_! 𝐅_ℓ` on th
 (which are the Kummer and Artin–Schreier calculations): finite direct image is exact and
 preserves cohomology, and the normalisation exact sequence
 `AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar` has a third term whose
-cohomology is concentrated in degree zero and invariant under field extension.
-(blueprint: theorem-cohomology-curves)
--/
+cohomology is concentrated in degree zero and invariant under field extension. -/
 theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite_coefficients {k : Type u}
   [Field k]
     [IsAlgClosed k] {X X' U U' : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]

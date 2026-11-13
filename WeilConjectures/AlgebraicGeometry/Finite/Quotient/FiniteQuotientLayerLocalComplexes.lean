@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerLoca
 
 /-! # Local algebraic complexes for a coefficient-filtration outer term
 Source: Stacks Project, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-layer-local-complexes).
 -/
 
 @[expose] public noncomputable section
@@ -25,25 +24,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 set_option linter.unusedVariables false in
 /-- The residue complex computes the coefficient layer after ordinary tensor.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-layer-local-complexes).
-
-Proof: Put Q=I^(n+1)/I^(n+2), a submodule of the finite ring A/I^(n+2).
-Thus Q has a finite underlying set. The ideal I annihilates Q, so Q is a finite
-module over A/I. The quotient compatibility squares identify the actual sheaf kernel
-with constant Q over the
-successor ring. Derived tensor balancing identifies the layer object with the
-residue reduction tensored over A/I with Q, followed by scalar restriction. On
-each residue-model chart use the given bounded finite-projective complex P.
-Its flat terms compute the derived tensor with Q by ordinary tensor. Each term
-P^i tensor Q is finite over A/I and hence over the successor ring, and it is zero
-outside [a,b]. Regard this as a complex of successor modules. Exact constant
-realization and exact scalar and slice restriction identify its algebraic
-homology with the slice of the actual layer's homology. Pull back the original
-cover along each W -> V to obtain all charts in the stated predicate. On empty
-charts and for the zero coefficient ring the same complexes and identifications
-apply. This uses only residue models, without any model or homology hypothesis
-on the successor reduction. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I. -/
 theorem finiteQuotient_layer_local_complexes
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

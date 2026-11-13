@@ -17,9 +17,6 @@ import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 
 /-!
 # Etale modules on a field and discrete Galois modules
-
-Source: blueprint `sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md`,
-node `lem-exc-field-discrete-modules` (blueprint: lem-exc-field-discrete-modules).
 -/
 
 @[expose] public section

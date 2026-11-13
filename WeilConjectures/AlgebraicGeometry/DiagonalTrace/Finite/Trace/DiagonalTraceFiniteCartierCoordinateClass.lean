@@ -43,9 +43,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- The canonical finite Cartier class with its scalar endpoints explicitly shared.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-coordinate-class). -/
+/-- The canonical finite Cartier class with its scalar endpoints explicitly shared. -/
 @[irreducible] def finiteCartierCoordinateClass
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     (n : ℕ) :
@@ -56,10 +54,7 @@ Source: diagonal trace proof (2), finite Cartier endpoint.
       (finiteCartierSourceObject l Y n) (finiteCartierLineObject l Y n) 2 :=
   finiteCartierClass l Y hY n
 
-/-- The typed coordinate class is the original canonical class.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: lem-sfb-diagonal-trace-finite-cartier-coordinate-class-eq).
-Proof: unfold the deterministic typed alias. -/
+/-- The typed coordinate class is the original canonical class. -/
 theorem finiteCartierCoordinateClass_eq
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤))) (n : ℕ) :
     finiteCartierCoordinateClass l Y hY n = finiteCartierClass l Y hY n := by

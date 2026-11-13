@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantRealizationScalarRestr
 /-! # Constant realization and scalar restriction
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL.
-(blueprint: lem-weil-pbc-constant-realization-scalar-restriction).
 -/
 
 @[expose] public noncomputable section
@@ -110,13 +109,7 @@ private theorem constantRealization_underlying_eq (X : Scheme.{t})
 
 /-- Constant realization commutes naturally with restriction of coefficient scalars.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL.
-(blueprint: lem-weil-pbc-constant-realization-scalar-restriction).
-
-Proof: use the canonical objectwise comparison induced by the module-sheafification
-adjunction. Its underlying abelian sheaf map is the identity: the adjunction sends
-it to the sheafification unit. Faithfulness of the forgetful functor therefore
-proves naturality. This argument works for arbitrary rings and modules. -/
+Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL. -/
 theorem constantRealization_restrictScalars (X : Scheme.{t})
     {B D : Type t} [CommRing B] [CommRing D] (f : B →+* D) :
     Nonempty

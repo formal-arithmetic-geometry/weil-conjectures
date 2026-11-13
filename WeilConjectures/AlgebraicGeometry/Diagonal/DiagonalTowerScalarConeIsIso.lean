@@ -42,8 +42,7 @@ import WeilConjectures.CategoryTheory.RegularScalarQuotient.RegularScalarQuotien
 
 /-! # Scalar cones of strict ordinary quotient limits
 
-Source: Stacks 099M and 0941; diagonal tower limit proof paragraph (3).
-(blueprint: lem-sfb-diagonal-tower-scalar-cone-is-iso).
+Source: Stacks 099M and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -240,37 +239,7 @@ private theorem scalarConeAugmentation_at_zero_isIso
 
 /-- The explicit scalar-cone comparison for a regular strict quotient tower is invertible.
 
-Source: Stacks 099M, the proof of naive completion; Stacks 0941; blueprint
-`sk-prop-diagonal-tower-limit.proof.md`, paragraph (3).
-(blueprint: lem-sfb-diagonal-tower-scalar-cone-is-iso).
-
-Proof: exact scalar extension preserves all the monic scalar maps on P. Identify
-its ordinary quotients with the scalar cokernels by the given colimit property,
-compatibly with transitions by cancellation of the quotient epimorphisms. Adjoin
-the zero quotient at exponent zero. The resulting tower T is normalized: the
-scalar annihilation follows by cancelling the quotient projection; the quotient
-of P/ell^m by ell^k is P/ell^k for k <= m; regularity identifies the kernel of
-ell^b on P/ell^(a+b) with the image of ell^a. These are degreewise statements and
-therefore give the three fields of IsNormalizedAdicTower for the complex tower.
-Apply the normalized strict-limit theorem to a K-injective replacement I of the
-strict tower complex. At I, L.eta is invertible, so cancel it in the two
-normalization formulas to identify the cone legs with L.projection followed by
-the exact evaluation comparison. Evaluation of the replacement is a levelwise
-quasi-isomorphism. Transport this cone back along those isomorphisms and
-L.R applied to the replacement, using naturality of L.projection. This gives
-the required homotopy-limit cone at the original tower. Deleting
-the initial zero term and restricting to any finite tail preserves this property.
-Apply the existing integer-linear scalar cone, which is triangulated and preserves
-countable products, to the tail starting at n+1. Its representative comparison
-identifies the resulting cone with a homotopy limit of the strict multiplication
-cones for ell^(n+1). The theorem IsNormalizedAdicTower.isIso_π_comp says its
-augmented zeroth projection is invertible. At that zeroth level the reduction is
-the identity. Its cone augmentation agrees with the projection used in
-our defined map: their degree-zero inclusion composites are the identity and their
-shifted inclusion components are zero. Naturality of the representative comparison
-therefore identifies this invertible augmented projection with the explicitly
-defined map, up to invertible evaluation factors. This proves its invertibility.
-The same argument includes n=0, a zero complex and the empty scheme. -/
+Source: Stacks 099M, the proof of naive completion; Stacks 0941. -/
 theorem diagonal_tower_scalar_cone_isIso (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})
     [HasDerivedCategory.{u + 1} (DiagonalMod ℓ W)]
     [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]

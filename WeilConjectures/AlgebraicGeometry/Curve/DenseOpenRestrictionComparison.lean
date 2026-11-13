@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.LowerShriekCoefficientCounit
 # DenseOpenRestrictionComparison
 
 Source: Stacks Project, Lemma 0GJA.
-(blueprint: lem-pbc-j2-dense-open-restriction-comparison).
 -/
 
 @[expose] public section
@@ -31,19 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
-(blueprint: lem-pbc-j2-dense-open-restriction-comparison).
-
-Proof: Let a : W → X be any open immersion. Intersecting the dense open U with W leaves a
-dense open with finite zero-dimensional complement. The open-closed sequence on X
-and its restriction to W therefore identify H^2(G) with H^2(F), both on X and on W.
-The pullback long exact ladder makes these identifications commute with restriction
-along a. Surjectivity transports in both directions across this square of additive
-equivalences: lift the corresponding class through the surjective restriction map,
-then through the inverse horizontal equivalence; commutativity and injectivity of the
-other horizontal equivalence give the required equality. Since a was arbitrary this
-proves exactly the equivalence of the two restriction predicates.
--/
+/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_restriction_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

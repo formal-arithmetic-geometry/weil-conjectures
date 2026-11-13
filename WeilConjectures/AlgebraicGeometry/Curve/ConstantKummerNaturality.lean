@@ -16,10 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 
 /-!
 # Kummer naturality in primitive-root coordinates
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, Kummer naturality in the proper and affine
-cases (blueprint: lem-sc-constant-kummer-naturality).
 -/
 
 @[expose] public section

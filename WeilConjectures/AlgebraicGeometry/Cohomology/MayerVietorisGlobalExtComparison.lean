@@ -90,22 +90,7 @@ private theorem extComparison
 
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
 /-- Compatible Ext presentations for a single cohomology term.
-Source: Stacks Project, Tag 01EB and Section 01F7.
-(blueprint: lem-pc-global-free-ext-comparison)
-
-Proof: For every open U, Hom(U, top) is a singleton. The free abelian group
-on this singleton is canonically ULift integers, naturally in U (check on the
-free generators). Sheafifying gives topFreeIso from the free sheaf on top to
-the constant integer sheaf. Precomposition with this isomorphism gives e;
-precomposition with its inverse-image isomorphism followed by constIso gives e'.
-The scalar actions are definitionally Ext postcomposition, so associativity
-proves both scalar identities. The definition of H.baseChangeLinear applies
-inverse image to Ext and composes with constIso.inv and the coefficient map.
-Functoriality of Ext composition, associativity, and cancellation of constIso.hom
-with constIso.inv prove the final identity. All equivalences are constructed
-explicitly. The construction also applies to the empty scheme, degree zero,
-and zero coefficients, without additional hypotheses.
--/
+Source: Stacks Project, Tag 01EB and Section 01F7. -/
 theorem H.globalFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

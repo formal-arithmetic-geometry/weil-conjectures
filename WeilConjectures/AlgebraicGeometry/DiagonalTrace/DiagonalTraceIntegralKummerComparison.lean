@@ -298,24 +298,7 @@ private theorem ordinaryKummer_comp (A : Type (u + 1)) [CommRing A]
 ordinary etale Kummer class. This assertion has no Chern data, scalar restriction,
 frame, supplied finite lift, support, or limiting arrow.
 
-Source: geometric tower classes proof (2), positive Kummer connecting map;
-Cartier reduction site comparison, Kummer comparison paragraph; Stacks 03PL.
-(blueprint: lem-sfb-diagonal-trace-integral-kummer-comparison).
-
-Proof: represent lineBundleClass as an Ext class and evaluate the Yoneda
-composite. Exact functors preserve Yoneda composition. Evaluation composed with
-the constant tower functor is identity, so the evaluated line-bundle extension
-is the etale Picard extension mapped through comparison, with integerComparison
-and cartierUnitsComparison at its ends. Compare the evaluated short complex of
-k with cartierProKummerComplex using inclusion_eq and power_eq; naturality of
-extension classes identifies their connecting classes. Compose with the root
-map and apply kummer_comparison: the pro-etale Kummer unit is the comparison
-image of the ordinary etale Kummer unit. Ext associativity moves the integral
-source comparison outside and gives Pic(P) composed with that etale unit.
-Sheaf.H.map_apply and Sheaf.H.δSucc_apply identify this composite with
-ordinaryFiniteKummerClass. The target comparison equals forgetComparisonIso.hom
-by its adjunction-mate formula. Positive n+1 covers n=0; the same functorial
-calculation covers zero coefficient rings, trivial P and the empty scheme. -/
+Source: Stacks 03PL. -/
 theorem diagonalTrace_integralKummer_comparison
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (n : ℕ)

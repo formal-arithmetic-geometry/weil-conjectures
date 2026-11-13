@@ -142,27 +142,7 @@ private theorem openBaseChangeInclusion_opensRange
     Scheme.Hom.opensRange_pullbackSnd, Scheme.Opens.opensRange_ι]
 
 /-- Restriction from the free sheaf on an open, before and after base change, is bijective.
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
-(blueprint: lem-pc-open-restriction-ext-bijective)
-
-Proof: Restriction preserves injective abelian sheaves, and is bijective on
-ordinary morphisms from the free sheaf of its image open. Induct on Ext degree,
-generalizing the coefficient sheaf. Degree zero is the morphism assertion through
-Ext.mk₀. In the successor step choose an injective presentation and its cokernel
-short exact sequence. Exact restriction preserves this sequence and the middle
-object is still injective. The two covariant Ext sequences are right exact and
-the connecting morphisms commute with the exact-functor map. The induction
-hypothesis and the additive five lemma give bijectivity in the next degree.
-For base change, express the constructed inclusion as a pullback projection
-preceded by the inverse of the pullback-pasting isomorphism. It is open and its
-image is the preimage of W. The inverse-image/free-sheaf isomorphism, proved by
-adjunction and Yoneda, transports the ordinary morphism assertion to the pulled
-free sheaf. Apply the same induction. Finally, precomposition with e.inv or
-e'.inv and postcomposition with d.hom or d'.hom are bijective, with inverses
-induced by the inverse object isomorphisms. This proves the specific restriction
-maps for all independently chosen isomorphisms. Empty opens, top opens and zero
-coefficients are included; no flatness or quasi-coherence is used.
--/
+Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7. -/
 theorem H.openRestrictionExt_bijective
     (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens)
     (e : (invImage W.ι).obj (H.openFreeSheaf W) ≅

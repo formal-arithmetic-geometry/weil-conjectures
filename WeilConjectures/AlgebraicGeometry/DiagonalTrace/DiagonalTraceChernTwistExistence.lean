@@ -88,26 +88,7 @@ private def kummerData (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
   zero := kummerZero l T
   exact := kummerExact l T hT
 
-/-- Normalized simultaneous Kummer reduction admits the actual tensor/Hom line twist.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clauses
-(1)--(4), and `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1).
-(blueprint: lem-sfb-diagonal-trace-chern-twist-existence).
-
-Proof: use the integral quotient-system K-flat reduction model. Its unit comparison
-is induced by the integer generator; its root comparison is induced by the Kummer
-short exact sequence, with the positive boundary convention. Extend scalars along
-the actual quotient coefficient map. The scalar adjunction fixes the unit map by
-one mapping to one. Evaluating the reduction model gives the finite Kummer
-boundary and hence FiniteChernNormalization. On the pro-etale cover consisting of
-compatible primitive roots, the root module and its scalar extension are free of
-rank one. Tensor by this line and internal Hom from this same line are inverse
-functors: the local coevaluation sends x to (y maps to x tensor y), and evaluation
-sends z tensor y to z(y). These formulas glue and satisfy the triangle identities.
-They give Twisting with its stated unit normalization. For the empty scheme all
-objects and equations are unique; the construction also applies at l = 2 and at
-level zero, which denotes the quotient modulo l rather than the zero ring.
--/
+/-- Normalized simultaneous Kummer reduction admits the actual tensor/Hom line twist. -/
 theorem exists_diagonalTraceChernTwist (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤))) :
     ∃ c : Chern l (ULift.{u} (Padic l)) T,

@@ -13,10 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceFiniteIndexIso
 
 /-! # Finite covers of projective schemes over affine opens
 
-Source: blueprint, chap-Smooth-purity, sk-prop-sf-cbc, node
-`proposition-proper-direct-image-finite-coefficients`, order 1601 (blueprint:
-proposition-proper-direct-image-finite-coefficients). The conclusion uses the node's corrected
-affine-local H-projective convention.
+ The conclusion uses the node's corrected affine-local H-projective convention.
 -/
 
 @[expose] public section
@@ -45,8 +42,6 @@ private theorem finite_over_projective_embedding_affine {S T Y : Scheme.{u}} [Is
 
 /-- Over each affine open of a Noetherian base, a finite cover of a projective scheme
 admits a closed immersion into a finite-dimensional projective space over that open.
-Source: blueprint, chap-Smooth-purity, sk-prop-sf-cbc, order 1601
-(blueprint: proposition-proper-direct-image-finite-coefficients).
 
 Proof plan:
 1. Fix an affine open U. Restrict the closed projective embedding of T and the finite
@@ -65,12 +60,11 @@ Proof plan:
    (def-nagata-relative-projective-space, def-weil-closed-immersion,
    def-weil-finite-integral-morphism, lem-weil-pbc-invertible-pullback-tensor,
    def-weil-pbc-ample-invertible-module).
-5. The affine-base ample immersion theorem gives an immersion into some P^N_U over U
-   (lem-weil-pbc-ample-very-ample-immersion-affine-base).
+5. The affine-base ample immersion theorem gives an immersion into some P^N_U over U.
 6. Projective space is separated over U, so the immersion is proper and hence closed
    (lem-weil-pbc-projective-space-proj-separated, lem-weil-pbc-proper-to-separated,
-   lem-weil-pbc-proper-immersion-closed). With quasi-compactness this is projectivity
-   (def-pc-projective-morphism). For an affine base take U to be the whole base. -/
+   lem-weil-pbc-proper-immersion-closed). With quasi-compactness this is projectivity.
+For an affine base take U to be the whole base. -/
 theorem finite_over_projective_affineLocally {S T Y : Scheme.{u}}
     [CompactSpace S] [IsLocallyNoetherian S] (p : T ⟶ S) [IsProjective p]
     (h : Y ⟶ T) [IsFinite h] :

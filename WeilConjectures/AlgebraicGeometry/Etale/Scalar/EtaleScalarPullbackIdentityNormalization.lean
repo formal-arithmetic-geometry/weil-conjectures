@@ -12,9 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackComposition
 
 /-! # Identity normalization of geometric and scalar pullback comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E46 (remark-compose-base-change),
-identity specialization; Tags 03D8 and 0D6D for the ordinary and derived compositors.
-(blueprint: lem-pur-etale-scalar-pullback-identity-normalization).
+Source: Stacks Project, sites-cohomology.tex, Tag 0E46, identity specialization; Tags 03D8 and 0D6D
+for the ordinary and derived compositors.
 -/
 
 @[expose] public section
@@ -92,35 +91,8 @@ private theorem exact_identity_unit
 
 /-- The canonical identity-identity geometric compositor and scalar/pullback comparison
 become identity transformations under the canonical geometric identity comparisons.
-Source: Stacks Project, Tag 0E46 (remark-compose-base-change), identity specialization,
-with ordinary formulas from Tag 03D8 and derived normalization from Tag 0D6D.
-(blueprint: lem-pur-etale-scalar-pullback-identity-normalization).
-
-Proof: (1) Resolve each complex by a flat-term K-flat complex using
-lem-pc-kflat-resolution. Geometric pullback and scalar extension are computed on these
-models by lem-weil-pbc-ringed-topoi-derived-tensor-pullback and
-situation-conventions, with their specified counits.
-(2) Write I_R for ordinary identity module pullback and F for scalar extension.
-The ordinary identity map h_R sends m tensor r to rm, and the compositor d_R sends
-m tensor r to (m tensor 1) tensor r. Thus h_R I_R(h_R) d_R = h_R.
-The adjunction-conjugate scalar comparison a of def-pur-scalar-pullback-representative-data
-sends (m tensor b) tensor b' to (m tensor 1) tensor bb'. Both adjunction routes send the
-unit generator m to (m tensor 1) tensor 1, so this is the specified comparison.
-Consequently F(h_A) a = h_B. Tensor balancing gives equality of presheaf maps and of
-sheafifications, as in def-pur-sheaf-tensor-product. These degreewise maps introduce no sign.
-(3) Localize the first equality. The geometric identity and composition comparisons of
-lem-sfb-ringed-derived-monoidal-comparisons are induced by h_R and d_R, giving the first
-two conjuncts on all representing complexes.
-(4) For a K-flat A-complex P, write r_P for the scalar counit and g_R for the geometric
-counit. The defining square of def-pur-etale-scalar-pullback-iso is
-lambda ; S(g_A) ; r_(I_A P) = P_B(r_P) ; g_B ; Q(a_P).
-The geometric identity is Q(h_R) g_R. Naturality of r with h_A, followed by F(h_A) a = h_B,
-therefore gives r_P S(i_A) lambda = r_P i_B. Cancel the invertible r_P, using
-lem-pur-derived-change-of-rings, to obtain the third conjunct on K-flat representatives.
-(5) Every derived object is isomorphic to such a representative. Naturality transports
-each equality along that isomorphism, and cancellation gives the equality at every object.
-Conjugating by the identity comparisons now gives identity transformations. Neither
-boundedness nor flatness of B over A is used. -/
+Source: Stacks Project, Tag 0E46, identity specialization, with ordinary formulas from Tag 03D8 and
+derived normalization from Tag 0D6D. -/
 theorem leftDerivedUpperStarId_scalarExtension_normalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :

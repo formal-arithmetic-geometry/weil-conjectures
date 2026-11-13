@@ -44,10 +44,7 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportExchangeTransport
 
 /-! # Identity-normalized compact origin of a closed-section map
 
-Source: current blueprint, sec-smooth-purity/sk-prop-an,
-thm-pur-rank-one-thom.proof.md, Step 1, induced global morphism;
-Stacks Project, Tags 0F7B and 0F7J
-(blueprint: lem-pur-closed-section-compact-origin).
+Source: Stacks Project, Tags 0F7B and 0F7J.
 
 The source identifications are assembled from the published proper, composition and
 identity comparisons. The given compactification is retained throughout.
@@ -109,14 +106,13 @@ private lemma compact_comparison_naturality {X Y : Scheme.{u}} {v : X ⟶ Y}
     (compactExchangeTransportComparison P.Coefficient c).hom.naturality t
 
 /-- The identity-normalized source equation and transport of the given closed-section map.
-Source: current blueprint, thm-pur-rank-one-thom.proof.md, Step 1; Stacks 0F7B, 0F7J
-(blueprint: lem-pur-closed-section-compact-origin).
+Source: Stacks 0F7B, 0F7J.
 
 Proof, following the node's ten steps:
 1. Exact etale extension by zero preserves a lower cohomological bound. Resolve its
 bounded-below output by bounded-below injectives (lem-weil-pbc-module-sheaves-enough-injectives,
 lem-weil-pbc-dplus-injective-representative). They are K-injective, and total derived proper
-image is their termwise image, still bounded below (lem-weil-pbc-kinjective-total-derived).
+image is their termwise image, still bounded below.
 2. The section is proper. Finite type over the field makes B, X and the compactification
 ambient Noetherian. Etale closed image is exact; pro-etale closed image is exact for a
 quasi-compact open complement. The identity-open comparison removes identity extension,
@@ -144,7 +140,7 @@ gives b_(rt) C(D_(r,t) Gamma_e). Identity compatibility removes b_id; naturality
 and epsilon_s = P_s(chi) b_s give exactly the first displayed equation below.
 9. Naturality of beta at the actual ce, followed by F^p(theta) and the assumed class-map
 square, gives psi C(F^e ce) = F^p(cp) F^p(epsilon_s) beta_source. Psi is an isomorphism
-because theta and beta are isomorphisms (proposition-comparison-immersions--4).
+because theta and beta are isomorphisms.
 10. Precompose with C(sigma_e inverse) and use step 8 to cancel the two sigma factors.
 The result is psi C(tau_e) = tau_p chi. The degree-zero source and bounded-below target,
 with sourceWitness and targetWitness, retain the actual antecedent and map tau_e.

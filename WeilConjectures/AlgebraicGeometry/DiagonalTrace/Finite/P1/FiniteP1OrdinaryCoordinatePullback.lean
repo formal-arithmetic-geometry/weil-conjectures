@@ -177,9 +177,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1LocalCo
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1RealizedCoordinatePullback
 
 /-! # Pullback of arbitrary ordinary arrows in the finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-p1-ordinary-coordinate-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -218,18 +215,7 @@ attribute [local irreducible] Functor.mapDerivedCategory SpTowerP1.nuSingle
 
 /-- Pullback and site comparison send the projective-line endpoint coordinates to
 the local coordinates of the ordinary pulled arrow. This is functorial for every
-arrow, before specifying its cohomology class.
-Source: diagonal-tower trace (1), exact site comparison and inverse image
-(blueprint: lem-sfb-finite-p1-ordinary-coordinate-pullback).
-
-Proof: expand the two endpoint coordinates. Naturality of the site-comparison
-pullback square conjugates the pullback of the comparison image to the comparison
-image of ordinary pullback. The constant coordinate is its source comparison;
-uniqueness of normalized Tate transport identifies its target comparison with
-ordinaryFiniteShiftedLinePullback. Apply the realization functor and compose with
-the inverse source single comparison and the shifted target single comparison.
-All cancellation is by isomorphisms, so zero coefficients and empty schemes are
-included. -/
+arrow, before specifying its cohomology class. -/
 theorem finiteP1_ordinary_coordinate_pullback (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] {X S : Scheme.{u}}
     (e : X ≅ ProjectiveLine S) (hS : IsUnit (l : Γ(S, ⊤)))

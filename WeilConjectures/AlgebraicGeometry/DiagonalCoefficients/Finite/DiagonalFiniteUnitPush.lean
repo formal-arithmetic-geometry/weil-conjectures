@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFin
 import WeilConjectures.CategoryTheory.SixFunctors.CompIsoApp
 
 /-! # Finite realization of the coefficient-unit arrow
-
-Source: diagonal tower coefficient changes (1), the normalized finite push square.
 -/
 
 @[expose] public noncomputable section
@@ -34,25 +32,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
   Functor.rightAdjoint FiniteRealization.derivedUnit
   HasDerivedCategory.ofIsGrothendieckAbelian DerivedCategory.singleFunctors
 
-/-- Finite realization preserves the canonical coefficient-unit adjunct.
-Source: diagonal tower coefficient changes (1), ordinary finite units and adjunction.
-(blueprint: lem-diagonal-finite-unit-push).
-
-Proof: the ordinary push-square equation identifies its underlying map with the
-ordinary direct image comparison. The finite realization unit is normalized by a
-unital coefficient-ring isomorphism, so the ordinary coefficient-unit adjunct is
-sent to the ordinary constant-coefficient unit adjunct. More explicitly, after
-the faithful underlying-sheaf functor, compare the maps on the coefficient-one
-section. The ordinary-square equation and the unital coefficient isomorphisms
-send this section to one on both sides. A morphism from the constant free
-rank-one module is determined by that section, giving the ordinary equality.
-Apply the single-object case of the full derived-unit normalization to the regular
-module. The canonical
-single comparisons cancel; hcanonical identifies the remaining supplied right
-derived unit with the canonical derived unit. The canonical derived adjunction
-unit formula then gives the adjunct of geoP1UnitPullback. This statement concerns
-only coefficient units: no Tate-line comparison, Chern class or trace occurs, and
-no nonzero-ring assumption is needed. -/
+/-- Finite realization preserves the canonical coefficient-unit adjunct. -/
 theorem finite_unit_push
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})

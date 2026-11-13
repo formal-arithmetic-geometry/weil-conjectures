@@ -120,13 +120,6 @@ private theorem quotientRootProjection_epi
 /-- A root-normalized projection from the scalar quotient of the completed positive
 Tate line to the free module on the finite root sheaf is invertible.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), expected reductions;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, positive inverse-limit
-construction; sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, compatible root bases.
-(blueprint: lem-diagonal-quotient-root-projection-iso).
-
 Proof in words. The root-tower projection is locally surjective. Applying the free
 module functor preserves its epimorphism. By the displayed normalization it factors
 through q, so q is epic. Choose the common compatible-root cover. The integral line

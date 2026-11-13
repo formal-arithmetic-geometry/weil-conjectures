@@ -9,9 +9,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Ordered affine space and the iterated affine line
-
-Source: the coordinate-chart passage in corollary-cup-product-pairing--1, proof step 9.
-(blueprint: lem-pd-affine-space-iterated-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -21,12 +18,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 -- Coordinate recursion unfolds the affine-line tower and its section pullbacks.
-/-- A map to the affine tower is determined by its base map and ordered coordinates.
-Source: universal property of relative affine space, iterated one coordinate at a time
-(blueprint: lem-pd-affine-space-iterated-coordinates).
-Proof: induct on the tower length. The length-zero projection is the identity.
-At a successor, use the affine-line universal property; the old coordinates
-identify the base map by induction and coordinate zero identifies the new line map. -/
+/-- A map to the affine tower is determined by its base map and ordered coordinates. -/
 theorem iteratedAffineLine.hom_ext {S X : Scheme.{u}} :
     ∀ {r : ℕ} {f g : X ⟶ iteratedAffineLine S r},
       f ≫ iteratedAffineLineProj S r = g ≫ iteratedAffineLineProj S r →
@@ -49,11 +41,7 @@ theorem iteratedAffineLine.hom_ext {S X : Scheme.{u}} :
       exact hc 0
 
 /-- Affine space and the ordered affine tower are canonically isomorphic with
-identical coordinates and base map. Source: corollary-cup-product-pairing--1, local smooth
-coordinates (blueprint: lem-pd-affine-space-iterated-coordinates).
-Proof: use their universal properties to define both maps by the same ordered
-coordinate functions. The two extensionality lemmas identify each composite with
-its identity, including the empty-coordinate case. -/
+identical coordinates and base map. -/
 def AffineSpace.iteratedIso (S : Scheme.{u}) (r : ℕ) :
     AffineSpace (ULift.{u} (Fin r)) S ≅ iteratedAffineLine S r where
   hom := Scheme.Hom.toIteratedAffineLine (AffineSpace (ULift.{u} (Fin r)) S ↘ S)
@@ -71,18 +59,14 @@ def AffineSpace.iteratedIso (S : Scheme.{u}) (r : ℕ) :
     · intro i
       simp [Scheme.Hom.toIteratedAffineLine_appTop_coord]
 
-/-- The ordered comparison preserves the structural projection.
-Source: its defining universal property
-(blueprint: lem-pd-affine-space-iterated-coordinates). -/
+/-- The ordered comparison preserves the structural projection. -/
 @[reassoc (attr := simp)]
 theorem AffineSpace.iteratedIso_hom_proj (S : Scheme.{u}) (r : ℕ) :
     (iteratedIso S r).hom ≫ iteratedAffineLineProj S r =
       (AffineSpace (ULift.{u} (Fin r)) S ↘ S) :=
   Scheme.Hom.toIteratedAffineLine_proj _ _
 
-/-- The ordered comparison preserves the zero section.
-Source: its defining universal property
-(blueprint: lem-pd-affine-space-iterated-coordinates). -/
+/-- The ordered comparison preserves the zero section. -/
 theorem AffineSpace.zeroSection_iteratedIso (S : Scheme.{u}) (r : ℕ) :
     zeroSection (ULift.{u} (Fin r)) S ≫ (iteratedIso S r).hom =
       Scheme.Hom.toIteratedAffineLine (𝟙 S) (fun _ : Fin r ↦ 0) := by

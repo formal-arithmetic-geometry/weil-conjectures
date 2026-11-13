@@ -97,20 +97,7 @@ private theorem first_comparison (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤)))
 
 /-- The finite root projection and the finite-root site comparison give normalized
 comparison isomorphisms in every nonnegative degree.
-Source: `lem-amb-finite-tate-site-descent`, proof steps 1 and 3; Stacks 03PK and 03EK
-(blueprint: lem-amb-finite-tate-normalized-comparisons).
-
-Proof: use `AmbTateRootProjectionData.theta` to identify the first pro-etale twist
-with the scalar extension of the finite root module. Constant scalar restriction
-identifies this extension with `finiteRootProTensor`; its pure sections are the
-same tensors. Compose the finite-root site comparison with the inverse of this
-identification. The root-unit formula and injectivity of the finite-root inclusion
-prove the required normalization on arbitrary pro-etale tests. In degree zero use
-the constant-module comparison. In degree k+2 tensor the comparisons for k+1 and 1,
-using the monoidal comparison inverse image and constant scalar restriction. The
-monoidal unit and tensor equations carry precisely the two recursively specified
-pure generators to one another. This argument includes the empty scheme and
-requires only annihilation of the coefficient ring by the stated positive power. -/
+Source: Stacks 03PK and 03EK. -/
 theorem finite_tate_normalized_comparisons :
     ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →
       ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),

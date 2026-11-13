@@ -19,9 +19,8 @@ coefficients, and `deg D = ∑_P n_P`. For a nonzero rational function `f ∈ k(
 `P`; such divisors are *principal*, and the divisor class group is
 `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`.
 
-The function field `k(X)` (blueprint `def-sc-function-field`) is Mathlib's
-`AlgebraicGeometry.Scheme.functionField`, the stalk at the generic point; it is the fraction
-field of `Γ(X, U)` for every nonempty affine open `U`
+The function field `k(X)` is Mathlib's `AlgebraicGeometry.Scheme.functionField`, the stalk at the
+generic point; it is the fraction field of `Γ(X, U)` for every nonempty affine open `U`
 (`AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen`).
 
 ## Main definitions
@@ -54,14 +53,14 @@ namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u})
 
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
+/-- Divisors, principal divisors, class group
 
 A *divisor* on a curve `X` is a finite formal sum `D = ∑_P n_P [P]` of closed points `P` of `X`
 with integer coefficients: `Div(X)` is the free abelian group on the closed points of `X`. -/
 abbrev Divisor : Type u :=
   closedPoints X →₀ ℤ
 
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
+/-- Divisors, principal divisors, class group
 
 The *degree* `deg D = ∑_P n_P` of a divisor `D = ∑_P n_P [P]`. Over an algebraically closed
 field, where every closed point is rational, this is the usual degree. -/
@@ -156,7 +155,7 @@ lemma ord_one (x : X) : X.ord 1 x = 0 := by
   omega
 
 variable (X) in
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
+/-- Divisors, principal divisors, class group
 
 The *divisor* `div f = ∑_P v_P(f) [P]` of a nonzero rational function `f ∈ k(X)ˣ` on a Noetherian
 integral scheme `X`, where `v_P` is the order of vanishing
@@ -181,14 +180,14 @@ lemma div_apply (f : Additive X.functionFieldˣ) (P : closedPoints X) :
   rfl
 
 variable (X) in
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
+/-- Divisors, principal divisors, class group
 
 The subgroup of *principal divisors* `div f`, for `f ∈ k(X)ˣ`. -/
 noncomputable def principalDivisors : AddSubgroup X.Divisor :=
   X.div.range
 
 variable (X) in
-/-- Blueprint `def-sc-divisor`: Divisors, principal divisors, class group
+/-- Divisors, principal divisors, class group
 
 The *divisor class group* `Cl(X) = Div(X) / {div f : f ∈ k(X)ˣ}`. -/
 abbrev DivisorClassGroup : Type u :=

@@ -19,9 +19,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # The completed first square for a normalized Chern adjunct
-
-Source: diagonal tower coefficient changes (1), passage from the canonical model to
-completed coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -62,11 +59,7 @@ private theorem singleFactor (M : A) :
   exact (Iso.inv_comp_eq (U.mapDerivedCategoryFactors.app _)).mp
     (U.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app M)
 
-/-- The full derived-unit square evaluated on a single coefficient object.
-Source: diagonal trace universal-unit normalization.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: evaluate the normalization on the single complex and cancel the canonical
-single-complex comparisons. Their coherence is checked in each degree. -/
+/-- The full derived-unit square evaluated on a single coefficient object. -/
 private theorem single_square
     (s : DiagonalTrace.ExactSquareOfUniverses F G U V RF RG ordinary) (M : A) :
     V.mapDerivedCategory.map (singlePushComparison RF M) ≫
@@ -301,22 +294,7 @@ private theorem map_comp_naturality_square
   simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using
     congrArg (fun k ↦ U.map a ≫ k) (σ.naturality f)
 
-/-- Realizing the normalized completed adjunct gives the condensed adjunct of the local arrow.
-Source: diagonal tower coefficient changes (1), and diagonal tower trace proof (1).
-(blueprint: lem-diagonal-completed-adjunct-square).
-
-Proof: the model identity makes its Picard pullback O(1). The coefficient-one
-normalization identifies the coefficient pullback unit with the canonical unit.
-The varying ordinary section equation and full derived-unit normalization transport
-model.chernAdjoint to the strict constant-coefficient system. Naturality of the
-constant-system/limit adjunction and the limit-square normalization show that the
-completed adjunct of z has exactly the sourceMap equation defining c. Restriction
-on complete objects is fully faithful; the unit, shifted root line and its direct
-image are complete, so that equation identifies the two completed arrows. Finally
-apply the normalized completed realization square and its ordinary unit equation.
-Only this first realization is involved: there is no integral extension, quotient,
-finite realization, finite Kummer class or trace identity in this conclusion. The
-argument also applies on the empty scheme. -/
+/-- Realizing the normalized completed adjunct gives the condensed adjunct of the local arrow. -/
 theorem completed_adjunct_square
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

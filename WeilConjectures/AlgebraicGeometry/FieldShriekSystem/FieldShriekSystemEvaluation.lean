@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldShriekSystem.FieldShriekSys
 
 /-! # Normalized evaluation of coefficient-system comparisons
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-evaluation).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -45,9 +41,7 @@ variable (P : PurityFiniteSetting.{u})
 
 attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 
-/-- Exact evaluation of coefficient restriction, fixed on all section carriers.
-Source: blueprint (2), evaluation of simultaneous scalar models
-(blueprint: def-sp-field-shriek-system-evaluation). -/
+/-- Exact evaluation of coefficient restriction, fixed on all section carriers. -/
 structure RestrictionEvaluation (D : Models P) {E F : Index P} (h : E ≤ F)
     (T : Scheme.{u}) (n : ℕ) where
   ordinary : SemilinearSections.res (coefficientMap P (D.coefficients E F h) T) ⋙
@@ -60,9 +54,7 @@ structure RestrictionEvaluation (D : Models P) {E F : Index P} (h : E ≤ F)
       SpTowerShriek.ev P.coefficients.l E.val T n).obj M).val.obj U),
     HEq (((ordinary.hom.app M).val.app U) x) x
 
-/-- Exact localization of the uniquely section-normalized restriction comparison.
-Source: blueprint (2), simultaneous evaluation
-(blueprint: def-sp-field-shriek-system-evaluation). -/
+/-- Exact localization of the uniquely section-normalized restriction comparison. -/
 def restrictionEvaluation (D : Models P) {E F : Index P} (h : E ≤ F)
     (T : Scheme.{u}) (n : ℕ) (r : RestrictionEvaluation P D h T n) :
     SemilinearSections.resD (coefficientMap P (D.coefficients E F h) T) ⋙
@@ -75,8 +67,7 @@ attribute [local irreducible] restrictionEvaluation
 
 /-- Evaluation compatibility of two actual adjunctions is equality of the right mate
 with the given restriction square. This is the adjunction-transpose equation, before
-any claim of conservativity. Source: blueprint (2), scalar evaluation normalization
-(blueprint: def-sp-field-shriek-system-evaluation). -/
+any claim of conservativity. -/
 @[irreducible] def AdjunctionEvaluationNormalized
     {A : Type a} {B : Type b} {A' : Type a'} {B' : Type b'}
     [Category.{vA} A] [Category.{vB} B] [Category.{vA'} A'] [Category.{vB'} B']
@@ -85,18 +76,14 @@ any claim of conservativity. Source: blueprint (2), scalar evaluation normalizat
     (left : L ⋙ V ≅ U ⋙ L') (right : R ⋙ U ≅ V ⋙ R') : Prop :=
   (mateEquiv adj adj' left.inv) = right.hom
 
-/-- The specified finite scalar adjunction with its functors made explicit.
-Source: blueprint (2), finite scalar normalization
-(blueprint: def-sp-field-shriek-system-evaluation). -/
+/-- The specified finite scalar adjunction with its functors made explicit. -/
 @[irreducible] def finiteScalarAdjunction {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) :
     scalarExtensionFunctor φ T ⊣ scalarRestriction φ T :=
   proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ)
 
 /-- Derived scalar evaluation, normalized by the actual two scalar adjunctions.
-The transpose equation fixes the comparison on all derived morphisms.
-Source: blueprint (2), evaluation of C_T
-(blueprint: def-sp-field-shriek-system-evaluation). -/
+The transpose equation fixes the comparison on all derived morphisms. -/
 structure ScalarEvaluation (D : Models P) {E F : Index P} (h : E ≤ F)
     (T : Scheme.{u}) (n : ℕ) where
   restriction : RestrictionEvaluation P D h T n

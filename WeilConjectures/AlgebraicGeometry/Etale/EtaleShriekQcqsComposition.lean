@@ -14,10 +14,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 
 /-!
 # Composition of qcqs etale compact-support candidates
-
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7J,
-`lemma-shriek-composition`, with Tag 0F7I for arbitrary chosen compactifications
-(blueprint: lem-weil-pbc-etale-shriek-qcqs-composition).
 -/
 
 @[expose] public section
@@ -32,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 schemes, the bounded-below compact-support functors attached to any three chosen
 compactifications compose up to natural isomorphism.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7I
-(blueprint: lem-weil-pbc-etale-shriek-qcqs-composition).
+Source: Stacks Project, More on Etale Cohomology, Tags 0F7J and 0F7I.
 
 Proof plan:
 1. Apply `lem-weil-pbc-compatible-compactification-triangle` to the compactification of `g`.
@@ -50,8 +45,7 @@ Proof plan:
    with the model for `f ≫ g`; all functors preserve bounded-below objects.
 5. Whisker the comparison from `lem-weil-pbc-etale-shriek-compactification-independence`
    for `f` with the functor for `g`, and then compose with its comparison for `f ≫ g`.
-   This gives the asserted isomorphism for the original three choices.
--/
+   This gives the asserted isomorphism for the original three choices. -/
 theorem nonempty_iso_etaleShriek_qcqs_compactification_comp
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y Z : Scheme.{u}}

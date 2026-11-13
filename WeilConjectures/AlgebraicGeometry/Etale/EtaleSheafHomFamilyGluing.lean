@@ -11,7 +11,6 @@ import WeilConjectures.SixFunctors.OpenClosed.Conservative
 /-! # Gluing sheaf morphisms on an étale covering family
 
 Source: Stacks Project, Modules on Sites, Lemma 03EM and Sites Lemma 04TQ.
-(blueprint: lem-amb-etale-sheaf-hom-family-gluing).
 -/
 
 @[expose] public noncomputable section
@@ -22,15 +21,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Compatible morphisms of restrictions to an étale covering family glue uniquely.
 Compatibility is equality on any étale object admitting two lifts to cover members.
-Source: Stacks Project, Tags 03EM and 04TQ.
-(blueprint: lem-amb-etale-sheaf-hom-family-gluing).
-
-Proof: the presheaf of morphisms on slice sites is a sheaf. Each local morphism gives
-its section over the corresponding cover member, by evaluation on lifts. Compatibility
-makes these a matching family. Glue at the terminal étale object and evaluate on every
-object over it. The sheaf axiom gives a morphism with the prescribed restrictions.
-Restrictions jointly reflect isomorphisms and preserve equalizers, so they are jointly
-faithful, proving uniqueness. The empty cover is included. -/
+Source: Stacks Project, Tags 03EM and 04TQ. -/
 theorem existsUnique_etaleSheafHom_of_family
     (B : Type (u + 1)) [CommRing B]
     {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}}
@@ -109,13 +100,7 @@ theorem existsUnique_etaleSheafHom_of_family
       (ModuleCat.{u + 1} B) (a i) inferInstance) φ, hφ' i, hφ i]
 
 /-- A glued map has any further local restriction compatible with its covering family.
-Source: Stacks Project, Tags 03EM and 04TQ.
-(blueprint: lem-amb-etale-sheaf-hom-family-gluing).
-
-Proof: add the further étale object to the covering family and glue again. The old
-cover still covers the base, so its uniqueness identifies the new glued map with the
-old one. The restriction at the added member is the required equation. This works
-also for an empty base or a repeated cover member. -/
+Source: Stacks Project, Tags 03EM and 04TQ. -/
 theorem etaleSheafHom_restriction_eq_of_compatible
     (B : Type (u + 1)) [CommRing B]
     {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}}
@@ -168,12 +153,7 @@ theorem etaleSheafHom_restriction_eq_of_compatible
   change (localizationRestriction (ModuleCat.{u + 1} B) b inferInstance).map β = θ at hlast
   simpa only [heq] using hlast
 
-/-- A local map over a monomorphism automatically satisfies its self-overlap equation.
-Source: uniqueness of lifts through a monomorphism, in étale sheaf descent.
-(blueprint: lem-amb-etale-sheaf-hom-family-gluing).
-
-Proof: the two lifts have the same composite to the base. Cancel the monomorphism,
-apply extensionality for morphisms over the base, and apply congruence to the component. -/
+/-- A local map over a monomorphism automatically satisfies its self-overlap equation. -/
 theorem descentComponent_eq_of_mono (B : Type (u + 1)) [CommRing B]
     {X V : Scheme.{u}} (b : V ⟶ X) [Etale b] [Mono b]
     {P Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)}

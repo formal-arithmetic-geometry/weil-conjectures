@@ -31,7 +31,6 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
 /-- A sheaf map normalized into the common direct image has the graph transfer as
 its transpose after passage through the right-derived units.
 Source: Stacks Project, Tag 0F7B, case (b), and Tag 0F4L, graph support description.
-(blueprint: lem-pur-proper-sheaf-unit-graph-transpose).
 
 Proof in words: on sheaves, transpose tau under v_! adjoint to v^*, and follow by
 base change for c.g. Its restriction to the clopen graph is the adjunction unit

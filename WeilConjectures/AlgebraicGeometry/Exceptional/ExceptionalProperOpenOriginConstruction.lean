@@ -33,16 +33,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
 /-- The pro-etale compact-support operation and its comparison data exist.
-Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65.
-(blueprint: lem-sf-exceptional-proper-open-origin-construction).
-
-Proof: construct extension by zero on the pro-etale coefficient-system category,
-then take the universal derived image of the proper factor.  The ordinary and
-finite-level evaluation squares are obtained before localization.  The inverse
-image comparison is the adjunction mate of the proper square followed by the
-open square.  The mate identities and the recorded normalization equations give
-an object of `ExceptionalSystemCompactificationComparison`; all constructions are
-canonical and remain valid for zero rings and empty schemes. -/
+Source: Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65. -/
 theorem exceptionalProperOpenOriginConstruction
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (hX : ExceptionalSystemSiteEquivalence CX)

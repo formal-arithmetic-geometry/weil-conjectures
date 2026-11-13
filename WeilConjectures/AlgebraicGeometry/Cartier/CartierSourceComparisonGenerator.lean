@@ -44,10 +44,6 @@ import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
 /-!
 # Supported generators under the Cartier source comparison
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/
-sk-lem-geo-cartier.proof.md, opening comparison paragraph
-(blueprint: lem-sfb-cartier-source-comparison-generator).
-
 The general unit equation and its finite-coefficient generator consequence use the
 specified comparison maps. They assert neither a Kummer class nor a scalar-unit property.
 -/
@@ -122,22 +118,7 @@ private theorem normalizedIso_unit {C : Type*} [Category C]
     _ = u ≫ e ≫ t := by simp only [Category.assoc, Iso.hom_inv_id_assoc]
     _ = γ ≫ ρ := he
 
-/-- The specified source comparison transports the ordinary supported constant unit.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening comparison paragraph
-(blueprint: lem-sfb-cartier-source-comparison-generator).
-
-Proof: transpose the equation through the comparison adjunction at Z. The source
-comparison is its defining mate followed by the constant comparison at D, identified
-by part (1) of lem-sfb-cartier-constant-comparison-normalization. The mate-transpose
-identity reduces the equation to the ordinary supported unit and the transposed
-constant comparisons. Transpose once more through sheafification and evaluate on
-constant presheaf sections. The source library's formula for the ordinary constant
-unit, and the inverse laws of the sheafification Hom equivalence for both comparison
-maps and the pro-etale direct-image map, send each coefficient to the same section.
-The direct-image commutation isomorphism acts identically on section modules.
-Injectivity of both Hom equivalences gives the equation. This uses no Cartier or
-finite-coefficient hypothesis and does not need the inverse-image normalization square.
--/
+/-- The specified source comparison transports the ordinary supported constant unit. -/
 theorem cartierSourceComparison_supportedConstantUnit
     (A : Type (u + 1)) [CommRing A] {D Z : Scheme.{u}}
     (i : D ⟶ Z) [IsClosedImmersion i] :
@@ -211,9 +192,7 @@ theorem cartierSourceComparison_supportedConstantUnit
   rfl
 
 /-- The identity identification between the general supported constant and the published
-finite-coefficient supported object. It only unfolds their definitions and has no choices.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening comparison paragraph
-(blueprint: lem-sfb-cartier-source-comparison-generator). -/
+finite-coefficient supported object. It only unfolds their definitions and has no choices. -/
 def cartierSourceComparisonSupportIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -225,21 +204,7 @@ def cartierSourceComparisonSupportIso
   exact Iso.refl _
 
 /-- Every normalized finite-coefficient source isomorphism differs from the canonical
-source comparison by an automorphism preserving the supported unit and its generators.
-Source: blueprint sk-lem-geo-cartier.proof.md, opening comparison paragraph
-(blueprint: lem-sfb-cartier-source-comparison-generator).
-
-Proof: the preceding general equation and the assumed equation for `α` have the same
-right-hand side. Postcompose the latter with `α.inv` and the canonical source comparison.
-Cancel the invertible constant comparison, using part (1) of
-lem-sfb-cartier-constant-comparison-normalization, to obtain the unit equation. The source
-comparison is invertible by lem-sfb-geo-cartier-source-comparison, so `α.inv` followed by
-it is an automorphism. Evaluate the unit equation on every pro-etale object and constant
-section; the identity support identification and the definitions of `cartierSupportedUnit`
-and `cartierSupportedGenerator` give the last clause. Associativity and the inverse
-equations apply also to zero coefficients,
-empty schemes, empty support, the identity immersion, and the canonical choice of `α`.
--/
+source comparison by an automorphism preserving the supported unit and its generators. -/
 theorem cartierSourceComparison_fixes_supportedGenerator
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ)

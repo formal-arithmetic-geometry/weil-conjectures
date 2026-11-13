@@ -16,9 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 /-!
 # The ordinary derived closed-support triangle
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-existence,
-lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project, Tags 0A45 and 0152
-(blueprint: lemma-local-cohomology-right-adjoint--2).
+Source: Stacks Project, Tags 0A45 and 0152.
 -/
 
 set_option autoImplicit false
@@ -39,32 +37,10 @@ left modules over the sheafification of the constant ring presheaf: a locally re
 constant scalar acts locally, and the resulting sections glue uniquely. This is the same
 encoding as the recorded closed-ambient adjoint, without constructibility conditions.
 
-Source: blueprint lemma-local-cohomology-right-adjoint--2, order 1804; Stacks Project,
+Source: Stacks Project,
 Tags 0A45 (support triangle), 0152 (boundary), 079P (injective-term replacement),
 070K (total derivation), 08FI (restriction of K-injectives), 04CA (closed direct image),
-09XQ (sections with support) and 093X (restriction of injective sections)
-(blueprint: lemma-local-cohomology-right-adjoint--2).
-
-Proof:
-1. Write F = Ri_*, G = Rj_* and J = D(j^*). Both direct images are fully faithful
-   on sheaves and preserve K-injectives, so their total right derived functors are
-   fully faithful. Use the supplied adjunction of F with its chosen right adjoint.
-2. Disjointness gives J(FM) = 0. Since J commutes with shifts, the open adjunction
-   gives Hom((FM)[n], GN) = Hom(J((FM)[n]), N) = 0 for every integer n.
-3. If JE = 0, the closed inverse/direct-image unit E → Ri_*D(i^*)E becomes invertible
-   after J, since both objects vanish, and after D(i^*), by full faithfulness and
-   the triangle identity. Derived open-closed conservativity makes the unit invertible.
-   Thus E belongs to the essential image of F.
-4. Complete the open unit K → GJK to a distinguished triangle K' → K → GJK.
-   Full faithfulness of G and the triangle identity make J invert the unit, so JK' = 0.
-   Step 3 puts K' in the essential image of F. The orthogonal counit-triangle theorem
-   now replaces K' → K with the prescribed counit F(F.rightAdjoint K) → K.
-5. Choose a boundary for each K. Given f : K → L, triangle-morphism extension gives
-   a triangle map with middle component f. Shift-one orthogonality and Hom exactness
-   uniquely determine its first and third components from their adjacent squares.
-   Counit and unit naturality identify those components with the specified functor maps;
-   its last square is boundary naturality. The resulting natural transformation has
-   distinguished components by Step 4. No boundedness or constructibility is used. -/
+09XQ (sections with support) and 093X (restriction of injective sections). -/
 theorem exists_etale_closedSupportTriangle
     (A : Type (u + 1)) [Ring A] [Finite A]
     {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]

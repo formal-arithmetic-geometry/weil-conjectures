@@ -15,8 +15,7 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 The counit normalizations of `imageHomIso`, of restriction and of the coefficient variances of
 global Hom, and the compatibility of the constant-pullback comparison with composition.
 These are the inputs of `imageHomIso_naturality`.
-Source: Bhatt--Scholze 6.3.16, adjunction step; Stacks 08JA
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
+Source: Bhatt--Scholze 6.3.16, adjunction step; Stacks 08JA.
 -/
 
 @[expose] public noncomputable section
@@ -63,10 +62,7 @@ private theorem conjugateIsoEquiv_app_hom_heq
 
 /-- The comparison is the mate of the specified left-adjoint comparison.
 This records its counit normalization without any continuity hypothesis.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: apply the counit identity for conjugation of adjunctions to imageTensorIso.
--/
+Source: Stacks 08JA. -/
 theorem imageHomIso_counit (T : Over X) :
     (ExternalRHom.constant A T.left ⋙
       CategoryTheory.MonoidalCategory.tensorLeft ((ExternalRHom.pull A T.hom).obj K)).map
@@ -114,12 +110,7 @@ theorem pulledEvaluation_left
   rw [F.map_id, Category.id_comp]
 
 /-- Restriction transposes to pullback of the global tensor-Hom counit.
-Source: Bhatt--Scholze 6.3.16, adjunction; Stacks 08JA
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: expand restriction as a transpose. Braided compatibility of inverse image
-moves the braiding across its tensor constraint; the two braidings cancel.
--/
+Source: Bhatt--Scholze 6.3.16, adjunction; Stacks 08JA. -/
 theorem imageRestriction_counit (T : Over X) :
     (ExternalRHom.constant A T.left ⋙ tensorLeft ((ExternalRHom.pull A T.hom).obj K)).map
         (ExternalRHom.restriction A T.hom K M) ≫
@@ -189,12 +180,7 @@ private theorem hom_counit_naturality_of_eq
   exact hom_counit_naturality a f g
 
 /-- Both coefficient variances of global Hom respect its left-tensor counit.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: the existing evaluation naturality identity gives the square with the
-constant coefficient on the left. Naturality of the braiding moves this
-coefficient to the right and cancels both inverse braidings.
--/
+Source: Stacks 08JA. -/
 theorem imageGlobalHom_counit_naturality
     {E E' N N' : DerivedCategoryModule A X} (f : E' ⟶ E) (g : N ⟶ N') :
     (ExternalRHom.constant A X ⋙ tensorLeft E').map
@@ -248,13 +234,7 @@ private theorem leftDerivedComp_assoc
   rfl
 
 /-- The canonical derived constant comparison respects inverse-image composition.
-Source: Stacks 0G7E; Bhatt--Scholze 6.3.16, adjunction
-(blueprint: lem-per-ind-etale-derived-image-hom-adjunction).
-
-Proof: transport the underived constant-sheaf composition identity through exact
-derivation. Naturality in each functor and associativity of the derived
-composition constraints give the displayed equation.
--/
+Source: Stacks 0G7E; Bhatt--Scholze 6.3.16, adjunction. -/
 theorem imageConstantPullback_comp
     (Z : DerivedCategory (ModuleCat.{u + 1} A)) :
     (ExternalRHom.constantPullbackIso A (f ≫ g)).hom.app Z ≫

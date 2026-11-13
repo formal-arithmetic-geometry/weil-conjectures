@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PowerMapPullback
 
 /-!
 # Primitive-root trivializations commute with field extension
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, compatible primitive-root trivializations
-(blueprint: lem-sc-root-trivialization-base-change).
 -/
 
 @[expose] public section

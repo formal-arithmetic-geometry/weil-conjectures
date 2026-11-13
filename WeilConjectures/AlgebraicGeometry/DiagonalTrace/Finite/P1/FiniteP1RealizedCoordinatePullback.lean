@@ -175,9 +175,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryPullbackComparison
 
 /-! # Pullback of arbitrary ordinary arrows in the finite coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-p1-realized-coordinate-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -230,14 +227,7 @@ private theorem realized_normalized_arrow
   simpa only [Functor.map_comp, Category.assoc] using
     congrArg (fun f ↦ S₁.hom ≫ S₂.hom ≫ R.map f ≫ T₁.hom ≫ T₂.hom) h
 
-/-- Intrinsic realization of the normalized ordinary pullback square.
-Source: diagonal-tower trace (1), exact comparison and pullback
-(blueprint: lem-sfb-finite-p1-realized-coordinate-pullback).
-
-Proof: use finiteOrdinaryPullback_comparison, then apply intrinsic realization.
-The generic realized_normalized_arrow formula composes this square with the
-actual single and coordinate isomorphisms. Expand only the two specified
-projective-line endpoint coordinates and associate their isomorphisms. -/
+/-- Intrinsic realization of the normalized ordinary pullback square. -/
 theorem finiteP1_realized_coordinate_pullback (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] {X S : Scheme.{u}}
     (e : X ≅ ProjectiveLine S) (hS : IsUnit (l : Γ(S, ⊤)))

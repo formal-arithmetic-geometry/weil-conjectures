@@ -61,9 +61,7 @@ private theorem standard_prime_comparison
       Etale.subsingleton_cohomology_upperStar_injective_algClosed_extension f r hr J q hq)
     _ (forget_killed F r hF) q
 
-/-- Proper constant-sheaf base change in the higher degree.
-(blueprint: lemma-weil-pbc-smooth-curve-proper-base-change-higher)
-Proof: apply the corresponding degree part of the proper base-change argument. -/
+/-- Proper constant-sheaf base change in the higher degree. -/
 theorem proper_constant_base_change_higher [IsCurve f] [Smooth f] [ConnectedSpace C]
     [IsProper f] (r : ℕ) [Fact r.Prime] (k' : Type u) [Field k']
     [IsAlgClosed k']

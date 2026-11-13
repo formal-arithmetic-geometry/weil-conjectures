@@ -17,9 +17,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-! # Constructible flat models under arbitrary finite scalar extension
 
-Source: Stacks Project, etale-cohomology.tex, Tags 03TT (lemma-when-ctf) and
-0GKB (lemma-tensor-constructible), with sites-cohomology.tex, Tags 06YQ, 0G7E,
-06YT, 06YY and 08G1 (blueprint: lem-sp-etale-scalar-flat-model).
+Source: Stacks Project, etale-cohomology.tex, Tags 03TT and 0GKB, with sites-cohomology.tex, Tags
+06YQ, 0G7E, 06YT, 06YY and 08G1.
 
 Scalar extension is the ordinary, uncompleted functor into the B-module derived
 category. The ordinary representative retains the target-ring action; its tensor
@@ -38,8 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A bounded constructible complex of Tor amplitude `[a,b]` has a flat constructible
 model in that interval, and every such model computes arbitrary finite scalar extension.
-Source: Stacks Project, Tags 03TT and 0GKB
-(blueprint: lem-sp-etale-scalar-flat-model).
+Source: Stacks Project, Tags 03TT and 0GKB.
 
 Proof plan:
 1. Apply lem-sf-etale-flat-constructible to T, A, a, b and K. Its forward implication

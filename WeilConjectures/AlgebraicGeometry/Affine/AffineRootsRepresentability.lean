@@ -12,10 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 /-!
 # The affine scheme of roots of unity
 
-Source: Stacks Project, groupoids.tex, Tag 040M, Example `example-roots-of-unity`,
-and etale-cohomology.tex, Tag 03PK, Section `section-kummer`
-(blueprint: lem-asd-affine-roots-representability).
-
 ## Main definitions
 
 - `affineRootsOver`: the explicit quotient spectrum over `Spec R`.
@@ -37,14 +33,14 @@ namespace AlgebraicGeometry
 
 /-- The scheme `Spec R[t]/(t^n - 1)` over `Spec R`. `AdjoinRoot` is exactly the quotient
 by the principal ideal, and the structure morphism is induced by the quotient algebra map.
-Source: Stacks, Tag 040M (blueprint: lem-asd-affine-roots-representability). -/
+Source: Stacks, Tag 040M. -/
 noncomputable def affineRootsOver (R : Type u) [CommRing R] (n : ℕ) :
     Over (Spec (CommRingCat.of R)) :=
   Over.mk (Spec.map (CommRingCat.ofHom (algebraMap R
     (AdjoinRoot ((X : R[X]) ^ n - 1)))))
 
 /-- The global section corresponding to the residue class of `t` in `R[t]/(t^n - 1)`.
-Source: Stacks, Tag 040M (blueprint: lem-asd-affine-roots-representability). -/
+Source: Stacks, Tag 040M. -/
 noncomputable def affineRootsCoordinate (R : Type u) [CommRing R] (n : ℕ) :
     Γ((affineRootsOver R n).left, ⊤) :=
   (Scheme.ΓSpecIso (CommRingCat.of (AdjoinRoot ((X : R[X]) ^ n - 1)))).inv
@@ -146,24 +142,7 @@ the kernel inclusion into `gmSheaf`, whose sections are lifted, additively writt
 Mathlib's `Over.pullback` chooses `P ×_V V'`, with projection `pullback.fst` to `P`, for the
 base change denoted `V' ×_V P` in the source.
 
-Source: Stacks, Tag 040M and Tag 03PK
-(blueprint: lem-asd-affine-roots-representability).
-
-Proof: The quotient relation gives `x^n = 1`, so `x` is a unit with inverse `x^(n-1)`.
-The adjunction between global sections and affine spectra identifies a morphism into `P`
-with a ring homomorphism from `R[t]/(t^n-1)` to the global section ring. Being over `Spec R`
-means this homomorphism is an `R`-algebra homomorphism. The polynomial and quotient universal
-properties identify these homomorphisms with sections whose nth power is one, which are
-units because n is positive. This correspondence sends a morphism to pullback of `x`.
-Functoriality of pullback gives naturality in every test scheme. Restrict to the small
-etale site; the representable presheaf is a sheaf by
-`lem-weil-pbc-small-etale-representable-presheaf-sheaf`, and the kernel definition of
-`def-asd-etale-roots-of-unity` gives precisely the same roots and restriction maps. This
-produces the displayed presheaf isomorphism with its specified kernel-inclusion formula.
-Finally, the fibre-product universal property identifies morphisms into the base-changed
-scheme with morphisms into `P` over `V`; applying the same correspondence gives the
-base-changed bijections. Composition of pullbacks gives their naturality and the final
-compatibility with base-changing a morphism. -/
+Source: Stacks, Tag 040M and Tag 03PK. -/
 theorem affineRoots_representability (R : Type u) [CommRing R] (n : ℕ) (hn : 1 ≤ n) :
     ∃ x : Γ((affineRootsOver R n).left, ⊤)ˣ,
       (x : Γ((affineRootsOver R n).left, ⊤)) = affineRootsCoordinate R n ∧

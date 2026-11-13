@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 # Homotopy normalization of a cartesian refinement
 
 Source: Stacks Project, Tags 0F7I and 0D6E.
-(blueprint: lem-sfb-compactification-refinement-homotopy-unit).
 -/
 
 @[expose] public section
@@ -270,20 +269,7 @@ private lemma refinement_unit
 
 /-- Pasting the exact-source unit with a single cartesian derived refinement is the
 homotopy unit of the explicitly transported sheaf map. The input map need not be invertible.
-Source: Stacks Project, Tags 0F7I and 0D6E.
-(blueprint: lem-sfb-compactification-refinement-homotopy-unit).
-
-Proof: expand the derived refinement into the unit of inverse image/direct image,
-inverse open base change and the derived direct-image composition isomorphism. On a
-homotopy representative, the derived adjunction unit is the ordinary adjunction unit
-followed by the right-derived unit, with the exact inverse-image factorization removed.
-Naturality moves inverse open base change through that unit. The composition-unit identity
-then combines the units for the refinement pushforward and the coarser proper pushforward
-into the unit for the finer proper pushforward. Naturality moves the input sheaf map through
-these identities. The remaining ordinary factors are exactly
-compactificationSheafRefinement, and the exact factors are exactly those of
-normalizationHomotopyTransformation. This proves equality before localization, for every
-homotopy complex; no support-inclusion cancellation or common refinement is used. -/
+Source: Stacks Project, Tags 0F7I and 0D6E. -/
 theorem compactificationRefinement_homotopyUnit
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}

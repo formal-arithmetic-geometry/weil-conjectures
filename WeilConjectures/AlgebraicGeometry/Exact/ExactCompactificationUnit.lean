@@ -12,8 +12,7 @@ import WeilConjectures.SixFunctors.Finite.Exact
 /-!
 # The derived unit of an exact compactification sheaf functor
 
-Source: Stacks Project, Tags 0GKM and 015F
-(blueprint: def-sfb-exact-compactification-unit).
+Source: Stacks Project, Tags 0GKM and 015F.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ variable (A : Type (u + 1)) [CommRing A]
 
 /-- Descend the sheaf comparison followed by the proper direct-image derived unit.
 The descent is unique because precomposition with the homotopy localization is fully faithful.
-Source: Stacks Project, Tags 0GKM and 015F
-(blueprint: def-sfb-exact-compactification-unit). -/
+Source: Stacks Project, Tags 0GKM and 015F. -/
 @[irreducible]
 noncomputable def exactCompactificationUnit :
     F.mapDerivedCategory ⟶
@@ -64,8 +62,7 @@ noncomputable def exactCompactificationUnit :
 /-- For a finite compactification the derived unit is invertible on all complexes:
 finite direct image is exact, so every factor in the displayed representative is invertible.
 Full faithfulness of localization reflects this isomorphism.
-Source: Stacks Project, Tags 0GKM and 015F
-(blueprint: lem-sfb-exact-compactification-unit-finite). -/
+Source: Stacks Project, Tags 0GKM and 015F. -/
 theorem isIso_exactCompactificationUnit_of_isFinite [IsFinite c.g] :
     IsIso (exactCompactificationUnit A c F a) := by
   have ha : IsIso (a.hom.mapHomotopyCategory (.up ℤ)) :=

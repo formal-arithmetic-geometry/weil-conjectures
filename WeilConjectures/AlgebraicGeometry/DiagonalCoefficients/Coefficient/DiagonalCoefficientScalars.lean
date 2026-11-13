@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Normalized diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-scalars).
-
 ## Main definitions
 
 - `RestrictionSquare.mate`: the canonical scalar/direct-image comparison.
@@ -36,9 +33,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   (a : Λ ⟶ Λ') [IsMonHom a]
 
 /-- Restriction/direct-image comparison with its universal-unit normalization.
-Its scalar mate is therefore the canonical scalar/direct-image map. Source:
-blueprint coefficient changes, proof steps 1--2
-(blueprint: def-sfb-diagonal-coefficient-scalars). -/
+Its scalar mate is therefore the canonical scalar/direct-image map. -/
 abbrev RestrictionSquare {X S : Scheme.{u}} (f : X ⟶ S)
     (R : DiagonalRightDerived (CondensedRing.lowerStar Λ f))
     (R' : DiagonalRightDerived (CondensedRing.lowerStar Λ' f)) :=
@@ -48,8 +43,7 @@ abbrev RestrictionSquare {X S : Scheme.{u}} (f : X ⟶ S)
     R' R (CondensedRing.comapLowerStarIso a f)
 
 /-- The scalar/direct-image comparison is the adjunction mate of the normalized
-restriction comparison, for arbitrary coefficients including nonflat quotients.
-Source: blueprint coefficient changes (blueprint: def-sfb-diagonal-coefficient-scalars). -/
+restriction comparison, for arbitrary coefficients including nonflat quotients. -/
 def RestrictionSquare.mate {X S : Scheme.{u}} {f : X ⟶ S}
     {R : DiagonalRightDerived (CondensedRing.lowerStar Λ f)}
     {R' : DiagonalRightDerived (CondensedRing.lowerStar Λ' f)}
@@ -62,9 +56,7 @@ def RestrictionSquare.mate {X S : Scheme.{u}} {f : X ⟶ S}
 
 /-- One canonical scalar/trace square. The specified scalar/direct-image mate
 must be invertible on the shifted positive line. Factoring this uniform
-construction shares the derived-category witnesses for all three projections.
-Source: blueprint clauses 1--2
-(blueprint: def-sfb-diagonal-coefficient-scalars). -/
+construction shares the derived-category witnesses for all three projections. -/
 structure TraceCompatibility {X S : Scheme.{u}} (f : X ⟶ S)
     {M : Modules Λ X} {M' : Modules Λ' X} {m : M.X ⟶ M'.X}
     (c : Endpoint a (Mod.regular (condensedRingObj Λ S))
@@ -84,8 +76,7 @@ structure TraceCompatibility {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- All scalar-extension squares for a diagonal class and its three traces.
 The endpoint maps are normalized adjoints of the actual unit and root maps, and
-all direct-image maps are their specified adjunction mates. Source: blueprint
-clauses 1--2 (blueprint: def-sfb-diagonal-coefficient-scalars). -/
+all direct-image maps are their specified adjunction mates. -/
 structure ScalarCompatibility (Y : Scheme.{u})
     (L : ∀ X : Scheme.{u}, Modules Λ X) (L' : ∀ X : Scheme.{u}, Modules Λ' X)
     (m : ∀ X : Scheme.{u}, (L X).X ⟶ (L' X).X)

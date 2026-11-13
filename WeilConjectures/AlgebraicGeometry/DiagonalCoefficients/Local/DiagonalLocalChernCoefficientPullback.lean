@@ -420,20 +420,7 @@ private theorem coefficient_derivedIso_eq
   rfl
 
 -- Instantiate the exact cone diagram on the normalized completed endpoints.
-/-- The coefficient-unit cone is preserved by the normalized whole-tower comparison.
-
-Source: latest blueprint, diagonal coefficient changes (3).
-(blueprint: lem-diagonal-local-chern-coefficient-pullback).
-
-Proof: use the ordinary scalar squares and the full derived-limit cone equation in the
-pullback data. Normalize the right scalar squares on every section, and use their mate
-equations for the left squares.
-The coefficient-unit cone projects to the actual quotient of a completed scalar. After
-pullback, its projection is the quotient of the pulled scalar because the canonical
-completed coefficient map commutes with every finite quotient. The coefficient comparison
-sends one to one, so its linearity identifies both entire ordinary cones. Apply the cone
-field and the exact single comparison to obtain the displayed unit equation. This also
-applies to empty schemes; the coefficient unit and its identity are still the ring unit. -/
+/-- The coefficient-unit cone is preserved by the normalized whole-tower comparison. -/
 theorem diagonalLocalChern_coefficient_pullback (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X']
     {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)

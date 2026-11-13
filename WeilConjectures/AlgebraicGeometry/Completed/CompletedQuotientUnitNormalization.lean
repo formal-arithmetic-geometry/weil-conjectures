@@ -16,7 +16,6 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 /-! # Normalization of the actual completed quotient unit
 
 Source: Stacks Tags 03CR, 05RR, 06YY and 0941.
-(blueprint: lem-weil-pbc-completed-quotient-unit-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -151,8 +150,7 @@ attribute [local irreducible] completedReductionTower completedReductionTowerCou
 
 /-- The ordinary strict quotient-limit unit, constructed from the constant/limit
 adjunction and the specified quotient augmentation.
-Source: Stacks Tags 099M and 0941.
-(blueprint: def-weil-pbc-completed-quotient-ordinary-unit). -/
+Source: Stacks Tags 099M and 0941. -/
 @[irreducible]
 def completedQuotientOrdinaryUnit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
@@ -180,8 +178,7 @@ private theorem completedQuotientOrdinaryUnit_projection (T : Scheme.{t})
 /-- The specified actual quotient-completion unit as a single natural transformation.
 Its construction is exactly the derived adjunction unit followed by derived inverse
 limit of the fixed quotient augmentation.
-Source: Stacks Tags 099M and 0941.
-(blueprint: def-weil-pbc-completed-quotient-completion-unit). -/
+Source: Stacks Tags 099M and 0941. -/
 @[irreducible]
 def completedQuotientCompletionUnit (T : Scheme.{t})
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
@@ -240,14 +237,7 @@ set_option linter.style.haveILetI false in
 /-- On a K-flat representative the actual quotient-completion unit is the localized
 strict quotient-unit cone followed by the universal inverse-limit comparison.
 
-Source: Stacks Tags 06YY, 099M and 0941.
-(blueprint: lem-weil-pbc-completed-quotient-unit-normalization).
-
-Proof: apply the defining computation formula for the derived constant/limit
-adjunction unit. The specified reduction-tower augmentation has its stipulated
-normalization on this K-flat representative. Compose that equation with derived
-inverse limit. Naturality of its universal comparison moves the ordinary tower
-augmentation across the comparison, giving exactly the displayed composite. -/
+Source: Stacks Tags 06YY, 099M and 0941. -/
 theorem completedQuotientUnitNormalization
     (T : Scheme.{t}) {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ)

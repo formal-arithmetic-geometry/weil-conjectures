@@ -18,9 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionDiv
 
 /-!
 # Torsion and divisibility of the Picard group of a proper curve
-
-Source: Weil-conjectures blueprint, sec-curve-estimates/sk-thm-curveestimate,
-corollary-torsion-jacobian-field-extension (blueprint: corollary-torsion-jacobian-field-extension).
 -/
 
 @[expose] public section
@@ -31,8 +28,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Weil-conjectures blueprint, sec-curve-estimates/sk-thm-curveestimate,
-corollary-torsion-jacobian-field-extension (blueprint: corollary-torsion-jacobian-field-extension).
+/--
 For a proper smooth connected curve over an algebraically closed field, with `n` prime to
 its characteristic, the Picard group's `n`-torsion is `(ℤ/n)^(2g)`, its multiplication-by-`n`
 cokernel is `ℤ/n`, and its degree-zero part is `n`-divisible. The group law of `Pic(C)` is

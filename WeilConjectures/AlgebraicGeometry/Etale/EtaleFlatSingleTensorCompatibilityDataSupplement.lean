@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFlatSingleTensorCompatibili
 /-! # Data for tensor compatibility of degree-zero etale sheaves
 
 Source: Stacks Project, Cohomology, Tags 06YQ and 06YU.
-(blueprint: def-pur-etale-flat-single-tensor-compatibility-data).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   {X X' : AlgebraicGeometry.Scheme.{u}}
 
 /-- Map a pair of arrows with the specified derived tensor bifunctor.
-Source: Stacks Tag 06YU;
-(blueprint: lem-pur-etale-single-functor-monoidal-compatibility).
+Source: Stacks Tag 06YU.
 The coefficient category stays abstract when this composite is checked. -/
 noncomputable def derivedTensorPairMap (X : AlgebraicGeometry.Scheme.{u})
     {K K' L L' : DerivedCategory (Sheaf X.smallEtaleTopology B)}

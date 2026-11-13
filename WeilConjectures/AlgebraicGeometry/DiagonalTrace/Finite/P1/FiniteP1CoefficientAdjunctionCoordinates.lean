@@ -13,10 +13,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteP1UnitOnPullback
 import Mathlib.AlgebraicGeometry.Scheme
 
 /-! # Finite coefficient and adjunction coordinates
-
-Source: blueprint latest, diagonal-tower trace proof (1), identification of
-finite coefficient units and direct images before the Chern-class calculation.
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -47,26 +43,7 @@ attribute [local irreducible] finiteNativePullCoordinate finiteProjectionPullCoo
   finiteGeoUnitIso finiteUnitCoordinate finiteOverUnitCoordinate
 
 /-- Finite coordinate comparisons preserve the ordinary adjunction and the
-normalized coefficient pullback. This statement contains no Chern class.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), finite unit and direct-image
-identifications; `sk-prop-sp-tower-geometric-p1.proof.md`, Levels.
-(blueprint: lem-sfb-finite-p1-coefficient-adjunction-coordinates).
-
-Proof: the constant-module and root-tensor universal properties construct
-normalized coefficient coordinates on S and X. Invertibility of the exponent
-pulls back along f. Uniqueness of the intrinsic inverse-image adjoint and
-composition with the isomorphism e give an initial comparison p0. Its value on
-the coefficient unit may differ from the evaluated coefficient pullback by an
-automorphism of H(geoP1Unit). Since H is an equivalence, lift this discrepancy
-to the ordinary projective-line category. The coefficient unit is its tensor
-unit, so tensoring this automorphism with every object and conjugating by
-unitors extends it to a natural automorphism. Adjust p0 by this automorphism
-to get p with exactly the displayed coefficient equation. The invertible mate
-of p gives q, and the mate unit identity gives the first equation for every
-object. This uses only the given coefficient isomorphism, not an additional
-normalization theorem for a fixed choice of p. Empty schemes, the zero ring,
-and n=0 are included in the same categorical and tensor arguments. -/
+normalized coefficient pullback. This statement contains no Chern class. -/
 theorem finiteP1_coefficient_adjunction_coordinates
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (b : SpTowerShriek.Base l E) {f : X ⟶ S}

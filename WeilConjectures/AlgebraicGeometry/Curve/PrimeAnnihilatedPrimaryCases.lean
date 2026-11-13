@@ -20,15 +20,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Prime annihilation gives primary torsion for that prime, and a sheaf primary for
 another prime must be zero.
-Source: Stacks Project, Tag 0GJA, proof, primary assertion; elementary Bezout argument
-and geometric stalk conservativity.
-(blueprint: lemma-removing-finitely-many-points--1).
-
-Proof: Applying a geometric stalk functor to r times the identity shows that r kills
-all stalk elements, so exponent one witnesses r-primary torsion. If p is a different
-prime and an element is killed by p^n, then r and p^n are coprime. Bezout's identity
-makes this element zero. Thus every geometric stalk is zero, and conservativity of
-geometric stalks makes F zero. This also covers the zero sheaf and the empty scheme. -/
+Source: Stacks Project, Tag 0GJA, proof, primary assertion. -/
 theorem prime_annihilated_primary_cases (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} (r : ℕ) [Fact r.Prime]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) :

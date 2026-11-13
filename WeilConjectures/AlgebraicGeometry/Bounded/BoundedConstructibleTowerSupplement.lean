@@ -23,9 +23,7 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 /-!
 # Uniformly bounded constructible adic towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-bounded-constructible-tower, order 1250; Stacks Tags 09AI and 09BT
-(blueprint: def-weil-pbc-bounded-constructible-tower).
+Source: Stacks Tags 09AI and 09BT.
 
 Positive level n+1 is indexed by n : ℕ. Normalizations are stored for every comparable
 pair; their cocycle determines the nonconsecutive ones from the consecutive ones.
@@ -153,8 +151,7 @@ private theorem normalizedDerivedAdjunction
 
 variable (X : Scheme.{u})
 
-/-- Exact termwise evaluation in the derived tower category.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Exact termwise evaluation in the derived tower category. -/
 abbrev pbcTowerEvaluation (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (n : ℕ) :=
   ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X R)).obj (op n)).mapDerivedCategory
 
@@ -165,15 +162,14 @@ variable {B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
 
 include h in
 /-- Composition of exact derived scalar restrictions, with its canonical section maps.
-Source: Stacks Tag 03DA (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tag 03DA. -/
 def pbcDerivedRestrictComp : pbcDerivedRestrict ψ ⋙ pbcDerivedRestrict φ ≅
     pbcDerivedRestrict χ :=
   Functor.mapDerivedCategoryCompIso (pbcRestrict ψ) (pbcRestrict φ) ≪≫
     Functor.mapDerivedCategoryNatIso (pbcRestrictComp φ ψ χ h)
 
 /-- The reduction transition is the adjunct of the direct scalar-extension unit.
-This formula is the derived version of b⊗x↦ψ(b)⊗x.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+This formula is the derived version of b⊗x↦ψ(b)⊗x. -/
 def pbcReductionTransition (K : DerivedCategory (pbcModules X R)) :
     (pbcDerivedExtend φ).obj K ⟶
       (pbcDerivedRestrict ψ).obj ((pbcDerivedExtend χ).obj K) :=
@@ -181,8 +177,7 @@ def pbcReductionTransition (K : DerivedCategory (pbcModules X R)) :
     ((pbcDerivedScalarAdjunction χ).unit.app K ≫
       (pbcDerivedRestrictComp φ ψ χ h).inv.app ((pbcDerivedExtend χ).obj K))
 
-/-- Its adjunct along ψ is the canonical quotient-reduction normalization map.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Its adjunct along ψ is the canonical quotient-reduction normalization map. -/
 def pbcReductionNormalizationHom (K : DerivedCategory (pbcModules X R)) :
     (pbcDerivedExtend ψ).obj ((pbcDerivedExtend φ).obj K) ⟶
       (pbcDerivedExtend χ).obj K :=
@@ -190,14 +185,7 @@ def pbcReductionNormalizationHom (K : DerivedCategory (pbcModules X R)) :
     (pbcReductionTransition φ ψ χ h K)
 
 /-- Derived balancing is invertible, without flatness of either coefficient map.
-Source: blueprint order 1239; Stacks Tag 06YY
-(blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: resolve K by a K-flat P. Scalar extension Eφ(P) is K-flat over S, since tensoring
-it with an acyclic B-complex is P tensored with that complex after restriction. Thus
-both derived sides are computed by Eψ(Eφ(P)) and Eχ(P). The displayed adjunct is the
-ordinary balancing map s⊗(r⊗x)↦sψ(r)⊗x, by the fixed tensor units. Its inverse sends
-s⊗x to s⊗(1⊗x). The balancing relations prove the inverse identities. Local tensor
-generation and sheafification give inverse chain maps, hence an isomorphism on localization. -/
+Source: Stacks Tag 06YY. -/
 theorem pbcReductionNormalization_isIso (K : DerivedCategory (pbcModules X R)) :
     IsIso (pbcReductionNormalizationHom φ ψ χ h K) := by
   let e := Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction φ)
@@ -210,43 +198,35 @@ theorem pbcReductionNormalization_isIso (K : DerivedCategory (pbcModules X R)) :
   rw [he]
   infer_instance
 
-/-- Canonical normalization, retaining its balancing and unit characterization.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- Canonical normalization, retaining its balancing and unit characterization. -/
 def pbcReductionNormalization (K : DerivedCategory (pbcModules X R)) :
     (pbcDerivedExtend ψ).obj ((pbcDerivedExtend φ).obj K) ≅
       (pbcDerivedExtend χ).obj K :=
   letI := pbcReductionNormalization_isIso φ ψ χ h K
   asIso (pbcReductionNormalizationHom φ ψ χ h K)
 
-/-- All quotient maps in the coefficient diagram, including equal indices.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- All quotient maps in the coefficient diagram, including equal indices. -/
 def pbcAdicQuotient (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)
     (b a : ℕ) (hab : a ≤ b) :=
   (pbcAdicRings X d).map (homOfLE hab).op
 
 set_option linter.defProp false in
-/-- Projection followed by quotient reduction is the lower projection.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: apply the naturality equation of the limit cone to the arrow b→a. -/
+/-- Projection followed by quotient reduction is the lower projection. -/
 theorem pbcAdicProjection_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (b a : ℕ) (hab : a ≤ b) :
     pbcAdicProjection X d b ≫ pbcAdicQuotient X d b a hab = pbcAdicProjection X d a := by
   exact limit.w (pbcAdicRings X d) (homOfLE hab).op
 
 set_option linter.defProp false in
-/-- Quotient maps satisfy the full quotient cocycle.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower).
-Proof: the coefficient diagram preserves composition, and the opposite poset has a unique
-arrow between its comparable endpoints. This includes every equal-index case. -/
+/-- Quotient maps satisfy the full quotient cocycle. -/
 theorem pbcAdicQuotient_comp (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) (c b a : ℕ) (hab : a ≤ b) (hbc : b ≤ c) :
     pbcAdicQuotient X d c b hbc ≫ pbcAdicQuotient X d b a hab =
       pbcAdicQuotient X d c a (hab.trans hbc) := by
   exact ((pbcAdicRings X d).map_comp (homOfLE hbc).op (homOfLE hab).op).symm
 
-/-- The natural derived transition between any two evaluations of a strict tower.
-Source: blueprint order 1239 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+/-- The natural derived transition between any two evaluations of a strict tower. -/
 def pbcTowerTransition (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (b a : ℕ) (hab : a ≤ b) :
     pbcTowerEvaluation X R b ⟶ pbcTowerEvaluation X R a :=
@@ -261,8 +241,7 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
 /-- A normalization's semilinear transition, obtained by its canonical scalar-extension
-unit and restriction of its R_a-linear isomorphism.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+unit and restriction of its R_a-linear isomorphism. -/
 def adicTowerSemilinearTransition
     (M : ∀ n : ℕ, DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))
     (ρ : ∀ (b a : ℕ) (hab : a ≤ b),
@@ -276,8 +255,7 @@ def adicTowerSemilinearTransition
 and normalized derived reductions compatible with its actual transitions. The cocycle
 is written on the semilinear adjuncts; the canonical restriction comparison identifies
 the two successive scalar restrictions with direct restriction. Invertible normalization
-and the equal-index cocycle also force the usual identity normalization.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+and the equal-index cocycle also force the usual identity normalization. -/
 structure AdicTower where
   /-- The derived object of strict completed-coefficient towers. -/
   tower : DerivedCategory (pbcTowers X (pbcAdicCompletion X d))
@@ -314,8 +292,7 @@ structure AdicTower where
 variable {X} {Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- The local reduction of a common completed-coefficient complex, retaining the
-inverse image of the completed ring rather than completing again after restriction.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+inverse image of the completed ring rather than completing again after restriction. -/
 def adicTowerLocalReduction
     (L : CochainComplex (pbcModules Y
       ((adicTowerInverseImage g).obj (pbcAdicCompletion X d))) ℤ) (n : ℕ) :=
@@ -323,8 +300,7 @@ def adicTowerLocalReduction
     (DerivedCategory.Q.obj L)
 
 /-- The canonical semilinear transition of the local reduction model. It is the adjunct
-of the balancing normalization N_b⊗ᴸR_a≅N_a, as specified by the coefficient datum.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+of the balancing normalization N_b⊗ᴸR_a≅N_a, as specified by the coefficient datum. -/
 def adicTowerLocalTransition
     (L : CochainComplex (pbcModules Y
       ((adicTowerInverseImage g).obj (pbcAdicCompletion X d))) ℤ)
@@ -342,8 +318,7 @@ def adicTowerLocalTransition
 
 /-- Restriction of semilinear transitions, using the existing canonical comparison for
 exact inverse image and scalar restriction. It is the mate of identity on sections,
-so no arbitrary map or coefficient identification occurs.
-Source: blueprint order 1250 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
+so no arbitrary map or coefficient identification occurs. -/
 def adicTowerRestrictedTransition (M : AdicTower X d) (b a : ℕ) (hab : a ≤ b) :
     (adicTowerPullback g ((pbcAdicRings X d).obj (op b))).obj (M.level b) ⟶
       (pbcDerivedRestrict ((adicTowerInverseImage g).map
@@ -364,8 +339,7 @@ def adicTowerRestrictedTransition (M : AdicTower X d) (b a : ℕ) (hab : a ≤ b
 cohomology in every finite reduction, and compatible quotient-linear identifications.
 The compatibility equation is the adjoint form of e_aρ=σ(Le_b); scalar-extension Hom
 bijections make it equivalent to the blueprint's equation.
-Source: blueprint order 1250; Stacks Tags 09AI and 09BT
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tags 09AI and 09BT. -/
 structure AdicTowerLocalModel (M : AdicTower X d) (d₀ d₁ : ℤ) where
   /-- One complex over the restricted completed coefficients, independent of the level. -/
   complex : CochainComplex (pbcModules Y
@@ -398,8 +372,7 @@ structure AdicTowerLocalModel (M : AdicTower X d) (d₀ d₁ : ℤ) where
 stratification, with a pro-etale cover on each stratum carrying common local models.
 The coefficient restrictions are along the composite of the stratum immersion and the
 covering morphism. The finite-lisse cohomology covers can depend on both level and degree.
-Source: blueprint order 1250; Stacks Tags 09AI and 09BT
-(blueprint: def-weil-pbc-bounded-constructible-tower). -/
+Source: Stacks Tags 09AI and 09BT. -/
 def IsUniformlyBoundedConstructibleAdicTower (M : AdicTower X d) : Prop :=
   ∃ (d₀ d₁ : ℤ), d₀ ≤ d₁ ∧ ∃ S : Stratification X,
     ∀ α : Fin S.n, ∃ V : Sieve (⊤_ (S.domain α).ProEt),

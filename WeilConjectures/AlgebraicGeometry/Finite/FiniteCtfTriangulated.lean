@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-!
 # Finite-stage constructible complexes of finite Tor amplitude
-
-Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
-and the Weil blueprint, finite-stage paragraph of `definition-constructible-sheaves`
-(blueprint: lem-weil-finite-ctf-triangulated).
 -/
 
 @[expose] public section
@@ -144,27 +140,7 @@ private theorem amplitude_mono
 
 /-- Bounded constructibility and finite Tor amplitude cut out a strictly full triangulated
 subcategory on the small pro-etale site. The last two clauses retain the precise interval
-bounds under shifts and extensions.
-
-Source: Stacks Project, Cohomology on Sites, Tag 08G2, lemma-cone-tor-amplitude (2),
-Tag 08FZ, definition-tor-amplitude; Weil blueprint, finite-stage paragraph of
-`definition-constructible-sheaves` (blueprint: lem-weil-finite-ctf-triangulated).
-
-Proof:
-1. Apply `Padic.finite_coefficientExtensionRing` and the existing bounded-constructibility
-closure theorem.
-2. Resolve a degree-zero test sheaf by a K-flat complex. Tensoring with its image in the
-homotopy localization is triangulated, by the existing monoidal derived-category API.
-The localized quasi-isomorphism and the invertible tensor comparison identify its value
-with every K-flat presentation used by `HasProEtaleTorAmplitude`.
-3. Transport vanishing across these comparisons. Tensor sends zero to zero, giving `[0,0]`.
-The shift comparison and the homology shift isomorphism give `[a-m,b-m]`.
-4. After enlarging endpoint intervals to their minimum/maximum interval, apply the exact
-homology segment of the tensor image of a distinguished triangle. Zero endpoint homology
-forces zero middle homology, with no enlargement when the intervals already agree.
-5. Intersect these closure properties with bounded constructibility and use Mathlib's
-triangulated-subcategory criterion.
--/
+bounds under shifts and extensions. -/
 theorem finite_ctf_isTriangulated
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :

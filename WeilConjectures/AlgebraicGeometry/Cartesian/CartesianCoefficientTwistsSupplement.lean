@@ -124,10 +124,6 @@ public import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
 import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTateTowerLimit
 
 /-! # Cartesian coefficients and Tate twists
-
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-an,
-`sk-prop-sfb-cartesian-coefficients-twists.md`
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
 -/
 
 @[expose] public noncomputable section
@@ -532,15 +528,7 @@ private theorem globalPrimeUnit (S : Scheme.{u}) (l : ℕ)
   simpa only [map_natCast] using (isUnit_of_invertible (l : S.residueField x)).ne_zero
 
 /-- Roots of unity commute with inverse image along every scheme morphism where ell
-is invertible, including exponent zero. Source: blueprint Roots of unity paragraph
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
-Proof: invertibility in every residue field makes ell a unit of global sections,
-and hence ell^n is a unit as well. Apply the root square of finiteRootSiteComparison
-with the finite auxiliary ring ULift (ZMod (ell^n)). The etale root comparison,
-the comparison of the etale and pro-etale inverse images, and the etale-to-pro-etale
-root identifications are isomorphisms. Thus so is their composite, and cancellation
-of the pulled-back root identification gives the prescribed pro-etale root map.
-This argument also applies to n=0, where the auxiliary ring is the zero ring. -/
+is invertible, including exponent zero. -/
 theorem spRoots_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] (n : ℕ) :
@@ -815,9 +803,7 @@ private theorem sectionRingPullbackIso_ofMonHom
   exact sectionRingPullbackIso_existsUnique f RY RX α eta
     (fun V a ↦ congrArg (fun q ↦ q.hom.app V a) heta) (liftRingSheafMap f _ _ φ) hφ
 
-/-- Alpha, in commutative ring sheaves, selected by its unique adjunct normalization.
-Source: blueprint coefficient compatibility
-(blueprint: lemma-inverse-image-coefficient-sheaves--2). -/
+/-- Alpha, in commutative ring sheaves, selected by its unique adjunct normalization. -/
 def spCoefficientIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :=
@@ -873,14 +859,7 @@ private theorem integralComparisonSystem_app (ℓ : ℕ) [Fact ℓ.Prime]
 
 attribute [local irreducible] integralComparisonSystem
 
-/-- The integral comparison is uniquely determined by every finite root projection.
-Source: blueprint Integral twist paragraph
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
-Proof: tensor the canonical coefficient comparison with the canonical root map,
-using the strong monoidal inverse image. These maps commute with reductions and
-Kummer transitions. They give a cone on the finite-level system. The forgetful
-functor creates its limit, hence the cone has exactly one induced abelian map.
-This characterization does not assert preservation of arbitrary inverse limits. -/
+/-- The integral comparison is uniquely determined by every finite root projection. -/
 theorem spIntegralComparison_existsUnique (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     ∃! c : (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj
@@ -917,9 +896,7 @@ theorem spIntegralComparison_existsUnique (ℓ : ℕ) [Fact ℓ.Prime]
     rw [integralComparisonSystem_app]
     exact hc' n
 
-/-- The integral comparison, with all finite-level projections specified.
-Source: blueprint Integral twist paragraph
-(blueprint: lemma-inverse-image-coefficient-sheaves--2). -/
+/-- The integral comparison, with all finite-level projections specified. -/
 def spIntegralComparison (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj
@@ -1069,8 +1046,7 @@ private theorem extendedComparison_iso_exists
 attribute [local irreducible] spIntegralComparison
 
 /-- The derived twist functor is tensor with the recorded signed line in degree zero.
-Its object function is spComplexTwistOfUniverses. Source: blueprint derived consequence
-(blueprint: lemma-inverse-image-coefficient-sheaves--2). -/
+Its object function is spComplexTwistOfUniverses. -/
 def spTwistFunctor (Z : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology Z) CommRingCat.{u + 1})
     (L : Scheme.proEtaleRingModules Z R) (d : ℤ) :=
@@ -1093,8 +1069,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 Here the unit section is the canonical unit of the module pullback adjunction;
 thus the formulas determine maps on all inverse-image generators, not just global
 sections. Negative powers are normalized by evaluation of the pulled-back functional
-on the pulled-back section. Source: blueprint Powers and duals paragraph
-(blueprint: lemma-inverse-image-coefficient-sheaves--2). -/
+on the pulled-back section. -/
 structure SpSignedComparison
     (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
@@ -1943,17 +1918,7 @@ attribute [local irreducible] finiteFirstComparison rootModuleComparison
   rootModuleDirect tensorMap' directScalarIso' tensorPullbackHomEquiv'
 
 /-- The finite signed comparison is normalized on root tensors, and commutes with
-all annihilating-exponent Kummer identifications. Source: blueprint Finite coefficients
-and Powers and duals paragraphs
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
-Proof: tensor the root comparison with the constant coefficient comparison. The
-map sends u tensor a to the pulled-back u tensor the pulled-back a. Pure tensors
-locally generate, so this determines it uniquely. The Kummer square is the root
-power square. Tensor this comparison for positive powers and use alpha in degree
-zero. For negative powers pull back evaluation; finite local freeness makes the
-dual comparison invertible. Apply the unbounded derived tensor comparison with
-one factor the signed line in degree zero. This gives the natural derived
-isomorphism for every K, without any boundedness or constructibility restriction. -/
+all annihilating-exponent Kummer identifications. -/
 theorem spFiniteTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)]
@@ -2001,8 +1966,7 @@ theorem spFiniteTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
 /-- A comparison over alpha in the internal and sectionwise module encodings.
 The signed first comparison has exactly the given abelian adjunct, which fixes
 its linear lift; the module isomorphisms encode semilinearity over alpha at every
-signed degree. Source: blueprint compatibility with alpha and module structures
-(blueprint: lemma-inverse-image-coefficient-sheaves--2). -/
+signed degree. -/
 def SpInternalCartesian
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -2829,38 +2793,7 @@ set_option backward.isDefEq.respectTransparency.types true
 /-- Inverse image of all non-finite coefficient twists, including integral and rational
 Q_ell as the bottom finite subextension, and the algebraic-closure sheafified colimit.
 Together with spRoots_cartesian and spFiniteTwists_cartesian this states every
-coefficient case in the source. Source: blueprint Inverse image of Tate twists,
-Integral twist, Rational and algebraically closed coefficients, Powers and duals,
-and Derived consequence paragraphs
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
-Proof:
-1. The separate native integral tower lemma says that inverse image preserves its
-   displayed limiting cone. The finite component comparisons are isomorphisms by
-   the root comparison and alpha. Uniqueness of maps between limiting cones makes
-   the projection-normalized integral comparison invertible.
-2. The integral residue tensor square lifts that abelian comparison to the ordinary
-   coefficient-module pullback. Scalar extension to E preserves its invertibility.
-   Its quotient-map normalization is the required rational normalization.
-3. Conjugate each coefficient inclusion by alpha. Its normalized composite into the
-   field coefficients determines it uniquely, giving integral coefficient naturality.
-   The quotient normalizations then give finite coefficient naturality. Projection
-   extensionality and the scalar-extension quotient give integral and rational twist
-   naturality, respectively.
-4. Inverse image preserves the filtered colimit over finite subextensions. The
-   preceding rational naturality supplies its comparison isomorphism and fixes every
-   coprojection. To check semilinearity, test on a coefficient coprojection and a
-   module coprojection, choose a common upper finite field, and use the specified
-   finite-stage action there. This uses the finite-subextension condensed Qbar ring.
-5. Transport each ordinary internal-module isomorphism to sectionwise modules. The
-   coefficient and adjunction-unit normalizations identify its abelian adjunct
-   exactly, so the prescribed first comparison is retained.
-6. The common root cover makes each finite, integral, rational and Qbar line locally
-   free of rank one. The signed-line derived base-change theorem then gives all
-   signed degrees with their unit, tensor and evaluation normalizations. Uniqueness
-   of left adjoints transports its unit formulas to the actual pullback, and the
-   induced natural isomorphism on unbounded derived categories gives the derived
-   comparison. No boundedness or finite-Tor condition is needed.
-7. Naturality of the root inverse-image map gives the last transition formula. -/
+coefficient case in the source. -/
 theorem spTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)] :

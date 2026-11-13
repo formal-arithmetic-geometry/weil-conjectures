@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTowerTrace
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 
 /-! # The normalized limit data used in diagonal pullback
-
-Source: blueprint diagonal coefficient changes, paragraph (3).
 -/
 
 @[expose] public noncomputable section
@@ -37,10 +35,7 @@ abbrev diagonalSurfaceSystemsHasExt (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 attribute [local instance high] diagonalSurfaceSystemsHasExt
 
 /-- Named fields for the whole-system data of the diagonal limit. This structure
-chooses no witnesses and imposes no new property on the completed class.
-
-Source: the defining predicate `IsDiagonalLimit`, blueprint coefficient proof (3).
-(blueprint: def-diagonal-class-limit-presentation). -/
+chooses no witnesses and imposes no new property on the completed class. -/
 structure ClassLimitPresentation (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
     (hY : IsUnit (l : Γ(Y, ⊤)))

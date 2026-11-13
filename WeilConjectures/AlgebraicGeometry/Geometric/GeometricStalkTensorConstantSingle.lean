@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedTensorStalk
 /-! # Geometric stalks and tensoring with a constant degree-zero module
 
 Source: Stacks Project, Tags 03PT and 07A4.
-(blueprint: lem-sfb-geometric-stalk-tensor-constant-single)
 -/
 
 @[expose] public section
@@ -26,17 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A geometric stalk commutes with derived tensor against a constant module in degree zero.
 
-Source: Stacks Project, etale-cohomology.tex, proof of Tag 09BI; Tags 03PT and 07A4.
-(blueprint: lem-sfb-geometric-stalk-tensor-constant-single)
-
-Proof. Apply `exists_derivedTensor_stalk_iso` to L and the constant sheaf of N
-placed in degree zero. This identifies the stalk of the derived tensor with the
-tensor of the two derived stalks. The exact-functor comparison
-`mapDerivedCategorySingleFunctor` identifies the second stalk with the degree-zero
-complex on the ordinary stalk of the constant sheaf. The constant-stalk isomorphism
-identifies that module with N. Tensor this composite on the left by the derived
-stalk of L and compose with the first isomorphism. No boundedness, finiteness or
-Noetherian hypothesis is used, including for zero modules and zero rings. -/
+Source: Stacks Project, etale-cohomology.tex, proof of Tag 09BI; Tags 03PT and 07A4. -/
 theorem geometricStalk_tensor_constant_single
     (R : Type (u + 1)) [CommRing R] {X : Scheme.{u}}
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)

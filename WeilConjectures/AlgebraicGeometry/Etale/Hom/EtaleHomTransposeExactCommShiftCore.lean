@@ -16,8 +16,7 @@ open CategoryTheory.Pretriangulated.Opposite Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The evaluation transpose satisfies the shift square in one fixed integer degree.
-Source: Stacks Project, Tags 08JC and 08J9; blueprint
-`lem-coef-etale-hom-transpose-exact`, proof steps 3--4.
+Source: Stacks Project, Tags 08JC and 08J9.
 
 The composite shifts `_chiPhi` and `_chiPsi` are the normalized ones: `hPhi` and `hPsi`
 give their components in terms of `sA`, `sB` and the scalar shift (without them the
@@ -25,8 +24,7 @@ statement is false, by twisting `_chiPhi` with the character `n ↦ (-1)^n`). Re
 two components of the degree-`n` square by `hPhi` and `hPsi`; the resulting component
 equation is `etaleHomComparison_reversedExact_commShift_component`, which transposes the
 square through the tensor--Hom adjunction and reduces it to scalar tensor shift
-cancellation.
-(blueprint: lem-coef-etale-hom-transpose-exact-comm-shift-core) -/
+cancellation. -/
 theorem etaleHomComparison_reversedExact_commShift_core
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)

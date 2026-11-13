@@ -17,17 +17,14 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 
 Let `C` be a smooth integral curve over an algebraically closed field `k`, with generic point
 `η : Spec k(C) ⟶ C`. We show that `Hᵠ(C, F) = 0` for every torsion étale sheaf `F` on `C` and
-`q ≥ 3` (blueprint `theorem-cohomology-curves--1`), following the blueprint argument at the
-generic point, without spectral sequences:
+`q ≥ 3`, following the blueprint argument at the generic point, without spectral sequences:
 
 * by the generic replacement `Hᵠ(C, F) ≅ Hᵠ(C, η_* η^* F)` for `q ≥ 2`
-  (`AlgebraicGeometry.IsCurve.bijective_H_map_unit_fromSpecFunctionField`, blueprint
-  `theorem-cohomology-curves`) it suffices to treat `η_* M`;
+ it suffices to treat `η_* M`;
 * every affine étale `k(C)`-scheme `W` is finite over `k(C)`, so its cohomology is that of
   `Spec k(C)` with coefficients in a pushforward, and vanishes in degrees `≥ 2` for torsion
-  coefficients since `k(C)` has cohomological dimension at most one
-  (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_isAlgebraic_functionField`, blueprint
-  `theorem-cohomology-curves`); this is the vanishing of `Rᵇη_* M` for `b ≥ 2`;
+  coefficients since `k(C)` has cohomological dimension at most one;
+this is the vanishing of `Rᵇη_* M` for `b ≥ 2`;
 * dimension shifting along acyclic envelopes `0 → M → J → N → 0` of sheaves killed by `n`
   (`AlgebraicGeometry.Etale.exists_mono_acyclic_of_nsmul_eq_zero`) then replaces the Grothendieck
   spectral sequence: if `H¹(W, M) = 0` on all affine étale `k(C)`-schemes `W` then
@@ -96,7 +93,7 @@ include f in
 Let `C` be an integral curve over an algebraically closed field and `W` an affine étale
 `k(C)`-scheme. Then `Hᵠ(W, G) = 0` for `q ≥ 2` and every sheaf `G` on `W` killed by some `n > 0`:
 `W` is finite over `k(C)`, so `Hᵠ(W, G) = Hᵠ(k(C), e_* G)`, which vanishes as `k(C)` has
-cohomological dimension at most one. (blueprint: `theorem-cohomology-curves`) -/
+cohomological dimension at most one. -/
 theorem subsingleton_sheafH_of_etale_functionField {W : Scheme.{u}}
     (e : W ⟶ Spec C.functionField) [AlgebraicGeometry.Etale e] [IsAffine W] {n : ℕ}
     (hn : 0 < n) (G : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : n • 𝟙 G = 0)
@@ -269,8 +266,7 @@ algebraically closed field `k`. Then `Hᵠ(C, F) = 0` for every torsion étale s
 `q ≥ 3`. Smoothness is not needed: the argument at the generic point
 (`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_nsmul_eq_zero`) only uses the
 generic replacement, the vanishing of `Rᵇη_*` for `b ≥ 2` and the cohomological dimension of
-`k(C)`; torsion sheaves are filtered unions of sheaves killed by an integer.
-(blueprint: `theorem-cohomology-curves--1`) -/
+`k(C)`; torsion sheaves are filtered unions of sheaves killed by an integer. -/
 theorem subsingleton_sheafH_of_three_le_of_isIntegral
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
     (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) := by

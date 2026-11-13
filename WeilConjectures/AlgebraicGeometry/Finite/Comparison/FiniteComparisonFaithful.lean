@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedSiteComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Full faithfulness in the ordinary finite-coefficient presentation
-
-Source: blueprint finite comparison localizing proof, unbounded comparison step
-(blueprint: lem-ctf-finite-comparison-ordinary-fully-faithful).
 -/
 
 @[expose] public noncomputable section
@@ -21,15 +18,7 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
-/-- Cancel the exact coefficient-realization equivalence from unbounded comparison.
-Source: blueprint finite comparison localizing proof, unbounded comparison step
-(blueprint: lem-ctf-finite-comparison-ordinary-fully-faithful).
-
-Proof: factor the recorded ringed-coefficient derived comparison as ordinary comparison
-followed by derived realization, using the exact-functor composition isomorphism.
-Realization is an equivalence, and its derived functor is therefore faithful.
-Fullness and faithfulness of the composite imply both for ordinary comparison.
-The argument includes the zero ring and empty scheme. -/
+/-- Cancel the exact coefficient-realization equivalence from unbounded comparison. -/
 theorem finiteComparisonOrdinary_fullyFaithful
     (A : Type (u + 1)) [CommRing A] [TopologicalSpace A]
     [DiscreteTopology A] [Finite A]

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Localized.LocalizedMixedPullbackFiniteF
 /-! # Termwise comparison for a cartesian relatively flat single sheaf
 
 Source: Stacks Project, Tags 0A1D, 06YD, 06YJ and 08FE.
-(blueprint: lem-pc-cartesian-flat-single-termwise-comparison).
 -/
 
 @[expose] public section
@@ -27,25 +26,7 @@ namespace AlgebraicGeometry
 /-- Cartesian single-sheaf base change followed by termwise computation on finite frees.
 This has no Noetherian, coherence or approximation hypothesis or conclusion.
 Source: Stacks Project, Tag 0A1D (relatively flat base change), Tags 06YD and 06YJ
-(K-flat computation) and Tag 08FE (open base change).
-
-Proof: Open base change identifies the localized restriction of Rf_*F[0] with the
- direct image of the ordinary restriction of F to the pullback along V.ι followed
- by U.ι. The cartesian square and the sheaf isomorphism identify this restricted
- sheaf with q^*M. Relative flatness of M over p makes derived tensor base change
- Tor-independent for this single sheaf: apply Tag 0A1D with the perfect unit and
- G=M[0]. It identifies this direct image with Lg^*Rp_*M[0]. Map the supplied
- representative isomorphism through Lg^*. The complex P is bounded above with
- finite free terms, hence K-flat; its restriction to W is likewise K-flat.
- Therefore derived pullback is computed by termwise tensor pullback. Composition
- of ordinary pullbacks identifies this complex with tensorPullback(g≫W.ι)(P).
- Finally transport through the exact inverse localized-site equivalence. Uniqueness
- of localization identifies Q-images even in different universes. Compute both
- right-derived images using one K-injective resolution to identify the independently
- supplied direct-image functors. The resulting isomorphisms compose as stated.
- Zero sheaves, zero-rank free terms and empty schemes are covered by the same
- computations. No bounded-below hypothesis is required: bounded above ensures K-flatness.
-(blueprint: lem-pc-cartesian-flat-single-termwise-comparison). -/
+(K-flat computation) and Tag 08FE (open base change). -/
 theorem cartesian_flat_single_termwise_comparison
     {X S T Y : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX}

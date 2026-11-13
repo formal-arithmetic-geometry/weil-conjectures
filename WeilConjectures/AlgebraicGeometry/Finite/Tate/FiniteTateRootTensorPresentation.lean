@@ -345,24 +345,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
 
 /-- The root projection identifies the first finite coefficient twist with the
 fixed-scalar extension of the finite roots module, retaining its tensor formula.
-Source: Stacks 03CY, 03EK and 03PK; the first step of
-`lem-amb-finite-tate-normalized-comparisons`.
-(blueprint: lem-amb-finite-tate-root-tensor-presentation).
-
-Proof: map the global unit hypothesis to each stalk and lower the annihilation
-identity through `ULift.down`. Apply `ambTateRootProjectionReduction` and restrict
-its theta to constant coefficients. The restricted ringed scalar extension and
-`finiteRootProTensor` both represent additive maps from the finite root sheaf:
-additive maps are linear for lifted ZMod scalars since every scalar is an integer
-cast; fullness of constant-scalar restriction upgrades this to sheaf-ring linearity.
-Compose the scalar-extension and sheafification Hom equivalences to construct a
-comparison. Precomposition with it is bijective for every target, so it is invertible.
-Its formula on `1` tensors comes from the Hom equivalences and its formula on general
-tensors from linearity. Sheafification naturality identifies the RingCat constant unit
-with the CommRingCat unit in the prescribed generator. Compose theta with the inverse
-comparison. The `j_pure` formula at integral scalar `1` and `theta_pure` then give the
-required generator equation. No primitive root, flatness or nonempty-base hypothesis
-is used, so the construction includes the empty scheme and zero coefficients. -/
+Source: Stacks 03CY, 03EK and 03PK. -/
 theorem finite_tate_root_tensor_presentation (T : Scheme.{u})
     (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)
     (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) :

@@ -43,9 +43,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Tensor normalization before taking the geometric scalar mate
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6; the representative
-calculation in step 1 of lem-sfb-derived-scalar-projection-normalization.
-(blueprint: lem-sfb-derived-scalar-pullback-tensor-normalization).
+Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -102,26 +100,7 @@ private theorem flat_representative {T : Scheme.{u}}
 before taking any right-adjoint mate. The coefficient comparison is the specified
 pullback of the degree-zero restricted B-module, including its unit normalization.
 
-Source: Stacks 03EK, 06YY, 07A4, 07A6; step 1 of the projection-normalization node
-(blueprint: lem-sfb-derived-scalar-pullback-tensor-normalization).
-
-Proof: choose a flat-term K-flat complex P representing M and a flat-term K-flat
-resolution Q of coefficientComplex a. Pullback preserves these resolving classes.
-Use IsDerivedTensor at P,Q and at their pullbacks, and the representative square
-of proEtaleCanonicalTensorComparison. The scalar-derived counits are invertible
-on these representatives. The inverse scalar mate is the balanced ordinary
-scalar/pullback comparison by kflat_scalar_comparison_normalization. After the
-ordinary tensor identification, both composites take the inverse image of b tensor m
-to pullback(m) tensor pullback(b). This is equality on all local pure tensors,
-including nonconstant b, so the balanced tensor universal property and sheafification
-prove equality of module maps. Applying this in every degree and using the
-single-factor complex identification proves equality of chain maps. The coefficient
-unit comparison is exactly coefficientPullback, so its degree-zero localization
-is derivedCoefficientPullback. Tensoring the resolution Q to B[0] is a
-quasi-isomorphism because P is K-flat; no flatness of B is needed. Cancel these
-resolution maps and the scalar counits. Naturality and the resolving localization
-equivalence extend the equality from P to every M. This uses no direct image,
-no geometric counit and no projection morphism. -/
+Source: Stacks 03EK, 06YY, 07A4, 07A6. -/
 theorem scalarPullback_tensor_normalization
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

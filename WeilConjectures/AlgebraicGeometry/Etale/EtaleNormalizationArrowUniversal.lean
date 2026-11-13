@@ -14,7 +14,6 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 /-! # Sourcewise universality for constant normalization arrows
 
 Source: Stacks Project, Tags 06YY and 03ED.
-(blueprint: lem-weil-pbc-etale-constant-arrow-universal-transport).
 -/
 
 @[expose] public noncomputable section
@@ -200,13 +199,11 @@ namespace AlgebraicGeometry.Scheme
 etale source and transport through the canonical coefficient mate.
 
 Source: Stacks Project, Tags 06YY and 03ED.
-(blueprint: lem-weil-pbc-etale-constant-arrow-universal-transport).
 
 The proof transports the initial structured arrow along the exact slice equivalence
 and the coefficient mate. The mate is invertible by the inverse-image scalar
 comparison, and the source and target constants are identified by the localization
-comparison. Initial objects are preserved by these isomorphisms.
--/
+comparison. Initial objects are preserved by these isomorphisms. -/
 theorem etaleNormalizationArrow_universal_of_constant
     (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S]
     (q : R →+* S)

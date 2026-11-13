@@ -23,7 +23,6 @@ import Mathlib.Data.Int.GCD
 # DenseOpenVanishingComparison
 
 Source: Stacks Project, Lemma 0GJA.
-(blueprint: lem-pbc-j2-dense-open-vanishing-comparison).
 -/
 
 @[expose] public section
@@ -154,33 +153,7 @@ private noncomputable def cohomologyIsoEquiv {X : Scheme.{u}}
   right_inv x := by rw [← Sheaf.H.map_comp_apply, e.inv_hom_id]; simp
   map_add' := map_add _
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
-(blueprint: lem-pbc-j2-dense-open-vanishing-comparison).
-
-Proof: The coefficient functor E is an equivalence, so it preserves colimits and
-sheafification. Commuting E with the left Kan extensions defining inverse image and
-extension by zero identifies G with the module-valued extension by zero of F. Apply
-`dense_open_high_cohomology` to F, and compose its additive equivalences with the
-cohomology equivalences induced by this identification. This proves the first clause.
-
-The open-closed short exact sequence for the abelian sheaf P.F makes its dense-open
-counit monic. Applying the left exact coefficient functor gives a monomorphism G -> F.
-Geometric stalk functors preserve this monomorphism. If F is p-primary, apply primary
-annihilation to the image of a stalk element of G and use injectivity to pull back the
-annihilation. Thus F primary implies G primary. The high-degree equivalences then
-transfer C3(G) to C3(F).
-
-For the reverse implication, if F is primary for some characteristic prime r, uniqueness
-of characteristic identifies r with the prime p in the C3(G) test. Apply C3(F) and
-transfer subsingleton cohomology along the same equivalences. If instead F has
-invertible-order torsion, the monomorphism makes G have invertible-order torsion too.
-Every stalk element of a p-primary G is killed by p^a and by an integer n invertible
-in k. Such n is not divisible by p, so p^a and n are coprime. Bezout makes the element
-zero. Geometric stalk conservativity gives IsZero G, and its cohomology is zero.
-The empty scheme, the full open, exponent a=0, and the zero sheaf are covered by the
-same proofs. In characteristic zero there is no prime characteristic to test. Neither
-the constructibility hypothesis nor the torsion of P.F is needed by this argument.
--/
+/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_vanishing_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

@@ -52,9 +52,7 @@ variable (k : Type u) [Field k] {Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over
 they are computed by the cohomology of `ℱ` on the affine scheme `g ⁻¹ᵁ V`, which vanishes by
 `subsingleton_H_succ_of_isAffine`; the Leray spectral sequence then degenerates.
 
-For a closed immersion this is the cohomology clause of the blueprint lemma.
-
-(blueprint: `lem-pc-closed-immersion-coherent-cohomology`) -/
+For a closed immersion this is the cohomology clause of the blueprint lemma. -/
 theorem nonempty_cohomologyFunctor_iso_pushforward_of_isAffineHom (g : X ⟶ Y)
     [g.IsOver (Spec (.of k))] [IsAffineHom g] (q : ℕ) :
     Nonempty ((SheafOfModules.isQuasicoherent X.ringCatSheaf).ι ⋙ cohomologyFunctor k q ≅

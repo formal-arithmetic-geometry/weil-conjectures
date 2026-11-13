@@ -33,10 +33,6 @@ import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 
 /-!
 # Smooth projective completions after an inseparable field extension
-
-Source: Stacks Project, Varieties, Tag 0GK5,
-`lemma-dim-1-projective-completion-after-insep`, assertions (1)-(5)
-(blueprint: lem-weil-pbc-field-curve-completion-insep).
 -/
 
 @[expose] public section
@@ -204,38 +200,13 @@ private theorem constant_field_model
 /-- A separated finite type scheme of dimension at most one has, after finite purely
 inseparable extension, componentwise normalization with smooth projective geometrically
 irreducible completions over finite separable constant fields.
-Source: Stacks Project, Varieties, Tag 0GK5
-(blueprint: lem-weil-pbc-field-curve-completion-insep).
+Source: Stacks Project, Varieties, Tag 0GK5.
 
 The integral closed immersions `c i` enumerate the reduced irreducible components of
 `X_K`: an integral closed subscheme with a given irreducible-component support is exactly
 its reduced induced subscheme, equivalently that of `(X_K)_red`. The isomorphisms `e i`
 identify `Y i` with their normalizations. Thus the equation for `ν` specifies the full
-componentwise normalization map, including its scheme structure.
-
-Proof:
-1. Take a dense projective completion of X and a finite purely inseparable extension
-   making its componentwise normalization geometrically normal. This applies directly
-   to nonreduced and empty schemes. The base-change projection is a homeomorphism,
-   preserving the dimension bound and the dense original open.
-2. Each normalized component is finite over a closed component of the projective
-   completion, hence projective. Its dimension is at most one. Geometric normality
-   descends from the normalization coproduct along the component open immersions;
-   the geometric-normality dimension-one criterion gives smoothness.
-3. The global sections of each proper integral component form a finite field extension;
-   smoothness makes it separable. Affine Stein factorization gives geometric connectedness
-   over this constant field, and finite separable base refinement preserves smoothness
-   and projectivity. Smooth geometrically connected schemes over a field are geometrically
-   irreducible, by regularity and the regular connected integral criterion.
-4. Pull back the reduced integral closed components to the original dense open. They are
-   nonempty integral schemes and enumerate its irreducible components without repetitions.
-   Normalization commutes with their open immersions by Mathlib smooth normalization base
-   change, giving the dense open immersions of their normalizations into the completions.
-5. Finite normalization and finite-type composition give the finite-presentation clauses
-   over the Noetherian field base. The normalization coproduct has a finite compact open
-   cover. The component enumeration and nonemptiness identify the empty-index case with
-   empty X, and the pullback equations give all structure-map identities.
--/
+componentwise normalization map, including its scheme structure. -/
 theorem exists_field_curve_completion_insep
     (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]

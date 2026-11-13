@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 
 /-!
 # Compatibility of identity tangent transport with the vector-space operations
-
-Source: blueprint `def-wf-lie-algebra-derivation` and
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph (blueprint:
-lem-ag-identity-tangent-addition).
 -/
 
 @[expose] public section
@@ -27,22 +23,8 @@ namespace AlgebraicGeometry.GrpObj
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The prescribed identity tangent transport sends infinitesimal multiplication to addition.
-Source: blueprint `def-wf-lie-algebra-derivation`;
-`lemma-connected-components-images-homomorphisms--3`, Multiplication paragraph; Stacks Project, Tag
-0B2B, construction of tangent addition. (blueprint: lem-ag-identity-tangent-addition)
-
-Proof: The addition formula in `exists_tangentVectors_vectorSpace` uses the pushout
-of two dual-number spectra over their common closed point. Extend each infinitesimal
-point over the two-direction square-zero spectrum using its coordinate projection
-and multiply the resulting over-morphisms. On the first axis the second extension
-restricts to the identity, and on the second axis the first does. The group unit laws
-therefore identify the restrictions of the product with the given tangent vectors.
-Uniqueness of the pushout gluing identifies this product with their gluing. Pulling
-back by the sum map recovers the product of the original points, because both
-coordinate projections composed with that map are identities. Transport by the
-identity residue isomorphism commutes with those coordinate projections and the sum
-map. The sum formula and subtype extensionality now give the asserted equality.
-No bijectivity or scalar compatibility is assumed or concluded. -/
+Source: Stacks Project, Tag
+0B2B, construction of tangent addition. -/
 theorem identity_tangent_transport_addition
     {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :
     let x := unitSection G (IsLocalRing.closedPoint k)

@@ -119,15 +119,7 @@ end AlgebraicGeometry.Etale.ExceptionalCoefficients
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical scalar tensor comparison preserves the Koszul symmetry.
-Source: Stacks 07A4 and 06YU; the signed scalar-balancing step
-(blueprint: lem-pur-etale-normalized-scalar-symmetry).
-
-Proof: identify scalar extension with the native derived functor by uniqueness of
-left adjoints, computing its representative counit. Transport the native monoidal
-structure along this identification. The unique K-flat normalization identifies its
-tensorator with etaleHomTensorComparison. The ordinary scalar adjunction is braided,
-so its derived functor and its transported monoidal structure are braided as well.
-The resulting braidedness equation is exactly the displayed signed symmetry law. -/
+Source: Stacks 07A4 and 06YU. -/
 theorem etaleNormalizedScalarSymmetry
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (Z : Scheme.{u})
     (K L : DerivedCategoryModule A Z) :

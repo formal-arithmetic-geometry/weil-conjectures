@@ -130,9 +130,7 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalEndpointsProof.DiagonalLimi
 /-!
 # The completed diagonal class
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-limit.md, clauses 1--3; Stacks Tags 099L and 099I
-(blueprint: proposition-ell-adic-cycle-class-diagonal).
+Source: Stacks Tags 099L and 099I.
 
 Strict towers have constant discrete Z_l coefficients. Only the final arrow has
 coefficients in the completed ring sheaf. Positive exponent n+1 is indexed by n.
@@ -163,8 +161,7 @@ attribute [local irreducible] diagonalCompletedSource diagonalOrdinaryRlim
 attribute [local irreducible] diagonalExactFunctorExtImage
 attribute [local irreducible] CategoryTheory.Abelian.Ext
 
-/-- The generic direct-image assertion, sharing its categorical structures.
-Source: blueprint clause 1 (blueprint: proposition-ell-adic-cycle-class-diagonal). -/
+/-- The generic direct-image assertion, sharing its categorical structures. -/
 def diagonalDirectImageAssertion
     {A : Type a} [Category.{v} A] [Abelian A]
     {B : Type b} [Category.{u} B] [Abelian B]
@@ -453,34 +450,7 @@ constant-coefficient morphism, not by a claim that individual reductions detect 
 The reduction isomorphisms are normalized against the canonical limit projections and
 the canonical derived quotient units.
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-limit.md, clauses 1 and 3;
-Stacks 099L, 099I and 099M (blueprint: proposition-ell-adic-cycle-class-diagonal).
-
-Proof:
-1. Quotient transitions and the root power transitions are epimorphisms, the latter
-by lem-pur-twist-sheaf-locally-free and invertibility of ell. proposition-milnor-sequence--3
-identifies derived and ordinary limits. The ordinary limits are the completed
-coefficient sheaf and its Tate line, by lemma-comparison-completed-coefficients--1.
-2. The diagonal is Cartier. Its complementary open is quasi-compact, since locally
-it is the distinguished affine open D(t). proposition-extension-zero-restriction-closed-subscheme--4
-preserves coefficient epimorphisms. Apply the same Milnor comparison to its direct-image
-tower; direct image commutes with ordinary limits sectionwise. This gives the
-supported completed constant. Clause 2 permits commuting the Tate line and shift.
-3. proposition-ell-adic-cycle-class-diagonal identifies simultaneous reduction of the
-integral source and G_m[1] with the supported finite constants and roots shifted
-by two. Its completion formula identifies Rlim T(partial) with derived completion
-of partial, with the intrinsic ell-completeness criterion.
-4. lemma-weil-pbc-adic-completion-reduction identifies finite reduction of this
-limit with evaluation at that level. The finite quotient has its two-term free
-resolution. Naturality identifies the map, not merely the endpoints; its quotient
-unit is adjoint to the tower projection. Thus the displayed finite arrow is the
-torsion diagonal class with its positive Cartier/Kummer normalization.
-5. lem-weil-pbc-constant-completion-equivalence identifies constant and completed
-finite reductions and completion units. Both endpoints are derived complete.
-Restriction from completed to constant coefficients is fully faithful on these
-objects by diagonalCompleteScalarRestrictionCore. Hence there is exactly one
-completed-coefficient arrow inducing the whole constant-coefficient completion.
-No assertion of uniqueness from separate finite reductions is used. -/
+Source: Stacks 099L, 099I and 099M. -/
 theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

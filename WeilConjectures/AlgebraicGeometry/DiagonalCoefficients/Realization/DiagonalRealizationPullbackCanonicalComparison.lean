@@ -81,9 +81,7 @@ theorem diagonalPullbackOrdinaryComparison_mate
       (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)).apply_symm_apply
         (diagonalPullbackRightComparison l f eX eS).hom)
 
-/-- The canonical ordinary comparison preserves every adjunction transpose.
-Source: the unit/counit formula for the inverse mate, applied to each module map.
-(blueprint: def-sfb-diagonal-realization-pullback-canonical-comparison). -/
+/-- The canonical ordinary comparison preserves every adjunction transpose. -/
 theorem diagonalPullbackOrdinaryComparison_transpose
     [IsIso (diagonalCompletedCoefficientMap l f)]
     (M : DiagonalCompleted l S) (N : DiagonalCompleted l X)
@@ -134,8 +132,7 @@ def diagonalPullbackDerivedComparison [IsIso (diagonalCompletedCoefficientMap l 
 
 /-- The canonical pullback comparison. The coefficient normalization transports the
 supplied coefficient isomorphism to the canonical map; the comparison is then exactly
-the derived ordinary inverse mate, with no further choice of natural isomorphism.
-(blueprint: def-sfb-diagonal-realization-pullback-canonical-comparison). -/
+the derived ordinary inverse mate, with no further choice of natural isomorphism. -/
 def diagonalRealization_pullback_canonical_comparison
     (coeff : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
       (Scheme.purTwistZlCompletion S l) ≅ Scheme.purTwistZlCompletion X l)
@@ -150,9 +147,7 @@ def diagonalRealization_pullback_canonical_comparison
   have hcoeff : coeff = diagonalPullbackCoefficientIso l f := Iso.ext hc
   exact hcoeff.symm ▸ diagonalPullbackDerivedComparison l f eX eS
 
-/-- At the canonical coefficient isomorphism, coefficient transport is the identity.
-Source: proof irrelevance for the coefficient normalization equation.
-(blueprint: def-sfb-diagonal-realization-pullback-canonical-comparison). -/
+/-- At the canonical coefficient isomorphism, coefficient transport is the identity. -/
 theorem diagonalRealization_pullback_canonical_comparison_normalized
     [IsIso (diagonalCompletedCoefficientMap l f)]
     (hc : (diagonalPullbackCoefficientIso l f).hom = diagonalCompletedCoefficientMap l f) :

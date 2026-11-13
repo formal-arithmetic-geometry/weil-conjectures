@@ -46,7 +46,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.AlgebraicGeometry.FreeParameterScalarMaps
 
 /-! # Canonical free-parameter evaluation data and coherence.
-Source: Stacks 08J7, 07A6, 07A7 (blueprint: def-sfb-free-parameter-scalar-maps). -/
+Source: Stacks 08J7, 07A6, 07A7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -91,12 +91,12 @@ variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]
   (φ : R.X ⟶ S.X) [IsMonHom φ]
 
 /-- K-flat derived extension of scalars, with its recorded scalar adjunction.
-Source: Stacks 07A6 (blueprint: def-sfb-free-parameter-scalar-maps). -/
+Source: Stacks 07A6. -/
 abbrev extendPoint := (Mod.extendScalars φ).leftDerivedFunctor
 
 /-- The derived tensorator of scalar extension, normalized by scalar units at the
 ordinary level. This uses preservation of flat objects, never exact scalar extension.
-Source: Stacks 07A4 (blueprint: def-sfb-free-parameter-scalar-maps). -/
+Source: Stacks 07A4. -/
 def scalarTensor (K L : DerivedCategory (PointModules R)) :
     (extendPoint R S φ).obj K ⊗ (extendPoint R S φ).obj L ≅
       (extendPoint R S φ).obj (K ⊗ L) :=

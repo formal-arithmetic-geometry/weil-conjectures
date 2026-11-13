@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 
 /-!
 # Proper Picard torsion under algebraically closed extension
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree
-one (blueprint: lem-sc-proper-pic-torsion-base-change).
 -/
 
 @[expose] public section

@@ -16,7 +16,6 @@ public import WeilConjectures.AlgebraicGeometry.Derived.ComparisonScalarExtensio
 /-! # Finite-coefficient presentations of the genuine system evaluations
 
 Source: Zheng, Construction 4.1; Bhatt--Scholze, finite coefficient comparison.
-(blueprint: def-sfb-finite-coefficient-system-evaluation)
 
 The functors change only the presentation of the same module sheaves. In
 particular the horizontal arrows below are those of the actual sequence topos.
@@ -37,10 +36,7 @@ attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConject
 
 /-- Proof alias of the existing exactness-reflection criteria for scalar restriction.
 The underlying abelian sheaf is unchanged; no new exactness theorem is postulated.
-Source: Stacks 03D7 (blueprint: def-sfb-finite-coefficient-system-evaluation).
-Proof: compose with the faithful exact forgetful functor to abelian sheaves, which
-reflects finite limits and finite colimits, and use the corresponding forgetful
-functor on the source ring. -/
+Source: Stacks 03D7. -/
 private abbrev ringRestriction_exact (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u + 1} a) ∧
@@ -54,27 +50,25 @@ private abbrev ringRestriction_exact (X : Scheme.{u})
     preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
 /-- The existing equivalence from constant-ring module sheaves to fixed-ring sheaves.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 def fixedEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   (constant_ring_module_sheaves.{u + 1, u} (Scheme.ProEt.topology X) A).1.choose
 
 /-- Its forward maps are the original scalar restrictions.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance fixedEquivalence_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (fixedEquivalence X A).functor.Additive :=
   (constant_ring_module_sheaves.{u + 1, u}
     (Scheme.ProEt.topology X) A).1.choose_spec.2.1
 
 /-- Its inverse retains the original additive sections and maps.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance fixedEquivalence_inverse_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (fixedEquivalence X A).inverse.Additive :=
   (constant_ring_module_sheaves.{u + 1, u}
     (Scheme.ProEt.topology X) A).1.choose_spec.2.2.1
 
-/-- Canonical finite realization on the pro-etale site, through the constant-section iso.
-Source: finite coefficient comparison
-(blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+/-- Canonical finite realization on the pro-etale site, through the constant-section iso. -/
 def finiteRealization (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     [TopologicalSpace A] [DiscreteTopology A] :
     Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A) ⥤
@@ -85,9 +79,7 @@ def finiteRealization (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A
       (Scheme.ProEt.topology X) A).hom ⋙
     res.{u + 1, u, u + 1} (finiteConstantIso X A).inv
 
-/-- The inverse finite presentation, with its unchanged underlying additive maps.
-Source: finite coefficient comparison
-(blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+/-- The inverse finite presentation, with its unchanged underlying additive maps. -/
 def finiteUnrealization (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     [TopologicalSpace A] [DiscreteTopology A] :
     WeilConjectures.SemilinearSections.Mod.{u + 1, u, u + 1}
@@ -97,7 +89,7 @@ def finiteUnrealization (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite
     CategoryTheory.ConstantScalarRestriction.restriction (Scheme.ProEt.topology X) A
 
 /-- Finite realization is additive.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteRealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteRealization X A).Additive := by
@@ -105,7 +97,7 @@ instance finiteRealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
   infer_instance
 
 /-- Finite realization preserves finite limits.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteRealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteLimits (finiteRealization X A) := by
@@ -117,7 +109,7 @@ instance finiteRealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing 
   infer_instance
 
 /-- Finite realization preserves finite colimits.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteRealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteColimits (finiteRealization X A) := by
@@ -129,7 +121,7 @@ instance finiteRealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
   infer_instance
 
 /-- The inverse presentation is additive.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteUnrealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteUnrealization X A).Additive := by
@@ -140,7 +132,7 @@ instance finiteUnrealization_additive (X : Scheme.{u}) (A : Type (u + 1)) [CommR
   infer_instance
 
 /-- The inverse presentation preserves finite limits.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteUnrealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteLimits (finiteUnrealization X A) := by
@@ -157,7 +149,7 @@ instance finiteUnrealization_limits (X : Scheme.{u}) (A : Type (u + 1)) [CommRin
   infer_instance
 
 /-- The inverse presentation preserves finite colimits.
-Source: Stacks 03DA (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03DA. -/
 instance finiteUnrealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     PreservesFiniteColimits (finiteUnrealization X A) := by
@@ -174,7 +166,7 @@ instance finiteUnrealization_colimits (X : Scheme.{u}) (A : Type (u + 1)) [CommR
   infer_instance
 
 /-- The finite presentation is an exact equivalence, with its original section maps.
-Source: Stacks 03CY (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03CY. -/
 instance finiteUnrealization_isEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
     (finiteUnrealization X A).IsEquivalence := by
@@ -190,8 +182,7 @@ instance finiteUnrealization_isEquivalence (X : Scheme.{u}) (A : Type (u + 1)) [
 
 /-- The ordinary tensor comparison sends local pure tensors to the same pure tensors.
 Both factors use published, proved tensor-transport constructions.
-Source: Stacks 03CY, 06YT
-(blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 03CY, 06YT. -/
 @[instance_reducible]
 def finiteUnrealizationMonoidal (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     [Finite A] [TopologicalSpace A] [DiscreteTopology A] :
@@ -207,7 +198,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Ordinary fixed-module evaluation of the actual system.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 def fixedEvaluation (X : Scheme.{u}) (n : ℕ) :
     Systems.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) ⥤
@@ -218,26 +209,26 @@ def fixedEvaluation (X : Scheme.{u}) (n : ℕ) :
       finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n)
 
 /-- Fixed evaluation preserves addition through the exact finite presentation.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 instance fixedEvaluation_additive (X : Scheme.{u}) (n : ℕ) :
     (fixedEvaluation l E X n).Additive := by unfold fixedEvaluation; infer_instance
 
 /-- Fixed evaluation preserves finite limits through the exact finite presentation.
-Source: Stacks 0941 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 0941. -/
 instance fixedEvaluation_limits (X : Scheme.{u}) (n : ℕ) :
     PreservesFiniteLimits (fixedEvaluation l E X n) := by
   unfold fixedEvaluation
   infer_instance
 
 /-- Fixed evaluation preserves finite colimits through the exact finite presentation.
-Source: Stacks 0941 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 0941. -/
 instance fixedEvaluation_colimits (X : Scheme.{u}) (n : ℕ) :
     PreservesFiniteColimits (fixedEvaluation l E X n) := by
   unfold fixedEvaluation
   infer_instance
 
 /-- Its exact derived evaluation, without choosing level objects.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 def fixedDerivedEvaluation (X : Scheme.{u}) (n : ℕ) :
     DS.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X) ⥤
@@ -248,17 +239,15 @@ def fixedDerivedEvaluation (X : Scheme.{u}) (n : ℕ) :
       (finiteUnrealization X (Etale.FiniteProperQuotient.Ring l E n)).mapDerivedCategory
 
 /-- Exact derived etale-to-pro-etale comparison with the original fixed coefficients.
-Source: Bhatt--Scholze, finite coefficient comparison
-(blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Bhatt--Scholze, finite coefficient comparison. -/
 def nu (X : Scheme.{u}) (n : ℕ) :=
   (comparisonUpperStar (ModuleCat.{u + 1} (Etale.FiniteProperQuotient.Ring l E n))
     X).mapDerivedCategory
 
 /-- The canonical derived comparison between scalar extension and `nu^*`.
-Source: Stacks 09B1 and 0F63, via the scalar-restriction comparison square
-(blueprint: def-sfb-finite-coefficient-system-evaluation).
-The map is the mate of the existing comparison isomorphism, hence it is tied
-to the derived scalar-extension adjunction and is not an arbitrary natural map. -/
+Source: Stacks 09B1 and 0F63, via the scalar-restriction comparison square. The map is the mate of
+the existing comparison isomorphism, hence it is tied to the derived scalar-extension adjunction and
+is not an arbitrary natural map. -/
 noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙
@@ -281,19 +270,14 @@ noncomputable def nuFixedScalarExtensionComparisonMap (X : Scheme.{u})
     ).symm (TwoSquare.mk _ _ _ _ (Scheme.comparisonRestrictScalarsIso X A φ).hom))
 
 /-- The canonical `nu^*`/scalar-extension comparison is invertible.
-Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation).
-Proof: compute derived scalar extension on K-flat complexes. Exact comparison
-pullback preserves flat sheaves and commutes with sheafified scalar tensor.
-The ordinary scalar tensor comparison is an isomorphism on every term. Passing
-to the localization gives the displayed mate, because its restriction mate is
-exactly comparisonRestrictScalarsIso. Hence the derived mate is invertible. -/
+Source: Stacks 09B1 and 0F63. -/
 theorem nuFixedScalarExtensionComparisonMap_isIso (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     IsIso (nuFixedScalarExtensionComparisonMap X φ) := by
   exact ProEtale.isIso_mate_comparisonRestrictScalarsIso φ X
 
 /-- The canonical comparison isomorphism used by the finite reduction maps.
-Source: Stacks 09B1 and 0F63 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Stacks 09B1 and 0F63. -/
 noncomputable def nuFixedScalarExtensionComparison (X : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙
@@ -514,16 +498,7 @@ theorem finiteUnrealizationSemilinearMap_forget (X : Scheme.{u}) {A B : Type (u 
         (Scheme.ProEt.topology X) (sectionRing X A))).map f) :=
   HEq.rfl
 /-- The fixed coefficient transition is the original horizontal additive map.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation).
-
-Proof: evaluate a module system at m and n. Its horizontal map is linear over
-A_m through the original quotient A_m to A_n. The constant-section maps commute
-with continuous postcomposition. Consequently forgetting the two constant-ring
-presentations turns this into precisely a map of fixed A_m-module sheaves.
-The naturality square is the square already present in the module system.
-Conversely the faithful forgetful functor to additive sheaves determines every
-component and hence the natural transformation uniquely. No flatness is used.
--/
+Source: Zheng 4.1. -/
 theorem fixedTransition_existsUnique (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     ∃! δ : fixedEvaluation l E X m ⟶ fixedEvaluation l E X n ⋙
         Sheaf.restrictScalars (Scheme.ProEt.topology X)
@@ -552,12 +527,12 @@ theorem fixedTransition_existsUnique (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) 
   exact eq_of_heq ((hδ' M).trans (finiteUnrealizationSemilinearMap_forget X _ _ hκ (T.app M)).symm)
 
 /-- The uniquely normalized fixed-coefficient horizontal map.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 def fixedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
   (fixedTransition_existsUnique l E X h).exists.choose
 
 /-- Derived descent of the original horizontal map, including the localization compositors.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 def fixedDerivedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     fixedDerivedEvaluation l E X m ⟶ fixedDerivedEvaluation l E X n ⋙
       Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X)
@@ -579,7 +554,7 @@ def fixedDerivedTransition (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
       (Etale.FiniteProperQuotient.quotient l E h))
 
 /-- Scalar-adjunction transpose of that map: the actual derived reduction of a system.
-Source: Zheng 4.1 (blueprint: def-sfb-finite-coefficient-system-evaluation). -/
+Source: Zheng 4.1. -/
 def fixedReduction (X : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
     (M : DS.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
       (coefficients l E X) (transitions l E X)) :

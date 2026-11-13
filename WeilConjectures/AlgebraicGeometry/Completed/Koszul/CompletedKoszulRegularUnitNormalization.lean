@@ -317,22 +317,7 @@ private lemma completedRegularUnitIso_normalization (r : ℕ) (a : Fin r → A) 
       congrArg (fun f ↦ (scalarUnitIso (completedAdicScalar T d)).inv ≫
         eqToHom (hG (SheafOfModules.unit R)).symm ≫ f) hc)
 
-/-- One fixed regular-module isomorphism realizes every normalized degree-zero Koszul unit.
-
-Source: Stacks Project, Modules on Sites, section on tensor products (03EK), and
-proetale.tex, proof of lemma-naive-completion (099M).
-(blueprint: lem-weil-pbc-completed-koszul-regular-unit-normalization).
-
-Proof: the constant regular-module unit is invertible by the sheafification adjunction:
-its inverse sends the sheafified generator 1 back to 1, and both inverse equations are
-checked on that generator. For scalar extension of the regular module, use sectionwise
-s tensor r mapped to s*phi(r). This tensor isomorphism commutes with restrictions;
-sheafification and its counit identify it with the regular module over the new ring.
-The inverse sends 1 to the sheafification of 1 tensor 1. Compose that inverse with the
-realized constant regular-module unit. For each Koszul level, functoriality of scalar
-tensor sends its exterior degree-zero inclusion to the prescribed completed unit on 1.
-The unit-module/global-section equivalence proves equality of the maps. This uses no
-nonzero-ring, positive-rank, or nonempty-site hypothesis. -/
+/-- One fixed regular-module isomorphism realizes every normalized degree-zero Koszul unit. -/
 theorem completedKoszulRegularUnitNormalization
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) :

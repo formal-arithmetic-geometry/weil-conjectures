@@ -17,10 +17,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
 # Explicit étale-origin witnesses
-
-Source: Weil conjectures blueprint, proper base change,
-`proposition-proper-direct-image-constructible-complexes--5`, order 1289
-(blueprint: proposition-proper-direct-image-constructible-complexes--5).
 -/
 
 @[expose] public section
@@ -35,9 +31,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- An explicit bounded-below étale origin for a pro-étale derived object.  The source
 retains the étale complex and its comparison isomorphism as data, rather than merely
-asserting that such data exists. Source: Weil conjectures blueprint,
-`proposition-proper-direct-image-constructible-complexes--5` (blueprint:
-proposition-proper-direct-image-constructible-complexes--5). -/
+asserting that such data exists. -/
 structure EtaleOriginWitness (T : Scheme.{u}) (Λ : Type (u + 1))
     [Ring Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : FiniteCoefficientDerivedCategoryPlus T Λ) where

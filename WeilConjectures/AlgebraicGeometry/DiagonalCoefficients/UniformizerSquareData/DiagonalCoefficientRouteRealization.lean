@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteEndpoints
 
 /-! # Realization identities for finite coefficient routes
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: lem-diagonal-coefficient-route-realization).
 -/
 
 @[expose] public noncomputable section

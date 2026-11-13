@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicTransportEquation
 
 /-! # Literal proposition wrapper for the cyclic transport equation
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-finite-class-transport).
 -/
 
 @[expose] public noncomputable section
@@ -52,12 +49,7 @@ attribute [local semireducible] finiteCyclicTransportEquation cyclicTransportEqu
 
 attribute [local semireducible] cyclicRestrictedFrameClass
 
-/-- The named canonical finite class is the original exact-functor image.
-Source: definition of the finite Cartier class
-(blueprint: lem-diagonal-cyclic-finite-class-transport).
-Proof: unfold both literal equation predicates, the canonical finite class and
-its generic exact-functor image wrapper. The given equality has precisely the
-original conclusion. No finite normalization or coefficient comparison is used. -/
+/-- The named canonical finite class is the original exact-functor image. -/
 theorem finiteCyclicTransport_to_transportEquation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

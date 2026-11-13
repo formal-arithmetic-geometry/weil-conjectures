@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.Quotient.EtaleQuotientTensorProje
 /-! # The restricted compact-support coefficient projection
 
 Source: Zheng, Proposition 2.29(2), Construction 2.26, Lemma 5.22 and Proposition 5.24,
-printed pp. 16, 36--37 (blueprint: lem-pur-etale-quotient-tensor-projection).
+printed pp. 16, 36--37.
 
 This identity compares the canonical coefficient map with the constant-tensor
 projection. Its coefficient complex and scalar/tensor identifications are written
@@ -36,20 +36,7 @@ open CategoryTheory CategoryTheory.Limits SheafOfModules
 namespace AlgebraicGeometry.Etale
 
 /-- Restriction of the actual scalar projection is the constant-coefficient projection.
-Source: Zheng, Proposition 2.29(2) and Construction 2.26; Stacks Tag 0GL6.
-(blueprint: lem-pur-etale-quotient-tensor-projection).
-
-Proof: expand the compact-support coefficient map as proper scalar mate followed by
-open balancing. The restriction/proper-image comparison and scalar/tensor comparison
-identify the first factor with the counit-defined proper projection. For the open
-factor, restrict the two maps to the open and apply the invertible extension/restriction
-unit. Both are the same balanced tensor map there; off the open both are zero.
-Thus this factor is the inverse open projection followed by the coefficient pullback.
-Naturality pastes these two squares. Exact descent of the constant-sheaf comparison
-identifies the coefficient pullback with exceptionalConstantPullbackIso. Moving the
-signed tensor symmetries through the projection gives coefficient-first order, which
-is precisely exceptionalConstantProjectionMap. On K-flat representatives these are
-the ordinary tensor comparisons, so no flatness of the ring map is required. -/
+Source: Zheng, Proposition 2.29(2) and Construction 2.26; Stacks Tag 0GL6. -/
 theorem etaleQuotientTensorProjection
     {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

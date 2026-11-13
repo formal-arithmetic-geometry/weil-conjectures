@@ -17,9 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotie
 
 /-! # Regular scalars and finite quotients of completed coefficients
 
-Source: blueprint, chap-Smooth-purity, proposition-sp-integral-towers proof, first paragraph,
-and coefficient setup in prose-09-21; Stacks Tags 00WK and 00YR.
-(blueprint: lem-sp-completed-coefficient-regular-quotients).
+Source: Stacks Tags 00WK and 00YR.
 
 Natural level n denotes exponent n+1. The commutative-ring objects below retain the
 underlying ring sheaves of the recorded coefficient towers. Quotients are the existing
@@ -41,9 +39,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{t})
 
-/-- A constant integral scalar as a compatible section of the actual completed ring.
-Source: blueprint, coefficient setup, constant scalar convention
-(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+/-- A constant integral scalar as a compatible section of the actual completed ring. -/
 def spCompletedScalarSection (a : Padic.coefficientExtensionIntegers l E) :
     ((completedIntegralCommRingSheafUnrestricted l E T).obj ⋙
       forget CommRingCat.{max u (t + 1)}).sections :=
@@ -57,18 +53,14 @@ def spCompletedScalarSection (a : Padic.coefficientExtensionIntegers l E) :
         (forget CommRingCat.{max u (t + 1)}))
       ⟨fun _ ↦ ULift.up a, fun _ ↦ rfl⟩)
 
-/-- The recorded ell-power constant coefficient sheaf, retaining commutativity.
-Source: blueprint, coefficient towers, R_(n+1)
-(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+/-- The recorded ell-power constant coefficient sheaf, retaining commutativity. -/
 def spEllCommRingSheaf (n : ℕ) :
     Sheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)} :=
   (constantSheaf _ CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{t + 1}
       (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))
 
-/-- The actual ell-power projection, from the uniquely normalized tower comparison.
-Source: blueprint, coefficient towers, completed-coefficient comparison
-(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+/-- The actual ell-power projection, from the uniquely normalized tower comparison. -/
 def spCompletedEllCommRingProjection (n : ℕ) :
     completedIntegralCommRingSheafUnrestricted l E T ⟶ spEllCommRingSheaf l E T n where
   hom :=
@@ -81,9 +73,7 @@ def spCompletedEllCommRingProjection (n : ℕ) :
         (((sp_completed_coefficient_limit l E T).choose.hom ≫
           limit.π (spCoefficientRings l E T) (op n)).hom.naturality f) }
 
-/-- Every uniformizer quotient transition, induced by the identity on integers.
-Source: blueprint, finite coefficient reductions
-(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+/-- Every uniformizer quotient transition, induced by the identity on integers. -/
 def spUniformizerQuotientTransition {m n : ℕ} (h : m ≤ n) :
     integralCoefficientCommRingSheaf l E T n ⟶ integralCoefficientCommRingSheaf l E T m :=
   (constantSheaf _ CommRingCat.{max u (t + 1)}).map
@@ -91,9 +81,7 @@ def spUniformizerQuotientTransition {m n : ℕ} (h : m ≤ n) :
       (Ideal.Quotient.factorPow (Ideal.span {Padic.coefficientExtensionUniformizer l E})
         (Nat.add_le_add_right h 1))))
 
-/-- Every ell-power quotient transition, induced by the identity on integers.
-Source: blueprint, coefficient towers, quotient reductions
-(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+/-- Every ell-power quotient transition, induced by the identity on integers. -/
 def spEllQuotientTransition {m n : ℕ} (h : m ≤ n) :
     spEllCommRingSheaf l E T n ⟶ spEllCommRingSheaf l E T m :=
   (constantSheaf _ CommRingCat.{max u (t + 1)}).map
@@ -368,32 +356,7 @@ private theorem quotient_iso {C : Type t} [Category C]
 /-- Completed coefficients have regular positive scalar powers and the specified finite
 quotients, with the actual projections and all quotient transitions normalized.
 
-Source: blueprint, proposition-sp-integral-towers proof, first paragraph; coefficient setup in
-prose-09-21; Stacks Tags 00WK, 00YR, 03CO and 03DB.
-(blueprint: lem-sp-completed-coefficient-regular-quotients).
-
-Proof: (1) DVR factorization gives ell = u pi^e. The extending absolute value of ell
-is less than one, so e is positive. Equality (ell^n)=(pi^(en)) proves cofinality;
-finite residue field and the finite-quotient theorem give finiteness of both families.
-(2) The integral-limit comparison identifies the actual completed ring and its scalar
-map with the uniformizer tower. Cofinal restriction to en identifies the ell tower:
-reduce from a sufficiently large en to define the inverse, independently of the choice.
-(3) Apply completedIntegralScalar_regular on every object to pi powers.
-(4) Apply completedIntegralProjection_divisible at index j-1 to a section in ker rho_j;
-it is a pi^j multiple. The converse follows by reduction. Injectivity ensures unique
-preimages glue, so this sectionwise ideal is the ideal subsheaf pi^jR.
-(5) A section of the finite constant sheaf locally comes from O/pi^j, by 00WK and the
-underlying-set comparison for ring sheafification. Lift the representative to O and
-then to its compatible constant family. These local lifts prove rho_j is epi by sheaf
-separatedness and cancellation against any two maps out of its target.
-(6) Multiplication by the constant unit u^n is invertible. Hence ell^n is regular,
-ell^nR=pi^(en)R, and the same conclusions hold for the actual ell projections.
-(7) The sectionwise quotient map descends through ring sheafification. To construct its
-inverse, lift target sections locally and glue their quotient classes: differences
-of lifts lie in the kernel ideal by (4) and (6). The inverse is independent of lifts,
-respects restrictions and ring operations, and is inverse on local representatives.
-Both composites in each transition square send a local representative x to its lower
-reduction; 00WK and separatedness imply equality. No property of T is used. -/
+Source: Stacks Tags 00WK, 00YR, 03CO and 03DB. -/
 theorem sp_completed_coefficient_regular_quotients :
     (∃ (v : (Padic.coefficientExtensionIntegers l E)ˣ) (e : ℕ),
       1 ≤ e ∧ (l : Padic.coefficientExtensionIntegers l E) =

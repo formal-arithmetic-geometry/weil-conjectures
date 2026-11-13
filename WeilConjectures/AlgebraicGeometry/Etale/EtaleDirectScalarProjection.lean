@@ -45,10 +45,9 @@ private def curryComparison
 namespace AlgebraicGeometry.Etale
 
 /-- The ordered counit projection as a natural transformation in the input object.
-Source: Stacks 0GL6, counit projection formula
-(blueprint: lem-pur-etale-direct-scalar-projection).
-It is a composite of the source symmetry, the flipped counit projection, and the
-image of the target symmetry, so its naturality is inherited from these maps. -/
+Source: Stacks 0GL6, counit projection formula. It is a composite of the source symmetry, the
+flipped counit projection, and the image of the target symmetry, so its naturality is inherited from
+these maps. -/
 @[irreducible] def orderedDirectProjectionNat (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (p : X ⟶ Y) (K : DerivedCategoryModule R Y) :
     (lowerStar (ModuleCat.{u + 1} R) p).rightDerivedFunctor ⋙
@@ -65,8 +64,7 @@ image of the target symmetry, so its naturality is inherited from these maps. -/
       (lowerStar (ModuleCat.{u + 1} R) p).rightDerivedFunctor
 
 /-- The counit projection, with the base coefficient first.
-Source: Stacks 0GL6, projection formula preceding change of rings
-(blueprint: lem-pur-etale-direct-scalar-projection). -/
+Source: Stacks 0GL6, projection formula preceding change of rings. -/
 @[irreducible] def orderedDirectProjection (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (K : DerivedCategoryModule R Y) (E : DerivedCategoryModule R X) :
@@ -78,8 +76,7 @@ Source: Stacks 0GL6, projection formula preceding change of rings
   (orderedDirectProjectionNat R p K).app E
 
 /-- The component formula for the structured ordered projection.
-Source: Stacks 0GL6, counit projection formula
-(blueprint: lem-pur-etale-direct-scalar-projection). -/
+Source: Stacks 0GL6, counit projection formula. -/
 theorem orderedDirectProjection_eq (R : Type (u + 1)) [CommRing R]
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (K : DerivedCategoryModule R Y) (E : DerivedCategoryModule R X) :
@@ -113,19 +110,7 @@ private theorem orderedDirectProjection_flip
     flipFunctor_map_app_app, Functor.flip_map_app] using h
 
 /-- The scalar mate intertwines the two ordered counit projections.
-Source: Stacks 0GL6 and 07A4; compact-scalar coherence proof step 2, proper part.
-(blueprint: lem-pur-etale-direct-scalar-projection).
-Proof: apply the B-geometric adjunction's Hom equivalence to both composites.
-The mate counit identity replaces the pullback of scalarMate followed by counit
-by scalarPullbackIso followed by scalar extension of the A-counit. Naturality
-moves the tensor comparisons past that counit. The binary scalar/pullback tensor
-square identifies the remaining composites. This is the identity-topos coefficient
-specialization of ringed exchange/tensor coherence. Conjugate by the canonical
-signed tensor symmetries on source and target to put the coefficient first.
-Scalar tensor comparison respects these symmetries: on homogeneous K-flat
-representatives both paths have sign (-1)^(pq), and localization descends that
-identity. The argument applies to every morphism and every unbounded input;
-properness and finite coefficients are unnecessary. -/
+Source: Stacks 0GL6 and 07A4. -/
 theorem etaleDirectScalarProjection
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (p : X ⟶ Y)

@@ -40,9 +40,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 /-- The canonical positive Cartier class after restriction of the finite scalars.
 The source and target are inferred from the canonical class itself, so the
-categorical structures of the finite functor and the Ext class are shared.
-Source: diagonal-system finite normalization, clause (4).
-(blueprint: def-sfb-diagonal-trace-finite-cartier-class). -/
+categorical structures of the finite functor and the Ext class are shared. -/
 @[irreducible]
 def finiteCartierClass (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤))) (n : ℕ) :=

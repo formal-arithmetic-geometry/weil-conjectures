@@ -20,8 +20,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The sectionwise tensor comparison obtained from the two normalized base comparisons
 and native tensor pullback. Its defining composite makes the tensor square commute.
-Source: Stacks 03EL and the native balanced tensor comparison
-(blueprint: lem-sf-adic-slice-tensor). -/
+Source: Stacks 03EL and the native balanced tensor comparison. -/
 noncomputable def adicSliceTensorIso (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),
@@ -179,23 +178,7 @@ private lemma adicSliceTensorIso_hom (l : ℕ) [Fact l.Prime]
   rfl
 
 /-- The explicitly constructed tensor restriction iso preserves local pure tensors.
-Source: Stacks 03EL and 0E8H; the pure-tensor test in step 2 of the parent comparison.
-(blueprint: lem-sf-adic-slice-tensor).
-
-Proof: native tensor pullback is normalized by its equation before the balanced
-quotient. The native inverse-image/localization comparison is monoidal, so on
-local pure tensors it gives the same underlying restricted sections in each
-factor. Insert the base tensor_sections formulas and the restriction
-slice_sections formulas into the defining composite of adicSliceTensorIso.
-The second-factor tensor map sends x ⊗ y to x ⊗ sn(y), and the first-factor
-map has the analogous formula. The quotient equation and the two base
-normalizations therefore cancel the inverse part of that composite on a pure
-tensor. What remains is exactly the local pure tensor on the restricted site.
-Equivalently use exists_localizedSiteTensorRestriction on the actual slice
-site: its iso preserves pure tensors, and its composite with the native and
-base comparisons is the same by the coequalizer universal property, so equals
-the explicitly constructed iso. This proof applies to arbitrary modules and
-includes their zero sections. -/
+Source: Stacks 03EL and 0E8H. -/
 theorem adicSliceTensorIso_sections (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),

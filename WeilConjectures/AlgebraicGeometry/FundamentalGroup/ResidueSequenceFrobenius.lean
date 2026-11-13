@@ -73,7 +73,7 @@ open FiniteEtale
 
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: Frobenius equivariance of the residue map.
+/-- Frobenius equivariance of the residue map.
 
 Let `E_C` be an automorphism of `C`, semilinear over an automorphism `σ₀` of `k`, restricting to
 an automorphism `E_U` of `U`. The residue at `E_C z` against `ξ` of the transport of a torsor `T`
@@ -157,7 +157,7 @@ theorem residue_mapIso (EC : C ≅ C) (EU : U ≅ U) (hE : EU.hom ≫ j = j ≫ 
   · rw [← hconj, hxσ, map_mul, map_pow, hκ, hχ]
     rfl
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: a Frobenius power fixing a boundary point
+/-- A Frobenius power fixing a boundary point
 acts on the residues there as multiplication by `Q`.
 
 Let `E_C` be an automorphism of `C` fixing `z`, semilinear over `σ₀` with `σ₀(x) ^ Q = x` (for a
@@ -220,7 +220,7 @@ lemma castHom_eq_of_compatible (hl : l.Prime)
       ← RingHom.comp_apply, ZMod.castHom_comp]
     rfl
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the inverse-limit boundary module
+/-- The inverse-limit boundary module
 `lim_n Hom(μ_{lⁿ}, ℤ / lⁿ) = ℤ_l(-1)` has no nonzero element fixed by `Φ_Q`, which acts on it as
 multiplication by `Q ≥ 2`: a compatible system `(r_n)` with `Q r_n = r_n` for all `n` is zero. -/
 theorem eq_zero_of_compatible_of_smul_eq_self (hl : l.Prime) {Q : ℕ} (hQ : 2 ≤ Q)

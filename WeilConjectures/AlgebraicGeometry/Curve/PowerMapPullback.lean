@@ -11,9 +11,6 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Pullback of power maps from the constant sheaf to units
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case,
-compatible primitive-root trivializations (blueprint: lem-sc-power-map-pullback).
 -/
 
 @[expose] public section

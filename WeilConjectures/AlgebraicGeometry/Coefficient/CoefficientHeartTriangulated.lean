@@ -18,10 +18,6 @@ import Mathlib.CategoryTheory.ObjectProperty.Retract
 /-!
 # Bounded constructible field-coefficient complexes form a thick triangulated subcategory
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-coefficient-heart-ii,
-`sk-cor-coefficient-heart-ii-triangulated.md`
-(blueprint: corollary-coefficient-heart-b--1).
-
 The property is the recorded finite-constant-model notion, not the different upstream
 stratified-local-finite-presentation property. The two coefficient choices carry their
 canonical ring-object structures. The algebraic-closure coefficient has sections valued
@@ -82,18 +78,13 @@ triangulated full subcategories of the ambient derived categories of `Λ_X`-modu
 isomorphism closure, rotation gives the two-out-of-three property for all distinguished
 triangles. `IsStableUnderRetracts` is closure under direct summands, i.e. thickness.
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-cor-coefficient-heart-ii,
-`sk-cor-coefficient-heart-ii-triangulated.md`
-(blueprint: corollary-coefficient-heart-b--1).
-
 Proof plan:
 1. Work with the actual pulled-back ring `Λ_X` and its abelian module category, using
    prose-01-10, situation-conventions and
    corollary-coefficient-heart-b--1. By corollary-coefficient-heart-b--1,
    membership means finite cohomological support and constructible cohomology. Zero has
-   the zero finite constant model (definition-constructible-sheaves--1), with the empty
-   stratification on an empty scheme. Cohomology preserves isomorphisms, so constructibility
-   and finite support are invariant under isomorphism.
+   the zero finite constant model, with the empty stratification on an empty scheme. Cohomology
+   preserves isomorphisms, so constructibility and finite support are invariant under isomorphism.
 2. By corollary-coefficient-heart-b--1, H^q(K[n]) is H^{q+n}(K). Translate the finite
    cohomological support by -n and transport the local models through this isomorphism.
    This gives all shifts, including +1 and -1.
@@ -105,9 +96,9 @@ Proof plan:
    This uses the image/coimage identity in corollary-coefficient-heart-b--1 and
    corollary-coefficient-heart-b--1. By lemma-constructible-sheaves, the endpoints and then the
    middle term are constructible, for precisely the stated field coefficients and Noetherian base.
-5. Rotate the triangle once or twice (corollary-coefficient-heart-b--1) to cover the
-   other two choices of vertices; undo shifts by step 2. Zero, shifts and extension
-   closure give corollary-coefficient-heart-b--1 in the ambient triangulated category.
+5. Rotate the triangle once or twice to cover the other two choices of vertices; undo shifts by step
+   2. Zero, shifts and extension closure give corollary-coefficient-heart-b--1 in the ambient
+   triangulated category.
 6. If K is a retract of L, applying H^q gives maps a : H^q K → H^q L and b back with
    a ≫ b = 1. The first map identifies H^q K with ker(1 - b ≫ a), an endomorphism of
    the constructible H^q L. Kernel closure in lemma-constructible-sheaves therefore

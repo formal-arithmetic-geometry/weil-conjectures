@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteSiteWordRefinement
 
 /-! # Finite-site comparison of a compatible proper/open tower
 
-Source: Stacks Project, Tags 0F7J and 0F7B, the four composition equalities
-(blueprint: lem-sp-finite-site-tower-paste).
+Source: Stacks Project, Tags 0F7J and 0F7B, the four composition equalities.
 -/
 
 @[expose] public noncomputable section
@@ -41,43 +40,35 @@ private local instance tower_has_proper_exchange
 
 variable (R : Type (u + 1)) [CommRing R]
 
-/-- Bounded-below etale coordinates. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Bounded-below etale coordinates. Source: Stacks 0F7J. -/
 abbrev DE (X : Scheme.{u}) :=
   DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))
 
-/-- Bounded-below pro-etale coordinates. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Bounded-below pro-etale coordinates. Source: Stacks 0F7J. -/
 abbrev DP (X : Scheme.{u}) :=
   DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))
 
-/-- Exact site comparison, restricted to D+. Source: Stacks 099R
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Exact site comparison, restricted to D+. Source: Stacks 099R. -/
 abbrev N (X : Scheme.{u}) :=
   (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus
 
-/-- Etale direct image on D+. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Etale direct image on D+. Source: Stacks 0F7J. -/
 abbrev PE {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (Etale.lowerStar (ModuleCat.{u + 1} R) f).rightDerivedFunctorPlus
 
-/-- Pro-etale direct image on D+. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Pro-etale direct image on D+. Source: Stacks 0F7J. -/
 abbrev PP {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (lowerStar (ModuleCat.{u + 1} R) f).rightDerivedFunctorPlus
 
-/-- Etale open extension on D+. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Etale open extension on D+. Source: Stacks 0F7J. -/
 abbrev JE {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :=
   (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus
 
-/-- Pro-etale open extension on D+. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Pro-etale open extension on D+. Source: Stacks 0F7J. -/
 abbrev JP {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus
 
-/-- The actual two-edge comparison, not an arbitrary isomorphism. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The actual two-edge comparison, not an arbitrary isomorphism. Source: Stacks 0F7J. -/
 def B {X W Y : Scheme.{u}} (j : X ⟶ W) [IsOpenImmersion j] (r : W ⟶ Y)
     (E : DE R X) :
     (N R Y).obj ((PE R r).obj ((JE R j).obj E)) ⟶
@@ -86,8 +77,7 @@ def B {X W Y : Scheme.{u}} (j : X ⟶ W) [IsOpenImmersion j] (r : W ⟶ Y)
     (PP R r).map ((properOpenSiteExtensionIso R j).hom.app E)
 
 /-- The canonical etale proper compositor, normalized by inverse adjunction conjugacy.
-Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def kE {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) :
     PE R a ⋙ PE R b ≅ PE R (a ≫ b) :=
   (conjugateIsoEquiv
@@ -97,8 +87,7 @@ def kE {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) :
     (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} R) a b).symm).symm
 
 /-- The canonical pro-etale proper compositor, normalized by inverse adjunction conjugacy.
-Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def kP {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) :
     PP R a ⋙ PP R b ≅ PP R (a ≫ b) :=
   (conjugateIsoEquiv
@@ -109,16 +98,14 @@ def kP {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z) :
       (upperStarComp (ModuleCat.{u + 1} R) a b) ≪≫
       Functor.mapDerivedCategoryPlusCompIso _ _).symm).symm
 
-/-- Canonical etale open compositor. Source: Stacks 03EH
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Canonical etale open compositor. Source: Stacks 03EH. -/
 def mE {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] : JE R a ⋙ JE R b ≅ JE R (a ≫ b) :=
   (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryPlusNatIso
       (Etale.openImmersionLowerShriekComp (ModuleCat.{u + 1} R) a b).symm
 
-/-- Canonical pro-etale open compositor. Source: Stacks 03EH
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Canonical pro-etale open compositor. Source: Stacks 03EH. -/
 def mP {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
     [IsOpenImmersion a] [IsOpenImmersion b] : JP R a ⋙ JP R b ≅ JP R (a ≫ b) :=
   (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
@@ -177,8 +164,7 @@ variable {X U XB Y YB Z : Scheme.{u}}
   [IsProper p] [IsProper q] [IsProper s]
   (sq : IsPullback b s p i)
 
-/-- The etale interchange before the compositors. Source: Stacks 0F7B
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The etale interchange before the compositors. Source: Stacks 0F7B. -/
 def GE (E : DE R X) :=
   (Etale.properOpenCoefficientInterchangePlus R sq ((JE R a).obj E)).hom
 
@@ -194,29 +180,26 @@ private theorem GE_naturality {E F : DE R X} (h : E ⟶ F) :
 
 /-- The open-adjunct pro-etale interchange on J_a N E. Transport along the canonical
 open comparison changes the origin witness from N J_a E to J_a N E. This uses the
-specified adjunct, never the tower comparison equation. Source: Stacks 0F7B
-(blueprint: lem-sp-finite-site-tower-paste). -/
+specified adjunct, never the tower comparison equation. Source: Stacks 0F7B. -/
 def GP (E : DE R X) :=
   (JP R i).map ((PP R s).map ((properOpenSiteExtensionIso R a).inv.app E)) ≫
     properOpenSiteInterchange R sq ((JE R a).obj E) ≫
     (PP R p).map ((JP R b).map ((properOpenSiteExtensionIso R a).hom.app E))
 
 /-- The actual etale tower arrow, including both canonical compositors.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def AE (E : DE R X) :=
   (PE R q).map (GE R a b p i s sq E) ≫
     (kE R p q).hom.app ((JE R b).obj ((JE R a).obj E)) ≫
     (PE R (p ≫ q)).map ((mE R a b).hom.app E)
 
-/-- The actual pro-etale open-adjunct tower paste. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The actual pro-etale open-adjunct tower paste. Source: Stacks 0F7J. -/
 def AP (E : DE R X) :=
   (PP R q).map (GP R a b p i s sq E) ≫
     (kP R p q).hom.app ((JP R b).obj ((JP R a).obj ((N R X).obj E))) ≫
     (PP R (p ≫ q)).map ((mP R a b).hom.app ((N R X).obj E))
 
-/-- Input word comparison, with its four specified factors. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Input word comparison, with its four specified factors. Source: Stacks 0F7J. -/
 def Win (E : DE R X) :=
   (fixedComparisonDirectImageMatePlus R q).app
       ((JE R i).obj ((PE R s).obj ((JE R a).obj E))) ≫
@@ -227,8 +210,7 @@ def Win (E : DE R X) :=
     (PP R q).map ((JP R i).map ((PP R s).map
       ((properOpenSiteExtensionIso R a).hom.app E)))
 
-/-- Output word comparison, with its four specified factors. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- Output word comparison, with its four specified factors. Source: Stacks 0F7J. -/
 def Wout (E : DE R X) :=
   (fixedComparisonDirectImageMatePlus R q).app
       ((PE R p).obj ((JE R b).obj ((JE R a).obj E))) ≫
@@ -239,8 +221,7 @@ def Wout (E : DE R X) :=
     (PP R q).map ((PP R p).map ((JP R b).map
       ((properOpenSiteExtensionIso R a).hom.app E)))
 
-/-- The comparison of the two compact-support factors. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The comparison of the two compact-support factors. Source: Stacks 0F7J. -/
 def D (E : DE R X) :=
   B R i q ((PE R s).obj ((JE R a).obj E)) ≫
     (PP R q).map ((JP R i).map (B R a s E))
@@ -248,7 +229,7 @@ def D (E : DE R X) :=
 /-- The unbounded etale proper/open tower, with the canonical conjugate and open
 compositors. This is the normalized tower prescription of
 lem-amb-unbounded-compact-support-comparisons, not an arbitrary isomorphism.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def AEUnbounded (E : Etale.DerivedCategoryModule R X) :=
   (Etale.lowerStar (ModuleCat.{u + 1} R) q).rightDerivedFunctor.map
       ((Etale.properOpenCoefficientInterchange R sq).hom.app
@@ -262,7 +243,7 @@ def AEUnbounded (E : Etale.DerivedCategoryModule R X) :=
           (Etale.openImmersionLowerShriekComp (ModuleCat.{u + 1} R) a b).symm).hom.app E)
 
 /-- Compatibility of the source word with the fully faithful inclusion D+ into D.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def sourceCompatibility (E : DE R X) :=
   ((Etale.lowerStar (ModuleCat.{u + 1} R) q).rightDerivedFunctorPlusCompatibility.app
       ((JE R i).obj ((PE R s).obj ((JE R a).obj E)))) ≪≫
@@ -278,7 +259,7 @@ def sourceCompatibility (E : DE R X) :=
                 (ModuleCat.{u + 1} R) a).mapDerivedCategoryPlusCompatibility.app E)))
 
 /-- Compatibility of the target compact-support word with D+ inclusion.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def targetCompatibility (E : DE R X) :=
   ((Etale.lowerStar (ModuleCat.{u + 1} R) (p ≫ q)).rightDerivedFunctorPlusCompatibility.app
       ((JE R (a ≫ b)).obj E)) ≪≫
@@ -360,14 +341,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The etale arrow is the restriction of the normalized unbounded tower compositor.
-Source: Stacks 0F7J; lem-amb-unbounded-compact-support-comparisons, tower normalization
-(blueprint: lem-sp-finite-site-tower-paste).
-Proof: use the canonical inclusion compatibilities for each proper and open factor.
-The definition of properOpenCoefficientInterchangePlus restricts precisely the
-specified unbounded Gamma. The derived proper and exact open compositors restrict
-along the same fully faithful inclusion. Paste these three squares. The unbounded
-tower normalization identifies AEUnbounded with the compact-support compositor
-on the supplied compatible tower, so this states its bounded-below restriction. -/
+Source: Stacks 0F7J. -/
 theorem etale_normalization (E : DE R X) :
     DerivedCategory.Plus.ι.map (AE R a b p q i s sq E) ≫
         (targetCompatibility R a b p q E).hom =
@@ -392,8 +366,7 @@ theorem etale_normalization (E : DE R X) :
     Category.comp_id, Category.id_comp, Category.assoc, JE, PE, Functor.comp_obj]
   rfl
 
-/-- The supplied compactification `(a, s)` of `f = a ≫ s`. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The supplied compactification `(a, s)` of `f = a ≫ s`. Source: Stacks 0F7J. -/
 def compactificationF : Compactification (a ≫ s) where
   Z := U
   g := s
@@ -402,8 +375,7 @@ def compactificationF : Compactification (a ≫ s) where
   isProper := inferInstance
   isOpenImmersion := inferInstance
 
-/-- The supplied compactification `(i, q)` of `g = i ≫ q`. Source: Stacks 0F7J
-(blueprint: lem-sp-finite-site-tower-paste). -/
+/-- The supplied compactification `(i, q)` of `g = i ≫ q`. Source: Stacks 0F7J. -/
 def compactificationG : Compactification (i ≫ q) where
   Z := YB
   g := q
@@ -413,7 +385,7 @@ def compactificationG : Compactification (i ≫ q) where
   isOpenImmersion := inferInstance
 
 /-- The supplied compactification `(a ≫ b, p ≫ q)` of `g f`, using `b ≫ p = s ≫ i`.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste). -/
+Source: Stacks 0F7J. -/
 def compactificationGF : Compactification ((a ≫ s) ≫ (i ≫ q)) where
   Z := XB
   g := p ≫ q
@@ -598,19 +570,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The finite-site word equation, its compositor paste and the resulting inverse formula.
-Source: Stacks 0F7J, four equalities, and 0F7B
-(blueprint: lem-sp-finite-site-tower-paste).
-
-Proof: (1) lem-sp-finite-site-word-refinement supplies lower bounds and invertibility
-of the three B maps. (2) Apply lem-sp-proper-open-coefficient-mate to M = J_a E.
-(3) Whisker its site square by P_q and use naturality of d_q and of the open adjunct
-at e_a(E); this is the word equation. (4) Expand B_g and B_f to identify D with Win.
-(5) Apply the proper and open compositor equations of word-refinement, and naturality
-of d_(qp), to identify C^p Wout with B_gf N(C^e). (6) Postcompose the word equation
-by C^p to obtain the named-map equation. (7) The normalization of
-lem-amb-unbounded-compact-support-comparisons identifies AE with the restriction
-of the unbounded etale compositor. AE, B_gf and D are invertible; cancel D to get
-the displayed transport formula and invertibility of the actual adjunct paste. -/
+Source: Stacks 0F7J, four equalities, and 0F7B. -/
 theorem paste (E : DE R X) :
     (N R Z).map ((PE R q).map (GE R a b p i s sq E)) ≫ Wout R a b p q E =
       Win R a q i s E ≫ (PP R q).map (GP R a b p i s sq E) ∧
@@ -652,13 +612,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of both word comparisons and of the etale tower arrow.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste).
-Proof: each d is a natural transformation and each e is a natural isomorphism.
-Whiskering them with P and J and composing gives naturality of Win and Wout.
-The specified etale interchange is natural, by its unbounded natural isomorphism
-and the fully faithful D+ inclusion. Compose its naturality with that of the
-proper and open compositors to obtain the last equality. These are the naturality
-assertions used in proof Steps 3--7 of the node. -/
+Source: Stacks 0F7J. -/
 theorem word_naturality {E F : DE R X} (h : E ⟶ F) :
     ((N R Z).map ((PE R q).map ((JE R i).map ((PE R s).map ((JE R a).map h)))) ≫
         Win R a q i s F =
@@ -705,13 +659,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of the three named compact-support comparisons and their input paste.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste).
-Proof: expand B as the specified natural mate d followed by P of the natural
-open comparison e. Their naturality gives each of the first three equations.
-Apply P_q J_i to the first, compose with the second, and use functoriality;
-this gives the last equation, also the naturality of Win by proof Step 4.
-Thus the transport formula is natural as well, because an inverse of a natural
-isomorphism is natural. No transported formula defines the actual AP arrow. -/
+Source: Stacks 0F7J. -/
 theorem comparison_naturality {E F : DE R X} (h : E ⟶ F) :
     ((N R Y).map ((PE R s).map ((JE R a).map h)) ≫ B R a s F =
       B R a s E ≫ (PP R s).map ((JP R a).map ((N R X).map h))) ∧
@@ -738,11 +686,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Naturality of the actual tower paste, rather than merely of its transported value.
-Source: Stacks 0F7J (blueprint: lem-sp-finite-site-tower-paste).
-Proof: the inverse open comparison, properOpenSiteInterchange, both direct-image
-functors and the two compositors are natural. Compose their naturality equalities.
-The naturality of the middle adjunct follows from naturality of the restriction
-exchange, open unit, and open-adjunction Hom bijection, as in proof Step 3. -/
+Source: Stacks 0F7J. -/
 theorem paste_naturality {E F : DE R X} (h : E ⟶ F) :
     (PP R q).map ((JP R i).map ((PP R s).map ((JP R a).map ((N R X).map h)))) ≫
         AP R a b p q i s sq F =

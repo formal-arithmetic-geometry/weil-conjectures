@@ -215,8 +215,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
 
 /-! # Reduction of a local completed Chern class
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
 -/
 
 @[expose] public noncomputable section
@@ -245,8 +243,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 namespace UniformizerChernNormalizationData
 
 /-- The finite factor is the positive finite Kummer class.
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: lem-diagonal-uniformizer-local-chern-identification).
 
 The coefficient-one and integral-root equations identify the finite factor with
 the Kummer boundary of the hyperplane class. This is a finite-level statement,

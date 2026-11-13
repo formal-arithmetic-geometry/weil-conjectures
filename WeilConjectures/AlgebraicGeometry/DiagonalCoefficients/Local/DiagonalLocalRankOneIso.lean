@@ -112,10 +112,6 @@ private theorem epiOver (X : Scheme.{u})
 /-- An epic morphism of module sheaves is invertible on a slice where both
 modules have specified rank-one bases over the same commutative coefficient ring.
 
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, the local rank-one criterion.
-(blueprint: lem-diagonal-local-rank-one-iso).
-
 Proof in words. Restrict the epic map to the slice; restriction preserves local
 surjectivity and the forgetful functor reflects epimorphisms. Conjugate by the two
 bases to obtain an epic regular-module endomorphism. Such an endomorphism is

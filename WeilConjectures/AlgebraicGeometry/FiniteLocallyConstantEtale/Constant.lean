@@ -417,8 +417,7 @@ variable {T : Scheme.{u}} (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : T
 
 /-- **A constant sheaf with finite stalks is represented by a trivial finite cover.** If the
 restriction of a sheaf `E` with finite stalks to a nonempty étale `T`-scheme `U` is constant,
-then it is represented by a trivial finite cover `∐_{S'} U ⟶ U`.
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) -/
+then it is represented by a trivial finite cover `∐_{S'} U ⟶ U`. -/
 theorem Etale.exists_isUniversalSection_of_isConstant (hfin : IsFiniteSheaf E) (x : U.left)
     [(E.over U).IsConstant (T.smallEtaleTopology.over U)] :
     ∃ (S' : Type u) (_ : Finite S') (ξ : E.obj.obj (op (Etale.trivialCover U S'))),

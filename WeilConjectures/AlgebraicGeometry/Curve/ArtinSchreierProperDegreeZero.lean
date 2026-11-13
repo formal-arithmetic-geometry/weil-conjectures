@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-! # Degree-zero Artin–Schreier surjectivity on proper curves
 
-Source: blueprint sec-proper-base-change/sk-thm-p1/lem-sc-c5,
-Artin–Schreier branch; Stacks Project Tag 0A3P.
+Source: Stacks Project Tag 0A3P.
 -/
 
 @[expose] public section
@@ -29,20 +28,7 @@ namespace AlgebraicGeometry
 
 /-- On a smooth proper connected curve, Frobenius minus identity is onto in
  degree-zero additive cohomology.
- Source: blueprint `proposition-p-torsion-smooth-proper-curve--4`, characteristic-p branch, and
- `proposition-p-torsion-smooth-proper-curve--4`, paragraph 2; Stacks Project Tag 0A3P.
- (blueprint: lem-sc-artin-schreier-proper-degree-zero)
-
- Proof: The natural section identifications a identify G with the additive structure
- sheaf. The degree-zero comparison with global sections is natural in wp, so wp induces
- x ↦ x^p-x on Γ(C,O_C). Smoothness implies reducedness; properness, connectedness and
- algebraic closedness identify the global section ring with k via its structural map.
- This map commutes with powers and subtraction. Every a in k has a root of T^p-T-a
- because k is algebraically closed. Transport this surjectivity through the global
- section identification and the degree-zero comparison; surjectivity of a homomorphism
- of additive groups is epimorphy. No assumption about higher cohomology is used. 
-(blueprint: lemma-weil-pbc-smooth-curve-artin-schreier-proper-degree-zero)
--/
+ Source: Stacks Project Tag 0A3P. -/
 theorem epi_etaleCohomology_artinSchreier_zero_of_isProper
     {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f]

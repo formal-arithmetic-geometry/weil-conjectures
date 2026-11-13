@@ -42,13 +42,13 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 variable (Y) in
-/-- Blueprint `def-galois-categories`: Finite etale covers and finite locally constant sheaves.
+/-- Finite etale covers and finite locally constant sheaves.
 
 The category `FLC(Y)` of finite locally constant sheaves of sets on the small étale site of
 `Y`, with morphisms of sheaves; the category `FÉt(Y)` of finite étale `Y`-schemes is
-`AlgebraicGeometry.Scheme.FiniteEtale`. The small étale site `Y_ét` (blueprint
-`def-weil-pbc-etale-site`) is Mathlib's `AlgebraicGeometry.Scheme.smallEtaleTopology`, and finite
-torsors (blueprint `def-weil-pbc-finite-torsors`) are `CategoryTheory.Sheaf.Torsor`. -/
+`AlgebraicGeometry.Scheme.FiniteEtale`. The small étale site `Y_ét` is Mathlib's
+`AlgebraicGeometry.Scheme.smallEtaleTopology`, and finite torsors are `CategoryTheory.Sheaf.Torsor`.
+-/
 protected abbrev FiniteLocallyConstant : Type (u + 2) :=
   ObjectProperty.FullSubcategory fun F : Sheaf Y.smallEtaleTopology (Type (u + 1)) ↦
     IsFiniteLocallyConstantSheafOfTypes F
@@ -57,7 +57,7 @@ namespace FiniteLocallyConstant
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
-/-- Blueprint `def-galois-categories`: the stalk `F_s` of a finite locally constant sheaf at
+/-- The stalk `F_s` of a finite locally constant sheaf at
 a geometric point `s : Spec Ω ⟶ Y`, as a functor `FLC(Y) ⥤ FintypeCat`; the corresponding
 fibre `|P_s|` of a finite étale `P` is `AlgebraicGeometry.Scheme.FiniteEtale.fiber`. -/
 noncomputable def fiber : Y.FiniteLocallyConstant ⥤ FintypeCat.{u + 1} :=

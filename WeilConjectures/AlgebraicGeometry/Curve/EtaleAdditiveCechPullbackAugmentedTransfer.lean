@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackTotalTransfer
 
 /-! # Augmentation-preserving pullback maps of the additive Čech complexes
-Source: Stacks Project, Tags 01FD, 01FB and 03P2.
-(blueprint: lem-pbc-etale-additive-cech-pullback-augmented-transfer) -/
+Source: Stacks Project, Tags 01FD, 01FB and 03P2. -/
 
 @[expose] public section
 
@@ -61,21 +60,7 @@ private theorem exists_structural_resolution_comparison
 
 /-- Pullback and refinement give augmentation-preserving global and total cochain maps.
 Source: Stacks Project, Tag 01FD, proof of Lemma 20.15.1 (double-complex maps),
-Tag 01FB, resolution comparison, and Tag 03P2, structural-function coordinates.
-(blueprint: lem-pbc-etale-additive-cech-pullback-augmented-transfer)
-
-Proof: The right adjoint g_* of the monomorphism-preserving etale inverse image
-preserves injectives, so every g_*J^n is injective. Extend the structural coefficient
-map followed by g_*J augmentation across the augmentation of I to get α^0. Its
-composite with the next differential vanishes on that augmentation; exact₀ and
-injectivity supply α^1. Inductively the preceding commuting square and square-zero
-identity let exact_succ and injectivity supply each succeeding component.
-CochainComplex.mkHom assembles them into α, whose degree-zero equation is the
-required augmentation equation. Apply exists_additiveCech_pullback_total_transfer
-to this supplied α: tuplewise evaluation and restriction commute with both
-differentials, giving the total map and the alpha and beta component equations.
-Empty families give zero total maps; degree zero, empty intersections and empty
-schemes need no extra assumptions. -/
+Tag 01FB, resolution comparison, and Tag 03P2, structural-function coordinates. -/
 theorem exists_additiveCech_pullback_augmented_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

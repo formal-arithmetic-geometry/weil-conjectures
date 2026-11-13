@@ -66,9 +66,7 @@ where `U₁ ∩ (U₂ ∪ ⋯ ∪ U_t)` is a union of affine opens of the affine
 Over an affine open `W' ⊆ g⁻¹ A` of `T'`, the preimages of these opens in `f'⁻¹ W'` are
 again affine, being fibre products of affine schemes, and form a covering of the same shape
 [Stacks, Tag 01XJ]. Quasi-coherence of the `R^p f_* ℱ`, the first part of the blueprint
-lemma, is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`.
-
-(blueprint: `lem-pc-finite-support-hi`) -/
+lemma, is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`. -/
 theorem exists_isZero_higherDirectImage_of_isPullback [CompactSpace T] (f : X ⟶ T)
     [QuasiCompact f] [QuasiSeparated f] :
     ∃ n : ℕ, ∀ {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -154,9 +152,7 @@ covered by the `d + 1` affine preimages of the standard affine opens, and quasi-
 cohomology vanishes above the number of affine opens in such a covering
 (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`).
 
-This is the vanishing clause of the blueprint lemma.
-
-(blueprint: `lem-pc-projective-coherent-finiteness`) -/
+This is the vanishing clause of the blueprint lemma. -/
 theorem Scheme.Modules.subsingleton_H_of_isClosedImmersion (A : Type u) [CommRing A]
     (i : X ⟶ ℙ(n; Spec (.of A))) [IsClosedImmersion i] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] {d : ℕ} (hn : Nat.card n = d + 1)
@@ -189,12 +185,7 @@ noetherian, `f : X ⟶ S` projective, i.e. `f = π ∘ i` for a closed immersion
 and `ℱ` a coherent `𝒪_X`-module. Then every `R^q f_* ℱ` is coherent.
 
 A projective morphism is proper, so this is a case of
-`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. (The blueprint proves
-it directly, as the input of the proper case: over an affine open `Spec A` of `S`, the Čech
-complex of a finite affine cover of `f⁻¹(Spec A)` localises, so `R^q f_* ℱ` is the sheaf
-associated with the finite `A`-module `H^q(f⁻¹(Spec A), ℱ)`.)
-
-(blueprint: `lem-pc-projective-coherent-higher-images`) -/
+`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage`. -/
 theorem isFinitePresentation_higherDirectImage_of_isClosedImmersion [IsLocallyNoetherian S]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsFinitePresentation := by
@@ -209,9 +200,7 @@ include hi in
 higher direct images `R^q f_* ℱ` vanish for `q > d`: over an affine open `S'` of `S`, the base
 change of `X` is separated and covered by the `d + 1` affine preimages of the standard affine
 opens, and the Mayer–Vietoris sequence of the higher direct images gives the vanishing above
-`d` (`AlgebraicGeometry.Scheme.Modules.higherDirectImageBound_finsetSup`).
-
-(blueprint: `lem-pc-projective-coherent-higher-images`) -/
+`d` (`AlgebraicGeometry.Scheme.Modules.higherDirectImageBound_finsetSup`). -/
 theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n = d + 1)
     {q : ℕ} (hq : d < q) : IsZero ((higherDirectImage f q).obj ℱ) := by
   classical

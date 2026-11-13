@@ -20,8 +20,7 @@ ring on every curve `X` over an algebraically closed field. This is the reductio
 In particular the assertions for `F` and for `j_! j^* F` are equivalent for every open `j`,
 without any condition on the torsion of `F`.
 
-Source: Stacks Project, Theorem 03SC and Lemma 0GJA (blueprint: `app:curve-package`,
-`lemma-removing-finitely-many-points`).
+Source: Stacks Project, Theorem 03SC and Lemma 0GJA.
 -/
 
 @[expose] public section
@@ -36,11 +35,7 @@ namespace AlgebraicGeometry.IsCurve
 finite ring. Then the eight assertions `C(X, F)` hold for every sheaf `F` of `Λ`-modules on
 `X_ét`; such a sheaf is torsion because `Λ` is finite.
 
-Source: Stacks Project, Theorem 03SC (blueprint: `app:curve-package`).
-
-Proof: by `AlgebraicGeometry.IsCurve.Assertions.of_forall_isReduced` it suffices to prove
-`C(Y, G)` for every reduced curve `Y`, every prime `ℓ` and every constructible sheaf `G` of
-`𝐅_ℓ`-modules on `Y`, which is `AlgebraicGeometry.IsCurve.primeCoefficientCurveAssertions`. -/
+Source: Stacks Project, Theorem 03SC. -/
 theorem Assertions.of_finite_coefficients (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -54,9 +49,7 @@ finite ring, `F` a sheaf of `Λ`-modules on `X_ét` and `j : U ⟶ X` an open im
 `C(X, F)` holds if and only if `C(X, j_! j^* F)` holds. No condition on the torsion of `F` is
 needed, and the statement holds for every open `U`, in particular for every dense open.
 
-Source: Stacks Project, Lemma 0GJA (blueprint: `lemma-removing-finitely-many-points`).
-
-Proof: both sides hold by `AlgebraicGeometry.IsCurve.Assertions.of_finite_coefficients`. -/
+Source: Stacks Project, Lemma 0GJA. -/
 theorem assertions_iff_dense_open_of_finite_coefficients (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

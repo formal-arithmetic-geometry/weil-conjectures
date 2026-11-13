@@ -96,9 +96,7 @@ isomorphism on `D_QCoh` since `g` is flat (`isIso_schemeDerivedBaseChangeMap_of_
 RΓ(X, ℱ) ⊗_A B ≅ RΓ(T, Lg^* Rf_* ℱ) ≅ RΓ(T, Rf'_* Lg'^* ℱ) ≅ RΓ(Y, Lg'^* ℱ) ≅ RΓ(Y, g'^* ℱ),
 ```
 using the affine sections base change mate (`exists_mixedAffineSectionsBaseChangeMate`), the
-Leray isomorphism for `f'` and flatness of `g'`.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) -/
+Leray isomorphism for `f'` and flatness of `g'`. -/
 @[stacks 02KH]
 theorem nonempty_derivedGlobalSectionsOver_baseChange_iso :
     Nonempty ((ModuleCat.extendScalars.{u, u, u} g.appTop.hom).mapDerivedCategory.obj
@@ -135,9 +133,7 @@ and let `ℱ` be a quasi-coherent `𝒪_X`-module. Then `B ⊗_A H^n(X, ℱ) ≅
 This is the degree `n` cohomology of the derived statement
 `nonempty_derivedGlobalSectionsOver_baseChange_iso`, `RΓ(X, ℱ) ⊗_A B ≅ RΓ(Y, g'^* ℱ)`: the
 cohomology of `RΓ` is sheaf cohomology (`homologyDerivedGlobalSectionsOverLinearEquiv`), and
-`- ⊗_A B` commutes with cohomology since `B` is flat over `A`.
-
-(blueprint: `lem-pc-flat-base-change-cohom`) -/
+`- ⊗_A B` commutes with cohomology since `B` is flat over `A`. -/
 @[stacks 02KH]
 theorem nonempty_H_baseChange_linearEquiv (n : ℕ) :
     Nonempty (Γ(T, ⊤) ⊗[Γ(S, ⊤)] WithAction (baseAction f ℱ) ((constantSheaf

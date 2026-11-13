@@ -23,7 +23,6 @@ import WeilConjectures.CategoryTheory.Sites.Point.Linear
 # DenseOpenBaseChangeComparison
 
 Source: Stacks Project, Lemma 0GJA.
-(blueprint: lem-pbc-j2-dense-open-base-change-comparison).
 -/
 
 @[expose] public section
@@ -37,17 +36,7 @@ namespace AlgebraicGeometry
 /-- Changing abelian coefficients to modules over the lifted integers commutes with
 extension by zero followed by restriction.
 Source: Stacks Project, Tag 0GJA, open-closed reduction. The coefficient transport is
-formal uniqueness of left adjoints (`Adjunction.leftAdjointUniq`).
-
-Proof: The inverse of the equivalence from integer modules to abelian groups, followed
-by restriction along ULift Z ≃ Z, is an equivalence E. Postcomposition by E and its
-inverse give inverse equivalences on the sheaf categories. Open restriction is
-precomposition on the localized site, so commutes with postcomposition by E.
-The two composites of extension by zero with E are left adjoints to the same functor,
-after transporting across these equivalences. Uniqueness of left adjoints gives their
-natural isomorphism. Apply it to the restriction of A and use the restriction comparison.
-No density, curve, constructibility or torsion assumption is used. This includes empty
-opens and the identity open. -/
+formal uniqueness of left adjoints (`Adjunction.leftAdjointUniq`). -/
 private theorem dense_open_coefficient_iso {X : Scheme.{u}}
     (A : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
@@ -105,24 +94,7 @@ private theorem comparison_iso_iff {X Y : Scheme.{u}} (a : Y ⟶ X)
     (cohomology_iso_bijective ((Etale.upperStar _ a).mapIso e) q)
     (fun x ↦ Etale.cohomologyMap_map a q e.hom x)
 
-/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L.
-(blueprint: lem-pbc-j2-dense-open-base-change-comparison).
-
-Proof: Form the open-closed short exact sequence with quotient Q = i_* i^* F supported on
-the finite set Z of k-rational closed points. Finite direct image and zero-dimensional
-cohomology identify H^q(X,Q) with zero for q > 0 and H^0 with the finite product of its
-geometric stalks. After any algebraically closed field extension this product is
-unchanged, and the canonical pullback map is bijective. Pullback gives an exact sequence
-on the base changed curve and a commuting long exact cohomology ladder. If comparison
-is bijective for G, the five lemma applied with the comparisons for Q proves it for F.
-Conversely, if comparison is bijective for F, the segment H^(q-1)(F) → H^(q-1)(Q) →
-H^q(G) → H^q(F) → H^q(Q), with the preceding terms zero in degree zero, and the five lemma
-prove bijectivity for G. Properness supplies the comparison hypotheses without a
-torsion restriction. In the invertible-order case the required order condition passes
-to subobjects and quotients. If F is primary while G has invertible order, G is zero
-by geometric stalk conservativity, so every comparison for G is bijective. These are
-the two cases in the displayed torsion alternative.
--/
+/-- Source: Stacks Project, Lemma 0GJA, proof, with Lemma 095L. -/
 theorem IsCurve.dense_open_baseChange_comparison {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (U : P.C.Opens) (hU : Dense (U : Set P.C)) :

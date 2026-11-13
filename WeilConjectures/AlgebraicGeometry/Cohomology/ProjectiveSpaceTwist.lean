@@ -38,9 +38,7 @@ open Scheme.Modules
 variable {n : Type u}
 
 /-- **`H⁰` of the twisting sheaves over a ring**: `H⁰(ℙⁿ_A, 𝒪(D)) ≅ A[x₀, …, xₙ]_D` for `D ≥ 0`,
-as `A`-modules, for any commutative ring `A`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (i)) -/
+as `A`-modules, for any commutative ring `A`. -/
 theorem nonempty_H_zero_twist_linearEquiv (A : Type u) [CommRing A] [Finite n] [Nonempty n]
     (D : ℕ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) D) 0
@@ -50,9 +48,7 @@ theorem nonempty_H_zero_twist_linearEquiv (A : Type u) [CommRing A] [Finite n] [
   obtain ⟨e⟩ := nonempty_H_twist_linearEquiv_monomialCechComplex_homology (n := n) A D 0
   exact ⟨e ≪≫ₗ monomialCechComplexHomologyZeroLinearEquiv n A D⟩
 
-/-- **Vanishing in the middle degrees over a ring**: `H^q(ℙᵈ_A, 𝒪(m)) = 0` for `q ∉ {0, d}`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+/-- **Vanishing in the middle degrees over a ring**: `H^q(ℙᵈ_A, 𝒪(m)) = 0` for `q ∉ {0, d}`. -/
 theorem subsingleton_H_twist_of_ne_of_commRing (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) (m : ℤ) {q : ℕ} (hq0 : q ≠ 0) (hqd : q ≠ d) :
     Subsingleton ((twist n (Spec (.of A)) m).H q) := by
@@ -62,9 +58,7 @@ theorem subsingleton_H_twist_of_ne_of_commRing (A : Type u) [CommRing A] [Fintyp
 
 /-- **The top cohomology of the twisting sheaves over a ring**: `Hᵈ(ℙᵈ_A, 𝒪(m))` is the free
 `A`-module on the strictly negative exponent vectors `e` of sum `m`, the basis vector `e` being
-the class of the Čech cocycle `xᵉ` on `U₀ ∩ ⋯ ∩ U_d` (for `d = 0` this requires `m < 0`).
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+the class of the Čech cocycle `xᵉ` on `U₀ ∩ ⋯ ∩ U_d` (for `d = 0` this requires `m < 0`). -/
 theorem nonempty_H_twist_top_linearEquiv_finsupp (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) {m : ℤ} (hm : d ≠ 0 ∨ m < 0) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
@@ -74,9 +68,7 @@ theorem nonempty_H_twist_top_linearEquiv_finsupp (A : Type u) [CommRing A] [Fint
   exact ⟨e ≪≫ₗ monomialCechComplexHomologyTopLinearEquiv n A m hn
     (Fintype.equivFinOfCardEq hn).symm hm⟩
 
-/-- **Vanishing of the top cohomology over a ring**: `Hᵈ(ℙᵈ_A, 𝒪(m)) = 0` for `m ≥ -d`, `d ≥ 1`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+/-- **Vanishing of the top cohomology over a ring**: `Hᵈ(ℙᵈ_A, 𝒪(m)) = 0` for `m ≥ -d`, `d ≥ 1`. -/
 theorem subsingleton_H_twist_top_of_commRing (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) (hd : d ≠ 0) {m : ℤ} (hm : -(d : ℤ) ≤ m) :
     Subsingleton ((twist n (Spec (.of A)) m).H d) := by
@@ -85,9 +77,7 @@ theorem subsingleton_H_twist_top_of_commRing (A : Type u) [CommRing A] [Fintype 
   exact e.toEquiv.subsingleton
 
 /-- **`Hᵈ(ℙᵈ_A, 𝒪(-d-1)) ≅ A`** for `d ≥ 1`: the top cohomology of `𝒪(-d-1)` is free of rank
-one, with basis the class of `x₀⁻¹ ⋯ x_d⁻¹`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+one, with basis the class of `x₀⁻¹ ⋯ x_d⁻¹`. -/
 theorem nonempty_H_twist_top_linearEquiv_self (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) (hd : d ≠ 0) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A))
@@ -102,10 +92,7 @@ theorem nonempty_H_twist_top_linearEquiv_self (A : Type u) [CommRing A] [Fintype
   exact ⟨e ≪≫ₗ Finsupp.uniqueLinearEquiv A A (negOneExponents n hn)⟩
 
 /-- **The top cohomology of the twisting sheaves as a dual, over a ring**:
-`Hᵈ(ℙᵈ_A, 𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology` (ii),
-`theorem-riemann-roch-coherent-serre-duality--2`) -/
+`Hᵈ(ℙᵈ_A, 𝒪(m)) ≅ (A[xᵢ]_{-m-d-1})^∨` for `m ≤ -d - 1`. -/
 theorem nonempty_H_twist_top_linearEquiv_dual (A : Type u) [CommRing A] [Fintype n] {d : ℕ}
     (hn : Fintype.card n = d + 1) {m : ℤ} (hm : m ≤ -(d : ℤ) - 1) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
@@ -142,9 +129,7 @@ lemma nonempty_unique_degree_eq [Fintype n] (hn : Fintype.card n = 1) (D : ℕ) 
   simp [hs]
 
 /-- **The case `n = 0`**: on `ℙ⁰_A = Spec A`, `H⁰(𝒪(m)) ≅ A` for every `m`; the higher
-cohomology vanishes by `subsingleton_H_of_lt`.
-
-(blueprint: `lem-pc-projective-space-twist-cohomology`) -/
+cohomology vanishes by `subsingleton_H_of_lt`. -/
 theorem nonempty_H_zero_twist_linearEquiv_of_card_eq_one (A : Type u) [CommRing A] [Fintype n]
     (hn : Fintype.card n = 1) (m : ℤ) :
     letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) 0

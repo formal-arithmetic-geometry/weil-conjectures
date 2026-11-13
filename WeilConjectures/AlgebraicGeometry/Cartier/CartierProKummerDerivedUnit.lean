@@ -18,8 +18,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -42,14 +40,7 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
 morphism and φ:R→A. If two Cartier Ext classes have GeoCartierScalarCompatibility
 [lemma-cycle-class-cartier-divisor], then the normalized full pro-etale Kummer class
 G_m,pro→forget(A_Z(1))[1] is a degree-one scalar unit [def-sfb-cartier-reduction-data,
-def-sp-derived-scalar-ext-unit]. Source: blueprint Cartier derived reduction and comparison
-paragraphs; Stacks 0152, 06YY and 0GLZ (blueprint: lem-sp-cartier-pro-kummer-derived-unit).
-Proof: The pro-etale residue root map is an isomorphism: it is the inverse roots comparison, the
-image of the residue etale root isomorphism, and the coefficient-forgetting comparison isomorphism.
-Apply the residue Kummer unit theorem to the full pro-etale Kummer sequence through this kernel
-isomorphism. Extract the Tate-line derived unit from coefficient compatibility and compose the
-units. The normalized pro root-map scalar identity identifies the resulting Ext class with the given
-A-Kummer unit. -/
+def-sp-derived-scalar-ext-unit]. Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem pro_kummer_derived_unit
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (hn : 0 < n)
     (hA : (n : A) = 0) (hR : (n : ULift.{u + 1} (ZMod n)) = 0)

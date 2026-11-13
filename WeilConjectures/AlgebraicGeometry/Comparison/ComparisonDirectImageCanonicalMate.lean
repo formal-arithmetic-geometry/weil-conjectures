@@ -43,8 +43,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 /-!
 # Canonical derived direct-image comparison as a mate
 
-Source: blueprint, `lem-weil-pbc-comparison-direct-image-canonical-mate`,
-from `theorem-comparison-direct-images--1`; Stacks Tags 099R and 0B65.
+Source: Stacks Tags 099R and 0B65.
 -/
 
 @[expose] public section
@@ -60,8 +59,7 @@ namespace AlgebraicGeometry.ProEtale
 canonical pullback comparison.  This is the objectwise map used in the
 proper-base-change comparison theorem.
 
-Source: blueprint `lem-weil-pbc-comparison-direct-image-canonical-mate`,
-proof of `theorem-comparison-direct-images--1`; Stacks Tag 0B65.
+Source: Stacks Tag 0B65.
 
 Proof (the node's steps): For each bounded-below etale complex, use the
 pullback comparison and the etale counit to form the underived base-change
@@ -86,9 +84,7 @@ an isomorphism (`proposition-comparison-morphism-inverse-image--3`,
 `lemma-acyclicity-pulled-back-injectives`,
 `theorem-comparison-direct-images`). Finally, the derived
 base-change universal-property equation gives the displayed unit
-factorization and hence the counit-mate normalization.
-(blueprint: lem-weil-pbc-comparison-direct-image-canonical-mate).
--/
+factorization and hence the counit-mate normalization. -/
 noncomputable def comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (u : U ⟶ V) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) u ⋙
@@ -102,9 +98,7 @@ noncomputable def comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRi
 quasi-separated morphisms.  Its component is the named mate, hence this
 asserts invertibility of that particular morphism.
 
-Source: blueprint `lem-weil-pbc-comparison-direct-image-canonical-mate`,
-proof of `theorem-comparison-direct-images--1`; Stacks Tag 099R.
--/
+Source: Stacks Tag 099R. -/
 theorem isIso_comparisonDirectImageCanonicalMate (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {U V : Scheme.{u}} (u : U ⟶ V)
     [QuasiCompact u] [QuasiSeparated u] :

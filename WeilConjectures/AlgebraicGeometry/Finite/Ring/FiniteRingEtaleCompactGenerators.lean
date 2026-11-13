@@ -33,7 +33,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 Source: Bhatt--Scholze, *The pro-étale topology for schemes*, Section 6.4,
 hypothesis before Example 6.4.1, Example 6.4.1, Lemmas 6.4.2 and 6.4.5,
-and Proposition 6.4.8 (blueprint: lem-pur-etale-finite-ring-compact-generators).
+and Proposition 6.4.8.
 
 Coproducts and the generator set are indexed in universe `u + 1`, the universe of the
 module values and the small presentation of the site. The derived category has objects
@@ -71,9 +71,7 @@ Proof, following the node and Bhatt--Scholze, Section 6.4:
    by this explicit family and its shifts. Combine it with the preceding properties.
 
 Source: Bhatt--Scholze, Section 6.4, Example 6.4.1, Lemmas 6.4.2 and 6.4.5, and
-Proposition 6.4.8; perfect-value constructibility is related to bounded constructibility
-and finite Tor amplitude by Lemma 6.3.7 and the finite-Tor perfectness criterion.
-(blueprint: lem-pur-etale-finite-ring-compact-generators) -/
+Proposition 6.4.8. -/
 theorem finiteRing_compactGenerators
     {k : Type u} [Field k] [IsAlgClosed k]
     (ℓ : ℕ) (hℓprime : Nat.Prime ℓ) (hℓunit : IsUnit (ℓ : k))

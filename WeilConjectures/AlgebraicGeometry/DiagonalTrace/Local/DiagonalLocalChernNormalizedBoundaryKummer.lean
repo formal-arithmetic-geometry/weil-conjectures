@@ -25,24 +25,7 @@ attribute [local irreducible] Functor.mapDerivedCategory HasDerivedCategory.stan
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Finite Chern normalization identifies the integral finite cone coordinates
-with the positive Kummer class. No completed arrow or limit normalization is used.
-Source: geometric tower classes proof (2), finite Kummer normalization; diagonal
-tower trace proof (1), coefficient-one and pure-tensor root normalization.
-(blueprint: lem-diagonal-local-finite-cone-kummer).
-
-Proof: apply hc to P,n and eliminate the heterogeneous endpoint witnesses. Restrict,
-evaluate, and forget by restrictionUnderlying and mapSingleArrow_natIso. The source
-map is the integer quotient: coefficient_one fixes its value on 1; additivity and
-the constant-sheaf adjunction fix its value on every integer. At the target, expand
-finiteBoundary_rootMap. The ordinary scalar unit sends x to its scalar-extension
-section. The line_tensor field sends that section to the original root. Cancel
-lineEvaluation and the restriction comparison to see that finiteRootMap followed
-by the target coordinate is the identity on roots. Postcompose the finite boundary
-equation with the Cartier root map and substitute the two endpoint identities.
-Finally Ext.comp_hom, mapExactFunctor_hom, and extClass_hom identify the evaluated
-positive Kummer composite with evaluatedIntegralKummerClass. Positivity of n+1
-covers n=0; all maps preserve zero and the argument covers empty schemes and zero
-coefficient rings. -/
+with the positive Kummer class. No completed arrow or limit normalization is used. -/
 theorem localChern_normalized_boundary_kummer
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]
     (c : Chern l (ULift.{u} (Padic l)) T)

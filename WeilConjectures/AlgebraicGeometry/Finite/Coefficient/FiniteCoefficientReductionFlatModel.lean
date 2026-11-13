@@ -117,9 +117,6 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-!
 # Reduction of bounded flat models at finite coefficient levels
 
-Source: Weil blueprint, sec-smooth-purity/sk-lem-sf-flat-model,
-lem-sf-reduction-flat-model.md (blueprint: lem-sf-reduction-flat-model).
-
 The pro-etale statement uses the recorded constant-ring module category and intrinsic
 constructibility predicate. The etale statement uses the recorded finite-value
 constructibility predicate.
@@ -163,9 +160,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (m n : ℕ) (hmn : m ≤ n) (T : Scheme.{u})
 
 /-- The quotient factor map between the actual finite coefficient rings, canonically
-lifted to the coefficient universe. No flatness of this ring map is assumed.
-Source: blueprint, lem-sf-reduction-flat-model.md, the map A_{E,n} to A_{E,m}
-(blueprint: lem-sf-reduction-flat-model). -/
+lifted to the coefficient universe. No flatness of this ring map is assumed. -/
 noncomputable def flatModelReductionCoefficientMap :
     ULift.{u + 1} (Padic.coefficientExtensionRing l E n) →+*
       ULift.{u + 1} (Padic.coefficientExtensionRing l E m) :=

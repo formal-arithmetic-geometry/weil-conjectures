@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.Diagon
 
 This repair restores the quarantined module and re-applies the completed finite-free
 rank-one comparison proof against the current sheaf-dag dependency snapshot.
-
-Source: diagonal tower coefficient changes, paragraph (1), cofinal uniformizer quotients.
-(blueprint: lem-diagonal-uniformizer-scalar-squares).
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +37,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 
 /-- A scalar/direct-image square with invertible mate on every complex.
 Keeping the coefficient rings as parameters shares the derived-category instances
-in the concrete uniformizer theorem. Source: coefficient changes paragraph (1).
-(blueprint: lem-diagonal-uniformizer-scalar-squares). -/
+in the concrete uniformizer theorem. -/
 structure ScalarSquareIsomorphisms
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
@@ -70,39 +66,7 @@ set_option linter.unusedVariables false in
 /-- Uniformizer reduction has a normalized restriction/direct-image square whose
 scalar mate is invertible on every complex.
 
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and the finite free
-coefficient argument; Stacks Tags 070G, 070Y and 0D6E.
-(blueprint: lem-diagonal-uniformizer-scalar-squares).
-
-Proof: The quotient O_E/(pi^(n+1)) has the two-term free O_E-resolution with differential
-pi^(n+1). The integer ring is a domain and the specified uniformizer is nonzero, so this
-map is injective. Continuous functions on a profinite set preserve this short exact
-sequence: finite residue classes have locally constant lifts on a finite clopen
-partition, and the inverse of multiplication by pi^(n+1) on its image is continuous.
-Pull back from the profinite point to either scheme by the exact monoidal inverse
-image. This gives the same two-term free resolution of the pulled-back quotient ring.
-
-Exact restriction of coefficients commutes with ordinary direct image. Compute derived
-direct image using resolutions acyclic for the underlying ringed-topos direct image;
-restriction need not preserve injectives. The universal full right-derived units give
-the normalized derived restriction isomorphism, also for an arbitrary full universal
-integral derived model R. This constructs s and its full-unit normalization.
-
-After exact restriction to integral coefficients, the scalar mate is the projection
-comparison for the two-term resolution just constructed. For each regular free term
-this is the unitor, hence invertible. The derived direct images are triangulated, so
-the comparison on their cones is invertible as well. This proves the projection
-comparison for tensoring any input complex with the quotient resolution, without a
-bound on that complex. The scalar-adjunction unit and the full-unit normalization of
-s identify this comparison with the restriction of s.mate. Exact restriction of scalar
-coefficients reflects isomorphisms, so s.mate is invertible. This is also the finite
-free scalar perfect-model argument formalized by integralFiniteScalarPerfectModel;
-its comparison must be identified with the normalized square used here.
-No properness, projective-line cohomology, quotient flatness, trace, or Tate line
-is required. The exponent is n+1, so n=0 is the residue field case, and ramification
-changes only the nonzero scalar in the differential.
--/
+Source: Stacks Tags 070G, 070Y and 0D6E. -/
 theorem diagonal_uniformizer_scalar_squares
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E)

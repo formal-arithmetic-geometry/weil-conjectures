@@ -28,10 +28,6 @@ import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Finite free integral and rational pro-etale coefficients
-
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-sfb-cartesian-coefficients-finite-free.md
-(blueprint: lemma-inverse-image-coefficient-sheaves).
 -/
 
 @[expose] public section
@@ -47,9 +43,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- The integral inclusion for finite subfields, using the existing integers map.
-Source: blueprint finite-free coefficient detail, integral inclusion
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The integral inclusion for finite subfields, using the existing integers map. -/
 noncomputable abbrev finiteCoefficientIntegersMap
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     PadicAlgCl.integers ℓ E.1 →+* PadicAlgCl.integers ℓ F.1 :=
@@ -59,17 +53,13 @@ noncomputable abbrev finiteCoefficientIntegersMap
       (show E.1.toSubalgebra ≤ F.1.toSubalgebra from h) (PadicAlgCl ℓ)
   PadicAlgCl.integersMap ℓ E.1 F.1
 
-/-- The degree of the indicated inclusion, with its actual scalar action.
-Source: blueprint finite-free coefficient detail, d = [F:E]
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The degree of the indicated inclusion, with its actual scalar action. -/
 noncomputable abbrev finiteCoefficientDegree
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) : ℕ :=
   @Module.finrank E.1 F.1 inferInstance inferInstance
     (Module.compHom F.1 (IntermediateField.inclusion h).toRingHom)
 
-/-- The type of integral bases for the actual inclusion of integer rings.
-Source: blueprint finite-free coefficient detail, choice of b_1,...,b_d
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The type of integral bases for the actual inclusion of integer rings. -/
 noncomputable abbrev finiteCoefficientIntegralBasis
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :=
   @Module.Basis (Fin (finiteCoefficientDegree ℓ h))
@@ -77,9 +67,7 @@ noncomputable abbrev finiteCoefficientIntegralBasis
     inferInstance inferInstance
     (Module.compHom (PadicAlgCl.integers ℓ F.1) (finiteCoefficientIntegersMap ℓ h))
 
-/-- The condensed integral inclusion, by postcomposition on continuous functions.
-Source: blueprint finite-free coefficient detail, integral coefficient inclusion
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The condensed integral inclusion, by postcomposition on continuous functions. -/
 noncomputable def finiteCoefficientIntegersPointMap
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     Profinite.padicIntegersRingObj.{u} ℓ E.1 ⟶ Profinite.padicIntegersRingObj ℓ F.1 :=
@@ -88,9 +76,7 @@ noncomputable def finiteCoefficientIntegersPointMap
       (Profinite.continuousMapRingSheafMap (finiteCoefficientIntegersMap ℓ h)
         ((continuous_subtype_val.comp continuous_subtype_val).subtype_mk _ |>.subtype_mk _))
 
-/-- The integral coefficient inclusion is a ring-object map.
-Source: blueprint finite-free coefficient detail, integral coefficient inclusion
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The integral coefficient inclusion is a ring-object map. -/
 noncomputable instance isMonHom_finiteCoefficientIntegersPointMap
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     IsMonHom (finiteCoefficientIntegersPointMap.{u} ℓ h) :=
@@ -99,9 +85,7 @@ noncomputable instance isMonHom_finiteCoefficientIntegersPointMap
       (Profinite.continuousMapRingSheafMap (finiteCoefficientIntegersMap ℓ h)
         ((continuous_subtype_val.comp continuous_subtype_val).subtype_mk _ |>.subtype_mk _))))
 
-/-- The basis summand on the point: postcompose a continuous function with a ↦ φ(a)t.
-Source: blueprint finite-free coefficient detail, displayed sum formula
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The basis summand on the point: postcompose a continuous function with a ↦ φ(a)t. -/
 noncomputable def finiteCoefficientPointSummand
     {R T : Type} [TopologicalSpace R] [CommRing R] [IsTopologicalRing R]
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
@@ -113,9 +97,7 @@ noncomputable def finiteCoefficientPointSummand
             (hφ.mul_const t)).comp ULift.ringEquiv.toAddMonoidHom))
      naturality _ _ _ := rfl }⟩
 
-/-- The integral summand on X, with exactly the multiplication-by-b formula.
-Source: blueprint finite-free coefficient detail, apply p_X^*
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The integral summand on X, with exactly the multiplication-by-b formula. -/
 noncomputable abbrev finiteCoefficientIntegralSummand (X : Scheme.{u})
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (b : PadicAlgCl.integers ℓ F.1) :=
@@ -123,9 +105,7 @@ noncomputable abbrev finiteCoefficientIntegralSummand (X : Scheme.{u})
     (finiteCoefficientIntegersMap ℓ h)
     ((continuous_subtype_val.comp continuous_subtype_val).subtype_mk _ |>.subtype_mk _) b)
 
-/-- The rational summand on X, using the same integral basis vector in F.
-Source: blueprint finite-free coefficient detail, rational displayed sum formula
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The rational summand on X, using the same integral basis vector in F. -/
 noncomputable abbrev finiteCoefficientRationalSummand (X : Scheme.{u})
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (b : PadicAlgCl.integers ℓ F.1) :=
@@ -133,18 +113,14 @@ noncomputable abbrev finiteCoefficientRationalSummand (X : Scheme.{u})
     (IntermediateField.inclusion h).toRingHom
     (continuous_subtype_val.subtype_mk _) (b : F.1))
 
-/-- The i-th integral free-module summand, on underlying abelian sheaves.
-Source: blueprint finite-free coefficient detail, integral direct power
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The i-th integral free-module summand, on underlying abelian sheaves. -/
 noncomputable abbrev finiteCoefficientIntegralLeg (X : Scheme.{u})
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (i : Fin (finiteCoefficientDegree ℓ h)) :=
   (biproduct.ι (fun _ : Fin (finiteCoefficientDegree ℓ h) =>
     Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) i).hom
 
-/-- The i-th rational free-module summand, on underlying abelian sheaves.
-Source: blueprint finite-free coefficient detail, rational direct power
-(blueprint: lemma-inverse-image-coefficient-sheaves). -/
+/-- The i-th rational free-module summand, on underlying abelian sheaves. -/
 noncomputable abbrev finiteCoefficientRationalLeg (X : Scheme.{u})
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     (i : Fin (finiteCoefficientDegree ℓ h)) :=
@@ -496,46 +472,7 @@ private theorem point_basis_naturality
   exact point_summand_naturality a f
 
 /-- Integral and rational coefficient sheaves are finite free, by the specified basis maps.
-All squares are stated on coproduct injections, which jointly determine the full square.
-
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-sfb-cartesian-coefficients-finite-free.md
-(blueprint: lemma-inverse-image-coefficient-sheaves).
-
-Proof:
-1. The integer rings are DVRs by lemma-inverse-image-coefficient-sheaves--3. The lower
-   ring is a Noetherian normal PID by lemma-inverse-image-coefficient-sheaves--3. The upper
-   ring is its integral closure by lemma-inverse-image-coefficient-sheaves--3.
-   Characteristic zero gives separability; apply
-   lemma-inverse-image-coefficient-sheaves--3 and then
-   lemma-inverse-image-coefficient-sheaves--3 to get a finite integral basis.
-2. Multiplying an element of F, or all coefficients in a relation, by a sufficiently
-   large power of ell puts it in the integral ring. Thus this basis is an E-basis
-   of F, and its rank is d. This also applies to every chosen integral basis.
-3. The rational basis map is a homeomorphism by lemma-inverse-image-coefficient-sheaves--3
-   and lemma-inverse-image-coefficient-sheaves--3. Restricting it to the
-   integral lattices gives the integral homeomorphism, with the subspace topologies
-   of prose-02-50.
-4. Applying continuous functions on each profinite S gives mutually inverse linear
-   maps; their formulas commute with precomposition (lemma-inverse-image-coefficient-sheaves--3).
-5. Apply p_X^* (lemma-inverse-image-coefficient-sheaves--3). It preserves finite coproducts and
-   transports module structures (lemma-inverse-image-coefficient-sheaves--3), giving the integral
-   iso on the rings of lemma-inverse-image-coefficient-sheaves--3, with the specified summands.
-6. Invert ell using lemma-comparison-completed-coefficients--2. Restriction of scalars
-   preserves colimits by lemma-inverse-image-coefficient-sheaves--3. Finite sums commute with
-   these colimits, so this gives the rational iso. The condensed inclusion square
-   commutes sectionwise; applying p_X^* and the localization universal property
-   identifies the rational action with prose-07-03. Term zero
-   gives the square with lemma-comparison-completed-coefficients--2.
-7. Naturality of lemma-inverse-image-coefficient-sheaves--3 on multiplication by each b_i
-   gives both inverse-image squares with the lemma-inverse-image-coefficient-sheaves--3 maps.
-8. The balanced coequalizer of lemma-inverse-image-coefficient-sheaves--3 identifies extension
-   by either finite free ring with the d-fold sum of the underlying module:
-   (sum a_i b_i) tensor m maps to (a_i m), with inverse sum b_i tensor m_i.
-9. Finite limits of abelian sheaves and module objects are computed on underlying
-   sheaves, and commute with finite powers. Thus both scalar extensions preserve
-   finite limits, which is the asserted flatness (lemma-inverse-image-coefficient-sheaves--3).
--/
+All squares are stated on coproduct injections, which jointly determine the full square. -/
 theorem cartesianCoefficients_finiteFree
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) :
     Nonempty (finiteCoefficientIntegralBasis ℓ h) ∧

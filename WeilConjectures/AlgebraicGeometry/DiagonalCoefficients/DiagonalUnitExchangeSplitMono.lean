@@ -46,16 +46,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   CondensedRing.upperStar CondensedRing.lowerStar
 
 /-- On an inverse-image object, canonical exchange composed with the unit is split
-injective whenever the new vertical map has a section.
-
-Source: the adjunction-unit component in diagonal coefficients (3)
-(blueprint: lem-diagonal-unit-exchange-split-mono).
-
-Proof: naturality of exchange first moves the specified input isomorphism past
-exchange. Expand the mate into the new unit, the pullback-square isomorphism and
-the old counit. The old triangle identity contracts the old unit and counit.
-The result is the new adjunction unit followed by the new direct image of a
-composite of isomorphisms. A section of the new vertical morphism splits that unit. -/
+injective whenever the new vertical map has a section. -/
 theorem diagonalUnitExchange_splitMono
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X S X' S' : Scheme.{u}}

@@ -301,21 +301,7 @@ open CompletedConstantRankOne
 
 /-- The comparison is invertible for the rank-one free completion module.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 093M; More on Algebra,
-Tag 05GG (completion modulo an ideal power).
-(blueprint: lem-weil-pbc-completed-constant-rank-one-comparison).
-
-Proof: write C = AdicCompletion I A and H = lim constant(A/I^(n+1)). The constant
-C-module C is the unit module of constant C. Scalar extension takes it to the unit
-module of H, via multiplication h tensor c -> h times phi(c). On the other side,
-evaluation C -> A/I^(n+1) is surjective with kernel I^(n+1)C. The induced additive
-quotient isomorphisms C/I^(n+1)C -> A/I^(n+1) commute with every transition and
-with A-actions. Constant sheafification and the limit give an isomorphism from
-the completed constant C-module to H with its restricted A-action. After these
-two identifications the comparison is the identity on H: at every finite
-projection its pure-tensor formula is projected(h) times eval(c), exactly the
-formula of multiplication. Local tensor generation and the limit universal
-property give equality with the fixed comparison map. All these identifications
-remain valid for the zero ring, I=0 and I=top. -/
+Tag 05GG (completion modulo an ideal power). -/
 theorem completedConstantComparisonMap_rankOne_isIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

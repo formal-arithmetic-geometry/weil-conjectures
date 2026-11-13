@@ -13,9 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 
 /-! # Unit-normalized finite coefficient realizations
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-finite-realization).
-
 ## Main definitions
 
 - `FiniteRealization`: exact realization with specified units and underlying sheaves.
@@ -35,8 +32,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Constant modules commute with the etale/pro-etale inverse image by uniqueness
-of the constant-object left adjoint. Source: blueprint torsion normalization
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+of the constant-object left adjoint. -/
 def finiteConstantComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) X).obj
       (Etale.ordinaryFiniteConstant A X) ≅ geoCartierConstant A X :=
@@ -46,8 +42,7 @@ def finiteConstantComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
 attribute [-instance] AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian
   AlgebraicGeometry.ProEtale.diagonalAbSheafAbelian in
 /-- The exact single comparison identifies the finite trace's unit with the
-constant unit used by the Cartier class. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+constant unit used by the Cartier class. -/
 def finiteUnitComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     geoP1Unit A X ≅ (DerivedCategory.singleFunctor
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) 0).obj
@@ -55,16 +50,13 @@ def finiteUnitComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
   Functor.compIsoApp (finiteSingleComparison A X) (Etale.ordinaryFiniteConstant A X) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (finiteConstantComparison A X)
 
-/-- The ordinary constant ring viewed as an abelian ring object.
-Source: blueprint clause 1, finite coefficients
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+/-- The ordinary constant ring viewed as an abelian ring object. -/
 def finiteConstantAbRing (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) Ab.{u + 1} :=
   ((sfbConstantRing X).obj (RingCat.of A)).X
 
 /-- The two forgetful presentations of the constant coefficient have the same
-constant-section normalization. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+constant-section normalization. -/
 def finiteConstantAbComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     (sheafCompose (Scheme.ProEt.topology X)
       (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).obj (geoCartierConstant A X) ≅
@@ -79,8 +71,7 @@ def finiteConstantAbComparison (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) 
 
 /-- A finite-coefficient realization retains its actual underlying sheaves and
 its coefficient unit. The unital ring normalization prevents rescaling the coefficient
-unit. Source: blueprint coefficient changes, clause 1
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+unit. -/
 structure FiniteRealization
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) where
@@ -102,9 +93,7 @@ attribute [instance] FiniteRealization.additive FiniteRealization.limits
   FiniteRealization.colimits FiniteRealization.equivalence
 
 /-- Compare a prescribed root arrow through a realization and its specified
-line isomorphism. This names the equality without expanding tensor quotients.
-Source: blueprint clause 1, positive-root normalization
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+line isomorphism. This names the equality without expanding tensor quotients. -/
 def FiniteRealization.LineNormalization
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}} (e : FiniteRealization R A X)
@@ -117,9 +106,7 @@ def FiniteRealization.LineNormalization
     (sheafCompose (Scheme.ProEt.topology X)
       (forget₂ (ModuleCat.{u + 1} A) Ab.{u + 1})).map i.hom = v
 
-/-- A finite-line endpoint with its specified root arrow. Source: blueprint
-clause 1, positive-root normalization
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+/-- A finite-line endpoint with its specified root arrow. -/
 structure FiniteRealization.LineEndpoint
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}} (e : FiniteRealization R A X)
@@ -132,8 +119,7 @@ structure FiniteRealization.LineEndpoint
   normalization : e.LineNormalization M N m iso v
 
 /-- The underlying-sheaf and universal-derived-unit normalizations for the
-finite realization/direct-image comparison. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+finite realization/direct-image comparison. -/
 structure FinitePushSquare
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A : Type (u + 1)) [CommRing A] {X S : Scheme.{u}} (f : X ⟶ S)
@@ -154,8 +140,7 @@ structure FinitePushSquare
 attribute [-instance] AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian
   AlgebraicGeometry.ProEtale.diagonalAbSheafAbelian in
 /-- The finite realization of the degree-zero coefficient unit, in the trace's
-specified comparison presentation. Source: blueprint clause 1
-(blueprint: def-sfb-diagonal-coefficient-finite-realization). -/
+specified comparison presentation. -/
 def FiniteRealization.derivedUnit
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
     {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}} (e : FiniteRealization R A X) :

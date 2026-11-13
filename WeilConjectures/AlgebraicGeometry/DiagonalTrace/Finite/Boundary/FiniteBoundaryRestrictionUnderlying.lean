@@ -34,8 +34,7 @@ open SpTowerClasses
 /-- The restricted evaluation of a diagonal system agrees with its finite
 evaluation: componentwise the identity transport along `r.underlying`, natural by
 `r.restrictions` and `r.morphisms` through
-`SpTowerClasses.finiteBoundary_transport_addHom`.
-(blueprint: def-diagonal-local-finite-boundary-restriction-underlying) -/
+`SpTowerClasses.finiteBoundary_transport_addHom`. -/
 noncomputable def finiteBoundaryRestrictionUnderlying (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ) :
     r.F ⋙ (CategoryTheory.evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n) ⋙

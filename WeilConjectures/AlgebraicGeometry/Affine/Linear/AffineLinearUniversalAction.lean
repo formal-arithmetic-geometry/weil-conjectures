@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearTraceA
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 /-! # Universal invertible matrices for the affine trace action
-
-Source: linear-trace invariance, proof paragraph 1.
-(blueprint: def-amb-affine-linear-universal-action).
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +29,7 @@ def linearUniversalMatrix (S : Scheme.{u}) (d : ℕ) :
       exact (AffineSpace (ULift.{u} (Fin d × Fin d)) S).isUnit_ι_appTop_basicOpen
         (matrixCoord d S).det)
 
-/-- Pulling the universal matrix back along a matrix section recovers that matrix.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: def-amb-affine-linear-universal-action). -/
+/-- Pulling the universal matrix back along a matrix section recovers that matrix. -/
 theorem linearUniversalMatrix_specialize (S : Scheme.{u}) (d : ℕ)
     (g : Matrix.GeneralLinearGroup (Fin d) Γ(S, ⊤)) :
     Matrix.GeneralLinearGroup.map

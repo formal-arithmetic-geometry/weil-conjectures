@@ -76,9 +76,7 @@ surjective.
 By induction on `d`: `π_{d + 1}` is `π_d × 𝟙 : X^d ×_k X ⟶ H_d ×_k X`, a base change of `π_d`,
 followed by the addition morphism `H_d ×_k X ⟶ H_{d + 1}`
 (`AlgebraicGeometry.exists_addition_hilbertPresheaf`), which is finite locally free of degree
-`d + 1`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, complements) -/
+`d + 1`. -/
 theorem exists_iteratedAddition_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f]
     [IsProper f] [GeometricallyIntegral f] (d : ℕ) (H : Over (Spec (.of k)))
     (e : (hilbertPresheaf f d).RepresentableBy H) :

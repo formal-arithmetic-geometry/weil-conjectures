@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicDirectImageUnitNormalizat
 
 /-! # The restriction and direct-image cube for intrinsic realization
 
-Source: Step 1 of lem-finite-realization-scalar-mate; Stacks Tags 0D6E, 0D6J and 07A6.
-(blueprint: lem-finite-realization-restriction-cube).
+Source: Stacks Tags 0D6E, 0D6J and 07A6.
 -/
 
 @[expose] public noncomputable section
@@ -95,8 +94,7 @@ private theorem derived_unit_ext_general
   rw [← a.naturality e.hom, ← b.naturality e.hom, hi]
 
 /-- A square normalized by the canonical right-derived units and localization factors.
-Source: Stacks Tag 0D6E
-(blueprint: lem-pur-derived-square-normalization-naturality). -/
+Source: Stacks Tag 0D6E. -/
 private def unitNormalized
     (X : DerivedCategory A ⥤ DerivedCategory Ap)
     (Y : DerivedCategory B ⥤ DerivedCategory Bp)
@@ -113,12 +111,7 @@ private def unitNormalized
 omit [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y] in
 /-- A square normalized by right-derived units respects a morphism of ordinary squares.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation.
-(blueprint: lem-pur-derived-square-normalization-naturality).
-Proof: evaluate on a K-injective representative, cancel the invertible source unit,
-and use the two normalization equations. The ordinary square's naturality and the
-naturality of the target derived unit then identify the two composites. Essential
-surjectivity of K-injective representatives gives the equation on every object. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation. -/
 private theorem normalized_naturality
     (x' : A ⥤ Ap) (y' : B ⥤ Bp) [x'.Additive] [y'.Additive]
     (X X' : DerivedCategory A ⥤ DerivedCategory Ap)
@@ -298,9 +291,7 @@ end MixedDerivedCube
 
 namespace AlgebraicGeometry.Scheme.FiniteCompactScalar
 
-/-- The inverse realization/restriction square, descended termwise.
-Source: sfInverseRealizationRestriction, Step 1 of lem-finite-realization-scalar-mate.
-(blueprint: lem-finite-realization-restriction-cube). -/
+/-- The inverse realization/restriction square, descended termwise. -/
 def realizationRestrictionRightIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -322,9 +313,7 @@ def realizationRestrictionRightIso
       Functor.mapDerivedCategorySquareIso (sfInverseRealizationRestriction T φ)
   exact e
 
-/-- Its forward counterpart, using only the units and counits of realization.
-Source: equivalence conjugation, Step 1 of lem-finite-realization-scalar-mate.
-(blueprint: lem-finite-realization-restriction-cube). -/
+/-- Its forward counterpart, using only the units and counits of realization. -/
 def realizationRestrictionIso
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :
@@ -474,21 +463,7 @@ private theorem restriction_eq
 
 /-- The realization/restriction square commutes with the specified direct-image squares.
 
-Source: Stacks Tags 0D6E, 0D6J and 07A6; Step 1 of
-`lem-finite-realization-scalar-mate`.
-(blueprint: lem-finite-realization-restriction-cube).
-
-Proof: identify the conjugated restriction square with the exact localization of
-sfRealizationRestriction using the derived mate equation and realization triangles.
-On ordinary sheaves, the scalar comparisons are identities on sections; evaluating
-on the scalar-unit sections proves the cube, since those unit maps are invertible.
-The K-injective normalization of each realization comparison gives its inverse's
-right-derived unit equation. Naturality along a K-injective resolution extends this
-equation to every complex. The intrinsic restriction comparison and fixed-scalar
-restriction mate already satisfy the corresponding all-complex unit equations.
-Apply the proved normalized derived cube to these four equations and the ordinary
-cube. Cancel its inverse comparison isomorphisms to recover the forward equation.
-No restriction functor is asserted to preserve K-injectivity. -/
+Source: Stacks Tags 0D6E, 0D6J and 07A6. -/
 theorem realizationRestriction_directImage_cube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y)

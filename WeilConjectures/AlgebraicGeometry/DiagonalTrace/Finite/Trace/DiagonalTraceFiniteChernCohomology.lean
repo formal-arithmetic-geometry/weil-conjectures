@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The finite degree-two Chern generator
 
-Source: blueprint latest, diagonal-tower trace proof (1), and projective-line
-cohomology (G2). This is only the degree-two calculation for the second component.
+ This is only the degree-two calculation for the second component.
 -/
 
 @[expose] public noncomputable section
@@ -55,31 +54,7 @@ private theorem evaluation_reflects_iso
           ((SpTowerShriek.ev l E S n).map f))
   exact isIso_of_reflects_iso f single
 
-/-- The actual untwisted Chern component induces the finite degree-two generator.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), and
-`lemma-cohomology-projective-line-trace` (G2), the Chern summand.
-(blueprint: lem-sfb-diagonal-trace-finite-chern-cohomology).
-
-Proof: compare the positive Chern adjunct at each finite level with the second
-component of the positively twisted ordinary decomposition (G2). The left
-summand A(1)[2] has no H⁰. Additivity shows that its complementary second
-injection is invertible on H⁰, so invertibility of (G2) gives invertibility
-of H⁰ of the positive Chern adjunct. Exact scalar realization and the arrow
-comparison carry this conclusion back to the evaluated tower adjunct.
-Exact evaluation commutes with homology. To reflect isomorphisms of system
-sheaves, place each map in degree zero and apply the derived evaluation
-detector and the single/evaluation comparisons; full faithfulness of the
-single functor then reflects invertibility. Hence H⁰ of the actual system
-Chern adjunct is invertible. Compose with twistedPush inverse and the
-positive-twist shift comparison, then apply the exact negative-twist
-functor. Its homology comparison preserves invertibility on H⁰. Compose
-with inverseUnit inverse and cancelNegative, shift by minus two and cancel
-the shifts. This is precisely Model.second. The homology shift comparison
-turns H⁰ before this shift into H² afterwards. Finally exact finite
-evaluation preserves this H² isomorphism. This avoids all finite
-negative-twist and tensor/Hom realization comparisons. The argument uses
-positive exponents k+1, including k=0, and works for zero coefficients. -/
+/-- The actual untwisted Chern component induces the finite degree-two generator. -/
 theorem diagonalTrace_finite_chern_cohomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

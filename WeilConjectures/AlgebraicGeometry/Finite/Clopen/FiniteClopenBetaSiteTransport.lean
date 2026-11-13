@@ -41,8 +41,7 @@ set_option backward.defeqAttrib.useBackward true
 sites. The first factor converts etale restriction to inverse image; the middle factor
 is the recorded canonical comparison, and the last converts pro-etale inverse image to
 restriction. No independent comparison is chosen.
-Source: Stacks Project, Tags 099R and 09AF
-(blueprint: lem-sf-open-comparison-unit-normalization). -/
+Source: Stacks Project, Tags 099R and 09AF. -/
 private noncomputable def openComparisonRestrictionIso (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
@@ -333,15 +332,7 @@ private theorem component_unpack
       K₂.map (se.hom.app F) ≫ c₂'.inv.app (L₁'.obj F) ≫ R₂'.map (c₁'.inv.app F) := h
 
 /-- Specialized inverse-image comparison square used by the open exchange calculation.
-Source: canonical comparison-square coherence, Stacks Tags 099R and 0B65.
-(blueprint: lem-fix-site-open-exchange-square).
-
-Proof: flip the chosen Cartesian square using the pullback symmetry isomorphism.
-The component equation for this flipped square has exactly the required orientation.
-Its pro-etale square is the original inverse-image square, and its coefficient
-comparisons are the inverses of the specified pullback comparisons. Normalize the
-bundled square data and unpack its component equation. No open-immersion assumption
-is needed; the construction also covers empty schemes and the zero coefficient ring. -/
+Source: canonical comparison-square coherence, Stacks Tags 099R and 0B65. -/
 private theorem fixSiteOpenExchangeSquare (Λ : Type (u + 1)) [CommRing Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} (sq : ChosenCartesianSquare gU j' j g)
@@ -486,21 +477,7 @@ private theorem beta_forward_comparison (Λ : Type (u + 1)) [CommRing Λ]
 
 end BetaSiteTransportProof
 
-/-- Site comparison preserves the inverse cartesian open base-change map.
-Source: Stacks Project, proetale.tex, lemma-jshriek-comparison (Tag 09AF);
-open-unit transpose calculation in step 1 of
-lem-cbc-finite-clopen-alpha-site-transport
-(blueprint: lem-cbc-finite-clopen-beta-site-transport).
-
-Proof: transpose the forward base-change maps under extension by zero along
-b = W ×_T S → W. The transpose is pullback along q of the open unit along i,
-followed by the cartesian inverse-image compositor. The pullback comparison
-preserves that compositor. The open comparison is the adjunction comparison,
-so its unit equation identifies the two open units. The transposes therefore
-agree, and injectivity of the adjunction bijection identifies the forward maps.
-All four comparison maps and the cartesian base-change maps are isomorphisms;
-compose with their inverses to obtain the stated equation. This works also for
-an empty open, and uses no properness or finiteness condition on p. -/
+/-- Site comparison preserves the inverse cartesian open base-change map. -/
 theorem finiteClopenBetaSiteTransport
     (Λ : Type (u + 1)) [CommRing Λ]
     {W S T : Scheme.{u}} (i : S ⟶ T) (p : W ⟶ T) [IsOpenImmersion i]

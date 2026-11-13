@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 # Coherent, quasi-coherent and finite-type modules
 
 Source: Stacks Project, Sheaves of Modules, Tags 01BV, 01B5 and 01BE;
-Schemes, Tag 01IA (blueprint: pqf-def-coherent).
+Schemes, Tag 01IA.
 
 The public coherence import exposes `RingedSpace.IsCoherent`, the finite-type
 and finite-type-kernel condition of Tag 01BV. Mathlib supplies
@@ -32,8 +32,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- A sheaf of modules is quasi-coherent and of finite type.
-Source: Stacks Project, Modules on Schemes, Tags 01B5 and 01BE
-(blueprint: pqf-def-coherent). -/
+Source: Stacks Project, Modules on Schemes, Tags 01B5 and 01BE. -/
 def Scheme.Modules.IsQuasiCoherentFiniteType {X : Scheme.{u}} (F : X.Modules) : Prop :=
   SheafOfModules.IsQuasicoherent F ∧ SheafOfModules.IsFiniteType F
 

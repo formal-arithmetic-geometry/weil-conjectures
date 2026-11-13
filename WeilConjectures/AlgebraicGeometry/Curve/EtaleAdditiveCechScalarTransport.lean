@@ -25,24 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Multiplication transports a common augmentation representative to another one.
 Source: Stacks Project, Tag 01EQ, functoriality in coefficients, and Tag 01FD,
-the commuting augmented double-complex diagram used in Tag 03P2.
-(blueprint: new-w2-additive-cech-scalar-transport)
-
-Proof: Lift μ(r) to an endomorphism of I preserving its augmentation, by the
-injective-resolution comparison theorem. Apply its global section cochain map
-to s and its induced total-complex map to tα and tβ. On coefficient cochains
-use multiplication by r in the module complex cechOver. The section formula hμ
-and naturality of restrictFunctorΓ imply that beta commutes with these maps:
-the pullback of r on the intersection is its restriction as a structural
-section, and GammaSpecIso.inv_hom_id identifies the base scalar with r.
-Alpha commutes by naturality of restrictions. These chain maps preserve cycles
-and equality of homology classes, giving s', z', tα', tβ' and the first three
-equations. The canonical comparison's extMk formula and functoriality of Ext
-identify the class of s' with H(μ(r)) of the class of s. Finally the homology
-projection in ModuleCat is linear, so the class of z' is r times [z]. This
-argument does not assume a normalized edge or the affine-cover hypotheses.
-For r=0 and r=1 the same chain-map identities apply; in degree zero there
-are no boundaries, and empty intersections give zero coordinates. -/
+the commuting augmented double-complex diagram used in Tag 03P2. -/
 theorem additiveCech_scalar_transport
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))

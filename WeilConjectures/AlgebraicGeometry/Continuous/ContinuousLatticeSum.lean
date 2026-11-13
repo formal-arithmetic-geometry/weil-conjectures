@@ -18,9 +18,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Continuous functions into a finite sum of lattices
 
-Source: main-20261015 blueprint, sk-lem-stratified-lattice.proof.md,
-"Pushing down by the trace" (blueprint: lem-sfb-continuous-lattice-sum).
-
 The sheaf assertions are stated by their sections and restriction maps: the
 submodule sum is equal sectionwise, the rank-r trivialization commutes with
 restriction, and the scalar-extension comparison is specified on pure tensors.
@@ -38,9 +35,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option autoImplicit false
 
-/-- The actual inclusion of continuous lattice-valued functions into vector-valued functions.
-Source: main-20261015 blueprint, sk-lem-stratified-lattice.proof.md,
-"Pushing down by the trace" (blueprint: lem-sfb-continuous-lattice-sum). -/
+/-- The actual inclusion of continuous lattice-valued functions into vector-valued functions. -/
 def continuousLatticeInclusion {E : Type v} [NormedField E] (A : Subring E)
     {r : ℕ} (L : Submodule A (Fin r → E)) (Z : Type z) [TopologicalSpace Z] :
     C(Z, L) →ₗ[C(Z, A)] C(Z, Fin r → E) where
@@ -191,9 +186,6 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
 functions preserve this sum, and on every small pro-etale site the resulting
 module sheaf is free of rank r and its actual inclusion rationalizes to an isomorphism.
 
-Source: main-20261015 blueprint, sk-lem-stratified-lattice.proof.md,
-"Pushing down by the trace" (blueprint: lem-sfb-continuous-lattice-sum).
-
 Proof plan:
 1. Apply lem-sfb-finite-sum-lattice to obtain an integral basis of the sum
    that is also a field basis. Restrict the continuous field coordinate map
@@ -214,8 +206,7 @@ Proof plan:
    distribute the tensor over the finite power, and reconstruct using the field
    basis. The pure-tensor formula specifies this actual comparison. These are
    exactly the sectionwise tensor assertions of the existing statement.
-   All formulas also hold for r = 0.
--/
+   All formulas also hold for r = 0. -/
 theorem continuous_lattice_sum
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type v) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

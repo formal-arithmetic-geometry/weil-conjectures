@@ -88,10 +88,6 @@ public import Mathlib.RepresentationTheory.Coinvariants
 
 /-! # Geometric curve compact-support cohomology
 
-Source: `literature/blueprint/latest/blueprint/part-weights-riemann-hypothesis/`
-`sec-fourier-transform/sec-perverse-t-exactness-of-the-fourier-transform/sk-p-dl-a1-perverse/`
-`sk-p-dl-a1-perverse.proof.md`, right exactness and localization/coinvariant sentences
-(blueprint: lem-per-geometric-curve-compact-cohomology).
 The declaration below records the complete geometric statement; its proof is postponed to a
 later stage.  Compact cohomology is the project’s actual condensed lower-shriek construction,
 and the finite-support hypothesis is written as vanishing after restriction to the complement of
@@ -111,15 +107,11 @@ open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale.CondensedCurve
 
 /-- The finite-subextension-valued condensed ring `Q = Qbar_ℓ`; an abbreviation of
-`Profinite.padicAlgClRingObj`, introducing no new coefficient ring.
-Source: `prose-02-50`, as cited in the statement of the node
-(blueprint: lem-per-geometric-curve-compact-cohomology). -/
+`Profinite.padicAlgClRingObj`, introducing no new coefficient ring. -/
 abbrev CurveCoeff (ℓ : ℕ) [Fact ℓ.Prime] := Profinite.padicAlgClRingObj ℓ
 
 /-- Modules over `Q_X = p_X^* Q` on the small pro-étale site; the same category as
-`CondensedLisseMonodromy.Modules`, introducing no new notion.
-Source: `prose-02-51`, as cited in the statement of the node
-(blueprint: lem-per-geometric-curve-compact-cohomology). -/
+`CondensedLisseMonodromy.Modules`, introducing no new notion. -/
 abbrev CurveModules (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) :=
   CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (CurveCoeff ℓ) X)

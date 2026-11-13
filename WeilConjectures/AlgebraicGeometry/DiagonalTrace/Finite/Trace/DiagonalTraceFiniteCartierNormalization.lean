@@ -42,9 +42,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 /-- The positive finite Cartier-cycle normalization, named with its scalar endpoints.
 This is exactly the finite-cycle clause of IsDiagonalLimit, for an ordinary
-reduction presentation and a specified strict Ext class.
-Source: diagonal-limit clause (3), positive finite Cartier reductions.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-normalization). -/
+reduction presentation and a specified strict Ext class. -/
 @[irreducible]
 def FiniteCartierNormalization
     (l : ℕ) [Fact l.Prime]

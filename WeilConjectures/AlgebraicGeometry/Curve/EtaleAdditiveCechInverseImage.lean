@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap
 /-! # Étale additive cohomology in ordinary Čech coordinates
 
 Source: Stacks Project, Tags 03P2 and 01FD.
-(blueprint: lem-pbc-etale-additive-cech-inverse-image)
 -/
 
 @[expose] public section
@@ -124,41 +123,7 @@ private lemma exists_additiveOrdinary_cycle_transfer
 
 /-- Affine-intersection Čech coordinates compute lifted additive étale cohomology.
 The coordinates respect multiplication and represent inverse-image classes by
-matching structural-function cocycles. No ordinary Ext comparison occurs here.
-
-Source: Stacks Project, Tag 03P2, separated-case proof of
-etale-cohomology-theorem-zariski-fpqc-quasi-coherent; Tag 01FD,
-cohomology-lemma-cech-functorial, augmented double-complex diagram.
-(blueprint: lem-pbc-etale-additive-cech-inverse-image)
-
-Proof: Regard the open covers as covers in the small étale sites. The unit module
-has canonical structural-function sections, and the fixed additive sheaf is their
-coefficient lift. Every tuple intersection is affine. Affine quasi-coherent étale
-acyclicity, also with lifted coefficients, makes the coefficient augmentation of
-the injective Čech double complex a quasi-isomorphism. The global-sections
-augmentation is a quasi-isomorphism by injective Čech acyclicity. Their inverses
-on cohomology identify Ext cohomology with the ordered section Čech homology.
-Lower every lifted coordinate; structural-function restrictions identify this
-complex with cechOver for the unit and the canonical map to Spec of global
-functions. In each degree the tuple index is finite. Lowering commutes with these finite
-products, kernels, images and alternating differentials.
-Multiplication acts coordinatewise, so this identification carries the stipulated
-endomorphism to scalar multiplication on homology. For g use the refined-cover
-structural pullback map of section complexes. The adjunction unit defining its
-étale coefficient map gives precisely structural pullback on each intersection.
-Use exists_resolutionSection_canonical_comparison to normalize the resolution
-section comparisons on cocycles. The augmented double-complex diagram of 01FD
-and resolutionSection_canonical_transfer identify the inverse-image homology map
-with exact étale inverse image. Compose with an augmentation-preserving resolution
-lift of the adjoint coefficient map; the extMk cocycle formula identifies its
-homology map with Sheaf.H.map of that coefficient map. These constructions fix
-the edge maps; naturality is not inferred from an arbitrary Nonempty comparison.
-Choose a
-cycle representing the source class and take its image under this section chain
-map as the target cycle. This gives both homology equalities and the displayed
-coordinate matching. Degree zero is gluing of sections with structural pullback.
-Empty intersections have zero sections; an empty covering index forces both
-schemes empty. Neither flatness nor affineness of g is used. -/
+matching structural-function cocycles. No ordinary Ext comparison occurs here. -/
 theorem exists_etaleAdditive_cech_inverseImage
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     [CompactSpace X] [CompactSpace Y] [X.IsSeparated] [Y.IsSeparated]

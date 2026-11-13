@@ -87,8 +87,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalC
 
 /-! # Finite constant module sheaves on a slice
 
-Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL
-(blueprint: lem-weil-pbc-finite-coefficient-slice-heart-origin).
+Source: Stacks Project, proetale.tex, Tags 099R, 099Y and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -201,26 +200,7 @@ private def localizedModelIso (X : Scheme.{t}) (B : Type t) [CommRing B]
 
 set_option linter.unusedVariables false in
 /-- Finite etale-local constant models of a single module sheaf descend on a chart.
-This is a statement in the abelian hearts; it has no complex or truncation bound.
-
-Source: Stacks Project, proetale.tex, lemma-compare-locally-constant (099Y),
-with small-site localization (099R).
-(blueprint: lem-weil-pbc-finite-coefficient-slice-heart-origin).
-
-Proof: restrict the action along phi and then along the constant-section map.
-These operations retain the underlying additive sheaf. Identify the slice site
-at V with the pro-etale site of V.left. Local finite models become constant
-ULift(B)-module sheaves on that site: scalar extension along the isomorphism phi
-cancels scalar restriction, and module sheafification of a constant module
-restricts to the corresponding constant module-valued sheaf. Etale covers over
-V transport to etale covers of V.left under the etale slice equivalence.
-Apply finite locally constant descent (099Y). The descended sheaf can be taken
-to be comparisonLowerStar of the fixed-coefficient restriction of M; its counit
-is invertible on the supplied local constant models and hence globally.
-Restrict the descended trivializations to every smaller etale chart to obtain
-the displayed covering families. The comparison counit supplies the marking.
-Empty charts admit the empty cover; zero modules and the zero ring cause no
-exception. No derived object or connecting morphism is chosen. -/
+This is a statement in the abelian hearts; it has no complex or truncation bound. -/
 theorem finiteCoefficient_slice_heart_origin
     (X : Scheme.{t})
     (B : Type t) [CommRing B] [Finite B]

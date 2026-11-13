@@ -48,9 +48,6 @@ import all WeilConjectures.CategoryTheory.Sites.MonObj
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 
 /-! # Completed realization and normalized inverse image
-
-Source: blueprint latest, sk-prop-diagonal-tower-coefficients.proof.md, paragraph (3).
-(blueprint: lem-sfb-diagonal-realization-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -81,13 +78,7 @@ private def residueTowerIso (l : ℕ) (X : Scheme.{u}) :
           Scheme.purTwistZlTowerOfUniverses,
           Scheme.purTwistFiniteTransitionOfUniverses])).naturality f)
 
-/-- The canonical completed coefficient comparison is invertible.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-sfb-diagonal-realization-pullback).
-Proof: the map is the limit lift of the finite constant-section comparisons.
-Apply lem-weil-pbc-profinite-coefficient-inverse-image to the positive finite
-coefficient tower. Its projection equations identify its comparison with this
-limit lift, and its invertibility gives the assertion. -/
+/-- The canonical completed coefficient comparison is invertible. -/
 theorem diagonalRealization_coefficient_isIso (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     IsIso (diagonalCompletedCoefficientMap l f) := by
@@ -138,18 +129,14 @@ theorem diagonalRealization_coefficient_isIso (l : ℕ) [Fact l.Prime]
 attribute [instance] diagonalRealization_coefficient_isIso
 
 /-- The actual sheafified tensor inverse image along the canonical completed
-coefficient isomorphism; no completion is applied to its values.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-sfb-diagonal-realization-pullback). -/
+coefficient isomorphism; no completion is applied to its values. -/
 abbrev diagonalRealizationPull (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) : DiagonalCompleted l S ⥤ DiagonalCompleted l X :=
   Scheme.proEtaleRingModulePullback f (Scheme.purTwistZlCompletion S l)
     (Scheme.purTwistZlCompletion X l) (asIso (diagonalCompletedCoefficientMap l f))
 
 /-- The root-normalized inverse-image arrow, transported between the two specified
-abelian inverse-image adjunctions through their common direct image.
-Source: blueprint coefficient changes (3), integral Tate comparison
-(blueprint: lem-sfb-diagonal-realization-pullback). -/
+abelian inverse-image adjunctions through their common direct image. -/
 def diagonalRealizationLinePullMap (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) :
     (upperStar Ab.{u + 1} f).obj (zlLine l S).X ⟶ (zlLine l X).X :=
@@ -157,9 +144,7 @@ def diagonalRealizationLinePullMap (l : ℕ) [Fact l.Prime]
     ((Scheme.proEtaleSheafAdjunction f Ab.{u + 1}).homEquiv _ _
       (spIntegralComparison f l (bottomField l)))
 
-/-- The completed endpoint in degree zero, using the exact single comparison.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-sfb-diagonal-realization-pullback). -/
+/-- The completed endpoint in degree zero, using the exact single comparison. -/
 def diagonalRealizationPullSingle (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -171,9 +156,7 @@ def diagonalRealizationPullSingle (l : ℕ) [Fact l.Prime]
   (diagonalRealizationPull l f).mapDerivedCategorySingleFunctor 0 |>.app M |>.trans
     ((DerivedCategory.singleFunctor (DiagonalCompleted l X) 0).mapIso t)
 
-/-- The completed endpoint with its canonical cochain shift comparison.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-sfb-diagonal-realization-pullback). -/
+/-- The completed endpoint with its canonical cochain shift comparison. -/
 def diagonalRealizationPullShift (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -188,9 +171,7 @@ def diagonalRealizationPullShift (l : ℕ) [Fact l.Prime]
 
 /-- All endpoint and arrow equations of the normalized realization square.
 The line endpoint uses the actual root-limit comparison, and the derived functor
-on condensed modules is the published derived inverse image.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-sfb-diagonal-realization-pullback). -/
+on condensed modules is the published derived inverse image. -/
 structure DiagonalRealizationPullback (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -362,30 +343,7 @@ private theorem arrow_of_components
 
 -- Elaborating the derived endpoint comparison unfolds several exact-functor compositors.
 /-- Exact completed realization commutes with inverse image, with the prescribed
-unit and integral Tate-line endpoints, their shifts, and normalized arrows.
-
-Source: blueprint latest, sk-prop-diagonal-tower-coefficients.proof.md, paragraph (3).
-(blueprint: lem-sfb-diagonal-realization-pullback).
-
-Proof:
-1. The canonical completed coefficient comparison is invertible by the
-   coefficient theorem above; it defines the exact scalar-extension pullback.
-2. The inverse strong-monoidal unit comparison has the required condensed
-   adjoint normalization. For the line, restrict the whole integral comparison
-   along the bottom-field inclusion and lift it through extension by the
-   invertible coefficient comparison. The forgetful adjunction-unit formula
-   gives its prescribed normalization.
-3. Apply lem-sfb-diagonal-realization-pullback-endpoints to obtain the completed
-   regular and whole-root endpoints with their adjoint projection equations.
-4. Apply lem-sfb-diagonal-realization-pullback-derived to these endpoints and
-   the supplied realizations. This gives the derived natural isomorphism,
-   shift compatibility, and the two endpoint component equations.
-5. Every normalized unit endpoint has the same underlying module adjoint.
-   Faithfulness and the adjunction Hom bijection identify its isomorphism.
-6. For the arrow equation, precompose with the invertible source comparison
-   followed by pullback of the source realization. Substitute the unit component
-   equation, cancel source isomorphisms, apply naturality, and substitute the
-   line component equation. Unfolding localChern gives the required formula. -/
+unit and integral Tate-line endpoints, their shifts, and normalized arrows. -/
 theorem diagonalRealization_pullback (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian X] [IsNoetherian S]
     (hX : IsUnit (l : Γ(X, ⊤))) (hS : IsUnit (l : Γ(S, ⊤)))

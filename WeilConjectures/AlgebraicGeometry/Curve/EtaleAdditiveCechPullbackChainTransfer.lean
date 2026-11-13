@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechPullbackAugmente
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechCanonicalCoefficientTransfer
 
 /-! # Pullback maps of the augmented additive Čech complexes
-Source: Stacks Project, Tags 01FD, 01FB and 03P2.
-(blueprint: lem-pbc-etale-additive-cech-pullback-chain-transfer) -/
+Source: Stacks Project, Tags 01FD, 01FB and 03P2. -/
 
 @[expose] public section
 
@@ -25,20 +24,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Pullback and refinement give augmentation-preserving global and total cochain maps.
 Source: Stacks Project, Tag 01FD, proof of Lemma 20.15.1 (double-complex maps),
-Tag 01FB, resolution comparison, and Tag 03P2, structural-function coordinates.
-(blueprint: lem-pbc-etale-additive-cech-pullback-chain-transfer)
-
-Proof: Obtain α:I -> g_*J, its coefficient augmentation equation, and its total
-map t from exists_additiveCech_pullback_augmented_transfer. Take f to be the explicit
-globalResolutionSectionTransfer of α. Its terminal restrictions and the tuplewise
-restriction components of t give the alpha square and the beta equation supplied
-by that theorem. Apply resolutionSection_canonical_coefficient_transfer to α and
-the structural coefficient morphism. The canonical comparisons identify the
-homology map of f with inverse-image pullback followed by the adjoint coefficient
-map. This proves the final formula for every global class. No global cycle is
-chosen with a prescribed class, and no equality of total classes is assumed.
-Empty families give zero total maps; degree zero,
-empty intersections and empty schemes need no extra assumptions. -/
+Tag 01FB, resolution comparison, and Tag 03P2, structural-function coordinates. -/
 theorem exists_additiveCech_pullback_chain_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     {ι : Type u} [Finite ι] (U : ι → X.Opens) (V : ι → Y.Opens)

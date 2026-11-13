@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteModelQuotient.FiniteModelOrdinary
 
 /-! # Quotient reduction of a literal finite free model complex
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks 093M and 0G7E.
-(blueprint: lem-sfb-finite-model-free-complex-reduction). -/
+Source: Stacks 093M and 0G7E. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,24 +36,8 @@ private lemma flat_finite_biproduct (T : Scheme.{u}) (r : ℕ) :
 -- The derived reduction unfolds the two-term free model complex and its matrix.
 /-- Derived reduction of the literal two-term free model complex keeps its matrix.
 
-Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks Tags 093M,
-06YQ, 06YY and 0G7E (blueprint: lem-sfb-finite-model-free-complex-reduction).
-
-Proof: the model functor takes the two scalar free modules to the corresponding
-finite free modules over the pulled-back integral ring. Thus the literal double
-complex is a bounded complex of flat modules and is K-flat, without any injectivity
-assumption on its differential. Compute derived extension along the actual quotient
-map on this complex. On a free module of rank r, the map sending a scalar tensor a
-basis vector to the same quotient basis vector identifies extension with the free
-quotient module of rank r. On the jth basis vector, the ith coordinate of the
-extended differential is the residue of v i j. The normalized encoding sends the
-quotient regular module to the constant regular module and these basis maps to the
-constant basis maps, by its normalization on constant scalar sections. These term
-isomorphisms therefore commute with the differentials and identify the reduced
-complex with the constant realization of scalarComplex. Localize this cochain
-isomorphism and apply the unit of the specified fixedDerived equivalence. The empty
-basis gives zero terms, so the same argument includes either or both ranks zero.
--/
+Source: Stacks Tags 093M,
+06YQ, 06YY and 0G7E. -/
 theorem free_complex_reduction (T : Scheme.{u}) (n : ℕ) (e : Encoding l E n T)
     (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField

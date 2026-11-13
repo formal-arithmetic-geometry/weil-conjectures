@@ -40,9 +40,6 @@ import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.RingTheory.Idempotents
 
 /-! # Detecting Tor amplitude of a finite-quotient constant model
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I)
-(blueprint: lem-weil-pbc-finite-quotient-model-tor-amplitude).
 -/
 
 @[expose] public noncomputable section
@@ -86,22 +83,7 @@ private theorem zero_of_nilpotent_reduction
 
 /-- A constant model on a nonempty chart has the Tor interval of the residue.
 The zero-complex alternative permits the zero model on empty charts. No finiteness
-or projectivity of the model is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, lemma-bounded (094I), part (2).
-(blueprint: lem-weil-pbc-finite-quotient-model-tor-amplitude).
-
-Proof: if P is zero, its localized object and every derived tensor are zero.
-On a nonempty chart, extract the algebraic derived residue model using the geometric
-stalk and the normalized coefficient squares. Put B = A/I^(n+1), and let J be the
-image of I in B; then J^(n+1) = 0. The residue model is a projective complex E in
-[a,b] over B/J. Stacks Tag 09AR lifts it to a bounded-above projective B-complex F
-representing Q(P), with an actual isomorphism F/JF = E of complexes. If E^i = 0,
-then F^i = JF^i = ... = J^(n+1)F^i = 0. Thus F has both bounds a and b. Its terms
-are projective, hence flat, so its derived tensor with any module in degree zero
-is computed termwise and vanishes outside [a,b]. Transport this Tor bound along
-the isomorphism Q(F) = Q(P). No finiteness hypothesis on P or on the tensor test
-module is used. -/
+or projectivity of the model is assumed. -/
 theorem finiteQuotient_model_torAmplitude
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]

@@ -65,8 +65,7 @@ private theorem graph_chosen_open_eq_etale
 
 /-- Graph extension for an open immersion followed by an etale map agrees with
 composition of their left adjoints. There is no proper square in this assertion.
-Source: Stacks Project, etale-cohomology.tex Tag 0F4L, and more-etale.tex Tag 0F7J
-(blueprint: lem-pur-graph-open-etale-composition).
+Source: Stacks Project, etale-cohomology.tex Tag 0F4L, and more-etale.tex Tag 0F7J.
 
 Proof in words: choose a compactification of b and compactify j over its open part.
 Expand the compact-support compositor in this tower. A lift section on the open source

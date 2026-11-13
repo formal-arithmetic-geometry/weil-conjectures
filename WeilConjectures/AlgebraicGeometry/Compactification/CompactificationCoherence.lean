@@ -13,10 +13,6 @@ import WeilConjectures.Compactification.CategoryBaseChange
 /-!
 # Compactification coherence on the witnessed etale-origin domain
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations,
-prop-compactification-coherence, order 1485
-(blueprint: proposition-construction-independence-rf-shriek).
-
 The candidates and their specified objectwise comparisons are written in the canonical
 fixed-scalar presentation of the recorded finite coefficient module categories. The
 forgetful functor retains every ambient morphism between the witnessed objects.
@@ -36,9 +32,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The recorded compact-support candidate restricted to witnessed bounded below
 etale-origin objects, in the fixed-scalar presentation used by the recorded refinement
 comparison. The coefficient equivalence is the same one as `refinementFixedObject`;
-objects, maps, and witnesses are transported canonically, without a new choice of map.
-Source: blueprint prop-compactification-coherence, displayed candidates and final scope
-paragraph, order 1485 (blueprint: proposition-construction-independence-rf-shriek). -/
+objects, maps, and witnesses are transported canonically, without a new choice of map. -/
 def compactificationOriginCandidate (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -330,13 +324,10 @@ pairwise comparisons satisfy the cocycle law. The normalization by the recorded
 proper pushforward of the inverse proper-open map, rather than an arbitrary isomorphism.
 The domain consists of bounded below etale-origin triples, with all ambient morphisms.
 
-Source: blueprint prop-compactification-coherence, statement and proof paragraphs 1--4,
-order 1485 (blueprint: proposition-construction-independence-rf-shriek).
-
 Proof plan:
-1. Finite type over the field makes X, Y and every proper compactification Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian). Refinements are proper, hence qcqs
-   (definition-compactification-refinement and lem-weil-pbc-proper-fp-permanence).
+1. Finite type over the field makes X, Y and every proper compactification Noetherian.
+Refinements are proper, hence qcqs (definition-compactification-refinement and
+   lem-weil-pbc-proper-fp-permanence).
 2. In the defining etale proper-open map, derived open restriction, extension-zero
    base change, and restriction to the clopen section are natural. Compose their
    naturality squares and invert the restriction comparison; the adjunction counit
@@ -368,7 +359,7 @@ Proof plan:
 8. For two choices d,d', first take a common refinement and successively equalize
    the two resulting parallel arrows to c1 and to c2. The first equality survives
    the second precomposition. Step 7 identifies the resulting comparisons, including
-   different choices of arrows (prop-compactification-refinement).
+   different choices of arrows.
 9. Use the finite-family clause of the same cofilteredness theorem. A single common
    refinement for three objects cancels the middle theta and proves the cocycle law.
    Nonemptiness handles the empty family and identities handle a singleton. All these

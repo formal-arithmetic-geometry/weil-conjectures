@@ -77,21 +77,7 @@ private theorem truncLE_preservesCoproducts
   let : ∀ K : I → DerivedCategory A, PreservesColimit (Discrete.functor K) T := hK
   exact preservesColimitsOfShape_of_discrete T
 
-/-- Double good truncation preserves small coproducts.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii general proof,
-paragraph 1 (blueprint: lem-sfb-derived-truncation-coproducts).
-
-Proof: exact coproducts of module sheaves imply that cohomology commutes with
-derived coproducts. The comparison from the sum of upper truncations to the upper
-truncation of the sum is an isomorphism on cohomology: in retained degrees it is
-the sum of the canonical cohomology isomorphisms, and outside them both sides
-are zero. Cohomology detects isomorphisms. For lower truncation, coproducts of
-objects in D≥r remain there by the homology formula, and the universal property
-of K→τ≥r K constructs the inverse comparison. Reuse the proved generic theorem
-`CondensedRing.truncGE_preservesCoproducts` for this step. Composing the two
-preservation statements proves the assertion.
-For an empty family all sums and all their cohomologies are zero, so the same
-argument applies. No boundedness or constructibility is required. -/
+/-- Double good truncation preserves small coproducts. -/
 theorem derivedTruncation_preservesCoproducts
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u}) (I : Type (u + 1)) (q r : ℤ) :

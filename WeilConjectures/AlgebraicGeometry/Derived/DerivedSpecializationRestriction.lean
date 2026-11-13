@@ -122,21 +122,7 @@ private lemma exactDerived_factorization
 
 /-- Specialization is restriction to strict-local sections followed by the global germ
 and the inverse-image stalk identification.
-Source: Stacks Project, Tag 0GJ2, Remark alternative-sp, and Tag 03Q1 (3).
-(blueprint: lem-weil-pbc-derived-specialization-restriction).
-
-Proof: underived specialization is by definition the uniquely characterized restriction
-of germs, followed by the terminal-section germ and the inverse-image stalk comparison.
-The terminal-section germ is globalGerm. Derive this equality of natural transformations.
-The source stalk, inverse image, strict-local global sections and target stalk are exact,
-so their right derived functors are canonically the functors computed termwise. The
-composition isomorphism for termwise exact functors separates inverse image and global
-sections. Naturality of this composition isomorphism carries the terminal germ to the
-derived global germ; the exact-functor comparison carries the inverse-image stalk
-isomorphism to derivedPullbackStalkIso. The two adjacent exact-global-sections
-comparisons cancel. Equivalently, check on Qh of a bounded-below complex using the
-right-derived unit formulas: both sides become the localization of the same degreewise
-specialization map. Right-derived extensionality proves the stated equality. -/
+Source: Stacks Project, Tag 0GJ2, Remark alternative-sp, and Tag 03Q1 (3). -/
 theorem derivedEtaleStalkSpecialization_restriction
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']

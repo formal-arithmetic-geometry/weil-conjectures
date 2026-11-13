@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Flatness of the internal supported diagonal coefficient
 
-Source: closed/open localization and tensor detection; Stacks Tags 09AA and 09AH.
-(blueprint: lem-sfb-diagonal-supported-flat).
+Source: Stacks Tags 09AA and 09AH.
 -/
 
 @[expose] public noncomputable section
@@ -121,23 +120,7 @@ private theorem flat_of_closed_open_restrictions
         exact (Functor.Monoidal.commTensorLeft (ringSheafInverseImage i B) F).symm)).1
 
 /-- The regular module supported on the closed diagonal is flat, for arbitrary
-commutative condensed coefficients.
-
-Source: Stacks, proetale.tex, lemma-closed-immersion; the closed/open tensor
-argument in the diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-sfb-diagonal-supported-flat).
-
-Proof: Complementary exact module restrictions jointly reflect isomorphisms:
-their underlying abelian restrictions detect zero kernels and cokernels. Tensoring
-commutes with both restrictions. On a closed direct image the closed restriction
-is the input, through the actual counit, and the open restriction is zero. Thus a
-flat input gives two exact tensor functors. Joint reflection of exactness proves
-flatness of the closed direct image. Apply this to the regular module after
-restricting scalars through the canonical coefficient pullback isomorphism. This
-restriction is the regular module for the pulled-back ring, hence flat. The
-ordinary coefficient/direct-image comparison identifies its direct image with
-the stated source. The Noetherian hypothesis ensures the open complement is
-quasi-compact; no point or nonzero-ring hypothesis is needed. -/
+commutative condensed coefficients. -/
 theorem diagonal_supported_flat
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

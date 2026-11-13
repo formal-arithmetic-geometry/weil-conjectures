@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteTensorConstructibleCohomol
 /-!
 # Derived tensor on the finite-Tor constructible subcategory
 
-Source: Weil conjectures blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`proposition-six-operations-dctf--14`, order 2119 (blueprint: proposition-six-operations-dctf--14).
-
 The two derived inputs are expressed by arbitrary cochain representatives `K` and `M`.
 The tensor is the recorded `derivedTensor`, using any K-flat resolution `f : P ⟶ K`.
 Its defining quasi-isomorphism and K-flatness conditions specify the computation,
@@ -41,41 +38,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 2048 in
 /-- Tensoring a bounded constructible complex by a finite-Tor constructible complex
 preserves bounded constructibility. If both inputs have Tor intervals, the output
-is finite-Tor constructible with the sum interval.
-
-Source: Weil blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`proposition-six-operations-dctf--14`, clauses (i) and (ii), order 2119
-(blueprint: proposition-six-operations-dctf--14).
-
-Proof:
-1. The global datum and `l ≠ D.p` make `l` invertible on the finite-type `D.k`-scheme.
-By lemma-flat-models-generators--1 choose a flat model of the first input concentrated in `[a,b]`.
-It is K-flat by lem-pc-bounded-above-flat-kflat-site. Def-weil-derived-tensor and
-lem-weil-derived-tensor-functorial identify the tensor computed on this model with
-that computed on any chosen resolution `f : P ⟶ K`.
-2. Bounded constructibility of `M` gives cohomological bounds `c' < d'`.
-Good upper truncation in degree `d'` uses the kernel of the outgoing differential;
-good lower truncation in degree `c'` uses the cokernel of the incoming differential.
-Their comparison maps preserve the remaining cohomology and remove only zero
-cohomology. They therefore produce a representative concentrated in `[c',d']`.
-By def-pc-tensor-complex-sheaves the tensor totalization has terms given by sums
-of pairs of terms with degrees adding to the total degree. All terms vanish
-outside `[a+c',b+d']`, so the resulting derived tensor has bounded cohomology.
-3. Lem-pur-finite-tensor-constructible-cohomology makes every cohomology sheaf
-of this tensor constructible: both inputs are bounded constructible over `A_{E,n}`,
-`n ≥ 1`, and `l` is invertible on `X`. Together with step 2 this is exactly
-definition-constructible-sheaves, proving clause (i).
-4. For clause (ii) choose also a flat model of `M` concentrated in `[c,d]`,
-by lemma-flat-models-generators--1. Tensor associativity identifies the tensor functor of two
-flat terms with a composite of exact tensor functors, so their tensor is flat
-(def-pc-flat-sheaf-modules). The totalization has only finitely many nonzero
-summands in each degree. Tensoring their finite sum is a finite sum of exact
-functors; kernels and cokernels are their finite sums, hence the sum is flat.
-A nonzero pair of terms requires `a ≤ q ≤ b` and `c ≤ r ≤ d`, giving
-`a+c ≤ q+r ≤ b+d`. This is a flat model in the sum interval. The reverse
-implication of lemma-flat-models-generators--1 gives that Tor interval; clause (i) supplies
-bounded constructibility, hence membership in `Dᵇ_ctf` by definition-constructible-sheaves.
--/
+is finite-Tor constructible with the sum interval. -/
 theorem finiteCoefficient_tensor_ctf
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

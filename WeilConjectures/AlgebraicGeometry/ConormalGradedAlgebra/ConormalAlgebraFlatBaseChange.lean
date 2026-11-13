@@ -20,8 +20,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Flat base change of the conormal graded algebra
 
-Source: Stacks Project, Divisors, Tags 0634 and 0635, closed immersion case
-(blueprint: lem-pur-conormal-algebra-flat-base-change).
+Source: Stacks Project, Divisors, Tags 0634 and 0635, closed immersion case.
 
 ## Main definitions
 
@@ -65,8 +64,7 @@ variable {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
 
 /-- The adjoint homogeneous comparison, with the commutative square implementing the
 identification of the two pushforwards. The adjunction units send a representative to
-its pure tensor with one. Source: Stacks Project, Divisors, Tag 0634
-(blueprint: lem-pur-conormal-algebra-flat-base-change). -/
+its pure tensor with one. Source: Stacks Project, Divisors, Tag 0634. -/
 def adjointPiece (n : ℕ) (d : (tensorPullback f).obj (piece i' n) ⟶ piece i n) :
     power i' n ⟶ (pushforward (i ≫ g)).obj (piece i n) :=
   (Classical.choose (exists_tensorPullbackAdjunction i')).unit.app (power i' n) ≫
@@ -81,8 +79,7 @@ makes the module map an algebra map; homogeneous maps make it graded. The affine
 uses ideal-power representatives and arbitrary scalar factors, hence says precisely
 `[a] tensor r` maps to `[g-sharp(a) * r]` under the recorded conormal identifications.
 The last two equations normalize degrees zero and one using the existing canonical maps.
-Source: Stacks Project, Divisors, Tags 0634 and 0635
-(blueprint: lem-pur-conormal-algebra-flat-base-change). -/
+Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
 def IsBaseChangeMap (A : Presentation i) (A' : Presentation i')
     (c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule) : Prop :=
   ∃ (ρ : A'.algebra.right ⟶
@@ -591,15 +588,7 @@ private theorem adjoint_homogeneous_square
 
 /-- The homogeneous comparisons assemble to a base-change algebra map with the
 required affine formula, normalizations, epimorphism and flat isomorphism.
-Source: Stacks Project, Divisors, Tags 0634 and 0635.
-(blueprint: lem-pur-conormal-algebra-flat-base-change).
-
-Proof: assemble the degreewise comparisons through the presentation coproduct.
-The affine homogeneous representative formula proves the adjoint ring-sheaf laws
-by direct-sum induction and local sheaf descent. The degree-zero and degree-one
-normalizations are inherited from the canonical unit and conormal maps. The
-coproduct map is epi when each degree map is epi; under flatness the degreewise
-inverses assemble to an inverse. -/
+Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
 private theorem exists_baseChangeMap_assembly (hc : IsLimit (PullbackCone.mk i f h))
     (A : Presentation i) (A' : Presentation i') :
     ∃ c : (tensorPullback f).obj A'.algebra.toModule ⟶ A.algebra.toModule,
@@ -647,8 +636,7 @@ private theorem exists_baseChangeMap_assembly (hc : IsLimit (PullbackCone.mk i f
 
 /-- The canonical comparison of conormal graded algebras exists uniquely. Its underlying
 module map is an epimorphism, and it is an isomorphism when the ambient base change is flat.
-Source: Stacks Project, Divisors, Tags 0634 and 0635
-(blueprint: lem-pur-conormal-algebra-flat-base-change). -/
+Source: Stacks Project, Divisors, Tags 0634 and 0635. -/
 theorem existsUnique_baseChangeMap (hc : IsLimit (PullbackCone.mk i f h))
     (A : Presentation i) (A' : Presentation i') :
     (∀ (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1),

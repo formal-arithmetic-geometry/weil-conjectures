@@ -17,7 +17,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.Sites
 /-! # The homogeneous coproduct of a line bundle's symmetric algebra
 
 Source: Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS.
-(blueprint: lem-sc-invertible-symmetric-algebra-coproduct).
 -/
 
 @[expose] public section
@@ -32,23 +31,7 @@ noncomputable section
 /-- Multiplicative tensor-power maps to a locally symmetric algebra of a line bundle
 are a coproduct cofan of module sheaves.
 
-Source: Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS.
-(blueprint: lem-sc-invertible-symmetric-algebra-coproduct).
-Proof: Refine the affine cover by affine opens on which L has a frame e. The affine
-comparison identifies B there with Sym(L(U)), hence with O(U)[T], sending j(e) to T.
-The degree-zero and degree-one conditions and multiplicativity identify b_d(e^d) with
-T^d. These identifications persist on smaller affine opens: the symmetric algebra
-comparison is determined by the structure map and its values on degree one, so it
-commutes with restrictions. The tensor powers have frames e^d, and polynomial modules
-are direct sums of their monomials. A family of module-sheaf maps from L^d to any M
-therefore extends locally to B by finite summation of coefficients times the images
-of e^d. Sheafify the polynomial-module presheaf to extend to arbitrary opens, whose
-sections need only be locally finite sums. On intersections the extensions agree,
-since both send each b_d to the prescribed map and the local polynomial expansion
-is unique. Sheaf gluing gives the global desc map. The same local calculation proves
-its factorization through every b_d and uniqueness; these three facts define IsColimit.
-No global direct-sum formula for sections is used. Empty opens have the unique map;
-zero coefficients and degree zero are covered by the polynomial expansion. -/
+Source: Stacks Project, Modules, Section 01CF; Schemes, Section 01LA (9); Tag 09MS. -/
 theorem isColimit_invertible_symmetricAlgebra_cofan {X : Scheme.{u}}
     (L : X.Modules) [L.IsInvertible] (B : X.CommAlgebraSheaf)
     (j : L ⟶ commAlgebraSheafModule X.sheaf B)

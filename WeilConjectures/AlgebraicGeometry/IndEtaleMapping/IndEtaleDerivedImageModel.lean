@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 
 The complex diagram here lives on the fixed small etale site of the base. Its
 normalization uses the actual derived inverse-image/direct-image adjunction.
-Source: Bhatt--Scholze 6.3.16 and Stacks 0GIU
-(blueprint: lem-per-ind-etale-derived-image-model).
+Source: Bhatt--Scholze 6.3.16 and Stacks 0GIU.
 -/
 
 @[expose] public noncomputable section
@@ -35,15 +34,14 @@ variable (A : Type (u + 1)) [CommRing A]
 variable {X : Scheme.{u}} (M : DerivedCategoryModule A X)
 
 /-- The actual derived direct image of the pullback of the coefficient complex.
-Source: Stacks 0GIU (blueprint: lem-per-ind-etale-derived-image-model). -/
+Source: Stacks 0GIU. -/
 def imageValue (T : Over X) : DerivedCategoryModule A X :=
   ((lowerStar (ModuleCat.{u + 1} A) T.hom).rightDerivedFunctor).obj
     ((ExternalRHom.pull A T.hom).obj M)
 
 /-- The transition is adjoint to pullback of the earlier counit. The two composition
 isomorphisms identify iterated inverse images with the specified inverse image.
-Source: Stacks 0EYM and Bhatt--Scholze 6.3.16
-(blueprint: lem-per-ind-etale-derived-image-model). -/
+Source: Stacks 0EYM and Bhatt--Scholze 6.3.16. -/
 def imagePullback {T S : Over X} (f : T ⟶ S) :
     imageValue A M S ⟶ imageValue A M T :=
   (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) T.hom).homEquiv _ _
@@ -57,7 +55,7 @@ def imagePullback {T S : Over X} (f : T ⟶ S) :
 
 /-- The canonical comparison of the two left adjoints whose right adjoints
 compute global Hom on X and on T.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction). -/
+Source: Stacks 08JA. -/
 def imageTensorIso (K : DerivedCategoryModule A X) (T : Over X) :
     ExternalRHom.constant A T.left ⋙
         tensorLeft ((ExternalRHom.pull A T.hom).obj K) ≅
@@ -72,7 +70,7 @@ def imageTensorIso (K : DerivedCategoryModule A X) (T : Over X) :
 /-- Global Hom adjunction for the direct image, constructed by conjugating the
 canonical monoidal and constant-pullback comparisons. In particular no witness
 of an existence theorem is used to define this isomorphism.
-Source: Stacks 08JA (blueprint: lem-per-ind-etale-derived-image-hom-adjunction). -/
+Source: Stacks 08JA. -/
 def imageHomIso (K : DerivedCategoryModule A X) (T : Over X) :
     ((ExternalRHom.globalHom A X).obj (op K)).obj (imageValue A M T) ≅
       ((ExternalRHom.globalHom A T.left).obj
@@ -86,7 +84,7 @@ def imageHomIso (K : DerivedCategoryModule A X) (T : Over X) :
 
 /-- The derived direct image of a bounded-below pullback stays bounded below:
 inverse image is exact and the total right derived functor is left t-exact.
-Source: Stacks 0EYM, proof (blueprint: lem-per-ind-etale-derived-image-model). -/
+Source: Stacks 0EYM, proof. -/
 theorem isGE_imageValue (T : Over X) (a : ℤ) [M.IsGE a] : (imageValue A M T).IsGE a := by
   have := (upperStar (ModuleCat.{u + 1} A) T.hom).isGE_mapDerivedCategory_obj M a
   have hK : ((ExternalRHom.pull A T.hom).obj M).IsGE a :=
@@ -162,8 +160,7 @@ variable (D : I ⥤ Over X) (c : Cone D)
 
 /-- A strict complex realization of the derived direct-image diagram and cocone.
 No continuity assertion is part of this data.
-Source: Bhatt--Scholze 6.3.16, proof, direct-image construction
-(blueprint: lem-per-ind-etale-derived-image-model). -/
+Source: Bhatt--Scholze 6.3.16, proof, direct-image construction. -/
 structure DerivedImageModel where
   diagram : Iᵒᵖ ⥤ CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ
   cocone : Cocone diagram
@@ -183,25 +180,7 @@ set_option linter.unusedVariables false in
 and its actual cocone comparison is a derived isomorphism. This concerns only M;
 it makes no assertion about constructible global Hom.
 
-Source: Stacks 0GIU, Bhatt--Scholze 6.3.16, proof, direct-image continuity
-(blueprint: lem-per-ind-etale-derived-image-model).
-
-Proof: choose a bounded-below injective representative of M. At an etale stage
-its exact inverse image remains injective, since etale extension by zero is an
-exact left adjoint. Apply direct image to obtain the stage complexes. Their
-transition maps are the adjunction units, with the inverse-image composition
-identifications. At the limit resolve the pulled-back complex by a bounded-below
-injective complex with the same lower bound, and use the resolution map for the
-cocone legs. The unit and counit identities give the displayed normalizations.
-Stacks 0GIU gives the colimit isomorphism on every cohomology sheaf; forgetting
-coefficient modules preserves the colimit and reflects the isomorphism. Exactness
-of filtered colimits identifies these cohomology maps with those of the complex
-cocone comparison, so localization inverts it. Construct the strict
-representatives on I itself. For the cohomology continuity argument only, take
-a directed final index in the opposite of I and adjoin X as an initial stage.
-Finality identifies the cohomology cocone comparisons; no strict diagram is
-transported backwards along a final functor.
--/
+Source: Stacks 0GIU, Bhatt--Scholze 6.3.16, proof, direct-image continuity. -/
 theorem derivedImageModel_exists_continuous [Finite A] [IsAffine X]
     [IsNoetherian X] [IsCofiltered I]
     (hc : IsLimit ((Over.forget X).mapCone c))

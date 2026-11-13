@@ -38,7 +38,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 
 /-! # The normalized quotient Roos triangle on explicit Koszul completion
 
-Source: blueprint order 1248; Stacks Tags 091Z and 099M.
+Source: Stacks Tags 091Z and 099M.
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 /-! # Quotient-normalized reductions are scalar cones
 
 Source: Stacks 099M and uniqueness of pointwise left derived functors.
-(blueprint: lem-sfb-diagonal-quotient-scalar-cone).
 -/
 
 @[expose] public noncomputable section
@@ -58,16 +57,7 @@ private theorem reduction_computes_regular (ℓ : ℕ)
 /-- In any abelian category admitting regular resolutions, normalized simultaneous
 quotients are the localized two-term scalar cones, including their quotient units.
 
-Source: Stacks 099M, the free two-term resolution, and Stacks 06YY.
-(blueprint: lem-sfb-diagonal-quotient-scalar-cone).
-Proof: evaluate the supplied left derived functor. Exact evaluation is a right
-adjoint with exact left adjoint, so preserves its pointwise right Kan extension.
-The cone-to-cokernel maps give another counit. On regular resolutions they are
-quasi-isomorphisms, as is the supplied counit by uniqueness of left derived
-functors on the regular resolving class. The universal comparison is therefore
-invertible on resolutions and hence on every derived object. Its defining counit
-square and the two unit formulas prove the unit equation on regular resolutions.
-Naturality transports it to every object. -/
+Source: Stacks 099M, the free two-term resolution, and Stacks 06YY. -/
 theorem diagonal_quotient_scalar_cone (ℓ : ℕ) (N : DiagonalCompletedReductionData ℓ A)
     (res : ∀ K : CochainComplex A ℤ,
       ∃ (P : CochainComplex A ℤ) (p : P ⟶ K),

@@ -33,15 +33,14 @@ addition morphisms `H_{d₁} ×[k] H_{d₂} ⟶ H_{d₁ + d₂}`.
 
 - `AlgebraicGeometry.IsHilbertSubscheme.mul`: the sum of two finite locally free divisors.
 - `AlgebraicGeometry.exists_addition_hilbertPresheaf`: the addition morphism
-  `H_d ×[S] X ⟶ H_{d + 1}` (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
+  `H_d ×[S] X ⟶ H_{d + 1}`.
 - `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_hilbertPresheaf`: `H_d` is
-  smooth of relative dimension `d` (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
+  smooth of relative dimension `d`.
 - `AlgebraicGeometry.isRelativeEffectiveCartier_universal_hilbertPresheaf`: the universal
-  divisor and its line bundle (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
+  divisor and its line bundle.
 - `AlgebraicGeometry.hilbertPresheaf_curve_representable`,
   `AlgebraicGeometry.hilbertPresheaf_curve_points`,
-  `AlgebraicGeometry.hilbertPresheaf_curve_add`: the Hilbert schemes of a smooth proper curve
-  (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`).
+  `AlgebraicGeometry.hilbertPresheaf_curve_add`: the Hilbert schemes of a smooth proper curve.
 -/
 
 @[expose] public section
@@ -478,9 +477,7 @@ variable {X S : Scheme.{u}}
 `I_D ≤ I_E`. Then `D = D' + E` for a closed subscheme `D'`, finite locally free of degree `d₁`:
 its ideal is the colon ideal `(I_D : I_E)`, which is invertible since locally `I_E = (v)` and
 `I_D = (v g)`, flat over `T` as the kernel of `𝒪/(v g) ⟶ 𝒪/(v)`, finite since `D' ⊆ D`, and of
-degree `d₁` by additivity of the degree.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 1) -/
+degree `d₁` by additivity of the degree. -/
 theorem IsHilbertSubscheme.exists_eq_mul {f : X ⟶ S} [SmoothOfRelativeDimension 1 f]
     {d₁ d₂ : ℕ} {T : Over S} {D E : (pullback f T.hom).IdealSheafData}
     (hD : IsHilbertSubscheme f (d₁ + d₂) T D) (hE : IsHilbertSubscheme f d₂ T E) (hle : D ≤ E) :
@@ -623,10 +620,7 @@ locally free of degree `d₁ + d₂` over `T`.
 Both are relative effective Cartier divisors by the Cartier criterion; locally `D₁ + D₂` is cut
 out by the product `v₁ v₂` of local equations, and the exact sequence
 `0 ⟶ 𝒪/(v₁) ⟶ 𝒪/(v₁ v₂) ⟶ 𝒪/(v₂) ⟶ 0` (the first map is multiplication by the
-non-zerodivisor `v₂`) shows that `𝒪_{D₁ + D₂}` is finite flat over `T` of rank `d₁ + d₂`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 3, and
-`theorem-hilbert-schemes-points-smooth-curve--1`, Step 1) -/
+non-zerodivisor `v₂`) shows that `𝒪_{D₁ + D₂}` is finite flat over `T` of rank `d₁ + d₂`. -/
 theorem IsHilbertSubscheme.mul [SmoothOfRelativeDimension 1 f] {d₁ d₂ : ℕ} {T : Over S}
     {I₁ I₂ : (pullback f T.hom).IdealSheafData} (h₁ : IsHilbertSubscheme f d₁ T I₁)
     (h₂ : IsHilbertSubscheme f d₂ T I₂) : IsHilbertSubscheme f (d₁ + d₂) T (I₁ * I₂) := by
@@ -655,7 +649,7 @@ sending a pair `(Z, x)` of a point `Z` of `H` and a point `x` of `X` to `Z + Γ_
 The morphism `a` identifies `H ×[S] X` with the universal divisor over `H'`, since a divisor
 `D` of degree `d + 1` containing the graph `Γ_x` is uniquely `D' + Γ_x` with `D'` of degree `d`.
 
-(Stacks, Tag 0B9G; blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+(Stacks, Tag 0B9G) -/
 theorem exists_addition_hilbertPresheaf [IsSeparated f] [SmoothOfRelativeDimension 1 f] (d : ℕ)
     (H H' : Over S) (e : (hilbertPresheaf f d).RepresentableBy H)
     (e' : (hilbertPresheaf f (d + 1)).RepresentableBy H') :
@@ -783,9 +777,7 @@ theorem exists_addition_hilbertPresheaf [IsSeparated f] [SmoothOfRelativeDimensi
     exact hrank t
 
 /-- **The Hilbert scheme of degree zero is the base.** `Hilb^0_{X/S}(T)` has exactly one
-element, the empty subscheme of `X_T`, so a scheme `H` representing it is terminal over `S`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, the case `d = 0`) -/
+element, the empty subscheme of `X_T`, so a scheme `H` representing it is terminal over `S`. -/
 theorem isIso_of_representableBy_hilbertPresheaf_zero {X S : Scheme.{u}} (f : X ⟶ S)
     {H : Over S} (e : (hilbertPresheaf f 0).RepresentableBy H) : IsIso H.hom := by
   have hext : ∀ {T : Over S} (a b : T ⟶ H), a = b := fun a b ↦
@@ -805,7 +797,7 @@ For `d = 0` the representing scheme is `S`; then one inducts with the addition m
 positive degree, hence faithfully flat, along which smoothness descends
 (`smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective`).
 
-(Stacks, Tag 0B9H; blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+(Stacks, Tag 0B9H) -/
 theorem smoothOfRelativeDimension_of_representableBy_hilbertPresheaf [IsSeparated f]
     [SmoothOfRelativeDimension 1 f] (hrep : ∀ e, (hilbertPresheaf f e).IsRepresentable) (d : ℕ)
     (H : Over S) (e : (hilbertPresheaf f d).RepresentableBy H) :
@@ -834,7 +826,7 @@ pullback of `𝒪(D_univ)` along `X_T ⟶ X ×[S] H`.
 For `T = Spec k` a rational point `[D]` of `H`, this says that `𝒪(D_univ)` restricts on the
 fibre `{[D]} × X ≅ X` to `𝒪_X(D)`.
 
-(Stacks, Tag 0B9J; blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+(Stacks, Tag 0B9J) -/
 theorem isRelativeEffectiveCartier_universal_hilbertPresheaf [SmoothOfRelativeDimension 1 f]
     {d : ℕ} {H : Over S} (e : (hilbertPresheaf f d).RepresentableBy H) :
     (e.homEquiv (𝟙 H)).1.IsRelativeEffectiveCartier (pullback.snd f H.hom) ∧
@@ -1081,9 +1073,7 @@ Choose a rational function `c`, transcendental over `k` and regular at the point
 (`mem_opensRange_infinityChart_of_mem_range_stalk`), whose preimage is affine.
 
 The blueprint instead removes a closed point `Q ∉ t`, using that `𝒪_X(Q)` is ample by
-Riemann–Roch; the argument here avoids Riemann–Roch.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 0) -/
+Riemann–Roch; the argument here avoids Riemann–Roch. -/
 theorem exists_affineOpens_forall_mem_of_curve [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (t : Finset X) : ∃ U : X.affineOpens, ∀ x ∈ t, x ∈ U.1 := by
   classical
@@ -1110,9 +1100,7 @@ theorem exists_affineOpens_forall_mem_of_curve [SmoothOfRelativeDimension 1 f] [
 /-- **The Hilbert functors of a curve are representable.** For a geometrically integral smooth
 proper curve `X` over `k`, every `Hilb^d_{X/k}` is representable: `X` is separated over `k`,
 and every finite set of points lies in an affine open by
-`exists_affineOpens_forall_mem_of_curve`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 1, representability) -/
+`exists_affineOpens_forall_mem_of_curve`. -/
 theorem isRepresentable_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d : ℕ) : (hilbertPresheaf f d).IsRepresentable := by
   classical
@@ -1123,9 +1111,7 @@ theorem isRepresentable_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f] [I
 /-- **Hilbert schemes are separated.** If `f : X ⟶ S` is separated and `H` represents
 `Hilb^d_{X/S}`, then `H` is separated over `S`: for the two points `Z₁, Z₂` of `Hilb^d_{X/S}` over
 `H ×[S] H` the loci where `Z₁ ⊆ Z₂` and where `Z₂ ⊆ Z₁` are closed
-(`exists_idealSheafData_le_ker_iff_comap_le`), and the diagonal of `H` is their intersection.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 1, separatedness) -/
+(`exists_idealSheafData_le_ker_iff_comap_le`), and the diagonal of `H` is their intersection. -/
 theorem isSeparated_of_representableBy_hilbertPresheaf {X S : Scheme.{u}} (f : X ⟶ S)
     [IsSeparated f] {d : ℕ} {H : Over S} (e : (hilbertPresheaf f d).RepresentableBy H) :
     IsSeparated H.hom := by
@@ -1182,9 +1168,7 @@ lemma geometricallyIrreducible_id_spec_field : GeometricallyIrreducible (𝟙 (S
 /-- **The Hilbert scheme of a curve is dominated by a power of the curve.** For a geometrically
 integral smooth proper curve `X` over `k` and `H` representing `Hilb^d_{X/k}`, there is a
 surjection onto `H` over `k` from a proper geometrically irreducible `k`-scheme, namely the
-iterated addition `X^d ⟶ H`, `(x₁, …, x_d) ↦ x₁ + ⋯ + x_d`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 1, the morphism `π_d`) -/
+iterated addition `X^d ⟶ H`, `(x₁, …, x_d) ↦ x₁ + ⋯ + x_d`. -/
 theorem exists_surjective_of_representableBy_hilbertPresheaf_curve [SmoothOfRelativeDimension 1 f]
     [IsProper f] [GeometricallyIntegral f] (d : ℕ) (H : Over (Spec (.of k)))
     (e : (hilbertPresheaf f d).RepresentableBy H) :
@@ -1212,9 +1196,7 @@ theorem exists_surjective_of_representableBy_hilbertPresheaf_curve [SmoothOfRela
 /-- **The Hilbert scheme of a curve is proper and geometrically integral.** For a geometrically
 integral smooth proper curve `X` over `k`, the scheme `H` representing `Hilb^d_{X/k}` is proper
 and geometrically integral over `k`: it is separated, it is the image of the proper
-geometrically irreducible `X^d`, and it is smooth, hence geometrically reduced.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 1) -/
+geometrically irreducible `X^d`, and it is smooth, hence geometrically reduced. -/
 theorem isProper_and_geometricallyIntegral_of_representableBy_hilbertPresheaf_curve
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] (d : ℕ)
     (H : Over (Spec (.of k))) (e : (hilbertPresheaf f d).RepresentableBy H) :
@@ -1250,9 +1232,7 @@ classified by a `k`-morphism `h : T ⟶ H` is the pullback of `D` along the indu
          │                      │            f
          ▼                      ▼            ▼
          T ─────── h ─────────▶ H ─── p ──▶ Spec k
-```
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, parts (1) and (3)) -/
+``` -/
 theorem hilbertPresheaf_curve_representable [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d : ℕ) :
     ∃ (H : Scheme.{u}) (p : H ⟶ Spec (.of k)), SmoothOfRelativeDimension d p ∧ IsProper p ∧
@@ -1285,9 +1265,7 @@ identity on underlying ideal sheaves, which is the naturality in `k'`.
 An effective Cartier divisor `D` on `X_{k'}` is finite over `k'`, since `X_{k'}` is a proper curve
 (`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`),
 and flat, since `k'` is a field; its degree is the rank `Scheme.Hom.finrank` of `D ⟶ Spec k'`,
-the dimension of `Γ(D, 𝒪_D)` over `k'`.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, part (2)) -/
+the dimension of `Γ(D, 𝒪_D)` over `k'`. -/
 theorem hilbertPresheaf_curve_points [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d : ℕ) (k' : Type u) [Field k'] [Algebra k k']
     (T : Over (Spec (.of k))) (hT : T = Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
@@ -1339,9 +1317,7 @@ on `H₁ ×[k] H₂' ×[k] X`. Here `1 × a` is finite locally free and surjecti
 is proper (`H₁ ×[k] H₂` is proper and `H` is separated) with finite fibres, hence finite; it is
 flat by descent along `1 × a` (`AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective`), and its
 degree `N` satisfies `d₂ N = (d₁ + d₂ - 1).choose d₁ * (d₁ + d₂)`, by multiplicativity of
-degrees (`Scheme.Hom.finrank_comp_of_forall_finrank_eq`).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, Step 3) -/
+degrees (`Scheme.Hom.finrank_comp_of_forall_finrank_eq`). -/
 theorem isFinite_flat_finrank_of_hilbertPresheaf_add [SmoothOfRelativeDimension 1 f]
     [IsProper f] [GeometricallyIntegral f] (d₁ d₂ : ℕ) (H₁ H₂ H : Over (Spec (.of k)))
     (e₁ : (hilbertPresheaf f d₁).RepresentableBy H₁)
@@ -1513,9 +1489,7 @@ i.e. the product of the corresponding ideal sheaves — and which is finite, fla
 finite presentation of degree `(d₁ + d₂).choose d₁`.
 
 The last clause is what identifies `α`: without it any finite flat morphism of the right degree
-would do, and the descent argument of the blueprint needs to know which morphism it is.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, part (3)) -/
+would do, and the descent argument of the blueprint needs to know which morphism it is. -/
 theorem hilbertPresheaf_curve_add [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] (d₁ d₂ : ℕ) (H₁ H₂ H : Over (Spec (.of k)))
     (e₁ : (hilbertPresheaf f d₁).RepresentableBy H₁)

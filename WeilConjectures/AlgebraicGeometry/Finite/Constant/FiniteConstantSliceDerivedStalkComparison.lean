@@ -45,7 +45,6 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-! # Constant complexes under the geometric stalk of a ringed slice
 
 Source: Stacks Project, Tags 03CY, 0F6B, 00Y8(3), and 05RU.
-(blueprint: lem-weil-pbc-finite-constant-slice-derived-stalk-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -446,27 +445,7 @@ The same functor works for every complex; no isomorphism between two complexes i
 assumed or reflected by this statement.
 
 Source: Stacks Project, Modules on Sites, Tag 03CY; proetale.tex, Tag 0F6B;
-Sites, Tag 00Y8(3); Derived Categories, Tag 05RU.
-(blueprint: lem-weil-pbc-finite-constant-slice-derived-stalk-comparison).
-
-Proof: identify X_proet/W with W_proet by composition of weakly etale maps.
-Restriction along the coefficient isomorphism phi identifies modules over R|W
-with modules over the restricted constant ring sheaf. Restriction along constant
-sections then identifies these with ULift(B)-module-valued sheaves. Take the
-geometric stalk at y and restrict scalars along B -> ULift(B). All these functors
-are additive and exact: the coefficient transports are equivalences, and the
-stalk is a filtered colimit with the usual local lifting property. Thus their
-termwise composite descends at quasi-isomorphisms to a functor F on unbounded
-derived categories. For a module M, the constant-section germ identifies the stalk
-of the constant module sheaf with M. This identification is natural in all module
-maps, so it identifies every differential of a constant complex as well. Extension
-along phi cancels the first scalar restriction, since phi is an isomorphism;
-its derived extension is its exact termwise extension by uniqueness of the derived
-functor. The representative-based slice restriction agrees with exact derived
-restriction through Q.objObjPreimageIso. Composing these comparisons gives the
-claimed isomorphism with the termwise universe lift. This argument imposes no
-bounds on P and works for the zero ring and zero complex. The supplied point y
-is the only nonemptiness needed. -/
+Sites, Tag 00Y8(3); Derived Categories, Tag 05RU. -/
 theorem finiteConstantSlice_derivedStalk_comparison
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{t + 1} B)]

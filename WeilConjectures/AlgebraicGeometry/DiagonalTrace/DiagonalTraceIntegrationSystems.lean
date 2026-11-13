@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Supported.DiagonalTraceSu
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceLimitWitnessExistence
 
 /-! # The system underlying a completed diagonal integral
-Source: diagonal tower trace proof paragraph (2), steps 9--11.
 -/
 
 @[expose] public noncomputable section
@@ -28,25 +27,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- A completed diagonal integral is the inverse limit of a degree-zero system
 endomorphism whose evaluations are identities. This retains the single whole-system
-map and its limit comparison, rather than inferring equality from derived evaluations.
-
-Source: diagonal tower trace proof paragraph (2), steps 9--11
-(blueprint: lem-sfb-diagonal-trace-integration-systems).
-Proof: composition of the ordinary direct images along the diagonal and either
-projection is the identity direct image. Their canonical comparison sends sections to
-the same sections, giving the normalized supported-source isomorphism. Exactness of
-closed pushforward for finite-coefficient systems, followed by exact restriction to
-constant scalars, identifies its derived value on the coefficient source with the
-ordinary value. The derived composition comparison gives acyclicity of that source.
-Compose the strict-system supported diagonal class with the specified strict-system
-trace. Evaluation preserves the units and comparisons, and gives the finite Cartier
-class and usual projective-line trace. The finite diagonal integral theorem therefore
-makes every evaluation the identity. Apply the natural pushforward/limit comparison
-to this one system endomorphism. The whole-system characterization of the supplied
-completed diagonal and the construction equation of Result identify its limit with
-the completed integral. The source comparison is the inverse limit of the same
-ordinary composition comparison, giving the displayed square. No assertion that
-evaluation is faithful on arbitrary derived objects is used. -/
+map and its limit comparison, rather than inferring equality from derived evaluations. -/
 theorem diagonalTrace_integrationSystems
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

@@ -227,9 +227,7 @@ variable (A : Type u) [CommRing A] [Finite A]
 variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R]
 
-/-- The published total internal inverse image, with its scalar ring fixed.
-Source: published internal derived inverse image
-(blueprint: lem-sfb-finite-coefficient-pullback-encoding). -/
+/-- The published total internal inverse image, with its scalar ring fixed. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj R Y)) ⥤
@@ -241,9 +239,7 @@ abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
           (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))}
       (_ : F ≅ G) ↦ F) (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory R f)
 
-/-- The published total inverse image of fixed-scalar module sheaves.
-Source: published fixed-scalar derived inverse image
-(blueprint: lem-sfb-finite-coefficient-pullback-encoding). -/
+/-- The published total inverse image of fixed-scalar module sheaves. -/
 abbrev fixedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y)
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ⥤
@@ -251,9 +247,7 @@ abbrev fixedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) :=
   (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f).leftDerivedFunctor
 
-/-- A family of inverse-image comparisons, before imposing composition compatibility.
-Source: the inverse-image part of normalized coefficient transport
-(blueprint: lem-sfb-finite-coefficient-pullback-encoding). -/
+/-- A family of inverse-image comparisons, before imposing composition compatibility. -/
 abbrev Family (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T) :=
   ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -347,30 +341,7 @@ private lemma fixed_compositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 set_option linter.unusedSectionVars false in
 /-- Normalized encoding commutes with inverse images and their published compositors.
 
-Source: blueprint proper-base-change-finite, Transport and clause (2);
-lem-sfb-finite-coefficient-exchange-encoding, proof steps 1--2; Stacks 03D3 and 0D6D.
-(blueprint: lem-sfb-finite-coefficient-pullback-encoding).
-
-Proof: On hearts, restrict scalars along the inverse coefficient isomorphism,
-apply section-action reconstruction and restrict to constant scalars. Scalar restriction
-along an isomorphism commutes with direct image by the coefficient-map naturality
-square. Section-action identifies the internal direct image with its sectionwise
-ringed-site direct image. The normalized constant-section maps identify the latter
-with direct image of fixed-scalar sheaves: both evaluate the same additive sheaf
-on the same fibre product and have the same scalar action. This comparison is the
-identity on underlying sections. For two successive morphisms these identities commute
-with the canonical direct-image compositor, since the two fibre-product evaluations
-are canonically identified. Conjugate these identity-on-sections comparisons under the
-specified geometric adjunctions. The adjunction unit equation uniquely determines the
-inverse-image comparisons and identifies their composites with the published underived
-inverse-image compositors. All three coefficient functors and both inverse images are
-exact. Apply their termwise functors on complexes and localize at quasi-isomorphisms.
-The exact-functor localization comparisons and the published left-derived-to-termwise
-isomorphisms give P. Localization carries the underived composition equation to the
-displayed equation, because the published total inverse-image compositors are the
-localized underived compositors. No direct image is derived in this argument, and no
-properness, boundedness or qcqs hypothesis occurs. Empty schemes and the zero ring
-use the same constant-section and adjunction identities. -/
+Source: Stacks 03D3 and 0D6D. -/
 theorem finiteCoefficientPullbackEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T) :

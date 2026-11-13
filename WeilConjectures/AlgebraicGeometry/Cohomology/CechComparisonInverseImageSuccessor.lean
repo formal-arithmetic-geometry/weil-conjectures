@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.CechInverseImageCocha
 /-! # Successor step for inverse-image Čech comparison
 
 Source: Stacks Project, Tags 01FD and 01EQ, applied to abelian sheaves.
-(blueprint: lem-pc-cech-comparison-inverse-image-unit-succ-step)
 -/
 
 @[expose] public section
@@ -80,15 +79,7 @@ private theorem exactFunctor_Hδ
 /-- The inverse-image comparison equality passes through a Čech connecting map.
 
 Source: Stacks Project, Tags 01FD and 01EQ, connecting-map compatibility of the
-comparison; the elementary diagram chase is written here for normalized systems.
-(blueprint: lem-pc-cech-comparison-inverse-image-unit-succ-step)
-
-Proof: Naturality of the adjunction unit and of restriction makes its cochain maps
-into a morphism between the two short exact Čech complexes. Naturality of the
-homology connecting map sends the U-boundary of y to the V-boundary of its image.
-Apply the connecting laws of c′ and c. Between them substitute the assumed equality
-on y. Exact inverse image maps the extension class of T to that of its image;
-Ext associativity then identifies the two sheaf-cohomology boundaries. -/
+comparison. -/
 theorem cechComparison_inverseImage_succ_step
     {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)
     (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)

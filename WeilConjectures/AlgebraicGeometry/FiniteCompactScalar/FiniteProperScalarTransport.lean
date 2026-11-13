@@ -158,28 +158,7 @@ private theorem fixedSiteScalar_mate_with_iso
 /-- Proper direct-image scalar transport in intrinsic coordinates. This compares
 only proper images, before composing with any extension by zero.
 
-Source: Stacks Tags 0D6E, 0D6J, 099R and 0GL6; blueprint scalar-six direct-image
-proof, finite rings paragraph; compact-support constructibility, Step 5.
-(blueprint: lem-finite-proper-scalar-transport).
-
-Proof: compute the intrinsic realization/restriction square on a K-injective
-B-complex J and a K-injective resolution of its restriction. The normalization
-of sfDerivedImageRestriction identifies its component with the inverse image
-of the resolution arrow. The normalization of
-sfIntrinsicDerivedDirectImageComparison gives the same equation after
-realization. The sectionwise underived squares commute, so cancel the common
-quasi-isomorphism to identify the intrinsic restriction square with the
-fixed-scalar one. Transpose under the coefficient adjunction; its comparison
-is realizationScalarIso by left-adjoint uniqueness. On fixed-scalar sites,
-apply etaleProEtale_scalar_mate at H.obj. Its boundedness hypothesis is H's
-lower bound, and its scalar-extension lower bound follows from eHB and HB.
-The canonical inverse pullback scalar mate is scalarPullbackIso, by its
-K-flat normalization. The D+ direct-image comparison used in properSiteIso
-is the same counit mate as its ambient comparison, by compatibility of
-derived adjunctions with the inclusion. Whisker the equation by realization
-and cancel the site/realization unit and counit maps. Naturality inserts eHB.
-This uses no flatness or additional boundedness on the target scalar extension;
-zero rings, empty schemes and identity maps obey the same unit equations. -/
+Source: Stacks Tags 0D6E, 0D6J, 099R and 0GL6. -/
 theorem properScalar_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (g : Z ⟶ Y) [IsProper g]

@@ -507,7 +507,7 @@ lemma exists_pow_eq_units_line (N : ℕ) (hk : ∀ c : kˣ, ∃ d : kˣ, d ^ N =
   obtain ⟨d, rfl⟩ := hk c
   exact ⟨_, (map_pow _ d N).symm⟩
 
-/-- Blueprint `lem-pur-affine-punctured-line-algebra`: Units and Picard groups of the line and
+/-- Units and Picard groups of the line and
 the punctured line.
 
 Let `k` be a field, `𝔸¹_k = Spec k[t]`, and `G = 𝔾_{m,k}` the complement of the zero section,

@@ -20,10 +20,6 @@ import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRe
 /-!
 # Scalar extension respects ordinary etale direct-image exchange
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal`, with Tag 07A7, `remark-base-change`
-(blueprint: lem-pur-etale-direct-image-scalar-exchange).
-
 The scalar functor is `scalarExtension`; the K-flat-normalized pullback comparison
 is `properOpenCoefficientPullbackIso`, the canonical exactness transport of
 `scalarPullbackIso`. The map chi is the existing `scalarMate`: transporting its
@@ -123,40 +119,7 @@ private theorem coefficientPullback_square
     Category.id_comp]
 
 /-- Scalar extension commutes with the specified ordinary unbounded etale exchange,
-naturally in the input complex.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal`, with Tag 07A7, `remark-base-change`
-(blueprint: lem-pur-etale-direct-image-scalar-exchange).
-
-Proof:
-1. Apply lem-sf-scalar-pullback-composition to h followed by f and to f' followed
-   by g, using their common composite h followed by f. These laws already use
-   the K-flat-normalized scalar comparison transported to exact inverse image.
-   The specified square comparison of definition-derived-base-change-map is the inverse
-   of the second path's compositor followed by the first path's compositor.
-   Cancel the second compositor and use the two composition laws to obtain the
-   coefficient/pullback cube.
-2. The definition of scalarMate and def-weil-pbc-adjunction-mate say that its
-   transpose is lambda followed by scalar extension of the A-counit. The
-   definition of exactDerivedBaseChangeMap similarly says that its transpose is
-   the square comparison followed by pullback of the geometric counit. The
-   canonical derived adjunctions are those of definition-projection-formula-map--1,
-   transported to exact termwise inverse image.
-3. Transpose the left-hand composite under the f'-adjunction with B coefficients.
-   Counit naturality, the exchange transpose formula, square naturality, and the
-   scalar-mate transpose formula rewrite it as Q(h_A^*(epsilon_f)) after the
-   h/f path of the coefficient/pullback cube. Naturality of lambda_h is the last
-   rewrite; no invertibility of a direct-image comparison is used.
-4. Transpose the right-hand composite under the same adjunction. Use the scalar
-   transpose formula for f', naturality of lambda_f', functoriality of Q, and the
-   exchange transpose formula with A coefficients. The result is the same
-   Q(h_A^*(epsilon_f)) after the f'/g path of that cube.
-5. Postcompose the cube identity from Step 1 with Q(h_A^*(epsilon_f)). The two
-   transposes agree, so injectivity of the canonical adjunction Hom bijection
-   gives the claimed equality. Every map used is natural; whiskering and
-   composition therefore make the equality natural in M on the entire unbounded
-   derived category, without properness, flatness or boundedness assumptions. -/
+naturally in the input complex. -/
 theorem exactDerivedBaseChangeMap_scalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X' X Y' Y : Scheme.{u}}

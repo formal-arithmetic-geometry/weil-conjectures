@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 # Derivation coefficients on the dual-number diagonal
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
+pushout calculation.
 -/
 
 @[expose] public section
@@ -118,25 +118,7 @@ private theorem transported_d_heq {S : Scheme.{u}} (X : Over S)
 
 /-- On the dual-number diagonal the first-order coefficient is the sum of the
 first-order coefficients on the two axes, after identifying the common reduction.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, applied sectionwise.
-(blueprint: lem-ag-dual-numbers-diagonal-coefficients)
-
-Proof: Compose with the comparison from the iterated thickening S[epsilon][delta]
-to the product. On sections the axis restrictions take a double dual number to
-its first dual-number component, and apply the constant projection to both of
-its components, respectively. The diagonal sends epsilon and delta to epsilon.
-It kills their product, since epsilon squared is zero. Write a double dual
-number as its constant, epsilon, delta, and epsilon-delta terms: the coefficient
-of epsilon on the diagonal is the sum of its epsilon and delta coefficients.
-The comparison composed with the diagonal is the categorical diagonal, because
-both its projections are identities. Its restrictions to the two axes are the
-categorical axes, by the corresponding projection identities. Apply the
-coefficient calculation to the section map of f on each target open.
-The three equations of reductions identify all inverse-image opens and the
-pushforward module structures with those of g. Equality transport therefore
-turns the coefficient identity into exactly the displayed derivation identity.
-No finiteness or smoothness assumption is needed; the calculation holds for the
-zero ring as well. -/
+Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, applied sectionwise. -/
 theorem infDerivation_diagonal_coefficients {S : Scheme.{u}} (X : Over S)
     (f : Scheme.dualNumbersOver S ⊗ Scheme.dualNumbersOver S ⟶ X)
     (g : S ⟶ X.left)

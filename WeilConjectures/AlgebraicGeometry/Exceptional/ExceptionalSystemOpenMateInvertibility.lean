@@ -86,16 +86,7 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
   (CZ : ExceptionalSystemSiteComparison O ell c.Z S.PZ)
 
 /-- Inverse mates of the normalized ordinary open pullback squares are invertible.
-Source: Zheng Construction 5.15 and Lemmas 4.10 and 5.22; Stacks 09AF.
-(blueprint: lem-sf-exceptional-system-level-open-mate-invertibility).
-
-Proof: Transport the finite coefficient module categories to sheaves of modules over
-one fixed quotient ring. The open inverse-image adjunctions have invertible units,
-and the canonical extension-by-zero comparison identifies the two left-adjoint paths.
-The unit equation for the inverse mate proves its inverse-image image invertible.
-The counit is invertible on the supported essential image, so its naturality implies
-that the mate itself is invertible. Transport back through the fully faithful
-coefficient equivalences. -/
+Source: Zheng Construction 5.15 and Lemmas 4.10 and 5.22; Stacks 09AF. -/
 theorem exceptionalSystemLevelOpenMate_isIso
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     (_hX : ExceptionalSystemSiteEquivalence CX)

@@ -10,8 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplem
 import all WeilConjectures.AlgebraicGeometry.ScalarUnitExtComparison
 import all WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 
-/-! # Detection of cyclic Cartier classes after integral restriction
-(blueprint: lem-diagonal-cyclic-class-restriction).
+/-! # Detection of cyclic Cartier classes after integral restriction.
 -/
 
 @[expose] public noncomputable section
@@ -38,18 +37,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 attribute [local irreducible] cyclicLine cyclicLineMap derivedScalars
 
-/-- Restriction detects degree-two classes with the supported cyclic constant source.
-
-Source: the supported integral-generator Ext bijection in Cartier reduction,
-and exact-functor composition coherence.
-(blueprint: lem-diagonal-cyclic-class-restriction).
-
-Proof: forgetting the discrete integral action after finite scalar restriction
-is the ordinary abelian forgetful functor. Exact-functor composition coherence
-therefore carries equal restricted classes to equal abelian classes. Compose
-these with the full supported integral generator. Its existing degree-two Ext
-bijection is injective, so the original cyclic classes agree. This uses neither
-a choice of class nor a global-section test and includes the empty scheme. -/
+/-- Restriction detects degree-two classes with the supported cyclic constant source. -/
 theorem diagonalCyclicClass_restrict_injective
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ) :
     Function.Injective (fun c : GeoCartierClass (diagonalResidue.{u} l n)

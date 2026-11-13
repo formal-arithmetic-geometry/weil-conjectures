@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 /-!
 # Finiteness of torsion étale cohomological dimension
 
-Source: Stacks Project, Tag 0F10, Lemma 59.96.2; blueprint chap-Smooth-purity,
-proposition-ordinary-external-kunneth--1 (blueprint: theorem-results-from-etale-theory--6).
+Source: Stacks Project, Tag 0F10, Lemma 59.96.2.
 -/
 
 @[expose] public section
@@ -33,18 +32,7 @@ namespace AlgebraicGeometry
 
 /-- A morphism over a field between finite-type schemes has finite torsion étale
 cohomological dimension; over a separably closed field each such scheme has finite dimension.
-Source: Stacks Project, Tag 0F10 (blueprint: theorem-results-from-etale-theory--6).
-
-Proof: Choose a natural uniform bound for the dimensions of all extensions of the
-source's ground field, using a finite affine cover and finite algebra generators.
-The torsion abelian higher-direct-image bound then vanishes above twice this bound:
-its proof passes to a separable closure, applies absolute torsion cohomological
-vanishing there, and descends through monic finite-separable transition maps.
-Thus a finite natural number belongs to the set defining the relative dimension.
-Over a separably closed field, the existing finite-type cohomology theorem gives
-the absolute bound twice a natural upper bound for the dimension of X. Compare
-Ext cohomology with derived global sections and again use the defining infimum.
-Both arguments include empty schemes without a nonemptiness hypothesis. -/
+Source: Stacks Project, Tag 0F10. -/
 theorem torsionEtaleCohomologicalDimension_finite_of_finiteType
     (K : Type u) [Field K]
     (X Y : Scheme.{u}) [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))]

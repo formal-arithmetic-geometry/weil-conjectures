@@ -82,13 +82,10 @@ private theorem lowerStar_isColimit {Y X : Scheme.{u}} (f : Y ⟶ X)
       (colimit.desc ((D ⋙ S) ⋙ E) (E.mapCocone (S.mapCocone c))))).some
   exact isColimitOfReflects G hE
 
-/-- Generic direct image and etale cohomology preserve the finite-stalk cocone.
-Source: blueprint `theorem-cohomology-curves--2`, cohomology passage.
-(blueprint: lem-sc-generic-torsion-finite-stalk-colimit-cohomology)
-The generic point is affine and qcqs; sections are finite products of invariants, which commute
-with the filtered union. The directed-colimit theorem for etale cohomology and the natural
-Ext/derived comparison then identify the displayed mapped cocones as colimits.
--/
+/-- Generic direct image and etale cohomology preserve the finite-stalk cocone. The generic point is
+affine and qcqs; sections are finite products of invariants, which commute with the filtered union.
+The directed-colimit theorem for etale cohomology and the natural Ext/derived comparison then
+identify the displayed mapped cocones as colimits. -/
 theorem generic_torsion_cohomology_colimit
     (X : Scheme.{u}) [IsIntegral X] [CompactSpace X] [QuasiSeparatedSpace X]
     (M : Sheaf (Spec X.functionField).smallEtaleTopology AddCommGrpCat.{u + 1})

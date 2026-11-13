@@ -16,10 +16,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The finite constructible exceptional inverse image
 
-Source: blueprint sec-smooth-purity/sk-def-sf-operations,
-theorem-f-shriek-finite-coefficients, order 1489
-(blueprint: theorem-f-shriek-finite-coefficients).
-
 The finite-level operation is the published ordinary etale right adjoint transported
 by the canonical comparison. The intrinsic constant-ring realization changes only the
 presentation of module sheaves. No ambient pro-etale adjunction is assumed.
@@ -40,9 +36,7 @@ namespace AlgebraicGeometry.Scheme
 realization, and the last performs comparison and that realization. The ordinary
 etale right adjoint is supplied by Brown representability, and compactifiability
 by Nagata over the field; neither is an additional hypothesis. Restricting this
-formula to bounded constructible complexes is the operation of the blueprint.
-Source: blueprint order 1489, finite-level displayed definition
-(blueprint: theorem-f-shriek-finite-coefficients). -/
+formula to bounded constructible complexes is the operation of the blueprint. -/
 noncomputable def finiteExceptionalInverseImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)

@@ -45,9 +45,7 @@ boundary `S` (as a set of closed points). Then there are homomorphisms
 `D : 𝒪(C)ˣ ⟶ ℤ^S` (the orders of a unit at the points of `S`) and `a : ℤ^S ⟶ Pic(C̄)` (the
 class of a divisor supported on `S`) such that the image of `D` is the kernel of `a`, the kernel
 of `D` (the constants `kˣ`) consists of `n`-th powers for every `n ≥ 1`, and
-`Pic(C) ≅ Pic(C̄) / a(ℤ^S)`.
-(blueprint: `proposition-cohomology-smooth-affine-curve--3`,
-`proposition-cohomology-smooth-affine-curve--2`) -/
+`Pic(C) ≅ Pic(C̄) / a(ℤ^S)`. -/
 theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] :
     ∃ (D : Additive Γ(C, ⊤)ˣ →+ ({P : closedPoints c.Z // P.1 ∉ Set.range c.i} → ℤ))
@@ -298,8 +296,7 @@ applied to `0 → M → ℤ^S → Λ → 0` and `0 → Λ → Pic(C̄) → Pic(C
 `Pic(C̄)[n] ≅ (ℤ/n)^{2g}`, `Pic(C̄) / n ≅ ℤ/n`
 (`AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`) and the divisibility of
 `Pic(C)` (`AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`), gives
-the formula.
-(blueprint: `proposition-cohomology-smooth-affine-curve`, affine case) -/
+the formula. -/
 theorem natCard_sheafH_one_constantZMod_mul (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
     [Smooth f] [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] {n : ℕ}
     (hn : (n : k) ≠ 0) :

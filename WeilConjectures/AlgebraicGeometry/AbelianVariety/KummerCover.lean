@@ -138,7 +138,7 @@ theorem Scheme.exists_isAffineOpen_isUnit_not_exists_pow (X : Scheme.{u}) [IsInt
   exact IsIntegrallyClosed.not_exists_pow_eq_algebraMap (R := X.presheaf.stalk y)
     (P := maximalIdeal _) haM ha.2 hn
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`: an abelian variety `E` of positive dimension over a
+/-- An abelian variety `E` of positive dimension over a
 field is covered by finitely many affine opens `U i`, each carrying a unit `f i ∈ Γ(E, U i)` which
 is not an `r`-th power in the function field of `E`, for `2 ≤ r`.
 

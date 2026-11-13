@@ -46,8 +46,7 @@ under base change by `AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback`.
 ## Main definitions
 
 - `AlgebraicGeometry.IsHilbertSubscheme`: the condition cutting out the Hilbert functor.
-- `AlgebraicGeometry.hilbertPresheaf`: the Hilbert functor `Hilb^d_{X/S}`
-  (blueprint `sk-the-hilbert-functor--definition-1`).
+- `AlgebraicGeometry.hilbertPresheaf`: the Hilbert functor `Hilb^d_{X/S}`.
 
 ## Main statements
 
@@ -57,9 +56,8 @@ under base change by `AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback`.
   Hilbert functor are relative effective Cartier divisors.
 - `AlgebraicGeometry.IsHilbertSubscheme.eq_of_le`: two points of `Hilb^d_{X/S}(T)` one of
   which contains the other are equal.
-- `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
-  (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`), hence a Zariski sheaf
-  (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
+- `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf,
+hence a Zariski sheaf (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 -/
 
 @[expose] public section
@@ -88,9 +86,7 @@ def IsHilbertSubscheme (f : X ⟶ S) (d : ℕ) (T : Over S)
 Finiteness, flatness and local finite presentation are stable under base change, and so is the
 rank `AlgebraicGeometry.Scheme.Hom.finrank`, since the closed subscheme cut out by the pullback
 ideal sheaf is the base change of the one cut out by `I`. This makes `T ↦ Hilb^d_{X/S}(T)` a
-contravariant functor by base change of closed subschemes, `AlgebraicGeometry.hilbertPresheaf`.
-
-(blueprint: `prose-C-08`, `prose-C-08`) -/
+contravariant functor by base change of closed subschemes, `AlgebraicGeometry.hilbertPresheaf`. -/
 theorem IsHilbertSubscheme.comap {f : X ⟶ S} {d : ℕ} {T T' : Over S} (φ : T' ⟶ T)
     {I : (Limits.pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I) :
     IsHilbertSubscheme f d T' (I.comap (baseChangeMap f φ)) := by
@@ -149,9 +145,7 @@ of degree `d`, the last condition meaning that its rank function `Scheme.Hom.fin
 constantly `d`.
 
 An `S`-morphism `φ : T' ⟶ T` acts by pulling back the ideal sheaf along the base-change map
-`X_{T'} ⟶ X_T`.
-
-(blueprint: `sk-the-hilbert-functor--definition-1`, `prose-C-08`) -/
+`X_{T'} ⟶ X_T`. -/
 noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ Type u where
   obj T := { I : (Limits.pullback f T.unop.hom).IdealSheafData // IsHilbertSubscheme f d T.unop I }
   map φ := TypeCat.ofHom fun I ↦ ⟨I.1.comap (baseChangeMap f φ.unop),
@@ -163,17 +157,14 @@ noncomputable def hilbertPresheaf (f : X ⟶ S) (d : ℕ) : (Over S)ᵒᵖ ⥤ T
     rfl))
 
 /-- **The Hilbert functor is an fppf sheaf.** `Hilb^d_{X/S}` is a sheaf for the fppf topology on
-`S`-schemes, that is for `AlgebraicGeometry.Scheme.fppfTopology` localized to `Over S` (the big
-fppf site of `S`, blueprint `definition-relative-picard-functor--1`), hence in particular for the
-coarser Zariski topology (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
+`S`-schemes, that is for `AlgebraicGeometry.Scheme.fppfTopology` localized to `Over S`, hence in
+particular for the coarser Zariski topology
+(`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 
 A covering sieve of `T` is in particular an fpqc covering of `T.left`, the base changes of `X_T`
 along its members are the `X_{T'}`, and a compatible family of points of `Hilb^d_{X/S}` is a
 descent datum of closed subschemes; it glues uniquely by
-`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme` (blueprint `det-thm-picard-descent`,
-part (D2)).
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme`. -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) := by
   rw [isSheaf_iff_isSheaf_of_type]
@@ -239,9 +230,7 @@ theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
   exact congrArg Subtype.val (hy i.1.2 i.2)
 
 /-- The Hilbert functor is a Zariski sheaf, since it is an fppf sheaf and Zariski coverings are
-fppf coverings.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`, `rem-ptr-pc-fppf-site-5`) -/
+fppf coverings. -/
 lemma isSheaf_zariskiTopology_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.zariskiTopology.over S) (hilbertPresheaf f d) := by
   have h := isSheaf_hilbertPresheaf f d

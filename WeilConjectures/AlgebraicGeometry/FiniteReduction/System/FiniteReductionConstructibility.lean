@@ -15,9 +15,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteReduction.FiniteReductionSystem
 /-!
 # Finite reduction and constructibility
 
-Source: main-20261015 blueprint, sec-smooth-purity/sk-lem-sp-reduction,
-first paragraph; Stacks Tags 08G1, 06YQ, 094H and 09AL
-(blueprint: lem-pur-finite-reduction-constructibility).
+Source: Stacks Tags 08G1, 06YQ, 094H and 09AL.
 
 ## Main definitions
 

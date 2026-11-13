@@ -105,9 +105,7 @@ perfect trace pairing of the separable extension `k(X) ⊇ k(t)` together with l
 the Kähler sequence. It cannot be dropped: the isomorphism is induced by the trace of
 differentials, which vanishes identically when `f` is inseparable (e.g. a Frobenius-type map),
 so for such `f` the comparison is the zero map. Downstream (`nonempty_dual_H_one_iso`) `f` is
-chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, the trace identification) -/
+chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`. -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :

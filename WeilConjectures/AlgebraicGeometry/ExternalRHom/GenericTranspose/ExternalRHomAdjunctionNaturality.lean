@@ -8,10 +8,8 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 /-! # Naturality of the composite global tensor--Hom adjunction
 
-Source: Stacks 08J9 and 08JA
-(blueprint: lem-pur-external-rhom-adjunction-naturality).
-The transpose and evaluation use the composite adjunction and its canonical braiding.
-The equations follow by adjunction naturality, curry naturality and injectivity.
+Source: Stacks 08J9 and 08JA. The transpose and evaluation use the composite adjunction and its
+canonical braiding. The equations follow by adjunction naturality, curry naturality and injectivity.
 -/
 
 @[expose] public section

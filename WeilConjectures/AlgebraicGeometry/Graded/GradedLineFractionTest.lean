@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.Graded.GradedLineFractionTestLocal
 
 /-! # Comparison of graded line fraction charts with a trivialized Proj map
 
-Source: Stacks Project, Constructions, Tags 01NK and 01O9
-(blueprint: lem-trf-graded-line-fraction-test).
+Source: Stacks Project, Constructions, Tags 01NK and 01O9.
 -/
 
 @[expose] public section
@@ -27,25 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A morphism with all prescribed fraction restrictions has the usual formula on any
 trivialized open test with unit irrelevant ideal. This is a comparison lemma for an
-already supplied morphism, not an existence assertion or a statement that it is over S.
-
-Source: Stacks Project, Constructions, Tag 01NK, lemma-invertible-map-into-proj,
-and Tag 01O9, lemma-invertible-map-into-relative-proj, characterizations (2) and (3)
-(blueprint: lem-trf-graded-line-fraction-test).
-
-Proof: The unit-irrelevant-ideal hypothesis covers the test by basic opens of the
-images under alpha of positive-degree homogeneous elements. Refine these opens by
-affine opens on which the pulled-back trivialization comes from a local frame of L.
-For an open immersion, the tensor-pullback section and power comparisons identify
-psi.evaluate with restriction of psi.component. Thus the displayed equality for alpha
-says that its degree-n value is the coefficient in the n-th power of this frame.
-The uniqueness of coefficients in a free generator identifies these coefficients
-with c. Each refined basic open therefore maps through the corresponding source
-localization chart. Its given restriction to F and Mathlib's fromOfGlobalSections map
-have the same image of every homogeneous fraction. The affine adjunction identifies
-their maps into the standard Proj chart. Compose with the relative-Proj chart embedding
-and glue these equalities on the test. This proves the formula without imposing an
-extra generation hypothesis on T. Empty tests and exponent-zero fractions are included. -/
+already supplied morphism, not an existence assertion or a statement that it is over S. -/
 theorem gradedLineFraction_test
     {S T : Scheme.{u}} {h : T ⟶ S} {A : S.GradedAlgebraData} {L : T.Modules}
     (ψ : RelativeGradedLineMap h A L)

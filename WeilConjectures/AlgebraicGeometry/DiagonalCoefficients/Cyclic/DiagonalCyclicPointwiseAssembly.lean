@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicExtEvaluationAssembly
 
 /-! # The normalized assembly contract with fixed representative endpoints
-
-Source: diagonal limit (3).
-(blueprint: def-diagonal-cyclic-pointwise-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +28,6 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   Ext.comp Ext.mk₀ Ext.mapExactFunctor Functor.mapDerivedCategory shiftFunctor
 
 /-- Literal normalized assembly after the representative functor and endpoints are fixed.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-pointwise-assembly).
 All arrows, classes, normalizations and comparison squares remain parameters. -/
 @[irreducible] def cyclicPointwiseAssemblySpec
     {A : Type uA} [Category.{vA} A] [Abelian A]
@@ -82,10 +78,7 @@ All arrows, classes, normalizations and comparison squares remain parameters. -/
 
 attribute [local semireducible] cyclicEvaluationAssemblySpec
 
-/-- A universal normalized evaluation contract gives its fixed-endpoint instance.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-Proof: unfold the literal contract and specialize the universal statement to its
-fixed functor, endpoints and degree two. -/
+/-- A universal normalized evaluation contract gives its fixed-endpoint instance. -/
 theorem cyclicPointwiseAssembly_of_spec
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]
@@ -106,7 +99,6 @@ theorem cyclicPointwiseAssembly_of_spec
     c hc d hrep goalClass finite arrows comparison
 
 /-- The same assembly contract after fixing the reduction functors, arrow and norms.
-Source: coefficient changes (1) (blueprint: def-diagonal-cyclic-pointwise-assembly).
 The completed arrow and both Ext classes still vary. -/
 @[irreducible] def cyclicArrowAssemblySpec
     {A : Type uA} [Category.{vA} A] [Abelian A]
@@ -161,9 +153,8 @@ The completed arrow and both Ext classes still vary. -/
 
 attribute [local semireducible] cyclicPointwiseAssemblySpec
 
-/-- Fixed reduction data, with all four normalization predicates still varying.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-This delays the actual cone equations until the final application. -/
+/-- Fixed reduction data, with all four normalization predicates still varying. This delays the
+actual cone equations until the final application. -/
 @[irreducible] def cyclicFixedArrowAssemblySpec
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]
@@ -189,9 +180,8 @@ This delays the actual cone equations until the final application. -/
     cyclicArrowAssemblySpec k G σ τ R F f a b
       sourceNorm targetNorm sourceArrowNorm targetArrowNorm
 
-/-- Assembly after the source and root comparisons have already been supplied.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-Only the representative, finite cycle and finite arrow equations remain inputs. -/
+/-- Assembly after the source and root comparisons have already been supplied. Only the
+representative, finite cycle and finite arrow equations remain inputs. -/
 @[irreducible] def cyclicResolvedAssemblySpec
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]
@@ -232,10 +222,7 @@ Only the representative, finite cycle and finite arrow equations remain inputs. 
 
 attribute [local semireducible] cyclicArrowAssemblySpec
 
-/-- Fix endpoint comparison before introducing classes and their representatives.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-Proof: introduce the remaining class and arrow arguments, then apply assembly
-with the fixed endpoint comparison. -/
+/-- Fix endpoint comparison before introducing classes and their representatives. -/
 theorem cyclicResolvedAssembly_of_comparison
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]
@@ -281,10 +268,7 @@ theorem cyclicResolvedAssembly_of_comparison
   intro δ c hc d hrep goalClass finite arrows
   exact h δ c hc d hrep goalClass finite arrows comparison
 
-/-- Fix the quotient and strict arrow before introducing normalization predicates.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-Proof: introduce the four predicates and varying arrow, then specialize the
-universal pointwise contract. All class arguments are left unapplied. -/
+/-- Fix the quotient and strict arrow before introducing normalization predicates. -/
 theorem cyclicFixedArrowAssembly_of_pointwise
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]
@@ -309,9 +293,8 @@ theorem cyclicFixedArrowAssembly_of_pointwise
   intro δ
   exact h R F δ f a b sourceNorm targetNorm sourceArrowNorm targetArrowNorm
 
-/-- A realized class with a specified representative equals the fixed solution.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-This literal predicate contains no strict class or family data. -/
+/-- A realized class with a specified representative equals the fixed solution. This literal
+predicate contains no strict class or family data. -/
 @[irreducible] def cyclicRepresentativeSolution
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A] [eA : HasExt.{vA} A]
@@ -325,10 +308,7 @@ This literal predicate contains no strict class or family data. -/
 
 attribute [local semireducible] cyclicResolvedAssemblySpec
 
-/-- Insert the strict class, finite cycle and finite arrow before the realized class.
-Source: diagonal limit (3) (blueprint: def-diagonal-cyclic-pointwise-assembly).
-Proof: introduce an arbitrary realized class with its representative and apply
-resolved assembly with the fixed strict class and finite equations. -/
+/-- Insert the strict class, finite cycle and finite arrow before the realized class. -/
 theorem cyclicRepresentativeSolution_of_resolved
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [dA : HasDerivedCategory.{tA} A]

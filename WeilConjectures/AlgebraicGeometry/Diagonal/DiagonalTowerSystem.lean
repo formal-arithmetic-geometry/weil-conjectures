@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalReductionCompletion
 import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalKummerReduction
 
 /-! # Existence of the normalized strict diagonal cycle system
-
-Source: the diagonal tower blueprint, clauses 1--4.
 -/
 
 @[expose] public noncomputable section
@@ -80,48 +78,7 @@ strict inverse systems, obtained by simultaneous derived reduction of the positi
 integral Cartier roof. No noetherian, finiteness or nonemptiness assumption is imposed
 on Y. The displayed typeclasses only choose the localization and Ext size conventions.
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-system.md, clauses 1--4;
-Stacks Project, Tags 099M and 09AD (blueprint: proposition-ell-adic-cycle-class-diagonal).
-
-Proof:
-1. The diagonal is a section of the smooth relative curve given by the first
-   projection. Its kernel subscheme projects isomorphically to the projective
-   line, so the relative Cartier criterion makes its ideal invertible.
-   Form the pole extension with all integer powers of t inverse, sending it to +1.
-   Exact conservative geometric stalks identify its quotient with Delta_* Z.
-2. Exact comparison inverse image preserves the extension and its quotient
-   quasi-isomorphism; the open--closed sequence gives the supported comparison.
-   The positive cone projection is the negative of the standard Ext boundary,
-   which is precisely diagonalIntegralBoundary.
-3. Form the actual strict reduction functor by the cokernels specified above,
-   with quotient transitions. Resolve every integral input by a flat-term K-flat
-   complex. Simultaneous tensor preserves quasi-isomorphisms between these;
-   the resolving-class theorem gives its pointwise left derived functor, exact
-   because tensor respects shifts and mapping cones.
-4. Z_l is torsion free, hence flat over Z. Exact extension is left adjoint to
-   restriction, so restriction preserves K-injective strict systems and commutes
-   with their inverse limits. Derive with the same resolution. The integral
-   composite is Rlim_n(K tensor^L Z/l^(n+1)). The principal-ideal criterion
-   of Tags 091S and 091Z identifies completeness with right orthogonality to
-   all complexes on which l acts invertibly. Tag 099M supplies complete outputs
-   and the natural completion unit, with bijective precomposition for every
-   complete target. Thus the composite is the completion reflector, including
-   its universal unit, not merely an isomorphism of the naive limit formulas.
-5. Open--closed exactness shows Delta_* Z is flat and its ordinary reductions
-   are the supported finite constants. These identifications preserve the units
-   and every quotient transition, giving a and the normalized level maps s.
-6. Kummer exactness computes the reduction of comparison units by
-   [G_m --l^(n+1)--> G_m] in degrees -1,0. The resolution transition is l in
-   degree -1 and identity in degree 0, hence the roots transition is zeta→zeta^l.
-   Exact comparison identifies the roots with the actual pro-etale root sheaves.
-   Use the negative Kummer identification, compensating the positive roof sign.
-   Concentration in one cohomology degree lifts this to the strict system category.
-7. The divisible-extension derived-reduction comparison fixes the complete
-   supported Cartier class, not only its Chern composite. Its signed Kummer
-   normalization identifies every evaluated arrow with cartierResidueReducedPro.
-   The source and roots normalization equations retain the canonical finite
-   identifications. Compatibility already holds because T has values in the
-   derived category of strict systems, and c is its image of one boundary. -/
+Source: Stacks Project, Tags 099M and 09AD. -/
 theorem exists_diagonalTowerSystem (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

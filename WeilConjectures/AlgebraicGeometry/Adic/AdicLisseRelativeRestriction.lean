@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseIm
 
 Source: Stacks Project, proetale.tex, Tag 09BT, clause (3), and
 sites.tex, Tag 00YV (functoriality of algebraic structures in topoi).
-(blueprint: lem-weil-pbc-adic-lisse-relative-restriction).
 -/
 
 @[expose] public section
@@ -217,27 +216,7 @@ private theorem localModel_restrict
 /-- A projection-compatible coefficient map turns an adic-lisse module on the target
 site into a relatively adic-lisse module over the inverse-image completed coefficients.
 
-Source: Stacks Project, Tag 09BT, clause (3); Tag 00YV, parts (2), (5), (6).
-(blueprint: lem-weil-pbc-adic-lisse-relative-restriction).
-
-Proof: retain the covering sieve and the complete A-modules N in the adic-lisse
-local models. For each A-module M, inverse image of its constant module sheaf on X
-is the restriction of its constant module sheaf on Y along the canonical constant
-ring comparison. Indeed, inverse image preserves constant abelian sheaves and their
-scalar-action maps, and the canonical comparison sends a constant section to the
-same section. This identification is natural in M, hence gives an isomorphism of
-the actual quotient-module diagrams for N and all their transitions. Restriction of
-scalars preserves limits, so taking limits and forgetting to abelian sheaves gives
-an isomorphism between the relative model and the absolute model, without commuting
-inverse image with an infinite limit. Compose its inverse with each original local
-trivialization. Given a scalar a in the inverse-image constant A-ring and a completed
-scalar r with equal nth residues, apply the canonical constant quotient-ring
-comparison. Naturality on A -> A/I^(n+1) and the assumed equation for beta show that
-the images of a and beta(r) have equal nth residues on Y. The original local model's
-linearity proves the scalar identity after applying the diagram comparison; its
-inverse proves the relative identity. Completeness and finite generation of N/IN
-are unchanged. This also treats the empty site, zero modules and zero rings, and
-I=0 or I=top: neither a residue lift nor a nonzero scalar is chosen. -/
+Source: Stacks Project, Tag 09BT, clause (3); Tag 00YV, parts (2), (5), (6). -/
 theorem adicLisse_relative_restrict {X Y : Scheme.{u}} (h : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (β : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj

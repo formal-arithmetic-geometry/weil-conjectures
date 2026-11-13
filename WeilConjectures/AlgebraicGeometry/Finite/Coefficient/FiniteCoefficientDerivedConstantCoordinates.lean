@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 /-! # Constant complexes in fixed coordinates on an etale chart
 
 Source: Stacks Project, Tags 03CY, 093J and 099R.
-(blueprint: lem-weil-pbc-finite-coefficient-derived-constant-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -127,19 +126,7 @@ private def fixedConstantComparison (X : Scheme.{t}) (B : Type t) [CommRing B] :
 constant complex on the chart. This applies to arbitrary unbounded complexes.
 
 Source: Stacks Project, change of rings (03CY), module sheafification (093J),
-and localization (099R).
-(blueprint: lem-weil-pbc-finite-coefficient-derived-constant-coordinates).
-
-Proof: scalar restriction along psi is an exact equivalence, with inverse restriction
-along psi inverse. Its derived inverse is left adjoint to derived restriction.
-Uniqueness of left adjoints identifies completedAdicDerivedChange with that inverse;
-thus derived scalar extension followed by restriction is the identity. Restricting the
-module-sheafification of a constant module to constant scalars gives its module-valued
-constant sheaf. The natural comparison is induced by the sheafification unit and is
-invertible because the scalar map is locally bijective. Apply it to each differential.
-Finally localization preserves constant sheaves. The factors and composition
-isomorphisms for exact derived functors identify this composite with the displayed
-universe-lifted constant complex. No bounds, nonempty charts or nonzero ring are used. -/
+and localization (099R). -/
 theorem finiteCoefficient_derived_constant_coordinates
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})

@@ -23,38 +23,7 @@ attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
 /-- Derived open-extension adjunction transports the two Ext presentations.
 Source: Stacks Project, Tags 00A7 (open-extension adjunction), 01AK (exactness),
-04J0 (localization of morphisms of ringed sites), and Section 01F7.
-(blueprint: lem-pc-open-free-ext-transport)
-
-Proof: Write j for the open immersion W.ι and p for the base-change projection.
-Extension by zero j_! on abelian sheaves is exact and left adjoint to exact
-restriction j^*. The free abelian sheaf on W is j_! of the constant integer
-sheaf on W; the free sheaf on the top open of W is that constant integer sheaf.
-The resulting derived adjunction, in the reverse direction, gives t. The
-restriction of the abelian sheaf of M identifies canonically with the abelian
-sheaf of the module pullback j^*M. Naturality of this adjunction in coefficients
-identifies postcomposition by the restricted scalar with postcomposition by the
-ambient scalar, proving the first equation.
-
-The square obtained by base changing j along p is cartesian, and its upper
-left scheme is the base change of W over Spec R. Base change of extension by
-zero is extension by zero of inverse image: both sides are the free abelian
-sheaf represented by the preimage open. The cartesian open-subscheme
-isomorphism and composition of module pullbacks identify the restricted
-coefficient sheaf with the underlying sheaf of the displayed module on the
-base change of W. The same derived open-extension adjunction gives t'. Its
-coefficient naturality identifies S-scalars and proves the second equation.
-
-The unit defining the coefficient morphism on W is the restriction of the
-ambient unit, under the cartesian coefficient identification. Naturality of
-derived adjunction with respect to exact inverse image and this coefficient
-morphism now gives the third equation. This can be checked on resolutions:
-apply the restriction/extension adjunction to each term and the canonical
-comparison of the restricted inverse-image resolutions; the squares commute
-by the adjunction unit identities, and passing to cohomology preserves them.
-No flatness is needed. For an empty open, both Ext groups are zero, and all
-three equations hold; zero coefficients behave in the same way.
--/
+04J0 (localization of morphisms of ringed sites), and Section 01F7. -/
 theorem H.openFreeExtTransport (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

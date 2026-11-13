@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualStrictPullback
 
 /-! # Completed pullback preserves shifts and distinguished triangles
-Source: literature/stacks-project/proetale.tex, Tag 099N (2),(5), with
-`derived.tex`, Tag 05SE, and `sites-cohomology.tex`, Tag 0941
-(blueprint: lem-cbc-completed-pullback-triangles).
 
 The specified strict-tower completed pullback has coherent shift comparisons,
 and it carries distinguished triangles whose vertices are intrinsically derived

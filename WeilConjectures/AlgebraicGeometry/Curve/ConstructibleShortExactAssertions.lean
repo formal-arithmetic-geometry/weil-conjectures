@@ -33,8 +33,7 @@ eight assertions `C(X, F₁)` and `C(X, F₂)` hold, then so does `C(X, F)`: the
 cohomology sequences (and their pullbacks along a field extension) pass vanishing, finiteness
 and bijectivity to the middle term, the hypotheses of the assertions being inherited by
 subsheaves and quotients; constructibility of the outer terms is assumed; for `C₈` one uses
-`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`.
-(blueprint: lem-v2-constructible-short-exact-assertions) -/
+`H³(X, F₁) = 0`, i.e. `C₁(X, F₁)`. -/
 theorem IsCurve.Assertions.of_constructible_shortExact {k : Type u} [Field k]
     {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f]

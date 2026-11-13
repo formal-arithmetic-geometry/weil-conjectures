@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-! # Descent of homogeneous algebra operations through a closed immersion
 
 Source: Stacks Project, Divisors, Tag 0630, and Modules, Lemma 08KS.
-(blueprint: lem-pur-closed-immersion-graded-algebra-descent).
 -/
 
 @[expose] public section
@@ -210,22 +209,7 @@ private theorem reflect_heq {I : Type*} {M N : I → Type*}
   exact heq_of_eq (hf j (eq_of_heq h))
 
 /-- A graded algebra on modules supported on a closed subscheme descends through
-specified pushforward isomorphisms, including the structure-sheaf unit.
-Source: Stacks Project, Divisors, Tag 0630, paragraph preceding
-`definition-conormal-sheaf`, and Modules, Lemma 08KS.
-(blueprint: lem-pur-closed-immersion-graded-algebra-descent).
-
-Proof: The projection formula for a closed immersion identifies the pushforward
-of `C_m ⊗ C_n` with `i_*C_m ⊗ i_*C_n`: on stalks on the closed subset both are
-modules over the quotient local ring, and off it both vanish. Transport the
-multiplication through the specified isomorphisms and this tensor comparison,
-then lift the resulting morphisms by fully faithful pushforward. Transport the
-unit by the equivalence between modules annihilated by the kernel ideal and
-modules on the closed subscheme. The induced unit has the stated composite with
-`O_X → i_*O_Z`. Faithfulness gives associativity, commutativity and the unit laws.
-The tensor comparison sends a pair of sections to their tensor, so evaluating
-its multiplication gives exactly the displayed equality. These constructions
-also apply to zero modules and to the empty closed subscheme. -/
+specified pushforward isomorphisms, including the structure-sheaf unit. -/
 theorem exists_gradedAlgebra_closed_descent {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] (B : ℕ → X.Modules) (C : ℕ → Z.Modules)
     (e : ∀ n, (Scheme.Modules.pushforward i).obj (C n) ≅ B n)

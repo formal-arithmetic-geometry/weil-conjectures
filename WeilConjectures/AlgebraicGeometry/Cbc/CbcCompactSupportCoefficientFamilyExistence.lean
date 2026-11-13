@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficient
 set_option linter.privateModule false
 
 /-! # Normalized compact-support families
-
-Source: current blueprint, compact-support scalar comparison.
-(blueprint: lem-cbc-normalized-support-family-existence)
 -/
 
 @[expose] public noncomputable section

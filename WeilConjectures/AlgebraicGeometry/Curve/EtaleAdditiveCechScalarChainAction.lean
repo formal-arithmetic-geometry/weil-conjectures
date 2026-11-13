@@ -22,8 +22,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Apply global sections to the actual resolution comparison map.
-Source: Stacks Project, Tag 01EQ, functoriality in coefficients.
-(blueprint: new-q4-additive-cech-scalar-chain-action) -/
+Source: Stacks Project, Tag 01EQ, functoriality in coefficients. -/
 noncomputable def additiveCechGlobalMap {X : Scheme.{u}}
     (I : InjectiveResolution X.etaleAdditiveSheaf)
     (f : X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf) :
@@ -32,8 +31,7 @@ noncomputable def additiveCechGlobalMap {X : Scheme.{u}}
     (.up ℕ)).map (InjectiveResolution.desc f I I)
 
 /-- Apply the open Čech functor, flip, and totalize the resolution comparison map.
-Source: Stacks Project, Tag 01FD, functoriality of the double complex.
-(blueprint: new-q4-additive-cech-scalar-chain-action) -/
+Source: Stacks Project, Tag 01FD, functoriality of the double complex. -/
 noncomputable def additiveCechTotalMap {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf)
     (f : X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf) :
@@ -46,8 +44,7 @@ noncomputable def additiveCechTotalMap {X : Scheme.{u}} {ι : Type u}
             (.up ℕ)).map (InjectiveResolution.desc f I I))) (.up ℕ)
 
 /-- The global restriction augmentation is natural in a coefficient endomorphism.
-Source: Stacks Project, Tag 01FD, right upper square of the augmented diagram.
-(blueprint: new-q4-additive-cech-scalar-chain-action) -/
+Source: Stacks Project, Tag 01FD, right upper square of the augmented diagram. -/
 theorem additiveCech_alpha_natural
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (I : InjectiveResolution X.etaleAdditiveSheaf)
@@ -68,17 +65,7 @@ theorem additiveCech_alpha_natural
   exact ((InjectiveResolution.desc f I I).f n).hom.naturality _
 
 /-- The coefficient augmentation commutes with multiplication.
-Source: Stacks Project, Tags 01EQ and 01FD, the augmented double-complex diagram.
-(blueprint: new-q4-additive-cech-scalar-chain-action)
-
-Proof: The total map on a summand is the Čech map of the resolution comparison
-in that resolution degree. Use desc_commutes_zero to move the comparison
-past I.ι in each tuple coordinate. Substitute hμ, and use naturality of
-restrictFunctorΓ to identify the restricted structural section with the scalar
-on the module coordinate. The base ring map is the identity by ΓSpecIso and
-toSpecΓ, so this coordinate is r times the original coordinate. The product
-maps are equal coordinatewise; applying ιTotal_map proves the beta identity.
-These arguments include zero scalar, unit scalar, degree zero, and empty products. -/
+Source: Stacks Project, Tags 01EQ and 01FD, the augmented double-complex diagram. -/
 theorem additiveCech_scalar_chain_action
     (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (μ : Γ(X, ⊤) → (X.etaleAdditiveSheaf ⟶ X.etaleAdditiveSheaf))

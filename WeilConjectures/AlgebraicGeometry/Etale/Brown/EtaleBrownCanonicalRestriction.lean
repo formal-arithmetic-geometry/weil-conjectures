@@ -39,7 +39,6 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
 
 /-- The exact lift of the ordinary coefficient-restriction inverse-image square.
 Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU.
-(blueprint: def-pur-etale-brown-canonical-restriction).
 
 The representative equation determines this isomorphism uniquely by fully faithful
 precomposition with the derived localization; the choice introduces no arbitrary data. -/
@@ -56,9 +55,7 @@ def strictEtaleBrownCanonicalRestriction :
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose
 
 /-- The canonical lift has the prescribed cochain representative.
-Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU.
-(blueprint: def-pur-etale-brown-canonical-restriction).
-Proof: this is the lifting equation of fully faithful localization precomposition. -/
+Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU. -/
 theorem strictEtaleBrownCanonicalRestriction_rep
     (K : CochainComplex (strictEtaleLevel W O t m) ℤ) :
     (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom.app
@@ -83,14 +80,7 @@ theorem strictEtaleBrownCanonicalRestriction_rep
 
 -- Transposing the scalar adjunction exposes several localization factors.
 /-- The tensor comparison is the scalar mate of the exact restriction square.
-Source: Zheng, Construction 4.1; Stacks 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-canonical-restriction-mate).
-
-Proof: compute the inverse scalar mate on complexes using the normalized scalar
-adjunctions. On a flat-term K-flat resolution, the tensor representative equation
-identifies it with the inverse of derivedTensor. Cancel the invertible scalar
-comparison on this resolution. Naturality and the quasi-isomorphism from the
-resolution identify the components on every derived object. -/
+Source: Zheng, Construction 4.1; Stacks 06YY and 07A4. -/
 theorem strictEtaleBrownCanonicalRestriction_mate :
     ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
       (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)) =

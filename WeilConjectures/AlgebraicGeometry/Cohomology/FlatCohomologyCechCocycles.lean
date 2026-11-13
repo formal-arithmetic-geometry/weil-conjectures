@@ -14,7 +14,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-! # The inverse-image Cech comparison on cocycles
 
 Source: Stacks Project, Tags 01FD, 02KH, 01XD and 02KE.
-(blueprint: lem-pc-flat-cech-cocycle-comparison)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable {X : Scheme.{u}} {ι : Type u}
 
 /-- Extend a Cech cocycle and apply a chain map. This construction needs no flatness:
 only the fact that scalar extension takes a zero differential to zero is used.
-Source: Stacks Tag 02KH, the map on Cech cocycles in the separated-case argument.
-(blueprint: lem-pc-flat-cech-cocycle-comparison) -/
+Source: Stacks Tag 02KH, the map on Cech cocycles in the separated-case argument. -/
 noncomputable def extendedCechCycles (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)
     (M : X.Modules)
     (c : tensorCech (S := S) f U M ⟶
@@ -60,30 +58,7 @@ cocycle with its inverse-image cohomology class. There is no assertion about
 arbitrary elements of tensor homology, and flatness is not assumed.
 
 Source: Stacks Project, Lemma 20.15.1 (01FD), inverse-image naturality;
-Lemma 30.5.2 (02KH), separated-case paragraph;
-Lemma 30.2.6 (01XD), and the canonical comparison of Tag 02KE.
-(blueprint: lem-pc-flat-cech-cocycle-comparison)
-
-Proof: The affine opens have affine nonempty finite intersections by separatedness
-of f over the affine scheme Spec R. Their inverse images are affine after affine
-base change, cover X_S, and have affine intersections. Pullback preserves
-quasi-coherence. For both covers form the augmented Cech double complex of an
-injective resolution of the underlying abelian sheaf. The affine acyclicity of M
-and its pullback collapses the vertical comparison, and exactness of the augmented
-Cech complex of an injective sheaf gives the comparison with Ext cohomology.
-Use these edge maps as the two Leray isomorphisms. Naturality in multiplication
-by global functions makes them linear; restrict scalars along f and f_S.
-The adjunction unit into p_*p^*M induces the comparison of augmentations. On a
-cocycle z its tuple component is pullback of that section. The hypothesis hc,
-specialized to b = 1, identifies those tuple components with c applied to 1 tensor
-z. The restrictions to intersections in hc are exactly the restriction maps of
-the augmented double complexes. Passing to classes therefore gives the displayed
-identity. The inverse-image action on Ext, using the canonical constant integer
-sheaf isomorphism and the adjoint coefficient map, is H.baseChangeLinear by its
-definition. No tensor-homology isomorphism or preservation of kernels by tensor
-is used. In degree zero the same augmented comparison is the section map. An
-empty cover forces X empty and gives zero groups; the zero algebra gives an empty
-base-changed scheme, so the same identity holds in these cases. -/
+Lemma 30.2.6 (01XD), and the canonical comparison of Tag 02KE. -/
 theorem exists_cechBaseChange_cocycle_comparison
     (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]
     (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)

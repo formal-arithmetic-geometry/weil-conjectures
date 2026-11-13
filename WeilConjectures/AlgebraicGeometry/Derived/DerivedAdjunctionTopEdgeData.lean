@@ -19,7 +19,7 @@ the upper-truncation inclusion and its invertible map on top cohomology. Keeping
 constructions here lets a local calculation import them without importing its consumer.
 
 Source: Stacks Project, cohomology.tex, Tags 0BKJ, 0D5X and 079W; derived.tex,
-Tags 08J5 and 06XS (blueprint: def-weil-pbc-truncated-counit-edge).
+Tags 08J5 and 06XS.
 -/
 
 @[expose] public section
@@ -38,14 +38,13 @@ variable (X : RingedSpace.{u})
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
 
 /-- A fixed K-injective representative, using the published functorial resolution.
-Source: Stacks, Tag 079V (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+Source: Stacks, Tag 079V. -/
 abbrev topEdgeResolution (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :=
   (CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X))).obj
     (DerivedCategory.Q.objPreimage K)
 
 /-- The canonical identification of that representative with K, induced by the resolution
-quasi-isomorphism. Source: Stacks, Tag 079V
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+quasi-isomorphism. Source: Stacks, Tag 079V. -/
 def topEdgeResolutionIso (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     DerivedCategory.Q.obj (topEdgeResolution X K) ≅ K :=
   let r := (CochainComplex.toKInjectiveResolution.{u}
@@ -55,8 +54,7 @@ def topEdgeResolutionIso (K : DerivedCategory (SheafOfModules.{u} (moduleRings X
   (asIso (DerivedCategory.Q.map r)).symm ≪≫ DerivedCategory.Q.objObjPreimageIso K
 
 /-- H^q of local sections computed on the fixed representative. Both isomorphisms are
-canonical derived-unit comparisons. Source: Stacks, Tags 0BKJ and 0D5W
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+canonical derived-unit comparisons. Source: Stacks, Tags 0BKJ and 0D5W. -/
 def topEdgeLocalModel (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf X q).obj K ≅
@@ -69,8 +67,7 @@ def topEdgeLocalModel (q : ℤ)
     (DerivedCategory.homologyFunctorFactors _ q).app _
 
 /-- The canonical local-class map Θ, namely the abelian sheafification unit followed by
-its fixed cohomology-sheaf identification. Source: Stacks, Tag 0BKJ
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+its fixed cohomology-sheaf identification. Source: Stacks, Tag 0BKJ. -/
 def topEdgeLocalClass (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf X q).obj K ⟶
@@ -83,8 +80,7 @@ variable {X} {Y : RingedSpace.{u}}
   [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y))]
 
 /-- Transport between the two published right-derived direct images, by comparing both
-units on the same K-injective representative. Source: Stacks, Tags 079V and 0D5W
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+units on the same K-injective representative. Source: Stacks, Tags 079V and 0D5W. -/
 def topEdgeDirectImageComparison (g : X ⟶ Y)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (sectionDerivedDirectImage g).obj K ≅ (derivedModuleDirectImage g).obj K :=
@@ -95,7 +91,7 @@ def topEdgeDirectImageComparison (g : X ⟶ Y)
       (moduleDirectImage g).rightDerivedFunctorObjQIso (topEdgeResolution X K)).symm
 
 /-- The inverse-open local cohomology presheaf computed on the same representative.
-Source: Stacks, Tag 0D5X (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+Source: Stacks, Tag 0D5X. -/
 def topEdgeInverseModel (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (inverseOpenHypercohomologyPresheaf g q).obj K ≅
@@ -109,8 +105,7 @@ def topEdgeInverseModel (g : X ⟶ Y) (q : ℤ)
 
 /-- The local derived-sections isomorphism λ, in the direction used by the edge.
 The selected presheaf isomorphism is uniquely fixed by its stated hom transformation.
-Source: Stacks, Tags 0D5W and 0D5X
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+Source: Stacks, Tags 0D5W and 0D5X. -/
 def topEdgeLocalLeray (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (localHypercohomologyPresheaf Y q).obj ((derivedModuleDirectImage g).obj K) ≅
@@ -120,8 +115,7 @@ def topEdgeLocalLeray (g : X ⟶ Y) (q : ℤ)
 
 /-- Θ on inverse-image opens. Exact precomposition commutes with homology; the two
 model comparisons then identify H^q(g^-1 V,K) with the corresponding local sections of K.
-Source: Stacks, Tags 0BKJ and 0D5X
-(blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+Source: Stacks, Tags 0BKJ and 0D5X. -/
 def topEdgeInverseLocalClass (g : X ⟶ Y) (q : ℤ)
     (K : DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
     (inverseOpenHypercohomologyPresheaf g q).obj K ⟶
@@ -143,7 +137,7 @@ variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
 /-- The inverse of the already recorded canonical top comparison κ.
-Source: Stacks, Tag 05TC (blueprint: lem-weil-pbc-derived-adjunction-top-edge). -/
+Source: Stacks, Tag 05TC. -/
 def topEdgePullbackInverse {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q) :=
   letI := (derivedPullback_topCohomology g q C hC).choose_spec.2.1
@@ -151,8 +145,7 @@ def topEdgePullbackInverse {T S : Scheme.{u}} (g : T ⟶ S)
 
 /-- The edge obtained by transposing the inclusion of the upper truncation of Rg_*K.
 The inverse on cohomology exists because upper truncation preserves degree q.
-Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tag 079W
-(blueprint: def-weil-pbc-truncated-counit-edge). -/
+Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tag 079W. -/
 def topEdgeTruncatedCounit {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (K : schemeDerivedCategory T) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}

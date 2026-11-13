@@ -13,9 +13,6 @@ import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplem
 
 /-!
 # Derived tensor products of étale sheaves preserve direct sums
-
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
-`lem-kun-derived-tensor-direct-sums.md` (blueprint: proposition-open-direct-image-preserves-finite).
 -/
 
 @[expose] public section
@@ -28,9 +25,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Tensoring on either side with an arbitrary unbounded derived étale sheaf preserves
 set-indexed direct sums, including the empty sum.
-
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-prop-sf-kunneth-ordinary/`
-`lem-kun-derived-tensor-direct-sums.md` (blueprint: proposition-open-direct-image-preserves-finite).
 
 Proof plan:
 1. The category of coefficient sheaves is Grothendieck abelian, by

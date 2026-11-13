@@ -15,8 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.GenericFiber.SpreadSmooth
 /-!
 # Auxiliary lemmas for the generic curve model
 
-General facts used in the construction of the generic curve model
-(`proposition-proper-direct-image-finite-coefficients`):
+General facts used in the construction of the generic curve model:
 
 * `AlgebraicGeometry.isPullback_sigmaDesc`: finite coproducts of cartesian squares over a common
   base change are cartesian;

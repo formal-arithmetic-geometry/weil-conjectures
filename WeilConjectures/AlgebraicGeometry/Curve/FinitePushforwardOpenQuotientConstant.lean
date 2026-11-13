@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteStalkModule
 
 /-!
 # Constructibility of finite pushforward of open quotient constants
-
-Source: normalization exact-sequence blueprint, unit
-`proposition-proper-base-change-projective-line`. (blueprint: lemma-normalization-constant-sheaf--1)
 -/
 
 @[expose] public section
@@ -87,24 +84,7 @@ private theorem finite_open_constantModule_stalk {X U : Scheme.{u}}
     have := ModuleCat.isZero_iff_subsingleton.mp hz
     infer_instance
 
-/-- Finite pushforward of an extension-by-zero finite quotient constant is constructible.
-
-Source: normalization exact-sequence blueprint,
-`sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md`,
-constructibility of the middle term.
-(blueprint: lemma-normalization-constant-sheaf--1)
-
-Proof: Y is Noetherian, since it is finite over X. Write R = Λ/(ℓ). Its constant sheaf
-is finite locally constant, because R is cyclic as a Λ-module. Extend its stratification
-by the closed complement of the quasi-compact open j to obtain constructibility of j_!R.
-Its underlying abelian sheaf has finite constructible stalks. Finite direct image preserves
-this constructibility by finite base change, the finite geometric-fibre formula and
-Noetherian induction. Extension by zero and finite direct image preserve annihilation by ℓ,
-so the module action factors through the finite ring R. Refine the finite-set trivializations
-on every stratum to trivialize the finitely many R-operations. These give constant finite
-R-module values, finitely generated over Λ, and hence the required module stratification.
-Neither finiteness nor Noetherianity of Λ is needed. Empty opens and the zero quotient
-produce zero sheaves, which satisfy the same conclusion. -/
+/-- Finite pushforward of an extension-by-zero finite quotient constant is constructible. -/
 theorem finite_pushforward_open_constantModSheaf_constructible
     {X Y U : Scheme.{u}} [IsNoetherian X] (ν : Y ⟶ X) [IsFinite ν]
     (j : U ⟶ Y) [IsOpenImmersion j] (ℓ : ℕ)

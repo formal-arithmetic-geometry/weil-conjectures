@@ -77,10 +77,7 @@ private theorem constantRestriction_unit
     Functor.whiskerRight_app, NatTrans.comp_app] using congr_app h (op (⊤_ X.Etale))
 
 /-- Scalar restriction and ordinary constant inverse image commute.
-Source: Stacks Tags 03EK and 07A6 (blueprint: lem-pur-etale-ordinary-constant-restriction).
-Proof: transpose under inverse image and constant sheaf. The restriction square
-has identity direct-image mate; naturality and the constant-adjunction units
-then identify both transposes. -/
+Source: Stacks Tags 03EK and 07A6. -/
 theorem etaleOrdinaryConstantRestrictionPullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : ModuleCat.{u + 1} B) :

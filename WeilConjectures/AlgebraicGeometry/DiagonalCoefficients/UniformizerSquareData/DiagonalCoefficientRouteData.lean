@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.ScalarCompatibility.DiagonalScalarArrowComposition
 
 /-! # Explicit endpoint bundles for cyclic and successive coefficient routes
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-coefficient-route-data).
 -/
 
 @[expose] public noncomputable section

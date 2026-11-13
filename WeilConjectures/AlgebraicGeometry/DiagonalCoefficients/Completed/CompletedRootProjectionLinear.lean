@@ -13,9 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsEmbed
 import all WeilConjectures.AlgebraicGeometry.Constant.ConstantZModScalarTensor
 
 /-! # Linearity of the normalized finite root projections
-
-Source: diagonal coefficient changes, integral root-limit identification.
-(blueprint: lem-diagonal-completed-root-projection-linear).
 -/
 
 @[expose] public noncomputable section
@@ -247,27 +244,7 @@ private local instance finitePointCommMon (l : ℕ) [Fact l.Prime]
   exact Profinite.isCommMonObj_continuousMapRingObj (spEllQuotient l E n)
 
 attribute [-instance] WeilConjectures.SixFunctors.integralModel_coefficientMonObj in
-/-- Every finite root projection is linear for the normalized completed coefficients.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and the coordinatewise
-integral twist construction of definition-tate-twists.
-(blueprint: lem-diagonal-completed-root-projection-linear).
-
-Proof: the completed root action is defined coordinatewise. Its n-th projection
-is scalar multiplication by the n-th coefficient reduction. The equation he
-identifies that reduction with the residue of the pulled-back condensed scalar.
-The finite quotient coefficient ring is annihilated by l^(n+1). The cokernel
-property of normalized reduction therefore factors the actual coefficient map
-through the constant cyclic residue ring. Canceling reduction and its tensor
-square proves that this factor is unital and multiplicative. The free-module
-unit commutes with the resulting cyclic scalar action: locally each scalar is
-an integer, and additivity proves the equation there. Separatedness gives the
-equation on all sections. The underlying root projection followed by the free-module unit
-is natural in the site object; these linear section maps give the morphism.
-No invertibility of this morphism is asserted: the source is the whole root
-limit and the target is just one finite level. The same argument applies to
-the empty scheme. -/
+/-- Every finite root projection is linear for the normalized completed coefficients. -/
 theorem completedRootProjection_linear (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤)))
     (e : (sheafCompose (Scheme.ProEt.topology X)

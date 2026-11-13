@@ -27,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The Hom, evaluation, and bidual part of the normalized comparison for the explicit
-adic section equivalence. Source: Stacks 03EO and 0E8H
-(blueprint: lem-sf-adic-module-hom-comparison-core). -/
+adic section equivalence. Source: Stacks 03EO and 0E8H. -/
 structure AdicModuleHomComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) where
   /-- The Hom comparison is natural in the target. -/
   homIso : ∀ M : AdicSheaf l X,
@@ -236,15 +235,7 @@ private theorem homComparison_isIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
   rw [he, Category.comp_id, FF.map_preimage, ← Category.assoc, Iso.inv_hom_id_assoc]
 
 /-- The normalized Hom comparison and its evaluation and bidual formulas exist for every
-prime and scheme.
-
-Proof: curry the image of native evaluation through the normalized tensor comparison.
-The native tensor-Hom adjunction, full faithfulness, and sheaf currying give bijections
-on Hom sets; essential surjectivity and Yoneda prove that the comparison is invertible.
-Its pure-tensor formula gives evaluation and naturality. The braided transpose identity
-for the native bidual gives the bidual formula after restriction.
-Source: Stacks 03EO and 0E8H
-(blueprint: lem-sf-adic-module-hom-comparison-core). -/
+prime and scheme. -/
 theorem adicModuleHomComparisonCore (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     Nonempty (AdicModuleHomComparisonCore l X) := by
   obtain ⟨T⟩ := adicModuleTensorComparisonCore l X

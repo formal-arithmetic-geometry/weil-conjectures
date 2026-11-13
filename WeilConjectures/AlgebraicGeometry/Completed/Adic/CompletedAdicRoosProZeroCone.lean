@@ -51,7 +51,6 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 /-! # The concrete completed adic Roos functor kills pro-zero cones
 
 Source: Stacks Project, Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-completed-adic-roos-pro-zero-cone).
 -/
 
 @[expose] public noncomputable section
@@ -91,17 +90,7 @@ private theorem countableProducts_exact :
 
 /-- The concrete Roos fibre kills an eventually derived-zero strict cone tower.
 
-Source: Stacks Project, Tags 0940 and 0941; the pro-zero derived-limit argument.
-(blueprint: lem-weil-pbc-completed-adic-roos-pro-zero-cone).
-
-Proof: countable products of completed module sheaves are exact by the pro-etale
-countable-products theorem. The strict derived-limit comparison supplies an evaluation
-isomorphism between the derived image of the strict cone and its tower of levelwise
-derived complexes. Naturality of this isomorphism transports each zero transition to
-zero in that tower. The pro-zero clause of the ringed strict derived-limit theorem
-then makes the derived-limit map invertible. The exact-products Roos comparison
-identifies this map with the derived image of the displayed concrete fibre map.
-A chain map has invertible derived image precisely when it is a quasi-isomorphism. -/
+Source: Stacks Project, Tags 0940 and 0941. -/
 theorem completedAdicRoosMapQuasiIsoOfProZero
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     {X Y : CochainComplex (CompletedAdicTowers T d) ℤ} (v : X ⟶ Y)

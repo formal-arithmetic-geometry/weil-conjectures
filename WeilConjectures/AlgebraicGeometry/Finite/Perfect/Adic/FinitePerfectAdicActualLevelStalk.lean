@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 /-! # Geometric stalk sections for descended finite levels
 
 Source: Stacks Project, Tags 09AL and 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-level-stalk).
 -/
 
 @[expose] public noncomputable section

@@ -26,8 +26,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 /-- Descent and scalar comparisons for the actual quotient tower, against the explicit
 constant diagram. This data has no Isom-presheaf reduction maps or constant-model
 boundedness, lisse, or universality assertions.
-Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing.
-(blueprint: def-weil-pbc-finite-perfect-adic-actual-normalization). -/
+Source: Stacks Tags 09AL and 09C6, finite quotient descent and balancing. -/
 structure FinitePerfectAdicActualNormalization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (V : X.Etale)
@@ -99,32 +98,7 @@ explicit constant diagram after forgetting finite scalars. This is the actual-qu
 and scalar-comparison part of the argument, before constructing any Isom-presheaf map.
 
 Source: Stacks Project, Tag 09C6, the finite quotient levels and their consecutive
-normalization maps; Tag 09AL, constructible derived comparison; Tag 06YY, balancing.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-normalization).
-
-Proof: on the etale chart, the separate markings identify each actual quotient locally
-with the supplied perfect constant level. Thus its cohomology is bounded and finite
-locally constant. The exact finite-coefficient comparison descends it to an etale K_n;
-full faithfulness descends its consecutive quotient arrow. Derived tensor balancing
-for two consecutive completed quotients makes this arrow universal for restriction
-of quotient scalars. The canonical coefficient mates for etale pullback give its
-source-site universal arrows and their restriction coherence. Restrict a marking at
-a geometric point; the resulting local derived isomorphism, followed by the
-sheafification unit, supplies the required inhabited Isom stalk.
-
-For a pro-etale U over the chart, realize a fixed finite-coefficient sheaf as a module
-over the finite quotient ring sheaf, using the locally bijective constant-scalar
-unit. Restrict its scalars along the completed-ring projection, and then restrict
-along W to U. These exact functors localized termwise give realization. Restriction
-of scalars in two steps gives scalar. The descent isomorphism of K gives actual;
-the constant-sheaf comparison and universe lift give model for the explicitly
-constructed constant algebraic level. The compatibility equations for phi identify
-the two composites of coefficient homomorphisms. Their termwise restriction
-comparisons, localized on complexes, identify the two realized consecutive arrows
-with the strict actual and model transitions. These are actual_normalized and
-model_normalized. All comparisons are the canonical ones, fixed by the scalar units;
-no simultaneous marking or inverse limit is chosen. The argument remains valid for
-zero rings and empty charts, where the stalk assertion has no geometric point. -/
+normalization maps; Tag 09AL, constructible derived comparison; Tag 06YY, balancing. -/
 theorem finitePerfectAdic_actual_normalization
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

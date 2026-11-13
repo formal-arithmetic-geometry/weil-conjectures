@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 /-!
 # Finiteness of finite-type direct images of constructible etale sheaves
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
-`sbc-thm-finiteness-finite-type.md` (blueprint: theorem-results-from-etale-theory).
-
 The ordinary direct image requires no separatedness. For the compact-support clauses,
 use the Nagata compactification already supplied by `compactSupportAmplitudeCompactification`.
 On the degree-zero input this candidate agrees with compactification-independent compact
@@ -72,22 +69,18 @@ private theorem isBoundedConstructible_of_iso
 finite-type schemes over a field is bounded constructible. For a separated map the compact
 support direct image is also bounded constructible, and its cohomology vanishes above twice
 a bound on the dimensions of the original geometric fibres.
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md`
-(blueprint: theorem-results-from-etale-theory).
 
 Proof, following the node's five steps:
 1. The coefficient convention gives a finite commutative ring killed by positive N invertible
 in k, hence on every k-scheme. Place F in degree zero; it is bounded constructible by
 `def-weil-pbc-constructible-complexes`. Apply `proposition-six-operations-dctf--2` to obtain
 the ordinary direct-image assertion, including nonseparated maps.
-2. For separated f, finite type over the Noetherian field makes X and Y Noetherian
-(`lem-weil-pbc-finite-type-over-noetherian`); local Noetherianity makes Y quasi-separated
-(`lem-weil-pbc-locally-noetherian-quasi-separated`). Use
-`theorem-nagata-s-compactification-theorem--1` and `definition-compactification-refinement--1` to
-factor f as an open immersion j followed by a proper r. Properness includes finite type
-(`def-weil-proper-morphism`). Finite affine covers and the union of algebra generators show the
-compactification is finite type over k, hence Noetherian. All three schemes admit finite Noetherian
-affine covers. No bound on the compactified fibres is required.
+2. For separated f, finite type over the Noetherian field makes X and Y Noetherian;
+local Noetherianity makes Y quasi-separated. Use `theorem-nagata-s-compactification-theorem--1` and
+`definition-compactification-refinement--1` to factor f as an open immersion j followed by a proper
+r. Properness includes finite type. Finite affine covers and the union of algebra generators show
+the compactification is finite type over k, hence Noetherian. All three schemes admit finite
+Noetherian affine covers. No bound on the compactified fibres is required.
 3. By `proposition-six-operations-dctf--6`, j_!F is constructible. Place it in degree zero and apply
 `theorem-results-from-etale-theory--3` to r to obtain bounded constructibility of Rr_*(j_!F).
 4. By `proposition-construction-independence-rf-shriek`, the chosen candidate is Rr_* Dj_!. Its

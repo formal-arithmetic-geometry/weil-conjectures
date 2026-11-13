@@ -10,8 +10,7 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # Naturality of the external evaluation transpose
 
-Source: Stacks 08J9 and 0A90
-(blueprint: lem-pur-external-rhom-evaluation-naturality).
+Source: Stacks 08J9 and 0A90.
 -/
 
 @[expose] public section
@@ -21,8 +20,7 @@ universe uC vC uD vD uB vB
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Etale.ExternalRHom
 /-- Pull an evaluation through the constant and tensor comparisons before specializing
-categories. Source: Stacks 08J9 and 0G7E
-(blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+categories. Source: Stacks 08J9 and 0G7E. -/
 noncomputable def pullEvaluationOf
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
     {D : Type uD} [Category.{vD} D] [MonoidalCategory D]
@@ -34,7 +32,7 @@ noncomputable def pullEvaluationOf
   (α.hom.app Q ▷ F.obj E) ≫ δ (c.obj Q) E ≫ F.map t
 
 /-- Tensor two evaluations with the Koszul interchange before specializing categories.
-Source: Stacks 08J9 and 0A90 (blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+Source: Stacks 08J9 and 0A90. -/
 noncomputable def externalEvaluationOf
     {B : Type uB} [Category.{vB} B] [MonoidalCategory B]
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [BraidedCategory C]
@@ -49,7 +47,7 @@ noncomputable def externalEvaluationOf
 
 /-- The external transpose with its adjunction left abstract. This is the same
 external evaluation composite, with no extra choices of maps.
-Source: Stacks 08J9 and 0A90 (blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+Source: Stacks 08J9 and 0A90. -/
 noncomputable def pairingOf
     {B : Type uB} [Category.{vB} B] [MonoidalCategory B]
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [BraidedCategory C]
@@ -160,8 +158,7 @@ variable {B : Type uB} [Category.{vB} B] [MonoidalCategory B]
     (((Functor.whiskeringLeft₂ P).obj cp).obj cp).obj (curriedTensor P))
 
 /-- The same external evaluation transpose with the three closed categories abstract.
-Source: Stacks 08J9 and 0A90
-(blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+Source: Stacks 08J9 and 0A90. -/
 noncomputable def pairing (E K : X) (H L : Y) :
     sx.obj ((ihom E).obj K) ⊗ sy.obj ((ihom H).obj L) ⟶
       sp.obj ((ihom (F.obj E ⊗ G.obj H)).obj (F.obj K ⊗ G.obj L)) :=
@@ -173,8 +170,7 @@ noncomputable def pairing (E K : X) (H L : Y) :
         (GenericTranspose.ev ay H L)))
 
 /-- The exact four-variance square for the canonical external evaluation transpose.
-Source: Stacks 08J9 and 0A90
-(blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+Source: Stacks 08J9 and 0A90. -/
 def NaturalityAt {E E' K K' : X} {H H' L L' : Y}
     (f : E' ⟶ E) (g : H' ⟶ H) (k : K ⟶ K') (l : L ⟶ L') : Prop :=
   ((sx.map ((MonoidalClosed.pre f).app K) ≫ sx.map ((ihom E').map k)) ⊗ₘ
@@ -185,8 +181,7 @@ def NaturalityAt {E E' K K' : X} {H H' L L' : Y}
       sp.map ((ihom (F.obj E' ⊗ G.obj H')).map (F.map k ⊗ₘ G.map l))
 
 /-- Evaluation, pullback constraints and the Koszul interchange are natural in all factors.
-Source: Stacks 08J9 and 0A90
-(blueprint: lem-pur-external-rhom-evaluation-naturality). -/
+Source: Stacks 08J9 and 0A90. -/
 theorem naturality {E E' K K' : X} {H H' L L' : Y}
     (f : E' ⟶ E) (g : H' ⟶ H) (k : K ⟶ K') (l : L ⟶ L') :
     NaturalityAt ax ay ap F G α β δ f g k l := by

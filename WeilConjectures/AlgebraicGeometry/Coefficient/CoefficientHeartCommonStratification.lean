@@ -21,10 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NoetherianStratumDetec
 /-!
 # Common stratifications and restriction of coefficient modules
 
-Source: Weil blueprint, sec-six-functors-basics/sk-lem-coefficient-heart/
-sk-lem-coefficient-heart-common-stratification.md, clauses (1)--(3)
-(blueprint: lemma-constructible-sheaves).
-
 Refinement means containment of stratum images, with their given scheme structures.
 No factorization through a stratum is inferred from containment of images.
 -/
@@ -179,22 +175,8 @@ private lemma coefficientExactDetection
     rw [F.map_comp, ← hl, ← hk, Category.assoc, reassoc_of% he, zero_comp, comp_zero]
 
 /-- Exactness, monomorphisms and epimorphisms of coefficient modules are detected on every
-finite locally closed stratification. Source: blueprint det-lem-coefficient-heart-common-
-stratification, step (7). It uses exact inverse image for cartesian coefficients and the
-finite-stratum zero-detection theorem on underlying abelian sheaves.
-(blueprint: new-det-lem-coefficient-heart-common-stratification-exactness).
-
-Proof: convert the finite locally closed stratification into a constructible scheme
-stratification, and use identity covers in the existing Noetherian stratum-detection
-theorem. The forgetful functor is faithful, so vanishing of underlying sheaves detects
-vanishing of coefficient modules. Exact pullback preserves the image of a morphism;
-therefore a morphism with zero restrictions has zero image and is zero. Cancellation
-against these morphisms detects monomorphisms and epimorphisms. For arbitrary arrows
-f and g, local exactness first forces f followed by g to vanish. Exactness is then
-equivalent to the vanishing of the map from the kernel of g to the cokernel of f.
-After restriction this map factors through the corresponding local kernel-to-cokernel
-map, which vanishes. The established detection of zero morphisms finishes the proof.
--/
+finite locally closed stratification. It uses exact inverse image for cartesian coefficients and the
+finite-stratum zero-detection theorem on underlying abelian sheaves. -/
 theorem coefficientHeart_commonStratification_exactness
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :
@@ -233,24 +215,7 @@ theorem coefficientHeart_commonStratification_exactness
   · intro A B C f g
     exact coefficientExactDetection (coefficientHeartRingObj Λ) R f g
 
-/-- Common refinement, lisse restriction, and detection of exactness on strata.
-Source: blueprint sk-lem-coefficient-heart-common-stratification (1)--(3)
-(blueprint: lemma-constructible-sheaves).
-
-Proof: assemble the three independently proved clauses.
-1. Intersect the finite input partitions and apply Noetherian induction on closed
-subsets. Choose an irreducible nonempty relative open contained in one covering part,
-then recursively stratify its proper closed complement. Closed tails give open prefixes.
-Realize the pieces as vanishing-ideal subschemes in their open coborders. Their immersions
-identify the domains with irreducible, hence connected, subsets.
-2. Pull back finite-free covers to preserve lisse modules. Finite constant models give
-local finite presentations. Transfer these presentations to a refined stratum through
-the existing immersion-range theorem, retaining the given scheme structures. The
-finite-subfield and algebraic-closure local-triviality lemmas give lisse restrictions.
-3. Exact coefficient pullback has the underlying abelian-sheaf inverse image. Finite
-stratum detection and faithful forgetfulness detect zero modules and zero morphisms.
-Cancellation detects monomorphisms and epimorphisms. The kernel-to-cokernel criterion,
-together with zero-morphism detection, detects exactness of arbitrary pairs. -/
+/-- Common refinement, lisse restriction, and detection of exactness on strata. -/
 theorem coefficientHeart_commonStratification (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X]

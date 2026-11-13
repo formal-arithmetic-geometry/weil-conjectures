@@ -128,7 +128,6 @@ set_option maxHeartbeats 8000000 in
 -- Specialize mate-pasting to the concrete coefficient and sheaf derived categories.
 /-- The normalized realization square for a chosen proper scalar projection.
 Source: Zheng, Lemma 5.16; Stacks 03CY, 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-proper-scalar-square).
 
 The proof is the mate-pasting calculation on cochain representatives. The
 ordinary restriction comparison is sectionwise the identity, its derived square

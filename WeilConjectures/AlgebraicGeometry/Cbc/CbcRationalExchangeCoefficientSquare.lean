@@ -14,9 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProe
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 
 /-! # The rational exchange coefficient square
-
-Source: current blueprint, coefficient coherence of units, counits and mates.
-(blueprint: lem-cbc-rational-exchange-coefficient-square)
 -/
 
 @[expose] public noncomputable section

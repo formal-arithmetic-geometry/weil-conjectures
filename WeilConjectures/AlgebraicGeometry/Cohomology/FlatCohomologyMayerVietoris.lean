@@ -17,7 +17,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Prod
 /-! # The flat base-change Mayer--Vietoris comparison diagram
 
 Source: Stacks Project, Tags 02KH and 01EB, the Mayer--Vietoris proof of flat
-base change (blueprint: lem-pc-flat-cohomology-mayer-vietoris).
+base change.
 -/
 
 @[expose] public section
@@ -33,36 +33,7 @@ Mayer--Vietoris sequences. This assertion assumes no local comparison is bijecti
 The upper terms are tensor products of the original cohomology, with the binary
 sum identified with the product of the two tensor products. The lower terms use
 base changes of the individual opens, transported by the cartesian open-subscheme
-isomorphisms and the iterated module-pullback isomorphisms.
-
-Source: Stacks Project, Tag 02KH (coherent-lemma-flat-base-change-cohomology),
-Mayer--Vietoris alternative, and Tag 01EB (cohomology-lemma-mayer-vietoris).
-(blueprint: lem-pc-flat-cohomology-mayer-vietoris)
-
-Proof: Apply the ringed-space module Mayer--Vietoris sequence to M and the cover
-X = U union V. Its maps are R-linear: restriction commutes with multiplication by
-a global scalar, and naturality in the module gives the same assertion for the
-boundary maps. Tensor this exact sequence with S. Flatness preserves its exactness
-and the initial injection; use the canonical tensor/product isomorphism for the
-binary sum to obtain r, d and delta below. Apply Mayer--Vietoris to the pullback of
-M and the inverse images of U and V in X_S. Preimage preserves union and
-intersection, so these opens cover X_S and their intersection is the inverse image
-of U intersect V. Base change of each open identifies it with that inverse image;
-functoriality of module pullback identifies the corresponding restricted modules.
-Transport the lower sequence by these isomorphisms to obtain r', d' and delta'.
-For the commuting squares, the inverse-image functor on abelian sheaves is exact.
-The sheaf Mayer--Vietoris short exact sequence (the free abelian sheaves on the
-intersection, the two opens and their union) pulls back to the corresponding
-sequence on the inverse-image cover. Functoriality of Ext, the constant-sheaf
-comparison and the adjoint coefficient map defining H.baseChangeLinear therefore
-give a morphism of the long exact sequences. The restriction squares follow from
-functoriality of Ext; the boundary square follows because Ext boundaries are
-Yoneda composition with the short exact sequence class, and exact inverse image
-preserves this class and Yoneda composition. Thus the three squares commute before
-extending scalars. Since all horizontal maps are linear, tensor extension gives
-the displayed squares: on a pure tensor s tensor x both composites equal s times
-the common value before scalar extension, and pure tensors generate. No conclusion
-about bijectivity of a comparison is used in this construction. -/
+isomorphisms and the iterated module-pullback isomorphisms. -/
 theorem H.baseChange_mayerVietoris
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) (M : X.Modules) [M.IsQuasicoherent]

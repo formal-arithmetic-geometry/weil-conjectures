@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.Fi
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryTransportImages
 
 /-! # The actual two finite scalar transport routes
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-scalar-transport-routes).
 -/
 
 @[expose] public noncomputable section
@@ -53,9 +50,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Successive comparison, realization and coefficient forgetting of the given arrow.
-Source: the three actual exact functors
-(blueprint: def-sfb-finite-scalar-transport-routes). -/
+/-- Successive comparison, realization and coefficient forgetting of the given arrow. -/
 def finiteScalarModuleRoute (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}
@@ -67,8 +62,7 @@ def finiteScalarModuleRoute (n : ℕ)
         (finiteOrdinaryIntrinsicImage l E n T a)
 
 /-- Ordinary module forgetting and abelian comparison, with the actual scalar
-comparison isomorphisms at the endpoints. Source: exact site comparison
-(blueprint: def-sfb-finite-scalar-transport-routes). -/
+comparison isomorphisms at the endpoints. -/
 def finiteScalarAbelianRoute (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

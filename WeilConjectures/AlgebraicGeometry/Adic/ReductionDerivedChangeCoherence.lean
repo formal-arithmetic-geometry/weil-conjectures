@@ -20,7 +20,7 @@ For ring sheaves `R`, `S`, `U` on the small pro-étale site of `Y`, derived scal
   isomorphism `L φ ≅ 𝟭` whose value on every complex is the multiplication map
   `a ⊗ x ↦ a • x` read through the universal counit.
 
-Source: Stacks Tag 06YY (blueprint: lem-sf-field-stage-ordinary-realization).
+Source: Stacks Tag 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -39,9 +39,7 @@ attribute [local instance] reductionModulesHasDerivedCategory
 variable (Y : Scheme.{u})
 
 /-- The universal scalar-extension counit on complex representatives is natural.
-Source: Stacks Tag 06YY (blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: it is the component of the natural transformation obtained by whiskering the
-universal homotopy counit along the quotient functor. -/
+Source: Stacks Tag 06YY. -/
 theorem reductionScalarComplexCounit_naturality
     {R S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (φ : R ⟶ S)
     {P P' : CochainComplex (reductionModules Y R) ℤ} (p : P' ⟶ P) :
@@ -56,10 +54,7 @@ theorem reductionScalarComplexCounit_naturality
 
 /-- Derived scalar extension along a composite is the composite of derived scalar
 extensions, by a unique isomorphism given on every complex by ordinary balancing.
-Source: Stacks Tag 06YY (blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: the K-flat statement is `derivedReductionComposition`. For an arbitrary complex
-take a K-flat resolution; naturality of the counits and of balancing transport the
-equation along it. Uniqueness already holds on K-flat complexes. -/
+Source: Stacks Tag 06YY. -/
 theorem reductionDerivedChange_comp_existsUnique
     {R S U : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     (φ : R ⟶ S) (ψ : S ⟶ U) (χ : R ⟶ U) (h : φ ≫ ψ = χ) :
@@ -104,7 +99,7 @@ section Identity
 variable {Y} {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
 
 /-- A module sheaf includes into its restriction along the identity, by the identity on
-sections. Source: Stacks Tag 03DA (blueprint: lem-sf-field-stage-ordinary-realization). -/
+sections. Source: Stacks Tag 03DA. -/
 private def restrictIdInclusion (M : reductionModules Y R) :
     M ⟶ (reductionRestrict Y (𝟙 R)).obj M :=
   ⟨PresheafOfModules.homMk ((PresheafOfModules.toPresheaf _).map (𝟙 M.val)) (by
@@ -112,7 +107,7 @@ private def restrictIdInclusion (M : reductionModules Y R) :
     rfl)⟩
 
 /-- Restriction along the identity maps back by the identity on sections.
-Source: Stacks Tag 03DA (blueprint: lem-sf-field-stage-ordinary-realization). -/
+Source: Stacks Tag 03DA. -/
 private def restrictIdProjection (M : reductionModules Y R) :
     (reductionRestrict Y (𝟙 R)).obj M ⟶ M :=
   ⟨PresheafOfModules.homMk ((PresheafOfModules.toPresheaf _).map (𝟙 M.val)) (by
@@ -297,12 +292,7 @@ end Identity
 
 /-- Derived scalar extension along a ring endomorphism equal to the identity is the
 identity, by a unique isomorphism given on every complex by multiplication `a ⊗ x ↦ a • x`.
-Source: Stacks Tag 06YY (blueprint: lem-sf-field-stage-ordinary-realization).
-Proof: the unit `x ↦ 1 ⊗ x` and multiplication are inverse chain maps. The universal
-property of the left derived functor lifts the unit to a transformation `𝟭 ⟶ L`, which
-is invertible on K-flat complexes and hence everywhere. Its inverse is multiplication
-through the counit; multiplication is determined by its values on local tensor
-generators, which gives uniqueness. -/
+Source: Stacks Tag 06YY. -/
 theorem reductionDerivedChange_id_existsUnique
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (φ : R ⟶ R) (hφ : φ = 𝟙 R) :
     ∃! e : reductionDerivedChange Y φ ≅ 𝟭 (reductionDerivedCategory Y R),

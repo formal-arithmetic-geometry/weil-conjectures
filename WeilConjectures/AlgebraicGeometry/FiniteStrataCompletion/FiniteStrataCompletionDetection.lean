@@ -65,10 +65,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Finite-stratum detection for strict integral completion
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-def-localizing-closure-ctf-equals-bc.proof.md, Strata and Locality;
-Stacks Tags 09Y4, 09AA, 09AH, 09BM
-(blueprint: lem-sfb-finite-strata-completion-detection).
+Source: Stacks Tags 09Y4, 09AA, 09AH, 09BM.
 
 The helpers only specialize published constructions: exact inverse image, the actual
 base-changed cover, its leaf tests, and the cone of the specified strict augmentation.
@@ -95,14 +92,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Exact inverse image on the ordinary unbounded derived module categories.
 It is the levelwise form of the recorded total left derived pullback, identified by
-`CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`.
-Source: blueprint Strata/Locality (blueprint: lem-sfb-finite-strata-completion-detection). -/
+`CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`. -/
 abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory
 
 /-- The cone of the specified strict Roos augmentation on a complex. On a K-flat
-representative this is the cone of the completion unit, with its zero second coordinate.
-Source: blueprint strict completion (blueprint: lem-sfb-finite-strata-completion-detection). -/
+representative this is the cone of the completion unit, with its zero second coordinate. -/
 def completionCone (X : Scheme.{u}) (P : CochainComplex (AdicCompletion.Modules l E X) ℤ) :
     DerivedCategory (AdicCompletion.Modules l E X) :=
   DerivedCategory.Q.obj (CochainComplex.mappingCone (AdicCompletion.augmentation l E X P))
@@ -112,15 +107,14 @@ variable {W : Scheme.{u}} (S : Scheme.FiniteLocallyClosedStratification W)
 
 /-- The given cover pulled back to an actual stratum factor of a leaf. Its cover structure
 retains the fpqc finite-refinement condition, not just joint surjectivity.
-Source: Stacks Tag 022D (blueprint: lem-sfb-finite-strata-completion-detection). -/
+Source: Stacks Tag 022D. -/
 abbrev leafCover {L : Scheme.{u}} (a : Fin S.n) (t : L ⟶ S.domain a) :
     Scheme.Cover.{u} Scheme.proetalePrecoverage L :=
   (𝒰 a).pullback₂ t
 
 /-- Test a property on every base-changed covering member of a leaf, using its actual
 branch morphism. The accompanying tree assertion supplies stratum factors for nonempty
-leaves; every restriction on an empty leaf lies in the zero module category.
-Source: blueprint Strata/Locality (blueprint: lem-sfb-finite-strata-completion-detection). -/
+leaves; every restriction on an empty leaf lies in the zero module category. -/
 def leafCoverTest (P : ∀ (T : Scheme.{u}), (T ⟶ W) → Prop)
     (L : Scheme.{u}) (branch : L ⟶ W) : Prop :=
   ∀ (a : Fin S.n) (t : L ⟶ S.domain a), t ≫ S.immersion a = branch →
@@ -130,9 +124,7 @@ def leafCoverTest (P : ∀ (T : Scheme.{u}), (T ⟶ W) → Prop)
 /-- The same scalar module and every one of its finite scalar presentations survive
 restriction from a stratum-cover member to the corresponding leaf-cover member.
 Scalar modules are ordinary modules encoded as module objects in abelian groups;
-matrix entries are maps from the integer tensor unit, equivalently scalar elements.
-Source: blueprint finite scalar models (blueprint: lem-sfb-finite-strata-completion-detection).
--/
+matrix entries are maps from the integer tensor unit, equivalently scalar elements. -/
 def leafScalarModels (L : Scheme.{u}) (branch : L ⟶ W) : Prop :=
   ∀ (a : Fin S.n) (t : L ⟶ S.domain a), t ≫ S.immersion a = branch →
     ∀ (i : (𝒰 a).I₀) (M : AdicCompletion.Modules l E W)
@@ -708,39 +700,7 @@ private theorem refinement_tree [CompactSpace W] [QuasiSeparatedSpace W]
 
 /-- Finite-stratum and leaf-cover detection of strict completion, each cohomology degree,
 and the cone of the specified completion unit, retaining the scalar models and matrices.
-Source: blueprint main-20261015, finite-model proof, Strata and Locality;
-Stacks Tags 09Y4, 09AA, 09AH, 09BM, 03DJ, 04TQ
-(blueprint: lem-sfb-finite-strata-completion-detection).
-
-Proof: (1) Apply lem-fix-constructible-open-closed-refinement to the given constructible
-partition. Obtain the finite qcqs open/closed tree and actual stratum factorizations.
-Base change the covers using weakly-etale stability and the fpqc covering axioms.
-(2) Cartesian coefficients make inverse image exact. Immersion inverse image preserves
-products by lem-weil-pbc-proetale-immersion-limit-preservation. Cover restriction is slice
-restriction by weakly-etale localization; its extension-by-zero adjunction preserves products.
-Exact inverse image commutes with each cohomology functor.
-(3) In lem-pe-principal-reduction-cone-calculus the reductions are Cone(pi^n), their
-transitions are (x,y) ↦ (x,pi*y), and their augmentations are m ↦ (m,0). Products and finite
-cones identify their Roos 1-shift maps under restriction. The shifted-product coordinate
-of the unit stays zero. Lem-pe-completion-triangle-comparison identifies precisely these
-units with strict completion, not merely the completion objects.
-(4) At each internal vertex use the arbitrary-ring proetale open/closed short exact
-sequence. Lem-sfb-exact-open-closed-unbounded-calculus gives joint reflection of derived
-isomorphisms; the sheaf cover criterion detects module isomorphisms on each leaf cover.
-(5) Apply exact-cohomology comparison and cover detection on leaves, and induct through
-the finite tree to detect each degree separately. Apply the same reflection to the unit;
-the quasi-isomorphism/cone-acyclicity criterion gives the asserted cone zero-detection.
-(6) Since stratum and branch immersions are monomorphisms, each leaf factor is a base
-change of its branch immersion. Hence its further cover restriction is an immersion.
-Pullback composition identifies the branch-cover and original-cover routes, proving both
-directions of the original-cover equivalences.
-(7) Apply definition-constructible-sheaves--1 to a finite scalar presentation. Exact
-inverse image preserves finite colimits, the regular module and each constant scalar.
-Lem-sfb-finite-colimit-matrix-cokernels therefore preserves the same entries, sizes and
-cokernel, and hence the same scalar module.
-(8) The empty covering forces all modules on an empty scheme to be zero. Empty leaves
-and the empty root therefore impose no extra tests. No boundedness, Noetherianity or
-invertibility of l is used, and no original stratum is required to be globally open. -/
+Source: Stacks Tags 09Y4, 09AA, 09AH, 09BM, 03DJ, 04TQ. -/
 theorem finite_strata_completion_detection
     [CompactSpace W] [QuasiSeparatedSpace W]
     (_hc : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a)) :

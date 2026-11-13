@@ -41,19 +41,7 @@ private theorem closedImmersion_fiber_descend
 closed-immersion locus of an arbitrary base change.
 
 Source: Stacks Project, Morphisms, Tags 04DG and 056J; the marked-open paragraph of
-Tag 0GK7. (blueprint: lem-weil-pbc-finite-closed-immersion-locus)
-
-Proof: A closed-immersion fibre spreads to a neighbourhood by the finite-cokernel
-and Nakayama argument of 04DG. The set of such fibres is consequently open: every
-point of that neighbourhood has a closed-immersion fibre, using the restriction
-square and descent along the extension of residue fields. Let W be this set.
-The restriction to W has closed-immersion fibres, hence is locally on its target
-a closed immersion by the same neighbourhood theorem, and these local assertions
-glue. For x in W₀, the closed immersion over W₀ has a closed-immersion fibre.
-Descend this first through W₀ → X₀ and then through the given cartesian square.
-Descent here is only along field extensions, which are faithfully flat; the
-original base change a is arbitrary. Empty opens and empty fibres cause no exception.
--/
+Tag 0GK7. -/
 theorem exists_finite_closedImmersion_locus
     {Y X Y₀ X₀ : Scheme.{u}} (f : Y ⟶ X) [IsFinite f]
     (f₀ : Y₀ ⟶ X₀) (b : Y₀ ⟶ Y) (a : X₀ ⟶ X)

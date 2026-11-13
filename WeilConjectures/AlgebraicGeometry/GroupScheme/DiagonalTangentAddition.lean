@@ -15,7 +15,7 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficie
 # Addition of tangent maps on the dual-number diagonal
 
 Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2, the square-zero
-pushout calculation; blueprint `def-wf-lie-algebra-derivation`, the dual-number description.
+pushout calculation.
 -/
 
 @[expose] public section
@@ -69,21 +69,7 @@ private theorem omegaHom_transport {S : Scheme.{u}} (X : Over S)
 
 /-- The tangent map of a map from two dual-number thickenings, restricted to the
 diagonal, is the sum of its tangent maps on the axes.
-Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2.
-(blueprint: lem-ag-dual-numbers-diagonal-tangent-addition)
-
-Proof: Pull the map back to the iterated thickening using its two projections.
-Its sections are double dual numbers. The two axes retain respectively the
-constant and first infinitesimal coefficient and the constant and second
-infinitesimal coefficient. The diagonal ring map sends both infinitesimals to
-epsilon and their product to zero. Therefore its epsilon coefficient is the
-sum of the two axis coefficients on every open. These coefficients are the
-relative derivations defining `omegaHom`. Transport them along the three given
-equalities of reductions, so they all take values in `g_* O_S`. The universal
-property of relative differentials takes their sum to the sum of the induced
-module morphisms. Sheafification and the pullback-pushforward adjunction also
-preserve addition, giving the asserted equality. This applies over any base,
-including the empty scheme, and requires no group law or smoothness. -/
+Source: Stacks Project, Tag 0B2B, proof of Lemma 33.16.2. -/
 theorem omegaHom_diagonal_add {S : Scheme.{u}} (X : Over S)
     (f : Scheme.dualNumbersOver S ⊗ Scheme.dualNumbersOver S ⟶ X)
     (g : S ⟶ X.left)

@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.Picard
 
 /-!
 # Powers in the kernel of the boundary divisor map
-
-Source: blueprint
-sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
-proof, divisor kernel and constants paragraph.
 -/
 
 @[expose] public section
@@ -28,24 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- A unit with zero boundary divisor is an nth power.
-
-Source: blueprint
-sec-curve-estimates/sbc-thm-algebraically-closed-invariance/thm-sc-constant-invariance, affine-case
-proof, divisor kernel and constants paragraph (blueprint: lem-sc-boundary-divisor-kernel-powers).
-
-Proof: The germ compatibility identifies φ with restriction to the function field through
-the open immersion c.i. At every point of C both the unit and its inverse have regular germs,
-so their valuations are zero. At a boundary closed point the assumed boundary divisor is
-zero. Thus the rational function and its inverse have no poles anywhere on the smooth
-proper curve c.Z, and extend to global sections by
-Scheme.exists_isUnit_germToFunctionField_eq_of_ord_eq_zero (the local DVR criterion followed
-by gluing regular rational functions). They are
-inverse global sections, hence give a global unit. Global functions on a smooth proper
-connected curve over an algebraically closed field are precisely the constants. Therefore
-the original unit is a nonzero constant from k. Choose an nth root of that constant in k,
-which is nonzero since n ≥ 1, and restrict it to C. Its nth power is the original unit.
-No affineness or prime-to-characteristic assumption is needed. -/
+/-- A unit with zero boundary divisor is an nth power. -/
 theorem boundary_divisor_kernel_powers
     (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

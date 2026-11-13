@@ -13,7 +13,6 @@ import Mathlib.Algebra.FiveLemma
 /-! # Affine degeneration of normalized Čech comparisons
 
 Source: Stacks Project, Tags 01ET and 01XD.
-(blueprint: lem-pc-cech-comparison-affine)
 -/
 
 @[expose] public section
@@ -113,24 +112,7 @@ private theorem comparison_smul
 It is essential that the system is normalized and commutes with connecting maps;
 this assertion would be false for an arbitrary additive comparison.
 
-Source: Stacks Project, Tags 01ET and 01XD.
-(blueprint: lem-pc-cech-comparison-affine)
-
-Proof: Work on the class of abelian sheaves acyclic on affine opens. It contains
-quasi-coherent module sheaves and injectives and is stable under taking the cokernel
-of an embedding into an injective. Such embeddings give sectionwise-surjective
-short exact sequences on every affine tuple intersection. In degree zero the
-normalization identifies the comparison with the gluing and Ext-section isomorphisms.
-Inductively use the exact Čech and sheaf cohomology sequences for the embedding into
-an injective. Both higher cohomologies of the injective vanish, and the connecting-map
-law identifies the induced cokernel maps; hence the comparison in the next degree is
-bijective. For linearity, naturality of comparison with respect to multiplication by
-any global function identifies its action on Čech homology with its Ext cohomology
-action. The scalar-restriction homology transport respects that multiplication,
-as in `cechComplexFunctorHomologyIso_hom_smul`. Restrict along the homomorphism induced by
-f to obtain R-linearity. All tuple intersections are affine without any assumption
-that X or f is separated. Infinite covers cause no change to the acyclicity argument;
-empty covers imply an empty scheme, where both sides are zero. -/
+Source: Stacks Project, Tags 01ET and 01XD. -/
 theorem cechComparison_affine_bijective_linear
     {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u}
     (f : X ⟶ Spec (.of R)) (U : ι → X.Opens)

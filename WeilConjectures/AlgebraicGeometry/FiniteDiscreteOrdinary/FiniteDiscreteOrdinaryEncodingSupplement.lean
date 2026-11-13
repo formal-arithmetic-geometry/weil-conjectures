@@ -88,10 +88,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
 
 /-! # Finite discrete internal and ordinary coefficients
-
-Source: blueprint main-20261015, chap-Construction-of-f,
-theorem-f-shriek-finite-coefficients, coefficient-identification step
-(blueprint: lem-sf-finite-discrete-normalized-encoding).
 -/
 
 @[expose] public noncomputable section
@@ -111,9 +107,7 @@ variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 attribute [instance] Encoding.ordinaryAdditive Encoding.ordinaryInverseAdditive
   Encoding.fixedAdditive Encoding.fixedInverseAdditive
 
-/-- The canonical shift comparison on the actual termwise derived functor.
-Source: blueprint proof step 4 and Stacks 015F
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+/-- The canonical shift comparison on the actual termwise derived functor. -/
 instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
     e.fixedDerived.functor.CommShift ℤ := by
   letI : (e.ordinary.trans e.fixed).functor.Additive :=
@@ -123,9 +117,7 @@ instance Encoding.fixedDerivedShift {T : Scheme.{u}} (e : Encoding A T) :
   change (e.ordinary.trans e.fixed).functor.mapDerivedCategory.CommShift ℤ
   infer_instance
 
-/-- The ordinary bounded constructible finite-Tor predicate, without a fixed Tor bound.
-Source: definition-constructible-sheaves, final paragraph, and blueprint proof steps 7 and 9
-(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+/-- The ordinary bounded constructible finite-Tor predicate, without a fixed Tor bound. -/
 def ordinaryCtf (T : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
       (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=

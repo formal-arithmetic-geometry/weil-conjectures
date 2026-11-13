@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearExchangeCoher
 import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 
 /-! # Specialization of the universal linear compact-support action
-
-Source: linear trace invariance, proof paragraph 1.
-(blueprint: lem-amb-affine-linear-action-family).
 -/
 
 @[expose] public noncomputable section
@@ -101,9 +98,7 @@ private lemma action_eq_id
     ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))]
   exact (affineLinearCompactComparison N hN A hA S hS d).hom_inv_id
 
-/-- The identity matrix acts as the identity on the actual trace source.
-Source: blueprint linear-trace proof, paragraph 1
-(blueprint: lem-amb-affine-linear-action-family). -/
+/-- The identity matrix acts as the identity on the actual trace source. -/
 theorem affineLinearAction_one
     (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
@@ -307,29 +302,7 @@ private theorem action_baseChange
 /-- The actual universal linear action restricts to the identity along the identity
 section, and specializes to the actual action of every matrix, up to the compact-support
 base-change comparison. No assertion about traces, scalar functions, or connectedness
-is part of this statement.
-Source: blueprint proposition-purity-vector-bundles, proof paragraph 1
-(blueprint: lem-amb-affine-linear-action-family).
-
-Proof: compactify each affine projection by its standard projective compactification.
-The determinant-open and its tower are Noetherian and the projection is separated and
-finite type, with quasi-compact compactifying open. The universal matrix and its inverse
-are the coordinate matrix and its adjugate divided by the determinant. Apply
-affineLinearExchange_action_naturality to the Cartesian linear-map squares. Pullback
-along the section of g takes
-its matrix entries to g, so the affine Cartesian squares identify the pulled-back
-scheme automorphism with the specified linear map of g. Inverse-image composition
-and the tensor and normalized Tate comparisons identify the coefficient maps: both
-are descent of the ordered shifted Tate tensor from the base. Transport the resulting
-exchange equation from bounded-below compact supports to the unbounded tower using
-affineLinearCompactComparison and the restriction compatibilities in that definition.
-All factors of the comparison are isomorphisms; their composite gives C. At the identity
-section, the matrix becomes 1, and the normalized identity Tate comparison together
-with unboundedEtaleCompactSupport_baseChange_id makes the pulled-back action the identity.
-The source
-coefficient is bounded below by exists_affineSpaceTopTrace; it is independent of the
-chosen normalization data. Dimension zero uses the identity adjunction, and an empty
-base satisfies the same equations. -/
+is part of this statement. -/
 theorem affineLinearAction_family
     (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

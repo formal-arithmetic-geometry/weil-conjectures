@@ -104,10 +104,6 @@ import all WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
 /-! # Transport of normalized completed open endpoints
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-cbc,
-lem-cbc-completed-extension-zero-comparison.proof.md, finite-exchange and final
-inverse-limit paragraphs (blueprint: lem-cbc-completed-open-endpoint-limit-transport).
-
 All towers are derived objects of the category of strict module sequences. The
 constant and completed coefficient rings remain distinct. The limit comparison
 is the constant-diagram mate: its augmentation normalization uniquely fixes it,
@@ -129,49 +125,37 @@ attribute [local irreducible] Functor.leftAdjoint Functor.mapDerivedCategory
   Functor.rightDerivedFunctor constantSheaf
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- Finite limits of strict diagrams are computed at each level.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- Finite limits of strict diagrams are computed at each level. -/
 instance cbcEndpointWhiskerLimits {C : Type uC} {D : Type uD}
     [Category.{vC} C] [Category.{vD} D] [HasFiniteLimits C]
     (F : C ⥤ D) [PreservesFiniteLimits F] :
     PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
   preservesFiniteLimits _ _ _ := inferInstance
 
-/-- Finite colimits of strict diagrams are computed at each level.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- Finite colimits of strict diagrams are computed at each level. -/
 instance cbcEndpointWhiskerColimits {C : Type uC} {D : Type uD}
     [Category.{vC} C] [Category.{vD} D] [HasFiniteColimits C]
     (F : C ⥤ D) [PreservesFiniteColimits F] :
     PreservesFiniteColimits ((Functor.whiskeringRight ℕᵒᵖ C D).obj F) where
   preservesFiniteColimits _ _ _ := inferInstance
 
-/-- The existing exact ringed extension by zero, with its universal open adjunction.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- The existing exact ringed extension by zero, with its universal open adjunction. -/
 abbrev cbcEndpointOpen {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   proEtaleRingOpenExtension j (d.completedRing T) (d.completedRing U) (d.integralRingIso j)
 
-/-- The ordinary section-normalized open adjunction.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- The ordinary section-normalized open adjunction. -/
 def cbcEndpointOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcEndpointOpen d j ⊣ proEtaleRingModulePullback j (d.completedRing T)
       (d.completedRing U) (d.integralRingIso j) := Adjunction.ofIsRightAdjoint _
 
-/-- The exact derived open adjunction, using the published derived pullback.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- The exact derived open adjunction, using the published derived pullback. -/
 def cbcEndpointDerivedOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     (cbcEndpointOpen d j).mapDerivedCategory ⊣ d.pull j :=
   Adjunction.ofNatIsoRight (cbcEndpointOpenAdj d j).mapDerivedCategoryRightDerivedAdjunction
     (proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
       (d.integralRingIso j)).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- The open adjunction on actual derived strict towers.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- The open adjunction on actual derived strict towers. -/
 def cbcEndpointTowerOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcTowerDerived (cbcEndpointOpen d j) ⊣ d.towerPull j :=
   Adjunction.ofNatIsoRight
@@ -192,9 +176,7 @@ private theorem cbcEndpointInverseMate_app
   erw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
   exact (unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ s) K).symm
 
-/-- The inverse quotient/open comparison is the transpose of the reduced open unit.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport). -/
+/-- The inverse quotient/open comparison is the transpose of the reduced open unit. -/
 def cbcEndpointReductionInv {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (K : d.derived U) :
     (cbcTowerDerived (cbcEndpointOpen d j)).obj ((completedReductionTower U d).obj K) ⟶
@@ -383,19 +365,7 @@ private theorem cbcEndpointReduction_isIso {U T : Scheme.{t}} (j : U ⟶ T)
         ((cbcEndpointOpen d j).mapDerivedCategory.obj K))) := inferInstance
   infer_instance
 
-/-- The canonical quotient/open comparison is invertible and natural before evaluation.
-Source: blueprint finite-exchange and final derived-limit paragraphs
-(blueprint: lem-cbc-completed-open-endpoint-limit-transport).
-Proof: Use the exact open adjunction and the canonical reduction/pullback
-comparison of def-weil-pbc-completed-pullback. On a K-flat representative the
-transpose is the tensor balancing map from open extension of its reduction to
-reduction of its open extension. The inverse is the usual balanced section map.
-Open extension preserves K-flatness: tensoring with an acyclic ambient complex
-is extension of tensor with its exact restriction. The maps commute with quotient
-transitions, differentials and quotient augmentations. They therefore give inverse
-strict tower maps and descend through quasi-isomorphisms. Naturality follows from
-the open unit and the normalized reduction/pullback comparison, without faithfulness
-of derived evaluation. -/
+/-- The canonical quotient/open comparison is invertible and natural before evaluation. -/
 theorem cbcEndpointReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] :
     (∀ K : d.derived U, IsIso (cbcEndpointReductionInv d j K)) ∧

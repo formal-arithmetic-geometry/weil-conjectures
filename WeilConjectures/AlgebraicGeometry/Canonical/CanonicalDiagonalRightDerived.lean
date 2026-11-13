@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-! # The canonical model of a diagonal right derived functor
 
 Source: Stacks Project, Tag 070G, derived functors computed by K-injectives.
-(blueprint: lem-diagonal-canonical-right-derived).
 -/
 
 @[expose] public noncomputable section
@@ -41,7 +40,7 @@ private theorem canonicalDerives (F : C ⥤ D) [F.Additive] :
   infer_instance
 
 /-- The full canonical unit on cochain complexes.
-Source: Stacks Tag 070G. (blueprint: lem-diagonal-canonical-right-derived). -/
+Source: Stacks Tag 070G. -/
 def canonicalDiagonalUnit (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] :
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -50,7 +49,7 @@ def canonicalDiagonalUnit (F : C ⥤ D) [F.Additive]
   naturality _ _ f := F.rightDerivedFunctorUnitQ_naturality f
 
 /-- The canonical cochain unit is universal, since it computes on K-injectives.
-Source: Stacks Tag 070G. (blueprint: lem-diagonal-canonical-right-derived). -/
+Source: Stacks Tag 070G. -/
 theorem canonicalDiagonalUnit_universal (F : C ⥤ D) [F.Additive]
     [Abelian.HasKInjectiveResolutions C] :
     F.rightDerivedFunctor.IsRightDerivedFunctor (canonicalDiagonalUnit F)
@@ -66,7 +65,7 @@ theorem canonicalDiagonalUnit_universal (F : C ⥤ D) [F.Additive]
 K-injective computation, shift structure and triangulation.
 
 Source: Stacks Project, Tag 070G, and the library's canonical right derived
-functor. (blueprint: lem-diagonal-canonical-right-derived).
+functor.
 
 Proof of the fields: a quasi-isomorphism between K-injective complexes is a
 homotopy equivalence. The additive functor preserves that homotopy equivalence,

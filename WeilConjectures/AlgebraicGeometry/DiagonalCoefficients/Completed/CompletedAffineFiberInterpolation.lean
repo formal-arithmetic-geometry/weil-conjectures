@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 import Mathlib.Topology.Piecewise
 
 /-! Finite interpolation by clopen stage tests.
-(blueprint: lem-sfb-completed-affine-fiber-interpolation)
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +23,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Scalar tests are natural functions on the representable on the slice; linearity
-and descent are not part of this definition.
-Source: the stage-test construction in `completedAffineFree_localDual_detect`.
-(blueprint: lem-sfb-completed-affine-fiber-interpolation) -/
+and descent are not part of this definition. -/
 abbrev completedAffineScalarTest (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (U : X.ProEtᵒᵖ) (W : X.ProEt) :=
   (Over.forget W).op ⋙ uliftYoneda.{u + 1}.obj U.unop ⟶
@@ -171,22 +168,7 @@ private theorem stageSection_eval (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 open Classical in
 /-- A finite set of arrows can be interpolated at one residue-field point by a natural
-scalar test. This asserts only values on generators, not detection in a module or sheaf.
-Source: `CompletedAffineFreeLocalDual.lean`, the clopen stage-graph part of the
-finite-support proof of `completedAffineFree_localDual_detect`.
-(blueprint: lem-sfb-completed-affine-fiber-interpolation)
-
-Proof: choose an affine etale presentation of U. At a point x, arrows whose residue-field
-maps differ are distinguished at some stage, by the limit universal property. For each
-of the finitely many arrows different from the selected one choose such a stage.
-The equality locus of two maps to that stage over X is clopen: the stage is etale
-and separated over X (its source is absolutely affine). Its characteristic function
-is continuous with values 0 and 1. On V over W compare an arbitrary arrow V to U
-with the selected arrow restricted from W. Transport this characteristic function
-through the coefficient model. Pullback of equality loci and naturality of the model
-make it a natural scalar test. Multiply the finitely many tests. At x it is one
-on the selected fiber class and zero on every other class. An empty product is
-one; if there is no selected index the assertion is vacuous. -/
+scalar test. This asserts only values on generators, not detection in a module or sheaf. -/
 theorem completedAffine_fiber_interpolation (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (M : CompletedAffineCoefficientModel l X)
     (U : X.ProEtᵒᵖ) (hU : proAffineEtale U.unop.hom) (W : X.ProEt)

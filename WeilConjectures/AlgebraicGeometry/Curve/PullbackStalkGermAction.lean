@@ -28,21 +28,7 @@ set_option linter.unusedVariables false in
 represented lifts by the same endomorphism of the geometric point.
 
 Source: Stacks Project, Tag 03QW, equation 59.56.0.1 and Remark 59.56.6;
-Tag 03Q1, Lemma 59.36.2(3).
-(blueprint: lem-sc-pullback-stalk-germ-action)
-
-Proof: Let k be the inverse of the canonical pullback stalk comparison, after
-substituting t = s followed by f. Its germ formula sends a section z at (V,v)
-to the germ at the lift (v,s) of the section obtained by the pullback unit and
-the comparison between abstract and constructed pullbacks. This formula follows
-from the existing germ descriptions of the point isomorphism and comap comparison,
-and naturality of the germ map for the comparison of sheaf pullbacks.
-For tau fixing s, the lift of tau followed by v equals tau followed by the lift
-of v: their first projections agree by construction, and their second projections
-agree because tau fixes s. Apply hb to the germ at v, and ha to the resulting
-pullback section at (v,s). The germ formula then gives k followed by a = b followed
-by k on every represented germ. The colimit hom-ext lemma gives equality on the
-whole stalk. Cancel k to obtain the requested square for j = k inverse. -/
+Tag 03Q1, Lemma 59.36.2(3). -/
 theorem exists_etale_pullback_stalk_germ_action
     {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) (t : Spec (.of Ω) ⟶ Y) (hst : s ≫ f = t)

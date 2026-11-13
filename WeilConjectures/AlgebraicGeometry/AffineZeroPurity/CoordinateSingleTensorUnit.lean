@@ -15,9 +15,6 @@ import all WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal
 import all WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic
 /-! # The unit law for the specified derived single tensorator
-
-Source: the degree-zero realization of the affine-space supported product.
-(blueprint: lem-pur-coordinate-single-tensor-unit).
 -/
 
 @[expose] public noncomputable section
@@ -125,17 +122,7 @@ private theorem single_left_unitor
   exact unit_of_inverse (DerivedCategory.singleFunctorObjUnitIso C) _ _ hε hu
 
 /-- The specified single tensor comparison carries a supplied coefficient-unit
-isomorphism to its canonical derived left unitor.
-
-Source: the empty factor in the affine-space supported-product construction.
-(blueprint: lem-pur-coordinate-single-tensor-unit).
-
-Proof: transport the monoidal single-cochain functor through the quotient comparison.
-Its tensorator is the specified cupSingleTensorMap. The cochain left-unit equation
-identifies its unit map with the identity; the localization unit factors through Qh
-and the homotopy quotient, whose inverses are precisely singleFunctorObjUnitIso.
-The lax left-unit axiom therefore gives the derived single left-unit equation.
-Finally apply tensorator naturality to the given coefficient-unit isomorphism. -/
+isomorphism to its canonical derived left unitor. -/
 theorem coordinate_single_tensor_unit
     {C : Type*} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]

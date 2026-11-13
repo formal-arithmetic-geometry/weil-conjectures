@@ -99,20 +99,7 @@ private theorem etale_open_iso_eq
 
 /-- Change of site preserves the fixed-coefficient open scalar mate.
 
-Source: Stacks Tags 03DI and 09AF; the site part of Step 2 of
-lem-finite-open-scalar-transport. (blueprint: lem-finite-open-scalar-site-transport).
-
-Proof: the right adjoints of the open/site composites are restriction along
-identical composites of site inclusions. Coefficient restriction commutes with
-these restrictions sectionwise. The site/coefficient comparison is the mate
-of that identity square; so is the site/open comparison. Paste this commuting
-cube and take the scalar mates. The mate of the fixed open/coefficient square
-is the displayed scalar transpose. On the etale face, uniqueness of the left
-adjoint of open restriction followed by coefficient restriction gives precisely
-openScalarIso. Exact termwise localization preserves the open/site and
-coefficient restriction squares and their mate unit equations. Thus the two
-pasted scalar mates agree on every unbounded derived object. This argument
-uses neither a proper map nor intrinsic coefficient realization. -/
+Source: Stacks Tags 03DI and 09AF. -/
 theorem fixedOpenScalar_site_transport
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

@@ -52,7 +52,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 Source: Stacks Project, Tag 09C6; Modules on Sites, Tags 093J--093M.
 This comparison takes place entirely in the abelian module categories.
-(blueprint: lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -461,30 +460,7 @@ private def scalarTensorComparison
 is natural in the input module and in every coefficient transition.
 
 Source: Stacks Project, Tag 09C6, the ordinary quotient tensor calculation;
-Modules on Sites, Tags 093J--093M, completed constant algebra flatness and finite reduction.
-(blueprint: lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison).
-
-Proof: apply completed constant algebra flatness to the Noetherian ring A after
-lifting it to the site's coefficient universe. Identify its constant quotient system
-with the prescribed finite coefficient sheaves by the constants-to-functions maps.
-These maps commute with the quotient homomorphisms. The universal property of the
-limit identifies the completed rings and their projections, and the normalization
-of completedAdicScalar identifies the scalar action. Flatness of that algebra makes
-ordinary completed scalar extension exact; cokernels are preserved by its scalar
-adjunction. Finite reduction gives H(A/I^(n+1))≅(A/I^(n+1))_T, with the prescribed
-completed action. Constant realization and ordinary scalar extension commute with
-tensor products. Their tensor comparisons and the preceding coefficient comparison
-therefore identify H(M) tensor_(A_T) (A/I^(n+1))_T with
-H(M tensor_A A/I^(n+1)). Use inverse finite reduction to represent a coefficient
-section locally by t tensor a. On these pure generators the forward map sends
-(s tensor m) tensor red(t tensor a) to st tensor (m tensor a); its inverse sends
-s tensor (m tensor a) to (s tensor m) tensor red(1 tensor a). Balancing proves
-well-definedness, and local tensor generation proves that the maps are inverse.
-The same formulas commute with every module map and quotient homomorphism, so the
-comparisons form the stated natural isomorphism of functors to diagrams. Carry the
-ULift equivalences through the formula. No complex, derived functor, K-flatness,
-boundedness, projectivity or inverse-limit exactness assertion occurs here.
-For I=A or A=0 the coefficient modules are zero and the same maps apply. -/
+Modules on Sites, Tags 093J--093M, completed constant algebra flatness and finite reduction. -/
 theorem finitePerfectAdicOrdinaryCoefficient_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     (PreservesFiniteLimits (completedAdicScalarExtension X d) ∧
@@ -505,10 +481,7 @@ theorem finitePerfectAdicOrdinaryCoefficient_comparison
     (adicOrdinaryCoefficientDiagram d.ideal) (finitePerfectAdicCoefficientDiagram X d) e⟩⟩
 
 /-- Ordinary coefficient balancing extends degreewise to a diagram of complexes.
-Source: Stacks Project, Tag 09C6
-(blueprint: lem-weil-pbc-finite-perfect-adic-ordinary-coefficient-comparison).
-Proof: apply the ordinary natural isomorphism to complexes, using the composition
-comparisons for the termwise functors; transpose the resulting complex of diagrams. -/
+Source: Stacks Project, Tag 09C6. -/
 theorem finitePerfectAdicTensorComplexDiagram_ordinaryComparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (P : CochainComplex (ModuleCat.{t} A) ℤ) :

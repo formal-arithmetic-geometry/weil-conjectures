@@ -11,8 +11,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.FreeMap
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFlatCoefficientCalculus
 
 /-! # Finite coefficient restriction preserves constructibility
-
-Source: blueprint latest, uniform constructible Ext, finite-basis restriction argument.
 -/
 
 @[expose] public section
@@ -64,17 +62,7 @@ private theorem constructible_restrict_of_free
 namespace AlgebraicGeometry.ProEtale
 
 /-- Restricting a constructible sheaf along an inclusion of finite coefficient fields
-preserves the upstream local finite presentation predicate.
-
-Source: blueprint latest, sk-lem-uniform-constructible-ext.proof.md, algebraic-closure
-coefficient argument. (blueprint: lem-sfb-finite-coefficient-restriction-constructible).
-
-Proof: choose a basis of F over E. Its continuous coordinates identify the restricted
-regular F coefficient module with a finite free E coefficient module. Inverse image
-preserves this identification on every stratum and every member of its presentation
-cover. Exact additive restriction takes a presentation F^m -> F^n -> M -> 0 to
-E^(m[F:E]) -> E^(n[F:E]) -> Res M -> 0. Use the same stratification and covers.
-The empty stratification and the zero module require no separate choices. -/
+preserves the upstream local finite presentation predicate. -/
 theorem finiteCoefficientRestriction_constructible
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)

@@ -18,11 +18,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Kernels
 /-! # Finite reductions of integral scalar-model constructible sheaves
 
 The coordinate definitions are shared by the chart comparison and descent.
-(blueprint: def-sfb-finite-model-quotient-coordinates).
 
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof,
-Local models, Locality and Strata paragraphs; Stacks Tags 093J, 093M, 06YQ, 06YY and 09AJ
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible).
+Source: Stacks Tags 093J, 093M, 06YQ, 06YY and 09AJ.
 
 The index n denotes the positive exponent n+1. All reductions use the existing actual
 quotient map and take values in the derived category over the quotient coefficient ring.
@@ -44,40 +41,30 @@ namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The recorded integral scalar ring. Source: blueprint Local models
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The recorded integral scalar ring. -/
 abbrev A := Padic.coefficientExtensionIntegers l E
 
-/-- The recorded positive-level scalar quotient. Source: blueprint Local models
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The recorded positive-level scalar quotient. -/
 abbrev R (n : ℕ) := Padic.coefficientExtensionRing l E (n + 1)
 
-/-- Named quotient-module coordinates for the specified category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Named quotient-module coordinates for the specified category. -/
 def quotientModules (n : ℕ) (T : Scheme.{u}) :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   FiniteDiscreteOrdinary.Internal (R l E n) T
 
-/-- Named quotient-module coordinates for the specified category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Named quotient-module coordinates for the specified category. -/
 @[instance_reducible] def quotientModuleCategory (n : ℕ) (T : Scheme.{u}) :
     Category.{u + 1} (quotientModules l E n T) :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   inferInstanceAs (Category (FiniteDiscreteOrdinary.Internal (R l E n) T))
 
-/-- Named quotient-module coordinates for the specified category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Named quotient-module coordinates for the specified category. -/
 @[instance_reducible] def quotientModuleAbelian (n : ℕ) (T : Scheme.{u}) :
     @Abelian (quotientModules l E n T) (quotientModuleCategory l E n T) := by
   dsimp only [quotientModuleCategory, quotientModules]
   infer_instance
 
-/-- Named quotient-module coordinates for the specified category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Named quotient-module coordinates for the specified category. -/
 @[instance_reducible] def quotientModuleDerived (n : ℕ) (T : Scheme.{u}) :
     @HasDerivedCategory.{u + 1} (quotientModules l E n T)
       (quotientModuleCategory l E n T) (quotientModuleAbelian l E n T) := by
@@ -86,49 +73,38 @@ Source: blueprint finite coefficient coordinates
 
 attribute [instance] quotientModuleCategory quotientModuleAbelian quotientModuleDerived
 
-/-- Named quotient-module coordinates for the specified category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Named quotient-module coordinates for the specified category. -/
 def quotientHomology (n : ℕ) (T : Scheme.{u}) (q : ℤ) :
     DerivedCategory (quotientModules l E n T) ⥤ quotientModules l E n T :=
   DerivedCategory.homologyFunctor _ q
 
-/-- Ordinary quotient-module coordinates with the existing category structures.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Ordinary quotient-module coordinates with the existing category structures. -/
 def ordinaryHomology (n : ℕ) (T : Scheme.{u}) (q : ℤ) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology T)
       (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))) ⥤ Sheaf (Scheme.ProEt.topology T)
       (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))) :=
   DerivedCategory.homologyFunctor _ q
 
-/-- Exact quotient inverse image in the named module category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Exact quotient inverse image in the named module category. -/
 @[instance_reducible] def quotientUpperStar (n : ℕ) {V T : Scheme.{u}} (f : T ⟶ V) :
     quotientModules l E n V ⥤ quotientModules l E n T :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   CondensedRing.upperStar (FiniteDiscreteOrdinary.coefficient (R l E n)) f
 
-/-- Derived quotient inverse image in the named category.
-Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- Derived quotient inverse image in the named category. -/
 def quotientPullback (n : ℕ) {V T : Scheme.{u}} (f : T ⟶ V) :
     DerivedCategory (quotientModules l E n V) ⥤
       DerivedCategory (quotientModules l E n T) :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   CondensedRing.moduleObjectDerivedPullback (FiniteDiscreteOrdinary.coefficient (R l E n)) f
 
-/-- The normalized encoding with exactly the recorded quotient topology.
-Source: blueprint finite-coefficient coordinates
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The normalized encoding with exactly the recorded quotient topology. -/
 abbrev Encoding (n : ℕ) (T : Scheme.{u}) :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   FiniteDiscreteOrdinary.Encoding (R l E n) T
 
 /-- The specified ordinary encoding with its source written as the actual quotient
-module category. Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+module category. -/
 def fixedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
     quotientModules l E n T ≌
       Sheaf (Scheme.ProEt.topology T)
@@ -137,8 +113,7 @@ def fixedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
   e.ordinary.trans e.fixed
 
 /-- The specified derived encoding with its source written as the actual quotient
-module category. Source: blueprint finite coefficient coordinates
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+module category. -/
 def derivedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
     DerivedCategory (quotientModules l E n T) ≌
       DerivedCategory (Sheaf (Scheme.ProEt.topology T)
@@ -146,49 +121,37 @@ def derivedEncoding (n : ℕ) (T : Scheme.{u}) (e : Encoding l E n T) :
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   e.fixedDerived
 
-/-- The recorded scalar-extension model, with the induced norm topology on A.
-Source: blueprint Local models
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The recorded scalar-extension model, with the induced norm topology on A. -/
 def model (T : Scheme.{u}) (P : ModuleCat.{u + 1} (A l E)) :
     AdicCompletion.Modules l E T :=
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   (FiniteConstantModel.modelFunctor (A l E) T).obj P
 
-/-- Derived reduction of a sheaf in degree zero along the actual quotient homomorphism.
-Source: blueprint Local models
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- Derived reduction of a sheaf in degree zero along the actual quotient homomorphism. -/
 def reduction (T : Scheme.{u}) (M : AdicCompletion.Modules l E T) (n : ℕ) :
     DerivedCategory (quotientModules l E n T) :=
   (AdicCompletion.derivedReduction l E T n).obj ((DerivedCategory.singleFunctor _ 0).obj M)
 
 /-- Reduce every entry of the given scalar matrix by the actual quotient homomorphism.
-The lift only puts the scalar coordinates in the site's coefficient universe.
-Source: blueprint specified scalar resolution
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+The lift only puts the scalar coordinates in the site's coefficient universe. -/
 def matrix (n a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     Matrix (Fin b) (Fin a) (ULift.{u + 1} (R l E n)) :=
   fun i j ↦ ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
     (v i j))
 
-/-- The specified reduced scalar linear map, including ranks zero.
-Source: blueprint specified scalar resolution
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The specified reduced scalar linear map, including ranks zero. -/
 def differential (n a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     ModuleCat.of (ULift.{u + 1} (R l E n)) (Fin a → ULift.{u + 1} (R l E n)) ⟶
       ModuleCat.of (ULift.{u + 1} (R l E n)) (Fin b → ULift.{u + 1} (R l E n)) :=
   ModuleCat.ofHom (matrix l E n a b v).mulVecLin
 
-/-- The literal complex of free quotient modules in degrees -1 and 0.
-Source: blueprint specified scalar resolution
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The literal complex of free quotient modules in degrees -1 and 0. -/
 def scalarComplex (n a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n))) ℤ :=
   HomologicalComplex.double (differential l E n a b v)
     (c := ComplexShape.up ℤ) (i₀ := -1) (i₁ := 0) (by decide)
 
-/-- Constant realization of that literal two-term scalar complex in ordinary coordinates.
-Source: blueprint finite-coefficient coordinates
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- Constant realization of that literal two-term scalar complex in ordinary coordinates. -/
 def ordinaryComplex (T : Scheme.{u}) (n a b : ℕ)
     (v : Matrix (Fin b) (Fin a) (A l E)) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology T)
@@ -198,9 +161,7 @@ def ordinaryComplex (T : Scheme.{u}) (n a b : ℕ)
       (ModuleCat.{u + 1} (ULift.{u + 1} (R l E n)))).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (scalarComplex l E n a b v))
 
-/-- The original integral scalar matrix in the lifted coordinates of the finite free modules.
-Source: blueprint specified scalar resolution
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+/-- The original integral scalar matrix in the lifted coordinates of the finite free modules. -/
 def integralDifferential (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
     ModuleCat.of (A l E) (Fin a → ULift.{u + 1} (A l E)) ⟶
       ModuleCat.of (A l E) (Fin b → ULift.{u + 1} (A l E)) :=
@@ -212,9 +173,7 @@ def integralDifferential (a b : ℕ) (v : Matrix (Fin b) (Fin a) (A l E)) :
           (ULift.moduleEquiv : ULift.{u + 1} (A l E) ≃ₗ[A l E] A l E)).toLinearMap))
 
 /-- Internal coordinates for the literal two-term quotient complex, transported by
-exactly the normalized finite coefficient equivalence (not an arbitrary equivalence).
-Source: blueprint specified scalar resolution and ordinary coordinates
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+exactly the normalized finite coefficient equivalence (not an arbitrary equivalence). -/
 def internalComplex (T : Scheme.{u}) (n a b : ℕ)
     (v : Matrix (Fin b) (Fin a) (A l E)) (e : Encoding l E n T) :
     DerivedCategory (quotientModules l E n T) :=
@@ -222,9 +181,7 @@ def internalComplex (T : Scheme.{u}) (n a b : ℕ)
   (derivedEncoding l E n T e).inverse.obj (ordinaryComplex l E T n a b v)
 
 /-- Properties of a specified quotient chart, kept as a record so projections do
-not normalize the other derived cohomology types.
-Source: blueprint Local models and Locality
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+not normalize the other derived cohomology types. -/
 structure ChartCalculation (T : Scheme.{u}) (n a b : ℕ)
     (v : Matrix (Fin b) (Fin a) (A l E)) (e : Encoding l E n T)
     (D : DerivedCategory (quotientModules l E n T)) : Prop where
@@ -257,8 +214,7 @@ structure ChartCalculation (T : Scheme.{u}) (n a b : ℕ)
 
 /-- The chart calculation for every specified scalar resolution on every member of
 any chosen stratification and pro-etale covers. The two cohomology identifications
-retain the quotient coefficient action. Source: blueprint Local models and Locality
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+retain the quotient coefficient action. -/
 structure LocalCalculationAt (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (enc : ∀ T : Scheme.{u}, Encoding l E n T)
     (K : DerivedCategory (quotientModules l E n V)) : Prop where
@@ -279,17 +235,14 @@ structure LocalCalculationAt (V : Scheme.{u}) (M : AdicCompletion.Modules l E V)
         ((quotientPullback l E n
           ((C i).f j ≫ S.immersion i)).obj K)
 
-/-- The universal chart calculation at the actual specified reduction.
-Source: blueprint Local models and Locality
-(blueprint: def-sfb-finite-model-quotient-coordinates). -/
+/-- The universal chart calculation at the actual specified reduction. -/
 abbrev LocalCalculation (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (enc : ∀ T : Scheme.{u}, Encoding l E n T) : Prop :=
   LocalCalculationAt l E V M n enc (reduction l E V M n)
 
 /-- Ordinary boundedness and intrinsic constructibility in the recorded finite-ring
 encoding. The explicit finiteness witness installs only the finiteness just asserted
-by the main theorem. Source: blueprint finite constructible cohomology clause
-(blueprint: lem-sfb-finite-model-sheaf-quotient-constructible). -/
+by the main theorem. -/
 def OrdinaryConclusion (V : Scheme.{u}) (M : AdicCompletion.Modules l E V) (n : ℕ)
     (hf : Finite (R l E n)) (e : Encoding l E n V) : Prop :=
   let := hf

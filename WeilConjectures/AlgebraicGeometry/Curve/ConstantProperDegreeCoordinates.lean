@@ -19,10 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-!
 # Degree-normalized proper cohomology coordinates
-
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proof of proposition-cohomology-smooth-affine-curve, proper case in degree two
-(blueprint: lem-sc-constant-proper-degree-coordinates).
 -/
 
 @[expose] public section

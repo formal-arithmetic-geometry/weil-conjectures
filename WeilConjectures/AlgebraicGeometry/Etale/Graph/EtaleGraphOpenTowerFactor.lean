@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphEtaleOpenComposit
 /-! # Graph tower factorization before endpoint normalization
 
 Source: Stacks Project, Tags 0F4L, 0F7B and 0F7J.
-(blueprint: lem-pur-etale-graph-open-tower-factor)
 -/
 
 @[expose] public section
@@ -186,7 +185,6 @@ comparison `k`; the original tower formula follows by cancellation.
 This involves only one compact-support composition, and no proper/etale interchange.
 Source: Stacks Project, etale-cohomology.tex Tag 0F4L (graph comparison), and
 more-etale.tex Tags 0F7B and 0F7J (the proper/open composition tower).
-(blueprint: lem-pur-etale-graph-open-tower-factor).
 
 Proof in words:
 Take the tower e over c. The every-tower composition formula writes the left

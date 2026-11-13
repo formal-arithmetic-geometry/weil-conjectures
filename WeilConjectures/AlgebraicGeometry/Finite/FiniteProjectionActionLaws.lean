@@ -28,9 +28,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
 /-!
 # Tensor-action and open-counit identities for finite-level projection maps
 
-Source: blueprint chap-Smooth-purity, prose-09-16, expanded Step 6;
-Stacks Project Tags 0B56, 0E8I and 0GL1
-(blueprint: lem-pur-finite-projection-action-laws).
+Source: Stacks Project Tags 0B56, 0E8I and 0GL1.
 
 The eight statements give the proper, open, open-counit and chosen-compactification
 identities on each of the pro-etale and ordinary etale sites. All projection maps are
@@ -87,9 +85,7 @@ end CategoryTheory.Functor
 
 namespace WeilConjectures.PurityFiniteSetting
 
-/-- Finiteness of the lifted positive-level quotient used in the projection identities.
-Source: the finite coefficient convention and coefficient-extension finiteness
-(blueprint: lem-pur-finite-projection-action-laws). -/
+/-- Finiteness of the lifted positive-level quotient used in the projection identities. -/
 noncomputable instance projectionAction_coefficientFinite (P : PurityFiniteSetting.{u}) :
     Finite P.Coefficient :=
   @Finite.of_equiv P.Coefficient P.Ring
@@ -102,8 +98,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical reassociation of the derived tensor bifunctor, exposed before
 specializing the coefficient category to avoid comparing two monoidal instance terms.
-Source: Stacks Tag 0FPT, reassociation on total tensors
-(blueprint: lem-pur-finite-projection-action-laws). -/
+Source: Stacks Tag 0FPT, reassociation on total tensors. -/
 noncomputable def projectionActionAssociator
     (B : Type v) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

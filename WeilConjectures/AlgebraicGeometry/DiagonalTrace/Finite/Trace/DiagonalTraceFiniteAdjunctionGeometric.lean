@@ -50,17 +50,7 @@ private theorem adjunct_naturality
 
 The previous arbitrary-function interface was false: its values on supported
 classes do not determine it on all geometric classes. The source uses the
-operation induced by direct image, which is the explicit operation below.
-
-Source: geometric classes proof (3), forgetting support, together with the
-coefficient-system derived comparison and exact-cone projection.
-(blueprint: lem-sfb-diagonal-trace-finite-adjunction-geometric).
-
-Proof: expand the operation as the actual coefficient unit, direct image of the
-input arrow, and the finite evaluation comparison. Naturality of that comparison
-moves theta to the right. The coefficient-unit seed equation identifies the
-remaining prefix. Naturality of the adjunction hom-equivalence combines the
-coefficient pullback and theta into the required adjunct. -/
+operation induced by direct image, which is the explicit operation below. -/
 theorem diagonalTrace_finiteAdjunction_geometric
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

@@ -162,11 +162,6 @@ public import WeilConjectures.AlgebraicGeometry.AdicConstructibilityPredicateCom
 /-!
 # Adic constructibility predicates on Noetherian schemes
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-existence,
-`det-existence-restriction.proof.md`, integral and rational cases, and
-sec-proetale-coefficients/sk-def-sfb-constructible, clauses 1--2 and final paragraph
-(blueprint: lem-sfb-adic-constructibility-predicate-comparison).
-
 The comparison uses the specified condensed multiplication and the existing internal
 module predicates. Under the section-action equivalence these are the same module sheaves.
 Both bounded predicates live in the ordinary derived category; no completion is imposed.
@@ -393,33 +388,7 @@ private theorem fieldCoefficientIso (E : Type) [NormedField E] :
 /-- Stratified local finite presentation agrees with finite constant scalar local models
 for the three certified adic coefficient rings, including integral torsion modules.
 Consequently their bounded constructible object properties in the same ordinary derived
-category agree. The two existentially quantified stratifications need not be identical.
-
-Source: blueprint main-20261015, `det-existence-restriction.proof.md`, integral/rational
-cases; `sk-def-sfb-constructible/_section.md`, clauses 1--2 and final paragraph
-(blueprint: lem-sfb-adic-constructibility-predicate-comparison).
-
-Proof:
-1. The general comparison from local models is the proved helper
-`comparison_of_local_models` in the integral comparison module. Noetherianity makes X
-qcqs and every stratum Noetherian. Transport finite presentations along the canonical
-coefficient isomorphisms; constant local models imply local finite presentation.
-2. For integral coefficients identify the valuation-topology ring of integers on
-`ULift E` with the embedded ring of integers. The absolute value is the spectral norm,
-which agrees with the given extension norm. This gives an isometric ring isomorphism,
-hence a condensed ring isomorphism. Apply `integralLfpConstantModelComparison` and
-transport both predicates along that isomorphism. Integral torsion modules are retained.
-3. For finite field coefficients use `ULift E` to match the scheme universe. Continuous
-functions into `ULift E` and E are canonically isomorphic condensed rings. On every
-Noetherian stratum `exists_finiteFree_cover_of_condensedField_lfp` gives a finite free
-cover. Its rank-n module is the pullback of the rank-n free module on the point, finitely
-presented as the cokernel of a zero map. These are finite constant local models.
-4. For the specified algebraic-closure ring use `condensedQbar_lfp_locally_free` and the
-same free scalar model. This keeps the finite-subextension-valued coefficient ring.
-5. Substitute the module equivalence in every cohomological degree. The boundedness
-condition is identical, so the two object properties agree in the ordinary derived
-category.
--/
+category agree. The two existentially quantified stratifications need not be identical. -/
 theorem adicConstructibilityPredicateComparison
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X]

@@ -43,15 +43,13 @@ namespace AlgebraicGeometry
 variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (k' : Type u) [Field k']
   [Algebra k k']
 
-/-- The base change `C_{k'} ⟶ Spec k'` of a `k`-scheme `C` along a field extension `k ⊆ k'`.
-(blueprint: `theorem-cohomology-curves--6`) -/
+/-- The base change `C_{k'} ⟶ Spec k'` of a `k`-scheme `C` along a field extension `k ⊆ k'`. -/
 noncomputable abbrev Scheme.Hom.baseChangeField :
     pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))) ⟶ Spec (.of k') :=
   pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))
 
 /-- The pullback map `ρᵠ : Hᵠ(C_ét, F) ⟶ Hᵠ((C_{k'})_ét, F_{k'})` along the projection
-`π_{k'} : C_{k'} ⟶ C`, where `F_{k'} = π_{k'}^* F`.
-(blueprint: `theorem-cohomology-curves--6`) -/
+`π_{k'} : C_{k'} ⟶ C`, where `F_{k'} = π_{k'}^* F`. -/
 noncomputable abbrev Scheme.Hom.fieldExtensionCohomologyMap
     (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :=
   Etale.cohomologyMap (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) F q
@@ -59,8 +57,7 @@ noncomputable abbrev Scheme.Hom.fieldExtensionCohomologyMap
 /-- **Base change of a curve.** Let `C` be a smooth separated quasi-compact curve over `k`,
 of relative dimension one, and `k'` a field extension of `k`. Then `C_{k'}` is a smooth
 separated curve over `k'` of relative dimension one; it is proper if `C` is, and affine if `C`
-is.
-(blueprint: `lem-sc-base-change-curve`) -/
+is. -/
 theorem Scheme.Hom.baseChangeField_isCurve [SmoothOfRelativeDimension 1 f] [IsSeparated f]
     [QuasiCompact f] :
     SmoothOfRelativeDimension 1 (f.baseChangeField k') ∧ IsCurve (f.baseChangeField k') ∧
@@ -78,8 +75,7 @@ theorem Scheme.Hom.baseChangeField_isCurve [SmoothOfRelativeDimension 1 f] [IsSe
 
 /-- **Base change of a proper connected curve.** Over an algebraically closed field `k`, the
 base change of a smooth proper connected curve to a field extension `k'` is a smooth proper
-connected curve over `k'`: the curve has a rational point, so it is geometrically connected.
-(blueprint: `lem-sc-base-change-curve`) -/
+connected curve over `k'`: the curve has a rational point, so it is geometrically connected. -/
 theorem IsConnectedCurve.baseChangeField [IsAlgClosed k] [IsConnectedCurve f] [Smooth f]
     [IsProper f] : IsConnectedCurve (f.baseChangeField k') := by
   have := IsConnectedCurve.connectedSpace (f := f)
@@ -165,8 +161,7 @@ pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`: it
 (`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`), and both groups are
 finite of the same order by the curve estimate
 (`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`), since `C_{k'}` is again a
-smooth proper connected curve of the same genus.
-(blueprint: `proposition-cohomology-smooth-affine-curve`, proper case) -/
+smooth proper connected curve of the same genus. -/
 theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper [IsAlgClosed k]
     [IsConnectedCurve f] [Smooth f] [IsProper f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
     (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by

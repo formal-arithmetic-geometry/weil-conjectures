@@ -35,11 +35,11 @@ the degree of divisors, and shows that principal divisors have degree zero.
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.exists_divisorClassGroup_addEquiv_pic`: `Cl(C) ≅ Pic(C)` for a
-  smooth integral curve (blueprint `proposition-cohomology-smooth-affine-curve`).
+  smooth integral curve.
 - `AlgebraicGeometry.Scheme.picDegreeHom_toPic`: `deg 𝒪_C(D) = deg D`.
 - `AlgebraicGeometry.Scheme.surjective_picDegreeHom`: the degree is surjective.
 - `AlgebraicGeometry.Scheme.exists_mulEquiv_prod_ker_picDegreeHom`:
-  `Pic(C) ≅ ℤ × Pic⁰(C)` (blueprint `corollary-degree-jacobian--1`).
+  `Pic(C) ≅ ℤ × Pic⁰(C)`.
 
 ## Implementation notes
 
@@ -50,8 +50,7 @@ divisors, transported along `Cl(C) ≅ Pic(C)`; the two agree by
 
 The module `𝒪_C(D)` of the blueprint is a subsheaf of the constant sheaf `k(C)`, which is not
 available. Here `D ↦ [𝒪_C(D)]` is defined as the homomorphism sending `[P]` to the class of
-`𝓘_Pᵛ`; for effective `D` the two constructions agree (blueprint
-`theorem-riemann-roch-coherent-serre-duality`), so they define the same map to `Pic(C)`.
+`𝓘_Pᵛ`; for effective `D` the two constructions agree, so they define the same map to `Pic(C)`.
 -/
 
 @[expose] public section
@@ -71,7 +70,7 @@ section Degree
 variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
 
 variable (k C) in
-/-- Blueprint `corollary-degree-jacobian--1`: Picard group, degree, `Pic⁰`
+/-- Picard group, degree, `Pic⁰`
 
 The **degree homomorphism** `deg : Pic(C) → ℤ` of a smooth proper curve `C` over `k`, with
 values in `Multiplicative ℤ` since the group law of `Pic(C)` is written multiplicatively. The
@@ -79,9 +78,7 @@ degree of the class of `ℒ` is `deg ℒ = χ(ℒ) - χ(𝒪_C)`
 (`AlgebraicGeometry.Scheme.Hom.picDegree`); it is a homomorphism by
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj`. Its kernel is `Pic⁰(C)`
 (`AlgebraicGeometry.Scheme.coe_ker_picDegreeHom`), and it is the degree of divisors
-(`AlgebraicGeometry.Scheme.picDegreeHom_toPic`).
-
-(blueprint: `corollary-degree-jacobian--1`) -/
+(`AlgebraicGeometry.Scheme.picDegreeHom_toPic`). -/
 noncomputable def picDegreeHom : C.Pic →* Multiplicative ℤ where
   toFun L := .ofAdd ((C ↘ Spec (.of k)).picDegree L)
   map_one' := by
@@ -238,9 +235,7 @@ The blueprint compares two sheaves: `𝒪_C(E) ⊆ k(C)` (functions `g` with `di
 enters the formalisation only through its class `AlgebraicGeometry.Scheme.Divisor.toPic`; the
 statement is therefore the equality of the classes in `Pic(C)`, which is the content used
 downstream. See `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.toMul_toPic_eq` for the
-version starting from an effective Cartier divisor, an invertible ideal sheaf.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+version starting from an effective Cartier divisor, an invertible ideal sheaf. -/
 lemma Divisor.toMul_toPic_mapRange_eq_dual (E : closedPoints C →₀ ℕ) :
     haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E).isInvertible_dual_toModules
     (Divisor.toPic k C (E.mapRange Nat.cast Nat.cast_zero)).toMul =
@@ -254,9 +249,7 @@ with divisor `D = ∑_P ord_P(𝓘) [P]`. Then the class `[𝒪_C(D)]` of the di
 (`AlgebraicGeometry.Scheme.Divisor.toPic`) is the class of `𝒪_C(D) = 𝓘ᵛ`. Indeed `𝓘` is the
 ideal sheaf of the effective divisor `D`
 (`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.exists_eq_idealSheaf`), and
-`AlgebraicGeometry.Scheme.Divisor.toMul_toPic_mapRange_eq_dual` applies.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`AlgebraicGeometry.Scheme.Divisor.toMul_toPic_mapRange_eq_dual` applies. -/
 theorem IdealSheafData.IsInvertible.toMul_toPic_eq [IsIntegral C] [IsNoetherian C]
     {I : C.IdealSheafData} (hI : I.IsInvertible) :
     haveI := hI.isInvertible_dual_toModules
@@ -288,7 +281,7 @@ lemma Divisor.mapRange_toNat_sub (D : C.Divisor) :
     Pi.neg_apply]
   exact Int.toNat_sub_toNat_neg (D P)
 
-/-- Blueprint `proposition-cohomology-smooth-affine-curve`: `Pic` is the divisor class group for
+/-- `Pic` is the divisor class group for
 smooth curves
 
 Let `C` be a smooth integral (equivalently, connected) curve over `k`, proper or not. Then the
@@ -301,9 +294,7 @@ for `D = div g` multiplication by `g` is an isomorphism `𝒪_C(-E₂) ≅ 𝒪_
 since conversely every isomorphism `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)` is multiplication by some `g` with
 `div g = E₁ - E₂` (`AlgebraicGeometry.Scheme.Divisor.exists_ord_eq_of_nonempty_iso`). It is
 surjective since every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, a nonzero rational section
-giving a nonzero morphism `𝒪_C(-E₂) ⟶ ℒ` whose zero scheme is a sum of points
-(`AlgebraicGeometry.Scheme.Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj`;
-blueprint `theorem-riemann-roch-coherent-serre-duality--1`).
+giving a nonzero morphism `𝒪_C(-E₂) ⟶ ℒ` whose zero scheme is a sum of points.
 
 This is the identification `Cl(C) ≅ Pic(C)` asserted in blueprint `def-sc-divisor`. -/
 theorem exists_divisorClassGroup_addEquiv_pic [IsCurve (C ↘ Spec (.of k))] [IsIntegral C]
@@ -386,9 +377,7 @@ noncomputable def fieldPointOfClosedPoint (P : closedPoints C) :
     (pointOfClosedPoint_comp (C ↘ Spec (.of k)) P.1 P.2).trans (by
       rw [Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id])⟩
 
-/-- Over an algebraically closed field, the class `𝒪_C(P)` of a closed point has degree one.
-
-(blueprint: `corollary-degree-jacobian--1`) -/
+/-- Over an algebraically closed field, the class `𝒪_C(P)` of a closed point has degree one. -/
 lemma picDegreeHom_ofClosedPoint (P : closedPoints C) :
     picDegreeHom k C (Pic.ofClosedPoint k P) = .ofAdd 1 := by
   have hJ := isInvertible_vanishingIdeal_of_isClosed (C ↘ Spec (.of k)) P.2
@@ -398,9 +387,7 @@ lemma picDegreeHom_ofClosedPoint (P : closedPoints C) :
   rwa [fieldPointOfClosedPoint, ker_pointOfClosedPoint] at h
 
 /-- **The degree on `Pic(C)` is the degree of divisors.** Over an algebraically closed field,
-`deg 𝒪_C(D) = deg D` for every divisor `D` on a smooth proper curve `C`.
-
-(blueprint: `corollary-degree-jacobian--1`) -/
+`deg 𝒪_C(D) = deg D` for every divisor `D` on a smooth proper curve `C`. -/
 theorem picDegreeHom_toPic (D : C.Divisor) :
     picDegreeHom k C (Divisor.toPic k C D).toMul = .ofAdd (Divisor.degree C D) := by
   induction D using Finsupp.induction_linear with
@@ -418,7 +405,7 @@ theorem surjective_picDegreeHom [Nonempty C] : Function.Surjective (picDegreeHom
   refine ⟨Pic.ofClosedPoint k ⟨P, hP⟩ ^ n.toAdd, ?_⟩
   rw [map_zpow, picDegreeHom_ofClosedPoint, ← ofAdd_zsmul, smul_eq_mul, mul_one, ofAdd_toAdd]
 
-/-- Blueprint `corollary-degree-jacobian--1`: Structure of the Picard group of a proper curve
+/-- Structure of the Picard group of a proper curve
 
 Let `C` be a nonempty (for instance, connected) smooth proper curve over an algebraically closed
 field `k`. The degree sequence `0 → Pic⁰(C) → Pic(C) → ℤ → 0` splits, so
@@ -482,9 +469,7 @@ variable (k) in
 include k in
 /-- **Principal divisors have degree zero** on a smooth proper integral curve over an
 algebraically closed field: `deg div(f) = ∑_P v_P(f) = 0`
-(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`).
-
-(blueprint: `corollary-degree-jacobian--1`) -/
+(`AlgebraicGeometry.Scheme.finsum_ord_eq_zero`). -/
 theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (C.div f) = 0 := by
   have := QuasiCompact.compactSpace_of_compactSpace (C ↘ Spec (.of k))
   rw [← finsum_ord_eq_zero k C f.toMul.ne_zero, Divisor.degree_apply, Finsupp.sum,
@@ -494,7 +479,7 @@ theorem degree_div_eq_zero (f : Additive C.functionFieldˣ) : Divisor.degree C (
     finsum_mem_def]
   rw [(Set.indicator_eq_self (s := closedPoints C)).2 fun y hy ↦ isClosed_of_ord_ne_zero k hy]
 
-/-- Blueprint `corollary-degree-jacobian--1`: Picard group, degree, `Pic⁰`
+/-- Picard group, degree, `Pic⁰`
 
 Let `C` be a smooth proper integral (equivalently, connected) curve over an algebraically closed
 field `k`. Its Picard group `Pic(C)` is the group of invertible `𝒪_C`-modules up to isomorphism,

@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-transition-words).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -52,9 +48,7 @@ attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 attribute [local irreducible] restrictionEvaluation supportEvaluation comparison
 
 /-- First path of the actual b transition square: apply b at n, then the target
-system's reduction. Scalar associativity identifies its source with the composite map.
-Source: blueprint (2), proof step 8, R_n to S_n to S_m
-(blueprint: def-sp-field-shriek-system-transition-words). -/
+system's reduction. Scalar associativity identifies its source with the composite map. -/
 @[irreducible] def quotientAfterComparison (D : Models P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (e : EvaluationLaw P D c) {E F : Index P} (h : E ≤ F) {m n : ℕ} (v : m ≤ n)
@@ -72,9 +66,7 @@ Source: blueprint (2), proof step 8, R_n to S_n to S_m
     (comparisonTarget P D c e h m M).hom
 
 /-- Second path of the actual b transition square: reduce the source support system,
-then apply b at m. It uses that system's own transition, not a finite cocycle substitute.
-Source: blueprint (2), proof step 8, R_n to R_m to S_m
-(blueprint: def-sp-field-shriek-system-transition-words). -/
+then apply b at m. It uses that system's own transition, not a finite cocycle substitute. -/
 @[irreducible] def comparisonAfterQuotient (D : Models P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (e : EvaluationLaw P D c) {E F : Index P} (h : E ≤ F) {m n : ℕ} (v : m ≤ n)
@@ -94,9 +86,7 @@ Source: blueprint (2), proof step 8, R_n to R_m to S_m
     (comparisonTarget P D c e h m M).hom
 
 /-- The square for b as a morphism between its source and target whole systems.
-Both vertical maps come from their own derived strict transitions via scalar adjunction.
-Source: blueprint (2), proof step 8, transition square of b_a
-(blueprint: def-sp-field-shriek-system-transition-words). -/
+Both vertical maps come from their own derived strict transitions via scalar adjunction. -/
 @[irreducible] def ComparisonTransitionSquare (D : Models P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     {E F : Index P} (h : E ≤ F) {m n : ℕ} (v : m ≤ n)
@@ -113,9 +103,7 @@ Source: blueprint (2), proof step 8, transition square of b_a
 
 /-- The common right side of the transition square: the specified finite b for
 R_n to S_m, followed by compact support of the actual input system transition.
-The coefficient-square equality transports only the source scalar action.
-Source: blueprint (2), proof step 8, common composite comparison
-(blueprint: def-sp-field-shriek-system-transition-words). -/
+The coefficient-square equality transports only the source scalar action. -/
 @[irreducible] def commonTransitionComparison (D : Models P)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     {E F : Index P} (h : E ≤ F) {m n : ℕ} (v : m ≤ n)

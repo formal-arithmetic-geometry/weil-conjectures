@@ -10,8 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimit
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFiniteCartierNormalization
 
 /-! # The normalized completed diagonal arrow
-Source: blueprint main-20261015, diagonal-limit clause 3 and trace proof step 11
-(blueprint: def-sfb-diagonal-trace-limit-characterization).
 
 ## Main definitions
 - `DiagonalTrace.rootLimitComparison` is the canonical preserved-limit comparison.
@@ -31,9 +29,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- A completed diagonal arrow with the full normalized presentation of the recorded
 limit theorem: its finite Cartier system, coefficient cones, limit equation, completeness,
-uniqueness and reduction comparisons. This specifies the whole-system map.
-Source: blueprint trace clause 2 and diagonal-limit clause 3
-(blueprint: def-sfb-diagonal-trace-limit-characterization). -/
+uniqueness and reduction comparisons. This specifies the whole-system map. -/
 def IsDiagonalLimit (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

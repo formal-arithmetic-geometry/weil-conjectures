@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientArrowTransport
 
 /-! # Supplied positive-root comparison at general finite coefficients
-
-Source: diagonal coefficient changes (1).
-(blueprint: def-diagonal-uniformizer-root-frame).
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +25,7 @@ attribute [local irreducible] quotientLine quotientLineMap finiteRealizedClass
 
 /-- Supplied root-normalized finite realization of the quotient line, with its
 ordinary coefficient ring left as a parameter. This record asserts no existence
-or class equation and makes no choices.
-Source: coefficient changes (1) (blueprint: def-diagonal-uniformizer-root-frame). -/
+or class equation and makes no choices. -/
 structure UniformizerRootFrame
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E) (n : ℕ)
@@ -46,8 +42,7 @@ structure UniformizerRootFrame
       finiteRoots.toLine A hA)
 
 /-- All supplied data of the uniformizer coefficient square. The record contains
-no Cartier class equation. Source: coefficient changes (1)
-(blueprint: def-diagonal-uniformizer-root-frame). -/
+no Cartier class equation. -/
 structure UniformizerSquareData
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)
@@ -67,8 +62,7 @@ structure UniformizerSquareData
     (l ^ (n + 1)) (cartierResidue_cast l (n + 1)) hA Y
 
 /-- The coefficient equation for this supplied data. This definition asserts
-nothing and chooses nothing. Source: coefficient changes (1)
-(blueprint: def-diagonal-uniformizer-root-frame). -/
+nothing and chooses nothing. -/
 @[irreducible]
 def UniformizerSquareData.equation
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

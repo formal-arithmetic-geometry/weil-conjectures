@@ -23,10 +23,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 /-!
 # Compact-support amplitude bounded by the original geometric fibres
 
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/
-lem-dg-compact-support-amplitude.md, order 1625
-(blueprint: theorem-results-from-etale-theory--5).
-
 ## Main definitions
 
 - `compactSupportAmplitudeCompactification`: the existing Nagata compactification with
@@ -48,9 +44,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The existing Nagata compactification for a morphism over a finite-type field scheme.
 This supplies its quasi-compact quasi-separated base instances from the finite-type hypotheses;
-it introduces no additional choice beyond `NagataCompactification`.
-Source: blueprint lem-dg-compact-support-amplitude.md, proof step 1
-(blueprint: theorem-results-from-etale-theory--5). -/
+it introduces no additional choice beyond `NagataCompactification`. -/
 noncomputable def compactSupportAmplitudeCompactification
     (k : Type u) [Field k] (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
@@ -66,8 +60,6 @@ noncomputable def compactSupportAmplitudeCompactification
 compact-support direct image of any etale module sheaf over a finite coefficient ring of
 invertible exponent vanishes above twice the dimension bound on the original geometric fibres.
 All derived functors are on the ordinary unbounded derived categories.
-Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-dg-compact-support-amplitude.md,
-order 1625 (blueprint: theorem-results-from-etale-theory--5).
 
 Proof, following the node's nine steps:
 1. A field is Noetherian. By lem-weil-pbc-finite-type-over-noetherian, X and Y are
@@ -88,8 +80,8 @@ H^q(T,G_ab). No finiteness assumption is made on F.
 3. By lem-pc-proper-base-change, T is proper and finite type over the algebraic closure.
 Use lem-weil-pbc-reduced-induced-closed-subscheme for the reduced closure C of U in T.
 By lem-weil-pbc-closed-immersion-proper, C is proper and finite type. Its finitely many
-components (lem-sc-noetherian-closed-subset-finite-components) have reduced induced integral
-scheme structures, by def-pc-integral-scheme. No factorization of nonreduced U through C is used.
+components have reduced induced integral scheme structures, by def-pc-integral-scheme. No
+factorization of nonreduced U through C is used.
 4. Each component C_a meets U: otherwise the finite closed union of the other components
 would contain U and hence its closure C. The nonempty open V_a = C_a intersect U has the
 same dimension as C_a by lem-sc-integral-locally-algebraic-opens-dimension. It is closed

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Canonical pullback of diagonal coefficient diagrams
 
-Source: blueprint main-20261015, sk-prop-diagonal-tower-coefficients.
-(blueprint: def-sfb-diagonal-coefficient-exchange).
-
 ## Main definitions
 
 - `derivedUpper`: the actual derived coefficient inverse image.
@@ -32,25 +29,20 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The actual derived inverse image, named once to share its derived-category
-instances in the canonical exchange maps. Source: blueprint base-change clause
-(blueprint: def-sfb-diagonal-coefficient-exchange). -/
+instances in the canonical exchange maps. -/
 def derivedUpper (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :
     DerivedCategory (Modules R S) ⥤ DerivedCategory (Modules R X) :=
   (CondensedRing.upperStar R f).leftDerivedFunctor
 
 /-- The actual derived direct image, named once to share its derived-category
-and K-injective-resolution instances in the model comparisons.
-Source: blueprint base-change clause
-(blueprint: def-sfb-diagonal-coefficient-exchange). -/
+and K-injective-resolution instances in the model comparisons. -/
 def derivedLower (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :
     DerivedCategory (Modules R X) ⥤ DerivedCategory (Modules R S) :=
   (CondensedRing.lowerStar R f).rightDerivedFunctor
 
-/-- The inverse-image shift structure from its actual derived adjunction.
-Source: blueprint base-change comparisons
-(blueprint: def-sfb-diagonal-coefficient-exchange). -/
+/-- The inverse-image shift structure from its actual derived adjunction. -/
 instance derivedUpperCommShift (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S : Scheme.{u}} (f : X ⟶ S) :
     (derivedUpper R f).CommShift ℤ :=
@@ -58,8 +50,7 @@ instance derivedUpperCommShift (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u
 
 /-- The canonical Beck--Chevalley map is the mate of the compositional
 pullback isomorphism of the specified commutative square. No proper or flat
-base-change theorem is built into its definition. Source: blueprint clause 3
-(blueprint: def-sfb-diagonal-coefficient-exchange). -/
+base-change theorem is built into its definition. -/
 def ordinaryExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)
@@ -74,8 +65,7 @@ def ordinaryExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       CondensedRing.upperStarCongr R h ≪≫
       CondensedRing.upperStarComp R hX f))
 
-/-- The corresponding derived mate, with the same composition normalization.
-Source: blueprint clause 3 (blueprint: def-sfb-diagonal-coefficient-exchange). -/
+/-- The corresponding derived mate, with the same composition normalization. -/
 def derivedExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)

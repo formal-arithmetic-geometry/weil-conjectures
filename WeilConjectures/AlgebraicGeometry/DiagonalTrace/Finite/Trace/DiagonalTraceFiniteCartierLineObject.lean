@@ -19,9 +19,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- The finite Cartier line object in the fixed diagonal module category.
-Source: diagonal trace proof (2), finite target projection.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-line-object). -/
+/-- The finite Cartier line object in the fixed diagonal module category. -/
 abbrev finiteCartierLineObject (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ) :
     DiagonalMod l (diagonalSurface Y) :=
   (diagonalFiniteToPadic l n (diagonalSurface Y)).obj

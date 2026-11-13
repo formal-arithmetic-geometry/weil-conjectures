@@ -169,9 +169,7 @@ private theorem counit_normalized (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
               lim)).counit.app I) :=
   h.1
 
-/-- Normalization of an exact pullback mate on every ordinary tower cone.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-diagonal-local-chern-pullback-data). -/
+/-- Normalization of an exact pullback mate on every ordinary tower cone. -/
 def LocalChernConeMate
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasLimitsOfShape ℕᵒᵖ A] [HasLimitsOfShape ℕᵒᵖ B]
@@ -197,8 +195,6 @@ def LocalChernConeMate
 -- The record retains two scalar squares and their complete derived cone equations.
 /-- Ordinary scalar squares and a natural comparison for the entire derived tower.
 
-Source: latest blueprint, diagonal coefficient changes (3), pullback of the normalized
-coefficient and root cones (blueprint: lem-diagonal-local-chern-pullback-data).
 The cone equation is an equality before evaluation at any finite level. -/
 structure LocalChernPullbackData (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)
@@ -260,9 +256,7 @@ structure LocalChernPullbackData (l : ℕ) [Fact l.Prime]
   cone : LocalChernConeMate
     (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) hX) p.LX p'.LX limitMate
 
-/-- The natural comparison on the entire varying derived system.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-diagonal-local-chern-pullback-data). -/
+/-- The natural comparison on the entire varying derived system. -/
 def LocalChernPullbackData.comparison (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'} {hX : X' ⟶ X}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -295,9 +289,7 @@ def LocalChernPullbackData.comparison (l : ℕ) [Fact l.Prime]
     (Functor.associator (SpTowerShriek.pull l (ULift.{u} (Padic l)) d.base d.geometry)
       p'.restrictionX.F.mapDerivedCategory p'.LX.R).hom
 
-/-- The exact completed scalar square of the pullback data.
-Source: blueprint coefficient changes (3)
-(blueprint: lem-diagonal-local-chern-pullback-data). -/
+/-- The exact completed scalar square of the pullback data. -/
 abbrev LocalChernPullbackData.completedSquare (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'} {hX : X' ⟶ X}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
@@ -308,18 +300,7 @@ abbrev LocalChernPullbackData.completedSquare (l : ℕ) [Fact l.Prime]
   Functor.mapDerivedCategorySquareIso d.completedOrdinary
 
 -- Instantiate the normalized endpoint theorem with both independent presentations.
-/-- Normalized scalar pullback squares and the whole derived-limit mate exist.
-
-Source: latest blueprint, diagonal coefficient changes (3).
-(blueprint: lem-diagonal-local-chern-pullback-data).
-
-Proof: choose the coefficient-unit-normalized tensor geometry, then its normalized
-positive-root line. Use the constant-tower/limit adjunction determined by the full
-cochain counit. The derived tower counit theorem and the specified projection
-normalization identify all its projections. Apply diagonalRlim_pullback_endpoints.
-Its varying and completed scalar squares provide the two ordinary squares, their
-section normalizations and mate equations. Its natural limit mate, shift law and
-full ordinary cone equation supply the remaining fields. -/
+/-- Normalized scalar pullback squares and the whole derived-limit mate exist. -/
 theorem diagonalLocalChern_pullback_data (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

@@ -41,9 +41,7 @@ normalization.  Apply the supplied normalization isomorphism of the adic
 tower at `(n+1,n)`, transport it through inverse image, and paste the
 canonical scalar restriction comparison.  The resulting map is exactly the
 displayed pulled-back transition, so it is invertible.  This statement is the
-tower-only part of the realization reduction.
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-tower-transition).
--/
+tower-only part of the realization reduction. -/
 theorem adicTowerPullback_consecutive_transition_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

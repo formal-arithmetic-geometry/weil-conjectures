@@ -200,9 +200,6 @@ public import WeilConjectures.AlgebraicGeometry.CartierReductionData
 /-!
 # Cartier boundary and normalized reduction constructions
 
-Source: blueprint main-20261015, sk-lem-geo-cartier.proof.md, (G1), derived reduction,
-and opening comparison paragraphs (blueprint: lem-sp-cartier-reduction-site-comparison).
-
 The derived scalar units below are expressed by their Hom adjunction against every
 unbounded complex. This is an equivalent, model-independent specification of derived
 extension of scalars at the supported constant and at G_m. In particular the equality
@@ -255,9 +252,7 @@ attribute [local instance 0] IsGroupoid.all_isIso isIso_of_isDiscrete
   HasZeroObject.zero_to_zero_isIso to_initial_isIso terminal_isIso_from initial_isIso_to
 
 /-- Scalar forgetting is exact on the original pro-etale site.
-Source: Stacks 03D7 (blueprint: lem-sp-cartier-reduction-site-comparison).
-Proof: kernels are sectionwise, and cokernels are the sheafifications of the same
-abelian presheaf cokernels. The scalar action descends uniquely to these cokernels. -/
+Source: Stacks 03D7. -/
 theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteLimits (cartierForget A Z) ∧
       PreservesFiniteColimits (cartierForget A Z) := by
@@ -270,18 +265,15 @@ theorem cartierForget_exact (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
   · have := (Sheaf.forget₂CoinduceAdj (Scheme.ProEt.topology Z) A).isLeftAdjoint
     infer_instance
 
-/-- Exactness on finite limits. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
+/-- Exactness on finite limits. Source: Stacks 03D7. -/
 instance cartierForgetLimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteLimits (cartierForget A Z) := (cartierForget_exact A Z).1
 
-/-- Exactness on finite colimits. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
+/-- Exactness on finite colimits. Source: Stacks 03D7. -/
 instance cartierForgetColimits (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     PreservesFiniteColimits (cartierForget A Z) := (cartierForget_exact A Z).2
 
-/-- Additivity on sections. Source: Stacks 03D7
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
+/-- Additivity on sections. Source: Stacks 03D7. -/
 instance cartierForgetAdditive (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     (cartierForget A Z).Additive where
 
@@ -349,8 +341,7 @@ attribute [local irreducible] cartierReducedEtale cartierReducedPro
 /-- The Hom universal property of a derived scalar unit with a shifted sheaf target.
 It is tested against every unbounded complex, and therefore determines the target up
 to its unique unit-compatible isomorphism.
-Source: Stacks 09T5, 0FND and blueprint Cartier reduction paragraphs
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
+Source: Stacks 09T5, 0FND. -/
 def CartierScalarUnit
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasExt.{wE} B]
@@ -358,9 +349,7 @@ def CartierScalarUnit
     (F : B) (H : C) (n : ℕ) (e : Ext F (U.obj H) n) : Prop :=
   U.DerivedExtUnit F H n e
 
-/-- The specified R-algebra structure on A, uniquely determined by its integer action.
-Source: blueprint Cartier finite coefficient extension paragraph
-(blueprint: lem-sp-cartier-reduction-site-comparison). -/
+/-- The specified R-algebra structure on A, uniquely determined by its integer action. -/
 def cartierResidueAlgebra (ℓ r : ℕ) (A : Type (u + 1)) [CommRing A]
     (hA : ((ℓ ^ r : ℕ) : A) = 0) : cartierResidueRing.{u} ℓ r →+* A :=
   (Scheme.finiteEtaleTwistScalar (ℓ ^ r) A hA).comp ULift.ringEquiv.toRingHom

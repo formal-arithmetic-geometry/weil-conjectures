@@ -28,11 +28,6 @@ that every `k`-point of `T` lies in `r(G°(k))`. Then `S` is the finite union of
 
 - `AlgebraicGeometry.GeneralLinearGroup.RationalHom.mem_range_points_iff`: the image of `G(k)` is
   the set of `k`-points of its Zariski closure.
-
-## Blueprint
-
-- `lemma-connected-components-images-homomorphisms--2`: the image of a regular homomorphism is
-closed.
 -/
 
 @[expose] public section
@@ -345,8 +340,7 @@ on `S` vanishes lies in `S`. So `S` is the set of `k`-points of the reduced clos
 The image of `G°` is constructible with irreducible closure `T`, hence contains a nonempty open
 `U ∩ T`; for a `k`-point `x` of `T`, the open subsets `U ∩ T` and `x (U ∩ T)⁻¹` of `T` meet in a
 `k`-point `z`, so that `x = z (z⁻¹ x) ∈ r(G°(k))`. Then `S` is the finite union of the translates
-of `T` by `r` of coset representatives of `G°(k)` in `G(k)`.
-(blueprint: `lemma-connected-components-images-homomorphisms--2`) -/
+of `T` by `r` of coset representatives of `G°(k)` in `G(k)`. -/
 theorem mem_range_points_iff {x : GL m k} :
     x ∈ (r.points k).range ↔
       ∀ a ∈ vanishingIdeal ((r.points k).range : Set (GL m k)), evalAlgHom x a = 0 := by

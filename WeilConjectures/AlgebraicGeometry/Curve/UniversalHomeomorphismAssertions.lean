@@ -22,7 +22,6 @@ open Etale
 
 /-- Assertions transfer across a surjective closed universal homeomorphism of curves.
 Source: Stacks Project, Theorem 59.83.10 (03SC), Proposition 59.45.4 (03SI).
-(blueprint: lem-weil-pbc-universal-homeomorphism-assertions)
 
 The proof compares the eight cohomology assertions through the equivalence of etale
 sheaf categories induced by a universal homeomorphism. Pullback preserves the

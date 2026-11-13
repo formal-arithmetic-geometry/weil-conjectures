@@ -42,10 +42,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # Composition and boundary dualizing objects on the comparison class
 
-Source: Weil blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-cor-weil-boundary-duality-discharge.md, first proof paragraph
-(blueprint: lem-weil-boundary-dualizing-composition).
-
 All comparison data below are constructed from the existing compact-support composition,
 its actual adjunctions, and the site-comparison unit. No pro-etale ambient adjunction is used.
 -/
@@ -62,9 +58,7 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Restrict the actual ambient right adjoint to bounded below objects.
-Source: the boundary-duality proof, preparation and restriction of adjoints
-(blueprint: lem-weil-boundary-dualizing-composition). -/
+/-- Restrict the actual ambient right adjoint to bounded below objects. -/
 noncomputable def boundaryUpperShriekPlus {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [CompactSpace Y] :
     DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
@@ -73,9 +67,7 @@ noncomputable def boundaryUpperShriekPlus {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_root_.DerivedCategory.Plus.ι ⋙ rightDerivedUpperShriek Λ f)
     (fun K ↦ plus_rightDerivedUpperShriek_obj Λ f K.obj K.property)
 
-/-- The site unit, after applying f-times and ν_X^*, gives ρ_H (also λ_W at A).
-Source: boundary-duality proof, explicit comparison-unit transport
-(blueprint: lem-weil-boundary-dualizing-composition). -/
+/-- The site unit, after applying f-times and ν_X^*, gives ρ_H (also λ_W at A). -/
 noncomputable def boundaryOriginIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f]
     (H : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -90,17 +82,13 @@ noncomputable def boundaryOriginIso {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ProEtale.isIso_derivedComparisonAdjunction_unit_app
           (ModuleCat.{u + 1} Λ) Y H.obj H.property)))
 
-/-- The constant coefficient object in degree zero, in D+.
-Source: boundary-duality proof, evaluation at A
-(blueprint: lem-weil-boundary-dualizing-composition). -/
+/-- The constant coefficient object in degree zero, in D+. -/
 noncomputable def boundaryCoefficientPlus (S : Scheme.{u}) :
     DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   ⟨constantComplex Λ S, ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
     (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩⟩
 
-/-- λ_W, including the canonical identification of the pulled-back coefficient unit.
-Source: boundary-duality proof, comparison-unit formula for lambda
-(blueprint: lem-weil-boundary-dualizing-composition). -/
+/-- λ_W, including the canonical identification of the pulled-back coefficient unit. -/
 noncomputable def boundaryDualizingComparisonIso {X S : Scheme.{u}} (a : X ⟶ S)
     [HasCompactification a] :
     (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.obj

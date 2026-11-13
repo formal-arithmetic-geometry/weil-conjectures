@@ -36,14 +36,7 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance] Sheaf.monoidalCategory
 
 /-- The projection map is invertible on a bounded finite free constant complex.
-Source: Stacks Project, Tag 0944, finite free case
-(blueprint: lem-sf-projection-bounded-finite-free-constant).
-
-Proof: each term of the constant complex is dualizable, because it is isomorphic to
-a finite power of the coefficient ring. A bounded complex of dualizable sheaves is
-dualizable. Transport along the exact constant functor comparison identifies this
-complex with the derived constant image of P. The projection formula at a dualizable
-coefficient then gives the assertion. -/
+Source: Stacks Project, Tag 0944, finite free case. -/
 theorem isIso_projectionMap_bounded_finiteFree_constant
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))

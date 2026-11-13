@@ -25,8 +25,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The flat single complex on the structure sheaf computes its derived residue pullback.
-Source: Stacks Project, Tags 06YD and 06YJ. This is the flat-single component of
-(blueprint: lem-sc-derived-residue-unit-betti). -/
+Source: Stacks Project, Tags 06YD and 06YJ. This is the flat-single component of. -/
 private theorem residue_unit_single_iso (S : Scheme.{u}) (s : S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -81,14 +80,7 @@ private theorem residue_unit_single_iso (S : Scheme.{u}) (s : S)
     (DerivedCategory.singleFunctor B 0).mapIso eFM⟩
 
 /-- An invertible degree-zero residue map from the structure sheaf forces Betti number one.
-Source: Stacks Project, Tag 0E62, local argument, using Tags 06YD and 06YJ.
-(blueprint: lem-sc-derived-residue-unit-betti).
-
-Proof: The structure sheaf is flat, so its single complex computes its derived pullback
-termwise. Ordinary pullback of the structure sheaf is the structure sheaf. Taking H^0,
-global sections on Spec κ(s), and restriction of scalars through ΓSpecIso identifies the
-source fibre cohomology with κ(s). The given isomorphism identifies the target with the
-same one-dimensional vector space. No perfectness or vanishing in other degrees is used. -/
+Source: Stacks Project, Tag 0E62, local argument, using Tags 06YD and 06YJ. -/
 theorem derivedFiberBetti_zero_eq_one_of_unit_iso (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}

@@ -126,8 +126,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 /-!
 # Normalized coefficient models for finite-free direct image
 
-Source: Stacks Project, Tags 0B56 and 0944
-(blueprint: def-sp-finite-free-direct-image-data).
+Source: Stacks Project, Tags 0B56 and 0944.
 
 All module and derived categories are the existing ones. The auxiliary records bundle
 coefficient squares and normalized presentations of the existing scalar functors.
@@ -150,7 +149,7 @@ attribute [instance] proEtaleRingRestrictScalars_preservesFiniteLimits
   proEtaleRingRestrictScalars_preservesFiniteColimits
 
 /-- A presentation of the existing derived scalar extension on the actual small site.
-Source: Stacks Tag 06YY (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 06YY. -/
 abbrev Presentation (X : Scheme.{u}) {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) :=
   SheafOfModules.SuccessiveDerivedQuotient.Presentation.{u + 1, u, u + 1, u + 2}
@@ -163,8 +162,7 @@ set_option genSizeOf false in
 `normalization` fixes the balanced associators and tensor units. The additional
 adjunction is normalized against exact scalar restriction, and the multiplication
 isomorphism is fixed by its ordinary pure-tensor formula and the universal counit.
-Source: Stacks Tags 03EK, 06YY and 07A6
-(blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tags 03EK, 06YY and 07A6. -/
 structure ScalarModel (X : Scheme.{u}) where
   /-- Existing universal scalar-extension pairs, without a second tensor definition. -/
   presentation : ∀ {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}},
@@ -216,14 +214,14 @@ structure ScalarModel (X : Scheme.{u}) where
         ((Functor.mapHomotopyCategoryIdIso (proEtaleRingModules X R) (.up ℤ)).hom.app H)
 
 /-- The canonical scalar shift is the adjoint of the termwise restriction shift.
-Source: Stacks Tag 07A6 (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 07A6. -/
 instance scalarCommShift {X : Scheme.{u}} (s : ScalarModel X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :
     (s.presentation a).derived.CommShift ℤ :=
   (s.adjunction a).leftAdjointCommShift ℤ
 
 /-- The coefficient ring at both ends, with the specified inverse-image identification.
-Source: Stacks Tag 0B56 (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 0B56. -/
 structure Coefficients {Z W : Scheme.{u}} (q : Z ⟶ W) where
   /-- Ring sheaf on the target. -/
   target : Sheaf (ProEt.topology W) CommRingCat.{u + 1}
@@ -233,7 +231,7 @@ structure Coefficients {Z W : Scheme.{u}} (q : Z ⟶ W) where
   identification : (proEtaleSheafInverseImage q CommRingCat.{u + 1}).obj target ≅ source
 
 /-- Compatible coefficient maps on the two sites; the only condition is the ring square.
-Source: Stacks Tag 0B56 (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 0B56. -/
 structure CoefficientMap {Z W : Scheme.{u}} {q : Z ⟶ W} (R S : Coefficients q) where
   /-- Coefficient map on the target. -/
   target : R.target ⟶ S.target
@@ -244,7 +242,7 @@ structure CoefficientMap {Z W : Scheme.{u}} {q : Z ⟶ W} (R S : Coefficients q)
     (proEtaleSheafInverseImage q CommRingCat.{u + 1}).map target ≫ S.identification.hom
 
 /-- Identity coefficient map, keeping the given geometric identification.
-Source: Stacks Tag 0B56 (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 0B56. -/
 def CoefficientMap.id {Z W : Scheme.{u}} {q : Z ⟶ W} (R : Coefficients q) :
     CoefficientMap R R where
   target := 𝟙 _
@@ -252,7 +250,7 @@ def CoefficientMap.id {Z W : Scheme.{u}} {q : Z ⟶ W} (R : Coefficients q) :
   comm := by simp
 
 /-- Composition of compatible coefficient maps, using the same identifications.
-Source: Stacks Tag 0D6D (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 0D6D. -/
 def CoefficientMap.comp {Z W : Scheme.{u}} {q : Z ⟶ W} {R S B : Coefficients q}
     (a : CoefficientMap R S) (b : CoefficientMap S B) : CoefficientMap R B where
   target := a.target ≫ b.target
@@ -266,8 +264,7 @@ The right-adjoint comparison is the published one fixed by its derived units and
 identity section maps. Scalar adjunctions have the `x ↦ 1 ⊗ x` normalization, so this
 conjugate is exactly the balanced scalar/pullback comparison, including on flat K-flat
 representatives. Its definition does not use the finite-free theorem below.
-Source: Stacks Tags 03EL, 0D6D and 07A6
-(blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tags 03EL, 0D6D and 07A6. -/
 def balancing {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :
     (sW.presentation a.target).derived ⋙
@@ -285,7 +282,7 @@ def balancing {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : Scalar
 /-- The actual counit-tensor comparison in the larger coefficient derived category.
 By the mate formula its component is the `Lq_S* ⊣ Rq_S*` adjunct of
 `balancing.hom ≫ C_Z(ε_R)`. No scalar-forgetting functor is used to define the arrow.
-Source: Stacks Tag 0B56 (blueprint: def-sp-finite-free-direct-image-data). -/
+Source: Stacks Tag 0B56. -/
 def comparison {Z W : Scheme.{u}} {q : Z ⟶ W} (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :
     proEtaleRingDerivedDirectImage q R.target R.source R.identification ⋙

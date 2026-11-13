@@ -177,23 +177,7 @@ private theorem finite_etale_origin_realization
 
 /-- A single finite-ring complex with bounded intrinsically constructible cohomology
 has a bounded constructible etale presentation in the recorded coefficient universe.
-The comparison `e` may be any constant-ring presentation isomorphism.
-
-Source: Stacks Project, proetale.tex, Tag 09AL, lemma-compare-constructible-derived;
-coefficient transport in step 1 of the local-effectivity argument
-(blueprint: lem-weil-pbc-finite-coefficient-derived-origin-presentation).
-
-Proof: transfer K through the exact equivalence from fixed-ring sheaves to the
-recorded coefficient modules. Exactness and faithfulness reflect both cohomological
-bounds. The single-sheaf intrinsic constructibility comparison identifies the
-constructibility hypotheses on its cohomology. Descend each such sheaf and apply
-the existing boundedConstructible_of_homology theorem, whose finite truncation
-argument assembles a bounded constructible etale source. Convert its finite local
-models and its bounds to the recorded essential-image predicate. Realize the source
-and compose the derived comparison isomorphisms. Finally the proved helper
-finite_presentation_representative extracts a cochain representative by essential
-surjectivity of Q and transports it termwise through finiteRingComparison. No
-small-ring replacement or derived universe transport is required. -/
+The comparison `e` may be any constant-ring presentation isomorphism. -/
 theorem finiteCoefficient_constructibleDerived_origin_presentation
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (u + 1)) [CommRing B] [Finite B]

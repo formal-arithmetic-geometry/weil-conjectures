@@ -50,9 +50,7 @@ import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSuppl
 
 /-! # Intrinsic Koszul completion over the completed coefficient sheaf
 
-Source: blueprint, sec-proper-base-change/sk-thm-properbasechange,
-node def-weil-pbc-intrinsic-completion; Stacks Tag 099M
-(blueprint: def-weil-pbc-intrinsic-completion).
+Source: Stacks Tag 099M.
 
 Koszul complexes are obtained by scalar extension of the recorded exterior-algebra
 construction along the residue-normalized map from the constant ring to A_T. All tensor
@@ -75,14 +73,7 @@ variable {A : Type t} [CommRing A]
 
 attribute [local instance] koszulConstantFunctor_preservesZero
 
-/-- The scalar map to the completed ring is uniquely fixed by all its residue sections.
-Source: blueprint, def-weil-pbc-intrinsic-completion, the action of the generators
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: for each positive quotient use the residue homomorphism followed by the constant
-sections of its continuous-functions presheaf and sheafification. These maps commute with
-quotient transitions. The limit property gives a unique map of ring sheaves, and it is
-commutative because both rings are commutative. Maps out of a constant sheaf are fixed by
-their constant presheaf sections, so the displayed equation characterizes it uniquely. -/
+/-- The scalar map to the completed ring is uniquely fixed by all its residue sections. -/
 theorem completedAdicScalar_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     ∃! α : adicConstantRing T A ⟶ completedAdicCommRing T d,
       ∀ (n : ℕ) (U : T.ProEtᵒᵖ) (a : ULift.{t + 1} A),
@@ -172,38 +163,29 @@ theorem completedAdicScalar_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A)
   apply sheafify_hom_ext J _ _ (completedAdicCommRing T d).property
   exact htest.trans hα.symm
 
-/-- The actual scalar map, with its unique residue normalization.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The actual scalar map, with its unique residue normalization. -/
 def completedAdicScalar (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     adicConstantRing T A ⟶ completedAdicCommRing T d :=
   (completedAdicScalar_exists T d).exists.choose
 
 set_option linter.defProp false in
 /-- The scalar-extension witness with its object and morphism tensor formulas.
-Source: blueprint def-weil-pbc-intrinsic-completion; Stacks Tag 06YY
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+Source: Stacks Tag 06YY. -/
 def completedAdicScalarExtensionData (T : Scheme.{t}) (d : AdicCoefficientDatum A) :=
   completedAdicChangeData T (completedAdicScalar T d)
 
-/-- Ordinary scalar extension of constant A-module sheaves to A_T-module sheaves.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Ordinary scalar extension of constant A-module sheaves to A_T-module sheaves. -/
 def completedAdicScalarExtension (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     SheafOfModules.{t + 1} (adicModuleRing T A) ⥤ CompletedAdicModules T d :=
   completedAdicChange T (completedAdicScalar T d)
 
-/-- Scalar extension is additive, from the normalized change-of-rings witness.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- Scalar extension is additive, from the normalized change-of-rings witness. -/
 instance completedAdicScalarExtension_additive (T : Scheme.{t}) (d : AdicCoefficientDatum A) :
     (completedAdicScalarExtension T d).Additive :=
   (completedAdicScalarExtensionData T d).choose_spec.choose_spec.choose_spec.choose
 
 /-- The sheafified tensor generator in scalar extension. The equality transport is the
-object formula of the scalar-extension witness, not a freely chosen identification.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+object formula of the scalar-extension witness, not a freely chosen identification. -/
 def completedAdicScalarTensor (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (M : SheafOfModules.{t + 1} (adicModuleRing T A)) (U : T.ProEtᵒᵖ)
     (s : (completedAdicCommRing T d).obj.obj U) (x : M.val.obj U) :
@@ -269,18 +251,14 @@ private theorem adicScalarTensor_map (T : Scheme.{t}) (d : AdicCoefficientDatum 
     (fun g ↦ (completedAdicScalarExtensionData T d).choose_spec.choose_spec.choose g) f U s x
 
 /-- The Koszul complex of a_1^(m+1),...,a_r^(m+1) over A_T, in degrees [-r,0].
-It is the recorded constant exterior complex followed by actual extension of scalars.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+It is the recorded constant exterior complex followed by actual extension of scalars. -/
 def completedAdicKoszul (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (m : ℕ) : CochainComplex (CompletedAdicModules T d) ℤ :=
   ((completedAdicScalarExtension T d).mapHomologicalComplex (ComplexShape.up ℤ)).obj
     (koszulPowerSheaf T A r a m)
 
 /-- The inverse Koszul transition: multiplication by a_j in degree -1 of each factor,
-identity in degree zero. Extension of scalars preserves the recorded exterior map.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+identity in degree zero. Extension of scalars preserves the recorded exterior map. -/
 def completedAdicKoszulStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (m : ℕ) :
     completedAdicKoszul T d r a (m + 1) ⟶ completedAdicKoszul T d r a m :=
@@ -290,13 +268,7 @@ def completedAdicKoszulStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
       (koszulPowerTransition A r a m))
 
 attribute [local irreducible] completedAdicRing in
-/-- The degree-zero unit is determined by the tensor of the two scalar units.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the displayed section is compatible with restrictions since both its factors are.
-The unit-module/global-section equivalence gives the unique module map with that value on
-one. In degree zero the constant Koszul unit identifies the rank-one module with degree
-zero, and extension of scalars preserves this identification. -/
+/-- The degree-zero unit is determined by the tensor of the two scalar units. -/
 theorem completedAdicKoszulUnitZero_exists (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (m : ℕ) :
     ∃! u : SheafOfModules.unit (completedAdicRing T d) ⟶ (completedAdicKoszul T d r a m).X 0,
@@ -346,17 +318,13 @@ theorem completedAdicKoszulUnitZero_exists (T : Scheme.{t}) (d : AdicCoefficient
     exact (hv U).trans (congrArg (fun z ↦ z.val U)
       (((completedAdicKoszul T d r a m).X 0).unitHomEquiv.apply_symm_apply s)).symm
 
-/-- The specified degree-zero inclusion A_T[0] to its Koszul complex.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The specified degree-zero inclusion A_T[0] to its Koszul complex. -/
 def completedAdicKoszulUnitZero (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (m : ℕ) :
     SheafOfModules.unit (completedAdicRing T d) ⟶ (completedAdicKoszul T d r a m).X 0 :=
   (completedAdicKoszulUnitZero_exists T d r a m).exists.choose
 
-/-- The total tensor C tensor Q_(m+1) over the completed ring.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The total tensor C tensor Q_(m+1) over the completed ring. -/
 def completedAdicKoszulTensor (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :=
   letI := SheafOfModules.monoidalCategory (completedAdicCommRing T d)
@@ -369,9 +337,7 @@ def completedAdicKoszulTensor (T : Scheme.{t}) (d : AdicCoefficientDatum A)
       (completedAdicCommRing T d) M
   CochainComplex.mapBifunctor C (completedAdicKoszul T d r a m) (curriedTensor _)
 
-/-- The tensor transition 1_C tensor q_(m+2,m+1).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The tensor transition 1_C tensor q_(m+2,m+1). -/
 def completedAdicKoszulTensorStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :
     completedAdicKoszulTensor T d r a C (m + 1) ⟶ completedAdicKoszulTensor T d r a C m :=
@@ -386,9 +352,7 @@ def completedAdicKoszulTensorStep (T : Scheme.{t}) (d : AdicCoefficientDatum A)
   HomologicalComplex.mapBifunctorMap (𝟙 C) (completedAdicKoszulStep T d r a m)
     (curriedTensor _) (ComplexShape.up ℤ)
 
-/-- In degree p the unit sends c to c tensor 1 in the (p,0) total summand.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- In degree p the unit sends c to c tensor 1 in the (p,0) total summand. -/
 def completedAdicKoszulTensorUnitF (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) (p : ℤ) :
     C.X p ⟶ (completedAdicKoszulTensor T d r a C m).X p :=
@@ -435,12 +399,7 @@ private theorem adicTensorClosedUnit_comm
     hzero, zero_comp, smul_zero, comp_zero, add_zero]
   rw [whisker_exchange_assoc, ← rightUnitor_inv_naturality_assoc]
 
-/-- The tensor units are chain maps.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion).
-Proof: the differential of the Koszul degree-zero unit is zero, since the complex has no
-positive degrees. The total differential on c tensor 1 is therefore dc tensor 1; naturality
-of the right unit isomorphism gives the displayed chain-map identity. -/
+/-- The tensor units are chain maps. -/
 theorem completedAdicKoszulTensorUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ)
     (m : ℕ) (p q : ℤ) (_hpq : (ComplexShape.up ℤ).Rel p q) :
@@ -467,25 +426,19 @@ theorem completedAdicKoszulTensorUnitF_comm (T : Scheme.{t}) (d : AdicCoefficien
     ((koszulConstantFunctor T A).map ((koszulPower A r a m).d 0 1)) = 0
   rw [hd, Functor.map_zero, Functor.map_zero, comp_zero]
 
-/-- The actual chain map c ↦ c tensor 1 to each Koszul tensor complex.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The actual chain map c ↦ c tensor 1 to each Koszul tensor complex. -/
 def completedAdicKoszulTensorUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) (m : ℕ) :
     C ⟶ completedAdicKoszulTensor T d r a C m where
   f := completedAdicKoszulTensorUnitF T d r a C m
   comm' := completedAdicKoszulTensorUnitF_comm T d r a C m
 
-/-- The termwise product B(C) of the positive-power Koszul tensor complexes.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The termwise product B(C) of the positive-power Koszul tensor complexes. -/
 def completedAdicKoszulProduct (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :=
   ∏ᶜ (completedAdicKoszulTensor T d r a C)
 
-/-- The chain map 1-s with coordinates z_m - t_m(z_(m+1)).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The chain map 1-s with coordinates z_m - t_m(z_(m+1)). -/
 def completedAdicKoszulOneSubShift (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     completedAdicKoszulProduct T d r a C ⟶ completedAdicKoszulProduct T d r a C :=
@@ -494,16 +447,13 @@ def completedAdicKoszulOneSubShift (T : Scheme.{t}) (d : AdicCoefficientDatum A)
 
 /-- The mapping fibre with degree i terms B^i and B^(i-1). Taking the cone of -(1-s)
 and shifting by -1 gives exactly the differential (dx,(1-s)x-dy), under the canonical
-index isomorphisms of the shift. Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+index isomorphisms of the shift. -/
 def completedAdicKoszulFibre (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     CochainComplex (CompletedAdicModules T d) ℤ :=
   (CochainComplex.mappingCone (-completedAdicKoszulOneSubShift T d r a C))⟦(-1 : ℤ)⟧
 
-/-- The compatible tensor units form the map u_C to B(C).
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The compatible tensor units form the map u_C to B(C). -/
 def completedAdicKoszulProductUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     C ⟶ completedAdicKoszulProduct T d r a C :=
@@ -638,12 +588,7 @@ private theorem adicShiftedConeUnit_comm {A : Type*} [Category* A] [Preadditive 
   rw [← Category.assoc, hz', zero_comp, neg_zero, zero_add]
   rw [← a.comm_assoc (q + (-1)) q]
 
-/-- The completion unit c ↦ (u_C(c),0) commutes with the fibre differential.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: lem-weil-pbc-completed-adic-koszul-unit-chain-map).
-Proof: the transition on each degree-zero Koszul unit is identity, so (1-s)u_C=0.
-The first coordinate of the fibre differential is d_B u_C=u_C d_C and the second
-coordinate is zero. Thus inclusion in the first summand is a chain map. -/
+/-- The completion unit c ↦ (u_C(c),0) commutes with the fibre differential. -/
 theorem completedAdicKoszulUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ)
     (p q : ℤ) (_hpq : (ComplexShape.up ℤ).Rel p q) :
@@ -661,9 +606,7 @@ theorem completedAdicKoszulUnitF_comm (T : Scheme.{t}) (d : AdicCoefficientDatum
     (-completedAdicKoszulOneSubShift T d r a C) _ p q _hpq
   rw [Preadditive.comp_neg, adicKoszulProductUnit_oneSubShift, neg_zero]
 
-/-- The specified chain-level completion unit into the explicit mapping fibre.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The specified chain-level completion unit into the explicit mapping fibre. -/
 def completedAdicKoszulUnitComplex (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (C : CochainComplex (CompletedAdicModules T d) ℤ) :
     C ⟶ completedAdicKoszulFibre T d r a C where
@@ -674,18 +617,14 @@ def completedAdicKoszulUnitComplex (T : Scheme.{t}) (d : AdicCoefficientDatum A)
 
 /-- The Koszul completion of a derived object, using the localization's representative.
 No K-flatness or boundedness restriction on that representative is needed: the finite free
-Koszul factors preserve quasi-isomorphisms, and exact products compute derived products.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+Koszul factors preserve quasi-isomorphisms, and exact products compute derived products. -/
 def completedAdicIntrinsicCompletion (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (K : DerivedCategory (CompletedAdicModules T d)) :
     DerivedCategory (CompletedAdicModules T d) :=
   DerivedCategory.Q.obj
     (completedAdicKoszulFibre T d r a (DerivedCategory.Q.objPreimage K))
 
-/-- The image of c ↦ (u_C(c),0), transported along the localization representative iso.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+/-- The image of c ↦ (u_C(c),0), transported along the localization representative iso. -/
 def completedAdicIntrinsicUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (K : DerivedCategory (CompletedAdicModules T d)) :
     K ⟶ completedAdicIntrinsicCompletion T d r a K :=
@@ -694,9 +633,7 @@ def completedAdicIntrinsicUnit (T : Scheme.{t}) (d : AdicCoefficientDatum A)
       (completedAdicKoszulUnitComplex T d r a (DerivedCategory.Q.objPreimage K))
 
 /-- Derived I-completeness is invertibility of the specified Koszul completion map.
-The generator equation is supplied when this predicate is used for the ideal of d.
-Source: blueprint def-weil-pbc-intrinsic-completion
-(blueprint: def-weil-pbc-intrinsic-completion). -/
+The generator equation is supplied when this predicate is used for the ideal of d. -/
 def IsCompletedAdicDerivedComplete (T : Scheme.{t}) (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (_ha : Ideal.span (Set.range a) = d.ideal)
     (K : DerivedCategory (CompletedAdicModules T d)) : Prop :=

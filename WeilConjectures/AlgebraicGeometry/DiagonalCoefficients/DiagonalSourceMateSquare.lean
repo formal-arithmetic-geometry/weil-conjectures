@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSourceAdjunctionTransport
 
 /-! # Exact mate transport of ordinary source squares
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-source-mate-square).
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +30,7 @@ attribute [local instance 400000] AlgebraicGeometry.ProEtale.diagonalModuleSheaf
 
 variable {C D K : Type*} [Category C] [Category D] [Category K]
 
-/-- The transpose of the mate endpoint composite is the ordinary adjunction square.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-mate-square).
-Proof: naturality moves the endpoint map through the adjunction hom equivalence;
-the formula for the mate followed by the quotient endpoint gives the result. -/
+/-- The transpose of the mate endpoint composite is the ordinary adjunction square. -/
 theorem mate_endpoint_transpose
     {L : C ⥤ D} {R : D ⥤ C} {L' : C ⥤ K} {R' : K ⥤ C}
     (a : L ⊣ R) (b : L' ⊣ R') (H : K ⥤ D) (s : R' ≅ H ⋙ R)

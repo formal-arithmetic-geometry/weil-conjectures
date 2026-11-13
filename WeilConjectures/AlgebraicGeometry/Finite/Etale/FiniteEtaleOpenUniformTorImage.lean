@@ -28,11 +28,6 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Uniform Tor bound for finite-coefficient etale open direct images
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-ctf-stability,
-sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), finite A open-image case;
-Stacks Project, Tag 0F10, clause (1), and definition-cd-f
-(blueprint: lem-sfb-finite-etale-open-uniform-tor-image).
-
 The relative dimension is the coefficient-independent torsion dimension of the morphism.
 The derived categories and tensor products are ordinary and unbounded.
 -/
@@ -53,10 +48,6 @@ higher-direct-image bound equal to the torsion etale dimension of the immersion.
 The canonical finite-constant projection maps are invertible, and bounded constructible
 complexes of Tor amplitude `[a,b]` have bounded constructible direct image of Tor amplitude
 `[a,b+d]`, tested against every module sheaf. The zero coefficient ring is allowed.
-
-Source: blueprint main-20261015, sk-thm-sf-ctf-stability-direct-images.proof.md,
-paragraph (3), finite A open-image case; Stacks 0F10 (1), definition-cd-f
-(blueprint: lem-sfb-finite-etale-open-uniform-tor-image).
 
 Proof plan:
 1. Apply theorem-results-from-etale-theory--6 (1) over k to j. By definition-cohomological-dimension

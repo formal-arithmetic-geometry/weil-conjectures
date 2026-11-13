@@ -22,18 +22,7 @@ attribute [local instance 20000] Etale.sheafBraidedCategory
 
 /-- A single coefficient Hom functor admits the evaluation-normalized exact shift.
 Source: Stacks Project, Tags 08JC and 08J9, signed Hom reindexing and the
-termwise split sequence argument.
-
-Proof: use the existing native signed exact Hom theorem. Its degree-n component
-is the quadratic sign times the explicit right-adjoint source-shift mate.
-The right-adjoint uniqueness counit identity identifies the raw mate, followed by
-tensor-shift cancellation and evaluation, with evaluation at the shifted source.
-Multiply the signed component by the same sign; integer units square to one.
-Specializing this generic calculation to the category of etale sheaves gives the
-normalization for the same shift that the native theorem proves triangulated.
-The mate identity holds for every integer, including zero and negative integers,
-and sign cancellation also holds in characteristic two.
-(blueprint: lem-coef-etale-hom-normalized-single-shift) -/
+termwise split sequence argument. -/
 theorem etaleHom_normalizedShift_exists
     (C : Type (u + 2)) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]

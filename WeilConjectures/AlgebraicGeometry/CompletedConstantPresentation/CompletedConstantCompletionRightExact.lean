@@ -632,26 +632,8 @@ private noncomputable def sectionwise_cokernel (X : Scheme.{u})
   exact ModuleCat.isColimitCokernelCofork (f.val.app U) (g.val.app U) (he U) (hs U)
 
 /-- Completion of constant modules preserves cokernels of maps between finite modules.
-Source: Stacks Project, More on Algebra, Tag 0912 (lemma-limit-flat); Modules on Sites,
-Tags 093J--093M (constant exactness, finite-presentation tensor comparison and flat sections).
-(blueprint: lem-weil-pbc-completed-constant-completion-right-exact).
-
-Proof: put C = AdicCompletion I A and J = IC. The completion theorem makes C Noetherian,
-and evaluation identifies C/J^(n+1) with A/I^(n+1), compatibly with transitions.
-One may first replace the essentially small pro-etale site by its coefficient-sized
-equivalent site; constant sheaves, limits and cokernels transport across that equivalence.
-For every C-module V, J^k V = I^k V after restriction to A: C-multiplication in a generator
-can be absorbed into V. On any site object U let B_n be the sections of the constant
-C/J^(n+1). They are flat over C/J^(n+1) and the transitions are surjective, by constant
-section flatness and exactness. Tag 0912 identifies V tensor_C lim B_n with
-lim (V tensor_C B_n) for each finite V. Finite V is finitely presented over C, so Tag 093K
-identifies the latter with lim constant(V/J^(n+1)V)(U), naturally in V and U. Thus a
-finite-module presentation P -> Q -> coker f -> 0 becomes, sectionwise, its tensor
-with lim B_n and remains right exact. These sectionwise cokernel diagrams commute
-with restrictions and hence give cokernel diagrams of sheaves. The universal property
-is preservation of the indicated parallel-pair colimit. The cokernel is finite, so
-all three applications of the finite tensor comparison are legitimate. No injectivity
-of f is assumed. Zero modules, I=0, I=top and the zero ring obey the same diagrams. -/
+Source: Stacks Project, More on Algebra, Tag 0912; Modules on Sites, Tags 093J--093M (constant
+exactness, finite-presentation tensor comparison and flat sections). -/
 theorem completion_preservesCokernel (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {P Q : ModuleCat.{u + 1} (AdicCompletion I A)}

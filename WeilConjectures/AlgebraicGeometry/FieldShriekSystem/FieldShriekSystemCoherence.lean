@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Coefficient-system comparison laws
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: def-sp-field-shriek-system-coherence).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -52,8 +48,7 @@ attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 attribute [local irreducible] restrictionEvaluation supportEvaluation comparison
 
 /-- Associativity of scalar extension on the sequence site, fixed by restriction
-composition and the normalized adjunctions, hence by balanced tensor multiplication.
-Source: blueprint (2), alpha_T (blueprint: def-sp-field-shriek-system-coherence). -/
+composition and the normalized adjunctions, hence by balanced tensor multiplication. -/
 def scalarAssoc (D : Models P) {E F L : Index P} (h : E ≤ F) (k : F ≤ L)
     (T : Scheme.{u})
     (hc : coefficientMap P (D.coefficients E L (h.trans k)) T =
@@ -68,9 +63,7 @@ def scalarAssoc (D : Models P) {E F L : Index P} (h : E ≤ F) (k : F ≤ L)
           (coefficientMap P (D.coefficients E L (h.trans k)) T) hc)))
     (D.scalars E L (h.trans k) T).adjunction
 
-/-- Identity scalar extension with its tensor unitor normalization.
-Source: blueprint (2), identity coefficients
-(blueprint: def-sp-field-shriek-system-coherence). -/
+/-- Identity scalar extension with its tensor unitor normalization. -/
 def scalarUnit (D : Models P) (E : Index P) (T : Scheme.{u})
     (hc : coefficientMap P (D.coefficients E E le_rfl) T = 𝟙 _) :
     (D.scalars E E le_rfl T).T ≅ 𝟭 _ :=
@@ -82,9 +75,7 @@ def scalarUnit (D : Models P) (E : Index P) (T : Scheme.{u})
 
 attribute [local irreducible] scalarAssoc scalarUnit
 
-/-- Composition and identity in the ordinary derived category of whole systems.
-Source: blueprint (2), balanced coefficient cocycle
-(blueprint: def-sp-field-shriek-system-coherence). -/
+/-- Composition and identity in the ordinary derived category of whole systems. -/
 structure CoherenceLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) where
   coefficientComposition : ∀ (E F L : Index P) (h : E ≤ F) (k : F ≤ L) (T : Scheme.{u}),

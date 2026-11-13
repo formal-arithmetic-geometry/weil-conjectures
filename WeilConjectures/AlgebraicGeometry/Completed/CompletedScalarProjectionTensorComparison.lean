@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 /-!
 # Comparing scalar reduction with the tensor projection morphism
 
-Source: blueprint, proper base change, order 1276, finite-level projection formula;
-Stacks Project, Tags 0B56 and 06YY.
+Source: Stacks Project, Tags 0B56 and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -48,28 +47,7 @@ The ordinary direct-image presentations F and G are identified with the canonica
 ringed functors by hF and hG; deriving these exact presentations avoids unfolding
 the chosen localization constructions when applying the comparison.
 
-Source: blueprint order 1276, finite-level projection formula, and order 1275,
-identification of quotient tensors; Stacks Project, Tags 0B56 and 06YY.
-(blueprint: lem-pbc-completed-scalar-projection-tensor-comparison).
-
-Proof: identify the constant and continuous-function quotient ring systems using
-pbcConstantSystemComparison. Its limit comparison identifies completed rings, and
-its projection equations identify the transported target-module actions. Resolve an input
-by flat K-flat complexes. Extension followed by restriction is tensor with the
-restricted quotient ring: on sections the comparison sends s tensor m to m tensor s.
-The same construction at X and Y descends to the two tensor models and the source
-and target isomorphisms below. Restriction commutes with direct image through the
-section-normalized comparison. Its derived comparison is fixed by the universal
-right-derived units, so this comparison agrees with the given e.
-Transpose the displayed scalar projection using pbcDerivedScalarAdjunction: its
-transpose is direct image of m mapping to 1 tensor m, followed by this restriction
-comparison. Under the tensor identifications this is the transpose of the tensor
-projection, namely the tensor pullback comparison followed by counit tensor identity.
-The tensor-unit normalization and the adjunction triangle identity identify them
-on K-flat representatives. Localization and the derived-unit normalization extend
-the equality to arbitrary unbounded inputs. No perfectness argument is used to
-infer invertibility here; that is a separate application of the perfect projection
-formula. The zero quotient and the empty site use the same tensor/unit equations. -/
+Source: Stacks Project, Tags 0B56 and 06YY. -/
 theorem completedScalarProjectionTensorComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) [IsIso (completedCoefficientMap f d)]

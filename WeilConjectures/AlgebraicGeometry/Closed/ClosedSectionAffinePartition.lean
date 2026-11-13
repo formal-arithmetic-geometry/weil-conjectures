@@ -15,9 +15,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Separating closed sections over affine strata
-
-Source: Stacks Project, Tag 095K, proof of `lemma-decompose-quasi-finite-morphism`,
-final paragraph (blueprint: lem-weil-pbc-closed-section-affine-partition).
 -/
 
 @[expose] public section
@@ -275,32 +272,7 @@ private theorem select_disjoint_closed_sections
     exact ⟨e ⟨t k, k, rfl⟩, z, by simpa only [t', e.symm_apply_apply] using hz⟩
 
 /-- A closed subscheme of an affine scheme covered by finitely many closed sections is
-covered by disjoint closed sections after a finite reduced affine partition of the base.
-
-Source: Stacks Project, Tag 095K, final paragraph of
-`lemma-decompose-quasi-finite-morphism`.
-(blueprint: lem-weil-pbc-closed-section-affine-partition)
-
-Proof: Replace each Z_k by the base using its isomorphism Z_k -> X. The inverse image
-of Y under each section and the intersection of each pair of sections are closed subschemes
-of X, by base change of closed immersions. Form the finitely
-many Boolean atoms of their closed images. Realize an atom as an open subscheme of the
-closed subscheme cut out by the sum of the relevant defining ideals. Each atom is
-Noetherian. Partition it into finitely many reduced affine locally closed subschemes.
-The resulting maps R_a -> X cover X. Every pulled-back incidence and equalizer has
-empty image or all of R_a. In the latter case it is a surjective closed immersion into
-a reduced scheme, hence an isomorphism. Thus each section is either disjoint from Y_R
-or factors through it, and two retained sections coincide or have disjoint images.
-To prove coverage, project a point of Y_R to W and choose an original section through
-it. Its incidence with Y meets R, hence contains all of R. The square formed by this
-section, its lift R -> Y_R, the map R -> X, and Y_R -> W is a pullback: a compatible
-cone lifts by its projection to R. Thus the point lifts to R, and this also proves that
-R -> Y_R is closed by base change. Take the finite set of distinct lifted section
-morphisms and reindex it by Fin q. Their
-composites to R_a are isomorphisms, their images are pairwise disjoint, and they cover
-Y_R. When Y_R is empty, take zero sections. Empty atoms may be retained; for an empty
-base take an empty partition. This construction permits repeated sections and handles
-the zero ring. -/
+covered by disjoint closed sections after a finite reduced affine partition of the base. -/
 theorem exists_closed_section_affine_partition
     {X Y W : Scheme.{u}} [IsAffine X] [IsNoetherian X] [IsAffine W]
     (h : Y ⟶ X) (p : W ⟶ X) (j : Y ⟶ W) [IsClosedImmersion j]

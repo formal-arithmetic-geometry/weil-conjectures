@@ -25,22 +25,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Every global resolution cycle has a common total-complex class with a coefficient cycle.
 Source: Stacks Project, Tag 03P2, the separated affine-cover comparison, and Tag 01FD,
-the two augmentations of the injective Čech double complex.
-(blueprint: new-w2-additive-cech-common-representative)
-
-Proof: Restrictions to open subschemes preserve injectives, so the augmented Čech
-rows of each resolution term are exact for the covering U. Hence alpha is a
-quasi-isomorphism. On each finite intersection, the additive structure sheaf has
-vanishing positive cohomology by affine quasi-coherent acyclicity. Consequently
-beta is a quasi-isomorphism by the first-quadrant double-complex comparison.
-The coordinate identification by restrictFunctorΓ and the additive universe lift
-identifies its source with the ordinary unit Čech complex. Alpha sends s to a
-cycle tα. Surjectivity of beta on homology gives a coefficient homology class
-with image [tα]. Lift this class to a coefficient cycle z, and apply beta to get
-tβ. The chain-map identities give the two cycle equations, and the chosen
-class gives [tα]=[tβ]. At degree zero the same argument is the augmented kernel
-calculation; an empty covering covers only the empty scheme and all groups are
-zero. No normalized equivalence or scalar action on sheaf cohomology is used. -/
+the two augmentations of the injective Čech double complex. -/
 theorem additiveCech_common_representative
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     {ι : Type u} [Finite ι] (U : ι → X.Opens)

@@ -16,9 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 
 /-!
 # Extending acyclic constant coefficients from cyclic groups to torsion groups
-
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant.
-(blueprint: lem-weil-pbc-constant-torsion-acyclic-devissage).
 -/
 
 @[expose] public section
@@ -29,21 +26,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- On a qcqs scheme, acyclicity and the constant-section isomorphism for positive
 cyclic coefficients prime to p extend to all elementwise prime-to-p torsion groups.
-The case p = 0 allows every finite order.
-Source: Stacks Project, Tag 0GJR, proof of lemma-locally-acyclic-locally-constant.
-(blueprint: lem-weil-pbc-constant-torsion-acyclic-devissage).
-
-Proof: express M as the directed union of its finitely generated subgroups. Each is
-finite by the finite-order assumption. Decompose each finite abelian subgroup into a
-finite sum of nontrivial cyclic groups by the structure theorem. A cyclic generator
-has the indicated order also in M, so its order is admissible. Constant sheaves and
-cohomology preserve finite sums, and the constant-section unit is additive and natural;
-therefore the claimed two conditions hold for every finite subgroup, including zero.
-The constant-sheaf left adjoint preserves their filtered colimit. On a qcqs scheme
-etale cohomology preserves filtered colimits in every nonnegative degree, as do sections.
-In positive degrees the image cocone consists of zero groups, so its colimit is zero.
-In degree zero naturality of the constant-section unit gives an isomorphism of diagrams,
-whose colimit is the asserted unit for M. -/
+The case p = 0 allows every finite order. -/
 theorem constantTorsion_acyclic_of_cyclic
     (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] (p : ℕ)
     (hcyclic : ∀ n : ℕ, 0 < n → (p = 0 ∨ n.Coprime p) →

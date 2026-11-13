@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.FreeParameterEvaluationData
 
 /-! # Evaluation coherence for free profinite parameters
 
-Source: Stacks Project, Tags 08J7, 08J9 and 07A7; the generator and scalar
-adjunction calculations in the node
-(blueprint: def-sfb-free-parameter-evaluation-data).
+Source: Stacks Project, Tags 08J7, 08J9 and 07A7.
 
 All Hom objects are the recorded closed derived Hom. Gamma is the recorded
 ProfiniteFreeSlice.Comparison.gamma. The maps below precede all coherence claims.
@@ -33,36 +31,35 @@ namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 /-- The relative parameter scheme from the recorded test-object functor.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 abbrev testScheme (X : Scheme.{u}) (P : Profinite.{u}) := (ProfiniteFreeSlice.test X P).left
 
 /-- Its structural projection.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 abbrev projection (X : Scheme.{u}) (P : Profinite.{u}) := (ProfiniteFreeSlice.test X P).hom
 
 /-- The free parameter in degree zero.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 abbrev parameterD (P : Profinite.{u}) :=
   (DerivedCategory.singleFunctor (PointModules R) 0).obj (freeParameter R P)
 
 /-- F uses the existing closed derived Hom of the condensed module category.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 abbrev functions (P : Profinite.{u}) := ihom (parameterD R P)
 
 /-- H is exactly the source functor of Comparison.gamma.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 abbrev schemeFunctions (X : Scheme.{u}) (P : Profinite.{u}) :=
   (CondensedRing.derivedHom R.X X).obj (op (ProfiniteFreeSlice.derivedFree R.X X P))
 
-/-- Identify the two standard degree-zero pullback presentations.
-Source: exact termwise pullback (blueprint: def-sfb-free-parameter-evaluation-data). -/
+/-- Identify the two standard degree-zero pullback presentations. -/
 def pulledParameter (X : Scheme.{u}) (P : Profinite.{u}) :
     (pointPullD R X).obj (parameterD R P) ≅ ProfiniteFreeSlice.derivedFree R.X X P :=
   (pointPull R X).mapDerivedCategorySingleFunctor 0 |>.app (freeParameter R P)
 
 /-- Beta is the transpose of pulled-back evaluation, followed by the canonical
 single-complex identification, with no use of c or gamma.
-Source: Stacks 08J9 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J9. -/
 def beta (X : Scheme.{u}) (P : Profinite.{u})
     (N : DerivedCategory (PointModules R)) :
     (pointPullD R X).obj ((functions R P).obj N) ⟶
@@ -72,7 +69,7 @@ def beta (X : Scheme.{u}) (P : Profinite.{u})
 
 /-- An actual regular-module map from a compatible family of sections: apply the
 section-module equivalence to the ordinary unitHomEquiv, whose map sends r to r s.
-Source: Stacks 03EK (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 03EK. -/
 def sectionMap (X : Scheme.{u}) (M : Modules R X)
     (s : ((CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
       (Scheme.ProEt.topology X) (condensedRingObj R.X X)).obj M).sections) :
@@ -82,7 +79,7 @@ def sectionMap (X : Scheme.{u}) (M : Modules R X)
       (SheafOfModules.unitHomEquiv _ |>.symm s)
 
 /-- The universal P-section from the unit at id_P, restricted along its graph.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 def universalSection (X : Scheme.{u}) (P : Profinite.{u}) :
     ((pointPull R (testScheme X P)).obj (freeParameter R P)).X.obj.obj
       (op (Scheme.ProEt.mk (𝟙 (testScheme X P)))) :=
@@ -94,12 +91,12 @@ def universalSection (X : Scheme.{u}) (P : Profinite.{u}) :
       (freeParameter R P).X).hom.app (op P)) (ProfiniteFreeSlice.pointGenerator R.X P))
 
 /-- The terminal arrow of the small pro-etale site.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 def terminalArrow {X : Scheme.{u}} (V : X.ProEt) : V ⟶ Scheme.ProEt.mk (𝟙 X) :=
   MorphismProperty.Over.homMk V.hom (Category.comp_id V.hom)
 
 /-- The universal generator as a section of the section-module presheaf.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 def universalValue (X : Scheme.{u}) (P : Profinite.{u})
     (V : (testScheme X P).ProEtᵒᵖ) :
     (((CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
@@ -109,9 +106,7 @@ def universalValue (X : Scheme.{u}) (P : Profinite.{u})
     (terminalArrow V.unop).op) (universalSection R X P)
 
 /-- Restriction compatibility of the tautological generator.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data).
-Proof: compose the terminal arrow with the given test arrow and use uniqueness of
-terminal arrows. Presheaf functoriality identifies the two restrictions. -/
+Source: Stacks 08J7. -/
 theorem universalSection_compatible (X : Scheme.{u}) (P : Profinite.{u})
     {V W : (testScheme X P).ProEtᵒᵖ} (f : V ⟶ W) :
     (((CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
@@ -130,7 +125,7 @@ theorem universalSection_compatible (X : Scheme.{u}) (P : Profinite.{u})
   rw [h]
 
 /-- The universal generator, constructed by the ordinary regular-module adjunction.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 def parameterGenerator (X : Scheme.{u}) (P : Profinite.{u}) :
     𝟙_ (Modules R (testScheme X P)) ⟶
       (pointPull R (testScheme X P)).obj (freeParameter R P) :=
@@ -139,7 +134,7 @@ def parameterGenerator (X : Scheme.{u}) (P : Profinite.{u}) :
 
 /-- The same generator in the ordinary derived category, using the fixed unit and
 single-complex pullback identifications.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7. -/
 def generatorD (X : Scheme.{u}) (P : Profinite.{u}) :
     𝟙_ (DerivedCategory (Modules R (testScheme X P))) ⟶
       (pointPullD R (testScheme X P)).obj (parameterD R P) :=
@@ -151,7 +146,7 @@ def generatorD (X : Scheme.{u}) (P : Profinite.{u}) :
 
 /-- Derived evaluation on the universal generator: insert it in the first tensor
 factor, use the canonical K-flat tensor comparison, then pull back the closed counit.
-Source: Stacks 08J7, 08J9 (blueprint: def-sfb-free-parameter-evaluation-data). -/
+Source: Stacks 08J7, 08J9. -/
 def derivedEvaluation (X : Scheme.{u}) (P : Profinite.{u})
     (N : DerivedCategory (PointModules R)) :
     (pointPullD R (testScheme X P)).obj ((functions R P).obj N) ⟶

@@ -13,9 +13,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 import WeilConjectures.SixFunctors.ProEtale.Adic.ZModPowCokernel
 
 /-! # Finite-level scalar comparison for the integral root tower
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-integral-root-level-scalars).
 -/
 
 @[expose] public noncomputable section
@@ -295,35 +292,7 @@ private theorem levelIso_unit (l : ℕ) [Fact l.Prime]
     integralMap_comp]
 
 /-- Scalar extension identifies the finite root levels and their transition maps.
-The comparison is fixed on the ordinary scalar unit, before taking any limit.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), applied at each
-positive ell-power quotient; sec-proetale-coefficients/sk-def-sp-tate-twist/
-_section.md, finite-level tensor formulas.
-(blueprint: lem-diagonal-integral-root-level-scalars).
-
-Proof: Put N = l^(n+1). The actual condensed reduction O_E -> O_E/N is the
-cokernel of multiplication by N. On each profinite test, quotient-valued
-continuous functions lift through a continuous choice of representatives in
-the discrete quotient. A continuous function in the kernel divides by N
-continuously, because multiplication by N is an embedding of O_E. The
-sectionwise cokernel criterion supplies the condensed cokernel. Pullback to
-X and tensoring with mu_N preserve it. The first map then vanishes because
-N annihilates mu_N, so the tensor reduction is an isomorphism.
-The bottom integral coefficient map is an isomorphism by the normalized
-base coefficient identification. Hence the restricted bottom finite twist
-is the free Z_l,X-module on mu_N. Uniqueness of left adjoints identifies its
-extension to O_E,X with the free O_E,X-module on mu_N, and the tensor reduction
-identifies that module with the actual finite twist for E. The adjunction
-unit equation and the defining reduction square for spEllMap give exactly
-the stated normalization. The successive reduction squares commute after
-cancelling the epic integral reduction. Tensor these squares with the root
-power maps; injectivity of the extension-unit Hom correspondence then gives
-naturality of the level comparisons. They therefore assemble into the
-required tower isomorphism. No inverse limit, flatness of the root-limit
-line, or derived comparison is used. The same universal properties apply
-to an empty scheme and to the bottom field itself. -/
+The comparison is fixed on the ordinary scalar unit, before taking any limit. -/
 theorem diagonalIntegral_rootLevelScalars (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u}) :
     ∃ i : (spIntegralTwistSystem X l (bottomField l) ⋙

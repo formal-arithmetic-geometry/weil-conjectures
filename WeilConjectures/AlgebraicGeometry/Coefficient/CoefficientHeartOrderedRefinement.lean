@@ -11,9 +11,6 @@ import Mathlib.Topology.Irreducible
 
 /-!
 # Connected ordered common refinements
-
-Source: blueprint common-stratification clause (1), with its Noetherian-induction proof.
-(blueprint: new-det-lem-coefficient-heart-common-stratification-refinement).
 -/
 
 @[expose] public noncomputable section
@@ -180,24 +177,8 @@ private theorem exists_locallyClosed_immersion (X : Scheme.{u}) (s : Set X)
   exact Set.inter_eq_left.mpr subset_coborder
 
 /-- A finite family of locally closed scheme stratifications has a connected ordered
-common refinement. Source: blueprint common-stratification clause (1); Stacks Project,
-Topology, Tags 09Y5 and 0052.
-(blueprint: new-det-lem-coefficient-heart-common-stratification-refinement).
-
-Proof: intersect the input partitions, using tuples of indices. The empty product gives
-X for zero inputs. Induct on closed subsets of the Noetherian space, uniformly for any
-finite locally closed cover. On a nonempty closed subset, choose an irreducible component
-and a nonempty relative open contained in it. Irreducibility places that component in
-one of the finitely many closures of covering parts. Intersect the chosen open with the
-open part of this locally closed covering part. This gives a nonempty irreducible open
-contained in that part. Induct on its proper closed complement and prepend the chosen
-open to the resulting list. Complements of prefixes are closed tails from induction,
-so prefixes are open; distinct pieces are disjoint. The empty subset has no strata.
-Realize each locally closed piece as the vanishing-ideal closed subscheme of its open
-coborder. The composite inclusion is an immersion with the prescribed range. Its
-embedding identifies its domain with that irreducible piece, giving connectedness.
-No factorization through an input scheme stratum is inferred from image containment.
--/
+common refinement. Source: Stacks Project,
+Topology, Tags 09Y5 and 0052. -/
 theorem coefficientHeart_commonStratification_refinement
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] :

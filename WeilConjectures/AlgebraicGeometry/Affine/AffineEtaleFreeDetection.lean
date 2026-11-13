@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 # Detection by the affine étale free complexes
 
 Source: Bhatt--Scholze, Proposition 6.4.8, first paragraph.
-(blueprint: lem-pur-affine-etale-free-detection)
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The free rank-one sheaf at an affine étale object, placed in degree zero.
-Source: Bhatt--Scholze, Proposition 6.4.8, coherent generators.
-(blueprint: lem-pur-affine-etale-free-detection) -/
+Source: Bhatt--Scholze, Proposition 6.4.8, coherent generators. -/
 noncomputable def affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u}) (U : T.AffineEtale) :
     DerivedCategoryModule C T :=
@@ -226,8 +224,7 @@ The two adjacent postcomposition bijections and the exact Hom sequence show that
 all shifted tests of the cone vanish. In this calculation the shifted triangle
 maps carry the invertible scalar (-1)^n; cancel it explicitly. The cone is zero
 by the preceding argument, so h is invertible. This works for arbitrary
-unbounded objects and includes the empty scheme and zero coefficient ring.
-(blueprint: lem-pur-affine-etale-free-detection) -/
+unbounded objects and includes the empty scheme and zero coefficient ring. -/
 theorem isIso_of_affineEtaleFreeComplex
     (C : Type (u + 1)) [CommRing C] (T : Scheme.{u})
     {A B : DerivedCategoryModule C T} (h : A ⟶ B)

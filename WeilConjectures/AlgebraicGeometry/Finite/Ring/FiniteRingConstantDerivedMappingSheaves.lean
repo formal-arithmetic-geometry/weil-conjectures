@@ -299,21 +299,7 @@ private noncomputable def derivedIsoPresheafIso
         restrictDerivedMap_map])
 
 /-- Sheafified derived Hom and Isom between bounded finite constant complexes are the
-constant algebraic Hom and Isom sets.
-
-Source: Stacks Project, Tags 09BE and 08FR, and the finite-source argument of
-`lem-weil-pbc-finite-ring-derived-local-constancy`, steps 2--7.
-(blueprint: lem-weil-pbc-finite-ring-constant-derived-mapping-sheaves)
-
-Proof: Approximate E by a bounded finite free complex with cone strictly below
-G. Triangle exactness and orthogonality compare maps from E with maps from that
-approximation, both algebraically and after exact constant realization and restriction.
-Local-actual and finite componentwise constant-map descent give local algebraic
-representatives. An exact geometric stalk retracts constant realization on every
-nonempty scheme, proving local uniqueness. Lift an isomorphism and its inverse on a
-common cover; local uniqueness makes their algebraic composites identities. Thus both
-comparison maps are locally bijective, so sheafification inverts them. Empty schemes,
-zero coefficient rings and empty Isom sets are included. -/
+constant algebraic Hom and Isom sets. -/
 theorem finiteRing_constant_derived_mapping_sheaves
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ)

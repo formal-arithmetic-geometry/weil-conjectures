@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteComparisonSurjective
 
 /-! # Finite comparison tools for a local completed Chern class
-
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: lem-diagonal-uniformizer-local-chern-transport).
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +37,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 namespace UniformizerChernNormalizationData
 
 /-- The completed normalized arrow has a finite comparison factor.
-Source: diagonal tower coefficient changes proof (1), reduction of the section class.
-(blueprint: lem-diagonal-uniformizer-local-chern-transport).
 
 The target of the finite arrow is a degree-zero sheaf shifted by two, hence
 bounded below. The etale/pro-etale comparison is bijective on morphisms into

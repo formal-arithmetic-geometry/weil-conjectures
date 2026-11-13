@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.FiniteStageRationalExchangeData
 
 /-! # Scalar compatibility of the composite rational exchange
-
-Source: sketch32, lines 1218--1228 and 1291--1321.
-(blueprint: lem-sbc-rational-raw-square-exchange-coherence)
 -/
 
 @[expose] public noncomputable section

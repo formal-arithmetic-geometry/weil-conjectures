@@ -12,9 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwistCons
 import WeilConjectures.CategoryTheory.SixFunctors.IntegrationTransport
 
 /-! # Coherence and closure of fixed finite coefficient diagrams
-
-Source: diagonal tower coefficient changes, paragraph (2).
-(blueprint: lem-sfb-diagonal-finite-coefficient-closure).
 -/
 
 @[expose] public noncomputable section
@@ -240,37 +237,7 @@ private theorem scalarFrame_diagram
 
 /-- Fixed finite diagrams obtained from one Z_l diagram admit the prescribed
 rational transitions and a common algebraic-closure diagram. The integral and
-rational diagrams are input here; this theorem does not construct either.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (2), finite-field colimit
-and compatibility of its legs.
-(blueprint: lem-sfb-diagonal-finite-coefficient-closure).
-
-Proof: Derive exact coefficient restriction with the normalized universal unit
-and take its scalar mate. For E contained in F, associativity of extension of
-scalars and the coefficient/root-map composition equations identify the
-composite Z_l-to-O_E-to-E-to-F endpoint with the Z_l-to-O_F-to-F endpoint.
-Adjunction injectivity gives the same equality for normalized direct-image
-mates. Transport the two given scalar compatibility squares along these
-identifications; since their source is the same fixed Z_l diagram, their
-resulting diagonal and trace arrows agree. This constructs the required
-rational transition compatibilities, including identity inclusions, with the
-specified spRationalTwistMap maps. The poset of finite subextensions is
-filtered. Its coefficient colimit is the prescribed condensed algebraic closure
-and its root-line colimit is spQbarTwist. The regular objects and root lines
-shifted by two have common lower bound -2. Since the three projections are
-qcqs, bounded continuity identifies direct image of these colimits with the
-colimits of direct images. Closed-diagonal direct image is exact and has the
-same comparison on the supported coefficient source. Use these canonical
-scalar endpoints and scalar/direct-image mates to transport a rational
-diagram to the closure. Compatibility of all finite legs, just proved, makes
-the result independent of the chosen initial finite subextension. Naturality
-transports both integration identities. Normalize every endpoint by its adjoint
-and every derived restriction square by its full universal unit. Associativity
-and the colimit-leg equations then give ScalarCompatibility for every finite
-rational diagram to this one closure diagram, with the prescribed closureLineMap.
-The construction changes none of the input finite diagrams. -/
+rational diagrams are input here; this theorem does not construct either. -/
 theorem diagonalCoefficient_finiteClosure
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)]

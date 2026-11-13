@@ -70,7 +70,7 @@ import Mathlib.Topology.Sheaves.Stalks
 
 Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 2.2.8,
 paragraph preceding Lemma 4.2.13, and Lemma 4.2.13(1), with the split-cover
-qualification recorded in the DAG (blueprint: lem-zl-affine-component-site-projection).
+qualification recorded in the DAG.
 
 ## Main definitions
 
@@ -98,8 +98,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- Bundle the actual component quotient with its quotient topology. The structure proofs
 come from the spectral-component theorem; there is no chosen replacement space.
-Source: Bhatt--Scholze, Lemma 2.2.8
-(blueprint: lem-zl-affine-component-site-projection). -/
+Source: Bhatt--Scholze, Lemma 2.2.8. -/
 def componentProfinite (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] :
     Profinite.{u} := by
   letI : SpectralSpace X := {}
@@ -109,8 +108,7 @@ def componentProfinite (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (spectralSpace_connectedComponents_profinite (T := X)).2.2
 
 /-- The component object of a qcqs pro-etale object, over the component quotient of the base.
-Source: Bhatt--Scholze, Lemma 2.2.8 and paragraph before Lemma 4.2.13
-(blueprint: lem-zl-affine-component-site-projection). -/
+Source: Bhatt--Scholze, Lemma 2.2.8 and paragraph before Lemma 4.2.13. -/
 def componentObject (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (W : Qcqs T) : Over (componentProfinite T) := by
   letI : CompactSpace W.obj.left := W.property.1
@@ -121,8 +119,7 @@ def componentObject (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
         componentProfinite W.obj.left ⟶ componentProfinite T)
 
 /-- The map on actual component quotients induced by a map over the base.
-Source: Bhatt--Scholze, Lemma 4.2.13(1), canonical factorization
-(blueprint: lem-zl-affine-component-site-projection). -/
+Source: Bhatt--Scholze, Lemma 4.2.13(1), canonical factorization. -/
 def componentObjectMap {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
     {V W : Qcqs T} (a : V ⟶ W) : componentObject T V ⟶ componentObject T W :=
   Over.homMk (ConcreteCategory.ofHom
@@ -139,7 +136,7 @@ def componentObjectMap {T : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]
 scheme section. Since the coproduct map is over T, its section is automatically over T.
 Finite index sets are represented by Fin n, including n = 0.
 Source: the corrected split-cover form of Bhatt--Scholze, Lemma 4.2.13(1),
-using Stacks Tags 00WB and 00WK (blueprint: lem-zl-affine-component-site-projection). -/
+using Stacks Tags 00WB and 00WK. -/
 def HasSplitFiniteQcqsCovers {T : Scheme.{u}} (W : Qcqs T) : Prop :=
   ∀ (n : ℕ) (V : Fin n → Qcqs T) (a : ∀ i, (V i).obj ⟶ W.obj),
     Presieve.ofArrows (fun i ↦ (V i).obj) a ∈ precoverage T W.obj →
@@ -151,7 +148,7 @@ with actual restriction along U. Its adjunction unit and the component factoriza
 normalize the evaluation isomorphisms, which are natural in both sheaves and eligible W.
 Taking C to be sets, abelian groups, or rings retains all operations.
 Source: Bhatt--Scholze, Lemma 4.2.13(1), with split-cover sheafification via
-Stacks Tags 00WB/00WK (blueprint: lem-zl-affine-component-site-projection). -/
+Stacks Tags 00WB/00WK. -/
 def ComponentSiteEvaluation (T : Scheme.{u}) [IsAffine T]
     (U : Over (componentProfinite T) ⥤ T.ProEt)
     (r : ∀ E : Over (componentProfinite T), C((U.obj E).left, E.left))
@@ -1478,8 +1475,7 @@ private theorem component_evaluation (X : Scheme.{u}) [IsAffine X]
 
 /-- The affine component functor, its geometric morphism, and its split-cover evaluation.
 Source: Bhatt--Scholze, Lemma 2.2.8 and Lemma 4.2.13(1), with the corrected
-split-cover hypothesis; Stacks Tags 00WB and 00WK
-(blueprint: lem-zl-affine-component-site-projection).
+split-cover hypothesis; Stacks Tags 00WB and 00WK.
 
 Proof for stage 3 (the thirteen steps of the node):
 1. Write $T=\operatorname{Spec}A$ and $q:|T|\to P$. By [lem-weil-pbc-qcqs-scheme-spectral] and
@@ -1604,8 +1600,7 @@ with those on $F(\pi_0(|W|)\to P)$. For example the addition square identifies t
 $F(\pi_0(|W|))^2$ with the given addition on $F(\pi_0(|W|))$; the nullary maps similarly give
 zero and one. The equations for the operations are preserved functorially. Thus the canonical
 identification is one of abelian groups or rings, and is natural in their sheaves and in
-eligible $W$.
--/
+eligible $W$. -/
 theorem affine_component_site_projection (T : Scheme.{u}) [IsAffine T] :
     ∃ (U : Over (componentProfinite T) ⥤ T.ProEt)
       (r : ∀ E : Over (componentProfinite T), C((U.obj E).left, E.left)),

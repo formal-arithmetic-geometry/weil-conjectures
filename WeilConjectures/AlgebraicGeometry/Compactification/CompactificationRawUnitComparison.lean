@@ -157,7 +157,6 @@ The input sheaf functor is only additive; its exactness is unnecessary because i
 functor does not occur.
 
 Source: Stacks Project, Tags 0F7B, 0F7I and 0D6E.
-(blueprint: lem-pur-compactification-raw-unit-comparison).
 
 Proof in words: first take a Cartesian proper refinement. Expand its comparison as the
 adjunct of inverse open base change followed by proper direct-image composition. The

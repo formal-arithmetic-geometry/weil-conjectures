@@ -16,26 +16,20 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.mapExactFunctor
   comparisonUpperStar
 
-/-- The constant comparison with both endpoint sheaves fixed explicitly.
-Source: exact comparison preserves constant sheaves.
-(blueprint: def-sfb-diagonal-trace-finite-etale-image). -/
+/-- The constant comparison with both endpoint sheaves fixed explicitly. -/
 @[irreducible] def finiteEtaleConstantIso (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) T).obj
       (Etale.ordinaryFiniteConstant A T) ≅ geoCartierConstant A T :=
   (comparisonUpperStarConstantSheafIso A T).app (ModuleCat.of A A)
 
-/-- The Tate-line comparison, with both endpoint sheaves fixed explicitly.
-Source: the definition of the ordinary pro-etale finite Tate line.
-(blueprint: def-sfb-diagonal-trace-finite-etale-image). -/
+/-- The Tate-line comparison, with both endpoint sheaves fixed explicitly. -/
 @[irreducible] def finiteEtaleLineIso (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) T).obj
       (Scheme.finiteEtaleTateLine T N A hA) ≅ geoCartierLine A N hA T := Iso.refl _
 
-/-- Exact comparison, with both ordinary pro-étale endpoints fixed.
-Source: exact site comparison and endpoint transport.
-(blueprint: def-sfb-diagonal-trace-finite-etale-image). -/
+/-- Exact comparison, with both ordinary pro-étale endpoints fixed. -/
 @[irreducible] def finiteEtaleProEquiv (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0) :
     Ext (Etale.ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2 ≃
@@ -43,9 +37,7 @@ Source: exact site comparison and endpoint transport.
   (finiteEtaleRawEquiv A T N hA).trans
     (finiteExtEndpointEquiv (finiteEtaleConstantIso A T) (finiteEtaleLineIso A T N hA))
 
-/-- The comparison image, with the constant source transported to pro-etale constants.
-Source: diagonal trace finite coefficient comparison.
-(blueprint: def-sfb-diagonal-trace-finite-etale-image). -/
+/-- The comparison image, with the constant source transported to pro-etale constants. -/
 @[irreducible] def finiteEtaleProImage (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (N : ℕ) (hA : (N : A) = 0)
     (b : Ext (Etale.ordinaryFiniteConstant A T) (Scheme.finiteEtaleTateLine T N A hA) 2) :

@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-! # Section maps that are isomorphisms on all geometric stalks
 
 Source: Stacks Project, Tags 03PT and 0GKC, stalkwise-isomorphism step.
-(blueprint: lem-weil-pbc-etale-section-germ-iso).
 -/
 
 @[expose] public section
@@ -88,16 +87,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- If a linear map into neighbourhood sections induces a bijection at every geometric
 point of that neighbourhood, its adjunct is a constant-sheaf trivialization.
 
-Source: Stacks Project, Tag 0GKC, conclusion by Tag 03PT
-(blueprint: lem-weil-pbc-etale-section-germ-iso).
-
-Proof: The section map defines a morphism from the constant sheaf on the localized site.
-At a lifted point the stalk of restriction is the original stalk: the functor forgetting
-the chosen map to the neighbourhood is initial on pointed neighbourhoods. The stalk of
-the constant sheaf is its module value, compatibly with its constant sections. Thus the
-hypothesis says that every stalk of the adjunct is invertible. The conservative family
-of geometric points, localized at U and lifted to the coefficient universe, detects its
-invertibility. Take the inverse isomorphism. No finiteness or nonemptiness is needed. -/
+Source: Stacks Project, Tag 0GKC, conclusion by Tag 03PT. -/
 theorem exists_constant_iso_of_bijective_section_germs
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

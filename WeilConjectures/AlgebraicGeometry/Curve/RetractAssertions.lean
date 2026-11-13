@@ -18,7 +18,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 # The eight curve assertions pass to retracts
 
 Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 03SD,
-first paragraph (blueprint: lem-weil-pbc-curve-assertions-retract).
+first paragraph.
 -/
 
 @[expose] public section
@@ -65,28 +65,7 @@ private theorem pullback_bijective_of_retract {X Y : Scheme.{u}} (f : Y ⟶ X)
 `a ≫ b` is invertible and the conditional coefficient hypotheses pass from `P.F` to `H`.
 The local `E` is the same coefficient equivalence used in finite_pushforward_assertions;
 it views abelian groups as modules over `ULift ℤ`, adding no coefficient structure.
-Source: Stacks Project, Section 03SB, proof of Lemma 03SD, first paragraph
-(blueprint: lem-weil-pbc-curve-assertions-retract).
-
-Proof:
-1. Put `r = b ≫ inv (a ≫ b)`. Associativity gives `a ≫ r = 𝟙 P.F`.
-Apply the coefficient-equivalence and underlying-abelian-group functors to this identity.
-2. `Sheaf.H.map_comp_apply` and `Sheaf.H.map_id_apply` make the map induced by `r`
-a left inverse to the map induced by `a`. Hence the latter is injective in every degree.
-3. C1 and C2 descend by injectivity into a subsingleton. For C3 pass the primary
-hypothesis to H first and use the same argument.
-4. For C4 and C5 use `Scheme.isConstructibleSheaf_integral_iff` to turn module
-constructibility of G into the underlying-set predicate, pass it through hconstructible,
-and turn it back into module constructibility of H. Torsion is used in this comparison.
-Pass invertible order to H for C4. Injectivity into its finite cohomology proves both fields.
-5. Naturality `Etale.cohomologyMap_map` for a and r descends surjectivity of any pullback:
-lift the image of a target class under the section, then apply the retraction to the lift.
-Naturality and the retraction identity show that this is a lift of the original class.
-Injectivity descends by applying the coefficient section, then injectivity for H,
-then injectivity of the section on source cohomology.
-6. Apply the bijectivity argument to the extension projection for C6 and C7, passing
-invertible order to H in C6. Apply the surjectivity argument to the open immersion
-in degree two for C8. These are the eight fields of Assertions. -/
+Source: Stacks Project, Section 03SB, proof of Lemma 03SD, first paragraph. -/
 theorem IsCurve.assertions_of_isIso_comp {k : Type u} [Field k] [IsAlgClosed k]
     (P : CurveCoefficientPair k)
     (H : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

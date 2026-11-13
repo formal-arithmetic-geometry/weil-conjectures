@@ -88,9 +88,7 @@ the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the und
 sheaves is bijective for every `q`. This is the assertion `C₇(C, F)` of the eight curve
 calculations; it is proved by reducing to reduced curves and constructible `𝐅_r`-coefficients,
 splitting off the zero-dimensional components, localising to a dense open, passing to the
-normalisation and to the smooth constant case of the curve calculations.
-(blueprint: theorem-cohomology-curves--7)
--/
+normalisation and to the smooth constant case of the curve calculations. -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
     [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
@@ -124,9 +122,7 @@ and `k̄'/k'` are purely inseparable, so the base changes `C_{k̄} ⟶ C` and `C
 universal homeomorphisms and are bijective on étale cohomology
 (`AlgebraicGeometry.Etale.cohomologyMap_bijective`). The square of pullback maps between the
 four cohomology groups commutes, and its bottom row `Hᵠ(C_{k̄}) ⟶ Hᵠ(C_{k̄'})` is bijective by
-`H`.
-(blueprint: lemma-extension-separably-closed-ground-field--1)
--/
+`H`. -/
 theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
     (H : ∀ {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k']
       {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]
@@ -226,9 +222,7 @@ the pullback map `Hᵠ(C, F) ⟶ Hᵠ(C', ι'^* F)` on the cohomology of the und
 sheaves is bijective for every `q`: the algebraically closed case
 `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed`, transported to separably
 closed fields by
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`.
-(blueprint: lemma-extension-separably-closed-ground-field--1)
--/
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`. -/
 @[stacks 0A5E]
 theorem bijective_cohomologyMap_of_isSepClosed {k k' : Type u} [Field k] [IsSepClosed k]
     [Field k'] [IsSepClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]

@@ -18,8 +18,7 @@ Let `p : Y ⟶ S` be proper over an integral locally noetherian scheme, covered 
 opens `Y_α`, each embedded as a closed subscheme of an affine space `𝔸^{σ_α}_S`. Choose for every
 coordinate `t_{α r} : Y_α ⟶ 𝔸¹_S` a nonempty (equivalently, dense) open `V_{α r} ⊆ 𝔸¹_S`. Over a
 nonempty open of `S`, the complement `Z` of the union of the `t_{α r}⁻¹ V_{α r}` is finite over
-`S`. This is the first step of Deligne's generic constructibility theorem
-(`theorem-generic-constructibility-base-change-rj`).
+`S`. This is the first step of Deligne's generic constructibility theorem.
 
 The proof computes the generic fibre: over the residue field `K` of the generic point, the
 complement of each `V_{α r}` in `𝔸¹_K` lies in the zero set of a nonzero polynomial `P_{α r}`, so
@@ -30,8 +29,7 @@ subscheme supported there.
 
 ## Main statements
 
-- `AlgebraicGeometry.exists_isFinite_morphismRestrict_of_range_subset`
-  (`lemma-coordinate-projections--2`).
+- `AlgebraicGeometry.exists_isFinite_morphismRestrict_of_range_subset`.
 -/
 
 @[expose] public section
@@ -167,15 +165,14 @@ theorem finite_setOf_over_genericPoint {S : Scheme.{u}} [IrreducibleSpace S] {σ
     exact hr
   · exact hzz σ z
 
-/-- Blueprint `lemma-coordinate-projections--2`: A projective coordinate complement is
+/-- A projective coordinate complement is
 finite.
 
-Let `S` be integral and locally noetherian (the blueprint takes `S = Spec A` affine) and let
-`p : Y ⟶ S` be proper (the blueprint takes `p` projective). Let `Y = ⋃_α Y_α` be a finite open
-cover with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`, and for each coordinate
-`t_{α r} : Y_α ⟶ 𝔸¹_S` let `V_{α r} ⊆ 𝔸¹_S` be a nonempty open. Then there is a nonempty open
-`W ⊆ S` over which every closed subscheme `Z` of `Y` supported in the complement of
-`⋃_{α, r} t_{α r}⁻¹(V_{α r})` (for instance the reduced one) is finite over `W`. -/
+Let `S` be integral and locally noetherian and let `p : Y ⟶ S` be proper. Let `Y = ⋃_α Y_α` be a
+finite open cover with closed immersions `e_α : Y_α ⟶ 𝔸^{σ_α}_S` over `S`, and for each coordinate
+`t_{α r} : Y_α ⟶ 𝔸¹_S` let `V_{α r} ⊆ 𝔸¹_S` be a nonempty open. Then there is a nonempty open `W ⊆
+S` over which every closed subscheme `Z` of `Y` supported in the complement of `⋃_{α, r} t_{α
+r}⁻¹(V_{α r})` (for instance the reduced one) is finite over `W`. -/
 theorem exists_isFinite_morphismRestrict_of_range_subset {S Y : Scheme.{u}} [IsIntegral S]
     [IsLocallyNoetherian S] (p : Y ⟶ S) [IsProper p] {ι : Type u} [Finite ι]
     (U : ι → Y.Opens) (hU : ⨆ α, U α = ⊤) (σ : ι → Type u) [∀ α, Finite (σ α)]

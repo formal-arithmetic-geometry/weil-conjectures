@@ -82,9 +82,7 @@ After base change along `g`, the complex of free sheaves with the matrices of `P
 quasi-isomorphically to `p'_* Č(g'⁻¹ U, g'^* 𝒢)`
 (`AlgebraicGeometry.Scheme.Modules.quasiIso_mumfordFreeHom`), which is `R p'_* g'^* 𝒢`
 (`AlgebraicGeometry.Scheme.Modules.derivedPushforwardSingleIsoCechResolution`). The per-degree
-form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+form is `exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing`. -/
 theorem exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing {Y S : Scheme.{u}}
     [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
     [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]
@@ -190,9 +188,7 @@ presentation over an affine scheme `S` with Noetherian ring of global sections, 
 basic open `D(a)` over which there is a bounded complex `P` of finite free modules such that for
 every `g : T' ⟶ D(a)` and every cartesian square over `g ≫ ι` the cohomology of `g^* P` is
 `R^q p'_* g'^* 𝒢`. This is the per-degree form of
-`exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
+`exists_isFiniteFreeComplex_derivedPushforward_of_isNoetherianRing`. -/
 theorem exists_isFiniteFreeComplex_higherDirectImage_of_isNoetherianRing {Y S : Scheme.{u}}
     [IsAffine S] [IsNoetherianRing Γ(S, ⊤)] (p : Y ⟶ S) [IsProper p]
     [LocallyOfFinitePresentation p] (𝒢 : Y.Modules) [𝒢.IsFinitePresentation]

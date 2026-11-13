@@ -71,7 +71,7 @@ private theorem normalized_left_unit
   exact NatTrans.congr_app hab K
 
 /-- Left-unit coherence with the site monoidal parameters shared.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-left-unit). -/
+Source: Stacks 07A4. -/
 def SiteScalarLeftUnitLaw
     (C : Type*) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -91,8 +91,7 @@ def SiteScalarLeftUnitLaw
 
 /-- Component form of the scalar left-unit normalization, with the site monoidal
 structures shared throughout the statement.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-left-unit).
-Proof: evaluate the normalization equation at the given derived object. -/
+Source: Stacks 07A4. -/
 private theorem SiteScalarLeftUnitLaw.component
     (C : Type*) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [SymmetricCategory C]
@@ -195,14 +194,7 @@ private theorem scalarRepresentativeNatTrans_isIso
     (ProEtale.etaleSheafExtendScalarsAdjunction φ T) P hP
 
 /-- Left unitality of the specified scalar tensor and unit comparisons.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-left-unit).
-Proof: tensor the defining representative normalization for the coefficient unit
-with the representative at a K-flat complex. The tensor representative normalization,
-ordinary scalar left unitality, and localization left unitality imply the equation
-after the invertible scalar representative. Cancel that representative. Both sides
-are natural transformations on the derived category. Every complex receives a
-quasi-isomorphism from a K-flat complex, so localization extensionality and naturality
-extend the equation from these representatives to every derived object. -/
+Source: Stacks 07A4. -/
 theorem tensorIso_left_unit
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     (T : Scheme.{u}) :

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.D
 
 /-! # Ordinary normalization for completed supported coefficient transport
 
-Source: diagonal tower coefficient changes, initial supported-source identification.
-(blueprint: lem-diagonal-completed-supported-transport-normalization).
-
 The theorem below is the ordinary (degree-zero) normalization step in the
 transport argument.  It is independent of the derived acyclicity argument.
 -/
@@ -200,15 +197,7 @@ private theorem additive_comparison_ab (Y : Scheme.{u})
 /-- The composite ordinary comparison has the support normalization required
 by a normalized source.  This is the ordinary part of the proof of
 `completedSupportedCoefficient_transport`; the derived square and acyclicity
-are handled separately there.
-
-Source: diagonal tower coefficient changes, initial supported-source
-identification; the ordinary normalization paragraph of the proof.
-Proof: expand the composite, use naturality of the completed realization's
-underlying comparison, cancel the coefficient-unit isomorphism, and apply the
-normalizations of the input supported source and ordinary square together with
-the prescribed normalization of the coefficient isomorphism.
-(blueprint: lem-diagonal-completed-supported-transport-normalization). -/
+are handled separately there. -/
 theorem completedSupportedCoefficient_transport_normalization
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

@@ -16,8 +16,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
 
 /-! # The sheaf part of coefficient generation
-Source: blueprint generation, Single sheaves paragraph.
-(blueprint: lem-sfb-coefficient-heart-sheaf-cone-witness)
 -/
 
 @[expose] public noncomputable section
@@ -298,22 +296,7 @@ private theorem locallyClosedExtension_zero
     ((CondensedRing.openImmersionLowerShriek Λ a.toImage).map_isZero (isZero_zero _))
 
 /-- A shifted constructible sheaf has a finite cone witness from shifted lisse
-extensions. The conclusion also permits an isomorphic choice of its derived object.
-
-Source: blueprint generation, Single sheaves paragraph, and Stacks Tag 0152
-(blueprint: lem-sfb-coefficient-heart-sheaf-cone-witness).
-
-Proof: refine an adapted finite stratification to have open prefixes, using common
-stratification. Apply coefficientHeart_filtration to its prefixes. The bottom image
-subobject is zero, the top is the sheaf, and the successive cokernels are the specified
-locally closed extensions of lisse restrictions. Each inclusion is mono, so its
-cokernel sequence is short exact. The degree-zero distinguished triangle and inverse
-rotation express the next step as a cone of the shifted quotient into the preceding
-step. Start with the zero lisse module on X, concatenate witnesses, and append these
-cones. Shift the entire finite diagram by n, transporting generators by shift-addition
-isomorphisms and using the signed shifted distinguished triangle. Finally transport
-the last vertex by the given isomorphism. An empty filtration gives the zero object;
-non-strict steps and zero quotients are permitted. -/
+extensions. The conclusion also permits an isomorphic choice of its derived object. -/
 theorem coefficientHeart_sheaf_cone_witness (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj (coefficientHeartRingObj Λ)]

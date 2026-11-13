@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Abelian.Exact
 /-! # Residue cohomology computed by a free stalk representative
 
 Source: Stacks Project, Tags 06YB, 064K and 0098.
-(blueprint: lem-sc-stalk-free-residue-cohomology-comparison).
 -/
 
 @[expose] public section
@@ -32,30 +31,7 @@ namespace AlgebraicGeometry.Scheme
 computes the derived residue fibre, degree by degree, by a linear equivalence.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 06YB; More on Algebra, Tag 064K;
-Sheaves, Tag 0098.
-(blueprint: lem-sc-stalk-free-residue-cohomology-comparison).
-
-Proof:
-1. Take a K-flat sheaf resolution of G. Its stalk is K-flat by Tag 06YB, and
-   exactness of stalks preserves its comparison to G_x. Pulling this resolution
-   back to the residue-field point computes Li_x^*E using eG. On the one-point
-   spectrum, sections are exact. The pullback tensor product of a sheaf has
-   sections kappa(x) tensor over O_X,x its stalk by Tag 0098. The scalar and vector
-   germs restrict to the residue point, and their balanced bilinear map
-   induces this canonical identification. The identification is functorial in
-   the sheaf, hence is an identification of the corresponding complexes.
-2. The bounded-above free K is K-flat by Tag 064K. Its derived comparison
-   eK with G_x identifies their derived residue tensor products, since derived
-   tensor inverts quasi-isomorphisms and therefore respects derived isomorphisms.
-   The termwise residue extension of K is a representative of this product.
-3. Apply degree-i homology to this comparison. Sections on Spec kappa(x) and
-   transport along GammaSpecIso give exactly derivedFiberCohomology. The residue
-   field of the scheme point is definitionally IsLocalRing.ResidueField O_X,x.
-   The comparisons commute with its scalar action, so give a linear equivalence,
-   not merely an additive equivalence. This is independent of the chosen K.
-No finiteness of the cohomology or local strict perfection is assumed or concluded.
-In particular the statement includes zero complexes and arbitrary upper bounds;
-unbounded below K and free terms of infinite rank are allowed by bounded-above K-flatness. -/
+Sheaves, Tag 0098. -/
 theorem nonempty_stalkFree_residueCohomology_linearEquiv
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

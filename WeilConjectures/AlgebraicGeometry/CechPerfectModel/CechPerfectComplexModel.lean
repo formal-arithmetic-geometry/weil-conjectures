@@ -710,14 +710,7 @@ private theorem cech_slice_exact_products (X : Scheme.{u})
   exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete I) q.symm
 
 /-- The finite-projective constant model on the intrinsic small site is complete.
-Source: Bhatt--Scholze, Lemmas 6.5.8 and 6.6.8.
-(blueprint: lem-weil-pbc-cech-perfect-complex-model).
-
-Proof: exact countable products on each slice descend through the site equivalence.
-The inverse-limit ring has invertible multiplication-difference maps, since the
-scalar is nilpotent at each finite quotient. Finite-projective modules are retracts
-of finite free modules; the generic ringed-ideal completeness criterion applies
-termwise to the resulting complex. -/
+Source: Bhatt--Scholze, Lemmas 6.5.8 and 6.6.8. -/
 theorem cech_model_complete (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)

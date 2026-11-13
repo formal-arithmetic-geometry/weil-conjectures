@@ -13,7 +13,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteImmersionConstructibil
 
 /-! # Finite reductions of ordinary immersion pullback
 
-Source: localization Step 6, finite constructibility; Stacks Tags 09AK, 09AL and 09B5.
+Source: Stacks Tags 09AK, 09AL and 09B5.
 -/
 
 -- After pruning, this module only keeps private declarations.

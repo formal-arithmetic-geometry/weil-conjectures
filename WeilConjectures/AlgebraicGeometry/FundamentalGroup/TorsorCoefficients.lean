@@ -138,7 +138,7 @@ variable [TopologicalSpace M] [DiscreteTopology M] [TopologicalSpace M'] [Discre
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
 
-/-- Blueprint `lemma-invariant-additive-characters`: Abelian case: torsors, characters and H^1,
+/-- Abelian case: torsors, characters and H^1,
 naturality in the coefficients.
 
 Under the identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)`
@@ -162,7 +162,7 @@ theorem sheafHEquivContinuousMonoidHom_map (φ : M →+ M')
   rfl
 
 variable (M) in
-/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
+/-- Finite constant torsors and the etale
 fundamental group, additivity.
 
 The identification `H¹(Y_ét, M) ≃ Hom_cont(π₁(Y, s), M)` turns the sum of classes into the
@@ -202,7 +202,7 @@ theorem sheafHEquivContinuousMonoidHom_add
   rfl
 
 variable (M) in
-/-- Blueprint `lemma-invariant-additive-characters`: Finite constant torsors and the etale
+/-- Finite constant torsors and the etale
 fundamental group.
 
 The group isomorphism `H¹(Y_ét, M) ≃+ Hom_cont(π₁(Y, s), M)` underlying the bijection

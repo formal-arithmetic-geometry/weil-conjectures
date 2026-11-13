@@ -17,11 +17,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
 
 /-- The first four curve assertions transfer across a finite clopen partition.
-Source: the finite disjoint-union argument in the proof of the clopen constant
-assertions lemma. The cohomology and stalk comparison maps decompose componentwise,
-and vanishing and finiteness are preserved by finite products.
-(blueprint: lem-pbc-k2-clopen-constant-assertions-first)
--/
+ The cohomology and stalk comparison maps decompose componentwise, and vanishing and finiteness are
+preserved by finite products. -/
 theorem clopen_first_four (Λ : Type (u + 1)) [CommRing Λ]
     {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsCurve f] (M : ModuleCat.{u + 1} Λ)

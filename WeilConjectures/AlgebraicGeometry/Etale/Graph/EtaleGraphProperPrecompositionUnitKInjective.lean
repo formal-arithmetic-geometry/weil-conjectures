@@ -13,9 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 /-! # Component of proper-first graph normalization
 
 This is the K-injective component calculation in the proof of
-`graph_proper_precomposition_unit` (blueprint: lem-pur-graph-proper-precomposition-unit).
-It isolates the objectwise geometric calculation; natural-transformation extensionality is
-handled in the parent module.
+`graph_proper_precomposition_unit`. It isolates the objectwise geometric calculation;
+natural-transformation extensionality is handled in the parent module.
 -/
 
 @[expose] public section
@@ -31,16 +30,14 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
 /-- The proper-first graph unit equation at one homotopy object.
-Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J; resolution-level calculation.
-(blueprint: lem-pur-graph-proper-precomposition-unit-component).
+Source: Stacks Project, Tags 0F7B, 0F7I and 0F7J.
 
 Proof in words: expand both derived units at the chosen homotopy object.  The proper/open
 interchange and graph comparison formulas reduce the result to the degreewise sheaf map.
 The normalization hypothesis identifies that map after the compactification inclusion with
 the ordinary direct-image compositor, and monicity of the inclusion cancels the remaining
 factor.  The parent theorem assembles these component equations by natural-transformation
-extensionality.
--/
+extensionality. -/
 theorem graph_proper_precomposition_unit_component
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

@@ -67,7 +67,7 @@ the base `S`: a morphism `φ : A ⟶ B` of underlying schemes lying over `e` (th
 
 For `e = 𝟙 _` these are the homomorphisms of group schemes over `S`; for `e = Spec σ` with
 `σ` an automorphism of a field `k` these are the `σ`-semilinear homomorphisms acting on the Tate
-module (blueprint `definition-tate-module`). -/
+module. -/
 structure SemilinearGrpHom {S : Scheme.{u}} (e : S ⟶ S) (A B : Over S) [GrpObj A] [GrpObj B]
     where
   /-- The underlying morphism of schemes. -/
@@ -122,15 +122,14 @@ namespace IsAbelianVariety
 variable {K : Type u} [Field K] (ℓ : ℕ) [Fact ℓ.Prime] (A : Over (Spec (.of K))) [GrpObj A]
   [IsAbelianVariety A]
 
-/-- Blueprint `definition-tate-module`: `ℓ`-adic Tate module.
+/-- `ℓ`-adic Tate module.
 
 The *`ℓ`-adic Tate module* of an abelian variety `A` over `K` is the inverse limit
 `T_ℓ A = lim_n A[ℓ^n](K̄)`, the transition map from level `n + 1` to level `n` being
 multiplication by `ℓ`. It is a `ℤ_[ℓ]`-module.
 
-This is also blueprint `definition-tate-module`. It is defined as the Tate module
-`T_ℓ (A(K̄))` of the group of geometric points; the identification with compatible systems of
-points of the torsion subgroup schemes `A[ℓ ^ n]` is
+It is defined as the Tate module `T_ℓ (A(K̄))` of the group of geometric points; the identification
+with compatible systems of points of the torsion subgroup schemes `A[ℓ ^ n]` is
 `AlgebraicGeometry.IsAbelianVariety.tateModuleEquivTorsionPoints`. -/
 noncomputable def tateModule :
     AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) :=
@@ -153,7 +152,7 @@ noncomputable instance rationalTateModule.instModule : Module ℚ_[ℓ] (rationa
   inferInstanceAs (Module ℚ_[ℓ]
     (AddCommGroup.rationalTateModule ℓ (Additive (Scheme.specAlgebraicClosure K ⟶ A))))
 
-/-- Blueprint `definition-tate-module`: The Tate module used in the curve argument.
+/-- The Tate module used in the curve argument.
 
 The Tate module `T_ℓ A` is the inverse limit `lim_n A[ℓ ^ n](K̄)` of the geometric points of the
 `ℓ ^ n`-torsion subgroup schemes `A[ℓ ^ n] = AlgebraicGeometry.torsionSubgroupScheme A (ℓ ^ n)`,
@@ -225,8 +224,7 @@ noncomputable def pointsAddEquivGeometricPoints [IsAlgClosed K] :
   map_add' P Q := congr_arg Additive.ofMul (MonObj.comp_mul _ P.toMul Q.toMul)
 
 /-- Over an algebraically closed field `K` and for `ℓ ≠ char K`, the group `A(K̄)` is
-`ℓ`-divisible (blueprint `corollary-torsion-jacobian-field-extension--3`) and its `ℓ`-torsion has
-order `ℓ ^ (2g)` (blueprint `proposition-multiplication-n--2`). -/
+`ℓ`-divisible and its `ℓ`-torsion has order `ℓ ^ (2g)`. -/
 theorem exists_zsmul_eq_and_natCard_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     (∀ x : Additive (Scheme.specAlgebraicClosure K ⟶ A), ∃ y, (ℓ : ℤ) • y = x) ∧
       Nat.card (AddSubgroup.torsionBy (Additive (Scheme.specAlgebraicClosure K ⟶ A)) (ℓ : ℤ)) =
@@ -248,22 +246,21 @@ theorem exists_zsmul_eq_and_natCard_torsionBy [IsAlgClosed K] (p : ℕ) [CharP K
     simp only [AddSubgroup.torsionBy, Submodule.mem_toAddSubgroup, Submodule.mem_torsionBy_iff]
     rw [AddEquiv.toEquiv_eq_coe, EquivLike.coe_coe, ← map_zsmul, AddEquiv.map_eq_zero_iff]
 
-/-- Blueprint `proposition-integral-tate-module`: The `ℓ`-adic Tate module is free of rank `2g`.
+/-- The `ℓ`-adic Tate module is free of rank `2g`.
 
 This is also the blueprint proposition `proposition-integral-tate-module--2`.
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K` and let
 `ℓ ≠ char K`. Then `T_ℓ A ≅ ℤ_[ℓ] ^ (2 * g)`.
 
-The group `A(K̄)` is `ℓ`-divisible (blueprint `corollary-torsion-jacobian-field-extension--3`) and
-its `ℓ`-torsion has `ℓ ^ (2g)` elements (blueprint `proposition-multiplication-n--2`), so this is
+The group `A(K̄)` is `ℓ`-divisible and its `ℓ`-torsion has `ℓ ^ (2g)` elements, so this is
 `AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
 theorem nonempty_linearEquiv_tateModule [IsAlgClosed K] (p : ℕ) [CharP K p] (hℓ : ℓ ≠ p) :
     Nonempty (tateModule ℓ A ≃ₗ[ℤ_[ℓ]] (Fin (2 * IsAbelianVariety.dim A) → ℤ_[ℓ])) :=
   have h := exists_zsmul_eq_and_natCard_torsionBy ℓ A p hℓ
   AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq ℓ _ h.1 _ h.2
 
-/-- Blueprint `proposition-integral-tate-module`: The `ℓ`-adic Tate module is free of rank `2g`.
+/-- The `ℓ`-adic Tate module is free of rank `2g`.
 
 This is also the blueprint proposition `proposition-integral-tate-module--2`.
 
@@ -281,7 +278,7 @@ section Functoriality
 variable {ℓ A} {B C : Over (Spec (.of K))} [GrpObj B] [IsAbelianVariety B] [GrpObj C]
   [IsAbelianVariety C]
 
-/-- Blueprint `definition-tate-module`: the action of homomorphisms on Tate modules.
+/-- The action of homomorphisms on Tate modules.
 
 A homomorphism `f : A ⟶ B` of abelian varieties (for instance an endomorphism of `A`) acts
 componentwise on the Tate modules, `(P_n)_n ↦ (P_n ≫ f)_n`; this is a `ℤ_[ℓ]`-linear map
@@ -306,7 +303,7 @@ theorem tateModuleMap_comp (f : A ⟶ B) (g : B ⟶ C) [IsMonHom f] [IsMonHom g]
   LinearMap.ext fun t ↦ Subtype.ext <| funext fun n ↦ congr_arg Additive.ofMul <|
     (Category.assoc ((t : ∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ A)) n).toMul f g).symm
 
-/-- Blueprint `definition-tate-module`: the action of homomorphisms on rational Tate modules.
+/-- The action of homomorphisms on rational Tate modules.
 
 The `ℚ_[ℓ]`-linear map `V_ℓ A → V_ℓ B` induced by a homomorphism `f : A ⟶ B` of abelian
 varieties: the base change of `AlgebraicGeometry.IsAbelianVariety.tateModuleMap`. -/
@@ -320,7 +317,7 @@ theorem rationalTateModuleMap_tmul (f : A ⟶ B) [IsMonHom f] (a : ℚ_[ℓ])
       (a ⊗ₜ tateModuleMap f t : rationalTateModule ℓ B) :=
   AddCommGroup.rationalTateModule.map_tmul _ a t
 
-/-- Blueprint `definition-tate-module`: the action of semilinear homomorphisms on Tate modules.
+/-- The action of semilinear homomorphisms on Tate modules.
 
 Let `φ : A ⟶ B` be a homomorphism of abelian varieties over `K` which is semilinear over an
 endomorphism `e` of `Spec K` (for instance a semilinear automorphism of `A` over an automorphism
@@ -409,7 +406,7 @@ theorem geometricPointsAddEquiv_eq_mapPoints (σ : Gal(AlgebraicClosure K/K)) :
   AddMonoidHom.ext fun _ ↦ rfl
 
 variable (A) in
-/-- Blueprint `definition-tate-module`: the Galois representation on the Tate module.
+/-- The Galois representation on the Tate module.
 
 The group `Gal(K̄/K)` acts on the geometric points `A(K̄)` by coordinates
 (`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`), hence componentwise on the
@@ -444,7 +441,7 @@ theorem finite_setOf_frobenius_fixed :
   (Scheme.finite_setOf_specAlgebraicClosureMap_frobenius_comp_eq_self A).preimage
     (Additive.toMul.injective.injOn)
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: no Frobenius-fixed vectors on the Tate
+/-- No Frobenius-fixed vectors on the Tate
 module.
 
 Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,
@@ -461,7 +458,7 @@ theorem eq_zero_of_mem_tateModule_of_forall_geometricFrobenius_fixed {t : ℕ �
       rw [← geometricPointsAddEquiv_inv, ← FiniteField.geometricFrobeniusAlgEquivOfAlgebraic_eq_inv]
       exact hst n
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: no Frobenius-fixed vectors on the Tate
+/-- No Frobenius-fixed vectors on the Tate
 module.
 
 Let `A` be an abelian variety over a finite field `k₀` and `F = σ⁻¹` the geometric Frobenius,

@@ -116,7 +116,6 @@ import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedProperOpenCompositionSupplement
 
 /-! Core mate equation for compact-support graph tensor evaluation.
-(blueprint: lem-pur-compact-support-graph-tensor-evaluation-core).
 
 Proof: evaluate the normalized graph comparison on local tensor generators, where the unit
 equation determines the sum-extension tensor mate. The graph and complementary restrictions
@@ -222,14 +221,7 @@ private theorem tensorComparison_eq
 set_option linter.unusedVariables false in
 /-- The normalized comparison satisfies the mate equation before transposing through the
 compactification adjunction. This is the core tensor calculation; the graph evaluation theorem
-is obtained by applying the adjunction hom-equivalence. Source: Stacks Tags 0GKF and 0GL5.
-(blueprint: lem-pur-compact-support-graph-tensor-evaluation-core).
-
-Proof: evaluate the normalized graph comparison on local tensor generators, where the unit
-equation determines the sum-extension tensor mate. The graph and complementary restrictions
-agree sectionwise. Pass to flat-term K-flat representatives, totalize degreewise, and use the
-canonical tensor, open projection, and compactification comparisons. Derived localization
-descent then gives the unbounded mate equation. -/
+is obtained by applying the adjunction hom-equivalence. Source: Stacks Tags 0GKF and 0GL5. -/
 theorem compactSupportGraph_tensor_evaluation_core
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : EtaleCompactSupportNormalization A)

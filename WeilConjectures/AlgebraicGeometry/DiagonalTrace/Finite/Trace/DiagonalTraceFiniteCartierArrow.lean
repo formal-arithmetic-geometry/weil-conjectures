@@ -39,9 +39,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- The canonical finite Cartier class viewed as its derived morphism.
-Source: diagonal trace proof (2), finite Cartier endpoint.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-arrow). -/
+/-- The canonical finite Cartier class viewed as its derived morphism. -/
 @[irreducible] def finiteCartierArrow
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)] (n : ℕ) :=
