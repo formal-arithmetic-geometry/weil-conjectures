@@ -371,13 +371,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
-  refine Exists.imp ?_
-    (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
-      T₀ N h Ω hp C hC act hact)
-  intro r hr
-  refine ⟨hr.1, ?_⟩
+  obtain ⟨r, hr, hcoinv⟩ :=
+    exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
+      hact
+  refine ⟨r, hr, ?_⟩
   intro q V b hV W φ hφ
-  refine hr.2 (Z := Z) (W := W) (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+  refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
   intro K a _ hcab
   -- the cohomology of the tensor product is continuous along the finite layers
