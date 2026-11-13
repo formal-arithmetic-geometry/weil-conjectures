@@ -210,7 +210,7 @@ section OpenImmersion
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- `derivedOpenImmersionShriekIso` is unfolded to the conjugate defining it.
 /-- **(Shriek)** for an open immersion `j` and **(Pull)** for `j` are mates: the mate of the
 inverse of `j_! ⋙ T ≅ T ⋙ j_!` for the adjunctions `j_! ⊣ Lj^*` is `Lj^* ⋙ T ≅ T ⋙ Lj^*`.
