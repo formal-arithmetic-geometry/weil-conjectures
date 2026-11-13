@@ -138,16 +138,24 @@ private meta partial def conversionCongruence
         a.getAppFn.constName! == b.getAppFn.constName!)
     if sameHead && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
       try
-        let aa := a.getAppArgs
-        let bb := b.getAppArgs
-        let key := (a.getAppFn, aa.size)
+        let mut aa := a.getAppArgs
+        let mut bb := b.getAppArgs
+        -- Keep the common prefix fixed: its parameters need no equality proofs.
+        let mut prefix := 0
+        if a.getAppFn == b.getAppFn then
+          while prefix < aa.size && aa[prefix]! == bb[prefix]! do
+            prefix := prefix + 1
+        let head := Lean.mkAppN a.getAppFn (aa.extract 0 prefix)
+        aa := aa.extract prefix aa.size
+        bb := bb.extract prefix bb.size
+        let key := (head, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if a.getAppFn.hasFVar then
-                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
+            let ct ← if head.hasFVar then
+                Lean.Meta.mkHCongrWithArity head aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
+                Lean.Meta.mkHCongrWithArity head aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
@@ -518,7 +526,6 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
-set_option maxHeartbeats 400000 in
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
@@ -602,7 +609,6 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
-set_option maxHeartbeats 700000 in
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
