@@ -48,6 +48,7 @@ private def isoOfHomEquiv {C : Type*} [Category C] (M N : C)
     simpa using h.symm
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- The hom equivalences unfold dependent section modules and both scalar restrictions.
 /-- Extending the inverse image of the regular module gives the regular target module,
 with the canonical unit normalization.
