@@ -80,6 +80,7 @@ noncomputable def leftDerivedExtendScalarsUpperStarCompIso :
       (Mod.extendScalars (coefficientMap a Y)) (f)^*⟦Λ'⟧ ≪≫
     Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ' f).symm
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `L(Ext_{a_Y} ⋙ f^*_Λ') ≅ L(Ext_{a_Y}) ⋙ Lf^*_Λ'` is compatible with the counits. -/
@@ -108,6 +109,7 @@ lemma leftDerivedExtendScalarsUpperStarCompIso_inv_app_comp_counit
   erw [reassoc_of% h₂]
   rw [Iso.hom_inv_id_app_assoc]
 
+set_option profiler true in
 set_option maxHeartbeats 4000000 in
 -- the derived categories of module objects are unfolded when matching the comparisons
 /-- **(Pull) is monoidal**: for an arbitrary coefficient change `a`, the derived (Pull)
