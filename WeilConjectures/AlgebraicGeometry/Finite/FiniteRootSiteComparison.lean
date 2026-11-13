@@ -773,7 +773,6 @@ private theorem sigmaMap_generator (A : Type (u + 1)) [CommRing A] (m : ℕ)
       (T.rootsOfUnitySheaf m)).hom.app U z)
   exact hn.trans (congrArg (finiteRootProGenerator A m hm hA T W a) hz.symm)
 
-set_option profiler true in
 private theorem rootComparison_sections (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0)
     (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))) (W : T.ProEt) :
@@ -802,6 +801,7 @@ private theorem rootComparison_sections (A : Type (u + 1)) [CommRing A]
     dsimp only [e, AddEquiv.trans_apply]
     exact r₀.apply_symm_apply _
   have hE := heE (eE.symm (eP (c x)))
+  -- Transport the equality directly, avoiding rewriting through the evaluated sheaf objects.
   have hE' := (congrArg
     (fun y : Additive (rootsOfUnity m Γ(W.left, ⊤)) ↦
       ULift.up.{u + 1} (Additive.ofMul (Additive.toMul y).val))
