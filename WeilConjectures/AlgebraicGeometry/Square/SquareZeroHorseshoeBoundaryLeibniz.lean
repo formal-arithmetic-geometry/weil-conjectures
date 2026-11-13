@@ -78,6 +78,7 @@ private theorem common_lifts (X : Scheme.{u})
     simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     rfl
 
+/-- Cancel a common comparison map before transporting along the target isomorphism. -/
 private theorem boundary_eq_of_comparison {D : Type*} [Category* D]
     {A B C E F : D} (a : A ⟶ B) (b : B ⟶ C) (c : A ⟶ E) [Epi c]
     (d : E ⟶ C) (e : F ≅ C) (f : E ⟶ F)
@@ -89,7 +90,6 @@ private theorem boundary_eq_of_comparison {D : Type*} [Category* D]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
--- The boundary comparison elaborates several derived-category transports.
 private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{u + 1}
@@ -121,8 +121,10 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
   simp only [Category.assoc] at h
   dsimp only [RingedSpace.moduleCohomologyBoundary,
     Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso]
+  simp only [NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app]
   exact h
 
+/-- The Leibniz identity on local-lift cocycles, independent of derived-category comparisons. -/
 set_option profiler true in
 private theorem cech_cycles_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
@@ -233,6 +235,7 @@ private theorem cech_cycles_leibniz (X : Scheme.{u})
   change bf 1 * cg 1 - bf 0 * cg 0 = bf 0 * (cg 1 - cg 0) + cg 1 * (bf 1 - bf 0)
   ring
 
+/-- Transfer the cocycle identity to the canonical boundary using the natural Čech comparison. -/
 set_option profiler true in
 private theorem canonical_boundary_leibniz (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -250,16 +253,18 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
       @id (B.right.obj.obj (op U)) (i.val.app (op U) ((μ f).asHom.val.app (op U) x)) =
         b * @id (B.right.obj.obj (op U)) (i.val.app (op U) x)) :
     let S := ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw
-    let d := (RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
-      (commAlgebraSheafModule X.sheaf C) ≫
-        RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
-    ∀ f g : C.right.obj.obj (op ⊤), d.hom (f * g) =
-      ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f).asHom).hom (d.hom g) +
-        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom (d.hom f) := by
+    ∀ f g : C.right.obj.obj (op ⊤),
+      RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
+          ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃
+            (f * g)) =
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ f).asHom).hom
+          (RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
+            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ g)) +
+        ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom
+          (RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
+            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ f)) := by
   classical
-  let S := ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw
-  dsimp only
-  intro f g
+  intro S f g
   obtain ⟨ι, U, hU, b, c, hb, hc⟩ := common_lifts X B C p hS.epi_g f g
   obtain ⟨cmp, hcmp, hnatural⟩ := Scheme.Modules.cechH1Map_natural X U hU
   have ht : ∀ a, p.right.hom.app (op (U a)) (b a * c a) =
@@ -294,13 +299,9 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
     exact congrArg (fun m ↦ m (K.homologyπ 1 z)) (hnatural I I (μ s).asHom)
   have he := congrArg (fun z ↦ cmp I z) hclass
   rw [map_add, hn, hn, hcf, hcg, hcfg] at he
-  dsimp only [S] at he
-  simp only [ModuleCat.comp_apply]
   exact he
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
--- The cocycle calculation elaborates the underlying modules and product projections.
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
 Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
@@ -325,6 +326,7 @@ comparison. Naturality for the identity ladder makes the transported boundaries 
 the degree-zero augmentation identifies the section f with its H0 class through
  toRightDerivedZero. Thus the same identity holds for the specified boundary d.
 For I = 0 it is the zero identity; for a split extension the boundary vanishes. -/
+set_option profiler true in
 theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
     (I : SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -373,8 +375,6 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
   intro f g
   have he := canonical_boundary_leibniz X B C p I i hw hS μ hlift f g
   simp only [ModuleCat.comp_apply, hd]
-  dsimp only [S]
-  simp only [ModuleCat.comp_apply] at he
   exact he
 
 end AlgebraicGeometry
