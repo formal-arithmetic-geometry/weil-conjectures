@@ -171,7 +171,8 @@ theorem openRestriction_evaluationMate_isIso (X : Scheme.{u})
     Classical.choose_spec (exists_canonicalDerivedTensorHom U.toScheme)
   intro m K N
   letI : R.Monoidal := m
-  obtain ⟨J, adj, hp⟩ := exists_openExtension_projectionFormula X U m
+  refine (exists_openExtension_projectionFormula X U m).elim fun J hJ ↦ ?_
+  refine hJ.elim fun adj hp ↦ ?_
   have hi (A : schemeDerivedCategory U.toScheme) :
       IsIso ((adj.homEquiv (A ⊗ R.obj K) (J.obj A ⊗ K)).symm
         ((adj.unit.app A ⊗ₘ 𝟙 (R.obj K)) ≫
