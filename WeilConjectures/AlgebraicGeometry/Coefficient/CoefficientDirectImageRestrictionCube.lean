@@ -158,7 +158,11 @@ theorem coefficientDirectImageRestrictionCube
   ext x
   simp only [a, d, H, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    coefficientRestriction_map_apply, coefficientDirectImage_map_apply,
+    restrictionComp_apply, restrictionComp_inv_apply]
+  erw [coefficientRestriction_map_apply χ, coefficientRestriction_map_apply b.hom,
+    coefficientDirectImage_map_apply f R₀ (DerivedScalarMate.inverseRing f R₀) (Iso.refl _)]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
     restrictionComp_apply, restrictionComp_inv_apply, czApp, cdApp, hiInv, cpApp]
+
 
 end AlgebraicGeometry.Scheme
