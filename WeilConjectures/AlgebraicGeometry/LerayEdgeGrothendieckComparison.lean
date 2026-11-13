@@ -25,6 +25,29 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
+/-- Compare two maps on classes by unique lifts of cycles through a monomorphism. -/
+private theorem moduleCocycleComparison
+    {R S : Type u} [Ring R] [Ring S] {A B : ModuleCat.{u} R}
+    {Z W V C : ModuleCat.{u} S} (p : A ⟶ B) [Epi p]
+    (a : (forget₂ _ AddCommGrpCat).obj B ⟶ (forget₂ _ AddCommGrpCat).obj C)
+    (e : (forget₂ _ AddCommGrpCat).obj B ⟶ (forget₂ _ AddCommGrpCat).obj V)
+    (edge : V ⟶ C) (i : Z ⟶ W) [Mono i] (r : Z ⟶ C) (t : Z ⟶ V)
+    (restrict : A → W)
+    (ha : ∀ s, ∃ z, restrict s = i z ∧ a (p s) = r z)
+    (he : ∀ s, ∃ z, restrict s = i z ∧ e (p s) = t z)
+    (ht : t ≫ edge = r) : a = e ≫ (forget₂ _ AddCommGrpCat).map edge := by
+  apply ConcreteCategory.hom_ext
+  intro x
+  obtain ⟨s, rfl⟩ := (ModuleCat.epi_iff_surjective p).mp inferInstance x
+  obtain ⟨z, hz, haz⟩ := ha s
+  obtain ⟨z', hz', hez⟩ := he s
+  have hzz : z = z' := (ModuleCat.mono_iff_injective i).mp inferInstance
+    (hz.symm.trans hz')
+  subst z'
+  change a (p s) = edge (e (p s))
+  rw [haz, hez]
+  exact (CategoryTheory.congr_fun ht z).symm
+
 set_option trace.profiler true in
 -- Comparing resolution maps unfolds composed module and forgetful functors.
 set_option backward.isDefEq.respectTransparency false in
@@ -99,39 +122,28 @@ theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
   let K := (D.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   let T := ((D ⋙ G).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex
   obtain ⟨c, hc, hcπ⟩ := (grothendieck_left_edge_cocycle D G hFG F I).1 q
-  apply ConcreteCategory.hom_ext
-  intro x
-  obtain ⟨a, ha⟩ := (ModuleCat.epi_iff_surjective
-    (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv).mp
-      inferInstance x
-  obtain ⟨s, hs⟩ := (ModuleCat.epi_iff_surjective
-    ((RingedSpace.globalSectionsComplex I).homologyπ q)).mp inferInstance a
-  subst a
-  subst x
-  obtain ⟨z, hz, hez⟩ := he q F I s
-  obtain ⟨z', hz', hεz⟩ := hε q F I K rfl s
-  have hz'eq : z' = z := by
-    apply (ModuleCat.mono_iff_injective (G.map (K.iCycles q))).mp inferInstance
-    simpa only [eqToHom_refl, HomologicalComplex.id_f, Category.comp_id] using
-      hz'.symm.trans hz
-  subst z'
-  have hεz' : (ε q).app F
-      ((I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv
-        ((RingedSpace.globalSectionsComplex I).homologyπ q s)) =
-      G.map (I.isoRightDerivedObj D q).inv (G.map (K.homologyπ q) z) := by
-    dsimp only [D, G]
-    simpa only [eqToHom_refl, HomologicalComplex.homologyMap_id, Category.id_comp,
-      Functor.map_comp, ConcreteCategory.comp_apply] using! hεz
-  have hedge : ((D.grothendieckLeftEdgeMap G hFG q).app F)
-      ((I.isoRightDerivedObj (D ⋙ G) q).inv (T.homologyπ q (c z))) =
-      G.map (I.isoRightDerivedObj D q).inv (G.map (K.homologyπ q) z) := by
-    have heq := congrArg (fun a ↦ a ≫ G.map (I.isoRightDerivedObj D q).inv) hcπ
-    simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id] at heq
-    simpa only [G.map_comp, ConcreteCategory.comp_apply, ConcreteCategory.id_apply] using!
-      CategoryTheory.congr_fun heq z
-  change (ε q).app F _ = ((D.grothendieckLeftEdgeMap G hFG q).app F)
-    ((e q).hom.app F _)
-  rw [hez c hc]
-  exact hεz'.trans hedge.symm
+  apply moduleCocycleComparison
+    ((RingedSpace.globalSectionsComplex I).homologyπ q ≫
+      (I.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) q).inv)
+    ((ε q).app F) ((e q).hom.app F) ((D.grothendieckLeftEdgeMap G hFG q).app F)
+    (G.map (K.iCycles q))
+    (G.map (K.homologyπ q) ≫ G.map (I.isoRightDerivedObj D q).inv)
+    (c ≫ T.homologyπ q ≫ (I.isoRightDerivedObj (D ⋙ G) q).inv)
+    (fun s ↦ (I.cocomplex.X q).val.presheaf.map
+      (eqToHom (congrArg op (Opens.map_top f.base).symm))
+      ((RingedSpace.globalSectionsComplex I).iCycles q s))
+  · intro s
+    obtain ⟨z, hz, hεz⟩ := hε q F I K rfl s
+    refine ⟨z, ?_, ?_⟩
+    · simpa only [eqToHom_refl, HomologicalComplex.id_f, Category.comp_id] using hz
+    · dsimp only [D, G]
+      simpa only [eqToHom_refl, HomologicalComplex.homologyMap_id, Category.id_comp,
+        Functor.map_comp, ConcreteCategory.comp_apply] using! hεz
+  · intro s
+    obtain ⟨z, hz, hez⟩ := he q F I s
+    exact ⟨z, hz, hez c hc⟩
+  · have heq := congrArg (fun a ↦ a ≫ G.map (I.isoRightDerivedObj D q).inv) hcπ
+    simpa only [Category.assoc, ← G.map_comp, Iso.hom_inv_id, G.map_id,
+      Category.comp_id] using heq
 
 end AlgebraicGeometry
