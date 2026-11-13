@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
-import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryReflectsIsomorphisms
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalization
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationColimitTransport
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationLegs
@@ -67,6 +66,19 @@ theorem localization_comparison_zero (ℓ : ℕ)
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
+private lemma rightDerived_isGE
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [HasKInjectiveResolutions C]
+    (K : DerivedCategory C) (n : ℤ) (hK : K.IsGE n) :
+    (F.rightDerivedFunctor.obj K).IsGE n := by
+  let K' : DerivedCategory.Plus C := ⟨K, ⟨n, hK⟩⟩
+  have hK' : K'.IsGE n := (K'.isGE_ι_obj_iff n).1 hK
+  refine (DerivedCategory.isGE_iff _ n).2 fun q hq ↦ ?_
+  exact (F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K' n hq).of_iso
+    ((DerivedCategory.homologyFunctor D q).mapIso
+      (F.rightDerivedFunctorPlusCompatibility.app K')).symm
+
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -123,12 +135,16 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   let β : (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj (G.obj K.obj) ⟶
       (lowerStar (Profinite.continuousMapRingObj E) f).rightDerivedFunctor.obj
         (LX.obj K.obj) := (derivedPushHom a f).app K.obj
-  have : G.Additive := inferInstance
+  have : G.IsRightAdjoint :=
+    (derivedUpperStarLowerStarAdjunction (integralCoeff ℓ E) f).isRightAdjoint
+  have : PreservesBinaryBiproducts G :=
+    preservesBinaryBiproducts_of_preservesBinaryProducts _
+  have : G.Additive := Functor.additive_of_preservesBinaryBiproducts _
   have hK : DerivedCategory.TStructure.t.plus K.obj := K.property.1.1
   have hGK : DerivedCategory.TStructure.t.plus (G.obj K.obj) := by
     obtain ⟨n, hn⟩ := hK
     have : K.obj.IsGE n := hn
-    exact ⟨n, (lowerStar (integralCoeff ℓ E) f).isGE_rightDerivedFunctor_obj K.obj n⟩
+    exact ⟨n, rightDerived_isGE (lowerStar (integralCoeff ℓ E) f) K.obj n hn⟩
   let cX := integralLocalizationCocone ℓ E X K.obj
   let cY := integralLocalizationCocone ℓ E Y (G.obj K.obj)
   let σ := Mod.smulSequenceCompIso G K.obj ℓ
@@ -149,7 +165,13 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (mate_unit_comap adjX adjY κ K.obj)
   have hU : U.ReflectsIsomorphisms := by
     let V := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (coefficientMap a Y)
-    exact Functor.reflectsIsomorphisms_mapDerivedCategory V
+    refine ⟨fun z _ ↦ ?_⟩
+    rw [DerivedCategory.isIso_iff]
+    intro q
+    have : IsIso (V.map ((DerivedCategory.homologyFunctor _ q).map z)) :=
+      (NatIso.isIso_map_iff (V.mapDerivedCategoryHomologyFunctorIso q) z).2
+        (by rw [Functor.comp_map]; infer_instance)
+    exact isIso_of_reflects_iso _ V
   have : IsIso (U.map β) := by
     have hgg : IsIso g := by
       rw [DerivedCategory.isIso_iff]
