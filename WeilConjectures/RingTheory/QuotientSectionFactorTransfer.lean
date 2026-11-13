@@ -25,6 +25,7 @@ universe u v w
 
 namespace Algebra
 
+-- Keep the corner calculations over an abstract ring to avoid unfolding nested quotients.
 private theorem idempotent_section_prod
     {A : Type u} {R : Type v} [CommRing A] [CommRing R] [Algebra A R]
     (s : R →ₐ[A] A) (δ : R) (hδ : IsIdempotentElem δ) (hsδ : s δ = 1)
@@ -98,7 +99,6 @@ private theorem idempotent_mul_eq_of_localization_eq
   | succ n => simpa only [hδ.pow_succ_eq] using hn
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- A localization isomorphism transfers a specified section factor of the closed fibre,
 provided its parameter is already idempotent in the smaller closed fibre.
 
