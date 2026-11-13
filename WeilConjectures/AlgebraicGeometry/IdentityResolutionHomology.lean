@@ -84,7 +84,7 @@ private theorem resolution_homology_factorization {C A : Type*}
   have haug' : J.ι.f 0 ≫ β.f 0 = ψ ≫ I.ι.f 0 ≫ (c ≫ l).f 0 := by
     rw [haug, hφ]
     dsimp only [c, HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex]
-    simpa only [Category.assoc, Functor.id_map] using
+    simpa only [Category.assoc, Functor.id_map, CochainComplex.single₀_obj_zero] using
       congrArg (fun f ↦ ψ ≫ f ≫ l.f 0) (η.naturality (I.ι.f 0)).symm
   have hc' := complex_hom_eq_of_inv_f_comp a
     ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map c) hc
@@ -130,6 +130,8 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
         H.map (D.a.hom ≫ Γc.map D.lambda) := by
   dsimp only
   let Γ := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
+  have : (pushforward (𝟙 Z)).PreservesZeroMorphisms :=
+    inferInstanceAs (pushforward (𝟙 Z)).PreservesZeroMorphisms
   refine resolution_homology_factorization Γ ψ D.I D.J (pushforward (𝟙 Z))
     (pushforwardId Z).inv ψ ?_ D.injective D.lambda D.β D.a p D.compatible ?_
   · exact (Category.comp_id ψ).symm
