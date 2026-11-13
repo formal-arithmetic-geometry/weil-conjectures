@@ -643,7 +643,6 @@ private theorem rightDerivedPlus_isGE
   exact F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K a hq
 
 set_option linter.unusedVariables false in
-set_option trace.profiler true in
 /-- Open-closed recollement on ordinary bounded below derived categories.
 Source: Hemo--Richarz--Scholbach, (3.3), (3.4), Lemma 3.4 and Lemma 5.3(2);
 Stacks, Tags 09AH, 09BM, 09AA, 09BN
@@ -757,6 +756,8 @@ theorem condensed_open_closed_recollement
           (∀ K, IsIso ((lowerStar Λ j).rightDerivedFunctorPlusUnith.app
             ((HomotopyCategory.Plus.quotient _).obj (I.obj K))))) := by
   classical
+  -- Reuse these witnesses across the derived adjunctions instead of repeating the
+  -- quantified tensor and colimit instance searches.
   have hTensor₄ (T : Scheme.{u}) (A B C D : GradedObject ℤ
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
       GradedObject.HasTensor₄ObjExt A B C D := inferInstance
@@ -818,6 +819,7 @@ theorem condensed_open_closed_recollement
     (upperStarLowerStarAdjunction Λ i).leftAdjoint_preservesColimits
   refine ⟨hclosed, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, hjcol, hicol, ff.full, ff.faithful, ⟨e⟩, ?_⟩
+  -- Selecting the witnesses avoids eliminating an existential into this large dependent goal.
   have hexceptional :=
     exceptionalAdjointOfSupport (upperStar Λ i) (lowerStar Λ i)
       (upperStar Λ j) (lowerStar Λ j) (upperStarLowerStarAdjunction Λ i)
