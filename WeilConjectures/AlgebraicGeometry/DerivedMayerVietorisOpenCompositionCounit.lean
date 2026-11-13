@@ -54,8 +54,79 @@ private theorem counit_transport
     rw [m.naturality, n.naturality, hi]
   simpa [m, n] using he
 
-set_option maxHeartbeats 700000 in
--- The diagram chase elaborates several specialized derived-category interfaces.
+-- Prove the diagram chase for abstract functors, so its rewrites do not unfold
+-- the concrete restriction, homotopy, and derived-category constructions.
+private theorem counit_of_unit_normalizations
+    {C D A B C' D' A' B' : Type*}
+    [Category C] [Category D] [Category A] [Category B]
+    [Category C'] [Category D'] [Category A'] [Category B']
+    {RX : A ⥤ C} {F : C ⥤ D} {G : A ⥤ B} {RY : B ⥤ D}
+    {LX : C ⥤ A} {LY : D ⥤ B}
+    {RX' : A' ⥤ C'} {F' : C' ⥤ D'} {G' : A' ⥤ B'} {RY' : B' ⥤ D'}
+    {LX' : C' ⥤ A'} {LY' : D' ⥤ B'}
+    {QX : C ⥤ C'} {QY : D ⥤ D'} {QA : A ⥤ A'} {QB : B ⥤ B'}
+    (a : LX' ⊣ RX') (b : LY' ⊣ RY')
+    (α : F' ⋙ LY' ≅ LX' ⋙ G') (β : RX' ⋙ F' ≅ G' ⋙ RY')
+    (ηRX : RX ⋙ QX ⟶ QA ⋙ RX') (ηF : F ⋙ QY ⟶ QX ⋙ F')
+    (ηG : G ⋙ QB ⟶ QA ⋙ G') (ηRY : RY ⋙ QY ⟶ QB ⋙ RY')
+    (eLX : QX ⋙ LX' ≅ LX ⋙ QA) (eLY : QY ⋙ LY' ≅ LY ⋙ QB)
+    (K : A)
+    (α₀ : LY.obj (F.obj (RX.obj K)) ⟶ G.obj (LX.obj (RX.obj K)))
+    (β₀ : F.obj (RX.obj K) ⟶ RY.obj (G.obj K))
+    (εX : LX.obj (RX.obj K) ⟶ K) (εY : LY.obj (RY.obj (G.obj K)) ⟶ G.obj K)
+    (ha : LX'.map (ηRX.app K) ≫ a.counit.app (QA.obj K) =
+      eLX.hom.app (RX.obj K) ≫ QA.map εX)
+    (hb : LY'.map (ηRY.app (G.obj K)) ≫ b.counit.app (QB.obj (G.obj K)) =
+      eLY.hom.app (RY.obj (G.obj K)) ≫ QB.map εY)
+    (hα : LY'.map (ηF.app (RX.obj K)) ≫ α.hom.app (QX.obj (RX.obj K)) ≫
+        G'.map (eLX.hom.app (RX.obj K)) =
+      eLY.hom.app (F.obj (RX.obj K)) ≫ QB.map α₀ ≫ ηG.app (LX.obj (RX.obj K)))
+    (hβ : ηF.app (RX.obj K) ≫ F'.map (ηRX.app K) ≫ β.hom.app (QA.obj K) =
+      QY.map β₀ ≫ ηRY.app (G.obj K) ≫ RY'.map (ηG.app K))
+    (h₀ : LY.map β₀ ≫ εY = α₀ ≫ G.map εX)
+    [IsIso (ηF.app (RX.obj K))] [IsIso (ηRX.app K)] :
+    LY'.map (β.hom.app (QA.obj K)) ≫ b.counit.app (G'.obj (QA.obj K)) =
+      α.hom.app (RX'.obj (QA.obj K)) ≫ G'.map (a.counit.app (QA.obj K)) := by
+  let s := LY'.map (ηF.app (RX.obj K) ≫ F'.map (ηRX.app K))
+  have : IsIso s := by dsimp [s]; infer_instance
+  apply (cancel_epi s).mp
+  have hl : s ≫ LY'.map (β.hom.app (QA.obj K)) ≫
+      b.counit.app (G'.obj (QA.obj K)) =
+    eLY.hom.app (F.obj (RX.obj K)) ≫ QB.map (LY.map β₀ ≫ εY) ≫ ηG.app K := by
+    dsimp only [s]
+    rw [← Functor.map_comp_assoc]
+    simp only [Category.assoc]
+    rw [hβ]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn : LY'.map (RY'.map (ηG.app K)) ≫ b.counit.app (G'.obj (QA.obj K)) =
+      b.counit.app (QB.obj (G.obj K)) ≫ ηG.app K :=
+      b.counit.naturality (ηG.app K)
+    rw [hn]
+    rw [← Category.assoc (LY'.map (ηRY.app (G.obj K))), hb]
+    have hf : LY'.map (QY.map β₀) ≫ eLY.hom.app (RY.obj (G.obj K)) =
+      eLY.hom.app (F.obj (RX.obj K)) ≫ QB.map (LY.map β₀) :=
+      eLY.hom.naturality β₀
+    simp only [Category.assoc]
+    rw [reassoc_of% hf]
+  have hr : s ≫ α.hom.app (RX'.obj (QA.obj K)) ≫
+      G'.map (a.counit.app (QA.obj K)) =
+    eLY.hom.app (F.obj (RX.obj K)) ≫
+      QB.map (α₀ ≫ G.map εX) ≫ ηG.app K := by
+    dsimp only [s]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn : LY'.map (F'.map (ηRX.app K)) ≫ α.hom.app (RX'.obj (QA.obj K)) =
+      α.hom.app (QX.obj (RX.obj K)) ≫ G'.map (LX'.map (ηRX.app K)) :=
+      α.hom.naturality (ηRX.app K)
+    rw [reassoc_of% hn]
+    simp only [Functor.comp_obj, ← Functor.map_comp]
+    rw [ha, Functor.map_comp]
+    rw [reassoc_of% hα]
+    have hg : QB.map (G.map εX) ≫ ηG.app K =
+      ηG.app (LX.obj (RX.obj K)) ≫ G'.map (QA.map εX) :=
+      ηG.naturality εX
+    rw [← hg]
+  rw [hl, hr, h₀]
+
 /-- On a K-injective complex on the inverse-image open, restricting the normalized
 composition comparison and then applying the base-open counit agrees with first
 using the open-restriction comparison and then pushing forward the source-open counit.
@@ -122,11 +193,8 @@ theorem schemeMVOpenComposition_counit_Q
   let α := schemeMVOpenRestrictionComparison h U
   let K := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I
   let RXh := RX.mapHomotopyCategory (ComplexShape.up ℤ)
-  let Fh := F.mapHomotopyCategory (ComplexShape.up ℤ)
   let Gh := G.mapHomotopyCategory (ComplexShape.up ℤ)
   let RYh := RY.mapHomotopyCategory (ComplexShape.up ℤ)
-  let LXh := LX.mapHomotopyCategory (ComplexShape.up ℤ)
-  let LYh := LY.mapHomotopyCategory (ComplexShape.up ℤ)
   let α₀ := (schemeMVHomotopyOpenRestriction h U).hom.app (RXh.obj K)
   let β₀ := (schemeMVHomotopyOpenComposition h U).hom.app K
   let εX := ((a₀.mapHomotopyCategory (ComplexShape.up ℤ)).counit.app K)
@@ -145,36 +213,8 @@ theorem schemeMVOpenComposition_counit_Q
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
       LY.mapDerivedCategoryFactorsh.hom RY.rightDerivedFunctorUnit (Gh.obj K)
   have hα := schemeMVOpenRestriction_unit_normalization X Y h U (RXh.obj K)
-  change LY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app (RXh.obj K)) ≫
-      α.hom.app (DerivedCategory.Qh.obj (RXh.obj K)) ≫
-      G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.hom.app (RXh.obj K)) =
-    LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-      DerivedCategory.Qh.map α₀ ≫
-      G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) at hα
-  have hα' : LY.mapDerivedCategory.map (F.rightDerivedFunctorUnit.app (RXh.obj K)) ≫
-      α.hom.app (DerivedCategory.Qh.obj (RXh.obj K)) =
-    LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-      DerivedCategory.Qh.map α₀ ≫
-      G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) ≫
-      G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K)) := by
-    have hid : G.rightDerivedFunctor.map
-        (LX.mapDerivedCategoryFactorsh.hom.app (RXh.obj K)) ≫
-        G.rightDerivedFunctor.map (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K)) =
-        𝟙 _ := (G.rightDerivedFunctor.mapIso
-          (LX.mapDerivedCategoryFactorsh.app (RXh.obj K))).hom_inv_id
-    have he := congrArg (fun f ↦ f ≫ G.rightDerivedFunctor.map
-      (LX.mapDerivedCategoryFactorsh.inv.app (RXh.obj K))) hα
-    simp only [Category.assoc, hid] at he
-    erw [Category.comp_id] at he
-    exact he
   have hβ' := schemeMVOpenComposition_unit_normalization X Y h U β hβ K
-  change F.rightDerivedFunctorUnit.app (RXh.obj K) ≫
-      F.rightDerivedFunctor.map (RX.rightDerivedFunctorUnit.app K) ≫
-      β.hom.app (DerivedCategory.Qh.obj K) =
-    DerivedCategory.Qh.map β₀ ≫ RY.rightDerivedFunctorUnit.app (Gh.obj K) ≫
-      RY.rightDerivedFunctor.map (G.rightDerivedFunctorUnit.app K) at hβ'
   have h₀ := schemeMVUnderivedOpenCounit_square X Y h U K
-  change LYh.map β₀ ≫ εY = α₀ ≫ Gh.map εX at h₀
   have : RX.PreservesKInjectiveComplexes := a₀.preservesKInjectiveComplexes
   have hs : IsIso (F.rightDerivedFunctorUnit.app (RXh.obj K)) := by
     have : CochainComplex.IsKInjective
@@ -186,67 +226,11 @@ theorem schemeMVOpenComposition_counit_Q
   have ht : IsIso (RX.rightDerivedFunctorUnit.app K) := by
     dsimp [K]
     infer_instance
-  let s := LY.mapDerivedCategory.map
-    (F.rightDerivedFunctorUnit.app (RXh.obj K) ≫
-      F.rightDerivedFunctor.map (RX.rightDerivedFunctorUnit.app K))
-  have hs' : IsIso s := by dsimp [s]; infer_instance
-  have hc : LY.mapDerivedCategory.map (β.hom.app (DerivedCategory.Qh.obj K)) ≫
-      b.counit.app (G.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) =
-    α.hom.app (RX.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) ≫
-      G.rightDerivedFunctor.map (a.counit.app (DerivedCategory.Qh.obj K)) := by
-    apply (cancel_epi s).mp
-    have hl : s ≫ LY.mapDerivedCategory.map (β.hom.app (DerivedCategory.Qh.obj K)) ≫
-        b.counit.app (G.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) =
-      LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-        DerivedCategory.Qh.map (LYh.map β₀ ≫ εY) ≫
-        G.rightDerivedFunctorUnit.app K := by
-      dsimp only [s]
-      rw [← Functor.map_comp_assoc]
-      simp only [Category.assoc]
-      rw [hβ']
-      simp only [Functor.map_comp, Category.assoc]
-      have hn : LY.mapDerivedCategory.map
-          (RY.rightDerivedFunctor.map (G.rightDerivedFunctorUnit.app K)) ≫
-          b.counit.app (G.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) =
-        b.counit.app (DerivedCategory.Qh.obj (Gh.obj K)) ≫
-          G.rightDerivedFunctorUnit.app K :=
-        b.counit.naturality (G.rightDerivedFunctorUnit.app K)
-      rw [hn]
-      rw [← Category.assoc (LY.mapDerivedCategory.map
-        (RY.rightDerivedFunctorUnit.app (Gh.obj K))), hb]
-      have hf : LY.mapDerivedCategory.map (DerivedCategory.Qh.map β₀) ≫
-          LY.mapDerivedCategoryFactorsh.hom.app (RYh.obj (Gh.obj K)) =
-        LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-          DerivedCategory.Qh.map (LYh.map β₀) :=
-        LY.mapDerivedCategoryFactorsh.hom.naturality β₀
-      simp only [Category.assoc]
-      rw [reassoc_of% hf]
-    have hr : s ≫ α.hom.app (RX.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) ≫
-        G.rightDerivedFunctor.map (a.counit.app (DerivedCategory.Qh.obj K)) =
-      LY.mapDerivedCategoryFactorsh.hom.app (Fh.obj (RXh.obj K)) ≫
-        DerivedCategory.Qh.map (α₀ ≫ Gh.map εX) ≫ G.rightDerivedFunctorUnit.app K := by
-      dsimp only [s]
-      simp only [Functor.map_comp, Category.assoc]
-      have hn : LY.mapDerivedCategory.map
-          (F.rightDerivedFunctor.map (RX.rightDerivedFunctorUnit.app K)) ≫
-          α.hom.app (RX.rightDerivedFunctor.obj (DerivedCategory.Qh.obj K)) =
-        α.hom.app (DerivedCategory.Qh.obj (RXh.obj K)) ≫
-          G.rightDerivedFunctor.map (LX.mapDerivedCategory.map
-            (RX.rightDerivedFunctorUnit.app K)) :=
-        α.hom.naturality (RX.rightDerivedFunctorUnit.app K)
-      rw [reassoc_of% hn]
-      simp only [Functor.comp_obj]
-      rw [← Category.assoc, hα']
-      simp only [Category.assoc, ← Functor.map_comp]
-      rw [ha]
-      simp only [Iso.inv_hom_id_app_assoc]
-      have hg : DerivedCategory.Qh.map (Gh.map εX) ≫
-          G.rightDerivedFunctorUnit.app K =
-        G.rightDerivedFunctorUnit.app (LXh.obj (RXh.obj K)) ≫
-          G.rightDerivedFunctor.map (DerivedCategory.Qh.map εX) :=
-        G.rightDerivedFunctorUnit.naturality εX
-      rw [← hg]
-    rw [hl, hr, h₀]
+  have hc := counit_of_unit_normalizations a b α β
+    RX.rightDerivedFunctorUnit F.rightDerivedFunctorUnit
+    G.rightDerivedFunctorUnit RY.rightDerivedFunctorUnit
+    LX.mapDerivedCategoryFactorsh LY.mapDerivedCategoryFactorsh
+    K α₀ β₀ εX εY ha hb hα hβ' h₀
   exact counit_transport a b F.rightDerivedFunctor G.rightDerivedFunctor α β
     ((DerivedCategory.quotientCompQhIso _).app I) hc
 
