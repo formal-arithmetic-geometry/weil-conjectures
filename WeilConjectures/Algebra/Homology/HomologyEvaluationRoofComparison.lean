@@ -35,6 +35,7 @@ private theorem homComplex_precomp_homology_isIso
   let : QuasiIso (((homComplexFunctor (R := R)).map t.op).app K) := h
   infer_instance
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing the restricted Hom components elaborates several chosen product signatures.
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
