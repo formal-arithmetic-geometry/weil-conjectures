@@ -280,6 +280,8 @@ theorem residueOrdinaryTensorPull_homotopy
   have ht := tensor_single_homotopy_iso_inv F B B' e P
   dsimp only at ht
   exact map_comp_of_pasted_squares (F.mapHomotopyCategory (.up ℤ))
-    _ _ _ _ _ _ _ _ _ hm ht
+    _ _ _ _ _ ((Mod.tensorPresentationHomotopyIso (coefficientMap φ Y)).hom.app P)
+    ((homotopyTensorSingleIso B).inv.app P)
+    ((NatTrans.mapHomotopyCategory τ (.up ℤ)).app P) _ hm ht
 
 end AlgebraicGeometry.ProEtale.CondensedRing
