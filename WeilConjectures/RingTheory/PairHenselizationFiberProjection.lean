@@ -127,6 +127,7 @@ private theorem fiber_product_bijective
   rw [← hE]
   exact E.bijective
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Matching the cocone algebra instances and tensor equivalences needs additional heartbeats.
 /-- The canonical map of fibres is a surjective projection with idempotent kernel annihilator.

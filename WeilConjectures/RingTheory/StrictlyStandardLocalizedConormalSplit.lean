@@ -27,6 +27,7 @@ open scoped TensorProduct
 
 namespace Algebra.Presentation
 
+set_option profiler true in
 set_option maxHeartbeats 1500000 in
 -- The dependent ideal-span inductions also elaborate the presentation type aliases.
 /-- The two strictly standard conditions split the localized conormal differential.
