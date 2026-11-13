@@ -167,7 +167,11 @@ theorem finite_free_kernel_coordinate_step (X : Scheme.{u})
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   have := SheafOfModules.isQuasicoherent_free (R := X.ringCatSheaf) (Option I)
   have hqc := Scheme.Modules.isQuasicoherent_kernel p
-  obtain ⟨J, hJ, he⟩ := quasiCoherent_image_ideal X v
-  exact ⟨J, hJ, exists_shortExact_kernel_split inc r t s p hir hit hsplit (Classical.choice he)⟩
+  have himage := quasiCoherent_image_ideal X v
+  let J := himage.choose
+  have hJ := himage.choose_spec
+  have hstep := exists_shortExact_kernel_split inc r t s p hir hit hsplit
+    (Classical.choice hJ.2)
+  exact ⟨J, hJ.1, hstep⟩
 
 end AlgebraicGeometry

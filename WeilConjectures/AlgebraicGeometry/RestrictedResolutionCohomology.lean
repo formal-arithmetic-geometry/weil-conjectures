@@ -77,7 +77,6 @@ private theorem iso_homology_transport
     IsIso.inv_eq_of_hom_inv_id (by rw [← H.map_comp, Iso.hom_inv_id, H.map_id])
   rw [ha, ← H.map_comp, ← H.map_comp, h]
 
-set_option trace.profiler true in
 /-- Restriction on module cohomology is computed by the restriction of sections of a
 fixed resolution, followed by the pinned identification of the restricted resolution.
 This is a statement about homology of section complexes, before the map to a homology sheaf.

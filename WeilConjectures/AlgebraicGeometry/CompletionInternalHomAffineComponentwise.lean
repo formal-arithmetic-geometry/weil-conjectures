@@ -119,7 +119,6 @@ private theorem completion_evaluation_component
   | add w z hw hz => simp only [map_add, LinearMap.add_apply, hw, hz]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option trace.profiler true in
 /-- Construct completed evaluation and identify its individual quotient components.
 This does not identify equality with an arbitrary compatible family of morphisms and
 makes no assertion about an externally supplied map epsilon.
