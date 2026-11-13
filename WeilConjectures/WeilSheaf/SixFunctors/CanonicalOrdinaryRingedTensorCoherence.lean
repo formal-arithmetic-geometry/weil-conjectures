@@ -116,6 +116,8 @@ private theorem forward_associativity_of_inverse
 attribute [local irreducible] SheafOfModules.monoidalCategory Mod.monoidalCategoryStruct
 attribute [local implicit_reducible] Mod.monoidalCategory Monoidal.induced
 
+set_option maxHeartbeats 1000000 in
+-- TEMP private bump
 -- Compare the abstract native and ringed total-tensor instances through their APIs.
 private theorem ordinary_coherence_of_inverse_associativity
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
@@ -187,8 +189,6 @@ private theorem ordinary_coherence_of_inverse_associativity
 
 attribute [local irreducible] ProEtale.NativeFrobenius.equivalence
 
-set_option profiler true in
--- TEMP profiling
 /-- The canonical section-module equivalence retains its normalized tensor coherence.
 Source: the pure-tensor and evaluation equations of the adic module comparison;
 Stacks 03EO, 06YS, 06YU, 0FPT
