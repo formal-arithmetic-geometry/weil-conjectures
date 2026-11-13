@@ -308,6 +308,7 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 
 
 set_option backward.defeqAttrib.useBackward true in
+set_option maxHeartbeats 300000 in
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
 Source: Stacks Project, Tag 06Z0, the tilde/sections unit, and its restriction to U.
 (blueprint: lem-sc-open-sections-ordinary-structure-class).
