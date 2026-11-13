@@ -85,15 +85,16 @@ theorem exists_condensed_coefficient_complex_presentation
                         (g ≫ (ei i).hom)) ≫
                   (derivedExtendScalarsCompIso X ℓ (hf i)).hom.app L) =
               g ≫ DerivedCategory.Q.map (c.ι.app i) ≫ eΩ.hom := by
-  trace "start boundedness"
-  obtain ⟨a, ha⟩ := hL
-  trace "obtained bound"
+  let a := Classical.choose hL
+  have ha : L.IsGE a := Classical.choose_spec hL
   have : L.IsGE a := ha
-  obtain ⟨C, hC, ⟨e⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isGE L a
-  trace "obtained representative"
+  let hrep := DerivedCategory.exists_iso_Q_obj_of_isGE L a
+  let C := Classical.choose hrep
+  have hC : C.IsStrictlyGE a := Classical.choose (Classical.choose_spec hrep)
+  let e : L ≅ DerivedCategory.Q.obj C :=
+    Classical.choice (Classical.choose_spec (Classical.choose_spec hrep))
   obtain ⟨N, c, hc, hN, eΩ, ei, hcomp⟩ :=
     exists_condensed_coefficient_complex_model X ℓ E F C H he hf
-  trace "obtained model"
   have hbound : ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r) := by
     intro i r hr
     rw [hN i]
