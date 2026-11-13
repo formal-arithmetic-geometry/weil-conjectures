@@ -103,7 +103,13 @@ theorem derived_scalar_data : DerivedScalarData l E T := by
   let F := ordinaryExtension l E T
   let G := ordinaryRestriction l E T
   -- Reuse exactness proofs when elaborating the derived comparisons and unit.
-  obtain ⟨hF, hG, hFlim, hFcolim, hGlim, hGcolim, _⟩ := scalar_adjunction_data l E T
+  have h := scalar_adjunction_data l E T
+  have : F.Additive := h.1
+  have : G.Additive := h.2.1
+  have : PreservesFiniteLimits F := h.2.2.1
+  have : PreservesFiniteColimits F := h.2.2.2.1
+  have : PreservesFiniteLimits G := h.2.2.2.2.1
+  have : PreservesFiniteColimits G := h.2.2.2.2.2.1
   refine ⟨⟨F.leftDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨G.rightDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨inferInstance⟩, ⟨inferInstance⟩, inferInstance, inferInstance,
