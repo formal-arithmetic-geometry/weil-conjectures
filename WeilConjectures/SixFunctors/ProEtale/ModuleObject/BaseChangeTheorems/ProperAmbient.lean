@@ -87,8 +87,10 @@ private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_derive
     (K : Dᵇc(Y.left)⟦Λ⟧) :
     ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
       (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ sq')).hom.app K.obj := by
-  rw [boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-    ℓ Λ sq K, pullbackSquareComparison_eq_leftDerivedFunctorSquareIso Λ sq']
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ Λ sq K).trans (congrArg (fun e ↦ e.hom.app K.obj)
+      (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso Λ
+        (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)))
 
 set_option profiler true in
 /-- The base change map of the ambient derived categories of module objects over `ℚ̲̄_ℓ` at a
