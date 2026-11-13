@@ -55,14 +55,6 @@ private lemma adicBaseChange_mate_symm_app {C D E F : Type*}
         L₂.map (β.app (L₁.obj M)) ≫ adj₂.counit.app (H.obj (L₁.obj M)) := by
   simp
 
-private lemma adicBaseChange_modIsoTrans_hom_app {C D : Type*}
-    [Category* C] [Category* D] [MonoidalCategory D] {A : D} [MonObj A]
-    {F₁ F₂ F₃ F₄ : C ⥤ Mod D A} (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃)
-    (M : C) :
-    ((e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M).hom =
-      (e₁.hom.app M).hom ≫ (e₂.hom.app M).hom ≫ (e₃.inv.app M).hom :=
-  rfl
-
 private lemma adicBaseChange_isoTrans_app {C D : Type*} [Category* C] [Category* D]
     {F₁ F₂ F₃ F₄ : C ⥤ D} (e₁ : F₁ ≅ F₂) (e₂ : F₂ ≅ F₃) (e₃ : F₄ ≅ F₃) (M : C) :
     (e₁ ≪≫ e₂ ≪≫ e₃.symm).hom.app M =
@@ -79,7 +71,6 @@ noncomputable def adicSquareLowerStarIso (sq : CommSq g' j' j g'') :
   adicLowerStarComp l j' g'' ≪≫ adicLowerStarCongr l sq.w.symm ≪≫
     (adicLowerStarComp l g' j).symm
 
-set_option profiler true in
 private lemma adicSquareLowerStarIso_hom_app (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     (adicSquareLowerStarIso l sq).hom.app M =
@@ -87,11 +78,12 @@ private lemma adicSquareLowerStarIso_hom_app (sq : CommSq g' j' j g'')
         (adicLowerStarCongr l sq.w.symm).hom.app M ≫ (adicLowerStarComp l g' j).inv.app M :=
   adicBaseChange_isoTrans_app _ _ _ _
 
-set_option profiler true in
 private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
+  -- Compare on sections and retain the rewrite proofs: reducing the composite module
+  -- structures directly makes kernel checking much more expensive.
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   rewrite [adicSquareLowerStarIso_hom_app]
   unfold ProEtale.squareLowerStarIso
@@ -107,14 +99,12 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     lowerStarComp_inv_app_hom_app]
   rfl
 
-set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : AdicSheaf l Y) :
     ((adicUpperStarLowerStarAdjunction l f).unit.app M).hom =
       (upperStarLowerStarAdjunction (WeilCoefficients.{u} l) f).unit.app M.X := by
   exact Adjunction.modAdjunction_unit_app_hom _ _ _
 
-set_option profiler true in
 private lemma adicBaseChange_counit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : AdicSheaf l X) :
     ((adicUpperStarLowerStarAdjunction l f).counit.app M).hom =
@@ -132,7 +122,6 @@ noncomputable def adicBaseChangeMap (sq : CommSq g' j' j g'') :
     (adicUpperStarLowerStarAdjunction l j)).symm
     (TwoSquare.mk _ _ _ _ (adicSquareLowerStarIso l sq).hom))
 
-set_option profiler true in
 omit [WeaklyEtale j] [WeaklyEtale j'] in
 /-- The underlying map of sheaves of `ℚ̄_ℓ`-modules of the base change map of `ℓ`-adic sheaves is
 the base change map of the underlying sheaves. -/
@@ -141,8 +130,8 @@ lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
       (ProEtale.baseChangeMap (WeilCoefficients.{u} l) sq).app M.X := by
   dsimp only [adicBaseChangeMap, ProEtale.baseChangeMap]
   rw [adicBaseChange_mate_symm_app, adicBaseChange_mate_symm_app]
-  simp (config := { dsimp := false }) only [Mod.comp_hom', adicUpperStar_map_hom, adicLowerStar_map_hom,
-    adicBaseChange_unit_app_hom, adicBaseChange_counit_app_hom,
+  simp (config := { dsimp := false }) only [Mod.comp_hom', adicUpperStar_map_hom,
+    adicLowerStar_map_hom, adicBaseChange_unit_app_hom, adicBaseChange_counit_app_hom,
     adicSquareLowerStarIso_hom_app_hom]
   rfl
 
