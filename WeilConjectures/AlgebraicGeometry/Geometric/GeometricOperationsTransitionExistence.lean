@@ -224,7 +224,13 @@ private theorem pull_transition
           (Functor.mapDerivedCategoryCompIso _ _).symm).hom.app
         ((e.{c, v, max c v r} J B τ n).obj M) := by
   rw [G.pullEvaluation_model n, G.pullEvaluation_model m]
-  exact localize_transition G.pull
+  refine localize_transition
+    (C := Systems.{c, v, max c v r} J B τ)
+    (D := Systems.{c, v, max c v r} J' G.coefficients G.coefficientTransition)
+    (X₀ := Mod.{c, v, max c v r} J (B m))
+    (X₁ := Mod.{c, v, max c v r} J (B n))
+    (Y₀ := Mod.{c, v, max c v r} J' (G.coefficients m))
+    (Y₁ := Mod.{c, v, max c v r} J' (G.coefficients n)) G.pull
     (evaluation.{c, v, max c v r} J B τ m)
     (evaluation.{c, v, max c v r} J B τ n)
     (evaluation.{c, v, max c v r} J'
@@ -243,10 +249,11 @@ private theorem pull_transition
     (derivedTransition.{c, v, max c v r} J B τ h)
     (derivedTransition.{c, v, max c v r} J'
       G.coefficients G.coefficientTransition h)
-    (derived_transition_fac.{c, v, max c v r} J B τ h)
-    (derived_transition_fac.{c, v, max c v r} J'
-      G.coefficients G.coefficientTransition h)
-    (G.ordinaryPullTransition h) M
+    ?_ ?_ ?_ M
+  · exact derived_transition_fac.{c, v, max c v r} J B τ h
+  · exact derived_transition_fac.{c, v, max c v r} J'
+      G.coefficients G.coefficientTransition h
+  · exact G.ordinaryPullTransition h
 
 /-- The canonical termwise construction satisfies the pull-transition equation.  On each
 coefficient level this is the mate identity for inverse image and direct image; the ordinary

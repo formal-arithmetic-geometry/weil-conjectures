@@ -105,7 +105,6 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 set_option trace.profiler true in
--- Assembling the dependent normalized fields requires extra elaboration heartbeats.
 /-- The termwise inverse/direct image construction supplies the geometric-operation data.
 The construction uses the induced coefficient tower, ordinary module adjunctions, and their
 canonical derived localizations; the normalized tensor and evaluation comparisons are part of
@@ -155,7 +154,9 @@ theorem semilinearGeometryBaseExistence (systems : Data.{c, v, r} J B τ)
     tensorPullback := T.tensorPullback
     levelTensorPullback := T.levelTensorPullback
     tensorPullback_evaluation := T.tensorPullback_evaluation
-    ordinaryPullEvaluation_sections := O.ordinaryPullEvaluation_sections
+    ordinaryPullEvaluation_sections := by
+      dsimp only [GeometryOrdinary.toBase]
+      exact O.ordinaryPullEvaluation_sections
     ordinaryPushEvaluation := O.ordinaryPushEvaluation
     ordinaryPushEvaluation_sections := O.ordinaryPushEvaluation_sections
     ordinary_unit_evaluation := O.ordinary_unit_evaluation
@@ -164,12 +165,16 @@ theorem semilinearGeometryBaseExistence (systems : Data.{c, v, r} J B τ)
     pullEvaluation_model := fun _ ↦ rfl
     restrictionPullback := O.restrictionPullback
     restrictionPullback_underlying := O.restrictionPullback_underlying
-    ordinaryPullTransition := O.ordinaryPullTransition
+    ordinaryPullTransition := by
+      dsimp only [GeometryOrdinary.toBase]
+      exact O.ordinaryPullTransition
     coefficientPullback_transpose := E.coefficientPullback_transpose
     levelTensorModel := T.levelTensorModel
     levelTensor_pure := T.levelTensor_pure
     tensorModel := T.tensorModel
-    tensor_ordinary_evaluation := T.tensor_ordinary_evaluation }⟩
+    tensor_ordinary_evaluation := by
+      dsimp only [GeometryOrdinary.toBase]
+      exact T.tensor_ordinary_evaluation }⟩
   · intro n P I _ f
     exact CategoryTheory.Adjunction.canonical_transpose (O.levelAdjunction n) P I f
   · intro P I _ f

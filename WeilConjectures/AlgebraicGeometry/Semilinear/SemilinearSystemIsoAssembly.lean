@@ -185,6 +185,12 @@ private theorem square_of_functions {A B P Q : Type r}
   rw [← ha, ← hb]
   exact (hs x).symm
 
+private theorem transition_sections_apply (M : Systems.{c, v, max c v r} J B τ)
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (x : M.val.obj (op (m, U.unop))) :
+    ((transition.{c, v, max c v r} J B τ h).app M).val.app U x =
+      M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x :=
+  congrFun (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec M U)) x
+
 set_option trace.profiler true in
 -- Normalization checks the scalar-restriction identifications for both component maps.
 private theorem horizontal_natural
@@ -199,24 +205,15 @@ private theorem horizontal_natural
       assemble_app.{c, v, r} J B τ d (op (n, U.unop))
         (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
   rw [assemble_app_apply, assemble_app_apply]
-  exact square_of_functions.{max c v r}
-    (A := M.val.obj (op (m, U.unop))) (B := N.val.obj (op (m, U.unop)))
-    (P := M.val.obj (op (n, U.unop))) (Q := N.val.obj (op (n, U.unop)))
-    (fun y ↦ (d m).val.app U y) (fun y ↦ (d n).val.app U y)
-    (fun y ↦ ((transition.{c, v, max c v r} J B τ h).app M).val.app U y)
-    (fun y ↦ M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y)
-    (fun y ↦ ((transition.{c, v, max c v r} J B τ h).app N).val.app U y)
-    (fun y ↦ N.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op y)
-    (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec M U))
-    (eq_of_heq ((transition_exists.{c, v, max c v r} J B τ h).exists.choose_spec N U))
-    (fun y ↦ restriction_square_apply.{c, v, r} J
-      (coefficientMap.{c, v, max c v r} J B τ h)
-      (V := (evaluation.{c, v, max c v r} J B τ m).obj M)
-      (W := (evaluation.{c, v, max c v r} J B τ m).obj N)
-      (V' := (evaluation.{c, v, max c v r} J B τ n).obj M)
-      (W' := (evaluation.{c, v, max c v r} J B τ n).obj N)
-      ((transition.{c, v, max c v r} J B τ h).app M)
-      ((transition.{c, v, max c v r} J B τ h).app N) (d m) (d n) (ht h) U y) x
+  have hs := restriction_square_apply.{c, v, r} J
+    (coefficientMap.{c, v, max c v r} J B τ h)
+    (V := (evaluation.{c, v, max c v r} J B τ m).obj M)
+    (W := (evaluation.{c, v, max c v r} J B τ m).obj N)
+    (V' := (evaluation.{c, v, max c v r} J B τ n).obj M)
+    (W' := (evaluation.{c, v, max c v r} J B τ n).obj N)
+    ((transition.{c, v, max c v r} J B τ h).app M)
+    ((transition.{c, v, max c v r} J B τ h).app N) (d m) (d n) (ht h) U x
+  simpa only [transition_sections_apply] using hs.symm
 
 include ht in
 @[irreducible] private def assemble : M ⟶ N where
