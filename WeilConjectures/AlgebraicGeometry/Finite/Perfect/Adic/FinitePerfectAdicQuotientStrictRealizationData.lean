@@ -161,7 +161,6 @@ theorem completedAdicOrdinaryTower_map_succ (N : CompletedAdicModules X d) (n : 
   rfl
 
 set_option profiler true in
--- Instantiating the generic tensor transition unfolds the completed coefficient rings.
 /-- Under the tensor identifications, the ordinary quotient transition is the transition of the
 strict ordinary tensor tower. -/
 theorem finitePerfectAdicQuotientTensorIso_transition (n : ℕ) (N : CompletedAdicModules X d) :
@@ -174,7 +173,9 @@ theorem finitePerfectAdicQuotientTensorIso_transition (n : ℕ) (N : CompletedAd
     (finitePerfectAdicQuotientTensorIso X d (n + 1)).hom.app N ≫
       ((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op := by
   rw [completedAdicOrdinaryTower_map_succ]
-  exact SheafOfModules.changeOfRingsTensorNatIso_transition
+  have h := SheafOfModules.changeOfRingsTensorNatIso_transition
+    (E₂ := completedAdicChange X (completedAdicCommProjection X d (n + 1)))
+    (E₃ := completedAdicChange X (completedAdicCommProjection X d n))
     (completedAdicCommProjection X d (n + 1))
     (completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n))
     (completedAdicCommProjection X d n)
@@ -188,6 +189,7 @@ theorem finitePerfectAdicQuotientTensorIso_transition (n : ℕ) (N : CompletedAd
     (finitePerfectAdicRestrictComp (completedAdicProjection X d (n + 1)) _
         (completedAdicProjection X d n) (completedAdicProjection_comp_quotientCommMap X d n)
         ((completedAdicChange X (completedAdicCommProjection X d n)).obj N)) (fun _ _ ↦ rfl)
+  exact h
 
 end Realization
 
