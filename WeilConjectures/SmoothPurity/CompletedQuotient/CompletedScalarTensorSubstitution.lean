@@ -112,7 +112,7 @@ private theorem prime_unit (W : Scheme.{u})
   rw [map_natCast]
   with_unfolding_all exact isUnit_of_invertible (l : W.residueField w)
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The calculation combines three naturality squares in the system derived category.
 /-- Scalar extension of tensor substitution is computed by the normalized strict sigma.
 Source: Stacks 07A4 and 0941; the tensor step of scalar route coordinates.
