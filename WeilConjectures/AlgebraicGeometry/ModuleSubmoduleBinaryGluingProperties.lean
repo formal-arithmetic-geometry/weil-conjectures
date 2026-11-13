@@ -35,6 +35,7 @@ private theorem isIso_of_components
   have : IsIso ((SheafOfModules.forget R).map f) := ‹IsIso f.val›
   exact isIso_of_reflects_iso f (SheafOfModules.forget _)
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Sectionwise pullbacks require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in

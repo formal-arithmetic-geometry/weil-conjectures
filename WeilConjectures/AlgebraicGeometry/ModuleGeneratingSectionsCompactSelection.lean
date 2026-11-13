@@ -84,6 +84,7 @@ private theorem freeMap_subset_epi
   have := hS
   exact epi_of_epi_fac hfac
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The slice-site section types require additional elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
