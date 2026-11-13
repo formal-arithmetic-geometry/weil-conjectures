@@ -55,7 +55,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 set_option maxHeartbeats 800000 in
 -- the statement involves the Künneth maps of the product and of its slice, whose instances
 -- on module objects over the slice need a long search
-set_option synthInstance.maxHeartbeats 200000 in
 /-- **The Künneth map on a slice** (blueprint `lemma-kunneth-map-slice`): for the product `P`
 over the trait `S = Spec k'⟦t⟧` of models `M`, `N` of finite type and a coordinate `b` of `M`,
 identify the restrictions over the special fibre `s'` of the geometric slice of the nearby cycles
