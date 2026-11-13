@@ -63,23 +63,10 @@ private theorem homologyEvaluation_roof_of_cycle_pairings
     {M N : SheafOfModules.{u}
       ((sheafCompose S (forget₂ CommRingCat.{u} RingCat.{u})).obj R)}
     (e : M ⟶ N)
-    (a₀ : M ≅ (homComplex (R := R) A K).homology n)
-    (b₀ : N ≅ SheafOfModules.homObj (R := R) (A.homology (-n)) (K.homology 0))
-    (g : (homComplex (R := R) A K).homology n ⟶
-      SheafOfModules.homObj (R := R) (A.homology (-n)) (K.homology 0))
-    (d : (homComplex (R := R) A K).cycles n ⟶
-      SheafOfModules.homObj (R := R) (A.cycles (-n)) (K.cycles 0))
     (f : (homComplex (R := R) E K).homology n ⟶
       SheafOfModules.homObj (R := R) (E.homology (-n)) (K.homology 0))
     (c : (homComplex (R := R) E K).cycles n ⟶
       SheafOfModules.homObj (R := R) (E.cycles (-n)) (K.cycles 0))
-    (hd : d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =
-      (homComplex (R := R) A K).iCycles n ≫
-        (Classical.choose (homComplex_projections_exists (R := R))) A K n (-n) 0
-          (by omega) ≫ SheafOfModules.homObjMap (R := R) (A.iCycles (-n)) (𝟙 _))
-    (hd' : d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =
-      (homComplex (R := R) A K).homologyπ n ≫ g ≫
-        SheafOfModules.homObjMap (R := R) (A.homologyπ (-n)) (𝟙 _))
     (hc : c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =
       (homComplex (R := R) E K).iCycles n ≫
         (Classical.choose (homComplex_projections_exists (R := R))) E K n (-n) 0
@@ -87,10 +74,24 @@ private theorem homologyEvaluation_roof_of_cycle_pairings
     (hc' : c ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =
       (homComplex (R := R) E K).homologyπ n ≫ f ≫
         SheafOfModules.homObjMap (R := R) (E.homologyπ (-n)) (𝟙 _))
-    (h₀ : e ≫ b₀.hom = a₀.hom ≫ g) :
+    (h : ∃ a₀ : M ≅ (homComplex (R := R) A K).homology n,
+      ∃ b₀ : N ≅ SheafOfModules.homObj (R := R) (A.homology (-n)) (K.homology 0),
+      ∃ g : (homComplex (R := R) A K).homology n ⟶
+          SheafOfModules.homObj (R := R) (A.homology (-n)) (K.homology 0),
+      ∃ d : (homComplex (R := R) A K).cycles n ⟶
+          SheafOfModules.homObj (R := R) (A.cycles (-n)) (K.cycles 0),
+        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.iCycles 0) =
+          (homComplex (R := R) A K).iCycles n ≫
+            (Classical.choose (homComplex_projections_exists (R := R))) A K n (-n) 0
+              (by omega) ≫ SheafOfModules.homObjMap (R := R) (A.iCycles (-n)) (𝟙 _) ∧
+        d ≫ SheafOfModules.homObjMap (R := R) (𝟙 _) (K.homologyπ 0) =
+          (homComplex (R := R) A K).homologyπ n ≫ g ≫
+            SheafOfModules.homObjMap (R := R) (A.homologyπ (-n)) (𝟙 _) ∧
+        e ≫ b₀.hom = a₀.hom ≫ g) :
     ∃ a : M ≅ (homComplex (R := R) E K).homology n,
       ∃ b : N ≅ SheafOfModules.homObj (R := R) (E.homology (-n)) (K.homology 0),
         e ≫ b.hom = a.hom ≫ f := by
+  obtain ⟨a₀, b₀, g, d, hd, hd', h₀⟩ := h
   let Qmap : (homComplex (R := R) A K).homology n ⟶
       (homComplex (R := R) L K).homology n :=
     HomologicalComplex.homologyMap (((homComplexFunctor (R := R)).map q.op).app K) n
@@ -184,16 +185,13 @@ theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
             (E.homology (-n)) (K.homology 0),
         (((Scheme.Modules.restrictFunctor V.ι).map e).over W) ≫ b.hom =
           a.hom ≫ f := by
+  dsimp only
   intro f c hc hc'
   have := hI
   have := hq
   have := hp
-  obtain ⟨a₀, b₀, g, d, hd, hd', h₀⟩ :=
-    homologyEvaluation_restriction_comparison X T J n e he V W
   exact homologyEvaluation_roof_of_cycle_pairings (R := V.toScheme.sheaf.over W)
-    ((moduleOpenOverComplexFunctor X V W).obj T) E L
-    ((moduleOpenOverComplexFunctor X V W).obj J) n q p
-    (((Scheme.Modules.restrictFunctor V.ι).map e).over W)
-    a₀ b₀ g d f c hd hd' hc hc' h₀
+    _ E L _ n q p _ f c hc hc'
+    (homologyEvaluation_restriction_comparison X T J n e he V W)
 
 end CategoryTheory
