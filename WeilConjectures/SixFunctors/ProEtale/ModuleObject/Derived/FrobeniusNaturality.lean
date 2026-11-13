@@ -194,7 +194,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {T X : Scheme.{u}}
 
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of derived trivializations of pullbacks**: let `g : T ⟶ X`, `F_X : X ⟶ X`,
 `F_T : T ⟶ T` with `g ≫ F_X = F_T ≫ g`, and trivializations `κ_X : F_X^* ≅ 𝟭`,
@@ -213,12 +212,11 @@ theorem leftDerivedUpperStarComp_hom_app_comp_map_leftDerivedFunctorIdIso (g : T
       eqToHom (congrArg (fun s ↦ L((s)^*⟦Λ⟧).obj M) h) ≫
         (leftDerivedUpperStarComp Λ FT g).hom.app M ≫
           (Functor.leftDerivedFunctorIdIso κT).hom.app (L((g)^*⟦Λ⟧).obj M) := by
-  rw [leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
-    leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso,
-    Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
-      (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
-      (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M,
-    upperStarCongr, Functor.leftDerivedFunctorNatIso_eqToIso_hom_app]
+  have hc := Functor.leftDerivedFunctorFactorIso_comp_map_leftDerivedFunctorIdIso_app
+    (upperStarComp Λ g FX) (upperStarComp Λ FT g) κX κT (upperStarCongr Λ h)
+    (fun N ↦ by rw [upperStarCongr_hom_app]; exact hκ N) M
+  simpa only [← leftDerivedUpperStarComp_eq_leftDerivedFunctorFactorIso, upperStarCongr,
+    Functor.leftDerivedFunctorNatIso_eqToIso_hom_app] using hc
 
 -- the instances of the general lemma are found for each of the categories of module objects
 /-- **Naturality of the derived Frobenius trivialization**: for `g : T ⟶ X` between schemes in
