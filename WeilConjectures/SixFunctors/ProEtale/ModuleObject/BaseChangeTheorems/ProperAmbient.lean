@@ -95,7 +95,10 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
     IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq').app K.obj) := by
   unfold baseChangeMap
   rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq']
-  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
+        K).hom = (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+          (Profinite.padicAlgClRingObj ℓ) sq')).hom.app K.obj :=
     (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
       ℓ (Profinite.padicAlgClRingObj ℓ) sq K).trans (congrArg (fun e ↦ e.hom.app K.obj)
         (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ)
