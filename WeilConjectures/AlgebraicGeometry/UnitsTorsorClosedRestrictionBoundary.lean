@@ -45,8 +45,6 @@ private lemma equiv_zero_one (Y : Scheme.{u}) :
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option profiler true in
--- The comparison elaborates several sheaf adjunctions and Ext functors.
 /-- The inverse-image/counit comparison carries the boundary of one in the pullback
 of a direct-image extension to the boundary of one in the original extension.
 
@@ -105,6 +103,7 @@ theorem units_extension_pullback_boundary_comparison
         ((toSheafify (Opens.grothendieckTopology Z)
           ((Functor.const (Opens Z)ᵒᵖ).obj
             (AddCommGrpCat.of (ULift.{u} ℤ)))).app (op ⊤) ⟨1⟩) := by
+  -- Reuse the ambient sheaf and Ext instances throughout the comparison.
   have : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} := inferInstance
   have : HasSheafify (Opens.grothendieckTopology Z) AddCommGrpCat.{u} := inferInstance
   let : Abelian (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) := inferInstance
