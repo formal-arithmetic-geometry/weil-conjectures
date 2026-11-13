@@ -84,6 +84,7 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The affine-section comparison requires transport between restricted section-module instances.
 /-- The affine pullback comparison, transported through κ, is linear for the first
@@ -159,6 +160,7 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
   · intro n
     simpa only [map_one, one_smul] using hp 1 n
 
+set_option profiler true in
 set_option maxHeartbeats 1100000 in
 -- The canonical unit calculation unfolds inverse-image and change-of-rings section instances.
 /-- Affine first-tensor module section presentation with both actions and the canonical unit.
