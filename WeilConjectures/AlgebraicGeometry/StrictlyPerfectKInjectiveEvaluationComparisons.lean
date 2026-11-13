@@ -81,9 +81,6 @@ theorem exists_strictlyPerfect_kInjective_evaluation_comparisons (X : Scheme.{u}
           DerivedCategory.Q.obj (homComplex (R := X.sheaf.over U) P F),
         R.map g ≫ b.hom = a.hom ≫ DerivedCategory.Q.map f := by
   classical
-  dsimp only
-  let A := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)
-  letI : IsGrothendieckAbelian A := SheafOfModules.isGrothendieckAbelian _
   let R := (SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
