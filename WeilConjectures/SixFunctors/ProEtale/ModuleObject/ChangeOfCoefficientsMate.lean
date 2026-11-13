@@ -110,6 +110,28 @@ lemma transportedSquare_comp_hom_app (εG : LG ≅ DG) (εF : LF ≅ DF) (εH : 
 
 end TransportedSquare
 
+/-- Transporting the right adjoints in a conjugate square gives a mate square whenever the
+other pair of adjunctions sends its proposed right square to the transported conjugate. -/
+private lemma isMateSquare_of_conjugateIsoEquiv_ofNatIsoRight
+    {C₁ C₂ C₃ C₄ : Type*} [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
+    {L₁ : C₁ ⥤ C₂} {R₁ R₁' : C₂ ⥤ C₁} {L₂ : C₂ ⥤ C₄} {R₂ : C₄ ⥤ C₂}
+    {L₃ : C₁ ⥤ C₃} {R₃ : C₃ ⥤ C₁} {L₄ : C₃ ⥤ C₄} {R₄ R₄' : C₄ ⥤ C₃}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₃ ⊣ R₃) (b₂ : L₄ ⊣ R₄)
+    (e₁ : R₁ ≅ R₁') (e₄ : R₄ ≅ R₄') (ρ : R₄ ⋙ R₃ ≅ R₂ ⋙ R₁)
+    (τ : R₁' ⋙ L₃ ≅ L₂ ⋙ R₄')
+    (hτ : mateEquiv a₂ b₁ τ.hom =
+      Functor.whiskerLeft R₂ e₁.inv ≫ ρ.inv ≫ Functor.whiskerRight e₄.hom R₃) :
+    (a₁.ofNatIsoRight e₁).IsMateSquare (b₂.ofNatIsoRight e₄)
+      ((conjugateIsoEquiv (b₁.comp b₂) (a₁.comp a₂)).symm ρ) τ := by
+  rw [Adjunction.isMateSquare_iff, mateEquiv_ofNatIsoRight]
+  apply (mateEquiv a₂ b₁).injective
+  rw [hτ, mateEquiv_whiskerRight_comp, mateEquiv_comp_whiskerLeft,
+    ← conjugateEquiv_comp_eq_mateEquiv_mateEquiv]
+  have hρ : conjugateEquiv (a₁.comp a₂) (b₁.comp b₂)
+      ((conjugateIsoEquiv (b₁.comp b₂) (a₁.comp a₂)).symm ρ).inv = ρ.inv :=
+    congrArg Iso.inv ((conjugateIsoEquiv (b₁.comp b₂) (a₁.comp a₂)).apply_symm_apply ρ)
+  rw [hρ]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
@@ -210,8 +232,6 @@ section OpenImmersion
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-set_option maxHeartbeats 1000000 in
--- `derivedOpenImmersionShriekIso` is unfolded to the conjugate defining it.
 /-- **(Shriek)** for an open immersion `j` and **(Pull)** for `j` are mates: the mate of the
 inverse of `j_! ⋙ T ≅ T ⋙ j_!` for the adjunctions `j_! ⊣ Lj^*` is `Lj^* ⋙ T ≅ T ⋙ Lj^*`.
 Both are mates along `T ⊣ Res` of the levelwise commutation of `Res` with `j^*`. -/
@@ -221,40 +241,15 @@ lemma isMateSquare_derivedOpenImmersionShriekIso_derivedPullIso :
       ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j).ofNatIsoRight
         (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ' j).symm)
       (derivedOpenImmersionShriekIso a j) (derivedPullIso a j) := by
-  rw [Adjunction.isMateSquare_iff, mateEquiv_ofNatIsoRight]
-  apply (mateEquiv (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))).injective
+  apply isMateSquare_of_conjugateIsoEquiv_ofNatIsoRight
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j)
+    (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm
+    (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ' j).symm
+    (derivedComapUpperStarIso a j) (derivedPullIso a j)
   rw [mateEquiv_derivedPullIso_hom]
-  have hσ : conjugateEquiv ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).comp
-        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))
-      ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U)).comp
-        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j))
-      (derivedOpenImmersionShriekIso a j).inv = (derivedComapUpperStarIso a j).inv :=
-    congrArg Iso.inv ((conjugateIsoEquiv
-      ((Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U)).comp
-        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j))
-      ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).comp
-        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)))).apply_symm_apply
-      (derivedComapUpperStarIso a j))
-  rw [conjugateEquiv_comp_eq_mateEquiv_mateEquiv] at hσ
-  have h₁ := mateEquiv_whiskerRight_comp
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))
-    (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm.inv
-    (TwoSquare.mk _ _ _ _ ((mateEquiv (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j)
-      (TwoSquare.mk _ _ _ _ (derivedOpenImmersionShriekIso a j).inv)) ≫
-        Functor.whiskerLeft _
-          (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ' j).symm.hom))
-  have h₂ := mateEquiv_comp_whiskerLeft
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X))
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a U))
-    (mateEquiv (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ' j)
-      (TwoSquare.mk _ _ _ _ (derivedOpenImmersionShriekIso a j).inv))
-    (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ' j).symm.hom
-  refine h₁.trans ?_
-  rw [h₂, hσ]
   ext K
   simp [derivedComapLeftDerivedUpperStarIso, derivedComapUpperStarIso,
     leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion,
