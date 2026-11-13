@@ -1360,8 +1360,13 @@ theorem ringedSiteBidual_normalization (M : RingedSiteDualityModel.{c, v, r, w} 
     change _ = ringedSiteOrdinaryHomComparison.{c, v, r, w} J R _ _
     rw [ringedSiteOrdinaryHomComparison, ringedSiteAugmentationMap_eq]
     exact hd
-  rw [he', hd', ← hβeq] at hn
-  exact hn
+  have hemap := congrArg (fun f ↦
+    (derivedInternalHomOfUniverses.{c, v, r, w} J R).map
+      (Prod.mkHom f.op (𝟙 (ringedSiteDualityUnit.{c, v, r, w} J R)))) he'
+  exact (congrArg
+    (ringedSiteBidual M.closed M.symmetric (ringedSiteDualityUnit.{c, v, r, w} J R)
+      (DerivedCategory.Q.obj E) ≫ ·) hemap).symm.trans
+    (hn.trans (congrArg₂ (· ≫ ·) (congrArg DerivedCategory.Q.map hβeq.symm) hd'))
 
 /-- Evaluation is the unsigned ordinary map under the specified tensor and Hom comparisons.
 Source: Stacks 08JE, 08JJ (blueprint: lem-sfb-ringed-site-duality-maps).
