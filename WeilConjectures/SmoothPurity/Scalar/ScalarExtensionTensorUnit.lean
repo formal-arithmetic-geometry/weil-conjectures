@@ -236,7 +236,7 @@ private theorem scalar_unit_inv_section
     ← SheafOfModules.comp_val, Iso.hom_inv_id_app, SheafOfModules.id_val,
     PresheafOfModules.id_app, ModuleCat.id_apply] using hh.symm
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The signed tensor comparison has large sheafification and totalization instances.
 /-- A scalar tensor comparison normalized on homogeneous unit tensors is compatible
 with the scalar action unitor. Only the identity coefficient map is involved.
