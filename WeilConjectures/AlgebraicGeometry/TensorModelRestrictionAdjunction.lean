@@ -101,7 +101,6 @@ private theorem transport_tensor_adjunction_of_comparisons
   exact transport_tensor_adjunction Q B b R A H HU eX eU hn c d h hd hh
 
 set_option linter.style.haveILetI false in
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 512 in

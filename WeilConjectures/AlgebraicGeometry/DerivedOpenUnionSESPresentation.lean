@@ -129,7 +129,7 @@ theorem derived_open_union_ses_presentation
   classical
   dsimp only
   let M := SheafOfModules.{u} (moduleRings X.toRingedSpace)
-  have : Abelian M := inferInstance
+  let : Abelian M := inferInstance
   have : IsGrothendieckAbelian.{u} M :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
       (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).1
