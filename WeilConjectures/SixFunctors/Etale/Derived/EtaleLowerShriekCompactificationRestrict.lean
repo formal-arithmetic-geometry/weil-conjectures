@@ -226,10 +226,7 @@ lemma compactificationEtaleGraphIso_restrictOpen
       (leftDerivedUpperStarCompSectionIso _ (c.restrictOpen v).selfGraph
         (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
         (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
-    rw [derivedSquareUpperStarIso_hom_app_eq (ModuleCat.{u + 1} Λ)
-      (c.isPullback_selfGraphRestrict v).toCommSq _ (c.selfGraphRestrict_snd v)]
-    rw [← hpre, ← Functor.map_comp_assoc]
-    simp only [Functor.map_comp, Iso.hom_inv_id_app, Category.comp_id]
+    exact hpre
   rw [reassoc_of% hpre']
   simp only [hpost]
   simp only [← hnat]
