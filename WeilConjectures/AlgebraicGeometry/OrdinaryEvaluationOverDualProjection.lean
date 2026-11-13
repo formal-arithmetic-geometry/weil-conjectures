@@ -60,7 +60,6 @@ private theorem dualProjection_comp_transport
 attribute [local irreducible] homComplexFunctor Scheme.Modules.overEquiv
   Scheme.Modules.overEquivFunctorObjUnitIso HomologicalComplex.singleMapHomologicalComplex
 
-set_option trace.profiler true in
 set_option linter.unusedVariables false in
 /-- The inverse transported dual comparison recovers the unit-valued projection.
 Source: Stacks Project, Tags 0A8X and 08DL, product projections and open restriction.
@@ -143,13 +142,6 @@ theorem ordinaryEvaluation_over_dual_projection (X : Scheme.{u}) (U : X.Opens)
             (𝟙_ (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))).hom := by
   classical
   intro L T e he b hπ a d q r h
-  let : MonoidalCategory (localEvaluationModules X U) :=
-    SheafOfModules.monoidalCategory (X.sheaf.over U)
-  let : MonoidalCategory (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
-    SheafOfModules.monoidalCategory U.toScheme.sheaf
-  let : HasZeroObject (localEvaluationModules X U) := inferInstance
-  let : HasZeroObject (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=
-    inferInstance
   let π := Classical.choose
     (homComplex_projections_exists.{u, u, u, u} (R := U.toScheme.sheaf))
   let M := localEvaluationUnit X U
