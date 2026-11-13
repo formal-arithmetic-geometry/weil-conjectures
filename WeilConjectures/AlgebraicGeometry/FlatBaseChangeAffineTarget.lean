@@ -200,10 +200,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
   calc
     b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) =
         b (c (1 ⊗ₜ[Γ(S, V)] xi)) := congrArg b (hc xi).symm
-    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) := by
-      dsimp only [b, LinearEquiv.trans_apply]
-      rw [c.symm_apply_apply]
-      rfl
+    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) :=
+      congrArg (fun z ↦ b0 (c (a0.symm (a z)))) (c.symm_apply_apply _)
     _ = b0 (c (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi))) := congrArg (fun z ↦ b0 (c z)) ht'
     _ = b0 (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p
         (e0 (eH.symm xi))) := congrArg b0 (hc _)

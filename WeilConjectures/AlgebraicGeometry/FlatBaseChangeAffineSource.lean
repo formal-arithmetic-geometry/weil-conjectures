@@ -22,6 +22,7 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
+set_option trace.profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Source affine dictionary, with its specified pure-tensor normalization.
@@ -111,8 +112,8 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_source
   · intro s xi
     change c P hP (e xi ⊗ₜ[Γ(S, V)] s) = _
     have he' : e xi = D.sourceClass p (eH.symm xi) := by
-      -- Expose the resolution formula before matching the comparison theorem.
-      unfold Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass
+      -- Match both the class map and the chosen comparison before checking the formula.
+      dsimp only [Scheme.Modules.FlatBaseChangeOpenChoices.sourceClass, eH]
       exact he xi
     exact (ht P hP (e xi) s).trans (congrArg (fun z ↦ s •
       ((Scheme.Modules.tensorPullback g).obj P).presheaf.map (homOfLE eVW).op
