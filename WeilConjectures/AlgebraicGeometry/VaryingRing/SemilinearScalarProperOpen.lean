@@ -468,12 +468,16 @@ private theorem scalarBeta_unit {U' U X' X : Scheme.{u}} (a : U' ⟶ U)
     (scalarTowerOpenAdj B j').homEquiv _ _ ((scalarBeta B a j' j g h sq).inv.app M) =
       (StrictTower.towerPullback B a).map ((scalarTowerOpenAdj B j).unit.app M) ≫
         (scalarTowerSquare B a j' j g h).inv.app ((StrictTower.towerJ B j).obj M) := by
-  exact termwiseBetaUnitOfSquare (StrictTower.moduleJAdj B j) (StrictTower.moduleJAdj B j')
+  have ht := termwiseBetaUnitOfSquare (I := ℕᵒᵖ)
+    (J := StrictTower.moduleJ B j) (P := StrictTower.modulePullback B j)
+    (J' := StrictTower.moduleJ B j') (P' := StrictTower.modulePullback B j')
+    (StrictTower.moduleJAdj B j) (StrictTower.moduleJAdj B j')
     (StrictTower.modulePullback B a) (StrictTower.modulePullback B g)
     (StrictTower.openBetaModule B a j' j g h sq)
     (StrictTower.moduleSquareG B a j' j g h)
     (scalarTowerSquare B a j' j g h) (scalarSquare_termwise B a j' j g h)
     (StrictTower.openBetaModule_normalized B a j' j g h sq).2 M
+  exact ht
 
 private def scalarClopen {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
@@ -580,7 +584,7 @@ private theorem scalarDirect_comp (C : OrdinaryScalarRestriction R φ B ψ)
         (((((G.d g).hom.app ((push R φ f).obj M)).app n).val.app H) x)))
   rw [StrictTower.directComp_hom_apply f g B]
   erw [scalarSection_restrict]
-  rw [scalarSection_direct, scalarSection_direct]
+  erw [scalarSection_direct, scalarSection_direct]
   rfl
 
 private theorem scalarTowerComp_mate {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
