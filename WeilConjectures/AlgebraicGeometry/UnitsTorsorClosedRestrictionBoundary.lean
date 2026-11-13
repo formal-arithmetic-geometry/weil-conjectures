@@ -45,7 +45,7 @@ private lemma equiv_zero_one (Y : Scheme.{u}) :
 
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- The comparison elaborates several sheaf adjunctions and Ext functors.
 /-- The inverse-image/counit comparison carries the boundary of one in the pullback
 of a direct-image extension to the boundary of one in the original extension.
