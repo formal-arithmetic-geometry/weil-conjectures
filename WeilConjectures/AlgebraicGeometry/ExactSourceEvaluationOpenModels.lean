@@ -65,7 +65,8 @@ private theorem tensor_quasiIso_of_isKFlat
   intro i
   exact (hd i).of_iso (CochainComplex.mapBifunctorMappingCone₁Iso t D (curriedTensor _))
 
-set_option profiler true in
+/-- Resolve the coefficient complex and retain the ordinary evaluation square and its
+quasi-isomorphisms, independently of the later localization. -/
 private theorem exists_localEvaluation_resolution_square (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (hhom : ∀ (M M' : CochainComplex (localEvaluationModules X U) ℤ) (t : M ⟶ M'),
@@ -114,6 +115,7 @@ private theorem comparison_of_resolution_square
   rw [← hs]
   simp only [Iso.inv_hom_id_assoc]
 
+/-- Transport a comparison through a square whose vertical maps become isomorphisms. -/
 private theorem comparison_of_mapped_resolution_square
     {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D)
     {S H : D} {T T' V V' : C}
@@ -128,7 +130,6 @@ private theorem comparison_of_mapped_resolution_square
     (asIso (L.map t)) (asIso (L.map h)) a' b' hg
   simpa only [asIso_hom, Functor.map_comp] using L.congr_map hs
 
-set_option profiler true in
 /-- The ordinary evaluation calculation, entirely on the open scheme. The functor E
 only changes from the over-site to its equivalent scheme site; it does not restrict
 an object or an evaluation arrow from X.
