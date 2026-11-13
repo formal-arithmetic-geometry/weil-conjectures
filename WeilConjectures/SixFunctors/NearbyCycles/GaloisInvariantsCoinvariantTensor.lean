@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvaria
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyTensorColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
 
 /-!
 
@@ -237,7 +238,6 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
-set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
 (SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
@@ -279,6 +279,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
               (L((𝟙 X)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C)) ≫ φ = φ) →
         G.map (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ≫ φ = φ := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
@@ -318,7 +324,6 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   exact hcoinv (Z := Z) (R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
     L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ G) hG φ' hφ'
 
-set_option profiler true in
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
 [Th. finitude], Lemme 3.4; blueprint `det-nearby-kunneth-invariants`; finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
@@ -356,6 +361,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
+  have := hasTensor₄ObjExt_mod.{u}
+  have := hasGoodTensor₁₂Tensor_mod.{u}
+  have := hasGoodTensorTensor₂₃_mod.{u}
+  have := hasColimitsOfShape_int_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
+  have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
   letI := galoisTensorModuleColimit
   letI := galoisTensorLeftColimit
   letI := galoisTensorRightColimit
