@@ -156,9 +156,7 @@ private theorem naturality_transport
   simpa only [Category.assoc, hc'] using h
 
 
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
--- The resolution and localization instances need extra elaboration heartbeats.
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
 The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
 Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
@@ -221,6 +219,7 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
         (DerivedCategory.Q.map a ⊗ₘ DerivedCategory.Q.map b) ≫
           t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj L) (DerivedCategory.Q.obj M) f ≫
             DerivedCategory.Q.map c := by
+  let : Abelian (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := inferInstance
   let := schemeDerivedTensorMonoidal X
   intro P P' L L' M M' a b c f
   obtain ⟨F, F', a₀, eP, eP', hF, hF', ha⟩ :=
@@ -267,7 +266,8 @@ theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
               DerivedCategory.Q.map c) := by
       dsimp only [ψ]
       simp only [Functor.map_comp, Category.assoc]
-      rw [hom_model_natural, ← Category.assoc (DerivedCategory.Q.map φ), hf]
+      rw [hom_model_natural X N N' M M' b₀ c,
+        ← Category.assoc (DerivedCategory.Q.map φ), hf]
     rw [← hψ, ht F' N' M' hF' ψ, ← hf, ht F N M hF φ]
     exact schemeTensorHomUncurry_localized_evaluation X F F' N N' M M' a₀ b₀ c φ
   exact naturality_transport
