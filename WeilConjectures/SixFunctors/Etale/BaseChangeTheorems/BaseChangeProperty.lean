@@ -134,7 +134,7 @@ whenever `f` is proper.
 
 This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`,
 which is the declaration realising the blueprint's `def-weil-pbc-property`; see the module
-docstring. (blueprint: `sk-def-pbc`) -/
+docstring. -/
 def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
