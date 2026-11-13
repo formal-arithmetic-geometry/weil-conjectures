@@ -126,24 +126,32 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (Rm := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E m) f)
     (Ln := ProEtale.StrictTower.modulePullback (compactSupportSystemLevel l E n) f)
     (Rn := ProEtale.StrictTower.moduleDirectImage (compactSupportSystemLevel l E n) f)
-    (systemAdj l E f)
+    (ProEtale.VaryingRing.moduleAdj (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (m + 1)) f)
     (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
     (coefficientSequenceEvaluation l E Y m) (coefficientSequenceEvaluation l E Y n)
     (coefficientSequenceEvaluation l E X m) (coefficientSequenceEvaluation l E X n)
     (proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h))
     (proEtaleCoefficientRestrictScalars X (compactSupportLevelQuotient l E m n h))
-    (evP l E f m) (evP l E f n)
-    (evG l E f m) (evG l E f n)
+    (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) f m)
+    (ProEtale.VaryingRing.moduleEvalP (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) f n)
+    (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) f m)
+    (ProEtale.VaryingRing.moduleEvalG (compactSupportSystemLevel l E)
+      (compactSupportSystemQuotient l E) f n)
     (compactSupportOrdinaryCoefficientTransition l E Y h)
     (compactSupportOrdinaryCoefficientTransition l E X h)
     (compactSupportScalarDirectImage f (compactSupportLevelQuotient l E m n h)).hom
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
-    ?_ ?_ (compactSupportOrdinaryDirectImageTransition l E f h) ?_ N
+    ?_ ?_ ?_ ?_ N
   · intro Q
     exact compactSupportOrdinaryPullbackUnit l E f m Q
   · intro Q
     exact compactSupportOrdinaryPullbackUnit l E f n Q
+  · exact compactSupportOrdinaryDirectImageTransition l E f h
   · intro M
     exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
