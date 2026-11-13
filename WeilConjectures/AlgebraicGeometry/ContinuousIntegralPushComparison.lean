@@ -64,6 +64,25 @@ theorem localization_comparison_zero (ℓ : ℕ)
   change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)
   exact hg.trans (Category.id_comp (G.map (adjX.unit.app K))).symm
 
+private noncomputable def isColimit_mapCocone_precompose_whisker
+    {I J A B C : Type*} [Category I] [Category J]
+    [Category A] [Category B] [Category C]
+    (p : I ⥤ J) {F : J ⥤ A} (G : A ⥤ B) (H : B ⥤ C)
+    {F' : J ⥤ B} (σ : F ⋙ G ≅ F') (c : Cocone F)
+    (hc : IsColimit ((G ⋙ H).mapCocone (c.whisker p))) :
+    IsColimit (H.mapCocone
+      (((Cocone.precompose σ.inv).obj (G.mapCocone c)).whisker p)) := by
+  let e := Functor.isoWhiskerRight (Functor.isoWhiskerLeft p σ) H
+  refine (IsColimit.precomposeHomEquiv e _) ?_
+  apply hc.ofIsoColimit
+  refine Cocone.ext (Iso.refl _) ?_
+  intro j
+  change H.map (G.map (c.ι.app (p.obj j))) ≫ 𝟙 _ =
+    H.map (σ.hom.app (p.obj j)) ≫
+      H.map (σ.inv.app (p.obj j) ≫ G.map (c.ι.app (p.obj j)))
+  rw [Category.comp_id, ← H.map_comp, ← Category.assoc, Iso.hom_inv_id_app,
+    Category.id_comp]
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
@@ -77,8 +96,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- The cocone comparisons below unify large derived module categories.
 /-- The specified scalar-extension/pushforward mate is invertible on integral bounded
 constructible complexes for a qcqs map.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2.
@@ -185,23 +202,8 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       obtain ⟨hc⟩ := integralLocalization_homology_isColimit ℓ E Y (G.obj K.obj) hGK q
       obtain ⟨hd⟩ := integralLocalization_push_homology_isColimit ℓ E f K.obj hK q
       apply integralLocalization_cocone_map_isIso ℓ cY d g hzero H hc
-      let J := (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor
-      let e := Functor.isoWhiskerRight (Functor.isoWhiskerLeft J σ) H
-      refine (IsColimit.precomposeHomEquiv e _) ?_
-      apply hd.ofIsoColimit
-      exact Cocone.ext (Iso.refl _) (by
-        intro n
-        simp only [Functor.comp_obj, Mod.smulSequenceCompIso, NatIso.ofComponents_hom_app,
-          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-          Cocone.precompose_obj_pt, Functor.mapCocone_pt, Cocone.whisker_pt,
-          Functor.mapCocone_ι_app, Functor.comp_map, Iso.refl_hom, Category.comp_id,
-          Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.const_obj_obj,
-          Functor.whiskerRight_app, Functor.whiskerLeft_app,
-          CategoryTheory.Functor.map_id, Cocone.whisker_ι, Functor.whiskerLeft_comp,
-          Functor.map_comp, e, σ, d]
-        change H.map (G.map (cX.ι.app n.down)) =
-          𝟙 _ ≫ H.map (𝟙 _) ≫ H.map (G.map (cX.ι.app n.down))
-        rw [H.map_id, Category.id_comp, Category.id_comp])
+      exact isColimit_mapCocone_precompose_whisker
+        (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor G H σ cX hd
     have : U.map β = g ≫ κ.inv.app (LX.obj K.obj) := by
       simp only [g, Category.assoc, Iso.hom_inv_id_app]
       exact (Category.comp_id (U.map β)).symm
