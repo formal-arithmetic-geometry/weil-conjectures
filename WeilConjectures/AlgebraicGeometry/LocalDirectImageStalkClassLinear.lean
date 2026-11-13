@@ -44,7 +44,6 @@ private theorem homology_comparison_commutes
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
     Category.comp_id] using hm'
 
-set_option profiler true in
 private theorem pushforward_top_homology_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     (K : CochainComplex Z.Modules ℕ) (p : ℕ) (t : S.presheaf.obj (op ⊤)) :
     let A := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace).mapHomologicalComplex
@@ -80,7 +79,6 @@ private theorem pushforward_top_homology_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     cA.inv ≫ cB.hom ≫ τ.app (B.sc p).homology at hc
   exact congrArg (fun q ↦ q z) hc
 
-set_option profiler true in
 private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     {G : Z.Modules} (K : InjectiveResolution G) (p : ℕ)
     (t : S.presheaf.obj (op ⊤))
@@ -99,7 +97,8 @@ private theorem resolution_top_smul {Z S : Scheme.{u}} (h : Z ⟶ S)
     (ComplexShape.up ℕ)).obj K.cocomplex
   let B := ((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj L
-  let U := forget₂ (ModuleCat.{u} (Z.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
+  let U := forget₂ (ModuleCat.{u} ((moduleRings Z.toRingedSpace).obj.obj (op ⊤)))
+    AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
   let cA := (A.sc p).mapHomologyIso U
