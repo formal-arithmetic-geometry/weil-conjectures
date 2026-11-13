@@ -26,10 +26,20 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
+-- Keep the composition calculation independent of the concrete derived functors.
+private lemma schemeMV_composition_postcompose
+    {C D : Type*} [Category C] [Category D] (R : C ⥤ D)
+    {P₁ P₂ P₃ P₄ : D} {Q₁ Q₂ Q₃ : C}
+    (a : P₁ ⟶ P₂) (b : P₂ ⟶ P₃) (c : P₃ ⟶ R.obj Q₁)
+    (d : P₂ ⟶ R.obj Q₃) (e : P₁ ⟶ P₄) (f : P₄ ⟶ R.obj Q₂)
+    (g : Q₂ ⟶ Q₁) (t : Q₁ ⟶ Q₃)
+    (hf : d = b ≫ c ≫ R.map t) (hc : a ≫ b ≫ c = e ≫ f ≫ R.map g) :
+    a ≫ d = e ≫ f ≫ R.map (g ≫ t) := by
+  rw [hf, R.map_comp]
+  simpa only [Category.assoc] using congrArg (fun v ↦ v ≫ R.map t) hc
+
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 500000 in
--- The exact restriction factors require additional categorical instance conversions.
 /-- Left-hand composition normalization to the complex-composition composite.
 Source: Stacks Project, Tags 08FE, 0D5T and 079V.
 
@@ -72,18 +82,13 @@ theorem schemeMV_composition_left_normalization
          (schemeDerivedDirectImage (h ∣_ W)).map
            (LX.mapDerivedCategoryFactors.inv.app I) ≫
          (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) := by
-  let LX := schemeOpenRestriction X (h ⁻¹ᵁ W)
-  let J := (LX.mapHomologicalComplex (.up ℤ)).obj I
   let β := (schemeMVDirectImageComposition (h ⁻¹ᵁ W).ι h).symm ≪≫
     eqToIso (congrArg schemeDerivedDirectImage (morphismRestrict_ι h W).symm) ≪≫
     schemeMVDirectImageComposition (h ∣_ W) W.ι
   have hc := schemeMVOpenComposition_restricted_source_unit X Y h W β rfl I
   have hf := schemeMVOpenComposition_restriction_factors X Y h W I
   dsimp only [] at hc hf ⊢
-  rw [hf]
-  have hp := congrArg (fun t ↦ t ≫ (schemeDerivedDirectImage W.ι).map
-    ((schemeDerivedDirectImage (h ∣_ W)).map (LX.mapDerivedCategoryFactors.inv.app I) ≫
-      (schemeMVOpenRestrictionComparison h W).inv.app (DerivedCategory.Q.obj I))) hc
-  simpa only [Functor.map_comp, Category.assoc] using hp
+  exact schemeMV_composition_postcompose (schemeDerivedDirectImage W.ι)
+    _ _ _ _ _ _ _ _ hf hc
 
 end AlgebraicGeometry
