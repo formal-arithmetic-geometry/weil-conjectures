@@ -55,7 +55,6 @@ private def brownCoherenceGenericRestriction (W : Scheme.{u})
 
 -- State the section equation over arbitrary rings: specializing its proof does not
 -- require the kernel to check the expanded quotient-ring section expression again.
-set_option profiler true in
 private theorem brownCoherenceGenericSections (W : Scheme.{u})
     (A B : CommRingCat.{u + 1}) (f : A ⟶ B)
     (e : SheafOfModules.restrictScalars.{u + 1}
@@ -120,7 +119,6 @@ private def ordinaryRestrictionIso {m n : ℕ} (h : m ≤ n) :
     ext U x
     rfl
 
-set_option profiler true in
 private theorem brownCoherenceDerivedRestriction
     (P : StrictEtaleEvaluation W O t) (R : StrictEtaleBrownRealizationData O t W P)
     {m n : ℕ} (h : m ≤ n) :
@@ -139,7 +137,8 @@ private theorem brownCoherenceDerivedRestriction
             (((coefficientRestriction (J := W.smallEtaleTopology) O t h).mapHomologicalComplex
               (.up ℤ)).obj K) ≫
           DerivedCategory.Q.map
-            ((NatIso.mapHomologicalComplex (ordinaryRestrictionIso O t W h) (.up ℤ)).hom.app K) := by
+            ((NatIso.mapHomologicalComplex (ordinaryRestrictionIso O t W h)
+              (.up ℤ)).hom.app K) := by
   let := R.ordinaryAdditive
   exact exists_derivedSquare_independentUniverses
     (coefficientRestriction (J := W.smallEtaleTopology) O t h)
@@ -152,7 +151,6 @@ private theorem brownCoherenceDerivedRestriction
       (strictEtaleBrownRingMap O t h)).mapDerivedCategoryFactors
     (ordinaryRestrictionIso O t W h)
 
-set_option profiler true in
 -- The normalization transports adjunctions between two concrete derived-category universes.
 /-- Normalize the comparison maps while retaining the supplied derived functors and
 factorizations. Arbitrary comparison isomorphisms are not automatically normalized.
