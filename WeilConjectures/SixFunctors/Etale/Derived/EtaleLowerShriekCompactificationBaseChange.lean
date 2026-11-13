@@ -279,12 +279,12 @@ lemma compactificationEtaleGraphIso_baseChange
     (pullback.fst (c.ofIsPullback sq).g e') (c.ofIsPullback sq).i
     (c.ofIsPullback sq).selfGraph_fst.symm).hom.naturality
       ((derivedOpenImmersionLowerShriekBaseChangeIso _ (c.isPullback_i_ofIsPullback' sq)).inv.app N)
-  rw [compactificationEtaleGraphIso_hom_app, compactificationEtaleGraphIso_hom_app]
+  simp only [compactificationEtaleGraphIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
   dsimp at hnat
-  rw [reassoc_of% hpre', reassoc_of% hpost, ← hnat, ← reassoc_of% hJ,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [reassoc_of% hpre', reassoc_of% hpost, ← hnat, ← reassoc_of% hJ,
+    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
 
 omit [Finite Λ] in
 /-- The "restrict to the graph and extend by zero" maps commute with base change. -/
