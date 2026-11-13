@@ -338,7 +338,8 @@ theorem compare_properties {R : Type u} {S : Type w}
       rw [comp]
       apply LinearMap.ext
       intro x
-      exact (IsLocalizedModule.linearEquiv_apply T _ t x).symm
+      exact (IsLocalizedModule.linearEquiv_apply T
+        (LocalizedModule.mkLinearMap T (restrict φ (extend φ P))) t x).symm
     rw [hE]
     exact E.bijective
 
