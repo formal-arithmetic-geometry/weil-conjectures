@@ -298,9 +298,9 @@ private theorem ordinary_tensor {W : Scheme.{t}} (P Q : Complex l E W)
     apply restriction_section_injective (normalizedDVRQuotient l E W hmn)
       (((finiteTensor l E W n).obj (level l E P n, level l E Q n)).X k) U
     revert x y
-    apply (evaluation_section_surjective l E (P.X p) m U).forall.mpr
+    refine (evaluation_section_surjective l E (P.X p) m U).forall.mpr ?_
     intro x0
-    apply (evaluation_section_surjective l E (Q.X q) m U).forall.mpr
+    refine (evaluation_section_surjective l E (Q.X q) m U).forall.mpr ?_
     intro y0
     let x := coefficientEvaluationSection l E W (P.X p) m U x0
     let y := coefficientEvaluationSection l E W (Q.X q) m U y0
