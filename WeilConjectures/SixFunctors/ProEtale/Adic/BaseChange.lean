@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
@@ -90,11 +92,20 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
+  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   rewrite [adicSquareLowerStarIso_hom_app]
+  unfold ProEtale.squareLowerStarIso
+  repeat' rewrite [Iso.trans_hom]
+  repeat' rewrite [Iso.symm_hom]
+  repeat' rewrite [NatTrans.comp_app]
   repeat' rewrite [Mod.comp_hom']
-  rewrite [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
-    adicLowerStarComp_inv_app_hom]
-  exact (adicBaseChange_isoTrans_app _ _ _ _).symm
+  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
+  repeat' rewrite [NatTrans.comp_app]
+  rewrite [adicLowerStarComp_hom_app_hom_hom_app,
+    adicLowerStarCongr_hom_app_hom_hom_app, adicLowerStarComp_inv_app_hom_hom_app]
+  rewrite [lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
+    lowerStarComp_inv_app_hom_app]
+  rfl
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
