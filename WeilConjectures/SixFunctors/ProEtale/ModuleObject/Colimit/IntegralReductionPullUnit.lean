@@ -238,7 +238,7 @@ private lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_ap
     (Iso.refl ((f)^*⟦Λ'⟧ ⋙ Mod.comap (coefficientMap a X))) (ComplexShape.up ℤ)).inv.app
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
-  erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
+  simp only [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
@@ -293,8 +293,8 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     DerivedCategory.Qh.mapIso ((Functor.mapHomotopyCategoryCompIso
       (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧))
         (ComplexShape.up ℤ)).app K)
-  apply (cancel_iso_hom_right _ _ ((D(Mod.comap (coefficientMap a X))).mapIso c)).1
-  apply (cancel_iso_hom_right _ _ ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
+  apply (Iso.cancel_iso_hom_right _ _ ((D(Mod.comap (coefficientMap a X))).mapIso c)).1
+  apply (Iso.cancel_iso_hom_right _ _ ((Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.app
     (((Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧).mapHomotopyCategory
       (ComplexShape.up ℤ)).obj K))).1
   simpa only [Category.assoc] using
