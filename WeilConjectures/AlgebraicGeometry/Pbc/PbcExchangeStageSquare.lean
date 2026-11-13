@@ -458,7 +458,6 @@ theorem pbcExchangeStageSquare_integral
           (Lg.Φ F).map ((Rf.β h).hom.app (ScalarLocalization.mk K)) ≫
           (τ F).app
             (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj (ScalarLocalization.mk K)) := by
-  intro E F h K
   obtain ⟨ΦRf, βRf, cohRf⟩ := Rf
   obtain ⟨ΦRf', βRf', cohRf'⟩ := Rf'
   obtain ⟨ΦLg, βLg, cohLg⟩ := Lg
@@ -467,6 +466,7 @@ theorem pbcExchangeStageSquare_integral
   obtain rfl : ΦRf' = _ := funext hRf'
   obtain rfl : ΦLg = _ := funext hLg
   obtain rfl : ΦLg' = _ := funext hLg'
+  intro E F h K
   -- The four BetaSpec identities, transported to homogeneous equations.
   have bRf₀ := bRf h rfl rfl K
   have bRf'₀ := bRf' h rfl rfl ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
@@ -495,20 +495,20 @@ theorem pbcExchangeStageSquare_integral
     dX'.out dX.out iX'.out iX.out (presLg' E) (presLg' F)).exists.choose_spec ⟨K⟩
   have eRf := hom_eq_of_heq_objects ?x₁ ?y₁ (bRf₀.trans rRf)
   rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
   have eRf' := hom_eq_of_heq_objects ?x₂ ?y₂ (bRf'₀.trans rRf')
   rotate_left
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
   have eLg := hom_eq_of_heq_objects ?x₃ ?y₃ (bLg₀.trans rLg)
   rotate_left
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]
   have eLg' := hom_eq_of_heq_objects ?x₄ ?y₄ (bLg'₀.trans rLg')
   rotate_left
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
-  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]
   have hτE₁ := eq_of_heq (hτ E K)
   have βLg_inv := eq_inv_comp_comp_inv
     ((pbcDescentPullback l Ω g presLg F).mapIso
@@ -526,13 +526,8 @@ theorem pbcExchangeStageSquare_integral
     ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)) _ eLg'
-  change ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app ⟨K⟩) ≫
-      (βRf' h).hom.app ((pbcDescentPullback l Ω g' presLg' E).obj ⟨K⟩) ≫
-      (pbcDescentDirectImage l Ω f' presRf' F).map ((βLg' h).hom.app ⟨K⟩) =
-    (βLg h).hom.app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩) ≫
-      (pbcDescentPullback l Ω g presLg F).map ((βRf h).hom.app ⟨K⟩) ≫
-      (τ F).app (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj ⟨K⟩)
-  refine comp_comp_hom_eq_hom_comp
+  dsimp only
+  refine comp_comp_hom_eq_hom_comp (C := pbcStageCategory l Ω Y' F)
     ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
     ((pbcDescentDirectImage l Ω f' presRf' F).mapIso ((βLg' h).app ⟨K⟩)) _ _ _ _ ?_
   simp only [Iso.app_inv, Functor.mapIso_inv]
@@ -580,8 +575,8 @@ theorem pbcExchangeStageSquare_integral
   -- τ-naturality: move `τ F` to the localized integral scalar extension and use `hτ F`.
   have hτF₁ := eq_of_heq
     (hτ F ((pbcIntegralScalarExtension l Ω X dX.out iX.out h).obj K))
-  erw [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
-  erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
+  simp only [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
+  simp only [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
     (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
   set_option backward.isDefEq.respectTransparency false in
   simp only [Functor.map_comp, eqToHom_map, Category.comp_id,
