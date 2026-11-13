@@ -255,47 +255,17 @@ private lemma transport
   simp only [CategoryTheory.Functor.comp_map] at hn
   rw [← S.mapDerivedCategory.map_comp_assoc, hqa,
     S.mapDerivedCategory.map_comp_assoc, reassoc_of% hn]
-
-open CategoryTheory.Functor in
-/-- Transport through equivalences, with the inner comparison given by the unit.
-Keeping the equivalences abstract lets their exactness instances be assembled once. -/
-private lemma transportEquivalence
-    {C D E H I : Type*} [Category C] [Category D] [Category E] [Category H] [Category I]
-    [aC : Abelian C] [aD : Abelian D] [aE : Abelian E] [aH : Abelian H] [aI : Abelian I]
-    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-    [HasDerivedCategory H] [HasDerivedCategory I]
-    (A : C ⥤ D) (e : D ≌ E) (T : D ⥤ H) (v : H ≌ I) (B : C ⥤ H)
-    [hA : A.Additive] [hT : T.Additive] [hB : B.Additive]
-    [PreservesFiniteLimits A] [PreservesFiniteColimits A]
-    [PreservesFiniteLimits T] [PreservesFiniteColimits T]
-    [PreservesFiniteLimits B] [PreservesFiniteColimits B]
-    (γ : A ⋙ T ≅ B) (F G : DerivedCategory C) :
-    let S := e.inverse ⋙ T ⋙ v.functor
-    let κ : e.functor ⋙ S ≅ T ⋙ v.functor :=
-      (associator _ _ _).symm ≪≫ isoWhiskerRight e.unitIso.symm _ ≪≫ leftUnitor _
-    let α := associator A e.functor S ≪≫ isoWhiskerLeft A κ ≪≫
-      (associator A T v.functor).symm ≪≫ isoWhiskerRight γ v.functor
-    let αD := mapDerivedCategoryCompIso (A ⋙ e.functor) S ≪≫ mapDerivedCategoryNatIso α
-    let qU := (mapDerivedCategoryCompIso A e.functor).symm
-    let qW := (mapDerivedCategoryCompIso B v.functor).symm
-    let d := mapDerivedCategoryCompIso A T ≪≫ mapDerivedCategoryNatIso γ
-    ∀ (a : (A ⋙ e.functor).mapDerivedCategory.obj F ⟶
-        (A ⋙ e.functor).mapDerivedCategory.obj G),
-      αD.inv.app F ≫ S.mapDerivedCategory.map a ≫ αD.hom.app G =
-        qW.hom.app F ≫ v.functor.mapDerivedCategory.map
-          (d.inv.app F ≫ T.mapDerivedCategory.map
-            (e.functor.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app G)) ≫
-            d.hom.app G) ≫ qW.inv.app G := by
-  intro S κ α αD qU qW d a
-  exact transport A e.functor S T v.functor B κ γ F G a
-
 end RestrictionTransport
 
 end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option trace.profiler true in
+-- Additivity of the three-fold composite restriction functors exceeds the default size.
+-- v4.35 tree: this override is still needed here (green in bumpF build81, whnf timeout without it in build82);
+-- master removed it on the pre-bump tree.
+set_option maxHeartbeats 1600000 in
+-- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
 Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
@@ -381,22 +351,19 @@ theorem scheme_derived_hom_restriction_transport
           (derivedOpenHomRestriction X.toRingedSpace i
             (e.mapDerivedCategory.preimage (qU.inv.app F ≫ a ≫ qU.hom.app E))) ≫
           qW.inv.app E := by
-  exact RestrictionTransport.transportEquivalence
-    (aC := SheafOfModules.instAbelian (moduleRings X.toRingedSpace))
-    (aD := SheafOfModules.instAbelian ((moduleRings X.toRingedSpace).over U))
-    (aE := SheafOfModules.instAbelian (moduleRings U.toScheme.toRingedSpace))
-    (aH := SheafOfModules.instAbelian ((moduleRings X.toRingedSpace).over W))
-    (aI := SheafOfModules.instAbelian (moduleRings W.toScheme.toRingedSpace))
-    (hA := moduleOverFunctor_additive X.toRingedSpace U)
-    (hT := moduleOverMap_additive X.toRingedSpace i)
-    (hB := moduleOverFunctor_additive X.toRingedSpace W)
-    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U)
-    (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U) ≌
-      SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace) from Scheme.Modules.overEquiv U)
-    (SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i)
-    (show SheafOfModules.{u} ((moduleRings X.toRingedSpace).over W) ≌
-      SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace) from Scheme.Modules.overEquiv W)
-    (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W)
-    (SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i) F E
+  intro R_U S_U eU e eW qU qW a
+  let A := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U
+  let B := SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) W
+  let T := SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) i
+  let S := Equivalence.inverse
+    (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+    (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+    (Scheme.Modules.overEquiv U) ⋙ T ⋙ eW
+  let κ : e ⋙ S ≅ T ⋙ eW :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).unitIso.symm _ ≪≫
+        Functor.leftUnitor _
+  let γ := SheafOfModules.overFunctorMap.{u} (moduleRings X.toRingedSpace) i
+  exact RestrictionTransport.transport A e S T eW B κ γ F E a
 
 end AlgebraicGeometry
