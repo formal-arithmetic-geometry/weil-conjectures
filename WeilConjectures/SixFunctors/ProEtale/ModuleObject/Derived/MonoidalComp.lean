@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
@@ -24,15 +25,19 @@ open Scheme Functor
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 
--- `erw` unfolds the tensor product of complexes of module objects to its components.
-private lemma upperStarTensorComplexHom_f
+@[reassoc]
+private lemma upperStarTensorComplexHom_ιTensorObj
     (A B : CochainComplex
-      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) (n : ℤ) :
-    (upperStarTensorComplexHom Λ f A B).f n =
-      HomologicalComplex.mapBifunctorDesc (fun p q h ↦
-        Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
-          (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)) := by
-  rfl
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
+    (p q n : ℤ) (h : p + q = n) :
+      HomologicalComplex.ιTensorObj
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B) p q n h ≫
+        (upperStarTensorComplexHom Λ f A B).f n =
+      Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
+        (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h) := by
+  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorDesc]
 
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
@@ -51,21 +56,15 @@ lemma upperStarTensorComplexHom_comp
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  erw [HomologicalComplex.ι_mapBifunctorMap_assoc]
-  rw [upperStarTensorComplexHom_f (Λ := Λ) (f := f)
-      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
-      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj B) n]
-  rw [upperStarTensorComplexHom_f (Λ := Λ) (f := f ≫ g) A B n]
-  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc,
-    HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  erw [CochainComplex.ιTensorObj_tensorHom_f_assoc,
+    upperStarTensorComplexHom_ιTensorObj_assoc,
+    upperStarTensorComplexHom_ιTensorObj_assoc]
   rw [Category.assoc, ← Functor.map_comp]
-  erw [HomologicalComplex.ι_mapBifunctorDesc]
+  rw [upperStarTensorComplexHom_ιTensorObj]
   simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
   rw [(upperStarComp Λ f g).hom.naturality, Functor.map_comp]
-  have hμ := upperStarComp_hom_app_tensor_μ_assoc Λ f g (A.X p) (B.X q)
+  exact upperStarComp_hom_app_tensor_μ_assoc Λ f g (A.X p) (B.X q)
     ((f)^*⟦Λ⟧.map ((g)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)))
-  rw [MonoidalCategory.tensorHom_def_assoc] at hμ
-  exact hμ
 
 open DerivedCategory Functor.LaxMonoidal
 
