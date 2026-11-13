@@ -93,7 +93,6 @@ lemma boundedConstructibleUpperStarComp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Y')
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- On the ambient derived category, the pullback comparison of a commutative square on bounded
 constructible complexes is the isomorphism of total left derived functors induced by the
@@ -132,8 +131,12 @@ lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f
         L((g'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ f).inv.app K) ≫
         (boundedConstructibleUpperStarCompatibility Λ ℓ g').inv.app
           ((boundedConstructibleUpperStar Λ ℓ f).obj K) := by
-  simpa only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso_inv_app,
-    Functor.map_id, Category.id_comp, Category.comp_id] using
+  change L((f'.left)^*⟦Λ⟧).map (𝟙 (L((g.left)^*⟦Λ⟧).obj K.obj)) ≫ 𝟙 _ ≫
+      ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
+    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
+      ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj ≫
+      L((g'.left)^*⟦Λ⟧).map (𝟙 (L((f.left)^*⟦Λ⟧).obj K.obj)) ≫ 𝟙 _
+  simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using
     boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
 
 end SquareComparison
