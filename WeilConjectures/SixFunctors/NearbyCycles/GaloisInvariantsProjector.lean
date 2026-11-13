@@ -506,12 +506,16 @@ private theorem exists_retraction_galoisLayer_projector_of_complex
   have hc (n : ℤ) := isColimitModuleCocone_galoisTower Ω h T₀ (K.X n) (hKe n)
   have hK (n : ℤ) :=
     rightAcyclic_condensedRingLowerStar_upperStar_of_iso (Ω := Ω) T₀ h (K.X n) (F₀ n) (hF₀ n)
-  obtain ⟨r, hr₁, hr₂, hr₃⟩ := N.exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
-    _ h Ω C ((galoisTower Ω h).derivedTrace _ (fun j M ↦ hW j M) K hc a hK _ e)
-    ((galoisTower Ω h).unit_app_comp_derivedTrace _ _ K hc a hK _ e)
-    (fun σ ↦ (galoisTower Ω h).derivedUnitTransport_comp_derivedTrace _ _ K hc a hK _ e _ _
-      fun (j : FiniteGaloisIntermediateField L Ω) ↦
+  let R := (galoisTower Ω h).derivedTrace _ (fun j M ↦ hW j M) K hc a hK _ e
+  have hR := (galoisTower Ω h).unit_app_comp_derivedTrace _ (fun j M ↦ hW j M) K hc a hK _ e
+  have hinv (σ : Ω ≃ₐ[L] Ω) :=
+    (galoisTower Ω h).derivedUnitTransport_comp_derivedTrace _ (fun j M ↦ hW j M)
+      K hc a hK _ e _ (pullbackAction_fst h _ specGaloisAction_comp σ)
+      (fun (j : FiniteGaloisIntermediateField L Ω) ↦
         ⟨σ.restrictNormal j, pullbackAction_comp_galoisLevelProjection h j σ⟩)
+  have hret := exists_galoisLayer_retraction_projector (Profinite.continuousMapRingObj T₀)
+    N h Ω C R hR hinv
+  obtain ⟨r, hr₁, hr₂, hr₃⟩ := hret
   refine ⟨r, hr₁, hr₂, fun {Z} f' q W φ κ S hS hφ ↦ ?_⟩
   obtain ⟨hΦ⟩ := nonempty_isColimit_homology_leftDerivedUpperStar_nearbyCycles_galoisTower N h Ω T₀
     K a hKe f' q
