@@ -34,7 +34,6 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
 Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
 Lemma 4.10, p. 23; Stacks 03D2 and 0941
@@ -81,6 +80,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
   apply HomologicalComplex.hom_ext
   intro i
   have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  -- Normalize hidden successor indices before comparing the evaluation functor applications.
   dsimp only [Nat.succ_eq_add_one, integralPullEvaluationComplex, ordinaryPullEvaluationComplex,
     HomologicalComplex.comp_f] at h ⊢
   exact h
