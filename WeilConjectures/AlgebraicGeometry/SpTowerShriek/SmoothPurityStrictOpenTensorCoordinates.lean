@@ -293,7 +293,6 @@ private abbrev HS (X : Scheme.{u}) (σ : ∀ n, B l E X (n + 1) ⟶ B l E X n)
     {m n : ℕ} (h : n ≤ m) :=
   transitionValue (ProEt.topology X) (B l E X) σ h
 
-set_option profiler true in
 -- Each section comparison normalizes the two continuous module-sheaf carrier presentations.
 private theorem canonicalPushHorizontal
     (R' : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R' (n + 1) ⟶ R' n)
@@ -311,6 +310,7 @@ private theorem canonicalPushHorizontal
     (transitionValue (ProEt.topology T) (VaryingRing.coefficients R' T)
       (VaryingRing.coefficientTransition R' φ T) h ((VaryingRing.push R' φ j).obj M) V x)
   have hm := (VaryingRing.moduleEvalP_existsUnique R' φ j m).choose_spec.1 M V.unop x
+  -- Apply the section equalities directly to avoid rewrite matching through carrier conversions.
   refine hn.trans ?_
   refine Eq.trans ?_ (congrArg
     (transitionValue (ProEt.topology U) (VaryingRing.coefficients R' U)
