@@ -43,6 +43,7 @@ private theorem affineTilde_map_bijective (A : Type u) [CommRing A]
   exact ⟨h⟩
 
 set_option maxHeartbeats 1500000 in
+set_option profiler true in
 -- Elaborating the three additive equivalences crosses two derived-category universes.
 set_option backward.isDefEq.respectTransparency false in
 /-- For any module target complex, affine derived arrows out of a K-projective module

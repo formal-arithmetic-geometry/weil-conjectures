@@ -29,6 +29,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- Derived restriction and nested homology functors require extra elaboration steps.
 /-- Evaluation at one is natural and agrees with the fraction comparison on chain maps.
 The statement concerns chain maps into F; it does not identify arbitrary stage derived
