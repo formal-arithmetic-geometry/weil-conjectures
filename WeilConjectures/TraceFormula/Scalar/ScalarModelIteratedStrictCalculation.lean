@@ -63,6 +63,17 @@ private theorem iteratedScalar_move_naturality
   simp only [Functor.map_comp, Category.assoc] at hd ⊢
   rw [← hd]
 
+/-- Transport the normalized associator along the presentation morphism. -/
+private theorem iteratedScalar_suffix_naturality
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (A : C ⥤ D) (A' : D ⥤ E) (A'' : C ⥤ E) (α : A ⋙ A' ⟶ A'')
+    {K P : C} {N : D} {Z : E} (e : K ⟶ P)
+    {u : A.obj P ⟶ N} {v : A'.obj N ⟶ Z} {w : A''.obj P ⟶ Z}
+    (h : α.app P ≫ w = A'.map u ≫ v) :
+    α.app K ≫ A''.map e ≫ w = A'.map (A.map e ≫ u) ≫ v := by
+  rw [← Category.assoc, ← α.naturality, Category.assoc, h]
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+
 /-- Assemble five identities without unfolding any of the concrete functors. -/
 private theorem assemble_calculation
     {V : Type*} [Category V]
@@ -105,7 +116,7 @@ variable (l : ℕ) [Fact l.Prime]
   (ι : E →ₐ[ℚ_[l]] L) (j : L →ₐ[ℚ_[l]] F)
   (X : Scheme.{u})
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- The iterated route, on one simultaneous presentation, is the localized ordinary
 scalar counits followed by the strict tensor associator and quotient augmentation.
 It does not involve a direct scalar realization model or a derived associator.
@@ -220,7 +231,10 @@ theorem scalarModelIteratedStrictCalculation
     (.up ℤ)).mapIso a
   let wa := HomologicalComplex.complexOfFunctorsToFunctorToComplex.mapIso w
   let v := A.map e.hom ≫ M.ε.app C
-  obtain ⟨qEL, hqEL, hnEL⟩ := bEL.normalization P C e κ hC hcoh
+  have hnEL' := bEL.normalization P C e κ hC hcoh
+  let qEL := hnEL'.choose
+  have hqEL := hnEL'.choose_spec.1
+  have hnEL := hnEL'.choose_spec.2
   let f := (completedScalarChainComparison l E L ι X).app P.obj ≫
     integralOperationsRoosFunctor.map qEL.inv
   let g := (CompletedLineTensor.scalarAssociatorComplex l E X L ι F j
@@ -240,7 +254,8 @@ theorem scalarModelIteratedStrictCalculation
     have hc := (completedScalarComparison_existsUnique l E L ι X).exists.choose_spec P
     change (completedScalarComparison l E L ι X).app K ≫
       (integralScalarExtensionComparisonOfUniverses l E L ι X).hom.app P = _ at hc
-    simpa only [v, f, Functor.map_comp, Category.assoc] using
+    simpa only [v, f, M, TL, Functor.mapIso_inv, Functor.comp_map,
+      Functor.map_comp, Category.assoc] using
       iteratedScalar_normalized_counit (integralComparisonRoosBridge l L X ρL D)
         ((integralOperationsRoosFunctor ⋙ DerivedCategory.Q).mapIso qEL) hnEL hc
   have hK := scalarPresentationKFlat l E X P C κ
@@ -264,11 +279,8 @@ theorem scalarModelIteratedStrictCalculation
       (integralComparisonSystemScalarComposition l E L F ι j X).hom.app
           (SE.reduction.obj K) ≫ A''.map e.hom ≫ M''.ε.app C =
         A'.map v ≫ M'.ε.app D ≫ DerivedCategory.Q.map a.hom := by
-    rw [← Category.assoc,
-      ← (integralComparisonSystemScalarComposition l E L F ι j X).hom.naturality]
-    rw [Category.assoc, ha]
-    simp only [v, Functor.comp_map, Functor.map_comp, Category.assoc]
-    rfl
+    exact iteratedScalar_suffix_naturality A A' A''
+      (integralComparisonSystemScalarComposition l E L F ι j X).hom e.hom ha
   have hmove :
       B.map ((completedScalarComparison l E L ι X).app K) ≫
         (completedScalarComparison l L F j X).app
