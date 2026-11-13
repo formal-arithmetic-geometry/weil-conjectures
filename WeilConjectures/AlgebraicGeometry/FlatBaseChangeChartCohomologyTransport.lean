@@ -65,6 +65,7 @@ private theorem chart_fmap_inverse {Y Z : Scheme.{u}} (σ : Y ≅ Z)
   rw [hc]
   exact chart_fmap_identity Z A p
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Elaborating the coefficient comparisons uses several module functors.
 /-- Transport along the affine chart identifies its unit map with open restriction

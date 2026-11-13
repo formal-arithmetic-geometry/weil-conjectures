@@ -57,6 +57,7 @@ private theorem linearEquiv_from_scalar_transports
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Combining the two geometric transports compares explicit module cohomology functors.
 /-- The target Leray identification commutes with module cohomology pullback.
