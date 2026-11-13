@@ -166,16 +166,20 @@ theorem compactSupportOrdinaryPullbackTransition {X Y : Scheme.{u}} (f : X ⟶ Y
     (compactSupportScalarPullback f (compactSupportLevelQuotient l E m n h))
     ?_ ?_ ?_ ?_ N
   · intro Q
-    dsimp only [Functor.comp_obj, Functor.comp_map]
-    have hu := systemEval_unit l E f m Q
-    trace_state
+    have hu := compactSupportOrdinaryPullbackUnit l E f m Q
+    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
+      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hu ⊢
     exact hu
   · intro Q
-    dsimp only [Functor.comp_obj, Functor.comp_map]
-    exact systemEval_unit l E f n Q
+    have hu := compactSupportOrdinaryPullbackUnit l E f n Q
+    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
+      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hu ⊢
+    exact hu
   · intro M
-    dsimp only [Functor.comp_obj, Functor.comp_map]
-    exact compactSupportOrdinaryDirectImageTransition l E f h M
+    have hd := compactSupportOrdinaryDirectImageTransition l E f h M
+    dsimp only [coefficientSequenceEvaluation, ProEtale.VaryingRing.eval,
+      SemilinearSections.evaluation, Functor.comp_obj, Functor.comp_map] at hd ⊢
+    exact hd
   · intro M
     exact (unit_mateEquiv_symm
       (proEtaleConstantRingAdjunction (Padic.coefficientExtensionRing l E (n + 1)) f)
