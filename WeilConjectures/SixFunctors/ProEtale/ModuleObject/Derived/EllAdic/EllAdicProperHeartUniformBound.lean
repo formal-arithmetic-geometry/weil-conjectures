@@ -212,7 +212,6 @@ private theorem qbar_closure_le_ind (ℓ : ℕ) [Fact ℓ.Prime]
     (((adicConstructibilityPredicateComparison ℓ X Λ .algebraicClosure).1 N).mp hN))
     inferInstance inferInstance inferInstance inferInstance hsum
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference in the internal module category needs a larger search budget.
 set_option synthInstance.maxSize 4096 in
 private theorem higherDirectImage_filtered
