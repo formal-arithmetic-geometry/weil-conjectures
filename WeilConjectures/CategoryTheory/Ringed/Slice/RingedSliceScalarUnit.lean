@@ -268,6 +268,23 @@ private theorem scalar_unit_section_surjective (V : Cᵒᵖ) :
     (HomologicalComplex.singleObjXSelf (.up ℤ) 0
       (SheafOfModules.unit B)).hom_inv_id
 
+private theorem scalar_restriction_unit_exists :
+    let F := ringedSliceComplexRestriction.{c, v, r} J R U
+    let O := ringedTensorUnitComplex.{c, v, r} J R
+    let OU := ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U)
+    ∃ e : F.obj O ≅ OU, ∀ (V : (Over U)ᵒᵖ) (b : R.obj.obj (op V.unop.left)),
+      (e.hom.f 0).val.app V
+        (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) =
+          ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b := by
+  let B := ((sheafCompose J
+    (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
+  let := (ringedOverFunctor_exactGeneral.{c, v, max c v r, max c v r} B U).1
+  refine ⟨(HomologicalComplex.singleMapHomologicalComplex
+    (SheafOfModules.overFunctor.{max c v r} B U) (.up ℤ) (0 : ℤ)).app
+      (SheafOfModules.unit B), ?_⟩
+  intro V b
+  rfl
+
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
 -- Abstract the localization data so normalization does not reduce its construction.
@@ -435,13 +452,7 @@ theorem ringedSlice_scalar_unit :
   let F := ringedSliceComplexRestriction.{c, v, r} J R U
   let O := ringedTensorUnitComplex.{c, v, r} J R
   let OU := ringedTensorUnitComplex.{max c v, v, r} (J.over U) (R.over U)
-  let B := ((sheafCompose J
-    (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
-  let := (ringedOverFunctor_exactGeneral.{c, v, max c v r, max c v r} B U).1
-  let e : F.obj O ≅ OU :=
-    (HomologicalComplex.singleMapHomologicalComplex
-      (SheafOfModules.overFunctor.{max c v r} B U) (.up ℤ) (0 : ℤ)).app
-        (SheafOfModules.unit B)
+  obtain ⟨e, he_unit⟩ := scalar_restriction_unit_exists J R U
   let o := α₀.app O ≪≫
     DerivedCategory.Q.mapIso e
   let r := r₀
@@ -491,8 +502,7 @@ theorem ringedSlice_scalar_unit :
           PresheafOfModules.id_app, ModuleCat.id_apply]
         have he : (e.hom.f 0).val.app V
             (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) =
-              ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b := by
-          rfl
+              ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b := he_unit V b
         rewrite [he, hβU]
         set_option backward.isDefEq.respectTransparency.types false in
         set_option backward.isDefEq.respectTransparency false in
