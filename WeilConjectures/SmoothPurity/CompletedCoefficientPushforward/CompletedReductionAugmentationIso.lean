@@ -281,8 +281,11 @@ theorem reductionAugmentation_isIso (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
       ρ.hom.app (DerivedCategory.Q.obj C) = α.app C := by
     have h := RF.rightDerivedNatTrans_app source.limit.functor (roosDerivedUnit κ)
       α T (𝟙 _) C
-    simpa only [roosDerivedUnit, NatTrans.comp_app, Functor.whiskerRight_app,
-      roosInclusion, Category.assoc, NatTrans.id_app, Category.id_comp] using h
+    simpa only [ρ, Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+      Iso.refl_hom, roosDerivedUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+      roosInclusion, roosLimitFunctor, Functor.comp_obj,
+      HomologicalComplex.complexOfFunctorsToFunctorToComplex_obj,
+      Category.assoc, NatTrans.id_app, Category.id_comp] using h
   have hunit : DerivedCategory.Q.map (limIso.hom.app C ≫ roosι C) ≫
       κ.hom.app C ≫ ρ.hom.app (DerivedCategory.Q.obj C) = source.limit.unit.app C := by
     simp only [Functor.map_comp, Category.assoc, hn]
