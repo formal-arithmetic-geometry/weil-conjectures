@@ -25,14 +25,6 @@ Global sections are the sections over the terminal étale schemes `Scheme.Etale.
 `Scheme.Etale.mk (𝟙 Y₀)`, and `i^*` is the inverse image `Scheme.etaleSetPullback i` of
 sheaves of sets.
 
-The proof is Gabber's criterion `AlgebraicGeometry.gabber_h0_etale_criterion` [Stacks 09ZF]:
-it suffices that restriction to the closed fibre is bijective on global sections of Zariski
-sheaves of sets on `Y` and on every finite `Y`-scheme `Y'`. These follow from the spectral
-restriction lemma [Stacks 09ZG] (`AlgebraicGeometry.zariski_restriction_universe_transport`),
-since every irreducible closed subset of `Y'`, which is proper over `A`, meets the closed fibre
-in a nonempty connected set (`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`,
-[Stacks 0A0B]).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.setGlobalSectionsUpperStarMap`: the restriction
@@ -44,6 +36,16 @@ in a nonempty connected set (`AlgebraicGeometry.Scheme.Hom.isConnected_inter_pre
   natural in `F`.
 - `AlgebraicGeometry.Etale.bijective_setGlobalSectionsUpperStarMap_of_henselianRing`: the
   comparison over a henselian pair.
+
+## Implementation details
+
+The proof is Gabber's criterion `AlgebraicGeometry.gabber_h0_etale_criterion` [Stacks 09ZF]:
+it suffices that restriction to the closed fibre is bijective on global sections of Zariski
+sheaves of sets on `Y` and on every finite `Y`-scheme `Y'`. These follow from the spectral
+restriction lemma [Stacks 09ZG] (`AlgebraicGeometry.zariski_restriction_universe_transport`),
+since every irreducible closed subset of `Y'`, which is proper over `A`, meets the closed fibre
+in a nonempty connected set (`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`,
+[Stacks 0A0B]).
 
 ## References
 
@@ -125,17 +127,9 @@ lemma bijective_setGlobalSectionsUpperStarMap_iff
 
 end Restriction
 
-/-- **Étale henselian restriction in degree zero, for sheaves of sets.** Let `(A, I)` be a
-henselian pair, let `p : Y ⟶ Spec A` be proper, and let `i : Y₀ ⟶ Y` be the closed fibre over
-`Spec (A ⧸ I)`. For every sheaf of sets `F` on the small étale site of `Y`, restriction
-`Γ(Y, F) ⟶ Γ(Y₀, i^* F)` is bijective; it is natural in `F` by
-`AlgebraicGeometry.Etale.setGlobalSectionsUpperStarMap_naturality`.
-
-This is Gabber's criterion (`AlgebraicGeometry.gabber_h0_etale_criterion`), whose Zariski
-hypotheses hold because every irreducible closed subset of a finite `Y`-scheme meets the
-closed fibre in a nonempty connected set
-(`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`).
-(blueprint: `theorem-comparison-over-henselian-pair-degree--1`) -/
+/-- Let `(A, I)` be a henselian pair, `p : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed
+fibre over `Spec (A ⧸ I)`. For every sheaf of sets `F` on the small étale site of `Y`, the
+restriction `Γ(Y, F) ⟶ Γ(Y₀, i^* F)` is bijective. -/
 @[stacks 0A0C]
 theorem bijective_setGlobalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y Y₀ : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]

@@ -154,7 +154,6 @@ group actions (finitely many automorphisms subject to finitely many equations), 
 uniquely.
 (blueprint: `thm-weil-pbc-finite-etale-lifting`) 
 (blueprint: thm-weil-pbc-finite-etale-lifting)
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`)
 -/
 @[stacks 0A48]
 theorem Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing
@@ -217,7 +216,6 @@ and these correspond under the finite étale lifting
 `AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing`.
 (blueprint: `lemma-weil-pbc-h1-torsor-comparison`) 
 (blueprint: lemma-weil-pbc-h1-torsor-comparison)
-(blueprint: `theorem-finite-etale-covers-proper-henselian--3`)
 -/
 theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
@@ -231,17 +229,10 @@ theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     have hFE := Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing I f i f₀ h
     exact Etale.bijective_cohomologyMap_one_of_finiteEtale_equivalence i hFE M
 
-/-- **Finite étale covers over a proper scheme over a henselian pair.** Let `(A, I)` be a
-henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`.
-Then base change along `i` is an equivalence from the category of finite étale `Y`-schemes
-to the category of finite étale `Y₀`-schemes, and consequently, for every finite abelian group
-`M`, restriction `H¹(Y, M) ⟶ H¹(Y₀, i^* M) ≅ H¹(Y₀, M)` is bijective, where the last map is
-induced by the canonical isomorphism `i^* M ≅ M` of constant sheaves
-(`AlgebraicGeometry.Scheme.upperStarConstantSheafIso`).
-The two halves are
-`AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing` and
-`AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing`.
-(blueprint: `theorem-finite-etale-covers-proper-henselian`) -/
+/-- Let `(A, I)` be a henselian pair, `f : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed
+fibre over `Spec A/I`. Then base change along `i` is an equivalence from finite étale
+`Y`-schemes to finite étale `Y₀`-schemes, and for every finite abelian group `M` the
+restriction `H¹(Y, M) ⟶ H¹(Y₀, i^* M) ≅ H¹(Y₀, M)` is bijective. -/
 theorem Scheme.isEquivalence_pullback_finiteEtale_and_bijective_cohomology_one_of_henselianRing
     {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
     {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f] (i : Y₀ ⟶ Y)
