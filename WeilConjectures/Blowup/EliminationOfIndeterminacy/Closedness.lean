@@ -95,7 +95,7 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
         (AffineBlowup.awaySlope (K.ideal V) (ha i) (hb i j)))) :
     IsClosed (Set.range (pullback.lift W.ι g hg.symm)) := by
   classical
-  set gen : ι ⊕ ι × σ → Γ(X, V.1) := Sum.elim a fun p ↦ b p.1 p.2 with hgendef
+  let gen : ι ⊕ ι × σ → Γ(X, V.1) := Sum.elim a fun p ↦ b p.1 p.2
   have hgen : ∀ k, gen k ∈ K.ideal V := by
     rintro (i | ⟨i, j⟩)
     · exact ha i
@@ -141,8 +141,8 @@ lemma Scheme.IdealSheafData.isClosed_range_pullbackLift_of_awaySlope
       rw [mul_comm (a i), hrel i' i j, mul_comm]
     · -- the coordinate identity on each piece
       intro i j
-      convert K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
-        (hgi i) rfl (hBle i) j using 2
+      exact K.mul_appTop_coord_awaySlope V g (hgen k) lam hlam (ha i) (hb i) (ci i) (hci i)
+        (hgi i) rfl (hBle i) j
 
 end Closedness
 
