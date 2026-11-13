@@ -224,6 +224,7 @@ private theorem transposePair_lift [F.Monoidal]
   rw [← Category.assoc, ← Category.assoc, imageLift]
   rw [Category.assoc, CartesianMonoidalCategory.lift_map_assoc]
 
+-- Specify the mate by its equation, keeping both underlying maps abstract.
 set_option profiler true in
 private theorem mate_linear_iff
     (M0 : SheafOfModules.{u} (ringSheaf R))
@@ -341,8 +342,13 @@ private theorem transpose_bilinear
       (show H.val.obj W from β.hom.app W ((F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t,
         (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
-    rw [I.moduleAdd M Z x y s hs W t]
-    exact (βb W).map_add₂ _ _ _
+    have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
+        (show (I.modules.obj M).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) +
+        (show (I.modules.obj M).val.obj W from (F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
+      I.moduleAdd M Z x y s hs W t
+    exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦
+      βb W v ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
+        ((βb W).map_add₂ _ _ _)
   have hAddR Z (x y : Z ⟶ (RingedTensor.underlying R).obj N)
       (n : Z ⟶ (RingedTensor.underlying R).obj M)
       (s : Z ⟶ (RingedTensor.underlying R).obj N)
@@ -364,8 +370,13 @@ private theorem transpose_bilinear
       (show H.val.obj W from β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
         (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
-    rw [I.moduleAdd N Z x y s hs W t]
-    exact (βb W _).map_add _ _
+    have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
+        (show (I.modules.obj N).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
+        (show (I.modules.obj N).val.obj W from (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
+      I.moduleAdd N Z x y s hs W t
+    exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦
+      βb W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
+        ((βb W _).map_add _ _)
   have hSmul Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj M)
       (n : Z ⟶ (RingedTensor.underlying R).obj N)
       (s : Z ⟶ (RingedTensor.underlying R).obj M)
@@ -385,8 +396,13 @@ private theorem transpose_bilinear
       (show H.val.obj W from β.hom.app W ((F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t,
         (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
-    rw [I.moduleSMul M Z a x s hs W t]
-    exact (βb W).map_smul₂ _ _ _
+    have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
+        (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
+        (show (I.modules.obj M).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
+      I.moduleSMul M Z a x s hs W t
+    exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦
+      βb W v ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
+        ((βb W).map_smul₂ _ _ _)
   have hSmulR Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj N)
       (n : Z ⟶ (RingedTensor.underlying R).obj M)
       (s : Z ⟶ (RingedTensor.underlying R).obj N)
@@ -406,8 +422,13 @@ private theorem transpose_bilinear
       (show H.val.obj W from β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
         (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t))
     simp only [hβ]
-    rw [I.moduleSMul N Z a x s hs W t]
-    exact (βb W _).map_smul _ _
+    have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
+        (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
+        (show (I.modules.obj N).val.obj W from (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
+      I.moduleSMul N Z a x s hs W t
+    exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦
+      βb W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
+        ((βb W _).map_smul _ _)
   have hAddSections W (x y : M.val.obj W) (n : N.val.obj W) :
       φ.hom.app W (x + y, n) =
         (show P0.val.obj W from φ.hom.app W (x, n)) +
