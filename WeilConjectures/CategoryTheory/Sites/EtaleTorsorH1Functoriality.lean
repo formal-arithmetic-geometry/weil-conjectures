@@ -30,9 +30,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace CategoryTheory.Sheaf.Torsor
 
-set_option maxHeartbeats 600000 in
--- The naturality of the pullback comparison `σ` identifies sections of the pushforward of the
--- sheaf inverse image with those of `Scheme.etaleSetPullback`, which unfolds both constructions.
 /-- The canonical torsor class is compatible with scheme pullback and change of coefficients.
 The inverse-image torsor is identified with the sheafified set inverse image, with its action
 specified by equivariance on the sections pulled back by the adjunction units. The contracted
@@ -107,11 +104,14 @@ theorem etale_torsor_h1_functoriality :
         T'.sheaf.obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop)) :=
       fun W x ↦ eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W.unop))
         (ε.hom.app W x)
+    -- Specify the morphism and section to avoid inferring them through sheafification.
     have hσ : ∀ ⦃W V : X.Etaleᵒᵖ⦄ (h : W ⟶ V) (x : T.sheaf.obj.obj W),
         T'.sheaf.obj.map ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (σ W x) =
           σ V (T.sheaf.obj.map h x) := fun W V h x ↦
-      ((NatTrans.naturality_apply eT.hom.hom _ _).symm.trans
-        (congrArg _ (NatTrans.naturality_apply ε.hom h x).symm))
+      (NatTrans.naturality_apply eT.hom.hom
+        ((MorphismProperty.Over.pullback @Etale ⊤ f).map h.unop).op (ε.hom.app W x)).symm.trans
+          (congrArg (eT.hom.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V.unop)))
+            (NatTrans.naturality_apply ε.hom h x).symm)
     have key := Etale.classH1_eq_map_cohomologyMap_of_equivariant f
       ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app G) T T' σ hσ
       (fun W a x ↦ heT W.unop a x)
