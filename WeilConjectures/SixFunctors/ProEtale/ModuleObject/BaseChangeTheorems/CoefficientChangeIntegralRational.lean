@@ -62,6 +62,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the transfer theorem are unified with the concrete coefficient rings
 /-- Blueprint `sk-lem-sbc-exchange-compatibility`, its last assertion for the localization
