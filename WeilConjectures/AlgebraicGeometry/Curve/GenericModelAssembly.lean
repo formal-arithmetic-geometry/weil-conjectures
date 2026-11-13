@@ -66,6 +66,7 @@ lemma smoothOfRelativeDimension_of_isPullback {Y S P : Scheme.{u}} [IrreducibleS
   exact smoothOfRelativeDimension_of_pullback_snd g j hj d
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- Elaborating the many restrictions over `V` exceeds the default heartbeat limit.
 /-- **Assembling the generic curve model over an open of the base.** Let `S₀` be integral and
 locally noetherian, `F₀ : X₀ ⟶ S₀` proper, `pₐ : Yₐ ⟶ X₀` finitely many finite morphisms whose
