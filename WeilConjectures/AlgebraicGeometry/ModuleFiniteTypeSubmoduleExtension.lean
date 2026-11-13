@@ -69,7 +69,6 @@ private theorem restricted_image_iso.{u₁, v₁, u₂, v₂}
   rw [← R.map_comp, Abelian.image.fac]
   exact hr
 
-set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.
 
