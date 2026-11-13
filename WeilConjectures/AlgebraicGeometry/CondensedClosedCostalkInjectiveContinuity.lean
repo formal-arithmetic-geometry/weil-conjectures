@@ -124,7 +124,6 @@ private theorem injectiveContinuity_of_derived
     hd.fac c s]
   exact (rightDerivedObjQIso_naturality H (K := J.obj s) (L := c.pt) (c.ι.app s)).symm
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Internal module colimit inference needs a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- A closed exceptional inverse image preserves a filtered quasi-colimit cocone
