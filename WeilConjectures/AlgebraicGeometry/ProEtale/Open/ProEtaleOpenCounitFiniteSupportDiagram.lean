@@ -36,8 +36,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable (A : Type u) [CommRing A] [Finite A]
 
-set_option maxHeartbeats 800000 in
--- Elaborating both coefficient presentations requires more than the default heartbeat budget.
+set_option profiler true in
 
 /-- A section of the pushforward of an open extension has a finite support diagram
 coming from a quasi-compact open in the affine test object. The maps `a` and `b` are
