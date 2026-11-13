@@ -184,6 +184,7 @@ lemma leftDerivedUpperStarId_hom_app_unit (X : Scheme.{u}) :
     ← Functor.mapHomotopyCategorySingleHom_id]
   exact Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj (upperStarId Λ X) (𝟙_ _)
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks of module
