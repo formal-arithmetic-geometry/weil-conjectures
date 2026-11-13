@@ -192,10 +192,10 @@ theorem GaloisCover.stalk_normalization_trait_section_residue_separable {S C : S
     MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
       (inferInstance : QuasiCompact U.ι)
   intro a n τ hn x _hx
+  apply residueSeparableAt_stalk n x
   obtain ⟨I, R, φ, hφ, hcover, hcharts⟩ :=
     GaloisCover.stalk_normalization_trait_charts
       c G hG q j hCη Z U jU PA ψ hjU hψ s hs hmin hdvr hn
-  exact residueSeparableAt_stalk n x
-    (residueSeparableAt_of_root_charts n I R φ hφ hcover hcharts x)
+  exact residueSeparableAt_of_root_charts n I R φ hφ hcover hcharts x
 
 end AlgebraicGeometry.Scheme
