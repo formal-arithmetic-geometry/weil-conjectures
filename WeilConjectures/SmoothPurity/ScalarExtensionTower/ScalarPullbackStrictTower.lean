@@ -52,6 +52,7 @@ private theorem section_cast_cancel {A B : AddCommGrpCat.{u + 1}} (h : A = B) (x
   rfl
 
 set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The strict square contains several nested sheaf scalar-change functors.
 /-- The strict scalar/pullback quotient square on every level and transition.
 Source: Stacks 03D3, 06YY and 07A4, the nested generator calculation.
