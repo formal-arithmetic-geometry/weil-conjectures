@@ -386,7 +386,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
           if a.isApp && b.isApp then
             todo := todo.push (a.appArg!, b.appArg!) |>.push (a.appFn!, b.appFn!)
           else
-            let d := s!"actual: {(reprStr a).take 1500}\nexpected: {(reprStr b).take 1500}"
+            let d := s!"actual: {a.getAppFn.constName?.getD .anonymous} ({a.getAppNumArgs}); expected: {b.getAppFn.constName?.getD .anonymous} ({b.getAppNumArgs})"
             if !differences.contains d then
               differences := differences ++ [d]
               Lean.logInfo d
