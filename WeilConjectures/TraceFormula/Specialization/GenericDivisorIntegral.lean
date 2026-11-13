@@ -353,7 +353,8 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
   exact (D(((overRestrictι X I.support.compl).left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
     (deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
     L(((zeroSectionSpecialFibreMap X I k').left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
-    L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).mapIso
+    L((((constantSpecialFibreProj k' (centre X I)) ⁻¹ᵁ U).ι)^*⟦
+      Profinite.padicAlgClRingObj ℓ⟧)).mapIso
       ((ObjectProperty.ι _).mapIso e).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
