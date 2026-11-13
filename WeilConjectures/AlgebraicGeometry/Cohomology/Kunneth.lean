@@ -279,6 +279,7 @@ lemma eq_of_presheaf_map_eq {Z : Scheme.{u}} {O₁ O₂ : Z.Opens} (h : O₂ = O
   rw [← key s, ← key t, hst]
 
 
+set_option profiler true in
 set_option maxHeartbeats 1600000 in
 -- the proof checks many index cases of the Čech cocycle condition
 /-- **The Künneth argument on Čech cochains.** Let `U` and `V` be finite affine open covers

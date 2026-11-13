@@ -51,6 +51,7 @@ noncomputable def gaPresheaf : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
     AddCommGrpCat.uliftFunctor.{u + 1, u}
 
 set_option backward.isDefEq.respectTransparency.types false in
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 open Pseudofunctor.LocallyDiscreteOpToCat Modules in
