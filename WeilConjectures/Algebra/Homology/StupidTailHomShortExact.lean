@@ -122,7 +122,6 @@ private noncomputable def stupidTailFanSplitting
       _ = (𝟙 _) ≫ p₂ i := by rw [(σ i).id, Category.comp_id, Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency true in
-set_option profiler true in
 private lemma homComplex_degreewise_split {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u}}
     (S : ShortComplex (CochainComplex (SheafOfModules.{u}
