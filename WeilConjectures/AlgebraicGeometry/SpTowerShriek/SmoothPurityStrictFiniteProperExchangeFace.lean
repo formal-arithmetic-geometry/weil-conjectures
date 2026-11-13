@@ -343,7 +343,6 @@ private theorem finitePullbackSquareCoherenceCube (b : Base l E)
         ((comparisonFinitePull l E b f n).inv.app M) ≫
       (comparisonFinitePull l E b h n).inv.app
         ((upperStar B f).leftDerivedFunctor.obj M) := by
-  dsimp
   intro M
   have HC := strictFinitePullbackSquareCoherence l E b sq n M
   run_tac Lean.Elab.Tactic.withMainContext do
