@@ -322,32 +322,7 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-private theorem finitePullbackSquareCoherenceCube (b : Base l E)
-    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
-    {f : X ⟶ Y} {g : Y' ⟶ Y}
-    (sq : IsPullback h f' f g) (n : ℕ) :
-    let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-    ∀ (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) B)),
-    (proEtaleConstantRingDerivedPullback (R l E n) f').map
-        ((comparisonFinitePull l E b g n).inv.app M) ≫
-      (comparisonFinitePull l E b f' n).inv.app
-        ((upperStar B g).leftDerivedFunctor.obj M) ≫
-      (comparisonFiniteRealization l E b X' n).map
-        ((leftDerivedUpperStarSquareIso B sq.toCommSq).hom.app M) =
-    (proEtaleConstantRingPullbackComposition f' g (R l E n) ≪≫
-        eqToIso (congrArg (fun a ↦
-          proEtaleConstantRingDerivedPullback (R l E n) a) sq.w.symm) ≪≫
-        (proEtaleConstantRingPullbackComposition h f (R l E n)).symm).hom.app
-          ((comparisonFiniteRealization l E b Y n).obj M) ≫
-      (proEtaleConstantRingDerivedPullback (R l E n) h).map
-        ((comparisonFinitePull l E b f n).inv.app M) ≫
-      (comparisonFinitePull l E b h n).inv.app
-        ((upperStar B f).leftDerivedFunctor.obj M) := by
-  simp only
-  intro M
-  have HC := strictFinitePullbackSquareCoherence l E b sq n M
-  exact HC
-
+set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.
@@ -409,9 +384,18 @@ theorem strictFiniteProperExchangeFace (b : Base l E)
     θ θ' (derivedBaseChangeMap B sq.toCommSq)
     (by
       have HN := native_base_change_mate (R l E n) sq.toCommSq
-      simpa only [StrictFiniteCoordinates] using HN)
-    (finitePullbackSquareCoherenceCube l E b sq n)
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HN) none
+        exactByConversion h)
+    (by
+      intro M
+      have HC := strictFinitePullbackSquareCoherence l E b sq n M
+      run_tac Lean.Elab.Tactic.withMainContext do
+        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HC) none
+        exactByConversion h)
     N (coordinates.property f n) (coordinates.property f' n)
-  sorry
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
+    exactByConversion h
 
 end AlgebraicGeometry.ProEtale.SpTowerShriek

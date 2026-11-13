@@ -595,7 +595,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
-set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words.
 Source: blueprint operations proof (2), pullback compositor normalization.
