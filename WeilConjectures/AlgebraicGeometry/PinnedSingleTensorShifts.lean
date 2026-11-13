@@ -273,6 +273,8 @@ theorem exists_pinned_single_tensor_shifts
   let := s
   have := hs
   exact SingleFunctors.exists_single_tensor_shifts_of_counit
+    (A := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (B := SheafOfModules.{u} (moduleRings X'.toRingedSpace))
     (Scheme.Modules.tensorPullback g') (derivedPullback g') (pinnedPullbackCounit g')
 
 end AlgebraicGeometry
