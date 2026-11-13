@@ -75,6 +75,7 @@ private theorem root_local {R : Type u} [CommRing R] [IsLocalRing R]
   obtain ⟨q, rfl⟩ := AdjoinRoot.mk_surjective (g := p) z
   exact (hmem M hM q).trans (hmem P hP q).symm
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The dependent normalization stalks and localization transport need this elaboration budget.
 /-- The geometric normal form, retaining the actual local root algebra and a uniformizer

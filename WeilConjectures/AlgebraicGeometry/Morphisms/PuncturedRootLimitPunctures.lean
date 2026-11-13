@@ -27,6 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 set_option maxHeartbeats 600000 in
 -- Comparing the iterated over-category cones needs additional elaboration heartbeats.
 /-- Punctured root charts commute with cofiltered affine ring colimits over R.

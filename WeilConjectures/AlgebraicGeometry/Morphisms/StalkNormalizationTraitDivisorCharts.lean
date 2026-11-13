@@ -174,6 +174,7 @@ private theorem smooth_trait_affine_generic_open_over
   exact ⟨β, IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _⟩
 
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- Elaborating the nested pullbacks and product root algebras exceeds the default budget.
 /-- A tame affine chart using the pullback of an actual trait uniformizer.
