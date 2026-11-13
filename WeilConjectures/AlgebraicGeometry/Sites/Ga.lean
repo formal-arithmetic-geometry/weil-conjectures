@@ -51,7 +51,6 @@ noncomputable def gaPresheaf : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
     AddCommGrpCat.uliftFunctor.{u + 1, u}
 
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 open Pseudofunctor.LocallyDiscreteOpToCat Modules in
 /-- The underlying presheaf of sets of `V ↦ Γ(V, 𝒪_V)` is a sheaf on the small étale site:
 `a ↦ a ·` identifies it with the étale sheaf `V ↦ End(V^* 𝒪_X)`. -/
