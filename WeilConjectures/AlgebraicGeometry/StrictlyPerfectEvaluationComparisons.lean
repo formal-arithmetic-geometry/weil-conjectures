@@ -97,6 +97,7 @@ private theorem exact_hom_of_retract {C : Type u} [SmallCategory C]
       simp [i, r, SE, SheafOfModules.homObjMap_comp_homObjMap, hιπ]
   exact ⟨hz, shortExact_of_retraction i r hir hB⟩
 
+-- Unpack the finite-free retraction on an abstract site before specializing to an open.
 private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{u}]
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u})
@@ -123,7 +124,6 @@ private theorem exact_hom_of_finiteFree_retract {C : Type u} [SmallCategory C]
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 -- The finite-free retractions use the localized and internal-Hom carrier presentations.
 private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
     (P : CochainComplex (localEvaluationModules X U) ℤ)
@@ -136,6 +136,7 @@ private theorem strictlyPerfect_hom_quasiIso (X : Scheme.{u}) (U : X.Opens)
   intro n S hS
   exact exact_hom_of_finiteFree_retract (X.sheaf.over U) (P.X n) (hP.2 n) S hS
 
+-- Transport a comparison square without unfolding the concrete derived-category objects.
 private theorem exists_comparisons_of_isos {C : Type*} [Category C]
     {A B T T' H H' : C} (g : A ⟶ B) (f : T ⟶ H) (f' : T' ⟶ H') (h : H ⟶ H')
     [IsIso f] [IsIso f'] [IsIso h]
@@ -151,7 +152,6 @@ private theorem exists_comparisons_of_isos {C : Type*} [Category C]
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 -- The resolution comparisons use several equivalent carrier presentations.
 /-- Given representatives and an ordinary evaluation chain map, there are compatible
 source and target comparison isomorphisms. The comparisons are existentially
