@@ -120,6 +120,7 @@ private def scalarSection
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf a M).presheaf).app V
       (s ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x))
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Elaborate the simultaneous scalar-extension and total-tensor comparisons.
 attribute [local implicit_reducible] SheafOfModules.restrictScalars
