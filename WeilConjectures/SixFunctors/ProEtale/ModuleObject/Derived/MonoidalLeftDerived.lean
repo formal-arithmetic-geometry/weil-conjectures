@@ -54,8 +54,8 @@ objects is the generic tensor comparison of the left derived functor of the stro
 functor `f^*`. -/
 theorem leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :
     leftDerivedUpperStarTensor Λ f = ((f)^*⟦Λ⟧).leftDerivedTensorComparison := by
-  refine Functor.leftDerived₂_ext (leftDerivedUpperStarTensorRight Λ f)
-    (leftDerivedUpperStarTensorRightCounit Λ f) (HomotopyCategory.quasiIso _ _)
+  refine Functor.leftDerived₂_ext ((f)^*⟦Λ⟧).derivedTensorLeftDerived
+    ((f)^*⟦Λ⟧).derivedTensorLeftDerivedCounit (HomotopyCategory.quasiIso _ _)
     (HomotopyCategory.quasiIso _ _) _ _ _ ?_
   apply NatTrans.ext
   funext A
@@ -63,9 +63,9 @@ theorem leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison :
   funext B
   have h₁ := leftDerivedUpperStarTensor_app_app_fac Λ f A B
   have h₂ := ((f)^*⟦Λ⟧).leftDerivedTensorComparison_app_app_comp_tensorHom A B
-  rw [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
-  simp only [NatTrans.comp_app]
-  rw [leftDerivedUpperStarTensorRightCounit_app_app]
-  erw [reassoc_of% h₁, reassoc_of% h₂]
+  simp only [MonoidalCategory.tensorHom_def, Category.assoc] at h₂
+  simp only [NatTrans.comp_app, Functor.derivedTensorLeftDerivedCounit_app_app,
+    MonoidalCategory.tensorHom_def, Category.assoc]
+  exact h₁.trans h₂.symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
