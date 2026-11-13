@@ -27,10 +27,6 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The product-localization comparison repeatedly elaborates derived and sheaf Hom instances.
-set_option synthInstance.maxHeartbeats 40000 in
--- Additive Hom inference traverses the derived and sheaf categories in each repeated binder.
 /-- The canonical additive identification `H⁰(C, R𝓗om(L, M)) ≃+ Hom_D(O)(L, M)`,
 natural contravariantly in `L` and covariantly in `M`.
 
