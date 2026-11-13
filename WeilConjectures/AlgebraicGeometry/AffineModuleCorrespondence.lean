@@ -212,15 +212,35 @@ theorem affine_module_correspondence [IsAffineHom f] :
     apply (hqc ((R).obj F)).mpr
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
   refine ⟨hqc, hpush, ?_⟩
-  obtain ⟨B, b, t, ε, hring, hb, ht, P, pobj, κ, hPmap, hPunit,
-    H, hobj, γ, hHmap, hHunit, hHqc, α, β, hcomp⟩ := affine_module_tensor_construction f
+  refine Exists.elim (affine_module_tensor_construction f) (fun B hB ↦ ?_)
+  refine ⟨B, ?_⟩
+  refine Exists.elim hB (fun b hb ↦ ?_)
+  refine ⟨b, ?_⟩
+  refine Exists.elim hb (fun t ht ↦ ?_)
+  refine ⟨t, ?_⟩
+  refine Exists.elim ht (fun ε hring ↦ ?_)
+  refine ⟨ε, hring.1, hring.2.1, hring.2.2.1, ?_⟩
+  refine Exists.elim hring.2.2.2 (fun P hP₀ ↦ ?_)
+  refine ⟨P, ?_⟩
+  refine Exists.elim hP₀ (fun pobj hP₁ ↦ ?_)
+  refine ⟨pobj, ?_⟩
+  refine Exists.elim hP₁ (fun κ hP ↦ ?_)
+  refine ⟨κ, hP.1, hP.2.1, ?_⟩
+  refine Exists.elim hP.2.2 (fun H hH₀ ↦ ?_)
+  refine ⟨H, ?_⟩
+  refine Exists.elim hH₀ (fun hobj hH₁ ↦ ?_)
+  refine ⟨hobj, ?_⟩
+  refine Exists.elim hH₁ (fun γ hH ↦ ?_)
+  refine ⟨γ, hH.1, hH.2.1, hH.2.2.1, ?_⟩
+  refine Exists.elim hH.2.2.2 (fun α hβ₀ ↦ ?_)
+  refine ⟨α, ?_⟩
+  refine Exists.elim hβ₀ (fun β hcomp ↦ ?_)
+  refine ⟨β, hcomp.1, hcomp.2, ?_⟩
   have hiso := affine_module_tensor_comparison_isIso f B b t ε
-    ⟨hring, hb, ht⟩ P pobj κ ⟨hPmap, hPunit⟩ H hobj γ
-    ⟨hHmap, hHunit, hHqc⟩ α β hcomp
-  have hE := equivalence_on_full_subcategories qU qA R H hpush hHqc α β
-    hiso.1 hiso.2
-  exact ⟨B, b, t, ε, hring, hb, ht, P, pobj, κ, hPmap, hPunit,
-    H, hobj, γ, hHmap, hHunit, hHqc, α, β, hcomp.1, hcomp.2, hiso.1, hiso.2, hE⟩
+    ⟨hring.1, hring.2.1, hring.2.2.1⟩ P pobj κ ⟨hP.1, hP.2.1⟩ H hobj γ
+    ⟨hH.1, hH.2.1, hH.2.2.1⟩ α β hcomp
+  refine ⟨hiso.1, hiso.2, ?_⟩
+  exact equivalence_on_full_subcategories qU qA R H hpush hH.2.2.1 α β hiso.1 hiso.2
 
 end
 end AlgebraicGeometry.Scheme.Modules

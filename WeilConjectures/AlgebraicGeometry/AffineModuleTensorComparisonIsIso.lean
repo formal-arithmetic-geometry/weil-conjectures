@@ -84,7 +84,6 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
-set_option profiler true in
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
 performs the affine inverse calculation and the passage from affine opens to sheaves.
@@ -191,6 +190,7 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
     apply PresheafOfModules.hom_ext
     intro V
     ext m
+    -- Evaluate the adjoint equation and counit factorization on sections.
     have hb := congrArg (fun k ↦ k.val.app V m) (hcomp.2 (Rf.obj F))
     simp only [Adjunction.homEquiv_unit] at hb
     have ha := congrArg (fun k ↦ k.val.app (fV V)
