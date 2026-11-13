@@ -68,7 +68,6 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-set_option profiler true in
 /-- Scalar compatibility of the transported pullback counit.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-counit-smul).
@@ -162,14 +161,16 @@ theorem affine_module_tensor_counit_smul
       (t.hom.app ((Opens.map f.base).op.obj V) (ηA.hom.app V r)) = r at hh
     rw [hh]
   -- Compose inverse-image and change-of-rings Hom equivalences.
-  let φ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose
-  have hφ := (SheafOfModules.moduleInverseImageAdjunction f.base A).choose_spec.1
+  let miAdj := SheafOfModules.moduleInverseImageAdjunction f.base A
+  let φ := miAdj.choose
+  have hφ := miAdj.choose_spec.1
   let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
-  let hE := (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose
+  let crAdj := SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
+  let hE := crAdj.choose_spec.choose
   let adE :=
-    (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose_spec.choose
+    crAdj.choose_spec.choose_spec.choose
   have heE :=
-    (SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t).choose_spec.choose_spec.choose_spec
+    crAdj.choose_spec.choose_spec.choose_spec
   let d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶ N :=
     eqToHom (hE _).symm ≫ (adE.homEquiv _ N).symm v
   have hd (V : (Opens X)ᵒᵖ) (m : ((R).obj F).val.obj V) :
