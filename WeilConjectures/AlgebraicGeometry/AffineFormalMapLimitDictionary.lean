@@ -66,8 +66,6 @@ private theorem finite_presentation_module
   exact Module.Finite.equiv eP.toLinearEquiv.symm
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- The affine equivalence and two natural comparisons require extra elaboration heartbeats.
 /-- The affine dictionary identifies a formal morphism with a completed linear map,
 and identifies that map with the actual inverse limit of its section maps.
 No torsion hypothesis or annihilator conclusion is involved.
@@ -124,13 +122,7 @@ theorem affine_formal_map_limit_dictionary
           (lim.map (Functor.whiskerRight δ.hom
             (SheafOfModules.evaluation X.ringCatSheaf (op ⊤)))).hom (a x) := by
   classical
-  dsimp only
-  intro P ε η
-  let A := Γ(X, ⊤)
-  let I := J.ideal ⟨⊤, isAffineOpen_top X⟩
-  let S := AdicCompletion I A
-  let L := tilde.functor A ⋙ Scheme.Modules.pullback X.isoSpec.hom
-  let C := L ⋙ formalCompletionFunctor J
+  intro A I S L C P ε η
   let R := ObjectProperty.ι (fun Q : ModuleCat.{u} S ↦ Module.Finite S Q) ⋙
     ModuleCat.restrictScalars (algebraMap A S)
   let ι := (IsCoherentFormalModule J).ι

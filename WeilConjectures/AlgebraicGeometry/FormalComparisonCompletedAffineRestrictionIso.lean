@@ -38,8 +38,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
-set_option maxHeartbeats 700000 in
--- The nested affine-limit and section functors require additional elaboration heartbeats.
 /-- A coherent realization of the canonical comparison is invertible off the
 extended exceptional ideal. Unlike the model theorem, this supplies no objects,
 map, or limit isomorphisms: all are inputs and the commuting square is a hypothesis.
@@ -114,15 +112,8 @@ theorem formalComparison_completed_affine_restriction_isIso
             ((moduleSpecΓFunctor (R := CommRingCat.of R)).map c)) →
           IsIso ((Scheme.Modules.restrictFunctor
             (Scheme.Opens.ι Q.support.compl)).map c) := by
-  intro U
-  dsimp only
+  intro U B R L Q A D c eA eD hs
   classical
-  let B := Γ(Y, U.1)
-  let R := AdicCompletion (J.ideal U) B
-  let L := (K.ideal U).map (algebraMap B R)
-  let Q := Scheme.IdealSheafData.ofIdealTop
-    (L.map (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom)
-  intro A D c eA eD hs
   have : IsNoetherianRing B := IsLocallyNoetherian.component_noetherian U
   have : IsNoetherianRing R := AdicCompletion.isNoetherianRing (J.ideal U)
   obtain ⟨Z, p, adjR, A₀, F₀, b, hD, _, hp, eA₀, eD₀, hs₀⟩ :=
