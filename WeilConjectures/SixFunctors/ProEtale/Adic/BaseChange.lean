@@ -69,26 +69,10 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
     (M : AdicSheaf l U') :
     ((adicSquareLowerStarIso l sq).hom.app M).hom =
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
-  refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
-  unfold adicSquareLowerStarIso ProEtale.squareLowerStarIso
-  repeat' first
-    | rw [Iso.trans_hom]
-    | rw [Iso.symm_hom]
-    | rw [Functor.map_comp]
-    | rw [Mod.comp_hom']
-    | rw [ObjectProperty.FullSubcategory.comp_hom]
-    | rw [NatTrans.comp_app]
-    | rw [adicLowerStarComp_hom_app_hom_hom_app]
-    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
-    | rw [adicLowerStarComp_inv_app_hom_hom_app]
-    | rw [lowerStarComp_hom_app_hom_app]
-    | rw [lowerStarCongr_hom_app_hom_app]
-    | rw [lowerStarComp_inv_app_hom_app]
-  simp only [← Functor.map_comp, ← op_comp]
-  congr 2
-  ext : 1
-  simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
-    MorphismProperty.Over.mk]
+  simp (config := { dsimp := false }) only [adicSquareLowerStarIso,
+    ProEtale.squareLowerStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarComp_inv_app_hom,
+    adicLowerStarCongr_hom_app_hom]
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -124,7 +108,7 @@ lemma adicBaseChangeMap_app_hom (sq : CommSq g' j' j g'') (M : AdicSheaf l Z') :
       (ProEtale.baseChangeMap (WeilCoefficients.{u} l) sq).app M.X := by
   dsimp only [adicBaseChangeMap, ProEtale.baseChangeMap]
   rw [adicBaseChange_mate_symm_app, adicBaseChange_mate_symm_app]
-  simp only [Mod.comp_hom', adicUpperStar_map_hom, adicLowerStar_map_hom,
+  simp (config := { dsimp := false }) only [Mod.comp_hom', adicUpperStar_map_hom, adicLowerStar_map_hom,
     adicBaseChange_unit_app_hom, adicBaseChange_counit_app_hom,
     adicSquareLowerStarIso_hom_app_hom]
   rfl
