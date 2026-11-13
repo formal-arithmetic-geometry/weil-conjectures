@@ -26,6 +26,7 @@ attribute [local irreducible] constantAdicQuotientRealization constantAdicFinite
   constantAdicQuotientRightIso pbcDerivedRestrict constantAdicFiniteProjection
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Matching the explicit derived scalar-comparison types in the assembly needs more
 -- elaboration heartbeats; this file compiles in about 25 seconds.
 /-- Separate local markings of a fixed normalized finite algebraic tower can be
