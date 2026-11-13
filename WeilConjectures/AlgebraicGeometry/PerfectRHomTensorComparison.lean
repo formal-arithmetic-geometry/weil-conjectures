@@ -85,7 +85,6 @@ private theorem isIso_adjunct_left_evaluation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The dual of a perfect complex is perfect, with evaluation, coevaluation, biduality,
 base change, and the tensor--internal-Hom comparison.
 Source: Stacks Project, Cohomology, Tags 08DQ, 0FPC and 0GM7
@@ -236,10 +235,11 @@ theorem perfect_rhom_tensor_comparison
     intro A B f q
     have hh := hadj' B A D.obj D.obj (𝟙_ (schemeDerivedCategory X))
       (𝟙_ (schemeDerivedCategory X)) f (𝟙 _) (𝟙 _) q
-    have hmap := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
-      X.toRingedSpace.sheaf).map_id (op D.obj, 𝟙_ (schemeDerivedCategory X))
-    rw [op_id, ← prod_id', hmap] at hh
-    simpa only [Category.comp_id, id_tensorHom] using hh
+    have hmap : (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
+        X.toRingedSpace.sheaf).map
+        ((𝟙 D.obj).op, 𝟙 (𝟙_ (schemeDerivedCategory X))) = 𝟙 _ :=
+      Functor.map_id _ _
+    simpa only [hmap, Category.comp_id] using hh
   refine ⟨D, hD, ev, rfl, hperfect, (fun N ↦ φ N.obj), ?_, hφ M.obj,
     hφ K.obj, bidual, ?_, hb, η, ?_, ?_, ⟨p, rfl, rfl⟩, ?_⟩
   · intro N
@@ -270,10 +270,11 @@ theorem perfect_rhom_tensor_comparison
       have hh := hadjT B A ((derivedPullback g).obj K.obj)
         ((derivedPullback g).obj K.obj) (𝟙_ (schemeDerivedCategory T))
         (𝟙_ (schemeDerivedCategory T)) f (𝟙 _) (𝟙 _) q
-      have hmap := (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace)
-        T.toRingedSpace.sheaf).map_id
-        (op ((derivedPullback g).obj K.obj), 𝟙_ (schemeDerivedCategory T))
-      rw [op_id, ← prod_id', hmap] at hh
-      simpa only [Category.comp_id, tensorHom_id] using hh
+      have hmap : (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace)
+          T.toRingedSpace.sheaf).map
+          ((𝟙 ((derivedPullback g).obj K.obj)).op,
+            𝟙 (𝟙_ (schemeDerivedCategory T))) = 𝟙 _ :=
+        Functor.map_id _ _
+      simpa only [hmap, Category.comp_id] using hh
 
 end AlgebraicGeometry
