@@ -403,8 +403,6 @@ end CanonicalTensorPullbackProof
 
 set_option synthInstance.maxSize 2048 in
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborate the full two-variable representative square.
 set_option linter.style.longLine false in
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
@@ -542,8 +540,10 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
   have hF : ∀ P, PR P → PS (F.obj P) := by
     intro P hp
     exact (hPS _).2 (hpres P ((hPR _).1 hp).1 ((hPR _).1 hp).2)
-  obtain ⟨LF', ε', hLF', _, _, hε', _⟩ :=
+  obtain ⟨LF', ε', hLF', hdata⟩ :=
     ringedTopoiDerivedPullback uInv uPush adj I c uStar hobj hmap
+  have hε' := hdata.2.2.1
+  clear hdata
   have := hLF
   have := hLF'
   let e := Functor.leftDerivedNatIso LF' LF ε' epsilon
@@ -591,7 +591,8 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
         CanonicalTensorPullbackProof.tensorMap_factor]
       exact
         (CanonicalTensorPullbackProof.tensorPullbackTotal_naturality
-          uStar k.mu k.naturality f.1 f.2))
+          uStar k.mu k.naturality (P := X.1) (P' := Y.1) (Q := X.2) (Q' := Y.2)
+          f.1 f.2))
   let b := b0.symm
   let H : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦ PR X.as
   have hres : ∀ X : HomotopyCategory A (.up ℤ),
@@ -621,26 +622,20 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
       (fun P hp ↦ he P ((hPR _).1 hp).1 ((hPR _).1 hp).2)
       (fun P Q hp hq ↦ het P Q ((hPR _).1 hp).1 ((hPR _).1 hp).2
         ((hPR _).1 hq).1 ((hPR _).1 hq).2)
-  obtain ⟨alpha, ha, hu⟩ := hdes
   have heps (P : CochainComplex A ℤ) :
       eps.app P = derivedPullbackComplexComparison uStar LF epsilon P := rfl
   have hb (P Q : CochainComplex A ℤ) :
       DerivedCategory.Q.map (b.hom.app (P, Q)) =
         (DerivedCategory.Q.mapIso
           (k.totalIso R S RI uInv I c uStar hobj V am P Q)).inv := rfl
-  refine ⟨hpres, alpha, ?_, ?_⟩
-  · intro P Q hp hq
+  refine ⟨hpres, (existsUnique_congr ?_).mp hdes⟩
+  intro alpha
+  constructor
+  · intro ha P Q hp hq
     refine ⟨hF P hp, hF Q hq, ?_⟩
-    have hh := ha P Q hp hq
-    simp only [heps, hb] at hh
-    exact hh
-  · intro alpha' ha'
-    apply hu alpha'
-    intro P Q hp hq
-    set_option backward.isDefEq.respectTransparency true in
-      obtain ⟨hp', hq', hh⟩ := ha' P Q hp hq
-    simp only [heps, hb]
-    exact hh
+    simpa only [heps, hb] using ha P Q hp hq
+  · intro ha P Q hp hq
+    simpa only [heps, hb] using (ha P Q hp hq).choose_spec.choose_spec
 
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.

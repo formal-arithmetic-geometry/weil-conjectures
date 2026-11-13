@@ -17,9 +17,16 @@ universe u v r w
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+private lemma map_homCongr_naturality_hcs
+    {K H D : Type*} [Category* K] [Category* H] [Category* D]
+    (q : K ⥤ H) (F : H ⥤ D) (Q : K ⥤ D) (c : q ⋙ F ≅ Q)
+    {A A' B B' : K} (t : A' ⟶ A) (s : B ⟶ B') (f : q.obj A ⟶ q.obj B) :
+    Iso.homCongr (c.app A') (c.app B') (F.map (q.map t ≫ f ≫ q.map s)) =
+      Q.map t ≫ Iso.homCongr (c.app A) (c.app B) (F.map f) ≫ Q.map s := by
+  simp only [Iso.homCongr_apply, Functor.map_comp, Category.assoc]
+  rw [c.hom.naturality s, ← c.inv.naturality_assoc t]
+
 set_option trace.profiler true in
-set_option maxHeartbeats 400000 in
--- Elaborating both shifted sheaf Hom comparisons and localization equivalences needs extra fuel.
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
 The maps `s` and `t` need not be quasi-isomorphisms.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94.
@@ -91,15 +98,8 @@ theorem homComplex_sections_derived_naturalityOfUniverses
   refine ⟨a.trans (e (res.obj L) ((res.obj I')⟦n⟧)),
     b.trans (e (res.obj L') ((res.obj I)⟦n⟧)), ?_⟩
   intro x
-  change e _ _ (b _) = Q.map (res.map t) ≫ e _ _ (a x) ≫
-    Q.map ((shiftFunctor _ n).map (res.map s))
-  rw [hab]
-  change c.inv.app _ ≫ F.map (q.map (res.map t) ≫ a x ≫
-      q.map ((shiftFunctor _ n).map (res.map s))) ≫ c.hom.app _ =
-    Q.map (res.map t) ≫ (c.inv.app _ ≫ F.map (a x) ≫ c.hom.app _) ≫
-      Q.map ((shiftFunctor _ n).map (res.map s))
-  simp only [Functor.map_comp, Category.assoc]
-  rw [DerivedCategory.quotientCompQhIso_hom_naturality]
-  rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
+  exact (congrArg (e (res.obj L') ((res.obj I)⟦n⟧)) (hab x)).trans
+    (map_homCongr_naturality_hcs q F Q c (res.map t)
+      ((shiftFunctor _ n).map (res.map s)) (a x))
 
 end CategoryTheory
