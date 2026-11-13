@@ -37,7 +37,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
-set_option maxHeartbeats 400000 in
 -- Keep tensor instances as local abbreviations during the representative computation.
 private theorem affinePerfectTensorRoof_aux
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
@@ -77,13 +76,8 @@ private theorem affinePerfectTensorRoof_aux
         ∃ (γ : B ⟶ E'.obj) (bU : R.obj B ≅ R.obj A),
           bU.hom = R.map β ∧ α = bU.inv ≫ R.map γ := by
   classical
-  let := SheafOfModules.monoidalCategory X.sheaf
-  let := (SheafOfModules.tensorClosed X.sheaf).1.some
-  let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
-    Equivalence.functor
-      (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
-      (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
-      (Modules.overEquiv U)).mapDerivedCategory
+  -- Reuse the tensor instances bound in the conclusion instead of elaborating them again.
+  intro monoidal monoidalPreadditive
   let H := (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
     X.toRingedSpace.sheaf).obj (Opposite.op A, E'.obj)
   have hH : schemeDerivedQCohProperty X H :=
@@ -92,17 +86,10 @@ private theorem affinePerfectTensorRoof_aux
   obtain ⟨J, hJ, hperfect, u, ξ, hu, hξ⟩ :=
     affine_koszul_section_roof X U hU ⟨H, hH⟩ (e.symm α)
   obtain ⟨γ, hβ, hγ⟩ := he J hJ u hu ξ (e.symm α) hξ
-  let B := DerivedCategory.Q.obj (CochainComplex.mapBifunctor P J (curriedTensor _))
-  let β : B ⟶ A := DerivedCategory.Q.map
-    (HomologicalComplex.mapBifunctorMap (𝟙 P) u (curriedTensor _) (ComplexShape.up ℤ)) ≫
-    DerivedCategory.Q.map (HomologicalComplex.rightUnitor P).hom ≫ eA.hom
-  have : IsIso (R.map β) := hβ
-  refine ⟨J, hJ, hperfect, u, γ, asIso (R.map β), rfl, ?_⟩
-  change α = (asIso (R.map β)).inv ≫ R.map γ
-  have hγ' : R.map β ≫ α = R.map γ := by
-    simpa only [Equiv.apply_symm_apply] using hγ
-  rw [← hγ']
-  simp
+  -- Infer the augmentation from its isomorphism proof, avoiding a second tensor computation.
+  refine ⟨J, hJ, hperfect, u, γ, @asIso _ _ _ _ _ hβ, rfl, ?_⟩
+  apply (Iso.eq_inv_comp _).2
+  simpa only [asIso_hom, Equiv.apply_symm_apply] using hγ
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
