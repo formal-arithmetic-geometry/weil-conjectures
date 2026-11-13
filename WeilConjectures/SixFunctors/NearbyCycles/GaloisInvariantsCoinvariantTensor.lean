@@ -40,6 +40,45 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+namespace CategoryTheory
+
+/-- Transport a split unit and its coinvariant property along a functor and two isomorphisms. -/
+private lemma tensor_coinvariant_retraction_of_conjugate
+    {C D A : Type*} [Category C] [Category D] [Category A] (F : C ⥤ D) (G : D ⥤ A)
+    {S T : C} {P Q : D} (η : S ⟶ T) (R : T ⟶ S) (i : P ≅ F.obj S) (e : F.obj T ≅ Q)
+    (α : P ⟶ Q) (hα : α = i.hom ≫ F.map η ≫ e.hom) (hR : η ≫ R = 𝟙 S)
+    {κ : Type*} (u : κ → (T ⟶ T)) (ρ : κ → (Q ⟶ Q))
+    (hρ : ∀ k, ρ k = e.inv ≫ F.map (u k) ≫ e.hom) :
+    let r := e.inv ≫ F.map R ≫ i.inv
+    α ≫ r = 𝟙 P ∧
+      ∀ {W : A} (φ : G.obj Q ⟶ W),
+        (∀ φ' : G.obj (F.obj T) ⟶ W,
+          (∀ k, G.map (F.map (u k)) ≫ φ' = φ') →
+            G.map (F.map (R ≫ η)) ≫ φ' = φ') →
+        (∀ k, G.map (ρ k) ≫ φ = φ) → G.map (r ≫ α) ≫ φ = φ := by
+  dsimp only
+  have he : (e.inv ≫ F.map R ≫ i.inv) ≫ α = e.inv ≫ F.map (R ≫ η) ≫ e.hom := by
+    rw [hα]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, F.map_comp]
+  refine ⟨?_, ?_⟩
+  · rw [hα]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp_assoc, hR, F.map_id, Category.id_comp, i.hom_inv_id]
+  · intro W φ hco hφ
+    have key := hco (G.map e.hom ≫ φ) fun k ↦ by
+      have h := hφ k
+      rw [hρ k, G.map_comp, G.map_comp] at h
+      simp only [Category.assoc] at h
+      calc
+        _ = G.map e.hom ≫
+            (G.map e.inv ≫ G.map (F.map (u k)) ≫ G.map e.hom ≫ φ) := by
+          rw [← G.map_comp_assoc e.hom e.inv, e.hom_inv_id, G.map_id, Category.id_comp]
+        _ = _ := by rw [h]
+    rw [he, G.map_comp, G.map_comp, Category.assoc, Category.assoc, key,
+      ← G.map_comp_assoc, e.inv_hom_id, G.map_id, Category.id_comp]
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.GaloisTower
 
 open Scheme CondensedRing
@@ -123,10 +162,10 @@ private lemma tensor_coinvariant_pullbackExchange_of_unit
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
   rw [Functor.map_comp] at hα
-  exact retraction_of_eq_comp_map_comp_of_coinvariant
-    (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)) (𝟭 _) G _
-    ((leftDerivedUpperStarId Λ X').app _) (N.galoisLayerExchangeIso h Ω Λ C).hom
-    (N.galoisLayerExchangeIso h Ω Λ C) rfl _ R hα hR
+  exact CategoryTheory.tensor_coinvariant_retraction_of_conjugate
+    (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)) G _ R
+    ((leftDerivedUpperStarId Λ X').app _)
+    (N.galoisLayerExchangeIso h Ω Λ C) _ hα hR
     (fun k ↦ derivedUnitTransport Λ
       (pullbackAction h _ specGaloisAction_comp (act k))
       (pullbackAction_fst h _ specGaloisAction_comp (act k))
@@ -320,11 +359,11 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
   refine (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
-    T₀ N h Ω hp C hC act hact).elim fun r hr ↦ ?_
-  refine ⟨r, hr.1, fun q V b hV W φ hφ ↦ ?_⟩
+    T₀ N h Ω hp C hC act hact).imp fun r hr ↦ ⟨hr.1, ?_⟩
+  intro q V b hV W φ hφ
   exact hr.2 (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q)
-    (fun K a _ hcab ↦ tensor_coinvariant_isColimit T₀ N (galoisTower Ω h) K a hcab f' V b hV q)
+    (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ (galoisTower Ω h) K a hcab f' V b hV q)
     φ hφ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
