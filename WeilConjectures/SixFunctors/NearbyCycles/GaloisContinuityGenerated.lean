@@ -66,9 +66,6 @@ private theorem generatedContinuity_hasGoodTensorTensor₂₃ (S : AlgebraicGeom
       GradedObject.HasGoodTensorTensor₂₃ P Q R₁ := by
   infer_instance
 
-attribute [local instance] generatedContinuity_hasTensor₄ObjExt
-  generatedContinuity_hasGoodTensor₁₂Tensor generatedContinuity_hasGoodTensorTensor₂₃
-
 /-- Cancel an epimorphism after applying functors, and transport through an intertwining iso. -/
 private lemma map_eq_of_epi_comp_of_intertwining
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
@@ -122,6 +119,12 @@ theorem exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated [QuasiComp
   let H := DerivedCategory.homologyFunctor
     (Mod (Sheaf (Scheme.ProEt.topology X') Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T₀) X')) q
+  have := generatedContinuity_hasTensor₄ObjExt N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := generatedContinuity_hasGoodTensor₁₂Tensor N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
+  have := generatedContinuity_hasGoodTensorTensor₂₃ N.total
+    (condensedRingObj (Profinite.continuousMapRingObj T₀) N.total)
   let Ψ := R((N.j)_*⟦Profinite.continuousMapRingObj T₀⟧) ⋙
     L((N.i)^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ H
   let Φ := DerivedCategory.Q ⋙ Ψ
