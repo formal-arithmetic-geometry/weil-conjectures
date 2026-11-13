@@ -41,7 +41,7 @@ private theorem localized_uncurry_factor_of_naturality
     rw [I.map_id, op_id]
     rfl
   rw [hid, H.map_id] at h
-  simp only [Category.comp_id, Functor.map_id] at h
+  simp only [Category.comp_id, Q.map_id] at h
   rw [h]
   simp only [tensorHom_comp_tensorHom_assoc, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
@@ -68,7 +68,8 @@ private theorem localized_uncurry_input (X : Scheme.{u})
             schemeHomResolutionInverse X M := by
   let := schemeDerivedTensorMonoidal X
   exact localized_uncurry_factor_of_naturality
-    (Functor.uncurry.obj (homComplexFunctor (R := X.sheaf)))
+    (C := CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (Functor.uncurry.obj (homComplexFunctor.{u, u, u, u} (R := X.sheaf)))
     (schemeHomKInjectiveResolution X) DerivedCategory.Q φ
     (fun ψ ↦ pullbackTensorModelMap X P L ≫
       DerivedCategory.Q.map (schemeTensorHomUncurry X P L M ψ) ≫
