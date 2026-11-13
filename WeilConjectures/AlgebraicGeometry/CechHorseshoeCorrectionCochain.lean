@@ -117,6 +117,38 @@ private theorem cechZeroπ {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
   erw [hh]
   rfl
 
+private theorem cochain_comm_apply {R : Type u} [Ring R]
+    {K L : CochainComplex (ModuleCat.{u} R) ℕ} (f : K ⟶ L) (i j : ℕ) (x : K.X i) :
+    L.d i j (f.f i x) = f.f j (K.d i j x) :=
+  ConcreteCategory.congr_hom (f.comm i j) x
+
+private theorem mapCochain_comp_apply {X : Scheme.{u}} {R : Type u} [Ring R]
+    (F : X.Modules ⥤ CochainComplex (ModuleCat.{u} R) ℕ)
+    {A B C : X.Modules} (f : A ⟶ B) (g : B ⟶ C) (n : ℕ) (x : (F.obj A).X n) :
+    (F.map g).f n ((F.map f).f n x) = (F.map (f ≫ g)).f n x := by
+  rw [F.map_comp, HomologicalComplex.comp_f]
+  rfl
+
+private theorem mapCochain_zero_apply {X : Scheme.{u}} {R : Type u} [Ring R]
+    (F : X.Modules ⥤ CochainComplex (ModuleCat.{u} R) ℕ) [F.Additive]
+    {A B : X.Modules} (n : ℕ) (x : (F.obj A).X n) :
+    (F.map (0 : A ⟶ B)).f n x = 0 := by
+  rw [F.map_zero]
+  rfl
+
+private theorem moduleCechZero_naturality_apply {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) {A B : X.Modules} (f : A ⟶ B) (x : A.val.obj (op ⊤)) :
+    (((cechComplexFunctor U).map
+      ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map
+        f.val)).f 0) (moduleCechZero U A x) =
+      moduleCechZero U B (f.val.app (op ⊤) x) :=
+  ConcreteCategory.congr_hom (moduleCechZero_naturality U f) x
+
+private theorem moduleCechZero_d_apply {X : Scheme.{u}} {ι : Type u}
+    (U : ι → X.Opens) (A : X.Modules) (x : A.val.obj (op ⊤)) :
+    ((cechComplexFunctor U).obj A.presheafModuleCat).d 0 1 (moduleCechZero U A x) = 0 :=
+  ConcreteCategory.congr_hom (moduleCechZero_d U A) x
+
 -- The sectionwise and two cochain calculations repeatedly compare categorical product modules.
 set_option backward.isDefEq.respectTransparency false in
 /-- A Cech zero cochain with prescribed resolution and Cech differentials.
@@ -304,57 +336,24 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
     change (F.map (α.f 1)).f 0 ((F.map (IA.cocomplex.d 0 1)).f 0 t) =
       (F.map (α.f 1)).f 0 (-(moduleCechZero U (IA.cocomplex.X 1))
         ((RingedSpace.globalSectionsComplex IA).iCycles 1 a))
-    have hcomm := congrArg (fun f ↦ (F.map f).f 0) (α.comm 0 1)
-    rw [F.map_comp, F.map_comp, HomologicalComplex.comp_f,
-      HomologicalComplex.comp_f] at hcomm
-    have hcomm' := ConcreteCategory.congr_hom hcomm t
-    change (F.map (IB.cocomplex.d 0 1)).f 0 ((F.map (α.f 0)).f 0 t) =
-      (F.map (α.f 1)).f 0 ((F.map (IA.cocomplex.d 0 1)).f 0 t) at hcomm'
-    rw [← hcomm', hαt]
+    rw [mapCochain_comp_apply, ← α.comm, ← mapCochain_comp_apply, hαt]
     dsimp only [v]
     rw [map_sub, map_neg]
-    have haug : (F.map jB).f 0 ≫
-        (F.map (IB.cocomplex.d 0 1)).f 0 = 0 := by
-      have h : jB ≫ IB.cocomplex.d 0 1 = 0 := by
-        dsimp only [jB]
-        simp
-      rw [← HomologicalComplex.comp_f, ← F.map_comp, h, F.map_zero]
-      rfl
-    have haug' := ConcreteCategory.congr_hom haug x₀
-    change (F.map (IB.cocomplex.d 0 1)).f 0 ((F.map jB).f 0 x₀) = 0 at haug'
-    rw [haug', zero_sub]
-    have hd := ConcreteCategory.congr_hom
-      (moduleCechZero_naturality U (IB.cocomplex.d 0 1)) b
-    change (F.map (IB.cocomplex.d 0 1)).f 0 (moduleCechZero U (IB.cocomplex.X 0) b) =
-      moduleCechZero U (IB.cocomplex.X 1) ((IB.cocomplex.d 0 1).val.app (op ⊤) b) at hd
-    have hα := ConcreteCategory.congr_hom (moduleCechZero_naturality U (α.f 1))
-      ((RingedSpace.globalSectionsComplex IA).iCycles 1 a)
-    change (F.map (α.f 1)).f 0 (moduleCechZero U (IA.cocomplex.X 1) _) =
-      moduleCechZero U (IB.cocomplex.X 1) ((α.f 1).val.app (op ⊤) _) at hα
-    rw [hd, ← ha, ← hα]
+    have haug : jB ≫ IB.cocomplex.d 0 1 = 0 := by
+      dsimp only [jB]
+      simp
+    rw [mapCochain_comp_apply, haug, mapCochain_zero_apply, zero_sub]
+    rw [moduleCechZero_naturality_apply, ← ha, moduleCechZero_naturality_apply]
   · have : Mono (α.f 0) := (hrows 0).mono_f
     apply cechMap_injective U (α.f 0) 1
-    have hcomm := ConcreteCategory.congr_hom ((F.map (α.f 0)).comm 0 1) t
-    dsimp only [moduleCechDouble, F, A₀, B₀] at hcomm
-    conv_lhs =>
-      change (F.map (α.f 0)).f 1 (A₀.d 0 1 t)
-    rw [← hcomm, hαt]
+    change (F.map (α.f 0)).f 1 (A₀.d 0 1 t) =
+      (F.map (α.f 0)).f 1 ((F.map jA).f 1
+        (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z))
+    rw [← cochain_comm_apply, hαt]
     dsimp only [v]
-    rw [map_sub]
-    have hzero := ConcreteCategory.congr_hom
-      (moduleCechZero_d U (IB.cocomplex.X 0)) b
-    change B₀.d 0 1 (moduleCechZero U (IB.cocomplex.X 0) b) = 0 at hzero
-    rw [hzero, sub_zero]
-    have haug := ConcreteCategory.congr_hom ((F.map jB).comm 0 1) x₀
-    change B₀.d 0 1 ((F.map jB).f 0 x₀) =
-      (F.map jB).f 1 (B.d 0 1 x₀) at haug
-    rw [haug, hdx]
+    rw [map_sub, moduleCechZero_d_apply, sub_zero, cochain_comm_apply, hdx]
     have hιA₀ : jA ≫ α.f 0 = S.f ≫ jB := by
       simpa [jA, jB] using congrArg (fun f ↦ f.f 0) hιA
-    have hι := congrArg (fun f ↦ (F.map f).f 1) hιA₀
-    rw [F.map_comp, F.map_comp, HomologicalComplex.comp_f,
-      HomologicalComplex.comp_f] at hι
-    exact (ConcreteCategory.congr_hom hι
-      (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z)).symm
+    rw [mapCochain_comp_apply, mapCochain_comp_apply, hιA₀]
 
 end AlgebraicGeometry.Scheme.Modules
