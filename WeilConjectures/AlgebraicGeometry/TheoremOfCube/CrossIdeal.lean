@@ -155,6 +155,7 @@ noncomputable abbrev sliceComparison (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
     ((Scheme.Modules.pullbackComp _ _).app L).symm
 
 set_option maxHeartbeats 1000000 in
+set_option trace.profiler true in
 -- transporting sections between equal opens `g⁻¹ f⁻¹ O` and `(g ≫ f)⁻¹ O` is slow
 /-- **Compatibility of the coefficients of rigidified slice trivialisations.** Let `ex`, `ey`
 be global sections of `L` on the two slices which agree on `{x} × {y} × Z`, and `ℓ` a free

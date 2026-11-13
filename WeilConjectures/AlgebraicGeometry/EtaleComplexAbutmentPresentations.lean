@@ -85,6 +85,7 @@ theorem reindex_first_page_comparison
 set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 700000 in
+set_option trace.profiler true in
 -- The dependent page and quotient witnesses require elaboration together.
 /-- Construct the functorial pages and abutment quotient projections, without continuity.
 Source: Stacks Project, Tags 015J and 015K; Tag 0EZM, proof of
