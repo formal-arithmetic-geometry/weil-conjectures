@@ -66,6 +66,21 @@ private theorem sectionToLocalizedHom_add
     sectionToLocalizedHom.{u, v, r} R U A B (φ + ψ) =
       sectionToLocalizedHom.{u, v, r} R U A B φ + sectionToLocalizedHom.{u, v, r} R U A B ψ := rfl
 
+private noncomputable def sectionToLocalizedHomEquiv
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{max u v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    (R : Sheaf J CommRingCat.{max u v r}) (U : C)
+    (A B : SheafOfModules.{max u v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R)) :
+    (SheafOfModules.homObj (R := R) A B).val.obj (op U) ≃
+      ((SheafOfModules.overFunctor _ U).obj A ⟶
+        (SheafOfModules.overFunctor _ U).obj B) where
+  toFun := sectionToLocalizedHom.{u, v, r} R U A B
+  invFun φ := φ.val
+  left_inv _ := rfl
+  right_inv _ := rfl
+
 set_option backward.isDefEq.respectTransparency true in
 /-- Product projections identify degreewise sections with all localized cochains.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
@@ -137,10 +152,8 @@ theorem homComplex_sections_cochainsOfUniverses
               (((π L I n p q hpq).val.app (op U)).hom x) +
             sectionToLocalizedHom.{u, v, r} R U (L.X p) (I.X q)
               (((π L I n p q hpq).val.app (op U)).hom y)
-        rw [map_add, sectionToLocalizedHom_add.{u, v, r}] }
-  have hfv (n : ℤ) (x : S.X n) (p q : ℤ) (hpq : p + n = q) :
-      (((f n) x).v p q hpq).val = ((π L I n p q hpq).val.app (op U)) x := by
-    rfl
+        rw [((π L I n p q hpq).val.app (op U)).hom.map_add,
+          sectionToLocalizedHom_add.{u, v, r}] }
   have hf (n : ℤ) : Function.Bijective (f n) := by
     let H := fun p : ℤ ↦ SheafOfModules.homObj (L.X p) (I.X (p + n))
     have hlim := (Classical.choose_spec
@@ -153,20 +166,19 @@ theorem homComplex_sections_cochainsOfUniverses
     · intro x y hxy
       apply hb.1
       funext p
-      have hh := congrArg (fun c ↦ (c.v p (p + n) rfl).val) hxy
-      change ((π L I n p (p + n) rfl).val.app (op U)) x =
-        ((π L I n p (p + n) rfl).val.app (op U)) y
-      rw [hfv, hfv] at hh
-      exact hh
+      apply (sectionToLocalizedHomEquiv.{u, v, r} R U (L.X p) (I.X (p + n))).injective
+      exact CochainComplex.HomComplex.Cochain.congr_v hxy p (p + n) rfl
     · intro c
-      obtain ⟨x, hx⟩ := hb.2 (fun p ↦ (c.v p (p + n) rfl).val)
+      obtain ⟨x, hx⟩ := hb.2 (fun p ↦
+        (sectionToLocalizedHomEquiv.{u, v, r} R U (L.X p) (I.X (p + n))).symm
+          (c.v p (p + n) rfl))
       refine ⟨x, ?_⟩
       apply CochainComplex.HomComplex.Cochain.ext
       intro p q hpq
       subst q
-      apply SheafOfModules.hom_ext
-      change (((f n) x).v p (p + n) rfl).val = _
-      exact (hfv n (show S.X n from x) p (p + n) rfl).trans (congrFun hx p)
+      exact (congrArg (sectionToLocalizedHomEquiv.{u, v, r} R U (L.X p) (I.X (p + n)))
+        (congrFun hx p)).trans
+          ((sectionToLocalizedHomEquiv.{u, v, r} R U (L.X p) (I.X (p + n))).apply_symm_apply _)
   refine ⟨fun n ↦ AddEquiv.ofBijective (f n) (hf n), ?_⟩
   intro n x p q hpq W
   rfl
