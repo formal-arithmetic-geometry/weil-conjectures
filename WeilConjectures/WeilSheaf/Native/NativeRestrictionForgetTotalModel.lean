@@ -673,6 +673,16 @@ private theorem balanced_restriction_summand
   rw [reassoc_of% hu, ht, reassoc_of% hr]
   simp only [← G.map_comp, ← G.map_comp_assoc, hz]
 
+/-- Identity input comparisons do not change a binary functor square. -/
+private theorem binary_map_identity_square
+    {C D : Type*} [Category* C] [Category* D] (S : C × C ⥤ D)
+    {P T : C} {A B E : D} {a : P ⟶ P} {b : T ⟶ T} {c : A ⟶ A}
+    {f : A ⟶ B} {g : B ⟶ S.obj (P, T)} {r : A ⟶ E} {s : E ⟶ S.obj (P, T)}
+    (ha : a = 𝟙 P) (hb : b = 𝟙 T) (hc : c = 𝟙 A) (h : f ≫ g = r ≫ s) :
+    f ≫ g ≫ S.map (Prod.mkHom a b) = c ≫ r ≫ s := by
+  rw [ha, hb, hc, ← prod_id, S.map_id, Category.comp_id, Category.id_comp]
+  exact h
+
 section AbstractTransport
 variable (α : (ProEtale.adicUpperStar l
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))) ⋙
@@ -892,6 +902,7 @@ private theorem native_restriction_goal_proof
   let utotal := (((nativeTensorTotal k₀ l U).obj RP).obj RT)
   have hchain := native_restriction_chain k₀ l j α hL sr hsr P T
     (totalRestriction P T) cZ cU (restriction_summands P T) hcZ hcU
+  have ha := native_restriction_complex_square_hom k₀ l j α
   have hdiagram :=
     final_total_diagram (Lα) FU F R e
       (nativeDerivedTensor k₀ l Z) (nativeDerivedTensor k₀ l U)
@@ -901,12 +912,8 @@ private theorem native_restriction_goal_proof
       (nativeOpenTensorModel k₀ l Z P T hP hT)
       (nativeOpenTensorModel k₀ l U RP RT (hR P hP) (hR T hT))
       (totalRestriction P T) (restriction_model' P T hP hT)
-      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀) (by
-        rw [native_restriction_complex_square_hom k₀ l j α P,
-          native_restriction_complex_square_hom k₀ l j α T,
-          native_restriction_complex_square_hom k₀ l j α ztotal]
-        simpa only [Functor.map_id, Category.id_comp, Category.comp_id]
-          using hchain) mZ rfl
+      cZ cU hmU (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀)
+      (binary_map_identity_square _ (ha P) (ha T) (ha ztotal) hchain) mZ rfl
   exact ⟨mZ, hdiagram.choose, hmZ', hdiagram.choose_spec.1, hdiagram.choose_spec.2⟩
 
 -- Preserve the named restriction functor when specializing the Frobenius comparison.
