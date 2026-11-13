@@ -58,7 +58,6 @@ private theorem scalar_map_of_iso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option trace.profiler true in
 -- The scalar action is transported through the derived localization.
 private theorem restriction_scalar (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -111,7 +110,6 @@ private theorem restriction_scalar (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option trace.profiler true in
 -- Sectionwise scalar actions require unfolding transported module structures.
 /-- Scalar identities commute with every affine realization comparison isomorphism.
 This requires neither perfectness nor a cohomology support condition.
@@ -176,7 +174,7 @@ theorem affine_open_realization_scalar
   obtain ⟨c⟩ := hF
   have hFscalar : F.map ((show A from a.val (op U)) • 𝟙 (DerivedCategory.Q.obj K)) =
       b • 𝟙 (F.obj (DerivedCategory.Q.obj K)) := by
-    refine scalar_map_of_factorization DerivedCategory.Q DerivedCategory.Q
+    refine scalar_map_of_factorization (DerivedCategory.Q (C := ModuleCat.{u} A)) DerivedCategory.Q
       (S.mapHomologicalComplex (.up ℤ)) F c (show A from a.val (op U)) b K ?_
     exact hS
   rw [hFscalar, hR]
