@@ -270,7 +270,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)] (k' : Type u) [Field k'] [Algebra k k']
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-set_option trace.profiler true in
 -- Destructuring the finite-coefficient statement unfolds the coefficient rings.
 open NearbyCyclesModel in
 /-- **Generic vanishing along a divisor for `ℚ̄_ℓ`-coefficients, from finite coefficients**: let
@@ -316,8 +315,10 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
   have : IsNoetherian (overRestrict X I.support.compl).left := {}
   have : QuasiSeparatedSpace X.left := quasiSeparatedSpace_of_quasiSeparated X.hom
   -- an integral model `N ≅ ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} N₀`
-  obtain ⟨E, N₀, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel
-    (overRestrict X I.support.compl).left ℓ N
+  refine (exists_padicAlgCl_iso_integralModel
+    (overRestrict X I.support.compl).left ℓ N).elim fun E hE ↦ ?_
+  refine hE.elim fun N₀ he ↦ ?_
+  refine he.elim fun e ↦ ?_
   have hN₀ : boundedConstructible _ N₀.obj := by exact_mod_proofs N₀.property
   -- the finite-coefficient case, for the reduction of `N₀`
   have core := exists_isZero_upperStar_nearbyCycles_lowerShriek_residueField k' hX hh hI ζ hζ E
@@ -333,11 +334,11 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
   -- the integral case, by derived Nakayama
   have hK := boundedConstructible_openImmersionLowerShriek_obj _ ℓ
     (overRestrictι X I.support.compl) ⟨N₀.obj, hN₀⟩
-  obtain ⟨n, hn⟩ := hK.1.1
-  have hn' : ((L(((deformationModel X I k').ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
-      (D(((overRestrictι X I.support.compl).left)_!open⟦
-        Profinite.padicIntegersRingObj ℓ E.1⟧).obj N₀.obj)).IsGE n :=
-    isGE_leftDerivedUpperStar_obj _ _ _ n
+  refine hK.1.1.elim fun n hn ↦ ?_
+  have hn' := isGE_leftDerivedUpperStar_obj (Profinite.padicIntegersRingObj ℓ E.1)
+    (deformationModel X I k').ε
+    (D(((overRestrictι X I.support.compl).left)_!open⟦
+      Profinite.padicIntegersRingObj ℓ E.1⟧).obj N₀.obj) n
   have h₀ := isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_residueField
     E (deformationModel X I k') (overRestrictι X I.support.compl).left
     (zeroSectionSpecialFibreMap X I k').left
