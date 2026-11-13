@@ -573,7 +573,8 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
         (α_ (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)
           (DerivedCategory.Q.obj N)).hom =
       DerivedCategory.Q.map aB.hom ≫ (bR.hom ≫ (DerivedCategory.Q.obj P ◁ bQN.hom))
-    simpa only [cB.tensorIso_both PQ N hPQ hN, cB.tensorIso_both P QN hP hQN,
+    simpa only [show cB.tensorIso PQ N (Or.inr hN) = TB.iso J R SB PQ N hPQ hN from
+        cB.tensorIso_both PQ N hPQ hN, cB.tensorIso_both P QN hP hQN,
       bL, bR, bPQ, bQN, CoefficientClosedStructure.tensor, tensor_map,
       tensorHom_id, id_tensorHom, Category.assoc] using heB
   have hA : lA.hom ≫ (α_ (DerivedCategory.Q.obj (V.obj P))
@@ -583,7 +584,8 @@ private theorem scalarAssoc_representatives (A B C : ScalarExtensionTower.Comple
         (α_ (DerivedCategory.Q.obj (V.obj P)) (DerivedCategory.Q.obj (V.obj Q))
           (DerivedCategory.Q.obj (V.obj N))).hom =
       DerivedCategory.Q.map aA.hom ≫ (aR.hom ≫ (DerivedCategory.Q.obj (V.obj P) ◁ aQN.hom))
-    simpa only [cA.tensorIso_both (A.obj (V.obj P, V.obj Q)) (V.obj N) hAPQ hUN,
+    simpa only [show cA.tensorIso (A.obj (V.obj P, V.obj Q)) (V.obj N) (Or.inr hUN) =
+        TA.iso J' R' SA _ _ hAPQ hUN from cA.tensorIso_both _ _ hAPQ hUN,
       cA.tensorIso_both (V.obj P) (A.obj (V.obj Q, V.obj N)) hUP hAQN,
       aL, aR, aPQ, aQN, CoefficientClosedStructure.tensor, tensor_map,
       tensorHom_id, id_tensorHom, Category.assoc] using heA
