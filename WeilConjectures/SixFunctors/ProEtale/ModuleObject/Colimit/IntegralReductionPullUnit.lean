@@ -272,7 +272,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
       (ComplexShape.up ℤ)).unit.app K)
   dsimp only [K, Functor.comp_obj, Functor.comp_map, Functor.id_obj] at r5 e1
-  simp only [← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
+  simp only [← Functor.map_comp_assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   simp only [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
