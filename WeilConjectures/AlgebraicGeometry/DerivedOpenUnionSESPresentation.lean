@@ -9,7 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
 import WeilConjectures.AlgebraicGeometry.LocalizedOpenImageComplexComparisons
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Short exact presentation on an arbitrary open union
@@ -131,9 +131,8 @@ theorem derived_open_union_ses_presentation
   let M := SheafOfModules.{u} (moduleRings X.toRingedSpace)
   let : Abelian M := inferInstance
   have : IsGrothendieckAbelian.{u} M :=
-    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
-      (Opens.grothendieckTopology X) X.toRingedSpace.sheaf).1
-  obtain ⟨I, hKI, hI, ⟨e⟩⟩ := exists_injective_representative E
+    SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
+  obtain ⟨I, hKI, hI, ⟨e⟩⟩ := exists_injective_representative.{u, w} (M := M) E
   let Q : CochainComplex M ℤ ⥤ schemeDerivedCategory X := DerivedCategory.Q
   have : I.IsKInjective := hKI
   change DerivedCategory.Q.obj I ≅ E at e

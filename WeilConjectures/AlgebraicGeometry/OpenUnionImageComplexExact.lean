@@ -100,7 +100,6 @@ private theorem shortExact_of_degreewise_pullback
       exact biprod.mapBiprod_hom_desc F B D c (-d))
   exact ShortComplex.shortExact_of_iso e.symm he
 
-set_option profiler true in
 /-- The pair of restrictions from the union and the difference to the overlap
 form a short exact sequence for a complex with injective terms.
 
