@@ -140,10 +140,22 @@ private theorem evaluated_counit_adjunct (W : Scheme.{u})
   rw [← hn, Category.assoc, Adjunction.homEquiv_naturality_left,
     T.counit_projection]
 
+private theorem counit_projection_map_component
+    {A B : Type*} [Category A] [Category B] (R : A ⥤ B)
+    {X Y Z W V U : A} {D E : B}
+    (a : X ⟶ Y) (p : R.obj Y ⟶ D) (q : D ⟶ E) (r : E ⟶ R.obj Z)
+    (c : Z ⟶ W) (d : W ⟶ V) (e : V ⟶ U) (t : Y ⟶ V) (b : X ⟶ U)
+    (ht : p ≫ q ≫ r ≫ R.map (c ≫ d) = R.map t) (hf : a ≫ t ≫ e = b) :
+    R.map a ≫ p ≫ q ≫ r ≫ R.map (c ≫ d ≫ e) = R.map b := by
+  calc
+    _ = R.map a ≫ (p ≫ q ≫ r ≫ R.map (c ≫ d)) ≫ R.map e := by
+      simp only [Functor.map_comp, Category.assoc]
+    _ = R.map (a ≫ t ≫ e) := by
+      rw [ht]
+      simp only [Functor.map_comp, Category.assoc]
+    _ = _ := congrArg R.map hf
+
 set_option profiler true in
-set_option maxHeartbeats 800000 in
--- reason for change: the derived-category transport and Roos projection assembly
--- requires more heartbeats while remaining below the delivery time limit.
 /-- Evaluating normalized realization followed by the coherent counit gives
 exactly the scalar adjunct of the defining pullback-tower projection. This is
 a map equality; it asserts neither invertibility nor a system isomorphism.
@@ -255,37 +267,10 @@ theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hcomponent : R.map (V.map a) ≫
       (integralComparisonRestrictedEvaluationFactors l E X D n).hom ≫
       DerivedCategory.Q.map (q.hom.app (op n)) ≫ r ≫ R.map c = R.map b := by
-    have ht := integralPullbackStrictFiniteComponent l E f P.obj C κ q hq n
-    change (integralComparisonRestrictedEvaluationFactors l E X D n).hom ≫
-        DerivedCategory.Q.map (q.hom.app (op n)) ≫ r ≫ R.map
-          (DerivedCategory.Q.map
-            ((NatIso.mapHomologicalComplex (integralFinitePullbackModel l E f n)
-              (.up ℤ)).hom.app ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)) ≫
-            (proEtaleConstantRingPullback
-              (Padic.coefficientExtensionRing l E (n + 1)) f).mapDerivedCategoryFactors.inv.app
-              ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)) =
-      R.map (V.map
-        ((integralComparisonSequencePullback l E f).mapDerivedCategoryFactors.inv.app C) ≫
-        β.hom.app (DerivedCategory.Q.obj C) ≫
-        B.map ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app C ≫
-          DerivedCategory.Q.map (κ n).hom)) at ht
-    calc
-      _ = R.map (V.map a) ≫
-          ((integralComparisonRestrictedEvaluationFactors l E X D n).hom ≫
-            DerivedCategory.Q.map (q.hom.app (op n)) ≫ r ≫ R.map
-              (DerivedCategory.Q.map
-                ((NatIso.mapHomologicalComplex (integralFinitePullbackModel l E f n)
-                  (.up ℤ)).hom.app
-                  ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj)) ≫
-                (proEtaleConstantRingPullback
-                  (Padic.coefficientExtensionRing l E (n + 1)) f).mapDerivedCategoryFactors.inv.app
-                  ((unrestrictedIntegralFiniteComplex l E Y n).obj P.obj))) ≫
-          R.map (B.map (coefficientFiniteReductionModel l E Y P.obj hP n).inv) := by
-        simp only [c, Functor.map_comp, Category.assoc]
-      _ = _ := by
-        erw [ht]
-        rw [← R.map_comp, ← R.map_comp]
-        simpa only [Category.assoc] using congrArg R.map hf
+    apply counit_projection_map_component R (V.map a) _ _ r _ _
+      (B.map (coefficientFiniteReductionModel l E Y P.obj hP n).inv) _ b
+    · exact integralPullbackStrictFiniteComponent l E f P.obj C κ q hq n
+    · simpa only [Category.assoc] using hf
   have hm' : M.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫
       (coefficientSequenceLimit l E X).map a ≫
       (integralComparisonRoosBridge l E X ρ D).hom ≫
