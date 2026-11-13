@@ -182,6 +182,14 @@ theorem open_pinned_single_degree_square
   let R := (schemeOpenRestriction S' W).mapDerivedCategory
   let J := shiftFunctor (schemeDerivedCategory.{u, w} W.toScheme) (-n)
   exact transport_functor_square r J
+    (F := singleDegreeBaseChangeSource.{u, w} f g n ⋙ R)
+    (G := singleDegreeBaseChangeTarget.{u, w} g' f' n ⋙ R)
+    (F₀ := singleDegreeBaseChangeSource.{u, w} f g 0 ⋙ R)
+    (G₀ := singleDegreeBaseChangeTarget.{u, w} g' f' 0 ⋙ R)
+    (F' := singleDegreeBaseChangeSource.{u, w} fA gA n)
+    (G' := singleDegreeBaseChangeTarget.{u, w} p q n)
+    (F₀' := singleDegreeBaseChangeSource.{u, w} fA gA 0)
+    (G₀' := singleDegreeBaseChangeTarget.{u, w} p q 0)
     (fun G ↦ R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w n G))
     (fun G ↦ R.map (singleDegreeBaseChangeComposite.{u, w} f g g' f' sq.w 0 G))
     (fun G ↦ singleDegreeBaseChangeComposite.{u, w} fA gA p q pullback.condition n G)

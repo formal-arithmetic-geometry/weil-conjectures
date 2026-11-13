@@ -203,7 +203,8 @@ theorem open_pinned_single_degree_zero_target
           Q.map (singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K)
             (𝟙 _) U Z j hj) ≫ d.inv.app _ at hb
     apply (Iso.eq_comp_inv (d.app _)).mp
-    simpa only [Category.assoc, δ] using hb
+    with_unfolding_all
+      simpa only [Category.assoc, δ] using hb
   have hc' : δ ≫ RZ.map (openPinnedSingleDegreeZeroCounit g' G) ≫ t.hom.app G =
       L.map s ≫ openPinnedSingleDegreeZeroCounit j H := hc
   have hb₀ : b₀.hom.app G = d.hom.app _ ≫ Q.map (t.hom.app G) := by
@@ -248,7 +249,8 @@ theorem open_pinned_single_degree_zero_target
           ((DerivedCategory.singleFunctor _ 0).obj H) ≫
             Q.map (openPinnedSingleDegreeZeroCounit j H))
     rw [Functor.map_comp, hb₀]
-    simpa only [Category.assoc] using h
+    with_unfolding_all
+      simpa only [Category.assoc] using h
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app,
     Category.assoc, U, H] using
