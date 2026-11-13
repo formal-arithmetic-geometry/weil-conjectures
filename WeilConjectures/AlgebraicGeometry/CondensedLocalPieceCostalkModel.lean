@@ -259,7 +259,8 @@ private theorem localPieceCostalkModelComplexColimits
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) := by
   infer_instance
 
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 100000 in
+-- Internal module colimits require a larger typeclass search budget.
 set_option synthInstance.maxSize 4096 in
 /-- Transport the Hom cocone through j_! and i_* to a strict bounded-below diagram on U.
 This does not assert that either Hom cocone is a colimit, and makes no finite-presentation
@@ -350,6 +351,7 @@ theorem condensed_local_piece_costalk_model
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=
     (CondensedRing.upperStarLowerStarAdjunction Λ j).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
+  -- Use the colimits of the target category without searching through the composite functor.
   have : HasColimit (J ⋙ H.mapHomologicalComplex (.up ℤ)) :=
     HasColimitsOfShape.has_colimit _
   have hH : QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
