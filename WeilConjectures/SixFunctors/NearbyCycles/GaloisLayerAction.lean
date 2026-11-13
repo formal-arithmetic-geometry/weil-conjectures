@@ -181,7 +181,6 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 400000 in
 -- the conjugates of the composition isomorphisms of derived pullbacks are large terms
 /-- **Associativity of the composition isomorphisms of derived pushforwards**: the two ways of
 identifying `R(a ≫ b ≫ c)_*` with `Ra_* ⋙ Rb_* ⋙ Rc_*` agree. It is the conjugate of the
@@ -193,8 +192,10 @@ lemma rightDerivedLowerStarComp_inv_app_assoc {A₀ A₁ A₂ A₃ : Scheme.{u}}
         (rightDerivedLowerStarComp Λ b c).inv.app (R((a)_*⟦Λ⟧).obj Z) =
       eqToHom (by rw [Category.assoc]) ≫ (rightDerivedLowerStarComp Λ (a ≫ b) c).inv.app Z ≫
         R((c)_*⟦Λ⟧).map ((rightDerivedLowerStarComp Λ a b).inv.app Z) := by
-  refine conjugateIsoEquiv_assoc_aux (fun m : A₀ ⟶ A₃ ↦ L((m)^*⟦Λ⟧))
-    (fun m : A₀ ⟶ A₃ ↦ R((m)_*⟦Λ⟧)) (fun m ↦ derivedUpperStarLowerStarAdjunction Λ m)
+  let L' : (A₀ ⟶ A₃) → _ := fun m ↦ L((m)^*⟦Λ⟧)
+  let R' : (A₀ ⟶ A₃) → _ := fun m ↦ R((m)_*⟦Λ⟧)
+  let adj' : ∀ m, L' m ⊣ R' m := fun m ↦ derivedUpperStarLowerStarAdjunction Λ m
+  refine conjugateIsoEquiv_assoc_aux L' R' adj'
     (Category.assoc a b c).symm (derivedUpperStarLowerStarAdjunction Λ c)
     (derivedUpperStarLowerStarAdjunction Λ b) (derivedUpperStarLowerStarAdjunction Λ a)
     (derivedUpperStarLowerStarAdjunction Λ (b ≫ c))
@@ -202,7 +203,7 @@ lemma rightDerivedLowerStarComp_inv_app_assoc {A₀ A₁ A₂ A₃ : Scheme.{u}}
     (leftDerivedUpperStarComp Λ a b) (leftDerivedUpperStarComp Λ a (b ≫ c))
     (leftDerivedUpperStarComp Λ (a ≫ b) c) (fun K ↦ ?_) Z
   have h := leftDerivedUpperStarComp_assoc_app Λ a b c K
-  rw [← cancel_epi (eqToHom (congrArg (fun m ↦ L((m)^*⟦Λ⟧).obj K) (Category.assoc a b c))),
+  rw [← cancel_epi (eqToHom (congrArg (fun m ↦ (L' m).obj K) (Category.assoc a b c))),
     ← h, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
 
 /-- The **unit transport** along `s : G ⟶ G'` of `R(p)_* L(q)^*`, for `s ≫ p = p₁` and
@@ -245,7 +246,6 @@ lemma derivedUnitTransport_eq_conjugate {G G' T S : Scheme.{u}} (s : G ⟶ G') {
   subst hp hq
   exact Category.comp_id _
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The unit transport of a composite**: the unit transport along `s` of `R(g' ≫ j)_*
 L(g' ≫ ε)^*` is `Rj_*` of the unit transport along `s` of `Rg'_* Lg'^*` at `Lε^* A`, up to the
@@ -358,7 +358,6 @@ lemma Hom.pullbackExchange_app_eq_derivedUnitTransport (M : NearbyCyclesModel X 
   · exact fun A ↦ pullbackSquareComparison_hom_app_of_eq_id_right Λ φ.generic M.ε hq φ.commSq_ε A
   · rfl
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The action of an endomorphism of a model with identity total component** on the nearby
 cycles is `Li^*` of the unit transport along its generic component. -/
@@ -374,7 +373,6 @@ lemma Hom.autAction_eq_derivedUnitTransport (M : NearbyCyclesModel X X')
 variable (N : NearbyCyclesModel X X') {L : Type u} [Field L] (h : N.generic ⟶ Spec (.of L))
   (L' : Type u) [Field L'] [Algebra L L']
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The Galois action on the nearby cycles of a finite Galois layer** is, through the
 canonical isomorphism `κ` (`NearbyCyclesModel.galoisLayerExchangeIso`), `Li^* Rj_*` of the unit
@@ -388,39 +386,39 @@ lemma galoisLayerAut_autAction (σ : L' ≃ₐ[L] L')
           (pullbackAction_fst h _ specGaloisAction_comp σ)
           (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))) ≫
         (N.galoisLayerExchangeIso h L' Λ C).hom := by
-  have hp : pullbackAction h _ specGaloisAction_comp σ ≫ (N.galoisLayer h L').j =
+  let p' := Spec.map (CommRingCat.ofHom (algebraMap L L'))
+  let p := pullback.fst h p'
+  let s := pullbackAction h p' specGaloisAction_comp σ
+  have hs := pullbackAction_fst h p' specGaloisAction_comp σ
+  let F := L((N.i)^*⟦Λ⟧)
+  let Rj := R((p ≫ N.j)_*⟦Λ⟧)
+  let Lε := L((p ≫ N.ε)^*⟦Λ⟧)
+  have hp : s ≫ (N.galoisLayer h L').j =
       (N.galoisLayer h L').j := (N.galoisLayerAut h L' σ).comm_j.trans (Category.comp_id _)
-  have hq : pullbackAction h _ specGaloisAction_comp σ ≫ (N.galoisLayer h L').ε =
+  have hq : s ≫ (N.galoisLayer h L').ε =
       (N.galoisLayer h L').ε := (N.galoisLayerAut h L' σ).comm_ε.trans (Category.comp_id _)
   have h1 := Hom.autAction_eq_derivedUnitTransport Λ (N.galoisLayer h L') _ hp hq
     (N.galoisLayerAut h L' σ) rfl rfl C
-  have h2 : derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ) hp hq C =
-      R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧).map
-          ((leftDerivedUpperStarComp Λ _ N.ε).hom.app C) ≫
+  have h2 : derivedUnitTransport Λ s hp hq C =
+      Rj.map ((leftDerivedUpperStarComp Λ _ N.ε).hom.app C) ≫
         (rightDerivedLowerStarComp Λ _ N.j).inv.app _ ≫
-        R((N.j)_*⟦Λ⟧).map (derivedUnitTransport Λ
-          (pullbackAction h _ specGaloisAction_comp σ)
-          (pullbackAction_fst h _ specGaloisAction_comp σ)
-          (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C)) ≫
+        R((N.j)_*⟦Λ⟧).map (derivedUnitTransport Λ s hs hs (L((N.ε)^*⟦Λ⟧).obj C)) ≫
         (rightDerivedLowerStarComp Λ _ N.j).hom.app _ ≫
-        R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧).map
-          ((leftDerivedUpperStarComp Λ _ N.ε).inv.app C) :=
-    derivedUnitTransport_comp Λ _ _ _ (pullbackAction_fst h _ specGaloisAction_comp σ) N.j N.ε C
+        Rj.map ((leftDerivedUpperStarComp Λ _ N.ε).inv.app C) :=
+    derivedUnitTransport_comp Λ s p p hs N.j N.ε C
   have hn := Hom.autAction_naturality Λ (N.galoisLayerAut h L' σ) (A' := C)
     ((leftDerivedUpperStarId Λ X).hom.app C)
   rw [h1, h2] at hn
-  exact eq_inv_comp_map_comp_hom_of_comp_map_eq L((N.i)^*⟦Λ⟧)
-    R((pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L L'))) ≫ N.j)_*⟦Λ⟧)
-    (L((_ ≫ N.ε)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).hom.app C))
-    (L((_ ≫ N.ε)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ X).inv.app C))
+  exact eq_inv_comp_map_comp_hom_of_comp_map_eq F Rj
+    (Lε.map ((leftDerivedUpperStarId Λ X).hom.app C))
+    (Lε.map ((leftDerivedUpperStarId Λ X).inv.app C))
     (by rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id])
-    ((leftDerivedUpperStarComp Λ _ N.ε).hom.app C) ((leftDerivedUpperStarComp Λ _ N.ε).inv.app C)
+    ((leftDerivedUpperStarComp Λ p N.ε).hom.app C) ((leftDerivedUpperStarComp Λ p N.ε).inv.app C)
     ((rightDerivedLowerStarComp Λ _ N.j).inv.app _) ((rightDerivedLowerStarComp Λ _ N.j).hom.app _)
     _ _ hn _ rfl rfl
 
 variable [FiniteDimensional L L'] [IsGalois L L']
 
-set_option maxHeartbeats 400000 in
 -- the derived functors and their composition isomorphisms are large terms
 /-- **The pullback exchange of a finite Galois layer is split by the averaged action on nearby
 cycles**: if multiplication by `|Γ|` is invertible on `Lε^* C` and the unit transports along
@@ -439,16 +437,12 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom'
     ∃ r, ((N.galoisLayerHom h L').pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
       Fintype.card (L' ≃ₐ[L] L') • (r ≫ ((N.galoisLayerHom h L').pullbackExchange Λ).app C) =
         ∑ σ, (N.galoisLayerAut h L' σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  have key (σ : L' ≃ₐ[L] L') :
-      (N.galoisLayerExchangeIso h L' Λ C).inv ≫ L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map
-        ((derivedGaloisAction Λ (pullback.fst _ _)
-          (pullbackAction_fst h _ specGaloisAction_comp) (e σ)).app (L((N.ε)^*⟦Λ⟧).obj C))) ≫
-        (N.galoisLayerExchangeIso h L' Λ C).hom =
-      (N.galoisLayerAut h L' σ).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) :=
+  have key (σ : L' ≃ₐ[L] L') :=
     (congrArg (fun z ↦ (N.galoisLayerExchangeIso h L' Λ C).inv ≫
       L((N.i)^*⟦Λ⟧).map (R((N.j)_*⟦Λ⟧).map z) ≫ (N.galoisLayerExchangeIso h L' Λ C).hom)
         (hact σ)).symm.trans (galoisLayerAut_autAction Λ N h L' σ C).symm
-  obtain ⟨r, hr₁, hr₂⟩ := exists_retraction_pullbackExchange_galoisLayerHom N h L' Λ C
+  have base := exists_retraction_pullbackExchange_galoisLayerHom N h L' Λ C
+  obtain ⟨r, hr₁, hr₂⟩ := base
   exact ⟨r, hr₁, hr₂.trans ((Equiv.sum_comp e _).symm.trans
     (Finset.sum_congr rfl fun σ _ ↦ key σ))⟩
 
