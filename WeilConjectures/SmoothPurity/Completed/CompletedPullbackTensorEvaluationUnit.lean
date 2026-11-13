@@ -71,7 +71,6 @@ private theorem coefficient_homEquiv_section_heq {X Y : Scheme.{u}} (f : X ⟶ Y
             ).val.app (op U) x)) := by
   rfl
 
-set_option trace.profiler true in
 -- The section transports involve two presentations of the module underlying groups.
 private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceModules l E Y) (U : Y.ProEt)
@@ -93,7 +92,7 @@ private theorem evaluation_mate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   dsimp only [Functor.comp_obj] at h
   have hh := congrArg (fun a ↦ a.val.app (op U)
     (coefficientEvaluationSection l E Y M n (op U) x)) h
-  simp only [Functor.comp_obj, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
     ModuleCat.comp_apply] at hh
   have hd := (pullbackTensorSequenceDirectEvaluation_existsUnique l E f n).exists.choose_spec
     ((pullbackTensorSequenceInverse l E f).obj M) U
