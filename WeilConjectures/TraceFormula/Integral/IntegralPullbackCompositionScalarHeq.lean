@@ -247,9 +247,7 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  apply eq_of_heq
-  convert (config := { typeEqs := true, closePre := false, closePost := false }) hh using 2
+  exact eq_of_heq (hh.trans HEq.rfl)
 
 end Composition
 
