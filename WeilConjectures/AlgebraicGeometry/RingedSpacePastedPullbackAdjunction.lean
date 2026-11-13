@@ -257,7 +257,7 @@ theorem exists_pasted_tensorPullback_adjunction
     simpa only [α, G, L, R, β, NatTrans.comp_app,
       Functor.associator_inv_app, Functor.associator_hom_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
-      Category.comp_id, Functor.comp_obj] using
+      Category.comp_id, Functor.comp_obj, Category.assoc] using
       pasted_adjunction_unit_fac DerivedCategory.Qh DerivedCategory.Qh DerivedCategory.Qh
         (ag.mapHomotopyCategory (.up ℤ)) (af.mapHomotopyCategory (.up ℤ)) dg df
         αg αf (moduleDirectImage g).rightDerivedFunctorUnit

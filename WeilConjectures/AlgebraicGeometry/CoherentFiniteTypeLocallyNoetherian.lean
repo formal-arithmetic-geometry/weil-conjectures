@@ -152,7 +152,6 @@ private theorem isQuasicoherent_and_isFiniteType_of_isCoherent
       F q.I q.X q.coversTop hfp
   exact ⟨inferInstance, h.1⟩
 
-set_option profiler true in
 private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
     (hq : F.IsQuasicoherent) (ht : F.IsFiniteType) :
