@@ -86,8 +86,9 @@ private theorem hypercover_extendMap_naturality
     (HomologicalComplex.extendMap f ComplexShape.embeddingUpNat).f (p : ℤ) ≫
         (B.extendXIso ComplexShape.embeddingUpNat (i := p) rfl).hom =
       (A.extendXIso ComplexShape.embeddingUpNat (i := p) rfl).hom ≫ f.f p := by
-  rw [HomologicalComplex.extendMap_f _ _ (i := p) rfl]
-  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  change ((ComplexShape.embeddingUpNat.extendFunctor _).map f).f (p : ℤ) ≫ _ = _
+  erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := p) rfl]
+  simp
 
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def sectionColumnIso
@@ -104,9 +105,11 @@ private noncomputable def sectionColumnIso
         ComplexShape.embeddingUpNat (i := p) rfl)) ?_
   intro q r h
   symm
-  exact hypercover_extendMap_naturality
+  change ((ComplexShape.embeddingUpNat.extendFunctor _).map
     ((AlgebraicTopology.alternatingCofaceMapComplex _).map
-      ((hypercoverSections X R W U).map (E.d q r))) p
+      ((hypercoverSections X R W U).map (E.d q r)))).f (p : ℤ) ≫ _ = _
+  erw [HomologicalComplex.extendMap_f _ ComplexShape.embeddingUpNat (i := p) rfl]
+  simp
 
 private theorem sectionBicomplex_zero
     (E : CochainComplex (ringedSiteModules.{u + 1}
