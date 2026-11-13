@@ -130,7 +130,6 @@ private theorem residueSeparableAt_of_root_charts {X Y : Scheme.{u}} (n : X ⟶ 
   rw [hα] at hcomp
   exact hcomp
 
-set_option trace.profiler true in
 /-- Residue extensions at points above the closed trait section are separable.
 
 Source: Stacks Project, Tag 0EYH, the tame charts used in the trait paragraph of 0EYJ.

@@ -82,7 +82,6 @@ private theorem root_maximalIdeal {R : Type u} [CommRing R] [IsLocalRing R]
     ((show Ideal.span {t} ≤ M ⊔ Ideal.span {t} from le_sup_right)
       ((Ideal.span {t}).mul_mem_right _ (Ideal.subset_span (by simp))))
 
-set_option trace.profiler true in
 /-- The tame local chart, before using splitting of the generic section fibre.
 
 Source: Stacks Project, Tag 0EYH, and the transverse section construction in 0EYI(2).

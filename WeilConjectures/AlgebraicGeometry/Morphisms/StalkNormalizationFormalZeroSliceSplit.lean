@@ -112,7 +112,6 @@ private theorem iso_trans_over {X Y Z B : Scheme.{u}} (e : X ≅ Y) (d : Y ≅ Z
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Splitting over U first makes the minimality hypotheses unnecessary for this proof.
-set_option trace.profiler true in
 /-- The normalization test is split on the zero slice of its punctured open.
 This only gives an isomorphism after pulling back to the zero slice.
 
