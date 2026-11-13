@@ -131,35 +131,28 @@ private meta partial def conversionCongruence
       if e.headBeta != e then return some e.headBeta
       if let some e' ← e.reduceProjStruct? then return some e'
       return none
-    -- Instance diamonds are definitional equalities. Check them directly instead of
-    -- deriving congruences for every field and argument of their constructors.
-    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
-      return ← conversionReduction a b
+    if let some a' ← reduce a then
+      return ← conversionTrans (← conversionReduction a a')
+        (← conversionCongruence cache congrCache a' b)
+    if let some b' ← reduce b then
+      return ← conversionTrans (← conversionCongruence cache congrCache a b')
+        (← conversionSymm (← conversionReduction b b'))
     let mut congruenceError : Option Lean.Exception := none
     let sameHead := a.getAppFn == b.getAppFn ||
       (a.getAppFn.isConst && b.getAppFn.isConst &&
         a.getAppFn.constName! == b.getAppFn.constName!)
     if sameHead && a.isApp && a.getAppNumArgs == b.getAppNumArgs then
       try
-        let allA := a.getAppArgs
-        let allB := b.getAppArgs
-        -- Keep the common parameters fixed in the congruence theorem. In particular,
-        -- do not quantify again over identical categories and their instances.
-        let mut common := 0
-        if a.getAppFn == b.getAppFn then
-          while common < allA.size && allA[common]! == allB[common]! do
-            common := common + 1
-        let head := Lean.mkAppN a.getAppFn (allA.extract 0 common)
-        let aa := allA.extract common allA.size
-        let bb := allB.extract common allB.size
-        let key := (head, aa.size)
+        let aa := a.getAppArgs
+        let bb := b.getAppArgs
+        let key := (a.getAppFn, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if head.hasFVar then
-                Lean.Meta.mkHCongrWithArity head aa.size
+            let ct ← if a.getAppFn.hasFVar then
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity head aa.size
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
@@ -173,13 +166,8 @@ private meta partial def conversionCongruence
         let h := Lean.mkAppN ct.proof args
         return ← if (← Lean.Meta.inferType h).isHEq then pure h else conversionOfEq h
       catch err => congruenceError := some err
-    -- Compare applications before unfolding their common structural head.
-    if let some a' ← reduce a then
-      return ← conversionTrans (← conversionReduction a a')
-        (← conversionCongruence cache congrCache a' b)
-    if let some b' ← reduce b then
-      return ← conversionTrans (← conversionCongruence cache congrCache a b')
-        (← conversionSymm (← conversionReduction b b'))
+    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
+      return ← conversionReduction a b
     let a' ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf a)
     let a' ← match (← reduce a') with
       | some v => pure v
@@ -212,8 +200,9 @@ private meta partial def conversionCongruence
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
   let h ← compute
-  -- Share composed proofs in the expression cache. Only reduction certificates and
-  -- reusable congruence rules need separate declarations and kernel checks.
+  let ty ← Lean.Meta.mkHEq a b
+  let h ← Lean.Meta.mkAuxTheorem ty h
+    (zetaDelta := true) (kind? := `_finiteCongruence)
   cache.modify fun m => m.insert (a, b) h
   return h
 
@@ -394,6 +383,7 @@ end NativePasting
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option maxHeartbeats 1100000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Ambient scalar comparison after replacing the retained etale witness by the
 canonical pro-etale compactification base-change map.

@@ -198,9 +198,10 @@ private meta partial def conversionCongruence
     if a.isLambda && b.isLambda then return ← conversionReduction a b
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
-  -- The reductions and generic congruence lemmas are already checked separately.
-  -- Cache their composition directly, without rechecking its full concrete type at every node.
   let h ← compute
+  let ty ← Lean.Meta.mkHEq a b
+  let h ← Lean.Meta.mkAuxTheorem ty h
+    (zetaDelta := true) (kind? := `_finiteCongruence)
   cache.modify fun m => m.insert (a, b) h
   return h
 
@@ -594,6 +595,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option linter.style.haveILetI false in
 -- Inlining the finite instance keeps the concrete realization conversions small.
+set_option maxHeartbeats 600000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- The fixed scalar pullback comparisons identify the two pullback-square words.
 Source: blueprint operations proof (2), pullback compositor normalization.

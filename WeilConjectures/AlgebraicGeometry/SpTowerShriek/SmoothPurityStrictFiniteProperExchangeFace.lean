@@ -198,9 +198,10 @@ private meta partial def conversionCongruence
     if a.isLambda && b.isLambda then return ← conversionReduction a b
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
-  -- The reductions and generic congruence lemmas are already checked separately.
-  -- Cache their composition directly, without rechecking its full concrete type at every node.
   let h ← compute
+  let ty ← Lean.Meta.mkHEq a b
+  let h ← Lean.Meta.mkAuxTheorem ty h
+    (zetaDelta := true) (kind? := `_finiteCongruence)
   cache.modify fun m => m.insert (a, b) h
   return h
 
@@ -321,6 +322,7 @@ private theorem native_base_change_mate (A : Type u) [CommRing A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the proper base-change mate.
 Source: blueprint operations proof (2), finite proper exchange face.

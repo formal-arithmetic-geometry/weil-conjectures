@@ -63,7 +63,7 @@ lemma Adjunction.exchangeLeft_app_comp_map_counit_app {A B A' B' : Type*} [Categ
 
 /-- A base change compatible with an exchange and a comparison of counits also intertwines
 the original counits. -/
-lemma map_counit_eq_of_baseChange {A B : Type*} [Category A] [Category B]
+private lemma map_counit_eq_of_baseChange {A B : Type*} [Category A] [Category B]
     {jL jS : A ⥤ B} {jU : B ⥤ A} {H : A ⥤ A} {H' : B ⥤ B}
     (e : jL ⟶ jS) (ε : jU ⋙ jL ⟶ 𝟭 B) (εS : jU ⋙ jS ⟶ 𝟭 B)
     (θ : jU ⋙ H ⟶ H' ⋙ jU) (β : jL ⋙ H' ⟶ H ⋙ jL) (δ : H ⋙ jS ⟶ jS ⋙ H')

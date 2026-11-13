@@ -325,11 +325,20 @@ private noncomputable def isoHomAddEquiv
     map_add' f g := by simp [Iso.homCongr, Preadditive.comp_add, Preadditive.add_comp] }
 
 open CochainComplex HomComplex in
-/-- The cohomology-to-derived-Hom equivalence for an arbitrary source complex. -/
-private noncomputable def classDerivedEquiv
-    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory.{w} C]
-    (S I : CochainComplex C ℤ) [I.IsKInjective] (i : ℤ) :
-    CohomologyClass S I i ≃+ ((DerivedCategory.Q.obj S)⟦-i⟧ ⟶ DerivedCategory.Q.obj I) := by
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    (I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    [I.IsKInjective] (i : ℤ) :
+    CohomologyClass ((CochainComplex.singleFunctor _ 0).obj
+      (SheafOfModules.unit (moduleRings Y.toRingedSpace))) I i ≃+
+      ((((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
+          (SheafOfModules.unit (moduleRings Y.toRingedSpace)))⟦-i⟧) ⟶
+            DerivedCategory.Q.obj I) := by
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let S := (CochainComplex.singleFunctor C 0).obj
+    (SheafOfModules.unit (moduleRings Y.toRingedSpace))
   let e := CohomologyClass.homAddEquiv (K := S) (L := I) (n := i)
   let eQ := AddEquiv.ofBijective DerivedCategory.Qh.mapAddHom
     (CochainComplex.IsKInjective.Qh_map_bijective
@@ -344,19 +353,25 @@ private noncomputable def classDerivedEquiv
       (DerivedCategory.Q.obj S) (DerivedCategory.Q.obj I)).symm
 
 open CochainComplex HomComplex in
-/-- Prove naturality before specializing the abelian category to sheaves of modules. -/
-private lemma classDerivedEquiv_naturality
-    {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory.{w} C]
-    (S : CochainComplex C ℤ) {I J : CochainComplex C ℤ}
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- Unfolding the composite Hom equivalence also checks both localization and shift structures.
+private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
     [I.IsKInjective] [J.IsKInjective] (f : I ⟶ J) (i : ℤ)
-    (a : CohomologyClass S I i) :
-    classDerivedEquiv S J i (DQComparisonAux.postClass f i a) =
-      classDerivedEquiv S I i a ≫ DerivedCategory.Q.map f := by
+    (a : CohomologyClass ((CochainComplex.singleFunctor _ 0).obj
+      (SheafOfModules.unit (moduleRings Y.toRingedSpace))) I i) :
+    unitClassDerivedEquiv Y J i (DQComparisonAux.postClass f i a) =
+      unitClassDerivedEquiv Y I i a ≫ DerivedCategory.Q.map f := by
   have hh : CohomologyClass.toHom (DQComparisonAux.postClass f i a) =
       CohomologyClass.toHom a ≫ (HomotopyCategory.quotient _ _).map (f⟦i⟧') := by
     obtain ⟨a, rfl⟩ := a.mk_surjective
     simp only [DQComparisonAux.postClass_mk, CohomologyClass.toHom_mk,
       Cocycle.equivHomShift_symm_postcomp, Functor.map_comp]
+  let C := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
+  let S := (CochainComplex.singleFunctor C 0).obj
+    (SheafOfModules.unit (moduleRings Y.toRingedSpace))
   let sh := shiftEquiv' (DerivedCategory C) (-i) i (neg_add_cancel i)
   change (sh.toAdjunction.homEquiv (DerivedCategory.Q.obj S)
     (DerivedCategory.Q.obj J)).symm
@@ -372,40 +387,15 @@ private lemma classDerivedEquiv_naturality
           (DerivedCategory.Q.commShiftIso i).hom.app I) ≫ DerivedCategory.Q.map f
   rw [hh, Functor.map_comp]
   simp only [Category.assoc]
-  rw [DerivedCategory.quotientCompQhIso_hom_naturality_assoc,
-    DerivedCategory.Q.commShiftIso_hom_naturality]
-  simpa only [sh, shiftEquiv', Category.assoc] using
+  erw [(DerivedCategory.quotientCompQhIso C).hom.naturality_assoc]
+  erw [(DerivedCategory.Q.commShiftIso i).hom.naturality]
+  simp only [Functor.comp_map]
+  simpa only [sh, shiftEquiv', Category.assoc] using!
     sh.toAdjunction.homEquiv_naturality_right_symm
       ((DerivedCategory.quotientCompQhIso C).inv.app S ≫
         DerivedCategory.Qh.map (CohomologyClass.toHom a) ≫
         (DerivedCategory.quotientCompQhIso C).hom.app (I⟦i⟧) ≫
         (DerivedCategory.Q.commShiftIso i).hom.app I) (DerivedCategory.Q.map f)
-
-open CochainComplex HomComplex in
-set_option backward.isDefEq.respectTransparency false in
-private noncomputable def unitClassDerivedEquiv (Y : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    (I : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
-    [I.IsKInjective] (i : ℤ) :
-    CohomologyClass ((CochainComplex.singleFunctor _ 0).obj
-      (SheafOfModules.unit (moduleRings Y.toRingedSpace))) I i ≃+
-      ((((DerivedCategory.singleFunctor
-        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
-          (SheafOfModules.unit (moduleRings Y.toRingedSpace)))⟦-i⟧) ⟶
-            DerivedCategory.Q.obj I) := by
-  exact classDerivedEquiv _ I i
-
-open CochainComplex HomComplex in
-set_option backward.isDefEq.respectTransparency false in
-private lemma unitClassDerivedEquiv_naturality (Y : Scheme.{u})
-    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
-    {I J : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}
-    [I.IsKInjective] [J.IsKInjective] (f : I ⟶ J) (i : ℤ)
-    (a : CohomologyClass ((CochainComplex.singleFunctor _ 0).obj
-      (SheafOfModules.unit (moduleRings Y.toRingedSpace))) I i) :
-    unitClassDerivedEquiv Y J i (DQComparisonAux.postClass f i a) =
-      unitClassDerivedEquiv Y I i a ≫ DerivedCategory.Q.map f := by
-  exact classDerivedEquiv_naturality _ f i a
 
 /-- Global degree-i cohomology of a K-injective representative is the derived Hom
 from O_Y[-i], as an additive group.

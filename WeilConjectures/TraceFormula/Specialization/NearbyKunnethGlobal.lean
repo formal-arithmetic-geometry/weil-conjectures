@@ -340,7 +340,7 @@ end Transport
 
 /-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
 constructible complex on the total space. -/
-lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
+private lemma IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_of_iso
     {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)]
     {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
     {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}

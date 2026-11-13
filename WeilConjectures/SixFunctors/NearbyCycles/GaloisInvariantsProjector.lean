@@ -108,7 +108,7 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant_eq {C D E : Type*} [Cat
 
 /-- Transport an invariant split unit through a functor and comparison isomorphisms.
 If the exchange is fixed on the right, its resulting projector is fixed on both sides. -/
-lemma exists_retraction_of_conjugate_invariant_eq {C D : Type*} [Category C] [Category D]
+private lemma exists_retraction_of_conjugate_invariant_eq {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (i : P ≅ F.obj A)
     (κ : F.obj T ≅ Q) (η : A ⟶ T) (R : T ⟶ A)
     (hα : α = i.hom ≫ F.map η ≫ κ.hom) (hR : η ≫ R = 𝟙 A) {ι : Type*}
@@ -133,7 +133,7 @@ lemma exists_retraction_of_conjugate_invariant_eq {C D : Type*} [Category C] [Ca
 
 /-- An invariant retraction has the same mapped projector as any retraction with the
 coinvariant universal property. -/
-lemma map_retraction_comp_eq_of_coinvariant {C D : Type*} [Category C] [Category D]
+private lemma map_retraction_comp_eq_of_coinvariant {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {P Q : C} (α : P ⟶ Q) (r : Q ⟶ P) (hr : α ≫ r = 𝟙 P)
     {ι : Type*} (ρ : ι → (Q ⟶ Q)) (hinv : ∀ k, ρ k ≫ (r ≫ α) = r ≫ α)
     (hproj : ∃ r' : Q ⟶ P, ∀ {W : D} (φ : F.obj Q ⟶ W),
@@ -352,7 +352,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The Galois-layer exchange is the derived unit transported through its comparison
 isomorphisms. -/
-lemma galoisLayerProjectorFactorization
+private lemma galoisLayerProjectorFactorization
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =

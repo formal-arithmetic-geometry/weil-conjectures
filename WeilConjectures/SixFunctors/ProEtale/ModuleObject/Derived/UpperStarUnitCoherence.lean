@@ -185,7 +185,7 @@ variable {C₁ C₂ C₃ : Type*} [Category C₁] [Category C₂] [Category C₃
 
 /-- The composition comparison of exact derived functors respects morphisms out of complexes
 concentrated in degree `0`, after composing with the derived counits. -/
-lemma leftDerivedFunctorFactorIso_hom_app_single
+private lemma leftDerivedFunctorFactorIso_hom_app_single
     {F : C₁ ⥤ C₃} {G : C₁ ⥤ C₂} {H : C₂ ⥤ C₃}
     [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]

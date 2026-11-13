@@ -62,39 +62,37 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   intro M
   exact Mod.extendRestrictAdjunction_unit_app_hom (inclusion l E T) M
 
+set_option maxHeartbeats 1000000 in
+-- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
 termwise on every complex, and their adjunction unit is the localized termwise unit.
 Source: exact derived factorization and localization of adjunctions.
 (blueprint: lem-weil-pbc-normalized-realization-clauses). -/
 def DerivedScalarData : Prop :=
-  let F := ordinaryExtension l E T
-  let G := ordinaryRestriction l E T
-  -- Reuse exactness instances instead of synthesizing them at every derived occurrence.
-  have : F.Additive := inferInstance
-  have : G.Additive := inferInstance
-  have : PreservesFiniteLimits F := inferInstance
-  have : PreservesFiniteColimits F := inferInstance
-  have : PreservesFiniteLimits G := inferInstance
-  have : PreservesFiniteColimits G := inferInstance
-  let DF := F.mapDerivedCategory
-  let DG := G.mapDerivedCategory
-  let a : F ⊣ G := Mod.extendRestrictAdjunction (inclusion l E T)
-  Nonempty (F.leftDerivedFunctor ≅ DF) ∧
-  Nonempty (G.rightDerivedFunctor ≅ DG) ∧
-  Nonempty (DF.CommShift ℤ) ∧
-  Nonempty (DG.CommShift ℤ) ∧
-  DF.IsTriangulated ∧
-  DG.IsTriangulated ∧
-  (∀ P, IsIso (F.mapDerivedCategoryFactors.hom.app P)) ∧
-  (∀ P, IsIso (G.mapDerivedCategoryFactors.hom.app P)) ∧
+  Nonempty ((ordinaryExtension l E T).leftDerivedFunctor ≅
+    (ordinaryExtension l E T).mapDerivedCategory) ∧
+  Nonempty ((ordinaryRestriction l E T).rightDerivedFunctor ≅
+    (ordinaryRestriction l E T).mapDerivedCategory) ∧
+  Nonempty ((ordinaryExtension l E T).mapDerivedCategory.CommShift ℤ) ∧
+  Nonempty ((ordinaryRestriction l E T).mapDerivedCategory.CommShift ℤ) ∧
+  (ordinaryExtension l E T).mapDerivedCategory.IsTriangulated ∧
+  (ordinaryRestriction l E T).mapDerivedCategory.IsTriangulated ∧
+  (∀ P, IsIso ((ordinaryExtension l E T).mapDerivedCategoryFactors.hom.app P)) ∧
+  (∀ P, IsIso ((ordinaryRestriction l E T).mapDerivedCategoryFactors.hom.app P)) ∧
   ∀ P : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (integralRing l E T)) ℤ,
-    a.mapExactDerivedCategory.unit.app (DerivedCategory.Q.obj P) ≫
-        DG.map (F.mapDerivedCategoryFactors.hom.app P) ≫
-        G.mapDerivedCategoryFactors.hom.app
-          ((F.mapHomologicalComplex (.up ℤ)).obj P) =
-      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex a.unit (.up ℤ)).app P)
+    (Mod.extendRestrictAdjunction (inclusion l E T)).mapExactDerivedCategory.unit.app
+          (DerivedCategory.Q.obj P) ≫
+        (ordinaryRestriction l E T).mapDerivedCategory.map
+          ((ordinaryExtension l E T).mapDerivedCategoryFactors.hom.app P) ≫
+        (ordinaryRestriction l E T).mapDerivedCategoryFactors.hom.app
+          (((ordinaryExtension l E T).mapHomologicalComplex (.up ℤ)).obj P) =
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex
+          (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
+set_option maxHeartbeats 1000000 in
+-- The derived scalar square unfolds the exact derived extension and restriction.
 /-- All-complex derived computation and the normalized derived unit.
 Source: exact derived functor comparisons and the exact derived adjunction unit.
 (blueprint: lem-weil-pbc-normalized-realization-clauses).
@@ -103,14 +101,12 @@ localization. The latter has its canonical shifts and preserves triangles.
 Its comparison components are isomorphisms on every complex. The unit formula
 is the component formula for the localization of the ordinary adjunction. -/
 theorem derived_scalar_data : DerivedScalarData l E T := by
-  let F := ordinaryExtension l E T
-  let G := ordinaryRestriction l E T
-  refine ⟨⟨F.leftDerivedFunctorIsoMapDerivedCategory⟩,
-    ⟨G.rightDerivedFunctorIsoMapDerivedCategory⟩,
+  refine ⟨⟨(ordinaryExtension l E T).leftDerivedFunctorIsoMapDerivedCategory⟩,
+    ⟨(ordinaryRestriction l E T).rightDerivedFunctorIsoMapDerivedCategory⟩,
     ⟨inferInstance⟩, ⟨inferInstance⟩, inferInstance, inferInstance,
     (fun P ↦ inferInstance), (fun P ↦ inferInstance), ?_⟩
   intro P
-  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit (F := F) (G := G)
+  exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit
     (Mod.extendRestrictAdjunction (inclusion l E T)) P
 
 /-- The exact ordinary and derived scalar clauses together.

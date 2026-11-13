@@ -34,7 +34,7 @@ namespace CategoryTheory
 
 /-- A tower with finite morphism sets and isomorphism-preserving transition maps has a
 compatible family of isomorphisms whenever its objects are isomorphic at every stage. -/
-lemma exists_compatible_isIso_homs_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
+private lemma exists_compatible_isIso_homs_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
     {K L : ∀ n, C n} (hfin : ∀ n, Finite (K n ⟶ L n))
     (hne : ∀ n, Nonempty (K n ≅ L n))
     (r : ∀ n, (K (n + 1) ⟶ L (n + 1)) → (K n ⟶ L n))
@@ -57,7 +57,7 @@ lemma exists_compatible_isIso_homs_of_finite {C : ℕ → Type*} [∀ n, Categor
 
 /-- If compatible families of morphisms lift, a compatible family of isomorphisms gives a
 lift whose image is an isomorphism at every stage. -/
-lemma exists_isIso_maps_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
+private lemma exists_isIso_maps_of_finite {C : ℕ → Type*} [∀ n, Category (C n)]
     {K L : ∀ n, C n} (hfin : ∀ n, Finite (K n ⟶ L n))
     (hne : ∀ n, Nonempty (K n ≅ L n))
     (r : ∀ n, (K (n + 1) ⟶ L (n + 1)) → (K n ⟶ L n))
@@ -101,7 +101,7 @@ lemma isIso_derivedReductionStep (n : ℕ)
   infer_instance
 
 /-- A reduction step is compatible with the transition maps after restricting scalars. -/
-lemma map_comp_reductionTransition_derivedReductionStep (n : ℕ)
+private lemma map_comp_reductionTransition_derivedReductionStep (n : ℕ)
     {K L : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}
     (s : (Mod.extendScalars (integersModPowReduction X ℓ E (n + 1))).leftDerivedFunctor.obj K ⟶

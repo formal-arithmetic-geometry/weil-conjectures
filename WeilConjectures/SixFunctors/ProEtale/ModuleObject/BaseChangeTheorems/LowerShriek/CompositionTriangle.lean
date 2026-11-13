@@ -549,7 +549,7 @@ section AnyTriangle
 /-- The inverse composition maps of two triangles agree after comparison with a common
 compactification. Keeping both triangles arbitrary avoids unfolding chosen compactifications
 in the common-refinement argument. -/
-lemma compIso_triangleShriekTriangle_inv_comparison
+private lemma compIso_triangleShriekTriangle_inv_comparison
     [QuasiCompact f.left] [QuasiCompact g.left] [QuasiCompact (f.left ≫ g.left)]
     (c : Compactification (f ≫ g).left)
     (T₀ T : Compactification.Triangle f.left g.left) :

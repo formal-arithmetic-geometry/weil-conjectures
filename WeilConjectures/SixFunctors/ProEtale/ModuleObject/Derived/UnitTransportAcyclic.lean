@@ -54,7 +54,7 @@ lemma comp_eq_comp_of_naturality {C : Type*} [Category C] {P₀ P₁ P₂ P₃ P
 
 /-- Transport a comparison square along a morphism using naturality, without expanding the
 components of the natural transformation. -/
-lemma comp_eq_comp_of_app_naturality {C D : Type*} [Category C] [Category D]
+private lemma comp_eq_comp_of_app_naturality {C D : Type*} [Category C] [Category D]
     {F G : C ⥤ D} (τ : F ⟶ G) {X Y : C} (f : X ⟶ Y) {P₀ P₁ P₂ Q₀ Q₁ Q₂ : D}
     (e : P₀ ⟶ P₁) (u : P₁ ⟶ P₂) (r : P₂ ⟶ F.obj X) (w : P₀ ⟶ Q₀)
     (e' : Q₀ ⟶ Q₁) (u' : Q₁ ⟶ Q₂) (r' : Q₂ ⟶ G.obj X) (x : P₁ ⟶ Q₁)

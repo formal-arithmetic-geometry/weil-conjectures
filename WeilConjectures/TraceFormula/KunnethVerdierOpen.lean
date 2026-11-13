@@ -130,7 +130,7 @@ noncomputable def exceptionalKunnethSourceRestrictionIso (j : U ⟶ Y) [IsOpenIm
           (prod.snd : X ⨯ U ⟶ U)).mapIso (dualizingComplexUpperStarIso ℓ j))
 
 /-- The isomorphism `exceptionalKunnethSourceRestrictionIso`, componentwise. -/
-lemma exceptionalKunnethSourceRestrictionIso_hom (j : U ⟶ Y) [IsOpenImmersion j.left]
+private lemma exceptionalKunnethSourceRestrictionIso_hom (j : U ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (exceptionalKunnethSourceRestrictionIso ℓ j M).hom =
       Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -164,7 +164,7 @@ def ExceptionalKunnethMapRestriction (j : U ⟶ Y) [IsOpenImmersion j.left]
     (exceptionalKunnethSourceRestrictionIso ℓ j M).hom ≫ exceptionalKunnethMap ℓ (Y := U) M
 
 /-- The exceptional restriction compatibility after precomposing with the tensor comparison. -/
-lemma μ_map_exceptionalKunnethMap_comp_restriction (j : U ⟶ Y) [IsOpenImmersion j.left]
+private lemma μ_map_exceptionalKunnethMap_comp_restriction (j : U ⟶ Y) [IsOpenImmersion j.left]
     (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (hα : ExceptionalKunnethMapRestriction ℓ j M) :
     Functor.LaxMonoidal.μ (boundedConstructibleUpperStar

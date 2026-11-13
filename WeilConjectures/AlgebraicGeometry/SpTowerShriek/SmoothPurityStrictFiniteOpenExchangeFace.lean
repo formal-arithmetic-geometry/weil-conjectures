@@ -140,23 +140,14 @@ private meta partial def conversionCongruence
       try
         let aa := a.getAppArgs
         let bb := b.getAppArgs
-        -- Fix the common prefix before generating dependent congruence. In particular,
-        -- category and instance parameters need no equality transport when they agree.
-        let mut first := 0
-        if a.getAppFn == b.getAppFn then
-          while first < aa.size && aa[first]! == bb[first]! do
-            first := first + 1
-        let head := Lean.mkAppN a.getAppFn (aa.extract 0 first)
-        let aa := aa.extract first aa.size
-        let bb := bb.extract first bb.size
-        let key := (head, aa.size)
+        let key := (a.getAppFn, aa.size)
         let ct ← match (← congrCache.get).get? key with
           | some ct => pure ct
           | none => do
-            let ct ← if head.hasFVar then
-                Lean.Meta.mkHCongrWithArity head aa.size
+            let ct ← if a.getAppFn.hasFVar then
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
               else Lean.Meta.withLCtx {} {} <|
-                Lean.Meta.mkHCongrWithArity head aa.size
+                Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
             let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
               (kind? := `_finiteCongruence)
             let ct := { ct with proof := proof }
@@ -220,8 +211,9 @@ private meta partial def conversionCongruence
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
   let h ← compute
-  -- Reduction steps are already checked separately. Share the congruence proof itself
-  -- instead of repeatedly closing and kernel-checking its entire local context.
+  let ty ← Lean.Meta.mkHEq a b
+  let h ← Lean.Meta.mkAuxTheorem ty h
+    (zetaDelta := true) (kind? := `_finiteCongruence)
   cache.modify fun m => m.insert (a, b) h
   return h
 
@@ -232,9 +224,8 @@ private meta def exactByConversion (h : Lean.Expr) : Lean.Elab.Tactic.TacticM Un
     let y ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
     let strip (e : Lean.Expr) : Lean.Expr := e.replace fun v =>
       if v.isMData then some v.consumeMData else none
-    -- Expand local aliases once so they do not generate congruence subproblems.
-    let x ← Lean.Meta.zetaReduce (strip x)
-    let y ← Lean.Meta.zetaReduce (strip y)
+    let x := strip x
+    let y := strip y
     let cache ← IO.mkRef ({} : Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr)
     let congrCache ← IO.mkRef
       ({} : Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem)
@@ -527,6 +518,7 @@ private theorem native_open_unit_mate (A : Type u) [CommRing A]
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     NatTrans.comp_app, Category.assoc] using he.symm
 
+set_option maxHeartbeats 400000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem inverse_pull_square (b : Base l E)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
@@ -609,6 +601,7 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
+set_option maxHeartbeats 700000 in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
     (o : Operations l E b) (levels : ComparisonLevels l E b o)

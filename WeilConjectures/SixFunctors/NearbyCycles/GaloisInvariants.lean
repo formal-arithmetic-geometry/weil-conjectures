@@ -64,7 +64,7 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant {C D E : Type*} [Catego
 /-- A retraction invariant under endomorphisms stays invariant after applying a functor and
 transporting along isomorphisms. If the transported action fixes the inclusion, its projector
 is fixed on both sides. -/
-lemma exists_invariant_retraction_of_conjugate {C D : Type*} [Category C] [Category D]
+private lemma exists_invariant_retraction_of_conjugate {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (R : T ⟶ A) (η : A ⟶ T)
     (hR : η ≫ R = 𝟙 A)
     (i : P ≅ F.obj A) (κ : F.obj T ≅ Q) (hα : α = i.hom ≫ F.map η ≫ κ.hom)
@@ -92,7 +92,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The Galois layer exchange is the image of the derived unit, transported by the identity
 and Galois layer exchange isomorphisms. -/
-lemma pullbackExchange_galoisLayerHom_app_eq_map_unit
+private lemma pullbackExchange_galoisLayerHom_app_eq_map_unit
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
