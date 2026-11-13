@@ -24,26 +24,37 @@ A tower is an object of the derived category of the ringed sequence site
 quotient-linear transition maps. The reduction `red_T M = (M ⊗ᴸ 𝒪_E/π^{n+1})_n` is the reduction
 functor of the canonical calculus `pullbackTensorCalculus`, left adjoint to the total derived limit
 `R lim = coefficientSequenceLimit`; its unit projects to the reduction maps `M ⟶ M/π^{n+1}`
-(`CoefficientDerivedSystemReduction.unit_projection`). This is blueprint
-`lemma-sp-tower-adjunction-foundation--1`, see also `coefficientSequenceReductionAdjunction_exists`.
+(`CoefficientDerivedSystemReduction.unit_projection`), see also
+`coefficientSequenceReductionAdjunction_exists`.
 A tower is *constructible and normalized* (`ExceptionalIntegralReconstruction.normalized`) if its
 reduction maps `C_n ⊗ᴸ 𝒪_E/π^{m+1} ⟶ C_m` are isomorphisms and all levels are constructible with
 cohomology and Tor amplitude in one interval independent of `n`.
 
-The blueprint indexes the reductions by the powers `ℓ^n`; the powers `π^{n+1}` used here contain
-them (`ℓ^n 𝒪_E = π^{en} 𝒪_E` for the ramification index `e`), so the statements below cover the
-blueprint's reductions `K/ℓ^n`.
-
 ## Main statements
 
-* `AlgebraicGeometry.ProEtale.exists_bounds_reduction_of_sfIntegralConstructible`: blueprint
-  `proposition-sp-integral-towers--1`, uniform bounds for the reductions of `K ∈ Dᵇc(T, 𝒪_E)`.
-* `AlgebraicGeometry.ProEtale.sfIntegralConstructible_of_isSfDerivedComplete`: blueprint
-  `proposition-sp-integral-towers--2`, a derived complete complex with a constructible reduction
-  of finite Tor amplitude is in `Dᵇc(T, 𝒪_E)`.
-* `AlgebraicGeometry.ProEtale.reductionAdjunction_restrict_sfIntegralConstructible`: blueprint
-  `lemma-sp-tower-adjunction-foundation--2`, the adjunction `red_T ⊣ R lim` restricts to an
-  equivalence between `Dᵇc(T, 𝒪_E)` and the normalized constructible towers.
+* `AlgebraicGeometry.ProEtale.exists_bounds_reduction_of_sfIntegralConstructible`: uniform bounds
+  for the reductions of `K ∈ Dᵇc(T, 𝒪_E)`.
+* `AlgebraicGeometry.ProEtale.sfIntegralConstructible_of_isSfDerivedComplete`: a derived complete
+  complex with a constructible reduction of finite Tor amplitude is in `Dᵇc(T, 𝒪_E)`.
+* `AlgebraicGeometry.ProEtale.reductionAdjunction_restrict_sfIntegralConstructible`: the
+  adjunction `red_T ⊣ R lim` restricts to an equivalence between `Dᵇc(T, 𝒪_E)` and the normalized
+  constructible towers.
+
+## Implementation details
+
+The blueprint indexes the reductions by the powers `ℓ^n`; the powers `π^{n+1}` used here contain
+them (`ℓ^n 𝒪_E = π^{en} 𝒪_E` for the ramification index `e`), so the statements below cover the
+blueprint's reductions `K/ℓ^n`. Likewise, the blueprint's hypothesis on `K/ℓ` in
+`sfIntegralConstructible_of_isSfDerivedComplete` is the case `π^{m+1} 𝒪_E = ℓ 𝒪_E`, and its
+hypotheses that `T` is of finite type over an algebraic closure of a finite field of
+characteristic `p ≠ ℓ` are not needed there: the residue reduction `K/π` is bounded constructible
+(`residue_constructible_of_reduction`), hence so is every reduction `K/π^{n+1}`, with cohomology
+in one interval (`reduction_constructible_of_residue`).
+
+The second conjunct of `WeilConjectures.integral_residue_tor` proves the equality of predicates
+`finiteTorConstructibleIntegral_eq_sfIntegralConstructible` on schemes whose residue fields have
+`ℓ` invertible; here the hypothesis is a structure morphism to `Spec k` instead, and the proof
+goes through `constructibleReduction_good`.
 -/
 
 @[expose] public noncomputable section
@@ -140,11 +151,11 @@ private lemma hasProEtaleTorAmplitude_mono {T : Scheme.{u}} {A : Type u} [CommRi
   ⟨by have := h.1; omega, fun L P hL f hf hP M i hi ↦
     h.2 L P hL f hf hP M i (by omega)⟩
 
-/-- Blueprint `proposition-sp-integral-towers--1`: **uniform bounds for the reductions of an
-integral constructible complex**. Let `T` be a scheme over an algebraic closure of a finite field
-of characteristic `p ≠ ℓ`. For `K ∈ Dᵇc(T, 𝒪_E)` there are integers `a ≤ b` such that every
-reduction `K/π^{n+1} = K ⊗ᴸ 𝒪_E/π^{n+1}` lies in `Dᵇctf(T_proét, 𝒪_E/π^{n+1})`, with cohomology
-and Tor amplitude in `[a, b]`. The reductions `K/ℓ^n` of the blueprint are among these. -/
+/-- **Uniform bounds for the reductions of an integral constructible complex**. Let `T` be a
+scheme over an algebraic closure of a finite field of characteristic `p ≠ ℓ`. For
+`K ∈ Dᵇc(T, 𝒪_E)` there are integers `a ≤ b` such that every reduction
+`K/π^{n+1} = K ⊗ᴸ 𝒪_E/π^{n+1}` lies in `Dᵇctf(T_proét, 𝒪_E/π^{n+1})`, with cohomology and Tor
+amplitude in `[a, b]`. -/
 theorem exists_bounds_reduction_of_sfIntegralConstructible (D : FiniteFieldDatum.{u})
     (hl : l ≠ D.p) (T : Scheme.{u}) [T.Over (Spec (.of D.k))] (K : Integral l E T)
     (hK : sfIntegralConstructible l E T K) :
@@ -165,10 +176,8 @@ theorem exists_bounds_reduction_of_sfIntegralConstructible (D : FiniteFieldDatum
 
 /-- On a scheme over an algebraic closure of a finite field of characteristic `p ≠ ℓ`, every
 bounded constructible integral complex has uniformly bounded finite Tor amplitude: the
-constructible complexes are the finite-Tor constructible ones. The second conjunct of
-`WeilConjectures.integral_residue_tor` proves the same equality of predicates on schemes whose
-residue fields have `ℓ` invertible; here the hypothesis is a structure morphism to `Spec k`
-instead, and the proof goes through `constructibleReduction_good`. -/
+constructible complexes are the finite-Tor constructible ones. See also the second conjunct of
+`WeilConjectures.integral_residue_tor`. -/
 theorem finiteTorConstructibleIntegral_eq_sfIntegralConstructible
     (D : FiniteFieldDatum.{u})
     (hl : l ≠ D.p) (T : Scheme.{u}) [T.Over (Spec (.of D.k))] :
@@ -177,16 +186,9 @@ theorem finiteTorConstructibleIntegral_eq_sfIntegralConstructible
   obtain ⟨a, b, hab, h⟩ := exists_bounds_reduction_of_sfIntegralConstructible l E D hl T K hK
   exact ⟨a, b, hab, fun n ↦ (h n).2.2⟩
 
-/-- Blueprint `proposition-sp-integral-towers--2`: **a derived complete complex with a
-constructible reduction of finite Tor amplitude is constructible**. Let `T` be a scheme. If `K` is
-derived complete and some reduction `K/π^{m+1}` lies in `Dᵇctf(T_proét, 𝒪_E/π^{m+1})`, then
-`K ∈ Dᵇc(T, 𝒪_E)`. The blueprint's hypothesis on `K/ℓ` is the case `π^{m+1} 𝒪_E = ℓ 𝒪_E`; its
-hypotheses that `T` is of finite type over an algebraic closure of a finite field of
-characteristic `p ≠ ℓ` are not needed.
-
-Proof: the residue reduction `K/π` is bounded constructible
-(`residue_constructible_of_reduction`), hence so is every reduction `K/π^{n+1}`, with cohomology
-in one interval (`reduction_constructible_of_residue`). -/
+/-- **A derived complete complex with a constructible reduction of finite Tor amplitude is
+constructible**. Let `T` be a scheme. If `K` is derived complete and some reduction `K/π^{m+1}`
+lies in `Dᵇctf(T_proét, 𝒪_E/π^{m+1})`, then `K ∈ Dᵇc(T, 𝒪_E)`. -/
 theorem sfIntegralConstructible_of_isSfDerivedComplete (T : Scheme.{u})
     (K : Integral l E T) (hK : IsSfDerivedComplete l E T K) (m : ℕ)
     (hm : intrinsicFiniteTorsionConstructible l E (m + 1) (Nat.succ_pos m) T
@@ -197,13 +199,12 @@ theorem sfIntegralConstructible_of_isSfDerivedComplete (T : Scheme.{u})
   obtain ⟨a', b', hab', h₀, hs₀⟩ := residue_constructible_of_reduction l E T K m ⟨hm, a, b, ht⟩
   exact ⟨hK, a', b', hab', reduction_constructible_of_residue l E T K a' b' h₀ hs₀⟩
 
-/-- Blueprint `lemma-sp-tower-adjunction-foundation--2`: **the adjunction `red_T ⊣ R lim`
-restricts to an equivalence between `Dᵇc(T, 𝒪_E)` and the normalized constructible towers**. Let
-`T` be a scheme over an algebraic closure of a finite field of characteristic `p ≠ ℓ`, and let
-`red_T ⊣ R lim` be the reduction adjunction of the canonical calculus (blueprint
-`lemma-sp-tower-adjunction-foundation--1`). Then `red_T` maps `Dᵇc(T, 𝒪_E)` to normalized
-constructible towers and its unit is an isomorphism there, and `R lim` maps normalized
-constructible towers to `Dᵇc(T, 𝒪_E)` and the counit is an isomorphism there. -/
+/-- **The adjunction `red_T ⊣ R lim` restricts to an equivalence between `Dᵇc(T, 𝒪_E)` and the
+normalized constructible towers**. Let `T` be a scheme over an algebraic closure of a finite field
+of characteristic `p ≠ ℓ`, and let `red_T ⊣ R lim` be the reduction adjunction of the canonical
+calculus. Then `red_T` maps `Dᵇc(T, 𝒪_E)` to normalized constructible towers and its unit is an
+isomorphism there, and `R lim` maps normalized constructible towers to `Dᵇc(T, 𝒪_E)` and the
+counit is an isomorphism there. -/
 theorem reductionAdjunction_restrict_sfIntegralConstructible (D : FiniteFieldDatum.{u})
     (hl : l ≠ D.p) (T : Scheme.{u}) [T.Over (Spec (.of D.k))] :
     (∀ K : Integral l E T, sfIntegralConstructible l E T K →

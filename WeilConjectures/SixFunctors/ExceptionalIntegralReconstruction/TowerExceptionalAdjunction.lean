@@ -19,20 +19,20 @@ with compact support (`sfCompactSupportFiniteIntegralFunctor`).
 
 On towers, `Rf_{!,•}` has a right adjoint `f^!_•` on normalized constructible towers
 (`ExceptionalIntegralReconstruction.Systems.exceptional`, with the adjunction
-`ExceptionalIntegralReconstruction.SystemAdjunction`). Blueprint
-`proposition-sp-integral-adjunction` transports this adjunction to integral complexes along the
-equivalence `red ⊣ R lim` between `Dᵇc(-, 𝒪_E)` and normalized constructible towers (blueprint
-`lemma-sp-tower-adjunction-foundation`): the functor
+`ExceptionalIntegralReconstruction.SystemAdjunction`). We transport this adjunction to integral
+complexes along the equivalence `red ⊣ R lim` between `Dᵇc(-, 𝒪_E)` and normalized constructible
+towers: the functor
 `H_{f,𝒪_E}(K) = R lim_n f^!_• (red_Y K)` is right adjoint to `Rf_{!,𝒪_E}`, and it is therefore
 identified with any other right adjoint, such as `f^!_{𝒪_E}`, by a unique counit-preserving
 isomorphism.
 
 ## Main statements
 
-* `AlgebraicGeometry.ProEtale.exists_towerLimit_rightAdjoint_sfCompactSupport`: blueprint
-  `proposition-sp-integral-adjunction--1`.
-* `AlgebraicGeometry.ProEtale.exists_towerLimit_rightAdjoint_sfCompactSupport_uniq`: blueprint
-  `proposition-sp-integral-adjunction--2`.
+* `AlgebraicGeometry.ProEtale.exists_towerLimit_rightAdjoint_sfCompactSupport`: the functor
+  `H_{f,𝒪_E}` built from towers is right adjoint to `Rf_{!,𝒪_E}`.
+* `AlgebraicGeometry.ProEtale.exists_towerLimit_rightAdjoint_sfCompactSupport_uniq`: moreover,
+  `H_{f,𝒪_E}` is identified with every right adjoint of `Rf_{!,𝒪_E}` by a unique
+  counit-preserving isomorphism.
 -/
 
 @[expose] public noncomputable section
@@ -69,10 +69,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f]
   [QuasiCompact f] (c : Compactification f)
 
-/-- Blueprint `proposition-sp-integral-adjunction--2`: **the integral right adjoint built from
-towers, and its uniqueness**. There are a right adjoint `f^!_•` of `Rf_{!,•}` on normalized
-constructible towers and a right adjoint `H` of `Rf_{!,𝒪_E}` on `Dᵇc(-, 𝒪_E)` with
-`H(K) ≅ R lim_n f^!_• (red_Y K)` (blueprint `proposition-sp-integral-adjunction--1`), and for every
+/-- **The integral right adjoint built from towers, and its uniqueness**. There are a right
+adjoint `f^!_•` of `Rf_{!,•}` on normalized constructible towers and a right adjoint `H` of
+`Rf_{!,𝒪_E}` on `Dᵇc(-, 𝒪_E)` with `H(K) ≅ R lim_n f^!_• (red_Y K)`, and for every
 right adjoint `G` of `Rf_{!,𝒪_E}`, for instance the exceptional inverse image `f^!_{𝒪_E}`, there
 is a unique isomorphism `H ≅ G` compatible with the counits. -/
 theorem exists_towerLimit_rightAdjoint_sfCompactSupport_uniq :
@@ -109,10 +108,10 @@ theorem exists_towerLimit_rightAdjoint_sfCompactSupport_uniq :
     ⟨Functor.isoWhiskerLeft eY.inverse (rightComposite l E c rX rY s a)⟩,
     fun G adj' ↦ adj.existsUnique_iso_comp_counit adj'⟩
 
-/-- Blueprint `proposition-sp-integral-adjunction--1`: **the integral right adjoint built from
-towers**. There are a right adjoint `f^!_•` of `Rf_{!,•}` on normalized constructible towers and
-a right adjoint `H` of `Rf_{!,𝒪_E}` on `Dᵇc(-, 𝒪_E)`, obtained by transporting the tower
-adjunction along `red ⊣ R lim`, with `H(K) ≅ R lim_n f^!_• (red_Y K)`. -/
+/-- **The integral right adjoint built from towers**. There are a right adjoint `f^!_•` of
+`Rf_{!,•}` on normalized constructible towers and a right adjoint `H` of `Rf_{!,𝒪_E}` on
+`Dᵇc(-, 𝒪_E)`, obtained by transporting the tower adjunction along `red ⊣ R lim`, with
+`H(K) ≅ R lim_n f^!_• (red_Y K)`. -/
 theorem exists_towerLimit_rightAdjoint_sfCompactSupport :
     ∃ (s : Systems l E c) (_ : SystemAdjunction l E c s)
       (H : sfIntegralConstructibleCategory l E Y ⥤ sfIntegralConstructibleCategory l E X),
