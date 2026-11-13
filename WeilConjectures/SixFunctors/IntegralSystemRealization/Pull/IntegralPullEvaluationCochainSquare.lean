@@ -90,7 +90,7 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  rw [integralPullEvaluationComplex_eq_ordinary, integralPullEvaluationComplex_eq_ordinary]
+  rewrite [integralPullEvaluationComplex_eq_ordinary, integralPullEvaluationComplex_eq_ordinary]
   exact cochain_comp_eq_comp_comp_of_components _ _ _ _ _
     (integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P)
 
