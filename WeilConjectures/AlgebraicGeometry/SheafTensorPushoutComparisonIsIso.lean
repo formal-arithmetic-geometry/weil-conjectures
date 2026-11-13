@@ -232,7 +232,8 @@ theorem sheafTensorPushoutComparison_isIso
     let z := c ⊗ₜ[D.obj.obj (Opposite.op U), (r.hom.app (Opposite.op U)).hom]
       (show ((restrictScalars (𝓻 s)).obj M).val.obj (Opposite.op U) from m)
     let w := b.hom.app (Opposite.op U) c
-      ⊗ₜ[A.obj.obj (Opposite.op U), (t.hom.app (Opposite.op U)).hom] m
+      ⊗ₜ[A.obj.obj (Opposite.op U), (t.hom.app (Opposite.op U)).hom]
+        (show M.val.obj (Opposite.op U) from m)
     change g (gr (cx ⊗ₜ[Dx] mx)) = gt (E (cx ⊗ₜ[Dx] mx))
     have hleft : g (gr (cx ⊗ₜ[Dx] mx)) =
         TopCat.Presheaf.germ (changeOfRings t M).val.presheaf U x hxU
