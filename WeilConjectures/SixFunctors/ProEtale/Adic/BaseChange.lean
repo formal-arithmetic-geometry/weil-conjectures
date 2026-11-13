@@ -71,15 +71,24 @@ private lemma adicSquareLowerStarIso_hom_app_hom (sq : CommSq g' j' j g'')
       (ProEtale.squareLowerStarIso (WeilCoefficients.{u} l) sq).hom.app M.X := by
   refine ObjectProperty.hom_ext _ (NatTrans.ext (funext fun V ↦ ?_))
   unfold adicSquareLowerStarIso ProEtale.squareLowerStarIso
-  repeat' rewrite [Iso.trans_hom]
-  repeat' rewrite [Iso.symm_hom]
-  repeat' rewrite [NatTrans.comp_app]
-  repeat' rewrite [Mod.comp_hom']
-  repeat' rewrite [ObjectProperty.FullSubcategory.comp_hom]
-  repeat' rewrite [NatTrans.comp_app]
-  rewrite [adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
-    adicLowerStarComp_inv_app_hom]
-  rfl
+  repeat' first
+    | rw [Iso.trans_hom]
+    | rw [Iso.symm_hom]
+    | rw [Functor.map_comp]
+    | rw [Mod.comp_hom']
+    | rw [ObjectProperty.FullSubcategory.comp_hom]
+    | rw [NatTrans.comp_app]
+    | rw [adicLowerStarComp_hom_app_hom_hom_app]
+    | rw [adicLowerStarCongr_hom_app_hom_hom_app]
+    | rw [adicLowerStarComp_inv_app_hom_hom_app]
+    | rw [lowerStarComp_hom_app_hom_app]
+    | rw [lowerStarCongr_hom_app_hom_app]
+    | rw [lowerStarComp_inv_app_hom_app]
+  simp only [← Functor.map_comp, ← op_comp]
+  congr 2
+  ext : 1
+  simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+    MorphismProperty.Over.mk]
 
 set_option profiler true in
 private lemma adicBaseChange_unit_app_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
