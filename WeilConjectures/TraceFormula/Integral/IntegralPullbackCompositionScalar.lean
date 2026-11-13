@@ -55,6 +55,41 @@ private abbrev integralCompositionFiniteScalar (X : Scheme.{u}) :
       finiteSystemDerived (integralSystemRings l L) (integralSystemTransition l L) X :=
   integralComparisonDerivedSequenceScalar l E L ι X
 
+private abbrev integralCompositionFiniteScalarPullback {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y) :
+    finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f ⋙
+        integralCompositionFiniteScalar l E L ι X ≅
+      integralCompositionFiniteScalar l E L ι Y ⋙
+        finiteSystemDerivedPullback (integralSystemRings l L) (integralSystemTransition l L) f :=
+  integralComparisonSystemScalarPullback l E L ι f
+
+private abbrev integralCompositionFiniteScalarIso (X : Scheme.{u})
+    [∀ x : X, Invertible (l : X.residueField x)] :
+    sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+        E L ι X ⋙ integralSystemReduction l L X ≅
+      integralSystemReduction l E X ⋙ integralCompositionFiniteScalar l E L ι X :=
+  integralSystemScalarIso l E L ι X
+
+private theorem integralCompositionFiniteScalar_square {X Y : Scheme.{u}}
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (f : X ⟶ Y)
+    (K : sfIntegralConstructibleCategory l E Y) :
+    (integralSystemReduction l L X).map (integralPullbackScalarComparison l E L ι f K).hom ≫
+        (integralPullbackSystemIso l L f).hom.app
+          ((sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+            E L ι Y).obj K) ≫
+        (finiteSystemDerivedPullback (integralSystemRings l L)
+          (integralSystemTransition l L) f).map
+            ((integralCompositionFiniteScalarIso l E L ι Y).hom.app K) =
+      (integralCompositionFiniteScalarIso l E L ι X).hom.app
+          ((constructibleIntegralPullback l E f).obj K) ≫
+        (integralCompositionFiniteScalar l E L ι X).map
+          ((integralPullbackSystemIso l E f).hom.app K) ≫
+        (integralCompositionFiniteScalarPullback l E L ι f).hom.app
+          ((integralSystemReduction l E Y).obj K) :=
+  integralPullbackSystemIso_scalar l E L ι f K
+
 private theorem scalar_comp_naturality {C D D' B : Type*}
     [Category C] [Category D] [Category D'] [Category B]
     (F : C ⥤ D) (G : D ⥤ B) (F' : C ⥤ D') (G' : D' ⥤ B)
@@ -161,12 +196,12 @@ private theorem integralComparisonSystemScalarPullback_finite_naturality
     (integralCompositionFiniteScalar l E L ι X).map
         ((finiteSystemDerivedPullback (integralSystemRings l E)
           (integralSystemTransition l E) f).map a) ≫
-        (integralComparisonSystemScalarPullback l E L ι f).hom.app N =
-      (integralComparisonSystemScalarPullback l E L ι f).hom.app M ≫
+        (integralCompositionFiniteScalarPullback l E L ι f).hom.app N =
+      (integralCompositionFiniteScalarPullback l E L ι f).hom.app M ≫
         (finiteSystemDerivedPullback (integralSystemRings l L)
           (integralSystemTransition l L) f).map
             ((integralCompositionFiniteScalar l E L ι Y).map a) := by
-  exact (integralComparisonSystemScalarPullback l E L ι f).hom.naturality a
+  exact (integralCompositionFiniteScalarPullback l E L ι f).hom.naturality a
 
 private theorem integralComparisonSystemScalarPullback_finite_mixed
     {V W Z : Scheme.{u}}
@@ -177,13 +212,13 @@ private theorem integralComparisonSystemScalarPullback_finite_mixed
     (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
     (integralCompositionFiniteScalar l E L ι Z).map
         ((integralComparisonSystemComposition l E h k).hom.app M) ≫
-      (integralComparisonSystemScalarPullback l E L ι h).hom.app
+      (integralCompositionFiniteScalarPullback l E L ι h).hom.app
         ((finiteSystemDerivedPullback (integralSystemRings l E)
           (integralSystemTransition l E) k).obj M) ≫
       (finiteSystemDerivedPullback (integralSystemRings l L)
         (integralSystemTransition l L) h).map
-          ((integralComparisonSystemScalarPullback l E L ι k).hom.app M) =
-      (integralComparisonSystemScalarPullback l E L ι (h ≫ k)).hom.app M ≫
+          ((integralCompositionFiniteScalarPullback l E L ι k).hom.app M) =
+      (integralCompositionFiniteScalarPullback l E L ι (h ≫ k)).hom.app M ≫
         (integralComparisonSystemComposition l L h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
   exact NatTrans.congr_app
@@ -234,14 +269,14 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
   let T := (integralPullbackSystemIso l L h).app
       ((constructibleIntegralPullback l L k).obj (SV.obj K)) ≪≫
     (UL h).mapIso ((integralPullbackSystemIso l L k).app (SV.obj K)) ≪≫
-    (UL h).mapIso ((UL k).mapIso ((integralSystemScalarIso l E L ι V).app K))
+    (UL h).mapIso ((UL k).mapIso ((integralCompositionFiniteScalarIso l E L ι V).app K))
   apply (cancel_mono T.hom).1
   have N1 := scalar_comp_naturality
     (constructibleIntegralPullback l L h) (integralSystemReduction l L Z)
     (integralSystemReduction l L W) (UL h) (integralPullbackSystemIso l L h).hom
     (integralPullbackScalarComparison l E L ι k K).hom
-  have IIIk := integralPullbackSystemIso_scalar l E L ι k K
-  have IIIh := integralPullbackSystemIso_scalar l E L ι h
+  have IIIk := integralCompositionFiniteScalar_square l E L ι k K
+  have IIIh := integralCompositionFiniteScalar_square l E L ι h
     ((constructibleIntegralPullback l E k).obj K)
   have Ng := integralComparisonSystemScalarPullback_finite_naturality l E L ι h
     ((integralPullbackSystemIso l E k).hom.app K)
@@ -249,17 +284,17 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
       E L ι Z) (integralSystemReduction l L Z)
     (integralSystemReduction l E Z) (integralCompositionFiniteScalar l E L ι Z)
-    (integralSystemScalarIso l E L ι Z).hom
+    (integralCompositionFiniteScalarIso l E L ι Z).hom
     (((integralPullbackComposition l E).choose h k).hom.app K)
   have CE := (integralPullbackComposition l E).choose_spec.2.2 h k K
   simp only [integralPullbackSystemComparison_choose] at CE
   have mix := integralComparisonSystemScalarPullback_finite_mixed l E L ι h k
     ((integralSystemReduction l E V).obj K)
-  have IIIhk := integralPullbackSystemIso_scalar l E L ι (h ≫ k) K
+  have IIIhk := integralCompositionFiniteScalar_square l E L ι (h ≫ k) K
   have Na := scalar_right_comp_naturality (UL (h ≫ k)) (UL k) (UL h)
     (finiteSystemDerivedComposition (integralSystemRings l L)
       (integralSystemTransition l L) h k).hom
-    ((integralSystemScalarIso l E L ι V).hom.app K)
+    ((integralCompositionFiniteScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
   simp only [integralPullbackSystemComparison_choose] at CL
   have eE := finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k
