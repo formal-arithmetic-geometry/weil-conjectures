@@ -412,6 +412,7 @@ private theorem tensor_transition_apply (n : ℕ)
       ((((unrestrictedIntegralTransition l E X n).app Q).f q).val.app V y) :=
   (integralOperationsTensorTransition_existsUnique l E X n).exists.choose_spec P Q p q V x y
 
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- Compare the two scalar presentations and their maps on total summand generators.
 /-- The generator-normalized total scalar-extension comparison commutes with the
