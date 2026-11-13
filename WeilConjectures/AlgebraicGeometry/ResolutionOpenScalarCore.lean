@@ -103,6 +103,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
     dsimp only at hs
     dsimp only [h] at hb'
     simp only [hb', map_pow] at hs
+    dsimp only [eA, raw, A, Q, H, eB, B, E, K, b, Y]
     exact hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj
       R.resolution.cocomplex))) :

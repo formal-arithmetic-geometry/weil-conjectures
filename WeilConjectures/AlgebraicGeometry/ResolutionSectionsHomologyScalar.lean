@@ -47,7 +47,6 @@ attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option profiler true in
 /-- The homology comparison of restricted section complexes is semilinear.
 Source: Stacks Project, Tags 01E4 and 01E5.
 (blueprint: lem-pc-resolution-sections-homology-scalar)

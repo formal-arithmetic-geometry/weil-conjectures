@@ -68,7 +68,6 @@ lemma le_of_image_preimage_ι_comp {W W' : X.Opens} (h : W' ≤ W) (V : T.Opens)
   rw [image_preimage_ι_comp, image_preimage_ι_comp]
   exact inf_le_inf_left _ h
 
-set_option profiler true in
 lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modules)
     (V : T.Opens) :
     (pushforwardRestrictMapApp f h M).app V =
