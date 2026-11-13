@@ -86,14 +86,15 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
             ((constructibleIntegralPullback l E f).obj M)
             ((constructibleIntegralPullback l E f).obj N)).hom) := by
   refine reducedPullbackTensorComposition_of_systemLaw
+    (DY := coefficientSequenceDerived l E Y) (DX := coefficientSequenceDerived l E X)
+    (DZ := coefficientSequenceDerived l E Z)
     (integralSystemReduction l E Y) (integralSystemReduction l E X)
     (integralSystemReduction l E Z)
     (constructibleIntegralPullback l E f) (constructibleIntegralPullback l E h)
     (constructibleIntegralPullback l E (h ≫ f))
-    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f)
-    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) h)
-    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E)
-      (h ≫ f))
+    (integralComparisonDerivedSequencePullback l E f)
+    (integralComparisonDerivedSequencePullback l E h)
+    (integralComparisonDerivedSequencePullback l E (h ≫ f))
     (constructibleIntegralTensor l E Y) (constructibleIntegralTensor l E X)
     (constructibleIntegralTensor l E Z)
     (pullbackTensorCalculus l E Y).systemClosed.tensor
