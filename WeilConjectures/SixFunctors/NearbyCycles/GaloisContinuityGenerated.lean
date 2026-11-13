@@ -96,6 +96,8 @@ theorem exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated [QuasiComp
         pullbackAction_comp_galoisLevelProjection h L' τ)
   have hG := congrArg Φ.map ((hU σ hσ).trans (hU 1 fun _ ↦ rfl).symm)
   simp only [Φ.map_comp] at hG
+  have : Epi (Φ.map
+      (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j)) := hj
   have hG' := (cancel_epi (Φ.map
     (((galoisTower Ω h).complexCocone (Profinite.continuousMapRingObj T₀) K).ι.app j))).1 hG
   have he (τ : Ω ≃ₐ[L] Ω) := congrArg Ψ.map
