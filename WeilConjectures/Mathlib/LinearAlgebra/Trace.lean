@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.Contraction
@@ -24,6 +25,10 @@ For endomorphisms `g` of `N` and `h` of `M` (free of finite rank), the endomorph
 (`LinearMap.trace_compLeft_compRight`). Consequently, if a perfect pairing `V × M → N`
 intertwines endomorphisms `F_V`, an automorphism `F_M` and `F_N`, then
 `tr(F_V) = tr(F_N) tr(F_M⁻¹)` (`LinearMap.trace_eq_mul_of_bijective`).
+
+For morphisms of `ModuleCat`, the trace is invariant under conjugation by an isomorphism
+(`ModuleCat.trace_hom_eq_of_iso`) and vanishes on zero modules
+(`ModuleCat.trace_hom_eq_zero_of_isZero`).
 -/
 
 @[expose] public section
@@ -129,3 +134,25 @@ theorem trace_llcomp_comp_lcomp (g : N →ₗ[R] N) (h : M →ₗ[R] M) :
 end Pairing
 
 end LinearMap
+
+namespace ModuleCat
+
+open CategoryTheory Limits
+
+variable {R : Type*} [CommRing R]
+
+/-- The trace of the endomorphism of a module induced by `f` through an isomorphism `e` is the
+trace of `f`. -/
+lemma trace_hom_eq_of_iso {M N : ModuleCat R} (e : M ≅ N) (f : M ⟶ M) (g : N ⟶ N)
+    (h : f ≫ e.hom = e.hom ≫ g) :
+    LinearMap.trace R M f.hom = LinearMap.trace R N g.hom := by
+  have hg : g = e.inv ≫ f ≫ e.hom := by rw [h, Iso.inv_hom_id_assoc]
+  rw [hg, ← LinearMap.trace_conj' f.hom e.toLinearEquiv]
+  rfl
+
+/-- The trace of an endomorphism of a zero module is zero. -/
+lemma trace_hom_eq_zero_of_isZero {M : ModuleCat R} (hM : IsZero M) (f : M ⟶ M) :
+    LinearMap.trace R M f.hom = 0 := by
+  rw [hM.eq_of_src f 0, ModuleCat.hom_zero, map_zero]
+
+end ModuleCat
