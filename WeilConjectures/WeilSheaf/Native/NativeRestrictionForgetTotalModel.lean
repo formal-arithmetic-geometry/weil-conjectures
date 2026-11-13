@@ -706,6 +706,14 @@ private theorem native_restriction_goal_proof
         DerivedCategory.Q.map (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
   let := hL
   intro hR sr hsr rho c _hc dU dZ P T hP hT
+  let : MonoidalCategory (CochainComplex
+      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
+  let : MonoidalCategory (CochainComplex
+      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ) := inferInstance
+  let : MonoidalCategory (DerivedCategory
+      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
+  let : MonoidalCategory (DerivedCategory
+      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)) := inferInstance
   have hdata := native_restriction_data k₀ l (Lα)
     hR sr rho c _hc
   let totalRestriction := hdata.choose
