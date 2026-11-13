@@ -246,7 +246,7 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     (finiteSystemComposition_heq_integralComparison l E h k)
   unfold finiteSystemDerivedComposition integralComparisonSystemComposition
   apply eq_of_heq
-  convert hh using 1
+  convert (config := { closePost := false }) hh using 2
 
 end Composition
 
