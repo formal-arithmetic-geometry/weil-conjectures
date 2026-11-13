@@ -420,6 +420,7 @@ private theorem nativeReductionMonoidal
         J, R, S, completedIntegralCommRingSheaf, totalTensor, coefficientTotalTensor,
         ordinaryTensor, CategoryTheory.Functor.uncurry_obj_obj,
         CategoryTheory.Functor.prod_obj] at ht hn ⊢
+      trace_state
       have hsquare := ht.trans hn
       trace "PH805: square composed"
       with_unfolding_all
