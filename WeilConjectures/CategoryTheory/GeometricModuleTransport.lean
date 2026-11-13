@@ -381,7 +381,6 @@ private theorem restrictHomEquiv_map
 
 end Helpers
 
-set_option maxHeartbeats 800000 in
 set_option trace.profiler true in
 -- The statement records every operation and its underlying comparison.
 
@@ -711,6 +710,12 @@ theorem geometric_module_transport
  := by
   dsimp only
   intro L V adj hL R S A eR addR mulR addA mulA hRing c
+  have : J.HasSheafCompose (CategoryTheory.forget CommRingCat.{u}) := inferInstance
+  have : K.HasSheafCompose (CategoryTheory.forget CommRingCat.{u}) := inferInstance
+  have : J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  have : K.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+  have : J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u}) := inferInstance
+  have : K.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u}) := inferInstance
   let : ∀ X Y : Sheaf J (Type u), HasBinaryProduct X Y := sheafHasBinaryProduct
   let : ∀ X Y : Sheaf K (Type u), HasBinaryProduct X Y := sheafHasBinaryProduct
   let : PreservesLimits V := adj.rightAdjoint_preservesLimits
