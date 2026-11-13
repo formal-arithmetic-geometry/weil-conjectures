@@ -313,13 +313,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   let ff := Localization.fullyFaithfulWhiskeringLeft
     ((PY.ι ⋙ DerivedCategory.Q).prod (PY.ι ⋙ DerivedCategory.Q)) (V.prod V)
     (coefficientSequenceDerived l E Z)
-  refine tensorComparisonDescent_comp
-    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E Y) ℤ ⥤
-      coefficientSequenceDerived l E Y)
-    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E X) ℤ ⥤
-      coefficientSequenceDerived l E X)
-    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E Z) ℤ ⥤
-      coefficientSequenceDerived l E Z)
+  refine tensorComparisonDescent_comp DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
     ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ))
     ((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ))
     ((integralComparisonSequencePullback l E (h ≫ f)).mapHomologicalComplex (.up ℤ))
@@ -354,15 +348,15 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E f P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    apply hs
+    with_reducible exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E h P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    apply hs
+    with_reducible exact hs
   · intro P Q hP hQ
     have hs := integralSystemTensorComparison_square l E (h ≫ f) P Q hP hQ
     dsimp only [pullbackTensorSystemModel, CoefficientTensorModels.iso, Iso.app_hom] at hs
-    apply hs
+    with_reducible exact hs
   · intro P
     dsimp only [integralComparisonSystemComposition, integralComparisonDerivedSequencePullback]
     rw [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Category.assoc,
@@ -371,7 +365,7 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   · intro P Q
     have hc := CompletedQuotient.comparison_composition l E h f P Q
     simp only [← strictTensorComparison_app, Iso.app_hom] at hc
-    apply hc
+    with_reducible exact hc
   · intro P _
     infer_instance
   · intro P _
