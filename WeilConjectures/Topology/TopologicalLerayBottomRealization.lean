@@ -128,7 +128,7 @@ theorem exists_topological_leray_bottom_realization
             I.extMk z (p + 1) rfl hz)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat
         (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}),
-      ∃ e₂ : ∀ a b : ℕ, (E.page 2).X (a, b) ≅
+      ∃ e₂ : ∀ a b : ℕ, (E.page 2 le_rfl).X (a, b) ≅
           (TopCat.Sheaf.pushforwardAb f).rightDerived b ⋙ HX a,
         (∀ a b : ℕ, ∃ (R : ℤ) (_hR : 2 ≤ R), ∀ (r : ℤ) (hr : R ≤ r),
           Nonempty ((E.page r (by omega)).X (a, b) ≅ E.pageInfinity (a, b))) ∧
@@ -137,7 +137,7 @@ theorem exists_topological_leray_bottom_realization
           (∀ n, (T n).step (n + 1) = ⊥) ∧
           ∃ g : ∀ p q : ℕ, (T (p + q)).gradedPiece p ≅ E.pageInfinity (p, q),
             ∃ e₀ : ∀ p : ℕ,
-                TopCat.Sheaf.pushforwardAb f ⋙ HX p ≅ (E.page 2).X (p, 0),
+                TopCat.Sheaf.pushforwardAb f ⋙ HX p ≅ (E.page 2 le_rfl).X (p, 0),
               (∀ p, (e₀ p).hom =
                 Functor.whiskerRight (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero
                   (HX p) ≫ (e₂ p 0).inv) ∧
@@ -147,7 +147,7 @@ theorem exists_topological_leray_bottom_realization
                   (E.page r hr).iCycles (p, 0) ≫ t p r hr =
                     (E.page r hr).homologyπ (p, 0) ≫ (E.iso r (r + 1) (p, 0) rfl hr).hom) ∧
                 ∃ b : ∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
-                    (E.page 2).X (p, 0) ⟶ (E.page r hr).X (p, 0),
+                    (E.page 2 le_rfl).X (p, 0) ⟶ (E.page r hr).X (p, 0),
                   (∀ p, b p 2 (by omega) = 𝟙 _) ∧
                   (∀ (p : ℕ) (r : ℤ) (hr : 2 ≤ r),
                     b p (r + 1) (by omega) = b p r hr ≫ t p r hr) ∧
