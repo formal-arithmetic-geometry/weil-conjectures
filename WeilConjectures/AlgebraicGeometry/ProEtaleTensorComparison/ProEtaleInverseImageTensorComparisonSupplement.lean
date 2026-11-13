@@ -169,8 +169,18 @@ noncomputable abbrev inverseRingMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     {R S : Rings Y} (a : R ⟶ S) :=
   (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map a
 
-set_option maxHeartbeats 800000 in
--- Elaborate the two scalar actions in the sectionwise bilinear pairing.
+-- Restrict a tensor pairing at the level of modules, before using it on sheaf sections.
+private noncomputable def restrictedTensorPairing {A B : Type u} [CommRing A] [CommRing B]
+    (c : A →+* B) (M N P : ModuleCat.{u} B) (f : TensorProduct B M N →ₗ[B] P) :
+    (ModuleCat.restrictScalars c).obj M →ₗ[A]
+      (ModuleCat.restrictScalars c).obj N →ₗ[A] (ModuleCat.restrictScalars c).obj P :=
+  let b := (TensorProduct.mk B M N).compr₂ f
+  LinearMap.mk₂ A (fun x y ↦ b x y)
+    (fun x y z ↦ LinearMap.congr_fun (b.map_add x y) z)
+    (fun r x y ↦ LinearMap.congr_fun (b.map_smul (c r) x) y)
+    (fun x y z ↦ (b x).map_add y z)
+    (fun r x y ↦ (b x).map_smul (c r) y)
+
 /-- The coefficient quotient is uniquely fixed by local pure tensors.
 Source: Stacks, Section 03EK; clause 2
 (blueprint: lem-pur-proetale-inverse-image-tensor-comparison).
@@ -192,44 +202,9 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
       ((restrict a).obj M).val.obj U →ₗ[R.obj.obj U]
         ((restrict a).obj N).val.obj U →ₗ[R.obj.obj U]
           ((restrict a).obj (tensor M N)).val.obj U :=
-    { toFun := fun x ↦
-        { toFun := fun y ↦ pure M N U.unop x y
-          map_add' := by
-            intro y z
-            change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-              (x ⊗ₜ[S.obj.obj U] (y + z)) = _
-            rw [TensorProduct.tmul_add]
-            exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_add _ _
-          map_smul' := by
-            intro r y
-            change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-              (x ⊗ₜ[S.obj.obj U] (a.hom.app U r • (show N.val.obj U from y))) =
-              a.hom.app U r •
-                ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-                  (x ⊗ₜ[S.obj.obj U] y)
-            rw [TensorProduct.tmul_smul]
-            exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_smul _ _ }
-      map_add' := by
-        intro x y
-        apply LinearMap.ext
-        intro z
-        change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          ((x + y) ⊗ₜ[S.obj.obj U] z) = _
-        rw [TensorProduct.add_tmul]
-        exact ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_add _ _
-      map_smul' := by
-        intro r x
-        apply LinearMap.ext
-        intro y
-        change ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          ((a.hom.app U r • (show M.val.obj U from x)) ⊗ₜ[S.obj.obj U] y) =
-            a.hom.app U r •
-              ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-                (x ⊗ₜ[S.obj.obj U] y)
-        exact (congrArg ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U)
-          (TensorProduct.smul_tmul' (R := S.obj.obj U) (a.hom.app U r)
-            (show M.val.obj U from x) (show N.val.obj U from y)).symm).trans
-              (((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom.map_smul _ _) }
+    restrictedTensorPairing (a.hom.app U).hom (M.val.obj U) (N.val.obj U)
+      ((tensor M N).val.obj U)
+      ((adjS.unit.app (siteTensorPresheaf M.val N.val)).app U).hom
   let q : siteTensorPresheaf ((restrict a).obj M).val ((restrict a).obj N).val ⟶
       ((restrict a).obj (tensor M N)).val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -252,11 +227,7 @@ theorem coefficientQuotient_exists {X : Scheme.{u}} {R S : Rings X} (a : R ⟶ S
     intro V s t
     have h := (adj.homEquiv _ ((restrict a).obj (tensor M N))).apply_symm_apply q
     rw [Adjunction.homEquiv_unit] at h
-    have hh := congrArg (fun k ↦ k.app (op V) (s ⊗ₜ[R.obj.obj (op V)] t)) h
-    change p.val.app (op V) (pure ((restrict a).obj M) ((restrict a).obj N) V s t) =
-      TensorProduct.lift (β (op V)) (s ⊗ₜ[R.obj.obj (op V)] t) at hh
-    rw [TensorProduct.lift.tmul] at hh
-    exact hh
+    exact congrArg (fun k ↦ k.app (op V) (s ⊗ₜ[R.obj.obj (op V)] t)) h
   refine ⟨p, hp, ?_⟩
   intro p' hp'
   apply (adj.homEquiv _ ((restrict a).obj (tensor M N))).injective
@@ -384,8 +355,6 @@ section TensorPairing
 
 universe uC vC uD vD r
 
-set_option maxHeartbeats 500000 in
--- Construct and sheafify the sectionwise bilinear pairing.
 /-- Pair two maps into module pushforwards, then use the sectionwise tensor universal
 property and module sheafification. The uniqueness is the same universal property.
 Source: Stacks Project, Modules on Sites, Section 03EK and Tag 03D7. -/
@@ -433,83 +402,10 @@ private theorem tensorPushforwardPairing_exists
   let β (U : Cᵒᵖ) : M.val.obj U →ₗ[R.obj.obj U]
       N.val.obj U →ₗ[R.obj.obj U]
         (T.obj H).val.obj U :=
-    { toFun := fun x ↦
-        { toFun := fun y ↦ siteSheafTensorTmul P Q (F.op.obj U)
-            (ηM.val.app U x) (ηN.val.app U y)
-          map_add' := by
-            intro y z
-            change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U (y + z)) = _
-            rw [(ηN.val.app U).hom.map_add, TensorProduct.tmul_add]
-            exact ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U)).hom.map_add _ _
-          map_smul' := by
-            intro r y
-            have hn := (ηN.val.app U).hom.map_smul r y
-            change ηN.val.app U (r • y) =
-              a.hom.app U r •
-                (show Q.val.obj (F.op.obj U) from ηN.val.app U y) at hn
-            change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U (r • y)) =
-              a.hom.app U r •
-                ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-                  (F.op.obj U))
-                    (ηM.val.app U x ⊗ₜ[S.obj.obj
-                      (F.op.obj U)] ηN.val.app U y)
-            rw [hn]
-            exact (congrArg ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (TensorProduct.tmul_smul
-                  (R := S.obj.obj (F.op.obj U))
-                  (R' := S.obj.obj (F.op.obj U))
-                  (show S.obj.obj (F.op.obj U) from
-                    a.hom.app U r)
-                  (show P.val.obj (F.op.obj U) from ηM.val.app U x)
-                  (show Q.val.obj (F.op.obj U) from ηN.val.app U y))).trans
-              (((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-                (F.op.obj U)).hom.map_smul _ _) }
-      map_add' := by
-        intro x y
-        apply LinearMap.ext
-        intro z
-        change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (ηM.val.app U (x + y) ⊗ₜ[S.obj.obj
-              (F.op.obj U)] ηN.val.app U z) = _
-        rw [(ηM.val.app U).hom.map_add, TensorProduct.add_tmul]
-        exact ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U)).hom.map_add _ _
-      map_smul' := by
-        intro r x
-        apply LinearMap.ext
-        intro y
-        have hm := (ηM.val.app U).hom.map_smul r x
-        change ηM.val.app U (r • x) =
-          a.hom.app U r •
-            (show P.val.obj (F.op.obj U) from ηM.val.app U x) at hm
-        change ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (ηM.val.app U (r • x) ⊗ₜ[S.obj.obj
-              (F.op.obj U)] ηN.val.app U y) =
-          a.hom.app U r •
-            ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U))
-                (ηM.val.app U x ⊗ₜ[S.obj.obj
-                  (F.op.obj U)] ηN.val.app U y)
-        rw [hm]
-        exact (congrArg ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-          (F.op.obj U))
-            (TensorProduct.smul_tmul' (R := S.obj.obj (F.op.obj U))
-              (R' := S.obj.obj (F.op.obj U))
-                (show S.obj.obj (F.op.obj U) from a.hom.app U r)
-                (show P.val.obj (F.op.obj U) from ηM.val.app U x)
-                (show Q.val.obj (F.op.obj U) from ηN.val.app U y)).symm).trans
-            (((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app
-              (F.op.obj U)).hom.map_smul _ _) }
+    (restrictedTensorPairing (a.hom.app U).hom (P.val.obj (F.op.obj U))
+      (Q.val.obj (F.op.obj U)) (H.val.obj (F.op.obj U))
+      ((adjX.unit.app (siteTensorPresheaf P.val Q.val)).app (F.op.obj U)).hom).compl₁₂
+        (ηM.val.app U).hom (ηN.val.app U).hom
   let q : siteTensorPresheaf M.val N.val ⟶
       (T.obj H).val :=
     { app := fun U ↦ ModuleCat.ofHom
@@ -541,11 +437,7 @@ private theorem tensorPushforwardPairing_exists
           (ηM.val.app (op V) x) (ηN.val.app (op V) y) := by
     have h := (adj.homEquiv _ (T.obj H)).apply_symm_apply q
     rw [Adjunction.homEquiv_unit] at h
-    have hh := congrArg (fun z ↦ z.app (op V) (x ⊗ₜ[R.obj.obj (op V)] y)) h
-    change k.val.app (op V) (siteSheafTensorTmul M N (op V) x y) =
-      TensorProduct.lift (β (op V)) (x ⊗ₜ[R.obj.obj (op V)] y) at hh
-    rw [TensorProduct.lift.tmul] at hh
-    exact hh
+    exact congrArg (fun z ↦ z.app (op V) (x ⊗ₜ[R.obj.obj (op V)] y)) h
   refine ⟨k, hk, ?_⟩
   intro k' hk'
   apply (adj.homEquiv _ (T.obj H)).injective
