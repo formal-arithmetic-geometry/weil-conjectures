@@ -342,7 +342,7 @@ theorem scalarTensorRoosCoordinates
             (((integralComparisonSequenceScalarModel l L F j X).E.mapHomologicalComplex
               (.up ℤ)).obj D)).asFunctor.obj (op m)) n).f i) ≫
         ((wa ≪≫ qEF).hom.app (op n)).f i).val.app U) _ = _
-    rw [roosMap_level_iso_hom]
+    erw [roosMap_level_iso_hom _ _ (wa ≪≫ qEF) n i]
     change ((((completedScalarChainComparison l E F (j.comp ι) X).app P).f i ≫
       (CochainComplex.mappingCocone.fst
         (completedScalarRoosEndomorphism l E F (j.comp ι) X P)).f i ≫
