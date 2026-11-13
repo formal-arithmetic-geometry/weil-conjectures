@@ -205,10 +205,15 @@ private theorem fibre_pullback_pushforward {Z X : TopCat.{u}} (f : Z ⟶ X)
       inv_hom_id := by apply Sheaf.hom_ext; exact IsIso.inv_hom_id η }
   exact ⟨e, fun _ _ ↦ rfl⟩
 
+-- Cache the sheafification instances used repeatedly by the constant sheaves and lifting
+-- torsors below, so elaboration does not repeat the general instance search at each occurrence.
+local instance hasSheafify_addCommGrp_opens (Y : TopCat.{u}) :
+    HasSheafify (Opens.grothendieckTopology Y) AddCommGrpCat.{u} := inferInstance
 
-set_option maxHeartbeats 600000 in
+local instance wEqualsLocallyBijective_addCommGrp_opens (Y : TopCat.{u}) :
+    (Opens.grothendieckTopology Y).WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
+
 set_option trace.profiler true in
--- The explicit pullback and lifting-torsor types require extra definitional reduction.
 /-- Direct image of an extension, pulled back along restriction of constant integer
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
 The isomorphism is specified on sections by the first projection of the pullback, and it
