@@ -53,7 +53,7 @@ noncomputable def unitKFlat : CochainComplex.KFlat C :=
 
 end TensorCommShift₂
 
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Measured 310623 heartbeats on Lean v4.35.0-rc3 for the K-flat unit shift comparison.
 open TensorCommShift₂ in
 lemma leftUnitor_commShift (n : ℤ) :
@@ -106,7 +106,7 @@ lemma leftUnitor_commShift (n : ℤ) :
     rw [← Functor.map_comp_assoc, hF]
   exact hG
 
-set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Elaborating the shift of the K-flat unit complex is slow.
 open TensorCommShift₂ in
 lemma rightUnitor_commShift (n : ℤ) :
