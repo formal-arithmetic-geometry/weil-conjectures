@@ -209,6 +209,11 @@ private theorem scalarShift
       dsimp only [r, Iso.refl_hom, NatTrans.id_app, Iso.refl_inv,
         Functor.associator_hom_app, Functor.associator_inv_app]
       simp only [Category.id_comp, Category.comp_id, Category.assoc]
+      change ((e.hom.app (DerivedCategory.Q.obj P.obj) ≫ 𝟙 _ ≫
+        (pbcAmbientScalarExtension l Ω T h).map (aE.inv.app K) ≫
+        (𝟙 _ ≫ 𝟙 _) ≫ ((b h).hom.app K).hom ≫ aL.hom.app ((U l Ω T h).obj K)) ≫
+        dL.map t) ≫ f = _
+      simp only [Category.id_comp, Category.comp_id, Category.assoc]
       have hl := hlift h P hP
       let z := ((b h).hom.app K).hom ≫ aL.hom.app ((U l Ω T h).obj K) ≫
         dL.map t ≫ f
