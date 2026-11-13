@@ -55,7 +55,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option profiler true in
 /-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
 constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
 square of schemes. -/
@@ -79,7 +78,6 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquare
     pullbackSquareComparison_hom_app Λ _ K.obj, ObjectProperty.FullSubcategory.comp_hom,
     hinv f' g, boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K, e]
 
-set_option profiler true in
 /-- Transport the ambient comparison of components along an equality of square isomorphisms. -/
 private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_of_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -91,7 +89,6 @@ private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_of_eq
   exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
     ℓ Λ sq K).trans (congrArg (fun e ↦ e.hom.app K.obj) hθ)
 
-set_option profiler true in
 /-- The base change map of the ambient derived categories of module objects over `ℚ̲̄_ℓ` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
 constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
@@ -121,7 +118,8 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
     (boundedConstructiblePullbackSquareComparison_hom_app_hom_of_eq
       ℓ (Profinite.padicAlgClRingObj ℓ) sq sq'
-      (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq')) K
+      (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso
+        (Profinite.padicAlgClRingObj ℓ) sq')) K
   rw [← key, ObjectProperty.isIso_hom_iff]
   convert hres using 3
   all_goals rfl
