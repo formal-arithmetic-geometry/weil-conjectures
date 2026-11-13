@@ -718,6 +718,14 @@ private theorem native_restriction_chain
           (nativeOrdinaryRestrictionTotal k₀ l j P₀ T₀).hom := by
   let := hL
   intro F FU R RP RT P₀ T₀ tr cZ cU restriction_summands hcZ hcU
+  have : HasColimitsOfSize.{0, 0}
+      (ProEtale.AdicSheaf l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+    hasColimitsOfSizeShrink _
+  have : HasColimitsOfSize.{0, 0}
+      (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
+    hasColimitsOfSizeShrink _
+  have : HasColimitsOfSize.{0, 0} (ProEtaleWeilSheaf k₀ l Z) :=
+    hasColimitsOfSizeShrink _
   let G := ProEtale.upperStar (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀))))
   let : G.Braided :=
@@ -750,9 +758,6 @@ private theorem native_restriction_chain
   conv_lhs =>
     arg 1
     rw [hs]
-  change r.hom ≫ _ =
-    R.map (F.map (HomologicalComplex.ιMapBifunctor P T
-      (nativeTensorBifunctor k₀ l Z).flip (.up ℤ) p q n hpq)) ≫ R.map (cZ.hom.f n)
   apply (cancel_epi r.inv).1
   conv_lhs => rw [Iso.inv_hom_id_assoc]
   apply Mod.tensorLeft_obj_hom_ext
