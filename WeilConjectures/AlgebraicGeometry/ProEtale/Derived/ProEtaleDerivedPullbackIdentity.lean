@@ -249,6 +249,13 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
     exact (ProEtaleTensorComparison.moduleId_exists R M).exists
   choose d hd using hd
   let e (M : proEtaleRingModules X R) := T.mapIso (d M) ≪≫ cancelScalarTransport c M
+  have he_unit (M : proEtaleRingModules X R) (V : X.ProEt) (s : M.val.obj (op V)) :
+      (e M).hom.val.app (op ((proEtaleBaseChange (𝟙 X)).obj V))
+        (ProEtaleTensorComparison.inverseSection (𝟙 X) M V s) =
+      M.val.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V).op s :=
+    hd M V s
+  -- Subsequent section calculations use only the normalization of this isomorphism.
+  clear_value e
   have he (M : proEtaleRingModules X R) (U : X.ProEt) (m : M.val.obj (op U)) :
       (e M).inv.val.app (op U) m = proEtaleIdentityModuleCoprojection X A M U m := by
     have : IsIso ((e M).hom.val.app (op U)) :=
@@ -266,7 +273,7 @@ private theorem identityModule_exists (X : Scheme.{u}) (A : Type u) [CommRing A]
             ((e M).hom.val.app (op ((proEtaleBaseChange (𝟙 X)).obj U)) z) :=
           PresheafOfModules.naturality_apply (e M).hom.val (p.inv.app U).op z
         _ = M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m) :=
-          congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (hd M U m)
+          congrArg (fun z ↦ M.val.map (p.inv.app U).op z) (he_unit M U m)
         _ = M.val.map ((p.hom.app U).op ≫ (p.inv.app U).op) m :=
           (M.val.map_comp_apply _ _ m).symm
         _ = m := by
