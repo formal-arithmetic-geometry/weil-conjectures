@@ -220,8 +220,6 @@ private theorem mapComplex_eqToIso_symm
   subst G
   rfl
 
-set_option profiler true in
--- Elaborate the tensor-generator type across both sequence inverse-image interfaces.
 /-- Generator normalization after transport across the sequence pullback bridge.
 Source: Stacks 07A4 and 0941; the generator-normalization step of canonical
 comparison identification (blueprint: lem-pur-completed-comparison-generator-transport).
@@ -294,8 +292,7 @@ theorem completedComparisonGeneratorTransport {X Y : Scheme.{u}} (f : X ⟶ Y)
   specialize hs P Q p q k hpq (n, V) x y
   rw [hbridge] at hs
   dsimp only [rI, rP] at hs ⊢
-  simp only [Functor.mapIso_hom, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
-    Iso.app_hom, Iso.app_inv, Iso.prod_hom] at hs
+  simp only [Iso.trans_hom, Iso.symm_hom] at hs
   dsimp only [sequenceDirect, pullbackTensorSequenceDirect,
     pullbackTensorSequenceAdjunction, pullbackTensorSequenceInverse,
     IntegralCoherence.PullbackComparison.tensor] at hs ⊢
