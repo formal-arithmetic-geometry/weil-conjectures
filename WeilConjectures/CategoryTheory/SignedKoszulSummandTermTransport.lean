@@ -61,7 +61,7 @@ private theorem signed_tensor_degree_transport
         (MonoidalCategory.tensorLeft (K.X p)).map
           (s ≫ β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
         CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
-      (ρ ((if Even p then 1 else -1) * b)) • (K.XIsoOfEq hp).hom ≫
+      ((ρ ((if Even p then 1 else -1) * b)) • (K.XIsoOfEq hp).hom) ≫
         (MonoidalCategory.rightUnitor (K.X p')).inv ≫
         MonoidalCategory.tensorHom (𝟙 _) β ≫
         CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p' n' t h' := by
