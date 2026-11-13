@@ -90,6 +90,7 @@ lemma etaleIsoTorsorVal_vadd {U : X.Etaleᵒᵖ} (a : X.gmSheaf.obj.obj U)
         etaleIsoTorsorVal L x :=
   rfl
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- **The torsor `Isom(𝒪, L)` determines `L`.** An isomorphism of `𝔾ₘ`-torsors
@@ -163,6 +164,7 @@ lemma nonempty_iso_of_etaleIsoTorsor_iso
     @asIso _ _ _ _ σ.down hiso ≪≫
     (Cat.Hom.toNatIso (modulesPseudofunctor.mapId _)).app L'⟩
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- Isomorphic modules have isomorphic torsors of trivialisations. -/
