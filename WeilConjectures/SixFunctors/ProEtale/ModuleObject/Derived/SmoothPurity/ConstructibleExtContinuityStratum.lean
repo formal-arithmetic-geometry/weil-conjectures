@@ -533,6 +533,8 @@ private theorem qcqsCostalkModel
   have : PreservesColimitsOfShape I (CondensedRing.upperStar Λ j) :=
     (CondensedRing.upperStarLowerStarAdjunction Λ j).leftAdjoint_preservesColimits
       |>.preservesColimitsOfShape
+  have : HasColimit (J ⋙ H.mapHomologicalComplex (.up ℤ)) :=
+    HasColimitsOfShape.has_colimit _
   have hH : QuasiIso (colimit.desc (J ⋙ H.mapHomologicalComplex (.up ℤ))
       ((H.mapHomologicalComplex (.up ℤ)).mapCocone c)) := by
     exact quasiIso_desc_mapCocone (CondensedRing.upperStar Λ j)
@@ -630,6 +632,9 @@ private theorem qcqsFiniteFreeHomContinuity
     rw [CochainComplex.isStrictlyGE_iff]
     intro r hr
     exact H.map_isZero (ha i r hr)
+  have : HasColimit (M ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
+    HasColimitsOfShape.has_colimit _
   have hT : IsIso (condensedContinuityComparison M a T) :=
     condensed_qcqs_globalSections_continuity Λ X M a (fun i r hr ↦ by
       let : CochainComplex.IsStrictlyGE (M.obj i) a := hb i
