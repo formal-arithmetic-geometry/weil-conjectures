@@ -45,11 +45,9 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   [HasCompactification f'] [QuasiCompact f'] [HasInvertibleExponent Λ X]
   [HasInvertibleExponent Λ X'] {k k' : Type u} [Field k] [Field k']
 
-/-- Blueprint `proposition-compatibility-purity-base-change`, the orientation part: the canonical
-orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and `θ_{f'}`
+/-- The canonical orientations `θ_f : Rf^! Λ_Y ≅ Λ_X(d)[2d]` and `θ_{f'}`
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`) are compatible with the exceptional base
-change `Lg'^* Rf^! ⟶ Rf'^! Lg^*` and the pullback of the Tate twist. Each step of the diagonal
-construction of the orientation commutes with base change. -/
+change `Lg'^* Rf^! ⟶ Rf'^! Lg^*` and the pullback of the Tate twist. -/
 theorem dualizingComplexTwistShiftIso_baseChange (sq : IsPullback g' f' f g)
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
     (aY' : Y' ⟶ Spec (.of k')) [IsSeparated aY'] [LocallyOfFiniteType aY'] :

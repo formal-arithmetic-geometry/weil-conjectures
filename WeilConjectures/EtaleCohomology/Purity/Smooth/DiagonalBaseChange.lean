@@ -75,7 +75,7 @@ lemma isPullback_diagonal_fst_map :
 end Geometry
 
 -- `rfl` compares the tensor unit of `constantComplex` with the one inside the definition, which
--- needs a deep (but fast: elaboration and type checking well below 0.1 s, measured) recursion.
+-- needs a deep (but fast) recursion.
 set_option maxRecDepth 20000 in
 /-- The unfolding of
 `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`. -/
@@ -167,8 +167,7 @@ theorem sectionInvariantDiagonalIso_baseChange
 set_option maxRecDepth 20000 in
 /-- The comparison `Le^* ω_{p₁} ≅ ω_{p₁'}` of
 `AlgebraicGeometry.Etale.dualizingComplexPullbackFstBaseChangeIso` induced by the exceptional base
-change `Lg'^* ω_f ≅ ω_{f'}` is the exceptional base change of `p₁` at the unit. Both are the
-exceptional base change of the rectangle `p₁' / f`, by horizontal pasting. -/
+change `Lg'^* ω_f ≅ ω_{f'}` is the exceptional base change of `p₁` at the unit. -/
 theorem dualizingComplexPullbackFstBaseChangeIso_hom_eq :
     (dualizingComplexPullbackFstBaseChangeIso Λ sq d
         (dualizingComplexBaseChangeIso Λ sq d)).hom =

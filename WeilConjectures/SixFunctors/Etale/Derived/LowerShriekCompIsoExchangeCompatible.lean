@@ -22,6 +22,8 @@ pasting are compatible with these composition isomorphisms
 (`AlgebraicGeometry.Etale.exchangeCompCompatible_rightDerivedLowerShriekCompIso`), also after
 transport along equalities `f ≫ g = h` (`AlgebraicGeometry.Etale.exchangeCompCompatible_of_eq`).
 
+## Implementation details
+
 The identity and tower laws of the comparisons of compactifications hold for any schemes: they
 are those of the private compact-support formalism of
 `WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement`,
