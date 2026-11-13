@@ -92,7 +92,7 @@ private theorem adjunction_counit_factorization_triangle
   rw [← adj.homEquiv_naturality_right, h, ← adj.homEquiv_symm_id]
   exact Equiv.apply_symm_apply _ _
 
-set_option trace.profiler true in
+set_option profiler true in
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
 performs the affine inverse calculation and the passage from affine opens to sheaves.
@@ -165,54 +165,58 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
 (∀ F : U.Modules, F.IsQuasicoherent → IsIso (α.app F)) ∧
             (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent → IsIso (β.app G)) := by
   classical
+  let RA := 𝓡 A
+  let Rf : U.Modules ⥤ SheafOfModules.{u} RA := R
+  let Sf : SheafOfModules.{u} RA ⥤ X.Modules := S
+  let adj := adj₀
   have hA : (Scheme.CommAlgebraSheaf.toModule (Under.mk ρ)).IsQuasicoherent := by
     have := IsSeparated.of_isAffineHom f
     have := SheafOfModules.isQuasicoherent_unit.{u, u, u} («R» := U.ringCatSheaf)
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f
       (SheafOfModules.unit U.ringCatSheaf)
-  have hβ (G : SheafOfModules.{u} (𝓡 A)) (hG : G.IsQuasicoherent) :
+  have hβ (G : SheafOfModules.{u} RA) (hG : G.IsQuasicoherent) :
       IsIso (β.app G) := by
     have hBasis : Opens.IsBasis (Set.range (fun V : X.affineOpens ↦ V.1)) := by
       rw [Subtype.range_coe]
       exact X.isBasis_affineOpens
-    have : IsIso ((SheafOfModules.toSheaf (𝓡 A)).map (β.app G)) := by
+    have : IsIso ((SheafOfModules.toSheaf RA).map (β.app G)) := by
       apply TopCat.Sheaf.isIso_iff_isIso_basis hBasis
       intro V
       apply (ConcreteCategory.isIso_iff_bijective _).mpr
       exact affine_module_tensor_unit_sections_bijective f B b t ε hring P pobj κ hP
         H hobj γ hH β hcomp.2 G hG V.1 V.2
-    exact isIso_of_reflects_iso (β.app G) (SheafOfModules.toSheaf (𝓡 A))
+    exact isIso_of_reflects_iso (β.app G) (SheafOfModules.toSheaf RA)
   refine ⟨?_, hβ⟩
   intro F hF
   have hF' : ((𝟭 U.Modules).obj F).IsQuasicoherent := hF
   have := IsSeparated.of_isAffineHom f
-  have hRF : ((R).obj F).IsQuasicoherent := by
-    apply (quasiCoherent_iff_restrictScalars X (Under.mk ρ) hA ((R).obj F)).mpr
+  have hRF : (Rf.obj F).IsQuasicoherent := by
+    apply (quasiCoherent_iff_restrictScalars X (Under.mk ρ) hA (Rf.obj F)).mpr
     exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
-  have hHF : ((R ⋙ H).obj F).IsQuasicoherent := hH.2.2 ((R).obj F) hRF
-  have htriangle : β.app ((R).obj F) ≫ (R).map (α.app F) = 𝟙 ((R).obj F) := by
-    have hs : (S).map (β.app ((R).obj F) ≫ (R).map (α.app F)) =
-        (S).map (𝟙 ((R).obj F)) := by
+  have hHF : ((Rf ⋙ H).obj F).IsQuasicoherent := hH.2.2 (Rf.obj F) hRF
+  have htriangle : β.app (Rf.obj F) ≫ Rf.map (α.app F) = 𝟙 (Rf.obj F) := by
+    have hs : Sf.map (β.app (Rf.obj F) ≫ Rf.map (α.app F)) =
+        Sf.map (𝟙 (Rf.obj F)) := by
       calc
-        _ = (S).map (β.app ((R).obj F)) ≫ (S).map ((R).map (α.app F)) :=
-          (S).map_comp _ _
-        _ = (adj₀).homEquiv _ _ (γ.app ((R).obj F)) ≫
-            (S).map ((R).map (α.app F)) :=
-          congrArg (fun k ↦ k ≫ (S).map ((R).map (α.app F))) (hcomp.2 ((R).obj F))
+        _ = Sf.map (β.app (Rf.obj F)) ≫ Sf.map (Rf.map (α.app F)) :=
+          Sf.map_comp _ _
+        _ = adj.homEquiv _ _ (γ.app (Rf.obj F)) ≫
+            Sf.map (Rf.map (α.app F)) :=
+          congrArg (fun k ↦ k ≫ Sf.map (Rf.map (α.app F))) (hcomp.2 (Rf.obj F))
         _ = 𝟙 _ := adjunction_counit_factorization_triangle
-          (adj₀) (γ.app ((R).obj F)) (α.app F) (hcomp.1 F)
-        _ = _ := ((S).map_id _).symm
+          adj (γ.app (Rf.obj F)) (α.app F) (hcomp.1 F)
+        _ = _ := (Sf.map_id _).symm
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
     ext g
     exact congrArg (fun q ↦ q.val.app V g) hs
-  have := hβ ((R).obj F) hRF
-  have : IsIso (β.app ((R).obj F) ≫ (R).map (α.app F)) := by
+  have := hβ (Rf.obj F) hRF
+  have : IsIso (β.app (Rf.obj F) ≫ Rf.map (α.app F)) := by
     rw [htriangle]
     infer_instance
-  have : IsIso ((R).map (α.app F)) :=
-    IsIso.of_isIso_comp_left (β.app ((R).obj F)) ((R).map (α.app F))
+  have : IsIso (Rf.map (α.app F)) :=
+    IsIso.of_isIso_comp_left (β.app (Rf.obj F)) (Rf.map (α.app F))
   apply Hom.isIso_of_bijective_on_affine_open_cover (α.app F)
     (fun V : X.affineOpens ↦ f ⁻¹ᵁ V.1)
   · apply Opens.ext
@@ -228,9 +232,9 @@ theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
   · intro V
     exact V.2.preimage f
   · intro V
-    have hEval : IsIso (((R).map (α.app F)).val.app (op V.1)) :=
-      (SheafOfModules.evaluation (𝓡 A) (op V.1)).map_isIso ((R).map (α.app F))
-    exact ConcreteCategory.bijective_of_isIso (((R).map (α.app F)).val.app (op V.1))
+    have hEval : IsIso ((Rf.map (α.app F)).val.app (op V.1)) :=
+      (SheafOfModules.evaluation RA (op V.1)).map_isIso (Rf.map (α.app F))
+    exact ConcreteCategory.bijective_of_isIso ((Rf.map (α.app F)).val.app (op V.1))
 
 end
 end AlgebraicGeometry.Scheme.Modules
