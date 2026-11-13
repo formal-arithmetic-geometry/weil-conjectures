@@ -24,8 +24,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 
 -- Elaborate the two site tensors through their comparison APIs.
 -- The independently chosen site tensors require large definitional equalities.
-attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients in
-set_option genInjectivity false in
+set_option genInjectivity true in
 set_option genSizeOfSpec false in
 -- The two independently chosen site tensors occur in the same field.
 /-- The normalized restriction tensorator and its associativity equation.
