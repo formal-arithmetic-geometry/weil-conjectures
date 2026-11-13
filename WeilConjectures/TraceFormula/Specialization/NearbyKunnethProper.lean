@@ -264,7 +264,7 @@ theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace X]
   have h₂ := Triangle.isZero₃_of_isIso₁ _
     (L(((finsetComplOpens S hS).ι)^*⟦Profinite.padicAlgClRingObj ℓ⟧).map_distinguished _ hT) hU
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1
-    (hdetect S hS C hC h₂ h₁)
+    (isZero_of_isZero_upperStar_finsetComplOpens ℓ S hS C hC h₂ h₁)
 
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Projective closures over the trait**: an affine scheme of finite type over the trait
