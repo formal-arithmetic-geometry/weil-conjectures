@@ -44,6 +44,19 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
+-- Record the comparison in the finite-system presentation once, so applying the
+-- transport theorem does not repeatedly unfold the two presentations of pullback.
+set_option profiler true in
+private def integralSystemTensorComparison_finite {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙
+        finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f ≅
+      (finiteSystemDerivedPullback (integralSystemRings l E)
+        (integralSystemTransition l E) f).prod
+        (finiteSystemDerivedPullback (integralSystemRings l E)
+          (integralSystemTransition l E) f) ⋙
+        (pullbackTensorCalculus l E X).systemClosed.tensor :=
+  integralSystemTensorComparison l E f
+
 set_option profiler true in
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
@@ -85,40 +98,41 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
           (canonicalIntegralPullbackTensor l E h
             ((constructibleIntegralPullback l E f).obj M)
             ((constructibleIntegralPullback l E f).obj N)).hom) := by
-  let β {U V : Scheme.{u}}
-      [∀ x : U, Invertible (l : U.residueField x)]
-      [∀ y : V, Invertible (l : V.residueField y)] (g : U ⟶ V) :
-      constructibleIntegralPullback l E g ⋙ integralSystemReduction l E U ≅
-        integralSystemReduction l E V ⋙ integralComparisonDerivedSequencePullback l E g :=
-    (integralPullbackSystemComparison l E).choose g
-  refine reducedPullbackTensorComposition_of_systemLaw
+  have key := reducedPullbackTensorComposition_of_systemLaw
     (integralSystemReduction l E Y) (integralSystemReduction l E X)
     (integralSystemReduction l E Z)
     (constructibleIntegralPullback l E f) (constructibleIntegralPullback l E h)
     (constructibleIntegralPullback l E (h ≫ f))
-    (integralComparisonDerivedSequencePullback l E f)
-    (integralComparisonDerivedSequencePullback l E h)
-    (integralComparisonDerivedSequencePullback l E (h ≫ f))
+    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f)
+    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) h)
+    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E)
+      (h ≫ f))
     (constructibleIntegralTensor l E Y) (constructibleIntegralTensor l E X)
     (constructibleIntegralTensor l E Z)
     (pullbackTensorCalculus l E Y).systemClosed.tensor
     (pullbackTensorCalculus l E X).systemClosed.tensor
     (pullbackTensorCalculus l E Z).systemClosed.tensor
-    (β f) (β h) (β (h ≫ f))
+    ((integralPullbackSystemComparison l E).choose f)
+    ((integralPullbackSystemComparison l E).choose h)
+    ((integralPullbackSystemComparison l E).choose (h ≫ f))
     (integralSystemTensorReduction l E Y) (integralSystemTensorReduction l E X)
     (integralSystemTensorReduction l E Z)
-    (integralSystemTensorComparison l E f) (integralSystemTensorComparison l E h)
-    (integralSystemTensorComparison l E (h ≫ f))
-    (integralComparisonSystemComposition l E h f) c ?_
+    (integralSystemTensorComparison_finite l E f) (integralSystemTensorComparison_finite l E h)
+    (integralSystemTensorComparison_finite l E (h ≫ f))
+    (finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h f)
+    c hc
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
-    ?_ ?_ ?_ ?_ M N
-  · intro K
-    simpa only [β, finiteSystemDerivedComposition_eq] using hc K
-  · exact canonicalIntegralPullbackTensor_systemReduction l E f
-  · exact canonicalIntegralPullbackTensor_systemReduction l E h
-  · exact canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f)
-  · exact integralSystemTensorComparison_comp l E h f
+    (canonicalIntegralPullbackTensor_systemReduction l E f)
+    (canonicalIntegralPullbackTensor_systemReduction l E h)
+    (canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f))
+    (fun A B ↦ by
+      have hσ := integralSystemTensorComparison_comp l E h f A B
+      simp only [← finiteSystemDerivedComposition_eq l E h f] at hσ
+      dsimp only [integralSystemTensorComparison_finite, finiteSystemDerivedPullback,
+        integralComparisonDerivedSequencePullback] at hσ ⊢
+      exact hσ) M N
+  exact key
 
 /-- Reduced form of the integral pullback/tensor composition equation.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
