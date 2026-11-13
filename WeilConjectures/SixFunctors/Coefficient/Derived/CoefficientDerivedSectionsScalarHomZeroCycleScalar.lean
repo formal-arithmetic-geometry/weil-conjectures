@@ -318,8 +318,6 @@ private theorem cyclesMap_comp_apply_eq_of_components
   rw [h1, h3, h2, hx, hy]
   exact hf
 
-set_option profiler true in
--- The section-level cycle computation unfolds the scalar-sections comparison.
 /-- The global cycles of the transported scalar unit and of the finite unit agree.
 Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
 theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScalarCoherence l E W)
@@ -386,8 +384,6 @@ private theorem unitClass_eq_of_scalar_model
   rw [G.map_comp, H.map_comp (G.map w), ConcreteCategory.comp_apply, ← key]
   exact (e1 _).symm
 
-set_option profiler true in
--- The unit-class computation chains several localized section comparisons.
 /-- The finite scalar adjunction unit followed by the scalar-sections comparison sends
 the completed unit class to the finite unit class, along the transported scalar unit.
 Source: Stacks 03CZ, 079P, 08JA (auxiliary; not a blueprint node).
