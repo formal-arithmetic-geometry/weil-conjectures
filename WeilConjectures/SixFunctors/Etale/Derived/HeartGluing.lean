@@ -401,6 +401,7 @@ lemma Etale.leftDerivedUpperStarComp_conj_comp {W P Y Z : Scheme.{u}} (f : W ⟶
   rw [a₂']
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- the gluing manipulates long composites of derived and sheaf-level isomorphisms
 theorem Etale.exists_hom_of_isOpenImmersion_cover {X : Scheme.{u}}
     {K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
