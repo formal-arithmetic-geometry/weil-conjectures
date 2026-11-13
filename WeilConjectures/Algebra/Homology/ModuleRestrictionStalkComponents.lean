@@ -58,32 +58,28 @@ theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Open
   let N (F : SheafOfModules.{u} (moduleRings X)) : RingedSpace.Modules Y :=
     (W.sheafOfModulesEquivOver (moduleRings X)).functor.obj
       ((SheafOfModules.overFunctor (moduleRings X) W).obj F)
-  let C (F : SheafOfModules.{u} (moduleRings X)) :
-      Limits.Cocone ((OpenNhds.inclusion y).op ⋙ (N F).val.presheaf) :=
-    { pt := TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x
-      ι :=
-        { app := fun (V : (OpenNhds y)ᵒᵖ) ↦
-            TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)
-              F.val.presheaf (W.isOpenEmbedding.isOpenMap.functor.obj V.unop.1)
-              x ⟨y, V.unop.2, rfl⟩
-          naturality := by
-            intro U V f
-            exact (TopCat.Presheaf.germ_res (C := Ab.{u}) (X := X.carrier)
-              F.val.presheaf
-              (W.isOpenEmbedding.isOpenMap.functor.map
-                (homOfLE f.unop.le : V.unop.1 ⟶ U.unop.1)) x ⟨y, V.unop.2, rfl⟩).trans
-                (Category.comp_id _).symm } }
+  let S (F : SheafOfModules.{u} (moduleRings X)) : PresheafedSpace Ab.{u} :=
+    ⟨X.carrier, F.val.presheaf⟩
+  -- Identify the presheaves before taking stalks, so the colimit instances stay shared.
+  let d (F : SheafOfModules.{u} (moduleRings X)) :
+      (N F).val.presheaf ≅ ((S F).restrict W.isOpenEmbedding).presheaf := Iso.refl _
   let a (F : SheafOfModules.{u} (moduleRings X)) :
       TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y ⟶
         TopCat.Presheaf.stalk (C := Ab.{u}) (X := X.carrier) F.val.presheaf x :=
-    Limits.colimit.desc _ (C F)
+    (TopCat.Presheaf.stalkFunctor (X := Y.carrier) Ab.{u} y).map (d F).hom ≫
+      ((S F).restrictStalkIso W.isOpenEmbedding y).hom
   have hg (F : SheafOfModules.{u} (moduleRings X)) (V : Opens W) (hV : y ∈ V)
       (s : F.val.obj (op (W.isOpenEmbedding.isOpenMap.functor.obj V))) :
       a F (TopCat.Presheaf.germ (C := Ab.{u}) (X := Y.carrier)
         (N F).val.presheaf V y hV s) =
         TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) F.val.presheaf
           (W.isOpenEmbedding.isOpenMap.functor.obj V) x ⟨y, hV, rfl⟩ s := by
-    exact ConcreteCategory.congr_hom (Limits.colimit.ι_desc (C F) (op ⟨V, hV⟩)) s
+    change ((S F).restrictStalkIso W.isOpenEmbedding y).hom
+      ((TopCat.Presheaf.stalkFunctor (X := Y.carrier) Ab.{u} y).map (d F).hom
+        (TopCat.Presheaf.germ (C := Ab.{u}) (X := Y.carrier)
+          (N F).val.presheaf V y hV s)) = _
+    rw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+    exact (S F).restrictStalkIso_hom_eq_germ_apply W.isOpenEmbedding V y hV s
   have hs (F : SheafOfModules.{u} (moduleRings X))
       (r : Y.presheaf.stalk y)
       (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := Y.carrier) (N F).val.presheaf y) :
