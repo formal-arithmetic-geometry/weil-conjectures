@@ -259,7 +259,7 @@ private theorem ringedKoszulConeFamilyComparison
     (E : ModuleCat.{max v (u + 1)} A ⥤ Mod O)
     [E.Additive] [PreservesFiniteColimits E]
     (c : SheafOfModules.unit (siteModuleRings O) ≅ E.obj (ModuleCat.of A A))
-    (s : A → (O.obj ⋙ forget CommRingCat).sections)
+    (s : A → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
     (hs : ∀ x : A, c.hom ≫ E.map (ModuleCat.ofHom (LinearMap.mul A A x)) =
       (ringedKoszulScalar O (s x)).asHom ≫ c.hom)
     (r : ℕ) (a : Fin r → A)
