@@ -404,6 +404,7 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
+set_option profiler true in
 /-- Ordinary derived Hom descent, with the degree-zero comparison normalized once. -/
 private lemma finiteDescentDerivedHom_bijective
     (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact p.Prime] [Fact ℓ.Prime]
@@ -431,32 +432,46 @@ private lemma finiteDescentDerivedHom_bijective
   have hi := hh.2
   constructor
   · intro ψ
-    obtain ⟨F, h, f, hf⟩ := hs (ψ ≫ (shiftFunctorZero _ ℤ).inv.app _)
-    refine ⟨F, h, f ≫ (shiftFunctorZero _ ℤ).hom.app _, ?_⟩
+    obtain ⟨F, h, f, hf⟩ := hs
+      (ψ ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj))
+    refine ⟨F, h, f ≫ (shiftFunctorZero _ ℤ).hom.app
+      ((derivedExtendScalarsSubfield X ℓ h).obj D.obj), ?_⟩
     have hz := finiteDescentDerivedHomToAlgCl_zero X ℓ h C.obj D.obj
-      (f ≫ (shiftFunctorZero _ ℤ).hom.app _)
+      (f ≫ (shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsSubfield X ℓ h).obj D.obj))
     have hz' : coefficientDescentHomToAlgCl X ℓ h C.obj D.obj 0 f ≫
-        (shiftFunctorZero _ ℤ).hom.app _ =
-          finiteDescentDerivedHomToAlgCl X ℓ h
-            (f ≫ (shiftFunctorZero _ ℤ).hom.app _) := by
+        (shiftFunctorZero _ ℤ).hom.app
+          ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj) =
+        finiteDescentDerivedHomToAlgCl X ℓ h
+          (f ≫ (shiftFunctorZero _ ℤ).hom.app
+            ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)) := by
       simpa only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id] using hz
     exact hz'.symm.trans
-      ((congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app _) hf).trans (by
+      ((congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj)) hf).trans (by
         simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]))
   · intro F G h a f g heq
     have heq' : coefficientDescentHomToAlgCl X ℓ h C.obj D.obj 0
-        (f ≫ (shiftFunctorZero _ ℤ).inv.app _) =
+        (f ≫ (shiftFunctorZero _ ℤ).inv.app
+          ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)) =
       coefficientDescentHomToAlgCl X ℓ a C.obj D.obj 0
-        (g ≫ (shiftFunctorZero _ ℤ).inv.app _) := by
-      apply (cancel_mono ((shiftFunctorZero _ ℤ).hom.app _)).mp
+        (g ≫ (shiftFunctorZero _ ℤ).inv.app
+          ((derivedExtendScalarsSubfield X ℓ a).obj D.obj)) := by
+      apply (cancel_mono ((shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj))).mp
       simpa only [finiteDescentDerivedHomToAlgCl_zero] using heq
     obtain ⟨H, b, c, he⟩ := hi F G h a
-      (f ≫ (shiftFunctorZero _ ℤ).inv.app _)
-      (g ≫ (shiftFunctorZero _ ℤ).inv.app _) heq'
+      (f ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsSubfield X ℓ h).obj D.obj))
+      (g ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsSubfield X ℓ a).obj D.obj)) heq'
     refine ⟨H, b, c, ?_⟩
-    have he' := congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app _) he
+    have he' := congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app
+      ((derivedExtendScalarsSubfield X ℓ (h.trans b)).obj D.obj)) he
     simpa only [finiteDescentDerivedHomTransition_zero] using he'
 
+set_option profiler true in
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
 Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit, assertions (1)--(4)
