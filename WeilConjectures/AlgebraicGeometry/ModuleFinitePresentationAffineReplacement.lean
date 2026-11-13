@@ -169,6 +169,66 @@ private theorem fp_free_slice {X : Scheme.{u}} (U : X.Opens) (n : ℕ) :
   exact P.isFinitePresentation
 
 set_option profiler true in
+private theorem fp_cokernel_slice {X : Scheme.{u}} (U : X.Opens)
+    {Q F : SheafOfModules.{u} (X.ringCatSheaf.over U)}
+    [Q.IsFiniteType] [F.IsFinitePresentation] (a : Q ⟶ F) :
+    (cokernel a).IsFinitePresentation := by
+  let B := overEquiv U
+  have : HasFiniteColimits (SheafOfModules.{u} U.toScheme.ringCatSheaf) := inferInstance
+  have : (B.functor.obj Q).IsFiniteType := finiteType_equivOver U Q
+  have := fp_equivOver U F
+  have hc := RingedSpace.isFinitePresentation_cokernel_of_isFiniteType
+    U.toScheme.toRingedSpace (B.functor.map a)
+  have : (B.functor.obj (cokernel a)).IsFinitePresentation :=
+    (SheafOfModules.isFinitePresentation U.toScheme.ringCatSheaf).prop_of_iso
+      (PreservesCokernel.iso B.functor a).symm hc
+  have hb := fp_equivOver_inverse U (B.functor.obj (cokernel a))
+  exact (SheafOfModules.isFinitePresentation (X.ringCatSheaf.over U)).prop_of_iso
+    (B.unitIso.app (cokernel a)).symm hb
+
+-- The cokernel comparison only needs the categorical exactness of restriction.
+set_option profiler true in
+private theorem isIso_map_cokernel_desc_of_epi_kernel
+    {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C]
+    [HasKernels C] [HasCokernels C] [Abelian D]
+    (T : C ⥤ D) [T.PreservesZeroMorphisms]
+    [PreservesLimitsOfShape WalkingParallelPair T]
+    [PreservesColimitsOfShape WalkingParallelPair T]
+    {F M Q : C} (φ : F ⟶ M) (κ : Q ⟶ kernel φ)
+    [Epi (T.map φ)] [Epi (T.map κ)] :
+    IsIso (T.map (cokernel.desc (κ ≫ kernel.ι φ) φ (by simp))) := by
+  let a := κ ≫ kernel.ι φ
+  have ha : a ≫ φ = 0 := by simp [a]
+  let j := cokernel.desc a φ ha
+  change IsIso (T.map j)
+  have hzero : T.map (kernel.ι φ) ≫ T.map φ = 0 :=
+    (T.map_comp _ _).symm.trans
+      ((congrArg T.map (kernel.condition φ)).trans (T.map_zero _ _))
+  have hc : IsColimit (CokernelCofork.ofπ (T.map φ) hzero) :=
+    Abelian.epiIsCokernelOfKernel
+      (KernelFork.ofι (T.map (kernel.ι φ)) hzero)
+      ((KernelFork.ofι (kernel.ι φ) (kernel.condition φ)).mapIsLimit
+        (kernelIsKernel φ) T)
+  have hazero : T.map a ≫ T.map φ = 0 :=
+    (T.map_comp _ _).symm.trans ((congrArg T.map ha).trans (T.map_zero _ _))
+  have hc' : IsColimit (CokernelCofork.ofπ (T.map φ) hazero) :=
+    isCokernelEpiComp hc (T.map κ) (by dsimp [a]; rw [Functor.map_comp])
+  have hezero : T.map a ≫ T.map (cokernel.π a) = 0 :=
+    (T.map_comp _ _).symm.trans
+      ((congrArg T.map (cokernel.condition a)).trans (T.map_zero _ _))
+  have hecol : IsColimit (CokernelCofork.ofπ (T.map (cokernel.π a)) hezero) :=
+    (CokernelCofork.ofπ (cokernel.π a) (cokernel.condition a)).mapIsColimit
+      (cokernelIsCokernel a) T
+  have hdesc : T.map (cokernel.π a) ≫ T.map j = T.map φ :=
+    (T.map_comp _ _).symm.trans (congrArg T.map (cokernel.π_desc a φ ha))
+  let e := hecol.coconePointUniqueUpToIso hc'
+  have hj : T.map j = e.hom := by
+    apply Cofork.IsColimit.hom_ext hecol
+    exact hdesc.trans (hecol.comp_coconePointUniqueUpToIso_hom hc' WalkingParallelPair.one).symm
+  rw [hj]
+  infer_instance
+
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace a quasi-coherent module on an affine open by a finitely presented module,
 with a map which is an isomorphism on the overlap with the previous open.
@@ -208,10 +268,10 @@ theorem exists_finitePresentation_affine_replacement
   let f : K ⟶ V.1 := homOfLE inf_le_right
   let : Abelian (SheafOfModules.{u} (R.over V.1)) := inferInstance
   let : Abelian (SheafOfModules.{u} (R.over K)) := inferInstance
-  have : HasFiniteLimits (SheafOfModules.{u} (R.over V.1)) := inferInstance
-  have : HasFiniteColimits (SheafOfModules.{u} (R.over V.1)) := inferInstance
-  have : HasFiniteLimits (SheafOfModules.{u} (R.over K)) := inferInstance
-  have : HasFiniteColimits (SheafOfModules.{u} (R.over K)) := inferInstance
+  have : HasEqualizers (SheafOfModules.{u} (R.over V.1)) := inferInstance
+  have : HasCoequalizers (SheafOfModules.{u} (R.over V.1)) := inferInstance
+  have : HasEqualizers (SheafOfModules.{u} (R.over K)) := inferInstance
+  have : HasCoequalizers (SheafOfModules.{u} (R.over K)) := inferInstance
   let T : SheafOfModules.{u} (R.over V.1) ⥤ SheafOfModules.{u} (R.over K) :=
     SheafOfModules.overMap R f
   have : PreservesColimitsOfSize.{u, u} T := inferInstance
@@ -264,53 +324,10 @@ theorem exists_finitePresentation_affine_replacement
   have ha : a ≫ φ = 0 := by simp [a]
   let E : SheafOfModules.{u} (R.over V.1) := cokernel a
   let j : E ⟶ H.over V.1 := cokernel.desc a φ ha
-  have hE : E.IsFinitePresentation := by
-    let B : SheafOfModules.{u} (R.over V.1) ≌
-        SheafOfModules.{u} V.1.toScheme.ringCatSheaf := overEquiv V.1
-    have : HasFiniteColimits (SheafOfModules.{u} V.1.toScheme.ringCatSheaf) := inferInstance
-    have : (B.functor.obj Q).IsFiniteType := finiteType_equivOver V.1 Q
-    have : (SheafOfModules.free (R := R.over V.1)
-        (ULift.{u} (Fin n))).IsFinitePresentation := fp_free_slice V.1 n
-    have := fp_equivOver V.1
-      (SheafOfModules.free (R := R.over V.1) (ULift.{u} (Fin n)))
-    have hc := RingedSpace.isFinitePresentation_cokernel_of_isFiniteType
-      V.1.toScheme.toRingedSpace (B.functor.map a)
-    have : (B.functor.obj E).IsFinitePresentation :=
-      (SheafOfModules.isFinitePresentation V.1.toScheme.ringCatSheaf).prop_of_iso
-        (PreservesCokernel.iso B.functor a).symm hc
-    have hb := fp_equivOver_inverse V.1 (B.functor.obj E)
-    exact (SheafOfModules.isFinitePresentation (R.over V.1)).prop_of_iso
-      (B.unitIso.app E).symm hb
+  have : (free (R := R.over V.1) (ULift.{u} (Fin n))).IsFinitePresentation :=
+    fp_free_slice V.1 n
+  have hE : E.IsFinitePresentation := fp_cokernel_slice V.1 a
   refine ⟨E, hE, j, ?_⟩
-  change IsIso (T.map j)
-  have hjiso : IsIso (T.map j) := by
-    have hzero : T.map (kernel.ι φ) ≫ T.map φ = 0 := by
-      exact (T.map_comp _ _).symm.trans
-        ((congrArg T.map (kernel.condition φ)).trans (T.map_zero _ _))
-    have hc : IsColimit (CokernelCofork.ofπ (T.map φ) hzero) :=
-      Abelian.epiIsCokernelOfKernel
-        (KernelFork.ofι (T.map (kernel.ι φ)) hzero)
-        ((KernelFork.ofι (kernel.ι φ) (kernel.condition φ)).mapIsLimit
-          (kernelIsKernel φ) T)
-    have hazero : T.map a ≫ T.map φ = 0 := by
-      exact (T.map_comp _ _).symm.trans
-        ((congrArg T.map ha).trans (T.map_zero _ _))
-    have hc' : IsColimit (CokernelCofork.ofπ (T.map φ) hazero) :=
-      isCokernelEpiComp hc (T.map κ) (by dsimp [a]; rw [Functor.map_comp])
-    have hezero : T.map a ≫ T.map (cokernel.π a) = 0 := by
-      exact (T.map_comp _ _).symm.trans
-        ((congrArg T.map (cokernel.condition a)).trans (T.map_zero _ _))
-    have hecol : IsColimit (CokernelCofork.ofπ (T.map (cokernel.π a)) hezero) :=
-      (CokernelCofork.ofπ (cokernel.π a) (cokernel.condition a)).mapIsColimit
-        (cokernelIsCokernel a) T
-    have hdesc : T.map (cokernel.π a) ≫ T.map j = T.map φ := by
-      exact (T.map_comp _ _).symm.trans (congrArg T.map (cokernel.π_desc a φ ha))
-    let e := hecol.coconePointUniqueUpToIso hc'
-    have hj : T.map j = e.hom := by
-      apply (cancel_epi (T.map (cokernel.π a))).mp
-      exact hdesc.trans (hecol.comp_coconePointUniqueUpToIso_hom hc' WalkingParallelPair.one).symm
-    rw [hj]
-    infer_instance
-  exact hjiso
+  exact isIso_map_cokernel_desc_of_epi_kernel T φ κ
 
 end AlgebraicGeometry.Scheme.Modules
