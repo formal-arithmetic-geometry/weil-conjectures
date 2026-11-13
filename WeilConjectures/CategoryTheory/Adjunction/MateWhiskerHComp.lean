@@ -57,9 +57,9 @@ are compatible. -/
 lemma app_comp_mateEquiv_app_of_whiskerRight_comp_eq (α₁ : TwoSquare G₁ L₁ L₂ H₁)
     (α₂ : TwoSquare G₂ L₂ L₃ H₂) (α₃ : TwoSquare G₃ L₁ L₃ H₃) (τG : G₁ ⋙ G₂ ⟶ G₃)
     (τH : H₁ ⋙ H₂ ⟶ H₃)
-    (h : Functor.whiskerRight τG L₃ ≫ α₃.natTrans =
-      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft G₁ α₂.natTrans ≫
-        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α₁.natTrans H₂ ≫
+    (h : Functor.whiskerRight τG L₃ ≫ α₃ =
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft G₁ α₂ ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α₁ H₂ ≫
         (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L₁ τH) (X : B) :
     τG.app (R₁.obj X) ≫ (mateEquiv adj₁ adj₃ α₃).app X =
       G₂.map ((mateEquiv adj₁ adj₂ α₁).app X) ≫ (mateEquiv adj₂ adj₃ α₂).app (H₁.obj X) ≫
@@ -75,11 +75,11 @@ lemma app_comp_mateEquiv_app_of_whiskerRight_comp_eq (α₁ : TwoSquare G₁ L�
 `τ_G` and `τ_H`. -/
 lemma app_comp_hom_app_of_mateEquiv_inv (e₁ : L₁ ⋙ H₁ ≅ G₁ ⋙ L₂) (e₂ : L₂ ⋙ H₂ ≅ G₂ ⋙ L₃)
     (e₃ : L₁ ⋙ H₃ ≅ G₃ ⋙ L₃) (τG : G₁ ⋙ G₂ ⟶ G₃) (τH : H₁ ⋙ H₂ ⟶ H₃)
-    (h : Functor.whiskerLeft R₁ τG ≫ (mateEquiv adj₁ adj₃ e₃.inv).natTrans =
+    (h : Functor.whiskerLeft R₁ τG ≫ mateEquiv adj₁ adj₃ e₃.inv =
       (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight (mateEquiv adj₁ adj₂ e₁.inv).natTrans G₂ ≫
+        Functor.whiskerRight (mateEquiv adj₁ adj₂ e₁.inv) G₂ ≫
         (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft H₁ (mateEquiv adj₂ adj₃ e₂.inv).natTrans ≫
+        Functor.whiskerLeft H₁ (mateEquiv adj₂ adj₃ e₂.inv) ≫
         (Functor.associator _ _ _).inv ≫ Functor.whiskerRight τH R₃) (X : A) :
     τH.app (L₁.obj X) ≫ e₃.hom.app X =
       H₂.map (e₁.hom.app X) ≫ e₂.hom.app (G₁.obj X) ≫ L₃.map (τG.app X) := by
@@ -90,7 +90,7 @@ lemma app_comp_hom_app_of_mateEquiv_inv (e₁ : L₁ ⋙ H₁ ≅ G₁ ⋙ L₂)
   have hX := NatTrans.congr_app
     ((whiskerTop_eq_hComp_whiskerBottom_iff adj₁ adj₂ adj₃ e₁.inv e₂.inv e₃.inv τG τH).2 h') X
   simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app, TwoSquare.hComp_app,
-    TwoSquare.natTrans, Category.assoc] at hX
+    Category.assoc] at hX
   rw [← cancel_mono (e₃.inv.app X), ← cancel_epi (H₂.map (e₁.inv.app X)),
     ← cancel_epi (e₂.inv.app (G₁.obj X))]
   simpa using hX.symm
