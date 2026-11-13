@@ -187,11 +187,10 @@ theorem affine_perfect_open_represent_cohomology_colimit
     exact ⟨e, φ, (hι e φ).trans hφ |>.symm⟩
   · intro e φ ψ heq
     change (koszulOpenObject A r f e ⟶ E.1) at φ ψ
-    have heq' := congrArg (fun k ↦ R.map (koszulOpenUnit A r f e) ≫ k) heq
-    rw [hι, hι] at heq'
-    simp only [← Category.assoc, hv₁ e, Category.id_comp] at heq'
-    have hz : R.map (φ - ψ) = 0 := by
-      rw [Functor.map_sub, heq', sub_self]
+    have := hiso e
+    have hz : R.map (φ - ψ) = 0 :=
+      (R.map_sub (f := φ) (g := ψ)).trans
+        (sub_eq_zero.mpr ((cancel_epi (v e)).mp heq))
     obtain ⟨b, h, hb⟩ := hzero e (φ - ψ) hz
     refine ⟨b, homOfLE h, ?_⟩
     change koszulOpenMap A r f e b h ≫ φ = koszulOpenMap A r f e b h ≫ ψ
