@@ -91,7 +91,7 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
       constructibleIntegralPullback l E g ⋙ integralSystemReduction l E U ≅
         integralSystemReduction l E V ⋙ integralComparisonDerivedSequencePullback l E g :=
     (integralPullbackSystemComparison l E).choose g
-  have key := reducedPullbackTensorComposition_of_systemLaw
+  refine reducedPullbackTensorComposition_of_systemLaw
     (integralSystemReduction l E Y) (integralSystemReduction l E X)
     (integralSystemReduction l E Z)
     (constructibleIntegralPullback l E f) (constructibleIntegralPullback l E h)
@@ -109,15 +109,16 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (integralSystemTensorReduction l E Z)
     (integralSystemTensorComparison l E f) (integralSystemTensorComparison l E h)
     (integralSystemTensorComparison l E (h ≫ f))
-    (integralComparisonSystemComposition l E h f) c
-    (fun K ↦ by simpa only [β, finiteSystemDerivedComposition_eq] using hc K)
+    (integralComparisonSystemComposition l E h f) c ?_
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
-    (canonicalIntegralPullbackTensor_systemReduction l E f)
-    (canonicalIntegralPullbackTensor_systemReduction l E h)
-    (canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f))
-    (integralSystemTensorComparison_comp l E h f) M N
-  exact key
+    ?_ ?_ ?_ ?_ M N
+  · intro K
+    simpa only [β, finiteSystemDerivedComposition_eq] using hc K
+  · exact canonicalIntegralPullbackTensor_systemReduction l E f
+  · exact canonicalIntegralPullbackTensor_systemReduction l E h
+  · exact canonicalIntegralPullbackTensor_systemReduction l E (h ≫ f)
+  · exact integralSystemTensorComparison_comp l E h f
 
 /-- Reduced form of the integral pullback/tensor composition equation.
 Source: Stacks 07A4 and 0941; quotient-system pure-tensor calculation.
