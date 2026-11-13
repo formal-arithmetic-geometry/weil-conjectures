@@ -148,7 +148,6 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicIntegers_of_res
     transport_mod_proofs k'
 
 -- Elaborating the statement compares the derived categories of the coefficient rings.
-set_option trace.profiler true in
 omit [IsOpenImmersion ι] in
 /-- **Restricted nearby cycles of extensions by zero, from `𝒪_E` to `ℚ̄_ℓ`**: let `M` be a model
 of `X` whose inclusion `j` of the geometric generic fibre is quasi-compact and quasi-separated,
@@ -175,6 +174,19 @@ theorem isZero_upperStar_upperStar_nearbyCycles_lowerShriek_padicAlgCl_of_padicI
               ((L(Mod.extendScalars
                 (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E) U))).obj
                 K₀)))))) := by
+  -- Share the tensor properties of module categories across the derived functors below.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt A B C D := by infer_instance
   -- from `𝒪_E` to `E`
   have hφ₁ := isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E M.j
     ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj
@@ -225,7 +237,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 -- Destructuring the finite-coefficient statement unfolds the coefficient rings.
-set_option trace.profiler true in
 open NearbyCyclesModel in
 /-- **Generic vanishing along a divisor for `ℚ̄_ℓ`-coefficients, from finite coefficients**: let
 `X` be normal, `Z = V(h)` for a nonzero global function `h`, `j : X ∖ Z ⟶ X` the complement, `ζ`
@@ -247,6 +258,19 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_padicAlgCl
           (((deformationModel X I k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
             ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
               (overRestrictι X I.support.compl)).obj N).obj))) := by
+  -- Share the tensor properties of module categories across the derived functors below.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := by infer_instance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt A B C D := by infer_instance
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   have : IsNoetherian X.left := {}
