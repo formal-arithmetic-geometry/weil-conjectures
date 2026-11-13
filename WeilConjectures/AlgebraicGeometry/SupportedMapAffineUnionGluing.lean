@@ -98,8 +98,6 @@ private theorem stabilized_map_restriction
 
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 600000 in
--- Derived composition comparisons and their additivity instances require this budget.
 /-- The affine construction produces a perfect supported source on the union itself.
 There is no ambient extension in this statement. The supplied natural comparison `c`
 identifies iterated restriction through the union with direct restriction to `U`.
@@ -191,6 +189,12 @@ theorem exists_supported_map_affine_union_gluing
         H.mapDerivedCategory.map α ≫ c.hom.app E.obj =
           e.hom ≫ biprod.fst ≫ J.mapDerivedCategory.map β := by
   classical
+  -- Cache the sheaf-category structures used by the restriction and lifting steps.
+  let : ∀ Z : Scheme.{u}, Abelian (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) :=
+    fun Z ↦ inferInstance
+  let : ∀ (Z : Scheme.{u}) (O : Z.Opens),
+      Abelian (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over O)) :=
+    fun Z O ↦ inferInstance
   let Y := W ⊔ V
   let L := (schemeOpenRestriction X Y).mapDerivedCategory
   let H := (schemeOpenOverlapRestriction X
@@ -206,13 +210,17 @@ theorem exists_supported_map_affine_union_gluing
       ∃ e : H.obj F ≅ J.obj R ⊞ (J.obj R)⟦(1 : ℤ)⟧,
         H.map α ≫ c.hom.app E.obj = e.hom ≫ biprod.fst ≫ J.map β
   intro c
-  obtain ⟨hDW, ⟨hOW⟩⟩ := open_derived_localization_data X W
+  -- Destructure a named hypothesis to avoid generalizing an application across the large goal.
+  have hlocalW := open_derived_localization_data X W
+  obtain ⟨hDW, ⟨hOW⟩⟩ := hlocalW
   let := hDW
   let := hOW
-  obtain ⟨hDV, ⟨hOV⟩⟩ := open_derived_localization_data X V
+  have hlocalV := open_derived_localization_data X V
+  obtain ⟨hDV, ⟨hOV⟩⟩ := hlocalV
   let := hDV
   let := hOV
-  obtain ⟨hDI, ⟨hOI⟩⟩ := open_derived_localization_data X (W ⊓ V)
+  have hlocalI := open_derived_localization_data X (W ⊓ V)
+  obtain ⟨hDI, ⟨hOI⟩⟩ := hlocalI
   let := hDI
   let := hOI
   let JW := (schemeOpenRestriction X W).mapDerivedCategory
@@ -222,11 +230,13 @@ theorem exists_supported_map_affine_union_gluing
   let kW := schemeDerivedOpenRestrictionCompIso X (homOfLE le_sup_left : W ⟶ Y)
   let kU := schemeDerivedOpenRestrictionCompIso X (homOfLE hUW : U ⟶ W)
   let A := JW.obj R ⊞ (JW.obj R)⟦(1 : ℤ)⟧
-  obtain ⟨hA, hAT, B, b, s, hB, hBT, hs⟩ :=
+  have hoverlap :=
     exists_supported_affine_overlap_map X W V hW hV T hT hTc E R β hR hRT
-  obtain ⟨F, α, hF, hFT, iW, _iV, hα, _hαV⟩ :=
+  obtain ⟨hA, hAT, B, b, s, hB, hBT, hs⟩ := hoverlap
+  have hgluing :=
     exists_supported_relative_open_gluing X W V T A B hA hB hAT hBT
       s E.obj (biprod.fst ≫ JW.map β) b hs
+  obtain ⟨F, α, hF, hFT, iW, _iV, hα, _hαV⟩ := hgluing
   let d : H ≅ P ⋙ Q :=
     (Functor.mapDerivedCategoryNatIso
       (relative_restriction_comp_iso X U W Y hUW le_sup_left)).symm ≪≫
@@ -234,8 +244,9 @@ theorem exists_supported_map_affine_union_gluing
         (schemeOpenOverlapRestriction X (homOfLE le_sup_left : W ⟶ Y))
         (schemeOpenOverlapRestriction X (homOfLE hUW : U ⟶ W))).symm
   have : Q.Additive := inferInstance
-  obtain ⟨e, he⟩ := stabilized_map_restriction L H J JW P Q d kW kU c
+  have hstabilized := stabilized_map_restriction L H J JW P Q d kW kU c
     E.obj R β F α iW hα
+  obtain ⟨e, he⟩ := hstabilized
   exact ⟨F, α, hF, hFT, e, he⟩
 
 end AlgebraicGeometry.Scheme
