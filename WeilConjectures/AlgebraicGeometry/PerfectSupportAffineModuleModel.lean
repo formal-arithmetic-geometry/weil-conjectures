@@ -57,6 +57,7 @@ private theorem affineSheafification_preservesFiniteLimits
   exact comp_preservesFiniteLimits _ _
 
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Elaborating the two derived localization comparisons and the model witnesses needs this limit.
 set_option linter.unusedVariables false in
 /-- Affine restriction admits a bounded finite-projective source model and a target

@@ -115,6 +115,7 @@ private theorem strictPerfect_isKFlat_local (X : Scheme.{u}) (U : X.Opens)
       ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2 hF)).2
 
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- Comparing the concrete tensor and its derived monoidal carrier needs extra elaboration.
 private theorem local_kFlat_tensor_invariance (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]
