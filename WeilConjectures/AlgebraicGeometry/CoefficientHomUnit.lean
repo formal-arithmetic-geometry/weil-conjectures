@@ -741,6 +741,7 @@ private theorem coefficientHom_unit_of_degreeZero
   let δ : SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⟶
       r.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
     σ.f 0
+  change δ = SheafOfModules.LocalizationCech.unitMap φ at hσ0
   obtain ⟨H, i, haction, haddRight, haddLeft⟩ :=
     SheafOfModules.exists_restrictedCoefficientHomFunctor φ
   obtain ⟨η, hη⟩ := SheafOfModules.exists_unitBase φ H i haction
@@ -849,8 +850,11 @@ theorem exists_coefficientHom_unit
   intro r rc σ
   have hσ := SheafOfModules.singleCoefficientMap r _ _
     (SheafOfModules.LocalizationCech.unitMap φ)
-  have hσ0 : σ.f 0 = SheafOfModules.LocalizationCech.unitMap φ := by
-    have h : (𝟙 _) ≫ σ.f 0 ≫ r.map (𝟙 _) =
+  let δ : SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⟶
+      r.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :=
+    σ.f 0
+  have hσ0 : δ = SheafOfModules.LocalizationCech.unitMap φ := by
+    have h : (𝟙 _) ≫ δ ≫ r.map (𝟙 _) =
         SheafOfModules.LocalizationCech.unitMap φ := hσ
     simpa only [Functor.map_id, Category.id_comp, Category.comp_id] using h
   exact coefficientHom_unit_of_degreeZero φ σ hσ0
