@@ -91,8 +91,9 @@ theorem exists_openExtension_projectionFormula (X : Scheme.{u})
                 (Functor.Monoidal.μIso R (J.obj A) K).hom)) := by
   dsimp
   intro m
-  obtain ⟨J, ⟨adj⟩⟩ := exists_openExtension_derivedAdjunction X U
+  have h := exists_openExtension_derivedAdjunction X U
   letI := m
+  obtain ⟨J, ⟨adj⟩⟩ := h
   refine ⟨J, adj, ?_⟩
   exact openExtension_projection_formula_of_adjunction X U m J adj
 
