@@ -65,6 +65,16 @@ private theorem scalar_right_comp_naturality {C D B : Type*}
 
 /-- Map a composite equation with its factors already expanded.
 Source: functoriality. -/
+private theorem scalar_map_three_eq_three {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B C' D' E' F' : C}
+    {a : A ⟶ B} {b : B ⟶ C'} {c : C' ⟶ D'}
+    {d : A ⟶ E'} {e : E' ⟶ F'} {f : F' ⟶ D'}
+    (h : a ≫ b ≫ c = d ≫ e ≫ f) :
+    F.map a ≫ F.map b ≫ F.map c = F.map d ≫ F.map e ≫ F.map f := by
+  simpa only [Functor.map_comp] using congrArg F.map h
+
+/-- Map a composite equation with its factors already expanded.
+Source: functoriality. -/
 private theorem scalar_map_three_eq_two {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) {A B C' D' E' : C}
     {a : A ⟶ B} {b : B ⟶ C'} {c : C' ⟶ D'} {d : A ⟶ E'} {e : E' ⟶ D'}
@@ -253,25 +263,12 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
       ((integralSystemReduction l E V).obj K))
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  have IIIk' := congrArg (UL h).map IIIk
+  have IIIk' := scalar_map_three_eq_three (UL h) IIIk
   have CE' := scalar_map_three_eq_two
     (C := finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) Z)
     (integralComparisonDerivedSequenceScalar l E L ι Z) CE
   have eE' := congrArg (integralComparisonDerivedSequenceScalar l E L ι Z).map eE
-  simp only [Functor.map_comp] at IIIk'
-  apply scalar_composition_paste_mapped
-  · exact N1
-  · exact IIIk'
-  · exact IIIh
-  · exact Ng
-  · exact Np
-  · exact CE'
-  · exact mix
-  · exact eE'
-  · exact eL
-  · exact IIIhk
-  · exact Na
-  · exact CL
+  exact scalar_composition_paste_mapped N1 IIIk' IIIh Ng Np CE' mix eE' eL IIIhk Na CL
 
 end SystemScalar
 
