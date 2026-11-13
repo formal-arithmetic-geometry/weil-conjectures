@@ -192,12 +192,12 @@ private theorem boundedConstructible_nearbyCycles_integralModel_pullback
                   Profinite.padicIntegersRingObj ℓ E.1⟧).obj
                     (L(((baseChangeHom hM b hb v hv).total)^*⟦
                       Profinite.padicIntegersRingObj ℓ E.1⟧).obj B₀.obj))))) := by
-  have {J : Type} [SmallCategory J] (T : Scheme.{u})
+  let {J : Type} [SmallCategory J] (T : Scheme.{u})
       (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
       (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
       (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
       PreservesColimit F (MonoidalCategory.tensorLeft P) := by infer_instance
-  have {J : Type} [SmallCategory J] (T : Scheme.{u})
+  let {J : Type} [SmallCategory J] (T : Scheme.{u})
       (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
       (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
       (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
@@ -208,7 +208,7 @@ private theorem boundedConstructible_nearbyCycles_integralModel_pullback
   have h := boundedConstructible_nearbyCycles_residue_pullback hM b hb v hv E
     ((Mod.extendScalars (coefficientMap
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.total)).leftDerivedFunctor.obj B₀.obj)
-    (by exact_mod_proofs hred)
+    hred
   refine (boundedConstructible _).prop_of_iso
     (((((baseChangeGaloisModel hM b hb v hv).toGenericWithSpecial
       (baseChangeGaloisModel hM b hb v hv).i).galoisLayer
@@ -260,12 +260,12 @@ theorem exists_integralModel_baseChangeGaloisModel [IsSeparated p] [IsSepClosed 
               (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
                 (baseChangeGaloisModel hM b hb v hv).generic)).leftDerivedFunctor.obj
                   K₀.obj))) := by
-  have {J : Type} [SmallCategory J] (T : Scheme.{u})
+  let {J : Type} [SmallCategory J] (T : Scheme.{u})
       (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
       (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
       (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
       PreservesColimit F (MonoidalCategory.tensorLeft P) := by infer_instance
-  have {J : Type} [SmallCategory J] (T : Scheme.{u})
+  let {J : Type} [SmallCategory J] (T : Scheme.{u})
       (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
       (P : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
       (F : J ⥤ Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
