@@ -232,7 +232,7 @@ private theorem ringedKoszulDualTower_quotient_augmentation
       (hunit_naturality n) (hnorm n) (hnorm (n + 1)) (hq n)
   exact ⟨NatTrans.ofOpSequence e hstep, hnorm⟩
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The coefficient augmentation exists before tensoring with any complex.
 In particular neither K-flatness nor Noetherianity is needed for this construction.
 
