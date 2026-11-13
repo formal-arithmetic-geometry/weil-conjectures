@@ -232,7 +232,7 @@ private theorem tensor_square_of_comparison {C : Type*} [Category C]
     r₁ ≫ (θ ≫ t₂) ≫ z₂ = r₁ ≫ (t₁ ≫ θt) ≫ z₂ := by
   simp only [Category.assoc]
   rw [reassoc_of% hn, he₂, reassoc_of% hc, reassoc_of% hd, hr,
-    ← reassoc_of% he₁, reassoc_of% hz]
+    ← reassoc_of% he₁, hz]
 
 -- Keep the four representative identifications explicit during composition.
 private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
@@ -410,12 +410,25 @@ theorem ringedSquareTensorCompatibility
         (ObjectProperty.homMk
           (X := ⟨(pull k).obj ((pull g).obj Q), pull_good k (pull_good g hq)⟩)
           (Y := ⟨(pull h).obj ((pull f).obj Q), pull_good h (pull_good f hq)⟩) (γ.app Q)))
-  apply tensor_square_of_comparison
+  have chase := tensor_square_of_comparison
+    (r₁ := k.left.map (g.left.map r))
     (r₂ := h.left.map (f.left.map r))
     (θr := theta.hom.app (DerivedCategory.Q.obj ((totalTensor Y).obj (P, Q))))
+    (θ := theta.hom.app (Y.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)))
+    (t₁ := k.left.map ((g.tensorComparison aY aY').hom.app
+      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+      (k.tensorComparison aY' aX').hom.app
+        (g.left.obj (DerivedCategory.Q.obj P), g.left.obj (DerivedCategory.Q.obj Q)))
+    (t₂ := h.left.map ((f.tensorComparison aY aX).hom.app
+      (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
+      (h.tensorComparison aX aX').hom.app
+        (f.left.obj (DerivedCategory.Q.obj P), f.left.obj (DerivedCategory.Q.obj Q)))
+    (θt := X'.tensor.map (CategoryTheory.Prod.mkHom
+      (theta.hom.app (DerivedCategory.Q.obj P)) (theta.hom.app (DerivedCategory.Q.obj Q))))
     (z₁ := X'.tensor.map (CategoryTheory.Prod.mkHom
       (k.left.map (comparison g P) ≫ comparison k ((pull g).obj P))
       (k.left.map (comparison g Q) ≫ comparison k ((pull g).obj Q))))
+    (z₂ := X'.tensor.map (CategoryTheory.Prod.mkHom zP zQ))
     (θz := X'.tensor.map (CategoryTheory.Prod.mkHom
       (DerivedCategory.Q.map (γ.app P)) (DerivedCategory.Q.map (γ.app Q))))
     (c₁ := k.left.map (comparison g ((totalTensor Y).obj (P, Q))) ≫
@@ -435,12 +448,11 @@ theorem ringedSquareTensorCompatibility
     (r₂' := aX'.representative.hom.app
       (⟨(pull h).obj ((pull f).obj P), pull_good h (pull_good f hp)⟩,
         ⟨(pull h).obj ((pull f).obj Q), pull_good h (pull_good f hq)⟩))
-  · exact hn
-  · simpa only [Functor.comp_map, Category.assoc] using heG
-  · simpa only [Category.assoc] using heF
-  · simpa only [Category.assoc] using hsT
-  · simpa only [Functor.map_comp, Category.assoc] using ho
-  · exact hrep
-  · exact tensor_map_square X'.tensor hsP hsQ
+    hn (by simpa only [Category.assoc] using heG)
+    (by simpa only [Category.assoc] using heF)
+    (by simpa only [Category.assoc] using hsT)
+    (by simpa only [Functor.map_comp, Category.assoc] using ho)
+    hrep (tensor_map_square X'.tensor hsP hsQ)
+  simpa only [Functor.comp_map, Category.assoc] using chase
 
 end SheafOfModules
