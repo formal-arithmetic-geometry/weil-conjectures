@@ -157,6 +157,7 @@ lemma unit_map_derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g'
 variable [Etale.UpperStarPreservesFlat A]
 
 set_option maxHeartbeats 1000000 in
+set_option profiler true in
 -- The tensor comparisons of the derived pullbacks make this rewriting expensive.
 omit [HasSmallSiteSheafify A] in
 /-- The square map `Dj^* ⋙ Lg'^* ⟶ Lg''^* ⋙ Dj'^*` and the square isomorphism of the derived
