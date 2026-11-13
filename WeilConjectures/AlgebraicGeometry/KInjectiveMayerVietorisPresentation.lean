@@ -30,10 +30,47 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
+private theorem mayerVietoris_map_lift_comparison
+    {C D : Type*} [Category C] [Category D] [HasZeroMorphisms C]
+    [HasZeroMorphisms D] [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (Q : C ⥤ D) [Q.PreservesZeroMorphisms] [PreservesBinaryBiproducts Q]
+    {A B C' : C} {A' B' C'' : D} (f : A ⟶ B) (g : A ⟶ C')
+    (eA : Q.obj A ≅ A') (eB : Q.obj B ≅ B') (eC : Q.obj C' ≅ C'')
+    (a : A' ⟶ B') (b : A' ⟶ C'')
+    (hf : Q.map f ≫ eB.hom = eA.hom ≫ a)
+    (hg : Q.map g ≫ eC.hom = eA.hom ≫ b) :
+    Q.map (biprod.lift f g) ≫
+        (Q.mapBiprod B C' ≪≫ biprod.mapIso eB eC).hom =
+      eA.hom ≫ biprod.lift a b := by
+  dsimp only [Iso.trans_hom, biprod.mapIso]
+  rw [← Category.assoc, biprod.map_lift_mapBiprod]
+  apply biprod.hom_ext
+  · simpa only [Category.assoc, biprod.map_fst, biprod.lift_fst_assoc,
+      biprod.lift_fst] using hf
+  · simpa only [Category.assoc, biprod.map_snd, biprod.lift_snd_assoc,
+      biprod.lift_snd] using hg
+
+private theorem mayerVietoris_map_desc_comparison
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (Q : C ⥤ D) [Q.Additive] [PreservesBinaryBiproducts Q]
+    {U V W : C} {U' V' W' : D}
+    (eU : Q.obj U ≅ U') (eV : Q.obj V ≅ V') (eW : Q.obj W ≅ W')
+    (rU : U ⟶ W) (rV : V ⟶ W) (sU : U' ⟶ W') (sV : V' ⟶ W')
+    (hU : Q.map rU ≫ eW.hom = eU.hom ≫ sU)
+    (hV : Q.map rV ≫ eW.hom = eV.hom ≫ sV) :
+    Q.map (biprod.desc rU (-rV)) ≫ eW.hom =
+      (Q.mapBiprod U V ≪≫ biprod.mapIso eU eV).hom ≫ biprod.desc sU (-sV) := by
+  dsimp only [Iso.trans_hom, biprod.mapIso]
+  rw [← biprod.mapBiprod_hom_desc Q]
+  simp only [Category.assoc]
+  apply congrArg (fun k ↦ (Q.mapBiprod U V).hom ≫ k)
+  apply biprod.hom_ext'
+  · simpa [Category.assoc] using hU
+  · simpa [Category.assoc] using congrArg Neg.neg hV
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The transported restriction functors require extra elaboration heartbeats.
 /-- The injective representative gives a short exact sequence with comparisons of
 its first two arrows to the derived units and the difference of restriction maps.
 Source: Stacks Project, Cohomology, Tag 08BV, construction of the short exact sequence
@@ -124,22 +161,7 @@ theorem schemeKInjective_mayerVietoris_presentation
     schemeMayerVietorisF X U V I, schemeMayerVietorisG X U V I,
     schemeMayerVietoris_zero X U V I, eB, eW,
     schemeMayerVietorisComplex_shortExact X U V hcover I hI, ?_, ?_⟩
-  · dsimp only [schemeMayerVietorisF, eB, Iso.trans_hom, biprod.mapIso]
-    rw [← Category.assoc, biprod.map_lift_mapBiprod]
-    apply biprod.hom_ext
-    · simp only [Category.assoc, biprod.map_fst]
-      rw [← Category.assoc, biprod.lift_fst]
-      simpa [Category.assoc] using hu
-    · simp only [Category.assoc, biprod.map_snd]
-      rw [← Category.assoc, biprod.lift_snd]
-      simpa [Category.assoc] using hv
-  · dsimp only [schemeMayerVietorisG, eB, Iso.trans_hom, biprod.mapIso]
-    rw [← biprod.mapBiprod_hom_desc Q]
-    simp only [Category.assoc]
-    apply congrArg (fun k => (Q.mapBiprod
-      (schemeOpenModuleImageComplex X U I) (schemeOpenModuleImageComplex X V I)).hom ≫ k)
-    apply biprod.hom_ext'
-    · simpa [Category.assoc] using hru
-    · simpa [Category.assoc] using congrArg Neg.neg hrv
+  · exact mayerVietoris_map_lift_comparison Q _ _ e eU eV _ _ hu hv
+  · exact mayerVietoris_map_desc_comparison Q eU eV eW _ _ _ _ hru hrv
 
 end AlgebraicGeometry
