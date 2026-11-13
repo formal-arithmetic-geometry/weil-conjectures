@@ -104,6 +104,26 @@ lemma exists_retraction_of_eq_comp_map_comp_of_invariant_eq {C D E : Type*} [Cat
     simp only [Category.assoc, Iso.hom_inv_id_assoc]
     rw [← F₂.map_comp_assoc, ← F₁.map_comp, ← Category.assoc (u σ), hinv]
 
+/-- Transport an invariant retraction along isomorphisms, retaining its projector formula. -/
+lemma exists_invariant_retraction_of_conjugate_eq {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A T : C} {P Q : D} (α : P ⟶ Q) (R : T ⟶ A) (η : A ⟶ T)
+    (hR : η ≫ R = 𝟙 A) (i : P ≅ F.obj A) (κ : F.obj T ≅ Q)
+    (hα : α = i.hom ≫ F.map η ≫ κ.hom) {ι : Type*} (u : ι → (T ⟶ T))
+    (hinv : ∀ σ, u σ ≫ R = R) (ρ : ι → (Q ⟶ Q)) (hfix : ∀ σ, α ≫ ρ σ = α)
+    (hρ : ∀ σ, ρ σ = κ.inv ≫ F.map (u σ) ≫ κ.hom) :
+    ∃ r, α ≫ r = 𝟙 P ∧
+      (∀ σ, ρ σ ≫ (r ≫ α) = r ≫ α ∧ (r ≫ α) ≫ ρ σ = r ≫ α) ∧
+      r ≫ α = κ.inv ≫ F.map (R ≫ η) ≫ κ.hom := by
+  refine ⟨κ.inv ≫ F.map R ≫ i.inv, ?_, fun σ ↦ ⟨?_, ?_⟩, ?_⟩
+  · rw [hα]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hR, F.map_id,
+      Category.id_comp, Iso.hom_inv_id]
+  · rw [hρ]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc, hinv]
+  · rw [Category.assoc, hfix]
+  · rw [hα]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc, F.map_comp]
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.GaloisTower
@@ -344,18 +364,23 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_invariant_eq
     (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
     (N.galoisLayerHom h Ω) rfl rfl C
   simp only [eqToHom_refl, Category.id_comp] at hα
-  have key := exists_retraction_of_eq_comp_map_comp_of_invariant_eq R((N.j)_*⟦Λ⟧)
-    L((N.i)^*⟦Λ⟧) _ ((leftDerivedUpperStarId Λ X').app _) _ (N.galoisLayerExchangeIso h Ω Λ C)
-    rfl _ R hα hR
-    (fun σ ↦ derivedUnitTransport Λ (pullbackAction h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ)
-      (pullbackAction_fst h _ specGaloisAction_comp σ) (L((N.ε)^*⟦Λ⟧).obj C))
+  rw [Functor.map_comp] at hα
+  have hα' : ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+    dsimp only [Functor.comp_map, galoisLayerExchangeIso, Functor.mapIso, Iso.trans,
+      Iso.symm, Iso.app]
+    exact hα
+  exact exists_invariant_retraction_of_conjugate_eq (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧))
+    (((N.galoisLayerHom h Ω).pullbackExchange Λ).app C) R _ hR
+    ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C))
+    (N.galoisLayerExchangeIso h Ω Λ C) hα' _ hinv
     (fun σ ↦ N.galoisLayerAction Λ h Ω σ (L((𝟙 X)^*⟦Λ⟧).obj C))
-    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C) hinv
-  obtain ⟨r, h₁, h₂, h₃⟩ := key
-  refine ⟨r, h₁, fun σ ↦ ⟨?_, ?_⟩, h₃⟩
-  · exact h₂ σ
-  · rw [Category.assoc, pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction]
+    (fun σ ↦ pullbackExchange_galoisLayerHom_app_comp_galoisLayerAction Λ N h Ω σ C)
+    (fun σ ↦ galoisLayerAut_autAction Λ N h Ω σ C)
 
 variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀]
   [DiscreteTopology T₀] [Finite T₀] [IsGalois L Ω]
@@ -433,7 +458,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_pro
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
               (Profinite.continuousMapRingObj T₀)).app C)) ≫ φ = φ := by
-  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := exists_complex_of_plusEtaleOrigin T₀ _ hC
+  have hcomplex := exists_complex_of_plusEtaleOrigin (X := N.generic) T₀
+    (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC
+  obtain ⟨K, a, hKa, hterms, ⟨e⟩⟩ := hcomplex
   choose F₀ hF₀ using hterms
   have hW (j : FiniteGaloisIntermediateField L Ω) {Y : Scheme.{u}}
       (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
