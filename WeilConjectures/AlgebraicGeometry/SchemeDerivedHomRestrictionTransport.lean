@@ -24,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-attribute [local instance] Functor.additive_of_preserves_binary_products
-  comp_preservesFiniteLimits comp_preservesFiniteColimits
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
 section
@@ -259,15 +258,23 @@ end RestrictionTransport
 
 end
 
+private instance overEquivFunctorAdditive (X : Scheme.{u}) (U : X.Opens) :
+    (Equivalence.functor
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
+private instance overEquivInverseAdditive (X : Scheme.{u}) (U : X.Opens) :
+    (Equivalence.inverse
+      (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))
+      (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))
+      (Scheme.Modules.overEquiv U)).Additive :=
+  Functor.additive_of_preserves_binary_products _
+
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxHeartbeats 400000 in
--- Additivity of the three-fold composite restriction functors exceeds the default size.
--- v4.35 tree: this override is still needed here (green in bumpF build81, whnf timeout without it in build82);
--- master removed it on the pre-bump tree.
-set_option maxHeartbeats 1600000 in
 set_option profiler true in
--- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Restricting a local derived morphism commutes with transporting from the localized
 site to the open subscheme. The formula includes all derived composition comparisons.
 Source: Stacks Project, Cohomology, Tag 08BW, canonical local Hom restriction maps;
