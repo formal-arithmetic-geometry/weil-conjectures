@@ -89,7 +89,6 @@ private theorem boundary_eq_of_comparison {D : Type*} [Category* D]
   rw [← hd, Category.assoc, e.inv_hom_id, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{u + 1}
@@ -125,7 +124,6 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
   simp only [NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app]
   exact h
 
-set_option profiler true in
 /-- The Leibniz identity on local-lift cocycles, independent of derived-category comparisons. -/
 private theorem cech_cycles_leibniz (X : Scheme.{u})
     (B C : X.CommAlgebraSheaf) (p : B ⟶ C)
@@ -236,7 +234,6 @@ private theorem cech_cycles_leibniz (X : Scheme.{u})
   change bf 1 * cg 1 - bf 0 * cg 0 = bf 0 * (cg 1 - cg 0) + cg 1 * (bf 1 - bf 0)
   ring
 
-set_option profiler true in
 /-- Transfer the cocycle identity to the canonical boundary using the natural Čech comparison. -/
 private theorem canonical_boundary_leibniz (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -304,7 +301,6 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
   exact he
 
 set_option backward.isDefEq.respectTransparency false in
-set_option profiler true in
 /-- The connecting map obeys Leibniz for any sheaf action agreeing with multiplication
 by local lifts. The action is input; no action, cohomology action, or boundary is chosen.
 Source: Stacks Project, Cohomology, Lemma 0B8S, local-lift computation.
