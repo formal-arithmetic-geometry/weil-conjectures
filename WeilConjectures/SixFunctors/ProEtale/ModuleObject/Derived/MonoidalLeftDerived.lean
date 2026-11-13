@@ -47,7 +47,6 @@ instance preservesFlat_upperStar : ((f)^*⟦Λ⟧).PreservesFlat where
       ((HomologicalComplex.singleMapHomologicalComplex (f)^*⟦Λ⟧ (.up ℤ) 0).app M)
       (kFlat_upperStar_mapHomologicalComplex_obj Λ f hM)
 
-set_option trace.profiler true in
 -- the images of complexes in the homotopy category are unfolded
 /-- The tensor comparison `Lf^*(K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` of the derived pullback of module
 objects is the generic tensor comparison of the left derived functor of the strong monoidal
