@@ -96,8 +96,12 @@ theorem exists_isIso_schemeHigherDirectImage_truncGE_over_affine
     (Scheme.Modules.overEquiv U.1)
   let RX := rX ⋙ eX
   let RY := rY ⋙ eY
-  have : RX.Additive := Functor.additive_of_preserves_binary_products _
-  have : RY.Additive := Functor.additive_of_preserves_binary_products _
+  have : rX.Additive := Functor.additive_of_preserves_binary_products _
+  have : eX.Additive := Functor.additive_of_preserves_binary_products _
+  have : rY.Additive := Functor.additive_of_preserves_binary_products _
+  have : eY.Additive := Functor.additive_of_preserves_binary_products _
+  have : RX.Additive := inferInstance
+  have : RY.Additive := inferInstance
   have : CategoryTheory.Limits.PreservesFiniteLimits RX :=
     CategoryTheory.Limits.comp_preservesFiniteLimits _ _
   have : CategoryTheory.Limits.PreservesFiniteColimits RX :=
