@@ -313,7 +313,13 @@ theorem integralSystemTensorComparison_comp {X Y Z : Scheme.{u}} (h : Z ⟶ X) (
   let ff := Localization.fullyFaithfulWhiskeringLeft
     ((PY.ι ⋙ DerivedCategory.Q).prod (PY.ι ⋙ DerivedCategory.Q)) (V.prod V)
     (coefficientSequenceDerived l E Z)
-  refine tensorComparisonDescent_comp DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q
+  refine tensorComparisonDescent_comp
+    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E Y) ℤ ⥤
+      coefficientSequenceDerived l E Y)
+    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E X) ℤ ⥤
+      coefficientSequenceDerived l E X)
+    (DerivedCategory.Q : CochainComplex (coefficientSequenceModules l E Z) ℤ ⥤
+      coefficientSequenceDerived l E Z)
     ((integralComparisonSequencePullback l E f).mapHomologicalComplex (.up ℤ))
     ((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ))
     ((integralComparisonSequencePullback l E (h ≫ f)).mapHomologicalComplex (.up ℤ))
