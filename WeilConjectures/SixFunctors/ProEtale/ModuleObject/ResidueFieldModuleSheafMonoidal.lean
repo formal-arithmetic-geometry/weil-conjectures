@@ -221,6 +221,57 @@ lemma upperStarForgetIso_hom_comp_whiskerRight_residueFieldModuleSheafUpperStarI
   ext M : 2
   exact upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIsoAux_hom_app ℓ E a M
 
+set_option profiler true in
+/-- Tensor compatibility with the commutative-ring presentation used to construct the
+pullback isomorphism. Keeping this presentation throughout the diagram avoids comparing
+the underlying sheaves of pullbacks for definitionally equal ring structures. -/
+lemma tensorCompatible_residueFieldModuleSheafUpperStarIsoAux {S T : Scheme.{u}} (a : S ⟶ T) :
+    NatTrans.TensorCompatible (residueFieldModuleSheafUpperStarIsoAux ℓ E a).hom
+      (Functor.TensorComparison.comp
+        (Functor.OplaxMonoidal.δNatTrans
+          (a)^*⟦residueFieldCommRingObj⟧)
+        (residueFieldModuleSheafTensorIso S ℓ E).hom)
+      (Functor.TensorComparison.comp (residueFieldModuleSheafTensorIso T ℓ E).hom
+        (Functor.OplaxMonoidal.δNatTrans
+          (a)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])) := by
+  intro M N
+  apply (sheafCompose (ProEt.topology S)
+    (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map_injective
+  rw [← cancel_epi ((a)^*[Ab.{u + 1}].map (Mod.tensorObjπ M N) ≫
+    upperStarUnitHom (residueFieldCommRingObj) a (M ⊗ N))]
+  simp only [Functor.map_comp, Category.assoc, Functor.TensorComparison.comp_app_app,
+    Functor.OplaxMonoidal.δNatTrans_app_app]
+  have hι := (sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a).hom.naturality
+    (((residueFieldModuleSheafTensorIso T ℓ E).hom.app M).app N)
+  have hG : (sheafCompose (ProEt.topology S)
+      (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map
+        ((residueFieldModuleSheaf S ℓ E).map (Functor.OplaxMonoidal.δ
+          (a)^*⟦residueFieldCommRingObj⟧ M N)) =
+      (Functor.OplaxMonoidal.δ
+        (a)^*⟦residueFieldCommRingObj⟧ M N).hom :=
+    rfl
+  dsimp at hι
+  rw [upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIsoAux_hom_app_assoc
+      ℓ E a (M ⊗ N),
+    ← reassoc_of% hι, ← Functor.map_comp_assoc]
+  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app T ℓ E M N]
+  rw [upperStar_map_μ_comp_sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a
+    ((residueFieldModuleSheaf T ℓ E).obj M) ((residueFieldModuleSheaf T ℓ E).obj N)]
+  rw [hG, map_tensorObjπ_upperStarUnitHom_δ_hom_assoc
+    (residueFieldCommRingObj) a M N]
+  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app_assoc S ℓ E
+    ((a)^*⟦residueFieldCommRingObj⟧.obj M)
+    ((a)^*⟦residueFieldCommRingObj⟧.obj N)]
+  have hμ := Functor.LaxMonoidal.μ_natural (sheafCompose (ProEt.topology S)
+      (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1}))
+      ((residueFieldModuleSheafUpperStarIsoAux ℓ E a).hom.app M)
+      ((residueFieldModuleSheafUpperStarIsoAux ℓ E a).hom.app N)
+  simp only [Functor.comp_obj] at hμ
+  rw [← hμ, tensorHom_comp_tensorHom_assoc,
+    upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIsoAux_hom_app ℓ E a M,
+    upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIsoAux_hom_app ℓ E a N]
+  rfl
+
 end Aux
 
 
@@ -254,7 +305,6 @@ lemma upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app {S T
   simpa using NatTrans.congr_app
     (upperStarForgetIso_hom_comp_whiskerRight_residueFieldModuleSheafUpperStarIso_hom ℓ E a) M
 
-set_option profiler true in
 /-- **The commutation of `G` with the pullbacks is compatible with the tensor products**: the
 isomorphism `f^* ⋙ G_X ≅ G_Y ⋙ f^*` of `residueFieldModuleSheafUpperStarIso` is compatible with
 the tensor isomorphisms of `G_X`, `G_Y` and the comonoidal structures of the pullbacks. On
@@ -269,43 +319,7 @@ lemma tensorCompatible_residueFieldModuleSheafUpperStarIso {S T : Scheme.{u}} (a
         (residueFieldModuleSheafTensorIso S ℓ E).hom)
       (Functor.TensorComparison.comp (residueFieldModuleSheafTensorIso T ℓ E).hom
         (Functor.OplaxMonoidal.δNatTrans
-          (a)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])) := by
-  intro M N
-  apply (sheafCompose (ProEt.topology S)
-    (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map_injective
-  rw [← cancel_epi ((a)^*[Ab.{u + 1}].map (Mod.tensorObjπ M N) ≫
-    upperStarUnitHom (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) a (M ⊗ N))]
-  simp only [Functor.map_comp, Category.assoc, Functor.TensorComparison.comp_app_app,
-    Functor.OplaxMonoidal.δNatTrans_app_app]
-  have hι := (sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a).hom.naturality
-    (((residueFieldModuleSheafTensorIso T ℓ E).hom.app M).app N)
-  have hG : (sheafCompose (ProEt.topology S)
-      (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1})).map
-        ((residueFieldModuleSheaf S ℓ E).map (Functor.OplaxMonoidal.δ
-          (a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧ M N)) =
-      (Functor.OplaxMonoidal.δ
-        (a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧ M N).hom :=
-    rfl
-  dsimp at hι
-  rw [upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app_assoc
-      ℓ E a (M ⊗ N),
-    ← reassoc_of% hι, ← Functor.map_comp_assoc]
-  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app T ℓ E M N]
-  rw [upperStar_map_μ_comp_sheafComposeForget₂CompUpperStarIso (ResidueFieldCoeff.{u} ℓ E) a
-    ((residueFieldModuleSheaf T ℓ E).obj M) ((residueFieldModuleSheaf T ℓ E).obj N)]
-  rw [hG, map_tensorObjπ_upperStarUnitHom_δ_hom_assoc
-    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) a M N]
-  rw [tensorObjπ_comp_map_residueFieldModuleSheafTensorIso_hom_app_app_assoc S ℓ E
-    ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj M)
-    ((a)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧.obj N)]
-  have hμ := Functor.LaxMonoidal.μ_natural (sheafCompose (ProEt.topology S)
-      (forget₂ (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) Ab.{u + 1}))
-      ((residueFieldModuleSheafUpperStarIso ℓ E a).hom.app M)
-      ((residueFieldModuleSheafUpperStarIso ℓ E a).hom.app N)
-  simp only [Functor.comp_obj] at hμ
-  rw [← hμ, tensorHom_comp_tensorHom_assoc,
-    upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app ℓ E a M,
-    upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app ℓ E a N]
-  rfl
+          (a)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])) :=
+  tensorCompatible_residueFieldModuleSheafUpperStarIsoAux ℓ E a
 
 end AlgebraicGeometry.ProEtale
