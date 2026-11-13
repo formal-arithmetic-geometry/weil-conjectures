@@ -120,12 +120,10 @@ private theorem stalkTensor_addHom_ext (r : D ⟶ C)
     (hgh : ∀ (U : Opens T) (hx : x ∈ U) (c : C.obj.obj (Opposite.op U))
         (m : M.val.obj (Opposite.op U)),
       g (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) D.obj x,
-            ((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[D.obj.stalk x,((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m) =
       h (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) D.obj x,
-            ((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[D.obj.stalk x,((TopCat.Presheaf.stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m)) : g = h := by
   apply AddMonoidHom.ext
   intro z
@@ -141,7 +139,6 @@ private theorem stalkTensor_addHom_ext (r : D ⟶ C)
         (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx m]
     exact hgh (U ⊓ V) hx _ _
 
-set_option profiler true in
 /-- A fixed comparison morphism with the tensor-unit formula is invertible over a
 pushout of ring sheaves. This concerns one module and does not construct the comparison
 or assert naturality in the module.
