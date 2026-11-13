@@ -44,6 +44,11 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
+set_option profiler true in
+private theorem finiteSystemPullback_eq_sequence {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) f =
+      integralComparisonSequencePullback l E f := rfl
+
 -- Record the comparison in the finite-system presentation once, so applying the
 -- transport theorem does not repeatedly unfold the two presentations of pullback.
 set_option profiler true in
@@ -129,9 +134,8 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (fun A B ↦ by
       have hσ := integralSystemTensorComparison_comp l E h f A B
       simp only [← finiteSystemDerivedComposition_eq l E h f] at hσ
-      dsimp only [integralSystemTensorComparison_finite, finiteSystemDerivedPullback,
-        integralComparisonDerivedSequencePullback] at hσ ⊢
-      with_unfolding_all exact hσ) M N
+      simpa only [integralSystemTensorComparison_finite, finiteSystemDerivedPullback,
+        integralComparisonDerivedSequencePullback, finiteSystemPullback_eq_sequence] using hσ) M N
   exact key
 
 /-- Reduced form of the integral pullback/tensor composition equation.
