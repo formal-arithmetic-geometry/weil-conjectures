@@ -50,6 +50,36 @@ private theorem identity_resolution_homotopy {C : Type*} [Category* C] [Abelian 
     (E.map J.ι) (E.map β) (E.map γ) he
   exact ⟨hh.ofExtend⟩
 
+private theorem complex_hom_eq_of_inv_f_comp {C : Type*} [Category* C]
+    [Limits.HasZeroMorphisms C] {K L : CochainComplex C ℕ} (a : K ≅ L) (f : K ⟶ L)
+    (hf : ∀ n, a.inv.f n ≫ f.f n = 𝟙 _) : f = a.hom := by
+  apply (cancel_epi a.inv).1
+  rw [a.inv_hom_id]
+  apply HomologicalComplex.hom_ext
+  intro n
+  exact hf n
+
+private theorem resolution_homology_factorization {C A : Type*}
+    [Category* C] [Abelian C] [Category* A] [Abelian A]
+    (Γ : C ⥤ A) [Γ.Additive] {G F : C} (ψ : G ⟶ F)
+    (I : InjectiveResolution F) (J : InjectiveResolution G)
+    {K P : CochainComplex C ℕ} (hK : ∀ n, Injective (K.X n))
+    (c : I.cocomplex ⟶ P) (l : P ⟶ K) (β : J.cocomplex ⟶ K)
+    (a : (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ≅
+      (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj P) (p : ℕ)
+    (haug : J.ι.f 0 ≫ β.f 0 = ψ ≫ I.ι.f 0 ≫ c.f 0 ≫ l.f 0)
+    (hc : (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map c = a.hom) :
+    let Γc := Γ.mapHomologicalComplex (ComplexShape.up ℕ)
+    let H := HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p
+    H.map (Γc.map β) = H.map (Γc.map (InjectiveResolution.desc ψ I J)) ≫
+      H.map (a.hom ≫ Γc.map l) := by
+  dsimp only
+  obtain ⟨hh⟩ := identity_resolution_homotopy ψ I J hK β (c ≫ l) haug
+  have hhom := (Γ.mapHomotopy hh).homologyMap_eq p
+  change (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p).map _ =
+    (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p).map _ at hhom
+  simpa only [Functor.map_comp, hc, Category.assoc] using hhom
+
 set_option profiler true in
 -- Identity pushforward and the sections functor require substantial definitional reduction.
 set_option backward.isDefEq.respectTransparency.types false in
@@ -86,27 +116,18 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
         H.map (D.a.hom ≫ Γc.map D.lambda) := by
   dsimp only
   let Γ := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
-  let Γc := Γ.mapHomologicalComplex (ComplexShape.up ℕ)
   let c : D.I.cocomplex ⟶
       ((pushforward (𝟙 Z)).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.I.cocomplex :=
     ((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex
-  let α := InjectiveResolution.desc ψ D.I D.J
-  have hc : Γc.map c = D.a.hom := by
-    rw [← cancel_epi D.a.inv, Iso.inv_hom_id]
-    apply HomologicalComplex.hom_ext
+  refine resolution_homology_factorization Γ ψ D.I D.J D.injective c D.lambda D.β D.a p
+    ?_ ?_
+  · rw [D.compatible, ← Category.assoc (D.I.ι.f 0)]
+    congr 1
+  · apply complex_hom_eq_of_inv_f_comp
     intro n
-    rw [HomologicalComplex.comp_f, D.sections]
+    rw [D.sections]
     change (presheaf (D.I.cocomplex.X n)).map _ ≫
       ((pushforwardId Z).inv.app (D.I.cocomplex.X n)).app ⊤ = 𝟙 _
     simp
-  have haug : D.J.ι.f 0 ≫ D.β.f 0 = ψ ≫ D.I.ι.f 0 ≫ (c ≫ D.lambda).f 0 := by
-    rw [D.compatible, HomologicalComplex.comp_f, ← Category.assoc (D.I.ι.f 0)]
-    congr 1
-  obtain ⟨hh⟩ := identity_resolution_homotopy ψ D.I D.J D.injective D.β
-    (c ≫ D.lambda) haug
-  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
-  have hhom := (Γ.mapHomotopy hh).homologyMap_eq p
-  change H.map (Γc.map D.β) = H.map (Γc.map (α ≫ c ≫ D.lambda)) at hhom
-  simpa only [Functor.map_comp, hc, Category.assoc] using hhom
 
 end AlgebraicGeometry.Scheme.Modules
