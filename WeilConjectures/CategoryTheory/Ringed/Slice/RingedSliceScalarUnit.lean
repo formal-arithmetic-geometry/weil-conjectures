@@ -285,6 +285,24 @@ private theorem scalar_restriction_unit_exists :
   intro V b
   rfl
 
+private theorem scalar_flat_representative
+    (N : DerivedCategory (RingedTensorModules.{c, v, r} J R)) :
+    ∃ P : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∧
+      (∀ n, SheafOfModules.IsFlatOnSite.{c, v, max c v r, max c v r}
+        (J := J) (R := R) (P.X n)) ∧ Nonempty (DerivedCategory.Q.obj P ≅ N) := by
+  classical
+  obtain ⟨P, f, hP, fP, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R)
+      (DerivedCategory.Q.objPreimage N)
+  have : IsIso (DerivedCategory.Q.map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hf
+  refine ⟨P, hP, ?_, ⟨asIso (DerivedCategory.Q.map f) ≪≫
+    DerivedCategory.Q.objObjPreimageIso N⟩⟩
+  intro n
+  exact (exactFunctor _ _).prop_of_iso
+    (siteSheafTensorRightIso R (P.X n)).symm (fP n)
+
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
 -- Abstract the localization data so normalization does not reduce its construction.
@@ -472,10 +490,19 @@ theorem ringedSlice_scalar_unit :
               (Y := (r.obj (DerivedCategory.Q.obj P), SU.monoidal.tensorUnit))
               (𝟙 _, KU.unitIso.inv) ≫
                 (SU.monoidal.rightUnitor (r.obj (DerivedCategory.Q.obj P))).hom := by
-    rcases hmodel P O hP (unit_kflat.{c, v, r} J R) fP (unit_flat.{c, v, r} J R) with
-      ⟨γ, hγ, hρ⟩
-    rcases K.rightUnitor_model P hP with ⟨β, hβ, heβ⟩
-    rcases KU.rightUnitor_model (F.obj P) (d₀.kflat P hP fP).1 with ⟨βU, hβU, heβU⟩
+    have hγ_model := hmodel P O hP (unit_kflat.{c, v, r} J R)
+      fP (unit_flat.{c, v, r} J R)
+    let γ := hγ_model.choose
+    have hγ := hγ_model.choose_spec.1
+    have hρ := hγ_model.choose_spec.2
+    have hβ_model := K.rightUnitor_model P hP
+    let β := hβ_model.choose
+    have hβ := hβ_model.choose_spec.1
+    have heβ := hβ_model.choose_spec.2
+    have hβU_model := KU.rightUnitor_model (F.obj P) (d₀.kflat P hP fP).1
+    let βU := hβU_model.choose
+    have hβU := hβU_model.choose_spec.1
+    have heβU := hβU_model.choose_spec.2
     rw [K.tensorIso_both P O hP (unit_kflat.{c, v, r} J R)] at heβ
     have hchain : F.map β.hom = γ.hom ≫
         (coefficientTotalTensor.{r, max c v, v} (J.over U) (R.over U)).map
@@ -503,10 +530,10 @@ theorem ringedSlice_scalar_unit :
         have he : (e.hom.f 0).val.app V
             (ringedTensorUnitSection.{c, v, r} J R (op V.unop.left) b) =
               ringedTensorUnitSection.{max c v, v, r} (J.over U) (R.over U) V b := he_unit V b
-        rewrite [he, hβU]
+        rewrite [he]
         set_option backward.isDefEq.respectTransparency.types false in
         set_option backward.isDefEq.respectTransparency false in
-         rfl
+         exact (hβU k (Int.add_zero k) V b x).symm
     let α := α₀
     have hPU := (d₀.kflat P hP fP).1
     have hOU := unit_kflat.{max c v, v, r} (J.over U) (R.over U)
@@ -569,17 +596,7 @@ theorem ringedSlice_scalar_unit :
         Iso.refl_hom, Prod.mkHom]
   refine ⟨o, ?_⟩
   intro N
-  classical
-  obtain ⟨P, f, hP, fP, hf, _⟩ :=
-    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R)
-      (DerivedCategory.Q.objPreimage N)
-  have : IsIso (DerivedCategory.Q.map f) :=
-    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hf
-  let eP := asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso N
-  apply scalar_of_iso S SU d₀ _ _ K.unitIso KU.unitIso o eP
-  apply base P hP
-  intro n
-  exact (exactFunctor _ _).prop_of_iso
-    (siteSheafTensorRightIso R (P.X n)).symm (fP n)
+  obtain ⟨P, hP, fP, ⟨eP⟩⟩ := scalar_flat_representative.{c, v, r, w} J R N
+  exact scalar_of_iso S SU d₀ _ _ K.unitIso KU.unitIso o eP (base P hP fP)
 
 end CategoryTheory
