@@ -819,6 +819,7 @@ private theorem derivedUnitRestrictionOnComplex (φ : R ⟶ B) (r : ℕ)
       (ordinaryUnitRestriction φ r a h hu N)
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Normalize the dependent endpoints of the chosen tower and localization functors.
 private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
@@ -910,6 +911,7 @@ private theorem normalizedProjectionSquare (φ : R ⟶ B) (r : ℕ)
   exact NatTrans.congr_app ht M
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Assemble the independently normalized comparisons without unfolding their models.
 /-- Scalar restriction identifies strict Koszul towers, with the identity on each ordered
 exterior coordinate, their coaugmentations, and their normalized total derived limits.
