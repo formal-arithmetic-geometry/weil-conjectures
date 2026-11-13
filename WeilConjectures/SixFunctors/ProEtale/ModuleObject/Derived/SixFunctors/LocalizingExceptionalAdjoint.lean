@@ -310,23 +310,9 @@ theorem exists_localizingExceptionalAdjoint
         ((localizingClosureProEtale Λ Y).liftCompιIso _ _).symm
     exact preservesColimitsOfShape_of_reflects_of_preserves F
       (localizingClosureProEtale Λ Y).ι
-  let : ObjectProperty.EssentiallySmall.{u + 1} SX := hessX
-  have hSXL : SX ≤ localizingClosureProEtale Λ X := by
-    intro K hK P hP hSP
-    exact hSP K hK
-  let : LocallySmall.{u + 1} SX.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hSXL)
-  obtain ⟨QX, hQX, hQSX, hSXQ⟩ := ObjectProperty.EssentiallySmall.exists_small_le SX
-  let := hQX
-  let : LocallySmall.{u + 1} QX.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hQSX)
-  let : (ObjectProperty.ιOfLE hQSX).IsEquivalence :=
-    (ObjectProperty.isEquivalence_ιOfLE_iff hQSX).mpr hSXQ
-  let : EssentiallySmall.{u + 1} SX.FullSubcategory :=
-    (essentiallySmall_congr (ObjectProperty.ιOfLE hQSX).asEquivalence).mp
-      (essentiallySmall_of_small_of_locallySmall _)
-  let IX := SmallModel.{u + 1} SX.FullSubcategory
-  let e := (equivSmallModel.{u + 1} SX.FullSubcategory).symm
+  obtain ⟨IX, hIX, ⟨eX⟩⟩ := (ObjectProperty.exists_equivalence_iff SX).mpr hessX
+  let := hIX
+  let e := eX.symm
   have hLX : ∀ i : IX, localizingClosureProEtale Λ X (e.functor.obj i).obj := by
     intro i P hP hSP
     exact hSP _ (e.functor.obj i).property
@@ -358,23 +344,12 @@ theorem exists_localizingExceptionalAdjoint
     exact compact_of_iso q (hcompactX i)
   let SY := constantModelBoundedConstructible Λ Y ⊓ fun K ↦
     DerivedCategory.finiteTorAmplitude _ K
-  let : ObjectProperty.EssentiallySmall.{u + 1} SY := hessY
+  obtain ⟨IY, hIY, ⟨eY'⟩⟩ := (ObjectProperty.exists_equivalence_iff SY).mpr hessY
+  let := hIY
+  let eY := eY'.symm
   have hSYL : SY ≤ localizingClosureProEtale Λ Y := by
     intro K hK P hP hSP
     exact hSP K hK
-  let : LocallySmall.{u + 1} SY.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hSYL)
-  obtain ⟨QY, hQY, hQSY, hSYQ⟩ := ObjectProperty.EssentiallySmall.exists_small_le SY
-  let := hQY
-  let : LocallySmall.{u + 1} QY.FullSubcategory :=
-    locallySmall_of_faithful (ObjectProperty.ιOfLE hQSY)
-  let : (ObjectProperty.ιOfLE hQSY).IsEquivalence :=
-    (ObjectProperty.isEquivalence_ιOfLE_iff hQSY).mpr hSYQ
-  let : EssentiallySmall.{u + 1} SY.FullSubcategory :=
-    (essentiallySmall_congr (ObjectProperty.ιOfLE hQSY).asEquivalence).mp
-      (essentiallySmall_of_small_of_locallySmall _)
-  let IY := SmallModel.{u + 1} SY.FullSubcategory
-  let eY := (equivSmallModel.{u + 1} SY.FullSubcategory).symm
   have hLY : ∀ i : IY, localizingClosureProEtale Λ Y (eY.functor.obj i).obj :=
     fun i ↦ hSYL _ (eY.functor.obj i).property
   obtain ⟨hcompactY, _⟩ := hgenY IY eY hLY
