@@ -111,6 +111,7 @@ private theorem comparison_formula (r : D ⟶ C) (s : D ⟶ A) (b : C ⟶ B) (t 
     ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W,(t.hom.app W).hom] m) = _
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Comparing the stalk scalar actions unfolds the filtered-colimit module constructions.
 /-- A fixed comparison morphism with the tensor-unit formula is invertible over a
