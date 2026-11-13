@@ -349,9 +349,7 @@ variable (X Y X' Y' : Scheme.{u})
   [dY' : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))]
   [iY' : Fact (∀ t : Y', IsUnit (l : Y'.presheaf.stalk t))]
 
-set_option maxHeartbeats 1000000 in
 set_option profiler true in
--- the restated goal unfolds the concrete stage functors
 /-- `pbcExchangeStageSquare` on integral objects, with the composite comparisons of
 `StageSystem.Morphism.comp` expanded.
 Source: blueprint main-20261015, order 1312, final exchange sentence and the
@@ -372,7 +370,7 @@ Formalized below (before the `sorry`):
 * The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
 * The pullback equations are solved for `β.inv` by `eq_inv_comp_comp_inv`, with the outer
   isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
-The goal is now restated by `change` (it needs `maxHeartbeats 1000000`) and flipped by
+The goal is now restated by `change` and flipped by
 `comp_comp_hom_eq_hom_comp`, so the two pullback comparisons appear as `β.inv`.
 The direct-image comparisons are solved for `β.hom` by `eq_comp_inv_of_comp_hom`. All four
 solved forms are substituted by `erw`, so every β is now a localized ambient scalar
