@@ -125,18 +125,10 @@ theorem koszulOpenHom_restriction_surjective
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
     ∀ ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.1,
       ∃ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), v e ≫ R.map φ = ψ := by
-  dsimp only
+  intro R
   classical
   let := HasDerivedCategory.standard (ModuleCat.{uMain} A)
   obtain ⟨F, hF, ⟨i⟩⟩ := affine_qcoh_representative A E
-  let R := ((SheafOfModules.overFunctor.{uMain}
-      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{uMain}
-          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-        (D := SheafOfModules.{uMain}
-          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
   let j (e : ℕ) : R.obj (koszulOpenObject A r f e) ≅ R.obj (koszulOpenStructure A) :=
     ⟨R.map (koszulOpenUnit A r f e), v e, hv₁ e, hv₂ e⟩
   let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0

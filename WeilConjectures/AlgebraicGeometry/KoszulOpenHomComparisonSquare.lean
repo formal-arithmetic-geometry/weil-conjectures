@@ -101,27 +101,7 @@ theorem koszulOpenHom_comparison_square
         R.map (koszulOpenUnit A r f e) ≫ ψ = R.map φ →
         b ψ = H.map c (H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ)) := by
   classical
-  let F₀ := SheafOfModules.overFunctor.{uMain}
-    (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)
-  let G₀ := Equivalence.functor
-      (C := SheafOfModules.{uMain}
-        ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-      (D := SheafOfModules.{uMain}
-        (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-      (Scheme.Modules.overEquiv (koszulOpen A r f))
-  let R := (F₀ ⋙ G₀).mapDerivedCategory
-  let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
-  let D := koszulCechHomDiagram A r f
-    (((affineOpenSections A ⊤).mapHomologicalComplex (ComplexShape.up ℤ)).obj F)
-  let G := (affineOpenSections A (koszulOpen A r f)).rightDerivedFunctor
-  let c := koszulCechDerivedComparison A r f F ≫ G.map i.hom
-  change ∃ (a : ∀ e : ℕ, (koszulOpenObject A r f e ⟶ E.obj) ≃
-          H.obj (DerivedCategory.Q.obj (D.obj e)))
-      (b : (R.obj (koszulOpenStructure A) ⟶ R.obj E.obj) ≃ H.obj (G.obj E.obj)),
-      ∀ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.obj)
-        (ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.obj),
-        R.map (koszulOpenUnit A r f e) ≫ ψ = R.map φ →
-        b ψ = H.map c (H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ))
+  intro R H D G c
   obtain ⟨a₀, ha₀, hrep⟩ :=
     koszulOpenHom_chain_representatives.{uMain, wMain, vMain} A r f F hF
   obtain ⟨b, hb, hchain⟩ :=
