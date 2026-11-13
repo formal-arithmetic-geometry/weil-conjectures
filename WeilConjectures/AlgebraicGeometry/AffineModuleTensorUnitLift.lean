@@ -136,6 +136,10 @@ theorem affine_module_tensor_unitLift
       ∃ a : G ⟶ (R).obj (H.obj G),
         (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G) := by
   classical
+  let : HasWeakSheafify (𝓙 U) AddCommGrpCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 X) AddCommGrpCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 U) CommRingCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 X) CommRingCat.{u} := inferInstance
   have _ := hpush
   have _ := hb
   intro G
@@ -196,17 +200,18 @@ theorem affine_module_tensor_unitLift
       d.val.app V (r • g) =
         @SMul.smul _ _ (((R).obj (H.obj G)).val.obj V).isModule.toSMul r
           (d.val.app V g) := by
-    rw [hd, hd]
-    rw [(Classical.choose_spec
-      (TopCat.Sheaf.exists_inverseImageModuleInstances f.base A G)).2]
-    erw [(q.val.app ((Opens.map f.base).op.obj V)).hom.map_smul]
+    refine (hd V (r • g)).trans ?_
+    refine (congrArg (q.val.app ((Opens.map f.base).op.obj V))
+      ((Classical.choose_spec
+        (TopCat.Sheaf.exists_inverseImageModuleInstances f.base A G)).2 V r g)).trans ?_
+    refine ((q.val.app ((Opens.map f.base).op.obj V)).hom.map_smul _ _).trans ?_
     let adjRing := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)
     have htriangle : adjRing.unit.app A ≫
         ((Opens.map f.base).sheafPushforwardContinuous CommRingCat.{u}
           (𝓙 X) (𝓙 U)).map e₀ = 𝟙 A := by
-      erw [← Adjunction.homEquiv_unit]
-      exact (adjRing.homEquiv A U.sheaf).apply_symm_apply (𝟙 A)
+      exact (adjRing.homEquiv_unit A U.sheaf e₀).symm.trans
+        ((adjRing.homEquiv A U.sheaf).apply_symm_apply (𝟙 A))
     have hr : ε.hom.app ((Opens.map f.base).op.obj V)
         (t.hom.app ((Opens.map f.base).op.obj V)
           ((adjRing.unit.app A).hom.app V r)) = r := by
@@ -221,7 +226,9 @@ theorem affine_module_tensor_unitLift
           ((adjRing.unit.app A).hom.app V r))) _ =
       @SMul.smul _ _
         ((H.obj G).val.obj ((Opens.map f.base).op.obj V)).isModule.toSMul r _
-    rw [hr]
+    exact congrArg₂ (fun r p ↦ @SMul.smul _ _
+      ((H.obj G).val.obj ((Opens.map f.base).op.obj V)).isModule.toSMul r p)
+      hr (hd V g).symm
   let a : G ⟶ (R).obj (H.obj G) :=
     ⟨PresheafOfModules.homMk
       ((PresheafOfModules.toPresheaf X.ringCatSheaf.obj).map d.val) hscalar⟩

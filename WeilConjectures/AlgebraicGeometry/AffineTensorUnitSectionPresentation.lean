@@ -273,6 +273,11 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
           (γ.app G).val.app (fV (op V))
             (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
   classical
+  let : HasWeakSheafify (𝓙 U) AddCommGrpCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 X) AddCommGrpCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 U) CommRingCat.{u} := inferInstance
+  let : HasWeakSheafify (𝓙 X) CommRingCat.{u} := inferInstance
+  dsimp only
   let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
   let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
   let : Module Γ(X, V) Γ(H.obj G, f ⁻¹ᵁ V) := Module.compHom _ (f.app V).hom
@@ -341,6 +346,8 @@ theorem affine_tensor_unit_section_presentation [IsAffineHom f]
     exact congrArg (fun a ↦ a.hom.app (op (f ⁻¹ᵁ V)) c) hring.2.1
   obtain ⟨hq, hk⟩ := scalar_tensor_presentation
     (D := Γ(X, V)) (C := Γ(U, f ⁻¹ᵁ V))
+    (E := B.obj.obj (op (f ⁻¹ᵁ V))) (N := G.val.obj (op V))
+    (M := (P.obj G).val.obj (op (f ⁻¹ᵁ V))) (T := Γ(H.obj G, f ⁻¹ᵁ V))
     (b.hom.app (op (f ⁻¹ᵁ V))).hom δ (ε.hom.app (op (f ⁻¹ᵁ V))).hom
     hb hδ hgen p hpα hpδ e q he
   refine ⟨q, hq, hk, ?_⟩
