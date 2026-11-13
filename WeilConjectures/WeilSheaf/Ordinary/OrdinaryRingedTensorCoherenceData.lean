@@ -48,6 +48,8 @@ structure OrdinaryRingedTensorUnderivedData where
           (E.functor.obj Q) (E.functor.obj I)).symm
             (E.functor.map f ≫ H.hom.app (op P, I))
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- Elaborating the concrete tensor instances requires large definitional comparisons.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- A normalized comparison on the existing ordinary and ringed cochain tensors.
