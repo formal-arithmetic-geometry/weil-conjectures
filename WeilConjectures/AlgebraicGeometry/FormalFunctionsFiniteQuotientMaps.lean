@@ -33,6 +33,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 400000 in
+set_option trace.profiler true in
 -- Nested cohomology restrictions and resolution comparisons need extra elaboration heartbeats.
 /-- Composing the local germ formula with canonical finite-level pullback gives theta.
 Source: Stacks Project, Tag 02OD, factorization c_n through c; Tags 01F7, 01FB, 01E4.

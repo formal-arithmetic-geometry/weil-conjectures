@@ -240,6 +240,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 500000 in
+set_option trace.profiler true in
 -- The resolution and evaluation comparisons use multiple concrete functor composites.
 /-- The class of an augmented restricted section is the direct-image augmentation
 of the same section on the original open.
