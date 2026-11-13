@@ -43,8 +43,6 @@ lemma nonempty_pullback_unit_iso_of_isFreeGenerator {Y : Scheme.{u}} (h : Y ⟶ 
   have := isIso_homOfGlobalSection he
   exact ⟨pullbackObjUnitIso h ≪≫ asIso (homOfGlobalSection _ e)⟩
 
-set_option profiler true in
-set_option maxHeartbeats 1000000 in
 -- the defeq checks through the small étale and pro-étale sites are slow
 /-- The `𝔾ₘ`-torsor `Isom(𝒪, L)` on the small étale site. -/
 noncomputable def etaleIsoTorsor [SheafOfModules.IsInvertible.{u, u, u} (L : X.Modules)] :
