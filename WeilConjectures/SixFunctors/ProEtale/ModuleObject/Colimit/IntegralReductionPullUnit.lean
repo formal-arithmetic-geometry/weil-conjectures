@@ -67,6 +67,7 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
   rfl
 
 set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option trace.profiler true in
 
 /-- The commutation `ι` of the restriction of scalars with the derived pullbacks, on the image of
 an object of the homotopy category, is the underived commutation `comapUpperStarIso` modulo
@@ -160,6 +161,7 @@ lemma upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv
   exact h
 
 set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**, on the image of a K-flat complex. -/
 lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
     (P : CochainComplex (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
@@ -242,6 +244,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
 
 set_option maxHeartbeats 4000000 in -- large composites of derived functors on sheaf categories
+set_option trace.profiler true in
 /-- **(Pull) is compatible with the units of `Ext ⊣ Res`**: for `M ∈ D(Y_proét, Λ)`, the
 pullback of the unit `M ⟶ Res (Ext M)`, followed by the commutation `ι` of `Res` with `Lf^*`, is
 the unit at `Lf^* M` followed by `Res` of (Pull). -/
