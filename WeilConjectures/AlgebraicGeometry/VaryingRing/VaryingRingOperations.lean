@@ -994,7 +994,7 @@ private theorem coMate_isIso
     IsIso (mateEquiv (coAdj K B n) (coAdj J A n) d.hom) := by
   let β : coFunctor K B n ⋙ SheafOfModules.pushforward φ ⟶
       SheafOfModules.pushforward ψ ⋙ coFunctor J A n :=
-    (mateEquiv (coAdj K B n) (coAdj J A n) d.hom).natTrans
+    (mateEquiv (coAdj K B n) (coAdj J A n) d.hom)
   have hb (M) (V : (ℕ × C)ᵒᵖ)
       (x : ((coFunctor K B n ⋙ SheafOfModules.pushforward φ).obj M).val.obj V)
       (h : PLift (n ≤ V.unop.1)) :
@@ -1083,7 +1083,7 @@ private theorem inverseMate_isIso_of_iterated
     (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
     (d : R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂)
     [IsIso (mateEquiv adj₄ adj₃ d)] :
-    IsIso ((mateEquiv adj₁ adj₂).symm d).natTrans := by
+    IsIso ((mateEquiv adj₁ adj₂).symm d) := by
   let α := (mateEquiv adj₁ adj₂).symm d
   have h := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ adj₃ adj₄ α
   rw [Equiv.apply_symm_apply] at h
@@ -1150,10 +1150,10 @@ theorem moduleEvalG_exists {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     Scheme.proEtaleRingModuleAdjunction f (coefficients R Y n)
     (coefficients R X n) (StrictTower.constantRingIso (R n) f)
   have hj : IsIso ((mateEquiv (moduleAdj R φ f) adj).symm
-      (moduleEvalP R φ f n).hom).natTrans :=
+      (moduleEvalP R φ f n).hom) :=
     inverseMate_isIso_of_iterated (moduleAdj R φ f) adj (coA Y) (coA X) _
   let α := ((mateEquiv (moduleAdj R φ f) adj).symm
-    (moduleEvalP R φ f n).hom).natTrans
+    (moduleEvalP R φ f n).hom)
   let d := (asIso α).symm
   refine ⟨d, ?_⟩
   intro N
@@ -1920,7 +1920,7 @@ private theorem extensionEvaluation_exists
       (ring.{u + 1, u, u + 1} (ProEt.topology X) (coefficients R X n))
       (evaluation_ring.{u + 1, u, u + 1} (ProEt.topology X)
         (coefficients R X) (coefficientTransition R φ X) n)) e ≪≫
-    asIso (mateEquiv (coA X) (coA U) d.hom).natTrans ≪≫
+    asIso (mateEquiv (coA X) (coA U) d.hom) ≪≫
       isoWhiskerRight e'.symm (coFor (ProEt.topology U) (seqRing R φ U) n
         (ring.{u + 1, u, u + 1} (ProEt.topology U) (coefficients R U n))
         (evaluation_ring.{u + 1, u, u + 1} (ProEt.topology U)
@@ -2027,14 +2027,14 @@ private theorem inverseMateIsoOfUnit
     (d : P ⋙ E ⟶ E' ⋙ P') (q : F ⋙ E' ≅ E ⋙ F')
     (hq : ∀ N, E.map (a.unit.app N) ≫ d.app (F.obj N) ≫
       P'.map (q.hom.app N) = b.unit.app (E.obj N)) :
-    IsIso ((mateEquiv a b).symm d).natTrans := by
-  have h : ((mateEquiv a b).symm d).natTrans = q.inv := by
+    IsIso ((mateEquiv a b).symm d) := by
+  have h : ((mateEquiv a b).symm d) = q.inv := by
     apply NatTrans.ext
     funext N
     apply (b.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
     have hu : E.map (a.unit.app N) ≫ d.app (F.obj N) =
-        b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).natTrans.app N) :=
+        b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).app N) :=
       unit_mateEquiv_symm a b d N
     rw [← hu]
     apply (cancel_mono (P'.map (q.hom.app N))).mp
@@ -2050,9 +2050,9 @@ private theorem inverseMateIsoOfOtherAdj
     {F : A ⥤ B} {P : B ⥤ A} {F' : C ⥤ D} {P' : D ⥤ C}
     (a qa : F ⊣ P) (b qb : F' ⊣ P') (E : A ⥤ C) (E' : B ⥤ D)
     (d : P ⋙ E ≅ E' ⋙ P')
-    [IsIso ((mateEquiv qa qb).symm d.hom).natTrans] :
-    IsIso ((mateEquiv a b).symm d.hom).natTrans := by
-  let α := ((mateEquiv qa qb).symm d.hom).natTrans
+    [IsIso ((mateEquiv qa qb).symm d.hom)] :
+    IsIso ((mateEquiv a b).symm d.hom) := by
+  let α := ((mateEquiv qa qb).symm d.hom)
   let q := (asIso α).symm
   have hq (N : A) : E.map (qa.unit.app N) ≫ d.hom.app (F.obj N) ≫
       P'.map (q.hom.app N) = qb.unit.app (E.obj N) := by
@@ -2074,11 +2074,11 @@ private theorem mateWhiskerIso
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {G G' : A ⥤ C} {H H' : B ⥤ D}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (d : G ⋙ L₂ ≅ L₁ ⋙ H)
-    (σ : G' ≅ G) (τ : H ≅ H') [IsIso (mateEquiv a b d.hom).natTrans] :
+    (σ : G' ≅ G) (τ : H ≅ H') [IsIso (mateEquiv a b d.hom)] :
     IsIso (mateEquiv a b
-      (isoWhiskerRight σ L₂ ≪≫ d ≪≫ isoWhiskerLeft L₁ τ).hom).natTrans := by
+      (isoWhiskerRight σ L₂ ≪≫ d ≪≫ isoWhiskerLeft L₁ τ).hom) := by
   have hd : (isoWhiskerRight σ L₂ ≪≫ d ≪≫ isoWhiskerLeft L₁ τ).hom =
-      (((TwoSquare.mk _ _ _ _ d.hom).whiskerTop σ.hom).whiskerBottom τ.hom).natTrans := by
+      (((TwoSquare.mk _ _ _ _ d.hom).whiskerTop σ.hom).whiskerBottom τ.hom) := by
     ext X
     simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
       isoWhiskerLeft_hom, whiskerRight_app, whiskerLeft_app,
@@ -2094,7 +2094,7 @@ private theorem ordinaryOpenMateIso
     (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n, R (n + 1) ⟶ R n)
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (n : ℕ) :
     IsIso ((mateEquiv (moduleJAdj R φ j) (StrictTower.moduleJAdj (R n) j)).symm
-      (moduleEvalG R φ j n).hom).natTrans := by
+      (moduleEvalG R φ j n).hom) := by
   let coA (Z : Scheme.{u}) :=
     coForAdj (ProEt.topology Z)
       (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (ProEt.topology Z))
@@ -2108,7 +2108,7 @@ private theorem ordinaryOpenMateIso
   let : ((𝟭 ℕ).prod (openMap j)).IsContinuous
       (coefficientSequenceTopology (ProEt.topology U))
       (coefficientSequenceTopology (ProEt.topology X)) := prodOpenContinuous j
-  have : IsIso (mateEquiv (coA X) (coA U) d.hom).natTrans := by
+  have : IsIso (mateEquiv (coA X) (coA U) d.hom) := by
     exact coForMate_isIso _ _ (openMap j) _ _ n (inv (openRingTranspose R φ j)) _ _
       (evaluation_ring.{u + 1, u, u + 1} (ProEt.topology U)
         (coefficients R U) (coefficientTransition R φ U) n)
@@ -2127,10 +2127,10 @@ private theorem ordinaryOpenMateIso
         (openLevelAdj R j n) (eval R φ X n) (eval R φ U n)
         (moduleEvalP R φ j n) d (openEval_unit R φ j n)
     · exact (moduleEvalG_existsUnique R φ j n).choose_spec.1
-  have : IsIso (mateEquiv (coA X) (coA U) q.hom).natTrans :=
+  have : IsIso (mateEquiv (coA X) (coA U) q.hom) :=
     mateWhiskerIso (coA X) (coA U) d e e'.symm
-  have : IsIso (mateEquiv (coA X) (coA U) (moduleEvalG R φ j n).hom).natTrans := by
-    exact hq ▸ (inferInstance : IsIso (mateEquiv (coA X) (coA U) q.hom).natTrans)
+  have : IsIso (mateEquiv (coA X) (coA U) (moduleEvalG R φ j n).hom) := by
+    exact hq ▸ (inferInstance : IsIso (mateEquiv (coA X) (coA U) q.hom))
   exact inverseMate_isIso_of_iterated (moduleJAdj R φ j) (StrictTower.moduleJAdj (R n) j)
     (coA U) (coA X) (moduleEvalG R φ j n).hom
 
@@ -2470,13 +2470,13 @@ private theorem inverseMateEqOfUnit
     (d : P ⋙ E ⟶ E' ⋙ P') (q : F ⋙ E' ≅ E ⋙ F')
     (hq : ∀ N, E.map (a.unit.app N) ≫ d.app (F.obj N) ≫
       P'.map (q.hom.app N) = b.unit.app (E.obj N)) :
-    ((mateEquiv a b).symm d).natTrans = q.inv := by
+    ((mateEquiv a b).symm d) = q.inv := by
   apply NatTrans.ext
   funext N
   apply (b.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
   have hu : E.map (a.unit.app N) ≫ d.app (F.obj N) =
-      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).natTrans.app N) :=
+      b.unit.app (E.obj N) ≫ P'.map (((mateEquiv a b).symm d).app N) :=
     unit_mateEquiv_symm a b d N
   rw [← hu]
   apply (cancel_mono (P'.map (q.hom.app N))).mp
@@ -2492,7 +2492,7 @@ private theorem ordinary_finiteMate_iso
     {L : StrictTower.Modules (R n) Y ⥤ Modules R φ Y}
     {L' : StrictTower.Modules (R n) X ⥤ Modules R φ X}
     (a : L ⊣ eval R φ Y n) (b : L' ⊣ eval R φ X n) :
-    IsIso ((mateEquiv a b).symm (moduleEvalG R φ f n).inv).natTrans := by
+    IsIso ((mateEquiv a b).symm (moduleEvalG R φ f n).inv) := by
   let c := AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunction f
     (coefficients R Y n) (coefficients R X n) (StrictTower.constantRingIso (R n) f)
   have h := inverseMateEqOfUnit (moduleAdj R φ f) c (eval R φ Y n)
@@ -2500,11 +2500,10 @@ private theorem ordinary_finiteMate_iso
     (moduleEvalG_existsUnique R φ f n).choose_spec.1
   have hs : (mateEquiv (moduleAdj R φ f) c).symm (moduleEvalP R φ f n).hom =
       TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app h M
   have : IsIso (mateEquiv (moduleAdj R φ f) c
-      (TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (moduleEvalG R φ f n).inv)) := by
     rw [← hs, Equiv.apply_symm_apply]
     infer_instance
   exact inverseMate_isIso_of_iterated a b c (moduleAdj R φ f) _
@@ -2515,8 +2514,8 @@ private theorem mate_isIso_of_inverseMate
     {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (c : F₁ ⊣ U₁) (d : F₂ ⊣ U₂)
     (τ : R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂)
-    (hi : IsIso ((mateEquiv a b).symm τ).natTrans) :
-    IsIso (mateEquiv d c τ).natTrans := by
+    (hi : IsIso ((mateEquiv a b).symm τ)) :
+    IsIso (mateEquiv d c τ) := by
   have := hi
   have h := iterated_mateEquiv_conjugateEquiv a b c d ((mateEquiv a b).symm τ)
   rw [Equiv.apply_symm_apply] at h
@@ -2540,9 +2539,9 @@ private theorem derived_finiteMate_iso
   have : PreservesFiniteColimits (StrictTower.modulePullback (R n) f) :=
     StrictTower.modulePullback_finiteColimits (R n) f
   let τ := (moduleEvalG R φ f n).inv
-  have : IsIso ((mateEquiv dY.ordinaryAdj dX.ordinaryAdj).symm τ).natTrans :=
+  have : IsIso ((mateEquiv dY.ordinaryAdj dX.ordinaryAdj).symm τ) :=
     ordinary_finiteMate_iso R φ f n dY.ordinaryAdj dX.ordinaryAdj
-  let ι := asIso ((mateEquiv dY.ordinaryAdj dX.ordinaryAdj).symm τ).natTrans
+  let ι := asIso ((mateEquiv dY.ordinaryAdj dX.ordinaryAdj).symm τ)
   have hι (P) : dX.ordinaryAdj.homEquiv _ _ (ι.hom.app P) =
       (StrictTower.modulePullback (R n) f).map (dY.ordinaryAdj.unit.app P) ≫
       τ.app (dY.ordinary.obj P) := by
@@ -2574,7 +2573,7 @@ private theorem derived_finiteMate_iso
     (fun P hP ↦ ringPull_preserves_flat f (coefficients R Y n) (coefficients R X n)
       (StrictTower.constantRingIso (R n) f) P hP.1 hP.2)
   have hD : IsIso ((mateEquiv dY.adjunction dX.adjunction).symm
-      (evalG R φ f n).inv).natTrans := by
+      (evalG R φ f n).inv) := by
     change IsIso (derivedExtensionMate dY dX (pull R φ f)
       (StrictTower.modulePullback (R n) f).mapDerivedCategory (evalG R φ f n).inv)
     infer_instance
@@ -2891,17 +2890,17 @@ private theorem localizedInverseMate_isIso
     [PreservesFiniteLimits E] [PreservesFiniteColimits E]
     [PreservesFiniteLimits E'] [PreservesFiniteColimits E']
     (d : P ⋙ E ≅ E' ⋙ P')
-    [IsIso ((mateEquiv a b).symm d.hom).natTrans] :
+    [IsIso ((mateEquiv a b).symm d.hom)] :
     IsIso ((mateEquiv (exactAdj a) (exactAdj b)).symm
-      (Functor.mapDerivedCategorySquareIso d).hom).natTrans := by
-  let β := asIso ((mateEquiv a b).symm d.hom).natTrans
+      (Functor.mapDerivedCategorySquareIso d).hom) := by
+  let β := asIso ((mateEquiv a b).symm d.hom)
   have hb (M : A) : b.unit.app (E.obj M) ≫ P'.map (β.hom.app M) =
       E.map (a.unit.app M) ≫ d.hom.app (L.obj M) :=
     (unit_mateEquiv_symm a b d.hom M).symm
   have hd := exactDerivedMate a b d β hb
   have he : ((mateEquiv (exactAdj a)
       (exactAdj b)).symm
-      (Functor.mapDerivedCategorySquareIso d).hom).natTrans =
+      (Functor.mapDerivedCategorySquareIso d).hom) =
       (Functor.mapDerivedCategorySquareIso β).hom := by
     ext M
     apply ((exactAdj b).homEquiv _ _).injective
@@ -2912,7 +2911,7 @@ private theorem localizedInverseMate_isIso
         (Functor.mapDerivedCategorySquareIso d).hom.app (L.mapDerivedCategory.obj M) =
       (exactAdj b).unit.app (E.mapDerivedCategory.obj M) ≫ P'.mapDerivedCategory.map
         (((mateEquiv (exactAdj a) (exactAdj b)).symm
-          (Functor.mapDerivedCategorySquareIso d).hom).natTrans.app M) at hu
+          (Functor.mapDerivedCategorySquareIso d).hom).app M) at hu
     exact hu.symm.trans (hd M).symm
   rw [he]
   infer_instance
@@ -2933,17 +2932,17 @@ private theorem derivedOpenMateIso
   have : PreservesFiniteColimits (StrictTower.moduleJ (R n) j) :=
     (StrictTower.moduleJ_exact (R n) j).2.2
   have : IsIso ((mateEquiv (moduleJAdj R φ j)
-    (StrictTower.moduleJAdj (R n) j)).symm (moduleEvalG R φ j n).hom).natTrans :=
+    (StrictTower.moduleJAdj (R n) j)).symm (moduleEvalG R φ j n).hom) :=
       ordinaryOpenMateIso R φ j n
   have := localizedInverseMate_isIso (moduleJAdj R φ j)
     (StrictTower.moduleJAdj (R n) j) (eval R φ U n) (eval R φ X n)
       (moduleEvalG R φ j n)
   have : IsIso ((mateEquiv (exactAdj (moduleJAdj R φ j))
       (exactAdj (StrictTower.moduleJAdj (R n) j))).symm
-      (evalG R φ j n).hom).natTrans := by
+      (evalG R φ j n).hom) := by
     change IsIso ((mateEquiv (exactAdj (moduleJAdj R φ j))
       (exactAdj (StrictTower.moduleJAdj (R n) j))).symm
-      (Functor.mapDerivedCategorySquareIso (moduleEvalG R φ j n)).hom).natTrans
+      (Functor.mapDerivedCategorySquareIso (moduleEvalG R φ j n)).hom)
     infer_instance
   exact inverseMateIsoOfOtherAdj (jAdj R φ j)
     (exactAdj (moduleJAdj R φ j))

@@ -24,9 +24,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option maxHeartbeats 400000 in
 -- The cone construction elaborates several derived restriction comparisons.
-set_option synthInstance.maxHeartbeats 400000 in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Two derived objects with an overlap identification extend to one ambient derived object.

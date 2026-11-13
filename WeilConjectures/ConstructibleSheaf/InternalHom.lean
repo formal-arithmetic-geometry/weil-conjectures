@@ -109,7 +109,7 @@ constant sheaf functor is monoidal, additive, left exact and a left adjoint. -/
 theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ)
     [Module.FinitePresentation Λ P] :
     IsIso ((ihomComparison (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-      P).natTrans.app Q) := by
+      P).app Q) := by
   have := MonoidalClosed.monoidalPreadditive_of_braided
     (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   have : PreservesFiniteLimits (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
@@ -163,11 +163,11 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.ihom [IsNoetherianRing Λ]
     refine ⟨(CategoryTheory.ihom P).obj Q, ?_, ⟨?_⟩⟩
     · have : Module.Finite Λ (P →ₗ[Λ] Q) := Module.Finite.linearMap_of_isNoetherianRing
       exact Module.Finite.equiv ModuleCat.homLinearEquiv.symm
-    · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).natTrans.app M) ≪≫
+    · exact asIso ((ihomComparison (Etale.upperStar (ModuleCat.{u + 1} Λ) g) L).app M) ≪≫
         (CategoryTheory.ihom _).mapIso eM.symm ≪≫
         asIso ((MonoidalClosed.pre eL.hom).app _) ≪≫
         (asIso ((ihomComparison (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-          P).natTrans.app Q)).symm
+          P).app Q)).symm
   choose H hH e using key
   have hc (i : 𝒰.I₀) : ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
       ((CategoryTheory.ihom L).obj M)).IsConstant (𝒰.X i).smallEtaleTopology :=

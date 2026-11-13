@@ -73,7 +73,6 @@ private def scalarHomMap {C : Type c} [Category.{v} C] {J : GrothendieckTopology
     ext x
     rfl
 
-set_option maxHeartbeats 800000 in
 -- The scalar comparison checks linearity and two-variable naturality on every slice.
 /-- Scalar restriction along a coefficient isomorphism preserves ordinary internal
 Hom, naturally in both module arguments.

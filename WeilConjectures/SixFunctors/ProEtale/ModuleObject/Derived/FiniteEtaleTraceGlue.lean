@@ -98,7 +98,7 @@ lemma glueComponent_map_obj {i : ι} (b : (W i).ProEt) :
       i b.hom rfl = (φ i).hom.app (op b) := by
   let Z := (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (g i))).obj b
   have h1 : (liftObjIso (Z := Z) g b.hom rfl).hom = 𝟙 _ := MorphismProperty.Over.Hom.ext (by
-    simp [liftObjIso, MorphismProperty.Over.isoMk]; try rfl)
+    simp [liftObjIso, MorphismProperty.Over.isoMk])
   have h2 : (liftObjIso (Z := Z) g b.hom rfl).inv = 𝟙 _ := MorphismProperty.Over.Hom.ext (by
     simp [liftObjIso, MorphismProperty.Over.isoMk]; try rfl)
   erw [glueComponent, h1, h2, op_id, G.obj.map_id, Category.id_comp, G'.obj.map_id,

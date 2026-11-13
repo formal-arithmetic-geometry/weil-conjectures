@@ -11,6 +11,7 @@ public import Mathlib.NumberTheory.Padics.Complex
 public import Mathlib.Topology.Baire.Lemmas
 public import Mathlib.Topology.Baire.LocallyCompactRegular
 public import WeilConjectures.RepresentationTheory.WeilGroupBoundedExtension
+public import Mathlib.Analysis.Normed.Field.Approximation
 
 /-!
 # Stable lattices for bounded `ℚ̄_ℓ`-representations

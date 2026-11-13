@@ -232,22 +232,22 @@ private theorem descent_counit_on_open {X Y : Scheme.{u}} (f : X ⟶ Y)
     TwoSquare.mk _ _ _ _ q.hom
   let b := (mateEquiv (descentAdj k) (descentAdj j)).symm sq
   let a := (mateEquiv (descentAdj f) (descentAdj g)).symm b
-  have ha : IsIso a.natTrans := by
+  have ha : IsIso a := by
     dsimp only [a, b]
     rw [iterated_mateEquiv_conjugateEquiv_symm]
     change IsIso ((conjugateEquiv ((descentAdj f).comp (descentAdj k))
       ((descentAdj j).comp (descentAdj g))).symm q.hom)
     infer_instance
-  have hb : b.natTrans.app M = moduleBaseChangeMap f g j k (morphismRestrict_ι f U).symm M := by
+  have hb : b.app M = moduleBaseChangeMap f g j k (morphismRestrict_ι f U).symm M := by
     apply ((descentAdj j).homEquiv _ _).injective
-    change ((descentAdj j).homEquiv _ _) (b.natTrans.app M) =
+    change ((descentAdj j).homEquiv _ _) (b.app M) =
       ((descentAdj j).homEquiv _ _)
         (((descentAdj j).homEquiv _ _).symm
           ((pushforward f).map ((descentAdj k).unit.app M) ≫
             q.hom.app ((tensorPullback k).obj M)))
     rw [Equiv.apply_symm_apply]
     exact (unit_mateEquiv_symm (descentAdj k) (descentAdj j) sq M).symm
-  have hbiso : IsIso (b.natTrans.app M) := by
+  have hbiso : IsIso (b.app M) := by
     rw [hb]
     apply moduleBaseChangeMap_open_square_isIso f g j k
       (morphismRestrict_ι f U).symm
@@ -257,12 +257,12 @@ private theorem descent_counit_on_open {X Y : Scheme.{u}} (f : X ⟶ Y)
   have := ha
   have := hbiso
   have := he
-  have hi : IsIso (a.natTrans.app ((pushforward f).obj M) ≫
+  have hi : IsIso (a.app ((pushforward f).obj M) ≫
       (tensorPullback k).map ((descentAdj f).counit.app M)) := by
     rw [← mateEquiv_counit_symm (descentAdj f) (descentAdj g) b M]
     infer_instance
   have := hi
-  exact IsIso.of_isIso_comp_left (a.natTrans.app ((pushforward f).obj M)) _
+  exact IsIso.of_isIso_comp_left (a.app ((pushforward f).obj M)) _
 
 private theorem descent_isIso_of_open_cover {X : Scheme.{u}} {I : Type u}
     (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) {M N : X.Modules} (φ : M ⟶ N)

@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.RingTheory.PopescuLiftPresentation
+public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.RingHom.Flat
 import WeilConjectures.RingTheory.AnnihilatorElementFlatBaseChange
 import WeilConjectures.RingTheory.PopescuLiftChartComparison

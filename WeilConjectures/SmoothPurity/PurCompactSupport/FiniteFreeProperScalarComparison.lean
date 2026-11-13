@@ -27,8 +27,8 @@ private theorem inverseMate_isIso_of_isIso
     {G : A ⥤ C} {H : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₁' ⊣ R₁) (b₂ : L₂' ⊣ R₂)
     (β : TwoSquare R₁ H G R₂)
-    [IsIso (((mateEquiv b₁ b₂).symm β).natTrans)] :
-    IsIso (((mateEquiv a₁ a₂).symm β).natTrans) := by
+    [IsIso (((mateEquiv b₁ b₂).symm β))] :
+    IsIso (((mateEquiv a₁ a₂).symm β)) := by
   let e₁ : L₁' ≅ L₁ := (conjugateIsoEquiv a₁ b₁).symm (Iso.refl R₁)
   let e₂ : L₂' ≅ L₂ := (conjugateIsoEquiv a₂ b₂).symm (Iso.refl R₂)
   have h₁ : conjugateEquiv a₁ b₁ e₁.hom = 𝟙 R₁ :=
@@ -44,8 +44,8 @@ private theorem inverseMate_isIso_of_isIso
     simp only [w, w', Equiv.apply_symm_apply, h₁, h₂]
     ext X
     simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
-  let : ∀ X, IsIso (w.natTrans.app X) := fun X ↦ by
-    have hc := congrArg (fun t ↦ t.natTrans.app X) h
+  let : ∀ X, IsIso (w.app X) := fun X ↦ by
+    have hc := congrArg (fun t ↦ t.app X) h
     change w'.app X ≫ H.map (e₁.hom.app X) = e₂.hom.app (G.obj X) ≫ w.app X at hc
     have : IsIso (e₂.hom.app (G.obj X) ≫ w.app X) := by
       rw [← hc]
@@ -103,21 +103,20 @@ theorem properComparison_isIso_of_finiteFree {R S : Coefficients.{u}} (a : Chang
     (R.ring V) (S.ring V) (R.ring U) (S.ring U)
     (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)
   have hm : (mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)
-      (TwoSquare.mk _ _ _ _ (FiniteFreeDirectImage.comparison sV sU a'))).natTrans =
+      (TwoSquare.mk _ _ _ _ (FiniteFreeDirectImage.comparison sV sU a'))) =
       δ.inv := by
     rw [FiniteFreeDirectImage.comparison,
       iterated_mateEquiv_conjugateEquiv]
     exact (conjugateEquiv _ _).apply_symm_apply δ.inv
   have he : ((mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)).symm
-      (TwoSquare.mk _ _ _ _ δ.inv)).natTrans =
+      (TwoSquare.mk _ _ _ _ δ.inv)) =
         FiniteFreeDirectImage.comparison sV sU a' := by
-    apply congrArg TwoSquare.natTrans
     apply (mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)).injective
     rw [Equiv.apply_symm_apply]
     ext X
     exact (NatTrans.congr_app hm X).symm
   have : IsIso (((mateEquiv (sU.adjunction a'.source)
-      (sV.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans) := by
+      (sV.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv))) := by
     rw [he]
     infer_instance
   have : IsIso (properComparison a g) := inverseMate_isIso_of_isIso

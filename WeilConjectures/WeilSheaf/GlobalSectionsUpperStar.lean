@@ -60,13 +60,14 @@ lemma globalSections_frobenius_eq_frobeniusStr [QuasiCompact (X ↘ Spec (CommRi
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (a : F.globalSections.carrier) :
     F.globalSections.frobenius a = ((WeilCoefficients.toModuleCat l).map
-      ((globalSectionsToUpperStar _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).app
+      ((globalSectionsToUpperStar _
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).app
         F.obj.carrier.X ≫ (Sheaf.Γ _ _).map F.frobeniusStr)).hom a := by
   have h : (globalSectionsToUpperStar _
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).app F.obj.carrier.X ≫
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).app F.obj.carrier.X ≫
         (Sheaf.Γ _ _).map F.frobeniusStr =
       (globalSectionsLowerStarIso _
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app F.obj.carrier.X ≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv).inv.app F.obj.carrier.X ≫
         (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map F.obj.str.hom) := by
     rw [frobeniusStr, Functor.map_comp, ← Category.assoc,
       globalSectionsToUpperStar_comp_upperStarIsoLowerStarInv]
@@ -88,24 +89,27 @@ noncomputable def globalSectionsRestrict [QuasiCompact (X ↘ Spec (CommRingCat.
 /-- Restriction of global sections commutes with the Frobenius, on the underlying sheaves. -/
 lemma globalSectionsToUpperStar_comp_frobeniusStr (F : WeilSheaf k₀ l Y) :
     (globalSectionsToUpperStar _ (φ̄)).app F.obj.carrier.X ≫
-      (globalSectionsToUpperStar _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).app
+      (globalSectionsToUpperStar _
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).app
         ((upperStar φ).obj F).obj.carrier.X ≫
       (Sheaf.Γ _ _).map ((upperStar φ).obj F).frobeniusStr =
-    (globalSectionsToUpperStar _ (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).app
+    (globalSectionsToUpperStar _
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).app
         F.obj.carrier.X ≫ (Sheaf.Γ _ _).map F.frobeniusStr ≫
       (globalSectionsToUpperStar _ (φ̄)).app F.obj.carrier.X := by
   have e₁ : (globalSectionsToUpperStar _ (φ̄)).app F.obj.carrier.X ≫
-      (globalSectionsToUpperStar _ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom).app
+      (globalSectionsToUpperStar _
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom).app
         ((upperStar φ).obj F).obj.carrier.X =
       (globalSectionsToUpperStar _
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom ≫ (φ̄))).app
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom ≫ (φ̄))).app
         F.obj.carrier.X ≫ (Sheaf.Γ _ _).map ((upperStarComp _
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom (φ̄)).hom.app
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom (φ̄)).hom.app
             F.obj.carrier.X) :=
     (globalSectionsToUpperStar_comp (WeilCoefficients.{u} l)
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom (φ̄) F.obj.carrier.X).symm
+      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom (φ̄) F.obj.carrier.X).symm
   have e₂ := globalSectionsToUpperStar_comp (WeilCoefficients.{u} l) (φ̄)
-    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.hom F.obj.carrier.X
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom F.obj.carrier.X
   have e₃ := globalSectionsToUpperStar_app_comp_upperStarCongr (A := WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
       (comp_over φ (Spec (CommRingCat.of k₀)))).symm F.obj.carrier.X

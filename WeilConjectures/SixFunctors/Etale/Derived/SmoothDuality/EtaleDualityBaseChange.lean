@@ -86,11 +86,11 @@ theorem isIso_map_leftDerivedUpperStar_map_rightDerivedUpperShriekTensorMap
       infer_instance
   have : IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction Λ f)
       (rightDerivedUpperShriekAdjunction Λ f')
-        (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app M) :=
+        (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).app M) :=
     ‹IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app M)›
   have : IsIso ((mateEquiv (rightDerivedUpperShriekAdjunction Λ f)
       (rightDerivedUpperShriekAdjunction Λ f')
-        (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).natTrans.app (M ⊗ N)) :=
+        (inv (rightDerivedLowerShriekBaseChangeMap Λ sq))).app (M ⊗ N)) :=
     ‹IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app (M ⊗ N))›
   exact Adjunction.isIso_map_map_projectionTensorMap_of_isIso
     (rightDerivedUpperShriekAdjunction Λ f)

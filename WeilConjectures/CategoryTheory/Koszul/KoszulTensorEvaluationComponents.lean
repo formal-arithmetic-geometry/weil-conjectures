@@ -151,7 +151,6 @@ private theorem signedTripleEvaluation_component
   simp only [Units.smul_def, zsmul_whiskerRight, Preadditive.comp_zsmul,
     Preadditive.zsmul_comp, smul_smul, Units.val_mul]
 
-set_option maxHeartbeats 3000000 in
 -- Normalize the recursive total-tensor basis and its component inclusions.
 /-- Homogeneous components of uncurried tensor-Hom evaluation.
 Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).

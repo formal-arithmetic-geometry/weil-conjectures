@@ -111,7 +111,7 @@ theorem ideal_power_torsionFree_section_lifting
   have hann (n : ℕ) (W : X.Opens) (x : Γ(F, W)) :
       x ∈ Set.range (a.app W) ↔
         ∀ (V : X.Opens) (h : V ≤ W) (b : Γ((idealSheafPower ι n).1, V)),
-          (F.smul (U := V) ((idealSheafPower ι n).2.val.app (op V) b)).hom
+          (F.smul (U := V) ((idealSheafPower ι n).2.val.app (op V) b)).asHom.hom
             (F.presheaf.map (homOfLE h).op x) = 0 := by
     constructor
     · rintro ⟨z, rfl⟩

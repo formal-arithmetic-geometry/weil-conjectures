@@ -38,7 +38,7 @@ private theorem double_mate_isIso
     (aY : TY ⊣ rY) (aX : TX ⊣ rX) (gA : pA ⊣ uA) (gB : pB ⊣ uB)
     (s : uB ⋙ rY ≅ rX ⋙ uA) :
     IsIso (((mateEquiv aY aX).symm
-      ((mateEquiv gB gA).symm (TwoSquare.mk _ _ _ _ s.hom))).natTrans) := by
+      ((mateEquiv gB gA).symm (TwoSquare.mk _ _ _ _ s.hom)))) := by
   rw [iterated_mateEquiv_conjugateEquiv_symm]
   change IsIso ((conjugateEquiv (aY.comp gB) (gA.comp aX)).symm s.hom)
   infer_instance
@@ -52,7 +52,7 @@ private def ordinaryScalarIso {Z T : Scheme.{u}} (f : Z ⟶ T)
     a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)
   let theta := ((mateEquiv (proEtaleRingExtensionAdjunction a)
     (proEtaleRingExtensionAdjunction (inverseMap f a))).symm
-      (TwoSquare.mk _ _ _ _ b)).natTrans
+      (TwoSquare.mk _ _ _ _ b))
   have : IsIso theta := by
     have h := double_mate_isIso (proEtaleRingExtensionAdjunction a)
       (proEtaleRingExtensionAdjunction (inverseMap f a))
@@ -73,8 +73,7 @@ private def ordinaryScalarIso {Z T : Scheme.{u}} (f : Z ⟶ T)
           (proEtaleRingRestrictionDirectImage f A B (inverseRing f A) (inverseRing f B)
             a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)).hom from
       by
-        apply TwoSquare.ext
-        intro M
+        refine NatTrans.ext (funext fun M ↦ ?_)
         exact congr_app hb M] at he
     dsimp only [theta]
     rw [← he]
@@ -108,7 +107,7 @@ private theorem ordinaryScalarIso_unit {Z T : Scheme.{u}} (f : Z ⟶ T)
         (proEtaleRingExtensionAdjunction (inverseMap f a))).symm
         (TwoSquare.mk _ _ _ _
           (proEtaleRingRestrictionPullbackInv f A B (inverseRing f A) (inverseRing f B)
-            a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp)))).natTrans) := by
+            a (inverseMap f a) (Iso.refl _) (Iso.refl _) (by simp))))) := by
     unfold ordinaryScalarIso
     rfl
   rw [hi]

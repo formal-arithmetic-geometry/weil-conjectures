@@ -318,7 +318,6 @@ private theorem flat_representative (X : DerivedCategory (RingedTensorModules.{c
 
 attribute [local irreducible] coefficientTotalTensor tensorSummand ringedForgetTensorUnitIso
 
-set_option maxHeartbeats 400000 in
 -- Assemble the four transported constraints without unfolding their model constructions.
 /-- A tensor comparison already constructed and normalized on flat-term K-flat models
 preserves the structural constraints of the two fixed derived tensor presentations.

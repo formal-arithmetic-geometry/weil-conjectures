@@ -386,7 +386,7 @@ private theorem universal_map_of_mate
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {F : A ⥤ C} {G : B ⥤ D}
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (s : R₁ ⋙ F ≅ G ⋙ R₂)
-    [IsIso ((mateEquiv a₁ a₂).symm s.hom).natTrans]
+    [IsIso ((mateEquiv a₁ a₂).symm s.hom)]
     {E : A} {E' : B} (d : E ⟶ R₁.obj E')
     (h : StructuredArrow.IsUniversal (StructuredArrow.mk d)) :
     Nonempty (StructuredArrow.IsUniversal
@@ -448,7 +448,7 @@ private theorem restrictedTransition_universal {X Z : Scheme.{u}} (f : Z ⟶ X)
       a b (Iso.refl _) (Iso.refl _)
       ((Category.id_comp _).trans (Category.comp_id _).symm)).symm
   have : IsIso ((mateEquiv (pbcDerivedScalarAdjunction a)
-      (pbcDerivedScalarAdjunction b)).symm k.hom).natTrans := by
+      (pbcDerivedScalarAdjunction b)).symm k.hom) := by
     simpa only [k, b, id, Iso.symm_hom] using inverseImage_mate_isIso f a
   let i : (StructuredArrow.mk ((pbcDerivedScalarAdjunction a).unit.app
       (M.level (n + 1))) : StructuredArrow _ (pbcDerivedRestrict a)) ≅

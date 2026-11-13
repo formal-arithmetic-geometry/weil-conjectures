@@ -6,7 +6,7 @@ Authors: Jiedong Jiang, Christian Merten
 module
 
 public import Mathlib.Topology.Spectral.Basic
-public import Mathlib.Topology.Separation.Profinite
+public import Mathlib.Topology.Separation.Regular
 
 /-!
 # Profinite spaces are spectral

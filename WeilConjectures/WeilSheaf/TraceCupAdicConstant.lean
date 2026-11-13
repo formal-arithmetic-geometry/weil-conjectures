@@ -92,7 +92,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
   -- the pro-étale models of the cohomology groups, in the nonnegative degrees
   have hΘ : ∀ i : ℤ, 0 ≤ i → ∃ Θ : ProEtale.AdicConstantH l f.geometricFiber i.toNat ≃ₗ[
       PadicAlgCl l] ((adicConstant k₀ l X).cohomology i).carrier,
-      ∀ x, Θ (ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius i.toNat x) =
+      ∀ x, Θ (ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius.asIso i.toNat x) =
         ((adicConstant k₀ l X).cohomology i).frobenius (Θ x) := by
     intro i hi
     obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le hi
@@ -100,7 +100,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
       (k₀ := k₀) (l := l) (Y := X) n
   choose Θ hΘ using hΘ
   have hΘ' (i : ℤ) (hi : 0 ≤ i) (x) : (Θ i hi).symm (((adicConstant k₀ l X).cohomology i).frobenius
-      x) = ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius i.toNat
+      x) = ProEtale.adicConstantHPullback l f.geometricGaloisFrobenius.asIso i.toNat
         ((Θ i hi).symm x) := by
     rw [LinearEquiv.symm_apply_eq, hΘ, LinearEquiv.apply_symm_apply]
   let H := (adicConstant k₀ l X).cohomology
@@ -126,7 +126,7 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
     by_cases hij : 0 ≤ i ∧ 0 ≤ j
     · rw [hcup i j k h hij, hcup i j k h hij, hΘ', hΘ', ← hΘ]
       exact congrArg _ (ProEtale.adicConstantHPullback_adicConstantHCup l f.geometricFiber hfin
-        f.geometricGaloisFrobenius _ _ _).symm
+        f.geometricGaloisFrobenius.asIso _ _ _).symm
     · rw [hcup0 i j k h hij]
       exact (map_zero ((adicConstant k₀ l X).cohomology k).frobenius).symm
   · intro i j k h x y

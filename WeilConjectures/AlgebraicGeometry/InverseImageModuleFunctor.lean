@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Topology.InverseImageModule
 import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # The canonical inverse-image functor on modules
 

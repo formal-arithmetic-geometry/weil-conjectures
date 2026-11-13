@@ -79,7 +79,6 @@ section Open
 
 variable {U V : Scheme.{u}} (i : U ⟶ V) (i' : V ⟶ X) [IsOpenImmersion i] [IsOpenImmersion i']
 
-set_option maxHeartbeats 2000000 in
 -- instantiating the abstract statement in the derived categories of module objects
 /-- **The open projection comparison of a composite** (blueprint `prop-sf-pf-coherence`,
 composition clause, for the extensions by zero along open immersions). -/

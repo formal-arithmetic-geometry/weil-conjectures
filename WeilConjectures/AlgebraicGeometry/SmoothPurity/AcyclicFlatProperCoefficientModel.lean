@@ -105,7 +105,7 @@ def properSheafCoefficientMap
       ProEtale.etaleSheafExtendScalars φ W ⋙ lowerStar (ModuleCat.{u + 1} B) r :=
   (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) r)
-    (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ r).hom))
 
 /-- The termwise projection chain map pi_C. Mapping the ordinary natural transformation
 on complexes guarantees that its components commute with the differentials.
@@ -311,9 +311,9 @@ private lemma mate_component
     {H₁ : D₁ ⥤ D₃} {H₂ : D₂ ⥤ D₄}
     (ad₁ : G₁ ⊣ F₁) (ad₂ : G₂ ⊣ F₂)
     (θ : TwoSquare H₁ G₁ G₂ H₂) (X : D₂) :
-    (mateEquiv ad₁ ad₂ θ).natTrans.app X =
+    (mateEquiv ad₁ ad₂ θ).app X =
       ad₂.unit.app (H₁.obj (F₁.obj X)) ≫
-        F₂.map (θ.natTrans.app (F₁.obj X) ≫ H₂.map (ad₁.counit.app X)) := by
+        F₂.map (θ.app (F₁.obj X) ≫ H₂.map (ad₁.counit.app X)) := by
   simp only [CategoryTheory.Functor.map_comp]
   simp [mateEquiv_apply]
 
@@ -333,19 +333,19 @@ private theorem mate_comparison
     (k : N ⟶ T) (n : Y ⟶ T)
     (hc : G₁.map p ≫ ad₁.counit.app X = a₁ ≫ c)
     (hu : ad₂.unit.app Y ≫ F₂.map a₂ = i ≫ b₂)
-    (hθ : θ.natTrans.app P ≫ H₂.map a₁ ≫ v = G₂.map s ≫ a₂ ≫ z)
+    (hθ : θ.app P ≫ H₂.map a₁ ≫ v = G₂.map s ≫ a₂ ≫ z)
     (h₄ : H₂.map c ≫ t = v ≫ c')
     (h₇ : k ≫ q = b₂ ≫ F₂.map (z ≫ c'))
     (hn : i ≫ k = n) :
-    H₁.map p ≫ (mateEquiv ad₁ ad₂ θ).natTrans.app X ≫ F₂.map t =
+    H₁.map p ≫ (mateEquiv ad₁ ad₂ θ).app X ≫ F₂.map t =
       s ≫ n ≫ q := by
-  have hmate : (mateEquiv ad₁ ad₂ θ).natTrans.app X =
+  have hmate : (mateEquiv ad₁ ad₂ θ).app X =
       ad₂.unit.app (H₁.obj (F₁.obj X)) ≫
-        F₂.map (θ.natTrans.app (F₁.obj X)) ≫
+        F₂.map (θ.app (F₁.obj X)) ≫
         F₂.map (H₂.map (ad₁.counit.app X)) := by
     simp [mateEquiv_apply]
   have h₁ := ad₂.unit.naturality (H₁.map p)
-  have h₂ := θ.natTrans.naturality p
+  have h₂ := θ.naturality p
   have h₅ := ad₂.unit.naturality s
   simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map]
     at h₁ h₂ h₅
@@ -546,8 +546,8 @@ private lemma complex_mate
     (σ : TwoSquare H₁ G₁ G₂ H₂) (C : CochainComplex C₂ ℤ) :
     (mateEquiv (adj₁.mapHomologicalComplex (.up ℤ))
       (adj₂.mapHomologicalComplex (.up ℤ))
-      (TwoSquare.mk _ _ _ _ (complexTransformation H₁ G₂ G₁ H₂ σ.natTrans))).natTrans.app C =
-      (complexTransformation F₁ H₁ H₂ F₂ (mateEquiv adj₁ adj₂ σ).natTrans).app C := by
+      (TwoSquare.mk _ _ _ _ (complexTransformation H₁ G₂ G₁ H₂ σ))).app C =
+      (complexTransformation F₁ H₁ H₂ F₂ (mateEquiv adj₁ adj₂ σ)).app C := by
   ext n
   simp only [complexTransformation, mateEquiv_apply, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,

@@ -61,7 +61,6 @@ theorem trfStrictQuotientUnit_compatible
   simpa [unrestrictedIntegralTransition] using
     (unrestrictedIntegralTransition_existsUnique l E Y n).exists.choose_spec P i U 1 x
 
-set_option maxHeartbeats 600000 in
 -- Reconcile the two published scalar-restriction product presentations explicitly.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The tuple of quotient units is killed by one minus transition shift.

@@ -32,10 +32,9 @@ private theorem inverseMate_isIso_of_counit
     (w : TwoSquare R₁ H G R₂) (e : L₁ ⋙ H ≅ G ⋙ L₂)
     (he : ∀ N, H.map (a.counit.app N) =
       e.hom.app (R₁.obj N) ≫ L₂.map (w.app N) ≫ b.counit.app (H.obj N)) :
-    IsIso ((mateEquiv a b).symm w).natTrans := by
+    IsIso ((mateEquiv a b).symm w) := by
   have hm : mateEquiv a b (TwoSquare.mk _ _ _ _ e.inv) = w := by
-    apply TwoSquare.ext
-    intro N
+    refine NatTrans.ext (funext fun N ↦ ?_)
     apply (b.homEquiv _ _).symm.injective
     simp only [Adjunction.homEquiv_counit]
     rw [mateEquiv_counit, he]
@@ -118,7 +117,7 @@ private theorem ordinaryMate_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) (n : ℕ) :
     IsIso ((mateEquiv a.adjunction
       (sfIntrinsicOpenAdjunction (finiteCoefficientRing l E (n + 1)) j)).symm
-        (ordinaryEvaluation l E j n).hom).natTrans := by
+        (ordinaryEvaluation l E j n).hom) := by
   obtain ⟨L, b, e, he⟩ := ordinaryOpenFiniteEvaluation l E j a n
   let c := b.ofNatIsoRight (pullbackTensorLevelIntrinsic l E j n)
   have hc (N : coefficientSequenceModules l E X) :
@@ -133,7 +132,7 @@ private theorem ordinaryMate_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     simpa only [← L.map_comp_assoc, Iso.hom_inv_id_app, L.map_id,
       Category.id_comp, Category.comp_id, Functor.comp_obj] using he N
   have : IsIso ((mateEquiv a.adjunction c).symm
-      (ordinaryEvaluation l E j n).hom).natTrans :=
+      (ordinaryEvaluation l E j n).hom) :=
     inverseMate_isIso_of_counit a.adjunction c (ordinaryEvaluation l E j n).hom e hc
   exact inverseMate_change_left a.adjunction a.adjunction
     (sfIntrinsicOpenAdjunction (finiteCoefficientRing l E (n + 1)) j) c
@@ -161,7 +160,7 @@ the same argument applies to zero complexes. -/
 theorem integralSystemOpenEvaluation_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) (n : ℕ) :
     IsIso ((mateEquiv a.adj (finiteOpenAdj l E j n)).symm
-      (pullbackTensorDerivedEvaluation l E j n).hom).natTrans := by
+      (pullbackTensorDerivedEvaluation l E j n).hom) := by
   have := ordinaryMate_isIso l E j a n
   have h := (exact_localization_inverse_mate
     (A := coefficientSequenceModules l E U) (B := coefficientSequenceModules l E X)

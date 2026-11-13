@@ -303,7 +303,7 @@ theorem etaleBrownRestrictionImageCube
   let G (k : ℕ) := Etale.lowerStar
     (ModuleCat.{u + 1} (strictEtaleBrownRing O t k)) g
   let α := (mateEquiv (A.levelAdj m) (A.levelAdj n)
-    (.mk _ _ _ _ (A.restrictInverse h).hom)).natTrans
+    (.mk _ _ _ _ (A.restrictInverse h).hom))
   exact normalized_full_cube (A.right m) (A.right n) (G m) (G n)
     qV qW (eV m) (eW m) (eV n) (eW n) rV rW
     (B.level m).direct (B.level n).direct

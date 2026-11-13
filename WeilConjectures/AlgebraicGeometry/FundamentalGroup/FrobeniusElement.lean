@@ -144,7 +144,7 @@ Frobenius element in `π₁(X₀, s)`: transport the geometric Frobenius `F_x` a
 theorem exists_isFrobeniusElement (x : X₀) [Finite (X₀.residueField x)] :
     ∃ g : G, IsFrobeniusElement s G x g := by
   obtain ⟨τ⟩ := nonempty_iso_of_fiberFunctor (fiber (residueFieldPoint X₀ x)) (fiber s)
-  obtain ⟨g, hg⟩ := (toAut_bijective (fiber s) G).2 (τ.symm ≪≫ geometricFrobeniusAt x ≪≫ τ)
+  obtain ⟨g, hg⟩ := (toAut_bijective (fiber s) G).2 (.of (τ.symm ≪≫ geometricFrobeniusAt x ≪≫ τ))
   refine ⟨g, τ, fun P y ↦ ?_⟩
   rw [← toAut_hom_app_apply, hg]
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, ConcreteCategory.comp_apply]

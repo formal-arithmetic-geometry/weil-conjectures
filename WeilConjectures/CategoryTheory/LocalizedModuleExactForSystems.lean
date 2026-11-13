@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import WeilConjectures.AlgebraicGeometry.RingedProjectionRestrictionData
 public import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Localized module adjunction for independent site universes
 

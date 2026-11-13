@@ -39,16 +39,16 @@ private theorem support_reflect
     (hu : ∀ M, F.map (a.unit.app M) ≫ d.hom.app (L.obj M) ≫
       r.map (e.hom.app M) = b.unit.app (F.obj M))
     (N : B) (hN : IsIso (b.counit.app (G.obj N))) : L.essImage N := by
-  have hm : (mateEquiv a b e.inv).natTrans = d.hom := by
+  have hm : (mateEquiv a b e.inv) = d.hom := by
     have hh := mateEquiv_eq_of_unit a b (TwoSquare.mk _ _ _ _ e.inv)
       (TwoSquare.mk _ _ _ _ d.hom) (fun M ↦ ?_)
-    · exact congrArg TwoSquare.natTrans hh
+    · exact hh
     · have ht := congrArg (fun z ↦ z ≫ r.map (e.inv.app M)) (hu M)
       simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at ht
       erw [r.map_id, Category.comp_id] at ht
       exact ht
   have hc := mateEquiv_counit a b (TwoSquare.mk _ _ _ _ e.inv) N
-  change l.map ((mateEquiv a b e.inv).natTrans.app N) ≫ b.counit.app (G.obj N) =
+  change l.map ((mateEquiv a b e.inv).app N) ≫ b.counit.app (G.obj N) =
     e.inv.app (R.obj N) ≫ G.map (a.counit.app N) at hc
   rw [hm] at hc
   have : IsIso (b.counit.app (G.obj N)) := hN

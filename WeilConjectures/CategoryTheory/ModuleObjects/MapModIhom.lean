@@ -173,9 +173,9 @@ open scoped Obj
 /-- The comparison map `F Hom_R(M, N) ⟶ Hom_{F R}(F M, F N)` of `F.mapMod R` is compatible with
 the maps to the internal homs `[F M, F N]` of the underlying objects. -/
 lemma ihomComparison_mapMod_app_hom_comp (M N : Mod C R) :
-    ((ihomComparison (F.mapMod R) M).natTrans.app N).hom ≫
+    ((ihomComparison (F.mapMod R) M).app N).hom ≫
         (ihomToHomMod ((F.mapMod R).obj M) ((F.mapMod R).obj N)).hom =
-      F.map (ihomToHomMod M N).hom ≫ (ihomComparison F M.X).natTrans.app N.X := by
+      F.map (ihomToHomMod M N).hom ≫ (ihomComparison F M.X).app N.X := by
   apply uncurry_injective
   rw [uncurry_natural_left, uncurry_ihomToHomMod_hom, uncurry_eq,
     MonoidalCategory.whiskerLeft_comp_assoc]
@@ -194,9 +194,9 @@ omit [Abelian C] [IsGrothendieckAbelian.{v} C] [IsCommMonObj R] [Abelian D]
   [PreservesColimitsOfShape WalkingParallelPair F] in
 /-- The comparison maps of `F` intertwine the maps `f ↦ f ∘ act_M` for `M` and for `F M`. -/
 lemma map_pre_act_comp_ihomComparison (M N : Mod C R) :
-    F.map ((pre (act M.X)).app N.X) ≫ (ihomComparison F (R ⊗ M.X)).natTrans.app N.X ≫
+    F.map ((pre (act M.X)).app N.X) ≫ (ihomComparison F (R ⊗ M.X)).app N.X ≫
         (pre (Functor.LaxMonoidal.μ F R M.X)).app (F.obj N.X) =
-      (ihomComparison F M.X).natTrans.app N.X ≫
+      (ihomComparison F M.X).app N.X ≫
         (pre (act ((F.mapMod R).obj M).X)).app (F.obj N.X) := by
   rw [map_pre_app_comp_ihomComparison_assoc, ← NatTrans.comp_app, ← pre_map]
   rfl
@@ -207,15 +207,15 @@ omit [Abelian C] [IsGrothendieckAbelian.{v} C] [Abelian D]
 /-- The comparison maps of `F` intertwine the maps `f ↦ act_N ∘ (R ⊗ f)` for `M`, `N` and for
 `F M`, `F N`. -/
 lemma map_homModB_comp_ihomComparison (M N : Mod C R) :
-    F.map (homModB R M N).hom ≫ (ihomComparison F (R ⊗ M.X)).natTrans.app N.X ≫
+    F.map (homModB R M N).hom ≫ (ihomComparison F (R ⊗ M.X)).app N.X ≫
         (pre (Functor.LaxMonoidal.μ F R M.X)).app (F.obj N.X) =
-      (ihomComparison F M.X).natTrans.app N.X ≫
+      (ihomComparison F M.X).app N.X ≫
         (homModB (F.obj R) ((F.mapMod R).obj M) ((F.mapMod R).obj N)).hom := by
   change F.map (curry ((α_ R M.X ((CategoryTheory.ihom M.X).obj N.X)).hom ≫
         R ◁ (CategoryTheory.ihom.ev M.X).app N.X ≫ act N.X)) ≫
-      (ihomComparison F (R ⊗ M.X)).natTrans.app N.X ≫
+      (ihomComparison F (R ⊗ M.X)).app N.X ≫
       (pre (Functor.LaxMonoidal.μ F R M.X)).app (F.obj N.X) =
-    (ihomComparison F M.X).natTrans.app N.X ≫
+    (ihomComparison F M.X).app N.X ≫
       curry ((α_ (F.obj R) (F.obj M.X) ((CategoryTheory.ihom (F.obj M.X)).obj (F.obj N.X))).hom ≫
         F.obj R ◁ (CategoryTheory.ihom.ev (F.obj M.X)).app (F.obj N.X) ≫
           Functor.LaxMonoidal.μ F R N.X ≫ F.map (act N.X))
@@ -230,17 +230,17 @@ lemma map_homModB_comp_ihomComparison (M N : Mod C R) :
   erw [μ_natural_right_assoc]
   rw [associativity_assoc]
 
-variable [PreservesFiniteLimits F] [∀ Z : C, IsIso (ihomComparison F Z).natTrans]
+variable [PreservesFiniteLimits F] [∀ Z : C, IsIso (ihomComparison F Z)]
 
 /-- **Transport of module objects along an exact braided functor commuting with internal homs
 commutes with internal homs**: the comparison `F Hom_R(M, N) ⟶ Hom_{F R}(F M, F N)` is an
 isomorphism. Both sides are equalizers of `[M, N] ⇉ [R ⊗ M, N]` (`Mod.isLimitIhomToHomMod`),
 respectively of its image under `F`, which `F` preserves. -/
 instance isIso_ihomComparison_mapMod (M : Mod C R) :
-    IsIso (ihomComparison (F.mapMod R) M).natTrans := by
+    IsIso (ihomComparison (F.mapMod R) M) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro N
-  let c := (ihomComparison (F.mapMod R) M).natTrans.app N
+  let c := (ihomComparison (F.mapMod R) M).app N
   suffices IsIso ((forget _).map c) from isIso_of_reflects_iso c (forget _)
   have hC := isLimitForkMapOfIsLimit (forget R) _ (isLimitIhomToHomMod M N)
   have hFC := isLimitForkMapOfIsLimit F _ hC
@@ -249,8 +249,8 @@ instance isIso_ihomComparison_mapMod (M : Mod C R) :
   have hm₁ : Mono (F.map (ihomToHomMod M N).hom) := Fork.IsLimit.mono hFC
   have hm₂ : Mono (ihomToHomMod ((F.mapMod R).obj M) ((F.mapMod R).obj N)).hom :=
     Fork.IsLimit.mono hD
-  let u := (ihomComparison F M.X).natTrans.app N.X
-  let v := (ihomComparison F (R ⊗ M.X)).natTrans.app N.X ≫
+  let u := (ihomComparison F M.X).app N.X
+  let v := (ihomComparison F (R ⊗ M.X)).app N.X ≫
     (pre (Functor.LaxMonoidal.μ F R M.X)).app (F.obj N.X)
   have ha := map_pre_act_comp_ihomComparison F M N
   have hb := map_homModB_comp_ihomComparison F M N

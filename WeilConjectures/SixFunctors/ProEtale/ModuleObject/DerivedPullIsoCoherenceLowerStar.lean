@@ -48,7 +48,6 @@ noncomputable abbrev upperStarCompHomotopy :
       ((g)^*⟦Λ⟧).mapHomotopyCategory (.up ℤ) ⋙ ((f)^*⟦Λ⟧).mapHomotopyCategory (.up ℤ) :=
   (Functor.mapHomotopyCategoryCompIso (upperStarComp Λ f g).symm (.up ℤ)).symm
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `upperStarCompHomotopy` is induced by `upperStarComp` on the homotopy categories. -/
 lemma upperStarCompHomotopy_hom_app
@@ -59,7 +58,6 @@ lemma upperStarCompHomotopy_hom_app
   obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective M
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `leftDerivedUpperStarComp` on the image `Qh M` of a complex, through the counits of the left
 derived functors, is `upperStarCompHomotopy`. -/
@@ -75,7 +73,6 @@ lemma leftDerivedUpperStarComp_hom_app_Qh_fac
   rw [upperStarCompHomotopy_hom_app]
   exact Functor.leftDerivedFunctorFactorIso_hom_app_comp_counit (upperStarComp Λ f g) M
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- `rightDerivedLowerStarComp` on the image `Qh K` of a complex, through the units of the right
 derived functors, is the conjugate of `upperStarCompHomotopy` on the homotopy categories. -/
@@ -125,7 +122,6 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ'] 
   (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The coherence of `derivedComapLowerStarIso` with the composition isomorphisms of derived
 pushforwards follows from its analogue on the homotopy categories, given that every object of
@@ -168,7 +164,6 @@ lemma derivedComapLowerStarIsoCompCoherence_of_homotopy
     (hd' := rightDerivedLowerStarComp_hom_app_Qh_fac Λ' f g)
     (hd := rightDerivedLowerStarComp_hom_app_Qh_fac Λ f g) (hH := hH) (hK := hK)
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- The derived (Pull) isomorphisms are compatible with the composition isomorphisms
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, given the hypotheses of

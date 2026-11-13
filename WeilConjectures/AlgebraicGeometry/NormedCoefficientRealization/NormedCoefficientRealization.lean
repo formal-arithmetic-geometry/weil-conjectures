@@ -358,7 +358,7 @@ private theorem transport_property {Λ Λ' : Profinite.CondensedRing.{u}}
       dsimp [transport]
       infer_instance
     let θ := (pullComparison a f).symm
-    let β := (mateEquiv adj adj' θ.hom).natTrans
+    let β := (mateEquiv adj adj' θ.hom)
     have hβ : IsIso β := isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
       adj adj' (transport a Y) (transport a X) θ
     refine ⟨asIso β, fun K ↦ ?_⟩

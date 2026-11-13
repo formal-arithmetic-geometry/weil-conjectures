@@ -131,7 +131,7 @@ noncomputable def ProEtaleWeilSheaf.ihom (A B : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk ((ProEtale.AdicSheaf.ihom A.carrier).obj B.carrier)
     ((ProEtale.adicLowerStarCompIhomIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).symm.app
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv A.carrier).symm.app
         B.carrier ≪≫
       (Mod.ihomMapIso A.str.symm).app _ ≪≫ (ProEtale.AdicSheaf.ihom A.carrier).mapIso B.str)
 
@@ -149,7 +149,8 @@ lemma ProEtaleWeilSheaf.ihom_map_comm (A : ProEtaleWeilSheaf k₀ l X)
   simp only [ProEtaleWeilSheaf.ihom, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.app_hom,
     Iso.symm_hom, Functor.mapIso_hom, IsoAlgebra.str_hom, Category.assoc]
   have h₁ := (ProEtale.adicLowerStarCompIhomIso l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).inv.naturality f.hom.f
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+      A.carrier).inv.naturality f.hom.f
   have h₂ := (Mod.ihomMapIso A.str.symm).hom.naturality
     ((WeilSheaf.frobeniusPullback k₀ l X).map f.hom.f)
   simp only [Functor.comp_map] at h₁ h₂
@@ -169,7 +170,8 @@ noncomputable def ProEtaleWeilSheaf.tensor (A B : ProEtaleWeilSheaf k₀ l X) :
     ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mk ((Mod.tensorLeft A.carrier).obj B.carrier)
     ((ProEtale.adicLowerStarTensorLeftIso l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).app B.carrier ≪≫
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+          A.carrier).app B.carrier ≪≫
       (Mod.tensorLeftMapIso A.str).app _ ≪≫ (Mod.tensorLeft A.carrier).mapIso B.str)
 
 omit [Fact (ringChar k₀ ≠ l)] in
@@ -182,7 +184,8 @@ lemma ProEtaleWeilSheaf.tensor_map_comm (A : ProEtaleWeilSheaf k₀ l X)
   simp only [ProEtaleWeilSheaf.tensor, IsoAlgebra.mk_obj, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, IsoAlgebra.str_hom, Category.assoc]
   have h₁ := (ProEtale.adicLowerStarTensorLeftIso l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv A.carrier).hom.naturality f.hom.f
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
+      A.carrier).hom.naturality f.hom.f
   have h₂ := (Mod.tensorLeftMapIso A.str).hom.naturality
     ((WeilSheaf.frobeniusPullback k₀ l X).map f.hom.f)
   simp only [Functor.comp_map] at h₁ h₂
@@ -260,20 +263,22 @@ open Functor.LaxMonoidal ProEtale
 theorem dual_evaluation_str (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     ((F.dual hF).obj.str.hom.hom ⊗ₘ F.obj.str.hom.hom) ≫
         Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier =
-      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+      μ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
+          WeilCoefficients.{u} l]
           (F.dual hF).obj.carrier.X F.obj.carrier.X ≫
-        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+        ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[_].map
           (Mod.evaluation F.obj.carrier (adicConstant k₀ l X).obj.carrier) ≫
         (adicConstant k₀ l X).obj.str.hom.hom := by
-  have : (Mod.mapModComap (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[
+  have : (Mod.mapModComap
+      (G := ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*[
       WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)).IsEquivalence :=
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)).IsEquivalence :=
     isEquivalence_adicLowerStar l _
   have h := Mod.μ_comp_map_evaluation (adicConstantSheafToLowerStar l
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)
     (fun _ _ ↦ Functor.LaxBraided.braided _ _) F.obj.carrier (adicConstant k₀ l X).obj.carrier
   have hstr : (F.dual hF).obj.str.hom.hom =
-      ((adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+      ((adicLowerStarCompIhomIso l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
         F.obj.carrier).inv.app (adicConstant k₀ l X).obj.carrier).hom ≫
       ((Mod.ihomMap F.obj.str.inv).app _).hom ≫
       ((ProEtale.AdicSheaf.ihom F.obj.carrier).map (adicConstant k₀ l X).obj.str.hom).hom := rfl
@@ -289,8 +294,8 @@ theorem dual_evaluation_str (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
   rfl
 
 variable (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+  (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
 
 /-- The pairing `(F^∨)_s × F_s → (ℚ̄_ℓ)_s` of stalks induced by the evaluation is invariant under
 the Frobenius of the stalks. -/

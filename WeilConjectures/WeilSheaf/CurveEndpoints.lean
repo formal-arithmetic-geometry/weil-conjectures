@@ -239,7 +239,6 @@ lemma quasiCompact_over_of_isOpenImmersion : QuasiCompact (U ↘ Spec (CommRingC
 variable [IsDominant j] [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
   (F : WeilSheaf k₀ l U)
 
-set_option maxHeartbeats 1600000 in
 -- the cohomology of the three terms of the triangle unfolds through the Weil structures
 /-- *Localization in high degrees.* For a dense open immersion `j : U₀ ↪ C₀` into a smooth
 geometrically connected affine curve and a Weil sheaf `F` on `U₀`, the boundary triangle

@@ -106,7 +106,7 @@ variable {S P P' Q Q' : Type*} [CommRing S] [Algebra R S] [AddCommGroup P] [Modu
 /-- `f.lTensor S` is `S`-linear. -/
 lemma lTensor_smul_apply (f : Q →ₗ[R] Q') (a : S) (x : S ⊗[R] Q) :
     f.lTensor S (a • x) = a • f.lTensor S x := by
-  rw [← baseChange_eq_ltensor, map_smul]
+  rw [← baseChange_eq_lTensor, map_smul]
 
 /-- Compatibility of `S`-linear extensions of maps `P → S ⊗[R] Q` with base changes of maps. -/
 lemma liftBaseChange_lTensor_apply {σ₁ : P →ₗ[R] S ⊗[R] Q} {σ₂ : P' →ₗ[R] S ⊗[R] Q'}

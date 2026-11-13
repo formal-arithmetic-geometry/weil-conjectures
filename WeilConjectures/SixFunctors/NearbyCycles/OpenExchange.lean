@@ -106,7 +106,7 @@ lemma baseChangeMap_commSq_j_eq_mateEquiv :
     baseChangeMap Λ φ.commSq_j =
       (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
         (derivedUpperStarLowerStarAdjunction Λ M.j)
-        (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans :=
+        (pullbackSquareComparison Λ φ.commSq_j).hom) :=
   Adjunction.exchangeRight_eq_mateEquiv _ _ _
 
 /-- If the base change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic
@@ -117,7 +117,7 @@ theorem isIso_pullbackExchange_of_isIso_baseChangeMap
   isIso_pullbackExchange_aux (pullbackSquareComparison Λ φ.commSq_i).hom
     (mateEquiv (derivedUpperStarLowerStarAdjunction Λ N.j)
       (derivedUpperStarLowerStarAdjunction Λ M.j)
-      (pullbackSquareComparison Λ φ.commSq_j).hom).natTrans
+      (pullbackSquareComparison Λ φ.commSq_j).hom)
     (baseChangeMap Λ φ.commSq_j) (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl
 

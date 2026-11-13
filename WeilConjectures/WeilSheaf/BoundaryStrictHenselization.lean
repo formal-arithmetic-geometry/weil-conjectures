@@ -193,7 +193,6 @@ theorem indEtale_inertiaInvariants_of_isAffineOpen :
 noncomputable abbrev sectionsStructHom : k₀ →+* Γ(C, W) :=
   (Spec.preimage (hW.fromSpec ≫ (C ↘ Spec (.of k₀)))).hom
 
-set_option maxHeartbeats 400000 in
 -- the codomain restrictions of the embedding of `k̄` unfold slowly
 omit [IsDedekindDomain Γ(C, W)] [Finite k₀] in
 include hxW in

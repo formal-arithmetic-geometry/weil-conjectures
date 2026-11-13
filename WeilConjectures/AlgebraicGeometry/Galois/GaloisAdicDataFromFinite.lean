@@ -80,7 +80,7 @@ structure GaloisAdicCanonicalConstruction
                   (F.obj.obj (op n))).obj z) ∧
             ∀ (g : G) (z : (V.obj (op n)).V),
               κ ((α.hom.app (op n)) ((V.obj (op n)).ρ g z)) =
-              (c.γ g).hom.app (galoisUnderlyingFLC
+              (c.γ g).asIso.hom.app (galoisUnderlyingFLC
                 (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n)) h)
                   (κ ((α.hom.app (op n)) z))
   /-- Rationalization of each integral model, normalized on every pure tensor. -/

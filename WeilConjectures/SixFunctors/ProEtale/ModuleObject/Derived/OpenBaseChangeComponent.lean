@@ -45,7 +45,7 @@ noncomputable def openBaseChangeCanonical
       (TwoSquare.mk _ _ _ _
         (((upperStarComp Λ (pullback.fst a j) a).symm ≪≫
           upperStarCongr Λ (IsPullback.of_hasPullback a j).w ≪≫
-          upperStarComp Λ (pullback.snd a j) j).inv))).natTrans
+          upperStarComp Λ (pullback.snd a j) j).inv)))
 
 /-- The open base-change mate has the canonical section normalization.
 Source: blueprint proof (1), first sentence: the common right adjoint and its

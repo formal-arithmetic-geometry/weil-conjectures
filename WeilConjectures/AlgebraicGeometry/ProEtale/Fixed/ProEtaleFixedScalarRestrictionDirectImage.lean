@@ -38,10 +38,10 @@ private theorem mate_left_iso
     (adj : L ⊣ R) (adj' : L' ⊣ R') (e : L ≅ E) (e' : L' ≅ E')
     (s : G ⋙ E' ⟶ E ⋙ H) :
     (mateEquiv (adj.ofNatIsoLeft e) (adj'.ofNatIsoLeft e')
-      (TwoSquare.mk _ _ _ _ s)).natTrans =
+      (TwoSquare.mk _ _ _ _ s)) =
       (mateEquiv adj adj'
         (TwoSquare.mk _ _ _ _
-          (Functor.whiskerLeft G e'.hom ≫ s ≫ Functor.whiskerRight e.inv H))).natTrans := by
+          (Functor.whiskerLeft G e'.hom ≫ s ≫ Functor.whiskerRight e.inv H))) := by
   ext X
   simp only [mateEquiv_apply, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
@@ -70,14 +70,14 @@ private theorem derived_mate_isIso
     (t : R ⋙ G ⟶ H ⋙ R') [IsIso t]
     (hm : m = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
       adj'.mapDerivedCategoryRightDerivedAdjunction
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans)
-    (ht : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = t)
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)))
+    (ht : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) = t)
     (hres : ∀ I : CochainComplex B ℤ, I.IsKInjective →
       ∀ J : CochainComplex D ℤ, J.IsKInjective →
       ∀ j : (H.mapHomologicalComplex (.up ℤ)).obj I ⟶ J,
         QuasiIso j → QuasiIso ((R'.mapHomologicalComplex (.up ℤ)).map j)) :
     IsIso m := by
-  have : IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans := by
+  have : IsIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) := by
     rw [ht]
     infer_instance
   have hI (I : CochainComplex B ℤ) [I.IsKInjective] :
@@ -92,9 +92,9 @@ private theorem derived_mate_isIso
       chainDerivedUnit_isIso_of_resolution R' _ J j
     have : IsIso (chainDerivedUnit R I) := chainDerivedUnit_isIso R I
     have : IsIso ((NatTrans.mapHomologicalComplex
-        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app I) := by
+        (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app I) := by
       change IsIso (((NatIso.mapHomologicalComplex
-        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans)
+        (asIso (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)))
         (.up ℤ)).app I).hom)
       infer_instance
     have hi := derived_mate_factors adj adj' s I
@@ -130,16 +130,11 @@ private theorem restriction_underived_mate
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom)) =
         𝟙 (lowerStar (ModuleCat.{u + 1} B) f ⋙
           Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ) := by
   apply (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
     (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)).injective
-  change (mateEquiv (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
-    (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology Y) φ)
-    (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-      (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIso φ f).hom))).natTrans = _
   rw [iterated_mateEquiv_conjugateEquiv]
   rw [conjugateEquiv_upperStarRestrictScalarsIso_hom]
   ext M ⟨U⟩ x
@@ -222,7 +217,7 @@ private theorem simple_derived_mate_factors
     G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
       DerivedCategory.Q.map
         ((NatTrans.mapHomologicalComplex
-          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans (.up ℤ)).app K) ≫
+          (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)) (.up ℤ)).app K) ≫
       restrictionDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj K) := by
   have h := derived_mate_factors adj adj' s K
   rw [chainDerivedUnit_eq, chainDerivedUnit_eq] at h
@@ -271,11 +266,11 @@ private theorem restriction_mate_eq
           (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f))
         (TwoSquare.mk _ _ _ _
           (Functor.mapDerivedCategorySquareIso
-            (upperStarRestrictScalarsIso φ f)).hom)).natTrans := by
+            (upperStarRestrictScalarsIso φ f)).hom)) := by
   change (mateEquiv
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
-    (TwoSquare.mk _ _ _ _ (fixedScalarRestrictionPullback φ f).hom)).natTrans = _
+    (TwoSquare.mk _ _ _ _ (fixedScalarRestrictionPullback φ f).hom)) = _
   rw [restriction_derived_adj_eq, restriction_derived_adj_eq]
   refine (mate_left_iso _ _ _ _ (fixedScalarRestrictionPullback φ f).hom).trans ?_
   congr 2

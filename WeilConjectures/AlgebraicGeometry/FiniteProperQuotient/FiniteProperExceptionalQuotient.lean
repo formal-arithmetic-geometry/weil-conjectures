@@ -129,7 +129,7 @@ Source: blueprint quotient mate, counit transpose; Mathlib mateEquiv
 def b {m n : ℕ} (h : n ≤ m)
     (q : F l E p m ⋙ Q l E Y h ≅ Q l E Z h ⋙ F l E p n) :
     G m ⋙ Q l E Z h ⟶ Q l E Y h ⋙ G n :=
-  (mateEquiv (adj m) (adj n) (.mk _ _ _ _ q.inv)).natTrans
+  (mateEquiv (adj m) (adj n) (.mk _ _ _ _ q.inv))
 
 include G adj in
 /-- Ordinary proper exceptional inverse images preserve ctf and have coherent quotient mates.

@@ -192,8 +192,8 @@ power of that of `k̄` over `k₀`, as automorphisms of spectra: `Spec τ ≫ σ
 lemma spec_algebraicClosureAlgEquiv_comp_specGeometricFrobenius [Algebra.IsAlgebraic k₀ k₀']
     (r : ℕ) (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
     Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) ≫
-        (specGeometricFrobenius k₀').hom =
-      (specGeometricFrobenius k₀ ^ r).hom ≫
+        (specGeometricFrobenius k₀').asIso.hom =
+      (specGeometricFrobenius k₀ ^ r).asIso.hom ≫
         Spec.map (CommRingCat.ofHom (algebraicClosureAlgEquiv k₀ k₀').toRingHom) := by
   let := Fintype.ofFinite k₀
   let := Fintype.ofFinite k₀'
@@ -210,7 +210,7 @@ include hg in
 Frobenius, `k₀'` having `#k₀ ^ r` elements. -/
 lemma geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange (r : ℕ)
     (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
-    (f.geometricGaloisFrobenius ^ r).hom ≫ geometricFiberToBaseChange hg =
+    (f.geometricGaloisFrobenius ^ r).asIso.hom ≫ geometricFiberToBaseChange hg =
       geometricFiberToBaseChange hg := by
   refine hg.hom_ext ?_ ?_
   · simp
@@ -224,8 +224,8 @@ include hg in
 `θ ≫ Fr' = Frʳ ≫ θ`. -/
 lemma geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius (r : ℕ)
     (hr : Nat.card k₀' = Nat.card k₀ ^ r) :
-    (geometricFiberBaseChangeIso hg).hom ≫ f'.geometricGaloisFrobenius.hom =
-      (f.geometricGaloisFrobenius ^ r).hom ≫ (geometricFiberBaseChangeIso hg).hom := by
+    (geometricFiberBaseChangeIso hg).hom ≫ f'.geometricGaloisFrobenius.asIso.hom =
+      (f.geometricGaloisFrobenius ^ r).asIso.hom ≫ (geometricFiberBaseChangeIso hg).hom := by
   ext
   · simp [geometricFiberBaseChangeIso,
       geometricGaloisFrobenius_pow_hom_comp_geometricFiberToBaseChange hg r hr]

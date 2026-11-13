@@ -121,7 +121,6 @@ noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
         ℤ) :=
   inferInstance
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategory
@@ -131,7 +130,6 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
 
 /-! ### K-flatness of pullbacks -/
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 /-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
 quasi-isomorphisms of the homotopy category. It is not an instance: it would change the instance
@@ -277,7 +275,6 @@ lemma upperStarTensorComplexHom_eq_inv
   refine (IsIso.inv_eq_of_inv_hom_id (HomologicalComplex.hom_ext _ _ fun n ↦ ?_)).symm
   exact upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B n
 
-set_option maxHeartbeats 1600000 in
 -- the instances on complexes of module objects make the elaboration slow
 /-- The comparison `upperStarTensorComplexHom` is natural in both complexes. -/
 lemma upperStarTensorComplexHom_naturality
@@ -669,7 +666,6 @@ lemma isIso_leftDerivedUpperStarTensor_app_app_Qh_obj
   exact IsIso.of_isIso_comp_right _ (((leftDerivedUpperStarTensorRightCounit Λ f).app
     ((HomotopyCategory.quotient _ _).obj A)).app ((HomotopyCategory.quotient _ _).obj B))
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the K-flat derivability structure on complexes of module objects is found by instance search
 /-- The comparison `m : Lf^* (- ⊗ᴸ -) ⟶ Lf^* - ⊗ᴸ Lf^* -` is an isomorphism: every object is
 isomorphic to the image of a K-flat complex, on which `m` is an isomorphism
@@ -720,7 +716,6 @@ noncomputable def leftDerivedUpperStarUnitIso :
               (ComplexShape.up ℤ) 0).app (𝟙_ _) ≪≫
             (HomologicalComplex.single _ _ 0).mapIso (Functor.Monoidal.εIso (f)^*⟦Λ⟧).symm))
 
-set_option maxHeartbeats 1600000 in
 -- the instances on complexes of module objects make the elaboration slow
 /-- The compatibility of the comparison `m` with the comonoidal structure of `f^*` on the
 homotopy category, in the form of the hypothesis of

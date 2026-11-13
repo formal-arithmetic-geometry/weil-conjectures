@@ -37,6 +37,19 @@ private theorem sectionsComparisonNatIso_apply
       (c.hom.app (T.obj F)) ((b.inv.app (T.obj F)) ((a.hom.app F) x)) := by
   rfl
 
+private theorem moduleComparisonEquiv_apply_of_component
+    {A : Type*} [Category A] {R : Type u} [Ring R]
+    {K : A ⥤ ModuleCat.{u} R} {L : A ⥤ AddCommGrpCat.{u}}
+    (η : K ⋙ forget₂ _ AddCommGrpCat.{u} ≅ L) (F : A)
+    {B C : AddCommGrpCat.{u}}
+    (a : (forget₂ _ AddCommGrpCat.{u}).obj (K.obj F) ≅ B)
+    (b : C ≅ B) (c : C ≃+ L.obj F)
+    (h : η.app F = a ≪≫ b.symm ≪≫ c.toAddCommGrpIso) (x : K.obj F) :
+    moduleComparisonEquiv η F x = c (b.inv (a.hom x)) := by
+  change (η.app F).hom x = _
+  rw [h]
+  rfl
+
 set_option maxHeartbeats 800000 in
 -- Elaborating the specialized derived-functor types needs additional instance conversions.
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
@@ -69,14 +82,58 @@ theorem ext_sections_factorization
       exact (Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p).symm
         (d.inv (((resolutionSectionsNatIso G V T Γ p (sectionHomologyIso X p)
           (fun M _ ↦ forgottenInjectiveAcyclic X M)).app F).hom x))) := by
-  -- Evaluate the generic comparison before exposing the specialized scheme instances.
-  unfold moduleCohomologyExtResolutionEquiv moduleCohomologyExtResolutionNatIso
-  delta RingedSpace.moduleCohomology at x ⊢
-  dsimp only [id, AlgebraicGeometry.Scheme.Modules.H, Sheaf.functorH]
-  change @Eq (Abelian.Ext
-    ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
-      (AddCommGrpCat.of (ULift.{u} ℤ)))
-    ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p) _ _
-  erw [sectionsComparisonNatIso_apply]
+  let : EnoughInjectives (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
+  let T := SheafOfModules.toSheaf (moduleRings X.toRingedSpace)
+  let Γ := sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⋙
+    (evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let G := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let V := forget₂ (ModuleCat.{u}
+    ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}
+  -- Compare natural isomorphisms before evaluating their components.
+  unfold moduleCohomologyExtResolutionEquiv
+  let a := resolutionSectionsNatIso
+    (A := SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (B := ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+    (D := AddCommGrpCat.{u})
+    (E := Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    G V T Γ p (sectionHomologyIso X p)
+    (fun M _ ↦ forgottenInjectiveAcyclic X M)
+  let b := siteSectionsObjIso (Opens.grothendieckTopology X) ⊤ (T.obj F) p
+  let c := Abelian.Ext.precompAddEquiv (terminalSourceIso X) (T.obj F) p
+  have hη : moduleCohomologyExtResolutionNatIso X p = a ≪≫ Functor.isoWhiskerLeft T
+      ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
+        siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
+          extSourceNatIso (terminalSourceIso X) p ≪≫
+            siteHNatIso (Opens.grothendieckTopology X) p) := by
+    unfold moduleCohomologyExtResolutionNatIso
+    rfl
+  have hcomp : (moduleCohomologyExtResolutionNatIso X p).app F =
+      a.app F ≪≫ b.symm ≪≫ c.symm.toAddCommGrpIso := by
+    rw [hη, NatIso.trans_app]
+    apply congrArg (fun e ↦ a.app F ≪≫ e)
+    change ((siteSectionsNatIso (Opens.grothendieckTopology X) ⊤ p).symm ≪≫
+      siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
+        extSourceNatIso (terminalSourceIso X) p ≪≫
+          siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
+    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
+    rfl
+  have h := moduleComparisonEquiv_apply_of_component
+    (moduleCohomologyExtResolutionNatIso X p) F (a.app F) b c.symm hcomp x
+  dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,
+    AlgebraicGeometry.Scheme.Modules.H, AlgebraicGeometry.Scheme.Modules.instAddCommGroupH,
+    Sheaf.functorH, Sheaf.H, Sheaf.H'] at h ⊢
+  -- Align the comparison objects before projecting their maps; otherwise instance conversion
+  -- unfolds the derived functor constructions underneath those projections.
+  conv_rhs =>
+    pattern resolutionSectionsNatIso _ _ _ _ _ _ _
+    change a
+  conv_rhs =>
+    pattern siteSectionsObjIso _ _ _ _
+    change b
+  conv_rhs =>
+    pattern Abelian.Ext.precompAddEquiv _ _ _
+    change c
+  exact h
 
 end AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution

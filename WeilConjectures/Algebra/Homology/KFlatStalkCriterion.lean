@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Homology.StalkTensorComplex
 import WeilConjectures.Topology.SkyscraperComplex
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # K-flatness detected on stalks

@@ -64,7 +64,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option synthInstance.maxHeartbeats 80000 in
 -- Elaborate the two scalar derived functors and their geometric adjunction mate.
 /-- The canonical coefficient-change/direct-image arrow. The inclusion is pulled back
 from the point. The published `derivedPushHom` is the mate of the canonical restriction
@@ -117,14 +116,13 @@ private theorem localization_comparison_zero (ℓ : ℕ)
       ((Cocone.precompose (Mod.smulSequenceCompIso G K ℓ).inv).obj
         (G.mapCocone (scalarLocalizationUnitCocone ℓ adjX K))).ι.app 0 := by
   simp only [scalarLocalizationUnitCocone, Functor.comp_obj, Functor.const_obj_obj, pow_zero,
-    End.one_def, CategoryTheory.Functor.map_id, Category.comp_id, Mod.smulSequenceCompIso,
+    End.one_asHom, CategoryTheory.Functor.map_id, Category.comp_id, Mod.smulSequenceCompIso,
     NatIso.ofComponents_inv_app, Iso.refl_inv, Cocone.precompose_obj_pt, Functor.mapCocone_pt,
     Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app]
   change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)
   exact hg.trans (Category.id_comp (G.map (adjX.unit.app K))).symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Keep the internal localization argument abstract in the coefficient field.
 private theorem bounded_integralScalarPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
@@ -267,7 +265,6 @@ private theorem bounded_integralScalarPushHom_isIso_of_eq
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 120000 in
 -- Identify the equal coefficient data before specializing its derived functors.
-set_option synthInstance.maxHeartbeats 80000 in
 -- The ambient derived category retains the full module tensor-resolution structure.
 /-- Localization of coefficients commutes with ordinary ambient derived direct image
 for every bounded-below complex; completeness, constructibility and finite Tor

@@ -27,8 +27,8 @@ noncomputable def purity_geometricTatePairIso
         (tateTwistNat X ℓ d) ≅
       IsoAlgebra.mk (tateTwistNat a.geometricFiber ℓ d)
         (((upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
-          a.geometricGaloisFrobenius).app _).symm ≪≫
-          upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.hom
+          a.geometricGaloisFrobenius.asIso).app _).symm ≪≫
+          upperStarTateTwistNatIso ℓ a.geometricGaloisFrobenius.asIso.hom
             a.geometricFiberToAlgebraicClosure d) := by
   exact purity_geometricTateInterfacePairIso ℓ a d ≪≫
     eqToIso (purityTateRootPair_eq ℓ a d)

@@ -45,8 +45,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 at `s` of weights at most `w`, every `G i` has stalk at `s` of weights at most `w`. -/
 theorem stalkAt_hasWeightsAtMost_of_filtration {ι : PadicAlgCl l →+* ℂ} {q : ℕ} {w : ℝ}
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =
+      (specGeometricFrobenius k₀ ^ m).asIso.hom ≫ s)
     {n : ℕ} (G : Fin (n + 1) → WeilSheaf k₀ l X) (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ)
     (h0 : IsZero (G 0)) (hmono : ∀ i, Mono (φ i))
     (h : ∀ i : Fin n, ((cokernel (φ i)).stalkAt s m hs).HasWeightsAtMost ι q w) :

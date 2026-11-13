@@ -54,7 +54,7 @@ local notation "G" => CondensedRing.lowerStar Λ q
 
 -- Explicit monoidal module comparisons need additional elaboration heartbeats.
 private theorem translation_eq (a : k) :
-    condensedArtinSchreierTranslationAction Λ k a =
+    (condensedArtinSchreierTranslationAction Λ k a).asHom =
       (CondensedRing.lowerStar Λ q).map
         (ε (CondensedRing.lowerStar Λ (Etale.artinSchreierTranslation k a))) ≫
         ((CondensedRing.lowerStarComp Λ (Etale.artinSchreierTranslation k a) q).hom ≫
@@ -82,12 +82,12 @@ no invertibility or nontrivial-character hypothesis. -/
 theorem condensedArtinSchreierTranslation_algebra (a : k) :
     (μ G R R ≫ (CondensedRing.lowerStar Λ q).map
       (Mod.regularMul (condensedRingObj Λ A))) ≫
-        condensedArtinSchreierTranslationAction Λ k a =
-      (condensedArtinSchreierTranslationAction Λ k a ⊗ₘ
-        condensedArtinSchreierTranslationAction Λ k a) ≫
+        (condensedArtinSchreierTranslationAction Λ k a).asHom =
+      ((condensedArtinSchreierTranslationAction Λ k a).asHom ⊗ₘ
+        (condensedArtinSchreierTranslationAction Λ k a).asHom) ≫
           μ G R R ≫ (CondensedRing.lowerStar Λ q).map
             (Mod.regularMul (condensedRingObj Λ A)) ∧
-      ε G ≫ condensedArtinSchreierTranslationAction Λ k a = ε G := by
+      ε G ≫ (condensedArtinSchreierTranslationAction Λ k a).asHom = ε G := by
   let σ := Etale.artinSchreierTranslation k a
   let H := CondensedRing.lowerStar Λ σ
   let c : H ⋙ G ⟶ G :=

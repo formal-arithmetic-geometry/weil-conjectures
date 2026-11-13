@@ -51,7 +51,7 @@ theorem balancedAction_affine_sections
     (M : X.Modules) (hM : M.IsQuasicoherent)
     (rho : B →+* End M)
     (hscalar : ∀ a : A, rho (algebraMap A B a) =
-      M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a)) :
+      .of (M.smulHom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a))) :
     let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
     let Y := pullback f g
     let pi : Y ⟶ X := pullback.fst f g
@@ -68,7 +68,7 @@ theorem balancedAction_affine_sections
       (∀ (U : X.affineOpens) (b : B) (x : M.val.obj (op U.val)),
         tau U (Y.presheaf.map (homOfLE (le_top (a := pi ⁻¹ᵁ U.val))).op
           (((Scheme.ΓSpecIso (.of B)).inv ≫ fB.appTop).hom b)) x =
-            (rho b).val.app (op U.val) x) := by
+            (rho b).asHom.val.app (op U.val) x) := by
   classical
   dsimp only
   let g := Spec.map (CommRingCat.ofHom (algebraMap A B))
@@ -105,7 +105,7 @@ theorem balancedAction_affine_sections
           rw [← CommRingCat.comp_apply, ← Y.presheaf.map_comp]
           rfl
         rw [he, hb U]
-        exact (PresheafOfModules.naturality_apply (rho b).val i.op x).symm
+        exact (PresheafOfModules.naturality_apply (rho b).asHom.val i.op x).symm
       · intro r s hr hs x
         rw [map_add, map_add, map_add]
         change M.val.map i.op (tau V r x + tau V s x) =

@@ -21,6 +21,7 @@ import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.KFlatTensorQuasiIso
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Homology.StalkTensorComplex
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Relative tensor bounds from a strictly perfect local model
 

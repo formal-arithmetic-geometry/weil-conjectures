@@ -66,17 +66,17 @@ private def value {R : Sheaf J CommRingCat.{u}}
 
 private theorem scalar_apply (R : Sheaf J CommRingCat.{u})
     (f : (unit (rings R)).sections) (X : Cᵒᵖ) (a : R.obj.obj X) :
-    (scalar R f).val.app X a = a * value f X := by
+    (scalar R f).asHom.val.app X a = a * value f X := by
   rfl
 
 private theorem scalar_pow_apply (R : Sheaf J CommRingCat.{u})
     (f : (unit (rings R)).sections) (k : ℕ) (X : Cᵒᵖ) (a : R.obj.obj X) :
-    (scalar R f ^ k).val.app X a = a * value f X ^ k := by
+    (scalar R f ^ k).asHom.val.app X a = a * value f X ^ k := by
   induction k generalizing a with
   | zero => simp
   | succ k ih =>
     rw [pow_succ']
-    change (scalar R f).val.app X ((scalar R f ^ k).val.app X a) = _
+    change (scalar R f).asHom.val.app X ((scalar R f ^ k).asHom.val.app X a) = _
     rw [scalar_apply, ih, pow_succ, mul_assoc]
 
 /-- Cochain Koszul differential at the positive exponent n+1. Source: Tag 0913
@@ -88,22 +88,23 @@ noncomputable def differential (R : Sheaf J CommRingCat.{u}) (r : ℕ)
   exact Sigma.desc (fun s ↦ ∑ j : Fin r,
     if h : j ∉ s.val then
       (-1 : ℤ) ^ (s.val.filter (· < j)).card •
-        ((scalar R (f j) ^ (n + 1)) ≫
+        (((scalar R (f j) ^ (n + 1)).asHom) ≫
           Sigma.ι (fun _ : Indices r (q + 1) ↦ unit (rings R))
             ⟨insert j s.val, insert_degree s j h⟩)
     else 0)
 
 private theorem scalar_powers_comm (R : Sheaf J CommRingCat.{u})
     (f g : (unit (rings R)).sections) (k : ℕ) :
-    (scalar R f ^ k) ≫ (scalar R g ^ k) = (scalar R g ^ k) ≫ (scalar R f ^ k) := by
+    ((scalar R f ^ k).asHom) ≫ ((scalar R g ^ k).asHom) =
+      ((scalar R g ^ k).asHom) ≫ ((scalar R f ^ k).asHom) := by
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro X
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro a
-  change (scalar R g ^ k).val.app X ((scalar R f ^ k).val.app X a) =
-    (scalar R f ^ k).val.app X ((scalar R g ^ k).val.app X a)
+  change (scalar R g ^ k).asHom.val.app X ((scalar R f ^ k).asHom.val.app X a) =
+    (scalar R f ^ k).asHom.val.app X ((scalar R g ^ k).asHom.val.app X a)
   rw [scalar_pow_apply, scalar_pow_apply, scalar_pow_apply, scalar_pow_apply]
   ac_rfl
 
@@ -138,7 +139,7 @@ private noncomputable def doubleTerm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
   exact if hj : j ∉ s.val then if hk : k ∉ insert j s.val then
     ((-1 : ℤ) ^ (s.val.filter (· < j)).card *
       (-1 : ℤ) ^ ((insert j s.val).filter (· < k)).card) •
-      ((scalar R (f j) ^ (n + 1)) ≫ (scalar R (f k) ^ (n + 1)) ≫
+      (((scalar R (f j) ^ (n + 1)).asHom) ≫ ((scalar R (f k) ^ (n + 1)).asHom) ≫
         Sigma.ι (fun _ : Indices r (q + 1 + 1) ↦ unit (rings R))
           (doubleIndex s j k hj hk))
     else 0 else 0
@@ -221,22 +222,22 @@ Source: Tag 0913 (blueprint: def-weil-pbc-extended-localization-cech). -/
 noncomputable def subsetScalar (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r)) :
     End (unit (rings R)) :=
-  (s.sort (· ≤ ·)).foldr (fun j a ↦ scalar R (f j) ≫ a) (𝟙 _)
+  .of ((s.sort (· ≤ ·)).foldr (fun j a ↦ (scalar R (f j)).asHom ≫ a) (𝟙 _))
 
 private theorem subsetScalar_apply (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r))
     (X : Cᵒᵖ) (a : R.obj.obj X) :
-    (subsetScalar R r f s).val.app X a = a * ∏ j ∈ s, value (f j) X := by
+    (subsetScalar R r f s).asHom.val.app X a = a * ∏ j ∈ s, value (f j) X := by
   have hl : ∀ (l : List (Fin r)) (a : R.obj.obj X),
-      (l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _)).val.app X a =
+      (l.foldr (fun j b ↦ (scalar R (f j)).asHom ≫ b) (𝟙 _)).val.app X a =
         a * (l.map (fun j ↦ value (f j) X)).prod := by
     intro l
     induction l with
     | nil => intro a; simp
     | cons j l ih =>
       intro a
-      change (l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _)).val.app X
-        ((scalar R (f j)).val.app X a) = _
+      change (l.foldr (fun j b ↦ (scalar R (f j)).asHom ≫ b) (𝟙 _)).val.app X
+        ((scalar R (f j)).asHom.val.app X a) = _
       rw [scalar_apply, ih]
       simp only [List.map_cons, List.prod_cons, mul_assoc]
   have hp : ((s.sort (· ≤ ·)).map (fun j ↦ value (f j) X)).prod =
@@ -250,7 +251,7 @@ private theorem subsetScalar_apply (R : Sheaf J CommRingCat.{u}) (r : ℕ)
 (blueprint: def-weil-pbc-extended-localization-cech). -/
 noncomputable def transitionTerm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (q : ℤ) : term R r q ⟶ term R r q :=
-  Sigma.desc (fun s ↦ subsetScalar R r f s.val ≫
+  Sigma.desc (fun s ↦ (subsetScalar R r f s.val).asHom ≫
     Sigma.ι (fun _ : Indices r q ↦ unit (rings R)) s)
 
 /-- The transitions commute with the differentials. Source: Tag 0913
@@ -263,18 +264,18 @@ theorem transition_comm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
       (koszul R r f n).d q (q + 1) ≫ transitionTerm R r f (q + 1) := by
   classical
   have hc (s : Finset (Fin r)) (j : Fin r) (h : j ∉ s) :
-      subsetScalar R r f s ≫ (scalar R (f j) ^ (n + 1 + 1)) =
-        (scalar R (f j) ^ (n + 1)) ≫ subsetScalar R r f (insert j s) := by
+      (subsetScalar R r f s).asHom ≫ ((scalar R (f j) ^ (n + 1 + 1)).asHom) =
+        ((scalar R (f j) ^ (n + 1)).asHom) ≫ (subsetScalar R r f (insert j s)).asHom := by
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro X
     apply ModuleCat.hom_ext
     apply LinearMap.ext
     intro a
-    change (scalar R (f j) ^ (n + 1 + 1)).val.app X
-        ((subsetScalar R r f s).val.app X a) =
-      (subsetScalar R r f (insert j s)).val.app X
-        ((scalar R (f j) ^ (n + 1)).val.app X a)
+    change (scalar R (f j) ^ (n + 1 + 1)).asHom.val.app X
+        ((subsetScalar R r f s).asHom.val.app X a) =
+      (subsetScalar R r f (insert j s)).asHom.val.app X
+        ((scalar R (f j) ^ (n + 1)).asHom.val.app X a)
     rw [scalar_pow_apply, subsetScalar_apply, subsetScalar_apply, scalar_pow_apply,
       Finset.prod_insert h, pow_succ]
     ac_rfl
@@ -346,16 +347,16 @@ private theorem unitMap_apply {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
 
 private theorem scalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (f : (unit (rings R)).sections) (k : ℕ) :
-    (scalar R f ^ k) ≫ unitMap φ =
-      unitMap φ ≫ (restriction φ).map (scalar B (mapSection φ f) ^ k) := by
+    ((scalar R f ^ k).asHom) ≫ unitMap φ =
+      unitMap φ ≫ (restriction φ).map ((scalar B (mapSection φ f) ^ k).asHom) := by
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro X
   apply ModuleCat.hom_ext
   apply LinearMap.ext
   intro a
-  change (unitMap φ).val.app X ((scalar R f ^ k).val.app X a) =
-    (scalar B (mapSection φ f) ^ k).val.app X ((unitMap φ).val.app X a)
+  change (unitMap φ).val.app X ((scalar R f ^ k).asHom.val.app X a) =
+    (scalar B (mapSection φ f) ^ k).asHom.val.app X ((unitMap φ).val.app X a)
   rw [unitMap_apply, scalar_pow_apply, scalar_pow_apply, unitMap_apply]
   let b : R.obj.obj X := a
   change (φ.hom.app X).hom (b * value f X ^ k) =
@@ -364,12 +365,12 @@ private theorem scalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
 
 private theorem subsetScalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (r : ℕ) (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r)) :
-    subsetScalar R r f s ≫ unitMap φ =
-      unitMap φ ≫ (restriction φ).map (subsetScalar B r (mapSection φ ∘ f) s) := by
+    (subsetScalar R r f s).asHom ≫ unitMap φ =
+      unitMap φ ≫ (restriction φ).map ((subsetScalar B r (mapSection φ ∘ f) s)).asHom := by
   have hl : ∀ l : List (Fin r),
-      l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _) ≫ unitMap φ =
+      l.foldr (fun j b ↦ (scalar R (f j)).asHom ≫ b) (𝟙 _) ≫ unitMap φ =
         unitMap φ ≫ (restriction φ).map
-          (l.foldr (fun j b ↦ scalar B (mapSection φ (f j)) ≫ b) (𝟙 _)) := by
+          (l.foldr (fun j b ↦ (scalar B (mapSection φ (f j))).asHom ≫ b) (𝟙 _)) := by
     intro l
     induction l with
     | nil => simp
@@ -497,9 +498,9 @@ theorem idealRow_comparison_zero {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
         0 := by
   classical
   have hi : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings R)) j ≫ idealRow R r f =
-      scalar R (f j) := fun j ↦ Sigma.ι_comp_desc _ _
+      (scalar R (f j)).asHom := fun j ↦ Sigma.ι_comp_desc _ _
   have hb : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings B)) j ≫
-      idealRow B r (mapSection φ ∘ f) = scalar B (mapSection φ (f j)) :=
+      idealRow B r (mapSection φ ∘ f) = (scalar B (mapSection φ (f j))).asHom :=
     fun j ↦ Sigma.ι_comp_desc _ _
   apply Sigma.hom_ext
   intro j

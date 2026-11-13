@@ -103,7 +103,7 @@ theorem openRestrictionCompactSupport_cube
         ((derivedOpenImmersionLowerShriekBaseChangeIso A sqA).hom.app K) :=
     If.hom.naturality _
   simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc] at h hn ⊢

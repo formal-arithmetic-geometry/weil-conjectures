@@ -122,7 +122,7 @@ on the unbounded derived categories of étale sheaves, as a natural transformati
 (blueprint: `def:weil-pbc-derived-exchange-unbounded`) -/
 noncomputable def derivedBaseChangeMap (sq : CommSq g' f' f g) :
     R((f)_*[A]) ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ R((f')_*[A]) :=
-  (derivedBaseChangeSquare A sq).natTrans
+  (derivedBaseChangeSquare A sq)
 
 omit [HasSmallSiteSheafify A] in
 /-- **The adjoint of the derived base change map** is the derived square isomorphism followed

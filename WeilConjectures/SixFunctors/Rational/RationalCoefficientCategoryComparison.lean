@@ -72,16 +72,16 @@ structure FdFrobeniusComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     IsUnit (l : (D.geometricFiber X₀).left.presheaf.stalk x))]
   common : sfCommonStageWeilComplex D l hl X₀ Ω ≌
     CategoryTheory.Endofunctor.IsoAlgebra
-      (pbcQbarCompletedPull l Ω (D.geometricFrobenius X₀).hom)
+      (pbcQbarCompletedPull l Ω (D.geometricFrobenius X₀).asIso.hom)
   common_functor : HEq common.functor
     (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
-      (S.pullback (D.geometricFrobenius X₀)).pair)
+      (S.pullback (D.geometricFrobenius X₀).asIso).pair)
   finite : ∀ E : Padic.FiniteCoefficientFields l Ω,
     sfWeilComplex D l hl X₀ (pbcFiniteField.{u} l Ω E) ≌
       CategoryTheory.Endofunctor.IsoAlgebra
-        ((pbcQbarPullFamily l Ω (D.geometricFrobenius X₀).hom).Φ E)
+        ((pbcQbarPullFamily l Ω (D.geometricFrobenius X₀).asIso.hom).Φ E)
   finite_functors : ∀ E, HEq (finite E).functor
     (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
-      ((S.pullback (D.geometricFrobenius X₀)).finite E).rational)
+      ((S.pullback (D.geometricFrobenius X₀).asIso).finite E).rational)
 
 end WeilConjectures

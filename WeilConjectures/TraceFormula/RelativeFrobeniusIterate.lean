@@ -191,7 +191,6 @@ lemma weilLowerShriekFrobeniusComparison_hom_app_congr {aX aX' : X ⟶ X} {aY aY
   subst eX eY
   simp
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the categories of sheaves make the unification slow
 /-- **The iterates of the pushforward** (blueprint `sk-i-relative-frob` (2),
 `lem-trf-weil-shriek-iterates` (2)): for a Frobenius coefficient morphism `ψ : LΦ_X^* K ⟶ K`
@@ -279,7 +278,6 @@ section Stalk
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
 
-set_option maxHeartbeats 1000000 in
 -- the defeq of the carriers of the lower shriek with `Rf_! K` is slow
 omit [IsFinite ΦX.left] [IsUniversalHomeomorphism ΦX.left] [IsFinite ΦY.left]
   [IsUniversalHomeomorphism ΦY.left] in

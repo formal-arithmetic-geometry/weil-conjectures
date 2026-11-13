@@ -89,18 +89,17 @@ private theorem ordinary_reverse_of_mate
     {f : A ⥤ C} {rf : C ⥤ A} (af : f ⊣ rf)
     {g : B ⥤ D} {rg : D ⥤ B} (ag : g ⊣ rg)
     (e : rx ⋙ f ≅ g ⋙ rt) (δ : rg ⋙ rx ≅ rt ⋙ rf)
-    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)).natTrans = δ.hom) :
-    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)).natTrans =
+    (hδ : (mateEquiv ag af (TwoSquare.mk _ _ _ _ e.hom)) = δ.hom) :
+    ((mateEquiv ax at').symm (TwoSquare.mk _ _ _ _ e.hom)) =
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv := by
   apply (mateEquiv ax at').injective
   apply (mateEquiv ag af).injective
   rw [Equiv.apply_symm_apply]
-  apply TwoSquare.ext
-  intro M
+  refine NatTrans.ext (funext fun M ↦ ?_)
   have h := iterated_mateEquiv_conjugateEquiv ax at' af ag
     (TwoSquare.mk _ _ _ _
       ((conjugateIsoEquiv (af.comp at') (ax.comp ag)).symm δ.symm).inv)
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at h hδ
+  dsimp only [TwoSquare.mk] at h hδ
   rw [h, hδ]
   simp only [conjugateIsoEquiv_symm_apply_inv, Iso.symm_inv]
   erw [Equiv.apply_symm_apply]
@@ -124,10 +123,9 @@ private theorem scalarPullback_mate
     (ProEtale.etaleSheafExtendScalarsAdjunction φ Z)
   have h' : e.symm (TwoSquare.mk _ _ _ _ (upperStarRestrictScalarsIsoSheaf φ f).hom) =
       TwoSquare.mk _ _ _ _ (scalarSheafPullbackIso φ f).inv := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact NatTrans.congr_app h M
-  have hh := congrArg (fun q ↦ (e q).natTrans) h'
+  have hh := congrArg (fun q ↦ (e q)) h'
   simpa only [Equiv.apply_symm_apply] using hh.symm
 
 private instance scalarPullbackMonoidal

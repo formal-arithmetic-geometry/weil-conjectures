@@ -50,7 +50,6 @@ private theorem app_arrow_congr {C D : Type*} [Category C] [Category D]
   cases h
   exact ArrowHEq.refl _
 
-set_option maxHeartbeats 400000 in
 -- The formulas compare cached finite-stage and native coefficient presentations.
 /-- The final two-arrow boundary respects the canonical common-field scalar arrow.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.

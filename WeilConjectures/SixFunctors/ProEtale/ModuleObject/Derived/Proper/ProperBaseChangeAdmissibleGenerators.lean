@@ -82,7 +82,7 @@ private theorem residue_exchange_eq_condensed
       (upperStar R q').leftDerivedFunctor ≅ (upperStar R q).leftDerivedFunctor ⋙
       (upperStar R a).leftDerivedFunctor) ↦
     (mateEquiv (derivedUpperStarLowerStarAdjunction R q)
-      (derivedUpperStarLowerStarAdjunction R q') (TwoSquare.mk _ _ _ _ i.hom)).natTrans)
+      (derivedUpperStarLowerStarAdjunction R q') (TwoSquare.mk _ _ _ _ i.hom)))
     hsquare
 
 private theorem ambient_iso_of_residue_iso

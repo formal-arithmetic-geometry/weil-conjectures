@@ -10,6 +10,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRingsPresheaf
 import Mathlib.Topology.Sheaves.Sheafify
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Stalks of change of rings

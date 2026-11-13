@@ -114,7 +114,7 @@ lemma restrict_eq_upperShriekUnitCompOfEq (z : BorelMooreSection ℓ F) :
 /-- **The integral of a restriction**: the integral over `B` of the restriction of a Borel–Moore
 section `z` of `F` is `z^♭ : Ra_{F!} ℚ̄_ℓ ⟶ ℚ̄_ℓ` precomposed with the class of `B`. -/
 theorem integral_restrict (z : BorelMooreSection ℓ F) :
-    (z.restrict j).integral = componentClass ℓ j ≫
+    (z.restrict j).integral.asHom = componentClass ℓ j ≫
       ((boundedConstructibleUpperShriekAdjunction ℓ
         (toPoint F)).homEquiv _ _).symm z := by
   rw [integral_eq, componentClass, restrict_eq_upperShriekUnitCompOfEq, Category.assoc,
@@ -213,7 +213,7 @@ theorem map_integral_restrict_eq_zero_of_sp_eq_zero [IsProper F'.F.hom]
     [IsProper B.hom] (j : B ⟶ F.F) [IsOpenImmersion j.left]
     (hS : T.SpecializesComponentClass σpt νF j)
     (z : BorelMooreSection ℓ F.F) (hz : T.sp z = 0) :
-    Ψpt.map (z.restrict j).integral = 0 := by
+    Ψpt.map (z.restrict j).integral.asHom = 0 := by
   have h := T.integral_sp_eq σpt νF hθ z
   rw [hz, BorelMooreSection.integral_zero] at h
   rw [BorelMooreSection.integral_restrict]

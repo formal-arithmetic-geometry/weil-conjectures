@@ -101,7 +101,7 @@ private theorem finiteFreeDirectImageUnit {Z W : Scheme.{u}} (q : Z ⟶ W)
   have h := mateEquiv_whiskerTop_whiskerBottom adj adj α
     (sW.unit R.target).inv (sZ.unit R.source).hom
   rw [heq, mateEquiv_unitors] at h
-  have hc := congrArg (fun t ↦ t.natTrans.app M) h
+  have hc := congrArg (fun t ↦ t.app M) h
   simpa [comparison, α, TwoSquare.whiskerRight, TwoSquare.whiskerLeft] using hc.symm
 
 /-- The coefficient tower equation for the actual direct-image mate.
@@ -140,7 +140,7 @@ private theorem finiteFreeDirectImageTower {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW.normalization.derived a.target b.target).inv
     (sZ.normalization.derived a.source b.source).hom
   rw [heq, mateEquiv_vcomp ar as' ab] at h
-  have hc := congrArg (fun t ↦ t.natTrans.app M) h
+  have hc := congrArg (fun t ↦ t.app M) h
   simpa [comparison, α, β, ar, as', ab, CoefficientMap.comp, TwoSquare.vComp,
     TwoSquare.whiskerRight,
     TwoSquare.whiskerLeft, Category.assoc] using hc

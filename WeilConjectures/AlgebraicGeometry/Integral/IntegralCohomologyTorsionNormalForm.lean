@@ -94,7 +94,7 @@ theorem pbc_integral_cohomology_torsion_normal_form
                 (pbcAdicProjection T d n))).obj
               ((proEtaleRingModulePullback g ((pbcAdicRings T d).obj (op n))
                 ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
-                (Iso.refl _)).obj (tor n)) ⟶ cokernel f,
+                (Iso.refl _)).obj (tor n)) ⟶ cokernel f.asHom,
               Epi t := by
   have hl' : IsUnit (l : Γ(T, ⊤)) := by
     apply T.toRingedSpace.isUnit_of_isUnit_germ

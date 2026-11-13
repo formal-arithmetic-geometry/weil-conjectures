@@ -1400,7 +1400,6 @@ private def extensionPresheafIso
   exact (SheafOfModules.changeOfRingsMap_tmul a M g 1 m).trans
     (SheafOfModules.changeOfRingsMap_tmulOfUniverses a M g 1 m).symm
 
-set_option maxHeartbeats 400000 in
 -- Compare the two scalar-extension presentations and their sheafification units.
 private theorem pullback_unit_mate_isIso
     (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})

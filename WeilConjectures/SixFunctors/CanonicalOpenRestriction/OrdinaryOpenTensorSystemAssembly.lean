@@ -20,7 +20,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-attribute [local implicit_reducible] CategoryTheory.TwoSquare
 attribute [local irreducible] HasDerivedCategory.standard
   WeilConjectures.scalarReductionExtension WeilConjectures.scalarReductionExistence
   WeilConjectures.SemilinearSections.transition
@@ -74,7 +73,6 @@ private theorem extensionTransitions
   exact OpenSemilinearTensor.openScalarTransitionCompatibility
     l E j o AX AU o.openSystems.restrictionSections tensor M h
 
-set_option maxHeartbeats 400000 in
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
 /-- Assemble the normalized finite extension tensor comparisons as a strict-system iso.
 Source: Stacks 03DJ, 0E8I and 0941

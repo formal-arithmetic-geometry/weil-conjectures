@@ -99,7 +99,7 @@ theorem affineEtale_inverseImage_restriction_unit
       (Type (u + 1)) (fullAffineEtaleTopology X) (fullAffineEtaleTopology Y)
       Y.smallEtaleTopology).symm
   let alpha := fun {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] ↦
-    ((mateEquiv (adj h) (a h)).symm (beta h).hom).natTrans
+    ((mateEquiv (adj h) (a h)).symm (beta h).hom)
   have halpha {X Y : Scheme.{u}} (h : Y ⟶ X) [IsAffineHom h] : IsIso (alpha h) :=
     isIso_inverseMate_of_equivalences (adj h) (a h) (beta h)
   refine ⟨fun h ↦ (asIso (alpha h)).symm, ?_⟩

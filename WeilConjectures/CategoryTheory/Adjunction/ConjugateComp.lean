@@ -143,7 +143,6 @@ lemma Adjunction.homEquiv_symm_conjugateIsoEquiv_inv_app (Ex : Lc ⋙ Δs ⟶ ι
     Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.associator_hom_app,
     Functor.map_id, Functor.rightUnitor_hom_app, Category.comp_id, Category.id_comp,
     Functor.map_comp, comp_counit_app, NatTrans.naturality]
-  dsimp only [TwoSquare.natTrans]
   congr 1
   simp only [← Functor.map_comp]
   congr 1

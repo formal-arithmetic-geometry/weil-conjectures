@@ -63,7 +63,7 @@ private theorem normalizedConeComparison
     (a : ∀ n, CochainComplex.PrincipalCone.level μ n ≅ T.obj (op n))
     (hs : ∀ n, CochainComplex.PrincipalCone.step μ n ≫ (a n).hom =
       (a (n + 1)).hom ≫ WeilConjectures.integralOperationsTowerStep T n)
-    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ (a n).hom =
+    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)).asHom ≫ (a n).hom =
       γ.app (op n)) :
     ∃ c : DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ) ≅
         DerivedCategory.Q.obj (WeilConjectures.integralOperationsRoos T),
@@ -276,7 +276,7 @@ private theorem moduleSmallDiscreteColimits (ι : Type) :
 attribute [local instance 20000] moduleCountableProducts moduleSmallDiscreteColimits
 
 private lemma endoPow_eq_pow {B : Type*} [Category* B] {X : B}
-    (f : End X) (n : ℕ) : endoPow f n = f ^ n := by
+    (f : End X) (n : ℕ) : endoPow f.asHom n = (f ^ n).asHom := by
   induction n with
   | zero => rfl
   | succ n ih => rw [endoPow, ih, pow_succ']; rfl
@@ -501,7 +501,7 @@ private theorem coneTowerRoosComparison
     (a : ∀ n, CochainComplex.PrincipalCone.level (A := 𝒜) (P := P) μ n ≅ T.obj (op n))
     (hs : ∀ n, CochainComplex.PrincipalCone.step (A := 𝒜) (P := P) μ n ≫ (a n).hom =
       (a (n + 1)).hom ≫ WeilConjectures.integralOperationsTowerStep T n)
-    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ (a n).hom =
+    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)).asHom ≫ (a n).hom =
       γ.app (op n)) :
     ∃ e : (DerivedCategory.Q.{w} (C := 𝒜)).obj (CochainComplex.PrincipalCone.completion (A := 𝒜)
       (P := P) μ) ≅
@@ -540,7 +540,7 @@ theorem principalConeKoszulRoosComparison
     (a : (R.obj ⋙ forget CommRingCat).sections)
     (μ : End P)
     (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),
-      (μ.f q).val.app U x =
+      (μ.asHom.f q).val.app U x =
         @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :
     ∃ e : (DerivedCategory.Q.{w} (C := 𝒜)).obj (CochainComplex.PrincipalCone.completion (A := 𝒜)
       (P := P) μ) ≅

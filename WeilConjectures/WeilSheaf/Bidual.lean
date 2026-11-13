@@ -42,7 +42,7 @@ theorem bidual_comm (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
         ((P.dual hP).dual hP.dual).obj.str.hom =
       P.obj.str.hom ≫ Mod.bidual P.obj.carrier (adicConstant k₀ l X).obj.carrier := by
   let Fr := ProEtale.lowerStar (WeilCoefficients.{u} l)
-    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+    (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
   let b := Mod.bidual P.obj.carrier (adicConstant k₀ l X).obj.carrier
   let sP := P.obj.str.hom.hom
   let sD := (P.dual hP).obj.str.hom.hom

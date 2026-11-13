@@ -46,7 +46,6 @@ private theorem transpose_top_naturality
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
--- The pinned sheaf adjunction requires extra elaboration heartbeats.
 private theorem truncatedCounit_source {T S : Scheme.{u}} (g : T ⟶ S)
     (q : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE q)
     (K : schemeDerivedCategory T) (d : (derivedPullback g).obj C ⟶ K) :
@@ -120,7 +119,6 @@ private theorem topProjection_single {A : Type*} [Category A] [Abelian A]
   simpa only [C, E, Functor.comp_obj, Functor.id_obj, Functor.comp_map, Functor.id_map] using
     E.inv.naturality (E.inv.app N)
 
-set_option maxHeartbeats 400000 in
 -- Keep the top comparison as a composite of functor maps and single isomorphisms.
 private theorem single_kappa {T S : Scheme.{u}} (g : T ⟶ S) (q : ℤ)
     (N : SheafOfModules.{u} (moduleRings S.toRingedSpace)) :
