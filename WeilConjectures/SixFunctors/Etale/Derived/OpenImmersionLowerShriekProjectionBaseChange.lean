@@ -54,7 +54,7 @@ private lemma tensorComparison_square_transport
         (σ.hom.app X ⊗ₘ σ.hom.app Y) =
       σ.hom.app (X ⊗ Y) ≫ U.map (δ₁ X Y).hom ≫ ψU (F₁.obj X) (F₁.obj Y)) :
     U.map (e₁.inv.app X ▷ F₁.obj Y ≫ (δ₁ X Y).inv ≫ e₁.hom.app (X ⊗ Y)) ≫
-        (U.map (e₁.inv.app (X ⊗ Y)) ≫ σ.inv.app (X ⊗ Y) ≫ e₂.hom.app (V.obj (X ⊗ Y))) ≫
+        U.map (e₁.inv.app (X ⊗ Y)) ≫ σ.inv.app (X ⊗ Y) ≫ e₂.hom.app (V.obj (X ⊗ Y)) ≫
         G₂.map (ψV X Y) =
       ψU (G₁.obj X) (F₁.obj Y) ≫
         (U.map (e₁.inv.app X) ≫ σ.inv.app X ≫ e₂.hom.app (V.obj X)) ▷ U.obj (F₁.obj Y) ≫
