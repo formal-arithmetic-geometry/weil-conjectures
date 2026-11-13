@@ -222,6 +222,6 @@ theorem exists_topological_leray_bottom_realization
       exact eqToHom_apply_injective _
         ((hedge F I J φ hφ p s hs z hz hsz).trans
           (computation F I J φ hφ p s hs z hz hsz).symm))
-  exact h ▸ hbottom
+  exact fun p ↦ (congrFun h p).trans (hbottom p)
 
 end CategoryTheory

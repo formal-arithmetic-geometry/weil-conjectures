@@ -165,25 +165,12 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
                                     ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
                                     (J.extMk s (p + 1) rfl hs))) =
                                   I.extMk z (p + 1) rfl hz) := by
-  let HX (n : ℕ) :
-      Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
-    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙
-    (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
-  let HZ (n : ℕ) :
-      Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
-    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙
-    (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
-  have hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor
-      (Opens.grothendieckTopology X) n ⋙
-        (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
-  have hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor
-      (Opens.grothendieckTopology Z) n ⋙
-        (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
-  refine ⟨HX, HZ, hX, hZ, ?_⟩
+  refine ⟨_, _, fun _ ↦ rfl, fun _ ↦ rfl, ?_⟩
   obtain ⟨edge, a, ha, hedge⟩ :=
-    exists_topological_induced_cohomology_cocycle f HX HZ hX hZ
+    exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
   refine Exists.imp (fun E ↦ ?_)
-    (exists_topological_leray_bottom_realization f HX HZ hX hZ edge a ha hedge)
+    (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
+      edge a ha hedge)
   refine Exists.imp (fun e₂ ↦ ?_)
   refine And.imp_right ?_
   refine Exists.imp (fun T ↦ ?_)
