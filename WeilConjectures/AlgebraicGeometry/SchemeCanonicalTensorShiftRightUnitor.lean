@@ -59,9 +59,11 @@ private lemma rightUnitor_shift_lifting_square (P : CochainComplex.KFlat C) (n :
     let η := Functor.CommShift₂OfLocalization.liftingIsoApp (L C) (LKFlat C)
       (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
       (F C).flip (curriedTensor (DerivedCategory C)).flip (𝟙_ _)
-    ((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).map
+    ((curriedTensor (DerivedCategory C)).flip.obj
+        ((L C).obj (𝟙_ (CochainComplex C ℤ)))).map
         ((L C).map a ≫ ((L C).commShiftIso n).hom.app P.obj) ≫
-      (((curriedTensor (DerivedCategory C)).flip.obj (𝟙_ _)).commShiftIso n).hom.app
+      (((curriedTensor (DerivedCategory C)).flip.obj
+        ((L C).obj (𝟙_ (CochainComplex C ℤ)))).commShiftIso n).hom.app
         ((LKFlat C).obj P) ≫ (η.app P)⟦n⟧' =
       η.app (P⟦n⟧) ≫
         (L C).map (a ▷ 𝟙_ _ ≫

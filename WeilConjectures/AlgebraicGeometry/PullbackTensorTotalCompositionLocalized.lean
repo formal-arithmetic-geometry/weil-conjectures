@@ -255,28 +255,34 @@ private theorem pullback_tensor_total_composition_chain
   -- Keep coproduct synthesis local to this proof and reuse it at each total tensor.
   have : ∀ P N : CochainComplex X.Modules ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor X.Modules) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      X.Modules).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace))).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex Y.Modules ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor Y.Modules) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      Y.Modules).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace))) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace))).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex Z.Modules ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor Z.Modules) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      Z.Modules).has_colimits_of_shape _).has_colimit _
   have : ∀ P N : CochainComplex
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace))) (.up ℤ) :=
-    fun P N ↦ inferInstance
+    fun P N n ↦ ((CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u}
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace))).has_colimits_of_shape _).has_colimit _
   let F := Scheme.Modules.tensorPullback f
   let G := Scheme.Modules.tensorPullback g
   let Fc := F.mapHomologicalComplex (.up ℤ)
@@ -284,63 +290,59 @@ private theorem pullback_tensor_total_composition_chain
   let b := Functor.mapHomologicalComplexCompIso e (.up ℤ)
   have : F.IsLeftAdjoint := ⟨_, ⟨tensorAdj f⟩⟩
   have : G.IsLeftAdjoint := ⟨_, ⟨tensorAdj g⟩⟩
-  have hchain : Fc.map ψ.hom ≫ θ.hom ≫
-      HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
-        (curriedTensor _) (.up ℤ) =
-      b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom := by
-    ext n : 1
-    apply HomologicalComplex.mapBifunctor.hom_ext_of_map (G ⋙ F)
-    intro p q h
-    let H := Scheme.Modules.tensorPullback (f ≫ g)
-    let iZ : P.X p ⊗ N.X q ⟶ (pullbackTensorTotal Z P N).X n :=
-      HomologicalComplex.ιMapBifunctor P N (curriedTensor Z.Modules) (.up ℤ) p q n h
-    let iY : G.obj (P.X p) ⊗ G.obj (N.X q) ⟶
-        (pullbackTensorTotal Y (Gc.obj P) (Gc.obj N)).X n :=
-      HomologicalComplex.ιMapBifunctor (Gc.obj P) (Gc.obj N)
-        (curriedTensor Y.Modules) (.up ℤ) p q n h
-    let iX : F.obj (G.obj (P.X p)) ⊗ F.obj (G.obj (N.X q)) ⟶
-        (pullbackTensorTotal X (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))).X n :=
-      HomologicalComplex.ιMapBifunctor (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))
-        (curriedTensor X.Modules) (.up ℤ) p q n h
-    let iD : H.obj (P.X p) ⊗ H.obj (N.X q) ⟶
-        (pullbackTensorTotal X ((H.mapHomologicalComplex (.up ℤ)).obj P)
-          ((H.mapHomologicalComplex (.up ℤ)).obj N)).X n :=
-      HomologicalComplex.ιMapBifunctor
-        ((H.mapHomologicalComplex (.up ℤ)).obj P)
-        ((H.mapHomologicalComplex (.up ℤ)).obj N)
-        (curriedTensor X.Modules) (.up ℤ) p q n h
-    let eg := ((Classical.choose (Scheme.Modules.module_pullback_tensor g))
-      (P.X p) (N.X q)).hom
-    let ef := ((Classical.choose (Scheme.Modules.module_pullback_tensor f))
-      (G.obj (P.X p)) (G.obj (N.X q))).hom
-    let ed := ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g)))
-      (P.X p) (N.X q)).hom
-    let bP := e.hom.app (P.X p)
-    let bN := e.hom.app (N.X q)
-    let bT := e.hom.app ((pullbackTensorTotal Z P N).X n)
-    let bS := e.hom.app (P.X p ⊗ N.X q)
-    have hψ' : G.map iZ ≫ ψ.hom.f n = eg ≫ iY := hψ p q n h
-    have hθ' : F.map iY ≫ θ.hom.f n = ef ≫ iX := hθ p q n h
-    have hφ' : H.map iZ ≫ φ.hom.f n = ed ≫ iD := hφ p q n h
-    clear hψ hθ hφ
-    have hb : F.map (G.map iZ) ≫ bT = bS ≫ H.map iZ :=
-      e.hom.naturality iZ
-    have hm : F.map eg ≫ ef ≫ (bP ⊗ₘ bN) = bS ≫ ed :=
-      he (P.X p) (N.X q)
-    have hi : iX ≫ (HomologicalComplex.mapBifunctorMap (b.hom.app P)
-        (b.hom.app N) (curriedTensor X.Modules) (.up ℤ)).f n =
-        (bP ⊗ₘ bN) ≫ iD := by
-      change HomologicalComplex.ιMapBifunctor (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))
-        (curriedTensor X.Modules) (.up ℤ) p q n h ≫ _ = _
-      rw [HomologicalComplex.ι_mapBifunctorMap]
-      simp only [b, Functor.mapHomologicalComplexCompIso_hom_app_f,
-        curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def_assoc]
-    change F.map (G.map iZ) ≫ F.map (ψ.hom.f n) ≫ θ.hom.f n ≫
-        (HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
-          (curriedTensor X.Modules) (.up ℤ)).f n =
-      F.map (G.map iZ) ≫ bT ≫ φ.hom.f n
-    exact tensorTotal_summand_square F hψ' hθ' hi hm hb hφ'
-  exact hchain
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext_of_map (G ⋙ F)
+  intro p q h
+  let H := Scheme.Modules.tensorPullback (f ≫ g)
+  let iZ : P.X p ⊗ N.X q ⟶ (pullbackTensorTotal Z P N).X n :=
+    HomologicalComplex.ιMapBifunctor P N (curriedTensor Z.Modules) (.up ℤ) p q n h
+  let iY : G.obj (P.X p) ⊗ G.obj (N.X q) ⟶
+      (pullbackTensorTotal Y (Gc.obj P) (Gc.obj N)).X n :=
+    HomologicalComplex.ιMapBifunctor (Gc.obj P) (Gc.obj N)
+      (curriedTensor Y.Modules) (.up ℤ) p q n h
+  let iX : F.obj (G.obj (P.X p)) ⊗ F.obj (G.obj (N.X q)) ⟶
+      (pullbackTensorTotal X (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))).X n :=
+    HomologicalComplex.ιMapBifunctor (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))
+      (curriedTensor X.Modules) (.up ℤ) p q n h
+  let iD : H.obj (P.X p) ⊗ H.obj (N.X q) ⟶
+      (pullbackTensorTotal X ((H.mapHomologicalComplex (.up ℤ)).obj P)
+        ((H.mapHomologicalComplex (.up ℤ)).obj N)).X n :=
+    HomologicalComplex.ιMapBifunctor
+      ((H.mapHomologicalComplex (.up ℤ)).obj P)
+      ((H.mapHomologicalComplex (.up ℤ)).obj N)
+      (curriedTensor X.Modules) (.up ℤ) p q n h
+  let eg := ((Classical.choose (Scheme.Modules.module_pullback_tensor g))
+    (P.X p) (N.X q)).hom
+  let ef := ((Classical.choose (Scheme.Modules.module_pullback_tensor f))
+    (G.obj (P.X p)) (G.obj (N.X q))).hom
+  let ed := ((Classical.choose (Scheme.Modules.module_pullback_tensor (f ≫ g)))
+    (P.X p) (N.X q)).hom
+  let bP := e.hom.app (P.X p)
+  let bN := e.hom.app (N.X q)
+  let bT := e.hom.app ((pullbackTensorTotal Z P N).X n)
+  let bS := e.hom.app (P.X p ⊗ N.X q)
+  have hψ' : G.map iZ ≫ ψ.hom.f n = eg ≫ iY := hψ p q n h
+  have hθ' : F.map iY ≫ θ.hom.f n = ef ≫ iX := hθ p q n h
+  have hφ' : H.map iZ ≫ φ.hom.f n = ed ≫ iD := hφ p q n h
+  clear hψ hθ hφ
+  have hb : F.map (G.map iZ) ≫ bT = bS ≫ H.map iZ :=
+    e.hom.naturality iZ
+  have hm : F.map eg ≫ ef ≫ (bP ⊗ₘ bN) = bS ≫ ed :=
+    he (P.X p) (N.X q)
+  have hi : iX ≫ (HomologicalComplex.mapBifunctorMap (b.hom.app P)
+      (b.hom.app N) (curriedTensor X.Modules) (.up ℤ)).f n =
+      (bP ⊗ₘ bN) ≫ iD := by
+    change HomologicalComplex.ιMapBifunctor (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))
+      (curriedTensor X.Modules) (.up ℤ) p q n h ≫ _ = _
+    rw [HomologicalComplex.ι_mapBifunctorMap]
+    simp only [b, Functor.mapHomologicalComplexCompIso_hom_app_f,
+      curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def_assoc]
+    rfl
+  change F.map (G.map iZ) ≫ F.map (ψ.hom.f n) ≫ θ.hom.f n ≫
+      (HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
+        (curriedTensor X.Modules) (.up ℤ)).f n =
+    F.map (G.map iZ) ≫ bT ≫ φ.hom.f n
+  exact tensorTotal_summand_square F hψ' hθ' hi hm hb hφ'
 
 set_option profiler true in
 private theorem pullback_tensor_total_composition_localized_of_chain
