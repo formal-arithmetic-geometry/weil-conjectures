@@ -29,6 +29,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+set_option profiler true in
 set_option maxHeartbeats 400000 in
 -- Comparing the evaluated complexes in the two auxiliary statements exceeds the default limit.
 /-- Degree-zero sections that are cocycles are exactly chain maps on the slice site.

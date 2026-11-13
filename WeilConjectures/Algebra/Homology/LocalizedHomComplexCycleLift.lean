@@ -28,6 +28,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 1400000 in
 -- Evaluated Hom projections compare composed functors and scalar-restriction structures.
