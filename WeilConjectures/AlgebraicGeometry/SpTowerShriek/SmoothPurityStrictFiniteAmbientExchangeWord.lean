@@ -451,7 +451,13 @@ private theorem strictFiniteAmbientExchangeCore (b : Base l E)
     (coordinates.val (c.ofIsPullback sq).g n).right N
     hp ho
   simpa only [comparisonFiniteF, comparisonLevelExchange, finiteF,
-    rightDerivedLowerShriekOfCompactification] using H
+    rightDerivedLowerShriekOfCompactification, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_inv,
+    Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.comp_map, Functor.comp_obj,
+    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc] using H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- The retained witness transport equals the ambient
