@@ -397,7 +397,9 @@ private theorem nativeReductionMonoidal
       simp only [heps P hP, heps Q hQ]
       dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor,
         CategoryTheory.Functor.uncurry_obj_obj, Modules, J, R] at hepsPQ ⊢
-      rw [hepsPQ]
+      conv_rhs =>
+        arg 1
+        rw [hepsPQ]
       trace "PH805: counits rewritten"
       let εP := reductionCounit l E Y D hl n P
       let εQ := reductionCounit l E Y D hl n Q
