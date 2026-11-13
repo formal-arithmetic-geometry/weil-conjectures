@@ -318,6 +318,7 @@ private lemma torsorDescentData_hom {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf
           (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm)) ≫
         (unitDescentData V).hom q f₁ f₂ hf₁ hf₂ := rfl
 
+set_option trace.profiler true in
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
     (M : modulesPseudofunctor.obj (.mk (op X)))
