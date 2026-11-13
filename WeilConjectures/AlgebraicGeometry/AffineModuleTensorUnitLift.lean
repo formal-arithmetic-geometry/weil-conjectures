@@ -77,7 +77,7 @@ private theorem tensor_changeOfRings_adjunct
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 C))
     (k : SheafOfModules.changeOfRings.{u, u, u} φ M ⟶ N) :
     ∃ q : M ⟶ (SheafOfModules.restrictScalars (𝓻 φ)).obj N,
-      ∀ (W : (Opens Y)ᵒᵖ) (m : M.val.obj W),
+      ∀ (W : (TopologicalSpace.Opens Y)ᵒᵖ) (m : M.val.obj W),
         q.val.app W m = k.val.app W
           (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C).obj)).unit.app
             (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M)).app W
@@ -233,8 +233,11 @@ theorem affine_module_tensor_unitLift
     ⟨PresheafOfModules.homMk
       ((PresheafOfModules.toPresheaf X.ringCatSheaf.obj).map d.val) hscalar⟩
   refine ⟨a, ?_⟩
-  ext V g
-  rfl
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  exact LinearMap.ext fun _ ↦ rfl
 
 end
 end AlgebraicGeometry.Scheme.Modules
