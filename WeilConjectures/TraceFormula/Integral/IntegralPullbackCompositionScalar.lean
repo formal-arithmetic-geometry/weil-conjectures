@@ -84,6 +84,15 @@ private theorem scalar_composition_paste
   rw [reassoc_of% N1, IIIk', reassoc_of% IIIh, ← reassoc_of% Ng, reassoc_of% Np,
     reassoc_of% CE', mix, ← reassoc_of% IIIhk, Na, ← reassoc_of% CL]
 
+private theorem finiteSystemDerivedComposition_hom_app_eq_integralComparison
+    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
+    (M : finiteSystemDerived (integralSystemRings l E) (integralSystemTransition l E) V) :
+    (finiteSystemDerivedComposition (integralSystemRings l E)
+      (integralSystemTransition l E) h k).hom.app M =
+        (integralComparisonSystemComposition l E h k).hom.app M := by
+  exact NatTrans.congr_app (congrArg Iso.hom
+    (finiteSystemDerivedComposition_eq_integralComparison l E h k)) M
+
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
 /-- Scalar extension carries the integral pullback compositor at E to the one at L.
@@ -142,13 +151,11 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
       ((integralSystemScalarIso l E L ι V).hom.app K)
   have CL := (integralPullbackComposition l L).choose_spec.2.2 h k (SV.obj K)
   simp only [integralPullbackSystemComparison_choose] at CL
-  have eE := NatTrans.congr_app (congrArg Iso.hom
-    (finiteSystemDerivedComposition_eq_integralComparison l E h k))
-      ((integralSystemReduction l E V).obj K)
-  have eL := NatTrans.congr_app (congrArg Iso.hom
-    (finiteSystemDerivedComposition_eq_integralComparison l L h k))
-      ((integralComparisonDerivedSequenceScalar l E L ι V).obj
-        ((integralSystemReduction l E V).obj K))
+  have eE := finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k
+    ((integralSystemReduction l E V).obj K)
+  have eL := finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
+    ((integralComparisonDerivedSequenceScalar l E L ι V).obj
+      ((integralSystemReduction l E V).obj K))
   dsimp only [Functor.comp_map, Functor.comp_obj, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Ng Np mix Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
