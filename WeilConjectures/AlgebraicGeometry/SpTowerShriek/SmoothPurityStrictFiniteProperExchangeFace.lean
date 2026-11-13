@@ -86,8 +86,6 @@ private meta partial def conversionCongruence
   let compute : Lean.MetaM Lean.Expr := do
     if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then
       return ← Lean.Meta.mkAppM ``proof_irrel_heq #[a, b]
-    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
-      return ← conversionReduction a b
     let reduce (e : Lean.Expr) : Lean.MetaM (Option Lean.Expr) := do
       if let .letE _ _ v body _ := e then return some (body.instantiate1 v)
       if e.getAppFn.isFVar then
@@ -167,6 +165,8 @@ private meta partial def conversionCongruence
         let h := Lean.mkAppN ct.proof args
         return ← if (← Lean.Meta.inferType h).isHEq then pure h else conversionOfEq h
       catch err => congruenceError := some err
+    if (← Lean.Meta.isClass? (← Lean.Meta.inferType a)).isSome then
+      return ← conversionReduction a b
     let a' ← Lean.Meta.withTransparency .reducible (Lean.Meta.whnf a)
     let a' ← match (← reduce a') with
       | some v => pure v
@@ -199,9 +199,6 @@ private meta partial def conversionCongruence
     if let some err := congruenceError then throw err
     throwError "Unmatched finite comparison expressions: {a} versus {b}"
   let h ← compute
-  let ty ← Lean.Meta.mkHEq a b
-  let h ← Lean.Meta.mkAuxTheorem ty h
-    (zetaDelta := true) (kind? := `_finiteCongruence)
   cache.modify fun m => m.insert (a, b) h
   return h
 
