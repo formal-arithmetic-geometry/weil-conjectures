@@ -63,7 +63,6 @@ private theorem sum_singleton_subsets (r : ℕ)
     · simp [hT]
   · simp
 
-set_option maxHeartbeats 400000 in
 /-- Explicit subset insertion agrees with the singleton augmentation.
 
 Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
