@@ -72,6 +72,9 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     (h' : IsCanonicalDerivedTensorHom X e') : e = e' := by
   classical
   let C := SheafOfModules.{uCD} (moduleRings X.toRingedSpace)
+  let : HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} := inferInstance
+  have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
+    inferInstance
   let : Abelian C := inferInstance
   let Q := DerivedCategory.Q.{wCD} (C := C)
   let H := derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace)
@@ -109,25 +112,20 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   have hφSurj := q.map_surjective v
   rcases hφSurj with ⟨φ, hφ⟩
   have hφQ : Q.map φ = g ≫ j.hom := by
-    have hn := DerivedCategory.quotientCompQhIso_hom_naturality φ
-    rw [hφ, hv] at hn
-    change ((d.app P).hom ≫ g ≫ j.hom ≫ (d.app _).inv) ≫
-      (d.app _).hom = (d.app P).hom ≫ Q.map φ at hn
-    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id] at hn
-    exact ((cancel_epi (d.app P).hom).1 hn).symm
+    have hmap := (congrArg DerivedCategory.Qh.map hφ).trans hv
+    have hn := (DerivedCategory.quotientCompQhIso_hom_naturality φ).symm.trans
+      (congrArg (fun v ↦ v ≫ (d.app _).hom) hmap)
+    apply (cancel_epi (d.app P).hom).1
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using hn
   have hg : Q.map φ ≫ j.inv = g := by
-    rw [hφQ]
-    simp
+    exact (congrArg (fun t ↦ t ≫ j.inv) hφQ).trans
+      (by simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id])
   have hrep := h.2 P Lc Mc hP φ
   rcases hrep with ⟨ψ, hψ, he⟩
   have hrep' := h'.2 P Lc Mc hP φ
   rcases hrep' with ⟨ψ', hψ', he'⟩
   have eqψ : ψ = ψ' := by
     have := SheafOfModules.isMonoidal_W X.sheaf
-    have : (Opens.grothendieckTopology X).WEqualsLocallyBijective AddCommGrpCat.{uCD} :=
-      inferInstance
-    have : HasWeakSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{uCD} :=
-      inferInstance
     let := SheafOfModules.monoidalCategory X.sheaf
     let := SheafOfModules.symmetricCategory X.sheaf
     let := SheafOfModules.preservesZeroMorphisms_curriedTensor X.sheaf
@@ -145,15 +143,16 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     DerivedCategory.Q.map t ≫ schemeHomResolutionInverse X Mc) eqψ).trans he'.symm)
   change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) =
     e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) (Q.map φ ≫ j.inv) at heq
-  rw [hg] at heq
+  have heqg := (congrArg (e (Q.obj P) (Q.obj Lc) (Q.obj Mc)) hg.symm).trans
+    (heq.trans (congrArg (e' (Q.obj P) (Q.obj Lc) (Q.obj Mc)) hg))
   have hn := h.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
   have hn' := h'.1 K (Q.obj P) L (Q.obj Lc) M (Q.obj Mc) a.hom b.hom c.inv f
   change e (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn
   change e' (Q.obj P) (Q.obj Lc) (Q.obj Mc) g = _ at hn'
-  rw [hn, hn'] at heq
+  have heq' := hn.symm.trans (heqg.trans hn')
   have : IsIso (a.hom ⊗ₘ b.hom) := inferInstance
   exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
-    (by simpa only [← Category.assoc] using heq))
+    (by simpa only [← Category.assoc] using heq'))
 
 /-- Canonical family fixed by the representative equation.
 Source: Stacks, cohomology.tex, Tag 08DJ
