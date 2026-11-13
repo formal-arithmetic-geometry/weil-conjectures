@@ -158,9 +158,11 @@ theorem inverseImageRegularExtension
   have hv := congrArg (fun z ↦ z.val V) hs
   change (q (unit S) e.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
-  rw [← hadj I (unit S) e.hom _ _]
-  rw [← hφ M (L.obj (unit S)) _ V a]
-  change (q (unit S) e.hom).val.app V a = _
+  trans (q (unit S) e.hom).val.app V a
+  · symm
+    dsimp only [q, Equiv.trans_apply]
+    rw [hφ]
+    exact hadj I (unit S) e.hom _ _
   rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
   rw [(q (unit S) e.hom).val.app V |>.hom.map_smul, hv]
   change (t.hom.app ((Opens.map g).op.obj V)).hom
