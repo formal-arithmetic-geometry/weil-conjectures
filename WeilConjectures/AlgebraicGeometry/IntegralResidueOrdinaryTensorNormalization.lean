@@ -220,7 +220,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local irreducible] residueOrdinaryUpperStarMonoidal
 
-set_option profiler true in
 -- The degreewise calculation compares several concrete module-functor composites.
 /-- The scalar tensor square agrees with ordinary pullback's comonoidal map.
 Source: Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5), p. 51.
