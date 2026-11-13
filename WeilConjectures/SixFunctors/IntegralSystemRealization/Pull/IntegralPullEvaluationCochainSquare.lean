@@ -25,14 +25,6 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-private theorem cochain_comp_eq_comp_comp_of_components
-    {ι : Type*} {c : ComplexShape ι} {V : Type*} [Category* V] [HasZeroMorphisms V]
-    {A B C D F : HomologicalComplex V c}
-    (a : A ⟶ B) (b : B ⟶ F) (c' : A ⟶ C) (d : C ⟶ D) (e : D ⟶ F)
-    (h : ∀ i, a.f i ≫ b.f i = c'.f i ≫ d.f i ≫ e.f i) :
-    a ≫ b = c' ≫ d ≫ e :=
-  HomologicalComplex.hom_ext _ _ h
-
 /-- The actual comparison of exact cochain functors, before localization.
 Source: Stacks 03D2 and 0941
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square). -/
@@ -67,27 +59,11 @@ private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X �
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
-  apply cochain_comp_eq_comp_comp_of_components
+  apply HomologicalComplex.hom_ext
   intro i
-  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
-    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
-    let ts := target.appArg!.getAppArgs.back!.getAppArgs
-    let ss := source.appArg!.getAppArgs.back!.getAppArgs
-    let td := ts[ts.size - 2]!
-    let sd := ss[ss.size - 2]!
-    let tf := td.getAppArgs
-    let sf := sd.getAppArgs
-    let tm := tf[tf.size - 2]!
-    let sm := sf[sf.size - 2]!
-    Lean.logInfo m!"MAP HEADS {tm.getAppFn} / {sm.getAppFn}"
-    let ta := tm.getAppArgs
-    let sa := sm.getAppArgs
-    for j in [:min ta.size sa.size] do
-      if ta[j]! != sa[j]! then
-        Lean.logInfo m!"ARG {j} TARGET {ta[j]!}\nSOURCE {sa[j]!}"
-  exact h
+  simpa only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+    NatTrans.mapHomologicalComplex_app_f] using
+    integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
