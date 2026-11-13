@@ -175,7 +175,7 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
     (Scheme.Hom.opensRange_of_isIso _) N inferInstance p
   rw [Category.id_comp] at hb
   let c := LinearEquiv.ofBijective (Scheme.Modules.H.baseChange (S := Γ(S', W)) h N p) hb
-  obtain ⟨e0, a0, b0, ha0, hb0⟩ :=
+  choose e0 a0 b0 ha0 hb0 using
     Scheme.Modules.exists_flatBaseChange_affine_canonical_comparisons
       f g F I J p V W hV hW eVW D
   intro eH a ha ha_tmul
@@ -196,15 +196,12 @@ theorem Scheme.Modules.exists_flatBaseChange_affine_target
   have ht' : a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)) =
       1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi) :=
     (congrArg a0.symm ht).trans (a0.symm_apply_apply _)
-  have hb_c (z : Γ(S', W) ⊗[Γ(S, V)] Scheme.Modules.HOver h N p) :
-      b (c z) = b0 (c (a0.symm (a z))) := by
-    change b0 (c (a0.symm (ae (c.symm (c z))))) = b0 (c (a0.symm (a z)))
-    rw [c.symm_apply_apply]
   change b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) = _
   calc
     b (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p xi) =
         b (c (1 ⊗ₜ[Γ(S, V)] xi)) := congrArg b (hc xi).symm
-    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) := hb_c _
+    _ = b0 (c (a0.symm (a (1 ⊗ₜ[Γ(S, V)] xi)))) :=
+      congrArg (fun z ↦ b0 (c (a0.symm (a z)))) (c.symm_apply_apply _)
     _ = b0 (c (1 ⊗ₜ[Γ(S, V)] e0 (eH.symm xi))) := congrArg (fun z ↦ b0 (c z)) ht'
     _ = b0 (Scheme.Modules.H.baseChangeLinear (S := Γ(S', W)) h N p
         (e0 (eH.symm xi))) := congrArg b0 (hc _)
