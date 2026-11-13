@@ -48,6 +48,63 @@ private theorem tensor_naturality {C : Type*} [Category* C] [MonoidalCategory C]
   rw [← Category.assoc, ← comp_whiskerRight, h, comp_whiskerRight, Category.assoc, k]
   exact (Category.assoc _ _ _).symm
 
+private theorem evaluation_chain_hi (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (f : M ⟶ N) :
+    letI := schemeDerivedTensorMonoidal X
+    let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+    let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+      (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+      ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+    (DerivedCategory.Q.map h ⊗ₘ 𝟙 (DerivedCategory.Q.obj L)) ≫
+        (pullbackTensorModelMap X _ L ≫
+          DerivedCategory.Q.map (schemeTensorHomUncurry X _ L N (𝟙 _)) ≫
+          schemeHomResolutionInverse X N) =
+      pullbackTensorModelMap X _ L ≫
+          DerivedCategory.Q.map (schemeTensorHomUncurry X _ L N h) ≫
+          schemeHomResolutionInverse X N := by
+  let := schemeDerivedTensorMonoidal X
+  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+  have hi := schemeTensorHomUncurry_localized_evaluation X _ _ L L N N
+    h (𝟙 L) (𝟙 N) (𝟙 _)
+  have hid : ((𝟙 L).op, (schemeHomKInjectiveResolution X).map (𝟙 N)) =
+      𝟙 (op L, (schemeHomKInjectiveResolution X).obj N) := by
+    rw [(schemeHomKInjectiveResolution X).map_id, op_id]
+    rfl
+  rw [hid, H.map_id] at hi
+  simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hi
+  exact hi.symm
+
+private theorem evaluation_chain_hf (X : Scheme.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
+    (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
+    (f : M ⟶ N) :
+    letI := schemeDerivedTensorMonoidal X
+    let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+    let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+      (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+      ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+    pullbackTensorModelMap X _ L ≫
+        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L N h) ≫
+        schemeHomResolutionInverse X N =
+      (pullbackTensorModelMap X _ L ≫
+        DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
+        schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map f := by
+  let := schemeDerivedTensorMonoidal X
+  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
+  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
+    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
+    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
+  have hf := schemeTensorHomUncurry_localized_evaluation X _ _ L L M N
+    (𝟙 _) (𝟙 L) f (𝟙 _)
+  simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hf
+  simp only [id_tensorHom_id, Category.id_comp] at hf
+  exact hf
+
 private theorem evaluation_chain_localized (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M N : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
@@ -64,23 +121,7 @@ private theorem evaluation_chain_localized (X : Scheme.{u})
       (pullbackTensorModelMap X _ L ≫
           DerivedCategory.Q.map (schemeTensorHomUncurry X _ L M (𝟙 _)) ≫
           schemeHomResolutionInverse X M) ≫ DerivedCategory.Q.map f := by
-  let := schemeDerivedTensorMonoidal X
-  let H := Functor.uncurry.obj (homComplexFunctor (R := X.sheaf))
-  let h := H.map (X := (op L, (schemeHomKInjectiveResolution X).obj M))
-    (Y := (op L, (schemeHomKInjectiveResolution X).obj N))
-    ((𝟙 L).op, (schemeHomKInjectiveResolution X).map f)
-  have hi := schemeTensorHomUncurry_localized_evaluation X _ _ L L N N
-    h (𝟙 L) (𝟙 N) (𝟙 _)
-  have hf := schemeTensorHomUncurry_localized_evaluation X _ _ L L M N
-    (𝟙 _) (𝟙 L) f (𝟙 _)
-  have hid : ((𝟙 L).op, (schemeHomKInjectiveResolution X).map (𝟙 N)) =
-      𝟙 (op L, (schemeHomKInjectiveResolution X).obj N) := by
-    rw [(schemeHomKInjectiveResolution X).map_id, op_id]
-    rfl
-  rw [hid, H.map_id] at hi
-  simp only [Category.comp_id, Category.id_comp, DerivedCategory.Q.map_id] at hi hf
-  simp only [id_tensorHom_id, Category.id_comp] at hf
-  exact hi.symm.trans hf
+  exact (evaluation_chain_hi X L M N f).trans (evaluation_chain_hf X L M N f)
 
 private theorem evaluation_chain_resolution_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
