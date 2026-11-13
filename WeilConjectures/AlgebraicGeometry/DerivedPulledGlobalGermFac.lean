@@ -30,9 +30,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 -- Canonical homotopy comparison endpoints require repeated definitional equality checks.
 /-- The source-side derived germ and exchange, precomposed with the global-sections
-unit, are the localized underived source-side composite followed by the target units.
-Source: Stacks Project, sites-cohomology.tex, Remark 08J6 and Lemma 0736;
-cohomology.tex, Tag 01EZ. -/
+unit, are the localized underived source-side composite followed by the target units
+(Stacks, Tags 08J6, 0736 and 01EZ). -/
 theorem derivedPulledGlobalGerm_fac
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)

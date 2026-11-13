@@ -26,9 +26,8 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X : AlgebraicGeometry.Scheme.{u}}
 
-/-- The prescribed derived single/pullback map factors through the derived counit.
-Source: Stacks, Cohomology on Sites, Tag 06YY; the exact-functor comparisons
-leftDerivedFunctorIsoMapDerivedCategory and mapDerivedCategorySingleFunctor. -/
+/-- The prescribed derived single/pullback map factors through the derived counit
+(Stacks, Tag 06YY). -/
 theorem singleFunctorObjIsoQh_pullback_counit
     {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)
     (L : Sheaf X.smallEtaleTopology B) :

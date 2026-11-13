@@ -128,8 +128,7 @@ private lemma comparison_app {X Y : RingedSpace.{u}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison after applying the inverse derived shift map is the shifted
-comparison followed by the inverse localized shift identification.
-Source: Stacks Project, Tag 079V. -/
+comparison followed by the inverse localized shift identification (Stacks, Tag 079V). -/
 theorem derivedModuleDirectImageKInjectiveIso_shift_aux
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

@@ -26,8 +26,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Every positive cohomology group of a higher direct image vanishes on an affine base.
-Source: Stacks Project, Tags 01XJ (1), 01XB and 03FD. -/
+/-- Every positive cohomology group of a higher direct image vanishes on an affine base
+(Stacks, Tags 01XJ, 01XB and 03FD). -/
 theorem isZero_affine_higherDirectImage_moduleCohomology
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] [IsAffine S]
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (hM : M.IsQuasicoherent)

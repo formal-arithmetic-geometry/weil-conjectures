@@ -30,8 +30,8 @@ namespace AlgebraicGeometry
 
 /-- Distinguished cover triangles and the connecting square for the constructed
 canonical comparison maps. The open adjunctions are fixed explicit constructions.
-This asserts no first or second square and constructs no triangle morphism.
-Source: Stacks Project, Tags 08BV, 08HZ and 0DJ9, induction step. -/
+This asserts no first or second square and constructs no triangle morphism
+(Stacks, Tags 08BV, 08HZ and 0DJ9). -/
 theorem derivedBaseChange_mayerVietoris_connectingSquare
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

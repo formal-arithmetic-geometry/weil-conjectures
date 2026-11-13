@@ -53,8 +53,8 @@ private noncomputable def opensSiteCechIso (X : Scheme.{u}) {n : Type u} (U : n 
     simp only [SiteCechComplex.complex, CochainComplex.of_d]
     rfl)
 
-/-- The standard N+1 affine opens bound cohomology of a closed projective subscheme.
-Source: Stacks Project, Tags 01XT and 01YS (4). -/
+/-- The standard N+1 affine opens bound cohomology of a closed projective subscheme
+(Stacks, Tags 01XT and 01YS). -/
 theorem isZero_closedImmersion_twist_above_dimension
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

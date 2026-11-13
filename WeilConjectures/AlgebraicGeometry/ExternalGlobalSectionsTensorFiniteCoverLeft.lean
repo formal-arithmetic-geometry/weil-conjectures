@@ -44,8 +44,8 @@ private theorem isIso_app_of_pairwise_limits
   infer_instance
 
 /-- Bijectivity descends from a finite cover of the first factor and its overlaps.
-There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma.
-Source: Stacks Project, Tag 0BED, degree-zero part of equation-kunneth-on-cech. -/
+There are no quasi-coherence, compactness, or affine-diagonal assumptions in this lemma
+(Stacks, Tag 0BED). -/
 theorem externalGlobalSectionsTensor_bijective_of_finite_cover_left
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

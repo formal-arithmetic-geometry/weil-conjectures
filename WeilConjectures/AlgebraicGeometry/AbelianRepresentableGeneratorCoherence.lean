@@ -444,9 +444,7 @@ private theorem generatorSection_naturality {X Y : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The universal section is compatible with a morphism of étale objects.
-Source: Stacks Project, Tag 03Q8 (restriction on the cohomology presheaf), and
-naturality of the free-sheaf, inverse-image, and constant-sheaf adjunctions. -/
+/-- The universal section is compatible with a morphism of étale objects (Stacks, Tag 03Q8). -/
 theorem abelianRepresentableGenerator_coherence {X Y : Scheme.{u}}
     (h : Y ⟶ X) (W V : X.Etale) (v : V ⟶ W) :
     let g := pullback.map h V.hom h W.hom (𝟙 Y) v.left (𝟙 X) (by simp) (by simp)

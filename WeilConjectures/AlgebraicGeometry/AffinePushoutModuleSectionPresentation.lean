@@ -160,8 +160,8 @@ private theorem affine_pushout_module_section_presentation_equiv [IsAffineHom f]
 
 set_option maxHeartbeats 1100000 in
 -- The canonical unit calculation unfolds inverse-image and change-of-rings section instances.
-/-- Affine first-tensor module section presentation with both actions and the canonical unit.
-Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction. -/
+/-- Affine first-tensor module section presentation with both actions and the canonical unit
+(Stacks, Tag 01SB). -/
 theorem affine_pushout_module_section_presentation [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

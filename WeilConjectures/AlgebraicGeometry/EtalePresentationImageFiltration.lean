@@ -38,8 +38,8 @@ private theorem imageSubobject_mem_iff {A B : AddCommGrpCat.{u + 1}}
     exact congrArg (fun g ↦ g y) (imageSubobject_arrow_comp f)
 
 /-- The presentation's canonical filtration consists of images from complexes supported
-above its index. The statement compares filtration membership only, with no page data.
-Source: Stacks Project, Tag 015J, the first hypercohomology filtration. -/
+above its index. The statement compares filtration membership only, with no page data
+(Stacks, Tag 015J). -/
 theorem etalePresentation_image_filtration
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

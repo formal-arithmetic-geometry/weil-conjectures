@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The finite abutment filtration has stage representatives on each graded piece.
-Source: Stacks Project, Tags 0EZM and 015J, finite-term spectral-sequence comparison. -/
+/-- The finite abutment filtration has stage representatives on each graded piece
+(Stacks, Tags 0EZM and 015J). -/
 theorem exists_etale_complex_graded_class_rep
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

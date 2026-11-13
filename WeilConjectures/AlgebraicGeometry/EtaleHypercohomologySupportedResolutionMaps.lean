@@ -57,9 +57,8 @@ set_option linter.unusedVariables false in
 -- Elaborate the dependent presentation, stable-range and resolution-map families.
 /-- Construct the filtered resolution comparison on every page in the support-controlled
 stable range. The abutment map is expressed on K-injective resolutions; no derived
-adjunction identification, identity law, composition law, or threshold selection is asserted.
-Source: Stacks Project, Tags 015J (first spectral sequence), 015K (filtered functoriality),
-and 0EZM (the common lower-bound argument). -/
+adjunction identification, identity law, composition law, or threshold selection is asserted
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_supported_resolution_maps :
     ∃ (D : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

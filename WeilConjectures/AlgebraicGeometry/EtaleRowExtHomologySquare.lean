@@ -114,8 +114,8 @@ private theorem ext_homComplex_naturality
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Pullback and the coefficient map on Ext are computed on the unevaluated Hom complex.
-Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9/01FA), and 08J6. -/
+/-- Pullback and the coefficient map on Ext are computed on the unevaluated Hom complex
+(Stacks, Tags 06XR, 01F8, 01F9, 01FA and 08J6). -/
 theorem ceExtHomologySquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})

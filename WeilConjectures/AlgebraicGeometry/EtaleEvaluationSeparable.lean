@@ -25,9 +25,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Evaluation of an etale function at a geometric lift is separable over the base field.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
+/-- Evaluation of an etale function at a geometric lift is separable over the base field
+(Stacks, Tags 03QU and 03QV). -/
 theorem etale_evaluation_isSeparable (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

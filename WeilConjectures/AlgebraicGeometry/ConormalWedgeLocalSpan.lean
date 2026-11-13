@@ -53,8 +53,8 @@ private theorem exterior_section_smul {X : Scheme.{u}} (M : X.Modules) (n : ℕ)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A pure wedge of local conormal sections is locally in the span of wedges of the
-pullback-unit images of ideal sections on a fixed ambient affine chart.
-Source: Stacks Project, Tags 01R3 and 0096, and affine module localization. -/
+pullback-unit images of ideal sections on a fixed ambient affine chart (Stacks, Tags 01R3 and 0096).
+-/
 theorem conormal_wedge_mem_span_locally
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ)
     (V : Y.affineOpens) (W : Z.Opens) (hW : W ≤ i ⁻¹ᵁ V.1)

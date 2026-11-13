@@ -43,7 +43,7 @@ private theorem affine_global_sections_faithful
 -- The legacy statement has unused diagram lets; keep its signature unchanged.
 set_option linter.unusedVariables false in
 /-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
-category of residue-field triples. (Stacks, Tags 04HX and 04HT) -/
+category of residue-field triples (Stacks, Tags 04HX and 04HT). -/
 /- The affine chart construction supplies an equivalence of the indexing categories.
 The construction follows affine-spectrum duality and residue-point factorization.
 The proof constructs object and morphism maps, proves full faithfulness by

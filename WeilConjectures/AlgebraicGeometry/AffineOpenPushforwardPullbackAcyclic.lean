@@ -31,8 +31,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Arbitrary base change of an affine-open direct image is acyclic over the new affine base.
-Source: Stacks Project, Tag 02KG; parent resolution node, affine intersection paragraph. -/
+/-- Arbitrary base change of an affine-open direct image is acyclic over the new affine base
+(Stacks, Tag 02KG). -/
 theorem affine_open_pushforward_pullback_rightAcyclic
     {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     [IsSeparated f] (g : Spec B ⟶ Spec A)

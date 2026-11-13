@@ -26,10 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Sections on an affine open form a finite adic tower. This concerns only individual
-levels and successor transitions, and asserts nothing about an inverse limit.
-
-Source: Stacks Project, Lemma 087W, first paragraph, and Lemma 087X (2);
-Schemes, Tags 01I7 and 01IB. -/
+levels and successor transitions, and asserts nothing about an inverse limit
+(Stacks, Tags 087W, 087X, 01I7 and 01IB). -/
 theorem coherentFormalModule_affine_open_sections_adic
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I) (V : X.affineOpens) :

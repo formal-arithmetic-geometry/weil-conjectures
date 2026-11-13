@@ -97,10 +97,7 @@ private theorem graphComparison_shrink
     hside hmiddle
 
 /-- Product-graph comparisons identify the elementary neighborhood move and intertwine
-proper/open interchange for arbitrary two supplied diagrams.
-
-Source: Stacks Project, Tag 0F7J, independence of choices, final A--F comparison;
-agent product-graph extension. -/
+proper/open interchange for arbitrary two supplied diagrams (Stacks, Tag 0F7J). -/
 theorem etaleGraphComparisonInterchange (A : Type (u + 1)) [CommRing A] [Finite A] :
     (∀ {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)
       (H : EtaleGraphPresentation h) (a' : X ⟶ W) (v : W ⟶ H.U)

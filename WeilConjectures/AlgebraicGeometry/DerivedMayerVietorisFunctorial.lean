@@ -437,8 +437,8 @@ private theorem canonicalMV_spec
       Iso.hom_inv_id, H.map_id, Category.id_comp]
 
 /-- Mayer--Vietoris boundaries can be chosen simultaneously, naturally in the object.
-The adjunction units and the difference of restrictions are the first two maps.
-Source: Stacks, Tag 08BV. -/
+The adjunction units and the difference of restrictions are the first two maps (Stacks, Tag 08BV).
+-/
 theorem schemeDerived_mayerVietoris_naturality
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

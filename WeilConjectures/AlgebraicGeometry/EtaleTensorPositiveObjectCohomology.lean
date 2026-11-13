@@ -27,9 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option autoImplicit false
 
 /-- Positive object cohomology of the associated etale tensor-sections sheaf vanishes
-on affine opens.
-Source: Stacks Project, Etale Cohomology, Tag 03P2 (affine case), and Cohomology
-on Sites, Tag 03F3. https://stacks.math.columbia.edu/tag/03P2 -/
+on affine opens (Stacks, Tags 03P2 and 03F3). -/
 theorem etaleTensorPositiveObjectCohomology
     (X : Scheme.{u})
     [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u}]

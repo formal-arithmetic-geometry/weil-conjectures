@@ -97,9 +97,8 @@ private theorem ker_lt_map_power {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 /-- Transport a comparison whose kernel is killed by a positive power of an ideal
 with nonempty complementary open through a closed immersion. Proper support of the
-coherent target makes the transported completion properly supported.
-
-Source: Stacks Project, Theorem 088E, paragraphs 2--4, Tag 087T and Lemma 0CYS. -/
+coherent target makes the transported completion properly supported
+(Stacks, Tags 088E, 087T and 0CYS). -/
 theorem exists_closedImmersionFormalComparisonTransport
     {X Z S : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]
     (f : X ⟶ S) (j : Z ⟶ X) [IsClosedImmersion j]

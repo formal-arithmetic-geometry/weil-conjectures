@@ -64,8 +64,8 @@ private theorem affineOpen_conormal_transport_comp
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The actual kernel conormal on an affine closed chart, with its original unit.
-Source: Stacks Project, Tag 01R3 (1), (2), and Tag 0096. -/
+/-- The actual kernel conormal on an affine closed chart, with its original unit
+(Stacks, Tags 01R3 and 0096). -/
 theorem affineOpen_kernel_conormal_sections {X Y : Scheme.{u}} (g : X ⟶ Y)
     (W : Y.affineOpens) (U : X.affineOpens)
     (h : U.1 ≤ g ⁻¹ᵁ W.1) (hpre : g ⁻¹ᵁ W.1 = U.1)

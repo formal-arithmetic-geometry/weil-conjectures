@@ -39,8 +39,7 @@ noncomputable def compactificationSheafToDirectImage
       (lowerStar (ModuleCat.{u + 1} A) c.g) ≫
     (lowerStarComp (ModuleCat.{u + 1} A) c.i c.g f c.comm).hom
 
-/-- The specified sum-extension exchange, descended termwise and inverted.
-Source: Stacks Project Tag 03S6. -/
+/-- The specified sum-extension exchange, descended termwise and inverted (Stacks, Tag 03S6). -/
 noncomputable def exactEtaleSumExchange
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :
@@ -77,8 +76,7 @@ section HomotopyNormalization
 attribute [local instance 2000] Abelian.toPreadditive
 
 /-- The natural transformation underlying the homotopy comparison, assembled from
-exact-functor factors and the right-derived unit. No new objects are chosen.
-Source: Stacks Project Tag 015F. -/
+exact-functor factors and the right-derived unit. No new objects are chosen (Stacks, Tag 015F). -/
 noncomputable def normalizationHomotopyTransformation
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -103,8 +101,8 @@ noncomputable def normalizationHomotopyTransformation
     (Functor.associator _ _ _).hom
 
 /-- The homotopy formula for an exact source and open factor followed by a right derived
-functor. This is the explicit five-factor composite, with no choices of new objects.
-Source: Stacks Project Tag 015F. -/
+functor. This is the explicit five-factor composite, with no choices of new objects
+(Stacks, Tag 015F). -/
 noncomputable def normalizationHomotopyComponent
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -124,8 +122,8 @@ noncomputable def normalizationHomotopyComponent
     R.rightDerivedFunctorUnit.app ((O.mapHomotopyCategory (.up ℤ)).obj K) ≫
     R.rightDerivedFunctor.map (O.mapDerivedCategoryFactorsh.inv.app K)
 
-/-- The generic natural transformation has the specified five-factor component.
-Source: Stacks Project Tag 015F. -/
+/-- The generic natural transformation has the specified five-factor component (Stacks, Tag 015F).
+-/
 theorem normalizationHomotopyTransformation_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]
@@ -162,8 +160,8 @@ noncomputable def compactSupportComparisonOnHomotopy
     (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)
     (lowerStar (ModuleCat.{u + 1} A) c.g) a K
 
-/-- Descend a natural transformation through a localization without choosing any data.
-Source: Stacks Project Tag 04VG. -/
+/-- Descend a natural transformation through a localization without choosing any data
+(Stacks, Tag 04VG). -/
 @[irreducible]
 noncomputable def normalizationLocalizationDesc
     {C D E : Type*} [Category C] [Category D] [Category E]
@@ -171,8 +169,8 @@ noncomputable def normalizationLocalizationDesc
     {F G : D ⥤ E} (τ : L ⋙ F ⟶ L ⋙ G) : F ⟶ G :=
   (Localization.fullyFaithfulWhiskeringLeft L W E).preimage τ
 
-/-- The localization descent recovers the original transformation on every representative.
-Source: Stacks Project Tag 04VG. -/
+/-- The localization descent recovers the original transformation on every representative
+(Stacks, Tag 04VG). -/
 theorem normalizationLocalizationDesc_app
     {C D E : Type*} [Category C] [Category D] [Category E]
     (L : C ⥤ D) (W : MorphismProperty C) [L.IsLocalization W]
@@ -183,8 +181,8 @@ by
   exact congr_app ((Localization.fullyFaithfulWhiskeringLeft L W E).map_preimage τ) K
 
 /-- The normalized comparison on all derived objects, obtained by full faithfulness of
-precomposition with the homotopy localization. No isomorphism claim enters this construction.
-Source: Stacks Project Tags 04VG and 015F. -/
+precomposition with the homotopy localization. No isomorphism claim enters this construction
+(Stacks, Tags 04VG and 015F). -/
 @[irreducible]
 noncomputable def compactSupportDerivedComparison
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
@@ -204,8 +202,8 @@ noncomputable def compactSupportDerivedComparison
       (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)
       (lowerStar (ModuleCat.{u + 1} A) c.g) a)
 
-/-- The derived comparison has the prescribed value on every homotopy representative.
-Source: Stacks Project Tag 04VG. -/
+/-- The derived comparison has the prescribed value on every homotopy representative
+(Stacks, Tag 04VG). -/
 theorem compactSupportDerivedComparison_app
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (c : Compactification f)

@@ -24,9 +24,7 @@ namespace DerivedCategory
 set_option backward.isDefEq.respectTransparency false in
 /-- A derived map from a strictly upper bounded complex to an object in its
 highest degree is represented by an actual chain map. The terms of the source
-need not be projective.
-
-Source: Stacks Project, Cohomology on Sites, Tag 094G, boundary-map step. -/
+need not be projective (Stacks, Tag 094G). -/
 theorem exists_chainMap_to_single_of_isStrictlyLE
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (P : CochainComplex A ℤ) (n : ℤ) [P.IsStrictlyLE n] (X : A)

@@ -32,10 +32,7 @@ private theorem sum_filtered {α : Type*} [Fintype α] {B : Type*} [AddCommMonoi
 
 open Classical in
 /-- The signed tail-deletion sum cancels exactly the incoming terms whose deleted
-label does not precede the junction in stable order.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1, tail-deletion part
-of the labelled-deletion argument (details omitted in the source). -/
+label does not precede the junction in stable order (Stacks, Tag 01FM). -/
 theorem cechFirstSortingTailCancellation {I : Type v} [LinearOrder I] {B : Type w} [AddCommGroup B]
     (p : ℕ) (t : Fin (p + 2) → I) (f : (Fin (p + 2) → Fin (p + 2)) → B) :
     let before := fun (j : Fin (p + 2)) (σ : Equiv.Perm (Fin (p + 1)))

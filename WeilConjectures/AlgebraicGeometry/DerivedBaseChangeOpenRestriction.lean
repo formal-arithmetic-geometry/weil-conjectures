@@ -134,9 +134,8 @@ private theorem open_restriction_square
       rw [← Category.assoc, mvOpenBaseChange_unit q K K' ψ U,
         Category.assoc, open_restriction_unit]
 
-/-- Base-change components commute with restriction to a nested open.
-Source: Stacks Project, Cohomology, Lemma 08BV and Remark 08HY;
-Perfect Complexes, Tag 0DJ9, induction step, using Tag 0D5S. -/
+/-- Base-change components commute with restriction to a nested open
+(Stacks, Tags 08BV, 08HY, 0DJ9 and 0D5S). -/
 theorem mvBaseChangeOpenMap_restriction
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

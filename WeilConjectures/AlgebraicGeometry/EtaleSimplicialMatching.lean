@@ -173,9 +173,8 @@ noncomputable def properCone {X : Scheme.{u}} (U : SimplicialObject X.Etale) (n 
           projection U n _ _ a.unop.obj.hom ≫ U.map f.unop.hom.left.op
         rw [Category.id_comp, projection_naturality, Over.w] }
 
-/-- The lower-simplex matching limit and the proper-face matching limit coincide.
-Source: Stacks, Tag 0186. Factor every lower simplex through its image; this extends
-proper-face families uniquely and naturally to all lower simplices. -/
+/-- The lower-simplex matching limit and the proper-face matching limit coincide (Stacks, Tag 0186).
+-/
 noncomputable def properConeIsLimit {X : Scheme.{u}} (U : SimplicialObject X.Etale)
     (n : ℕ) : IsLimit (properCone U n) where
   lift s := limit.lift (diagram U n) ⟨s.pt, extendProperFamily U n s.π⟩
@@ -203,8 +202,8 @@ noncomputable def properConeIsLimit {X : Scheme.{u}} (U : SimplicialObject X.Eta
     rw [hfi, limit.lift_π]
     rfl
 
-/-- The matching limit remains a limit among all schemes over the base.
-Source: Stacks, Tags 0186 and 021D: the étale inclusion preserves finite limits. -/
+/-- The matching limit remains a limit among all schemes over the base (Stacks, Tags 0186 and 021D).
+-/
 theorem matching_universal {X : Scheme.{u}} (U : SimplicialObject X.Etale) (n : ℕ)
     (T : Over X)
     (p : ∀ (Δ : SimplexCategory), Δ.len < n → (Δ ⟶ ⦋n⦌) →
@@ -233,8 +232,8 @@ theorem matching_universal {X : Scheme.{u}} (U : SimplicialObject X.Etale) (n : 
     exact hf ⦋a.unop.1.val⦌ a.unop.1.isLt a.unop.2
 
 /-- Surjectivity of the canonical matching arrows gives precisely the required hypercover
-witnesses; their data are finite limits, not witnesses chosen from a mere existence theorem.
-Source: Stacks, Definition 01G5 and Tag 0186. -/
+witnesses; their data are finite limits, not witnesses chosen from a mere existence theorem
+(Stacks, Tags 01G5 and 0186). -/
 theorem isEtaleHypercover_of_matchingCover {X : Scheme.{u}}
     (U : SimplicialObject X.Etale) (hU : ∀ n, Surjective (matchingMap U n).left) :
     IsEtaleHypercover U := by
@@ -244,7 +243,7 @@ theorem isEtaleHypercover_of_matchingCover {X : Scheme.{u}}
     matchingMap_projection U n, hU n⟩
 
 /-- Any matching witnesses in the hypercover predicate give covers of the canonical
-matching schemes as well. Source: Stacks, Tag 0186, uniqueness of matching limits. -/
+matching schemes as well (Stacks, Tag 0186). -/
 theorem matchingCover_of_isEtaleHypercover {X : Scheme.{u}}
     (U : SimplicialObject X.Etale) (hU : IsEtaleHypercover U) (n : ℕ) :
     Surjective (matchingMap U n).left := by
@@ -298,8 +297,7 @@ theorem matchingCover_of_isEtaleHypercover {X : Scheme.{u}}
   exact congrArg (fun f ↦ f x) hleft
 
 /-- The full scheme matching predicate supplies the singleton semi-representable
-hypercover predicate required by finite-simplex lifting.
-Source: Stacks, Tags 01G5 and 0186, and the one-member matching comparison. -/
+hypercover predicate required by finite-simplex lifting (Stacks, Tags 01G5 and 0186). -/
 theorem isSemiRepresentableHypercover_of_isEtaleHypercover {X : Scheme.{u}}
     (U : SimplicialObject X.Etale) (hU : IsEtaleHypercover U) :
     Scheme.IsSemiRepresentableHypercover (U ⋙ FormalCoproduct.incl.{w} X.Etale) := by

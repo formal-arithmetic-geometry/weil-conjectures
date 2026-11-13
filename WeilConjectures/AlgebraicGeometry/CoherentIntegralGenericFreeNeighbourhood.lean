@@ -25,9 +25,8 @@ universe w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A finite generic basis extends to a finite free map on an open neighbourhood.
-
-Source: Stacks Project, Tag 01YE, integral case, choice and extension of the generic basis. -/
+/-- A finite generic basis extends to a finite free map on an open neighbourhood (Stacks, Tag 01YE).
+-/
 theorem exists_generic_free_neighbourhood (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules)
     (hG : RingedSpace.IsCoherent Z.toRingedSpace G) :

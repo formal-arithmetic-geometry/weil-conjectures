@@ -31,8 +31,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 500000 in
 -- The explicit derived section comparisons require substantial elaboration.
 /-- The affine Leray comparison, normalized by any augmentation-preserving restricted
-resolution. This comparison is formed before any base change or scalar extension.
-Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 03FD. -/
+resolution. This comparison is formed before any base change or scalar extension
+(Stacks, Tags 01F4, 01XJ, 01E4 and 03FD). -/
 theorem exists_affine_cohomology_section_equiv
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F)

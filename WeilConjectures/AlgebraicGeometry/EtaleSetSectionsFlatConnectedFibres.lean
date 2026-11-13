@@ -31,8 +31,7 @@ namespace AlgebraicGeometry
 quasi-compact morphism with connected geometric fibres. Sections upstairs are evaluated
 at the base change of the terminal etale object of `S`, which is terminal over `T`.
 The map is the unit of the same inverse-image adjunction used in
-`etaleSetInverseImageCompositionUnits`.
-Source: Stacks Project, Etale Cohomology, Lemma 59.39.3 (Tag 0A3H). -/
+`etaleSetInverseImageCompositionUnits` (Stacks, Tag 0A3H). -/
 theorem etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres
     {S T : Scheme.{u}} (f : T ⟶ S) [Flat f] [QuasiCompact f]
     (hconn : ∀ s : S, ConnectedSpace

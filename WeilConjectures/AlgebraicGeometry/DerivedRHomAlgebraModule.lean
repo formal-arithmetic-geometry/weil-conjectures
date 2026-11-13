@@ -144,8 +144,7 @@ noncomputable abbrev sheafAlgebraHomSections (F : SheafOfModules.{u}
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ) :=
   (PresheafOfModules.homObj.{u, u, u, u} B.toModule.val F.val).obj U
 
-/-- Multiplication by a restricted algebra section is additive and O-linear.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Multiplication by a restricted algebra section is additive and O-linear (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraMul_linear (U : Opens Y) (b : B.right.obj.obj (op U))
     (W : (Over U)ᵒᵖ) :
     (∀ x y : B.toModule.val.obj (op W.unop.left),
@@ -176,8 +175,7 @@ theorem sheafAlgebraMul_linear (U : Opens Y) (b : B.right.obj.obj (op U))
     change b' * (r' * x') = r' * (b' * x')
     exact mul_left_comm _ _ _
 
-/-- The component of multiplication by b on B restricted to U.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The component of multiplication by b on B restricted to U (Stacks, Tag 0BUZ). -/
 noncomputable def sheafAlgebraMulApp (U : Opens Y) (b : B.right.obj.obj (op U))
     (W : (Over U)ᵒᵖ) :
     ((PresheafOfModules.restrictOver Y.sheaf.obj U).obj B.toModule.val).obj W ⟶
@@ -188,8 +186,7 @@ noncomputable def sheafAlgebraMulApp (U : Opens Y) (b : B.right.obj.obj (op U))
       map_add' := (sheafAlgebraMul_linear Y B U b W).1
       map_smul' := (sheafAlgebraMul_linear Y B U b W).2 }
 
-/-- Multiplication components commute with restrictions.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Multiplication components commute with restrictions (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraMul_naturality (U : Opens Y) (b : B.right.obj.obj (op U))
     {W V : (Over U)ᵒᵖ} (f : W ⟶ V) :
     ((PresheafOfModules.restrictOver Y.sheaf.obj U).obj B.toModule.val).map f ≫
@@ -211,24 +208,21 @@ theorem sheafAlgebraMul_naturality (U : Opens Y) (b : B.right.obj.obj (op U))
     rw [← CommRingCat.comp_apply, ← Functor.map_comp, ← op_comp, Over.w]
   rw [hb]
 
-/-- Multiplication by b on the first argument, on every open over U.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Multiplication by b on the first argument, on every open over U (Stacks, Tag 0BUZ). -/
 noncomputable def sheafAlgebraMul (U : Opens Y) (b : B.right.obj.obj (op U)) :
     (PresheafOfModules.restrictOver Y.sheaf.obj U).obj B.toModule.val ⟶
       (PresheafOfModules.restrictOver Y.sheaf.obj U).obj B.toModule.val where
   app := sheafAlgebraMulApp Y B U b
   naturality := sheafAlgebraMul_naturality Y B U b
 
-/-- The B(U) action on Hom is precomposition with multiplication by b.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The B(U) action on Hom is precomposition with multiplication by b (Stacks, Tag 0BUZ). -/
 noncomputable instance sheafAlgebraHomSMul (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ) :
     SMul (B.right.obj.obj U) (sheafAlgebraHomSections Y B F U) where
   smul b φ := sheafAlgebraMul Y B U.unop b ≫ φ
 
-/-- On every open over U the B-action is precomposition with multiplication.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- On every open over U the B-action is precomposition with multiplication (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_smul (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ)
@@ -238,8 +232,7 @@ theorem sheafAlgebraHom_smul (F : SheafOfModules.{u}
       (B.right.obj.map W.unop.hom.op b * (@id (B.right.obj.obj (op W.unop.left)) x)) := by
   rfl
 
-/-- The explicit action satisfies the module axioms.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The explicit action satisfies the module axioms (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_module_axioms (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ) :
@@ -301,8 +294,7 @@ theorem sheafAlgebraHom_module_axioms (F : SheafOfModules.{u}
     simp only [sheafAlgebraHom_smul, map_zero, zero_mul]
     rfl
 
-/-- The B(U)-module structure with the explicitly defined scalar action.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The B(U)-module structure with the explicitly defined scalar action (Stacks, Tag 0BUZ). -/
 noncomputable instance sheafAlgebraHomModule (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (U : (Opens Y)ᵒᵖ) :
@@ -315,8 +307,7 @@ noncomputable instance sheafAlgebraHomModule (F : SheafOfModules.{u}
   add_smul := (sheafAlgebraHom_module_axioms Y B F U).2.2.2.2.1
   zero_smul := (sheafAlgebraHom_module_axioms Y B F U).2.2.2.2.2
 
-/-- The existing Hom restrictions are semilinear for the B action.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The existing Hom restrictions are semilinear for the B action (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_restrict_smul (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
@@ -341,8 +332,8 @@ theorem sheafAlgebraHom_restrict_smul (F : SheafOfModules.{u}
   have hb : b' = c' := PresheafOfModules.overSections_coe_map_obj f.unop b W
   rw [hb]
 
-/-- The Hom sheaf with B-module sections and the existing Hom restriction maps.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The Hom sheaf with B-module sections and the existing Hom restriction maps (Stacks, Tag 0BUZ).
+-/
 noncomputable def sheafAlgebraHomObj (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) : SheafOfModules.{u}
@@ -359,8 +350,7 @@ noncomputable def sheafAlgebraHomObj (F : SheafOfModules.{u}
     (fun {U V} f b φ ↦ sheafAlgebraHom_restrict_smul Y B F (U := U) (V := V) f b φ)
   isSheaf := (SheafOfModules.homObj.{u, u, u, u} (R := Y.sheaf) B.toModule F).isSheaf
 
-/-- Postcomposition commutes with the B action.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Postcomposition commutes with the B action (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_map_smul {F G : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)} (g : F ⟶ G)
@@ -373,8 +363,7 @@ theorem sheafAlgebraHom_map_smul {F G : SheafOfModules.{u}
   simp only [PresheafOfModules.homObjMap_app_apply]
   exact (Category.assoc _ _ _).symm
 
-/-- The functor map: postcomposition, as a `B`-linear map.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The functor map: postcomposition, as a `B`-linear map (Stacks, Tag 0BUZ). -/
 noncomputable def sheafAlgebraHomMap {F G : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)} (g : F ⟶ G) :
@@ -385,8 +374,7 @@ noncomputable def sheafAlgebraHomMap {F G : SheafOfModules.{u}
       (PresheafOfModules.homObjMap (𝟙 B.toModule.val) g.val))
     (sheafAlgebraHom_map_smul Y B g)
 
-/-- Postcomposition preserves identity and composition.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Postcomposition preserves identity and composition (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_functor_axioms :
     (∀ F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
@@ -411,8 +399,8 @@ theorem sheafAlgebraHom_functor_axioms :
     simp only [PresheafOfModules.homObjMap_app_apply]
     simp
 
-/-- The explicit algebra-valued Hom functor: sections are Hom and maps postcompose.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The explicit algebra-valued Hom functor: sections are Hom and maps postcompose
+(Stacks, Tag 0BUZ). -/
 noncomputable def sheafAlgebraHom : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf) ⥤ SheafOfModules.{u}
@@ -423,8 +411,7 @@ noncomputable def sheafAlgebraHom : SheafOfModules.{u}
   map_id := (sheafAlgebraHom_functor_axioms Y B).1
   map_comp := fun f g ↦ (sheafAlgebraHom_functor_axioms Y B).2 _ _ _ f g
 
-/-- The explicit Hom functor is additive.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The explicit Hom functor is additive (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_additive : (sheafAlgebraHom Y B).Additive := by
   constructor
   intro F G f g
@@ -442,8 +429,7 @@ theorem sheafAlgebraHom_additive : (sheafAlgebraHom Y B).Additive := by
 
 attribute [instance] sheafAlgebraHom_additive
 
-/-- The identity on Hom sections is O-linear after restriction of scalars.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- The identity on Hom sections is O-linear after restriction of scalars (Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHom_underlying_linear (F : SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
@@ -544,8 +530,8 @@ private theorem sheafAlgebraHomUnderlying_obj_eq (F : SheafOfModules.{u}
       ((SheafOfModules.homFunctor Y.sheaf).obj (op B.toModule)).obj F :=
   sheaf_eq (sheafAlgebraHomUnderlying_obj_val_eq Y B F)
 
-/-- Restricting the explicitly constructed Hom functor gives the existing O-module Hom.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+/-- Restricting the explicitly constructed Hom functor gives the existing O-module Hom
+(Stacks, Tag 0BUZ). -/
 theorem sheafAlgebraHomUnderlying_eq :
     sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
@@ -568,8 +554,8 @@ theorem sheafAlgebraHomUnderlying_eq :
 
 
 /-- The identity comparison, transported along equality of the constructed underlying
-functor with the shared Hom functor. No Hom object, map or isomorphism is chosen.
-Source: Stacks Project, Section 48.11, Tag 0BUZ. -/
+functor with the shared Hom functor. No Hom object, map or isomorphism is chosen (Stacks, Tag 0BUZ).
+-/
 noncomputable def sheafAlgebraHomUnderlyingIso :
     sheafAlgebraHom Y B ⋙ SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
@@ -578,8 +564,7 @@ noncomputable def sheafAlgebraHomUnderlyingIso :
   eqToIso (sheafAlgebraHomUnderlying_eq Y B)
 
 /-- The functorial K-injective resolution in the Grothendieck abelian category of
-O_Y-modules, using the canonical factorization construction.
-Source: Stacks Project, Cohomology on Sites, Section 07A5, Theorem 079P. -/
+O_Y-modules, using the canonical factorization construction (Stacks, Tags 07A5 and 079P). -/
 noncomputable def sheafAlgebraHomResolution :
     CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) ℤ ⥤
@@ -592,8 +577,7 @@ noncomputable def sheafAlgebraHomResolution :
     (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
 
-/-- The canonical natural resolution map into the preceding functor.
-Source: Stacks Project, Cohomology on Sites, Section 07A5, Theorem 079P. -/
+/-- The canonical natural resolution map into the preceding functor (Stacks, Tags 07A5 and 079P). -/
 noncomputable def toSheafAlgebraHomResolution :
     𝟭 (CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) ℤ) ⟶
@@ -615,8 +599,7 @@ variable (hB : B.toModule.IsQuasicoherent)
 
 set_option linter.unusedSectionVars false in
 /-- The resolution followed by termwise algebra-valued Hom inverts quasi-isomorphisms
-after localization in D(B).
-Source: Stacks Project, Section 48.11, Tag 0BV0; Cohomology on Sites, Lemma 0A95. -/
+after localization in D(B) (Stacks, Tags 0BV0 and 0A95). -/
 theorem sheafAlgebraHomResolution_inverts :
     (HomologicalComplex.quasiIso (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
       (forget₂ CommRingCat RingCat)).obj Y.sheaf))
@@ -632,8 +615,8 @@ theorem sheafAlgebraHomResolution_inverts :
 end
 
 /-- Derived internal Hom with the natural B-module structure: localize termwise
-Hom(B, I(M)), where I is the fixed degreewise injective K-injective resolution.
-Source: Stacks Project, Section 48.11, Tags 0BV0 and 0BV1. -/
+Hom(B, I(M)), where I is the fixed degreewise injective K-injective resolution
+(Stacks, Tags 0BV0 and 0BV1). -/
 noncomputable def derivedRHomAlgebraModule
     (Y : Scheme.{u}) (B : Y.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
@@ -656,8 +639,7 @@ variable (hB : B.toModule.IsQuasicoherent)
   [HasDerivedCategory.{wB} (SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))]
 
-/-- Computation on a representative, naturally in the entire complex M.
-Source: Stacks Project, Section 48.11, Tag 0BV0. -/
+/-- Computation on a representative, naturally in the entire complex M (Stacks, Tag 0BV0). -/
 theorem derivedRHomAlgebraModule_comparison :
     Nonempty (DerivedCategory.Q ⋙ derivedRHomAlgebraModule Y B hB ≅
       sheafAlgebraHomResolution Y ⋙
@@ -666,8 +648,7 @@ theorem derivedRHomAlgebraModule_comparison :
   exact ⟨Localization.fac _ (sheafAlgebraHomResolution_inverts Y B) DerivedCategory.Q⟩
 
 set_option linter.unusedSectionVars false in
-/-- Restriction of algebra scalars preserves finite limits.
-Source: Stacks Project, Section 48.11, Tag 0BV1. -/
+/-- Restriction of algebra scalars preserves finite limits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
@@ -677,8 +658,7 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteLimits
 
 set_option linter.unusedSectionVars false in
-/-- Restriction of algebra scalars preserves finite colimits.
-Source: Stacks Project, Section 48.11, Tag 0BV1. -/
+/-- Restriction of algebra scalars preserves finite colimits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
     PreservesFiniteColimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
@@ -692,8 +672,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Forgetting the algebra action recovers the recorded derived internal Hom, naturally
 in K. The derived restriction of scalars is the exact functor mapDerivedCategory; the Hom
-computation uses the same I as the definition above.
-Source: Stacks Project, Section 48.11, Tag 0BV1. -/
+computation uses the same I as the definition above (Stacks, Tag 0BV1). -/
 theorem derivedRHomAlgebraModule_underlying :
     Nonempty (derivedRHomAlgebraModule Y B hB ⋙
       (SheafOfModules.restrictScalars.{u}

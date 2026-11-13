@@ -66,8 +66,8 @@ attribute [local irreducible] ConstantCompletion.completed ConstantCompletion.de
 
 namespace AlgebraicGeometry.Scheme.SfbAdicRestriction
 
-/-- The equivalence from the small model to the original pro-etale sheaf category.
-Source: Stacks Tags 00YY and 09A5. -/
+/-- The equivalence from the small model to the original pro-etale sheaf category
+(Stacks, Tags 00YY and 09A5). -/
 def modelEquivalence (X : Scheme.{u}) (D : Type v) [Category.{u + 1} D] :
     Sheaf (proEtaleModelTopology X) D ≌ Sheaf (ProEt.topology X) D :=
   CategoryTheory.Equivalence.mk
@@ -79,8 +79,8 @@ def modelEquivalence (X : Scheme.{u}) (D : Type v) [Category.{u + 1} D] :
 
 attribute [local irreducible] modelEquivalence
 
-/-- The specified pro-etale inverse image, transported through the site equivalences.
-Source: Stacks Tags 09A5 and 00YV. -/
+/-- The specified pro-etale inverse image, transported through the site equivalences
+(Stacks, Tags 09A5 and 00YV). -/
 def inverse {X S : Scheme.{u}} (i : S ⟶ X) :
     Sheaf (proEtaleModelTopology X) (Type (u + 1)) ⥤
       Sheaf (proEtaleModelTopology S) (Type (u + 1)) :=
@@ -88,8 +88,8 @@ def inverse {X S : Scheme.{u}} (i : S ⟶ X) :
     proEtaleSheafInverseImage i (Type (u + 1)) ⋙
       (modelEquivalence S (Type (u + 1))).inverse
 
-/-- Its transported right adjoint, the actual pro-etale direct image.
-Source: Stacks Tags 09A5 and 00YV. -/
+/-- Its transported right adjoint, the actual pro-etale direct image (Stacks, Tags 09A5 and 00YV).
+-/
 def direct {X S : Scheme.{u}} (i : S ⟶ X) :
     Sheaf (proEtaleModelTopology S) (Type (u + 1)) ⥤
       Sheaf (proEtaleModelTopology X) (Type (u + 1)) :=
@@ -97,15 +97,15 @@ def direct {X S : Scheme.{u}} (i : S ⟶ X) :
     proEtaleSheafDirectImage i (Type (u + 1)) ⋙
       (modelEquivalence X (Type (u + 1))).inverse
 
-/-- Transport of the specified inverse-image adjunction, with no new functor choice.
-Source: Stacks Tag 00YV. -/
+/-- Transport of the specified inverse-image adjunction, with no new functor choice
+(Stacks, Tag 00YV). -/
 def adjunction {X S : Scheme.{u}} (i : S ⟶ X) : inverse i ⊣ direct i :=
   ((modelEquivalence X (Type (u + 1))).toAdjunction.comp
     (proEtaleSheafAdjunction i (Type (u + 1)))).comp
       (modelEquivalence S (Type (u + 1))).symm.toAdjunction
 
-/-- Finite-limit structure inherited from the original inverse image and equivalences.
-Source: Stacks Tag 00YV. -/
+/-- Finite-limit structure inherited from the original inverse image and equivalences
+(Stacks, Tag 00YV). -/
 instance inverse_finiteLimits {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
     PreservesFiniteLimits (inverse i) :=
   haveI := (proEtale_immersion_inverseImage_preservesLimits i).1
@@ -266,8 +266,8 @@ section Slice
 
 variable {C : Type v} [SmallCategory C] (J : GrothendieckTopology C) (U : C)
 
-/-- Slice restriction with all algebraic operations evaluated on the underlying object.
-Source: Stacks Tags 00XZ and 03D2. -/
+/-- Slice restriction with all algebraic operations evaluated on the underlying object
+(Stacks, Tags 00XZ and 03D2). -/
 def sliceAlgebra : ConstantCompletion.InverseImageData (J.overPullback (Type v) U) where
   rings := J.overPullback CommRingCat.{v} U
   algebra O :=
@@ -290,13 +290,12 @@ def sliceAlgebra : ConstantCompletion.InverseImageData (J.overPullback (Type v) 
         CommRingCat.{v} (J.over U) J).inv.naturality
           ((Functor.const Cᵒᵖ).map f))
 
-/-- The right adjoint of slice restriction, from the canonical site localization.
-Source: Stacks Tag 00XZ. -/
+/-- The right adjoint of slice restriction, from the canonical site localization (Stacks, Tag 00XZ).
+-/
 abbrev sliceDirect :=
   (Over.forget U).sheafPushforwardCocontinuous (Type v) (J.over U) J
 
-/-- The canonical localization adjunction, rather than a chosen module map.
-Source: Stacks Tag 00XZ. -/
+/-- The canonical localization adjunction, rather than a chosen module map (Stacks, Tag 00XZ). -/
 def sliceAdjunction : J.overPullback (Type v) U ⊣ sliceDirect J U :=
   (Over.forget U).sheafAdjunctionCocontinuous (Type v) (J.over U) J
 
@@ -313,8 +312,8 @@ variable {C D : Type v} [SmallCategory C] [SmallCategory D]
   (V : Sheaf K (Type v) ⥤ Sheaf J (Type v)) (adj : L ⊣ V)
   [PreservesFiniteLimits L] (A : Type v) [CommRing A] (I : Ideal A)
 
-/-- Derived module inverse image with the finite-projection completed coefficient map.
-Source: Stacks Tags 099L and 06YY. -/
+/-- Derived module inverse image with the finite-projection completed coefficient map
+(Stacks, Tags 099L and 06YY). -/
 def completedPull :
     ConstantCompletion.D (ConstantCompletion.completed J A I) ⥤
       ConstantCompletion.D (ConstantCompletion.completed K A I) :=

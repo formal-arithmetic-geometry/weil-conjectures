@@ -34,8 +34,7 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- The total tensor complex used in the coordinate equation below.
-Source: Stacks, 079U. -/
+/-- The total tensor complex used in the coordinate equation below (Stacks, Tag 079U). -/
 def pullbackTensorTotal (X : Scheme.{uTC})
     (P N : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ) :
     CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ :=
@@ -43,8 +42,8 @@ def pullbackTensorTotal (X : Scheme.{uTC})
   CochainComplex.mapBifunctor P N (curriedTensor _)
 
 /-- The canonical localization tensor map, invertible on K-flat coordinates.
-It is the upstream lax monoidal map of Q for the recorded derived tensor.
-Source: Stacks, 06YH and 079U. -/
+It is the upstream lax monoidal map of Q for the recorded derived tensor
+(Stacks, Tags 06YH and 079U). -/
 def pullbackTensorModelMap (X : Scheme.{uTC})
     [HasDerivedCategory.{wTC} (SheafOfModules.{uTC} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uTC} (moduleRings X.toRingedSpace)) ℤ) :
@@ -160,8 +159,8 @@ variable [∀ Y : Scheme.{uTC},
 /-- The canonical tensor comparison is characterized on every pair of K-flat
 representatives by the left-derived counits, the localization tensor maps and
 termwise module pullback. The degreewise equation pins the chain isomorphism to
-the canonical module tensor map on each summand, including its signs.
-Source: Stacks, 079U; perfect.tex, 0DJA(1). -/
+the canonical module tensor map on each summand, including its signs (Stacks, Tags 079U and 0DJA).
+-/
 def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X)
     (τ : ∀ E K : schemeDerivedCategory X,
       (derivedPullback g).obj (E ⊗ K) ⟶

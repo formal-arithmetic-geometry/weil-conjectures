@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 set_option linter.auxLemma false in
-/-- Canonical evaluation sends a lifted pure tensor to its normalized pure section.
-Source: Stacks Project, Tag 03P2, affine tensor calculation. -/
+/-- Canonical evaluation sends a lifted pure tensor to its normalized pure section
+(Stacks, Tag 03P2). -/
 theorem singletonTensorDegreeComparisonHom_pure_image
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

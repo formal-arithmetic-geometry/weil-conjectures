@@ -25,8 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- Termwise ordinary exchange, with the composition identifications on homotopy categories.
-Source: Stacks Project, Tag 08HY. -/
+/-- Termwise ordinary exchange, with the composition identifications on homotopy categories
+(Stacks, Tag 08HY). -/
 def moduleHomotopyBaseChange
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)
@@ -113,9 +113,7 @@ private theorem exchange_unit_of_counit
   rw [hp]
 
 /-- The pinned derived mate agrees with ordinary exchange before resolving the input.
-There is no acyclicity, flatness, affine-base or cover hypothesis.
-Source: Stacks Project, Tag 08HY, transposition of the mate; the derived adjunction
-compatibility of Tag 09T5. -/
+There is no acyclicity, flatness, affine-base or cover hypothesis (Stacks, Tags 08HY and 09T5). -/
 theorem derivedBaseChange_unit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

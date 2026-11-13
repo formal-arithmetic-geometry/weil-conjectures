@@ -28,9 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The positive-degree naturality part of coefficient comparison.
-Source: Stacks Project, Tags 01FT and 06XR, with coefficient-lift injectivity
-from Tag 01DO. The original statement is the comparison needed in Tag 03P2. -/
+/-- The positive-degree naturality part of coefficient comparison
+(Stacks, Tags 01FT, 06XR, 01DO and 03P2). -/
 theorem exists_etaleTensorSectionsSheaf_cohomology_ulift_natural_succ
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (n : ℕ) :

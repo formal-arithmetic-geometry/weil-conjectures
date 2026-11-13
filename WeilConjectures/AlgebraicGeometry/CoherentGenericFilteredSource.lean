@@ -127,10 +127,7 @@ private theorem coherent_ideal_sum_filtration
     exact hasCoherentIntegralFiltration_of_biproduct _ _ _ ih hA hAw e
 
 /-- Construct only the filtered source of the generic inclusion, without constructing
-its cokernel or asserting anything about the target's support.
-
-Source: Stacks Project, Tag 01YE, and Tag 01YF
-, final paragraph. -/
+its cokernel or asserting anything about the target's support (Stacks, Tags 01YE and 01YF). -/
 theorem coherent_generic_filtered_source
     {X Z : Scheme.{u}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

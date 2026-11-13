@@ -19,8 +19,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Pullback-pasting comparisons for the explicitly constructed upper-tail chart cone.
-Source: Stacks Project, Limits Tags 01ZR, 0095 and 0097. -/
+/-- Pullback-pasting comparisons for the explicitly constructed upper-tail chart cone
+(Stacks, Tags 01ZR, 0095 and 0097). -/
 theorem affine_chart_upper_tail_limit_comparisons
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u})

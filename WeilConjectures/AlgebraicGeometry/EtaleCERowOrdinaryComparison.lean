@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Evaluate Ext cocycles on an arbitrary injective row at 1, then remove the extension
-by zero. All maps are constructed from the specified resolution.
-Source: Stacks Project, Tags 06XR and 01F8. -/
+by zero. All maps are constructed from the specified resolution (Stacks, Tags 06XR and 01F8). -/
 noncomputable def ceRowOrdinaryIso (X : Scheme.{uNatural})
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (R : InjectiveResolution G) (p : ℕ) :
@@ -42,8 +41,7 @@ noncomputable def ceRowOrdinaryIso (X : Scheme.{uNatural})
   (SheafPullbackResolution.classSectionsIso X R.cochainComplex (p : ℤ)).symm ≪≫
   R.extAddEquivCohomologyClass.toAddCommGrpIso.symm
 
-/-- Apply the sections pullback unit and a comparison of nonnegative rows.
-Source: Stacks Project, Tag 015K. -/
+/-- Apply the sections pullback unit and a comparison of nonnegative rows (Stacks, Tag 015K). -/
 noncomputable def ceRowSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
@@ -57,8 +55,7 @@ noncomputable def ceRowSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℕ)).map φ
 
-/-- Regard a prescribed augmented CE row as its injective resolution.
-Source: Stacks Project, Tag 015J. -/
+/-- Regard a prescribed augmented CE row as its injective resolution (Stacks, Tag 015J). -/
 def cePresentationRow {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) (q : ℤ) : InjectiveResolution (K.obj.X q) where
@@ -68,8 +65,8 @@ def cePresentationRow {X : Scheme.{uNatural}}
   quasiIso := D.rows q
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit row comparison computes pullback followed by a coefficient map.
-Source: Stacks Project, Tag 01F8, equations 01F9 and 01FA; Tags 06XR and 08J6. -/
+/-- The explicit row comparison computes pullback followed by a coefficient map
+(Stacks, Tags 01F8, 01F9, 01FA, 06XR and 08J6). -/
 theorem ceRowOrdinaryIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})

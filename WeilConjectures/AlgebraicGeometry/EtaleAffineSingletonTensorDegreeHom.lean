@@ -216,8 +216,8 @@ private theorem normalizationOfFormula (X : Scheme.{u}) (F : X.Modules)
 
 -- Affineness is only needed for the subsequent invertibility theorem.
 set_option linter.unusedVariables false in
-/-- A normalized degree comparison homomorphism, without invertibility.
-Source: Stacks Project, Tag 03P2, affine calculation; Tag 03DR, equation (35.8.1). -/
+/-- A normalized degree comparison homomorphism, without invertibility (Stacks, Tags 03P2 and 03DR).
+-/
 theorem exists_singletonTensorDegreeComparison_hom
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

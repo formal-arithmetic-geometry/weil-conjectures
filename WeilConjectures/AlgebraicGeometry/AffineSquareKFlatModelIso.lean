@@ -111,8 +111,8 @@ private theorem inverse_iso_pullback {X Y : Scheme.{u}} (s : X ≅ Y)
   exact ⟨δinv ≪≫ Functor.leftDerivedUnique (derivedPullback s.hom)
     G.mapDerivedCategory γ.hom ε (HomotopyCategory.quasiIso _ (.up ℤ))⟩
 
-/-- A single K-flat model comparison across a commuting square of affine coordinates.
-Source: Stacks Project, Tag 08DW(2), and Tag 0D5S. -/
+/-- A single K-flat model comparison across a commuting square of affine coordinates
+(Stacks, Tags 08DW and 0D5S). -/
 theorem nonempty_affineSquareKFlatModelIso
     (A B : CommRingCat.{u}) (Y Z : Scheme.{u})
     [∀ X : Scheme.{u},

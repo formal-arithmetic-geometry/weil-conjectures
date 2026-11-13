@@ -28,9 +28,8 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 700000 in
 -- Elaborating the coordinate functors repeatedly compares nested chosen pullback objects.
-/-- Coordinate-change isomorphisms identify the canonical module base-change maps.
-Source: Stacks Project, Tag 08HY, counit construction and coordinate transport;
-Tag 0D5T, composition of derived functors. -/
+/-- Coordinate-change isomorphisms identify the canonical module base-change maps
+(Stacks, Tags 08HY and 0D5T). -/
 theorem canonicalModuleBaseChange_iso_comparison_ab
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

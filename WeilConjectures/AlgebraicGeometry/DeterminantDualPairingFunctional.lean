@@ -27,8 +27,8 @@ open Scheme.Modules (wedge)
 
 -- Explicit scalar restrictions on the over-open site require additional elaboration.
 set_option backward.isDefEq.respectTransparency false in
-/-- A tuple of dual sections determines a unique internal functional on the exterior sheaf.
-Source: Stacks Project, Tag 0BRT, determinant pairing; Tag 03CY, module sheafification. -/
+/-- A tuple of dual sections determines a unique internal functional on the exterior sheaf
+(Stacks, Tags 0BRT and 03CY). -/
 theorem exterior_dual_pairing_functional (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) (φ : Fin n → (Scheme.Modules.dual M).val.obj (op U)) :
     ∃! q : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U),

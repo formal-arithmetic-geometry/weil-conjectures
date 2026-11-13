@@ -45,8 +45,7 @@ set_option synthInstance.maxSize 2048 in
 -- The nested derived-functor comparisons require a larger elaboration budget.
 
 /-- The restriction to O of an open direct image from P is in the essential image
-of the right adjoint to restriction from O to W = O ∩ P.
-Source: Stacks Project, Tag 08FE, used in the local calculation of Tag 08DG. -/
+of the right adjoint to restriction from O to W = O ∩ P (Stacks, Tags 08FE and 08DG). -/
 theorem derived_open_intersection_mem_essImage
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P) (iO : W ⟶ O)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

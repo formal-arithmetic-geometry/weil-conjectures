@@ -73,9 +73,8 @@ private theorem subsingleton_H_of_isZero_higherDirectImage_sepClosed
   exact AddCommGrpCat.subsingleton_of_isZero (hderived.of_iso (eH.app F))
 
 /-- The inverse image of an injective Z/n-module sheaf is acyclic after extending
-algebraically closed scalars, when n is invertible in the base field.
-Source: Stacks Project, Tag 0F1C (field-extension exchange), Tag 03QU (cohomology over
-separably closed bases) and Tag 03FD (abelian acyclicity of injective module sheaves). -/
+algebraically closed scalars, when n is invertible in the base field
+(Stacks, Tags 0F1C, 03QU and 03FD). -/
 theorem subsingleton_cohomology_upperStar_injective_algClosed_extension
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [QuasiCompact f] [QuasiSeparated f]

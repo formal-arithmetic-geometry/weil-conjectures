@@ -171,8 +171,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Transfer the module-valued sections theorem through the equivalence between abelian
 sheaves and sheaves of modules over lifted integers. Both equivalence functors preserve
-colimits, so the original evaluation cocone is a colimit. Source: Stacks 0738 (4),
-0739, via `etale_sections_filtered_colimit`. -/
+colimits, so the original evaluation cocone is a colimit (Stacks, Tags 0738 and 0739). -/
 private theorem abelianSectionsColimit (Y : Scheme.{u}) (V : Y.Etale)
     [CompactSpace V.left] [QuasiSeparatedSpace V.left]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]

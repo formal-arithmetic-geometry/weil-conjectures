@@ -35,8 +35,8 @@ namespace AlgebraicGeometry
 section maps, regarded as linear over Γ(U, O_X); Lemma 087W identifies this with the
 underlying map of finite modules over the completion. `op n` denotes level `n+1`.
 Kernel forks and cokernel coforks express condition (4) without choosing an abelian
-structure or particular representatives of the kernel and cokernel.
-Source: Stacks, Remark 0888 and Lemmas 087W, 087X. -/
+structure or particular representatives of the kernel and cokernel
+(Stacks, Tags 0888, 087W and 087X). -/
 theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G) :
     List.TFAE
@@ -121,8 +121,8 @@ theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X]
       X.affineOpens id (iSup_affineOpens_eq_top X) t ht).mp h U
   tfae_finish
 
-/-- The exponent t on a finite affine cover gives exponent 2t for every component.
-Source: Stacks, Remark 0888. -/
+/-- The exponent t on a finite affine cover gives exponent 2t for every component
+(Stacks, Tag 0888). -/
 theorem coherentFormalModule_annihilated_double (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)
     (r : ℕ) (U : Fin r → X.affineOpens) (t : ℕ)

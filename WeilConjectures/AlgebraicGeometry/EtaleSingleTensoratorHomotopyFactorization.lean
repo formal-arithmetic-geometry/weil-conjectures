@@ -45,9 +45,8 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X : AlgebraicGeometry.Scheme.{u}}
 
-/-- Factor the flat single tensorator directly through homotopy single complexes.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU; the explicit factorization
-singleFunctorObjTensorIso_factorization. -/
+/-- Factor the flat single tensorator directly through homotopy single complexes
+(Stacks, Tags 06YQ and 06YU). -/
 theorem singleFunctorObjTensorIso_homotopy_factorization
     (L M : Sheaf X.smallEtaleTopology B) (hL : ObjectProperty.flat L) :
     let q := HomotopyCategory.quotient (Sheaf X.smallEtaleTopology B) (.up ℤ)

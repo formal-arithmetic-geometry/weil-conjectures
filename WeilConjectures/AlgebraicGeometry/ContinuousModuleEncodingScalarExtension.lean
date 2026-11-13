@@ -123,7 +123,7 @@ private noncomputable def scalarExtensionTensorHomEquiv
             (α.hom.app U).hom).apply_symm_apply (g.val.app U)) x }
 
 /-- The sheafified sectionwise tensor product is left adjoint to scalar restriction
-on any small ringed site. Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+on any small ringed site (Stacks, Tag 03D7). -/
 theorem exists_siteChangeOfRingsAdjunction :
     ∃ (F : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A) ⥤
         SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)),
@@ -151,8 +151,8 @@ end SheafOfModules
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Restriction of scalars commutes with the integral and rational continuous encodings.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Restriction of scalars commutes with the integral and rational continuous encodings
+(Stacks, Tag 03D7). -/
 theorem continuousLisse_comap_compatibility
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) :
@@ -206,7 +206,7 @@ theorem continuousLisse_comap_compatibility
     Functor.isoWhiskerLeft (continuousRingModuleEquivalence X E).functor q⟩
 
 /-- Encoding the scalar extension of an inverse integral encoding recovers the
-sectionwise sheafified tensor product. Source: Stacks Project, Tag 03D7. -/
+sectionwise sheafified tensor product (Stacks, Tag 03D7). -/
 theorem continuousModuleEncoding_scalar_extension
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})

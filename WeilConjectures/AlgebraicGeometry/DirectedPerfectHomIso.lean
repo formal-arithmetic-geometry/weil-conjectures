@@ -51,8 +51,7 @@ structure DirectedPerfectHomSystem
       transport (show k ≤ m from le_trans hkl hlm) f =
         transport (show k ≤ m from le_trans hkl hlm) g
 
-/-- An isomorphism in the limit lifts as an isomorphism at a directed stage.
-Source: Stacks Project, Tag 09RE. -/
+/-- An isomorphism in the limit lifts as an isomorphism at a directed stage (Stacks, Tag 09RE). -/
 theorem DirectedPerfectHomSystem.lift_iso
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     {C : I → Type v} [∀ k, Category.{h} (C k)]
@@ -95,9 +94,7 @@ theorem DirectedPerfectHomSystem.lift_iso
   refine ⟨l, ⟨fl, gl, hflgl, hglfl⟩, ?_⟩
   exact (H.limit_transport (hkl₁.trans hl₁l) f').trans hf'
 
-/-- Recover the comparison square from the prescribed conjugated limit image.
-Source: Stacks Project, Tag 09RE, transport of the descended morphism.
--/
+/-- Recover the comparison square from the prescribed conjugated limit image (Stacks, Tag 09RE). -/
 theorem iso_comparison_of_conjugated_identity
     {C D : Type*} [Category* C] [Category* D] (G : C ⥤ D)
     {A B : C} {T : D} (p : G.obj A ≅ T) (q : G.obj B ≅ T) (e : A ≅ B)

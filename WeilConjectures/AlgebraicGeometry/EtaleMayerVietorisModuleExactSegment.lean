@@ -61,8 +61,7 @@ private theorem module_open_pullback_cohomology_equiv
   exact ⟨(cohomologyEquiv e.inv A q).trans eh.addCommGroupIsoToAddEquiv⟩
 
 /-- An exact Mayer--Vietoris segment for the underlying abelian groups of
-module-sheaf pullbacks. There are no vanishing hypotheses.
-Source: Stacks Project, Tag 0A50; module inverse image, Tags 03D3 and 03D7. -/
+module-sheaf pullbacks. There are no vanishing hypotheses (Stacks, Tags 0A50, 03D3 and 03D7). -/
 theorem Etale.exists_module_mayer_vietoris_exact_segment
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

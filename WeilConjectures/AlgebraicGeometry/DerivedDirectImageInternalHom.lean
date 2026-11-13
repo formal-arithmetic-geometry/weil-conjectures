@@ -142,8 +142,7 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
     e A' L' M' (a ≫ g ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A L M g ≫ d)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Build the tensor-Hom adjunction from the pinned natural bijections.
-Source: Stacks, Tag 08DJ. -/
+/-- Build the tensor-Hom adjunction from the pinned natural bijections (Stacks, Tag 08DJ). -/
 private def tensorAdjunctionCore (L : C) :
     Adjunction.CoreHomEquiv (tensorRight L) ((Functor.curry.obj H).obj (op L)) where
   homEquiv A M := (e A L M).symm

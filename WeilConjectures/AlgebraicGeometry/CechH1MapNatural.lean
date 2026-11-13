@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For every open cover of a scheme, the canonical comparison from first Čech cohomology
-of an `O_X`-module to its first module cohomology exists and is natural in the module.
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ. -/
+of an `O_X`-module to its first module cohomology exists and is natural in the module
+(Stacks, Tag 01EQ). -/
 theorem cechH1Map_natural (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (hcover : iSup U = ⊤) :
     ∃ c : ∀ F : X.Modules,

@@ -26,9 +26,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The fraction formula detects basic-open membership at a point outside the base locus.
-Only this point must have a nonvanishing positive-degree section; no global cover is assumed.
-Source: Stacks Project, Constructions, Tag 01N8, chart inverse-image calculation;
-Properties, Tag 01PZ, clause (1). -/
+Only this point must have a nonvanishing positive-degree section; no global cover is assumed
+(Stacks, Tags 01N8 and 01PZ). -/
 theorem sectionRing_proj_mem_basicOpen (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible]
     (f : X ⟶ Proj (sectionRingGrade L))
     (hformula : ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d),

@@ -26,8 +26,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Flat sections on all affine subopens give flatness of an individual stalk.
-Source: Stacks Project, Modules Tag 05NE; Algebra Tags 00H9 and 00HT. -/
+/-- Flat sections on all affine subopens give flatness of an individual stalk
+(Stacks, Tags 05NE, 00H9 and 00HT). -/
 theorem flat_stalk_of_affineFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules)
     (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y)) (x : Y) :
     Module.Flat (Y.toRingedSpace.presheaf.stalk x)

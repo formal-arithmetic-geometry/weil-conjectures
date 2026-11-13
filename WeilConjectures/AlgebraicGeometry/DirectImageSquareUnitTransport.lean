@@ -20,8 +20,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- The ordinary comparison, constructed from pushforward composition and equality transport.
-Source: Stacks, Tags 08HY and 0D5T. -/
+/-- The ordinary comparison, constructed from pushforward composition and equality transport
+(Stacks, Tags 08HY and 0D5T). -/
 @[irreducible] noncomputable def directImageSquareIso {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r) :
     RingedSpace.moduleDirectImage s.toLRSHom.toShHom ⋙
@@ -33,8 +33,8 @@ Source: Stacks, Tags 08HY and 0D5T. -/
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The constructed comparison is the identity on whole-space sections.
-Source: Stacks, Tags 08HY and 0D5T. -/
+/-- The constructed comparison is the identity on whole-space sections (Stacks, Tags 08HY and 0D5T).
+-/
 theorem directImageSquareIso_top {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r)
     (M : SheafOfModules.{u} (moduleRings A.toRingedSpace)) (x : M.val.obj (op ⊤)) :
@@ -96,8 +96,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 -- Matching the composite homotopy functors unfolds the sheaf scalar restrictions.
-/-- Equality transport of a single right-derived unit across the ordinary square.
-Source: Stacks Project, Tags 08HY and 0D5T. -/
+/-- Equality transport of a single right-derived unit across the ordinary square
+(Stacks, Tags 08HY and 0D5T). -/
 theorem directImageSquare_unit_transport {A B C D : Scheme.{u}}
     (s : A ⟶ B) (t : B ⟶ D) (q : A ⟶ C) (r : C ⟶ D) (h : s ≫ t = q ≫ r)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :

@@ -36,9 +36,8 @@ attribute [local instance] CategoryTheory.GrothendieckTopology.Point.sheafFiber_
 
 namespace AlgebraicGeometry.Etale
 
-/-- Vanishing of each cohomology sheaf is detected by all derived geometric stalks.
-Source: Stacks Project, etale-cohomology.tex, Tag 03PU; sites-cohomology.tex,
-Tag 0DJJ. -/
+/-- Vanishing of each cohomology sheaf is detected by all derived geometric stalks
+(Stacks, Tags 03PU and 0DJJ). -/
 theorem etaleModuleStalk_cohomology_test
     (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (E : DerivedCategoryModule A T) (i : ℤ) :

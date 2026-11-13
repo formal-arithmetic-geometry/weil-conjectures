@@ -35,10 +35,8 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
-/-- An adjoint algebra reduction is surjective on affine sections, with the expected kernel.
-Source: Stacks Project, Schemes, Tag 01I9 (1), using 01BJ and the affine
-quasi-coherent tilde equivalence. Unlike formal algebraization this assertion
-concerns one arbitrary closed immersion and requires no completeness or properness. -/
+/-- An adjoint algebra reduction is surjective on affine sections, with the expected kernel
+(Stacks, Tags 01I9 and 01BJ). -/
 theorem closedImmersion_algebra_sections_exact
     {X Z Y : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (p : Y ⟶ Z)
     (B : X.CommAlgebraSheaf) [B.toModule.IsQuasicoherent]

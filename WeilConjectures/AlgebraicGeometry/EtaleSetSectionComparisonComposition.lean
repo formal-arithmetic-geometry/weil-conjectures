@@ -23,10 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 -- Expanding the units and reassociating naturality equations needs extra elaboration fuel.
-/-- The scheme-level composition calculation for two commuting triangles.
-
-Source: Stacks Project, Sites Tags 03CB and 03CC (units of composite inverse images),
-with fibre-product pasting as in Étale Cohomology Tag 09YQ. -/
+/-- The scheme-level composition calculation for two commuting triangles
+(Stacks, Tags 03CB, 03CC and 09YQ). -/
 theorem etaleSetSectionComparisonComposition
     {R S T V : Scheme.{u}} (h : T ⟶ S) (g : V ⟶ T) (f : S ⟶ R)
     (k : T ⟶ R) (l : V ⟶ R) (hk : h ≫ f = k) (hl : g ≫ k = l)

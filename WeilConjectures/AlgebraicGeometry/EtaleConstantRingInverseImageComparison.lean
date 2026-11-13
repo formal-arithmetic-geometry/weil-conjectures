@@ -25,8 +25,8 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry
 
-/-- Constant rings commute with the ring inverse image, with the compatible abelian lift.
-Source: Stacks Project, Sites and Sheaves, Example 0H7J; Modules on Sites, 03D2. -/
+/-- Constant rings commute with the ring inverse image, with the compatible abelian lift
+(Stacks, Tags 0H7J and 03D2). -/
 theorem etaleConstantRingInverseImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1}) :
     (fun (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

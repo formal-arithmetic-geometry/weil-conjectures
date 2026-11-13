@@ -28,9 +28,8 @@ namespace AlgebraicGeometry
 
 /-- For a morphism between qcqs schemes over a qcqs stage of an inverse system with affine
 transitions, separatedness after base change to the limit implies separatedness after
-base change to some later stage. No finiteness assumption on the morphism is required.
-
-Source: Stacks Project, Limits, Lemma 01ZQ in Situation 081D. -/
+base change to some later stage. No finiteness assumption on the morphism is required
+(Stacks, Tags 01ZQ and 081D). -/
 theorem Scheme.exists_isSeparated_overPullbackMap
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

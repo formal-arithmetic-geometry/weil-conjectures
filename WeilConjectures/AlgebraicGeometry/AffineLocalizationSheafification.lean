@@ -26,9 +26,8 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Sheafification preserves affine values when restrictions to principal opens
-are localizations. No sheaf condition is assumed on non-affine opens.
-
-Source: Stacks Project, Tags 01HV and 009H (sheaves on a basis). -/
+are localizations. No sheaf condition is assumed on non-affine opens (Stacks, Tags 01HV and 009H).
+-/
 theorem affineLocalization_sheafification_unit_isIso (T : Scheme.{u})
     (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)
     (hlocal : ∀ (U : T.Opens), IsAffineOpen U → ∀ a : Γ(T, U),

@@ -97,9 +97,8 @@ private theorem hom_uncurry_natural {C : Type u} [Category.{u} C] {J : Grothendi
       (SheafOfModules.tensorHomEquiv (R := R) (L'.X q) (P'.X p) (N'.X n)).symm t) hp
   exact he.trans hu
 
-/-- Evaluation on a single degree pair commutes with simultaneous chain maps.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, functoriality of the
-Hom-total-tensor comparison; cohomology.tex, Tag 08DJ, componentwise evaluation. -/
+/-- Evaluation on a single degree pair commutes with simultaneous chain maps
+(Stacks, Tags 0A90 and 08DJ). -/
 theorem schemeTensorHomUncurryComponent_natural (X : Scheme.{u})
     (P P' L L' M M' : CochainComplex
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

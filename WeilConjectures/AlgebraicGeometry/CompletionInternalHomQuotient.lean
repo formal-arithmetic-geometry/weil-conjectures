@@ -26,10 +26,7 @@ namespace AlgebraicGeometry
 
 /-- Postcomposition with the level-n quotient kills the level-n ideal product of
 internal Hom. Maps into that quotient factor uniquely through the level-m source
-quotient whenever n ≤ m.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, construction of its map;
-Section 0EHN, equation 0880. -/
+quotient whenever n ≤ m (Stacks, Tags 0882, 0EHN and 0880). -/
 theorem completion_internal_hom_quotient {X : Scheme.{u}}
     (I : X.IdealSheafData) (F G : X.Modules) (m n : ℕ) (h : n ≤ m) :
     (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2

@@ -41,10 +41,7 @@ private noncomputable def rawFunctor {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ) 
           DerivedCategory.Plus.singleFunctor _ 0).op
 
 /-- Constant abelian higher direct images commute with filtered colimits whose
-index category lies in the coefficient universe.
-
-Source: Stacks Project, Tags 03Q5 and 0739 (filtered cohomology), and Tag 03Q8
-(higher direct images as sheafified cohomology presheaves). -/
+index category lies in the coefficient universe (Stacks, Tags 03Q5, 0739 and 03Q8). -/
 theorem preservesColimitsOfShape_constantAbelianHigherDirectImage
     {X Y : Scheme.{u}} (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h]
     (q : ℕ) (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] :

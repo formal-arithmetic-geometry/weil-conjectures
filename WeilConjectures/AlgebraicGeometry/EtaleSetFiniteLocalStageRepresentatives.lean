@@ -89,10 +89,7 @@ private theorem comparison_unit
   exact (Classical.choose_spec etaleSetInverseImageCompositionUnits.2.2).1 R S T f h G U s
 
 /-- A limit section has finitely many local representatives from one stage.
-They are not asserted to be compatible at that stage.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-existence of local representatives; Étale Cohomology Tag 09YQ. -/
+They are not asserted to be compatible at that stage (Stacks, Tags 0A35 and 09YQ). -/
 theorem etaleSet_finiteLocalStageRepresentatives
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

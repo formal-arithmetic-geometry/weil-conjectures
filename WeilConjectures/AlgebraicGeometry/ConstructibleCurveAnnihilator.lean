@@ -18,9 +18,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.CurveCoefficientPair
 
-/-- A constructible torsion sheaf on a curve is killed by a positive integer.
-Source: Stacks Project, Definition 03RW and Lemma 095E; the finite-bound
-argument in step 1 of the parent constructible subobject node, used for 09BH (2). -/
+/-- A constructible torsion sheaf on a curve is killed by a positive integer
+(Stacks, Tags 03RW, 095E and 09BH). -/
 theorem exists_annihilator_of_constructible {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k) (hF : (Scheme.IsConstructibleEtaleSheafOfSets
       ((sheafCompose P.C.smallEtaleTopology

@@ -220,9 +220,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Changing both source coordinates, and transporting the coefficient arrow, conjugates
 its derived comparison by isomorphisms. This statement concerns arbitrary commutative
-squares, not open restrictions or the invertibility of the comparison.
-Source: Stacks Project, cohomology.tex, Tag 08HY (counit definition of base change)
-and Tag 0D5S (composition of derived pullback). -/
+squares, not open restrictions or the invertibility of the comparison (Stacks, Tags 08HY and 0D5S).
+-/
 theorem exists_derivedBaseChange_source_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

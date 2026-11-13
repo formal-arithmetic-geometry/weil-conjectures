@@ -58,9 +58,7 @@ private noncomputable def affinePullbackTensorMap {A W : Scheme.{u}} (q : W ⟶ 
   (ModuleCat.extendRestrictScalarsAdj r).homEquiv _ _ |>.symm
     (affinePullbackSectionMap q M S r ρ hρ)
 
-/-- The canonical tensor comparison is bijective on affine schemes.
-Source: Stacks Project, Tags 01I9 (pullback of an associated module) and
-01IB (the affine quasi-coherent equivalence). -/
+/-- The canonical tensor comparison is bijective on affine schemes (Stacks, Tags 01I9 and 01IB). -/
 private theorem affinePullbackTensorMap_bijective {A W : Scheme.{u}} [IsAffine A] [IsAffine W]
     (q : W ⟶ A) (M : A.Modules) (hMq : M.IsQuasicoherent)
     (S : CommRingCat.{u}) (r : Γ(A, ⊤) →+* S) (ρ : S ≃+* Γ(W, ⊤))
@@ -142,8 +140,7 @@ private theorem tensorMap_one_tmul {A W : Scheme.{u}} (q : W ⟶ A)
 
 /-- Normalized scalar-extension models for one affine pullback, starting
 from sections on an isomorphic affine chart. The starting equivalences are fixed
-before the destination chart, its coefficient ring, or its ring presentation.
-Source: Stacks Project, Tag 01I6, Lemmas 26.7.1, 26.7.3, 26.7.4 and 26.7.5. -/
+before the destination chart, its coefficient ring, or its ring presentation (Stacks, Tag 01I6). -/
 theorem affine_isomorphic_source_normalized_models
     {A T : Scheme.{u}} [IsAffine A] (s : T ⟶ A) [IsIso s]
     (M N : A.Modules) (hMq : M.IsQuasicoherent) (hNq : N.IsQuasicoherent) :

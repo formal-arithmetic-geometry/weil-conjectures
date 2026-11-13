@@ -30,8 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- The underlying abelian sheaf of an injective module-valued étale sheaf is acyclic
-for global sections. Its underlying abelian sheaf need not be injective.
-Source: Stacks Project, Tag 03FD, second paragraph, via Tags 03FC and 03F9. -/
+for global sections. Its underlying abelian sheaf need not be injective
+(Stacks, Tags 03FD, 03FC and 03F9). -/
 theorem isZero_rightDerived_globalSections_forget_of_injective
     (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G] (n : ℕ) :

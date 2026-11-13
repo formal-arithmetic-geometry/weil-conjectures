@@ -114,9 +114,7 @@ private theorem cohomology_injective_reindex (X : RingedSpace.{u_1})
 
 /-- Bijectivity of the canonical middle comparison in the localization diagram.
 The fraction formula `hc` identifies `c` with the canonical comparison; all three
-local equivalences satisfy that same formula.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 09MR, Mayer--Vietoris paragraph. -/
+local equivalences satisfy that same formula (Stacks, Tag 09MR). -/
 theorem localized_middle_comparison_bijective
     (X : Scheme.{u_1}) [CompactSpace X] [QuasiSeparatedSpace X]
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))

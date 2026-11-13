@@ -74,8 +74,8 @@ private theorem compose_maps_square
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The comparison before applying the inverse derived pullback counit.
-Source: Stacks Project, Tag 0DJ8, equation-bc; Tag 0098, stalk pullback formula. -/
+/-- The comparison before applying the inverse derived pullback counit (Stacks, Tags 0DJ8 and 0098).
+-/
 def comparisonIntoTensorPullback {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) (z : X')
@@ -92,8 +92,8 @@ def comparisonIntoTensorPullback {X X' S S' : Scheme.{u}}
       (((Scheme.Modules.tensorPullback g').mapHomologicalComplex (.up ℤ)).obj P) i).inv
 
 /-- The actual chain isomorphism between the two successive ordinary pullbacks.
-It is the adjunction mate of pushforward composition, with isoSpec naturality.
-Source: Stacks Project, Tags 0096 and 0D5S, pullback composition. -/
+It is the adjunction mate of pushforward composition, with isoSpec naturality
+(Stacks, Tags 0096 and 0D5S). -/
 def affineSpectrumTensorComplexIso {X X' : Scheme.{u}}
     [IsAffine X] [IsAffine X'] (g' : X' ⟶ X)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

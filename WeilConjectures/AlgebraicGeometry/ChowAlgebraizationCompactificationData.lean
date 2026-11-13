@@ -39,9 +39,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Construct an algebraization by restricting from a proper compactification, retaining
-its degree-zero support on the adic closed fibre.
-Source: Stacks Project, Theorem 088E, the paragraphs from "Choose an open immersion"
-through the displayed equation for the support intersect V(I). -/
+its degree-zero support on the adic closed fibre (Stacks, Tag 088E). -/
 theorem exists_chow_algebraization_compactification_data
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

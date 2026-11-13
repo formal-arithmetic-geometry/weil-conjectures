@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The explicitly sheafified and extended bounded finite free complex is strictly perfect.
-Source: Stacks Project, Tag 068C, affine finite free resolution argument, and Definition 08C4. -/
+/-- The explicitly sheafified and extended bounded finite free complex is strictly perfect
+(Stacks, Tags 068C and 08C4). -/
 theorem affine_finite_free_perfect_core {Y : Scheme.{u}}
     (U : Y.Opens) (hU : IsAffineOpen U)
     (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ) (r : ℕ)

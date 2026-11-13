@@ -63,13 +63,13 @@ attribute [local irreducible] quotientPresentation
 
 variable {J A I}
 
-/-- Levelwise restriction on strict module towers. Source: Stacks 0940. -/
+/-- Levelwise restriction on strict module towers (Stacks, Tag 0940). -/
 def tres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (ℕᵒᵖ ⥤ Mod B) ⥤ (ℕᵒᵖ ⥤ Mod R) :=
   (Functor.whiskeringRight ℕᵒᵖ (Mod B) (Mod R)).obj (res φ)
 
-/-- Levelwise restriction is additive and exact, since evaluation computes these laws.
-Source: Stacks 0940. -/
+/-- Levelwise restriction is additive and exact, since evaluation computes these laws
+(Stacks, Tag 0940). -/
 theorem tres_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (tres φ).Additive ∧ PreservesFiniteLimits (tres φ) ∧
       PreservesFiniteColimits (tres φ) := by
@@ -79,23 +79,20 @@ theorem tres_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   dsimp only [tres, res]
   refine ⟨inferInstance, ⟨fun K _ _ ↦ ?_⟩, ⟨fun K _ _ ↦ ?_⟩⟩ <;> infer_instance
 
-/-- The additive structure of the specified levelwise restriction.
-Source: Stacks 0940. -/
+/-- The additive structure of the specified levelwise restriction (Stacks, Tag 0940). -/
 instance tres_additive {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (tres φ).Additive := (tres_exact φ).1
 
-/-- Finite limits for levelwise restriction.
-Source: Stacks 0940. -/
+/-- Finite limits for levelwise restriction (Stacks, Tag 0940). -/
 instance tres_finiteLimits {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     PreservesFiniteLimits (tres φ) := (tres_exact φ).2.1
 
-/-- Finite colimits for levelwise restriction.
-Source: Stacks 0940. -/
+/-- Finite colimits for levelwise restriction (Stacks, Tag 0940). -/
 instance tres_finiteColimits {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     PreservesFiniteColimits (tres φ) := (tres_exact φ).2.2
 
-/-- Exact levelwise restriction induces restriction on the derived strict tower categories.
-Source: Stacks 0940. -/
+/-- Exact levelwise restriction induces restriction on the derived strict tower categories
+(Stacks, Tag 0940). -/
 def tdres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : TD B ⥤ TD R :=
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod R)
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod B)
@@ -103,8 +100,7 @@ def tdres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : TD B ⥤ TD R :=
   letI := (siteRestrictScalars_exact φ).2
   (tres φ).mapDerivedCategory
 
-/-- Restricting before forming the strict quotient tower is additive.
-Source: Stacks 06YY. -/
+/-- Restricting before forming the strict quotient tower is additive (Stacks, Tag 06YY). -/
 theorem restrictionReduction_additive (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (res (coefficientMap J A I) ⋙ reductionTower J A I false).Additive := by
@@ -118,8 +114,7 @@ theorem restrictionReduction_additive (J : GrothendieckTopology C) (A : Type u)
 
 attribute [instance] restrictionReduction_additive
 
-/-- Reducing and then restricting a completed-coefficient tower is additive.
-Source: Stacks 06YY. -/
+/-- Reducing and then restricting a completed-coefficient tower is additive (Stacks, Tag 06YY). -/
 theorem reductionRestriction_additive (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (reductionTower J A I true ⋙ tres (coefficientMap J A I)).Additive := by
@@ -127,8 +122,8 @@ theorem reductionRestriction_additive (J : GrothendieckTopology C) (A : Type u)
 
 attribute [instance] reductionRestriction_additive
 
-/-- The completed strict reduction followed by restriction preserves zero maps.
-Source: Stacks 06YY. -/
+/-- The completed strict reduction followed by restriction preserves zero maps (Stacks, Tag 06YY).
+-/
 theorem reductionRestriction_preservesZero (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] (I : Ideal A) :
     (reductionTower J A I true ⋙ tres (coefficientMap J A I)).PreservesZeroMorphisms := by
@@ -169,8 +164,7 @@ private theorem extensionTensorComponent_pure {R B : Sheaf J CommRingCat.{u}}
 
 attribute [irreducible] extensionTensorComponent
 
-/-- The pure-tensor comparison is natural in the module argument.
-Source: Stacks 03EK; the component is exists_extensionTensorComparison. -/
+/-- The pure-tensor comparison is natural in the module argument (Stacks, Tag 03EK). -/
 private def extensionTensorIso {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     letI := SheafOfModules.monoidalCategory R
     MonoidalCategory.tensorLeft ((res φ).obj (SheafOfModules.unit (siteModuleRings B))) ≅
@@ -193,9 +187,7 @@ private def extensionTensorIso {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   rw [extensionTensorComponent_pure, extensionTensorComponent_pure]
   exact (tensorSection_map φ f U s m).symm
 
-/-- Flatness of the target ring makes scalar extension exact.
-Source: Stacks 03EK. Identify its restriction with tensoring by the flat target,
-reflect finite limits through restriction, and use the extension adjunction for colimits. -/
+/-- Flatness of the target ring makes scalar extension exact (Stacks, Tag 03EK). -/
 private theorem change_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (hflat : SheafOfModules.IsFlat
       ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))) :
@@ -222,8 +214,7 @@ private theorem change_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
 
 end ExactScalarExtension
 
-/-- Forget a module sheaf to its underlying sheaf of sets.
-Source: Stacks 03D2. -/
+/-- Forget a module sheaf to its underlying sheaf of sets (Stacks, Tag 03D2). -/
 abbrev underlying (O : Sheaf J CommRingCat.{u}) : Mod O ⥤ Sheaf J (Type u) :=
   SheafOfModules.toSheaf (siteModuleRings O) ⋙ sheafCompose J (forget AddCommGrpCat)
 
@@ -243,8 +234,8 @@ private theorem sheaf_map_existsUnique_of_formula {X Y : Sheaf J (Type u)}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The scalar-extension insertion is the unique underlying-sheaf map m ↦ 1 tensor m.
-Source: Stacks 06YY. -/
+/-- The scalar-extension insertion is the unique underlying-sheaf map m ↦ 1 tensor m
+(Stacks, Tag 06YY). -/
 theorem insertion_existsUnique {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M : Mod R) :
     ∃! q : (underlying R).obj M ⟶ (underlying S).obj ((change φ).obj M),
       ∀ (U : Cᵒᵖ) (m : M.val.obj U), q.hom.app U m = tensorSection φ M U 1 m := by
@@ -254,8 +245,7 @@ theorem insertion_existsUnique {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M
     (fun U m ↦ tensorSection φ M U 1 m)
     ((scalarExtensionUnit_exists J φ).choose_spec M)
 
-/-- The actual scalar-extension insertion, including sheafification.
-Source: Stacks 06YY. -/
+/-- The actual scalar-extension insertion, including sheafification (Stacks, Tag 06YY). -/
 def insertion {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M : Mod R) :
     (underlying R).obj M ⟶ (underlying S).obj ((change φ).obj M) :=
   (insertion_existsUnique φ M).exists.choose
@@ -268,8 +258,7 @@ set_option genInjectivity false in
 The existing AlgebraicInverseImage specifies every ring operation and module action on
 all generalized sections. Naturality specifies its action on ring maps. The constant
 comparison is natural in every commutative ring, fixing the canonical constant-object
-identification, including its coefficient maps.
-Source: Stacks 00YV, 03D2, 099L. -/
+identification, including its coefficient maps (Stacks, Tags 00YV, 03D2 and 099L). -/
 structure InverseImageData (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)) where
   rings : Sheaf J CommRingCat.{u} ⥤ Sheaf J' CommRingCat.{u}
   algebra : ∀ O : Sheaf J CommRingCat.{u},
@@ -283,8 +272,8 @@ structure InverseImageData (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)) where
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The inverse-image maps to finite coefficients form the canonical projection cone.
-Source: Stacks 099L. -/
+/-- The inverse-image maps to finite coefficients form the canonical projection cone
+(Stacks, Tag 099L). -/
 theorem pulledProjection_naturality (A : Type u) [CommRing A] (I : Ideal A)
     {m n : ℕᵒᵖ} (f : m ⟶ n) :
     ((Functor.const ℕᵒᵖ).obj (F.rings.obj (completed J A I))).map f ≫
@@ -332,8 +321,7 @@ theorem pulledProjection_naturality (A : Type u) [CommRing A] (I : Ideal A)
 attribute [local semireducible] completed
 
 /-- The canonical map from the inverse image of the completed coefficient sheaf to the
-completion on the second site, formed from its finite projections.
-Source: Stacks 099L. -/
+completion on the second site, formed from its finite projections (Stacks, Tag 099L). -/
 def completedMap (A : Type u) [CommRing A] (I : Ideal A) :
     F.rings.obj (completed J A I) ⟶ completed J' A I :=
   limit.lift (finiteSystem J' A I)
@@ -345,8 +333,8 @@ def completedMap (A : Type u) [CommRing A] (I : Ideal A) :
 
 attribute [local irreducible] completed
 
-/-- Module inverse image followed by the existing sheafified scalar extension.
-Source: Stacks 03D2, 06YY. -/
+/-- Module inverse image followed by the existing sheafified scalar extension
+(Stacks, Tags 03D2 and 06YY). -/
 def pull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : Mod R ⥤ Mod S :=
   (F.algebra R).modules ⋙ change c
@@ -382,8 +370,7 @@ private theorem algebraModules_additive {R : Sheaf J CommRingCat.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- This prescribed module pullback is additive.
-Source: Stacks 03D2. -/
+/-- This prescribed module pullback is additive (Stacks, Tag 03D2). -/
 theorem pull_additive {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : (pull F c).Additive := by
   have := algebraModules_additive (F.algebra R)
@@ -393,7 +380,7 @@ theorem pull_additive {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u
 attribute [instance] pull_additive
 
 /-- Insertion after inverse image: u^(-1)M → u^(-1)M tensor S, with coefficient action
-fixed by c. Source: Stacks 06YY. -/
+fixed by c (Stacks, Tag 06YY). -/
 def pullInsertion {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) (M : Mod R) :
     L.obj ((underlying R).obj M) ⟶ (underlying S).obj ((pull F c).obj M) :=
@@ -401,8 +388,8 @@ def pullInsertion {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- A universally specified derived pullback with computation on flat-term K-flat models.
-Source: Stacks 06YY, 0G7E. -/
+/-- A universally specified derived pullback with computation on flat-term K-flat models
+(Stacks, Tags 06YY and 0G7E). -/
 structure DerivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) where
   functor : D R ⥤ D S
@@ -414,8 +401,8 @@ structure DerivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The recorded K-flat derived-pullback theorem supplies this universal derived pair.
-Source: Stacks 06YY, 0G7E. -/
+/-- The recorded K-flat derived-pullback theorem supplies this universal derived pair
+(Stacks, Tags 06YY and 0G7E). -/
 theorem derivedPull_exists (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : Nonempty (DerivedPull F c) := by
@@ -513,16 +500,15 @@ private theorem change_flat_kFlat {R S : Sheaf J CommRingCat.{u}}
       ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP) hf
   exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 hk, hflat⟩
 
-/-- Choose the derived pullback with its universal comparison, not an arbitrary lift.
-Source: Stacks 06YY. -/
+/-- Choose the derived pullback with its universal comparison, not an arbitrary lift
+(Stacks, Tag 06YY). -/
 def derivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : DerivedPull F c :=
   Classical.choice (derivedPull_exists F V adj c)
 
 attribute [local irreducible] derivedPull pull change
 
-/-- The canonical constant-coefficient structural isomorphism.
-Source: Stacks 099L. -/
+/-- The canonical constant-coefficient structural isomorphism (Stacks, Tag 099L). -/
 def constantMap (A : Type u) [CommRing A] : F.rings.obj (constant J A) ⟶ constant J' A :=
   (F.constants.app (CommRingCat.of A)).hom
 

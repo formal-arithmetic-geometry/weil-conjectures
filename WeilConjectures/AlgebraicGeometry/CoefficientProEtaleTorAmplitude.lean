@@ -40,15 +40,15 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Cohomology at the standard derived localization. Source: Stacks Tag 05RU. -/
+/-- Cohomology at the standard derived localization (Stacks, Tag 05RU). -/
 abbrev coefficientModelCohomology {C : Type w} [SmallCategory C]
     {T : GrothendieckTopology C} (R : Sheaf T CommRingCat.{w}) (q : ℤ) :
     ConstantCompletion.D R ⥤ ConstantCompletion.Mod R :=
   @DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) q
 
 /-- The Tor test on every K-flat representative, tensoring with every degree-zero module.
-K-flat resolutions exist, so quantification over representatives is independent of choices.
-Source: Stacks Tags 08FZ and 06YS. -/
+K-flat resolutions exist, so quantification over representatives is independent of choices
+(Stacks, Tags 08FZ and 06YS). -/
 def HasCoefficientModelTorAmplitude {C : Type w} [SmallCategory C]
     {T : GrothendieckTopology C} (R : Sheaf T CommRingCat.{w})
     (K : ConstantCompletion.D R) (a b : ℤ) : Prop :=
@@ -65,23 +65,22 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Sheafification on the existing coefficient-sized small site, with its exact size.
-This uses the general small-site theorem, avoiding the older successor-universe instance.
-Source: Stacks Tags 00W1 and 08FZ. -/
+This uses the general small-site theorem, avoiding the older successor-universe instance
+(Stacks, Tags 00W1 and 08FZ). -/
 instance coefficientModelAdditiveSheafify (X : Scheme.{u}) :
     HasSheafify (coefficientProEtaleModelTopology.{u, v} X)
       AddCommGrpCat.{max v (u + 1)} :=
   GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
 
-/-- The same size-correct sheafification on the etale model.
-Source: Stacks Tags 00W1 and 08FZ. -/
+/-- The same size-correct sheafification on the etale model (Stacks, Tags 00W1 and 08FZ). -/
 instance coefficientEtaleModelAdditiveSheafify (X : Scheme.{u}) :
     HasSheafify (smallModelComparisonEtaleTopology.{u, v} X)
       AddCommGrpCat.{max v (u + 1)} :=
   GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
 
 /-- The recorded pro-etale Tor predicate on the equivalent coefficient-sized model.
-No equality between the scheme and coefficient universes is required.
-Source: Stacks Tags 08FZ and 09A5. -/
+No equality between the scheme and coefficient universes is required (Stacks, Tags 08FZ and 09A5).
+-/
 abbrev HasCoefficientProEtaleTorAmplitude (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (K : CategoryTheory.ConstantCompletion.D
@@ -89,8 +88,8 @@ abbrev HasCoefficientProEtaleTorAmplitude (X : Scheme.{u})
     (a b : ℤ) : Prop :=
   HasCoefficientModelTorAmplitude _ K a b
 
-/-- Finite Tor amplitude is one common ordered interval for all module-sheaf tests.
-Source: Stacks Tag 08FZ. -/
+/-- Finite Tor amplitude is one common ordered interval for all module-sheaf tests
+(Stacks, Tag 08FZ). -/
 abbrev HasFiniteCoefficientProEtaleTorAmplitude (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (K : CategoryTheory.ConstantCompletion.D

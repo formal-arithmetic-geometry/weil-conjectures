@@ -27,8 +27,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The global constant section followed by its germ is an isomorphism of abelian groups.
-Source: Stacks Project, Tags 03PT (2), 040R and 03PQ. -/
+/-- The global constant section followed by its germ is an isomorphism of abelian groups
+(Stacks, Tags 03PT, 040R and 03PQ). -/
 theorem constantSheaf_geometricStalk_isIso (T : Scheme.{u})
     (E : AddCommGrpCat.{(max u v) + 1}) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (t : Spec (.of Ω) ⟶ T) :

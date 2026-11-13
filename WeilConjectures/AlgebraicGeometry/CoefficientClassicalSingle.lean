@@ -13,8 +13,7 @@ set_option autoImplicit false
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
-/-- The ordinary degree-n embedding into the standard derived localization.
-Source: Stacks Tag 05RU. -/
+/-- The ordinary degree-n embedding into the standard derived localization (Stacks, Tag 05RU). -/
 @[irreducible] def coefficientModelSingle {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w}) (n : ℤ) :
     ConstantCompletion.Mod R ⥤ ConstantCompletion.D R :=
@@ -34,8 +33,7 @@ instance coefficientModelSingle_faithful {C : Type w} [SmallCategory C]
   unfold coefficientModelSingle
   infer_instance
 
-/-- A degree-zero module has cohomology only in the ordered interval [0,0].
-Source: Stacks Tag 05RU. -/
+/-- A degree-zero module has cohomology only in the ordered interval [0,0] (Stacks, Tag 05RU). -/
 theorem coefficientSingle_bounded {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (M : ConstantCompletion.Mod R) :
@@ -48,8 +46,7 @@ theorem coefficientSingle_bounded {C : Type w} [SmallCategory C]
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isGE 0 q hq
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isLE 0 q hq
 
-/-- Degree-zero cohomology of a module in degree zero is that same module.
-Source: Stacks Tag 05RU. -/
+/-- Degree-zero cohomology of a module in degree zero is that same module (Stacks, Tag 05RU). -/
 def coefficientSingle_homologyIso {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (M : ConstantCompletion.Mod R) :
@@ -68,8 +65,8 @@ private theorem singleHZero {C : Type w} [SmallCategory C]
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isGE 0 q hq
   · exact ((DerivedCategory.singleFunctor _ 0).obj M).isZero_of_isLE 0 q hq
 
-/-- Cancel degree-zero embeddings to recover full faithfulness of a module functor.
-Source: Stacks Tags 05RU and 09AL. -/
+/-- Cancel degree-zero embeddings to recover full faithfulness of a module functor
+(Stacks, Tags 05RU and 09AL). -/
 theorem coefficientSingle_full_faithful {C B : Type w} [SmallCategory C] [SmallCategory B]
     {J : GrothendieckTopology C} {K : GrothendieckTopology B}
     (R : Sheaf J CommRingCat.{w}) (S : Sheaf K CommRingCat.{w})
@@ -137,8 +134,8 @@ private theorem continuousZero (X : Scheme.{u})
   exact ((colimit.isColimit (sectionDiagram P E)).isZero_pt hd).isIso
     (hp.obj _) _
 
-/-- A continuous module, placed in degree zero, has continuous cohomology in all degrees.
-Source: Stacks Tags 05RU and 099T. -/
+/-- A continuous module, placed in degree zero, has continuous cohomology in all degrees
+(Stacks, Tags 05RU and 099T). -/
 theorem coefficientSingle_classical (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : ConstantCompletion.Mod (ConstantCompletion.constant

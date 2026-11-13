@@ -130,9 +130,8 @@ private theorem orbit_extension {C : Type*} [Category* C] [MonoidalCategory C]
 
 /-- Extend representative-normalized values to an isomorphism-compatible family.
 The new family agrees with the given one only on the specified chain inputs;
-the given family need not be compatible on arbitrary derived objects.
-Source: Stacks Project, cohomology.tex, Tag 08DJ (functoriality on representatives),
-and sites-cohomology.tex, Tags 0A90 and 0A96. -/
+the given family need not be compatible on arbitrary derived objects
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem exists_tensorHomUncurry_descent_extension (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

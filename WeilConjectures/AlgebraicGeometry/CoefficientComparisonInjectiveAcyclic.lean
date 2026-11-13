@@ -121,7 +121,7 @@ private theorem intrinsicUnitIso (X : Scheme.{u})
     (SheafOfModules.toSheaf _) hmap inferInstance
 
 /-- The ordinary comparison unit is invertible on injectives, whose inverse images
-are acyclic for comparison direct image. (Stacks, Tags 099U, 099V) -/
+are acyclic for comparison direct image (Stacks, Tags 099U, 099V). -/
 theorem coefficientComparison_injectiveAcyclic (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

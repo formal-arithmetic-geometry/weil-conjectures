@@ -40,8 +40,8 @@ private theorem evaluation_equality_transport {C : Type*} [Category C]
   simp only [tensorHom_id, id_whiskerRight, Category.id_comp, Category.comp_id] at h
   exact heq_of_eq h
 
-/-- Normalized evaluation at the identity depends only on the literal derived objects.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96. -/
+/-- Normalized evaluation at the identity depends only on the literal derived objects
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomIdentityEvaluation_coherence (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M L' M' : CochainComplex

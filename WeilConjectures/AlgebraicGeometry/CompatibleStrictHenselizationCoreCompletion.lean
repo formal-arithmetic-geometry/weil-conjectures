@@ -19,8 +19,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
 set_option linter.unusedVariables.funArgs false in
-/-- Functoriality between affine presentations of compatible strict henselizations.
-Source: Stacks Project, Tag 04GU. -/
+/-- Functoriality between affine presentations of compatible strict henselizations
+(Stacks, Tag 04GU). -/
 theorem Etale.exists_compatibleStrictHenselizationCoreCompletion
     {S T : Scheme.{u}} {g : T ⟶ S}
     {Ω A B : Type u} [Field Ω] [IsAlgClosed Ω]

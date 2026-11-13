@@ -139,8 +139,7 @@ private theorem inverseImage_unit_iso {T T' : TopCat.{u}} (g : T ⟶ T')
   intro V
   exact congrArg (fun z ↦ l.val.app ((Opens.map g).op.obj V) (z.val V)) hs.symm
 
-/-- The tensor pushout of the affine direct-image algebra is quasi-coherent.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h. -/
+/-- The tensor pushout of the affine direct-image algebra is quasi-coherent (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_algebra_quasiCoherent [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpush : IsPushout r₀ t₀ b t) :

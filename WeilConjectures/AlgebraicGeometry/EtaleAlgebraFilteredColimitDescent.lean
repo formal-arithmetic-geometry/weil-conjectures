@@ -28,7 +28,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- An étale algebra over a filtered colimit of rings is the base change of an étale algebra
-over some stage. (Stacks, Tag 00U2 and Tag 0A02) -/
+over some stage (Stacks, Tag 00U2 and Tag 0A02). -/
 theorem exists_etale_algebra_of_filteredColimit
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

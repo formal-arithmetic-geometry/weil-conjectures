@@ -211,8 +211,8 @@ private theorem composition_factorization_transport_private
 (used by `import all` importers; linter.privateModule). -/
 alias composition_factorization_transport := composition_factorization_transport_private
 /-- The composition comparison intertwines the successive derived counits at a complex.
-There is no coefficient morphism, representative isomorphism or K-flatness assumption.
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks. -/
+There is no coefficient morphism, representative isomorphism or K-flatness assumption
+(Stacks, Tag 0D5S). -/
 private theorem affineSpectrum_composition_counit_square_aux
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -271,8 +271,8 @@ private theorem affineSpectrum_composition_counit_square_aux
 
 
 /-- The composition comparison intertwines the successive derived counits at a complex.
-There is no coefficient morphism, representative isomorphism or K-flatness assumption.
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks. -/
+There is no coefficient morphism, representative isomorphism or K-flatness assumption
+(Stacks, Tag 0D5S). -/
 theorem affineSpectrum_composition_counit_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

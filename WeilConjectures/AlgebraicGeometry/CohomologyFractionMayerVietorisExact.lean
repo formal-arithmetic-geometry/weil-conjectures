@@ -182,9 +182,8 @@ private lemma fraction_kill_pair {X : Scheme.{uMV}} (L F : X.Modules)
 
 /-- An exact module-natural Mayer--Vietoris family induces an exact sequence on
 cohomology fractions, with the prescribed restriction, difference, and boundary formulas.
-This statement concerns only the upper row: it has no nonvanishing open or comparison map.
-
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB. -/
+This statement concerns only the upper row: it has no nonvanishing open or comparison map
+(Stacks, Tags 09MR and 01EB). -/
 theorem exists_cohomologyFraction_mayerVietoris_exact (X : Scheme.{uMV})
     (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))

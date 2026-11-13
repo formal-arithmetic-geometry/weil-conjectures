@@ -24,8 +24,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
-/-- Finite freeness on the localized site is detected by raw internal inverse image.
-Source: Stacks Project, Tags 03DM and 03DO. -/
+/-- Finite freeness on the localized site is detected by raw internal inverse image
+(Stacks, Tags 03DM and 03DO). -/
 theorem continuousRing_slice_free_iff
     (X : Scheme.{u}) (T : Type)
     [CommRing T] [TopologicalSpace T] [IsTopologicalRing T] [TotallyDisconnectedSpace T]

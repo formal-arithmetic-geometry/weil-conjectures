@@ -34,8 +34,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- K-flat extension models respect the extension adjunction unit.
-Source: Stacks Project, perfect.tex, Tags 08DW(2) and 0AA7. -/
+/-- K-flat extension models respect the extension adjunction unit (Stacks, Tags 08DW and 0AA7). -/
 theorem exists_affineExtension_model_unit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     [(@id (ModuleCat.{u} R ⥤

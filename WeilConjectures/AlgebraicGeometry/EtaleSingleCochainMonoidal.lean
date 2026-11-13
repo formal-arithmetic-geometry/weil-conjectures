@@ -29,9 +29,7 @@ variable {C : Type uB} [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C]
 
-/-- The explicit total-tensor comparison for single complexes in degree zero.
-Source: Stacks, Cohomology on Sites, Tag 06YQ.
-It is the composition of the two existing single/bifunctor comparisons. -/
+/-- The explicit total-tensor comparison for single complexes in degree zero (Stacks, Tag 06YQ). -/
 @[irreducible]
 noncomputable def singleCochainTensorIso
     (L M : C) :
@@ -157,8 +155,8 @@ private noncomputable def cochainSingleMonoidal :
           whiskerLeft_id, Category.id_comp] using
           (congrArg Iso.hom (singleCochainTensorIso_rightUnitor L)).symm }
 
-/-- The canonical degree-zero cochain tensorator extends to a strong monoidal structure.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, total tensor of single complexes. -/
+/-- The canonical degree-zero cochain tensorator extends to a strong monoidal structure
+(Stacks, Tags 06YQ and 06YU). -/
 theorem exists_singleCochainMonoidal :
     ∃ m : (HomologicalComplex.single C (.up ℤ) 0).Monoidal,
       ∀ L M : C, letI := m

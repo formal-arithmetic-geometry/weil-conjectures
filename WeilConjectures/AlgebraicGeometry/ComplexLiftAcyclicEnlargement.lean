@@ -62,9 +62,8 @@ private theorem cokernel_bounded_above
   apply (cancel_epi π).mp
   exact (A.isZero_of_isStrictlyLE b i hi).eq_of_src _ _
 
-/-- Construct an acyclic cone and a cokernel sequence for any acyclic lift of it.
-
-Source: Stacks Project, More on Algebra, Tag 0BCA, cone and dotted-arrow paragraphs. -/
+/-- Construct an acyclic cone and a cokernel sequence for any acyclic lift of it (Stacks, Tag 0BCA).
+-/
 theorem exists_complex_lift_acyclic_enlargement
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

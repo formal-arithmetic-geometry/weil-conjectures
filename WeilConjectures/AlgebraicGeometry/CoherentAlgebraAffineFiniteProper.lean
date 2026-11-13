@@ -47,8 +47,7 @@ set_option synthInstance.maxHeartbeats 200000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- An affine realization of a coherent algebra is finite, and proper over the base
-when its underlying module has proper support.
-Source: Stacks Project, Lemma 09ZT, final sentence, and Lemma 0CYS (3). -/
+when its underlying module has proper support (Stacks, Tags 09ZT and 0CYS). -/
 theorem coherent_algebra_affine_finite_proper
     {X Y S : Scheme.{u}} [IsLocallyNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] (g : Y ⟶ X) [IsAffineHom g]

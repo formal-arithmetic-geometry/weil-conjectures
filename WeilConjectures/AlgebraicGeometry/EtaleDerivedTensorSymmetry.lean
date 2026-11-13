@@ -42,8 +42,7 @@ variable (C : Type u') [Category.{u + 1} C] [Abelian C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- The canonical signed symmetry, packaged before specialization to sheaves.
-Source: Stacks Project, Tag 06YU. -/
+/-- The canonical signed symmetry, packaged before specialization to sheaves (Stacks, Tag 06YU). -/
 noncomputable def canonicalTensorSymmetry :
     curriedTensor (DerivedCategory C) ≅ (curriedTensor (DerivedCategory C)).flip :=
   letI : BraidedCategory (DerivedCategory C) := by exact braidedCategory' C

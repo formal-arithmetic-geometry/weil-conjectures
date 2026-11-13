@@ -64,10 +64,8 @@ set_option maxHeartbeats 800000 in
 -- Comparing the transported module functors requires additional elaboration heartbeats.
 /-- A short exact sequence of complexes representing the three direct-image terms
 on an arbitrary open union, with the first arrow identified by adjunction.
-No connecting morphism, integer shift, or distinguished triangle is asserted.
-
-Source: Stacks Project, Tag 08BV, its short exact
-sequence of complexes applied on the union; Tag 079W. -/
+No connecting morphism, integer shift, or distinguished triangle is asserted
+(Stacks, Tags 08BV and 079W). -/
 theorem derived_open_union_ses_presentation
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -71,10 +71,8 @@ private theorem bijective_app_of_restrict_iso
     (E.map ((SheafOfModules.overFunctor X.ringCatSheaf V).map c))
 
 /-- A coherent map invertible outside V(L) has affine section kernel and cokernel
-whose annihilator radicals contain L. This involves no formal system or proper map.
-
-Source: Stacks Project, Lemma 01Y9, its affine support criterion (Algebra, Lemma 00L6),
-and the last paragraph of Lemma 088B. -/
+whose annihilator radicals contain L. This involves no formal system or proper map
+(Stacks, Tags 01Y9, 00L6 and 088B). -/
 theorem coherentAffineMap_support_radical
     (R : Type u) [CommRing R] [IsNoetherianRing R] (L : Ideal R)
     (A D : CoherentModules (Spec (CommRingCat.of R))) (c : A.obj ⟶ D.obj)

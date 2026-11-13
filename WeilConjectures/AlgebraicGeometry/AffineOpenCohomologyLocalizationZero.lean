@@ -26,10 +26,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Degree-zero affine localization, expressed on an open of the ambient scheme.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, degree-zero and affine-open
-paragraphs; Properties, Lemma 01PW; Cohomology of Sheaves, Lemma 01E1 (2). -/
+/-- Degree-zero affine localization, expressed on an open of the ambient scheme
+(Stacks, Tags 09MR, 01PW and 01E1). -/
 theorem affineOpen_cohomology_localization_zero
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))
     (F : X.Modules) [F.IsQuasicoherent]

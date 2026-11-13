@@ -93,8 +93,8 @@ private theorem lift_indEtale_residue
   simpa only [← heA, eA.symm_apply_apply] using h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Lift compatible geometric residue embeddings to a ring map of strict henselizations.
-Source: Stacks Project, Tags 04GU and 04HX. -/
+/-- Lift compatible geometric residue embeddings to a ring map of strict henselizations
+(Stacks, Tags 04GU and 04HX). -/
 theorem Etale.exists_compatibleStrictHenselizationResidueLift
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Completion and composition with a map having power-torsion kernel detect maps.
-Only the kernel of b needs a bound; its cokernel plays no role.
-Source: Stacks Project, Tag 0889, uniqueness argument, and Tag 088A, final paragraph. -/
+Only the kernel of b needs a bound; its cokernel plays no role (Stacks, Tags 0889 and 088A). -/
 theorem coherentMap_torsion_completion_ext
     {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)
     (P Q R : CoherentModules X) (b : Q ⟶ R)

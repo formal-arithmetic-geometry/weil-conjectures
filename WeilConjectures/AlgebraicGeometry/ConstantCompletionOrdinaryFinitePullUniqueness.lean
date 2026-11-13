@@ -56,10 +56,8 @@ private theorem finitePull_homEquiv {R : Sheaf J CommRingCat.{u}}
   rw [finiteScalar_homEquiv, pullInsertion, Category.assoc]
 
 include V adj hL in
-/-- Two isomorphisms satisfying the insertion normalization are equal.
-Source: Stacks Project, Tags 06YY and 099L.
-The insertion maps generate the sheafified scalar extensions, so the displayed
-formula determines every component and hence the natural isomorphism. -/
+/-- Two isomorphisms satisfying the insertion normalization are equal (Stacks, Tags 06YY and 099L).
+-/
 theorem ordinaryFinitePull_unique
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)
     (e e' : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅

@@ -26,8 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- The image of a closed subset proper over the base under a universally closed
-morphism over that base is closed and proper over the base.
-Source: Stacks Project, Tag 0CYQ, part (2). -/
+morphism over that base is closed and proper over the base (Stacks, Tag 0CYQ). -/
 theorem image_isClosedSubsetProperOver_of_universallyClosed
     {X Y S : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S)
     [LocallyOfFiniteType p] [LocallyOfFiniteType q]

@@ -24,8 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical cohomology transition on the restricted stage opens.
-Source: Stacks Project, Tags 09YQ and 01F7. -/
+/-- Canonical cohomology transition on the restricted stage opens (Stacks, Tags 09YQ and 01F7). -/
 noncomputable def tailOpenCohomologyMapDegree {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -46,8 +45,7 @@ noncomputable def tailOpenCohomologyMapDegree {I : Type u} [Preorder I]
         (F j.val) (F k.val)
         (φ (homOfLE (show j.val ≤ k.val from f.le)))) n)
 
-/-- Canonical cohomology leg from a stage open to the limit open.
-Source: Stacks Project, Tags 09YQ and 01F7. -/
+/-- Canonical cohomology leg from a stage open to the limit open (Stacks, Tags 09YQ and 01F7). -/
 noncomputable def tailOpenCohomologyLegDegree {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -68,9 +66,8 @@ noncomputable def tailOpenCohomologyLegDegree {I : Type u} [Preorder I]
         (by simp only [tailLimitOpenMap, Scheme.Hom.resLE_comp_ι]) (F j.val) L.pt
         ((eG j.val).inv ≫ L.ι.app j.val)) n)
 
-/-- The canonical restricted cohomology arrows and legs form a diagram and cocone.
-
-Source: Stacks Project, Tag 09YQ (coherent systems) and Tag 01F7 (functoriality). -/
+/-- The canonical restricted cohomology arrows and legs form a diagram and cocone
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_open_cohomology_cocone_degree
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

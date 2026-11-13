@@ -15,8 +15,8 @@ universe u wC wD
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero lift and degree-one cycle in a global horseshoe resolution.
-Source: Stacks Project, Tags 0117, 013T and 015B. -/
+/-- The degree-zero lift and degree-one cycle in a global horseshoe resolution
+(Stacks, Tags 0117, 013T and 015B). -/
 theorem boundary_horseshoe_global_lift (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A bounded-below algebra-derived object whose underlying object has quasi-coherent
-cohomology belongs to the bounded-below quasi-coherent algebra-derived category.
-Source: Stacks Project, Tags 0BV0, 0BV1 and 0AX2. -/
+cohomology belongs to the bounded-below quasi-coherent algebra-derived category
+(Stacks, Tags 0BV0, 0BV1 and 0AX2). -/
 theorem derivedAlgebraQCohOfUnderlying (Y : Scheme.{u})
     (A : Y.CommAlgebraSheaf) (hA : A.toModule.IsQuasicoherent)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

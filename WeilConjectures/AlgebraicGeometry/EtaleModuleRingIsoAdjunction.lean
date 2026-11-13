@@ -26,8 +26,8 @@ namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport a linearity criterion through an isomorphism of ring sheaves.
-Source: Stacks Project, Tags 03D3 and 03D7, specialized to an invertible ring map. -/
+/-- Transport a linearity criterion through an isomorphism of ring sheaves
+(Stacks, Tags 03D3 and 03D7). -/
 theorem etaleModuleRingIsoAdjunction (U V : Scheme.{u}) (f : U ⟶ V)
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})

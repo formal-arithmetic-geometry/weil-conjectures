@@ -37,8 +37,8 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- The structure sheaf viewed as a sheaf of rings, as in the module-stalk siblings.
-Source: Stacks, Tag 08BW. -/
+/-- The structure sheaf viewed as a sheaf of rings, as in the module-stalk siblings
+(Stacks, Tag 08BW). -/
 abbrev moduleRings (X : RingedSpace.{u}) :=
   (sheafCompose (Opens.grothendieckTopology X)
     (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf
@@ -89,8 +89,8 @@ instance moduleOverMap_colimits (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶
     PreservesFiniteColimits (SheafOfModules.overMap.{u} (moduleRings X) i) := by
   infer_instance
 
-/-- Restrict a morphism on `U` to `W`, transporting along the canonical restriction iso.
-Source: Stacks, Tag 08BW. -/
+/-- Restrict a morphism on `U` to `W`, transporting along the canonical restriction iso
+(Stacks, Tag 08BW). -/
 def derivedOpenHomRestriction (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))]
@@ -177,8 +177,8 @@ private theorem hom_exact_of_open_triangle
 
 set_option maxHeartbeats 700000 in
 -- Specializing the triangle identifications compares three large derived restriction functors.
-/-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups.
-Source: Stacks, Tag 08BW. -/
+/-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups (Stacks, Tag 08BW).
+-/
 theorem derived_hom_mayer_vietoris
     (X : RingedSpace.{u}) (U V : Opens X) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

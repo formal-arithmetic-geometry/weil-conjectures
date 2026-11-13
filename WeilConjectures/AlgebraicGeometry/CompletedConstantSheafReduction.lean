@@ -36,7 +36,7 @@ namespace AlgebraicGeometry.Scheme.CompletedConstantReduction
 
 open AdicCoefficients
 
-/-- The base map is uniquely fixed by all quotient projections. Source: Stacks Tag 093M. -/
+/-- The base map is uniquely fixed by all quotient projections (Stacks, Tag 093M). -/
 theorem base_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     ∃! φ : adicLisseConstantRing T A ⟶ adicLisseCompletedRing T I,
       ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem T I) (op n) =
@@ -59,13 +59,13 @@ theorem base_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal 
     intro n
     exact (hφ n.unop).trans (limit.lift_π c n).symm
 
-/-- The canonical constant-to-completed coefficient homomorphism. Source: Stacks Tag 093M. -/
+/-- The canonical constant-to-completed coefficient homomorphism (Stacks, Tag 093M). -/
 def base (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     adicLisseConstantRing T A ⟶ adicLisseCompletedRing T I :=
   (base_exists T I).choose
 
-/-- The quotient sheaf, retaining its action by the completed ring through its projection.
-Source: Stacks Tags 093M and 06YU. -/
+/-- The quotient sheaf, retaining its action by the completed ring through its projection
+(Stacks, Tags 093M and 06YU). -/
 def residue (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : ℕ) :
     SheafOfModules.{u + 1} ((adicLisseForget T).obj (adicLisseCompletedRing T I)) :=
   (SheafOfModules.restrictScalars ((adicLisseForget T).map
@@ -207,7 +207,7 @@ private theorem tensorHomEquiv_tmul (T : Scheme.{u})
   exact hh
 
 /-- The reduction map is uniquely determined on local tensor generators by projection
-and multiplication. Source: Stacks Tag 093M. -/
+and multiplication (Stacks, Tag 093M). -/
 theorem reduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (n : ℕ) :
     ∃! r : (completedAdicChange T (base T I)).obj
@@ -342,13 +342,13 @@ theorem reduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     convert hx using 1
     rfl
 
-/-- The ordinary canonical reduction map, fixed by its formula in `reduction_exists`.
-Source: Stacks Tag 093M. -/
+/-- The ordinary canonical reduction map, fixed by its formula in `reduction_exists`
+(Stacks, Tag 093M). -/
 def reduction (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (n : ℕ) := (reduction_exists T I n).choose
 
-/-- The actual canonical reduction on a complex mapping to the constant quotient.
-Source: Stacks Tags 06YY and 093M. -/
+/-- The actual canonical reduction on a complex mapping to the constant quotient
+(Stacks, Tags 06YY and 093M). -/
 def reductionComplex (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (n : ℕ)
     (P : CochainComplex
@@ -359,7 +359,7 @@ def reductionComplex (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     ((completedAdicChange T (base T I)).mapCochainComplexSingleFunctor 0).hom.app _ ≫
       (CochainComplex.singleFunctor _ 0).map (reduction T I n)
 
-/-- Constant module sheafification is additive. Source: Stacks Tag 093J. -/
+/-- Constant module sheafification is additive (Stacks, Tag 093J). -/
 theorem constant_additive (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (adicLisseConstantModules T A).Additive := by
   constructor
@@ -402,7 +402,7 @@ private theorem constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] 
     comp_preservesFiniteColimits P
       (PresheafOfModules.sheafification (adicLisseConstantUnit T A))⟩
 
-/-- The termwise constant module sheaf of a complex. Source: Stacks Tag 093J. -/
+/-- The termwise constant module sheaf of a complex (Stacks, Tag 093J). -/
 def constantComplex (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     CochainComplex (ModuleCat.{u + 1} A) ℤ ⥤
       CochainComplex

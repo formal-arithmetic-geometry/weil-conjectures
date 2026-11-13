@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The canonical coimage-image comparison for coherent adic systems is invertible,
-for any choices of the kernel and cokernel structures.
-Source: Stacks Project, Lemma 087X, paragraph proving Coim=Im. -/
+for any choices of the kernel and cokernel structures (Stacks, Tag 087X). -/
 theorem coherentFormalModules_coimageImage_isIso (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) [HasKernels (CoherentFormalModule X I)]
     [HasCokernels (CoherentFormalModule X I)]

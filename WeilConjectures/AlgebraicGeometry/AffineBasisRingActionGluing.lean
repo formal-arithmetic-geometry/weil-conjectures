@@ -22,9 +22,8 @@ universe u
 open CategoryTheory Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 
-/-- Compatible actions on the affine basis extend uniquely to a natural ring action.
-
-Source: Stacks Project, Tag 009O, applied to the affine basis; Tags 01LX and 0897. -/
+/-- Compatible actions on the affine basis extend uniquely to a natural ring action
+(Stacks, Tags 009O, 01LX and 0897). -/
 theorem affineBasis_ringAction_gluing
     (X : Scheme.{u}) (R : TopCat.Sheaf RingCat.{u} X)
     (F : TopCat.Sheaf AddCommGrpCat.{u} X)

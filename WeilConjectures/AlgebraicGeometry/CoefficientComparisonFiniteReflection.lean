@@ -85,8 +85,7 @@ private theorem comparison_coversTop_reflect (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A fixed-scalar etale module whose comparison is a finite local system is itself
 a finite local system. This is the single-stratum assertion, with no stratification
-or intrinsic-module inverse image in its statement.
-Source: Stacks Tags 099Y and 099T. -/
+or intrinsic-module inverse image in its statement (Stacks, Tags 099Y and 099T). -/
 theorem coefficientComparison_finite_reflect (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

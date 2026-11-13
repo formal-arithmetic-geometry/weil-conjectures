@@ -178,9 +178,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 600000 in
 -- The affine-limit comparison and sheaf separatedness require extra elaboration steps.
 /-- An affine limit-kernel annihilator makes every reduction of the coherent
-ideal product with the original kernel zero.
-Source: Stacks Project, Tag 088A, second application of Remark 0888;
-Tag 087W and Algebra, Tag 00MB (exactness of finite-module completion). -/
+ideal product with the original kernel zero (Stacks, Tags 088A, 0888, 087W and 00MB). -/
 theorem coherentKernel_idealProduct_completion_zero
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (F G : CoherentModules X) (a : F ⟶ G) (t : ℕ)

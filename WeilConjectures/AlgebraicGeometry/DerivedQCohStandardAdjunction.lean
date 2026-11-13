@@ -114,8 +114,8 @@ private theorem directImageComparison {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (HomologicalComplex.quasiIso AZ (.up ℤ)) (@schemeDerivedCategory Y sY)).preimageIso
       (δ ≪≫ γ.symm)⟩
 
-/-- Standardize a specified right adjoint, with comparisons on all objects.
-Source: Stacks Project, Tags 05RU and 079V. -/
+/-- Standardize a specified right adjoint, with comparisons on all objects
+(Stacks, Tags 05RU and 079V). -/
 theorem derivedQCoh_standardAdjunction
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

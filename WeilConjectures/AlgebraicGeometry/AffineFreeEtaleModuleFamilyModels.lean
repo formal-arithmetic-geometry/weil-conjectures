@@ -133,10 +133,8 @@ private noncomputable def freeModelIso (W : X.Etale) :
         freeYonedaEvalEquiv_comp, evalEquiv_comp])
 
 /-- Two finite affine etale families admit free-sum models at one stage.
-This statement descends objects only; it makes no assertion about arrows between them.
-
-Source: Stacks Project, Tag 09YU (3), essential surjectivity of the affine etale site
-using 095N, and Tag 03S6. -/
+This statement descends objects only; it makes no assertion about arrows between them
+(Stacks, Tags 09YU, 095N and 03S6). -/
 theorem exists_affine_free_etaleModule_family_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -41,9 +41,8 @@ set_option linter.unusedVariables false in
 /-- Construct support-controlled stationary comparisons for maps of augmented CE totals.
 The presentation, page maps and stationary comparisons are chosen simultaneously.
 The abutment is the homology map of the specified CE-total map; this assertion does not
-compare it with an arbitrary supplied map of K-injective resolutions.
-Source: Stacks Project, Tag 015J (first spectral sequence), Tag 015K (filtered
-functoriality), and Tag 0EZM (common lower support bound). -/
+compare it with an arbitrary supplied map of K-injective resolutions
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_supported_ce_filtered_totals :
     ∃ (D : ∀ (X : Scheme.{u})
         (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

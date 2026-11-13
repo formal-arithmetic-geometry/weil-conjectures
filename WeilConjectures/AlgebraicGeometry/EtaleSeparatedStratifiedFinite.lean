@@ -31,9 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A quasi-compact separated étale morphism into a quasi-compact quasi-separated scheme is
 finite étale after base change to each member of a finite constructible locally closed
-stratification of its target.
-
-Source: More on Morphisms, Lemma Tag 07RZ, and Etale Cohomology, Lemma Tag 03S9. -/
+stratification of its target (Stacks, Tags 07RZ and 03S9). -/
 theorem exists_etale_separated_stratified_finite {X U : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     (j : U ⟶ X) [Etale j] [IsSeparated j] [QuasiCompact j] :

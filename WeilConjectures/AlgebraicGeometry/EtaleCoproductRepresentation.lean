@@ -171,11 +171,8 @@ private noncomputable def coproductYonedaRestrictionIso {ι : Type u}
     · rw [h.lift_snd, Category.assoc, h.lift_snd]
 
 /-- Chosen etale representatives on a family of components represent the transported
-restriction to their coproduct. Finiteness and joint surjectivity onto T are not needed.
-
-Source: Stacks Project, Tag 03RV, the
-assembly of local representations; Tag 02W5, the sheaf
-identification in the effective case. This is the disjoint-cover instance of that argument. -/
+restriction to their coproduct. Finiteness and joint surjectivity onto T are not needed
+(Stacks, Tags 03RV and 02W5). -/
 theorem etaleCoproduct_representation
     {ι : Type u} (T : Scheme.{u})
     (E : Sheaf T.smallEtaleTopology (Type (u + 1)))

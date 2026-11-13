@@ -22,10 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Coherent coefficients and their colimit restrict to the explicit tail opens.
-
-Source: Stacks Project, Tag 09YQ, coherent-system construction;
-Tag 01F7, functoriality of inverse image. -/
+/-- Coherent coefficients and their colimit restrict to the explicit tail opens
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_tail_open_coefficients
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

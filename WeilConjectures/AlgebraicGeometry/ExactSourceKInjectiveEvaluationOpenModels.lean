@@ -33,8 +33,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The standard localization is available on the open scheme independently of the
-specified localization universe of the over-site.
-Source: Stacks Project, Tag 05RU. -/
+specified localization universe of the over-site (Stacks, Tag 05RU). -/
 local instance kInjectiveEvaluationStandardDerived (X : Scheme.{u}) (U : X.Opens) :
     HasDerivedCategory.{u + 1}
       (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=

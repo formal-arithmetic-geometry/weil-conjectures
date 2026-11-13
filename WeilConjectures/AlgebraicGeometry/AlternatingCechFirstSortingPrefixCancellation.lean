@@ -108,10 +108,7 @@ private theorem sum_subtype_ite {α : Type*} [Fintype α] {B : Type*}
 
 open Classical in
 /-- The signed prefix-deletion sum cancels exactly the incoming terms whose deleted
-label precedes the junction in stable order.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1, prefix-deletion part
-of the labelled-deletion argument (details omitted in the source). -/
+label precedes the junction in stable order (Stacks, Tag 01FM). -/
 theorem cechFirstSortingPrefixCancellation
     {I : Type v} [LinearOrder I] {B : Type w} [AddCommGroup B]
     (p : ℕ) (t : Fin (p + 2) → I) (f : (Fin (p + 2) → Fin (p + 2)) → B) :

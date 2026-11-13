@@ -24,9 +24,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
-/-- The balanced tensor action on affine opens, including compatibility on inclusions.
-
-Source: Stacks Project, Tags 01LX (2)-(3), 01SB and 0897, relative-spectrum paragraph. -/
+/-- The balanced tensor action on affine opens, including compatibility on inclusions
+(Stacks, Tags 01LX, 01SB and 0897). -/
 theorem balancedAction_affine_sections
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

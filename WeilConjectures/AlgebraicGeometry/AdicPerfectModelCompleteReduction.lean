@@ -78,8 +78,8 @@ namespace AlgebraicGeometry.Scheme.AdicPerfectModel
 variable {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
   {A : Type w} [CommRing A] (I : Ideal A)
 
-/-- The actual termwise constant complex, using the recorded exact realization.
-Source: Stacks 093J. -/
+/-- The actual termwise constant complex, using the recorded exact realization (Stacks, Tag 093J).
+-/
 abbrev constantComplex (R : Type w) [CommRing R] :=
   (commutativeSiteConstantModuleFunctor J R).mapHomologicalComplex (.up ℤ)
 
@@ -89,8 +89,8 @@ abbrev model (P : CochainComplex (ModuleCat.{w} A) ℤ) :=
   ((ConstantCompletion.change (ConstantCompletion.coefficientMap J A I)).mapHomologicalComplex
     (.up ℤ)).obj ((constantComplex J A).obj P)
 
-/-- The ordinary algebraic residue complex k tensor_A P, with its k-action retained.
-Source: Stacks 093M. -/
+/-- The ordinary algebraic residue complex k tensor_A P, with its k-action retained
+(Stacks, Tag 093M). -/
 def algebraicResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :
     CochainComplex (ModuleCat.{w} (A ⧸ I ^ (0 + 1))) ℤ :=
   letI := (ModuleCat.extendRestrictScalarsAdj
@@ -98,37 +98,34 @@ def algebraicResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :
   ((ModuleCat.extendScalars (Ideal.Quotient.mk (I ^ (0 + 1)))).mapHomologicalComplex
     (.up ℤ)).obj P
 
-/-- The constant sheaf of the ordinary residue complex.
-Source: Stacks 093J. -/
+/-- The constant sheaf of the ordinary residue complex (Stacks, Tag 093J). -/
 abbrev constantResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :=
   (constantComplex J (A ⧸ I ^ (0 + 1))).obj (algebraicResidue I P)
 
 variable {J}
 
-/-- Restrict actual complexes and chain maps to the localized site.
-Source: Stacks 03DJ. -/
+/-- Restrict actual complexes and chain maps to the localized site (Stacks, Tag 03DJ). -/
 def overComplex (R : Sheaf J CommRingCat.{w}) (U : C) :
     ConstantCompletion.Cx R ⥤ ConstantCompletion.Cx (R.over U) :=
   letI := ringedOverFunctor_additive R U
   (SheafOfModules.overFunctor (siteModuleRings R) U).mapHomologicalComplex
     (.up ℤ)
 
-/-- Cohomology in the standard derived localization used throughout the coefficient API.
-Source: Stacks 05RU. -/
+/-- Cohomology in the standard derived localization used throughout the coefficient API
+(Stacks, Tag 05RU). -/
 abbrev cohomology (R : Sheaf J CommRingCat.{w}) (q : ℤ) :=
   @DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard (ConstantCompletion.Mod R)) q
 
 variable (J)
 
-/-- Constant module sections, through the actual additive sheafification unit.
-Source: Stacks 093J. -/
+/-- Constant module sections, through the actual additive sheafification unit (Stacks, Tag 093J). -/
 def constantSection (R : Type w) [CommRing R] (N : ModuleCat.{w} R) (U : Cᵒᵖ) (x : N) :
     ((commutativeSiteConstantModuleFunctor J R).obj N).val.obj U :=
   (toSheafify J ((siteConstantModulePresheafGeneral (C := C) R).obj N).presheaf).app U x
 
 /-- The normalization fixing the canonical residue comparison on local tensor generators.
-The image of (c tensor (b tensor p)) is c times bar(b) times the constant section 1 tensor p.
-Source: Stacks 093M. -/
+The image of (c tensor (b tensor p)) is c times bar(b) times the constant section 1 tensor p
+(Stacks, Tag 093M). -/
 def IsResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ)
     (f : ((ConstantCompletion.change (ConstantCompletion.projection J A I 0)).mapHomologicalComplex
       (.up ℤ)).obj (model J I P) ⟶ constantResidue J I P) : Prop :=
@@ -142,8 +139,8 @@ def IsResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ)
         constantSection J (A ⧸ I ^ (0 + 1)) ((algebraicResidue I P).X q) U
           ((1 : A ⧸ I ^ (0 + 1)) ⊗ₜ[A, Ideal.Quotient.mk (I ^ (0 + 1))] p)
 
-/-- The same canonical tensor formula on a slice, with the restricted coefficient sheaf.
-Source: Stacks 03DJ, 093M and 0E8K. -/
+/-- The same canonical tensor formula on a slice, with the restricted coefficient sheaf
+(Stacks, Tags 03DJ, 093M and 0E8K). -/
 def IsSliceResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ) (U : C)
     (f : ((ConstantCompletion.change
       ((J.overPullback CommRingCat U).map

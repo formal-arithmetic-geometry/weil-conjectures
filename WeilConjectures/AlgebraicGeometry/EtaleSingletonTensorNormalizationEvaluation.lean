@@ -22,8 +22,8 @@ noncomputable section
 
 set_option linter.auxLemma false in
 /-- Evaluating the sole outer Čech index gives an additive map whose value on
-normalized pure tensors is the prescribed section. No affine hypothesis is needed.
-Source: Stacks Project, Tag 03P2, affine Čech term identification. -/
+normalized pure tensors is the prescribed section. No affine hypothesis is needed
+(Stacks, Tag 03P2). -/
 theorem singletonTensor_normalization_evaluation
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

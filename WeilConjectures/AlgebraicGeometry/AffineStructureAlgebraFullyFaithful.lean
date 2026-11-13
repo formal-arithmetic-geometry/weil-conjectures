@@ -87,8 +87,8 @@ private theorem exists_over_map_of_algebra {S X Y : Scheme.{u}} (f : X ⟶ S)
   convert ea using 1
   congr 1
 
-/-- The canonical contravariant structure-algebra functor is full and faithful.
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemmas 01LT and 01LY. -/
+/-- The canonical contravariant structure-algebra functor is full and faithful
+(Stacks, Tags 01SA, 01LT and 01LY). -/
 theorem affine_structure_algebra_full_faithful (S : Scheme.{u})
     (F : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ⥤
       ObjectProperty.FullSubcategory

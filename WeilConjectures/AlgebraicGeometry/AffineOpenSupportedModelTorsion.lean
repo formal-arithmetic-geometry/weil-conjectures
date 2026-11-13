@@ -26,8 +26,8 @@ private theorem torsion_of_localized_subsingleton {R M : Type*} [CommRing R]
   rcases hr with ⟨n, rfl⟩
   exact ⟨n, hm⟩
 
-/-- Vanishing away from the zero locus implies power annihilation on affine cohomology.
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0. -/
+/-- Vanishing away from the zero locus implies power annihilation on affine cohomology
+(Stacks, Tags 08EJ and 06Z0). -/
 theorem affine_open_supported_model_torsion
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

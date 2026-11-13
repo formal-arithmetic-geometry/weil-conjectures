@@ -139,8 +139,8 @@ private theorem tail_stage (X : Scheme.{u}) {I : Type v} (U : I → X.Opens)
     tail_coefficient σ τ₀ ρ₀ a hτ hc, neg_smul]
 
 open Classical in
-/-- Tail-labelled junction deletions contribute the negatives of the advanced stages.
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1. -/
+/-- Tail-labelled junction deletions contribute the negatives of the advanced stages
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionTailContribution (X : Scheme.{u}) {I : Type v}
     [LinearOrder I] (U : I → X.Opens)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})

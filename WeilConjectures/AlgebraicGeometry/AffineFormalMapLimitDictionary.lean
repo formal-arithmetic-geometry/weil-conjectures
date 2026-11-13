@@ -31,8 +31,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A coherent affine tilde presentation has a finite module of coefficients.
-Source: Stacks Project, Tags 01IB, 01PB and 01XZ. -/
+/-- A coherent affine tilde presentation has a finite module of coefficients
+(Stacks, Tags 01IB, 01PB and 01XZ). -/
 private theorem finite_presentation_module
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X]
     (H : CoherentModules X) (P : ModuleCat.{u} Γ(X, ⊤))
@@ -68,10 +68,8 @@ set_option maxHeartbeats 1000000 in
 -- The affine equivalence and two natural comparisons require extra elaboration heartbeats.
 /-- The affine dictionary identifies a formal morphism with a completed linear map,
 and identifies that map with the actual inverse limit of its section maps.
-No torsion hypothesis or annihilator conclusion is involved.
-
-Source: Stacks Project, Tags 087W, 00MA and 0889(1), affine comparison before
-applying Remark 0888. -/
+No torsion hypothesis or annihilator conclusion is involved
+(Stacks, Tags 087W, 00MA, 0889 and 0888). -/
 theorem affine_formal_map_limit_dictionary
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

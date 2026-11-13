@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite affine-local immersed partition admits a global immersed refinement with actual
-factorization maps into its local representatives. Source: Stacks Project, Etale Cohomology,
-Tag 03S0, locality reduction. -/
+factorization maps into its local representatives (Stacks, Tag 03S0). -/
 theorem exists_global_stratification_factoring_local
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (n : ℕ) (W : Fin n → X.Opens)

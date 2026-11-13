@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A subobject of a constant module sheaf has a constant model of its generic stalk,
-with the same inclusion into the ambient constant sheaf at every geometric generic point.
-Source: Stacks Project, Tag 09BH, Proposition 59.74.1 (3), the submodule M' of M. -/
+with the same inclusion into the ambient constant sheaf at every geometric generic point
+(Stacks, Tag 09BH). -/
 theorem exists_constant_generic_stalk_model_of_mono_constant
     {X : Scheme.{u}} [IrreducibleSpace X]
     {Λ : Type (u + 1)} [CommRing Λ]

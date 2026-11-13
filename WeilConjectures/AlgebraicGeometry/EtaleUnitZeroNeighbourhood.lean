@@ -100,8 +100,8 @@ private theorem etaleUnit_zero_pointed_witness
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A section killed on the whole base-changed object vanishes near its image.
-Source: Stacks Project, Tag 09XM (equality locus) and Tag 03Q1 (pullback stalks). -/
+/-- A section killed on the whole base-changed object vanishes near its image
+(Stacks, Tags 09XM and 03Q1). -/
 theorem etaleUnit_zero_neighbourhood
     {X T : Scheme.{u + 1}} (p : T ⟶ X)
     (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤

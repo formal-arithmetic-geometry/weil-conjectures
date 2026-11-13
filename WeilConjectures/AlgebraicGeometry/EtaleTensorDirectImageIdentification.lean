@@ -87,8 +87,7 @@ private theorem etaleTensorOpenSectionIso_coeff_natural
             (Category.assoc _ _ _).symm)))
 
 /-- The underlying abelian sheaf is the direct image of the tensor-sections sheaf,
-naturally in the specified tensor-pullback maps.
-Source: Stacks Project, Descent, Tag 03DW(2), and Etale Cohomology, Tag 03P2. -/
+naturally in the specified tensor-pullback maps (Stacks, Tags 03DW and 03P2). -/
 theorem etaleTensorDirectImageIdentification
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

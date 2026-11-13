@@ -165,8 +165,8 @@ private theorem hom_uncurry_comm {C : Type u} [Category.{u} C]
       (homComplex_projections_exists.{u, u, u, u} (R := R))).2.1
         L I p (p + 1) q (n + 1) n (q + 1) rfl (by omega) (by omega) (by omega)) φ n m
 
-/-- The actual coproduct extension of the uncurried components in total degree `n`.
-Source: Stacks Project, Tag 0A90 (degreewise evaluation). -/
+/-- The actual coproduct extension of the uncurried components in total degree `n`
+(Stacks, Tag 0A90). -/
 def schemeTensorHomUncurryGraded (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -179,9 +179,8 @@ def schemeTensorHomUncurryGraded (X : Scheme.{u})
       change p + q = n at h
       omega))
 
-/-- The coproduct evaluation commutes with the total tensor differential.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, differential calculation,
-and cohomology.tex, Tag 08DJ. -/
+/-- The coproduct evaluation commutes with the total tensor differential
+(Stacks, Tags 0A90 and 08DJ). -/
 theorem schemeTensorHomUncurryGraded_comm (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -193,8 +192,8 @@ theorem schemeTensorHomUncurryGraded_comm (X : Scheme.{u})
   exact hom_uncurry_comm X.sheaf P L ((schemeHomKInjectiveResolution X).obj M) φ n m
 
 /-- The chain map obtained by extending evaluation over the tensor coproducts.
-Its data are explicit; only differential compatibility uses the preceding theorem.
-Source: Stacks Project, Tag 0A90. -/
+Its data are explicit; only differential compatibility uses the preceding theorem
+(Stacks, Tag 0A90). -/
 def schemeTensorHomUncurry (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -203,8 +202,8 @@ def schemeTensorHomUncurry (X : Scheme.{u})
   f := schemeTensorHomUncurryGraded X P L M φ
   comm' n m _ := schemeTensorHomUncurryGraded_comm X P L M φ n m
 
-/-- Restricting coproduct evaluation to a summand recovers exactly the specified component.
-Source: Stacks Project, Tag 0A90, coproduct universal property. -/
+/-- Restricting coproduct evaluation to a summand recovers exactly the specified component
+(Stacks, Tag 0A90). -/
 theorem schemeTensorHomUncurry_component (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L

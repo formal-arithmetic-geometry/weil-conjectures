@@ -116,9 +116,8 @@ private noncomputable def sections_cokernel_iso (S : Scheme.{u}) (hS : IsAffine 
     (sectionsRestrictFromSpecLinearEquiv (cokernel φ) htop).toModuleIso
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer flatness of module opcycles to affine-local flatness of sheaf opcycles.
-Source: Stacks Project, Tags 01IB (affine equivalence), 01HV (localization of
-associated sheaves), and 01U4 (affine-local flatness). -/
+/-- Transfer flatness of module opcycles to affine-local flatness of sheaf opcycles
+(Stacks, Tags 01IB, 01HV and 01U4). -/
 theorem affine_opcycles_flat_from_sections (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ) (a : ℤ)
     (hprev : (C.X (a - 1)).IsQuasicoherent) (hcurr : (C.X a).IsQuasicoherent)

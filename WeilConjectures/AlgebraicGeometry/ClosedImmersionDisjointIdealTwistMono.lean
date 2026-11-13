@@ -72,10 +72,7 @@ private theorem tensor_ideal_inclusions_disjoint {Y : Scheme.{u}}
   exact (cancel_epi (e.counitIso.app T).hom).mp (ha.trans (comp_zero.symm))
 
 /-- Restriction of an ideal times an invertible module is monic when the ideal has
-zero intersection with the closed-immersion ideal.
-
-Source: Stacks Project, Remark 09NW, the calculation I/(I intersection J), and the
-local trivialization argument in Lemma 09NX. -/
+zero intersection with the closed-immersion ideal (Stacks, Tags 09NW and 09NX). -/
 theorem closedImmersion_disjointIdeal_twist_mono {Y X : Scheme.{u}} (i : X ⟶ Y)
     [IsClosedImmersion i] (I : Y.IdealSheafData)
     (hzero : ∀ U : Y.Opens, I.idealOfOpens U ⊓ i.ker.idealOfOpens U = ⊥)

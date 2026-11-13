@@ -26,8 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- For an irreducible scheme locally of finite type over a field, every nonempty open subset
-and every point have the dimension of the whole scheme. Source: Stacks Project, Varieties,
-Lemma 33.20.3, Tag 0A21, part (3). -/
+and every point have the dimension of the whole scheme (Stacks, Tag 0A21). -/
 theorem dimension_locally_algebraic {k : Type u} [Field k] (X : Scheme.{u})
     [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
     [IrreducibleSpace X] :

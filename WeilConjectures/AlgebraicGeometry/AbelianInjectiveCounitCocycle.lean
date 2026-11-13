@@ -185,8 +185,8 @@ private theorem injective_resolution_constant_cocycle (X : Scheme.{u})
   rw [I.mk₀_comp_extMk]
   exact h
 
-/-- Inverse image and coefficients on Ext agree with the adjoint section chain map.
-Source: Stacks Project, Tags 01F7, 01F8, 01F9 and 06XR. -/
+/-- Inverse image and coefficients on Ext agree with the adjoint section chain map
+(Stacks, Tags 01F7, 01F8, 01F9 and 06XR). -/
 theorem abelian_injective_counit_cocycle_calculation
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : SheafOfModules.{u} (moduleRings Y.toRingedSpace))

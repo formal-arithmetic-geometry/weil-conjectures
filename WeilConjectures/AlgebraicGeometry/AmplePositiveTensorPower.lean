@@ -59,10 +59,8 @@ private theorem nonvanishing_of_frame {X : Scheme.{u}} (M : X.Modules)
   change ¬ _ ↔ _
   rw [hmem, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, not_not]
 
-/-- A positive tensor power of an ample invertible module is ample.
-
-Source: Stacks Project, Properties Definition 01PS and Lemma 01PT;
-Varieties Lemma 09NX, first two paragraphs. -/
+/-- A positive tensor power of an ample invertible module is ample
+(Stacks, Tags 01PS, 01PT and 09NX). -/
 theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]
     (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)  := by
   refine ⟨hM.1, fun x ↦ ?_⟩

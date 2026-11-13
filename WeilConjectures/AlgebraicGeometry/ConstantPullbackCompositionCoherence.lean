@@ -24,9 +24,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Constant-sheaf comparison morphisms commute with inverse-image composition.
-Source: Stacks Project, sites.tex, Tag 03CB (composition of inverse images), and
-cohomology.tex, Tag 01F8, applied to the constant sheaf. -/
+/-- Constant-sheaf comparison morphisms commute with inverse-image composition
+(Stacks, Tags 03CB and 01F8). -/
 theorem constantPullbackCompositionCoherence {X Y Z : Scheme.{u}}
     (u : X ⟶ Y) (v : Y ⟶ Z) (M : AddCommGrpCat.{u + 1}) :
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (u ≫ v)).inv.app M) ≫

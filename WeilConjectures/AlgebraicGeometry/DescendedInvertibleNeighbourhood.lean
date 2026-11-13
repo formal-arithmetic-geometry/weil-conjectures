@@ -85,8 +85,8 @@ private theorem exists_local_unit_of_invertible_pullback
   exact ⟨V, hyV, ⟨eV ≪≫ coproductUniqueIso
     (fun _ : I ↦ SheafOfModules.unit V.toScheme.ringCatSheaf)⟩⟩
 
-/-- Descent to a vector bundle gives a rank-one trivialization near a base point.
-Source: Stacks Project, Tags 0BF2 and 0BF0, rank-one descent and local trivialization. -/
+/-- Descent to a vector bundle gives a rank-one trivialization near a base point
+(Stacks, Tags 0BF2 and 0BF0). -/
 theorem exists_descendedInvertible_neighbourhood
     {X S : Scheme.{v}} (f : X ⟶ S)
     (hO : ∀ {T : Scheme.{v}} (g : T ⟶ S),

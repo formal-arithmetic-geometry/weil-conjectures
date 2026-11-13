@@ -26,8 +26,7 @@ variable [∀ S : Scheme.{u},
 -- The selected scheme counits have large dependent types.
 /-- The explicit expression obtained by pasting the localized underived counits.
 This names a concrete morphism made from the already recorded choices of counits
-and adjunctions. It makes no new existential choice.
-Source: Stacks Project, Tags 079W and 0D5S. -/
+and adjunctions. It makes no new existential choice (Stacks, Tags 079W and 0D5S). -/
 noncomputable def derivedCompositionCounitApex
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -50,8 +49,7 @@ noncomputable def derivedCompositionCounitApex
         (ε f).app H ≫ DerivedCategory.Qh.map ((b f).counit.app K)
 
 -- The construction equation elaborates the same dependent counit types.
-/-- The construction equation for the explicit counit expression.
-Source: Stacks Project, Tags 079W and 0D5S. -/
+/-- The construction equation for the explicit counit expression (Stacks, Tags 079W and 0D5S). -/
 theorem derivedCompositionCounitApex_eq
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

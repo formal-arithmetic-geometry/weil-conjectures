@@ -111,9 +111,7 @@ set_option maxHeartbeats 1600000 in
 -- The derived restriction functors and their comparisons need this elaboration budget.
 /-- The difference arrow has split normal form on each of the two opens.
 The middle and last objects are the explicit direct-image sum and overlap image.
-This constructs their maps, not a glued object.
-Source: Stacks Project, Cohomology, Tag 08DG, construction of the difference arrow;
-Tag 08FE for restriction of direct images. -/
+This constructs their maps, not a glued object (Stacks, Tags 08DG and 08FE). -/
 theorem derived_open_difference_diagram
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

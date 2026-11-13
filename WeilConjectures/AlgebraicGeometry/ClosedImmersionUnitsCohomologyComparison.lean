@@ -75,9 +75,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 400000 in
 -- Comparing the two concrete Ext maps unfolds the sheaf-adjunction construction.
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
-of units is bijective in every degree.
-Source: Stacks Project, Cohomology, Lemma 02UV, and Varieties, Lemma 09NY, the sentence
-invoking Lemma 02UV. -/
+of units is bijective in every degree (Stacks, Tags 02UV and 09NY). -/
 theorem bijective_unitsPushforwardCohomologyComparison_of_isClosedImmersion
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (p : ℕ) :
     Function.Bijective (unitsPushforwardCohomologyComparison i p) := by

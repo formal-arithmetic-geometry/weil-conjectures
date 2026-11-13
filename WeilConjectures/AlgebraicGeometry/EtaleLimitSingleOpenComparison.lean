@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Restriction to one quasi-compact open constructs its canonical comparison on the tail.
-
-Source: Stacks Project, Tag 09YQ, coherent systems on inverse limits, and Tag 01F7,
-functoriality of cohomology. -/
+/-- Restriction to one quasi-compact open constructs its canonical comparison on the tail
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_single_open_comparison
     (X : Scheme.{u}) (O W : X.Opens)
     (hW : IsCompact (W : Set X)) (hWO : W ≤ O)

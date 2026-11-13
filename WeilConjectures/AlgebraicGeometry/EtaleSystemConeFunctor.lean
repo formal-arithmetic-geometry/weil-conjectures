@@ -33,9 +33,8 @@ private theorem cone_pullback_unit {X Y : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Y
   subst b
   simp [upperStarComp_id_right]
 
-/-- Pulling a compatible coefficient system to an arbitrary cone gives a functor.
-Source: Stacks Project, Tag 0EXZ, transport of a system along compatible inverse
-images; the canonical inverse-image comparisons are those of Sites, Tag 03CB. -/
+/-- Pulling a compatible coefficient system to an arbitrary cone gives a functor
+(Stacks, Tags 0EXZ and 03CB). -/
 theorem etale_system_cone_functor
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

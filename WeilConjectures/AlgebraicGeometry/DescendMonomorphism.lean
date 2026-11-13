@@ -268,9 +268,7 @@ private theorem exists_mono_overPullback
     (Arrow.isoMk (hρq.isoIsPullback _ _ hργ) (Iso.refl _) (by simp))).mp ha
 
 /-- A locally finite type morphism between qcqs schemes is monic at some stage if its
-base change to the inverse limit is monic.
-
-Source: Stacks Project, Limits, Lemma Tag 07RQ, in Situation 081D. -/
+base change to the inverse limit is monic (Stacks, Tags 07RQ and 081D). -/
 theorem exists_mono_baseChange_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

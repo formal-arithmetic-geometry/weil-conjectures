@@ -136,8 +136,8 @@ private theorem affine_pullback_of_pushout
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A fixed morphism of affine schemes over X is the base change along a closed
-immersion if its section maps present the quotient by the extended base ideal.
-Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA. -/
+immersion if its section maps present the quotient by the extended base ideal
+(Stacks, Tags 09ZT, 01S8 and 01SA). -/
 private theorem affine_algebra_quotient_isPullback
     {X Y X' Y' : Scheme.{u}}
     (j : X' ⟶ X) [IsClosedImmersion j]
@@ -257,8 +257,8 @@ private theorem affine_algebra_quotient_isPullback
 
 
 /-- Compatible quotient maps from an affine structure algebra give compatible
-cartesian morphisms of the reduction schemes into its realization.
-Source: Stacks Project, Lemma 09ZT, final sentence; Morphisms, Lemmas 01S8 and 01SA. -/
+cartesian morphisms of the reduction schemes into its realization
+(Stacks, Tags 09ZT, 01S8 and 01SA). -/
 theorem affine_algebra_reductions_cartesian
     {X Y : Scheme.{u}} (Xn Yn : ℕ → Scheme.{u})
     (j : ∀ n, Xn n ⟶ X) [∀ n, IsClosedImmersion (j n)]

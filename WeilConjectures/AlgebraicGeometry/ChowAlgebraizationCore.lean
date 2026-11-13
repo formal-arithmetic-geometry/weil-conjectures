@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Algebraization on the supplied quasi-projective modification with proper support on Y.
-Source: Stacks Project, Theorem 088E, the projective compactification argument
-(https://stacks.math.columbia.edu/tag/088E), using Tags 0885, 0CYJ, and 0CYQ. -/
+/-- Algebraization on the supplied quasi-projective modification with proper support on Y
+(Stacks, Tags 088E, 0885, 0CYJ and 0CYQ). -/
 theorem exists_chow_algebraization_core
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

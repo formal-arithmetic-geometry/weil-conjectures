@@ -25,9 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A degree-zero class of a single stage sheaf which dies on the affine inverse
 limit dies after pullback to a later stage. No varying coefficient system or colimit
-of sheaves is involved.
-
-Source: Stacks Project, Tag 09YQ, degree-zero argument via 0EYL, 04HR and 09YN. -/
+of sheaves is involved (Stacks, Tags 09YQ, 0EYL, 04HR and 09YN). -/
 theorem fixed_affine_degree_zero_kernel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

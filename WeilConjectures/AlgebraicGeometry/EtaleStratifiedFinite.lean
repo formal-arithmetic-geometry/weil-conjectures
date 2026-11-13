@@ -83,8 +83,8 @@ private theorem exists_etale_stratified_finite_affine {X U : Scheme.{u}}
   exact finite_etale_pullback_comp j (ι i) ((T i).immersion b)
 
 /-- An etale morphism between quasi-compact quasi-separated schemes is finite etale
-after restriction to each member of a finite constructible locally closed stratification.
-Source: Stacks Project, Tag 03S0. -/
+after restriction to each member of a finite constructible locally closed stratification
+(Stacks, Tag 03S0). -/
 theorem exists_etale_stratified_finite {X U : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] :

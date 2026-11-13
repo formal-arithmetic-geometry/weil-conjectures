@@ -194,8 +194,8 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
 /-- The root, signed pullback and signed multiplication maps with every normalization of
-etaleFiniteTwistPullback, including unbounded derived pullback and exponent change.
-Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E. -/
+etaleFiniteTwistPullback, including unbounded derived pullback and exponent change
+(Stacks, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E). -/
 structure FiniteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hA : (m : A) = 0) where
   /-- Roots of unity, normalized by their inclusion in G_m. -/
@@ -359,8 +359,8 @@ theorem nonempty_finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
 
 /-- Select the normalized comparisons. Constants and pure root tensors determine c, and
 unitors, positive recursion, associativity and evaluation determine p; r is determined by
-its monic inclusion into G_m. Thus the data are unique up to equality, including the duals.
-Source: Stacks 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E. -/
+its monic inclusion into G_m. Thus the data are unique up to equality, including the duals
+(Stacks, Tags 03PK, 03Q1, 03EK, 03EM, 07A4 and 0G7E). -/
 @[irreducible]
 def finiteEtaleTwistPullbackData (A : Type (u + 1)) [CommRing A]
     (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) : FiniteEtaleTwistPullbackData A m hA :=

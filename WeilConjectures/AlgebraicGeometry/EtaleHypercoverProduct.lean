@@ -26,8 +26,8 @@ namespace AlgebraicGeometry
 /-- The product in simplicial étale `X`-schemes is again a hypercover.
 This product is computed termwise; products in `X.Etale` are scheme-theoretic fibre
 products over `X`. Its projections `prod.fst U V` and `prod.snd U V` are natural
-transformations, hence morphisms of augmented simplicial `X`-schemes.
-Source: Stacks Project, Hypercoverings, Lemmas 01GI and 01GH. -/
+transformations, hence morphisms of augmented simplicial `X`-schemes (Stacks, Tags 01GI and 01GH).
+-/
 theorem isEtaleHypercover_prod (X : Scheme.{uP}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : SimplicialObject X.Etale) (hU : IsEtaleHypercover U)
     (hV : IsEtaleHypercover V) : IsEtaleHypercover (U ⨯ V) := by

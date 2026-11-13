@@ -28,9 +28,8 @@ noncomputable local instance (X : Scheme.{u}) :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Identifying the two pulled-back unit coefficients and applying the tensor unitor
-turns external cup with the degree-zero class of one into scalar projection pullback.
-Source: Stacks Project, Tag 0BED, maps preceding varieties-equation-kunneth-on-cech;
-Cohomology, section-cup-product; Tag 01F7, functoriality. -/
+turns external cup with the degree-zero class of one into scalar projection pullback
+(Stacks, Tags 0BED and 01F7). -/
 theorem external_cup_unit_coefficient_identities (k : Type u) [Field k]
     (X Y : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) :

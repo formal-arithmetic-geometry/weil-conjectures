@@ -35,7 +35,7 @@ noncomputable local instance DerivedPullbackTensorQCoh_monoidalCategory (X : Sch
 set_option synthInstance.maxSize 256 in
 /-- Derived pullback preserves quasi-coherent cohomology, and the derived tensor of two
 objects with quasi-coherent cohomology has quasi-coherent cohomology, stated through K-flat
-representatives. (Stacks, Tags 08DW and 08DX) -/
+representatives (Stacks, Tags 08DW and 08DX). -/
 theorem derivedPullback_tensor_preserve_QCoh {X Y : Scheme.{uX}} (f : X ⟶ Y)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] :

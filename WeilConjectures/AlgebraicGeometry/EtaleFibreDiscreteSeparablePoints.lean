@@ -27,8 +27,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The fibre of an etale morphism is discrete, and each singleton open subscheme is the
-spectrum of its residue field, finite and separable over the base residue field.
-Source: Stacks Project, Morphisms, Lemma 02GL(2). -/
+spectrum of its residue field, finite and separable over the base residue field (Stacks, Tag 02GL).
+-/
 theorem Scheme.Hom.etale_fibre_discrete_separable_points
     {X S : Scheme.{u}} (f : X ⟶ S) [Etale f] (s : S) :
     DiscreteTopology (f.fiber s) ∧

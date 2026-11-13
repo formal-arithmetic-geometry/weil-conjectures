@@ -92,7 +92,7 @@ private theorem product_range_affine {X : Scheme.{u}} {J : X.Modules}
     rintro s ⟨a, t, rfl⟩
     exact ⟨Modules.tmulSection a t, ht a t⟩
 
-/-- Sheaf separatedness detects a zero morphism on the affine basis. (Stacks, Tag 01YP) -/
+/-- Sheaf separatedness detects a zero morphism on the affine basis (Stacks, Tag 01YP). -/
 private theorem hom_zero_of_affine {X : Scheme.{u}} {M N : X.Modules}
     (φ : M ⟶ N) (h : ∀ V : X.affineOpens, ∀ s : Γ(M, V.1), φ.app V.1 s = 0) :
     φ = 0 := by

@@ -68,8 +68,8 @@ private theorem principalCover_refinement
     exact a.property
 
 /-- The underlying abelian-group presheaf satisfies the sheaf condition on the
-site of affine opens when all affine-to-principal restrictions are localizations.
-Source: Stacks Project, Tag 01HV, and Tags 009N/009Q. -/
+site of affine opens when all affine-to-principal restrictions are localizations
+(Stacks, Tags 01HV, 009N and 009Q). -/
 theorem isSheaf_affineBasis_of_localizing
     (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)
     (hP : ∀ (W : T.Opens), IsAffineOpen W → ∀ a : Γ(T, W),

@@ -165,10 +165,8 @@ private theorem comparison_eventually_equal
 -- The unchanged signature names V' only as an implicit object family.
 set_option linter.unusedVariables false in
 /-- Finitely many affine local sections with a common image at the limit become
-compatible at some later stage. No covering hypothesis or covering conclusion is needed.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit
-and its finite-matching argument; Étale Cohomology Tag 0EYL. -/
+compatible at some later stage. No covering hypothesis or covering conclusion is needed
+(Stacks, Tags 0A35 and 0EYL). -/
 theorem etaleSet_eventualLocalStageCompatibility
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

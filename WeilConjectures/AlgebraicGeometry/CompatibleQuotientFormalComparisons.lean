@@ -95,10 +95,8 @@ private theorem local_epi_cancel {X : Scheme.{u}} {P Q S : X.Modules}
   exact hv
 
 /-- Compatible local quotient maps identify a fixed coherent source's completion with N.
-The source and arrow are supplied; this theorem only descends their quotient comparisons.
-
-Source: Stacks Project, Tag 0889(1), compatibility after algebraic sheaf descent;
-Sheaves, Tags 00AL and 00AM. -/
+The source and arrow are supplied; this theorem only descends their quotient comparisons
+(Stacks, Tags 0889, 00AL and 00AM). -/
 theorem compatible_quotient_formal_comparisons
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (H F : CoherentModules X) (N : CoherentFormalModule X J)

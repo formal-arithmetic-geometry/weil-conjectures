@@ -73,8 +73,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option maxHeartbeats 800000 in
 -- The two transported tensor adjunctions require extra definitional-equality checks.
-/-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+/-- The adjoint of γ is linear over the affine direct-image algebra, objectwise (Stacks, Tag 01SB).
+-/
 theorem affine_module_tensor_unitLift
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

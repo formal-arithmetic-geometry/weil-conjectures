@@ -28,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A locally finitely presented morphism over a quasi-compact quasi-separated stage,
 whose source and target are quasi-compact quasi-separated, is étale at some later stage
-if its base change to the inverse limit is étale.
-
-Source: Stacks Project, Limits, Lemma 07RP in Situation 081D. -/
+if its base change to the inverse limit is étale (Stacks, Tags 07RP and 081D). -/
 theorem Etale.exists_stage_of_inverseLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

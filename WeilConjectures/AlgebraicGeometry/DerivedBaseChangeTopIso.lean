@@ -24,8 +24,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Change only the upper-left scheme of a commutative square by an isomorphism.
-Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T. -/
+/-- Change only the upper-left scheme of a commutative square by an isomorphism
+(Stacks, Tags 08HY, 0D5S and 0D5T). -/
 theorem exists_derivedBaseChange_top_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

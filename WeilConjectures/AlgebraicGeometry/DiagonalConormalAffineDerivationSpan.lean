@@ -21,8 +21,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
-/-- The values of a normalized difference derivation generate affine conormal sections.
-Source: Stacks Project, Tag 08S2, final affine calculation; Tags 01R3 and 00RW. -/
+/-- The values of a normalized difference derivation generate affine conormal sections
+(Stacks, Tags 08S2, 01R3 and 00RW). -/
 theorem diagonalConormal_affine_derivation_span (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)

@@ -209,9 +209,8 @@ set_option synthInstance.maxSize 2048 in
 -- The derived tensor instances are repeated in the equivalences and comparisons.
 /-- The pointwise transpose of pulled-back evaluation respects the canonical
 identification of zeroth hypercohomology with derived morphisms.
-This is a statement about elements, with no bifunctorial mate and no counit composite.
-
-Source: Stacks Project, Cohomology, Remark 08I3, Lemma 079W, Lemma 08DJ and Tag 08JA. -/
+This is a statement about elements, with no bifunctorial mate and no counit composite
+(Stacks, Tags 08I3, 079W, 08DJ and 08JA). -/
 theorem exists_derivedPullback_evaluation_sections
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

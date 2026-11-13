@@ -151,9 +151,8 @@ attribute [local irreducible] completed
 omit hL in
 /-- The ordinary comparison admits compatible transports to the canonical finite model.
 The source and target isomorphisms are chosen with their insertion normalizations;
-arbitrary independently chosen isomorphisms need not satisfy the equation.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M;
-sites-cohomology.tex, Tag 06YY. -/
+arbitrary independently chosen isomorphisms need not satisfy the equation
+(Stacks, Tags 03EK, 03EL, 093M and 06YY). -/
 theorem ordinaryReducedPull_transport_eq
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [hL : PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

@@ -39,8 +39,8 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
-/-- Étale and Zariski cohomology agree for each quasi-coherent module on a curve.
-Source: Stacks Project, Descent, Proposition 03DW (2). -/
+/-- Étale and Zariski cohomology agree for each quasi-coherent module on a curve (Stacks, Tag 03DW).
+-/
 theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
     (F : C.Modules) [F.IsQuasicoherent] (q : ℕ) :
@@ -55,9 +55,7 @@ theorem etale_zariski_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
   exact ⟨(Abelian.Ext.homAddEquiv.{u + 1, u}.trans
     Abelian.Ext.homAddEquiv.{u + 1, u + 1}.symm).trans (c F q).symm⟩
 
-/-- The comparison specialized to `Gₐ = (𝒪_C)_et`.
-Source: Stacks Project, Descent, Proposition 03DW (2), specialized to the structure
-sheaf. -/
+/-- The comparison specialized to `Gₐ = (𝒪_C)_et` (Stacks, Tag 03DW). -/
 theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (q : ℕ) :
     Nonempty (Sheaf.H (@Scheme.Modules.etaleTensorSectionsSheaf C (Scheme.Modules.unit C)
@@ -68,8 +66,7 @@ theorem etale_ga_cohomology_agree {k : Type u} [Field k] [IsAlgClosed k]
   exact etale_zariski_cohomology_agree f (Scheme.Modules.unit C) q
 
 /-- Both cohomology groups of `Gₐ` and `𝒪_C` vanish in degree at least two on a smooth
-connected curve. Source: Stacks Project, Descent, Proposition 03DW (2), and Cohomology,
-Proposition 02UZ. -/
+connected curve (Stacks, Tags 03DW and 02UZ). -/
 theorem subsingleton_etale_ga_and_structure_cohomology {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]
     (q : ℕ) (hq : 2 ≤ q) :

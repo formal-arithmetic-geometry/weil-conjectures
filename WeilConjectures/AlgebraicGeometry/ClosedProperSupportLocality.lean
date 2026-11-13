@@ -26,8 +26,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Closed subsets proper over the base remain proper after any base change, and
 properness descends along any jointly surjective étale family. No quasi-compactness
-of the ambient morphism, base, or covering members is assumed.
-Source: Stacks Project, Tags 0CYP and 0F4J. -/
+of the ambient morphism, base, or covering members is assumed (Stacks, Tags 0CYP and 0F4J). -/
 theorem closed_proper_support_locality
     {T S : Scheme.{u}} (p : T ⟶ S) [LocallyOfFiniteType p]
     (C : TopologicalSpace.Closeds T) :

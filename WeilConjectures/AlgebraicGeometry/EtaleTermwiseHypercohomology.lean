@@ -47,8 +47,8 @@ noncomputable def resolutionEtaleCohomologyIso (X : Scheme.{uHyper})
 /-- A presentation of the first hypercohomology spectral sequence, its signed E₁
 identifications and its canonical finite abutment filtration. The bicomplex and all
 resolution properties are the witnesses of `Functor.exists_hypercohomology_firstPage`;
-the comparison to derived global sections is fixed by the resolution map.
-Source: Stacks, Tags 015H, 015J, 015K. -/
+the comparison to derived global sections is fixed by the resolution map
+(Stacks, Tags 015H, 015J and 015K). -/
 structure EtaleTermwiseHypercohomology (X : Scheme.{uHyper})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})) where
   I : HomologicalComplex₂ (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})
@@ -146,8 +146,8 @@ structure EtaleTermwiseHypercohomology (X : Scheme.{uHyper})
 
 namespace EtaleTermwiseHypercohomology
 
-/-- Restrict the resolution spectral sequence to its intrinsic pages E₁ and later.
-Source: Stacks, Tags 015J and 015K. -/
+/-- Restrict the resolution spectral sequence to its intrinsic pages E₁ and later
+(Stacks, Tags 015J and 015K). -/
 def sequence {X : Scheme.{uHyper}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})}
     (D : EtaleTermwiseHypercohomology X K) :
@@ -155,8 +155,7 @@ def sequence {X : Scheme.{uHyper}}
   page r hr := D.E.page r (le_trans (by decide : (0 : ℤ) ≤ 1) hr)
   iso r r' pq hrr' hr := D.E.iso r r' pq hrr' (le_trans (by decide : (0 : ℤ) ≤ 1) hr)
 
-/-- The signed identification of E₁^{p,q} with H^p(X,K^q).
-Source: Stacks, Tag 015J. -/
+/-- The signed identification of E₁^{p,q} with H^p(X,K^q) (Stacks, Tag 015J). -/
 noncomputable def firstPageIso {X : Scheme.{uHyper}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uHyper + 1})}
     (D : EtaleTermwiseHypercohomology X K) (p : ℕ) (q : ℤ) :

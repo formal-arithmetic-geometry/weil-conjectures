@@ -24,9 +24,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A boundary class is represented by the differential of a global lift through the
-middle horseshoe resolution. No cover or Cech comparison is involved.
-Source: Stacks Project, Homology, Tag 0117 (snake construction); Derived Categories,
-Tags 013T and 015B (resolution and derived-triangle compatibility). -/
+middle horseshoe resolution. No cover or Cech comparison is involved
+(Stacks, Tags 0117, 013T and 015B). -/
 theorem boundary_horseshoe_representative (X : Scheme.{u})
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))]

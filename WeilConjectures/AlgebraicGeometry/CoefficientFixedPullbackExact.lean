@@ -20,8 +20,8 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Fixed-scalar scheme inverse image is a left adjoint and preserves colimits.
-Source: Stacks Tag 00YV. -/
+/-- Fixed-scalar scheme inverse image is a left adjoint and preserves colimits (Stacks, Tag 00YV).
+-/
 instance coefficientFixedPullback_colimits {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :
     PreservesColimits (coefficientProEtaleFixedModulePullback.{u, v} f A) :=
@@ -30,8 +30,7 @@ instance coefficientFixedPullback_colimits {X Y : Scheme.{u}} (f : Y ⟶ X)
     (coefficientProEtaleModelTopology.{u, v} X)
     (coefficientProEtaleModelTopology.{u, v} Y)).leftAdjoint_preservesColimits
 
-/-- Scheme base change is left exact on fixed-scalar sheaves.
-Source: Stacks Tags 00YV and 00WJ. -/
+/-- Scheme base change is left exact on fixed-scalar sheaves (Stacks, Tags 00YV and 00WJ). -/
 instance coefficientFixedPullback_limits {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :
     PreservesFiniteLimits (coefficientProEtaleFixedModulePullback.{u, v} f A) := by
@@ -42,8 +41,7 @@ instance coefficientFixedPullback_limits {X Y : Scheme.{u}} (f : Y ⟶ X)
   unfold coefficientProEtaleFixedModulePullback
   infer_instance
 
-/-- Exact inverse image of module-valued sheaves is additive.
-Source: Stacks Tag 00YV. -/
+/-- Exact inverse image of module-valued sheaves is additive (Stacks, Tag 00YV). -/
 instance coefficientFixedPullback_additive {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type (max v (u + 1))) [CommRing A] :
     (coefficientProEtaleFixedModulePullback.{u, v} f A).Additive :=

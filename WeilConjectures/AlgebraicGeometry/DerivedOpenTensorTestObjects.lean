@@ -27,8 +27,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048
 
 /-- Every object on an open admits an extended test object on the ambient scheme,
-from which restriction is bijective on Hom sets, also after tensoring.
-Source: Stacks Project, Tags 00A7, 08BT and 06YB. -/
+from which restriction is bijective on Hom sets, also after tensoring
+(Stacks, Tags 00A7, 08BT and 06YB). -/
 theorem exists_derivedOpen_tensorTestObject
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

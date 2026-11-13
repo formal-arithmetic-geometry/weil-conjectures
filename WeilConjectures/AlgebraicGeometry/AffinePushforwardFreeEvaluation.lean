@@ -63,8 +63,8 @@ private noncomputable def scalarOver (V : X.Opens) :=
 set_option maxHeartbeats 500000 in
 -- Transport through the over-site and scalar restriction unfolds several ring actions.
 /-- A finite free evaluation map into the algebra-valued direct image is epi on an
-   affine open exactly when its map on sections over that open is surjective.
-   Source: Stacks Project, Morphisms, Tag 01SB; Schemes, Tag 01IC. -/
+   affine open exactly when its map on sections over that open is surjective
+(Stacks, Tags 01SB and 01IC). -/
 theorem affine_pushforward_free_evaluation [IsAffineHom f]
     (F : U.Modules) (hF : F.IsQuasicoherent) (V : X.Opens) (hV : IsAffineOpen V)
     (I : Type u) [Finite I]

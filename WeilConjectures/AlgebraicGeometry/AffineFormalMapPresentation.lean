@@ -64,9 +64,8 @@ private theorem annihilators_of_linear_square
     rw [map_smul, hs, hx]
     exact hz
 
-/-- A completed-module presentation of a formal map, before algebraic gluing.
-
-Source: Stacks Project, Tags 087W, 0888, 00MA and 0889(1). -/
+/-- A completed-module presentation of a formal map, before algebraic gluing
+(Stacks, Tags 087W, 0888, 00MA and 0889). -/
 theorem affine_formal_map_presentation
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (H : CoherentModules X) (N : CoherentFormalModule X J)

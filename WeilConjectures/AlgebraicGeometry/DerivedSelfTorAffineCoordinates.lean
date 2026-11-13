@@ -74,9 +74,8 @@ set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
-for any augmented quotient-resolution comparison, whose existence is not asserted here.
-
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1). -/
+for any augmented quotient-resolution comparison, whose existence is not asserted here
+(Stacks, Tags 08DX, 06YH, 01I9 and 00LS). -/
 theorem exists_derived_selfTor_affine_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) :
     letI := HasDerivedCategory.standard

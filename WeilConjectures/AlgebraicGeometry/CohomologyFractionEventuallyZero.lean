@@ -24,10 +24,7 @@ open AlgebraicGeometry.RingedSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A zero fraction has a numerator killed by a further power of the section.
-
-Source: Stacks Project, Tag 09MR, degree-zero localization preceding the lemma;
-this is the zero criterion for that localization. -/
+/-- A zero fraction has a numerator killed by a further power of the section (Stacks, Tag 09MR). -/
 theorem cohomologyFraction_eventually_zero {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (p : ℕ) (W : X.Opens) (n : ℕ)
     (ξ : (openModuleCohomology X.toRingedSpace p W).obj

@@ -27,7 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An epimorphic image of a finite-type module is finite type: compose each local finite
-family of generating sections with the epimorphism. Source: Stacks Project, Tag 01B7. -/
+family of generating sections with the epimorphism (Stacks, Tag 01B7). -/
 private theorem finiteType_of_epi {X : Scheme.{u}} {P Q : X.Modules}
     (a : P ⟶ Q) [Epi a] [P.IsFiniteType] : Q.IsFiniteType := by
   obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData P
@@ -96,9 +96,8 @@ private theorem epi_of_residue_epi {X : Scheme.{u}} {P Q : X.Modules}
   exact Abelian.epi_of_cokernel_π_eq_zero a (hzero.eq_of_tgt _ _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Residue surjectivity splits a map onto a finitely presented flat affine module.
-
-Source: Stacks Project, Tags 056J and 00NX; finite-cokernel Nakayama argument. -/
+/-- Residue surjectivity splits a map onto a finitely presented flat affine module
+(Stacks, Tags 056J and 00NX). -/
 theorem affine_isSplitEpi_of_residue_epi (S : Scheme.{u}) (hS : IsAffine S)
     (M N : S.Modules) (f : M ⟶ N)
     (hMqc : M.IsQuasicoherent) (hNqc : N.IsQuasicoherent)

@@ -22,9 +22,7 @@ universe u
 open CategoryTheory Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Sheafification does not change the explicit intersection-product terms.
-Source: Stacks Project, Tag 02FU, direct images of restrictions are sheaves;
-finite products are sheaves, as used in the covering resolution. -/
+/-- Sheafification does not change the explicit intersection-product terms (Stacks, Tag 02FU). -/
 theorem alternatingCechSheafPresheafTerms_unit_isIso
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (p : ℕ) :
     IsIso ((PresheafOfModules.sheafificationAdjunction

@@ -41,9 +41,8 @@ local notation "ρ" => (show X.sheaf ⟶ A from ⟨f.c⟩)
 set_option hygiene false in
 local notation "S" => SheafOfModules.restrictScalars.{u} (𝓻 ρ)
 -- Object transports and sheafified tensor instances require additional elaboration steps.
-/-- The second tensor operation is a quotient of the underlying first operation.
-Source: Stacks Project, Tag 01SB, construction of h and the map p to p tensor 1;
-Tag 008A, sheafified extension of scalars. -/
+/-- The second tensor operation is a quotient of the underlying first operation
+(Stacks, Tags 01SB and 008A). -/
 theorem affine_module_tensor_extension_epi
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (ε : B ⟶ U.sheaf)

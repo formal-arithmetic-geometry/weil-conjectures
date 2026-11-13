@@ -82,7 +82,7 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) [CompactSpace Y]
     (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1} hV).symm hAb⟩
 
 /-- On a quasi-compact quasi-separated scheme, etale cohomology of abelian sheaves commutes
-with filtered colimits, with no torsion hypothesis. (Stacks, Tags 03Q5 and 0739) -/
+with filtered colimits, with no torsion hypothesis (Stacks, Tags 03Q5 and 0739). -/
 theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y] {I : Type u} [SmallCategory I] [IsFiltered I]
     {F : I ⥤ Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
@@ -116,7 +116,7 @@ theorem etaleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y
       (isColimitOfPreserves (Γ.rightDerived q) hc)⟩
 
 /-- The same canonical comparison is an isomorphism for etale sheaves of modules over a
-fixed constant commutative ring. (Stacks, Tags 03FD, 03CO and 03Q5) -/
+fixed constant commutative ring (Stacks, Tags 03FD, 03CO and 03Q5). -/
 theorem etaleModuleCohomology_isColimit_of_isFiltered (Y : Scheme.{u}) [CompactSpace Y]
     [QuasiSeparatedSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
     {I : Type u} [SmallCategory I] [IsFiltered I]

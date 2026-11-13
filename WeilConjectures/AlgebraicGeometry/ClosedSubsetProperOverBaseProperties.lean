@@ -28,8 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Closed subset properness is independent of the chosen closed subscheme structure,
-passes to closed subsets, and is preserved by images under morphisms over the base.
-Source: Stacks Project, Cohomology of Schemes, Lemmas 0CYL, 0CYN, and 0CYQ. -/
+passes to closed subsets, and is preserved by images under morphisms over the base
+(Stacks, Tags 0CYL, 0CYN and 0CYQ). -/
 theorem closed_subset_proper_over_base_properties
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (Z : TopologicalSpace.Closeds X) :

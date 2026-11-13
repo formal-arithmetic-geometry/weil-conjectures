@@ -56,8 +56,8 @@ private theorem adjunctionForgetUnitCounit
 
 set_option maxHeartbeats 500000 in
 -- Specializing the abstract adjunction identities to this dependent package exceeds the default.
-/-- Transport the module inverse image and its adjunction along a ring comparison.
-Source: Stacks Project, Modules on Sites, Lemmas 03D2, 03D3, 03D7 and Definition 03D6. -/
+/-- Transport the module inverse image and its adjunction along a ring comparison
+(Stacks, Tags 03D2, 03D3, 03D7 and 03D6). -/
 theorem etaleModuleInverseImageTransport (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1})
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

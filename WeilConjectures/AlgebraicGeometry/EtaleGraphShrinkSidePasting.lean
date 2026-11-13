@@ -54,8 +54,7 @@ private theorem cancel_side₂
   simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id_assoc,
     Category.comp_id] using hc.symm
 
-/-- The side comparison respects an open shrinking of its proper graph.
-Source: Stacks Tag 0F7J, product-graph extension, side-square calculation. -/
+/-- The side comparison respects an open shrinking of its proper graph (Stacks, Tag 0F7J). -/
 theorem etaleGraphShrinkSidePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

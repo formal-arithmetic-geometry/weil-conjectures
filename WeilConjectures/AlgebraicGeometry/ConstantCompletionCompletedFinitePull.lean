@@ -178,7 +178,7 @@ private theorem reduced_derivedPullComparison_isIso
 
 /-- Completed pullback has the asserted finite comparison in D(A/I^(n+1)) on the second
 site. Its inverse is exactly the finite reduction of the unreduced scalar comparison,
-after the canonical constant-pullback tensor reassociation. Source: Stacks 099L, 06YY. -/
+after the canonical constant-pullback tensor reassociation (Stacks, Tags 099L and 06YY). -/
 theorem completedFinitePull_existsUnique (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (n : ℕ) :
     ∃! e : (derivedPull F V adj (completedMap F A I)).functor ⋙

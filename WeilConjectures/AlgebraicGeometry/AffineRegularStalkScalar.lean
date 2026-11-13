@@ -18,9 +18,8 @@ Source: Stacks Project, Tag 01HV, Lemma 26.5.4, functoriality, and Tag 0098.
 universe u
 namespace AlgebraicGeometry.Scheme
 
-/-- A scalar endomorphism acts on the explicit unit germ by the scalar's germ.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4, functoriality, and Tag 0098. -/
+/-- A scalar endomorphism acts on the explicit unit germ by the scalar's germ
+(Stacks, Tags 01HV and 0098). -/
 theorem affineRegularStalkGerm_scalar
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (a : Γ(X, U)) :

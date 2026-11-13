@@ -55,9 +55,7 @@ private theorem additive_pi_sections_bijective {R : Type u} [CommRing R]
 
 /-- An additive functor applied to the extended alternating section complex has
 finite-product coordinates. The differential in these coordinates is the signed sum
-of the images of the coefficient restriction maps.
-Source: Stacks Project, Tag 02KE, termwise finite Čech calculation; the definitions of
-alternatingCechComplex and extension by zero. -/
+of the images of the coefficient restriction maps (Stacks, Tag 02KE). -/
 theorem additive_alternatingCech_coordinates {Y S : Scheme.{u}} {r : ℕ}
     (V : Fin r → Y.Opens)
     (G : Y.Opensᵒᵖ ⥤ ModuleCat.{u} Γ(Y, ⊤))

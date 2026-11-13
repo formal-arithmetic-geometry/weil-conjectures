@@ -131,9 +131,7 @@ private theorem quasiIso_of_affine_sections (Y : Scheme.{u})
   exact ConcreteCategory.bijective_of_isIso _
 
 /-- Applying affine pushforward to a K-injective resolution of a termwise
-quasi-coherent complex gives a quasi-isomorphism.
-Source: Stacks Project, Tag 08C2 (singleton affine covering) and Tag 0AVW
-(affine cohomology calculation). -/
+quasi-coherent complex gives a quasi-isomorphism (Stacks, Tags 08C2 and 0AVW). -/
 theorem affinePushforward_resolution_quasiIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (F J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

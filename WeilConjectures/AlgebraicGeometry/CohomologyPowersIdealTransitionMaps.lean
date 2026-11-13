@@ -48,8 +48,7 @@ private theorem product_inclusion {X : Scheme.{v}} {P Q : X.Modules}
   refine ⟨image.map (Arrow.homMk' (u ▷ F) (𝟙 F) hs), ?_⟩
   exact (image.map_ι (Arrow.homMk' (u ▷ F) (𝟙 F) hs)).trans (Category.comp_id _)
 
-/-- Transition maps for ideal powers on any scheme and any module.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, inverse-system setup. -/
+/-- Transition maps for ideal powers on any scheme and any module (Stacks, Tag 02OA). -/
 theorem cohomology_powers_ideal_transition_maps
     {X : Scheme.{v}} (J : X.IdealSheafData) (F : X.Modules) :
     ∃ i : ∀ (k n : ℕ), n ≤ k →

@@ -109,9 +109,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Vanishing against the direct image of a spectrum module sheaf implies vanishing
 against that sheaf after affine sheafification. This concerns one test sheaf and one
-cohomological degree; it assumes neither Tor bounds nor boundedness of the complex.
-Source: Stacks Project, Tags 08CG and 08DX, using exact open restriction and its
-counit on direct images. -/
+cohomological degree; it assumes neither Tor bounds nor boundedness of the complex
+(Stacks, Tags 08CG and 08DX). -/
 theorem affine_sheafification_tensor_vanishing_test (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ V : S.Opens,

@@ -25,9 +25,8 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- A nonzero section forces the scheme universe to be small in the section universe.
-Source: Stacks Project, Sites, Definition 00VR (sheaf condition), and Schemes,
-Section 01JA (gluing schemes, including disjoint unions); size argument written by S1. -/
+/-- A nonzero section forces the scheme universe to be small in the section universe
+(Stacks, Tags 00VR and 01JA). -/
 theorem etale_module_sheaf_section_univLE (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ))
     (U : X.Etale) (s : F.obj.obj (op U)) (hs : s ≠ 0) : UnivLE.{u, max v w} := by

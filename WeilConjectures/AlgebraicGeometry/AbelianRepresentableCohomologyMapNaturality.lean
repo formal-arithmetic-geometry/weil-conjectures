@@ -46,8 +46,8 @@ private lemma plusHomExt_precomp {Y : Scheme.{u}}
   simpa only [Functor.comp_map, Category.assoc] using
     congrArg (fun t ↦ t ≫ I.map ξ ≫ i.hom) (j.inv.naturality a).symm
 
-/-- Naturality of the free-representable comparison before coefficient conversion.
-Source: Stacks Project, Tag 03Q8 and the free-sheaf adjunction. -/
+/-- Naturality of the free-representable comparison before coefficient conversion
+(Stacks, Tag 03Q8). -/
 theorem abelianRepresentableCohomologyMap_naturality {X Y : Scheme.{u}}
     (h : Y ⟶ X) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     let P := (uliftYoneda.{u + 1} ⋙

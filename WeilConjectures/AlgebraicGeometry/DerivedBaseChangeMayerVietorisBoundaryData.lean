@@ -144,8 +144,8 @@ private theorem pinned_boundary_distinguished (X : Scheme.{u}) (U V W : X.Opens)
 
 /-- The explicit SES boundaries are distinguished, and their images are distinguished
 for the specified adjunction-compatible derived-functor shifts. The actual unit/counit
-shift compatibility is proved in mvCanonicalPullbackShift_compatible.
-Source: Stacks Tags 08BV and 0DJ9. -/
+shift compatibility is proved in mvCanonicalPullbackShift_compatible (Stacks, Tags 08BV and 0DJ9).
+-/
 theorem mvBoundary_canonical_data
     {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -193,8 +193,7 @@ theorem mvBoundary_canonical_data
 /-- Compatibility of the specifically constructed SES boundaries for the specifically
 constructed adjunction-compatible shifts. There are no arbitrary boundary or shift
 parameters: each side refers to the same fixed SES and right-derived shift data
-used by mvBoundary_canonical_data.
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
+used by mvBoundary_canonical_data (Stacks, Tags 08BV, 08HY and 0DJ9). -/
 theorem mvBoundary_equation
     {X S X' S' : Scheme.{u}} [IsAffine S] [IsAffine S']
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

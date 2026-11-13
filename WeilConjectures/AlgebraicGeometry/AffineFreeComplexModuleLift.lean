@@ -82,10 +82,8 @@ private lemma affineFreeCoordinates_matrix (R : CommRingCat.{u})
   rw [freeSectionsEquiv_app, LinearEquiv.apply_symm_apply, Matrix.mulVec_single_one]
   rfl
 
-/-- Lift the original complex, before any cancellation, to modules with finite bases.
-
-Source: Stacks Project, Tag 01I7 (affine associated-sheaf equivalence), and Tag 00MT
-(the supplied matrix entry). -/
+/-- Lift the original complex, before any cancellation, to modules with finite bases
+(Stacks, Tags 01I7 and 00MT). -/
 theorem exists_affine_free_complex_module_lift (R : CommRingCat.{u})
     (P : CochainComplex (Spec R).Modules ℤ) (n : ℤ → ℕ)
     (e : ∀ j : ℤ, P.X j ≅ SheafOfModules.free

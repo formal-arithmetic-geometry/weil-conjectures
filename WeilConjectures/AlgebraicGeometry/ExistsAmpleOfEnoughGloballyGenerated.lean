@@ -55,8 +55,8 @@ private theorem positiveTensorFamily_invertible {X : Scheme.{u}} (n : ℕ)
     infer_instance
 
 /-- A quasi-compact scheme with an affine nonvanishing neighbourhood of each point supplied
-by a section of a globally generated invertible module has an ample invertible module.
-Source: Stacks Project, Varieties, Lemma 09NC. -/
+by a section of a globally generated invertible module has an ample invertible module
+(Stacks, Tag 09NC). -/
 theorem exists_isAmple_of_enough_globallyGenerated (X : Scheme.{u}) [CompactSpace X]
     (h : ∀ x : X, ∃ L : X.Modules, L.IsInvertible ∧
       Nonempty (SheafOfModules.GeneratingSections L) ∧

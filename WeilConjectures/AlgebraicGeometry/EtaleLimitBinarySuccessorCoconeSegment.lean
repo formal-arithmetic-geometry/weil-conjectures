@@ -99,10 +99,8 @@ private theorem product_cocone_certificate
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
-/-- The positive-degree Mayer--Vietoris segment before descent of its squares.
-
-Source: Stacks Project, Tag 09YQ, coherent-system construction, and Tag 0A50,
-long exact sequence and coefficient naturality; pullback naturality of its construction. -/
+/-- The positive-degree Mayer--Vietoris segment before descent of its squares
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_successor_cocone_segment
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

@@ -93,8 +93,8 @@ private theorem power_quotient_stalk_zero {X : Scheme.{u}}
 
 /-- A coherent module with support `Z ∪ Z'` has a coherent submodule supported on `Z'`
 and coherent quotient supported on `Z`. The inclusion is a monomorphism `i`, and the
-quotient is its canonical cokernel. Support uses the inline nonzero-stalk convention.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.12.1, Tag 01YD. -/
+quotient is its canonical cokernel. Support uses the inline nonzero-stalk convention
+(Stacks, Tag 01YD). -/
 theorem exists_coherent_submodule_of_support_union
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

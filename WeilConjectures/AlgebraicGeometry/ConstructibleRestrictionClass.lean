@@ -26,9 +26,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A cohomology class in the restriction of a module sheaf comes from a constructible
-module sheaf mapping to it. No injectivity or properness is needed.
-
-Source: Stacks Project, Tags 03SA(3) and 03Q5. -/
+module sheaf mapping to it. No injectivity or properness is needed (Stacks, Tags 03SA and 03Q5). -/
 theorem exists_constructible_restriction_class
     {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X)

@@ -85,9 +85,8 @@ private theorem adicResidue_scalar_slice
   exact ⟨e₁ ≪≫ e₂.symm⟩
 
 /-- The finite reductions admit normalized algebraic stalk towers on one covering.
-No complex over the complete base ring is constructed here; A need not be J-complete.
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph through the choice
-of an affine weakly contractible covering; Tags 09C2, 094I, 09BI and 090K. -/
+No complex over the complete base ring is constructed here; A need not be J-complete
+(Stacks, Tags 09C6, 09C2, 094I, 09BI and 090K). -/
 theorem adicResidue_stalk_tower_family
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

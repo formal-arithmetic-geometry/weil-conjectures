@@ -23,15 +23,14 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.instAddCommGroupH
-/-- Abelian direct image, with the site categories fixed before instance search.
-Source: Stacks, Tag 01F7. -/
+/-- Abelian direct image, with the site categories fixed before instance search (Stacks, Tag 01F7).
+-/
 abbrev abelianPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤
       Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u} :=
   TopCat.Sheaf.pushforward AddCommGrpCat.{u} f.base
 
-/-- The inverse-image/direct-image adjunction on the fixed site categories.
-Source: Stacks, Tag 01F7. -/
+/-- The inverse-image/direct-image adjunction on the fixed site categories (Stacks, Tag 01F7). -/
 def abelianAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     invImage f ⊣ abelianPushforward f :=
   TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} f.base
@@ -40,9 +39,8 @@ local instance cocycle_pushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abelianPushforward f).Additive :=
   ⟨by intros; ext U x; rfl⟩
 
-/-- The common Ext-to-derived-sections part of the resolution comparisons.
-Source: Stacks Project, Tags 03FD and 06XR. This is the composition of the
-terminal-source Ext precomposition with the site-sections comparison. -/
+/-- The common Ext-to-derived-sections part of the resolution comparisons
+(Stacks, Tags 03FD and 06XR). -/
 @[irreducible]
 def abelianExtSectionsIso (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (p : ℕ) :
@@ -54,9 +52,7 @@ def abelianExtSectionsIso (X : Scheme.{u})
     siteSectionsObjIso (Opens.grothendieckTopology X) ⊤
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F) p
 
-/-- Ext compared with sections of an abelian injective resolution of a module.
-Source: Stacks Project, Tag 06XR.
--/
+/-- Ext compared with sections of an abelian injective resolution of a module (Stacks, Tag 06XR). -/
 @[irreducible]
 def abelianInjectiveResolutionIso (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
@@ -67,11 +63,8 @@ def abelianInjectiveResolutionIso (X : Scheme.{u})
   abelianExtSectionsIso X F p ≪≫ R.isoRightDerivedObj (abelianSections X) p
 
 
-/-- The injective constructor equals the original acyclic-resolution constructor.
-Source: Stacks Project, Tags 015E and 06XR. The comparison lift from the given
-injective resolution to the chosen resolution commutes with the augmentation.
-Naturality of the usual injective comparison cancels its homology map, giving
-the acyclic constructor used before this computational normalization. -/
+/-- The injective constructor equals the original acyclic-resolution constructor
+(Stacks, Tags 015E and 06XR). -/
 theorem abelianInjectiveResolutionIso_eq_acyclic (X : Scheme.{u}) (F : X.Modules)
     (R : InjectiveResolution
       ((SheafOfModules.toSheaf (moduleRings X.toRingedSpace)).obj F)) (p : ℕ) :
@@ -85,8 +78,8 @@ attribute [local irreducible] abelianResolutionIso
 attribute [local irreducible] Functor.rightDerivedObjIsoOfResolution
 attribute [local irreducible] siteSectionsObjIso
 
-/-- Changing from a forgotten module resolution to an abelian injective resolution.
-Source: Stacks Project, Tags 03FD, 015E and 06XR. -/
+/-- Changing from a forgotten module resolution to an abelian injective resolution
+(Stacks, Tags 03FD, 015E and 06XR). -/
 theorem abelian_resolution_comparison_evaluation (X : Scheme.{u})
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (I : InjectiveResolution F)

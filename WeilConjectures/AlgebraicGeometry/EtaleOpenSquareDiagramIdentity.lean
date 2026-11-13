@@ -66,9 +66,8 @@ private theorem square_identity_heq {X Y : Scheme.{u}}
   exact heq_of_eq
     (openSquareCoefficient_identity_normalized a (a ≫ 𝟙 X) (Category.comp_id a) h rfl F)
 
-/-- Restricting an identity coefficient across the identity square gives the canonical unit.
-Source: Stacks Project, Tag 09YQ (coherent coefficient systems), and sites.tex,
-Tag 03CB (composition of inverse images), with the unit coherence of the chosen adjoints. -/
+/-- Restricting an identity coefficient across the identity square gives the canonical unit
+(Stacks, Tags 09YQ and 03CB). -/
 theorem openSquareCoefficient_diagram_identity
     {I J : Type u} [Preorder I] [Preorder J]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (E : Jᵒᵖ ⥤ Scheme.{u}) (σ : J → I)

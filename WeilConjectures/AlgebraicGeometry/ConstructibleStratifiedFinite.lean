@@ -54,8 +54,7 @@ private theorem exists_immersion_of_locallyClosed {X : Scheme.{u}} {s : Set X}
 /-- A flat locally finitely presented separated quasi-finite morphism over a qcqs scheme
 admits a finite constructible locally closed stratification on whose strata it is finite.
 This packages the construction from the closed degree filtration, including the induced
-subscheme structures. Source: More on Morphisms, Lemma Tag 07RZ.
--/
+subscheme structures (Stacks, Tag 07RZ). -/
 theorem exists_constructible_stratified_finite
     {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (j : U ⟶ X) [Flat j] [LocallyOfFinitePresentation j] [IsSeparated j]

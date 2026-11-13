@@ -54,9 +54,7 @@ lemma commonFieldFibreIso_hom_snd {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ 
 
 /-- A field fibre of a pulled-back family surjects onto a prescribed field fibre, via the
 base-change projection along a surjection `Spec E → Spec K` composed with the comparison
-isomorphism `commonFieldFibreIso`.
-
-Source: Stacks Project, Tag 055G, descent from the model by common field extension. -/
+isomorphism `commonFieldFibreIso` (Stacks, Tag 055G). -/
 theorem exists_common_field_fibre_comparison {X S T : Scheme.{u}}
     (f : X ⟶ S) (g : T ⟶ S) (t : T) (s : S) (ht : g t = s)
     (K : Type u) [Field K]

@@ -27,8 +27,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Two derived objects with an overlap identification extend to one ambient derived object.
-Only objects and their transition are constructed; there is no assertion about maps.
-Source: Stacks Project, Tag 08DG, its direct-image cone construction. -/
+Only objects and their transition are constructed; there is no assertion about maps
+(Stacks, Tag 08DG). -/
 theorem exists_ambient_open_gluing_object
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

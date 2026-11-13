@@ -62,8 +62,7 @@ private theorem tilde_preservesHomology (R : CommRingCat.{u}) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Localization at one element detects the quasi-isomorphism of the associated
-sheaf complexes on its principal open.
-Source: Stacks Project, Tags 01HV and 01IB; Tag 08EE, final sheafification step. -/
+sheaf complexes on its principal open (Stacks, Tags 01HV, 01IB and 08EE). -/
 private theorem principalOpen_localized_quasiIso
     (X : Scheme.{u}) [IsAffine X]
     (T : ModuleCat.{u} (X.presheaf.obj (.op ⊤)) ⥤
@@ -222,8 +221,8 @@ private theorem quasiIso_over_of_cover (X : RingedSpace.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Localized quasi-isomorphisms on a principal-open cover give an invertible
-map on the open derived category. No pseudo-coherence or boundedness is required.
-Source: Stacks Project, Tag 08EE, final sheafification step, and Tags 01HV and 01IB. -/
+map on the open derived category. No pseudo-coherence or boundedness is required
+(Stacks, Tags 08EE, 01HV and 01IB). -/
 theorem affine_principal_cover_quasiIso_detection
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

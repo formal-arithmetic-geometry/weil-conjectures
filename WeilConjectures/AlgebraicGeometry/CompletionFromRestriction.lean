@@ -84,8 +84,7 @@ private theorem quotient_comparison_naturality {C D : Type*}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A restriction functor with unit-normalized pullback comparisons induces the
-canonical comparison with completion.
-Source: Stacks Project, Remark 088F, Lemma 087T and equation 0880. -/
+canonical comparison with completion (Stacks, Tags 088F, 087T and 0880). -/
 theorem completion_from_restriction {A : Type v} [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A))
     [LocallyOfFiniteType f] [QuasiCompact f] (I : Ideal A)

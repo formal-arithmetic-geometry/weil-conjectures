@@ -74,8 +74,7 @@ private lemma canonicalMap_naturality {X : Scheme.{u}}
   simp
 
 /-- Object cohomology over an open is the cohomology of its inverse-image sheaf,
-naturally for inclusions of opens.
-Source: Stacks Project, Cohomology on Sites, Tag 03F3; Étale Cohomology, Tag 09AX. -/
+naturally for inclusions of opens (Stacks, Tags 03F3 and 09AX). -/
 theorem etaleOpenObjectCohomology_natural
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (q : ℕ)

@@ -33,8 +33,8 @@ private theorem exact_inner_inverse_on_cycles
   rw [← Limits.kernel.lift_ι S.g a ha]
   simp only [Category.assoc, hi]
 
-/-- Positive-degree signed insertion cancellation on the singleton open.
-Source: Stacks Project, Tag 02FU, with the ordered convention of Tag 01FM. -/
+/-- Positive-degree signed insertion cancellation on the singleton open
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheaf_restrict_positive_contraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

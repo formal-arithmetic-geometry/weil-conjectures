@@ -25,8 +25,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
-/-- The lift of a normalized difference derivation has no kernel on an affine chart.
-Source: Stacks Project, Tag 08S2, final affine calculation, and Algebra, Tag 00RW. -/
+/-- The lift of a normalized difference derivation has no kernel on an affine chart
+(Stacks, Tags 08S2 and 00RW). -/
 theorem diagonalConormal_affine_lift_injective (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)

@@ -38,22 +38,21 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The algebraic lift of comparison, specified on all operations and constants.
-Source: Stacks Tags 00YV and 03D2. -/
+/-- The algebraic lift of comparison, specified on all operations and constants
+(Stacks, Tags 00YV and 03D2). -/
 def adicResidueComparisonData (X : Scheme.{u}) :=
   Classical.choice (CategoryTheory.ConstantCompletion.inverseImageData_exists
     (smallModelComparisonPullback.{u, v} X)
     (smallModelComparisonPushforward.{u, v} X) (smallModelProEtaleComparison.{u, v} X))
 
-/-- Derived comparison with its canonical constant coefficient map.
-Source: Stacks Tags 06YY and 099R. -/
+/-- Derived comparison with its canonical constant coefficient map (Stacks, Tags 06YY and 099R). -/
 def adicResidueComparison (X : Scheme.{u}) (R : Type (max v (u + 1))) [CommRing R] :=
   (CategoryTheory.ConstantCompletion.derivedPull (adicResidueComparisonData.{u, v} X)
     (smallModelComparisonPushforward.{u, v} X) (smallModelProEtaleComparison.{u, v} X)
     (CategoryTheory.ConstantCompletion.constantMap (adicResidueComparisonData.{u, v} X) R)).functor
 
-/-- Completed constant realization of a complex of coefficient modules, termwise.
-Source: Stacks Tag 09C6. -/
+/-- Completed constant realization of a complex of coefficient modules, termwise (Stacks, Tag 09C6).
+-/
 def adicResidueConstantPerfect (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (P : CochainComplex (ModuleCat.{max v (u + 1)} A) ℤ) :
@@ -71,15 +70,14 @@ def adicResidueConstantPerfect (X : Scheme.{u})
       J)).obj
       ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
 
-/-- Cohomology in the standard localization used by the coefficient package.
-Source: Stacks Tag 05RU. -/
+/-- Cohomology in the standard localization used by the coefficient package (Stacks, Tag 05RU). -/
 abbrev adicResidueCohomology {D : Type w} [SmallCategory D]
     {T : GrothendieckTopology D} (R : Sheaf T CommRingCat.{w}) (q : ℤ) :
     CategoryTheory.ConstantCompletion.D R ⥤ CategoryTheory.ConstantCompletion.Mod R :=
   @DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) q
 
-/-- Exact restriction to the actual localized site, at the same standard localization.
-Source: Stacks Tag 03DJ. -/
+/-- Exact restriction to the actual localized site, at the same standard localization
+(Stacks, Tag 03DJ). -/
 def adicResidueRestriction {D : Type w} [SmallCategory D]
     {T : GrothendieckTopology D} (R : Sheaf T CommRingCat.{w}) (U : D) :
     CategoryTheory.ConstantCompletion.D R ⥤ CategoryTheory.ConstantCompletion.D (R.over U) :=
@@ -88,8 +86,7 @@ def adicResidueRestriction {D : Type w} [SmallCategory D]
   CategoryTheory.ringedDerivedRestriction R U
 
 /-- Cohomology of the existing total tensor with a module in degree zero.
-With a K-flat first factor this is precisely the derived Tor test.
-Source: Stacks Tags 06YS and 09C6. -/
+With a K-flat first factor this is precisely the derived Tor test (Stacks, Tags 06YS and 09C6). -/
 def adicResidueTensorCohomology {D : Type w} [SmallCategory D]
     {T : GrothendieckTopology D} (R : Sheaf T CommRingCat.{w})
     (P : CategoryTheory.ConstantCompletion.Cx R)
@@ -99,8 +96,7 @@ def adicResidueTensorCohomology {D : Type w} [SmallCategory D]
     ((HomologicalComplex.single (CategoryTheory.ConstantCompletion.Mod R)
       (ComplexShape.up ℤ) 0).obj N)).homology q
 
-/-- The residue-completion projection on the actual localized site.
-Source: Stacks Tags 03DJ and 099M. -/
+/-- The residue-completion projection on the actual localized site (Stacks, Tags 03DJ and 099M). -/
 def adicResidueLocalProjection (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :=
@@ -108,8 +104,7 @@ def adicResidueLocalProjection (X : Scheme.{u})
     (CategoryTheory.ConstantCompletion.projection
       (coefficientProEtaleModelTopology.{u, v} X) A J n)
 
-/-- Exact slice category over the completed coefficient ring.
-Source: Stacks Tags 03DJ and 099M. -/
+/-- Exact slice category over the completed coefficient ring (Stacks, Tags 03DJ and 099M). -/
 abbrev AdicResidueLocalDerived (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :=
@@ -117,15 +112,15 @@ abbrev AdicResidueLocalDerived (X : Scheme.{u})
     ((CategoryTheory.ConstantCompletion.completed
       (coefficientProEtaleModelTopology.{u, v} X) A J).over U)
 
-/-- Derived finite reduction on the slice, retaining the quotient coefficient action.
-Source: Stacks Tags 06YY and 099M. -/
+/-- Derived finite reduction on the slice, retaining the quotient coefficient action
+(Stacks, Tags 06YY and 099M). -/
 def adicResidueLocalReduction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :=
   CategoryTheory.ConstantCompletion.extend (adicResidueLocalProjection.{u, v} X J U n)
 
-/-- Consecutive quotient reductions reassociate by the normalized scalar balancing map.
-Source: Stacks Tags 06YY and 099M. -/
+/-- Consecutive quotient reductions reassociate by the normalized scalar balancing map
+(Stacks, Tags 06YY and 099M). -/
 def adicResidueLocalReductionStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :=
@@ -144,8 +139,8 @@ def adicResidueLocalReductionStep (X : Scheme.{u})
           (coefficientProEtaleModelTopology.{u, v} X) A J)
         (homOfLE (Nat.le_succ n)).op).symm)
 
-/-- Hom reductions use scalar extension and conjugation by the same balancing maps.
-Source: Stacks Tag 09C6. -/
+/-- Hom reductions use scalar extension and conjugation by the same balancing maps
+(Stacks, Tag 09C6). -/
 def adicResidueHomStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -160,8 +155,7 @@ def adicResidueHomStep (X : Scheme.{u})
   let e := adicResidueLocalReductionStep.{u, v} X J U n
   e.inv.app T ≫ (CategoryTheory.ConstantCompletion.extend τ).map f ≫ e.hom.app M
 
-/-- The actual derived Hom tower between the finite reductions.
-Source: Stacks Tag 09C6. -/
+/-- The actual derived Hom tower between the finite reductions (Stacks, Tag 09C6). -/
 def adicResidueHomTower (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -171,8 +165,8 @@ def adicResidueHomTower (X : Scheme.{u})
       (adicResidueLocalReduction.{u, v} X J U n).obj M))
     (fun n ↦ ↾(adicResidueHomStep.{u, v} X J U T M n))
 
-/-- Reduction of a single morphism gives a compatible section of the Hom tower.
-Source: Stacks Tags 06YY and 09C6. -/
+/-- Reduction of a single morphism gives a compatible section of the Hom tower
+(Stacks, Tags 06YY and 09C6). -/
 def adicResidueHomSection (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -197,8 +191,8 @@ def adicResidueHomSection (X : Scheme.{u})
   exact ⟨fun n ↦ α.app n PUnit.unit, fun {i j} g ↦
     congrArg (fun k ↦ k PUnit.unit) (α.naturality g).symm⟩
 
-/-- Weak contractibility stated on the same slice and at the coefficient universe.
-Source: Stacks Tags 090K and 09C6. -/
+/-- Weak contractibility stated on the same slice and at the coefficient universe
+(Stacks, Tags 090K and 09C6). -/
 def AdicResidueSliceWeaklyContractible (X : Scheme.{u})
     (U : coefficientProEtaleSiteModel.{u, v} X) : Prop :=
   ∀ (F G : Sheaf ((coefficientProEtaleModelTopology.{u, v} X).over U)

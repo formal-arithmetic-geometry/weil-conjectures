@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The upper tail, viewed in the over category of the initial stage.
-Source: Stacks Project, Tag 09YQ. -/
+/-- The upper tail, viewed in the over category of the initial stage (Stacks, Tag 09YQ). -/
 def tailOpenIndexFunctor {I : Type u} [Preorder I] (i₀ : I) :
     (Set.Ici i₀)ᵒᵖ ⥤ Over (op i₀) where
   obj j := Over.mk (homOfLE j.unop.property).op
@@ -33,8 +32,7 @@ def tailOpenIndexFunctor {I : Type u} [Preorder I] (i₀ : I) :
   map_id _ := by apply Over.OverMorphism.ext; apply Subsingleton.elim
   map_comp _ _ := by apply Over.OverMorphism.ext; apply Subsingleton.elim
 
-/-- The explicit inverse diagram of inverse-image opens.
-Source: Stacks Project, Tag 09YQ. -/
+/-- The explicit inverse diagram of inverse-image opens (Stacks, Tag 09YQ). -/
 noncomputable abbrev tailOpenDiagram {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) : (Set.Ici i₀)ᵒᵖ ⥤ Scheme.{u} :=
@@ -52,8 +50,7 @@ noncomputable abbrev tailOpenDiagram {I : Type u} [Preorder I]
       rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, ← D.map_comp]
       rfl }
 
-/-- The explicit cone of inverse-image opens.
-Source: Stacks Project, Tag 09YQ. -/
+/-- The explicit cone of inverse-image opens (Stacks, Tag 09YQ). -/
 noncomputable abbrev tailOpenCone {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) : Cone (tailOpenDiagram D g₀ W) :=
@@ -68,14 +65,12 @@ noncomputable abbrev tailOpenCone {I : Type u} [Preorder I]
         rw [← Category.assoc, Scheme.Hom.resLE_comp_ι, Category.assoc, c.w]
     } }
 
-/-- Inclusion of the upper tail into the original directed preorder.
-Source: Stacks Project, Tag 09YQ. -/
+/-- Inclusion of the upper tail into the original directed preorder (Stacks, Tag 09YQ). -/
 def tailOpenInclusion {I : Type u} [Preorder I] (i₀ : I) : Set.Ici i₀ ⥤ I where
   obj j := j.val
   map f := homOfLE f.le
 
-/-- Restriction of the coefficient sheaves at each stage.
-Source: Stacks Project, Tag 09YQ. -/
+/-- Restriction of the coefficient sheaves at each stage (Stacks, Tag 09YQ). -/
 noncomputable abbrev tailOpenSheaf {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -86,8 +81,8 @@ noncomputable abbrev tailOpenSheaf {I : Type u} [Preorder I]
   (upperStar AddCommGrpCat.{u + 1} (tailStageOpen D g₀ W j).ι).obj (F j.val)
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Restricted coefficient transitions, constructed by the commuting open square.
-Source: Stacks Project, Tag 09YQ. -/
+/-- Restricted coefficient transitions, constructed by the commuting open square (Stacks, Tag 09YQ).
+-/
 noncomputable abbrev tailOpenCoefficient {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -103,8 +98,7 @@ noncomputable abbrev tailOpenCoefficient {I : Type u} [Preorder I]
     (by simp only [tailStageOpenMap, Scheme.Hom.resLE_comp_ι])
     (F j.val) (F k.val) (φ (homOfLE (show j.val ≤ k.val from f.le)))
 
-/-- The canonical identification of restricted limit coefficients.
-Source: Stacks Project, Tag 09YQ and inverse-image composition. -/
+/-- The canonical identification of restricted limit coefficients (Stacks, Tag 09YQ). -/
 noncomputable abbrev tailOpenLimitIso {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -192,9 +186,8 @@ private theorem openSquareCoefficient_iso
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Restriction preserves the coherence of a system of inverse-image coefficients.
-
-Source: Stacks Project, Tag 09YQ, coherent systems; inverse-image composition. -/
+/-- Restriction preserves the coherence of a system of inverse-image coefficients
+(Stacks, Tag 09YQ). -/
 theorem tailOpenRestrictedSystem_coherence
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

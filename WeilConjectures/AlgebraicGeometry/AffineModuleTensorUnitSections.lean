@@ -124,8 +124,7 @@ private theorem scalar_relation_unit_bijective
     obtain ⟨z, rfl⟩ := hq y
     exact ⟨a z, (hnormal z).symm⟩
 
-/-- The tensor unit comparison is bijective on the indicated affine sections.
-Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs. -/
+/-- The tensor unit comparison is bijective on the indicated affine sections (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_unit_sections_bijective [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

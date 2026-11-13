@@ -53,8 +53,8 @@ private theorem ker_tensor_unit {R S : Type w} [CommRing R] [CommRing S]
   rfl
 
 /-- At a point on the closed image, the kernel of the pullback unit is the local
-ring kernel times the module stalk. This involves no ideal sheaf or multiplication map.
-Source: Stacks Project, Modules, Lemma 08KS; Sheaves, Lemmas 0098 and 00AE. -/
+ring kernel times the module stalk. This involves no ideal sheaf or multiplication map
+(Stacks, Tags 08KS, 0098 and 00AE). -/
 theorem closedImmersion_unit_stalk_kernel_on_image {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (F : Y.Modules) (z : Z) :
     let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)

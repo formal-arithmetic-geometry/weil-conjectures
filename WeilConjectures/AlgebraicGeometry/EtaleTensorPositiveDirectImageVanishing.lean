@@ -33,9 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option autoImplicit false
 
 /-- The positive derived direct images of a tensor-sections quasi-coherent sheaf
-along the inclusion of opens vanish.
-Source: Stacks Project, Etale Cohomology, Tag 03P2, and Cohomology on Sites,
-Tags 03F3 and 072W. -/
+along the inclusion of opens vanish (Stacks, Tags 03P2, 03F3 and 072W). -/
 theorem etaleTensorPositiveDirectImageVanishing
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

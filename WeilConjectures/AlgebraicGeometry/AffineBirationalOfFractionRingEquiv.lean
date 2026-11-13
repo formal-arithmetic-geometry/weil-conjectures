@@ -18,9 +18,8 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- Integral affine schemes of finite type over an affine base are birational over that
-base when their fraction rings are isomorphic compatibly with the base sections.
-
-Source: Stacks Project, Tag 0552 (Lemma 29.51.7). -/
+base when their fraction rings are isomorphic compatibly with the base sections (Stacks, Tag 0552).
+-/
 theorem birationalOver_of_fractionRing_equiv
     {X Y S : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine S]
     [IsIntegral X] [IsIntegral Y]

@@ -30,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For a direct-image-acyclic module, the horizontal comparison in any system of
-edge-map resolution choices is a quasi-isomorphism. Source: Stacks Project, Tags
-01XC and 01FB, with Leray's acyclicity lemma (015E). -/
+edge-map resolution choices is a quasi-isomorphism (Stacks, Tags 01XC, 01FB and 015E). -/
 private theorem beta_quasiIso {X S : Scheme.{v}} (h : X ⟶ S)
     [HasInjectiveResolutions X.Modules] (F : X.Modules)
     (hF : (pushforward h).rightAcyclic F)
@@ -64,9 +63,7 @@ private theorem beta_quasiIso {X S : Scheme.{v}} (h : X ⟶ S)
   exact (quasiIso_iff_comp_left D.J.ι D.β).mp this
 
 /-- For an affine morphism, higher direct images of a quasi-coherent module vanish and
-cohomology is carried isomorphically by the edge map.
-Source: Stacks Project, Cohomology of Schemes, Lemma 089W and Lemma 01XC;
-Cohomology, Lemma 01F4 and Equation 01FA. -/
+cohomology is carried isomorphically by the edge map (Stacks, Tags 089W, 01XC, 01F4 and 01FA). -/
 theorem affine_morphism_cohomology_edge
     {X S : Scheme.{v}} (h : X ⟶ S) [IsAffineHom h]
     (F : X.Modules) [F.IsQuasicoherent] :

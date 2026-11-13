@@ -34,8 +34,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Affine derived pullback has a module-complex representative on the target spectrum.
-Source: Stacks Project, Tag 08DW(2), Tag 06Z0 and Tag 08DV. -/
+/-- Affine derived pullback has a module-complex representative on the target spectrum
+(Stacks, Tags 08DW, 06Z0 and 08DV). -/
 theorem exists_affine_derivedPullback_module_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsAffine X] [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

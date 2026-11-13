@@ -30,10 +30,7 @@ namespace AlgebraicGeometry
 
 /-- Local representatives whose images match at the limit become a matching
 family after refinement to a later stage. The finite family is transported by
-base change, not replaced by a global section.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-finite matching equations; Étale Cohomology Tag 09YQ. -/
+base change, not replaced by a global section (Stacks, Tags 0A35 and 09YQ). -/
 theorem etaleSet_eventualLocalStageMatching
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

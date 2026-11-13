@@ -136,8 +136,8 @@ private theorem exists_affineChart_counit (X : Scheme.{u}) [IsAffine X] :
   dsimp only [ε, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
-/-- Sheafification transfers an actual finite-free ring resolution to an affine scheme.
-Source: Stacks Project, Tag 01IB (affine equivalence), and Tag 01HV (exactness of tilde). -/
+/-- Sheafification transfers an actual finite-free ring resolution to an affine scheme
+(Stacks, Tags 01IB and 01HV). -/
 theorem exists_affine_sheaf_resolution_of_ring_model
     {T : Scheme.{u}} (U : T.Opens) [IsAffine U.toScheme]
     (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)

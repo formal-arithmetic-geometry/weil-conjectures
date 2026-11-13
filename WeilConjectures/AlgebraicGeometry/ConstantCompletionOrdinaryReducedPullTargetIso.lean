@@ -28,8 +28,8 @@ variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
 /-- The target finite reduction has a transport to the same finite quotient model as
-the source reduction.  This is the target half of the common-quotient argument.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M. -/
+the source reduction.  This is the target half of the common-quotient argument
+(Stacks, Tags 03EK, 03EL and 093M). -/
 theorem ordinaryReducedPull_targetIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

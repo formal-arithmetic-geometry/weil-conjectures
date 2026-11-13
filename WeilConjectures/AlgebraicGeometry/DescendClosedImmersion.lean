@@ -40,9 +40,7 @@ private theorem property_overPullback_comp
 
 /-- A locally finite type morphism between quasi-compact quasi-separated schemes over a
 quasi-compact quasi-separated stage becomes a closed immersion at some later stage if its
-base change to the limit is a closed immersion.
-
-Source: Stacks Project, Limits, Tag 01ZP, in Situation 081D. -/
+base change to the limit is a closed immersion (Stacks, Tags 01ZP and 081D). -/
 theorem exists_isClosedImmersion_stage_of_locallyOfFiniteType
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

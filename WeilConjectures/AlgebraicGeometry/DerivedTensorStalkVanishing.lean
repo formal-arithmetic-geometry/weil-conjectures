@@ -34,8 +34,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 /-- Tensoring a representative with a K-flat complex preserves vanishing
 of all cohomology at an individual stalk. No affine, perfect, or closed-support
-hypothesis is needed.
-Source: Stacks Project, Cohomology, Tag 06YB; Tag 08EH, support conclusion. -/
+hypothesis is needed (Stacks, Tags 06YB and 08EH). -/
 theorem derived_tensor_stalk_vanishing
     (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

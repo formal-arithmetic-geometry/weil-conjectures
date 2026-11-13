@@ -30,10 +30,8 @@ attribute [local irreducible] upperStar cohomologyMap
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Choose exact Mayer--Vietoris boundaries compatible with all stage maps and legs.
-
-Source: Stacks Project, Tag 0A50, functorial long exact sequence of an injective
-resolution, and Tag 09YQ, coherent-system restriction maps. -/
+/-- Choose exact Mayer--Vietoris boundaries compatible with all stage maps and legs
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem tailOpenCompatibleBoundaries
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I]

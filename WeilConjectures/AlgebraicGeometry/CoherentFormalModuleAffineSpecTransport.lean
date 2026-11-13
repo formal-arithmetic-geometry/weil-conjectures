@@ -63,8 +63,8 @@ private noncomputable def affineSectionsIso (X : Scheme.{u}) (V : X.affineOpens)
     rfl
 
 /-- Transport coherent formal modules from an affine open to its canonical spectrum,
-including the natural comparison of the underlying A-module section diagrams.
-Source: Stacks Project, Lemma 087X, affine reduction, and Lemma 087W. -/
+including the natural comparison of the underlying A-module section diagrams
+(Stacks, Tags 087X and 087W). -/
 theorem coherentFormalModule_affine_spec_transport
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

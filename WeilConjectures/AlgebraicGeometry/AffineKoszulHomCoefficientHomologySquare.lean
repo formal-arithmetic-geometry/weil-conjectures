@@ -73,9 +73,8 @@ private theorem homology_coefficient_square
     (h₁.vert_comp h₂ |>.vert_comp h₃).w
 
 
-/-- The finite free coefficient square remains commutative on homology.
-Source: Stacks Project, Tag 0BQZ, displayed Hom coefficient square;
-Tag 01HV, exact associated sheafification. -/
+/-- The finite free coefficient square remains commutative on homology (Stacks, Tags 0BQZ and 01HV).
+-/
 theorem affine_koszul_hom_coefficient_homology_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n m : ℕ) (f : Fin n → Γ(Y, U.1))

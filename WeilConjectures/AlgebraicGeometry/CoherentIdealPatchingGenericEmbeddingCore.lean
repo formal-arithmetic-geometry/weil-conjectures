@@ -84,7 +84,7 @@ private theorem stalk_sum_isIso (X : Scheme.{u}) (x : X) (r : ℕ)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Core geometric construction of the patching embedding, omitting the generic
-stalk bijectivity conclusion.  Source: Stacks Project, Tag 01YL, third paragraph. -/
+stalk bijectivity conclusion (Stacks, Tag 01YL). -/
 theorem coherent_ideal_patching_generic_embedding_core
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

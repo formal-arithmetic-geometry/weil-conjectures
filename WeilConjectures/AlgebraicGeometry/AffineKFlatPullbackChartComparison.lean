@@ -56,8 +56,8 @@ private theorem isKFlat_of_iso {X : Scheme.{u}}
   exact (hK F hF i).of_iso
     (((MonoidalCategory.curriedTensor _).map₂CochainComplex.obj F).mapIso e)
 
-/-- Transport the affine derived pullback calculation through canonical spectrum charts.
-Source: Stacks Project, Tag 08DW(2), using Tag 08DV. -/
+/-- Transport the affine derived pullback calculation through canonical spectrum charts
+(Stacks, Tags 08DW and 08DV). -/
 theorem affine_kFlat_pullback_chart_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsAffine X] [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

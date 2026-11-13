@@ -97,9 +97,8 @@ private theorem unit_stalk_iso (X : Scheme.{u}) (x : X) :
   exact hg
 
 /-- The unit germ identifies the ambient stalk ring with the stalk of the sheafification
-of the regular coordinate module, after ordinary open direct image.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (6)-(7), and Tags 01IB and 0098. -/
+of the regular coordinate module, after ordinary open direct image
+(Stacks, Tags 01HV, 01IB and 0098). -/
 theorem affineRegularStalkComparison_bijective
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) :
     Function.Bijective (affineRegularStalkComparison X x U hxU hU)  := by

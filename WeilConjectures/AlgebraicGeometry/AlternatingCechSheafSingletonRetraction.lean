@@ -41,8 +41,7 @@ private theorem cechCapFunctor_isContinuous {X : Scheme.{u}} (W : X.Opens) :
   exact Functor.isContinuous_of_iso e.symm (Opens.grothendieckTopology X)
     (Opens.grothendieckTopology X)
 
-/-- The local augmentation has a left inverse in degree zero.
-Source: Stacks Project, Tag 02FU, degree-zero insertion; Tag 01FM for increasing tuples. -/
+/-- The local augmentation has a left inverse in degree zero (Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheafAugmentation_restrict_degreeZero_retraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

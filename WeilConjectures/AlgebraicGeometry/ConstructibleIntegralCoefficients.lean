@@ -36,11 +36,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A torsion abelian sheaf is constructible as an integral module sheaf exactly
-when its underlying sheaf of sets is constructible.
-
-Source: Stacks Project, Definition 03RW (2), (3), Lemma 095E, and the comparison
-needed in the retract argument of Lemma 03SD. This comparison is written out here;
-03RW does not identify the two notions for nontorsion sheaves. -/
+when its underlying sheaf of sets is constructible (Stacks, Tags 03RW, 095E and 03SD). -/
 theorem isConstructibleSheaf_integral_iff {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : X.IsTorsionAbelianSheaf F) :

@@ -26,9 +26,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Homology of the derived-unit section map agrees with classical right-derived
-base change, through the canonical single-complex comparisons.
-
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA. -/
+base change, through the canonical single-complex comparisons (Stacks, Tags 01F8, 01F9 and 01FA). -/
 theorem derivedUnit_classicalPullback {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G

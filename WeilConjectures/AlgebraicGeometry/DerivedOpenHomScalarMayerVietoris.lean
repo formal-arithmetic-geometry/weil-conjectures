@@ -128,8 +128,7 @@ set_option maxHeartbeats 1600000 in
 -- Instantiating the four derived adjunctions compares large localization functors.
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
 Its preceding term is Hom into the negative shift on the overlap. No compactness,
-perfectness, quasi-coherence or support hypothesis is required.
-Source: Stacks Project, Tag 08BW and the globalization paragraph of Tag 08EJ. -/
+perfectness, quasi-coherence or support hypothesis is required (Stacks, Tags 08BW and 08EJ). -/
 theorem derived_open_hom_scalar_mayer_vietoris
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

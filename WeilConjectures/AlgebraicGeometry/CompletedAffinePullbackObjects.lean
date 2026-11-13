@@ -66,8 +66,8 @@ private theorem coherent_pushforward {X Y : Scheme.{u}} [IsNoetherian Y]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The geometric and coherence part of completed affine base change.
-Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 0887 and 02O5. -/
+/-- The geometric and coherence part of completed affine base change
+(Stacks, Tags 088B, 0887 and 02O5). -/
 theorem completedAffine_pullback_objects
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

@@ -25,8 +25,8 @@ variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
-/-- The target quotient restriction is canonically the target projection change-of-scalars.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL. -/
+/-- The target quotient restriction is canonically the target projection change-of-scalars
+(Stacks, Tags 03EK and 03EL). -/
 theorem ordinaryReducedPull_targetQuotientIso (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (n : ℕ) :
     Nonempty ((pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙

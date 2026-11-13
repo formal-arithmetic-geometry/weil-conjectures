@@ -79,9 +79,8 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
       (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app G
     exact Finite.of_equiv M e.toEquiv.symm
 
-/-- Finite module trivializations give a constructible underlying sheaf of sets.
-
-Source: Stacks Project, Tag 095E(3), and the passage from (3) to (1) in Tag 09Z6. -/
+/-- Finite module trivializations give a constructible underlying sheaf of sets
+(Stacks, Tags 095E and 09Z6). -/
 theorem isConstructibleEtaleSheafOfSets_of_module
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

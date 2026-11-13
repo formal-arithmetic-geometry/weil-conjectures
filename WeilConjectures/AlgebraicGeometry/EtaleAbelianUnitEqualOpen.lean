@@ -144,9 +144,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Equality of inverse-image unit sections is characterized by the inverse image
-of an open in the original étale object being the whole base-changed object.
-Source: Stacks Project, Étale Cohomology Tag 09XM (agreement open),
-Tag 03Q1 (inverse image on geometric stalks), and Tag 03S2 (étale restriction). -/
+of an open in the original étale object being the whole base-changed object
+(Stacks, Tags 09XM, 03Q1 and 03S2). -/
 theorem etale_abelian_unit_equal_open
     (S : Scheme.{u})
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})

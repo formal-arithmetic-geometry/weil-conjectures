@@ -416,9 +416,8 @@ private theorem cech_generator_vanishing
 
 end LocalCalculation
 
-/-- An invertible augmented extended Cech unit forces local derived completeness.
-
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F. -/
+/-- An invertible augmented extended Cech unit forces local derived completeness
+(Stacks, Tags 099B and 099F). -/
 theorem ringedExtendedCech_unit_isIso_implies_complete
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

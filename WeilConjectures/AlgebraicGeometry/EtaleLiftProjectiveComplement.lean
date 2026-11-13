@@ -82,9 +82,8 @@ private theorem quotient_tensor_equiv
     TensorProduct.smul_tmul', smul_eq_mul, mul_one]
   rfl
 
-/-- A finite projective quotient module acquires a lifted projective complement.
-
-Source: Stacks Project, More on Algebra, Tag 07M7, first paragraph, and Tag 07M5. -/
+/-- A finite projective quotient module acquires a lifted projective complement
+(Stacks, Tags 07M7 and 07M5). -/
 theorem exists_etale_lift_projective_complement
     (A : Type u) [CommRing A] (J : Ideal A)
     (P : Type u) [AddCommGroup P] [Module (A ⧸ J) P]

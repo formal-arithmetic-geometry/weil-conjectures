@@ -74,10 +74,8 @@ set_option maxHeartbeats 200000 in
 -- The transported cohomology objects require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
-/-- Canonical restricted diagrams admit the compatible exact successor segment.
-
-Source: Stacks Project, Tag 0A50, its coefficient-natural
-long exact sequence; Tag 09YQ, canonical coherent-system maps. -/
+/-- Canonical restricted diagrams admit the compatible exact successor segment
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_mayerVietoris_maps
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

@@ -142,8 +142,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Identify the pushforward of the extended ideal with its ambient ideal product,
-including the compatibility with the inclusions into the closed structure module.
-Source: Stacks Project, Tag 01QY. -/
+including the compatibility with the inclusions into the closed structure module (Stacks, Tag 01QY).
+-/
 theorem closed_structure_ideal_product_iso
     {X W : Scheme.{u}} (i : W ⟶ X) [IsClosedImmersion i]
     (I : X.IdealSheafData) :

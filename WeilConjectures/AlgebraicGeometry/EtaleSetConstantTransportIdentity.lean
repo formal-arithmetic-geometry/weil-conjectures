@@ -142,9 +142,8 @@ private lemma constant_id (P : Scheme.{u}) (A : Type (u + 1)) :
   simp
 
 /-- Transporting a map from a constant sheaf along the identity changes only
-its target by the identity-composition cast. The map need not be invertible.
-
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5. -/
+its target by the identity-composition cast. The map need not be invertible
+(Stacks, Tags 03CB, 03CC and 03P5). -/
 theorem etaleSetConstantTransportIdentity
     (S P : Scheme.{u}) (s : P ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (A : Type (u + 1))

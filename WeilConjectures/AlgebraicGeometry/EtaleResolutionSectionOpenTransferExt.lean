@@ -18,9 +18,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- Transfer of Ext cocycles represented by sections over an open.
-Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality),
-03F3 (localization), and 0A50 (section complexes). -/
+/-- Transfer of Ext cocycles represented by sections over an open
+(Stacks, Tags 01F8, 01FB, 03F3 and 0A50). -/
 theorem resolutionSection_transfer_open_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

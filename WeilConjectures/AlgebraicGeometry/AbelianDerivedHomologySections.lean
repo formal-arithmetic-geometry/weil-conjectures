@@ -23,8 +23,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Every homology section locally comes from a derived section of the free
-abelian sheaf. The comparison is specified by homology and the identity generator.
-Source: Stacks Project, Tags 072W and 03Q8. -/
+abelian sheaf. The comparison is specified by homology and the identity generator
+(Stacks, Tags 072W and 03Q8). -/
 theorem exists_abelianDerivedHomology_sections_comparison (S : Scheme.{u}) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     ∃ τ : (abelianComparisonFree S ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙

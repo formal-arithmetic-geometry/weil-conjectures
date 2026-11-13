@@ -23,8 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Restriction along an open immersion for the small coefficient universe.
-The continuous localization functor is used directly, without changing coefficient data.
-Source: Stacks Sites 00XZ. -/
+The continuous localization functor is used directly, without changing coefficient data
+(Stacks, Tag 00XZ). -/
 noncomputable def etaleOpenSmallRestriction {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u} ⥤

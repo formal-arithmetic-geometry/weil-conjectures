@@ -207,10 +207,7 @@ private lemma constantModuleTransition_comp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical constant-module pushforward maps preserve identity and composition
-contravariantly in the scheme over the base.
-
-Source: Stacks Project, Tag 09Z1, system of sheaves and its direct-image transitions;
-Tag 09Z6, finite approximation paragraph. -/
+contravariantly in the scheme over the base (Stacks, Tags 09Z1 and 09Z6). -/
 theorem constantModulePushforwardMap_id_comp
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ) :
     (∀ {X Y : Scheme.{u}} (f : Y ⟶ X),

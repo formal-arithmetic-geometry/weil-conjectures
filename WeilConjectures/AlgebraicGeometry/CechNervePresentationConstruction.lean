@@ -249,9 +249,7 @@ noncomputable def nerveFactorProjection (k : ℕ) (y : Fin (k + 1) → Fin n)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Compatible presentations of a base and its covering members present every
-nonempty repeated intersection.
-Source: Stacks Project, Tag 099U, the finite Čech limit reduction, and the
-universal property of a wide pullback. -/
+nonempty repeated intersection (Stacks, Tag 099U). -/
 noncomputable def presentedNerveIsLimit
     (hB : IsLimit ((Scheme.ProEt.forget Y ⋙ Over.forget Y).mapCone P.pres.cone))
     (hA : ∀ a, IsLimit

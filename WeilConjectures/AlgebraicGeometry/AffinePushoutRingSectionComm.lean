@@ -26,8 +26,8 @@ local notation "r₀" => tensorPullbackRingMap f
 set_option hygiene false in
 local notation "t₀" =>
   (TopCat.Sheaf.inverseImageConstruction f.base CommRingCat.{u}).map ρ
-/-- The section legs agree on the base ring, by the adjunction unit and pushout equation.
-Source: Stacks Project, Tag 01SB. -/
+/-- The section legs agree on the base ring, by the adjunction unit and pushout equation
+(Stacks, Tag 01SB). -/
 theorem affinePushoutSection_comm
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpushout : IsPushout r₀ t₀ b t) (V : X.Opens) :

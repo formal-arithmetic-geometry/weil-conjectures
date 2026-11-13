@@ -437,10 +437,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finite coverings in the affine ind-etale basis have zero positive Čech cohomology
-with coefficients in the intrinsic comparison pullback of an injective etale module.
-Source: Stacks Project, Tag 099U, paragraphs beginning "To check condition (3)" and
-"Let U be an etale covering"; module coefficients use the augmented free-module
-Čech resolution (Cohomology on Sites, Tag 03FC). -/
+with coefficients in the intrinsic comparison pullback of an injective etale module
+(Stacks, Tags 099U and 03FC). -/
 theorem coefficientComparison_affineCech_vanishing (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

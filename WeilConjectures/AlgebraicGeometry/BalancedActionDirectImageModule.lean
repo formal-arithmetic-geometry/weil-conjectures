@@ -35,9 +35,7 @@ private theorem affine_section_ext {X : Scheme.{u}} (M : X.Modules)
   exact ⟨V, hVU, hzV, h ⟨V, hV⟩ (homOfLE hVU)⟩
 
 /-- Extend the balanced action to the direct-image structure algebra, without realizing
-its module on the base-changed scheme.
-
-Source: Stacks Project, Tags 01LX and 01SB; Tag 0897, relative-spectrum paragraph. -/
+its module on the base-changed scheme (Stacks, Tags 01LX, 01SB and 0897). -/
 theorem balancedAction_directImage_module
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

@@ -26,7 +26,7 @@ namespace AlgebraicGeometry
 
 /-- The object associated to the shifted Koszul complex on powers of a finite
 sequence is perfect; its canonical augmentation restricts to an isomorphism on
-the union of the principal opens. Source: Stacks, Tag 08CX. -/
+the union of the principal opens (Stacks, Tag 08CX). -/
 theorem affine_perfect_koszul_principal_unit
     (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) (he : 1 ≤ e)
     [HasDerivedCategory.{b}

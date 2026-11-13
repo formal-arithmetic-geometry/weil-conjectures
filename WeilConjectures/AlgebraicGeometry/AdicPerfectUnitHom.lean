@@ -210,9 +210,8 @@ private theorem adic_quotient_linear {A : Type w} [CommRing A]
   exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The natural ordinary quotient Hom comparison, with its rank-one computation.
-Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-quotient total-Hom calculation; More on Algebra, Tag 0A8H. -/
+/-- The natural ordinary quotient Hom comparison, with its rank-one computation
+(Stacks, Tags 093T, 09C6 and 0A8H). -/
 theorem adicPerfectUnitHom (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

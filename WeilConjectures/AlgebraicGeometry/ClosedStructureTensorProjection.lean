@@ -109,8 +109,8 @@ private theorem exists_projectionComponent {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The closed-immersion ordinary projection formula, natural in the module.
-Source: Stacks Project, Modules, Tags 08KS and 01CB; Sheaves, Tag 0098 for pullback stalks. -/
+/-- The closed-immersion ordinary projection formula, natural in the module
+(Stacks, Tags 08KS, 01CB and 0098). -/
 theorem nonempty_closedStructure_tensor_projection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     letI := SheafOfModules.monoidalCategory Y.sheaf

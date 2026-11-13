@@ -29,8 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- An étale algebra mapping to `A/J` has a principal localization whose quotient
-is `A/J`, with the equivalence extending the given map.
-Source: Stacks Project, Tag 07M7, last paragraph, with Tags 00U7 and 00U8. -/
+is `A/J`, with the equivalence extending the given map (Stacks, Tags 07M7, 00U7 and 00U8). -/
 theorem exists_localization_quotient_equiv_of_etale_section
     (A C : Type u) [CommRing A] [CommRing C] [Algebra A C]
     (J : Ideal A) (τ : C →ₐ[A] A ⧸ J)

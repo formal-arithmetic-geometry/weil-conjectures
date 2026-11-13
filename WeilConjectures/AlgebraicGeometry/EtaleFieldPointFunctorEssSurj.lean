@@ -30,8 +30,8 @@ attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 variable (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
   [IsSepClosure K Ksep]
 
-/-- Every discrete continuous Galois set is the geometric points of an étale scheme.
-Source: Stacks Project, Tag 03QR, construction of an inverse. -/
+/-- Every discrete continuous Galois set is the geometric points of an étale scheme
+(Stacks, Tag 03QR). -/
 theorem etaleFieldPointFunctor_essSurj :
     (etaleFieldPointFunctor K Ksep).EssSurj := by
   classical

@@ -54,8 +54,8 @@ private theorem tensor_ideal_range {A S T : Type u} [CommRing A]
       exact Submodule.add_mem _ hx hy
 
 open scoped TensorProduct in
-/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis.
-Source: Stacks, Tag 05GG and right exactness of tensor, used in Tag 0889(1). -/
+/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis
+(Stacks, Tags 05GG and 0889). -/
 private theorem adic_tensor_unit_quotient {A : Type u} [CommRing A]
     (I : Ideal A) (hI : I.FG) (T : ModuleCat.{u} A) (n : ℕ) :
     ∃ e : (T ⧸ (I ^ n • (⊤ : Submodule A T))) ≃ₗ[A]
@@ -139,8 +139,8 @@ private theorem adic_tensor_unit_bijective {A : Type u} [CommRing A]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 open scoped TensorProduct in
-/-- The affine-chart pullback unit is naturally the tensor scalar-extension unit.
-Source: Stacks Project, Tags 01I9 and 01IA; Tag 088B, affine base-change paragraph. -/
+/-- The affine-chart pullback unit is naturally the tensor scalar-extension unit
+(Stacks, Tags 01I9, 01IA and 088B). -/
 private theorem affineSpec_tensor_sections_comparison
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (R : Type u) [CommRing R] [Algebra Γ(Y, U.1) R] :
@@ -250,10 +250,8 @@ private theorem affineSpec_tensor_sections_comparison
 
 /-- A natural comparison on all module sheaves is invertible on quasi-coherent
 sheaves whose affine sections are killed by a positive power of the completion ideal.
-This statement concerns one sheaf at a time, without formal systems or transitions.
-
-Source: Stacks Project, Tags 088B (completed base change), 05GG (completion quotient),
-and 01I9 (affine pullback). -/
+This statement concerns one sheaf at a time, without formal systems or transitions
+(Stacks, Tags 088B, 05GG and 01I9). -/
 theorem completedAffineSections_powerTorsion
     {Y : Scheme.{u}} [IsNoetherian Y] (J : Y.IdealSheafData) (U : Y.affineOpens) :
     let B := Γ(Y, U.1)

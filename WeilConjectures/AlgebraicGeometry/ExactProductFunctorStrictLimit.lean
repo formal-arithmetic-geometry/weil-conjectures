@@ -197,8 +197,8 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
 
 /-- The full signed Roos specification for exact product-preserving functors.
 This packages verbatim the witnesses and normalization equations of
-`exactProductFunctorStrictLimit`, so specialization can retain a named predicate.
-Source: Stacks 0940, 0941 and 07KC. -/
+`exactProductFunctorStrictLimit`, so specialization can retain a named predicate
+(Stacks, Tags 0940, 0941 and 07KC). -/
 def StrictLimitAssertions (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)

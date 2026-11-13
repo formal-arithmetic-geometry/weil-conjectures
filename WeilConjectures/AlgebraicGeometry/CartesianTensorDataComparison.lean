@@ -77,8 +77,8 @@ private theorem iso_pullback_computes {Y Y' : Scheme.{u}} (i : Y' ≅ Y)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
-/-- Tensor base change in a specified cartesian square, with identified tensor factors.
-Source: Stacks Project, Tag 0A1D, displayed cartesian square and its isomorphism. -/
+/-- Tensor base change in a specified cartesian square, with identified tensor factors
+(Stacks, Tag 0A1D). -/
 theorem cartesian_tensor_data_comparison
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

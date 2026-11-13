@@ -111,9 +111,7 @@ private noncomputable def section_on_open {X : Scheme.{u}} (E : X.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A section of a quasi-coherent module on an open of a Noetherian scheme
-lifts to a coherent submodule.
-
-Source: Stacks Project, Tag 01YB, first paragraph; Tags 01PF and 01XZ. -/
+lifts to a coherent submodule (Stacks, Tags 01YB, 01PF and 01XZ). -/
 theorem exists_coherent_open_section_carrier
     {X : Scheme.{u}} [IsNoetherian X]
     (E : X.Modules) [E.IsQuasicoherent] (U : X.Opens) (s : E.val.obj (op U)) :

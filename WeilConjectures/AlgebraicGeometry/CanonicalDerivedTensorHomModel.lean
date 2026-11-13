@@ -27,18 +27,14 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- The functorial resolution already used by derived internal Hom, with the scheme's
-Grothendieck instance supplied explicitly.
-Source: Stacks, cohomology.tex, 08DJ.
--/
+Grothendieck instance supplied explicitly (Stacks, Tag 08DJ). -/
 def schemeHomKInjectiveResolution (X : Scheme.{uCD}) :
     CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ ⥤
       CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ :=
   haveI := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace)
   CochainComplex.kInjectiveResolutionFunctor.{uCD} _
 
-/-- Inverse of the localized quasi-isomorphism into the fixed resolution.
-Source: Stacks, cohomology.tex, 08DJ.
--/
+/-- Inverse of the localized quasi-isomorphism into the fixed resolution (Stacks, Tag 08DJ). -/
 def schemeHomResolutionInverse (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (M : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ) :
@@ -53,9 +49,7 @@ def schemeHomResolutionInverse (X : Scheme.{uCD})
   exact inv (DerivedCategory.Q.map
     ((CochainComplex.toKInjectiveResolution.{uCD} _).app M))
 
-/-- The localization factorization for the fixed functorial K-injective model.
-Source: Stacks, cohomology.tex, 08DJ.
--/
+/-- The localization factorization for the fixed functorial K-injective model (Stacks, Tag 08DJ). -/
 def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (L M : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ) :
@@ -78,9 +72,7 @@ def schemeDerivedInternalHomResolutionIso (X : Scheme.{uCD})
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{uCD} _ M⟩))
     (DerivedCategory.Q.op.prod DerivedCategory.Q)).app (op L, M)
 
-/-- The uncurried component of a map into the fixed Hom complex.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, componentwise evaluation.
--/
+/-- The uncurried component of a map into the fixed Hom complex (Stacks, Tag 08DJ). -/
 def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
     (P L M : CochainComplex (SheafOfModules.{uCD} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -100,9 +92,8 @@ def schemeTensorHomUncurryComponent (X : Scheme.{uCD})
 /-- Naturality and the actual representative evaluation equation characterize the family.
 The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
-P^p tensor L^q. The localization factorization and resolution map fix both targets.
-Source: Stacks, cohomology.tex, Tag 08DJ.
--/
+P^p tensor L^q. The localization factorization and resolution map fix both targets
+(Stacks, Tag 08DJ). -/
 def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (e : ∀ K L M : schemeDerivedCategory X,
@@ -138,8 +129,8 @@ def IsCanonicalDerivedTensorHom (X : Scheme.{uCD})
 /-- Naturality and the actual representative evaluation equation characterize the family.
 The chain map ψ is fixed on every total-tensor summand by currying the degree-p
 component of φ, projected to Hom(L^q,I(M)^(q+p)). The symmetry restores the order
-P^p tensor L^q. The localization factorization and resolution map fix both targets.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+P^p tensor L^q. The localization factorization and resolution map fix both targets
+(Stacks, Tag 08DJ). -/
 def IsCanonicalDerivedTensorHomMap (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (e : ∀ K L M : schemeDerivedCategory X,

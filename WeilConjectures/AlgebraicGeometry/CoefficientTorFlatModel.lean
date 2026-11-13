@@ -24,8 +24,7 @@ namespace CategoryTheory
 variable {C : Type w} [SmallCategory C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{w})
 
-/-- Homology of the ordinary tensor with a degree-zero module.
-Source: Stacks Tags 06YN and 08FZ. -/
+/-- Homology of the ordinary tensor with a degree-zero module (Stacks, Tags 06YN and 08FZ). -/
 abbrev coefficientModelTensorTest (P : ConstantCompletion.Cx R)
     (M : ConstantCompletion.Mod R) (q : ℤ) : ConstantCompletion.Mod R :=
   ((((ringedKoszulTensor R).obj P).obj
@@ -87,8 +86,8 @@ private theorem nativeKFlat_iff (P : ConstantCompletion.Cx R) :
       (CochainComplex.mapBifunctor Z P (curriedTensor _))).mpr (h Z hZ')
     exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) ht, ht⟩
 
-/-- Every coefficient-model derived object has a K-flat representative with flat terms.
-Source: Stacks Project, Tag 06YS. -/
+/-- Every coefficient-model derived object has a K-flat representative with flat terms
+(Stacks, Tag 06YS). -/
 theorem exists_coefficientModelFlatKFlatRepresentative (K : ConstantCompletion.D R) :
     ∃ P : ConstantCompletion.Cx R, P.IsKFlatIndependentCoefficients ∧
       (∀ i, SheafOfModules.IsFlat (P.X i)) ∧
@@ -102,8 +101,8 @@ theorem exists_coefficientModelFlatKFlatRepresentative (K : ConstantCompletion.D
     ⟨asIso ((ConstantCompletion.Q R).map π) ≪≫
       (ConstantCompletion.Q R).objObjPreimageIso K⟩⟩
 
-/-- Tensor-test homology depends only on the derived class of a K-flat representative.
-Source: Stacks Project, Tags 06YN and 06YY. -/
+/-- Tensor-test homology depends only on the derived class of a K-flat representative
+(Stacks, Tags 06YN and 06YY). -/
 theorem coefficientModelTensorTest_iso (P Q : ConstantCompletion.Cx R)
     (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
     (e : (ConstantCompletion.Q R).obj P ≅ (ConstantCompletion.Q R).obj Q)
@@ -162,8 +161,8 @@ private theorem nativeTor_iff (K : ConstantCompletion.D R) (a b : ℤ) (hab : a 
     exact ⟨(DerivedCategory.isGE_iff _ a).mpr (fun q hq ↦ hz q (Or.inl hq)),
       (DerivedCategory.isLE_iff _ b).mpr (fun q hq ↦ hz q (Or.inr hq))⟩
 
-/-- A coefficient-model Tor bound is exactly a flat complex in the same interval.
-Source: Stacks Project, Tags 08G0 and 08G1. -/
+/-- A coefficient-model Tor bound is exactly a flat complex in the same interval
+(Stacks, Tags 08G0 and 08G1). -/
 theorem coefficientModelTorAmplitude_iff_flatModel (K : ConstantCompletion.D R)
     (a b : ℤ) (hab : a ≤ b) :
     HasCoefficientModelTorAmplitude R K a b ↔

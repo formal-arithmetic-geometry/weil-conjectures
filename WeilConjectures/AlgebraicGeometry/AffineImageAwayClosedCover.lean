@@ -22,9 +22,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An affine open in one member of a closed cover, disjoint from the other member,
-has affine open image in the reduced ambient scheme.
-
-Source: Stacks Project, Varieties, Lemma 09NX, final paragraph. -/
+has affine open image in the reduced ambient scheme (Stacks, Tag 09NX). -/
 theorem exists_affineOpen_image_away_closed_cover
     {X Y : Scheme.{u}} [IsReduced X] (f : Y ⟶ X) [IsClosedImmersion f]
     (T : TopologicalSpace.Closeds X) (hcover : Set.range f ∪ (T : Set X) = Set.univ)

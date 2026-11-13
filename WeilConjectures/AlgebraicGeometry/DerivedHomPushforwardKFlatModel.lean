@@ -82,9 +82,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- For a K-flat source and K-injective complex on the source scheme, derived
 internal Hom into its termwise direct image is represented by the direct image of
-internal Hom from the termwise tensor pullback.
-
-Source: Stacks Project, Cohomology, Remark 08I3, Section 08DH, Tags 06YS and 079P. -/
+internal Hom from the termwise tensor pullback (Stacks, Tags 08I3, 08DH, 06YS and 079P). -/
 theorem nonempty_derivedHom_pushforward_kFlat_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [hY : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

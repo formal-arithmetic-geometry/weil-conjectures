@@ -43,9 +43,7 @@ private theorem over_pullback_comparison_square {S T R : Scheme.{u}}
   simpa only [hx, hy] using over_pullback_square X Y f r
 
 /-- Finite locally freeness, and its degree, descend to a finite stage of an inverse limit
-of schemes with affine transition morphisms.
-
-Source: Stacks Project, Limits, Lemma Tag 06AC, in Situation Tag 081D. -/
+of schemes with affine transition morphisms (Stacks, Tags 06AC and 081D). -/
 theorem descend_finite_locally_free
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -32,8 +32,8 @@ namespace AlgebraicGeometry
 set_option maxHeartbeats 600000 in
 -- Elaborating naturality across the composed affine equivalences needs more heartbeats.
 set_option backward.isDefEq.respectTransparency false in
-/-- The finite completed-module equivalence with natural local section cones.
-Source: Stacks Project, Lemma 087W and the affine reduction in Lemma 087X. -/
+/-- The finite completed-module equivalence with natural local section cones
+(Stacks, Tags 087W and 087X). -/
 theorem coherentFormalModule_affine_limit_equivalence
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

@@ -134,8 +134,7 @@ noncomputable def abelianHigherDirectImageClass {S Y : Scheme.{v}} (h : Y ⟶ S)
         (FreeAbelianGroup.of (ULift.up (𝟙 U))))
 
 /-- The explicit class map commutes with pullback of a raw class and the canonical
-higher-direct-image transition. Source: Stacks Project, Tag 03Q8 (the canonical
-sectionwise comparison), Tag 09Z1 (compatibility of comparison maps). -/
+higher-direct-image transition (Stacks, Tags 03Q8 and 09Z1). -/
 theorem abelianHigherDirectImageClass_pullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

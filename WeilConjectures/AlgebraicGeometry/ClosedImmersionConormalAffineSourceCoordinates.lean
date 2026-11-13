@@ -38,10 +38,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine source coordinate for the iterated tensor pullback, normalized on
 scalar multiples of the successive adjunction units of ideal sections.
-No conormal morphism or target coordinate occurs in this statement.
-
-Source: Stacks Project, Morphisms, Lemma 0473, affine reduction; Schemes,
-Lemma 01JU (1); Morphisms, Lemma 01R3 (2). -/
+No conormal morphism or target coordinate occurs in this statement
+(Stacks, Tags 0473, 01JU and 01R3). -/
 theorem closedImmersion_conormal_affine_source_coordinates
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

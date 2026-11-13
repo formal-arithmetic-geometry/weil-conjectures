@@ -73,8 +73,8 @@ private theorem mv_degreewise_split (X : Scheme.{u}) (U V : X.Opens)
   exact ⟨((schemeMayerVietorisComplex_shortExact X U V hcover I hI).map_of_exact
     (HomologicalComplex.eval _ _ n)).splittingOfInjective⟩
 
-/-- The explicitly constructed boundary commutes with the recorded direct-image comparisons.
-Source: Stacks Tags 08BV, 0D5T and 0DJ9. -/
+/-- The explicitly constructed boundary commutes with the recorded direct-image comparisons
+(Stacks, Tags 08BV, 0D5T and 0DJ9). -/
 theorem schemeMV_directImage_boundary
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     (hcover : U ⊔ V = ⊤)

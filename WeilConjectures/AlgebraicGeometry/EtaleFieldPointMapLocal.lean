@@ -26,11 +26,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The singleton at a point of an étale K-scheme is the spectrum of its residue field.
-The base algebra is the canonical map recovered from the residue-field point by Spec.
-Source: Stacks Project, Tag 02GL(1). Discreteness follows from quasi-finiteness over a
-one-point base. The residue-field map is étale, so the extension is finite separable.
-The residue-field point lifts to the singleton open; it is a surjective closed immersion
-into a reduced scheme, hence an isomorphism. -/
+The base algebra is the canonical map recovered from the residue-field point by Spec
+(Stacks, Tag 02GL). -/
 private theorem singleton_chart
     (K : Type u) [Field K] (X : Scheme.Etale (Spec (CommRingCat.of K))) (x : X.left) :
     let i := Spec.homEquiv (X.left.fromSpecResidueField x ≫ X.hom)

@@ -32,10 +32,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Vanishing of derived constant etale cohomology agrees with vanishing of the
 Ext-defined sheaf cohomology on an isomorphic scheme. No finiteness, affineness,
-normality, or separably closed field hypothesis is needed.
-
-Source: Stacks Project, Cohomology on Sites, definition of cohomology as derived global
-sections; Etale Cohomology, Lemma 09ZC, first sentence and implicit transport. -/
+normality, or separably closed field hypothesis is needed (Stacks, Tag 09ZC). -/
 theorem isZero_constant_cohomology_iff_subsingleton_H_of_iso
     (X Y : Scheme.{u}) (e : X ≅ Y)
     (M : Type (u + 1)) [AddCommGroup M] (n : ℕ) :

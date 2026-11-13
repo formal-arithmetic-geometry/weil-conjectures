@@ -89,8 +89,7 @@ private theorem tailOpenDiagram_affine {I : Type u} [Preorder I]
       rfl
   exact MorphismProperty.of_isPullback hp.flip (inferInstance : IsAffineHom a)
 
-/-- Every stage open is quasi-compact and quasi-separated, and the least is W.
-Source: Stacks Project, Tag 09YQ; affine preimages preserve quasi-compactness. -/
+/-- Every stage open is quasi-compact and quasi-separated, and the least is W (Stacks, Tag 09YQ). -/
 private theorem tailOpenDiagram_geometry
     (X : Scheme.{u}) (O W : X.Opens) (hW : IsCompact (W : Set X)) (hWO : W ≤ O)
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})

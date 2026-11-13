@@ -36,10 +36,8 @@ Source: Stacks Project, Remark 09NW, the formula IB = (I+J)/J, and Lemma 09NX.
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The ambient restriction of an ideal twist has the target ideal-product image.
-No zero-intersection hypothesis is needed for this image calculation.
-
-Source: Stacks Project, Remark 09NW, the formula IB = (I+J)/J, and the
-local trivialization argument in Lemma 09NX. -/
+No zero-intersection hypothesis is needed for this image calculation (Stacks, Tags 09NW and 09NX).
+-/
 theorem closedImmersion_disjointIdeal_twist_image {Y X : Scheme.{u}} (i : X ⟶ Y)
     [IsClosedImmersion i] (I : Y.IdealSheafData)
     (M : Y.Modules) [M.IsInvertible] (m : ℕ)

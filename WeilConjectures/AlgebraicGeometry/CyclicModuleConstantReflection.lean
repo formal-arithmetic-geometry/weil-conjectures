@@ -24,9 +24,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Forgetting cyclic coefficients reflects constancy on a localized small etale site.
-Source: Stacks Project, Definitions 03RU and 03RW(2),(3), and the cyclic coefficient
-identification used in Theorem 03SC. -/
+/-- Forgetting cyclic coefficients reflects constancy on a localized small etale site
+(Stacks, Tags 03RU, 03RW and 03SC). -/
 theorem cyclic_module_isConstant_of_forget {Y : Scheme.{u}}
     (n : ℕ) [NeZero n] (U : Y.Etale)
     (F : Sheaf (Y.smallEtaleTopology.over U)

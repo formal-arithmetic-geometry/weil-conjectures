@@ -94,7 +94,7 @@ private theorem mono_homology_one_of_column_kernels {C : Type*} [Category C] [Ab
   rw [Category.assoc, ← a.comm, ← Category.assoc, hx, hh]
 
 /-- The canonical map from first Čech cohomology of an open cover to first module
-cohomology is injective. Source: Stacks Project, Cohomology, Lemma 0B8R. -/
+cohomology is injective (Stacks, Tag 0B8R). -/
 theorem cechH1_injective (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (hcover : iSup U = ⊤) :
     ∃ c : ∀ F : X.Modules,

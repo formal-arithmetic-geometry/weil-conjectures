@@ -70,10 +70,8 @@ noncomputable def constantModuleSectionCoefficientEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical coefficient comparison intertwines module transitions with the
-adjunction-unit transition for the abelian sheaf pulled back from the base.
-
-Source: Stacks Project, Tags 03DB and 03CO (forgetting coefficients and sheafification),
-and Tag 09Z1 (canonical transition maps). -/
+adjunction-unit transition for the abelian sheaf pulled back from the base
+(Stacks, Tags 03DB, 03CO and 09Z1). -/
 theorem constantModuleSectionCoefficientEquiv_naturality
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} (U : X.Etale)

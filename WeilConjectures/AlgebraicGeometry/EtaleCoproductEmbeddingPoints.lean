@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
-/-- Geometric points of a prescribed coproduct of field spectra are the sum of embeddings.
-Source: Stacks Project, Tag 03QR, coproduct construction; Tag 01JB, scheme coproducts. -/
+/-- Geometric points of a prescribed coproduct of field spectra are the sum of embeddings
+(Stacks, Tags 03QR and 01JB). -/
 theorem etaleCoproduct_embedding_points
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (I : Type u) (E : I → IntermediateField K Ksep)

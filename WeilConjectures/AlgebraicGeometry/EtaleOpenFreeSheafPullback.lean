@@ -17,8 +17,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- The map from the free sheaf of the inverse-image open to the inverse image of
 its free sheaf. It classifies the pullback of the identity section, via the unit
-of inverse image/direct image and restriction along `openSectionPullback`.
-Source: Stacks Project, Tags 03F3 and 0A50; free-abelian Yoneda adjunction. -/
+of inverse image/direct image and restriction along `openSectionPullback`
+(Stacks, Tags 03F3 and 0A50). -/
 noncomputable def etaleOpenFreeSheafPullback {X Y : Scheme.{u}} (g : Y ⟶ X)
     (W : X.Opens) :
     (etaleOpenFreeSheaf Y).obj (Scheme.Etale.mk (g ⁻¹ᵁ W).ι) ⟶

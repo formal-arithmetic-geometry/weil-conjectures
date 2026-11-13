@@ -634,7 +634,7 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
   GrothendieckTopology.hasSheafify_proEtTopology in
 /-- The open extension of the open restriction is the kernel of the closed unit.
 This assertion concerns arbitrary coefficient-sized module sheaves and does not involve
-etale comparison or an etale antecedent. (Stacks, Tag 09AH) -/
+etale comparison or an etale antecedent (Stacks, Tag 09AH). -/
 theorem coefficientOpenClosedKernelIso
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

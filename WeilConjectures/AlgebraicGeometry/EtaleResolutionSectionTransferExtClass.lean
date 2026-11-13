@@ -17,8 +17,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer of a represented Ext class before applying the open-object map.
-Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality), and 0A50. -/
+/-- Transfer of a represented Ext class before applying the open-object map
+(Stacks, Tags 01F8, 01FB and 0A50). -/
 theorem resolutionSection_transfer_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

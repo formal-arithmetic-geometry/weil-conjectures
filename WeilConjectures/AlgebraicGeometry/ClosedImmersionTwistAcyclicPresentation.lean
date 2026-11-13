@@ -24,7 +24,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A coherent closed-immersion pushforward has a presentation whose middle term
-has zero positive cohomology after sufficiently large twists. (Stacks, Tag 01YS) -/
+has zero positive cohomology after sufficiently large twists (Stacks, Tag 01YS). -/
 theorem exists_closedImmersion_twist_acyclic_presentation
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

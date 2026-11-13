@@ -73,8 +73,8 @@ private theorem coefficientTarget_generator_scalar_ring
 
 
 /-- The supported pullback-unit section is linear over the global ring of U.
-Only scalar compatibility is asserted; neither affineness nor bijectivity is needed.
-Source: Stacks Project, Tags 0096 and 0097, module pullback units and restriction. -/
+Only scalar compatibility is asserted; neither affineness nor bijectivity is needed
+(Stacks, Tags 0096 and 0097). -/
 theorem coefficientTarget_generator_scalar
     {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules)

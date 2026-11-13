@@ -56,8 +56,7 @@ private theorem adjunction_of_epi_comparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical affine algebra adjunction component.
-Source: Stacks Project, Tags 0AVW and 01SB. -/
+/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_counit_iso
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

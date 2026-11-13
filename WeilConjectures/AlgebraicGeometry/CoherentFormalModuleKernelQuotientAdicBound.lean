@@ -23,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 set_option backward.isDefEq.respectTransparency false
 namespace AlgebraicGeometry
 
-/-- Sufficiently large shifts give a coherent adic quotient system.
-
-Source: Stacks Project, Lemma 087X, claims (b)--(c). -/
+/-- Sufficiently large shifts give a coherent adic quotient system (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_adic_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

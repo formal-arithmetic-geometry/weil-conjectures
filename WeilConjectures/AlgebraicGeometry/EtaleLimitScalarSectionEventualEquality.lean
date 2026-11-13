@@ -23,9 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Equality of two stage sections in the limit is detected at a later stage.
-Source: Stacks Project, Sites Tag 09YN, lemma-colimit, the iterated-colimit
-argument; Etale Cohomology Tags 0EYL and 09YQ, affine-site realization. -/
+/-- Equality of two stage sections in the limit is detected at a later stage
+(Stacks, Tags 09YN, 0EYL and 09YQ). -/
 theorem etale_limit_scalar_sections_eventual_equality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

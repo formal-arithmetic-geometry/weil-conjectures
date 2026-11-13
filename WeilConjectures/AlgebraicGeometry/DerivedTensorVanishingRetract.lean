@@ -31,8 +31,7 @@ private noncomputable local instance (X : Scheme.{u}) :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- Vanishing of one derived tensor cohomology group passes to a retract.
-Source: Stacks Project, Cohomology of Sheaves, Tag 08CK. -/
+/-- Vanishing of one derived tensor cohomology group passes to a retract (Stacks, Tag 08CK). -/
 theorem schemeDerivedTensorCohomologyVanishes_of_retract (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E K : schemeDerivedCategory X) (r : Retract E K)

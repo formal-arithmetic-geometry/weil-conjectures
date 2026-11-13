@@ -191,8 +191,8 @@ private theorem etaleCE_filtration_restrictions
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Totalize a supplied augmented bicomplex map, retaining its summand equations.
-This theorem constructs no pages and makes no choice of CE resolutions.
-Source: Stacks Project, Tag 015J, finite-diagonal total comparison; Tag 015K. -/
+This theorem constructs no pages and makes no choice of CE resolutions (Stacks, Tags 015J and 015K).
+-/
 theorem etaleCE_totalize_augmented_comparison
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))

@@ -20,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Forgetting the scalar action detects vanishing of a geometric germ.
-Source: Stacks Project, Tag 04FR. -/
+/-- Forgetting the scalar action detects vanishing of a geometric germ (Stacks, Tag 04FR). -/
 theorem etaleModuleGerm_zero
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)
@@ -49,8 +48,8 @@ theorem etaleModuleGerm_zero
   · intro h
     rw [← he, h, map_zero]
 
-/-- The nonzero geometric germs of a module-sheaf section form a closed subset.
-Source: Stacks Project, Tags 04FR and 04FT. -/
+/-- The nonzero geometric germs of a module-sheaf section form a closed subset
+(Stacks, Tags 04FR and 04FT). -/
 theorem etaleModuleSection_closedSupport
     (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)
@@ -104,8 +103,7 @@ theorem etaleModuleSection_closedSupport
     exact (hT Ω v).2 hs
 
 /-- Proper support is independent of testing at algebraically closed or at all separably
-closed geometric points.
-Source: Stacks Project, Tags 04FR and 04FT. -/
+closed geometric points (Stacks, Tags 04FR and 04FT). -/
 theorem sectionHasProperSupport_iff
     (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)

@@ -85,9 +85,8 @@ private theorem finite_of_quotient_and_torsion_kernel
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A fixed quasi-coherent candidate is coherent if its quotient by a positive ideal
-power is coherent and that same power annihilates the kernel of a map to a coherent module.
-
-Source: Stacks Project, Tag 0889(1), finiteness paragraph, and Tag 05EU. -/
+power is coherent and that same power annihilates the kernel of a map to a coherent module
+(Stacks, Tags 0889 and 05EU). -/
 theorem coherent_of_formalQuotients_and_torsionKernel
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData)
     (F : X.Modules) [F.IsQuasicoherent] (H : CoherentModules X) (a : F ⟶ H.obj)

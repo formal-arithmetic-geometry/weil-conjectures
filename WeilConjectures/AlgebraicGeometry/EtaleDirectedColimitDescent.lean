@@ -28,8 +28,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- A finitely presented map of algebras over a stage of a directed system is etale
-at some later stage if its base change to the colimit is etale.
-Source: Stacks Project, Algebra, Lemma 10.168.7 (Tag 07RI). -/
+at some later stage if its base change to the colimit is etale (Stacks, Tag 07RI). -/
 theorem Etale.exists_stage_of_directedColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I)

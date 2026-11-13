@@ -25,8 +25,8 @@ attribute [local instance] TensorComparison.tensorTower_additive
 attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoidalStruct
   SheafOfModules.monoidalCategory Functor.preservesZeroMorphisms_of_additive
 
-/-- Normalized augmentations give a commuting tensor square before taking cones.
-Source: Stacks 099M and 06YN. -/
+/-- Normalized augmentations give a commuting tensor square before taking cones
+(Stacks, Tags 099M and 06YN). -/
 theorem augmentationTensorSquare
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

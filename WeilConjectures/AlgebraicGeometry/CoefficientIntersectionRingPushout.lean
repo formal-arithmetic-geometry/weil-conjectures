@@ -24,8 +24,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- The coefficient intersection rings form the affine tensor pushout.
-Source: Stacks Project, Tag 02KG, affine computation in Lemma 30.5.1. -/
+/-- The coefficient intersection rings form the affine tensor pushout (Stacks, Tag 02KG). -/
 theorem coefficientIntersection_ring_pushout
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (U : T.Opens) (hU : IsAffineOpen U)

@@ -19,9 +19,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A bounded-above finite-presentation flat quasi-coherent complex on an affine
-scheme has pseudo-coherent global sections.
-Source: Stacks Project, Tag 064U, implication (3) to (1), and the affine
-quasi-coherent equivalence used in Tag 08EB. -/
+scheme has pseudo-coherent global sections (Stacks, Tags 064U and 08EB). -/
 theorem affine_finitePresentation_flat_pseudoCoherent (S : Scheme.{u})
     (hS : IsAffine S) (D : CochainComplex S.Modules ℤ) (b : ℕ)
     (hDle : D.IsStrictlyLE b)

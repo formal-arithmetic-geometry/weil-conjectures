@@ -17,7 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry.CurveCoefficientPair
-/-- Constructibility of the quotient in the six step dévissage argument. (Stacks, Tag 09BH) -/
+/-- Constructibility of the quotient in the six step dévissage argument (Stacks, Tag 09BH). -/
 theorem constructible_quot_part {k : Type u} [Field k] [IsAlgClosed k]
     (P : AlgebraicGeometry.CurveCoefficientPair k)
     (F₁ F₂ : Sheaf P.C.smallEtaleTopology AddCommGrpCat.{u + 1})

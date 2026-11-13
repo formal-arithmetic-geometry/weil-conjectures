@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Constructible-source factorization and refinement of relations recognize a
-filtered colimit cocone. No constructibility assumption on the diagram is needed.
-
-Source: Stacks Project, Tags 09Z4, 03EW(3), 03S8(3), and 03SA(3). -/
+filtered colimit cocone. No constructibility assumption on the diagram is needed
+(Stacks, Tags 09Z4, 03EW, 03S8 and 03SA). -/
 theorem exists_constructible_colimit_cocone
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

@@ -56,14 +56,12 @@ universe t u c v
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The vertical covering condition for a sequence site.
-Source: Stacks 0941, sequence-site construction. -/
+/-- The vertical covering condition for a sequence site (Stacks, Tag 0941). -/
 def coefficientSequenceCovering {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (X : ℕ × C) (S : Sieve X) : Prop :=
   S.functorPullback (Prod.sectR X.1 C) ∈ J X.2
 
-/-- The vertical covering condition satisfies the topology axioms.
-Source: Stacks 0941. -/
+/-- The vertical covering condition satisfies the topology axioms (Stacks, Tag 0941). -/
 theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) :
     (∀ X : ℕ × C, coefficientSequenceCovering J X ⊤) ∧
@@ -96,8 +94,8 @@ theorem coefficientSequenceTopologyAxioms {C : Type c} [Category.{v} C]
       (Prod.sectR X.1 C) ∈ J Y at hr
     rwa [Sieve.functorPullback_pullback] at hr
 
-/-- The actual sequence topology, with covering determined by the vertical slice.
-Source: Stacks 0941. -/
+/-- The actual sequence topology, with covering determined by the vertical slice (Stacks, Tag 0941).
+-/
 def coefficientSequenceTopology {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) : GrothendieckTopology (ℕ × C) where
   sieves X := {S | coefficientSequenceCovering J X S}
@@ -168,29 +166,27 @@ private theorem diagrams_isGrothendieckAbelian
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The unchanged sequence site fits in the coefficient universe.
-Source: the size convention, Stacks 0941. -/
+/-- The unchanged sequence site fits in the coefficient universe (Stacks, Tag 0941). -/
 noncomputable instance (priority := low) coefficientSequenceEssentiallySmall :
     EssentiallySmall.{max u (t + 1)} (ℕ × W.ProEt) := essentiallySmallSelf _
 
-/-- The standard localization at each finite coefficient ring.
-Source: Stacks 05RU. -/
+/-- The standard localization at each finite coefficient ring (Stacks, Tag 05RU). -/
 noncomputable instance coefficientFiniteHasDerived (n : ℕ) :
     HasDerivedCategory (SheafOfModules.{max u (t+1)}
       ((sheafCompose (Scheme.ProEt.topology W)
         (forget₂ CommRingCat RingCat)).obj (integralCoefficientCommRingSheaf l E W n))) :=
   HasDerivedCategory.standard _
 
-/-- The vertical inclusion is continuous, so restriction is coefficient evaluation.
-Source: Stacks 0941. -/
+/-- The vertical inclusion is continuous, so restriction is coefficient evaluation
+(Stacks, Tag 0941). -/
 @[instance]
 theorem coefficientSequenceEvaluationContinuous (n : ℕ) :
     (Prod.sectR n W.ProEt).IsContinuous (Scheme.ProEt.topology W)
       (coefficientSequenceTopology (Scheme.ProEt.topology W)) := by
   exact sequenceInclusion_continuous (Scheme.ProEt.topology W) n
 
-/-- The simultaneous resolution instance for the actual constant-coefficient towers.
-Source: Stacks 079P and 0941. -/
+/-- The simultaneous resolution instance for the actual constant-coefficient towers
+(Stacks, Tags 079P and 0941). -/
 noncomputable instance coefficientConstantTowersKInjectives :
     Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ scalarReductionSource l E W) := by
   let A := scalarReductionSource l E W
@@ -203,14 +199,12 @@ noncomputable instance coefficientConstantTowersKInjectives :
       (Equivalence.congrLeft (AsSmall.equiv (C := ℕᵒᵖ)).symm)
   infer_instance
 
-/-- The standard unbounded localization of constant coefficient towers.
-Source: Stacks 0941. -/
+/-- The standard unbounded localization of constant coefficient towers (Stacks, Tag 0941). -/
 noncomputable instance coefficientConstantTowerDerived :
     HasDerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) :=
   HasDerivedCategory.standard _
 
-/-- The additive structure on the ordinary inverse-limit functor.
-Source: Stacks 0941. -/
+/-- The additive structure on the ordinary inverse-limit functor (Stacks, Tag 0941). -/
 noncomputable instance coefficientConstantTowerLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).Additive := by
   constructor

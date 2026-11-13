@@ -39,10 +39,8 @@ private theorem etale_iff_of_chart_factorization
 
 /-- One affine triple has a finitely presented ring model over the upper tail.
 The model identifies étaleness at the limit, and étaleness at a stage implies
-étaleness of the original chart at that stage.
-
-Source: Stacks Project, Limits, Tag 07RP, affine reduction; Tags 01YX and 01YW;
-Schemes, Tags 01JR and 01I4; Morphisms, Tags 01TQ and 02GJ. -/
+étaleness of the original chart at that stage
+(Stacks, Tags 07RP, 01YX, 01YW, 01JR, 01I4, 01TQ and 02GJ). -/
 theorem exists_affineChart_directedRingModel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

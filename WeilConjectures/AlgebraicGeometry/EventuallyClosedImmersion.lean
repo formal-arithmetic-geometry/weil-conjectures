@@ -152,9 +152,7 @@ private theorem exists_surjective_app_of_isLimit
 /-- If an inverse system over a quasi-compact, quasi-separated base has closed immersion
 transitions, quasi-compact and quasi-separated stages, and locally finite type structure
 maps, and its limit structure map is a closed immersion, then all sufficiently late
-structure maps are closed immersions.
-
-Source: Stacks Project, Limits, Lemma 0A0N. -/
+structure maps are closed immersions (Stacks, Tag 0A0N). -/
 theorem eventually_isClosedImmersion_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]

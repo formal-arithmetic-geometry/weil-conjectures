@@ -59,8 +59,8 @@ private theorem externalTensorAlgebraEquiv_tmul
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Before taking the sheaf tensor product, the two projection-pullback section modules
-have tensor product equal to the tensor product of the original sections over the field.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth. -/
+have tensor product equal to the tensor product of the original sections over the field
+(Stacks, Tag 0BED). -/
 private theorem exists_affine_projection_sections_tensor
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
@@ -171,8 +171,8 @@ private theorem exists_affine_projection_sections_tensor
   rw [hd, TensorProduct.congr_tmul, hF, hG]
 
 
-/-- On two affine schemes the canonical external tensor comparison is bijective.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth. -/
+/-- On two affine schemes the canonical external tensor comparison is bijective (Stacks, Tag 0BED).
+-/
 theorem externalGlobalSectionsTensor_bijective_of_isAffine
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

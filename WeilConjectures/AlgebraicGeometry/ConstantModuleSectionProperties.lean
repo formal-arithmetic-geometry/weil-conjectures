@@ -311,8 +311,7 @@ end TensorComparison
 
 /-- Sections of constant modules are exact, commute with finitely presented tensor
 factors by the canonical comparison, naturally in both modules and the site object,
-and preserve flatness over a commutative Noetherian ring.
-Source: Stacks Project, sites-modules, Tags 093J, 093K, 093L. -/
+and preserve flatness over a commutative Noetherian ring (Stacks, Tags 093J, 093K and 093L). -/
 theorem constantModule_section_properties
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Type (u)) [CommRing R] [IsNoetherianRing R] :

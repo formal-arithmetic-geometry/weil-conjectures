@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits CochainComplex HomComplex Abelian
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Apply the sections unit and an integer-indexed comparison.
-Source: Stacks Project, Tag 015K; evaluation maps in Tags 01F9 and 01FA. -/
+/-- Apply the sections unit and an integer-indexed comparison (Stacks, Tags 015K, 01F9 and 01FA). -/
 noncomputable def ceIntegerSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
@@ -38,8 +37,8 @@ noncomputable def ceIntegerSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℤ)).map φ
 
-/-- Extend a supplied row map, commuting inverse image with extension by zero.
-Source: Stacks Project, Tags 015J and 015K. -/
+/-- Extend a supplied row map, commuting inverse image with extension by zero
+(Stacks, Tags 015J and 015K). -/
 noncomputable def ceExtendedRowMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
@@ -61,8 +60,8 @@ private lemma map_square {C : Type w} {D : Type w'}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- The integer-indexed sections map computes the coefficient and pullback map on Ext.
-Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9 and 01FA) and 08J6. -/
+/-- The integer-indexed sections map computes the coefficient and pullback map on Ext
+(Stacks, Tags 06XR, 01F8, 01F9, 01FA and 08J6). -/
 theorem ceIntegerSectionsIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})

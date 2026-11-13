@@ -84,8 +84,7 @@ private theorem localization_on_source {C D : Type (u + 1)}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The perfect source has a bounded finite-projective model under any realization
-of the explicit affine sheafification functor.
-Source: Stacks Project, Tag 08EB and Tag 06Z0. -/
+of the explicit affine sheafification functor (Stacks, Tags 08EB and 06Z0). -/
 theorem affine_open_perfect_source_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

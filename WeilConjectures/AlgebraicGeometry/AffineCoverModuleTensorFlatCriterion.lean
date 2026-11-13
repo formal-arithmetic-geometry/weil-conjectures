@@ -71,8 +71,8 @@ private theorem flat_tensor_right_unit_iff
     (Module.Flat.equiv_iff E)
 
 /-- Flatness after an affine base change is equivalent to tensor flatness of the actual
-section modules on a specified affine covering. No finiteness or descent is asserted.
-Source: Stacks Project, Morphisms, Tag 01U4; Algebra, Tag 00HT; Limits, Tag 05LY. -/
+section modules on a specified affine covering. No finiteness or descent is asserted
+(Stacks, Tags 01U4, 00HT and 05LY). -/
 theorem affine_cover_module_tensor_flat_criterion
     (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)
     (M : X.Modules) [M.IsQuasicoherent]

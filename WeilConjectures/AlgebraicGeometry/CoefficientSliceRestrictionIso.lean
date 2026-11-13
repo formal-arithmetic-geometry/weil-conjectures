@@ -357,10 +357,8 @@ private theorem slice_of_model_iso
 attribute [local irreducible] fixedModel sectionFixedModel modelEquivalence modelPullbackIso
 
 /-- Reconstruction on the coefficient slice respects an isomorphism of internal inverse images.
-This comparison concerns arbitrary modules; it has no finite presentation or point-module input.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-More on Morphisms, Tags 094T and 0951; Sites, Section 00XZ. -/
+This comparison concerns arbitrary modules; it has no finite presentation or point-module input
+(Stacks, Tags 03CY, 00YV, 094T, 0951 and 00XZ). -/
 theorem coefficient_slice_iso_of_internal_restriction_iso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)

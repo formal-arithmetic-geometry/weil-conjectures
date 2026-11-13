@@ -112,9 +112,8 @@ private lemma rawPullbackMap_app {S Y Y' : Scheme.{v}}
   rfl
 
 
-/-- The explicit raw pullbacks form natural transformations and obey identity and composition.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps;
-Tag 03CB for inverse-image composition. -/
+/-- The explicit raw pullbacks form natural transformations and obey identity and composition
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent_base {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

@@ -70,8 +70,8 @@ private theorem qcoh_openRestriction (X : Scheme.{u₁}) (U : X.Opens)
   exact (SheafOfModules.isQuasicoherent
     (moduleRings U.toScheme.toRingedSpace)).prop_of_iso comparison.symm hF
 
-/-- A two-open cover gives the direct-image Mayer--Vietoris distinguished triangle.
-Source: Stacks Project, Tags 08BV and 08D5. -/
+/-- A two-open cover gives the direct-image Mayer--Vietoris distinguished triangle
+(Stacks, Tags 08BV and 08D5). -/
 theorem schemeDerived_mayerVietoris_triangle
     (X : Scheme.{u₁}) [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

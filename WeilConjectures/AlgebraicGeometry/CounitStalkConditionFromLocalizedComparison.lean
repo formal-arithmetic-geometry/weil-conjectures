@@ -57,9 +57,7 @@ private theorem resolution_counit_isIso
   infer_instance
 
 /-- The localized tensor comparison on the original complex suffices for the
-coordinate-independent stalk condition of its universal pullback counit.
-
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8. -/
+coordinate-independent stalk condition of its universal pullback counit (Stacks, Tag 0DJ8). -/
 theorem counit_stalkCondition_of_localizedComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

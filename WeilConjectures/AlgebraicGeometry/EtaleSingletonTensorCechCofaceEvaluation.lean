@@ -100,8 +100,7 @@ theorem singletonTensorCech_coface_raw_projection
 
 -- Keep the unused `P` let-binding in the existing public statement.
 set_option linter.unusedVariables false in
-/-- Downstairs evaluation of the raw coface map is restriction.
-Source: Stacks Project, Tags 03P2 and 03DR, the restriction formula for tensor sections. -/
+/-- Downstairs evaluation of the raw coface map is restriction (Stacks, Tags 03P2 and 03DR). -/
 theorem singletonTensorCech_coface_map_down
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))
@@ -123,8 +122,8 @@ theorem singletonTensorCech_coface_map_down
     (G.map f.op) (Modules.etaleTensorSectionsRestriction F f.left) s (tensorMap_eq X F U f)
 
 
-/-- Evaluation of a singleton Čech coface is restriction along the product map.
-Source: Stacks Project, Tag 03P2 (Čech restriction formula), Tag 03DR. -/
+/-- Evaluation of a singleton Čech coface is restriction along the product map
+(Stacks, Tags 03P2 and 03DR). -/
 theorem singletonTensorCech_coface_evaluation
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

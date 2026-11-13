@@ -27,8 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- A class in the restriction of a supplied filtered colimit of module sheaves is
-represented at one of its stages. The diagram objects need not be constructible.
-Source: Stacks Project, Tag 03Q5; used after Tag 03SA(3). -/
+represented at one of its stages. The diagram objects need not be constructible
+(Stacks, Tags 03Q5 and 03SA). -/
 theorem exists_restriction_class_of_filtered_presentation
     {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X)

@@ -32,10 +32,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- The canonical tuple-indexed maps exhibit a positive power of a coproduct over `U`
-as a coproduct of the corresponding products of its summands.
-
-Source: Stacks Project, Tag 03OZ, product decomposition following equation-sheaf-coprod;
-Schemes, Section 26.17, uniqueness of fibre products. -/
+as a coproduct of the corresponding products of its summands (Stacks, Tag 03OZ). -/
 theorem etale_over_coproduct_power_isColimit
     (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]
     (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

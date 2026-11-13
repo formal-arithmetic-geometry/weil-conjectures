@@ -24,8 +24,7 @@ attribute [local irreducible] adicResidueLocalReductionStep
   adicPerfectQuotientComplex adicPerfectQuotientStep
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- K-projectivity of the ordinary quotient complexes.
-Source: Stacks Project, Tags 06YY, 064B and 09C5. -/
+/-- K-projectivity of the ordinary quotient complexes (Stacks, Tags 06YY, 064B and 09C5). -/
 theorem adicPerfectReductionModels_kprojective (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

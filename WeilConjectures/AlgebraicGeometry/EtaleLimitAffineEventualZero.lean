@@ -37,10 +37,8 @@ private theorem cohomologyMap_comp_explicit {X Y Z : Scheme.{u}}
   exact (cohomologyPullbackFunctorial a b F p).2.1 x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The kernel half of affine-stage cohomology continuity.
-
-Source: Stacks Project, Theorem 09YQ, via Lemmas 0EYL, 04HR and 09YP,
-and the dimension-shifting argument of 0739. -/
+/-- The kernel half of affine-stage cohomology continuity
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YP and 0739). -/
 theorem etale_limit_affine_eventual_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

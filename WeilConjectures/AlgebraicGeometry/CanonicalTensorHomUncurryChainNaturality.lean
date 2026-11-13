@@ -158,9 +158,8 @@ private theorem naturality_transport
 set_option maxHeartbeats 800000 in
 -- The resolution and localization instances need extra elaboration heartbeats.
 /-- Componentwise uncurrying is natural on the images of actual chain maps.
-The input `f` is an arbitrary derived morphism; the three variable maps are chain maps.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. -/
+The input `f` is an arbitrary derived morphism; the three variable maps are chain maps
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomUncurry_chain_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

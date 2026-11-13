@@ -132,7 +132,7 @@ private theorem coefficientRingIso_normalized (X : Scheme.{u}) (A : Type u) [Com
   delta discreteCoefficientAbelianIso
   rfl
 
-/-- Normalization uniquely determines the coefficient ring isomorphism. (Stacks, Tag 03CY) -/
+/-- Normalization uniquely determines the coefficient ring isomorphism (Stacks, Tag 03CY). -/
 theorem discreteCoefficientNormalized_unique (X : Scheme.{u}) (A : Type u) [CommRing A]
     (k : Type (u + 1)) [CommRing k] (e : ULift.{u + 1} A ≃+* k)
     {c d : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X) k ≅

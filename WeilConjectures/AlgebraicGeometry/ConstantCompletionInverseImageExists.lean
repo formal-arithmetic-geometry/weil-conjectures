@@ -132,8 +132,8 @@ private theorem ringTransport_algebraic
       (L.map a).hom.app V x from
         congrArg (fun f ↦ f.hom.app V ((L.map a).hom.app V x)) e.hom_inv_id]
 
-/-- Every geometric inverse image has these algebraic lifts and canonical constant maps.
-Source: Stacks 00YV, 03D2, 099L. -/
+/-- Every geometric inverse image has these algebraic lifts and canonical constant maps
+(Stacks, Tags 00YV, 03D2 and 099L). -/
 theorem inverseImageData_exists (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] : Nonempty (InverseImageData L) := by

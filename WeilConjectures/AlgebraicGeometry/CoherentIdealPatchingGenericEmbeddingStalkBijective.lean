@@ -16,8 +16,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option linter.unusedVariables false in
 /-- The factorization supplied by the core construction is bijective at the generic
-stalk once its stalk map is known to be surjective. Source: Stacks Project, Tag 01YL,
-final paragraph. -/
+stalk once its stalk map is known to be surjective (Stacks, Tag 01YL). -/
 theorem coherent_ideal_patching_generic_embedding_stalk_bijective
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

@@ -92,8 +92,7 @@ private theorem localizedPullbackStrictlyPerfect {T X : Scheme.{u}} (g : T ⟶ X
     simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Functor.map_comp, hιπ]
     exact F.map_id _
 
-/-- Derived pullback of a perfect complex is perfect.
-Source: Stacks Project, perfect.tex, Tag 09UA. -/
+/-- Derived pullback of a perfect complex is perfect (Stacks, Tag 09UA). -/
 theorem derivedPullback_preserve_perfect {T X : Scheme.{u}} (g : T ⟶ X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}

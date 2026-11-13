@@ -92,9 +92,8 @@ private theorem projection_factorization_unit_change
   rw [reassoc_of% hex]
   rw [leftUnitor_naturality]
 
-/-- The direct image of tensor precomposition factors through its base tensor map.
-Source: Stacks Project, Tag 08EU, canonical projection formula and naturality,
-and Tag 0E4G, Lemma 48.4.4, projection-formula paragraph. -/
+/-- The direct image of tensor precomposition factors through its base tensor map
+(Stacks, Tags 08EU and 0E4G). -/
 theorem exists_derivedTensor_precomposition_projection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

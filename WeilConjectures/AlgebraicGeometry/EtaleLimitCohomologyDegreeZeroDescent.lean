@@ -26,10 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Degree-zero limit cohomology classes descend to a stage.
-
-Source: Stacks Project, Etale Cohomology, Tag 09YQ, the degree-zero part of
-Cohomology on Sites Tag 09YP, and Sites Tag 09YN. -/
+/-- Degree-zero limit cohomology classes descend to a stage (Stacks, Tags 09YQ, 09YP and 09YN). -/
 theorem etale_limit_cohomology_degree_zero_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

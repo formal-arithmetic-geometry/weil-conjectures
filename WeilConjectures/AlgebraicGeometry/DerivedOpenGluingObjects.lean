@@ -91,8 +91,7 @@ set_option synthInstance.maxHeartbeats 400000 in
 set_option maxHeartbeats 800000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Objects of the derived category glue across a two-open cover with their prescribed
-transition, without an assertion about morphisms into another object.
-Source: Stacks Project, Cohomology, Tag 08DG, first assertion and cone construction. -/
+transition, without an assertion about morphisms into another object (Stacks, Tag 08DG). -/
 theorem derived_open_gluing_objects
     (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

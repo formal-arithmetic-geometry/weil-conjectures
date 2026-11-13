@@ -66,8 +66,7 @@ private theorem ideal_product_unit_image {X : Scheme.{u}} {I : X.Modules}
 /-- The projection of the base change of a closed immersion is a closed immersion,
 and its kernel ideal is the image of the pulled-back ideal inclusion followed by the
 adjoint of the structure-sheaf map. The adjunction is the one supplied by the tensor
-pullback dependency; its choice does not affect the image subobject.
-Source: Stacks Project, Schemes, Tag 01JU (1). -/
+pullback dependency; its choice does not affect the image subobject (Stacks, Tag 01JU). -/
 theorem closedSubscheme_baseChange_ideal_image {S Z Y : Scheme.{u}}
     (i : Z ⟶ S) [IsClosedImmersion i] (g : Y ⟶ S) :
     IsClosedImmersion (pullback.snd i g) ∧

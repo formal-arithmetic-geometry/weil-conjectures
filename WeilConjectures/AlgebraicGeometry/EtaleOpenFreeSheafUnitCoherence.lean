@@ -22,9 +22,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The identity generator restricts to the inclusion generator on a smaller open.
-Source: Stacks Project, Tag 03F3, localization restriction; the explicit adjunction
-unit calculation in open_restriction_pullback_unit. -/
+/-- The identity generator restricts to the inclusion generator on a smaller open
+(Stacks, Tag 03F3). -/
 theorem etaleOpenFreeSheafUnit_coherence {X : Scheme.{u}}
     (U V : X.Opens) (h : V ≤ U) :
     etaleOpenFreeSheafUnit V ≫

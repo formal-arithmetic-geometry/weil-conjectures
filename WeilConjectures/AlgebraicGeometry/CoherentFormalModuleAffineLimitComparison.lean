@@ -58,8 +58,7 @@ private def sectionsIso {X : Scheme.{u}} (U : X.Opens) (M : X.Modules) :
   exact l.toModuleIso
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Termwise restriction identifies affine sections as A-module diagrams.
-Source: Stacks Project, Lemma 087X, restriction to an affine open. -/
+/-- Termwise restriction identifies affine sections as A-module diagrams (Stacks, Tag 087X). -/
 theorem coherentFormalModule_affine_limit_comparison
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

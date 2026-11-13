@@ -33,7 +33,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Identify the right adjoint with open direct image through the derived over equivalence.
 The underived open pushforward is fully faithful and preserves K-injective complexes,
 so its derived functor is fully faithful. Restriction and qcqs direct image preserve
-quasi-coherent cohomology. Source: Stacks Project, Tags 09IR and 08D5. -/
+quasi-coherent cohomology (Stacks, Tags 09IR and 08D5). -/
 private theorem open_right_adjoint (A : Type u) [CommRing A]
     (U : (Spec (.of A)).Opens) (hqc : IsCompact (U : Set (Spec (.of A))))
     [HasDerivedCategory.{w}

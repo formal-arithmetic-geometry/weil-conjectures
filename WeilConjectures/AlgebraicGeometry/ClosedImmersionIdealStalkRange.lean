@@ -38,8 +38,8 @@ private theorem ideal_stalk_map_germ {Y : Scheme.{w}} (x : Y) {M N : Y.Modules}
   rfl
 
 /-- The stalk ideal is the kernel of the local ring map on the image, and the whole
-ring off the image. The comparison `e` identifies structure-module germs with ring germs.
-Source: Stacks Project, Modules, Lemma 08KS, using Lemma 01AG. -/
+ring off the image. The comparison `e` identifies structure-module germs with ring germs
+(Stacks, Tags 08KS and 01AG). -/
 theorem closedImmersion_ideal_stalk_range {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (x : Y)
     (e : (RingedSpace.moduleStalkFunctor Y.toRingedSpace x).obj

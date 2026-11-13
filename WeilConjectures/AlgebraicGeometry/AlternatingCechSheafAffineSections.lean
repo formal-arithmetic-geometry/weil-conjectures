@@ -220,7 +220,7 @@ private theorem presheafTermsSectionsIso_comm {X : Scheme.{u}} {r : ℕ}
 end
 
 /-- Taking global sections after pushforward recovers the section complex, with scalars
-restricted along the base morphism. Source: Stacks Project, Tags 01FM and 02KG. -/
+restricted along the base morphism (Stacks, Tags 01FM and 02KG). -/
 theorem alternatingCechSheafComplex_affineSections
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A)
     {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :

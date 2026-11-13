@@ -31,10 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Algebraization on a supplied quasi-projective proper modification, with proper
-support of the pushforward.
-
-Source: Stacks Project, Theorem 088E, projective compactification and support paragraphs,
-using Lemmas 0885 and 0887. -/
+support of the pushforward (Stacks, Tags 088E, 0885 and 0887). -/
 theorem exists_chow_algebraization_data
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

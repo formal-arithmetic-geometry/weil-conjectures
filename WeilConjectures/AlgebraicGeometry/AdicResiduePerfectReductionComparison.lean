@@ -31,8 +31,8 @@ attribute [local irreducible] CategoryTheory.ConstantCompletion.completed
 
 /-- Reduction of a completed constant perfect complex is the constant algebraic reduction.
 The algebraic extension is specified by its adjunction to actual restriction of scalars.
-There is no completeness or Noetherian hypothesis on the coefficient ring or scheme.
-Source: Stacks Project, Tags 06YY, 093J and 09C6. -/
+There is no completeness or Noetherian hypothesis on the coefficient ring or scheme
+(Stacks, Tags 06YY, 093J and 09C6). -/
 theorem adicResidue_perfect_reduction_comparison
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ)

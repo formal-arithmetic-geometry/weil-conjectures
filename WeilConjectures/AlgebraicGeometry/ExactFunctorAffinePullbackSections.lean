@@ -333,8 +333,8 @@ private theorem coefficientSectionsIso_pullback {X Y : Scheme.{u}}
   erw [reassoc_of% ht, reassoc_of% he, reassoc_of% hu]
   simp
 
-/-- Exact coefficient change commutes with the canonical maps on affine pullback sections.
-Source: Stacks, Sites, Tag 0738(4), and the inverse-image adjunction. -/
+/-- Exact coefficient change commutes with the canonical maps on affine pullback sections
+(Stacks, Tag 0738). -/
 theorem coefficientPullbackSectionsIso_comp {S X Y : Scheme.{u}}
     [IsAffine X] [IsAffine Y] [PreservesFiniteLimits L]
     (F : Sheaf S.smallEtaleTopology B) (h : X ⟶ Y) (f : Y ⟶ S)

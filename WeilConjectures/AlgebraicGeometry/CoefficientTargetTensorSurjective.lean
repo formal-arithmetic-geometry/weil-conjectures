@@ -27,9 +27,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- A tensor map with the supported pullback-unit formula is surjective.
-Only surjectivity is asserted; no equivalence or inverse formula is assumed.
-Source: Stacks Project, Tag 02KG (Lemma 30.5.1, affine tensor computation),
-Tags 01I9 and 01IA (affine pullback), and Tag 0097 (restriction). -/
+Only surjectivity is asserted; no equivalence or inverse formula is assumed
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem coefficientTarget_tensor_surjective
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

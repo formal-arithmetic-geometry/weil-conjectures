@@ -67,9 +67,8 @@ private noncomputable def affineNhdsCone (X : Scheme.{u}) (x : X)
 
 /-- The cohomology groups of the restricted sheaves have the canonical local-scheme
 pullbacks as a colimit cocone. This statement concerns global cohomology on the open
-schemes, and does not identify it with object cohomology on the original étale site.
-Source: Stacks Project, Étale Cohomology, Tags 09AX, 03Q6 and 09YQ;
-Limits of Schemes, Tag 0GWT. -/
+schemes, and does not identify it with object cohomology on the original étale site
+(Stacks, Tags 09AX, 03Q6, 09YQ and 0GWT). -/
 theorem etaleRestrictedCohomology_neighbourhood_colimit
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : X) (q : ℕ)

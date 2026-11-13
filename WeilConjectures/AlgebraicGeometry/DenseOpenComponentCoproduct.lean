@@ -19,7 +19,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The component coproduct is an isomorphism on a dense open whose inverse image in
-each component lies in any prescribed dense open. (Stacks, Tag 0BAJ) -/
+each component lies in any prescribed dense open (Stacks, Tag 0BAJ). -/
 theorem exists_dense_open_component_coproduct
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

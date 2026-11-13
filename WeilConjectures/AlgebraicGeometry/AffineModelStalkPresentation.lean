@@ -24,8 +24,8 @@ open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- An affine model presents the original module stalk over its own local ring.
-Source: Stacks Project, Tag 01BH, Lemma 17.10.5 (3), and Tag 01HV (7). -/
+/-- An affine model presents the original module stalk over its own local ring
+(Stacks, Tags 01BH and 01HV). -/
 theorem exists_affine_model_stalk_presentation
     {Y : Scheme.{u}} (x : Y) (U : Y.affineOpens) (hx : x ∈ U.1) :
     let A := (Γ(Y, U.1) : Type u)

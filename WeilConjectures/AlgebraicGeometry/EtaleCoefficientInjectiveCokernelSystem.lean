@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 /-- A compatible coefficient system embeds in a stagewise injective system, with
-compatible cokernels. Source: Stacks Project, Tag 0EXZ, product-of-direct-images
-construction, and Tag 04JC for preservation of cokernels by inverse image. -/
+compatible cokernels (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_coefficient_injective_cokernel_system
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

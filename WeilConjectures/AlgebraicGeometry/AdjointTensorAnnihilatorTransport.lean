@@ -31,8 +31,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- A perfect tensor annihilator for the adjoint of beta gives a precomposition killing
-beta which becomes invertible over the inverse image open.
-Source: Stacks Project, Tag 0E4G, projection-formula paragraph. -/
+beta which becomes invertible over the inverse image open (Stacks, Tag 0E4G). -/
 theorem adjoint_tensor_annihilator_transport
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [Flat f] [LocallyOfFinitePresentation f]

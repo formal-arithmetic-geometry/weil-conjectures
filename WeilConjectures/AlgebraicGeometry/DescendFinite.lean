@@ -44,9 +44,8 @@ private theorem isAffineHom_over_pullback_iff
   rw [he]
   exact MorphismProperty.cancel_left_of_respectsIso @IsAffineHom e.hom _
 
-/-- Finiteness of a base change to an inverse limit descends to a finite stage.
-
-Source: Stacks Project, Limits, Lemma 01ZO, in Situation 081D. -/
+/-- Finiteness of a base change to an inverse limit descends to a finite stage
+(Stacks, Tags 01ZO and 081D). -/
 theorem exists_isFinite_baseChange_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

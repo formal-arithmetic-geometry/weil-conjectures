@@ -26,8 +26,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- The inclusion of a refined intersection in the inverse image of its original
-intersection. Covers and index sets need not be finite.
-Source: Stacks, Tag 01FD. -/
+intersection. Covers and index sets need not be finite (Stacks, Tag 01FD). -/
 def cechRefinementIntersection {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i))
@@ -41,8 +40,7 @@ def cechRefinementIntersection {X X' : Scheme.{uR}} (f : X' ⟶ X)
     exact hrefine (y j) ((iInf_le (fun j ↦ U' (y j)) j) hx))
 
 /-- The prescribed refinement map on cochains, written on every tuple of indices.
-The canonical tensor-pullback adjunction unit gives pullback of sections.
-Source: Stacks, Tag 01FD. -/
+The canonical tensor-pullback adjunction unit gives pullback of sections (Stacks, Tag 01FD). -/
 def IsCechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F : X.Modules)
@@ -62,8 +60,7 @@ def IsCechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
           (TopCat.Presheaf.cechComplexFunctorXAddEquiv U F.presheafModuleCat n a
             (refine ∘ y)))
 
-/-- Pullback and restriction define a unique refinement cochain map.
-Source: Stacks, Tag 01FD. -/
+/-- Pullback and restriction define a unique refinement cochain map (Stacks, Tag 01FD). -/
 theorem exists_unique_cechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     {ι ι' : Type uR} (U : ι → X.Opens) (U' : ι' → X'.Opens)
     (refine : ι' → ι) (hrefine : ∀ i, U' i ≤ f ⁻¹ᵁ U (refine i)) (F : X.Modules) :
@@ -136,8 +133,7 @@ theorem exists_unique_cechRefinementMap {X X' : Scheme.{uR}} (f : X' ⟶ X)
     rfl
 
 /-- The refinement map on cohomology, transported through the canonical homology
-comparison for forgetting scalars on each scheme.
-Source: Stacks, Tag 01FD. -/
+comparison for forgetting scalars on each scheme (Stacks, Tag 01FD). -/
 def cechRefinementHomology {X X' : Scheme.{uR}} {f : X' ⟶ X}
     {ι ι' : Type uR} {U : ι → X.Opens} {U' : ι' → X'.Opens} {F : X.Modules}
     (gamma : ((forget₂ (ModuleCat.{uR} Γ(X, ⊤)) AddCommGrpCat.{uR}).mapHomologicalComplex

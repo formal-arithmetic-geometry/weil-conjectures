@@ -29,8 +29,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- An exact sequence `0 → K → L → N → 0` of finite left modules over a finite ring
-induces an exact sequence of constant sheaves on the small etale site.
-Source: Stacks Project, Tags 03RX (3), 093U (extension argument), and 03EI. -/
+induces an exact sequence of constant sheaves on the small etale site
+(Stacks, Tags 03RX, 093U and 03EI). -/
 theorem constantEtaleSheaf_shortExact (X : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
     (S : ShortComplex (ModuleCat.{u + 1} Λ)) [Finite S.X₁] [Finite S.X₂] [Finite S.X₃]
     (hS : S.ShortExact) :

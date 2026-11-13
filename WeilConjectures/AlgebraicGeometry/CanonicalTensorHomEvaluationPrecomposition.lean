@@ -150,9 +150,8 @@ private theorem evaluation_chain (X : Scheme.{u})
 set_option maxHeartbeats 600000 in
 -- Matching the fixed evaluation expression uses the shared sheaf localization instances.
 set_option backward.isDefEq.respectTransparency.types true in
-/-- One-variable compatibility of the explicit localized identity evaluation.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex,
-Tags 0A90 and 0A96. -/
+/-- One-variable compatibility of the explicit localized identity evaluation
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomEvaluation_precomposition (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L L' M : CochainComplex

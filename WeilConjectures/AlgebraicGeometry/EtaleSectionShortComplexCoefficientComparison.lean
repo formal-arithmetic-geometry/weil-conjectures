@@ -55,10 +55,8 @@ private theorem exists_lift_to_injective_complex
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The open-section cocycle transfer, with the adjoint coefficient map retained.
-Source: Stacks Tags 01FB and 03F3. Generalizes the proved calculation in
-EtaleResolutionSectionTransferExtClass: exactFunctor_resolution_cocycle supplies
-transport followed by the coefficient map; sectionsEquiv identifies its representative. -/
+/-- The open-section cocycle transfer, with the adjoint coefficient map retained
+(Stacks, Tags 01FB and 03F3). -/
 private theorem coefficient_transfer_ext
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -144,9 +142,8 @@ private theorem coefficient_transfer_ext
   simp only [hfe]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A section cycle determines a closed Hom cocycle by the free-sheaf adjunction.
-Source: Stacks Tags 03F3 and 0A50; the calculation is the one in
-EtaleResolutionSectionCanonicalOpenTransfer. -/
+/-- A section cycle determines a closed Hom cocycle by the free-sheaf adjunction
+(Stacks, Tags 03F3 and 0A50). -/
 private theorem section_cocycle
     {S : Scheme.{u}}
     (K : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -169,8 +166,7 @@ private theorem section_cocycle
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit open-object comparison respects coefficient morphisms.
-Source: Stacks Tag 03F3; exact-functor preservation of Ext composition and associativity. -/
+/-- The explicit open-object comparison respects coefficient morphisms (Stacks, Tag 03F3). -/
 private theorem openObject_coefficient {X : Scheme.{u}} (W : X.Opens)
     {F G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G) (q : ℕ)
     (x : Abelian.Ext ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk W.ι)) F q) :
@@ -188,10 +184,8 @@ private theorem openObject_coefficient {X : Scheme.{u}} (W : X.Opens)
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer on one open with arbitrary target coefficients and fixed comparisons.
-Source: Stacks Tags 0A50, 01F7 and 03F3. Represent a class by a cycle, use the two
-open_cocycle normalizations, and apply coefficient_transfer_ext followed by the
-proved open-object pullback identity and coefficient naturality. -/
+/-- Transfer on one open with arbitrary target coefficients and fixed comparisons
+(Stacks, Tags 0A50, 01F7 and 03F3). -/
 private theorem coefficient_transfer_open
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -246,8 +240,8 @@ private theorem coefficient_transfer_open
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- A coefficient morphism induces a comparison of fixed section complexes.
-Source: Stacks Project, Tag 0A50, resolution functoriality, and Tag 01F7. -/
+/-- A coefficient morphism induces a comparison of fixed section complexes
+(Stacks, Tags 0A50 and 01F7). -/
 theorem etaleSectionShortComplex_coefficient_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X) (U V : X.Opens) (U' V' : Y.Opens)
     (hU : U' = f ⁻¹ᵁ U) (hV : V' = f ⁻¹ᵁ V)

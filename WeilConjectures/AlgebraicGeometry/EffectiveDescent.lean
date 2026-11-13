@@ -63,7 +63,7 @@ variable {X Y : Scheme.{u}} {p : X ⟶ Y}
 /-- **Effective descent for quasi-projective schemes.** Let `p : X ⟶ Y` be a surjective finite
 locally free morphism and let `V` be a scheme over `X` in which every finite set of points lies in
 an affine open, as is the case for a projective scheme over a field. Then every
-descent datum on `V` relative to `p` is effective. (Stacks, Tags 0CCJ, 0CCI and 01ZY) -/
+descent datum on `V` relative to `p` is effective (Stacks, Tags 0CCJ, 0CCI and 01ZY). -/
 theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] {V : Over X}
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)
@@ -76,7 +76,7 @@ theorem isEffective_of_isFinite [IsFinite p] [Flat p] [LocallyOfFinitePresentati
 free morphism with `X` affine, and let `V` be a scheme over `X` such that `V ⟶ X` is projective:
 there is a closed immersion `i : V ⟶ ℙ(α; X)`, with `α` finite, whose composition with the
 projection `ℙ(α; X) ⟶ X` is the structure morphism of `V`. Then every descent datum on `V`
-relative to `p` is effective. (Stacks, Tag 0CCJ) -/
+relative to `p` is effective (Stacks, Tag 0CCJ). -/
 theorem isEffective_of_isClosedImmersion [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     [Surjective p] [IsAffine X] {V : Over X} {α : Type u} [Finite α] (i : V.left ⟶ ℙ(α; X))
     [IsClosedImmersion i] (hi : i ≫ ℙ(α; X) ↘ X = V.hom) (D : Over.DescentDatum p V) :
@@ -188,7 +188,7 @@ namespace AlgebraicGeometry
 /-- **Properties of morphisms are local in the fpqc topology on the target.** Let `k ⊆ K` be a
 field extension and let `Z` be a scheme over `k` whose base change `Z_K` is smooth (in particular
 locally of finite type) and proper over `K`, and connected. Then `Z` is of finite type, smooth and
-proper over `k`, and connected. (Stacks, Tags 02KL, 05B5, 02YJ) -/
+proper over `k`, and connected (Stacks, Tags 02KL, 05B5, 02YJ). -/
 theorem locallyOfFiniteType_quasiCompact_smooth_isProper_connectedSpace_of_isPullback
     {k K : Type u} [Field k] [Field K] [Algebra k K] {Z Z' : Scheme.{u}} (z : Z ⟶ Spec (.of k))
     (z' : Z' ⟶ Spec (.of K)) (q : Z' ⟶ Z)

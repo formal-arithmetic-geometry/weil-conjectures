@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Essential surjectivity on a closed subscheme algebraizes supported formal modules.
-Source: Stacks Project, Theorem 088E, first paragraph, using Tags 087T and 088A. -/
+/-- Essential surjectivity on a closed subscheme algebraizes supported formal modules
+(Stacks, Tags 088E, 087T and 088A). -/
 theorem closedSupported_formal_algebraization
     {X Z : Scheme.{u}} [IsNoetherian X] (j : Z ⟶ X) [IsClosedImmersion j]
     (K : X.IdealSheafData)

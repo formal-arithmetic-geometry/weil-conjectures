@@ -27,9 +27,8 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
-/-- A fibre Cohen-Macaulay open decomposes into pieces with pure-dimensional fibres.
-
-Source: Stacks Project, Tags 02NM and 02NJ. -/
+/-- A fibre Cohen-Macaulay open decomposes into pieces with pure-dimensional fibres
+(Stacks, Tags 02NM and 02NJ). -/
 theorem exists_equidimensional_fibre_open_partition_of_depth_eq_ringKrullDim
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] (W : X.Opens)

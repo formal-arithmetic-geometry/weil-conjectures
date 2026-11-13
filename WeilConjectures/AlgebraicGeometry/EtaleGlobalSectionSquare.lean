@@ -153,10 +153,8 @@ private lemma section_comp {S T D E : Scheme.{u}} (f : T ⟶ S) (k : D ⟶ T)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Global inverse-image section restriction is independent of a factorization through
-an arbitrary commutative square. No fibre, field, or connectedness hypothesis is used.
-
-Source: Stacks Project, Sites, Tags 03CB and 03CC; Tag 0A3H, the identification of
-restrictions along the two factorizations through a geometric fibre. -/
+an arbitrary commutative square. No fibre, field, or connectedness hypothesis is used
+(Stacks, Tags 03CB, 03CC and 0A3H). -/
 theorem etaleSet_globalSection_square
     {S T D U E : Scheme.{u}} (f : T ⟶ S) (k : D ⟶ T) (d : E ⟶ D)
     (p : U ⟶ T) (v : E ⟶ U) (g : D ⟶ S) (r : U ⟶ S) (t : E ⟶ S)

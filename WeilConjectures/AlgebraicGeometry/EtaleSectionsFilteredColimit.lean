@@ -32,8 +32,8 @@ namespace AlgebraicGeometry
 
 /-- Sections over a quasi-compact quasi-separated scheme in the small etale site commute
 with filtered colimits of sheaves of modules. The comparison is the unique map whose
-composite with each colimit coprojection is the corresponding cocone map evaluated at `U`.
-Source: Sites, Lemma 7.17.7, Tag 0738, part (4), and Etale Cohomology, Tag 03Q4. -/
+composite with each colimit coprojection is the corresponding cocone map evaluated at `U`
+(Stacks, Tags 0738 and 03Q4). -/
 theorem etale_sections_filtered_colimit
     (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (U : X.Etale) [CompactSpace U.left] [QuasiSeparatedSpace U.left]

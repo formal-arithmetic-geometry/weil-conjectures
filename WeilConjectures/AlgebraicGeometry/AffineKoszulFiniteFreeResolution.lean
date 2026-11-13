@@ -75,9 +75,8 @@ private theorem quotient_presentation {Z Y : Scheme.{u}} (i : Z ⟶ Y)
   exact hex
 
 /-- Sheafification of an already augmented algebraic Koszul resolution is a
-bounded-above finite free resolution of the restricted closed pushforward.
-
-Source: Stacks Project, Tag 068C, affine quotient resolution, and Tag 0BQZ. -/
+bounded-above finite free resolution of the restricted closed pushforward
+(Stacks, Tags 068C and 0BQZ). -/
 theorem affine_koszul_finite_free_resolution
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1))

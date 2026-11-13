@@ -90,8 +90,7 @@ private theorem coherent_zero (X : RingedSpace.{u}) :
 
 
 /-- Coherent modules are closed under kernels, cokernels, two out of three in short exact
-sequences, finite direct sums (including the zero module), and isomorphisms.
-Source: Stacks Project, Modules, Tag 01BY, parts (3) and (4). -/
+sequences, finite direct sums (including the zero module), and isomorphisms (Stacks, Tag 01BY). -/
 theorem coherent_kernel_cokernel_sum (X : RingedSpace.{u}) :
     (∀ (F G : SheafOfModules.{u} (moduleRings X)) (f : F ⟶ G),
       IsCoherent X F → IsCoherent X G →

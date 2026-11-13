@@ -19,8 +19,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical comparison is obtained by the chosen derived counit.
-Source: Stacks Project, Tag 08HY. -/
+/-- The canonical comparison is obtained by the chosen derived counit (Stacks, Tag 08HY). -/
 private theorem canonical_single_pullback_comparison_fixed
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

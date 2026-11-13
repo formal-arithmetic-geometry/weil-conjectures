@@ -147,10 +147,8 @@ end
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The sheafified dual-tensor-to-Hom map is the canonical closed-category comparison.
-
-Source: Stacks Project, Modules, Example 0FNV, canonical tensor-to-endomorphism map;
-the two maps here are its natural generalization with arbitrary target `N`. -/
+/-- The sheafified dual-tensor-to-Hom map is the canonical closed-category comparison
+(Stacks, Tag 0FNV). -/
 theorem dualTensorHom_eq_ihomUnitTensorToIhom {X : Scheme.{u}} (M N : X.Modules) :
     dualTensorHom M N = MonoidalClosed.ihomUnitTensorToIhom M N := by
   exact SheafOfModules.dualTensorHom_comparison (R := X.sheaf) M N

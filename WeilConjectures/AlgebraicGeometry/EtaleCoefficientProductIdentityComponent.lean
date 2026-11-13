@@ -38,9 +38,7 @@ private theorem identity_component
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.id_comp,
     Functor.id_map] using (lowerStarId AddCommGrpCat.{u + 1} V).inv.naturality p
 
-/-- Identity calculation at one outgoing-arrow factor.
-Source: Stacks Project, Tag 0EXZ, canonical maps ψ, expanded with the adjunction
-mate equations and direct-image coherence in UpperLowerStar.Coherence. -/
+/-- Identity calculation at one outgoing-arrow factor (Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_product_identity_component
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (i : I)

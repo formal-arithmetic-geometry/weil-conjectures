@@ -37,8 +37,8 @@ private theorem homEquiv_conjugate
 
 -- Keep the chosen derived comparison families folded during mate rewriting.
 /-- The mate pasting law before cancellation of the upper-left adjunction unit.
-It applies to any morphism `t`, without an invertibility or cartesian assumption.
-Source: Stacks Project, Remark 20.28.3 (Tag 08HY), and Lemma 20.27.2 (Tag 0D5S). -/
+It applies to any morphism `t`, without an invertibility or cartesian assumption
+(Stacks, Tags 08HY and 0D5S). -/
 theorem schemeDerivedBaseChange_pasting
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

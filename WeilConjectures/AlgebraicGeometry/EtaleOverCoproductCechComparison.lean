@@ -63,8 +63,8 @@ private theorem cofan_sections_isIso {X : Scheme.{u}} {J : Type (u + 1)} [Finite
     exact hjk (congrArg Sigma.fst ((sigmaι_eq_iff H j k v w).mp he))
   exact Etale.isIso_piLift_of_disjoint G D d hcov hdisj
 
-/-- Replacing a finite family over an étale object by its coproduct preserves the Čech complex.
-Source: Stacks Project, Tag 03OZ, equation-sheaf-coprod and its Čech-complex consequence. -/
+/-- Replacing a finite family over an étale object by its coproduct preserves the Čech complex
+(Stacks, Tag 03OZ). -/
 theorem nonempty_etale_over_coproduct_cech_iso
     (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]
     (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

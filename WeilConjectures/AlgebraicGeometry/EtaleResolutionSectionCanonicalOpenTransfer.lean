@@ -46,9 +46,8 @@ private theorem section_cocycle
     (.up ℕ)).obj K)
   exact ConcreteCategory.congr_hom (L.iCycles_d q (q + 1)) z
 
-/-- The open component of augmentation-preserving canonical section transfer.
-Source: Stacks Project, Tags 01F8 and 01FB (resolution functoriality),
-Tag 03F3 (localization), and Tag 0A50 (section complexes). -/
+/-- The open component of augmentation-preserving canonical section transfer
+(Stacks, Tags 01F8, 01FB, 03F3 and 0A50). -/
 theorem resolutionSection_canonical_transfer_open
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

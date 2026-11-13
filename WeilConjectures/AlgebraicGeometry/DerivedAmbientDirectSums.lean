@@ -38,7 +38,7 @@ local instance instHasColimitsOfShape_derivedAmbientDirectSums (X : Scheme.{u}) 
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- Termwise direct sums of any representatives give direct sums in `D(𝒪_X)`, and their
-cohomology is canonically the direct sum of the cohomology sheaves. (Stacks, Tags 07D9, 08DT) -/
+cohomology is canonically the direct sum of the cohomology sheaves (Stacks, Tags 07D9, 08DT). -/
 theorem derivedAmbientDirectSums (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

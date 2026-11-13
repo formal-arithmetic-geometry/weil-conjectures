@@ -126,9 +126,8 @@ private lemma sections_unit {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       ((upperStarLowerStarAdjunction AddCommGrpCat.{uNatural + 1} f).unit.app M)]
   rfl
 
-/-- The unit--Leray map on K-injective complexes is represented by the sectionwise map.
-Source: Stacks Project, Tags 08BJ and 070I; cohomology.tex, Tags 01F8--01FA;
-sites-cohomology.tex, Tag 08J6. -/
+/-- The unit--Leray map on K-injective complexes is represented by the sectionwise map
+(Stacks, Tags 08BJ, 070I, 01F8, 01FA and 08J6). -/
 theorem etaleKInjective_unit_leray
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

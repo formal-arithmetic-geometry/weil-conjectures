@@ -31,9 +31,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- Tensor sections of a module epimorphism are locally surjective on the small etale site.
-Source: Stacks Project, Descent, Tag 070S(2), and Tag 03FH(1); pullback adjunction
-Tag 0096. -/
+/-- Tensor sections of a module epimorphism are locally surjective on the small etale site
+(Stacks, Tags 070S, 03FH and 0096). -/
 theorem etaleTensorSections_locallySurjective {X : Scheme.{u}} {G H : X.Modules}
     (ψ : G ⟶ H) [Epi ψ]
     (β : etaleTensorSectionsPresheaf G ⟶ etaleTensorSectionsPresheaf H)

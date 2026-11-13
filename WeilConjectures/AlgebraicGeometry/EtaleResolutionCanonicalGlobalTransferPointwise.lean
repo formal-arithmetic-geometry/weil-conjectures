@@ -103,9 +103,8 @@ private theorem section_adjunction_transfer {X Y : Scheme.{u}} (g : Y ⟶ X)
   exact congrArg (AddCommGrpCat.uliftZMultiplesAddEquiv _) hs
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical global transfer identity for one degree and one homology class.
-Source: Stacks Project, Tags 0A50 and 03F3; this is the pointwise cocycle calculation
-used in the global transfer theorem. -/
+/-- The canonical global transfer identity for one degree and one homology class
+(Stacks, Tags 0A50 and 03F3). -/
 theorem resolutionSection_canonical_transfer_global_pointwise
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

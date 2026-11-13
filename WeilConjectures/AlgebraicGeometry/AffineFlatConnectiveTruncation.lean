@@ -99,8 +99,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Canonical lower truncation retains finite presentation and flatness when
 negative homology vanishes universally. It preserves nonnegative homology after
-any base change. This statement has no proper morphism or coefficient sheaf.
-Source: Stacks Project, Tags 0653 and 0654 (flat opcycles and lower truncation). -/
+any base change. This statement has no proper morphism or coefficient sheaf
+(Stacks, Tags 0653 and 0654). -/
 theorem affine_flat_connective_truncation (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ) (a : ℤ) (b : ℕ)
     (hCge : C.IsStrictlyGE a) (hCle : C.IsStrictlyLE b)

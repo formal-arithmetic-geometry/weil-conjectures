@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Identifications with the actual cycle/boundary cokernels, without making any choice.
-Source: Stacks Project, Tag 012K. -/
+/-- Identifications with the actual cycle/boundary cokernels, without making any choice
+(Stacks, Tag 012K). -/
 abbrev EtaleCEQuotientRealization {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :=
@@ -36,7 +36,7 @@ abbrev EtaleCEQuotientRealization {X : Scheme.{uNatural}}
 
 /-- A page map is induced by the sections-total map on graded cycle representatives.
 This is an equation of maps from arbitrary test objects, rather than an existence
-assertion about a spectral-sequence map. Source: Stacks Project, Tags 012K and 015K. -/
+assertion about a spectral-sequence map (Stacks, Tags 012K and 015K). -/
 def EtaleCEPageMapOnRepresentatives {X Y : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     {L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
@@ -149,8 +149,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 -- Elaborate the dependent simultaneous page and presentation families.
 /-- Choose the stationary comparisons naturally for all sections-total filtered maps.
-No augmentation, pullback, ordinary first-page identification or CE lift is asserted.
-Source: Stacks Project, Homology, Tags 012K, 012Q and 012W. -/
+No augmentation, pullback, ordinary first-page identification or CE lift is asserted
+(Stacks, Tags 012K, 012Q and 012W). -/
 theorem exists_etaleCE_stationary_page_comparisons
     (D : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

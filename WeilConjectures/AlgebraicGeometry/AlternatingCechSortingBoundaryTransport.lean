@@ -104,10 +104,7 @@ private theorem second_sorted (X : Scheme.{u}) {I : Type v} [LinearOrder I]
   · simp [ha]
 
 open Classical in
-/-- Signed stable sorting transports the repeated-tuple boundary.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equations
-20.23.6.1 and 20.23.6.2, transported by signed stable sorting. -/
+/-- Signed stable sorting transports the repeated-tuple boundary (Stacks, Tag 01FM). -/
 theorem cechSortingBoundaryTransport (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ)

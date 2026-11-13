@@ -188,8 +188,8 @@ attribute [local irreducible] homComplexFunctor ringedKoszulDualTower
 
 -- Finite tensor coordinates involve several nested sheaf and complex functors.
 /-- Exact realization identifies the finite algebraic augmentation cones, including
-all strict transition maps. No arbitrary complex, pro-zero or derived limit occurs.
-Source: Stacks Project, Tag 099M, with Tags 093M and 0A0E. -/
+all strict transition maps. No arbitrary complex, pro-zero or derived limit occurs
+(Stacks, Tags 099M, 093M and 0A0E). -/
 theorem constantKoszulCoefficientConeComparison
     (b : Bool)
     (E : ModuleCat.{u} A ⥤ Mod (coefficients J A I b)) [E.Additive]

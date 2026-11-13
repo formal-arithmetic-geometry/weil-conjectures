@@ -28,8 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections on one affine chart are flat over an affine base precisely when the
-module stalks on that chart are flat over the corresponding base stalks.
-Source: Stacks Project, Morphisms Tag 01U4; Algebra Tag 00HT (6). -/
+module stalks on that chart are flat over the corresponding base stalks
+(Stacks, Tags 01U4 and 00HT). -/
 theorem affine_chart_relative_flat_iff {X S : Scheme.{u}} [IsAffine S]
     (f : X ⟶ S) (G : X.Modules) [G.IsQuasicoherent] (U : X.affineOpens) :
     (letI : Module Γ(S, ⊤) Γ(G, U.1) :=

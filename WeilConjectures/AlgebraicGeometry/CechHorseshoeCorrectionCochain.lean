@@ -60,8 +60,8 @@ private theorem moduleCechZero_naturality {X : Scheme.{u}} {ι : Type u}
   simp only [ModuleCat.comp_apply]
   exact PresheafOfModules.naturality_apply f.val _ x
 
-/-- The two restrictions of a global section to each pairwise intersection agree.
-Source: Stacks 01EQ. -/
+/-- The two restrictions of a global section to each pairwise intersection agree (Stacks, Tag 01EQ).
+-/
 private theorem moduleCechZero_d {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (F : X.Modules) :
     moduleCechZero U F ≫

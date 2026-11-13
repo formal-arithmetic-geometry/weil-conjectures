@@ -23,9 +23,8 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Pull sections back by the unit, then restrict to the support of the direct image.
-Source: Stacks Project, Tag 0097, restriction of a pullback section.
--/
+/-- Pull sections back by the unit, then restrict to the support of the direct image
+(Stacks, Tag 0097). -/
 def coefficientSectionAddMap {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -45,8 +44,8 @@ def coefficientSectionAddMap {X T : Scheme.{u}} (f : X ⟶ T)
     ((((pullbackPushforwardAdjunction g').unit.app F).app
       ((f ⁻¹ᵁ U).ι ''ᵁ Z)).hom.comp ((F.restrictAppIso (f ⁻¹ᵁ U).ι Z).hom.hom))
 
-/-- The section-unit map is linear for the structural map of the base.
-Source: Stacks Project, Tag 0096, module pullback adjunction; Tag 0097, composition. -/
+/-- The section-unit map is linear for the structural map of the base (Stacks, Tags 0096 and 0097).
+-/
 theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -128,9 +127,7 @@ theorem coefficientSectionAddMap_linear {X T : Scheme.{u}} (f : X ⟶ T)
   rw [← Scheme.Hom.appLE_comp_appLE (f' ≫ g) U.ι _ _ _ ht hl]
   erw [hi, Category.id_comp]
 
-/-- The linear map of sections used as the mate in the composed adjunction.
-Source: Stacks Project, Tag 02KE, termwise coefficient construction.
--/
+/-- The linear map of sections used as the mate in the composed adjunction (Stacks, Tag 02KE). -/
 def coefficientSectionLinearMap {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
@@ -148,9 +145,8 @@ def coefficientSectionLinearMap {X T : Scheme.{u}} (f : X ⟶ T)
       map_add' := (coefficientSectionAddMap f F U Z g g' f' w W hW).map_add
       map_smul' := coefficientSectionAddMap_linear f F U Z g g' f' w W hW }
 
-/-- The coefficient morphism is the mate of the explicit linear map of sections.
-Source: Stacks Project, Tags 02KE and 01IA, adjunction construction.
--/
+/-- The coefficient morphism is the mate of the explicit linear map of sections
+(Stacks, Tags 02KE and 01IA). -/
 def coefficientComparisonMorphism {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')

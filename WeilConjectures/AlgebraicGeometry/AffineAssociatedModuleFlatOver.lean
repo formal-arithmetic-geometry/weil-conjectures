@@ -23,8 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A flat global-ring module gives an associated module flat over the affine base itself.
-This is an affine module/sheaf fact, with no cover, complex or cohomology.
-Source: Stacks Project, Tags 01I9 and 00HT. -/
+This is an affine module/sheaf fact, with no cover, complex or cohomology
+(Stacks, Tags 01I9 and 00HT). -/
 theorem flatOver_affineAssociatedModule (T : Scheme.{u}) [IsAffine T]
     (M : ModuleCat.{u} Γ(T, ⊤)) (hM : Module.Flat Γ(T, ⊤) M) :
     ((Modules.pullback T.toSpecΓ).obj ((tilde.functor Γ(T, ⊤)).obj M)).IsFlatOver

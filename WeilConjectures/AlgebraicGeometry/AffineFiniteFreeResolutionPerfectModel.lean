@@ -28,8 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A bounded finite free algebraic chain complex resolving a sheaf on an affine
-open supplies a strictly perfect model for its derived restriction to that open.
-Source: Stacks Project, Tag 068C, and Definitions 08C4, 08CM. -/
+open supplies a strictly perfect model for its derived restriction to that open
+(Stacks, Tags 068C, 08C4 and 08CM). -/
 theorem exists_affine_finite_free_perfect_model {Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

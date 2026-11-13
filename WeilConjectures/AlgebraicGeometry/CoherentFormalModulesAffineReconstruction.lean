@@ -27,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Surjective projections with ideal-power kernels reconstruct the formal sheaf system.
-This is the formal-system half of the equivalence; no equivalence is assumed.
-Source: Stacks Project, Lemma 087W, final quotient computation and the affine
-sheaf/module correspondence, Schemes 01I7/01IB. -/
+This is the formal-system half of the equivalence; no equivalence is assumed
+(Stacks, Tags 087W, 01I7 and 01IB). -/
 theorem coherentFormalModules_affine_reconstruction (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

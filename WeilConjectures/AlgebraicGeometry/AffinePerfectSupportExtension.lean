@@ -68,8 +68,8 @@ set_option backward.isDefEq.respectTransparency false in
 intersection with a closed set with quasi-compact complement, extends after adjoining
 its shift to a perfect complex supported on that closed set.
 Support is expressed by vanishing of every cohomology stalk off the closed subset.
-Restriction uses the canonical equivalence from the localized site to the open subscheme.
-Source: Stacks Project, Tag 08EK. -/
+Restriction uses the canonical equivalence from the localized site to the open subscheme
+(Stacks, Tag 08EK). -/
 theorem exists_perfect_supported_extension (X : Scheme.{u}) [IsAffine X]
     (T : Set X) (hT : IsClosed T) (hTc : IsCompact Tᶜ)
     (U : X.Opens) (hU : IsCompact (U : Set X))

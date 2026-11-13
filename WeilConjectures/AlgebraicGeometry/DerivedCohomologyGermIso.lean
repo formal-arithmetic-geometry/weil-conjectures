@@ -373,8 +373,8 @@ end LocalComparison
 end GermComparison
 
 /-- The canonical derived-sections comparison induces an isomorphism on geometric stalks.
-This is only the local sheafification assertion, with no strict-local limit or base-change mate.
-Source: Stacks, Tag 03Q8 and Cohomology on Sites, Tag 0BKV. -/
+This is only the local sheafification assertion, with no strict-local limit or base-change mate
+(Stacks, Tags 03Q8 and 0BKV). -/
 theorem isIso_strictLocalCohomologyGermMap {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

@@ -30,10 +30,7 @@ attribute [local instance] RawRestrictedComparison.etaleComposition
 
 /-- Evaluation of raw derived Hom is naturally isomorphic, in the coefficient
 sheaf, to cohomology restricted to an etale pullback. No qcqs or continuity
-hypothesis is used.
-
-Source: Stacks Project, Tag 03Q8 and the restriction
-calculations in Tags 072W and 0BKV. -/
+hypothesis is used (Stacks, Tags 03Q8, 072W and 0BKV). -/
 theorem nonempty_abelianHigherDirectImage_evaluationFunctorIso
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ) (U : X.Etale) :
     Nonempty

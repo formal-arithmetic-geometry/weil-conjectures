@@ -31,8 +31,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance 2000] schemeMVModuleAbelian
 
-/-- The recorded comparisons commute with the first two arrows of the explicit triangles.
-Source: Stacks Tags 0D5T and 0DJ9. -/
+/-- The recorded comparisons commute with the first two arrows of the explicit triangles
+(Stacks, Tags 0D5T and 0DJ9). -/
 theorem schemeMV_directImage_squares
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     (hcover : U ⊔ V = ⊤)

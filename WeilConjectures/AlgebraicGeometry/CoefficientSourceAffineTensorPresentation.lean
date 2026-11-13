@@ -146,8 +146,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4096 in
 -- Transport between native tensors and module-category sections.
 /-- Sections on an affine open of the pullback of an associated module have a
-unit-compatible tensor presentation. This assertion involves no comparison morphism.
-Source: Stacks Project, Tags 01I9 and 01IA, affine pullback of modules. -/
+unit-compatible tensor presentation. This assertion involves no comparison morphism
+(Stacks, Tags 01I9 and 01IA). -/
 theorem exists_coefficientSource_affine_tensor_presentation
     {S S' : Scheme.{u}} (g : S' ⟶ S) (N : ModuleCat.{u} Γ(S, ⊤))
     (B : S'.Opens) (hB : IsAffineOpen B) :

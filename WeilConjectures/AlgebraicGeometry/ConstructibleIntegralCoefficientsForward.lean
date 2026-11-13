@@ -35,8 +35,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The counit of the equivalence between integral modules and abelian groups identifies
 an abelian sheaf with the underlying abelian sheaf of its integral coefficient transport.
-The change to the universe-lifted ring leaves the underlying group unchanged.
-Source: the coefficient comparison in Stacks Project Tag 03RW. -/
+The change to the universe-lifted ring leaves the underlying group unchanged (Stacks, Tag 03RW). -/
 private theorem integralAbIso {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙

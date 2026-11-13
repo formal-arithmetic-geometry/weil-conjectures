@@ -22,9 +22,8 @@ set_option autoImplicit false
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Deleting the tail copy of the junction advances the partially sorted prefix.
-
-Source: Stacks Project, Tag 01FM, equation 20.23.6.1, labelled-deletion verification. -/
+/-- Deleting the tail copy of the junction advances the partially sorted prefix (Stacks, Tag 01FM).
+-/
 theorem cechPartialSort_advance (p : ℕ) (σ τ ρ : Equiv.Perm (Fin (p + 2)))
     (a : Fin (p + 2)) (hτ : cechPartialSort σ τ a)
     (hρ : (∀ k, k.val < a.val + 1 → ρ k = σ k) ∧

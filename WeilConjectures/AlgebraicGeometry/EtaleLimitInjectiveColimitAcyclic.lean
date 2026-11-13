@@ -34,8 +34,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- A compatible injective coefficient system has an acyclic pulled-back colimit.
-Source: Stacks Project, Tags 09YP and 09YQ, Cech acyclicity argument using 09YN. -/
+/-- A compatible injective coefficient system has an acyclic pulled-back colimit
+(Stacks, Tags 09YP, 09YQ and 09YN). -/
 theorem etale_limit_injective_colimit_acyclic
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

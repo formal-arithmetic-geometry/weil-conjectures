@@ -101,9 +101,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxHeartbeats 900000 in
 -- Sectionwise scalar actions require unfolding transported module structures.
 /-- Scalar identities commute with every affine realization comparison isomorphism.
-This requires neither perfectness nor a cohomology support condition.
-Source: Stacks Project, Tag 06Z0, termwise associated-sheaf construction, and
-Tag 08EJ, identification of the affine scalar action. -/
+This requires neither perfectness nor a cohomology support condition (Stacks, Tags 06Z0 and 08EJ).
+-/
 theorem affine_open_realization_scalar
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

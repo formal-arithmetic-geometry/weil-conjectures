@@ -211,8 +211,8 @@ end CategoryTheory.Functor
 namespace AlgebraicGeometry
 open Scheme Etale
 
-/-- Classical derived base change is computed by the section map on resolutions.
-Source: Stacks Project, Tag 01F8, equation 01F9; site version Tag 08J6. -/
+/-- Classical derived base change is computed by the section map on resolutions
+(Stacks, Tags 01F8, 01F9 and 08J6). -/
 theorem classicalPullback_resolution_sections
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

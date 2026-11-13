@@ -13,8 +13,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The product of direct images of the canonical stagewise injective objects.
-Source: Stacks Project, Tag 0EXZ, product over outgoing arrows. -/
+/-- The product of direct images of the canonical stagewise injective objects (Stacks, Tag 0EXZ). -/
 noncomputable def etaleCoefficientInjectiveTarget
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -22,8 +21,7 @@ noncomputable def etaleCoefficientInjectiveTarget
   ∏ᶜ fun t : Σ k : I, i ⟶ k ↦
     (lowerStar AddCommGrpCat.{u + 1} (D.map t.2.op)).obj (Injective.under (F t.1))
 
-/-- The specified product target is injective at every index.
-Source: Stacks Project, Tag 0EXZ: exact inverse image, right adjoints and products. -/
+/-- The specified product target is injective at every index (Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_injective_system_data
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})

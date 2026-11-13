@@ -25,7 +25,7 @@ namespace AlgebraicGeometry
 
 /-- An indexed clopen decomposition consists of pairwise disjoint open subschemes whose
 union is the whole scheme. Each piece is also closed, since its complement is the union
-of the other pieces. (Stacks, Tag 03YW) -/
+of the other pieces (Stacks, Tag 03YW). -/
 def IsClopenDecomposition (W : Scheme.{u}) (E : Type v) (P : E → W.Opens) : Prop :=
   (∀ e e' : E, e ≠ e' → Disjoint (P e) (P e')) ∧ (⨆ e, P e) = ⊤
 

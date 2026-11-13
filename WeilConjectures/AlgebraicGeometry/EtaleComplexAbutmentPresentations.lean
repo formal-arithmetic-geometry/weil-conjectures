@@ -81,8 +81,8 @@ set_option backward.isDefEq.respectTransparency true in
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 700000 in
 -- The dependent page and quotient witnesses require elaboration together.
-/-- Construct the functorial pages and abutment quotient projections, without continuity.
-Source: Stacks Project, Tags 015J and 015K; Tag 0EZM. -/
+/-- Construct the functorial pages and abutment quotient projections, without continuity
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etale_complex_abutment_presentations
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

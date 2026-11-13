@@ -28,10 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A full Čech endomorphism whose increasing coordinates vanish is null homotopic.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equations 20.23.6.1 and
-20.23.6.2. -/
+/-- A full Čech endomorphism whose increasing coordinates vanish is null homotopic
+(Stacks, Tag 01FM). -/
 theorem alternatingCechKernelNullHomotopic (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

@@ -142,10 +142,8 @@ private theorem tensor_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The affine module quotient realizes the explicit sheaf quotient, with its projection.
-No finiteness, completeness or Noetherian hypothesis on the module is required.
-
-Source: Stacks Project, Tags 01I7 and 01IC (exact affine module correspondence),
-01I8 (tensor products), and 087W (the positive-power quotient system). -/
+No finiteness, completeness or Noetherian hypothesis on the module is required
+(Stacks, Tags 01I7, 01IC, 01I8 and 087W). -/
 theorem affine_formalQuotient_comparison
     {X : Scheme.{u}} [IsAffine X] (J : X.IdealSheafData)
     (M : ModuleCat.{u} Γ(X, ⊤)) (n : ℕ) (hn : 0 < n) :

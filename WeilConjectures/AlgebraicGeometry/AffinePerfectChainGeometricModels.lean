@@ -36,9 +36,8 @@ namespace AlgebraicGeometry
 
 -- Elaborating the affine models and their chosen derived-category comparisons needs this budget.
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine finite-projective models with scalar/geometric Hom equivalences.
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation; Tags 08EB,
-06Z0 and 08DW. -/
+/-- Affine finite-projective models with scalar/geometric Hom equivalences
+(Stacks, Tags 09RE, 08EB, 06Z0 and 08DW). -/
 theorem exists_affinePerfectChainGeometricModels
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

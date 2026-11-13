@@ -137,9 +137,8 @@ private theorem middle_factor_Second
   rfl
 
 /-- Changing the three proper ambient schemes commutes with the supplied square exchange.
-This is the proper-projection part of the product grid, before shrinking any supporting open.
-Source: Stacks Tag 0F7J, final A--F calculation, with vertical exchange pasting as in
-Tag 0F7C. -/
+This is the proper-projection part of the product grid, before shrinking any supporting open
+(Stacks, Tags 0F7J and 0F7C). -/
 theorem etaleGraphProductAmbientPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

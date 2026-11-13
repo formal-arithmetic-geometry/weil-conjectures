@@ -348,9 +348,8 @@ end ProductTransport
 
 /-- Finite affine pro-étale covers admit simultaneous affine étale covering approximations,
 with scheme-limit cones on all their repeated intersections. This is a purely geometric
-assertion: it says nothing about sections, injectivity, exactness, or cohomology.
-Source: Stacks Project, Tag 099U, the two finite Čech limit reductions; Limits Tags
-01ZM, 01ZN and 07RP for finite-presentation and covering descent. -/
+assertion: it says nothing about sections, injectivity, exactness, or cohomology
+(Stacks, Tags 099U, 01ZM, 01ZN and 07RP). -/
 theorem exists_coefficient_affine_cech_presentation (X : Scheme.{u})
     (U : Scheme.coefficientProEtaleSiteModel.{u, v} X)
     (m : ℕ) (V : Fin m → Scheme.coefficientProEtaleSiteModel.{u, v} X)

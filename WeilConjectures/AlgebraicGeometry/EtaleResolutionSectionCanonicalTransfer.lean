@@ -22,9 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical comparisons identify augmentation-preserving section transfers with pullback.
-Source: Stacks Project, Tag 01F8 and Remark 01FB (functoriality through resolutions),
-Tag 03F3 (localization), and Tag 0A50 (section complexes). -/
+/-- Canonical comparisons identify augmentation-preserving section transfers with pullback
+(Stacks, Tags 01F8, 01FB, 03F3 and 0A50). -/
 theorem resolutionSection_canonical_transfer
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

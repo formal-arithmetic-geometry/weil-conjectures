@@ -33,8 +33,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Naturality of the canonical derived base-change map in its coefficient object.
-Source: Stacks Project, Cohomology, Remark 08HY. -/
+/-- Naturality of the canonical derived base-change map in its coefficient object
+(Stacks, Tag 08HY). -/
 theorem schemeDerivedBaseChangeMap_naturality
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

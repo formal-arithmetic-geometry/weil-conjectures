@@ -50,10 +50,8 @@ private theorem differenceMap_natural {A B C A' B' C' : Type*}
 attribute [local irreducible] openCohomologyRestriction
 
 
-/-- Difference of restrictions commutes with canonical transitions and cone legs.
-
-Source: Stacks Project, Tag 0A50 (difference map), Tag 01F7 (pullback functoriality),
-Tag 09YQ (restricted coherent-system maps). -/
+/-- Difference of restrictions commutes with canonical transitions and cone legs
+(Stacks, Tags 0A50, 01F7 and 09YQ). -/
 theorem tailOpenDifference_naturality
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I]

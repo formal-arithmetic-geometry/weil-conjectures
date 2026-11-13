@@ -20,8 +20,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {U X : Scheme.{u}} (f : U ⟶ X)
-/-- Affine pushout sections are finite sums of products of the two section legs.
-Source: Stacks Project, Morphisms, Tag 01SB, affine reduction; Schemes, Tags 01IA and 01HV. -/
+/-- Affine pushout sections are finite sums of products of the two section legs
+(Stacks, Tags 01SB, 01IA and 01HV). -/
 theorem affinePushoutSection_products [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (t : TopCat.Sheaf.inverseImageRing f.base

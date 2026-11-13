@@ -30,10 +30,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 /-- The geometric part of the closed immersion quotient theorem: the unit is epi
-and the multiplication image is its kernel.
-
-Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (1), with the stalkwise
-argument of Modules, Lemma 08KS. -/
+and the multiplication image is its kernel (Stacks, Tags 04CJ and 08KS). -/
 theorem closedImmersion_unit_kernel {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] :
     let adj : tensorPullback i ⊣ pushforward i :=

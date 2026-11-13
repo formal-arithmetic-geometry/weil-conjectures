@@ -71,16 +71,16 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-/-- The canonical ordinary finite pullback comparison, not an arbitrary isomorphism.
-Source: Stacks 06YY, 099L. -/
+/-- The canonical ordinary finite pullback comparison, not an arbitrary isomorphism
+(Stacks, Tags 06YY and 099L). -/
 def ordinaryFinitePull (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅
       change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))) :=
   (ordinaryFinitePull_existsUnique F V adj A I n).exists.choose
 
 /-- The representative square for the derived finite-reduction comparison.
-The ordinary tensor comparison is lifted with abstract functors before specialization.
-Source: Stacks 06YY, 099L. -/
+The ordinary tensor comparison is lifted with abstract functors before specialization
+(Stacks, Tags 06YY and 099L). -/
 def FinitePullComparisonFormula
     {M₀ M₁ M₂ M₃ D₀ D₁ D₂ D₃ : Type*}
     [Category M₀] [Category M₁] [Category M₂] [Category M₃]
@@ -143,7 +143,7 @@ attribute [local irreducible] dres
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived constant pullback and finite reduction commute by the prescribed ordinary
-comparison on every flat-term K-flat representative. Source: Stacks 06YY, 099L. -/
+comparison on every flat-term K-flat representative (Stacks, Tags 06YY and 099L). -/
 theorem finitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : (derivedPull F V adj (constantMap F A)).functor ⋙ extend (quotient J' A I n) ≅
         extend (quotient J A I n) ⋙
@@ -193,8 +193,7 @@ theorem finitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ
 
 end
 
-/-- The specified derived finite constant pullback comparison.
-Source: Stacks 06YY, 099L. -/
+/-- The specified derived finite constant pullback comparison (Stacks, Tags 06YY and 099L). -/
 def finitePull (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     (derivedPull F V adj (constantMap F A)).functor ⋙ extend (quotient J' A I n) ≅
       extend (quotient J A I n) ⋙

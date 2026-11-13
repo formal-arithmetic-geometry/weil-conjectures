@@ -115,10 +115,8 @@ private theorem finiteProjective_hom_bijective
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The quotient Hom comparison for modules is additive, natural in both variables,
 is invertible for a finite projective source, and respects actual scalar balancing.
-No complexes, differentials, degree bounds or cohomology occur in this assertion.
-
-Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-the quotient total-Hom calculation; More on Algebra, Tag 0A8H. -/
+No complexes, differentials, degree bounds or cohomology occur in this assertion
+(Stacks, Tags 093T, 09C6 and 0A8H). -/
 theorem adicPerfectModuleHom (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

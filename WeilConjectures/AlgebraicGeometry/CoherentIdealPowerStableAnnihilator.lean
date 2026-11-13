@@ -201,9 +201,7 @@ local instance localInst_CoherentIdealPowerStableAnnihilator_1 {X : Scheme.{u}} 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A coherent module has a quasi-coherent submodule containing every local
-ideal-power annihilator and killed by one fixed ideal power.
-
-Source: Stacks Project, Tag 01YB, second paragraph; Tags 01PO and 01Y8. -/
+ideal-power annihilator and killed by one fixed ideal power (Stacks, Tags 01YB, 01PO and 01Y8). -/
 theorem exists_coherent_idealPower_stable_annihilator
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (H : X.Modules) [H.IsQuasicoherent]

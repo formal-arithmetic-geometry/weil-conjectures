@@ -26,9 +26,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The field-linear pullback unit on the presheaf of sections.
-Source: Stacks Project, Tag 0096. The adjunction and its unit equation determine
-this map on every open, so no arbitrary coefficient data is chosen. -/
+/-- The field-linear pullback unit on the presheaf of sections (Stacks, Tag 0096). -/
 def scalarSectionUnit (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g)
     (F : X.Modules) : scalarPresheaf f F ⟶
@@ -36,8 +34,7 @@ def scalarSectionUnit (f : X ⟶ Spec (CommRingCat.of k))
   ((((TopologicalSpace.Opens.map a.base).sheafAdjunctionContinuous (ModuleCat.{w} k)
     _ _).homEquiv _ _) (Classical.choose (exists_scalarPullbackCoefficient f g a h F))).hom
 
-/-- The section unit is the chosen tensor-pullback unit.
-Source: Stacks Project, Tag 0096. -/
+/-- The section unit is the chosen tensor-pullback unit (Stacks, Tag 0096). -/
 theorem scalarSectionUnit_apply (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (h : a ≫ f = g)
     (F : X.Modules) (U : X.Opens) (s : F.val.obj (op U)) :
@@ -46,8 +43,8 @@ theorem scalarSectionUnit_apply (f : X ⟶ Spec (CommRingCat.of k))
         (op U) s :=
   Classical.choose_spec (exists_scalarPullbackCoefficient f g a h F) U s
 
-/-- Pull a section of the second factor back globally, then restrict it above U.
-Source: Stacks Project, Tag 0BED. -/
+/-- Pull a section of the second factor back globally, then restrict it above U (Stacks, Tag 0BED).
+-/
 def externalSecondSectionLeft (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (G : Y.Modules) (U : X.Opens) :
     scalarObj g G (op ⊤) ⟶
@@ -59,8 +56,7 @@ def externalSecondSectionLeft (f : X ⟶ Spec (CommRingCat.of k))
       ((tensorPullback (pullback.snd f g)).obj G)).map
         (homOfLE (by simp : pullback.fst f g ⁻¹ᵁ U ≤ pullback.snd f g ⁻¹ᵁ ⊤)).op
 
-/-- Tensor the first pullback unit with the restricted second section.
-Source: Stacks Project, Tag 0BED. -/
+/-- Tensor the first pullback unit with the restricted second section (Stacks, Tag 0BED). -/
 def externalSectionsUnitAppLeft (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (F : X.Modules) (G : Y.Modules)
     (U : X.Opens) : scalarObj f F (op U) ⊗ scalarObj g G (op ⊤) ⟶
@@ -72,8 +68,7 @@ def externalSectionsUnitAppLeft (f : X ⟶ Spec (CommRingCat.of k))
         ((tensorPullback (pullback.fst f g)).obj F)
         ((tensorPullback (pullback.snd f g)).obj G) (op (pullback.fst f g ⁻¹ᵁ U))
 
-/-- The component maps commute with restriction.
-Source: Stacks Project, Tags 0096, 01F7 and 0BED. -/
+/-- The component maps commute with restriction (Stacks, Tags 0096, 01F7 and 0BED). -/
 theorem externalSectionsUnitAppLeft_naturality
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) {U V : X.Opensᵒᵖ} (i : U ⟶ V) :
@@ -105,8 +100,7 @@ theorem externalSectionsUnitAppLeft_naturality
     rw [← Functor.map_comp]
     rfl
 
-/-- The canonical external section morphism on opens of the first factor.
-Source: Stacks Project, Tag 0BED. -/
+/-- The canonical external section morphism on opens of the first factor (Stacks, Tag 0BED). -/
 def externalSectionsUnitLeft
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -116,8 +110,7 @@ def externalSectionsUnitLeft
   app U := externalSectionsUnitAppLeft f g F G U.unop
   naturality _ _ i := externalSectionsUnitAppLeft_naturality f g F G i
 
-/-- At the top open the unit construction is the canonical external product.
-Source: Stacks Project, Tag 0BED. -/
+/-- At the top open the unit construction is the canonical external product (Stacks, Tag 0BED). -/
 theorem externalSectionsUnitLeft_top
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -158,9 +151,8 @@ theorem externalSectionsUnitLeft_top
   rfl
 
 /-- The cartesian open-immersion square transports the unit-defined external
-product on pure tensors to the external product on the open subscheme.
-Source: Stacks Project, Tag 0BED, the degree-zero restriction verification;
-Tags 0096, 0097 and 01CD. -/
+product on pure tensors to the external product on the open subscheme
+(Stacks, Tags 0BED, 0096, 0097 and 01CD). -/
 theorem exists_externalSectionsUnitOpenTransportLeft
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : X.Opens) :

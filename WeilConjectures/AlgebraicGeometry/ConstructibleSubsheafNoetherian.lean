@@ -28,8 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Every subsheaf of a constructible sheaf of modules over a finite commutative ring
-on the small etale site of a Noetherian scheme is constructible.
-Source: Stacks Project, Proposition 59.74.1(3), Tag 03RY. -/
+on the small etale site of a Noetherian scheme is constructible (Stacks, Tag 03RY). -/
 theorem isConstructibleEtaleModuleSheaf_of_mono_noetherian
     {T : Scheme.{u}} [IsNoetherian T] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {G F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

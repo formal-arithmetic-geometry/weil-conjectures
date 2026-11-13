@@ -29,8 +29,8 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCategory
   lowerStar openImmersionLowerShriek rightDerivedLowerStarComp
 
-/-- The intersection word absorbs the inverse triangle from a smaller neighborhood.
-Source: Stacks Tag 0F7J, product-graph extension, intersection calculation. -/
+/-- The intersection word absorbs the inverse triangle from a smaller neighborhood
+(Stacks, Tag 0F7J). -/
 theorem etaleGraphShrinkMiddlePasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

@@ -22,8 +22,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The inverse constant comparison preserves a unit-pulled generator.
-Source: Stacks Project, Tags 0B65 and 03P5. -/
+/-- The inverse constant comparison preserves a unit-pulled generator (Stacks, Tags 0B65 and 03P5).
+-/
 theorem etaleSetConstantPullbackUnitGenerators
     (P U : Scheme.{u}) (h : U ⟶ P) (A : Type (u + 1)) (W : P.Etale) (e : A) :
     (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous

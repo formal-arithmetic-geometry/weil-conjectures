@@ -65,8 +65,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 256 in
 /-- A module complex and its corresponding quasi-coherent derived object on `Spec A`
 have the same Tor amplitude in `[a,b]`. The corresponding object is the image under `Q` of
-the termwise tilde complex of `M`, as in `exists_affineQCohDerivedEquivalence`.
-Source: Stacks Project, Tag 08E9, part (1). -/
+the termwise tilde complex of `M`, as in `exists_affineQCohDerivedEquivalence` (Stacks, Tag 08E9).
+-/
 theorem affine_torAmplitude_iff (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wX}

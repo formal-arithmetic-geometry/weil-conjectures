@@ -236,8 +236,7 @@ noncomputable def ringModuleUnitIso (X : Scheme.{u})
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-/-- A coefficient isomorphism preserves the finite free sectionwise modules.
-Source: Stacks Project, Modules on Sites, Tag 03DO. -/
+/-- A coefficient isomorphism preserves the finite free sectionwise modules (Stacks, Tag 03DO). -/
 noncomputable def ringModuleFreeIso (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}} (e : S ≅ R)
     (n : ℕ) :

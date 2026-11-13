@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The transported extension-by-zero quasi-isomorphism identifies the derived restriction
-with the explicitly constructed local model. No boundedness or freeness is needed.
-Source: Stacks Project, Tag 068C, and derived localization, Tag 05RU. -/
+with the explicitly constructed local model. No boundedness or freeness is needed
+(Stacks, Tags 068C and 05RU). -/
 theorem affine_finite_free_perfect_comparison {Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

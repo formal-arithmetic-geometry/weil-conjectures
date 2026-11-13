@@ -50,8 +50,7 @@ set_option synthInstance.maxSize 2048 in
 
 /-- For a map from the direct image from P to one from W = O ∩ P, invertibility
 on W implies invertibility on O. This applies to every such map, independently
-of any choice of adjunction or of any formula for a mate.
-Source: Stacks Project, Tag 08FE and the local identification in Tag 08DG. -/
+of any choice of adjunction or of any formula for a mate (Stacks, Tags 08FE and 08DG). -/
 theorem derived_open_intersection_isIso_of_restriction
     (X : Scheme.{u}) (O P W : X.Opens) (hW : W = O ⊓ P)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

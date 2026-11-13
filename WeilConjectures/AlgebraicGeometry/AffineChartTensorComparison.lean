@@ -28,10 +28,8 @@ namespace AlgebraicGeometry
 
 /-- A fixed affine triple admits one finitely presented algebra map whose tensor
 base changes describe the restricted chart morphism for every compatible affine base open.
-There is no inverse system or limiting cone in this statement.
-
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Morphisms, Tag 01TQ;
-Limits, Tag 07RP, affine reduction. -/
+There is no inverse system or limiting cone in this statement
+(Stacks, Tags 01JR, 01I4, 01TQ and 07RP). -/
 theorem exists_affineChart_tensorComparison
     {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)
     [LocallyOfFinitePresentation f₀.left]

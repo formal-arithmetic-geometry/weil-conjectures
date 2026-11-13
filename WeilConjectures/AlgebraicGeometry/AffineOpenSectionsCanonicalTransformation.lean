@@ -11,11 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
-/-- Construction of the canonical restriction transformation in the affine continuity argument.
-Source: Stacks Project, Tag 03Q6, degree-zero continuity on affine neighbourhoods.
-The transformation is obtained by composing the adjunction unit with restriction along the
-pullback lift from each affine stage to the limiting object. Naturality is the functoriality
-of restriction and the naturality of the adjunction unit. -/
+/-- Construction of the canonical restriction transformation in the affine continuity argument
+(Stacks, Tag 03Q6). -/
 theorem affineOpenSections_exists_canonical_transformation
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

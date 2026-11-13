@@ -31,14 +31,12 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The module functor used termwise in sfbCompletedModel.
-Source: Stacks Tags 093J and 099L. -/
+/-- The module functor used termwise in sfbCompletedModel (Stacks, Tags 093J and 099L). -/
 def sfbImmersionActualConstants (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   adicLisseConstantModules X A ⋙ completedAdicChange X (CompletedConstantReduction.base X I)
 
-/-- The module functor used termwise in adicResidueConstantPerfect.
-Source: Stacks Tags 093J and 099L. -/
+/-- The module functor used termwise in adicResidueConstantPerfect (Stacks, Tags 093J and 099L). -/
 def sfbImmersionModelConstants (S : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   SheafOfModules.strictPerfectConstantSheaf (proEtaleModelTopology S) A ⋙
@@ -46,8 +44,7 @@ def sfbImmersionModelConstants (S : Scheme.{u})
       (constantModuleHomRingIso (proEtaleModelTopology S) A).inv ⋙
     ConstantCompletion.change (ConstantCompletion.coefficientMap (proEtaleModelTopology S) A I)
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionActualConstants_additive (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionActualConstants X I).Additive := by
@@ -55,8 +52,7 @@ instance sfbImmersionActualConstants_additive (X : Scheme.{u})
   unfold sfbImmersionActualConstants
   infer_instance
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionModelConstants_additive (S : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionModelConstants S I).Additive := by

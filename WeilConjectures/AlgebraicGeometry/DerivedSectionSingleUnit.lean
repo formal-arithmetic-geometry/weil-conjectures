@@ -168,9 +168,7 @@ private lemma sections_unit {X Y : Scheme.{v}} (f : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Before taking homology, the unit–Leray pullback intertwines the two
-right-derived units on single sheaves.
-Source: Stacks Project, Tag 07A6 (derived adjunction), and the defining
-right-derived composite unit for Leray. -/
+right-derived units on single sheaves (Stacks, Tag 07A6). -/
 theorem derivedSectionPullback_single_unit {Y X : Scheme.{v}} (f : X ⟶ Y)
     (M : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (let τ : rightDerivedGlobalSections AddCommGrpCat.{v + 1} Y ⟶

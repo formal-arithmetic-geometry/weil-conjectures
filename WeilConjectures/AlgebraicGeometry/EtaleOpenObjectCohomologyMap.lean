@@ -23,15 +23,15 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The actual free abelian representable sheaf functor used in object cohomology.
-Source: Stacks Project, Tag 03F3, sections represented by free abelian sheaves. -/
+/-- The actual free abelian representable sheaf functor used in object cohomology
+(Stacks, Tag 03F3). -/
 def etaleOpenFreeSheaf (X : Scheme.{u}) :
     X.Etale ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
     presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}
 
-/-- The identity generator, transported to sections of the inverse image on the open.
-Source: Stacks Project, Tag 03F3, the free-sheaf/Yoneda adjunction. -/
+/-- The identity generator, transported to sections of the inverse image on the open
+(Stacks, Tag 03F3). -/
 def etaleOpenFreeSheafSection {X : Scheme.{u}} (U : X.Opens) :
     ((Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj
       ((etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι))).obj.obj
@@ -48,8 +48,8 @@ def etaleOpenFreeSheafSection {X : Scheme.{u}} (U : X.Opens) :
   exact ((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} U.ι
     inferInstance).inv.app A).hom.app (op b) s
 
-/-- The constant-to-pulled-back-free-sheaf map classifying the identity generator.
-Source: Stacks Project, Tag 03F3, the sections adjunction at the terminal object. -/
+/-- The constant-to-pulled-back-free-sheaf map classifying the identity generator
+(Stacks, Tag 03F3). -/
 def etaleOpenFreeSheafUnit {X : Scheme.{u}} (U : X.Opens) :
     (constantSheaf U.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift ℤ)) ⟶
@@ -65,8 +65,7 @@ def etaleOpenFreeSheafUnit {X : Scheme.{u}} (U : X.Opens) :
         ((AddCommGrpCat.uliftZMultiplesAddEquiv _).symm (etaleOpenFreeSheafSection U))
 
 /-- Pull an Ext class back to the open and precompose with the identity generator.
-This is a real construction, with no choice of a comparison isomorphism.
-Source: Stacks Project, Tag 03F3, identification of section complexes. -/
+This is a real construction, with no choice of a comparison isomorphism (Stacks, Tag 03F3). -/
 def etaleOpenObjectCohomologyMap {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (U : X.Opens) :
     ((Functor.flip ((etaleOpenFreeSheaf X).op ⋙ Abelian.extFunctor q)).obj F).obj

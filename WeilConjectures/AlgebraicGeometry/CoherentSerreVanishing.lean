@@ -36,9 +36,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- A coherent module on a proper scheme over a Noetherian ring has zero positive-degree
 cohomology after sufficiently large tensor powers of an ample invertible module, with
 one nonnegative bound for every positive cohomological degree. Tensor powers include
-`L.tensorPow 0 = 𝒪_X`. Cohomology is the right derived functor of module global sections.
-Source: Stacks Project, Cohomology of Schemes, Tags 02O1 and 0B5T (4), and Morphisms,
-Tag 01VK. -/
+`L.tensorPow 0 = 𝒪_X`. Cohomology is the right derived functor of module global sections
+(Stacks, Tags 02O1, 0B5T and 01VK). -/
 theorem exists_isZero_moduleCohomology_tensorPow_of_ample
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

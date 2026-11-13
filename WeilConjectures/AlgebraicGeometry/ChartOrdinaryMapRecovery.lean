@@ -21,8 +21,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The ordinary recovery equation for a map on a pulled-back chart.
-Source: Stacks Project, Tags 0095 and 0096. -/
+/-- The ordinary recovery equation for a map on a pulled-back chart (Stacks, Tags 0095 and 0096). -/
 @[irreducible] noncomputable def chartOrdinaryMapRecovery
     {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)
     (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)

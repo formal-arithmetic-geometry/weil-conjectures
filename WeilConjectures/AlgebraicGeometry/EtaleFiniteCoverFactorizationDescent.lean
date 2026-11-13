@@ -147,10 +147,8 @@ private theorem covering_of_iso
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite affine covering of a fixed base-changed object, together with one map from
  each covering object into a base-changed original étale object, descends to a common
- stage. This is a geometric assertion: it contains no sheaf or section.
-
-Source: Stacks Project, Étale Cohomology Tag 0EYL, qcqs case,
-and Limits Tags 01ZM and 01ZC, descent of finite-presentation objects and arrows. -/
+ stage. This is a geometric assertion: it contains no sheaf or section
+(Stacks, Tags 0EYL, 01ZM and 01ZC). -/
 theorem etale_finiteCoverFactorizationDescent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

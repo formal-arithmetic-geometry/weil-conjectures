@@ -50,9 +50,8 @@ local instance {X : Scheme.{u}} (H : X.Modules)
   inferInstanceAs (SMul (X.sheaf.obj.obj (op V)) (H.val.obj (op V)))
 
 /-- A sufficiently high ideal-power product has no ideal-power torsion,
-and its inclusion is bijective on sections over the ideal complement.
-
-Source: Stacks Project, Tag 01YB, second paragraph; Tags 01Y8 and 01YA. -/
+and its inclusion is bijective on sections over the ideal complement
+(Stacks, Tags 01YB, 01Y8 and 01YA). -/
 theorem exists_coherent_idealPower_torsionFree_product
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (H : X.Modules) [H.IsQuasicoherent]

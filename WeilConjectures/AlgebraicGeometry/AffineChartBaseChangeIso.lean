@@ -26,10 +26,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A specified spectrum presentation of an open chart over an affine base induces a
-spectrum presentation of its inverse image under base change, with both projections fixed.
-
-Source: Stacks Project, Schemes, Tags 01JR (open fibre products) and 01I4
-(affine fibre products). -/
+spectrum presentation of its inverse image under base change, with both projections fixed
+(Stacks, Tags 01JR and 01I4). -/
 theorem exists_affineChart_baseChangeIso
     {S Z : Scheme.{u}} (z : Z ⟶ S)
     (W : S.Opens) (V : Z.Opens) (eV : V ≤ z ⁻¹ᵁ W)

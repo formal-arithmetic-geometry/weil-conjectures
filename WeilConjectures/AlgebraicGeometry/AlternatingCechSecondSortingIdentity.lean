@@ -29,9 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The repeated-tuple operator contracts stable sorting minus alternating projection.
-
-Source: Stacks 01FM, equation 20.23.6.2, transported by signed stable sorting. -/
+/-- The repeated-tuple operator contracts stable sorting minus alternating projection
+(Stacks, Tag 01FM). -/
 theorem cechSecondSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) :

@@ -66,8 +66,8 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-/-- The counit transported by κ is B-linear when F carries its B-action through ε.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+/-- The counit transported by κ is B-linear when F carries its B-action through ε
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counitLinear
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

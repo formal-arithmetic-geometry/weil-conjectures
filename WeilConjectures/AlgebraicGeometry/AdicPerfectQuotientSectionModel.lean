@@ -29,8 +29,8 @@ variable (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
 
 attribute [local irreducible] adicPerfectQuotientFunctor adicPerfectQuotientModuleStep
 
-/-- The ordinary adjunction tower, with its proved unit identity stored as a field.
-Source: Stacks 03CY, 03EK. -/
+/-- The ordinary adjunction tower, with its proved unit identity stored as a field
+(Stacks, Tags 03CY and 03EK). -/
 structure SectionModel where
   R : ∀ n : ℕ,
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
@@ -64,18 +64,17 @@ def SectionModel.ofAdjunctions
     (C₀ := change (adicPerfectQuotientScalarStep X J U n))
     (a n) (a (n + 1)) (adicPerfectQuotientModuleStep X J U n) M
 
-/-- Supply the concrete terminal sections adjoints to the general constructor.
-Source: Stacks 03CY, 03EK. -/
+/-- Supply the concrete terminal sections adjoints to the general constructor
+(Stacks, Tags 03CY and 03EK). -/
 theorem sectionModel_exists : Nonempty (SectionModel X J U) :=
   ⟨SectionModel.ofAdjunctions X J U (rawRightAdjoint X J U) (rawAdjunction X J U)⟩
 
 /-- An adjunction tower selected from the preceding completely proved construction.
-Its fields are abstract interfaces, so consumers do not reduce scalar tensor implementations.
-Source: Stacks 03CY, 03EK. -/
+Its fields are abstract interfaces, so consumers do not reduce scalar tensor implementations
+(Stacks, Tags 03CY and 03EK). -/
 def sectionModel : SectionModel X J U := Classical.choice (sectionModel_exists X J U)
 
-/-- The right adjoints of the constructed tower.
-Source: Stacks 03CY. -/
+/-- The right adjoints of the constructed tower (Stacks, Tag 03CY). -/
 def rightAdjoint : ∀ n : ℕ,
     Mod ((finite (coefficientProEtaleModelTopology.{u, v} X) A J n).over U) ⥤
       ModuleCat.{max v (u + 1)} A :=
@@ -83,8 +82,7 @@ def rightAdjoint : ∀ n : ℕ,
 
 attribute [local irreducible] rightAdjoint
 
-/-- The adjunctions of the constructed tower.
-Source: Stacks 03CY, 03EK. -/
+/-- The adjunctions of the constructed tower (Stacks, Tags 03CY and 03EK). -/
 def adjunction : ∀ n : ℕ, adicPerfectQuotientFunctor X J U n ⊣
     rightAdjoint X J U n := by
   unfold rightAdjoint
@@ -92,8 +90,7 @@ def adjunction : ∀ n : ℕ, adicPerfectQuotientFunctor X J U n ⊣
 
 attribute [local irreducible] adjunction
 
-/-- The scalar successor maps of the constructed tower.
-Source: Stacks 03EK. -/
+/-- The scalar successor maps of the constructed tower (Stacks, Tag 03EK). -/
 def step : ∀ n : ℕ, rightAdjoint X J U (n + 1) ⟶
     change (adicPerfectQuotientScalarStep X J U n) ⋙ rightAdjoint X J U n := by
   unfold rightAdjoint
@@ -101,8 +98,7 @@ def step : ∀ n : ℕ, rightAdjoint X J U (n + 1) ⟶
 
 attribute [local irreducible] step
 
-/-- The already proved unit equation of the constructed tower.
-Source: Stacks 03EK. -/
+/-- The already proved unit equation of the constructed tower (Stacks, Tag 03EK). -/
 theorem step_unit (n : ℕ) (M : ModuleCat.{max v (u + 1)} A) :
     (adjunction X J U n).unit.app M =
       (adjunction X J U (n + 1)).unit.app M ≫

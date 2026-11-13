@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 
 /-- The canonical Čech comparison isomorphisms transport the map of cochains obtained by
-applying a quasi-coherent module morphism componentwise to the induced cohomology map.
-Source: Stacks 01EQ and 01XD. -/
+applying a quasi-coherent module morphism componentwise to the induced cohomology map
+(Stacks, Tags 01EQ and 01XD). -/
 theorem moduleCechComparison_natural_affine (X : Scheme.{u}) {ι : Type u}
     (U : ι → X.Opens)
     (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))

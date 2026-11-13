@@ -88,8 +88,7 @@ private lemma openGenerator_identity {X : Scheme.{u}} (U : X.Opens) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option maxRecDepth 4096 in
-/-- The degree-zero identity generator commutes with pullback.
-Source: Stacks Project, Tag 03F3 (localization), Tags 01F8/01FB (functoriality). -/
+/-- The degree-zero identity generator commutes with pullback (Stacks, Tags 03F3, 01F8 and 01FB). -/
 theorem etaleOpenFreeSheafUnit_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens) :
     etaleOpenFreeSheafUnit (g ⁻¹ᵁ W) ≫
       (upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ W).ι).map

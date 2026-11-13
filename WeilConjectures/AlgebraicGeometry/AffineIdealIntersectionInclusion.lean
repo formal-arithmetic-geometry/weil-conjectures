@@ -302,8 +302,8 @@ namespace Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An inclusion between affine section submodules gives the corresponding inclusion
-of ideal products on every subopen. No bound, coherence or Noetherian hypothesis is used.
-Source: Stacks Project, Tag 01YA, affine reduction; Tags 01I8 and 01IC. -/
+of ideal products on every subopen. No bound, coherence or Noetherian hypothesis is used
+(Stacks, Tags 01YA, 01I8 and 01IC). -/
 theorem affine_ideal_intersection_inclusion {X : Scheme.{u}}
     (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]
     (g : G ⟶ F) [Mono g] (I : X.IdealSheafData) (U : X.affineOpens) (m n : ℕ)

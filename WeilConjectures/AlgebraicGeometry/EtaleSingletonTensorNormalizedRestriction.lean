@@ -77,8 +77,8 @@ private theorem smul_pinned {A B : Scheme.{u}} (G : A.Modules) (H : B.Modules)
   exact (congrArg (fun r ↦ (G.smul a).asHom ≫ r) (seal_eq r)).trans
     ((hr a).trans (congrArg (fun r ↦ r ≫ (H.smul (σ a)).asHom) (seal_eq r).symm))
 
-/-- The evaluated normalized pure sections agree after omitting a factor.
-Source: Stacks Project, Tag 03P2 (tensor Čech identification), Tag 03DR. -/
+/-- The evaluated normalized pure sections agree after omitting a factor
+(Stacks, Tags 03P2 and 03DR). -/
 theorem singletonTensor_normalized_restriction
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

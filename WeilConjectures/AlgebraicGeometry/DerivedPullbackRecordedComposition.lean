@@ -33,7 +33,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The tensor functor and universal counit in the original derived-pullback presentation.
-The additive instance is included. (Stacks, Tag 06YJ) -/
+The additive instance is included (Stacks, Tag 06YJ). -/
 structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
   E : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
     SheafOfModules.{u} (moduleRings X.toRingedSpace)
@@ -53,7 +53,7 @@ structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
       CochainComplex.IsKFlatTensor (R := Y.sheaf) P →
         IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))
 
-/-- The complete original witness used to define `derivedPullback`. (Stacks, Tag 06YJ) -/
+/-- The complete original witness used to define `derivedPullback` (Stacks, Tag 06YJ). -/
 @[irreducible] noncomputable def recordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) :
     RecordedPullbackData f := by
   classical
@@ -61,22 +61,19 @@ structure RecordedPullbackData {X Y : Scheme.{u}} (f : X ⟶ Y) where
   choose E hE hEmap hEa ε hε using hprops.2.2.2
   exact ⟨E, hE, hEmap, hEa, ε, hε.1, hε.2.2⟩
 
-/-- Equality of the recorded tensor functor with the fixed tensor formula.
-Source: Stacks Project, Tag 06YJ. -/
+/-- Equality of the recorded tensor functor with the fixed tensor formula (Stacks, Tag 06YJ). -/
 theorem recordedPullbackData_E {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (recordedPullbackData f).E = Scheme.Modules.tensorPullback f :=
   CategoryTheory.Functor.ext (recordedPullbackData f).obj_eq
     (fun _ _ a ↦ (recordedPullbackData f).map_eq a)
 
-/-- Additivity of the tensor pullback in the original presentation.
-Source: Stacks Project, Tag 06YJ. -/
+/-- Additivity of the tensor pullback in the original presentation (Stacks, Tag 06YJ). -/
 theorem recordedPullbackData_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (recordedPullbackData f).E.Additive :=
   (recordedPullbackData f).additive
 
 /-- Transport a counit along equality of its underived tensor functors.
-This is equality transport, with no selection of natural-transformation data.
-Source: Stacks Project, Tag 06YJ. -/
+This is equality transport, with no selection of natural-transformation data (Stacks, Tag 06YJ). -/
 noncomputable def recordedTransportCounit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (E E' : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace)) [E.Additive] [E'.Additive]
@@ -116,8 +113,8 @@ private theorem transportCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
   cases h
   exact hε
 
-/-- The original counit, transported along equality of the tensor-formula functors.
-Source: Stacks Project, Tag 06YJ. -/
+/-- The original counit, transported along equality of the tensor-formula functors
+(Stacks, Tag 06YJ). -/
 @[irreducible] noncomputable def recordedDerivedPullbackCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI : (Scheme.Modules.tensorPullback f).Additive := by
       rw [← recordedPullbackData_E f]
@@ -131,8 +128,7 @@ Source: Stacks Project, Tag 06YJ. -/
   exact recordedTransportCounit f (recordedPullbackData f).E (Scheme.Modules.tensorPullback f)
     (recordedPullbackData_E f) (recordedPullbackData f).ε
 
-/-- The retained counit has the original universal property.
-Source: Stacks Project, Tag 06YJ. -/
+/-- The retained counit has the original universal property (Stacks, Tag 06YJ). -/
 theorem recordedDerivedPullbackCounit_universal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedPullback f).IsLeftDerivedFunctor (recordedDerivedPullbackCounit f)
       (HomotopyCategory.quasiIso
@@ -145,8 +141,7 @@ theorem recordedDerivedPullbackCounit_universal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Scheme.Modules.tensorPullback f) (recordedPullbackData_E f)
     (recordedPullbackData f).ε (recordedPullbackData f).universal
 
-/-- The retained counit computes pullback on K-flat complexes.
-Source: Stacks Project, Tag 06YJ. -/
+/-- The retained counit computes pullback on K-flat complexes (Stacks, Tag 06YJ). -/
 theorem recordedDerivedPullbackCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (hP : CochainComplex.IsKFlatTensor (R := Y.sheaf) P) :
@@ -162,8 +157,8 @@ theorem recordedDerivedPullbackCounit_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local instance] recordedDerivedPullbackCounit_universal
 
-/-- The explicit composite of the original counits and the canonical tensor associator.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The explicit composite of the original counits and the canonical tensor associator
+(Stacks, Tag 0D5S). -/
 noncomputable def recordedDerivedPullbackCompositionLift {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ⟶ derivedPullback (f ≫ g) := by
@@ -190,8 +185,7 @@ noncomputable def recordedDerivedPullbackCompositionLift {X Y Z : Scheme.{u}}
             (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)).hom
         (DerivedCategory.Qh (C := SheafOfModules.{u} (moduleRings X.toRingedSpace))))
 
-/-- The explicit lift is invertible by its K-flat computation.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The explicit lift is invertible by its K-flat computation (Stacks, Tag 0D5S). -/
 theorem recordedDerivedPullbackCompositionLift_isIso {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) : IsIso (recordedDerivedPullbackCompositionLift f g) := by
   exact isIso_derivedPullbackCompositionLift
@@ -203,8 +197,8 @@ theorem recordedDerivedPullbackCompositionLift_isIso {X Y Z : Scheme.{u}}
 
 attribute [local instance] recordedDerivedPullbackCompositionLift_isIso
 
-/-- Composition of derived pullbacks, constructed from the retained original counits.
-Source: Stacks Project, Tag 0D5S. -/
+/-- Composition of derived pullbacks, constructed from the retained original counits
+(Stacks, Tag 0D5S). -/
 noncomputable def recordedDerivedPullbackComposition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=

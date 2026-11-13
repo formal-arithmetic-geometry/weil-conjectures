@@ -145,8 +145,8 @@ variable (X Y : Scheme.{u}) (h : X ⟶ Y)
 attribute [local instance 2000] schemeMVModuleAbelian
 
 /-- The canonical restriction comparison is the derivation of the sectionwise
-restriction identification, with its exact-source and exact-target factors.
-Source: Stacks Tag 08FE; Tag 0D5T for the composition factors. -/
+restriction identification, with its exact-source and exact-target factors
+(Stacks, Tags 08FE and 0D5T). -/
 theorem schemeMVOpenRestriction_unit_normalization
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))
       (ComplexShape.up ℤ)) :

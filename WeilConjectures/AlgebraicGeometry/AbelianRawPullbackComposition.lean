@@ -163,9 +163,8 @@ private lemma rawGeneralComp (A : Type (v + 2)) [Category.{v + 1} A]
   rw [ht]
 
 /-- Two varying-coefficient raw pullbacks compose on each derived-Hom group.
-The composite scheme map and coefficient map may be given with canonical transports.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps; Tag 03CB, composition of
-inverse images. -/
+The composite scheme map and coefficient map may be given with canonical transports
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianHigherDirectImageRawPullback_composition {S Y Y' Y'' : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (d : Y'' ⟶ Y) (hd : d = b ≫ a)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)

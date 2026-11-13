@@ -254,8 +254,7 @@ private theorem lisse_of_iso
   exact ⟨M, hM, ⟨(overFunctor _ U).mapIso e ≪≫ i⟩⟩
 
 /-- A bijective change of constant coefficients reflects finite locally constant
-cohomology in each degree. Source: Stacks Project, Cohomology on Sites, Tags 06YY
-and 094I. -/
+cohomology in each degree (Stacks, Tags 06YY and 094I). -/
 theorem locallyConstantFiniteTypeModules_of_scalarExtension_bijective
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)

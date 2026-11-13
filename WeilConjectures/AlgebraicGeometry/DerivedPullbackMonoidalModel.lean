@@ -37,8 +37,7 @@ attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePre
 /-- A monoidal structure on derived pullback is induced by the recorded module tensor
 comparison when its left-derived counit is compatible with the tensor comparisons.
 The module tensor comparison is pinned to `module_pullback_tensor`;
-the unit is then fixed by its unit laws.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27. -/
+the unit is then fixed by its unit laws (Stacks, Tag 079U). -/
 def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
@@ -112,8 +111,7 @@ private theorem reassoc_pinned {C : Type*} [Category C] {A B D E G : C}
 
 /-- The canonical module tensor comparison descends to a monoidal model of derived pullback.
 Statements that use the model quantify over every `m` with
-`IsDerivedPullbackMonoidalModel g m` rather than choosing one.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27. -/
+`IsDerivedPullbackMonoidalModel g m` rather than choosing one (Stacks, Tag 079U). -/
 theorem exists_derivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))] :

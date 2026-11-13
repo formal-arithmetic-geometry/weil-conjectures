@@ -29,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The presheaf `V ↦ Hⁱ(RΓ(f⁻¹V,E))`, with the restriction maps induced by the same
-K-injective resolution and the `𝒪_Y(V)`-action induced by `f`. (Stacks, Tag 0D5X) -/
+K-injective resolution and the `𝒪_Y(V)`-action induced by `f` (Stacks, Tag 0D5X). -/
 noncomputable def schemeDerivedSectionPresheaf {X Y : Scheme.{a}}
     [HasDerivedCategory.{b} (SheafOfModules.{a} (moduleRings X.toRingedSpace))]
     (f : X ⟶ Y) (i : ℤ) :

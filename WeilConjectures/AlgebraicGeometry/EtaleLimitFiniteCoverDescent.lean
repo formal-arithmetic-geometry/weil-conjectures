@@ -22,8 +22,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Descend just the finite geometric covering, with its arrow equations.
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YQ. -/
+/-- Descend just the finite geometric covering, with its arrow equations
+(Stacks, Tags 01ZM, 07RP, 07RR and 09YQ). -/
 theorem exists_etale_limit_finite_cover_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

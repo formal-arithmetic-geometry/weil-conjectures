@@ -29,10 +29,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Localization identifies good lower truncation with t-structure lower truncation,
-with the canonical projection fixed.
-
-Source: Stacks Project, Derived Categories, Tag 015A; uniqueness of truncation
-triangles, as in the parent bridge step 1. -/
+with the canonical projection fixed (Stacks, Tag 015A). -/
 private theorem lowerTruncationLocalization
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (I : CochainComplex C ℤ) (n : ℤ) :
@@ -99,10 +96,7 @@ private theorem preservesBottomHomology
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual right-derived unit is invertible on bottom cohomology of a
-complex that is strictly zero in lower degrees.
-
-Source: Stacks Project, Derived Categories, Tags 05TC (2), 05TH, 05TI, 015A;
-parent bridge step 2. -/
+complex that is strictly zero in lower degrees (Stacks, Tags 05TC, 05TH, 05TI and 015A). -/
 private theorem isIsoBottomUnit
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]
@@ -156,10 +150,8 @@ private theorem isIsoBottomUnit
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived edge map factors through the underived lower truncation, and
 its bottom-degree comparison there is invertible. This concerns the derived
-unit and localization only; it contains no cycle-class or homology quotient map.
-
-Source: Stacks Project, Tag 05TC (2); Tags 015A, 05TH, 05TI, and naturality of
-localization and of the right-derived unit. -/
+unit and localization only; it contains no cycle-class or homology quotient map
+(Stacks, Tags 05TC, 015A, 05TH and 05TI). -/
 theorem derived_lower_truncation_unit_bridge
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]

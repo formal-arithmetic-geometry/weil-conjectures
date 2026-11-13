@@ -24,9 +24,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Scalar extension preserves global sections of every module-valued etale sheaf.
-Source: Stacks Project, Tag 0A3I; the coefficient-forgetting comparison is the
-Kan-extension/sheafification comparison of inverse images. -/
+/-- Scalar extension preserves global sections of every module-valued etale sheaf
+(Stacks, Tag 0A3I). -/
 theorem isIso_globalSectionsUpperStarMap_algClosed_extension
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) (n : ℕ)

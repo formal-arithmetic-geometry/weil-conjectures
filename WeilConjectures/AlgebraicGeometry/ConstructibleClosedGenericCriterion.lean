@@ -20,8 +20,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Generic finite local constancy on every closed subscheme implies constructibility.
-Source: Stacks Project, Tag 09BH, Noetherian-induction step, and Tag 095E. -/
+/-- Generic finite local constancy on every closed subscheme implies constructibility
+(Stacks, Tags 09BH and 095E). -/
 theorem constructible_of_closed_generic
     {X : Scheme.{u}} [IsNoetherian X] {Λ : Type (u + 1)} [CommRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

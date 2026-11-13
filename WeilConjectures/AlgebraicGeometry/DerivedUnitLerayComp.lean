@@ -44,8 +44,8 @@ private theorem derivedUnit_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y
         (Functor.mapDerivedCategoryCompIso (upperStar A f)
           (upperStar A g)).symm).hom K).symm
 
-/-- The derived unit--Leray composites respect inverse-image composition.
-Source: Stacks Project, Tags 015M and 03CB. -/
+/-- The derived unit--Leray composites respect inverse-image composition
+(Stacks, Tags 015M and 03CB). -/
 theorem derivedUnitLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (rightDerivedGlobalSections A X).map

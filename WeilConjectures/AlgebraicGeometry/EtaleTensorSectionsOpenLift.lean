@@ -20,9 +20,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- A lift on one Zariski open transports to a lift of the normalized tensor restriction.
-Source: Stacks Project, Tags 0096 and 03DR; restriction along an open immersion
-agrees with pullback, and equation (35.8.0.1) gives the normalized composition map. -/
+/-- A lift on one Zariski open transports to a lift of the normalized tensor restriction
+(Stacks, Tags 0096 and 03DR). -/
 theorem etaleTensorSections_open_lift {X : Scheme.{u}} {G H : X.Modules}
     (ψ : G ⟶ H) (U : X.Etale) (V : U.left.Opens)
     (s : Γ((tensorPullback U.hom).obj H, ⊤))

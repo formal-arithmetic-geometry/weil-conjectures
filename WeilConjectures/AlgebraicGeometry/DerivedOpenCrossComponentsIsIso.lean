@@ -32,9 +32,8 @@ set_option synthInstance.maxSize 2048 in
 -- Threefold transported overlap restrictions require additional instance search.
 -- Transported threefold restrictions require the same instance budget as the parent theorem.
 /-- The adjoint overlap counits are invertible on the opposite open. This concerns
-only the individual summands, without choosing a difference diagram or a gluing object.
-Source: Stacks Project, Cohomology, Tag 08DG, the restriction of the
-second arrow to U and V; Tag 08FE. -/
+only the individual summands, without choosing a difference diagram or a gluing object
+(Stacks, Tags 08DG and 08FE). -/
 theorem derived_open_cross_components_isIso
     (X : Scheme.{u}) (U V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -30,48 +30,41 @@ Source: the supplied compactification equations. -/
 theorem equation : ((𝟙 X) ≫ r.i) ≫ r.g = s.i ≫ s.g := by
   simp only [Category.id_comp, ← r.comm, ← s.comm]
 
-/-- The proper graph `(1,rs.hom)` in the product of the two ambient schemes.
-Source: Stacks Tags 0F7C--0F7E, refinement projection grids. -/
+/-- The proper graph `(1,rs.hom)` in the product of the two ambient schemes
+(Stacks, Tags 0F7C and 0F7E). -/
 def z : r.Z ⟶ pullback r.g s.g :=
   pullback.lift (𝟙 r.Z) rs.hom (by simpa using rs.hom_g.symm)
 
-/-- The proper ambient structural map of the fixed graph.
-Source: the product graph formula, Stacks Tag 0F7B. -/
+/-- The proper ambient structural map of the fixed graph (Stacks, Tag 0F7B). -/
 abbrev p : pullback r.g s.g ⟶ Y := pullback.fst r.g s.g ≫ r.g
 
-/-- The first supporting open, pulled back from `s`.
-Source: the product graph formula, Stacks Tag 0F7B. -/
+/-- The first supporting open, pulled back from `s` (Stacks, Tag 0F7B). -/
 abbrev b₁ := pullback.fst (pullback.snd r.g s.g) s.i
 
-/-- The second supporting open, pulled back from `r`.
-Source: the product graph formula, Stacks Tag 0F7B. -/
+/-- The second supporting open, pulled back from `r` (Stacks, Tag 0F7B). -/
 abbrev b₂ := pullback.fst (pullback.fst r.g s.g) r.i
 
-/-- The first graph lift.
-Source: the explicit graph formula, Stacks Tag 0F7B. -/
+/-- The first graph lift (Stacks, Tag 0F7B). -/
 abbrev s₁ := locallyClosedGraphS₁ (𝟙 X) r.i r.g s.i s.g (equation s r)
 
-/-- The second graph lift.
-Source: the explicit graph formula, Stacks Tag 0F7B. -/
+/-- The second graph lift (Stacks, Tag 0F7B). -/
 abbrev s₂ := locallyClosedGraphS₂ (𝟙 X) r.i r.g s.i s.g (equation s r)
 
-/-- Properness follows by composing with the separated first projection to obtain `1`.
-Source: Stacks Tag 01W6. -/
+/-- Properness follows by composing with the separated first projection to obtain `1`
+(Stacks, Tag 01W6). -/
 instance z_proper : IsProper (z s r rs) := by
   have : IsProper (z s r rs ≫ pullback.fst r.g s.g) := by
     simpa only [z, pullback.lift_fst] using (inferInstance : IsProper (𝟙 r.Z))
   exact IsProper.of_comp _ (pullback.fst r.g s.g)
 
-/-- Properness of the first neighborhood graph.
-Source: Stacks Tag 01W6. -/
+/-- Properness of the first neighborhood graph (Stacks, Tag 01W6). -/
 instance s₁_proper : IsProper (s₁ s r) := by
   have : IsProper (s₁ s r ≫ pullback.snd (pullback.snd r.g s.g) s.i) := by
     simpa only [s₁, locallyClosedGraphS₁, pullback.lift_snd] using
       (inferInstance : IsProper (𝟙 X))
   exact IsProper.of_comp _ (pullback.snd (pullback.snd r.g s.g) s.i)
 
-/-- Properness of the second neighborhood graph.
-Source: Stacks Tag 01W6. -/
+/-- Properness of the second neighborhood graph (Stacks, Tag 01W6). -/
 instance s₂_proper : IsProper (s₂ s r) := by
   have : IsProper (s₂ s r ≫ pullback.snd (pullback.fst r.g s.g) r.i) := by
     simpa only [s₂, locallyClosedGraphS₂, pullback.lift_snd] using
@@ -133,8 +126,8 @@ def middle :
       (locallyClosedGraphMiddle (𝟙 X) r.i r.g s.i s.g (equation s r) A) _ ≪≫
     Functor.associator _ _ _
 
-/-- Transport the first graph neighborhood along the proper graph, including exterior image.
-Source: Cartesian proper/open interchange, Stacks Tags 0F7B--0F7C. -/
+/-- Transport the first graph neighborhood along the proper graph, including exterior image
+(Stacks, Tags 0F7B and 0F7C). -/
 def transport₁ (hs : IsPullback r.i (𝟙 X) rs.hom s.i) :
     R((s₁ s r)_*[ModuleCat.{u + 1} A]) ⋙
         D((b₁ s r)_!open[ModuleCat.{u + 1} A]) ⋙ R((p s r)_*[ModuleCat.{u + 1} A]) ≅
@@ -146,8 +139,8 @@ def transport₁ (hs : IsPullback r.i (𝟙 X) rs.hom s.i) :
     Functor.isoWhiskerLeft _ (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A)
       (z s r rs) (p s r) r.g (z_p s r rs))
 
-/-- Transport the second graph neighborhood along the same proper graph.
-Source: Cartesian proper/open interchange, Stacks Tags 0F7B--0F7C. -/
+/-- Transport the second graph neighborhood along the same proper graph
+(Stacks, Tags 0F7B and 0F7C). -/
 def transport₂ :
     R((s₂ s r)_*[ModuleCat.{u + 1} A]) ⋙
         D((b₂ s r)_!open[ModuleCat.{u + 1} A]) ⋙ R((p s r)_*[ModuleCat.{u + 1} A]) ≅

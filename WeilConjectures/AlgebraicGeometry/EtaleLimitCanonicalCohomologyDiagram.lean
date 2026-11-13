@@ -63,9 +63,8 @@ private theorem cohomology_composition_transport {X Y Z : Scheme.{u}}
 -- The existential witness `hH` is intentionally unused in the following conclusion.
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Cohomology functoriality constructs the canonical comparison diagram in any degree.
-
-Source: Stacks Project, Tags 01F7 and 09YQ (canonical comparison map). -/
+/-- Cohomology functoriality constructs the canonical comparison diagram in any degree
+(Stacks, Tags 01F7 and 09YQ). -/
 theorem etale_limit_canonical_cohomology_diagram
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -21,9 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Compatible affine reconstruction projections assemble into a natural isomorphism.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, affine correspondence and
-M/I^n M = M_n; Algebra, Lemma 05G8, surjective finite-module endomorphisms. -/
+/-- Compatible affine reconstruction projections assemble into a natural isomorphism
+(Stacks, Tags 087W and 05G8). -/
 theorem coherentFormalModules_affine_reconstruction_assembly
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

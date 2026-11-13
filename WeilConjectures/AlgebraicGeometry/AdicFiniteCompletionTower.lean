@@ -71,9 +71,7 @@ attribute [local irreducible] adicFiniteStrictReductionLevel
   HasDerivedCategory.standard dres change extend adicFiniteTransition
 
 /-- The strict ordinary quotient tower on a K-flat representative computes the normalized
-finite reductions, with all successor maps retained.
-
-Source: Stacks Project, Tag 06YY (derived tensor products) and Tag 099M. -/
+finite reductions, with all successor maps retained (Stacks, Tags 06YY and 099M). -/
 private theorem adicFiniteStrictReduction_comparison
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))

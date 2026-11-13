@@ -24,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- Compatible stage short exact sequences and their limit sequence.
-Source: Stacks Project, Tags 0EXZ and 09YP, construction of the injective system and
-its cokernel; exactness of filtered sheaf colimits. -/
+/-- Compatible stage short exact sequences and their limit sequence (Stacks, Tags 0EXZ and 09YP). -/
 theorem etale_limit_replacement_exact_systems
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -75,9 +75,8 @@ private theorem idealAction_zero_of_iso {Y : Scheme.{u}}
 
 
 /-- Every scalar Ext sheaf from the pushed-forward structure sheaf is annihilated
-by the closed-immersion ideal, without regularity or finite-presentation assumptions.
-
-Source: Stacks Project, Tag 0BUZ (precomposition algebra action), and Tag 0BQZ. -/
+by the closed-immersion ideal, without regularity or finite-presentation assumptions
+(Stacks, Tags 0BUZ and 0BQZ). -/
 theorem closedImmersion_ext_idealAction_eq_zero
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

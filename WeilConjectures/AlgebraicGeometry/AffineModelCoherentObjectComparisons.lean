@@ -41,8 +41,8 @@ noncomputable abbrev affineModelTildeComplex (A : CommRingCat.{u}) :
       SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) (tilde.functor A))
     ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
 
-/-- Localization of termwise tilde followed by the supplied coordinate equivalence.
-Source: the defining affine comparison functor in Stacks, Tag 09RE. -/
+/-- Localization of termwise tilde followed by the supplied coordinate equivalence
+(Stacks, Tag 09RE). -/
 noncomputable def affineModelLocalizedTilde (A : CommRingCat.{u}) (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -72,8 +72,8 @@ noncomputable abbrev affineModelScalarPair {A B : Type u} [CommRing A] [CommRing
   cond q (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj E)
     (((ModuleCat.extendScalars f).mapHomologicalComplex (.up ℤ)).obj K)
 
-/-- Scalar-extension reassociation, including the specified equality of ring maps.
-Source: Stacks Project, Tag 09RE; `ModuleCat.extendScalarsComp`. -/
+/-- Scalar-extension reassociation, including the specified equality of ring maps
+(Stacks, Tag 09RE). -/
 @[irreducible]
 noncomputable def affineModelScalarAssocIso
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
@@ -112,8 +112,7 @@ theorem affineModelScalarAssocIso_inv
   unfold affineModelScalarAssocIso
   rfl
 
-/-- The finite-stage base arrow in the over category.
-Source: Spec functoriality; Stacks, Tag 09RE. -/
+/-- The finite-stage base arrow in the over category (Stacks, Tag 09RE). -/
 noncomputable abbrev affineModelStageArrow {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i : I}
     (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k) :
@@ -122,8 +121,7 @@ noncomputable abbrev affineModelStageArrow {I : Type u} [Preorder I]
   Over.homMk (Spec.map (R.map (homOfLE hjk)))
     (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)
 
-/-- The arrow from the cocone spectrum to a finite-stage spectrum.
-Source: Spec functoriality and cocone naturality; Stacks, Tag 09RE. -/
+/-- The arrow from the cocone spectrum to a finite-stage spectrum (Stacks, Tag 09RE). -/
 noncomputable abbrev affineModelLimitArrow {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I}
     (j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) :
@@ -161,8 +159,8 @@ private theorem affineModel_conjugation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Scalar extension of a map is conjugation by the explicit reassociation maps.
-Source: Stacks Project, Tag 09RE; ModuleCat.extendScalarsComp. -/
+/-- Scalar extension of a map is conjugation by the explicit reassociation maps (Stacks, Tag 09RE).
+-/
 private theorem scalarExtensionHom_assoc
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (hc : h = g.comp f)
@@ -220,8 +218,8 @@ private theorem affineModel_scalarConjugation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The natural-isomorphism form of scalar conjugation avoids expanding its components.
-Source: naturality and scalar reassociation; Stacks, Tag 09RE. -/
+/-- The natural-isomorphism form of scalar conjugation avoids expanding its components
+(Stacks, Tag 09RE). -/
 theorem affineModel_scalarConjugation_nat
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (hc : h = g.comp f)
@@ -268,8 +266,7 @@ variable {I : Type u} [Preorder I]
       (dlim : schemeDerivedCategory (Spec (C.pt)) ≌
         schemeDerivedCategory (pullback s (Spec.map (c.ι.app i))))
 
-/-- Object comparisons at every finite stage for one model.
-Source: Stacks, Tag 09RE, affine model formula. -/
+/-- Object comparisons at every finite stage for one model (Stacks, Tag 09RE). -/
 abbrev AffineModelStageObjects : Type _ :=
   ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),
     (affineModelLocalizedTilde (F.obj j.val) _ (d j)).obj
@@ -277,15 +274,14 @@ abbrev AffineModelStageObjects : Type _ :=
           (ModuleCat.extendScalars (F.map (homOfLE j.property)).hom) (.up ℤ)).obj E) ≅
       (derivedPullback (pullback.fst s (Spec.map (R.map (homOfLE j.val.property))))).obj P
 
-/-- Object comparison at the cocone point for one model.
-Source: Stacks, Tag 09RE, affine model formula. -/
+/-- Object comparison at the cocone point for one model (Stacks, Tag 09RE). -/
 abbrev AffineModelLimitObject : Type _ :=
   (affineModelLocalizedTilde C.pt _ dlim).obj
       (((ModuleCat.extendScalars (C.ι.app ⟨i, le_rfl⟩).hom).mapHomologicalComplex (.up ℤ)).obj E) ≅
     (derivedPullback (pullback.fst s (Spec.map (c.ι.app i)))).obj P
 
-/-- Natural affine comparisons for finite-stage arrows on the two labelled models.
-Source: Stacks, Tags 09RE and 0D5S. -/
+/-- Natural affine comparisons for finite-stage arrows on the two labelled models
+(Stacks, Tags 09RE and 0D5S). -/
 abbrev AffineModelStageArrowComparisons : Type _ :=
   ∀ (j k : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i)) (hjk : j ≤ k),
     inducedFunctor (affineModelScalarPair (F.map (homOfLE j.property)).hom E K) ⋙
@@ -295,8 +291,8 @@ abbrev AffineModelStageArrowComparisons : Type _ :=
       affineModelLocalizedTilde (F.obj j.val) _ (d j) ⋙
         derivedPullback (baseChangeMap s (affineModelStageArrow R j k hjk))
 
-/-- Natural affine comparisons for arrows to the cocone point on both labelled models.
-Source: Stacks, Tags 09RE and 0D5S. -/
+/-- Natural affine comparisons for arrows to the cocone point on both labelled models
+(Stacks, Tags 09RE and 0D5S). -/
 abbrev AffineModelLimitArrowComparisons : Type _ :=
   ∀ j : Set.Ici (⟨i, le_rfl⟩ : Set.Ici i),
     inducedFunctor (affineModelScalarPair (F.map (homOfLE j.property)).hom E K) ⋙
@@ -306,8 +302,8 @@ abbrev AffineModelLimitArrowComparisons : Type _ :=
       affineModelLocalizedTilde (F.obj j.val) _ (d j) ⋙
         derivedPullback (baseChangeMap s (affineModelLimitArrow R c j))
 
-/-- The finite-stage object triangles, independently of conjugated chain maps.
-Source: Stacks, Tags 09RE and 0D5S, composition comparisons. -/
+/-- The finite-stage object triangles, independently of conjugated chain maps
+(Stacks, Tags 09RE and 0D5S). -/
 def affineModelStageObjectCoherence
     (αE : AffineModelStageObjects R i Y s P F E d)
     (αK : AffineModelStageObjects R i Y s Q F K d)
@@ -326,8 +322,8 @@ def affineModelStageObjectCoherence
           (F.map (homOfLE hjk)).hom (F.map (homOfLE k.property)).hom hc K) ≪≫
       (θ j k hjk).app false ≪≫ B.mapIso (αK j) ≪≫ (ε.app Q).symm = αK k)
 
-/-- The cocone object triangles, independently of conjugated chain maps.
-Source: Stacks, Tags 09RE and 0D5S, composition comparisons. -/
+/-- The cocone object triangles, independently of conjugated chain maps
+(Stacks, Tags 09RE and 0D5S). -/
 def affineModelLimitObjectCoherence
     (αE : AffineModelStageObjects R i Y s P F E d)
     (αK : AffineModelStageObjects R i Y s Q F K d)
@@ -347,8 +343,8 @@ def affineModelLimitObjectCoherence
           (C.ι.app j.val).hom (C.ι.app ⟨i, le_rfl⟩).hom hc K) ≪≫
       (θ j).app false ≪≫ B.mapIso (αK j) ≪≫ (ε.app Q).symm = βK)
 
-/-- Coherent comparison objects and their naturality data, stored without choosing a witness.
-Source: Stacks Project, Tags 09RE and 0D5S. -/
+/-- Coherent comparison objects and their naturality data, stored without choosing a witness
+(Stacks, Tags 09RE and 0D5S). -/
 structure AffineModelCoherentObjects where
   αE : AffineModelStageObjects R i Y s P F E d
   αK : AffineModelStageObjects R i Y s Q F K d
@@ -393,8 +389,8 @@ attribute [local irreducible] perfectHomComposition
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Construct coherent object comparisons for the supplied stages and cocone point.
-Source: Stacks Project, Tag 09RE (affine calculation), Tags 06Y1 and 0D5S. -/
+/-- Construct coherent object comparisons for the supplied stages and cocone point
+(Stacks, Tags 09RE, 06Y1 and 0D5S). -/
 theorem exists_affineModelCoherentObjectComparisons
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

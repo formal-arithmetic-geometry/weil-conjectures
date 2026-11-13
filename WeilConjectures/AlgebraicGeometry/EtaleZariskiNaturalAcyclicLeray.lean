@@ -34,9 +34,8 @@ set_option autoImplicit false
 
 set_option linter.unusedVariables false in
 /-- Natural mixed-universe Leray comparison on the subcategory of acyclic abelian
-sheaves. No quasi-coherent module or tensor-sections construction is assumed.
-Source: Stacks Project, Cohomology on Sites, Tag 0733(1), Tags 072Z and 0730;
-Ext via injective resolutions, Tag 06XP. -/
+sheaves. No quasi-coherent module or tensor-sections construction is assumed
+(Stacks, Tags 0733, 072Z, 0730 and 06XP). -/
 theorem etaleZariskiNaturalAcyclicLeray
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

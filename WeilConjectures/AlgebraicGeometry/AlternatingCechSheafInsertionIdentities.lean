@@ -155,9 +155,8 @@ private theorem identitiesOfSupportedContraction
   simpa only [← Category.assoc, transportHomotopySource, Category.id_comp,
     HomologicalComplex.id_f, add_comm, add_left_comm, add_assoc] using hk.symm
 
-/-- Signed insertion contracts the complement of any chain retraction.
-Source: Stacks Project, Tag 02FU, insertion and cancellation, adapted to increasing
-indices as in Tag 01FM. The adjustment to an arbitrary retraction is elementary. -/
+/-- Signed insertion contracts the complement of any chain retraction (Stacks, Tags 02FU and 01FM).
+-/
 theorem alternatingCechSheafAugmentation_restrict_insertion_identities
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

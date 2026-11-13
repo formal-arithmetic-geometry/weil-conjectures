@@ -35,7 +35,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Finite affine free covers can be chosen with zero cokernel. (Stacks, Tag 095N) -/
+/-- Finite affine free covers can be chosen with zero cokernel (Stacks, Tag 095N). -/
 theorem exists_affine_free_etale_zero_cokernel
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

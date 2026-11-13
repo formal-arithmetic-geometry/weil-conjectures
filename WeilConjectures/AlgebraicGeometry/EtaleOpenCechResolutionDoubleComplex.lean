@@ -44,8 +44,7 @@ instance etaleOpenCech_preservesZeroMorphisms (X : Scheme.{u})
     simp
 
 /-- Apply the open Čech complex functor to each term of the actual injective
-resolution, and flip the indices to put the Čech degree first.
-Source: Stacks Project, Tag 03AZ. -/
+resolution, and flip the indices to put the Čech degree first (Stacks, Tag 03AZ). -/
 noncomputable def etaleOpenCechResolutionDoubleComplex
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     {ι : Type u} (U : ι → X.Opens)

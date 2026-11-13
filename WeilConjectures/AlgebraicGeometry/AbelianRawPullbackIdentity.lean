@@ -157,9 +157,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Raw pullback along an identity scheme map, with its canonical coefficient map,
-is the identity on each derived-Hom group. The equality `ha` permits functor-map transports.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps; Tag 03CB, identity of inverse
-images. -/
+is the identity on each derived-Hom group. The equality `ha` permits functor-map transports
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianHigherDirectImageRawPullback_identity {S Y : Scheme.{v}}
     (a : Y ⟶ Y) (ha : a = 𝟙 Y) (h : Y ⟶ S) (w : a ≫ h = h) (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

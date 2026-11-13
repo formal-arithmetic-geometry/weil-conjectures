@@ -21,9 +21,8 @@ variable (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
 
 variable {Y : Scheme.{u}} {e : Y ⟶ T} {h : Y ⟶ X}
 
-/-- Canonical target restriction commutes with transport from the original square.
-
-Source: canonical pullback restrictions in Stacks Tags 0F07 and 09Z1. -/
+/-- Canonical target restriction commutes with transport from the original square
+(Stacks, Tags 0F07 and 09Z1). -/
 theorem baseChangeStalkTransport_comp (sq : IsPullback e h g p)
     {U V : Over T} (φ : U ⟶ V) :
     baseChangeStalkTransport Λ p g q F x sq V ≫

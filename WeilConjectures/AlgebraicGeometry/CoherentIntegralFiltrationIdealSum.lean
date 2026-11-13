@@ -24,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The pushforward of a finite sum of one nonzero coherent ideal on an integral
-closed subscheme has the required filtration.
-Source: Stacks Project, Tag 01YF, final paragraph,
-the filtration of the source of the generic-point inclusion. -/
+closed subscheme has the required filtration (Stacks, Tag 01YF). -/
 theorem coherentIntegralFiltration_ideal_sum
     {X Z : Scheme.{u}} [IsLocallyNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

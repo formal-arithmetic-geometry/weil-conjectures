@@ -133,9 +133,8 @@ private theorem exchange_compatibility
 
 /-- The canonical inverse- and direct-image coefficient comparisons intertwine the
 derived exchange morphisms. The endpoint comparisons are already constructed as
-isomorphisms; this theorem asserts only the compatibility of the morphisms.
-
-Source: Stacks Project, Remark 21.19.3, Tag 07A7, and Lemma 21.20.7(3), Tag 0D6J. -/
+isomorphisms; this theorem asserts only the compatibility of the morphisms
+(Stacks, Tags 07A7 and 0D6J). -/
 theorem derivedBaseChange_restrictScalars_exchange
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

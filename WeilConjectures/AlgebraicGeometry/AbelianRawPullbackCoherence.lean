@@ -25,9 +25,8 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Raw pullback obeys coefficient identity, composition and cocone laws.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps;
-Tag 03CB for inverse-image composition. -/
+/-- Raw pullback obeys coefficient identity, composition and cocone laws
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

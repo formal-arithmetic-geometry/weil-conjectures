@@ -32,8 +32,7 @@ local instance instHasLeftKanExtension_affinePushoutRingSectionDelta
   Functor.HasLeftKanExtension.mk _
     (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
 
-/-- The second section-ring leg is the inverse-image unit followed by `t`.
-Source: Stacks Project, Tag 01SB. -/
+/-- The second section-ring leg is the inverse-image unit followed by `t` (Stacks, Tag 01SB). -/
 def affinePushoutSectionDelta (B : U.toTopCat.Sheaf CommRingCat.{u}) (t : IA ⟶ B)
     (V : X.Opens) : Γ(U, f ⁻¹ᵁ V) →+* B.obj.obj (op (f ⁻¹ᵁ V)) :=
   (t.hom.app (op (f ⁻¹ᵁ V))).hom.comp

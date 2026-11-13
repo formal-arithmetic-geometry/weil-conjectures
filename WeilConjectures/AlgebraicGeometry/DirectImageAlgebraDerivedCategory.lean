@@ -31,22 +31,21 @@ namespace AlgebraicGeometry
 
 variable {X Y : Scheme.{u}}
 
-/-- The space `Y` with ring sheaf `f_* O_X`.
-Source: Stacks, Tag 0AVW. -/
+/-- The space `Y` with ring sheaf `f_* O_X` (Stacks, Tag 0AVW). -/
 def directImageAlgebraSpace (f : X ⟶ Y) : RingedSpace.{u} where
   carrier := Y.toTopCat
   presheaf := ((TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf).obj
   IsSheaf := ((TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf).property
 
 /-- The morphism `g : (X, O_X) → (Y, f_* O_X)` with identity map on the pushed-forward
-ring sheaf. Source: Stacks, Tag 0AVW. -/
+ring sheaf (Stacks, Tag 0AVW). -/
 def toDirectImageAlgebraSpace (f : X ⟶ Y) :
     X.toRingedSpace ⟶ directImageAlgebraSpace f :=
   ⟨{ base := f.base, c := 𝟙 _ }⟩
 
 /-- A derived direct-image-algebra module has quasi-coherent cohomology over that algebra
-in every integer degree, using the same `IsQuasicoherent` as the affine module correspondence.
-Source: Stacks, Tag 0AVW. -/
+in every integer degree, using the same `IsQuasicoherent` as the affine module correspondence
+(Stacks, Tag 0AVW). -/
 def directImageAlgebraDerivedQCohProperty (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] :
     ObjectProperty (DerivedCategory (SheafOfModules.{u}
@@ -56,8 +55,8 @@ def directImageAlgebraDerivedQCohProperty (f : X ⟶ Y)
       (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))) n).obj K).IsQuasicoherent
 
 /-- The full subcategory `D_QCoh(f_* O_X)` of the derived category of modules over the
-ring sheaf `f_* O_X` whose cohomology sheaves are quasi-coherent over that ring sheaf.
-Source: Stacks, Tag 0AVW. -/
+ring sheaf `f_* O_X` whose cohomology sheaves are quasi-coherent over that ring sheaf
+(Stacks, Tag 0AVW). -/
 abbrev directImageAlgebraDerivedQCohCategory (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] :=
   (directImageAlgebraDerivedQCohProperty f).FullSubcategory

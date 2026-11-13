@@ -73,9 +73,8 @@ private def reverseHomotopyEquiv {V : Type*} [Category V] [Preadditive V]
   homotopyHomInvId := reverseHomotopy h.homotopyHomInvId
   homotopyInvHomId := reverseHomotopy h.homotopyInvHomId
 
-/-- A unit coefficient removes a contractible summand, with explicit complementary sizes.
-
-Source: Stacks Project, Tag 00MT. -/
+/-- A unit coefficient removes a contractible summand, with explicit complementary sizes
+(Stacks, Tag 00MT). -/
 theorem exists_affine_free_complex_unit_cancellation (R : CommRingCat.{u})
     (P : CochainComplex (Spec R).Modules ℤ) (n : ℤ → ℕ)
     (e : ∀ j : ℤ, P.X j ≅ SheafOfModules.free

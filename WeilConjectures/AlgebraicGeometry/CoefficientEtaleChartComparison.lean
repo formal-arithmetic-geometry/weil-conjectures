@@ -158,9 +158,8 @@ private def localFixedConstant
       ((Over.map f).pushforwardContinuousSheafificationCompatibility
         (ModuleCat.{w} B) (K.over V) (K.over (G.obj W))).symm
 
-/-- A supplied etale constant chart realizes the comparison on every object over that chart.
-Source: Stacks Project, Pro-etale Cohomology, 099R; Modules on Sites, 03DJ;
-Cohomology on Sites, 094G. -/
+/-- A supplied etale constant chart realizes the comparison on every object over that chart
+(Stacks, Tags 099R, 03DJ and 094G). -/
 theorem coefficient_etale_chart_comparison
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (K : ConstantCompletion.D

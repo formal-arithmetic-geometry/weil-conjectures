@@ -67,7 +67,7 @@ private theorem mem_basicOpen_norm_of_free
     change (⟨Q, hQ⟩ : PrimeSpectrum _) ∈ hV.fromSpec ⁻¹ᵁ Y.basicOpen a at this
     rwa [hV.fromSpec_preimage_basicOpen, PrimeSpectrum.mem_basicOpen] at this
 
-/-- A norm locus contained in an affine basic open is affine. (Stacks, Tag 03JE) -/
+/-- A norm locus contained in an affine basic open is affine (Stacks, Tag 03JE). -/
 theorem isAffineOpen_descent_norm_locus
     {V R : Scheme.{u}} (s t : R ⟶ V)
     [IsFinite s] [Flat s] [LocallyOfFinitePresentation s]

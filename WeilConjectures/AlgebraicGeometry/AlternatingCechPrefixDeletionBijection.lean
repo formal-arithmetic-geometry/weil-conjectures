@@ -25,8 +25,8 @@ universe v
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Valid outgoing prefix-deletion indices, with the original order of summation.
-Source: Stacks 01FM, equation-first-homotopy. -/
+/-- Valid outgoing prefix-deletion indices, with the original order of summation (Stacks, Tag 01FM).
+-/
 abbrev CechPrefixOutgoing {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×
@@ -34,8 +34,7 @@ abbrev CechPrefixOutgoing {I : Type v} [LinearOrder I] (p : ℕ)
     (cechStableSort t x.1 ∧ cechPartialSort x.1 x.2.2.1 x.2.1) ∧
       x.2.2.2.val < x.2.1.val}
 
-/-- Valid incoming faces whose omitted label precedes the remaining junction.
-Source: Stacks 01FM, equation-first-homotopy. -/
+/-- Valid incoming faces whose omitted label precedes the remaining junction (Stacks, Tag 01FM). -/
 abbrev CechPrefixIncoming {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {y : Fin (p + 2) × Equiv.Perm (Fin (p + 1)) × Fin (p + 1) ×
@@ -47,10 +46,7 @@ abbrev CechPrefixIncoming {I : Type v} [LinearOrder I] (p : ℕ)
         y.1 < y.1.succAbove (y.2.1 y.2.2.1)))}
 
 /-- Prefix deletion is an unsigned bijection, identifying both smaller
-permutations with restrictions of the larger ones.
-
-Source: Stacks 01FM, equation-first-homotopy (01FN), omitted verification;
-the prefix labelled-deletion argument of the parent node. -/
+permutations with restrictions of the larger ones (Stacks, Tags 01FM and 01FN). -/
 theorem cechPrefixDeletionBijection {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :
     ∃ e : CechPrefixOutgoing p t ≃ CechPrefixIncoming p t, ∀ x,

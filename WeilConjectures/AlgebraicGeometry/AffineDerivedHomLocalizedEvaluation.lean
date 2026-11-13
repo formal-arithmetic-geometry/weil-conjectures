@@ -86,9 +86,8 @@ private theorem change_evaluation_iso
   simp [α, ← Category.assoc, hd]
 
 /-- Evaluation compatibility on complex representatives for an already supplied derived
-sheaf-Hom adjunction. This does not construct the adjunction or the unit-Hom isomorphism.
-
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3. -/
+sheaf-Hom adjunction. This does not construct the adjunction or the unit-Hom isomorphism
+(Stacks, Tags 0BUZ, 0BV0 and 0AX3). -/
 theorem affine_derivedHom_localized_evaluation
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

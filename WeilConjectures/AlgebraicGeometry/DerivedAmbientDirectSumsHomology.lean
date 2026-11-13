@@ -109,7 +109,7 @@ local instance instHasColimitsOfShape_derivedAmbientDirectSumsHomology
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
 /-- Cohomology of a termwise coproduct is the coproduct of the cohomologies, with the
-canonical map induced by the coprojections. (Stacks, Tag 08DT) -/
+canonical map induced by the coprojections (Stacks, Tag 08DT). -/
 theorem derivedAmbientDirectSumsHomology (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

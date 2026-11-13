@@ -90,9 +90,8 @@ private theorem stalk_projection_comparison (X : Scheme.{u}) (x : X) (U : X.Open
     v.down p • affineRegularStalkGerm X x U hxU hU
   simp
 
-/-- The linear combination map of actual standard basis germs is bijective.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), and Tags 01IB, 01C6, 0098. -/
+/-- The linear combination map of actual standard basis germs is bijective
+(Stacks, Tags 01HV, 01IB, 01C6 and 0098). -/
 theorem affineFreeStalkComparison_bijective
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (n : ℕ) : Function.Bijective (affineFreeStalkComparison X x U hxU hU n)  := by

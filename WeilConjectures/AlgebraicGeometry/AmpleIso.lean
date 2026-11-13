@@ -88,8 +88,7 @@ private theorem tensorPow_iso {X : Scheme.{u}} {M N : X.Modules}
     obtain ⟨a⟩ := ih
     exact ⟨MonoidalCategory.tensorIso e a⟩
 
-/-- Isomorphic invertible modules have the same ampleness predicate.
-Source: Stacks Project, Properties, Definition 01PS and Section 01PR. -/
+/-- Isomorphic invertible modules have the same ampleness predicate (Stacks, Tags 01PS and 01PR). -/
 theorem isAmple_iff_of_iso {X : Scheme.{u}} {L N : X.Modules}
     [L.IsInvertible] [N.IsInvertible] (e : L ≅ N) :
     IsAmple X L ↔ IsAmple X N := by

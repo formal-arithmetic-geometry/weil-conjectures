@@ -102,9 +102,8 @@ private theorem exchange_paste
     hn e₁ q₁₀ r₁₀ e₀ sq₁₀, hn e₂ q₂₁ r₂₁ e₁ sq₂₁,
     openImmersionLowerShriekLowerStarExchangeIso, asIso_hom] using hp
 
-/-- Two Cartesian proper ambient transports compose to the transport of the rectangle.
-
-Source: Stacks Project, more-etale.tex, Tag 0F7C, vertical proper/open exchange pasting. -/
+/-- Two Cartesian proper ambient transports compose to the transport of the rectangle
+(Stacks, Tag 0F7C). -/
 theorem etaleProperAmbientTransport_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y U₀ U₁ U₂ P₀ P₁ P₂ : Scheme.{u}}

@@ -29,10 +29,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- Chosen fibre products and the categorical products in the slice give isomorphic
-Čech complexes, with their alternating restriction differentials.
-
-Source: Stacks Project, Cohomology on Sites, Tags 03AK and 03AM, independence of the
-choice of fibre products. -/
+Čech complexes, with their alternating restriction differentials (Stacks, Tags 03AK and 03AM). -/
 theorem nonempty_etale_siteCech_complex_iso
     (X : Scheme.{u}) (U : X.Etale) {J : Type (u + 1)}
     (V : J → X.Etale) (f : ∀ j : J, V j ⟶ U) (S : SiteCechComplex V f)

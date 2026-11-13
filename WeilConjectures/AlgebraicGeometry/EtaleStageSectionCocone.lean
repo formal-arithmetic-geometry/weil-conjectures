@@ -17,8 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- The limit section comparisons form a cocone.
-Source: Stacks Project, Tag 09YQ. -/
+/-- The limit section comparisons form a cocone (Stacks, Tag 09YQ). -/
 noncomputable def etaleStageSectionCocone
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)
     (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))

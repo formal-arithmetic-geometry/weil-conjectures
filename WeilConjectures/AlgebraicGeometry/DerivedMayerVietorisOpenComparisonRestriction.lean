@@ -91,9 +91,8 @@ private theorem cancel_into_right_adjoint
     congrArg (fun v ↦ (a.homEquiv A N).symm v) h
 
 /-- The canonical single-open comparison commutes with restriction for any
-inclusion W ≤ U, before taking a biproduct or a signed difference.
-Source: Stacks Project, Tags 08FE and 0D5T, their K-injective and composition
-comparisons; Tag 08BV, the restriction arrow in the displayed sequence of complexes. -/
+inclusion W ≤ U, before taking a biproduct or a signed difference
+(Stacks, Tags 08FE, 0D5T and 08BV). -/
 theorem schemeMVOpenComparison_restriction
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

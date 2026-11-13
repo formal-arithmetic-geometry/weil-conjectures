@@ -19,8 +19,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Generator normalization implies this affine comparison property.
-Source: Stacks Project, Tag 01HV (4)-(5). -/
+/-- Generator normalization implies this affine comparison property (Stacks, Tag 01HV). -/
 theorem affineHomComparison_chart_right {Y : Scheme.{u}} (U : Y.affineOpens)
     :
     ∀ (M N N' : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (g : N ⟶ N'),

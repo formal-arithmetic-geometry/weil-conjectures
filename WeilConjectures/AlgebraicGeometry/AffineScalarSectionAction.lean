@@ -20,9 +20,8 @@ universe u
 namespace AlgebraicGeometry.Scheme
 
 /-- Affine sheafification and ordinary direct image carry multiplication by `a` to
-multiplication by `a` on sections over the affine open, for every section.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), Tag 01IB, and Tag 0098. -/
+multiplication by `a` on sections over the affine open, for every section
+(Stacks, Tags 01HV, 01IB and 0098). -/
 theorem affineScalarEnd_section_action (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U) (a : Γ(X, U)) :
     let P := SheafOfModules.pushforward.{u}

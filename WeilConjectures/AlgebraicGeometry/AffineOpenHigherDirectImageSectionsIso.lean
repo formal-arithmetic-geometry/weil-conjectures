@@ -32,8 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Cohomology over the inverse image of an affine open is the group of sections of
-the corresponding higher direct image. Both sides use resolutions on the original X.
-Source: Stacks Project, Tag 01XK; Tags 01XJ (1), 01E1 and 01F4 (2). -/
+the corresponding higher direct image. Both sides use resolutions on the original X
+(Stacks, Tags 01XK, 01XJ, 01E1 and 01F4). -/
 theorem nonempty_affineOpen_higherDirectImage_sections_iso
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (U : S.Opens) (hU : IsAffineOpen U)

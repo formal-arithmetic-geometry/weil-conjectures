@@ -66,8 +66,8 @@ private theorem normalization_pasting
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Normalization of the successive tensor-pullback route on K-flat complexes.
-Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S. -/
+/-- Normalization of the successive tensor-pullback route on K-flat complexes
+(Stacks, Tags 079U and 0D5S). -/
 theorem derivedPullback_tensor_successive_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)

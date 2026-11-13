@@ -27,10 +27,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A generic ideal-sum inclusion with filtered source and smaller-support cokernel.
-
-Source: Stacks Project, Tag 01YE and Tag 01YF, final generic-point paragraph
-(https://stacks.math.columbia.edu/tag/01YE). -/
+/-- A generic ideal-sum inclusion with filtered source and smaller-support cokernel
+(Stacks, Tags 01YE and 01YF). -/
 theorem coherent_generic_filtered_extension
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

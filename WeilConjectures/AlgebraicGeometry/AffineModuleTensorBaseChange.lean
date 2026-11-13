@@ -177,8 +177,7 @@ private theorem extensionFunctor_unit {T : TopCat.{u}} {C D : T.Sheaf CommRingCa
 
 -- The unit calculation unfolds two scalar restrictions and the chosen adjunction.
 /-- Base change across the ring-sheaf pushout identifies extension of the inverse-image
-algebra module with tensor pullback after scalar restriction.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+algebra module with tensor pullback after scalar restriction (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_baseChange
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (hpush : IsPushout r₀ t₀ b t) :

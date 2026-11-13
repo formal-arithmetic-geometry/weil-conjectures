@@ -164,9 +164,7 @@ private theorem exists_firstRepeat {I : Type v} [LinearOrder I] {p : ℕ}
     t ⟨b.val, by omega⟩ = t ⟨b.val + 1, hk⟩ from ⟨by omega, he'⟩)
   omega
 
-/-- The contraction boundary on a nondecreasing tuple.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2. -/
+/-- The contraction boundary on a nondecreasing tuple (Stacks, Tag 01FM). -/
 theorem cechSortedContraction (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ)

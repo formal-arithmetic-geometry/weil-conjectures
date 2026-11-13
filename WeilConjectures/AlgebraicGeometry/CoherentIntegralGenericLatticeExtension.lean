@@ -160,10 +160,8 @@ private theorem product_free_iso (Z : Scheme.{w}) {K : Z.Modules}
     infer_instance
   exact ⟨c ≪≫ (imageMonoIsoSource μ).symm⟩
 
-/-- An ideal power times a finite free module is a sum of copies of the power ideal.
-
-Source: Stacks Project, Tag 01YE, integral-case paragraph (the map from a sum of
-copies of a power ideal), the coordinate identity in its final paragraph. -/
+/-- An ideal power times a finite free module is a sum of copies of the power ideal
+(Stacks, Tag 01YE). -/
 private theorem ideal_power_finite_free_lattice (Z : Scheme.{w})
     (J : Z.IdealSheafData) (n r : ℕ) :
     Nonempty ((∐ fun _ : Fin r ↦ (J ^ n).toModules) ≅
@@ -244,9 +242,8 @@ private theorem ideal_coherent (Z : Scheme.{w}) [IsLocallyNoetherian Z]
   exact ((isCoherent_kernel_cokernel_biprod_and_submodule Z).2 _ _
     I.toModulesι hu inferInstance hqc).1
 
-/-- A finite free map defined near the generic point extends from an ideal-sum lattice.
-
-Source: Stacks Project, Tag 01YE, extension over a power of the complement ideal. -/
+/-- A finite free map defined near the generic point extends from an ideal-sum lattice
+(Stacks, Tag 01YE). -/
 theorem exists_generic_ideal_extension (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules)
     (hG : RingedSpace.IsCoherent Z.toRingedSpace G)

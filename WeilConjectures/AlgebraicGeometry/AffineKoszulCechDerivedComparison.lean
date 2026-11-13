@@ -26,9 +26,8 @@ namespace AlgebraicGeometry
 /-- For an unbounded complex of quasi-coherent modules on Spec(A), the canonical
 Koszul-to-alternating-Čech map followed by the Čech-to-derived-sections map is an
 isomorphism in D(A), equivalently a quasi-isomorphism of its complex representatives.
-The positive exponent e is indexed by e-1 in the natural-number diagram.
-
-Source: Stacks, Tags 08D1 and 08D2. -/
+The positive exponent e is indexed by e-1 in the natural-number diagram
+(Stacks, Tags 08D1 and 08D2). -/
 theorem affine_koszul_cech_derived_comparison
     (A : Type uT) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wT}

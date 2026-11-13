@@ -40,8 +40,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The composition isomorphism normalized by the canonical tensor-pullback units.
-It is the conjugate of the sectionwise pushforward composition identification.
-Source: Stacks, Tag 03DR. -/
+It is the conjugate of the sectionwise pushforward composition identification (Stacks, Tag 03DR). -/
 def tensorSectionsComp {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :
     tensorPullback b ⋙ tensorPullback a ≅ tensorPullback (a ≫ b) :=
   (conjugateIsoEquiv (Classical.choose (exists_tensorPullbackAdjunction (a ≫ b)))
@@ -49,16 +48,15 @@ def tensorSectionsComp {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :
       (Classical.choose (exists_tensorPullbackAdjunction a)))).symm
     (pushforwardComp a b).symm
 
-/-- Pullback of global sections by the canonical unit, evaluated at the whole scheme.
-Source: Stacks, Tag 03DR. -/
+/-- Pullback of global sections by the canonical unit, evaluated at the whole scheme
+(Stacks, Tag 03DR). -/
 def tensorSectionsUnit {A B : Scheme.{u}} (a : A ⟶ B) (G : B.Modules) :
     Γ(G, ⊤) ⟶ Γ((tensorPullback a).obj G, ⊤) :=
   ((Classical.choose (exists_tensorPullbackAdjunction a)).unit.app G).app ⊤ ≫
     ((tensorPullback a).obj G).presheaf.map (homOfLE a.preimage_top.ge).op
 
 /-- The restriction `ρ_g(s) = c_{g,u}(g^*s)`, with transport along `g ≫ u = u'`.
-The map is an abelian group homomorphism by its type.
-Source: Stacks, Tag 03DR. -/
+The map is an abelian group homomorphism by its type (Stacks, Tag 03DR). -/
 def etaleTensorSectionsRestriction {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etale} (g : V ⟶ U) :
     Γ((tensorPullback U.hom).obj F, ⊤) ⟶ Γ((tensorPullback V.hom).obj F, ⊤) :=
@@ -93,8 +91,8 @@ private theorem identityComparison
   erw [eqToHom_refl, Category.comp_id]
   exact hc
 
-/-- The unit-normalized identity comparison cancels the unit on global sections.
-Source: Stacks, Tag 03DR; the conjugate-isomorphism unit equation. -/
+/-- The unit-normalized identity comparison cancels the unit on global sections (Stacks, Tag 03DR).
+-/
 private theorem unitId_sections {A : Scheme.{u}} (I : A.Modules ⥤ A.Modules)
     (adj : I ⊣ pushforward (𝟙 A)) (M : A.Modules) :
     (adj.unit.app M).app ⊤ ≫
@@ -108,15 +106,15 @@ private theorem unitId_sections {A : Scheme.{u}} (I : A.Modules ⥤ A.Modules)
   erw [Category.id_comp] at hs
   exact hs.symm
 
-/-- The global-section unit for an arbitrary left adjoint of scheme pushforward.
-Source: Stacks, Tag 03DR. -/
+/-- The global-section unit for an arbitrary left adjoint of scheme pushforward (Stacks, Tag 03DR).
+-/
 private def sectionsUnitOfAdjunction {A B : Scheme.{u}} (f : A ⟶ B)
     (L : B.Modules ⥤ A.Modules) (adj : L ⊣ pushforward f) (G : B.Modules) :
     Γ(G, ⊤) ⟶ Γ(L.obj G, ⊤) :=
   (adj.unit.app G).app ⊤ ≫ (L.obj G).presheaf.map (homOfLE f.preimage_top.ge).op
 
-/-- Identity restrictions for any family of left adjoints, before specializing to tensors.
-Source: Stacks, Tag 03DR. -/
+/-- Identity restrictions for any family of left adjoints, before specializing to tensors
+(Stacks, Tag 03DR). -/
 private theorem identitySections
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -139,8 +137,7 @@ private theorem identitySections
   erw [hct]
   exact hs
 
-/-- The normalized composition map for a family of left adjoints.
-Source: Stacks, Tag 03DR. -/
+/-- The normalized composition map for a family of left adjoints (Stacks, Tag 03DR). -/
 private def compOfAdjunction
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -149,8 +146,7 @@ private def compOfAdjunction
   (conjugateIsoEquiv (adj (a ≫ b)) ((adj b).comp (adj a))).symm
     (pushforwardComp a b).symm
 
-/-- Naturality of the unit on global sections.
-Source: Stacks, Tag 03DR. -/
+/-- Naturality of the unit on global sections (Stacks, Tag 03DR). -/
 private theorem sectionsUnit_naturality {A B : Scheme.{u}} (f : A ⟶ B)
     (L : B.Modules ⥤ A.Modules) (adj : L ⊣ pushforward f)
     {M N : B.Modules} (φ : M ⟶ N) :
@@ -167,8 +163,7 @@ private theorem sectionsUnit_naturality {A B : Scheme.{u}} (f : A ⟶ B)
   unfold sectionsUnitOfAdjunction
   rw [← Category.assoc, hu, Category.assoc, ← ht, ← Category.assoc]
 
-/-- The unit equation before taking global sections.
-Source: Stacks, Tag 03DR. -/
+/-- The unit equation before taking global sections (Stacks, Tag 03DR). -/
 private theorem comp_unit
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -179,8 +174,7 @@ private theorem comp_unit
   exact unit_conjugateEquiv_symm (adj (a ≫ b)) ((adj b).comp (adj a))
     (pushforwardComp a b).inv G
 
-/-- The inverse image of the whole scheme contributes an identity restriction.
-Source: Stacks, Tag 03DR. -/
+/-- The inverse image of the whole scheme contributes an identity restriction (Stacks, Tag 03DR). -/
 private theorem sectionsUnit_eq {A B : Scheme.{u}} (f : A ⟶ B)
     (L : B.Modules ⥤ A.Modules) (adj : L ⊣ pushforward f) (G : B.Modules) :
     sectionsUnitOfAdjunction f L adj G =
@@ -189,8 +183,7 @@ private theorem sectionsUnit_eq {A B : Scheme.{u}} (f : A ⟶ B)
   unfold sectionsUnitOfAdjunction
   erw [hi, op_id, (L.obj G).presheaf.map_id, Category.comp_id]
 
-/-- Successive global-section units agree with the composite unit.
-Source: Stacks, Tag 03DR. -/
+/-- Successive global-section units agree with the composite unit (Stacks, Tag 03DR). -/
 private theorem sectionsUnit_comp
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -240,8 +233,7 @@ private theorem compOfAdjunction_assoc
   erw [eqToHom_refl, Category.comp_id]
   exact hc
 
-/-- The two section maps for three composable scheme morphisms agree.
-Source: Stacks, Tag 03DR. -/
+/-- The two section maps for three composable scheme morphisms agree (Stacks, Tag 03DR). -/
 private theorem tripleSections
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -265,8 +257,7 @@ private theorem tripleSections
     congrArg (fun t ↦ sectionsUnitOfAdjunction b (L b) (adj b) ((L c).obj F) ≫
       t ≫ ((compOfAdjunction L adj a (b ≫ c)).hom.app F).app ⊤) hn.symm)
 
-/-- Normalized sections restriction along a commutative triangle.
-Source: Stacks, Tag 03DR. -/
+/-- Normalized sections restriction along a commutative triangle (Stacks, Tag 03DR). -/
 private def restrictionOfAdjunction
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -276,8 +267,8 @@ private def restrictionOfAdjunction
     ((compOfAdjunction L adj a b).hom.app F).app ⊤ ≫
     (eqToHom (congrArg (fun f ↦ (L f).obj F) p)).app ⊤
 
-/-- Composition of normalized sections restrictions along commutative triangles.
-Source: Stacks, Tag 03DR. -/
+/-- Composition of normalized sections restrictions along commutative triangles (Stacks, Tag 03DR).
+-/
 private theorem restrictionOfAdjunction_comp
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -293,8 +284,8 @@ private theorem restrictionOfAdjunction_comp
   have h := tripleSections L adj a b c F
   simpa only [eqToHom_refl, Hom.id_app, Category.comp_id] using h
 
-/-- Semilinearity of restrictions for arbitrary adjoints of scheme pushforward.
-Source: Stacks, Tag 03DR. -/
+/-- Semilinearity of restrictions for arbitrary adjoints of scheme pushforward (Stacks, Tag 03DR).
+-/
 private theorem restrictionOfAdjunction_smul
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -313,8 +304,8 @@ private theorem restrictionOfAdjunction_smul
   erw [Hom.app_smul, Hom.app_smul]
   rfl
 
-/-- Equality of multiplication endomorphisms is exactly pointwise semilinearity.
-Source: Stacks, Tag 03DR. -/
+/-- Equality of multiplication endomorphisms is exactly pointwise semilinearity (Stacks, Tag 03DR).
+-/
 private theorem smulHom_eq_iff {A B : Scheme.{u}} (M : B.Modules) (N : A.Modules)
     (ρ : Γ(M, ⊤) ⟶ Γ(N, ⊤)) (r : Γ(B, ⊤)) (t : Γ(A, ⊤)) :
     (M.smul r).asHom ≫ ρ = ρ ≫ (N.smul t).asHom ↔ ∀ s, ρ (r • s) = t • ρ s := by
@@ -325,8 +316,7 @@ private theorem smulHom_eq_iff {A B : Scheme.{u}} (M : B.Modules) (N : A.Modules
     ext s
     exact h s
 
-/-- The semilinearity equation as an equality of additive maps.
-Source: Stacks, Tag 03DR. -/
+/-- The semilinearity equation as an equality of additive maps (Stacks, Tag 03DR). -/
 private theorem restrictionOfAdjunction_smulHom
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -342,8 +332,7 @@ private theorem restrictionOfAdjunction_smulHom
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Restriction is semilinear over the map on global functions.
-Source: Stacks, Tag 03DR. -/
+/-- Restriction is semilinear over the map on global functions (Stacks, Tag 03DR). -/
 theorem etaleTensorSectionsRestriction_smul {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etale} (g : V ⟶ U) (a : Γ(U.left, ⊤)) :
     (((tensorPullback U.hom).obj F).smul a).asHom ≫ etaleTensorSectionsRestriction F g =
@@ -356,8 +345,7 @@ theorem etaleTensorSectionsRestriction_smul {X : Scheme.{u}} (F : X.Modules)
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Identity restrictions are identities.
-Source: Stacks, Tag 03DR. -/
+/-- Identity restrictions are identities (Stacks, Tag 03DR). -/
 theorem etaleTensorSectionsRestriction_id {X : Scheme.{u}} (F : X.Modules) (U : X.Etale) :
     etaleTensorSectionsRestriction F (𝟙 U) = 𝟙 _ := by
   exact identitySections (@tensorPullback)
@@ -366,8 +354,7 @@ theorem etaleTensorSectionsRestriction_id {X : Scheme.{u}} (F : X.Modules) (U : 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Restrictions compose contravariantly.
-Source: Stacks, Tag 03DR. -/
+/-- Restrictions compose contravariantly (Stacks, Tag 03DR). -/
 theorem etaleTensorSectionsRestriction_comp {X : Scheme.{u}} (F : X.Modules)
     {U V W : X.Etale} (h : W ⟶ V) (g : V ⟶ U) :
     etaleTensorSectionsRestriction F (h ≫ g) =
@@ -376,8 +363,8 @@ theorem etaleTensorSectionsRestriction_comp {X : Scheme.{u}} (F : X.Modules)
     (fun {A B} f ↦ Classical.choose (exists_tensorPullbackAdjunction f))
     h.left g.left U.hom V.hom W.hom g.w h.w (h ≫ g).w F
 
-/-- The presheaf `u ↦ Γ(U,u^*F)`, with the unit-normalized pullback restrictions.
-Source: Stacks, Tag 03DR, equation (35.8.1), and Tag 03DU, item 4. -/
+/-- The presheaf `u ↦ Γ(U,u^*F)`, with the unit-normalized pullback restrictions
+(Stacks, Tags 03DR and 03DU). -/
 def etaleTensorSectionsPresheaf {X : Scheme.{u}} (F : X.Modules) :
     X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u} where
   obj U := Γ((tensorPullback U.unop.hom).obj F, ⊤)

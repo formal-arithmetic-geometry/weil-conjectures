@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 open scoped IsMulCommutative
 
-/-- On a single affine open the two factor actions extend uniquely.
-
-Source: Stacks Project, Tags 01LX (2)-(3) and 0897, relative-spectrum paragraph;
-tensor universal-property calculation underlying Tag 01SB. -/
+/-- On a single affine open the two factor actions extend uniquely
+(Stacks, Tags 01LX, 0897 and 01SB). -/
 theorem balancedAction_affine_open
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

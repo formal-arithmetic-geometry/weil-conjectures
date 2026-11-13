@@ -304,9 +304,8 @@ private noncomputable def pullbackEncodingComparison
     Functor.isoWhiskerLeft EX.functor (Functor.associator P EY.inverse EY.functor ≪≫
       Functor.isoWhiskerLeft P EY.counitIso ≪≫ P.rightUnitor))
 
-/-- Global encoding, its regular module, and its coordinate-normalized inverse-image comparison.
-
-Source: Stacks Project, Tags 00YV, 03CY and 03D2. -/
+/-- Global encoding, its regular module, and its coordinate-normalized inverse-image comparison
+(Stacks, Tags 00YV, 03CY and 03D2). -/
 theorem constant_module_global_encoding
     (X : Scheme.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

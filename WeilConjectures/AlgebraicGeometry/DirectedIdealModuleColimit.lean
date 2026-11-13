@@ -20,10 +20,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 
-/-- A nonempty directed union of ideal sheaves is a colimit of their module sheaves.
-
-Source: Stacks Project, Properties, Tag 01PG (the union argument for submodules),
-applied to ideal sheaves. -/
+/-- A nonempty directed union of ideal sheaves is a colimit of their module sheaves
+(Stacks, Tag 01PG). -/
 theorem nonempty_isColimit_of_directed_ideal_modules {X : Scheme.{u}}
     (I : X.IdealSheafData) (S : Set X.IdealSheafData)
     (hne : S.Nonempty) (hdir : DirectedOn (· ≤ ·) S) (hunion : sSup S = I)

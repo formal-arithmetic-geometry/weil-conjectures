@@ -31,8 +31,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Restriction to a slice site preserves finite type for a sheaf of modules over
 an arbitrary sheaf of rings. Pull a local finite generating cover back along `Over.forget U`;
-its local maps preserve colimits and the unit, hence preserve finite generating families.
-Source: Stacks Project, Modules, Tag 01B5, locality of finite type. -/
+its local maps preserve colimits and the unit, hence preserve finite generating families
+(Stacks, Tag 01B5). -/
 private theorem isFiniteType_over_site
     {C : Type u₁} [Category.{v₁} C] [Limits.HasBinaryProducts C] [Limits.HasPullbacks C]
     (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u})
@@ -130,8 +130,7 @@ private theorem annihilator_localized
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine annihilator ideals of a finite type quasi-coherent module are compatible with
-restriction to basic opens.
-Source: Stacks Project, Morphisms, Lemma 05JU (last paragraph), and Algebra, Lemma 07T8. -/
+restriction to basic opens (Stacks, Tags 05JU and 07T8). -/
 theorem annihilator_affine_basicOpen
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent] [F.IsFiniteType]
     (U : X.affineOpens) (f : Γ(X, U.1)) :

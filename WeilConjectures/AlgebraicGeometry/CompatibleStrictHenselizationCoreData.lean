@@ -19,8 +19,8 @@ set_option autoImplicit false
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
-/-- Construction of compatible strict henselization data from pointed affine etale neighbourhoods.
-Source: Stacks Tags 04HX, 03PS, 04GU, 04DY. -/
+/-- Construction of compatible strict henselization data from pointed affine etale neighbourhoods
+(Stacks, Tags 04HX, 03PS, 04GU and 04DY). -/
 theorem Etale.exists_compatibleStrictHenselizationCoreData
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

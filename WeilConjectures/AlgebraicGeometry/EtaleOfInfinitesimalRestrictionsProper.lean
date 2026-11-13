@@ -31,9 +31,8 @@ namespace AlgebraicGeometry
 
 
 /-- A finite type morphism to a locally Noetherian scheme is étale if all its
-infinitesimal restrictions are étale and its source is proper over the complete base.
-Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity
-paragraph, using More on Morphisms, Tag 0A43(2), and Algebra, Tag 05GI(4). -/
+infinitesimal restrictions are étale and its source is proper over the complete base
+(Stacks, Tags 0GS2, 0A43 and 05GI). -/
 theorem etale_of_infinitesimal_restrictions_of_proper
     {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)

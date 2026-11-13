@@ -26,10 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The cohomology of Hom from the sheafified Koszul complex into the structure
-sheaf is the associated sheaf of the recorded signed dual Koszul homology.
-
-Source: Stacks Project, Tag 0BQZ, local Hom complex computation; Tag 01HV,
-exact associated sheafification on affine schemes. -/
+sheaf is the associated sheaf of the recorded signed dual Koszul homology
+(Stacks, Tags 0BQZ and 01HV). -/
 theorem affine_koszul_hom_coordinates
     {Y : Scheme.{u}} (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1)) (q : ℤ) :
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom

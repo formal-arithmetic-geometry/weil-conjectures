@@ -62,8 +62,7 @@ abbrev ProperOpenSheafComparisonFamily (A : Type (u + 1)) [CommRing A] :=
       ((r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅
         (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])
 
-/-- The type of unbounded derived proper/open comparison families.
-Source: Stacks Project, Tag 0F7B(b). -/
+/-- The type of unbounded derived proper/open comparison families (Stacks, Tag 0F7B). -/
 abbrev ProperOpenDerivedComparisonFamily (A : Type (u + 1)) [CommRing A] :=
   ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k],

@@ -25,8 +25,8 @@ open CategoryTheory.ConstantCompletion
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The kernel of the actual residue projection on the slice is of finite type.
-Source: Stacks Tags 099L and 099E. -/
+/-- The kernel of the actual residue projection on the slice is of finite type
+(Stacks, Tags 099L and 099E). -/
 theorem adicResidueKernel_finiteType
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :
@@ -56,8 +56,8 @@ theorem adicResidueKernel_finiteType
 attribute [local instance] HasDerivedCategory.standard
 
 /-- A genuine augmented Cech model for the residue kernel; its unit is invertible
-on every object satisfying the existing local completeness predicate.
-Source: Stacks Tags 099E and 099F. -/
+on every object satisfying the existing local completeness predicate (Stacks, Tags 099E and 099F).
+-/
 theorem adicResidueCompletionModel_exists
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :

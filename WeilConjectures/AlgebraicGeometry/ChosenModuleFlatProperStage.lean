@@ -111,9 +111,8 @@ private theorem supportProper_of_cartesian_model
     eqToIso (congrArg (fun k ↦ Scheme.Modules.tensorPullback k) ha.symm) ≪≫ δ
   exact supportProper_of_iso b (δ'.app M) ht
 
-/-- A chosen finitely presented module becomes flat with proper support at every later stage.
-
-Source: Stacks Project, Tags 05LY, 081G, 0CYS, 0032 and 0097. -/
+/-- A chosen finitely presented module becomes flat with proper support at every later stage
+(Stacks, Tags 05LY, 081G, 0CYS, 0032 and 0097). -/
 theorem exists_eventually_chosen_module_flat_proper
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

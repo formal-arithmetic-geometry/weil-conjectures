@@ -28,8 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The differential of an alternating cochain vanishes on tuples with repetitions.
-Source: Stacks 01FG, differential stability of alternating cochains before Definition 01FH. -/
+/-- The differential of an alternating cochain vanishes on tuples with repetitions
+(Stacks, Tags 01FG and 01FH). -/
 theorem cechDifferential_repeated (X : Scheme.{u}) {I : Type v}
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

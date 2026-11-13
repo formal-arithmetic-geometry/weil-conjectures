@@ -23,8 +23,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Degree-zero external cup is the tensor of the two pulled-back sections.
-Source: Stacks Project, Cohomology, Tags 01DZ, 01F7, 0FKV; Varieties, Tag 0BED. -/
+/-- Degree-zero external cup is the tensor of the two pulled-back sections
+(Stacks, Tags 01DZ, 01F7, 0FKV and 0BED). -/
 theorem externalCup_zero_globalSections
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

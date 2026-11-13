@@ -27,8 +27,7 @@ open Opposite
 attribute [local irreducible] derivedExtension DerivedCategory.Q HasDerivedCategory.standard
   dres change
 
-/-- Termwise evaluation commutes with the two ordinary scalar functors.
-Source: Stacks Tag 06YY. -/
+/-- Termwise evaluation commutes with the two ordinary scalar functors (Stacks, Tag 06YY). -/
 def adicFiniteStrictReductionEvaluationIso
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A)) (n : ℕ) :
@@ -40,8 +39,8 @@ def adicFiniteStrictReductionEvaluationIso
   eqToIso (by rfl)
 
 /-- The levelwise scalar comparison, constructed from universal K-flat computation
-and exact restriction; its direction is from the derived reduction to the strict model.
-Source: Stacks Tag 06YY. -/
+and exact restriction; its direction is from the derived reduction to the strict model
+(Stacks, Tag 06YY). -/
 def adicFiniteStrictReductionLevel
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))
@@ -146,8 +145,8 @@ end Proofs
 
 attribute [local semireducible] extend
 
-/-- The normalized derived tensor unit and balancing give the actual quotient successor.
-Source: Stacks Tags 06YY and 099M. -/
+/-- The normalized derived tensor unit and balancing give the actual quotient successor
+(Stacks, Tags 06YY and 099M). -/
 theorem adicFiniteStrictReduction_successor
     (X : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] (J : Ideal A)
     (P : Cx (constant (coefficientProEtaleModelTopology.{u, v} X) A))

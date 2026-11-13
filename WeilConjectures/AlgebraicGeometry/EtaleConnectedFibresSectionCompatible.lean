@@ -131,9 +131,7 @@ private theorem global_eq_of_jointly_surjective
 /-- Every section of an etale inverse image along a morphism with connected
 geometric fibres has equal pullbacks along the two Cech projections. The comparisons
 are the unit-compatible composition comparisons, evaluated at the terminal etale
-object. Flatness and quasi-compactness are not required for this assertion.
-
-Source: Stacks Project, Etale Cohomology, Tag 0A3H, final paragraph. -/
+object. Flatness and quasi-compactness are not required for this assertion (Stacks, Tag 0A3H). -/
 theorem etaleSet_section_compatible_of_connected_geometricFibres
     {S T : Scheme.{u}} (f : T ⟶ S)
     (hconn : ∀ s : S, ConnectedSpace

@@ -30,9 +30,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Properties of the actual cone of a reduced quasi-isomorphism.
-
-Source: Stacks Project, Tag 0BCA, cone construction paragraph. -/
+/-- Properties of the actual cone of a reduced quasi-isomorphism (Stacks, Tag 0BCA). -/
 theorem complex_lift_cone_properties
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

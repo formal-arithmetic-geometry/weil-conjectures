@@ -32,9 +32,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A strict lift of the cone inclusion has the expected reduced cokernel.
-
-Source: Stacks Project, Tag 0BCA, cokernel paragraph. -/
+/-- A strict lift of the cone inclusion has the expected reduced cokernel (Stacks, Tag 0BCA). -/
 theorem complex_lift_cone_cokernel
     (R : Type u) [CommRing R] (I : Ideal R)
     (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ)

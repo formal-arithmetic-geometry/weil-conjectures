@@ -24,9 +24,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Transport the affine tilde counit along the canonical affine chart.
-
-Source: Stacks Project, Tags 01IB and 01XZ. -/
+/-- Transport the affine tilde counit along the canonical affine chart (Stacks, Tags 01IB and 01XZ).
+-/
 theorem affine_coherent_tilde_presentation
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (H : CoherentModules X) :
     ∃ P : ModuleCat.{u} Γ(X, ⊤),

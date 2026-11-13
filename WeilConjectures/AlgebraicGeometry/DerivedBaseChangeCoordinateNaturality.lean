@@ -24,8 +24,8 @@ universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Changing coordinates of a cartesian square transports its derived base-change mate.
-Source: Stacks Project, Tag 08HY, adjoint description; Tags 0D5S and 0D5T, composition. -/
+/-- Changing coordinates of a cartesian square transports its derived base-change mate
+(Stacks, Tags 08HY, 0D5S and 0D5T). -/
 theorem exists_derivedBaseChange_coordinate_naturality
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

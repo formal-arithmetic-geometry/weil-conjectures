@@ -26,8 +26,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Membership in the image filtration from complexes supported in degrees at least `q`.
 A map from such a complex factors through the stupid truncation of `K` at `q`, so this
-is the usual image filtration of the termwise hypercohomology spectral sequence.
-Source: Stacks Project, Tag 015J. -/
+is the usual image filtration of the termwise hypercohomology spectral sequence (Stacks, Tag 015J).
+-/
 def InEtaleHypercohomologyFiltration (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
     (p q : ℤ) (x : (cohomology AddCommGrpCat.{u + 1} X p).obj
@@ -38,8 +38,7 @@ def InEtaleHypercohomologyFiltration (X : Scheme.{u})
       (DerivedCategory.Q.obj T)),
       (cohomology AddCommGrpCat.{u + 1} X p).map (DerivedCategory.Q.map f) y = x
 
-/-- The image filtration is zero above the total cohomological degree.
-Source: Stacks Project, Tag 015J, the first spectral sequence and its vanishing region. -/
+/-- The image filtration is zero above the total cohomological degree (Stacks, Tag 015J). -/
 theorem eq_zero_of_inEtaleHypercohomologyFiltration
     (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

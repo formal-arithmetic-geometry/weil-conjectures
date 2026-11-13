@@ -110,9 +110,7 @@ private theorem affineSectionsAcyclic
 
 /-- Normalized sections comparisons for f, its base change, and g itself.
 This statement concerns only right-derived composition; it has no input E,
-quasi-coherence hypothesis, extension functor, or base-change map.
-Source: Stacks, cohomology.tex, Tag 0D5T, and
-perfect.tex, Tag 0AA7, restriction of the canonical comparison to the base. -/
+quasi-coherence hypothesis, extension functor, or base-change map (Stacks, Tags 0D5T and 0AA7). -/
 theorem exists_affineSectionsCompositionComparisons
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

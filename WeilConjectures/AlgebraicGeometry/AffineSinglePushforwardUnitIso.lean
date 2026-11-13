@@ -27,10 +27,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- The canonical right-derived unit computes affine pushforward of a quasi-coherent
-module in degree zero, not merely some unspecified derived isomorphism.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 01XC; Derived Categories of
-Schemes, Tags 08I8 and 0AVW. -/
+module in degree zero, not merely some unspecified derived isomorphism
+(Stacks, Tags 01XC, 08I8 and 0AVW). -/
 theorem affine_singlePushforward_unit_isIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

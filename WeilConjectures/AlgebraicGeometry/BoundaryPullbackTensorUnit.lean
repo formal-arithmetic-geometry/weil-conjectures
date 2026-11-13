@@ -23,8 +23,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 noncomputable section
 
-/-- The tensor comparison induced by uniqueness of left adjoints preserves unit sections.
-Source: Stacks Project, Tag 01CD, pullback of tensor products; Tag 0096, adjunction. -/
+/-- The tensor comparison induced by uniqueness of left adjoints preserves unit sections
+(Stacks, Tags 01CD and 0096). -/
 theorem boundaryPullbackTensorIso_unit_tmul {X Z : Scheme.{u}} (j : Z ⟶ X)
     (M N : X.Modules) (U : X.Opens) (s : Γ(M, U)) (t : Γ(N, U)) :
     (boundaryPullbackTensorIso j M N).hom.app (j ⁻¹ᵁ U)

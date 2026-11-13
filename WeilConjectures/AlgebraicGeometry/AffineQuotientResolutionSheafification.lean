@@ -29,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- An algebraic resolution of an affine quotient sheafifies to a resolution of the
-restricted pushforward of the closed subscheme's structure sheaf.
-Source: Stacks Project, Tag 068C, affine-local reduction and Koszul resolution. -/
+restricted pushforward of the closed subscheme's structure sheaf (Stacks, Tag 068C). -/
 theorem exists_affine_quotient_sheafified_resolution {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (U : Y.Opens) (hU : IsAffineOpen U) (I : Ideal (Γ(Y, U)))
     (e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅

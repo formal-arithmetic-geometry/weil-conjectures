@@ -26,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Ordered restriction admits a cochain section.
-
-Source: Stacks Project, Cohomology of Sheaves, Tags 01FJ and 01FK. -/
+/-- Ordered restriction admits a cochain section (Stacks, Tags 01FJ and 01FK). -/
 theorem alternatingCechRestrictionHomotopy_map (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

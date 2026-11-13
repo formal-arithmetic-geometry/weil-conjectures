@@ -60,8 +60,7 @@ private theorem familyLimit_isZero
   have : (familyLimit R c f hij).IsLeftAdjoint := adj.isLeftAdjoint
   exact Functor.map_isZero _ hM
 
-/-- Descent of maps between fixed bounded module families.
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (2). -/
+/-- Descent of maps between fixed bounded module families (Stacks, Tag 01ZR). -/
 theorem bounded_graded_map_compatibility
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

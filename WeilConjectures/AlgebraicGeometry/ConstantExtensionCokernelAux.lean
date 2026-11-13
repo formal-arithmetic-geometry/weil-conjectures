@@ -75,9 +75,7 @@ private theorem extension_presentation
   exact (cokernelIsCokernel d).coconePointUniqueUpToIso hu.gIsCokernel
 
 /-- An extension with constant outer terms admits a local cokernel presentation before
-recording finite generation of the source module.
-Source: Stacks Project, Tag 093U, extension argument.
--/
+recording finite generation of the source module (Stacks, Tag 093U). -/
 theorem exists_constantExtension_cokernelPresentation_aux_cover {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -111,8 +109,7 @@ theorem exists_constantExtension_cokernelPresentation_aux_cover {X : Scheme.{u}}
   exact cokernel.mapIso (d ≫ eL.inv) d (Iso.refl _) eL (by simp) ≪≫ ed
 
 /-- A lifted short exact module presentation with finite kernel yields a finite-source
-cokernel presentation of the middle term, when the first term is constant.
-Source: Stacks Project, Tag 093U, finite free presentation step. -/
+cokernel presentation of the middle term, when the first term is constant (Stacks, Tag 093U). -/
 theorem finite_cokernelPresentation_of_local_presentation {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

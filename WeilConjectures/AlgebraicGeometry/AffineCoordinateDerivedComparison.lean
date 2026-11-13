@@ -41,8 +41,7 @@ noncomputable def affineCoordinateObjectDerivedComparison
       ((affineCoordinateHomotopyComparison a b φ p hp).app M).symm ≪≫
     (asIso ((perfectHomTensorCounit p).app ((affineCoordinateHomotopy a).obj M))).symm
 
-/-- The inverse-counit comparison is natural between K-flat models.
-Source: Stacks Project, Tags 08DW and 0D5S. -/
+/-- The inverse-counit comparison is natural between K-flat models (Stacks, Tags 08DW and 0D5S). -/
 theorem affineCoordinateObjectDerivedComparison_naturality
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -83,8 +82,7 @@ noncomputable def affineCoordinateChartObjectComparison
     affineCoordinateObjectDerivedComparison a b φ p hp M hM ≪≫
     (derivedPullback p).mapIso ((affineCoordinateHomotopyIso a).app M).symm
 
-/-- The chart comparison retains naturality on K-flat models.
-Source: Stacks Project, Tag 08DW. -/
+/-- The chart comparison retains naturality on K-flat models (Stacks, Tag 08DW). -/
 theorem affineCoordinateChartObjectComparison_naturality
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)

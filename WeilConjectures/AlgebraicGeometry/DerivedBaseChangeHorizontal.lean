@@ -29,8 +29,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- Horizontal pasting for arbitrary commutative squares, before any open
-restriction or coefficient comparison is inserted.
-Source: Stacks Project, Cohomology, Remark 08HY and Lemma 0D5S. -/
+restriction or coefficient comparison is inserted (Stacks, Tags 08HY and 0D5S). -/
 theorem schemeDerivedBaseChange_horizontal
     {A X S A' X' S' : Scheme.{u}}
     (j : A ⟶ X) (f : X ⟶ S) (j' : A' ⟶ X') (f' : X' ⟶ S')

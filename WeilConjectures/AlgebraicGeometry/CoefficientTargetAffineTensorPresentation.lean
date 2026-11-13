@@ -33,8 +33,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Sections supported on the inverse image of an affine coefficient open have a
 unit-compatible tensor presentation. This assertion only describes the target sections;
-it does not mention an associated-module source or a comparison morphism.
-Source: Stacks Project, Tag 02KG (Lemma 30.5.1), and Tags 01I9, 01IA and 0097. -/
+it does not mention an associated-module source or a comparison morphism
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem exists_coefficientTarget_affine_tensor_presentation
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

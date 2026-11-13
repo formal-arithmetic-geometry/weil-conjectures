@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] HasDerivedCategory.standard
 
-/-- Finite reductions with the given Tor interval and the prescribed residue marking.
-Source: Stacks Project, proetale.tex, Tag 09C2 (1)-(4), and Tag 09AL. -/
+/-- Finite reductions with the given Tor interval and the prescribed residue marking
+(Stacks, Tags 09C2 and 09AL). -/
 theorem adic_constructible_finite_reductions (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (hcomplete : adicFiniteComplete.{u, v} X A J N)

@@ -26,7 +26,7 @@ open scoped TensorProduct
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every scalar on the intersection is a finite sum of products of scalars from
-its two factors. Source: Stacks Project, Tag 02KG, Lemma 30.5.1. -/
+its two factors (Stacks, Tag 02KG). -/
 theorem coefficientIntersection_scalar_decomposition
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (U : T.Opens) (hU : IsAffineOpen U)

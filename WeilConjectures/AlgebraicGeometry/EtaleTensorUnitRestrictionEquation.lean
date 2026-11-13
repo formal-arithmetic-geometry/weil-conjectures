@@ -119,8 +119,8 @@ private theorem tensorStructureMap_restriction {A B D : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized restriction followed by the adjoint structure-module map is the
-structure-sheaf restriction followed after the source structure-module map.
-Source: Stacks Project, Tags 0096, 01CA and 03DR, equation (35.8.1). -/
+structure-sheaf restriction followed after the source structure-module map
+(Stacks, Tags 0096, 01CA and 03DR). -/
 theorem etaleTensorUnitRestriction_equation {X : Scheme.{u}} {U V : X.Etale}
     (g : V ⟶ U) (x : Γ((tensorPullback U.hom).obj
       (SheafOfModules.unit X.ringCatSheaf), ⊤)) :

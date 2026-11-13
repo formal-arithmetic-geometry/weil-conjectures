@@ -456,8 +456,8 @@ private theorem finite_sections_equal
   exact congrArg ((D.map (q i)).app _) (hf i)
 
 /-- A filtered colimit of presheaves satisfying the sheaf condition for one finite
-presieve with pairwise pullbacks satisfies that same condition.
-Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W. -/
+presieve with pairwise pullbacks satisfies that same condition (Stacks, Tags 0738, 00VM and 002W).
+-/
 private theorem finitePresieveSheafFilteredColimit
     {C : Type w} [Category.{u} C]
     {Λ : Type u} [SmallCategory Λ] [IsFiltered Λ]

@@ -58,8 +58,8 @@ private theorem restriction_naturality {A B C : Scheme.{u}}
         ((tensorPullback (a ≫ b)).map φ).app ⊤ at hc
   rw [Category.assoc, ← hc, ← Category.assoc, unit_naturality, Category.assoc]
 
-/-- Applying a module morphism commutes with the normalized tensor restrictions.
-Source: Stacks Project, Descent, Tag 03DR, equation (35.8.0.1). -/
+/-- Applying a module morphism commutes with the normalized tensor restrictions (Stacks, Tag 03DR).
+-/
 theorem etaleTensorSectionsMap_naturality {X : Scheme.{u}} {F G : X.Modules}
     (φ : F ⟶ G) {U V : X.Etale} (g : V ⟶ U) :
     etaleTensorSectionsRestriction F g ≫ ((tensorPullback V.hom).map φ).app ⊤ =

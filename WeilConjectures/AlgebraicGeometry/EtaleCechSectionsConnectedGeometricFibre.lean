@@ -43,9 +43,7 @@ local notation "R[" X "," Y "," e "," G "]" =>
 set_option backward.isDefEq.respectTransparency false in
 /-- The two Cech pullbacks agree after restriction to one connected geometric fibre.
 Only that fibre is assumed connected; no assertion of equality on the whole Cech
-scheme is made.
-
-Source: Stacks Project, Tag 0A3H, final paragraph. -/
+scheme is made (Stacks, Tag 0A3H). -/
 theorem etaleSet_cech_sections_agree_on_connected_geometric_fibre
     {S T : Scheme.{u}} (f : T ⟶ S)
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (q : Spec (.of Ω) ⟶ S)

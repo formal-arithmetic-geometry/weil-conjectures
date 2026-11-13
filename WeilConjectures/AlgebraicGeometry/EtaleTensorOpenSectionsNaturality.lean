@@ -38,8 +38,8 @@ def tensorOpenSectionIso (X : Scheme.{u}) (F : X.Modules) (U : X.Opens) :
     F.presheaf.mapIso (eqToIso U.ι_image_top.symm).op
 
 /-- Transport the canonical open-section comparison along the equality of
-underlying over-scheme objects. No section is chosen from an existence assertion.
-Source: Stacks, Tag 03DR. -/
+underlying over-scheme objects. No section is chosen from an existence assertion (Stacks, Tag 03DR).
+-/
 def etaleTensorOpenSectionIso (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules)
     (U : X.Opensᵒᵖ) :
@@ -275,8 +275,8 @@ private theorem overSections_naturality (X : Scheme.{u}) (F : X.Modules)
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The constructed comparisons commute with the unit-normalized tensor restrictions.
-Source: Stacks, Tag 03DR, equation (35.8.0.1), and Tags 0095 and 0096. -/
+/-- The constructed comparisons commute with the unit-normalized tensor restrictions
+(Stacks, Tags 03DR, 0095 and 0096). -/
 /- Core comparison compatibility after expanding the constructed isomorphisms.
 Source: Stacks, Tag 03DR, equation (35.8.0.1).
 -/

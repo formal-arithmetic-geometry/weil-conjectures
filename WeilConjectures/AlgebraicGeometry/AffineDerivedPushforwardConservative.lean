@@ -28,8 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- For an affine morphism of schemes, derived direct image reflects isomorphisms
-between objects with quasi-coherent cohomology.
-Source: Stacks Project, Tag 08I8, Lemma 36.5.2. -/
+between objects with quasi-coherent cohomology (Stacks, Tag 08I8). -/
 theorem schemeDerivedDirectImage_isIso_of_affine
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Every module-sheaf map between the limits of coherent adic systems descends
-uniquely at each level to a compatible map of systems; here only existence is asserted.
-Source: Stacks Project, Lemma 087W, its formula M/I^n M = M_n, and Lemma 088B,
-the construction of alpha through that equivalence and local uniqueness. -/
+uniquely at each level to a compatible map of systems; here only existence is asserted
+(Stacks, Tags 087W and 088B). -/
 theorem coherentFormalModule_limit_full {Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (G H : CoherentFormalModule Y J)
     (β : limit G.obj ⟶ limit H.obj) :

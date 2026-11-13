@@ -81,8 +81,7 @@ private theorem affine_reflects_module_zero {X Y : Scheme.{u}}
 
 /-- Affine derived direct image takes quasi-coherent cohomology to quasi-coherent cohomology,
 preserves and reflects both bounds of the standard t-structure, and reflects isomorphisms
-between objects with quasi-coherent cohomology.
-Source: Stacks Project, Tags 0AVW and 08I8. -/
+between objects with quasi-coherent cohomology (Stacks, Tags 0AVW and 08I8). -/
 theorem schemeDerivedDirectImage_tExact_and_conservative_of_affine
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

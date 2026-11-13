@@ -190,10 +190,8 @@ private theorem overObj
     (J : GrothendieckTopology C) (U : C) (M : Sheaf J D) :
     (J.overPullback D U).obj M = M.over U := rfl
 
-/-- Encoding comparison for all modules, before choosing any presentation.
-
-Source: Stacks Project, Sites, Tag 00YV, functoriality of algebraic structures;
-Modules on Sites, Tags 03CY and 04IX, sheafification and localization of modules. -/
+/-- Encoding comparison for all modules, before choosing any presentation
+(Stacks, Tags 00YV, 03CY and 04IX). -/
 theorem constant_slice_module_encoding
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

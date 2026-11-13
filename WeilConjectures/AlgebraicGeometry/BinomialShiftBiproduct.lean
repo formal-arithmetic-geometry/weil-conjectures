@@ -161,8 +161,7 @@ private theorem binomial_biproduct_succ (Y : Scheme.{u})
         (p.1.val + 1 : ℤ) (by omega)).app F
 
 /-- Binomial sums start with F plus F[1], and adding the shift of the nth sum
-produces the (n+1)st sum.
-Source: Stacks Project, Tag 08EK, cone construction and Pascal's identity. -/
+produces the (n+1)st sum (Stacks, Tag 08EK). -/
 theorem binomial_shift_biproduct (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (F : schemeDerivedCategory Y) :

@@ -53,7 +53,7 @@ def constructibleComparisonRingMap (X : Scheme.{u})
 
 /-- Module comparison inverse image, constructed by module Kan extension and sheafification.
 The ring map is the canonical constant-section map, so this is inverse image with the
-canonical identification of the constant coefficient rings. (Stacks, Tags 00WX and 03D2) -/
+canonical identification of the constant coefficient rings (Stacks, Tags 00WX and 03D2). -/
 abbrev constructibleComparisonPullback (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ConstantCompletion.Mod (ConstantCompletion.constant
@@ -65,7 +65,7 @@ abbrev constructibleComparisonPullback (X : Scheme.{u})
 
 /-- Termwise comparison pullback on cochain complexes. Zero-morphism preservation is
 supplied by Mathlib's theorem for the existing module pullback adjunction, explicitly
-rather than by an expensive instance search. (Stacks, Tag 09AL) -/
+rather than by an expensive instance search (Stacks, Tag 09AL). -/
 def constructibleComparisonComplexPullback (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ConstantCompletion.Cx (ConstantCompletion.constant

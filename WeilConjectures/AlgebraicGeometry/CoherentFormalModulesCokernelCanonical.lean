@@ -48,8 +48,8 @@ private theorem multiplicationImage_quotient_comp_zero_iff
   rw [← Category.assoc, ← hn]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical ambient cokernel of a map between coherent formal modules is coherent.
-Source: Stacks Project, Lemma 087X, termwise cokernel construction. -/
+/-- The canonical ambient cokernel of a map between coherent formal modules is coherent
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_canonicalCokernel_isCoherent
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     {F G : ℕᵒᵖ ⥤ X.Modules}

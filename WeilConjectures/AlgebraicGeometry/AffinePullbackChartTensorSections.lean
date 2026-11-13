@@ -29,8 +29,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The inverse image of an affine open under an affine base change is affine, and
-its actual pullback-module sections are the scalar extension of the original sections.
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV. -/
+its actual pullback-module sections are the scalar extension of the original sections
+(Stacks, Tags 01I4, 01IA and 01HV). -/
 theorem exists_affine_pullback_chart_tensor_sections
     (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)
     (M : X.Modules) [M.IsQuasicoherent] (U : X.affineOpens)

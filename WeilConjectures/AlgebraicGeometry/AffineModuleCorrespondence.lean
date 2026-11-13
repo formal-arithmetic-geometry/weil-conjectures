@@ -119,8 +119,7 @@ set_option maxHeartbeats 400000 in
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
-and the canonical counit-induced `α` and adjoint `β` are isomorphisms.
-Source: Stacks Project, Morphisms, Lemma 01SB. -/
+and the canonical counit-induced `α` and adjoint `β` are isomorphisms (Stacks, Tag 01SB). -/
 theorem affine_module_correspondence [IsAffineHom f] :
     (∀ G : SheafOfModules.{u} (𝓡 A), G.IsQuasicoherent ↔ ((S).obj G).IsQuasicoherent) ∧
     (∀ F : U.Modules, F.IsQuasicoherent → ((R).obj F).IsQuasicoherent) ∧

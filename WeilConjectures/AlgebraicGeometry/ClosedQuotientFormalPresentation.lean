@@ -32,9 +32,7 @@ namespace AlgebraicGeometry
 
 /-- Descend a system killed by K to V(K), retaining its first support and the
 termwise pushforward identification. The lack of a proper closed support implies
-that V(K) is nonempty.
-
-Source: Stacks Project, Theorem 088E, paragraphs 2--4, and Tag 087T. -/
+that V(K) is nonempty (Stacks, Tags 088E and 087T). -/
 theorem exists_closedQuotientFormalPresentation
     {X S : Scheme.{u}} [IsNoetherian X] (f : X ⟶ S)
     [LocallyOfFiniteType f]

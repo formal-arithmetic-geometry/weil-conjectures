@@ -82,8 +82,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option maxHeartbeats 1400000 in
 -- The deeply nested functor and transport equalities require additional elaboration steps.
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
-This assertion constructs the maps; it does not assert that they are isomorphisms.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+This assertion constructs the maps; it does not assert that they are isomorphisms
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_construction [IsAffineHom f] :
     ∃ (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf),

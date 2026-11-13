@@ -24,8 +24,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- An affine etale object over a qcqs inverse limit descends to an affine etale
-object at a stage, for an arbitrary small cofiltered index.
-Source: Stacks Project, Tags 0EYL and 01ZM. -/
+object at a stage, for an arbitrary small cofiltered index (Stacks, Tags 0EYL and 01ZM). -/
 theorem exists_affineEtale_model_of_cofiltered
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u})

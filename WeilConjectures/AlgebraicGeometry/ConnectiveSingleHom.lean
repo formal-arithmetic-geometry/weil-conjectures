@@ -24,8 +24,7 @@ namespace DerivedCategory
 
 /-- Localization does not change maps from a degree-zero object into a complex
 which is zero in negative degrees. No projectivity or acyclicity of global sections
-is assumed.
-Source: Stacks Project, Derived Categories, Section 13.11 (Tag 05RR). -/
+is assumed (Stacks, Tag 05RR). -/
 theorem connective_single_hom_bijective
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (M : C) (K : CochainComplex C ℤ)

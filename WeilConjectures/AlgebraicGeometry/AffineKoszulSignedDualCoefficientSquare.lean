@@ -283,9 +283,8 @@ private theorem coefficient_dual_square_of_components
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The affine finite-free signed dual comparisons commute with quotient coefficients.
-Source: Stacks Project, Tag 0BQZ, displayed Hom-complex map;
-Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules. -/
+/-- The affine finite-free signed dual comparisons commute with quotient coefficients
+(Stacks, Tags 0BQZ and 01HV). -/
 theorem affine_koszul_signed_dual_coefficient_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n : ℕ) (f : Fin n → Γ(Y, U.1)) :

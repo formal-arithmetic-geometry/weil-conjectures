@@ -21,9 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Closed pushforward identifies the underlying inverse system of a categorical
-formal kernel, without asserting that evaluation preserves kernels.
-
-Source: Stacks Project, Tags 087T, 088A and 0887. -/
+formal kernel, without asserting that evaluation preserves kernels
+(Stacks, Tags 087T, 088A and 0887). -/
 theorem closedImmersion_formalKernel_comparison
     {X Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]
     (j : Z ⟶ X) [IsClosedImmersion j] (Q : X.IdealSheafData)

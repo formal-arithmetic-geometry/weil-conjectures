@@ -35,8 +35,7 @@ private theorem section_eval {C : Type u} [Category.{u} C]
   simp only [affineHomSection, Equiv.apply_symm_apply]
   rfl
 
-/-- Generator normalization implies this affine comparison property.
-Source: Stacks Project, Tag 01HV (4)-(5). -/
+/-- Generator normalization implies this affine comparison property (Stacks, Tag 01HV). -/
 theorem affineHomComparison_chart_rankone {Y : Scheme.{u}} (U : Y.affineOpens) :
     ∀ N : ModuleCat.{u} Γ(Y, U.1),
       IsIso (affineHomComparison U (ModuleCat.of Γ(Y, U.1) Γ(Y, U.1)) N) := by

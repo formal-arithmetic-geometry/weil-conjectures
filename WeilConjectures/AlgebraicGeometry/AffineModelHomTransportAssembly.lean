@@ -106,8 +106,8 @@ private theorem exists_affineTransportedHomEquiv (A : CommRingCat.{u})
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Convert coherent object comparisons to derived module Hom comparisons.
-Source: Stacks Project, Tags 06Z0, 08DW and 09RE. -/
+/-- Convert coherent object comparisons to derived module Hom comparisons
+(Stacks, Tags 06Z0, 08DW and 09RE). -/
 theorem exists_affineModelHomTransportAssembly
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

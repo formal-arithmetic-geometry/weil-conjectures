@@ -112,10 +112,8 @@ private theorem triangle_localization {X Y T : Scheme.{v}}
 
 /-- The sections comparison commutes with restriction along any triangle of schemes.
 The local lets spell out the existing comparison maps without importing their defining
-module, which uses this theorem. No injectivity or boundedness is required for this square.
-
-Source: Stacks Project, Tag 03Q9, final paragraph, the maps from each neighbourhood
-complex to the limit complex and their realization on cohomology. -/
+module, which uses this theorem. No injectivity or boundedness is required for this square
+(Stacks, Tag 03Q9). -/
 theorem sectionsComparison_triangle_naturality {X Y T : Scheme.{v}}
     (a : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = a ≫ g)
     {K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1})}

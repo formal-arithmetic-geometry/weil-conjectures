@@ -98,8 +98,7 @@ private theorem etaleSetPullback_unit_hom
   exact h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The underlying-set Kan comparison is locally surjective.
-Source: Stacks Project, Tags 09XN and 00YV, inverse image and algebraic structures. -/
+/-- The underlying-set Kan comparison is locally surjective (Stacks, Tags 09XN and 00YV). -/
 theorem etaleAbelianKanComparison_locally_surjective
     {X T : Scheme.{u + 1}} (p : T ⟶ X)
     (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤

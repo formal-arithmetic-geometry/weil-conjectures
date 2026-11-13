@@ -21,9 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Equality under the inverse-image unit for one stage sheaf is detected by
-an inverse-image unit at a later scheme stage.
-Source: Stacks Project, Sites Tag 0A35,
-and Etale Cohomology Tags 0EYL, 04HR and 09YQ. -/
+an inverse-image unit at a later scheme stage (Stacks, Tags 0A35, 0EYL, 04HR and 09YQ). -/
 theorem etale_inverse_image_unit_eventual_equality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

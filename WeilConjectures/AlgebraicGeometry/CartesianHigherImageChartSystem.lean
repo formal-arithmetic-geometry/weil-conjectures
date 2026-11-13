@@ -38,8 +38,8 @@ noncomputable def cartesianChartCone
   (Over.pullback (pullback.snd f (D.obj i).hom)).mapCone
     (((Over.forget S).mapCone c).overPost i)
 
-/-- The chart system is limiting and has affine arrows and qcqs structure maps.
-Source: Stacks Project, Tags 0EYM, 01YZ and 01Z6. -/
+/-- The chart system is limiting and has affine arrows and qcqs structure maps
+(Stacks, Tags 0EYM, 01YZ and 01Z6). -/
 theorem cartesianChartSystem_properties
     {S X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -27,8 +27,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
-/-- Currying restricted evaluation gives an isomorphism for any natural tensor comparison.
-Source: Stacks Project, Tags 08DJ and 08DL; Tag 08BS (exact extension by zero). -/
+/-- Currying restricted evaluation gives an isomorphism for any natural tensor comparison
+(Stacks, Tags 08DJ, 08DL and 08BS). -/
 theorem derivedRestriction_evaluationMate_isIso
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

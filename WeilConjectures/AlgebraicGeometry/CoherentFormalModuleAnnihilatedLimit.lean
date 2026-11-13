@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Uniform termwise annihilation gives exponent `2 * t` on an affine inverse-limit map.
-Source: Stacks Project, Remark 0888, final paragraph, and Lemma 087W. -/
+/-- Uniform termwise annihilation gives exponent `2 * t` on an affine inverse-limit map
+(Stacks, Tags 0888 and 087W). -/
 theorem coherentFormalModule_annihilated_affine_limit
     (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)
     (F G : CoherentFormalModule X I) (α : F ⟶ G) (t : ℕ) (ht : 1 ≤ t)

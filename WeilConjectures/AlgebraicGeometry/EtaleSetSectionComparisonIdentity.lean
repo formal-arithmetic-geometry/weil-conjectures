@@ -41,10 +41,8 @@ private noncomputable def pushId (S : Scheme.{u}) : push (𝟙 S) ≅ 𝟭 _ :=
     (Type (u + 1)) (S.smallGrothendieckTopology @Etale)
 
 
-/-- The scheme-level identity calculation, before specializing to a diagram.
-
-Source: Stacks Project, Sites Tags 03CB and 03CC (composition of morphisms of sites),
-with the identity adjunction and fibre-product pasting as in Étale Cohomology Tag 09YQ. -/
+/-- The scheme-level identity calculation, before specializing to a diagram
+(Stacks, Tags 03CB, 03CC and 09YQ). -/
 theorem etaleSetSectionComparisonIdentity
     {R S : Scheme.{u}} (f : S ⟶ R)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) :

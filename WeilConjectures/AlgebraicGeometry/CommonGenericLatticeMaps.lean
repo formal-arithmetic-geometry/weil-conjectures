@@ -58,8 +58,7 @@ private theorem pushforward_stalk_isIso {X W : Scheme.{u}}
 
 /-- Two nonzero ideals on an integral closed subscheme admit a coherent common
 generic lattice and monomorphisms into both pushed ideals, which are isomorphisms
-at the generic point.  The coherence of the pushed ideal itself is separate.
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH, intersection comparison. -/
+at the generic point.  The coherence of the pushed ideal itself is separate (Stacks, Tag 01YH). -/
 theorem exists_common_generic_lattice_maps {X W : Scheme.{u}}
     [IsLocallyNoetherian X] (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (I J : W.IdealSheafData) (hI : ¬ IsZero ((pushforward i).obj I.toModules))

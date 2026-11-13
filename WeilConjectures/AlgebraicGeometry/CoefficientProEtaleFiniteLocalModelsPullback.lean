@@ -70,8 +70,7 @@ private def fixedComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
         (Scheme.coefficientProEtaleModelTopology Z) (Scheme.coefficientProEtaleModelTopology X)
   exact ((conjugateIsoEquiv ac (ag.comp af)).symm e.symm).symm
 
-/-- Isomorphisms retain the displayed finite constant models on every slice.
-Source: Stacks Tag 03RW. -/
+/-- Isomorphisms retain the displayed finite constant models on every slice (Stacks, Tag 03RW). -/
 theorem coefficientProEtale_finite_iso {T : Scheme.{u}}
     (A : Type (max v (u + 1))) [CommRing A]
     {F G : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} T) (ModuleCat A)}
@@ -86,8 +85,8 @@ theorem coefficientProEtale_finite_iso {T : Scheme.{u}}
   exact ((Scheme.coefficientProEtaleModelTopology.{u, v} T).overPullback
     (ModuleCat A) U).mapIso e.symm ≪≫ i
 
-/-- Finite local models on a stratum persist after a further scheme pullback.
-Source: Stacks Tags 03RW and 00VC. -/
+/-- Finite local models on a stratum persist after a further scheme pullback
+(Stacks, Tags 03RW and 00VC). -/
 theorem coefficientProEtale_finite_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} Z) (ModuleCat A))

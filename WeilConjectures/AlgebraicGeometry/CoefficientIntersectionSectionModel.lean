@@ -28,8 +28,7 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pullback composition and open restriction transport sections and their unit generators.
-No affineness or quasi-coherence is required.
-Source: Stacks Project, Tags 0096 and 0097. -/
+No affineness or quasi-coherence is required (Stacks, Tags 0096 and 0097). -/
 private theorem exists_coefficientPullback_section_transport
     {X X' : Scheme.{u}} (F : X.Modules) (U : X.Opens)
     (Z : U.toScheme.Opens) (g' : X' ⟶ X) (k : X' ⟶ U.toScheme)
@@ -156,8 +155,8 @@ private theorem exists_coefficientPullback_section_transport
   exact H.symm
 
 
-/-- Affine pullback sections, before the ring pushout and tensor contraction.
-Source: Stacks Project, Tags 0097, 01I9 and 01IA. -/
+/-- Affine pullback sections, before the ring pushout and tensor contraction
+(Stacks, Tags 0097, 01I9 and 01IA). -/
 theorem exists_coefficientIntersection_section_model
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

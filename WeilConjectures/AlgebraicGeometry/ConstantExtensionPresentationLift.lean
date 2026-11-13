@@ -28,9 +28,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A finite constant quotient admits a module presentation whose constant sheaf map
-lifts locally to the middle term of the extension.
-
-Source: Stacks Project, Tag 093U, extension paragraph, through the choice of lifted generators. -/
+lifts locally to the middle term of the extension (Stacks, Tag 093U). -/
 theorem exists_constantExtension_presentation_lift {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

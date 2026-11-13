@@ -170,10 +170,8 @@ private theorem product_power_factor {X : Scheme.{u}} {J : X.Modules}
   refine ⟨image.map (Arrow.homMk' _ _ w), ?_⟩
   exact (image.map_homMk'_ι w).symm
 set_option backward.isDefEq.respectTransparency false in
-/-- A finite coherent adic chain with generic-residue-field successive quotients.
-
-Source: Stacks Project, Tag 01YF, irreducible-support ideal-power paragraph,
-using Tags 01Y9 and 01J3 (https://stacks.math.columbia.edu/tag/01YF). -/
+/-- A finite coherent adic chain with generic-residue-field successive quotients
+(Stacks, Tags 01YF, 01Y9 and 01J3). -/
 theorem coherent_support_adic_chain
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

@@ -234,9 +234,8 @@ private theorem compatibility_of_kflat_model
     (reduction_counit_comp (π (n + 1)) (τ n) (π n) (he n) K hk)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Compatible object comparisons for the actual constant perfect model.
-Source: Stacks Project, Tags 09C6 and 06YY; the normalized derived extension
-composition comparison of Tag 099M. -/
+/-- Compatible object comparisons for the actual constant perfect model
+(Stacks, Tags 09C6, 06YY and 099M). -/
 theorem adicPerfectReductionModels_compatibility (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

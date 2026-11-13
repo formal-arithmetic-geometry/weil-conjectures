@@ -24,8 +24,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- Naturality form of one object triangle: propagation of any supplied identification.
-Source: Stacks Project, Tag 0D5S, and naturality of the composition comparison. -/
+/-- Naturality form of one object triangle: propagation of any supplied identification
+(Stacks, Tag 0D5S). -/
 def AffineComparisonTransportTriangle
     {D T V : Type*} [Category D] [Category T] [Category V]
     (L : D ⥤ T) (B : T ⥤ V) (N : D ⥤ V) (κ : L ⋙ B ≅ N)
@@ -59,8 +59,8 @@ private theorem affineComparisonTransportTriangle_of_comp
   simpa only [Category.assoc] using
     congrArg (fun v ↦ v ≫ N.map a.hom ≫ e₂.inv) hd
 
-/-- Affine-coordinate comparisons can be made simultaneously and respect composition.
-Source: Stacks Project, Tag 08DW(2), Tag 06Y1 and Tag 0D5S. -/
+/-- Affine-coordinate comparisons can be made simultaneously and respect composition
+(Stacks, Tags 08DW, 06Y1 and 0D5S). -/
 theorem exists_affineCoordinateComparisonFamily :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b c : AffineComparisonCoordinate.{u, w})
@@ -118,8 +118,8 @@ theorem exists_affineCoordinateComparisonFamily :
       affineCoordinateChartObjectComparison_cocycle a b c φ ψ χ hc p q r hr hp hq hs N hN
 
 
-/-- Affine-coordinate comparisons with the naturality form of their composition law.
-Source: Stacks Project, Tags 08DW(2), 06Y1 and 0D5S. -/
+/-- Affine-coordinate comparisons with the naturality form of their composition law
+(Stacks, Tags 08DW, 06Y1 and 0D5S). -/
 theorem exists_affineCoordinateComparisonTransportFamily :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b c : AffineComparisonCoordinate.{u, w})

@@ -179,10 +179,8 @@ private theorem homologyHomEquiv_scalar
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Homotopy-category Hom between the ordinary quotient complexes is sections of
 algebraic quotient Hom cohomology. Naturality is stated on actual chain maps and
-ordinary scalar balancing, without derived localization or derived Hom.
-
-Source: Stacks Tag 09C6, the displayed formula for H_n; Tag 09C5, exact sections;
-More on Algebra, Tag 0A8H, the signed Hom differential. -/
+ordinary scalar balancing, without derived localization or derived Hom
+(Stacks, Tags 09C6, 09C5 and 0A8H). -/
 theorem adicPerfectModelHomCohomology (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

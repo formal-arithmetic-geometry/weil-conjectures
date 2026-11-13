@@ -27,9 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A constructible sheaf over a finite commutative coefficient ring on a quasi-compact,
 quasi-separated scheme embeds into a finite biproduct of direct images of constant finite
-module sheaves along finite, locally finitely presented morphisms.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (3). -/
+module sheaves along finite, locally finitely presented morphisms (Stacks, Tag 09Z7). -/
 theorem finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

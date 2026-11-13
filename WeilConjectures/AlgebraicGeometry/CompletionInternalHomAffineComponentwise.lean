@@ -36,9 +36,7 @@ set_option maxHeartbeats 500000 in
 -- Two nested tensor inductions elaborate the sheaf scalar actions at each quotient.
 /-- Construct completed evaluation and identify its individual quotient components.
 This does not identify equality with an arbitrary compatible family of morphisms and
-makes no assertion about an externally supplied map epsilon.
-
-Source: Stacks Project, Tag 0882, affine argument, and Tag 087W, module/sections comparison. -/
+makes no assertion about an externally supplied map epsilon (Stacks, Tags 0882 and 087W). -/
 theorem completion_internal_hom_affine_componentwise {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

@@ -68,8 +68,7 @@ private lemma singleTensorator_eq_transport
     singleCochainTensorIso, e, singleIsoQh, sg]
   simp [singleCochainTensorIso, singleIsoQh, Functor.map_comp, Category.assoc]
 
-/-- The canonical flat single tensorators preserve the associator.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, single/total tensor calculation. -/
+/-- The canonical flat single tensorators preserve the associator (Stacks, Tags 06YQ and 06YU). -/
 theorem singleFunctorObjTensorIso_associativity
     (L M N : Sheaf X.smallEtaleTopology B)
     (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M) :

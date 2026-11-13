@@ -121,9 +121,8 @@ private theorem pairIntersection {X : Scheme.{u}} {r : ℕ}
     · exact inf_le_left
     · exact inf_le_right
 
-/-- Degree-zero insertion expresses restriction as an augmentation plus a boundary term.
-Source: Stacks Project, Tag 02FU, insertion cancellation in degree zero;
-Tag 01FM for the increasing-tuple convention. -/
+/-- Degree-zero insertion expresses restriction as an augmentation plus a boundary term
+(Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheafPresheaf_degreeZero_identity
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let K := cechCapPresheafFunctor (U i)

@@ -79,8 +79,7 @@ attribute [local instance] tensorDescentPullbackDescentModuleTensor
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Coherent termwise tensor comparisons descend along K-flat resolutions.
-Source: Stacks Project, Cohomology, Tag 079U and Section 20.27. -/
+/-- Coherent termwise tensor comparisons descend along K-flat resolutions (Stacks, Tag 079U). -/
 theorem derivedPullback_monoidal_descent {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

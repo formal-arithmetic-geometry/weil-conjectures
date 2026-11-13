@@ -34,8 +34,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- A perfect object on the limit affine base change has a bounded finite-projective
 model over the colimit of the actual coordinate-ring diagram. This is a representation
-statement, not a descent statement: no finite stage or descended object is asserted.
-Source: Stacks Project, Tag 09RF, affine case, and Tag 08EB. -/
+statement, not a descent statement: no finite stage or descended object is asserted
+(Stacks, Tags 09RF and 08EB). -/
 theorem exists_affine_descent_colimit_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)

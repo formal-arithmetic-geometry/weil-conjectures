@@ -28,8 +28,7 @@ universe uCD wCD
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Existence of the canonical tensor-Hom family.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+/-- Existence of the canonical tensor-Hom family (Stacks, Tag 08DJ). -/
 theorem exists_canonicalDerivedTensorHom (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
     ∃ e : ∀ K L M : schemeDerivedCategory X,
@@ -49,8 +48,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.style.haveILetI false in
 set_option maxHeartbeats 1000000 in
 -- The representative predicate requires extra heartbeats to elaborate the sheaf tensor instances.
-/-- Uniqueness of the family specified on representatives.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+/-- Uniqueness of the family specified on representatives (Stacks, Tag 08DJ). -/
 theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     {e e' : ∀ K L M : schemeDerivedCategory X,
@@ -137,8 +135,7 @@ theorem IsCanonicalDerivedTensorHom.unique (X : Scheme.{uCD})
   exact (cancel_epi (a.hom ⊗ₘ b.hom)).1 ((cancel_mono c.inv).1
     (by simpa only [← Category.assoc] using heq))
 
-/-- Canonical family fixed by the representative equation.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+/-- Canonical family fixed by the representative equation (Stacks, Tag 08DJ). -/
 def schemeDerivedTensorHomEquiv (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
     ∀ K L M : schemeDerivedCategory X,

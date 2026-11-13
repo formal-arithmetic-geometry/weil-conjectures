@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace CategoryTheory
 
-/-- Pullback of descent data exists for every morphism of schemes.
-Source: Stacks Project, Descent, Lemma 023Y (pullback), specialized to a fixed base. -/
+/-- Pullback of descent data exists for every morphism of schemes (Stacks, Tag 023Y). -/
 theorem descent_pullback_construction
     {S X X' : Scheme.{u}} (a : X ⟶ S) (r : X' ⟶ X) :
     ∃ (F : Over.DescentDataCategory a ⥤ Over.DescentDataCategory (r ≫ a))

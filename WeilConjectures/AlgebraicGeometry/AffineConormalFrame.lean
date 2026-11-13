@@ -252,8 +252,8 @@ namespace AlgebraicGeometry
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
 /-- A basis of an affine conormal module gives a frame of the conormal sheaf,
-and its cardinality computes stalk finrank at points of that affine chart.
-Source: Stacks Project, Morphisms, Tag 01R3 (2), and Modules, Tag 01C6 (3). -/
+and its cardinality computes stalk finrank at points of that affine chart
+(Stacks, Tags 01R3 and 01C6). -/
 theorem affine_conormal_frame {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (U : Y.affineOpens) (m : ℕ)
     (b : Module.Basis (Fin m) (Γ(Y, U.1) ⧸ i.ker.ideal U) (i.ker.ideal U).Cotangent) :

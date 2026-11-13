@@ -19,8 +19,8 @@ universe u
 open CategoryTheory TensorProduct
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
-/-- Natural affine-model comparison after extension from the original stalk.
-Source: Stacks Project, Tags 01BH and 008B. -/
+/-- Natural affine-model comparison after extension from the original stalk
+(Stacks, Tags 01BH and 008B). -/
 theorem exists_affine_model_stalk_tensor_transport
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)
     (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :

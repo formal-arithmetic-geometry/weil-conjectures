@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The finite-diagonal comparison, constructed from coproduct comparison maps and
-extension by zero. No isomorphism is chosen from an existence statement.
-Source: Stacks, Tag 015J; finite diagonals of the CE total. -/
+extension by zero. No isomorphism is chosen from an existence statement (Stacks, Tag 015J). -/
 noncomputable def etaleCEMappedTotalIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
@@ -88,8 +87,8 @@ noncomputable def etaleRestrictedBicomplex (X : Scheme.{u})
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
   T.I.stupidTrunc (ComplexShape.embeddingUpIntGE q)
 
-/-- The actual sheaf-valued restricted total, before global sections.
-Source: Stacks, Tags 015J and 0133. -/
+/-- The actual sheaf-valued restricted total, before global sections (Stacks, Tags 015J and 0133).
+-/
 noncomputable def etaleRestrictedTotal (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
@@ -109,8 +108,7 @@ theorem etaleRestrictedBicomplex_below (X : Scheme.{u})
     (fun i hi ↦ by change q + (i : ℤ) = s at hi; omega)
 
 /-- The explicit degree-zero summand map into the restricted total. It is zero
-when n < q and is the row augmentation when n ≥ q.
-Source: Stacks, Tag 015J and Tag 0133, augmented total construction. -/
+when n < q and is the row augmentation when n ≥ q (Stacks, Tags 015J and 0133). -/
 noncomputable def etaleRestrictedAugmentationComponent (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q n : ℤ) :
@@ -127,8 +125,7 @@ noncomputable def etaleRestrictedAugmentationComponent (X : Scheme.{u})
         (etaleRestrictedBicomplex X K T q)).flip).ιTotal
       (ComplexShape.up ℤ) 0 n n (zero_add n)
 
-/-- Inclusion of the restricted mapped total into the full mapped total.
-Source: Stacks, Tag 015J; totalization of the column inclusion. -/
+/-- Inclusion of the restricted mapped total into the full mapped total (Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedMappedInclusion (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=
@@ -140,7 +137,7 @@ noncomputable def etaleRestrictedMappedInclusion (X : Scheme.{u})
             (T.I.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))) (ComplexShape.up ℤ)
 
 /-- The inclusion from Γ of the restricted sheaf total, using the finite-diagonal
-comparison in the inverse direction. Source: Stacks, Tag 015J. -/
+comparison in the inverse direction (Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedSectionsInclusion (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :=

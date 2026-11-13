@@ -60,9 +60,7 @@ private theorem restriction_tensor_hom_tmul {A B : Scheme.{w}}
 
 -- Tensor section transports require additional elaboration of restriction instances.
 /-- Restriction of the external coefficient to an open base change, normalized on
-sections by the pullback units.
-Source: Stacks Project, Tag 0BED, omitted canonical-cup verification; Tags 0096,
-0097 and 01CD. -/
+sections by the pullback units (Stacks, Tags 0BED, 0096, 0097 and 01CD). -/
 theorem exists_externalOpenCoefficient_normalized
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens)

@@ -22,8 +22,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Propagate two bottom-stage models through compatible affine coordinates.
-Source: Stacks Project, Tag 09RE, affine calculation, and Tags 0D5S and 06Y1. -/
+/-- Propagate two bottom-stage models through compatible affine coordinates
+(Stacks, Tags 09RE, 0D5S and 06Y1). -/
 theorem affineModelComparisonData_of_bottom_models
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

@@ -20,8 +20,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Commuting sections with extension by zero respects any row comparison.
-Source: Stacks Project, Tags 015J and 015K. -/
+/-- Commuting sections with extension by zero respects any row comparison
+(Stacks, Tags 015J and 015K). -/
 theorem ceRowSectionsMap_extend {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}

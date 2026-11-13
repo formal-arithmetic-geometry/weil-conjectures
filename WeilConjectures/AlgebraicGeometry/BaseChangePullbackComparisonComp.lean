@@ -172,9 +172,8 @@ private lemma square_comp
     Category.comp_id, Functor.map_comp, Category.assoc] at hc
   simpa only [Functor.map_comp, Category.assoc] using hc
 
-/-- The pullback and single-complex comparisons for two commutative squares compose.
-
-Source: Stacks Tag 0F07, condition (1), and Tag 09Z1, the canonical restriction maps. -/
+/-- The pullback and single-complex comparisons for two commutative squares compose
+(Stacks, Tags 0F07 and 09Z1). -/
 theorem Etale.baseChangePullbackComparison_comp
     {T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T)
     (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂)

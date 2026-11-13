@@ -28,9 +28,7 @@ namespace AlgebraicGeometry.Etale
 -- The existential proof binders in the unchanged interface are used by later witnesses.
 set_option linter.unusedVariables false in
 /-- Compatible injective and cokernel systems, assembled into a short exact diagram
-on the cone point, before taking any filtered colimit.
-Source: Stacks Project, Tag 0EXZ, its product-of-direct-images construction, and
-Tag 04JC for exact inverse image. -/
+on the cone point, before taking any filtered colimit (Stacks, Tags 0EXZ and 04JC). -/
 theorem etale_replacement_stage_diagram
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -31,7 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Over the algebra of a closed immersion, rank-stratified cohomology determines
-its derived object. (Stacks, Tags 0BQZ, 0AVW) -/
+its derived object (Stacks, Tags 0BQZ, 0AVW). -/
 theorem closedImmersion_rankedCohomology_reconstruction
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

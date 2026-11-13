@@ -25,9 +25,7 @@ universe u
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The internal sheaf Hom from a coherent module `G` to a coherent module `F` on any scheme
-is coherent, with no Noetherian hypothesis.
-
-Source: Stacks Project, Modules, Lemma 01CQ. -/
+is coherent, with no Noetherian hypothesis (Stacks, Tag 01CQ). -/
 theorem isCoherent_homObj (X : Scheme.{u}) (F G : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) :

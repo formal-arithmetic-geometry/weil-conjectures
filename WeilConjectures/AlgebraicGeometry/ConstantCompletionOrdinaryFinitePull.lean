@@ -73,7 +73,7 @@ attribute [local irreducible] derivedPull pull change
 include V adj hL in
 /-- Ordinary constant-coefficient pullback commutes with finite reduction, normalized
 by the two insertions. This fixes the canonical tensor reassociation in the quotient
-coefficient category. Source: Stacks 06YY, 099L. -/
+coefficient category (Stacks, Tags 06YY and 099L). -/
 theorem ordinaryFinitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅
         change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))),

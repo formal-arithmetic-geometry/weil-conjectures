@@ -87,8 +87,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Degreewise affine Hom comparison data.
 
 This is the termwise part of the chain-map comparison; the chain-map
-extensionality argument is supplied by `affine_hom_complex_d`.
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3. -/
+extensionality argument is supplied by `affine_hom_complex_d` (Stacks, Tags 0BUZ, 0BV0 and 0AX3). -/
 theorem affine_hom_complex_d_components
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     (H : SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤

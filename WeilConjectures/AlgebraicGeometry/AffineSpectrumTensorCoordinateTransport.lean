@@ -132,8 +132,7 @@ attribute [local irreducible] ordinaryIsoPullbackStalkComplexIso
 
 set_option maxHeartbeats 700000 in
 -- The two stalk-ring diagrams require a larger elaboration budget.
-/-- The homology transport equation for supplied affine coordinate data.
-Source: Stacks Project, Tag 0098. -/
+/-- The homology transport equation for supplied affine coordinate data (Stacks, Tag 0098). -/
 theorem affineSpectrum_tensor_coordinate_homology_transport_pointwise
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
@@ -395,8 +394,8 @@ theorem affineSpectrum_tensor_coordinate_homology_transport
     f f' g g' sq sq0 z0 i P eR eA eB eD q t h hc x
 
 
-/-- Affine spectrum tensor coordinate transport, assembled from the data and homology sublemmas.
-Source: Stacks Project, Tag 0098. -/
+/-- Affine spectrum tensor coordinate transport, assembled from the data and homology sublemmas
+(Stacks, Tag 0098). -/
 theorem exists_affineSpectrum_tensor_coordinates
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

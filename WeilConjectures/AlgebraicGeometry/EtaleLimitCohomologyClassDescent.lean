@@ -24,10 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Finite-stage representatives of limit cohomology classes.
-
-Source: Stacks Project, Theorem 09YQ, via 09YP, using the degree-zero
-section comparison 09YN and dimension shifting 0739. -/
+/-- Finite-stage representatives of limit cohomology classes
+(Stacks, Tags 09YQ, 09YP, 09YN and 0739). -/
 theorem etale_limit_cohomology_class_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

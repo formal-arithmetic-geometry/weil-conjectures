@@ -83,8 +83,8 @@ private theorem compact_shift
     obtain ⟨x, hx⟩ := hφ.2 (Q f)
     exact ⟨x, Q.injective hx⟩
 
-/-- All compact objects jointly detect isomorphisms in D_QCoh(X).
-Source: Stacks Project, Tags 09IS and 09M1; the detection step of Tag 0A9R. -/
+/-- All compact objects jointly detect isomorphisms in D_QCoh(X) (Stacks, Tags 09IS, 09M1 and 0A9R).
+-/
 theorem derivedQCoh_compact_detection (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     let _ : HasCoproducts.{u} (schemeDerivedQCohCategory X) := derivedQCohDirectSums X

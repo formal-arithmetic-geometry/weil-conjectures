@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The unique lift through the monic filtered-step inclusion, a genuine universal
-property construction rather than a choice of an arbitrary isomorphism.
-Source: Stacks, Tag 015J, column filtration. -/
+property construction rather than a choice of an arbitrary isomorphism (Stacks, Tag 015J). -/
 noncomputable def etaleRestrictedSectionsLift
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

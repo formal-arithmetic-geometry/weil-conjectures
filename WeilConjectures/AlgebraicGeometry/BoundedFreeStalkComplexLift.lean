@@ -57,10 +57,8 @@ private theorem openModuleDirectImage_restrict_iso (X : Scheme.{u}) (U : X.Opens
     infer_instance
   exact ⟨asIso (adj.counit.app M)⟩
 
-/-- A bounded free stalk complex lifts as a complex, without a prescribed derived object.
-
-Source: Stacks Project, Tags 0BCD and 0BC7, descent of finite presentations and maps,
-and Tag 00CR. The final direct image is only an auxiliary global complex. -/
+/-- A bounded free stalk complex lifts as a complex, without a prescribed derived object
+(Stacks, Tags 0BCD, 0BC7 and 00CR). -/
 theorem exists_boundedFree_stalk_complex_lift
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)
     (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)

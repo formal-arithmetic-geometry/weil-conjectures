@@ -26,8 +26,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- Structure maps on sections commute with pullback.
-Source: Stacks Project, Tags 0096 and 0BED. -/
+/-- Structure maps on sections commute with pullback (Stacks, Tags 0096 and 0BED). -/
 theorem scalarMap_pullback
     (f : X ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (U : X.Opens) (r : k) :
     (a.app U).hom (scalarMap f U r) = scalarMap (a ≫ f) (a ⁻¹ᵁ U) r := by
@@ -38,8 +37,8 @@ theorem scalarMap_pullback
     CommRingCat.hom_comp]
   convert hn using 1; rfl
 
-/-- The pullback adjunction unit on sections, with the scalar actions restricted to k.
-Source: Stacks Project, Tags 0096 and 0BED. -/
+/-- The pullback adjunction unit on sections, with the scalar actions restricted to k
+(Stacks, Tags 0096 and 0BED). -/
 def scalarUnitSection
     (f : X ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (F : X.Modules) (U : X.Opens) :
     scalarObj f F (op U) →ₗ[k]
@@ -58,16 +57,15 @@ def scalarUnitSection
       q • (show Γ((tensorPullback a).obj F, a ⁻¹ᵁ U) from η.hom s))
       (scalarMap_pullback f a U r)
 
-/-- Pull a global section back and restrict it to an arbitrary open in the source.
-Source: Stacks Project, Tags 0096 and 0BED. -/
+/-- Pull a global section back and restrict it to an arbitrary open in the source
+(Stacks, Tags 0096 and 0BED). -/
 def scalarPullbackGlobalSection
     (f : X ⟶ Spec (CommRingCat.of k)) (a : Y ⟶ X) (F : X.Modules) (W : Y.Opens) :
     scalarObj f F (op ⊤) →ₗ[k] scalarObj (a ≫ f) ((tensorPullback a).obj F) (op W) :=
   (scalarRestriction (a ≫ f) ((tensorPullback a).obj F)
     (homOfLE (by simp : W ≤ a ⁻¹ᵁ ⊤)).op).hom.comp (scalarUnitSection f a F ⊤)
 
-/-- The bilinear external section map over an open of the second factor.
-Source: Stacks Project, Tag 0BED. -/
+/-- The bilinear external section map over an open of the second factor (Stacks, Tag 0BED). -/
 def externalSectionsBilinear
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens) :
@@ -94,8 +92,7 @@ def externalSectionsBilinear
           pullback.condition.symm]
       exact tmulSection_smul _ _ _)
 
-/-- The induced k-linear map on tensor products of sections.
-Source: Stacks Project, Tag 0BED. -/
+/-- The induced k-linear map on tensor products of sections (Stacks, Tag 0BED). -/
 def externalSectionsComponent
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens) :
@@ -110,8 +107,7 @@ def externalSectionsComponent
         (op (pullback.snd f g ⁻¹ᵁ V)) from
     TensorProduct.lift (externalSectionsBilinear f g F G V))
 
-/-- External section components commute with restriction in the second factor.
-Source: Stacks Project, Tag 0BED, degree-zero cup product. -/
+/-- External section components commute with restriction in the second factor (Stacks, Tag 0BED). -/
 theorem externalSectionsComponent_naturality
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) {U V : Y.Opensᵒᵖ} (i : U ⟶ V) :

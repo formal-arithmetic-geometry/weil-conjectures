@@ -50,9 +50,8 @@ private theorem adicResidueAlgebraTower_model
     (DerivedCategory.adicLimitReduction J T.level T.extension T.adjunction E p n) (hred n)⟩
 
 /-- A covering family with a bounded finite-projective algebraic model for all
-finite reductions. Completeness of either object on the slice is a separate assertion.
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph through the choice of
-an affine weakly contractible cover; Tags 09C2, 094I, 09BI and 09AW. -/
+finite reductions. Completeness of either object on the slice is a separate assertion
+(Stacks, Tags 09C6, 09C2, 094I, 09BI and 09AW). -/
 theorem adicResidue_finite_reduction_model_family
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

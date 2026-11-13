@@ -32,8 +32,7 @@ private theorem tensorPullback_kFlat {X Y : Scheme.{u₁}} (f : X ⟶ Y)
   convert h using 1
   rfl
 
-/-- The canonical lift of the composite tensor counit is invertible.
-Source: Stacks Project, Cohomology, Tag 0D5S. -/
+/-- The canonical lift of the composite tensor counit is invertible (Stacks, Tag 0D5S). -/
 theorem isIso_derivedPullbackCompositionLift
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

@@ -30,9 +30,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Restriction of étale module sections to a closed subscheme is an isomorphism if
 all irreducible closed subsets of every finite cover meet that subscheme in a
-nonempty connected subset.
-
-Source: Stacks Project, Lemmas 59.82.4 and 59.82.2 (Tags 09ZG and 09ZF). -/
+nonempty connected subset (Stacks, Tags 09ZG and 09ZF). -/
 theorem isIso_globalSectionsUpperStarMap_of_finite_connected_closed_intersections
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] (i : Z ⟶ X) [IsClosedImmersion i]

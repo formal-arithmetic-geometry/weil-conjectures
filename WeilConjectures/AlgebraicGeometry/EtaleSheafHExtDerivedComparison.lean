@@ -241,9 +241,8 @@ private lemma sheafHRightDerivedIso_naturality (X : Scheme.{u})
   simp only [Category.assoc]
 
 /-- Ext cohomology of abelian etale sheaves agrees naturally with the homology of
- derived global sections. No compactness, dimension, or torsion assumption is needed.
- Source: Stacks Project, Derived Categories, Definition 015A and Lemma 05TI;
- Etale Cohomology, Lemma 03Q5, using the same injective-resolution definition of cohomology. -/
+ derived global sections. No compactness, dimension, or torsion assumption is needed
+(Stacks, Tags 015A, 05TI and 03Q5). -/
 theorem nonempty_sheafH_extDerivedIso (X : Scheme.{u}) (q : ℕ) :
     Nonempty (Sheaf.functorH.{u + 1} X.smallEtaleTopology q ≅
       DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙

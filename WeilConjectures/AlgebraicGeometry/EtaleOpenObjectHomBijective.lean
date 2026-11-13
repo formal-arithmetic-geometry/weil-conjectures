@@ -30,9 +30,7 @@ private noncomputable def freeSectionEquiv {X : Scheme.{u}} (U : X.Opens)
     (((AddCommGrpCat.adj.whiskerRight (C := X.Etaleᵒᵖ)).homEquiv
       (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk U.ι)) F.obj).trans uliftYonedaEquiv)
 
-/-- The degree-zero identity-generator comparison on morphisms is bijective.
-Source: Stacks Project, Cohomology on Sites, Tag 03F3, free abelian representable
-and constant-sheaf adjunctions. -/
+/-- The degree-zero identity-generator comparison on morphisms is bijective (Stacks, Tag 03F3). -/
 theorem etaleOpenObjectHom_bijective {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (U : X.Opens) :
     Function.Bijective (fun f : (etaleOpenFreeSheaf X).obj (Scheme.Etale.mk U.ι) ⟶ F ↦

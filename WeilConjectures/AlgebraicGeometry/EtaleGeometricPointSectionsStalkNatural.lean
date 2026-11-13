@@ -24,8 +24,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The global-section comparison with the original geometric stalk is natural.
-Source: Stacks Project, Tag 03Q1 (3), and the identity-point case of Tag 03P5. -/
+/-- The global-section comparison with the original geometric stalk is natural
+(Stacks, Tags 03Q1 and 03P5). -/
 theorem etaleGeometricPointSectionsStalkNatural
     (S : Scheme.{u}) (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :

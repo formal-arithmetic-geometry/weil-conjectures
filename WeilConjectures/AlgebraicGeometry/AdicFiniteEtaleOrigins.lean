@@ -122,8 +122,7 @@ private theorem adicFiniteBoundedConstructible_iso (X : Scheme.{u}) [IsNoetheria
       (hv q hq).of_iso ((coefficientModelCohomology _ q).mapIso i.symm)⟩
 
 /-- Each reduction has a bounded constructible etale origin with the same Tor
-interval. No compatibility or residue marking is asserted here.
-Source: Stacks Project, proetale.tex, Tag 09C2 (3)-(4) and Tag 09AL. -/
+interval. No compatibility or residue marking is asserted here (Stacks, Tags 09C2 and 09AL). -/
 theorem adicFiniteEtale_origins
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

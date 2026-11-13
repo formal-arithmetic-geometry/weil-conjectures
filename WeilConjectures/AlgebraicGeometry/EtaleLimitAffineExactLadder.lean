@@ -67,10 +67,8 @@ private theorem cohomology_middle_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact connecting rows and their comparison squares for an affine-stage system.
-
-Source: Stacks Project, Tag 09YP, using 0EXZ and the right-exact rows of 0739;
-scheme-to-affine-site comparison in 0EYL and 04HR. -/
+/-- Exact connecting rows and their comparison squares for an affine-stage system
+(Stacks, Tags 09YP, 0EXZ, 0739, 0EYL and 04HR). -/
 theorem etale_limit_affine_exact_ladder
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

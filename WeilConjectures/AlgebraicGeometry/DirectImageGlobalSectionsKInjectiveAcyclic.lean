@@ -28,8 +28,7 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 /-- Direct image of a K-injective complex is acyclic for subsequent global sections.
-No preservation of K-injectivity by direct image is asserted.
-Source: Stacks Project, Cohomology, Tags 079W and 0D5T; Duality, Tag 0B6I. -/
+No preservation of K-injectivity by direct image is asserted (Stacks, Tags 079W, 0D5T and 0B6I). -/
 theorem isIso_directImage_globalSections_unit_on_kInjective
     {X Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

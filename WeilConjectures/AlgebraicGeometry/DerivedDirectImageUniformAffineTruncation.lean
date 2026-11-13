@@ -36,8 +36,8 @@ namespace AlgebraicGeometry
 -- Homology, restriction and truncation comparisons require substantial normalization.
 -- Exact restriction additivity witnesses need a larger typeclass-search budget.
 /-- A single lower truncation works on an affine open for every quasi-coherent
-derived object. This is uniform in the object, with no coproduct hypothesis.
-Source: Stacks Project, Tag 08D5(2), final truncation argument, and Tag 08DZ. -/
+derived object. This is uniform in the object, with no coproduct hypothesis
+(Stacks, Tags 08D5 and 08DZ). -/
 theorem exists_isIso_schemeHigherDirectImage_uniform_truncGE_over_affine
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

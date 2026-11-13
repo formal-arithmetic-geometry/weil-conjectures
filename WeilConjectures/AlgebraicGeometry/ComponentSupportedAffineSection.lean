@@ -30,10 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An invertible module with ample restrictions to the reduced components has an
 ambient affine power-section neighbourhood at a point on exactly one component.
-No ampleness near component intersections is asserted.
-
-Source: Stacks Project, Varieties, Lemma 09NX, final paragraph, and Remark 09NW;
-Properties, Proposition 01Q3 and Lemma 01PV. -/
+No ampleness near component intersections is asserted (Stacks, Tags 09NX, 09NW, 01Q3 and 01PV). -/
 theorem exists_component_supported_affine_section
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] [IsReduced X]
     (r : ℕ) (C : Fin r → Scheme.{u}) (i : ∀ a, C a ⟶ X)

@@ -22,9 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Weakly-etale localization in fixed-scalar sheaves, with its inverse-image comparison.
-
-Source: Stacks Project, Sites, Tag 00XZ; Modules on Sites, Tag 04IX. -/
+/-- Weakly-etale localization in fixed-scalar sheaves, with its inverse-image comparison
+(Stacks, Tags 00XZ and 04IX). -/
 theorem coefficient_slice_fixed_module_equivalence
     (Y : Scheme.{u}) (U : coefficientProEtaleSiteModel.{u, u} Y)
     (k : Type (u + 1)) [CommRing k] :

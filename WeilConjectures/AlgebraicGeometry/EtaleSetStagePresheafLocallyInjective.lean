@@ -35,10 +35,7 @@ private theorem arrow_eq_kernel_iff
   rfl
 
 /-- The comparison from the presheaf colimit to the limit push-pull sheaf
-is locally injective.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-and Étale Cohomology Tag 09YQ, via the affine-site colimit presentation. -/
+is locally injective (Stacks, Tags 0A35 and 09YQ). -/
 theorem etaleSetStagePresheaf_locallyInjective
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

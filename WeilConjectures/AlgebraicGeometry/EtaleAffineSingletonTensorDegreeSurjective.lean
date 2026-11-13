@@ -29,8 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- A normalized affine singleton comparison lifts every target section.
-Source: Stacks Project, Tag 03P2; Tags 01I4, 01JQ, 01I9 and 01IA. -/
+/-- A normalized affine singleton comparison lifts every target section
+(Stacks, Tags 03P2, 01I4, 01JQ, 01I9 and 01IA). -/
 theorem singletonTensorDegreeComparisonHom_surjective
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

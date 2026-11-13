@@ -20,8 +20,7 @@ noncomputable section
 universe v
 open CategoryTheory
 namespace AlgebraicGeometry
-/-- The canonical affine algebra adjunction component.
-Source: Stacks Project, Tags 0AVW and 01SB. -/
+/-- The canonical affine algebra adjunction component (Stacks, Tags 0AVW and 01SB). -/
 theorem affine_algebra_module_adjunction_preserves_finite_limits
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [(RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)).IsRightAdjoint] :

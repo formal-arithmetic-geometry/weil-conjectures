@@ -19,9 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 set_option backward.isDefEq.respectTransparency false
 namespace AlgebraicGeometry
 
-/-- The kernels of the descended inclusion vanish after the defining shift.
-
-Source: Stacks Project, Lemma 087X, uniqueness in claim (d). -/
+/-- The kernels of the descended inclusion vanish after the defining shift (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_inclusion_bound
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)

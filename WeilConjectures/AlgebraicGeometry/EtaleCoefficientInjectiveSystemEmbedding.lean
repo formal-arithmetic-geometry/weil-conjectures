@@ -36,8 +36,8 @@ private theorem etaleCoefficientProductEmbedding_mono
   exact mono_of_mono (etaleCoefficientProductEmbedding D F φ i) (Pi.π _ ⟨i, 𝟙 i⟩)
 
 set_option linter.unusedVariables false in
-/-- The explicit outgoing-arrow product admits compatible transitions and embeddings.
-Source: Stacks Project, Tag 0EXZ, product/direct-image construction. -/
+/-- The explicit outgoing-arrow product admits compatible transitions and embeddings
+(Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_injective_system_embedding
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

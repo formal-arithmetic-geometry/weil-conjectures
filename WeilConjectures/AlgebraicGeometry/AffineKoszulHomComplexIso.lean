@@ -24,10 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Hom from the sheafified Koszul complex into the structure sheaf is
-isomorphic to the sheafified integer-indexed signed dual Koszul complex.
-
-Source: Stacks Project, Tag 0BQZ, local Hom complex computation; Tag 01HV,
-exact associated sheafification on affine schemes. -/
+isomorphic to the sheafified integer-indexed signed dual Koszul complex
+(Stacks, Tags 0BQZ and 01HV). -/
 theorem affine_koszul_hom_complex_iso
     {Y : Scheme.{u}} (U : Y.affineOpens) (n : ℕ) (f : Fin n → Γ(Y, U.1)) :
     let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom

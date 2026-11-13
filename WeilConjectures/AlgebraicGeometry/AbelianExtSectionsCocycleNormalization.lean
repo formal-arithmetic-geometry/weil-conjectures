@@ -28,8 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite CochainComplex HomComplex
 noncomputable section
 namespace CategoryTheory
 
-/-- The acyclic comparison of an injective resolution is its usual derived comparison.
-Source: Stacks Project, Tags 015E and 06XR. -/
+/-- The acyclic comparison of an injective resolution is its usual derived comparison
+(Stacks, Tags 015E and 06XR). -/
 theorem acyclic_comparison_of_injective
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [HasInjectiveResolutions C] [Abelian D]

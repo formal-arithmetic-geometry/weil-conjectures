@@ -22,8 +22,7 @@ universe u
 open CategoryTheory Module
 namespace AlgebraicGeometry
 
-/-- The based affine module in free-sheaf coordinates.
-Source: Stacks Project, Tag 01HV. -/
+/-- The based affine module in free-sheaf coordinates (Stacks, Tag 01HV). -/
 @[irreducible]
 noncomputable def affineBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} (b : Basis I Γ(Y, U.1) M) :
@@ -35,8 +34,7 @@ noncomputable def affineBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
       tildeFinsupp (R := Γ(Y, U.1)) I) ≪≫
     Scheme.Modules.restrictFreeIso U.2.isoSpec.hom I
 
-/-- The algebraic module dual in dual-basis free-sheaf coordinates.
-Source: Stacks Project, Tag 01HV; Basis.dualBasis_repr. -/
+/-- The algebraic module dual in dual-basis free-sheaf coordinates (Stacks, Tag 01HV). -/
 @[irreducible]
 noncomputable def affineDualBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} [Finite I]

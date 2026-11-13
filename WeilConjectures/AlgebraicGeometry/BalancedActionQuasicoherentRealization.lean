@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace AlgebraicGeometry
 
 /-- A quasi-coherent module with a balanced action of `B` comes from the base change
-by `Spec B`, with an identification respecting every scalar in `B`.
-
-Source: Stacks Project, Tags 01LX and 01SB; Tag 0897, relative-spectrum paragraph. -/
+by `Spec B`, with an identification respecting every scalar in `B`
+(Stacks, Tags 01LX, 01SB and 0897). -/
 theorem balancedAction_quasicoherent_realization
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

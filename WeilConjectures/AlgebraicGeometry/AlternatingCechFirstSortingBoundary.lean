@@ -29,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 open Classical in
 /-- After pairing nonjunction deletions, the two differential expansions leave
 consecutive signed partial sorting stages. This statement does not identify the
-endpoints or telescope the sum.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1. -/
+endpoints or telescope the sum (Stacks, Tag 01FM). -/
 theorem cechFirstSortingBoundary (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

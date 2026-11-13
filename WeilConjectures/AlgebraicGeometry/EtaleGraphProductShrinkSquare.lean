@@ -255,9 +255,8 @@ private theorem square_component
     rfl
 
 /-- The final Q exchange commutes with the mixed-neighborhood support shrink.
-This assertion involves no source presentation or inverse B exchange.
-Source: Stacks Project, more-etale.tex, horizontal exchange pasting (Tag 0F7D),
-and the final A--F comparison of Tag 0F7J. -/
+This assertion involves no source presentation or inverse B exchange (Stacks, Tags 0F7D and 0F7J).
+-/
 theorem etaleGraphProductShrinkSquare
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

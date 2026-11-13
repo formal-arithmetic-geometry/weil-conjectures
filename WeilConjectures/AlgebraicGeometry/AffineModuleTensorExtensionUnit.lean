@@ -62,8 +62,8 @@ local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 
 set_option maxHeartbeats 800000 in
 -- Tensor instance reduction in the explicit unit construction needs additional heartbeats.
-/-- Extension along ε supplies a functor and its canonical tensor unit after κ.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h. -/
+/-- Extension along ε supplies a functor and its canonical tensor unit after κ (Stacks, Tag 01SB).
+-/
 theorem affine_module_tensor_extensionUnit
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hb : b ≫ ε = 𝟙 U.sheaf)

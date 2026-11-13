@@ -36,8 +36,8 @@ namespace AlgebraicGeometry.Scheme
 /-- Fixed-scalar inverse image on the existing equivalent pro-etale site models.
 This is the usual left Kan extension followed by sheafification along canonical scheme
 base change. It reads the constant-ring module inverse image after constant-scalar
-restriction, with its canonical constant-coefficient identification.
-Source: Stacks Tags 09A5, 00VC and 03D2. -/
+restriction, with its canonical constant-coefficient identification
+(Stacks, Tags 09A5, 00VC and 03D2). -/
 def coefficientProEtaleFixedModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Type (max v (u + 1))) [CommRing R] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -47,9 +47,8 @@ def coefficientProEtaleFixedModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The recorded affine-local constructibility condition, transported to the equivalent
 coefficient-sized site. The finite stratification consists of the same immersed schemes.
 On every localized site, values are finitely presented modules and may vary with the
-covering member. No coefficient-set finiteness or universe equality is imposed.
-Source: Stacks Project, Tag 09AJ, definition-constructible; Tag 00IK identifies finite type
-and finite presentation over a Noetherian coefficient ring. -/
+covering member. No coefficient-set finiteness or universe equality is imposed
+(Stacks, Tags 09AJ and 00IK). -/
 def IsCoefficientAffineLocallyConstructibleProEtaleModuleSheaf (X : Scheme.{u})
     (R : Type (max v (u + 1))) [CommRing R] [IsNoetherianRing R]
     (F : CategoryTheory.ConstantCompletion.Mod

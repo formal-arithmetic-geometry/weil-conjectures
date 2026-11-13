@@ -72,8 +72,7 @@ noncomputable def derivedLowerStarRestrictScalarsMap :
   Functor.rightDerivedFunctorPlusBaseChange (lowerStarRestrictScalarsIso φ f).hom
 
 /-- The canonical derived direct-image comparison is invertible because restriction
-sends injectives to direct-image acyclics.
-Source: Stacks Project, Tag 0D6J(3), with the acyclicity argument of Tag 03FD. -/
+sends injectives to direct-image acyclics (Stacks, Tags 0D6J and 03FD). -/
 theorem isIso_derivedLowerStarRestrictScalarsMap :
     IsIso (derivedLowerStarRestrictScalarsMap φ f) := by
   exact Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic

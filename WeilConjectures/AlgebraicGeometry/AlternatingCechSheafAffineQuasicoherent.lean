@@ -35,8 +35,7 @@ private theorem quasicoherent_product {A : CommRingCat.{u}} {I : Type}
   exact (SheafOfModules.isQuasicoherent.{u} (Spec A).ringCatSheaf).prop_of_iso e
     (inferInstance : SheafOfModules.IsQuasicoherent.{u} ((tilde.functor A).obj N))
 
-/-- Each pushed-forward extended term is quasi-coherent.
-Source: Stacks Project, Tags 02KG and 02KH, separated-case affine intersections. -/
+/-- Each pushed-forward extended term is quasi-coherent (Stacks, Tags 02KG and 02KH). -/
 theorem alternatingCechSheafComplex_affineQuasicoherent
     {A : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) [IsSeparated f]
     {r : ℕ} (U : Fin r → X.Opens) (haffine : ∀ i, IsAffineOpen (U i))

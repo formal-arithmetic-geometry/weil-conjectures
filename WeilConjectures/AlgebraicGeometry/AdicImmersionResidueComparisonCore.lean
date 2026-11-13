@@ -62,8 +62,8 @@ attribute [local instance 40000] modelAbelian fixedAbelian standardDerived
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
 /-- Pure inverse image of a fixed-scalar residue, followed by the actual small-site
-and constant-ring equivalences. No completed coefficient ring occurs in this functor.
-Source: Stacks Tags 03A0 and 03CY. -/
+and constant-ring equivalences. No completed coefficient ring occurs in this functor
+(Stacks, Tags 03A0 and 03CY). -/
 def sfbFixedResiduePull {X S : Scheme.{u}} (i : S ⟶ X)
     (k : Type (u + 1)) [CommRing k] :
     Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ⥤

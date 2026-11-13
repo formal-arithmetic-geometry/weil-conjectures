@@ -27,8 +27,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 -- Coproduct and tensor comparison elaboration requires additional heartbeats.
 /-- An ambient ideal times a closed finite free source is the pushforward of the
-finite sum of its extended ideal, compatibly with the inclusions.
-Source: Stacks Project, Tag 01QY, affine quotient calculation, applied coordinatewise. -/
+finite sum of its extended ideal, compatibly with the inclusions (Stacks, Tag 01QY). -/
 theorem closed_free_ideal_product_iso
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (K : X.IdealSheafData) (r : ℕ) :

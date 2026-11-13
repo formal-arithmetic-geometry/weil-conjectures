@@ -142,9 +142,8 @@ private theorem sliceTest_isZero
     (eL.symm.op.prod eN)
   exact (F.mapDerivedCategory.map_isZero hz).of_iso e'.symm
 
-/-- Restriction to an arbitrary slice preserves local derived completeness.
-Source: Stacks Project, algebraization.tex, Tag 0999; Modules on Sites, Section 03DH;
-Cohomology on Sites, Tag 08JB; proetale.tex, Tag 09C6, the connected-local reduction. -/
+/-- Restriction to an arbitrary slice preserves local derived completeness
+(Stacks, Tags 0999, 03DH, 08JB and 09C6). -/
 theorem adicResidue_slice_completeness
     (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

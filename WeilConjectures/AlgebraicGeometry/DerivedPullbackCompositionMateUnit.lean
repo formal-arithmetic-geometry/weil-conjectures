@@ -62,8 +62,8 @@ set_option linter.all false in
 -- Avoid repeating the expensive chosen-object type comparisons during linting.
 -- Matching the composition expands the sheaf and derived-functor instances.
 /-- The conjugate of the fixed pullback comparison satisfies the pasted direct-image
-unit equation, before identifying it with any direct-image composition isomorphism.
-Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T. -/
+unit equation, before identifying it with any direct-image composition isomorphism
+(Stacks, Tags 079W, 0D5S and 0D5T). -/
 theorem derivedPullbackComposition_mate_unit
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

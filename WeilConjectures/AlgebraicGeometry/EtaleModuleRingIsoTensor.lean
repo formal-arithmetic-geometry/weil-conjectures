@@ -225,9 +225,8 @@ private theorem tensorComparisonSheafIso_unit (U : Scheme.{u})
   exact h'
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Identify extension along a ring isomorphism using a restriction comparison.
-Source: Stacks Project, Definition 03D6 and Lemma 03D7; the tensor-restriction
-adjunction in Tag 03CZ, specialized to an isomorphism. -/
+/-- Identify extension along a ring isomorphism using a restriction comparison
+(Stacks, Tags 03D6, 03D7 and 03CZ). -/
 theorem etaleModuleRingIsoTensor (U V : Scheme.{u}) (f : U ⟶ V)
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})

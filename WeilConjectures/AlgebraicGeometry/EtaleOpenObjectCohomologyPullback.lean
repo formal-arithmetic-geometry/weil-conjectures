@@ -16,8 +16,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- The open-object map commutes with pullback of arbitrary Ext classes.
-Source: Stacks Project, Tag 03F3 (localization), and functoriality, Tags 01F8/01FB. -/
+/-- The open-object map commutes with pullback of arbitrary Ext classes
+(Stacks, Tags 03F3, 01F8 and 01FB). -/
 theorem etaleOpenObjectCohomologyMap_pullback
     {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

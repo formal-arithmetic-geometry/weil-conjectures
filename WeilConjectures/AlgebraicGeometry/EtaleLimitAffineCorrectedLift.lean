@@ -26,10 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A successor-degree zero-image class has a corrected preceding-degree lift.
-
-Source: Stacks Project, Tag 09YP via the injective-system construction 0EXZ,
-and the connecting-row argument of Tag 0739, transported by 0EYL and 04HR. -/
+/-- A successor-degree zero-image class has a corrected preceding-degree lift
+(Stacks, Tags 09YP, 0EXZ, 0739, 0EYL and 04HR). -/
 theorem etale_limit_affine_corrected_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

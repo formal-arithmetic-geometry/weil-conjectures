@@ -85,9 +85,7 @@ private theorem isOpen_flat_stalks_affine
   rw [he]
 
 /-- The fibre depth-equals-dimension locus for a flat finitely presented map
-between affine schemes is open.
-
-Source: Stacks Project, Tag 00RI, via Tag 00RH; Tag 00N8. -/
+between affine schemes is open (Stacks, Tags 00RI, 00RH and 00N8). -/
 theorem isOpen_fibre_depth_eq_ringKrullDim_of_isAffine
     {X T : Scheme.{u}} [IsAffine X] [IsAffine T]
     (f : X ⟶ T) [Flat f] [LocallyOfFinitePresentation f] :

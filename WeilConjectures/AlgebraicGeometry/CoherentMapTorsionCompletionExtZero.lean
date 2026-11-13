@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A power-torsion kernel embeds into a sufficiently deep ideal quotient.
-Source: Stacks Project, Tags 0889 and 088A, uniqueness argument. -/
+/-- A power-torsion kernel embeds into a sufficiently deep ideal quotient
+(Stacks, Tags 0889 and 088A). -/
 theorem coherentMap_torsion_completion_ext_zero
     {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)
     (Q R : CoherentModules X) (b : Q ⟶ R)

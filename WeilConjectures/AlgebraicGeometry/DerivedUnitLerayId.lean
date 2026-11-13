@@ -253,7 +253,7 @@ private lemma derived_leray_identity (X : Scheme.{u}) :
   exact (Category.comp_id _).symm
 
 /-- The derived unit followed by Leray and the derived inverse-image identity is
-identity. Source: Stacks Project, Tags 015M and 03CB. -/
+identity (Stacks, Tags 015M and 03CB). -/
 theorem derivedUnitLeray_id (X : Scheme.{u})
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (rightDerivedGlobalSections A X).map

@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 noncomputable section
 namespace AlgebraicGeometry
 -- Affine functor identifications need to unfold the scheme module carrier.
-/-- The affine extension/sections comparison on associated sheaves, with its unit equation.
-Source: Stacks Project, Schemes, Tag 01I9, and perfect.tex, Tag 0AA7. -/
+/-- The affine extension/sections comparison on associated sheaves, with its unit equation
+(Stacks, Tags 01I9 and 0AA7). -/
 theorem exists_affineExtensionSections_underived_model
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

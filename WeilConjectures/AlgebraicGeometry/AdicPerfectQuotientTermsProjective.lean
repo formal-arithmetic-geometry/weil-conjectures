@@ -119,9 +119,8 @@ private noncomputable def change_unit_iso {D : Type v} [SmallCategory D]
     asIso ((PresheafOfModules.sheafificationAdjunction (R := A) (𝟙 _)).counit.app
       (SheafOfModules.unit A))
 
-/-- Each term of the actual ordinary quotient complex is projective on the slice.
-Source: Stacks Project, Tags 09C5 and 09C6 (exact sections on weakly contractible
-objects and finite-projective constant models). -/
+/-- Each term of the actual ordinary quotient complex is projective on the slice
+(Stacks, Tags 09C5 and 09C6). -/
 theorem adicPerfectQuotientComplex_terms_projective (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

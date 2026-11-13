@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Cech of a quasi-isomorphism from pushed-forward injectives to injectives is
-columnwise a quasi-isomorphism in the resolution direction.
-Source: Stacks 01FD, the arrow B-double-prime to B-prime; 01EX and Derived Categories 015E. -/
+columnwise a quasi-isomorphism in the resolution direction (Stacks, Tags 01FD, 01EX and 015E). -/
 theorem cech_pushforward_lambda_columns {X X' : Scheme.{v}} (f : X' ⟶ X)
     {ι : Type v} (U : ι → X.Opens) (A : CochainComplex X'.Modules ℕ)
     (K : CochainComplex X.Modules ℕ)

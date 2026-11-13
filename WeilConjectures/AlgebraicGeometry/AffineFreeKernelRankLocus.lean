@@ -29,8 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A single map between finite-free sheaves on an affine scheme has a closed,
 finitely presented locus representing rank-r locally free pulled-back kernels
-when its domain has rank at most r. No complex or derived category is involved.
-Source: Stacks Project, Tag 0BDL, local matrix calculation, and Tag 0EWY. -/
+when its domain has rank at most r. No complex or derived category is involved
+(Stacks, Tags 0BDL and 0EWY). -/
 theorem exists_affineFreeKernelRankLocus
     (X : Scheme.{u}) [IsAffine X]
     (M N : SheafOfModules.{u} (X.ringCatSheaf)) (d : M ⟶ N)

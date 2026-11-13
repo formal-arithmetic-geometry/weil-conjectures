@@ -42,14 +42,13 @@ noncomputable section
 
 variable {X S : Scheme.{u}}
 
-/-- Module base change along `g : T' ⟶ T` over `S` is `g_X^*`.
-Source: Stacks, Tag 0095. -/
+/-- Module base change along `g : T' ⟶ T` over `S` is `g_X^*` (Stacks, Tag 0095). -/
 def Scheme.Modules.moduleBaseChange (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
     (Limits.pullback f T.hom).Modules ⥤ (Limits.pullback f T'.hom).Modules :=
   Scheme.Modules.tensorPullback (baseChangeMap f g)
 
-/-- Base change of an `S`-morphism is the induced map with the two prescribed projections.
-Source: Stacks, Tag 01JX (6). -/
+/-- Base change of an `S`-morphism is the induced map with the two prescribed projections
+(Stacks, Tag 01JX). -/
 theorem baseChange_morphism_projections {A B : Over S} (h : A ⟶ B) (T : Over S) :
     ((Over.pullback T.hom).map h).left ≫ pullback.fst B.hom T.hom =
       pullback.fst A.hom T.hom ≫ h.left ∧
@@ -57,8 +56,8 @@ theorem baseChange_morphism_projections {A B : Over S} (h : A ⟶ B) (T : Over S
       pullback.snd A.hom T.hom := by
   constructor <;> simp [Over.pullback_map_left]
 
-/-- The map `g_X` exhibits `X_{T'}` as `X_T ×_T T'`, with compatible projections.
-Source: Stacks, Tag 01JX and pullback pasting. -/
+/-- The map `g_X` exhibits `X_{T'}` as `X_T ×_T T'`, with compatible projections (Stacks, Tag 01JX).
+-/
 theorem baseChange_iterated (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
     ∃ e : pullback f T'.hom ≅ pullback (pullback.snd f T.hom) g.left,
       e.hom ≫ pullback.fst (pullback.snd f T.hom) g.left = baseChangeMap f g ∧
@@ -66,8 +65,7 @@ theorem baseChange_iterated (f : X ⟶ S) {T T' : Over S} (g : T' ⟶ T) :
   let h := isPullback_baseChangeMap f g
   exact ⟨h.isoPullback, h.isoPullback_hom_fst, h.isoPullback_hom_snd⟩
 
-/-- `X ×_S Spec κ(t)` is the scheme-theoretic fibre of `pr_T` over `t`.
-Source: Stacks, Tag 01K0. -/
+/-- `X ×_S Spec κ(t)` is the scheme-theoretic fibre of `pr_T` over `t` (Stacks, Tag 01K0). -/
 theorem baseChange_fiber (f : X ⟶ S) (T : Over S) (t : T.left) :
     ∃ e : pullback f (T.left.fromSpecResidueField t ≫ T.hom) ≅
         (pullback.snd f T.hom).fiber t,

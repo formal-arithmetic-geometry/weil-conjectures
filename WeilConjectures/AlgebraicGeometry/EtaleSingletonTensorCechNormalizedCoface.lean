@@ -25,8 +25,8 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- The geometric Čech coface preserves the inserted-unit normalization.
-Source: Stacks Project, Tag 03P2, affine Čech restriction formula; Tag 03DR. -/
+/-- The geometric Čech coface preserves the inserted-unit normalization
+(Stacks, Tags 03P2 and 03DR). -/
 theorem singletonTensorCech_normalized_coface
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ) (j : Fin (n + 2))

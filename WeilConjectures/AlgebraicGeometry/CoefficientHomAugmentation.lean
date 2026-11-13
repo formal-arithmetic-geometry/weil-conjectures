@@ -118,8 +118,8 @@ private theorem coefficientAugmentation
 -- The sectionwise formula compares the two scalar actions and the product projections.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Augmentation evaluation lifts to a natural B-linear map of coefficient Hom complexes.
-Source: Stacks Project, Algebraization, Tag 099I, final displayed composite. -/
+/-- Augmentation evaluation lifts to a natural B-linear map of coefficient Hom complexes
+(Stacks, Tag 099I). -/
 theorem exists_coefficientHom_augmentation
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)

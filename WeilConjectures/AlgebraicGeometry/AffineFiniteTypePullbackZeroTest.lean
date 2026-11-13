@@ -32,9 +32,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- A finite family of sections on an affine open tests vanishing after every pullback.
-Source: Stacks Project, Properties, Tag 01PB; Schemes, Tags 01I9 and 01IA;
-Sheaves, Tag 0097. -/
+/-- A finite family of sections on an affine open tests vanishing after every pullback
+(Stacks, Tags 01PB, 01I9, 01IA and 0097). -/
 theorem exists_affine_finiteType_pullback_zero_test
     {Y : Scheme.{u}} (F : Y.Modules) (hF_ft : F.IsFiniteType)
     (hF_qc : F.IsQuasicoherent) (V : Y.Opens) (hV : IsAffineOpen V) :

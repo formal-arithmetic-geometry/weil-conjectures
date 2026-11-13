@@ -27,8 +27,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Compose the natural coefficient, etale/Zariski and module/abelian comparisons.
-Source: Stacks Project, Tags 03P2 and 03FD. -/
+/-- Compose the natural coefficient, etale/Zariski and module/abelian comparisons
+(Stacks, Tags 03P2 and 03FD). -/
 theorem exists_etaleTensorSectionsSheaf_source_comparison_natural
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) :

@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentModuleFiniteTypeLocalCover
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry
-/-- The finite-type clauses of locality for coherent modules.
-Source: Stacks Project, Modules, Definitions 01BV and 01B5 and Lemma 01B6. -/
+/-- The finite-type clauses of locality for coherent modules (Stacks, Tags 01BV, 01B5 and 01B6). -/
 theorem coherent_module_finite_type_local_core
     (X : Scheme.{u}) (F : X.Modules) (I : Type u)
     (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) :

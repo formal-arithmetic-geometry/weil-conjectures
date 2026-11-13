@@ -28,8 +28,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual quotient projections identify sections of a coherent module over a
-complete affine base with the inverse limit of its completed sections.
-Source: Stacks Project, Tag 087U, degree zero for the identity of Spec A. -/
+complete affine base with the inverse limit of its completed sections (Stacks, Tag 087U). -/
 theorem affine_complete_coherent_sections
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

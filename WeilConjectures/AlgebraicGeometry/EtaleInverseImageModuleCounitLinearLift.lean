@@ -118,8 +118,7 @@ private theorem product_sections.{uC, uT} {C : Type uC} [Category C] (J : Grothe
         Types.binaryProductIso_inv_comp_snd]
     exact types_congr_hom h (r, m)
 
-/-- The transported abelian counit admits a module lift.
-Source: Stacks Project, Tag 03D3. -/
+/-- The transported abelian counit admits a module lift (Stacks, Tag 03D3). -/
 theorem etaleInverseImageModuleCounitLinearLift (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

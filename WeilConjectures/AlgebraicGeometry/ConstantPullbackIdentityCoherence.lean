@@ -24,8 +24,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Constant-sheaf comparison for identity inverse image is the inverse of upperStarId.
-Source: Stacks Project, sites.tex, Tag 03CB, and cohomology.tex, Tag 01F8. -/
+/-- Constant-sheaf comparison for identity inverse image is the inverse of upperStarId
+(Stacks, Tags 03CB and 01F8). -/
 theorem constantPullbackIdentityCoherence (Z : Scheme.{u}) (M : AddCommGrpCat.{u + 1}) :
     (Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (𝟙 Z)).inv.app M ≫
         (upperStarId AddCommGrpCat.{u + 1} Z).hom.app

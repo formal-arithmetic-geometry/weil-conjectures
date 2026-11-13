@@ -31,8 +31,8 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] Scheme.Modules.tensorPullback
   Scheme.Modules.tensorPullbackObj Scheme.Modules.tensorPullbackObjUnitToUnit
 
-/-- Evaluate the adjoint structure-module isomorphism on the top open.
-Source: Stacks Tags 0096 and 01CA. -/
+/-- Evaluate the adjoint structure-module isomorphism on the top open (Stacks, Tags 0096 and 01CA).
+-/
 noncomputable def tensorStructureSectionsEquiv {A B : Scheme.{u}} (f : A ⟶ B) :
     Γ((Scheme.Modules.tensorPullback f).obj (SheafOfModules.unit B.ringCatSheaf), ⊤) ≃+
       Γ(A, ⊤) := by
@@ -43,8 +43,8 @@ noncomputable def tensorStructureSectionsEquiv {A B : Scheme.{u}} (f : A ⟶ B) 
     (ConcreteCategory.bijective_of_isIso
       ((Scheme.Modules.tensorPullbackObjUnitToUnit f).app ⊤))
 
-/-- Remove the universe lift and identify pullback sections with regular functions.
-Source: Stacks Tags 0096, 01CA, 03DR, 03DU. -/
+/-- Remove the universe lift and identify pullback sections with regular functions
+(Stacks, Tags 0096, 01CA, 03DR and 03DU). -/
 noncomputable def etaleStructureSectionsEquiv (C : Scheme.{u}) (U : C.Etaleᵒᵖ) :
     ((sheafCompose C.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
       (Scheme.Modules.etaleTensorSectionsSheaf (Scheme.Modules.unitObj C))).obj.obj U ≃+

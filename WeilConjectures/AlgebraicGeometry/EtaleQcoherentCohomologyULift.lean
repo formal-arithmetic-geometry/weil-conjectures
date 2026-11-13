@@ -32,9 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Lifting the coefficients of an associated quasi-coherent étale sheaf does not
-change its cohomology on a quasi-compact separated scheme.
-Source: Stacks Project, Theorem 03P2, separated-case Čech argument, and Proposition
-03DW (2). -/
+change its cohomology on a quasi-compact separated scheme (Stacks, Tags 03P2 and 03DW). -/
 theorem nonempty_etaleTensorSectionsSheaf_cohomology_ulift
     (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]
     (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) :

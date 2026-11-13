@@ -122,10 +122,7 @@ private theorem derived_mate
     (upperStarRestrictScalarsIsoSheaf φ f)
 
 /-- The canonical coefficient comparisons preserve the unit and counit of a single
-bounded below inverse-image/direct-image adjunction.
-
-Source: Stacks Project, Remark 21.19.3, Tag 07A7 (adjunction construction), and
-Lemma 21.20.7(3), Tag 0D6J (natural derived direct-image comparison). -/
+bounded below inverse-image/direct-image adjunction (Stacks, Tags 07A7 and 0D6J). -/
 theorem derivedRestrictScalars_adjunction_identities
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {Z W : Scheme.{u}} (f : Z ⟶ W) :

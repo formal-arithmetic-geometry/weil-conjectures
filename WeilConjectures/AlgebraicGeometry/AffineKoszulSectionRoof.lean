@@ -35,8 +35,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Realize a derived augmentation by a chain map after a K-flat replacement.
-Source: Stacks Project, Tag 06YS, and calculus of fractions in the derived category. -/
+/-- Realize a derived augmentation by a chain map after a K-flat replacement (Stacks, Tag 06YS). -/
 private theorem kflat_augmentation_realization
     (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
@@ -69,10 +68,8 @@ set_option maxHeartbeats 600000 in
 -- Comparing chosen restriction functors and their localization instances needs extra heartbeats.
 /-- A section of an arbitrary quasi-coherent derived object on a compact open of an affine scheme
 is represented by a map from a K-flat perfect complex with a chain augmentation.
-There is no perfect source, tensor product, or lifted morphism in this statement.
-
-Source: Stacks Project, perfect.tex, Tags 08DC and 08DD, and the first paragraph of
-Tag 08EH; cohomology.tex, Tag 06YD. -/
+There is no perfect source, tensor product, or lifted morphism in this statement
+(Stacks, Tags 08DC, 08DD, 08EH and 06YD). -/
 theorem affine_koszul_section_roof
     (X : Scheme.{uX}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

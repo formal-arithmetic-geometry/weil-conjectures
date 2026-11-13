@@ -27,8 +27,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false
 
 /-- The canonical cocone of fixed-base cohomology is a colimit. This asserts only the
-universal property for supplied diagram and cocone data; it does not construct them.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), and Tag 0032. -/
+universal property for supplied diagram and cocone data; it does not construct them
+(Stacks, Tags 09YQ and 0032). -/
 theorem nonempty_isColimit_cofiltered_fixed_base_cohomology
     {J : Type u} [SmallCategory J] [IsCofiltered J] {S : Scheme.{u}}
     (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

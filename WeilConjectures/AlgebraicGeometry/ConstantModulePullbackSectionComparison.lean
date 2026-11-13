@@ -31,10 +31,8 @@ namespace AlgebraicGeometry.Etale
 set_option maxRecDepth 4096 in
 /-- Constant-module direct-image sections identify with abelian global sections
 on the etale pullback, compatibly with a cartesian morphism of total spaces.
-There is no inverse system, limit cone, stalk, or finiteness hypothesis here.
-
-Source: Stacks Project, Tag 03S2, restriction along an etale morphism;
-Tag 09Z1, canonical degree-zero transition maps; Tags 03DB and 03CO, coefficients. -/
+There is no inverse system, limit cone, stalk, or finiteness hypothesis here
+(Stacks, Tags 03S2, 09Z1, 03DB and 03CO). -/
 theorem exists_constantModule_pullback_section_comparison
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} (U : X.Etale) :

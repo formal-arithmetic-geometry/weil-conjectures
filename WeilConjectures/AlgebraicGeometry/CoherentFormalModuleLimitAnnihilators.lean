@@ -27,9 +27,7 @@ namespace AlgebraicGeometry
 
 /-- The affine-limit description of a formal kernel and cokernel preserves their
 annihilator ideals over the ring of sections. This statement has no auxiliary ideal,
-exponent, or covering hypothesis.
-
-Source: Stacks Project, Lemma 087W and the affine calculation in Lemma 087X. -/
+exponent, or covering hypothesis (Stacks, Tags 087W and 087X). -/
 theorem coherentFormalModule_limit_annihilators
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F G : CoherentFormalModule X I) (α : F ⟶ G)

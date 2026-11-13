@@ -26,8 +26,8 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] cohomology upperStar rawAffineComplexPullback
   rightDerivedGlobalSections DerivedCategory.Q
 
-/-- The specified raw pullback of the canonical inverse-evaluation stage class.
-Source: Stacks Project, Tags 0EYM and 03Q8. -/
+/-- The specified raw pullback of the canonical inverse-evaluation stage class
+(Stacks, Tags 0EYM and 03Q8). -/
 @[irreducible]
 noncomputable def cartesianChartRestrictedRawClass
     {S X : Scheme.{u}} (f : X ⟶ S)
@@ -71,8 +71,7 @@ noncomputable def cartesianChartRestrictedRawClass
   let z' := abelianHigherDirectImageRawPullback l h h' wl q G G' φ V z
   z'
 
-/-- The defining equation of the cached chart raw class.
-Source: Stacks Project, Tags 0EYM and 03Q8. -/
+/-- The defining equation of the cached chart raw class (Stacks, Tags 0EYM and 03Q8). -/
 theorem cartesianChartRestrictedRawClass_eq
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)
@@ -119,8 +118,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency true in
 /-- Evaluation at the apex sends the restricted cohomology cone map to the
-raw pullback of the canonical inverse-evaluation class.
-Source: Stacks Project, Tags 0EYM and 03Q8. -/
+raw pullback of the canonical inverse-evaluation class (Stacks, Tags 0EYM and 03Q8). -/
 theorem cartesianChartRestrictedCohomologyMap_eval
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

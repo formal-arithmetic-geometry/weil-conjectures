@@ -26,8 +26,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A quasi-coherent module has zero positive-degree cohomology on every affine open.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag 01XB. -/
+/-- A quasi-coherent module has zero positive-degree cohomology on every affine open
+(Stacks, Tag 01XB). -/
 theorem subsingleton_openModuleCohomology_of_isAffineOpen (X : Scheme.{u})
     (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hU : IsAffineOpen U)
     (p : ℕ) (hp : 0 < p) :

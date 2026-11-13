@@ -139,7 +139,7 @@ private theorem transport_derivedPullback_leftDerived
   exact ⟨δ, ⟨hδ⟩⟩
 
 /-- The transported pullback remains a left derived functor of the concrete tensor
-pullback. Source: Stacks Project, Tags 06YJ and 05RU. -/
+pullback (Stacks, Tags 06YJ and 05RU). -/
 theorem exists_derivedPullbackAcrossUniverses_leftDerived
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

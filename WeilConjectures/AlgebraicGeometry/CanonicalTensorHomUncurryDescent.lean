@@ -28,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- Componentwise uncurrying descends to functions on derived morphisms.
 The family obeys the localization equation and transport along isomorphisms.
-Naturality for noninvertible morphisms is not asserted here.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, and sites-cohomology.tex,
-Tags 0A90 and 0A96. -/
+Naturality for noninvertible morphisms is not asserted here (Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem exists_tensorHomUncurry_descent (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := schemeDerivedTensorMonoidal X

@@ -30,7 +30,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 /-- A tower `S_n = R/I_n = B/I_n B`, including the quotient projections and their
 transition compatibility. Its ideals are the kernels of the projections from `R`.
 The pushout with bottom map the identity says precisely that the projection from `B`
-is the quotient by the extended ideal. Source: Stacks 099L and 03EK. -/
+is the quotient by the extended ideal (Stacks, Tags 099L and 03EK). -/
 structure CommonQuotientTowerPresentation (φ : R ⟶ B) where
   /-- The common quotient rings; index zero denotes the first level. -/
   S : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r}
@@ -46,12 +46,10 @@ structure CommonQuotientTowerPresentation (φ : R ⟶ B) where
 namespace CommonQuotientTowerPresentation
 variable {φ : R ⟶ B} (D : CommonQuotientTowerPresentation φ)
 
-/-- The quotient projection with its source ring explicit.
-Source: Stacks 099L. -/
+/-- The quotient projection with its source ring explicit (Stacks, Tag 099L). -/
 abbrev projection (n : ℕ) : R ⟶ D.S.obj (op n) := D.q.app (op n)
 
-/-- The projection from the second ring, with its source ring explicit.
-Source: Stacks 099L. -/
+/-- The projection from the second ring, with its source ring explicit (Stacks, Tag 099L). -/
 abbrev extensionProjection (n : ℕ) : B ⟶ D.S.obj (op n) := D.b.app (op n)
 
 end CommonQuotientTowerPresentation

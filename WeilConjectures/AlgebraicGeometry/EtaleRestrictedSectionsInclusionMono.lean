@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restricted sections inclusion is monic degreewise.
-Source: Stacks Project, Tag 015J. -/
+/-- The restricted sections inclusion is monic degreewise (Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsInclusion_mono_component
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

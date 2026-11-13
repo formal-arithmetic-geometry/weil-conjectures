@@ -26,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Sections of an abelian etale sheaf on a strictly henselian open neighbourhood
-identify with its geometric stalk at the closed point.
-Source: Stacks Project, Tags 03QO, 03S2 and 03Q1. -/
+identify with its geometric stalk at the closed point (Stacks, Tags 03QO, 03S2 and 03Q1). -/
 theorem strictlyHenselianOpen_abelian_germ_isIso
     {T : Scheme.{u}} (U : T.Opens)
     {R : Type u} [CommRing R] [IsLocalRing R]

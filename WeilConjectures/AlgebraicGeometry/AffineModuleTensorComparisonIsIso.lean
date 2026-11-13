@@ -87,8 +87,8 @@ set_option maxHeartbeats 400000 in
 -- The adjunction identity compares two definitionally equal scalar-restricted pushforwards.
 /-- The canonical affine tensor comparisons are isomorphisms on quasi-coherent modules.
 The construction data and the formulas on units are hypotheses, so this statement only
-performs the affine inverse calculation and the passage from affine opens to sheaves.
-Source: Stacks Project, Morphisms, Lemma 01SB, last two paragraphs and key algebra observation. -/
+performs the affine inverse calculation and the passage from affine opens to sheaves
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_comparison_isIso [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

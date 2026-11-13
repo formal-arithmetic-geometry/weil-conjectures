@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The canonical base-change transformation for etale extension by zero is an isomorphism
 on sheaves of constant-ring modules. Thus every component is an isomorphism, and the
-inverse components form a natural transformation in the opposite direction.
-Source: Stacks Project, Etale Cohomology, Lemma 59.70.5, Tag 03S6. -/
+inverse components form a natural transformation in the opposite direction (Stacks, Tag 03S6). -/
 theorem isIso_etaleLowerShriekBaseChangeMap (Λ : Type (u + 1)) [CommRing Λ]
     {Y V X : Scheme.{u}} (f : Y ⟶ X) (j : V ⟶ X) [Etale j] :
     IsIso (etaleLowerShriekBaseChangeMap Λ f j) := by

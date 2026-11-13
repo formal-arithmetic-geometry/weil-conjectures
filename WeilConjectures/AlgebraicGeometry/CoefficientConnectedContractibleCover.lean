@@ -41,7 +41,7 @@ private theorem small_pushforward_eq_pullback (X : Scheme.{u})
     exact ⟨AsSmall.up.obj Y, ⟨f⟩, 𝟙 _, hf, by simp⟩
 
 /-- An affine w-contractible ring gives weak contractibility on the actual model slice,
-in every coefficient universe. Source: Stacks Tags 0990 and 090K. -/
+in every coefficient universe (Stacks, Tags 0990 and 090K). -/
 theorem coefficientSliceWeaklyContractible_of_wContractible
     (X : Scheme.{u}) (W : X.ProEt) (R : CommRingCat.{u}) [IsWContractibleRing R]
     (e : W.left ≅ Spec R) :
@@ -103,7 +103,7 @@ theorem coefficientSliceWeaklyContractible_of_wContractible
 
 /-- A Noetherian scheme has an affine, slice-weakly-contractible cover, each member
 mapping into the connected component of a specified point of the base. The index lies
-in the coefficient universe. Source: Stacks Tags 09C6, 0990 and 098F. -/
+in the coefficient universe (Stacks, Tags 09C6, 0990 and 098F). -/
 theorem exists_coefficient_connected_contractible_cover
     (X : Scheme.{u}) [IsNoetherian X] :
     ∃ (I : Type (max v (u + 1)))

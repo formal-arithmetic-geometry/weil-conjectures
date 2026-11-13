@@ -24,7 +24,7 @@ variable [∀ X : Scheme.{u},
 This is the universal-property calculation after cancelling the fixed counits:
 the underived term is `affineCoordinateTensorComparison_comp`, while the derived
 term is `perfectHomTensorCounit_comp`; the chart model isomorphisms cancel by
-naturality. Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S. -/
+naturality (Stacks, Tags 08DW, 06Y1 and 0D5S). -/
 theorem affineCoordinateChartObjectComparison_cocycle
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (χ : a.A →+* c.A)

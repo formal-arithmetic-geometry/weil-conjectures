@@ -40,10 +40,7 @@ private theorem biprod_prod_snd (A B : AddCommGrpCat.{u + 1}) :
 set_option linter.unusedVariables false in
 -- The dependent scheme and sheaf identifications exhaust the default elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
-/-- The degree-zero restriction row on a cofinal tail.
-
-Source: Stacks Project, Tag 09YQ, coherent-system construction, and Tag 0A50,
-initial injectivity and naturality of restriction. -/
+/-- The degree-zero restriction row on a cofinal tail (Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_zero_restriction_row
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

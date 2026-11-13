@@ -202,8 +202,8 @@ private theorem tensorComparisons_from_objectwise
       (scalarRestriction_injective f) hf hβ
 
 -- Elaborating the nested tensor transports requires additional heartbeats.
-/-- The tensor extension is quasi-coherent and carries the canonical comparison maps.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+/-- The tensor extension is quasi-coherent and carries the canonical comparison maps
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_coherenceComparisons [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

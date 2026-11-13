@@ -162,8 +162,7 @@ noncomputable def abelianDerivedDirectImageTransition {S Y Y' : Scheme.{v}}
       (fun f : Y' ⟶ S => ((f)^*[AddCommGrpCat.{v + 1}]).mapDerivedCategoryPlus)
       w.symm) ≪≫ upperStarPlusComp AddCommGrpCat.{v + 1} a h).hom K K' t
 
-/-- The derived transition commutes with integer shifts. Source: Stacks Project,
-Tag 09Z1, compatibility of comparison morphisms; derived-adjunction coherence. -/
+/-- The derived transition commutes with integer shifts (Stacks, Tag 09Z1). -/
 theorem abelianDerivedDirectImageTransition_shift {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))

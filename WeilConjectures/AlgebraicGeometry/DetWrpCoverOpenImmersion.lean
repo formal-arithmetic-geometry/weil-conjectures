@@ -37,7 +37,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 /-- An étale connected component over a connected normal finite-type scheme is open in its
-finite generic normalization. (Stacks, Tags 035B, 0AVK, 05K0 and 0AB1) -/
+finite generic normalization (Stacks, Tags 035B, 0AVK, 05K0 and 0AB1). -/
 theorem det_wrp_cover_open_immersion
     {k : Type u} [Field k] {X Y₁ : Scheme.{u}}
     [ConnectedSpace X]

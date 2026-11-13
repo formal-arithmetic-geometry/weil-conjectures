@@ -59,8 +59,8 @@ private theorem cone_projection_iso
     biprod.braiding _ _⟩
 
 /-- If `X` is affine and `U` is a quasi-compact open, every perfect complex on `U`
-becomes the restriction of a perfect complex on `X` after adjoining its shift by one.
-Source: Stacks Project, Tag 08EI (Lemma 36.13.8). -/
+becomes the restriction of a perfect complex on `X` after adjoining its shift by one
+(Stacks, Tag 08EI). -/
 theorem exists_perfect_restrict_iso_directSum_shift
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X))
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

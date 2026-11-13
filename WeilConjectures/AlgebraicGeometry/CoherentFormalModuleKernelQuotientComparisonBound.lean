@@ -20,9 +20,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Sufficiently large shifts give the successive quotient comparisons.
-
-Source: Stacks Project, Lemma 087X, claims (b)--(c). -/
+/-- Sufficiently large shifts give the successive quotient comparisons (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

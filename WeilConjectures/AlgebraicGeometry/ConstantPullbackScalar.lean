@@ -56,10 +56,8 @@ private theorem change_scalar
       ((tensorAdjunction c).unit.app M).val.app U x)
   rw [h]
 
-/-- Constant-coefficient pullback carries scalar multiplication to its transported section.
-
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7;
-Cohomology on Sites, Tag 093M. -/
+/-- Constant-coefficient pullback carries scalar multiplication to its transported section
+(Stacks, Tags 03D2, 03D7 and 093M). -/
 theorem constantPullback_scalar
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

@@ -29,10 +29,8 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGermExchang
     : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
-/-- The canonical derived global germ intertwines exchange with the derived unit.
-
-Source: Stacks Project, etale-cohomology.tex, Tag 095T, final map-on-stalks paragraph;
-cohomology.tex, Tag 01F8; sites-cohomology.tex, Remark 08J6. -/
+/-- The canonical derived global germ intertwines exchange with the derived unit
+(Stacks, Tags 095T, 01F8 and 08J6). -/
 theorem derivedGlobalGerm_exchange
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : IsPullback g' f' f g)

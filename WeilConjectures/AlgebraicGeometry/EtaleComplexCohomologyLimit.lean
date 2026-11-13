@@ -31,8 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Uniformly bounded-below systems of abelian etale complexes satisfy cohomology continuity.
-Source: Stacks Project, Tag 0EZM. -/
+/-- Uniformly bounded-below systems of abelian etale complexes satisfy cohomology continuity
+(Stacks, Tag 0EZM). -/
 theorem nonempty_isColimit_etale_complex_cohomology
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -23,8 +23,8 @@ set_option synthInstance.maxSize 2048
 
 set_option maxHeartbeats 800000 in
 -- The two scheme tensor structures need extra elaboration when composing Hom equivalences.
-/-- The explicit restricted evaluation mate induces bijections on all Hom sets.
-Source: Stacks Project, Tags 08DJ, 08DL and 08BS. -/
+/-- The explicit restricted evaluation mate induces bijections on all Hom sets
+(Stacks, Tags 08DJ, 08DL and 08BS). -/
 theorem derivedRestriction_evaluationMate_postcomp_bijective
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

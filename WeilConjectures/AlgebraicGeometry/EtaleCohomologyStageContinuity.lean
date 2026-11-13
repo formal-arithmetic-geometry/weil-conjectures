@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Etale
 /-- Continuity for all coefficient systems having a stage isomorphic to `S`.
 
 This is an explicit proposition, not a chosen sheaf or diagram. All scheme and sheaf
-limits, transitions, and comparison legs are supplied and universally quantified.
-Source: Stacks Project, Tag 09YQ. -/
+limits, transitions, and comparison legs are supplied and universally quantified (Stacks, Tag 09YQ).
+-/
 structure EtaleCohomologyStageContinuity (S : Scheme.{u}) : Prop where
   holds :
     ∀ {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

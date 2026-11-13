@@ -60,10 +60,8 @@ private theorem pullback_comp {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
   exact ((cohomologyPullbackFunctorial a b F n).2.1 x).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Detection of zero for degree-zero affine-stage cohomology.
-
-Source: Stacks Project, Tag 09YP, degree-zero case, using Sites Tag 09YN;
-affine étale reduction in Tags 09YQ, 0EYL and 04HR. -/
+/-- Detection of zero for degree-zero affine-stage cohomology
+(Stacks, Tags 09YP, 09YN, 09YQ, 0EYL and 04HR). -/
 theorem etale_limit_affine_degree_zero_kernel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

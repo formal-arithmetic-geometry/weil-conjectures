@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Every transition of a coherent formal module is an epimorphism.
-Source: Stacks Project, Lemma 087X, transition-surjectivity argument. -/
+/-- Every transition of a coherent formal module is an epimorphism (Stacks, Tag 087X). -/
 theorem formalTransition_epi {X : Scheme.{u}} [IsNoetherian X]
     {I : X.IdealSheafData} (T : CoherentFormalModule X I) {n m : ℕ} (h : n ≤ m) :
     Epi (T.obj.map (homOfLE h).op) := by
@@ -87,9 +86,7 @@ private theorem formalDescent {X : Scheme.{u}} [IsNoetherian X]
 
 /-- Every annihilated map factors through a coherent system presented by the shifted
 quotients of the images of later levelwise kernels. No uniqueness is asserted and no
-componentwise injectivity of ι is required.
-
-Source: Stacks Project, Lemma 087X, claim (d), factorization-existence paragraph. -/
+componentwise injectivity of ι is required (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_factorization {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

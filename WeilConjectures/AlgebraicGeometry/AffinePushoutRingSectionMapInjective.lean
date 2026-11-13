@@ -22,8 +22,7 @@ noncomputable section
 variable {U X : Scheme.{u}} (f : U ⟶ X)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical affine tensor section map has zero kernel.
-Source: Stacks Project, Morphisms, Tag 01SB, affine reduction; Schemes, Tags 01IA and 01HV. -/
+/-- The canonical affine tensor section map has zero kernel (Stacks, Tags 01SB, 01IA and 01HV). -/
 theorem affinePushoutSectionMap_injective [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (t : TopCat.Sheaf.inverseImageRing f.base

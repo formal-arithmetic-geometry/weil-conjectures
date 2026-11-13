@@ -73,9 +73,8 @@ private theorem restriction₀_d
   exact add_neg_cancel _
 
 /-- The total Čech complex of an injective resolution over an open covering
-computes derived evaluation, without affineness or acyclicity of G on opens.
-
-Source: Stacks Project, Tags 03AW, 03F6 and 03AZ, the augmentation comparison. -/
+computes derived evaluation, without affineness or acyclicity of G on opens
+(Stacks, Tags 03AW, 03F6 and 03AZ). -/
 theorem nonempty_etale_openCech_resolution_total_iso
     (X : Scheme.{u})
     (i : X.Opens ⥤ X.Etale)

@@ -42,8 +42,7 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- The affine pullback unit on a K-flat associated-sheaf model is the localized
-ordinary unit after the sections comparisons.
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW(2) and 0AA7. -/
+ordinary unit after the sections comparisons (Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem exists_affinePullbackSections_model_unit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

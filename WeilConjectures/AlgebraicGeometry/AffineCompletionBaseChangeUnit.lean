@@ -57,8 +57,8 @@ private theorem tensor_ideal_range {A S T : Type u} [CommRing A]
       rw [smul_add]
       exact Submodule.add_mem _ hx hy
 
-/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis.
-Source: Stacks, Tag 05GG and right exactness of tensor, used in Tag 0889(1). -/
+/-- The quotient equivalence is the tensor unit, without a finite-module hypothesis
+(Stacks, Tags 05GG and 0889). -/
 private theorem adic_tensor_unit_quotient {A : Type u} [CommRing A]
     (I : Ideal A) (hI : I.FG) (T : ModuleCat.{u} A) (n : ℕ) :
     ∃ e : (T ⧸ (I ^ n • (⊤ : Submodule A T))) ≃ₗ[A]
@@ -101,9 +101,7 @@ private theorem adic_tensor_unit_quotient {A : Type u} [CommRing A]
 -- The component proof unfolds quotient maps through two composite functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- Extension along the adic completion leaves every positive sheaf quotient unchanged.
-The source module need not be finite.
-
-Source: Stacks Project, Tags 05GG, 087W and 0889(1). -/
+The source module need not be finite (Stacks, Tags 05GG, 087W and 0889). -/
 theorem affine_completion_baseChange_unit
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData) :
     let A := Γ(X, ⊤)

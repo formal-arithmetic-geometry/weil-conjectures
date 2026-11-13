@@ -58,8 +58,8 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 -- Affine functor identifications need to unfold the scheme module carrier.
-/-- Localization of the normalized underived model comparison computes the derived mate.
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7. -/
+/-- Localization of the normalized underived model comparison computes the derived mate
+(Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem exists_affineExtensionSections_model_factorization
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

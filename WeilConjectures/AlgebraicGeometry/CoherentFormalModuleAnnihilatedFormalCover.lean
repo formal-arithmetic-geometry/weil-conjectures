@@ -76,8 +76,8 @@ private theorem formal_annihilation_iff_limit
       (Module.mem_annihilator.mp (h j ha) y)
 
 /-- On any affine open cover, a fixed positive power kills a formal kernel and cokernel
-exactly when its section ideals kill the kernels and cokernels of the affine limit maps.
-Source: Stacks Project, Lemmas 087W and 087X (the affine description of the kernel). -/
+exactly when its section ideals kill the kernels and cokernels of the affine limit maps
+(Stacks, Tags 087W and 087X). -/
 theorem coherentFormalModule_annihilated_formal_cover
     (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData)
     (F G : CoherentFormalModule X I) (α : F ⟶ G)

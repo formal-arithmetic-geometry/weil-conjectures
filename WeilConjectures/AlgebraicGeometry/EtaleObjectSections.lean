@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The natural evaluation/global-sections comparison for an étale object.
-Source: Stacks Project, Tag 03S2. -/
+/-- The natural evaluation/global-sections comparison for an étale object (Stacks, Tag 03S2). -/
 noncomputable def etaleObjectSectionsIso {X : Scheme.{u}} (V : X.Etale) :
     (sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op V) ≅
       upperStar AddCommGrpCat.{u + 1} V.hom ⋙
@@ -57,8 +56,8 @@ set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Étale evaluation is compatible with the unit for an arbitrary base change.
-Source: Stacks Project, Tags 03CF, 03EF and 03S2. -/
+/-- Étale evaluation is compatible with the unit for an arbitrary base change
+(Stacks, Tags 03CF, 03EF and 03S2). -/
 theorem etaleObjectSections_baseChange {R X Y : Scheme.{u}} (W : R.Etale)
     (h : X ⟶ Y) (f : Y ⟶ R) (g : X ⟶ R) (w : g = h ≫ f)
     (m : pullback W.hom g ⟶ pullback W.hom f)

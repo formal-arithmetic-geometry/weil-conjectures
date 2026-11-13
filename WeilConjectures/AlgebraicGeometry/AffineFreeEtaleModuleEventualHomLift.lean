@@ -59,10 +59,8 @@ private lemma transpose_comp_pullback {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h�
 set_option maxRecDepth 4096 in
 /-- Maps from a fixed finite affine free family into a pulled-back sheaf lift later.
 The codomain is arbitrary, the family is already defined at i, and the comparison
-is the canonical upperStar composition isomorphism. No constructibility is claimed.
-
-Source: Stacks Project, Tag 09YU, fully faithful argument for (3), via Tag 09YQ
-in degree zero, and Tag 03S6. -/
+is the canonical upperStar composition isomorphism. No constructibility is claimed
+(Stacks, Tags 09YU, 09YQ and 03S6). -/
 theorem exists_affine_free_etaleModule_eventual_hom_lift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

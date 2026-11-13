@@ -468,8 +468,8 @@ private theorem pullbackMap_snd
         simp only [pullback.lift_snd_assoc]
     · simpa using hl₂
 
-/-- A single graph map commutes with the exchanges of its source and target words.
-Source: Stacks Project, Tag 0F7F and the explicit `B1`, `B12`, inverse `B2` formula. -/
+/-- A single graph map commutes with the exchanges of its source and target words
+(Stacks, Tag 0F7F). -/
 theorem etaleGraphFromOpen_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}

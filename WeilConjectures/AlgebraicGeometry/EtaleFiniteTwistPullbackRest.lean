@@ -249,7 +249,7 @@ private lemma signedIso_eval (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
 
 /-! Remaining coherence package for finite Tate pullback. -/
 /-- Derived tensor/shift comparison and change of annihilating exponent for finite Tate
-sheaves. Source: Stacks Project, Tags 03PK, 07A4 and 0G7E. -/
+sheaves (Stacks, Tags 03PK, 07A4 and 0G7E). -/
 theorem etaleFiniteTwistPullback_rest (A : Type (u + 1)) [CommRing A] (m : ℕ)
     (hm : 0 < m) (hA : (m : A) = 0)
     (r : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T),

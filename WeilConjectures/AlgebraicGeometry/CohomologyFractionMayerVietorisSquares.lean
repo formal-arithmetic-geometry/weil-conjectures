@@ -64,9 +64,7 @@ private theorem fraction_addHom_ext {X : Scheme.{uMV}} (L F : X.Modules)
 
 /-- The three fraction-comparison squares commute for any additive maps satisfying
 the generator formulas and any module-natural boundary compatible with restricting covers.
-Exactness of either row is not assumed.
-
-Source: Stacks Project, Tag 09MR, Mayer--Vietoris paragraph; Tag 01EB naturality. -/
+Exactness of either row is not assumed (Stacks, Tags 09MR and 01EB). -/
 theorem cohomologyFraction_mayerVietoris_squares (X : Scheme.{uMV})
     (L F : X.Modules) [L.IsInvertible]
     (s : Γ(L, ⊤))

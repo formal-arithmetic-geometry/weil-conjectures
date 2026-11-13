@@ -56,8 +56,8 @@ def coefficientBaseRingMap {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     (((Scheme.ΓSpecIso Γ(U.toScheme, ⊤)).inv ≫
       ((f ∣_ U) ≫ U.toScheme.toSpecΓ).appTop).hom)
 
-/-- Structural map from the coefficient ring to the intersection ring.
-Source: Stacks Project, Tags 0097 and 02KG. -/
+/-- Structural map from the coefficient ring to the intersection ring (Stacks, Tags 0097 and 02KG).
+-/
 def coefficientIntersectionRingMap {X T T' X' : Scheme.{u}}
     (f : X ⟶ T) (U : T.Opens) (Z : (f ⁻¹ᵁ U).toScheme.Opens)
     (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')

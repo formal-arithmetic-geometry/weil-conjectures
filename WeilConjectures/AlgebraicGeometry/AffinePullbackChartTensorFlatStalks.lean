@@ -34,9 +34,8 @@ namespace AlgebraicGeometry
 
 /-- On the inverse image of one affine open, flatness of the scalar-extended section
 module is equivalent to relative flatness of the pulled-back stalks there.
-There is no covering assumption and no flatness assertion outside this chart.
-Source: Stacks Project, Schemes Tags 01I4, 01IA, 01HV; Morphisms Tag 01U4;
-Algebra Tag 00HT (6). -/
+There is no covering assumption and no flatness assertion outside this chart
+(Stacks, Tags 01I4, 01IA, 01HV, 01U4 and 00HT). -/
 theorem affine_pullback_chart_tensor_flat_iff_stalks
     (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)
     (M : X.Modules) [M.IsQuasicoherent] (U : X.affineOpens)

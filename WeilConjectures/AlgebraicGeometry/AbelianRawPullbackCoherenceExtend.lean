@@ -189,8 +189,7 @@ private theorem pullbackHom_comp (𝒜 : Type (v + 2)) [Category.{v + 1} 𝒜]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pulling a raw class back twice composes the coefficient morphisms through
-`upperStarComp`. Source: Stacks Project, Tag 09Z1, canonical cohomology maps,
-and Tag 03CB, composition of inverse images. -/
+`upperStarComp` (Stacks, Tags 09Z1 and 03CB). -/
 private theorem abelianHigherDirectImageRawPullback_comp {S Y Y' Z : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Z ⟶ Y') (d : Z ⟶ Y) (wd : b ≫ a = d)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Z ⟶ S)
@@ -213,9 +212,8 @@ private theorem abelianHigherDirectImageRawPullback_comp {S Y Y' Z : Scheme.{v}}
 
 
 set_option linter.unusedVariables false in
-/-- Natural transformations with the prescribed raw components obey the colimit cocone law.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps;
-Tag 03CB for inverse-image composition. -/
+/-- Natural transformations with the prescribed raw components obey the colimit cocone law
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent_extend {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

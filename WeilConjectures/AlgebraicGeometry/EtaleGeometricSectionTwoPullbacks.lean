@@ -49,9 +49,8 @@ local notation "P[" f "," k "," r "," hk "," F "]" =>
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Two maps over an algebraically closed field pull back a section on a connected
-scheme to the same section. The receiving scheme may be empty or disconnected.
-
-Source: Stacks Project, Tag 0A3H, final paragraph, and Tag 03P5. -/
+scheme to the same section. The receiving scheme may be empty or disconnected
+(Stacks, Tags 0A3H and 03P5). -/
 theorem etaleSet_geometricSection_two_pullbacks
     {S U E : Scheme.{u}} (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (q : Spec (.of Ω) ⟶ S) (h : U ⟶ Spec (.of Ω)) [ConnectedSpace U]

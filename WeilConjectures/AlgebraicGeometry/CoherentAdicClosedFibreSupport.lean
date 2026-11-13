@@ -93,8 +93,8 @@ private theorem support_inter_ideal_subset_quotient {X : Scheme.{u}} [IsNoetheri
     exact h
   exact ha.trans hb.symm
 
-/-- On the closed fibre, support is detected by the first ideal quotient.
-Source: Stacks Project, Theorem 088E, displayed support equation, and Algebra, Tag 00DV. -/
+/-- On the closed fibre, support is detected by the first ideal quotient
+(Stacks, Tags 088E and 00DV). -/
 theorem coherent_adic_closed_fibre_support
     (A : Type u) [CommRing A] (I : Ideal A)
     {X : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Spec (.of A))

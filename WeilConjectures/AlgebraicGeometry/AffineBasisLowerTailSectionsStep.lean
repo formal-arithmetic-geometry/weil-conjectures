@@ -30,8 +30,8 @@ set_option autoImplicit false
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Vanishing transfers through the open-restriction and source comparisons.
-Source: Stacks Project, Tags 01E1 and 03FD. -/
+/-- Vanishing transfers through the open-restriction and source comparisons
+(Stacks, Tags 01E1 and 03FD). -/
 private theorem evaluation_rightDerived_isZero
     (X : Scheme.{u}) (V : X.Opens) (M : X.Modules) (q : ℕ)
     (hM : Subsingleton ((M.restrict V.ι).H (q + 1))) :

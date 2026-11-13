@@ -151,10 +151,7 @@ private theorem zeroDifferentialAssembly (Y : Scheme.{u})
   exact ⟨(asIso a).symm ≪≫ asIso g⟩
 
 /-- A family of arbitrary module sheaves on disjoint rank strata is formal after
-scalar direct image along a closed immersion. The family need not be finite.
-
-Source: Stacks Project, Tag 0BQZ, single-degree truncation; parent reconstruction
-step 3. -/
+scalar direct image along a closed immersion. The family need not be finite (Stacks, Tag 0BQZ). -/
 theorem closedImmersion_rankStrata_scalar_formality
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

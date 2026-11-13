@@ -32,9 +32,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Affine perfect Hom models with geometric compatibility checked on chain maps.
-Source: Stacks Project, perfect.tex, Tag 09RE (affine calculation), Tags 08EB,
-06Z0 and 08DW. -/
+/-- Affine perfect Hom models with geometric compatibility checked on chain maps
+(Stacks, Tags 09RE, 08EB, 06Z0 and 08DW). -/
 theorem exists_affinePerfectChainHomPresentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

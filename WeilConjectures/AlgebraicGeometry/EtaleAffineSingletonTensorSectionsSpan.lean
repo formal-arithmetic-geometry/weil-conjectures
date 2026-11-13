@@ -64,8 +64,8 @@ private theorem tensor_generators_span_of_equivs
   change c (m ⊗ₜ[R] e (PiTensorProduct.tprod R b)) = _
   rw [hc, he]
 
-/-- Global sections on the iterated affine fibre product have the tensor description.
-Source: Stacks Project, Tag 03P2, affine calculation; Tags 01I4, 01I9, 01IA. -/
+/-- Global sections on the iterated affine fibre product have the tensor description
+(Stacks, Tags 03P2, 01I4, 01I9 and 01IA). -/
 theorem singletonTensorSections_span
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

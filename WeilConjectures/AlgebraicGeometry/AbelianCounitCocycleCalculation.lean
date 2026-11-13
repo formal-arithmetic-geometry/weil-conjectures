@@ -53,9 +53,8 @@ private theorem homotopy_of_comp_quasiIso_nat
 
 
 /-- The inverse-image/coefficient cocycle computation for abelian sheaves.
-It asserts no comparison with a target module resolution.
-
-Source: Stacks Project, Tag 01F7, Lemma 01F8 and equation 01F9; Tag 06XR. -/
+It asserts no comparison with a target module resolution (Stacks, Tags 01F7, 01F8, 01F9 and 06XR).
+-/
 theorem abelian_counit_cocycle_calculation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Y.Modules) (F : X.Modules) (J : InjectiveResolution A)
     (c : (invImage f).obj

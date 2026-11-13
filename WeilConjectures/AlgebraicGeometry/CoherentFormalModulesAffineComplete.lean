@@ -26,8 +26,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Applying a completed-module limit functor to the canonical quotient system recovers
-any finite completed module. This is the finite-module half of the equivalence.
-Source: Stacks Project, Lemma 087W, implicit converse; Algebra 0316, 05GG and 00MA (3). -/
+any finite completed module. This is the finite-module half of the equivalence
+(Stacks, Tags 087W, 0316, 05GG and 00MA). -/
 theorem coherentFormalModules_affine_complete (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

@@ -62,9 +62,8 @@ private def scalarRestrictIso {A B : Scheme.{w}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The explicit external section component agrees with the external product on X times V.
-Source: Stacks Project, Tag 0BED, degree-zero cup product and omitted canonical-map
-verification; Tags 0096, 0097 and 01CD. -/
+/-- The explicit external section component agrees with the external product on X times V
+(Stacks, Tags 0BED, 0096, 0097 and 01CD). -/
 theorem externalSectionsComponent_openComparison
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : Y.Opens) :

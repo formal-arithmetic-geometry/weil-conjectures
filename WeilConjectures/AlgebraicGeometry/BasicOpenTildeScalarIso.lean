@@ -72,8 +72,8 @@ private lemma restricted_scalar_isIso (A : Type u) [CommRing A] (a : A)
   have : IsIso ((SheafOfModules.forget _).map f) := ‹IsIso f.val›
   exact isIso_of_reflects_iso f (SheafOfModules.forget _)
 
-/-- Multiplication by a on any sheafified complex is invertible over D(a).
-Source: Stacks Project, Tag 01HR, and the local vanishing argument of Tag 09IR. -/
+/-- Multiplication by a on any sheafified complex is invertible over D(a)
+(Stacks, Tags 01HR and 09IR). -/
 theorem basicOpen_tilde_scalar_isIso
     (A : Type u) [CommRing A] (a : A) (K : CochainComplex (ModuleCat.{u} A) ℤ) :
     IsIso

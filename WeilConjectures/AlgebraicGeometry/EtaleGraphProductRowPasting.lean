@@ -34,8 +34,7 @@ variable {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   (d₁ d₂ : EtaleGraphInterchangeDiagram f g)
   (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The source lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J. -/
+/-- The source lambda for a selected side of the common product diagram (Stacks, Tag 0F7J). -/
 def productSourceLambda (second : Bool) :
     (if second then d₂ else d₁).sourcePresentation.functor A ≅
       (d₁.productF d₂).functor A := by
@@ -45,8 +44,7 @@ def productSourceLambda (second : Bool) :
   · exact EtaleGraphPresentation.PairwiseProduct.lambda₂
       d₁.sourcePresentation d₂.sourcePresentation A
 
-/-- The middle lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J. -/
+/-- The middle lambda for a selected side of the common product diagram (Stacks, Tag 0F7J). -/
 def productMiddleLambda (second : Bool) :
     (EtaleGraphPresentation.ofCompactification
       (if second then d₂ else d₁).compactification).functor A ≅
@@ -59,8 +57,7 @@ def productMiddleLambda (second : Bool) :
       (EtaleGraphPresentation.ofCompactification d₁.compactification)
       (EtaleGraphPresentation.ofCompactification d₂.compactification) A
 
-/-- The composite lambda for a selected side of the common product diagram.
-Source: Stacks Tag 0F7J. -/
+/-- The composite lambda for a selected side of the common product diagram (Stacks, Tag 0F7J). -/
 def productCompositeLambda (second : Bool) :
     (if second then d₂ else d₁).compositePresentation.functor A ≅
       (d₁.productH d₂).functor A := by

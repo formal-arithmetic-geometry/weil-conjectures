@@ -34,54 +34,52 @@ namespace EtaleGraphPresentation.PairwiseProduct
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)
 
-/-- The proper ambient product. Source: Stacks Tag 0F7J, product diagrams. -/
+/-- The proper ambient product (Stacks, Tag 0F7J). -/
 abbrev P : Scheme.{u} := pullback s.p t.p
 
-/-- The product of the supporting opens over the base. Source: Stacks Tag 0F7J. -/
+/-- The product of the supporting opens over the base (Stacks, Tag 0F7J). -/
 abbrev U : Scheme.{u} := pullback (s.e ≫ s.p) (t.e ≫ t.p)
 
-/-- The graph of the two proper first factors. Source: Stacks Tag 0F7J. -/
+/-- The graph of the two proper first factors (Stacks, Tag 0F7J). -/
 def a : X ⟶ U s t := pullback.lift s.a t.a (s.fac.trans t.fac.symm)
 
-/-- The actual product of the open immersions, over the identity of the base.
-Source: Stacks Tag 0F7J. -/
+/-- The actual product of the open immersions, over the identity of the base (Stacks, Tag 0F7J). -/
 def b : U s t ⟶ P s t :=
   pullback.map (s.e ≫ s.p) (t.e ≫ t.p) s.p t.p s.e t.e (𝟙 Y)
     (Category.comp_id _) (Category.comp_id _)
 
-/-- The structural map of the product. Its other expression is `pullback.condition`.
-Source: Stacks Tag 0F7J. -/
+/-- The structural map of the product. Its other expression is `pullback.condition`
+(Stacks, Tag 0F7J). -/
 def p : P s t ⟶ Y := pullback.fst s.p t.p ≫ s.p
 
-/-- The first supporting neighborhood. Source: Stacks Tag 0F7J. -/
+/-- The first supporting neighborhood (Stacks, Tag 0F7J). -/
 abbrev O₁ : Scheme.{u} := pullback (pullback.fst s.p t.p) s.e
 
-/-- The second supporting neighborhood. Source: Stacks Tag 0F7J. -/
+/-- The second supporting neighborhood (Stacks, Tag 0F7J). -/
 abbrev O₂ : Scheme.{u} := pullback (pullback.snd s.p t.p) t.e
 
-/-- The projection equations defining the induced maps to both neighborhoods.
-Source: Stacks Tag 0F7J, product diagram. -/
+/-- The projection equations defining the induced maps to both neighborhoods (Stacks, Tag 0F7J). -/
 theorem b_projections :
     b s t ≫ pullback.fst s.p t.p = pullback.fst (s.e ≫ s.p) (t.e ≫ t.p) ≫ s.e ∧
     b s t ≫ pullback.snd s.p t.p = pullback.snd (s.e ≫ s.p) (t.e ≫ t.p) ≫ t.e := by
   constructor <;> simp [b]
 
-/-- The canonical map to the first neighborhood. Source: Stacks Tag 0F7J. -/
+/-- The canonical map to the first neighborhood (Stacks, Tag 0F7J). -/
 def v₁ : U s t ⟶ O₁ s t :=
   pullback.lift (b s t) (pullback.fst (s.e ≫ s.p) (t.e ≫ t.p)) (b_projections s t).1
 
-/-- The canonical map to the second neighborhood. Source: Stacks Tag 0F7J. -/
+/-- The canonical map to the second neighborhood (Stacks, Tag 0F7J). -/
 def v₂ : U s t ⟶ O₂ s t :=
   pullback.lift (b s t) (pullback.snd (s.e ≫ s.p) (t.e ≫ t.p)) (b_projections s t).2
 
-/-- The first neighborhood graph. Source: Stacks Tag 0F7J. -/
+/-- The first neighborhood graph (Stacks, Tag 0F7J). -/
 def z₁ : X ⟶ O₁ s t := a s t ≫ v₁ s t
 
-/-- The second neighborhood graph. Source: Stacks Tag 0F7J. -/
+/-- The second neighborhood graph (Stacks, Tag 0F7J). -/
 def z₂ : X ⟶ O₂ s t := a s t ≫ v₂ s t
 
-/-- The geometric properties of the explicitly constructed product diagram.
-Source: Stacks Tags 01W3, 01W4 and 01W6 and the product diagrams of Tag 0F7J. -/
+/-- The geometric properties of the explicitly constructed product diagram
+(Stacks, Tags 01W3, 01W4, 01W6 and 0F7J). -/
 structure Geometry : Prop where
   properA : IsProper (a s t)
   openB : IsOpenImmersion (b s t)
@@ -96,9 +94,8 @@ structure Geometry : Prop where
   v₁_b : v₁ s t ≫ pullback.fst (pullback.fst s.p t.p) s.e = b s t
   v₂_b : v₂ s t ≫ pullback.fst (pullback.snd s.p t.p) t.e = b s t
 
-/-- The products form a proper/open/proper presentation, with both neighborhood graphs proper.
-Source: Stacks Tags 01W3 (composition), 01W4 (base change), 01W6 (proper to separated),
-and 0F7J, product diagrams. -/
+/-- The products form a proper/open/proper presentation, with both neighborhood graphs proper
+(Stacks, Tags 01W3, 01W4, 01W6 and 0F7J). -/
 theorem geometry : Geometry s t := by
   have hb : IsOpenImmersion (b s t) := by
     exact MorphismProperty.pullbackMap (P := @IsOpenImmersion)
@@ -137,8 +134,8 @@ theorem geometry : Geometry s t := by
   · simp [v₁]
   · simp [v₂]
 
-/-- The product presentation with exactly the constructed maps; only its proofs use geometry.
-Source: Stacks Tag 0F7J. -/
+/-- The product presentation with exactly the constructed maps; only its proofs use geometry
+(Stacks, Tag 0F7J). -/
 def presentation : EtaleGraphPresentation f where
   U := U s t
   P := P s t
@@ -187,8 +184,8 @@ namespace EtaleGraphPresentation.PairwiseProduct
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (s t : EtaleGraphPresentation f)
 
-/-- Lambda₁, with the literal first product projection and its pullback neighborhood.
-Source: Stacks Tags 0F7B--0F7D and 0F7J. -/
+/-- Lambda₁, with the literal first product projection and its pullback neighborhood
+(Stacks, Tags 0F7B, 0F7D and 0F7J). -/
 def lambda₁ (A : Type (u + 1)) [CommRing A] [Finite A] :
     s.functor A ≅ (presentation s t).functor A :=
   letI := (geometry s t).openV₁
@@ -199,8 +196,8 @@ def lambda₁ (A : Type (u + 1)) [CommRing A] [Finite A] :
     (IsPullback.of_hasPullback (pullback.fst s.p t.p) s.e).flip
     (geometry s t).z₁_q rfl rfl (geometry s t).v₁_b
 
-/-- Lambda₂, with the second product projection and the same product structural map.
-Source: Stacks Tags 0F7B--0F7D and 0F7J. -/
+/-- Lambda₂, with the second product projection and the same product structural map
+(Stacks, Tags 0F7B, 0F7D and 0F7J). -/
 def lambda₂ (A : Type (u + 1)) [CommRing A] [Finite A] :
     t.functor A ≅ (presentation s t).functor A :=
   letI := (geometry s t).openV₂

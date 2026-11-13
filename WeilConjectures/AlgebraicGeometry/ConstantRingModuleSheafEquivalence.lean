@@ -152,9 +152,7 @@ private instance (X : Scheme.{u}) (r : ℕ) : (restriction X r).EssSurj where
     exact ⟨M, ⟨ObjectProperty.isoMk _ (asIso f).symm⟩⟩
 
 /-- The two encodings of sheaves of modules over ZMod r are equivalent, compatibly
-with their underlying abelian sheaves.
-Source: Stacks Project, Modules on Sites, Section 18.11, Lemma 18.11.1
-(https://stacks.math.columbia.edu/tag/03CY), applied to the constant ring presheaf. -/
+with their underlying abelian sheaves (Stacks, Tag 03CY). -/
 theorem constantRing_moduleSheaf_equivalence (X : Scheme.{u}) (r : ℕ) :
     ∃ E : Sheaf X.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) ≌

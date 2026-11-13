@@ -26,8 +26,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Pure inverse image of a fixed-scalar residue, followed by the actual small-site
 and constant-ring equivalences: the public name of
-`SfbResidueComparisonCore.sfbFixedResiduePull`, whose exactness instances it inherits.
-Source: Stacks Tags 03A0 and 03CY. -/
+`SfbResidueComparisonCore.sfbFixedResiduePull`, whose exactness instances it inherits
+(Stacks, Tags 03A0 and 03CY). -/
 abbrev sfbFixedResiduePull {X S : Scheme.{u}} (i : S ⟶ X)
     (k : Type (u + 1)) [CommRing k] :
     Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ⥤

@@ -129,8 +129,8 @@ private theorem tensor_support_subset (X : Scheme.{u})
 /-- Tensoring any derived object with a bounded complex with proper termwise supports
 puts all cohomology supports inside one closed subset proper over the base. No perfection,
 coherence, relative flatness, Noetherian assumption or cohomology boundedness is needed.
-This asserts containment; the cohomology supports need not themselves be closed.
-Source: Stacks Project, Tag 0DJQ, support verification for 08EV; Tags 01AT, 0CYR, 08DX. -/
+This asserts containment; the cohomology supports need not themselves be closed
+(Stacks, Tags 0DJQ, 08EV, 01AT, 0CYR and 08DX). -/
 theorem boundedComplex_tensor_proper_support_bound
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

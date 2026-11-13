@@ -35,7 +35,7 @@ open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry
 
 /-- A constructible sheaf of modules on the spectrum of a field becomes constant after
-finite separable extension. (Stacks, Tag 09Z6, Tag 03RU and Tag 02GL) -/
+finite separable extension (Stacks, Tag 09Z6, Tag 03RU and Tag 02GL). -/
 theorem constructible_field_finite_separable_constant
     (k : Type u) [Field k]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

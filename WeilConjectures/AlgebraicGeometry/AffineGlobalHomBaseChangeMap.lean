@@ -37,39 +37,36 @@ variable [∀ Z : Scheme.{u},
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- The ring map of a morphism between affine schemes, using canonical section
-identifications. Source: Stacks Tag 0AA7. -/
+identifications (Stacks, Tag 0AA7). -/
 def affineBaseRingMap {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) : R →+* B :=
   ((Scheme.ΓSpecIso R).inv ≫ g.appTop ≫ (Scheme.ΓSpecIso B).hom).hom
 
-/-- Exact restriction from global sections to the affine base ring.
-Source: Stacks Tag 0AA7. -/
+/-- Exact restriction from global sections to the affine base ring (Stacks, Tag 0AA7). -/
 abbrev affineGlobalSectionsRestriction {R : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) :=
   ModuleCat.restrictScalars.{u} (R := R)
     (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤))
     ((Scheme.ΓSpecIso R).inv ≫ f.appTop).hom
 
-/-- Underived global sections with the action of the affine base.
-Source: Stacks Tag 0AA7. -/
+/-- Underived global sections with the action of the affine base (Stacks, Tag 0AA7). -/
 abbrev affineGlobalSections {R : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec R) :=
   RingedSpace.globalSectionsFunctor X.toRingedSpace ⋙ affineGlobalSectionsRestriction f
 
-/-- Derived global sections followed by exact restriction to the base.
-Source: Stacks Tag 0AA7. -/
+/-- Derived global sections followed by exact restriction to the base (Stacks, Tag 0AA7). -/
 abbrev affineDerivedGlobalSections {R : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) :=
   schemeDerivedGlobalSections X ⋙ (affineGlobalSectionsRestriction f).mapDerivedCategory
 
-/-- The unit-compatible comparison for deriving global sections before exact restriction.
-Source: Stacks Tag 0AA7. -/
+/-- The unit-compatible comparison for deriving global sections before exact restriction
+(Stacks, Tag 0AA7). -/
 def affineGlobalSectionsDerivedIso {R : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) :
     (affineGlobalSections f).rightDerivedFunctor ≅ affineDerivedGlobalSections f :=
   Functor.rightDerivedFunctorCompMapDerivedCategoryIso
     (RingedSpace.globalSectionsFunctor X.toRingedSpace) (affineGlobalSectionsRestriction f)
 
-/-- The two exact restrictions commute with deriving global sections on the fibre product.
-Source: Stacks Tag 0AA7. -/
+/-- The two exact restrictions commute with deriving global sections on the fibre product
+(Stacks, Tag 0AA7). -/
 def affineBaseChangedSectionsDerivedIso {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :
     (affineGlobalSections (pullback.snd f g) ⋙
@@ -82,16 +79,15 @@ def affineBaseChangedSectionsDerivedIso {R B : CommRingCat.{u}} {X : Scheme.{u}}
     Functor.isoWhiskerRight (affineGlobalSectionsDerivedIso (pullback.snd f g))
       (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory
 
-/-- Global derived Hom over the base ring, by restriction of scalars.
-Source: Stacks Tag 0AA7. -/
+/-- Global derived Hom over the base ring, by restriction of scalars (Stacks, Tag 0AA7). -/
 def schemeGlobalDerivedHomOver {R : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) :
     (schemeDerivedCategory X)ᵒᵖ × schemeDerivedCategory X ⥤
       DerivedCategory (ModuleCat.{u} R) :=
   schemeGlobalDerivedHom X ⋙ (affineGlobalSectionsRestriction f).mapDerivedCategory
 
-/-- Derived extension of scalars, constructed with the fixed K-flat derived counit.
-Source: Stacks Tag 0AA7. -/
+/-- Derived extension of scalars, constructed with the fixed K-flat derived counit
+(Stacks, Tag 0AA7). -/
 def affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B) := by
   let _ := ‹∀ Z : Scheme.{u},
@@ -106,8 +102,8 @@ def affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
 /-- The specified extension/restriction adjunction descended from
 ModuleCat.extendRestrictScalarsAdj, with the fixed left-derived counit and
 right-derived unit. Exact restriction is identified with its derived functor
-by the unit-compatible comparison, so no independent adjunction witness is chosen.
-Source: Stacks Tag 0AA7. -/
+by the unit-compatible comparison, so no independent adjunction witness is chosen
+(Stacks, Tag 0AA7). -/
 def affineDerivedExtensionAdjunction {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     affineDerivedExtension g ⊣
       (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory := by
@@ -121,8 +117,7 @@ def affineDerivedExtensionAdjunction {R B : CommRingCat.{u}} (g : Spec B ⟶ Spe
 
 set_option linter.unusedSectionVars false in
 -- Preserve the original derived-category instances in the theorem signature.
-/-- Derived extension of scalars, chosen from its adjunction with restriction
-Source: Stacks Tag 0AA7. -/
+/-- Derived extension of scalars, chosen from its adjunction with restriction (Stacks, Tag 0AA7). -/
 theorem exists_affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),
       Nonempty (E ⊣ (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory) := by
@@ -133,8 +128,8 @@ attribute [local irreducible] affineDerivedExtension affineDerivedExtensionAdjun
 
 /-- The canonical pullback adjunction selected by the normalized derived-adjunction theorem.
 Its Hom equivalence is pinned to the underived tensor-pullback adjunction, the shared
-left-derived counit and the right-derived unit by exists_schemeDerivedAdjunction.
-Source: Stacks Tags 0096 and 079W. -/
+left-derived counit and the right-derived unit by exists_schemeDerivedAdjunction
+(Stacks, Tags 0096 and 079W). -/
 def canonicalPullbackAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :
     derivedPullback g ⊣ schemeDerivedDirectImage g :=
   Classical.choose (exists_schemeDerivedAdjunction g
@@ -205,8 +200,7 @@ set_option linter.unusedSectionVars false in
 The inverse Hom equivalences satisfy the shared K-flat representative equation: the
 chain evaluation is specified on every summand using the recorded sheaf tensor-Hom
 currying, then localized using the fixed internal-Hom factorization and K-injective
-resolution map. The counit is this same uncurrying applied to the identity.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+resolution map. The counit is this same uncurrying applied to the identity (Stacks, Tag 08DJ). -/
 theorem exists_canonicalTensorHomAdjunction (S : Scheme.{u}) :
     ∃ b : ∀ K : schemeDerivedCategory S, tensorRight K ⊣
       (Functor.curry.obj
@@ -259,8 +253,8 @@ theorem exists_canonicalTensorHomAdjunction (S : Scheme.{u}) :
       (congrArg (fun q => q (𝟙 _)) (hb _ K L))
 
 /-- The tensor/internal-Hom adjunction selected with the K-flat/K-injective
-Hom-complex evaluation normalization, rather than from an unrestricted adjunction package.
-Source: Stacks, cohomology.tex, Tag 08DJ. -/
+Hom-complex evaluation normalization, rather than from an unrestricted adjunction package
+(Stacks, Tag 08DJ). -/
 def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) :
     tensorRight K ⊣
       (Functor.curry.obj
@@ -271,8 +265,8 @@ def canonicalTensorHomAdjunction (S : Scheme.{u}) (K : schemeDerivedCategory S) 
 /-- The canonical comparison is specified by four equations, not mere existence of
 an arrow. Gamma satisfies the evaluation-mate equation of the shared internal-Hom
 pullback adjunction; s is the identity on underived sections; c commutes with the
-right-derived units (in particular on K-injective complexes). Phi is their composite.
-Source: Stacks Tags 0AA7, 08I3 and 0D5T. -/
+right-derived units (in particular on K-injective complexes). Phi is their composite
+(Stacks, Tags 0AA7, 08I3 and 0D5T). -/
 theorem exists_globalHomPullbackComparison
     {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)
@@ -392,8 +386,7 @@ theorem exists_globalHomPullbackComparison
     (fun _ => rfl), (fun _ => rfl), ht, hγ, hs, hc, rfl⟩
 
 /-- Restricted global sections of gamma followed by the canonical pushforward comparison.
-The chosen phi satisfies all equations of exists_globalHomPullbackComparison.
-Source: Stacks Tag 0AA7. -/
+The chosen phi satisfies all equations of exists_globalHomPullbackComparison (Stacks, Tag 0AA7). -/
 def globalHomPullbackComparison
     {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)
@@ -411,8 +404,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical affine global RHom comparison: the adjoint, under derived extension of
 scalars along `g` and exact restriction of scalars, of the global RHom map induced by
-`Lg_X^*`. Source: Stacks, Tag 0AA7.
--/
+`Lg_X^*` (Stacks, Tag 0AA7). -/
 def affineGlobalHomBaseChangeMap
     {R B : CommRingCat.{u}} {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)

@@ -120,8 +120,8 @@ private theorem map_transport {S Y Y' : Scheme.{v}}
   cases eq_of_heq hφ
   rfl
 
-/-- Canonical abelian higher direct image transitions respect coefficient composition.
-Source: Stacks Project, Tag 09Z1, functoriality of the comparison maps. -/
+/-- Canonical abelian higher direct image transitions respect coefficient composition
+(Stacks, Tag 09Z1). -/
 theorem abelianHigherDirectImage_transition_comp {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

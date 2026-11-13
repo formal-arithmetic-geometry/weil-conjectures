@@ -32,8 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- For a quasi-compact quasi-separated scheme, the full subcategory of complexes with
-quasi-coherent cohomology is compactly generated, with its inherited triangulated structure.
-Source: Stacks Project, Tag 09IS and Tag 09SQ. -/
+quasi-coherent cohomology is compactly generated, with its inherited triangulated structure
+(Stacks, Tags 09IS and 09SQ). -/
 theorem schemeDerivedQCoh_compactlyGenerated (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :

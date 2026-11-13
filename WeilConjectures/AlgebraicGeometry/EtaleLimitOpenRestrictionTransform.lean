@@ -22,9 +22,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- Construct only the restriction transformation, with its canonical components and right square.
-
-Source: Stacks Project, Tags 0A50 and 09YQ, naturality of restriction. -/
+/-- Construct only the restriction transformation, with its canonical components and right square
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_restriction_transform
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

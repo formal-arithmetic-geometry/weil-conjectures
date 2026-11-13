@@ -44,8 +44,8 @@ private theorem eq_comp_inv_of_comp_hom_eq
   apply (cancel_mono e.hom).1
   simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
 
-/-- Ordinary continuity extends from directed orders to small cofiltered categories.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ) and Tag 0032. -/
+/-- Ordinary continuity extends from directed orders to small cofiltered categories
+(Stacks, Tags 09YQ and 0032). -/
 theorem nonempty_isColimit_etale_cohomology_of_cofiltered_isLimit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

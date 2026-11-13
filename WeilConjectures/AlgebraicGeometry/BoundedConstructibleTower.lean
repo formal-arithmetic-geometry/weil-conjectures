@@ -143,8 +143,8 @@ private theorem normalizedDerivedAdjunction
 /-- Finite lissity over an inverse-image constant ring. A covering sieve on the final
 object trivializes F as a module sheaf; on each member the constant is a finite module.
 The coefficient ring is exactly the inverse image, so the module isomorphism is linear
-with the restricted coefficient action, including when g is the identity.
-Source: Stacks Tags 09AI and 099Y. -/
+with the restricted coefficient action, including when g is the identity
+(Stacks, Tags 09AI and 099Y). -/
 def IsRelativelyFiniteLisseModule {X Y : Scheme.{u}} (g : Y ⟶ X)
     (A : Type (u + 1)) [CommRing A]
     (F : ringedSiteModules.{u + 1} ((adicLisseForget Y).obj
@@ -175,21 +175,19 @@ instance pbcTowers_hasDerivedCategory
 
 variable {X} {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
 
-/-- Restrict scalar actions along the given ring-sheaf map.
-Source: Stacks Tag 03CZ. -/
+/-- Restrict scalar actions along the given ring-sheaf map (Stacks, Tag 03CZ). -/
 abbrev pbcRestrict :=
   proEtaleRingRestrictScalars φ
 
-/-- Exact restriction preserves finite limits. Source: Stacks Tag 03DA. -/
+/-- Exact restriction preserves finite limits (Stacks, Tag 03DA). -/
 instance pbcRestrict_limits : PreservesFiniteLimits (pbcRestrict φ) :=
   (proEtaleRingRestrictScalars_properties φ).1
 
-/-- Exact restriction preserves finite colimits. Source: Stacks Tag 03DA. -/
+/-- Exact restriction preserves finite colimits (Stacks, Tag 03DA). -/
 instance pbcRestrict_colimits : PreservesFiniteColimits (pbcRestrict φ) :=
   (proEtaleRingRestrictScalars_properties φ).2.1
 
-/-- Restriction of scalars is additive on pro-etale module sheaves.
-Source: Stacks Tag 03DA. -/
+/-- Restriction of scalars is additive on pro-etale module sheaves (Stacks, Tag 03DA). -/
 instance pbcRestrict_additive : (pbcRestrict φ).Additive := by
   dsimp [pbcRestrict, proEtaleRingRestrictScalars]
   infer_instance
@@ -199,21 +197,20 @@ def pbcDerivedRestrict := (pbcRestrict φ).mapDerivedCategory
 
 set_option linter.defProp false in
 /-- The existing universal scalar-extension theorem, including its fixed objects,
-fixed maps and K-flat computation. Source: Stacks Tag 06YY. -/
+fixed maps and K-flat computation (Stacks, Tag 06YY). -/
 abbrev pbcExtensionExistence :=
   completedAdicChangeData X φ
 
-/-- Ordinary sheafified tensor extension, determined on both objects and maps.
-Source: Stacks Tag 03EK. -/
+/-- Ordinary sheafified tensor extension, determined on both objects and maps (Stacks, Tag 03EK). -/
 abbrev pbcExtend : pbcModules X R ⥤ pbcModules X S := reductionChange X φ
 
-/-- Tensor extension is additive. Source: Stacks Tag 03EK. -/
+/-- Tensor extension is additive (Stacks, Tag 03EK). -/
 instance pbcExtend_additive : (pbcExtend φ).Additive :=
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose
 
 set_option linter.defProp false in
-/-- The universal derived pair supplied by the existing K-flat scalar-extension theorem.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived pair supplied by the existing K-flat scalar-extension theorem
+(Stacks, Tag 06YY). -/
 @[no_expose] def pbcDerivedExtensionExistence :
     ∃ (LF : DerivedCategory (pbcModules X R) ⥤ DerivedCategory (pbcModules X S))
       (ε : DerivedCategory.Qh ⋙ LF ⟶
@@ -227,38 +224,35 @@ Source: Stacks Tag 06YY. -/
   (pbcExtensionExistence φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived scalar extension, determined up to unique comparison compatible with its
-universal counit. Source: Stacks Tag 06YY. -/
+universal counit (Stacks, Tag 06YY). -/
 abbrev pbcDerivedExtend : DerivedCategory (pbcModules X R) ⥤
     DerivedCategory (pbcModules X S) := reductionDerivedChange X φ
 
-/-- The universal comparison, invertible on K-flat complexes.
-Source: Stacks Tag 06YY. -/
+/-- The universal comparison, invertible on K-flat complexes (Stacks, Tag 06YY). -/
 def pbcExtensionCounit : DerivedCategory.Qh ⋙ pbcDerivedExtend φ ⟶
     (pbcExtend φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh :=
   reductionDerivedCounit X φ
 
-/-- The universal property of the recorded scalar-extension comparison.
-Source: Stacks Tag 06YY. -/
+/-- The universal property of the recorded scalar-extension comparison (Stacks, Tag 06YY). -/
 theorem pbcDerivedExtension_universal :
     (pbcDerivedExtend φ).IsLeftDerivedFunctor (pbcExtensionCounit φ)
       (HomotopyCategory.quasiIso (pbcModules X R) (.up ℤ)) :=
   (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.1
 
-/-- The recorded scalar-extension comparison computes tensor on K-flat complexes.
-Source: Stacks Tag 06YY. -/
+/-- The recorded scalar-extension comparison computes tensor on K-flat complexes (Stacks, Tag 06YY).
+-/
 theorem pbcExtensionCounit_isIso (P : CochainComplex (pbcModules X R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := ProEt.topology X) (R := R) P) :
     IsIso ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj P)) :=
   (pbcDerivedExtensionExistence φ).choose_spec.choose_spec.2.2 P hP
 
-/-- A sheafified pure tensor, using the object equality in the scalar-extension witness.
-Source: Stacks Tag 03EK. -/
+/-- A sheafified pure tensor, using the object equality in the scalar-extension witness
+(Stacks, Tag 03EK). -/
 def pbcTensorSection (M : pbcModules X R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U) (x : M.val.obj U) : ((pbcExtend φ).obj M).val.obj U :=
   completedAdicChangeTensor X φ M U s x
 
-/-- The tensor-unit normalized ordinary adjunction is unique.
-Source: Stacks Tags 03EK and 06YY. -/
+/-- The tensor-unit normalized ordinary adjunction is unique (Stacks, Tags 03EK and 06YY). -/
 theorem pbcScalarAdjunction_exists :
     ∃! adj : pbcExtend φ ⊣ pbcRestrict φ,
       ∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -282,13 +276,11 @@ theorem pbcScalarAdjunction_exists :
   ext M U x
   exact (hadj' M U x).trans (hu M U x).symm
 
-/-- The ordinary adjunction with its actual tensor unit.
-Source: Stacks Tag 03EK. -/
+/-- The ordinary adjunction with its actual tensor unit (Stacks, Tag 03EK). -/
 def pbcScalarAdjunction : pbcExtend φ ⊣ pbcRestrict φ :=
   (pbcScalarAdjunction_exists φ).exists.choose
 
-/-- The universal derived counit expressed on cochain representatives.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived counit expressed on cochain representatives (Stacks, Tag 06YY). -/
 def pbcComplexCounit (P : CochainComplex (pbcModules X R) ℤ) :
     (pbcDerivedExtend φ).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -299,8 +291,8 @@ def pbcComplexCounit (P : CochainComplex (pbcModules X R) ℤ) :
     (DerivedCategory.quotientCompQhIso _).hom.app
       (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The derived adjunction is uniquely fixed by its tensor-unit computation on K-flats.
-Source: Stacks Tags 06YY and 0DVC. -/
+/-- The derived adjunction is uniquely fixed by its tensor-unit computation on K-flats
+(Stacks, Tags 06YY and 0DVC). -/
 theorem pbcDerivedScalarAdjunction_exists :
     ∃! adj : pbcDerivedExtend φ ⊣ pbcDerivedRestrict φ,
       ∀ (P : CochainComplex (pbcModules X R) ℤ),
@@ -323,8 +315,7 @@ theorem pbcDerivedScalarAdjunction_exists :
     (pbcDerivedExtend φ) (pbcExtensionCounit φ)
     (pbcDerivedExtension_universal φ) (pbcExtensionCounit_isIso φ)
 
-/-- Canonical derived scalar extension/restriction adjunction.
-Source: Stacks Tag 06YY. -/
+/-- Canonical derived scalar extension/restriction adjunction (Stacks, Tag 06YY). -/
 def pbcDerivedScalarAdjunction : pbcDerivedExtend φ ⊣ pbcDerivedRestrict φ :=
   (pbcDerivedScalarAdjunction_exists φ).exists.choose
 
@@ -332,8 +323,8 @@ variable {B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
   (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
 
 include h in
-/-- Composition of ordinary scalar restrictions is identity on underlying sections.
-Source: Stacks Tag 03DA. -/
+/-- Composition of ordinary scalar restrictions is identity on underlying sections
+(Stacks, Tag 03DA). -/
 theorem pbcRestrictComp_exists :
     ∃! e : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ,
       ∀ (M : pbcModules X B) (U : X.ProEtᵒᵖ) (x : M.val.obj U),
@@ -358,8 +349,7 @@ theorem pbcRestrictComp_exists :
     ext M U x
     exact he' M U x
 
-/-- The canonical ordinary restriction comparison.
-Source: Stacks Tag 03DA. -/
+/-- The canonical ordinary restriction comparison (Stacks, Tag 03DA). -/
 def pbcRestrictComp : pbcRestrict ψ ⋙ pbcRestrict φ ≅ pbcRestrict χ :=
   (pbcRestrictComp_exists φ ψ χ h).exists.choose
 

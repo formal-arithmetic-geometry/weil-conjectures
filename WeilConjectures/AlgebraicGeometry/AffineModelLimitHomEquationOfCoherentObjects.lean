@@ -18,8 +18,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The limit Hom equation follows from the natural comparison and object triangles.
-Source: Stacks Project, Tag 09RE and derived pullback composition, Tag 0D5S. -/
+/-- The limit Hom equation follows from the natural comparison and object triangles
+(Stacks, Tags 09RE and 0D5S). -/
 theorem affineModelLimitHomEquation_of_coherent_objects
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

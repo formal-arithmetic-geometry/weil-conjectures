@@ -198,8 +198,7 @@ private theorem compare_of_iso
         (cancel.app (((constantCoefficientModule T B).obj M).over U))
 
 /-- The finite local constant-module descriptions formed by sheafifying in
-commutative rings agree with those formed in rings. Source: Stacks Project,
-Modules on Sites, Tag 093U; Cohomology on Sites, Tag 094I. -/
+commutative rings agree with those formed in rings (Stacks, Tags 093U and 094I). -/
 theorem exists_constantCoefficientRing_localModels_comparison
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     (B : Type u) [CommRing B] :

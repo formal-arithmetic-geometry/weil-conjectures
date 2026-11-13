@@ -63,8 +63,7 @@ private theorem adjunct_pair_snd
   rw [Category.assoc, prod.map_snd, ← Category.assoc, prodComparison_snd]
   exact a.homEquiv_naturality_left _ _
 
-/-- The transported abelian unit admits a module lift.
-Source: Stacks Project, Tag 03D3. -/
+/-- The transported abelian unit admits a module lift (Stacks, Tag 03D3). -/
 theorem etaleInverseImageModuleUnitLinearLift (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

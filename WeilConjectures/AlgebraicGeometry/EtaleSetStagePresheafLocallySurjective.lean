@@ -119,10 +119,7 @@ private theorem stage_global_representative
   exact ConcreteCategory.congr_hom (L.obj.map_id _) t
 
 /-- The comparison from the presheaf colimit to the limit push-pull sheaf
-is locally surjective.
-
-Source: Stacks Project, Sites Tag 0A35, equation-compute-pullback-to-limit,
-and Étale Cohomology Tag 09YQ, via the affine-site colimit presentation. -/
+is locally surjective (Stacks, Tags 0A35 and 09YQ). -/
 theorem etaleSetStagePresheaf_locallySurjective
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

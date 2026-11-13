@@ -152,8 +152,8 @@ private theorem integral_strictHenselization_residue
   rw [← Category.assoc ν ρ, hmap]
   simpa only [← Spec.map_comp_assoc, CommRingCat.ofHom_comp] using hbase
 
-/-- The strict henselization rings and residue maps exist for the two geometric points.
-Source: Stacks Project, Tags 04HX, 03PS and 04DY. -/
+/-- The strict henselization rings and residue maps exist for the two geometric points
+(Stacks, Tags 04HX, 03PS and 04DY). -/
 theorem Etale.exists_compatibleStrictHenselizationCoreExistence
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

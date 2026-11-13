@@ -77,10 +77,8 @@ private theorem exact_transport_middle
     rw [Iso.hom_inv_id_apply]
     exact h.apply_apply_eq_zero x
 
-/-- The geometric and exactness part of binary continuity, before the group chase.
-
-Source: Stacks Project, Tag 09YQ, finite-open-cover reduction,
-and Tag 0A50. -/
+/-- The geometric and exactness part of binary continuity, before the group chase
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_comparison_ladder
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

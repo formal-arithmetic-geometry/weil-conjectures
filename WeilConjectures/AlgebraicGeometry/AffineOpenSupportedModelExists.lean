@@ -19,8 +19,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency true in
 
-/-- The inverse affine derived equivalence supplies a model of the restricted target.
-Source: Stacks Project, Tag 06Z0, and exact open and affine-site transport. -/
+/-- The inverse affine derived equivalence supplies a model of the restricted target
+(Stacks, Tag 06Z0). -/
 theorem affine_open_supported_model_exists
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

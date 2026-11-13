@@ -82,9 +82,8 @@ private theorem coefficient_two_pullbacks
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical degree-zero strict-local stalk comparison for constant coefficients
-carries the unit applied to a coefficient to the same constant section on the strict fibre.
-Source: Stacks Project, Tag 03Q9, degree zero and its restriction construction,
-as used in the first assertion of Tag 09Z5. -/
+carries the unit applied to a coefficient to the same constant section on the strict fibre
+(Stacks, Tags 03Q9 and 09Z5). -/
 theorem constant_strict_fibre_stalk_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

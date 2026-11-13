@@ -20,9 +20,8 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
-/-- Restriction property of the cohomology map induced by an h-map.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
-Derived Categories, Tags 013P, 013S, 05TG. -/
+/-- Restriction property of the cohomology map induced by an h-map
+(Stacks, Tags 01F9, 01FA, 01FB, 013P, 013S and 05TG). -/
 theorem moduleCohomologyFMap_basic_restriction {Y : Scheme.{u}}
     (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :
     ∀ (U : Y.Opens),

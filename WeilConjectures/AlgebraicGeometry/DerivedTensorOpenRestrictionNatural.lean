@@ -104,8 +104,8 @@ private def tensorRestrictionIso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- Matching total-tensor and localization bifunctors needs additional reduction heartbeats.
-/-- Exact open restriction commutes naturally with the derived tensor bifunctor.
-Source: Stacks Project, Tag 06YH (derived tensor construction) and Tag 08EU, locality. -/
+/-- Exact open restriction commutes naturally with the derived tensor bifunctor
+(Stacks, Tags 06YH and 08EU). -/
 theorem derivedTensor_openRestriction_natIso (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :

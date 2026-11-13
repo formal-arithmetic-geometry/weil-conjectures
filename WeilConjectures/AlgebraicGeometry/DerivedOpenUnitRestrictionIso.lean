@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Restricting the unit of any right adjunction of open restriction is invertible.
-There are no compactness, quasi-coherence, closed support, or triangle hypotheses.
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE (open restriction of direct image). -/
+There are no compactness, quasi-coherence, closed support, or triangle hypotheses
+(Stacks, Tags 08BS and 08FE). -/
 theorem derived_open_unit_restriction_isIso
     (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

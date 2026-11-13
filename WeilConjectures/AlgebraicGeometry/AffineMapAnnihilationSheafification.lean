@@ -60,9 +60,8 @@ private theorem idealPower_zero_of_sections_iso {X : Scheme.{u}} [IsAffine X]
   exact h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sheafification transfers a fixed annihilating power for an algebraic map.
-
-Source: Stacks Project, Tags 01I7, 01IB and 0889(1). -/
+/-- Sheafification transfers a fixed annihilating power for an algebraic map
+(Stacks, Tags 01I7, 01IB and 0889). -/
 theorem affine_map_annihilation_sheafification
     {X : Scheme.{u}} [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData) :
     let A := Γ(X, ⊤)

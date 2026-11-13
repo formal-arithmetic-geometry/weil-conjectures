@@ -51,8 +51,8 @@ private noncomputable def torsorAction {Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Two inverse-image actions specified on the adjunction units agree via their sheaf iso.
-Source: Stacks Project Tag 03Q1 (2), and Tag 0A5G action-transport argument. -/
+/-- Two inverse-image actions specified on the adjunction units agree via their sheaf iso
+(Stacks, Tags 03Q1 and 0A5G). -/
 theorem etale_torsor_unit_action_unique
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Sheaf.Torsor G)

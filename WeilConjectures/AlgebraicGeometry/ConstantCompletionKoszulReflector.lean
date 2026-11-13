@@ -89,8 +89,8 @@ private theorem complete_of_iso {R S : Sheaf J CommRingCat.{u}} (q : R ⟶ S)
     (H.mapIso ((Iso.refl _).prod ((ringedDerivedRestriction R U).mapIso e))).symm
 
 /-- Koszul and finite-quotient completion are canonically identified, preserving the units;
-their common functor is the reflector for the local internal-Hom completeness condition.
-Source: Stacks 099L, 099M, 0A0E. -/
+their common functor is the reflector for the local internal-Hom completeness condition
+(Stacks, Tags 099L, 099M and 0A0E). -/
 theorem koszul_quotient_reflector [IsNoetherianRing A] (b : Bool) (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = I) :
     ∃ K : KoszulPresentation J A I b r a,

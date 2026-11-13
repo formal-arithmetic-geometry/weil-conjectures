@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every module sheaf on the small etale site of a quasi-compact quasi-separated scheme
 is a quotient of a coproduct of constructible module sheaves, for finite commutative
-coefficients. Source: Stacks Project, Tags 093B(2), 03EW(3) and 03S8(3). -/
+coefficients (Stacks, Tags 093B, 03EW and 03S8). -/
 theorem exists_epi_coproduct_constructible
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

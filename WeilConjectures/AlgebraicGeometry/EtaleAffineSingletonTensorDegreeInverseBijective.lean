@@ -21,11 +21,7 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- A normalized affine singleton tensor comparison homomorphism is bijective.
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
-The affine sections and tensor-generator argument identifies the homomorphism on
-all additive generators with the canonical affine comparison, which is bijective.
--/
+/-- A normalized affine singleton tensor comparison homomorphism is bijective (Stacks, Tag 03P2). -/
 theorem singletonTensorDegreeComparisonHom_bijective
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

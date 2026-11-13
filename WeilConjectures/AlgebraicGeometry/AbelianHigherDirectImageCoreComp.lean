@@ -180,8 +180,7 @@ private theorem abelianUpperStarPlusComp_single
     (a)^*[AddCommGrpCat.{v + 1}] (b)^*[AddCommGrpCat.{v + 1}] 0 F,
     plus_single_natIso (upperStarComp AddCommGrpCat.{v + 1} b a) 0 F]
 
-/-- The derived comparison before inserting the single-complex identification.
-Source: Stacks Tag 09Z1; the adjunct of pullback of the counit. -/
+/-- The derived comparison before inserting the single-complex identification (Stacks, Tag 09Z1). -/
 private noncomputable def abelianDerivedTransition {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})) :
@@ -198,7 +197,7 @@ private noncomputable def abelianDerivedTransition {S Y Y' : Scheme.{v}}
           ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} h).derivedPlus.counit.app K))
 
 /-- Naturality of the derived comparison in its complex, by naturality of the
-unit, composition comparison and counit. Source: Stacks Tag 09Z1. -/
+unit, composition comparison and counit (Stacks, Tag 09Z1). -/
 private lemma abelianDerivedTransition_naturality {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     {K L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})}
@@ -312,8 +311,8 @@ private theorem abelianDerivedTransition_comp
   rw [Category.comp_id]
 
 
-/-- Expand the comparison as a derived transition followed by the coefficient map.
-Source: Stacks Tag 09Z1; associativity and functoriality of direct image. -/
+/-- Expand the comparison as a derived transition followed by the coefficient map
+(Stacks, Tag 09Z1). -/
 private lemma abelianHigherDirectImageMap_eq {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -342,7 +341,7 @@ private lemma abelianHigherDirectImageMap_eq {S Y Y' : Scheme.{v}}
     ((DerivedCategory.Plus.singleFunctor _ 0).map φ)
 
 /-- Composition with canonical pullback coefficients, before inserting arbitrary
-coefficient morphisms. Source: Stacks Project, Tag 09Z1, canonical comparison maps. -/
+coefficient morphisms (Stacks, Tag 09Z1). -/
 theorem abelianHigherDirectImage_core_comp {S Y Y' Y'' : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)
     (wa : a ≫ h = h') (wb : b ≫ h' = h'') (p : ℕ)

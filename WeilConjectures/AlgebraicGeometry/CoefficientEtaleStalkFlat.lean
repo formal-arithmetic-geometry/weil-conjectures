@@ -102,8 +102,7 @@ private theorem geometric_fiber_flat
     inferInstance S hS).1
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Flatness survives the normalized coefficient geometric stalk.
-Source: Stacks Project, Modules on Sites, Tag 05VC, only-if direction. -/
+/-- Flatness survives the normalized coefficient geometric stalk (Stacks, Tag 05VC). -/
 theorem coefficientEtaleModuleStalk_flat
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)

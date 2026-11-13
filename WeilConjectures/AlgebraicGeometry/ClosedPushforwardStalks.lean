@@ -29,8 +29,8 @@ noncomputable section
 /-- Stalks of the pushforward of a module along a morphism of schemes whose underlying map
 is a closed embedding: (1) the stalk of `i_* G` vanishes off the closed image; (2) the germ map
 `c_z = stalkPushforward : (i_* G)_{i(z)} → G_z` is bijective (an isomorphism) and linear over
-`O_{X,i(z)}` acting on `G_z` through `i^♯_z = i.stalkMap z`; (3) `c_z` is natural in `G`.
-Source: Stacks Project, Sheaves, Lemma 00AE and Modules, Lemma 08KS. -/
+`O_{X,i(z)}` acting on `G_z` through `i^♯_z = i.stalkMap z`; (3) `c_z` is natural in `G`
+(Stacks, Tags 00AE and 08KS). -/
 theorem closedImmersion_pushforward_stalks
     {X Z : Scheme.{w}} (i : Z ⟶ X)
     (h : Topology.IsClosedEmbedding i.base) (G : Z.Modules) :

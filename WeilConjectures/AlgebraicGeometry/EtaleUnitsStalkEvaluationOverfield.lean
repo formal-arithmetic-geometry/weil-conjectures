@@ -99,9 +99,7 @@ private theorem evaluation_isSeparable_overfield
 
 /-- Evaluation identifies the additive units stalk with separable-closure units.
 The displayed formula fixes the equivalence on every germ, independently of any
-equivalence between sheaves and representations.
-
-Source: Stacks Project, Tag 03QV, Example sheaves-point (2), and Morphisms, Tag 02GL. -/
+equivalence between sheaves and representations (Stacks, Tags 03QV and 02GL). -/
 theorem exists_etaleUnits_stalk_evaluation_overfield
     (K Ω : Type u) [Field K] [Field Ω]
     [Algebra (SeparableClosure K) Ω] [Algebra K Ω]

@@ -137,10 +137,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On compatible affine ambient charts, the canonical conormal map is conjugate,
 as a function on sections, to `Ideal.tensorCotangentHom`. No surjectivity or
-injectivity is asserted here.
-
-Source: Stacks Project, Morphisms, Lemma 0473, affine reduction; Schemes,
-Lemma 01JU (1), the ideal of a base-changed closed immersion. -/
+injectivity is asserted here (Stacks, Tags 0473 and 01JU). -/
 theorem closedImmersion_conormal_affine_base_change_comparison
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

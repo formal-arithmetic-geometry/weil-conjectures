@@ -28,9 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The termwise affine Hom comparison on K-injective targets respects evaluation.
-This statement involves only the underived adjunction, with no supplied derived functors.
-
-Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0 and 0AX3. -/
+This statement involves only the underived adjunction, with no supplied derived functors
+(Stacks, Tags 0BUZ, 0BV0 and 0AX3). -/
 theorem affine_hom_kInjective_evaluation
     {Y X : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

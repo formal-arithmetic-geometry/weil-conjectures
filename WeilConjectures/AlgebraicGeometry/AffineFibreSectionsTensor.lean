@@ -23,9 +23,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sections on the inverse image of an affine open in a fibre are its residue-field tensor.
-
-Source: Stacks Project, Tags 01I4 and 01JQ; Tag 055J, affine fibre identifications. -/
+/-- Sections on the inverse image of an affine open in a fibre are its residue-field tensor
+(Stacks, Tags 01I4, 01JQ and 055J). -/
 theorem affine_fibre_sections_tensor {R : Type u} [CommRing R] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of R)) (U : X.affineOpens) (p : PrimeSpectrum R) :
     let ρ := (Scheme.ΓSpecIso (.of R)).inv ≫ f.appLE ⊤ U.1 le_top

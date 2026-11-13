@@ -148,8 +148,8 @@ private theorem resolutionEtaleCohomologyIso_naturality
   rw [← H.map_comp_assoc, e.hom_inv_id, H.map_id, Category.id_comp]
   rfl
 
-/-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion.
-Source: Stacks Project, Tags 015J and 0133; restricted augmented-total comparison. -/
+/-- Compatibility of the canonical filtered-step isomorphism with truncation inclusion
+(Stacks, Tags 015J and 0133). -/
 theorem etale_filtered_step_cohomology_compatibility
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

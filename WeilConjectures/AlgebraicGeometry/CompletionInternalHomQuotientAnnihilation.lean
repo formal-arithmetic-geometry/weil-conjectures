@@ -100,11 +100,7 @@ private theorem hom_multiplication_zero {X : Scheme.{u}} {J Q : X.Modules}
   rw [hzero, zero_comp]
 
 /-- Postcomposition with the level-n quotient kills the level-n ideal product
-of the internal Hom.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 0882, construction of the
-comparison map, and Section 0EHN, equation 0880. The finite-level assertion is
-an explicit preliminary argument for that comparison, valid without coherence. -/
+of the internal Hom (Stacks, Tags 0882, 0EHN and 0880). -/
 theorem completion_internal_hom_quotient_annihilation {X : Scheme.{u}}
     (I : X.IdealSheafData) (F G : X.Modules) (n : ℕ) :
     Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2

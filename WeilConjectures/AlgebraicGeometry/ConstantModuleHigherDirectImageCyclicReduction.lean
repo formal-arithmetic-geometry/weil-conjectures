@@ -35,11 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Vanishing for every cyclic group whose order divides d implies vanishing for
-constant coefficients Λ/dΛ, with no finiteness assumption on Λ.
-
-Source: the coefficient reduction in
-`Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`, using
-Stacks Project, Tags 03Q8, 03Q5 and 03FD. -/
+constant coefficients Λ/dΛ, with no finiteness assumption on Λ (Stacks, Tags 03Q8, 03Q5 and 03FD).
+-/
 theorem isZero_constantModHigherDirectImage_of_cyclic
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)

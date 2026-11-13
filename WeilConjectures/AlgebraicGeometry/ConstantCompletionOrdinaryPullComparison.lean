@@ -320,8 +320,8 @@ private theorem pull_homEquiv {R : Sheaf J CommRingCat.{u}}
   rfl
 
 /-- The unreduced scalar comparison on ordinary modules is fixed by scalar insertion.
-This is exactly u^(-1)M → u^(-1)M tensor the completed coefficient ring after inverse image.
-Source: Stacks 06YY, 099L. -/
+This is exactly u^(-1)M → u^(-1)M tensor the completed coefficient ring after inverse image
+(Stacks, Tags 06YY and 099L). -/
 theorem ordinaryPullComparison_existsUnique (A : Type u) [CommRing A] (I : Ideal A) :
     ∃! q : res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⟶
         pull F (completedMap F A I) ⋙ res (coefficientMap J' A I),

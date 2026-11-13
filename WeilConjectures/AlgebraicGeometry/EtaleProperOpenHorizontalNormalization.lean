@@ -72,8 +72,7 @@ private lemma derived_horizontal_factor
   exact Functor.mapDerivedCategoryNatIso_fach e X
 
 /-- A comparison is normalized when it carries the right-derived units to the
-termwise ordinary comparison and the target right-derived unit.
-Source: Stacks Project, Tag 0F7D. -/
+termwise ordinary comparison and the target right-derived unit (Stacks, Tag 0F7D). -/
 def ProperOpenUnitNormalized
     {C C' D D' : Type v} [Category.{w} C] [Category.{w} C']
     [Category.{w} D] [Category.{w} D']
@@ -419,8 +418,8 @@ attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Horizontal pasting for normalized unbounded proper/open comparison families.
-Source: Stacks Project, Tag 0F7D. -/
+/-- Horizontal pasting for normalized unbounded proper/open comparison families (Stacks, Tag 0F7D).
+-/
 theorem etaleProperOpenHorizontalNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     {U V T W Z S : Scheme.{u}}
     (k : U ⟶ V) (l : V ⟶ T) (r : U ⟶ W) (p : V ⟶ Z) (q : T ⟶ S)

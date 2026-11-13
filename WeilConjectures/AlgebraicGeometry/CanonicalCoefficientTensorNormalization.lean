@@ -278,8 +278,8 @@ private theorem regularPullback₀_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   simp only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom]
   rw [pull_unit_eq S f]
 
-/-- The canonical balanced tensor presentation, including its fixed symmetry.
-Source: Stacks 06YY, 0G7E. -/
+/-- The canonical balanced tensor presentation, including its fixed symmetry
+(Stacks, Tags 06YY and 0G7E). -/
 def canonicalCoefficientTensorNormalization (T : Scheme.{u}) : TensorNormalization a T := by
   letI : SymmetricCategory (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) :=
     { toBraidedCategory := sheafBraidedCategory Ab.{u + 1} T
@@ -296,10 +296,8 @@ def canonicalCoefficientTensorNormalization (T : Scheme.{u}) : TensorNormalizati
     exact Mod.residueDerivedTensorIso (coefficientMap a T)
 
 /-- The canonical balanced tensor comparison satisfies the universal computation
-normalization, and the two exact single-object pullback constructions agree.
-
-Source: Stacks 06YY and 0G7E; the canonical scalar tensor and inverse-image
-comparisons in rational proper base change, paragraph (1). -/
+normalization, and the two exact single-object pullback constructions agree
+(Stacks, Tags 06YY and 0G7E). -/
 theorem canonicalCoefficientTensorNormalization_normalized :
     (∀ T : Scheme.{u},
       TensorNormalized a T (canonicalCoefficientTensorNormalization a T)) ∧

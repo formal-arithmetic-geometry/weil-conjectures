@@ -59,9 +59,8 @@ private theorem unit_map_eval {A : Scheme.{u}} {M : A.Modules}
   exact he.trans (mul_comm _ _)
 
 /-- The unit module's tensor sections have their usual structure-sheaf coordinates,
-compatibly with restrictions and multiplication by global functions.
-Source: Stacks Project, Tags 0096 and 01CA (pullback of the unit), and Tag 03DR,
-equation (35.8.1) (normalized restrictions). -/
+compatibly with restrictions and multiplication by global functions
+(Stacks, Tags 0096, 01CA and 03DR). -/
 theorem exists_etaleTensorUnit_sections_natural (X : Scheme.{u}) :
     ∃ b : ∀ U : X.Etaleᵒᵖ,
         (etaleTensorSectionsSheaf (SheafOfModules.unit X.ringCatSheaf)).obj.obj U ≃+

@@ -85,8 +85,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE and normalized page data together.
 /-- Construct normalized presentations and pin their first-page comparison to the
-concrete signed row comparison. No scheme-map naturality is asserted here.
-Source: Stacks Project, Tags 015J, 015K, 012K and 06XR. -/
+concrete signed row comparison. No scheme-map naturality is asserted here
+(Stacks, Tags 015J, 015K, 012K and 06XR). -/
 theorem exists_etaleCE_normalized_row_presentations
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

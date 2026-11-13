@@ -44,9 +44,7 @@ private theorem compose_three_squares {D : Type*} [Category D]
 -- Descending evaluation compares several expanded product-localization functors.
 set_option backward.isDefEq.respectTransparency false in
 /-- The actual augmentation-induced completion unit is natural for every augmented
-complex, without a boundedness or completeness hypothesis.
-
-Source: Stacks Project, algebraization.tex, Tag 099F; sites-cohomology.tex, Section 08J7. -/
+complex, without a boundedness or completeness hypothesis (Stacks, Tags 099F and 08J7). -/
 theorem completion_unit_natural
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -159,8 +157,7 @@ private theorem unit_isIso_of_complete_universal
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The global augmented model exists.
-Source: Stacks Project, algebraization.tex, Tag 099E. -/
+/-- The global augmented model exists (Stacks, Tag 099E). -/
 theorem exists_ringedExtendedCech_global_model
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})
@@ -216,8 +213,8 @@ theorem exists_ringedExtendedCech_global_model
           (fac.app K).inv ≫ z ≫ DerivedCategory.Q.map a.hom) hn
     _ = _ := by rw [hε]; exact hβ
 
-/-- The internal-Hom reflector properties of every local extended Cech model.
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F. -/
+/-- The internal-Hom reflector properties of every local extended Cech model
+(Stacks, Tags 099B and 099F). -/
 theorem ringedExtendedCech_reflector_properties
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

@@ -31,8 +31,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 
-/-- The actual composite oplax maps have the specified module-adjunction transposes.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EL. -/
+/-- The actual composite oplax maps have the specified module-adjunction transposes
+(Stacks, Tags 03D7 and 03EL). -/
 theorem composite_module_oplax_mate
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :

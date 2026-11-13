@@ -20,8 +20,7 @@ set_option backward.isDefEq.respectTransparency false
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- The explicit system with level n equal to S_(n+d)/I^(n+1) S_(n+d).
-Source: Stacks Project, Lemma 087X, claim (b). -/
+/-- The explicit system with level n equal to S_(n+d)/I^(n+1) S_(n+d) (Stacks, Tag 087X). -/
 def formalShiftedQuotient {X : Scheme.{u}} (I : X.IdealSheafData)
     (S : ℕᵒᵖ ⥤ X.Modules) (d : ℕ) : ℕᵒᵖ ⥤ X.Modules where
   obj n := formalModuleQuotient I (n.unop + 1) (S.obj (op (n.unop + d)))
@@ -51,8 +50,7 @@ theorem shiftedQuotient_kill {X : Scheme.{u}} [IsNoetherian X]
     (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι (n + 1)).2
       (F.obj.obj (op n))), comp_zero]
 
-/-- The descended inclusion, constructed by the cokernel universal property.
-Source: Stacks Project, Lemma 087X, the map from the system of claim (c) to F. -/
+/-- The descended inclusion, constructed by the cokernel universal property (Stacks, Tag 087X). -/
 def formalShiftedQuotientι {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (d : ℕ) :

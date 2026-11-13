@@ -94,8 +94,8 @@ private theorem unitTensor_smul {A B : Type u} [CommRing A] [CommRing B]
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
 
-/-- Tensor coordinates detect pullback of a morphism across a scheme square.
-Source: Stacks Project, Tag 01I6, and Tags 0095 and 0096. -/
+/-- Tensor coordinates detect pullback of a morphism across a scheme square
+(Stacks, Tags 01I6, 0095 and 0096). -/
 private theorem tensor_coordinate_square
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (r : A →+* B) (r₁ : B →+* C) (r₀ : A →+* C)
@@ -222,8 +222,8 @@ private theorem tensor_coordinate_square
       _ = _ := (pullbackΓ_naturality l s' _).symm
   | add z z' hz hz' => simp only [map_add, hz, hz']
 
-/-- A chart specialization of the tensor-coordinate square criterion.
-Source: Stacks Project, Tag 01I6, and Tags 0095 and 0096. -/
+/-- A chart specialization of the tensor-coordinate square criterion
+(Stacks, Tags 01I6, 0095 and 0096). -/
 theorem affine_chart_tensor_coordinate_recovery
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (r : A →+* B) (r₁ : B →+* C) (r₀ : A →+* C)

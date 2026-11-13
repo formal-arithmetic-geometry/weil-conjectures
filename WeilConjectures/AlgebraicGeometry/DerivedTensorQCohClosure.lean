@@ -22,8 +22,7 @@ universe u w
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- The canonical derived tensor preserves quasi-coherent cohomology.
-Source: Stacks Project, perfect.tex, Tag 08DX. -/
+/-- The canonical derived tensor preserves quasi-coherent cohomology (Stacks, Tag 08DX). -/
 theorem canonical_derivedTensor_preserve_QCoh (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E F : schemeDerivedCategory X)

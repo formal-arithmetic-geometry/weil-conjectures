@@ -89,9 +89,7 @@ private theorem fraction_equiv_of_numerator_equiv {X Y : Scheme.{u}}
   intro n t
   exact congrArg QuotientAddGroup.mk (hE n t)
 
-/-- Localization of ordinary sections over an ambient affine open.
-Source: Stacks Project, Properties, Tag 01PW, equation module-invert-s, and Cohomology
-of Schemes, Tag 09MR, affine-open paragraph. -/
+/-- Localization of ordinary sections over an ambient affine open (Stacks, Tags 01PW and 09MR). -/
 theorem affineOpen_sectionFraction_localization (X : Scheme.{u})
     (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))
     (F : X.Modules) [F.IsQuasicoherent]

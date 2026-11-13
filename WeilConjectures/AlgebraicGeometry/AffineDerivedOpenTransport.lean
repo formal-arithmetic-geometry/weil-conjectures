@@ -38,8 +38,8 @@ private noncomputable def moduleIsoEquivalence {S T : Scheme.{u}} (s : S ≅ T) 
 set_option backward.isDefEq.respectTransparency false in
 /-- An isomorphism with a spectrum transports derived restriction, its right adjoint,
 quasi-coherence, perfection, support, and the shift structure. No detector assertion is
-part of this statement: it holds for every derived object on the spectrum.
-Source: Stacks Project, Tag 079W (derived adjunction), and Tag 09IR (affine presentation). -/
+part of this statement: it holds for every derived object on the spectrum
+(Stacks, Tags 079W and 09IR). -/
 theorem affine_derived_open_transport
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

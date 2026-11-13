@@ -64,9 +64,7 @@ noncomputable def constantModulePushforwardCocone :
       simpa using (π.naturality g.unop).symm }
 
 /-- The canonical cocone for an affine cofiltered inverse system with qcqs structure
-maps is a colimit of constant-module direct images.
-
-Source: Stacks Project, Tag 09Z1, degree zero, and Tag 09Z6, finite approximation paragraph. -/
+maps is a colimit of constant-module direct images (Stacks, Tags 09Z1 and 09Z6). -/
 theorem isColimit_constantModulePushforwardCocone [IsCofiltered I]
     [∀ {i j : I} (g : i ⟶ j), IsAffineHom (D.map g)]
     [∀ i : I, QuasiCompact (p i)] [∀ i : I, QuasiSeparated (p i)]

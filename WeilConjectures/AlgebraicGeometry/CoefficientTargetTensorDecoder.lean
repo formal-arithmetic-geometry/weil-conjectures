@@ -28,8 +28,8 @@ noncomputable section
 
 /-- The affine coefficient computation supplies a linear decoder on supported sections.
 This assertion does not quantify over a candidate coefficient map and does not assert
-injectivity. It specifies the decoder only on supported pullback-unit generators.
-Source: Stacks Project, Tags 02KG, 01I9, 01IA and 0097. -/
+injectivity. It specifies the decoder only on supported pullback-unit generators
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem exists_coefficientTarget_tensor_decoder
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

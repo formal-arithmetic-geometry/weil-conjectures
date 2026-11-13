@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Coefficient lift preserves injective abelian sheaves on the small étale site.
-Source: Stacks Project, Injectives, Lemma 19.7.3, Tag 01DO. -/
+/-- Coefficient lift preserves injective abelian sheaves on the small étale site (Stacks, Tag 01DO).
+-/
 theorem etale_ulift_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I] :
     Injective

@@ -28,9 +28,8 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The comparison from termwise sections to derived sections respects restriction
-along one morphism, before taking homology or changing a complex by an isomorphism.
-
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph. -/
+along one morphism, before taking homology or changing a complex by an isomorphism
+(Stacks, Tag 03Q9). -/
 theorem sectionsComparison_restriction_square {X Y : Scheme.{v}} (a : X ⟶ Y)
     (C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
   let restriction :=

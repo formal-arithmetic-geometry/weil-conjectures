@@ -228,8 +228,8 @@ private theorem imageSieve_ulift {X : Scheme.{u}}
   · rintro ⟨t, ht⟩
     exact ⟨ULift.up t, congrArg ULift.up ht⟩
 
-/-- The sheafified tensor-section sequence of a module cokernel is exact in the middle.
-Source: Stacks Project, Descent, Tag 070S(2), and Tag 03FH(1). -/
+/-- The sheafified tensor-section sequence of a module cokernel is exact in the middle
+(Stacks, Tags 070S and 03FH). -/
 theorem etaleTensorSections_cokernel_exact {X : Scheme.{u}} {F G : X.Modules}
     (φ : F ⟶ G)
     (α : etaleTensorSectionsPresheaf F ⟶ etaleTensorSectionsPresheaf G)

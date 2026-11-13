@@ -14,8 +14,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Compatibility of the canonical cyclic coefficient comparisons with pullback.
-Source: Stacks Project, Tag 03Q8, and the constant-sheaf pullback coherence. -/
+/-- Compatibility of the canonical cyclic coefficient comparisons with pullback (Stacks, Tag 03Q8).
+-/
 theorem cyclicCoefficientPullbackCompatibility {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) (W V : X.Etale) (v : V ⟶ W)
     (x : Sheaf.H ((upperStar AddCommGrpCat.{u + 1} (pullback.fst h W.hom)).obj

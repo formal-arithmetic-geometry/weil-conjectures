@@ -23,8 +23,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The fixed derived graph comparison is invertible for a finite etale morphism.
-Source: Stacks Project Tags 0F4L and 015F. -/
+/-- The fixed derived graph comparison is invertible for a finite etale morphism
+(Stacks, Tags 0F4L and 015F). -/
 theorem isIso_compactSupportGraphDerivedComparison_of_isFinite
     (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
     (f : U ⟶ X) [Etale f] [IsFinite f] (c : Compactification f) :

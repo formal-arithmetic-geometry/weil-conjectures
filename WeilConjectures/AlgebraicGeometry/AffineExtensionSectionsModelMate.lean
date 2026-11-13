@@ -27,8 +27,8 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- The normalized extension/sections mate is invertible on termwise tilde models.
-Source: Stacks, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7. -/
+/-- The normalized extension/sections mate is invertible on termwise tilde models
+(Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem affineExtensionSections_model_mate_isIso
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

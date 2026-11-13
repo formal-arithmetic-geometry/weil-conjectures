@@ -30,9 +30,8 @@ private theorem apply_eq_index {A : Sort*} {B : A → Sort*} {R : Sort*}
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent inverse-image and spectral-page map families.
 set_option linter.unusedVariables false in
-/-- The supplied pullback page maps obey diagram and cocone equations.
-Source: Stacks Project, Tag 015J (functorial hypercohomology), Tag 015K
-(comparison maps), and Tag 0EZM (inverse-system comparison). -/
+/-- The supplied pullback page maps obey diagram and cocone equations
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem etale_page_map_coherence
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

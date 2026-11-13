@@ -105,8 +105,8 @@ private noncomputable def swapSequenceFunctor :
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
-/-- Assemble functorial pullback presentations into a spectral diagram, with coordinates swapped.
-Source: Stacks Project, Tags 015J, 015K and 0EZM. -/
+/-- Assemble functorial pullback presentations into a spectral diagram, with coordinates swapped
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleComplex_page_diagram
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

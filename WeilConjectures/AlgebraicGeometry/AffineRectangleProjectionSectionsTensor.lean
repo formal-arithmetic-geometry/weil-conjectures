@@ -55,8 +55,8 @@ private theorem externalTensorAlgebraEquiv_tmul
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary section modules of the two projection pullbacks on an affine rectangle
-have tensor product over its coordinate ring equal to the tensor of the factor sections.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth; Tags 01IA and 01I9. -/
+have tensor product over its coordinate ring equal to the tensor of the factor sections
+(Stacks, Tags 0BED, 01IA and 01I9). -/
 theorem exists_affine_rectangle_projection_sections_tensor
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

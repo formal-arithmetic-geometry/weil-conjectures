@@ -96,9 +96,8 @@ private lemma single_isoQh_naturality
     Functor.isoWhiskerLeft _
       (DerivedCategory.quotientCompQhIso (Sheaf X.smallEtaleTopology B)).symm).hom.naturality f
 
-/-- The canonical single/pullback comparison respects the flat single tensorators.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU; the derived inverse-image
-counit identity leftDerivedUpperStarTensorComparison_app_app_comp. -/
+/-- The canonical single/pullback comparison respects the flat single tensorators
+(Stacks, Tags 06YQ and 06YU). -/
 theorem singleFunctorObjTensorIso_pullback
     {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)
     [(upperStar B v).PreservesFlat]

@@ -520,10 +520,8 @@ private theorem actualDiagram_realized (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Evaluation identifies the entire graded quotient Hom complex, before taking
 cycles, boundaries or homotopy classes. The equation is in every cochain degree.
-No weak contractibility or exactness of section evaluation is assumed.
-
-Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-the displayed quotient Hom calculation; More on Algebra, Tag 0A8H. -/
+No weak contractibility or exactness of section evaluation is assumed
+(Stacks, Tags 093T, 09C6 and 0A8H). -/
 theorem adicPerfectHomCochains (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

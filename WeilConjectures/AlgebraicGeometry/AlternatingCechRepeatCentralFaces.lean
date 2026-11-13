@@ -60,10 +60,7 @@ private theorem central_tuple {I : Type v} [LinearOrder I] {p : ℕ}
     · simp only [cechJunction, Fin.val_succ, hka, dite_false, Equiv.refl_apply]
       congr 1
 
-/-- The three deletions in the tripled block have total contribution s(t).
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.2
-and the verification omitted immediately after it. -/
+/-- The three deletions in the tripled block have total contribution s(t) (Stacks, Tag 01FM). -/
 theorem cechRepeatCentralFaces (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ)

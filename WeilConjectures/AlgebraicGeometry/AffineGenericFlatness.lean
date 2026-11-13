@@ -24,9 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- An affine finite type chart over an affine integral base becomes flat on a basic open.
-
-Source: Stacks Project, Tag 051T applied to the algebra itself, and Tag 052A. -/
+/-- An affine finite type chart over an affine integral base becomes flat on a basic open
+(Stacks, Tags 051T and 052A). -/
 theorem exists_nonzero_flat_restrict_basicOpen {X S : Scheme.{u}}
     [IsAffine X] [IsAffine S] [IsIntegral S] (f : X ⟶ S) [LocallyOfFiniteType f] :
     ∃ a : Γ(S, ⊤), a ≠ 0 ∧ Flat (f ∣_ S.basicOpen a) := by

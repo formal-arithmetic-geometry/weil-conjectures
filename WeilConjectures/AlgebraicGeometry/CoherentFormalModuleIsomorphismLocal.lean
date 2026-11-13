@@ -24,8 +24,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Isomorphisms in Coh(X,I) are detected on any open covering. The index `op n`
-is positive level `n + 1`; restriction is the usual restriction of module sheaves.
-Source: Stacks Project, Lemma 30.23.2 (Tag 087X), locality in part (3). -/
+is positive level `n + 1`; restriction is the usual restriction of module sheaves
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_isIso_of_isIso_restrict
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     {J : Type v} (U : J → X.Opens) (hU : iSup U = ⊤)

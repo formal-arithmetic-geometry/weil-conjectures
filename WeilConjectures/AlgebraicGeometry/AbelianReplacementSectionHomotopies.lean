@@ -85,8 +85,8 @@ private theorem quasiIso_of_replacement_section_homotopy {X Y : Scheme.{u}} (f :
     (a.hom ≫ ((moduleSections Y).mapHomologicalComplex (.up ℕ)).map l) q
 
 /-- Two section-complex homotopies compare a module replacement with the abelian lift.
-This asserts no equality involving Ext, and applies to any augmentation-compatible lift.
-Source: Stacks Project, Remark 01FB; Tags 013P, 013S and 03FD. -/
+This asserts no equality involving Ext, and applies to any augmentation-compatible lift
+(Stacks, Tags 01FB, 013P, 013S and 03FD). -/
 theorem abelian_replacement_section_homotopies {X Y : Scheme.{u}} (f : X ⟶ Y)
     {F : X.Modules} (I : InjectiveResolution F)
     (J : InjectiveResolution ((pushforward f).obj F)) (K : CochainComplex Y.Modules ℕ)

@@ -83,8 +83,8 @@ private noncomputable def mapResolution
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- Acyclic Leray for right-derived terminal sections, without either Ext model.
-Source: Stacks Project, Tags 072Z and 0733(1). -/
+/-- Acyclic Leray for right-derived terminal sections, without either Ext model
+(Stacks, Tags 072Z and 0733). -/
 theorem etaleZariskiDerivedSectionsAcyclicLeray
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

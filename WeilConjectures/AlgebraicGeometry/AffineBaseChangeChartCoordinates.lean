@@ -65,9 +65,8 @@ private theorem source_chart_unit_comparison {S S' : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Target chart tensor coordinates normalized by the pullback unit of g'.
-Source: Stacks Project, Tags 02KG (reduction to spectra), 01I9 (1),(2),
-01I4 (affine fibre products), and 08HY (pushforward composition identifications). -/
+/-- Target chart tensor coordinates normalized by the pullback unit of g'
+(Stacks, Tags 02KG, 01I9, 01I4 and 08HY). -/
 private theorem exists_affineBaseChange_target_chart_unit_comparison {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]

@@ -212,10 +212,7 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
   erw [← Category.assoc, ← hn, Category.assoc, Iso.inv_hom_id_app_assoc] at h
   exact h.symm
 
-/-- Existence of the normalized ordinary finite pullback comparison.
-Source: Stacks Project, Tags 06YY and 099L.
-The map is obtained by transporting the finite quotient tensor comparison through
-inverse image; pure tensors with coefficient one give the displayed normalization. -/
+/-- Existence of the normalized ordinary finite pullback comparison (Stacks, Tags 06YY and 099L). -/
 theorem ordinaryFinitePull_exists
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃ e : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅

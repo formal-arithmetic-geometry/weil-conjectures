@@ -18,8 +18,8 @@ namespace AlgebraicGeometry
 
 set_option maxHeartbeats 500000 in
 -- Elaborating the cone comparison unfolds both presentations of the Koszul tail.
-/-- The canonical shifted Koszul augmentation is invertible on the principal-open union.
-Source: Stacks Project, Tag 08CX; More on Algebra, Tags 0626 and 0663. -/
+/-- The canonical shifted Koszul augmentation is invertible on the principal-open union
+(Stacks, Tags 08CX, 0626 and 0663). -/
 theorem affine_perfect_koszul_principal_unit_iso
     (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ) (he : 1 ≤ e)
     [HasDerivedCategory.{b}

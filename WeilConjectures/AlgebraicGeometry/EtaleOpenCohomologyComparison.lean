@@ -25,8 +25,7 @@ namespace AlgebraicGeometry
 
 namespace EtaleOpenComparison
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable def freeSectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (W : C)
     (F : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}) :
@@ -39,8 +38,7 @@ noncomputable def freeSectionsEquiv
       Adjunction.whiskerRight_unit_app_app]
     rfl
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable def sectionsEquiv
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}] (W : C)
@@ -50,8 +48,7 @@ noncomputable def sectionsEquiv
   ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homAddEquiv _ F).trans
     (freeSectionsEquiv W F.obj)
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 lemma sectionsEquiv_naturality
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}] (W : C)
@@ -65,14 +62,12 @@ lemma sectionsEquiv_naturality
   dsimp [freeSectionsEquiv]
   rfl
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable abbrev integerSheaf (U : Scheme.{u}) :=
   (constantSheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable def restrictedSectionsEquiv
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -87,8 +82,7 @@ noncomputable def restrictedSectionsEquiv
     MorphismProperty.Over.isoMk (Iso.refl U) (Category.id_comp j)
   exact e.trans (G.obj.mapIso i.op.symm).addCommGroupIsoToAddEquiv
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 lemma restrictedSectionsEquiv_naturality
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -103,8 +97,7 @@ lemma restrictedSectionsEquiv_naturality
   change G'.obj.map _ (f.hom.app _ _) = f.hom.app _ (G.obj.map _ _)
   exact (NatTrans.naturality_apply f.hom _ _).symm
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable def representingHomEquiv
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -116,8 +109,7 @@ noncomputable def representingHomEquiv
     ((restrictedSectionsEquiv j G).toEquiv.trans
       (sectionsEquiv X.smallEtaleTopology (Scheme.Etale.mk j) G).toEquiv.symm)
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 lemma representingHomEquiv_naturality
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     {G G' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : G ⟶ G')
@@ -135,8 +127,7 @@ lemma representingHomEquiv_naturality
       ((sectionsEquiv X.smallEtaleTopology (Scheme.Etale.mk j) G).symm _))
   simp only [AddEquiv.apply_symm_apply]
 
-/-- Canonical sections construction for the open-cohomology comparison.
-Source: Stacks 03F3 and the free-abelian Yoneda adjunction. -/
+/-- Canonical sections construction for the open-cohomology comparison (Stacks, Tag 03F3). -/
 noncomputable def representingIso
     {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -171,8 +162,7 @@ noncomputable def etaleCohomologyOverOpenEquiv {X U : Scheme.{u}} (j : U ⟶ X)
   exact (Abelian.Ext.precompAddEquiv (EtaleOpenComparison.representingIso j) G q).symm.trans e.symm
 
 
-/-- The canonical comparison commutes with a morphism of coefficient sheaves.
-Source: Stacks 03F3; naturality of the exact Ext adjunction and Ext composition. -/
+/-- The canonical comparison commutes with a morphism of coefficient sheaves (Stacks, Tag 03F3). -/
 theorem etaleCohomologyOverOpenEquiv_naturality {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale j]
     [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
@@ -201,16 +191,16 @@ theorem etaleCohomologyOverOpenEquiv_naturality {X U : Scheme.{u}} (j : U ⟶ X)
   · exact congrArg (fun z ↦ z.comp (Abelian.Ext.mk₀ f) (add_zero q)) hx.symm
   all_goals omega
 
-/-- The free abelian sheaf functor representing sections on the small etale site.
-Source: Stacks 03F3. -/
+/-- The free abelian sheaf functor representing sections on the small etale site (Stacks, Tag 03F3).
+-/
 noncomputable abbrev EtaleOpenComparison.freeSheaf (X : Scheme.{u}) :
     X.Etale ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   etaleOpenFreeSheaf X
 
 /-- Restriction in global cohomology, transported from inverse image to site restriction.
 The three coefficient maps identify k^*j^*G with (k composed with j)^*G, using the
-inverse-image composition isomorphism and the canonical restriction comparisons.
-Source: Stacks 03F3. -/
+inverse-image composition isomorphism and the canonical restriction comparisons (Stacks, Tag 03F3).
+-/
 noncomputable def etaleCohomologyOverOpenRestriction {X U V : Scheme.{u}}
     (j : U ⟶ X) (k : V ⟶ U) [IsOpenImmersion j] [IsOpenImmersion k]
     [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})]

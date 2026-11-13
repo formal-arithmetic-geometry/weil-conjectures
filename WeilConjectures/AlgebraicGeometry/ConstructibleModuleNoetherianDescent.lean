@@ -30,7 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A constructible sheaf of modules on a quasi-compact, quasi-separated scheme descends
-along a morphism to a constructible sheaf on a Noetherian scheme. (Stacks, Tag 09Z7) -/
+along a morphism to a constructible sheaf on a Noetherian scheme (Stacks, Tag 09Z7). -/
 theorem exists_noetherian_descent
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

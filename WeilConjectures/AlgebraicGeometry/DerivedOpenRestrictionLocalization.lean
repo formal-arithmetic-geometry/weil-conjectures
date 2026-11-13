@@ -29,8 +29,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Exact derived restriction localizes at the morphisms it turns into isomorphisms.
-Source: Stacks Project, Tags 08BT and 08BS, using extension by zero from Tag 00A7. -/
+/-- Exact derived restriction localizes at the morphisms it turns into isomorphisms
+(Stacks, Tags 08BT, 08BS and 00A7). -/
 theorem schemeDerivedOpenRestriction_isLocalization (X : Scheme.{u}) (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wO} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] :

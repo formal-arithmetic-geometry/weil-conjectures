@@ -56,9 +56,8 @@ private theorem affine_projection {Y : Scheme.{u}} [IsNoetherian Y]
     · simp
     · exact (LinearMap.range_eq_top.mpr hsurj).ge
 
-/-- The canonical limit projection identifies the ideal-power quotient with its level.
-Source: Stacks Project, Lemma 087W, the projection-kernel calculation; the local
-uniqueness argument in Lemma 088B. -/
+/-- The canonical limit projection identifies the ideal-power quotient with its level
+(Stacks, Tags 087W and 088B). -/
 theorem coherentFormalModule_limit_quotient {Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (G : CoherentFormalModule Y J) (n : ℕ) :
     ∃ e : formalModuleQuotient J (n + 1) (limit G.obj) ≅ G.obj.obj (op n),

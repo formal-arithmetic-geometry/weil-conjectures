@@ -117,8 +117,8 @@ set_option maxHeartbeats 700000 in
 -- Elaborate the dependent page isomorphisms and all filtration-degree witnesses.
 set_option linter.unusedVariables false in
 /-- One diagram of pages with categorical abutment filtrations at every degree.
-This statement constructs no reindexing, subgroup presentation, or quotient homomorphism.
-Source: Stacks Project, Tags 015J and 015K; the finite-support argument of Tag 0EZM. -/
+This statement constructs no reindexing, subgroup presentation, or quotient homomorphism
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etale_complex_coherent_filtrations
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

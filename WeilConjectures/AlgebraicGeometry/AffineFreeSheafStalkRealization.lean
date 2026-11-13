@@ -40,11 +40,8 @@ private theorem coordinate_hom_ext {R : Type u} [CommRing R] (n : ℕ)
   rw [coordinate_expansion n v]
   simp only [map_sum, map_smul, h]
 
-/-- Affine sheafification realizes coordinate modules, naturally on their stalk maps.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7) (associated-sheaf stalk localization),
-Tag 01IB (modules on an affine scheme), Tag 01C6 (finite free sheaves),
-and Tag 0098 (stalks under restriction along the affine chart). -/
+/-- Affine sheafification realizes coordinate modules, naturally on their stalk maps
+(Stacks, Tags 01HV, 01IB, 01C6 and 0098). -/
 theorem exists_affine_freeSheaf_stalk_realization
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) :
     ∃ e : ∀ n : ℕ, ModuleCat.of (X.presheaf.stalk x)

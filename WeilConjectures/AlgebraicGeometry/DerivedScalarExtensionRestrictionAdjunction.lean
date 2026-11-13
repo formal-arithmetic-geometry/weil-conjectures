@@ -442,8 +442,8 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- Modules over the completed coefficient ring, without a finite-field convention.
-Source: Stacks Tag 06YY. -/
+/-- Modules over the completed coefficient ring, without a finite-field convention
+(Stacks, Tag 06YY). -/
 @[reducible]
 noncomputable def scalarReductionSource :=
   SheafOfModules.{max u (t + 1)}
@@ -451,19 +451,16 @@ noncomputable def scalarReductionSource :=
       (AlgebraicGeometry.Scheme.ProEt.topology Y)
       (completedIntegralCommRingSheafUnrestricted l E Y))
 
-/-- Modules over the constant finite quotient ring at exponent n+1.
-Source: Stacks Tag 06YY. -/
+/-- Modules over the constant finite quotient ring at exponent n+1 (Stacks, Tag 06YY). -/
 @[reducible]
 noncomputable def scalarReductionTarget (n : ℕ) :=
   SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n)
 
-/-- The standard localization of completed-coefficient module complexes.
-Source: Stacks Tag 05RU. -/
+/-- The standard localization of completed-coefficient module complexes (Stacks, Tag 05RU). -/
 noncomputable instance scalarReductionSourceDerived :
     HasDerivedCategory (scalarReductionSource l E Y) := HasDerivedCategory.standard _
 
-/-- The standard localization of finite-coefficient module complexes.
-Source: Stacks Tag 05RU. -/
+/-- The standard localization of finite-coefficient module complexes (Stacks, Tag 05RU). -/
 noncomputable instance scalarReductionTargetDerived (n : ℕ) :
     HasDerivedCategory (scalarReductionTarget l E Y n) := HasDerivedCategory.standard _
 
@@ -476,8 +473,7 @@ attribute [local instance] scalarReductionSiteSmall
 
 variable (n : ℕ)
 
-/-- Restriction along the coordinate projection of the completed ring sheaf.
-Source: Stacks Tag 03CZ. -/
+/-- Restriction along the coordinate projection of the completed ring sheaf (Stacks, Tag 03CZ). -/
 @[reducible]
 noncomputable def scalarReductionRestriction :
     scalarReductionTarget l E Y n ⥤ scalarReductionSource l E Y :=
@@ -486,15 +482,14 @@ noncomputable def scalarReductionRestriction :
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E Y n))
 
-/-- Additivity of the explicit scalar-restriction functor.
-Source: Stacks Tag 03CZ. -/
+/-- Additivity of the explicit scalar-restriction functor (Stacks, Tag 03CZ). -/
 instance scalarReductionRestrictionAdditive :
     (scalarReductionRestriction l E Y n).Additive := by
   unfold scalarReductionRestriction
   infer_instance
 
-/-- Restriction is exact, since it leaves underlying abelian sheaves unchanged.
-Source: Stacks Tags 03DA and 03CZ. -/
+/-- Restriction is exact, since it leaves underlying abelian sheaves unchanged
+(Stacks, Tags 03DA and 03CZ). -/
 theorem scalarReductionRestriction_exact :
     PreservesFiniteLimits (scalarReductionRestriction l E Y n) ∧
       PreservesFiniteColimits (scalarReductionRestriction l E Y n) := by
@@ -515,16 +510,14 @@ theorem scalarReductionRestriction_exact :
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf R),
     preservesFiniteColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf R)⟩
 
-/-- Finite-limit preservation supplied by exactness.
-Source: Stacks Tag 03DA. -/
+/-- Finite-limit preservation supplied by exactness (Stacks, Tag 03DA). -/
 theorem scalarReductionRestrictionLimits :
     PreservesFiniteLimits (scalarReductionRestriction l E Y n) :=
   (scalarReductionRestriction_exact l E Y n).1
 
 attribute [local instance] scalarReductionRestrictionLimits
 
-/-- Finite-colimit preservation supplied by exactness.
-Source: Stacks Tag 03DA. -/
+/-- Finite-colimit preservation supplied by exactness (Stacks, Tag 03DA). -/
 theorem scalarReductionRestrictionColimits :
     PreservesFiniteColimits (scalarReductionRestriction l E Y n) :=
   (scalarReductionRestriction_exact l E Y n).2
@@ -532,8 +525,8 @@ theorem scalarReductionRestrictionColimits :
 attribute [local instance] scalarReductionRestrictionColimits
 
 set_option linter.defProp false in
-/-- The canonical universal derived-change-of-rings witness for the limit projection.
-Source: Stacks Tag 06YY. -/
+/-- The canonical universal derived-change-of-rings witness for the limit projection
+(Stacks, Tag 06YY). -/
 noncomputable def scalarReductionExistence :=
   letI := HasDerivedCategory.standard (SheafOfModules.{max u (t + 1)}
     (SheafOfModules.derivedChangeRingIndependentCoefficients
@@ -550,14 +543,12 @@ noncomputable def scalarReductionExistence :=
     (completedIntegralCommRingProjectionUnrestricted l E Y n)
 
 /-- Ordinary scalar extension, with the sectionwise tensor objects and maps fixed
-by the derived-change-of-rings witness.
-Source: Stacks Tag 06YY. -/
+by the derived-change-of-rings witness (Stacks, Tag 06YY). -/
 noncomputable def scalarReductionExtension :
     scalarReductionSource l E Y ⥤ scalarReductionTarget l E Y n :=
   (scalarReductionExistence l E Y n).choose
 
-/-- Additivity of tensor extension.
-Source: Stacks Tag 06YY. -/
+/-- Additivity of tensor extension (Stacks, Tag 06YY). -/
 theorem scalarReductionExtensionAdditive :
     (scalarReductionExtension l E Y n).Additive :=
   (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose_spec.choose
@@ -570,8 +561,8 @@ attribute [local irreducible] scalarReductionExistence scalarReductionExtension
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.defProp false in
-/-- The universal derived pair, including the K-flat computation and exactness.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived pair, including the K-flat computation and exactness (Stacks, Tag 06YY).
+-/
 noncomputable def scalarReductionDerivedExistence :
     ∃ (LF : DerivedCategory (scalarReductionSource l E Y) ⥤
         DerivedCategory (scalarReductionTarget l E Y n))
@@ -608,21 +599,19 @@ attribute [local instance] scalarReductionRestrictionLimits
 attribute [local instance] scalarReductionRestrictionColimits
 attribute [local instance] scalarReductionExtensionAdditive
 
-/-- Termwise exact restriction descended through localization.
-Source: Stacks Tag 015F. -/
+/-- Termwise exact restriction descended through localization (Stacks, Tag 015F). -/
 noncomputable def scalarReductionDerivedRestriction :=
   (scalarReductionRestriction l E Y n).mapDerivedCategory
 
 /-- Derived tensor with the finite quotient over the completed coefficient ring.
-Its universal property determines it up to unique compatible isomorphism.
-Source: Stacks Tag 06YY. -/
+Its universal property determines it up to unique compatible isomorphism (Stacks, Tag 06YY). -/
 noncomputable def scalarReductionDerivedExtension :
     DerivedCategory (scalarReductionSource l E Y) ⥤
       DerivedCategory (scalarReductionTarget l E Y n) :=
   (scalarReductionDerivedExistence l E Y n).choose
 
-/-- The universal comparison on homotopy complexes, an isomorphism on K-flat ones.
-Source: Stacks Tag 06YY. -/
+/-- The universal comparison on homotopy complexes, an isomorphism on K-flat ones
+(Stacks, Tag 06YY). -/
 noncomputable def scalarReductionCounit :
     DerivedCategory.Qh ⋙ scalarReductionDerivedExtension l E Y n ⟶
       (scalarReductionExtension l E Y n).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
@@ -648,8 +637,8 @@ variable (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The underived tensor/restriction adjunction with its sectionwise unit normalization.
-Source: Stacks Tag 03CZ. -/
+/-- The underived tensor/restriction adjunction with its sectionwise unit normalization
+(Stacks, Tag 03CZ). -/
 theorem scalarReductionExtension_adjunction :
     ∃ adj : scalarReductionExtension l E Y n ⊣ scalarReductionRestriction l E Y n,
       ∀ (M : scalarReductionSource l E Y)

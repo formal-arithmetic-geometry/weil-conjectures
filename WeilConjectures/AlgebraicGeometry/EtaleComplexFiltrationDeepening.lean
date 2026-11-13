@@ -105,8 +105,8 @@ private theorem finite_comparison_filtered
   rw [hfactor]
   infer_instance
 
-/-- A kernel class in one image-filtration step moves to the next step at a later stage.
-Source: Stacks Project, Tag 0EZM, finite-term comparison, and Tag 015J. -/
+/-- A kernel class in one image-filtration step moves to the next step at a later stage
+(Stacks, Tags 0EZM and 015J). -/
 theorem exists_etale_complex_class_in_next_filtration
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

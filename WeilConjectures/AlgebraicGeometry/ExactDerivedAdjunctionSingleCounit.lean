@@ -29,8 +29,8 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
   [HasKInjectiveResolutions A] [HasKInjectiveResolutions B]
 
-/-- The single comparison for an exact right adjoint preserves the derived counit.
-Source: Stacks Project, Tag 0AX3, trace-map counit comparison. -/
+/-- The single comparison for an exact right adjoint preserves the derived counit
+(Stacks, Tag 0AX3). -/
 theorem exact_derivedAdjunction_single_counit {T : A ⥤ B} {H : B ⥤ A}
     [T.Additive] [H.Additive]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]

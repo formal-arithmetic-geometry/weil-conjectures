@@ -30,8 +30,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- Locally an extension with finite constant outer terms is a cokernel of a morphism
-between constant sheaves, with finitely generated source.
-Source: Stacks Project, Tag 093U, extension argument, up to the pushout diagram. -/
+between constant sheaves, with finitely generated source (Stacks, Tag 093U). -/
 theorem exists_constantExtension_cokernelPresentation {X : Scheme.{u}}
     {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

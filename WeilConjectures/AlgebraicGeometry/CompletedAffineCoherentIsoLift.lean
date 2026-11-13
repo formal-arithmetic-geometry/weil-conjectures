@@ -85,11 +85,8 @@ private theorem completion_linear_map_smul
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A B-linear section isomorphism between coherent modules over the completion
-of a Noetherian ring B lifts to a sheaf isomorphism with exactly those sections.
-
-Source: Stacks Project, Tag 087W (finite formal modules), Tag 00MA (completion
-of finite modules over Noetherian rings), Tag 05GG (completion modulo powers),
-and Tag 01I6 (the affine quasi-coherent module equivalence). -/
+of a Noetherian ring B lifts to a sheaf isomorphism with exactly those sections
+(Stacks, Tags 087W, 00MA, 05GG and 01I6). -/
 theorem completedAffine_coherent_iso_lift
     (B : Type u) [CommRing B] [IsNoetherianRing B] (I : Ideal B)
     (A D : CoherentModules (Spec (CommRingCat.of (AdicCompletion I B))))

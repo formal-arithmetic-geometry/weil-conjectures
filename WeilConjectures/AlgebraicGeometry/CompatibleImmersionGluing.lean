@@ -21,8 +21,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A compatible local immersion has the expected open overlap with every other patch.
-Source: Stacks Project, Tag 0BDL, final paragraph, characterized local patches. -/
+/-- A compatible local immersion has the expected open overlap with every other patch
+(Stacks, Tag 0BDL). -/
 private theorem compatibleImmersion_openOverlap (S : Scheme.{u})
     (U : S → S.Opens) (W : S → Scheme.{u})
     (j : ∀ s : S, W s ⟶ (U s).toScheme) (hj : ∀ s : S, IsImmersion (j s))
@@ -72,8 +72,8 @@ private theorem compatibleImmersion_openOverlap (S : Scheme.{u})
     rw [hfst, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
       Set.range_eq_univ.mpr hp.isoPullback.inv.surjective, Set.image_univ, Opens.range_ι]
 
-/-- Monomorphisms with open Limits.pullback projections admit a glued open atlas over the base.
-Source: Stacks Project, Tags 01JB and 01JC, gluing schemes along open subschemes. -/
+/-- Monomorphisms with open Limits.pullback projections admit a glued open atlas over the base
+(Stacks, Tags 01JB and 01JC). -/
 private theorem exists_gluedMonoOpenAtlas {I : Type u} (S : Scheme.{u}) (W : I → Scheme.{u})
     (f : ∀ i, W i ⟶ S) (hf : ∀ i, Mono (f i))
     (hopen : ∀ i k, IsOpenImmersion (Limits.pullback.fst (f i) (f k))) :
@@ -143,9 +143,8 @@ private theorem exists_gluedMonoOpenAtlas {I : Type u} (S : Scheme.{u}) (W : I �
     simpa only [D, Category.assoc, Limits.pullbackSymmetry_hom_comp_fst_assoc] using
       (D.glue_condition i k).symm
 
-/-- Compatible immersions over a point-indexed family of opens descend to Cartesian charts.
-Source: Stacks Project, Tags 01JB and 01JC, applied to the characterized patches
-in the final paragraph of Tag 0BDL. -/
+/-- Compatible immersions over a point-indexed family of opens descend to Cartesian charts
+(Stacks, Tags 01JB, 01JC and 0BDL). -/
 theorem exists_gluedCompatibleImmersionCharts (S : Scheme.{u})
     (U : S → S.Opens)
     (W : S → Scheme.{u}) (j : ∀ s : S, W s ⟶ (U s).toScheme)

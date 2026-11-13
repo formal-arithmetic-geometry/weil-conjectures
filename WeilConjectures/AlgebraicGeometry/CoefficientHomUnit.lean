@@ -713,8 +713,7 @@ private theorem unitProducts
 set_option maxHeartbeats 700000 in
 -- The statement and its normalization compare several chosen Hom-complex constructions.
 /-- The coefficient-Hom bifunctor has a unit at the coefficient ring, normalized by
-restriction and evaluation at one.
-Source: Stacks Project, Algebraization, Tag 099I, first arrow of the final composite. -/
+restriction and evaluation at one (Stacks, Tag 099I). -/
 theorem exists_coefficientHom_unit
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :

@@ -69,9 +69,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ambient tensor of cotangent classes identifies with the tensor of conormal
 sections over the source chart rings. This concerns only the tensor modules, before
-applying the section map of the second module pullback.
-
-Source: Stacks Project, Morphisms, Tags 0473 and 01R3 (2); Schemes, Tag 01JU (1). -/
+applying the section map of the second module pullback (Stacks, Tags 0473, 01R3 and 01JU). -/
 theorem closedImmersion_conormal_affine_tensor_coordinates
     {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')
     [IsClosedImmersion i] [IsClosedImmersion i']

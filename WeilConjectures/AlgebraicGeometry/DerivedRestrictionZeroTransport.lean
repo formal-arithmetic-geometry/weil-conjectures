@@ -86,8 +86,8 @@ private theorem single_nat {C D : Type*} [Category C] [Category D]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [Category.id_comp]
 
-/-- Combine the composition and natural-isomorphism calculations for an exact square.
-Source: Stacks Project, Tag 0D6F, functoriality of localization. -/
+/-- Combine the composition and natural-isomorphism calculations for an exact square
+(Stacks, Tag 0D6F). -/
 private theorem single_square {C D D' E : Type*}
     [Category C] [Category D] [Category D'] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian D']
@@ -148,11 +148,8 @@ private theorem zero_single_naturality {C D : Type*} [Category C] [Category D]
   erw [R.rightDerivedZeroIsoSelf.hom.naturality]
   rfl
 
-/-- Degree-zero coefficient transport for an arbitrary square of exact functors.
-Source: Stacks Project, Tag 0D6F, restriction, and functoriality of localization.
-First apply the single-square calculation and naturality of the target single comparison.
-Then apply derived sections and zeroth homology. Finally use the naturality of the
-single-object degree-zero right-derived comparison. No coefficient isomorphism is assumed. -/
+/-- Degree-zero coefficient transport for an arbitrary square of exact functors (Stacks, Tag 0D6F).
+-/
 private theorem square_zero_transport {C D D' E : Type*}
     [Category C] [Category D] [Category D'] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian D']
@@ -222,8 +219,8 @@ private theorem square_zero_transport {C D D' E : Type*}
   simp only [z, Iso.trans_hom, Category.assoc]
   rfl
 
-/-- The restriction triangle and a coefficient morphism respect the zero comparison.
-Source: Stacks Project, Tag 0D6F, restriction, and functoriality of localization. -/
+/-- The restriction triangle and a coefficient morphism respect the zero comparison
+(Stacks, Tag 0D6F). -/
 theorem derivedRestriction_zero_transport {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

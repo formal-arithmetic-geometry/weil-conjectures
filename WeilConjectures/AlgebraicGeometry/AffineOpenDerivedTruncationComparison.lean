@@ -31,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- Derived sections on an affine open send the canonical lower-truncation
-projection to an isomorphism on cohomology in its cutoff degree.
-Source: Stacks Project, Tag 08D4 with N = 1; Tag 0AVW, cohomology calculation. -/
+projection to an isomorphism on cohomology in its cutoff degree (Stacks, Tags 08D4 and 0AVW). -/
 theorem affine_open_derived_truncation_comparison
     (X : Scheme.{v})
     [HasDerivedCategory.{w} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

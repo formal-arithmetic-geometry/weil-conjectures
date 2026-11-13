@@ -26,8 +26,8 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Construct the module inverse-image functor and its transported scalar action.
-Source: Stacks Project, Tags 03D1 and 03D2. -/
+/-- Construct the module inverse-image functor and its transported scalar action
+(Stacks, Tags 03D1 and 03D2). -/
 theorem etaleInverseImageModuleConstruction (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

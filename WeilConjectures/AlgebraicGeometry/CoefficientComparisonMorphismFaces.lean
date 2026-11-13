@@ -107,8 +107,8 @@ private theorem coefficientSectionLinearMap_naturality
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- The composed adjunction compares dependent scalar-restriction and direct-image instances.
-/-- The concrete coefficient mates commute with every Cech face restriction.
-Source: Stacks Project, Tags 02KE and 0097, naturality of the termwise map. -/
+/-- The concrete coefficient mates commute with every Cech face restriction
+(Stacks, Tags 02KE and 0097). -/
 theorem coefficientComparisonMorphism_faces {X T : Scheme.{u}} (f : X ⟶ T)
     (F : X.Modules) (U : T.Opens) {r : ℕ}
     (V : Fin r → (f ⁻¹ᵁ U).toScheme.Opens)

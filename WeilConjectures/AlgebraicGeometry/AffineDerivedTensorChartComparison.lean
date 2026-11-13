@@ -40,8 +40,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Compute affine derived tensor through the canonical spectrum chart, on given
-module complexes and a given K-flat resolution of the first complex.
-Source: Stacks Project, Tag 08DX(2), using Tag 08DV. -/
+module complexes and a given K-flat resolution of the first complex (Stacks, Tags 08DX and 08DV). -/
 theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (M N P : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ)

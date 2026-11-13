@@ -19,9 +19,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Surjectivity part of geometric stalk evaluation.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
+/-- Surjectivity part of geometric stalk evaluation (Stacks, Tags 03QU and 03QV). -/
 theorem etale_units_stalk_evaluation_surjective (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

@@ -114,9 +114,8 @@ private theorem evaluation_chain_natural (X : Scheme.{u})
 
 -- Elaborating the fixed sheaf tensor and localization instances needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency.types true in
-/-- One-variable compatibility of the explicit localized identity evaluation.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex,
-Tags 0A90 and 0A96. -/
+/-- One-variable compatibility of the explicit localized identity evaluation
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomEvaluation_postcomposition (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M M' : CochainComplex

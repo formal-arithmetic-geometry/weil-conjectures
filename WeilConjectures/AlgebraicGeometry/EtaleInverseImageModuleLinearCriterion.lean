@@ -26,9 +26,8 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The abelian adjunction preserves and reflects linearity for the transported action.
-Source: Stacks Project, Tag 03D3, with the omitted converse supplied by the
-naturality and triangle-identity calculation in the parent node, steps 2--5. -/
+/-- The abelian adjunction preserves and reflects linearity for the transported action
+(Stacks, Tag 03D3). -/
 theorem etaleInverseImageModuleLinearCriterion (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

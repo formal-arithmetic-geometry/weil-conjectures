@@ -146,9 +146,8 @@ private theorem assoc_four {C : Type*} [Category* C] {A B D E F G : C}
     a ≫ (b ≫ c ≫ d) ≫ e = a ≫ b ≫ c ≫ d ≫ e := by
   simp only [Category.assoc]
 
-/-- Localized evaluation respects comparisons between normalized representatives.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90
-and 0A96. -/
+/-- Localized evaluation respects comparisons between normalized representatives
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomUncurry_normalized_comparison (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M P' L' M' : CochainComplex

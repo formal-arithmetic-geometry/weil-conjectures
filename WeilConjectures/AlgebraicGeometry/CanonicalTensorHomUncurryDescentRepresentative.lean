@@ -19,9 +19,8 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Existence of representative-normalized values, without isomorphism transport.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex,
-Tags 0A90 and 0A96. -/
+/-- Existence of representative-normalized values, without isomorphism transport
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem exists_tensorHomUncurry_descent_representative (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := schemeDerivedTensorMonoidal X

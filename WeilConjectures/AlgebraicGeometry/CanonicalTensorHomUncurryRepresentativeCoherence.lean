@@ -85,8 +85,7 @@ private theorem evaluation_heq {C : Type*} [Category C] [MonoidalCategory C]
 /-- Two chain presentations of the same literal derived input have the same localized
 uncurried output. Object equalities and heterogeneous equalities record only transport
 along equality, not transport along arbitrary isomorphisms. No family of functions is
-asserted to exist here.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90, 0A96. -/
+asserted to exist here (Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomUncurry_representative_coherence (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P L M P' L' M' : CochainComplex

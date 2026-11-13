@@ -42,8 +42,7 @@ local instance instAdditiveModuleCatExtendScalars_affineOpenPseudoCoherentLocali
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pseudo-coherence of a fixed associated-sheaf complex on an open supplies a
-pseudo-coherent localization near each point of that open.
-Source: Stacks Project, Tags 08EE and 08E7, local-model step. -/
+pseudo-coherent localization near each point of that open (Stacks, Tags 08EE and 08E7). -/
 theorem affine_open_pseudoCoherent_localization_point
     (X : Scheme.{u}) [IsAffine X] (U : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

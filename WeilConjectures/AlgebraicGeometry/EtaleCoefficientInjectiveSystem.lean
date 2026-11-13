@@ -21,8 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- A compatible coefficient system admits a compatible stagewise injective embedding.
-Source: Stacks Project, Tag 0EXZ, product of direct images over all outgoing arrows. -/
+/-- A compatible coefficient system admits a compatible stagewise injective embedding
+(Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_injective_system
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

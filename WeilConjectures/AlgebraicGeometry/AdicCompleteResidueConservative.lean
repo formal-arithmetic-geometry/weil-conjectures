@@ -88,9 +88,8 @@ private theorem complete_zero_of_reductions
   exact hc0.of_iso eM.symm
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Residue reduction detects isomorphisms between locally complete objects on a slice.
-Source: Stacks Project, proetale.tex, Tag 09C6, final step; Algebraization, Tags 099M and
-099F, derived Nakayama. -/
+/-- Residue reduction detects isomorphisms between locally complete objects on a slice
+(Stacks, Tags 09C6, 099M and 099F). -/
 theorem adicResidue_isIso_of_residue
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

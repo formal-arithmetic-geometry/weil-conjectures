@@ -94,10 +94,8 @@ private theorem dualizeAugmentedDiagram
     congrArg (fun z ↦ j.hom ≫ ηS ≫ HS.map z.op) he
 
 /-- Pullback identifies the bounded finite free dual Koszul tower, with its unit.
-Only the Koszul complexes occur here; there is no arbitrary coefficient complex.
-
-Source: Stacks Project, algebraization.tex, Tag 0A0E, finite Koszul calculation;
-sites-cohomology.tex, Tag 07A4, tensor pullback. -/
+Only the Koszul complexes occur here; there is no arbitrary coefficient complex
+(Stacks, Tags 0A0E and 07A4). -/
 theorem completedKoszulDualTowerPullback
     {C D : Type v} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

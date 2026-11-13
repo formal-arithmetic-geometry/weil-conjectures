@@ -86,9 +86,7 @@ private lemma inverse_associativity {W X Y Z : Scheme.{u}}
     ((lowerStarComp AddCommGrpCat.{u + 1} a bc abc
       (by rw [habc, hab, hbc, Category.assoc])).app J) key
 
-/-- Composition calculation at one outgoing-arrow factor.
-Source: Stacks Project, Tag 0EXZ, canonical maps ψ, expanded with the adjunction
-mate equations and direct-image coherence in UpperLowerStar.Coherence. -/
+/-- Composition calculation at one outgoing-arrow factor (Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_product_composition_component
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})

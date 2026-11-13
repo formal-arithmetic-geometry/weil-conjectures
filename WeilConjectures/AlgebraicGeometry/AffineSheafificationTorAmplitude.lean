@@ -28,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A module complex representing the restriction of a finite-Tor-dimensional object
 has finite Tor amplitude over the ring of the affine open. No pseudo-coherence or
-boundedness of the representative is assumed.
-Source: Stacks Project, Tag 08CG (locality), Tag 08E9(1), and Tag 08DX(2). -/
+boundedness of the representative is assumed (Stacks, Tags 08CG, 08E9 and 08DX). -/
 theorem finiteTorAmplitude_of_affine_sheafification (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ V : S.Opens,

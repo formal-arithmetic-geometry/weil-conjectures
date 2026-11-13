@@ -151,9 +151,8 @@ private lemma coefficient_generators
     congrArg (fun k ↦ k.app U) he
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Forgetting scalars respects the adjoint constant-sheaf transition.
-
-Source: Stacks Project, Tags 03DB and 03CO. -/
+/-- Forgetting scalars respects the adjoint constant-sheaf transition (Stacks, Tags 03DB and 03CO).
+-/
 theorem constantModuleTransition_coefficients
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {Z W : Scheme.{u}} (g : W ⟶ Z)

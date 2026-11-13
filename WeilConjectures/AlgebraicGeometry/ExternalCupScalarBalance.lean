@@ -97,8 +97,8 @@ private theorem cup_balance (f : X ⟶ Spec (CommRingCat.of k))
     (Abelian.Ext.mk₀ (scalarTensorCoefficient f F G)) (add_zero (p + q)))
       (ext_tensor_balance _ _ r)
 
-/-- A scalar may be moved between the two arguments of an external cup product.
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, Tag 01F7. -/
+/-- A scalar may be moved between the two arguments of an external cup product
+(Stacks, Tags 0BED and 01F7). -/
 theorem external_cup_scalar_balance (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (F : X.Modules) (G : Y.Modules)
     (p q : ℕ) (r : k) (a : scalarCohomology f F p) (b : scalarCohomology g G q) :

@@ -21,8 +21,8 @@ open CategoryTheory CategoryTheory.Limits CochainComplex HomComplex Abelian
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Evaluation of the integer Hom complex commutes with pullback and sections.
-Source: Stacks Project, Tags 015K, 01F9 and 01FA. -/
+/-- Evaluation of the integer Hom complex commutes with pullback and sections
+(Stacks, Tags 015K, 01F9 and 01FA). -/
 theorem ceComplexSectionsSquare {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {K' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}

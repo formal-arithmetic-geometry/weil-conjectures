@@ -24,9 +24,8 @@ universe u w
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- The canonical tensor model map commutes with a chain map in its first variable.
-Source: Stacks Project, cohomology.tex, Tag 06YH (derived tensor construction), and
-Tag 08DJ (representative tensor-Hom comparison). -/
+/-- The canonical tensor model map commutes with a chain map in its first variable
+(Stacks, Tags 06YH and 08DJ). -/
 theorem tensorModelMap_input_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P P' L : CochainComplex

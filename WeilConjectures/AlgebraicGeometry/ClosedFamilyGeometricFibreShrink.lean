@@ -78,10 +78,7 @@ private theorem closed_geometric_fibre_irreducible_iff {Z P T : Scheme.{u}}
     exact eZ.hom.homeomorph.irreducibleSpace_iff.mpr hZ
 
 /-- A finite family of generically geometrically irreducible closed subsets has
-geometrically irreducible fibres on a common open.
-
-Source: Stacks Project, Tag 0559 (Lemma 37.27.5), applied to reduced closed
-subschemes; Tag 055G, the simultaneous shrinking of the component closures. -/
+geometrically irreducible fibres on a common open (Stacks, Tags 0559 and 055G). -/
 theorem exists_open_closed_family_geometric_fibre_shrink {P T : Scheme.{u}}
     (p : P ⟶ T) [LocallyOfFiniteType p] [QuasiCompact p]
     (η : T) (hη : IsGenericPoint η Set.univ) {I : Type u} [Finite I]

@@ -29,9 +29,8 @@ attribute [local irreducible] derivedExtension extend change
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The ordinary quotient realization is left adjoint to sections with algebraic
 A-scalars. Its value followed by sections is constant-module sections of the algebraic
-quotient. These identifications respect the successor quotient and the adjunction units.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK, and proetale.tex,
-Tag 09C6, the ordinary quotient calculation before the total-Hom calculation. -/
+quotient. These identifications respect the successor quotient and the adjunction units
+(Stacks, Tags 03CY, 03EK and 09C6). -/
 theorem adicPerfectQuotientSectionAdjunction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

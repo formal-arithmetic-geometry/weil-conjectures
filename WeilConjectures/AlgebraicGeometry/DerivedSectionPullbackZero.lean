@@ -41,9 +41,8 @@ private theorem map_zero_comparison {C D : Type*} [Category* C] [Category* D]
   rw [hv] at hh
   exact hh.trans (e.hom.naturality s)
 
-/-- Degree-zero derived section pullback before any restriction-triangle comparison.
-Source: Stacks Project, Tag 07A6, derived adjunction, and the defining composite
-unit of the Leray comparison. -/
+/-- Degree-zero derived section pullback before any restriction-triangle comparison
+(Stacks, Tag 07A6). -/
 theorem derivedSectionPullback_zero {Y X : Scheme.{v}} (W : Y.Etale)
     (f : X ⟶ W.left) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (let τ : rightDerivedGlobalSections AddCommGrpCat.{v + 1} W.left ⟶

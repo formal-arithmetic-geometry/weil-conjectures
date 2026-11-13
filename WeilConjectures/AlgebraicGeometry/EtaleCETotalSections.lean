@@ -24,7 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 namespace EtaleTermwiseHypercohomology
 
-/-- The extended and flipped CE total before global sections. Source: Stacks, Tag 015J. -/
+/-- The extended and flipped CE total before global sections (Stacks, Tag 015J). -/
 noncomputable abbrev sheafTotal {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :=
@@ -32,7 +32,7 @@ noncomputable abbrev sheafTotal {X : Scheme.{uNatural}}
     (𝟭 (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))).obj D.I).flip).total
       (ComplexShape.up ℤ)
 
-/-- The CE total after global sections. Source: Stacks, Tag 015J. -/
+/-- The CE total after global sections (Stacks, Tag 015J). -/
 noncomputable abbrev sectionsTotal {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :=
@@ -40,10 +40,7 @@ noncomputable abbrev sectionsTotal {X : Scheme.{uNatural}}
     (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})).obj D.I).flip).total
       (ComplexShape.up ℤ)
 
-/-- Finite-diagonal comparison. Source: Stacks, Tag 015J.
-The summand equations determine this isomorphism uniquely: total coproduct inclusions
-are jointly epimorphic in each degree, and negative resolution summands are zero.
-The existence theorem used here is proved, and no arbitrary existence data are chosen. -/
+/-- Finite-diagonal comparison (Stacks, Tag 015J). -/
 noncomputable def totalSectionsIso {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :
@@ -53,7 +50,7 @@ noncomputable def totalSectionsIso {X : Scheme.{uNatural}}
   (Functor.cartanEilenberg_mapped_total_iso
     (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) D.I D.below).choose
 
-/-- Summand characterization of the comparison. Source: Stacks, Tag 015J. -/
+/-- Summand characterization of the comparison (Stacks, Tag 015J). -/
 theorem totalSectionsIso_formula {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :
@@ -77,7 +74,7 @@ theorem totalSectionsIso_formula {X : Scheme.{uNatural}}
     (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) D.I D.below).choose_spec
 
 /-- The diagonal comparison followed by global sections of the resolution comparison
-is the presentation's fixed map `w`. Source: Stacks, Tag 015J. -/
+is the presentation's fixed map `w` (Stacks, Tag 015J). -/
 theorem totalSectionsIso_comparison {X : Scheme.{uNatural}}
     {K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})}
     (D : EtaleTermwiseHypercohomology X K) :
@@ -101,10 +98,7 @@ theorem totalSectionsIso_comparison {X : Scheme.{uNatural}}
 end EtaleTermwiseHypercohomology
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The global-sections pullback maps form a natural transformation.
-Source: Stacks, Tag 015K. Naturality follows from the inverse-image adjunction unit
-and the natural comparison between global sections and sections at the terminal object.
-This packages all components, so its naturality also applies to complex differentials. -/
+/-- The global-sections pullback maps form a natural transformation (Stacks, Tag 015K). -/
 noncomputable def ceSectionsUnit {X Y : Scheme.{uNatural}} (f : Y ⟶ X) :
     Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{uNatural + 1} ⟶
       upperStar AddCommGrpCat.{uNatural + 1} f ⋙
@@ -121,7 +115,7 @@ noncomputable def ceSectionsUnit {X Y : Scheme.{uNatural}} (f : Y ⟶ X) :
         terminalIsTerminal).inv
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Apply the global-sections unit and a given chain map. Source: Stacks, Tag 015K. -/
+/-- Apply the global-sections unit and a given chain map (Stacks, Tag 015K). -/
 noncomputable def ceSectionsLift {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {A : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {B : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
@@ -148,8 +142,7 @@ noncomputable def ceSectionsLift {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     rw [← Category.assoc, ← hn, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Postcomposition of the chain map commutes with its sections lift.
-Source: Stacks, Tag 015K. -/
+/-- Postcomposition of the chain map commutes with its sections lift (Stacks, Tag 015K). -/
 theorem ceSectionsLift_comp {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {A : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {B C : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}

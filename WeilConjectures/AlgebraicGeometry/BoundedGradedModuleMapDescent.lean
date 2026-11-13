@@ -27,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Descend a bounded graded family and its successive maps, without imposing any
-square-zero equations. Source: Stacks Project, Tag 01ZR, clauses (1) and (2). -/
+square-zero equations (Stacks, Tag 01ZR). -/
 theorem bounded_graded_module_map_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

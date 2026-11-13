@@ -240,9 +240,8 @@ private theorem finite_affine_free_epimorphism
     d, inferInstance⟩
 
 
-/-- A constructible module sheaf over a Noetherian ring has a finite affine free presentation.
-
-Source: Stacks Project, Tag 095N. -/
+/-- A constructible module sheaf over a Noetherian ring has a finite affine free presentation
+(Stacks, Tag 095N). -/
 theorem exists_affine_free_etale_presentation_general
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]

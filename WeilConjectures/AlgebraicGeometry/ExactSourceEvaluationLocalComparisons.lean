@@ -51,9 +51,7 @@ set_option maxHeartbeats 600000 in
 -- Derived equivalence instance comparisons need a larger declaration-local budget.
 /-- The representative equation needs preservation of quasi-isomorphisms by Hom(P,-)
 and K-flatness of its ordinary dual, rather than finite freeness or invertibility
-of ordinary evaluation. The second complex is arbitrary.
-Source: Stacks Project, Tags 08DL, 08DM and 08DQ, the ordinary complex models;
-Tag 08DJ, the tensor-Hom representative equation. -/
+of ordinary evaluation. The second complex is arbitrary (Stacks, Tags 08DL, 08DM, 08DQ and 08DJ). -/
 theorem exists_exactSource_evaluation_local_comparisons (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens, HasDerivedCategory.{w}

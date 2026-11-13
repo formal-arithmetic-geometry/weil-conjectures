@@ -28,9 +28,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The image of the canonical terminal germ map is precisely the invariant subgroup.
-
-Source: Stacks Project, Tags 04JM and 04JQ. -/
+/-- The image of the canonical terminal germ map is precisely the invariant subgroup
+(Stacks, Tags 04JM and 04JQ). -/
 theorem etaleGlobalSections_galoisInvariants_image
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

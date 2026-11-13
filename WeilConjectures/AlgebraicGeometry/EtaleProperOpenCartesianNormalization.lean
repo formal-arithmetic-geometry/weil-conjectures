@@ -208,8 +208,7 @@ private theorem derived_cartesian_normalized
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The support- and unit-normalized derived comparison on a Cartesian square
-is the canonical adjunction exchange.
-Source: Stacks Project, Tag 0F7B. -/
+is the canonical adjunction exchange (Stacks, Tag 0F7B). -/
 theorem etaleProperOpenCartesianNormalization
     (A : Type (u + 1)) [CommRing A]
     {U V W Z : Scheme.{u}}

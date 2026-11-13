@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- Every normalized pure section belongs to the evaluated comparison range.
-Source: Stacks Project, Tag 03P2, affine tensor calculation. -/
+/-- Every normalized pure section belongs to the evaluated comparison range (Stacks, Tag 03P2). -/
 theorem singletonTensorDegreeComparisonHom_normalized_range
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (n : ℕ)

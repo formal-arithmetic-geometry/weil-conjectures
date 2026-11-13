@@ -174,9 +174,8 @@ private theorem derived_unit_germ_fac
 -- The original interface retains the square and its unused source-side functors.
 set_option linter.unusedVariables false in
 /-- The target-side derived unit and germ, precomposed with the global-sections unit,
-are the localized section-unit-and-germ composite followed by the target units.
-Source: Stacks Project, cohomology.tex, Tags 01EZ and 01F8;
-sites-cohomology.tex, Remark 08J6. -/
+are the localized section-unit-and-germ composite followed by the target units
+(Stacks, Tags 01EZ, 01F8 and 08J6). -/
 theorem derivedGlobalGerm_unit_fac
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)

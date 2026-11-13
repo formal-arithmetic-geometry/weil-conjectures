@@ -100,8 +100,7 @@ private theorem familyLimit_isZero
   have : (familyLimit R c f hij).IsLeftAdjoint := adj.isLeftAdjoint
   exact Functor.map_isZero _ hM
 
-/-- Descent of bounded finitely presented module families.
-Source: Stacks Project, Tag 01ZR, Lemma 32.10.2, clause (1). -/
+/-- Descent of bounded finitely presented module families (Stacks, Tag 01ZR). -/
 theorem bounded_graded_family_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

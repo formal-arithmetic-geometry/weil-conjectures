@@ -34,8 +34,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Image and kernel bounds for H^q(X, I^n F), with a single uniform constant.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, parts (2) and (3). -/
+/-- Image and kernel bounds for H^q(X, I^n F), with a single uniform constant (Stacks, Tag 02OA). -/
 theorem cohomology_powers_ideal_application
     (A : Type v) [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}}
     (I : Ideal A) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (J : X.IdealSheafData)

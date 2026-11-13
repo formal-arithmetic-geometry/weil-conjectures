@@ -48,9 +48,7 @@ private theorem evaluation_naturality_of_components
 
 /-- Evaluation at the identity of the fixed Hom complex is natural in both derived
 variables. This concerns the evaluation morphism itself, with no choice of a map into
-internal Hom.
-Source: Stacks Project, cohomology.tex, Tag 08DJ; sites-cohomology.tex, Tags 0A90
-and 0A96. -/
+internal Hom (Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomEvaluation_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (L M L' M' : CochainComplex

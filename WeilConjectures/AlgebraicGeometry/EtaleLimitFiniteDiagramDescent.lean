@@ -144,8 +144,8 @@ private theorem finite_qcqs_pullback_hom_descent
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Descend a finite star diagram, without a covering assumption or conclusion.
-Source: Stacks Project, Limits, Tags 01ZM(1),(2) and 07RP. -/
+/-- Descend a finite star diagram, without a covering assumption or conclusion
+(Stacks, Tags 01ZM and 07RP). -/
 theorem exists_etale_limit_finite_diagram_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

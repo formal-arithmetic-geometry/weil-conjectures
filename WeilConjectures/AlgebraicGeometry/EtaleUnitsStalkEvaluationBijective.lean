@@ -27,9 +27,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A stalk homomorphism satisfying the evaluation formula is bijective.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
+/-- A stalk homomorphism satisfying the evaluation formula is bijective
+(Stacks, Tags 03QU and 03QV). -/
 theorem etale_units_stalk_evaluation_bijective (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

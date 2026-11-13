@@ -69,8 +69,7 @@ set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
 set_option maxHeartbeats 1000000 in
 -- The explicit inverse-image and tensor transports require additional elaboration fuel.
-/-- Scalar compatibility of the transported pullback counit.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+/-- Scalar compatibility of the transported pullback counit (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counit_smul
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

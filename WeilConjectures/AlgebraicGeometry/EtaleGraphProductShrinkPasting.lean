@@ -30,8 +30,8 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.mapDerivedCate
 
 /-- Shrinking the three supporting neighborhoods commutes with the fixed product boundary.
 The source and target are the already enlarged proper ambient products: this assertion
-contains neither the original supplied square exchange nor a proper-ambient lambda.
-Source: Stacks Tags 0F7C, 0F7D and the final A--F calculation in 0F7J. -/
+contains neither the original supplied square exchange nor a proper-ambient lambda
+(Stacks, Tags 0F7C, 0F7D and 0F7J). -/
 theorem etaleGraphProductShrinkPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

@@ -32,8 +32,8 @@ local instance (X : Scheme.{u}) (I : Type u)
     HasCoproduct K := HasColimitsOfShape.has_colimit _
 
 /-- The termwise coproduct representative has the coproduct universal property in the
-derived category. This is the localization and coproduct part of the direct-sums lemma.
-Source: Stacks Project, Injectives, Lemma 07D9 (1)-(2). -/
+derived category. This is the localization and coproduct part of the direct-sums lemma
+(Stacks, Tag 07D9). -/
 theorem derivedAmbientDirectSumsCofan (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) (E : I → schemeDerivedCategory X)

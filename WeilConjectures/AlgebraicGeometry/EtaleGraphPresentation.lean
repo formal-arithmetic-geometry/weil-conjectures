@@ -29,8 +29,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- A supplied presentation `f = p e a`, with proper outer factors and open middle factor.
-Source: the presentations in the product-graph argument, Stacks Tags 0F7C--0F7F. -/
+/-- A supplied presentation `f = p e a`, with proper outer factors and open middle factor
+(Stacks, Tags 0F7C and 0F7F). -/
 structure EtaleGraphPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) where
   U : Scheme.{u}
   P : Scheme.{u}
@@ -87,14 +87,14 @@ def etaleGraphComparisonFromOpen (A : Type (u + 1)) [CommRing A] [Finite A]
     ((Category.assoc t.a t.e t.p).trans (t.fac.trans c.comm)) A
 
 /-- `C_{t,s} = B_{t,c} B_{s,c}^{-1}`, retaining the auxiliary compactification explicitly
-until the independence theorem. Source: Stacks Tags 0F7C--0F7D, product/intersection argument. -/
+until the independence theorem (Stacks, Tags 0F7C and 0F7D). -/
 def etaleGraphComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (s t : EtaleGraphPresentation f) : s.functor A ≅ t.functor A :=
   (etaleGraphComparisonFromOpen A c s).symm ≪≫ etaleGraphComparisonFromOpen A c t
 
 /-- Cartesian representatives of the three pulled-back factors of a presentation.
-The maps `v` and `b` are the source and base projections. Source: Stacks Tag 0F7F. -/
+The maps `v` and `b` are the source and base projections (Stacks, Tag 0F7F). -/
 structure EtaleGraphPresentation.BaseChange
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (t : EtaleGraphPresentation f) (t' : EtaleGraphPresentation f')
@@ -119,8 +119,8 @@ def EtaleGraphPresentation.ofCompactificationBaseChange
   pSquare := (c.isPullback_g_ofIsPullback sq).flip
 
 /-- The actual successive canonical exchanges `chi_t`: proper exchange for `p`, inverse
-of the unit-normalized open mate for `e`, then proper exchange for `a`, with associators.
-Source: Stacks Tag 0F7F; `exactDerivedBaseChangeMap` and the termwise open-unit mate. -/
+of the unit-normalized open mate for `e`, then proper exchange for `a`, with associators
+(Stacks, Tag 0F7F). -/
 def etaleGraphPresentationExchange (A : Type (u + 1)) [CommRing A]
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {t : EtaleGraphPresentation f} {t' : EtaleGraphPresentation f'}

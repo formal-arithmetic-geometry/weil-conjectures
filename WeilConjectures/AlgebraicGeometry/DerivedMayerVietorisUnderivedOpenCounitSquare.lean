@@ -84,8 +84,7 @@ end
 
 set_option linter.unusedVariables false in
 /-- The sectionwise comparison square respects the two underived open counits,
-after passage to the homotopy category.
-Source: Stacks Tags 08FE and 08BV. -/
+after passage to the homotopy category (Stacks, Tags 08FE and 08BV). -/
 theorem schemeMVUnderivedOpenCounit_square
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U : Y.Opens)
     (K : HomotopyCategory

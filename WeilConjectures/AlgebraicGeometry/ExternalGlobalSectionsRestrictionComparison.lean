@@ -24,16 +24,15 @@ noncomputable section
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The presheaf of sections of the external coefficient above opens of the second factor.
-Source: Stacks Project, Tag 0BED. -/
+/-- The presheaf of sections of the external coefficient above opens of the second factor
+(Stacks, Tag 0BED). -/
 abbrev externalSectionsPushforward
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) : Y.Opensᵒᵖ ⥤ ModuleCat.{w} k :=
   (TopologicalSpace.Opens.map (pullback.snd f g).base).op ⋙
     scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)
 
-/-- Sections above the top open are global sections on the fibre product.
-Source: Stacks Project, Tag 0BED. -/
+/-- Sections above the top open are global sections on the fibre product (Stacks, Tag 0BED). -/
 def externalSectionsTopIso
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -44,9 +43,8 @@ def externalSectionsTopIso
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The external section comparison is a morphism of presheaves on the second factor.
-Its components identify with the canonical comparisons on the open subschemes.
-Source: Stacks Project, Tag 0BED, degree-zero cup product; Tags 0096 and 0097,
-restriction and composition of pullback adjunctions. -/
+Its components identify with the canonical comparisons on the open subschemes
+(Stacks, Tags 0BED, 0096 and 0097). -/
 theorem exists_externalSectionsRestrictionComparison
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :

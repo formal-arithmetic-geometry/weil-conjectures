@@ -471,9 +471,8 @@ attribute [local irreducible] adicPerfectQuotientFunctor
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The tensor-quotient identification on constant sections respects scalar transitions.
 The right adjoints and the successor mates here are the already constructed ones;
-this statement neither constructs an adjunction nor asserts a unit equation.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK; proetale.tex,
-Tag 09C6, the ordinary constant finite-quotient tensor calculation. -/
+this statement neither constructs an adjunction nor asserts a unit equation
+(Stacks, Tags 03CY, 03EK and 09C6). -/
 theorem adicPerfectQuotientSectionComparison (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

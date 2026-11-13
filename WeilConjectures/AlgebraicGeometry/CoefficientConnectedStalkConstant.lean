@@ -41,7 +41,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.Scheme
 
 /-- Exact constant realization followed by actual slice restriction for any coefficient
-ring. Source: Stacks Tag 093J. -/
+ring (Stacks, Tag 093J). -/
 def coefficientSliceConstant (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     (U : coefficientProEtaleSiteModel.{u, v} X) :=
@@ -209,9 +209,8 @@ private theorem coefficient_stalk_perfect
 /-- A bounded lisse finite-type etale complex of finite Tor amplitude has a perfect
 geometric stalk. On an affine weakly contractible object mapping into the connected
 component of that point, its comparison pullback is the constant realization of
-that specified stalk. This assertion concerns one complex over one ring.
-Source: Stacks Project, Etale Cohomology, Tag 09BI; Pro-etale Cohomology, Tag 09C6,
-first paragraph; Sites, Tag 090K. -/
+that specified stalk. This assertion concerns one complex over one ring
+(Stacks, Tags 09BI, 09C6 and 090K). -/
 theorem coefficient_connected_stalk_constant
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

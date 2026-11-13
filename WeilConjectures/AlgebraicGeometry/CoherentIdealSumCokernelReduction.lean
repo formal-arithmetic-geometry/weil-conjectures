@@ -30,9 +30,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] HasFiniteBiproducts.of_hasFiniteProducts
 
 /-- An ideal-sum inclusion which is invertible near a nonzero stalk has a nonzero
-ideal, coherent source and cokernel, and strictly smaller cokernel support.
-Source: Stacks Project, Tag 01YF, final paragraph,
-using the coherent inclusion of Tag 01YE. -/
+ideal, coherent source and cokernel, and strictly smaller cokernel support
+(Stacks, Tags 01YF and 01YE). -/
 theorem coherent_ideal_sum_cokernel_reduction
     {X Z : Scheme.{u}} [IsLocallyNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i]

@@ -210,8 +210,8 @@ private lemma derived_leray_composition {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : 
     Functor.mapHomotopyCategory_map, HomotopyCategory.quotient_obj_as,
     Functor.map_comp] using hq
 
-/-- The canonical Leray comparisons associate with the derived direct-image comparison.
-Source: Stacks Project, Tags 05T2, 015M and 03CB. -/
+/-- The canonical Leray comparisons associate with the derived direct-image comparison
+(Stacks, Tags 05T2, 015M and 03CB). -/
 theorem derivedLeray_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)
     (M : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
     (rightDerivedGlobalSections A X).map

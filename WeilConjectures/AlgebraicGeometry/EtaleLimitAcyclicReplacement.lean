@@ -27,10 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term.
-
-Source: Stacks Project, Tag 09YP, injective-system step 0EXZ and dimension shifting 0739;
-Tag 09YQ transports it to schemes, using 09YN, 0EYL and 04HR. -/
+/-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term
+(Stacks, Tags 09YP, 0EXZ, 0739, 09YQ, 09YN, 0EYL and 04HR). -/
 theorem etale_limit_acyclic_replacement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

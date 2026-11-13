@@ -45,8 +45,8 @@ private def overStalkIso
       (Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π p.fiber).op)
     (Functor.Final.colimIso F.op)
 
-/-- Taking a geometric stalk of one supplied constant chart recovers its algebraic model.
-Source: Stacks Project, Etale Cohomology, 03PT and 04EQ; Cohomology on Sites, 094G. -/
+/-- Taking a geometric stalk of one supplied constant chart recovers its algebraic model
+(Stacks, Tags 03PT, 04EQ and 094G). -/
 theorem coefficient_etale_chart_stalk
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (K : ConstantCompletion.D

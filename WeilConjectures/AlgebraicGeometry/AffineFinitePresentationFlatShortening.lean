@@ -23,9 +23,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Residue-field vanishing shortens a bounded finite-presentation flat complex on
 an affine scheme without shrinking that scheme. This is an algebraic statement;
-there is no proper morphism, coefficient sheaf, or competing cohomology model.
-Source: Stacks Project, https://stacks.math.columbia.edu/tag/068V (residue criterion),
-Tags 0653 and 064U (Tor-amplitude and finite-projective representatives), and 08EB. -/
+there is no proper morphism, coefficient sheaf, or competing cohomology model
+(Stacks, Tags 068V, 0653, 064U and 08EB). -/
 theorem exists_affine_finitePresentation_flat_shortening (S : Scheme.{u})
     (hS : IsAffine S) (B : CochainComplex S.Modules ℤ) (b d : ℕ)
     (hBge : B.IsStrictlyGE 0) (hBle : B.IsStrictlyLE b)

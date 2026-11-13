@@ -67,8 +67,8 @@ private theorem isFlat_of_flat_stalks (X : RingedSpace.{u}) (F : RingedSpace.Mod
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine-local flatness over the identity implies tensor-exact sheaf flatness.
-Source: Stacks Project, Modules, Tag 05NE; flatness and filtered colimits, Tag 00H9. -/
+/-- Affine-local flatness over the identity implies tensor-exact sheaf flatness
+(Stacks, Tags 05NE and 00H9). -/
 theorem isFlat_of_affineFlatOver_identity {Y : Scheme.{u}} (G : Y.Modules)
     (hflat : Scheme.Modules.IsFlatOver G (𝟙 Y)) : SheafOfModules.IsFlat G := by
   exact isFlat_of_flat_stalks Y.toRingedSpace G

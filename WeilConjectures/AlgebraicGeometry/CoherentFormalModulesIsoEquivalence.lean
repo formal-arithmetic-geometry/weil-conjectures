@@ -24,9 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A scheme isomorphism transports the category of coherent formal modules.
-Source: Stacks Project, Section 0EHN (definition of coherent formal modules), and
-Lemma 087W (identification with an affine presentation). -/
+/-- A scheme isomorphism transports the category of coherent formal modules
+(Stacks, Tags 0EHN and 087W). -/
 theorem coherentFormalModules_iso_equivalence {X Y : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian Y] (I : X.IdealSheafData) (e : X ≅ Y) :
     Nonempty (CoherentFormalModule X I ≌ CoherentFormalModule Y (I.comap e.inv)) := by

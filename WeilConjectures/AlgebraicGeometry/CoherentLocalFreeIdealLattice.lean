@@ -39,10 +39,8 @@ set_option maxHeartbeats 400000 in
 -- Finite-generator transport and several image comparisons need extra elaboration heartbeats.
 /-- A local map from a finite closed free source extends from an ideal lattice.
 The lattice inclusion is invertible over the given open; no injectivity of the
-extended map or generic stalk hypothesis on the target is asserted.
-
-Source: Stacks Project, Tag 01YB, applied to a closed free source as in the final
-paragraph of Tag 01YE, and Tag 01Y6 for coherence of the closed free source. -/
+extended map or generic stalk hypothesis on the target is asserted
+(Stacks, Tags 01YB, 01YE and 01Y6). -/
 theorem coherent_local_free_ideal_lattice
     {X Z : Scheme.{u}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i]

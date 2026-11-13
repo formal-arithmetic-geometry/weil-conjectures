@@ -45,8 +45,8 @@ private theorem tensorQuasicoherent {A B : Scheme.{u}} (f : A ⟶ B)
 
 -- Compare tensor-product scalar instances and sectionwise module morphisms.
 /-- Over affine objects, tensoring coefficient sections with the target ring gives
-sections on the target, with the unit-normalized restriction formula.
-Source: Stacks Project, Tags 01I9, 01IA and 03DR. -/
+sections on the target, with the unit-normalized restriction formula
+(Stacks, Tags 01I9, 01IA and 03DR). -/
 theorem exists_etaleAffineTensorSectionsEquiv
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U V : X.Etale) (a : V ⟶ U) (hU : IsAffine U.left) (hV : IsAffine V.left) :

@@ -20,8 +20,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Derived pullback preserves the degree-zero structure sheaf.
-Source: Stacks Project, Tags 06YD, 06YJ and 0096. -/
+/-- Derived pullback preserves the degree-zero structure sheaf (Stacks, Tags 06YD, 06YJ and 0096).
+-/
 theorem nonempty_derivedPullback_structureSheaf_iso
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

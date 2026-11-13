@@ -29,10 +29,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- If an ideal has zero intersection with the ideal of a closed immersion, restriction
 identifies its product with an invertible module with the product of its image ideal
-and the pulled-back module, for every linear tensor-power comparison `e`.
-
-Source: Stacks Project, Varieties Remark 09NW, final sentence, and Lemma 09NX, displayed
-conductor equality. -/
+and the pulled-back module, for every linear tensor-power comparison `e`
+(Stacks, Tags 09NW and 09NX). -/
 theorem closedImmersion_disjointIdeal_twist {Y X : Scheme.{u}} (i : X ⟶ Y)
     [IsClosedImmersion i] (I : Y.IdealSheafData)
     (hzero : ∀ U : Y.Opens, I.idealOfOpens U ⊓ i.ker.idealOfOpens U = ⊥)

@@ -29,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Restricting a compactification algebraization whose support avoids the boundary
-has proper support. Source: Stacks Project, Theorem 088E, the paragraph beginning
-"Thus" after the boundary-support argument. -/
+has proper support (Stacks, Tag 088E). -/
 private theorem compactificationRestriction_support
     {S P Y : Scheme.{u}} [IsLocallyNoetherian P]
     (p : P ⟶ S) [IsProper p] (j : Y ⟶ P) [IsOpenImmersion j]
@@ -111,9 +110,8 @@ private theorem closed_subset_avoids_boundary
     exact hIM
   exact hy.2 (hCU ⟨hy.1, hyV⟩)
 
-/-- Proper support for the algebraization constructed on a proper compactification.
-Source: Stacks Project, Theorem 088E, the displayed support equation and the following
-boundary-support and restriction paragraphs. -/
+/-- Proper support for the algebraization constructed on a proper compactification
+(Stacks, Tag 088E). -/
 theorem chow_algebraization_candidate_support
     (A : Type u) [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {P Y : Scheme.{u}} [IsLocallyNoetherian P]

@@ -21,8 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Affine sections of a coherent formal module are the quotients of their limit.
-Source: Stacks Project, Lemma 087W, especially the projection-kernel calculation. -/
+/-- Affine sections of a coherent formal module are the quotients of their limit (Stacks, Tag 087W).
+-/
 theorem coherentFormalModule_affine_projections
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I) (V : X.affineOpens) (n : ℕ) :

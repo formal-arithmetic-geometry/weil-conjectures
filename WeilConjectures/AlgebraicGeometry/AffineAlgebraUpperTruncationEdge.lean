@@ -34,7 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Direct image preserves finite limits, since underlying sections are evaluated on
-inverse-image opens. Source: Stacks Project, Tag 079V. -/
+inverse-image opens (Stacks, Tag 079V). -/
 theorem affineAlgebraDirectImage_preservesFiniteLimits
     {X Y : Scheme.{v}} (f : X ⟶ Y) :
     PreservesFiniteLimits (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)) := by
@@ -271,9 +271,8 @@ private theorem upperTruncation_edge_of_lowerIso
 
 
 /-- The derived upper-truncation edge is an isomorphism and sends the canonical image
-of a cycle to its original homology-sheaf class. K-injectivity is not assumed here.
-Source: Stacks Project, Tag 0AVW, cohomology display and its omitted detail;
-Tag 08D4 (2) and (3), N = 1, and Tag 05TC. -/
+of a cycle to its original homology-sheaf class. K-injectivity is not assumed here
+(Stacks, Tags 0AVW, 08D4 and 05TC). -/
 theorem affine_algebra_upper_truncation_edge
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

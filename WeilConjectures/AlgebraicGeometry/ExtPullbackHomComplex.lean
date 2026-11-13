@@ -144,8 +144,8 @@ private theorem ext_homComplex_naturality
   rw [Cochain.fromSingleEquiv_fromSingleMk]
 
 
-/-- Ext pullback on the unevaluated Hom complex of a chosen injective resolution.
-Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA. -/
+/-- Ext pullback on the unevaluated Hom complex of a chosen injective resolution
+(Stacks, Tags 06XR, 01F8, 01F9 and 01FA). -/
 theorem extPullback_homComplex {X X' : Scheme.{u}} (g : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
     (φ : ((upperStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℤ)).obj

@@ -73,9 +73,8 @@ private theorem etale_on_open_pullback_comp
   exact het
 
 /-- Étaleness on a fixed affine triple descends and persists at all later stages.
-No quasi-compactness or quasi-separatedness of the ambient schemes is required.
-
-Source: Stacks Project, Limits, Tag 07RP (the affine reduction), Algebra, Tag 07RI. -/
+No quasi-compactness or quasi-separatedness of the ambient schemes is required
+(Stacks, Tags 07RP and 07RI). -/
 theorem Etale.exists_stage_on_affine_chart
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

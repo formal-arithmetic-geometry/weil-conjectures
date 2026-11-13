@@ -96,8 +96,7 @@ private theorem pasted_comparison
 end
 
 /-- Restricting a coefficient map across two commutative squares agrees with
-restriction across their pasted rectangle, in the composition coordinates.
-Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback. -/
+restriction across their pasted rectangle, in the composition coordinates (Stacks, Tag 0D5S). -/
 theorem coefficient_square_pasting
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

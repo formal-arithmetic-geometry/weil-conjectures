@@ -33,7 +33,7 @@ local instance instHasColimitsOfShape_derivedQCohDirectSumsAux (X : Scheme.{u}) 
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
-/-- The ambient derived category of sheaves of modules has coproducts. (Stacks, Tag 08DT) -/
+/-- The ambient derived category of sheaves of modules has coproducts (Stacks, Tag 08DT). -/
 theorem derivedAmbientHasCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     HasCoproducts.{u} (schemeDerivedCategory X) := by
@@ -47,7 +47,7 @@ theorem derivedAmbientHasCoproducts (X : Scheme.{u})
   exact hasCoproducts_of_colimit_cofans (fun E ↦ c E)
     (fun E ↦ (derivedAmbientDirectSums X _ E (K E) (e E)).1.some)
 
-/-- Quasi-coherent cohomology is closed under ambient derived coproducts. (Stacks, Tag 08DT) -/
+/-- Quasi-coherent cohomology is closed under ambient derived coproducts (Stacks, Tag 08DT). -/
 theorem schemeDerivedQCohClosedUnderCoproducts (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (I : Type u) :

@@ -22,9 +22,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
-/-- A constant trivialization over P extends coherently to every scheme over P.
-Source: Stacks Project, Tags 03CB and 03CC (composition of inverse images),
-and Tag 0A3H, final paragraph (pullback of a constant sheaf). -/
+/-- A constant trivialization over P extends coherently to every scheme over P
+(Stacks, Tags 03CB, 03CC and 0A3H). -/
 theorem etaleConstantTrivializationPullback
     (S P : Scheme.{u}) (s : P ⟶ S)
     (E : Sheaf S.smallEtaleTopology (Type (u + 1)) ⥤ Type (u + 1))

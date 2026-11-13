@@ -29,8 +29,7 @@ set_option autoImplicit false
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Constant-integer Ext in the standard large model computes terminal evaluation,
-naturally in the coefficient sheaf.
-Source: Stacks Project, Tags 01FT and 06XP, Lemma 13.27.2(1). -/
+naturally in the coefficient sheaf (Stacks, Tags 01FT and 06XP). -/
 theorem etaleCohomologyNaturalDerivedEvaluation
     (X : Scheme.{u}) (V : X.Etale) (hV : IsTerminal V) :
     let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u} ⋙

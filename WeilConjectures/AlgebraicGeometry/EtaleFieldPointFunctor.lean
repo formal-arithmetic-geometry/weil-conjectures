@@ -73,8 +73,7 @@ noncomputable def etaleFieldPointFunctor :
     simp
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The geometric-point functor is full and faithful.
-Source: Stacks Project, Tag 03QR, the equivalence assertion. -/
+/-- The geometric-point functor is full and faithful (Stacks, Tag 03QR). -/
 theorem etaleFieldPointFunctor_fullyFaithful :
     (etaleFieldPointFunctor K Ksep).Full ∧ (etaleFieldPointFunctor K Ksep).Faithful := by
   classical

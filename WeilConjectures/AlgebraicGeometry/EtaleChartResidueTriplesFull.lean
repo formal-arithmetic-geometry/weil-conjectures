@@ -48,7 +48,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A functor from pointed affine chart neighbourhoods to residue-field triples compatible with
-the chart data is full. (Stacks, Tags 04HX and 04HT) -/
+the chart data is full (Stacks, Tags 04HX and 04HT). -/
 theorem etale_chart_residue_triples_full
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]

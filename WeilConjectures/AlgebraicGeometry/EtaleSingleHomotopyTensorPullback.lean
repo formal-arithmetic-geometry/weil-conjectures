@@ -75,8 +75,8 @@ private lemma singleCochainTensorIso_pullback
     CochainComplex.ιTensorObj_whiskerLeft_f]
 
 /-- The single/termwise-pullback comparison preserves the tensor comparison after
-passing to the homotopy category. No flatness hypothesis is required.
-Source: Stacks, Cohomology on Sites, Tags 06YU and 07A4, termwise tensor comparison. -/
+passing to the homotopy category. No flatness hypothesis is required (Stacks, Tags 06YU and 07A4).
+-/
 theorem singleHomotopyTensorIso_pullback
     (U : C ⥤ D) [U.Additive] [U.Monoidal] [U.IsLeftAdjoint]
     (L M : C) :

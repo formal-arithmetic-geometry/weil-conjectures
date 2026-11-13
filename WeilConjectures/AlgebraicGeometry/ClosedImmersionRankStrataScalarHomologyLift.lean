@@ -79,10 +79,8 @@ private theorem rank_term_stalk_zero
 
 
 /-- A scalar map from one closed rank support lifts to the derived object when
-its other cohomology degrees are supported on the other rank strata.
-
-Source: Stacks, Tag 0BQZ (single-degree truncation), and Cohomology, Tags
-08BS and 08BT (exact extension by zero and its adjunction). -/
+its other cohomology degrees are supported on the other rank strata
+(Stacks, Tags 0BQZ, 08BS and 08BT). -/
 theorem closedImmersion_rankStrata_scalar_homology_lift
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u}

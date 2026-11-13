@@ -20,8 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Two maps from a local spectrum to an etale scheme over the same base agree if
-some field-valued point over the closed point makes them agree.
-Source: Stacks Project, Tag 08HQ, uniqueness, and Tag 02GE (open diagonal). -/
+some field-valued point over the closed point makes them agree (Stacks, Tags 08HQ and 02GE). -/
 theorem etalePointedMapRigidity
     {B : CommRingCat.{v}} [IsLocalRing B]
     {Ω : Type v} [Field Ω] (β : B →+* Ω) [IsLocalHom β]

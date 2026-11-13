@@ -29,9 +29,8 @@ private lemma stalk_range_congr
   subst hg
   rfl
 
-/-- Target restriction sends the image of base change into the image of base change.
-
-Source: the commutative restriction square in Stacks Tag 0F07. -/
+/-- Target restriction sends the image of base change into the image of base change
+(Stacks, Tag 0F07). -/
 theorem baseChangeTargetStalkMap_mem_range {U V : Over T} (φ : U ⟶ V)
     (η : baseChangeSourceStalk Λ p g q F x V) :
     (baseChangeTargetStalkMap Λ p g q F x φ).hom

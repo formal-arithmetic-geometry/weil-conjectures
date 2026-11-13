@@ -541,9 +541,8 @@ private theorem lift_core
     Category.comp_id, Category.assoc] using hc
 
 /-- The inverse B exchanges commute with the three supporting-open shrinkings,
-up to the explicit mixed-neighborhood boundary. This stops before either Q exchange.
-Source: Stacks Project, more-etale.tex, vertical pasting (Tag 0F7C), horizontal
-pasting (Tag 0F7D), and the graph-triangle cancellation in Tag 0F7J. -/
+up to the explicit mixed-neighborhood boundary. This stops before either Q exchange
+(Stacks, Tags 0F7C, 0F7D and 0F7J). -/
 theorem etaleGraphProductShrinkLift
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

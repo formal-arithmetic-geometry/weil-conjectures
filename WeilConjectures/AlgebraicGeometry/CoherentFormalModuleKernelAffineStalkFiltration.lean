@@ -27,10 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- On an affine open, stabilized kernel stalks have the intersection filtration of
-one submodule of a finite completed module. No bound for this filtration is asserted.
-
-Source: Stacks Project, Lemmas 087W and 087X, affine calculation for claims (a) and (b),
-and Tags 01IB and 01IC for the affine module/sheaf correspondence. -/
+one submodule of a finite completed module. No bound for this filtration is asserted
+(Stacks, Tags 087W, 087X, 01IB and 01IC). -/
 theorem coherentFormalModule_kernel_affine_stalk_filtration
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

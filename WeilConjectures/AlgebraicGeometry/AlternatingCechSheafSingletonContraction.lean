@@ -21,9 +21,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The singleton projection admits the signed insertion contraction.
-Source: Stacks Project, Tag 02FU, insertion cancellation, with the increasing
-convention of Tag 01FM. -/
+/-- The singleton projection admits the signed insertion contraction (Stacks, Tags 02FU and 01FM).
+-/
 theorem alternatingCechSheafAugmentation_restrict_singleton_contraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

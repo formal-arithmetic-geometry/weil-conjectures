@@ -211,8 +211,8 @@ private theorem homTower_finiteComparison
   · intro x
     exact (homTower_map_comp X J U T M T (g ≫ f) x e.inv).symm
 
-/-- The finite-reduction Hom tower from a constant perfect local model is Mittag-Leffler.
-Source: Stacks Project, proetale.tex, Tags 09C5 and 09C6, the dual-complex calculation. -/
+/-- The finite-reduction Hom tower from a constant perfect local model is Mittag-Leffler
+(Stacks, Tags 09C5 and 09C6). -/
 theorem adicResidueHomTower_mittagLeffler
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

@@ -26,8 +26,8 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Affine pullback sections are finite sums of section-ring multiples of unit sections.
-Source: Stacks Project, Tags 01I9 and 01IA (affine pullback), 0097 (restriction). -/
+/-- Affine pullback sections are finite sums of section-ring multiples of unit sections
+(Stacks, Tags 01I9, 01IA and 0097). -/
 theorem coefficientTarget_section_generators
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

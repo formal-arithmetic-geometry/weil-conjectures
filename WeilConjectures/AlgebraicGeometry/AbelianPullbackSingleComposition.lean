@@ -23,8 +23,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The composition comparison of exact derived pullbacks agrees on single complexes
-with the underived comparison. Source: Stacks Project, Tag 09Z1, compatibility of
-comparison morphisms, and the levelwise construction of exact derived inverse image. -/
+with the underived comparison (Stacks, Tag 09Z1). -/
 theorem abelianPullbackSingleComposition {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (A : Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) :

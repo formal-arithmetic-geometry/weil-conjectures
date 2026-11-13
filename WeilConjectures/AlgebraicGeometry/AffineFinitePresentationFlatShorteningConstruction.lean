@@ -23,9 +23,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Cancel the excess top terms of a bounded affine finite-presentation flat complex,
-retaining finite presentation and a chain homotopy equivalence to the input.
-Source: Stacks Project, Tag 068V (bounded-projective residue criterion), with the
-explicit split cancellation argument; affine identification as in Tag 08EB. -/
+retaining finite presentation and a chain homotopy equivalence to the input
+(Stacks, Tags 068V and 08EB). -/
 theorem affine_finitePresentation_flat_shortening_construction (S : Scheme.{u})
     (hS : IsAffine S) (B : CochainComplex S.Modules ℤ) (b d : ℕ)
     (hBge : B.IsStrictlyGE 0) (hBle : B.IsStrictlyLE b)

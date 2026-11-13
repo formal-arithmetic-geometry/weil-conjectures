@@ -27,11 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 
 namespace AlgebraicGeometry.EtaleSimplicialMatching
 
-/-- A family on a finite nonempty subcomplex of a standard simplex extends locally.
-Source: Stacks, Tag 01GN. The singleton inclusion is fully faithful; its compatible
-families are represented by the Hom objects in Tags 017J and 017K. Apply finite-simplex
-lifting to the representing point of the given family, then evaluate its restriction
-identity at each simplex and use full faithfulness to return to the étale category. -/
+/-- A family on a finite nonempty subcomplex of a standard simplex extends locally
+(Stacks, Tags 01GN, 017J and 017K). -/
 theorem locally_extend_simplex {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (V : SimplicialObject X.Etale) (hV : IsEtaleHypercover V) (n : ℕ)
     (A : (Δ[n] : SSet.{t}).Subcomplex) [A.toSSet.Finite]

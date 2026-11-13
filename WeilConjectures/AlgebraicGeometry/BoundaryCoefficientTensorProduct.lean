@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 universe u
 noncomputable section
 
-/-- Move the ideal factor to the left and multiply the two tensor degrees.
-Source: Stacks Project, Tag 09MS, ideal coefficient tensor multiplication. -/
+/-- Move the ideal factor to the left and multiply the two tensor degrees (Stacks, Tag 09MS). -/
 def boundaryIdealTensorProduct {X : Scheme.{u}} (J L : X.Modules) (a b : ℕ) :
     L.tensorPow a ⊗ (J ⊗ L.tensorPow b) ⟶ J ⊗ L.tensorPow (a + b) :=
   (α_ _ _ _).inv ≫ (β_ _ _).hom ▷ _ ≫ (α_ _ _ _).hom ≫
@@ -45,10 +44,8 @@ private theorem boundaryIdealTensorProduct_interchange {X : Scheme.{u}}
     Iso.inv_hom_id_assoc]
 
 /-- The coefficient comparison repartitions a product into its coefficient and section blocks.
-This involves only tensor comparisons on Z, with no kernel, square-zero hypothesis, or lift.
-
-Source: Stacks Project, Tag 01CD (pullback of tensor products), and Tag 09MS,
-coherent-equation-ses (tensor powers of the ideal coefficient). -/
+This involves only tensor comparisons on Z, with no kernel, square-zero hypothesis, or lift
+(Stacks, Tags 01CD and 09MS). -/
 theorem boundaryCoefficientDegreeIso_tensor_product {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) [L.IsInvertible] (n e : ℕ) (V : Z.Opens)
     (q : Γ((tensorPullback j).obj (L.tensorPow (n * (e + 1))), V))

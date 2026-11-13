@@ -26,9 +26,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Evaluation defines an additive homomorphism on the geometric stalk of units.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
+/-- Evaluation defines an additive homomorphism on the geometric stalk of units
+(Stacks, Tags 03QU and 03QV). -/
 theorem exists_etale_units_stalk_evaluation (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

@@ -32,13 +32,12 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u})
 
-/-- The recorded sheaf tensor structure, specialized to O_X.
-Source: Stacks, 06Y7. -/
+/-- The recorded sheaf tensor structure, specialized to O_X (Stacks, Tag 06Y7). -/
 noncomputable local instance moduleTensor :
     MonoidalCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- O_X-modules admit functorial flat resolutions. Source: Stacks, 06Y7. -/
+/-- O_X-modules admit functorial flat resolutions (Stacks, Tag 06Y7). -/
 theorem schemeModule_hasFunctorialFlatResolution :
     Abelian.HasFunctorialFlatResolution
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := by

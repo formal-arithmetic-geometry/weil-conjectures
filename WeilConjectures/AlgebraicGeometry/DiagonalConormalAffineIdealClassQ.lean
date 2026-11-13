@@ -24,8 +24,8 @@ variable {X S : Scheme.{u}}
 -- The chart and scalar-action transports elaborate several nested sheaf module instances.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Affine diagonal cotangent equivalence and unit formula, assuming tensor coordinates.
-Source: Stacks Project, Tags 08S2, 01KJ, 01R3. -/
+/-- Affine diagonal cotangent equivalence and unit formula, assuming tensor coordinates
+(Stacks, Tags 08S2, 01KJ and 01R3). -/
 theorem diagonalConormal_affine_ideal_class_q (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     : letI : Algebra Γ(S, V.1) Γ(X, U.1) :=

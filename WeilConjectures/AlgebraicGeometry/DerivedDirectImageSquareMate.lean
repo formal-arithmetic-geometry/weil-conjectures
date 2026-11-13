@@ -24,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
-/-- The fixed direct-image composition comparison, typed on schemes.
-Source: Stacks Project, Tag 0D5T. -/
+/-- The fixed direct-image composition comparison, typed on schemes (Stacks, Tag 0D5T). -/
 noncomputable def schemeNormalizedDirectImageCompIso
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅
@@ -34,8 +33,8 @@ noncomputable def schemeNormalizedDirectImageCompIso
     f.toLRSHom.toShHom g.toLRSHom.toShHom)
 
 -- Checking canonical comparison choices expands derived-functor and sheaf instances.
-/-- The mate of the fixed pullback square is the normalized direct-image square.
-Source: Stacks Project, Tags 08HY and 0D5T. -/
+/-- The mate of the fixed pullback square is the normalized direct-image square
+(Stacks, Tags 08HY and 0D5T). -/
 theorem derivedDirectImage_square_mate
     {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (gX : X' ⟶ X)

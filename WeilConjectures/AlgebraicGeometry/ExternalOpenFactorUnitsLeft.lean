@@ -27,15 +27,13 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The open base change in the first factor, constructed by the pullback map.
-Source: Stacks Project, Tag 0BED. -/
+/-- The open base change in the first factor, constructed by the pullback map (Stacks, Tag 0BED). -/
 def externalOpenBaseChangeLeft (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (V : X.Opens) :
     Limits.pullback (V.ι ≫ f) g ⟶ Limits.pullback f g :=
   pullback.map (V.ι ≫ f) g f g V.ι (𝟙 Y) (𝟙 _) (by simp) (by simp)
 
-/-- The cartesian open base change is an open immersion.
-Source: Stacks Project, Tag 0BED. -/
+/-- The cartesian open base change is an open immersion (Stacks, Tag 0BED). -/
 instance externalOpenBaseChangeLeft_isOpenImmersion
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (V : X.Opens) :
     IsOpenImmersion (externalOpenBaseChangeLeft f g V) := by
@@ -98,8 +96,8 @@ private theorem sectionUnitLinear_bijective {A B : Scheme.{w}}
 
 -- The two mate computations and their sectionwise transports elaborate large module functors.
 /-- The factor comparisons carry the two unit sections to the local unit sections.
-This statement contains no tensor product of coefficients or sections.
-Source: Stacks Project, Tags 0096 and 0097; Tag 0BED, degree-zero restriction. -/
+This statement contains no tensor product of coefficients or sections
+(Stacks, Tags 0096, 0097 and 0BED). -/
 theorem exists_externalOpenFactorUnitsLeft
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : X.Opens) :

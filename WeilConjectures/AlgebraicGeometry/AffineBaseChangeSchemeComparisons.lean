@@ -28,10 +28,8 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Identify the explicitly constructed pushout diagram with geometric base change,
 including its colimit and its transition arrows. This is entirely a statement
-about rings and schemes; it contains no complexes or derived categories.
-
-Source: Stacks Project, Tag 01JO (affine fibre products), and Tag 09RE,
-affine calculation. -/
+about rings and schemes; it contains no complexes or derived categories
+(Stacks, Tags 01JO and 09RE). -/
 theorem exists_affineBaseChangeSchemeComparisons
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

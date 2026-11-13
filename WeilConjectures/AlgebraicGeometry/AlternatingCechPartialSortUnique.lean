@@ -21,9 +21,8 @@ set_option autoImplicit false
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The partial sorting filter has exactly one solution, including the empty tail.
-
-Source: Stacks Project, Tag 01FM, definition of sigma_a preceding equation 20.23.6.1. -/
+/-- The partial sorting filter has exactly one solution, including the empty tail
+(Stacks, Tag 01FM). -/
 theorem cechPartialSort_existsUnique (n : ℕ) (σ : Equiv.Perm (Fin n))
     (a : ℕ) (_ha : a ≤ n) :
     ∃! τ : Equiv.Perm (Fin n),

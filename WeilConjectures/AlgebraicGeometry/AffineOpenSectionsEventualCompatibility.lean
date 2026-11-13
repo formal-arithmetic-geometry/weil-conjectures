@@ -70,8 +70,8 @@ private theorem affine_stage_open_containment
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Two affine local representatives with the same inverse-image section agree over
-some later stage, without constructing or choosing a covering refinement.
-Source: Stacks Project, Tags 03Q6 and 09XM, equality-open and limit-containment arguments. -/
+some later stage, without constructing or choosing a covering refinement
+(Stacks, Tags 03Q6 and 09XM). -/
 theorem affineOpenSections_pair_eventual_agreement
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

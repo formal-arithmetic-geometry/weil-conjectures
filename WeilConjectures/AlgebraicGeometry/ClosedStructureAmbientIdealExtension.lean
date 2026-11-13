@@ -29,8 +29,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Extend a local map from a closed structure module using an ambient ideal power.
-Source: Stacks Project, Tag 01YB, with Tags 01QY and 01XZ. -/
+/-- Extend a local map from a closed structure module using an ambient ideal power
+(Stacks, Tags 01YB, 01QY and 01XZ). -/
 theorem closed_structure_ambient_ideal_extension
     {X W : Scheme.{u}} [IsNoetherian X]
     (i : W ⟶ X) [IsClosedImmersion i]

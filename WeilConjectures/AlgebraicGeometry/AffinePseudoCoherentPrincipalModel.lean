@@ -28,10 +28,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A bounded-above finite-free sheaf model on an open neighbourhood gives a
-pseudo-coherent localized module complex on every principal open contained in it.
-
-Source: Stacks Project, Tag 08E7, local-model comparison, using the affine derived
-comparison of Tag 06Z0. -/
+pseudo-coherent localized module complex on every principal open contained in it
+(Stacks, Tags 08E7 and 06Z0). -/
 theorem affine_pseudoCoherent_principal_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

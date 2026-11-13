@@ -63,8 +63,8 @@ private theorem stupidTailι_isIso_f
 
 /-- If the image complex is exact through r, its stupid tail fits into the triangle
 whose first term is the outgoing kernel placed in degree r. This is solely a
-homological-algebra statement: no finiteness, boundedness or perfectness is assumed.
-Source: Stacks Project, Tag 08EG, stupid truncations; Tag 0152, SES triangle. -/
+homological-algebra statement: no finiteness, boundedness or perfectness is assumed
+(Stacks, Tags 08EG and 0152). -/
 theorem exactFunctor_stupidTail_triangle
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {D : Type u₂} [Category.{v₂} D] [Abelian D]

@@ -25,9 +25,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Pullback along a commuting triangle, followed by the inverse-image comparison.
-Source: Stacks Project, Tag 01F7.
--/
+/-- Pullback along a commuting triangle, followed by the inverse-image comparison
+(Stacks, Tag 01F7). -/
 noncomputable def cohomologyTriangleMap {S X Y : Scheme.{u}}
     (f : X ⟶ Y) (a : Y ⟶ S) (b : X ⟶ S) (h : b = f ≫ a)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
@@ -36,9 +35,8 @@ noncomputable def cohomologyTriangleMap {S X Y : Scheme.{u}}
   (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f a b h).inv.app G) q).comp
     (cohomologyMap f (((a)^*[AddCommGrpCat.{u + 1}]).obj G) q)
 
-/-- A triangle map carries restriction from the base to restriction from the base.
-Source: Stacks Project, Tag 01F7.
--/
+/-- A triangle map carries restriction from the base to restriction from the base
+(Stacks, Tag 01F7). -/
 theorem cohomologyTriangleMap_restriction {S X Y : Scheme.{u}}
     (f : X ⟶ Y) (a : Y ⟶ S) (b : X ⟶ S) (h : b = f ≫ a)
     (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)
@@ -57,8 +55,7 @@ theorem cohomologyTriangleMap_restriction {S X Y : Scheme.{u}}
           (cohomologyMap (f ≫ a) G q x)) := congrArg _ hcomp
     _ = _ := by rw [← Sheaf.H.map_comp_apply]; simp
 
-/-- Triangle maps are unital and compose contravariantly over a fixed base.
-Source: Stacks Project, Cohomology, Section 20.14 (Tag 01F7). -/
+/-- Triangle maps are unital and compose contravariantly over a fixed base (Stacks, Tag 01F7). -/
 theorem cohomologyTriangleMap_laws
     (S : Scheme.{u}) (G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
     (∀ (X : Scheme.{u}) (a : X ⟶ S),

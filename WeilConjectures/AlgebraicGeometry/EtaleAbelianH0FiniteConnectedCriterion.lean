@@ -29,9 +29,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Abelian étale sections restrict isomorphically to a closed subscheme when every
-irreducible closed subset of every finite cover meets it in a nonempty connected set.
-
-Source: Stacks Project, Lemmas 59.82.4 and 59.82.2 (Tags 09ZG and 09ZF). -/
+irreducible closed subset of every finite cover meets it in a nonempty connected set
+(Stacks, Tags 09ZG and 09ZF). -/
 theorem isIso_abelian_globalSectionsUpperStarMap_of_finite_connected_closed_intersections
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

@@ -30,9 +30,8 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
-/-- Affine-local acyclicity is inherited by restriction to an open subscheme.
-Source: Stacks Project, Tag 0A51, induction step; inverse-image composition and
-base-change associativity, Stacks Project, Tag 03D3. -/
+/-- Affine-local acyclicity is inherited by restriction to an open subscheme
+(Stacks, Tags 0A51 and 03D3). -/
 theorem Etale.affine_local_acyclic_open_restriction
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

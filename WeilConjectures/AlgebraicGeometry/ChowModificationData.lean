@@ -30,10 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A Chow modification with its immersion into a finite projective space over the base
-and a nonempty open of the target over which it is an isomorphism.
-
-Source: Stacks Project, Theorem 088E, Chow modification paragraph, using Chow's lemma
-0200 and the reduced complement construction. -/
+and a nonempty open of the target over which it is an isomorphism (Stacks, Tags 088E and 0200). -/
 theorem exists_chow_modification_data
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))

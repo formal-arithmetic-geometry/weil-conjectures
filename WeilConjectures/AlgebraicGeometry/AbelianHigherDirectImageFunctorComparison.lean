@@ -122,10 +122,8 @@ private noncomputable def yonedaRestrictionIso
       exact (Category.assoc _ _ _).symm)
 
 /-- The sheafified raw derived-Hom functor is naturally isomorphic to higher
- direct image, in the coefficient sheaf. No qcqs or continuity hypothesis is used.
-
-Source: Stacks Project, Tag 03Q8, with Tags 072W
-and 0BKV for the sheafification calculation. -/
+ direct image, in the coefficient sheaf. No qcqs or continuity hypothesis is used
+(Stacks, Tags 03Q8, 072W and 0BKV). -/
 theorem nonempty_abelianHigherDirectImage_sheafificationFunctorIso
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℕ) :
     Nonempty

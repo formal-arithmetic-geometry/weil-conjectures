@@ -29,7 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The coproduct of modifications of distinct integral components is an isomorphism
-on a dense open of the reduced target. (Stacks, Tags 0BAJ and 0A3Q) -/
+on a dense open of the reduced target (Stacks, Tags 0BAJ and 0A3Q). -/
 theorem exists_dense_open_isIso_component_modifications
     (X : Scheme.{u}) [IsReduced X]
     (n : ℕ) (C : Fin n → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

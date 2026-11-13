@@ -15,8 +15,7 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
-/-- The initial upper-tail chart projection is an isomorphism.
-Source: Stacks Project, Tag 01ZR. -/
+/-- The initial upper-tail chart projection is an isomorphism (Stacks, Tag 01ZR). -/
 theorem affine_chart_section_ring_presentations_iso
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (j : I) {A : Scheme.{u}}

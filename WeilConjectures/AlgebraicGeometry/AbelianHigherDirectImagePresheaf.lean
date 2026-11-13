@@ -539,8 +539,7 @@ end AbelianComparison
 
 /-- The restricted cohomology presheaf `U ↦ Hom(h^* ℤ[U][0], K[q]) = H^q(U ×_X Y, K)` on `X_ét`,
 for `h : Y ⟶ X` and `K ∈ D⁺(Y_ét)`, where `ℤ[U]` is the sheafification of the free presheaf of
-abelian groups on the representable presheaf of `U`.
-Source: Stacks Project, Tag 03Q8. -/
+abelian groups on the representable presheaf of `U` (Stacks, Tag 03Q8). -/
 noncomputable abbrev higherDirectImageRawPresheafAbelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
@@ -549,8 +548,7 @@ noncomputable abbrev higherDirectImageRawPresheafAbelian {X Y : Scheme.{u}} (h :
 /-- The canonical map from the restricted cohomology presheaf to the sections of
 `Rᵠh_* K`: a class `Hom(h^* ℤ[U][0], K[q])` is sent, by the adjunction `h^* ⊣ Rh_*`, to a map
 `ℤ[U][0] ⟶ Rh_*(K[q])`, whose degree `0` homology `ℤ[U] ⟶ H⁰(Rh_*(K[q])) = Rᵠh_* K` is
-evaluated at the generator of `ℤ[U]`.
-Source: Stacks Project, Tag 03Q8. -/
+evaluated at the generator of `ℤ[U]` (Stacks, Tag 03Q8). -/
 noncomputable def higherDirectImagePresheafToHomologyAbelian {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     higherDirectImageRawPresheafAbelian h q K ⟶
@@ -597,8 +595,7 @@ theorem isLocallyBijective_higherDirectImagePresheafToHomologyAbelian {X Y : Sch
 /-- **Higher direct image is the sheafified restricted cohomology presheaf.** For `h : Y ⟶ X`
 and `K ∈ D⁺(Y_ét)`, the canonical map `higherDirectImagePresheafToHomologyAbelian` from the
 presheaf `U ↦ H^q(U ×_X Y, K)` to `Rᵠh_* K` induces an isomorphism from its sheafification to
-`Rᵠh_* K` (`toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom`).
-Source: Stacks Project, Tag 03Q8. -/
+`Rᵠh_* K` (`toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom`) (Stacks, Tag 03Q8). -/
 noncomputable def higherDirectImageIsoSheafificationAbelian {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
@@ -625,8 +622,7 @@ theorem toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom {X Y : Sch
   exact AbelianComparison.toSheafify_comp_sheafifyIsoOfLocallyBijective_hom _
 
 /-- The sheafified restricted cohomology presheaf is isomorphic to `Rᵠh_* K`; the canonical
-isomorphism is `higherDirectImageIsoSheafificationAbelian`.
-Source: Stacks Project, Tag 03Q8. -/
+isomorphism is `higherDirectImageIsoSheafificationAbelian` (Stacks, Tag 03Q8). -/
 theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X)
     (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     Nonempty
@@ -651,8 +647,7 @@ theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}}
   exact ⟨higherDirectImageIsoSheafificationAbelian h q K⟩
 
 /-- The case of a sheaf of `nonempty_higherDirectImage_iso_sheafification_abelian`, with the
-canonical isomorphism `higherDirectImageIsoSheafificationAbelian h q (F[0])`.
-Source: Stacks Project, Tag 03Q8. -/
+canonical isomorphism `higherDirectImageIsoSheafificationAbelian h q (F[0])` (Stacks, Tag 03Q8). -/
 theorem nonempty_higherDirectImage_iso_sheafification_abelian_single
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :

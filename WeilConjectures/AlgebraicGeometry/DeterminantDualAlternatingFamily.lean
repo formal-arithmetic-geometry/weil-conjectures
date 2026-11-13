@@ -26,8 +26,7 @@ open Scheme.Modules (wedge)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On a fixed open, the determinant pairing gives a unique alternating family of
-internal functionals, characterized on wedges over every subopen.
-Source: Stacks Project, Tag 0BRT, determinant inversion; Tag 03CY, module sheafification. -/
+internal functionals, characterized on wedges over every subopen (Stacks, Tags 0BRT and 03CY). -/
 theorem exterior_dual_pairing_local (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens) :
     ∃! A : ((Scheme.Modules.dual M).val.obj (op U)) [⋀^Fin n]→ₗ[X.presheaf.obj (op U)]

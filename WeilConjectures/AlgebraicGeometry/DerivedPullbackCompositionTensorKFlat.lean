@@ -29,9 +29,7 @@ variable [∀ Z : Scheme.{u},
 
 -- The selected counits and tensor model maps have large dependent types.
 /-- The fixed composition comparison preserves the normalized tensorator on
-localized K-flat complexes.
-Source: Stacks Project, cohomology.tex, Lemma 079U and Remark 08HY;
-composition of derived pullbacks as in Tag 0D5S. -/
+localized K-flat complexes (Stacks, Tags 079U, 08HY and 0D5S). -/
 theorem derivedPullbackComposition_tensor_kFlat
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (P N : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ)

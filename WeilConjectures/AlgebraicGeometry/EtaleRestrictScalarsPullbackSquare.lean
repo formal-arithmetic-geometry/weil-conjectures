@@ -539,10 +539,7 @@ private lemma coefficient_square
   exact (coefficient_comp_app φ e g (e ≫ g) rfl L).symm
 
 /-- Coefficient restriction commutes with the comparison of the two composite
-inverse images attached to a commutative square.
-
-Source: Stacks Project, Remark 21.19.3, Tag 07A7, and the composition of inverse images
-in the definition of the exchange map. -/
+inverse images attached to a commutative square (Stacks, Tag 07A7). -/
 theorem pullbackSquareComparison_restrictScalars
     {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}

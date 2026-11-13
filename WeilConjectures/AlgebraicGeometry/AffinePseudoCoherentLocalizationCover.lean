@@ -27,10 +27,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A pseudo-coherent associated-sheaf complex has pseudo-coherent module localizations
-on a finite principal-open cover. This asserts only the local models, not their gluing.
-
-Source: Stacks Project, Tag 08E7, finite-cover and local-model steps, using the local
-finite-free characterization in Tags 08CB and 08E5. -/
+on a finite principal-open cover. This asserts only the local models, not their gluing
+(Stacks, Tags 08E7, 08CB and 08E5). -/
 theorem affine_pseudoCoherent_localization_cover (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wX}

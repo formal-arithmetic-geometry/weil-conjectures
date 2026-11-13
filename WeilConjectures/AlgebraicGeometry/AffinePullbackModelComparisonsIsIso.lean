@@ -44,9 +44,7 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- Canonical comparison from localized sections to derived affine sections.
-Source: Stacks Project, Tag 06Z0, ordinary-to-derived comparison.
--/
+/-- Canonical comparison from localized sections to derived affine sections (Stacks, Tag 06Z0). -/
 def affineModelSectionsComparison (A : CommRingCat.{u})
     (K : CochainComplex (SheafOfModules.{u} (moduleRings (Spec A).toRingedSpace)) ℤ) :
     DerivedCategory.Q.obj
@@ -59,9 +57,8 @@ def affineModelSectionsComparison (A : CommRingCat.{u})
       ((DerivedCategory.quotientCompQhIso _).hom.app K) ≫
     (affineGlobalSectionsDerivedIso (𝟙 (Spec A))).hom.app (DerivedCategory.Q.obj K)
 
-/-- The fixed left-derived counit, transported from homotopy to complex localization.
-Source: Stacks Project, Tag 0D5S; the same counit fixes canonicalPullbackAdjunction.
--/
+/-- The fixed left-derived counit, transported from homotopy to complex localization
+(Stacks, Tag 0D5S). -/
 def affineModelPullbackComparison {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     [(Scheme.Modules.tensorPullback g).Additive]
     (K : CochainComplex (SheafOfModules.{u} (moduleRings (Spec R).toRingedSpace)) ℤ) :

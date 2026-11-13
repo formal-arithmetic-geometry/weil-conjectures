@@ -32,10 +32,7 @@ namespace AlgebraicGeometry
 
 /-- For an étale object `V → X`, the unit followed by restriction along its diagonal
 maps `F(V)` to the global sections of the inverse image on `V`. Its inverse is the
-restriction identification in the last clause of continuity.
-
-Source: Stacks Project, Étale Cohomology, Tag 03S2, inverse image along an étale morphism
-is restriction. -/
+restriction identification in the last clause of continuity (Stacks, Tag 03S2). -/
 noncomputable def etaleSetRestrictionUnit
     {X : Scheme.{u}} (V : X.Etale) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     F.obj.obj (op V) ⟶

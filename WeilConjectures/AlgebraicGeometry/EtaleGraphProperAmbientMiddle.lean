@@ -419,10 +419,8 @@ private theorem cancel_intersection_transport
   rw [h₂, h₁]
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
 
-/-- The intersection graph comparison is natural for a proper ambient map.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, vertical and horizontal
-pasting in the proper-projection grid. -/
+/-- The intersection graph comparison is natural for a proper ambient map
+(Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleGraphProperAmbientMiddle
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

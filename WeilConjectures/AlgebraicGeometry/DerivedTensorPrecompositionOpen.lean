@@ -378,9 +378,8 @@ private theorem tensorLocalIso (X : Scheme.{u}) (U : X.Opens)
     (NatIso.isIso_map_iff c (a ▷ P)).mp inferInstance
   exact isIso_of_reflects_iso _ Ed
 
-/-- Pull back a perfect map to the tensor unit and tensor it with P.
-Source: Stacks Project, Tags 08DW(1), 08DX(1), and Tag 0E4G, Lemma 48.4.4,
-last paragraph. -/
+/-- Pull back a perfect map to the tensor unit and tensor it with P
+(Stacks, Tags 08DW, 08DX and 0E4G). -/
 theorem exists_derivedTensor_precomposition_open
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

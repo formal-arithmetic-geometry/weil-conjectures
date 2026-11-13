@@ -27,10 +27,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- The derived-unit pullback on global cohomology of a degree-zero abelian sheaf
-agrees with the Ext definition of cohomology pullback.
-
-Source: Stacks Project, sites-cohomology.tex, Section 21.2 (definition of cohomology)
-and Tag 08J6; cohomology.tex, Tag 01F8 and equations 01F9 and 01FA. -/
+agrees with the Ext definition of cohomology pullback (Stacks, Tags 08J6, 01F8, 01F9 and 01FA). -/
 theorem Etale.exists_addEquiv_derivedGlobal_ext_pullback
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :

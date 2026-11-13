@@ -27,9 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 /-- Derive the homotopy tensor-Hom adjunction using K-flat and K-injective
 resolutions. Unlike the bundled upstream closed instance, this argument needs
-Grothendieck abelianness only in the scheme universe.
-Source: the argument of `DerivedCategory.tensorHomAdjunctionQhObj` in
-WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed; Stacks, Tag 06YH. -/
+Grothendieck abelianness only in the scheme universe (Stacks, Tag 06YH). -/
 private theorem derivedTensorLeft_isLeftAdjoint (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) : (tensorLeft E).IsLeftAdjoint := by

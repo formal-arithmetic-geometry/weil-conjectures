@@ -20,8 +20,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- On an affine neighborhood, the pushforward stalk is the localization of the
-sections of its inverse image at the images of functions not vanishing at the point.
-Source: Stacks Project, Tag 0AVW, affine stalk calculation. -/
+sections of its inverse image at the images of functions not vanishing at the point
+(Stacks, Tag 0AVW). -/
 theorem affine_pushforward_stalk_isLocalization
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f]
     {U : Y.Opens} (hU : IsAffineOpen U) (y : U) :

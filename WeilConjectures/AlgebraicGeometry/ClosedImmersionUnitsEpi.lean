@@ -23,8 +23,8 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction of units along a closed immersion is an epimorphism of abelian sheaves.
-Source: Stacks Project, Varieties, Lemma 09NY, opening short exact sequence. -/
+/-- Restriction of units along a closed immersion is an epimorphism of abelian sheaves
+(Stacks, Tag 09NY). -/
 theorem epi_unitsSheafToPushforward_of_isClosedImmersion
     {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     Epi (unitsSheafToPushforward i) := by

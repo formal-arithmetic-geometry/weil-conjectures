@@ -25,8 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Inverse image on abelian sheaves on the small étale site is exact, additive, preserves
-kernels and cokernels, and carries short exact sequences to short exact sequences.
-Source: Stacks Project, Tag 03Q1(1), with exactness as in Tag 0034. -/
+kernels and cokernels, and carries short exact sequences to short exact sequences
+(Stacks, Tags 03Q1 and 0034). -/
 theorem upperStar_abelian_exact {U V : Scheme.{u}} (f : U ⟶ V) :
     PreservesFiniteLimits (upperStar AddCommGrpCat.{u + 1} f) ∧
     PreservesFiniteColimits (upperStar AddCommGrpCat.{u + 1} f) ∧

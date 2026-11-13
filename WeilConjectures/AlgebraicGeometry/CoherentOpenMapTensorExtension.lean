@@ -27,7 +27,7 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A local morphism extends from an ideal-power tensor product. (Stacks, Tag 01YB). -/
+/-- A local morphism extends from an ideal-power tensor product (Stacks, Tag 01YB). -/
 theorem coherent_open_map_tensor_extension
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (H F : X.Modules)

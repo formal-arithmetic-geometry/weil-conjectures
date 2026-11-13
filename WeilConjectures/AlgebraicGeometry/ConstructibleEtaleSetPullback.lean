@@ -28,7 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Pullback of an abelian etale sheaf preserves constructibility of its underlying
-set sheaf, including the finiteness of its geometric stalks. (Stacks, Tag 095A) -/
+set sheaf, including the finiteness of its geometric stalks (Stacks, Tag 095A). -/
 theorem isConstructibleEtaleSheafOfSets_upperStar
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

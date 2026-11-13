@@ -20,9 +20,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Proper pushforward preserves support proper over a separated finite-type base.
-Source: Stacks Project, Theorem 088E, the paragraph on the support of H, using
-Tags 02O5, 0CYQ (1), and 0CYN (https://stacks.math.columbia.edu/tag/088E). -/
+/-- Proper pushforward preserves support proper over a separated finite-type base
+(Stacks, Tags 088E, 02O5, 0CYQ and 0CYN). -/
 theorem chow_algebraization_pushforward_support
     {S Z Y : Scheme.{u}} [IsNoetherian Z]
     (f : Z ⟶ S) [IsSeparated f] [LocallyOfFiniteType f]

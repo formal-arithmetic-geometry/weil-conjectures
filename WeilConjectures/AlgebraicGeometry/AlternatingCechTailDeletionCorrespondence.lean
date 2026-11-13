@@ -24,8 +24,7 @@ universe v
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Filtered outgoing tail indices, retaining original labels.
-Source: Stacks 01FM, equation 20.23.6.1. -/
+/-- Filtered outgoing tail indices, retaining original labels (Stacks, Tag 01FM). -/
 abbrev cechTailOutgoingIndex {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×
@@ -34,8 +33,8 @@ abbrev cechTailOutgoingIndex {I : Type v} [LinearOrder I] (p : ℕ)
       cechJunction x.1 x.2.2.1 x.2.1 x.2.2.2 ≠ x.1 x.2.1) ∧
       ¬ x.2.2.2.val < x.2.1.val}
 
-/-- Filtered incoming indices whose omitted label follows the junction in stable order.
-Source: Stacks 01FM, equation 20.23.6.1. -/
+/-- Filtered incoming indices whose omitted label follows the junction in stable order
+(Stacks, Tag 01FM). -/
 abbrev cechTailIncomingIndex {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I) :=
   {y : Fin (p + 2) × Equiv.Perm (Fin (p + 1)) × Fin (p + 1) ×

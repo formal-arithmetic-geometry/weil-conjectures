@@ -44,10 +44,7 @@ private theorem quotient_unit_epi
   exact hy
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Lift a reduced map into an acyclic reduced complex strictly.
-
-Source: Stacks Project, Tag 0BCA, dotted-arrow paragraph; Derived Categories,
-Tag 0649 (lifting maps from bounded-above projective complexes). -/
+/-- Lift a reduced map into an acyclic reduced complex strictly (Stacks, Tags 0BCA and 0649). -/
 theorem exists_complex_lift_strict_map
     (R : Type u) [CommRing R] (I : Ideal R)
     (K A : CochainComplex (ModuleCat.{max u v} R) ℤ)

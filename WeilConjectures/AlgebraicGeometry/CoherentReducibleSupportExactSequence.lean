@@ -29,10 +29,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The reducible-support case gives a short exact sequence with two smaller supports.
-
-Source: Stacks Project, Tag 01YD, Lemma 30.12.1, and Tag 01YF, Lemma 30.12.3,
-reducible-support paragraph (https://stacks.math.columbia.edu/tag/01YD). -/
+/-- The reducible-support case gives a short exact sequence with two smaller supports
+(Stacks, Tags 01YD and 01YF). -/
 theorem exists_coherent_submodule_of_reducible_support
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X)

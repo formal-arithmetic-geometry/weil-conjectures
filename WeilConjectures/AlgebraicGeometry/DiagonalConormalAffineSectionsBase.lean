@@ -25,8 +25,8 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
-/-- The affine conormal equivalence and its formula for one normalized derivation.
-Source: Stacks Project, Tags 01KJ, 01R3, 08S2 and 00RW. -/
+/-- The affine conormal equivalence and its formula for one normalized derivation
+(Stacks, Tags 01KJ, 01R3, 08S2 and 00RW). -/
 theorem exists_diagonalConormal_affine_sections_base (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1)
     (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)

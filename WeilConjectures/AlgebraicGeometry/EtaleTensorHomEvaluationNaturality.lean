@@ -30,8 +30,8 @@ noncomputable section
 
 set_option autoImplicit false
 
-/-- The comparison of tensor pullback with abstract pullback normalized by their units.
-Source: Stacks Project, Tag 0096; uniqueness of left adjoints. -/
+/-- The comparison of tensor pullback with abstract pullback normalized by their units
+(Stacks, Tag 0096). -/
 def tensorSectionsPullbackComparison {X Y : Scheme.{u}} (f : Y ⟶ X) :
     tensorPullback f ≅ pullback f :=
   Adjunction.leftAdjointUniq (Classical.choose (exists_tensorPullbackAdjunction f))

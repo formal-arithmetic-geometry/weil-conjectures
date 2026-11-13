@@ -113,9 +113,7 @@ private theorem telescope {A : Type*} [AddCommGroup A] (f : ℕ → A) (n : ℕ)
   rw [Fin.sum_univ_eq_sum_range (fun i ↦ f i - f (i + 1)) n]
   exact Finset.sum_range_sub' f n
 
-/-- The first sorting operator contracts identity minus stable sorting.
-
-Source: Stacks 01FM, equation 20.23.6.1. -/
+/-- The first sorting operator contracts identity minus stable sorting (Stacks, Tag 01FM). -/
 theorem cechFirstSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) :

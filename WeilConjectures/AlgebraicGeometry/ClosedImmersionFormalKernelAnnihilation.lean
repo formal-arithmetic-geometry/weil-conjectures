@@ -30,9 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- A commuting pushforward square transports annihilation of a formal kernel by
-an ideal power to annihilation by the inverse image ideal.
-
-Source: Stacks Project, Theorem 088E, paragraphs 2--4, and Tags 087T, 087W, 087X. -/
+an ideal power to annihilation by the inverse image ideal (Stacks, Tags 088E, 087T, 087W and 087X).
+-/
 theorem closedImmersion_formalKernel_annihilated
     {X Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z]
     (j : Z ⟶ X) [IsClosedImmersion j] (Q : X.IdealSheafData)

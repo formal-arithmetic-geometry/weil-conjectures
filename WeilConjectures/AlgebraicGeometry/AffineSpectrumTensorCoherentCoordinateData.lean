@@ -36,8 +36,7 @@ private theorem tensor_additive_smul
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The canonical additive pullback-stalk comparison on ordinary complexes.
-Source: Stacks Project, Tag 0098, stalk pullback formula. -/
+/-- The canonical additive pullback-stalk comparison on ordinary complexes (Stacks, Tag 0098). -/
 def ordinaryIsoPullbackStalkComplexIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j]
     (y : Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ) :=
@@ -58,9 +57,8 @@ def ordinaryIsoPullbackStalkComplexIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsIso j
       (.up ℤ)).symm.app ((E.mapHomologicalComplex (.up ℤ)).obj P)
 
 -- The stalk comparison has several nested complex functor compositions.
-/-- Canonical affine coordinates with chain-level pullback-stalk coherence.
-Source: Stacks Project, Tag 0098 (stalk pullback formula), Tag 0096 (adjunction),
-and Tag 0DJ8 (affine reduction). -/
+/-- Canonical affine coordinates with chain-level pullback-stalk coherence
+(Stacks, Tags 0098, 0096 and 0DJ8). -/
 theorem exists_affineSpectrum_tensor_coherent_coordinate_data
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

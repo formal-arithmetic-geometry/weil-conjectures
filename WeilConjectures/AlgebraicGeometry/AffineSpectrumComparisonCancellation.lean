@@ -28,8 +28,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The inverse unit component of the constructed spectrum equivalence, with its
-pullback endpoints stated explicitly. No new choice of data is made.
-Source: Stacks Project, Tag 0D5S. -/
+pullback endpoints stated explicitly. No new choice of data is made (Stacks, Tag 0D5S). -/
 noncomputable def affineSpectrumUnitInv (X : Scheme.{u}) [IsAffine X]
     (K : schemeDerivedCategory X) :
     (derivedPullback X.toSpecΓ).obj ((derivedPullback X.isoSpec.inv).obj K) ⟶ K :=

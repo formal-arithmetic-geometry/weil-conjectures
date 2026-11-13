@@ -169,10 +169,8 @@ private noncomputable def affineSectionsIso (X : Scheme.{u}) [IsAffine X] :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- On any affine Noetherian scheme, the finite completed-module equivalence has
-its prescribed quotient-system realization and its natural section-limit realization.
-
-Source: Stacks Project, Tag 087W, with the canonical affine chart of Tag 01IB and
-finite-module completeness of Tag 00MA. -/
+its prescribed quotient-system realization and its natural section-limit realization
+(Stacks, Tags 087W, 01IB and 00MA). -/
 theorem coherentFormalModules_affine_global_comparison
     (X : Scheme.{u}) [IsNoetherian X] [IsAffine X] (J : X.IdealSheafData) :
     let A := Γ(X, ⊤)

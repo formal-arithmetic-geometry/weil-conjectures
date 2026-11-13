@@ -38,7 +38,7 @@ pullback of a module: the left-derived counit of `La^*` at `G[0]`, for a left-de
 structure of `La^*` over the termwise tensor pullback, followed by the identification of
 `a^*` applied to `G[0]` with `(a^*G)[0]`. Transposed under `La^* ⊣ Ra_*`, pinned to the
 same counit, this is the ordinary pullback unit in degree zero followed by
-`a_* ⟶ Ra_*`. Source: Stacks, Cohomology, Remark 08HY. -/
+`a_* ⟶ Ra_*` (Stacks, Tag 08HY). -/
 def IsDerivedModulePullbackComparison
     [∀ Y : Scheme.{uMB},
       HasDerivedCategory.{wMB} (SheafOfModules.{uMB} (moduleRings Y.toRingedSpace))]
@@ -63,8 +63,7 @@ def IsDerivedModulePullbackComparison
 
 /-- `φ` is the canonical module base-change map `Lg^*Rf_*(G[0]) ⟶ Rf_{T,*}((g_X^*G)[0])`:
 the derived base-change map of the chosen fibre square followed by the derived direct
-image of the derived-to-ordinary pullback comparison at `G`.
-Source: Stacks Project, Tag 0B91, clause (2), and Cohomology, Remark 08HY. -/
+image of the derived-to-ordinary pullback comparison at `G` (Stacks, Tags 0B91 and 08HY). -/
 def IsDerivedModuleBaseChangeMap
     [∀ Y : Scheme.{uMB},
       HasDerivedCategory.{wMB} (SheafOfModules.{uMB} (moduleRings Y.toRingedSpace))]

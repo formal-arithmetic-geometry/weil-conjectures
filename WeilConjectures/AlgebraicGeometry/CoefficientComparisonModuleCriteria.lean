@@ -17,8 +17,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- The canonical inverse image is fully faithful, descends continuous modules,
-and preserves and reflects constructibility.
-Source: Stacks Tags 099T, 099Y, 09AK and 09AL. -/
+and preserves and reflects constructibility (Stacks, Tags 099T, 099Y, 09AK and 09AL). -/
 theorem coefficientComparison_moduleCriteria (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     (constructibleComparisonPullback X A).Full ∧

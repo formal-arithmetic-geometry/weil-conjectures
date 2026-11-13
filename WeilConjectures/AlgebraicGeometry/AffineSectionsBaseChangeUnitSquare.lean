@@ -50,9 +50,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The right-adjoint base-change unit square after taking affine sections.
 This is an identity of maps over R, for arbitrary E. It constructs no extension
 isomorphism and requires no quasi-coherence. Only the canonical pullback unit
-is used: the passage to all L and m is a separate naturality argument.
-Source: Stacks, cohomology.tex, Tag 08HY and
-Tag 0D5T; perfect.tex, Tag 0AA7. -/
+is used: the passage to all L and m is a separate naturality argument
+(Stacks, Tags 08HY, 0D5T and 0AA7). -/
 theorem affineSectionsBaseChange_unit_square
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)

@@ -25,9 +25,8 @@ universe uCD wCD
 open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- Existence of normalized natural uncurrying maps, without asserting bijectivity.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, using
-sites-cohomology.tex, Tag 0A90 (Hom complexes). -/
+/-- Existence of normalized natural uncurrying maps, without asserting bijectivity
+(Stacks, Tags 08DJ and 0A90). -/
 theorem exists_canonicalDerivedTensorHomMap (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))] :
     ∃ t : ∀ K L M : schemeDerivedCategory X,

@@ -25,8 +25,8 @@ variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
-/-- The source finite reduction has its canonical transport to the finite quotient model.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL. -/
+/-- The source finite reduction has its canonical transport to the finite quotient model
+(Stacks, Tags 03EK and 03EL). -/
 theorem ordinaryReducedPull_sourceIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

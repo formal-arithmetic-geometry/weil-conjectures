@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 /-- The comparison for the actual left-Kan-extension inverse image of sets.
 Compose the constant-sheaf adjunction with the constructed inverse-image adjunction.
 Its right adjoint is global sections: base change preserves the terminal etale object.
-Uniqueness of left adjoints then gives this comparison, in the full value universe.
-Source: Stacks Project, Tags 03CB, 03CC, and 03P5. -/
+Uniqueness of left adjoints then gives this comparison, in the full value universe
+(Stacks, Tags 03CB, 03CC and 03P5). -/
 noncomputable def etaleSetConstantPullbackComparison
     {P U : Scheme.{u}} (h : U ⟶ P) :
     constantSheaf P.smallEtaleTopology (Type (u + 1)) ⋙ Scheme.etaleSetPullback h ≅

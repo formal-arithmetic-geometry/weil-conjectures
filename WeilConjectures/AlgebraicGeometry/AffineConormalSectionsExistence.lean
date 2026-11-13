@@ -23,9 +23,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
-/-- The affine conormal linear equivalence and its compatibility with the adjunction unit.
-Source: Stacks Project, Morphisms, Lemma 01R3 (2), together with Schemes, Tag 01I9
-and Algebra, Tag 00DF. -/
+/-- The affine conormal linear equivalence and its compatibility with the adjunction unit
+(Stacks, Tags 01R3, 01I9 and 00DF). -/
 theorem affine_conormal_sections_existence {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] :
       ∀ (U : X.affineOpens) (R : Type v) [CommRing R]

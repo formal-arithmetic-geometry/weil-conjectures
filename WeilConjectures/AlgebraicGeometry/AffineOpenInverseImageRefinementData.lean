@@ -15,8 +15,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
-/-- Pullback of a cover along any stage map covers both that stage and the limit.
-Source: Stacks Project, Tag 03Q6, base-change stability of coverings. -/
+/-- Pullback of a cover along any stage map covers both that stage and the limit (Stacks, Tag 03Q6).
+-/
 theorem affineOpenSections_refinement_data
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J]
     (D : J ⥤ X.Etale) [∀ j, IsOpenImmersion (D.obj j).hom]

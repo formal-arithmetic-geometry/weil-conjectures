@@ -24,9 +24,7 @@ open CategoryTheory Opposite AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Internal Hom from the degree-zero structure sheaf is the identity on the derived
-category, naturally in every unbounded derived object.
-
-Source: Stacks Project, sites-cohomology.tex, Section 08J7; duality.tex, Tag 0AX3. -/
+category, naturally in every unbounded derived object (Stacks, Tags 08J7 and 0AX3). -/
 theorem derivedInternalHom_unit_iso (Y : Scheme.{u})
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :
     Nonempty ((Functor.curry.obj

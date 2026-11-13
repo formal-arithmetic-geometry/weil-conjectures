@@ -36,8 +36,8 @@ private noncomputable def tensorPullbackRestrictIso {X Y : Scheme.{u}}
     (Scheme.Modules.pullbackComp _ _).symm ≪≫
     Functor.isoWhiskerRight (Scheme.Modules.restrictFunctorIsoPullback W.ι).symm _
 
-/-- Tensor pullback carries a local quotient-module frame to a structure-module frame.
-Source: Stacks Project, Tags 08KS and 0095; closed-immersion counit and tensor pullback. -/
+/-- Tensor pullback carries a local quotient-module frame to a structure-module frame
+(Stacks, Tags 08KS and 0095). -/
 theorem closedImmersion_quotient_frame_pullback
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.Opens) (J : Type u) (G : Y.Modules)

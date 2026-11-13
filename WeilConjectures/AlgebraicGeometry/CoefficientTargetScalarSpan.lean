@@ -23,9 +23,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- A section-ring multiple of a unit generator is in the base-ring span.
-Source: Stacks Project, Tag 02KG, Lemma 30.5.1 (affine tensor computation),
-Tags 01I9, 01IA and 0097 (unit and restriction formulas). -/
+/-- A section-ring multiple of a unit generator is in the base-ring span
+(Stacks, Tags 02KG, 01I9, 01IA and 0097). -/
 theorem coefficientTarget_scalar_span
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (F : X.Modules) [F.IsQuasicoherent]

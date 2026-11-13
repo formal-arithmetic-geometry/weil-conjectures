@@ -70,15 +70,15 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-/-- The prescribed unreduced ordinary scalar comparison. Source: Stacks 06YY, 099L. -/
+/-- The prescribed unreduced ordinary scalar comparison (Stacks, Tags 06YY and 099L). -/
 def ordinaryPullComparison (A : Type u) [CommRing A] (I : Ideal A) :
     res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⟶
       pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) :=
   (ordinaryPullComparison_existsUnique F A I).exists.choose
 
 /-- The representative square for a derived scalar comparison, with abstract ordinary
-functors so complex-composition conversions are checked before specialization.
-Source: Stacks 06YY, 099L. -/
+functors so complex-composition conversions are checked before specialization
+(Stacks, Tags 06YY and 099L). -/
 def DerivedPullComparisonFormula
     {M₀ M₁ M₂ M₃ D₀ D₁ D₂ D₃ : Type*}
     [Category M₀] [Category M₁] [Category M₂] [Category M₃]
@@ -139,8 +139,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical derived scalar comparison, characterized on every flat-term K-flat
 representative. Uniqueness makes it independent of resolving choices and gives its
-coherence for identity and composite inverse images with the same insertion formula.
-Source: Stacks 06YY, 099L. -/
+coherence for identity and composite inverse images with the same insertion formula
+(Stacks, Tags 06YY and 099L). -/
 theorem derivedPullComparison_existsUnique (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     ∃! δ : dres (coefficientMap J A I) ⋙ (derivedPull F V adj (constantMap F A)).functor ⟶
@@ -184,8 +184,8 @@ theorem derivedPullComparison_existsUnique (A : Type u) [CommRing A]
 
 end
 
-/-- The actual derived comparison with the specified K-flat scalar-insertion formula.
-Source: Stacks 06YY, 099L. -/
+/-- The actual derived comparison with the specified K-flat scalar-insertion formula
+(Stacks, Tags 06YY and 099L). -/
 def derivedPullComparison (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
     dres (coefficientMap J A I) ⋙ (derivedPull F V adj (constantMap F A)).functor ⟶
       (derivedPull F V adj (completedMap F A I)).functor ⋙ dres (coefficientMap J' A I) :=

@@ -177,8 +177,8 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Global sections commute with homology of a termwise quasi-coherent complex
-on an affine scheme, via the exact associated-sheaf functor and its counit.
-Source: Stacks Project, Tags 01IB and 01HV. -/
+on an affine scheme, via the exact associated-sheaf functor and its counit
+(Stacks, Tags 01IB and 01HV). -/
 theorem nonempty_affineSectionsHomologyIso
     (X : Scheme.{u}) [IsAffine X] (K : CochainComplex X.Modules ℤ)
     (hqc : ∀ n : ℤ, (K.X n).IsQuasicoherent) (n : ℤ) :

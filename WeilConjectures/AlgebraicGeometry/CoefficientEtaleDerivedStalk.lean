@@ -27,8 +27,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Continuity of the original etale-site equivalence at the coefficient size.
-Source: Stacks Tag 00VC. -/
+/-- Continuity of the original etale-site equivalence at the coefficient size (Stacks, Tag 00VC). -/
 instance coefficientEtaleAsSmallUp_isContinuous (X : Scheme.{u}) :
     (AsSmall.up : X.Etale ⥤ smallModelComparisonEtaleSite.{u, v} X).IsContinuous
       X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X) :=
@@ -39,7 +38,7 @@ instance coefficientEtaleAsSmallUp_isContinuous (X : Scheme.{u}) :
         X.smallEtaleTopology))
 
 /-- The ordinary geometric stalk: restrict to constant scalars, undo AsSmall, and take
-its usual pointed-neighborhood colimit. Source: Stacks Tags 03PT and 04EQ. -/
+its usual pointed-neighborhood colimit (Stacks, Tags 03PT and 04EQ). -/
 def coefficientEtaleModuleStalk (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
@@ -52,7 +51,7 @@ def coefficientEtaleModuleStalk (X : Scheme.{u})
         X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X) ⋙
     (pointSmallEtale x).sheafFiber (A := ModuleCat.{max v (u + 1)} B)
 
-/-- Geometric stalks on the model are additive and exact. Source: Stacks Tag 04EQ. -/
+/-- Geometric stalks on the model are additive and exact (Stacks, Tag 04EQ). -/
 theorem coefficientEtaleModuleStalk_exact (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :
@@ -121,7 +120,7 @@ instance coefficientEtaleModuleStalk_colimits (X : Scheme.{u})
   (coefficientEtaleModuleStalk_exact X B x).2.2
 
 /-- The exact derived geometric stalk of a constant-ring module complex, in the
-independent coefficient universe. Source: Stacks Tags 03PT and 04EQ. -/
+independent coefficient universe (Stacks, Tags 03PT and 04EQ). -/
 def coefficientEtaleDerivedStalk (X : Scheme.{u})
     (B : Type (max v (u + 1))) [CommRing B]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) :

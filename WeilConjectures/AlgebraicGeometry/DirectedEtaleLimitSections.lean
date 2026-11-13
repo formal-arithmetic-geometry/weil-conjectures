@@ -26,9 +26,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Continuity for a directed inverse system of qcqs étale schemes over a fixed base.
 The cocone is supplied by its natural transformation `ν`; `hν` fixes every component
 as the inverse-image unit followed by restriction along the diagonal limit section.
-This statement does not include the reduction from an arbitrary cofiltered category.
-
-Source: Stacks Project, Theorem Tag 09YQ, degree zero, and Tag 03S2, used in Tag 03Q9. -/
+This statement does not include the reduction from an arbitrary cofiltered category
+(Stacks, Tags 09YQ, 03S2 and 03Q9). -/
 theorem directedEtaleLimitSections
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale)

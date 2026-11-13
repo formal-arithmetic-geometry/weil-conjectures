@@ -71,8 +71,8 @@ private theorem comparison_transport
       P.map (e.hom.app G)) hb
 
 
-/-- A compatible ordinary chart map gives the canonical tensor chart equation.
-Source: Stacks Project, Tags 0095 and 0096, composition and base change of pullback. -/
+/-- A compatible ordinary chart map gives the canonical tensor chart equation
+(Stacks, Tags 0095 and 0096). -/
 theorem chart_tensor_pullback_lift_transport
     {X Y Z : Scheme.{u}} (q : Y ⟶ X) (p : Z ⟶ Y) (q₀ : Z ⟶ X)
     (w : p ≫ q = q₀) (U : X.OpenCover.{u}) (a : U.I₀)

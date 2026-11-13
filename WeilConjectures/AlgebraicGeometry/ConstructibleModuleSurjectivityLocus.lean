@@ -29,9 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The points where a morphism of constructible module sheaves fails to be surjective
 on the geometric stalk at the algebraic closure of the residue field form a constructible
-subset. The source need not be a sum of affine free sheaves.
-
-Source: Stacks Project, Tag 095N, construction of T_{I'}, with Tags 095E and 04FN. -/
+subset. The source need not be a sum of affine free sheaves (Stacks, Tags 095N, 095E and 04FN). -/
 theorem isConstructible_module_stalk_nonsurjective
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

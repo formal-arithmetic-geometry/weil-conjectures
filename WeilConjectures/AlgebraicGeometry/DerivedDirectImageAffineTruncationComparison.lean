@@ -52,9 +52,8 @@ set_option maxHeartbeats 400000 in
 set_option synthInstance.maxHeartbeats 100000 in
 /-- On an affine open, a sufficiently low canonical truncation induces an
 isomorphism on any fixed higher direct image. The assertion concerns the actual
-canonical map, and does not assert quasi-coherence of either higher direct image.
-Source: Stacks Project, perfect.tex, Tag 08D5, final paragraph; cohomology.tex,
-Tag 08BS for open restriction. -/
+canonical map, and does not assert quasi-coherence of either higher direct image
+(Stacks, Tags 08D5 and 08BS). -/
 theorem exists_isIso_schemeHigherDirectImage_truncGE_over_affine
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

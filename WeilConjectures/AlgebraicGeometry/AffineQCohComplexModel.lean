@@ -32,8 +32,8 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- Every quasi-coherent affine derived object has a K-flat module-complex model.
-Source: Stacks, perfect.tex, Tag 06Z0. -/
+/-- Every quasi-coherent affine derived object has a K-flat module-complex model (Stacks, Tag 06Z0).
+-/
 theorem exists_affineQCohComplexModel
     {R : CommRingCat.{u}} (Q : schemeDerivedCategory (Spec R))
     (hQ : schemeDerivedQCohProperty (Spec R) Q) :

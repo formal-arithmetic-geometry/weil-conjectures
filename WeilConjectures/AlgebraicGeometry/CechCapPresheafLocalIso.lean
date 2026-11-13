@@ -22,15 +22,14 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- Restrict a module presheaf to intersections with W, retaining scalars on the test open.
-Source: Stacks Project, Tag 02FU, restriction on intersection sections. -/
+/-- Restrict a module presheaf to intersections with W, retaining scalars on the test open
+(Stacks, Tag 02FU). -/
 def cechCapPresheafFunctor {X : Scheme.{u}} (W : X.Opens) :
     PresheafOfModules.{u} X.ringCatSheaf.obj ⥤
       PresheafOfModules.{u} X.ringCatSheaf.obj :=
   PresheafOfModules.pushforward (cechCapRingMap W)
 
-/-- The natural restriction of a presheaf to intersections with W.
-Source: Stacks Project, Tag 02FU, restriction on intersection sections. -/
+/-- The natural restriction of a presheaf to intersections with W (Stacks, Tag 02FU). -/
 def cechCapPresheafUnit {X : Scheme.{u}} (W : X.Opens) :
     𝟭 (PresheafOfModules.{u} X.ringCatSheaf.obj) ⟶ cechCapPresheafFunctor W where
   app P :=
@@ -114,8 +113,8 @@ private theorem cap_precompose_bijective {X : Scheme.{u}} (W : X.Opens)
         exact congrArg (· ≫ inv (ν.app H)) (ν.naturality f).symm
       _ = f := by simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
 
-/-- Intersecting with W has no effect after sheafification and restriction to W.
-Source: Stacks Project, Tag 02FU, local restriction of the Čech resolution. -/
+/-- Intersecting with W has no effect after sheafification and restriction to W (Stacks, Tag 02FU).
+-/
 theorem cechCapPresheafUnit_local_isIso {X : Scheme.{u}} (W : X.Opens)
     (P : PresheafOfModules.{u} X.ringCatSheaf.obj) :
     IsIso ((Scheme.Modules.restrictFunctor W.ι).map

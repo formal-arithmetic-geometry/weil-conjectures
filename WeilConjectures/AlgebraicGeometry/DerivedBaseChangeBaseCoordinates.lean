@@ -25,8 +25,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Change the two base schemes, keeping the upper-left scheme fixed.
-Source: Stacks Project, Tag 08HY (counit description), Tags 0D5S and 0D5T. -/
+/-- Change the two base schemes, keeping the upper-left scheme fixed
+(Stacks, Tags 08HY, 0D5S and 0D5T). -/
 theorem exists_derivedBaseChange_base_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

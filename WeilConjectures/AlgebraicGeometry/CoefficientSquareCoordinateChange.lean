@@ -104,8 +104,7 @@ end
 
 /-- A change of the two coordinates of a commutative coefficient square is
 compatible with the composition comparisons. The coordinate arrows need not
-be invertible.
-Source: Stacks Project, Tag 0D5S, associativity and naturality of derived pullback. -/
+be invertible (Stacks, Tag 0D5S). -/
 theorem coefficient_square_coordinate_change
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -177,8 +177,8 @@ attribute [local irreducible] SfbCompletionNormalization.constants
 
 attribute [-instance] ConstantScalarRestriction.ringAbelian ConstantScalarRestriction.fixedAbelian
   ConstantScalarRestriction.ringGrothendieck ConstantScalarRestriction.fixedGrothendieck in
-/-- Finite reduction is unchanged by normalizing the completed coefficient presentation.
-Source: Stacks Tags 03A0, 03CY and 06YY. -/
+/-- Finite reduction is unchanged by normalizing the completed coefficient presentation
+(Stacks, Tags 03A0, 03CY and 06YY). -/
 theorem sfbResidue_normalization
     (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (K : @DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) _ _

@@ -30,9 +30,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance 2000] schemeMVModuleAbelian
 
-/-- A map of concrete short complexes realizes the normalized first and intersection maps.
-Source: Stacks Project, Tag 08BV, concrete sequence; Tag 08FE, sectionwise comparison;
-Tag 0D5T, derived composition comparison. -/
+/-- A map of concrete short complexes realizes the normalized first and intersection maps
+(Stacks, Tags 08BV, 08FE and 0D5T). -/
 theorem schemeMV_image_resolution_comparison
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -29,9 +29,8 @@ namespace AlgebraicGeometry
 
 /-- Flatness of a locally finitely presented morphism over a quasi-compact quasi-separated
 stage descends from a directed inverse limit with affine transitions to some later stage.
-The source and target at the original stage are also quasi-compact and quasi-separated.
-
-Source: Stacks Project, Limits of Schemes, Tag 04AI in Situation 081D. -/
+The source and target at the original stage are also quasi-compact and quasi-separated
+(Stacks, Tags 04AI and 081D). -/
 theorem exists_flat_stage_of_limit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

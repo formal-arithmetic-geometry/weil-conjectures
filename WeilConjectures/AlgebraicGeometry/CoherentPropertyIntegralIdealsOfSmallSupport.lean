@@ -34,10 +34,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The generic-point patching step of higher-rank coherent devissage: assuming the
 property for coherent modules supported on this integral closed subscheme and vanishing
-at its generic point, the distinguished module gives the property for every ideal.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL, third paragraph and its end,
-with the explicit zero hypothesis needed for the zero ideal. -/
+at its generic point, the distinguished module gives the property for every ideal
+(Stacks, Tag 01YL). -/
 theorem coherent_property_integral_ideals_of_small_support
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (P : X.Modules → Prop)

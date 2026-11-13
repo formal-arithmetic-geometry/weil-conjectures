@@ -23,8 +23,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- For every morphism of schemes `a : X ⟶ Y` and every module `G` on `Y`, there is a map
-`La^*(G[0]) ⟶ (a^*G)[0]` which is the derived-to-ordinary pullback comparison at `G`.
-Source: Stacks Project, Cohomology, Remark 08HY. -/
+`La^*(G[0]) ⟶ (a^*G)[0]` which is the derived-to-ordinary pullback comparison at `G`
+(Stacks, Tag 08HY). -/
 theorem exists_isDerivedModulePullbackComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

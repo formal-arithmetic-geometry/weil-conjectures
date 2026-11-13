@@ -96,8 +96,7 @@ private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
   exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) htop
 
 /-- Derived direct image of a bounded-below object with quasi-coherent cohomology
-has quasi-coherent cohomology. No compactness of the target is required.
-Source: Stacks Project, perfect.tex, Tag 08D5, bounded-below paragraph. -/
+has quasi-coherent cohomology. No compactness of the target is required (Stacks, Tag 08D5). -/
 theorem schemeDerivedDirectImage_preserves_QCoh_of_isGE
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

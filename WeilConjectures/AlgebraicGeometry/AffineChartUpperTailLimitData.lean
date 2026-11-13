@@ -65,8 +65,8 @@ noncomputable def upperTailChartCone {I : Type u} [Preorder I]
     {A : Scheme.{u}} (g : A ⟶ Spec (R.obj i)) : Cone (upperTailChartDiagram R i g) :=
   (Over.forget A).mapCone ((Over.pullback g).mapCone (upperTailSpectrumOverCone R c i))
 
-/-- The explicitly constructed upper-tail base-change cone is limiting.
-Source: Stacks Project, Limits Tag 01ZR, affine case; Tags 0095 and 0097. -/
+/-- The explicitly constructed upper-tail base-change cone is limiting
+(Stacks, Tags 01ZR, 0095 and 0097). -/
 theorem upperTailChartCone_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

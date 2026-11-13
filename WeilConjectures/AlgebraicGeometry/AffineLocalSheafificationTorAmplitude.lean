@@ -50,8 +50,8 @@ noncomputable def affine_cancel (S : Scheme.{u}) (U : S.Opens) (hU : IsAffineOpe
         Modules.restrictFunctorCongr hU.isoSpec.inv_hom_id ≪≫ Modules.restrictFunctorId) ≪≫
     Functor.rightUnitor T
 
-/-- Tor bounds on an open W pass to a module model on an affine subopen U.
-Source: Stacks Project, Tags 08CG, 08E9(1), 08DX(2), and 09U8. -/
+/-- Tor bounds on an open W pass to a module model on an affine subopen U
+(Stacks, Tags 08CG, 08E9, 08DX and 09U8). -/
 theorem finiteTorAmplitude_of_affine_sheafification_of_open_tor (S : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
     [∀ V : S.Opens,

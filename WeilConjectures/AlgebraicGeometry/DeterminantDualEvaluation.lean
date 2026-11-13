@@ -29,8 +29,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- The top exterior powers of a finite locally free sheaf and its internal dual
-are tensor inverses in the ordinary category of sheaves of modules.
-Source: Stacks Project, Tag 0BRT, final determinant inversion. -/
+are tensor inverses in the ordinary category of sheaves of modules (Stacks, Tag 0BRT). -/
 theorem determinant_dual_evaluation (X : Scheme.{u})
     (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) :
     letI := SheafOfModules.monoidalCategory X.sheaf

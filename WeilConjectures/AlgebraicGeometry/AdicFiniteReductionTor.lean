@@ -194,9 +194,7 @@ private theorem tensorTest_devissage {D₀ : Type v} [SmallCategory D₀]
     exact hN U _ ((pow_le_pow_left' hle m) hm) x
   exact (key m N hglob).of_iso (he N)
 
-/-- The residue Tor interval controls every positive-power reduction.
-Source: Stacks Project, proetale.tex, Tag 09C2 (2), and sites-cohomology.tex,
-lemma-bounded; finite-Tor comparison over discrete Noetherian coefficients. -/
+/-- The residue Tor interval controls every positive-power reduction (Stacks, Tag 09C2). -/
 theorem adicFiniteReduction_tor
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

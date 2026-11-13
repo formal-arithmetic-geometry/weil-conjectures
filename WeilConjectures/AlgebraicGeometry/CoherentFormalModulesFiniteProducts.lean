@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Coherent adic inverse systems are closed under ambient finite products.
-Source: Stacks Project, Section 087V and Lemma 087X, additive structure of Coh(X,I). -/
+/-- Coherent adic inverse systems are closed under ambient finite products
+(Stacks, Tags 087V and 087X). -/
 theorem coherentFormalModules_closedUnderFiniteProducts (X : Scheme.{u})
     [IsNoetherian X] (I : X.IdealSheafData) :
     (IsCoherentFormalModule I).IsClosedUnderFiniteProducts := by

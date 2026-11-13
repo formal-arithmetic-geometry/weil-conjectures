@@ -45,26 +45,24 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
-/-- Coherent modules as a full subcategory of all modules.
-Source: Stacks, Section 0EHN. -/
+/-- Coherent modules as a full subcategory of all modules (Stacks, Tag 0EHN). -/
 abbrev CoherentModules (X : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (C := X.Modules) (RingedSpace.IsCoherent X.toRingedSpace)
 
-/-- The quotient by the image of multiplication by the nth power of a quasi-coherent ideal.
-Source: Stacks, equation 0880. -/
+/-- The quotient by the image of multiplication by the nth power of a quasi-coherent ideal
+(Stacks, Tag 0880). -/
 def formalModuleQuotient {X : Scheme.{u}} (I : X.IdealSheafData) (n : ℕ) (F : X.Modules) :
     X.Modules :=
   cokernel (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 F)
 
-/-- The quotient projection.
-Source: Stacks, equation 0880. -/
+/-- The quotient projection (Stacks, Tag 0880). -/
 def formalModuleQuotientπ {X : Scheme.{u}} (I : X.IdealSheafData) (n : ℕ) (F : X.Modules) :
     F ⟶ formalModuleQuotient I n F :=
   cokernel.π (Scheme.idealModuleProductι (Scheme.idealSheafPower I.toModulesι n).2 F)
 
 /-- The defining object conditions: coherence, annihilation by I^(n+1), and an induced
-quotient isomorphism whose composite with the quotient projection is the transition map.
-Source: Stacks, Section 0EHN. -/
+quotient isomorphism whose composite with the quotient projection is the transition map
+(Stacks, Tag 0EHN). -/
 def IsCoherentFormalModule {X : Scheme.{u}} (I : X.IdealSheafData)
     : ObjectProperty (ℕᵒᵖ ⥤ X.Modules) := fun F ↦
   (∀ n : ℕ, RingedSpace.IsCoherent X.toRingedSpace (F.obj (op n))) ∧
@@ -76,8 +74,7 @@ def IsCoherentFormalModule {X : Scheme.{u}} (I : X.IdealSheafData)
 
 /-- The full subcategory of inverse systems satisfying the coherent adic conditions.
 This is Stacks' Coh(X, I); the object `op n` is the level `n + 1`. Morphisms are natural
-transformations, hence precisely compatible families of module maps.
-Source: Stacks, Section 0EHN. -/
+transformations, hence precisely compatible families of module maps (Stacks, Tag 0EHN). -/
 abbrev CoherentFormalModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :=
   (IsCoherentFormalModule I).FullSubcategory
 
@@ -274,8 +271,8 @@ theorem formalModuleQuotient_map_zero {X : Scheme.{u}} (I : X.IdealSheafData)
         simp only [Category.assoc]
     _ = 0 := by simp [formalModuleQuotientπ]
 
-/-- Reduction of a linear map from level m to level n, n ≤ m, by the cokernel property.
-Source: Stacks, equation 0880. -/
+/-- Reduction of a linear map from level m to level n, n ≤ m, by the cokernel property
+(Stacks, Tag 0880). -/
 def formalModuleQuotientMap {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (f : F ⟶ G) {m n : ℕ} (h : n ≤ m) :
     formalModuleQuotient I m F ⟶ formalModuleQuotient I n G :=
@@ -347,8 +344,7 @@ theorem formalCompletionSystem_laws {X : Scheme.{u}} (I : X.IdealSheafData)
     simpa using formalModuleQuotientMap_comp I (𝟙 F) (𝟙 F)
       (Nat.succ_le_succ (leOfHom f.unop)) (Nat.succ_le_succ (leOfHom g.unop))
 
-/-- The inverse system F/I^(n+1)F, with the canonical surjections.
-Source: Stacks, equation 0880. -/
+/-- The inverse system F/I^(n+1)F, with the canonical surjections (Stacks, Tag 0880). -/
 def formalCompletionSystem {X : Scheme.{u}} (I : X.IdealSheafData) (F : X.Modules) :
     ℕᵒᵖ ⥤ X.Modules where
   obj n := formalModuleQuotient I (n.unop + 1) F
@@ -367,8 +363,7 @@ theorem formalCompletionMap_naturality {X : Scheme.{u}} (I : X.IdealSheafData)
   rw [← formalModuleQuotientMap_comp, ← formalModuleQuotientMap_comp]
   simp
 
-/-- The compatible family of reductions of a module map.
-Source: Stacks, equation 0880. -/
+/-- The compatible family of reductions of a module map (Stacks, Tag 0880). -/
 def formalCompletionMap {X : Scheme.{u}} (I : X.IdealSheafData)
     {F G : X.Modules} (u : F ⟶ G) : formalCompletionSystem I F ⟶ formalCompletionSystem I G
     where
@@ -422,8 +417,8 @@ theorem formalCompletionMap_laws {X : Scheme.{u}} (I : X.IdealSheafData) :
     exact formalModuleQuotientMap_comp I f g (Nat.le_refl (n.unop + 1))
       (Nat.le_refl (n.unop + 1))
 
-/-- The functor to inverse systems, on objects the quotients and on maps their reductions.
-Source: Stacks, equation 0880. -/
+/-- The functor to inverse systems, on objects the quotients and on maps their reductions
+(Stacks, Tag 0880). -/
 def formalCompletionFunctor {X : Scheme.{u}} (I : X.IdealSheafData) :
     X.Modules ⥤ (ℕᵒᵖ ⥤ X.Modules) where
   obj := formalCompletionSystem I
@@ -431,8 +426,8 @@ def formalCompletionFunctor {X : Scheme.{u}} (I : X.IdealSheafData) :
   map_id := (formalCompletionMap_laws I).1
   map_comp f g := (formalCompletionMap_laws I).2 _ _ _ f g
 
-/-- The completion functor Coh(O_X) → Coh(X,I), with the specified quotient data.
-Source: Stacks, equation 0880. -/
+/-- The completion functor Coh(O_X) → Coh(X,I), with the specified quotient data (Stacks, Tag 0880).
+-/
 def completion (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) :
     CoherentModules X ⥤ CoherentFormalModule X I :=
   ObjectProperty.lift (IsCoherentFormalModule I)
@@ -446,8 +441,8 @@ def AnnihilatedBy {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∀ n : ℕ, IsZero (Scheme.idealModuleProduct K.toModulesι (M.obj.obj (op n)))
 
-/-- Uniform annihilation by a positive power of I, as opposed to the termwise adic condition.
-Source: Stacks, paragraph before Lemma 0889. -/
+/-- Uniform annihilation by a positive power of I, as opposed to the termwise adic condition
+(Stacks, Tag 0889). -/
 def IsIdealPowerTorsion {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (M : CoherentFormalModule X I) : Prop :=
   ∃ c : ℕ, 1 ≤ c ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct
@@ -515,16 +510,16 @@ def CoherentModuleSupportedOn {X Z : Scheme.{u}} (F : CoherentModules X)
     (i : Z ⟶ X) [IsClosedImmersion i] : Prop :=
   IsZero (Scheme.idealModuleProduct i.ker.toModulesι F.obj)
 
-/-- Full subcategory of formal modules whose level 1 has support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D. -/
+/-- Full subcategory of formal modules whose level 1 has support proper over the base
+(Stacks, Tags 0CYW and 088D). -/
 abbrev CohSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :=
   ObjectProperty.FullSubcategory
     (fun M : CoherentFormalModule X I ↦
       Scheme.Modules.HasSupportProperOver f (M.obj.obj (op 0)))
 
-/-- Full subcategory of coherent modules with support proper over the base.
-Source: Stacks, Section 0CYW, equation 088D. -/
+/-- Full subcategory of coherent modules with support proper over the base
+(Stacks, Tags 0CYW and 088D). -/
 abbrev CohModuleSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] :=
   ObjectProperty.FullSubcategory
@@ -570,8 +565,8 @@ theorem formalCompletion_support_proper {X S : Scheme.{u}} [IsNoetherian X]
     exact hx
   exact hxQ
 
-/-- Restriction of completion to the two proper-support full subcategories.
-Source: Stacks, Section 0CYW, equation 088D. -/
+/-- Restriction of completion to the two proper-support full subcategories
+(Stacks, Tags 0CYW and 088D). -/
 def completionSupportProper {X S : Scheme.{u}} [IsNoetherian X]
     (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (I : X.IdealSheafData) :
     CohModuleSupportProper f ⥤ CohSupportProper f I :=

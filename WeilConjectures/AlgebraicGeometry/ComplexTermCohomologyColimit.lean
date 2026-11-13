@@ -49,8 +49,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.dsimp.instances true in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-/-- Ordinary sheaf cohomology preserves the cocone of evaluated complex terms.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ). -/
+/-- Ordinary sheaf cohomology preserves the cocone of evaluated complex terms (Stacks, Tag 09YQ). -/
 theorem nonempty_isColimit_complex_term_cohomology
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 
 /-- A selected stratum of a finite locally closed constructible partition is closed on
 an affine neighborhood of any of its points. Every stratum restricts to a locally closed
-constructible subset there, and the selected stratum has quasi-compact open complement.
-Source: Stacks Project, Topology, Tags 004E, 005J and 09YH; Schemes, Tag 01IT. -/
+constructible subset there, and the selected stratum has quasi-compact open complement
+(Stacks, Tags 004E, 005J, 09YH and 01IT). -/
 theorem exists_affineOpen_closed_stratum (Y : Scheme.{u}) (N : ℕ)
     (S : Fin N → Set Y) (hcover : (⋃ i, S i) = Set.univ)
     (hdisjoint : Pairwise (fun i j ↦ Disjoint (S i) (S j)))

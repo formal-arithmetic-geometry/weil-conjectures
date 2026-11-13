@@ -29,8 +29,7 @@ private theorem comparison_inv_map_id
   exact CategoryTheory.Category.comp_id _
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Canonical coefficient coherence with all comparison maps expanded.
-Source: Stacks Project, Tag 0D5S. -/
+/-- Canonical coefficient coherence with all comparison maps expanded (Stacks, Tag 0D5S). -/
 theorem canonical_relativeMV_open_square_coefficient_coherence
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

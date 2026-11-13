@@ -30,9 +30,8 @@ namespace AlgebraicGeometry.Scheme
 -- The filtered colimit and residue-field refinements require additional elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A stalk homomorphism satisfying the evaluation formula is bijective.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2). -/
+/-- A stalk homomorphism satisfying the evaluation formula is bijective
+(Stacks, Tags 03QU and 03QV). -/
 theorem etaleUnits_stalk_evaluation_overfield_bijective
     (K Ω : Type u) [Field K] [Field Ω]
     [Algebra (SeparableClosure K) Ω] [Algebra K Ω]

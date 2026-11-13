@@ -24,8 +24,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-/-- The inverse standard comparison respects the K-flat derived tensor.
-Source: Stacks Project, Tags 05RU and 06YH. -/
+/-- The inverse standard comparison respects the K-flat derived tensor (Stacks, Tags 05RU and 06YH).
+-/
 theorem derivedLocalization_tensorComparison (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (A B : @schemeDerivedCategory X (HasDerivedCategory.standard _)) :

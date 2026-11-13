@@ -26,9 +26,8 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- A quasi-coherent ideal on a closed integral subscheme has coherent pushforward.
-Source: Stacks Project, Cohomology of Schemes, Tag 01YH, the paragraph beginning
-"Next, suppose"; this is the coherence subargument isolated for reuse. -/
+/-- A quasi-coherent ideal on a closed integral subscheme has coherent pushforward
+(Stacks, Tag 01YH). -/
 theorem coherent_pushforward_ideal {X W : Scheme.{u}} [IsLocallyNoetherian X]
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]
     (I : W.IdealSheafData) :

@@ -260,10 +260,8 @@ private theorem kernel_transition_range
 
 /-- On an affine open, comparison of any two finite-level kernel image subsheaves
 is equivalent to comparison of the corresponding quotient submodules of a completed
-module. There is no stabilization assertion or Artin--Rees bound in this statement.
-
-Source: Stacks Project, Lemma 087X, description of K'_(l,m) before claim (a),
-and Lemma 087W; Schemes, Tags 01IB and 01IC. -/
+module. There is no stabilization assertion or Artin--Rees bound in this statement
+(Stacks, Tags 087X, 087W, 01IB and 01IC). -/
 theorem coherentFormalModule_affine_kernel_image_comparison
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (F H : CoherentFormalModule X I) (α : F ⟶ H) (U : X.affineOpens) :

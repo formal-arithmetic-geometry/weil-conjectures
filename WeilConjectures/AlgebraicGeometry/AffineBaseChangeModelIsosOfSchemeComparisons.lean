@@ -37,8 +37,7 @@ private theorem module_model_acyclic
   exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
     (h _ hL').2
 
-/-- Core categorical construction.
-Source: Stacks Project Tags 08DW, 09RE and 0D5S. -/
+/-- Core categorical construction (Stacks, Tags 08DW, 09RE and 0D5S). -/
 theorem affineBaseChangeModelIsosCore
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

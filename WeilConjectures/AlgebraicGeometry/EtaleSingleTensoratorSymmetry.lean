@@ -129,8 +129,8 @@ private lemma singleTensorator_factorization
   rw [singleIsoQh_hom_app, singleIsoQh_hom_app, singleIsoQh_inv_app]
   exact singleFunctorObjTensorIso_factorization A C hA
 
-/-- The canonical flat single tensorators preserve the signed braiding in degree zero.
-Source: Stacks, Cohomology on Sites, Tags 06YQ and 06YU, signed tensor symmetry. -/
+/-- The canonical flat single tensorators preserve the signed braiding in degree zero
+(Stacks, Tags 06YQ and 06YU). -/
 theorem singleFunctorObjTensorIso_symmetry
     (L M : Sheaf X.smallEtaleTopology B)
     (hL : ObjectProperty.flat L) (hM : ObjectProperty.flat M) :

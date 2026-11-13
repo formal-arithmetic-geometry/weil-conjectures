@@ -29,8 +29,8 @@ attribute [local instance 2000]
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 -- Compare the affine-open algebra instance with the whole-scheme algebra instance.
-/-- The affine sections comparison specialized to the whole source and target schemes.
-Source: Stacks Project, Tags 01I9 and 01IA. -/
+/-- The affine sections comparison specialized to the whole source and target schemes
+(Stacks, Tags 01I9 and 01IA). -/
 theorem exists_affineTopTensorSections {A B : Scheme.{u}} (f : B ⟶ A)
     (G : A.Modules) (hG : G.IsQuasicoherent) (hA : IsAffine A) (hB : IsAffine B) :
     letI : Algebra Γ(A, ⊤) Γ(B, ⊤) := f.appTop.hom.toAlgebra

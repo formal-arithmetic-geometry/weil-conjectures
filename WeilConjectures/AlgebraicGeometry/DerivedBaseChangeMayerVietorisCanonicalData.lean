@@ -26,8 +26,8 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The concrete open-image comparison, transported by the fixed resolution isomorphism.
-Source: Stacks Tag 08BV. -/
+/-- The concrete open-image comparison, transported by the fixed resolution isomorphism
+(Stacks, Tag 08BV). -/
 def mvCanonicalOpenComparison (X : Scheme.{u}) (W : X.Opens)
     (K : schemeDerivedCategory X) :
     DerivedCategory.Q.obj (schemeOpenModuleImageComplex X W (schemeMVResolution X K)) ≅
@@ -40,8 +40,8 @@ def mvCanonicalOpenComparison (X : Scheme.{u}) (W : X.Opens)
 
 /-- Boundary of the actual Mayer--Vietoris SES of the fixed K-injective resolution.
 The comparisons are normalized to the pinned open adjunctions, not chosen from
-existence of distinguished triangles. The equality hW merely transports the overlap.
-Source: Stacks Tag 08BV. -/
+existence of distinguished triangles. The equality hW merely transports the overlap
+(Stacks, Tag 08BV). -/
 def mvCanonicalBoundary (X : Scheme.{u}) (U V W : X.Opens)
     (hW : U ⊓ V = W) (hcover : U ⊔ V = ⊤) (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage W.ι).obj
@@ -83,8 +83,7 @@ theorem mvCanonicalHomEquiv_shift {X Y : Scheme.{u}} (g : X ⟶ Y)
   rw [Functor.commShiftIso_hom_naturality]
 
 /-- With these compatible shifts pullback is triangulated, because its right
-adjoint is the triangulated right-derived direct image.
-Source: Stacks Tag 079W. -/
+adjoint is the triangulated right-derived direct image (Stacks, Tag 079W). -/
 theorem mvCanonicalPullbackShift_triangulated {X Y : Scheme.{u}} (g : X ⟶ Y) :
     letI := mvCanonicalPullbackShift g
     (derivedPullback g).IsTriangulated := by
@@ -93,14 +92,13 @@ theorem mvCanonicalPullbackShift_triangulated {X Y : Scheme.{u}} (g : X ⟶ Y) :
   exact (mvDerivedPullbackAdjunction g).isTriangulated_leftAdjoint
 
 /-- Composite of the right-derived direct-image shift and its adjoint-compatible
-pullback shift. Source: Stacks Tag 0DJ9. -/
+pullback shift (Stacks, Tag 0DJ9). -/
 @[instance_reducible] def mvCanonicalSourceShift {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) :
     (schemeDerivedDirectImage f ⋙ derivedPullback g).CommShift ℤ :=
   letI := mvCanonicalPullbackShift g
   inferInstance
 
-/-- The existing right-derived shift structure, with no independent choice.
-Source: Stacks Tag 0DJ9. -/
+/-- The existing right-derived shift structure, with no independent choice (Stacks, Tag 0DJ9). -/
 abbrev mvCanonicalTargetShift {X' S' : Scheme.{u}} (f' : X' ⟶ S') :
     (schemeDerivedDirectImage f').CommShift ℤ := inferInstance
 

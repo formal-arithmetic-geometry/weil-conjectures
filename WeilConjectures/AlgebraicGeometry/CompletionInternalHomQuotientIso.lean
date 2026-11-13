@@ -26,11 +26,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Precomposition with the level-m source quotient is an internal-Hom
-isomorphism into the level-n target quotient when n ≤ m.
-
-Source: Stacks Project, Cohomology of Schemes, Tag 0882, construction of the
-comparison map, and Section 0EHN, equation 0880. This finite-level cokernel
-argument requires neither coherence nor a Noetherian scheme. -/
+isomorphism into the level-n target quotient when n ≤ m (Stacks, Tags 0882, 0EHN and 0880). -/
 theorem completion_internal_hom_quotient_isIso {X : Scheme.{u}}
     (I : X.IdealSheafData) (F G : X.Modules) (m n : ℕ) (h : n ≤ m) :
     IsIso (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)

@@ -62,9 +62,7 @@ private theorem stalks_agree_on_component
   exact hsub hx
 
 /-- A bounded lisse complex has the specified stalk as a common local model on
-objects mapping into its connected component.
-Source: Stacks Project, Etale Cohomology, Tag 09BI; Pro-etale Cohomology, Tag 09C6,
-first paragraph, before the weak-contractibility argument. -/
+objects mapping into its connected component (Stacks, Tags 09BI and 09C6). -/
 theorem coefficient_connected_local_stalk_models
     (X : Scheme.{u}) [IsNoetherian X]
     (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]

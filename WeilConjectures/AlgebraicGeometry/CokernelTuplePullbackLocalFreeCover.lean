@@ -107,9 +107,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 400000 in
 -- Unfold restriction functors while synthesizing the pullback instance.
 /-- The pullback of a finite tuple along a cokernel projection admits a local
-finite-free epimorphism.
-
-Source: Stacks Project, Modules, Lemma 01BY, cokernel paragraph. -/
+finite-free epimorphism (Stacks, Tag 01BY). -/
 theorem cokernel_tuple_pullback_local_free_cover (X : RingedSpace.{u})
     (F G : SheafOfModules.{u} (moduleRings X)) (f : F ⟶ G)
     (hF : F.IsFiniteType) (U : Opens X) (n : ℕ)

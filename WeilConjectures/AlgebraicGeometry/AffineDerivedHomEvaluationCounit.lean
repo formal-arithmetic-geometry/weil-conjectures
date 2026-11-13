@@ -145,9 +145,7 @@ private theorem exists_affine_localizedEvaluation {X Y : Scheme.{u}}
 
 /-- The affine algebra-valued derived Hom adjunction, with its evaluation counit.
 This lemma involves neither a quasi-coherent right adjoint of pushforward nor its
-comparison with scalar restriction.
-
-Source: Stacks Project, Tags 0BUZ, 0BV0 and 0AX3. -/
+comparison with scalar restriction (Stacks, Tags 0BUZ, 0BV0 and 0AX3). -/
 theorem exists_affine_derivedHom_evaluation_counit {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

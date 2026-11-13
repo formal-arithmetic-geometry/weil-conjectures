@@ -34,10 +34,8 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine global sections carry a coherent formal system to a tower of finite
 A-modules with the algebraic annihilation and transition-kernel conditions.
-This statement concerns only finite-level sections, with no inverse limit.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, first paragraph;
-Schemes, Tags 01I7 and 01IB. -/
+This statement concerns only finite-level sections, with no inverse limit
+(Stacks, Tags 087W, 01I7 and 01IB). -/
 theorem coherentFormalModule_affine_sections_adic (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
     (hJ : J = Scheme.IdealSheafData.ofIdealTop

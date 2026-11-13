@@ -21,8 +21,7 @@ set_option autoImplicit false
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
-/-- Cohomology vanishes outside one ordered finite integer interval.
-Source: Stacks Tag 05RU. -/
+/-- Cohomology vanishes outside one ordered finite integer interval (Stacks, Tag 05RU). -/
 def coefficientCohomologyBounded {C : Type w} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     (K : ConstantCompletion.D R) : Prop :=

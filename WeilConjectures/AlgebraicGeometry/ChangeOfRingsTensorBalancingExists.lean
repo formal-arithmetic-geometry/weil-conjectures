@@ -35,7 +35,7 @@ set_option maxHeartbeats 400000 in
 -- Tensor and scalar-restriction elaboration needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Existence clause for the balancing factorization. (Stacks, Tag 01SB). -/
+/-- Existence clause for the balancing factorization (Stacks, Tag 01SB). -/
 theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

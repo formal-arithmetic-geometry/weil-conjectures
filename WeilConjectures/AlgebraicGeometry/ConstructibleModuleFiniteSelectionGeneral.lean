@@ -98,8 +98,7 @@ private theorem failure_locus_constructible
   exact hc
 
 /-- A family containing an injective map at every geometric stalk of a constructible
-module sheaf has a finite subfamily whose joint map is monomorphic.
-Source: Stacks Project, Tag 09Z6 (3), using constructible-topology compactness. -/
+module sheaf has a finite subfamily whose joint map is monomorphic (Stacks, Tag 09Z6). -/
 theorem exists_mono_biproduct_of_constructible_module_stalk_injective_general
     (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ]
     (X : Scheme.{u}) [IsNoetherian X]

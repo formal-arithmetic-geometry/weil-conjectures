@@ -309,9 +309,8 @@ open FiniteCoefficientRealization
 
 /-- Exact constant realization followed by scalar extension identifies the regular
 module and all finite quotients, with their scalar and quotient unit formulas.
-This is entirely a statement about ordinary modules, without Koszul complexes.
-
-Source: Stacks Project, Tags 093M, 099M and 03EK. -/
+This is entirely a statement about ordinary modules, without Koszul complexes
+(Stacks, Tags 093M, 099M and 03EK). -/
 theorem constantExactCoefficientRealization
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (b : Bool) :

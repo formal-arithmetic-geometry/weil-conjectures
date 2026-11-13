@@ -48,9 +48,7 @@ private theorem spectrum_pushforward_unit_iso {R S : CommRingCat.{u}} (φ : R �
     asIso ((pushforward (Spec.map φ)).obj M).fromTildeΓ⟩
 
 /-- Basic-open calculation identifies the associated quotient sheaf with the restricted
-pushforward of the closed subscheme structure sheaf.
-Source: Stacks Project, Lemma 26.7.3(2), Tag 01I9, with the affine chart
-and quotient presentation of Tag 068C. -/
+pushforward of the closed subscheme structure sheaf (Stacks, Tags 01I9 and 068C). -/
 theorem affine_quotient_restricted_iso {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (U : Y.Opens) (hU : IsAffineOpen U) (I : Ideal (Γ(Y, U)))
     (e : Scheme.Opens.toScheme (i ⁻¹ᵁ U) ≅

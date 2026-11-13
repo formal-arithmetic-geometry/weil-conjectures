@@ -29,8 +29,7 @@ local instance instHasLimitsOfShape_cechComplexAugmentations
     HasLimitsOfShape (Discrete J) (ModuleCat.{v} R) :=
   ModuleCat.hasLimitsOfShape
 
-/-- The functor applying Cech termwise to a module complex.
-Source: Stacks 01FD. -/
+/-- The functor applying Cech termwise to a module complex (Stacks, Tag 01FD). -/
 def moduleCechDoubleFunctor {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens) :
     CochainComplex X.Modules ℕ ⥤
       HomologicalComplex₂ (ModuleCat.{v} Γ(X, ⊤)) (ComplexShape.up ℕ) (ComplexShape.up ℕ) :=
@@ -38,15 +37,14 @@ def moduleCechDoubleFunctor {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens) 
     PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙
       cechComplexFunctor U).mapHomologicalComplex (ComplexShape.up ℕ)
 
-/-- Apply the module Cech functor termwise and totalize.
-Source: Stacks 01FD. -/
+/-- Apply the module Cech functor termwise and totalize (Stacks, Tag 01FD). -/
 def moduleCechTotalFunctor {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens) :
     CochainComplex X.Modules ℕ ⥤ CochainComplex (ModuleCat.{v} Γ(X, ⊤)) ℕ :=
   moduleCechDoubleFunctor U ⋙
     HomologicalComplex₂.totalFunctor _ _ _ (ComplexShape.up ℕ)
 
-/-- Components of the map from global sections of the resolution to its Čech total complex.
-Source: Stacks 01EQ. -/
+/-- Components of the map from global sections of the resolution to its Čech total complex
+(Stacks, Tag 01EQ). -/
 noncomputable def moduleCechComplexAlphaComponent {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) (K : CochainComplex X.Modules ℕ) (n : ℕ) :
     (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex
@@ -55,7 +53,7 @@ noncomputable def moduleCechComplexAlphaComponent {X : Scheme.{v}} {ι : Type v}
   moduleCechZero U (K.X n) ≫
     ((moduleCechDoubleFunctor U).obj K).ιTotal (ComplexShape.up ℕ) n 0 n (by simp)
 
-/-- The alpha components commute with the differential. Source: Stacks 01EQ. -/
+/-- The alpha components commute with the differential (Stacks, Tag 01EQ). -/
 theorem moduleCechComplexAlpha_comm {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
     (K : CochainComplex X.Modules ℕ) (n m : ℕ) :
     moduleCechComplexAlphaComponent U K n ≫
@@ -105,8 +103,7 @@ noncomputable def moduleCechComplexAlpha {X : Scheme.{v}} {ι : Type v} (U : ι 
   f := moduleCechComplexAlphaComponent U K
   comm' := fun n m _ => moduleCechComplexAlpha_comm U K n m
 
-/-- Components of the augmentation beta into the Čech total complex.
-Source: Stacks 01EQ. -/
+/-- Components of the augmentation beta into the Čech total complex (Stacks, Tag 01EQ). -/
 noncomputable def moduleCechComplexBetaComponent {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) {F : X.Modules} (K : CochainComplex X.Modules ℕ)
     (a : F ⟶ K.X 0) (n : ℕ) :
@@ -117,7 +114,7 @@ noncomputable def moduleCechComplexBetaComponent {X : Scheme.{v}} {ι : Type v}
         (a).val)).f n ≫
     ((moduleCechDoubleFunctor U).obj K).ιTotal (ComplexShape.up ℕ) 0 n n (by simp)
 
-/-- The beta components commute with the differential. Source: Stacks 01EQ. -/
+/-- The beta components commute with the differential (Stacks, Tag 01EQ). -/
 theorem moduleCechComplexBeta_comm {X : Scheme.{v}} {ι : Type v} (U : ι → X.Opens)
     {F : X.Modules} (K : CochainComplex X.Modules ℕ)
     (a : F ⟶ K.X 0) (ha : a ≫ K.d 0 1 = 0) (n m : ℕ) :
@@ -162,8 +159,8 @@ noncomputable def moduleCechComplexBeta {X : Scheme.{v}} {ι : Type v} (U : ι �
   comm' := fun n m _ => moduleCechComplexBeta_comm U K a ha n m
 
 
-/-- Restriction of global sections commutes with every map of coefficient complexes.
-Source: Stacks 01FD, the lower squares. -/
+/-- Restriction of global sections commutes with every map of coefficient complexes
+(Stacks, Tag 01FD). -/
 theorem moduleCechComplexAlpha_naturality {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) {K L : CochainComplex X.Modules ℕ} (ψ : K ⟶ L) :
     moduleCechComplexAlpha U K ≫ (moduleCechTotalFunctor U).map ψ =
@@ -181,8 +178,8 @@ theorem moduleCechComplexAlpha_naturality {X : Scheme.{v}} {ι : Type v}
     congrArg (fun k ↦ k ≫ ((moduleCechDoubleFunctor U).obj L).ιTotal
       (ComplexShape.up ℕ) n 0 n (by simp)) (moduleCechZero_naturality U (ψ.f n))
 
-/-- An augmentation-preserving map commutes with the coefficient augmentation into totals.
-Source: Stacks 01FD, the pentagon. -/
+/-- An augmentation-preserving map commutes with the coefficient augmentation into totals
+(Stacks, Tag 01FD). -/
 theorem moduleCechComplexBeta_naturality {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) {F : X.Modules} {K L : CochainComplex X.Modules ℕ}
     (a : F ⟶ K.X 0) (ha : a ≫ K.d 0 1 = 0)
@@ -204,14 +201,12 @@ theorem moduleCechComplexBeta_naturality {X : Scheme.{v}} {ι : Type v}
   rw [← Category.assoc, ← HomologicalComplex.comp_f, ← T.map_comp, hψ]
 
 
-/-- The general alpha specializes to the existing resolution alpha.
-Source: Stacks 01EQ. -/
+/-- The general alpha specializes to the existing resolution alpha (Stacks, Tag 01EQ). -/
 theorem moduleCechComplexAlpha_resolution {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) {F : X.Modules} (I : InjectiveResolution F) :
     moduleCechComplexAlpha U I.cocomplex = moduleCechAlpha U I := rfl
 
-/-- The general beta specializes to the existing resolution beta.
-Source: Stacks 01EQ. -/
+/-- The general beta specializes to the existing resolution beta (Stacks, Tag 01EQ). -/
 theorem moduleCechComplexBeta_resolution {X : Scheme.{v}} {ι : Type v}
     (U : ι → X.Opens) {F : X.Modules} (I : InjectiveResolution F)
     (h : I.ι.f 0 ≫ I.cocomplex.d 0 1 = 0) :

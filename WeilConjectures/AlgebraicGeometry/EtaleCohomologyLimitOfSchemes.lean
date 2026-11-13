@@ -37,7 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 
 /-- Cohomology continuity for a system of abelian sheaves on a directed inverse system
-of qcqs schemes with affine transition maps. (Stacks, Tag 09YQ) -/
+of qcqs schemes with affine transition maps (Stacks, Tag 09YQ). -/
 theorem nonempty_isColimit_etale_cohomology_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

@@ -106,8 +106,7 @@ private theorem finiteType_embedding_stabilizer_open [IsSepClosure K Ksep]
   intro a _
   exact stabilizer_isOpen_of_isIntegral (K := K) (L := Ksep) (σ a)
 
-/-- The geometric-point action is continuous for the discrete topology.
-Source: Stacks Project, Tag 03QR, first paragraph. -/
+/-- The geometric-point action is continuous for the discrete topology (Stacks, Tag 03QR). -/
 theorem etaleFieldGeometricAction_continuous [IsSepClosure K Ksep]
     (X : Scheme.Etale (Spec (CommRingCat.of K))) :
     (etaleFieldGeometricAction K Ksep X).IsContinuous := by

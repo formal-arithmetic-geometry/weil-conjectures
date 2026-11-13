@@ -81,8 +81,8 @@ private theorem canonical_unit_commShift
 
 
 -- Whiskered shift comparisons involve several localized functors.
-/-- The identity-resolution computation intertwines the actual derived shift comparison.
-Source: Stacks Project, Tag 079V, construction by the equivalence K(Inj) to D. -/
+/-- The identity-resolution computation intertwines the actual derived shift comparison
+(Stacks, Tag 079V). -/
 theorem derivedModuleDirectImageKInjectiveIso_shift
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

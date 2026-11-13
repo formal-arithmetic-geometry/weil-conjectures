@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The abelian étale direct image agrees with the direct image of commutative group objects,
-compatibly with the forgetful functors. (Stacks, Tags 00YR and 00YV) -/
+compatibly with the forgetful functors (Stacks, Tags 00YR and 00YV). -/
 theorem etaleAbelianDirectImageInternal (U V : Scheme.{u}) (f : U ⟶ V) :
     let R : Sheaf U.smallEtaleTopology (Type (u + 1)) ⥤
         Sheaf V.smallEtaleTopology (Type (u + 1)) :=

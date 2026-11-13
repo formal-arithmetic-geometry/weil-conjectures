@@ -22,7 +22,7 @@ universe w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The lattice construction before proving injectivity. (Stacks, Tag 01YE). -/
+/-- The lattice construction before proving injectivity (Stacks, Tag 01YE). -/
 theorem coherent_integral_generic_ideal_construction (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G) :
     ∃ (r : ℕ) (I : Z.IdealSheafData),

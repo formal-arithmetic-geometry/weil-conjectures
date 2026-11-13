@@ -303,8 +303,8 @@ set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent CE and normalized page data together.
 /-- The inverse canonical cycle comparison takes related filtered representatives to
 related row cycles. This is a degreewise statement, before taking homology; it assumes
-no augmentation compatibility and no normalization of higher spectral-sequence pages.
-Source: Stacks Project, Tags 015J, 015K and 012K. -/
+no augmentation compatibility and no normalization of higher spectral-sequence pages
+(Stacks, Tags 015J, 015K and 012K). -/
 theorem etaleCE_row_cycles_naturality
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))

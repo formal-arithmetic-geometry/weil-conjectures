@@ -162,8 +162,8 @@ private lemma represented_resolution {C : Type*} [Category.{v} C] [Abelian C]
   rw [K.cyclesIsoSc'_hom_iCycles]
   exact hz
 
-/-- Existence of comparisons normalized by the Hom-to-sections adjunction.
-Source: Stacks Project, Tag 0A50 (sections of resolutions), Tag 03F3 (localization). -/
+/-- Existence of comparisons normalized by the Hom-to-sections adjunction
+(Stacks, Tags 0A50 and 03F3). -/
 theorem exists_resolutionSection_canonical_comparison {X : Scheme.{u}}
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) :
     Nonempty (ResolutionSectionCanonicalComparison G I) := by

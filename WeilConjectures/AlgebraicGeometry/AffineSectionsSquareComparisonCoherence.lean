@@ -32,8 +32,8 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 -- The exposed derived-scalar construction increases signature elaboration work.
 /-- Normalized sections comparisons commute with the right-adjoint comparison of
 an arbitrary fibre-product object. This assertion has no pullback units and no
-base-change map: it only compares two ways to take sections of a composed direct image.
-Source: Stacks, cohomology.tex, Tags 0D5T and 08HY; perfect.tex, Tag 0AA7. -/
+base-change map: it only compares two ways to take sections of a composed direct image
+(Stacks, Tags 0D5T, 08HY and 0AA7). -/
 theorem affineSections_square_comparison_coherence
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R)

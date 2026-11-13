@@ -27,8 +27,7 @@ variable {X S : Scheme.{u}}
 
 /-- On an affine diagonal chart the tensor multiplication kernel maps onto the
 actual conormal sections, compatibly with the canonical tensor-pullback unit.
-This statement is independent of any normalized derivation.
-Source: Stacks Project, Tag 08S2, affine calculation; Tags 01KJ and 01R3. -/
+This statement is independent of any normalized derivation (Stacks, Tags 08S2, 01KJ and 01R3). -/
 theorem diagonalConormal_affine_ideal_class (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :
     letI : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra

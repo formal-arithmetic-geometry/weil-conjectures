@@ -24,8 +24,8 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- The explicit proposition of coherent scheme transports and model isomorphisms.
 Its data are the derived equivalences, the four families of object isomorphisms,
 and the two sheafified-chain-map compatibility equations written below. This is
-notation for that formula, not data chosen from an existence theorem.
-Source: Stacks Project, Tags 09RE and 08DW, affine comparison formula. -/
+notation for that formula, not data chosen from an existence theorem (Stacks, Tags 09RE and 08DW).
+-/
 @[irreducible]
 def affineModelComparisonData
     {I : Type u} [Preorder I]

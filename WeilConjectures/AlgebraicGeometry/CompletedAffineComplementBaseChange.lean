@@ -24,10 +24,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- An isomorphism over the complement of K stays an isomorphism over the complement
-of the extended affine ideal after completion base change.
-
-Source: Stacks Project, Tag 088B, paragraph defining Y', X' and the pullback of K;
-stability of isomorphisms under base change. -/
+of the extended affine ideal after completion base change (Stacks, Tag 088B). -/
 theorem completedAffine_complement_base_change
     {X Y : Scheme.{u}} (J K : Y.IdealSheafData) (f : X ⟶ Y)
     (hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl)))

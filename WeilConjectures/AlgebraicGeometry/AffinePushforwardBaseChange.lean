@@ -60,8 +60,8 @@ private theorem baseChange_unit_top {X S X' S' : Scheme.{u}}
     pushforwardCongr_hom_app_app] using ht
 
 
-/-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible.
-Source: Stacks Project, Lemma 02KG. -/
+/-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible
+(Stacks, Tag 02KG). -/
 theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]
@@ -74,8 +74,8 @@ theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}}
 
 /-- On affine charts, the canonical map is the tensor associativity identification.
 The two equivalences are pinned by their values on generators, using the canonical units.
-Applying this assertion to restricted affine squares gives the formula on affine opens.
-Source: Stacks Project, Lemma 02KG, affine computation (01I9). -/
+Applying this assertion to restricted affine squares gives the formula on affine opens
+(Stacks, Tags 02KG and 01I9). -/
 theorem affinePushforward_baseChange_affine_formula
     (R B R' : Type u) [CommRing R] [CommRing B] [CommRing R']
     [Algebra R B] [Algebra R R'] (M : ModuleCat.{u} B) :
@@ -198,8 +198,8 @@ theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
   have := (tensorPullbackObjUnitToUnit_isIso g').1
   exact ⟨mu, mu', hmu, hmu', inferInstance, hmult, hunit⟩
 
-/-- Compatibility with a further base change under the canonical composition isomorphisms.
-Source: Stacks Project, Cohomology, Remark 0ATM; node clause (3). -/
+/-- Compatibility with a further base change under the canonical composition isomorphisms
+(Stacks, Tag 0ATM). -/
 theorem affinePushforward_baseChange_comp
     {X S X' S' X'' S'' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (f'' : X'' ⟶ S'')

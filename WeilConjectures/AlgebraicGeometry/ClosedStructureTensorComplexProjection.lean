@@ -25,8 +25,8 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Tensor with the pushed-forward structure sheaf is termwise pullback and pushforward.
-Source: Stacks Project, Modules, Tags 01AX and 08KS; More on Algebra, Tag 068G. -/
+/-- Tensor with the pushed-forward structure sheaf is termwise pullback and pushforward
+(Stacks, Tags 01AX, 08KS and 068G). -/
 theorem nonempty_closedStructure_tensor_complex_projection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [(Scheme.Modules.tensorPullback i).Additive]

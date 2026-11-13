@@ -34,8 +34,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Pushforward from a closed subscheme preserves quasi-coherence and is annihilated by
 its ideal. A quasi-coherent module annihilated by that ideal has quasi-coherent pullback
 and invertible canonical unit, and finite type passes to that pullback.
-Here `i.ker.idealOfOpens V` is the ideal on every open, not only affine opens.
-Source: Stacks Project, Morphisms, Lemma 01QY, and Modules, Lemmas 08KS, 01BG, and 01B6. -/
+Here `i.ker.idealOfOpens V` is the ideal on every open, not only affine opens
+(Stacks, Tags 01QY, 08KS, 01BG and 01B6). -/
 theorem closedImmersion_pushforward_annihilated
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     (∀ (G : Z.Modules) [G.IsQuasicoherent],

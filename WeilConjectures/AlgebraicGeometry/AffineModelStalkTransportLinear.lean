@@ -133,8 +133,8 @@ noncomputable def affineModelStalkAddEquiv
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicitly constructed additive transport respects the coordinate-ring action.
-Source: Stacks Project, Tags 01BH and 01HV (7). -/
+/-- The explicitly constructed additive transport respects the coordinate-ring action
+(Stacks, Tags 01BH and 01HV). -/
 theorem affineModelStalkAddEquiv_smul
     {Y : Scheme.{u}} (x : Y) (U : Y.affineOpens) (hx : x ∈ U.1)
     (F : Y.Modules) (M : ModuleCat.{u} Γ(Y, U.1))

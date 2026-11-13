@@ -60,8 +60,8 @@ private theorem stageMap_asHomMap
       perfectHomMap s (affineModelStageArrow R j k hjk) a := by
   rfl
 
-/-- The stage Hom equation follows from the natural comparison and object triangles.
-Source: Stacks Project, Tag 09RE and derived pullback composition, Tag 0D5S. -/
+/-- The stage Hom equation follows from the natural comparison and object triangles
+(Stacks, Tags 09RE and 0D5S). -/
 theorem affineModelStageHomEquation_of_coherent_objects
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

@@ -141,8 +141,8 @@ private theorem restrict_scalar_naturality {R : CommRingCat.{u}} {X : Scheme.{u}
   exact congrArg (fun k ↦ k ((Scheme.ΓSpecIso R).inv r)) hh
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Global linear maps extend to a morphism into the internal Hom sheaf.
-Source: Stacks Project, Tag 01I7 (mapping property) and Tag 01HV (4)-(5). -/
+/-- Global linear maps extend to a morphism into the internal Hom sheaf
+(Stacks, Tags 01I7 and 01HV). -/
 theorem exists_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) :
     ∀ (T : ModuleCat.{u} Γ(Y, U.1) ⥤ U.1.toScheme.Modules)

@@ -30,8 +30,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Left exactness computes the lowest cohomology of truncated derived sections.
-This statement applies to every derived sheaf object, without quasi-coherence.
-Source: Stacks Project, Tag 05TC (2); Tag 06Z0, cohomology calculation. -/
+This statement applies to every derived sheaf object, without quasi-coherence
+(Stacks, Tags 05TC and 06Z0). -/
 theorem affineDerivedSections_truncated_bottom (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

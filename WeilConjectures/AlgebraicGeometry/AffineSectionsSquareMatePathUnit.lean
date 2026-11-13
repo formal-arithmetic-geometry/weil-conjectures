@@ -432,8 +432,7 @@ set_option cleanup.letToHave false in
 -- The sections and exact-restriction comparisons require unfolding scalar actions.
 /-- The path through the square mate and the comparisons r,d, evaluated on the
 unit for p_* followed by affine sections. This formula does not involve the derived
-comparison c on the other path.
-Source: Stacks Project, cohomology.tex, Tags 08HY and 0D5T; perfect.tex, Tag 0AA7. -/
+comparison c on the other path (Stacks, Tags 08HY, 0D5T and 0AA7). -/
 theorem affineSections_square_mate_path_unit
     {R B : CommRingCat.{u}} {X : Scheme.{u}}
     (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) :

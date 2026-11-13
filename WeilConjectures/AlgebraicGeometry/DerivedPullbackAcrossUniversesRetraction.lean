@@ -24,8 +24,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Pullback along a retraction cancels, also between different localization universes.
-Source: Stacks Project, Tag 0D5S (composition and identity of derived pullback). -/
+/-- Pullback along a retraction cancels, also between different localization universes
+(Stacks, Tag 0D5S). -/
 theorem derivedPullbackAcrossUniverses_retraction {X Y : Scheme.{u}}
     [hx : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hy : HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

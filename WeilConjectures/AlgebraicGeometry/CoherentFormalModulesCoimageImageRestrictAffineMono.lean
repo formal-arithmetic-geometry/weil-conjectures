@@ -67,8 +67,7 @@ private theorem restriction_preservesCokernel {X : Scheme.{u}} [IsNoetherian X]
   exact preservesColimit_of_reflects_of_preserves R j
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The affine restriction of the coimage-image comparison is monic.
-Source: Stacks Project, Lemma 087X, affine calculation of Coim=Im. -/
+/-- The affine restriction of the coimage-image comparison is monic (Stacks, Tag 087X). -/
 theorem coherentFormalModules_coimageImage_isMono_restrict_affine
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     [HasKernels (CoherentFormalModule X I)]

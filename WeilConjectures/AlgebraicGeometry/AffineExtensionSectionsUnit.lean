@@ -28,9 +28,7 @@ variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
 /-- The affine extension comparison respects the fixed adjunction units.
 Only Q on Spec R must have quasi-coherent cohomology. No f, base-change square,
-map m, or base-change morphism occurs in this statement.
-Source: Stacks, perfect.tex, Tag 06Z0 and Tags 08DV, 08DW;
-Tag 0AA7, extension/restriction adjunct construction. -/
+map m, or base-change morphism occurs in this statement (Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem exists_affineExtensionSectionsUnit
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

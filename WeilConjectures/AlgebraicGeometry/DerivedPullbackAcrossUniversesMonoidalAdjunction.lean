@@ -31,8 +31,8 @@ namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
 /-- The transported K-flat pullback is strong monoidal and left adjoint to the
-specified K-injective direct image, with independent localization universes.
-Source: Stacks Project, Tags 079U, 079W and 05RU. -/
+specified K-injective direct image, with independent localization universes
+(Stacks, Tags 079U, 079W and 05RU). -/
 theorem exists_derivedPullbackAcrossUniverses_monoidal_adjunction
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

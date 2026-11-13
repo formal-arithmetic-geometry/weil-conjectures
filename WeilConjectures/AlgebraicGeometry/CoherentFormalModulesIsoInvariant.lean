@@ -37,8 +37,8 @@ private theorem finiteType_of_iso
   dsimp [q']
   infer_instance
 
-/-- Coherence of a formal module is invariant under isomorphism of inverse systems.
-Source: Stacks Project, Lemma 087X, transport of the three defining conditions. -/
+/-- Coherence of a formal module is invariant under isomorphism of inverse systems
+(Stacks, Tag 087X). -/
 theorem coherentFormalModules_of_iso
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     {F G : ℕᵒᵖ ⥤ X.Modules} (e : F ≅ G)

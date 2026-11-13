@@ -238,9 +238,8 @@ private lemma normalizedSquareCore
 end Generic
 
 /-- Degree-zero normalization and vanishing away from that degree determine the
-square relating a tensor augmentation to its value at the cochain unit.
-
-Source: Stacks 099M, tensoring the finite augmentation, with Stacks 03EK. -/
+square relating a tensor augmentation to its value at the cochain unit (Stacks, Tags 099M and 03EK).
+-/
 theorem normalizedTensorSquare
     (O : Sheaf J CommRingCat.{u}) (K P : Cx O) (Q : Mod O)
     (u : 𝟙_ (Mod O) ⟶ K.X 0) [IsIso u] (q : 𝟙_ (Mod O) ⟶ Q)

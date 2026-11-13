@@ -27,10 +27,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The affine localization comparison, expressed on an open of the ambient scheme.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, affine-open paragraph;
-Cohomology of Sheaves, Lemma 01E1 (2). -/
+/-- The affine localization comparison, expressed on an open of the ambient scheme
+(Stacks, Tags 09MR and 01E1). -/
 theorem affineOpen_cohomology_localization
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))
     (F : X.Modules) [F.IsQuasicoherent]

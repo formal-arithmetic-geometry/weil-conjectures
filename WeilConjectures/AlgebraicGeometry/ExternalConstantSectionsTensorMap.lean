@@ -106,8 +106,7 @@ theorem externalConstantSectionsTensorMap_app
   rfl
 
 /-- A component of `externalConstantSectionsTensorMap` is bijective exactly when the
-corresponding `k`-linear external section component is bijective.
-Source: Stacks Project, Varieties, Tag 0BED, affine-open degree-zero calculation. -/
+corresponding `k`-linear external section component is bijective (Stacks, Tag 0BED). -/
 theorem externalConstantSectionsTensorMap_app_bijective_iff
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

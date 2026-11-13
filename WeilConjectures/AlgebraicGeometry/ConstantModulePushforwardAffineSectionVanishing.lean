@@ -32,9 +32,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- A section on an affine etale test scheme which vanishes at the limit already
-vanishes at a later stage. This assertion concerns sections, not geometric germs.
-
-Source: Stacks Project, Tag 09Z1, degree-zero injectivity, using Tag 09YQ. -/
+vanishes at a later stage. This assertion concerns sections, not geometric germs
+(Stacks, Tags 09Z1 and 09YQ). -/
 theorem exists_constantModulePushforward_affine_section_eq_zero
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

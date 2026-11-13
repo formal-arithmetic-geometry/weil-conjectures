@@ -76,18 +76,15 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Etale sheafification for integral coefficients.
-Source: Stacks 00WJ. -/
+/-- Etale sheafification for integral coefficients (Stacks, Tag 00WJ). -/
 theorem cartierEtaleAbSheafify (Z : Scheme.{u}) :
     HasSheafify Z.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
 
-/-- Etale sheafification for fixed module coefficients.
-Source: Stacks 00WJ. -/
+/-- Etale sheafification for fixed module coefficients (Stacks, Tag 00WJ). -/
 theorem cartierEtaleModuleSheafify (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     HasSheafify Z.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
 
-/-- Pro-etale sheafification for fixed module coefficients.
-Source: Stacks 00WJ. -/
+/-- Pro-etale sheafification for fixed module coefficients (Stacks, Tag 00WJ). -/
 theorem cartierProModuleSheafify (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :
     HasSheafify (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A) := inferInstance
 
@@ -188,8 +185,7 @@ abbrev cartierForget (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u}) :=
     (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1})
 
 /-- The unit-normalized comparison with scalar forgetting, as the adjoint of the
-module comparison unit after forgetting scalars.
-Source: Stacks 00WX and the Cartier opening comparison paragraph. -/
+module comparison unit after forgetting scalars (Stacks, Tag 00WX). -/
 def cartierForgetComparison (A : Type (u + 1)) [CommRing A] (Z : Scheme.{u})
     (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (comparisonUpperStar AddCommGrpCat.{u + 1} Z).obj
@@ -255,8 +251,8 @@ def cartierIntegralSourceIso {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion
 attribute [local irreducible] cartierIntegralSourceComparison cartierIntegralSourceIso
   cartierUnitsComparison
 
-/-- Transport of an extension boundary through an exact functor and endpoint maps.
-Source: Stacks 0152, naturality of extension classes. -/
+/-- Transport of an extension boundary through an exact functor and endpoint maps
+(Stacks, Tag 0152). -/
 def cartierBoundaryImage
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasExt.{wC} C]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasExt.{wB} B]
@@ -265,8 +261,8 @@ def cartierBoundaryImage
     (β : Ext.{wC} F G 1) : Ext.{wB} F' G' 1 :=
   (Ext.mk₀ s).comp ((β.mapExactFunctor U).comp (Ext.mk₀ t) (add_zero 1)) (zero_add 1)
 
-/-- The positive connecting class followed by a change of kernel coefficients.
-Source: Stacks 0152 and 03PL. -/
+/-- The positive connecting class followed by a change of kernel coefficients
+(Stacks, Tags 0152 and 03PL). -/
 def cartierKummerClass
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasExt.{wC} C]
     {S : ShortComplex C} (hS : S.ShortExact) {H : C} (f : S.X₁ ⟶ H) :
@@ -283,8 +279,8 @@ def cartierProBoundary {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]
   cartierBoundaryImage (comparisonUpperStar AddCommGrpCat.{u + 1} Z)
     (cartierIntegralSourceIso i).inv (cartierUnitsComparison Z) β
 
-/-- Restriction of roots, followed by the etale kernel inclusion, is killed by n.
-Source: Stacks 03PL. -/
+/-- Restriction of roots, followed by the etale kernel inclusion, is killed by n (Stacks, Tag 03PL).
+-/
 theorem cartierRootsComparison_condition (Z : Scheme.{u}) (n : ℕ) :
     ((comparisonUpperStar AddCommGrpCat.{u + 1} Z).map
         (kernel.ι (n • 𝟙 Z.gmSheaf)) ≫ cartierUnitsComparison Z) ≫
@@ -386,8 +382,7 @@ def cartierProIntegralGenerator (A : Type (u + 1)) [CommRing A]
 
 attribute [local irreducible] cartierProRootMap cartierProIntegralGenerator
 
-/-- The actual pro-etale Kummer short complex, with its kernel inclusion.
-Source: Stacks 03PL. -/
+/-- The actual pro-etale Kummer short complex, with its kernel inclusion (Stacks, Tag 03PL). -/
 def cartierProKummerComplex (Z : Scheme.{u}) (n : ℕ) :
     ShortComplex (Sheaf (Scheme.ProEt.topology Z) AddCommGrpCat.{u + 1}) :=
   ShortComplex.mk (kernel.ι (n • 𝟙 (Scheme.ProEt.gmSheaf Z)))

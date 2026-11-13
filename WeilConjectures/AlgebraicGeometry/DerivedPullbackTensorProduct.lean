@@ -45,7 +45,7 @@ set_option maxHeartbeats 800000 in
 set_option synthInstance.maxSize 256 in
 /-- For a morphism of schemes `g : T ⟶ S`, derived pullback commutes with derived tensor product:
 `Lg^*(K ⊗^L L) ≅ Lg^*K ⊗^L Lg^*L`, canonically and naturally in `K` and `L`, stated on K-flat
-representatives. (Stacks, Tag 079U) -/
+representatives (Stacks, Tag 079U). -/
 theorem derivedPullback_tensorProduct
     {T S : Scheme.{uPull}} (g : T ⟶ S)
     [HasDerivedCategory.{wPull}

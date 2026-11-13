@@ -25,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensoring the ideal inclusion by an invertible tensor power identifies its sections
-with the kernel of restriction to the closed subscheme.
-
-Source: Stacks Project, Modules Lemma 08KS and Varieties Lemma 09NX, extension by zero. -/
+with the kernel of restriction to the closed subscheme (Stacks, Tags 08KS and 09NX). -/
 theorem closedImmersion_ideal_tensor_sections {Y Z : Scheme.{u}} (j : Z ⟶ Y)
     [IsClosedImmersion j] (M : Y.Modules) [M.IsInvertible] (m : ℕ) :
     let N := M.tensorPow m

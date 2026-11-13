@@ -25,9 +25,8 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 set_option autoImplicit false
 namespace AlgebraicGeometry
 
-/-- The restriction of a lower tail has local cohomological bound zero on an affine basis.
-Source: Stacks Project, Tag 0D64, Tag 01E1 (restriction
-of injectives), and Tag 03FD (module versus abelian cohomology). -/
+/-- The restriction of a lower tail has local cohomological bound zero on an affine basis
+(Stacks, Tags 0D64, 01E1 and 03FD). -/
 theorem affineBasisRestrictedLowerTail_local_bound
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

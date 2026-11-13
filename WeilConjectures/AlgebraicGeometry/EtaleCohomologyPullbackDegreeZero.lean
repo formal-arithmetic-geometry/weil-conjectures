@@ -28,8 +28,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- The augmentation of any K-injective resolution induces the canonical isomorphism
 from global sections to degree-zero cohomology. The factor `z` records well-definedness:
-its composite with the inclusion of cycles is precisely the augmentation on sections.
-Source: Stacks Tag 05TD. -/
+its composite with the inclusion of cycles is precisely the augmentation on sections
+(Stacks, Tag 05TD). -/
 theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
     (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -61,8 +61,8 @@ theorem exists_degreeZeroCohomology_cycles_iso (T : Scheme.{u})
   exact ⟨z, hz, isIso_degreeZeroCohomology_cycles_factor T G I s z hz⟩
 
 /-- Naturality of the augmentation-to-cohomology map for arbitrary K-injective resolutions.
-Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications.
-Source: Stacks Tag 05TD. -/
+Taking `G' = G` and `φ = 𝟙 G` gives compatibility with resolution identifications
+(Stacks, Tag 05TD). -/
 theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     (G G' : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : G ⟶ G')
     (I I' : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -128,8 +128,8 @@ theorem degreeZeroCohomology_resolution_naturality (T : Scheme.{u})
     _ = _ := by
       rw [homologyπ_naturality, ← Category.assoc, hs', Category.assoc]
 
-/-- The degree-zero pullback formula on the actual complexes computing cohomology.
-Source: Stacks Tag 01FA. -/
+/-- The degree-zero pullback formula on the actual complexes computing cohomology
+(Stacks, Tag 01FA). -/
 theorem degreeZeroCohomology_resolution_pullback {X Y : Scheme.{u}} (u : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -222,8 +222,7 @@ private theorem homEquiv_comparison {C D : Type*} [Category* C] [Category* D]
     Adjunction.homEquiv_leftAdjointUniq_hom_app, adj.homEquiv_apply]
 
 /-- Under the canonical degree-zero identification, pullback on étale cohomology is
-pullback of a global section by the adjunction unit.
-Source: Stacks Tag 01FA. -/
+pullback of a global section by the adjunction unit (Stacks, Tag 01FA). -/
 theorem cohomologyMap_zero_eq_globalSectionsUpperStarMap {X Y : Scheme.{u}}
     (u : Y ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (g : (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj G) :

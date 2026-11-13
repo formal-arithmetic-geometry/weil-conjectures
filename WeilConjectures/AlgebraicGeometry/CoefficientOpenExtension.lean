@@ -26,8 +26,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Composition with an open immersion on the coefficient-sized pro-etale sites.
-Source: Stacks Tags 03DI and 09AF. -/
+/-- Composition with an open immersion on the coefficient-sized pro-etale sites
+(Stacks, Tags 03DI and 09AF). -/
 abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.coefficientProEtaleSiteModel.{u, v} U ⥤
@@ -35,8 +35,8 @@ abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
   AsSmall.down ⋙ MorphismProperty.Over.map ⊤
     (inferInstance : @WeaklyEtale _ _ j) ⋙ AsSmall.up
 
-/-- Composition with an open immersion on the coefficient-sized etale sites.
-Source: Stacks Tags 03DI and 09AF. -/
+/-- Composition with an open immersion on the coefficient-sized etale sites
+(Stacks, Tags 03DI and 09AF). -/
 abbrev coefficientOpenEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.smallModelComparisonEtaleSite.{u, v} U ⥤
@@ -92,8 +92,8 @@ instance coefficientOpenEtaleMap_isContinuous {U X : Scheme.{u}} (j : U ⟶ X)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} U) U.smallEtaleTopology
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
-/-- Pro-etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI. -/
+/-- Pro-etale open extension by zero: left Kan extension followed by sheafification
+(Stacks, Tag 03DI). -/
 def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -101,8 +101,8 @@ def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.coefficientProEtaleModelTopology.{u, v} U)
     (Scheme.coefficientProEtaleModelTopology.{u, v} X)
 
-/-- Etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI. -/
+/-- Etale open extension by zero: left Kan extension followed by sheafification (Stacks, Tag 03DI).
+-/
 def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback

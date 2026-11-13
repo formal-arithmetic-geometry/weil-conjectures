@@ -54,9 +54,7 @@ private theorem constructible_image_clopen {Y : Type u} [TopologicalSpace Y]
   exact hE.inter (hWc.isConstructible hWo)
 
 /-- The value on a trivializing cover member detects support at every point in its image,
-including after pullback along an arbitrary scheme morphism.
-
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 03Q1 and 04FN. -/
+including after pullback along an arbitrary scheme morphism (Stacks, Tags 09YS, 03Q1 and 04FN). -/
 private theorem etaleModuleSupport_on_trivializing_cover
     {X Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f : Y ⟶ X)
@@ -115,9 +113,7 @@ private theorem etaleModuleSupport_on_trivializing_cover
 
 /-- The zero-stalk condition is independent of the geometric point over a point of `X`;
 a single zero stalk excludes that point from the support. The support is constructible.
-Stalks and support are taken for the underlying abelian sheaf.
-
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN. -/
+Stalks and support are taken for the underlying abelian sheaf (Stacks, Tags 09YS, 04FS and 04FN). -/
 theorem constructibleEtaleModuleSupport {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {Λ : Type (u + 1)}
     [CommRing Λ] [Finite Λ] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

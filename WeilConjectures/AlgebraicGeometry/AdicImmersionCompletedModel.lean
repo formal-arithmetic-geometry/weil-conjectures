@@ -22,8 +22,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- Algebraic inverse-image data for the specified transported geometric inverse image.
-Its ring and module operations are fixed on generalized sections by InverseImageData.
-Source: Stacks Tags 00YV and 03D2. -/
+Its ring and module operations are fixed on generalized sections by InverseImageData
+(Stacks, Tags 00YV and 03D2). -/
 def sfbImmersionAlgebra {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
     ConstantCompletion.InverseImageData (SfbAdicRestriction.inverse i) :=
   Classical.choice (ConstantCompletion.inverseImageData_exists

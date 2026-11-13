@@ -31,8 +31,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Over one affine open, the two vertical maps of the coproduct comparison square
-are isomorphisms for a common lower truncation. The integer may depend on that open.
-Source: Stacks Project, Tag 08DZ, truncation argument using Tag 08D5(2). -/
+are isomorphisms for a common lower truncation. The integer may depend on that open
+(Stacks, Tags 08DZ and 08D5). -/
 theorem exists_derivedDirectImage_coproduct_affine_truncation
     {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

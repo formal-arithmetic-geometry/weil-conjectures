@@ -69,9 +69,7 @@ private theorem localDim_surjective_polynomial
 /-- The dimension at a point of the spectrum of a finite type algebra is preserved by any
 extension of its ground field. The map `algebraMap k K` is the given field homomorphism;
 `S ⊗[k] K` has its right-factor `K`-algebra structure. The displayed prime-spectrum map
-contracts the prime along `s ↦ s ⊗ₜ 1`.
-
-Source: Stacks Project, Algebra, Lemma 10.116.6, Tag 00P4. -/
+contracts the prime along `s ↦ s ⊗ₜ 1` (Stacks, Tag 00P4). -/
 theorem topologicalKrullDimAt_spec_tensorProduct_field_extension
     {k : Type u} {K : Type v} {S : Type w} [Field k] [Field K] [CommRing S]
     [Algebra k K] [Algebra k S] [Algebra.FiniteType k S]

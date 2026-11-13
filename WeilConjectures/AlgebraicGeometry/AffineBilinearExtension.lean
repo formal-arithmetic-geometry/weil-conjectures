@@ -26,8 +26,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
-/-- Sections of a module sheaf agree if they agree on every affine subopen.
-Source: Stacks Tag 0072, sheaf separatedness, and the affine basis of a scheme. -/
+/-- Sections of a module sheaf agree if they agree on every affine subopen (Stacks, Tag 0072). -/
 theorem sections_eq_of_affine {X : Scheme.{u}} (M : X.Modules)
     (U : X.Opens) (a b : Γ(M, U))
     (h : ∀ (V : X.affineOpens) (hVU : V.1 ≤ U),
@@ -41,8 +40,8 @@ theorem sections_eq_of_affine {X : Scheme.{u}} (M : X.Modules)
     X.isBasis_affineOpens.exists_subset_of_mem_open hx U.2
   exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨⟨V, hV⟩, hVU⟩, hxV⟩
 
-/-- Natural bilinear operations on the affine basis extend to all opens.
-Source: Stacks Tags 087Z and 0072, affine-basis descent. -/
+/-- Natural bilinear operations on the affine basis extend to all opens
+(Stacks, Tags 087Z and 0072). -/
 theorem affineBilinear_extension {X : Scheme.{u}} (M N P : X.Modules)
     (beta : ∀ V : X.affineOpens,
       M.val.obj (op V.1) →ₗ[Γ(X, V.1)] N.val.obj (op V.1) →ₗ[Γ(X, V.1)]

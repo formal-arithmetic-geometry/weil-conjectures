@@ -36,9 +36,8 @@ namespace AlgebraicGeometry
 
 /-- The pullback of a properly supported formal system to a Chow modification
 algebraizes. The coherent pushforward of this algebraization has proper support.
-The open locus on which the modification is an isomorphism is explicitly nonempty.
-
-Source: Stacks Project, Theorem 088E, paragraphs 2--4, using Lemmas 0885 and 0887. -/
+The open locus on which the modification is an isomorphism is explicitly nonempty
+(Stacks, Tags 088E, 0885 and 0887). -/
 theorem exists_chowPullbackAlgebraization
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

@@ -49,10 +49,7 @@ private theorem constructible_essentiallySmall
   infer_instance
 
 /-- A small filtered system of constructible maps to `F`, with factorization and
-refinement of relations tested on constructible sources.
-
-Source: Stacks Project, Tags 03SA(3), 095N and 03RZ; the category of finite
-presentations over `F` in Modules on Sites, Lemma 093C. -/
+refinement of relations tested on constructible sources (Stacks, Tags 03SA, 095N, 03RZ and 093C). -/
 theorem exists_filtered_constructible_data
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

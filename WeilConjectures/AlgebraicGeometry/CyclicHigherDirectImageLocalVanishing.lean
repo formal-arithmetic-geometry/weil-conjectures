@@ -29,10 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Local annihilation of every cohomology class on affine etale objects makes the
-higher direct image of a constant cyclic abelian sheaf zero.
-
-Source: Stacks Project, Tag 03Q8; the vanishing argument in
-`Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`. -/
+higher direct image of a constant cyclic abelian sheaf zero (Stacks, Tag 03Q8). -/
 theorem isZero_cyclicHigherDirectImage_of_locally_zero {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ)
     (H : ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U]

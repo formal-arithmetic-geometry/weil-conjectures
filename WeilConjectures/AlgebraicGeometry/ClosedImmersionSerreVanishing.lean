@@ -343,8 +343,7 @@ end RingTwistCech
 namespace Scheme.Modules
 
 /-- Serre vanishing for a finitely presented quasi-coherent module on a closed subscheme
-of finite-dimensional projective space over a Noetherian ring.
-Source: Stacks Project, Cohomology of Schemes, Tags 01YS and 0B5T (4). -/
+of finite-dimensional projective space over a Noetherian ring (Stacks, Tags 01YS and 0B5T). -/
 theorem exists_isZero_moduleCohomology_tensor_twist_of_closedImmersion
     (A : Type u) [CommRing A] [IsNoetherianRing A] {X : Scheme.{u}} {N : ℕ}
     (i : X ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of A))) [IsClosedImmersion i]

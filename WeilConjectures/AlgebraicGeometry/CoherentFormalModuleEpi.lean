@@ -96,9 +96,8 @@ private theorem isZero_of_first_component {X : Scheme.{u}} [IsNoetherian X]
   exact Functor.isZero F.obj (fun n ↦ hn n.unop)
 
 /-- A morphism in Coh(X,I) is an epimorphism exactly when its first component is an
- epimorphism of O_X-modules. In the shared indexing convention, `op 0` denotes level 1.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Y. -/
+ epimorphism of O_X-modules. In the shared indexing convention, `op 0` denotes level 1
+(Stacks, Tag 087Y). -/
 theorem coherentFormalModule_epi_iff_first_component {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) {F G : CoherentFormalModule X I} (α : F ⟶ G) :
     Epi α ↔ Epi (α.hom.app (op 0)) := by

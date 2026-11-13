@@ -28,14 +28,14 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.standard
 
 /-- The actual kernel of the successive quotient, as a module over the larger quotient.
-It is canonically J^(n+1)/J^(n+2), with no choice of a presentation or generators.
-Source: Stacks Tag 09BR. -/
+It is canonically J^(n+1)/J^(n+2), with no choice of a presentation or generators
+(Stacks, Tag 09BR). -/
 def adicFiniteGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} (adicFiniteCoeff J (n + 1)) :=
   ModuleCat.of _ (RingHom.ker (adicFiniteFactor J (Nat.le_succ n)))
 
-/-- The constant graded module placed in degree zero in the standard localization.
-Source: Stacks Tags 09BR and 093J. -/
+/-- The constant graded module placed in degree zero in the standard localization
+(Stacks, Tags 09BR and 093J). -/
 def adicFiniteGradedSingle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A) (n : ℕ) :
     adicFiniteAmbient.{u, v} X (adicFiniteCoeff J (n + 1)) :=
@@ -46,8 +46,8 @@ def adicFiniteGradedSingle (X : Scheme.{u})
       (adicFiniteGradedModule J n)))
 
 /-- The derived tensor with the actual graded coefficient module. The K-flat tensor is
-computed over the larger quotient, so the layer retains that quotient's scalar action.
-Source: Stacks Tag 09BR. -/
+computed over the larger quotient, so the layer retains that quotient's scalar action
+(Stacks, Tag 09BR). -/
 def adicFiniteGradedLayer (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :
@@ -59,8 +59,7 @@ def adicFiniteGradedLayer (X : Scheme.{u})
     (adicFiniteReduction.{u, v} X J N (n + 1))).obj
       (adicFiniteGradedSingle.{u, v} X J n)
 
-/-- The lower reduction, retaining the larger quotient's scalar action.
-Source: Stacks Tag 09BR. -/
+/-- The lower reduction, retaining the larger quotient's scalar action (Stacks, Tag 09BR). -/
 def adicFiniteRestrictedReduction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :

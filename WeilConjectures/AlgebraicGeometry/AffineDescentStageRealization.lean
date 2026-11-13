@@ -74,8 +74,8 @@ private theorem realization_perfect (Y : Scheme.{u}) (A : CommRingCat.{u})
 
 /-- Sheafifying a bounded finite-projective complex at any specified stage is perfect,
 and its canonical derived pullback is sheafification of scalar extension to the colimit.
-No existence of a stage and no model for a given limit object are asserted here.
-Source: Stacks Project, Tag 09RF, affine case; Tags 08EB, 06YI and 06YJ. -/
+No existence of a stage and no model for a given limit object are asserted here
+(Stacks, Tags 09RF, 08EB, 06YI and 06YJ). -/
 theorem affine_descent_stage_realization
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)

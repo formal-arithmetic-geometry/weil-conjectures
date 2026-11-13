@@ -73,8 +73,8 @@ private theorem canonical_boundary_naturality (X : Scheme.{u}) (U V : X.Opens)
 
 /-- Naturality of the concrete SES boundary under pullback to the inverse-image
 cover, before applying any further direct image. All shifts and SES comparisons
-are the fixed constructions, and the overlap morphism is the pinned open mate.
-Source: Stacks Tags 08BV, 08HY and 0DJ9, relative Mayer--Vietoris diagram. -/
+are the fixed constructions, and the overlap morphism is the pinned open mate
+(Stacks, Tags 08BV, 08HY and 0DJ9). -/
 theorem mvCanonicalBoundary_pullback
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

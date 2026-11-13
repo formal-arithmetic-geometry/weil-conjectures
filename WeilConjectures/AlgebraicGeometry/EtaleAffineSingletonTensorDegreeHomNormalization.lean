@@ -76,9 +76,7 @@ def IsSingletonTensorDegreeComparison (X : Scheme.{u}) (F : X.Modules)
       (∏ k : Fin (n + 1), (Pi.π (fun _ : Fin (n + 1) ↦ Over.mk g) k).left.left.appTop
         (b k)) • Modules.etaleTensorSectionsRestriction F P.hom m
 
-/-- The pure-tensor normalization for a comparison homomorphism.
-Source: Stacks Project, Tag 03P2, affine tensor calculation.
--/
+/-- The pure-tensor normalization for a comparison homomorphism (Stacks, Tag 03P2). -/
 def IsSingletonTensorDegreeComparisonHom (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] (U W : X.Etale) (g : W ⟶ U) (n : ℕ)
     (f : (singletonTensorAmitsur X F U W g).X n ⟶

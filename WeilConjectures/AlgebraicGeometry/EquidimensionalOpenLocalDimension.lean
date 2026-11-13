@@ -22,9 +22,8 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
-/-- Pure dimension of an open in a locally algebraic scheme gives its local dimension.
-
-Source: Stacks Project, Tag 0A21 (3), (5). -/
+/-- Pure dimension of an open in a locally algebraic scheme gives its local dimension
+(Stacks, Tag 0A21). -/
 theorem topologicalKrullDimAt_eq_of_equidimensional_open
     {k : Type u} [Field k] {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType g] (O : Y.Opens) (n : ℕ)

@@ -127,10 +127,8 @@ private theorem pullback_ideal_section {X Y : Scheme.{u}} (f : Y ⟶ X)
   refine ⟨(J.toModules ◁ e.hom).app ⊤ v, ?_⟩
   rw [ideal_image_map, nonvanishingLocus_iso e]
 
-/-- An ample pullback admits ideal-supported affine power sections outside the ideal support.
-
-Source: Stacks Project, Properties, Proposition 01Q3 and Lemma 01PV;
-Varieties, Lemma 09NX, final paragraph. -/
+/-- An ample pullback admits ideal-supported affine power sections outside the ideal support
+(Stacks, Tags 01Q3, 01PV and 09NX). -/
 theorem exists_ample_pullback_ideal_affine_section
     {X Y : Scheme.{u}} (f : Y ⟶ X) (L : X.Modules) [L.IsInvertible]
     [((tensorPullback f).obj L).IsInvertible]

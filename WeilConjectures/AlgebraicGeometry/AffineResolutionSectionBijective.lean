@@ -31,8 +31,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 /-- The canonical restricted-resolution class map is bijective over an affine base open.
-There is no Ext comparison or choice of cohomology coordinates in this assertion.
-Source: Stacks Project, Tags 01F4 (2), 01XJ (1), 01E4 and 01E5. -/
+There is no Ext comparison or choice of cohomology coordinates in this assertion
+(Stacks, Tags 01F4, 01XJ, 01E4 and 01E5). -/
 theorem affine_resolutionSectionClass_bijective
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F)

@@ -22,8 +22,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Internal functionals on an exterior sheaf agree if they agree on pure wedges
-on every subopen, rather than only on wedges over the largest open.
-Source: Stacks Project, Tag 03CY, uniqueness in the sheafification adjunction. -/
+on every subopen, rather than only on wedges over the largest open (Stacks, Tag 03CY). -/
 theorem exteriorSheaf_dual_ext (X : Scheme.{u}) (M : X.Modules) (n : ℕ)
     (U : X.Opens)
     (q r : (Scheme.Modules.dual (Scheme.Modules.exteriorPower M n)).val.obj (op U))

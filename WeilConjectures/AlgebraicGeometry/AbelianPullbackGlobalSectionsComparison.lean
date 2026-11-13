@@ -320,9 +320,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option maxRecDepth 2048 in
 /-- Global sections of an abelian inverse image identify with sections of the set
 inverse image on the base-changed terminal object, compatibly with composition.
-There is no inverse system or finite-stage lifting assertion here.
-
-Source: Stacks Project, Sites, Tags 00YV, 03CB and 03CC. -/
+There is no inverse system or finite-stage lifting assertion here
+(Stacks, Tags 00YV, 03CB and 03CC). -/
 theorem exists_abelianPullbackGlobalSectionsComparison
     (X : Scheme.{u}) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     ∃ e : ∀ (Y : Scheme.{u}) (f : Y ⟶ X),

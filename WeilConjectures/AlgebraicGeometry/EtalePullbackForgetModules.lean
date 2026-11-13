@@ -17,8 +17,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- Module pullback and abelian pullback have isomorphic underlying sheaves.
-Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7 (inverse image of modules). -/
+/-- Module pullback and abelian pullback have isomorphic underlying sheaves
+(Stacks, Tags 03D3 and 03D7). -/
 theorem pullback_forget_modules_iso (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

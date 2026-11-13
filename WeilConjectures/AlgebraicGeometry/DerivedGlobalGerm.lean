@@ -50,8 +50,8 @@ noncomputable def pulledGlobalGerm {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
       (g)^*[AddCommGrpCat.{u + 1}] ⋙ (pointSmallEtale t).sheafFiber :=
   globalGerm (t ≫ g) ≫ (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} g t).inv
 
-/-- Derive the global germ after Leray. Its construction has no strict-local hypothesis.
-Source: Stacks Project, Tags 03QO and 01EZ. -/
+/-- Derive the global germ after Leray. Its construction has no strict-local hypothesis
+(Stacks, Tags 03QO and 01EZ). -/
 noncomputable def derivedPulledGlobalGerm {X Y Y' : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y)
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Y') :

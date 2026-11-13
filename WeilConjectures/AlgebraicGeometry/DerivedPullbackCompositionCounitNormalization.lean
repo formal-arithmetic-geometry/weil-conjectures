@@ -35,8 +35,7 @@ variable [∀ S : Scheme.{u},
 set_option maxHeartbeats 500000 in
 -- The selected adjunctions and composite sheaf instances need a larger budget.
 /-- The chosen pullback comparison and composite direct-image unit transpose to the
-explicit pasted underived counits.
-Source: Stacks Project, Tags 079W, 0D5S and 0D5T. -/
+explicit pasted underived counits (Stacks, Tags 079W, 0D5S and 0D5T). -/
 theorem derivedPullbackComposition_counit_normalization
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings X.toRingedSpace))

@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Pull back a chart class, with the free-sheaf source transported from a given
 pullback test object. All factors are the specified composition, single-functor,
-and shift comparisons of exact inverse image.
-Source: Stacks Project, Tags 03CB and 0EYM. -/
+and shift comparisons of exact inverse image (Stacks, Tags 03CB and 0EYM). -/
 noncomputable def cartesianChartClassPullback {B T T' : Scheme.{u}}
     (a : T ⟶ B) (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)
     (V : B.Etale) (U : T'.Etale) (r : U.left ⟶ V.left)
@@ -51,8 +50,8 @@ noncomputable local instance localInst_CartesianChartClassPullback_1 (T : Scheme
 
 /-- The actual stage lift for the chart diagram; it uses the inverse of the
 canonical raw cohomology comparison, the chart adjunction, and pullback of the
-resulting derived class. No representative or lift is selected by choice.
-Source: Stacks Project, Tags 03Q8 and 0EYM. -/
+resulting derived class. No representative or lift is selected by choice
+(Stacks, Tags 03Q8 and 0EYM). -/
 noncomputable def cartesianChartCohomologyLift
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

@@ -79,8 +79,8 @@ private theorem tensorQCSections (A C : Type u) [CommRing A] [CommRing C]
       (Spec.map (CommRingCat.ofHom (algebraMap A C))))).unit.app F).app ⊤)
       (fromTildeΓ_app_toOpen (R := .of A) F n))
 
-/-- Tensor coordinates for the source and target, normalized by the pullback units.
-Source: Stacks Project, Schemes, Lemma 01I9 (1),(2), and Cohomology of Schemes, Lemma 02KG. -/
+/-- Tensor coordinates for the source and target, normalized by the pullback units
+(Stacks, Tags 01I9 and 02KG). -/
 theorem exists_affineBaseChange_tensorComparisons
     (R B R' : Type u) [CommRing R] [CommRing B] [CommRing R']
     [Algebra R B] [Algebra R R'] (M : ModuleCat.{u} B) :

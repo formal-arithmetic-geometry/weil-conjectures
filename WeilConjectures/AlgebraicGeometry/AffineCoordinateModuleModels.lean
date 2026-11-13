@@ -64,8 +64,8 @@ noncomputable def affineCoordinateComplexFactorIso (a : AffineComparisonCoordina
   NatIso.ofComponents (fun M ↦ HomologicalComplex.Hom.isoOfComponents
     (fun _ ↦ Iso.refl _) (by intros; simp)) (by intros; ext i; rfl)
 
-/-- The supplied localized model is naturally its concrete module model's localization.
-Source: Stacks Project, Tag 08DW; the supplied hd and hH. -/
+/-- The supplied localized model is naturally its concrete module model's localization
+(Stacks, Tag 08DW). -/
 noncomputable def affineCoordinateModelIso (a : AffineComparisonCoordinate.{u, w}) :
     a.H ≅ affineCoordinateComplex a ⋙ DerivedCategory.Q :=
   a.hH ≪≫ Functor.isoWhiskerLeft _ a.hd
@@ -82,8 +82,7 @@ noncomputable def affineCoordinateModuleEquivalence {X Y : Scheme.{u}} (s : X �
     (Scheme.Modules.pushforwardComp s.inv s.hom ≪≫
       Scheme.Modules.pushforwardCongr s.inv_hom_id ≪≫ Scheme.Modules.pushforwardId Y)
 
-/-- Concrete coordinate models preserve K-flatness.
-Source: Stacks Project, Tags 06Y1 and 08DW. -/
+/-- Concrete coordinate models preserve K-flatness (Stacks, Tags 06Y1 and 08DW). -/
 theorem affineCoordinateComplex_isKFlat (a : AffineComparisonCoordinate.{u, w})
     (M : CochainComplex (ModuleCat.{u} a.A) ℤ) (hM : AffineComparisonKFlat a.A M) :
     CochainComplex.IsKFlatTensor (R := a.X.sheaf) ((affineCoordinateComplex a).obj M) := by

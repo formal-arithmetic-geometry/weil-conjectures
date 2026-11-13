@@ -22,8 +22,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- A supported quasi-coherent target has a power-torsion affine module preimage.
-Source: Stacks Project, Tag 08EJ, affine paragraph, and Tag 06Z0. -/
+/-- A supported quasi-coherent target has a power-torsion affine module preimage
+(Stacks, Tags 08EJ and 06Z0). -/
 theorem affine_open_supported_target_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -23,10 +23,7 @@ namespace AlgebraicGeometry
 
 /-- Identify the section sets and maps on the upper tail of a chosen stage. This
 comparison is independent of continuity: it requires neither qcqs stages, affine
-transitions, directedness, nor a limiting cone.
-
-Source: Stacks Project, Tag 03S2 (restriction along an étale morphism), Sites Tags
-03CB and 03CC (inverse-image composition and units); the comparison step in Tag 09YQ. -/
+transitions, directedness, nor a limiting cone (Stacks, Tags 03S2, 03CB, 03CC and 09YQ). -/
 theorem directedEtaleSectionIdentifications
     {I : Type u} [Preorder I]
     {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale)

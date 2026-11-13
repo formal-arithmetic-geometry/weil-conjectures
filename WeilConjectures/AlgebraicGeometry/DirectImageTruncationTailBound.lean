@@ -27,8 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- A bound on nonpositive quasi-coherent derived objects gives a bound on the
-upper truncation tail, without any geometric hypotheses beyond the supplied bound.
-Source: Stacks Project, Tag 08D5, final truncation argument. -/
+upper truncation tail, without any geometric hypotheses beyond the supplied bound
+(Stacks, Tag 08D5). -/
 theorem directImage_truncation_tail_bound
     {X S : Scheme.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

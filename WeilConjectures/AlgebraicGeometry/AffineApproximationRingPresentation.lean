@@ -23,9 +23,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Express an affine-base proper approximation as a diagram of rings.
-
-Source: Stacks Project, Tag 0A0P, affine-base clause, and Tag 0GS2, General case. -/
+/-- Express an affine-base proper approximation as a diagram of rings (Stacks, Tags 0A0P and 0GS2).
+-/
 theorem affine_approximation_ring_presentation
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A))
     {Λ : Type u} [Preorder Λ]

@@ -27,8 +27,8 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Geometric points detect morphisms from an étale scheme over a field.
-Source: Stacks Project, Tag 03QR, full-faithfulness argument, using Tag 02GL. -/
+/-- Geometric points detect morphisms from an étale scheme over a field
+(Stacks, Tags 03QR and 02GL). -/
 theorem etaleFieldGeometricPoints_detect
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (X : Scheme.Etale (Spec (CommRingCat.of K)))

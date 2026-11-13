@@ -120,8 +120,7 @@ private theorem termIso {X : Scheme.{u}} (M : X.Modules) (d : ℕ) (i : ℤ) :
 
 /-- A constant rank function gives a single exterior power in the indicated degree;
 an isomorphism of the input sheaves transports that exterior power.
-No smoothness, local freeness or duality hypothesis is needed.
-Source: Stacks Project, Tag 0BR0, the expression wedge^r N[-r]. -/
+No smoothness, local freeness or duality hypothesis is needed (Stacks, Tag 0BR0). -/
 theorem constantRankExterior_derived_iso {X : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (M N : X.Modules) (d : ℕ) (e : M ≅ N) :

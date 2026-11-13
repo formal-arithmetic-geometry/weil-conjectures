@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
-/-- Normalized diagonal conormal derivations agree on sections of every open.
-Source: Stacks Project, Tag 08S2. -/
+/-- Normalized diagonal conormal derivations agree on sections of every open (Stacks, Tag 08S2). -/
 theorem diagonalConormal_affine_sections_unique (f : X ⟶ S)
     (U : X.Opens)
     (D₁ D₂ : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)

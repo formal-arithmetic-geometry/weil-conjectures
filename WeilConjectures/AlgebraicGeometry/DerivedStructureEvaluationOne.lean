@@ -292,8 +292,8 @@ private theorem evaluation_bijective_transport
   simp only [Category.assoc, e.hom_inv_id, Category.comp_id]
 
 /-- The class of one in derived global sections of the degree-zero structure sheaf.
-It is constructed before choosing a resolution, using the ordinary-to-derived unit.
-Source: Stacks Project, Tag 079V, K-injective computation of derived global sections. -/
+It is constructed before choosing a resolution, using the ordinary-to-derived unit
+(Stacks, Tag 079V). -/
 def derivedStructureGlobalOne (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     letI := HasDerivedCategory.standard
@@ -326,9 +326,8 @@ def derivedStructureGlobalOne (X : Scheme.{u})
     (((DerivedCategory.homologyFunctorFactors (ModuleCat.{u} A) 0).app S).inv
       (ε.inv (1 : A)))
 
-/-- Canonical evaluation at one is bijective, without any open-restriction comparison.
-Source: Stacks Project, Tag 09M1, the structure-sheaf case of the first Hom formula;
-Tag 079V, computation by K-injective complexes. -/
+/-- Canonical evaluation at one is bijective, without any open-restriction comparison
+(Stacks, Tags 09M1 and 079V). -/
 theorem derivedStructure_evaluation_one_bijective (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) :

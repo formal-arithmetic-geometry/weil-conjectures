@@ -104,10 +104,8 @@ private lemma exists_hom_app_top_eq_of_isAffine_any
 
 end Modules
 
-/-- A linear map on an affine open extends from a quasi-coherent source to a sheaf map.
-
-Source: Stacks Project, Schemes, Lemma 01IB (affine equivalence), and Properties,
-Lemma 01PM (passing from linear maps to sheaf maps). -/
+/-- A linear map on an affine open extends from a quasi-coherent source to a sheaf map
+(Stacks, Tags 01IB and 01PM). -/
 theorem affine_section_linear_map_extension
     {X : Scheme.{u}} (P Q : X.Modules) [P.IsQuasicoherent]
     (V : X.affineOpens) (f : Γ(P, V.1) →ₗ[Γ(X, V.1)] Γ(Q, V.1)) :

@@ -78,8 +78,7 @@ private theorem restriction_eq {X : Scheme.{u}} (F : X.Modules)
         (eqToHom (congrArg (fun f ↦ (tensorPullback f).obj F) a.w)).app ⊤ := rfl
 
 /-- Transport from an iterated tensor pullback to the pullback of an etale object,
-with the normalized unit equation on global sections.
-Source: Stacks Project, Tag 03DR, equation-quasi-coherent-presheaf. -/
+with the normalized unit equation on global sections (Stacks, Tag 03DR). -/
 theorem exists_etaleTensorSectionsTransport {X : Scheme.{u}} (F : X.Modules)
     {U V : X.Etale} (a : V ⟶ U) :
     ∃ e : Γ((tensorPullback a.left).obj ((tensorPullback U.hom).obj F), ⊤) ≃+

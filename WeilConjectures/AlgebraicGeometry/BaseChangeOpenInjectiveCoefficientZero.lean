@@ -231,9 +231,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {X S T : Scheme.{u}} (p : X ⟶ S) (g : T ⟶ S)
 
 /-- A class that is a base-change image on V maps to zero after the open injective
-coefficient embedding. This is the Leray part of the closed–open argument.
-
-Source: Stacks Project, Tag 0F07, open summand in condition (3). -/
+coefficient embedding. This is the Leray part of the closed–open argument (Stacks, Tag 0F07). -/
 theorem baseChange_open_injective_coefficient_eq_zero [IsAffine S]
     (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, UniversalBaseChangeProperty Λ p q')

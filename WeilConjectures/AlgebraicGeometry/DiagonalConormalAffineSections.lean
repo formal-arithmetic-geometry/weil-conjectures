@@ -27,8 +27,8 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- The diagonal conormal on an affine chart is the ring's Kähler differential module.
-Every normalized difference derivation has the expected formula in these coordinates.
-Source: Stacks Project, Tag 08S2, affine calculation; Tags 01KJ, 01R3 and 00RW. -/
+Every normalized difference derivation has the expected formula in these coordinates
+(Stacks, Tags 08S2, 01KJ, 01R3 and 00RW). -/
 theorem diagonalConormal_affine_sections (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :
     ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]

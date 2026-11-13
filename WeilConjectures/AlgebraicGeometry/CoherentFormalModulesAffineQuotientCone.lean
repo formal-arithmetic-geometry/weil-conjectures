@@ -21,9 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The canonical cone from a module to the sections of its sheaf quotient system.
-The maps are the tilde/global-sections unit followed by the actual quotient projections.
-Source: Stacks Project, Tag 087W, implicit converse.
--/
+The maps are the tilde/global-sections unit followed by the actual quotient projections
+(Stacks, Tag 087W). -/
 noncomputable def coherentFormalModules_affine_quotientCone
     (A : Type u) [CommRing A] (I : Ideal A)
     (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -117,8 +116,8 @@ private theorem isLimit_of_complete_quotient_projections
 
 /-- The canonical quotient cone of a finite completed module is limiting, and its
 projections use the residue of a completed scalar at their level. This assertion
-concerns only the explicit quotient construction, not any candidate inverse functor.
-Source: Stacks Project, Tag 087W, implicit converse; Algebra Tags 0316, 05GG, 00MA (3). -/
+concerns only the explicit quotient construction, not any candidate inverse functor
+(Stacks, Tags 087W, 0316, 05GG and 00MA). -/
 theorem coherentFormalModules_affine_quotientCone_complete
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

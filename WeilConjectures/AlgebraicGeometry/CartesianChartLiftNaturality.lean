@@ -230,9 +230,8 @@ private theorem chartPull_adj_naturality {S X B T T' : Scheme.{u}}
   simpa only [Category.assoc] using
     chartRawAdj_pullback f g a g' w b a' ha g'' w' wb l hl₁ hl₂ hw F n W z z' hz'
 
-/-- A chart lift intertwines the restricted cohomology map with cartesian exchange.
-
-Source: Stacks Project, Tag 0EYM, the canonical comparison square; Tags 03CB and 03Q8. -/
+/-- A chart lift intertwines the restricted cohomology map with cartesian exchange
+(Stacks, Tags 0EYM, 03CB and 03Q8). -/
 theorem cartesianChartCohomologyLift_naturality
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

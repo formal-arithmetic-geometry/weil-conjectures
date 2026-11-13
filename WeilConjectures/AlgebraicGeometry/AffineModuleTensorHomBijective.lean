@@ -62,8 +62,8 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-/-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions.
-Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y. -/
+/-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions
+(Stacks, Tags 01SB, 008A and 008Y). -/
 theorem affine_module_tensor_hom_bijective
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf)

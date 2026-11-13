@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Localizing compatible affine quotients preserves any prescribed kernel filtration.
-
-Source: Stacks Project, Schemes, Tags 01IB and 01IC, and Algebra, Tag 00CS. -/
+/-- Localizing compatible affine quotients preserves any prescribed kernel filtration
+(Stacks, Tags 01IB, 01IC and 00CS). -/
 theorem affine_intersection_quotients_stalk
     {X : Scheme.{u}} (I : X.IdealSheafData) (S : ℕᵒᵖ ⥤ X.Modules)
     (U : X.affineOpens)

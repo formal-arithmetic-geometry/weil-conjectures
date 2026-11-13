@@ -78,8 +78,8 @@ private theorem projection_unit_stalk_iso (X : Scheme.{u}) (x : X) :
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- The stalk of a module map with the specified section-pairing formula is invertible.
-Source: Stacks Project, Tags 08KS, 01CB, 0098, and Sheaves Tag 007T. -/
+/-- The stalk of a module map with the specified section-pairing formula is invertible
+(Stacks, Tags 08KS, 01CB, 0098 and 007T). -/
 theorem closedStructure_projection_stalk_isIso
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (M : Y.Modules)
     (α : M ⊗ (pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf) ⟶

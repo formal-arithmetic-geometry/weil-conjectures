@@ -24,8 +24,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Constant comparisons respect the chosen inverse-image composition comparison.
-Source: Stacks Project, Tags 03CB, 03CC, 0B65, and 03P5. -/
+/-- Constant comparisons respect the chosen inverse-image composition comparison
+(Stacks, Tags 03CB, 03CC, 0B65 and 03P5). -/
 theorem etaleSetConstantPullbackComposition
     (P U V : Scheme.{u}) (h : U ⟶ P) (v : V ⟶ U) (A : Type (u + 1)) :
     (etaleSetConstantPullbackComparison v).inv.app A ≫

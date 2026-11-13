@@ -66,8 +66,8 @@ private theorem shifted_koszul_strictly_perfect (A : Type a) [CommRing A] (r : �
       let e' := F.mapIso (T.mapIso (L.extendXIso ComplexShape.embeddingDownNat hq)) ≪≫ e
       exact ⟨m, e'.hom, e'.inv, e'.hom_inv_id⟩
 
-/-- The shifted Koszul complex on powers of a finite sequence gives a perfect affine object.
-Source: Stacks Project, Tag 08CX and Definition 08CM. -/
+/-- The shifted Koszul complex on powers of a finite sequence gives a perfect affine object
+(Stacks, Tags 08CX and 08CM). -/
 theorem affine_perfect_koszul_principal_unit_perfect
     (A : Type a) [CommRing A] (r : ℕ) (f : Fin r → A) (e : ℕ)
     [HasDerivedCategory.{b}

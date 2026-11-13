@@ -21,9 +21,8 @@ universe u w
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Ordinary base-change maps paste horizontally before any invertibility assumption.
-Source: Stacks Project, Tag 0ATM (composition of base change), Tag 08HY (counit formula),
-and Tag 0D5S (associativity of derived pullback). -/
+/-- Ordinary base-change maps paste horizontally before any invertibility assumption
+(Stacks, Tags 0ATM, 08HY and 0D5S). -/
 theorem schemeDerivedBaseChange_horizontal_pasting
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

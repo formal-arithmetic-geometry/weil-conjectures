@@ -37,7 +37,7 @@ private theorem evaluation_slide {C : Type*} [Category C] [MonoidalCategory C]
 
 /- The evaluation isomorphism criterion for a dualizable object in `D(O_X)`.
 The bijection `adj` is a tensor--internal-Hom bijection, with the naturality equation of
-`scheme_derivedInternalHom_adjunction` as hypothesis `hadj`. (Stacks, Tag 0FPC) -/
+`scheme_derivedInternalHom_adjunction` as hypothesis `hadj` (Stacks, Tag 0FPC). -/
 /-- The second triangle identity isolated from the evaluation criterion.
 The formal tensor--Hom naturality and bifunctoriality calculation is the
 second zig-zag identity in Stacks Project, Cohomology, Tag 0FPC. -/
@@ -135,7 +135,7 @@ theorem dualizable_evaluation_second_triangle (X : Scheme.{u})
   exact hgid.symm
 
 /-- The evaluation isomorphism criterion for a dualizable object in `D(O_X)`: both triangle
-(zig-zag) identities hold for the evaluation `e` and the coevaluation `η`. (Stacks, Tag 0FPC) -/
+(zig-zag) identities hold for the evaluation `e` and the coevaluation `η` (Stacks, Tag 0FPC). -/
 theorem dualizable_evaluation_criterion (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K D : schemeDerivedCategory X)

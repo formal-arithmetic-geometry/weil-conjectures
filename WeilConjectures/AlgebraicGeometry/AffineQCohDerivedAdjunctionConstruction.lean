@@ -22,9 +22,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Derived affine tilde and derived global sections admit an adjunction on
-quasi-coherent derived objects, with the two defining functor comparisons.
-Source: Stacks Project, Tag 06Z0, elucidation of the two adjoint functors;
-Tag 079W supplies derived adjunction. -/
+quasi-coherent derived objects, with the two defining functor comparisons
+(Stacks, Tags 06Z0 and 079W). -/
 theorem affineQCohDerivedAdjunction_construction (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

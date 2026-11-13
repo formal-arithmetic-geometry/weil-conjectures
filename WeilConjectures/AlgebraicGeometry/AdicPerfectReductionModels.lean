@@ -27,9 +27,8 @@ attribute [local irreducible] adicResidueLocalReductionStep
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A single constant perfect complex has K-projective ordinary quotient models and
 compatible identifications with its actual derived reductions. The square compares
-only object computations; no Hom/cohomology comparison is asserted here.
-
-Source: Stacks Tags 09C6, 06YY, 064B, and 09C5 (exact evaluation). -/
+only object computations; no Hom/cohomology comparison is asserted here
+(Stacks, Tags 09C6, 06YY, 064B and 09C5). -/
 theorem adicPerfectReductionModels (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

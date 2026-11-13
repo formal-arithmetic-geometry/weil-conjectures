@@ -28,9 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A sheaf isomorphism to an affine tilde model induces a tensor stalk
 identification, naturally for morphisms respecting the affine identifications.
-There is no flatness or closed immersion hypothesis.
-Source: Stacks Project, Tags 008H and 0098 (inverse image stalks), 008B
-(change of rings), and 01BH (associated modules). -/
+There is no flatness or closed immersion hypothesis (Stacks, Tags 008H, 0098, 008B and 01BH). -/
 theorem exists_affine_model_tensorPullback_stalk
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) (V : Z.Opens) (z : V.toScheme)
     (U : Y.affineOpens) (hzU : i z.1 ∈ U.1) :

@@ -21,8 +21,7 @@ variable [∀ X : Scheme.{u},
 
 /-- The chart object comparisons assemble to a natural comparison on the induced
 category of the two labelled models. Naturality is the preceding chart naturality
-lemma, applied to all four possible labels and all cross-label morphisms.
-Source: Stacks Project, Tag 08DW(2). -/
+lemma, applied to all four possible labels and all cross-label morphisms (Stacks, Tag 08DW). -/
 theorem exists_affineCoordinateComparisonFamilyBase :
     ∃ δ : AffineCoordinateComparisonFamily.{u, w},
       ∀ (a b : AffineComparisonCoordinate.{u, w})

@@ -29,8 +29,8 @@ open CategoryTheory.ConstantCompletion
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The scalar adjunction is uniquely specified by the existing normalized derived unit.
-Source: Stacks Tags 03CZ, 09T5 and 0FND. -/
+/-- The scalar adjunction is uniquely specified by the existing normalized derived unit
+(Stacks, Tags 03CZ, 09T5 and 0FND). -/
 theorem adicResidueScalarAdjunction_existsUnique
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
@@ -105,8 +105,8 @@ theorem adicResidueScalarAdjunction_existsUnique
   exact Adjunction.ext (ha.trans hunit.symm)
 
 /-- The scalar adjunction on the actual slice, obtained from the tensor adjunction
-and the universal derived comparison. No complete-object hypothesis is needed.
-Source: Stacks Tags 03CZ, 09T5 and 0FND. -/
+and the universal derived comparison. No complete-object hypothesis is needed
+(Stacks, Tags 03CZ, 09T5 and 0FND). -/
 def adicResidueScalarAdjunction (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :
@@ -137,8 +137,8 @@ private theorem homStep_naturality_left
     τ, V] using h
 
 /-- The quotient successor is the adjoint of the reduction of the scalar counit.
-This formula constructs the map; it does not choose a map from an existence theorem.
-Source: Stacks Tags 03CZ, 09T5 and 09C6. -/
+This formula constructs the map; it does not choose a map from an existence theorem
+(Stacks, Tags 03CZ, 09T5 and 09C6). -/
 def adicResidueAdjointStep (M : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ) :
     (dres (adicResidueLocalProjection.{u, v} X J U (n + 1))).obj
         ((adicResidueLocalReduction.{u, v} X J U (n + 1)).obj M) ⟶
@@ -149,8 +149,8 @@ def adicResidueAdjointStep (M : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ) 
       ((adicResidueScalarAdjunction.{u, v} X J U (n + 1)).counit.app
         ((adicResidueLocalReduction.{u, v} X J U (n + 1)).obj M)))
 
-/-- Scalar transposes commute with the actual quotient successor.
-Source: Stacks Tags 03CZ, 09T5 and 09C6. -/
+/-- Scalar transposes commute with the actual quotient successor (Stacks, Tags 03CZ, 09T5 and 09C6).
+-/
 theorem adicResidueAdjointStep_transpose
     (T M : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ)
     (f : (adicResidueLocalReduction.{u, v} X J U (n + 1)).obj T ⟶
@@ -168,8 +168,8 @@ theorem adicResidueAdjointStep_transpose
   rw [← Adjunction.homEquiv_naturality_left]
   rw [← homStep_naturality_left, hf]
 
-/-- The normalized scalar units commute with the constructed quotient successor.
-Source: Stacks Tags 099M and 09C6. -/
+/-- The normalized scalar units commute with the constructed quotient successor
+(Stacks, Tags 099M and 09C6). -/
 theorem adicResidueAdjointStep_unit
     (M : AdicResidueLocalDerived.{u, v} X J U) (n : ℕ) :
     (adicResidueScalarAdjunction.{u, v} X J U (n + 1)).unit.app M ≫
@@ -184,8 +184,8 @@ theorem adicResidueAdjointStep_unit
   have h := adicResidueAdjointStep_transpose.{u, v} X J U M M n (𝟙 _)
   simpa only [hid, Adjunction.homEquiv_id] using h
 
-/-- The constructed quotient tower in the common completed-coefficient category.
-Source: Stacks Tags 099M and 09C6. -/
+/-- The constructed quotient tower in the common completed-coefficient category
+(Stacks, Tags 099M and 09C6). -/
 def adicResidueAdjointTower (M : AdicResidueLocalDerived.{u, v} X J U) :
     ℕᵒᵖ ⥤ AdicResidueLocalDerived.{u, v} X J U :=
   Functor.ofOpSequence

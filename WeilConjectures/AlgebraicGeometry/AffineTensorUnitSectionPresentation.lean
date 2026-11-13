@@ -192,8 +192,8 @@ private theorem scalar_tensor_presentation
 set_option maxHeartbeats 800000 in
 -- The affine comparisons unfold dependent section-module scalar restrictions.
 /-- Affine sections of the two tensor operations are the quotient of the first tensor
-product by the diagonal-action relations. The map on unit tensors is canonical.
-Source: Stacks Project, Morphisms, Tag 01SB, construction of h and key algebra observation. -/
+product by the diagonal-action relations. The map on unit tensors is canonical (Stacks, Tag 01SB).
+-/
 theorem affine_tensor_unit_section_presentation [IsAffineHom f]
      (B : U.toTopCat.Sheaf CommRingCat.{u})
       (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)

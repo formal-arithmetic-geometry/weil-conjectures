@@ -80,10 +80,7 @@ private theorem pullbackComp_inv_fst
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Descend a specified finite affine cover and its representing arrows, retaining
-one source comparison for both families of arrows.
-
-Source: Stacks Project, Tag 0EYL (finite affine etale site descent), Tag 01ZM
-(object and arrow descent), Tag 01ZC(3) (maps to locally finitely presented targets). -/
+one source comparison for both families of arrows (Stacks, Tags 0EYL, 01ZM and 01ZC). -/
 private theorem affineOpen_finite_representing_models
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

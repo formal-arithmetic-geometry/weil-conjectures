@@ -128,8 +128,7 @@ private theorem stalk_subsingleton_of_zero_over (X : Scheme.{u}) (U : X.Opens)
   exact ⟨fun a b ↦ (hz a).trans (hz b).symm⟩
 
 /-- The actual sheafified finite Koszul complex is perfect and acyclic
-where one of its defining functions is invertible.
-Source: Stacks Project, Tag 0A9A, affine paragraph, and Tag 0663. -/
+where one of its defining functions is invertible (Stacks, Tags 0A9A and 0663). -/
 theorem affine_koszul_geometric_properties
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{w}

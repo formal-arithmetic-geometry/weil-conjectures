@@ -30,8 +30,8 @@ private lemma sectionsEquiv_naturality (X : Scheme.{u})
   rw [Adjunction.homEquiv_naturality_right]
   rfl
 
-/-- Ext pullback is the homology map of the unit section map followed by the lift.
-Source: Stacks Project, Tag 01F8, equations 01F9 and 01FA; site version Tag 08J6. -/
+/-- Ext pullback is the homology map of the unit section map followed by the lift
+(Stacks, Tags 01F8, 01F9, 01FA and 08J6). -/
 theorem extPullback_resolution_sections
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ)

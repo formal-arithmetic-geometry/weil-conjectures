@@ -19,8 +19,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The map to the outgoing-arrow product whose components are adjoint to the coefficient
-transitions followed by the canonical injective embeddings. This is an explicit product lift.
-Source: Stacks Project, Tag 0EXZ, definition of γ. -/
+transitions followed by the canonical injective embeddings. This is an explicit product lift
+(Stacks, Tag 0EXZ). -/
 noncomputable def etaleCoefficientProductEmbedding
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -62,8 +62,8 @@ private theorem adjointComp
   simp only [Functor.map_comp, Category.assoc]
 
 
-/-- The canonical product embedding intertwines the coefficient and product transitions.
-Source: Stacks Project, Tag 0EXZ, the assertion that γ is a map of systems. -/
+/-- The canonical product embedding intertwines the coefficient and product transitions
+(Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_product_embedding_compatibility
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})

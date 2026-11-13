@@ -209,8 +209,8 @@ private theorem subobject_le_of_affine_range {X : Scheme.{v}} {M N P : X.Modules
 /-- For an affine morphism, the extended ideal times a quasi-coherent module is
 quasi-coherent, and its pushforward equals the ideal times the pushforward, as subobjects.
 The upstairs multiplication uses pullback of the inclusion followed by the adjoint
-structure-sheaf map; `idealModuleProduct` takes the image after tensoring with `F`.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YP. -/
+structure-sheaf map; `idealModuleProduct` takes the image after tensoring with `F`
+(Stacks, Tag 01YP). -/
 theorem affine_pushforward_ideal_product {X Y : Scheme.{v}} (f : Y ⟶ X) [IsAffineHom f]
     (F : Y.Modules) [F.IsQuasicoherent] {I : X.Modules} [I.IsQuasicoherent]
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] :

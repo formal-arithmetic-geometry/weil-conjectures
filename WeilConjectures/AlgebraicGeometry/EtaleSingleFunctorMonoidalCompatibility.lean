@@ -44,10 +44,8 @@ private theorem singleFunctorFlatPairing_eq
   unfold singleFunctorFlatPairing
   rfl
 
-/-- Canonical flat degree-zero pairings preserve associativity, symmetry and exact pullback.
-
-Source: Stacks Project, Cohomology, Tags 06YQ and 06YU; the canonical tensor/counit
-comparisons in `Derived.Invertible` and `Derived.UpperStarMonoidal.Comparison`. -/
+/-- Canonical flat degree-zero pairings preserve associativity, symmetry and exact pullback
+(Stacks, Tags 06YQ and 06YU). -/
 theorem etaleSingleFunctor_monoidalCompatibility
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

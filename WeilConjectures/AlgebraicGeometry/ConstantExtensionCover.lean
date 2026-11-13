@@ -73,7 +73,7 @@ private theorem exists_constantCokernel_cover {Y : Scheme.{u}} {Λ : Type (u + 1
   rwa [hw]
 
 /-- An extension with constant outer terms of finite stalks has a cover on which its middle
-term is constant. Source: Stacks Project, Tags 03RX (3) and 093U. -/
+term is constant (Stacks, Tags 03RX and 093U). -/
 theorem exists_constantExtension_cover {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
     [Finite Λ] {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hS : S.ShortExact)

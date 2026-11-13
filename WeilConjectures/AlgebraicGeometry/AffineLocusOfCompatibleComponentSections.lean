@@ -31,10 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 
 /-- A fixed global section with affine component loci has affine locus, and contains
-any set whose inverse images lie in those loci.
-
-Source: Stacks Project, Varieties Lemma 09NX, second paragraph;
-Limits Lemma 09NL and Properties Section 01PR. -/
+any set whose inverse images lie in those loci (Stacks, Tags 09NX, 09NL and 01PR). -/
 theorem affine_locus_of_compatible_component_sections
     (X : Scheme.{u}) (r : ℕ) (C : Fin r → Scheme.{u})
     (i : ∀ a, C a ⟶ X) [∀ a, IsClosedImmersion (i a)]

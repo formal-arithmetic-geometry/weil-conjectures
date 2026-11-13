@@ -154,8 +154,7 @@ private theorem sheaf_sum_mono (Y : Scheme.{u₁}) (I : Type u₁)
   infer_instance
 
 /-- After a single common lower truncation, derived direct-image cohomology commutes
-with an ambient coproduct of objects with quasi-coherent cohomology.
-Source: Stacks Project, Tag 08DZ, bounded-below comparison, and Tag 015J. -/
+with an ambient coproduct of objects with quasi-coherent cohomology (Stacks, Tags 08DZ and 015J). -/
 theorem derivedDirectImage_truncated_cohomology_coproduct
     {X Y : Scheme.{u₁}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

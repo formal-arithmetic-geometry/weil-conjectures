@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- Finite families of sections of a coherent module have finite type relations
-also after passing to an iterated open slice.
-Source: Stacks Project, Modules, Definition 01BV, condition (2). -/
+also after passing to an iterated open slice (Stacks, Tag 01BV). -/
 theorem coherent_iterated_slice_relations (X : RingedSpace.{u})
     (U : Opens X) (G : SheafOfModules.{u} (moduleRings X))
     (hG : IsCoherent X G) (V : Over U) (I : Type u) [Finite I]

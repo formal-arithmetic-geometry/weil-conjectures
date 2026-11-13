@@ -464,8 +464,8 @@ private theorem open_baseChange_factors (A : Type (u + 1)) [CommRing A]
       (@asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap
         (ModuleCat.{u + 1} A) s)).symm
 
-/-- Base change for support- and right-derived-unit-normalized comparison families.
-Source: Stacks Project, Tag 0F7F. -/
+/-- Base change for support- and right-derived-unit-normalized comparison families
+(Stacks, Tag 0F7F). -/
 theorem etaleProperOpenCubeNormalization (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}
         (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)

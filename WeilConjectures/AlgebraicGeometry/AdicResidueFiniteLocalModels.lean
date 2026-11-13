@@ -120,10 +120,8 @@ private theorem adicResidue_restriction_factor
       (F := F ⋙ G) (G := H) (SheafOfModules.overFunctorMap.{w} O g)
 
 /-- A single local finite-projective model for all finite reductions, without compatible
-markings or an isomorphism over completed coefficients.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, through the construction of the dual
-complex; Tags 09C2, 09BI, 09AW and 099Q. -/
+markings or an isomorphism over completed coefficients
+(Stacks, Tags 09C6, 09C2, 09BI, 09AW and 099Q). -/
 theorem adicResidue_finite_local_models
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]

@@ -31,7 +31,7 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-/-- Uniqueness clause for the balancing factorization. (Stacks, Tag 01SB). -/
+/-- Uniqueness clause for the balancing factorization (Stacks, Tag 01SB). -/
 theorem changeOfRings_tensor_balancing_universal_unique (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

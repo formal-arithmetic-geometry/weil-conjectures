@@ -300,8 +300,8 @@ private def modelEquivalence (X : Scheme.{u})
 
 end SfbImmersionNormalization
 
-/-- Transport modules to the small model and normalize their completed scalars.
-Source: Stacks Tags 00YY and 099L. -/
+/-- Transport modules to the small model and normalize their completed scalars
+(Stacks, Tags 00YY and 099L). -/
 def sfbImmersionNormalizeModules (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     proEtaleRingModules X (adicLisseCompletedRing X I) ⥤
@@ -309,15 +309,14 @@ def sfbImmersionNormalizeModules (X : Scheme.{u})
   proEtaleModuleToModel ((adicLisseForget X).obj (adicLisseCompletedRing X I)) ⋙
     ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv
 
-/-- The specified algebraic pullback of modules with completed coefficients.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- The specified algebraic pullback of modules with completed coefficients
+(Stacks, Tags 03D2 and 099L). -/
 def sfbImmersionCompletedPullModules {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   ConstantCompletion.pull (sfbImmersionAlgebra i)
     (ConstantCompletion.completedMap (sfbImmersionAlgebra i) A I)
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionNormalizeModules_additive (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionNormalizeModules X I).Additive := by
@@ -326,8 +325,8 @@ instance sfbImmersionNormalizeModules_additive (X : Scheme.{u})
   exact inferInstanceAs
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv).Additive
 
-/-- Finite-limit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Finite-limit preservation of the specified ordinary module functor (Stacks, Tags 03D2 and 099L).
+-/
 instance sfbImmersionNormalizeModules_limits (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteLimits (sfbImmersionNormalizeModules X I) := by
@@ -340,8 +339,8 @@ instance sfbImmersionNormalizeModules_limits (X : Scheme.{u})
   exact inferInstanceAs (PreservesFiniteLimits
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv))
 
-/-- Finite-colimit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Finite-colimit preservation of the specified ordinary module functor
+(Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionNormalizeModules_colimits (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteColimits (sfbImmersionNormalizeModules X I) := by
@@ -354,16 +353,15 @@ instance sfbImmersionNormalizeModules_colimits (X : Scheme.{u})
   exact inferInstanceAs (PreservesFiniteColimits
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv))
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionCompletedPullModules_additive {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionCompletedPullModules i I).Additive := by
   unfold sfbImmersionCompletedPullModules
   infer_instance
 
-/-- Finite-limit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Finite-limit preservation of the specified ordinary module functor (Stacks, Tags 03D2 and 099L).
+-/
 instance sfbImmersionCompletedPullModules_limits {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteLimits (sfbImmersionCompletedPullModules i I) := by
@@ -371,8 +369,8 @@ instance sfbImmersionCompletedPullModules_limits {X S : Scheme.{u}}
   have := SfbAdicRestriction.completedMap_isIso (sfbImmersionAlgebra i) A I
   exact ConstantCompletion.pull_finiteLimits_of_isIso (sfbImmersionAlgebra i) _
 
-/-- Finite-colimit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L. -/
+/-- Finite-colimit preservation of the specified ordinary module functor
+(Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionCompletedPullModules_colimits {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteColimits (sfbImmersionCompletedPullModules i I) := by

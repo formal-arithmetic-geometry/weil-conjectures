@@ -26,9 +26,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option autoImplicit false
 
-/-- The singleton Čech complex of an affine map is its tensor Amitsur complex.
-Source: Stacks Project, Tag 03P2, identification before the faithfully-flat exactness argument;
-Tag 03OZ, singleton-cover calculation. -/
+/-- The singleton Čech complex of an affine map is its tensor Amitsur complex
+(Stacks, Tags 03P2 and 03OZ). -/
 theorem nonempty_etale_affine_singleton_tensor_amitsur_iso
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :

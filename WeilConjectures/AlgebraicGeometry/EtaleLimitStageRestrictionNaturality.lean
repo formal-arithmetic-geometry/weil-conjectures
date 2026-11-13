@@ -29,10 +29,8 @@ attribute [local irreducible] upperStar cohomologyMap openCohomologyRestriction
 set_option backward.isDefEq.respectTransparency true
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Composition with coefficient morphisms, from cohomology pullback functoriality.
-Source: Stacks Project, Tag 01F7. Move the first coefficient map through pullback
-using cohomologyMap_map, use composition functoriality, and combine the three
-coefficient maps using Sheaf.H.map_comp_apply. -/
+/-- Composition with coefficient morphisms, from cohomology pullback functoriality
+(Stacks, Tag 01F7). -/
 private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
     (a : X ⟶ Y) (b : Y ⟶ Z) (c : X ⟶ Z) (hc : c = a ≫ b)
     (G : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -323,9 +323,8 @@ private theorem conormalDifference_app (f : X ⟶ S) (V : S.Opens) (a : Γ(S, V)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The difference derivation into the diagonal conormal, with its local formula.
-Source: Stacks Project, Tag 08S2. Construct the difference of the two splittings
-of the square-zero diagonal extension and check the formula locally. -/
+/-- The difference derivation into the diagonal conormal, with its local formula (Stacks, Tag 08S2).
+-/
 theorem exists_diagonalConormalDerivation_core (f : X ⟶ S) :
     ∃ D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf,
       ∀ (U : X.Opens) (W : (pullback f f).Opens)

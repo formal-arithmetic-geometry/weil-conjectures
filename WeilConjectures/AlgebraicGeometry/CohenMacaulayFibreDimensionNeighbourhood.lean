@@ -90,9 +90,8 @@ private theorem fibre_dimension_open_immersion
     exact (IsHomeomorph.topologicalKrullDim_eq _
       (q.isOpenEmbedding.toIsEmbedding.homeomorphImage (U : Set _)).symm.isHomeomorph).le
 
-/-- Local fibre dimension is a finite constant near each point of the given open.
-
-Source: Stacks Project, Tags 00RH and 0A21 (10); the local step underlying 02NM. -/
+/-- Local fibre dimension is a finite constant near each point of the given open
+(Stacks, Tags 00RH, 0A21 and 02NM). -/
 theorem exists_constant_fibre_dimension_neighbourhood_of_depth_eq_ringKrullDim
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] (W : X.Opens)

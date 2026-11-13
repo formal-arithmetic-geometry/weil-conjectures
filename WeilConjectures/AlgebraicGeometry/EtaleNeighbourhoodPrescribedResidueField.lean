@@ -27,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A finite separable extension of the residue field of a scheme point is realized by
-an étale neighbourhood, compatibly with the induced residue-field map.
-Source: Stacks Project, More on Morphisms, Lemma 02LF. -/
+an étale neighbourhood, compatibly with the induced residue-field map (Stacks, Tag 02LF). -/
 theorem Scheme.exists_etale_neighbourhood_prescribed_residueField
     (S : Scheme.{u}) (s : S) (k : Type v) [Field k]
     [Algebra (S.residueField s) k] [FiniteDimensional (S.residueField s) k]

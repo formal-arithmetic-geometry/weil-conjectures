@@ -43,10 +43,8 @@ private theorem cartesian_exchange_comp_named {X S T T' T'' : Scheme.{u}}
   subst d
   exact cartesian_map_comp_local f g g' g'' a b w w' P
 
-/-- A raw stage class admits a chart representative after one further base change.
-
-Source: Stacks Project, Tags 0EYL and 0GIT for descent with the original stage
-coefficient complex fixed; Tag 0EYM for the exchange comparison square. -/
+/-- A raw stage class admits a chart representative after one further base change
+(Stacks, Tags 0EYL, 0GIT and 0EYM). -/
 theorem exists_cartesianRawClass_chart_representative
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -324,9 +324,7 @@ attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
 /-- The displayed point presentation transports to a finite matrix presentation on the slice.
 This is the section reconstruction, constant-sheaf pullback, and scalar-restriction step of
 Stacks Tags 03CY and 00YV; it is strictly the first step of the refinement argument and does
-not include the local lifting of matrix coefficients.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV. -/
+not include the local lifting of matrix coefficients (Stacks, Tags 03CY and 00YV). -/
 theorem discrete_point_presentation_transport
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (A : Type u) [CommRing A] (k : Type (u + 1)) [CommRing k]

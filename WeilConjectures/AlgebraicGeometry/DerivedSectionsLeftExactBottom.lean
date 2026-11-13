@@ -26,8 +26,7 @@ universe uC vC uD vD wC wD
 open CategoryTheory
 namespace CategoryTheory.Functor
 
-/-- A left exact functor computes bottom cohomology after lower truncation.
-Source: Stacks Project, Tag 05TC (2). -/
+/-- A left exact functor computes bottom cohomology after lower truncation (Stacks, Tag 05TC). -/
 theorem rightDerivedFunctor_truncated_bottom
     {C : Type uC} [Category.{vC} C] [Abelian C]
     [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]

@@ -45,9 +45,8 @@ private theorem milnor_surjective
   simp only [Pretriangulated.Triangle.mk_mor₁, Fan.IsLimit.fac, Category.assoc] at h
   exact h.symm
 
-/-- Compatible morphisms to the finite reductions lift to a morphism into a complete object.
-Source: Stacks Project, proetale.tex, Tag 09C6, the inverse-limit morphism; Cohomology on
-Sites, Tags 0940 and 0941. -/
+/-- Compatible morphisms to the finite reductions lift to a morphism into a complete object
+(Stacks, Tags 09C6, 0940 and 0941). -/
 theorem adicResidueHomSection_surjective
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

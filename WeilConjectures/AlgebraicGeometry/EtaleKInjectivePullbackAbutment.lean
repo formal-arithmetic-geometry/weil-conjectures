@@ -26,10 +26,8 @@ namespace AlgebraicGeometry.Etale
 
 -- Elaborating resolution and spectral-page comparison families together.
 /-- A pullback comparison between K-injective resolutions computes the canonical
-unit--Leray map, after the canonical resolution identifications.
-Source: Stacks Project, Tag 015J (computation by an injective total resolution),
-Tag 015K (independence of comparison maps), and Tags 070I and 08BJ
-(K-injective comparison and direct image). -/
+unit--Leray map, after the canonical resolution identifications
+(Stacks, Tags 015J, 015K, 070I and 08BJ). -/
 theorem etaleKInjective_pullback_abutment
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

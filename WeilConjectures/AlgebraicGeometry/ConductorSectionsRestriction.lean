@@ -37,9 +37,7 @@ private noncomputable def tensorPowCongr {X : Scheme.{u}} {A B : X.Modules} (e :
   | m + 1 => e ⊗ᵢ tensorPowCongr e m
 
 /-- Restriction on conductor tensor sections is an additive bijection compatible with
-inclusion into the ambient tensor power.
-
-Source: Stacks Project, Varieties Remark 09NW and the displayed equality in Lemma 09NX. -/
+inclusion into the ambient tensor power (Stacks, Tags 09NW and 09NX). -/
 theorem conductor_sections_restriction {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (C : ι → Scheme.{u}) (i : ∀ b : ι, C b ⟶ Y)
     [∀ b : ι, IsReduced (C b)] [∀ b : ι, IsClosedImmersion (i b)]

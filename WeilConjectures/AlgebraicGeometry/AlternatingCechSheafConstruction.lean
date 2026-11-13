@@ -27,12 +27,12 @@ noncomputable section
 
 variable {X : Scheme.{u}}
 
-/-- Intersection with a fixed open, as a functor on opens. Source: Stacks 01FM. -/
+/-- Intersection with a fixed open, as a functor on opens (Stacks, Tag 01FM). -/
 def cechCapFunctor (W : X.Opens) : X.Opens ⥤ X.Opens where
   obj V := V ⊓ W
   map h := homOfLE (inf_le_inf_right W (leOfHom h))
 
-/-- Restriction of rings to intersections. Source: Stacks 01FM. -/
+/-- Restriction of rings to intersections (Stacks, Tag 01FM). -/
 def cechCapRingMap (W : X.Opens) :
     X.ringCatSheaf.obj ⟶ (cechCapFunctor W).op ⋙ X.ringCatSheaf.obj where
   app V := X.ringCatSheaf.obj.map (homOfLE (inf_le_left : V.unop ⊓ W ≤ V.unop)).op
@@ -41,13 +41,12 @@ def cechCapRingMap (W : X.Opens) :
     simp only [Functor.comp_map, ← Functor.map_comp]
     rfl
 
-/-- The module presheaf with sections G(V ∩ W), scalars restricted from V.
-Source: Stacks 01FM. -/
+/-- The module presheaf with sections G(V ∩ W), scalars restricted from V (Stacks, Tag 01FM). -/
 def cechCapModule (G : X.Modules) (W : X.Opens) :
     PresheafOfModules.{u} X.ringCatSheaf.obj :=
   (PresheafOfModules.pushforward (cechCapRingMap W)).obj G.val
 
-/-- Restriction between intersection presheaves. Source: Stacks 01FM. -/
+/-- Restriction between intersection presheaves (Stacks, Tag 01FM). -/
 def cechCapModuleMap (G : X.Modules) {W Z : X.Opens} (h : W ≤ Z) :
     cechCapModule G Z ⟶ cechCapModule G W where
   app V := ModuleCat.ofHom
@@ -87,14 +86,12 @@ private theorem cechCapModuleMap_comp (G : X.Modules) {V W Z : X.Opens}
   rw [← PresheafOfModules.map_comp_apply]
   rfl
 
-/-- The degree-p module presheaf, a finite product over increasing tuples.
-Source: Stacks 01FM. -/
+/-- The degree-p module presheaf, a finite product over increasing tuples (Stacks, Tag 01FM). -/
 def alternatingCechSheafPresheafTerms {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules)
     (p : ℕ) : PresheafOfModules.{u} X.ringCatSheaf.obj :=
   ∏ᶜ fun t : Fin (p + 1) ↪o Fin r ↦ cechCapModule G (alternatingCechIntersection U t)
 
-/-- The alternating differential on intersection module presheaves.
-Source: Stacks 01FM. -/
+/-- The alternating differential on intersection module presheaves (Stacks, Tag 01FM). -/
 def alternatingCechSheafPresheafD {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules)
     (p : ℕ) : alternatingCechSheafPresheafTerms U G p ⟶
       alternatingCechSheafPresheafTerms U G (p + 1) :=
@@ -110,8 +107,8 @@ private theorem alternatingCechSheafPresheafD_π {r : ℕ} (U : Fin r → X.Open
           cechCapModuleMap G (alternatingCechIntersection_face_le U p t j)) := by
   simp only [alternatingCechSheafPresheafD, Pi.lift_comp_π]
 
-/-- Signed face restrictions square to zero by pairing the two deletion orders.
-Source: Stacks 01FM. -/
+/-- Signed face restrictions square to zero by pairing the two deletion orders (Stacks, Tag 01FM).
+-/
 theorem alternatingCechSheafPresheafD_square {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) (p : ℕ) :
     alternatingCechSheafPresheafD U G p ≫
@@ -180,14 +177,13 @@ theorem alternatingCechSheafPresheafD_square {r : ℕ} (U : Fin r → X.Opens)
         rfl
       exact hrestriction _ _ _ _ ht
 
-/-- The explicit nonnegative alternating complex of module presheaves.
-Source: Stacks 01FM. -/
+/-- The explicit nonnegative alternating complex of module presheaves (Stacks, Tag 01FM). -/
 def alternatingCechSheafPresheafComplex {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :
     CochainComplex (PresheafOfModules.{u} X.ringCatSheaf.obj) ℕ :=
   CochainComplex.of (alternatingCechSheafPresheafTerms U G)
     (alternatingCechSheafPresheafD U G) (alternatingCechSheafPresheafD_square U G)
 
-/-- Restriction from G into the intersection presheaf. Source: Stacks 01FM. -/
+/-- Restriction from G into the intersection presheaf (Stacks, Tag 01FM). -/
 def cechCapModuleUnit (G : X.Modules) (W : X.Opens) : G.val ⟶ cechCapModule G W where
   app V := ModuleCat.ofHom (X := G.val.obj V) (Y := (cechCapModule G W).obj V)
     { toFun := fun s ↦ G.val.map (homOfLE (inf_le_left : V.unop ⊓ W ≤ V.unop)).op s
@@ -212,13 +208,12 @@ private theorem cechCapModuleUnit_comp (G : X.Modules) {W Z : X.Opens} (h : W �
   rw [← PresheafOfModules.map_comp_apply]
   rfl
 
-/-- Degree-zero restriction augmentation. Source: Stacks 01FM. -/
+/-- Degree-zero restriction augmentation (Stacks, Tag 01FM). -/
 def alternatingCechSheafPresheafZero {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :
     G.val ⟶ alternatingCechSheafPresheafTerms U G 0 :=
   Pi.lift fun t ↦ cechCapModuleUnit G (alternatingCechIntersection U t)
 
-/-- The augmentation has zero composite with the first differential.
-Source: Stacks 01FM. -/
+/-- The augmentation has zero composite with the first differential (Stacks, Tag 01FM). -/
 theorem alternatingCechSheafPresheafZero_comp {r : ℕ} (U : Fin r → X.Opens)
     (G : X.Modules) :
     alternatingCechSheafPresheafZero U G ≫ alternatingCechSheafPresheafD U G 0 = 0 := by
@@ -230,8 +225,7 @@ theorem alternatingCechSheafPresheafZero_comp {r : ℕ} (U : Fin r → X.Opens)
     alternatingCechSheafPresheafZero, Pi.lift_comp_π, cechCapModuleUnit_comp, Limits.zero_comp]
   simp [Fin.sum_univ_two]
 
-/-- Degreewise module sheafification of the explicit presheaf complex.
-Source: Stacks 01FM. -/
+/-- Degreewise module sheafification of the explicit presheaf complex (Stacks, Tag 01FM). -/
 def alternatingCechSheafComplex {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :
     CochainComplex X.Modules ℕ :=
   letI : (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).Additive :=
@@ -239,8 +233,7 @@ def alternatingCechSheafComplex {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules
   ((PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj (alternatingCechSheafPresheafComplex U G)
 
-/-- The augmentation obtained by sheafifying the restriction maps.
-Source: Stacks 01FM. -/
+/-- The augmentation obtained by sheafifying the restriction maps (Stacks, Tag 01FM). -/
 def alternatingCechSheafAugmentation {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) :
     (CochainComplex.single₀ X.Modules).obj G ⟶ alternatingCechSheafComplex U G :=
   let L := PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)

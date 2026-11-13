@@ -144,10 +144,7 @@ private theorem signed_dual_iso_of_components
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Sheafification and transport to an affine open commute with signed duals
-of degreewise finite free chain complexes.
-
-Source: Stacks Project, duality.tex, Tag 0BQZ, local finite free Hom computation;
-schemes.tex, Tag 01HV, associated sheaves on affine schemes. -/
+of degreewise finite free chain complexes (Stacks, Tags 0BQZ and 01HV). -/
 theorem affine_finite_free_dual_complex_comparison
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (K : ChainComplex (ModuleCat.{u} Γ(Y, U.1)) ℕ)

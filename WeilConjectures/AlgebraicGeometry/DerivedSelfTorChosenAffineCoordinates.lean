@@ -66,9 +66,8 @@ set_option linter.unusedVariables false in
 /-- Intrinsic self-Tor has affine resolution coordinates compatible with one augmented
 lift of the canonical quotient restriction on each basic inclusion.
 This theorem only constructs one compatible augmented lift on each basic inclusion;
-compatibility with every supplied lift requires the separate homotopy argument.
-
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1). -/
+compatibility with every supplied lift requires the separate homotopy argument
+(Stacks, Tags 08DX, 06YH, 01I9 and 00LS). -/
 theorem exists_derived_selfTor_chosen_affine_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) :
     letI := HasDerivedCategory.standard

@@ -88,8 +88,8 @@ private theorem imageCover (X : Scheme.{u}) (I : Type u)
   exact ⟨hx, ⟨⟨x, hi⟩, hj, rfl⟩⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite type is local for an open cover when each restricted module is coherent.
-Source: Stacks Project, Definitions 01BV and 01B5 and Lemma 01B6. -/
+/-- Finite type is local for an open cover when each restricted module is coherent
+(Stacks, Tags 01BV, 01B5 and 01B6). -/
 theorem coherent_module_finite_type_local_cover
     (X : Scheme.{u}) (F : X.Modules) (I : Type u)
     (U : I → X.Opens) (hU : ⨆ i, U i = ⊤)

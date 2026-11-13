@@ -41,8 +41,8 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- On an affine scheme, quasi-coherent test sheaves detect Tor amplitude.
-Source: Stacks Project, Tag 08EA, affine paragraph, and Tags 06Z0, 08E9. -/
+/-- On an affine scheme, quasi-coherent test sheaves detect Tor amplitude
+(Stacks, Tags 08EA, 06Z0 and 08E9). -/
 theorem affineQCoh_torAmplitude_detection (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E)

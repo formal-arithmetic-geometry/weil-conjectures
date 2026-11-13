@@ -25,8 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensor-pullback sections restricted to open subschemes recover the additive
-section presheaf of the original module. Quasi-coherence is not needed.
-Source: Stacks Project, Tag 03DR, equation (35.8.0.1), and Tags 0095 and 0096. -/
+section presheaf of the original module. Quasi-coherence is not needed
+(Stacks, Tags 03DR, 0095 and 0096). -/
 theorem nonempty_etaleTensor_openSections_iso
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) :

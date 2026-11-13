@@ -90,10 +90,8 @@ private theorem cofinal_right_square
       Functor.Final.ι_colimitIso_hom_assoc, colimit.ι_desc_assoc] using h j
   rw [hs, Iso.inv_hom_id_assoc]
 
-/-- Exact natural ladder with certified neighboring comparisons, without assuming continuity.
-
-Source: Stacks Project, Tag 09YQ, restriction of its coherent systems,
-and Tag 0A50, its exact sequence and coefficient naturality. -/
+/-- Exact natural ladder with certified neighboring comparisons, without assuming continuity
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_geometric_ladder
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

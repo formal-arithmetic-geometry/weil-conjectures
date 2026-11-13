@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Finite-stage detection of a zero limit cohomology class.
-
-Source: Stacks Project, Theorem 09YQ (theorem-colimit), via 0EYL and 09YP;
-the qcqs gluing argument uses 0A50 and the parent node steps 2-8. -/
+/-- Finite-stage detection of a zero limit cohomology class
+(Stacks, Tags 09YQ, 0EYL, 09YP and 0A50). -/
 theorem etale_limit_cohomology_eventual_vanishing
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

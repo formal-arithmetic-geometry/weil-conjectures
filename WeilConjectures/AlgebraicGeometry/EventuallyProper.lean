@@ -28,9 +28,8 @@ namespace AlgebraicGeometry
 
 /-- A locally finite type morphism between qcqs schemes over a qcqs stage of an inverse
 system with affine transitions is proper at some later stage if its base change to the
-limit is proper. The distinguished index `i₀` need not be a least element.
-
-Source: Stacks Project, Limits, Lemma 081F in Situation 081D. -/
+limit is proper. The distinguished index `i₀` need not be a least element
+(Stacks, Tags 081F and 081D). -/
 theorem exists_isProper_baseChange_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

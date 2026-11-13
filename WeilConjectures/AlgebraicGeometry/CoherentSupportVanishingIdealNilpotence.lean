@@ -264,9 +264,7 @@ private theorem powerProduct_isZero_iff_affine_cover (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The vanishing ideal of a closed set containing the support kills a coherent module
-by some power.
-
-Source: Stacks Project, Tag 01Y9, as used in the ideal-power paragraph of Tag 01YF. -/
+by some power (Stacks, Tags 01Y9 and 01YF). -/
 theorem coherent_support_vanishingIdeal_nilpotence
     (X : Scheme.{u}) [IsNoetherian X] (T : TopologicalSpace.Closeds X)
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

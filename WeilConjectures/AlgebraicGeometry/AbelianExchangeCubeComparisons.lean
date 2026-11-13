@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- Apply homology and the inverse-image stalk comparison to a derived morphism.
-The equality specifies the point at which its source stalk is taken.
-Source: Stacks Project, Tag 03Q1. -/
+The equality specifies the point at which its source stalk is taken (Stacks, Tag 03Q1). -/
 noncomputable def derivedStalkComparison
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -48,8 +47,7 @@ variable {S T X X' S₀ T₀ X₀ X₁ : Scheme.{u}}
   {b : X₁ ⟶ X'}
 
 /-- Restrict the source of exchange: commute the two inverse images, use the
-base-change map for f, and identify the pulled-back single complex.
-Source: Stacks Project, Tag 03Q9, restriction complexes. -/
+base-change map for f, and identify the pulled-back single complex (Stacks, Tag 03Q9). -/
 noncomputable def exchangeCubeSourceComparison
     (sq₀ : CommSq p₀ f₀ f jA) (h : jB ≫ g = g₀ ≫ jA)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -71,8 +69,7 @@ noncomputable def exchangeCubeSourceComparison
             ((p₀)^*[AddCommGrpCat.{u + 1}]) 0).hom.app G))
 
 /-- Restrict the target of exchange: use the base-change map for f', then commute
-inverse images and identify the pulled-back single complex.
-Source: Stacks Project, Tag 03Q9, restriction complexes. -/
+inverse images and identify the pulled-back single complex (Stacks, Tag 03Q9). -/
 noncomputable def exchangeCubeTargetComparison
     (sqB : CommSq b f₁ f' jB) (hb : b ≫ g' = p₁ ≫ p₀)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
@@ -154,8 +151,7 @@ private theorem derivedExchangeCube_pasting
   simpa only [Category.comp_id] using hw.symm
 
 
-/-- Naturality of the stalk comparison in its target morphism.
-Source: Stacks Project, Tag 095T, formal functoriality of homology and fibres. -/
+/-- Naturality of the stalk comparison in its target morphism (Stacks, Tag 095T). -/
 private theorem derivedStalkComparison_postcomp
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -170,8 +166,7 @@ private theorem derivedStalkComparison_postcomp
   subst s
   simp [derivedStalkComparison, Functor.map_comp, Category.assoc]
 
-/-- Naturality of the stalk comparison in its source morphism.
-Source: Stacks Project, Tag 095T, formal functoriality of inverse image. -/
+/-- Naturality of the stalk comparison in its source morphism (Stacks, Tag 095T). -/
 private theorem derivedStalkComparison_precomp
     {Y Z : Scheme.{u}} (a : Z ⟶ Y)
     {k : Type u} [Field k] [IsSepClosed k]
@@ -228,8 +223,8 @@ private theorem exchangeCube_derived_square
   exact (reassoc_of% hp) _
 
 /-- The exchange square commutes after restriction along a commuting cube and on
-homology stalks. This is a compatibility assertion only, with no invertibility claim.
-Source: Stacks Project, Tags 03Q9 and 095T; formal mate-pasting calculation. -/
+homology stalks. This is a compatibility assertion only, with no invertibility claim
+(Stacks, Tags 03Q9 and 095T). -/
 theorem exchangeCube_stalk_square
     (sq : CommSq g' f' f g) (sq₀ : CommSq p₀ f₀ f jA)
     (sq₁ : CommSq p₁ f₁ f₀ g₀) (sqB : CommSq b f₁ f' jB)

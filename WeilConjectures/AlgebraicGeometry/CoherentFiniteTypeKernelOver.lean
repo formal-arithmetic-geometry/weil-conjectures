@@ -24,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- A map from a finite type module on an open slice to the restriction of a coherent
-module has a finite type kernel.
-Source: Stacks Project, Modules, Lemma 01BY (2), with Definition 01BV. -/
+module has a finite type kernel (Stacks, Tags 01BY and 01BV). -/
 theorem coherent_finiteType_kernel_over (X : RingedSpace.{u})
     (U : Opens X) (G : SheafOfModules.{u} (moduleRings X))
     (F : SheafOfModules.{u} ((moduleRings X).over U))

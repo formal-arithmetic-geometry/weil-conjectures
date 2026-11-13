@@ -302,7 +302,7 @@ private theorem ordinary_presentation (N : ModuleCat.{u + 1} A)
 end ContinuousScalarPresentation
 
 /-- Finitely presented modules over continuous condensed coefficients are precisely
-extensions of ordinary finitely presented scalar modules. (Stacks, Tag 0518) -/
+extensions of ordinary finitely presented scalar modules (Stacks, Tag 0518). -/
 theorem continuousScalarFinitePresentation (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A]
     (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

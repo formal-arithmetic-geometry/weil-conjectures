@@ -87,8 +87,8 @@ private theorem hom_ext_of_elements {A : Type u} [CommRing A]
   have hy := congrArg (fun k : ModuleCat.of A A ⟶ S.obj N ↦ k.hom 1) hx
   simpa [affineHomElement] using hy
 
-/-- The images of global linear maps extend uniquely to the affine Hom comparison.
-Source: Stacks Project, Tag 01I7, the mapping property, and Tag 01HV (4)-(5). -/
+/-- The images of global linear maps extend uniquely to the affine Hom comparison
+(Stacks, Tags 01I7 and 01HV). -/
 theorem existsUnique_affineHom_generator_extension {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) :
     ∃! c : (affineHomComparisonFunctor U).obj (ModuleCat.of Γ(Y, U.1) (M ⟶ N)) ⟶

@@ -79,8 +79,8 @@ private theorem isIso_unit_on_basis
     rfl
 
 /-- A module presheaf whose principal restrictions on every affine open are
-localizations already has the correct sections on affine opens after sheafification.
-Source: Stacks Project, Tags 01HV and 009Q. -/
+localizations already has the correct sections on affine opens after sheafification
+(Stacks, Tags 01HV and 009Q). -/
 theorem isIso_sheafificationUnit_app_of_affine_localizing
     (T : Scheme.{u}) (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)
     (hP : ∀ (W : T.Opens), IsAffineOpen W → ∀ a : Γ(T, W),

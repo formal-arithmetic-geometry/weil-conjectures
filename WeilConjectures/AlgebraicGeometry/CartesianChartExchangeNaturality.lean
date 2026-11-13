@@ -31,8 +31,8 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 /-- The explicit chart lift and apex isomorphism commute with the specified
 cartesian derived exchange. This asserts an identity between constructed maps;
-it does not choose an isomorphism, lift, coefficient object, or representative.
-Source: Stacks Project, Tags 0EYM, 03Q8, 03CB and 09YQ. -/
+it does not choose an isomorphism, lift, coefficient object, or representative
+(Stacks, Tags 0EYM, 03Q8, 03CB and 09YQ). -/
 theorem cartesianChartCohomologyLift_exchange
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

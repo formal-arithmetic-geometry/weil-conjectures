@@ -100,11 +100,8 @@ private theorem supported_completion_faithful {X Z : Scheme.{u}}
   simpa using hfg
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Completion on a fixed closed thickening reflects a uniform cokernel torsion bound.
-Source: Stacks Project, Tag 088A, the second use of Remark 0888 and the identification
-of coherent modules killed by the thickening ideal (Tag 087T).
-https://stacks.math.columbia.edu/tag/088A
-https://stacks.math.columbia.edu/tag/0888. -/
+/-- Completion on a fixed closed thickening reflects a uniform cokernel torsion bound
+(Stacks, Tags 088A, 0888 and 087T). -/
 theorem completion_thickening_cokernel_reflection
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (q : ℕ) (hq : 1 ≤ q)

@@ -38,9 +38,8 @@ private theorem upperStarComp_inv_of_eq_id {X T : Scheme.{u}}
     congrArg (fun e ↦ e.inv.app G) (upperStarComp_id_left AddCommGrpCat.{u + 1} a)
 
 /-- Canonical pullback comparisons give a sheaf system, identified on a cone with a
-constant diagram. No limit or quasi-compactness hypothesis is needed.
-Source: Stacks Project, Sites, Tag 03CB (composition of morphisms of sites), and the
-compatible inverse-image system in Etale Cohomology, Tag 09YQ. -/
+constant diagram. No limit or quasi-compactness hypothesis is needed (Stacks, Tags 03CB and 09YQ).
+-/
 theorem compatiblePullbackSheafSystem
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (d : Cone D)
     (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -25,10 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Canonical affine completion projections, including their inverse-limit property.
-
-Source: Stacks Project, Tag 087W, first paragraph; Tags 01I7 and 01IB,
-affine module/sections comparison. -/
+/-- Canonical affine completion projections, including their inverse-limit property
+(Stacks, Tags 087W, 01I7 and 01IB). -/
 theorem completion_affine_sections_coordinates {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (P : CoherentModules X) (U : X.affineOpens) :
     let A := Γ(X, U.val)

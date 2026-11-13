@@ -25,8 +25,7 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Determining equation of the concrete composite unit.
-Source: Stacks Tag 0D5T. -/
+/-- Determining equation of the concrete composite unit (Stacks, Tag 0D5T). -/
 private theorem schemeMVCompositionUnit_fac {A B D : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings A.toRingedSpace))]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings B.toRingedSpace))]
@@ -60,8 +59,8 @@ attribute [local instance 2000] schemeMVModuleAbelian
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The composition square commutes with the right-derived units, before any counit
-is applied. This holds on every homotopy object, without a K-injectivity hypothesis.
-Source: Stacks Tag 0D5T; Tag 08FE, composition on inverse-image opens. -/
+is applied. This holds on every homotopy object, without a K-injectivity hypothesis
+(Stacks, Tags 0D5T and 08FE). -/
 theorem schemeMVOpenComposition_unit_normalization
     (β : schemeDerivedDirectImage (h ⁻¹ᵁ U).ι ⋙ schemeDerivedDirectImage h ≅
       schemeDerivedDirectImage (h ∣_ U) ⋙ schemeDerivedDirectImage U.ι)

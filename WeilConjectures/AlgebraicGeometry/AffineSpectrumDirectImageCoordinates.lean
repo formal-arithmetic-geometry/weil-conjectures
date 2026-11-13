@@ -29,7 +29,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The inverse spectrum pullback equivalence, constructed from the selected composition
-and identity comparisons. Source: Stacks Project, Tag 0D5S. -/
+and identity comparisons (Stacks, Tag 0D5S). -/
 def affineSpectrumInversePullbackEquivalence (X : Scheme.{u}) [IsAffine X] :
     schemeDerivedCategory X ≌ schemeDerivedCategory (Spec Γ(X, ⊤)) := by
   let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),
@@ -51,7 +51,7 @@ def affineSpectrumInversePullbackEquivalence (X : Scheme.{u}) [IsAffine X] :
 
 /-- The direct-image coordinate isomorphism is the conjugate of the selected pullback
 coordinate comparison. Its data are constructed, with no existence witness for an
-arbitrary coordinate isomorphism. Source: Stacks Project, Tags 0D5S and 08HY. -/
+arbitrary coordinate isomorphism (Stacks, Tags 0D5S and 08HY). -/
 def affineSpectrumDerivedDirectImageIso {X S : Scheme.{u}}
     [IsAffine X] [IsAffine S] (f : X ⟶ S) :
     schemeDerivedDirectImage f ≅
@@ -76,8 +76,8 @@ def affineSpectrumDerivedDirectImageIso {X S : Scheme.{u}}
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (derivedPullback X.isoSpec.inv) d
 
-/-- Forward spectrum pullback comparison, using naturality of the spectrum map.
-Source: Stacks Project, Tag 0D5S. -/
+/-- Forward spectrum pullback comparison, using naturality of the spectrum map (Stacks, Tag 0D5S).
+-/
 def affineSpectrumForwardPullbackIso {S S' : Scheme.{u}}
     [IsAffine S] [IsAffine S'] (g : S' ⟶ S) :
     derivedPullback S.toSpecΓ ⋙ derivedPullback g ≅
@@ -91,7 +91,7 @@ def affineSpectrumForwardPullbackIso {S S' : Scheme.{u}}
       (c S'.toSpecΓ (Spec.map g.appTop)).symm
 
 /-- The source coordinate isomorphism, obtained by applying pullback to the canonical
-right-adjoint coordinate isomorphism. Source: Stacks Project, Tags 0D5S and 08HY. -/
+right-adjoint coordinate isomorphism (Stacks, Tags 0D5S and 08HY). -/
 def affineSpectrumBaseChangeSourceIso {X S S' : Scheme.{u}}
     [IsAffine X] [IsAffine S] [IsAffine S'] (f : X ⟶ S) (g : S' ⟶ S) :
     schemeDerivedDirectImage f ⋙ derivedPullback g ≅

@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Every germ of the constant-module direct image on the limit descends to a stage.
-
-Source: Stacks Project, Tag 09Z1 in degree zero and Tag 09Z6, finite approximation. -/
+/-- Every germ of the constant-module direct image on the limit descends to a stage
+(Stacks, Tags 09Z1 and 09Z6). -/
 theorem exists_constantModule_limit_fiber_rep
     (Λ : Type (u + 1)) [CommRing Λ] (M : ModuleCat.{u + 1} Λ)
     {X : Scheme.{u}} {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -45,9 +45,7 @@ private theorem pullback_triangle_coherence
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Existing models and their two arrow equations transport to any later stage.
-This assertion constructs no descended model and asserts no covering.
-
-Source: Stacks, Limits 01YZ and the universal property of fibre products. -/
+This assertion constructs no descended model and asserts no covering (Stacks, Tag 01YZ). -/
 theorem etale_factorizationData_baseChange
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (i₀ : I)
     (W : (D.obj (op i₀)).FullAffineEtale)

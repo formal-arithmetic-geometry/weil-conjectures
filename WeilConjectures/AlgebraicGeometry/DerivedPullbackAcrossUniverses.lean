@@ -23,8 +23,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Compare the specified localization with the standard localization of the same complexes.
-Source: Stacks Project, Tag 05RU. -/
+/-- Compare the specified localization with the standard localization of the same complexes
+(Stacks, Tag 05RU). -/
 noncomputable def schemeDerivedStandardEquivalence (X : Scheme.{u})
     [h : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     schemeDerivedCategory X ≌
@@ -34,8 +34,8 @@ noncomputable def schemeDerivedStandardEquivalence (X : Scheme.{u})
     (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
 
 /-- Transport the standard K-flat derived pullback through localization equivalences.
-This constructs a functor even when the two specified derived universes differ.
-Source: Stacks Project, Tags 05RU and 06YI. -/
+This constructs a functor even when the two specified derived universes differ
+(Stacks, Tags 05RU and 06YI). -/
 noncomputable def derivedPullbackAcrossUniverses {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hx : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hy : HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

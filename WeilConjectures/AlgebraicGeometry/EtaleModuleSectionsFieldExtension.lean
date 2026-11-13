@@ -19,8 +19,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Base extension from a separably closed field is injective on module sections.
-Source: Stacks Tag 0A3I and the canonical coefficient-forgetting comparison. -/
+/-- Base extension from a separably closed field is injective on module sections (Stacks, Tag 0A3I).
+-/
 theorem etaleModuleSectionsFieldExtension_injective
     (Λ : Type (u + 1)) [CommRing Λ]
     (k K : Type u) [Field k] [Field K] [IsSepClosed k]

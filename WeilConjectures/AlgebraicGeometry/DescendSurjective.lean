@@ -30,9 +30,7 @@ namespace AlgebraicGeometry
 
 /-- A locally finitely presented morphism between quasi-compact, quasi-separated schemes
 at a stage of an inverse system with affine transitions is surjective at some later stage
-if its base change to the limit is surjective.
-
-Source: Stacks Project, Limits, Lemma 07RR in Situation 081D. -/
+if its base change to the limit is surjective (Stacks, Tags 07RR and 081D). -/
 theorem exists_surjective_of_isLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

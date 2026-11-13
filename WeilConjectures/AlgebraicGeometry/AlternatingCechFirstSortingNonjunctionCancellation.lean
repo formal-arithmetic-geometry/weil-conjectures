@@ -40,10 +40,7 @@ private theorem sortingRestriction_comp (X : Scheme.{u}) {I : Type v}
   rfl
 
 open Classical in
-/-- Outgoing nonjunction deletions cancel the incoming differential expansion.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1 (the computation omitted
-in the source), nonjunction terms of the labelled-deletion argument. -/
+/-- Outgoing nonjunction deletions cancel the incoming differential expansion (Stacks, Tag 01FM). -/
 theorem cechFirstSortingNonjunctionCancellation (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

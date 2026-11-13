@@ -55,8 +55,7 @@ private noncomputable def constantRestrictionIso
       (constantRingMap T f) hsq P)
 
 /-- Restriction along a surjective coefficient homomorphism preserves local constant
-finite-module descriptions. Source: Stacks Project, Cohomology on Sites, Tag 094I,
-restriction of scalars in the filtration argument. -/
+finite-module descriptions (Stacks, Tag 094I). -/
 theorem locallyConstantFiniteTypeModules_restrictScalars_surjective
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)

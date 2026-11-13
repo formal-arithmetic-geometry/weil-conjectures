@@ -65,8 +65,7 @@ private theorem restriction_preserves_cokernel {X : Scheme.{u}} [IsNoetherian X]
     infer_instance
   exact preservesColimit_of_reflects_of_preserves R V
 
-/-- The affine restriction of the coimage-image comparison is epic.
-Source: Stacks Project, Lemma 087X, affine calculation of Coim=Im. -/
+/-- The affine restriction of the coimage-image comparison is epic (Stacks, Tag 087X). -/
 theorem coherentFormalModules_coimageImage_isEpi_restrict_affine
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     [HasKernels (CoherentFormalModule X I)]

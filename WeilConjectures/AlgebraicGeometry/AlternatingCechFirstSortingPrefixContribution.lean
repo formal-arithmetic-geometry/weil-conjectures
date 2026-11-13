@@ -49,8 +49,8 @@ private theorem prefix_junction_filter {p : ℕ}
     simp [cechJunction]
 
 open Classical in
-/-- Prefix-labelled junction deletions contribute the unadvanced partial sorting stages.
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1. -/
+/-- Prefix-labelled junction deletions contribute the unadvanced partial sorting stages
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionPrefixContribution (X : Scheme.{u}) {I : Type v}
     [LinearOrder I] (U : I → X.Opens)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})

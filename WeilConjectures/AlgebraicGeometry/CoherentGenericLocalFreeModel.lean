@@ -78,9 +78,7 @@ private theorem sections_vanishing {X : Scheme.{u}} (E : X.Modules)
   exact exists_pow_smul_eq_zero_of_isAffineOpen E hW g t ht
 
 /-- The pushforward of a finite free module along a closed immersion is coherent
-on a locally Noetherian target.
-
-Source: Stacks Project Tag 01Y6 (finite pushforward) and Tag 01XZ (coherence). -/
+on a locally Noetherian target (Stacks, Tags 01Y6 and 01XZ). -/
 private theorem isCoherent_closedImmersion_finiteFree {X Z : Scheme.{u}}
     [IsLocallyNoetherian X] (i : Z ⟶ X) [IsClosedImmersion i]
     (I : Type u) [Finite I] :
@@ -210,9 +208,8 @@ private noncomputable def closed_pushforward_stalk_iso {X Z : Scheme.{u}}
   exact (LinearEquiv.ofBijective f hb).toModuleIso
 
 /-- A maximal-ideal-annihilated generic stalk has a local model by the closed
-pushforward of a finite free module. This asserts no global map or ideal lattice.
-
-Source: Stacks Project, Tag 01YE, first paragraphs through the local free map. -/
+pushforward of a finite free module. This asserts no global map or ideal lattice (Stacks, Tag 01YE).
+-/
 theorem coherent_generic_local_free_model
     {X Z : Scheme.{u}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

@@ -101,9 +101,8 @@ private theorem constantComparison_unit
         ht).trans hK.symm)
 
 /-- A constant chart of the reconstructed coefficient ring propagates along every scheme map.
-Only coefficient rings occur in this assertion, with no input module or slice.
-
-Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2. -/
+Only coefficient rings occur in this assertion, with no input module or slice
+(Stacks, Tags 00YV and 03D2). -/
 theorem exists_constant_coefficient_chart_pullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)

@@ -27,10 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 open Classical in
-/-- The outgoing junction deletions give the successive partial sorting differences.
-
-Source: Stacks 01FM, verification of equation 20.23.6.1 (the computation omitted
-in the source), junction terms of the labelled-deletion argument. -/
+/-- The outgoing junction deletions give the successive partial sorting differences
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionDeletions (X : Scheme.{u}) {I : Type v} [LinearOrder I]
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

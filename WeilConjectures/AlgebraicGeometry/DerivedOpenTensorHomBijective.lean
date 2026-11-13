@@ -223,8 +223,8 @@ private theorem tensor_stalk_vanishing
     hz.of_iso (T.mapIso ((DerivedCategory.homologyFunctor C n).mapIso eTensor))
   exact AddCommGrpCat.isZero_iff_subsingleton.mp hz'
 
-/-- Tensoring an extension object preserves the restriction Hom bijection.
-Source: Stacks Project, Tags 00A7, 08BT, 06YB and 06YH. -/
+/-- Tensoring an extension object preserves the restriction Hom bijection
+(Stacks, Tags 00A7, 08BT, 06YB and 06YH). -/
 theorem derivedOpen_tensorHom_bijective
     (X : Scheme.{uX}) (U : X.Opens)
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

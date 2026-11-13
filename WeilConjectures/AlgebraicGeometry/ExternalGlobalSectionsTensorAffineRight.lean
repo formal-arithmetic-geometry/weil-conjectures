@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The external section comparison when the second factor is affine.
-Source: Stacks Project, Varieties, Tag 0BED, lemma-kunneth, the comparison on X times V. -/
+/-- The external section comparison when the second factor is affine (Stacks, Tag 0BED). -/
 theorem externalGlobalSectionsTensor_bijective_of_isAffine_right
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

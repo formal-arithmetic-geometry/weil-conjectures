@@ -26,8 +26,8 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 
 set_option maxHeartbeats 400000 in
 -- Elaborating the semilinear tensor factors and sheaf scalar actions needs more fuel.
-/-- The affine ideal tensor comparison, before identifying its source with `I/I²`.
-Source: Stacks Project, Morphisms, Lemma 01R3 (2), and Schemes, Tag 01I9. -/
+/-- The affine ideal tensor comparison, before identifying its source with `I/I²`
+(Stacks, Tags 01R3 and 01I9). -/
 theorem affine_ideal_tensor_sections {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] :
       ∀ (U : X.affineOpens) (R : Type v) [CommRing R]

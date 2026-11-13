@@ -38,9 +38,8 @@ private theorem dimension_le_of_local_dimension_eq
     exact (le_iSup D ⟨E, ENat.WithBot.lt_add_one_iff.mp hEdim⟩) hxE
   exact topologicalKrullDim_le_of_iSup_eq_top D hcover _ (fun i ↦ i.2)
 
-/-- Constant finite local dimension on a locally noetherian open gives pure dimension.
-
-Source: Stacks Project, Tag 0052, Lemma 5.9.2 (2), (3), and Tag 0055. -/
+/-- Constant finite local dimension on a locally noetherian open gives pure dimension
+(Stacks, Tags 0052 and 0055). -/
 theorem topologicalKrullDim_component_eq_of_constant_local_dimension
     {Y : Scheme.{u}} [IsLocallyNoetherian Y] (O : Y.Opens) (n : ℕ)
     (hdim : ∀ x ∈ O, topologicalKrullDimAt x = (n : WithBot ℕ∞))

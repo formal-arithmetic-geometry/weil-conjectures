@@ -22,9 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The comparison cocone restricted above an affine stage is a colimit.
-
-Source: Stacks Project, Tag 09YQ, the cofinal-tail reduction. -/
+/-- The comparison cocone restricted above an affine stage is a colimit (Stacks, Tag 09YQ). -/
 theorem etale_limit_affine_stage_tail_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

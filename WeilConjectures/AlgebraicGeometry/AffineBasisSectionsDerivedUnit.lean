@@ -24,8 +24,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The three affine-basis acyclicity conditions make the ordinary-to-derived
-section comparison invertible for an unbounded complex. No quasi-coherence is assumed.
-Source: Stacks Project, Tag 08C2, conditions (3)(a), (3)(b), (3)(c). -/
+section comparison invertible for an unbounded complex. No quasi-coherence is assumed
+(Stacks, Tag 08C2). -/
 theorem affineBasisSections_isIso_derivedUnit
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ)

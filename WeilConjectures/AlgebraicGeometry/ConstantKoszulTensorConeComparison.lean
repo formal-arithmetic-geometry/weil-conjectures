@@ -27,9 +27,7 @@ attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoid
 
 /-- Tensoring the coefficient cone gives the actual cone at an arbitrary complex.
 This is a strict tower isomorphism, with no Noetherianity, flatness, localization,
-or inverse-limit assertion.
-
-Source: Stacks Project, Tags 099M and 06YP, the signed tensor-cone calculation. -/
+or inverse-limit assertion (Stacks, Tags 099M and 06YP). -/
 theorem constantKoszulTensorConeComparison
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

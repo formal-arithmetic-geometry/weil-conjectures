@@ -27,8 +27,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Universal vanishing in degree -1 makes the degree-zero opcycles flat.
-Source: Stacks Project, Tag 0653, its tensor-exactness criterion, and Tag 01IB. -/
+/-- Universal vanishing in degree -1 makes the degree-zero opcycles flat
+(Stacks, Tags 0653 and 01IB). -/
 theorem affine_opcycles_flat_of_universally_exact (S : Scheme.{u}) (hS : IsAffine S)
     (C : CochainComplex S.Modules ℤ)
     (hflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 S))

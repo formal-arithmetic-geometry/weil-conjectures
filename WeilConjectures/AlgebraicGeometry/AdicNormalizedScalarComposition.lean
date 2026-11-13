@@ -169,8 +169,8 @@ private theorem scalar_composition_representative
   erw [hn]
   exact (ordinary_comp_unit f g P).symm
 
-/-- The normalized scalar-composition comparison is the uniqueness comparison of left adjoints.
-Source: Stacks Project, Tags 03CZ and 06YY. -/
+/-- The normalized scalar-composition comparison is the uniqueness comparison of left adjoints
+(Stacks, Tags 03CZ and 06YY). -/
 theorem adicFiniteExtendComp_leftAdjointUniq (f : R ⟶ S) (g : S ⟶ V)
     (af : extend f ⊣ dres f) (ag : extend g ⊣ dres g)
     (ah : extend (f ≫ g) ⊣ dres (f ≫ g))

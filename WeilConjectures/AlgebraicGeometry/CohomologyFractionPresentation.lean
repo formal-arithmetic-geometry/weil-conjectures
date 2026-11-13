@@ -30,8 +30,7 @@ open CategoryTheory MonoidalCategory DirectSum
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The fraction relations on twisted cohomology over an open `U`.
-Source: Stacks, Lemma 09MR, degree-zero fractions ξ/s^n. -/
+/-- The fraction relations on twisted cohomology over an open `U` (Stacks, Tag 09MR). -/
 noncomputable def cohomologyFractionRelations {X : Scheme.{uCF}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (p : ℕ) (U : X.Opens) :
     AddSubgroup (⨁ n : ℕ,
@@ -47,16 +46,15 @@ noncomputable def cohomologyFractionRelations {X : Scheme.{uCF}} (L F : X.Module
         (n + b) ((RingedSpace.openModuleCohomology X.toRingedSpace p U).map
           (mulTensorPowSection (homOfGlobalSection L s) F n b) ξ)}
 
-/-- The underlying additive group of H^p_*(U,L,F)_(s), with its explicit fraction relations.
-Source: Stacks, Lemma 09MR, degree-zero localization. -/
+/-- The underlying additive group of H^p_*(U,L,F)_(s), with its explicit fraction relations
+(Stacks, Tag 09MR). -/
 noncomputable abbrev CohomologyFractionPresentation {X : Scheme.{uCF}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (p : ℕ) (U : X.Opens) : Type uCF :=
   (⨁ n : ℕ,
     (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj (F ⊗ L.tensorPow n : X.Modules)) ⧸
       cohomologyFractionRelations L F s p U
 
-/-- The class ξ/s^n in the degree-zero localization.
-Source: Stacks, Lemma 09MR, fraction formula. -/
+/-- The class ξ/s^n in the degree-zero localization (Stacks, Tag 09MR). -/
 noncomputable def cohomologyFraction {X : Scheme.{uCF}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (p : ℕ) (U : X.Opens) (n : ℕ)
     (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj

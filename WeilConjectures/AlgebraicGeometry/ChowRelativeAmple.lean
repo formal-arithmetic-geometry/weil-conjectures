@@ -37,9 +37,8 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 namespace AlgebraicGeometry
 
 set_option linter.unusedVariables false in
-/-- The Chow immersion is closed and its pulled-back twisting module is relatively ample.
-Source: Stacks Project, Cohomology of Schemes, Remark 30.18.2 and Proposition 30.19.1,
-Tag 02O5. -/
+/-- The Chow immersion is closed and its pulled-back twisting module is relatively ample
+(Stacks, Tag 02O5). -/
 theorem chow_relative_ample (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

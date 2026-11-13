@@ -76,8 +76,8 @@ private theorem sections_naturality {X Y : Scheme.{u}} (f : Y ⟶ X)
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
-/-- Functorial termwise presentations can be chosen with a quantitative stabilization bound.
-Source: Stacks Project, Tags 015J, 015K and 0EZM. -/
+/-- Functorial termwise presentations can be chosen with a quantitative stabilization bound
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleHypercohomology_uniform_bound
     (P : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X)
       (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

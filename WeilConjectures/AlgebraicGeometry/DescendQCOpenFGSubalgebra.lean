@@ -85,7 +85,7 @@ private theorem subalgebraTransition_quasiCompact
   infer_instance
 
 /-- A quasi-compact open in a base change to an algebra descends to a finitely generated
-subalgebra. Source: Stacks Project, Tag 0388. -/
+subalgebra (Stacks, Tag 0388). -/
 theorem descend_qc_open_fg_subalgebra (k : Type u) [Field k] (X : Scheme.{u})
     (f : X ⟶ Spec (CommRingCat.of k)) (A : Type u) [CommRing A] [Algebra k A] :
     ∀ (V : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k A)))).Opens),

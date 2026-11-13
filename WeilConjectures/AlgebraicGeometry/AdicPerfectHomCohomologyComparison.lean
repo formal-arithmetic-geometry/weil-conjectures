@@ -29,8 +29,8 @@ attribute [local irreducible] ConstantCompletion.derivedExtension
   adicResidueLocalReductionStep adicResidueConstantPerfect adicResidueRestriction
 
 /-- Sections of the cohomology of the actual quotients of the algebraic Hom complex.
-Index n uses the ideal power J^(n+1); all quotient maps are the canonical maps.
-Source: Stacks Project, Tags 09C5 and 09C6. -/
+Index n uses the ideal power J^(n+1); all quotient maps are the canonical maps
+(Stacks, Tags 09C5 and 09C6). -/
 def adicPerfectHomCohomologyTower
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

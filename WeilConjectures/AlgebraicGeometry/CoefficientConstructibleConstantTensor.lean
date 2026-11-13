@@ -26,8 +26,8 @@ universe u v w
 open CategoryTheory CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
-/-- Exact constant realization of a module in degree zero on the coefficient-sized site.
-Source: Stacks Tags 093J and 09BQ. -/
+/-- Exact constant realization of a module in degree zero on the coefficient-sized site
+(Stacks, Tags 093J and 09BQ). -/
 def coefficientConstantSingle (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] (M : ModuleCat.{max v (u + 1)} A) :
     adicFiniteAmbient.{u, v} X A :=
@@ -36,8 +36,8 @@ def coefficientConstantSingle (X : Scheme.{u})
   (Q R).obj ((HomologicalComplex.single (Mod R) (.up ℤ) 0).obj
     ((commutativeSiteConstantModuleFunctor T A).obj M))
 
-/-- The existing K-flat tensor with the specified constant module in degree zero.
-Source: Stacks Tags 09BQ and 094H. -/
+/-- The existing K-flat tensor with the specified constant module in degree zero
+(Stacks, Tags 09BQ and 094H). -/
 def coefficientConstantTensor (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (K : adicFiniteAmbient.{u, v} X A) (M : ModuleCat.{max v (u + 1)} A) :

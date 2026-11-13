@@ -110,8 +110,8 @@ private lemma unitLeray_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
   exact τ.naturality a
 
 -- Elaborating the dependent presentation families and compatibility equations.
-/-- Identity and composition of pullback on derived étale cohomology.
-Source: Stacks Project, Tags 015J, 015K and 0EZM. -/
+/-- Identity and composition of pullback on derived étale cohomology
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem derivedEtaleCohomology_pullback_laws
     (P : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

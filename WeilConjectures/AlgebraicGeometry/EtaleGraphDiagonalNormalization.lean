@@ -24,8 +24,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The graph map comparing a compactification with itself only inserts R(id)_*.
-Source: Stacks Project, Tags 0F7C--0F7E, identity and proper diagonal pasting. -/
+/-- The graph map comparing a compactification with itself only inserts R(id)_*
+(Stacks, Tags 0F7C and 0F7E). -/
 theorem etaleGraphComparison_diagonal
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

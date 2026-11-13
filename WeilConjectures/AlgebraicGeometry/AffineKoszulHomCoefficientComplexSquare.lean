@@ -39,9 +39,8 @@ private theorem exists_iso_square_trans {C : Type*} [Category* C]
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Applying internal Hom to the sheafified coefficient quotient gives the
-sheafification of the explicit coefficient reduction between dual complexes.
-Source: Stacks Project, Tag 0BQZ, Lemma 48.15.5, displayed Hom-complex map;
-Tag 01HV, Lemma 26.5.4(4)-(5), localization of associated modules. -/
+sheafification of the explicit coefficient reduction between dual complexes
+(Stacks, Tags 0BQZ and 01HV). -/
 theorem affine_koszul_hom_coefficient_complex_square
     {Y : Scheme.{u}} (U : Y.affineOpens) (I : Ideal (Γ(Y, U.1)))
     (n : ℕ) (f : Fin n → Γ(Y, U.1))

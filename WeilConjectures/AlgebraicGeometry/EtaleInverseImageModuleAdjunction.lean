@@ -118,8 +118,8 @@ private theorem adjunctionOfLinearLifts
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Inverse image transports the scalar action and the abelian adjunction restricts to modules.
-Source: Stacks Project, Tags 03D1--03D3. -/
+/-- Inverse image transports the scalar action and the abelian adjunction restricts to modules
+(Stacks, Tags 03D1 and 03D3). -/
 theorem etaleInverseImageModuleAdjunction (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

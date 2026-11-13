@@ -57,9 +57,7 @@ private theorem pair_section {C : Type*} [Category C] (E : C ⥤ Type (u + 1))
       _ = b := congrArg Prod.snd he
 
 /-- Any pair of sections of an abelian and a set inverse image is locally pulled back
-from a pair of sections on the same étale object.
-
-Source: Stacks Project, Tags 09XN and 00YV. -/
+from a pair of sections on the same étale object (Stacks, Tags 09XN and 00YV). -/
 theorem etaleInverseImage_joint_representatives
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

@@ -45,8 +45,8 @@ attribute [local instance 40000] fixedAbelian
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
 /-- The standard derived category on the original slice, with the actual inverse-image ring.
-This abbreviates the codomain of `sfbLocalRestriction`; it changes no coefficient ring.
-Source: Stacks Tag 00XZ. -/
+This abbreviates the codomain of `sfbLocalRestriction`; it changes no coefficient ring
+(Stacks, Tag 00XZ). -/
 abbrev sfbAdicImmersionSliceCategory {X S : Scheme.{u}} (i : S ⟶ X)
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) (U : S.ProEt) :=
   let R := (adicLisseForget S).obj

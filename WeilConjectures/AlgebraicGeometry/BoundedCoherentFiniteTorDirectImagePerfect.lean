@@ -118,8 +118,7 @@ private theorem finiteTor_of_iso (S : Scheme.{u})
   exact ⟨P, hP, ⟨eP ≪≫ e⟩, hz⟩
 
 /-- A bounded coherent complex with proper cohomological support and finite Tor dimension
- over the inverse-image structure sheaf has perfect derived direct image.
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV). -/
+ over the inverse-image structure sheaf has perfect derived direct image (Stacks, Tag 08EV). -/
 theorem isPerfect_schemeDerivedDirectImage_of_bounded_coherent_finiteTor
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

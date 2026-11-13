@@ -29,9 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 set_option autoImplicit false
 
-/-- The lifted tensor-section sheaf has zero positive Čech cohomology on finite affine covers.
-Source: Stacks Project, Étale Cohomology Tags 03P2 (affine case) and 03OZ;
-faithfully flat Amitsur exactness. -/
+/-- The lifted tensor-section sheaf has zero positive Čech cohomology on finite affine covers
+(Stacks, Tags 03P2 and 03OZ). -/
 theorem isZero_etaleTensorSectionsSheaf_ulift_cech
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)

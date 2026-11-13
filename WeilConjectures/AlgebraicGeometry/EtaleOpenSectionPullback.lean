@@ -22,9 +22,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Classifying a section after pullback between nested opens gives its restriction.
-Source: Stacks Project, Tag 03F3, localization restriction; the unit compatibility
-calculation of `open_restriction_pullback_unit`. -/
+/-- Classifying a section after pullback between nested opens gives its restriction
+(Stacks, Tag 03F3). -/
 theorem etaleOpenSection_pullback {X : Scheme.{u}}
     (U V : X.Opens) (h : V ≤ U)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

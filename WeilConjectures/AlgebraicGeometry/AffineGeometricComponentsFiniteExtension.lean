@@ -33,8 +33,8 @@ namespace AlgebraicGeometry
 
 /-- The data expressing a finite-field decomposition into affine open-and-closed geometric
 components.  The maps `baseComponent` are characterized by their two pullback projections, so
-that they are the canonical base changes of the inclusions `inclusion`.
-Source: Stacks Project, varieties.tex, Tags 038E and 0387. -/
+that they are the canonical base changes of the inclusions `inclusion` (Stacks, Tags 038E and 0387).
+-/
 structure AffineGeometricComponentDecomposition
     (D : WeilConjectures.FiniteFieldDatum.{u}) {X₀ : Scheme.{u}}
     (f₀ : X₀ ⟶ Spec (CommRingCat.of D.k₀)) (e : ℕ) (he : 1 ≤ e) where

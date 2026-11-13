@@ -76,9 +76,8 @@ private theorem generic_affine_extension {R : Type u} [CommRing R] [IsDomain R]
     hπ hred (he.map ε.toRingHom)
   exact ⟨b, ε.injective ((hε b).trans hb)⟩
 
-/-- A connected flat scheme over a DVR with reduced closed fibre has connected generic fibre.
-
-Source: Stacks Project, Tag 055J. -/
+/-- A connected flat scheme over a DVR with reduced closed fibre has connected generic fibre
+(Stacks, Tag 055J). -/
 theorem connectedSpace_generic_fibre_of_flat_trait {R : Type u} [CommRing R] [IsDomain R]
     [IsDiscreteValuationRing R] {X : Scheme.{u}} (f : X ⟶ Spec (.of R))
     [Flat f] [ConnectedSpace X] [IsReduced (f.fiber (closedPoint R))] :

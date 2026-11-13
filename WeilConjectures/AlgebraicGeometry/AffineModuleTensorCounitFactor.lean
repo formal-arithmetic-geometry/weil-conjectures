@@ -75,8 +75,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
 set_option maxHeartbeats 600000 in
 -- Transport through three sheaf-module object equalities needs extra elaboration heartbeats.
-/-- The pullback counit factors through scalar extension; its comparison map is epic.
-Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation. -/
+/-- The pullback counit factors through scalar extension; its comparison map is epic
+(Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counitFactor
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
     (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)

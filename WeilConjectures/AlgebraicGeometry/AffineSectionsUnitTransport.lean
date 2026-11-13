@@ -101,9 +101,7 @@ variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{wA} (ModuleCat.{u} R)]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Transport invertibility of the sections comparison across the canonical affine
-isomorphism, for an arbitrary complex of module sheaves on its spectrum.
-Source: Stacks Project, Tag 06Z0, identification of derived sections; the transport
-argument is given below. -/
+isomorphism, for an arbitrary complex of module sheaves on its spectrum (Stacks, Tag 06Z0). -/
 theorem affineSectionsUnit_transport (S : Scheme.{u}) [IsAffine S]
     [(Scheme.Modules.restrictFunctor S.toSpecΓ).Additive]
     (C : CochainComplex

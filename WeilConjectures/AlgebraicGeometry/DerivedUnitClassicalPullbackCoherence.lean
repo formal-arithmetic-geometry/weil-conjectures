@@ -24,9 +24,8 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 open Scheme Etale
 
-/-- The total derived morphism underlying the classical pullback comparison.
-
-Source: Stacks Project, Tag 01F8 and equations 01F9 and 01FA. -/
+/-- The total derived morphism underlying the classical pullback comparison
+(Stacks, Tags 01F8, 01F9 and 01FA). -/
 theorem derivedUnit_classicalPullback_coherence {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     let P := (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus

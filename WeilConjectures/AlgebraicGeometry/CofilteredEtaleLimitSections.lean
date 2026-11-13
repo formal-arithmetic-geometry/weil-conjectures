@@ -24,8 +24,8 @@ variable {J : Type u} [SmallCategory J] {R : Scheme.{u}}
   (p : c.pt ⟶ R) (h : ∀ j, c.π.app j ≫ (B.obj j).hom = p)
 
 /-- The diagonal section map from the terminal etale object of the limit to the
-base change of a stage. Its first component is the limit leg; its second is the identity.
-Source: Stacks Project, Tag 03Q9, canonical section restriction. -/
+base change of a stage. Its first component is the limit leg; its second is the identity
+(Stacks, Tag 03Q9). -/
 noncomputable def limitSectionMap (j : J) :
     Scheme.Etale.mk (𝟙 c.pt) ⟶
       (MorphismProperty.Over.pullback @Etale ⊤ p).obj (B.obj j) :=
@@ -35,8 +35,7 @@ noncomputable def limitSectionMap (j : J) :
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Compatibility of the diagonal section maps with transition morphisms.
-Source: Stacks Project, Tag 03Q9, compatibility of the section comparison components. -/
+/-- Compatibility of the diagonal section maps with transition morphisms (Stacks, Tag 03Q9). -/
 theorem limitSectionMap_naturality {j k : J} (a : j ⟶ k) :
     limitSectionMap B c p h j ≫
       (MorphismProperty.Over.pullback @Etale ⊤ p).map (B.map a) =
@@ -81,8 +80,8 @@ noncomputable def limitSectionCocone : Cocone (B.op ⋙ H.obj) where
 
 /-- The explicit unit/restriction cocone is a colimit when its etale stages are qcqs,
 its transition morphisms are affine, and its scheme cone is limiting. The base scheme
-need not be quasi-separated; all qcqs assumptions concern the stages.
-Source: Stacks Project, Tag 03Q9, degree zero, using Theorem 09YQ and Tag 03S2. -/
+need not be quasi-separated; all qcqs assumptions concern the stages
+(Stacks, Tags 03Q9, 09YQ and 03S2). -/
 theorem cofilteredLimitSections
     {J : Type u} [SmallCategory J] {R : Scheme.{u}}
     (B : J ⥤ R.Etale) (c : Cone (B ⋙ Scheme.Etale.forget R ⋙ Over.forget R))

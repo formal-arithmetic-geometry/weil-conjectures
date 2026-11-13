@@ -29,8 +29,8 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
-/-- Vanishing in the adjacent terms of a two-open Mayer--Vietoris sequence.
-Source: Stacks Project, Tags 0A50 and 0A51, the exact segment used in the induction. -/
+/-- Vanishing in the adjacent terms of a two-open Mayer--Vietoris sequence
+(Stacks, Tags 0A50 and 0A51). -/
 theorem Etale.subsingleton_H_of_two_open_pullback_cover
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)
     (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

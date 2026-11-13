@@ -29,8 +29,8 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Each image element of the first strict-henselization residue field satisfies a
-nonzero separable polynomial with coefficients in the second residue field.
-Source: Stacks Project, Tag 04HX and the residue-field inclusion argument of Tag 095T. -/
+nonzero separable polynomial with coefficients in the second residue field
+(Stacks, Tags 04HX and 095T). -/
 theorem Etale.compatibleStrictHenselization_residue_separable_polynomial
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

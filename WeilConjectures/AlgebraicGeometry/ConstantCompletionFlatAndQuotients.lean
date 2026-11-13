@@ -55,8 +55,8 @@ variable (A : Type u) [CommRing A] (I : Ideal A)
 attribute [local irreducible] completed
 variable {J A I}
 
-/-- Flatness and every canonical quotient identification for the sheafwise completion.
-Source: Stacks 093M. -/
+/-- Flatness and every canonical quotient identification for the sheafwise completion
+(Stacks, Tag 093M). -/
 theorem flat_and_quotients (J : GrothendieckTopology C) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     SheafOfModules.IsFlat

@@ -30,8 +30,8 @@ variable {X Y : RingedSpace.{u}}
   [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]
 
 /-- The identification computed by the identity resolution of a K-injective complex.
-It is the inverse right-derived unit, with the quotient/localization identifications.
-Source: Stacks, Tag 079V. -/
+It is the inverse right-derived unit, with the quotient/localization identifications
+(Stacks, Tag 079V). -/
 def derivedModuleDirectImageKInjectiveIso (g : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [K.IsKInjective] :
     (derivedModuleDirectImage g).obj (DerivedCategory.Q.obj K) ≅
@@ -46,8 +46,8 @@ def derivedModuleDirectImageKInjectiveIso (g : X ⟶ Y)
     (DerivedCategory.quotientCompQhIso _).app _
 
 /-- The identification of the localized image of a shifted complex with the shifted
-localized image. Both complex shift comparison maps are degreewise identities.
-Source: Stacks, Tags 0152 and 079V. -/
+localized image. Both complex shift comparison maps are degreewise identities
+(Stacks, Tags 0152 and 079V). -/
 def moduleDirectImageLocalizedShiftIso (g : X ⟶ Y)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     DerivedCategory.Q.obj
@@ -59,8 +59,8 @@ def moduleDirectImageLocalizedShiftIso (g : X ⟶ Y)
         (1 : ℤ)).app K) ≪≫
     (DerivedCategory.Q.commShiftIso (1 : ℤ)).app _
 
-/-- The triangle with the connecting map transported by the identity-resolution comparisons.
-Source: Stacks, Tags 0152 and 079V. -/
+/-- The triangle with the connecting map transported by the identity-resolution comparisons
+(Stacks, Tags 0152 and 079V). -/
 def derivedModuleDirectImageSplitTriangle (g : X ⟶ Y)
     (S : ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ))
     (hS : S.ShortExact) [S.X₁.IsKInjective] [S.X₂.IsKInjective] [S.X₃.IsKInjective] :
@@ -142,8 +142,8 @@ set_option maxHeartbeats 700000 in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Degreewise split sequences of K-injectives have their canonical triangle carried to
-that of the direct-image sequence, including its connecting morphism.
-Source: Stacks, Tags 0152 and 079V. -/
+that of the direct-image sequence, including its connecting morphism (Stacks, Tags 0152 and 079V).
+-/
 theorem derivedModuleDirectImage_termwise_split_ses_triangle (g : X ⟶ Y)
     (S : ShortComplex (CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ))
     (hS : S.ShortExact)

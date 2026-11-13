@@ -100,8 +100,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The canonical open base-change mate commutes with the exact-open unit.
-Source: Stacks Project, Cohomology, Remark 08HY and Lemma 08BV. -/
+/-- The canonical open base-change mate commutes with the exact-open unit
+(Stacks, Tags 08HY and 08BV). -/
 theorem mvOpenBaseChange_unit
     {X X' : Scheme.{u}} (q : X' ⟶ X)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

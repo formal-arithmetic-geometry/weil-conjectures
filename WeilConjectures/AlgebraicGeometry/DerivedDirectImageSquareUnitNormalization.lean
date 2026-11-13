@@ -110,8 +110,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 -- Source identifications expand the successive direct-image functors.
-/-- Equality transport of one derived unit, before factoring it into two units.
-Source: Stacks Project, Cohomology, Tags 08FE and 0D5T. -/
+/-- Equality transport of one derived unit, before factoring it into two units
+(Stacks, Tags 08FE and 0D5T). -/
 theorem schemeDirectImageSquare_single_unit_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

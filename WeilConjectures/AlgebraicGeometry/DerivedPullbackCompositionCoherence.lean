@@ -148,8 +148,8 @@ private theorem derivedPullbackIdentity_normalized
   choose i hi using one
   exact ⟨i, hi⟩
 
-/-- Canonical composition comparisons have identity comparisons and satisfy coherence.
-Source: Stacks Project, Cohomology, Tag 0D5S, with the tensor unit and associativity laws. -/
+/-- Canonical composition comparisons have identity comparisons and satisfy coherence
+(Stacks, Tag 0D5S). -/
 theorem derivedPullbackComposition_coherence
     [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁}
       (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))]

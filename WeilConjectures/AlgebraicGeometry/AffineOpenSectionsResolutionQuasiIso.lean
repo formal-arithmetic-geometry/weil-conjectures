@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The global-ring module presheaf functor is additive.
-Source: Stacks Project, 08C2. -/
+/-- The global-ring module presheaf functor is additive (Stacks, Tag 08C2). -/
 instance alternatingCechModulePresheaf_additive (X : Scheme.{u}) :
     (alternatingCechModulePresheaf (X := X)).Additive where
   map_add := by
@@ -56,9 +55,7 @@ private theorem affine_basis_vanishing (X : Scheme.{u}) (M : X.Modules)
   exact Scheme.Modules.subsingleton_H_succ_of_isAffine (M.restrict W.ι) q
 
 /-- Evaluating a resolution map on an affine open gives a quasi-isomorphism of
-complexes of modules over the global section ring.
-
-Source: Stacks Project, Cohomology, Lemma 08C2, and Cohomology of Schemes, 01XB. -/
+complexes of modules over the global section ring (Stacks, Tags 08C2 and 01XB). -/
 theorem affineOpenSections_resolution_quasiIso
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

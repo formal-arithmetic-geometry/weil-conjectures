@@ -85,9 +85,7 @@ private theorem preservesLeftHomology_of_lowerComparison
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections preserve homology of a K-injective complex with acyclic homology
-on an affine basis of V.
-Source: Stacks Project, Tag 08C2, unbounded comparison via Tag 071B;
-Tag 08D4, its tower argument adapted using the basis hypothesis of Tag 071B. -/
+on an affine basis of V (Stacks, Tags 08C2, 071B and 08D4). -/
 theorem affineBasisKInjectiveSections_preservesLeftHomology
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ) [F.IsKInjective]

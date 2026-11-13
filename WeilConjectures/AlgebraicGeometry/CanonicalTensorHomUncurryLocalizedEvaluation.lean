@@ -58,8 +58,8 @@ private lemma uncurry_chain_natural (X : Scheme.{u})
   conv_rhs => rw [← tensorHom_def_assoc]
   exact schemeTensorHomUncurryComponent_natural X P P' L L' M M' a b c φ p q n h'
 
-/-- The localized evaluation composite is natural for actual Hom-complex inputs.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ. -/
+/-- The localized evaluation composite is natural for actual Hom-complex inputs
+(Stacks, Tags 0A90 and 08DJ). -/
 theorem schemeTensorHomUncurry_localized_evaluation (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (P P' L L' M M' : CochainComplex

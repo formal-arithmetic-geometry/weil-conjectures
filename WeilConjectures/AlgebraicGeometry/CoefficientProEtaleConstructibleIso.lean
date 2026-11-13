@@ -16,8 +16,8 @@ set_option autoImplicit false
 universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
-/-- A module isomorphism transports the same affine-local strata and finite models.
-Source: Stacks Tag 09AJ. -/
+/-- A module isomorphism transports the same affine-local strata and finite models
+(Stacks, Tag 09AJ). -/
 theorem coefficientProEtale_constructible_of_iso (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     {F G : ConstantCompletion.Mod (ConstantCompletion.constant

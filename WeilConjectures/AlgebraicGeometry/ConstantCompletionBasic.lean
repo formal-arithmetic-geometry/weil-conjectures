@@ -57,35 +57,35 @@ namespace CategoryTheory.ConstantCompletion
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 variable (A : Type u) [CommRing A] (I : Ideal A)
 
-/-- The constant ring sheaf. Source: Stacks 099L. -/
+/-- The constant ring sheaf (Stacks, Tag 099L). -/
 abbrev constant : Sheaf J CommRingCat.{u} :=
   (constantSheaf J CommRingCat.{u}).obj (CommRingCat.of A)
 
-/-- The finite coefficient sheaf at exponent n+1. Source: Stacks 099L. -/
+/-- The finite coefficient sheaf at exponent n+1 (Stacks, Tag 099L). -/
 abbrev finite (n : ℕ) : Sheaf J CommRingCat.{u} :=
   constant J (A ⧸ I ^ (n + 1))
 
-/-- The quotient map of constant ring sheaves. Source: Stacks 099L. -/
+/-- The quotient map of constant ring sheaves (Stacks, Tag 099L). -/
 def quotient (n : ℕ) : constant J A ⟶ finite J A I n :=
   (constantSheaf J CommRingCat.{u}).map (CommRingCat.ofHom (Ideal.Quotient.mk _))
 
-/-- The finite quotient transition. Source: Stacks 099L. -/
+/-- The finite quotient transition (Stacks, Tag 099L). -/
 def transition (n : ℕ) : finite J A I (n + 1) ⟶ finite J A I n :=
   (constantSheaf J CommRingCat.{u}).map
     (CommRingCat.ofHom (Ideal.Quotient.factorPow I (Nat.le_succ (n + 1))))
 
-/-- The actual inverse sequence of finite constant ring sheaves. Source: Stacks 099L. -/
+/-- The actual inverse sequence of finite constant ring sheaves (Stacks, Tag 099L). -/
 def finiteSystem : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{u} :=
   Functor.ofOpSequence (transition J A I)
 
-/-- The sheafwise completion, as the limit of the specified sequence. Source: Stacks 093M. -/
+/-- The sheafwise completion, as the limit of the specified sequence (Stacks, Tag 093M). -/
 def completed : Sheaf J CommRingCat.{u} := limit (finiteSystem J A I)
 
-/-- The canonical finite projection. Source: Stacks 093M. -/
+/-- The canonical finite projection (Stacks, Tag 093M). -/
 def projection (n : ℕ) : completed J A I ⟶ finite J A I n :=
   limit.π (finiteSystem J A I) (op n)
 
-/-- Quotient maps form a cone. Source: Stacks 093M. -/
+/-- Quotient maps form a cone (Stacks, Tag 093M). -/
 theorem quotient_step (n : ℕ) :
     ((Functor.const ℕᵒᵖ).obj (constant J A)).map (homOfLE (Nat.le_succ n)).op ≫
         quotient J A I n =
@@ -96,12 +96,12 @@ theorem quotient_step (n : ℕ) :
   rw [← Functor.map_comp]
   congr 1
 
-/-- The quotient cone, using the actual quotient maps. Source: Stacks 093M. -/
+/-- The quotient cone, using the actual quotient maps (Stacks, Tag 093M). -/
 def quotientCone : Cone (finiteSystem J A I) where
   pt := constant J A
   π := NatTrans.ofOpSequence (quotient J A I) (quotient_step J A I)
 
-/-- The canonical map from constant to completed coefficients. Source: Stacks 093M. -/
+/-- The canonical map from constant to completed coefficients (Stacks, Tag 093M). -/
 def coefficientMap : constant J A ⟶ completed J A I :=
   limit.lift _ (quotientCone J A I)
 
@@ -109,47 +109,46 @@ attribute [local irreducible] completed
 
 variable {J A I}
 
-/-- The existing category of module sheaves, with commutativity forgotten.
-Source: Stacks 099L. -/
+/-- The existing category of module sheaves, with commutativity forgotten (Stacks, Tag 099L). -/
 abbrev Mod (O : Sheaf J CommRingCat.{u}) := ringedSiteModules.{u} (siteModuleRings O)
 
-/-- Cochain complexes of these module sheaves. Source: Stacks 099L. -/
+/-- Cochain complexes of these module sheaves (Stacks, Tag 099L). -/
 abbrev Cx (O : Sheaf J CommRingCat.{u}) := CochainComplex (Mod O) ℤ
 
-/-- The standard derived localization, rather than an additional size hypothesis.
-Source: Stacks 099L. -/
+/-- The standard derived localization, rather than an additional size hypothesis (Stacks, Tag 099L).
+-/
 abbrev D (O : Sheaf J CommRingCat.{u}) :=
   @DerivedCategory (Mod O) _ _ (HasDerivedCategory.standard _)
 
-/-- The standard localization functor. Source: Stacks 099L. -/
+/-- The standard localization functor (Stacks, Tag 099L). -/
 abbrev Q (O : Sheaf J CommRingCat.{u}) : Cx O ⥤ D O :=
   @DerivedCategory.Q (Mod O) _ _ (HasDerivedCategory.standard _)
 
-/-- Ordinary restriction of scalars, exactly Mathlib's functor. Source: Stacks 099I. -/
+/-- Ordinary restriction of scalars, exactly Mathlib's functor (Stacks, Tag 099I). -/
 abbrev res {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : Mod B ⥤ Mod R :=
   SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
 
-/-- Exact derived restriction of scalars. Source: Stacks 099I. -/
+/-- Exact derived restriction of scalars (Stacks, Tag 099I). -/
 def dres {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) : D B ⥤ D R :=
   letI := HasDerivedCategory.standard (Mod R)
   letI := HasDerivedCategory.standard (Mod B)
   siteDerivedRestrictScalars φ
 
-/-- Constant global sections supplied by the sheafification unit. Source: Stacks 093M. -/
+/-- Constant global sections supplied by the sheafification unit (Stacks, Tag 093M). -/
 def constantSection (a : A) : ((constant J A).obj ⋙ forget CommRingCat).sections :=
   ⟨fun U ↦ (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app U a,
     fun f ↦ ConcreteCategory.congr_hom
       ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).naturality f) a |>.symm⟩
 
-/-- Images of constant sections in a coefficient algebra. Source: Stacks 093M. -/
+/-- Images of constant sections in a coefficient algebra (Stacks, Tag 093M). -/
 def algebraSection {O : Sheaf J CommRingCat.{u}} (φ : constant J A ⟶ O) (a : A) :
     (O.obj ⋙ forget CommRingCat).sections :=
   ⟨fun U ↦ φ.hom.app U ((constantSection (J := J) a).val U),
     fun f ↦ (ConcreteCategory.congr_hom (φ.hom.naturality f) _).symm.trans
       (congrArg (φ.hom.app _) ((constantSection (J := J) a).property f))⟩
 
-/-- The kernel of a ring-sheaf map is a genuine ideal subsheaf with these sections.
-Source: Stacks 093M. -/
+/-- The kernel of a ring-sheaf map is a genuine ideal subsheaf with these sections
+(Stacks, Tag 093M). -/
 theorem kernelIdeal_existsUnique {O S : Sheaf J CommRingCat.{u}} (q : O ⟶ S) :
     ∃! K : RingedSiteIdeal O,
       ∀ U : C, K.sections U = RingHom.ker (q.hom.app (op U)).hom := by
@@ -187,13 +186,13 @@ theorem kernelIdeal_existsUnique {O S : Sheaf J CommRingCat.{u}} (q : O ⟶ S) :
     rfl
   exact hext L K h
 
-/-- The specified kernel ideal subsheaf, selected by its unique sections formula.
-Source: Stacks 093M. -/
+/-- The specified kernel ideal subsheaf, selected by its unique sections formula (Stacks, Tag 093M).
+-/
 def kernelIdeal {O S : Sheaf J CommRingCat.{u}} (q : O ⟶ S) : RingedSiteIdeal O :=
   (kernelIdeal_existsUnique q).exists.choose
 
-/-- The existing local internal-Hom completeness predicate, at the standard localization.
-Source: Stacks 0999, 099I. -/
+/-- The existing local internal-Hom completeness predicate, at the standard localization
+(Stacks, Tags 0999 and 099I). -/
 def IsComplete {O S : Sheaf J CommRingCat.{u}} (q : O ⟶ S) (M : D O) : Prop :=
   @IsLocallyDerivedRingedIdealComplete C _ J O
     (HasDerivedCategory.standard _)

@@ -63,8 +63,8 @@ private theorem augmentationModelUnitAt
   erw [Category.id_comp]
   exact h
 
-/-- The two normalized augmentation maps satisfy the native tensor square at a finite level.
-Source: Stacks 099M and 06YN. -/
+/-- The two normalized augmentation maps satisfy the native tensor square at a finite level
+(Stacks, Tags 099M and 06YN). -/
 theorem normalizedAugmentationTensorLevel
     (b : Bool) (r : ℕ) (a : Fin r → A)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

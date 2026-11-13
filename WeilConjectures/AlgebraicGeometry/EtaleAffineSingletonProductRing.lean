@@ -111,8 +111,7 @@ private noncomputable def tensorCoconeIsColimit :
 end TensorColimit
 
 /-- The iterated product is affine, and its functions are the indexed tensor power,
-with the expected formula on indexed pure tensors.
-Source: Stacks Project, Tags 01I4 and 01JQ. -/
+with the expected formula on indexed pure tensors (Stacks, Tags 01I4 and 01JQ). -/
 theorem singletonProduct_affine_ring
     (X : Scheme.{u}) (U W : X.Etale) (g : W ⟶ U)
     (hU : IsAffine U.left) (hW : IsAffine W.left) (n : ℕ) :

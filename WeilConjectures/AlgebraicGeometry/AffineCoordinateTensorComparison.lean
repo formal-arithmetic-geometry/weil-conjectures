@@ -80,8 +80,7 @@ noncomputable def affineCoordinateGammaComparison
       (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p)))).symm
     (affineCoordinateGammaComparison a b φ p hp).symm
 
-/-- The right comparisons compose by restriction of scalars.
-Source: Stacks Project, Tags 01I9 and 08DW. -/
+/-- The right comparisons compose by restriction of scalars (Stacks, Tags 01I9 and 08DW). -/
 theorem affineCoordinateGammaComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)
@@ -108,8 +107,8 @@ theorem affineCoordinateGammaComparison_comp
     F.presheaf.map (𝟙 _) (F.presheaf.map (𝟙 _) m)
   simp
 
-/-- The underived affine comparisons respect the fixed scalar and pullback mates.
-Source: Stacks Project, Tags 01I9 and 08DW; uniqueness and pasting of adjoints. -/
+/-- The underived affine comparisons respect the fixed scalar and pullback mates
+(Stacks, Tags 01I9 and 08DW). -/
 theorem affineCoordinateTensorComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)
@@ -196,8 +195,7 @@ noncomputable def affineCoordinateComplexComparison
     Functor.isoWhiskerLeft ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ))
       (affineCoordinateComplexFactorIso b)
 
-/-- Termwise comparison components are the underived module mate.
-Source: the termwise construction; Stacks Project, Tag 01I9. -/
+/-- Termwise comparison components are the underived module mate (Stacks, Tag 01I9). -/
 theorem affineCoordinateComplexComparison_hom_f
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -236,8 +234,8 @@ noncomputable def affineCoordinateHomotopyComparison
     Functor.isoWhiskerRight (affineCoordinateComplexComparison a b φ p hp)
       (HomotopyCategory.quotient _ (.up ℤ))
 
-/-- The homotopy comparison evaluates to the quotient of the complex comparison.
-Source: the termwise construction and homotopy quotient; Stacks Project, Tag 01I9. -/
+/-- The homotopy comparison evaluates to the quotient of the complex comparison (Stacks, Tag 01I9).
+-/
 theorem affineCoordinateHomotopyComparison_hom_app
     (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A)
     (p : b.X ⟶ a.X)
@@ -293,8 +291,7 @@ private theorem affineCoordinateComplexComparison_comp_hom
   simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using congrArg Iso.hom
     (affineCoordinateTensorComparison_comp a b c φ ψ p q hp hq hs (M.X n))
 
-/-- The same composition equation on concrete homotopy models.
-Source: Stacks Project, Tags 01I9, 08DW and 0D5S. -/
+/-- The same composition equation on concrete homotopy models (Stacks, Tags 01I9, 08DW and 0D5S). -/
 theorem affineCoordinateHomotopyComparison_comp
     (a b c : AffineComparisonCoordinate.{u, w})
     (φ : a.A →+* b.A) (ψ : b.A →+* c.A) (p : b.X ⟶ a.X) (q : c.X ⟶ b.X)

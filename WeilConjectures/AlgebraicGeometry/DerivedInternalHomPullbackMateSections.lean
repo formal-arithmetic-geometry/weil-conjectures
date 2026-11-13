@@ -210,9 +210,8 @@ private theorem counitSections
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Construction of the evaluation mate, with compatible sections identifications.
-No invertibility of the counit composite is asserted here.
-
-Source: Stacks Project, Tags 08I3, 079W, 08DJ and 08JA. -/
+No invertibility of the counit composite is asserted here (Stacks, Tags 08I3, 079W, 08DJ and 08JA).
+-/
 theorem exists_derivedInternalHom_pullback_mate_sections
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

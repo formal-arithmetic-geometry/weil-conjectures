@@ -20,8 +20,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
-/-- Core affine tensor-product ring calculation for the diagonal chart.
-Source: Stacks Project, Tags 08S2, 01KJ. -/
+/-- Core affine tensor-product ring calculation for the diagonal chart (Stacks, Tags 08S2 and 01KJ).
+-/
 theorem diagonalConormal_affine_ideal_class_core (f : X ⟶ S)
     (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) :
     letI : Algebra Γ(S, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra

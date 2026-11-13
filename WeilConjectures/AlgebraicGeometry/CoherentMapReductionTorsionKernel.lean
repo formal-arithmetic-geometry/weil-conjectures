@@ -21,8 +21,8 @@ namespace AlgebraicGeometry
 open MonoidalCategory in
 open scoped TensorProduct in
 set_option backward.isDefEq.respectTransparency false in
-/-- Affine sections of multiplication have range equal to the ideal times the module.
-Source: Stacks Project, Tags 01I8 and 01AH. -/
+/-- Affine sections of multiplication have range equal to the ideal times the module
+(Stacks, Tags 01I8 and 01AH). -/
 private theorem power_multiplication_range {X : Scheme.{u}} {K : X.Modules}
     (i : K ⟶ SheafOfModules.unit X.ringCatSheaf) (M : X.Modules)
     [K.IsQuasicoherent] [M.IsQuasicoherent] (U : X.affineOpens) :
@@ -82,8 +82,7 @@ private theorem power_multiplication_range {X : Scheme.{u}} {K : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine quotient projections by positive ideal powers are surjective with the expected
-kernel, and their targets are quasi-coherent.
-Source: Stacks Project, Tags 01IC and 01AH. -/
+kernel, and their targets are quasi-coherent (Stacks, Tags 01IC and 01AH). -/
 private theorem quotient_affine {X : Scheme.{u}} (I : X.IdealSheafData)
     (F : X.Modules) [F.IsQuasicoherent] (U : X.affineOpens) (n : ℕ) (hn : 0 < n) :
     (formalModuleQuotient I n F).IsQuasicoherent ∧
@@ -116,8 +115,7 @@ private theorem quotient_affine {X : Scheme.{u}} (I : X.IdealSheafData)
   exact SetLike.coe_injective hr
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Kernel part of the reduction torsion bound.
-Source: Stacks Project, Remark 0888, final commutative algebra argument. -/
+/-- Kernel part of the reduction torsion bound (Stacks, Tag 0888). -/
 theorem coherentMap_reduction_torsion_kernel
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (F H : CoherentModules X) (a : F ⟶ H) (t : ℕ) (ht : 1 ≤ t)

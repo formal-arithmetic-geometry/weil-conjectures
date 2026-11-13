@@ -79,8 +79,8 @@ private theorem unit_stalk_iso (X : Scheme.{w}) (x : X) :
   refine ⟨(LinearEquiv.ofBijective f e.bijective).toModuleIso, ?_⟩
   exact hg
 
-/-- On a single stalk the range of ideal multiplication is the kernel of the pullback unit.
-Source: Stacks Project, Modules, Lemma 08KS, using Sheaves, Lemmas 0098 and 00AE. -/
+/-- On a single stalk the range of ideal multiplication is the kernel of the pullback unit
+(Stacks, Tags 08KS, 0098 and 00AE). -/
 theorem closedImmersion_unit_stalk_kernel {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] (F : Y.Modules) (x : Y) :
     let adj := Classical.choice (nonempty_tensorPullbackAdjunction i)

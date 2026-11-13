@@ -146,12 +146,8 @@ theorem noetherian_perfect_representatives (X : Scheme.{u}) [IsNoetherian X]
         ∃ s, Nonempty (P ≅ G s) := by
   exact Scheme.exists_perfectComplex_representatives X
 
-/-- Perfect objects on a Noetherian scheme are compact in its QCoh derived category.
-Source: Stacks Project, Tag 09M1, the perfect-to-compact implication, using
-tensor-Hom duality and preservation of coproducts.
-This is the Noetherian specialization of `perfectObjectCompact`; all local
-derived-category and quasi-compactness infrastructure is discharged in the
-intermediate theorem. -/
+/-- Perfect objects on a Noetherian scheme are compact in its QCoh derived category
+(Stacks, Tag 09M1). -/
 theorem noetherian_perfect_compact (X : Scheme.{u}) [IsNoetherian X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hOpen : ∀ U : X.Opens,

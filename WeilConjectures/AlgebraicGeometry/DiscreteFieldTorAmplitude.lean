@@ -26,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- Over the pulled-back discrete ring of a field, every internal module is flat.
-Source: Stacks Project, Tags 03ER and 08FC. -/
+/-- Over the pulled-back discrete ring of a field, every internal module is flat
+(Stacks, Tags 03ER and 08FC). -/
 theorem flat_of_discreteField (X : Scheme.{u}) [IsNoetherian X] (A : Type u) [Field A]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (discreteObj A) X)) :

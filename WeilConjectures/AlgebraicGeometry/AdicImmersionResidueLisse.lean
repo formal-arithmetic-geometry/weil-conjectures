@@ -120,9 +120,8 @@ private theorem finiteLisse_fixedModels {S : Scheme.{u}} (k : Type (u + 1)) [Com
       (constantOverMapIso k h).app M⟩⟩
 
 /-- Finite local constancy on the original etale site gives finite module values in
-its explicit constant-ring small model. The coefficient ring need not be finite.
-
-Source: Stacks Project, Tags 03RU, 03RW(3), 03CY and 03A0. -/
+its explicit constant-ring small model. The coefficient ring need not be finite
+(Stacks, Tags 03RU, 03RW, 03CY and 03A0). -/
 theorem sfbEtaleResidueModel_finiteLisse (S : Scheme.{u})
     (k : Type (u + 1)) [CommRing k]
     (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} k))
@@ -148,8 +147,8 @@ theorem sfbEtaleResidueModel_finiteLisse (S : Scheme.{u})
   exact (SheafOfModules.compare_of_iso J k c
     (SheafOfModules.coefficientRingIso_fac J k) M).mpr hring
 
-/-- The concrete residue model has locally constant finite type cohomology.
-Source: Stacks Project, Tags 03RU, 03CY and 03A0. -/
+/-- The concrete residue model has locally constant finite type cohomology
+(Stacks, Tags 03RU, 03CY and 03A0). -/
 theorem sfbImmersionResidue_lisse {X S : Scheme.{u}} (i : S ⟶ X)
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (C : CochainComplex

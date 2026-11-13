@@ -26,10 +26,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- Filter a coherent module with irreducible support, assuming smaller supports filtered.
-
-Source: Stacks Project, Tag 01YF, ideal-power and generic-inclusion paragraphs,
-using Tags 01Y9 and 01YE (https://stacks.math.columbia.edu/tag/01YF). -/
+/-- Filter a coherent module with irreducible support, assuming smaller supports filtered
+(Stacks, Tags 01YF, 01Y9 and 01YE). -/
 theorem coherentIntegralFiltration_of_irreducible_support
     (X : Scheme.{u}) [IsNoetherian X]
     (T : TopologicalSpace.Closeds X) (ξ : X)

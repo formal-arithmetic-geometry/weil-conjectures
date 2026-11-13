@@ -44,9 +44,8 @@ private theorem chartClassPullback_postcomp {B T T' : Scheme.{u}}
   simp only [cartesianChartClassPullback, Functor.map_comp, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality]
 
-/-- Stage exchange turns a raw finite-stage representative into a chart class.
-
-Source: Stacks Project, Tags 0EYL and 0GIT for raw descent; Tag 0EYM for exchange. -/
+/-- Stage exchange turns a raw finite-stage representative into a chart class
+(Stacks, Tags 0EYL, 0GIT and 0EYM). -/
 theorem exists_cartesianRawClass_chart_data
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

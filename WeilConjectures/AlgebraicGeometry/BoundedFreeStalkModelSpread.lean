@@ -25,9 +25,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- A given bounded finite-free stalk model of a locally strictly perfect object spreads
-with its specified ranks to an affine neighbourhood. No residue rank computation is made.
-
-Source: Stacks Project, Tag 0BCD, spreading paragraph; Tags 00CR, 0BC7 and 09RE. -/
+with its specified ranks to an affine neighbourhood. No residue rank computation is made
+(Stacks, Tags 0BCD, 00CR, 0BC7 and 09RE). -/
 theorem spread_boundedFree_stalkModel
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -29,7 +29,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 namespace AlgebraicGeometry.ProEtale
 
 /-- Finitely presented local constant models descend to the etale site, with no
-Noetherian hypothesis on the coefficient ring. (Stacks, Tag 099Y) -/
+Noetherian hypothesis on the coefficient ring (Stacks, Tag 099Y). -/
 theorem coefficientFpLocalSystem_essImage (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

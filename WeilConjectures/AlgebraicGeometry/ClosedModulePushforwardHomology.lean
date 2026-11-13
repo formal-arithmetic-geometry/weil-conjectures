@@ -65,9 +65,7 @@ private theorem closedPushforward_preservesEpimorphisms
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Closed-immersion pushforward of module sheaves preserves homology.
-
-Source: Stacks Project, Modules, Lemma 17.13.4 (Tag 08KS). -/
+/-- Closed-immersion pushforward of module sheaves preserves homology (Stacks, Tag 08KS). -/
 theorem closed_modulePushforward_preservesHomology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     (Scheme.Modules.pushforward i).PreservesHomology := by

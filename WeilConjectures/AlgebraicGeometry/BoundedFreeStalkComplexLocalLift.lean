@@ -60,12 +60,8 @@ private theorem affineSheafification_coordinate_free
     H.mapIso (tildeFinsupp (ULift.{u} (Fin n))) ≪≫ ?_⟩
   exact (SheafOfModules.mapFreeIso H (ULift.{u} (Fin n)) unitIso.symm).symm
 
-/-- The affine-local part of bounded free stalk-complex lifting.
-
-Source: Stacks Project, Tags 0BCD and 0BC7 (finite-presentation spreading),
-and Algebra Tag 00CR. The stalk of a sheaf on the open is expressed using ordinary
-open direct image followed by the ambient stalk functor; no global boundedness or
-restriction comparison is asserted here. -/
+/-- The affine-local part of bounded free stalk-complex lifting (Stacks, Tags 0BCD, 0BC7 and 00CR).
+-/
 theorem exists_boundedFree_stalk_complex_local_lift
     (X : Scheme.{u}) (x : X) (d : ℤ → ℕ)
     (F : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ)

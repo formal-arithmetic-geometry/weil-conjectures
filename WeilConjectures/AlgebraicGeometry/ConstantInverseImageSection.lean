@@ -37,8 +37,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.ConstantCompletion
 
-/-- A global section viewed as a constant-valued map on a test sheaf.
-Source: Stacks 00YV. -/
+/-- A global section viewed as a constant-valued map on a test sheaf (Stacks, Tag 00YV). -/
 def sectionMap
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (a : (R.obj ⋙ forget CommRingCat).sections)
@@ -49,16 +48,15 @@ def sectionMap
        ext x
        exact (a.property f).symm }⟩
 
-/-- A constant coefficient as a map on any test sheaf.
-Source: Stacks 093M. -/
+/-- A constant coefficient as a map on any test sheaf (Stacks, Tag 093M). -/
 def constantSectionMap
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Type u) [CommRing A] (a : A) (T : Sheaf J (Type u)) :
     T ⟶ (sheafCompose J (forget CommRingCat)).obj (constant J A) :=
   sectionMap (constant J A) (constantSection (J := J) a) T
 
-/-- Transport a global ring section using preservation of the terminal sheaf.
-Source: Stacks 00YV, 03D2. -/
+/-- Transport a global ring section using preservation of the terminal sheaf
+(Stacks, Tags 00YV and 03D2). -/
 def inverseImageSection
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
@@ -72,8 +70,8 @@ def inverseImageSection
   let f := h.from T' ≫ L.map (sectionMap R a T) ≫ (F.algebra R).ringUnderlying.hom
   (((F.rings.obj R).obj ⋙ forget CommRingCat).sectionsEquivHom PUnit).symm f.hom
 
-/-- The transported global section computes inverse image on every test sheaf.
-Source: Stacks 00YV, 03D2. -/
+/-- The transported global section computes inverse image on every test sheaf
+(Stacks, Tags 00YV and 03D2). -/
 theorem inverseImageSection_map
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
@@ -95,8 +93,7 @@ theorem inverseImageSection_map
   ext U x
   rfl
 
-/-- The structural image of a transported constant coefficient.
-Source: Stacks 03D2, 093M. -/
+/-- The structural image of a transported constant coefficient (Stacks, Tags 03D2 and 093M). -/
 def transportedConstantSection
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

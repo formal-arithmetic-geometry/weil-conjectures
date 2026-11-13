@@ -115,8 +115,7 @@ private theorem quotientAugmentation_f
 
 /-- A degree-zero identification compatible with the dual unit and transitions,
 and annihilation of the incoming differential after reduction, determine a normalized
-strict tower augmentation.
-Source: Stacks Project, Tag 099M, Koszul quotient construction. -/
+strict tower augmentation (Stacks, Tag 099M). -/
 theorem constantKoszulAugmentationFromLowDegrees
     (e₀ : ∀ n : ℕ, ((ringedKoszulDualTower (coefficients J A I b) r
       (fun i ↦ algebraSection (baseMap J A I b) (a i))).obj (op n)).X 0 ≅

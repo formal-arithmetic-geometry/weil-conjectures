@@ -48,8 +48,8 @@ private theorem commRingHasWeakSheafify (T : Scheme.{u}) :
 
 open scoped ChangeOfRings MonoidalCategory TensorProduct
 
-/-- The recorded pure tensor in scalar extension, using the existing normalized witness.
-Source: Stacks Tag 03EK. -/
+/-- The recorded pure tensor in scalar extension, using the existing normalized witness
+(Stacks, Tag 03EK). -/
 abbrev tensorSection (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
     (M : SheafOfModules.{u + 1} ((adicLisseForget T).obj R))
@@ -58,8 +58,8 @@ abbrev tensorSection (T : Scheme.{u})
   completedAdicChangeTensor T φ M U s m
 
 /-- The commutative-ring presentation of the recorded continuous-function coefficient
-presheaf; its objects and restrictions are exactly `finiteCoefficientPresheaf`.
-Source: Tag 09BT. -/
+presheaf; its objects and restrictions are exactly `finiteCoefficientPresheaf` (Stacks, Tag 09BT).
+-/
 def functionPresheaf (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     T.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} :=
   letI : TopologicalSpace Λ := ⊥
@@ -75,14 +75,12 @@ def functionPresheaf (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite 
       obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe c
       rfl }
 
-/-- The actual coefficient sheaf, sheafifying those continuous functions.
-Source: Tag 09BT. -/
+/-- The actual coefficient sheaf, sheafifying those continuous functions (Stacks, Tag 09BT). -/
 def coefficientRing (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     Sheaf (ProEt.topology T) CommRingCat.{u + 1} :=
   (presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).obj (functionPresheaf T Λ)
 
-/-- Postcomposition with a map of finite discrete commutative rings.
-Source: Tag 09BT. -/
+/-- Postcomposition with a map of finite discrete commutative rings (Stacks, Tag 09BT). -/
 def functionPresheafMap (T : Scheme.{u}) {Λ Λ' : Type (u + 1)}
     [CommRing Λ] [CommRing Λ'] [Finite Λ] [Finite Λ'] (φ : Λ →+* Λ') :
     functionPresheaf T Λ ⟶ functionPresheaf T Λ' :=
@@ -98,8 +96,8 @@ def functionPresheafMap (T : Scheme.{u}) {Λ Λ' : Type (u + 1)}
         map_add' := fun s t ↦ by ext c; exact φ.map_add _ _ }
     naturality := fun _ _ f ↦ by ext s; rfl }
 
-/-- The quotient homomorphism on coefficient sheaves is the sheafified postcomposition map.
-Source: Tag 09BT. -/
+/-- The quotient homomorphism on coefficient sheaves is the sheafified postcomposition map
+(Stacks, Tag 09BT). -/
 def coefficientMap (T : Scheme.{u}) {Λ Λ' : Type (u + 1)}
     [CommRing Λ] [CommRing Λ'] [Finite Λ] [Finite Λ'] (φ : Λ →+* Λ') :
     coefficientRing T Λ ⟶ coefficientRing T Λ' :=
@@ -116,13 +114,13 @@ def ringSystem (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (fun n ↦ coefficientMap T (Ideal.Quotient.factorPowSucc I (n + 1)))
 
 /-- Completed coefficients are the actual inverse limit of the function coefficient sheaves,
-with compatible-family sections. Source: Tag 09BT. -/
+with compatible-family sections (Stacks, Tag 09BT). -/
 abbrev completedRing (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (I : Ideal A) (hf : ∀ n : ℕ, Finite (A ⧸ I ^ (n + 1))) :=
   limit (ringSystem T I hf)
 
-/-- The constants-to-functions morphism on presheaves, with its constant value formula.
-Source: Tag 09BT. -/
+/-- The constants-to-functions morphism on presheaves, with its constant value formula
+(Stacks, Tag 09BT). -/
 def constants (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     (Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of Λ) ⟶ functionPresheaf T Λ :=
   letI : TopologicalSpace Λ := ⊥
@@ -135,8 +133,8 @@ def constants (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
         map_add' := fun _ _ ↦ rfl }
     naturality := fun _ _ f ↦ by ext x; rfl }
 
-/-- The canonical comparison from constant sheafification to function sheafification.
-Source: Tag 09BT. -/
+/-- The canonical comparison from constant sheafification to function sheafification
+(Stacks, Tag 09BT). -/
 def constantComparison (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     adicLisseConstantRing T Λ ⟶ coefficientRing T Λ :=
   (presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).map (constants T Λ)
@@ -148,8 +146,7 @@ def finiteRingPresentation (T : Scheme.{u}) (Λ : Type (u + 1))
   letI : DiscreteTopology Λ := ⟨rfl⟩
   ProEtale.finiteCoefficientRingSheaf T Λ
 
-/-- The recorded presheaf's map into its RingCat sheafification.
-Source: Tag 09BT. -/
+/-- The recorded presheaf's map into its RingCat sheafification (Stacks, Tag 09BT). -/
 def finiteRingUnit (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     functionPresheaf T Λ ⋙ forget₂ CommRingCat RingCat ⟶ (finiteRingPresentation T Λ).obj :=
   letI : TopologicalSpace Λ := ⊥
@@ -157,8 +154,7 @@ def finiteRingUnit (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ
   toSheafify (ProEt.topology T) (ProEtale.finiteCoefficientPresheaf T Λ)
 
 /-- Forgetting the commutative presentation gives the recorded coefficient sheaf, with the
-comparison uniquely fixed by the sheafification units.
-Source: Tag 09BT. -/
+comparison uniquely fixed by the sheafification units (Stacks, Tag 09BT). -/
 theorem finiteRingComparison_exists (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] :
     ∃! f : (adicLisseForget T).obj (coefficientRing T Λ) ⟶ finiteRingPresentation T Λ,
@@ -217,8 +213,8 @@ theorem finiteRingComparison_exists (T : Scheme.{u}) (Λ : Type (u + 1))
     _ = _ := (congrArg (fun k ↦ k ≫ (inv g).hom) hg).symm.trans
       (Category.assoc _ _ _)
 
-/-- Canonical identification with the existing RingCat coefficient sheaf, retaining its unit.
-Source: Tag 09BT. -/
+/-- Canonical identification with the existing RingCat coefficient sheaf, retaining its unit
+(Stacks, Tag 09BT). -/
 def finiteRingComparison (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     (adicLisseForget T).obj (coefficientRing T Λ) ≅ finiteRingPresentation T Λ :=
   letI := (finiteRingComparison_exists T Λ).choose_spec.1.1
@@ -294,21 +290,19 @@ theorem reductionChangeExistence (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     ∃ E, reductionChangeSpec T φ E := completedAdicChangeData T φ
 
-/-- Ordinary scalar extension, fixed by sheafified sectionwise tensor on objects and maps.
-Source: Stacks Tag 06YY. -/
+/-- Ordinary scalar extension, fixed by sheafified sectionwise tensor on objects and maps
+(Stacks, Tag 06YY). -/
 noncomputable def reductionChange (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     reductionModules T R ⥤ reductionModules T S := completedAdicChange T φ
 
-/-- The additive structure supplied by the canonical scalar-extension witness.
-Source: Stacks Tag 06YY. -/
+/-- The additive structure supplied by the canonical scalar-extension witness (Stacks, Tag 06YY). -/
 noncomputable instance reductionChangeAdditive (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     (reductionChange T φ).Additive :=
   (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose
 
-/-- The universal derived scalar-extension specification for a fixed functor.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived scalar-extension specification for a fixed functor (Stacks, Tag 06YY). -/
 def reductionDerivedSpec (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (LF : reductionDerivedCategory T R ⥤ reductionDerivedCategory T S) : Prop :=
@@ -321,23 +315,23 @@ def reductionDerivedSpec (T : Scheme.{t})
           CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
           IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
-/-- The universal derived scalar-extension pair, including its K-flat counit isomorphisms.
-Source: Stacks Tag 06YY. -/
+/-- The universal derived scalar-extension pair, including its K-flat counit isomorphisms
+(Stacks, Tag 06YY). -/
 theorem reductionDerivedExistence (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     ∃ LF, reductionDerivedSpec T φ LF :=
   (reductionChangeExistence T φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
 
 /-- Derived scalar extension is chosen with its universal comparison, hence is determined
-up to unique compatible isomorphism, rather than by a mere existence of a functor.
-Source: Stacks Tag 06YY. -/
+up to unique compatible isomorphism, rather than by a mere existence of a functor
+(Stacks, Tag 06YY). -/
 noncomputable def reductionDerivedChange (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     reductionDerivedCategory T R ⥤ reductionDerivedCategory T S :=
   completedAdicDerivedChange T φ
 
-/-- The universal counit comparing the derived functor with ordinary tensor on homotopy.
-Source: Stacks Tag 06YY. -/
+/-- The universal counit comparing the derived functor with ordinary tensor on homotopy
+(Stacks, Tag 06YY). -/
 noncomputable def reductionDerivedCounit (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     DerivedCategory.Qh ⋙ reductionDerivedChange T φ ⟶
@@ -346,16 +340,16 @@ noncomputable def reductionDerivedCounit (T : Scheme.{t})
 
 attribute [local instance] reductionModulesHasDerivedCategory
 
-/-- The sheafified pure tensor, including the object's canonical equality transport.
-Source: Stacks Tag 03EK. -/
+/-- The sheafified pure tensor, including the object's canonical equality transport
+(Stacks, Tag 03EK). -/
 noncomputable def reductionTensorSection (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (M : reductionModules T R) (U : T.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
     ((reductionChange T φ).obj M).val.obj U :=
   completedAdicChangeTensor T φ M U s x
 
-/-- Restrict the coefficient action without changing the underlying abelian sheaf.
-Source: Stacks Tag 03DA. -/
+/-- Restrict the coefficient action without changing the underlying abelian sheaf
+(Stacks, Tag 03DA). -/
 noncomputable def reductionRestrict (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :=
   SheafOfModules.restrictScalars.{t + 1}
@@ -379,8 +373,7 @@ theorem reductionRestrict_preservesFiniteColimits (T : Scheme.{t})
       (SheafOfModules.toSheaf.{t + 1} (reductionModuleRing T S)))
   exact preservesFiniteColimits_of_reflects_of_preserves (reductionRestrict T φ) F
 
-/-- Scalar restriction is additive on the unchanged underlying abelian sheaf.
-Source: Stacks 03DA. -/
+/-- Scalar restriction is additive on the unchanged underlying abelian sheaf (Stacks, Tag 03DA). -/
 instance reductionRestrict_additive (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     (reductionRestrict T φ).Additive :=

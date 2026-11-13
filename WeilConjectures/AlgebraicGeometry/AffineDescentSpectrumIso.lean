@@ -29,8 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 open Opposite
 
 /-- The explicit canonical morphism from the limit affine base change to the spectrum
-of the colimit of the tail coordinate rings is an isomorphism.
-Source: Stacks Project, Tag 09RF, affine case; Limits, Tag 01YW. -/
+of the colimit of the tail coordinate rings is an isomorphism (Stacks, Tags 09RF and 01YW). -/
 theorem isIso_affine_descent_colimit_toSpec
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I)

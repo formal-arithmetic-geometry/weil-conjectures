@@ -213,8 +213,8 @@ private noncomputable def outgoing_image_iso
 
 
 /-- Acyclic differential cokernels and homology sheaves make sections preserve
-left homology of the original complex. No term acyclicity or boundedness is needed.
-Source: Stacks Project, Tags 015B and 08C2, finite cycle and boundary sequences. -/
+left homology of the original complex. No term acyclicity or boundedness is needed
+(Stacks, Tags 015B and 08C2). -/
 theorem affineBasisAcyclicSections_preservesLeftHomology
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F : CochainComplex X.Modules ℤ)

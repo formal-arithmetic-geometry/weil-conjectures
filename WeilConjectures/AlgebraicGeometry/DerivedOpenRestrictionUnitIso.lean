@@ -30,8 +30,8 @@ noncomputable section
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Exact-open restriction makes the unit of its right adjunction invertible.
-Source: Stacks Project, Cohomology, Tags 08BS and 08FE. -/
+/-- Exact-open restriction makes the unit of its right adjunction invertible
+(Stacks, Tags 08BS and 08FE). -/
 theorem schemeDerivedOpen_unit_isIso (X : Scheme.{u}) (U : X.Opens)
     (adj : (schemeOpenRestriction X U).mapDerivedCategory ⊣ schemeDerivedDirectImage U.ι)
     (K : schemeDerivedCategory X) :

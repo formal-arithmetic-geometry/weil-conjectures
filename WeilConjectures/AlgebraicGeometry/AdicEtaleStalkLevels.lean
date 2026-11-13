@@ -30,8 +30,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A normalized constructible etale quotient system with lisse residue has perfect
 algebraic stalk levels on an affine weakly contractible cover. The input consists only
-of finite etale complexes; no complete complex or completed coefficient ring occurs.
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph; Tags 094I and 09BI. -/
+of finite etale complexes; no complete complex or completed coefficient ring occurs
+(Stacks, Tags 09C6, 094I and 09BI). -/
 theorem adicEtale_stalk_levels
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A] (J : Ideal A)

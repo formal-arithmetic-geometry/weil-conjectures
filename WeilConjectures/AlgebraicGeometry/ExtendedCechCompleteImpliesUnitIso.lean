@@ -373,9 +373,8 @@ private theorem derived_isIso_of_cover
   have := hsheaf
   exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf R)
 
-/-- A locally derived complete object has invertible augmented extended Cech unit.
-
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F. -/
+/-- A locally derived complete object has invertible augmented extended Cech unit
+(Stacks, Tags 099B and 099F). -/
 theorem ringedExtendedCech_complete_implies_unit_isIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

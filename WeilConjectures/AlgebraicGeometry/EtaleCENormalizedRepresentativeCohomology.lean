@@ -25,8 +25,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent normalized page and CE comparison families together.
 /-- Prescribed normalized CE presentations compute pullback on individual cycle
-representatives. This does not identify any supplied first-page map.
-Source: Stacks Project, Tags 015J, 015K, 012K and 06XR. -/
+representatives. This does not identify any supplied first-page map
+(Stacks, Tags 015J, 015K, 012K and 06XR). -/
 theorem exists_etaleCE_normalized_representative_cohomology
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

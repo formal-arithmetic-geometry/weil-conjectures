@@ -490,8 +490,8 @@ private theorem alternatingCechPresheaf_insertion_omitting_coordinate
   rw [hcancel]
   abel
 
-/-- The positive insertion identity valued in intersection presheaves.
-Source: Stacks Project, Tag 02FU, local insertion; Tag 01FM, increasing tuples. -/
+/-- The positive insertion identity valued in intersection presheaves (Stacks, Tags 02FU and 01FM).
+-/
 theorem alternatingCechSheafPresheaf_positive_insertion
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r)
     (p : ℕ) :

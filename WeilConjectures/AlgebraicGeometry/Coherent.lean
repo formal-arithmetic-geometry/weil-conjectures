@@ -39,8 +39,7 @@ namespace AlgebraicGeometry.RingedSpace
 is of finite type (Mathlib's `SheafOfModules.IsFiniteType`) and for every open `U` and every
 map `O_U^{⊕ n} ⟶ F|_U` the kernel is of finite type. Here `F|_U = F.over U` is the restriction
 `SheafOfModules.overFunctor (moduleRings X) U` and `O_U^{⊕ n}` is the free module on
-`ULift (Fin n)` over `(moduleRings X).over U`.
-Source: Stacks Project, Modules, Tag 01BV. -/
+`ULift (Fin n)` over `(moduleRings X).over U` (Stacks, Tag 01BV). -/
 def IsCoherent (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) : Prop :=
   F.IsFiniteType ∧
     ∀ (U : Opens X) (n : ℕ)

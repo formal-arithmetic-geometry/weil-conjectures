@@ -190,8 +190,7 @@ private theorem isCoherent_of_isQuasicoherent_and_isFiniteType
   exact SheafOfModules.instIsFiniteTypeOfIsFinitePresentation (Limits.kernel f)
 
 /-- On a locally Noetherian scheme, an `𝒪_X`-module is coherent exactly when it is
-quasi-coherent and of finite type.
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.9.1, Tag 01XZ. -/
+quasi-coherent and of finite type (Stacks, Tag 01XZ). -/
 theorem isCoherent_iff_isQuasicoherent_and_isFiniteType
     (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) :
     RingedSpace.IsCoherent X.toRingedSpace F ↔

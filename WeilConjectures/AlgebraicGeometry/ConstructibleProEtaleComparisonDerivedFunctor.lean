@@ -246,8 +246,8 @@ private theorem liftExact {C D : Type w} [SmallCategory C] [SmallCategory D]
   exact ⟨F.mapDerivedCategorySingleFunctor 0⟩
 
 /-- The actual canonical inverse image descends to the ordinary derived categories.
-No constructibility or boundedness hypothesis is needed for this ambient functor.
-Source: Stacks Tags 00YV, 03D2 and 09AL. -/
+No constructibility or boundedness hypothesis is needed for this ambient functor
+(Stacks, Tags 00YV, 03D2 and 09AL). -/
 theorem constructibleComparison_derivedFunctor (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ∃ D : ConstantCompletion.D (ConstantCompletion.constant

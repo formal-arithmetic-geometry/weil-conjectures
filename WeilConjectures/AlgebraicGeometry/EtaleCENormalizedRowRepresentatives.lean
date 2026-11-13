@@ -24,8 +24,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
 -- Elaborate the prescribed presentation, normalized pages and signed row families together.
-/-- Prescribed CE presentations with signed comparisons to the actual sections-row homology.
-Source: Stacks Project, Tags 015J, 015K and 012K. -/
+/-- Prescribed CE presentations with signed comparisons to the actual sections-row homology
+(Stacks, Tags 015J, 015K and 012K). -/
 theorem exists_etaleCE_normalized_row_representatives
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

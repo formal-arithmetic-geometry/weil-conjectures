@@ -27,8 +27,8 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- The constant scalar at the profinite point, followed by the constant-sheaf adjunction.
-This is an explicit section; it uses neither a local lift nor an existence theorem.
-Source: the constant-sheaf adjunction, Stacks Tag 00YV. -/
+This is an explicit section; it uses neither a local lift nor an existence theorem
+(Stacks, Tag 00YV). -/
 def discretePointScalarSection (A : Type u) [CommRing A] (c : ULift.{u + 1} A) :
     𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ discreteObj A :=
   Functor.LaxMonoidal.ε (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
@@ -934,9 +934,7 @@ attribute [irreducible] constantScalarSection
 /-- A global coefficient section on U.left has a coordinate on the equivalent small site.
 If that coordinate restricts to a constant scalar, its inverse image is the point
 constant section. This compares sections only; no module morphism, covering sieve,
-finite index set or matrix occurs in the statement.
-
-Source: Stacks, Tags 03CY and 00YV; `constantSchemeIso` and weakly-etale localization. -/
+finite index set or matrix occurs in the statement (Stacks, Tags 03CY and 00YV). -/
 theorem discrete_section_coordinates
     (A : Type u) [CommRing A] {Y : Scheme.{u}}
     (U : Scheme.coefficientProEtaleSiteModel.{u, u} Y)

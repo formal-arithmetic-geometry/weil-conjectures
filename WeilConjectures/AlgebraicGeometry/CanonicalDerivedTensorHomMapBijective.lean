@@ -116,9 +116,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 800000 in
 -- The representative predicate elaborates the sheaf tensor and derived-category instances.
-/-- Every normalized natural uncurrying map is bijective.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, using
-sites-cohomology.tex, Tag 0A90 (Hom complexes). -/
+/-- Every normalized natural uncurrying map is bijective (Stacks, Tags 08DJ and 0A90). -/
 theorem canonicalDerivedTensorHomMap_bijective (X : Scheme.{uCD})
     [HasDerivedCategory.{wCD} (SheafOfModules.{uCD} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

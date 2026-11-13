@@ -48,7 +48,7 @@ local instance etaleSheavesGrothendieckForCechCriterion (X : Scheme.{u}) :
 /-- Vanishing higher Čech cohomology on a cofinal collection of coverings implies vanishing
 higher derived evaluation on every object of the chosen collection `B`. The predicate `Cov`
 is membership in the collection of indexed families; `hcover` says they are coverings.
-Products in `Over U` are the iterated fibre products over `U`. (Stacks, Tag 03F9) -/
+Products in `Over U` are the iterated fibre products over `U` (Stacks, Tag 03F9). -/
 theorem isZero_rightDerived_etale_of_cech_vanishing
     (X : Scheme.{u}) (B : Set X.Etale)
     (Cov : ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale),

@@ -37,8 +37,7 @@ private theorem exists_pair_of_nonempty {A : Sort u} {B : A → Sort w}
   obtain ⟨a, ⟨b⟩⟩ := h
   exact ⟨a, b, trivial⟩
 
-/-- The upper support bound of a projective complex gives native K-flatness.
-Source: Stacks Project, Tag 064K; the proved upstream bounded-flat criterion. -/
+/-- The upper support bound of a projective complex gives native K-flatness (Stacks, Tag 064K). -/
 private theorem boundedProjective_isKFlat
     {A : Type u} [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ)
     (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (M.X n))
@@ -61,9 +60,8 @@ private theorem boundedProjective_isKFlat
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Coherent object isomorphisms between termwise affine models and geometric pullbacks.
-This asserts no equivalence of derived module Hom sets and no preservation of bounds.
-Source: Stacks Project, Tag 09RE, affine calculation; Tag 08DW(2), Tag 06Z0,
-and Tag 0D5S (composition of derived pullbacks). -/
+This asserts no equivalence of derived module Hom sets and no preservation of bounds
+(Stacks, Tags 09RE, 08DW, 06Z0 and 0D5S). -/
 theorem exists_affineBaseChangeModelComparisonIsos
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

@@ -68,8 +68,7 @@ private theorem finiteType_zero_near (X : RingedSpace.{u})
   exact IsZero.of_epi_zero (F.over U) (F.over U)
 
 /-- At a point of a locally Noetherian scheme, a morphism of coherent modules has
-zero, injective, surjective, or bijective stalk behaviour on a neighbourhood.
-Source: Stacks Project, Cohomology of Schemes, Lemma 01Y3. -/
+zero, injective, surjective, or bijective stalk behaviour on a neighbourhood (Stacks, Tag 01Y3). -/
 theorem coherent_local_isomorphism (X : Scheme.{u}) [IsLocallyNoetherian X]
     (F G : SheafOfModules (moduleRings X.toLocallyRingedSpace.toRingedSpace))
     (hF : RingedSpace.IsCoherent X.toLocallyRingedSpace.toRingedSpace F)

@@ -39,7 +39,7 @@ noncomputable abbrev abelianHigherDirectImageRawPresheaf {S Y : Scheme.{v}}
 /-- Pull back a raw derived-Hom class and then apply the coefficient map.
 All factors are actual functorial constructions: pullback composition, comparison
 with the degree-zero single functor, pullback of the class, shift comparison, and
-shifted coefficient map. Source: Stacks Project, Tag 09Z1, cohomology comparison. -/
+shifted coefficient map (Stacks, Tag 09Z1). -/
 noncomputable def abelianHigherDirectImageRawPullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

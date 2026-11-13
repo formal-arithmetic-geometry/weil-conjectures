@@ -23,9 +23,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every degree-zero endomorphism killed by the first differential factors
-through the local augmentation.
-Source: Stacks Project, Tag 02FU, exactness at the first Čech term;
-Tag 01FM for the ordered alternating convention. -/
+through the local augmentation (Stacks, Tags 02FU and 01FM). -/
 theorem alternatingCechSheafAugmentation_restrict_degreeZero_factorization
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

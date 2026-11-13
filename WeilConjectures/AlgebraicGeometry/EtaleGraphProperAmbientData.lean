@@ -26,8 +26,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Transport a proper/open/proper word along a Cartesian proper ambient map.
-Source: Stacks Tag 0F7C, vertical proper/open pasting. -/
+/-- Transport a proper/open/proper word along a Cartesian proper ambient map (Stacks, Tag 0F7C). -/
 def etaleProperAmbientTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y U U' P P' : Scheme.{u}}
@@ -56,15 +55,14 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)
   (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p)
 
-/-- The map `P_t ×_Y C → P_s ×_Y C` induced by the proper ambient map.
-Source: Stacks Tags 0F7C--0F7D, proper-projection grid. -/
+/-- The map `P_t ×_Y C → P_s ×_Y C` induced by the proper ambient map (Stacks, Tags 0F7C and 0F7D).
+-/
 def properAmbientProduct : pullback t.p c.g ⟶ pullback s.p c.g :=
   pullback.lift (pullback.fst t.p c.g ≫ pr) (pullback.snd t.p c.g)
     (by rw [Category.assoc, hp]; exact pullback.condition)
 
 omit [IsProper pr] in
-/-- The product map is Cartesian over the ambient map.
-Source: Stacks Tags 0F7C--0F7D; cancel the defining right pullback square. -/
+/-- The product map is Cartesian over the ambient map (Stacks, Tags 0F7C and 0F7D). -/
 theorem properAmbientProduct_isPullback :
     IsPullback (s.properAmbientProduct c t pr hp) (pullback.fst t.p c.g)
       (pullback.fst s.p c.g) pr := by
@@ -75,8 +73,7 @@ theorem properAmbientProduct_isPullback :
   · simp only [properAmbientProduct, pullback.lift_fst]
   · exact (IsPullback.of_hasPullback s.p c.g).flip
 
-/-- Properness of the product map follows by base change of `pr`.
-Source: Stacks Tags 0F7C--0F7D. -/
+/-- Properness of the product map follows by base change of `pr` (Stacks, Tags 0F7C and 0F7D). -/
 instance properAmbientProduct_proper : IsProper (s.properAmbientProduct c t pr hp) :=
   MorphismProperty.of_isPullback (s.properAmbientProduct_isPullback c t pr hp).flip
     inferInstance
@@ -90,8 +87,8 @@ theorem properAmbientProduct_base :
   dsimp only [properAmbientProduct]
   rw [pullback.lift_fst_assoc, Category.assoc, hp]
 
-/-- The map on the neighborhood pulled back from the compactification open.
-Source: Stacks Tags 0F7C--0F7D, first supporting neighborhood. -/
+/-- The map on the neighborhood pulled back from the compactification open
+(Stacks, Tags 0F7C and 0F7D). -/
 def properAmbientFirst :
     pullback (pullback.snd t.p c.g) c.i ⟶ pullback (pullback.snd s.p c.g) c.i :=
   pullback.lift (pullback.fst _ _ ≫ s.properAmbientProduct c t pr hp) (pullback.snd _ _)
@@ -111,8 +108,8 @@ theorem properAmbientFirst_isPullback :
   · simp only [properAmbientFirst, pullback.lift_fst]
   · exact (IsPullback.of_hasPullback (pullback.snd s.p c.g) c.i).flip
 
-/-- The map on the neighborhood pulled back from the presentation open.
-Source: Stacks Tags 0F7C--0F7D, second supporting neighborhood. -/
+/-- The map on the neighborhood pulled back from the presentation open (Stacks, Tags 0F7C and 0F7D).
+-/
 def properAmbientSecond :
     pullback (pullback.fst t.p c.g) t.e ⟶ pullback (pullback.fst s.p c.g) s.e :=
   pullback.lift (pullback.fst _ _ ≫ s.properAmbientProduct c t pr hp)
@@ -179,8 +176,7 @@ theorem properAmbientSecond_graph :
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The specified transport on the first graph word.
-Source: Stacks Tag 0F7C, proper projection exchange for the first supporting open. -/
+/-- The specified transport on the first graph word (Stacks, Tag 0F7C). -/
 def properAmbientFirstTransport :
     R((locallyClosedGraphS₁ s.a s.e s.p c.i c.g
       ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))_*[ModuleCat.{u + 1} A]) ⋙
@@ -194,8 +190,7 @@ def properAmbientFirstTransport :
     (s.properAmbientFirst c t pr hp) (s.properAmbientFirst_isPullback c t pr hp)
     (s.properAmbientFirst_graph c t pr q sq hz hp) (s.properAmbientProduct_base c t pr hp)
 
-/-- The specified transport on the second graph word.
-Source: Stacks Tag 0F7C, proper projection exchange for the second supporting open. -/
+/-- The specified transport on the second graph word (Stacks, Tag 0F7C). -/
 def properAmbientSecondTransport :
     R((locallyClosedGraphS₂ s.a s.e s.p c.i c.g
       ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))_*[ModuleCat.{u + 1} A]) ⋙

@@ -22,8 +22,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The constant-sheaf pullback comparison sends the adjunction unit to composition
-with the first projection, in the description of constant sheaves by continuous maps.
-Source: Stacks Project Tags 03Q1 (2), (4), and 0A5G. -/
+with the first projection, in the description of constant sheaves by continuous maps
+(Stacks, Tags 03Q1 and 0A5G). -/
 theorem constant_pullback_unit_continuousMap
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M]

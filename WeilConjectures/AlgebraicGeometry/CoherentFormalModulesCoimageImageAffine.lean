@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- On one affine open and at one positive level, the coimage-image comparison
-of coherent formal modules restricts to an isomorphism of module sheaves.
-Source: Stacks Project, Lemma 087X, affine kernel calculation and final paragraph
-of part (1), using Lemma 087W. -/
+of coherent formal modules restricts to an isomorphism of module sheaves
+(Stacks, Tags 087X and 087W). -/
 theorem coherentFormalModules_coimageImage_isIso_restrict_affine
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     [HasKernels (CoherentFormalModule X I)]

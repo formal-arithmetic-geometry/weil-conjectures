@@ -29,9 +29,7 @@ namespace AlgebraicGeometry
 /-- Multiplication by each tensor power of the nonvanishing section is bijective
 on cohomology over W intersect S. Its inverse after restriction is compatible with
 transition multiplication. This is a statement on individual twists, before either
-direct sums or quotient fractions are formed.
-
-Source: Stacks Project, Tag 09MR, canonical map; Tag 01CY, local trivialization. -/
+direct sums or quotient fractions are formed (Stacks, Tags 09MR and 01CY). -/
 theorem exists_cohomologySection_division (X : Scheme.{uMV})
     (L F : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))
     (S : X.Opens) (_hS : (S : Set X) = nonvanishingLocus L s) :

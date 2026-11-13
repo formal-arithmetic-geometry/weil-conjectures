@@ -32,10 +32,8 @@ namespace AlgebraicGeometry.Etale
 
 /-- Over a finite coefficient ring, vanishing of a higher direct image on constructible
 sheaves implies its vanishing on all sheaves, when the source is quasi-compact and
-quasi-separated and the morphism is quasi-compact and quasi-separated.
-
-Source: Stacks Project, Tags 03SA (constructible generation) and 09Z1 (continuity);
-ILO, Exposé XIII, Proposition 2.3.4, printed p. 198, reduction to constructible sheaves. -/
+quasi-separated and the morphism is quasi-compact and quasi-separated (Stacks, Tags 03SA and 09Z1).
+-/
 theorem isZero_rightDerived_lowerStar_of_constructible
     (B : Type (u + 1)) [CommRing B] [Finite B] {Y S : Scheme.{u}}
     [CompactSpace Y] [QuasiSeparatedSpace Y]

@@ -105,9 +105,8 @@ private theorem naturality_transport
 /-- The representative localization equation forces three-variable naturality.
 Assume also transport along isomorphisms; this is essential when the chosen
 derived category has objects which are not literally images of complexes.
-No existence of a family, or existence of chain representatives, is asserted here.
-Source: Stacks Project, cohomology.tex, Tag 08DJ, naturality of evaluation;
-sites-cohomology.tex, Tags 0A90 and 0A96. -/
+No existence of a family, or existence of chain representatives, is asserted here
+(Stacks, Tags 08DJ, 0A90 and 0A96). -/
 theorem tensorHomUncurry_descent_natural (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (t : ∀ K L M : schemeDerivedCategory X,

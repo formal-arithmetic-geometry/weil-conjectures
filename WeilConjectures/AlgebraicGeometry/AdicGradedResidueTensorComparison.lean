@@ -24,8 +24,8 @@ universe u v w
 open CategoryTheory CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
-/-- The kernel of the residue quotient annihilates the consecutive-power kernel.
-Source: Stacks Tag 09BR. -/
+/-- The kernel of the residue quotient annihilates the consecutive-power kernel (Stacks, Tag 09BR).
+-/
 theorem adicFiniteGradedModule_torsion {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) :
     Module.IsTorsionBySet (adicFiniteCoeff J (n + 1))
@@ -64,8 +64,8 @@ def adicFiniteResidueGradedModule {A : Type w} [CommRing A] (J : Ideal A) (n : �
         (Ideal.pow_le_pow_right (Nat.add_le_add_right (Nat.zero_le (n + 1)) 1)))).symm.toRingHom
   ModuleCat.of _ L
 
-/-- The descended residue action agrees with the original larger-quotient action.
-Source: Stacks Tag 09BR. -/
+/-- The descended residue action agrees with the original larger-quotient action (Stacks, Tag 09BR).
+-/
 theorem adicFiniteResidueGradedModule_smul {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) (b : adicFiniteCoeff J (n + 1))
     (x : RingHom.ker (adicFiniteFactor J (Nat.le_succ n))) :
@@ -79,8 +79,8 @@ theorem adicFiniteResidueGradedModule_smul {A : Type w} [CommRing A]
   rw [RingHom.quotientKerEquivOfSurjective_symm_apply]
   rfl
 
-/-- Restricting the constructed residue module gives exactly the original kernel module.
-Source: Stacks Tag 09BR. -/
+/-- Restricting the constructed residue module gives exactly the original kernel module
+(Stacks, Tag 09BR). -/
 def adicFiniteResidueGradedModule_restrictIso {A : Type w} [CommRing A]
     (J : Ideal A) (n : ℕ) :
     adicFiniteGradedModule J n ≅
@@ -91,8 +91,7 @@ def adicFiniteResidueGradedModule_restrictIso {A : Type w} [CommRing A]
   ext x
   exact adicFiniteResidueGradedModule_smul J n b x
 
-/-- Noetherianity makes the constructed residue module finite.
-Source: Stacks Tag 09BR. -/
+/-- Noetherianity makes the constructed residue module finite (Stacks, Tag 09BR). -/
 theorem adicFiniteResidueGradedModule_finite {A : Type w} [CommRing A]
     [IsNoetherianRing A] (J : Ideal A) (n : ℕ) :
     Module.Finite (adicFiniteCoeff J 0) (adicFiniteResidueGradedModule J n) := by

@@ -33,8 +33,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- A quasi-coherent derived object on an affine scheme has a module-complex representative.
-Source: Stacks Project, Tag 06Z0. -/
+/-- A quasi-coherent derived object on an affine scheme has a module-complex representative
+(Stacks, Tag 06Z0). -/
 theorem exists_affine_module_complex_representative (Y : Scheme.{u}) [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) :

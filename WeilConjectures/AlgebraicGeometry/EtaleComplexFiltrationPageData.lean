@@ -30,8 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The map on ordinary sheaf cohomology in one complex degree, with fixed endpoints.
-Source: Stacks Project, Tag 0EZM, the first-page comparison maps. -/
+/-- The map on ordinary sheaf cohomology in one complex degree, with fixed endpoints
+(Stacks, Tag 0EZM). -/
 noncomputable def complexTermCohomologyMap
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)

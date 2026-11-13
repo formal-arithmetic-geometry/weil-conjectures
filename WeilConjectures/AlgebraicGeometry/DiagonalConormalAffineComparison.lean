@@ -27,8 +27,7 @@ namespace AlgebraicGeometry
 variable {X S : Scheme.{u}}
 
 /-- The morphism induced by a normalized difference derivation is bijective on sections
-of an affine open mapping into an affine open of the base.
-Source: Stacks Project, Tag 08S2, final affine calculation, and Tag 00RW. -/
+of an affine open mapping into an affine open of the base (Stacks, Tags 08S2 and 00RW). -/
 theorem diagonalConormalComparison_bijective_on_affine (f : X ⟶ S)
     (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf)
     (hD : IsDiagonalConormalDerivation f D) (U : X.affineOpens) (V : S.affineOpens)

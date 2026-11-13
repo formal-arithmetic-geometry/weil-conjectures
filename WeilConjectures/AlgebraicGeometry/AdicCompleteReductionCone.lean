@@ -28,9 +28,8 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] HasDerivedCategory.standard
 
-/-- A complete object has the quotient homotopy-limit cone, with its actual adjunction units.
-Source: Stacks Project, Algebraization Tag 099M; Cohomology on Sites Tags 0940 and 0941;
-proetale.tex, Tag 09C6, passage from the reductions to the complete object. -/
+/-- A complete object has the quotient homotopy-limit cone, with its actual adjunction units
+(Stacks, Tags 099M, 0940, 0941 and 09C6). -/
 theorem adicResidue_complete_reduction_cone
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

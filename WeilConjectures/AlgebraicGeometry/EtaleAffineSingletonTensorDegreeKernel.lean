@@ -89,8 +89,8 @@ private theorem tensor_kernel_of_equivs
 
 
 
-/-- A normalized affine singleton comparison has zero kernel.
-Source: Stacks Project, Tag 03P2; Tags 01I4, 01JQ, 01I9 and 01IA. -/
+/-- A normalized affine singleton comparison has zero kernel
+(Stacks, Tags 03P2, 01I4, 01JQ, 01I9 and 01IA). -/
 theorem singletonTensorDegreeComparisonHom_kernel
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

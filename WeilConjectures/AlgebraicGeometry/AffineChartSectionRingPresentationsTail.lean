@@ -95,8 +95,8 @@ private theorem representative_final {J : Type u} [Preorder J] [IsDirectedOrder 
     toAntisymmetrization (· ≤ ·) (rep.obj (toAntisymmetrization (· ≤ ·) k))
   rw [hrep]
 
-/-- The actual upper-tail chart rings present the direct and finite-stage chart rings.
-Source: Stacks Project, Tag 01ZR, affine reduction, and Tag 01I4. -/
+/-- The actual upper-tail chart rings present the direct and finite-stage chart rings
+(Stacks, Tags 01ZR and 01I4). -/
 theorem affine_chart_section_ring_presentations_tail
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

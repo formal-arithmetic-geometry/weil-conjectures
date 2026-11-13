@@ -21,8 +21,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 set_option autoImplicit false
 /-- An ordinary affine module identified with restricted shifted cohomology has
-support disjoint from the scalar's basic open.
-Source: Stacks Project, Tag 08EJ, affine support paragraph, and Tag 06Z0. -/
+support disjoint from the scalar's basic open (Stacks, Tags 08EJ and 06Z0). -/
 theorem affine_restricted_homology_support
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

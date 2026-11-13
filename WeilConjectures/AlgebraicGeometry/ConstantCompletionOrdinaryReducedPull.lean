@@ -26,9 +26,8 @@ variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
-/-- Ordinary scalar insertion becomes invertible after extension to a finite quotient.
-Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL, 093M;
-sites-cohomology.tex, Tag 06YY. -/
+/-- Ordinary scalar insertion becomes invertible after extension to a finite quotient
+(Stacks, Tags 03EK, 03EL, 093M and 06YY). -/
 theorem ordinaryReducedPull_isIso
     (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
     [PreservesFiniteLimits L] (A : Type u) [CommRing A] [IsNoetherianRing A]

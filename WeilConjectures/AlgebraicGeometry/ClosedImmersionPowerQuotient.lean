@@ -47,7 +47,7 @@ private theorem power_iso {X : Scheme.{v}} (J : X.IdealSheafData) (n : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The quotient by an ideal power is the pushforward of restriction, with its
-projection identified with the unit of the supplied adjunction. (Stacks, Tag 087T) -/
+projection identified with the unit of the supplied adjunction (Stacks, Tag 087T). -/
 theorem closedImmersion_power_quotient {X Z : Scheme.{v}} (J : X.IdealSheafData)
     (n : ℕ) (j : Z ⟶ X) [IsClosedImmersion j] (hj : j.ker = J ^ n)
     (a : Scheme.Modules.tensorPullback j ⊣ Scheme.Modules.pushforward j)

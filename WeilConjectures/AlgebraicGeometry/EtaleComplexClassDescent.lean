@@ -23,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Every limit hypercohomology class has a stage representative.
-Source: Stacks Project, Tag 0EZM;
-Tag 015J (termwise hypercohomology spectral sequence). -/
+/-- Every limit hypercohomology class has a stage representative (Stacks, Tags 0EZM and 015J). -/
 theorem exists_etale_complex_class_rep
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

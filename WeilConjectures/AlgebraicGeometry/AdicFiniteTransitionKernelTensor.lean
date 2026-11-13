@@ -35,15 +35,13 @@ private def adicKernelSectionModule {C : Type w} [SmallCategory C]
 
 attribute [local instance 10000] adicKernelSectionModule
 
-/-- The actual quotient regarded as an A-module.
-Source: Stacks Project, Tag 09C2. -/
+/-- The actual quotient regarded as an A-module (Stacks, Tag 09C2). -/
 private def adicFiniteUnderlyingCoeffModule (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     ModuleCat.{w} A :=
   (ModuleCat.restrictScalars (adicFiniteQuotient J n)).obj
     (ModuleCat.of (adicFiniteCoeff J n) (adicFiniteCoeff J n))
 
-/-- The quotient factor, retaining the original scalar action.
-Source: Stacks Project, Tag 09C2. -/
+/-- The quotient factor, retaining the original scalar action (Stacks, Tag 09C2). -/
 private def adicFiniteUnderlyingCoeffMap (A : Type w) [CommRing A] (J : Ideal A) (n : ℕ) :
     adicFiniteUnderlyingCoeffModule A J (n + 1) ⟶ adicFiniteUnderlyingCoeffModule A J n :=
   ModuleCat.ofHom
@@ -199,9 +197,7 @@ private theorem adicKernel_pure_whisker
     ModuleCat.id_apply] using SheafOfModules.RingedTensor.pure_map R f (𝟙 M) U s m
 
 /-- Tensoring with a constant algebraic quotient is ordinary scalar reduction, naturally
-in the module and compatibly with the specified quotient factor.
-
-Source: Stacks Project, Modules on Sites, Tag 03EK; Cohomology on Sites, Tag 06YY. -/
+in the module and compatibly with the specified quotient factor (Stacks, Tags 03EK and 06YY). -/
 private theorem adicFiniteReduction_tensor_presentation
     {C : Type w} [SmallCategory C] (T : GrothendieckTopology C)
     (A : Type w) [CommRing A] (J : Ideal A) :

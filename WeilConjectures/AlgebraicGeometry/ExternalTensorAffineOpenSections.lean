@@ -35,8 +35,7 @@ variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 variable (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
 variable (F : X.Modules) (G : Y.Modules) (A : X.Opens) (V : Y.Opens)
 
-/-- The external product of two sections, on a specified open of the product.
-Source: Stacks Project, Tag 0BED, maps preceding equation-kunneth-on-cech. -/
+/-- The external product of two sections, on a specified open of the product (Stacks, Tag 0BED). -/
 def externalTensorOpenPureSection
     (J : ((pullback.snd f g) ⁻¹ᵁ V).toScheme.Opens)
     (hK : ((pullback.snd f g) ⁻¹ᵁ V).ι ''ᵁ J ≤ (pullback.fst f g) ⁻¹ᵁ A)
@@ -198,9 +197,8 @@ private theorem exists_external_open_raw [F.IsQuasicoherent] [G.IsQuasicoherent]
   rfl
 
 /-- On one affine product open, the external tensor-section map is an additive
-isomorphism, normalized by the original projection adjunction units.
-Source: Stacks Project, Tag 0BED, varieties-lemma-kunneth, affine-open paragraph;
-Tags 01I9 and 01CD for pullback and tensor sections. -/
+isomorphism, normalized by the original projection adjunction units
+(Stacks, Tags 0BED, 01I9 and 01CD). -/
 theorem externalTensor_affine_open_sections [F.IsQuasicoherent] [G.IsQuasicoherent]
     (hA : IsAffineOpen A) (hV : IsAffineOpen V)
     (J : ((pullback.snd f g) ⁻¹ᵁ V).toScheme.Opens)

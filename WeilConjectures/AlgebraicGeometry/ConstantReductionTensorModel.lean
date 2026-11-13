@@ -100,9 +100,8 @@ private theorem reductionTensorTowerIso_hom_app (b : Bool)
 
 /-- Restricted finite scalar extension is tensor with the reduction of the rank-one
 module, naturally in the module and in the finite quotient level. This statement
-involves ordinary module sheaves only, with no Koszul or cochain complex.
-
-Source: Stacks Project, Modules on Sites, Tag 03EK; proetale.tex, Tag 099M. -/
+involves ordinary module sheaves only, with no Koszul or cochain complex
+(Stacks, Tags 03EK and 099M). -/
 theorem constantReductionTensorModel (b : Bool) :
     let O := coefficients J A I b
     let Q := (reductionTower J A I b).obj (𝟙_ (Mod O))

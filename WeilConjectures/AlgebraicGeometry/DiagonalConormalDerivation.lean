@@ -31,8 +31,8 @@ variable {X S : Scheme.{u}}
 /-- A derivation into the diagonal conormal has the prescribed difference formula if,
 whenever the two projections pull a section `a` back to an ambient open `W`, its value
 is the tensor-pullback class of their difference. The kernel section `s` is specified by
-its image under the kernel inclusion. This uses the canonical tensor-pullback unit.
-Source: Stacks Project, Tag 08S2, the derivation `s₂ - s₁`. -/
+its image under the kernel inclusion. This uses the canonical tensor-pullback unit
+(Stacks, Tag 08S2). -/
 def IsDiagonalConormalDerivation (f : X ⟶ S)
     (D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf) : Prop :=
   let δ := pullback.diagonal f
@@ -48,8 +48,7 @@ def IsDiagonalConormalDerivation (f : X ⟶ S)
         (op W) s)
 
 /-- The difference of the two projections defines a relative derivation into the
-conormal sheaf, with its sectionwise difference formula.
-Source: Stacks Project, Tag 08S2, global construction preceding the affine calculation. -/
+conormal sheaf, with its sectionwise difference formula (Stacks, Tag 08S2). -/
 theorem exists_diagonalConormalDerivation (f : X ⟶ S) :
     ∃ D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf,
       IsDiagonalConormalDerivation f D := by

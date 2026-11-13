@@ -42,10 +42,7 @@ private theorem completion_linearMap_ext_of_finite
 
 /-- Affine quotient evaluation is detected by the linear map on adic completions.
 The supplied map sends each ordinary linear map to its adic completion. There are no
-scalar extension tensor products in this comparison.
-
-Source: Stacks Project, Tag 0882, affine argument before applying flat base change for Hom;
-Tag 087W, the equivalence of affine formal modules and complete modules. -/
+scalar extension tensor products in this comparison (Stacks, Tags 0882 and 087W). -/
 theorem completion_internal_hom_affine_completion_evaluation {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

@@ -20,9 +20,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Sheafifying a linear map sends each actual basis germ to the combination of target
-basis germs whose coefficients are the germs of its matrix entries.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7), and Tags 01IB, 01C6, 0098. -/
+basis germs whose coefficients are the germs of its matrix entries
+(Stacks, Tags 01HV, 01IB, 01C6 and 0098). -/
 theorem affineFreeBasisGerm_map
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U)
     (n m : ℕ)

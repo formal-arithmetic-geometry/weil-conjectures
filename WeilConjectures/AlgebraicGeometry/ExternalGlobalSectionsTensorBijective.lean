@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The explicit external tensor map on ordinary sections is bijective.
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech. -/
+/-- The explicit external tensor map on ordinary sections is bijective (Stacks, Tag 0BED). -/
 theorem externalGlobalSectionsTensor_bijective
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

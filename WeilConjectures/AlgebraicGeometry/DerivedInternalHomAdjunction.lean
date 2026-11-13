@@ -76,8 +76,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived tensor-internal-Hom bijection and tensor symmetry, natural in all variables.
 The second bijection is obtained from the first by precomposing with the inverse symmetry.
-The tensor is the shared K-flat derived tensor, and RHom is the shared K-injective model.
-Source: Stacks Project, Cohomology, Tags 08DJ and 0FPB. -/
+The tensor is the shared K-flat derived tensor, and RHom is the shared K-injective model
+(Stacks, Tags 08DJ and 0FPB). -/
 theorem scheme_derivedInternalHom_adjunction (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     ∃ (e : ∀ K L M : schemeDerivedCategory X,
