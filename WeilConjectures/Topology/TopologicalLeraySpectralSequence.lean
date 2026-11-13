@@ -55,9 +55,6 @@ private noncomputable abbrev topologicalSheafCategoryWithHomology (X : TopCat.{u
     CategoryWithHomology (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
   inferInstance
 
-attribute [local instance] topologicalSheafCategoryWithHomology
-
-set_option profiler true in
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -171,6 +168,8 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
                                     ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
                                     (J.extMk s (p + 1) rfl hs))) =
                                   I.extMk z (p + 1) rfl hz) := by
+  let := topologicalSheafCategoryWithHomology X
+  let := topologicalSheafCategoryWithHomology Z
   refine ⟨_, _, fun _ ↦ rfl, fun _ ↦ rfl, ?_⟩
   obtain ⟨edge, a, ha, hedge⟩ :=
     exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
