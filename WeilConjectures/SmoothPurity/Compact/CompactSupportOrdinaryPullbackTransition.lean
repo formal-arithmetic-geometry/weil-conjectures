@@ -98,6 +98,7 @@ private def evG {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (compactSupportSystemQuotient l E) f n
 
 set_option maxHeartbeats 600000 in
+set_option profiler true in
 -- Comparing the native and normalized coefficient carriers needs additional heartbeats.
 /-- Horizontal maps of ordinary coefficient systems commute with native inverse image.
 Source: Stacks Project, Tags 03DA, 03D3 and 0941; Zheng 4.1.
