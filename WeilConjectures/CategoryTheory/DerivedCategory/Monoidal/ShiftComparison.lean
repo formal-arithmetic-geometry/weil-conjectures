@@ -250,7 +250,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   simpa only [ρ, δ, G, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.comp_obj, curriedTensor_obj_obj,
     curriedTensor_obj_map, curriedTensor_map_app, Category.assoc, Functor.flip_obj_obj,
-    Functor.flip_obj_map, Functor.flip_map_app, NatTrans.flipApp, flipFunctor_map_app_app] using hτ M
+    Functor.flip_obj_map, Functor.flip_map_app, NatTrans.flipApp, flipFunctor_map_app_app]
+    using hτ M
 
 end Comparison
 end DerivedCategory
