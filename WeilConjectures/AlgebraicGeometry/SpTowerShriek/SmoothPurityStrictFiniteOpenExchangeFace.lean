@@ -598,6 +598,39 @@ private theorem open_scalar_from_comparisons
   exact Adjunction.openScalar_exchange_of_unit a a' b b' H He G Ge S S' Q Q'
     eg eh ej ej' c ce i i' d de hi hi' hd hde hcube M
 
+-- Normalize inverse comparisons while the categories and functors are abstract.
+private theorem open_scalar_from_inverse_comparisons
+    {C C' D D' E E' F F' : Type*}
+    [Category C] [Category C'] [Category D] [Category D']
+    [Category E] [Category E'] [Category F] [Category F']
+    {L : C ⥤ D} {J : D ⥤ C} {L' : C' ⥤ D'} {J' : D' ⥤ C'}
+    {N : E ⥤ F} {R : F ⥤ E} {N' : E' ⥤ F'} {R' : F' ⥤ E'}
+    {H : C ⥤ C'} {He : E ⥤ E'} {G : D ⥤ D'} {Ge : F ⥤ F'}
+    {S : C ⥤ E} {S' : C' ⥤ E'} {Q : D ⥤ F} {Q' : D' ⥤ F'}
+    (eg : G ⋙ Q' ≅ Q ⋙ Ge) (eh : H ⋙ S' ≅ S ⋙ He)
+    (ej : J ⋙ S ≅ Q ⋙ R) (ej' : J' ⋙ S' ≅ Q' ⋙ R')
+    (a : L ⊣ J) (a' : L' ⊣ J') (b : N ⊣ R) (b' : N' ⊣ R')
+    (c : G ⋙ J' ≅ J ⋙ H) (ce : Ge ⋙ R' ≅ R ⋙ He)
+    (i : S ⋙ N ⟶ L ⋙ Q) (i' : S' ⋙ N' ⟶ L' ⋙ Q')
+    (d : H ⋙ L' ⟶ L ⋙ G) (de : He ⋙ N' ⟶ N ⋙ Ge)
+    (hi : ∀ M, b.unit.app (S.obj M) ≫ R.map (i.app M) =
+      S.map (a.unit.app M) ≫ ej.hom.app (L.obj M))
+    (hi' : ∀ M, b'.unit.app (S'.obj M) ≫ R'.map (i'.app M) =
+      S'.map (a'.unit.app M) ≫ ej'.hom.app (L'.obj M))
+    (hd : ∀ M, a'.unit.app (H.obj M) ≫ J'.map (d.app M) =
+      H.map (a.unit.app M) ≫ c.inv.app (L.obj M))
+    (hde : ∀ M, b'.unit.app (He.obj M) ≫ R'.map (de.app M) =
+      He.map (b.unit.app M) ≫ ce.inv.app (N.obj M))
+    (hcube : ∀ K, S'.map (c.inv.app K) ≫ ej'.hom.app (G.obj K) ≫
+      R'.map (eg.hom.app K) =
+      eh.hom.app (J.obj K) ≫ He.map (ej.hom.app K) ≫ ce.inv.app (Q.obj K))
+    (M : C) :
+    N'.map (eh.hom.app M) ≫ de.app (S.obj M) ≫ Ge.map (i.app M) =
+      i'.app (H.obj M) ≫ Q'.map (d.app M) ≫ eg.hom.app (L.obj M)  := by
+  exact open_scalar_from_comparisons
+    eg.symm eh.symm ej.symm ej'.symm a a' b b' c.symm ce.symm i i' d de
+    hi hi' hd hde hcube M
+
 set_option profiler true in
 -- Explicit comparison congruences are checked within this declaration.
 private theorem open_exchange_inverse (b : Base l E)
@@ -622,54 +655,43 @@ private theorem open_exchange_inverse (b : Base l E)
         ((openImmersionLowerShriek
           (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))) j).mapDerivedCategory.obj N) := by
   let B := ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n))
-  have H := open_scalar_from_comparisons
-    (comparisonFinitePull l E b g n).symm (comparisonFinitePull l E b h n).symm
-    (comparisonFinitePull l E b j n).symm (comparisonFinitePull l E b j' n).symm
+  have H := open_scalar_from_inverse_comparisons
+    (comparisonFinitePull l E b g n) (comparisonFinitePull l E b h n)
+    (comparisonFinitePull l E b j n) (comparisonFinitePull l E b j' n)
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction B j)
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction B j')
     (comparisonLevelOpenAdjunction l E b j n)
     (comparisonLevelOpenAdjunction l E b j' n)
-    (leftDerivedUpperStarSquareIso B sq.toCommSq).symm
+    (leftDerivedUpperStarSquareIso B sq.toCommSq)
     (proEtaleConstantRingPullbackComposition j' g (R l E n) ≪≫
       eqToIso (congrArg (fun a ↦ proEtaleConstantRingDerivedPullback (R l E n) a)
         sq.w.symm) ≪≫
-      (proEtaleConstantRingPullbackComposition h j (R l E n)).symm).symm
+      (proEtaleConstantRingPullbackComposition h j (R l E n)).symm)
     (comparisonFiniteOpen l E b j n).inv (comparisonFiniteOpen l E b j' n).inv
     (leftDerivedOpenImmersionLowerShriekBaseChangeIso B sq).hom
     (levels.openExchange h j' j g sq n).inv
     (by
       intro M
       have HU := strict_finite_open_unit l E b j n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU) (by
       intro M
       have HU := strict_finite_open_unit l E b j' n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HU)
     (by
       intro M
       have HU := native_open_unit_mate (R l E n) sq M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        exactByConversion h)
+      exact HU)
     (fun K ↦ by
       have he := levels.openExchange_mate h j' j g sq n K
       simp only [Adjunction.homEquiv_unit, Iso.symm_hom, Iso.trans_inv,
         Iso.symm_inv, NatTrans.comp_app, Category.assoc,
         eqToIso.inv] at he ⊢
-      run_tac Lean.Elab.Tactic.withMainContext do
-        let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `he) none
-        exactByConversion h)
+      exact he)
     (by
       intro M
       have HC := inverse_pull_square l E b sq n M
-      simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       exact HC) N
-  simp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj] at H
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `H) none
-    exactByConversion h
+  exact H
 
 -- Explicit comparison congruences are checked within this declaration.
 /-- Fixed-scalar realization preserves the normalized open exchange.
