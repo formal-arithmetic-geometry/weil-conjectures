@@ -624,7 +624,7 @@ private theorem unitCompatibility_of_representative
       rw [reassoc_of% hn]
     _ = r.map b ≫ v := by
       rw [hc, hθ]
-      simpa only [Functor.map_comp, Category.assoc] using
+      simpa only [Functor.map_comp, Functor.mapIso_inv, Functor.mapIso_hom, Category.assoc] using
         congrArg (fun z ↦ r.map b ≫ z) ((r.mapIso a).inv_hom_id_assoc v)
     _ = e.hom ≫ η.app Y ≫ d.hom := hb
     _ = (η.app (r.obj X) ≫ H.map e.hom) ≫ d.hom := by
@@ -808,7 +808,10 @@ theorem flat_ringed_ideal_complete_equivalence
         QR.map (c.hom.app (T.obj (rc.obj M)) ≫
           ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))))
       (hβQ M) (hΘ (rc.obj M)) ?_
-    rw [← Category.assoc, eR.hom.naturality (b.app M), Category.assoc, ← QR.map_comp]
+    have heR : rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) =
+        eR.hom.app M ≫ QR.map (rc.map (b.app M)) :=
+      eR.hom.naturality (b.app M)
+    rw [← Category.assoc, heR, Category.assoc, ← QR.map_comp]
     rw [hb M]
     exact congrArg (fun z ↦ eR.hom.app M ≫ z) (hunitQ (rc.obj M)).symm
   -- Equality on complex representatives descends to all derived objects.
