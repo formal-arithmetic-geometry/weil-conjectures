@@ -80,6 +80,18 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquare
     hinv f' g, boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K, e]
 
 set_option profiler true in
+/-- Transport the ambient comparison of components along an equality of square isomorphisms. -/
+private lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_of_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (sq : CommSq g' f' f g) (sq' : CommSq g'.left f'.left f.left g.left) {θ}
+    (hθ : pullbackSquareComparison Λ sq' = θ) (K : Dᵇc(Y.left)⟦Λ⟧) :
+    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom = θ.hom.app K.obj := by
+  obtain rfl : sq' = (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ :
+      CommSq g'.left f'.left f.left g.left) := Subsingleton.elim _ _
+  exact (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
+    ℓ Λ sq K).trans (congrArg (fun e ↦ e.hom.app K.obj) hθ)
+
+set_option profiler true in
 /-- The base change map of the ambient derived categories of module objects over `ℚ̲̄_ℓ` at a
 bounded constructible `K` is an isomorphism as soon as the base-change morphism of the bounded
 constructible derived categories is an isomorphism at `K`: the latter is the restriction of the
@@ -93,22 +105,13 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
       (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)).app
         K)) :
     IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq').app K.obj) := by
-  let sq₀ : CommSq g'.left f'.left f.left g.left :=
-    ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩
-  have hsq : sq' = sq₀ := Subsingleton.elim _ _
-  let θ := Adjunction.leftDerivedFunctorSquareIso
-    (upperStarSquareComparison (Profinite.padicAlgClRingObj ℓ) sq₀)
-  have hcomp : pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) sq₀ = θ :=
-    pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq₀
-  have hθ (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-      ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq).hom.app
-        K).hom = θ.hom.app K.obj :=
-    (boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-      ℓ (Profinite.padicAlgClRingObj ℓ) sq K).trans (congrArg (fun e ↦ e.hom.app K.obj) hcomp)
+  unfold baseChangeMap
+  rw [pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq']
   have key := Adjunction.exchangeRight_restrictFullyFaithful_app_hom
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) f'.left)
-    θ
+    (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison
+          (Profinite.padicAlgClRingObj ℓ) sq'))
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f K)
     (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ f' K)
@@ -116,8 +119,10 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g K)
     (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj (Profinite.padicAlgClRingObj ℓ) ℓ g' K)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ sq)
-    hθ K
-  rw [hsq, baseChangeMap, hcomp, ← key, ObjectProperty.isIso_hom_iff]
+    (boundedConstructiblePullbackSquareComparison_hom_app_hom_of_eq
+      ℓ (Profinite.padicAlgClRingObj ℓ) sq sq'
+      (pullbackSquareComparison_eq_leftDerivedFunctorSquareIso (Profinite.padicAlgClRingObj ℓ) sq')) K
+  rw [← key, ObjectProperty.isIso_hom_iff]
   convert hres using 3
   all_goals rfl
 
