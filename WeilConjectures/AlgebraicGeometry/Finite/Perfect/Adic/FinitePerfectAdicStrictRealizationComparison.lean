@@ -432,7 +432,6 @@ variable (X : Scheme.{t}) (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
   (hδ : ∀ (U' : V.left.ProEt) x, δ.hom.app (op U') x =
     g.val.app (op (finitePerfectAdicChartObject V U')) x)
 
-set_option profiler true in
 -- The explicit square compares two presentations of the realization on the slice.
 include hps hαp hcoh hδ in
 /-- The explicit part of the realization square, after replacing inverse image by restriction:
@@ -464,53 +463,7 @@ theorem finitePerfectAdicRealization_square_explicit :
   simp only [Functor.map_comp]
   rw [hcoh]
   erw [reassoc_of% hR]
-  have hC' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₁)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₁))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₁)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom
-              U.prop).obj
-              ((sheafCompose (ProEt.topology V.left)
-                (ModuleCat.restrictScalars.{t + 1} (RingHom.ulift.{t + 1, t + 1} q))).obj
-                  ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀)))))).presheaf ≫
-      (PresheafOfModules.toPresheaf _).map ((SheafOfModules.forget _).map
-        ((finitePerfectAdicAssociatedCoherence αW₁ αW₀ (RingHom.ulift.{t + 1, t + 1} q)
-          (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-            ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map
-              s)) hαp).hom.app
-          ((finitePerfectAdicChartSlice X V U W f _).obj ((ProEtale.localizationRestriction _ U.hom
-            U.prop).obj ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))) =
-      toSheafify ((ProEt.topology X).over W)
-        ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₀)).obj
-          ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₀))).obj
-            ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₀)).obj
-              ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom
-                U.prop).obj
-                ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))).presheaf := hC
-  rw [reassoc_of% hC']
-  have h₀' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₀)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₀))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₀)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₀)) U.hom
-              U.prop).obj ((finiteCoefficientSliceRestriction X B₀ Rc₀ φ₀ V).obj M₀))))).presheaf ≫
-      (PresheafOfModules.toPresheaf (T.over W).obj).map ((SheafOfModules.forget (T.over W)).map
-        ((SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-          π₀)).map (finitePerfectAdicChartAssociated X V U W f Rc₀ φ₀ αW₀ hα₀ M₀))) =
-      (PresheafOfModules.toPresheaf _).map
-        (finitePerfectAdicChartRestriction X V U W f Rc₀ φ₀ αW₀ hα₀ M₀) := h₀
-  have h₁' : toSheafify ((ProEt.topology X).over W)
-      ((ProEtale.finiteCoefficientModulePresheaf (Over W) (ULift.{t + 1} B₁)).obj
-        ((sheafToPresheaf ((ProEt.topology X).over W) (ModuleCat.{t + 1} (ULift.{t + 1} B₁))).obj
-          ((finitePerfectAdicChartSlice X V U W f (ULift.{t + 1} B₁)).obj
-            ((ProEtale.localizationRestriction (ModuleCat.{t + 1} (ULift.{t + 1} B₁)) U.hom
-              U.prop).obj ((finiteCoefficientSliceRestriction X B₁ Rc₁ φ₁ V).obj M₁))))).presheaf ≫
-      (PresheafOfModules.toPresheaf (T.over W).obj).map ((SheafOfModules.forget (T.over W)).map
-        ((SheafOfModules.restrictScalars (((ProEt.topology X).overPullback RingCat.{t + 1} W).map
-          π₁)).map (finitePerfectAdicChartAssociated X V U W f Rc₁ φ₁ αW₁ hα₁ M₁))) =
-      (PresheafOfModules.toPresheaf _).map
-        (finitePerfectAdicChartRestriction X V U W f Rc₁ φ₁ αW₁ hα₁ M₁) := h₁
-  rw [h₀', reassoc_of% h₁']
+  rw [reassoc_of% hC, h₀, reassoc_of% h₁]
   ext Z x
   change M₀.val.map (finitePerfectAdicChartPoint X V U W f Z.unop).op
       (δ.hom.app (op ((MorphismProperty.Over.map ⊤ U.prop).obj
