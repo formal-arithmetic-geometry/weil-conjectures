@@ -160,6 +160,31 @@ private theorem total_shortExact_of_shortExact
   change (D.map F).ShortExact
   exact hD.map_of_exact F
 
+private theorem totalCech_shortExact {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
+    (R : ShortComplex
+      (CochainComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) ℕ))
+    (hrows : ∀ n, (R.map (HomologicalComplex.eval _ (.up ℕ) n)).ShortExact)
+    (hinj : ∀ n, Injective (R.X₁.X n)) :
+    (R.map (totalCechFunctor U)).ShortExact := by
+  let G := (TopCat.Sheaf.cechComplexFunctor U).mapHomologicalComplex (.up ℕ) ⋙
+    HomologicalComplex₂.flipFunctor _ (.up ℕ) (.up ℕ)
+  have : G.PreservesZeroMorphisms := by
+    constructor
+    intro A B
+    ext n m z
+    rfl
+  let D := R.map G
+  have hD : D.ShortExact := by
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro p
+    apply HomologicalComplex.shortExact_of_degreewise_shortExact
+    intro n
+    have : Injective ((R.map (HomologicalComplex.eval _ (.up ℕ) n)).X₁) :=
+      hinj n
+    exact (((hrows n).splittingOfInjective.map (TopCat.Sheaf.cechComplexFunctor U)).map
+      (HomologicalComplex.eval _ (.up ℕ) p)).shortExact
+  exact total_shortExact_of_shortExact D hD
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option profiler true in
@@ -212,25 +237,8 @@ theorem abelianCechHorseshoe_total_boundary
         HomologicalComplex.homologyMap (abelianCechAlpha U I₃) q ≫ δ  := by
   classical
   let R := ShortComplex.mk α β hαβ
-  let G := (TopCat.Sheaf.cechComplexFunctor U).mapHomologicalComplex (.up ℕ) ⋙
-    HomologicalComplex₂.flipFunctor _ (.up ℕ) (.up ℕ)
-  have : G.PreservesZeroMorphisms := by
-    constructor
-    intro A B
-    ext n m z
-    rfl
-  let D := R.map G
-  have hD : D.ShortExact := by
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro p
-    apply HomologicalComplex.shortExact_of_degreewise_shortExact
-    intro n
-    have : Injective ((R.map (HomologicalComplex.eval _ (.up ℕ) n)).X₁) :=
-      I₁.injective n
-    exact (((hrows n).splittingOfInjective.map (TopCat.Sheaf.cechComplexFunctor U)).map
-      (HomologicalComplex.eval _ (.up ℕ) p)).shortExact
   let V := R.map (totalCechFunctor U)
-  have hV : V.ShortExact := total_shortExact_of_shortExact D hD
+  have hV : V.ShortExact := totalCech_shortExact U R hrows (fun n ↦ I₁.injective n)
   let A := (ShortComplex.mk α β hαβ).map
     ((sheafToPresheaf _ _ ⋙ (CategoryTheory.evaluation _ _).obj
       (op (⊤ : X.Opens))).mapHomologicalComplex (.up ℕ))
