@@ -35,7 +35,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 -- Transport a cone augmentation and compose with a colimit identification abstractly.
-set_option trace.profiler true in
 private theorem telescope_augmentation_comp
     {B : Type*} [Category* B] [Abelian B]
     {X Y K L : CochainComplex B ℤ} {φ ψ : X ⟶ Y} (h : φ = ψ)
@@ -54,7 +53,6 @@ private theorem telescope_augmentation_comp
     rw [← HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain]
     rw [hinl, HomComplex.Cochain.zero_comp]
 
-set_option trace.profiler true in
 /-- (blueprint: lem-pc-kflat-hocolim-truncations) For a complex `K` of modules over a sheaf of
 commutative rings on a site, the canonical map from the telescope of its good truncations to
 `K` is a quasi-isomorphism. Also, filtered colimits preserve quasi-isomorphisms of such

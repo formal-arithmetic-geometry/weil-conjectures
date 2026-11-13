@@ -36,7 +36,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 -- Compare augmentations in an arbitrary abelian category, before specializing to sheaves.
-set_option trace.profiler true in
 private theorem quasiIso_of_cone_map_augmentation
     {B : Type*} [Category* B] [Abelian B] [HasDerivedCategory B]
     {X Y X' Y' K : CochainComplex B ℤ}
@@ -87,7 +86,6 @@ private theorem quasiIso_of_cone_map_augmentation
   have : QuasiIso g := hg
   infer_instance
 
-set_option trace.profiler true in
 /-- A canonical augmentation from the telescope of replacements of good truncations
 is a quasi-isomorphism. No flatness or boundedness of the replacements is needed.
 Source: Stacks Project, proof of Lemma 06YS via Lemma 077J; Derived Categories,

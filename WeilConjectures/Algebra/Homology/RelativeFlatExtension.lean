@@ -56,7 +56,6 @@ private theorem flat_biprod
     ((MonoidalCategory.curriedTensor _).flip.mapIso e) hk
 
 -- The twisted-sum construction only uses the abelian category and closure under biproducts.
-set_option trace.profiler true in
 private theorem relative_extension_of_flat_biprod
     {B : Type*} [Category* B] [Abelian B]
     (P : B → Prop) (hP : ∀ M N, P M → P N → P (M ⊞ N))
@@ -230,7 +229,6 @@ private theorem relative_extension_of_flat_biprod
   · ext i
     simp [t, g]
 
-set_option trace.profiler true in
 /-- A flat replacement of a mapping cone gives a relative flat replacement,
 strictly as chain maps.
 Termwise epimorphy of the new resolution is not asserted here.
