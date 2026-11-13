@@ -335,7 +335,7 @@ private theorem nativeReductionMonoidal
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       trace "PH805: beta normalized"
-      have hbκ : (asIso beta).symm = κ.app (P, Q) := hb.trans (hc P Q).symm
+      have hbκ := hb.trans (hc P Q).symm
       trace "PH805: flat representatives"
       refine ⟨hEP, hEQ, ?_⟩
       trace "PH805: representative comparisons"
