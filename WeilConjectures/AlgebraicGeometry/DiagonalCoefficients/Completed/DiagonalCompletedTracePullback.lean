@@ -138,6 +138,27 @@ private theorem trace_of_mapped_diagonal_components
   exact trace_of_diagonal_components (F.map a) (F.map b) a' b' e dB
     (F.map t) t' ha hb hat' hbt' hzero hlow hhigh
 
+-- Cancel an invertible endpoint comparison while the splitting maps are still abstract.
+private theorem trace_of_mapped_diagonal_components_factor
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D] (F : C ⥤ D) [F.Additive]
+    {A B K : C} {A' B' K' L : D} (a : A ⟶ K) (b : B ⟶ K)
+    (a' : A' ⟶ K') (b' : B' ⟶ K')
+    [IsIso (biprod.desc a b)] [IsIso (biprod.desc a' b')]
+    (e : F.obj K ⟶ L) (q : L ⟶ K') [IsIso q] (dB : F.obj B ≅ B')
+    (t : K ⟶ B) (t' : K' ⟶ B')
+    (hat : a ≫ t = 0) (hbt : b ≫ t = 𝟙 B)
+    (hat' : a' ≫ t' = 0) (hbt' : b' ≫ t' = 𝟙 B')
+    (hzero : F.map a ≫ (e ≫ q) ≫ t' = 0)
+    (hlow : IsIso (F.map a ≫ (e ≫ q) ≫ inv (biprod.desc a' b') ≫ biprod.fst))
+    (hhigh : F.map b ≫ (e ≫ q) ≫ t' = dB.hom) :
+    IsIso e ∧ F.map t ≫ dB.hom = e ≫ q ≫ t' := by
+  have htrace := trace_of_mapped_diagonal_components F a b a' b' (e ≫ q) dB t t'
+    hat hbt hat' hbt' hzero hlow hhigh
+  have : IsIso (e ≫ q) := htrace.1
+  refine ⟨IsIso.of_isIso_comp_right e q, ?_⟩
+  simpa only [Category.assoc] using htrace.2
+
 /-- The canonical realization of the shifted positive line is an isomorphism.
 Source: the exact realization's single and shift comparisons
 (blueprint: lem-diagonal-completed-trace-pullback).
@@ -156,7 +177,50 @@ attribute [local irreducible] Functor.mapDerivedCategory
   CompletedRealization.singleUnit CompletedRealization.shiftedLine
   modelExchange TracePullback
 
-set_option maxHeartbeats 500000 in
+-- Use global invertibility in the coordinate criterion before specializing the splitting maps.
+private theorem completedTrace_lowCoordinate (l : ℕ) [Fact l.Prime]
+    {X S X' S' : Scheme.{u}}
+    (f : X ⟶ S) (f' : X' ⟶ S') (hX : X' ⟶ X) (hS : S' ⟶ S)
+    (h : f' ≫ hS = hX ≫ f)
+    (hunit : IsUnit (l : Γ(S, ⊤))) (hunit' : IsUnit (l : Γ(S', ⊤)))
+    (s : S ⟶ X) (hs : s ≫ f = 𝟙 S) (s' : S' ⟶ X') (hs' : s' ≫ f' = 𝟙 S')
+    (D : DiagonalRightDerived
+      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f))
+    (D' : DiagonalRightDerived
+      (CondensedRing.lowerStar (Profinite.continuousMapRingObj.{u} ℤ_[l]) f'))
+    (canonical : D.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
+    (canonical' : D'.R = derivedLower (Profinite.continuousMapRingObj.{u} ℤ_[l]) f')
+    (line : PullEndpoint (Profinite.continuousMapRingObj.{u} ℤ_[l]) hX
+      (zlLine l X) (zlLine l X') (spIntegralComparison hX l (bottomField l)))
+    (v : diagonalShiftedIntegralLine l S ⟶ D.R.obj (diagonalShiftedIntegralLine l X))
+    (b : unit (Profinite.continuousMapRingObj.{u} ℤ_[l]) S ⟶
+      D.R.obj (diagonalShiftedIntegralLine l X))
+    (v' : diagonalShiftedIntegralLine l S' ⟶ D'.R.obj (diagonalShiftedIntegralLine l X'))
+    (b' : unit (Profinite.continuousMapRingObj.{u} ℤ_[l]) S' ⟶
+      D'.R.obj (diagonalShiftedIntegralLine l X'))
+    [IsIso (biprod.desc v b)] [IsIso (biprod.desc v' b')]
+    (τ : D.R.obj (diagonalShiftedIntegralLine l X) ⟶
+      unit (Profinite.continuousMapRingObj.{u} ℤ_[l]) S)
+    (τ' : D'.R.obj (diagonalShiftedIntegralLine l X') ⟶
+      unit (Profinite.continuousMapRingObj.{u} ℤ_[l]) S')
+    (hv : v ≫ τ = 0) (hb : b ≫ τ = 𝟙 _)
+    (hv' : v' ≫ τ' = 0) (hb' : b' ≫ τ' = 𝟙 _) :
+    IsIso ((derivedUpper _ hS).map v ≫
+      modelExchange _ f f' hX hS h D D' canonical canonical' (diagonalShiftedIntegralLine l X) ≫
+      D'.R.map line.shift ≫ inv (biprod.desc v' b') ≫ biprod.fst) := by
+  let residue (T : Scheme.{u}) (hu : IsUnit (l : Γ(T, ⊤))) :
+      ∀ x : T, Invertible (l : T.residueField x) := fun x ↦
+    (show IsUnit (l : T.residueField x) from by
+      let ψ := (T.residue x).hom.comp (T.presheaf.germ ⊤ x trivial).hom
+      simpa only [map_natCast] using hu.map ψ).invertible
+  let instS := residue S hunit
+  let instS' := residue S' hunit'
+  let instX := residue X (by simpa only [map_natCast] using hunit.map f.appTop.hom)
+  let instX' := residue X' (by simpa only [map_natCast] using hunit'.map f'.appTop.hom)
+  exact @diagonalDerivedLineExchange_coordinate l ‹Fact l.Prime› X S X' S'
+    instX instS instX' instS' f f' hX hS h s hs s' hs'
+    D D' canonical canonical' line v b v' b' ‹_› ‹_› τ τ' hv hb hv' hb'
+
 -- Compare the independently normalized derived functor endpoints.
 /-- Pullback of one completed projective-line trace, expressed in its normalized
 condensed realization. This is a trace-only assertion for a Cartesian square of
@@ -251,15 +315,6 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
       DerivedCategory.TStructure.t.isLE_of_iso i.symm (-2)
     exact DerivedCategory.TStructure.t.zero _ (-2) 0 (by decide)
   have hlow : IsIso (F.map v ≫ E ≫ inv (biprod.desc v' B') ≫ biprod.fst) := by
-    let residue (T : Scheme.{u}) (hu : IsUnit (l : Γ(T, ⊤))) :
-        ∀ x : T, Invertible (l : T.residueField x) := fun x ↦
-      (show IsUnit (l : T.residueField x) from by
-        let ψ := (T.residue x).hom.comp (T.presheaf.germ ⊤ x trivial).hom
-        simpa only [map_natCast] using hu.map ψ).invertible
-    let instS := residue S hunit
-    let instS' := residue S' hunit'
-    let instX := residue X (by simpa only [map_natCast] using hunit.map f.appTop.hom)
-    let instX' := residue X' (by simpa only [map_natCast] using hunit'.map f'.appTop.hom)
     let s := ProjectiveLine.infinity S ≫ t.model.model.inv
     let s' := ProjectiveLine.infinity S' ≫ t'.model.model.inv
     have hs : s ≫ f = 𝟙 S := by
@@ -269,20 +324,17 @@ theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
       rw [← t'.model.over_eq]
       simp only [s', Category.assoc, Iso.inv_hom_id_assoc, ProjectiveLine.infinity_over]
     simpa only [E, E₀, Category.assoc] using
-      diagonalDerivedLineExchange_coordinate l f f' hX hS square.w.symm s hs s' hs'
+      completedTrace_lowCoordinate l f f' hX hS square.w.symm hunit hunit' s hs s' hs'
         D D' canonical canonical' line v B v' B' τ τ' hvt hBt hvt' hBt'
   have hhigh : F.map B ≫ E ≫ τ' = c.derived := by
     simpa only [E, E₀, Category.assoc] using
       diagonalCompletedChern_highCoordinate l f f' hX hS square hunit hunit'
         eX eS eX' eS' t.toPresentation t'.toPresentation D D' canonical canonical'
         hcanonical hcanonical' push push' line c b hb b' hb' τ' hBt'
-  obtain ⟨hi, he⟩ := trace_of_mapped_diagonal_components F v B v' B'
-    E (asIso c.derived) τ τ' hvt hBt hvt' hBt' hzero hlow hhigh
   have : IsIso line.shift := by unfold PullEndpoint.shift PullEndpoint.derived; infer_instance
-  have : IsIso E₀ := IsIso.of_isIso_comp_right E₀ (D'.R.map line.shift)
   unfold TracePullback
-  change IsIso E₀ ∧ F.map τ ≫ c.derived = E₀ ≫ D'.R.map line.shift ≫ τ'
-  refine And.intro (show IsIso E₀ from inferInstance) ?_
-  simpa only [E, asIso_hom, Category.assoc] using he
+  exact trace_of_mapped_diagonal_components_factor F v B v' B'
+    E₀ (D'.R.map line.shift) (asIso c.derived) τ τ'
+    hvt hBt hvt' hBt' hzero hlow hhigh
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

@@ -243,7 +243,6 @@ private theorem finiteCochainModelAdditive (n : ℕ) :
 
 attribute [local instance] finiteRestrictionCommShift finiteCochainModelAdditive
 
-set_option maxHeartbeats 1200000 in
 -- Normalize the independently presented coefficient categories in the recorded unit equation.
 private theorem finite_adj_shift (n : ℕ)
     (s : (coefficientFiniteDerivedExtension l E W n).CommShift ℤ)
@@ -278,9 +277,10 @@ private theorem finite_adj_shift (n : ℕ)
         (R := completedIntegralCommRingSheafUnrestricted l E W) K
     exact ⟨Q, f, hQ, hf⟩
   · intro Q hQ
-    erw [finiteCochainModel_counit l E W n Q hQ]
     apply (Iso.eq_comp_inv (R.mapDerivedCategoryFactors.app _)).2
     have hu := CompletionUnit.finiteModel_unit l E W Q hQ n
+    -- Normalize the named model instead of searching inside the expanded cochain counit.
+    simp only [← finiteCochainModel_counit l E W n Q hQ] at hu
     with_unfolding_all exact (Category.assoc _ _ _).trans hu
 
 -- Assemble the actual sequence projection from exact restriction and the derived limit.
@@ -313,7 +313,6 @@ private theorem sequence_projection_shift (n : ℕ) :
   dsimp only [coefficientSequenceProjection]
   infer_instance
 
-set_option maxHeartbeats 600000 in
 -- Unfold coefficient-category aliases when identifying the two forms of the finite shift square.
 /-- The shift of reduction adjoint to the canonical total-limit shift agrees with
 all finite K-flat scalar-extension models and the supplied evaluation isomorphisms.
@@ -390,9 +389,10 @@ theorem purReductionFiniteShiftNormalization
     let := sf n
     have := hsf n
     have h := NatTrans.shift_app_comm (finiteCochainModel l E W n).ε r Q
-    rw [finiteCochainModel_counit l E W n Q hQ,
-      finiteCochainModel_counit l E W n (Q⟦r⟧) hQr] at h
     simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+    -- Use the cochain counits on both sides, with the same composition normal form as h.
+    simp only [← finiteCochainModel_counit l E W n Q hQ,
+      ← finiteCochainModel_counit l E W n (Q⟦r⟧) hQr, Category.assoc]
     with_unfolding_all exact h
   · intro n
     let := sf n

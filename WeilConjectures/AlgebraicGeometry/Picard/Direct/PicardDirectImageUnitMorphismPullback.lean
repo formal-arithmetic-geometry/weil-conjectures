@@ -75,12 +75,22 @@ private theorem singlePullback_naturality
 end Modules
 end
 
+/-- Compare two factorizations through an epimorphism using a faithful functor. -/
+private theorem cancel_single_comparison
+    {C D : Type*} [Category C] [Category D] (H : C ⥤ D) [H.Faithful]
+    {A B B' N : C} {Z : D} (P : Z ⟶ H.obj A) [Epi P]
+    (r : Z ⟶ H.obj B) (s : Z ⟶ H.obj B')
+    (a : A ⟶ B) (b : B ⟶ N) (c : A ⟶ B') (d : B' ⟶ N)
+    (hr : r = P ≫ H.map a) (hs : s = P ≫ H.map c)
+    (h : r ≫ H.map b = s ≫ H.map d) : a ≫ b = c ≫ d := by
+  apply H.map_injective
+  apply (cancel_epi P).mp
+  simpa only [Functor.map_comp, Category.assoc, hr, hs] using h
+
 set_option maxRecDepth 2048 in
 attribute [local irreducible] Modules.tensorPullback picardDirectImageUnitMorphism in
 set_option cleanup.letToHave false in
 -- Preserve the explicit signature lets; cleanup expands the large tensor-adjunction choices.
-set_option maxHeartbeats 600000 in
--- Fixed derived choices and single-functor comparisons need a larger elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pullback compatibility of the underlying module morphisms, before evaluating
@@ -150,9 +160,9 @@ theorem picardDirectImageUnitMorphism_pullback
   let u' := SheafOfModules.pullbackObjUnitToUnit p'.toRingCatSheafHom
   let ui := SheafOfModules.pullbackObjUnitToUnit i.toRingCatSheafHom
   let uj := SheafOfModules.pullbackObjUnitToUnit j.toRingCatSheafHom
-  generalize hn_def : picardDirectImageUnitMorphism f L W k t ξ = n
-  generalize hn'_def : picardDirectImageUnitMorphism f L W k t'
-    (picardDerivedModelRestriction E i t t' h ξ) = n'
+  let n := picardDirectImageUnitMorphism f L W k t ξ
+  let n' := picardDirectImageUnitMorphism f L W k t'
+    (picardDerivedModelRestriction E i t t' h ξ)
   let H := DerivedCategory.singleFunctor
     (SheafOfModules.{v} (moduleRings (pullback f (t' ≫ k)).toRingedSpace)) 0
   let A := (DerivedCategory.singleFunctor
@@ -172,10 +182,8 @@ theorem picardDirectImageUnitMorphism_pullback
   have hsquare := Modules.canonicalSinglePullbackSquare p i j p' hj₂ V N (u ≫ n)
   have hpaste := picardDirectImageDerivedTranspose_pasting f L W k i t t' h j hj₁ hj₂ ξ
   have ht := picardDirectImageDerivedTranspose_single f L W k t ξ
-  rw [hn_def] at ht
   have ht' := picardDirectImageDerivedTranspose_single f L W k t'
     (picardDerivedModelRestriction E i t t' h ξ)
-  rw [hn'_def] at ht'
   have hleft := congrArg (fun q ↦ D ≫ (derivedPullback j).map q ≫
     Modules.canonicalSinglePullbackMap j N ≫ H.map d.hom) ht
   have hright := congrArg (fun q ↦ (derivedPullback p').map
@@ -198,24 +206,17 @@ theorem picardDirectImageUnitMorphism_pullback
     P ≫ H.map (b.inv ≫ (Modules.pullback j).map (u ≫ n)) := by
       with_reducible
         simpa only [P, D, A, b, H, Category.assoc] using hsquare
-  have hderived : P ≫ H.map (b.inv ≫ (Modules.pullback j).map (u ≫ n) ≫ d.hom) =
-      P ≫ H.map ((Modules.pullback p').map ui ≫ u' ≫ n') := by
-    calc
-      _ = (D ≫ (derivedPullback j).map
-          (Modules.canonicalSinglePullbackMap p V ≫
-            (DerivedCategory.singleFunctor _ 0).map (u ≫ n)) ≫
-          Modules.canonicalSinglePullbackMap j N) ≫ H.map d.hom := by
-            rw [hsquare']
-            with_reducible simp only [Functor.map_comp, Category.assoc]
-      _ = _ := by
-        with_reducible simp only [Functor.map_comp, Category.assoc] at hpaste' ⊢
-        rw [hpaste']
-        have hsingle' := congrArg (fun q ↦
-          (derivedPullback p').map (Modules.canonicalSinglePullbackMap i V) ≫ q ≫
-            H.map (u' ≫ n')) hsingle
-        with_reducible
-          simpa only [H, P, A, V, V', Scheme.ringCatSheaf, Modules.pullback,
-            Functor.map_comp, Category.assoc] using hsingle'
+  have hsingle' : (derivedPullback p').map
+      (Modules.canonicalSinglePullbackMap i V ≫
+        (DerivedCategory.singleFunctor
+          (SheafOfModules.{v} (moduleRings T'.toRingedSpace)) 0).map ui) ≫
+      Modules.canonicalSinglePullbackMap p' V' =
+    P ≫ H.map ((Modules.pullback p').map ui) := by
+    have hn := congrArg (fun q ↦
+      (derivedPullback p').map (Modules.canonicalSinglePullbackMap i V) ≫ q) hsingle
+    with_reducible
+      simpa only [H, P, V, V', Scheme.ringCatSheaf, Modules.pullback,
+        Functor.map_comp, Category.assoc] using hn
   let : SheafOfModules.IsInvertible.{v, v, v} V := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} V' := SheafOfModules.instIsInvertibleUnit.{v, v, v}
   let : SheafOfModules.IsInvertible.{v, v, v} ((Modules.pullback i).obj V) :=
@@ -223,7 +224,8 @@ theorem picardDirectImageUnitMorphism_pullback
   let := Modules.isIso_canonicalSinglePullbackMap i V
   let := Modules.isIso_canonicalSinglePullbackMap p' ((Modules.pullback i).obj V)
   have : IsIso P := by dsimp only [P]; infer_instance
-  have hm := H.map_injective ((cancel_epi P).mp hderived)
+  have hm := cancel_single_comparison H P _ _ _ d.hom _ (u' ≫ n') hsquare' hsingle'
+    (by simpa only [Category.assoc] using hpaste')
   have hunit := Modules.pullbackStructureUnitSquare p i j p' hj₂
   change b.inv ≫ (Modules.pullback j).map u ≫ uj =
     (Modules.pullback p').map ui ≫ u' at hunit

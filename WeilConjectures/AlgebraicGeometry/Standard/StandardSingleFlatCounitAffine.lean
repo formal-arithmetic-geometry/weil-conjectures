@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+import all WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -130,8 +131,6 @@ private theorem affine_single_unit_iso
     (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map r)) _
 
 set_option backward.isDefEq.respectTransparency.instanceSearchTypes false in
-set_option maxHeartbeats 400000 in
--- The scheme-module and ringed-space derived category instances need extra elaboration.
 /-- The single complex of the actual affine direct image realizes the pinned comparison.
 Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 08HY,
 base-change mate; Tag 0DJ9, initial affine case.
@@ -247,7 +246,7 @@ private theorem affine_single_counit_comparison
       change IsIso ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((NatTrans.mapHomologicalComplex α (.up ℤ)).app C))
       infer_instance
-    dsimp [x, moduleHomotopyBaseChange]
+    dsimp only [x, moduleHomotopyBaseChange, NatTrans.comp_app]
     infer_instance
   let t := DerivedCategory.Qh.{u + 1}.mapIso
       ((G.mapHomotopyCategory (.up ℤ)).mapIso ρ) ≪≫
@@ -257,12 +256,7 @@ private theorem affine_single_counit_comparison
   let εp := (SingleComplexBaseChange.counit p)
   have hp : Scheme.picardTermwiseSingleMap p N =
       εp.app D ≫ DerivedCategory.Qh.{u + 1}.map σ.hom := by
-    dsimp only [Scheme.picardTermwiseSingleMap, Scheme.Modules.canonicalSinglePullbackMap]
-    simp only [cast_eq, Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
-      CategoryTheory.Functor.map_id, Category.comp_id, εp, SingleComplexBaseChange.counit,
-      D, C, σ, P, HomotopyCategory.singleFunctor, HomotopyCategory.singleFunctors,
-      CochainComplex.singleFunctor, CochainComplex.singleFunctors, SingleFunctors.postcomp,
-      Functor.comp_obj, Functor.mapIso_hom, Iso.app_hom]
+    exact Scheme.single_map_normalize p N
   have hc := derivedBaseChange_unit_compatibility.{u, u + 1} f f' g p pullback.condition D
   let εg := SingleComplexBaseChange.counit g
   have heq : (derivedPullback.{u, u + 1} g).map e.inv ≫ standardSingleBaseChangeMap f N g =
@@ -298,12 +292,7 @@ private theorem affine_single_counit_comparison
         dsimp only [t, Iso.trans_hom, Functor.mapIso_hom, asIso_hom]
         simp only [Category.assoc]
         erw [reassoc_of% hn]
-  change standardSingleBaseChangeMap f N g =
-    (derivedPullback.{u, u + 1} g).map e.hom ≫
-      εg.app ((HomotopyCategory.quotient _ (.up ℤ)).obj K) ≫ t.hom
-  apply (cancel_epi ((derivedPullback.{u, u + 1} g).map e.inv)).mp
-  rw [← Functor.map_comp_assoc, e.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp]
-  exact heq
+  exact ((derivedPullback.{u, u + 1} g).mapIso e.symm).eq_inv_comp.mpr heq
 
 /-- Affine source charts have bounded flat presentations over affine bases.
 Source: Stacks Project, Tag 0A1D, affine tensor calculation; Tag 0DJ9,

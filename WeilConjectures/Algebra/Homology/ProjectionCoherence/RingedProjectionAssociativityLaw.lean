@@ -168,7 +168,8 @@ private theorem edge_equation {A B : RingedTensorCorner.{u, w}}
     comparison e ((totalTensor A).obj (P, Q)) ≫ DerivedCategory.Q.map (delta e P Q) ≫
       b.representative.hom.app
         (⟨(pull e).obj P, pull_good e hp⟩, ⟨(pull e).obj Q, pull_good e hq⟩) := by
-  exact ringedTensorEdgeRepresentativeEquation e a b P Q hp hq
+  dsimp only [comparison, delta]
+  exact ringedTensorEdgeRepresentativeEquation (A := A) (B := B) e a b P Q hp hq
     (pull_good e hp) (pull_good e hq)
 
 attribute [local irreducible] monoidalCategory

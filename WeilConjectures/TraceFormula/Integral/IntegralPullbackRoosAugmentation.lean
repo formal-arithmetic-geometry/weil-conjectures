@@ -54,6 +54,25 @@ private theorem cone_ext
         ← CochainComplex.mappingCocone.id_X δ i (i - 1) (by omega)]
       rw [Preadditive.comp_add, ← Category.assoc, ← Category.assoc]
 
+/-- A Roos map preserves a vanishing shifted coordinate, also after precomposition. -/
+private theorem roosMap_comp_snd_eq_zero
+    {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
+    {P Q : CochainComplex A ℤ} {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ}
+    (a : P ⟶ Q) (f : Q ⟶ integralOperationsRoos C) (q : C ⟶ D)
+    (hf : ∀ i : ℤ, f.f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i (i - 1) (by omega) = 0)
+    (i : ℤ) :
+    (a ≫ f ≫ integralOperationsRoosFunctor.map q).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary D)).v i (i - 1) (by omega) =
+        0 := by
+  have hq : (integralOperationsRoosFunctor.map q).f i ≫
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary D)).v i (i - 1) (by omega) =
+      (CochainComplex.mappingCocone.snd (scalarRoosBoundary C)).v i (i - 1) (by omega) ≫
+        (Limits.Pi.map (fun n : ℕ ↦ q.app (op n))).f (i - 1) :=
+    (IntegralAmbient.roosMap_coordinates q).2 i (i - 1) (by omega)
+  simp only [HomologicalComplex.comp_f, Category.assoc]
+  rw [hq, ← Category.assoc (f.f i), hf i, zero_comp, comp_zero]
+
 private theorem cast_map
     {A : Type*} [Category A] {P Q : A ⥤ AddCommGrpCat.{u + 1}} (e : P = Q)
     {U V : A} (f : U ⟶ V) (x : Q.obj U) :
@@ -80,8 +99,6 @@ private theorem restrictedSection_naturality
     rfl
   exact cast_map e f x
 
-set_option maxHeartbeats 400000 in
--- The sectionwise chase through the tower unit and q needs more than the default.
 /-- The defining Roos lift of the inverse-image comparison is the limit lift of the
 inverse image of a strict quotient presentation, followed by the whole-tower tensor
 unit and the normalized pullback tower identification.
@@ -166,11 +183,6 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
   have hi2 (i : ℤ) : (integralComparisonLimitToRoos l E Z T).f i ≫
       (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
         i (i - 1) (by omega) = 0 := hi.2 i (i - 1) (by omega)
-  have hsecond (i : ℤ) : (integralOperationsRoosFunctor.map q.hom).f i ≫
-      (CochainComplex.mappingCocone.snd δ).v i (i - 1) (by omega) =
-      (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
-        i (i - 1) (by omega) ≫ (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) :=
-    (IntegralAmbient.roosMap_coordinates q.hom).2 i (i - 1) (by omega)
   change _ = a ≫ integralComparisonLimitToRoos l E Z T ≫
     integralOperationsRoosFunctor.map q.hom
   apply cone_ext δ
@@ -196,6 +208,9 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
       _ = _ := by
         rw [inverseImageReductionProduct, Pi.lift_comp_π]
         ext i U x
+        change ((q.hom.app (op n)).f i).val.app U
+          ((a.f i ≫ limit.π (T.X i) (op n)).val.app U x) = _
+        rw [ha]
         let V := (proEtaleIsoPostcompose h).obj U.unop
         let t := unrestrictedIntegralTensorSection l E W n (P.X i) (op V) 1 x
         let y := integralComparisonSequenceSection l E W (C.X i) n (op V)
@@ -214,15 +229,18 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
             (integralComparisonSequenceGenerator l E h (C.X i) n V y))
         have hk : ((κ n).hom.f i).val.app (op V) (((κ n).inv.f i).val.app (op V) t) = t :=
           congrArg (fun k ↦ (k.f i).val.app (op V) t) (κ n).inv_hom_id
-        have hbx := hb n i (op V) x
-        have e1 : ((a ≫ (NatTrans.mapHomologicalComplex (lim.π (op n))
-            (.up ℤ)).app T) ≫ q.hom.app (op n)).f i =
-            (c.f i).app (op n) ≫ (q.hom.app (op n)).f i := by
-          rw [HomologicalComplex.comp_f, ← ha]
+        have hy : coefficientEvaluationSection l E W (C.X i) n (op V) y =
+            ((κ n).inv.f i).val.app (op V) t := by
+          dsimp only [y, integralComparisonSequenceSection, coefficientEvaluationSection]
+          rw [← ConcreteCategory.comp_apply, eqToHom_trans]
           rfl
-        rw [e1]
+        have hqy := hq n i V y
+        rw [hy, hk] at hqy
+        have hbx := hb n i (op V) x
         refine Eq.trans ?_ hθ.symm
-        refine Eq.trans ?_ (hn.trans (congrArg _ ((hq n i V y).trans (congrArg _ hk))))
+        refine Eq.trans ?_ (hn.trans (congrArg
+          ((((integralOperationsPullbackLevel l E h n).obj P).X i).val.map
+            (proEtaleIsoCommaArrow h U.unop).op) hqy))
         exact congrArg (fun z ↦ ((q.hom.app (op n)).f i).val.app U z)
           ((congrArg (fun z ↦ (((integralTowerInverseImageUnit l E h).hom.app (C.X i)).app
             (op n)).val.app U z) hbx).trans (hu.trans hr.symm))
@@ -232,13 +250,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
         unfold inverseImageRoosComparisonComplex
         rw [CochainComplex.mappingCocone.lift_f_snd_v]
         rfl
-      _ = a.f i ≫ ((integralComparisonLimitToRoos l E Z T).f i ≫
-          (CochainComplex.mappingCocone.snd (scalarRoosBoundary T.asFunctor)).v
-            i (i - 1) (by omega)) ≫
-          (Limits.Pi.map (fun n : ℕ ↦ q.hom.app (op n))).f (i - 1) := by
-        rw [hi2 i]
-        simp
-      _ = _ := by
-        simp only [HomologicalComplex.comp_f, Category.assoc, hsecond i]
+      _ = _ :=
+        (roosMap_comp_snd_eq_zero a (integralComparisonLimitToRoos l E Z T) q.hom hi2 i).symm
 
 end WeilConjectures

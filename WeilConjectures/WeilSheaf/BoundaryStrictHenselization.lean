@@ -132,6 +132,14 @@ lemma specMap_apply_asIdeal {B B' : Type u} [CommRing B] [CommRing B'] (f : B �
     (Spec.map (CommRingCat.ofHom f) y).asIdeal = Ideal.comap f y.asIdeal :=
   rfl
 
+/-- The image of a localization away from `a` consists of the primes not containing `a`. -/
+private lemma specMap_mem_range_of_isLocalizationAway {A B : Type u} [CommRing A] [CommRing B]
+    [Algebra A B] (a : A) [IsLocalization.Away a B] (q : Spec (.of A)) :
+    q ∈ Set.range (Spec.map (CommRingCat.ofHom (algebraMap A B))) ↔ a ∉ q.asIdeal := by
+  change q ∈ Set.range (PrimeSpectrum.comap (algebraMap A B)) ↔ _
+  rw [PrimeSpectrum.localization_away_comap_range B a]
+  exact Iff.rfl
+
 /-- A ring map from a local ring to a field whose kernel is the maximal ideal maps the closed
 point to the closed point. -/
 lemma specMap_closedPoint_of_forall_eq_zero_iff {B L : Type u} [CommRing B] [IsLocalRing B]
@@ -493,8 +501,6 @@ section Punctured
 variable {U : Scheme.{u}} [U.Over (Spec (.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
   [j.IsOver (Spec (.of k₀))]
 
-set_option maxHeartbeats 400000 in
--- instance search for the localization and pullback squares is slow
 omit [Finite k₀] [IsSepClosed Ω] in
 include x hxW in
 /-- **The punctured neighbourhood.** If `U ∩ W = D(ϖ)` for some `0 ≠ ϖ` in the prime of `x`, the
@@ -539,13 +545,11 @@ theorem exists_iso_pullback_geometricFiberMap
           q ∈ PrimeSpectrum.basicOpen ϖ := by
       rw [← hW.fromSpec_preimage_basicOpen]
       rfl
-    rw [SetLike.mem_coe, SetLike.mem_coe, Scheme.Hom.mem_preimage, h1, h2,
-      Scheme.Hom.mem_opensRange, PrimeSpectrum.mem_basicOpen, specMap_apply_asIdeal,
-      Ideal.mem_comap, ← PrimeSpectrum.mem_basicOpen, ← SetLike.mem_coe,
-      ← PrimeSpectrum.localization_away_comap_range
-        (IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField)))
-        (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) ϖ)]
-    exact Iff.rfl
+    change (specInertiaInvariantsTo hW Q) q ∈ j.opensRange ↔ q ∈ Set.range iU
+    rw [h1, h2]
+    exact (specMap_mem_range_of_isLocalizationAway
+      (B := IntermediateField.fixedField (Q.inertia Gal(Ω/C.functionField)))
+      (algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) ϖ) q).symm
   have hrange : Set.range (iU ≫ (specInertiaInvariantsTo hW Q)) ⊆ Set.range j := by
     rintro _ ⟨y, rfl⟩
     have h : iU y ∈ iU.opensRange := Scheme.Hom.mem_opensRange.2 ⟨y, rfl⟩

@@ -89,8 +89,105 @@ private theorem iso_of_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.{u} X)
         congr 1)
   exact ⟨eF.symm ≪≫ eG⟩
 
-set_option maxHeartbeats 700000 in
--- Localized equivalences and dependent chart transports require more elaboration heartbeats.
+private theorem exists_localizedEquiv_mk {R M N : Type*} [CommRing R]
+    [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N]
+    (T : Submonoid R) (e : M ≃ₗ[R] N) :
+    ∃ L : LocalizedModule T M ≃ₗ[Localization T] LocalizedModule T N,
+      ∀ (y : M) (h : T), L (mk y h) = mk (e y) h := by
+  refine ⟨IsLocalizedModule.mapEquiv T (mkLinearMap _ M) (mkLinearMap _ N)
+    (Localization T) e, ?_⟩
+  intro y h
+  exact LocalizedModule.map_mk _ _ _ _
+
+private theorem exists_away_fraction {R M : Type*} [CommRing R] [AddCommGroup M]
+    [Module R M] (f : R) (x : LocalizedModule.Away f M) :
+    ∃ (y : M) (m : ℕ), x = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := by
+  induction x using LocalizedModule.induction_on with
+  | h y s =>
+    obtain ⟨m, hm⟩ := s.property
+    have hs : s = (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := Subtype.ext hm.symm
+    exact ⟨y, m, by rw [hs]⟩
+
+private theorem away_chart_map_naturality {R M N P P' Q Q' : Type*} [CommRing R]
+    [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N]
+    (f g : R) (e : M →ₗ[R] N)
+    (A : P → LocalizedModule.Away f M) (A' : P' → LocalizedModule.Away g M)
+    (B : Q → LocalizedModule.Away f N) (B' : Q' → LocalizedModule.Away g N)
+    (φ : P → Q) (φ' : P' → Q')
+    (L : LocalizedModule.Away f M → LocalizedModule.Away f N)
+    (L' : LocalizedModule.Away g M → LocalizedModule.Away g N)
+    (hB' : Function.Injective B')
+    (hφ : ∀ s, B (φ s) = L (A s)) (hφ' : ∀ s, B' (φ' s) = L' (A' s))
+    (hL : ∀ (y : M) (h : Submonoid.powers f), L (mk y h) = mk (e y) h)
+    (hL' : ∀ (y : M) (h : Submonoid.powers g), L' (mk y h) = mk (e y) h)
+    (u : P → P') (v : Q → Q') (a : R) (d : ℕ)
+    (hres : ∀ (m : ℕ) (y : M) (s : P),
+      A s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
+      A' (u s) = mk (a ^ m • y) (⟨g ^ (d * m), ⟨d * m, rfl⟩⟩ : Submonoid.powers g))
+    (hbetaRes : ∀ (m : ℕ) (y : N) (s : Q),
+      B s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →
+      B' (v s) = mk (a ^ m • y) (⟨g ^ (d * m), ⟨d * m, rfl⟩⟩ : Submonoid.powers g))
+    (s : P) : φ' (u s) = v (φ s) := by
+  obtain ⟨y, m, hs⟩ := exists_away_fraction f (A s)
+  have ht : B (φ s) = mk (e y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) := by
+    rw [hφ, hs, hL]
+  apply hB'
+  rw [hφ', hres m y s hs, hbetaRes m (e y) (φ s) ht, hL', map_smul]
+
+private theorem addEquiv_of_matching_ranges
+    {M N P Q : Type*} [AddCommGroup M] [AddCommGroup N] [AddCommGroup P] [AddCommGroup Q]
+    (A : M →+ P) (B : N →+ Q) (hA : Function.Injective A) (hB : Function.Injective B)
+    (e : P ≃+ Q) (hrange : ∀ x, x ∈ A.range ↔ e x ∈ B.range) :
+    ∃ φ : M ≃+ N, ∀ s, B (φ s) = e (A s) := by
+  let toB : M →+ B.range :=
+    { toFun := fun s ↦ ⟨e (A s), (hrange _).mp ⟨s, rfl⟩⟩
+      map_zero' := Subtype.ext (by simp)
+      map_add' := fun s t ↦ Subtype.ext (by simp) }
+  let φ : M →+ N := (AddMonoidHom.ofInjective hB).symm.toAddMonoidHom.comp toB
+  have hφ (s : M) : B (φ s) = e (A s) := AddMonoidHom.apply_ofInjective_symm hB _
+  have hbij : Function.Bijective φ := by
+    constructor
+    · intro s t hst
+      apply hA
+      apply e.injective
+      rw [← hφ, ← hφ, hst]
+    · intro t
+      have ht : e.symm (B t) ∈ A.range := by
+        apply (hrange _).mpr
+        rw [AddEquiv.apply_symm_apply]
+        exact ⟨t, rfl⟩
+      obtain ⟨s, hs⟩ := ht
+      refine ⟨s, hB ?_⟩
+      rw [hφ, hs, AddEquiv.apply_symm_apply]
+  exact ⟨AddEquiv.ofBijective φ hbij, hφ⟩
+
+private theorem iso_of_indexed_basis (X : TopCat.{u}) (R : TopCat.Sheaf RingCat.{u} X)
+    {I : Type u} (D : I → Opens X) (hB : Opens.IsBasis (Set.range D))
+    (hcap : ∀ U V : Set.range D, U.val ⊓ V.val ∈ Set.range D)
+    (hrefine : ∀ (U : Set.range D) (C : Set (Set.range D)),
+      (∀ V ∈ C, V.val ≤ U.val) → (⨆ V ∈ C, V.val) = U.val →
+      ∃ (n : ℕ) (W : Fin n → Set.range D), (⨆ i, (W i).val) = U.val ∧
+        ∀ i, ∃ V ∈ C, (W i).val ≤ V.val)
+    (F G : SheafOfModules.{u} R)
+    (lin : ∀ i, F.val.obj (op (D i)) ≃ₗ[R.obj.obj (op (D i))] G.val.obj (op (D i)))
+    (hlin : ∀ i j (h : D j ≤ D i) (s : F.val.obj (op (D i))),
+      lin j (F.val.map (homOfLE h).op s) = G.val.map (homOfLE h).op (lin i s)) :
+    Nonempty (F ≅ G) := by
+  classical
+  let idx (U : Set.range D) : I := U.property.choose
+  have hidx (U : Set.range D) : D (idx U) = U.val := U.property.choose_spec
+  let l (U : Set.range D) : F.val.obj (op U.val) ≃ₗ[R.obj.obj (op U.val)]
+      G.val.obj (op U.val) := (hidx U) ▸ lin (idx U)
+  have hlin' (i j : I) (U V : Opens X) (hi : D i = U) (hj : D j = V)
+      (inc : V ≤ U) (s : F.val.obj (op U)) :
+      (hj ▸ lin j) (F.val.map (homOfLE inc).op s) =
+        G.val.map (homOfLE inc).op ((hi ▸ lin i) s) := by
+    subst U V
+    exact hlin i j inc s
+  apply iso_of_basis X R (Set.range D) hB hcap hrefine F G l
+  intro U V h s
+  exact hlin' (idx U) (idx V) U.val V.val (hidx U) (hidx V) h s
+
 /-- A linear equivalence preserving numerator degrees compares sheaves given by charts.
 Source: Stacks Project, Constructions, Lemma 01M7; Sheaves on Spaces, Tags 009N and 009U;
 steps 2 and 3 of lem-sc-p1-homogeneous-basis-proj-coproduct.
@@ -182,14 +279,12 @@ theorem graded_chart_comparison (k : Type u) [Field k]
   let 𝒜 := homogeneousSubmodule (Fin 2) k
   let I := {p : S × ℕ // 0 < p.2 ∧ p.1 ∈ 𝒜 p.2}
   let D (f : I) := basicOpen 𝒜 f.val.1
-  let L (f : I) : LocalizedModule.Away f.val.1 M ≃ₗ[Localization.Away f.val.1]
-      LocalizedModule.Away f.val.1 N :=
-    IsLocalizedModule.mapEquiv (Submonoid.powers f.val.1)
-      (mkLinearMap _ M) (mkLinearMap _ N) (Localization.Away f.val.1) e
-  have hL (f : I) (y : M) (h : Submonoid.powers f.val.1) :
-      L f (mk y h) = mk (e y) h := by
-    change LocalizedModule.map (Submonoid.powers f.val.1) e.toLinearMap (mk y h) = _
-    exact LocalizedModule.map_mk _ _ _ _
+  have hL_exists (f : I) :
+      ∃ L : LocalizedModule.Away f.val.1 M ≃ₗ[Localization.Away f.val.1]
+          LocalizedModule.Away f.val.1 N,
+        ∀ (y : M) (h : Submonoid.powers f.val.1), L (mk y h) = mk (e y) h :=
+    exists_localizedEquiv_mk (Submonoid.powers f.val.1) e
+  choose L hL using hL_exists
   let A (f : I) := alpha f.val.1 f.val.2 f.property.1 f.property.2
   let B (f : I) := beta f.val.1 f.val.2 f.property.1 f.property.2
   have hrange (f : I) (x : LocalizedModule.Away f.val.1 M) :
@@ -205,30 +300,12 @@ theorem graded_chart_comparison (k : Type u) [Field k]
       · exact (hdegree n (e.symm y)).mpr (by simpa using hy)
       · apply (L f).injective
         simpa only [hL, LinearEquiv.apply_symm_apply] using heq
-  let toB (f : I) : F.val.obj (op (D f)) →+ (B f).range :=
-    { toFun := fun s ↦ ⟨L f (A f s), (hrange f _).mp ⟨s, rfl⟩⟩
-      map_zero' := Subtype.ext (by simp)
-      map_add' := fun s t ↦ Subtype.ext (by simp) }
-  let phi (f : I) : F.val.obj (op (D f)) →+ G.val.obj (op (D f)) :=
-    (AddMonoidHom.ofInjective
-      (hbeta f.val.1 f.val.2 f.property.1 f.property.2).1).symm.toAddMonoidHom.comp (toB f)
-  have hphi (f : I) (s : F.val.obj (op (D f))) : B f (phi f s) = L f (A f s) :=
-    AddMonoidHom.apply_ofInjective_symm
-      (hbeta f.val.1 f.val.2 f.property.1 f.property.2).1 _
-  have hbij (f : I) : Function.Bijective (phi f) := by
-    constructor
-    · intro s t hst
-      apply (halpha f.val.1 f.val.2 f.property.1 f.property.2).1
-      apply (L f).injective
-      rw [← hphi, ← hphi, hst]
-    · intro t
-      have ht : (L f).symm (B f t) ∈ (A f).range := by
-        apply (hrange f _).mpr
-        rw [LinearEquiv.apply_symm_apply]
-        exact ⟨t, rfl⟩
-      obtain ⟨s, hs⟩ := ht
-      refine ⟨s, (hbeta f.val.1 f.val.2 f.property.1 f.property.2).1 ?_⟩
-      rw [hphi, hs, LinearEquiv.apply_symm_apply]
+  have hphi_exists (f : I) : ∃ φ : F.val.obj (op (D f)) ≃+ G.val.obj (op (D f)),
+      ∀ s, B f (φ s) = L f (A f s) :=
+    addEquiv_of_matching_ranges (A f) (B f)
+      (halpha f.val.1 f.val.2 f.property.1 f.property.2).1
+      (hbeta f.val.1 f.val.2 f.property.1 f.property.2).1 (L f).toAddEquiv (hrange f)
+  choose phi hphi using hphi_exists
   have hphiScalar (f : I) (q : (Proj 𝒜).presheaf.obj (op (D f)))
       (s : F.val.obj (op (D f))) : phi f (q • s) = q • phi f s := by
     let Riso := basicOpenIsoAway 𝒜 f.val.1 f.property.2 f.property.1
@@ -240,36 +317,24 @@ theorem graded_chart_comparison (k : Type u) [Field k]
     rw [hscalar, hbetaScalar, hphi, map_smul]
   let lin (f : I) : F.val.obj (op (D f)) ≃ₗ[(Proj 𝒜).presheaf.obj (op (D f))]
       G.val.obj (op (D f)) :=
-    { AddEquiv.ofBijective (phi f) (hbij f) with map_smul' := hphiScalar f }
+    { phi f with map_smul' := hphiScalar f }
   have hlin (f g : I) (inc : D g ≤ D f) (s : F.val.obj (op (D f))) :
       lin g (F.val.map (homOfLE inc).op s) =
         G.val.map (homOfLE inc).op (lin f s) := by
-    obtain ⟨e', c, a, he', ha, hrel⟩ :=
+    have hrelation : ∃ (e' c : ℕ) (a : S),
+        0 < e' ∧ a ∈ 𝒜 c ∧ g.val.1 ^ e' = a * f.val.1 :=
       ((standardOpenProperties.{u, u, u} 𝒜).2.2.1 f.val.1 g.val.1 f.val.2 g.val.2
         f.property.1 g.property.1 f.property.2 g.property.2).1.mp inc
-    have hx : A f s ∈ degreeZeroFractions (fun n ↦ (𝒜 n : Set S)) 𝓜
-        (Submonoid.powers f.val.1) := by
-      rw [← (halpha f.val.1 f.val.2 f.property.1 f.property.2).2]
-      exact ⟨s, rfl⟩
-    obtain ⟨n, y, h, _, _, hy⟩ := hx
-    obtain ⟨m, hm⟩ := h.property
-    have hh : h = (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) :=
-      Subtype.ext hm.symm
-    have hs : A f s = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) := by
-      rw [← hy, hh]
-    have ht : B f (lin f s) =
-        mk (e y) (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) := by
-      change B f (phi f s) = _
-      rw [hphi, hs, hL]
-    apply (hbeta g.val.1 g.val.2 g.property.1 g.property.2).1
-    change B g (phi g (F.val.map (homOfLE inc).op s)) =
-      B g (G.val.map (homOfLE inc).op (lin f s))
-    rw [hphi]
-    rw [hres f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
-      f.property.2 g.property.2 inc e' c a he' ha hrel m y s hs]
-    rw [hbetaRes f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
-      f.property.2 g.property.2 inc e' c a he' ha hrel m (e y) (lin f s) ht]
-    rw [hL, map_smul]
+    obtain ⟨e', c, a, he', ha, hrel⟩ := hrelation
+    exact away_chart_map_naturality f.val.1 g.val.1 e.toLinearMap
+      (A f) (A g) (B f) (B g) (lin f) (lin g) (L f) (L g)
+      (hbeta g.val.1 g.val.2 g.property.1 g.property.2).1
+      (hphi f) (hphi g) (hL f) (hL g)
+      (F.val.map (homOfLE inc).op) (G.val.map (homOfLE inc).op) a e'
+      (hres f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
+        f.property.2 g.property.2 inc e' c a he' ha hrel)
+      (hbetaRes f.val.1 g.val.1 f.val.2 g.val.2 f.property.1 g.property.1
+        f.property.2 g.property.2 inc e' c a he' ha hrel) s
   let basis := Set.range D
   have hBasis : Opens.IsBasis basis := by
     convert (standardOpenProperties.{u, u, u} 𝒜).1 using 1
@@ -303,20 +368,7 @@ theorem graded_chart_comparison (k : Type u) [Field k]
     · intro i
       obtain ⟨V, hV⟩ := hsub i
       exact ⟨V.val, V.property, hV⟩
-  let idx (U : basis) : I := U.property.choose
-  have hidx (U : basis) : D (idx U) = U.val := U.property.choose_spec
-  let l (U : basis) : F.val.obj (op U.val) ≃ₗ[(Proj 𝒜).presheaf.obj (op U.val)]
-      G.val.obj (op U.val) := (hidx U) ▸ lin (idx U)
-  have hlin' (f g : I) (U V : (Proj 𝒜).Opens) (hf : D f = U) (hg : D g = V)
-      (inc : V ≤ U) (s : F.val.obj (op U)) :
-      (hg ▸ lin g) (F.val.map (homOfLE inc).op s) =
-        G.val.map (homOfLE inc).op ((hf ▸ lin f) s) := by
-    subst U
-    subst V
-    exact hlin f g inc s
-  apply iso_of_basis (Proj 𝒜).toTopCat (Proj 𝒜).ringCatSheaf
-    basis hBasis hcap hrefine F G l
-  intro U V h s
-  exact hlin' (idx U) (idx V) U.val V.val (hidx U) (hidx V) h s
+  exact iso_of_indexed_basis (Proj 𝒜).toTopCat (Proj 𝒜).ringCatSheaf
+    D hBasis hcap hrefine F G lin hlin
 
 end AlgebraicGeometry.Proj

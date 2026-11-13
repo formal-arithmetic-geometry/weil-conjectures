@@ -232,8 +232,18 @@ theorem readingIso_trans_right
   simp only [Functor.comp_map, Functor.id_map] at H
   simp [readingIso, H]
 
-set_option maxHeartbeats 1000000 in
--- Native derived pullback types need the allowance used by their coherence laws.
+private theorem reading_restrict_pasting {K : Type*} [Category K]
+    {T T' X X' Y Y' Z Z' R : K}
+    (p : T ≅ X) (q : T ≅ Y) (p' : T' ≅ X') (q' : T' ≅ Y')
+    (k : X ≅ X') (l : Y ≅ Y') (m : T ⟶ T') (s : Y' ≅ R)
+    (r : X' ⟶ Z) (t : Z ⟶ Z') (v : Z' ⟶ R)
+    (n₁ : k.hom ≫ p'.inv = p.inv ≫ m)
+    (n₂ : m ≫ q'.hom = q.hom ≫ l.hom)
+    (H : r ≫ t ≫ v = p'.inv ≫ q'.hom ≫ s.hom) :
+    s.inv ≫ l.inv ≫ q.inv ≫ p.hom ≫ k.hom ≫ r ≫ t ≫ v = 𝟙 R := by
+  rw [H, reassoc_of% n₁, Iso.hom_inv_id_assoc, reassoc_of% n₂,
+    Iso.inv_hom_id_assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id]
+
 /-- A family comparison, restricted and then read at the same section, gives the identity.
 Source: restriction of family constancy, using the compositor associativity and unit laws
 (blueprint: lem-pur-native-section-pullback). -/
@@ -244,19 +254,28 @@ theorem readingIso_restrict (hf : f ≫ a = a' ≫ b) (h : i ≫ a = 𝟙 B)
         (((upperStar Λ f).leftDerivedFunctor).mapIso κ ≪≫
           ((compAlong Λ f a (f ≫ a) rfl).app C).symm ≪≫
           (compAlong Λ a' b (f ≫ a) hf.symm).app C) = Iso.refl _ := by
-  ext
+  rw [readingIso]
+  apply Iso.ext
   have n₁ := (compAlong Λ i' f (i' ≫ f) rfl).inv.naturality κ.hom
   have n₂ := (compAlong Λ b i (i' ≫ f) hi.symm).hom.naturality κ.hom
   simp only [Functor.comp_map] at n₁ n₂
   have H := section_commute Λ b a a' f i i' hf hi h h' C
-  simp only [readingIso, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
+  simp only [Functor.map_comp, Category.assoc] at H
+  simp only [Iso.trans_hom, Iso.symm_hom, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_hom, Functor.mapIso_inv, Iso.app_hom, Iso.app_inv, Iso.refl_hom,
     Functor.map_comp, Category.assoc]
-  have H' := H
-  simp only [Functor.map_comp, Category.assoc] at H'
-  rw [H', reassoc_of% n₁, Iso.hom_inv_id_app_assoc, reassoc_of% n₂,
-    Iso.inv_hom_id_app_assoc]
-  simp
+  exact reading_restrict_pasting
+    ((compAlong Λ i' f (i' ≫ f) rfl).app F)
+    ((compAlong Λ b i (i' ≫ f) hi.symm).app F)
+    ((compAlong Λ i' f (i' ≫ f) rfl).app _)
+    ((compAlong Λ b i (i' ≫ f) hi.symm).app _)
+    (((upperStar Λ i').leftDerivedFunctor).mapIso
+      (((upperStar Λ f).leftDerivedFunctor).mapIso κ))
+    (((upperStar Λ b).leftDerivedFunctor).mapIso
+      (((upperStar Λ i).leftDerivedFunctor).mapIso κ))
+    (((upperStar Λ (i' ≫ f)).leftDerivedFunctor).map κ.hom)
+    (((upperStar Λ b).leftDerivedFunctor).mapIso ((sectionIso Λ i a h).app C))
+    _ _ _ n₁ n₂ H
 
 end Reading
 

@@ -200,11 +200,23 @@ private theorem tensor_homology_iso_of_resolutions
     asIso (HomologicalComplex.homologyMap β j)⟩
 
 
+/-- Specialize the functorial flat replacement to one nonpositive complex. -/
+private theorem exists_nonpositive_flat_quasiIso (Y : Scheme.{u})
+    (T : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+    (hT : ∀ j : ℤ, 0 < j → IsZero (T.X j)) :
+    ∃ (E : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
+      (r : E ⟶ T),
+      (∀ j : ℤ, SheafOfModules.IsFlat (E.X j)) ∧
+      (∀ j : ℤ, 0 < j → IsZero (E.X j)) ∧ QuasiIso r := by
+  obtain ⟨F, ε, hF⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
+    (Opens.grothendieckTopology Y.carrier) Y.sheaf 0
+  exact ⟨F.obj ⟨T, hT⟩, ε.app ⟨T, hT⟩,
+    (hF ⟨T, hT⟩).1, (hF ⟨T, hT⟩).2.1, (hF ⟨T, hT⟩).2.2.2⟩
+
+
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Total tensor and the bounded replacement involve large module-category instance terms.
 /-- The ordinary affine tensor comparison is compatible with one augmented algebraic
 comparison for each basic inclusion. Independence of the supplied comparison is not
 part of this statement.
@@ -286,36 +298,27 @@ theorem exists_selfTor_ordinary_localized_comparisons
           ∀ x, Q.val.map (homOfLE h).op (c U x) =
             c V (e.hom (HomologicalComplex.homologyMap k n x)) := by
   classical
-  let M := SheafOfModules.{u} (moduleRings Y.toRingedSpace)
-  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
-  let S := CochainComplex.singleFunctor M 0
+  intro B S Q
   let T := S.obj B
-  let P : ObjectProperty (CochainComplex M ℤ) :=
-    fun F ↦ ∀ j : ℤ, 0 < j → IsZero (F.X j)
-  have hT : P T := by
+  have hT : ∀ j : ℤ, 0 < j → IsZero (T.X j) := by
     intro j hj
     exact HomologicalComplex.isZero_single_obj_X _ _ _ j (by omega)
-  obtain ⟨F, ε, hF⟩ := CochainComplex.exists_functorial_boundedAbove_flat_replacement
-    (Opens.grothendieckTopology Y.carrier) Y.sheaf 0
-  let E := F.obj ⟨T, hT⟩
-  let r := ε.app ⟨T, hT⟩
-  obtain ⟨hflat, hbound, _, hr⟩ := hF ⟨T, hT⟩
+  rcases exists_nonpositive_flat_quasiIso Y T hT with ⟨E, r, hEr⟩
   have hE : E.IsKFlatTensor := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
-    Y.toRingedSpace E ⟨0, hbound⟩ hflat
+    Y.toRingedSpace E ⟨0, hEr.2.1⟩ hEr.1
   let := SheafOfModules.monoidalCategory Y.sheaf
-  obtain ⟨e⟩ := tensor_homology_iso_of_resolutions Y E K T T r q hE hK hr hq
-    (-(n : ℤ))
-  obtain ⟨d, hd⟩ := exists_selfTor_nonpositive_flat_sections i E r hbound hflat hr n
+  rcases tensor_homology_iso_of_resolutions Y E K T T r q hE hK hEr.2.2 hq (-(n : ℤ)) with ⟨e⟩
+  rcases exists_selfTor_nonpositive_flat_sections i E r hEr.2.1 hEr.1 hEr.2.2 n with ⟨d, hd⟩
   refine ⟨fun U ↦ (d U).trans (Scheme.Modules.appLinearEquivOfIso e U.1), ?_⟩
   intro V U h hbasic A C I J φ PU PV TA TC
   have hI : ∀ x ∈ I, φ x ∈ J := by
     intro x hx
     exact i.ker.ideal_le_comap_ideal h hx
-  obtain ⟨ψ, a, k, hψ, ha, hk⟩ := exists_quotient_resolution_tensor_comparison
-    A C I J φ hI PU PV
-  refine ⟨ψ, a, k, hψ, ha, hk, ?_⟩
+  refine (exists_quotient_resolution_tensor_comparison A C I J φ hI PU PV).imp
+    fun ψ ↦ Exists.imp fun a ↦ Exists.imp fun k hlift ↦ ?_
+  refine ⟨hlift.1, hlift.2.1, hlift.2.2, ?_⟩
   intro e' x
-  have hn := hd V U h hbasic ψ a k hψ ha hk x
+  have hn := hd V U h hbasic ψ a k hlift.1 hlift.2.1 hlift.2.2 x
   have hs := PresheafOfModules.naturality_apply e.hom.val (homOfLE h).op (d U x)
   change _ = e.hom.val.app (op V.1) _
   exact hs.symm.trans (congrArg (e.hom.val.app (op V.1)) hn)

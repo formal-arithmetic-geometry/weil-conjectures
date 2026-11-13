@@ -422,8 +422,22 @@ private theorem power_on_complex (T : Scheme.{u})
     (((HomologicalComplex.eval (AdicCompletion.Modules l E T) (.up ℤ) j).mapEnd P).map_pow
       (principalScalar l E T P) (n + 1)).symm
 
-set_option maxHeartbeats 1600000 in
--- Comparing the nested tower, cone and evaluation functors needs extra elaboration fuel.
+private theorem principal_levelConeTowerIso_app
+    {A : Type*} [Category A] [Abelian A]
+    {K L : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : K ⟶ L) (n : ℕ) :
+    (levelConeTowerIso
+      (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f)).app (op n) =
+        CochainComplex.mappingCone.mapHomologicalComplexIso f
+          ((evaluation ℕᵒᵖ A).obj (op n)) := rfl
+
+private theorem principal_coneIso_inr
+    {A : Type*} [Category A] [Abelian A]
+    {K L K' L' : CochainComplex A ℤ} (f : K ⟶ L) (g : K' ⟶ L')
+    (a : K ≅ K') (b : L ≅ L') (h : f ≫ b.hom = a.hom ≫ g) :
+    CochainComplex.mappingCone.inr f ≫ (coneIso f g a b h).hom =
+      b.hom ≫ CochainComplex.mappingCone.inr g :=
+  (CochainComplex.mappingCone.triangleMap f g a.hom b.hom h).comm₂
+
 private theorem strictPrincipalLevels (T : Scheme.{u})
     (P : CochainComplex (AdicCompletion.Modules l E T) ℤ) :
     ∃ b : ∀ n : ℕ, ((strictRed l E T).obj P).asFunctor.obj (op n) ≅
@@ -446,7 +460,8 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
   have hf (n : ℕ) : f.app (op n) = (μ ^ (n + 1)).asHom := power_on_complex l E T P n
   let c (n : ℕ) := coneIso (f.app (op n)) (μ ^ (n + 1)).asHom
     (Iso.refl P) (Iso.refl P) (by
-      simp only [Iso.refl_hom]
+      change (f.app (op n) : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ (μ ^ (n + 1)).asHom
+      erw [Category.comp_id, Category.id_comp]
       exact hf n)
   let b (n : ℕ) := e.app (op n) ≪≫ c n
   refine ⟨b, ?_, ?_⟩
@@ -459,17 +474,18 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         (fun _ ↦ scalar l E T)).map (homOfLE (Nat.le_succ n)).op).app (P.X j) = _
       rw [Functor.ofOpSequence_map_homOfLE_succ]
       rfl
-    have hY : Y.map (homOfLE (Nat.le_succ n)).op = 𝟙 P := rfl
     have hn := e.hom.naturality (homOfLE (Nat.le_succ n)).op
     have hc : (levelConeTower f).map (homOfLE (Nat.le_succ n)).op ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n := by
       change CochainComplex.mappingCone.map _ _ (X.map _) (Y.map _)
           (f.naturality (homOfLE (Nat.le_succ n)).op).symm ≫ (c n).hom =
         (c (n + 1)).hom ≫ CochainComplex.PrincipalCone.step μ n
-      dsimp only [c, coneIso, CochainComplex.PrincipalCone.step]
-      rw [← CochainComplex.mappingCone.map_comp, ← CochainComplex.mappingCone.map_comp]
-      simp only [Iso.refl_hom, Category.comp_id, hX, hY]
-      congr 1
+      apply coneIso_natural
+      · change (X.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ μ.asHom
+        erw [Category.comp_id, Category.id_comp]
+        exact hX
+      · change (Y.map (homOfLE (Nat.le_succ n)).op : P ⟶ P) ≫ 𝟙 P = 𝟙 P ≫ 𝟙 P
+        erw [Category.comp_id]
     change _ ≫ (e.hom.app (op n) ≫ (c n).hom) =
       (e.hom.app (op (n + 1)) ≫ (c (n + 1)).hom) ≫ _
     calc
@@ -483,15 +499,15 @@ private theorem strictPrincipalLevels (T : Scheme.{u})
         congrArg (fun g ↦ e.hom.app (op (n + 1)) ≫ g) hc
       _ = _ := (Category.assoc _ _ _).symm
   · intro n
+    dsimp only [b, Iso.trans_hom, e]
+    rw [principal_levelConeTowerIso_app]
     change ((ev l E T n).mapHomologicalComplex (.up ℤ)).map
       (CochainComplex.mappingCone.inr ((complexPowerMap l E T).app P)) ≫
         (CochainComplex.mappingCone.mapHomologicalComplexIso
           ((complexPowerMap l E T).app P) (ev l E T n)).hom ≫ (c n).hom = _
     rw [← Category.assoc, CochainComplex.mappingCone.map_inr]
     change CochainComplex.mappingCone.inr (f.app (op n)) ≫ (c n).hom = _
-    dsimp only [c, coneIso]
-    simp only [CochainComplex.mappingCone.map, CochainComplex.mappingCone.inr_desc,
-      Iso.refl_hom]
+    rw [principal_coneIso_inr]
     exact Category.id_comp _
 
 private abbrev strictProductUnit (T : Scheme.{u})

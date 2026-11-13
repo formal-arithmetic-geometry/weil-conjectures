@@ -580,8 +580,6 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   {T : NearbyCyclesModel (point k).left (point k').left}
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
-set_option maxHeartbeats 800000 in
--- the instantiation and the three identities `H` together exceed the default budget
 /-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
 `det-nearby-exchange-maps`, compatibility of `ν` with composition): for open immersions of models
 `φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
@@ -609,7 +607,32 @@ theorem compactSupportExchangeOfCompactification_comp_app
         ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K) ≫
       (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a
         ha).app ((boundedConstructibleLowerShriek ℓ j).obj K) := by
+  -- Fix the functors before elaborating the lifted isomorphisms and compatibility identities.
   have h := CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq
+    (PC := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))
+    (PC' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left))
+    (PX := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
+    (PX' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left))
+    (PP := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left))
+    (PP' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))
+    (Ps := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left))
+    (Ps' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k').left))
+    (ΨC := N.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (ΨX := M.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (ΨP := P.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (Ψs := T.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (DhN := D(((j ≫ ι).left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhN' := D(((j' ≫ ι').left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhM := D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhM' := D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (Rp := R(((toPoint Z).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (Rp' := R(((toPoint Z').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (LSfN := boundedConstructibleLowerShriek ℓ (toPoint Y))
+    (LSfN' := boundedConstructibleLowerShriek ℓ (toPoint Y'))
+    (LSfM := boundedConstructibleLowerShriek ℓ (toPoint X))
+    (LSfM' := boundedConstructibleLowerShriek ℓ (toPoint X'))
+    (Dj := boundedConstructibleLowerShriek ℓ j)
+    (Dj' := boundedConstructibleLowerShriek ℓ j')
     (Sp := NearbyCyclesModel.boundedConstructibleNearbyCycles hN)
     (SpX := NearbyCyclesModel.boundedConstructibleNearbyCycles hM)
     (Ts := NearbyCyclesModel.boundedConstructibleNearbyCycles hS)
@@ -650,7 +673,7 @@ theorem compactSupportExchangeOfCompactification_comp_app
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').inv.app
           ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom, ?_, ?_, ?_⟩
   · simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp]
-    cast_proofs NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
+    exact NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
   · cast_proofs compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
       ℓ j' ι' (toPoint Z') (comp_toPoint ι') (comp_toPoint j') (comp_toPoint (j' ≫ ι'))
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)

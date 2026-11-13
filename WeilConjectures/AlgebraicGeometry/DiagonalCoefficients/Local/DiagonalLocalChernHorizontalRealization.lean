@@ -101,7 +101,14 @@ private theorem derivedUnit_transport
   rw [CondensedRing.upperStarCongr_self, Functor.leftDerivedFunctorNatIso_refl]
   simp
 
-set_option maxHeartbeats 800000 in
+-- Prove compositor cancellation before instantiating the large derived module categories.
+private theorem unit_square_of_compositors {C : Type*} [Category C]
+    {A B D E T : C} (i : A ≅ B) (j : D ≅ E) (t : A ⟶ D)
+    (a : E ⟶ T) (b : B ⟶ T) (u : A ⟶ T) (v : D ⟶ T)
+    (hi : i.hom ≫ b = u) (hj : j.hom ≫ a = v) (ht : t ≫ v = u) :
+    (i.inv ≫ t ≫ j.hom) ≫ a = b := by
+  rw [Category.assoc, Category.assoc, hj, ht, ← hi, Iso.inv_hom_id_assoc]
+
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem derivedUnit_square
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -116,13 +123,15 @@ private theorem derivedUnit_square
     θ.hom.app (unit R S) ≫ (derivedUpper R hX).map cF.derived ≫ d.derived =
       (derivedUpper R f').map c.derived ≫ cF'.derived := by
   dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  rw [unitEndpoint_derived_eq, unitEndpoint_derived_eq, unitEndpoint_derived_eq,
-    unitEndpoint_derived_eq]
-  simp only [Category.assoc]
-  erw [CondensedRing.leftDerivedUpperStarComp_hom_app_unit, derivedUnit_transport]
-  erw [← CondensedRing.leftDerivedUpperStarComp_hom_app_unit R f' hS]
-  erw [Iso.inv_hom_id_app_assoc]
-  rfl
+  simp only [unitEndpoint_derived_eq]
+  exact unit_square_of_compositors
+    ((CondensedRing.leftDerivedUpperStarComp R f' hS).app (unit R S))
+    ((CondensedRing.leftDerivedUpperStarComp R hX f).app (unit R S))
+    ((Functor.leftDerivedFunctorNatIso _ (CondensedRing.upperStarCongr R h)).hom.app
+      (unit R S)) _ _ _ _
+    (CondensedRing.leftDerivedUpperStarComp_hom_app_unit R f' hS)
+    (CondensedRing.leftDerivedUpperStarComp_hom_app_unit R hX f)
+    (derivedUnit_transport R h)
 
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem normalized_pullback_arrow
@@ -186,7 +195,6 @@ private theorem realized_arrow_transport
   subst t'
   exact h
 
-set_option maxHeartbeats 700000 in
 -- Assemble the independent tower, completed, and condensed comparison diagrams.
 /-- Whole-system pullback is preserved by the specified completed realizations.
 
@@ -248,8 +256,9 @@ theorem diagonalLocalChern_horizontal_realization (l : ℕ) [Fact l.Prime]
     simpa only [map_natCast] using hunit.map f.appTop.hom
   have hXunit' : IsUnit (l : Γ(X', ⊤)) := by
     simpa only [map_natCast] using hunit'.map f'.appTop.hom
-  obtain ⟨r⟩ := diagonalRealization_pullback l hX hXunit' hXunit eX' eX
-  obtain ⟨d⟩ := diagonalLocalChern_pullback_data l hX p p' hXunit
+  -- Select witnesses without rebuilding the large square as an elimination motive.
+  have r := Classical.choice (diagonalRealization_pullback l hX hXunit' hXunit eX' eX)
+  have d := Classical.choice (diagonalLocalChern_pullback_data l hX p p' hXunit)
   have hu := diagonalLocalChern_coefficient_pullback l hX p p'
     hXunit hXunit' eX eX' r d
   have hl := diagonalLocalChern_root_pullback l hX p p' hXunit hXunit' eX eX' r d
@@ -300,8 +309,8 @@ theorem diagonalLocalChern_horizontal_realization (l : ℕ) [Fact l.Prime]
       q t z old new (by simpa only [ModelLocalChernNormalized, Functor.comp_map,
         diagonalCompletedUnderlying, DiagonalTrace.completedUnit, F, J, old, L]
           using hz) htower hu hl
-  obtain ⟨w₀, _, unique⟩ := DiagonalTrace.diagonalCompletedLocalChern_lift l p' hXunit' new
-  have heq : pulled = w := (unique pulled hpulled).trans (unique w hw).symm
+  have heq : pulled = w :=
+    (DiagonalTrace.diagonalCompletedLocalChern_lift l p' hXunit' new).unique hpulled hw
   have hlineIso := pullEndpoint_iso_unique r.line line (realizationLinePullMap_eq l hX)
   have hline := pullEndpoint_shift_eq r.line line hlineIso
   have harrow := realized_arrow_transport (eX'.localChern l X') r.unit.derived

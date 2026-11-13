@@ -113,8 +113,6 @@ private theorem basis_chain_exact
   · exact ComposableArrows.exact₂_mk _ hc₂ he₂
   · exact ComposableArrows.exact₂_mk _ hc₁ he₁
 
-set_option maxHeartbeats 400000 in
--- The four dependent module/chart families require extra elaboration heartbeats.
 /-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps.
 Source: Stacks Project, Constructions, Tag 01M7, final paragraph.
 (blueprint: lem-sc-p1-graded-chain-maps-exact).
@@ -262,14 +260,16 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
     Fin.cases (alphaE 2 f d hd hf)
       (Fin.cases (alphaE 1 f d hd hf) (Fin.cases (alphaE 0 f d hd hf) (fun i ↦ Fin.elim0 i)))
   have hN : ∀ j, DirectSum.IsInternal (H j) := by
-    intro j; fin_cases j <;> dsimp [H, N] <;> apply h𝒢
+    exact Fin.cases (h𝒢 2) (Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (fun i ↦ Fin.elim0 i)))
   have hNs : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N j),
       a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H j z → a • y ∈ H j (n + z) := by
-    intro j; fin_cases j <;> dsimp [H, N] <;> apply hA_smul
+    exact Fin.cases (hA_smul 2)
+      (Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (fun i ↦ Fin.elim0 i)))
   have ha : ∀ j, Function.Injective (a j) ∧ Set.range (a j) = degreeZeroFractions
       (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
       (fun n : ℕ ↦ (H j n : Set (N j))) (Submonoid.powers f) := by
-    intro j; fin_cases j <;> apply hcharts
+    exact Fin.cases (hcharts 2 f d hd hf)
+      (Fin.cases (hcharts 1 f d hd hf) (Fin.cases (hcharts 0 f d hd hf) (fun i ↦ Fin.elim0 i)))
   obtain ⟨hexL, hinjL, _⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N j) H hN hNs f d hd hf
     (fun j ↦ (T j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a ha
     f₂ f₁ hf₂ hf₁ hex₂
@@ -285,23 +285,15 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
     Fin.cases (alphaE 1 f d hd hf)
       (Fin.cases (alphaE 0 f d hd hf) (Fin.cases (alpha f d hd hf) (fun i ↦ Fin.elim0 i)))
   have hN' : ∀ j, DirectSum.IsInternal (H' j) := by
-    intro j; fin_cases j <;> dsimp [H', N']
-    · exact h𝒢 1
-    · exact h𝒢 0
-    · exact h𝓜
+    exact Fin.cases (h𝒢 1) (Fin.cases (h𝒢 0) (Fin.cases h𝓜 (fun i ↦ Fin.elim0 i)))
   have hNs' : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N' j),
       a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H' j z → a • y ∈ H' j (n + z) := by
-    intro j; fin_cases j <;> dsimp [H', N']
-    · exact hA_smul 1
-    · exact hA_smul 0
-    · exact hsmul
+    exact Fin.cases (hA_smul 1) (Fin.cases (hA_smul 0) (Fin.cases hsmul (fun i ↦ Fin.elim0 i)))
   have ha' : ∀ j, Function.Injective (a' j) ∧ Set.range (a' j) = degreeZeroFractions
       (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
       (fun n : ℕ ↦ (H' j n : Set (N' j))) (Submonoid.powers f) := by
-    intro j; fin_cases j
-    · exact hcharts 1 f d hd hf
-    · exact hcharts 0 f d hd hf
-    · exact halpha f d hd hf
+    exact Fin.cases (hcharts 1 f d hd hf)
+      (Fin.cases (hcharts 0 f d hd hf) (Fin.cases (halpha f d hd hf) (fun i ↦ Fin.elim0 i)))
   obtain ⟨hexR, _, hsurjR⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N' j) H' hN' hNs' f d hd hf
     (fun j ↦ (T' j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a' ha'
     f₁ f₀ hf₁ hf₀ hex₁'

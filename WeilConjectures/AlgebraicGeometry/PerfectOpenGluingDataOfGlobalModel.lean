@@ -80,8 +80,23 @@ private theorem perfect_exactOpenRestriction (Y : Scheme.{u}) (A : Y.Opens)
     (moduleRings A.toScheme.toRingedSpace) V).mapDerivedCategory.mapIso c ≪≫ iK⟩
 
 
-set_option maxHeartbeats 500000 in
--- Exact nested restrictions require a larger elaboration budget.
+-- Prove the adjunction calculation before specializing to derived restrictions.
+private theorem isIso_restricted_adjoint
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
+    (RX : D ⥤ D') (RY : C ⥤ C') (L' : C' ⥤ D')
+    (γ : L ⋙ RX ≅ RY ⋙ L') {A : C} {E : D} (e : L.obj A ≅ E) :
+    IsIso (L'.map (RY.map (adj.homEquiv A E e.hom)) ≫
+      γ.inv.app (R.obj E) ≫ RX.map (adj.counit.app E)) := by
+  let a := adj.homEquiv A E e.hom
+  have he : L.map a ≫ adj.counit.app E = e.hom :=
+    (adj.homEquiv A E).symm_apply_apply e.hom
+  have hn : L'.map (RY.map a) ≫ γ.inv.app (R.obj E) =
+      γ.inv.app A ≫ RX.map (L.map a) := γ.inv.naturality a
+  change IsIso (L'.map (RY.map a) ≫ γ.inv.app (R.obj E) ≫ RX.map (adj.counit.app E))
+  rw [← Category.assoc, hn, Category.assoc, ← RX.map_comp, he]
+  infer_instance
+
 /-- A global perfect model and its limit comparison provide local gluing data.
 Source: Stacks Project, Tag 09RF, adjunction construction of local maps.
 (blueprint: lem-pc-perfect-open-gluing-data-global-model).
@@ -114,21 +129,11 @@ theorem perfect_open_gluing_data_of_global_model
   let a := adj.homEquiv A E e.hom
   have hp : U.toScheme.IsPerfect (RY.obj A) :=
     perfect_exactOpenRestriction Y U (schemeOpenRestriction Y U) rfl A hA
-  have he : (derivedPullback g).map a ≫ adj.counit.app E = e.hom := by
-    exact (adj.homEquiv A E).symm_apply_apply e.hom
   have hi : IsIso ((derivedPullback (g ∣_ U)).map (RY.map a) ≫
-      γ.inv.app ((schemeDerivedDirectImage g).obj E) ≫ RX.map (adj.counit.app E)) := by
-    have hn : (derivedPullback (g ∣_ U)).map (RY.map a) ≫
-        γ.inv.app ((schemeDerivedDirectImage g).obj E) =
-        γ.inv.app A ≫ RX.map ((derivedPullback g).map a) := γ.inv.naturality a
-    have hh : (derivedPullback (g ∣_ U)).map (RY.map a) ≫
-        γ.inv.app ((schemeDerivedDirectImage g).obj E) ≫ RX.map (adj.counit.app E) =
-        γ.inv.app A ≫ RX.map e.hom := by
-      rw [← Category.assoc, hn, Category.assoc, ← RX.map_comp, he]
-    rw [hh]
-    infer_instance
-  refine ⟨U, U, by simp [U], adj, γ, γ, RY.obj A, RY.obj A,
+      γ.inv.app ((schemeDerivedDirectImage g).obj E) ≫ RX.map (adj.counit.app E)) :=
+    isIso_restricted_adjoint adj RX RY (derivedPullback (g ∣_ U)) γ e
+  refine ⟨U, U, by simp only [U, sup_idem], adj, γ, γ, RY.obj A, RY.obj A,
     Iso.refl _, RY.map a, RY.map a, hp, hp, ?_, hi, hi⟩
-  simp
+  simp only [Iso.refl_hom, Category.id_comp]
 
 end AlgebraicGeometry

@@ -23,8 +23,6 @@ noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-set_option maxHeartbeats 600000 in
--- The two exact sheafification comparisons use different homology functors.
 /-- The ordinary abelian sheafification class sends cycles to their module cohomology
 classes through the canonical kernel comparison.
 Source: Stacks Project, Tags 01E4 and 0BKJ.
@@ -97,7 +95,7 @@ theorem ordinaryLocalClass_cycles {Y : RingedSpace.{u}}
     exact (P.isoCyclesOfIsLimit_inv_ι _).symm
   change k' ≫ U.map ((I.sc q).mapCyclesIso T).hom ≫
     U.map (T.map (I.sc q).homologyπ) = _
-  erw [← Category.assoc, hk]
-  rfl
+  exact (Category.assoc _ _ _).symm.trans
+    (congrArg (fun l ↦ l ≫ U.map (T.map (I.sc q).homologyπ)) hk)
 
 end AlgebraicGeometry
