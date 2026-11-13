@@ -96,8 +96,12 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   refine cochain_square_of_comparison_eq
+    (α := integralPullEvaluationComplex l E f n)
+    (β := integralPullEvaluationComplex l E f (n + 1))
     (α' := ordinaryPullEvaluationComplex l E f n)
-    (β' := ordinaryPullEvaluationComplex l E f (n + 1)) rfl rfl ?_
+    (β' := ordinaryPullEvaluationComplex l E f (n + 1))
+    (R := (normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ))
+    (P := P) rfl rfl ?_
   exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
 
 end WeilConjectures.IntegralSystemRealization
