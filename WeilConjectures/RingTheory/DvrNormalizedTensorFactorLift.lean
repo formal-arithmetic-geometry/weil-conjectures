@@ -132,6 +132,7 @@ theorem dvr_normalized_tensor_factor_lift
   let := hP
   let F := (E ⊗[B] A) ⧸ P
   let : Field F := Ideal.Quotient.field P
+  let : Algebra E F := inferInstance
   let alpha : A →+* F := (Ideal.Quotient.mk P).comp
     (Algebra.TensorProduct.includeRight : A →ₐ[B] E ⊗[B] A).toRingHom
   let := alpha.toAlgebra
@@ -140,6 +141,7 @@ theorem dvr_normalized_tensor_factor_lift
   let : Module.Finite A (integralClosure A F) := hfinite
   let : FaithfulSMul A F := (faithfulSMul_iff_algebraMap_injective A F).mpr halpha
   let : Algebra B F := inferInstanceAs (Algebra B ((E ⊗[B] A) ⧸ P))
+  let : IsScalarTower B E F := inferInstance
   let : IsScalarTower B A F := by
     apply IsScalarTower.of_algebraMap_eq'
     ext b
@@ -154,6 +156,13 @@ theorem dvr_normalized_tensor_factor_lift
   let := hM
   let G := C ⧸ M
   let : Field G := Ideal.Quotient.field M
+  let : Algebra F G := inferInstance
+  let : Algebra A G := inferInstance
+  let : Algebra B G := inferInstance
+  let : Algebra E G := inferInstance
+  let : IsScalarTower A F G := inferInstance
+  let : IsScalarTower E F G := inferInstance
+  let : IsScalarTower B F G := inferInstance
   let gamma : A₁ →+* G := (Ideal.Quotient.mk M).comp
     (Algebra.TensorProduct.includeRight : A₁ →ₐ[A] C).toRingHom
   let : Algebra A₁ G := gamma.toAlgebra
@@ -172,13 +181,14 @@ theorem dvr_normalized_tensor_factor_lift
     exact (RingHom.injective_iff_ker_eq_bot _).mp
       ((algebraMap F G).injective.comp halpha)
   let : IsScalarTower B A₁ G := IsScalarTower.to₁₃₄ B A A₁ G
-  let : IsScalarTower B E G := inferInstance
+  let : IsScalarTower B E G := IsScalarTower.to₁₂₄ B E F G
   let phi : E ⊗[B] A₁ →ₐ[B] G := Algebra.TensorProduct.lift
     (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G)
     (fun _ _ ↦ Commute.all _ _)
   -- Each double pure tensor comes from e ⊗ (b * a), so this is a field quotient.
   have hphi : Function.Surjective phi := by
-    apply tensor_quotient_lift_surjective (Ideal.Quotient.mk P) (Ideal.Quotient.mk M)
+    apply tensor_quotient_lift_surjective (B := B) (A := A) (A₁ := A₁)
+      (E := E) (F := F) (G := G) (Ideal.Quotient.mk P) (Ideal.Quotient.mk M)
       phi.toRingHom Ideal.Quotient.mk_surjective Ideal.Quotient.mk_surjective
     · intro e a
       change Ideal.Quotient.mk P (e ⊗ₜ[B] a) =
@@ -189,7 +199,8 @@ theorem dvr_normalized_tensor_factor_lift
         Ideal.Quotient.mk M (z ⊗ₜ[A] 1) * Ideal.Quotient.mk M (1 ⊗ₜ[A] a)
       rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
     · intro e a
-      exact Algebra.TensorProduct.lift_tmul _ _ _ e a
+      exact Algebra.TensorProduct.lift_tmul
+        (IsScalarTower.toAlgHom B E G) (IsScalarTower.toAlgHom B A₁ G) _ e a
   let P₁ := RingHom.ker phi
   have hP₁ : P₁.IsMaximal := RingHom.ker_isMaximal_of_surjective phi hphi
   refine ⟨P₁, hP₁, ?_⟩

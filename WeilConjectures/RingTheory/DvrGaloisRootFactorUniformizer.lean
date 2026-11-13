@@ -95,6 +95,15 @@ theorem dvr_galois_root_factor_uniformizer
   let f := (Polynomial.X : Polynomial B) ^ n - Polynomial.C pi
   let A := AdjoinRoot f
   let D := E ⊗[B] A
+  intro P hP
+  let := hP
+  let F := D ⧸ P
+  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
+    (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom
+  let := alpha.toAlgebra
+  let S := integralClosure A F
+  intro Q hQ hcontract
+  let := hQ
   obtain ⟨hdomA, hdvrA, hmaxA⟩ :=
     AlgebraicGeometry.Scheme.dvr_uniformizer_root_algebra B pi hpi n hnpos
   let := hdomA
@@ -114,18 +123,9 @@ theorem dvr_galois_root_factor_uniformizer
       IsLocalRing.maximalIdeal A ^ n := by
     rw [hpi.maximalIdeal_eq, Ideal.map_span, Set.image_singleton, hmaxA,
       Ideal.span_singleton_pow, hrel]
-  intro P hP
-  let := hP
-  let F := D ⧸ P
-  let alpha : A →+* F := (Ideal.Quotient.mk P).comp
-    (Algebra.TensorProduct.includeRight : A →ₐ[B] D).toRingHom
-  let := alpha.toAlgebra
-  let S := integralClosure A F
   let : Module.Finite A S :=
     dvr_root_tensor_factor_integralClosure_finite B A E
       ⟨hE.1, inferInstance⟩ P hP
-  intro Q hQ hcontract
-  let := hQ
   have hc : Q.comap (algebraMap A S) = IsLocalRing.maximalIdeal A :=
     hcontract.trans hmaxA.symm
   let : Algebra.FormallyUnramified A (Localization.AtPrime Q) :=
