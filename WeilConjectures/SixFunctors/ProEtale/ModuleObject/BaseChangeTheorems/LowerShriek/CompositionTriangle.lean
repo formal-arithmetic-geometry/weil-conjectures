@@ -635,9 +635,9 @@ theorem boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle
   have hv := (NatTrans.exchange _ _ _ _).symm.trans
     (congrArg₂ NatTrans.hcomp (congrArg Iso.hom hcf) (congrArg Iso.hom hcg))
   have n₁' : a₀.hom ≫ hcfg₂.hom = u₀.hom ≫ a''.hom := by
-    simpa only [a₀, hcfg₂, a'', u₀] using n₁
+    simpa only [a₀, hcfg₂, a'', u₀, hcf₁, hcg₁] using n₁
   have n₂' : a.hom ≫ hcfg₃.hom = u.hom ≫ a''.hom := by
-    simpa only [a, hcfg₃, a'', u] using n₂
+    simpa only [a, hcfg₃, a'', u, hcf₂, hcg₂] using n₂
   have e₁ : a₀.inv = hcfg₂.hom ≫ a''.inv ≫ u₀.inv := by
     rw [← cancel_epi a₀.hom, Iso.hom_inv_id, reassoc_of% n₁']
     simp
