@@ -254,6 +254,7 @@ lemma upperStarUnitHom_comp_map_residueFieldModuleSheafUpperStarIso_hom_app {S T
   simpa using NatTrans.congr_app
     (upperStarForgetIso_hom_comp_whiskerRight_residueFieldModuleSheafUpperStarIso_hom ℓ E a) M
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- matching the units of the pullbacks of module objects unfolds the underlying sheaves of pullbacks
 /-- **The commutation of `G` with the pullbacks is compatible with the tensor products**: the
