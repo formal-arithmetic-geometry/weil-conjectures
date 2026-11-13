@@ -326,7 +326,9 @@ private lemma torsorDescentData_hom {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
     (M : modulesPseudofunctor.obj (.mk (op X)))
-    (φ : descentData T V t ⟶ (modulesPseudofunctor.toDescentData (fun i ↦ (V i).hom)).obj M)
+    (φ : descentData T V t ⟶
+      (modulesPseudofunctor.toDescentData (X := fun i ↦ (V i).left)
+        (fun i ↦ (V i).hom)).obj M)
     {Y : Scheme.{u}} (q : Y ⟶ X) {i₁ i₂ : ι}
     (f₁ : Y ⟶ (V i₁).left) (f₂ : Y ⟶ (V i₂).left)
     (hf₁ : f₁ ≫ (V i₁).hom = q) (hf₂ : f₂ ≫ (V i₂).hom = q) :
@@ -350,17 +352,7 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
         (by rw [← hf₁]; rfl)).hom.toNatTrans.app (Modules.unitObj X))
       (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
   · exact torsorDescentData_hom T V t q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
-  · have hc := φ.comm q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
-    run_tac
-      let goal ← Lean.Elab.Tactic.getMainGoal
-      goal.withContext do
-        let ctx ← Lean.getLCtx
-        let some decl := ctx.findFromUserName? `hc | throwError "missing hc"
-        let actual ← Lean.instantiateMVars decl.type
-        let target ← Lean.instantiateMVars (← goal.getType)
-        Lean.logInfo m!"HYP RAW: {repr actual}"
-        Lean.logInfo m!"GOAL RAW: {repr target}"
-    exact hc
+  · exact φ.comm q (i₁ := i₁) (i₂ := i₂) f₁ f₂ hf₁ hf₂
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
