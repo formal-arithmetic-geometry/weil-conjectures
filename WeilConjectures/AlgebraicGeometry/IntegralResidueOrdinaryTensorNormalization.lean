@@ -25,6 +25,22 @@ local instance instEssentiallySmallProfinite_integralResidueOrdinaryTensorNormal
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
 namespace CategoryTheory
+
+private theorem map_comp_of_pasted_squares
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {X Y Z : C} {U V W T R : D} (a : U ⟶ V) (b : V ⟶ W) (c : W ⟶ T)
+    (d : T ⟶ R) {S : D} (e : R ⟶ S) (m : X ⟶ Y) (n : Y ⟶ Z)
+    (i : U ⟶ F.obj X) (t : F.obj Y ⟶ T) (p : F.obj Z ⟶ S)
+    (hm : a ≫ b ≫ c = i ≫ F.map m ≫ t)
+    (ht : t ≫ d ≫ e = F.map n ≫ p) :
+    a ≫ b ≫ c ≫ d ≫ e = i ≫ F.map (m ≫ n) ≫ p := by
+  calc
+    _ = (a ≫ b ≫ c) ≫ d ≫ e := by simp only [Category.assoc]
+    _ = (i ≫ F.map m ≫ t) ≫ d ≫ e := congrArg (fun k ↦ k ≫ d ≫ e) hm
+    _ = i ≫ F.map m ≫ (t ≫ d ≫ e) := by simp only [Category.assoc]
+    _ = i ≫ F.map m ≫ (F.map n ≫ p) := congrArg (fun k ↦ i ≫ F.map m ≫ k) ht
+    _ = _ := by rw [F.map_comp]; simp only [Category.assoc]
+
 variable {C : Type u} [Category.{v + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{v + 1} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C]
@@ -273,12 +289,8 @@ theorem residueOrdinaryTensorPull_homotopy
     exact residueOrdinaryTensorPull_module Λ A φ f (K.X n)
   have ht := tensor_single_homotopy_iso_inv F B B' e P
   dsimp only at ht
-  calc
-    _ = _ := (Category.assoc _ _ _).symm
-    _ = _ := congrArg (fun k ↦ k ≫ _ ≫ _) hm
-    _ = _ := Category.assoc _ _ _
-    _ = _ := congrArg (fun k ↦ _ ≫ k) ht
-    _ = _ := (Category.assoc _ _ _).symm
-    _ = _ := congrArg (fun k ↦ k ≫ _) ((F.mapHomotopyCategory (.up ℤ)).map_comp _ _).symm
+  simpa only [Category.id_comp] using
+    map_comp_of_pasted_squares (F.mapHomotopyCategory (.up ℤ))
+      _ _ _ _ _ _ _ (𝟙 _) _ _ (by simpa only [Category.id_comp] using hm) ht
 
 end AlgebraicGeometry.ProEtale.CondensedRing
