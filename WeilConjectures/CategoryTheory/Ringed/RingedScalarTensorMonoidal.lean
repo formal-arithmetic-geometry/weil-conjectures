@@ -513,7 +513,6 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option maxHeartbeats 3000000 in
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
@@ -632,7 +631,7 @@ theorem ringedScalarTensorMonoidal
       exact D.ε.naturality f.hom)
   apply ScalarMonoidalProof.normalizedDescent L W D.T (E ⋙ LS) e μ
   intro P Q
-  obtain ⟨hEP, hEQ, hh⟩ := hμ P.obj Q.obj P.property Q.property
+  have hh := (hμ P.obj Q.obj P.property Q.property).choose_spec.choose_spec
   with_unfolding_all change (
     D.T.map (MR.iso J R AR P.obj Q.obj P.property Q.property).hom ≫
       μ.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
@@ -640,7 +639,7 @@ theorem ringedScalarTensorMonoidal
     D.ε.app ((coefficientTotalTensor.{r, c, v} J R).obj (P.obj, Q.obj)) ≫
       (DerivedCategory.Q.map ((mE.μIso P.obj Q.obj).inv) ≫
         (MS.iso J S AS _ _ (hk P.obj P.property) (hk Q.obj Q.property)).hom))
-  rw [hmE]
+  simp only [hmE]
   with_unfolding_all exact hh
 
 end Site
