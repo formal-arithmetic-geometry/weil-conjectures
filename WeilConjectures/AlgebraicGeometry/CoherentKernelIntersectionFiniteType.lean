@@ -157,7 +157,7 @@ theorem coherent_kernel_intersection_finiteType
         (Over.iteratedSliceEquiv D).functor).overPost B)
   have : (H.functor.obj (A.obj (kernel f))).IsFiniteType :=
     finiteType_pushforward_leftAdjoint
-      (R := X.ringCatSheaf.over Z) (S := (X.ringCatSheaf.over W).over D)
+      (R := X.ringCatSheaf.over D.left) (S := (X.ringCatSheaf.over W).over D)
       (M := A.obj (kernel f)) (Over.iteratedSliceEquiv D).functor (𝟙 _) (Iso.refl _)
   let eover : H.functor.obj (A.obj (kernel f)) ≅ (kernel f).over D :=
     (SheafOfModules.fullyFaithfulForget _).preimageIso
