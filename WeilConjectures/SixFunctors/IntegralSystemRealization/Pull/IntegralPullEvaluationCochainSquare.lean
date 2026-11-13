@@ -26,11 +26,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 private theorem cochain_square_of_comparison_eq
+    {ι : Type*} {c : ComplexShape ι}
     {S V W : Type*} [Category* S] [Category* V] [Category* W]
     [HasZeroMorphisms V] [HasZeroMorphisms W]
-    {F₀ F₁ : S ⥤ CochainComplex W ℤ} {G₀ G₁ : S ⥤ CochainComplex V ℤ}
-    {R : CochainComplex W ℤ ⥤ CochainComplex V ℤ} {P : S}
-    {D : CochainComplex V ℤ}
+    {F₀ F₁ : S ⥤ HomologicalComplex W c} {G₀ G₁ : S ⥤ HomologicalComplex V c}
+    {R : HomologicalComplex W c ⥤ HomologicalComplex V c} {P : S}
+    {D : HomologicalComplex V c}
     {α α' : F₀ ≅ F₁} {β β' : G₀ ≅ G₁}
     {a : G₀.obj P ⟶ R.obj (F₀.obj P)}
     {d : G₁.obj P ⟶ D} {e : D ⟶ R.obj (F₁.obj P)}
@@ -96,6 +97,8 @@ theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   refine cochain_square_of_comparison_eq
+    (c := .up ℤ) (V := normalizedDVRModules l E X (n + 1))
+    (W := normalizedDVRModules l E X n)
     (α := integralPullEvaluationComplex l E f n)
     (β := integralPullEvaluationComplex l E f (n + 1))
     (α' := ordinaryPullEvaluationComplex l E f n)
