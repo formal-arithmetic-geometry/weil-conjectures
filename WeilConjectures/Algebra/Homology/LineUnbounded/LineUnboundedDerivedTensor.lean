@@ -366,7 +366,6 @@ def normalization (P : Modules.{t, a} X R)
         (single.{t, a} X R P) hK hP hKf hPf).symm ≪≫
           DerivedCategory.Q.mapIso ((collapse.{t, a} X R P).app K)
 
-set_option profiler true in
 /-- Tensoring an arbitrary unbounded complex with a locally free line is termwise,
 with its inverse given by the internal dual and the specified evaluation. Global-section
 linearity is equivalent to the universal B-linearity clause: every sheaf B-algebra
