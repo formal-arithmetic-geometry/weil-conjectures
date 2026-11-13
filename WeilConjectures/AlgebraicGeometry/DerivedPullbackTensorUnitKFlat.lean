@@ -297,8 +297,6 @@ private theorem tensorUnit_complex_right
 
 
 set_option trace.profiler true in
-set_option maxHeartbeats 600000 in
--- The concrete sheaf tensor instances require extra elaboration heartbeats.
 /-- The explicitly constructed unit comparison satisfies both unit laws on Q(P)
 when P is K-flat. No statement about arbitrary derived objects is made here.
 Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product;
@@ -383,6 +381,8 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
              (derivedPullback g).map (ρ_ A).hom) := by
   let AX := SheafOfModules.{uModel} (moduleRings X.toRingedSpace)
   let AT := SheafOfModules.{uModel} (moduleRings T.toRingedSpace)
+  let : MonoidalCategory (CochainComplex AX ℤ) := inferInstance
+  let : MonoidalCategory (CochainComplex AT ℤ) := inferInstance
   let FC := F.mapHomologicalComplex (ComplexShape.up ℤ)
   let U : CochainComplex AX ℤ := 𝟙_ _
   let u : 𝟙_ (CochainComplex AT ℤ) ≅ FC.obj U :=
@@ -419,13 +419,8 @@ theorem derivedPullback_tensor_unit_kFlat {T X : Scheme.{uModel}} (g : T ⟶ X)
       (derivedPullback g).map (Functor.LaxMonoidal.μ QX K N) ≫ e (K ⊗ N) ≫
         QT.map (φ K N).hom := by
     intro K N hK hN
-    have hμ' := hμ K N hK hN
-    simp only [cast_eq] at hμ'
-    erw [← hμ']
-    dsimp only [QX, QT, e]
-    simp only [Iso.app_hom]
-    rw [Iso.inv_hom_id_app_app_assoc]
-    rfl
+    exact (((μ.app (QX.obj K)).app (QX.obj N)).inv_comp_eq).2
+      (hμ K N hK hN).symm
   have hl := tensorUnit_left_square QX QT FC (derivedPullback g) μ.inv e P u (φ U P)
     η hη (he (λ_ P).inv) (hδ U P hU hP) huL
   have hr := tensorUnit_right_square QX QT FC (derivedPullback g) μ.inv e P u (φ P U)
