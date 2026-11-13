@@ -284,7 +284,7 @@ private theorem scalarTensorTotal
   have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
   have := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients S
   have := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients S
-  obtain ⟨am, e, he, hu, hgen⟩ := scalarTensorAdjunctionComparison a F hF hmF
+  obtain ⟨am, e, he, hu, hgen⟩ := scalarTensorAdjunctionComparison.{c, v, r} a F hF hmF
   let EC := F.mapHomologicalComplex (.up ℤ)
   let tR := coefficientTotalTensor.{r, c, v} J R
   let tS := coefficientTotalTensor.{r, c, v} J S
