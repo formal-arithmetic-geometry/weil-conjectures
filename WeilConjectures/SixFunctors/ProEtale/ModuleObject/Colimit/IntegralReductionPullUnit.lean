@@ -237,7 +237,8 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
       (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X)))
         (ComplexShape.up ℤ)).hom.app K ≫
       (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K)
-  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at r1 r2 r3 r4 ⊢
+  dsimp only [K, Iso.app_hom, Functor.comp_obj, Functor.comp_map, Functor.id_obj,
+    Functor.id_map] at r1 r2 r3 r4 ⊢
   simp only [Category.assoc]
   simp only [← Functor.map_comp_assoc, r1]
   simp only [Functor.map_comp, Category.assoc] at r4 ⊢
@@ -255,13 +256,13 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
       (((Mod.extendScalars (coefficientMap a Y)).mapHomotopyCategory (ComplexShape.up ℤ)).obj K))
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
-  dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
+  dsimp only [K, Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
   simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
   have e1 := ((f)^*⟦Λ⟧).leftDerivedFunctorCounit.naturality
     (((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
       (ComplexShape.up ℤ)).unit.app K)
-  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at e1
+  dsimp only [K, Functor.comp_obj, Functor.comp_map, Functor.id_obj] at r5 e1
   rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc, r5, reassoc_of% e1]
   simp only [← DerivedCategory.Qh.map_comp, Category.assoc]
   rw [upperStar_mapHomotopyCategory_unit_comp_comapUpperStarIso_inv]
