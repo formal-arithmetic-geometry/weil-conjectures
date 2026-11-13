@@ -69,6 +69,7 @@ private theorem bridge_naturality (F : Type u) [Field F] [Algebra ℚ_[l] F]
     Functor.isoWhiskerLeft U ρF.comparison
   with_unfolding_all exact b.hom.naturality g
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- Keep the nested derived comparison functors folded during the calculation.
 /-- The scalar completion augmentation respects the pulled coherent quotient tower.
