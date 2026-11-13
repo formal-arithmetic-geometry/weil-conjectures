@@ -44,6 +44,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- The unit-section comparison elaborates several large nested generator terms.
 attribute [local semireducible] coefficientSequenceEvaluation in
 /-- The scalar-coordinate form of tensor associativity for the quotient system: on unit
@@ -224,6 +225,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : â
   exact cL.trans cR.symm
 
 set_option maxHeartbeats 800000 in
+set_option trace.profiler true in
 -- Instantiating the formal associativity lemma unifies the concrete evaluated tensor terms.
 /-- The ordinary tensor comparison of the quotient system is compatible with the native
 total associators: both composites agree after every finite evaluation, where they become
