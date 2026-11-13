@@ -34,6 +34,7 @@ open scoped TensorProduct
 
 namespace Algebra
 
+set_option profiler true in
 set_option maxHeartbeats 1000000 in
 -- The dependent conormal types and both tensor equivalences need extra elaboration steps.
 /-- Source: Stacks Project, proof of Lemma 07CE, lines 357–414, with projective `I/I²`

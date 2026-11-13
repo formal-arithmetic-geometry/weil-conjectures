@@ -97,6 +97,7 @@ private theorem completeIntersection_of_algEquiv
     let H := PrimeSpectrum.homeomorphOfRingEquiv e.toRingEquiv
     exact H.isHomeomorph.topologicalKrullDim_eq.trans hdim
 
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The three comparison equivalences involve several localization algebra towers.
 /-- Base change and localization identify the presentation ideal in the closed fibre.
