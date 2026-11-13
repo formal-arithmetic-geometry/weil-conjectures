@@ -84,6 +84,7 @@ private theorem flatCohomologyBaseChange_bijective_of_compact_open
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+set_option trace.profiler true in
 set_option maxHeartbeats 1000000 in
 -- The affine comparisons carry several definitionally equal section and scalar instances.
 /-- Target affine dictionary for a source comparison with a normalized linear lift.

@@ -22,6 +22,7 @@ open scoped TensorProduct
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance] Scheme.Modules.enoughInjectives
+set_option trace.profiler true in
 set_option maxHeartbeats 500000 in
 -- Comparing the explicit resolution class maps unfolds several homology transports.
 set_option backward.isDefEq.respectTransparency false in
