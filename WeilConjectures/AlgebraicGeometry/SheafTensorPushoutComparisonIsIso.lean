@@ -121,10 +121,10 @@ private theorem stalkTensor_addHom_ext (r : D ⟶ C)
     (hgh : ∀ (U : Opens T) (hx : x ∈ U) (c : C.obj.obj (Opposite.op U))
         (m : M.val.obj (Opposite.op U)),
       g (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[stalk D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[stalk (C := CommRingCat) D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m) =
       h (TopCat.Presheaf.germ C.obj U x hx c
-          ⊗ₜ[stalk D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
+          ⊗ₜ[stalk (C := CommRingCat) D.obj x,((stalkFunctor CommRingCat x).map r.hom).hom]
           TopCat.Presheaf.germ M.val.presheaf U x hx m)) : g = h := by
   apply AddMonoidHom.ext
   intro z
