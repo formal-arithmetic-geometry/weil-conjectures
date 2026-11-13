@@ -121,6 +121,24 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
   (h : N.generic ⟶ Spec (.of L)) (Ω : Type u) [Field Ω] [Algebra L Ω] [IsGalois L Ω]
 
 omit [IsGalois L Ω] in
+private lemma tensor_coinvariant_exchange_factorization
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ((N.galoisLayerHom h Ω).pullbackExchange Λ).app C =
+      ((leftDerivedUpperStarId Λ X').app ((N.nearbyCycles Λ).obj C)).hom ≫
+        (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)).map
+          ((derivedUpperStarLowerStarAdjunction Λ
+            (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app
+              (L((N.ε)^*⟦Λ⟧).obj C)) ≫ (N.galoisLayerExchangeIso h Ω Λ C).hom := by
+  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
+    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
+    (N.galoisLayerHom h Ω) rfl rfl C
+  simp only [eqToHom_refl, Category.id_comp] at hα
+  rw [Functor.map_comp] at hα
+  exact hα
+
+omit [IsGalois L Ω] in
 /-- Transport the coinvariant property of a retraction of the derived unit through the
 Galois layer exchange isomorphism. The retraction is independent of the functor `G`. -/
 private lemma tensor_coinvariant_pullbackExchange_of_unit
@@ -157,15 +175,11 @@ private lemma tensor_coinvariant_pullbackExchange_of_unit
         (∀ k, G.map (N.galoisLayerAction Λ h Ω (act k)
           (L((𝟙 X)^*⟦Λ⟧).obj C)) ≫ φ = φ) →
         G.map (r ≫ α) ≫ φ = φ := by
-  have hα := Hom.pullbackExchange_app_of_total_eq_id Λ N
-    (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) _ rfl
-    (N.galoisLayerHom h Ω) rfl rfl C
-  simp only [eqToHom_refl, Category.id_comp] at hα
-  rw [Functor.map_comp] at hα
   exact CategoryTheory.tensor_coinvariant_retraction_of_conjugate
     (R((N.j)_*⟦Λ⟧) ⋙ L((N.i)^*⟦Λ⟧)) G _ R
     ((leftDerivedUpperStarId Λ X').app _)
-    (N.galoisLayerExchangeIso h Ω Λ C) _ hα hR
+    (N.galoisLayerExchangeIso h Ω Λ C) _
+    (tensor_coinvariant_exchange_factorization N h Ω Λ C) hR
     (fun k ↦ derivedUnitTransport Λ
       (pullbackAction h _ specGaloisAction_comp (act k))
       (pullbackAction_fst h _ specGaloisAction_comp (act k))
@@ -357,13 +371,13 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
         (DerivedCategory.homologyFunctor _ q).map
           (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧).map
             (r ≫ ((N.galoisLayerHom h Ω).pullbackExchange
-              (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ := by
-  refine (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
-    T₀ N h Ω hp C hC act hact).imp fun r hr ↦ ⟨hr.1, ?_⟩
-  intro q V b hV W φ hφ
-  exact hr.2 (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
-    DerivedCategory.homologyFunctor _ q)
-    (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ (galoisTower Ω h) K a hcab f' V b hV q)
-    φ hφ
+              (Profinite.continuousMapRingObj T₀)).app C) ▷ V) ≫ φ = φ :=
+  (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit
+    T₀ N h Ω hp C hC act hact).imp fun r hr ↦
+      ⟨hr.1, fun q V b hV W φ hφ ↦ hr.2
+        (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
+          DerivedCategory.homologyFunctor _ q)
+        (fun K a _ hcab ↦
+          tensor_coinvariant_isColimit N T₀ (galoisTower Ω h) K a hcab f' V b hV q) φ hφ⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
