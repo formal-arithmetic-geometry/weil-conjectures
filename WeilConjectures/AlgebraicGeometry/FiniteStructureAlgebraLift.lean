@@ -136,8 +136,9 @@ theorem finite_structure_algebra_lift
               (by rw [← Scheme.Hom.comp_preimage, hw n]) =
             (b n).right.hom.app (op U)) := by
   classical
-  obtain ⟨B, e, b, hb, hcomp⟩ := finite_structure_algebra_operations_lift
+  have hlift := finite_structure_algebra_operations_lift
     A I X f i hi hp c Yn fnY gn hcart hw G hG hproper ψ hψ hc
+  rcases hlift with ⟨B, e, b, hb, hcomp⟩
   have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
   have hGqc :=
     (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG |>.1
@@ -150,9 +151,10 @@ theorem finite_structure_algebra_lift
     IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
   let α := (Scheme.Modules.tensorPullback (pullback.fst f
     (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))).mapIso e ≪≫ ψ n
-  obtain ⟨hs, hk⟩ := closedImmersion_algebra_sections_exact
+  have hexact := closedImmersion_algebra_sections_exact
     (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))
     (fnY n) B α (b n) (hb n) U hU
+  rcases hexact with ⟨hs, hk⟩
   refine ⟨(Ideal.quotEquivOfEq hk.symm).trans
     (RingHom.quotientKerEquivOfSurjective hs), ?_⟩
   intro x
