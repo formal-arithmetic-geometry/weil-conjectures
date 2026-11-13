@@ -41,6 +41,21 @@ private theorem stalkAddMap_germ {X : TopCat.{u}}
   exact stalkFunctor_map_germ_apply U x hx
     ((PresheafOfModules.toPresheaf R).map f) s
 
+private theorem stalkAddMap_comm_smul {X : TopCat.{u}}
+    (R : TopCat.Presheaf CommRingCat.{u} X) {x : X}
+    {M N : PresheafOfModules.{u} (R ⋙ forget₂ CommRingCat RingCat)} (f : M ⟶ N)
+    (r : R.stalk x) (m : stalk (C := Ab.{u}) M.presheaf x) :
+    PresheafOfModules.stalkAddMap f (r • m) = r • PresheafOfModules.stalkAddMap f m := by
+  obtain ⟨U, hxU, r, rfl⟩ := R.exists_germ_eq r
+  obtain ⟨V, hxV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.presheaf m
+  have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+  rw [← R.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
+    ← TopCat.Presheaf.germ_res_apply M.presheaf (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx m,
+    ← PresheafOfModules.germ_smul (R := R) M]
+  rw [stalkAddMap_germ, map_smul, PresheafOfModules.germ_smul (R := R) N,
+    stalkAddMap_germ]
+  rfl
+
 private theorem stalk_sheafification_bijective {X : TopCat.{u}}
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (x : X)
     (P : PresheafOfModules.{u} R.obj) :
@@ -53,7 +68,6 @@ private theorem stalk_sheafification_bijective {X : TopCat.{u}}
   exact ConcreteCategory.bijective_of_isIso t
 
 set_option profiler true in
--- Stalk action transports through sheaf composition require additional elaboration.
 /-- Change of rings commutes with stalks, naturally in the module and compatibly with germs.
 Mathlib writes extension of scalars with the coefficient factor first: `a ⊗ s`
 represents the paper's `s ⊗ a` under the canonical tensor commutation.
@@ -130,20 +144,7 @@ theorem stalkChangeOfRingsIso (X : TopCat.{u})
         stalk (C := Ab.{u}) (changeOfRings α F).val.presheaf x :=
     { toFun := PresheafOfModules.stalkAddMap (θ F)
       map_add' := (PresheafOfModules.stalkAddMap (θ F)).map_add
-      map_smul' := by
-        intro r m
-        obtain ⟨U, hxU, r, rfl⟩ := TopCat.Presheaf.exists_germ_eq (C := CommRingCat.{u}) R₂.obj r
-        obtain ⟨V, hxV, m, rfl⟩ :=
-          TopCat.Presheaf.exists_germ_eq (changeOfRingsPresheaf.{u, u, u} α F).presheaf m
-        have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
-        rw [← TopCat.Presheaf.germ_res_apply R₂.obj (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
-          ← TopCat.Presheaf.germ_res_apply
-            (changeOfRingsPresheaf.{u, u, u} α F).presheaf
-            (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx m,
-          ← PresheafOfModules.germ_smul]
-        erw [stalkAddMap_germ (θ F), map_smul, PresheafOfModules.germ_smul,
-          stalkAddMap_germ (θ F)]
-        rfl }
+      map_smul' := stalkAddMap_comm_smul R₂.obj (θ F) }
   let E (F : SheafOfModules.{u}
       ((sheafCompose (Opens.grothendieckTopology X)
         (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁)) :=

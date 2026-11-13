@@ -115,7 +115,6 @@ private theorem tensorUnitMap_stalk_isIso (F G : SheafOfModules.{u} 𝓡) :
   infer_instance
 
 set_option profiler true in
--- Comparing the adjunction tensorator with the localized tensor needs extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensorUnitMap_natural
     {F G F' G' : SheafOfModules.{u} 𝓡} (f : F ⟶ F') (g : G ⟶ G') :
@@ -125,7 +124,9 @@ private theorem tensorUnitMap_natural
   let H := forget 𝓡 ⋙ PresheafOfModules.restrictScalars (𝟙 (𝓡).obj)
   let : H.LaxMonoidal := A.rightAdjointLaxMonoidal
   have hθ (M N : SheafOfModules.{u} 𝓡) :
-      tensorUnitMap X M N = Functor.LaxMonoidal.μ H M N := by rfl
+      tensorUnitMap X M N = Functor.LaxMonoidal.μ H M N := by
+    ext U m
+    rfl
   rw [hθ, hθ]
   have hmap {M N : SheafOfModules.{u} 𝓡} (a : M ⟶ N) :
       H.map a = (forget 𝓡).map a := by
