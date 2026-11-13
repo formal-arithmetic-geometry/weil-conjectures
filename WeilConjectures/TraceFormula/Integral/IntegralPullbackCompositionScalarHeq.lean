@@ -253,7 +253,13 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     SemilinearSections.DS, SemilinearSections.D, finiteSystemPullback,
     ProEtale.VaryingRing.pull, integralComparisonSequencePullback,
     finiteSystems, ProEtale.VaryingRing.Modules, SemilinearSections.Systems,
-    SemilinearSections.Mod, coefficientSequenceModules, SemilinearSections.ring] at hh ⊢
+    SemilinearSections.Mod, coefficientSequenceModules, SemilinearSections.ring,
+    SemilinearSections.systemRing, SemilinearSections.ringPresheaf,
+    SemilinearSections.rings, coefficientSequenceCommRingSheaf,
+    coefficientSequenceCommRingPresheaf, coefficientSequenceCommRingSystem,
+    ProEtale.VaryingRing.coefficients, ProEtale.VaryingRing.coefficientTransition,
+    integralCoefficientCommRingSheaf, coefficientSequenceCommRingTransition,
+    integralCoefficientSheafTransition, integralSystemRings, integralSystemTransition] at hh ⊢
   exact eq_of_heq hh
 
 end Composition
