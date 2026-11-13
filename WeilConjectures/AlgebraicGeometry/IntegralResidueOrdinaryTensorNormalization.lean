@@ -252,17 +252,7 @@ theorem residueOrdinaryTensorPull_homotopy
           (homotopyTensorSingleIso B).inv.app P) ≫
       ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app
         (Functor.tensorModelCoefficient B)).app P := by
-  dsimp only
-  let F := (f)^*⟦Λ⟧
-  let TY := Mod.extendScalars (coefficientMap φ Y)
-  let SX := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap φ X)
-  let SY := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-    (coefficientMap φ Y)
-  let B := SY.obj (Mod.regular (condensedRingObj A Y))
-  let B' := SX.obj (Mod.regular (condensedRingObj A X))
-  let e := residueOrdinaryRestrictedRegularPullIso Λ A φ f
-  let _ := residueOrdinaryUpperStarMonoidal Λ f
+  intro F TY SX SY B B' FP TP inst e eH
   let τ : tensorLeft B ⋙ F ⟶ F ⋙ tensorLeft B' :=
     (Functor.Monoidal.commTensorLeft F B).inv ≫
       Functor.whiskerLeft F ((curriedTensor _).map e.hom)
