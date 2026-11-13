@@ -262,18 +262,19 @@ theorem adicResidue_koszul_coefficient_augmentation
     ∃ ε : ringedKoszulDualTower R r b ⟶ adicResidueQuotientCoefficientTower X J U,
       ∀ n : ℕ, ringedKoszulDualUnit R r b n ≫ ε.app (op n) =
         adicResidueQuotientCoefficientUnit X J U n := by
-  let O := (completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U
-  let b := fun i ↦ ringedKoszulSliceSection
-    (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
-    (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
-      (a i)) U
-  have h := ringedKoszulDualTower_quotient_augmentation O r b
+  dsimp only
+  have h := ringedKoszulDualTower_quotient_augmentation
+    ((completed (coefficientProEtaleModelTopology.{u, v} X) A J).over U) r
+    (fun i ↦ ringedKoszulSliceSection
+      (completed (coefficientProEtaleModelTopology.{u, v} X) A J)
+      (algebraSection (coefficientMap (coefficientProEtaleModelTopology.{u, v} X) A J)
+        (a i)) U)
     (adicResidueQuotientModule X J U) (adicResidueQuotientModuleStep X J U)
     (quotientProjection X J U) (quotientProjection_step X J U)
     (fun n i ↦ scalarPower_quotientProjection X J U (a i)
       (ha (Ideal.subset_span (Set.mem_range_self i))) n)
   simpa only [quotientProjection, adicResidueQuotientCoefficientTower,
-    adicResidueQuotientCoefficientUnit, O, b] using h
+    adicResidueQuotientCoefficientUnit] using h
 
 set_option hygiene false in
 set_option quotPrecheck false in
