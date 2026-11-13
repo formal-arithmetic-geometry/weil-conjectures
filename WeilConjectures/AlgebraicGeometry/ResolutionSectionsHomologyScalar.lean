@@ -90,13 +90,8 @@ theorem resolutionSectionsHomology_scalar
   let A := RingedSpace.globalSectionsComplex R.resolution
   let B := ((SheafOfModules.forget S.ringCatSheaf).mapHomologicalComplex
     (ComplexShape.up ℕ)).obj K
-  let U := forget₂ (ModuleCat.{u}
-    ((f ⁻¹ᵁ V).toScheme.ringCatSheaf.obj.obj (op ⊤))) AddCommGrpCat.{u}
   let E := PresheafOfModules.toPresheaf S.ringCatSheaf.obj ⋙
     (CategoryTheory.evaluation S.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
-  let cA := (A.sc p).mapHomologyIso U
-  let cB := (B.sc p).mapHomologyIso E
-  let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p
   dsimp only
   intro a y
   let b := ((Scheme.ΓSpecIso Γ(S, V)).inv ≫ h.appTop).hom a

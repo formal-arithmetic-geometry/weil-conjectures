@@ -101,6 +101,7 @@ theorem resolution_open_scalar_core {X T : Scheme.{u}}
       rw [← hb]
       simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
     dsimp only at hs
+    dsimp only [h] at hb'
     simp only [hb', map_pow] at hs
     exact hs
   have hh (y : (H.obj ((S.mapHomologicalComplex (.up ℕ)).obj

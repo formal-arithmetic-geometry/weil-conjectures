@@ -76,7 +76,7 @@ lemma pushforwardRestrictMapApp_app {W W' : X.Opens} (h : W' ≤ W) (M : X.Modul
   simp only [pushforwardRestrictMapApp, Hom.comp_app, pushforward_map_app,
     restrictAdjunction_unit_app_app, pushforwardComp_hom_app_app, pushforwardCongr_hom_app_app,
     restrictFunctorComp_inv_app_app, restrictFunctorCongr_hom_app_app, restrict_map,
-    Category.id_comp, ← Functor.map_comp]
+    ← Functor.map_comp]
   erw [Category.id_comp]
   simp only [← Functor.map_comp]
   rfl
