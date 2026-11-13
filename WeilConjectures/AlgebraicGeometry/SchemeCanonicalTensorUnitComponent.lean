@@ -167,7 +167,6 @@ private theorem evaluation_summand_postcomp (Y : Scheme.{u})
   exact uncurry_postcomp Y.sheaf (P.X r) _ (N.X n) B (π P N q r n h) g
 
 set_option backward.isDefEq.respectTransparency.types true in
-set_option trace.profiler true in
 /-- A tensor-unit action has the canonical dual-projection component formula.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, coefficient cancellation and tensor action.
