@@ -54,16 +54,18 @@ attribute [local instance] hasTensor₄ObjExt_mod hasGoodTensor₁₂Tensor_mod 
 -- Prove the cancellation in abstract categories, before specializing to derived functors.
 private lemma inv_comp_of_comparison {C D : Type*} [Category* C] [Category* D]
     (F : C ⥤ D) {A B A' B' : D} {W X Y Z : C} (e : A ≅ B)
-    (p : W ≅ X) (q : X ≅ Y) (r : Z ≅ Y)
+    (p : W ≅ X) (q : X ⟶ Y) (q' : Y ⟶ X) (hq : q ≫ q' = 𝟙 X) (r : Z ≅ Y)
     (u : A ⟶ A') (v : A' ⟶ F.obj W) (s : B ⟶ B') (t : B' ⟶ F.obj Z)
-    (h : e.hom ≫ s ≫ t ≫ F.map r.hom = u ≫ v ≫ F.map p.hom ≫ F.map q.hom) :
-    e.inv ≫ u ≫ v = (s ≫ t) ≫ F.map (r.hom ≫ q.inv ≫ p.inv) := by
+    (h : e.hom ≫ s ≫ t ≫ F.map r.hom = u ≫ v ≫ F.map p.hom ≫ F.map q) :
+    e.inv ≫ u ≫ v = (s ≫ t) ≫ F.map (r.hom ≫ q' ≫ p.inv) := by
   rw [Iso.inv_comp_eq]
   calc
-    u ≫ v = (u ≫ v ≫ F.map p.hom ≫ F.map q.hom) ≫
-        F.map (q.inv ≫ p.inv) := by simp [Functor.map_comp, Category.assoc]
-    _ = (e.hom ≫ s ≫ t ≫ F.map r.hom) ≫ F.map (q.inv ≫ p.inv) := by rw [h]
-    _ = e.hom ≫ (s ≫ t) ≫ F.map (r.hom ≫ q.inv ≫ p.inv) := by
+    u ≫ v = (u ≫ v ≫ F.map p.hom ≫ F.map q) ≫
+        F.map (q' ≫ p.inv) := by
+          simp only [Category.assoc, ← F.map_comp, reassoc_of% hq, Category.id_comp,
+            p.hom_inv_id, F.map_id, Category.comp_id]
+    _ = (e.hom ≫ s ≫ t ≫ F.map r.hom) ≫ F.map (q' ≫ p.inv) := by rw [h]
+    _ = e.hom ≫ (s ≫ t) ≫ F.map (r.hom ≫ q' ≫ p.inv) := by
       simp only [Functor.map_comp, Category.assoc]
 
 section Comap
@@ -94,16 +96,19 @@ lemma derivedUpperStarExtendScalarsIso_inv_app_comp_counit
               (ComplexShape.up ℤ)).inv.app K) :
         (L(Mod.extendScalars (coefficientMap a Y)) ⋙ L((f)^*⟦Λ'⟧)).obj
           (DerivedCategory.Qh.obj K) ⟶ _) := by
-  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv,
-    NatIso.mapHomotopyCategory_inv_app, NatTrans.mapHomotopyCategory_app] using
+  have hp : (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K ≫
+      (NatTrans.mapHomotopyCategory (pullIso a f).inv (ComplexShape.up ℤ)).app K = 𝟙 _ := by
+    rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
+      NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+  simpa only [Category.assoc, Iso.app_hom, Iso.app_inv, Functor.comp_obj] using
     inv_comp_of_comparison DerivedCategory.Qh
-    ((derivedUpperStarExtendScalarsIso a f).app (DerivedCategory.Qh.obj K))
-    ((Functor.mapHomotopyCategoryCompIso
-      (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X))) (.up ℤ)).app K)
-    ((NatIso.mapHomotopyCategory (pullIso a f) (.up ℤ)).app K)
-    ((Functor.mapHomotopyCategoryCompIso
-      (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧)) (.up ℤ)).app K)
-    _ _ _ _ (derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K)
+      ((derivedUpperStarExtendScalarsIso a f).app (DerivedCategory.Qh.obj K))
+      ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl ((f)^*⟦Λ⟧ ⋙ Mod.extendScalars (coefficientMap a X))) (.up ℤ)).app K)
+      _ _ hp
+      ((Functor.mapHomotopyCategoryCompIso
+        (Iso.refl (Mod.extendScalars (coefficientMap a Y) ⋙ (f)^*⟦Λ'⟧)) (.up ℤ)).app K)
+      _ _ _ _ (derivedUpperStarExtendScalarsIso_hom_app_comp_counit a f K)
 
 set_option profiler true in
 /-- The composite `Lf^* (Res (Ext M)) ⟶ Res (Lf^* (Ext M)) ⟶ Res (Ext (Lf^* M))` of `ι` and of `Res`
@@ -319,7 +324,7 @@ lemma upperStar_map_derivedExtendScalarsTriangleδ_app_Qh
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P)) ≫
       (shiftFunctor _ (1 : ℤ)).map
         (((f)^*⟦Λ⟧).leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P)) = _ := hG
-  simp only [hG']
+  rw [hG']
   have hV := congrArg DerivedCategory.Qh.map (upperStarExtendComapComplexIso_quotient_map a f P)
   simp only [Functor.map_comp] at hV
   have hq := DerivedCategory.quotientCompQhIso_hom_naturality
