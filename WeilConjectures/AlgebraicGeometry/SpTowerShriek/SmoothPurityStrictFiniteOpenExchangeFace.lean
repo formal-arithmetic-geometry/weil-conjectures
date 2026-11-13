@@ -652,8 +652,13 @@ private theorem open_exchange_inverse (b : Base l E)
       dsimp only [B, Iso.symm_hom, Iso.symm_inv, Functor.comp_obj]
       run_tac Lean.Elab.Tactic.withMainContext do
         let h ← Lean.Elab.Term.elabTerm (Lean.mkIdent `HU) none
-        let x ← Lean.Meta.zetaReduce (← Lean.Meta.inferType h)
-        let y ← Lean.Meta.zetaReduce (← Lean.Elab.Tactic.getMainTarget)
+        let x ← Lean.Meta.zetaReduce (← Lean.instantiateMVars (← Lean.Meta.inferType h))
+        let y ← Lean.Meta.zetaReduce
+          (← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget))
+        let strip (e : Lean.Expr) := e.replace fun v =>
+          if v.isMData then some v.consumeMData else none
+        let x := strip x
+        let y := strip y
         let mut count := 0
         let mut seen : Std.HashSet (Lean.Expr × Lean.Expr) := {}
         let mut todo := #[(x, y)]
