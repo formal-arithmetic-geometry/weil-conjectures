@@ -45,7 +45,7 @@ attribute [-instance] monoidalCategory_boundedConstructible
 namespace NearbyCyclesModel
 
 /-- Vanishing after pullback is preserved by any further factorization of the map. -/
-lemma isZero_leftDerivedUpperStar_of_factorization
+private lemma isZero_leftDerivedUpperStar_of_factorization
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {Y Z W : Scheme.{u}} (p : W ⟶ Y) (q : Z ⟶ Y)
     (hp : ∃ l : W ⟶ Z, l ≫ q = p)

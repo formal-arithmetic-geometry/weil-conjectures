@@ -52,7 +52,7 @@ lemma mateEquiv_eq_of_unit_comp_map (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ 
   simp
 
 /-- Unit compatibility with the forward comparison determines the mate of its inverse. -/
-lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+private lemma mateEquiv_inv_eq_of_unit_comp_map_hom (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (α : L₁ ⋙ H ≅ G ⋙ L₂) (β : TwoSquare R₁ H G R₂)
     (h : ∀ a, G.map (adj₁.unit.app a) ≫ β.app (L₁.obj a) ≫ R₂.map (α.hom.app a) =
       adj₂.unit.app (G.obj a)) :

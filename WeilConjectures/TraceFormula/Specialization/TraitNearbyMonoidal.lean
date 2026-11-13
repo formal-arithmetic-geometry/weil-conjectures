@@ -83,7 +83,7 @@ variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalC
 
 /-- A monoidal functor which inverts the unit at a dualizable object also inverts the lax
 tensor map of the right adjoint with the image of that object as its first argument. -/
-lemma isIso_map_homEquiv_counit_tensor_of_isDualizable
+private lemma isIso_map_homEquiv_counit_tensor_of_isDualizable
     {E : Type*} [Category E] [MonoidalCategory E] (H : D ⥤ E) [H.Monoidal]
     {B : D} (hB : IsDualizable B) (A : C) [IsIso (H.map (adj.unit.app B))] :
     IsIso (H.map (adj.homEquiv _ _

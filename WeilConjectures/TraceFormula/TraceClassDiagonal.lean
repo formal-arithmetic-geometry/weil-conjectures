@@ -39,7 +39,7 @@ namespace CategoryTheory
 
 /-- Transposing through a conjugate base change isomorphism commutes with evaluation and
 postcomposition. -/
-lemma Adjunction.homEquiv_symm_comp_conjugateIsoEquiv {C₁ C₂ C₃ C₄ : Type*}
+private lemma Adjunction.homEquiv_symm_comp_conjugateIsoEquiv {C₁ C₂ C₃ C₄ : Type*}
     [Category* C₁] [Category* C₂] [Category* C₃] [Category* C₄]
     {A : C₁ ⥤ C₂} {A' : C₂ ⥤ C₁} {B : C₂ ⥤ C₃} {B' : C₃ ⥤ C₂}
     {E : C₁ ⥤ C₄} {E' : C₄ ⥤ C₁} {G : C₄ ⥤ C₃} {G' : C₃ ⥤ C₄}

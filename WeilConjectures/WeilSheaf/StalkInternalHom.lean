@@ -143,14 +143,14 @@ theorem stalkAtIhomPairing_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
   exact ihomEvaluationPairing_stalkAt_frobenius s m hs D hD F v x
 
 /-- The perfect stalk pairing identifies the stalk of the internal hom with linear maps. -/
-noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+private noncomputable def stalkAtIhomLinearEquiv (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) :
     ((D.ihom hD F).stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l]
       ((D.stalkAt s m hs).carrier →ₗ[PadicAlgCl l] (F.stalkAt s m hs).carrier) :=
   LinearEquiv.ofBijective (stalkAtIhomPairing s m hs D hD F)
     (bijective_stalkAtIhomPairing s m hs D hD F)
 
-lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+private lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier)
     (x : (D.stalkAt s m hs).carrier) :
     stalkAtIhomLinearEquiv s m hs D hD F v x =
@@ -158,7 +158,7 @@ lemma stalkAtIhomLinearEquiv_apply (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
   rfl
 
 /-- Under the stalk equivalence, Frobenius acts by pre- and post-composition. -/
-lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
+private lemma stalkAtIhomLinearEquiv_frobenius (D : WeilSheaf k₀ l X) (hD : D.IsLisse)
     (F : WeilSheaf k₀ l X) (v : ((D.ihom hD F).stalkAt s m hs).carrier) :
     stalkAtIhomLinearEquiv s m hs D hD F (((D.ihom hD F).stalkAt s m hs).frobenius v) =
       (F.stalkAt s m hs).frobeniusEnd ∘ₗ stalkAtIhomLinearEquiv s m hs D hD F v ∘ₗ

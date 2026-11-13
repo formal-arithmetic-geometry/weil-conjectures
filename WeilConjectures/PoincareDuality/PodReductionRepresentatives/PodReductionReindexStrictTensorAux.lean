@@ -51,7 +51,7 @@ theorem finiteAdjunction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
   exact congrArg (f.val.app U) (finiteAdjunction_unit_apply l E W n M U x)
 
 /-- Transposing an evaluated ordinary reduction map evaluates it on the quotient unit. -/
-theorem ordinaryReduction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
+private theorem ordinaryReduction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) (N : coefficientSequenceModules l E W)
     (f : (pullbackTensorOrdinaryReduction l E W).obj M ⟶ N)
     (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
@@ -68,7 +68,7 @@ theorem ordinaryReduction_homEquiv_apply (W : Scheme.{u}) (n : ℕ)
       (coefficientSequenceEvaluation l E W n).map f) U x
 
 /-- Equality on a quotient unit gives equality of the corresponding transpose sections. -/
-theorem ordinaryReduction_homEquiv_apply_eq (W : Scheme.{u}) (n : ℕ)
+private theorem ordinaryReduction_homEquiv_apply_eq (W : Scheme.{u}) (n : ℕ)
     (M : integralTowerModules l E W) (N : coefficientSequenceModules l E W)
     (f g : (pullbackTensorOrdinaryReduction l E W).obj M ⟶ N)
     (U : W.ProEtᵒᵖ) (x : M.val.obj U)

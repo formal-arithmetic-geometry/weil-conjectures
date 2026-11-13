@@ -31,7 +31,7 @@ open CategoryTheory Limits Endofunctor Opposite Abelian
 namespace CategoryTheory.InjectiveResolution
 
 /-- A map of resolutions acting by a scalar on sections acts by that scalar on homology. -/
-lemma extAddEquivHomology_comp_mk₀
+private lemma extAddEquivHomology_comp_mk₀
     {C : Type*} [Category* C] [Abelian C] [HasExt C] {X Y : C}
     (R : InjectiveResolution Y) {A : Type*} [Ring A] {n : ℕ}
     (S : ShortComplex (ModuleCat A))
@@ -138,7 +138,7 @@ lemma sc_g_sectionsAddEquiv (f : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj 
     sectionsAddEquiv_comp]
   rfl
 
-lemma sc_f_sectionsAddEquiv (p : ℕ)
+private lemma sc_f_sectionsAddEquiv (p : ℕ)
     (g : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj (I.cocomplex.X p)) :
     ((I.cocomplex.sc (p + 1)).map (globalSectionsWeilFunctor k₀ l Y)).f
       (sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.prev_nat_succ p).symm) g) =

@@ -45,7 +45,7 @@ namespace NearbyCyclesModel
 
 /-- Vanishing on the special fibre of a slice implies vanishing on the fibre of its special
 coordinate over the slice point. -/
-lemma isZero_upperStar_pullback_fst_of_sliceSpecialMap
+private lemma isZero_upperStar_pullback_fst_of_sliceSpecialMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {k' K : Type u} [Field k'] [Field K] [Algebra k' K]
     {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}

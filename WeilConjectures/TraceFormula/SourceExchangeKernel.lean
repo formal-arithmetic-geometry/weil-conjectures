@@ -28,7 +28,7 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory.Functor
 
 /-- Move a mapped composite through two natural isomorphisms, keeping the final map grouped. -/
-lemma map_whiskerLeft_comp_naturality {V W X Y : Type*} [Category V] [Category W]
+private lemma map_whiskerLeft_comp_naturality {V W X Y : Type*} [Category V] [Category W]
     [Category X] [Category Y] [MonoidalCategory W]
     (F : W ⥤ Y) (G : V ⥤ W) (H : V ⥤ X) {Lf Sf : X ⥤ Y}
     (s : G ⋙ F ≅ H ⋙ Lf) (σ : Lf ≅ Sf) (A : W) {B₀ B₁ B₂ : W} {V₀ V₁ V₂ : V} {Z : X}

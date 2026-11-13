@@ -133,7 +133,7 @@ lemma specMap_apply_asIdeal {B B' : Type u} [CommRing B] [CommRing B'] (f : B �
   rfl
 
 /-- The image of a localization away from `a` consists of the primes not containing `a`. -/
-lemma specMap_mem_range_of_isLocalizationAway {A B : Type u} [CommRing A] [CommRing B]
+private lemma specMap_mem_range_of_isLocalizationAway {A B : Type u} [CommRing A] [CommRing B]
     [Algebra A B] (a : A) [IsLocalization.Away a B] (q : Spec (.of A)) :
     q ∈ Set.range (Spec.map (CommRingCat.ofHom (algebraMap A B))) ↔ a ∉ q.asIdeal := by
   change q ∈ Set.range (PrimeSpectrum.comap (algebraMap A B)) ↔ _

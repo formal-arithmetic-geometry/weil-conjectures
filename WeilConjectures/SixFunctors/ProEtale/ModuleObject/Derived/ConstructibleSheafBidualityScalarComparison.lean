@@ -22,14 +22,14 @@ attribute [local instance] DerivedCategory.braidedCategory'
 attribute [local irreducible] DerivedCategory.monoidalClosed
 
 /-- Forgetting membership in a full monoidal closed subcategory preserves biduality. -/
-lemma CategoryTheory.ObjectProperty.toIhomIhom_hom
+private lemma CategoryTheory.ObjectProperty.toIhomIhom_hom
     {C : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
     {P : ObjectProperty C} [P.IsMonoidal] [P.IsMonoidalClosed]
     (W L : P.FullSubcategory) :
     (toIhomIhom W L).hom = toIhomIhom W.obj L.obj := rfl
 
 /-- A composite of restrictions of braided functors is braided. -/
-lemma CategoryTheory.ObjectProperty.braided_lift_comp
+private lemma CategoryTheory.ObjectProperty.braided_lift_comp
     {C D E : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C]
     [Category* D] [MonoidalCategory D] [BraidedCategory D]
     [Category* E] [MonoidalCategory E] [BraidedCategory E]
@@ -45,7 +45,7 @@ lemma CategoryTheory.ObjectProperty.braided_lift_comp
   exact Functor.LaxBraided.braided (F := F ⋙ G) K.obj M.obj
 
 /-- Invertible dual comparisons identify the two biduality maps. -/
-lemma CategoryTheory.MonoidalClosed.exists_biduality_comparison
+private lemma CategoryTheory.MonoidalClosed.exists_biduality_comparison
     {C D : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
     [Category* D] [MonoidalCategory D] [BraidedCategory D] [MonoidalClosed D]
     (T : C ⥤ D) [T.LaxBraided] {W : C} {W' : D} (e : T.obj W ⟶ W') (L : C)
@@ -60,7 +60,7 @@ lemma CategoryTheory.MonoidalClosed.exists_biduality_comparison
   rw [map_toIhomIhom_comp_dualComparison_assoc, IsIso.hom_inv_id, Category.comp_id]
 
 /-- Forget a biduality comparison for a composite of restrictions to full subcategories. -/
-lemma CategoryTheory.ObjectProperty.exists_biduality_comparison_lift_comp
+private lemma CategoryTheory.ObjectProperty.exists_biduality_comparison_lift_comp
     {C D E : Type*} [Category* C] [MonoidalCategory C] [BraidedCategory C] [MonoidalClosed C]
     [Category* D] [Category* E] [MonoidalCategory E] [BraidedCategory E] [MonoidalClosed E]
     (P : ObjectProperty C) [P.IsMonoidal] [P.IsMonoidalClosed] (Q : ObjectProperty D)

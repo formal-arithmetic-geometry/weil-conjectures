@@ -161,7 +161,7 @@ lemma leftDerivedUpperStarComp_inv_congr_comp_hom_naturality {T S S' R : Scheme.
 omit [Finite Λ] in
 /-- The compatibility of base change with section isomorphisms transports across an
 isomorphism to a complex of étale origin. -/
-lemma leftDerivedUpperStar_map_comp_compSectionIso_of_iso {B B' P P' : Scheme.{u}}
+private lemma leftDerivedUpperStar_map_comp_compSectionIso_of_iso {B B' P P' : Scheme.{u}}
     (u : B' ⟶ B) (a : P ⟶ B) (a' : P' ⟶ B') (v : P' ⟶ P) (i : B ⟶ P) (i' : B' ⟶ P')
     (hv : v ≫ a = a' ≫ u) (hi : i' ≫ v = u ≫ i) (h : i ≫ a = 𝟙 B) (h' : i' ≫ a' = 𝟙 B')
     (C : _root_.DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

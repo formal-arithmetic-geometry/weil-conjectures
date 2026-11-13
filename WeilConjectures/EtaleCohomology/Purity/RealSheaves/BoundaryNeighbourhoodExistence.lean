@@ -261,7 +261,7 @@ lemma geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_pow [Fintype K] (n : ℕ)
 
 /-- A Galois lift of a Frobenius power makes a boundary chart compatible with its geometric
 residue point. -/
-lemma exists_boundaryChart_galois_compatible (x : C.finitePoints)
+private lemma exists_boundaryChart_galois_compatible (x : C.finitePoints)
     (c : BoundaryChart (C ↘ Spec (.of K)) j x.1) :
     ∃ (σ : Gal(Ω/C.functionField)) (n : ℕ),
       (∀ y, σ (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
@@ -355,7 +355,7 @@ variable [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))]
 omit [IsCurve (U ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] in
 /-- A compatible Galois conjugate of a chart gives a boundary neighbourhood for the conjugated
 Frobenius lift. -/
-lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.range j.base)
+private lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 ∉ Set.range j.base)
     (c : BoundaryChart (C ↘ Spec (.of K)) j x.1) (σF : Gal(Ω/C.functionField))
     (hσF : σF • c.point = c.point)
     (hFk : ∀ y, σF (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j
