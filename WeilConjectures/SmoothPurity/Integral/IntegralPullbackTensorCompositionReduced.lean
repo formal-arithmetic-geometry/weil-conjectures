@@ -137,7 +137,9 @@ theorem integralPullbackTensorCompositionReduced_of_systemLaw {X Y Z : Scheme.{u
     (integralSystemTensorComparison l E f) (integralSystemTensorComparison l E h)
     (integralSystemTensorComparison l E (h ≫ f))
     (integralComparisonSystemComposition l E h f) c
-    (fun K ↦ by simpa only [integralPullbackSystemComparison_sequence, finiteSystemDerivedComposition_eq] using hc K)
+    (fun K ↦ by
+      simpa only [integralPullbackSystemComparison_sequence,
+        ← finiteSystemDerivedComposition_eq l E h f] using hc K)
     (canonicalIntegralPullbackTensor l E f) (canonicalIntegralPullbackTensor l E h)
     (canonicalIntegralPullbackTensor l E (h ≫ f))
     (canonicalIntegralPullbackTensor_systemReduction_sequence l E f)
