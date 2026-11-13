@@ -73,7 +73,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
+set_option profiler true in
 -- Comparing the two concrete Ext maps unfolds the sheaf-adjunction construction.
 /-- The canonical comparison from cohomology of the direct image of units to cohomology
 of units is bijective in every degree.
