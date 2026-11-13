@@ -22,10 +22,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
 
-set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
 -- Elaborate the two site tensors through their comparison APIs.
-set_option maxHeartbeats 1200000 in
 -- The independently chosen site tensors require large definitional equalities.
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
@@ -56,10 +53,7 @@ structure NativeRingedForgetTensorChainComparison where
       tensor.hom.app (P ⊗ Q, N) ≫ (tensor.hom.app (P, Q) ▷ F.obj N) ≫
         (α_ (F.obj P) (F.obj Q) (F.obj N)).hom
 
-set_option profiler true in
-set_option synthInstance.maxHeartbeats 200000 in
 -- Elaborate the two site tensors through their comparison APIs.
-set_option maxHeartbeats 1200000 in
 -- The independently chosen site tensors require large definitional equalities.
 -- Elaborate the two site tensors through their comparison APIs.
 /-- Restriction has the comparison obtained by summing its underived tensorators.
