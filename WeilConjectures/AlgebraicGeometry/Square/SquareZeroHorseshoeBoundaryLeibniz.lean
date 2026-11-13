@@ -110,7 +110,6 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
       hΓ.δ 0 1 rfl ≫
       (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv =
         RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0 := by
-  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let v := RingedSpace.globalSectionsFunctor X.toRingedSpace
   let : PreservesFiniteLimits v := inferInstanceAs
     (PreservesFiniteLimits (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
@@ -120,6 +119,7 @@ private theorem snake_boundary_eq_triangle (X : Scheme.{u})
     (v.homologyRightDerivedFunctorPlusObjSingleFunctorIso S.X₁ 1) _
     (heq 0) (htriangle S hS 0)
   simp only [Category.assoc] at h
+  dsimp only [v] at h
   dsimp only [RingedSpace.moduleCohomologyBoundary,
     Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso]
   simp only [NatIso.ofComponents_hom_app, NatIso.ofComponents_inv_app]
@@ -263,10 +263,10 @@ private theorem canonical_boundary_leibniz (X : Scheme.{u})
             ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ g)) +
         ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom
           (RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0
-            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ f)) := by
+            ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app
+              S.X₃ f)) := by
   classical
   intro S f g
-  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   obtain ⟨ι, U, hU, b, c, hb, hc⟩ := common_lifts X B C p hS.epi_g f g
   obtain ⟨cmp, hcmp, hnatural⟩ := Scheme.Modules.cechH1Map_natural X U hU
   have ht : ∀ a, p.right.hom.app (op (U a)) (b a * c a) =
@@ -367,7 +367,6 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
         ((RingedSpace.moduleCohomology X.toRingedSpace 1).map ((μ g)).asHom).hom (d.hom f) := by
   classical
   have _ := hsq
-  let := (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2
   let := HasDerivedCategory.standard
     (SheafOfModules.{u} (moduleRings X.toRingedSpace))
   let := HasDerivedCategory.standard
@@ -377,7 +376,8 @@ theorem square_zero_horseshoe_boundary_leibniz (X : Scheme.{u})
   dsimp only
   intro f g
   have he := canonical_boundary_leibniz X B C p I i hw hS μ hlift f g
-  simp only [ModuleCat.comp_apply, hd]
+  rw [← hd] at he
+  simp only [ModuleCat.comp_apply]
   exact he
 
 end AlgebraicGeometry
