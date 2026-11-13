@@ -333,15 +333,17 @@ private theorem composite_complex_epsilon
     Functor.comp_obj, HomotopyCategory.quotient, CategoryTheory.Quotient.functor]
   simp only [Category.id_comp, Category.comp_id]
 
-private theorem derivedPullbackComplexComparison_eq_epsilon
-    {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
-    (P : CochainComplex (CornerModules A) ℤ) :
-    derivedPullbackComplexComparison e.pullback e.left e.epsilon P =
-      e.epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
-  change e.left.map (𝟙 _) ≫
-    e.epsilon.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
-  simp only [Functor.map_id, Category.comp_id, Category.id_comp]
+private theorem square_transport_cancel_iff
+    {C : Type*} [Category C] {A B A' B' D E D' E' : C}
+    {i : A ⟶ A'} [Epi i] {j : B ⟶ B'} {q : D ⟶ D'} [Mono q] {r : E ⟶ E'}
+    {t : A ⟶ B} {t' : A' ⟶ B'} {a : B' ⟶ D} {b : A' ⟶ E}
+    {c : B ⟶ D'} {d : A ⟶ E'} {m : E ⟶ D} {n : E' ⟶ D'}
+    (hc : c = j ≫ a ≫ q) (hd : d = i ≫ b ≫ r)
+    (ht : i ≫ t' = t ≫ j) (hm : m ≫ q = r ≫ n) :
+    (t ≫ c = d ≫ n) ↔ (t' ≫ a = b ≫ m) := by
+  simp only [hc, hd, Category.assoc, ← reassoc_of% ht, ← hm]
+  rw [cancel_epi]
+  simp only [← Category.assoc, cancel_mono]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -364,10 +366,11 @@ private theorem square_condition_transport
       (edge_composite_epsilon g k).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
         DerivedCategory.Qh.map ((square_homotopy_comparison s).hom.app
           ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) := by
-  -- The quotient comparison and the homotopy factorization have identity components.
-  simp only [derivedPullbackComplexComparison_eq_epsilon, edge_composite_epsilon,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc]
-  rfl
+  -- Cancel the comparison isomorphisms in an abstract diagram before specializing to complexes.
+  exact square_transport_cancel_iff
+    (composite_complex_epsilon f h P) (composite_complex_epsilon g k P)
+    (theta.hom.naturality ((DerivedCategory.quotientCompQhIso (CornerModules Y)).inv.app P))
+    (DerivedCategory.quotientCompQhIso_hom_naturality (s.complexComparison.hom.app P))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
