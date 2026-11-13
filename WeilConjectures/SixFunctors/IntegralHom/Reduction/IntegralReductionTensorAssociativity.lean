@@ -31,6 +31,26 @@ private theorem reduction_iso_inv_section_of_hom_section
   rw [← h]
   exact congrArg (fun f ↦ (f.f k).val.app U x) e.hom_inv_id
 
+private theorem reduction_tensorComparison_transport
+    {C D : Type*} [Category C] [Category D]
+    {T T' : C × C ⥤ C} {S S' : D × D ⥤ D} (F : C ⥤ D)
+    (e : T ≅ T') (f : S ≅ S') (mu : T ⋙ F ≅ F.prod F ⋙ S)
+    {A X Z : C} {P Q : D} (r : A ⟶ T.obj (X, Z))
+    (x : F.obj X ⟶ P) (y : F.obj Z ⟶ Q) :
+    F.map (r ≫ e.hom.app (X, Z)) ≫
+        (Functor.isoWhiskerRight e.symm F ≪≫ mu ≪≫
+          Functor.isoWhiskerLeft (F.prod F) f).hom.app (X, Z) ≫
+        S'.map (Prod.mkHom x y) =
+      (F.map r ≫ mu.hom.app (X, Z) ≫ S.map (Prod.mkHom x y)) ≫
+        f.hom.app (P, Q) := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.prod_obj]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← f.hom.naturality]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    Functor.map_id, Category.id_comp]
+
 private theorem nativeScalarTensorStrength_transpose
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
     (T : C × C ⥤ C) (S : D × D ⥤ D) {F : C ⥤ D} {U : D ⥤ C}
@@ -236,8 +256,7 @@ private theorem normalizedBeta_eq (n : ℕ)
   · unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
     exact (coefficientScalarTensorIso_exists l E Y n P Q).choose_spec.1
 
-set_option trace.profiler true in
-set_option maxHeartbeats 6400000 in
+set_option profiler true in
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem nativeReductionMonoidal
@@ -350,23 +369,14 @@ private theorem nativeReductionMonoidal
           rw [← hbκ]
           exact (asIso beta).hom_inv_id
         rw [hh, CategoryTheory.Functor.map_id]
-      have hnat := f.hom.naturality (Prod.mkHom εP εQ)
       let G := F.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
         m.mu.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
           m.target.tensor.map (Prod.mkHom εP εQ)
       calc
         _ = G ≫ f.hom.app (DerivedCategory.Q.obj _, DerivedCategory.Q.obj _) := by
+          rw [hcr]
           with_unfolding_all
-            rw [hcr]
-            dsimp only [D', finiteCochainModel, coefficientFiniteDerivedExtension,
-              F, integralDerivedReduction, G, AS, CoefficientClosedStructure.tensor,
-              CategoryTheory.Functor.prod_obj, mu, Iso.trans_hom, Iso.symm_hom,
-              Functor.isoWhiskerRight_hom,
-              Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
-              Functor.whiskerLeft_app]
-            simp only [Functor.map_comp, Category.assoc]
-            simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
-            erw [← hnat, Category.comp_id]
+            exact reduction_tensorComparison_transport F e f m.mu _ εP εQ
         _ = G ≫ m.target.representative.inv.app (⟨_, hEP⟩, ⟨_, hEQ⟩) ≫ cS := by
           rw [hcs]
           simp only [Iso.inv_hom_id_app_assoc]
