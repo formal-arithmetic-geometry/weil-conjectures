@@ -34,6 +34,26 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
+-- Transport a cone augmentation and compose with a colimit identification abstractly.
+set_option trace.profiler true in
+private theorem telescope_augmentation_comp
+    {B : Type*} [Category* B] [Abelian B]
+    {X Y K L : CochainComplex B ℤ} {φ ψ : X ⟶ Y} (h : φ = ψ)
+    (g : mappingCone φ ⟶ K) (e : K ≅ L) (p : Y ⟶ K) (q : Y ⟶ L)
+    (hinr : mappingCone.inr φ ≫ g = p)
+    (hinl : (mappingCone.inl φ).comp (HomComplex.Cochain.ofHom g) (add_zero _) = 0)
+    (hg : QuasiIso g) (hp : p ≫ e.hom = q) :
+    ∃ f : mappingCone ψ ⟶ L, mappingCone.inr ψ ≫ f = q ∧
+      (mappingCone.inl ψ).comp (HomComplex.Cochain.ofHom f) (add_zero _) = 0 ∧
+      QuasiIso f := by
+  subst ψ
+  have : QuasiIso g := hg
+  refine ⟨g ≫ e.hom, ?_, ?_, inferInstance⟩
+  · rw [← Category.assoc, hinr, hp]
+  · rw [HomComplex.Cochain.ofHom_comp]
+    rw [← HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain]
+    rw [hinl, HomComplex.Cochain.zero_comp]
+
 set_option trace.profiler true in
 /-- (blueprint: lem-pc-kflat-hocolim-truncations) For a complex `K` of modules over a sheaf of
 commutative rings on a site, the canonical map from the telescope of its good truncations to
@@ -117,25 +137,18 @@ theorem quasiIso_hocolim_truncLE_and_filtered_colimit
       K.ιTruncLE (n : ℤ) := by simp [t, D]
   have hs : telescopeColimitShift R D =
       𝟙 (∐ E) - Sigma.desc (fun n ↦ t n ≫ Sigma.ι E (n + 1)) := by
+    change Sigma.desc (fun n ↦ Sigma.ι E n - t n ≫ Sigma.ι E (n + 1)) = _
     apply Sigma.hom_ext
     intro n
-    simp only [telescopeColimitShift, Preadditive.comp_sub, Category.comp_id,
-      Sigma.ι_comp_desc]
+    simp only [Preadditive.comp_sub, Category.comp_id, Sigma.ι_comp_desc]
   obtain ⟨g, hg, hz, hq⟩ := quasiIso_telescopeColimit R D
-  have hq' : QuasiIso (g ≫ e.hom) := by
-    let _ := hq
-    infer_instance
   constructor
   · refine ⟨t, ht, ?_⟩
-    rw [← hs]
-    refine ⟨g ≫ e.hom, ?_, ?_, hq'⟩
-    · rw [← Category.assoc, hg]
-      apply Sigma.hom_ext
-      intro n
-      simpa only [telescopeToColimit, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using he n
-    · rw [HomComplex.Cochain.ofHom_comp]
-      rw [← HomComplex.Cochain.comp_assoc_of_second_is_zero_cochain]
-      rw [hz, HomComplex.Cochain.zero_comp]
+    apply telescope_augmentation_comp hs g e (telescopeToColimit R D)
+      (Sigma.desc (fun n : ℕ ↦ K.ιTruncLE (n : ℤ))) hg hz hq
+    apply Sigma.hom_ext
+    intro n
+    simpa only [telescopeToColimit, Sigma.ι_comp_desc_assoc, Sigma.ι_comp_desc] using he n
   · intro I _ _ F G α hα
     let _ := (SheafOfModules.grothendieckAbelian_with_localized_generator J R).1
     exact (HomologicalComplex.quasiIso M (.up ℤ)).colimMap α hα

@@ -266,7 +266,9 @@ theorem exists_relative_boundedAbove_flat_extension
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (t : E ⟶ F) (g : F ⟶ H),
       (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (F.X i)) ∧
       (∀ i : ℤ, SheafOfModules.IsFlat (F.X i)) ∧ QuasiIso g ∧ t ≫ g = f := by
-  exact relative_extension_of_flat_biprod SheafOfModules.IsFlat flat_biprod
+  exact relative_extension_of_flat_biprod
+    (B := SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    (SheafOfModules.IsFlat (R := R)) (flat_biprod (R := R))
     E H f hE hflat Q r hQ hflatQ hr
 
 end CochainComplex
