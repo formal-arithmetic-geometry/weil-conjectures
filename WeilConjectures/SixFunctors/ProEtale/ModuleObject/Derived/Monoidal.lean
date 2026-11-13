@@ -102,82 +102,25 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-! ### Instances
 
-Record the colimits and their preservation used by the graded tensor constructions once,
-so that constructing tensor products does not repeat the search through module objects. -/
+Direct instances for complexes of module objects over `Λ_Z`. -/
 
-private lemma hasColimitsOfShape_monoidalModule (Z : Scheme.{u})
-    (J : Type) [Category J] :
-    HasColimitsOfShape J
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
-  have := Mod.hasColimitsOfSize (C := Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-    (R := condensedRingObj Λ Z)
-  inferInstance
-
-private lemma preservesColimitsOfSize_tensorLeft_monoidalModule (Z : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-    PreservesColimitsOfSize.{0, 0} (tensorLeft M) := inferInstance
-
-private lemma preservesColimitsOfSize_tensorRight_monoidalModule (Z : Scheme.{u})
-    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-    PreservesColimitsOfSize.{0, 0} (tensorRight M) := inferInstance
-
-private lemma hasTensor_gradedModule (Z : Scheme.{u})
-    (A B : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasTensor A B := by
-  have := hasColimitsOfShape_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ Z
-  infer_instance
-
-private lemma hasTensor₄ObjExt_gradedModule (Z : Scheme.{u})
-    (A B C D : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasTensor₄ObjExt A B C D := by
-  have := hasColimitsOfShape_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ Z
-  infer_instance
-
-private lemma hasGoodTensor₁₂Tensor_gradedModule (Z : Scheme.{u})
-    (A B C : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasGoodTensor₁₂Tensor A B C := by
-  have := hasColimitsOfShape_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ Z
-  infer_instance
-
-private lemma hasGoodTensorTensor₂₃_gradedModule (Z : Scheme.{u})
-    (A B C : GradedObject ℤ
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    GradedObject.HasGoodTensorTensor₂₃ A B C := by
-  have := hasColimitsOfShape_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ Z
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ Z
-  infer_instance
-
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 instance hasTensor_cochainComplex (Z : Scheme.{u})
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) ℤ) :
     HomologicalComplex.HasTensor A B :=
-  hasTensor_gradedModule Λ Z A.X B.X
+  inferInstance
 
-set_option profiler true in
+set_option synthInstance.maxHeartbeats 200000 in
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategoryStruct_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategoryStruct
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
-        ℤ) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
-  infer_instance
+        ℤ) :=
+  inferInstance
 
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
     MonoidalCategory
       (CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
@@ -186,6 +129,7 @@ noncomputable instance monoidalCategory_cochainComplex (Z : Scheme.{u}) :
 
 /-! ### K-flatness of pullbacks -/
 
+-- the generic search goes through the colimits of `Mod (Sheaf (ProEt.topology Z) Ab) _`
 /-- The K-flat complexes of module objects over `Λ_Z` form a left derivability structure for the
 quasi-isomorphisms of the homotopy category. It is not an instance: it would change the instance
 found for the existence of the derived pullbacks of module objects. -/
@@ -270,13 +214,6 @@ lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
     upperStarTensorComplexHomX Λ f A B n ≫
       (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B).f n =
       𝟙 _ := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro i₁ i₂ h
   simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
@@ -299,13 +236,6 @@ lemma upperStarTensorComplexHom_comm
       (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj A ⊗
         ((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).obj B).d n n' ≫
         upperStarTensorComplexHomX Λ f A B n' := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have hc := HomologicalComplex.Hom.comm
     (HomologicalComplex.mapBifunctorComparison (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧)
       (.up ℤ) A B) n n'
@@ -338,13 +268,6 @@ lemma upperStarTensorComplexHom_eq_inv
     upperStarTensorComplexHom Λ f A B =
       inv (HomologicalComplex.mapBifunctorComparison (Functor.OplaxMonoidal.δNatTrans (f)^*⟦Λ⟧)
         (.up ℤ) A B) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   refine (IsIso.inv_eq_of_inv_hom_id (HomologicalComplex.hom_ext _ _ fun n ↦ ?_)).symm
   exact upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B n
 
@@ -403,13 +326,6 @@ lemma upperStarTensorCounit_naturality_aux
         (upperStarTensorComplexHom Λ f A B)) ≫
       DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
         (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map (φ ⊗ₘ ψ))) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have key : ((HomotopyCategory.quotient _ _).map
         (((f)^*⟦Λ⟧.mapHomologicalComplex (ComplexShape.up ℤ)).map φ) ⊗ₘ
       (HomotopyCategory.quotient _ _).map
@@ -432,44 +348,36 @@ noncomputable def upperStarTensorCounit :
         ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)).obj
         ((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)).obj
         (curriedTensor _) ⟶
-      upperStarTensorTarget Λ f := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
-  exact
-    { app A :=
-        { app B := Functor.LaxMonoidal.μ DerivedCategory.Qh
-              (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj A)
-              (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj B) ≫
-            DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
-              (upperStarTensorComplexHom Λ f A.as B.as))
-          naturality B B' ψ := by
-            obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
-            obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
-            obtain ⟨B', rfl⟩ := B'.quotient_obj_surjective
-            obtain ⟨ψ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective ψ
-            have h := upperStarTensorCounit_naturality_aux Λ f (𝟙 A) ψ
-            rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-              CategoryTheory.Functor.map_id, MonoidalCategory.id_tensorHom,
-              MonoidalCategory.id_tensorHom] at h
-            rw [Category.assoc]
-            exact h }
-      naturality A A' φ := by
-        ext B
+      upperStarTensorTarget Λ f where
+  app A :=
+    { app B := Functor.LaxMonoidal.μ DerivedCategory.Qh
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj A)
+          (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).obj B) ≫
+        DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map
+          (upperStarTensorComplexHom Λ f A.as B.as))
+      naturality B B' ψ := by
         obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
-        obtain ⟨A', rfl⟩ := A'.quotient_obj_surjective
         obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
-        obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective φ
-        have h := upperStarTensorCounit_naturality_aux Λ f φ (𝟙 B)
+        obtain ⟨B', rfl⟩ := B'.quotient_obj_surjective
+        obtain ⟨ψ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective ψ
+        have h := upperStarTensorCounit_naturality_aux Λ f (𝟙 A) ψ
         rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
-              CategoryTheory.Functor.map_id, MonoidalCategory.tensorHom_id,
-          MonoidalCategory.tensorHom_id] at h
-        rw [NatTrans.comp_app, NatTrans.comp_app, Category.assoc]
+          CategoryTheory.Functor.map_id, MonoidalCategory.id_tensorHom,
+          MonoidalCategory.id_tensorHom] at h
+        rw [Category.assoc]
         exact h }
+  naturality A A' φ := by
+    ext B
+    obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+    obtain ⟨A', rfl⟩ := A'.quotient_obj_surjective
+    obtain ⟨B, rfl⟩ := B.quotient_obj_surjective
+    obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective φ
+    have h := upperStarTensorCounit_naturality_aux Λ f φ (𝟙 B)
+    rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
+          CategoryTheory.Functor.map_id, MonoidalCategory.tensorHom_id,
+      MonoidalCategory.tensorHom_id] at h
+    rw [NatTrans.comp_app, NatTrans.comp_app, Category.assoc]
+    exact h
 
 /-! ### Derived categories -/
 
@@ -513,15 +421,18 @@ lemma upperStarTensorComplexHom_δ
     upperStarTensorComplexHom Λ f A B ≫
       ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B =
       𝟙 _ := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
-  exact HomologicalComplex.hom_ext _ _
-    (upperStarTensorComplexHomX_comp_mapBifunctorComparisonX Λ f A B)
+  refine HomologicalComplex.hom_ext _ _ (fun n ↦ ?_)
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro i₁ i₂ h
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f, 
+    Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
+    HomologicalComplex.mapBifunctorComparison_f]
+  dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  rw [Category.assoc]
+  erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
+  erw [Category.comp_id]
+  exact Functor.Monoidal.μ_δ_assoc _ _ _ _
 
 set_option profiler true in
 open DerivedCategory in
@@ -535,13 +446,6 @@ lemma leftDerivedUpperStarTensorRightCounit_app_app (A B : HomotopyCategory
         Functor.LaxMonoidal.μ Qh (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj A)
           (((f)^*⟦Λ⟧.mapHomotopyCategory (.up ℤ)).obj B) ≫
         Qh.map ((HomotopyCategory.quotient _ _).map (upperStarTensorComplexHom Λ f A.as B.as)) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   dsimp only [leftDerivedUpperStarTensorRightCounit, NatTrans.comp_app]
   erw [Category.id_comp]
   refine (?_ : _ = 𝟙 _ ≫ (((f)^*⟦Λ⟧.leftDerivedFunctorCounit.app A ▷ L((f)^*⟦Λ⟧).obj (Qh.obj B)) ≫
@@ -564,13 +468,6 @@ lemma isIso_leftDerivedUpperStarTensorRightCounit_app_app
     (hB : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat ((HomotopyCategory.quotient _ _).obj B)) :
     IsIso (((leftDerivedUpperStarTensorRightCounit Λ f).app
       ((HomotopyCategory.quotient _ _).obj A)).app ((HomotopyCategory.quotient _ _).obj B)) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have hB' := (HomotopyCategory.kFlat_quotient_obj_iff B).1 hB
   rw [leftDerivedUpperStarTensorRightCounit_app_app]
   have := (f)^*⟦Λ⟧.isIso_leftDerivedFunctorCounit_app_of_kFlat' _ hA
@@ -593,13 +490,6 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
       (leftDerivedUpperStarTensorRightCounit Λ f)
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have := isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
   refine LocalizerMorphism.isLeftDerivedFunctor₂_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat
@@ -617,37 +507,29 @@ set_option profiler true in
 noncomputable def leftDerivedUpperStarTensorLeftCounit :
     (((whiskeringLeft₂ _).obj DerivedCategory.Qh).obj DerivedCategory.Qh).obj
         (leftDerivedUpperStarTensorLeft Λ f) ⟶
-      upperStarTensorTarget Λ f := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
-  exact
-    { app A :=
-        { app B := L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫
-            (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B)
-          naturality B B' ψ := by
-            have h₁ := Functor.LaxMonoidal.μ_natural_right DerivedCategory.Qh A ψ
-            have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (A ◁ ψ)
-            dsimp only [Functor.comp_map] at h₂
-            change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.obj A ◁ DerivedCategory.Qh.map ψ) ≫
-                L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B') ≫ _ =
-              (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫
-                DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (A ◁ ψ))
-            rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂] }
-      naturality A A' φ := by
-        ext B
-        have h₁ := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh φ B
-        have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (φ ▷ B)
+      upperStarTensorTarget Λ f where
+  app A :=
+    { app B := L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫
+        (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B)
+      naturality B B' ψ := by
+        have h₁ := Functor.LaxMonoidal.μ_natural_right DerivedCategory.Qh A ψ
+        have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (A ◁ ψ)
         dsimp only [Functor.comp_map] at h₂
-        change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.map φ ▷ DerivedCategory.Qh.obj B) ≫
-            L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A' B) ≫ _ =
+        change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.obj A ◁ DerivedCategory.Qh.map ψ) ≫
+            L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B') ≫ _ =
           (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫
-            DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (φ ▷ B))
+            DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (A ◁ ψ))
         rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂] }
+  naturality A A' φ := by
+    ext B
+    have h₁ := Functor.LaxMonoidal.μ_natural_left DerivedCategory.Qh φ B
+    have h₂ := (f)^*⟦Λ⟧.leftDerivedFunctorCounit.naturality (φ ▷ B)
+    dsimp only [Functor.comp_map] at h₂
+    change L((f)^*⟦Λ⟧).map (DerivedCategory.Qh.map φ ▷ DerivedCategory.Qh.obj B) ≫
+        L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A' B) ≫ _ =
+      (L((f)^*⟦Λ⟧).map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫ _) ≫
+        DerivedCategory.Qh.map (((f)^*⟦Λ⟧.mapHomotopyCategory (ComplexShape.up ℤ)).map (φ ▷ B))
+    rw [← Functor.map_comp_assoc, h₁, Functor.map_comp_assoc, Category.assoc, h₂]
 
 /-- The comparison `m_{K,L} : Lf^* (K ⊗ᴸ L) ⟶ Lf^* K ⊗ᴸ Lf^* L` of the derived pullback with the
 derived tensor product, as a natural transformation of bifunctors on `D(Mod_{Λ_Y})`: the
@@ -684,13 +566,6 @@ lemma leftDerivedUpperStarTensor_app_app_fac (A B : HomotopyCategory
         (f)^*⟦Λ⟧.leftDerivedFunctorCounit.app (A ⊗ B) ≫
         Qh.map (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ)
           (f)^*⟦Λ⟧).app A).app B) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have h : ((leftDerivedUpperStarTensor Λ f).app (Qh.obj A)).app (Qh.obj B) ≫
       ((leftDerivedUpperStarTensorRightCounit Λ f).app A).app B =
       ((leftDerivedUpperStarTensorLeftCounit Λ f).app A).app B :=
@@ -726,13 +601,6 @@ lemma exists_kFlat_iso_Qh_obj (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
     ∃ P, (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat P ∧
       Nonempty (DerivedCategory.Qh.obj P ≅ K) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have := isLeftDerivabilityStructure_localizerMorphismKFlat Λ Y
   have := Localization.essSurj (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology Y)
     Ab.{u + 1}) (condensedRingObj Λ Y))) (HomotopyCategory.quasiIso _ (.up ℤ))
@@ -754,13 +622,6 @@ lemma isIso_leftDerivedUpperStarTensor_app_app_Qh_obj
     IsIso (((leftDerivedUpperStarTensor Λ f).app
       (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj A))).app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj B))) := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   have := isIso_leftDerivedUpperStarTensorRightCounit_app_app Λ f A B hA hB
   have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh ((HomotopyCategory.quotient _ _).obj A)
       ((HomotopyCategory.quotient _ _).obj B)) :=
@@ -859,13 +720,6 @@ set_option profiler true in
 complexes, whose pullbacks are K-flat. -/
 @[instance_reducible]
 noncomputable def leftDerivedUpperStarOplaxMonoidal : L((f)^*⟦Λ⟧).OplaxMonoidal :=
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   haveI := DerivedCategory.isIso_ε_Qh
     (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
   Functor.OplaxMonoidal.ofLaxSquare' (Q₁ := DerivedCategory.Qh) (Q₂ := DerivedCategory.Qh)
@@ -886,13 +740,6 @@ comparison `leftDerivedUpperStarUnitIso`. -/
 lemma leftDerivedUpperStarOplaxMonoidal_η :
     letI := leftDerivedUpperStarOplaxMonoidal Λ f
     Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧) = (leftDerivedUpperStarUnitIso Λ f).hom := by
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   let := leftDerivedUpperStarOplaxMonoidal Λ f
   have hY : Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := Mod (Sheaf (Scheme.ProEt.topology Y)
       Ab.{u + 1}) (condensedRingObj Λ Y))) = 𝟙 _ := rfl
@@ -914,13 +761,6 @@ set_option profiler true in
 strong monoidal for the derived tensor products, with tensorator the inverse of
 `leftDerivedUpperStarTensorIso` and unit comparison `leftDerivedUpperStarUnitIso`. -/
 noncomputable instance monoidal_leftDerivedUpperStar : L((f)^*⟦Λ⟧).Monoidal :=
-  have := hasColimitsOfShape_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorLeft_monoidalModule Λ
-  have := preservesColimitsOfSize_tensorRight_monoidalModule Λ
-  have := hasTensor_gradedModule Λ
-  have := hasTensor₄ObjExt_gradedModule Λ
-  have := hasGoodTensor₁₂Tensor_gradedModule Λ
-  have := hasGoodTensorTensor₂₃_gradedModule Λ
   letI := leftDerivedUpperStarOplaxMonoidal Λ f
   haveI (K L : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
