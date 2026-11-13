@@ -210,7 +210,8 @@ lemma compactificationEtaleGraphIso_restrictOpen
         (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
         (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
     rw [← hpre, ← Functor.map_comp_assoc]
-    simp [derivedSquareUpperStarIso]
+    simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Category.assoc]
   -- the open immersions `j` and `v ≫ j`
   have hθ := unit_map_restrictOpenLowerShriekIso Λ c v N
   have hpost := leftDerivedUpperStarComp_triangle_coherence (ModuleCat.{u + 1} Λ)
