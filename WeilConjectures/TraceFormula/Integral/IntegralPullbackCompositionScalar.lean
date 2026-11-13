@@ -239,12 +239,6 @@ private theorem scalar_mixed_of_compositor_eq {C D : Type*} [Category C] [Catego
   rw [ha, hb]
   exact h
 
-private theorem integralCompositionPullback_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (finiteSystemDerivedPullback (integralSystemRings l E) (integralSystemTransition l E) f :
-      coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X) =
-        integralComparisonDerivedSequencePullback l E f := by
-  rfl
-
 set_option profiler true in
 private theorem integralCompositionFinite_mixed
     {V W Z : Scheme.{u}}
@@ -266,14 +260,12 @@ private theorem integralCompositionFinite_mixed
         (finiteSystemDerivedComposition (integralSystemRings l L)
           (integralSystemTransition l L) h k).hom.app
           ((integralCompositionFiniteScalar l E L ι V).obj M) := by
+  unfold integralCompositionFiniteScalar integralCompositionFiniteScalarPullback
   apply scalar_mixed_of_compositor_eq (integralCompositionFiniteScalar l E L ι Z)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l E h k M)
     (finiteSystemDerivedComposition_hom_app_eq_integralComparison l L h k
       ((integralCompositionFiniteScalar l E L ι V).obj M))
-  have mixed := integralComparisonSystemScalarPullback_finite_mixed l E L ι h k
-    (show coefficientSequenceDerived l E V from M)
-  simp only [← integralCompositionPullback_eq] at mixed
-  exact mixed
+  exact integralComparisonSystemScalarPullback_finite_mixed l E L ι h k M
 
 set_option profiler true in
 -- The defeq checks identify two presentations of the same reduction systems.
