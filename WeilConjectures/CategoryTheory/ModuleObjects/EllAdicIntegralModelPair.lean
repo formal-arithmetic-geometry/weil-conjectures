@@ -61,7 +61,6 @@ lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [
     ⟨(constructibleToPadicAlgCl X' ℓ F).mapIso e₀' ≪≫
       (constructibleToPadicAlgClCompIso X' ℓ h₂).app K₂ ≪≫ e₂⟩⟩
 
-set_option maxHeartbeats 1000000 in
 set_option trace.profiler true in
 -- the extensions of scalars of `TwoColimit` are unfolded to the ambient derived functors
 /-- `exists_padicAlgCl_iso_integralModel_pair`, with the isomorphisms read in the ambient derived
