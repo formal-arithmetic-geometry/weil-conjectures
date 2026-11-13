@@ -112,7 +112,40 @@ private theorem prime_unit (W : Scheme.{u})
   rw [map_natCast]
   with_unfolding_all exact isUnit_of_invertible (l : W.residueField w)
 
-set_option maxHeartbeats 800000 in
+private theorem tensor_scalar_substitution {W : Scheme.{u}}
+    {ρ : IntegralComparisonRoosModel l L W}
+    (S : IntegralComparisonScalarModel l E L ι W (pullbackTensorCalculus l E W) ρ)
+    {K H : DerivedCategory (scalarReductionSource l E W)}
+    (A B : StrictQuotient.Complex l E W)
+    (hsA : StrictQuotient.SystemGood l L ((ScalarExtensionTower.scalar l E L ι W).obj A))
+    (hsB : StrictQuotient.SystemGood l L ((ScalarExtensionTower.scalar l E L ι W).obj B))
+    (β : K ⟶ (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj A))
+    (γ : H ⟶ (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj B)) :
+    let FE := integralComparisonDerivedSequenceScalar l E L ι W
+    let LL := coefficientSequenceLimit l L W
+    let U := (pullbackTensorCalculus l L W).systemClosed.tensor
+    let r := ScalarExtensionTower.scalarReduction l E L ι W
+      (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W) ρ S
+    tensorSubstitution l L ((ScalarExtensionTower.scalar l E L ι W).obj A)
+        ((ScalarExtensionTower.scalar l E L ι W).obj B) hsA hsB
+        (scalarSubstitution l E L ι S A β) (scalarSubstitution l E L ι S B γ) =
+      (pullbackTensorIntegralTensorModel l L W).hom.app
+        ((integralScalarExtension l E L ι W).obj K,
+          (integralScalarExtension l E L ι W).obj H) ≫
+      LL.map (U.map (Prod.mkHom (r K) (r H))) ≫
+      LL.map (U.map (Prod.mkHom (FE.map (reduction l E β)) (FE.map (reduction l E γ)))) ≫
+      LL.map (U.map (Prod.mkHom
+        ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
+        ((integralComparisonSequenceScalarModel l E L ι W).ε.app B))) ≫
+      LL.map (pullbackTensorSystemModel l L W
+        ((ScalarExtensionTower.scalar l E L ι W).obj A)
+        ((ScalarExtensionTower.scalar l E L ι W).obj B) hsA.1 hsB.1).inv := by
+  dsimp only
+  unfold tensorSubstitution
+  rewrite [scalar_reduction l E L ι S A β, scalar_reduction l E L ι S B γ]
+  simp only [← Functor.map_comp, ← Category.assoc]
+  rfl
+
 -- The calculation combines three naturality squares in the system derived category.
 /-- Scalar extension of tensor substitution is computed by the normalized strict sigma.
 Source: Stacks 07A4 and 0941; the tensor step of scalar route coordinates.
@@ -204,14 +237,14 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
     change reduction l E
       ((pullbackTensorIntegralTensorModel l E W).hom.app (M.obj, N.obj) ≫
         LE.map (T.map (Prod.mkHom a b)) ≫ LE.map e.inv) = _
-    rw [← LE.map_comp, reduction_post]
+    rewrite [← LE.map_comp, reduction_post]
     dsimp only [ScalarExtensionTower.tensorReduction, TE]
-    rw [fixed_tensor]
+    rewrite [fixed_tensor l E W]
     unfold reduction
     simp only [Category.assoc]
     rfl
   conv_lhs => unfold scalarSubstitution
-  rw [hred]
+  rewrite [hred]
   change (S.realization.hom.app _ ≫ LL.map _) ≫ LL.map _ = _
   change (S.realization.hom.app _ ≫ LL.map
     (FE.map (ScalarExtensionTower.tensorReduction l E W SE ρE TE M.obj N.obj ≫
@@ -219,30 +252,16 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       (integralComparisonSequenceScalarModel l E L ι W).ε.app
         (StrictQuotient.total l E A B))) ≫ LL.map _ = _
   simp only [FE.map_comp, Category.assoc, ← LL.map_comp]
-  rw [hnorm', reassoc_of% hnat]
+  rewrite [hnorm', reassoc_of% hnat]
   have hpost := congrArg (fun k ↦ k ≫ LL.map
     (U.map (Prod.mkHom (FE.map a) (FE.map b)) ≫
       U.map (Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B)) ≫ d.inv)) hlim.symm
   simp only [Functor.map_comp, Category.assoc] at hpost ⊢
-  erw [hpost]
-  unfold tensorSubstitution
-  rw [scalar_reduction, scalar_reduction]
+  refine hpost.trans ?_
+  rewrite [tensor_scalar_substitution l E L ι S A B hsA hsB β γ]
   dsimp only [TL]
-  rw [fixed_tensor]
-  have hp : Prod.mkHom
-        (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S M.obj ≫ FE.map a ≫
-          (integralComparisonSequenceScalarModel l E L ι W).ε.app A)
-        (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S N.obj ≫ FE.map b ≫
-          (integralComparisonSequenceScalarModel l E L ι W).ε.app B) =
-      Prod.mkHom
-        (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S M.obj)
-        (ScalarExtensionTower.scalarReduction l E L ι W SE SL ρ S N.obj) ≫
-      Prod.mkHom (FE.map a) (FE.map b) ≫
-      Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
-        ((integralComparisonSequenceScalarModel l E L ι W).ε.app B) := rfl
-  erw [hp]
-  simp only [Functor.map_comp, Category.assoc]
+  rewrite [fixed_tensor l L W]
   rfl
 
 end WeilConjectures.CompletedQuotient
