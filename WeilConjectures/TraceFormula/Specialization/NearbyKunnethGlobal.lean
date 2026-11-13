@@ -333,6 +333,18 @@ lemma isIso_app_of_forall_upperStar {X'' : Scheme.{u}} {M : NearbyCyclesModel X 
   have := hτ C₀ hC₀
   exact NatTrans.isIso_app_of_iso' τ e
 
+/-- Passing to the geometric generic model preserves bounded constructibility of nearby
+cycles. -/
+private lemma boundedConstructible_nearbyCycles_toGeneric
+    (M : NearbyCyclesModel X X')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (hA : boundedConstructible (condensedRingObj Λ X') ((M.nearbyCycles Λ).obj A)) :
+    boundedConstructible (condensedRingObj Λ X')
+      ((M.toGeneric.nearbyCycles Λ).obj (L((M.ε)^*⟦Λ⟧).obj A)) :=
+  (boundedConstructible _).prop_of_iso (L((M.i)^*⟦Λ⟧).mapIso
+    (R((M.j)_*⟦Λ⟧).mapIso ((leftDerivedUpperStarId _ M.generic).app _))).symm hA
+
 end Transport
 
 /-- The proper exchange is invertible at any complex isomorphic to the pullback of a bounded
@@ -449,6 +461,25 @@ section Global
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+/-- Bounded constructible complexes on the total space of a trait model are closed under
+tensor products. -/
+private lemma IsTraitModelOver.boundedConstructible_tensor_total
+    {X : Scheme.{u}} {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
+    {q : M.total ⟶ trait k'} {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
+    (h : M.IsTraitModelOver q g)
+    (C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total)))
+    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) C)
+    (hD : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) D) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.total) (C ⊗ D) := by
+  have := h.locallyOfFiniteType
+  have := h.quasiCompact
+  have : IsLocallyNoetherian M.total := LocallyOfFiniteType.isLocallyNoetherian q
+  have : CompactSpace M.total := QuasiCompact.compactSpace_of_compactSpace q
+  have : IsNoetherian M.total := {}
+  exact boundedConstructible_tensorObj
+    (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
+
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
   {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
@@ -456,7 +487,7 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-set_option trace.profiler true in
+set_option profiler true in
 -- the composite square identifying the direct image of the Künneth map has large terms
 /-- **The global-sections step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, equation (4); Illusie, *Autour du théorème de monodromie
@@ -535,42 +566,17 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
   -- the complexes on the geometric generic fibres
   have hA' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA
   have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB
-  have hΨA' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left)
-      ((M.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)) :=
-    (boundedConstructible _).prop_of_iso (L((M.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-      (R((M.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-        ((leftDerivedUpperStarId _ M.generic).app _))).symm hΨA
-  have hΨB' : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
-      ((N.toGeneric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
-        (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
-    (boundedConstructible _).prop_of_iso (L((N.i)^*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-      (R((N.j)_*⟦Profinite.padicAlgClRingObj ℓ⟧).mapIso
-        ((leftDerivedUpperStarId _ N.generic).app _))).symm hΨB
-  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)),
-      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
-        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
-          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
-            (C ⊗ D) := by
-    have := hP.locallyOfFiniteType
-    have := hP.quasiCompact
-    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
-    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
-    have : IsNoetherian P.total := {}
-    exact fun C D hC hD ↦
-      boundedConstructible_tensorObj
-        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
+  have hΨA' := boundedConstructible_nearbyCycles_toGeneric _ M A hΨA
+  have hΨB' := boundedConstructible_nearbyCycles_toGeneric _ N B hΨB
+  have htensor := hP.boundedConstructible_tensor_total (ℓ := ℓ)
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- Transport each proper exchange directly along its pullback isomorphism.
-  · have hχ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
-      (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A)
+  · have hχ := hM.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA,
         nonempty_upperStar_obj_iso_comp _ heM A⟩
     exact_mod_proofs hχ
-  · have hχ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ)
-      (L((N.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)
+  · have hχ := hN.isIso_pushforwardExchange_toTraitGeneric_of_iso (ℓ := ℓ) _
       ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eN B hB,
         nonempty_upperStar_obj_iso_comp _ heN B⟩
     exact_mod_proofs hχ
