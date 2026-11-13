@@ -26,11 +26,35 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
 
-universe t u
+universe t u v w
 
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures
+
+private theorem compactSupportPushforwardComp_sections
+    {C : Type v} [Category C] {D : Type w} [Category D] {B : Type*} [Category B]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {I : GrothendieckTopology B} {F : C ⥤ D} {G : D ⥤ B}
+    [F.IsContinuous J K] [G.IsContinuous K I]
+    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}} {T : Sheaf I RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat.{u} K I).obj T) :
+    ∀ M U x, HEq (((SheafOfModules.pushforwardComp.{u} φ ψ).hom.app M).val.app U x) x := by
+  intro M U x
+  exact heq_of_eq (SheafOfModules.pushforwardComp_hom_app_val_app φ ψ M U x)
+
+private theorem compactSupportPushforwardComp_inv_sections
+    {C : Type v} [Category C] {D : Type w} [Category D] {B : Type*} [Category B]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {I : GrothendieckTopology B} {F : C ⥤ D} {G : D ⥤ B}
+    [F.IsContinuous J K] [G.IsContinuous K I]
+    {S : Sheaf J RingCat.{u}} {R : Sheaf K RingCat.{u}} {T : Sheaf I RingCat.{u}}
+    (φ : S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R)
+    (ψ : R ⟶ (G.sheafPushforwardContinuous RingCat.{u} K I).obj T) :
+    ∀ M U x, HEq (((SheafOfModules.pushforwardComp.{u} φ ψ).inv.app M).val.app U x) x := by
+  intro M U x
+  exact heq_of_eq (SheafOfModules.pushforwardComp_inv_app_val_app φ ψ M U x)
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -115,8 +139,10 @@ theorem compactSupportDirectImageOrdinaryEvaluation
     simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
       SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
       SheafOfModules.pushforwardCongr_hom_app_val_app]
-    exact (heq_of_eq (SheafOfModules.pushforwardComp_inv_app_val_app s b N V _)).trans
-      (heq_of_eq (SheafOfModules.pushforwardComp_hom_app_val_app a r' N V x))
+    exact (compactSupportPushforwardComp_inv_sections
+      (F := Scheme.proEtaleBaseChange p) (G := Prod.sectR n Z.ProEt) s b N V _).trans
+      (compactSupportPushforwardComp_sections
+        (F := Prod.sectR n Y.ProEt) (G := integralComparisonSequenceBaseChange p) a r' N V x)
   exact ⟨fun n ↦ (level n).choose, fun n ↦ (level n).choose_spec⟩
 
 end WeilConjectures
