@@ -133,13 +133,52 @@ private theorem normalizedCoreMonoidalOfLocalization
   let : Localization.Lifting L W G F := ⟨h⟩
   let : F.Monoidal := Localization.Monoidal.functorMonoidalOfComp L W F G
   let : h.hom.IsMonoidal := Localization.Monoidal.lifting_isMonoidal L W F G
-  let : (L ⋙ F).LaxBraided := Functor.LaxBraided.ofNatIso h.symm
+  have hb := braided_descent L W F (by
+    intro A B
+    change Functor.LaxMonoidal.μ (L ⋙ F) A B ≫ (L ⋙ F).map (β_ A B).hom =
+      (β_ ((L ⋙ F).obj A) ((L ⋙ F).obj B)).hom ≫
+        Functor.LaxMonoidal.μ (L ⋙ F) B A
+    have hm (A B) := NatTrans.IsMonoidal.tensor (τ := h.hom) A B
+    apply (cancel_mono (h.hom.app (B ⊗ A))).1
+    simp only [Category.assoc]
+    rw [h.hom.naturality, ← Category.assoc, hm A B]
+    simp only [Category.assoc]
+    rw [hm B A, Functor.LaxBraided.braided, braiding_naturality_assoc])
   let : F.Braided :=
     { toMonoidal := (inferInstance : F.Monoidal)
-      braided := braided_descent L W F (Functor.LaxBraided.braided (F := L ⋙ F)) }
+      braided := hb }
   exact normalize F e
 
 end Descent
+
+section TensorTotal
+
+universe u₁ v₁ u₂ v₂
+variable {C : Type u₁} [Category.{v₁} C] [Preadditive C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [HasCoproducts.{0} C]
+  {D : Type u₂} [Category.{v₂} D] [Preadditive D] [MonoidalCategory D]
+  [MonoidalPreadditive D] [HasCoproducts.{0} D]
+
+private theorem exists_tensorTotalIso (R : C ⥤ D) [R.Additive]
+    [PreservesColimitsOfSize.{0, 0} R] (m : R.CoreMonoidal)
+    (F K : CochainComplex C ℤ) :
+    ∃ c : (R.mapHomologicalComplex (.up ℤ)).obj
+        (HomologicalComplex.mapBifunctor F K (curriedTensor C) (.up ℤ)) ≅
+      HomologicalComplex.mapBifunctor ((R.mapHomologicalComplex (.up ℤ)).obj F)
+        ((R.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor D) (.up ℤ),
+      ∀ (p q n : ℤ) (h : p + q = n),
+        R.map (HomologicalComplex.ιMapBifunctor F K (curriedTensor C) (.up ℤ) p q n h) ≫
+          c.hom.f n = (m.μIso (F.X p) (K.X q)).inv ≫
+            HomologicalComplex.ιMapBifunctor ((R.mapHomologicalComplex (.up ℤ)).obj F)
+              ((R.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor D) (.up ℤ) p q n h := by
+  let : R.OplaxMonoidal := m.toOplaxMonoidal
+  have (A B : C) : IsIso (Functor.OplaxMonoidal.δ R A B) := (m.μIso A B).isIso_inv
+  let τ := Functor.OplaxMonoidal.δNatTrans R
+  refine ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) F K), ?_⟩
+  intro p q n h
+  exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) F K p q n h
+
+end TensorTotal
 
 set_option trace.profiler true in
 /-- The open-site equivalence has a symmetric core monoidal structure with its prescribed unit.
@@ -257,13 +296,6 @@ theorem exists_ordinaryEvaluation_tensor_summands (X : Scheme.{u}) (U : X.Opens)
   obtain ⟨m, hm, hs⟩ := exists_normalizedOpen_coreMonoidal X U
   refine ⟨m, hm, hs, ?_⟩
   intro P F
-  let K := localEvaluationDual X U P
-  let : R.OplaxMonoidal := m.toOplaxMonoidal
-  have (A B : localEvaluationModules X U) :
-      IsIso (Functor.OplaxMonoidal.δ R A B) := (m.μIso A B).isIso_inv
-  let τ := Functor.OplaxMonoidal.δNatTrans R
-  refine ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) F K), ?_⟩
-  intro p q n h
-  exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX τ (.up ℤ) F K p q n h
+  exact exists_tensorTotalIso R m F (localEvaluationDual X U P)
 
 end AlgebraicGeometry
