@@ -695,7 +695,6 @@ lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
   rw [map_zero, ← CommRingCat.comp_apply, E.res_app_eq_sV_res l, CommRingCat.comp_apply, hy,
     map_zero]
 
-set_option profiler true in
 /-- (Implementation, Stacks 01Z9) The sections over the basic open `Wⱼ(r l)` are the
 localization of the coefficient algebra of the stage away from the tautological element
 `(b l, r l)`. Surjectivity is the condition `hgen` of the stage; injectivity combines the
