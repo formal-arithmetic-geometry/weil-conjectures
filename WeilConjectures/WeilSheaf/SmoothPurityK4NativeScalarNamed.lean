@@ -48,7 +48,7 @@ lemma scalarSourceUnitIso_eq :
 /-- Package the native law without changing the raw coefficient source. -/
 lemma scalarRootEquation_native :
     CategoryTheory.K4Native.scalarEquation
-      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.hom)
+      (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) a.geometricGaloisFrobenius.asIso.hom)
       (scalarFrobeniusIso (Profinite.padicAlgClRingObj ℓ) a
         ((Mod.extendScalars (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl ℓ) X)).obj
           (tateModule X ℓ))).hom

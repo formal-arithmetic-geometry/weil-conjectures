@@ -216,9 +216,9 @@ private theorem quotient_action_zero
     (F : supportModules (integralCoefficientRing l E) S)
     (hkill : (l ^ r) • 𝟙 F.X = 0) :
     (upperStarFromPoint S).map
-        ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).hom) ▷ F.X ≫
+        ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom.hom) ▷ F.X ≫
       ModObj.smul (M := condensedRingObj (integralCoefficientRing l E) S) (X := F.X) = 0 := by
-  have hpoint : (DerivedNakayama.uniformizerEnd l E ^ (n + 1)).hom =
+  have hpoint : (DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom.hom =
       (l ^ r) • pointScalarMultiply l E a := by
     let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     apply Sheaf.hom_ext
@@ -228,7 +228,7 @@ private theorem quotient_action_zero
     apply ULift.ext
     apply ContinuousMap.ext
     intro t
-    change (((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).hom.hom.app T) x).down t =
+    change (((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom.hom.hom.app T) x).down t =
       (l ^ r) • (a * x.down t)
     rw [DerivedNakayama.uniformizerPower_apply, ha, nsmul_eq_mul,
       Nat.cast_pow]
@@ -240,7 +240,7 @@ private theorem quotient_action_zero
     preservesBinaryBiproducts_of_preservesBinaryCoproducts _
   have : (upperStarFromPoint S).Additive := Functor.additive_of_preservesBinaryBiproducts _
   change (tensorRight F.X).map ((upperStarFromPoint S).map
-    ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).hom)) ≫ _ = 0
+    ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom.hom)) ≫ _ = 0
   rw [hpoint, Functor.map_nsmul, Functor.map_nsmul, Preadditive.nsmul_comp]
   calc
     _ = ((tensorRight F.X).map ((upperStarFromPoint S).map
@@ -318,7 +318,7 @@ theorem integral_finite_level_dual_classical
   have hzact := quotient_action_zero l E S n r a (by simpa only [hn] using ha) F hkill
   let W := Mod.forget (D := Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
     (condensedRingObj (integralCoefficientRing l E) S)
-  let P := ShortComplex.mk (DerivedNakayama.uniformizerEnd l E ^ (n + 1))
+  let P := ShortComplex.mk (DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom
     (DerivedNakayama.reductionHom l E (n + 1))
     (DerivedNakayama.reduction_zero l E (n + 1))
   let C := (P.map (DerivedNakayama.pullback l E S)).map W
@@ -331,7 +331,7 @@ theorem integral_finite_level_dual_classical
   obtain ⟨B, ⟨eB⟩⟩ := Mod.exists_quotient_module
     (coefficientMap (DerivedNakayama.reductionRing l E (n + 1)) S)
     ((upperStarFromPoint S).map
-      ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).hom)) C.zero hseq.exact F hzact
+      ((DerivedNakayama.uniformizerEnd l E ^ (n + 1)).asHom.hom)) C.zero hseq.exact F hzact
   intro q
   refine ⟨@integral_quotient_tensor_classical l _ E _ _ _ S _ n D hD F B eB (@hF) q, ?_⟩
   have hk : (l ^ r) • 𝟙 F = 0 := by

@@ -36,7 +36,7 @@ noncomputable def supportCoefficientMate
     F' ⟶ F ⋙ H :=
   (Functor.leftUnitor F').inv ≫
     ((mateEquiv adj adj').symm
-      (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r))).natTrans
+      (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r)))
 
 private lemma constantUnit_terminal
     (C : Type v) [Category.{u + 1} C] [Abelian C]

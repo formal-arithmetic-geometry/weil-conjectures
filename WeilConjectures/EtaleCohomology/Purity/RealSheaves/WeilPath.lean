@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
@@ -54,7 +55,7 @@ structure BasePointData where
   /-- A path from the image of `t` in `C₀` to the base point `s` of `W`. -/
   path : fiber (t ≫ p.geometricFiberProj) ≅ fiber W.basePoint
   /-- A path from `t` to `t ≫ Fr`. -/
-  frobPath : fiber t ≅ fiber (t ≫ p.geometricGaloisFrobenius.hom)
+  frobPath : fiber t ≅ fiber (t ≫ p.geometricGaloisFrobenius.asIso.hom)
 
 /-- Base point data exist: the geometric curve has a `K̄`-rational point, and any two fibre
 functors on the finite étale schemes over a connected scheme are isomorphic. -/
@@ -76,24 +77,13 @@ variable {W} (B : BasePointData W)
 `π₁(C₀, s)`, through the path `B.path`. -/
 noncomputable def toπ : Aut (fiber (B.t ≫ p.geometricFiberProj)) ≃* W.fundamentalGroup :=
   haveI := W.connectedSpace
-  { toFun e := (toAutMulEquiv (fiber W.basePoint) W.fundamentalGroup).symm
-      (B.path.symm ≪≫ e ≪≫ B.path)
-    invFun g := B.path ≪≫ toAutMulEquiv (fiber W.basePoint) W.fundamentalGroup g ≪≫ B.path.symm
-    left_inv e := by ext; simp
-    right_inv g := by
-      simp only [Iso.symm_self_id_assoc, Iso.trans_assoc, Iso.symm_self_id, Iso.trans_refl]
-      exact (toAutMulEquiv _ _).symm_apply_apply g
-    map_mul' e e' := by
-      rw [← map_mul]
-      congr 1
-      ext
-      simp [Aut.Aut_mul_def] }
+  (Aut.autMulEquivOfIso B.path).trans (toAutMulEquiv (fiber W.basePoint) W.fundamentalGroup).symm
 
 /-- The automorphism of the fibre functor at `s` attached to `toπ e`. -/
 lemma toAutMulEquiv_toπ (e : Aut (fiber (B.t ≫ p.geometricFiberProj))) :
     haveI := W.connectedSpace
     toAutMulEquiv (fiber W.basePoint) W.fundamentalGroup (B.toπ e) =
-      B.path.symm ≪≫ e ≪≫ B.path :=
+      .of (B.path.symm ≪≫ e.asIso ≪≫ B.path) :=
   MulEquiv.apply_symm_apply _ _
 
 /-- A path `δ : F_t ≅ F_y` on the geometric curve to a point `y` with the same image in `C₀` as
@@ -102,25 +92,26 @@ lemma toAutMulEquiv_toπ (e : Aut (fiber (B.t ≫ p.geometricFiberProj))) :
 noncomputable def downAut {y : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber}
     (δ : fiber B.t ≅ fiber y) (h : y ≫ p.geometricFiberProj = B.t ≫ p.geometricFiberProj) :
     W.fundamentalGroup :=
-  B.toπ (pullbackPathIso p.geometricFiberProj δ ≪≫ eqToIso (congrArg fiber h))
+  B.toπ (.of (pullbackPathIso p.geometricFiberProj δ ≪≫ eqToIso (congrArg fiber h)))
 
 /-- The map `π₁(C, t) → π₁(C₀, s)` induced by base change of finite étale schemes. -/
 noncomputable def geomAut : Aut (fiber B.t) →* W.fundamentalGroup where
-  toFun g := B.downAut g rfl
+  toFun g := B.downAut g.asIso rfl
   map_one' := by
     simp only [downAut, eqToIso_refl, Iso.trans_refl]
     rw [← map_one B.toπ]
     congr 1
-    exact pullbackPathIso_refl _ _
+    exact congrArg Aut.of (pullbackPathIso_refl _ _)
   map_mul' g g' := by
     simp only [downAut, eqToIso_refl, Iso.trans_refl]
     rw [← map_mul]
     congr 1
-    rw [Aut.Aut_mul_def, Aut.Aut_mul_def, pullbackPathIso_trans]
+    apply Aut.ext
+    exact pullbackPathIso_trans _ _ _
 
 /-- `geomAut` is the induced path along `C ⟶ C₀`, transported to `s`. -/
 lemma geomAut_apply (g : Aut (fiber B.t)) :
-    B.geomAut g = B.toπ (pullbackPathIso p.geometricFiberProj g) := by
+    B.geomAut g = B.toπ (.of (pullbackPathIso p.geometricFiberProj g.asIso)) := by
   simp [geomAut, downAut]
 
 /-- The element of `π₁(C₀, s)` attached to the path `β : F_t ≅ F_{t ≫ Fr}`: a lift of the
@@ -133,11 +124,11 @@ noncomputable def frobAut : W.fundamentalGroup :=
 `β_{m+1} = β_m ≫ (Frᵐ)_* β`, where `(Frᵐ)_* β : F_{t ≫ Frᵐ} ≅ F_{t ≫ Fr ≫ Frᵐ}` is the path
 induced by `β` along `Frᵐ`. -/
 noncomputable def frobPathPow :
-    (m : ℕ) → (fiber B.t ≅ fiber (B.t ≫ (p.geometricGaloisFrobenius ^ m).hom))
+    (m : ℕ) → (fiber B.t ≅ fiber (B.t ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom))
   | 0 => eqToIso (by rw [pow_zero]; rfl)
   | m + 1 => frobPathPow m ≪≫
-      pullbackPathIso (p.geometricGaloisFrobenius ^ m).hom B.frobPath ≪≫
-      eqToIso (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom, Category.assoc])
+      pullbackPathIso (p.geometricGaloisFrobenius ^ m).asIso.hom B.frobPath ≪≫
+      eqToIso (by rw [pow_succ, Aut.mul_asIso, Iso.trans_hom, Category.assoc])
 
 end BasePointData
 

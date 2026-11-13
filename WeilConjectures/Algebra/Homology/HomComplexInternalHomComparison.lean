@@ -168,7 +168,6 @@ lemma homComplexIsoInternalHomObj_hom_f_π (n p q : ℤ) (h : p + n = q) :
       (p * n).negOnePow • homComplexIhomπ L M n p q h :=
   homComplexToInternalHomObjX_π L M n p q h
 
-set_option maxHeartbeats 400000 in
 -- Rewriting with the components of `homComplexIsoInternalHomObj` in the naturality square
 -- needs unification up to the universe presentation `max u u u` of `homComplex`.
 /-- The comparison isomorphism `homComplexIsoInternalHomObj`, natural in the second variable:

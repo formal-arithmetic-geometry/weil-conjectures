@@ -122,7 +122,7 @@ lemma mateApp_eq (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N :
 
 /-- `CategoryTheory.Adjunction.mateApp` is the component of Mathlib's `CategoryTheory.mateEquiv`. -/
 lemma mateApp_eq_mateEquiv_app (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
-    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).natTrans.app N := by
+    adj.mateApp adj' S S' s N = (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s)).app N := by
   simp [mateApp]
 
 /-- The mate component `CategoryTheory.Adjunction.mateApp` is natural:

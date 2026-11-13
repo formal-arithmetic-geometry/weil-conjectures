@@ -77,9 +77,11 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 /-- Changing the path in `downAut` multiplies by the image of a loop at `t`. -/
 lemma downAut_eq_mul_geomAut {y : Spec (.of (AlgebraicClosure K)) ⟶ p.geometricFiber}
     (δ δ' : fiber B.t ≅ fiber y) (h : y ≫ p.geometricFiberProj = B.t ≫ p.geometricFiberProj) :
-    B.downAut δ h = B.downAut δ' h * B.geomAut (δ ≪≫ δ'.symm) := by
-  rw [geomAut_apply, downAut, downAut, ← map_mul, Aut.Aut_mul_def]
+    B.downAut δ h = B.downAut δ' h * B.geomAut (.of (δ ≪≫ δ'.symm)) := by
+  rw [geomAut_apply, downAut, downAut, ← map_mul]
   congr 1
+  apply Aut.ext
+  simp only [Aut.mul_asIso]
   rw [← Iso.trans_assoc, ← pullbackPathIso_trans]
   simp
 
@@ -132,39 +134,44 @@ theorem mem_weilGroup_frobAut :
 /-- Conjugation by the Frobenius lift is the transport of loops at `t` along `Fr` and `β`:
 for a loop `g` at `t`, the loop `β ≫ Fr_* g ≫ β⁻¹` maps to `frobAut⁻¹ (geomAut g) frobAut`. -/
 theorem geomAut_frobConj (g : Aut (fiber B.t)) :
-    B.geomAut (B.frobPath ≪≫ pullbackPathIso p.geometricGaloisFrobenius.hom g ≪≫
-      B.frobPath.symm) = B.frobAut⁻¹ * B.geomAut g * B.frobAut := by
+    B.geomAut (.of (B.frobPath ≪≫ pullbackPathIso p.geometricGaloisFrobenius.asIso.hom g.asIso ≪≫
+      B.frobPath.symm)) = B.frobAut⁻¹ * B.geomAut g * B.frobAut := by
   rw [geomAut_apply, geomAut_apply, frobAut, downAut, ← map_inv, ← map_mul, ← map_mul]
   congr 1
+  apply Aut.ext
+  simp only [Aut.mul_asIso, Aut.inv_asIso]
   rw [pullbackPathIso_trans, pullbackPathIso_trans, pullbackPathIso_symm,
     pullbackPathIso_pullbackPathIso_of_comp_eq
       (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj p)]
-  simp only [Aut.Aut_mul_def, Aut.Aut_inv_def, Iso.trans_symm, eqToIso_symm', Iso.trans_assoc]
+  simp only [Iso.trans_symm, eqToIso_symm', Iso.trans_assoc]
 
 /-- The iterated path `β_m` pushes down to the `m`-th power of the Frobenius lift. -/
 theorem downAut_frobPathPow (m : ℕ)
-    (h : (B.t ≫ (p.geometricGaloisFrobenius ^ m).hom) ≫ p.geometricFiberProj =
+    (h : (B.t ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom) ≫ p.geometricFiberProj =
       B.t ≫ p.geometricFiberProj) :
     B.downAut (B.frobPathPow m) h = B.frobAut ^ m := by
   induction m with
   | zero =>
-    have h0 : B.t = B.t ≫ (p.geometricGaloisFrobenius ^ 0).hom := by
+    have h0 : B.t = B.t ≫ (p.geometricGaloisFrobenius ^ 0).asIso.hom := by
       rw [pow_zero]
       rfl
     rw [pow_zero B.frobAut, downAut, frobPathPow, pullbackPathIso_eqToIso _ h0, eqToIso_trans,
       eqToIso_refl]
     exact map_one B.toπ
   | succ m ih =>
-    have hm : (B.t ≫ (p.geometricGaloisFrobenius ^ m).hom) ≫ p.geometricFiberProj =
+    have hm : (B.t ≫ (p.geometricGaloisFrobenius ^ m).asIso.hom) ≫ p.geometricFiberProj =
         B.t ≫ p.geometricFiberProj := by
       rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj]
-    have H : (B.t ≫ p.geometricGaloisFrobenius.hom) ≫ (p.geometricGaloisFrobenius ^ m).hom =
-        B.t ≫ (p.geometricGaloisFrobenius ^ (m + 1)).hom := by
-      rw [pow_succ, Aut.Aut_mul_def, Iso.trans_hom, Category.assoc]
+    have H : (B.t ≫ p.geometricGaloisFrobenius.asIso.hom) ≫
+        (p.geometricGaloisFrobenius ^ m).asIso.hom =
+        B.t ≫ (p.geometricGaloisFrobenius ^ (m + 1)).asIso.hom := by
+      rw [pow_succ, Aut.mul_asIso, Iso.trans_hom, Category.assoc]
     rw [pow_succ' B.frobAut m, ← ih hm, frobAut]
     unfold downAut
-    rw [← map_mul, Aut.Aut_mul_def]
+    rw [← map_mul]
     congr 1
+    apply Aut.ext
+    simp only [Aut.mul_asIso]
     rw [frobPathPow, pullbackPathIso_trans, pullbackPathIso_trans,
       pullbackPathIso_pullbackPathIso_of_comp_eq
         (Scheme.Hom.geometricGaloisFrobenius_pow_hom_comp_geometricFiberProj p m),

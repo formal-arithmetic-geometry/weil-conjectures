@@ -60,8 +60,8 @@ an isomorphism: `FC` carries the supported localization triangle of `K` to a dis
 triangle with vertices in the essential images of `i` and `j_*`, which is therefore the supported
 localization triangle of `FC K` (`CategoryTheory.Pretriangulated.Recollement.exists_iso_triangle`).
 Blueprint `prop-sf-localization-all-stages` (Weil clause). -/
-lemma isIso_mateEquiv : IsIso (mateEquiv adj' adj' αi.inv).natTrans := by
-  have (K : C) : IsIso ((mateEquiv adj' adj' αi.inv).natTrans.app K) := by
+lemma isIso_mateEquiv : IsIso (mateEquiv adj' adj' αi.inv) := by
+  have (K : C) : IsIso ((mateEquiv adj' adj' αi.inv).app K) := by
     obtain ⟨w, hw⟩ := exists_distTriang_counit_unit adj adj' hi h₀ hess K
     obtain ⟨w', hw'⟩ := exists_distTriang_counit_unit adj adj' hi h₀ hess (FC.obj K)
     obtain ⟨e, he⟩ := exists_iso_triangle adj adj' h₀ (FC.map_distinguished _ hw)
@@ -77,7 +77,7 @@ lemma isIso_mateEquiv : IsIso (mateEquiv adj' adj' αi.inv).natTrans := by
 `i^!` of blueprint `prop-sf-localization-all-stages` (Weil clause). -/
 noncomputable def rightAdjointIso : G ⋙ FZ ≅ FC ⋙ G :=
   have := isIso_mateEquiv adj adj' αi αjLow hi h₀ hess
-  asIso (mateEquiv adj' adj' αi.inv).natTrans
+  asIso (mateEquiv adj' adj' αi.inv)
 
 lemma mateEquiv_inv_eq_rightAdjointIso_hom :
     mateEquiv adj' adj' αi.inv = (rightAdjointIso adj adj' αi αjLow hi h₀ hess).hom :=
@@ -100,13 +100,13 @@ include αi h₀ hess in
 by isomorphisms, and the fibre of the unit lies in the essential image of `i`, which `FC` carries
 into the essential image of `i` (by `αi`) and `j^*` kills.
 Blueprint `prop-sf-localization-all-stages` (Weil clause). -/
-lemma isIso_mateEquiv_symm : IsIso ((mateEquiv adj adj).symm αjLow.hom).natTrans := by
-  have (K : C) : IsIso (((mateEquiv adj adj).symm αjLow.hom).natTrans.app K) := by
+lemma isIso_mateEquiv_symm : IsIso ((mateEquiv adj adj).symm αjLow.hom) := by
+  have (K : C) : IsIso (((mateEquiv adj adj).symm αjLow.hom).app K) := by
     obtain ⟨F, a, δ, hT, M, ⟨e⟩⟩ := exists_distTriang_unit adj hess K
     have : IsIso (jUp.map (FC.map (adj.unit.app K))) :=
       (Triangle.isZero₁_iff_isIso₂ _ (jUp.map_distinguished _ (FC.map_distinguished _ hT))).1
         ((h₀ (FZ.obj M)).of_iso (jUp.mapIso (FC.mapIso e.symm ≪≫ αi.app M)))
-    have h : ((mateEquiv adj adj).symm αjLow.hom).natTrans.app K =
+    have h : ((mateEquiv adj adj).symm αjLow.hom).app K =
         jUp.map (FC.map (adj.unit.app K)) ≫ jUp.map (αjLow.hom.app (jUp.obj K)) ≫
           adj.counit.app (FU.obj (jUp.obj K)) := by
       simp [mateEquiv]
@@ -120,7 +120,7 @@ lemma isIso_mateEquiv_symm : IsIso ((mateEquiv adj adj).symm αjLow.hom).natTran
 Blueprint `prop-sf-localization-all-stages` (Weil clause). -/
 noncomputable def leftAdjointIso : jUp ⋙ FU ≅ FC ⋙ jUp :=
   have := isIso_mateEquiv_symm adj αi αjLow h₀ hess
-  (asIso ((mateEquiv adj adj).symm αjLow.hom).natTrans).symm
+  (asIso ((mateEquiv adj adj).symm αjLow.hom)).symm
 
 /-- `αjLow` is the mate of the inverse of
 `CategoryTheory.Pretriangulated.Recollement.leftAdjointIso`, so that `j^* ⊣ j_*` lifts to objects

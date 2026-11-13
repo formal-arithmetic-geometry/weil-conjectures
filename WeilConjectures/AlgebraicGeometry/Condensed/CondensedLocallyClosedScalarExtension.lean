@@ -101,7 +101,7 @@ import all Mathlib.CategoryTheory.Sites.Grothendieck
 import all Mathlib.CategoryTheory.Sites.Limits
 import all Mathlib.CategoryTheory.Sites.Sheaf
 import all Mathlib.Combinatorics.Quiver.ReflQuiver
-import all Mathlib.Data.Int.ConditionallyCompleteOrder
+import all Mathlib.Order.Int.ConditionallyCompleteOrder
 import all Mathlib.Geometry.RingedSpace.LocallyRingedSpace
 import all Mathlib.Geometry.RingedSpace.PresheafedSpace
 import all Mathlib.Geometry.RingedSpace.SheafedSpace
@@ -172,10 +172,9 @@ private theorem push_eq_mate_pull_inv (a : T ⊣ S) (b : T' ⊣ S')
     (c : l ⊣ r) (d : l' ⊣ r') (e : r' ⋙ S' ≅ S ⋙ r) :
     Adjunction.pushHomOfComapIso a b e =
       (mateEquiv c d (TwoSquare.mk _ _ _ _
-        (Adjunction.pullIsoOfComapIso a b c d e).inv)).natTrans := by
+        (Adjunction.pullIsoOfComapIso a b c d e).inv)) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm c d b a
     (TwoSquare.mk _ _ _ _ e.inv)
-  apply (TwoSquare.equivNatTrans _ _ _ _).symm.injective
   apply (mateEquiv c d).symm.injective
   change (mateEquiv c d).symm ((mateEquiv a b).symm (.mk _ _ _ _ e.inv)) =
     (mateEquiv c d).symm
@@ -219,7 +218,7 @@ private theorem closed_scalar_iso
   · have hd : CondensedRing.pushHom a i =
         (mateEquiv (CondensedRing.upperStarLowerStarAdjunction A i)
           (CondensedRing.upperStarLowerStarAdjunction R i)
-          (TwoSquare.mk _ _ _ _ (CondensedRing.pullIso a i).inv)).natTrans := by
+          (TwoSquare.mk _ _ _ _ (CondensedRing.pullIso a i).inv)) := by
       simpa only [CondensedRing.pushHom, CondensedRing.pullIso] using
         (push_eq_mate_pull_inv
         (Mod.extendRestrictAdjunction (coefficientMap a Z))

@@ -54,7 +54,6 @@ section TensorModelSpecialization
 -- These proofs use only functoriality and never the underlying section construction.
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
-set_option maxHeartbeats 800000 in
 -- Keep the three coefficient reindexings together while checking the model squares.
 /-- Tensor composition on good representatives follows from the localized Roos equation.
 Source: blueprint Steps 1 and 5; Stacks 015F, 07A4, 0941

@@ -60,7 +60,7 @@ local notation "a[" Y "]" => (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberTo
 
 set_option hygiene false in
 /-- The inverse `Fr⁻¹` of the geometric Frobenius of `Ȳ`: `R(Fr⁻¹)_* = Fr^*`. -/
-local notation "Fr⁻¹[" Y "]" => (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+local notation "Fr⁻¹[" Y "]" => (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
 
 set_option hygiene false in
 /-- The base change `ī : Z̄ ⟶ X̄`. -/

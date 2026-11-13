@@ -56,7 +56,7 @@ private theorem isIso_of_residue_isIso
   have hf := ConcreteCategory.bijective_of_isIso
     ((ModuleCat.extendScalars (IsLocalRing.residue R)).map f)
   change Function.Bijective (f.hom.baseChange (IsLocalRing.ResidueField R)) at hf
-  rw [LinearMap.baseChange_eq_ltensor] at hf
+  rw [LinearMap.baseChange_eq_lTensor] at hf
   obtain ⟨g, hg⟩ :=
     (IsLocalRing.split_injective_iff_lTensor_residueField_injective f.hom).mpr hf.1
   have hgf : g.lTensor (IsLocalRing.ResidueField R) ∘ₗ

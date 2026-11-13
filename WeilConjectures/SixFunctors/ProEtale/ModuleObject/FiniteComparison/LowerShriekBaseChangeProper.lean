@@ -108,7 +108,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicIntegers_of_isProper_mate
       (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
         (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
         (boundedConstructiblePullbackSquareComparison (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ
-          sq.toCommSq).hom).natTrans =
+          sq.toCommSq).hom) =
     boundedConstructibleLowerShriekBaseChange_padicIntegers ℓ E sq ≫
       Functor.whiskerLeft
         (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj.{u} ℓ E) ℓ g')

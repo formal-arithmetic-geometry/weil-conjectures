@@ -14,6 +14,7 @@ import WeilConjectures.RingTheory.EquationCountLocalizeRelativeGlobalCompleteInt
 import WeilConjectures.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization
 import WeilConjectures.RingTheory.SyntomicPrincipalLocalizationHypotheses
 import WeilConjectures.RingTheory.SyntomicEquationCountComparison
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Syntomic at a prime: a relative global complete intersection neighbourhood

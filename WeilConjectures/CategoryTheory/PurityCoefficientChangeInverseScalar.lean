@@ -25,12 +25,14 @@ Source: inverse scalar convention in coefficient-change normalization
 Proof: its product with the endomorphism is the identity by the unit inverse law;
 cancel that endomorphism against the categorical inverse. -/
 theorem ringInverse_eq_categoricalInv
-    {C : Type u₁} [Category.{v₁} C] [Preadditive C] {X : C} (f : End X) [IsIso f] :
-    Ring.inverse f = inv f := by
-  apply (cancel_mono f).1
+    {C : Type u₁} [Category.{v₁} C] [Preadditive C] {X : C} (f : End X) [IsIso (f).asHom] :
+    Ring.inverse f = .of (inv (f).asHom) := by
+  apply End.ext
+  apply (cancel_mono f.asHom).1
   have h := Ring.mul_inverse_cancel f ((isUnit_iff_isIso f).mpr inferInstance)
-  change Ring.inverse (M₀ := End X) f ≫ f = 𝟙 X at h
-  exact h.trans (IsIso.inv_hom_id f).symm
+  have h' : (Ring.inverse (M₀ := End X) f).asHom ≫ f.asHom = 𝟙 X := by
+    simpa only [End.mul_asHom, End.one_asHom] using congr($(h).asHom)
+  exact h'.trans (IsIso.inv_hom_id f.asHom).symm
 
 /-- Every arrow intertwines an invertible natural-number scalar and its inverse.
 Source: canonical q^(-d) normalization in coefficient change
@@ -43,10 +45,12 @@ theorem map_inverse_nsmul_id_natural
     [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive]
     (n : ℕ) (X : C) (Y : D) (e : F.obj X ⟶ Y)
     [IsIso (n • 𝟙 X)] [IsIso (n • 𝟙 Y)] :
-    F.map (Ring.inverse (M₀ := End X) (n • (1 : End X))) ≫ e =
-      e ≫ Ring.inverse (M₀ := End Y) (n • (1 : End Y)) := by
+    F.map ((Ring.inverse (M₀ := End X) (n • (1 : End X)))).asHom ≫ e =
+      e ≫ (Ring.inverse (M₀ := End Y) (n • (1 : End Y))).asHom := by
+  have : IsIso (n • (1 : End X)).asHom := ‹IsIso (n • 𝟙 X)›
+  have : IsIso (n • (1 : End Y)).asHom := ‹IsIso (n • 𝟙 Y)›
   rw [ringInverse_eq_categoricalInv, ringInverse_eq_categoricalInv, F.map_inv]
-  simp only [End.one_def]
+  simp only [End.nsmul_asHom, End.one_asHom]
   have hs : F.map (n • 𝟙 X) ≫ e = e ≫ (n • 𝟙 Y) := by
     simp only [F.map_nsmul, F.map_id, Preadditive.nsmul_comp,
       Preadditive.comp_nsmul, Category.id_comp, Category.comp_id]

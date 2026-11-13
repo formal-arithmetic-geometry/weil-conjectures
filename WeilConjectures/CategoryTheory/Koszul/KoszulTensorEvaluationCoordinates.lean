@@ -111,7 +111,6 @@ def basisTensorCoordinate (O : Sheaf J CommRingCat.{u})
           (ρ_ (N.X p)).hom ≫ eqToHom (congrArg N.X hp)
       else 0)
 
-set_option maxHeartbeats 3000000 in
 -- Compare the total tensor inclusions and cancel the signed evaluation factors.
 /-- Canonical signed tensor-Hom evaluation preserves every homogeneous basis coordinate.
 Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).

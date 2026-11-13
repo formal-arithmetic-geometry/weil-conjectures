@@ -84,13 +84,17 @@ theorem traceFormulaHolds_frobeniusIterate_of_localTerm [IsAlgClosed k] [IsPrope
       ((Correspondence.ofGraph K (frobeniusIterate Φ m) v).traceClass
           (Correspondence.ofGraphFixedLocus hΦ hm K v)).localTerm
           (sigmaPointι k (FixedPoint Φ m) x) =
-        trace (Correspondence.graphStalkMap K (frobeniusIterate Φ m) v x.1 x.2)) :
+        End.of (trace (Correspondence.graphStalkMap K (frobeniusIterate Φ m) v x.1 x.2))) :
     TraceFormulaHolds ℓ (frobeniusIterate Φ m) := by
   intro K v _ _ _
   let F := Correspondence.ofGraphFixedLocus hΦ hm K v
   have : IsProper F.F.hom := inferInstanceAs (IsProper (sigmaPoint k (FixedPoint Φ m)).hom)
-  rw [← Correspondence.globalOperator_ofGraph,
-    (Correspondence.ofGraph K (frobeniusIterate Φ m) v).trace_globalOperator_eq_sum_localTerm F
+  rw [← Correspondence.globalOperator_ofGraph]
+  suffices h : End.of (trace (Correspondence.ofGraph K (frobeniusIterate Φ m) v).globalOperator) =
+      ∑ x : FixedPoint Φ m,
+        End.of (trace (Correspondence.graphStalkMap K (frobeniusIterate Φ m) v x.1 x.2)) by
+    simpa only [End.sum_asHom] using congrArg End.asHom h
+  rw [(Correspondence.ofGraph K (frobeniusIterate Φ m) v).trace_globalOperator_eq_sum_localTerm F
       (fun _ ↦ point k) (sigmaPointι k (FixedPoint Φ m))
       (fun _ _ h ↦ disjoint_range_sigmaPointι k _ h) (iUnion_range_sigmaPointι k _)]
   exact Finset.sum_congr rfl fun x _ ↦ hLT K v x

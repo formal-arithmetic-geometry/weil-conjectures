@@ -12,6 +12,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 import WeilConjectures.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.TensorPullbackStalkComplex
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-!
 # Pullback preserves K-flat complexes

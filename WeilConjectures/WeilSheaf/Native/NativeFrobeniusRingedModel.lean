@@ -74,7 +74,7 @@ structure NativeFrobeniusRingedModel
   hom_frobenius (P : Presentation J s R a) (M N : Modules R) :
     (WeilSheaf.frobeniusPullback k₀ l X).map (hom M N).hom ≫
         (ProEtale.adicLowerStarCompIhomIso l
-          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+          (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv
           (E.functor.obj M)).inv.app (E.functor.obj N) ≫
         (Mod.ihomMap (comparison.app M).inv).app _ ≫
           (ProEtale.AdicSheaf.ihom (E.functor.obj ((sigma J s R a).obj M))).map
@@ -125,7 +125,7 @@ theorem native_frobenius_ringed_model
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     Nonempty (NativeFrobeniusRingedModel k₀ l X) := by
   let Y := (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
-  let g := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+  let g := (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso
   let _ := (ProEtale.NativeFrobenius.translation_continuous Y g).1
   let _ := (ProEtale.NativeFrobenius.translation_continuous Y g).2
   obtain ⟨H⟩ := ProEtale.adicModuleHomComparisonCore l Y

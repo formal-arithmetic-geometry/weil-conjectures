@@ -32,7 +32,6 @@ attribute [local irreducible] AlgebraicGeometry.ProEtale.RationalP1.projectionMa
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the native braidings compares the fixed module-site instances.
 attribute [-instance] internalMonoidal in
 private theorem trace_projection_naturality {X S : Scheme.{u}} (g : X ⟶ S)

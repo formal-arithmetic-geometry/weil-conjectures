@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.AlternatingCechComputes
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # A step in projective Serre vanishing -/
 

@@ -165,7 +165,6 @@ private noncomputable def affineSectionsIso (X : Scheme.{u}) [IsAffine X] :
     ext x
     rfl
 
-set_option maxHeartbeats 400000 in
 -- Transport composes the affine, formal-system and finite-module equivalences.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

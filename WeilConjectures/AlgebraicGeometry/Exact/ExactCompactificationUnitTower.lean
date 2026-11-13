@@ -158,7 +158,7 @@ private lemma sheaf_exchange_inclusion
       (TwoSquare.mk _ _ _ _
         (@asIso _ _ _ _ _
           (isIso_openImmersionLowerShriekBaseChangeMap
-            (ModuleCat.{u + 1} A) sq)).inv)).natTrans.app M ≫
+            (ModuleCat.{u + 1} A) sq)).inv)).app M ≫
         (lowerStar (ModuleCat.{u + 1} A) p).map
           ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) b).app M) =
       (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) i).app
@@ -181,7 +181,7 @@ private lemma sheaf_exchange_inclusion
   dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hs
   have hx : (mateEquiv (upperStarLowerStarAdjunction B q)
       (upperStarLowerStarAdjunction B p)
-      (TwoSquare.mk _ _ _ _ bc.inv)).natTrans.app M =
+      (TwoSquare.mk _ _ _ _ bc.inv)).app M =
       (upperStarLowerStarAdjunction B p).unit.app _ ≫
         (lowerStar B p).map (bc.inv.app _ ≫ (openImmersionLowerShriek B b).map
           ((upperStarLowerStarAdjunction B q).counit.app M)) := by
@@ -520,7 +520,7 @@ theorem exactCompactificationUnit_tower
   let bc := @asIso _ _ _ _ _ (isIso_openImmersionLowerShriekBaseChangeMap K
     c.isPullback_restrict)
   let χ := (mateEquiv (upperStarLowerStarAdjunction K c.restrict.g)
-    (upperStarLowerStarAdjunction K c.g) (TwoSquare.mk _ _ _ _ bc.inv)).natTrans
+    (upperStarLowerStarAdjunction K c.g) (TwoSquare.mk _ _ _ _ bc.inv))
   let Γ := openImmersionLowerShriekLowerStarExchange K c.isPullback_restrict
   let eo : H ≅ J ⋙ O := open_congr A c.restrict_i_fst.symm ≪≫
     openImmersionLowerShriekComp K c.restrict.i (pullback.fst c.g d.i)

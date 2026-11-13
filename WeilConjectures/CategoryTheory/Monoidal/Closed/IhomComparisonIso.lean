@@ -32,13 +32,13 @@ open MonoidalCategory MonoidalClosed
 
 variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
   [MonoidalClosed C] [MonoidalClosed D] (G : C ⥤ D) [G.LaxMonoidal]
-  {A B : C} {A' B' : D} [IsIso ((ihomComparison G A).natTrans.app B)]
+  {A B : C} {A' B' : D} [IsIso ((ihomComparison G A).app B)]
 
 /-- The isomorphism `G [A, B] ≅ [A', B']` induced by isomorphisms `e : G A ≅ A'` and
 `d : G B ≅ B'`, when the comparison map `G [A, B] ⟶ [G A, G B]` is an isomorphism. -/
 noncomputable def mapIhomObjIso (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
     G.obj ((ihom A).obj B) ≅ (ihom A').obj B' :=
-  asIso ((ihomComparison G A).natTrans.app B) ≪≫ (ihom (G.obj A)).mapIso d ≪≫
+  asIso ((ihomComparison G A).app B) ≪≫ (ihom (G.obj A)).mapIso d ≪≫
     { hom := (pre e.inv).app B'
       inv := (pre e.hom).app B'
       hom_inv_id := by
@@ -47,7 +47,7 @@ noncomputable def mapIhomObjIso (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
         rw [← NatTrans.comp_app, ← pre_map, e.inv_hom_id, pre_id, NatTrans.id_app] }
 
 lemma mapIhomObjIso_hom (e : G.obj A ≅ A') (d : G.obj B ≅ B') :
-    (mapIhomObjIso G e d).hom = (ihomComparison G A).natTrans.app B ≫
+    (mapIhomObjIso G e d).hom = (ihomComparison G A).app B ≫
       (ihom (G.obj A)).map d.hom ≫ (pre e.inv).app B' :=
   rfl
 

@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 import WeilConjectures.AlgebraicGeometry.ValuativeSquareOfMemClosureRange
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Closedness of an immersion from valuative factorization

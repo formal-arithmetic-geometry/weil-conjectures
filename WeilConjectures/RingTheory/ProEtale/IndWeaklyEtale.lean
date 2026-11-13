@@ -8,6 +8,7 @@ module
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 public import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
+public import Mathlib.RingTheory.Ideal.IdempotentFG
 
 /-!
 # IndWeaklyEtale

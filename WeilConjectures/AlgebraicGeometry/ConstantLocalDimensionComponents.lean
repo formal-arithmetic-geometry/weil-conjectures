@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import Mathlib.AlgebraicGeometry.Properties
 
 /-! # Components of an open of constant local dimension
 

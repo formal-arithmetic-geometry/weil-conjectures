@@ -27,7 +27,6 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Conversion between the localized carrier and the Hom carrier needs extra elaboration steps.
 /-- The restricted canonical adjunct is the localization of ordinary evaluation,
 with the source and target comparison isomorphisms included in the commuting square.

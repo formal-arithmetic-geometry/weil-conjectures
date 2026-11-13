@@ -318,8 +318,8 @@ private theorem coefficientPlusCounit
   let a := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
   let b := clopenModuleAdj B f
   let e := @asIso _ _ _ _ (hPullbackInv B f Λ φ) (hPullbackInv_isIso B f Λ φ)
-  have hm : (mateEquiv a b e.hom).natTrans = hDirect B f Λ φ := by
-    exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
+  have hm : (mateEquiv a b e.hom) = hDirect B f Λ φ := by
+    exact ((mateEquiv a b).apply_symm_apply _)
   rw [← hm, Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv a b e]
   change (hPullbackPlus B Λ φ f).inv.app _ ≫
     (modulePullback B f).mapDerivedCategoryPlus.map
@@ -369,7 +369,7 @@ theorem singleLevelFiniteProperOpenTransport
   let b' := clopenModuleAdj B p
   let γ := (mateEquiv a'.derivedPlus b'.derivedPlus
     (Etale.ClopenMateNormalization.clopenLocalizedSquarePlus
-      (singleAlpha B k r p i h))).natTrans
+      (singleAlpha B k r p i h)))
   have heq := transport_mate a.derivedPlus b.derivedPlus a'.derivedPlus b'.derivedPlus
     (H B S Λ φ).mapDerivedCategoryPlus (H B V Λ φ).mapDerivedCategoryPlus
     (H B T Λ φ).mapDerivedCategoryPlus (H B W Λ φ).mapDerivedCategoryPlus

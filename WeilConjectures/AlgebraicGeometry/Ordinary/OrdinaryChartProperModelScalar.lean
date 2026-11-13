@@ -70,7 +70,7 @@ theorem ordinaryChartProperModelScalar
     L(upperStar (ModuleCat.{u + 1} A) r) L(upperStar (ModuleCat.{u + 1} B) r)
     (scalarExtension φ W) (scalarPullbackIso φ r).hom
   let D := ((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C
-  have hn : θ.natTrans.app (DerivedCategory.Q.obj D) ≫
+  have hn : θ.app (DerivedCategory.Q.obj D) ≫
       (scalarExtension φ W).map (scalarGeometricRepresentative A r D) ≫
         scalarExtensionRepresentative φ W
           (((upperStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj D) =
@@ -78,8 +78,8 @@ theorem ordinaryChartProperModelScalar
           (scalarExtensionRepresentative φ V D) ≫
         scalarGeometricRepresentative B r
           (((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).obj D) ≫
-        DerivedCategory.Q.map (σ.natTrans.app D) := by
-    dsimp only [θ, σ, TwoSquare.mk, TwoSquare.natTrans]
+        DerivedCategory.Q.map (σ.app D) := by
+    dsimp only [θ, σ, TwoSquare.mk]
     exact scalar_pullback_normalization φ r D hDV
   have hs : (scalarSheafPullbackComplexIso φ r).hom =
       complexTransformation (ProEtale.etaleSheafExtendScalars φ V)
@@ -88,7 +88,7 @@ theorem ordinaryChartProperModelScalar
     by
       dsimp only [scalarSheafPullbackComplexIso]
       exact complex_iso_transformation _ _ _ _ (scalarSheafPullbackIso φ r)
-  have hm : (mateEquiv a b σ).natTrans.app C = properCoefficientComplexMap φ r C := by
+  have hm : (mateEquiv a b σ).app C = properCoefficientComplexMap φ r C := by
     dsimp only [σ]
     rw [hs]
     dsimp only [properCoefficientComplexMap, properSheafCoefficientMap]
@@ -101,7 +101,7 @@ theorem ordinaryChartProperModelScalar
         (ProEtale.etaleSheafExtendScalars φ W) (scalarSheafPullbackIso φ r).hom) C
   let E := (ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)
   let M := ((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).obj D
-  let τ := σ.natTrans.app D ≫ E.map (a.counit.app C)
+  let τ := σ.app D ≫ E.map (a.counit.app C)
   have hc : L(upperStar (ModuleCat.{u + 1} A) r).map
         (properAcyclicComparison A r C) ≫
       (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) r).counit.app
@@ -124,7 +124,7 @@ theorem ordinaryChartProperModelScalar
   simp only [Functor.comp_map] at h₇
   rw [acyclicComparisonTransformation_app, acyclicComparisonTransformation_app] at h₇
   have hτ : DerivedCategory.Q.map τ =
-      DerivedCategory.Q.map (σ.natTrans.app D) ≫
+      DerivedCategory.Q.map (σ.app D) ≫
         DerivedCategory.Q.map (E.map (a.counit.app C)) := by
     exact CategoryTheory.Functor.map_comp DerivedCategory.Q _ _
   rw [hτ] at h₇
@@ -147,7 +147,7 @@ theorem ordinaryChartProperModelScalar
     (properAcyclicComparison B r
       (((upperStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).obj M))
     (DerivedCategory.Q.map (a.counit.app C)) (DerivedCategory.Q.map (b.unit.app M))
-    (DerivedCategory.Q.map (σ.natTrans.app D))
+    (DerivedCategory.Q.map (σ.app D))
     (DerivedCategory.Q.map (E.map (a.counit.app C)))
     (DerivedCategory.Q.map
       (((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map τ))

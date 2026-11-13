@@ -532,7 +532,6 @@ theorem existsUnique_iso_leftDerivedUpperStar_of_etale
     ext
     simpa using h =≫ κ.hom
 
-set_option maxHeartbeats 800000 in
 -- unifying the objects of the composition and section isomorphisms is expensive
 set_option linter.unusedSectionVars false in
 include aY in

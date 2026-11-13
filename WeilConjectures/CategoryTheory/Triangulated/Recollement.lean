@@ -67,14 +67,14 @@ lemma Adjunction.isIso_mateEquiv_app (adj : i ⊣ G) (adj' : i' ⊣ G') (hi' : i
     (α : ΦZ ⋙ i' ⟶ i ⋙ Φ) [IsIso α] (K : C)
     (f : Φ.obj (i.obj (G.obj K)) ≅ i'.obj (G'.obj (Φ.obj K)))
     (hf : f.hom ≫ adj'.counit.app (Φ.obj K) = Φ.map (adj.counit.app K)) :
-    IsIso ((mateEquiv adj adj' α).natTrans.app K) := by
-  have h : i'.map ((mateEquiv adj adj' α).natTrans.app K) = α.app (G.obj K) ≫ f.hom := by
+    IsIso ((mateEquiv adj adj' α).app K) := by
+  have h : i'.map ((mateEquiv adj adj' α).app K) = α.app (G.obj K) ≫ f.hom := by
     rw [← hi'.map_preimage (α.app (G.obj K) ≫ f.hom)]
     congr 1
     apply (adj'.homEquiv _ _).symm.injective
     simp only [Adjunction.homEquiv_counit, hi'.map_preimage, Category.assoc, hf]
     exact mateEquiv_counit adj adj' α K
-  have : IsIso (i'.map ((mateEquiv adj adj' α).natTrans.app K)) := by
+  have : IsIso (i'.map ((mateEquiv adj adj' α).app K)) := by
     rw [h]
     infer_instance
   exact hi'.isIso_of_isIso_map _

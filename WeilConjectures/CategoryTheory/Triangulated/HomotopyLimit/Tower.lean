@@ -126,14 +126,14 @@ omit [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunc
 /-- The `k`-th power of the transition endomorphism `t` of `∏ₙ Fₙ` has components
 `∏ Fₙ ⟶ Fₙ₊ₖ ⟶ Fₙ`. -/
 lemma towerShift_pow_proj (k n : ℕ) :
-    (End.of (towerShift hP) ^ k) ≫ P.proj n =
+    ((End.of (towerShift hP) ^ k).asHom) ≫ P.proj n =
       P.proj (n + k) ≫ F.map (homOfLE (Nat.le_add_right n k)).op := by
   induction k generalizing n with
   | zero =>
-    rw [pow_zero, End.one_def, id_comp]
+    rw [pow_zero, End.one_asHom, id_comp]
     exact (Category.comp_id _).symm.trans (by congr 1; exact (F.map_id _).symm)
   | succ k ih =>
-    rw [pow_succ, End.mul_def, assoc, ih, towerShift_proj_assoc, ← F.map_comp]
+    rw [pow_succ, End.mul_asHom, assoc, ih, towerShift_proj_assoc, ← F.map_comp]
     rfl
 
 omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
@@ -143,8 +143,10 @@ isomorphism of `∏ₙ Fₙ`. -/
 lemma isIso_sub_towerShift_of_eq_zero (N : ℕ)
     (hN : ∀ n : ℕ, F.map (homOfLE (Nat.le_add_right n N)).op = 0) :
     IsIso (𝟙 P.pt - towerShift hP) := by
-  have h : (End.of (towerShift hP) ^ N) = 0 :=
-    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by rw [towerShift_pow_proj, hN, comp_zero, zero_comp]
+  have h : (End.of (towerShift hP) ^ N) = 0 := by
+    apply End.ext
+    exact Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      rw [towerShift_pow_proj, hN, End.zero_asHom, comp_zero, zero_comp]
   have : IsUnit (1 - End.of (towerShift hP)) := IsNilpotent.isUnit_one_sub ⟨N, h⟩
   exact (isUnit_iff_isIso _).1 this
 
@@ -305,9 +307,9 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hp (n : ℕ) : p ≫ P'.proj n = P.proj (n + k) := Fan.IsLimit.fac hP' _ n
   have hq (n : ℕ) : q ≫ P.proj n = P'.proj n ≫ F.map (homOfLE (Nat.le_add_right n k)).op :=
     Fan.IsLimit.fac hP _ n
-  have hpq : p ≫ q = End.of (towerShift hP) ^ k :=
+  have hpq : p ≫ q = (End.of (towerShift hP) ^ k).asHom :=
     Fan.IsLimit.hom_ext hP _ _ fun n ↦ by rw [assoc, hq, ← assoc, hp, towerShift_pow_proj]
-  have hqp : q ≫ p = End.of (towerShift hP') ^ k :=
+  have hqp : q ≫ p = (End.of (towerShift hP') ^ k).asHom :=
     Fan.IsLimit.hom_ext hP' _ _ fun n ↦ by
       rw [assoc, hp, hq, towerShift_pow_proj]
       rfl
@@ -331,38 +333,38 @@ lemma IsHomotopyLimit.whiskerAdd [HasLimitsOfShape (Discrete ℕ) C] {F : ℕᵒ
   have hℓ : Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫ towerShift hP =
       Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := lift_comp_towerShift hP c
   have hℓpow : ∀ j : ℕ, Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) ≫
-      (End.of (towerShift hP) ^ j) = Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := by
+      ((End.of (towerShift hP) ^ j).asHom) = Fan.IsLimit.lift hP (fun n ↦ c.π.app (op n)) := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, comp_id]
-    | succ j ih => rw [pow_succ, End.mul_def, ← assoc, hℓ, ih]
+    | zero => rw [pow_zero, End.one_asHom, comp_id]
+    | succ j ih => rw [pow_succ, End.mul_asHom, ← assoc, hℓ, ih]
   have hδ : towerShift hP ≫ δ = δ := by
     have : (𝟙 _ - towerShift hP) ≫ δ = 0 := comp_distTriang_mor_zero₂₃ _ hT
     rw [Preadditive.sub_comp, id_comp, sub_eq_zero] at this
     exact this.symm
-  have hδpow : ∀ j : ℕ, (End.of (towerShift hP) ^ j) ≫ δ = δ := by
+  have hδpow : ∀ j : ℕ, ((End.of (towerShift hP) ^ j).asHom) ≫ δ = δ := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, id_comp]
-    | succ j ih => rw [pow_succ, End.mul_def, assoc, ih, hδ]
+    | zero => rw [pow_zero, End.one_asHom, id_comp]
+    | succ j ih => rw [pow_succ, End.mul_asHom, assoc, ih, hδ]
   have hℓ'' : ℓ'' ≫ towerShift hP' = ℓ'' := by
     have : ℓ'' ≫ (𝟙 _ - towerShift hP') = 0 := comp_distTriang_mor_zero₁₂ _ hT''
     rw [Preadditive.comp_sub, comp_id, sub_eq_zero] at this
     exact this.symm
-  have hℓ''pow : ∀ j : ℕ, ℓ'' ≫ (End.of (towerShift hP') ^ j) = ℓ'' := by
+  have hℓ''pow : ∀ j : ℕ, ℓ'' ≫ ((End.of (towerShift hP') ^ j).asHom) = ℓ'' := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, comp_id]
-    | succ j ih => rw [pow_succ, End.mul_def, ← assoc, hℓ'', ih]
+    | zero => rw [pow_zero, End.one_asHom, comp_id]
+    | succ j ih => rw [pow_succ, End.mul_asHom, ← assoc, hℓ'', ih]
   have hδ'' : towerShift hP' ≫ δ'' = δ'' := by
     have : (𝟙 _ - towerShift hP') ≫ δ'' = 0 := comp_distTriang_mor_zero₂₃ _ hT''
     rw [Preadditive.sub_comp, id_comp, sub_eq_zero] at this
     exact this.symm
-  have hδ''pow : ∀ j : ℕ, (End.of (towerShift hP') ^ j) ≫ δ'' = δ'' := by
+  have hδ''pow : ∀ j : ℕ, ((End.of (towerShift hP') ^ j).asHom) ≫ δ'' = δ'' := by
     intro j
     induction j with
-    | zero => rw [pow_zero, End.one_def, id_comp]
-    | succ j ih => rw [pow_succ, End.mul_def, assoc, ih, hδ'']
+    | zero => rw [pow_zero, End.one_asHom, id_comp]
+    | succ j ih => rw [pow_succ, End.mul_asHom, assoc, ih, hδ'']
   let φ : Triangle.mk _ _ δ ⟶ Triangle.mk ℓ'' (𝟙 P'.pt - towerShift hP') δ'' :=
     { hom₁ := u, hom₂ := p, hom₃ := p, comm₁ := hu₁, comm₂ := hpτ.symm, comm₃ := hu₃ }
   let φ' : Triangle.mk ℓ'' (𝟙 P'.pt - towerShift hP') δ'' ⟶ Triangle.mk _ _ δ :=

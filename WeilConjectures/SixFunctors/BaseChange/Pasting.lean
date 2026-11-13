@@ -163,7 +163,7 @@ lemma Etale.squareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
     (Etale.squareUpperStarIso A sq).hom =
       Functor.whiskerRight (Etale.upperStarComp A h g).hom ((f'')^*[A]) ≫
         (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom ≫ₕ
-          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom).natTrans ≫
+          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom) ≫
         Functor.whiskerLeft ((f)^*[A]) (Etale.upperStarComp A g'' g').inv := by
   refine NatTrans.ext (funext fun F => ?_)
   simp only [Etale.squareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -191,7 +191,7 @@ lemma Etale.baseChangeSquare_paste_horiz (sq₁ : CommSq g' f' f g) (sq₂ : Com
       ((TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom ≫ₕ
         TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom).whiskerTop
           (Etale.upperStarComp A h g).hom).whiskerBottom (Etale.upperStarComp A g'' g').inv := by
-    refine TwoSquare.ext _ _ fun F => ?_
+    refine NatTrans.ext (funext fun F => ?_)
     have := NatTrans.congr_app (Etale.squareUpperStarIso_paste_horiz_hom A sq₁ sq₂ sq) F
     simpa only [TwoSquare.whiskerBottom_app, TwoSquare.whiskerTop_app, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using this
@@ -253,7 +253,7 @@ lemma Etale.squareUpperStarIso_paste_vert_hom (sq₁ : CommSq g' f' f g) (sq₂ 
     (Etale.squareUpperStarIso A sq).hom =
       Functor.whiskerLeft ((k)^*[A]) (Etale.upperStarComp A f' e').hom ≫
         (TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom ≫ᵥ
-          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom).natTrans ≫
+          TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom) ≫
         Functor.whiskerRight (Etale.upperStarComp A f e).inv ((g')^*[A]) := by
   refine NatTrans.ext (funext fun F => ?_)
   simp only [Etale.squareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -284,7 +284,7 @@ lemma Etale.baseChangeSquare_paste_vert (sq₁ : CommSq g' f' f g) (sq₂ : Comm
       ((TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₂).hom ≫ᵥ
         TwoSquare.mk _ _ _ _ (Etale.squareUpperStarIso A sq₁).hom).whiskerRight
           (Etale.upperStarComp A f' e').hom).whiskerLeft (Etale.upperStarComp A f e).inv := by
-    refine TwoSquare.ext _ _ fun F => ?_
+    refine NatTrans.ext (funext fun F => ?_)
     have := NatTrans.congr_app (Etale.squareUpperStarIso_paste_vert_hom A sq₁ sq₂ sq) F
     simpa only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app, NatTrans.comp_app,
       Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using this

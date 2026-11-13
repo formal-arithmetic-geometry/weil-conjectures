@@ -34,7 +34,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 400000 in
 -- The sheaf tensor and total-complex instances require larger search terms and budget.
 /-- Derived pullback is left adjoint to derived direct image, bifunctorially on the
 unbounded derived categories of O-modules. Source: Stacks, Tag 079W

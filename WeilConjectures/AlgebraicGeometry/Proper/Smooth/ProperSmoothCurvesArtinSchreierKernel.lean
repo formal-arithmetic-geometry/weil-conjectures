@@ -116,8 +116,8 @@ theorem exists_forget₂_higherDirectImage_iso_frobeniusLinear_kernel
       (∀ (U : S.Etale) (a : Γ(U.left, ⊤))
         (e : Γ((Scheme.Modules.tensorPullback U.hom).obj E, ⊤)),
         F.hom.app (op U)
-            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).hom e) =
-          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).hom
+            ((((Scheme.Modules.tensorPullback U.hom).obj E).smul a).asHom.hom e) =
+          (((Scheme.Modules.tensorPullback U.hom).obj E).smul (a ^ p)).asHom.hom
             (F.hom.app (op U) e)) ∧
       Nonempty ((sheafCompose S.smallEtaleTopology
           (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))) AddCommGrpCat.{u + 1})).obj

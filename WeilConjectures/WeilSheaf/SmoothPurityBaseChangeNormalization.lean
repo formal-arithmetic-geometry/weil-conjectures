@@ -95,7 +95,7 @@ lemma rightDerivedLowerStarBaseChangeIso_hom_app_eq_derivedBaseChange
     (rightDerivedLowerStarBaseChangeIso Λ sq).hom.app K =
       ((upperStarLowerStarAdjunction Λ f).derivedBaseChange
         (upperStarLowerStarAdjunction Λ f')
-        (upperStarSquareComparison Λ sq.toCommSq)).natTrans.app K := by
+        (upperStarSquareComparison Λ sq.toCommSq)).app K := by
   have he := Adjunction.traceExchange_eq_of_iso
     (upperStarLowerStarAdjunction Λ f).derivedAdjunction
     (upperStarLowerStarAdjunction Λ f').derivedAdjunction
@@ -119,11 +119,11 @@ lemma rightDerivedLowerStarBaseChangeIso_hom_app_eq_derivedBaseChange
 lemma derivedBaseChange_eq_rightDerivedFunctorCommIso
     (sq : IsPullback g' f' f g) [WeaklyEtale g] [WeaklyEtale g'] :
     ((upperStarLowerStarAdjunction Λ f).derivedBaseChange
-      (upperStarLowerStarAdjunction Λ f') (upperStarSquareComparison Λ sq.toCommSq)).natTrans =
+      (upperStarLowerStarAdjunction Λ f') (upperStarSquareComparison Λ sq.toCommSq)) =
         (Functor.rightDerivedFunctorCommIso (lowerStarBaseChangeIso Λ sq)).hom := by
   have hb : (mateEquiv (upperStarLowerStarAdjunction Λ f)
       (upperStarLowerStarAdjunction Λ f')
-      (TwoSquare.mk _ _ _ _ (upperStarSquareComparison Λ sq.toCommSq).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (upperStarSquareComparison Λ sq.toCommSq).hom)) =
         (lowerStarBaseChangeIso Λ sq).hom := by
     simpa only [lowerStarBaseChangeIso, asIso_hom,
       ← Adjunction.exchangeRight_eq_mateEquiv] using

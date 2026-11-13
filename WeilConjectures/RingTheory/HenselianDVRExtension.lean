@@ -78,7 +78,7 @@ lemma exists_pow_eq_of_isUnit {u : A} (hu : IsUnit u) : ∃ w : A, w ^ N = u := 
 lemma exists_isPrimitiveRoot : ∃ ζ : A, IsPrimitiveRoot ζ N := by
   have hN0 : N ≠ 0 := fun h ↦ hN (by simp [h])
   have : NeZero (N : ResidueField A) := ⟨hN⟩
-  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (ResidueField A) N
+  obtain ⟨ζ₀, hζ₀⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot (ResidueField A) N
   have hζ₀0 : ζ₀ ≠ 0 := hζ₀.ne_zero hN0
   obtain ⟨ζ, hζ, hζres⟩ := exists_isRoot_residue_eq (X ^ N - 1) (monic_X_pow_sub_C 1 hN0) ζ₀
     (by simp [hζ₀.pow_eq_one]) (by simp [derivative_X_pow, hN, hζ₀0])

@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.RingTheory.Flat.Localization
 
 /-! # Derived orthogonality of power-torsion cohomology and localized coefficients -/
 

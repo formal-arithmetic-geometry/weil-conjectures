@@ -107,12 +107,12 @@ theorem constantAdicQuotient_realization_scalar_reduction
   have hm₁ := isIso_inverseMate_of_equivalences a₀ a₁
     (Functor.mapDerivedCategorySquareIso k₁)
   let m₁ := asIso ((mateEquiv a₀ a₁).symm
-    (Functor.mapDerivedCategorySquareIso k₁).hom).natTrans
+    (Functor.mapDerivedCategorySquareIso k₁).hom)
   -- Exact constant realization has an invertible scalar mate.
   let k₂ := (ConstantScalarRealization.restrictionIso (ProEt.topology X) r).symm
   have hm₂ := constant_square_mate_isIso X r
   let m₂ := asIso ((mateEquiv a₁ a₂).symm
-    (Functor.mapDerivedCategorySquareIso k₂).hom).natTrans
+    (Functor.mapDerivedCategorySquareIso k₂).hom)
   -- Naturality of the finite coefficient comparison gives the third square.
   have hn : a ≫ en.hom = ep.hom ≫ c := by
     simpa only [a, r, en, ep, c, adicLisseRingSystem,
@@ -127,10 +127,10 @@ theorem constantAdicQuotient_realization_scalar_reduction
     pbcRestrictComp ep.inv a (c ≫ en.inv) he ≪≫
       (pbcRestrictComp c en.inv (c ≫ en.inv) rfl).symm
   have hm₃ : IsIso ((mateEquiv a₂ a₃).symm
-      (Functor.mapDerivedCategorySquareIso k₃).hom).natTrans :=
+      (Functor.mapDerivedCategorySquareIso k₃).hom) :=
     isIso_inverseMate_of_equivalences a₂ a₃ (Functor.mapDerivedCategorySquareIso k₃)
   let m₃ := asIso ((mateEquiv a₂ a₃).symm
-    (Functor.mapDerivedCategorySquareIso k₃).hom).natTrans
+    (Functor.mapDerivedCategorySquareIso k₃).hom)
   -- Inverse image commutes with scalar extension by the ring-sheaf-change mate.
   let k₄ := proEtaleRingRestrictionDerivedPullback h
     ((pbcAdicRings X d).obj (op (n + 1))) ((pbcAdicRings X d).obj (op n))
@@ -139,7 +139,7 @@ theorem constantAdicQuotient_realization_scalar_reduction
     c b (Iso.refl _) (Iso.refl _)
     ((Category.id_comp _).trans (Category.comp_id _).symm)
   have hm₄ := inverseImage_mate_isIso h c
-  let m₄ := asIso ((mateEquiv a₃ (pbcDerivedScalarAdjunction b)).symm k₄.inv).natTrans
+  let m₄ := asIso ((mateEquiv a₃ (pbcDerivedScalarAdjunction b)).symm k₄.inv)
   -- Expand the exact realizations and compose the four mate isomorphisms.
   let fn := (Functor.mapDerivedCategoryCompIso Qn (Cn ⋙ Bn)).symm ≪≫
     Functor.isoWhiskerLeft Qn.mapDerivedCategory (Functor.mapDerivedCategoryCompIso Cn Bn).symm

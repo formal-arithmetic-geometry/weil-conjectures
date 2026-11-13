@@ -44,8 +44,8 @@ of `G X` and `G Z`:
 ```
 -/
 lemma map_ihomUnitTensorToIhom_comp (X Z : C) :
-    G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).natTrans.app Z =
-      δ G _ Z ≫ ((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+    G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).app Z =
+      δ G _ Z ≫ ((ihomComparison G X).app (𝟙_ C) ≫
         (ihom (G.obj X)).map (η G)) ▷ G.obj Z ≫ ihomUnitTensorToIhom (G.obj X) (G.obj Z) := by
   apply uncurry_injective
   rw [uncurry_eq, uncurry_eq, MonoidalCategory.whiskerLeft_comp_assoc, ihomComparison_ev,
@@ -62,29 +62,29 @@ lemma map_ihomUnitTensorToIhom_comp (X Z : C) :
 
 /-- If the comparison maps `G [X, -] ⟶ [G X, G -]` are isomorphisms, `G` carries an invertible
 comparison map `[X, 𝟙] ⊗ Z ⟶ [X, Z]` to an invertible comparison map. -/
-lemma isIso_ihomUnitTensorToIhom_obj (X Z : C) [IsIso (ihomComparison G X).natTrans]
+lemma isIso_ihomUnitTensorToIhom_obj (X Z : C) [IsIso (ihomComparison G X)]
     [IsIso (G.map (ihomUnitTensorToIhom X Z))] :
     IsIso (ihomUnitTensorToIhom (G.obj X) (G.obj Z)) := by
   have h := map_ihomUnitTensorToIhom_comp G X Z
-  have : IsIso (δ G _ Z ≫ ((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+  have : IsIso (δ G _ Z ≫ ((ihomComparison G X).app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G)) ▷ G.obj Z ≫ ihomUnitTensorToIhom (G.obj X) (G.obj Z)) := by
     rw [← h]; infer_instance
-  have : IsIso (((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+  have : IsIso (((ihomComparison G X).app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G)) ▷ G.obj Z ≫ ihomUnitTensorToIhom (G.obj X) (G.obj Z)) :=
     IsIso.of_isIso_comp_left (δ G _ Z) _
-  exact IsIso.of_isIso_comp_left (((ihomComparison G X).natTrans.app (𝟙_ C) ≫
+  exact IsIso.of_isIso_comp_left (((ihomComparison G X).app (𝟙_ C) ≫
       (ihom (G.obj X)).map (η G)) ▷ G.obj Z) _
 
 
 /-- If the comparison maps `G [X, -] ⟶ [G X, G -]` are isomorphisms and the comparison map of
 `G X` and `G Z` is invertible, so is the image under `G` of the comparison map of `X` and `Z`. -/
 lemma isIso_map_ihomUnitTensorToIhom_of_ihomComparison (X Z : C)
-    [IsIso (ihomComparison G X).natTrans]
+    [IsIso (ihomComparison G X)]
     [IsIso (ihomUnitTensorToIhom (G.obj X) (G.obj Z))] :
     IsIso (G.map (ihomUnitTensorToIhom X Z)) := by
   have h := map_ihomUnitTensorToIhom_comp G X Z
-  have : IsIso (G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).natTrans.app Z) := by
+  have : IsIso (G.map (ihomUnitTensorToIhom X Z) ≫ (ihomComparison G X).app Z) := by
     rw [h]; infer_instance
-  exact IsIso.of_isIso_comp_right _ ((ihomComparison G X).natTrans.app Z)
+  exact IsIso.of_isIso_comp_right _ ((ihomComparison G X).app Z)
 
 end CategoryTheory.Functor.Monoidal

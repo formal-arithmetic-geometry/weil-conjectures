@@ -204,7 +204,6 @@ private theorem secondTraceBraided_braiding
 
 section NativeComparison
 
-set_option maxHeartbeats 800000 in
 -- Comparing the native and bundled tensor structures needs more elaboration fuel.
 private theorem normalized_projection_swap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -270,7 +269,6 @@ end NativeComparison
 
 section FinalTransport
 
-set_option maxHeartbeats 800000 in
 -- Compare the fixed tensor and shift structures once when specializing abstract coherence.
 /-- Tensor strength can be moved through a projection and an arbitrary inside arrow.
 Source: rational projective-line triangle calculation, Second identity, projection-formula

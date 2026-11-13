@@ -122,7 +122,6 @@ variable [(adicSheafEquivCondensedMod l X).functor.Monoidal]
   [(adicSheafEquivCondensedMod l Y).functor.Monoidal] [(f)^*ᵃ[l].Monoidal]
   [NatTrans.IsMonoidal (adicUpperStarCompCondensedModIso l f).hom]
 
-set_option maxHeartbeats 1600000 in
 -- unifying the generic derived-category lemmas with the module-object instances is slow
 /-- The `ℓ`-adic projection map at `(K, M)` is invertible as soon as the condensed projection
 map is invertible at the images of `K` and `M` under the left derived functors of the

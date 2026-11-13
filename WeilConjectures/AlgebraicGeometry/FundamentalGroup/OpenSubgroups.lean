@@ -45,7 +45,7 @@ transitively on the geometric fibre `P_s`: for every `x ∈ P_s` the evaluation 
 bijection `Aut_Y(P) → P_s`. -/
 def IsGaloisCover (P : Y.FiniteEtale) : Prop :=
   ConnectedSpace P.obj.left ∧
-    ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.hom x
+    ∀ x : (fiber s).obj P, Function.Bijective fun σ : Aut P ↦ (fiber s).map σ.asIso.hom x
 
 /-- Over a connected base the Galois covers are the Galois objects of the Galois category of
 finite étale `Y`-schemes. -/
@@ -186,7 +186,8 @@ theorem exists_iso_fiber_map_eq_iff (P Q : Y.FiniteEtale) [IsConnected P] [IsCon
     let i : (A.functor.obj P).obj ≅ (A.functor.obj Q).obj :=
       Action.mkIso (FintypeCat.equivEquivIso e) fun g ↦ by
         ext x'
-        change e (((A.functor.obj P).obj.ρ g).hom x') = ((A.functor.obj Q).obj.ρ g).hom (e x')
+        change e (((A.functor.obj P).obj.ρ g).asHom.hom x') =
+          ((A.functor.obj Q).obj.ρ g).asHom.hom (e x')
         rw [equivalenceContAction_functor_obj_obj_ρ_apply,
           equivalenceContAction_functor_obj_obj_ρ_apply]
         exact he g x'

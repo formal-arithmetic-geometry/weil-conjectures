@@ -136,11 +136,10 @@ private theorem restriction_map_transport
       TwoSquare.mk _ _ _ _
         (Functor.whiskerLeft (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
           e.inv ≫
-          x.natTrans ≫ Functor.whiskerRight
+          x ≫ Functor.whiskerRight
             e'.hom
             (Sheaf.derivedRestrictScalars U.smallEtaleTopology φ)) := by
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     simpa only [x, scalarRestrictionPullbackIso, Iso.trans_hom,
       Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Iso.symm_hom,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,

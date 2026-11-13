@@ -69,20 +69,20 @@ structure Presentation (A : Type a) [Category.{b} A] [Abelian A]
   tower : CochainComplex A ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤ A) ℤ
   cone : ∀ (M : CochainComplex A ℤ) (n : ℕ),
     (tower.obj M).asFunctor.obj (op n) = CochainComplex.mappingCone
-      ((NatTrans.mapHomologicalComplex (scalar ^ (n + 1)) (.up ℤ)).app M)
+      ((NatTrans.mapHomologicalComplex (scalar ^ (n + 1)).asHom (.up ℤ)).app M)
   coordinates : ∀ (M : CochainComplex A ℤ) (n : ℕ) (q : ℤ),
     ((tower.obj M).asFunctor.obj (op n)).X q ≅ M.X q ⊞ M.X (q + 1)
   coordinates_eq : ∀ (M : CochainComplex A ℤ) (n : ℕ) (q : ℤ),
     coordinates M n q = eqToIso (congrArg (fun K ↦ K.X q) (cone M n)) ≪≫
       principalConeCoordinates
-        ((NatTrans.mapHomologicalComplex (scalar ^ (n + 1)) (.up ℤ)).app M) q
+        ((NatTrans.mapHomologicalComplex (scalar ^ (n + 1)).asHom (.up ℤ)).app M) q
   diagonal : ∀ {M N : CochainComplex A ℤ} (f : M ⟶ N) (n : ℕ) (q : ℤ),
     ((tower.map f).f q).app (op n) ≫ (coordinates N n q).hom =
       (coordinates M n q).hom ≫ biprod.map (f.f q) (f.f (q + 1))
   transition : ∀ (M : CochainComplex A ℤ) (n : ℕ) (q : ℤ),
     ((tower.obj M).asFunctor.map (homOfLE (Nat.le_succ n)).op).f q ≫
         (coordinates M n q).hom =
-      (coordinates M (n + 1) q).hom ≫ biprod.map (𝟙 _) (scalar.app (M.X (q + 1)))
+      (coordinates M (n + 1) q).hom ≫ biprod.map (𝟙 _) (scalar.asHom.app (M.X (q + 1)))
   augmentation : 𝟭 (CochainComplex A ℤ) ⟶ tower ⋙ roosF
   augmentation_zero : ∀ (M : CochainComplex A ℤ) (p : ℤ),
     (augmentation.app M).f (p + 1) ≫ (roosχ (tower.obj M) p).hom ≫ biprod.fst = 0
@@ -127,7 +127,7 @@ structure Comparison
   homology : ∀ q : ℤ, DerivedCategory.homologyFunctor A q ⋙ F ≅
     F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor B q
   homology_eq : ∀ q : ℤ, homology q = F.mapDerivedCategoryHomologyFunctorIso q
-  scalar : ∀ M : A, F.map (S.scalar.app M) = T.scalar.app (F.obj M)
+  scalar : ∀ M : A, F.map (S.scalar.asHom.app M) = T.scalar.asHom.app (F.obj M)
   tower : S.tower ⋙
       ((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ) ≅
     F.mapHomologicalComplex (.up ℤ) ⋙ T.tower
@@ -201,7 +201,7 @@ def IsIntegral (X : Scheme.{u})
     (S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X)) : Prop :=
   ∃ data : PrincipalReduction.PrincipalReductionConeData l E X,
     data.IsCanonical l E X ∧ S.tower = CompletionTriangle.tower l E X data ∧
-    S.scalar = DerivedNakayama.scalarOnModules l E X data.d ∧
+    S.scalar.asHom = DerivedNakayama.scalarOnModules l E X data.d ∧
     (∀ n : ℕ, S.reduction n = PrincipalReduction.reductionFunctor l E X n) ∧
     (∀ (n : ℕ) (K : DerivedCategory (AdicCompletion.Modules l E X)),
       HEq ((S.reduction_unit n).app K)
@@ -223,7 +223,7 @@ def sectionScalarValue (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (U : X.ProEtᵒᵖ) :
     (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U :=
   (((DerivedNakayama.regularPullbackIso l E X).inv ≫
-    (DerivedNakayama.pullback l E X).map d ≫
+    (DerivedNakayama.pullback l E X).map d.asHom ≫
     (DerivedNakayama.regularPullbackIso l E X).hom).hom.hom.app U)
       (1 : (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U)
 
@@ -392,7 +392,7 @@ def IsSectionIntegral (X : Scheme.{u})
     data.IsCanonical l E X ∧
     (∀ (M : Modules (DerivedNakayama.integerRing l E) X) (U : X.ProEtᵒᵖ)
       (x : M.val.obj U),
-      (T.scalar.app M).val.app U x = sectionScalarValue l E X data.d U • x) ∧
+      (T.scalar.asHom.app M).val.app U x = sectionScalarValue l E X data.d U • x) ∧
     ∃ (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
       (ι : (Functor.const ℕᵒᵖ).obj (ring (DerivedNakayama.integerRing l E) X) ⟶ B),
       (∀ n : ℕ, B.obj (op n) = sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)

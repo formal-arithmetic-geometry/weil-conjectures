@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-set_option maxHeartbeats 400000 in
 -- The mapped-complex section transports require extra definitional equality checks.
 /-- The displayed subset-coordinate augmentation is the increasing-tuple augmentation
 on the open union, after forgetting scalar actions. This is a chain-level coordinate

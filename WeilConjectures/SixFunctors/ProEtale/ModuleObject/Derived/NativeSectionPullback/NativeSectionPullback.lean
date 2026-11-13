@@ -130,7 +130,6 @@ private theorem section_pasting {K : Type*} [Category K]
   rw [reassoc_of% A1, Iso.hom_inv_id_assoc, UL, reassoc_of% A2,
     Iso.hom_inv_id_assoc, ← reassoc_of% A3, Iso.hom_inv_id_assoc, UR]
 
-set_option maxHeartbeats 1000000 in
 -- Native derived pullback types need the allowance used by their coherence laws.
 /-- The two evaluations of a pulled-back constant family agree by associativity and units.
 Source: base-change compatibility of normalized family constancy

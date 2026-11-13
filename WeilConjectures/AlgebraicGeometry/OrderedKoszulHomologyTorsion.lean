@@ -146,7 +146,7 @@ private theorem factor_scalar_nullhomotopy
       (((sectionScalarNat R ⟨b.val, b.property⟩ (n + 1)).mapHomologicalComplex
         (.up ℤ)).app (ringedKoszulFactor R b n)) 0) := by
   have he : (sectionScalarNat R ⟨b.val, b.property⟩ (n + 1)).app
-      (SheafOfModules.unit (rings R)) = (ringedKoszulScalar R b) ^ (n + 1) :=
+      (SheafOfModules.unit (rings R)) = (ringedKoszulScalar R b ^ (n + 1)).asHom :=
     sectionScalarNat_unit R ⟨b.val, b.property⟩ (n + 1)
   unfold ringedKoszulFactor
   rw [← he]
@@ -234,11 +234,11 @@ theorem ordered_koszul_ideal_power_annihilates_homology
     obtain ⟨h⟩ := ordered_scalar_nullhomotopy R r b n j
     have he := scalarNat_homology
       (sectionScalarNat R ⟨(b j).val, (b j).property⟩ (n + 1)) K
-      (((sectionScalarNat R ⟨(b j).val, (b j).property⟩ (n + 1)).mapHomologicalComplex
-        (.up ℤ)).app K) (fun _ ↦ rfl) q
+      (End.of (((sectionScalarNat R ⟨(b j).val, (b j).property⟩ (n + 1)).mapHomologicalComplex
+        (.up ℤ)).app K)) (fun _ ↦ rfl) q
     have hz := he.symm.trans (h.homologyMap_eq q)
     rw [HomologicalComplex.homologyMap_zero] at hz
-    exact congrArg (fun t : End (K.homology q) ↦ t.val.app X y) hz
+    exact congrArg (fun t : K.homology q ⟶ K.homology q ↦ t.val.app X y) hz
   have hh : (Ideal.span (Set.range (fun j ↦ (b j).val X))) ^ (r * (n + 1) + 1) ≤ A := by
     simpa using span_pow_le_of_generator_powers Finset.univ
       (fun j ↦ (b j).val X) (n + 1) A hgen

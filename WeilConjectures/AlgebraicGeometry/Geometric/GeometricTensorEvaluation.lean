@@ -243,7 +243,6 @@ private theorem fourModels_composite
   simp only [← S₃.tensor.map_comp_assoc, prod_comp, Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 400000 in
 -- The four representative model equations involve four independent module categories.
 include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in

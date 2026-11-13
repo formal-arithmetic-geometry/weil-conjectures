@@ -46,12 +46,13 @@ private theorem uniformizer_end_unique
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (d d' : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) a).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s)
     (hd' : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d'.hom.hom.app S) a).down s =
+      (s : S.unop), ((d'.asHom.hom.hom.app S) a).down s =
         Padic.coefficientExtensionUniformizer l E * a.down s) : d = d' := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  apply End.ext
   apply Mod.hom_ext
   apply Sheaf.hom_ext
   apply NatTrans.ext

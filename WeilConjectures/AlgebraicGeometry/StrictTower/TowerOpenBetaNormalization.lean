@@ -73,7 +73,7 @@ def openBetaRestriction {U' U X' X : Scheme.{u}}
     moduleDirectImage B g ⋙ modulePullback B j ⟶
       modulePullback B j' ⋙ moduleDirectImage B a :=
   (mateEquiv (openBetaModuleAdj B g) (openBetaModuleAdj B a)
-    (TwoSquare.mk _ _ _ _ (moduleSquareG B a j' j g w).inv)).natTrans
+    (TwoSquare.mk _ _ _ _ (moduleSquareG B a j' j g w).inv))
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem openBetaModuleJUnit {U X : Scheme.{u}} (j : U ⟶ X)
@@ -586,10 +586,9 @@ private theorem moduleInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
   rw [show conjugateEquiv ((moduleJAdj B k₁).comp (moduleJAdj B j₁)) (moduleJAdj B (k₁ ≫ j₁))
     (openBetaModuleJComp B k₁ j₁).inv = (moduleGComp B k₁ j₁).inv from
       Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _]
-  apply TwoSquare.ext
-  intro N
+  refine NatTrans.ext (funext fun N ↦ ?_)
   dsimp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
-    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans]
+    TwoSquare.hComp, TwoSquare.mk]
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Category.id_comp, Category.comp_id]
@@ -641,7 +640,7 @@ theorem openBetaModuleOpenComp {V U X V₁ U₁ X₁ : Scheme.{u}}
     erw [(modulePullback B k₁).map_id, Category.comp_id]
   have hi := congr_app (moduleInv_open_comp B k j k₁ j₁ a b g wk wj w hp) M
   dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
-    TwoSquare.mk, TwoSquare.natTrans] at hi
+    TwoSquare.mk] at hi
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id] at hi
@@ -708,13 +707,12 @@ private lemma finiteSquareTransport
     p'.whiskerRight z.inv = p.whiskerLeft w.hom := by
   rw [hz, hw]
   subst y
-  have h₁ (M : E) := congrArg (fun t ↦ t.natTrans.app M) ha
-  have h₂ (M : E) := congrArg (fun t ↦ t.natTrans.app M) ha'
-  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+  have h₁ (M : E) := congrArg (fun t ↦ t.app M) ha
+  have h₂ (M : E) := congrArg (fun t ↦ t.app M) ha'
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h₁ h₂
-  apply TwoSquare.ext
-  intro M
-  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft, TwoSquare.mk,
+  refine NatTrans.ext (funext fun M ↦ ?_)
+  simp only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
     Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, eqToIso_refl,
     Iso.refl_trans, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.map_comp, Category.assoc]
@@ -740,11 +738,11 @@ private lemma finiteSquareComponents
     z.inv.app (R₀.obj N) ≫ Pj'.map (αg.app N) ≫ αj'.app (Qg.obj N) =
       Pa.map (αj.app N) ≫ αa.app (Qj.obj N) ≫ R₃.map (w.hom.app N) := by
   simpa only [TwoSquare.whiskerRight, TwoSquare.whiskerLeft,
-    TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+    TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.comp_id, Category.assoc]
-    using congrArg (fun t ↦ t.natTrans.app N) h
+    using congrArg (fun t ↦ t.app N) h
 
 private lemma finiteMateCube
     {DY DX DY' DX' EY EX EY' EX' : Type*}

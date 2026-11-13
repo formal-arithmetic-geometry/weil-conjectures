@@ -48,7 +48,6 @@ attribute [local instance] traitGenericFieldAlgebra
 
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] [IsAlgClosed K]
 
-set_option synthInstance.maxHeartbeats 400000 in
 -- the instances `Module L L₁` for the concrete composita are found slowly
 /-- **The finite Galois subextensions of `L^sep / L` have degree prime to `ℓ`**, for a prime `ℓ`
 different from the characteristic of `k'`: their degree is a power of the characteristic

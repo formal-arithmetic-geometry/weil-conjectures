@@ -55,7 +55,7 @@ theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
     IsIso (((mateEquiv (pbcDerivedScalarAdjunction aU)
       (pbcDerivedScalarAdjunction aV)).symm
         (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedDirectImage g
-          RV SV RU SU aV aU cR cS comm).inv)).natTrans) := by
+          RV SV RU SU aV aU cR cS comm).inv))) := by
   classical
   let R' : Coefficients g := ⟨RV, RU, cR⟩
   let S' : Coefficients g := ⟨SV, SU, cS⟩
@@ -76,18 +76,17 @@ theorem restrictionDirectImageMate_isIso {U V : Scheme.{u}} (g : U ⟶ V)
   have : IsIso (comparison sV sU a') := NatIso.isIso_of_isIso_app _
   let δ := proEtaleRingRestrictionDerivedDirectImage g RV SV RU SU aV aU cR cS comm
   have hm : (mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)
-      (TwoSquare.mk _ _ _ _ (comparison sV sU a'))).natTrans = δ.inv := by
+      (TwoSquare.mk _ _ _ _ (comparison sV sU a'))) = δ.inv := by
     rw [comparison, iterated_mateEquiv_conjugateEquiv]
     exact (conjugateEquiv _ _).apply_symm_apply δ.inv
   have he : ((mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)).symm
-      (TwoSquare.mk _ _ _ _ δ.inv)).natTrans = comparison sV sU a' := by
-    apply congrArg TwoSquare.natTrans
+      (TwoSquare.mk _ _ _ _ δ.inv)) = comparison sV sU a' := by
     apply (mateEquiv (sU.adjunction a'.source) (sV.adjunction a'.target)).injective
     rw [Equiv.apply_symm_apply]
     ext X
     exact (NatTrans.congr_app hm X).symm
   have : IsIso (((mateEquiv (sU.adjunction a'.source)
-      (sV.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans) := by
+      (sV.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv))) := by
     rw [he]
     infer_instance
   exact isIso_mateEquiv_symm_of_isIso

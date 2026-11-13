@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Valuation.LocalSubring
 public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
 public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.OrderOfVanishing.Basic
 public import Mathlib.RingTheory.KrullDimension.LocalRing

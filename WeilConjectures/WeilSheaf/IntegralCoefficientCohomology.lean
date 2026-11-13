@@ -80,7 +80,7 @@ along `Fr_X⁻¹`. -/
 noncomputable abbrev ProEtaleIntegralWeilSheaf.frobeniusPullback :
     FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
       FieldSheaf Λ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᶠ[Λ]
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)_*ᶠ[Λ]
 
 /-- The category of pro-étale `Λ`-sheaves with a Weil structure on a `k₀`-scheme `X`, for a
 commutative ring `Λ` with an ultrametric norm, the case of interest being the ring of integers
@@ -106,7 +106,7 @@ geometric fiber (for `Λ = 𝒪_E` the completed coefficient sheaf `𝒪̂_{E,X�
 Weil structure `Fr_X^* Λ_X̄ = (Fr_X⁻¹)_* Λ_X̄ ≅ Λ_X̄`, pulling back functions. -/
 noncomputable def constant : ProEtaleIntegralWeilSheaf k₀ Λ X :=
   .mk (FieldSheaf.unit Λ _)
-    (fieldLowerStarUnitIso Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm)
+    (fieldLowerStarUnitIso Λ (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.symm)
 
 /-- The constant twist `F ⊗ 𝓑_b` of a pro-étale `Λ`-Weil sheaf by a unit `b` of `Λ`: the same
 sheaf, with its Weil structure multiplied by `b`. -/

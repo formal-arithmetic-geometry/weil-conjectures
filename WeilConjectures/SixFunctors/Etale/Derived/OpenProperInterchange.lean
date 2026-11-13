@@ -118,7 +118,7 @@ lemma lowerStarUpperStarOpenImmersionIso_hom (hsq : IsPullback p j i r) :
     (lowerStarUpperStarOpenImmersionIso A hsq).hom =
       (mateEquiv (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
         (derivedOpenImmersionLowerShriekUpperStarAdjunction A i)
-        (openImmersionLowerShriekLowerStarExchange A hsq)).natTrans := by
+        (openImmersionLowerShriekLowerStarExchange A hsq)) := by
   rw [openImmersionLowerShriekLowerStarExchange, iterated_mateEquiv_conjugateEquiv]
   rfl
 

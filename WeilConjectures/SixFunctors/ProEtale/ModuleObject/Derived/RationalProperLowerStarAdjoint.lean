@@ -82,6 +82,6 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padi
     (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E.1 g) _
     (asIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E.1
       g) (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E g)
-      (TwoSquare.mk _ _ _ _ (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).inv)).natTrans)
+      (TwoSquare.mk _ _ _ _ (boundedConstructibleUpperStarExtendScalarsIso ℓ E g).inv)))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

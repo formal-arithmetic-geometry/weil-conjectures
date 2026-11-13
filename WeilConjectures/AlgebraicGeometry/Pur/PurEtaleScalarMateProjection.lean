@@ -49,13 +49,13 @@ private theorem restricted_mate_tensor
     (t : ∀ X, F₁.obj (T.obj X) ⟶ T'.obj (F₁.obj X))
     (h : ∀ X, a.app (S.obj X) ≫ U'.map (c.app X) ≫ e'.hom.app (F₁.obj X) =
       F₁.map (e.hom.app X) ≫ t X) (J : D₁) :
-    U.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).natTrans.app J) ≫
-        (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).natTrans.app (S'.obj J) =
+    U.map ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).app J) ≫
+        (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).app (S'.obj J) =
       e.hom.app (R₁.obj J) ≫
         adj₁.homEquiv _ _ (t (R₁.obj J) ≫ T'.map (adj₁.counit.app J)) ≫
         R₁.map (e'.inv.app J) := by
-  let b := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).natTrans.app J
-  let d := (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).natTrans.app (S'.obj J)
+  let b := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ c)).app J
+  let d := (mateEquiv adj₂ adj₁ (TwoSquare.mk _ _ _ _ a)).app (S'.obj J)
   have hb : F₂.map b ≫ adj₂.counit.app (S'.obj J) =
       c.app (R₁.obj J) ≫ S'.map (adj₁.counit.app J) :=
     mateEquiv_counit adj₁ adj₂ (TwoSquare.mk _ _ _ _ c) J
@@ -169,7 +169,7 @@ def scalarMate
       scalarExtension φ Z ⋙ R(lowerStar (ModuleCat.{u + 1} B) f) :=
   (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
-    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom))
 
 private theorem scalar_tensor_pullback_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -300,7 +300,7 @@ theorem scalarMate_restrict_eq_projection
     Category.assoc] at hp hm
   rw [hp] at hm
   simpa only [scalarMate, scalarRestrictionDirectImageMap, adj, T, b,
-    TwoSquare.mk, TwoSquare.natTrans, Functor.map_comp,
+    TwoSquare.mk, Functor.map_comp,
     Category.assoc] using hm
 
 end AlgebraicGeometry.Etale

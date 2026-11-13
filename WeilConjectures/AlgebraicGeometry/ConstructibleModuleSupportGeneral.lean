@@ -13,6 +13,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Support of a constructible etale module sheaf

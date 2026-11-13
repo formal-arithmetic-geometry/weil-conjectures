@@ -701,7 +701,6 @@ theorem firstExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
       (CoordinateTrace.swap A Y ((push A f).obj M) ((push A f).obj B)).hom at hs
   rw [swap_swap, Category.comp_id, inner_comparison] at hs
   rw [reassoc_of% (c1.hom.naturality sw.hom)] at hs
-  try simp only [Functor.comp_map, Category.assoc] at hs
   rw [← Functor.map_comp_assoc, inner_first] at hs
   apply (cancel_epi (c2.hom.app V)).1
   rw [reassoc_of% hc]

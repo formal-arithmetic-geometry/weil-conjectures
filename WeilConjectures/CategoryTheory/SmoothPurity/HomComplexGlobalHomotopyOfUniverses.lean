@@ -412,7 +412,6 @@ private lemma externalHomologyIso_naturality
         (HomotopyCategory.quotient D (.up ℤ)).map g)) = _
   exact AddEquiv.apply_symm_apply _ _
 
-set_option maxHeartbeats 400000 in
 -- The natural-isomorphism assembly checks several large chosen-functor interfaces.
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary zeroth cohomology of global cochains is naturally the group of homotopy classes.

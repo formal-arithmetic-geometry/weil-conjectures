@@ -53,7 +53,6 @@ lemma δ_leftDerivedUpperStarId (W : Scheme.{u})
       (leftDerivedUpperStarId Λ W).hom.app (K ⊗ M) :=
   leftDerivedUpperStarTensor_id Λ W K M
 
-set_option maxHeartbeats 1000000 in
 -- unifying objects of the derived categories given by composites of derived pullbacks is slow
 /-- `ProEtale.CondensedRing.pullbackSquareComparison_hom_app_id_right`, in the form used below. -/
 private lemma pullbackSquareComparison_id_hom_app_comp_map {Z X : Scheme.{u}} (f : Z ⟶ X)
