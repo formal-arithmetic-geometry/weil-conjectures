@@ -42,7 +42,7 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option trace.profiler true in
+set_option profiler true in
 private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅
@@ -68,7 +68,26 @@ private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X �
           (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P) := by
   apply cochain_comp_eq_comp_comp_of_components
-  exact integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P
+  intro i
+  have h := integralPullEvaluation_cochainSquare_component l E f n r₀ hr₀ P i
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let source ← Lean.instantiateMVars (← Lean.Meta.getLocalDeclFromUserName `h).type
+    let ts := target.appArg!.getAppArgs.back!.getAppArgs
+    let ss := source.appArg!.getAppArgs.back!.getAppArgs
+    let td := ts[ts.size - 2]!
+    let sd := ss[ss.size - 2]!
+    let tf := td.getAppArgs
+    let sf := sd.getAppArgs
+    let tm := tf[tf.size - 2]!
+    let sm := sf[sf.size - 2]!
+    Lean.logInfo m!"MAP HEADS {tm.getAppFn} / {sm.getAppFn}"
+    let ta := tm.getAppArgs
+    let sa := sm.getAppArgs
+    for j in [:min ta.size sa.size] do
+      if ta[j]! != sa[j]! then
+        Lean.logInfo m!"ARG {j} TARGET {ta[j]!}\nSOURCE {sa[j]!}"
+  exact h
 
 set_option profiler true in
 /-- The pullback transition square already commutes as a square of cochain maps.
