@@ -89,9 +89,16 @@ private theorem sections_iso_comp {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ 
     pushforward_obj_presheaf_map, ← Functor.map_comp]
   congr 1
 
+private theorem map_comp_eq_of_map_comp_eq
+    {A B D : Type*} [Category* A] [Category* B] [Category* D]
+    (F : A ⥤ B) (G : B ⥤ D) {X Y Z : A} {S : B}
+    (a : S ⟶ F.obj X) (b : X ⟶ Y) (c : Y ⟶ Z) (d : X ⟶ Z)
+    (e : S ⟶ F.obj Z)
+    (h : G.map (F.map (b ≫ c)) = G.map (F.map d)) (he : a ≫ F.map d = e) :
+    G.map (a ≫ F.map b) ≫ G.map (F.map c) = G.map e := by
+  rw [← G.map_comp, Category.assoc, ← F.map_comp, G.map_comp, h, ← G.map_comp, he]
+
 set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
--- Cross-scheme complex functors require extra elaboration during diagram rewrites.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The section-complex homology maps for two successive scheme maps admit a common
 comparison target. This is the diagram step, before cancellation or transport through
@@ -263,11 +270,10 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
         HZ.map (PY.map Ch.lambda) = HY.map Ch.lambda ≫ a.hom at h3
       dsimp only [δ]
       simp only [HZ.map_comp]
-      rw [data_sections_iso Cc, reassoc_of% h1, reassoc_of% h2, reassoc_of% h3,
+      simp only [data_sections_iso Cc, reassoc_of% h1, reassoc_of% h2, reassoc_of% h3,
         ← data_sections_iso Ch]
     change Hp.map (Cc.a.hom ≫ HZ.map Cc.lambda) ≫ Hp.map (HZ.map f) = _
-    rw [← Hp.map_comp, Category.assoc, ← HZ.map_comp]
-    rw [Hp.map_comp, hh, ← Hp.map_comp, hs]
+    refine (map_comp_eq_of_map_comp_eq HZ Hp Cc.a.hom Cc.lambda f δ _ hh hs).trans ?_
     simp only [Functor.map_comp, Category.assoc]
     rfl
   · have hh := ((RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙
@@ -276,15 +282,14 @@ theorem moduleCohomologyFMap_comp_data {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y
     have hs : Ck.a.hom ≫ HZ.map γ =
         HY.map αG ≫ HY.map Ch.β ≫ a.hom ≫ HZ.map μ := by
       dsimp only [γ]
-      rw [HZ.map_comp, ← Category.assoc, data_sections_iso Ck]
+      simp only [HZ.map_comp, ← Category.assoc, data_sections_iso Ck]
       have hn := sections_iso_naturality k (αG ≫ Ch.β)
       change (pushforward_sections_iso k Ck.I.cocomplex).hom ≫
         HZ.map (PY.map (αG ≫ Ch.β)) = HY.map (αG ≫ Ch.β) ≫ a.hom at hn
       rw [hn, HY.map_comp]
       simp only [Category.assoc]
     change Hp.map (Ck.a.hom ≫ HZ.map Ck.lambda) ≫ Hp.map (HZ.map e) = _
-    rw [← Hp.map_comp, Category.assoc, ← HZ.map_comp]
-    rw [Hp.map_comp, hh, ← Hp.map_comp, hs]
+    refine (map_comp_eq_of_map_comp_eq HZ Hp Ck.a.hom Ck.lambda e γ _ hh hs).trans ?_
     simp only [Functor.map_comp]
     rfl
 

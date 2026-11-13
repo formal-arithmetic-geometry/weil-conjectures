@@ -24,8 +24,6 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 set_option trace.profiler true in
-set_option maxHeartbeats 800000 in
--- Elaborating the nested scalar restrictions and tensor components needs extra heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- The presheaf change-of-rings map exists with its section formula.
 Source: Stacks Project, Morphisms, proof of Lemma 01SB.
@@ -71,8 +69,8 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
       (fun c p ↦ η.app W (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p))
       (by
         intro c d p
-        rw [TensorProduct.add_tmul]
-        exact (η.app W).hom.map_add _ _)
+        exact (congrArg (η.app W) (TensorProduct.add_tmul c d p)).trans
+          ((η.app W).hom.map_add _ _))
       (by
         intro r c p
         change η.app W ((C.hom.hom.app W r * (show C.right.obj.obj W from c))
@@ -81,8 +79,8 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
           (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p))
       (by
         intro c p q
-        rw [TensorProduct.tmul_add]
-        exact (η.app W).hom.map_add _ _)
+        exact (congrArg (η.app W) (TensorProduct.tmul_add c p q)).trans
+          ((η.app W).hom.map_add _ _))
       (by
         intro r c p
         change η.app W (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom]
@@ -91,16 +89,18 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
           Module.compHom (C.right.obj.obj W) (φ.right.hom.app W).hom
         change η.app W (c ⊗ₜ[B.right.obj.obj W]
           (B.hom.hom.app W r • (show P.val.obj W from p))) = _
-        rw [TensorProduct.tmul_smul]
+        refine (congrArg (η.app W)
+          (TensorProduct.tmul_smul (B.hom.hom.app W r) c p)).trans ?_
         have h : φ.right.hom.app W (B.hom.hom.app W r) = C.hom.hom.app W r := by
           have hw := congrArg (fun f ↦ f.hom.app W) (CategoryTheory.Under.w φ)
           exact congrArg (fun f ↦ f r) hw
         change η.app W ((φ.right.hom.app W (B.hom.hom.app W r) *
           (show C.right.obj.obj W from c)) ⊗ₜ[B.right.obj.obj W,
           (φ.right.hom.app W).hom] p) = _
-        rw [h]
-        exact (η.app W).hom.map_smul (C.hom.hom.app W r)
-          (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p))
+        exact (congrArg (fun s : C.right.obj.obj W ↦ η.app W
+          (s • (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p))) h).trans
+          ((η.app W).hom.map_smul (C.hom.hom.app W r)
+            (c ⊗ₜ[B.right.obj.obj W, (φ.right.hom.app W).hom] p)))
   refine ⟨{ app := a, naturality := ?_ }, ?_⟩
   · intro U V f
     apply ModuleCat.MonoidalCategory.tensor_ext
@@ -110,8 +110,7 @@ theorem exists_changeOfRings_tensor_presheaf_map (Y : Scheme.{u})
       T.val.map f (η.app U (c ⊗ₜ[B.right.obj.obj U, (φ.right.hom.app U).hom] p))
     have ht := Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap φ.right P f) c p
     change Q.map f (c ⊗ₜ[B.right.obj.obj U, (φ.right.hom.app U).hom] p) = _ at ht
-    rw [← ht]
-    exact PresheafOfModules.naturality_apply η f _
+    exact (congrArg (η.app V) ht.symm).trans (PresheafOfModules.naturality_apply η f _)
   · intro W c p
     rfl
 end AlgebraicGeometry.Scheme.Modules
