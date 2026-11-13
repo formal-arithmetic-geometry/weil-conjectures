@@ -51,10 +51,6 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 
 attribute [instance] topological_pushforwardAb_additive
 
-private noncomputable abbrev topologicalSheafCategoryWithHomology (X : TopCat.{u}) :
-    CategoryWithHomology (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
-  inferInstance
-
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -168,25 +164,23 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
                                     ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
                                     (J.extMk s (p + 1) rfl hs))) =
                                   I.extMk z (p + 1) rfl hz) := by
-  let := topologicalSheafCategoryWithHomology X
-  let := topologicalSheafCategoryWithHomology Z
   refine ⟨_, _, fun _ ↦ rfl, fun _ ↦ rfl, ?_⟩
-  obtain ⟨edge, a, ha, hedge⟩ :=
-    exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
-  exact (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
-    edge a ha hedge).imp fun E ↦
-      Exists.imp fun e₂ ↦
-        And.imp_right <|
-          Exists.imp fun T ↦
-            And.imp_right <| And.imp_right <|
-              Exists.imp fun g ↦
-                Exists.imp fun e₀ ↦
-                  And.imp_right <|
-                    Exists.imp fun t ↦
+  exact (exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl)
+    (fun _ ↦ rfl)).elim fun edge h ↦ h.elim fun a h ↦
+      (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
+        edge a h.1 h.2).imp fun E ↦
+          Exists.imp fun e₂ ↦
+            And.imp_right <|
+              Exists.imp fun T ↦
+                And.imp_right <| And.imp_right <|
+                  Exists.imp fun g ↦
+                    Exists.imp fun e₀ ↦
                       And.imp_right <|
-                        Exists.imp fun b ↦
-                          And.imp_right <| And.imp_right <|
-                            Exists.imp fun k ↦
-                              And.imp_right fun he ↦ ⟨edge, he, a, ha, hedge⟩
+                        Exists.imp fun t ↦
+                          And.imp_right <|
+                            Exists.imp fun b ↦
+                              And.imp_right <| And.imp_right <|
+                                Exists.imp fun k ↦
+                                  And.imp_right fun he ↦ ⟨edge, he, a, h.1, h.2⟩
 
 end CategoryTheory
