@@ -589,7 +589,6 @@ lemma map_val_eq_rTensor {A : Type u} [CommRing A] [Algebra R₀ A] {R : Subalge
   | add a b ha hb => simp only [map_add, ha, hb]
   | tmul a s => rfl
 
-set_option trace.profiler true in
 /-- Compactness gives one finite stage that is flat at every prime coming from `A`. -/
 private lemma exists_fg_forall_flat_localizedModule_baseChange {A : Type u} [CommRing A]
     [Algebra R₀ A] [IsNoetherianRing R₀] [Algebra.FiniteType R₀ S₀] [Module.Finite S₀ M₀]
@@ -671,7 +670,8 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     obtain ⟨m, hm, hle⟩ := Ideal.exists_le_maximal _ hne
     have hmZ := hZ (PrimeSpectrum.comap φ₁.toRingHom ⟨m, hm.isPrime⟩)
       (Ideal.map_le_iff_le_comap.mp hle)
-    exact hmZ (hK ⟨m, hm.isPrime⟩)
+    apply hmZ
+    exact hK ⟨m, hm.isPrime⟩
   -- Descend the unit ideal to a finite stage.
   obtain ⟨R₂, hR₁₂, hR₂fg, hI₂⟩ :=
     Subalgebra.exists_map_tensorProduct_inclusion_eq_top hR₁ I hI
@@ -695,8 +695,8 @@ theorem exists_fg_forall_flat_baseChange {A : Type u} [CommRing A] [Algebra R₀
     (Q.comap ρ.toRingHom) rfl
   by_contra hP
   have hPZ : (⟨Q.comap ρ.toRingHom, inferInstance⟩ : PrimeSpectrum (R₁ ⊗[R₀] S₀)) ∈ Z := hP
-  have hIQ : I ≤ Q.comap ρ.toRingHom := fun x hx ↦
-    (PrimeSpectrum.mem_vanishingIdeal _ _).mp hx _ hPZ
+  have hIQ : I ≤ Q.comap ρ.toRingHom :=
+    (PrimeSpectrum.subset_zeroLocus_iff_le_vanishingIdeal Z I).mpr le_rfl hPZ
   have hQ : I.map ρ ≤ Q := Ideal.map_le_iff_le_comap.mpr hIQ
   rw [hIR] at hQ
   exact (Ideal.IsPrime.ne_top ‹_›) (top_le_iff.mp hQ)
