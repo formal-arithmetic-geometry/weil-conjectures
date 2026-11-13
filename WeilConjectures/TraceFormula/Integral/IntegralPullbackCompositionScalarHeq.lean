@@ -201,9 +201,8 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
     (h : Z ⟶ W) (k : W ⟶ V) :
     finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k =
       integralComparisonSystemComposition l E h k := by
-  have hh : HEq
-      (finiteSystemDerivedComposition (integralSystemRings l E) (integralSystemTransition l E) h k)
-      (integralComparisonSystemComposition l E h k) := derivedCompositor_heq
+  apply eq_of_heq
+  exact derivedCompositor_heq
     (F := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) k)
     (F' := integralComparisonSequencePullback l E k)
     (G := finiteSystemPullback (integralSystemRings l E) (integralSystemTransition l E) h)
@@ -246,10 +245,6 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  dsimp only [finiteSystemDerivedComposition, integralComparisonSystemComposition,
-    finiteSystemDerivedPullback, integralComparisonDerivedSequencePullback,
-    finiteSystemPullback, integralComparisonSequencePullback, ProEtale.VaryingRing.pull] at hh ⊢
-  exact eq_of_heq hh
 
 end Composition
 
