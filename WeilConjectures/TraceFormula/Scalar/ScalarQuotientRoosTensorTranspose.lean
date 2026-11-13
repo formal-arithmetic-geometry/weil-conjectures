@@ -81,7 +81,7 @@ private theorem quotientRoosMap_fst
         (f ≫ CochainComplex.mappingCocone.fst (scalarRoosBoundary C) ≫
           Pi.π (fun m ↦ C.obj (op m)) n) ≫ a.app (op n) ≫ q.app (op n) := by
   rw [reassoc_of% (scalarRoosTowerCoordinates q).1]
-  simp only [Category.assoc, Limits.Pi.map_π]
+  simp only [Limits.Pi.map_π]
   rw [reassoc_of% (scalarRoosTowerCoordinates a).1]
   rw [Limits.Pi.map_π_assoc]
   rw [reassoc_of% (scalarRoosCoordinates F C).1]
@@ -107,7 +107,6 @@ private theorem quotientRoosMap_snd_zero
   rw [Functor.mapHomologicalComplex_map_f, ← Functor.map_comp_assoc, hf,
     Functor.map_zero, zero_comp]
 
-set_option profiler true in
 -- Tensor section types involve several equivalent presentations of the scalar functor.
 private theorem quotientScalarChainComparison
     (l : ℕ) [Fact l.Prime]
