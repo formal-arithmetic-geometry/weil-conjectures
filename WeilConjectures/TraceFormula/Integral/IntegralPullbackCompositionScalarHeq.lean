@@ -244,10 +244,10 @@ theorem finiteSystemDerivedComposition_eq_integralComparison {V W Z : Scheme.{u}
       set_option backward.isDefEq.respectTransparency.types false in
       exact finiteSystemPullback_heq_integralComparison l E (h ≫ k))
     (finiteSystemComposition_heq_integralComparison l E h k)
-  unfold finiteSystemDerivedComposition integralComparisonSystemComposition
-  apply eq_of_heq
-  refine hh.trans ?_
-  apply HEq.rfl
+  dsimp only [finiteSystemDerivedComposition, integralComparisonSystemComposition,
+    finiteSystemPullback, ProEtale.VaryingRing.pull,
+    integralComparisonSequencePullback] at hh ⊢
+  exact eq_of_heq hh
 
 end Composition
 
