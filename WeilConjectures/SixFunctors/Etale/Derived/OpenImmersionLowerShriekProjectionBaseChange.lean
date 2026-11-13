@@ -78,6 +78,7 @@ private lemma tensorComparison_square_transport
   rw [← whisker_exchange_assoc]
   erw [← comp_whiskerRight_assoc (e₂.hom.app (V.obj X)) (e₂.inv.app (V.obj X)), e₂.hom_inv_id_app,
     id_whiskerRight, Category.id_comp, tensorHom_def, Category.assoc]
+  rfl
 
 namespace AlgebraicGeometry
 
@@ -215,11 +216,11 @@ lemma derivedOpenImmersionSquareMap_tensor (sq : CommSq g' j' j g'')
         ((mapDerivedCategoryUpperStarDerivedTensorIso A j').hom.app
           (L((g'')^*[A]).obj X)).app (L((g'')^*[A]).obj Y) := by
   rw [derivedOpenImmersionSquareMap_app, derivedOpenImmersionSquareMap_app]
-  simpa only [mapDerivedCategoryUpperStarDerivedTensorIso, Iso.trans_hom, NatTrans.comp_app,
+  simp only [mapDerivedCategoryUpperStarDerivedTensorIso, Iso.trans_hom, NatTrans.comp_app,
     Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom, Functor.whiskeringLeft₂_map_app_app_app_app,
     Functor.postcompose₂_map_app_app_app, derivedTensor, curriedTensor_map_app,
-    curriedTensor_obj_map, Category.assoc] using
-    tensorComparison_square_transport L((g')^*[A]) L((g'')^*[A])
+    curriedTensor_obj_map, Category.assoc]
+  exact tensorComparison_square_transport L((g')^*[A]) L((g'')^*[A])
       (leftDerivedUpperStarIsoMapDerivedCategory A j)
       (leftDerivedUpperStarIsoMapDerivedCategory A j') (derivedSquareUpperStarIso A sq)
       (leftDerivedUpperStarTensorIso A j) (leftDerivedUpperStarTensorIso A j')
