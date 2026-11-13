@@ -224,7 +224,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       U.map (Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B)) ≫ d.inv)) hlim.symm
   simp only [Functor.map_comp, Category.assoc] at hpost ⊢
-  erewrite [hpost]
+  rewrite (transparency := .default) [hpost]
   unfold tensorSubstitution
   rewrite [scalar_reduction, scalar_reduction]
   dsimp only [TL]
@@ -240,7 +240,7 @@ theorem completedScalarTensorSubstitution {W : Scheme.{u}}
       Prod.mkHom (FE.map a) (FE.map b) ≫
       Prod.mkHom ((integralComparisonSequenceScalarModel l E L ι W).ε.app A)
         ((integralComparisonSequenceScalarModel l E L ι W).ε.app B) := rfl
-  erewrite [hp]
+  rewrite (transparency := .default) [hp]
   simp only [Functor.map_comp, Category.assoc]
   rfl
 
