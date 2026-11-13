@@ -126,7 +126,6 @@ private theorem boundary_of_adjunction_triangle
     rw [hn, Category.assoc, hw]
 
 set_option profiler true in
-set_option maxHeartbeats 1600000 in
 -- Instantiating the four derived adjunctions compares large localization functors.
 /-- The boundary for Hom on an open union commutes with global scalar endomorphisms.
 Its preceding term is Hom into the negative shift on the overlap. No compactness,

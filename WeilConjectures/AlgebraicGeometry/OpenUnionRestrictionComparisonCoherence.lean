@@ -32,7 +32,6 @@ private theorem cancel_mapped_iso_pasting
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 set_option profiler true in
-set_option maxHeartbeats 400000 in
 -- The four descents compare large transported derived functor expressions.
 /-- Supplied direct restriction comparisons descend to commuting overlap comparisons.
 Source: Stacks Project Tag 08BW, cohomology.tex, lemma-mayer-vietoris-hom;
