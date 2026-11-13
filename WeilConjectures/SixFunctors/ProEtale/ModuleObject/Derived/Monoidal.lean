@@ -258,6 +258,18 @@ noncomputable def upperStarTensorComplexHomX
     Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
       (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h)
 
+private lemma ιTensorObj_upperStarTensorComplexHomX
+    (A B : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ)
+    (p q n : ℤ) (h : p + q = n) :
+    HomologicalComplex.ιTensorObj
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj A)
+        (((f)^*⟦Λ⟧.mapHomologicalComplex (.up ℤ)).obj B) p q n h ≫
+      upperStarTensorComplexHomX Λ f A B n =
+        Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ (A.X p) (B.X q) ≫
+          (f)^*⟦Λ⟧.map (HomologicalComplex.ιTensorObj A B p q n h) := by
+  exact HomologicalComplex.ι_mapBifunctorDesc _ p q h
+
 set_option profiler true in
 /-- The degreewise comparison `upperStarTensorComplexHomX` is a section of the comparison
 `f^* ((A ⊗ B)^n) ⟶ (f^* A ⊗ f^* B)^n` induced by the comonoidal structure of `f^*`. -/
@@ -278,8 +290,8 @@ lemma upperStarTensorComplexHomX_comp_mapBifunctorComparisonX
   intro i₁ i₂ h
   simp only [Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app,
     HomologicalComplex.mapBifunctorComparison_f]
-  dsimp only [upperStarTensorComplexHomX]
-  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+  rw [← Category.assoc]
+  erw [ιTensorObj_upperStarTensorComplexHomX]
   rw [Category.assoc]
   erw [HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX]
   erw [Category.comp_id]
@@ -421,6 +433,7 @@ lemma upperStarTensorCounit_naturality_aux
     DerivedCategory.Qh.map_comp]
 
 set_option maxHeartbeats 1600000 in
+-- The unchanged data construction still exceeds the default elaboration limit.
 set_option profiler true in
 /-- The transformation `Qh (f^* A) ⊗ᴸ Qh (f^* B) ⟶ Qh (f^* (A ⊗ B))` of bifunctors on the
 homotopy category of `Mod_{Λ_Y}`: the lax structure of `Qh` followed by `Qh` of the comparison
@@ -587,6 +600,7 @@ instance isLeftDerivedFunctor₂_upperStarTensor :
   exact isIso_leftDerivedUpperStarTensorRightCounit_app_app Λ f A B hA hB
 
 set_option maxHeartbeats 1600000 in
+-- The unchanged data construction still exceeds the default elaboration limit.
 set_option profiler true in
 /-- The counit of the bifunctor `Lf^* (- ⊗ᴸ -)`: `Lf^*` of the lax structure
 `Qh A ⊗ᴸ Qh B ⟶ Qh (A ⊗ B)` of the localization, followed by the counit
@@ -872,6 +886,7 @@ lemma leftDerivedUpperStarOplaxMonoidal_η :
   rfl
 
 set_option maxHeartbeats 1600000 in
+-- The unchanged data construction still exceeds the default elaboration limit.
 set_option profiler true in
 /-- The derived pullback `Lf^* : D(Mod_{Λ_Y}) ⥤ D(Mod_{Λ_X})` on module objects over `Λ` is
 strong monoidal for the derived tensor products, with tensorator the inverse of
