@@ -69,17 +69,19 @@ private theorem resolution_homology_factorization {C A : Type*}
     (a : (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex ≅
       (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).obj P) (p : ℕ)
     (haug : J.ι.f 0 ≫ β.f 0 = ψ ≫ I.ι.f 0 ≫ c.f 0 ≫ l.f 0)
-    (hc : (Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map c = a.hom) :
+    (hc : ∀ n, a.inv.f n ≫ Γ.map (c.f n) = 𝟙 _) :
     let Γc := Γ.mapHomologicalComplex (ComplexShape.up ℕ)
     let H := HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p
     H.map (Γc.map β) = H.map (Γc.map (InjectiveResolution.desc ψ I J)) ≫
       H.map (a.hom ≫ Γc.map l) := by
   dsimp only
+  have hc' := complex_hom_eq_of_inv_f_comp a
+    ((Γ.mapHomologicalComplex (ComplexShape.up ℕ)).map c) hc
   obtain ⟨hh⟩ := identity_resolution_homotopy ψ I J hK β (c ≫ l) haug
   have hhom := (Γ.mapHomotopy hh).homologyMap_eq p
   change (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p).map _ =
     (HomologicalComplex.homologyFunctor A (ComplexShape.up ℕ) p).map _ at hhom
-  simpa only [Functor.map_comp, hc, Category.assoc] using hhom
+  simpa only [Functor.map_comp, hc', Category.assoc] using hhom
 
 set_option profiler true in
 -- Identity pushforward and the sections functor require substantial definitional reduction.
@@ -117,14 +119,11 @@ theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}
         H.map (D.a.hom ≫ Γc.map D.lambda) := by
   dsimp only
   let Γ := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}
-  let c : D.I.cocomplex ⟶
-      ((pushforward (𝟙 Z)).mapHomologicalComplex (ComplexShape.up ℕ)).obj D.I.cocomplex :=
-    ((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex
-  refine resolution_homology_factorization Γ ψ D.I D.J D.injective c D.lambda D.β D.a p
-    ?_ ?_
+  refine resolution_homology_factorization Γ ψ D.I D.J D.injective
+    (((pushforwardId Z).inv.mapHomologicalComplex (ComplexShape.up ℕ)).app D.I.cocomplex)
+    D.lambda D.β D.a p ?_ ?_
   · exact D.compatible
-  · apply complex_hom_eq_of_inv_f_comp
-    intro n
+  · intro n
     rw [D.sections]
     change (presheaf (D.I.cocomplex.X n)).map _ ≫
       ((pushforwardId Z).inv.app (D.I.cocomplex.X n)).app ⊤ = 𝟙 _
