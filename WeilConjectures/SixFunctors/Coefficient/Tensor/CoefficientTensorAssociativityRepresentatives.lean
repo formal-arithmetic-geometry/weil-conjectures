@@ -126,18 +126,14 @@ private theorem coefficient_tensor_associativity_paste
   have hB : lB.hom ≫ (α_ (q.obj P) (q.obj Q)
         (q.obj N)).hom = q.map aB.hom ≫ rB.hom := by
     simpa only [lB, rB, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
-      tensorHom_id, id_tensorHom,
-      Category.assoc] using heB
+      tensorHom_id, id_tensorHom, Category.assoc] using heB
   have hA : lA.hom ≫ (α_ (q'.obj (K.obj P))
         (q'.obj (K.obj Q)) (q'.obj (K.obj N))).hom =
       q'.map aA.hom ≫ rA.hom := by
     simpa only [lA, rA, Iso.trans_hom, whiskerRightIso_hom, whiskerLeftIso_hom,
-      tensorHom_id, id_tensorHom,
-      Category.assoc] using heA
-  simp only [Functor.map_id] at hnL
-  erw [tensorHom_id] at hnL
-  simp only [Functor.map_id] at hnR
-  erw [id_tensorHom] at hnR
+      tensorHom_id, id_tensorHom, Category.assoc] using heA
+  erw [q'.map_id, tensorHom_id] at hnL
+  erw [q'.map_id, id_tensorHom] at hnR
   have hL₀ := left_square F μ bPQ.hom bL.hom
     (e.app P) (e.app Q) (e.app N) (e.app PQ)
     (e.app (T.obj (PQ, N))) (tPQ ≫ aPQ.hom) (tL ≫ aL₀.hom) hmPQ hmL
@@ -145,10 +141,8 @@ private theorem coefficient_tensor_associativity_paste
     (e.app P) (e.app Q) (e.app N) (e.app QN)
     (e.app (T.obj (P, QN))) (tQN ≫ aQN.hom) (tR ≫ aR₀.hom) hmQN hmR
   have hL : F.map lB.hom ≫
-      μ.hom.app ((MonoidalCategory.tensor B).obj (q.obj P, q.obj Q),
-        q.obj N) ≫
-      (μ.hom.app (q.obj P, q.obj Q) ▷
-        F.obj (q.obj N)) ≫
+      μ.hom.app (q.obj P ⊗ q.obj Q, q.obj N) ≫
+      (μ.hom.app (q.obj P, q.obj Q) ▷ F.obj (q.obj N)) ≫
       (((e.app P) ⊗ₘ (e.app Q)) ⊗ₘ (e.app N)) = eL ≫ lA.hom := by
     calc
       _ = e.app (T.obj (PQ, N)) ≫ (tL ≫ aL₀.hom) ≫
@@ -159,10 +153,8 @@ private theorem coefficient_tensor_associativity_paste
         simp only [eL, lA, Iso.trans_hom, whiskerRightIso_hom, Category.assoc]
         rfl
   have hR : F.map rB.hom ≫
-      μ.hom.app (q.obj P,
-        (MonoidalCategory.tensor B).obj (q.obj Q, q.obj N)) ≫
-      (F.obj (q.obj P) ◁
-        μ.hom.app (q.obj Q, q.obj N)) ≫
+      μ.hom.app (q.obj P, q.obj Q ⊗ q.obj N) ≫
+      (F.obj (q.obj P) ◁ μ.hom.app (q.obj Q, q.obj N)) ≫
       ((e.app P) ⊗ₘ ((e.app Q) ⊗ₘ (e.app N))) = eR ≫ rA.hom := by
     calc
       _ = e.app (T.obj (P, QN)) ≫ (tR ≫ aR₀.hom) ≫
@@ -180,7 +172,7 @@ private theorem coefficient_tensor_associativity_paste
           q'.map (K.map aB.hom) at hf
     dsimp only [eL, eR]
     rw [reassoc_of% hf]
-    simpa only [Functor.map_comp, Category.assoc] using
+    simpa only [q'.map_comp, Category.assoc] using
       congrArg (fun f ↦ e.app (T.obj (PQ, N)) ≫ q'.map f) hc
   exact associativity_transport F μ lB rB (q.map aB.hom)
     lA.hom rA.hom (q'.map aA.hom) (asIso (e.app P))
