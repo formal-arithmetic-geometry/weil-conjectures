@@ -138,8 +138,7 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency.types false
 set_option maxRecDepth 4000
 
-set_option maxHeartbeats 600000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- Restriction of the geometric Hom bijection compares the additive and scalar operations.
 /-- Scalar extension is adjoint to the supplied module direct image, with the underlying
 Hom bijection fixed by the canonical insertion.
@@ -296,8 +295,7 @@ private theorem privateSuppliedTensorAdjunction_normalized
   rw [tensorAdjunction_underlying]
   rfl
 
-set_option maxHeartbeats 600000 in
-set_option profiler true in
+set_option trace.profiler true in
 -- Transporting the scalar-extension presentation uses dependent functor equalities.
 /-- The scalar-extension normalization is unchanged by a specified presentation of
 its objects and maps.
@@ -345,4 +343,7 @@ theorem suppliedTensorAdjunction_normalized
     change (e.hom.app M).val.app W ((tensorUnit c (I.modules.obj M)).hom.app W x) = _
     rw [tensorUnit_apply]
     exact (k.q_one M W x).symm
-  erw [← Category.assoc (tensorUnit c (I.modules.obj M)), hq]
+  apply congrArg (f.adj.homEquiv _ _)
+  exact congrArg (fun a ↦ I.moduleUnderlying.inv.app M ≫ a)
+    ((Category.assoc _ _ _).symm.trans
+      (congrArg (fun a ↦ a ≫ (mset A).map v) hq))
