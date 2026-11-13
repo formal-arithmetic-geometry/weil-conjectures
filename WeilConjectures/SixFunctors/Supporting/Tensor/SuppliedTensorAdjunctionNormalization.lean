@@ -318,6 +318,8 @@ private theorem privateSuppliedTensorAdjunction_normalized
       exact hBR M ((tensorAdjunction c).homEquiv (I.modules.obj M) H a) b }
   refine ⟨am, ?_⟩
   intro M H v
+  dsimp only [am]
+  rw [Adjunction.mkOfHomEquiv_homEquiv]
   change (mset B).map
     (B' M H ((tensorAdjunction c).homEquiv (I.modules.obj M) H v)) ≫
       eP.hom.app H = _
