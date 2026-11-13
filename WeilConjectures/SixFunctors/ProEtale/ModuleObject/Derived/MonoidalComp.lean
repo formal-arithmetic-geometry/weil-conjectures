@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
@@ -39,6 +39,7 @@ private lemma upperStarTensorComplexHom_ιTensorObj
   dsimp only [upperStarTensorComplexHom, upperStarTensorComplexHomX]
   erw [HomologicalComplex.ι_mapBifunctorDesc]
 
+set_option profiler true in
 /-- On complexes, the comparison `f^* A ⊗ f^* B ⟶ f^* (A ⊗ B)` is compatible with the
 composition isomorphism of the pullbacks of module objects. -/
 @[reassoc]
@@ -56,9 +57,13 @@ lemma upperStarTensorComplexHom_comp
   apply HomologicalComplex.mapBifunctor.hom_ext
   intro p q h
   simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f]
-  erw [CochainComplex.ιTensorObj_tensorHom_f_assoc,
-    upperStarTensorComplexHom_ιTensorObj_assoc,
-    upperStarTensorComplexHom_ιTensorObj_assoc]
+  erw [CochainComplex.ιTensorObj_tensorHom_f_assoc
+    ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app A)
+    ((NatTrans.mapHomologicalComplex (upperStarComp Λ f g).hom (.up ℤ)).app B) p q n h]
+  rw [upperStarTensorComplexHom_ιTensorObj_assoc Λ f
+      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj A)
+      (((g)^*⟦Λ⟧.mapHomologicalComplex _).obj B) p q n h,
+    upperStarTensorComplexHom_ιTensorObj_assoc Λ (f ≫ g) A B p q n h]
   rw [Category.assoc, ← Functor.map_comp]
   rw [upperStarTensorComplexHom_ιTensorObj]
   simp only [NatTrans.mapHomologicalComplex_app_f, Category.assoc]
