@@ -62,7 +62,6 @@ lemma exists_padicAlgCl_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ) [
       (constructibleToPadicAlgClCompIso X' ℓ h₂).app K₂ ≪≫ e₂⟩⟩
 
 set_option trace.profiler true in
--- the extensions of scalars of `TwoColimit` are unfolded to the ambient derived functors
 /-- `exists_padicAlgCl_iso_integralModel_pair`, with the isomorphisms read in the ambient derived
 categories: `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀) ≅ K` and `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀') ≅ K'`. -/
 lemma exists_derivedExtendScalars_iso_integralModel_pair (X X' : Scheme.{u}) (ℓ : ℕ)
@@ -81,8 +80,10 @@ lemma exists_derivedExtendScalars_iso_integralModel_pair (X X' : Scheme.{u}) (�
         ((Mod.extendScalars (coefficientMap (padicIntegersRingObjToContinuousMapRingObj ℓ E)
           X')).leftDerivedFunctor.obj
           K₀'.obj) ≅ K'.obj) := by
-  obtain ⟨E, K₀, K₀', ⟨e⟩, ⟨e'⟩⟩ := exists_padicAlgCl_iso_integralModel_pair X X' ℓ K K'
-  exact ⟨E, K₀, K₀', ⟨(boundedConstructible _).ι.mapIso e⟩,
-    ⟨(boundedConstructible _).ι.mapIso e'⟩⟩
+  exact (exists_padicAlgCl_iso_integralModel_pair X X' ℓ K K').elim fun E hE ↦
+    hE.elim fun K₀ hK₀ ↦ hK₀.elim fun K₀' h ↦
+      ⟨E, K₀, K₀',
+        h.1.map (fun e ↦ (boundedConstructible (padicAlgClRingObj X ℓ)).ι.mapIso e),
+        h.2.map (fun e ↦ (boundedConstructible (padicAlgClRingObj X' ℓ)).ι.mapIso e)⟩
 
 end AlgebraicGeometry.ProEtale
