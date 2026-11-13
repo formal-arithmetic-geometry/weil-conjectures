@@ -149,6 +149,17 @@ private theorem moduleCechZero_d_apply {X : Scheme.{u}} {ι : Type u}
     ((cechComplexFunctor U).obj A.presheafModuleCat).d 0 1 (moduleCechZero U A x) = 0 :=
   ConcreteCategory.congr_hom (moduleCechZero_d U A) x
 
+private theorem cochain_correction_d {R : Type u} [Ring R]
+    {A B C D : CochainComplex (ModuleCat.{u} R) ℕ}
+    (α : A ⟶ B) (jA : C ⟶ A) (jB : D ⟶ B) (f : C ⟶ D)
+    (hsq : jA ≫ α = f ≫ jB) (hinj : Function.Injective (α.f 1))
+    (t : A.X 0) (x : D.X 0) (b : B.X 0) (z : C.X 1)
+    (ht : α.f 0 t = jB.f 0 x - b) (hx : D.d 0 1 x = f.f 1 z)
+    (hb : B.d 0 1 b = 0) : A.d 0 1 t = jA.f 1 z := by
+  apply hinj
+  rw [← cochain_comm_apply, ht, map_sub, hb, sub_zero, cochain_comm_apply, hx]
+  exact (ConcreteCategory.congr_hom (congrArg (fun g ↦ g.f 1) hsq) z).symm
+
 -- The sectionwise and two cochain calculations repeatedly compare categorical product modules.
 set_option backward.isDefEq.respectTransparency false in
 /-- A Cech zero cochain with prescribed resolution and Cech differentials.
@@ -346,16 +357,12 @@ theorem cech_horseshoe_correction_cochain (X : Scheme.{u})
     erw [moduleCechZero_naturality_apply U (IB.cocomplex.d 0 1), ← ha,
       moduleCechZero_naturality_apply U (α.f 1)]
   · have : Mono (α.f 0) := (hrows 0).mono_f
-    apply cechMap_injective U (α.f 0) 1
-    change (F.map (α.f 0)).f 1 (A₀.d 0 1 t) =
-      (F.map (α.f 0)).f 1 ((F.map jA).f 1
-        (((cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z))
-    erw [← cochain_comm_apply (F.map (α.f 0)), hαt]
-    dsimp only [v]
-    erw [map_sub, moduleCechZero_d_apply U, sub_zero,
-      cochain_comm_apply (F.map jB), hdx]
     have hιA₀ : jA ≫ α.f 0 = S.f ≫ jB := by
       simpa [jA, jB] using congrArg (fun f ↦ f.f 0) hιA
-    rw [mapCochain_comp_apply, mapCochain_comp_apply, hιA₀]
+    apply cochain_correction_d (F.map (α.f 0)) (F.map jA) (F.map jB) (F.map S.f)
+      (by rw [← F.map_comp, ← F.map_comp, hιA₀])
+      (cechMap_injective U (α.f 0) 1) t x₀
+      (moduleCechZero U (IB.cocomplex.X 0) b) _ hαt hdx
+    exact moduleCechZero_d_apply U (IB.cocomplex.X 0) b
 
 end AlgebraicGeometry.Scheme.Modules
