@@ -335,7 +335,13 @@ private theorem nativeReductionMonoidal
       let := hbeta
       have hb := normalizedBeta_eq l E Y D hl n P Q beta hgen
       trace "PH805: beta normalized"
-      have hbκ := hb.trans (hc P Q).symm
+      have hcPQ := hc P Q
+      dsimp only [reductionExtension_eq_scalarExtension, coefficientTotalTensor,
+        totalTensor, ordinaryTensor] at hb
+      dsimp only [D', finiteCochainModel, coefficientTotalTensor,
+        totalTensor, ordinaryTensor] at hcPQ
+      trace "PH805: comparison types normalized"
+      have hbκ := hb.trans hcPQ.symm
       trace "PH805: flat representatives"
       refine ⟨hEP, hEQ, ?_⟩
       trace "PH805: representative comparisons"
