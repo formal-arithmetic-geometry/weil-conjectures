@@ -281,6 +281,35 @@ private lemma comp_eq_of_comm {𝒞 : Type*} [Category 𝒞] {Oq O₁ O₂ Mq M�
   rw [this, ← Category.assoc, ← Category.assoc, ← Category.assoc, hs]
   simp
 
+private lemma pullHom_twisted_comm {C : Type*} [Category C]
+    {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat} {S Y V₁ V₂ : C}
+    {O M : F.obj (.mk (op S))} (u₁ : V₁ ⟶ S) (u₂ : V₂ ⟶ S)
+    (q : Y ⟶ S) (f₁ : Y ⟶ V₁) (f₂ : Y ⟶ V₂)
+    (h₁ : f₁ ≫ u₁ = q) (h₂ : f₂ ≫ u₂ = q)
+    (x₁ : (F.map u₁.op.toLoc).toFunctor.obj O ⟶ (F.map u₁.op.toLoc).toFunctor.obj M)
+    (x₂ : (F.map u₂.op.toLoc).toFunctor.obj O ⟶ (F.map u₂.op.toLoc).toFunctor.obj M)
+    (s₁ : (F.map f₁.op.toLoc).toFunctor.obj ((F.map u₁.op.toLoc).toFunctor.obj O) ⟶
+      (F.map f₁.op.toLoc).toFunctor.obj ((F.map u₁.op.toLoc).toFunctor.obj O))
+    (s : (F.map q.op.toLoc).toFunctor.obj O ⟶ (F.map q.op.toLoc).toFunctor.obj O)
+    (hs : (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).hom.toNatTrans.app O
+        ≫ s₁ = s ≫
+          (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).hom.toNatTrans.app O)
+    (hc : (F.map f₁.op.toLoc).toFunctor.map x₁ ≫
+        (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).inv.toNatTrans.app M ≫
+        (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl)).hom.toNatTrans.app M =
+      (s₁ ≫
+        (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl)).inv.toNatTrans.app O ≫
+        (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl)).hom.toNatTrans.app O) ≫
+          (F.map f₂.op.toLoc).toFunctor.map x₂) :
+    s ≫ pullHom x₂ f₂ q q h₂ h₂ = pullHom x₁ f₁ q q h₁ h₁ := by
+  let e₁ := Cat.Hom.toNatIso
+    (F.mapComp' u₁.op.toLoc f₁.op.toLoc q.op.toLoc (by rw [← h₁]; rfl))
+  let e₂ := Cat.Hom.toNatIso
+    (F.mapComp' u₂.op.toLoc f₂.op.toLoc q.op.toLoc (by rw [← h₂]; rfl))
+  exact (comp_eq_of_comm (e₁.app O) (e₁.app M) (e₂.app O) (e₂.app M)
+    ((F.map f₁.op.toLoc).toFunctor.map x₁) ((F.map f₂.op.toLoc).toFunctor.map x₂)
+    s₁ s hs hc).symm
+
 set_option profiler true in
 private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
     {ι : Type*} (V : ι → X.Etale) (t : ∀ i, T.sheaf.obj.obj (op (V i)))
@@ -295,26 +324,15 @@ private lemma descentData_pullHom_comm {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSh
           (f₁ := (V i₂).hom) (f₂ := (V i₂).hom) (φ.hom i₂) f₂ q q hf₂ hf₂ =
       pullHom (F := modulesPseudofunctor) (M₁ := Modules.unitObj X) (M₂ := M)
         (f₁ := (V i₁).hom) (f₂ := (V i₁).hom) (φ.hom i₁) f₁ q q hf₁ hf₁ := by
-  dsimp only [pullHom]
-  let mc₁ := modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
-    (by rw [← Quiver.Hom.comp_toLoc, ← op_comp, hf₁])
-  let mc₂ := modulesPseudofunctor.mapComp' (V i₂).hom.op.toLoc f₂.op.toLoc q.op.toLoc
-    (by rw [← Quiver.Hom.comp_toLoc, ← op_comp, hf₂])
   have hc := φ.comm q f₁ f₂ hf₁ hf₂
   dsimp only [descentData, unitDescentData, Pseudofunctor.toDescentData,
     Pseudofunctor.DescentData.ofObj] at hc
-  have key := comp_eq_of_comm (𝒞 := modulesPseudofunctor.obj (.mk (op Y)))
-    ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X))
-    ((Cat.Hom.toNatIso mc₁).app M) ((Cat.Hom.toNatIso mc₂).app (Modules.unitObj X))
-    ((Cat.Hom.toNatIso mc₂).app M)
-    ((modulesPseudofunctor.map f₁.op.toLoc).toFunctor.map (φ.hom i₁))
-    ((modulesPseudofunctor.map f₂.op.toLoc).toFunctor.map (φ.hom i₂))
-    _ _ (smulMor_naturality (Y := Y) ((Cat.Hom.toNatIso mc₁).app (Modules.unitObj X)).hom
-      (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm
-    hc
-  simp only [Iso.app_hom, Iso.app_inv, Cat.Hom.toNatIso_hom, Cat.Hom.toNatIso_inv, mc₁,
-    mc₂] at key
-  exact key.symm
+  exact pullHom_twisted_comm (F := modulesPseudofunctor)
+    (V i₁).hom (V i₂).hom q f₁ f₂ hf₁ hf₂ (φ.hom i₁) (φ.hom i₂) _ _
+    (smulMor_naturality (Y := Y)
+      ((modulesPseudofunctor.mapComp' (V i₁).hom.op.toLoc f₁.op.toLoc q.op.toLoc
+        (by rw [← hf₁]; rfl)).hom.toNatTrans.app (Modules.unitObj X))
+      (transitionAt T V t f₁ f₂ (hf₁.trans hf₂.symm))).symm hc
 
 private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
     (M : modulesPseudofunctor.obj (.mk (op X)))
@@ -327,6 +345,7 @@ private lemma etaleIsoTorsorVal_map_eq {X : Scheme.{u}}
   change (modulesPseudofunctor.presheafHom (Modules.unitObj X) M).map
     ((toProEt X ⋙ ProEt.forget X).map a).op (Modules.etaleIsoTorsorVal M x) = _
   simp only [Pseudofunctor.presheafHom_map, TypeCat.ofHom_apply, Quiver.Hom.unop_op]
+  rfl
 
 variable {X : Scheme.{u}} (T : Sheaf.Torsor X.gmSheaf)
 
