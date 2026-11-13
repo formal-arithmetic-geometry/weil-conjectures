@@ -176,8 +176,8 @@ theorem integralPullbackComposition_scalar {V W Z : Scheme.{u}}
     Functor.whiskerRight_app, Functor.whiskerLeft_app] at N1 Np mix Na
   simp only [T, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp,
     Category.assoc]
-  exact scalar_composition_paste (UL h) (integralComparisonDerivedSequenceScalar l E L ι Z)
-    N1 IIIk IIIh Ng Np CE mix eE eL IIIhk Na CL
+  apply scalar_composition_paste (U := UL h)
+    (H := integralComparisonDerivedSequenceScalar l E L ι Z) <;> assumption
 
 end SystemScalar
 
