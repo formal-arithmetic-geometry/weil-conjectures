@@ -1038,8 +1038,44 @@ private def openSliceAdjunction {U T : Scheme.{t}}
     exact ringAdj_second e φ ψ H₁.symm
   exact SheafOfModules.pushforwardPushforwardAdj e.toAdjunction φ ψ H₁ H₂
 
-set_option trace.profiler true in
-set_option maxHeartbeats 1000000 in
+private theorem compAdjunction_homEquiv_apply
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
+    (a : F ⊣ G) (b : H ⊣ I) (X : C) (Y : E) (f : (F ⋙ H).obj X ⟶ Y) :
+    (a.comp b).homEquiv X Y f = a.homEquiv X (I.obj Y) (b.homEquiv (F.obj X) Y f) :=
+  congrArg (fun e ↦ e X Y f) (Adjunction.comp_homEquiv a b)
+
+open Classical in
+private theorem extensionSheafAdjunction_homEquiv_apply
+    {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{t + 1}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{t + 1}]
+    (R : Sheaf J RingCat.{t + 1}) (W : C)
+    (M : SheafOfModules.{t + 1} (R.over W)) (N : SheafOfModules.{t + 1} R)
+    (f : (SheafOfModules.extensionByZeroPresheaf R W ⋙
+      PresheafOfModules.sheafification (𝟙 R.obj)).obj M ⟶ N)
+    (V : Over W) (x : M.val.obj (op V)) :
+    (((SheafOfModules.extensionSheafAdjunction.{t + 1, t, t + 1} R W).homEquiv M N)
+      f).val.app (op V) x =
+      (PresheafOfModules.sheafificationHomEquiv (𝟙 R.obj) f).app (op V.left)
+        (DirectSum.of _ V.hom x) := by
+  rw [SheafOfModules.extensionSheafAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+  rfl
+
+private theorem openSliceAdjunction_homEquiv_apply {U T : Scheme.{t}}
+    (j : U ⟶ T) (hj : IsOpenImmersion j)
+    (M : pbcModules U (pbcAdicCompletion U d))
+    (N : SheafOfModules.{t + 1}
+      ((reductionModuleRing T (completedReductionCoefficient T d)).over (cbcOpenObject j hj)))
+    (f : (cbcModuleToSlice d T (cbcOpenObject j hj)).obj M ⟶ N)
+    (V : U.ProEt) (x : M.val.obj (op V)) :
+    (((openSliceAdjunction d j hj).homEquiv M N) f).val.app (op V) x =
+      f.val.app (op (cbcOpenSliceObject j hj V)) x := by
+  change f.val.app (op (cbcOpenSliceObject j hj V)) (M.val.map (𝟙 (op V)) x) = _
+  rw [PresheafOfModules.map_id]
+  rfl
+
+set_option profiler true in
 open Classical in
 /-- The extension/restriction adjunction is fixed by the direct-sum generator formula.
 Source: Tag 03DI (blueprint: lem-cbc-completed-extension-zero-comparison).
@@ -1073,16 +1109,8 @@ theorem cbcOpenAdjunction_exists {U T : Scheme.{t}}
         (PresheafOfModules.sheafificationHomEquiv.{t + 1} (𝟙 S.obj) α).app
           (op ((cbcOpenSiteFunctor j hj).obj V))
             (DirectSum.of _ (cbcOpenSliceObject j hj V).hom x) := by
-    dsimp only [adj]
-    rw [Adjunction.comp_homEquiv]
-    simp only [SheafOfModules.extensionSheafAdjunction,
-      Adjunction.mkOfHomEquiv_homEquiv]
-    change (PresheafOfModules.sheafificationHomEquiv.{t + 1} (𝟙 S.obj) α).app
-        (op ((cbcOpenSiteFunctor j hj).obj V))
-          (DirectSum.of _ (cbcOpenSliceObject j hj V).hom
-            (M.val.map (𝟙 (op V)) x)) = _
-    rw [PresheafOfModules.map_id]
-    rfl
+    rw [compAdjunction_homEquiv_apply, openSliceAdjunction_homEquiv_apply]
+    exact extensionSheafAdjunction_homEquiv_apply S W _ N α (cbcOpenSliceObject j hj V) x
   refine ⟨adj, hu, ?_⟩
   intro adj' hadj'
   apply Adjunction.ext
