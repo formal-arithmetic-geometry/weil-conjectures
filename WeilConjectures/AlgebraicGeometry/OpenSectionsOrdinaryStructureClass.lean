@@ -308,6 +308,7 @@ private theorem section_iso_one (A : Type u) [CommRing A]
 
 
 set_option backward.defeqAttrib.useBackward true in
+set_option profiler true in
 set_option maxHeartbeats 900000 in
 -- The nested single-complex and scalar-forgetting comparisons need extra heartbeats.
 /-- The restricted ordinary class of one agrees with the tilde/sections unit class.
