@@ -124,8 +124,10 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorLeftCounit X).app M) ≫ cL.app (X ⊗ M) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X).app M)) :
     NatTrans.CommShift τ ℤ := by
-  have : HasCoproducts.{0} C₁ := fun J ↦ inferInstance
-  have : HasCoproducts.{0} C₂ := fun J ↦ inferInstance
+  have : HasCoproducts.{0} C₁ :=
+    fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{0} C₂ :=
+    fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
@@ -134,9 +136,11 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
   let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).obj (Qh.obj X) ⋙ LF) ⟶
       ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh :=
     (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (tensorLeftCounit X) LF ≫
-      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X) cL ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X) cL ≫
       (Functor.associator _ _ _).inv
-  let δ₀ : ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh ⟶ (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X)) ⋙ Qh :=
+  let δ₀ : ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh ⟶
+      (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X)) ⋙ Qh :=
     Functor.whiskerRight (G := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G)
       (H := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X))
       ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X) Qh
@@ -187,8 +191,10 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
       LF.map ((tensorRightCounit X).app M) ≫ cL.app (M ⊗ X) ≫
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app M).app X)) :
     NatTrans.CommShift τ ℤ := by
-  have : HasCoproducts.{0} C₁ := fun J ↦ inferInstance
-  have : HasCoproducts.{0} C₂ := fun J ↦ inferInstance
+  have : HasCoproducts.{0} C₁ :=
+    fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{0} C₂ :=
+    fun J ↦ HasColimitsOfSize.has_colimits_of_shape (Discrete J)
   let : MonoidalCategory (DerivedCategory C₁) :=
     monoidalCategoryOfMonoidalClosedBraidedCategory C₁
   let : MonoidalCategory (DerivedCategory C₂) :=
@@ -197,7 +203,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).flip.obj (Qh.obj X) ⋙ LF) ⟶
       ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G) ⋙ Qh :=
     (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (tensorRightCounit X) LF ≫
-      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X) cL ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X) cL ≫
       (Functor.associator _ _ _).inv
   let δ₀ : ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G) ⋙ Qh ⟶
       (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X)) ⋙ Qh :=
@@ -227,7 +234,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
   have : NatTrans.CommShift δ₀ ℤ :=
-    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G)
+    NatTrans.CommShift.whiskerRight
+      (F₁ := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G)
       (F₂ := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X)) _ Qh ℤ
   have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
   have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
