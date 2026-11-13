@@ -122,9 +122,6 @@ theorem inverseImageRegularExtension
               (Opens.map g) CommRingCat.{u} (Opens.grothendieckTopology T')
               (Opens.grothendieckTopology T)).unit.app A).hom.app V a) := by
   classical
-  have : HasWeakSheafify (Opens.grothendieckTopology T) AddCommGrpCat.{u} := inferInstance
-  have : (Opens.grothendieckTopology T).WEqualsLocallyBijective AddCommGrpCat.{u} :=
-    inferInstance
   let R := 𝓡 A
   let S := 𝓡 B
   let C := TopCat.Sheaf.inverseImageRing g A
@@ -148,21 +145,6 @@ theorem inverseImageRegularExtension
   let q (N : SheafOfModules.{u} S) : (F ⟶ N) ≃ (M ⟶ Q.obj (L.obj N)) :=
     (Iso.homCongr (eqToIso (hE I)).symm (Iso.refl N)).trans
       ((adj.homEquiv I N).trans (φ M (L.obj N)))
-  have hq (N : SheafOfModules.{u} S) (a : F ⟶ N)
-      (V : (Opens T')ᵒᵖ) (x : A.obj.obj V) :
-      (q N a).val.app V x = a.val.app ((Opens.map g).op.obj V)
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 S.obj)).unit.app
-          (changeOfRingsPresheaf.{u, u, u} t I)).app ((Opens.map g).op.obj V)
-            ((1 : B.obj.obj ((Opens.map g).op.obj V)) ⊗ₜ[
-              C.obj.obj ((Opens.map g).op.obj V),
-              (t.hom.app ((Opens.map g).op.obj V)).hom]
-              (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-                (Opens.map g) AddCommGrpCat.{u} (Opens.grothendieckTopology T')
-                (Opens.grothendieckTopology T)).unit.app
-                  ((toSheaf R).obj M)).hom.app V x))) := by
-    dsimp only [q, Equiv.trans_apply]
-    rw [hφ]
-    exact hadj I N a _ _
   have hnq (N N' : SheafOfModules.{u} S) (a : F ⟶ N) (b : N ⟶ N') :
       q N' (a ≫ b) = q N a ≫ Q.map (L.map b) := by
     change φ M (L.obj N') (adj.homEquiv I N' (eqToHom (hE I) ≫ (a ≫ b))) =
@@ -176,7 +158,9 @@ theorem inverseImageRegularExtension
   have hv := congrArg (fun z ↦ z.val V) hs
   change (q (unit S) e.hom).val.app V (1 : A.obj.obj V) =
     (1 : B.obj.obj ((Opens.map g).op.obj V)) at hv
-  rw [← hq]
+  rw [← hadj I (unit S) e.hom _ _]
+  rw [← hφ M (L.obj (unit S)) _ V a]
+  change (q (unit S) e.hom).val.app V a = _
   rw [show a = a • (1 : A.obj.obj V) by exact (mul_one a).symm]
   rw [(q (unit S) e.hom).val.app V |>.hom.map_smul, hv]
   change (t.hom.app ((Opens.map g).op.obj V)).hom
