@@ -46,35 +46,6 @@ private noncomputable def changeIsoRestriction
   let E := scalarEquivalence (asIso c)
   exact (SheafOfModules.tensorAdjunction c).leftAdjointUniq E.symm.toAdjunction
 
-private noncomputable def sfbOrdinarySliceNormalizationIso
-    (S : Scheme.{u}) (U : S.ProEt)
-    (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})
-    (B : Sheaf (proEtaleModelTopology S) CommRingCat.{u + 1})
-    (T : Sheaf ((proEtaleModelTopology S).over (AsSmall.up.obj U))
-      CommRingCat.{u + 1})
-    (e : (sfbModelRings S).obj R ≅ B)
-    (c : ((SfbAdicRestriction.sliceAlgebra (proEtaleModelTopology S)
-      (AsSmall.up.obj U)).rings.obj B) ⟶ T) [IsIso c]
-    (W : proEtaleSiteModel S) (H : Over W ⥤ Over U)
-    [H.IsContinuous (proEtaleModelTopology S).over W (ProEt.topology S).over U]
-    (φ : siteModuleRings T ⟶
-      (H.sheafPushforwardContinuous RingCat.{u + 1}
-        ((proEtaleModelTopology S).over W) ((ProEt.topology S).over U)).obj
-        (((adicLisseForget S).obj R).over U)) :
-    (((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
-        ConstantCompletion.res e.inv) ⋙
-        ConstantCompletion.pull
-          (SfbAdicRestriction.sliceAlgebra (proEtaleModelTopology S)
-            (AsSmall.up.obj U)) c ≅
-      SheafOfModules.overFunctor ((adicLisseForget S).obj R) U ⋙
-        SheafOfModules.pushforward.{u + 1} (F := H) φ)) := by
-  let h : ConstantCompletion.change c ≅ ConstantCompletion.res (asIso c).inv :=
-    changeIsoRestriction c
-  exact Functor.isoWhiskerLeft
-    ((proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
-      ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W)
-    h
-
 -- The final transport compares module structures on the two site presentations.
 /-- Ordinary slice restriction commutes with transport to the AsSmall site and
 with an invertible change of coefficient rings.
@@ -165,6 +136,11 @@ theorem sfbOrdinarySliceNormalization
   have hGl : PreservesFiniteLimits G := SheafOfModules.pushforward_finiteLimits φ
   have hGc : PreservesFiniteColimits G := SheafOfModules.pushforward_finiteColimits φ
   refine ⟨G, hGa, hGl, hGc, ⟨?_⟩⟩
-  exact sfbOrdinarySliceNormalizationIso S U R B T e c W H φ
+  let F := (proEtaleModuleToModel ((adicLisseForget S).obj R) ⋙
+    ConstantCompletion.res e.inv) ⋙ SheafOfModules.overFunctor (siteModuleRings B) W
+  let α := changeIsoRestriction c
+  refine NatIso.ofComponents (fun M ↦ α.app (F.obj M)) ?_
+  intro M N f
+  exact α.hom.naturality (F.map f)
 
 end AlgebraicGeometry.Scheme
