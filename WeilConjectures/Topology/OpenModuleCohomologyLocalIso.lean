@@ -24,7 +24,6 @@ universe u
 open CategoryTheory TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
-set_option profiler true in
 /-- Open cohomology depends only on the restriction of a module morphism.
 Source: Stacks Project, Cohomology, Tag 01E1, restriction of injective resolutions.
 Proof: Choose injective resolutions of M and N and a comparison map lifting f.
