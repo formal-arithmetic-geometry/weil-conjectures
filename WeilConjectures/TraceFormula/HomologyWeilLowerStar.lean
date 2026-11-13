@@ -103,21 +103,18 @@ lemma boundedConstructiblePullbackSquareComparison_hom_app_hom (sq : CommSq g' f
     ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
       (Adjunction.leftDerivedFunctorSquareIso (upperStarSquareComparison Λ
         ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)).hom.app K.obj := by
-  have h1 := boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K
+  have h1 := congrArg (fun φ ↦ φ.hom)
+    (boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K)
+  simp only [ObjectProperty.FullSubcategory.comp_hom,
+    boundedConstructibleUpperStarComp_inv_app_hom,
+    boundedConstructibleUpperStarComp_hom_app_hom, ObjectProperty.eqToHom_hom] at h1
   have h2 := Adjunction.leftDerivedFunctorSquareIso_hom_app_of_eq
     (upperStarSquareComparison Λ ⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩)
     (upperStarComp Λ f'.left g.left) (upperStarComp Λ g'.left f.left)
     (by rw [Over.left_comp_left_eq_of_comp_eq sq.w]) rfl K.obj
-  refine Eq.trans ?_ h2.symm
-  rw [h1, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
-  simp only [boundedConstructibleUpperStarComp_inv_app_hom,
-    boundedConstructibleUpperStarComp_hom_app_hom]
-  have e : ∀ {A B : Dᵇc(X'.left)⟦Λ⟧} (h : A = B),
-      (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
-    rintro _ _ rfl
-    rfl
-  simp only [e, leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
-    Category.assoc]
+  refine h1.trans ?_
+  simpa only [leftDerivedUpperStarComp, Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
+    Category.assoc] using h2.symm
 
 set_option profiler true in
 -- the instances of the general lemmas are found for each of the categories of module objects
@@ -135,11 +132,9 @@ lemma map_boundedConstructiblePullbackSquareComparison_hom_app (sq : CommSq g' f
         L((g'.left)^*⟦Λ⟧).map ((boundedConstructibleUpperStarCompatibility Λ ℓ f).inv.app K) ≫
         (boundedConstructibleUpperStarCompatibility Λ ℓ g').inv.app
           ((boundedConstructibleUpperStar Λ ℓ f).obj K) := by
-  simp only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
-    Iso.refl_inv, NatTrans.id_app]
-  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    Category.id_comp, Category.comp_id, Category.comp_id]
-  exact boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
+  simpa only [boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso_inv_app,
+    Functor.map_id, Category.id_comp, Category.comp_id] using
+    boundedConstructiblePullbackSquareComparison_hom_app_hom Λ ℓ sq K
 
 end SquareComparison
 
