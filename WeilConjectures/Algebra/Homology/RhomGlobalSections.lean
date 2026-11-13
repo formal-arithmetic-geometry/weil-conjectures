@@ -88,6 +88,43 @@ private theorem rhomGlobalSectionsHomComparison
     rw [hn])
   exact ⟨b⟩
 
+private theorem rhomGlobalSectionsOfComparison
+    {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
+    (I : CochainComplex A ℤ ⥤ CochainComplex A ℤ)
+    (η : 𝟭 (CochainComplex A ℤ) ⟶ I)
+    (hI : ∀ M, (I.obj M).IsKInjective)
+    (hη : ∀ M, QuasiIso (η.app M))
+    (F : (DerivedCategory A)ᵒᵖ × DerivedCategory A ⥤ AddCommGrpCat.{v})
+    (d : DerivedCategory.Q.op.prod DerivedCategory.Q ⋙ F ≅
+      (HomotopyCategory.quotient A (ComplexShape.up ℤ)).op.prod
+        (I ⋙ HomotopyCategory.quotient A (ComplexShape.up ℤ)) ⋙
+          Functor.uncurry.obj preadditiveCoyoneda) :
+    ∃ e : ∀ P, F.obj P ≃+ (P.1.unop ⟶ P.2),
+      ∀ P P' (f : P ⟶ P') (x : F.obj P),
+        e P' (F.map f x) = f.1.unop ≫ e P x ≫ f.2 := by
+  classical
+  let Q := DerivedCategory.Q (C := A)
+  let H := Functor.uncurry.obj (preadditiveCoyoneda (C := DerivedCategory A))
+  let U := AddCommGrpCat.uliftFunctor.{w, v}
+  let V := AddCommGrpCat.uliftFunctor.{v, w}
+  obtain ⟨b⟩ := rhomGlobalSectionsHomComparison I η hI hη
+  let d' : Q.op.prod Q ⋙ F ⋙ U ≅ Q.op.prod Q ⋙ H ⋙ V :=
+    Functor.isoWhiskerRight d U ≪≫ b
+  let W := (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).op.prod
+    (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
+  let z : F ⋙ U ≅ H ⋙ V :=
+    (Localization.fullyFaithfulWhiskeringLeft (Q.op.prod Q) W _).preimageIso d'
+  let E (P : (DerivedCategory A)ᵒᵖ × DerivedCategory A) :
+      F.obj P ≃+ (P.1.unop ⟶ P.2) := AddEquiv.ulift.symm.trans
+    ((z.app P).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift)
+  refine ⟨E, ?_⟩
+  intro P P' f x
+  have hz := ConcreteCategory.congr_hom (z.hom.naturality f) (ULift.up x)
+  have hz' := congrArg ULift.down hz
+  change E P' (F.map f x) = (f.1.unop ≫ E P x) ≫ f.2 at hz'
+  simpa only [Category.assoc] using hz'
+
+set_option profiler true in
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxHeartbeats 40000 in
 -- Additive Hom inference traverses the derived and sheaf categories in each repeated binder.
@@ -141,32 +178,10 @@ theorem rhom_global_sections
     CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u₁} A M
   have hη (M : CochainComplex A ℤ) : QuasiIso (η.app M) :=
     (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u₁} A M).2
-  let Q := DerivedCategory.Q (C := A)
-  let H := Functor.uncurry.obj (preadditiveCoyoneda (C := DerivedCategory A))
-  let U := AddCommGrpCat.uliftFunctor.{w₁, u₁}
-  let V := AddCommGrpCat.uliftFunctor.{u₁, w₁}
-  obtain ⟨b⟩ := rhomGlobalSectionsHomComparison I η hI hη
   obtain ⟨a⟩ := homComplex_hypercohomology J R I hI
   obtain ⟨c⟩ := derivedInternalHom_comparison J R I η (fun M ↦ ⟨hη M, hI M⟩)
-  let F := derivedInternalHom J R ⋙ ringedSiteZerothHypercohomology J R ⋙ U
-  let G := H ⋙ V
-  let d : Q.op.prod Q ⋙ F ≅ Q.op.prod Q ⋙ G :=
-    Functor.isoWhiskerRight c (ringedSiteZerothHypercohomology J R ⋙ U) ≪≫
-      Functor.isoWhiskerRight a U ≪≫ b
-  let W := (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).op.prod
-    (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
-  let z : F ≅ G :=
-    (Localization.fullyFaithfulWhiskeringLeft (Q.op.prod Q) W _).preimageIso d
-  let E (P : (DerivedCategory A)ᵒᵖ × DerivedCategory A) :
-      ((ringedSiteZerothHypercohomology J R).obj ((derivedInternalHom J R).obj P)) ≃+
-        (P.1.unop ⟶ P.2) := AddEquiv.ulift.symm.trans
-    ((z.app P).addCommGroupIsoToAddEquiv.trans AddEquiv.ulift)
-  refine ⟨E, ?_⟩
-  intro P P' f x
-  have hz := ConcreteCategory.congr_hom (z.hom.naturality f) (ULift.up x)
-  have hz' := congrArg ULift.down hz
-  change E P' ((ringedSiteZerothHypercohomology J R).map
-    ((derivedInternalHom J R).map f) x) = (f.1.unop ≫ E P x) ≫ f.2 at hz'
-  simpa only [Category.assoc] using hz'
+  exact rhomGlobalSectionsOfComparison I η hI hη
+    (derivedInternalHom J R ⋙ ringedSiteZerothHypercohomology J R)
+    (Functor.isoWhiskerRight c (ringedSiteZerothHypercohomology J R) ≪≫ a)
 
 end CategoryTheory
