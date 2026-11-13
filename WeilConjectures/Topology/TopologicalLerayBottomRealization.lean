@@ -73,7 +73,6 @@ private theorem topological_cohomology_edge_eq_of_cocycles
     exact eqToHom_apply_symm _ x
   simpa only [input] using h F J p s hs
 
-set_option profiler true in
 /-- Realize a cohomology map already characterized on resolution cocycles as the bottom
 edge of a functorial Leray spectral sequence. The induced map and its cocycle computation
 are inputs; this statement constructs only the spectral sequence and its finite filtration.

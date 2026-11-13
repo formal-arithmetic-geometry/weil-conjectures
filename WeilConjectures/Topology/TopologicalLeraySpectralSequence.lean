@@ -51,7 +51,7 @@ theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
 
 attribute [instance] topological_pushforwardAb_additive
 
-set_option profiler true in
+set_option trace.profiler true in
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -168,25 +168,20 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
   refine ⟨_, _, fun _ ↦ rfl, fun _ ↦ rfl, ?_⟩
   obtain ⟨edge, a, ha, hedge⟩ :=
     exists_topological_induced_cohomology_cocycle f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
-  refine Exists.imp (fun E ↦ ?_)
-    (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
-      edge a ha hedge)
-  refine Exists.imp (fun e₂ ↦ ?_)
-  refine And.imp_right ?_
-  refine Exists.imp (fun T ↦ ?_)
-  refine And.imp_right ?_
-  refine And.imp_right ?_
-  refine Exists.imp (fun g ↦ ?_)
-  refine Exists.imp (fun e₀ ↦ ?_)
-  refine And.imp_right ?_
-  refine Exists.imp (fun t ↦ ?_)
-  refine And.imp_right ?_
-  refine Exists.imp (fun b ↦ ?_)
-  refine And.imp_right ?_
-  refine And.imp_right ?_
-  refine Exists.imp (fun k ↦ ?_)
-  refine And.imp_right ?_
-  intro he
-  exact ⟨edge, he, a, ha, hedge⟩
+  exact (exists_topological_leray_bottom_realization f _ _ (fun _ ↦ rfl) (fun _ ↦ rfl)
+    edge a ha hedge).imp fun E ↦
+      Exists.imp fun e₂ ↦
+        And.imp_right <|
+          Exists.imp fun T ↦
+            And.imp_right <| And.imp_right <|
+              Exists.imp fun g ↦
+                Exists.imp fun e₀ ↦
+                  And.imp_right <|
+                    Exists.imp fun t ↦
+                      And.imp_right <|
+                        Exists.imp fun b ↦
+                          And.imp_right <| And.imp_right <|
+                            Exists.imp fun k ↦
+                              And.imp_right fun he ↦ ⟨edge, he, a, ha, hedge⟩
 
 end CategoryTheory
