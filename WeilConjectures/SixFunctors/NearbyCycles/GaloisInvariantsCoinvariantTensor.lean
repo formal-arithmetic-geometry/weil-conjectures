@@ -292,9 +292,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColim
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  have := galoisTensorModuleColimit
-  have := galoisTensorLeftColimit
-  have := galoisTensorRightColimit
+  have := galoisTensorModuleColimit.{u}
+  have := galoisTensorLeftColimit.{u}
+  have := galoisTensorRightColimit.{u}
   obtain ⟨R, hRC, hcoinv⟩ := exists_retraction_derivedUnit_galois_coinvariant_of_isColimit
     T₀ h Ω hp (L((N.ε)^*⟦Profinite.continuousMapRingObj T₀⟧).obj C) hC act hact
   have hα := pullbackExchange_galoisLayerHom_app_eq_comp_unit
@@ -385,9 +385,9 @@ private theorem tensor_property_of_coinvariant
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  have := galoisTensorModuleColimit
-  have := galoisTensorLeftColimit
-  have := galoisTensorRightColimit
+  have := galoisTensorModuleColimit.{u}
+  have := galoisTensorLeftColimit.{u}
+  have := galoisTensorRightColimit.{u}
   intro q V b hV W φ hφ
   refine hcoinv (L((f')^*⟦Profinite.continuousMapRingObj T₀⟧) ⋙ tensorRight V ⋙
     DerivedCategory.homologyFunctor _ q) ?_ φ hφ
@@ -456,9 +456,9 @@ theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor (T�
   have := hasColimitsOfShape_int_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_obj_mod.{u}
   have := preservesColimitsOfShape_int_curriedTensor_flip_obj_mod.{u}
-  have := galoisTensorModuleColimit
-  have := galoisTensorLeftColimit
-  have := galoisTensorRightColimit
+  have := galoisTensorModuleColimit.{u}
+  have := galoisTensorLeftColimit.{u}
+  have := galoisTensorRightColimit.{u}
   refine exists_retraction_transfer
     (exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of_isColimit T₀ N h Ω hp C hC act
       hact) ?_
