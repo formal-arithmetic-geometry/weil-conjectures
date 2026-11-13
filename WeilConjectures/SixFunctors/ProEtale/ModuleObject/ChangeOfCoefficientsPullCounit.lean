@@ -112,6 +112,14 @@ lemma derivedUpperStarExtendScalarsIso_hom_app_comp_counit
   -- Reuse the tensor instances when specializing the generic counit lemmas.
   have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
       [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((curriedTensor _).flip.obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
       (P Q S U : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
       GradedObject.HasTensor₄ObjExt P Q S U := inferInstance
   have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
