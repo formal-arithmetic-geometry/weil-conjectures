@@ -205,7 +205,7 @@ theorem finite_completion_factor_idempotent
     exact Localization.localRingHom_to_map q' q.asIdeal S'.val.toRingHom rfl y
   have hproj : φ.comp j =
       α.toRingHom.comp ((Pi.evalRingHom D q₀).comp E.toRingEquiv.toRingHom) := by
-    apply TensorProduct.ringHom_ext
+    apply TensorProduct.ringHom_ext (R := R) (A := Rph) (B := S')
     · apply RingHom.ext
       intro x
       change φ (TensorProduct.tmul R x 1) = α (E (TensorProduct.tmul R x 1) q₀)

@@ -116,7 +116,6 @@ private theorem extend_from_tensor
     ← hb (D b)]
   exact e.symm_apply_apply _
 
-set_option profiler true in
 /-- Every absolute derivation of a finite integral model extends to the base-changed
 formal fibre, compatibly with the model's inclusion into its fraction field.
 Source: Stacks Project, More on Algebra, Tag 07PR, finite-model and extension paragraphs;
