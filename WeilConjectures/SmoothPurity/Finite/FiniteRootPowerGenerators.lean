@@ -325,7 +325,6 @@ private theorem rootLocalSpan_local (d : ℕ) (U : X.ProEtᵒᵖ)
   rw [he]
   exact h V i hi
 
-set_option maxHeartbeats 1600000 in
 -- Comparing the two scalar-extension units unfolds several module wrappers.
 private theorem finiteTensor_generator (U : X.ProEtᵒᵖ)
     (a : rootScalar l E X n U)

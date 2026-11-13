@@ -447,7 +447,6 @@ noncomputable abbrev punctualObj (G : WeilSheaf k₀ l X) (hG : G.support.Finite
     ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X)) :=
   ⟨WeilSheaf.toComplex.obj G, isCurvePerverse_toComplex_obj G hG⟩
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- the reflection of isomorphisms by the inclusion of the heart is found slowly
 /-- **Punctual simple objects** (`prop-a1-curve-perverse-simples`): a Weil sheaf `G` of finite
 support placed in degree zero is simple in the curve perverse heart exactly when it is a simple

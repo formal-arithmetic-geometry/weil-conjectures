@@ -131,7 +131,6 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 attribute [local irreducible] scalar_adj comparisons
   integralComparisonSequenceTensorSection integralComparisonSequenceScalarUnit
 
-set_option maxHeartbeats 800000 in
 -- Check all three normalized maps on homogeneous tensor generators.
 /-- Equality before localization, hence for both directions and all quotient transitions.
 Source: blueprint integral operations; Stacks 03EL, 07A4

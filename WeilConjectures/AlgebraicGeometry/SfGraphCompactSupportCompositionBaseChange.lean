@@ -281,7 +281,6 @@ private noncomputable def elementaryInterchange
     Functor.isoWhiskerRight (Functor.associator _ _ _) _ ≪≫
     Functor.associator _ _ _
 
-set_option maxHeartbeats 800000 in
 -- Comparing the explicit interchange words requires their full component normalization.
 private theorem elementaryInterchange_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -316,7 +315,6 @@ private theorem elementaryInterchange_normalization
     CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   dsimp only [Functor.comp_map, Functor.comp_obj] at hn
   rw [reassoc_of% hn]
-  try simp only [CategoryTheory.Functor.map_comp, Category.assoc]
   simp only [← Category.assoc]
   exact (Category.comp_id _).trans (Category.comp_id _)
 
@@ -759,7 +757,6 @@ private theorem compactificationExactExchange_transport
   simp only [Functor.map_comp, Category.assoc]
   simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.comp_id]
-  try simp only [CategoryTheory.Functor.map_id, Category.comp_id]
   rfl
 
 private def compactificationPresentationBaseChange
@@ -839,8 +836,6 @@ private theorem paste_word
     reassoc_of% hn, ← reassoc_of% hg]
 
 -- The component calculation instantiates five derived exchange identities.
-set_option maxHeartbeats 800000 in
--- The explicit factorwise derived-category calculation exceeds the default heartbeat budget.
 private theorem diagramRawInterchange_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z X' Y' Z' : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
@@ -941,7 +936,6 @@ private theorem graphComparisonFromOpen_exchange
     (cf.isPullback_g_ofIsPullback sq).flip M
   apply (cancel_epi (D((b)^*[ModuleCat.{u + 1} A]).map
     ((etaleGraphOpenNormalization A cf).hom.app M))).1
-  try simp only [Category.assoc]
   rw [h]
   exact (reassoc_of% hn.symm) _
 

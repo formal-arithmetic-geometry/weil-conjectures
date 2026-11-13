@@ -126,7 +126,6 @@ variable [∀ S : Scheme.{u},
 
 set_option linter.style.haveILetI false in
 -- Inlining these instance proofs avoids costly let-bound instance comparisons.
-set_option maxHeartbeats 500000 in
 -- The composite pushforward objects require dependent sheaf type comparisons.
 /-- The left-derived lift equation followed by the localized underived composite
 counit equals the pasted underived expression. This calculation involves no

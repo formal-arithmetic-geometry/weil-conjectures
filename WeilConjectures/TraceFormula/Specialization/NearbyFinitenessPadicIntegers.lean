@@ -122,7 +122,6 @@ theorem boundedConstructible_nearbyCycles_affineSpace_extendScalars_residueField
   exact boundedConstructible_nearbyCycles_affineSpace_obj_of_finite (integersResidueField ℓ E.1)
     n hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ) (by exact_mod_proofs h)
 
-set_option maxHeartbeats 1000000 in
 -- the three extensions of scalars and the pushforward comparison at concrete models
 /-- **Deligne's finiteness theorem on `𝔸ⁿ_S` with `𝒪_E`-coefficients**: the nearby cycles of a
 bounded constructible `𝒪_E`-complex `K₀` on `𝔸ⁿ_S` are bounded constructible. They are derived

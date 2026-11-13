@@ -48,7 +48,7 @@ attribute [local instance 20000] SheafOfModules.hasSheafify_coefficientUniverse
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-private abbrev direct := proEtaleRingModuleDirectImage e.hom (ring X d) (ring X d)
+private abbrev direct := proEtaleRingModuleDirectImage e.asIso.hom (ring X d) (ring X d)
   (coefficientIso X d e)
 
 private theorem generator_natural (M : ModuleCat.{u + 1} A)

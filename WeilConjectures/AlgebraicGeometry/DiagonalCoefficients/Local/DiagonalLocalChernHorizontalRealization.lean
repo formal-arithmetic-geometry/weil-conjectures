@@ -61,7 +61,6 @@ private theorem unitEndpoint_iso_eq
   exact pullEndpoint_iso_unique c d rfl
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 400000 in
 -- Compare normalized endpoints through the derived and module-object presentations.
 private theorem unitEndpoint_derived_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

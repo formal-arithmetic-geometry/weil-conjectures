@@ -68,7 +68,7 @@ theorem integralComplexLocalization_colimit (X : Scheme.{u})
         Iso.refl_inv, Adjunction.mapHomologicalComplex, Functor.id_obj,
         scalarLocalizationUnitCocone, Functor.const_obj_obj, Cocone.precompose_obj_pt,
         Functor.mapCocone_pt, Cocone.precompose_obj_ι, NatTrans.comp_app,
-        Functor.mapCocone_ι_app, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
+        Functor.mapCocone_ι_app, pow_zero, End.one_asHom, CategoryTheory.Functor.map_id,
         Category.comp_id, integralModuleLocalizationCocone, d, σ, c, adj, cn]
       change 𝟙 (C.X n) ≫ (Mod.extendRestrictAdjunction φ).unit.app (C.X n) =
         (Mod.extendRestrictAdjunction φ).unit.app (C.X n)

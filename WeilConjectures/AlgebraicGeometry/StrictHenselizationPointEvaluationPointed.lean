@@ -20,7 +20,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option maxHeartbeats 800000 in
 -- The colimit comparison unfolds the full affine neighborhood diagram.
 /-- Evaluation recovers the given geometric point at every chosen neighbourhood.
 Source: Stacks Project, Tag 04HX. This is the colimit coprojection equation,

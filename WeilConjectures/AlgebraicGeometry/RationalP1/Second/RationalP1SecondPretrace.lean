@@ -72,7 +72,6 @@ private theorem assemble_pretrace
   simpa only [Functor.map_comp, Functor.mapIso_inv, Functor.map_inv,
     inv_whiskerLeft] using hi
 
-set_option maxHeartbeats 400000 in
 -- Keep native exchange comparisons abstract in the coefficient and object variables.
 private theorem generic_record_assembly
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -125,7 +124,6 @@ private theorem generic_record_assembly
   exact assemble_pretrace F R H a t b τ β s j c (unitTail Λ Y L e M hb hp)
     (ha := ha) (hb := hbIso) (hp := hpIso) (hx := hx) h hc hu
 
-set_option maxHeartbeats 400000 in
 -- Apply the abstract record assembly without unfolding the native derived choices.
 /-- Exchange/projection reordering before applying any scalar trace.
 The only inverses are the specified exchange and projection arrows. In particular,

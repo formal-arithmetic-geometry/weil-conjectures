@@ -25,7 +25,7 @@ variable {B B' C D : Type*} [Category B] [Category B'] [Category C] [Category D]
   {F : C ⥤ C} {G : D ⥤ D} {l : B ⥤ B'} {r : B' ⥤ B}
   {L : C ⥤ D} {R : D ⥤ C} (adjB : l ⊣ r) (adj : L ⊣ R)
   (eL : L ⋙ G ≅ F ⋙ L) (eR : R ⋙ F ≅ G ⋙ R)
-  (hmate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)).natTrans = eR.hom)
+  (hmate : (mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv)) = eR.hom)
   {PB : B ⥤ IsoAlgebra F} {PB' : B' ⥤ IsoAlgebra G}
 
 /-- The inverse mate of a descent square is computed on the underlying objects. -/
@@ -35,9 +35,9 @@ lemma traceInverseMate_forget {P₀ : B ⥤ C} {P₀' : B' ⥤ D}
     (hθ : ∀ b', (θ.hom.app b').hom.f = eqToHom (by rw [← hP]; rfl) ≫
       θ₀.hom.app b' ≫ eqToHom (by rw [← hP']; rfl)) (b : B) :
     (((mateEquiv adjB (mapOfNatIsoAdjunction adj eL eR hmate)).symm
-      (TwoSquare.mk _ _ _ _ θ.hom)).natTrans.app b).hom.f =
+      (TwoSquare.mk _ _ _ _ θ.hom)).app b).hom.f =
       eqToHom (by rw [← hP]; rfl) ≫
-        ((mateEquiv adjB adj).symm (TwoSquare.mk _ _ _ _ θ₀.hom)).natTrans.app b ≫
+        ((mateEquiv adjB adj).symm (TwoSquare.mk _ _ _ _ θ₀.hom)).app b ≫
         eqToHom (by rw [← hP']; rfl) := by
   subst hP hP'
   have hθ' : Functor.whiskerRight θ.hom (forget F) = θ₀.hom := by
@@ -64,7 +64,7 @@ base-change comparison. -/
 lemma openTraceInverseMate_eq :
     ((mateEquiv (openImmersionLowerShriekUpperStarAdjunction Λ j)
       (openImmersionLowerShriekUpperStarAdjunction Λ (Scheme.Hom.geometricFiberMap j h))).symm
-      (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ j h).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (geometricFiberUpperStarComparison Λ j h).hom)) =
       (openImmersionLowerShriekUpperStarBaseChangeIso Λ
         (Scheme.Hom.isPullback_geometricFiberMap j h)).inv := by
   rw [purityOpenImmersionLowerShriekUpperStarBaseChangeIso_inv,

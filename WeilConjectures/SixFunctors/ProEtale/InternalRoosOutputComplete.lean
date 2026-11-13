@@ -51,7 +51,7 @@ theorem isDerivedComplete_roos
   let e := eR ≪≫ cP.symm
   obtain ⟨cR, hcR⟩ := internal_quotient_principal_cone_comparison l E X d hd R hR
   let v := DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-    (DerivedNakayama.scalarOnComplex l E X d R))
+    (End.of (DerivedNakayama.scalarOnComplex l E X d R)))
   obtain ⟨r, hr⟩ :=
     (internal_principal_cone_hom_reflection l E X d hd R P).surjective e.hom
   change v ≫ r = e.hom at hr

@@ -155,7 +155,6 @@ universe u
 open AlgebraicGeometry
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Elaborating sheaf pullback monoidal structures requires this local budget.
 private theorem pointComp_monoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     NatTrans.IsMonoidal (upperStarFromPointModComp Λ f).hom := by

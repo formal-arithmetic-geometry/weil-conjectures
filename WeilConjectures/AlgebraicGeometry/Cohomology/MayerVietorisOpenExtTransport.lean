@@ -80,10 +80,10 @@ theorem H.openFreeExtTransport (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.O
         Ext (H.openFreeSheaf W) F n)
       (t' : ∀ n, Ext (GW.obj (H.openFreeSheaf (⊤ : W.toScheme.Opens))) NW n ≃+
         Ext (G.obj (H.openFreeSheaf W)) N n),
-      (∀ n a x, t n (x.comp (Ext.mk₀ (ρW a)) (add_zero n)) =
-        (t n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧
-      (∀ n a x, t' n (x.comp (Ext.mk₀ (τW a)) (add_zero n)) =
-        (t' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧
+      (∀ n a x, t n (x.comp (Ext.mk₀ (ρW a).asHom) (add_zero n)) =
+        (t n x).comp (Ext.mk₀ (ρ a).asHom) (add_zero n)) ∧
+      (∀ n a x, t' n (x.comp (Ext.mk₀ (τW a).asHom) (add_zero n)) =
+        (t' n x).comp (Ext.mk₀ (τ a).asHom) (add_zero n)) ∧
       (∀ n x, t' n ((x.mapExactFunctor GW).comp (Ext.mk₀ φW) (add_zero n)) =
         ((t n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by
   classical

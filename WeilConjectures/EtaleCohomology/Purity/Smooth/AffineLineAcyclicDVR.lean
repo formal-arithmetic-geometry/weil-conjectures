@@ -73,12 +73,12 @@ lemma CategoryTheory.isIso_unit_app_obj_of_isIso_mateEquiv_app {C D C' D' : Type
     [Category* D] [Category* C'] [Category* D'] {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : C' ⥤ D'}
     {R₂ : D' ⥤ C'} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) {G : C ⥤ C'} {G' : C' ⥤ C} {H : D ⥤ D'}
     {H' : D' ⥤ D} (adjG : G ⊣ G') (adjH : H ⊣ H') (α : G ⋙ L₂ ≅ L₁ ⋙ H) (d : D)
-    (hβ : IsIso ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans.app d))
+    (hβ : IsIso ((mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).app d))
     (hH : IsIso (adjH.unit.app d)) :
     IsIso (adjG.unit.app (R₁.obj d)) := by
   rw [adjG.isIso_unit_app_iff_bijective_map]
   intro c
-  let β := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).natTrans.app d
+  let β := (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α.hom)).app d
   let e : (G.obj c ⟶ G.obj (R₁.obj d)) ≃ (H.obj (L₁.obj c) ⟶ H.obj d) :=
     ((Iso.refl _).homCongr (asIso β)).trans
       ((adj₂.homEquiv _ _).symm.trans ((α.app c).homCongr (Iso.refl _)))

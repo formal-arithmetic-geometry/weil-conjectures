@@ -50,8 +50,8 @@ abbrev componentMap : (V ↘ Spec (CommRingCat.of k')).geometricFiber ⟶
 
 include hr in
 lemma geometricGaloisFrobenius_hom_comp_componentMap :
-    (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.hom ≫ componentMap hc =
-      componentMap hc ≫ ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom :=
+    (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso.hom ≫ componentMap hc =
+      componentMap hc ≫ ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso.hom :=
   have : Algebra.IsAlgebraic k₀ k' := Algebra.IsAlgebraic.of_finite k₀ k'
   Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberComponentMap _ _ hc r hr
 
@@ -61,12 +61,12 @@ def componentRestrictionCommIso :
     (componentMap hc)^*ᵃ[l] ⋙ WeilSheaf.frobeniusPullback k' l V ≅
       frobeniusPowPullback k₀ l V r ⋙ (componentMap hc)^*ᵃ[l] :=
   Functor.isoWhiskerLeft _ (adicUpperStarIsoLowerStarInv l
-      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius).symm ≪≫
+      (V ↘ Spec (CommRingCat.of k')).geometricGaloisFrobenius.asIso).symm ≪≫
     (adicUpperStarComp l _ _).symm ≪≫
     adicUpperStarCongr l (geometricGaloisFrobenius_hom_comp_componentMap hc r hr) ≪≫
     adicUpperStarComp l _ _ ≪≫
     Functor.isoWhiskerRight (adicUpperStarIsoLowerStarInv l
-      ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r)) _
+      ((V ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).asIso) _
 
 /-- **Restriction to a component**: a pro-étale Weil sheaf `(K, φ)` on `V` relative to `k₀`
 gives the pro-étale Weil sheaf `(θ^* K, θ^* φ_r)` on `V` relative to `k'`. -/

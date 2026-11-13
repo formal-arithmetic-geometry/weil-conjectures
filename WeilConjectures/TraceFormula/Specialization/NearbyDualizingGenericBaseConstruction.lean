@@ -74,7 +74,6 @@ noncomputable def dualizingMap (h : N.IsTraitModelOfGenericBase Y ι q g) :
   dualizingExchange ℓ (traitPointSpecializationUnit (traitGenericPointToSpec k' ≫ ι) ℓ)
     (h.compactSupportExchange ℓ)
 
-set_option maxHeartbeats 1600000 in
 -- matching the objects `ω_Y` and `Ra^! ℚ̄_ℓ` of the two sides unfolds the monoidal units
 /-- **The dualizing map of a proper model over a generic base is compatible with the traces**:
 `tr_{Y'} ∘ Ra'_*(θ_N) ∘ χ_a(ω_Y) = σ⁻¹ ∘ Ψ_S(tr_Y)` for `ε₀ = (Spec Ω ⟶ η ⟶ Spec F)`, `q`

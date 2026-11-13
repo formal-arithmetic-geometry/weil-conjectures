@@ -188,7 +188,6 @@ lemma valuation_eq_exp_neg_ord (hz : z ∉ Set.range j.base) {f : C.functionFiel
     HeightOneSpectrum.valuation_of_algebraMap, htv, ← WithZero.exp_zsmul, smul_eq_mul,
     mul_neg_one]
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [ConnectedSpace U] in
 /-- **An `N`-th root fixed by inertia.** If an `N`-th root in `Ω` of a nonzero rational function
@@ -209,7 +208,6 @@ theorem dvd_ord_of_forall_inertia (hz : z ∉ Set.range j.base)
   exact ⟨-b, by linarith⟩
 
 -- the localization instances at the stalk are slow
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsLocallyNoetherian C] in
 /-- **Inertia fixes `N`-th roots of units.** The inertia group of a point over the boundary point
@@ -232,7 +230,7 @@ theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [
   let ι : F →+* Ω := algebraMap F Ω
   -- a primitive `N`-th root of unity of `k`, in `Γ(C, W)` and in `Ω`
   have : NeZero (N : k) := ⟨hN⟩
-  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot k N
+  obtain ⟨ζk, hζk⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot k N
   let κ : k →+* F := (C.presheaf.germ ⊤ (genericPoint C) trivial).hom.comp
     (p.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
   let lR : k →+* Γ(C, c.W) := (C.presheaf.map (homOfLE (le_top : c.W ≤ ⊤)).op).hom.comp
@@ -282,7 +280,6 @@ theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [
         ← map_mul (algebraMap _ F), hpow, ← mul_assoc, ← hrs, IsLocalization.mk'_spec]
       simp only [map_mul, map_pow])
 
-set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 omit [ConnectedSpace U] in
 /-- **`N`-th roots of functions of order divisible by `N`.** If `N` is invertible in `k` and

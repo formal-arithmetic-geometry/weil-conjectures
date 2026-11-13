@@ -105,7 +105,7 @@ lemma leftDerivedUpperStar_map_counit_derivedOpenImmersionLowerShriek
     (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j')
     (TwoSquare.mk _ _ _ _ (derivedOpenImmersionLowerShriekBaseChangeIso _ hsq).hom) T
   rw [mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso] at h
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans] at h
+  dsimp only [TwoSquare.mk] at h
   rw [h, Iso.inv_hom_id_app_assoc]
 
 end BaseChange
@@ -218,7 +218,6 @@ lemma leftDerivedUpperStar_map_clopenTransfer_self
   rw [Adjunction.unit_naturality_assoc,
     Adjunction.right_triangle_components, Category.comp_id]
 
-set_option maxHeartbeats 800000 in
 -- the base change of the unit of `Lσ^* ⊣ Dσ_!` unfolds large derived functors
 /-- **`clopenTransfer` commutes with base change**: for a cartesian square
 `k ≫ σ = σ' ≫ h` of open and closed immersions `σ`, `σ'`, `Lh^*` of `clopenTransfer ψ` is

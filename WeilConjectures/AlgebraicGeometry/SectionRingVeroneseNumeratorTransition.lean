@@ -115,7 +115,6 @@ private theorem transition_unitor {X : Scheme.{u}} {M : X.Modules}
     whiskerLeft_app_tmulSection, leftUnitor_hom_app_tmulSection,
     leftUnitor_hom_app_tmulSection, one_smul, one_smul]
 
-set_option maxHeartbeats 400000 in
 -- Comparing the degree-one tensor regroupings needs additional definitional reductions.
 /-- Transporting a tensor-power transition to the section ring multiplies the numerator
 by the corresponding power of the homogeneous section.

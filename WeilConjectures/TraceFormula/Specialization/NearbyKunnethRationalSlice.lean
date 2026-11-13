@@ -120,7 +120,6 @@ theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
     A₀.obj B₀.obj (min a a') c).1 (Functor.map_isIso _ _)
   exact isIso_map_kunnethMap_of_iso _ _ φ₁ φ₂ eA.symm eB.symm key
 
-set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the derived categories of module objects are large terms
 /-- **Gabber's Künneth formula for proper models with `ℚ̄_ℓ`-coefficients from the `𝒪_E` ones**
 (blueprint `sk-prop-tf-nearby-external-kunneth`): if Gabber's Künneth formula with

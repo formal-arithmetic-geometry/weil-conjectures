@@ -104,7 +104,6 @@ lemma map_leftDerivedUpperStarIso_hom_app_comp_counit
   rw [Functor.comp_map, ← Functor.map_comp, ← Functor.map_comp]
   exact congrArg _ (Functor.leftDerivedFunctorCompMapDerivedCategoryIso_hom_app_Qh _ _ K)
 
-set_option maxHeartbeats 1000000 in
 -- the instances of the general lemmas are found for each of the categories of module objects
 /-- **The derived (Pull) isomorphism through the counits**: for every coefficient change `a` and
 every complex `K`, through the counits of the left derived functors,

@@ -239,7 +239,6 @@ private theorem podReindexingStrictNativeShift {X Y : Scheme.{u}} (g : X ⟶ Y) 
   simp only [Category.assoc]
   exact hs
 
-set_option maxHeartbeats 800000 in
 -- The calculation pastes several strict and localized shift squares.
 /-- The normalized whole-tower limit reindexing commutes with integer shifts.
 Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941 and 011G

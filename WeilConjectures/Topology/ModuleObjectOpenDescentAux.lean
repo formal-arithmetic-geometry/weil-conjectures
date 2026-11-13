@@ -23,7 +23,6 @@ open CategoryTheory TopologicalSpace Opposite
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
 -- The dependent Over-site naturality and scalar restrictions require extra elaboration.
 /-- Descent of module objects when the diagonal transition maps are identities.
 The proof constructs compatible families on each open and glues them componentwise;

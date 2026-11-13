@@ -94,7 +94,7 @@ private theorem sequenceScalarMate_isIso
       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hR.symm) ≅
       SheafOfModules.pushforward (F := Prod.sectR n C) (eqToHom hS.symm) ⋙
         SheafOfModules.restrictScalars ψ) :
-    IsIso ((mateEquiv adj adjn).symm (TwoSquare.mk _ _ _ _ δ.hom)).natTrans := by
+    IsIso ((mateEquiv adj adjn).symm (TwoSquare.mk _ _ _ _ δ.hom)) := by
   let : ((𝟭 ℕ).prod (𝟭 C)).IsContinuous
       (WeilConjectures.coefficientSequenceTopology J)
       (WeilConjectures.coefficientSequenceTopology J) := by
@@ -253,7 +253,7 @@ theorem semilinearScalarEvaluationTranspose
   let δD := restrictionEvaluation.{c, v, max c v r} J B τ F σ α hα
   let a (n : ℕ) : G n ⋙ (L n).model.E ⟶ S.model.E ⋙ H n :=
     ((mateEquiv S.ordinaryAdjunction (L n).ordinaryAdjunction).symm
-      (TwoSquare.mk _ _ _ _ (δ n).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (δ n).hom))
   have ha (n : ℕ) : IsIso (a n) := by
     exact sequenceScalarMate_isIso.{c, v, r} J
       (ring.{c, v, max c v r} (coefficientSequenceTopology J)
@@ -271,7 +271,7 @@ theorem semilinearScalarEvaluationTranspose
   let aD (n : ℕ) : e.{c, v, max c v r} J B τ n ⋙ (L n).T ⟶
       S.T ⋙ e.{c, v, max c v r} J F σ n :=
     ((mateEquiv S.adjunction (L n).adjunction).symm
-      (TwoSquare.mk _ _ _ _ (δD n).hom)).natTrans
+      (TwoSquare.mk _ _ _ _ (δD n).hom))
   have hrep (n : ℕ) (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ)
       (hP : CochainComplex.IsKFlatIndependentCoefficients
         (R := systemRing.{c, v, max c v r} J B τ) P)

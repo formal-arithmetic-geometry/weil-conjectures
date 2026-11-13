@@ -174,7 +174,6 @@ private lemma inverse_square {C : Type*} [Category C] {X Y Z T : C}
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-set_option maxHeartbeats 2000000 in
 -- Identify the canonical coefficient functors with the generic derived-functor models.
 private lemma coefficientLimitModel_shift
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -318,7 +317,6 @@ private lemma coefficientRoosTriangle_shift
     rw [← Category.assoc er.inv, he']
     simp only [Category.assoc]
 
-set_option maxHeartbeats 2000000 in
 -- Elaborating the coefficient sheaf and tower instances unfolds their universe models.
 /-- The canonical coefficient limit admits Roos triangles on every supplied
 K-injective replacement, with the canonical replacement-model shift equation,

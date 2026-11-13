@@ -197,7 +197,6 @@ section UnitComparison
 attribute [-instance] scalar_unit_comm_sym
 attribute [local instance 20001] ProEtale.sheafSymmetricCategory
 
-set_option maxHeartbeats 2000000 in
 -- Compare the two native unit structures with their dependent tensor instances.
 attribute [-instance] internalMonoidal internalTensorCommShift in
 private theorem native_unit_comparison
@@ -211,7 +210,6 @@ private theorem native_unit_comparison
 
 attribute [local instance 50000] scalar_unit_comm_braided
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
 private theorem native_single_unit_inv
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -222,7 +220,6 @@ private theorem native_single_unit_inv
   change ((𝟙 _ ≫ (DerivedCategory.Qh (C := Modules Λ X)).map (𝟙 _)) ≫ 𝟙 _) ≫ 𝟙 _ = 𝟙 _
   simp
 
-set_option maxHeartbeats 2000000 in
 -- Normalize the native module-object tensor instances and derived-functor comparisons.
 private theorem native_single_unit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -305,7 +302,6 @@ private theorem scalar_unit_pull_adjunct
 
 end UnitComparison
 
-set_option maxHeartbeats 2000000 in
 -- The four module-object categories carry large dependent instance arguments.
 private theorem scalar_unit_pull_naturality_aux
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}

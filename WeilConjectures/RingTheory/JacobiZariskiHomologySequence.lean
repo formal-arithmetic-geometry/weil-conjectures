@@ -30,7 +30,6 @@ open TensorProduct KaehlerDifferential CategoryTheory CategoryTheory.Limits
 namespace Algebra
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Transporting five module universes involves several tensor and quotient equivalences.
 private theorem lifted_kernel.{b, c, n₁, n₀, h}
     (B : Type b) (C : Type c) (N₁ : Type n₁) (N₀ : Type n₀) (H₀ : Type h)

@@ -49,8 +49,8 @@ identifications `R₁ ≅ 𝟭` and `R₂ ≅ 𝟭`. -/
 lemma mateEquiv_app_eq_of_iso_id {C D : Type*} [Category* C] [Category* D] {L₁ R₁ : C ⥤ C}
     {L₂ R₂ : D ⥤ D} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ 𝟭 C) (e₂ : L₂ ≅ 𝟭 D)
     (G : C ⥤ D) (α : TwoSquare G L₁ L₂ G)
-    (hα : ∀ X, α.natTrans.app X = e₂.hom.app (G.obj X) ≫ G.map (e₁.inv.app X)) (X : C) :
-    (mateEquiv adj₁ adj₂ α).natTrans.app X =
+    (hα : ∀ X, α.app X = e₂.hom.app (G.obj X) ≫ G.map (e₁.inv.app X)) (X : C) :
+    (mateEquiv adj₁ adj₂ α).app X =
       G.map ((conjugateIsoEquiv adj₁ Adjunction.id e₁.symm).hom.app X) ≫
         (conjugateIsoEquiv adj₂ Adjunction.id e₂.symm).inv.app (G.obj X) := by
   have h := ((conjugateIsoEquiv adj₂ Adjunction.id e₂.symm).inv.naturality

@@ -478,12 +478,12 @@ private theorem inverseMate_mate
     {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C}
     {L₂ : E ⥤ F} {R₂ : F ⥤ E} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (β : TwoSquare R₁ H G R₂)
-    [IsIso (((mateEquiv adj₁ adj₂).symm β).natTrans)] :
+    [IsIso (((mateEquiv adj₁ adj₂).symm β))] :
     (mateEquiv adj₁ adj₂
-      (asIso (((mateEquiv adj₁ adj₂).symm β).natTrans)).symm.inv).natTrans =
-        β.natTrans := by
-  change ((mateEquiv adj₁ adj₂) ((mateEquiv adj₁ adj₂).symm β)).natTrans = _
-  exact congrArg (fun s : TwoSquare R₁ H G R₂ ↦ s.natTrans)
+      (asIso (((mateEquiv adj₁ adj₂).symm β))).symm.inv) =
+        β := by
+  change ((mateEquiv adj₁ adj₂) ((mateEquiv adj₁ adj₂).symm β)) = _
+  exact congrArg (fun s : TwoSquare R₁ H G R₂ ↦ s)
     ((mateEquiv adj₁ adj₂).apply_symm_apply β)
 
 /-- The actual underived direct image and ringed module pullback are identified.
@@ -507,7 +507,7 @@ theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
           encoding l Y ⋙ CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f,
       (mateEquiv (adicUpperStarLowerStarAdjunction l f)
         (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)
-        q.inv).natTrans = p.hom ∧
+        q.inv) = p.hom ∧
       PreservesFiniteLimits (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f) ∧
       PreservesFiniteColimits (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) f) ∧
       (condensedPushforwardHom (Profinite.padicAlgClRingObj l) f ≫
@@ -517,7 +517,7 @@ theorem encoding_ordinary_operations (l : ℕ) [Fact l.Prime]
   let p := nativePushforwardComparison l f
   let α := ((mateEquiv (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f)).symm
-      p.hom).natTrans
+      p.hom)
   have : IsIso α := isIso_inverseMate_of_equivalences
     (adicUpperStarLowerStarAdjunction l f)
     (CondensedRing.upperStarLowerStarAdjunction (Profinite.padicAlgClRingObj l) f) p

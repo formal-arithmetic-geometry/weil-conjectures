@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 
 module
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
 
@@ -210,7 +211,6 @@ theorem exists_section_map_with_counit_homotopy {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Comparing the composed section functors unfolds the concrete sheaf categories.
 /-- Construct one section map carrying both comparison homotopies, uniformly in the
 compatible section isomorphism a. The map q is chosen before a is given.

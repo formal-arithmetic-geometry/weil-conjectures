@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteTorDimensionOver
 public import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.PerfectRelativeTensorLocallyBounded
 import WeilConjectures.Algebra.Homology.KFlatResolution
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Relative finite Tor dimension of a perfect complex
 

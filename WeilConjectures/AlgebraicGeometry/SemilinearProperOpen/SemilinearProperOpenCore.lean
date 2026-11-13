@@ -612,7 +612,7 @@ private theorem derived_constant_square_comp (e : L ⋙ G ≅ F ⋙ l) :
         ((Functor.whiskeringRight ℕᵒᵖ E D).obj l).mapDerivedCategory ≫
       ((TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e.symm).hom).hComp
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
-          (Functor.compConstIso ℕᵒᵖ l).symm).hom)).natTrans =
+          (Functor.compConstIso ℕᵒᵖ l).symm).hom)) =
     (Functor.mapDerivedCategorySquareIso (constant_diagram_square L G F l e).symm).hom ≫
       Functor.whiskerLeft L.mapDerivedCategory
         (Functor.mapDerivedCategoryNatIso (Iso.refl (G ⋙ Functor.const ℕᵒᵖ)) ≪≫
@@ -634,7 +634,7 @@ private theorem derived_constant_square_comp (e : L ⋙ G ≅ F ⋙ l) :
         Category.comp_id]
       erw [Category.id_comp, Category.id_comp])
   simpa only [Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-    Iso.symm_hom, TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans,
+    Iso.symm_hom, TwoSquare.hComp, TwoSquare.mk,
     Category.id_comp, Category.assoc]
     using congrArg Iso.hom h
 
@@ -644,7 +644,7 @@ private theorem derived_constant_square_inverse (e : L ⋙ G ≅ F ⋙ l) :
           (Functor.mapDerivedCategoryCompIso G (Functor.const ℕᵒᵖ)).symm).hom ≫
       ((TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).hom).vComp
         (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso
-          (Functor.compConstIso ℕᵒᵖ l)).hom)).natTrans =
+          (Functor.compConstIso ℕᵒᵖ l)).hom)) =
     (Functor.mapDerivedCategorySquareIso (constant_diagram_square L G F l e)).hom ≫
       Functor.whiskerRight (Functor.mapDerivedCategoryNatIso (Iso.refl (F ⋙ Functor.const ℕᵒᵖ)) ≪≫
           (Functor.mapDerivedCategoryCompIso F (Functor.const ℕᵒᵖ)).symm).hom
@@ -669,7 +669,7 @@ private theorem derived_constant_square_inverse (e : L ⋙ G ≅ F ⋙ l) :
       erw [Category.comp_id]) K
   simpa only [Iso.trans_hom, NatTrans.comp_app, NatTrans.id_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans,
+    TwoSquare.vComp, TwoSquare.mk,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc] using h.symm
 

@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Pullbacks
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExtOneExtensionClassification
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleExtContinuity

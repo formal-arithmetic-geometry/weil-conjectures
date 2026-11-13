@@ -144,7 +144,6 @@ universe c d vc vd r w w'
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.NativeRestriction
 
-set_option maxHeartbeats 1500000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- An exact additive module equivalence with a natural Hom-complex comparison
 transports the actual derived internal Hom bifunctors naturally.

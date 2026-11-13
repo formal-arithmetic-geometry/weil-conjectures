@@ -110,7 +110,6 @@ private def structuralRefl (g : MVarId) : MetaM Unit := do
     throwError "structural reflexivity expects an equality, got {← g.getType}"
   structuralCast g (← mkEqRefl lhs)
 
-set_option maxHeartbeats 600000 in
 -- Comparing normalized total tensors traverses several monoidal module structures.
 private lemma normalized_beta_computes
     {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
@@ -131,7 +130,6 @@ private lemma normalized_beta_computes
       (fun M ↦ (betaOrdinary a Z).app M) (fun M ↦ betaOrdinary_hom a Z M)
       ((betaTotalNatIso a S t Z).app C) (fun n ↦ betaTotalIso_summand a S t Z C n)
 
-set_option maxHeartbeats 600000 in
 -- Unpack coefficient data before comparing the specified point isomorphisms.
 private lemma point_comp_underlying (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : PointModules Λ) :
@@ -153,7 +151,6 @@ private lemma idSquare {A B : Type*} [Category A] [Category B]
     (F : A ⥤ B) {M : A} {N : B} (a : F.obj M ⟶ N) :
     F.map (𝟙 M) ≫ a = a ≫ 𝟙 N := by simp
 
-set_option maxHeartbeats 600000 in
 -- Compare the specified point and regular-module coefficient identifications.
 private lemma point_coefficient_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -176,7 +173,6 @@ private lemma point_coefficient_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ
   run_tac withMainContext do
     structuralCast (← getMainGoal) (← getLocalDeclFromUserName `h0).toExpr
 
-set_option maxHeartbeats 600000 in
 -- Restriction of the ordinary extension square agrees with balanced tensor pullback.
 private lemma ordinary_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -204,14 +200,12 @@ private lemma ordinary_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
   simpa only [betaMap, betaCoefficient] using
     finiteFreeScalar_ordinaryTensor_pullback Λ.X Λ'.X a.hom.hom f M
 
-set_option maxHeartbeats 600000 in
 -- The explicit component formula avoids conversion through the full complex isomorphism.
 private lemma pointComplexComp_hom_f (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) (C : CochainComplex (PointModules Λ) ℤ) (n : ℤ) :
     (pointComplexComp Λ f C).hom.f n = (pointModuleComp Λ f).hom.app (C.X n) := by
   run_tac withMainContext do structuralRefl (← getMainGoal)
 
-set_option maxHeartbeats 600000 in
 -- Establish the concrete module naturality formula before substituting chosen complex terms.
 private lemma pointModuleComp_naturality (Λ : ScalarSixRing.{u})
     {X Y : Scheme.{u}} (f : X ⟶ Y) {M N : PointModules Λ} (g : M ⟶ N) :
@@ -232,7 +226,6 @@ private lemma mapped_coefficient_square
     F.map (g ≫ c) ≫ r = eM ≫ (gX ≫ cX) := by
   rw [Functor.map_comp, Category.assoc, hC, ← Category.assoc, hN, Category.assoc]
 
-set_option maxHeartbeats 800000 in
 -- Compute naturality before substituting the single-complex component.
 private lemma point_ordinary_coefficient {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : PointModules Λ)
@@ -353,7 +346,6 @@ private lemma total_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     exact ordinary_tensor_pull a f (C.X n)
   · exact point_target_zero_pull a S t f
 
-set_option maxHeartbeats 600000 in
 -- Check naturality degreewise using the explicit point-comparison component.
 private lemma point_augmentation_pull (Λ : ScalarSixRing.{u})
     (S : ShortComplex (PointModules Λ)) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -407,7 +399,6 @@ private lemma augmentTensorSquare
   simp only [Category.assoc]
   simp only [tensorHom_comp_tensorHom_assoc, Category.id_comp, ha]
 
-set_option maxHeartbeats 800000 in
 -- Insert the natural augmentation into the ordinary total-tensor square.
 private lemma augmented_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))
@@ -449,7 +440,6 @@ private lemma augmented_tensor_pull {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ'
   · exact complexTensorNaturality F (augmentation Λ S Y) C
   · exact point_augmentation_pull Λ S f
 
-set_option maxHeartbeats 800000 in
 -- Compute the scalar mate before using any K-flat invertibility.
 private lemma restricted_scalar_pull_computes
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')

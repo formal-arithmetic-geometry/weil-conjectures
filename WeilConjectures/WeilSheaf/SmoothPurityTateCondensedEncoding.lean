@@ -40,16 +40,16 @@ theorem purity_nonempty_tateRootPair_iso_toCondensed_constantTwist (d : ℕ) :
           (ProEtaleWeilSheaf.adicConstant k₀ ℓ X))) := by
   obtain ⟨e₁⟩ := purity_nonempty_tateTwistOnePair_iso_unitScalar k₀ ℓ X
   obtain ⟨ê, hê⟩ := exists_iso_tateTwistNat_of_one ℓ
-    (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+    (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom
     (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure _ e₁ d
   refine ⟨eqToIso (CondensedRing.purityTateRootPair_eq ℓ (X ↘ Spec (.of k₀)) d) ≪≫
     ?_ ≪≫ (toCondensedObjConstantTwistAdicConstantIso k₀ ℓ X _).symm⟩
   exact IsoAlgebra.isoMkOfConj
     (CondensedRing.upperStarIsoLowerStarInv (Profinite.padicAlgClRingObj ℓ)
-      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius)
-    (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom
+      (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso)
+    (upperStarTateTwistNatIso ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom
       (X ↘ Spec (.of k₀)).geometricFiberToAlgebraicClosure d)
-    (tateUnitDatum ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.hom)
+    (tateUnitDatum ℓ (X ↘ Spec (.of k₀)).geometricGaloisFrobenius.asIso.hom)
     (IsoAlgebra.scalarPow (regularSmulIso k₀ ℓ X (cyclotomicUnit k₀ ℓ)) d).hom
     (adicConstantCondensedStr k₀ ℓ X) (regularSmulIso k₀ ℓ X (cyclotomicUnit k₀ ℓ ^ d))
     ê hê (purity_adicConstantCondensedStr_hom k₀ ℓ X)

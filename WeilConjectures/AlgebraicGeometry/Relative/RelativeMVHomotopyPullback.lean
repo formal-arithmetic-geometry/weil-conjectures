@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-! Generic exact rows and homotopy-pullback projections. -/
 
@@ -283,7 +286,6 @@ private lemma map_cocone_span_eq (F : E ⥤ C) [F.Additive]
   simp only [Functor.map_add, Functor.map_comp, Functor.map_neg,
     Preadditive.comp_add, Preadditive.comp_neg, add_neg_eq_zero] at hz
   simp only [Functor.map_comp, Category.assoc]
-  try simp only [Category.assoc] at hz
   rw [biprod.desc_eq]
   exact hz
 

@@ -9,6 +9,7 @@ module
 public import WeilConjectures.Algebra.Homology.MixedTotalTensor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution

@@ -93,13 +93,13 @@ theorem HasEtaleReductionLowerShriekIso.comp {f : X ⟶ Y} {g : Y ⟶ S}
   let sqg := TwoSquare.mk _ _ _ _ γg.inv
   let c := boundedConstructibleLowerShriekComp_padicIntegers ℓ E f g
   let sq := ((sqf.vComp sqg).whiskerLeft c.inv).whiskerRight e'.hom
-  have : IsIso sq.natTrans := by
-    have : IsIso sqf.natTrans := inferInstanceAs (IsIso γf.inv)
-    have : IsIso sqg.natTrans := inferInstanceAs (IsIso γg.inv)
+  have : IsIso sq := by
+    have : IsIso sqf := inferInstanceAs (IsIso γf.inv)
+    have : IsIso sqg := inferInstanceAs (IsIso γg.inv)
     have := sqf.isIso_vComp sqg
     have := (sqf.vComp sqg).isIso_whiskerLeft c.inv
     exact ((sqf.vComp sqg).whiskerLeft c.inv).isIso_whiskerRight e'.hom
-  refine ⟨(asIso sq.natTrans).symm, ?_⟩
+  refine ⟨(asIso sq).symm, ?_⟩
   exact isIso_mateEquiv_vComp_whiskerLeft_whiskerRight
     (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E f)
     (Etale.rightDerivedUpperShriekAdjunction _ f.left)

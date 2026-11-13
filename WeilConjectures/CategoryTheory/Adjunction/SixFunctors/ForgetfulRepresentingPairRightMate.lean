@@ -37,7 +37,7 @@ as Step 2 of the node (Old proof Steps 7–8).
 (blueprint: lem-sf-forgetful-representing-pair-right-mate) -/
 def forgetfulRightMate (adjW : FW ⊣ GW) (adj : F ⊣ G)
     (c : FW ⋙ UY ≅ UX ⋙ F) : GW ⋙ UX ⟶ UY ⋙ G :=
-  (mateEquiv adjW adj (TwoSquare.mk UX FW F UY c.inv)).natTrans
+  (mateEquiv adjW adj (TwoSquare.mk UX FW F UY c.inv))
 
 /-- Objectwise representing lifts identify the fixed right mate with the forgotten
 representing isomorphisms; it is invertible, independent of the lifts, and identifies

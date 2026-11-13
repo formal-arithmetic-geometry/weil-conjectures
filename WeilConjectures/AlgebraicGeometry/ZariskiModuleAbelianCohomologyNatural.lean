@@ -17,6 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Natural comparison of module and abelian cohomology
 
@@ -57,7 +58,6 @@ private theorem resolutionForget_naturality
       ((HomologicalComplex.shortComplexFunctor _ _ q).map
         ((G.mapHomologicalComplex _).map φ)) V)
 
-set_option maxHeartbeats 400000 in
 -- Comparing the two section complexes requires unfolding module and abelian evaluations.
 set_option backward.isDefEq.respectTransparency false in
 /-- Module cohomology and abelian sheaf cohomology are naturally isomorphic.

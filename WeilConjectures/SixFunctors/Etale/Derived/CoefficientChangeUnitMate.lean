@@ -41,7 +41,7 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
 /-- The components of the mate of a square. -/
 lemma mateEquiv_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (α : TwoSquare G L₁ L₂ H) (d : D) :
     (mateEquiv adj₁ adj₂ α).app d =
-      adj₂.unit.app (G.obj (R₁.obj d)) ≫ R₂.map (α.natTrans.app (R₁.obj d)) ≫
+      adj₂.unit.app (G.obj (R₁.obj d)) ≫ R₂.map (α.app (R₁.obj d)) ≫
         R₂.map (H.map (adj₁.counit.app d)) := by
   simp [mateEquiv_apply]
 

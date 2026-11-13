@@ -86,7 +86,6 @@ lemma IsTraitModel.isAffineHom_j {M : NearbyCyclesModel X X'.left} (hM : M.IsTra
 
 variable {ℓ : ℕ} [Fact ℓ.Prime]
 
-set_option maxHeartbeats 400000 in
 -- the derived categories of module objects are slow to elaborate
 /-- **Proper base change along the special fibre at a generic direct image** (the step
 `ī^* Rt̄_* ≃ Rt_{s*} ī'^*` of the proof of blueprint `det-sp-nearby-cycles-exchanges` (2); SGA 7

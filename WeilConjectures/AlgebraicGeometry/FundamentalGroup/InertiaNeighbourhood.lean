@@ -129,7 +129,7 @@ fixed by the inertia group of `Q`. Then there are an étale `C`-scheme `V`, a li
 theorem exists_etale_lift_of_forall_inertia_of_isIntegral (Z : U.FiniteEtale)
     [IsIntegral Z.obj.left] (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z)
     (ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     ∃ (V : C.Etale) (ℓ : Spec (.of (Localization.AtPrime Q)) ⟶ V.left)
       (hℓ : ℓ ≫ V.hom = specAtPrime hW Q) (g : Limits.pullback V.hom j ⟶ Z.obj.left),
       g ≫ Z.obj.hom = pullback.snd _ _ ∧
@@ -327,7 +327,7 @@ theorem exists_etale_lift_of_forall_inertia [ConnectedSpace U]
     (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
     (Z : U.FiniteEtale) (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z)
     (ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Z t = t) :
     ∃ (V : C.Etale) (ℓ : Spec (.of (Localization.AtPrime Q)) ⟶ V.left)
       (hℓ : ℓ ≫ V.hom = specAtPrime hW Q) (g : Limits.pullback V.hom j ⟶ Z.obj.left),
       g ≫ Z.obj.hom = pullback.snd _ _ ∧
@@ -342,12 +342,12 @@ theorem exists_etale_lift_of_forall_inertia [ConnectedSpace U]
     (ConcreteCategory.mono_iff_injective_of_preservesPullback _).1
       inferInstance
   have hy : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
-      (galoisToAut (genericPointLift j) σ).hom.app Y y = y := by
+      (galoisToAut (genericPointLift j) σ).asIso.hom.app Y y = y := by
     intro σ hσ
     apply hinj
     rw [← ht σ hσ]
     exact (ConcreteCategory.congr_hom
-      ((galoisToAut (genericPointLift j) σ).hom.naturality i) y).symm
+      ((galoisToAut (genericPointLift j) σ).asIso.hom.naturality i) y).symm
   obtain ⟨V, ℓ, hℓ, g, hg, hgy⟩ :=
     exists_etale_lift_of_forall_inertia_of_isIntegral j hW ϖ hϖ hWU m Q Y y hy
   refine ⟨V, ℓ, hℓ, g ≫ i.hom.left, ?_, ?_⟩

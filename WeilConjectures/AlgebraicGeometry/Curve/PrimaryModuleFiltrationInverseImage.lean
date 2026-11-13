@@ -80,7 +80,7 @@ theorem primary_inverseImage_restriction
   let g := Spec.map (CommRingCat.ofHom
     (algebraMap K (IntermediateField.fixedField H.toSubgroup)))
   let fg := f ≫ g
-  let hc := Etale.upperStarComp AddCommGrpCat.{u + 1} f g fg (by rfl)
+  let hc := Etale.upperStarComp AddCommGrpCat.{u + 1} f g fg rfl
   exact ⟨(hc.app M) ≪≫ (Etale.upperStar AddCommGrpCat.{u + 1} f).mapIso hM⟩
 
 end AlgebraicGeometry.Scheme

@@ -16,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
 import WeilConjectures.AlgebraicGeometry.DerivedInternalHomUnitIso
 import WeilConjectures.AlgebraicGeometry.AffineDerivedHomLocalizedEvaluation
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # AffineDerivedHomEvaluationCounit
 

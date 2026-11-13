@@ -375,7 +375,7 @@ def pbcFunctionReductionMap (n : ℕ) :
         (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))))
     (pbcDerivedScalarAdjunction
       (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)))).symm
-    (TwoSquare.mk _ _ _ _ (pbcDerivedFunctionRestriction T d n).hom)).natTrans
+    (TwoSquare.mk _ _ _ _ (pbcDerivedFunctionRestriction T d n).hom))
 
 /-- Mates across equivalences preserve invertibility, by conjugating the two
 adjunctions with the inverse equivalences. -/
@@ -384,19 +384,19 @@ private theorem inverseMate_equivalences
     {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
     {G : C ⥤ C'} {H : D ⥤ D'}
     (a : L ⊣ R) (b : L' ⊣ R') [G.IsEquivalence] [H.IsEquivalence]
-    (β : TwoSquare R H G R') [IsIso β.natTrans] :
-    IsIso ((mateEquiv a b).symm β).natTrans := by
+    (β : TwoSquare R H G R') [IsIso β] :
+    IsIso ((mateEquiv a b).symm β) := by
   let eG := G.asEquivalence.toAdjunction
   let eH := H.asEquivalence.toAdjunction
   let α := (mateEquiv a b).symm β
-  have hi : IsIso (mateEquiv eH eG β).natTrans := by
+  have hi : IsIso (mateEquiv eH eG β) := by
     dsimp only [mateEquiv, Equiv.coe_fn_mk]
     infer_instance
   have he := iterated_mateEquiv_conjugateEquiv a b eG eH α
-  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))).natTrans = _ at he
+  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))) = _ at he
   rw [Equiv.apply_symm_apply] at he
-  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α.natTrans) := he ▸ hi
-  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α.natTrans
+  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α) := he ▸ hi
+  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α
 
 /-- The canonical tensor mate is invertible. Source: blueprint order 1300
 (blueprint: def-weil-pbc-bounded-constructible-complete).

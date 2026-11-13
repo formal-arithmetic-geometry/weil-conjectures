@@ -201,7 +201,7 @@ private theorem eval_pull_mate_normalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((mateEquiv (VaryingRing.moduleAdj C τ f)
       ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y)
         (StrictTower.coefficients (C n) X)
-        (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm e.inv).natTrans =
+        (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm e.inv) =
       (constant_diagram_square (VaryingRing.pull C τ f)
         (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
         (StrictTower.modulePullback (C n) f) (VaryingRing.moduleEvalG C τ f n)).inv := by
@@ -233,7 +233,7 @@ private theorem eval_pull_mate_normalization {X Y : Scheme.{u}} (f : X ⟶ Y)
   change ((mateEquiv (VaryingRing.moduleAdj C τ f)
     ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y)
       (StrictTower.coefficients (C n) X)
-      (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm D.hom).natTrans = _
+      (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm D.hom) = _
   rw [← hm]
   erw [Equiv.symm_apply_apply]
   have hg' : g = VaryingRing.moduleEvalG C τ f n := by
@@ -260,7 +260,7 @@ private theorem eval_pull_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   change IsIso (((mateEquiv (VaryingRing.moduleAdj C τ f)
     ((proEtaleRingModuleAdjunction f (StrictTower.coefficients (C n) Y)
       (StrictTower.coefficients (C n) X)
-      (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm e.inv).natTrans)
+      (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm e.inv))
   rw [eval_pull_mate_normalization C τ n f e he]
   exact (constant_diagram_square (VaryingRing.pull C τ f)
     (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
@@ -310,11 +310,11 @@ private theorem mate_pasted_isIso
     {T : A ⥤ H} {S : B ⥤ I}
     (w₁ : TwoSquare T₁ L₁ L₂ B₁) (w₂ : TwoSquare T₂ L₂ L₃ B₂)
     (w : TwoSquare T L₁ L₃ S) (a : T ≅ T₁ ⋙ T₂) (b : S ≅ B₁ ⋙ B₂)
-    (h : Functor.whiskerRight a.hom L₃ ≫ (w₁.hComp w₂).natTrans =
-      w.natTrans ≫ Functor.whiskerLeft L₁ b.hom)
-    [IsIso (mateEquiv a₁ a₂ w₁).natTrans]
-    [IsIso (mateEquiv a₂ a₃ w₂).natTrans] :
-    IsIso (mateEquiv a₁ a₃ w).natTrans := by
+    (h : Functor.whiskerRight a.hom L₃ ≫ (w₁.hComp w₂) =
+      w ≫ Functor.whiskerLeft L₁ b.hom)
+    [IsIso (mateEquiv a₁ a₂ w₁)]
+    [IsIso (mateEquiv a₂ a₃ w₂)] :
+    IsIso (mateEquiv a₁ a₃ w) := by
   have hw : w = ((w₁.hComp w₂).whiskerTop a.hom).whiskerBottom b.inv := by
     ext X
     have ht := NatTrans.congr_app h X
@@ -331,16 +331,16 @@ private theorem inverse_mate_change_isIso
     {G : A ⥤ D} {H : B ⥤ F}
     (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
     (w : TwoSquare R₁ H G R₂)
-    [IsIso ((mateEquiv b₁ b₂).symm w).natTrans] :
-    IsIso ((mateEquiv a₁ a₂).symm w).natTrans := by
+    [IsIso ((mateEquiv b₁ b₂).symm w)] :
+    IsIso ((mateEquiv a₁ a₂).symm w) := by
   have hw : (mateEquiv a₁ a₂).symm w = TwoSquare.mk _ _ _ _
       (Functor.whiskerLeft G (a₂.leftAdjointUniq b₂).hom ≫
-        ((mateEquiv b₁ b₂).symm w).natTrans ≫
+        ((mateEquiv b₁ b₂).symm w) ≫
           Functor.whiskerRight (a₁.leftAdjointUniq b₁).inv H) := by
     apply (mateEquiv a₁ a₂).injective
     rw [Equiv.apply_symm_apply, mateEquiv_leftAdjointUniq, Equiv.apply_symm_apply]
   rw [hw]
-  dsimp only [TwoSquare.mk, TwoSquare.natTrans]
+  dsimp only [TwoSquare.mk]
   apply IsIso.comp_isIso'
   · exact (Functor.isoWhiskerLeft G (a₂.leftAdjointUniq b₂)).isIso_hom
   · apply IsIso.comp_isIso'
@@ -357,11 +357,11 @@ private theorem inverse_mate_pasted_isIso
     {T : A ⥤ H} {S : B ⥤ I}
     (w₁ : TwoSquare R₁ B₁ T₁ R₂) (w₂ : TwoSquare R₂ B₂ T₂ R₃)
     (w : TwoSquare R₁ S T R₃) (a : T ≅ T₁ ⋙ T₂) (b : S ≅ B₁ ⋙ B₂)
-    (h : Functor.whiskerLeft R₁ a.hom ≫ (w₁.vComp w₂).natTrans =
-      w.natTrans ≫ Functor.whiskerRight b.hom R₃)
-    [IsIso ((mateEquiv a₁ a₂).symm w₁).natTrans]
-    [IsIso ((mateEquiv a₂ a₃).symm w₂).natTrans] :
-    IsIso ((mateEquiv a₁ a₃).symm w).natTrans := by
+    (h : Functor.whiskerLeft R₁ a.hom ≫ (w₁.vComp w₂) =
+      w ≫ Functor.whiskerRight b.hom R₃)
+    [IsIso ((mateEquiv a₁ a₂).symm w₁)]
+    [IsIso ((mateEquiv a₂ a₃).symm w₂)] :
+    IsIso ((mateEquiv a₁ a₃).symm w) := by
   let v := ((mateEquiv a₁ a₂).symm w₁).hComp ((mateEquiv a₂ a₃).symm w₂)
   have hv : mateEquiv a₁ a₃ v = w₁.vComp w₂ := by
     dsimp only [v]
@@ -376,11 +376,11 @@ private theorem inverse_mate_pasted_isIso
       ← Functor.map_comp] using ht
   rw [← hw, Equiv.symm_apply_apply]
   dsimp only [v, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
-    TwoSquare.mk, TwoSquare.natTrans]
+    TwoSquare.mk]
   repeat' apply IsIso.comp_isIso'
   all_goals first
-    | exact Functor.isIso_whiskerLeft T₁ ((mateEquiv a₂ a₃).symm w₂).natTrans
-    | exact Functor.isIso_whiskerRight ((mateEquiv a₁ a₂).symm w₁).natTrans B₂
+    | exact Functor.isIso_whiskerLeft T₁ ((mateEquiv a₂ a₃).symm w₂)
+    | exact Functor.isIso_whiskerRight ((mateEquiv a₁ a₂).symm w₁) B₂
     | infer_instance
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
@@ -433,9 +433,9 @@ private theorem exact_inverse_mate_isIso
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H]
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (d : R₁ ⋙ G ≅ H ⋙ R₂)
-    [IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans] :
+    [IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom))] :
     IsIso ((mateEquiv (exactDerivedAdjunction a₁) (exactDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) := by
   have := (CategoryTheory.exact_localization_inverse_mate a₁ a₂ d).1
   exact inverse_mate_change_isIso (exactDerivedAdjunction a₁)
     (CategoryTheory.exactLocalizationDerivedAdjunction a₁) (exactDerivedAdjunction a₂)
@@ -450,7 +450,7 @@ private theorem constant_open_inverse_mate_isIso (A : Type (u + 1)) [CommRing A]
       (StrictTower.towerPullback A j).mapDerivedCategory) :
     IsIso ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _
       (Functor.mapDerivedCategorySquareIso
-        (Functor.compConstIso ℕᵒᵖ (StrictTower.modulePullback A j))).hom)).natTrans := by
+        (Functor.compConstIso ℕᵒᵖ (StrictTower.modulePullback A j))).hom)) := by
   let c := StrictTower.moduleJAdj A j
   let d := Functor.compConstIso ℕᵒᵖ (StrictTower.modulePullback A j)
   have hm : (mateEquiv c (c.whiskerRight ℕᵒᵖ)).symm (TwoSquare.mk _ _ _ _ d.hom) =
@@ -459,7 +459,7 @@ private theorem constant_open_inverse_mate_isIso (A : Type (u + 1)) [CommRing A]
     rw [Equiv.apply_symm_apply]
     exact (StrictTower.ConstantNormalization.const_mate _ _ c).symm
   have : IsIso ((mateEquiv c (c.whiskerRight ℕᵒᵖ)).symm
-      (TwoSquare.mk _ _ _ _ d.hom)).natTrans := by
+      (TwoSquare.mk _ _ _ _ d.hom)) := by
     rw [hm]
     exact (Functor.compConstIso ℕᵒᵖ (StrictTower.moduleJ A j)).isIso_inv
   have := exact_inverse_mate_isIso c (c.whiskerRight ℕᵒᵖ) d
@@ -511,18 +511,18 @@ private theorem eval_derived_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Functor.mapDerivedCategorySquareIso (VaryingRing.moduleEvalG C τ f n).symm).hom
   let w₂ := TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).hom
   have : IsIso (mateEquiv (VaryingRing.adj C τ f)
-      (VaryingRing.levelAdj C f n) w₁).natTrans := by
+      (VaryingRing.levelAdj C f n) w₁) := by
     dsimp only [w₁]
     rw [Functor.square_symm_hom]
     exact VaryingRing.evalPMate_isIso C τ f n
   have : IsIso (mateEquiv (VaryingRing.levelAdj C f n)
-      (StrictTower.adj (C n) f) w₂).natTrans := by
+      (StrictTower.adj (C n) f) w₂) := by
     change IsIso (mateEquiv
       (proEtaleRingDerivedAdjunction f (StrictTower.coefficients (C n) Y)
         (StrictTower.coefficients (C n) X) (StrictTower.constantRingIso (C n) f))
       (StrictTower.adj (C n) f)
       (TwoSquare.mk _ _ _ _
-        (StrictTower.ConstantNormalization.deltaPull (C n) f).hom)).natTrans
+        (StrictTower.ConstantNormalization.deltaPull (C n) f).hom))
     rw [← StrictTower.ConstantNormalization.chi_mate]
     exact (StrictTower.ConstantNormalization.chi (C n) f).isIso_hom
   exact mate_pasted_isIso (VaryingRing.adj C τ f) (VaryingRing.levelAdj C f n)
@@ -560,7 +560,7 @@ private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImm
         (StrictTower.coefficients (C n) X)
         (StrictTower.constantRingIso (C n) f)).whiskerRight ℕᵒᵖ)).symm e.inv) :
     IsIso ((mateEquiv ao (StrictTower.jAdj (C n) f)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).inv)).natTrans := by
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).inv)) := by
   subst F
   let G := constant_diagram_square (VaryingRing.pull C τ f)
     (VaryingRing.eval C τ X n) (VaryingRing.eval C τ Y n)
@@ -580,13 +580,13 @@ private theorem eval_open_mate_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImm
     (Functor.mapDerivedCategorySquareIso (VaryingRing.moduleEvalG C τ f n)).hom
   let w₂ := TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso q).hom
   have : IsIso ((mateEquiv (VaryingRing.jAdj C τ f)
-      (VaryingRing.levelJAdj C f n)).symm w₁).natTrans := by
+      (VaryingRing.levelJAdj C f n)).symm w₁) := by
     exact VaryingRing.evalJInv_isIso C τ f n
-  have : IsIso ((mateEquiv ao (VaryingRing.levelJAdj C f n)).symm w₁).natTrans :=
+  have : IsIso ((mateEquiv ao (VaryingRing.levelJAdj C f n)).symm w₁) :=
     inverse_mate_change_isIso ao (VaryingRing.jAdj C τ f)
       (VaryingRing.levelJAdj C f n) (VaryingRing.levelJAdj C f n) w₁
   have : IsIso ((mateEquiv (VaryingRing.levelJAdj C f n)
-      (StrictTower.jAdj (C n) f)).symm w₂).natTrans := by
+      (StrictTower.jAdj (C n) f)).symm w₂) := by
     exact constant_open_inverse_mate_isIso (C n) f
       (VaryingRing.levelJAdj C f n) (StrictTower.jAdj (C n) f)
   exact inverse_mate_pasted_isIso ao (VaryingRing.levelJAdj C f n)

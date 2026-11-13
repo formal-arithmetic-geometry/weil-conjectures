@@ -296,7 +296,6 @@ lemma Hom.pullbackExchange_zeroTwistSpecialization_zero (φ : N.Hom M f f') :
   refine (congrArg (_ ≫ ·) ?_).trans (Iso.inv_hom_id_assoc _ _)
   transport_exact φ.map_unit_comp_pullbackExchange_app (Profinite.padicAlgClRingObj ℓ)
 
-set_option maxHeartbeats 1000000 in
 -- the shifts of the derived categories of module objects unfold deeply
 /-- The specialization map of `ℚ̄_ℓ(0)[n]` is the shift of that of `ℚ̄_ℓ(0)`
 (`NearbyCyclesModel.twistSpecializationMap_shift_comp`). -/

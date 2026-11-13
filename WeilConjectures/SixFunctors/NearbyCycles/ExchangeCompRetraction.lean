@@ -100,7 +100,6 @@ lemma eq_id_of_naturality_of_iso {DX DS : Type*} [Category DX] [Category DS] {Ψ
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 400000 in
 -- the exchanges of the three models are large terms
 /-- **Exchanges of a composite and inclusions of invariants**: let `χ : M'' ⟶ M` be the composite
 of `ρ : M'' ⟶ M₁` and `ψ : M₁ ⟶ M`, both over `𝟙 X`. If the pullback exchange of

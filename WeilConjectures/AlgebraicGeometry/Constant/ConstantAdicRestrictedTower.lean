@@ -183,7 +183,7 @@ private theorem scalarPullSquare_mate {X Y : Scheme.{u}} (g : Y ⟶ X)
     (mateEquiv
       (proEtaleRingModuleAdjunction g S ((adicTowerInverseImage g).obj S) (Iso.refl _))
       (proEtaleRingModuleAdjunction g R ((adicTowerInverseImage g).obj R) (Iso.refl _))
-      (TwoSquare.mk _ _ _ _ (scalarPullSquare g a).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (scalarPullSquare g a).hom)) =
         (scalarDirectSquare g a).hom :=
   restrictionPullback_mate g R S
     ((adicTowerInverseImage g).obj R) ((adicTowerInverseImage g).obj S)
@@ -218,19 +218,18 @@ private theorem scalarPullSquare_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
   let t' := (t.whiskerTop (pbcRestrictComp a b c h).inv).whiskerBottom
     (pbcRestrictComp ((adicTowerInverseImage g).map a)
       ((adicTowerInverseImage g).map b) ((adicTowerInverseImage g).map c) hi).hom
-  have ht : (mateEquiv (adj B) (adj R) t').natTrans =
+  have ht : (mateEquiv (adj B) (adj R) t') =
       (scalarDirectSquare g c).hom := by
     rw [mate_whisker]
     have hh := mateEquiv_vcomp (adj B) (adj S) (adj R)
       (TwoSquare.mk _ _ _ _ (scalarPullSquare g b).hom)
       (TwoSquare.mk _ _ _ _ (scalarPullSquare g a).hom)
-    change (mateEquiv (adj B) (adj R) t).natTrans = _ at hh
+    change (mateEquiv (adj B) (adj R) t) = _ at hh
     have hm (T T' : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (k : T ⟶ T') :
         (mateEquiv (adj T') (adj T))
           (TwoSquare.mk _ _ _ _ (scalarPullSquare g k).hom) =
             TwoSquare.mk _ _ _ _ (scalarDirectSquare g k).hom := by
-      apply TwoSquare.ext
-      intro N
+      refine NatTrans.ext (funext fun N ↦ ?_)
       exact congr_app (scalarPullSquare_mate g k) N
     rw [hm S B b, hm R S a] at hh
     rw [hh]
@@ -247,18 +246,17 @@ private theorem scalarPullSquare_comp {X Y : Scheme.{u}} (g : Y ⟶ X)
       restrictComp_inv_apply, scalarDirectSquare_apply]
   have ht' : t' = TwoSquare.mk _ _ _ _ (scalarPullSquare g c).hom := by
     apply (mateEquiv (adj B) (adj R)).injective
-    apply TwoSquare.ext
-    intro M
+    refine NatTrans.ext (funext fun M ↦ ?_)
     exact congr_app (ht.trans (scalarPullSquare_mate g c).symm) M
   intro M
-  have hh := congrArg (fun k ↦ k.app M) (congrArg TwoSquare.natTrans ht')
+  have hh := congrArg (fun k ↦ k.app M) (ht')
   apply (cancel_epi ((proEtaleRingModulePullback g R
     ((adicTowerInverseImage g).obj R) (Iso.refl _)).map
       ((pbcRestrictComp a b c h).inv.app M))).mp
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   simpa only [t', t, TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
-    TwoSquare.natTrans, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
     Category.id_comp, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
     CategoryTheory.Functor.map_id, Category.comp_id] using hh.symm

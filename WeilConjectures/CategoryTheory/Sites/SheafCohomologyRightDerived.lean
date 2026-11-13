@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Connecting
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-!
 # Sheaf cohomology as the right derived functors of global sections

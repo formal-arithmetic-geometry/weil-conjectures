@@ -540,7 +540,6 @@ section OrdinarySheafRestriction
 
 open scoped Obj
 
-set_option maxHeartbeats 2000000 in
 -- The two module tensor conventions are compared through their quotient formulas.
 omit [Finite k₀] [Fact (ringChar k₀ ≠ l)] [IsOpenImmersion j]
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
@@ -977,7 +976,6 @@ private theorem native_restriction_goal_transport
 end AbstractTransport
 end Proof
 
-set_option maxHeartbeats 2000000 in
 -- The concrete specialization carries the full exact-derived normalization diagram.
 /-- Forgetting the native restriction presentation, compared with ordinary total models.
 The two isomorphisms are pinned by the binary model equations; the assertion does

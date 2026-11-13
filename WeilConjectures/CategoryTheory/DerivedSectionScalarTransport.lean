@@ -208,7 +208,6 @@ private theorem transportedAdjunction_unit_diagram
   erw [← adj.unit.naturality_assoc p]
   simpa only [Functor.id_map] using hη
 
-set_option maxHeartbeats 800000 in
 -- The proof transports universal localization data and its normalization diagrams.
 private theorem derivedTransport
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
@@ -572,7 +571,6 @@ private theorem sectionPair_unit_all
 -- Localization uses the equivalence API; do not unfold its section reconstruction.
 attribute [local irreducible] sectionModuleEquivalence Mod.extendScalars Mod.comap
 
-set_option maxHeartbeats 1200000 in
 -- The proof compares several localization factorization isomorphisms simultaneously.
 /-- Transport a normalized scalar derived pair through the exact section equivalences.
 The input squares are ordinary adjunction squares; this result concerns localization only.

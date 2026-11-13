@@ -105,8 +105,7 @@ private theorem fixed_transport_mate
     κ = k := by
   subst p
   intro ev ri li r κ k
-  apply TwoSquare.ext
-  intro K
+  refine NatTrans.ext (funext fun K ↦ ?_)
   have ht := transport_mate ev ac ad (horizontalMatePushComp e.hom q ≪≫
     Functor.isoWhiskerRight ri (horizontalMatePushforward q)) K
   have hc := canonical_transfer_app ev (horizontalMatePushComp e.hom q ≪≫
