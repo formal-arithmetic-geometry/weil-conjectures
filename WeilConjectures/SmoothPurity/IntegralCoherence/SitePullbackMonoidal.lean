@@ -353,10 +353,8 @@ theorem ordinary_associativity (M N P : SheafOfModules.{r}
   rw [← id_tensorHom, ← tensorHom_id]
   apply hom_ext_pure₃ J K U R S φ F adj
   intro V x y z
-  simp only [comp_val_app_apply]
-  rw [unit_naturality_apply, moduleTmul_associator, ordinary_pure, moduleTmul_map,
-    ordinary_pure, ordinary_pure, moduleTmul_map, ordinary_pure, id_val_app_apply,
-    id_val_app_apply, moduleTmul_associator]
+  simp only [comp_val_app_apply, unit_naturality_apply, moduleTmul_associator,
+    ordinary_pure, moduleTmul_map, id_val_app_apply]
 
 /-- The ordinary comparison is compatible with the left unitors. -/
 theorem ordinary_leftUnitor (M : SheafOfModules.{r}
@@ -472,8 +470,7 @@ theorem ordinary_composition (a : F₁₂ ≅ F₁ ⋙ F₂)
         (ordinary K L U₂ S T φ₂ F₂ adj₂ (F₁.obj M) (F₁.obj N)).hom := by
   apply hom_ext_pure J L U₁₂ R T φ₁₂ F₁₂ adj₁₂
   intro V x y
-  simp only [comp_val_app_apply]
-  rw [ordinary_pure, moduleTmul_map, ha, ha, ha]
+  simp only [comp_val_app_apply, ordinary_pure, moduleTmul_map, ha]
   erw [← moduleTmul_restrict]
   erw [PresheafOfModules.naturality_apply,
     unit_naturality_apply.{c, v, r} K L U₂ S T φ₂ F₂ adj₂]
