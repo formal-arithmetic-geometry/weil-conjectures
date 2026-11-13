@@ -29,6 +29,94 @@ open CategoryTheory MonoidalCategory TopologicalSpace AlgebraicGeometry
 
 namespace CochainComplex
 
+private theorem tensorComparison_iso_of_degrees
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    [MonoidalPreadditive C] [MonoidalPreadditive D]
+    [∀ F K : CochainComplex C ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor C) (.up ℤ)]
+    [∀ F K : CochainComplex D ℤ,
+      HomologicalComplex.HasMapBifunctor F K (curriedTensor D) (.up ℤ)]
+    (T : C ⥤ D) [T.Additive]
+    (φ : ∀ A B : C,
+      T.obj (A ⊗ B) ≅
+        T.obj A ⊗
+          T.obj B)
+    (hφ : ∀ (A B A' B' : C) (f : A ⟶ A') (g : B ⟶ B'),
+      T.map (f ⊗ₘ g) ≫ (φ A' B').hom =
+        (φ A B).hom ≫ (T.map f ⊗ₘ
+          T.map g))
+    (e : ∀ (F K : CochainComplex (C) ℤ) (n : ℤ),
+      ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).X n ≅
+        (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).X n)
+    (he : ∀ (F K : CochainComplex (C) ℤ)
+        (p q n : ℤ) (h : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n),
+      T.map
+          (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ) p q n h) ≫
+        (e F K n).hom = (φ (F.X p) (K.X q)).hom ≫ HomologicalComplex.ιMapBifunctor
+          ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _) (.up ℤ) p q n h)
+    (hd : ∀ (F K : CochainComplex C ℤ) (n m : ℤ),
+      (e F K n).hom ≫ (mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F)
+          ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _)).d n m =
+        ((T.mapHomologicalComplex (.up ℤ)).obj
+          (mapBifunctor F K (curriedTensor _))).d n m ≫ (e F K m).hom) :
+    ∃ e : ∀ (F K : CochainComplex (C) ℤ),
+      (T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _)) ≅
+        mapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F) ((T.mapHomologicalComplex (.up ℤ)).obj K) (curriedTensor _),
+      ∀ (F K F' K' : CochainComplex (C) ℤ)
+        (f : F ⟶ F') (g : K ⟶ K'),
+        (T.mapHomologicalComplex (.up ℤ)).map (HomologicalComplex.mapBifunctorMap f g (curriedTensor _) (.up ℤ)) ≫
+            (e F' K').hom =
+          (e F K).hom ≫ HomologicalComplex.mapBifunctorMap
+            ((T.mapHomologicalComplex (.up ℤ)).map f) ((T.mapHomologicalComplex (.up ℤ)).map g) (curriedTensor _) (.up ℤ) := by
+  have h_ext (F K : CochainComplex (C) ℤ) (n : ℤ)
+      (M : D)
+      (a b : ((T.mapHomologicalComplex (.up ℤ)).obj (mapBifunctor F K (curriedTensor _))).X n ⟶ M)
+      (h : ∀ p q (hpq : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n),
+        T.map (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ)
+          p q n hpq) ≫ a = T.map (HomologicalComplex.ιMapBifunctor F K
+            (curriedTensor _) (.up ℤ) p q n hpq) ≫ b) : a = b := by
+    apply (cancel_epi (e F K n).inv).1
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    apply (cancel_epi (φ (F.X p) (K.X q)).hom).1
+    simp only [← Category.assoc]
+    rw [← he F K p q n hpq]
+    simpa only [Category.assoc, Iso.hom_inv_id_assoc] using h p q hpq
+  let E (F K : CochainComplex (C) ℤ) :=
+    HomologicalComplex.Hom.isoOfComponents (e F K) (fun n m _ ↦ hd F K n m)
+  refine ⟨E, ?_⟩
+  intro F K F' K' f g
+  apply HomologicalComplex.Hom.ext
+  funext n
+  change T.map ((HomologicalComplex.mapBifunctorMap f g (curriedTensor _) (.up ℤ)).f n) ≫
+      (e F' K' n).hom = (e F K n).hom ≫
+        (HomologicalComplex.mapBifunctorMap ((T.mapHomologicalComplex (.up ℤ)).map f) ((T.mapHomologicalComplex (.up ℤ)).map g)
+          (curriedTensor _) (.up ℤ)).f n
+  apply h_ext F K n
+  intro p q hpq
+  have hi := he F K p q n hpq
+  have hi' := he F' K' p q n hpq
+  calc
+    _ = T.map ((f.f p ⊗ₘ g.f q) ≫ HomologicalComplex.ιMapBifunctor F' K'
+        (curriedTensor _) (.up ℤ) p q n hpq) ≫ (e F' K' n).hom := by
+      rw [← Functor.map_comp_assoc, HomologicalComplex.ι_mapBifunctorMap]
+      rfl
+    _ = T.map (f.f p ⊗ₘ g.f q) ≫ (φ (F'.X p) (K'.X q)).hom ≫
+        HomologicalComplex.ιMapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F') ((T.mapHomologicalComplex (.up ℤ)).obj K')
+          (curriedTensor _) (.up ℤ) p q n hpq := by
+      rw [Functor.map_comp, Category.assoc, hi']
+    _ = (φ (F.X p) (K.X q)).hom ≫ (T.map (f.f p) ⊗ₘ T.map (g.f q)) ≫
+        HomologicalComplex.ιMapBifunctor ((T.mapHomologicalComplex (.up ℤ)).obj F') ((T.mapHomologicalComplex (.up ℤ)).obj K')
+          (curriedTensor _) (.up ℤ) p q n hpq := by
+      rw [← Category.assoc, hφ, Category.assoc]
+    _ = _ := by
+      rw [← Category.assoc _ (e F K n).hom, hi, Category.assoc,
+        HomologicalComplex.ι_mapBifunctorMap]
+      simp only [tensorHom_def, Category.assoc]
+      rfl
+
+
 variable (X : RingedSpace.{u₁}) (x : X)
 
 set_option hygiene false in
@@ -51,9 +139,6 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- The stalk tensor comparison exceeds the default elaboration heartbeat budget.
 /-- (blueprint: lem-pc-stalk-tensor-complex) Stacks Project, Cohomology, Lemma 06YB:
 there is an isomorphism from the stalk of the total tensor complex to the total tensor
 complex of the stalks, natural in both complexes. Both total complexes use direct sums
@@ -81,56 +166,7 @@ theorem exists_stalk_tensor_complex_iso :
   obtain ⟨φ, _, hφ⟩ := SheafOfModules.stalkTensorIso X x
   obtain ⟨e, he⟩ := exists_stalk_tensor_degree_iso X x φ
   let := stalk_additive X x
-  let T := RingedSpace.moduleStalkFunctor X x
-  have h_ext (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) (n : ℤ)
-      (M : ModuleCat.{u₁} (X.presheaf.stalk x))
-      (a b : ((S).obj (mapBifunctor F K (curriedTensor _))).X n ⟶ M)
-      (h : ∀ p q (hpq : ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) (p, q) = n),
-        T.map (HomologicalComplex.ιMapBifunctor F K (curriedTensor _) (.up ℤ)
-          p q n hpq) ≫ a = T.map (HomologicalComplex.ιMapBifunctor F K
-            (curriedTensor _) (.up ℤ) p q n hpq) ≫ b) : a = b := by
-    apply (cancel_epi (e F K n).inv).1
-    apply HomologicalComplex.mapBifunctor.hom_ext
-    intro p q hpq
-    apply (cancel_epi (φ (F.X p) (K.X q)).hom).1
-    simp only [← Category.assoc]
-    rw [← he F K p q n hpq]
-    simpa only [Category.assoc, Iso.hom_inv_id_assoc] using h p q hpq
-  have hd (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) (n m : ℤ) :
-      (e F K n).hom ≫ (mapBifunctor ((S).obj F) ((S).obj K) (curriedTensor _)).d n m =
-      ((S).obj (mapBifunctor F K (curriedTensor _))).d n m ≫ (e F K m).hom := by
-    exact stalk_tensor_degree_differential X x φ hφ e he F K n m
-  let E (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ) :=
-    HomologicalComplex.Hom.isoOfComponents (e F K) (fun n m _ ↦ hd F K n m)
-  refine ⟨E, ?_⟩
-  intro F K F' K' f g
-  apply HomologicalComplex.Hom.ext
-  funext n
-  change T.map ((HomologicalComplex.mapBifunctorMap f g (curriedTensor _) (.up ℤ)).f n) ≫
-      (e F' K' n).hom = (e F K n).hom ≫
-        (HomologicalComplex.mapBifunctorMap ((S).map f) ((S).map g)
-          (curriedTensor _) (.up ℤ)).f n
-  apply h_ext F K n
-  intro p q hpq
-  have hi := he F K p q n hpq
-  have hi' := he F' K' p q n hpq
-  calc
-    _ = T.map ((f.f p ⊗ₘ g.f q) ≫ HomologicalComplex.ιMapBifunctor F' K'
-        (curriedTensor _) (.up ℤ) p q n hpq) ≫ (e F' K' n).hom := by
-      rw [← Functor.map_comp_assoc, HomologicalComplex.ι_mapBifunctorMap]
-      rfl
-    _ = T.map (f.f p ⊗ₘ g.f q) ≫ (φ (F'.X p) (K'.X q)).hom ≫
-        HomologicalComplex.ιMapBifunctor ((S).obj F') ((S).obj K')
-          (curriedTensor _) (.up ℤ) p q n hpq := by
-      rw [Functor.map_comp, Category.assoc, hi']
-    _ = (φ (F.X p) (K.X q)).hom ≫ (T.map (f.f p) ⊗ₘ T.map (g.f q)) ≫
-        HomologicalComplex.ιMapBifunctor ((S).obj F') ((S).obj K')
-          (curriedTensor _) (.up ℤ) p q n hpq := by
-      rw [← Category.assoc, hφ, Category.assoc]
-    _ = _ := by
-      rw [← Category.assoc _ (e F K n).hom, hi, Category.assoc,
-        HomologicalComplex.ι_mapBifunctorMap]
-      simp only [tensorHom_def, Category.assoc]
-      rfl
+  exact tensorComparison_iso_of_degrees (RingedSpace.moduleStalkFunctor X x) φ hφ e he
+    (stalk_tensor_degree_differential X x φ hφ e he)
 
 end CochainComplex

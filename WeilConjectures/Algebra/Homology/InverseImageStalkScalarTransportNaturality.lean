@@ -67,9 +67,6 @@ private theorem explicitStalkMap_germ
     TopCat.Presheaf.pullback]
 
 set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 800000 in
-set_option profiler true in
--- Comparing stalk module actions unfolds both the ringed-space and sheaf interfaces.
 /-- Natural semilinear comparison for the explicitly constructed inverse image.
 Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
 
@@ -144,7 +141,7 @@ theorem exists_inverseImage_stalk_comparison_natural
       ← TopCat.Presheaf.germ_res_apply M.val.presheaf
         (homOfLE inf_le_right : U ⊓ V ⟶ V) (f x) hx m,
       ← PresheafOfModules.germ_smul (R := Y.presheaf) M.val]
-    erw [hc]
+    rw [hc M (U ⊓ V) hx]
     have hu := (Classical.choose_spec
       (TopCat.Sheaf.exists_inverseImageModuleInstances f Y.sheaf M)).2
     have hs := hu (Opposite.op (U ⊓ V))
@@ -154,7 +151,7 @@ theorem exists_inverseImage_stalk_comparison_natural
     erw [PresheafOfModules.germ_smul
       (R := (TopCat.Sheaf.inverseImageRing f Y.sheaf).obj)
       (TopCat.Sheaf.inverseImageModule f Y.sheaf M).val]
-    erw [hc]
+    rw [hc M (U ⊓ V) hx]
     have hr := ConcreteCategory.congr_hom
       (explicitStalkMap_germ CommRingCat f x Y.sheaf (U ⊓ V) hx)
       (Y.presheaf.map (homOfLE inf_le_left).op r)
@@ -165,7 +162,7 @@ theorem exists_inverseImage_stalk_comparison_natural
       ((PresheafOfModules.toPresheaf _).map a.val)
         (TopCat.Presheaf.germ M.val.presheaf V (f x) hx m)) = _
     erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
-    erw [hc, hc]
+    rw [hc N V hx, hc M V hx]
     dsimp only [PresheafOfModules.stalkAddMap]
     erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
     have hn := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
