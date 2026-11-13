@@ -125,25 +125,25 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X).app M)) :
     NatTrans.CommShift τ ℤ := by
   let G := F.mapHomotopyCategory (.up ℤ)
-  let c₂ : Qh ⋙ ((curriedTensor _).obj (Qh.obj X) ⋙ LF) ⟶
-      ((curriedTensor _).obj X ⋙ G) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorLeftCounit X) LF ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).obj X) cL ≫
+  let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).obj (Qh.obj X) ⋙ LF) ⟶
+      ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (tensorLeftCounit X) LF ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X) cL ≫
       (Functor.associator _ _ _).inv
-  let δ₀ : ((curriedTensor _).obj X ⋙ G) ⋙ Qh ⟶ (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
-    Functor.whiskerRight (F := (curriedTensor _).obj X ⋙ G)
-      (G := G ⋙ (curriedTensor _).obj (G.obj X))
+  let δ₀ : ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G) ⋙ Qh ⟶ (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X)) ⋙ Qh :=
+    Functor.whiskerRight (G := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G)
+      (H := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X))
       ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app X) Qh
-  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor _).obj (LF.obj (Qh.obj X))) ⟶
-      (G ⋙ (curriedTensor _).obj (G.obj X)) ⋙ Qh :=
+  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor (DerivedCategory C₂)).obj (LF.obj (Qh.obj X))) ⟶
+      (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X)) ⋙ Qh :=
     (Functor.associator _ _ _).inv ≫
-      whiskerLeft (Qh ⋙ LF) ((curriedTensor _).map (cL.app X)) ≫
-      whiskerRight cL ((curriedTensor _).obj (Qh.obj (G.obj X))) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorLeftCounit (G.obj X)) ≫
+      Functor.whiskerLeft (Qh ⋙ LF) ((curriedTensor (DerivedCategory C₂)).map (cL.app X)) ≫
+      Functor.whiskerRight cL ((curriedTensor (DerivedCategory C₂)).obj (Qh.obj (G.obj X))) ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft G (tensorLeftCounit (G.obj X)) ≫
       (Functor.associator _ _ _).inv
   have := isIso_tensorLeftCounit (G.obj X) hFX
   have : IsIso c₁ := by dsimp only [c₁]; infer_instance
-  have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
+  have fac : Functor.whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
     ext M
     simpa only [c₁, c₂, δ₀, G, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
       Functor.comp_obj, curriedTensor_obj_obj, curriedTensor_obj_map, curriedTensor_map_app,
@@ -155,8 +155,8 @@ lemma commShift_of_tensorLeft_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_app F X
   have : NatTrans.CommShift δ₀ ℤ :=
-    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).obj X ⋙ G)
-      (F₂ := G ⋙ (curriedTensor _).obj (G.obj X)) _ Qh ℤ
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).obj (G.obj X)) _ Qh ℤ
   have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
   have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
     rw [(IsIso.eq_comp_inv c₁).2 fac]
@@ -182,26 +182,26 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
         Qh.map (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app M).app X)) :
     NatTrans.CommShift τ ℤ := by
   let G := F.mapHomotopyCategory (.up ℤ)
-  let c₂ : Qh ⋙ ((curriedTensor _).flip.obj (Qh.obj X) ⋙ LF) ⟶
-      ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh :=
-    (Functor.associator _ _ _).inv ≫ whiskerRight (tensorRightCounit X) LF ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft ((curriedTensor _).flip.obj X) cL ≫
+  let c₂ : Qh ⋙ ((curriedTensor (DerivedCategory C₁)).flip.obj (Qh.obj X) ⋙ LF) ⟶
+      ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G) ⋙ Qh :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (tensorRightCounit X) LF ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X) cL ≫
       (Functor.associator _ _ _).inv
-  let δ₀ : ((curriedTensor _).flip.obj X ⋙ G) ⋙ Qh ⟶
-      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
-    Functor.whiskerRight (F := (curriedTensor _).flip.obj X ⋙ G)
-      (G := G ⋙ (curriedTensor _).flip.obj (G.obj X))
+  let δ₀ : ((curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G) ⋙ Qh ⟶
+      (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X)) ⋙ Qh :=
+    Functor.whiskerRight (G := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G)
+      (H := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X))
       ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).flipApp X) Qh
-  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor _).flip.obj (LF.obj (Qh.obj X))) ⟶
-      (G ⋙ (curriedTensor _).flip.obj (G.obj X)) ⋙ Qh :=
+  let c₁ : Qh ⋙ (LF ⋙ (curriedTensor (DerivedCategory C₂)).flip.obj (LF.obj (Qh.obj X))) ⟶
+      (G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X)) ⋙ Qh :=
     (Functor.associator _ _ _).inv ≫
-      whiskerRight cL ((curriedTensor _).flip.obj (LF.obj (Qh.obj X))) ≫
-      whiskerLeft (G ⋙ Qh) ((curriedTensor _).flip.map (cL.app X)) ≫
-      (Functor.associator _ _ _).hom ≫ whiskerLeft G (tensorRightCounit (G.obj X)) ≫
+      Functor.whiskerRight cL ((curriedTensor (DerivedCategory C₂)).flip.obj (LF.obj (Qh.obj X))) ≫
+      Functor.whiskerLeft (G ⋙ Qh) ((curriedTensor (DerivedCategory C₂)).flip.map (cL.app X)) ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft G (tensorRightCounit (G.obj X)) ≫
       (Functor.associator _ _ _).inv
   have := isIso_tensorRightCounit (G.obj X) hFX
   have : IsIso c₁ := by dsimp only [c₁]; infer_instance
-  have fac : whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
+  have fac : Functor.whiskerLeft Qh τ ≫ c₁ = c₂ ≫ δ₀ := by
     ext M
     simpa only [c₁, c₂, δ₀, G, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
       Functor.comp_obj, Functor.flip_obj_obj, Functor.flip_obj_map, Functor.flip_map_app,
@@ -215,8 +215,8 @@ lemma commShift_of_tensorRight_fac (X : HomotopyCategory C₁ (.up ℤ))
   have : NatTrans.CommShift c₂ ℤ := by dsimp only [c₂]; infer_instance
   have := OplaxMonoidal.commShift_mapHomotopyCategoryδNatTrans_flipApp F X
   have : NatTrans.CommShift δ₀ ℤ :=
-    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor _).flip.obj X ⋙ G)
-      (F₂ := G ⋙ (curriedTensor _).flip.obj (G.obj X)) _ Qh ℤ
+    NatTrans.CommShift.whiskerRight (F₁ := (curriedTensor (HomotopyCategory C₁ (.up ℤ))).flip.obj X ⋙ G)
+      (F₂ := G ⋙ (curriedTensor (HomotopyCategory C₂ (.up ℤ))).flip.obj (G.obj X)) _ Qh ℤ
   have : NatTrans.CommShift (inv c₁) ℤ := NatTrans.CommShift.of_isIso c₁ ℤ
   have : NatTrans.CommShift (whiskerLeft Qh τ) ℤ := by
     rw [(IsIso.eq_comp_inv c₁).2 fac]
