@@ -442,8 +442,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
-set_option profiler true in
--- the instances of the categories of sheaves make the rewriting slow
 /-- **The Frobenius comparison at a fibre** (blueprint `lem-trf-weil-shriek-operator-fibres`,
 proof of (2)): for the fibre `Z` of `f = r ≫ f'` over a point `y` fixed by `Φ_Y`, the base change
 `β : Ly^* Rf_! ≅ RΓ_c(Z, -)` intertwines `Ly^*(θ_f)` with the pullback `Φ_Z^♯`. -/
