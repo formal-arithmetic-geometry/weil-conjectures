@@ -224,6 +224,7 @@ private theorem transposePair_lift [F.Monoidal]
   rw [← Category.assoc, ← Category.assoc, imageLift]
   rw [Category.assoc, CartesianMonoidalCategory.lift_map_assoc]
 
+set_option profiler true in
 private theorem mate_linear_iff
     (M0 : SheafOfModules.{u} (ringSheaf R))
     (H0 : SheafOfModules.{u} (ringSheaf RI))
@@ -290,7 +291,207 @@ private theorem mate_linear_iff
 -- Keep the tensor construction folded while checking its universal property.
 attribute [local irreducible] monoidalCategory
 
-set_option trace.profiler true in
+-- Work with an arbitrary bilinear target, so checking the four laws does not
+-- repeatedly unfold the target tensor construction or the transported module functor.
+set_option profiler true in
+omit [PreservesFiniteLimits F] in
+private theorem transpose_bilinear
+    (M N : SheafOfModules.{u} (ringSheaf R))
+    (H : SheafOfModules.{u} (ringSheaf RI)) (P0 : SheafOfModules.{u} (ringSheaf R))
+    (e : (RingedTensor.underlying R).obj P0 ≅ V.obj ((RingedTensor.underlying RI).obj H))
+    (hadd : madd R P0 ≫ e.hom = prod.map e.hom e.hom ≫
+      inv (prodComparison V ((RingedTensor.underlying RI).obj H)
+        ((RingedTensor.underlying RI).obj H)) ≫ V.map (madd RI H))
+    (hsmul : msmul R P0 ≫ e.hom =
+      prod.map (adj.homEquiv _ _ I.ringUnderlying.hom) e.hom ≫
+        inv (prodComparison V (rset RI) ((RingedTensor.underlying RI).obj H)) ≫
+          V.map (msmul RI H))
+    (β : (RingedTensor.underlying RI).obj (I.modules.obj M) ⊗
+      (RingedTensor.underlying RI).obj (I.modules.obj N) ⟶ (RingedTensor.underlying RI).obj H)
+    (βb : ∀ W : Dᵒᵖ, (I.modules.obj M).val.obj W →ₗ[RI.obj.obj W]
+      (I.modules.obj N).val.obj W →ₗ[RI.obj.obj W] H.val.obj W)
+    (hβ : ∀ W m n, β.hom.app W (m, n) = βb W m n)
+    (φ : (RingedTensor.underlying R).obj M ⊗ (RingedTensor.underlying R).obj N ⟶
+      (RingedTensor.underlying R).obj P0)
+    (hφ : ∀ Z (x : Z ⟶ (RingedTensor.underlying R).obj M)
+      (y : Z ⟶ (RingedTensor.underlying R).obj N),
+      CartesianMonoidalCategory.lift x y ≫ φ = mateIsoEquiv adj (Iso.refl _) e
+        (CartesianMonoidalCategory.lift (F.map x ≫ I.moduleUnderlying.inv.app M)
+          (F.map y ≫ I.moduleUnderlying.inv.app N) ≫ β)) :
+    ∃ f : (monoidalCategory R).tensorObj M N ⟶ P0,
+      pureSheaf R M N ≫ (RingedTensor.underlying R).map f = φ := by
+  have hAdd Z (x y : Z ⟶ (RingedTensor.underlying R).obj M)
+      (n : Z ⟶ (RingedTensor.underlying R).obj N)
+      (s : Z ⟶ (RingedTensor.underlying R).obj M)
+      (hs : ∀ W t, s.hom.app W t =
+        (show M.val.obj W from x.hom.app W t) +
+          (show M.val.obj W from y.hom.app W t)) :
+      CartesianMonoidalCategory.lift s n ≫ φ =
+        CartesianMonoidalCategory.lift
+          (CartesianMonoidalCategory.lift x n ≫ φ)
+          (CartesianMonoidalCategory.lift y n ≫ φ) ≫ addition R P0 := by
+    rw [hφ, hφ, hφ]
+    refine Eq.trans ?_ (mateAdd_cartesian R RI F V adj H P0 e hadd _ _)
+    apply congrArg (mateIsoEquiv adj (Iso.refl _) e)
+    ext W t
+    change β.hom.app W ((F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
+      (show H.val.obj W from β.hom.app W ((F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) +
+      (show H.val.obj W from β.hom.app W ((F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t))
+    simp only [hβ]
+    rw [I.moduleAdd M Z x y s hs W t]
+    exact (βb W).map_add₂ _ _ _
+  have hAddR Z (x y : Z ⟶ (RingedTensor.underlying R).obj N)
+      (n : Z ⟶ (RingedTensor.underlying R).obj M)
+      (s : Z ⟶ (RingedTensor.underlying R).obj N)
+      (hs : ∀ W t, s.hom.app W t =
+        (show N.val.obj W from x.hom.app W t) +
+          (show N.val.obj W from y.hom.app W t)) :
+      CartesianMonoidalCategory.lift n s ≫ φ =
+        CartesianMonoidalCategory.lift
+          (CartesianMonoidalCategory.lift n x ≫ φ)
+          (CartesianMonoidalCategory.lift n y ≫ φ) ≫ addition R P0 := by
+    rw [hφ, hφ, hφ]
+    refine Eq.trans ?_ (mateAdd_cartesian R RI F V adj H P0 e hadd _ _)
+    apply congrArg (mateIsoEquiv adj (Iso.refl _) e)
+    ext W t
+    change β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
+      (show H.val.obj W from β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t)) +
+      (show H.val.obj W from β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t))
+    simp only [hβ]
+    rw [I.moduleAdd N Z x y s hs W t]
+    exact (βb W _).map_add _ _
+  have hSmul Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj M)
+      (n : Z ⟶ (RingedTensor.underlying R).obj N)
+      (s : Z ⟶ (RingedTensor.underlying R).obj M)
+      (hs : ∀ W t, s.hom.app W t =
+        (show R.obj.obj W from a.hom.app W t) •
+          (show M.val.obj W from x.hom.app W t)) :
+      CartesianMonoidalCategory.lift s n ≫ φ =
+        CartesianMonoidalCategory.lift a
+          (CartesianMonoidalCategory.lift x n ≫ φ) ≫ action R P0 := by
+    rw [hφ, hφ]
+    refine Eq.trans ?_ (mateSMul_cartesian R RI F V adj I H P0 e hsmul a _)
+    apply congrArg (mateIsoEquiv adj (Iso.refl _) e)
+    ext W t
+    change β.hom.app W ((F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
+      (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
+      (show H.val.obj W from β.hom.app W ((F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t))
+    simp only [hβ]
+    rw [I.moduleSMul M Z a x s hs W t]
+    exact (βb W).map_smul₂ _ _ _
+  have hSmulR Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj N)
+      (n : Z ⟶ (RingedTensor.underlying R).obj M)
+      (s : Z ⟶ (RingedTensor.underlying R).obj N)
+      (hs : ∀ W t, s.hom.app W t =
+        (show R.obj.obj W from a.hom.app W t) •
+          (show N.val.obj W from x.hom.app W t)) :
+      CartesianMonoidalCategory.lift n s ≫ φ =
+        CartesianMonoidalCategory.lift a
+          (CartesianMonoidalCategory.lift n x ≫ φ) ≫ action R P0 := by
+    rw [hφ, hφ]
+    refine Eq.trans ?_ (mateSMul_cartesian R RI F V adj I H P0 e hsmul a _)
+    apply congrArg (mateIsoEquiv adj (Iso.refl _) e)
+    ext W t
+    change β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
+      (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
+      (show H.val.obj W from β.hom.app W ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t,
+        (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t))
+    simp only [hβ]
+    rw [I.moduleSMul N Z a x s hs W t]
+    exact (βb W _).map_smul _ _
+  have hAddSections W (x y : M.val.obj W) (n : N.val.obj W) :
+      φ.hom.app W (x + y, n) =
+        (show P0.val.obj W from φ.hom.app W (x, n)) +
+        (show P0.val.obj W from φ.hom.app W (y, n)) := by
+    let X := (RingedTensor.underlying R).obj M
+    let Y := (RingedTensor.underlying R).obj M
+    let Z := (RingedTensor.underlying R).obj N
+    let Z' := (X ⊗ Y) ⊗ Z
+    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.fst X Y
+    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.snd X Y
+    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
+    have hh := hAdd Z' a b c (CartesianMonoidalCategory.lift a b ≫ addition R M)
+      (fun _ _ ↦ rfl)
+    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj P0 ↦
+      f.hom.app W ((x, y), n)) hh
+  have hAddRSections W (x y : N.val.obj W) (n : M.val.obj W) :
+      φ.hom.app W (n, x + y) =
+        (show P0.val.obj W from φ.hom.app W (n, x)) +
+        (show P0.val.obj W from φ.hom.app W (n, y)) := by
+    let X := (RingedTensor.underlying R).obj N
+    let Y := (RingedTensor.underlying R).obj N
+    let Z := (RingedTensor.underlying R).obj M
+    let Z' := (X ⊗ Y) ⊗ Z
+    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.fst X Y
+    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.snd X Y
+    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
+    have hh := hAddR Z' a b c (CartesianMonoidalCategory.lift a b ≫ addition R N)
+      (fun _ _ ↦ rfl)
+    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj P0 ↦
+      f.hom.app W ((x, y), n)) hh
+  have hSmulSections W (x : R.obj.obj W) (y : M.val.obj W)
+      (n : N.val.obj W) :
+      φ.hom.app W (x • y, n) =
+        x • (show P0.val.obj W from φ.hom.app W (y, n)) := by
+    let X := rset R
+    let Y := (RingedTensor.underlying R).obj M
+    let Z := (RingedTensor.underlying R).obj N
+    let Z' := (X ⊗ Y) ⊗ Z
+    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.fst X Y
+    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.snd X Y
+    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
+    have hh := hSmul Z' a b c (CartesianMonoidalCategory.lift a b ≫ action R M)
+      (fun _ _ ↦ rfl)
+    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj P0 ↦
+      f.hom.app W ((x, y), n)) hh
+  have hSmulRSections W (x : R.obj.obj W) (y : N.val.obj W)
+      (n : M.val.obj W) :
+      φ.hom.app W (n, x • y) =
+        x • (show P0.val.obj W from φ.hom.app W (n, y)) := by
+    let X := rset R
+    let Y := (RingedTensor.underlying R).obj N
+    let Z := (RingedTensor.underlying R).obj M
+    let Z' := (X ⊗ Y) ⊗ Z
+    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.fst X Y
+    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
+      CartesianMonoidalCategory.snd X Y
+    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
+    have hh := hSmulR Z' a b c (CartesianMonoidalCategory.lift a b ≫ action R N)
+      (fun _ _ ↦ rfl)
+    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj P0 ↦
+      f.hom.app W ((x, y), n)) hh
+  let β' (W : Cᵒᵖ) : M.val.obj W →ₗ[R.obj.obj W]
+      N.val.obj W →ₗ[R.obj.obj W] P0.val.obj W :=
+    LinearMap.mk₂ _ (fun m n ↦ φ.hom.app W (m, n))
+      (hAddSections W) (hSmulSections W)
+      (fun m n n' ↦ hAddRSections W n n' m)
+      (fun r m n ↦ hSmulRSections W r n m)
+  have hβ' : ∀ {U W : Cᵒᵖ} (i : U ⟶ W) (m : M.val.obj U) (n : N.val.obj U),
+      β' W (M.val.map i m) (N.val.map i n) = P0.val.map i (β' U m n) := by
+    intro U W i m n
+    exact congrArg (fun k ↦ k (m, n)) (φ.hom.naturality i)
+  obtain ⟨f, hf, _⟩ := tensor_bilinear_universal R M N P0 β' hβ'
+  refine ⟨f, ?_⟩
+  ext W t
+  exact hf W t.1 t.2
+
+set_option profiler true in
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
@@ -428,216 +629,9 @@ theorem inverseImageTensorPairing_isIso
             (F.map y ≫ I.moduleUnderlying.inv.app N) ≫ β) := by
     rw [hφdef]
     exact transposePair_lift R RI F V adj I M N H (P.obj H) (eP.app H) β Z x y
-  have hAdd Z (x y : Z ⟶ (RingedTensor.underlying R).obj M)
-      (n : Z ⟶ (RingedTensor.underlying R).obj N)
-      (s : Z ⟶ (RingedTensor.underlying R).obj M)
-      (hs : ∀ W t, s.hom.app W t =
-        (show M.val.obj W from x.hom.app W t) +
-          (show M.val.obj W from y.hom.app W t)) :
-      CartesianMonoidalCategory.lift s n ≫ φ =
-        CartesianMonoidalCategory.lift
-          (CartesianMonoidalCategory.lift x n ≫ φ)
-          (CartesianMonoidalCategory.lift y n ≫ φ) ≫ addition R (P.obj H) := by
-    rw [hφ, hφ, hφ]
-    refine Eq.trans ?_ (mateAdd_cartesian R RI F V adj H (P.obj H) (eP.app H)
-      (hOps H).1 _ _)
-    apply congrArg (mateIsoEquiv adj (Iso.refl _) (eP.app H))
-    ext W t
-    change pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map s ≫ I.moduleUnderlying.inv.app
-      M).hom.app W t)
-        ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
-      pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map x ≫ I.moduleUnderlying.inv.app
-        M).hom.app W t)
-        ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
-      pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map y ≫ I.moduleUnderlying.inv.app
-        M).hom.app W t)
-        ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)
-    have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
-        (show (I.modules.obj M).val.obj W from
-          (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) +
-        (show (I.modules.obj M).val.obj W from
-          (F.map y ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
-      I.moduleAdd M Z x y s hs W t
-    exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦ pure RI (I.modules.obj M) (I.modules.obj
-      N) W v
-      ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
-        ((pureBilin RI (I.modules.obj M) (I.modules.obj N) W).map_add₂ _ _ _)
-  have hAddR Z (x y : Z ⟶ (RingedTensor.underlying R).obj N)
-      (n : Z ⟶ (RingedTensor.underlying R).obj M)
-      (s : Z ⟶ (RingedTensor.underlying R).obj N)
-      (hs : ∀ W t, s.hom.app W t =
-        (show N.val.obj W from x.hom.app W t) +
-          (show N.val.obj W from y.hom.app W t)) :
-      CartesianMonoidalCategory.lift n s ≫ φ =
-        CartesianMonoidalCategory.lift
-          (CartesianMonoidalCategory.lift n x ≫ φ)
-          (CartesianMonoidalCategory.lift n y ≫ φ) ≫ addition R (P.obj H) := by
-    rw [hφ, hφ, hφ]
-    refine Eq.trans ?_ (mateAdd_cartesian R RI F V adj H (P.obj H) (eP.app H)
-      (hOps H).1 _ _)
-    apply congrArg (mateIsoEquiv adj (Iso.refl _) (eP.app H))
-    ext W t
-    change pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map n ≫ I.moduleUnderlying.inv.app
-      M).hom.app W t)
-        ((F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
-      pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map n ≫ I.moduleUnderlying.inv.app
-        M).hom.app W t)
-        ((F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
-      pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map n ≫ I.moduleUnderlying.inv.app
-        M).hom.app W t)
-        ((F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t)
-    have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
-        (show (I.modules.obj N).val.obj W from
-          (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) +
-        (show (I.modules.obj N).val.obj W from
-          (F.map y ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
-      I.moduleAdd N Z x y s hs W t
-    exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦ pure RI (I.modules.obj M) (I.modules.obj
-      N) W
-      ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
-        ((pureBilin RI (I.modules.obj M) (I.modules.obj N) W _).map_add _ _)
-  have hSmul Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj M)
-      (n : Z ⟶ (RingedTensor.underlying R).obj N)
-      (s : Z ⟶ (RingedTensor.underlying R).obj M)
-      (hs : ∀ W t, s.hom.app W t =
-        (show R.obj.obj W from a.hom.app W t) •
-          (show M.val.obj W from x.hom.app W t)) :
-      CartesianMonoidalCategory.lift s n ≫ φ =
-        CartesianMonoidalCategory.lift a
-          (CartesianMonoidalCategory.lift x n ≫ φ) ≫ action R (P.obj H) := by
-    rw [hφ, hφ]
-    refine Eq.trans ?_ (mateSMul_cartesian R RI F V adj I H (P.obj H) (eP.app H)
-      (hOps H).2 a _)
-    apply congrArg (mateIsoEquiv adj (Iso.refl _) (eP.app H))
-    ext W t
-    change pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map s ≫ I.moduleUnderlying.inv.app
-      M).hom.app W t)
-        ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
-      (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map x ≫ I.moduleUnderlying.inv.app
-          M).hom.app W t)
-          ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)
-    have ht : (F.map s ≫ I.moduleUnderlying.inv.app M).hom.app W t =
-        (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        (show (I.modules.obj M).val.obj W from
-          (F.map x ≫ I.moduleUnderlying.inv.app M).hom.app W t) :=
-      I.moduleSMul M Z a x s hs W t
-    exact (congrArg (fun v : (I.modules.obj M).val.obj W ↦ pure RI (I.modules.obj M) (I.modules.obj
-      N) W v
-      ((F.map n ≫ I.moduleUnderlying.inv.app N).hom.app W t)) ht).trans
-        ((pureBilin RI (I.modules.obj M) (I.modules.obj N) W).map_smul₂ _ _ _)
-  have hSmulR Z (a : Z ⟶ rset R) (x : Z ⟶ (RingedTensor.underlying R).obj N)
-      (n : Z ⟶ (RingedTensor.underlying R).obj M)
-      (s : Z ⟶ (RingedTensor.underlying R).obj N)
-      (hs : ∀ W t, s.hom.app W t =
-        (show R.obj.obj W from a.hom.app W t) •
-          (show N.val.obj W from x.hom.app W t)) :
-      CartesianMonoidalCategory.lift n s ≫ φ =
-        CartesianMonoidalCategory.lift a
-          (CartesianMonoidalCategory.lift n x ≫ φ) ≫ action R (P.obj H) := by
-    rw [hφ, hφ]
-    refine Eq.trans ?_ (mateSMul_cartesian R RI F V adj I H (P.obj H) (eP.app H)
-      (hOps H).2 a _)
-    apply congrArg (mateIsoEquiv adj (Iso.refl _) (eP.app H))
-    ext W t
-    change pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map n ≫ I.moduleUnderlying.inv.app
-      M).hom.app W t)
-        ((F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t) =
-      (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        pure RI (I.modules.obj M) (I.modules.obj N) W ((F.map n ≫ I.moduleUnderlying.inv.app
-          M).hom.app W t)
-          ((F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t)
-    have ht : (F.map s ≫ I.moduleUnderlying.inv.app N).hom.app W t =
-        (show RI.obj.obj W from (F.map a ≫ I.ringUnderlying.hom).hom.app W t) •
-        (show (I.modules.obj N).val.obj W from
-          (F.map x ≫ I.moduleUnderlying.inv.app N).hom.app W t) :=
-      I.moduleSMul N Z a x s hs W t
-    exact (congrArg (fun v : (I.modules.obj N).val.obj W ↦ pure RI (I.modules.obj M) (I.modules.obj
-      N) W
-      ((F.map n ≫ I.moduleUnderlying.inv.app M).hom.app W t) v) ht).trans
-        ((pureBilin RI (I.modules.obj M) (I.modules.obj N) W _).map_smul _ _)
-  have hAddSections W (x y : M.val.obj W) (n : N.val.obj W) :
-      φ.hom.app W (x + y, n) =
-        (show (P.obj H).val.obj W from φ.hom.app W (x, n)) +
-        (show (P.obj H).val.obj W from φ.hom.app W (y, n)) := by
-    let X := (RingedTensor.underlying R).obj M
-    let Y := (RingedTensor.underlying R).obj M
-    let Z := (RingedTensor.underlying R).obj N
-    let Z' := (X ⊗ Y) ⊗ Z
-    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.fst X Y
-    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.snd X Y
-    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
-    have hh := hAdd Z' a b c (CartesianMonoidalCategory.lift a b ≫ addition R M)
-      (fun _ _ ↦ rfl)
-    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj (P.obj H) ↦
-      f.hom.app W ((x, y), n)) hh
-  have hAddRSections W (x y : N.val.obj W) (n : M.val.obj W) :
-      φ.hom.app W (n, x + y) =
-        (show (P.obj H).val.obj W from φ.hom.app W (n, x)) +
-        (show (P.obj H).val.obj W from φ.hom.app W (n, y)) := by
-    let X := (RingedTensor.underlying R).obj N
-    let Y := (RingedTensor.underlying R).obj N
-    let Z := (RingedTensor.underlying R).obj M
-    let Z' := (X ⊗ Y) ⊗ Z
-    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.fst X Y
-    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.snd X Y
-    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
-    have hh := hAddR Z' a b c (CartesianMonoidalCategory.lift a b ≫ addition R N)
-      (fun _ _ ↦ rfl)
-    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj (P.obj H) ↦
-      f.hom.app W ((x, y), n)) hh
-  have hSmulSections W (x : R.obj.obj W) (y : M.val.obj W)
-      (n : N.val.obj W) :
-      φ.hom.app W (x • y, n) =
-        x • (show (P.obj H).val.obj W from φ.hom.app W (y, n)) := by
-    let X := rset R
-    let Y := (RingedTensor.underlying R).obj M
-    let Z := (RingedTensor.underlying R).obj N
-    let Z' := (X ⊗ Y) ⊗ Z
-    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.fst X Y
-    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.snd X Y
-    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
-    have hh := hSmul Z' a b c (CartesianMonoidalCategory.lift a b ≫ action R M)
-      (fun _ _ ↦ rfl)
-    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj (P.obj H) ↦
-      f.hom.app W ((x, y), n)) hh
-  have hSmulRSections W (x : R.obj.obj W) (y : N.val.obj W)
-      (n : M.val.obj W) :
-      φ.hom.app W (n, x • y) =
-        x • (show (P.obj H).val.obj W from φ.hom.app W (n, y)) := by
-    let X := rset R
-    let Y := (RingedTensor.underlying R).obj N
-    let Z := (RingedTensor.underlying R).obj M
-    let Z' := (X ⊗ Y) ⊗ Z
-    let a : Z' ⟶ X := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.fst X Y
-    let b : Z' ⟶ Y := CartesianMonoidalCategory.fst (X ⊗ Y) Z ≫
-      CartesianMonoidalCategory.snd X Y
-    let c : Z' ⟶ Z := CartesianMonoidalCategory.snd (X ⊗ Y) Z
-    have hh := hSmulR Z' a b c (CartesianMonoidalCategory.lift a b ≫ action R N)
-      (fun _ _ ↦ rfl)
-    exact congrArg (fun f : Z' ⟶ (RingedTensor.underlying R).obj (P.obj H) ↦
-      f.hom.app W ((x, y), n)) hh
-  let β' (W : Cᵒᵖ) : M.val.obj W →ₗ[R.obj.obj W]
-      N.val.obj W →ₗ[R.obj.obj W] (P.obj H).val.obj W :=
-    LinearMap.mk₂ _ (fun m n ↦ φ.hom.app W (m, n))
-      (hAddSections W) (hSmulSections W)
-      (fun m n n' ↦ hAddRSections W n n' m)
-      (fun r m n ↦ hSmulRSections W r n m)
-  have hβ' : ∀ {U W : Cᵒᵖ} (i : U ⟶ W) (m : M.val.obj U) (n : N.val.obj U),
-      β' W (M.val.map i m) (N.val.map i n) = (P.obj H).val.map i (β' U m n) := by
-    intro U W i m n
-    exact congrArg (fun k ↦ k (m, n)) (φ.hom.naturality i)
-  obtain ⟨f, hf, _⟩ := tensor_bilinear_universal R M N (P.obj H) β' hβ'
-  have hf' : pureSheaf R M N ≫ (RingedTensor.underlying R).map f = φ := by
-    ext W t
-    exact hf W t.1 t.2
+  obtain ⟨f, hf'⟩ := transpose_bilinear R RI F V adj I M N H (P.obj H) (eP.app H)
+    (hOps H).1 (hOps H).2 β (pureBilin RI (I.modules.obj M) (I.modules.obj N))
+    (fun _ _ _ ↦ rfl) φ hφ
   obtain ⟨γ, hγ⟩ := (hImage _ H ((E _ H).symm ((RingedTensor.underlying R).map f))).mpr
     ⟨f, (E _ H).apply_symm_apply _ |>.symm⟩
   have hγ' : E _ H ((RingedTensor.underlying RI).map γ) =
