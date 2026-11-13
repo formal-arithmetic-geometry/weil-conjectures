@@ -42,7 +42,7 @@ def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option profiler true in
+set_option trace.profiler true in
 private theorem ordinaryPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅
