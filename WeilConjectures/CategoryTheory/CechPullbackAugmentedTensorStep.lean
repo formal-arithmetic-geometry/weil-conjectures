@@ -23,7 +23,6 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
-set_option maxHeartbeats 2000000 in
 set_option profiler true in
 -- The successor clause contains several chosen total-complex instances.
 /-- One successor step of the finite Cech comparison, including its augmentation.
