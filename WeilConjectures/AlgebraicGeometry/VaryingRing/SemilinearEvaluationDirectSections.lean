@@ -36,12 +36,16 @@ theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
     (x : ((eval R φ Y n).obj ((push R φ f).obj M)).val.obj H) :
     HEq (((moduleEvalP R φ f n).hom.app M).val.app H x) x := by
   dsimp only [eval, WeilConjectures.SemilinearSections.evaluation,
-    SheafOfModules.pushforward_obj_val, PresheafOfModules.pushforward_obj_obj,
-    ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj'] at x
+    SheafOfModules.pushforward, PresheafOfModules.pushforward,
+    PresheafOfModules.pushforward₀, PresheafOfModules.pushforward₀Obj,
+    PresheafOfModules.restrictScalars, ModuleCat.restrictScalars,
+    ModuleCat.RestrictScalars.obj'] at x
   have h := (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
   dsimp only [eval, WeilConjectures.SemilinearSections.evaluation, push,
     StrictTower.moduleDirectImage, Scheme.proEtaleRingModuleDirectImage,
-    Functor.comp_obj, SheafOfModules.pushforward_obj_val, PresheafOfModules.pushforward_obj_obj,
+    Functor.comp_obj, moduleEvalP, SheafOfModules.pushforward,
+    PresheafOfModules.pushforward, PresheafOfModules.pushforward₀,
+    PresheafOfModules.pushforward₀Obj, PresheafOfModules.restrictScalars,
     ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj'] at h ⊢
   trace_state
   exact heq_of_eq h
