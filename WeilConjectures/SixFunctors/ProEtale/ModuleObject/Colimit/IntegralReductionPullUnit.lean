@@ -66,44 +66,6 @@ lemma derivedComapLeftDerivedUpperStarIso_hom_eq :
     leftDerivedUpperStarIsoMapDerivedCategory, Functor.mapDerivedCategorySquareIso]
   rfl
 
--- These facts are reused only inside proofs, so derived-functor elaboration does not
--- repeatedly reconstruct the graded tensor instances.
-private lemma pullUnit_hasTensor
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u}) (A B : GradedObject ℤ
-      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-    A.HasTensor B := inferInstance
-
-private lemma pullUnit_hasTensor₄ObjExt
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u}) (A B C D : GradedObject ℤ
-      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-    GradedObject.HasTensor₄ObjExt A B C D := inferInstance
-
-private lemma pullUnit_hasGoodTensor₁₂Tensor
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u}) (A B C : GradedObject ℤ
-      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-    GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
-
-private lemma pullUnit_hasGoodTensorTensor₂₃
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u}) (A B C : GradedObject ℤ
-      (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T))) :
-    GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
-
-private lemma pullUnit_preservesColimits_tensorLeft
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u})
-    (A : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) :
-    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj A) := inferInstance
-
-private lemma pullUnit_preservesColimits_tensorRight
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    (T : Scheme.{u})
-    (A : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) :
-    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj A) := inferInstance
-
 private lemma pullUnit_comp_counit_diagram
     {C : Type*} [Category* C] {A₀ A₁ A₂ A₃ A₄ A₅ A₆ A₇ A₈ A₉ A₁₀ A₁₁ A₁₂ : C}
     {a : A₀ ⟶ A₁} {b : A₁ ⟶ A₂} {c : A₂ ⟶ A₃} {d : A₃ ⟶ A₄}
@@ -225,24 +187,27 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
         (L((f)^*⟦Λ⟧).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app
         (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) := by
-  have := pullUnit_hasTensor Λ Y
-  have := pullUnit_hasTensor₄ObjExt Λ Y
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
-  have := pullUnit_preservesColimits_tensorLeft Λ Y
-  have := pullUnit_preservesColimits_tensorRight Λ Y
-  have := pullUnit_hasTensor Λ' Y
-  have := pullUnit_hasTensor₄ObjExt Λ' Y
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ' Y
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ' Y
-  have := pullUnit_preservesColimits_tensorLeft Λ' Y
-  have := pullUnit_preservesColimits_tensorRight Λ' Y
-  have := pullUnit_hasTensor Λ X
-  have := pullUnit_hasTensor₄ObjExt Λ X
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ X
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ X
-  have := pullUnit_preservesColimits_tensorLeft Λ X
-  have := pullUnit_preservesColimits_tensorRight Λ X
+  -- Keep the tensor instances local to the calculation, with the coefficient ring abstract.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
   let K := (HomotopyCategory.quotient
     (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) (.up ℤ)).obj P
   have := (Mod.extendScalars (coefficientMap a Y)).isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
@@ -274,9 +239,9 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
       (NatTrans.mapHomotopyCategory (pullIso a f).hom (ComplexShape.up ℤ)).app K)
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at r1 r2 r3 r4 ⊢
   simp only [Category.assoc]
-  rw [← Functor.map_comp_assoc, r1]
+  simp only [← Functor.map_comp_assoc, r1]
   simp only [Functor.map_comp, Category.assoc] at r4 ⊢
-  rw [← reassoc_of% r2, r4, reassoc_of% r3]
+  simp only [← reassoc_of% r2, r4, reassoc_of% r3]
   have l1 := (derivedComapLeftDerivedUpperStarIso a f).hom.naturality
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctorCounit.app K)
   have l2 := (Mod.comap (coefficientMap a X)).mapDerivedCategoryFactorsh.hom.naturality
@@ -291,7 +256,7 @@ lemma upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app_Qh
   simp only [Category.assoc, ← DerivedCategory.Qh.map_comp, Iso.hom_inv_id_app] at i1'
   erw [CategoryTheory.Functor.map_id, Category.comp_id] at i1'
   dsimp only [Functor.comp_obj, Functor.comp_map] at l1 l2 i1'
-  rw [← reassoc_of% l1, l2, reassoc_of% i1']
+  simp only [← reassoc_of% l1, l2, reassoc_of% i1']
   have r5 := Mod.derivedExtendMapDerivedCategoryAdjunction_unit_app_fac (coefficientMap a Y) K
   have e1 := ((f)^*⟦Λ⟧).leftDerivedFunctorCounit.naturality
     (((Mod.extendRestrictAdjunction (coefficientMap a Y)).mapHomotopyCategory
@@ -313,12 +278,27 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)).unit.app
         (L((f)^*⟦Λ⟧).obj M) ≫
       D(Mod.comap (coefficientMap a X)).map ((derivedUpperStarExtendScalarsIso a f).hom.app M) := by
-  have := pullUnit_hasTensor Λ Y
-  have := pullUnit_hasTensor₄ObjExt Λ Y
-  have := pullUnit_hasGoodTensor₁₂Tensor Λ Y
-  have := pullUnit_hasGoodTensorTensor₂₃ Λ Y
-  have := pullUnit_preservesColimits_tensorLeft Λ Y
-  have := pullUnit_preservesColimits_tensorRight Λ Y
+  -- Keep the tensor instances local to the calculation, with the coefficient ring abstract.
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (M : Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R) :
+      PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C D : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasTensor₄ObjExt A B C D := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensor₁₂Tensor A B C := inferInstance
+  have (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) Ab.{u + 1})
+      [MonObj R] [IsCommMonObj R]
+      (A B C : GradedObject ℤ (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) R)) :
+      GradedObject.HasGoodTensorTensor₂₃ A B C := inferInstance
   let P := (CochainComplex.flatResolutionFunctor _).obj (DerivedCategory.Q.objPreimage M)
   let e : DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P) ≅ M :=
     (DerivedCategory.quotientCompQhIso _).app P ≪≫
@@ -338,6 +318,7 @@ theorem upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
       D(Mod.comap (coefficientMap a X))
   change lhs.app M = rhs.app M
   apply (Iso.cancel_iso_hom_left ((L((f)^*⟦Λ⟧)).mapIso e) _ _).1
+  dsimp only [Functor.mapIso_hom]
   have hl := lhs.naturality e.hom
   have hr := rhs.naturality e.hom
   dsimp only [Functor.comp_map, Functor.id_map] at hl hr
