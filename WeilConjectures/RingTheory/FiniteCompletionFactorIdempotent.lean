@@ -187,6 +187,8 @@ theorem finite_completion_factor_idempotent
   let D := fun a : p.primesOver S' ↦
     AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime a.1))
       (Localization.AtPrime a.1)
+  let : ∀ a, Algebra S' (D a) := fun a ↦ inferInstance
+  let : Algebra S' (D q₀) := inferInstance
   let := TensorProduct.rightAlgebra (R := R) (A := Rph) (B := S')
   obtain ⟨_, E, θ, hθ, hE⟩ :=
     AdicCompletion.completion_finite_extension_decomposition R S' p
