@@ -50,9 +50,8 @@ private theorem homologyEvaluation_compose_roof_square
     _ = a₀.hom ≫ (g ≫ bq.hom) ≫ bp.inv := by rw [h₀]; simp only [Category.assoc]
     _ = _ := by rw [hs]; simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
-set_option profiler true in
 /-- Cycle-compatible evaluations on a small site are compatible with a quasi-isomorphism
-roof into a K-injective complex. This keeps the roof argument independent of restriction. -/
+roof when the target complex is K-injective. The roof argument is independent of restriction. -/
 private theorem homologyEvaluation_roof_of_cycle_pairings
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     {R : Sheaf S CommRingCat.{u}}
@@ -118,7 +117,6 @@ private theorem homologyEvaluation_roof_of_cycle_pairings
   exact homologyEvaluation_compose_roof_square e
     g f a₀ b₀ (asIso Qmap) (asIso Pmap) bq bp h₀ hs
 
-set_option profiler true in
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
 invertibility hypothesis on the model evaluation is used.
