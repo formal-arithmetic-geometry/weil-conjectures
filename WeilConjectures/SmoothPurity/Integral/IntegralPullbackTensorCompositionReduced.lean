@@ -45,6 +45,7 @@ variable (l : ℕ) [Fact l.Prime]
   [FiniteDimensional (Padic l) E]
 
 set_option maxHeartbeats 4000000 in
+set_option profiler true in
 -- Matching the transported system law and the reduced comparisons unfolds the two
 -- presentations of the coherent derived system categories.
 /-- Reduced integral pullback/tensor composition equation for a system-normalized compositor.
