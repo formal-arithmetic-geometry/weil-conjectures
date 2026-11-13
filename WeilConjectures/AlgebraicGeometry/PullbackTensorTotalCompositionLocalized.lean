@@ -27,6 +27,30 @@ open CategoryTheory MonoidalCategory
 noncomputable section
 namespace AlgebraicGeometry
 
+private theorem tensorTotal_summand_square
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {U V W A : C} {T R J K L M : D}
+    {x : U ⟶ V} {y : V ⟶ W} {eg : U ⟶ A} {iY : A ⟶ W}
+    {θ : F.obj W ⟶ T} {t : T ⟶ R} {ef : F.obj A ⟶ J} {iX : J ⟶ T}
+    {pn : J ⟶ K} {iD : K ⟶ R} {bS : F.obj U ⟶ L} {ed : L ⟶ K}
+    {bT : F.obj V ⟶ M} {hz : L ⟶ M} {φ : M ⟶ R}
+    (hψ : x ≫ y = eg ≫ iY) (hθ : F.map iY ≫ θ = ef ≫ iX)
+    (hi : iX ≫ t = pn ≫ iD) (hm : F.map eg ≫ ef ≫ pn = bS ≫ ed)
+    (hb : F.map x ≫ bT = bS ≫ hz) (hφ : hz ≫ φ = ed ≫ iD) :
+    F.map x ≫ F.map y ≫ θ ≫ t = F.map x ≫ bT ≫ φ := by
+  rw [← F.map_comp_assoc, hψ, F.map_comp, Category.assoc,
+    reassoc_of% hθ, hi, reassoc_of% hm, reassoc_of% hb, hφ]
+
+private theorem tensorTotal_solve_chain
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {A B : C} {T R : D} (a : A ≅ B) (b : F.obj B ≅ T)
+    (t : T ⟶ R) (x : F.obj A ⟶ R) (h : F.map a.hom ≫ b.hom ≫ t = x) :
+    t = b.inv ≫ F.map a.inv ≫ x := by
+  apply (cancel_epi b.hom).1
+  apply (cancel_epi (F.map a.hom)).1
+  simpa only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp_assoc,
+    Iso.hom_inv_id, Functor.map_id, Category.id_comp] using h
+
 private abbrev tensorAdj {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)
 
@@ -297,14 +321,13 @@ private theorem pullback_tensor_total_composition_chain
       change HomologicalComplex.ιMapBifunctor (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N))
         (curriedTensor X.Modules) (.up ℤ) p q n h ≫ _ = _
       rw [HomologicalComplex.ι_mapBifunctorMap]
-      simp only [curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def_assoc]
-      rfl
+      simp only [b, Functor.mapHomologicalComplexCompIso_hom_app_f,
+        curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def_assoc]
     change F.map (G.map iZ) ≫ F.map (ψ.hom.f n) ≫ θ.hom.f n ≫
         (HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
           (curriedTensor X.Modules) (.up ℤ)).f n =
       F.map (G.map iZ) ≫ bT ≫ φ.hom.f n
-    rw [← F.map_comp_assoc, hψ', F.map_comp, Category.assoc,
-      reassoc_of% hθ', hi, reassoc_of% hm, reassoc_of% hb, hφ']
+    exact tensorTotal_summand_square F hψ' hθ' hi hm hb hφ'
   exact hchain
 
 set_option profiler true in
@@ -378,11 +401,6 @@ private theorem pullback_tensor_total_composition_localized_of_chain
   have : ∀ P N : CochainComplex X.Modules ℤ,
       HomologicalComplex.HasMapBifunctor P N (curriedTensor X.Modules) (.up ℤ) :=
     fun P N ↦ inferInstance
-  have : ∀ P N : CochainComplex
-      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      HomologicalComplex.HasMapBifunctor P N (curriedTensor
-        (SheafOfModules.{u} (moduleRings X.toRingedSpace))) (.up ℤ) :=
-    fun P N ↦ inferInstance
   let F := Scheme.Modules.tensorPullback f
   let G := Scheme.Modules.tensorPullback g
   let Fc := F.mapHomologicalComplex (.up ℤ)
@@ -390,12 +408,8 @@ private theorem pullback_tensor_total_composition_localized_of_chain
   let b := Functor.mapHomologicalComplexCompIso (tensorCompMate f g) (.up ℤ)
   have hsol : HomologicalComplex.mapBifunctorMap (b.hom.app P) (b.hom.app N)
       (curriedTensor _) (.up ℤ) =
-      θ.inv ≫ Fc.map ψ.inv ≫ b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom := by
-    apply (cancel_epi θ.hom).1
-    apply (cancel_epi (Fc.map ψ.hom)).1
-    simpa only [Category.assoc, Iso.hom_inv_id_assoc, ← Fc.map_comp_assoc,
-      Iso.hom_inv_id, Functor.map_id, Category.id_comp,
-      show Fc.map (𝟙 _) = 𝟙 _ from Fc.map_id _] using hchain
+      θ.inv ≫ Fc.map ψ.inv ≫ b.hom.app (pullbackTensorTotal Z P N) ≫ φ.hom :=
+    tensorTotal_solve_chain Fc ψ θ _ _ hchain
   change (DerivedCategory.Q.map (b.hom.app P) ⊗ₘ
       DerivedCategory.Q.map (b.hom.app N)) ≫
       pullbackTensorModelMap X _ _ =
@@ -403,11 +417,11 @@ private theorem pullback_tensor_total_composition_localized_of_chain
       DerivedCategory.Q.map θ.inv ≫ DerivedCategory.Q.map (Fc.map ψ.inv) ≫
       DerivedCategory.Q.map (b.hom.app (pullbackTensorTotal Z P N)) ≫
       DerivedCategory.Q.map φ.hom
-  rw [pullbackTensorModelMap_natural]
-  change pullbackTensorModelMap X (Fc.obj (Gc.obj P)) (Fc.obj (Gc.obj N)) ≫
-      DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap
-        (b.hom.app P) (b.hom.app N) (curriedTensor _) (.up ℤ)) = _
-  rw [hsol, Functor.map_comp, Functor.map_comp, Functor.map_comp]
+  have hmap := congrArg ((DerivedCategory.Q (C := X.Modules)).map) hsol
+  simp only [Functor.map_comp] at hmap
+  exact (pullbackTensorModelMap_natural X (b.hom.app P) (b.hom.app N)).trans
+    (congrArg (fun k ↦ pullbackTensorModelMap X (Fc.obj (Gc.obj P))
+      (Fc.obj (Gc.obj N)) ≫ k) hmap)
 
 /-- Localization of the ordinary tensor/composition square.
 Source: Stacks Project, cohomology.tex, Tags 079U and 0D5S.

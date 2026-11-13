@@ -63,6 +63,9 @@ private lemma rightUnitor_shift (P : CochainComplex.KFlat C) (n : ℤ) :
   let : MonoidalCategory (CochainComplex C ℤ) := inferInstance
   let : MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
   let : MonoidalCategory (DerivedCategory C) := inferInstance
+  let : MonoidalCategoryStruct (CochainComplex C ℤ) := inferInstance
+  let : MonoidalCategoryStruct (HomotopyCategory C (.up ℤ)) := inferInstance
+  let : MonoidalCategoryStruct (DerivedCategory C) := inferInstance
   let a := ((CochainComplex.ιKFlat C).commShiftIso n).hom.app P
   have := Functor.CommShift₂OfLocalization.commShift_liftingIsoApp (M := ℤ) (L C) (LKFlat C)
     (HomologicalComplex.quasiIso C (.up ℤ)) (HomologicalComplex.quasiIso C (.up ℤ)).WKFlat
