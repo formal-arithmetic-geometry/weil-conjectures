@@ -86,6 +86,8 @@ theorem tensorHom_restriction_of_local_scalar
   have hW : W ≤ U := by
     rintro x ⟨y, hy, rfl⟩
     exact y.property
+  change β.app W (tmulSection a g) =
+    (s.app (op (Over.mk (homOfLE hW)))) ((ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g))
   have hb := hβ W a g
   change β.app W (tmulSection a g) = _ at hb
   erw [hb]
@@ -94,10 +96,8 @@ theorem tensorHom_restriction_of_local_scalar
     (s.app (op (Over.mk (homOfLE hW)))) g = _
   rw [X.sheaf.obj.map_id]
   change (show Γ(X, W) from ι.app W a) • (s.app (op (Over.mk (homOfLE hW)))) g = _
-  have hm : ((restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom)).app V
-      (tmulSection (M := A) (N := H) (U := W) a g) =
+  have hm : (ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g) =
         (show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g) := by
-    change (ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g) = _
     rw [Hom.comp_app, ConcreteCategory.comp_apply,
       whiskerRight_app_tmulSection]
     exact leftUnitor_hom_app_tmulSection' (M := H) (ι.app W a) g

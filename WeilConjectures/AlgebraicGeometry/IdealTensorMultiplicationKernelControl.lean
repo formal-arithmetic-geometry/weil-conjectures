@@ -269,7 +269,7 @@ theorem ideal_tensor_multiplication_kernel_control
         ((quasiCoherent_tensor_product_affine_sections J.toModules H).2 U.1 U.2).2 z
       induction w using TensorProduct.inductionOn with
       | tmul b h =>
-        simp only [L, LinearMap.comp_apply, TensorProduct.mk_apply, tensorSectionsMap_tmul, hμ]
+        simp only [L, tensorSectionsMap_tmul, hμ]
         rw [← ha]
         exact ideal_tensor_balancing J H U.1 a b h
       | add x y hx hy => simp only [map_add, smul_add, hx, hy]

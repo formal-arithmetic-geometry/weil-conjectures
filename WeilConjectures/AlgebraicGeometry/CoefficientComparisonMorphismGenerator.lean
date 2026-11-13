@@ -97,16 +97,16 @@ theorem coefficientComparisonMorphism_generator {X T : Scheme.{u}} (f : X ⟶ T)
     coefficientSectionAddMap f F U Z g g' f' w W hW s at hs
   change _ = _
   conv_lhs =>
-    arg 1
+    arg 2
     rw [hom_restrict_apply q]
-    arg 1
-    arg 1
+    arg 2
+    arg 2
     rw [hom_restrict_apply ((pullbackPushforwardAdjunction g).unit.app
       ((pullback U.toScheme.toSpecΓ).obj (tilde N)))]
   simp only [pushforward_obj_presheaf_map]
   conv_lhs =>
-    arg 1
-    arg 1
+    arg 2
+    arg 2
     rw [hom_restrict_apply q]
   rw [hs]
   dsimp only [coefficientSectionAddMap]
