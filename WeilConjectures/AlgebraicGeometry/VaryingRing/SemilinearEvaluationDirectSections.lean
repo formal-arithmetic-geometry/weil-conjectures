@@ -41,8 +41,9 @@ theorem moduleEvalP_sections_heq {X Y : Scheme.{u}} (f : X ⟶ Y)
   have h := (moduleEvalP_existsUnique R φ f n).choose_spec.1 M H.unop x
   dsimp only [eval, WeilConjectures.SemilinearSections.evaluation, push,
     StrictTower.moduleDirectImage, Scheme.proEtaleRingModuleDirectImage,
-    SheafOfModules.pushforward_obj_val, PresheafOfModules.pushforward_obj_obj,
+    Functor.comp_obj, SheafOfModules.pushforward_obj_val, PresheafOfModules.pushforward_obj_obj,
     ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj'] at h ⊢
+  trace_state
   exact heq_of_eq h
 
 end AlgebraicGeometry.ProEtale.VaryingRing
