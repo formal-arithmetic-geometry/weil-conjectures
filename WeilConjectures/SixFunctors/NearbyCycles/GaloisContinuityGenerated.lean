@@ -51,6 +51,7 @@ variable {X X' : Scheme.{u}} (N : NearbyCyclesModel X X') {L : Type u} [Field L]
   [DiscreteTopology T₀] [Finite T₀]
 
 set_option maxHeartbeats 1600000 in
+set_option trace.profiler true in
 -- matching the derived functors of the Galois layer with those of the field tower (as in
 -- `exists_forall_homology_galoisLayerAction_eq_id`)
 /-- **Continuity of the Galois action on a finitely generated cohomology sheaf of nearby cycles**
