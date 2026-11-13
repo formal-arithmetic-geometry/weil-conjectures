@@ -28,6 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace RingTheory
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Coordinate comparisons elaborate several completion algebra structures.
 private theorem stage_completion_flat
@@ -83,6 +84,7 @@ private theorem stage_completion_flat
   exact ((RingHom.flat_algebraMap_iff).mpr inferInstance).comp
     (RingHom.Flat.of_bijective α.symm.bijective)
 
+set_option trace.profiler true in
 set_option maxHeartbeats 800000 in
 -- Transport between colimit vertices elaborates their quotient algebra structures.
 /-- The canonical map from a pair henselization to the base completion is faithfully flat.
