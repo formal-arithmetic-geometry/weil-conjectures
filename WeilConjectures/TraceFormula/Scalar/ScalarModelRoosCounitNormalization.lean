@@ -38,7 +38,7 @@ attribute [local implicit_reducible] coefficientSequenceLimit
   integralComparisonConstantAdjunction integralScalarComplexFunctor
   completedScalarRoosEndomorphism
 
-set_option maxHeartbeats 800000 in
+set_option profiler true in
 -- The normalization equation carries large coefficient-functor signatures.
 /-- The normalized scalar realization commutes with the whole-system counit in
 Roos coordinates. This is an equation on the target system alone, before inserting
