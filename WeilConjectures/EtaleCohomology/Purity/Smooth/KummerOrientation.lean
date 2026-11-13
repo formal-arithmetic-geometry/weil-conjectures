@@ -51,6 +51,14 @@ lemma Adjunction.homEquiv_comp_conjugateEquiv_app {C D : Type*} [Category C] [Ca
     (conjugateEquiv adj₁ adj₂ α).naturality β, ← Category.assoc, unit_conjugateEquiv,
     Category.assoc, ← R₂.map_comp]
 
+/-- The transpose under a composite adjunction is the successive transpose. -/
+lemma Adjunction.homEquiv_comp_apply {C D E : Type*} [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ E} {I : E ⥤ D}
+    (adj₁ : F ⊣ G) (adj₂ : H ⊣ I) (X : C) (Y : E) (f : H.obj (F.obj X) ⟶ Y) :
+    (adj₁.comp adj₂).homEquiv X Y f = adj₁.homEquiv X _ (adj₂.homEquiv _ Y f) := by
+  rw [CategoryTheory.Adjunction.comp_homEquiv]
+  rfl
+
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- For a closed immersion `i : Z ⟶ X` and `p : X ⟶ B` with `i ≫ p` invertible, the adjoint
@@ -417,13 +425,11 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
           ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).comp
             (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU)).homEquiv _ _
             ((L((jU)^*[ModuleCat.{u + 1} Λ])).map θp.hom ≫ θj.hom ≫ κU) := by
-        simp only [Ψ₁, Adjunction.comp_homEquiv
-          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p)
-          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) jU)]
-        simp only [← Adjunction.homEquiv_naturality_right, Category.assoc]
-        simpa only [← Adjunction.homEquiv_naturality_right] using
-          congrArg ((derivedUpperStarLowerStarAdjunction
-            (ModuleCat.{u + 1} Λ) p).homEquiv _ _) h1
+        simp only [Ψ₁, Adjunction.homEquiv_comp_apply]
+        refine (Adjunction.homEquiv_naturality_right
+          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p) _ _).symm.trans ?_
+        exact congrArg ((derivedUpperStarLowerStarAdjunction
+          (ModuleCat.{u + 1} Λ) p).homEquiv _ _) ((Category.assoc _ _ _).trans h1)
       rw [← Category.assoc, h2, Adjunction.homEquiv_comp_conjugateEquiv_app]
       congr 1
       simp only [Bι, κU, hunit, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc]
@@ -444,16 +450,15 @@ theorem isIso_supportedClassMap_kummerBoundary_coord_of_cohomology
     have h := Rp.commShiftIso_hom_naturality w (1 : ℤ)
     have hw' : Rp.map (w⟦(1 : ℤ)⟧') = (Rp.commShiftIso (1 : ℤ)).hom.app _ ≫
         (Rp.map w)⟦(1 : ℤ)⟧' ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ := by
-      simp only [← Category.assoc, ← h]
-      simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+      exact ((Iso.eq_comp_inv ((Rp.commShiftIso (1 : ℤ)).app _)).2 h).trans
+        (Category.assoc _ _ _)
     have := isIso_homology_zero_map_shift_of_isIso_shiftMap T.mor₃ hδ
     have hm₃ : (Rp.map w)⟦(1 : ℤ)⟧' = T.mor₃⟦(1 : ℤ)⟧' ≫
         ((Rp.commShiftIso (1 : ℤ)).inv.app _)⟦(1 : ℤ)⟧' := by
-      rw [← Functor.map_comp]
-      congr 1
-      change Rp.map w = (Rp.map w ≫ (Rp.commShiftIso (1 : ℤ)).hom.app _) ≫ _
-      rw [Category.assoc]
-      erw [Iso.hom_inv_id_app, Category.comp_id]
+      have hm : Rp.map w = T.mor₃ ≫ (Rp.commShiftIso (1 : ℤ)).inv.app _ :=
+        (Iso.eq_comp_inv ((Rp.commShiftIso (1 : ℤ)).app _)).2 rfl
+      exact (congrArg (shiftFunctor _ (1 : ℤ)).map hm).trans
+        ((shiftFunctor _ (1 : ℤ)).map_comp _ _)
     rw [hw', hm₃, Functor.map_comp, Functor.map_comp, Functor.map_comp]
     infer_instance
   -- the target of the adjoint is concentrated in degree zero
