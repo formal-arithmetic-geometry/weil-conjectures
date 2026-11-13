@@ -29,6 +29,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] enoughInjectives
 
 set_option backward.isDefEq.respectTransparency false in
+set_option profiler true in
 set_option maxHeartbeats 500000 in
 -- The explicit derived section comparisons require substantial elaboration.
 /-- The affine Leray comparison, normalized by any augmentation-preserving restricted

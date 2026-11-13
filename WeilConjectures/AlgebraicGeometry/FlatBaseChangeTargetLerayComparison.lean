@@ -31,6 +31,7 @@ attribute [local instance] enoughInjectives
 
 set_option linter.style.haveILetI false in
 -- Inline the canonical algebra to match the letI in the fixed statement.
+set_option profiler true in
 set_option maxHeartbeats 800000 in
 -- The section and Ext models require explicit derived-cohomology conversions.
 /-- Choose the natural source module/Ext comparison together with the target affine
