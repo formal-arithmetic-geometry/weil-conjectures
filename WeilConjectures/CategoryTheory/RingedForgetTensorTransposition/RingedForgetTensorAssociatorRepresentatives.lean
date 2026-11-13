@@ -167,8 +167,7 @@ attribute [local irreducible] coefficientTotalTensor tensorSummand
 include cB cA
 -- Preserve the original instance assumptions in the public declaration.
 set_option linter.unusedSectionVars false
-set_option maxHeartbeats 800000 in
--- Combining four representative squares across independent tensor presentations needs this budget.
+set_option profiler true in
 /-- Associativity on the image of flat-term K-flat representatives.
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.
