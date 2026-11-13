@@ -28,6 +28,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -106,22 +107,14 @@ lemma upperStarTensorHomotopyHom_braiding
   quotient_map_upperStarTensorComplexHom_braiding Λ f A B
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the module objects of the homotopy category are unfolded
 /-- The comparison `upperStarTensorHomotopyHom` is an isomorphism on images of complexes. -/
 instance isIso_upperStarTensorHomotopyHom
     (A B : CochainComplex
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
     IsIso (upperStarTensorHomotopyHom Λ f ((HomotopyCategory.quotient _ (.up ℤ)).obj A)
       ((HomotopyCategory.quotient _ (.up ℤ)).obj B)) := by
-  have h := upperStarTensorComplexHom_δ Λ f A B
-  have : IsIso (upperStarTensorComplexHom Λ f A B ≫
-      ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-        (f)^*⟦Λ⟧).app A).app B) := by
-    rw [h]
-    infer_instance
-  have : IsIso (upperStarTensorComplexHom Λ f A B) := IsIso.of_isIso_comp_right _
-    (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) (f)^*⟦Λ⟧).app A).app B)
+  have : IsIso (upperStarTensorComplexHom Λ f A B) :=
+    IsIso.of_isIso_fac_right (upperStarTensorComplexHom_δ Λ f A B)
   exact Functor.map_isIso (HomotopyCategory.quotient _ (.up ℤ))
     (upperStarTensorComplexHom Λ f A B)
 
@@ -138,8 +131,6 @@ lemma derivedBraiding_hom_μ_Qh {Z : Scheme.{u}}
   DerivedMonoidal.braiding_hom_μ Qh (HomotopyCategory.quasiIso _ _) K M
 
 set_option profiler true in
-set_option maxHeartbeats 2000000 in
--- the images of complexes in the homotopy category are unfolded
 /-- The tensor comparison of `Lf^*` commutes with the derived braidings at images of K-flat
 complexes. -/
 lemma leftDerivedUpperStarTensor_braiding_Qh
@@ -173,8 +164,6 @@ lemma leftDerivedUpperStarTensor_braiding_Qh
     (upperStarTensorHomotopyHom_braiding Λ f A B)
 
 set_option profiler true in
-set_option maxHeartbeats 1000000 in
--- the K-flat replacements are unfolded
 /-- **The derived pullback of module objects is braided**: the tensor comparison
 `m : Lf^* (K ⊗ᴸ M) ⟶ Lf^* K ⊗ᴸ Lf^* M` commutes with the derived braidings,
 `Lf^* β_{K, M} ≫ m_{M, K} = m_{K, M} ≫ β_{Lf^* K, Lf^* M}`. -/
@@ -184,15 +173,11 @@ theorem leftDerivedUpperStarTensor_braiding
     L((f)^*⟦Λ⟧).map (β_ K M).hom ≫ ((leftDerivedUpperStarTensor Λ f).app M).app K =
       ((leftDerivedUpperStarTensor Λ f).app K).app M ≫
         (β_ (L((f)^*⟦Λ⟧).obj K) (L((f)^*⟦Λ⟧).obj M)).hom := by
-  have (Z : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
-      PreservesColimitsOfShape ℤ ((curriedTensor _).obj Z) := inferInstance
-  obtain ⟨P, hP, ⟨eP⟩⟩ := DerivedCategory.exists_kFlat_iso K
-  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := DerivedCategory.exists_kFlat_iso M
-  obtain ⟨A, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
-  obtain ⟨B, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
-  have key := leftDerivedUpperStarTensor_braiding_Qh Λ f A B
-    ((HomotopyCategory.kFlat_quotient_obj_iff A).1 hP)
-    ((HomotopyCategory.kFlat_quotient_obj_iff B).1 hQ)
+  obtain ⟨P, hP, ⟨eP⟩⟩ := exists_kFlat_iso_Qh_obj Λ K
+  obtain ⟨Q, hQ, ⟨eQ⟩⟩ := exists_kFlat_iso_Qh_obj Λ M
+  have key := leftDerivedUpperStarTensor_braiding_Qh Λ f P.as Q.as
+    ((HomotopyCategory.kFlat_quotient_obj_iff P.as).1 hP)
+    ((HomotopyCategory.kFlat_quotient_obj_iff Q.as).1 hQ)
   exact map_braiding_comp_of_iso (fun K M ↦ ((leftDerivedUpperStarTensor Λ f).app K).app M)
     (leftDerivedUpperStarTensor_naturality Λ f) eP eQ key
 
